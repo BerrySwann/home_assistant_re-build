@@ -1,0 +1,61 @@
+# ╭──────────────────────────────────────────────────────────────────────╮
+# │    PÔLE 3. TOTAUX : GROUP (7 zones) + UNIT (19 lampes)               │
+# ╰──────────────────────────────────────────────────────────────────────╯
+
+# ╭──────────────────────────────────────────────────────────────────────╮
+# │    PÔLE 3. TOTAL : PAR REGROUPEMENT (7 zones)                        │
+# ╰──────────────────────────────────────────────────────────────────────╯
+
+# --- eclairage_total_group ---
+eclairage_total_group_annuel_kwh_um:
+  source: sensor.eclairage_total_group_energie_totale_kwh
+  name: "Eclairage Total Group Annuel kWh UM"
+  unique_id: eclairage_total_group_annuel_kwh_um
+  cycle: yearly
+
+eclairage_total_group_mensuel_kwh_um:
+  source: sensor.eclairage_total_group_energie_totale_kwh
+  name: "Eclairage Total Group Mensuel kWh UM"
+  unique_id: eclairage_total_group_mensuel_kwh_um
+  cycle: monthly
+
+eclairage_total_group_hebdomadaire_kwh_um:
+  source: sensor.eclairage_total_group_energie_totale_kwh
+  name: "Eclairage Total Group Hebdomadaire kWh UM"
+  unique_id: eclairage_total_group_hebdomadaire_kwh_um
+  cycle: weekly
+
+eclairage_total_group_quotidien_kwh_um:
+  source: sensor.eclairage_total_group_energie_totale_kwh
+  name: "Eclairage Total Group Quotidien kWh UM"
+  unique_id: eclairage_total_group_quotidien_kwh_um
+  cycle: daily
+
+# ╭──────────────────────────────────────────────────────────────────────╮
+# │    PÔLE 3. TOTAL : À L'UNITÉ (19 lampes)                             │
+# ╰──────────────────────────────────────────────────────────────────────╯
+
+# --- eclairage_total_unit ---
+eclairage_total_unit_annuel_kwh_um:
+  source: sensor.eclairage_total_unit_energie_totale_kwh
+  name: "Eclairage Total Unit Annuel kWh UM"
+  unique_id: eclairage_total_unit_annuel_kwh_um
+  cycle: yearly
+
+eclairage_total_unit_mensuel_kwh_um:
+  source: sensor.eclairage_total_unit_energie_totale_kwh
+  name: "Eclairage Total Unit Mensuel kWh UM"
+  unique_id: eclairage_total_unit_mensuel_kwh_um
+  cycle: monthly
+
+eclairage_total_unit_hebdomadaire_kwh_um:
+  source: sensor.eclairage_total_unit_energie_totale_kwh
+  name: "Eclairage Total Unit Hebdomadaire kWh UM"
+  unique_id: eclairage_total_unit_hebdomadaire_kwh_um
+  cycle: weekly
+
+eclairage_total_unit_quotidien_kwh_um:
+  source: sensor.eclairage_total_unit_energie_totale_kwh
+  name: "Eclairage Total Unit Quotidien kWh UM"
+  unique_id: eclairage_total_unit_quotidien_kwh_um
+  cycle: daily

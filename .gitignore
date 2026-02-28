@@ -1,0 +1,68 @@
+# --- YAML & docs à versionner ---
+!*.yaml
+!*.yml
+!*.md
+!.gitignore
+
+# --- Secrets & jetons (NE PAS PUBLISH) ---
+secrets.yaml
+.google.token
+.cloud
+.git-credentials
+.ssh/
+myelectricaldata/
+zigbee2mqtt/configuration.yaml
+
+# --- HA runtime ---
+.storage/
+.homeassistant/
+home-assistant.log
+home-assistant.log.*
+*.db
+*.db-shm
+*.db-wal
+.HA_VERSION
+.uuid
+
+# --- Python caches ---
+__pycache__/
+*.pyc
+
+# --- HACS (re-générés, bruit énorme) ---
+www/community/
+
+# --- Images volatiles / météo ---
+www/weather/
+www/*.png
+www/*.jpg
+
+# --- Zigbee2MQTT (états/backup volatiles) ---
+zigbee2mqtt/log
+zigbee2mqtt/coordinator_backup.json
+zigbee2mqtt/state.json
+configuration_backup_v*.yaml
+configuration.yaml.broken
+migration-*-to-*.log
+
+# --- IDE ---
+.vscode/
+.idea/
+
+# Logs internes
+.logs/
+
+# --- Réduction du bruit (texte et images) ---
+*.txt
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.webp
+*.ico
+# "[L60] Ignorer .txt & images (bruit)"
+
+# --- EXCEPTIONS FINALES (LES PLUS FORTES) ---
+!notifs/diag_conso_elec.txt
+# "[L65] Force l inclusion du diagnostic conso malgré l interdiction .txt"
+.secrets/

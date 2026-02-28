@@ -1,0 +1,89 @@
+# ╭────────────────────────────────────────────────────────────────────────╮
+# │ P3_AVG | PUISSANCE MOYENNE (W) - TOTAUX GROUP + UNIT                  │
+# ╰────────────────────────────────────────────────────────────────────────╯
+- sensor:
+    # ╭──────────────────────────────────────────────────────────────────────╮
+    # │    PÔLE 3. TOTAL : PAR REGROUPEMENT (7 zones)                        │
+    # ╰──────────────────────────────────────────────────────────────────────╯
+    # --- eclairage_total_group_avg_watts_quotidien ---
+    - name: "Eclairage Total Group Avg Watts Quotidien"
+      unique_id: eclairage_total_group_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.eclairage_total_group_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_total_group_avg_watts_hebdomadaire ---
+    - name: "Eclairage Total Group Avg Watts Hebdomadaire"
+      unique_id: eclairage_total_group_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.eclairage_total_group_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_total_group_avg_watts_mensuel ---
+    - name: "Eclairage Total Group Avg Watts Mensuel"
+      unique_id: eclairage_total_group_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.eclairage_total_group_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_total_group_avg_watts_annuel ---
+    - name: "Eclairage Total Group Avg Watts Annuel"
+      unique_id: eclairage_total_group_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.eclairage_total_group_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ╭──────────────────────────────────────────────────────────────────────╮
+    # │    PÔLE 3. TOTAL : À L'UNITÉ (19 lampes)                             │
+    # ╰──────────────────────────────────────────────────────────────────────╯
+    # --- eclairage_total_unit_avg_watts_quotidien ---
+    - name: "Eclairage Total Unit Avg Watts Quotidien"
+      unique_id: eclairage_total_unit_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.eclairage_total_unit_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_total_unit_avg_watts_hebdomadaire ---
+    - name: "Eclairage Total Unit Avg Watts Hebdomadaire"
+      unique_id: eclairage_total_unit_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.eclairage_total_unit_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_total_unit_avg_watts_mensuel ---
+    - name: "Eclairage Total Unit Avg Watts Mensuel"
+      unique_id: eclairage_total_unit_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.eclairage_total_unit_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_total_unit_avg_watts_annuel ---
+    - name: "Eclairage Total Unit Avg Watts Annuel"
+      unique_id: eclairage_total_unit_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.eclairage_total_unit_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}

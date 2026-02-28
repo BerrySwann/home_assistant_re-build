@@ -1,0 +1,111 @@
+# ╭────────────────────────────────────────────────────────────────────────────────────────╮
+# │ TEMPLATES : SÉRIE 01_2. MÉTÉO — FOUDRE (windrose-card / LABEL / AZIMUT / TIMER)        │
+# ╰────────────────────────────────────────────────────────────────────────────────────────╯
+
+- sensor:
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : windrose-card - LABEL DIRECTION ET DISTANCE           │
+# └───────────────────────────────────────────────────────────────────┘
+
+# --- lightning_direction_label ---
+# windrose-card - LABEL Lightning direction label
+    - name: "Lightning direction label"
+      unique_id: lightning_direction_label
+      state: >
+        {% set bearing = states('sensor.maison_lightning_azimuth') %}
+        {% if bearing in ['unknown', 'unavailable'] %}
+          Non disponible
+        {% else %}
+          {% set bearing = bearing | int(default=0) %}
+          {% if bearing >= 348.75 or bearing < 11.25 %} Nord
+          {% elif bearing >= 11.25 and bearing < 33.75 %} Nord-Nord-Est
+          {% elif bearing >= 33.75 and bearing < 56.25 %} Nord-Est
+          {% elif bearing >= 56.25 and bearing < 78.75 %} Est-Nord-Est
+          {% elif bearing >= 78.75 and bearing < 101.25 %} Est
+          {% elif bearing >= 101.25 and bearing < 123.75 %} Est-Sud-Est
+          {% elif bearing >= 123.75 and bearing < 146.25 %} Sud-Est
+          {% elif bearing >= 146.25 and bearing < 168.75 %} Sud-Sud-Est
+          {% elif bearing >= 168.75 and bearing < 191.25 %} Sud
+          {% elif bearing >= 191.25 and bearing < 213.75 %} Sud-Sud-Ouest
+          {% elif bearing >= 213.75 and bearing < 236.25 %} Sud-Ouest
+          {% elif bearing >= 236.25 and bearing < 258.75 %} Ouest-Sud-Ouest
+          {% elif bearing >= 258.75 and bearing < 281.25 %} Ouest
+          {% elif bearing >= 281.25 and bearing < 303.75 %} Ouest-Nord-Ouest
+          {% elif bearing >= 303.75 and bearing < 326.25 %} Nord-Ouest
+          {% elif bearing >= 326.25 and bearing < 348.75 %} Nord-Nord-Ouest
+          {% else %} Non disponible
+          {% endif %}
+        {% endif %}
+
+# --- lightning_distance_km ---
+# windrose-card - LABEL Lightning distance km
+    - name: "Lightning distance km"
+      unique_id: lightning_distance_km
+      unit_of_measurement: "km"
+      state: >
+        {% set distance_km = states('sensor.maison_lightning_distance') %}
+        {% if distance_km in ['unknown', 'unavailable'] %} 0
+        {% else %} {{ (distance_km | float (0)) | round(1) }}
+        {% endif %}
+
+# --- lightning_bearing ---
+# windrose-card - LABEL Lightning bearing
+    - name: "Lightning bearing"
+      unique_id: lightning_bearing
+      state: >
+        {% set bearing = states('sensor.maison_lightning_azimuth') %}
+        {% if bearing in ['unknown', 'unavailable'] %} 0
+        {% else %}
+          {% set bearing = bearing | float (0) | round(0) %}
+          {% if bearing == 0 %} 1
+          {% else %} {{ bearing }}
+          {% endif %}
+        {% endif %}
+
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : Card - TEMPS DEPUIS IMPACT (TIMER "LAST CHANGE")      │
+# └───────────────────────────────────────────────────────────────────┘
+
+# --- temps_depuis_le_dernier_impact_de_foudre ---
+    - name: "Temps depuis le dernier impact de foudre"
+      unique_id: temps_depuis_le_dernier_impact_de_foudre
+      state: >
+        {% set count = states('sensor.maison_lightning_counter') | int(0) %}
+        {% set last_time = states('sensor.blitzortung_lightning_last_impact_time') %}
+        {% set last_ts = as_timestamp(last_time) if last_time not in ['unknown', 'unavailable', 'none'] else 0 %}
+        {% set now_ts = as_timestamp(now()) %}
+        {% set diff = now_ts - last_ts %}
+
+        {# CONDITION : Si le compteur est à 0 OU si le dernier impact date de plus de 2h #}
+        {% if count == 0 or diff > 7200 or last_ts == 0 %}
+          Calme depuis plus de 2h
+        {% else %}
+          {% set s = (diff % 60) | int(0) %}
+          {% set m = ((diff % 3600) // 60) | int(0) %}
+          {% set h = (diff // 3600) | int(0) %}
+          Il y a {% if h > 0 %}{{ h }}h {% endif %}{{ m }}m {{ s }}s
+        {% endif %}
+
+# --- dernier_impact_temps_reel ---
+- sensor:
+    - name: "Dernier impact temps réel"
+      unique_id: dernier_impact_temps_reel
+      state: >
+        {% set last = states('input_datetime.dernier_eclair') %}
+        {% if last not in ['unknown', 'unavailable', 'none', ''] %}
+          {% set diff = as_timestamp(now()) - as_timestamp(last) %}
+          {% set m = ((diff % 3600) // 60) | int %}
+          {% set h = ((diff // 3600) % 24) | int %}
+          {% set d = (diff // 86400) | int %}
+
+          Dernier impact de foudre il y a 
+          {% if d > 0 %}
+            {{ d }} jour{{ 's' if d > 1 }}, {{ h }} heure{{ 's' if h > 1 }} et {{ m }} minute{{ 's' if m > 1 }}
+          {% elif h > 0 %}
+            {{ h }} heure{{ 's' if h > 1 }} et {{ m }} minute{{ 's' if m > 1 }}
+          {% else %}
+            {{ m }} minute{{ 's' if m > 1 }}
+          {% endif %}
+        {% else %}
+          Aucun impact enregistré
+        {% endif %}

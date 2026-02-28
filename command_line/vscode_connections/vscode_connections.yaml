@@ -1,0 +1,21 @@
+# ╭──────────────────────────────────────────────────────────────────╮
+# │ COMMAND_LINE : VSCODE (CONNECTIONS)                              │
+# ╰──────────────────────────────────────────────────────────────────╯
+
+# --- visual_code_serveur_connections ---
+- sensor:
+    name: "VSCode Connections"
+    unique_id: visual_code_serveur_connections
+    command: "netstat -an | grep :1337 | grep ESTABLISHED | wc -l"
+    value_template: "{{ value | int }}"
+    scan_interval: 60
+    unit_of_measurement: "conn"
+
+# --- visual_code_serveur_connections_exterieur ---
+- sensor:
+    name: "VSCode Connections exterieur"
+    unique_id: visual_code_serveur_connections_exterieur
+    command: "ps -ef | grep 'node' | grep 'code-server' | grep -v 'grep' | wc -l"
+    value_template: "{{ value | int }}"
+    scan_interval: 60
+    unit_of_measurement: "proc"
