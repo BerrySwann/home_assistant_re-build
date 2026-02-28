@@ -34,12 +34,6 @@ git config --global --add safe.directory /config || true
 git config user.name  >/dev/null 2>&1 || git config user.name  "BerrySwann (HAOS)"
 git config user.email >/dev/null 2>&1 || git config user.email "BerrySwann@users.noreply.github.com"
 
-# Gestion de la clé SSH si elle existe
-if [[ -f /config/.ssh/id_ed25519 ]]; then
-    export GIT_SSH_COMMAND='ssh -i /config/.ssh/id_ed25519 -o StrictHostKeyChecking=no'
-    log "ℹ️  GIT_SSH_COMMAND activé (/config/.ssh/id_ed25519)"
-fi
-
 # Sécurité critique : on ne push JAMAIS les secrets
 if git ls-files --error-unmatch secrets.yaml >/dev/null 2>&1; then
     log "❌ secrets.yaml est tracké par git — ABANDON POUR SÉCURITÉ"
@@ -54,11 +48,6 @@ BRANCH="$CUR_BRANCH"
 # │ git fetch / git pull / git merge sont INTERDITS dans ce script.          │
 # │ GitHub ne met jamais à jour /config. Push uniquement.                    │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-# [2026-02-28] Suppression bloc SYNCHRONISATION PRÉALABLE (PULL) :
-#   git fetch origin -q
-#   git pull --rebase --autostash origin "$BRANCH"
-#   git stash push / git stash pop
-# Motif : politique sens unique HA → GitHub
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ PRÉPARATION DU MESSAGE & VERSION                                         │
@@ -87,11 +76,16 @@ fi
 git add -A
 if git commit -m "$MSG" >/dev/null 2>&1; then
     log "📝 Commit créé : $MSG"
-    if git push origin "$BRANCH" -q; then
+    # [2026-02-28 modif] Capture erreur push dans variable pour logging réel
+    if PUSH_ERR=$(git push origin "$BRANCH" 2>&1); then
         log "✅ Push réussi sur $BRANCH"
     else
-        log "⚠️  Echec push sur $BRANCH, tentative sur main..."
-        git push origin main -q || log "❌ Push impossible"
+        log "⚠️  Echec push $BRANCH : $PUSH_ERR"
+        if PUSH_ERR2=$(git push origin main 2>&1); then
+            log "✅ Push réussi sur main (fallback)"
+        else
+            log "❌ Push impossible : $PUSH_ERR2"
+        fi
     fi
 else
     log "✅ État déjà à jour (rien à committer)"
@@ -101,17 +95,27 @@ fi
 # │ GESTION DU TAG WEEKLY                                                    │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 if [[ "$IS_WEEKLY" == "true" ]]; then
-    git fetch --tags -q  # fetch tags uniquement — pas de pull contenu
+    # fetch tags uniquement — pas de pull contenu
+    # [2026-02-28 modif] Suppression -q : erreur visible dans le log
+    git fetch --tags 2>/dev/null || log "⚠️  fetch --tags échoué (tags locaux uniquement)"
+
     TAG_BASE="weekly-$(date +'%G-W%V')"
     TAG="$TAG_BASE"
 
-    # Gestion des doublons de tags le même jour
-    if git rev-parse -q --verify "refs/tags/${TAG}" >/dev/null; then
+    # Gestion des doublons de tags la même semaine
+    if git rev-parse -q --verify "refs/tags/${TAG}" >/dev/null 2>&1; then
         TAG="${TAG_BASE}-$(date +'%H%M')"
     fi
 
+    # [2026-02-28 modif] Capture erreur push tag — plus de silence sur échec
     if git tag -a "$TAG" -m "Weekly backup $(date +'%F')${HA_VER:+ (HA ${HA_VER})}"; then
-        git push origin "$TAG" -q && log "🏷️  Tag créé et poussé : $TAG"
+        if TAG_ERR=$(git push origin "$TAG" 2>&1); then
+            log "🏷️  Tag créé et poussé : $TAG"
+        else
+            log "❌ Push tag $TAG échoué : $TAG_ERR"
+        fi
+    else
+        log "❌ Création du tag $TAG échouée"
     fi
 fi
 
@@ -127,3 +131,10 @@ if [[ -f "$TOKEN_FILE" ]]; then
         -d "{\"title\":\"Backup GitHub\",\"message\":\"$MSG\"}" \
         http://supervisor/core/api/services/persistent_notification/create >/dev/null || true
 fi
+
+# annotations_log:
+# [2026-02-28] Suppression bloc SSH (inutile sur re-build HTTPS)
+# [2026-02-28] Push branche : -q supprimé, erreur capturée dans PUSH_ERR
+# [2026-02-28] Push tag     : -q && log remplacé par if/else + TAG_ERR
+# [2026-02-28] fetch --tags : -q supprimé, || log ajouté
+# [2026-02-28] Tag création : else ajouté pour logger l'échec
