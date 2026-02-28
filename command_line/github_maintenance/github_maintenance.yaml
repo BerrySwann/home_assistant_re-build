@@ -30,15 +30,7 @@
     name: "Backup GitHub Journal"
     unique_id: backup_github_journal
     command: >-
-      bash -lc 'python3 -c "
-      import json
-      try:
-          lines = open(\"/config/.logs/ha_git_backup.log\").readlines()
-          keep = [l.strip() for l in lines if any(k in l for k in [\"OK:\",\"KO\",\"❌\",\"⚠️\",\"🏷️\",\"ℹ️\"])]
-          text = \"\n\".join(keep[-10:]) if keep else \"—\"
-          print(json.dumps({\"text\": text}))
-      except:
-          print(json.dumps({\"text\": \"—\"}))"'
+      bash -lc 'python3 -c "import json,os; f=\"/config/.logs/ha_git_backup.log\"; lines=open(f).readlines() if os.path.exists(f) else []; k=[l.strip() for l in lines if \"OK:\" in l]; print(json.dumps({\"text\":chr(10).join(k[-10:]) or \"-\"}))" 2>/dev/null || echo "{\"text\":\"-\"}"'
     scan_interval: 10
     value_template: 'OK'
     json_attributes:

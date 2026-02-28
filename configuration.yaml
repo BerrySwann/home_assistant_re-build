@@ -1,16 +1,26 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ CONFIGURATION PRINCIPALE                                                 │
+# ╰──────────────────────────────────────────────────────────────────────────╯
 
+# --- default_config ---
 # Loads default set of integrations. Do not remove.
 default_config:
 
+# --- frontend ---
 # Load frontend themes from the themes folder
 frontend:
   themes: !include_dir_merge_named themes
 
+# --- automations_scripts_scenes ---
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
-# Pour Button Outils Dev 
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ Pour Button Outils Dev dans la barre latérale                            │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+# --- panel_custom ---
+# Pour Button Outils Dev
 panel_custom:
   - name: developer-tools-sidebar
     sidebar_title: Outils Dev
@@ -19,42 +29,75 @@ panel_custom:
     module_url: /api/hassio/app/entrypoint.js
     embed_iframe: true
 
-# Pour powercalc
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ Pour powercalc (puissance virtuel des lampes et du relai SONOFF)         │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+# --- powercalc ---
 powercalc:
 
-# renvoi au fichier répertoire sensors/
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ INCLUDES                                                                 │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+
+# --- sensor ---
 sensor: !include_dir_merge_list sensors/
-# renvoi au fichier sensors.yaml
 #sensor: !include sensors.yaml
 
-# renvoi au fichier répertoire templates/
+# --- template ---
 template: !include_dir_merge_list templates/
-# renvoi au fichier templates.yaml
 #template: !include templates.yaml
 
-# renvoi au fichier répertoire utility_meter/
+# --- utility_meter ---
 utility_meter: !include_dir_merge_named utility_meter/
-# renvoi au fichier utility_meter.yaml
 #utility_meter: !include utility_meter.yaml
 
-# Renvoi au dossier contenant tous les fichiers command_line
+# --- command_line ---
 command_line: !include_dir_merge_list command_line/
-# renvoi au fichier commad_line.yaml
 #command_line: !include command_line.yaml
 
-# Renvoi au dossier contenant tous les fichiers shell_command
-#shell_command: !include_dir_merge_list shell_command/
-# renvoi au fichier shell_command.yaml
+# --- shell_command ---
 shell_command: !include shell_command.yaml
+#shell_command: !include_dir_merge_list shell_command/
 
-#renvoi au fichier camera.yaml -> carte meteo france alerte
+# --- camera ---
 camera: !include camera.yaml
+#camera: !include_dir_merge_list camera/
 
-# renvoi au fichier input_button.yaml
+# --- input_button ---
 input_button: !include input_button.yaml
+#input_button: !include_dir_merge_list input_button/
 
-#smartIR
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ BASE DE DONNEE MARIADB                                                   │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+
+# --- recorder ---
+recorder:
+  db_url: !secret mariadb_url
+  purge_keep_days: 7
+  auto_purge: true
+  auto_repack: true
+  exclude:
+    domains:
+      - update
+      - persistent_notification
+      - sun
+      - input_text
+    event_types:
+      - call_service
+    entity_globs:
+      - sensor.127_0_0_1*
+      - sensor.*linkquality
+      - sensor.*last_seen
+      - sensor.date*
+      - sensor.time*
+
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ CLIMATISATION SMARTIR                                                    │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+
 climate:
+  # --- clim_bureau_rm4_mini ---
   - platform: smartir
     name: Clim Bureau RM4-Mini
     unique_id: clim_bureau_rm4_mini
@@ -63,6 +106,7 @@ climate:
     temperature_sensor: sensor.th_bureau_temperature
     humidity_sensor: sensor.th_bureau_humidity
 
+  # --- clim_chambre_rm4_mini ---
   - platform: smartir
     name: Clim Chambre RM4-Mini
     unique_id: clim_chambre_rm4_mini
@@ -71,6 +115,7 @@ climate:
     temperature_sensor: sensor.th_chambre_temperature
     humidity_sensor: sensor.th_chambre_humidity
 
+  # --- clim_salon_rm4_mini ---
   - platform: smartir
     name: Clim Salon RM4-Mini
     unique_id: clim_salon_rm4_mini
