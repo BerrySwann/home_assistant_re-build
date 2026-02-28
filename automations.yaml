@@ -102,10 +102,8 @@
   - action: notify.mobile_app_poco_x7_pro_eric
     data:
       title: BACKUP WEEKLY
-      message: 'Backup hebdo + tag -> GitHub OK. Semaine {{ now().strftime(''%Y-W%U'')
+      message: Backup hebdo + tag -> GitHub OK. Semaine {{ now().strftime('%G-W%V')
         }}
-
-        '
   mode: single
 - id: '1772274342928'
   alias: '[01-Backup] Git hourly H+10'
