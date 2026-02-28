@@ -11,11 +11,50 @@
       then TS=$(grep -F "Backup GitHub OK:" /config/.logs/ha_git_backup.log | tail -n1 | sed -E "s/^.*OK: (.*)$/\1/");
       echo "{\"ok\":true,\"ts\":\"$TS\"}";
       else echo "{\"ok\":false,\"ts\":\"\"}"; fi'
-    scan_interval: 60
+    scan_interval: 10
     value_template: '{{ "OK" if value_json.ok else "KO" }}'
     json_attributes:
       - ts
 
+# --- git_last_weekly_tag ---
+- sensor:
+    name: "Git Last Weekly Tag"
+    unique_id: git_last_weekly_tag
+    command: >-
+      bash -lc 'git -C /config tag --sort=-creatordate 2>/dev/null | grep "^weekly-" | head -n1 || echo ""'
+    scan_interval: 3600
+    value_template: '{{ value | trim }}'
+
+# --- backup_github_journal ---
+- sensor:
+    name: "Backup GitHub Journal"
+    unique_id: backup_github_journal
+    command: >-
+      bash -lc 'python3 -c "
+      import json
+      try:
+          lines = open(\"/config/.logs/ha_git_backup.log\").readlines()
+          keep = [l.strip() for l in lines if any(k in l for k in [\"OK:\",\"KO\",\"❌\",\"⚠️\",\"🏷️\",\"ℹ️\"])]
+          text = \"\n\".join(keep[-10:]) if keep else \"—\"
+          print(json.dumps({\"text\": text}))
+      except:
+          print(json.dumps({\"text\": \"—\"}))"'
+    scan_interval: 10
+    value_template: 'OK'
+    json_attributes:
+      - text
+
+# --- github_default_branch ---
+- sensor:
+    name: "GitHub Default Branch"
+    unique_id: github_default_branch
+    command: >-
+      bash -lc 'git -C /config rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown"'
+    scan_interval: 3600
+    value_template: '{{ value | trim }}'
+
 # annotations_log:
-# [2026-02-28] Grep pattern : "Backup GitHub OK:" — match la ligne finale du script
-# [2026-02-28] ts           : horodatage extrait via sed, affiché dans le chip dashboard
+# [2026-02-28] backup_github_status  : OK/KO + ts — grep sur log script
+# [2026-02-28] git_last_weekly_tag   : dernier tag weekly local (git tag --sort)
+# [2026-02-28] backup_github_journal : 10 dernières lignes significatives du log (python3)
+# [2026-02-28] github_default_branch : branche courante git (rev-parse)
