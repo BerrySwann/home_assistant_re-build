@@ -1,3 +1,13 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ INPUT BUTTON : PUSH GITHUB                                               │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+
+# --- git_push_manuel ---
 git_push_manuel:
   name: "Git Push Manuel"
   icon: mdi:github
+
+# --- git_push_weekly_manuel ---
+git_push_weekly_manuel:
+  name: "Git Push Weekly Manuel"
+  icon: mdi:tag-outline
