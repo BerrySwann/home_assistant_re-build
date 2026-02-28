@@ -171,3 +171,11 @@
     entity_id: input_button.git_push_manuel
   actions:
   - action: shell_command.git_backup_push
+- id: '1772289095104'
+  alias: '[05-Backup] Git push weekly manuel'
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id: input_button.git_push_weekly_manuel
+  actions:
+  - action: shell_command.git_backup_push_weekly
