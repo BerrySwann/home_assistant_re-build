@@ -6,10 +6,15 @@
 git_backup_push: >-
   bash -lc '/config/.scripts/ha_git_backup.sh >> /config/.logs/ha_git_backup.log 2>&1'
 
+# --- git_backup_push_manual ---
+git_backup_push_manual: >-
+  bash -lc '/config/.scripts/ha_git_backup.sh "Manuel" >> /config/.logs/ha_git_backup.log 2>&1'
+
 # --- git_backup_push_weekly ---
 git_backup_push_weekly: >-
   bash -lc '/config/.scripts/ha_git_backup.sh weekly >> /config/.logs/ha_git_backup.log 2>&1'
 
 # annotations_log:
-# [2026-02-28] git_backup_push        : appel standard (auto/manuel)
+# [2026-02-28] git_backup_push        : appel automatique (horaire/daily)
+# [2026-02-28] git_backup_push_manual : passe l'argument "Manuel" → visible dans le journal
 # [2026-02-28] git_backup_push_weekly : passe l'argument weekly → tag ISO
