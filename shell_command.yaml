@@ -1,0 +1,28 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ SHELL COMMAND : BACKUP GIT & LOGS SYSTÈME                                │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+
+# ┌────────────────────────────────────┐
+# │ PIÈCE 10. AUTRE                    │
+# └────────────────────────────────────┘
+
+# --- git_backup_push_manual ---
+# [L10] Permet de passer un message de commit personnalisé via 'data'
+git_backup_push_manual: >-
+  bash -lc '/config/.scripts/ha_git_backup.sh "{{ custom_message }}" >> /config/.logs/ha_git_backup.log 2>&1'
+
+# --- git_backup_push ---
+# [L14] Push générique automatique
+git_backup_push: "bash -lc '/config/.scripts/ha_git_backup.sh >> /config/.logs/ha_git_backup.log 2>&1'"
+
+# --- git_backup_push_weekly ---
+# [L18] Push avec argument "weekly" pour les archives hebdomadaires
+git_backup_push_weekly: "bash -lc '/config/.scripts/ha_git_backup.sh weekly >> /config/.logs/ha_git_backup.log 2>&1'"
+
+# --- write_diag_log ---
+# [L22] Écriture native dans le fichier de diagnostic électrique
+write_diag_log: "echo '{{ message }}' >> /config/diag_conso_elec.txt"
+
+# annotations_log:
+# [2026-02-28] Suppression git_pull_ff (politique sens unique HA → GitHub)
+# [2026-02-28] Titre boîte secondaire complété : PIÈCE 10. AUTRE

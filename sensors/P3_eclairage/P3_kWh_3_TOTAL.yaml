@@ -1,0 +1,31 @@
+# ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 3. TOTAUX : SENSORS INTEGRATION (kWh)                        │
+  # ╰──────────────────────────────────────────────────────────────────────╯
+
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 3. TOTAL : PAR REGROUPEMENT (7 zones)                        │
+  # ╰──────────────────────────────────────────────────────────────────────╯
+
+  # --- eclairage_total_group_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.eclairage_total_group_puissance
+    name: "Eclairage Total Group Energie Totale kWh"
+    unique_id: eclairage_total_group_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 3. TOTAL : À L'UNITÉ (19 lampes)                             │
+  # ╰──────────────────────────────────────────────────────────────────────╯
+
+  # --- eclairage_total_unit_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.eclairage_total_unit_puissance
+    name: "Eclairage Total Unit Energie Totale kWh"
+    unique_id: eclairage_total_unit_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3

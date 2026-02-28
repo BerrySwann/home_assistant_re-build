@@ -1,0 +1,221 @@
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 3. ÉNERGIE: [kWh] ÉCLAIRAGE À L'UNITÉ (19 lampes)            │
+  # ╰──────────────────────────────────────────────────────────────────────╯
+
+  #┌───────────────────────────────────┐
+  #│         1. ENTRÉE                 │
+  #└───────────────────────────────────┘
+
+  # --- hue_white_lamp_entree_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_white_lamp_entree_power
+    name: "Hue White Lamp Entree Energie Totale kWh"
+    unique_id: hue_white_lamp_entree_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  #┌───────────────────────────────────┐
+  #│         4. SALON                  │
+  #└───────────────────────────────────┘
+
+  # --- hue_white_lamp_table_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_white_lamp_table_power
+    name: "Hue White Lamp Table Energie Totale kWh"
+    unique_id: hue_white_lamp_table_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # --- hue_ambiance_lamp_salon_1_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_ambiance_lamp_salon_1_power
+    name: "Hue Ambiance Lamp Salon 1 Energie Totale kWh"
+    unique_id: hue_ambiance_lamp_salon_1_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # --- hue_ambiance_lamp_salon_2_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_ambiance_lamp_salon_2_power
+    name: "Hue Ambiance Lamp Salon 2 Energie Totale kWh"
+    unique_id: hue_ambiance_lamp_salon_2_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # --- hue_ambiance_lamp_salon_3_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_ambiance_lamp_salon_3_power
+    name: "Hue Ambiance Lamp Salon 3 Energie Totale kWh"
+    unique_id: hue_ambiance_lamp_salon_3_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # --- hue_color_candle_salon_1_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_color_candle_salon_1_power
+    name: "Hue Color Candle Salon 1 Energie Totale kWh"
+    unique_id: hue_color_candle_salon_1_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  #┌───────────────────────────────────┐
+  #│         5. CUISINE                │
+  #└───────────────────────────────────┘
+
+  # --- hue_white_lamp_cuisine_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_white_lamp_cuisine_power
+    name: "Hue White Lamp Cuisine Energie Totale kWh"
+    unique_id: hue_white_lamp_cuisine_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  #┌───────────────────────────────────┐
+  #│         6. COULOIR                │
+  #└───────────────────────────────────┘
+
+  # --- hue_white_lamp_couloir_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_white_lamp_couloir_power
+    name: "Hue White Lamp Couloir Energie Totale kWh"
+    unique_id: hue_white_lamp_couloir_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  #┌───────────────────────────────────┐
+  #│         7. BUREAU                 │
+  #└───────────────────────────────────┘
+
+  # --- hue_play_1_pc_bureau_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_play_1_pc_bureau_power
+    name: "Hue Play 1 Pc Bureau Energie Totale kWh"
+    unique_id: hue_play_1_pc_bureau_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # --- hue_play_2_pc_bureau_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_play_2_pc_bureau_power
+    name: "Hue Play 2 Pc Bureau Energie Totale kWh"
+    unique_id: hue_play_2_pc_bureau_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # --- hue_play_3_pc_bureau_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_play_3_pc_bureau_power
+    name: "Hue Play 3 Pc Bureau Energie Totale kWh"
+    unique_id: hue_play_3_pc_bureau_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # --- hue_white_lamp_bureau_1_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_white_lamp_bureau_1_power
+    name: "Hue White Lamp Bureau 1 Energie Totale kWh"
+    unique_id: hue_white_lamp_bureau_1_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # --- hue_white_lamp_bureau_2_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_white_lamp_bureau_2_power
+    name: "Hue White Lamp Bureau 2 Energie Totale kWh"
+    unique_id: hue_white_lamp_bureau_2_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  #┌───────────────────────────────────┐
+  #│         8. SDB                    │
+  #└───────────────────────────────────┘
+
+  # --- relais_lumiere_sdb_sonoff_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.relais_lumiere_sdb_sonoff_power
+    name: "Relais Lumiere Sdb Sonoff Energie Totale kWh"
+    unique_id: relais_lumiere_sdb_sonoff_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # --- lampe_salle_de_bain_hue_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.lampe_salle_de_bain_hue_power
+    name: "Lampe Salle De Bain Hue Energie Totale kWh"
+    unique_id: lampe_salle_de_bain_hue_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  #┌───────────────────────────────────┐
+  #│         9. CHAMBRE                │
+  #└───────────────────────────────────┘
+
+  # --- hue_white_lamp_chambre_1_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_white_lamp_chambre_1_power
+    name: "Hue White Lamp Chambre 1 Energie Totale kWh"
+    unique_id: hue_white_lamp_chambre_1_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # --- hue_white_lamp_chambre_2_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_white_lamp_chambre_2_power
+    name: "Hue White Lamp Chambre 2 Energie Totale kWh"
+    unique_id: hue_white_lamp_chambre_2_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # --- hue_color_candle_chambre_gege_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_color_candle_chambre_gege_power
+    name: "Hue Color Candle Chambre Gege Energie Totale kWh"
+    unique_id: hue_color_candle_chambre_gege_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # --- hue_color_candle_chambre_eric_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.hue_color_candle_chambre_eric_power
+    name: "Hue Color Candle Chambre Eric Energie Totale kWh"
+    unique_id: hue_color_candle_chambre_eric_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3

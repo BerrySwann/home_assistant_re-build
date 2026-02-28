@@ -1,0 +1,784 @@
+# ╭────────────────────────────────────────────────────────────────────────╮
+# │ P3_AVG | PUISSANCE MOYENNE (W) - ÉCLAIRAGE                            │
+# ╰────────────────────────────────────────────────────────────────────────╯
+- sensor:
+    # ┌───────────────────────────────────┐
+    # │ 1. ENTRÉE                         │
+    # └───────────────────────────────────┘
+    # --- hue_white_lamp_entree_avg_watts_quotidien ---
+    - name: "Hue White Lamp Entree Avg Watts Quotidien"
+      unique_id: hue_white_lamp_entree_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_entree_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_entree_avg_watts_hebdomadaire ---
+    - name: "Hue White Lamp Entree Avg Watts Hebdomadaire"
+      unique_id: hue_white_lamp_entree_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_entree_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_entree_avg_watts_mensuel ---
+    - name: "Hue White Lamp Entree Avg Watts Mensuel"
+      unique_id: hue_white_lamp_entree_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_entree_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_entree_avg_watts_annuel ---
+    - name: "Hue White Lamp Entree Avg Watts Annuel"
+      unique_id: hue_white_lamp_entree_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_entree_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ 4. SALON                          │
+    # └───────────────────────────────────┘
+    # --- hue_white_lamp_table_avg_watts_quotidien ---
+    - name: "Hue White Lamp Table Avg Watts Quotidien"
+      unique_id: hue_white_lamp_table_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_table_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_table_avg_watts_hebdomadaire ---
+    - name: "Hue White Lamp Table Avg Watts Hebdomadaire"
+      unique_id: hue_white_lamp_table_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_table_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_table_avg_watts_mensuel ---
+    - name: "Hue White Lamp Table Avg Watts Mensuel"
+      unique_id: hue_white_lamp_table_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_table_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_table_avg_watts_annuel ---
+    - name: "Hue White Lamp Table Avg Watts Annuel"
+      unique_id: hue_white_lamp_table_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_table_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # --- hue_ambiance_lamp_salon_1_avg_watts_quotidien ---
+    - name: "Hue Ambiance Lamp Salon 1 Avg Watts Quotidien"
+      unique_id: hue_ambiance_lamp_salon_1_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_1_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_ambiance_lamp_salon_1_avg_watts_hebdomadaire ---
+    - name: "Hue Ambiance Lamp Salon 1 Avg Watts Hebdomadaire"
+      unique_id: hue_ambiance_lamp_salon_1_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_1_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_ambiance_lamp_salon_1_avg_watts_mensuel ---
+    - name: "Hue Ambiance Lamp Salon 1 Avg Watts Mensuel"
+      unique_id: hue_ambiance_lamp_salon_1_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_1_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_ambiance_lamp_salon_1_avg_watts_annuel ---
+    - name: "Hue Ambiance Lamp Salon 1 Avg Watts Annuel"
+      unique_id: hue_ambiance_lamp_salon_1_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_1_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # --- hue_ambiance_lamp_salon_2_avg_watts_quotidien ---
+    - name: "Hue Ambiance Lamp Salon 2 Avg Watts Quotidien"
+      unique_id: hue_ambiance_lamp_salon_2_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_2_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_ambiance_lamp_salon_2_avg_watts_hebdomadaire ---
+    - name: "Hue Ambiance Lamp Salon 2 Avg Watts Hebdomadaire"
+      unique_id: hue_ambiance_lamp_salon_2_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_2_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_ambiance_lamp_salon_2_avg_watts_mensuel ---
+    - name: "Hue Ambiance Lamp Salon 2 Avg Watts Mensuel"
+      unique_id: hue_ambiance_lamp_salon_2_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_2_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_ambiance_lamp_salon_2_avg_watts_annuel ---
+    - name: "Hue Ambiance Lamp Salon 2 Avg Watts Annuel"
+      unique_id: hue_ambiance_lamp_salon_2_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_2_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # --- hue_ambiance_lamp_salon_3_avg_watts_quotidien ---
+    - name: "Hue Ambiance Lamp Salon 3 Avg Watts Quotidien"
+      unique_id: hue_ambiance_lamp_salon_3_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_3_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_ambiance_lamp_salon_3_avg_watts_hebdomadaire ---
+    - name: "Hue Ambiance Lamp Salon 3 Avg Watts Hebdomadaire"
+      unique_id: hue_ambiance_lamp_salon_3_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_3_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_ambiance_lamp_salon_3_avg_watts_mensuel ---
+    - name: "Hue Ambiance Lamp Salon 3 Avg Watts Mensuel"
+      unique_id: hue_ambiance_lamp_salon_3_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_3_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_ambiance_lamp_salon_3_avg_watts_annuel ---
+    - name: "Hue Ambiance Lamp Salon 3 Avg Watts Annuel"
+      unique_id: hue_ambiance_lamp_salon_3_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_3_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # --- hue_color_candle_salon_1_avg_watts_quotidien ---
+    - name: "Hue Color Candle Salon 1 Avg Watts Quotidien"
+      unique_id: hue_color_candle_salon_1_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_color_candle_salon_1_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_color_candle_salon_1_avg_watts_hebdomadaire ---
+    - name: "Hue Color Candle Salon 1 Avg Watts Hebdomadaire"
+      unique_id: hue_color_candle_salon_1_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_color_candle_salon_1_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_color_candle_salon_1_avg_watts_mensuel ---
+    - name: "Hue Color Candle Salon 1 Avg Watts Mensuel"
+      unique_id: hue_color_candle_salon_1_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_color_candle_salon_1_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_color_candle_salon_1_avg_watts_annuel ---
+    - name: "Hue Color Candle Salon 1 Avg Watts Annuel"
+      unique_id: hue_color_candle_salon_1_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_color_candle_salon_1_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ 5. CUISINE                        │
+    # └───────────────────────────────────┘
+    # --- hue_white_lamp_cuisine_avg_watts_quotidien ---
+    - name: "Hue White Lamp Cuisine Avg Watts Quotidien"
+      unique_id: hue_white_lamp_cuisine_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_cuisine_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_cuisine_avg_watts_hebdomadaire ---
+    - name: "Hue White Lamp Cuisine Avg Watts Hebdomadaire"
+      unique_id: hue_white_lamp_cuisine_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_cuisine_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_cuisine_avg_watts_mensuel ---
+    - name: "Hue White Lamp Cuisine Avg Watts Mensuel"
+      unique_id: hue_white_lamp_cuisine_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_cuisine_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_cuisine_avg_watts_annuel ---
+    - name: "Hue White Lamp Cuisine Avg Watts Annuel"
+      unique_id: hue_white_lamp_cuisine_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_cuisine_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ 6. COULOIR                        │
+    # └───────────────────────────────────┘
+    # --- hue_white_lamp_couloir_avg_watts_quotidien ---
+    - name: "Hue White Lamp Couloir Avg Watts Quotidien"
+      unique_id: hue_white_lamp_couloir_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_couloir_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_couloir_avg_watts_hebdomadaire ---
+    - name: "Hue White Lamp Couloir Avg Watts Hebdomadaire"
+      unique_id: hue_white_lamp_couloir_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_couloir_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_couloir_avg_watts_mensuel ---
+    - name: "Hue White Lamp Couloir Avg Watts Mensuel"
+      unique_id: hue_white_lamp_couloir_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_couloir_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_couloir_avg_watts_annuel ---
+    - name: "Hue White Lamp Couloir Avg Watts Annuel"
+      unique_id: hue_white_lamp_couloir_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_couloir_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ 7. BUREAU                         │
+    # └───────────────────────────────────┘
+    # --- hue_play_1_pc_bureau_avg_watts_quotidien ---
+    - name: "Hue Play 1 Pc Bureau Avg Watts Quotidien"
+      unique_id: hue_play_1_pc_bureau_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_play_1_pc_bureau_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_play_1_pc_bureau_avg_watts_hebdomadaire ---
+    - name: "Hue Play 1 Pc Bureau Avg Watts Hebdomadaire"
+      unique_id: hue_play_1_pc_bureau_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_play_1_pc_bureau_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_play_1_pc_bureau_avg_watts_mensuel ---
+    - name: "Hue Play 1 Pc Bureau Avg Watts Mensuel"
+      unique_id: hue_play_1_pc_bureau_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_play_1_pc_bureau_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_play_1_pc_bureau_avg_watts_annuel ---
+    - name: "Hue Play 1 Pc Bureau Avg Watts Annuel"
+      unique_id: hue_play_1_pc_bureau_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_play_1_pc_bureau_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # --- hue_play_2_pc_bureau_avg_watts_quotidien ---
+    - name: "Hue Play 2 Pc Bureau Avg Watts Quotidien"
+      unique_id: hue_play_2_pc_bureau_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_play_2_pc_bureau_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_play_2_pc_bureau_avg_watts_hebdomadaire ---
+    - name: "Hue Play 2 Pc Bureau Avg Watts Hebdomadaire"
+      unique_id: hue_play_2_pc_bureau_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_play_2_pc_bureau_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_play_2_pc_bureau_avg_watts_mensuel ---
+    - name: "Hue Play 2 Pc Bureau Avg Watts Mensuel"
+      unique_id: hue_play_2_pc_bureau_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_play_2_pc_bureau_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_play_2_pc_bureau_avg_watts_annuel ---
+    - name: "Hue Play 2 Pc Bureau Avg Watts Annuel"
+      unique_id: hue_play_2_pc_bureau_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_play_2_pc_bureau_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # --- hue_play_3_pc_bureau_avg_watts_quotidien ---
+    - name: "Hue Play 3 Pc Bureau Avg Watts Quotidien"
+      unique_id: hue_play_3_pc_bureau_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_play_3_pc_bureau_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_play_3_pc_bureau_avg_watts_hebdomadaire ---
+    - name: "Hue Play 3 Pc Bureau Avg Watts Hebdomadaire"
+      unique_id: hue_play_3_pc_bureau_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_play_3_pc_bureau_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_play_3_pc_bureau_avg_watts_mensuel ---
+    - name: "Hue Play 3 Pc Bureau Avg Watts Mensuel"
+      unique_id: hue_play_3_pc_bureau_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_play_3_pc_bureau_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_play_3_pc_bureau_avg_watts_annuel ---
+    - name: "Hue Play 3 Pc Bureau Avg Watts Annuel"
+      unique_id: hue_play_3_pc_bureau_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_play_3_pc_bureau_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_bureau_1_avg_watts_quotidien ---
+    - name: "Hue White Lamp Bureau 1 Avg Watts Quotidien"
+      unique_id: hue_white_lamp_bureau_1_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_bureau_1_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_bureau_1_avg_watts_hebdomadaire ---
+    - name: "Hue White Lamp Bureau 1 Avg Watts Hebdomadaire"
+      unique_id: hue_white_lamp_bureau_1_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_bureau_1_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_bureau_1_avg_watts_mensuel ---
+    - name: "Hue White Lamp Bureau 1 Avg Watts Mensuel"
+      unique_id: hue_white_lamp_bureau_1_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_bureau_1_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_bureau_1_avg_watts_annuel ---
+    - name: "Hue White Lamp Bureau 1 Avg Watts Annuel"
+      unique_id: hue_white_lamp_bureau_1_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_bureau_1_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_bureau_2_avg_watts_quotidien ---
+    - name: "Hue White Lamp Bureau 2 Avg Watts Quotidien"
+      unique_id: hue_white_lamp_bureau_2_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_bureau_2_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_bureau_2_avg_watts_hebdomadaire ---
+    - name: "Hue White Lamp Bureau 2 Avg Watts Hebdomadaire"
+      unique_id: hue_white_lamp_bureau_2_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_bureau_2_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_bureau_2_avg_watts_mensuel ---
+    - name: "Hue White Lamp Bureau 2 Avg Watts Mensuel"
+      unique_id: hue_white_lamp_bureau_2_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_bureau_2_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_bureau_2_avg_watts_annuel ---
+    - name: "Hue White Lamp Bureau 2 Avg Watts Annuel"
+      unique_id: hue_white_lamp_bureau_2_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_bureau_2_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ 8. SDB                            │
+    # └───────────────────────────────────┘
+    # --- relais_lumiere_sdb_sonoff_avg_watts_quotidien ---
+    - name: "Relais Lumiere Sdb Sonoff Avg Watts Quotidien"
+      unique_id: relais_lumiere_sdb_sonoff_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.relais_lumiere_sdb_sonoff_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- relais_lumiere_sdb_sonoff_avg_watts_hebdomadaire ---
+    - name: "Relais Lumiere Sdb Sonoff Avg Watts Hebdomadaire"
+      unique_id: relais_lumiere_sdb_sonoff_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.relais_lumiere_sdb_sonoff_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- relais_lumiere_sdb_sonoff_avg_watts_mensuel ---
+    - name: "Relais Lumiere Sdb Sonoff Avg Watts Mensuel"
+      unique_id: relais_lumiere_sdb_sonoff_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.relais_lumiere_sdb_sonoff_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- relais_lumiere_sdb_sonoff_avg_watts_annuel ---
+    - name: "Relais Lumiere Sdb Sonoff Avg Watts Annuel"
+      unique_id: relais_lumiere_sdb_sonoff_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.relais_lumiere_sdb_sonoff_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # --- lampe_salle_de_bain_hue_avg_watts_quotidien ---
+    - name: "Lampe Salle De Bain Hue Avg Watts Quotidien"
+      unique_id: lampe_salle_de_bain_hue_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.lampe_salle_de_bain_hue_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- lampe_salle_de_bain_hue_avg_watts_hebdomadaire ---
+    - name: "Lampe Salle De Bain Hue Avg Watts Hebdomadaire"
+      unique_id: lampe_salle_de_bain_hue_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.lampe_salle_de_bain_hue_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- lampe_salle_de_bain_hue_avg_watts_mensuel ---
+    - name: "Lampe Salle De Bain Hue Avg Watts Mensuel"
+      unique_id: lampe_salle_de_bain_hue_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.lampe_salle_de_bain_hue_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- lampe_salle_de_bain_hue_avg_watts_annuel ---
+    - name: "Lampe Salle De Bain Hue Avg Watts Annuel"
+      unique_id: lampe_salle_de_bain_hue_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.lampe_salle_de_bain_hue_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ 9. CHAMBRE                        │
+    # └───────────────────────────────────┘
+    # --- hue_white_lamp_chambre_1_avg_watts_quotidien ---
+    - name: "Hue White Lamp Chambre 1 Avg Watts Quotidien"
+      unique_id: hue_white_lamp_chambre_1_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_chambre_1_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_chambre_1_avg_watts_hebdomadaire ---
+    - name: "Hue White Lamp Chambre 1 Avg Watts Hebdomadaire"
+      unique_id: hue_white_lamp_chambre_1_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_chambre_1_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_chambre_1_avg_watts_mensuel ---
+    - name: "Hue White Lamp Chambre 1 Avg Watts Mensuel"
+      unique_id: hue_white_lamp_chambre_1_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_chambre_1_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_chambre_1_avg_watts_annuel ---
+    - name: "Hue White Lamp Chambre 1 Avg Watts Annuel"
+      unique_id: hue_white_lamp_chambre_1_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_chambre_1_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_chambre_2_avg_watts_quotidien ---
+    - name: "Hue White Lamp Chambre 2 Avg Watts Quotidien"
+      unique_id: hue_white_lamp_chambre_2_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_chambre_2_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_chambre_2_avg_watts_hebdomadaire ---
+    - name: "Hue White Lamp Chambre 2 Avg Watts Hebdomadaire"
+      unique_id: hue_white_lamp_chambre_2_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_chambre_2_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_chambre_2_avg_watts_mensuel ---
+    - name: "Hue White Lamp Chambre 2 Avg Watts Mensuel"
+      unique_id: hue_white_lamp_chambre_2_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_chambre_2_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_white_lamp_chambre_2_avg_watts_annuel ---
+    - name: "Hue White Lamp Chambre 2 Avg Watts Annuel"
+      unique_id: hue_white_lamp_chambre_2_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_white_lamp_chambre_2_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # --- hue_color_candle_chambre_gege_avg_watts_quotidien ---
+    - name: "Hue Color Candle Chambre Gege Avg Watts Quotidien"
+      unique_id: hue_color_candle_chambre_gege_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_color_candle_chambre_gege_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_color_candle_chambre_gege_avg_watts_hebdomadaire ---
+    - name: "Hue Color Candle Chambre Gege Avg Watts Hebdomadaire"
+      unique_id: hue_color_candle_chambre_gege_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_color_candle_chambre_gege_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_color_candle_chambre_gege_avg_watts_mensuel ---
+    - name: "Hue Color Candle Chambre Gege Avg Watts Mensuel"
+      unique_id: hue_color_candle_chambre_gege_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_color_candle_chambre_gege_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_color_candle_chambre_gege_avg_watts_annuel ---
+    - name: "Hue Color Candle Chambre Gege Avg Watts Annuel"
+      unique_id: hue_color_candle_chambre_gege_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_color_candle_chambre_gege_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # --- hue_color_candle_chambre_eric_avg_watts_quotidien ---
+    - name: "Hue Color Candle Chambre Eric Avg Watts Quotidien"
+      unique_id: hue_color_candle_chambre_eric_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_color_candle_chambre_eric_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- hue_color_candle_chambre_eric_avg_watts_hebdomadaire ---
+    - name: "Hue Color Candle Chambre Eric Avg Watts Hebdomadaire"
+      unique_id: hue_color_candle_chambre_eric_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_color_candle_chambre_eric_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- hue_color_candle_chambre_eric_avg_watts_mensuel ---
+    - name: "Hue Color Candle Chambre Eric Avg Watts Mensuel"
+      unique_id: hue_color_candle_chambre_eric_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_color_candle_chambre_eric_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- hue_color_candle_chambre_eric_avg_watts_annuel ---
+    - name: "Hue Color Candle Chambre Eric Avg Watts Annuel"
+      unique_id: hue_color_candle_chambre_eric_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.hue_color_candle_chambre_eric_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}

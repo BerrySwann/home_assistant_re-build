@@ -1,0 +1,80 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# Pour Button Outils Dev 
+panel_custom:
+  - name: developer-tools-sidebar
+    sidebar_title: Outils Dev
+    sidebar_icon: mdi:hammer-wrench
+    url_path: developer-tools/yaml
+    module_url: /api/hassio/app/entrypoint.js
+    embed_iframe: true
+
+# Pour powercalc
+powercalc:
+
+# renvoi au fichier répertoire sensors/
+sensor: !include_dir_merge_list sensors/
+# renvoi au fichier sensors.yaml
+#sensor: !include sensors.yaml
+
+# renvoi au fichier répertoire templates/
+template: !include_dir_merge_list templates/
+# renvoi au fichier templates.yaml
+#template: !include templates.yaml
+
+# renvoi au fichier répertoire utility_meter/
+utility_meter: !include_dir_merge_named utility_meter/
+# renvoi au fichier utility_meter.yaml
+#utility_meter: !include utility_meter.yaml
+
+# Renvoi au dossier contenant tous les fichiers command_line
+command_line: !include_dir_merge_list command_line/
+# renvoi au fichier commad_line.yaml
+#command_line: !include command_line.yaml
+
+# Renvoi au dossier contenant tous les fichiers shell_command
+#shell_command: !include_dir_merge_list shell_command/
+# renvoi au fichier shell_command.yaml
+shell_command: !include shell_command.yaml
+
+#renvoi au fichier camera.yaml -> carte meteo france alerte
+camera: !include camera.yaml
+
+# renvoi au fichier input_button.yaml
+input_button: !include input_button.yaml
+
+#smartIR
+climate:
+  - platform: smartir
+    name: Clim Bureau RM4-Mini
+    unique_id: clim_bureau_rm4_mini
+    device_code: 1108
+    controller_data: remote.clim_bureau
+    temperature_sensor: sensor.th_bureau_temperature
+    humidity_sensor: sensor.th_bureau_humidity
+
+  - platform: smartir
+    name: Clim Chambre RM4-Mini
+    unique_id: clim_chambre_rm4_mini
+    device_code: 1108
+    controller_data: remote.clim_chambre
+    temperature_sensor: sensor.th_chambre_temperature
+    humidity_sensor: sensor.th_chambre_humidity
+
+  - platform: smartir
+    name: Clim Salon RM4-Mini
+    unique_id: clim_salon_rm4_mini
+    device_code: 1082
+    controller_data: remote.clim_salon
+    temperature_sensor: sensor.th_salon_temperature
+    humidity_sensor: sensor.th_salon_humidity

@@ -1,0 +1,173 @@
+- id: '1771872569647'
+  alias: Alerte Météo France actualisation des "CARTES"
+  description: 'Force la mise à jour des images d''alerte Météo France au démarrage,  aux
+    heures clés, ou toutes les 5 min si elles sont indisponibles.
+
+    '
+  triggers:
+  - trigger: homeassistant
+    event: start
+    id: Start
+  - trigger: time
+    at: 06:32:00
+    id: Heure632
+  - trigger: time
+    at: '16:32:00'
+    id: Heure1632
+  - trigger: time_pattern
+    minutes: /5
+    id: Toutesles5minutes
+  conditions:
+  - condition: or
+    conditions:
+    - condition: trigger
+      id:
+      - Start
+      - Heure632
+      - Heure1632
+    - alias: Vérif si Today est HS
+      condition: and
+      conditions:
+      - condition: trigger
+        id: Toutesles5minutes
+      - condition: state
+        entity_id: sensor.meteo_france_alertes_image_today
+        state: unavailable
+    - alias: Vérif si Tomorrow est HS
+      condition: and
+      conditions:
+      - condition: trigger
+        id: Toutesles5minutes
+      - condition: state
+        entity_id: sensor.meteo_france_alertes_image_tomorrow
+        state: unavailable
+  actions:
+  - alias: Premier essai de mise à jour
+    action: homeassistant.update_entity
+    target:
+      entity_id:
+      - sensor.meteo_france_alertes_image_today
+      - sensor.meteo_france_alertes_image_tomorrow
+  - delay: 00:00:05
+  - alias: Répéter MAJ Today si toujours indisponible
+    repeat:
+      count: 1
+      sequence:
+      - if:
+        - condition: state
+          entity_id: sensor.meteo_france_alertes_image_today
+          state: unavailable
+        then:
+        - action: homeassistant.update_entity
+          target:
+            entity_id: sensor.meteo_france_alertes_image_today
+        - delay: 00:00:05
+  - alias: Répéter MAJ Tomorrow si toujours indisponible
+    repeat:
+      count: 1
+      sequence:
+      - if:
+        - condition: state
+          entity_id: sensor.meteo_france_alertes_image_tomorrow
+          state: unavailable
+        then:
+        - action: homeassistant.update_entity
+          target:
+            entity_id: sensor.meteo_france_alertes_image_tomorrow
+        - delay: 00:00:05
+  - alias: Rafraîchir les caméras finales
+    action: homeassistant.update_entity
+    target:
+      entity_id:
+      - camera.mf_alerte_today
+      - camera.mf_alerte_tomorrow
+  mode: single
+- id: '1772274292302'
+  alias: '[03-Backup] Git weekly (dim 01:30)'
+  description: Backup natif HA + push + tag weekly chaque dimanche à 01:30
+  triggers:
+  - trigger: time
+    at: 01:30:00
+  conditions:
+  - condition: time
+    weekday:
+    - sun
+  actions:
+  - action: backup.create
+  - action: shell_command.git_backup_push_weekly
+  - action: system_log.write
+    data:
+      level: info
+      message: '[Backup] Weekly exécuté'
+  - action: notify.mobile_app_poco_x7_pro_eric
+    data:
+      title: BACKUP WEEKLY
+      message: 'Backup hebdo + tag -> GitHub OK. Semaine {{ now().strftime(''%Y-W%U'')
+        }}
+
+        '
+  mode: single
+- id: '1772274342928'
+  alias: '[01-Backup] Git hourly H+10'
+  description: Push Git + backup natif HA toutes les heures à H+10
+  triggers:
+  - trigger: time_pattern
+    minutes: '10'
+  conditions: []
+  actions:
+  - action: backup.create
+  - action: shell_command.git_backup_push
+  - action: system_log.write
+    data:
+      level: info
+      message: '[Backup] Horaire H+10 exécuté'
+  mode: single
+- id: '1772274384811'
+  alias: '[02-Backup] Git daily (03:00)'
+  description: Backup natif HA + push Git quotidien à 03h00
+  triggers:
+  - trigger: time
+    at: 03:00:00
+  conditions: []
+  actions:
+  - action: backup.create
+  - action: shell_command.git_backup_push
+  - action: system_log.write
+    data:
+      level: info
+      message: '[Backup] Daily 03:00 exécuté'
+  mode: single
+- id: '1772275440416'
+  alias: '[00-Backup] Alerte si KO 15 min'
+  description: Notification si le backup reste en KO pendant 15 minutes
+  triggers:
+  - trigger: state
+    entity_id: sensor.backup_github_status
+    to: KO
+    for: 00:15:00
+  conditions: []
+  actions:
+  - action: persistent_notification.create
+    data:
+      title: BACKUP GITHUB KO
+      message: 'Echec ou pas de commit depuis 15 min. Verif : /config/.logs/ha_git_backup.log
+
+        '
+  - action: notify.mobile_app_poco_x7_pro_eric
+    data:
+      title: BACKUP KO
+      message: 'Git push KO depuis 15 min. Verif log backup.
+
+        '
+  - action: system_log.write
+    data:
+      level: error
+      message: '[Backup] KO depuis 15 min — vérifier ha_git_backup.log'
+  mode: single
+- id: '1772276622703'
+  alias: '[04-Backup] Git push manuel'
+  triggers:
+  - trigger: state
+    entity_id: input_button.git_push_manuel
+  actions:
+  - action: shell_command.git_backup_push

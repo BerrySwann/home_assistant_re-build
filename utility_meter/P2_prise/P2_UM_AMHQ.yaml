@@ -1,0 +1,452 @@
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ UTILITY METER : PÔLE 2. PRISES (DÉCOUPAGE A/M/H/Q)                           │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+
+# ┌───────────────────────────────────┐
+# │ 1. ENTRÉE                         │
+# └───────────────────────────────────┘
+
+# --- prise_box_internet_ikea ---
+prise_box_internet_ikea_annuel_kwh_um:
+  source: sensor.prise_box_internet_ikea_energie_totale_kwh
+  name: "Prise Box Internet IKEA Annuel kWh UM"
+  unique_id: prise_box_internet_ikea_annuel_kwh_um
+  cycle: yearly
+
+prise_box_internet_ikea_mensuel_kwh_um:
+  source: sensor.prise_box_internet_ikea_energie_totale_kwh
+  name: "Prise Box Internet IKEA Mensuel kWh UM"
+  unique_id: prise_box_internet_ikea_mensuel_kwh_um
+  cycle: monthly
+
+prise_box_internet_ikea_hebdomadaire_kwh_um:
+  source: sensor.prise_box_internet_ikea_energie_totale_kwh
+  name: "Prise Box Internet IKEA Hebdomadaire kWh UM"
+  unique_id: prise_box_internet_ikea_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_box_internet_ikea_quotidien_kwh_um:
+  source: sensor.prise_box_internet_ikea_energie_totale_kwh
+  name: "Prise Box Internet IKEA Quotidien kWh UM"
+  unique_id: prise_box_internet_ikea_quotidien_kwh_um
+  cycle: daily
+
+# --- prise_horloge_ikea ---
+prise_horloge_ikea_annuel_kwh_um:
+  source: sensor.prise_horloge_ikea_energie_totale_kwh
+  name: "Prise Horloge IKEA Annuel kWh UM"
+  unique_id: prise_horloge_ikea_annuel_kwh_um
+  cycle: yearly
+
+prise_horloge_ikea_mensuel_kwh_um:
+  source: sensor.prise_horloge_ikea_energie_totale_kwh
+  name: "Prise Horloge IKEA Mensuel kWh UM"
+  unique_id: prise_horloge_ikea_mensuel_kwh_um
+  cycle: monthly
+
+prise_horloge_ikea_hebdomadaire_kwh_um:
+  source: sensor.prise_horloge_ikea_energie_totale_kwh
+  name: "Prise Horloge IKEA Hebdomadaire kWh UM"
+  unique_id: prise_horloge_ikea_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_horloge_ikea_quotidien_kwh_um:
+  source: sensor.prise_horloge_ikea_energie_totale_kwh
+  name: "Prise Horloge IKEA Quotidien kWh UM"
+  unique_id: prise_horloge_ikea_quotidien_kwh_um
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │ 4. SALON                          │
+# └───────────────────────────────────┘
+
+# --- prise_pc_s_gege_ikea ---
+prise_pc_s_gege_ikea_annuel_kwh_um:
+  source: sensor.prise_pc_s_gege_ikea_energie_totale_kwh
+  name: "Prise PC S-Gege IKEA Annuel kWh UM"
+  unique_id: prise_pc_s_gege_ikea_annuel_kwh_um
+  cycle: yearly
+
+prise_pc_s_gege_ikea_mensuel_kwh_um:
+  source: sensor.prise_pc_s_gege_ikea_energie_totale_kwh
+  name: "Prise PC S-Gege IKEA Mensuel kWh UM"
+  unique_id: prise_pc_s_gege_ikea_mensuel_kwh_um
+  cycle: monthly
+
+prise_pc_s_gege_ikea_hebdomadaire_kwh_um:
+  source: sensor.prise_pc_s_gege_ikea_energie_totale_kwh
+  name: "Prise PC S-Gege IKEA Hebdomadaire kWh UM"
+  unique_id: prise_pc_s_gege_ikea_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_pc_s_gege_ikea_quotidien_kwh_um:
+  source: sensor.prise_pc_s_gege_ikea_energie_totale_kwh
+  name: "Prise PC S-Gege IKEA Quotidien kWh UM"
+  unique_id: prise_pc_s_gege_ikea_quotidien_kwh_um
+  cycle: daily
+
+# --- prise_salon_chargeur_nous ---
+prise_salon_chargeur_nous_annuel_kwh_um:
+  source: sensor.prise_salon_chargeur_nous_energie_totale_kwh
+  name: "Prise Salon Chargeur NOUS Annuel kWh UM"
+  unique_id: prise_salon_chargeur_nous_annuel_kwh_um
+  cycle: yearly
+
+prise_salon_chargeur_nous_mensuel_kwh_um:
+  source: sensor.prise_salon_chargeur_nous_energie_totale_kwh
+  name: "Prise Salon Chargeur NOUS Mensuel kWh UM"
+  unique_id: prise_salon_chargeur_nous_mensuel_kwh_um
+  cycle: monthly
+
+prise_salon_chargeur_nous_hebdomadaire_kwh_um:
+  source: sensor.prise_salon_chargeur_nous_energie_totale_kwh
+  name: "Prise Salon Chargeur NOUS Hebdomadaire kWh UM"
+  unique_id: prise_salon_chargeur_nous_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_salon_chargeur_nous_quotidien_kwh_um:
+  source: sensor.prise_salon_chargeur_nous_energie_totale_kwh
+  name: "Prise Salon Chargeur NOUS Quotidien kWh UM"
+  unique_id: prise_salon_chargeur_nous_quotidien_kwh_um
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │ 5. CUISINE                        │
+# └───────────────────────────────────┘
+
+# --- prise_four_micro_ondes_nous ---
+prise_four_micro_ondes_nous_annuel_kwh_um:
+  source: sensor.prise_four_micro_ondes_nous_energie_totale_kwh
+  name: "Prise Four Micro-ondes NOUS Annuel kWh UM"
+  unique_id: prise_four_micro_ondes_nous_annuel_kwh_um
+  cycle: yearly
+
+prise_four_micro_ondes_nous_mensuel_kwh_um:
+  source: sensor.prise_four_micro_ondes_nous_energie_totale_kwh
+  name: "Prise Four Micro-ondes NOUS Mensuel kWh UM"
+  unique_id: prise_four_micro_ondes_nous_mensuel_kwh_um
+  cycle: monthly
+
+prise_four_micro_ondes_nous_hebdomadaire_kwh_um:
+  source: sensor.prise_four_micro_ondes_nous_energie_totale_kwh
+  name: "Prise Four Micro-ondes NOUS Hebdomadaire kWh UM"
+  unique_id: prise_four_micro_ondes_nous_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_four_micro_ondes_nous_quotidien_kwh_um:
+  source: sensor.prise_four_micro_ondes_nous_energie_totale_kwh
+  name: "Prise Four Micro-ondes NOUS Quotidien kWh UM"
+  unique_id: prise_four_micro_ondes_nous_quotidien_kwh_um
+  cycle: daily
+
+# --- prise_petit_dejeune_nous ---
+prise_petit_dejeune_nous_annuel_kwh_um:
+  source: sensor.prise_petit_dejeune_nous_energie_totale_kwh
+  name: "Prise Petit Dejeuné NOUS Annuel kWh UM"
+  unique_id: prise_petit_dejeune_nous_annuel_kwh_um
+  cycle: yearly
+
+prise_petit_dejeune_nous_mensuel_kwh_um:
+  source: sensor.prise_petit_dejeune_nous_energie_totale_kwh
+  name: "Prise Petit Dejeuné NOUS Mensuel kWh UM"
+  unique_id: prise_petit_dejeune_nous_mensuel_kwh_um
+  cycle: monthly
+
+prise_petit_dejeune_nous_hebdomadaire_kwh_um:
+  source: sensor.prise_petit_dejeune_nous_energie_totale_kwh
+  name: "Prise Petit Dejeuné NOUS Hebdomadaire kWh UM"
+  unique_id: prise_petit_dejeune_nous_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_petit_dejeune_nous_quotidien_kwh_um:
+  source: sensor.prise_petit_dejeune_nous_energie_totale_kwh
+  name: "Prise Petit Dejeuné NOUS Quotidien kWh UM"
+  unique_id: prise_petit_dejeune_nous_quotidien_kwh_um
+  cycle: daily
+
+# --- prise_lave_linge_nous ---
+prise_lave_linge_nous_annuel_kwh_um:
+  source: sensor.prise_lave_linge_nous_energie_totale_kwh
+  name: "Prise Lave-Linge NOUS Annuel kWh UM"
+  unique_id: prise_lave_linge_nous_annuel_kwh_um
+  cycle: yearly
+
+prise_lave_linge_nous_mensuel_kwh_um:
+  source: sensor.prise_lave_linge_nous_energie_totale_kwh
+  name: "Prise Lave-Linge NOUS Mensuel kWh UM"
+  unique_id: prise_lave_linge_nous_mensuel_kwh_um
+  cycle: monthly
+
+prise_lave_linge_nous_hebdomadaire_kwh_um:
+  source: sensor.prise_lave_linge_nous_energie_totale_kwh
+  name: "Prise Lave-Linge NOUS Hebdomadaire kWh UM"
+  unique_id: prise_lave_linge_nous_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_lave_linge_nous_quotidien_kwh_um:
+  source: sensor.prise_lave_linge_nous_energie_totale_kwh
+  name: "Prise Lave-Linge NOUS Quotidien kWh UM"
+  unique_id: prise_lave_linge_nous_quotidien_kwh_um
+  cycle: daily
+
+# --- prise_lave_vaisselle_nous ---
+prise_lave_vaisselle_nous_annuel_kwh_um:
+  source: sensor.prise_lave_vaisselle_nous_energie_totale_kwh
+  name: "Prise Lave-Vaisselle NOUS Annuel kWh UM"
+  unique_id: prise_lave_vaisselle_nous_annuel_kwh_um
+  cycle: yearly
+
+prise_lave_vaisselle_nous_mensuel_kwh_um:
+  source: sensor.prise_lave_vaisselle_nous_energie_totale_kwh
+  name: "Prise Lave-Vaisselle NOUS Mensuel kWh UM"
+  unique_id: prise_lave_vaisselle_nous_mensuel_kwh_um
+  cycle: monthly
+
+prise_lave_vaisselle_nous_hebdomadaire_kwh_um:
+  source: sensor.prise_lave_vaisselle_nous_energie_totale_kwh
+  name: "Prise Lave-Vaisselle NOUS Hebdomadaire kWh UM"
+  unique_id: prise_lave_vaisselle_nous_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_lave_vaisselle_nous_quotidien_kwh_um:
+  source: sensor.prise_lave_vaisselle_nous_energie_totale_kwh
+  name: "Prise Lave-Vaisselle NOUS Quotidien kWh UM"
+  unique_id: prise_lave_vaisselle_nous_quotidien_kwh_um
+  cycle: daily
+
+# --- prise_airfryer_ninja_nous ---
+prise_airfryer_ninja_nous_annuel_kwh_um:
+  source: sensor.prise_airfryer_ninja_nous_energie_totale_kwh
+  name: "Prise AirFryer Ninja NOUS Annuel kWh UM"
+  unique_id: prise_airfryer_ninja_nous_annuel_kwh_um
+  cycle: yearly
+
+prise_airfryer_ninja_nous_mensuel_kwh_um:
+  source: sensor.prise_airfryer_ninja_nous_energie_totale_kwh
+  name: "Prise AirFryer Ninja NOUS Mensuel kWh UM"
+  unique_id: prise_airfryer_ninja_nous_mensuel_kwh_um
+  cycle: monthly
+
+prise_airfryer_ninja_nous_hebdomadaire_kwh_um:
+  source: sensor.prise_airfryer_ninja_nous_energie_totale_kwh
+  name: "Prise AirFryer Ninja NOUS Hebdomadaire kWh UM"
+  unique_id: prise_airfryer_ninja_nous_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_airfryer_ninja_nous_quotidien_kwh_um:
+  source: sensor.prise_airfryer_ninja_nous_energie_totale_kwh
+  name: "Prise AirFryer Ninja NOUS Quotidien kWh UM"
+  unique_id: prise_airfryer_ninja_nous_quotidien_kwh_um
+  cycle: daily
+
+# --- four_et_plaque_de_cuisson ---
+four_et_plaque_de_cuisson_annuel_kwh_um:
+  source: sensor.four_et_plaque_de_cuisson_energie_totale_kwh
+  name: "Four et Plaque de Cuisson Annuel kWh UM"
+  unique_id: four_et_plaque_de_cuisson_annuel_kwh_um
+  cycle: yearly
+
+four_et_plaque_de_cuisson_mensuel_kwh_um:
+  source: sensor.four_et_plaque_de_cuisson_energie_totale_kwh
+  name: "Four et Plaque de Cuisson Mensuel kWh UM"
+  unique_id: four_et_plaque_de_cuisson_mensuel_kwh_um
+  cycle: monthly
+
+four_et_plaque_de_cuisson_hebdomadaire_kwh_um:
+  source: sensor.four_et_plaque_de_cuisson_energie_totale_kwh
+  name: "Four et Plaque de Cuisson Hebdomadaire kWh UM"
+  unique_id: four_et_plaque_de_cuisson_hebdomadaire_kwh_um
+  cycle: weekly
+
+four_et_plaque_de_cuisson_quotidien_kwh_um:
+  source: sensor.four_et_plaque_de_cuisson_energie_totale_kwh
+  name: "Four et Plaque de Cuisson Quotidien kWh UM"
+  unique_id: four_et_plaque_de_cuisson_quotidien_kwh_um
+  cycle: daily
+
+# --- prise_frigo_cuisine_nous ---
+prise_frigo_cuisine_nous_annuel_kwh_um:
+  source: sensor.prise_frigo_cuisine_nous_energie_totale_kwh
+  name: "Prise Frigo Cuisine NOUS Annuel kWh UM"
+  unique_id: prise_frigo_cuisine_nous_annuel_kwh_um
+  cycle: yearly
+
+prise_frigo_cuisine_nous_mensuel_kwh_um:
+  source: sensor.prise_frigo_cuisine_nous_energie_totale_kwh
+  name: "Prise Frigo Cuisine NOUS Mensuel kWh UM"
+  unique_id: prise_frigo_cuisine_nous_mensuel_kwh_um
+  cycle: monthly
+
+prise_frigo_cuisine_nous_hebdomadaire_kwh_um:
+  source: sensor.prise_frigo_cuisine_nous_energie_totale_kwh
+  name: "Prise Frigo Cuisine NOUS Hebdomadaire kWh UM"
+  unique_id: prise_frigo_cuisine_nous_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_frigo_cuisine_nous_quotidien_kwh_um:
+  source: sensor.prise_frigo_cuisine_nous_energie_totale_kwh
+  name: "Prise Frigo Cuisine NOUS Quotidien kWh UM"
+  unique_id: prise_frigo_cuisine_nous_quotidien_kwh_um
+  cycle: daily
+
+# --- prise_congelateur_cuisine_nous ---
+prise_congelateur_cuisine_nous_annuel_kwh_um:
+  source: sensor.prise_congelateur_cuisine_nous_energie_totale_kwh
+  name: "Prise Congelateur Cuisine NOUS Annuel kWh UM"
+  unique_id: prise_congelateur_cuisine_nous_annuel_kwh_um
+  cycle: yearly
+
+prise_congelateur_cuisine_nous_mensuel_kwh_um:
+  source: sensor.prise_congelateur_cuisine_nous_energie_totale_kwh
+  name: "Prise Congelateur Cuisine NOUS Mensuel kWh UM"
+  unique_id: prise_congelateur_cuisine_nous_mensuel_kwh_um
+  cycle: monthly
+
+prise_congelateur_cuisine_nous_hebdomadaire_kwh_um:
+  source: sensor.prise_congelateur_cuisine_nous_energie_totale_kwh
+  name: "Prise Congelateur Cuisine NOUS Hebdomadaire kWh UM"
+  unique_id: prise_congelateur_cuisine_nous_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_congelateur_cuisine_nous_quotidien_kwh_um:
+  source: sensor.prise_congelateur_cuisine_nous_energie_totale_kwh
+  name: "Prise Congelateur Cuisine NOUS Quotidien kWh UM"
+  unique_id: prise_congelateur_cuisine_nous_quotidien_kwh_um
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │ 7. BUREAU                         │
+# └───────────────────────────────────┘
+
+# --- prise_bureau_pc_ikea ---
+prise_bureau_pc_ikea_annuel_kwh_um:
+  source: sensor.prise_bureau_pc_ikea_energie_totale_kwh
+  name: "Prise Bureau PC IKEA Annuel kWh UM"
+  unique_id: prise_bureau_pc_ikea_annuel_kwh_um
+  cycle: yearly
+
+prise_bureau_pc_ikea_mensuel_kwh_um:
+  source: sensor.prise_bureau_pc_ikea_energie_totale_kwh
+  name: "Prise Bureau PC IKEA Mensuel kWh UM"
+  unique_id: prise_bureau_pc_ikea_mensuel_kwh_um
+  cycle: monthly
+
+prise_bureau_pc_ikea_hebdomadaire_kwh_um:
+  source: sensor.prise_bureau_pc_ikea_energie_totale_kwh
+  name: "Prise Bureau PC IKEA Hebdomadaire kWh UM"
+  unique_id: prise_bureau_pc_ikea_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_bureau_pc_ikea_quotidien_kwh_um:
+  source: sensor.prise_bureau_pc_ikea_energie_totale_kwh
+  name: "Prise Bureau PC IKEA Quotidien kWh UM"
+  unique_id: prise_bureau_pc_ikea_quotidien_kwh_um
+  cycle: daily
+
+# --- prise_bureau_fer_a_repasser_nous ---
+prise_bureau_fer_a_repasser_nous_annuel_kwh_um:
+  source: sensor.prise_bureau_fer_a_repasser_nous_energie_totale_kwh
+  name: "Prise Bureau Fer à Repasser NOUS Annuel kWh UM"
+  unique_id: prise_bureau_fer_a_repasser_nous_annuel_kwh_um
+  cycle: yearly
+
+prise_bureau_fer_a_repasser_nous_mensuel_kwh_um:
+  source: sensor.prise_bureau_fer_a_repasser_nous_energie_totale_kwh
+  name: "Prise Bureau Fer à Repasser NOUS Mensuel kWh UM"
+  unique_id: prise_bureau_fer_a_repasser_nous_mensuel_kwh_um
+  cycle: monthly
+
+prise_bureau_fer_a_repasser_nous_hebdomadaire_kwh_um:
+  source: sensor.prise_bureau_fer_a_repasser_nous_energie_totale_kwh
+  name: "Prise Bureau Fer à Repasser NOUS Hebdomadaire kWh UM"
+  unique_id: prise_bureau_fer_a_repasser_nous_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_bureau_fer_a_repasser_nous_quotidien_kwh_um:
+  source: sensor.prise_bureau_fer_a_repasser_nous_energie_totale_kwh
+  name: "Prise Bureau Fer à Repasser NOUS Quotidien kWh UM"
+  unique_id: prise_bureau_fer_a_repasser_nous_quotidien_kwh_um
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │ 9. CHAMBRE                        │
+# └───────────────────────────────────┘
+
+# --- prise_tete_de_lit_chambre ---
+prise_tete_de_lit_chambre_annuel_kwh_um:
+  source: sensor.prise_tete_de_lit_chambre_energie_totale_kwh
+  name: "Prise Tete de Lit Chambre Annuel kWh UM"
+  unique_id: prise_tete_de_lit_chambre_annuel_kwh_um
+  cycle: yearly
+
+prise_tete_de_lit_chambre_mensuel_kwh_um:
+  source: sensor.prise_tete_de_lit_chambre_energie_totale_kwh
+  name: "Prise Tete de Lit Chambre Mensuel kWh UM"
+  unique_id: prise_tete_de_lit_chambre_mensuel_kwh_um
+  cycle: monthly
+
+prise_tete_de_lit_chambre_hebdomadaire_kwh_um:
+  source: sensor.prise_tete_de_lit_chambre_energie_totale_kwh
+  name: "Prise Tete de Lit Chambre Hebdomadaire kWh UM"
+  unique_id: prise_tete_de_lit_chambre_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_tete_de_lit_chambre_quotidien_kwh_um:
+  source: sensor.prise_tete_de_lit_chambre_energie_totale_kwh
+  name: "Prise Tete de Lit Chambre Quotidien kWh UM"
+  unique_id: prise_tete_de_lit_chambre_quotidien_kwh_um
+  cycle: daily
+
+# --- prise_tv_chambre_nous ---
+prise_tv_chambre_nous_annuel_kwh_um:
+  source: sensor.prise_tv_chambre_nous_energie_totale_kwh
+  name: "Prise TV Chambre NOUS Annuel kWh UM"
+  unique_id: prise_tv_chambre_nous_annuel_kwh_um
+  cycle: yearly
+
+prise_tv_chambre_nous_mensuel_kwh_um:
+  source: sensor.prise_tv_chambre_nous_energie_totale_kwh
+  name: "Prise TV Chambre NOUS Mensuel kWh UM"
+  unique_id: prise_tv_chambre_nous_mensuel_kwh_um
+  cycle: monthly
+
+prise_tv_chambre_nous_hebdomadaire_kwh_um:
+  source: sensor.prise_tv_chambre_nous_energie_totale_kwh
+  name: "Prise TV Chambre NOUS Hebdomadaire kWh UM"
+  unique_id: prise_tv_chambre_nous_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_tv_chambre_nous_quotidien_kwh_um:
+  source: sensor.prise_tv_chambre_nous_energie_totale_kwh
+  name: "Prise TV Chambre NOUS Quotidien kWh UM"
+  unique_id: prise_tv_chambre_nous_quotidien_kwh_um
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │ 10. AUTRE                         │
+# └───────────────────────────────────┘
+
+# --- all_standby ---
+all_standby_annuel_kwh_um:
+  source: sensor.all_standby_energie_totale_kwh
+  name: "All Standby Annuel kWh UM"
+  unique_id: all_standby_annuel_kwh_um
+  cycle: yearly
+
+all_standby_mensuel_kwh_um:
+  source: sensor.all_standby_energie_totale_kwh
+  name: "All Standby Mensuel kWh UM"
+  unique_id: all_standby_mensuel_kwh_um
+  cycle: monthly
+
+all_standby_hebdomadaire_kwh_um:
+  source: sensor.all_standby_energie_totale_kwh
+  name: "All Standby Hebdomadaire kWh UM"
+  unique_id: all_standby_hebdomadaire_kwh_um
+  cycle: weekly
+
+all_standby_quotidien_kwh_um:
+  source: sensor.all_standby_energie_totale_kwh
+  name: "All Standby Quotidien kWh UM"
+  unique_id: all_standby_quotidien_kwh_um
+  cycle: daily

@@ -1,0 +1,26 @@
+# ╭──────────────────────────────────────────────────────────────────╮
+# │ COMMAND_LINE : RÉSEAU & SPEEDTEST                                │
+# ╰──────────────────────────────────────────────────────────────────╯
+
+# --- speedtest_cli_data ---
+- sensor:
+    name: "SpeedTest CLI Data"
+    unique_id: speedtest_cli_data
+    command: "/config/3rdparty/speedtest/speedtest --format=json --accept-license --accept-gdpr -s 48616"
+    scan_interval: 3600
+    command_timeout: 60
+    value_template: >-
+      {{ 
+        { 
+          "ping": value_json.ping.latency, 
+          "download": value_json.download.bandwidth, 
+          "upload": value_json.upload.bandwidth, 
+          "isp": value_json.isp,
+          "country": value_json.server.country,
+          "location": value_json.server.location,
+          "id": value_json.server.id,
+          "server_name": value_json.server.name,
+          "server_host": value_json.server.host
+        }
+        | to_json 
+      }}
