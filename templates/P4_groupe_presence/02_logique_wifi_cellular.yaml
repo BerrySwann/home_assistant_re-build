@@ -1,16 +1,16 @@
 # ╭────────────────────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATES : SÉRIE 03_06. CLIM — LOGIQUE WIFI / CELLULAIRE (GROUPE & PRÉSENCE)          │
+# │ TEMPLATES : P4 PRÉSENCE — LOGIQUE WIFI / CELLULAIRE (GROUPE & STATUTS)                 │
 # ╰────────────────────────────────────────────────────────────────────────────────────────╯
 
 - sensor:
 # ┌───────────────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : DÉTERMINATION DU GROUPE (PRESENCE AUTOMATION)         │
+# │ P4 : DÉTERMINATION DU GROUPE (PRESENCE AUTOMATION)                │
 # └───────────────────────────────────────────────────────────────────┘
 
-# --- groupe_clim ---
+# --- groupe ---
 # Calcul du groupe (1=Personne, 2=Mamour, 3=Eric, 4=Tous)
-    - name: "Groupe Clim"
-      unique_id: groupe_clim
+    - name: "Groupe"
+      unique_id: groupe
       icon: mdi:account-group
       state: >
         {# 1. Définition de la Cible #}
@@ -35,13 +35,13 @@
         {% endif %}
 
 # ┌───────────────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : CALCUL ET AFFICHAGE DES STATUTS RÉSEAU (INTERFACE)    │
+# │ P4 : CALCUL ET AFFICHAGE DES STATUTS RÉSEAU (INTERFACE)           │
 # └───────────────────────────────────────────────────────────────────┘
 
-# --- presence_clim ---
+# --- presence ---
 # Affichage textuel complexe (WIFI / CELL / WIFI_!?)
-    - name: "Presence Clim"
-      unique_id: presence_clim
+    - name: "Presence"
+      unique_id: presence
       icon: mdi:cellphone-information
       state: >
         {# --- 1. CONFIGURATION --- #}
@@ -82,14 +82,14 @@
           {%- set e_here = (e_net == 'wifi' and e_ssid == target_ssid) -%}
 
           {%- if m_here and e_here -%}
-            {# Cas où les deux sont là mais statuts différents (ex: "Just Arrived" vs "Home") #}
+            {# Cas où les deux sont là mais statuts différents #}
             [Tous les 2: {{ m_stat }}/{{ e_stat }}]
           {%- elif m_here -%}
             [Mamour: {{ m_stat }}/{{ e_stat }}]
           {%- elif e_here -%}
             [Eric: {{ e_stat }}/{{ m_stat }}]
           {%- else -%}
-            {# Fallback : aucun n'est sur le WiFi cible, on affiche juste les statuts #}
+            {# Fallback : aucun n'est sur le WiFi cible #}
             [{{ m_stat }} / {{ e_stat }}]
           {%- endif -%}
         {%- endif -%}
