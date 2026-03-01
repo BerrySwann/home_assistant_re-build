@@ -1,0 +1,42 @@
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ UTILITY METER : PÔLE 2. ECOJOKO — COMPTEURS QUOTIDIENS (TOTAL / HP / HC)     │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+#
+# LOGIQUE :
+#   - Chaque compteur suit le delta journalier de son sensor source (kWh)
+#   - Réinitialisation automatique à minuit (cycle: daily)
+#   - Attribut 'last_period' = valeur du jour précédent (J-1 natif sans sensor extra)
+#   - J-2 à J-7 sont gérés par : templates/P2_prises_NRJ_ TOTAL/P2_ecojoko_snapshot_j2_j7.yaml
+#
+# SOURCES :
+#   - ecojoko_consommation_reseau     → kWh cumulatif mensuel (total réseau)
+#   - ecojoko_consommation_hp_reseau  → kWh cumulatif mensuel HP
+#   - ecojoko_consommation_hc_reseau  → kWh cumulatif mensuel HC
+#
+# ┌───────────────────────────────────┐
+# │ 10. AUTRE (Ecojoko / Linky)       │
+# └───────────────────────────────────┘
+
+# --- ecojoko_reseau_quotidien_um ---
+# J-0 live (state) | J-1 automatique (attribut last_period)
+ecojoko_reseau_quotidien_um:
+  source: sensor.ecojoko_consommation_reseau
+  name: "Ecojoko Réseau Quotidien UM"
+  unique_id: ecojoko_reseau_quotidien_um
+  cycle: daily
+
+# --- ecojoko_hp_reseau_quotidien_um ---
+# HP J-0 live (state) | HP J-1 automatique (attribut last_period)
+ecojoko_hp_reseau_quotidien_um:
+  source: sensor.ecojoko_consommation_hp_reseau
+  name: "Ecojoko HP Réseau Quotidien UM"
+  unique_id: ecojoko_hp_reseau_quotidien_um
+  cycle: daily
+
+# --- ecojoko_hc_reseau_quotidien_um ---
+# HC J-0 live (state) | HC J-1 automatique (attribut last_period)
+ecojoko_hc_reseau_quotidien_um:
+  source: sensor.ecojoko_consommation_hc_reseau
+  name: "Ecojoko HC Réseau Quotidien UM"
+  unique_id: ecojoko_hc_reseau_quotidien_um
+  cycle: daily
