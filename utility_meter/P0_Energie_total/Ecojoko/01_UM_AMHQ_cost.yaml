@@ -1,0 +1,62 @@
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ UTILITY METER : PÔLE 2. ECOJOKO — COMPTEURS HEBDO & ANNUELS (TOTAL/HP/HC)   │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+#
+# SOURCES :
+#   - ecojoko_consommation_reseau     → kWh cumulatif mensuel (total réseau)
+#   - ecojoko_consommation_hp_reseau  → kWh cumulatif mensuel HP
+#   - ecojoko_consommation_hc_reseau  → kWh cumulatif mensuel HC
+#
+# CYCLES :
+#   weekly  → reset chaque lundi à minuit
+#   yearly  → reset chaque 1er janvier à minuit
+#
+# ┌───────────────────────────────────┐
+# │ Ecojoko / Linky                   │
+# └───────────────────────────────────┘
+
+# ─── HEBDOMADAIRE ────────────────────────────────────────────────────────────
+
+# --- ecojoko_reseau_hebdo_um ---
+ecojoko_reseau_hebdo_um:
+  source: sensor.ecojoko_consommation_reseau
+  name: "Ecojoko Réseau Hebdo UM"
+  unique_id: ecojoko_reseau_hebdo_um
+  cycle: weekly
+
+# --- ecojoko_hp_reseau_hebdo_um ---
+ecojoko_hp_reseau_hebdo_um:
+  source: sensor.ecojoko_consommation_hp_reseau
+  name: "Ecojoko HP Réseau Hebdo UM"
+  unique_id: ecojoko_hp_reseau_hebdo_um
+  cycle: weekly
+
+# --- ecojoko_hc_reseau_hebdo_um ---
+ecojoko_hc_reseau_hebdo_um:
+  source: sensor.ecojoko_consommation_hc_reseau
+  name: "Ecojoko HC Réseau Hebdo UM"
+  unique_id: ecojoko_hc_reseau_hebdo_um
+  cycle: weekly
+
+# ─── ANNUEL ──────────────────────────────────────────────────────────────────
+
+# --- ecojoko_reseau_annuel_um ---
+ecojoko_reseau_annuel_um:
+  source: sensor.ecojoko_consommation_reseau
+  name: "Ecojoko Réseau Annuel UM"
+  unique_id: ecojoko_reseau_annuel_um
+  cycle: yearly
+
+# --- ecojoko_hp_reseau_annuel_um ---
+ecojoko_hp_reseau_annuel_um:
+  source: sensor.ecojoko_consommation_hp_reseau
+  name: "Ecojoko HP Réseau Annuel UM"
+  unique_id: ecojoko_hp_reseau_annuel_um
+  cycle: yearly
+
+# --- ecojoko_hc_reseau_annuel_um ---
+ecojoko_hc_reseau_annuel_um:
+  source: sensor.ecojoko_consommation_hc_reseau
+  name: "Ecojoko HC Réseau Annuel UM"
+  unique_id: ecojoko_hc_reseau_annuel_um
+  cycle: yearly
