@@ -2,9 +2,8 @@
 # │ SENSOR : PÔLE 2. ECOJOKO — SNAPSHOT J-2 À J-7 (CASCADE 23:59:55)            │
 # ╰──────────────────────────────────────────────────────────────────────────────╯
 #
-# ⚠️  CE FICHIER EST UN TEMPLATE TRIGGER — il doit être inclus sous 'template:'
-#     dans configuration.yaml (ex: template: !include_dir_merge_list templates/)
-#     et NON sous 'sensor:'. Ne pas placer dans sensors/.
+# ⚠️  CE FICHIER EST UN TEMPLATE TRIGGER — inclus sous 'template:'
+#     dans configuration.yaml via: template: !include_dir_merge_list templates/
 #
 # LOGIQUE GENERALE :
 #   J-0  → sensor.ecojoko_reseau_quotidien_um (live, utility_meter)
@@ -12,21 +11,24 @@
 #   J-2 à J-7 → cascade snapshot ci-dessous
 #
 # DÉCLENCHEMENT : 23:59:55 chaque jour
-#   → Toutes les évaluations utilisent les valeurs PRE-TRIGGER (avant la cascade)
-#   → Le bon ordre est garanti : J7 lit J6 AVANT que J6 soit mis à jour, etc.
+#   → Toutes les évaluations utilisent les valeurs PRE-TRIGGER (cascade garantie)
+#   → J7 lit J6 AVANT que J6 soit mis à jour, etc.
+#
+# REDÉMARRAGE HA :
+#   → restore: true sur chaque sensor = HA relit la dernière valeur depuis la DB
+#   → Les sensors ne tombent PAS en 'unavailable' après un reboot
+#   → Nécessite que le sensor ait déjà été déclenché au moins une fois (unique_id requis)
 #
 # SOURCES PAR NIVEAU :
-#   ecojoko_j2_kwh  ← last_period de ecojoko_reseau_quotidien_um (= J-1 d'hier)
-#   ecojoko_j3_kwh  ← ecojoko_j2_kwh (J-2 d'hier = J-3 d'aujourd'hui)
+#   ecojoko_j2_kwh  ← last_period de ecojoko_reseau_quotidien_um (= total d'hier)
+#   ecojoko_j3_kwh  ← ecojoko_j2_kwh
 #   ...
-#   ecojoko_j7_kwh  ← ecojoko_j6_kwh
+#   ecojoko_j7_kwh  ← ecojoko_j6_kwh (= même jour semaine dernière)
 #
-# BOOTSTRAP : Les sensors sont 'unavailable' jusqu'au premier déclenchement.
-#   Après 7 jours de fonctionnement, toutes les valeurs sont cohérentes.
-#
-# UTILISATION (ApexCharts 7 jours — OPT.1) :
-#   Remplace les 6 séries offset (-2d à -7d) par ces sensors statiques.
-#   Réduit les requêtes DB de 8×24h history → 2×24h + 6 lectures instantanées.
+# BOOTSTRAP (1ère installation) :
+#   J-2 est disponible dès le 1er soir (last_period du UM)
+#   J-3..J-7 se remplissent progressivement sur 6 jours
+#   Après 7 jours : toutes les valeurs sont cohérentes
 #
 # ┌───────────────────────────────────┐
 # │ 10. AUTRE (Ecojoko / Linky)       │
@@ -47,6 +49,7 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total
+      restore: true
       state: >
         {{ state_attr('sensor.ecojoko_reseau_quotidien_um', 'last_period') | float(0) | round(2) }}
       attributes:
@@ -62,6 +65,7 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total
+      restore: true
       state: >
         {{ states('sensor.ecojoko_j2_kwh') | float(0) | round(2) }}
       attributes:
@@ -75,6 +79,7 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total
+      restore: true
       state: >
         {{ states('sensor.ecojoko_j3_kwh') | float(0) | round(2) }}
       attributes:
@@ -88,6 +93,7 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total
+      restore: true
       state: >
         {{ states('sensor.ecojoko_j4_kwh') | float(0) | round(2) }}
       attributes:
@@ -101,6 +107,7 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total
+      restore: true
       state: >
         {{ states('sensor.ecojoko_j5_kwh') | float(0) | round(2) }}
       attributes:
@@ -115,6 +122,7 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total
+      restore: true
       state: >
         {{ states('sensor.ecojoko_j6_kwh') | float(0) | round(2) }}
       attributes:
