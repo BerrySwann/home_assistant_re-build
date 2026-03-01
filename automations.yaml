@@ -113,7 +113,6 @@
     minutes: '10'
   conditions: []
   actions:
-  - action: backup.create
   - action: shell_command.git_backup_push
   - action: system_log.write
     data:
