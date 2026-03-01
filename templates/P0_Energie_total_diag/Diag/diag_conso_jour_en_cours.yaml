@@ -1,0 +1,121 @@
+# ╭────────────────────────────────────────────────────────────────────────╮
+# │ SENSOR : DIAGNOSTIC ÉNERGÉTIQUE — 7 POSTES (JOUR) — VERSION RE-BUILD   │
+# ╰────────────────────────────────────────────────────────────────────────╯
+
+- sensor:
+    # ┌───────────────────────────────────┐
+    # │ 1. POSTES DÉTAILLÉS               │
+    # └───────────────────────────────────┘
+    # --- diag_poste_1_hygiene_quotidien ---
+    - name: "Diag Poste 1 Hygiene Quotidien"
+      unique_id: diag_poste_1_hygiene_quotidien
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      icon: mdi:washing-machine
+      state: >
+        {{ (states('sensor.prise_lave_linge_nous_quotidien_kwh_um') | float(0) + 
+            states('sensor.prise_lave_vaisselle_nous_quotidien_kwh_um') | float(0) +
+            states('sensor.prise_bureau_fer_a_repasser_nous_quotidien_kwh_um') | float(0)) | round(3) }}
+
+    # --- diag_poste_2_cuisson_quotidien ---
+    - name: "Diag Poste 2 Cuisson Quotidien"
+      unique_id: diag_poste_2_cuisson_quotidien
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      icon: mdi:stove
+      state: >
+        {{ (states('sensor.prise_four_micro_ondes_nous_quotidien_kwh_um') | float(0) +
+            states('sensor.prise_airfryer_ninja_nous_quotidien_kwh_um') | float(0) +
+            states('sensor.prise_petit_dejeune_nous_quotidien_kwh_um') | float(0) +
+            states('sensor.four_et_plaque_de_cuisson_quotidien_kwh_um') | float(0)) | round(3) }}
+
+    # --- diag_poste_3_froid_quotidien ---
+    - name: "Diag Poste 3 Froid Quotidien"
+      unique_id: diag_poste_3_froid_quotidien
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      icon: mdi:fridge
+      state: >
+        {{ (states('sensor.prise_frigo_cuisine_nous_quotidien_kwh_um') | float(0) + 
+            states('sensor.prise_congelateur_cuisine_nous_quotidien_kwh_um') | float(0)) | round(3) }}
+
+    # --- diag_poste_4_chauffage_quotidien ---
+    - name: "Diag Poste 4 Chauffage Quotidien"
+      unique_id: diag_poste_4_chauffage_quotidien
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      icon: mdi:fire
+      state: >
+        {# DOUTE : Vérifie si tu as nommé l'UM "conso_clim_rad_total..." ou "chauffage_total..." #}
+        {{ states('sensor.conso_clim_rad_total_quotidien_kwh_um') | float(0) | round(3) }}
+
+    # --- diag_poste_5_multimedia_quotidien ---
+    - name: "Diag Poste 5 Multimedia Quotidien"
+      unique_id: diag_poste_5_multimedia_quotidien
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      icon: mdi:monitor-dashboard
+      state: >
+        {{ (states('sensor.prise_box_internet_ikea_quotidien_kwh_um') | float(0) + 
+            states('sensor.prise_pc_s_gege_ikea_quotidien_kwh_um') | float(0) + 
+            states('sensor.prise_bureau_pc_ikea_quotidien_kwh_um') | float(0) +
+            states('sensor.prise_tv_chambre_nous_quotidien_kwh_um') | float(0)) | round(3) }}
+
+    # --- diag_poste_6_lumiere_quotidien ---
+    - name: "Diag Poste 6 Lumiere Quotidien"
+      unique_id: diag_poste_6_lumiere_quotidien
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      icon: mdi:lightbulb
+      state: >
+        {# Utilisation du saucissonnage par UNITÉ (les 19 lampes) #}
+        {{ states('sensor.eclairage_total_unit_quotidien_kwh_um') | float(0) | round(3) }}
+
+    # --- diag_poste_7_autres_quotidien ---
+    - name: "Diag Poste 7 autres Quotidien"
+      unique_id: diag_poste_7_autres_quotidien
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      icon: mdi:plus-circle-outline
+      state: >
+        {{ (states('sensor.all_standby_quotidien_kwh_um') | float(0) + 
+            states('sensor.prise_tete_de_lit_chambre_quotidien_kwh_um') | float(0) + 
+            states('sensor.prise_salon_chargeur_nous_quotidien_kwh_um') | float(0) +
+            states('sensor.prise_horloge_ikea_quotidien_kwh_um') | float(0)) | round(3) }}
+
+    # ┌───────────────────────────────────┐
+    # │ 2. SYNTHÈSE (CALCULS GLOBAUX)     │
+    # └───────────────────────────────────┘
+    - name: "Diag Conso Totale Identifiee Quotidienne"
+      unique_id: diag_conso_totale_identifiee_quotidienne
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state: >
+        {% set p1 = states('sensor.diag_poste_1_hygiene_quotidien') | float(0) %}
+        {% set p2 = states('sensor.diag_poste_2_cuisson_quotidien') | float(0) %}
+        {% set p3 = states('sensor.diag_poste_3_froid_quotidien') | float(0) %}
+        {% set p4 = states('sensor.diag_poste_4_chauffage_quotidien') | float(0) %}
+        {% set p5 = states('sensor.diag_poste_5_multimedia_quotidien') | float(0) %}
+        {% set p6 = states('sensor.diag_poste_6_lumiere_quotidien') | float(0) %}
+        {% set p7 = states('sensor.diag_poste_7_autres_quotidien') | float(0) %}
+        {{ (p1 + p2 + p3 + p4 + p5 + p6 + p7) | round(2) }}
+
+    - name: "Max Conso Quotidien Dynamique"
+      unique_id: max_conso_quotidien_dynamique
+      unit_of_measurement: "kWh"
+      state: >
+        {% set p1 = states('sensor.diag_poste_1_hygiene_quotidien') | float(0) %}
+        {% set p2 = states('sensor.diag_poste_2_cuisson_quotidien') | float(0) %}
+        {% set p3 = states('sensor.diag_poste_3_froid_quotidien') | float(0) %}
+        {% set p4 = states('sensor.diag_poste_4_chauffage_quotidien') | float(0) %}
+        {% set p5 = states('sensor.diag_poste_5_multimedia_quotidien') | float(0) %}
+        {% set p6 = states('sensor.diag_poste_6_lumiere_quotidien') | float(0) %}
+        {% set p7 = states('sensor.diag_poste_7_autres_quotidien') | float(0) %}
+        {{ ([p1, p2, p3, p4, p5, p6, p7] | max + 0.5) | round(0) }}
