@@ -204,8 +204,8 @@ streamline_templates:
             }}**
 
 
-            **Groupe = {{ states('sensor.groupe_clim') | default('N/A') }} -
-            Presence = {{ states('sensor.presence_clim')  | default('N/A') }}**
+            **Groupe = {{ states('sensor.groupe') | default('N/A') }} - Presence
+            = {{ states('sensor.presence')  | default('N/A') }}**
           card_mod:
             style: |
               ha-card {
@@ -219,7 +219,7 @@ streamline_templates:
               entity: binary_sensor.est_jour_6h_21h
               state: 'on'
             - condition: state
-              entity: sensor.groupe_clim
+              entity: sensor.groupe
               state: groupe_1
           card:
             type: markdown
@@ -245,7 +245,7 @@ streamline_templates:
               entity: binary_sensor.est_jour_6h_21h
               state: 'on'
             - condition: state
-              entity: sensor.groupe_clim
+              entity: sensor.groupe
               state: groupe_2
           card:
             type: markdown
@@ -271,7 +271,7 @@ streamline_templates:
               entity: binary_sensor.est_jour_6h_21h
               state: 'on'
             - condition: state
-              entity: sensor.groupe_clim
+              entity: sensor.groupe
               state: groupe_3
           card:
             type: markdown
@@ -297,7 +297,7 @@ streamline_templates:
               entity: binary_sensor.est_jour_6h_21h
               state: 'on'
             - condition: state
-              entity: sensor.groupe_clim
+              entity: sensor.groupe
               state: groupe_4
           card:
             type: markdown
@@ -323,7 +323,7 @@ streamline_templates:
               entity: binary_sensor.est_nuit_21h_6h
               state: 'on'
             - condition: state
-              entity: sensor.groupe_clim
+              entity: sensor.groupe
               state: groupe_1
           card:
             type: markdown
@@ -349,7 +349,7 @@ streamline_templates:
               entity: binary_sensor.est_nuit_21h_6h
               state: 'on'
             - condition: state
-              entity: sensor.groupe_clim
+              entity: sensor.groupe
               state_not: groupe_1
           card:
             type: markdown
@@ -19353,220 +19353,6 @@ views:
     title: Energie Clim
     cards: []
   - type: sections
-    path: reserve
-    max_columns: 1
-    sections:
-      - type: grid
-        cards:
-          - type: heading
-            icon: mdi:cog
-            heading: Système
-            heading_style: title
-            badges: []
-            tap_action:
-              action: navigate
-              navigation_path: /lovelace/0
-            layout_options:
-              grid_columns: full
-              grid_rows: 1
-          - type: custom:bubble-card
-            card_type: separator
-            name: GitHub
-            icon: mdi:github
-            rows: 2
-            styles: |-
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 1;
-              }
-            card_layout: normal
-          - type: vertical-stack
-            cards:
-              - type: custom:mushroom-chips-card
-                alignment: center
-                chips:
-                  - type: template
-                    entity: sensor.backup_github_status
-                    icon: mdi:github
-                    content: >-
-                      {{ iif(states('sensor.backup_github_status')=='OK','Backup
-                      OK','Backup KO') }} · {{
-                      state_attr('sensor.backup_github_status','ts') or 'jamais'
-                      }}
-                    icon_color: >-
-                      {{
-                      iif(states('sensor.backup_github_status')=='OK','green','red')
-                      }}
-                    tap_action:
-                      action: url
-                      url_path: >-
-                        https://github.com/BerrySwann/home-assistant-config/commits/main
-                      new_tab: true
-                card_mod:
-                  style: >
-                    ha-card { background: none !important; box-shadow: none
-                    !important; border: none !important; }
-              - type: custom:mushroom-chips-card
-                alignment: center
-                chips:
-                  - type: template
-                    entity: sensor.git_last_weekly_tag
-                    icon: mdi:tag
-                    content: '{{ states(''sensor.git_last_weekly_tag'') or ''no tag'' }}'
-                    icon_color: >-
-                      {% set tag = states('sensor.git_last_weekly_tag') %} {%
-                      set iso = now().isocalendar() %} {% set current =
-                      "weekly-%04d-W%02d" | format(iso[0], iso[1]) %} {{ 'green'
-                      if (tag and tag.startswith(current)) else 'amber' }}
-                    tap_action:
-                      action: url
-                      url_path: https://github.com/BerrySwann/home-assistant-config/tags
-                      new_tab: true
-                    hold_action:
-                      action: call-service
-                      service: script.git_backup_weekly_refresh
-                      confirmation:
-                        text: Voulez-vous créer un Tag Hebdomadaire ?
-                  - type: template
-                    entity: sensor.github_default_branch
-                    icon: mdi:source-branch
-                    content: >-
-                      Branche: {{ states('sensor.github_default_branch') or
-                      'unknown' }}
-                    icon_color: >-
-                      {% set b = states('sensor.github_default_branch') %} {{
-                      'green' if b == 'main' else 'amber' }}
-                    tap_action:
-                      action: url
-                      url_path: >-
-                        https://github.com/BerrySwann/home-assistant-config/branches
-                      new_tab: true
-                  - type: template
-                    icon: mdi:cloud-upload-outline
-                    content: Push
-                    icon_color: deep-orange
-                    tap_action:
-                      action: call-service
-                      service: script.git_backup_and_update
-                card_mod:
-                  style: >
-                    ha-card { background: none !important; box-shadow: none
-                    !important; border: none !important; }
-              - type: custom:mushroom-title-card
-                title: Journal Backup (10 derniers)
-                alignment: center
-                card_mod:
-                  style: >
-                    ha-card { background: none !important; box-shadow: none
-                    !important; border: none !important; }
-              - type: markdown
-                content: |-
-                  ```
-                  {{ state_attr('sensor.backup_github_journal','text') or '—' }}
-                  ```
-                card_mod:
-                  style: >
-                    ha-card { background: none !important; box-shadow: none
-                    !important; border: none !important; }
-              - type: custom:apexcharts-card
-                header:
-                  title: Backup GitHub — OK/KO
-                graph_span: 7d
-                span:
-                  end: day
-                yaxis:
-                  - min: 0
-                    max: 1
-                    decimals: 0
-                series:
-                  - entity: sensor.backup_github_status
-                    name: Statut
-                    type: column
-                    transform: 'EVAL: return x === ''OK'' ? 1 : 0;'
-                    group_by:
-                      duration: 6h
-                      func: last
-                apex_config:
-                  yaxis:
-                    tickAmount: 2
-                    labels:
-                      formatter: >
-                        EVAL: function (value) { return value === 1 ? 'OK' :
-                        'KO'; }
-                card_mod:
-                  style: >
-                    ha-card { background: none !important; box-shadow: none
-                    !important; border: none !important; }
-          - type: custom:bubble-card
-            card_type: separator
-            name: Restart VSCode
-            icon: mdi:check-bold
-            rows: 2
-            styles: |-
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 1;
-              }
-            card_layout: normal
-          - type: custom:button-card
-            entity: automation.systeme_economie_energie_vs_code
-            name: Redémarrer Studio Code Server
-            icon: mdi:restart
-            tap_action:
-              action: call-service
-              service: automation.trigger
-              service_data:
-                entity_id: automation.systeme_economie_energie_vs_code
-            styles:
-              card:
-                - background: transparent
-                - border: 0.1px solid white
-                - border-radius: 12px
-                - color: white
-                - font-size: 14px
-                - padding: 4px
-              icon:
-                - width: 40px
-                - height: 40px
-                - color: white
-              name:
-                - font-size: 16px
-                - margin-top: 12px
-          - type: custom:bubble-card
-            card_type: separator
-            name: MariaDB
-            icon: mdi:database-cog-outline
-            rows: 2
-            styles: |-
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 1;
-              }
-            card_layout: normal
-          - type: custom:button-card
-            entity: automation.db_purge_mariadb_repack
-            name: Nettoyer MariaDB
-            icon: mdi:database-sync
-            tap_action:
-              action: call-service
-              service: automation.trigger
-              service_data:
-                entity_id: automation.db_purge_mariadb_repack
-            styles:
-              card:
-                - background: transparent
-                - border: 1px solid white
-                - border-radius: 12px
-                - color: white
-                - padding: 4px
-              icon:
-                - width: 40px
-                - color: >
-                    [[[ if (states['automation.db_purge_mariadb_repack'].state
-                    == 'on') return 'gold'; return 'white'; ]]]
-    title: reserve
-    cards: []
-  - type: sections
     max_columns: 3
     path: energie-lampes
     title: Lampes
@@ -19679,9 +19465,6 @@ views:
               show_states: true
               colorize_states: true
             all_series_config:
-              group_by:
-                func: diff
-                duration: 730h
               show:
                 legend_value: false
                 extremas: false
@@ -19722,6 +19505,7 @@ views:
                   border: none !important;
                 }
           - type: custom:apexcharts-card
+            graph_span: 730h
             span:
               end: day
             apex_config:
@@ -19762,17 +19546,14 @@ views:
                 yaxis_id: Watts
                 color: C9DABF
                 type: column
-              - entity: sensor.eclairage_salon_5_mensuel_kwh_um
+              - entity: sensor.eclairage_salon_5_avg_watts_mensuel
                 yaxis_id: Avg
                 type: line
                 stroke_dash: 8
                 color: red
                 unit: W
                 stroke_width: 1
-                name: Avg(730hrs)
-                group_by:
-                  func: avg
-                  duration: 730h
+                name: Moy. 1er du mois
             card_mod:
               style: |
                 ha-card {
@@ -19911,9 +19692,6 @@ views:
               show_states: true
               colorize_states: true
             all_series_config:
-              group_by:
-                func: diff
-                duration: 730h
               show:
                 legend_value: false
                 extremas: false
@@ -19944,6 +19722,7 @@ views:
                   border: none !important;
                 }
           - type: custom:apexcharts-card
+            graph_span: 730h
             span:
               end: day
             apex_config:
@@ -19984,17 +19763,14 @@ views:
                 yaxis_id: Watts
                 color: rgb(222, 143, 95)
                 type: column
-              - entity: sensor.eclairage_appart_3_mensuel_kwh_um
+              - entity: sensor.eclairage_appart_3_avg_watts_mensuel
                 yaxis_id: Avg
                 type: line
                 stroke_dash: 8
                 color: red
                 unit: W
                 stroke_width: 1
-                name: Avg(730hrs)
-                group_by:
-                  func: avg
-                  duration: 730h
+                name: Moy. 1er du mois
             card_mod:
               style: |
                 ha-card {
@@ -20140,9 +19916,6 @@ views:
               show_states: true
               colorize_states: true
             all_series_config:
-              group_by:
-                func: diff
-                duration: 730h
               show:
                 legend_value: false
                 extremas: false
@@ -20183,6 +19956,7 @@ views:
                   border: none !important;
                 }
           - type: custom:apexcharts-card
+            graph_span: 730h
             span:
               end: day
             apex_config:
@@ -20223,17 +19997,14 @@ views:
                 yaxis_id: Watts
                 color: rgb(22, 72, 99)
                 type: column
-              - entity: sensor.eclairage_bureau_5_mensuel_kwh_um
+              - entity: sensor.eclairage_bureau_5_avg_watts_mensuel
                 yaxis_id: Avg
                 type: line
                 stroke_dash: 8
                 color: red
                 unit: W
                 stroke_width: 1
-                name: Avg(730hrs)
-                group_by:
-                  func: avg
-                  duration: 730h
+                name: Moy. 1er du mois
             card_mod:
               style: |
                 ha-card {
@@ -20359,9 +20130,6 @@ views:
               show_states: true
               colorize_states: true
             all_series_config:
-              group_by:
-                func: diff
-                duration: 730h
               show:
                 legend_value: false
                 extremas: false
@@ -20434,10 +20202,7 @@ views:
                 color: red
                 unit: W
                 stroke_width: 1
-                name: Avg(730hrs)
-                group_by:
-                  func: avg
-                  duration: 730h
+                name: Moy. 1er du mois
             card_mod:
               style: |
                 ha-card {
@@ -20574,9 +20339,6 @@ views:
               show_states: true
               colorize_states: true
             all_series_config:
-              group_by:
-                func: diff
-                duration: 730h
               show:
                 legend_value: false
                 extremas: false
@@ -20612,6 +20374,7 @@ views:
                   border: none !important;
                 }
           - type: custom:apexcharts-card
+            graph_span: 730h
             span:
               end: day
             apex_config:
@@ -20652,17 +20415,14 @@ views:
                 yaxis_id: Watts
                 color: rgb(146, 26, 64)
                 type: column
-              - entity: sensor.eclairage_chambre_4_mensuel_kwh_um
+              - entity: sensor.eclairage_chambre_4_avg_watts_mensuel
                 yaxis_id: Avg
                 type: line
                 stroke_dash: 8
                 color: red
                 unit: W
                 stroke_width: 1
-                name: Avg(730hrs)
-                group_by:
-                  func: avg
-                  duration: 730h
+                name: Moy. 1er du mois
             card_mod:
               style: |
                 ha-card {
@@ -27537,6 +27297,244 @@ views:
       layout: responsive
       badges_position: bottom
       badges_wrap: wrap
+  - type: sections
+    path: reserve
+    max_columns: 1
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            icon: mdi:cog
+            heading: Système
+            heading_style: title
+            badges: []
+            tap_action:
+              action: navigate
+              navigation_path: /dashboard-tablette/0
+            layout_options:
+              grid_columns: full
+              grid_rows: 1
+          - type: custom:bubble-card
+            card_type: separator
+            name: GitHub
+            icon: mdi:github
+            rows: 2
+            styles: |-
+              .bubble-line {
+                background: var(--primary-text-color);
+                opacity: 1;
+              }
+            card_layout: normal
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-chips-card
+                alignment: center
+                chips:
+                  - type: template
+                    entity: sensor.backup_github_status
+                    icon: mdi:github
+                    content: >-
+                      {{ iif(states('sensor.backup_github_status')=='OK','Backup
+                      OK','Backup KO') }} · {{
+                      state_attr('sensor.backup_github_status','ts') or 'jamais'
+                      }}
+                    icon_color: >-
+                      {{
+                      iif(states('sensor.backup_github_status')=='OK','green','red')
+                      }}
+                    tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                card_mod:
+                  style: |
+                    ha-card {
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: transparent;
+                    }
+              - type: custom:mushroom-chips-card
+                alignment: center
+                chips:
+                  - type: template
+                    entity: sensor.git_last_weekly_tag
+                    icon: mdi:tag
+                    content: '{{ states(''sensor.git_last_weekly_tag'') or ''no tag'' }}'
+                    icon_color: >-
+                      {% set tag = states('sensor.git_last_weekly_tag') %} {%
+                      set iso = now().isocalendar() %} {% set current =
+                      "weekly-%04d-W%02d" | format(iso[0], iso[1]) %} {{ 'green'
+                      if (tag and tag.startswith(current)) else 'amber' }}
+                    tap_action:
+                      action: url
+                      url_path: >-
+                        https://github.com/BerrySwann/home_assistant_re-build/tags
+                      new_tab: true
+                    hold_action:
+                      action: call-service
+                      service: shell_command.git_backup_push_weekly
+                      confirmation:
+                        text: Créer un tag hebdomadaire ?
+                  - type: template
+                    entity: sensor.github_default_branch
+                    icon: mdi:source-branch
+                    content: >-
+                      Branche: {{ states('sensor.github_default_branch') or
+                      'unknown' }}
+                    icon_color: >-
+                      {% set b = states('sensor.github_default_branch') %} {{
+                      'green' if b == 'main' else 'amber' }}
+                    tap_action:
+                      action: url
+                      url_path: https://github.com/BerrySwann/home_assistant_re-build
+                      new_tab: true
+                  - type: template
+                    icon: mdi:cloud-upload-outline
+                    content: Push
+                    icon_color: deep-orange
+                    tap_action:
+                      action: call-service
+                      service: shell_command.git_backup_push_manual
+                      confirmation:
+                        text: Lancer un push Git manuel ?
+                    hold_action:
+                      action: url
+                      url_path: >-
+                        https://github.com/BerrySwann/home_assistant_re-build/commits/main
+                      new_tab: true
+                card_mod:
+                  style: |
+                    ha-card {
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: transparent;
+                    }
+              - type: custom:mushroom-title-card
+                title: Journal Backup (10 derniers)
+                alignment: center
+                card_mod:
+                  style: |
+                    ha-card {
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: transparent;
+                    }
+              - type: markdown
+                content: |-
+                  ```
+                  {{ state_attr('sensor.backup_github_journal','text') or '—' }}
+                  ```
+                card_mod:
+                  style: |
+                    ha-card {
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: transparent;
+                    }
+              - type: custom:apexcharts-card
+                header:
+                  title: Backup GitHub — OK/KO
+                graph_span: 7d
+                span:
+                  end: day
+                yaxis:
+                  - min: 0
+                    max: 1
+                    decimals: 0
+                series:
+                  - entity: sensor.backup_github_status
+                    name: Statut
+                    type: column
+                    transform: 'EVAL: return x === ''OK'' ? 1 : 0;'
+                    group_by:
+                      duration: 6h
+                      func: last
+                apex_config:
+                  yaxis:
+                    tickAmount: 2
+                    labels:
+                      formatter: >
+                        EVAL: function (value) { return value === 1 ? 'OK' :
+                        'KO'; }
+                card_mod:
+                  style: |
+                    ha-card {
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: transparent;
+                    }
+          - type: custom:bubble-card
+            card_type: separator
+            name: Restart VSCode
+            icon: mdi:check-bold
+            rows: 2
+            styles: |-
+              .bubble-line {
+                background: var(--primary-text-color);
+                opacity: 1;
+              }
+            card_layout: normal
+          - type: custom:button-card
+            entity: automation.redemarrage_quotidien_studio_code_server
+            name: Redémarrer Studio Code Server
+            icon: mdi:restart
+            tap_action:
+              action: call-service
+              service: automation.trigger
+              service_data:
+                entity_id: automation.redemarrage_quotidien_studio_code_server
+            styles:
+              card:
+                - background: transparent
+                - border: 0.1px solid white
+                - border-radius: 12px
+                - color: white
+                - font-size: 14px
+                - padding: 4px
+              icon:
+                - width: 40px
+                - height: 40px
+                - color: white
+              name:
+                - font-size: 16px
+                - margin-top: 12px
+          - type: custom:bubble-card
+            card_type: separator
+            name: MariaDB
+            icon: mdi:database-cog-outline
+            rows: 2
+            styles: |-
+              .bubble-line {
+                background: var(--primary-text-color);
+                opacity: 1;
+              }
+            card_layout: normal
+          - type: custom:button-card
+            entity: automation.db_purge_mariadb_repack
+            name: '[DB] Purge MariaDB + Repack'
+            icon: mdi:database-check-outline
+            tap_action:
+              action: call-service
+              service: automation.trigger
+              service_data:
+                entity_id: automation.db_purge_mariadb_repack
+            styles:
+              card:
+                - background: transparent
+                - border: 0.1px solid white
+                - border-radius: 12px
+                - color: white
+                - font-size: 14px
+                - padding: 4px
+              icon:
+                - width: 40px
+                - height: 40px
+                - color: white
+              name:
+                - font-size: 16px
+                - margin-top: 12px
+    cards: []
+    title: MariaDB / GitHub
   - type: sections
     max_columns: 1
     title: VIGIEAU / VIGI - EAU
