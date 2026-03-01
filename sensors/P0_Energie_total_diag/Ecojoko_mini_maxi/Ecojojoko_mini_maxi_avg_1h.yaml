@@ -1,9 +1,9 @@
 # ╭────────────────────────────────────────────────────────────────────────────────────────╮
-# │ SENSORS : PÔLE 03. ÉNERGIE — ANALYSE STATISTIQUE DE LA CONSOMMATION                    │
+# │ SENSORS : ÉNERGIE — ANALYSE STATISTIQUE DE LA CONSOMMATION                    │
 # ╰────────────────────────────────────────────────────────────────────────────────────────╯
 
 # ┌───────────────────────────────────────────────────────────────────┐
-# │ 02. ÉNERGIE : CONSOMMATION MINIMALE (TALON) SUR 24H               │
+# │ ÉNERGIE : CONSOMMATION MINIMALE (TALON) SUR 24H               │
 # └───────────────────────────────────────────────────────────────────┘
 - platform: statistics
   name: "Conso Mini"
@@ -16,7 +16,7 @@
   precision: 0
 
 # ┌───────────────────────────────────────────────────────────────────┐
-# │ 02. ÉNERGIE : CONSOMMATION MAXIMALE (PIC) SUR 24H                 │
+# │ ÉNERGIE : CONSOMMATION MAXIMALE (PIC) SUR 24H                 │
 # └───────────────────────────────────────────────────────────────────┘
 - platform: statistics
   name: "Conso Maxi"
@@ -29,7 +29,7 @@
   precision: 0
 
 # ┌───────────────────────────────────────────────────────────────────┐
-# │ 02. ÉNERGIE : CONSOMMATION MOYENNE (LISSAGE) SUR 1H               │
+# │ ÉNERGIE : CONSOMMATION MOYENNE (LISSAGE) SUR 1H               │
 # └───────────────────────────────────────────────────────────────────┘
 - platform: statistics
   name: "Conso Moyenne 1h"
