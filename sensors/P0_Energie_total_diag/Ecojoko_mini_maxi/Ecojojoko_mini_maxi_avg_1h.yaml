@@ -1,0 +1,45 @@
+# ╭────────────────────────────────────────────────────────────────────────────────────────╮
+# │ SENSORS : PÔLE 03. ÉNERGIE — ANALYSE STATISTIQUE DE LA CONSOMMATION                    │
+# ╰────────────────────────────────────────────────────────────────────────────────────────╯
+
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ 02. ÉNERGIE : CONSOMMATION MINIMALE (TALON) SUR 24H               │
+# └───────────────────────────────────────────────────────────────────┘
+- platform: statistics
+  name: "Conso Mini"
+  unique_id: conso_mini
+  entity_id: sensor.ecojoko_consommation_reseau
+  
+  state_characteristic: value_min
+  max_age:
+    hours: 24
+  sampling_size: 8640
+  precision: 0
+
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ 02. ÉNERGIE : CONSOMMATION MAXIMALE (PIC) SUR 24H                 │
+# └───────────────────────────────────────────────────────────────────┘
+- platform: statistics
+  name: "Conso Maxi"
+  unique_id: conso_maxi
+  entity_id: sensor.ecojoko_consommation_reseau
+
+  state_characteristic: value_max
+  max_age:
+    hours: 24
+  sampling_size: 8640
+  precision: 0
+
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ 02. ÉNERGIE : CONSOMMATION MOYENNE (LISSAGE) SUR 1H               │
+# └───────────────────────────────────────────────────────────────────┘
+- platform: statistics
+  name: "Conso Moyenne 1h"
+  unique_id: conso_moyenne_1h
+  entity_id: sensor.ecojoko_consommation_reseau
+
+  state_characteristic: mean
+  max_age:
+    hours: 1
+  sampling_size: 1000
+  precision: 1
