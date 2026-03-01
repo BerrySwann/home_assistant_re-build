@@ -1,0 +1,95 @@
+# ╭────────────────────────────────────────────────────────────────────────────────────────╮
+# │ TEMPLATES : SÉRIE 03_06. CLIM — LOGIQUE WIFI / CELLULAIRE (GROUPE & PRÉSENCE)          │
+# ╰────────────────────────────────────────────────────────────────────────────────────────╯
+
+- sensor:
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : DÉTERMINATION DU GROUPE (PRESENCE AUTOMATION)         │
+# └───────────────────────────────────────────────────────────────────┘
+
+# --- groupe_clim ---
+# Calcul du groupe (1=Personne, 2=Mamour, 3=Eric, 4=Tous)
+    - name: "Groupe Clim"
+      unique_id: groupe_clim
+      icon: mdi:account-group
+      state: >
+        {# 1. Définition de la Cible #}
+        {% set target_ssid = "Freebox_GG" %}
+        
+        {# 2. Vérification Booléenne (Vrai ou Faux) #}
+        {% set mamour_is_home = states('sensor.poco_x7_pro_mamour_network_type') == 'wifi' 
+                                and states('sensor.poco_x7_pro_mamour_wi_fi_connection') == target_ssid %}
+        
+        {% set eric_is_home = states('sensor.poco_x7_pro_network_type') == 'wifi' 
+                              and states('sensor.poco_x7_pro_wi_fi_connection') == target_ssid %}
+
+        {# 3. Déduction du Groupe #}
+        {% if mamour_is_home and eric_is_home %}
+          groupe_4
+        {% elif eric_is_home %}
+          groupe_3
+        {% elif mamour_is_home %}
+          groupe_2
+        {% else %}
+          groupe_1
+        {% endif %}
+
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : CALCUL ET AFFICHAGE DES STATUTS RÉSEAU (INTERFACE)    │
+# └───────────────────────────────────────────────────────────────────┘
+
+# --- presence_clim ---
+# Affichage textuel complexe (WIFI / CELL / WIFI_!?)
+    - name: "Presence Clim"
+      unique_id: presence_clim
+      icon: mdi:cellphone-information
+      state: >
+        {# --- 1. CONFIGURATION --- #}
+        {% set target_ssid = "Freebox_GG" %}
+
+        {# --- 2. RÉCUPÉRATION DES DONNÉES (Mamour) --- #}
+        {% set m_net = states('sensor.poco_x7_pro_mamour_network_type') %}
+        {% set m_ssid = states('sensor.poco_x7_pro_mamour_wi_fi_connection') %}
+
+        {# --- 3. RÉCUPÉRATION DES DONNÉES (Eric) --- #}
+        {% set e_net = states('sensor.poco_x7_pro_network_type') %}
+        {% set e_ssid = states('sensor.poco_x7_pro_wi_fi_connection') %}
+
+        {# --- 4. CALCUL DU STATUT (Mamour) --- #}
+        {% if m_net == 'wifi' and m_ssid == target_ssid %}
+          {% set m_stat = "WIFI" %}
+        {% elif m_net == 'wifi' %}
+          {% set m_stat = "WIFI_!?" %}
+        {% else %}
+          {% set m_stat = "CELL" %}
+        {% endif %}
+
+        {# --- 5. CALCUL DU STATUT (Eric) --- #}
+        {% if e_net == 'wifi' and e_ssid == target_ssid %}
+          {% set e_stat = "WIFI" %}
+        {% elif e_net == 'wifi' %}
+          {% set e_stat = "WIFI_!?" %}
+        {% else %}
+          {% set e_stat = "CELL" %}
+        {% endif %}
+
+        {# --- 6. AFFICHAGE FINAL --- #}
+        {%- if m_stat == e_stat -%}
+          [2] en [{{ m_stat }}]
+        {%- else -%}
+          {# Vérification si connectés au WiFi cible #}
+          {%- set m_here = (m_net == 'wifi' and m_ssid == target_ssid) -%}
+          {%- set e_here = (e_net == 'wifi' and e_ssid == target_ssid) -%}
+
+          {%- if m_here and e_here -%}
+            {# Cas où les deux sont là mais statuts différents (ex: "Just Arrived" vs "Home") #}
+            [Tous les 2: {{ m_stat }}/{{ e_stat }}]
+          {%- elif m_here -%}
+            [Mamour: {{ m_stat }}/{{ e_stat }}]
+          {%- elif e_here -%}
+            [Eric: {{ e_stat }}/{{ m_stat }}]
+          {%- else -%}
+            {# Fallback : aucun n'est sur le WiFi cible, on affiche juste les statuts #}
+            [{{ m_stat }} / {{ e_stat }}]
+          {%- endif -%}
+        {%- endif -%}
