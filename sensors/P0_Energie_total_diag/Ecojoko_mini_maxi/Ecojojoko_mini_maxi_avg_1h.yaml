@@ -8,8 +8,7 @@
 - platform: statistics
   name: "Conso Mini"
   unique_id: conso_mini
-  entity_id: sensor.ecojoko_consommation_reseau
-  
+  entity_id: sensor.ecojoko_consommation_temps_reel  # [L12] modif: reseau → temps_reel (W)
   state_characteristic: value_min
   max_age:
     hours: 24
@@ -22,8 +21,7 @@
 - platform: statistics
   name: "Conso Maxi"
   unique_id: conso_maxi
-  entity_id: sensor.ecojoko_consommation_reseau
-
+  entity_id: sensor.ecojoko_consommation_temps_reel  # [L23] modif: reseau → temps_reel (W)
   state_characteristic: value_max
   max_age:
     hours: 24
@@ -36,10 +34,15 @@
 - platform: statistics
   name: "Conso Moyenne 1h"
   unique_id: conso_moyenne_1h
-  entity_id: sensor.ecojoko_consommation_reseau
-
+  entity_id: sensor.ecojoko_consommation_temps_reel  # [L34] modif: reseau → temps_reel (W)
   state_characteristic: mean
   max_age:
     hours: 1
   sampling_size: 1000
   precision: 1
+
+# annotations_log:
+#   [L12] entity_id corrigé: ecojoko_consommation_reseau (kWh) → ecojoko_consommation_temps_reel (W)
+#   [L23] idem
+#   [L34] idem
+#   Raison: mini/maxi/moy doivent mesurer la PUISSANCE instantanée (W), pas l'énergie cumulée (kWh)
