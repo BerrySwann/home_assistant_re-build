@@ -93,7 +93,6 @@
     weekday:
     - sun
   actions:
-  - action: backup.create
   - action: shell_command.git_backup_push_weekly
   - action: system_log.write
     data:
@@ -127,7 +126,6 @@
     at: 03:00:00
   conditions: []
   actions:
-  - action: backup.create
   - action: shell_command.git_backup_push
   - action: system_log.write
     data:
