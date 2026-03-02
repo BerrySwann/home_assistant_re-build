@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATE : PÔLE 2. ECOJOKO — COÛTS HP / HC / TOTAL (4 PÉRIODES)             │
+# │ TEMPLATE : PÔLE 0. ECOJOKO — COÛTS HP / HC / TOTAL (4 PÉRIODES)             │
 # ╰──────────────────────────────────────────────────────────────────────────────╯
 #
 # CALCUL : consommation_kWh (UM) × tarif_€/kWh (tarif_edf) = coût_€
@@ -7,14 +7,17 @@
 # SOURCES kWh PAR PÉRIODE :
 #   Quotidien  → sensor.ecojoko_hp/hc_reseau_quotidien_um  (UM daily — reset minuit)
 #   Hebdo      → sensor.ecojoko_hp/hc_reseau_hebdo_um      (UM weekly — reset lundi)
-#   Mensuel    → sensor.ecojoko_consommation_hp/hc_reseau  (natif Ecojoko — reset cycle)
+#   Mensuel    → sensor.ecojoko_hp/hc_reseau_mensuel_um    (UM monthly — reset 1er du mois)
 #   Annuel     → sensor.ecojoko_hp/hc_reseau_annuel_um     (UM yearly — reset 1er jan)
+#
+# ⚠️  IMPORTANT : ecojoko_consommation_hp/hc_reseau = sensors DAILY (reset minuit).
+#     Utiliser les UMs monthly pour les coûts mensuels HP/HC/Total.
 #
 # SOURCE TARIFS :
 #   sensor.tarif_heures_pleines_ttc / sensor.tarif_heures_creuses_ttc (tarif_edf)
 #
 # ┌───────────────────────────────────┐
-# │ 10. AUTRE (Ecojoko / Linky)       │
+# │ (Ecojoko / Linky)                 │
 # └───────────────────────────────────┘
 
 - sensor:
@@ -112,7 +115,9 @@
           and states('sensor.ecojoko_cout_hc_hebdo') not in ['unavailable','unknown','none'] }}
 
     # ═══════════════════════════════════════════════════════════════════════════
-    # MENSUEL  (source : natif Ecojoko — reset cycle facturation)
+    # MENSUEL  (source : UM monthly — reset 1er du mois à minuit)
+    # ⚠️  ecojoko_consommation_hp/hc_reseau = sensor DAILY (reset minuit).
+    #     → Source obligatoire : ecojoko_hp/hc_reseau_mensuel_um (UM monthly).
     # ═══════════════════════════════════════════════════════════════════════════
 
     # --- ecojoko_cout_hp_mensuel ---
@@ -122,11 +127,11 @@
       device_class: monetary
       state_class: total
       state: >
-        {% set kwh   = states('sensor.ecojoko_consommation_hp_reseau') | float(0) %}
+        {% set kwh   = states('sensor.ecojoko_hp_reseau_mensuel_um') | float(0) %}  # [L125] modif: consommation_hp_reseau (daily) → hp_reseau_mensuel_um (monthly UM)
         {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0) %}
         {{ (kwh * tarif) | round(2) }}
       availability: >
-        {{ states('sensor.ecojoko_consommation_hp_reseau') not in ['unavailable','unknown','none']
+        {{ states('sensor.ecojoko_hp_reseau_mensuel_um') not in ['unavailable','unknown','none']
           and states('sensor.tarif_heures_pleines_ttc') not in ['unavailable','unknown','none'] }}
 
     # --- ecojoko_cout_hc_mensuel ---
@@ -136,11 +141,11 @@
       device_class: monetary
       state_class: total
       state: >
-        {% set kwh   = states('sensor.ecojoko_consommation_hc_reseau') | float(0) %}
+        {% set kwh   = states('sensor.ecojoko_hc_reseau_mensuel_um') | float(0) %}  # [L139] modif: consommation_hc_reseau (daily) → hc_reseau_mensuel_um (monthly UM)
         {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0) %}
         {{ (kwh * tarif) | round(2) }}
       availability: >
-        {{ states('sensor.ecojoko_consommation_hc_reseau') not in ['unavailable','unknown','none']
+        {{ states('sensor.ecojoko_hc_reseau_mensuel_um') not in ['unavailable','unknown','none']
           and states('sensor.tarif_heures_creuses_ttc') not in ['unavailable','unknown','none'] }}
 
     # --- ecojoko_cout_total_mensuel ---
@@ -202,3 +207,13 @@
       availability: >
         {{ states('sensor.ecojoko_cout_hp_annuel') not in ['unavailable','unknown','none']
           and states('sensor.ecojoko_cout_hc_annuel') not in ['unavailable','unknown','none'] }}
+
+# annotations_log:
+#   [L125] ecojoko_cout_hp_mensuel : source modifiée
+#          ecojoko_consommation_hp_reseau (sensor daily, reset minuit)
+#          → ecojoko_hp_reseau_mensuel_um (UM monthly, reset 1er du mois)
+#          Raison : bug coût mensuel HP = 0.45€ au lieu de ~X€ (daily × tarif ≠ monthly × tarif)
+#   [L139] ecojoko_cout_hc_mensuel : même correction que [L125] pour HC
+#          ecojoko_consommation_hc_reseau → ecojoko_hc_reseau_mensuel_um
+#   Dépendance ajoutée : sensor.ecojoko_hp/hc_reseau_mensuel_um
+#     → défini dans utility_meter/P0_Energie_total/Ecojoko/03_P2_UM_ecojoko_hebdo_annuel.yaml
