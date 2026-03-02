@@ -1,19 +1,48 @@
 # ╭──────────────────────────────────────────────────────────────────────────────╮
-# │ UTILITY METER : PÔLE 2. ECOJOKO — COMPTEURS HEBDO & ANNUELS (TOTAL/HP/HC)   │
+# │ UTILITY METER : PÔLE 0. ECOJOKO — COMPTEURS MENSUEL / HEBDO / ANNUELS        │
+# │                                   (TOTAL / HP / HC)                          │
 # ╰──────────────────────────────────────────────────────────────────────────────╯
 #
 # SOURCES :
-#   - ecojoko_consommation_reseau     → kWh cumulatif mensuel (total réseau)
-#   - ecojoko_consommation_hp_reseau  → kWh cumulatif mensuel HP
-#   - ecojoko_consommation_hc_reseau  → kWh cumulatif mensuel HC
+#   - ecojoko_consommation_reseau     → kWh QUOTIDIEN (daily sensor, reset minuit)
+#   - ecojoko_consommation_hp_reseau  → kWh QUOTIDIEN HP (daily sensor, reset minuit)
+#   - ecojoko_consommation_hc_reseau  → kWh QUOTIDIEN HC (daily sensor, reset minuit)
+#
+# ⚠️  CES 3 SENSORS SONT DAILY (reset à minuit), PAS mensuels.
+#     → L'UM monthly est OBLIGATOIRE pour calculer le coût mensuel HP/HC/Total.
+#     → Sans cet UM, le coût mensuel = coût du jour en cours seulement (0.45€ bug).
 #
 # CYCLES :
+#   monthly → reset chaque 1er du mois à minuit
 #   weekly  → reset chaque lundi à minuit
 #   yearly  → reset chaque 1er janvier à minuit
 #
 # ┌───────────────────────────────────┐
-# │ Ecojoko / Linky                   │
+# │ (Ecojoko / Linky)                 │
 # └───────────────────────────────────┘
+
+# ─── MENSUEL ─────────────────────────────────────────────────────────────────
+
+# --- ecojoko_reseau_mensuel_um ---
+ecojoko_reseau_mensuel_um:
+  source: sensor.ecojoko_consommation_reseau
+  name: "Ecojoko Réseau Mensuel UM"
+  unique_id: ecojoko_reseau_mensuel_um
+  cycle: monthly
+
+# --- ecojoko_hp_reseau_mensuel_um ---
+ecojoko_hp_reseau_mensuel_um:
+  source: sensor.ecojoko_consommation_hp_reseau
+  name: "Ecojoko HP Réseau Mensuel UM"
+  unique_id: ecojoko_hp_reseau_mensuel_um
+  cycle: monthly
+
+# --- ecojoko_hc_reseau_mensuel_um ---
+ecojoko_hc_reseau_mensuel_um:
+  source: sensor.ecojoko_consommation_hc_reseau
+  name: "Ecojoko HC Réseau Mensuel UM"
+  unique_id: ecojoko_hc_reseau_mensuel_um
+  cycle: monthly
 
 # ─── HEBDOMADAIRE ────────────────────────────────────────────────────────────
 
