@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATE : PÔLE 0. ECOJOKO — MOYENNE WATTS (A/M/H/Q)                        │
+# │ TEMPLATE : PÔLE 0. ECOJOKO — AVG WATTS (A/M/H/Q)                            │
 # ╰──────────────────────────────────────────────────────────────────────────────╯
 #
 # FORMULE : (kWh_cumulé × 1000) / heures_écoulées_depuis_reset → W moyen
@@ -19,9 +19,9 @@
 
     # ─── QUOTIDIEN ───────────────────────────────────────────────────────────
 
-    # --- ecojoko_avg_watts_daily ---
-    - name: "Ecojoko Avg Watts Daily"
-      unique_id: ecojoko_avg_watts_daily
+    # --- ecojoko_avg_watts_quotidien ---
+    - name: "Ecojoko Avg Watts Quotidien"
+      unique_id: ecojoko_avg_watts_quotidien
       unit_of_measurement: "W"
       device_class: power
       state_class: measurement
@@ -34,9 +34,9 @@
 
     # ─── HEBDOMADAIRE ────────────────────────────────────────────────────────
 
-    # --- ecojoko_avg_watts_weekly ---
-    - name: "Ecojoko Avg Watts Weekly"
-      unique_id: ecojoko_avg_watts_weekly
+    # --- ecojoko_avg_watts_hebdo ---
+    - name: "Ecojoko Avg Watts Hebdo"
+      unique_id: ecojoko_avg_watts_hebdo
       unit_of_measurement: "W"
       device_class: power
       state_class: measurement
@@ -49,9 +49,9 @@
 
     # ─── MENSUEL ─────────────────────────────────────────────────────────────
 
-    # --- ecojoko_avg_watts_monthly ---
-    - name: "Ecojoko Avg Watts Monthly"
-      unique_id: ecojoko_avg_watts_monthly
+    # --- ecojoko_avg_watts_mensuel ---
+    - name: "Ecojoko Avg Watts Mensuel"
+      unique_id: ecojoko_avg_watts_mensuel
       unit_of_measurement: "W"
       device_class: power
       state_class: measurement
@@ -64,9 +64,9 @@
 
     # ─── ANNUEL ──────────────────────────────────────────────────────────────
 
-    # --- ecojoko_avg_watts_yearly ---
-    - name: "Ecojoko Avg Watts Yearly"
-      unique_id: ecojoko_avg_watts_yearly
+    # --- ecojoko_avg_watts_annuel ---
+    - name: "Ecojoko Avg Watts Annuel"
+      unique_id: ecojoko_avg_watts_annuel
       unit_of_measurement: "W"
       device_class: power
       state_class: measurement
