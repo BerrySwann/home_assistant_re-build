@@ -22,9 +22,9 @@
 
 - sensor:
 
-    # ═══════════════════════════════════════════════════════════════════════════
-    # QUOTIDIEN
-    # ═══════════════════════════════════════════════════════════════════════════
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ 1. QUOTIDIEN (Q)                                                             │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
 
     # --- ecojoko_cout_hp_quotidien ---
     - name: "Ecojoko Coût HP Quotidien"
@@ -64,13 +64,10 @@
         {% set hp = states('sensor.ecojoko_cout_hp_quotidien') | float(0) %}
         {% set hc = states('sensor.ecojoko_cout_hc_quotidien') | float(0) %}
         {{ (hp + hc) | round(2) }}
-      availability: >
-        {{ states('sensor.ecojoko_cout_hp_quotidien') not in ['unavailable','unknown','none']
-          and states('sensor.ecojoko_cout_hc_quotidien') not in ['unavailable','unknown','none'] }}
 
-    # ═══════════════════════════════════════════════════════════════════════════
-    # HEBDOMADAIRE
-    # ═══════════════════════════════════════════════════════════════════════════
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ 2. HEBDOMADAIRE (H)                                                          │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
 
     # --- ecojoko_cout_hp_hebdo ---
     - name: "Ecojoko Coût HP Hebdo"
@@ -82,9 +79,6 @@
         {% set kwh   = states('sensor.ecojoko_hp_reseau_hebdo_um') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0) %}
         {{ (kwh * tarif) | round(2) }}
-      availability: >
-        {{ states('sensor.ecojoko_hp_reseau_hebdo_um') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_pleines_ttc') not in ['unavailable','unknown','none'] }}
 
     # --- ecojoko_cout_hc_hebdo ---
     - name: "Ecojoko Coût HC Hebdo"
@@ -96,9 +90,6 @@
         {% set kwh   = states('sensor.ecojoko_hc_reseau_hebdo_um') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0) %}
         {{ (kwh * tarif) | round(2) }}
-      availability: >
-        {{ states('sensor.ecojoko_hc_reseau_hebdo_um') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_creuses_ttc') not in ['unavailable','unknown','none'] }}
 
     # --- ecojoko_cout_total_hebdo ---
     - name: "Ecojoko Coût Total Hebdo"
@@ -110,16 +101,10 @@
         {% set hp = states('sensor.ecojoko_cout_hp_hebdo') | float(0) %}
         {% set hc = states('sensor.ecojoko_cout_hc_hebdo') | float(0) %}
         {{ (hp + hc) | round(2) }}
-      availability: >
-        {{ states('sensor.ecojoko_cout_hp_hebdo') not in ['unavailable','unknown','none']
-          and states('sensor.ecojoko_cout_hc_hebdo') not in ['unavailable','unknown','none'] }}
 
-    # ═══════════════════════════════════════════════════════════════════════════
-    # MENSUEL
-    # Source : ecojoko_hp/hc_reseau_mensuel_um (UM monthly — reset 1er du mois)
-    # ⚠️  ecojoko_consommation_hp/hc_reseau = sensor DAILY → UM mensuel obligatoire
-    # [modif] source: consommation_hp/hc_reseau (daily) → hp/hc_reseau_mensuel_um (monthly UM)
-    # ═══════════════════════════════════════════════════════════════════════════
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ 3. MENSUEL (M)                                                               │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
 
     # --- ecojoko_cout_hp_mensuel ---
     - name: "Ecojoko Coût HP Mensuel"
@@ -131,9 +116,6 @@
         {% set kwh   = states('sensor.ecojoko_hp_reseau_mensuel_um') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0) %}
         {{ (kwh * tarif) | round(2) }}
-      availability: >
-        {{ states('sensor.ecojoko_hp_reseau_mensuel_um') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_pleines_ttc') not in ['unavailable','unknown','none'] }}
 
     # --- ecojoko_cout_hc_mensuel ---
     - name: "Ecojoko Coût HC Mensuel"
@@ -145,9 +127,6 @@
         {% set kwh   = states('sensor.ecojoko_hc_reseau_mensuel_um') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0) %}
         {{ (kwh * tarif) | round(2) }}
-      availability: >
-        {{ states('sensor.ecojoko_hc_reseau_mensuel_um') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_creuses_ttc') not in ['unavailable','unknown','none'] }}
 
     # --- ecojoko_cout_total_mensuel ---
     - name: "Ecojoko Coût Total Mensuel"
@@ -159,13 +138,10 @@
         {% set hp = states('sensor.ecojoko_cout_hp_mensuel') | float(0) %}
         {% set hc = states('sensor.ecojoko_cout_hc_mensuel') | float(0) %}
         {{ (hp + hc) | round(2) }}
-      availability: >
-        {{ states('sensor.ecojoko_cout_hp_mensuel') not in ['unavailable','unknown','none']
-          and states('sensor.ecojoko_cout_hc_mensuel') not in ['unavailable','unknown','none'] }}
 
-    # ═══════════════════════════════════════════════════════════════════════════
-    # ANNUEL
-    # ═══════════════════════════════════════════════════════════════════════════
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ 4. ANNUEL (A)                                                                │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
 
     # --- ecojoko_cout_hp_annuel ---
     - name: "Ecojoko Coût HP Annuel"
@@ -177,9 +153,6 @@
         {% set kwh   = states('sensor.ecojoko_hp_reseau_annuel_um') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0) %}
         {{ (kwh * tarif) | round(2) }}
-      availability: >
-        {{ states('sensor.ecojoko_hp_reseau_annuel_um') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_pleines_ttc') not in ['unavailable','unknown','none'] }}
 
     # --- ecojoko_cout_hc_annuel ---
     - name: "Ecojoko Coût HC Annuel"
@@ -191,9 +164,6 @@
         {% set kwh   = states('sensor.ecojoko_hc_reseau_annuel_um') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0) %}
         {{ (kwh * tarif) | round(2) }}
-      availability: >
-        {{ states('sensor.ecojoko_hc_reseau_annuel_um') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_creuses_ttc') not in ['unavailable','unknown','none'] }}
 
     # --- ecojoko_cout_total_annuel ---
     - name: "Ecojoko Coût Total Annuel"
@@ -205,9 +175,6 @@
         {% set hp = states('sensor.ecojoko_cout_hp_annuel') | float(0) %}
         {% set hc = states('sensor.ecojoko_cout_hc_annuel') | float(0) %}
         {{ (hp + hc) | round(2) }}
-      availability: >
-        {{ states('sensor.ecojoko_cout_hp_annuel') not in ['unavailable','unknown','none']
-          and states('sensor.ecojoko_cout_hc_annuel') not in ['unavailable','unknown','none'] }}
 
 # annotations_log:
 #   [modif] ecojoko_cout_hp/hc_mensuel : commentaires inline supprimés des blocs state: >

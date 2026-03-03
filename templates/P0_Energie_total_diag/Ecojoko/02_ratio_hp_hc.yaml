@@ -3,6 +3,8 @@
     # Seuil rentabilité : > 25% = limite / > 33% = rentable
     # ═══════════════════════════════════════════════════════════════════════════
 
+- sensor:
+
     # --- ecojoko_ratio_hc_mensuel ---
     - name: "Ecojoko Ratio HC Mensuel"
       unique_id: ecojoko_ratio_hc_mensuel
