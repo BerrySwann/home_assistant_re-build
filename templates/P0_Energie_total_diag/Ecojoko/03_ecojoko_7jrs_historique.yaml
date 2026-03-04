@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────────╮
-# │ SENSOR : PÔLE 2. ECOJOKO — SNAPSHOT J-2 À J-7 (CASCADE 23:59:55)             │
+# │ SENSOR : PÔLE 2. ECOJOKO — SNAPSHOT J-1 À J-7 (CASCADE 23:59:55)             │
 # ╰──────────────────────────────────────────────────────────────────────────────╯
 # ┌───────────────────────────────────┐
 # │ Ecojoko / Linky                   │
@@ -7,7 +7,7 @@
 
 - trigger:
     - platform: time
-      at: "23:59:55"
+      at: "23:59:59"
 
   sensor:
 
@@ -15,18 +15,32 @@
 # │ 1. HISTORIQUE EN CASCADE (kWh)                                               │
 # ╰──────────────────────────────────────────────────────────────────────────────╯
 
-    # --- ecojoko_j2_kwh ---
-    - name: "Ecojoko J2 kWh"
-      unique_id: ecojoko_j2_kwh
+    # --- ecojoko_j1_kwh ---
+    # Source : last_period du UM quotidien = valeur du jour qui se termine (= Hier demain)
+    - name: "Ecojoko J1 kWh"
+      unique_id: ecojoko_j1_kwh
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total
       state: >
         {{ state_attr('sensor.ecojoko_reseau_quotidien_um', 'last_period') | float(0) | round(2) }}
       attributes:
-        jour: "{{ (now() - timedelta(days=2)).strftime('%A %d/%m') }}"
+        jour: "{{ (now() - timedelta(days=1)).strftime('%A %d/%m') }}"
         hp_kwh: "{{ state_attr('sensor.ecojoko_hp_reseau_quotidien_um', 'last_period') | float(0) | round(2) }}"
         hc_kwh: "{{ state_attr('sensor.ecojoko_hc_reseau_quotidien_um', 'last_period') | float(0) | round(2) }}"
+
+    # --- ecojoko_j2_kwh ---
+    # Source : ecojoko_j1_kwh (cascade — valeur de J1 AVANT sa mise à jour)
+    - name: "Ecojoko J2 kWh"
+      unique_id: ecojoko_j2_kwh
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total
+      state: "{{ states('sensor.ecojoko_j1_kwh') | float(0) | round(2) }}"
+      attributes:
+        jour: "{{ (now() - timedelta(days=2)).strftime('%A %d/%m') }}"
+        hp_kwh: "{{ state_attr('sensor.ecojoko_j1_kwh', 'hp_kwh') | float(0) | round(2) }}"
+        hc_kwh: "{{ state_attr('sensor.ecojoko_j1_kwh', 'hc_kwh') | float(0) | round(2) }}"
 
     # --- ecojoko_j3_kwh ---
     - name: "Ecojoko J3 kWh"
