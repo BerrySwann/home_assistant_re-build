@@ -4,7 +4,21 @@
 # ╰──────────────────────────────────────────────────────────────────────────────╯
 
 - sensor:
-
+    # --- ecojoko_ratio_hc_quotidien ---
+    - name: "Ecojoko Ratio HC Quotidien"
+      unique_id: ecojoko_ratio_hc_quotidien
+      unit_of_measurement: "%"
+      state_class: measurement
+      icon: mdi:percent
+      state: >
+        {% set hp = states('sensor.ecojoko_hp_reseau_quotidien_um') | float(0) %}
+        {% set hc = states('sensor.ecojoko_hc_reseau_quotidien_um') | float(0) %}
+        {% set total = hp + hc %}
+        {{ ((hc / total) * 100) | round(1) if total > 0 else 0 }}
+      availability: >
+        {{ states('sensor.ecojoko_hp_reseau_quotidien_um') not in ['unavailable','unknown','none']
+          and states('sensor.ecojoko_hc_reseau_quotidien_um') not in ['unavailable','unknown','none'] }}
+    
     # --- ecojoko_ratio_hc_mensuel ---
     - name: "Ecojoko Ratio HC Mensuel"
       unique_id: ecojoko_ratio_hc_mensuel
