@@ -2055,8 +2055,8 @@ views:
                       - font-weight: bold
                 custom_fields:
                   titre_1: >
-                    [[[ return 'Home Consumption<br><br>Mini -- Realtime --
-                    Maxi'; ]]]
+                    [[[ return 'Conso. Appart.<br><br>Mini -- Realtime -- Maxi';
+                    ]]]
                   mini: |
                     [[[
                       const value = parseFloat(states['sensor.conso_mini']?.state || 0);
@@ -3907,7 +3907,8 @@ views:
                       return ' ';
                     ]]]
               - type: custom:button-card
-                icon: mdi:face-mask-outline
+                show_entity_picture: true
+                entity_picture: /local/images/pollulene.png
                 tap_action:
                   action: navigate
                   navigation_path: /dashboard-tablette/pollen-pollution
@@ -3938,11 +3939,11 @@ views:
                     var airColor = getColor(airQuality);
                     var pollenColor = getColor(pollenAlert);
 
-                    return `<div style="text-align: left; color: white; font-size: 13px;margin-bottom: 4px;">Pollution / Pollen</div>
-                                  <div><span style="color: ${airColor}; font-weight: bold;">Niveau ${airQuality}</span> /
-                                  <span style="color: ${pollenColor}; font-weight: bold;">Niveau ${pollenAlert}</span></div>`;
+                    return `<div style="text-align: left; color: white; font-size: 13px;margin-bottom: 4px; text-shadow: 1px 1px 2px black;">Indice Pollulène</div>
+                            <div style="text-shadow: 1px 1px 2px black;"><span style="color: ${airColor}; font-weight: bold;">Air ${airQuality}</span> /
+                            <span style="color: ${pollenColor}; font-weight: bold;">Pollen ${pollenAlert}</span></div>`;
                   ]]]
-                size: 60%
+                size: 100%
                 styles:
                   card:
                     - aspect-ratio: 1/1
@@ -3954,12 +3955,9 @@ views:
                     - color: white
                     - font-size: 15px
                     - line-height: 1.2
-                  icon:
-                    - transform: rotate(350deg)
-                    - left: 15%
-                    - top: 15%
-                    - color: white
-                    - opacity: 1
+                  entity_picture:
+                    - opacity: 0.7
+                    - border-radius: 6px
                   name:
                     - color: white
                     - top: 10px
@@ -3967,6 +3965,7 @@ views:
                     - font-size: 80%
                     - font-weight: bold
                     - position: absolute
+                    - z-index: 2
               - type: custom:button-card
                 icon: |
                   [[[
@@ -13933,7 +13932,7 @@ views:
                         - font-size: 12px
                         - font-weight: bold
           - type: custom:mushroom-light-card
-            entity: light.smart_roller_shutter_2309261223820570080348e1e9dc6401_dnd
+            entity: light.store_salon_dnd
             grid_options:
               columns: full
               rows: 1
@@ -14226,7 +14225,7 @@ views:
                       name:
                         - color: white
           - type: custom:mushroom-light-card
-            entity: light.smart_roller_shutter_2309266337793570080348e1e9dc5a17_dnd
+            entity: light.store_bureau_dnd
             grid_options:
               columns: full
               rows: 1
@@ -14294,17 +14293,35 @@ views:
             layout_options:
               grid_columns: full
               grid_rows: 1
-          - type: custom:bubble-card
-            card_type: separator
-            name: Appartement
-            icon: mdi:home-assistant
-            rows: 2
-            styles: |-
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 1;
-              }
-            card_layout: normal
+          - card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+            type: custom:stack-in-card
+            mode: vertical
+            keep:
+              box_shadow: false
+              margin: false
+              border_radius: false
+              background: false
+              outer_padding: false
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mod-card
+                    card_mod:
+                      style:
+                        .: |
+                          :host {
+                            --text-divider-color: white;
+                            --text-divider-line-size: 1px;
+                          }
+                    card:
+                      type: custom:text-divider-row
+                      text: Appartement
           - square: false
             type: grid
             columns: 3
@@ -14336,10 +14353,10 @@ views:
                       box-shadow: none !important;
                       background: none !important;
                       align-items: center;
-                      justify-content: center;      
+                      justify-content: center;
                       transform: scale(0.90);
                       margin: 0px 0px 0px 0px;
-                    }        
+                    }
               - type: custom:ring-tile
                 entity: sensor.ecojoko_consommation_temps_reel
                 name: Conso. Temps Réel
@@ -14367,7 +14384,7 @@ views:
                       box-shadow: none !important;
                       background: none !important;
                       align-items: center;
-                      justify-content: center;      
+                      justify-content: center;
                       transform: scale(0.90);
                       margin: 0px 0px 0px 0px;
                     }
@@ -14398,10 +14415,10 @@ views:
                       box-shadow: none !important;
                       background: none !important;
                       align-items: center;
-                      justify-content: center;      
+                      justify-content: center;
                       transform: scale(0.90);
                       margin: 0px 0px 0px 0px;
-                    }  
+                    }
           - type: vertical-stack
             cards:
               - type: custom:vertical-stack-in-card
@@ -14442,17 +14459,35 @@ views:
             grid_options:
               columns: 24
               rows: auto
-          - type: custom:bubble-card
-            card_type: separator
-            name: Ratio Mois A-1 / Semaine dernière  / A-1
-            icon: mdi:percent
-            rows: 2
-            styles: |-
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 1;
-              }
-            card_layout: normal
+          - card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+            type: custom:stack-in-card
+            mode: vertical
+            keep:
+              box_shadow: false
+              margin: false
+              border_radius: false
+              background: false
+              outer_padding: false
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mod-card
+                    card_mod:
+                      style:
+                        .: |
+                          :host {
+                            --text-divider-color: white;
+                            --text-divider-line-size: 1px;
+                          }
+                    card:
+                      type: custom:text-divider-row
+                      text: Ratio Mois A-1 / Semaine dernière / A-1
           - type: custom:content-card-linky
             entity: sensor.linky_25481620821301_consumption
             ewEntity: sensor.linky_25481620821301_consumption
@@ -14573,83 +14608,157 @@ views:
                   box-shadow: none !important;
                   border: none !important;
                 }
-          - type: custom:bubble-card
-            card_type: separator
-            name: Coût Mensuel et Quotidien
-            icon: mdi:currency-eur
-            rows: 2
-            styles: |-
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 1;
-              }
-            card_layout: normal
-          - type: horizontal-stack
+          - card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+            type: custom:stack-in-card
+            mode: vertical
+            keep:
+              box_shadow: false
+              margin: false
+              border_radius: false
+              background: false
+              outer_padding: false
             cards:
-              - type: statistic
-                entity: sensor.ecojoko_consommation_reseau
-                period:
-                  calendar:
-                    period: month
-                    offset: 0
-                stat_type: change
-                name: Total Mois
-                icon: mdi:lightning-bolt-outline
-                card_mod:
-                  style: |
-                    ha-card {
-                      background: none !important;
-                      box-shadow: none !important;
-                      border: none !important;
-                      
-                    }
-                    .icon {
-                      color: white !important;
-                    }
-              - type: statistic
-                entity: sensor.ecojoko_consommation_hp_reseau_cost
-                period:
-                  calendar:
-                    period: month
-                    offset: 0
-                stat_type: change
-                name: H.P. Mois
-                icon: mdi:currency-eur
-                card_mod:
-                  style: |
-                    ha-card {
-                      background: none !important;
-                      box-shadow: none !important;
-                      border: none !important;
-                      
-                    }
-                    .icon {
-                      color: white !important;
-                    }
-              - type: statistic
-                entity: sensor.ecojoko_consommation_hc_reseau_cost
-                period:
-                  calendar:
-                    period: month
-                    offset: 0
-                stat_type: change
-                name: H.C. Mois
-                icon: mdi:currency-eur
-                card_mod:
-                  style: |
-                    ha-card {
-                      background: none !important;
-                      box-shadow: none !important;
-                      border: none !important;
-                    }
-                    .icon {
-                      color: white !important;
-                    }
-
-                     
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mod-card
+                    card_mod:
+                      style:
+                        .: |
+                          :host {
+                            --text-divider-color: white;
+                            --text-divider-line-size: 1px;
+                          }
+                    card:
+                      type: custom:text-divider-row
+                      text: Coût Quotidien
+          - type: vertical-stack
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: entity
+                    entity: sensor.ecojoko_reseau_quotidien_um
+                    name: Total kWh
+                    icon: mdi:lightning-bolt-outline
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none !important;
+                          box-shadow: none !important;
+                          border: none !important;
+                        }
+                        .icon {
+                          color: white !important;
+                        }
+                  - type: entity
+                    entity: sensor.ecojoko_hp_reseau_quotidien_um
+                    name: H.P. kWh
+                    icon: mdi:lightning-bolt
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none !important;
+                          box-shadow: none !important;
+                          border: none !important;
+                        }
+                        .icon {
+                          color: white !important;
+                        }
+                  - type: entity
+                    entity: sensor.ecojoko_hc_reseau_quotidien_um
+                    name: H.C. kWh
+                    icon: mdi:lightning-bolt-outline
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none !important;
+                          box-shadow: none !important;
+                          border: none !important;
+                        }
+                        .icon {
+                          color: white !important;
+                        }
+              - type: horizontal-stack
+                cards:
+                  - type: entity
+                    entity: sensor.ecojoko_cout_total_quotidien
+                    name: Total €
+                    icon: mdi:currency-eur
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none !important;
+                          box-shadow: none !important;
+                          border: none !important;
+                        }
+                        .icon {
+                          color: white !important;
+                        }
+                  - type: entity
+                    entity: sensor.ecojoko_cout_hp_quotidien
+                    name: H.P. €
+                    icon: mdi:currency-eur
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none !important;
+                          box-shadow: none !important;
+                          border: none !important;
+                        }
+                        .icon {
+                          color: white !important;
+                        }
+                  - type: entity
+                    entity: sensor.ecojoko_cout_hc_quotidien
+                    name: H.C. €
+                    icon: mdi:currency-eur
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none !important;
+                          box-shadow: none !important;
+                          border: none !important;
+                        }
+                        .icon {
+                          color: white !important;
+                        }
             grid_options:
               columns: 36
               rows: auto
+          - card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+            type: custom:stack-in-card
+            mode: vertical
+            keep:
+              box_shadow: false
+              margin: false
+              border_radius: false
+              background: false
+              outer_padding: false
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mod-card
+                    card_mod:
+                      style:
+                        .: |
+                          :host {
+                            --text-divider-color: white;
+                            --text-divider-line-size: 1px;
+                          }
+                    card:
+                      type: custom:text-divider-row
+                      text: Conso. réel sur 24 Heures
           - type: custom:apexcharts-card
             chart_type: pie
             graph_span: 24h
@@ -14661,14 +14770,20 @@ views:
                 height: 200px
               legend:
                 show: false
+              dataLabels:
+                enabled: true
+                formatter: |
+                  EVAL:function(val) {
+                    return val.toFixed(0) + "%";
+                  }
             header:
               show: true
-              title: Conso. journalière H.P./H.C. sur 24h.
+              title: Conso. journalière H.P./H.C.
               show_states: true
               colorize_states: true
             all_series_config:
               group_by:
-                func: diff
+                func: last
                 duration: 24h
               show:
                 legend_value: false
@@ -14677,10 +14792,10 @@ views:
               loading: true
               last_updated: false
             series:
-              - entity: sensor.ecojoko_consommation_hp_reseau
+              - entity: sensor.ecojoko_hp_reseau_quotidien_um
                 name: Heure pleine
                 color: rgb(211, 58, 79)
-              - entity: sensor.ecojoko_consommation_hc_reseau
+              - entity: sensor.ecojoko_hc_reseau_quotidien_um
                 name: Heure creuse
                 color: rgb(72, 132, 213)
             card_mod:
@@ -14690,79 +14805,344 @@ views:
                   box-shadow: none !important;
                   border: none !important;
                 }
-          - type: horizontal-stack
+          - type: custom:button-card
+            entity: sensor.ecojoko_ratio_hc_quotidien
+            name: Rentabilité
+            show_state: true
+            show_icon: false
+            show_label: true
+            label: Heures Creuses
+            decimal: 1
+            styles:
+              grid:
+                - grid-template-areas: '"n s" "l s" "bar bar"'
+                - grid-template-columns: 1fr auto
+                - grid-template-rows: auto auto 28px
+              card:
+                - padding: 12px
+                - background: transparent
+                - border: none
+                - box-shadow: none
+              name:
+                - justify-self: start
+                - font-weight: bold
+                - font-size: 16px
+              label:
+                - justify-self: start
+                - font-size: 11px
+                - opacity: 0.6
+                - margin-top: '-2px'
+              state:
+                - justify-self: end
+                - align-self: center
+                - font-weight: bold
+                - font-size: 19px
+                - opacity: 0.9
+              custom_fields:
+                bar:
+                  - position: relative
+                  - width: 100%
+                  - height: 25px
+                  - align-self: center
+                  - border-radius: 10px
+                  - background: >-
+                      linear-gradient(90deg, #f44336 0%, #f44336 25%, #ff9800
+                      25%, #ff9800 33%, #4caf50 33%, #4caf50 100%)
+                  - border: 2px solid rgba(255,255,255,1)
+            custom_fields:
+              bar: |
+                [[[
+                  let val = parseFloat(states['sensor.ecojoko_ratio_hc_quotidien'].state);
+                  if (isNaN(val)) return ""; 
+                  let pos = val;
+                  if (pos > 100) pos = 100;
+                  if (pos < 0) pos = 0;
+                  return `
+                    <div style="
+                      position: absolute;
+                      left: ${pos}%;
+                      top: 50%;
+                      width: 18px;
+                      height: 18px;
+                      background: gainsboro;
+                      border-radius: 10px;
+                      border: 1.5px solid black;
+                      transform: translate(-50%, -50%);
+                      transition: left 0.6s ease-in-out;
+                      z-index: 5;
+                    "></div>
+                  `;
+                ]]]
+          - card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+            type: custom:stack-in-card
+            mode: vertical
+            keep:
+              box_shadow: false
+              margin: false
+              border_radius: false
+              background: false
+              outer_padding: false
             cards:
-              - type: statistic
-                entity: sensor.ecojoko_consommation_reseau
-                period:
-                  calendar:
-                    period: day
-                    offset: 0
-                stat_type: change
-                name: Total Jours
-                card_mod:
-                  style: |
-                    ha-card {
-                      background: none !important;
-                      box-shadow: none !important;
-                      border: none !important;
-                      
-                    }
-                    .icon {
-                      color: white !important;
-                    }
-              - type: statistic
-                entity: sensor.ecojoko_consommation_hp_reseau_cost
-                period:
-                  calendar:
-                    period: day
-                    offset: 0
-                stat_type: change
-                name: H.P. Jours
-                icon: mdi:currency-eur
-                card_mod:
-                  style: |
-                    ha-card {
-                      background: none !important;
-                      box-shadow: none !important;
-                      border: none !important;
-                      
-                    }
-                    .icon {
-                      color: white !important;
-                    }
-              - type: statistic
-                entity: sensor.ecojoko_consommation_hc_reseau_cost
-                period:
-                  calendar:
-                    period: day
-                    offset: 0
-                stat_type: change
-                name: H.C. Jours
-                icon: mdi:currency-eur
-                card_mod:
-                  style: |
-                    ha-card {
-                      background: none !important;
-                      box-shadow: none !important;
-                      border: none !important;
-                    }
-                    .icon {
-                      color: white !important;
-                    }
-
-                     
-          - type: custom:bubble-card
-            card_type: separator
-            name: Conso. réel sur 24 Heures
-            icon: mdi:lightning-bolt
-            rows: 2
-            styles: |-
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 1;
-              }
-            card_layout: normal
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mod-card
+                    card_mod:
+                      style:
+                        .: |
+                          :host {
+                            --text-divider-color: white;
+                            --text-divider-line-size: 1px;
+                          }
+                    card:
+                      type: custom:text-divider-row
+                      text: Coût Mensuel
+          - type: vertical-stack
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: statistic
+                    entity: sensor.ecojoko_consommation_reseau
+                    period:
+                      calendar:
+                        period: month
+                        offset: 0
+                    stat_type: change
+                    name: Total kWh
+                    icon: mdi:lightning-bolt-outline
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none !important;
+                          box-shadow: none !important;
+                          border: none !important;
+                        }
+                        .icon {
+                          color: white !important;
+                        }
+                  - type: entity
+                    entity: sensor.ecojoko_hp_reseau_mensuel_um
+                    name: H.P. kWh
+                    icon: mdi:lightning-bolt
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none !important;
+                          box-shadow: none !important;
+                          border: none !important;
+                        }
+                        .icon {
+                          color: white !important;
+                        }
+                  - type: entity
+                    entity: sensor.ecojoko_hc_reseau_mensuel_um
+                    name: H.C. kWh
+                    icon: mdi:lightning-bolt-outline
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none !important;
+                          box-shadow: none !important;
+                          border: none !important;
+                        }
+                        .icon {
+                          color: white !important;
+                        }
+              - type: horizontal-stack
+                cards:
+                  - type: entity
+                    entity: sensor.ecojoko_cout_total_mensuel
+                    name: Total €
+                    icon: mdi:currency-eur
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none !important;
+                          box-shadow: none !important;
+                          border: none !important;
+                        }
+                        .icon {
+                          color: white !important;
+                        }
+                  - type: entity
+                    entity: sensor.ecojoko_cout_hp_mensuel
+                    name: H.P. €
+                    icon: mdi:currency-eur
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none !important;
+                          box-shadow: none !important;
+                          border: none !important;
+                        }
+                        .icon {
+                          color: white !important;
+                        }
+                  - type: entity
+                    entity: sensor.ecojoko_cout_hc_mensuel
+                    name: H.C. €
+                    icon: mdi:currency-eur
+                    card_mod:
+                      style: |
+                        ha-card {
+                          background: none !important;
+                          box-shadow: none !important;
+                          border: none !important;
+                        }
+                        .icon {
+                          color: white !important;
+                        }
+            grid_options:
+              columns: 36
+              rows: auto
+          - card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+            type: custom:stack-in-card
+            mode: vertical
+            keep:
+              box_shadow: false
+              margin: false
+              border_radius: false
+              background: false
+              outer_padding: false
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mod-card
+                    card_mod:
+                      style:
+                        .: |
+                          :host {
+                            --text-divider-color: white;
+                            --text-divider-line-size: 1px;
+                          }
+                    card:
+                      type: custom:text-divider-row
+                      text: Conso. réel mensuel
+          - type: custom:apexcharts-card
+            chart_type: pie
+            graph_span: 1month
+            cache: true
+            span:
+              start: month
+            apex_config:
+              chart:
+                height: 200px
+              legend:
+                show: false
+              dataLabels:
+                enabled: true
+                formatter: |
+                  EVAL:function(val) {
+                    return val.toFixed(0) + "%";
+                  }
+            header:
+              show: true
+              title: Conso. mensuelle H.P./H.C.
+              show_states: true
+              colorize_states: true
+            all_series_config:
+              group_by:
+                func: last
+                duration: 1month
+              show:
+                legend_value: false
+                extremas: false
+            show:
+              loading: true
+              last_updated: false
+            series:
+              - entity: sensor.ecojoko_hp_reseau_mensuel_um
+                name: Heure pleine
+                color: rgb(211, 58, 79)
+              - entity: sensor.ecojoko_hc_reseau_mensuel_um
+                name: Heure creuse
+                color: rgb(72, 132, 213)
+            card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+          - type: custom:button-card
+            entity: sensor.ecojoko_ratio_hc_mensuel
+            name: Rentabilité
+            show_state: true
+            show_icon: false
+            show_label: true
+            label: Heures Creuses
+            decimal: 1
+            styles:
+              grid:
+                - grid-template-areas: '"n s" "l s" "bar bar"'
+                - grid-template-columns: 1fr auto
+                - grid-template-rows: auto auto 28px
+              card:
+                - padding: 12px
+                - background: transparent
+                - border: none
+                - box-shadow: none
+              name:
+                - justify-self: start
+                - font-weight: bold
+                - font-size: 16px
+              label:
+                - justify-self: start
+                - font-size: 11px
+                - opacity: 0.6
+                - margin-top: '-2px'
+              state:
+                - justify-self: end
+                - align-self: center
+                - font-weight: bold
+                - font-size: 19px
+                - opacity: 0.9
+              custom_fields:
+                bar:
+                  - position: relative
+                  - width: 100%
+                  - height: 25px
+                  - align-self: center
+                  - border-radius: 10px
+                  - background: >-
+                      linear-gradient(90deg, #f44336 0%, #f44336 25%, #ff9800
+                      25%, #ff9800 33%, #4caf50 33%, #4caf50 100%)
+                  - border: 2px solid rgba(255,255,255,1)
+            custom_fields:
+              bar: |
+                [[[
+                  let val = parseFloat(states['sensor.ecojoko_ratio_hc_mensuel'].state);
+                  if (isNaN(val)) return ""; 
+                  let pos = val;
+                  if (pos > 100) pos = 100;
+                  if (pos < 0) pos = 0;
+                  return `
+                    <div style="
+                      position: absolute;
+                      left: ${pos}%;
+                      top: 50%;
+                      width: 18px;
+                      height: 18px;
+                      background: gainsboro;
+                      border-radius: 10px;
+                      border: 1.5px solid black;
+                      transform: translate(-50%, -50%);
+                      transition: left 0.6s ease-in-out;
+                      z-index: 5;
+                    "></div>
+                  `;
+                ]]]
           - type: custom:apexcharts-card
             graph_span: 24h
             cache: false
@@ -14821,14 +15201,14 @@ views:
                 group_by:
                   func: avg
                   duration: 24h
-              - entity: sensor.ecojoko_avg_watts_daily
+              - entity: sensor.ecojoko_avg_watts_quotidien
                 yaxis_id: Minuit
                 name: Moy. depuis minuit
                 unit: Wh
                 color: '#FF5252'
                 type: line
                 stroke_width: 1.5
-              - entity: sensor.ecojoko_avg_watts_monthly
+              - entity: sensor.ecojoko_avg_watts_mensuel
                 name: Moy. 1er du mois
                 unit: Wh
                 show:
@@ -14842,17 +15222,35 @@ views:
                   box-shadow: none !important;
                   border: none !important;
                 }
-          - type: custom:bubble-card
-            card_type: separator
-            name: Energie Totale consommée sur 7 Jours
-            icon: mdi:lightning-bolt
-            rows: 2
-            styles: |-
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 1;
-              }
-            card_layout: normal
+          - card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+            type: custom:stack-in-card
+            mode: vertical
+            keep:
+              box_shadow: false
+              margin: false
+              border_radius: false
+              background: false
+              outer_padding: false
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mod-card
+                    card_mod:
+                      style:
+                        .: |
+                          :host {
+                            --text-divider-color: white;
+                            --text-divider-line-size: 1px;
+                          }
+                    card:
+                      type: custom:text-divider-row
+                      text: Energie Totale consommée sur 7 Jours
           - type: custom:apexcharts-card
             experimental:
               color_threshold: true
@@ -14868,7 +15266,7 @@ views:
               show: true
               show_states: true
               colorize_states: true
-              title: ' '
+              title: ANCIEN — offset (comparaison)
             apex_config:
               chart:
                 height: 450px
@@ -15003,24 +15401,182 @@ views:
             card_mod:
               style: |
                 div#state__value {
-                  font-size: 8.5px;
+                  font-size: 8.25px;
                 }
                 ha-card {
                   background: none !important;
                   box-shadow: none !important;
                   border: none !important;
                 }
-          - type: custom:bubble-card
-            card_type: separator
-            name: Coût totale par Jours (hors Abo.)
-            icon: mdi:lightning-bolt
-            rows: 2
-            styles: |-
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 1;
-              }
-            card_layout: normal
+          - type: custom:apexcharts-card
+            experimental:
+              color_threshold: true
+            graph_span: 24h
+            cache: true
+            span:
+              end: day
+            now:
+              show: true
+              color: darkred
+              label: Now
+            header:
+              show: true
+              show_states: true
+              colorize_states: true
+              title: ' '
+            apex_config:
+              chart:
+                height: 450px
+                type: area
+              stroke:
+                show: true
+              dataLabels:
+                enabled: true
+              legend:
+                show: true
+              fill:
+                type: gradient
+                gradient:
+                  inverseColors: true
+                  type: vertical
+                  shadeIntensity: 0.1
+                  opacityFrom: 0.5
+                  opacityTo: 0.15
+                  stops:
+                    - 0
+                    - 50
+                    - 100
+              grid:
+                show: true
+              tooltip:
+                'y':
+                  formatter: >
+                    EVAL:(val) => (val === null || isNaN(val)) ? '' :
+                    `${Number(val).toFixed(1)} kWh`
+            all_series_config:
+              group_by:
+                func: last
+                duration: 10m
+              curve: smooth
+              type: area
+            yaxis:
+              - id: kWh
+                min: 0
+                max: auto
+                decimals: 1
+                opposite: true
+                apex_config:
+                  tickAmount: 20
+            series:
+              - entity: sensor.ecojoko_reseau_quotidien_um
+                yaxis_id: kWh
+                color: gainsboro
+                name: Aujourd'hui
+                unit: kWh
+                stroke_width: 3
+                float_precision: 2
+                show:
+                  legend_value: false
+                  extremas: max
+              - entity: sensor.ecojoko_j1_kwh
+                yaxis_id: kWh
+                color: rgb(220, 255, 220)
+                name: J-1
+                unit: kWh
+                float_precision: 1
+                show:
+                  legend_value: false
+                  extremas: max
+              - entity: sensor.ecojoko_j2_kwh
+                yaxis_id: kWh
+                color: rgb(153, 255, 153)
+                name: J-2
+                unit: kWh
+                float_precision: 1
+                show:
+                  legend_value: false
+                  extremas: max
+              - entity: sensor.ecojoko_j3_kwh
+                yaxis_id: kWh
+                color: rgb(102, 255, 102)
+                name: J-3
+                unit: kWh
+                float_precision: 1
+              - entity: sensor.ecojoko_j4_kwh
+                yaxis_id: kWh
+                color: rgb(51, 204, 51)
+                name: J-4
+                unit: kWh
+                float_precision: 1
+                show:
+                  legend_value: false
+                  extremas: max
+              - entity: sensor.ecojoko_j5_kwh
+                yaxis_id: kWh
+                color: rgb(0, 153, 0)
+                name: J-5
+                unit: kWh
+                float_precision: 1
+                show:
+                  legend_value: false
+                  extremas: max
+              - entity: sensor.ecojoko_j6_kwh
+                yaxis_id: kWh
+                color: rgb(0, 102, 0)
+                name: J-6
+                unit: kWh
+                float_precision: 1
+                show:
+                  legend_value: false
+                  extremas: max
+              - entity: sensor.ecojoko_j7_kwh
+                yaxis_id: kWh
+                color: rgb(0, 70, 0)
+                name: J-7
+                unit: kWh
+                float_precision: 1
+                show:
+                  legend_value: false
+                  extremas: max
+            card_mod:
+              style: |
+                div#state__value {
+                  font-size: 8.25px;
+                }
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+          - card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+            type: custom:stack-in-card
+            mode: vertical
+            keep:
+              box_shadow: false
+              margin: false
+              border_radius: false
+              background: false
+              outer_padding: false
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mod-card
+                    card_mod:
+                      style:
+                        .: |
+                          :host {
+                            --text-divider-color: white;
+                            --text-divider-line-size: 1px;
+                          }
+                    card:
+                      type: custom:text-divider-row
+                      text: Coût totale par Jours (hors Abo.)
           - card_mod:
               style: |
                 ha-card {
@@ -15054,17 +15610,35 @@ views:
               - name: HC (kWh)
                 data: hc_kwh
                 align: center
-          - type: custom:bubble-card
-            card_type: separator
-            name: Conso. Mensuel par Jours
-            icon: mdi:lightning-bolt-outline
-            rows: 2
-            styles: |-
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 1;
-              }
-            card_layout: normal
+          - card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+            type: custom:stack-in-card
+            mode: vertical
+            keep:
+              box_shadow: false
+              margin: false
+              border_radius: false
+              background: false
+              outer_padding: false
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mod-card
+                    card_mod:
+                      style:
+                        .: |
+                          :host {
+                            --text-divider-color: white;
+                            --text-divider-line-size: 1px;
+                          }
+                    card:
+                      type: custom:text-divider-row
+                      text: Conso. Mensuel par Jours
           - type: custom:apexcharts-card
             graph_span: 31d
             cache: true
@@ -15100,7 +15674,7 @@ views:
                 legend_value: false
                 extremas: true
             series:
-              - entity: sensor.ecojoko_energy_daily
+              - entity: sensor.ecojoko_avg_watts_quotidien
                 yaxis_id: daily
                 name: Conso. ce jour
                 color: rgb(68,115,158)
@@ -15118,14 +15692,14 @@ views:
                 group_by:
                   func: avg
                   duration: 730h
-              - entity: sensor.ecojoko_avg_watts_daily
+              - entity: sensor.ecojoko_avg_watts_quotidien
                 yaxis_id: moyenne
                 type: line
                 color: '#FF5252'
                 stroke_width: 1.5
                 name: Moy. depuis minuit
                 unit: Wh
-              - entity: sensor.ecojoko_avg_watts_monthly
+              - entity: sensor.ecojoko_avg_watts_mensuel
                 name: Moy. 1er du Mois
                 unit: Wh
                 show:
@@ -25171,6 +25745,244 @@ views:
                 }
     title: Systemes freebox
     cards: []
+  - type: sections
+    path: reserve
+    max_columns: 1
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            icon: mdi:cog
+            heading: Système
+            heading_style: title
+            badges: []
+            tap_action:
+              action: navigate
+              navigation_path: /dashboard-tablette/0
+            layout_options:
+              grid_columns: full
+              grid_rows: 1
+          - type: custom:bubble-card
+            card_type: separator
+            name: GitHub
+            icon: mdi:github
+            rows: 2
+            styles: |-
+              .bubble-line {
+                background: var(--primary-text-color);
+                opacity: 1;
+              }
+            card_layout: normal
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-chips-card
+                alignment: center
+                chips:
+                  - type: template
+                    entity: sensor.backup_github_status
+                    icon: mdi:github
+                    content: >-
+                      {{ iif(states('sensor.backup_github_status')=='OK','Backup
+                      OK','Backup KO') }} · {{
+                      state_attr('sensor.backup_github_status','ts') or 'jamais'
+                      }}
+                    icon_color: >-
+                      {{
+                      iif(states('sensor.backup_github_status')=='OK','green','red')
+                      }}
+                    tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                card_mod:
+                  style: |
+                    ha-card {
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: transparent;
+                    }
+              - type: custom:mushroom-chips-card
+                alignment: center
+                chips:
+                  - type: template
+                    entity: sensor.git_last_weekly_tag
+                    icon: mdi:tag
+                    content: '{{ states(''sensor.git_last_weekly_tag'') or ''no tag'' }}'
+                    icon_color: >-
+                      {% set tag = states('sensor.git_last_weekly_tag') %} {%
+                      set iso = now().isocalendar() %} {% set current =
+                      "weekly-%04d-W%02d" | format(iso[0], iso[1]) %} {{ 'green'
+                      if (tag and tag.startswith(current)) else 'amber' }}
+                    tap_action:
+                      action: url
+                      url_path: >-
+                        https://github.com/BerrySwann/home_assistant_re-build/tags
+                      new_tab: true
+                    hold_action:
+                      action: call-service
+                      service: shell_command.git_backup_push_weekly
+                      confirmation:
+                        text: Créer un tag hebdomadaire ?
+                  - type: template
+                    entity: sensor.github_default_branch
+                    icon: mdi:source-branch
+                    content: >-
+                      Branche: {{ states('sensor.github_default_branch') or
+                      'unknown' }}
+                    icon_color: >-
+                      {% set b = states('sensor.github_default_branch') %} {{
+                      'green' if b == 'main' else 'amber' }}
+                    tap_action:
+                      action: url
+                      url_path: https://github.com/BerrySwann/home_assistant_re-build
+                      new_tab: true
+                  - type: template
+                    icon: mdi:cloud-upload-outline
+                    content: Push
+                    icon_color: deep-orange
+                    tap_action:
+                      action: call-service
+                      service: shell_command.git_backup_push_manual
+                      confirmation:
+                        text: Lancer un push Git manuel ?
+                    hold_action:
+                      action: url
+                      url_path: >-
+                        https://github.com/BerrySwann/home_assistant_re-build/commits/main
+                      new_tab: true
+                card_mod:
+                  style: |
+                    ha-card {
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: transparent;
+                    }
+              - type: custom:mushroom-title-card
+                title: Journal Backup (10 derniers)
+                alignment: center
+                card_mod:
+                  style: |
+                    ha-card {
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: transparent;
+                    }
+              - type: markdown
+                content: |-
+                  ```
+                  {{ state_attr('sensor.backup_github_journal','text') or '—' }}
+                  ```
+                card_mod:
+                  style: |
+                    ha-card {
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: transparent;
+                    }
+              - type: custom:apexcharts-card
+                header:
+                  title: Backup GitHub — OK/KO
+                graph_span: 7d
+                span:
+                  end: day
+                yaxis:
+                  - min: 0
+                    max: 1
+                    decimals: 0
+                series:
+                  - entity: sensor.backup_github_status
+                    name: Statut
+                    type: column
+                    transform: 'EVAL: return x === ''OK'' ? 1 : 0;'
+                    group_by:
+                      duration: 6h
+                      func: last
+                apex_config:
+                  yaxis:
+                    tickAmount: 2
+                    labels:
+                      formatter: >
+                        EVAL: function (value) { return value === 1 ? 'OK' :
+                        'KO'; }
+                card_mod:
+                  style: |
+                    ha-card {
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: transparent;
+                    }
+          - type: custom:bubble-card
+            card_type: separator
+            name: Restart VSCode
+            icon: mdi:check-bold
+            rows: 2
+            styles: |-
+              .bubble-line {
+                background: var(--primary-text-color);
+                opacity: 1;
+              }
+            card_layout: normal
+          - type: custom:button-card
+            entity: automation.redemarrage_quotidien_studio_code_server
+            name: Redémarrer Studio Code Server
+            icon: mdi:restart
+            tap_action:
+              action: call-service
+              service: automation.trigger
+              service_data:
+                entity_id: automation.redemarrage_quotidien_studio_code_server
+            styles:
+              card:
+                - background: transparent
+                - border: 0.1px solid white
+                - border-radius: 12px
+                - color: white
+                - font-size: 14px
+                - padding: 4px
+              icon:
+                - width: 40px
+                - height: 40px
+                - color: white
+              name:
+                - font-size: 16px
+                - margin-top: 12px
+          - type: custom:bubble-card
+            card_type: separator
+            name: MariaDB
+            icon: mdi:database-cog-outline
+            rows: 2
+            styles: |-
+              .bubble-line {
+                background: var(--primary-text-color);
+                opacity: 1;
+              }
+            card_layout: normal
+          - type: custom:button-card
+            entity: automation.db_purge_mariadb_repack
+            name: '[DB] Purge MariaDB + Repack'
+            icon: mdi:database-check-outline
+            tap_action:
+              action: call-service
+              service: automation.trigger
+              service_data:
+                entity_id: automation.db_purge_mariadb_repack
+            styles:
+              card:
+                - background: transparent
+                - border: 0.1px solid white
+                - border-radius: 12px
+                - color: white
+                - font-size: 14px
+                - padding: 4px
+              icon:
+                - width: 40px
+                - height: 40px
+                - color: white
+              name:
+                - font-size: 16px
+                - margin-top: 12px
+    cards: []
+    title: MariaDB / GitHub
   - title: MàJ
     path: maj
     type: sections
@@ -27297,244 +28109,6 @@ views:
       layout: responsive
       badges_position: bottom
       badges_wrap: wrap
-  - type: sections
-    path: reserve
-    max_columns: 1
-    sections:
-      - type: grid
-        cards:
-          - type: heading
-            icon: mdi:cog
-            heading: Système
-            heading_style: title
-            badges: []
-            tap_action:
-              action: navigate
-              navigation_path: /dashboard-tablette/0
-            layout_options:
-              grid_columns: full
-              grid_rows: 1
-          - type: custom:bubble-card
-            card_type: separator
-            name: GitHub
-            icon: mdi:github
-            rows: 2
-            styles: |-
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 1;
-              }
-            card_layout: normal
-          - type: vertical-stack
-            cards:
-              - type: custom:mushroom-chips-card
-                alignment: center
-                chips:
-                  - type: template
-                    entity: sensor.backup_github_status
-                    icon: mdi:github
-                    content: >-
-                      {{ iif(states('sensor.backup_github_status')=='OK','Backup
-                      OK','Backup KO') }} · {{
-                      state_attr('sensor.backup_github_status','ts') or 'jamais'
-                      }}
-                    icon_color: >-
-                      {{
-                      iif(states('sensor.backup_github_status')=='OK','green','red')
-                      }}
-                    tap_action:
-                      action: none
-                    hold_action:
-                      action: none
-                card_mod:
-                  style: |
-                    ha-card {
-                      border: none !important;
-                      box-shadow: none !important;
-                      background: transparent;
-                    }
-              - type: custom:mushroom-chips-card
-                alignment: center
-                chips:
-                  - type: template
-                    entity: sensor.git_last_weekly_tag
-                    icon: mdi:tag
-                    content: '{{ states(''sensor.git_last_weekly_tag'') or ''no tag'' }}'
-                    icon_color: >-
-                      {% set tag = states('sensor.git_last_weekly_tag') %} {%
-                      set iso = now().isocalendar() %} {% set current =
-                      "weekly-%04d-W%02d" | format(iso[0], iso[1]) %} {{ 'green'
-                      if (tag and tag.startswith(current)) else 'amber' }}
-                    tap_action:
-                      action: url
-                      url_path: >-
-                        https://github.com/BerrySwann/home_assistant_re-build/tags
-                      new_tab: true
-                    hold_action:
-                      action: call-service
-                      service: shell_command.git_backup_push_weekly
-                      confirmation:
-                        text: Créer un tag hebdomadaire ?
-                  - type: template
-                    entity: sensor.github_default_branch
-                    icon: mdi:source-branch
-                    content: >-
-                      Branche: {{ states('sensor.github_default_branch') or
-                      'unknown' }}
-                    icon_color: >-
-                      {% set b = states('sensor.github_default_branch') %} {{
-                      'green' if b == 'main' else 'amber' }}
-                    tap_action:
-                      action: url
-                      url_path: https://github.com/BerrySwann/home_assistant_re-build
-                      new_tab: true
-                  - type: template
-                    icon: mdi:cloud-upload-outline
-                    content: Push
-                    icon_color: deep-orange
-                    tap_action:
-                      action: call-service
-                      service: shell_command.git_backup_push_manual
-                      confirmation:
-                        text: Lancer un push Git manuel ?
-                    hold_action:
-                      action: url
-                      url_path: >-
-                        https://github.com/BerrySwann/home_assistant_re-build/commits/main
-                      new_tab: true
-                card_mod:
-                  style: |
-                    ha-card {
-                      border: none !important;
-                      box-shadow: none !important;
-                      background: transparent;
-                    }
-              - type: custom:mushroom-title-card
-                title: Journal Backup (10 derniers)
-                alignment: center
-                card_mod:
-                  style: |
-                    ha-card {
-                      border: none !important;
-                      box-shadow: none !important;
-                      background: transparent;
-                    }
-              - type: markdown
-                content: |-
-                  ```
-                  {{ state_attr('sensor.backup_github_journal','text') or '—' }}
-                  ```
-                card_mod:
-                  style: |
-                    ha-card {
-                      border: none !important;
-                      box-shadow: none !important;
-                      background: transparent;
-                    }
-              - type: custom:apexcharts-card
-                header:
-                  title: Backup GitHub — OK/KO
-                graph_span: 7d
-                span:
-                  end: day
-                yaxis:
-                  - min: 0
-                    max: 1
-                    decimals: 0
-                series:
-                  - entity: sensor.backup_github_status
-                    name: Statut
-                    type: column
-                    transform: 'EVAL: return x === ''OK'' ? 1 : 0;'
-                    group_by:
-                      duration: 6h
-                      func: last
-                apex_config:
-                  yaxis:
-                    tickAmount: 2
-                    labels:
-                      formatter: >
-                        EVAL: function (value) { return value === 1 ? 'OK' :
-                        'KO'; }
-                card_mod:
-                  style: |
-                    ha-card {
-                      border: none !important;
-                      box-shadow: none !important;
-                      background: transparent;
-                    }
-          - type: custom:bubble-card
-            card_type: separator
-            name: Restart VSCode
-            icon: mdi:check-bold
-            rows: 2
-            styles: |-
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 1;
-              }
-            card_layout: normal
-          - type: custom:button-card
-            entity: automation.redemarrage_quotidien_studio_code_server
-            name: Redémarrer Studio Code Server
-            icon: mdi:restart
-            tap_action:
-              action: call-service
-              service: automation.trigger
-              service_data:
-                entity_id: automation.redemarrage_quotidien_studio_code_server
-            styles:
-              card:
-                - background: transparent
-                - border: 0.1px solid white
-                - border-radius: 12px
-                - color: white
-                - font-size: 14px
-                - padding: 4px
-              icon:
-                - width: 40px
-                - height: 40px
-                - color: white
-              name:
-                - font-size: 16px
-                - margin-top: 12px
-          - type: custom:bubble-card
-            card_type: separator
-            name: MariaDB
-            icon: mdi:database-cog-outline
-            rows: 2
-            styles: |-
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 1;
-              }
-            card_layout: normal
-          - type: custom:button-card
-            entity: automation.db_purge_mariadb_repack
-            name: '[DB] Purge MariaDB + Repack'
-            icon: mdi:database-check-outline
-            tap_action:
-              action: call-service
-              service: automation.trigger
-              service_data:
-                entity_id: automation.db_purge_mariadb_repack
-            styles:
-              card:
-                - background: transparent
-                - border: 0.1px solid white
-                - border-radius: 12px
-                - color: white
-                - font-size: 14px
-                - padding: 4px
-              icon:
-                - width: 40px
-                - height: 40px
-                - color: white
-              name:
-                - font-size: 16px
-                - margin-top: 12px
-    cards: []
-    title: MariaDB / GitHub
   - type: sections
     max_columns: 1
     title: VIGIEAU / VIGI - EAU
