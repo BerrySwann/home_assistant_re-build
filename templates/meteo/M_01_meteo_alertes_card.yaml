@@ -1,6 +1,21 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATES : SÉRIE 01. MÉTÉO — ALERTES VENCE (06140)                      │
+# │ MODÈLE : M_01 MÉTÉO ALERTES VENCE (CATÉGORIE M. ENVIRONNEMENT)           │
 # ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Regroupement et formatage des alertes Météo France (Vigilance) pour 
+# affichage dynamique (couleurs/icônes) sur l'interface.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : sensor.meteo_france_vence_weather_alert (ou équivalent)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# Ce fichier est dédié à l'UI. Il ne contient aucun calcul d'énergie. 
+# Attention aux mises à jour de l'intégration Météo France qui peuvent 
+# changer le nom des attributs.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert à la remontée d'info pour la vignette : Météo / Alertes
 
 - sensor:
 
