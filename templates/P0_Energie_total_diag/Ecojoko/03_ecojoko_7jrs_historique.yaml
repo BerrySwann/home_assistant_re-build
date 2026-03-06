@@ -1,103 +1,137 @@
-# ╭──────────────────────────────────────────────────────────────────────────────╮
-# │ SENSOR : PÔLE 2. ECOJOKO — SNAPSHOT J-1 À J-7 (CASCADE 23:59:55)             │
-# ╰──────────────────────────────────────────────────────────────────────────────╯
-# ┌───────────────────────────────────┐
-# │ Ecojoko / Linky                   │
-# └───────────────────────────────────┘
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ SENSOR : PÔLE 0. ECOJOKO — SNAPSHOT J-1 À J-7 (DÉCALAGE À MINUIT)        │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Historique glissant des 7 derniers jours de consommation Ecojoko.
+# Le déclenchement se fait à 00:00:10 pour laisser le temps au Utility Meter 
+# de basculer sa valeur 'last_period'.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - J1 : Récupère 'last_period' (la journée terminée) du sensor UM.
+# - J2 à J7 : Décalage en cascade des valeurs précédentes.
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# Ne pas déclencher à 23:59:59 sinon last_period n'est pas encore à jour.
+# L'utilisation de 'variables' permet de figer les anciennes valeurs pour
+# éviter que J2 ne copie la nouvelle valeur de J1 par erreur.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert à la remontée d'info pour la vignette : L2C1 Conso Énergie Générale
 
-- trigger:
-    - platform: time
-      at: "23:59:59"
+template:
+  - trigger:
+      - platform: time
+        at: "00:00:01"
+      - platform: event
+        event_type: event_template_reloaded
+    
+    # Capture des anciennes valeurs AVANT la mise à jour pour la cascade
+    variables:
+      old_j1: "{{ states('sensor.ecojoko_j1_kwh') | float(0) }}"
+      old_j1_hp: "{{ state_attr('sensor.ecojoko_j1_kwh', 'hp_kwh') | float(0) }}"
+      old_j1_hc: "{{ state_attr('sensor.ecojoko_j1_kwh', 'hc_kwh') | float(0) }}"
+      
+      old_j2: "{{ states('sensor.ecojoko_j2_kwh') | float(0) }}"
+      old_j2_hp: "{{ state_attr('sensor.ecojoko_j2_kwh', 'hp_kwh') | float(0) }}"
+      old_j2_hc: "{{ state_attr('sensor.ecojoko_j2_kwh', 'hc_kwh') | float(0) }}"
 
-  sensor:
+      old_j3: "{{ states('sensor.ecojoko_j3_kwh') | float(0) }}"
+      old_j3_hp: "{{ state_attr('sensor.ecojoko_j3_kwh', 'hp_kwh') | float(0) }}"
+      old_j3_hc: "{{ state_attr('sensor.ecojoko_j3_kwh', 'hc_kwh') | float(0) }}"
 
-# ╭──────────────────────────────────────────────────────────────────────────────╮
-# │ 1. HISTORIQUE EN CASCADE (kWh)                                               │
-# ╰──────────────────────────────────────────────────────────────────────────────╯
+      old_j4: "{{ states('sensor.ecojoko_j4_kwh') | float(0) }}"
+      old_j4_hp: "{{ state_attr('sensor.ecojoko_j4_kwh', 'hp_kwh') | float(0) }}"
+      old_j4_hc: "{{ state_attr('sensor.ecojoko_j4_kwh', 'hc_kwh') | float(0) }}"
 
-    # --- ecojoko_j1_kwh ---
-    # Source : last_period du UM quotidien = valeur du jour qui se termine (= Hier demain)
-    - name: "Ecojoko J1 kWh"
-      unique_id: ecojoko_j1_kwh
-      unit_of_measurement: "kWh"
-      device_class: energy
-      state_class: total
-      state: >
-        {{ state_attr('sensor.ecojoko_reseau_quotidien_um', 'last_period') | float(0) | round(2) }}
-      attributes:
-        jour: "{{ (now() - timedelta(days=1)).strftime('%A %d/%m') }}"
-        hp_kwh: "{{ state_attr('sensor.ecojoko_hp_reseau_quotidien_um', 'last_period') | float(0) | round(2) }}"
-        hc_kwh: "{{ state_attr('sensor.ecojoko_hc_reseau_quotidien_um', 'last_period') | float(0) | round(2) }}"
+      old_j5: "{{ states('sensor.ecojoko_j5_kwh') | float(0) }}"
+      old_j5_hp: "{{ state_attr('sensor.ecojoko_j5_kwh', 'hp_kwh') | float(0) }}"
+      old_j5_hc: "{{ state_attr('sensor.ecojoko_j5_kwh', 'hc_kwh') | float(0) }}"
 
-    # --- ecojoko_j2_kwh ---
-    # Source : ecojoko_j1_kwh (cascade — valeur de J1 AVANT sa mise à jour)
-    - name: "Ecojoko J2 kWh"
-      unique_id: ecojoko_j2_kwh
-      unit_of_measurement: "kWh"
-      device_class: energy
-      state_class: total
-      state: "{{ states('sensor.ecojoko_j1_kwh') | float(0) | round(2) }}"
-      attributes:
-        jour: "{{ (now() - timedelta(days=2)).strftime('%A %d/%m') }}"
-        hp_kwh: "{{ state_attr('sensor.ecojoko_j1_kwh', 'hp_kwh') | float(0) | round(2) }}"
-        hc_kwh: "{{ state_attr('sensor.ecojoko_j1_kwh', 'hc_kwh') | float(0) | round(2) }}"
+      old_j6: "{{ states('sensor.ecojoko_j6_kwh') | float(0) }}"
+      old_j6_hp: "{{ state_attr('sensor.ecojoko_j6_kwh', 'hp_kwh') | float(0) }}"
+      old_j6_hc: "{{ state_attr('sensor.ecojoko_j6_kwh', 'hc_kwh') | float(0) }}"
 
-    # --- ecojoko_j3_kwh ---
-    - name: "Ecojoko J3 kWh"
-      unique_id: ecojoko_j3_kwh
-      unit_of_measurement: "kWh"
-      device_class: energy
-      state_class: total
-      state: "{{ states('sensor.ecojoko_j2_kwh') | float(0) | round(2) }}"
-      attributes:
-        jour: "{{ (now() - timedelta(days=3)).strftime('%A %d/%m') }}"
-        hp_kwh: "{{ state_attr('sensor.ecojoko_j2_kwh', 'hp_kwh') | float(0) | round(2) }}"
-        hc_kwh: "{{ state_attr('sensor.ecojoko_j2_kwh', 'hc_kwh') | float(0) | round(2) }}"
+    sensor:
+      # --- ecojoko_j1_kwh ---
+      # On prend le 'last_period' qui contient désormais la journée d'hier.
+      - name: "Ecojoko J1 kWh"
+        unique_id: ecojoko_j1_kwh
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: "{{ state_attr('sensor.ecojoko_reseau_quotidien_um', 'last_period') | float(0) | round(2) }}"
+        attributes:
+          jour: "{{ (now() - timedelta(days=1)).strftime('%A %d/%m') }}"
+          hp_kwh: "{{ state_attr('sensor.ecojoko_hp_reseau_quotidien_um', 'last_period') | float(0) | round(2) }}"
+          hc_kwh: "{{ state_attr('sensor.ecojoko_hc_reseau_quotidien_um', 'last_period') | float(0) | round(2) }}"
 
-    # --- ecojoko_j4_kwh ---
-    - name: "Ecojoko J4 kWh"
-      unique_id: ecojoko_j4_kwh
-      unit_of_measurement: "kWh"
-      device_class: energy
-      state_class: total
-      state: "{{ states('sensor.ecojoko_j3_kwh') | float(0) | round(2) }}"
-      attributes:
-        jour: "{{ (now() - timedelta(days=4)).strftime('%A %d/%m') }}"
-        hp_kwh: "{{ state_attr('sensor.ecojoko_j3_kwh', 'hp_kwh') | float(0) | round(2) }}"
-        hc_kwh: "{{ state_attr('sensor.ecojoko_j3_kwh', 'hc_kwh') | float(0) | round(2) }}"
+      # --- ecojoko_j2_kwh ---
+      - name: "Ecojoko J2 kWh"
+        unique_id: ecojoko_j2_kwh
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: "{{ old_j1 | round(2) }}"
+        attributes:
+          jour: "{{ (now() - timedelta(days=2)).strftime('%A %d/%m') }}"
+          hp_kwh: "{{ old_j1_hp | round(2) }}"
+          hc_kwh: "{{ old_j1_hc | round(2) }}"
 
-    # --- ecojoko_j5_kwh ---
-    - name: "Ecojoko J5 kWh"
-      unique_id: ecojoko_j5_kwh
-      unit_of_measurement: "kWh"
-      device_class: energy
-      state_class: total
-      state: "{{ states('sensor.ecojoko_j4_kwh') | float(0) | round(2) }}"
-      attributes:
-        jour: "{{ (now() - timedelta(days=5)).strftime('%A %d/%m') }}"
-        hp_kwh: "{{ state_attr('sensor.ecojoko_j4_kwh', 'hp_kwh') | float(0) | round(2) }}"
-        hc_kwh: "{{ state_attr('sensor.ecojoko_j4_kwh', 'hc_kwh') | float(0) | round(2) }}"
+      # --- ecojoko_j3_kwh ---
+      - name: "Ecojoko J3 kWh"
+        unique_id: ecojoko_j3_kwh
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: "{{ old_j2 | round(2) }}"
+        attributes:
+          jour: "{{ (now() - timedelta(days=3)).strftime('%A %d/%m') }}"
+          hp_kwh: "{{ old_j2_hp | round(2) }}"
+          hc_kwh: "{{ old_j2_hc | round(2) }}"
 
-    # --- ecojoko_j6_kwh ---
-    - name: "Ecojoko J6 kWh"
-      unique_id: ecojoko_j6_kwh
-      unit_of_measurement: "kWh"
-      device_class: energy
-      state_class: total
-      state: "{{ states('sensor.ecojoko_j5_kwh') | float(0) | round(2) }}"
-      attributes:
-        jour: "{{ (now() - timedelta(days=6)).strftime('%A %d/%m') }}"
-        hp_kwh: "{{ state_attr('sensor.ecojoko_j5_kwh', 'hp_kwh') | float(0) | round(2) }}"
-        hc_kwh: "{{ state_attr('sensor.ecojoko_j5_kwh', 'hc_kwh') | float(0) | round(2) }}"
+      # --- ecojoko_j4_kwh ---
+      - name: "Ecojoko J4 kWh"
+        unique_id: ecojoko_j4_kwh
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: "{{ old_j3 | round(2) }}"
+        attributes:
+          jour: "{{ (now() - timedelta(days=4)).strftime('%A %d/%m') }}"
+          hp_kwh: "{{ old_j3_hp | round(2) }}"
+          hc_kwh: "{{ old_j3_hc | round(2) }}"
 
-    # --- ecojoko_j7_kwh ---
-    - name: "Ecojoko J7 kWh"
-      unique_id: ecojoko_j7_kwh
-      unit_of_measurement: "kWh"
-      device_class: energy
-      state_class: total
-      state: "{{ states('sensor.ecojoko_j6_kwh') | float(0) | round(2) }}"
-      attributes:
-        jour: "{{ (now() - timedelta(days=7)).strftime('%A %d/%m') }}"
-        hp_kwh: "{{ state_attr('sensor.ecojoko_j6_kwh', 'hp_kwh') | float(0) | round(2) }}"
-        hc_kwh: "{{ state_attr('sensor.ecojoko_j6_kwh', 'hc_kwh') | float(0) | round(2) }}"
+      # --- ecojoko_j5_kwh ---
+      - name: "Ecojoko J5 kWh"
+        unique_id: ecojoko_j5_kwh
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: "{{ old_j4 | round(2) }}"
+        attributes:
+          jour: "{{ (now() - timedelta(days=5)).strftime('%A %d/%m') }}"
+          hp_kwh: "{{ old_j4_hp | round(2) }}"
+          hc_kwh: "{{ old_j4_hc | round(2) }}"
+
+      # --- ecojoko_j6_kwh ---
+      - name: "Ecojoko J6 kWh"
+        unique_id: ecojoko_j6_kwh
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: "{{ old_j5 | round(2) }}"
+        attributes:
+          jour: "{{ (now() - timedelta(days=6)).strftime('%A %d/%m') }}"
+          hp_kwh: "{{ old_j5_hp | round(2) }}"
+          hc_kwh: "{{ old_j5_hc | round(2) }}"
+
+      # --- ecojoko_j7_kwh ---
+      - name: "Ecojoko J7 kWh"
+        unique_id: ecojoko_j7_kwh
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: "{{ old_j6 | round(2) }}"
+        attributes:
+          jour: "{{ (now() - timedelta(days=7)).strftime('%A %d/%m') }}"
+          hp_kwh: "{{ old_j6_hp | round(2) }}"
+          hc_kwh: "{{ old_j6_hc | round(2) }}"
+
+# annotations_log:
+# - [L38-39] Correction du trigger : passage à 00:00:10 pour garantir le reset du Utility Meter.
+# - [L43-65] Ajout du bloc 'variables' pour figer la cascade et éviter les conflits de mise à jour.
+# - [Global] Mise en conformité avec l'arborescence Pôle 0 et titrage ASCII arrondi.
