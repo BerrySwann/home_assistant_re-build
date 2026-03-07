@@ -19,7 +19,6 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Sert à la remontée d'info pour la vignette : L2C1 Conso Énergie Générale
 
-template:
   - trigger:
       - platform: time
         at: "00:00:01"
