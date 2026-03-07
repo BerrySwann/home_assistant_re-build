@@ -1,10 +1,25 @@
-# ╭────────────────────────────────────────────────────────────────────────╮
-# │ SENSOR : SÉRIE 11. ÉNERGIE — LINKY (J0..J7)                            │
-# ╰────────────────────────────────────────────────────────────────────────╯
+# ╭────────────────────────────────────────────────────────────────────────────╮
+# │ TEMPLATE : PÔLE 0. ÉNERGIE — LINKY HISTORIQUE J0..J7                      │
+# ╰────────────────────────────────────────────────────────────────────────────╯
+#
+# RÔLE : Expose 8 sensors (J0 = aujourd'hui via Ecojoko, J1..J7 via MEData)
+#         avec attributs : jour, total_kwh, hp_kwh, hc_kwh, cout
+#         → Utilisés par la carte flex-table-card dans page_energie_home.yaml
+#
+# SOURCES :
+#   J0  → sensor.ecojoko_consommation_hp/hc_reseau (Ecojoko — journée en cours)
+#   J1+ → sensor.linky_25481620821301_consumption  (MEData — historique daily)
+#           attributs: day_N_HP / day_N_HC (Wh → /1000 → kWh)
+#                      dailyweek[N-1] (date string pour libellé jour)
+#                      dailyweek_cost[N-1] (coût estimé €)
+#   Tarifs → sensor.tarif_heures_pleines_ttc / sensor.tarif_heures_creuses_ttc
+#
+# DASHBOARD : dashbord/page_energie_home.yaml (flex-table-card)
+#
 
 - sensor:
     # ┌───────────────────────────────────┐
-    # │ 1. AUJOURD'HUI (ECOJOKO)          │
+    # │ 1. AUJOURD'HUI — J0 (ECOJOKO)     │
     # └───────────────────────────────────┘
     # --- linky_jour_0 ---
     - name: "Linky Jour 0"
@@ -30,7 +45,7 @@
               states('sensor.tarif_heures_creuses_ttc') | float(0))) | round(2) }}
 
     # ┌───────────────────────────────────┐
-    # │ 2. HISTORIQUE (LINKY)             │
+    # │ 2. HISTORIQUE — J1..J7 (MEDATA)   │
     # └───────────────────────────────────┘
     # --- linky_jour_1 ---
     - name: "Linky Jour 1"
@@ -43,13 +58,9 @@
       attributes:
         jour: >-
           {% set jours = {
-            'Monday': 'Lundi',
-            'Tuesday': 'Mardi',
-            'Wednesday': 'Mercredi',
-            'Thursday': 'Jeudi',
-            'Friday': 'Vendredi',
-            'Saturday': 'Samedi',
-            'Sunday': 'Dimanche'
+            'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi',
+            'Thursday': 'Jeudi', 'Friday': 'Vendredi',
+            'Saturday': 'Samedi', 'Sunday': 'Dimanche'
           } %}
           {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
           {% set date_str = dailyweek[0] if dailyweek else None %}
@@ -58,13 +69,10 @@
               {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
             {% elif '/' in date_str %}
               {% set p = date_str.split('/') %}
-              {% set annee = now().year %}
-              {% set eng = as_timestamp(annee ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
             {% endif %}
             {{ jours[eng] if eng in jours else eng }}
-          {% else %}
-            Inconnu
-          {% endif %}
+          {% else %}Inconnu{% endif %}
         hp_kwh: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_1_HP') | float(0) / 1000) | round(1) }}
         hc_kwh: >-
@@ -86,13 +94,9 @@
       attributes:
         jour: >-
           {% set jours = {
-            'Monday': 'Lundi',
-            'Tuesday': 'Mardi',
-            'Wednesday': 'Mercredi',
-            'Thursday': 'Jeudi',
-            'Friday': 'Vendredi',
-            'Saturday': 'Samedi',
-            'Sunday': 'Dimanche'
+            'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi',
+            'Thursday': 'Jeudi', 'Friday': 'Vendredi',
+            'Saturday': 'Samedi', 'Sunday': 'Dimanche'
           } %}
           {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
           {% set date_str = dailyweek[1] if dailyweek else None %}
@@ -101,13 +105,10 @@
               {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
             {% elif '/' in date_str %}
               {% set p = date_str.split('/') %}
-              {% set annee = now().year %}
-              {% set eng = as_timestamp(annee ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
             {% endif %}
             {{ jours[eng] if eng in jours else eng }}
-          {% else %}
-            Inconnu
-          {% endif %}
+          {% else %}Inconnu{% endif %}
         hp_kwh: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_2_HP') | float(0) / 1000) | round(1) }}
         hc_kwh: >-
@@ -129,13 +130,9 @@
       attributes:
         jour: >-
           {% set jours = {
-            'Monday': 'Lundi',
-            'Tuesday': 'Mardi',
-            'Wednesday': 'Mercredi',
-            'Thursday': 'Jeudi',
-            'Friday': 'Vendredi',
-            'Saturday': 'Samedi',
-            'Sunday': 'Dimanche'
+            'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi',
+            'Thursday': 'Jeudi', 'Friday': 'Vendredi',
+            'Saturday': 'Samedi', 'Sunday': 'Dimanche'
           } %}
           {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
           {% set date_str = dailyweek[2] if dailyweek else None %}
@@ -144,13 +141,10 @@
               {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
             {% elif '/' in date_str %}
               {% set p = date_str.split('/') %}
-              {% set annee = now().year %}
-              {% set eng = as_timestamp(annee ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
             {% endif %}
             {{ jours[eng] if eng in jours else eng }}
-          {% else %}
-            Inconnu
-          {% endif %}
+          {% else %}Inconnu{% endif %}
         hp_kwh: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_3_HP') | float(0) / 1000) | round(1) }}
         hc_kwh: >-
@@ -172,13 +166,9 @@
       attributes:
         jour: >-
           {% set jours = {
-            'Monday': 'Lundi',
-            'Tuesday': 'Mardi',
-            'Wednesday': 'Mercredi',
-            'Thursday': 'Jeudi',
-            'Friday': 'Vendredi',
-            'Saturday': 'Samedi',
-            'Sunday': 'Dimanche'
+            'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi',
+            'Thursday': 'Jeudi', 'Friday': 'Vendredi',
+            'Saturday': 'Samedi', 'Sunday': 'Dimanche'
           } %}
           {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
           {% set date_str = dailyweek[3] if dailyweek else None %}
@@ -187,13 +177,10 @@
               {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
             {% elif '/' in date_str %}
               {% set p = date_str.split('/') %}
-              {% set annee = now().year %}
-              {% set eng = as_timestamp(annee ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
             {% endif %}
             {{ jours[eng] if eng in jours else eng }}
-          {% else %}
-            Inconnu
-          {% endif %}
+          {% else %}Inconnu{% endif %}
         hp_kwh: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_4_HP') | float(0) / 1000) | round(1) }}
         hc_kwh: >-
@@ -215,13 +202,9 @@
       attributes:
         jour: >-
           {% set jours = {
-            'Monday': 'Lundi',
-            'Tuesday': 'Mardi',
-            'Wednesday': 'Mercredi',
-            'Thursday': 'Jeudi',
-            'Friday': 'Vendredi',
-            'Saturday': 'Samedi',
-            'Sunday': 'Dimanche'
+            'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi',
+            'Thursday': 'Jeudi', 'Friday': 'Vendredi',
+            'Saturday': 'Samedi', 'Sunday': 'Dimanche'
           } %}
           {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
           {% set date_str = dailyweek[4] if dailyweek else None %}
@@ -230,13 +213,10 @@
               {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
             {% elif '/' in date_str %}
               {% set p = date_str.split('/') %}
-              {% set annee = now().year %}
-              {% set eng = as_timestamp(annee ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
             {% endif %}
             {{ jours[eng] if eng in jours else eng }}
-          {% else %}
-            Inconnu
-          {% endif %}
+          {% else %}Inconnu{% endif %}
         hp_kwh: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_5_HP') | float(0) / 1000) | round(1) }}
         hc_kwh: >-
@@ -258,13 +238,9 @@
       attributes:
         jour: >-
           {% set jours = {
-            'Monday': 'Lundi',
-            'Tuesday': 'Mardi',
-            'Wednesday': 'Mercredi',
-            'Thursday': 'Jeudi',
-            'Friday': 'Vendredi',
-            'Saturday': 'Samedi',
-            'Sunday': 'Dimanche'
+            'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi',
+            'Thursday': 'Jeudi', 'Friday': 'Vendredi',
+            'Saturday': 'Samedi', 'Sunday': 'Dimanche'
           } %}
           {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
           {% set date_str = dailyweek[5] if dailyweek else None %}
@@ -273,13 +249,10 @@
               {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
             {% elif '/' in date_str %}
               {% set p = date_str.split('/') %}
-              {% set annee = now().year %}
-              {% set eng = as_timestamp(annee ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
             {% endif %}
             {{ jours[eng] if eng in jours else eng }}
-          {% else %}
-            Inconnu
-          {% endif %}
+          {% else %}Inconnu{% endif %}
         hp_kwh: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_6_HP') | float(0) / 1000) | round(1) }}
         hc_kwh: >-
@@ -301,13 +274,9 @@
       attributes:
         jour: >-
           {% set jours = {
-            'Monday': 'Lundi',
-            'Tuesday': 'Mardi',
-            'Wednesday': 'Mercredi',
-            'Thursday': 'Jeudi',
-            'Friday': 'Vendredi',
-            'Saturday': 'Samedi',
-            'Sunday': 'Dimanche'
+            'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi',
+            'Thursday': 'Jeudi', 'Friday': 'Vendredi',
+            'Saturday': 'Samedi', 'Sunday': 'Dimanche'
           } %}
           {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
           {% set date_str = dailyweek[6] if dailyweek else None %}
@@ -316,13 +285,10 @@
               {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
             {% elif '/' in date_str %}
               {% set p = date_str.split('/') %}
-              {% set annee = now().year %}
-              {% set eng = as_timestamp(annee ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
             {% endif %}
             {{ jours[eng] if eng in jours else eng }}
-          {% else %}
-            Inconnu
-          {% endif %}
+          {% else %}Inconnu{% endif %}
         hp_kwh: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_7_HP') | float(0) / 1000) | round(1) }}
         hc_kwh: >-
@@ -334,7 +300,6 @@
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[6] | float(0)) | round(1) }}
 
 # annotations_log:
-# - [L1-3] Mise en forme du titre principal (Boîte ASCII arrondie 74 car).
-# - [L6-8] Ajout du titre secondaire (Boîte ASCII carrée 37 car).
-# - [L9,29,75,121,167,213,259,305] Ajout des titres tertiaires (slugs).
-# - [Global] Fusion des blocs sensor et standardisation de l'indentation.
+#   - 2026-03-07: migration depuis ancien repo (11_2_energie_linky_25481620821301_card.yaml)
+#                 refactoring: dict jours inline, now().year (plus robuste)
+#                 emplacement: templates/P0_Energie_total_diag/Linky/

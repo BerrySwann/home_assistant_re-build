@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATE : PÔLE 0. ECOJOKO — AVG WATTS (A/M/H/Q)                            │
+# │ TEMPLATE : PÔLE 0. ECOJOKO — AVG WATTS (A/M/H/Q)                             │
 # ╰──────────────────────────────────────────────────────────────────────────────╯
 #
 # FORMULE : (kWh_cumulé × 1000) / heures_écoulées_depuis_reset → W moyen
@@ -12,7 +12,7 @@
 #   Annuel     → sensor.ecojoko_reseau_annuel_um       (reset 1er jan)
 #
 # ┌───────────────────────────────────┐
-# │ 10. AUTRE (Ecojoko / Linky)       │
+# │ Ecojoko                           │
 # └───────────────────────────────────┘
 
 - sensor:
