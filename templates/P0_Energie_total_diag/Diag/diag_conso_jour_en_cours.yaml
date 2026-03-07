@@ -61,7 +61,8 @@
       state_class: total_increasing
       icon: mdi:monitor-dashboard
       state: >
-        {{ (states('sensor.prise_box_internet_ikea_quotidien_kwh_um') | float(0) + 
+        {{ (states('sensor.prise_box_internet_ikea_quotidien_kwh_um') | float(0) +
+            states('sensor.prise_tv_salon_ikea_quotidien_kwh_um') | float(0) + 
             states('sensor.prise_pc_s_gege_ikea_quotidien_kwh_um') | float(0) + 
             states('sensor.prise_bureau_pc_ikea_quotidien_kwh_um') | float(0) +
             states('sensor.prise_tv_chambre_nous_quotidien_kwh_um') | float(0)) | round(3) }}
