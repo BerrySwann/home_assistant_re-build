@@ -48,6 +48,16 @@
     unit_time: h
     round: 3
 
+# --- prise_tv_salon_ikea_energie_totale_kwh --- # "[L51] modif: ajout TV Salon"
+  - platform: integration
+    source: sensor.prise_tv_salon_ikea_power
+    name: "Prise TV Salon IKEA Energie Totale kWh"
+    unique_id: prise_tv_salon_ikea_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
 # ┌───────────────────────────────────┐
 # │ 5. CUISINE                        │
 # └───────────────────────────────────┘
