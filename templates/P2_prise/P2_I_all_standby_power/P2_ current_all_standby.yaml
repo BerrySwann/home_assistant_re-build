@@ -13,7 +13,7 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Vignette L2C1/L2C3 (Détails de consommation des veilles).
 
-sensor:
+- sensor:
   # --- all_standby_current ---
   - name: "All Standby Current"
     unique_id: all_standby_current

@@ -18,7 +18,7 @@
 # - Sert aux graphiques de détails affichés au clic depuis la vignette : 
 #   L3C2 Commandes Éco (Prises).
 
-sensor: 
+- sensor: 
   # ┌───────────────────────────────────┐
   # │ 1. ENTRÉE                         │
   # └───────────────────────────────────┘
