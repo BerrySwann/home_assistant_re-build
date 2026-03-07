@@ -27,17 +27,17 @@ ikea_devices:
 hue_devices:
   name: "HUE Devices"
   entities:
-    - sensor.hue_smart_button_entee_1_battery
-    - sensor.hue_smart_button_entee_2_battery
-    - sensor.hue_smart_button_eco_battery
-    - sensor.hue_smart_button_table_battery
-    - sensor.hue_smart_button_cuisine_battery
-    - sensor.hue_smart_button_couloir_battery
-    - sensor.hue_smart_button_batterie
+    - sensor.hue_smart_button_entee_1_batterie
+    - sensor.hue_smart_button_entee_2_batterie
+    - sensor.hue_smart_button_eco_batterie
+    - sensor.hue_smart_button_table_batterie
+    - sensor.hue_smart_button_cuisine_batterie
+    - sensor.hue_smart_button_couloir_batterie
+    - sensor.hue_smart_button_bureau_batterie
     - sensor.boutton_salle_de_bain_hue_battery
-    - sensor.hue_smart_button_chambre_battery
-    - sensor.eric_hue_smart_button_chambre_battery
-    - sensor.gege_hue_smart_button_chambre_battery
+    - sensor.hue_smart_button_chambre_batterie
+    - sensor.hue_smart_button_chambre_gege_batterie
+    - sensor.hue_smart_button_chambre_eric_batterie
 
 # --- sonoff_devices ---
 sonoff_devices:
