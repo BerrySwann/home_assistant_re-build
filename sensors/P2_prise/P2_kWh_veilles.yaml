@@ -1,0 +1,33 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ SENSOR : INTÉGRATION KWH VEILLES GLOBALES (PÔLE 2)                       │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Calcul de l'énergie totale cumulée (en kWh) consommée par l'ensemble 
+# des appareils en veille (Standby) sur les prises connectées.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Convertit la puissance instantanée de 'sensor.all_standby_power' (W) 
+#   en énergie (kWh) via l'intégrale de Riemann.
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - L'utilisation de 'method: left' est stricte pour ne pas fausser 
+#   les calculs lors des variations abruptes de puissance.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert à la remontée d'info pour la vignette : L2C1 Conso Énergie Générale 
+#   (ou L2C3 selon l'affichage souhaité sur le Dashboard).
+
+# --- all_standby_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.all_standby_power
+    name: "All Standby Energie Totale kWh"
+    unique_id: all_standby_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+# annotations_log:
+# - [Création] Fichier dédié pour isoler le calcul global des veilles du reste des prises individuelles.
+# - [L1-16] Ajout de la documentation obligatoire et du titrage ASCII.
