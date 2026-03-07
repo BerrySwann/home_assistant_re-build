@@ -67,6 +67,9 @@ camera: !include camera.yaml
 input_button: !include input_button.yaml
 #input_button: !include_dir_merge_list input_button/
 
+#renvoi au fichier groupe
+group: !include group.yaml
+
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ BASE DE DONNEE MARIADB                                                   │
 # ╰──────────────────────────────────────────────────────────────────────────╯
