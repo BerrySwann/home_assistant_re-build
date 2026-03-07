@@ -1,0 +1,45 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ UTILITY METER : P2_UM_AMHQ_VEILLES | VEILLES GLOBALES (PÔLE 2)           │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Découpage des compteurs d'énergie globaux des veilles (Standby) en 
+# 4 cycles temporels : Annuel, Mensuel, Hebdomadaire, Quotidien (AMHQ).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source unique : 'sensor.all_standby_energie_totale_kwh' (Intégration Riemann).
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Les cycles se réinitialisent automatiquement à minuit (ou au changement
+#   de semaine/mois/année). La valeur précédente est stockée dans 'last_period'.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Alimente la vignette : L2C1 Conso Énergie Générale.
+
+# --- all_standby ---
+all_standby_annuel_kwh_um:
+  source: sensor.all_standby_energie_totale_kwh
+  name: "All Standby Annuel kWh UM"
+  unique_id: all_standby_annuel_kwh_um
+  cycle: yearly
+
+all_standby_mensuel_kwh_um:
+  source: sensor.all_standby_energie_totale_kwh
+  name: "All Standby Mensuel kWh UM"
+  unique_id: all_standby_mensuel_kwh_um
+  cycle: monthly
+
+all_standby_hebdomadaire_kwh_um:
+  source: sensor.all_standby_energie_totale_kwh
+  name: "All Standby Hebdomadaire kWh UM"
+  unique_id: all_standby_hebdomadaire_kwh_um
+  cycle: weekly
+
+all_standby_quotidien_kwh_um:
+  source: sensor.all_standby_energie_totale_kwh
+  name: "All Standby Quotidien kWh UM"
+  unique_id: all_standby_quotidien_kwh_um
+  cycle: daily
+
+# annotations_log:
+# - [Création] Fichier dédié pour le découpage AMHQ des veilles. Nommage standardisé.

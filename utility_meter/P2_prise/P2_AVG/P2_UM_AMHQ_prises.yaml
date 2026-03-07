@@ -1,11 +1,24 @@
-# ╭──────────────────────────────────────────────────────────────────────────────╮
-# │ UTILITY METER : PÔLE 2. PRISES (DÉCOUPAGE A/M/H/Q)                           │
-# ╰──────────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ UTILITY METER : PÔLE 2. PRISES (DÉCOUPAGE AMHQ)                          │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Découpage des compteurs d'énergie (kWh) des prises physiques en 
+# 4 cycles temporels : Annuel, Mensuel, Hebdomadaire, Quotidien.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources : Entités d'intégration de Riemann (_energie_totale_kwh) du Pôle 2.
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ces entités se remettent à zéro automatiquement à la fin de leur cycle.
+# - L'attribut 'last_period' conserve la valeur exacte du cycle précédent.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Alimente la vignette : L2C3 Commandes Éco et les graphiques de suivi.
 
 # ┌───────────────────────────────────┐
 # │ 1. ENTRÉE                         │
 # └───────────────────────────────────┘
-
 # --- prise_box_internet_ikea ---
 prise_box_internet_ikea_annuel_kwh_um:
   source: sensor.prise_box_internet_ikea_energie_totale_kwh
@@ -59,7 +72,6 @@ prise_horloge_ikea_quotidien_kwh_um:
 # ┌───────────────────────────────────┐
 # │ 4. SALON                          │
 # └───────────────────────────────────┘
-
 # --- prise_pc_s_gege_ikea ---
 prise_pc_s_gege_ikea_annuel_kwh_um:
   source: sensor.prise_pc_s_gege_ikea_energie_totale_kwh
@@ -110,7 +122,7 @@ prise_salon_chargeur_nous_quotidien_kwh_um:
   unique_id: prise_salon_chargeur_nous_quotidien_kwh_um
   cycle: daily
 
-# --- prise_tv_salon_ikea --- # "[L113] modif: ajout TV Salon"
+# --- prise_tv_salon_ikea ---
 prise_tv_salon_ikea_annuel_kwh_um:
   source: sensor.prise_tv_salon_ikea_energie_totale_kwh
   name: "Prise TV Salon IKEA Annuel kWh UM"
@@ -138,7 +150,6 @@ prise_tv_salon_ikea_quotidien_kwh_um:
 # ┌───────────────────────────────────┐
 # │ 5. CUISINE                        │
 # └───────────────────────────────────┘
-
 # --- prise_four_micro_ondes_nous ---
 prise_four_micro_ondes_nous_annuel_kwh_um:
   source: sensor.prise_four_micro_ondes_nous_energie_totale_kwh
@@ -342,7 +353,6 @@ prise_congelateur_cuisine_nous_quotidien_kwh_um:
 # ┌───────────────────────────────────┐
 # │ 7. BUREAU                         │
 # └───────────────────────────────────┘
-
 # --- prise_bureau_pc_ikea ---
 prise_bureau_pc_ikea_annuel_kwh_um:
   source: sensor.prise_bureau_pc_ikea_energie_totale_kwh
@@ -396,7 +406,6 @@ prise_bureau_fer_a_repasser_nous_quotidien_kwh_um:
 # ┌───────────────────────────────────┐
 # │ 9. CHAMBRE                        │
 # └───────────────────────────────────┘
-
 # --- prise_tete_de_lit_chambre ---
 prise_tete_de_lit_chambre_annuel_kwh_um:
   source: sensor.prise_tete_de_lit_chambre_energie_totale_kwh
@@ -447,31 +456,6 @@ prise_tv_chambre_nous_quotidien_kwh_um:
   unique_id: prise_tv_chambre_nous_quotidien_kwh_um
   cycle: daily
 
-# ┌───────────────────────────────────┐
-# │ 10. AUTRE                         │
-# └───────────────────────────────────┘
-
-# --- all_standby ---
-all_standby_annuel_kwh_um:
-  source: sensor.all_standby_energie_totale_kwh
-  name: "All Standby Annuel kWh UM"
-  unique_id: all_standby_annuel_kwh_um
-  cycle: yearly
-
-all_standby_mensuel_kwh_um:
-  source: sensor.all_standby_energie_totale_kwh
-  name: "All Standby Mensuel kWh UM"
-  unique_id: all_standby_mensuel_kwh_um
-  cycle: monthly
-
-all_standby_hebdomadaire_kwh_um:
-  source: sensor.all_standby_energie_totale_kwh
-  name: "All Standby Hebdomadaire kWh UM"
-  unique_id: all_standby_hebdomadaire_kwh_um
-  cycle: weekly
-
-all_standby_quotidien_kwh_um:
-  source: sensor.all_standby_energie_totale_kwh
-  name: "All Standby Quotidien kWh UM"
-  unique_id: all_standby_quotidien_kwh_um
-  cycle: daily
+# annotations_log:
+# - [L1-18] Ajout de l'en-tête documentaire.
+# - [L310-335] Suppression de la catégorie "10. AUTRE". Les Utility Meters 'all_standby' sont migrés vers un fichier dédié.
