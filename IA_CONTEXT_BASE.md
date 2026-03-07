@@ -353,35 +353,39 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 └── docs
     ├── IA
     │   └── IA_CONTEXT_BASE.md
+    |
     ├── L1C1_METEO
     │   ├── L1C1_VIGNETTE_METEO.md
     │   ├── PAGE_METEO.md
     │   └── TUTO_IMAGES_ALERTES_METEO_FRANCE.md
+    |
     ├── L1C2_TEMPERATURES
     │   ├── L1C3_VIGNETTE_TEMPERATURES.md
     │   └── PAGE_TEMPERATURES.md
-    ├── L1C2_WIFI_PRESENCE
-    │   └── L1C2_VIGNETTE_WIFI_PRESENCE.md
-    ├── L1C3_TEMPERATURES
-    │   ├── L1C3_VIGNETTE_TEMPERATURES.md
-    │   └── PAGE_TEMPERATURES.md
+    |
     ├── L2C1_ENERGIE
     │   ├── L2C1_VIGNETTE_ENERGIE.md
     │   ├── P2_apexcharts_7jours_optimise_CARD.yaml
     │   ├── PAGE_ENERGIE.md
     │   ├── PAGE_ENERGIE_MENSUEL.md
     │   └── PAGE_ENERGIE_TEMPS_REEL.md
+    |
     ├── L2C2_ENERGIE_PRISES
     │   └── COULEURS_PRISES_PAR_PIECE.md
+    |
     ├── L2C3_ENERGIE_ECLAIRAGE
     │   └── L2C3_VIGNETTE_ECLAIRAGE.md
+    |
     ├── L5C1_PILES_BATTERIES
     │   ├── L5C1_VIGNETTE_BATTERIES.md
     │   └── PAGE_BATTERIES.md
-    ├── REBUILD_SYNC_STATUS.md
-    ├── WIFI_PRESENCE
+    |
+    ├── WIFI_PRESENCE (PAGE HOME)
     │   └── VIGNETTE_WIFI_PRESENCE.md
-    └── _TEMPLATE_DOC.md
+    |
+    └── TEMPLATE_DOC.md
+    |
+    ├── REBUILD_SYNC_STATUS.md
 
 40 directories, 59 files
 ```
