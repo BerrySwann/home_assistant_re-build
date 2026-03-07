@@ -110,6 +110,31 @@ prise_salon_chargeur_nous_quotidien_kwh_um:
   unique_id: prise_salon_chargeur_nous_quotidien_kwh_um
   cycle: daily
 
+# --- prise_tv_salon_ikea --- # "[L113] modif: ajout TV Salon"
+prise_tv_salon_ikea_annuel_kwh_um:
+  source: sensor.prise_tv_salon_ikea_energie_totale_kwh
+  name: "Prise TV Salon IKEA Annuel kWh UM"
+  unique_id: prise_tv_salon_ikea_annuel_kwh_um
+  cycle: yearly
+
+prise_tv_salon_ikea_mensuel_kwh_um:
+  source: sensor.prise_tv_salon_ikea_energie_totale_kwh
+  name: "Prise TV Salon IKEA Mensuel kWh UM"
+  unique_id: prise_tv_salon_ikea_mensuel_kwh_um
+  cycle: monthly
+
+prise_tv_salon_ikea_hebdomadaire_kwh_um:
+  source: sensor.prise_tv_salon_ikea_energie_totale_kwh
+  name: "Prise TV Salon IKEA Hebdomadaire kWh UM"
+  unique_id: prise_tv_salon_ikea_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_tv_salon_ikea_quotidien_kwh_um:
+  source: sensor.prise_tv_salon_ikea_energie_totale_kwh
+  name: "Prise TV Salon IKEA Quotidien kWh UM"
+  unique_id: prise_tv_salon_ikea_quotidien_kwh_um
+  cycle: daily
+
 # ┌───────────────────────────────────┐
 # │ 5. CUISINE                        │
 # └───────────────────────────────────┘

@@ -168,6 +168,46 @@
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
+    # --- tv_salon_avg_watts_quotidien --- # "[L171] modif: ajout TV Salon"
+    - name: "Tv Salon Avg Watts Quotidien"
+      unique_id: tv_salon_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.prise_tv_salon_ikea_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- tv_salon_avg_watts_hebdomadaire ---
+    - name: "Tv Salon Avg Watts Hebdomadaire"
+      unique_id: tv_salon_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.prise_tv_salon_ikea_hebdomadaire_kwh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- tv_salon_avg_watts_mensuel ---
+    - name: "Tv Salon Avg Watts Mensuel"
+      unique_id: tv_salon_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.prise_tv_salon_ikea_mensuel_kwh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- tv_salon_avg_watts_annuel ---
+    - name: "Tv Salon Avg Watts Annuel"
+      unique_id: tv_salon_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.prise_tv_salon_ikea_annuel_kwh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
     # ┌───────────────────────────────────┐
     # │ 5. CUISINE                        │
     # └───────────────────────────────────┘
