@@ -19,7 +19,7 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Sert à la remontée d'info pour la vignette : L2C1 Conso Énergie Générale
 
-sensor:
+- sensor:
   # --- all_standby_avg_watts_quotidien ---
   - name: "All Standby Avg Watts Quotidien"
     unique_id: all_standby_avg_watts_quotidien
