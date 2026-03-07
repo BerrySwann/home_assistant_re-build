@@ -368,9 +368,7 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
     │   ├── P2_apexcharts_7jours_optimise_CARD.yaml
     │   ├── PAGE_ENERGIE.md
     │   ├── PAGE_ENERGIE_MENSUEL.md
-    │   └── PAGE_ENERGIE_TEMPS_REEL.md
-    |
-    ├── L2C2_ENERGIE_PRISES
+    │   ├── PAGE_ENERGIE_TEMPS_REEL.md
     │   └── COULEURS_PRISES_PAR_PIECE.md
     |
     ├── L2C3_ENERGIE_ECLAIRAGE
