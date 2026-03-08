@@ -1,5 +1,5 @@
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
-*Dernière mise à jour : 2026-03-05*
+*Dernière mise à jour : 2026-03-08*
 
 ---
 
@@ -349,6 +349,9 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 │   └── P3_kWh_3_TOTAL.yaml
 └── meteo
     └── M_03_meteo_sensors_blitzortung.yaml
+
+
+
 /config/home-assistant-config-v2
 └── docs
     ├── IA
