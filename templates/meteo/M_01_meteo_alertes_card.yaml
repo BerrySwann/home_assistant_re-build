@@ -27,7 +27,7 @@
     - name: 'Alerte Vent violent'
       unique_id: sensor.alerte_vent_violent
       state: >-
-        {% set wa = state_attr('sensor.06_weather_alert', 'Vent violent') %}
+        {% set wa = state_attr('sensor.06_weather_alert', 'Vent violent') | default('Vert', true) %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
         {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
         {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
@@ -48,7 +48,7 @@
     - name: 'Alerte Inondation'
       unique_id: sensor.alerte_inondation
       state: >-
-        {% set wa = state_attr('sensor.06_weather_alert', 'Inondation') %}
+        {% set wa = state_attr('sensor.06_weather_alert', 'Inondation') | default('Vert', true) %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
         {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
         {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
@@ -69,7 +69,7 @@
     - name: 'Alerte Orages'
       unique_id: sensor.alerte_orages
       state: >-
-        {% set wa = state_attr('sensor.06_weather_alert', 'Orages') %}
+        {% set wa = state_attr('sensor.06_weather_alert', 'Orages') | default('Vert', true) %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
         {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
         {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
@@ -90,7 +90,7 @@
     - name: 'Alerte Pluie Inondation'
       unique_id: sensor.alerte_pluie_inondation
       state: >-
-        {% set wa = state_attr('sensor.06_weather_alert', 'Pluie-inondation') %}
+        {% set wa = state_attr('sensor.06_weather_alert', 'Pluie-inondation') | default('Vert', true) %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
         {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
         {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
@@ -111,7 +111,7 @@
     - name: 'Alerte Neige-verglas'
       unique_id: sensor.alerte_neige_verglas
       state: >-
-        {% set wa = state_attr('sensor.06_weather_alert', 'Neige-verglas') %}
+        {% set wa = state_attr('sensor.06_weather_alert', 'Neige-verglas') | default('Vert', true) %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
         {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
         {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
@@ -132,7 +132,7 @@
     - name: 'Alerte Grand-froid'
       unique_id: sensor.alerte_grand_froid
       state: >-
-        {% set wa = state_attr('sensor.06_weather_alert', 'Grand-froid') %}
+        {% set wa = state_attr('sensor.06_weather_alert', 'Grand-froid') | default('Vert', true) %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
         {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
         {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
@@ -153,7 +153,7 @@
     - name: 'Alerte Canicule'
       unique_id: sensor.alerte_canicule
       state: >-
-        {% set wa = state_attr('sensor.06_weather_alert', 'Canicule') %}
+        {% set wa = state_attr('sensor.06_weather_alert', 'Canicule') | default('Vert', true) %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
         {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
         {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
@@ -174,7 +174,7 @@
     - name: 'Alerte Avalanches'
       unique_id: sensor.alerte_avalanches
       state: >-
-        {% set wa = state_attr('sensor.06_weather_alert', 'Avalanches') %}
+        {% set wa = state_attr('sensor.06_weather_alert', 'Avalanches') | default('Vert', true) %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
         {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
         {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
@@ -195,7 +195,7 @@
     - name: 'Alerte Vagues-submersion'
       unique_id: sensor.alerte_vagues_submersion
       state: >-
-        {% set wa = state_attr('sensor.06_weather_alert', 'Vagues-submersion') %}
+        {% set wa = state_attr('sensor.06_weather_alert', 'Vagues-submersion') | default('Vert', true) %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
         {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
         {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
@@ -262,3 +262,5 @@
 #           neige/froid/canicule/avalanches/vagues) — TypeError: 'NoneType' not iterable
 #           quand binary_sensor.meteoalarm n'a pas d'attribut 'event' (hors alerte active)
 # - [modif] al: | default('') ajouté dans alerte_meteo (awareness_level NoneType idem)
+# - [modif] wa: | default('Vert', true) ajouté sur les 9 sensors pour éviter les crashs 
+#           TypeError si Météo France retire un attribut (ex: Canicule en hiver).
