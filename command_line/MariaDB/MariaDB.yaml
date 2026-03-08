@@ -1,0 +1,36 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ COMMAND_LINE : TAILLE BASE DE DONNÉES MARIADB                           │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Interroge MariaDB via information_schema pour obtenir la taille réelle
+# de la base homeassistant (data + index) en MB, arrondie à 1 décimale.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Requête : SUM(data_length + index_length) / 1024 / 1024
+# - Base ciblée : homeassistant
+# - Résultat : MB (virgule flottante)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Remplacer YOUR_PASSWORD par le mot de passe MariaDB réel.
+# - Le 2>/dev/null masque les warnings MySQL (ex: insecure password).
+# - tail -n1 isole la valeur numérique (élimine l'en-tête de colonne).
+# - scan_interval 3600 = 1 requête/heure (suffisant, peu volatile).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert à la remontée d'info pour la vignette : [L5C3 Taille DB MariaDB]
+
+# --- taille_db_home_assistant ---
+- sensor:
+    name: "Taille DB Home Assistant"
+    unique_id: taille_db_home_assistant
+    command: >-
+      mysql -u homeassistant -p'YOUR_PASSWORD'
+      -e 'SELECT ROUND(SUM(data_length + index_length) / 1024 / 1024, 1)
+      FROM information_schema.TABLES
+      WHERE table_schema = "homeassistant";'
+      2>/dev/null | tail -n1
+    unit_of_measurement: "MB"
+    icon: mdi:database
+    value_template: "{{ value | float(0) }}"
+    scan_interval: 3600
