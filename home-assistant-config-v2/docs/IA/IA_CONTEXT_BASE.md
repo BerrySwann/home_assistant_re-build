@@ -1,5 +1,5 @@
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
-*Dernière mise à jour : 2026-03-08*
+*Dernière mise à jour : 2026-03-08 — Ajout palette couleurs éclairage 9 pièces*
 
 ---
 
@@ -174,6 +174,56 @@ card_mod:
 - **ZONE 7. (5x) BUREAU** : [somme de] Play 1, 2, 3, Hue White, Hue White. (ex: eclairage_bureau_5_*)
 - **ZONE 8. (2x) SDB** : [somme de] Miroir Sonoff, Hue White. (ex: eclairage_sdb_2_*)
 - **ZONE 9. (4x) CHAMBRE** : [somme de] Hue White 1, 2, Hue Color Zone-1, Hue Color Zone-2. (ex: eclairage_chambre_4_*)
+
+### 🎨 PALETTE COULEURS OFFICIELLE — ÉCLAIRAGE & PRISES (PÔLES 3 & 2)
+> Référence pour `apexcharts-card` (donuts + colonnes) et `--mdc-theme-primary` des `tabbed-card`.
+> Chaque pièce a une famille chromatique distincte pour ses lampes et ses prises. CELLIER et TOILETTE sont en réserve.
+
+| #  | Pièce                    | Couleur     | `--mdc-theme-primary`  | Statut HA   |
+|----|--------------------------|-------------|------------------------|-------------|
+|  1 | ENTRÉE                   | Gris clair  | `rgb(220, 220, 220)`   | ✅ Actif    |
+|  2 | CELLIER                  | Sable       | `rgb(161, 136, 108)`   | 🔒 Réserve  |
+|  3 | TOILETTE                 | Mauve       | `rgb(127, 85, 177)`    | 🔒 Réserve  |
+|  4 | SALON                    | Rose        | `rgb(215, 95, 115)`    | ✅ Actif    |
+|  5 | CUISINE                  | Violet      | `rgb(118, 93, 160)`    | ✅ Actif    |
+|  6 | COULOIR                  | Gris foncé  | `rgb(150, 150, 150)`   | ✅ Actif    |
+|  7 | BUREAU                   | Orange      | `rgb(255, 165, 0)`     | ✅ Actif    |
+|  8 | SDB                      | Bleu        | `rgb(3, 155, 229)`     | ✅ Actif    |
+|  9 | CHAMBRE                  | Vert        | `rgb(88, 130, 70)`     | ✅ Actif    |
+| 10 | AUTRE (Veilles/standby)  | Marron/Gris | `rgb(109, 76, 65)`     | ✅ Actif    |
+
+**Dégradés complets par pièce (clair → foncé) :**
+
+- **1. ENTRÉE** *(Gris clair)*
+  - *Éclairage (1 lampe)* : `rgb(220, 220, 220)`
+  - *Prises (2 appareils)* :`rgb(220, 220, 220)` → `rgb(183, 183, 183)`
+- **2. CELLIER** *(Sable - Réserve)*
+  - *Éclairage* : `rgb(121, 98, 74)`
+- **3. TOILETTE** *(Mauve - Réserve)*
+  - *Éclairage* : `rgba(131, 48, 233, 1)`
+- **4. SALON** *(Rose/Bordeaux)*
+  - *Éclairage (5 lampes)* : `rgb(248, 210, 215)` → `rgb(235, 165, 175)` → `rgb(215, 95, 115)` → `rgb(196, 75, 97)` → `rgb(174, 68, 90)`
+  - *Prises (3 appareils)* : `rgb(248, 210, 215)` → `rgb(235, 165, 175)` → `rgb(215, 95, 115)`
+- **5. CUISINE** *(Violet)*
+  - *Éclairage (1 lampe)* : `rgb(162, 148, 249)`
+  - *Prises (6 appareils)* : `rgb(162, 148, 249)` → `rgb(142, 122, 181)` → `rgb(129, 116, 180)` → `rgb(137, 103, 179)` → `rgb(118, 93, 160)` → `rgb(98, 78, 136)`
+  - *Prises (Froid)* : `cyan` → `rgb(19, 160, 255)`
+- **6. COULOIR** *(Gris foncé)*
+  - *Éclairage (1 lampe)* : rgb(112, 128, 144)
+- **7. BUREAU** *(Orange/Or)*
+  - *Éclairage (5 lampes)* : `rgb(255, 237, 204)` → `rgb(255, 219, 153)` → `rgb(255, 201, 102)` → `rgb(255, 183, 51)` → `rgb(255, 165, 0)`
+  - *Prises (2 appareils)* : `rgb(255, 237, 204)` → `rgb(255, 219, 153)`
+- **8. SDB** *(Bleu)*
+  - *Éclairage (2 lampes)* : `rgb(213, 244, 253)` → `rgb(119, 210, 235)`
+- **9. CHAMBRE** *(Vert)*
+  - *Éclairage (4 lampes)* : `rgb(235, 242, 228)` → `rgb(212, 230, 200)` → `rgb(185, 215, 168)` → `rgb(155, 195, 135)`
+  - *Prises (2 appareils)* : `rgb(235, 242, 228)` → `rgb(212, 230, 200)`
+- **10. AUTRE/Veilles** *(Marron)*
+  - *Prises (Veilles)* : `rgb(109, 76, 65)`
+
+> **Note ECC** : ENTRÉE + CUISINE + COULOIR partagent un seul `tabbed-card` pour l'éclairage avec `--mdc-theme-primary: rgb(118, 93, 160)` (violet Cuisine).
+
+---
 
 ### 4. Pôle Groupe Présence (Pôle 4)
 - **Équipements** : Téléphones mobiles (Poco X7 Pro, etc.), capteurs Wi-Fi (SSID/BSSID), réseau mobile.
@@ -350,8 +400,6 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 └── meteo
     └── M_03_meteo_sensors_blitzortung.yaml
 
-
-
 /config/home-assistant-config-v2
 └── docs
     ├── IA
@@ -386,7 +434,7 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
     |
     └── TEMPLATE_DOC.md
     |
-    ├── REBUILD_SYNC_STATUS.md
+    └── REBUILD_SYNC_STATUS.md
 
 40 directories, 59 files
 ```
