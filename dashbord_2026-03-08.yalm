@@ -3131,10 +3131,10 @@ views:
                 tap_action:
                   action: navigate
                   navigation_path: /dashboard-tablette/battery-bp
-                  entities:
-                    - group.hue_devices
-                    - group.ikea_devices
-                    - group.sonoff_devices
+                entities:
+                  - group.hue_devices
+                  - group.ikea_devices
+                  - group.sonoff_devices
                 triggers_update:
                   - group.hue_devices
                   - group.ikea_devices
@@ -3222,7 +3222,6 @@ views:
                       }
                       function getStyledCount(groupName) {
                         if (hasBatteryBelowThreshold(groupName, 10)) {
-                          // L'émoji ⚠️ avec ton rouge et en gras (font-weight: bold)
                           return '<span style="color: rgb(244,67,54); font-weight: bold;">⚠️</span>';
                         }
                         var group = states[groupName];
@@ -3245,7 +3244,6 @@ views:
                       }
                       function getStyledMarque(name, groupName) {
                         if (hasBatteryBelowThreshold(groupName, 10)) {
-                          // Le nom de la marque passe aussi en ROUGE et en GRAS
                           return `<span style="color: rgb(244,67,54); font-weight: bold;">${name}</span>`;
                         }
                         return name;
@@ -3268,9 +3266,9 @@ views:
                         }
                         return count;
                       }
-                      var hue100_75 = getStyledCount(countBatteriesInRange('group.hue_devices', 76, 99));
-                      var ikea100_75 = getStyledCount(countBatteriesInRange('group.ikea_devices', 76, 99));
-                      var sonoff100_75 = getStyledCount(countBatteriesInRange('group.sonoff_devices', 76, 99));
+                      var hue100_75   = getStyledCount(countBatteriesInRange('group.hue_devices',   74, 100)); // "[L101] modif: lo 76→74, up 99→100"
+                      var ikea100_75  = getStyledCount(countBatteriesInRange('group.ikea_devices',  74, 100)); // "[L102] modif: lo 76→74, up 99→100"
+                      var sonoff100_75 = getStyledCount(countBatteriesInRange('group.sonoff_devices',74, 100)); // "[L103] modif: lo 76→74, up 99→100"
                       return `
                       <div>
                         <div>${hue100_75}</div>
@@ -3295,9 +3293,9 @@ views:
                         }
                         return count;
                       }
-                      var hue75_50 = getStyledCount(countBatteriesInRange('group.hue_devices', 51, 75));
-                      var ikea75_50 = getStyledCount(countBatteriesInRange('group.ikea_devices', 51, 75));
-                      var sonoff75_50 = getStyledCount(countBatteriesInRange('group.sonoff_devices', 51, 75));
+                      var hue75_50   = getStyledCount(countBatteriesInRange('group.hue_devices',   49, 74)); // "[L121] modif: lo 51→49, up 75→74"
+                      var ikea75_50  = getStyledCount(countBatteriesInRange('group.ikea_devices',  49, 74)); // "[L122] modif: lo 51→49, up 75→74"
+                      var sonoff75_50 = getStyledCount(countBatteriesInRange('group.sonoff_devices',49, 74)); // "[L123] modif: lo 51→49, up 75→74"
                       return `
                       <div>
                         <div>${hue75_50}</div>
@@ -3322,9 +3320,9 @@ views:
                         }
                         return count;
                       }
-                      var hue50_25 = getStyledCount(countBatteriesInRange('group.hue_devices', 26, 50));
-                      var ikea50_25 = getStyledCount(countBatteriesInRange('group.ikea_devices', 26, 50));
-                      var sonoff50_25 = getStyledCount(countBatteriesInRange('group.sonoff_devices', 26, 50));
+                      var hue50_25   = getStyledCount(countBatteriesInRange('group.hue_devices',   24, 49)); // "[L141] modif: lo 26→24, up 50→49"
+                      var ikea50_25  = getStyledCount(countBatteriesInRange('group.ikea_devices',  24, 49)); // "[L142] modif: lo 26→24, up 50→49"
+                      var sonoff50_25 = getStyledCount(countBatteriesInRange('group.sonoff_devices',24, 49)); // "[L143] modif: lo 26→24, up 50→49"
                       return `
                       <div>
                         <div>${hue50_25}</div>
@@ -3349,9 +3347,9 @@ views:
                         }
                         return count;
                       }
-                      var hue25_0 = getStyledCount(countBatteriesInRange('group.hue_devices', 0, 25));
-                      var ikea25_0 = getStyledCount(countBatteriesInRange('group.ikea_devices', 0, 25));
-                      var sonoff25_0 = getStyledCount(countBatteriesInRange('group.sonoff_devices', 0, 25));
+                      var hue25_0   = getStyledCount(countBatteriesInRange('group.hue_devices',   -1, 24)); // "[L161] modif: lo 0→-1, up 25→24"
+                      var ikea25_0  = getStyledCount(countBatteriesInRange('group.ikea_devices',  -1, 24)); // "[L162] modif: lo 0→-1, up 25→24"
+                      var sonoff25_0 = getStyledCount(countBatteriesInRange('group.sonoff_devices',-1, 24)); // "[L163] modif: lo 0→-1, up 25→24"
                       return `
                       <div>
                         <div>${hue25_0}</div>
@@ -15408,146 +15406,6 @@ views:
                   box-shadow: none !important;
                   border: none !important;
                 }
-          - type: custom:apexcharts-card
-            experimental:
-              color_threshold: true
-            graph_span: 24h
-            cache: true
-            span:
-              end: day
-            now:
-              show: true
-              color: darkred
-              label: Now
-            header:
-              show: true
-              show_states: true
-              colorize_states: true
-              title: ' '
-            apex_config:
-              chart:
-                height: 450px
-                type: area
-              stroke:
-                show: true
-              dataLabels:
-                enabled: true
-              legend:
-                show: true
-              fill:
-                type: gradient
-                gradient:
-                  inverseColors: true
-                  type: vertical
-                  shadeIntensity: 0.1
-                  opacityFrom: 0.5
-                  opacityTo: 0.15
-                  stops:
-                    - 0
-                    - 50
-                    - 100
-              grid:
-                show: true
-              tooltip:
-                'y':
-                  formatter: >
-                    EVAL:(val) => (val === null || isNaN(val)) ? '' :
-                    `${Number(val).toFixed(1)} kWh`
-            all_series_config:
-              group_by:
-                func: last
-                duration: 10m
-              curve: smooth
-              type: area
-            yaxis:
-              - id: kWh
-                min: 0
-                max: auto
-                decimals: 1
-                opposite: true
-                apex_config:
-                  tickAmount: 20
-            series:
-              - entity: sensor.ecojoko_reseau_quotidien_um
-                yaxis_id: kWh
-                color: gainsboro
-                name: Aujourd'hui
-                unit: kWh
-                stroke_width: 3
-                float_precision: 2
-                show:
-                  legend_value: false
-                  extremas: max
-              - entity: sensor.ecojoko_j1_kwh
-                yaxis_id: kWh
-                color: rgb(220, 255, 220)
-                name: J-1
-                unit: kWh
-                float_precision: 1
-                show:
-                  legend_value: false
-                  extremas: max
-              - entity: sensor.ecojoko_j2_kwh
-                yaxis_id: kWh
-                color: rgb(153, 255, 153)
-                name: J-2
-                unit: kWh
-                float_precision: 1
-                show:
-                  legend_value: false
-                  extremas: max
-              - entity: sensor.ecojoko_j3_kwh
-                yaxis_id: kWh
-                color: rgb(102, 255, 102)
-                name: J-3
-                unit: kWh
-                float_precision: 1
-              - entity: sensor.ecojoko_j4_kwh
-                yaxis_id: kWh
-                color: rgb(51, 204, 51)
-                name: J-4
-                unit: kWh
-                float_precision: 1
-                show:
-                  legend_value: false
-                  extremas: max
-              - entity: sensor.ecojoko_j5_kwh
-                yaxis_id: kWh
-                color: rgb(0, 153, 0)
-                name: J-5
-                unit: kWh
-                float_precision: 1
-                show:
-                  legend_value: false
-                  extremas: max
-              - entity: sensor.ecojoko_j6_kwh
-                yaxis_id: kWh
-                color: rgb(0, 102, 0)
-                name: J-6
-                unit: kWh
-                float_precision: 1
-                show:
-                  legend_value: false
-                  extremas: max
-              - entity: sensor.ecojoko_j7_kwh
-                yaxis_id: kWh
-                color: rgb(0, 70, 0)
-                name: J-7
-                unit: kWh
-                float_precision: 1
-                show:
-                  legend_value: false
-                  extremas: max
-            card_mod:
-              style: |
-                div#state__value {
-                  font-size: 8.25px;
-                }
-                ha-card {
-                  background: none !important;
-                  box-shadow: none !important;
-                  border: none !important;
-                }
           - card_mod:
               style: |
                 ha-card {
@@ -16038,7 +15896,7 @@ views:
                     color: lightgrey
               options:
                 group_by:
-                  func: diff
+                  func: last
                   duration: 24h
             sort:
               method: state
@@ -16250,8 +16108,6 @@ views:
                       entity_id: sensor.lampe_salle_de_bain_hue_power
                     - options: {}
                       entity_id: ^sensor.hue*power$
-                    - options: {}
-                      entity_id: ^sensor.lampe*ikea*power$
                 sort:
                   numeric: true
                   reverse: true
@@ -16284,22 +16140,27 @@ views:
                     transform: return x * 1000;
                     unit: Wh
                     name: Box (+)
-                    color: gainsboro
+                    color: rgb(183, 183, 183)
                   - entity: sensor.prise_horloge_ikea_quotidien_kwh_um
                     transform: return x * 1000;
                     unit: Wh
                     name: Horloge (+)
-                    color: rgb(183, 183, 183)
+                    color: rgb(220, 220, 220)
                   - entity: sensor.prise_pc_s_gege_ikea_quotidien_kwh_um
                     transform: return x * 1000;
                     unit: Wh
                     name: PCg
-                    color: rgb(202, 135, 135)
+                    color: rgb(174, 68, 90)
                   - entity: sensor.prise_salon_chargeur_nous_quotidien_kwh_um
                     transform: return x * 1000;
                     unit: Wh
                     name: Charge (+)
-                    color: rgb(174, 68, 90)
+                    color: rgb(196, 75, 97)
+                  - entity: sensor.prise_tv_salon_ikea_quotidien_kwh_um
+                    transform: return x * 1000;
+                    unit: Wh
+                    name: TV Salon
+                    color: rgb(215, 95, 115)
                   - entity: sensor.prise_four_micro_ondes_nous_quotidien_kwh_um
                     transform: return x * 1000;
                     unit: Wh
@@ -16334,37 +16195,37 @@ views:
                     transform: return x * 1000;
                     unit: Wh
                     name: Frigo
-                    color: cyan
+                    color: rgb(19, 160, 255)
                   - entity: sensor.prise_congelateur_cuisine_nous_quotidien_kwh_um
                     transform: return x * 1000;
                     unit: Wh
                     name: Congél.
-                    color: rgb(19, 160, 255)
+                    color: rgb(0, 255, 255)
                   - entity: sensor.prise_bureau_pc_ikea_quotidien_kwh_um
                     transform: return x * 1000;
                     unit: Wh
                     name: PCe
-                    color: orange
+                    color: rgb(255, 165, 0)
                   - entity: sensor.prise_bureau_fer_a_repasser_nous_quotidien_kwh_um
                     transform: return x * 1000;
                     unit: Wh
                     name: FàR (+)
-                    color: gold
+                    color: rgb(255, 183, 51)
                   - entity: sensor.prise_tete_de_lit_chambre_quotidien_kwh_um
                     transform: return x * 1000;
                     unit: Wh
                     name: Têtes L. (+)
-                    color: rgb(177, 194, 158)
+                    color: rgb(75, 130, 85)
                   - entity: sensor.prise_tv_chambre_nous_quotidien_kwh_um
                     transform: return x * 1000;
                     unit: Wh
                     name: TV (+)
-                    color: rgb(30, 81, 40)
+                    color: rgb(105, 155, 110)
                   - entity: sensor.all_standby_quotidien_kwh_um
                     transform: return x * 1000;
                     unit: Wh
                     name: Veilles
-                    color: grey
+                    color: rgb(109, 76, 65)
                 card_mod:
                   style: |
                     ha-card {
@@ -16404,28 +16265,35 @@ views:
                 series:
                   - entity: sensor.prise_box_internet_ikea_power
                     name: Box (+)
-                    color: gainsboro
+                    color: rgb(183, 183, 183)
                     yaxis_id: Watts
                     unit: W
                     stroke_width: 2
                     fill_raw: last
                   - entity: sensor.prise_horloge_ikea_power
                     name: Horloge (+)
-                    color: rgb(183, 183, 183)
+                    color: rgb(220, 220, 220)
                     yaxis_id: Watts
                     unit: W
                     stroke_width: 2
                     fill_raw: last
                   - entity: sensor.prise_pc_s_gege_ikea_power
                     name: PCg
-                    color: rgb(202, 135, 135)
+                    color: rgb(174, 68, 90)
                     yaxis_id: Watts
                     unit: W
                     stroke_width: 2
                     fill_raw: last
                   - entity: sensor.prise_salon_chargeur_nous_power
                     name: Charge (+)
-                    color: rgb(174,68,90)
+                    color: rgb(196, 75, 97)
+                    yaxis_id: Watts
+                    unit: W
+                    stroke_width: 2
+                    fill_raw: last
+                  - entity: sensor.prise_tv_salon_ikea_power
+                    name: TV Salon
+                    color: rgb(215, 95, 115)
                     yaxis_id: Watts
                     unit: W
                     stroke_width: 2
@@ -16453,7 +16321,7 @@ views:
                     fill_raw: last
                   - entity: sensor.prise_lave_vaisselle_nous_power
                     name: Vaisselle
-                    color: rgb(129,116,180)
+                    color: rgb(129, 116, 180)
                     yaxis_id: Watts
                     unit: W
                     stroke_width: 2
@@ -16474,49 +16342,49 @@ views:
                     fill_raw: last
                   - entity: sensor.prise_frigo_cuisine_nous_power
                     name: Frigo
-                    color: cyan
+                    color: rgb(19, 160, 255)
                     yaxis_id: Watts
                     unit: W
                     stroke_width: 2
                     fill_raw: last
                   - entity: sensor.prise_congelateur_cuisine_nous_power
                     name: Congél
-                    color: rgb(19, 160, 255)
+                    color: rgb(0, 255, 255)
                     yaxis_id: Watts
                     unit: W
                     stroke_width: 2
                     fill_raw: last
                   - entity: sensor.prise_bureau_pc_ikea_power
                     name: PCe
-                    color: orange
+                    color: rgb(255, 165, 0)
                     yaxis_id: Watts
                     unit: W
                     stroke_width: 2
                     fill_raw: last
                   - entity: sensor.prise_bureau_fer_a_repasser_nous_power
                     name: FàR (+)
-                    color: gold
+                    color: rgb(255, 183, 51)
                     yaxis_id: Watts
                     unit: W
                     stroke_width: 2
                     fill_raw: last
                   - entity: sensor.prise_tete_de_lit_chambre_power
                     name: Têtes L. (+)
-                    color: rgb(177,194,158)
+                    color: rgb(75, 130, 85)
                     yaxis_id: Watts
                     unit: W
                     stroke_width: 2
                     fill_raw: last
                   - entity: sensor.prise_tv_chambre_nous_power
                     name: TV (+)
-                    color: rgb(30, 81,40)
+                    color: rgb(105, 155, 110)
                     yaxis_id: Watts
                     unit: W
                     stroke_width: 2
                     fill_raw: last
                   - entity: sensor.all_standby_power
                     name: Veilles
-                    color: grey
+                    color: rgb(109, 76, 65)
                     yaxis_id: Watts
                     unit: W
                     stroke_width: 2
@@ -16548,7 +16416,10 @@ views:
                       '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.25)
                     options: {}
                     tabs:
-                      - card:
+                      - attributes:
+                          label: 1. Entrée
+                          icon: mdi:door
+                        card:
                           type: vertical-stack
                           cards:
                             - type: custom:streamline-card
@@ -16556,7 +16427,7 @@ views:
                               variables:
                                 - card_title: Box Internet (Hue)
                                 - energy_entity: sensor.prise_box_internet_ikea_power
-                                - energy_color: gainsboro
+                                - energy_color: rgb(183, 183, 183)
                                 - current_entity: sensor.prise_box_internet_ikea_current
                                 - avg_daily_entity: sensor.box_internet_avg_watts_quotidien
                                 - conso_daily_kwh_entity: >-
@@ -16566,14 +16437,14 @@ views:
                               variables:
                                 - card_title: Horloge Entrée (Chargeur)
                                 - energy_entity: sensor.prise_horloge_ikea_power
-                                - energy_color: rgb(183, 183, 183)
+                                - energy_color: rgb(220, 220, 220)
                                 - current_entity: sensor.prise_horloge_ikea_current
                                 - avg_daily_entity: sensor.horloge_avg_watts_quotidien
                                 - conso_daily_kwh_entity: sensor.prise_horloge_ikea_quotidien_kwh_um
-                        attributes:
-                          label: Entrée
-                          icon: mdi:door
-                      - card:
+                      - attributes:
+                          label: 4. Salon
+                          icon: mdi:sofa
+                        card:
                           type: vertical-stack
                           cards:
                             - type: custom:streamline-card
@@ -16581,7 +16452,7 @@ views:
                               variables:
                                 - card_title: PC's Géraldine
                                 - energy_entity: sensor.prise_pc_s_gege_ikea_power
-                                - energy_color: rgb(202, 135, 135)
+                                - energy_color: rgb(174, 68, 90)
                                 - current_entity: sensor.prise_pc_s_gege_ikea_current
                                 - avg_daily_entity: sensor.pc_gege_avg_watts_quotidien
                                 - conso_daily_kwh_entity: sensor.prise_pc_s_gege_ikea_quotidien_kwh_um
@@ -16592,15 +16463,24 @@ views:
                                     Prise Salon (Chargeurs, Vapote, Aspi. &
                                     iRobot)
                                 - energy_entity: sensor.prise_salon_chargeur_nous_power
-                                - energy_color: rgb(174, 68, 90)
+                                - energy_color: rgb(196, 75, 97)
                                 - current_entity: sensor.prise_salon_chargeur_nous_current
                                 - avg_daily_entity: sensor.chargeurs_salon_avg_watts_quotidien
                                 - conso_daily_kwh_entity: >-
                                     sensor.prise_salon_chargeur_nous_quotidien_kwh_um
-                        attributes:
-                          label: Salon
-                          icon: mdi:sofa
-                      - card:
+                            - type: custom:streamline-card
+                              template: conso_temps_reel_appareil
+                              variables:
+                                - card_title: TV Salon
+                                - energy_entity: sensor.prise_tv_salon_ikea_power
+                                - energy_color: rgb(215, 95, 115)
+                                - current_entity: sensor.prise_tv_salon_ikea_current
+                                - avg_daily_entity: sensor.tv_salon_avg_watts_quotidien
+                                - conso_daily_kwh_entity: sensor.prise_tv_salon_ikea_quotidien_kwh_um
+                      - attributes:
+                          label: 5. Cuisine
+                          icon: mdi:fridge
+                        card:
                           type: vertical-stack
                           cards:
                             - type: custom:streamline-card
@@ -16670,7 +16550,7 @@ views:
                               variables:
                                 - card_title: Frigo
                                 - energy_entity: sensor.prise_frigo_cuisine_nous_power
-                                - energy_color: cyan
+                                - energy_color: rgb(19, 160, 255)
                                 - current_entity: sensor.prise_frigo_cuisine_nous_current
                                 - avg_daily_entity: sensor.frigo_avg_watts_quotidien
                                 - conso_daily_kwh_entity: >-
@@ -16680,24 +16560,24 @@ views:
                               variables:
                                 - card_title: Congélateur
                                 - energy_entity: sensor.prise_congelateur_cuisine_nous_power
-                                - energy_color: rgb(19, 160, 255)
+                                - energy_color: rgb(0, 255, 255)
                                 - current_entity: >-
                                     sensor.prise_congelateur_cuisine_nous_current
                                 - avg_daily_entity: sensor.congelateur_avg_watts_quotidien
                                 - conso_daily_kwh_entity: >-
                                     sensor.prise_congelateur_cuisine_nous_quotidien_kwh_um
-                        attributes:
-                          label: Cuisine
-                          icon: mdi:fridge
-                      - card:
+                      - attributes:
+                          label: 7. Bureau
+                          icon: mdi:desktop-tower-monitor
+                        card:
                           type: vertical-stack
                           cards:
                             - type: custom:streamline-card
                               template: conso_temps_reel_appareil
                               variables:
-                                - card_title: PCe Bureau
+                                - card_title: PC Bureau
                                 - energy_entity: sensor.prise_bureau_pc_ikea_power
-                                - energy_color: orange
+                                - energy_color: rgb(255, 165, 0)
                                 - current_entity: sensor.prise_bureau_pc_ikea_current
                                 - avg_daily_entity: sensor.pc_bureau_avg_watts_quotidien
                                 - conso_daily_kwh_entity: sensor.prise_bureau_pc_ikea_quotidien_kwh_um
@@ -16707,16 +16587,16 @@ views:
                                 - card_title: Fer à Repasser Bureau (Store)
                                 - energy_entity: >-
                                     sensor.prise_bureau_fer_a_repasser_nous_power
-                                - energy_color: gold
+                                - energy_color: rgb(255, 183, 51)
                                 - current_entity: >-
                                     sensor.prise_bureau_fer_a_repasser_nous_current
                                 - avg_daily_entity: sensor.fer_repasser_avg_watts_quotidien
                                 - conso_daily_kwh_entity: >-
                                     sensor.prise_bureau_fer_a_repasser_nous_quotidien_kwh_um
-                        attributes:
-                          label: BUREAU
-                          icon: mdi:desktop-tower-monitor
-                      - card:
+                      - attributes:
+                          label: 9. Chambre
+                          icon: mdi:bed
+                        card:
                           type: vertical-stack
                           cards:
                             - type: custom:streamline-card
@@ -16726,7 +16606,7 @@ views:
                                     Têtes de Lit chambre (Chargeurs, Alexa,
                                     etc...)
                                 - energy_entity: sensor.prise_tete_de_lit_chambre_power
-                                - energy_color: rgb(177, 194, 158)
+                                - energy_color: rgb(75, 130, 85)
                                 - current_entity: sensor.prise_tete_de_lit_chambre_current
                                 - avg_daily_entity: sensor.tetes_lit_avg_watts_quotidien
                                 - conso_daily_kwh_entity: >-
@@ -16736,29 +16616,34 @@ views:
                               variables:
                                 - card_title: TV Chambre (Casques, TireTV, ect...)
                                 - energy_entity: sensor.prise_tv_chambre_nous_power
-                                - energy_color: rgb(30, 81, 40)
+                                - energy_color: rgb(105, 155, 110)
                                 - current_entity: sensor.prise_tv_chambre_nous_current
                                 - avg_daily_entity: sensor.tv_chambre_avg_watts_quotidien
                                 - conso_daily_kwh_entity: >-
                                     sensor.prise_tv_chambre_nous_quotidien_kwh_um
-                        attributes:
-                          label: Chambre
-                          icon: mdi:bed
-                      - card:
+                      - attributes:
+                          label: Veilles
+                          icon: mdi:sleep
+                        card:
                           type: vertical-stack
                           cards:
                             - type: custom:streamline-card
                               template: conso_temps_reel_appareil
                               variables:
-                                - card_title: Veilles
+                                - card_title: Veilles Globales
                                 - energy_entity: sensor.all_standby_power
-                                - energy_color: grey
+                                - energy_color: rgb(109, 76, 65)
                                 - current_entity: sensor.all_standby_current
-                                - avg_daily_entity: sensor.veilles_avg_watts_quotidien
+                                - avg_daily_entity: sensor.all_standby_avg_watts_quotidien
                                 - conso_daily_kwh_entity: sensor.all_standby_quotidien_kwh_um
-                        attributes:
-                          label: Veilles
-                          icon: mdi:sleep
+            card_mod:
+              style: |
+                ha-card {
+                  border: none !important;
+                  box-shadow: none !important;
+                  background: transparent;
+                }
+        column_span: 1
     cards: []
   - type: sections
     max_columns: 1
@@ -16797,16 +16682,19 @@ views:
             series:
               - entity: sensor.prise_box_internet_ikea_mensuel_kwh_um
                 name: Box (+)
-                color: gainsboro
+                color: rgb(183, 183, 183)
               - entity: sensor.prise_horloge_ikea_mensuel_kwh_um
                 name: Horloge (+)
-                color: rgb(183, 183, 183)
+                color: rgb(220, 220, 220)
               - entity: sensor.prise_pc_s_gege_ikea_mensuel_kwh_um
                 name: PCg
-                color: rgb(202, 135, 135)
+                color: rgb(174, 68, 90)
               - entity: sensor.prise_salon_chargeur_nous_mensuel_kwh_um
                 name: Chargeurs (+)
-                color: rgb(174, 68, 90)
+                color: rgb(196, 75, 97)
+              - entity: sensor.prise_tv_salon_ikea_mensuel_kwh_um
+                name: TV Salon
+                color: rgb(215, 95, 115)
               - entity: sensor.prise_four_micro_ondes_nous_mensuel_kwh_um
                 name: Four M-O (+)
                 color: rgb(98, 78, 136)
@@ -16827,25 +16715,25 @@ views:
                 color: rgb(162, 148, 249)
               - entity: sensor.prise_frigo_cuisine_nous_mensuel_kwh_um
                 name: frigo
-                color: cyan
+                color: rgb(19, 160, 255)
               - entity: sensor.prise_congelateur_cuisine_nous_mensuel_kwh_um
                 name: congél.
-                color: rgb(19, 160, 255)
+                color: rgb(0, 255, 255)
               - entity: sensor.prise_bureau_pc_ikea_mensuel_kwh_um
                 name: PCe
-                color: orange
+                color: rgb(255, 165, 0)
               - entity: sensor.prise_bureau_fer_a_repasser_nous_mensuel_kwh_um
                 name: FàR (+)
-                color: gold
+                color: rgb(255, 183, 51)
               - entity: sensor.prise_tete_de_lit_chambre_mensuel_kwh_um
                 name: Têtes L. (+)
-                color: rgb(177, 194, 158)
+                color: rgb(75, 130, 85)
               - entity: sensor.prise_tv_chambre_nous_mensuel_kwh_um
                 name: TV (+)
-                color: rgb(30, 81, 40)
+                color: rgb(105, 155, 110)
               - entity: sensor.all_standby_mensuel_kwh_um
                 name: Veilles
-                color: grey
+                color: rgb(109, 76, 65)
             card_mod:
               style: |
                 ha-card {
@@ -16862,7 +16750,7 @@ views:
             variables:
               title: Box Internet (Hue)
               energy_entity: sensor.prise_box_internet_ikea_energie_totale_kwh
-              color: gainsboro
+              color: rgb(183, 183, 183)
               avg_monthly_entity: sensor.box_internet_avg_watts_mensuel
               conso_monthly_kwh_entity: sensor.prise_box_internet_ikea_mensuel_kwh_um
           - type: custom:streamline-card
@@ -16870,7 +16758,7 @@ views:
             variables:
               title: Horloge Entrée (Chargeur)
               energy_entity: sensor.prise_horloge_ikea_energie_totale_kwh
-              color: rgb(183, 183, 183)
+              color: rgb(220, 220, 220)
               avg_monthly_entity: sensor.horloge_avg_watts_mensuel
               conso_monthly_kwh_entity: sensor.prise_horloge_ikea_mensuel_kwh_um
           - type: heading
@@ -16882,7 +16770,7 @@ views:
             variables:
               title: PC's Géraldine
               energy_entity: sensor.prise_pc_s_gege_ikea_energie_totale_kwh
-              color: rgb(202, 135, 135)
+              color: rgb(174, 68, 90)
               avg_monthly_entity: sensor.pc_gege_avg_watts_mensuel
               conso_monthly_kwh_entity: sensor.prise_pc_s_gege_ikea_mensuel_kwh_um
           - type: custom:streamline-card
@@ -16890,9 +16778,17 @@ views:
             variables:
               title: Prise Salon (Chargeurs, Vapote, Aspi. & iRobot)
               energy_entity: sensor.prise_salon_chargeur_nous_energie_totale_kwh
-              color: rgb(174, 68, 90)
+              color: rgb(196, 75, 97)
               avg_monthly_entity: sensor.chargeurs_salon_avg_watts_mensuel
               conso_monthly_kwh_entity: sensor.prise_salon_chargeur_nous_mensuel_kwh_um
+          - type: custom:streamline-card
+            template: conso_mensuelle_appareil
+            variables:
+              title: TV Salon
+              energy_entity: sensor.prise_tv_salon_ikea_energie_totale_kwh
+              color: rgb(215, 95, 115)
+              avg_monthly_entity: sensor.tv_salon_avg_watts_mensuel
+              conso_monthly_kwh_entity: sensor.prise_tv_salon_ikea_mensuel_kwh_um
           - type: heading
             icon: mdi:fridge
             heading: Cuisine
@@ -16950,7 +16846,7 @@ views:
             variables:
               title: Frigo
               energy_entity: sensor.prise_frigo_cuisine_nous_energie_totale_kwh
-              color: cyan
+              color: rgb(19, 160, 255)
               avg_monthly_entity: sensor.frigo_avg_watts_mensuel
               conso_monthly_kwh_entity: sensor.prise_frigo_cuisine_nous_mensuel_kwh_um
           - type: custom:streamline-card
@@ -16958,7 +16854,7 @@ views:
             variables:
               title: Congélateur
               energy_entity: sensor.prise_congelateur_cuisine_nous_energie_totale_kwh
-              color: rgb(19, 160, 255)
+              color: rgb(0, 255, 255)
               avg_monthly_entity: sensor.congelateur_avg_watts_mensuel
               conso_monthly_kwh_entity: sensor.prise_congelateur_cuisine_nous_mensuel_kwh_um
           - type: heading
@@ -16970,7 +16866,7 @@ views:
             variables:
               title: PCe Bureau
               energy_entity: sensor.prise_bureau_pc_ikea_energie_totale_kwh
-              color: orange
+              color: rgb(255, 165, 0)
               avg_monthly_entity: sensor.pc_bureau_avg_watts_mensuel
               conso_monthly_kwh_entity: sensor.prise_bureau_pc_ikea_mensuel_kwh_um
           - type: custom:streamline-card
@@ -16978,17 +16874,9 @@ views:
             variables:
               title: Fer à Repasser Bureau (Store)
               energy_entity: sensor.prise_bureau_fer_a_repasser_nous_energie_totale_kwh
-              color: gold
+              color: rgb(255, 183, 51)
               avg_monthly_entity: sensor.fer_repasser_avg_watts_mensuel
               conso_monthly_kwh_entity: sensor.prise_bureau_fer_a_repasser_nous_mensuel_kwh_um
-          - type: custom:streamline-card
-            template: conso_mensuelle_appareil
-            variables:
-              title: Têtes de Lit chambre (Chargeurs, Alexa, etc...)
-              energy_entity: sensor.prise_tete_de_lit_chambre_energie_totale_kwh
-              color: rgb(177, 194, 158)
-              avg_monthly_entity: sensor.tetes_lit_avg_watts_mensuel
-              conso_monthly_kwh_entity: sensor.prise_tete_de_lit_chambre_mensuel_kwh_um
           - type: heading
             icon: mdi:bed
             heading: Chambre
@@ -16996,9 +16884,17 @@ views:
           - type: custom:streamline-card
             template: conso_mensuelle_appareil
             variables:
+              title: Têtes de Lit chambre (Chargeurs, Alexa, etc...)
+              energy_entity: sensor.prise_tete_de_lit_chambre_energie_totale_kwh
+              color: rgb(75, 130, 85)
+              avg_monthly_entity: sensor.tetes_lit_avg_watts_mensuel
+              conso_monthly_kwh_entity: sensor.prise_tete_de_lit_chambre_mensuel_kwh_um
+          - type: custom:streamline-card
+            template: conso_mensuelle_appareil
+            variables:
               title: TV Chambre (Casques, FireTV, ect...)
               energy_entity: sensor.prise_tv_chambre_nous_energie_totale_kwh
-              color: rgb(30, 81, 40)
+              color: rgb(105, 155, 110)
               avg_monthly_entity: sensor.tv_chambre_avg_watts_mensuel
               conso_monthly_kwh_entity: sensor.prise_tv_chambre_nous_mensuel_kwh_um
           - type: heading
@@ -17010,8 +16906,8 @@ views:
             variables:
               title: Veilles
               energy_entity: sensor.all_standby_energie_totale_kwh
-              color: grey
-              avg_monthly_entity: sensor.veilles_avg_watts_mensuel
+              color: rgb(109, 76, 65)
+              avg_monthly_entity: sensor.all_standby_avg_watts_mensuel
               conso_monthly_kwh_entity: sensor.all_standby_mensuel_kwh_um
     title: Energie HOME Mensuel
     cards: []
@@ -19927,7 +19823,7 @@ views:
     title: Energie Clim
     cards: []
   - type: sections
-    max_columns: 3
+    max_columns: 1
     path: energie-lampes
     title: Lampes
     sections:
@@ -19944,6 +19840,16 @@ views:
             layout_options:
               grid_columns: full
               grid_rows: 1
+          - type: custom:button-card
+            styles:
+              card:
+                - height: 1px
+                - background: rgba(255, 255, 255, 1)
+                - border: none
+                - box-shadow: none
+                - border-radius: 0
+                - padding: 0
+                - margin: 10px
           - type: heading
             icon: mdi:sofa
             heading_style: title
@@ -19969,165 +19875,193 @@ views:
               grid_columns: full
               grid_rows: 1
             heading: SALON
-          - type: custom:apexcharts-card
-            chart_type: donut
-            cache: true
-            span:
-              start: day
-            apex_config:
-              chart:
-                height: 700px
-            header:
-              show: true
-              title: LAMPES SALON CONSO. PAR JOURS
-              show_states: true
-              colorize_states: true
-            all_series_config:
-              group_by:
-                func: diff
-                duration: 24h
-              show:
-                legend_value: false
-                extremas: false
-            show:
-              loading: true
-              last_updated: false
-            series:
-              - entity: sensor.hue_ambiance_lamp_salon_1_quotidien_kwh_um
-                name: Salon 1A (B1)
-                color: C9DABF
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_ambiance_lamp_salon_2_quotidien_kwh_um
-                name: Salon 2A (B2)
-                color: 9CA986
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_ambiance_lamp_salon_3_quotidien_kwh_um
-                name: Salon 3A (L1)
-                color: 808D7C
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_color_candle_salon_1_quotidien_kwh_um
-                name: Salon 1C (L1)
-                color: 5F6F65
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_white_lamp_table_quotidien_kwh_um
-                name: Table
-                color: 677D6A
-                transform: return x * 1000;
-                unit: W
-            card_mod:
-              style: |
-                ha-card {
-                  background: none !important;
-                  box-shadow: none !important;
-                  border: none !important;
-                }
-          - type: custom:apexcharts-card
-            chart_type: donut
-            cache: true
-            span:
-              start: month
-            apex_config:
-              chart:
-                height: 700px
-            header:
-              show: true
-              title: LAMPES SALON CONSO. PAR MOIS
-              show_states: true
-              colorize_states: true
-            all_series_config:
-              show:
-                legend_value: false
-                extremas: false
-            show:
-              loading: true
-              last_updated: false
-            series:
-              - entity: sensor.hue_ambiance_lamp_salon_1_mensuel_kwh_um
-                name: Salon 1A (B1)
-                color: C9DABF
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_ambiance_lamp_salon_2_mensuel_kwh_um
-                name: Salon 2A (B2)
-                color: 9CA986
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_ambiance_lamp_salon_3_mensuel_kwh_um
-                name: Salon 3A (L1)
-                color: 808D7C
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_color_candle_salon_1_mensuel_kwh_um
-                name: Salon 1C (L1)
-                color: 5F6F65
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_white_lamp_table_mensuel_kwh_um
-                name: Table
-                color: 677D6A
-                transform: return x * 1000;
-                unit: W
-            card_mod:
-              style: |
-                ha-card {
-                  background: none !important;
-                  box-shadow: none !important;
-                  border: none !important;
-                }
-          - type: custom:apexcharts-card
-            graph_span: 730h
-            span:
-              end: day
-            apex_config:
-              chart:
-                height: 500px
-            header:
-              show: true
-              title: Conso. Mensuel Lampes Salon
-              show_states: true
-              colorize_states: true
-            yaxis:
-              - id: Watts
-                min: 0
-                max: auto
-                opposite: false
-                decimals: 0
-                apex_config:
-                  tickAmount: 4
-              - id: Avg
-                min: 0
-                max: auto
-                opposite: true
-                decimals: 1
-                apex_config:
-                  tickAmount: 4
-            all_series_config:
-              group_by:
-                func: diff
-                duration: 24h
-              show:
-                legend_value: true
-                extremas: true
-            series:
-              - entity: sensor.eclairage_salon_5_mensuel_kwh_um
-                transform: return x * 1000;
-                unit: W
-                name: Conso. par jours
-                yaxis_id: Watts
-                color: C9DABF
-                type: column
-              - entity: sensor.eclairage_salon_5_avg_watts_mensuel
-                yaxis_id: Avg
-                type: line
-                stroke_dash: 8
-                color: red
-                unit: W
-                stroke_width: 1
-                name: Moy. 1er du mois
+          - type: custom:tabbed-card
+            styles:
+              '--mdc-theme-primary': rgb(215, 95, 115)
+              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              max-width: 100%
+            attributes:
+              animated: true
+              swipeable: true
+            tabs:
+              - attributes:
+                  label: JOUR
+                  icon: mdi:weather-sunny
+                card:
+                  type: custom:apexcharts-card
+                  chart_type: donut
+                  cache: true
+                  span:
+                    start: day
+                  apex_config:
+                    chart:
+                      height: 700px
+                  header:
+                    show: true
+                    title: LAMPES SALON CONSO. PAR JOURS
+                    show_states: true
+                    colorize_states: true
+                  all_series_config:
+                    group_by:
+                      func: diff
+                      duration: 24h
+                    show:
+                      legend_value: false
+                      extremas: false
+                  show:
+                    loading: true
+                    last_updated: false
+                  series:
+                    - entity: sensor.hue_white_lamp_table_quotidien_kwh_um
+                      name: Table
+                      color: rgb(174, 68, 90)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_color_candle_salon_1_quotidien_kwh_um
+                      name: Salon 1C (L1)
+                      color: rgb(196, 75, 97)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_ambiance_lamp_salon_3_quotidien_kwh_um
+                      name: Salon 3A (L1)
+                      color: rgb(215, 95, 115)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_ambiance_lamp_salon_2_quotidien_kwh_um
+                      name: Salon 2A (B2)
+                      color: rgb(235, 165, 175)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_ambiance_lamp_salon_1_quotidien_kwh_um
+                      name: Salon 1A (B1)
+                      color: rgb(248, 210, 215)
+                      transform: return x * 1000;
+                      unit: W
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+              - attributes:
+                  label: MOIS
+                  icon: mdi:calendar-month
+                card:
+                  type: custom:apexcharts-card
+                  chart_type: donut
+                  cache: true
+                  span:
+                    start: month
+                  apex_config:
+                    chart:
+                      height: 700px
+                  header:
+                    show: true
+                    title: LAMPES SALON CONSO. PAR MOIS
+                    show_states: true
+                    colorize_states: true
+                  all_series_config:
+                    show:
+                      legend_value: false
+                      extremas: false
+                  show:
+                    loading: true
+                    last_updated: false
+                  series:
+                    - entity: sensor.hue_white_lamp_table_mensuel_kwh_um
+                      name: Table
+                      color: rgb(174, 68, 90)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_color_candle_salon_1_mensuel_kwh_um
+                      name: Salon 1C (L1)
+                      color: rgb(196, 75, 97)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_ambiance_lamp_salon_3_mensuel_kwh_um
+                      name: Salon 3A (L1)
+                      color: rgb(215, 95, 115)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_ambiance_lamp_salon_2_mensuel_kwh_um
+                      name: Salon 2A (B2)
+                      color: rgb(235, 165, 175)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_ambiance_lamp_salon_1_mensuel_kwh_um
+                      name: Salon 1A (B1)
+                      color: rgb(248, 210, 215)
+                      transform: return x * 1000;
+                      unit: W
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+              - attributes:
+                  label: 30 JOURS
+                  icon: mdi:chart-bar
+                card:
+                  type: custom:apexcharts-card
+                  graph_span: 730h
+                  span:
+                    end: day
+                  apex_config:
+                    chart:
+                      height: 500px
+                  header:
+                    show: true
+                    title: Conso. Mensuel Lampes Salon
+                    show_states: true
+                    colorize_states: true
+                  yaxis:
+                    - id: Watts
+                      min: 0
+                      max: auto
+                      opposite: false
+                      decimals: 0
+                      apex_config:
+                        tickAmount: 4
+                    - id: Avg
+                      min: 0
+                      max: auto
+                      opposite: true
+                      decimals: 1
+                      apex_config:
+                        tickAmount: 4
+                  all_series_config:
+                    group_by:
+                      func: diff
+                      duration: 24h
+                    show:
+                      legend_value: true
+                      extremas: true
+                  series:
+                    - entity: sensor.eclairage_salon_5_mensuel_kwh_um
+                      transform: return x * 1000;
+                      unit: W
+                      name: Conso. par jours
+                      yaxis_id: Watts
+                      color: rgb(215, 95, 115)
+                      type: column
+                    - entity: sensor.eclairage_salon_5_avg_watts_mensuel
+                      yaxis_id: Avg
+                      type: line
+                      stroke_dash: 8
+                      color: red
+                      unit: W
+                      stroke_width: 1
+                      name: Moy. 1er du mois
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
             card_mod:
               style: |
                 ha-card {
@@ -20178,6 +20112,16 @@ views:
             grid_options:
               columns: 36
               rows: 1
+          - type: custom:button-card
+            styles:
+              card:
+                - height: 1px
+                - background: rgba(255, 255, 255, 1)
+                - border: none
+                - box-shadow: none
+                - border-radius: 0
+                - padding: 0
+                - margin: 10px
           - type: heading
             icon: mdi:home
             heading_style: title
@@ -20207,144 +20151,172 @@ views:
                 tap_action:
                   action: more-info
             heading: ENTREE - CUISINE - COULOIR
-          - type: custom:apexcharts-card
-            chart_type: donut
-            span:
-              start: day
-            apex_config:
-              chart:
-                height: 700px
-            header:
-              show: true
-              title: Lampes Entrée - Cuisine - Couloir Conso. / Jrs
-              show_states: true
-              colorize_states: true
-            all_series_config:
-              group_by:
-                func: diff
-                duration: 24h
-              show:
-                legend_value: false
-                extremas: false
-            show:
-              loading: true
-              last_updated: false
-            series:
-              - entity: sensor.hue_white_lamp_entree_quotidien_kwh_um
-                name: Entrée
-                color: rgb(255, 207, 157)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_white_lamp_cuisine_quotidien_kwh_um
-                name: Cuisine
-                color: rgb(222, 143, 95)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_white_lamp_couloir_quotidien_kwh_um
-                name: Couloir
-                color: rgb(255, 178, 111)
-                transform: return x * 1000;
-                unit: W
-            card_mod:
-              style: |
-                ha-card {
-                  background: none !important;
-                  box-shadow: none !important;
-                  border: none !important;
-                }
-          - type: custom:apexcharts-card
-            chart_type: donut
-            cache: true
-            span:
-              start: month
-            apex_config:
-              chart:
-                height: 700px
-            header:
-              show: true
-              title: Lampes Entrée - Cuisine - Couloir Conso. / Mois
-              show_states: true
-              colorize_states: true
-            all_series_config:
-              show:
-                legend_value: false
-                extremas: false
-            show:
-              loading: true
-              last_updated: false
-            series:
-              - entity: sensor.hue_white_lamp_entree_mensuel_kwh_um
-                name: Entrée
-                color: rgb(255, 207, 157)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_white_lamp_cuisine_mensuel_kwh_um
-                name: Cuisine
-                color: rgb(222, 143, 95)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_white_lamp_couloir_mensuel_kwh_um
-                name: Couloir
-                color: rgb(255, 178, 111)
-                transform: return x * 1000;
-                unit: W
-            card_mod:
-              style: |
-                ha-card {
-                  background: none !important;
-                  box-shadow: none !important;
-                  border: none !important;
-                }
-          - type: custom:apexcharts-card
-            graph_span: 730h
-            span:
-              end: day
-            apex_config:
-              chart:
-                height: 500px
-            header:
-              show: true
-              title: Conso. Mensuel Lampes Entrée, Cuisine & Couloir
-              show_states: true
-              colorize_states: true
-            yaxis:
-              - id: Watts
-                min: 0
-                max: auto
-                opposite: false
-                decimals: 0
-                apex_config:
-                  tickAmount: 4
-              - id: Avg
-                min: 0
-                max: auto
-                opposite: true
-                decimals: 1
-                apex_config:
-                  tickAmount: 4
-            all_series_config:
-              group_by:
-                func: diff
-                duration: 24h
-              show:
-                legend_value: true
-                extremas: true
-            series:
-              - entity: sensor.eclairage_appart_3_mensuel_kwh_um
-                transform: return x * 1000;
-                unit: W
-                name: Conso. par jours
-                yaxis_id: Watts
-                color: rgb(222, 143, 95)
-                type: column
-              - entity: sensor.eclairage_appart_3_avg_watts_mensuel
-                yaxis_id: Avg
-                type: line
-                stroke_dash: 8
-                color: red
-                unit: W
-                stroke_width: 1
-                name: Moy. 1er du mois
+          - type: custom:tabbed-card
+            styles:
+              '--mdc-theme-primary': (255, 255, 255)
+              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              max-width: 100%
+            attributes:
+              animated: true
+              swipeable: true
+            tabs:
+              - attributes:
+                  label: JOUR
+                  icon: mdi:weather-sunny
+                card:
+                  type: custom:apexcharts-card
+                  chart_type: donut
+                  span:
+                    start: day
+                  apex_config:
+                    chart:
+                      height: 700px
+                  header:
+                    show: true
+                    title: Lampes Entrée - Cuisine - Couloir Conso. / Jrs
+                    show_states: true
+                    colorize_states: true
+                  all_series_config:
+                    group_by:
+                      func: diff
+                      duration: 24h
+                    show:
+                      legend_value: false
+                      extremas: false
+                  show:
+                    loading: true
+                    last_updated: false
+                  series:
+                    - entity: sensor.hue_white_lamp_entree_quotidien_kwh_um
+                      name: Entrée
+                      color: rgb(220, 220, 220)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_white_lamp_cuisine_quotidien_kwh_um
+                      name: Cuisine
+                      color: rgb(137, 103, 179)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_white_lamp_couloir_quotidien_kwh_um
+                      name: Couloir
+                      color: rgb(150, 150, 150)
+                      transform: return x * 1000;
+                      unit: W
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+              - attributes:
+                  label: MOIS
+                  icon: mdi:calendar-month
+                card:
+                  type: custom:apexcharts-card
+                  chart_type: donut
+                  cache: true
+                  span:
+                    start: month
+                  apex_config:
+                    chart:
+                      height: 700px
+                  header:
+                    show: true
+                    title: Lampes Entrée - Cuisine - Couloir Conso. / Mois
+                    show_states: true
+                    colorize_states: true
+                  all_series_config:
+                    show:
+                      legend_value: false
+                      extremas: false
+                  show:
+                    loading: true
+                    last_updated: false
+                  series:
+                    - entity: sensor.hue_white_lamp_couloir_mensuel_kwh_um
+                      name: Couloir
+                      color: rgb(150, 150, 150)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_white_lamp_cuisine_mensuel_kwh_um
+                      name: Cuisine
+                      color: rgb(137, 103, 179)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_white_lamp_entree_mensuel_kwh_um
+                      name: Entrée
+                      color: rgb(220, 220, 220)
+                      transform: return x * 1000;
+                      unit: W
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+              - attributes:
+                  label: 30 JOURS
+                  icon: mdi:chart-bar
+                card:
+                  type: custom:apexcharts-card
+                  graph_span: 730h
+                  span:
+                    end: day
+                  apex_config:
+                    chart:
+                      height: 500px
+                  header:
+                    show: true
+                    title: Conso. Mensuel Lampes Entrée, Cuisine & Couloir
+                    show_states: true
+                    colorize_states: true
+                  yaxis:
+                    - id: Watts
+                      min: 0
+                      max: auto
+                      opposite: false
+                      decimals: 0
+                      apex_config:
+                        tickAmount: 4
+                    - id: Avg
+                      min: 0
+                      max: auto
+                      opposite: true
+                      decimals: 1
+                      apex_config:
+                        tickAmount: 4
+                  all_series_config:
+                    group_by:
+                      func: diff
+                      duration: 24h
+                    show:
+                      legend_value: true
+                      extremas: true
+                  series:
+                    - entity: sensor.eclairage_appart_3_mensuel_kwh_um
+                      transform: return x * 1000;
+                      unit: W
+                      name: Conso. par jours
+                      yaxis_id: Watts
+                      color: rgb(118, 93, 160)
+                      type: column
+                    - entity: sensor.eclairage_appart_3_avg_watts_mensuel
+                      yaxis_id: Avg
+                      type: line
+                      stroke_dash: 8
+                      color: red
+                      unit: W
+                      stroke_width: 1
+                      name: Moy. 1er du mois
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
             card_mod:
               style: |
                 ha-card {
@@ -20395,6 +20367,16 @@ views:
             grid_options:
               columns: 36
               rows: 1
+          - type: custom:button-card
+            styles:
+              card:
+                - height: 1px
+                - background: rgba(255, 255, 255, 1)
+                - border: none
+                - box-shadow: none
+                - border-radius: 0
+                - padding: 0
+                - margin: 10px
           - type: heading
             icon: mdi:desktop-tower-monitor
             heading_style: title
@@ -20420,165 +20402,193 @@ views:
                 tap_action:
                   action: more-info
             heading: BUREAU
-          - type: custom:apexcharts-card
-            chart_type: donut
-            cache: true
-            span:
-              start: day
-            apex_config:
-              chart:
-                height: 700px
-            header:
-              show: true
-              title: LAMPES BUREAU CONSO. PAR JOURS
-              show_states: true
-              colorize_states: true
-            all_series_config:
-              group_by:
-                func: diff
-                duration: 24h
-              show:
-                legend_value: false
-                extremas: false
-            show:
-              loading: true
-              last_updated: false
-            series:
-              - entity: sensor.hue_play_1_pc_bureau_quotidien_kwh_um
-                name: play 1
-                color: rgb(22, 72, 99)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_play_2_pc_bureau_quotidien_kwh_um
-                name: play 2
-                color: rgb(66, 125, 157)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_play_3_pc_bureau_quotidien_kwh_um
-                name: play 3
-                color: rgb(155, 190, 200)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_white_lamp_bureau_1_quotidien_kwh_um
-                name: Bureau HUE 1
-                color: rgb(122, 178, 211)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_white_lamp_bureau_2_quotidien_kwh_um
-                name: Bureau HUE 2
-                color: rgb(74, 98, 138)
-                transform: return x * 1000;
-                unit: W
-            card_mod:
-              style: |
-                ha-card {
-                  background: none !important;
-                  box-shadow: none !important;
-                  border: none !important;
-                }
-          - type: custom:apexcharts-card
-            chart_type: donut
-            cache: true
-            span:
-              start: month
-            apex_config:
-              chart:
-                height: 700px
-            header:
-              show: true
-              title: LAMPES BUREAU CONSO. PAR MOIS
-              show_states: true
-              colorize_states: true
-            all_series_config:
-              show:
-                legend_value: false
-                extremas: false
-            show:
-              loading: true
-              last_updated: false
-            series:
-              - entity: sensor.hue_play_1_pc_bureau_mensuel_kwh_um
-                name: play 1
-                color: rgb(22, 72, 99)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_play_2_pc_bureau_mensuel_kwh_um
-                name: play 2
-                color: rgb(66, 125, 157)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_play_3_pc_bureau_mensuel_kwh_um
-                name: play 3
-                color: rgb(155, 190, 200)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_white_lamp_bureau_1_mensuel_kwh_um
-                name: Bureau HUE 1
-                color: rgb(122, 178, 211)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_white_lamp_bureau_2_mensuel_kwh_um
-                name: Bureau HUE 2
-                color: rgb(74, 98, 138)
-                transform: return x * 1000;
-                unit: W
-            card_mod:
-              style: |
-                ha-card {
-                  background: none !important;
-                  box-shadow: none !important;
-                  border: none !important;
-                }
-          - type: custom:apexcharts-card
-            graph_span: 730h
-            span:
-              end: day
-            apex_config:
-              chart:
-                height: 500px
-            header:
-              show: true
-              title: Conso. mensuel Lampes Bureau
-              show_states: true
-              colorize_states: true
-            yaxis:
-              - id: Watts
-                min: 0
-                max: auto
-                opposite: false
-                decimals: 0
-                apex_config:
-                  tickAmount: 4
-              - id: Avg
-                min: 0
-                max: auto
-                opposite: true
-                decimals: 1
-                apex_config:
-                  tickAmount: 4
-            all_series_config:
-              group_by:
-                func: diff
-                duration: 24h
-              show:
-                legend_value: true
-                extremas: true
-            series:
-              - entity: sensor.eclairage_bureau_5_mensuel_kwh_um
-                transform: return x * 1000;
-                unit: W
-                name: Conso. par jours
-                yaxis_id: Watts
-                color: rgb(22, 72, 99)
-                type: column
-              - entity: sensor.eclairage_bureau_5_avg_watts_mensuel
-                yaxis_id: Avg
-                type: line
-                stroke_dash: 8
-                color: red
-                unit: W
-                stroke_width: 1
-                name: Moy. 1er du mois
+          - type: custom:tabbed-card
+            styles:
+              '--mdc-theme-primary': rgb(255, 165, 0)
+              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              max-width: 100%
+            attributes:
+              animated: true
+              swipeable: true
+            tabs:
+              - attributes:
+                  label: JOUR
+                  icon: mdi:weather-sunny
+                card:
+                  type: custom:apexcharts-card
+                  chart_type: donut
+                  cache: true
+                  span:
+                    start: day
+                  apex_config:
+                    chart:
+                      height: 700px
+                  header:
+                    show: true
+                    title: LAMPES BUREAU CONSO. PAR JOURS
+                    show_states: true
+                    colorize_states: true
+                  all_series_config:
+                    group_by:
+                      func: diff
+                      duration: 24h
+                    show:
+                      legend_value: false
+                      extremas: false
+                  show:
+                    loading: true
+                    last_updated: false
+                  series:
+                    - entity: sensor.hue_white_lamp_bureau_2_quotidien_kwh_um
+                      name: Bureau HUE 2
+                      color: rgb(255, 165, 0)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_white_lamp_bureau_1_quotidien_kwh_um
+                      name: Bureau HUE 1
+                      color: rgb(255, 183, 51)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_play_3_pc_bureau_quotidien_kwh_um
+                      name: play 3
+                      color: rgb(255, 201, 102)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_play_2_pc_bureau_quotidien_kwh_um
+                      name: play 2
+                      color: rgb(255, 219, 153)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_play_1_pc_bureau_quotidien_kwh_um
+                      name: play 1
+                      color: rgb(255, 237, 204)
+                      transform: return x * 1000;
+                      unit: W
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+              - attributes:
+                  label: MOIS
+                  icon: mdi:calendar-month
+                card:
+                  type: custom:apexcharts-card
+                  chart_type: donut
+                  cache: true
+                  span:
+                    start: month
+                  apex_config:
+                    chart:
+                      height: 700px
+                  header:
+                    show: true
+                    title: LAMPES BUREAU CONSO. PAR MOIS
+                    show_states: true
+                    colorize_states: true
+                  all_series_config:
+                    show:
+                      legend_value: false
+                      extremas: false
+                  show:
+                    loading: true
+                    last_updated: false
+                  series:
+                    - entity: sensor.hue_white_lamp_bureau_2_mensuel_kwh_um
+                      name: Bureau HUE 2
+                      color: rgb(255, 165, 0)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_white_lamp_bureau_1_mensuel_kwh_um
+                      name: Bureau HUE 1
+                      color: rgb(255, 183, 51)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_play_3_pc_bureau_mensuel_kwh_um
+                      name: play 3
+                      color: rgb(255, 201, 102)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_play_2_pc_bureau_mensuel_kwh_um
+                      name: play 2
+                      color: rgb(255, 219, 153)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_play_1_pc_bureau_mensuel_kwh_um
+                      name: play 1
+                      color: rgb(255, 237, 204)
+                      transform: return x * 1000;
+                      unit: W
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+              - attributes:
+                  label: 30 JOURS
+                  icon: mdi:chart-bar
+                card:
+                  type: custom:apexcharts-card
+                  graph_span: 730h
+                  span:
+                    end: day
+                  apex_config:
+                    chart:
+                      height: 500px
+                  header:
+                    show: true
+                    title: Conso. mensuel Lampes Bureau
+                    show_states: true
+                    colorize_states: true
+                  yaxis:
+                    - id: Watts
+                      min: 0
+                      max: auto
+                      opposite: false
+                      decimals: 0
+                      apex_config:
+                        tickAmount: 4
+                    - id: Avg
+                      min: 0
+                      max: auto
+                      opposite: true
+                      decimals: 1
+                      apex_config:
+                        tickAmount: 4
+                  all_series_config:
+                    group_by:
+                      func: diff
+                      duration: 24h
+                    show:
+                      legend_value: true
+                      extremas: true
+                  series:
+                    - entity: sensor.eclairage_bureau_5_mensuel_kwh_um
+                      transform: return x * 1000;
+                      unit: W
+                      name: Conso. par jours
+                      yaxis_id: Watts
+                      color: rgb(255, 165, 0)
+                      type: column
+                    - entity: sensor.eclairage_bureau_5_avg_watts_mensuel
+                      yaxis_id: Avg
+                      type: line
+                      stroke_dash: 8
+                      color: red
+                      unit: W
+                      stroke_width: 1
+                      name: Moy. 1er du mois
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
             card_mod:
               style: |
                 ha-card {
@@ -20629,6 +20639,16 @@ views:
             layout_options:
               grid_columns: full
               grid_rows: 1
+          - type: custom:button-card
+            styles:
+              card:
+                - height: 1px
+                - background: rgba(255, 255, 255, 1)
+                - border: none
+                - box-shadow: none
+                - border-radius: 0
+                - padding: 0
+                - margin: 10px
           - type: heading
             icon: mdi:shower
             heading_style: title
@@ -20650,133 +20670,162 @@ views:
                 tap_action:
                   action: more-info
             heading: SALLE DE BAIN
-          - type: custom:apexcharts-card
-            chart_type: donut
-            span:
-              start: day
-            apex_config:
-              chart:
-                height: 700px
-            header:
-              show: true
-              title: Lampes Salle de bain Conso. / Jrs
-              show_states: true
-              colorize_states: true
-            all_series_config:
-              group_by:
-                func: diff
-                duration: 24h
-              show:
-                legend_value: false
-                extremas: false
-            show:
-              loading: true
-              last_updated: false
-            series:
-              - entity: sensor.lampe_salle_de_bain_hue_quotidien_kwh_um
-                name: Salle de bain
-                color: rgb(127, 85, 177)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.relais_lumiere_sdb_sonoff_quotidien_kwh_um
-                name: Miroir
-                color: rgb(155, 126, 189)
-                transform: return x * 1000;
-                unit: W
-            card_mod:
-              style: |
-                ha-card {
-                  background: none !important;
-                  box-shadow: none !important;
-                  border: none !important;
-                }
-          - type: custom:apexcharts-card
-            chart_type: donut
-            cache: true
-            span:
-              start: month
-            apex_config:
-              chart:
-                height: 700px
-            header:
-              show: true
-              title: Lampes Salle de Bain Conso. / Mois
-              show_states: true
-              colorize_states: true
-            all_series_config:
-              show:
-                legend_value: false
-                extremas: false
-            show:
-              loading: true
-              last_updated: false
-            series:
-              - entity: sensor.lampe_salle_de_bain_hue_mensuel_kwh_um
-                name: Salle de bain
-                color: rgb(127, 85, 177)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.relais_lumiere_sdb_sonoff_mensuel_kwh_um
-                name: Miroir
-                color: rgb(155, 126, 189)
-                transform: return x * 1000;
-                unit: W
-            card_mod:
-              style: |
-                ha-card {
-                  background: none !important;
-                  box-shadow: none !important;
-                  border: none !important;
-                }
-          - type: custom:apexcharts-card
-            span:
-              end: day
-            apex_config:
-              chart:
-                height: 500px
-            header:
-              show: true
-              title: Conso. Mensuel Lampes Salle de Bain
-              show_states: true
-              colorize_states: true
-            yaxis:
-              - id: Watts
-                min: 0
-                max: auto
-                opposite: false
-                decimals: 0
-                apex_config:
-                  tickAmount: 4
-              - id: Avg
-                min: 0
-                max: auto
-                opposite: true
-                decimals: 1
-                apex_config:
-                  tickAmount: 4
-            all_series_config:
-              group_by:
-                func: diff
-                duration: 24h
-              show:
-                legend_value: true
-                extremas: true
-            series:
-              - entity: sensor.eclairage_sdb_2_mensuel_kwh_um
-                transform: return x * 1000;
-                unit: W
-                name: Conso. par jours
-                yaxis_id: Watts
-                color: rgb(127, 85, 177)
-                type: column
-              - entity: sensor.eclairage_sdb_2_mensuel_kwh_um
-                yaxis_id: Avg
-                type: line
-                stroke_dash: 8
-                color: red
-                unit: W
-                stroke_width: 1
-                name: Moy. 1er du mois
+          - type: custom:tabbed-card
+            styles:
+              '--mdc-theme-primary': rgb(3, 155, 229)
+              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              max-width: 100%
+            attributes:
+              animated: true
+              swipeable: true
+            tabs:
+              - attributes:
+                  label: JOUR
+                  icon: mdi:weather-sunny
+                card:
+                  type: custom:apexcharts-card
+                  chart_type: donut
+                  span:
+                    start: day
+                  apex_config:
+                    chart:
+                      height: 700px
+                  header:
+                    show: true
+                    title: Lampes Salle de bain Conso. / Jrs
+                    show_states: true
+                    colorize_states: true
+                  all_series_config:
+                    group_by:
+                      func: diff
+                      duration: 24h
+                    show:
+                      legend_value: false
+                      extremas: false
+                  show:
+                    loading: true
+                    last_updated: false
+                  series:
+                    - entity: sensor.relais_lumiere_sdb_sonoff_quotidien_kwh_um
+                      name: Miroir
+                      color: rgb(3, 155, 229)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.lampe_salle_de_bain_hue_quotidien_kwh_um
+                      name: Salle de bain
+                      color: rgb(119, 210, 235)
+                      transform: return x * 1000;
+                      unit: W
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+              - attributes:
+                  label: MOIS
+                  icon: mdi:calendar-month
+                card:
+                  type: custom:apexcharts-card
+                  chart_type: donut
+                  cache: true
+                  span:
+                    start: month
+                  apex_config:
+                    chart:
+                      height: 700px
+                  header:
+                    show: true
+                    title: Lampes Salle de Bain Conso. / Mois
+                    show_states: true
+                    colorize_states: true
+                  all_series_config:
+                    show:
+                      legend_value: false
+                      extremas: false
+                  show:
+                    loading: true
+                    last_updated: false
+                  series:
+                    - entity: sensor.relais_lumiere_sdb_sonoff_mensuel_kwh_um
+                      name: Miroir
+                      color: rgb(3, 155, 229)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.lampe_salle_de_bain_hue_mensuel_kwh_um
+                      name: Salle de bain
+                      color: rgb(119, 210, 235)
+                      transform: return x * 1000;
+                      unit: W
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+              - attributes:
+                  label: 30 JOURS
+                  icon: mdi:chart-bar
+                card:
+                  type: custom:apexcharts-card
+                  graph_span: 730h
+                  span:
+                    end: day
+                  apex_config:
+                    chart:
+                      height: 500px
+                  header:
+                    show: true
+                    title: Conso. Mensuel Lampes Salle de Bain
+                    show_states: true
+                    colorize_states: true
+                  yaxis:
+                    - id: Watts
+                      min: 0
+                      max: auto
+                      opposite: false
+                      decimals: 0
+                      apex_config:
+                        tickAmount: 4
+                    - id: Avg
+                      min: 0
+                      max: auto
+                      opposite: true
+                      decimals: 1
+                      apex_config:
+                        tickAmount: 4
+                  all_series_config:
+                    group_by:
+                      func: diff
+                      duration: 24h
+                    show:
+                      legend_value: true
+                      extremas: true
+                  series:
+                    - entity: sensor.eclairage_sdb_2_mensuel_kwh_um
+                      transform: return x * 1000;
+                      unit: W
+                      name: Conso. par jours
+                      yaxis_id: Watts
+                      color: rgb(3, 155, 229)
+                      type: column
+                    - entity: sensor.eclairage_sdb_2_avg_watts_mensuel
+                      yaxis_id: Avg
+                      type: line
+                      stroke_dash: 8
+                      color: red
+                      unit: W
+                      stroke_width: 1
+                      name: Moy. 1er du mois
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
             card_mod:
               style: |
                 ha-card {
@@ -20827,6 +20876,16 @@ views:
             layout_options:
               grid_columns: full
               grid_rows: 1
+          - type: custom:button-card
+            styles:
+              card:
+                - height: 1px
+                - background: rgba(255, 255, 255, 1)
+                - border: none
+                - box-shadow: none
+                - border-radius: 0
+                - padding: 0
+                - margin: 10px
           - type: heading
             icon: mdi:bed
             heading_style: title
@@ -20848,155 +20907,183 @@ views:
                 tap_action:
                   action: more-info
             heading: CHAMBRE
-          - type: custom:apexcharts-card
-            chart_type: donut
-            cache: true
-            span:
-              start: day
-            apex_config:
-              chart:
-                height: 700px
-            header:
-              show: true
-              title: LAMPES CHAMBRE CONSO. PAR JOURS
-              show_states: true
-              colorize_states: true
-            all_series_config:
-              group_by:
-                func: diff
-                duration: 24h
-              show:
-                legend_value: false
-                extremas: false
-            show:
-              loading: true
-              last_updated: false
-            series:
-              - entity: sensor.hue_white_lamp_chambre_1_quotidien_kwh_um
-                name: Chambre 1 (B1)
-                color: rgb(255, 198, 198)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_white_lamp_chambre_2_quotidien_kwh_um
-                name: Chambre 2 (B2)
-                color: rgb(217, 171, 171)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_color_candle_chambre_gege_quotidien_kwh_um
-                name: Géraldine (TL1)
-                color: rgb(199, 91, 122)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_color_candle_chambre_eric_quotidien_kwh_um
-                name: Eric (TL2)
-                color: rgb(146, 26, 64)
-                transform: return x * 1000;
-                unit: W
-            card_mod:
-              style: |
-                ha-card {
-                  background: none !important;
-                  box-shadow: none !important;
-                  border: none !important;
-                }
-          - type: custom:apexcharts-card
-            chart_type: donut
-            cache: true
-            span:
-              start: month
-            apex_config:
-              chart:
-                height: 700px
-            header:
-              show: true
-              title: LAMPES CHAMBRE CONSO. PAR MOIS
-              show_states: true
-              colorize_states: true
-            all_series_config:
-              show:
-                legend_value: false
-                extremas: false
-            show:
-              loading: true
-              last_updated: false
-            series:
-              - entity: sensor.hue_white_lamp_chambre_1_mensuel_kwh_um
-                name: Chambre 1 (B1)
-                color: rgb(255, 198, 198)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_white_lamp_chambre_2_mensuel_kwh_um
-                name: Chambre 2 (B2)
-                color: rgb(217, 171, 171)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_color_candle_chambre_gege_mensuel_kwh_um
-                name: Géraldine (TL1)
-                color: rgb(199, 91, 122)
-                transform: return x * 1000;
-                unit: W
-              - entity: sensor.hue_color_candle_chambre_eric_mensuel_kwh_um
-                name: Eric (TL2)
-                color: rgb(146, 26, 64)
-                transform: return x * 1000;
-                unit: W
-            card_mod:
-              style: |
-                ha-card {
-                  background: none !important;
-                  box-shadow: none !important;
-                  border: none !important;
-                }
-          - type: custom:apexcharts-card
-            graph_span: 730h
-            span:
-              end: day
-            apex_config:
-              chart:
-                height: 500px
-            header:
-              show: true
-              title: Conso. mensuel Lampes Chambre
-              show_states: true
-              colorize_states: true
-            yaxis:
-              - id: Watts
-                min: 0
-                max: auto
-                opposite: false
-                decimals: 0
-                apex_config:
-                  tickAmount: 4
-              - id: Avg
-                min: 0
-                max: auto
-                opposite: true
-                decimals: 1
-                apex_config:
-                  tickAmount: 4
-            all_series_config:
-              group_by:
-                func: diff
-                duration: 24h
-              show:
-                legend_value: true
-                extremas: true
-            series:
-              - entity: sensor.eclairage_chambre_4_mensuel_kwh_um
-                transform: return x * 1000;
-                unit: W
-                name: Conso. par jours
-                yaxis_id: Watts
-                color: rgb(146, 26, 64)
-                type: column
-              - entity: sensor.eclairage_chambre_4_avg_watts_mensuel
-                yaxis_id: Avg
-                type: line
-                stroke_dash: 8
-                color: red
-                unit: W
-                stroke_width: 1
-                name: Moy. 1er du mois
+          - type: custom:tabbed-card
+            styles:
+              '--mdc-theme-primary': rgb(88, 130, 70)
+              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              max-width: 100%
+            attributes:
+              animated: true
+              swipeable: true
+            tabs:
+              - attributes:
+                  label: JOUR
+                  icon: mdi:weather-sunny
+                card:
+                  type: custom:apexcharts-card
+                  chart_type: donut
+                  cache: true
+                  span:
+                    start: day
+                  apex_config:
+                    chart:
+                      height: 700px
+                  header:
+                    show: true
+                    title: LAMPES CHAMBRE CONSO. PAR JOURS
+                    show_states: true
+                    colorize_states: true
+                  all_series_config:
+                    group_by:
+                      func: diff
+                      duration: 24h
+                    show:
+                      legend_value: false
+                      extremas: false
+                  show:
+                    loading: true
+                    last_updated: false
+                  series:
+                    - entity: sensor.hue_color_candle_chambre_eric_quotidien_kwh_um
+                      name: Eric (TL2)
+                      color: rgb(75, 130, 85)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_color_candle_chambre_gege_quotidien_kwh_um
+                      name: Géraldine (TL1)
+                      color: rgb(105, 155, 110)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_white_lamp_chambre_2_quotidien_kwh_um
+                      name: Chambre 2 (B2)
+                      color: rgb(135, 180, 135)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_white_lamp_chambre_1_quotidien_kwh_um
+                      name: Chambre 1 (B1)
+                      color: rgb(165, 205, 160)
+                      transform: return x * 1000;
+                      unit: W
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+              - attributes:
+                  label: MOIS
+                  icon: mdi:calendar-month
+                card:
+                  type: custom:apexcharts-card
+                  chart_type: donut
+                  cache: true
+                  span:
+                    start: month
+                  apex_config:
+                    chart:
+                      height: 700px
+                  header:
+                    show: true
+                    title: LAMPES CHAMBRE CONSO. PAR MOIS
+                    show_states: true
+                    colorize_states: true
+                  all_series_config:
+                    show:
+                      legend_value: false
+                      extremas: false
+                  show:
+                    loading: true
+                    last_updated: false
+                  series:
+                    - entity: sensor.hue_white_lamp_chambre_1_mensuel_kwh_um
+                      name: Chambre 1 (B1)
+                      color: rgb(165, 205, 160)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_white_lamp_chambre_2_mensuel_kwh_um
+                      name: Chambre 2 (B2)
+                      color: rgb(135, 180, 135)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_color_candle_chambre_gege_mensuel_kwh_um
+                      name: Géraldine (TL1)
+                      color: rgb(105, 155, 110)
+                      transform: return x * 1000;
+                      unit: W
+                    - entity: sensor.hue_color_candle_chambre_eric_mensuel_kwh_um
+                      name: Eric (TL2)
+                      color: rgb(75, 130, 85)
+                      transform: return x * 1000;
+                      unit: W
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+              - attributes:
+                  label: 30 JOURS
+                  icon: mdi:chart-bar
+                card:
+                  type: custom:apexcharts-card
+                  graph_span: 730h
+                  span:
+                    end: day
+                  apex_config:
+                    chart:
+                      height: 500px
+                  header:
+                    show: true
+                    title: Conso. mensuel Lampes Chambre
+                    show_states: true
+                    colorize_states: true
+                  yaxis:
+                    - id: Watts
+                      min: 0
+                      max: auto
+                      opposite: false
+                      decimals: 0
+                      apex_config:
+                        tickAmount: 4
+                    - id: Avg
+                      min: 0
+                      max: auto
+                      opposite: true
+                      decimals: 1
+                      apex_config:
+                        tickAmount: 4
+                  all_series_config:
+                    group_by:
+                      func: diff
+                      duration: 24h
+                    show:
+                      legend_value: true
+                      extremas: true
+                  series:
+                    - entity: sensor.eclairage_chambre_4_mensuel_kwh_um
+                      transform: return x * 1000;
+                      unit: W
+                      name: Conso. par jours
+                      yaxis_id: Watts
+                      color: rgb(75, 130, 85)
+                      type: column
+                    - entity: sensor.eclairage_chambre_4_avg_watts_mensuel
+                      yaxis_id: Avg
+                      type: line
+                      stroke_dash: 8
+                      color: red
+                      unit: W
+                      stroke_width: 1
+                      name: Moy. 1er du mois
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
             card_mod:
               style: |
                 ha-card {
@@ -23267,17 +23354,17 @@ views:
                 icon: mdi:light-switch
                 icon_color: first
                 entities:
-                  - sensor.hue_smart_button_entee_1_battery
-                  - sensor.hue_smart_button_entee_2_battery
-                  - sensor.hue_smart_button_eco_battery
-                  - sensor.hue_smart_button_table_battery
-                  - sensor.hue_smart_button_cuisine_battery
-                  - sensor.hue_smart_button_couloir_battery
-                  - sensor.hue_smart_button_batterie
+                  - sensor.hue_smart_button_entee_1_batterie
+                  - sensor.hue_smart_button_entee_2_batterie
+                  - sensor.hue_smart_button_eco_batterie
+                  - sensor.hue_smart_button_table_batterie
+                  - sensor.hue_smart_button_cuisine_batterie
+                  - sensor.hue_smart_button_couloir_batterie
+                  - sensor.hue_smart_button_bureau_batterie
                   - sensor.boutton_salle_de_bain_hue_battery
-                  - sensor.hue_smart_button_chambre_battery
-                  - sensor.eric_hue_smart_button_chambre_battery
-                  - sensor.gege_hue_smart_button_chambre_battery
+                  - sensor.hue_smart_button_chambre_batterie
+                  - sensor.hue_smart_button_chambre_gege_batterie
+                  - sensor.hue_smart_button_chambre_eric_batterie
             sort:
               by: state
             bulk_rename:
@@ -28416,7 +28503,7 @@ views:
                                       if (state === "Aucune restriction") return "rgb(232, 237, 255)";
                                       if (state === "Sensibilisation") return "rgb(255, 237, 160)";
                                       if (state === "Interdiction sauf exception") return "rgb(254, 178, 76)";
-                                      if (state === "Interdiction") return "rgb(252, 78, 42)";
+                                      if (stat=== "Interdiction") return "rgb(252, 78, 42)";
                                       if (state === "unknown") return "grey";
                                       return "grey";
                                     ]]]
