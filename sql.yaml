@@ -33,6 +33,7 @@
   device_class: data_size
 
 # annotations_log:
+#
 # [L1-L3] Redimensionnement boîte ASCII Titre à 74 caractères (Règle Bible).
 # [L27] Appel de la commande complète via !secret pour contourner l'interpolation.
 # [L30] Sécurisation du rendu via float(0) pour éviter les erreurs de type.
