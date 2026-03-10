@@ -3,6 +3,40 @@ set -euo pipefail
 # "[L1] shebang + strict mode"
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
+# │ HA GIT BACKUP — SCRIPT DE SAUVEGARDE AUTOMATIQUE VERS GITHUB             │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Ce script sauvegarde automatiquement la configuration HA vers GitHub.
+# Il gère 3 modes d'exécution :
+#   - auto    : lancé par shell_command HA toutes les H+10 (ex: 00:10, 01:10...)
+#   - weekly  : lancé le dimanche (ou manuellement) — pose un tag ISO hebdo
+#   - manuel  : appelé via shell_command "git_backup_manuel" depuis le dashboard
+#
+# ## 🧮 FONCTIONNEMENT & SOURCES :
+# - Répertoire source : /config (tout le dépôt git HA)
+# - Filtre commit    : uniquement les fichiers .yaml, .yml et .md modifiés
+# - Authentification : token HTTPS embarqué dans l'URL remote (persistant dans .git/config)
+# - Tag hebdo        : format ISO "weekly-YYYY-WXX" (ex: weekly-2026-W10)
+#                      anti-collision : "-HHMM" ajouté si le tag existe déjà
+# - Log              : /config/.logs/ha_git_backup.log
+# - Notification HA  : via API supervisor + token dans /config/.secrets/ha_token
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - secrets.yaml ne doit JAMAIS être tracké — garde-fou ligne 22 bloque si c'est le cas
+# - !secret ne fonctionne pas en bash — le token est stocké dans l'URL remote git
+# - set -euo pipefail : toute commande non gérée fait quitter le script (exit 1)
+# - Le tag weekly doit être posé même si rien n'a changé depuis le dernier H+10
+#   → c'est pourquoi les deux exit 0 anticipés exemptent l'argument "weekly"
+# - "Manuel ne fonctionne pas" = en réalité rien à committer (H+10 a déjà tout poussé)
+#   → comportement normal et attendu, pas un bug
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Aucune vignette directe — ce script alimente GitHub (source externe)
+# - Indirectement utilisé par : L5C3 MariaDB (lien GitHub au clic sur la vignette)
+# - Appelé via : shell_command.yaml → boutons du dashboard HA
+
+# ╭──────────────────────────────────────────────────────────────────────────╮
 # │ CONFIGURATION & LOGGING                                                  │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 LOG_DIR="/config/.logs"
@@ -38,9 +72,13 @@ CHANGED="$( { git diff --name-only; git ls-files -o --exclude-standard; } \
 # "[L31] filtre CHANGED"
 if [[ -z "$CHANGED" ]]; then
   STATUS_LINES="$(git status --porcelain || true)"
-  [[ -z "$STATUS_LINES" ]] && { echo "ℹ️  Aucun changement" >> "$LOG_DIR/ha_git_backup.log"; exit 0; }
+  if [[ -z "$STATUS_LINES" ]]; then
+    if [[ "${1:-}" != "weekly" ]]; then  # "[L36] exit anticipé — sauf si weekly (tag doit être posé)"
+      echo "ℹ️  Aucun changement" >> "$LOG_DIR/ha_git_backup.log"; exit 0
+    fi
+  fi
 fi
-# "[L36] fallback status"
+# "[L36] fallback status — weekly exempt de l'exit anticipé"
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ MESSAGE DE COMMIT & VERSION HA                                           │
@@ -56,13 +94,18 @@ MSG="${MSG}${HA_VER:+ (HA ${HA_VER})}"
 # │ COMMIT & PUSH                                                            │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 git add -A
-git commit -m "$MSG" || { echo "ℹ️  Rien à committer" >> "$LOG_DIR/ha_git_backup.log"; exit 0; }
-# "[L45] commit"
-git push origin "$BRANCH" || git push origin main || git push origin master
-# "[L48] push"
+# "[L45] commit — si rien à committer, exit SAUF si weekly (tag doit être posé quoi qu'il arrive)"
+if git commit -m "$MSG" 2>/dev/null; then
+  git push origin "$BRANCH" || git push origin main || git push origin master
+  # "[L48] push (uniquement si nouveau commit)"
+elif [[ "${1:-}" != "weekly" ]]; then
+  echo "ℹ️  Rien à committer" >> "$LOG_DIR/ha_git_backup.log"; exit 0
+else
+  echo "ℹ️  Rien à committer — tag weekly posé quand même" >> "$LOG_DIR/ha_git_backup.log"
+fi
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ TAG HEBDOMADAIRE — SENS UNIQUE : HA → GITHUB                            │
+# │ TAG HEBDOMADAIRE — SENS UNIQUE : HA → GITHUB                             │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 if [[ "${1:-}" == "weekly" ]]; then
   TAG_BASE="weekly-$(date +'%G-W%V')"
@@ -97,3 +140,8 @@ fi
 # [2026-02-28] L9  user.email : "erodi@users.noreply.github.com" → "BerrySwann@users.noreply.github.com"
 # [2026-02-28] SSH supprimé  : re-build HTTPS uniquement (token dans URL remote)
 # [2026-02-28] Boîtes ASCII ajoutées sur toutes les sections
+# [2026-03-10] BUG FIX — exit 0 prématuré bloquait la création du tag weekly :
+#              L36 : exit anticipé "Aucun changement" désormais exempté si arg="weekly"
+#              L45 : "git commit || exit 0" → "if git commit ... elif weekly ... else exit 0"
+#              → Le tag weekly-YYYY-WXX est maintenant créé même sans nouveau commit
+# [2026-03-10] Ajout bloc documentation en-tête (DESCRIPTION / FONCTIONNEMENT / PIÈGES / VIGNETTES)
