@@ -25870,7 +25870,7 @@ views:
                     icon: mdi:github
                     content: >-
                       {{ iif(states('sensor.backup_github_status')=='OK','Backup
-                      OK','Backup KO') }} · {{
+                      OK','Backup KO') }} ·  {{
                       state_attr('sensor.backup_github_status','ts') or 'jamais'
                       }}
                     icon_color: >-
@@ -25896,10 +25896,11 @@ views:
                     icon: mdi:tag
                     content: '{{ states(''sensor.git_last_weekly_tag'') or ''no tag'' }}'
                     icon_color: >-
-                      {% set tag = states('sensor.git_last_weekly_tag') %} {%
-                      set iso = now().isocalendar() %} {% set current =
-                      "weekly-%04d-W%02d" | format(iso[0], iso[1]) %} {{ 'green'
-                      if (tag and tag.startswith(current)) else 'amber' }}
+                      {% set tag = states('sensor.git_last_weekly_tag') %}  {%
+                      set iso = now().isocalendar() %}  {% set current =
+                      "weekly-%04d-W%02d" | format(iso[0], iso[1]) %}  {{
+                      'green' if (tag and tag.startswith(current)) else 'amber'
+                      }}
                     tap_action:
                       action: url
                       url_path: >-
@@ -25917,7 +25918,7 @@ views:
                       Branche: {{ states('sensor.github_default_branch') or
                       'unknown' }}
                     icon_color: >-
-                      {% set b = states('sensor.github_default_branch') %} {{
+                      {% set b = states('sensor.github_default_branch') %}  {{
                       'green' if b == 'main' else 'amber' }}
                     tap_action:
                       action: url
@@ -25966,6 +25967,11 @@ views:
                       box-shadow: none !important;
                       background: transparent;
                     }
+                    ha-markdown$: |
+                      pre, code {
+                        font-size: 0px !important;
+                        line-height: 2.3 !important;
+                      }
               - type: custom:apexcharts-card
                 header:
                   title: Backup GitHub — OK/KO
@@ -25980,6 +25986,7 @@ views:
                   - entity: sensor.backup_github_status
                     name: Statut
                     type: column
+                    color: '#3498db'
                     transform: 'EVAL: return x === ''OK'' ? 1 : 0;'
                     group_by:
                       duration: 6h
@@ -26044,6 +26051,38 @@ views:
                 opacity: 1;
               }
             card_layout: normal
+          - type: custom:apexcharts-card
+            header:
+              show: true
+              title: Évolution Taille MariaDB
+              show_states: true
+              colorize_states: true
+            graph_span: 7d
+            span:
+              end: day
+            yaxis:
+              - id: db_size
+                min: auto
+                max: auto
+                decimals: 1
+            series:
+              - entity: sensor.taille_db_home_assistant
+                name: Taille (MiB)
+                yaxis_id: db_size
+                type: area
+                color: '#f39c12'
+                opacity: 0.3
+                stroke_width: 2
+                group_by:
+                  func: last
+                  duration: 1d
+            card_mod:
+              style: |
+                ha-card {
+                  border: none !important;
+                  box-shadow: none !important;
+                  background: transparent;
+                }
           - type: custom:button-card
             entity: automation.db_purge_mariadb_repack
             name: '[DB] Purge MariaDB + Repack'
@@ -28503,7 +28542,7 @@ views:
                                       if (state === "Aucune restriction") return "rgb(232, 237, 255)";
                                       if (state === "Sensibilisation") return "rgb(255, 237, 160)";
                                       if (state === "Interdiction sauf exception") return "rgb(254, 178, 76)";
-                                      if (stat=== "Interdiction") return "rgb(252, 78, 42)";
+                                      if (state === "Interdiction") return "rgb(252, 78, 42)";
                                       if (state === "unknown") return "grey";
                                       return "grey";
                                     ]]]
@@ -28519,3 +28558,1060 @@ views:
                                       if (state === "unknown") return "grey";
                                       return "grey";
                                     ]]]
+  - type: sections
+    max_columns: 1
+    title: RASPI4
+    path: raspi4
+    sections:
+      - type: grid
+        cards:
+          - type: custom:stack-in-card
+            mode: vertical
+            keep:
+              box_shadow: true
+              margin: false
+              border_radius: true
+              background: false
+              outer_padding: false
+            cards:
+              - type: picture
+                image: /local/images/RPi4B3.png
+                card_mod:
+                  style: |
+                    ha-card {
+                      border-radius: 0px;
+                    }     
+              - type: custom:vertical-stack-in-card
+                horizontal: true
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-weight: 
+                      margin-top: -15px;
+                      margin-left: -7px;
+                      margin-right: -5px;
+                      background: none;
+                    }    
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: IP int/ext
+                    secondary: ' '
+                    icon: mdi:ip-network
+                    icon_color: black
+                    fill_container: true
+                    layout: horizontal
+                    tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;
+                            border: 1px rgba(0,0,0,1.0) outset;             
+                            --shape-color: rgba(32,32,32,0.2) !important;
+                          }
+                        .: |
+                          ha-card {
+                            background: none;
+                            width: 140px
+                          }             
+                  - type: vertical-stack
+                    cards:
+                      - type: custom:mushroom-chips-card
+                        chips:
+                          - type: template
+                            entity: sensor.local_ip
+                            icon: mdi:ip
+                            icon_color: black
+                            content: '{{ states("sensor.local_ip") }}'
+                            tap_action:
+                              action: more-info
+                            card_mod:
+                              style: |
+                                ha-card {
+                                  margin-top: -5px;
+                                  margin-left: -37px;
+                                  box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;
+                                  border: 1px rgba(0,0,0,1.0) outset !important;
+                                  background: none;
+                                  --chip-height: 30px;
+                                  --chip-icon-size: 25px;
+                                  --chip-font-size: 14px;
+                                  --color: #44739e;
+                                }
+                          - type: template
+                            entity: sensor.myip
+                            icon: mdi:ip-outline
+                            icon_color: black
+                            content: '{{ states("sensor.myip") }}'
+                            tap_action:
+                              action: more-info
+                            card_mod:
+                              style: |
+                                ha-card {
+                                  margin-top: -5px;
+                                  box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;
+                                  border: 1px rgba(0,0,0,1.0) outset !important;
+                                  background: none;
+                                  --chip-height: 30px;
+                                  --chip-icon-size: 25px;
+                                  --chip-font-size: 14px;
+                                  --color: #44739e;
+                                }
+                        alignment: end
+                        card_mod:
+                          style: |
+                            ha-card {top:60%;right:5%;margin-left: -70px;}
+              - type: custom:vertical-stack-in-card
+                horizontal: true
+                card_mod:
+                  style: |
+                    ha-card {
+                      margin-top: -27px;
+                      margin-left: -7px;
+                      margin-right: -5px;
+                      background: none;
+                    }
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: Uptime
+                    secondary: ' '
+                    icon: mdi:clock-start
+                    icon_color: black
+                    fill_container: true
+                    layout: horizontal
+                    tap_action:
+                      action: none
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;
+                            border: 1px rgba(0,0,0,1.0) outset;
+                            --shape-color: rgba(32,32,32,0.2) !important;
+                          }
+                        .: |
+                          ha-card {
+                            margin-top: 4px;
+                            background: none;
+                            width: 140px;
+                          }
+                  - type: vertical-stack
+                    cards:
+                      - type: custom:mushroom-chips-card
+                        chips:
+                          - type: template
+                            icon: mdi:clock-start
+                            entity: sensor.system_monitor_dernier_demarrage
+                            content: >-
+                              {% set uptime = (now()| as_timestamp -
+                              states('sensor.system_monitor_dernier_demarrage')
+                              | as_timestamp ) %} {% set jours = (uptime /
+                              86400) | int(0) %} {%- if jours > 0 -%} {{ jours
+                              }}d {{ (uptime - (jours * 86400)) | int(0) |
+                              timestamp_custom('%Hh %Mm', false) }} {%- else -%}
+                              {{ uptime | int(0) | timestamp_custom('%Hh %Mm',
+                              false) }} {%- endif -%}
+                            tap_action:
+                              action: more-info
+                            card_mod:
+                              style: |
+                                ha-card {
+                                  margin-top: 0px;
+                                  box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;
+                                  border: 1px rgba(0,0,0,1.0) outset !important;
+                                  background: none;
+                                  --chip-height: 30px;
+                                  --chip-icon-size: 25px;
+                                  --chip-font-size: 14px;
+                                  --color: black;
+                                }
+                        alignment: end
+                        card_mod:
+                          style: |
+                            ha-card {
+                              top: 60%;
+                              right: 5%;
+                              margin-left: -70px;
+                              background: none;
+                            }
+              - type: custom:vertical-stack-in-card
+                horizontal: true
+                card_mod:
+                  style: |
+                    ha-card {
+                      margin-top: -20px;
+                      margin-left: -7px;
+                      margin-right: -5px;
+                      background: none;
+                      background-color: none;
+                    }
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: RPI Fan
+                    secondary: ' '
+                    entity: fan.rpi_cooling_fan
+                    icon: mdi:fan
+                    fill_container: true
+                    tap_action:
+                      action: more-info
+                    layout: horizontal
+                    card_mod:
+                      style:
+                        mushroom-shape-icon$: |
+                          .shape {
+                            box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;
+                            border: 1px rgba(0,0,0,1.0) outset;
+                            --shape-color: rgba(32,32,32,0.2) !important;
+                            {% if is_state('fan.rpi_cooling_fan','on') %} 
+                              --icon-color: green;
+                            {% else %}
+                              --icon-color: red;
+                            {% endif %}  
+                          }
+                        .: "ha-state-icon {\n  {% if is_state('fan.rpi_cooling_fan', 'on') %}\n  animation: rotation 2s linear infinite;\n  {% else %}\n  animation: none;\n  {% endif %}\t\t\n}\n@keyframes rotation {\n  0% {transform: rotate(0deg);}\n  100% {transform: rotate(359deg);}\n}\nha-card {background: none;}               \n"
+                  - type: vertical-stack
+                    cards:
+                      - type: custom:mushroom-chips-card
+                        chips:
+                          - type: template
+                            icon: |
+                              {% if is_state('fan.rpi_cooling_fan', 'on') %}
+                                mdi:toggle-switch
+                              {% else %}
+                                mdi:toggle-switch-off
+                              {% endif %}                 
+                            entity: fan.rpi_cooling_fan
+                            content: |
+                              {% if is_state('fan.rpi_cooling_fan', 'on') %}
+                                Allumé
+                              {% else %}
+                                Éteint
+                              {% endif %}
+                            tap_action:
+                              action: more-info
+                            card_mod:
+                              style: |
+                                ha-card {
+                                  margin-top: -5px;
+                                  box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;
+                                  border: 1px rgba(0,0,0,1.0) outset !important;
+                                  --chip-height: 30px;
+                                  --chip-icon-size: 30px;
+                                  --chip-font-size: 14px;
+                                  {% if is_state('fan.rpi_cooling_fan','on') %} 
+                                    --color: green;
+                                  {% else %}
+                                    --color: red;
+                                  {% endif %}
+                                  background: none;
+                                }
+                          - type: template
+                            icon: mdi:fan
+                            entity: fan.rpi_cooling_fan
+                            content: >-
+                              {{ state_attr('fan.rpi_cooling_fan','percentage')
+                              }} %
+                            tap_action:
+                              action: more-info
+                            card_mod:
+                              style: |
+                                ha-card {
+                                  margin-top: -5px;
+                                  margin-left: 2px;
+                                  box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;
+                                  border: 1px rgba(0,0,0,1.0) outset !important;
+                                  --chip-height: 30px;
+                                  --chip-icon-size: 30px;
+                                  --chip-font-size: 14px;
+                                  {% if is_state('fan.rpi_cooling_fan','on') %} 
+                                    --color: green;
+                                  {% else %}
+                                    --color: red;
+                                  {% endif %}
+                                  background: none;
+                                 }
+                        alignment: end
+                        card_mod:
+                          style: |
+                            ha-card {
+                            top:60%;right:5%;
+                            background: none;
+                            }
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bar-card
+                    entities:
+                      - entity: sensor.system_monitor_utilisation_du_processeur
+                        name: Use
+                        icon: mdi:cpu-64-bit
+                        color: rgb(68, 115, 158)
+                        height: 37px
+                        min: '0'
+                        max: '100'
+                        target: '80'
+                    animation:
+                      state: 'on'
+                    positions:
+                      icon: inside
+                      indicator: 'off'
+                      minmax: 'off'
+                    entity_row: true
+                    card_mod:
+                      style: |
+                        ha-card {
+                          font-weight: bold;
+                          font-size: 14px;
+                          margin-top: 2px;
+                          margin-left: 2px;
+                          margin-right: 2px;
+                          background: none;
+                          --mdc-icon-size: 30px;
+                          --mdc-icon-color: black;
+                        }
+                        bar-card-currentbar, bar-card-backgroundbar {
+                          border-radius: 10px;
+                          border: 1px rgba(0,0,0,1.0) outset;
+                          box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5);
+                        }
+                  - type: custom:bar-card
+                    entities:
+                      - entity: sensor.system_monitor_temperature_du_processeur
+                        name: Temp.
+                        icon: mdi:thermometer
+                        height: 37px
+                        color: orange
+                        min: '1'
+                        max: '76'
+                        target: '66'
+                        decimal: 0
+                    animation:
+                      state: 'on'
+                    positions:
+                      icon: inside
+                      indicator: 'off'
+                      minmax: 'off'
+                    entity_row: true
+                    card_mod:
+                      style: |
+                        ha-card {
+                          font-weight: bold;
+                          font-size: 14px;
+                          margin-top: 2px;
+                          margin-left: -2px;
+                          margin-right: 5px;
+                          background: none;
+                          --mdc-icon-size: 30px;
+                          --mdc-icon-color: black;
+                        }
+                        bar-card-currentbar, bar-card-backgroundbar {
+                          border-radius: 10px;
+                          border: 1px rgba(0,0,0,1.0) outset;
+                          box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5);
+                        } 
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bar-card
+                    entities:
+                      - entity: sensor.system_monitor_memoire_utilisee
+                        name: Use
+                        icon: mdi:memory
+                        color: red
+                        height: 37px
+                        min: '0'
+                        max: '3700'
+                        target: '300'
+                    animation:
+                      state: 'on'
+                    unit_of_measurement: MB/s
+                    positions:
+                      icon: inside
+                      indicator: 'off'
+                      minmax: 'off'
+                    entity_row: true
+                    card_mod:
+                      style: |
+                        ha-card {
+                          font-weight: bold;
+                          font-size: 14px;
+                          margin-top: 8px;
+                          margin-left: 2px;
+                          margin-right: 2px;
+                          background: none;
+                          --mdc-icon-size: 30px;
+                          --mdc-icon-color: black;
+                        }
+                        bar-card-currentbar, bar-card-backgroundbar {
+                          border-radius: 10px;
+                          border: 1px rgba(0,0,0,1.0) outset;
+                          box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5);
+                        }            
+                  - type: custom:bar-card
+                    entities:
+                      - entity: sensor.system_monitor_memoire_libre
+                        name: Free
+                        icon: mdi:memory
+                        color: rgb(31, 111, 235)
+                        height: 37px
+                        min: '0'
+                        max: '3700'
+                        target: '300'
+                    animation:
+                      state: 'on'
+                    unit_of_measurement: MB/s
+                    positions:
+                      icon: inside
+                      indicator: 'off'
+                      minmax: 'off'
+                    entity_row: true
+                    card_mod:
+                      style: |
+                        ha-card {
+                          font-weight: bold;
+                          font-size: 14px;
+                          margin-top: 8px;
+                          margin-left: -2px;
+                          margin-right: 5px;
+                          background: none;
+                          --mdc-icon-size: 30px;
+                          --mdc-icon-color: black;
+                        }
+                        bar-card-currentbar, bar-card-backgroundbar {
+                          border-radius: 10px;
+                          border: 1px rgba(0,0,0,1.0) outset;
+                          box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5);
+                        } 
+              - type: vertical-stack
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:bar-card
+                        entities:
+                          - entity: sensor.system_monitor_utilisation_du_disque
+                            name: SSD 120Go SATA III
+                            icon: mdi:cpu-64-bit
+                            height: 37px
+                            color: grey
+                            min: '0'
+                            max: '120'
+                            target: '100'
+                            positions:
+                              name: inside
+                              icon: inside
+                              indicator: 'off'
+                            animation:
+                              state: 'on'
+                        card_mod:
+                          style:
+                            ha-icon $: ''
+                            .: |
+                              ha-card {
+                                font-weight: bold;
+                                margin-top: -8px;
+                                margin-bottom: 10px;
+                                margin-left: -14px;
+                                margin-right: -10px;
+                               background: none;
+                              --mdc-icon-size: 30px;
+                              --mdc-icon-color: black;
+                              }
+                              bar-card-currentbar, bar-card-backgroundbar {
+                                border-radius: 10px;
+                                border: 1px rgba(0,0,0,1.0) outset;
+                                box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5);
+                              }
+                              bar-card-name {
+                                margin: 15px;
+                              }
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bar-card
+                    entities:
+                      - entity: sensor.system_monitor_debit_du_reseau_entrant_via_end0
+                        name: Download
+                        icon: mdi:download
+                        color: green
+                        height: 37px
+                        min: '0'
+                        max: '1000'
+                    animation:
+                      state: 'on'
+                    unit_of_measurement: MB/s
+                    positions:
+                      icon: inside
+                      indicator: 'off'
+                      minmax: 'off'
+                    entity_row: true
+                    card_mod:
+                      style: |
+                        ha-card {
+                          font-weight: bold;
+                          font-size: 14px;
+                          margin-top: -18px;
+                          margin-left: 2px;
+                          margin-right: 2px;
+                          --mdc-icon-color: green;
+                          --mdc-icon-size: 30px;
+                        }
+                        bar-card-currentbar, bar-card-backgroundbar {
+                          border-radius: 10px;
+                          border: 1px rgba(0,0,0,1.0) outset;
+                          box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5);
+                        }            
+                  - type: custom:bar-card
+                    entities:
+                      - entity: sensor.system_monitor_debit_du_reseau_sortant_via_end0
+                        name: Upload
+                        icon: mdi:upload
+                        color: red
+                        height: 37px
+                        min: '0'
+                        max: '1000'
+                    animation:
+                      state: 'on'
+                    unit_of_measurement: MB/s
+                    positions:
+                      icon: inside
+                      indicator: 'off'
+                      minmax: 'off'
+                    entity_row: true
+                    card_mod:
+                      style: |
+                        ha-card {
+                          font-weight: bold;
+                          font-size: 14px;
+                          margin-top: -18px;
+                          margin-left: -2px;
+                          margin-right: 5px;
+                          --mdc-icon-size: 30px;
+                          --mdc-icon-color: red;
+                        }
+                        bar-card-currentbar, bar-card-backgroundbar {
+                          border-radius: 10px;
+                          border: 1px rgba(0,0,0,1.0) outset;
+                          box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5);
+                        }   
+              - type: custom:uptime-card
+                entity: binary_sensor.rpi_power_status
+                title_template: Raspberry Pi4 Power -
+                ok: 'off'
+                ko: 'on'
+                bar:
+                  amount: 48
+                  round: 1
+                  height: 35
+                hours_to_show: 48
+                init:
+                  animation: raise
+                color:
+                  title: rgb(68, 115, 158)
+                  ko: rgb(250, 0, 1)
+                  ok: green
+                title_adaptive_color: false
+                icon_adaptive_color: false
+                tooltip_adaptive_color: true
+                status_adaptive_color: true
+                show:
+                  header: true
+                  title: false
+                  icon: false
+                  timeline: true
+                  footer: true
+                  average: true
+                tooltip:
+                  hour48: true
+                  animation: true
+                alias:
+                  ok: Raspberry Pi4 Power - OK
+                  ko: Raspberry Pi4 Power - Danger
+                tap_action:
+                  action: more-info
+                alignment:
+                  icon_first: false
+                  status: center
+                  tooltip_first: true
+                  header: spaced
+                card_mod:
+                  style: |
+                    :host {
+                      font-size: 15px;
+                    }
+                    ha-card {
+                      margin-bottom: -10px;
+                      background: none;
+                    }
+          - type: custom:stack-in-card
+            mode: vertical
+            keep:
+              box_shadow: true
+              margin: false
+              border_radius: true
+              background: false
+              outer_padding: false
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: custom:bar-card
+                    entities:
+                      - entity: sensor.speedtest_cli_download
+                        name: Speed Download
+                        icon: mdi:download
+                        color: green
+                        height: 37px
+                        min: '0'
+                        max: '1024'
+                    animation:
+                      state: 'on'
+                    positions:
+                      icon: inside
+                      indicator: 'off'
+                      minmax: 'off'
+                    entity_row: true
+                    card_mod:
+                      style: |
+                        ha-card {
+                          font-weight: bold;
+                          font-size: 14px;
+                          margin-top: 8px;
+                          margin-bottom: 0px;
+                          margin-left: 5px;
+                          margin-right: 5px;
+                          --mdc-icon-color: green;
+                          --mdc-icon-size: 30px;
+                        }
+                        bar-card-currentbar, bar-card-backgroundbar {
+                          border-radius: 10px;
+                          border: 1px rgba(0,0,0,1.0) outset;
+                          box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5);
+                        }            
+                  - type: custom:bar-card
+                    entities:
+                      - entity: sensor.speedtest_cli_upload
+                        name: Speed Upload
+                        icon: mdi:upload
+                        color: red
+                        height: 37px
+                        min: '0'
+                        max: '1024'
+                    animation:
+                      state: 'on'
+                    positions:
+                      icon: inside
+                      indicator: 'off'
+                      minmax: 'off'
+                    entity_row: true
+                    card_mod:
+                      style: |
+                        ha-card {
+                          font-weight: bold;
+                          font-size: 14px;
+                          margin-top: 8px;
+                          margin-bottom: 14px;
+                          margin-left: 5px;
+                          margin-right: 5px;
+                          --mdc-icon-size: 30px;
+                          --mdc-icon-color: red;
+                        }
+                        bar-card-currentbar, bar-card-backgroundbar {
+                          border-radius: 10px;
+                          border: 1px rgba(0,0,0,1.0) outset;
+                          box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5);
+                        }
+              - type: custom:mushroom-chips-card
+                chips:
+                  - type: template
+                    entity: sensor.myip
+                    icon: mdi:server-outline
+                    icon_color: black
+                    content: >-
+                      {{ states("sensor.speedtest_isp") }} <-> Serveur: {{
+                      states("sensor.speedtest_server_name") }}  / {{
+                      states("sensor.speedtest_location") }}  / {{
+                      states("sensor.speedtest_country") }}
+                    tap_action:
+                      action: more-info
+                    card_mod:
+                      style: |
+                        ha-card {
+                          margin-top: -8px;
+                          box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;
+                          border: 5px rgba(0,0,0,0.25) outset !important;
+                          --chip-height: 35px;
+                          --chip-icon-size: 30px;
+                          --chip-font-size: 14px;
+                        }
+                alignment: center
+              - type: custom:mini-graph-card
+                decimals: 0
+                hour24: true
+                height: 79
+                hours_to_show: 24
+                points_per_hour: 2
+                line_width: 2
+                entities:
+                  - entity: sensor.speedtest_cli_ping
+                    name: Ping
+                show:
+                  fill: true
+                  graph: line
+                  icon: true
+                  name: true
+                  state: true
+                  labels: false
+                  extrema: true
+                  average: true
+                  icon_adaptive_color: true
+                align_icon: right
+                align_state: right
+                font_size: 125
+                animate: true
+                color_thresholds:
+                  - value: 34
+                    color: '#336600'
+                  - value: 36
+                    color: '#f39c12'
+                  - value: 38
+                    color: '#d35400'
+                  - value: 40
+                    color: '#c0392b'
+          - type: custom:layout-card
+            layout_type: custom:grid-layout
+            layout:
+              grid-template-columns: 20% 20% 20% 20% 20%
+              grid-template-rows: 100%
+              grid-template-areas: |
+                "zone1 zone2 zone3 zone4 zone5"
+            cards:
+              - type: custom:button-card
+                fill_container: true
+                view_layout:
+                  grid-area: zone1
+                name: Faible
+                icon: mdi:fan
+                label: 40%
+                show_label: true
+                tap_action:
+                  action: call-service
+                  service: fan.set_percentage
+                  service_data:
+                    entity_id: fan.rpi_cooling_fan
+                    percentage: 40
+                styles:
+                  grid:
+                    - grid-template-areas: '"i" "n" "l"'
+                    - grid-template-rows: min-content min-content 1fr
+                  card:
+                    - aspect-ratio: 1/1.5
+                    - background-color: rgb(255,255,255)
+                  icon:
+                    - color: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 40)
+                            return "rgb(52,15,234)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+                    - width: 70%
+                    - animation: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 40)
+                            return "rotating 2.2s linear infinite";
+                        ]]]
+                  name:
+                    - font-weight: bold
+                    - color: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 40)
+                            return "rgb(52,15,234)";
+                          else if (states['fan.rpi_cooling_fan','off'])
+                            return "rgb(255,0,0)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+                  label:
+                    - font-weight: bold
+                    - color: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 40)
+                            return "rgb(52,15,234)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+              - type: custom:button-card
+                view_layout:
+                  grid-area: zone2
+                name: Normal
+                icon: mdi:fan
+                label: 50%
+                show_label: true
+                tap_action:
+                  action: call-service
+                  service: fan.set_percentage
+                  service_data:
+                    entity_id: fan.rpi_cooling_fan
+                    percentage: 50
+                styles:
+                  grid:
+                    - grid-template-areas: '"i" "n" "l"'
+                    - grid-template-rows: min-content min-content 1fr
+                  card:
+                    - aspect-ratio: 1/1.5
+                    - background-color: rgb(255,255,255)
+                  icon:
+                    - color: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 50)
+                            return "rgb(0,158,11)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+                    - width: 70%
+                    - animation: |
+                        [[[
+                                    if (states['fan.rpi_cooling_fan'].attributes.percentage == 50)
+                            return "rotating 2s linear infinite";
+                        ]]]
+                  name:
+                    - font-weight: bold
+                    - color: |
+                        [[[
+                                    if (states['fan.rpi_cooling_fan'].attributes.percentage == 50)
+                            return "rgb(0,158,11)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+                  label:
+                    - font-weight: bold
+                    - color: |
+                        [[[
+                                    if (states['fan.rpi_cooling_fan'].attributes.percentage == 50)
+                            return "rgb(0,158,11)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+              - type: custom:button-card
+                view_layout:
+                  grid-area: zone3
+                name: Moyen
+                icon: mdi:fan
+                label: 65%
+                show_label: true
+                tap_action:
+                  action: call-service
+                  service: fan.set_percentage
+                  service_data:
+                    entity_id: fan.rpi_cooling_fan
+                    percentage: 65
+                styles:
+                  grid:
+                    - grid-template-areas: '"i" "n" "l"'
+                    - grid-template-rows: min-content min-content 1fr
+                  card:
+                    - aspect-ratio: 1/1.5
+                    - background-color: rgb(255,255,255)
+                  icon:
+                    - color: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 65)
+                            return "rgb(255,197,3)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+                    - width: 70%
+                    - animation: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 65)
+                            return "rotating 1.6s linear infinite";
+                        ]]]
+                  name:
+                    - font-weight: bold
+                    - color: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 65)
+                            return "rgb(255,197,3)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+                  label:
+                    - font-weight: bold
+                    - color: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 65)
+                            return "rgb(255,197,3)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+              - type: custom:button-card
+                view_layout:
+                  grid-area: zone4
+                name: Fort
+                icon: mdi:fan
+                label: 85%
+                show_label: true
+                tap_action:
+                  action: call-service
+                  service: fan.set_percentage
+                  service_data:
+                    entity_id: fan.rpi_cooling_fan
+                    percentage: 85
+                styles:
+                  grid:
+                    - grid-template-areas: '"i" "n" "l"'
+                    - grid-template-rows: min-content min-content 1fr
+                  card:
+                    - aspect-ratio: 1/1.5
+                    - background-color: rgb(255,255,255)
+                  icon:
+                    - color: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 85)
+                            return "rgb(200,0,0)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+                    - width: 70%
+                    - animation: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 85)
+                            return "rotating 1s linear infinite";
+                        ]]]
+                  name:
+                    - font-weight: bold
+                    - color: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 85)
+                            return "rgb(200,0,0)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+                  label:
+                    - font-weight: bold
+                    - color: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 85)
+                            return "rgb(158,9,24)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+              - type: custom:button-card
+                view_layout:
+                  grid-area: zone5
+                name: Maxi
+                icon: mdi:fan
+                label: 100%
+                show_label: true
+                tap_action:
+                  action: call-service
+                  service: fan.set_percentage
+                  service_data:
+                    entity_id: fan.rpi_cooling_fan
+                    percentage: 100
+                styles:
+                  grid:
+                    - grid-template-areas: '"i" "n" "l"'
+                    - grid-template-rows: min-content min-content 1fr
+                  card:
+                    - aspect-ratio: 1/1.5
+                    - background-color: rgb(255,255,255)
+                  icon:
+                    - color: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 100)
+                            return "rgb(210,0,0)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+                    - width: 75%
+                    - animation: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 100)
+                            return "rotating 0.5s linear infinite";
+                        ]]]
+                  name:
+                    - font-weight: bold
+                    - color: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 100)
+                            return "rgb(210,0,0)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+                  label:
+                    - font-weight: bold
+                    - color: |
+                        [[[
+                          if (states['fan.rpi_cooling_fan'].attributes.percentage == 100)
+                            return "rgb(255,0,0)";
+                          else
+                            return "rgb(128,128,128)";
+                        ]]]
+          - type: gauge
+            entity: sensor.system_monitor_utilisation_du_processeur
+            min: 0
+            max: 100
+            needle: true
+            name: Utilisation CPU
+            layout_options:
+              grid_columns: 2
+              grid_rows: 3
+            severity:
+              green: 0
+              yellow: 75
+              red: 90
+          - graph: line
+            type: sensor
+            entity: sensor.system_monitor_utilisation_du_processeur
+            detail: 1
+            layout_options:
+              grid_columns: 2
+              grid_rows: 3
+            hours_to_show: 24
+            name: Util. CPU
+          - type: gauge
+            entity: sensor.system_monitor_temperature_du_processeur
+            min: 0
+            max: 100
+            severity:
+              green: 0
+              yellow: 65
+              red: 75
+            layout_options:
+              grid_columns: 2
+              grid_rows: 3
+            name: Température CPU
+            needle: true
+          - graph: line
+            type: sensor
+            entity: sensor.system_monitor_temperature_du_processeur
+            detail: 2
+            name: Temp. CPU
+            layout_options:
+              grid_columns: 2
+              grid_rows: 3
+            hours_to_show: 24
+          - graph: line
+            type: sensor
+            entity: sensor.system_monitor_utilisation_de_la_memoire
+            detail: 2
+            name: Mémoire
+            hours_to_show: 24
+            layout_options:
+              grid_columns: 4
+              grid_rows: 3
+          - graph: line
+            type: sensor
+            entity: sensor.system_monitor_espace_utilise
+            detail: 1
+            name: Espace disque utilisé
+            layout_options:
+              grid_columns: 4
+              grid_rows: 3
+            hours_to_show: 24
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: back
+            alignment: center
+            layout_options:
+              grid_columns: 4
+              grid_rows: auto
+    cards: []
