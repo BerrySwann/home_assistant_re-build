@@ -21,8 +21,8 @@
 # - Sert à la remontée d'info pour la vignette : L5C3 (GitHub/Système)
 # - backup_github_status  → chip mushroom statut OK/KO + timestamp
 # - git_last_weekly_tag   → chip mushroom tag hebdomadaire
-# - backup_github_journal → carte markdown journal des 10 derniers backups
-# - github_default_branch → chip mushroom branche active
+# - backup_github_journal → carte markdown journal des 10 derniers backups.
+# - github_default_branch → chip mushroom branche active.
 
 # --- backup_github_status ---
 - sensor:
