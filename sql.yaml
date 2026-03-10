@@ -1,26 +1,24 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ COMMAND_LINE : TAILLE BASE DE DONNÉES MARIADB                            │
+# │ SQL : CAPTEURS BASE DE DONNÉES MARIADB                                   │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Interroge MariaDB via information_schema pour obtenir la taille réelle
-# de la base homeassistant (data + index) en MB, arrondie à 1 décimale.
+# Utilise l'intégration sql native HA pour interroger MariaDB via
+# db_url: !secret mariadb_url — aucun credentials en clair.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Requête : SUM(data_length + index_length) / 1024 / 1024
-# - Base ciblée : homeassistant (via commande stockée dans secrets.yaml)
-# - Résultat : MB (virgule flottante)
+# - Requête : SUM(data_length + index_length) / POWER(1024,2)
+# - Base ciblée : homeassistant
+# - Résultat : MiB (virgule flottante, 1 décimale)
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - !secret ne fonctionne pas en interpolation directe dans une string.
-# - La commande doit être entière dans secrets.yaml pour être valide.
-# - 2>/dev/null : Masque les warnings (insecure password) de MySQL.
-# - tail -n1 : Isole la valeur numérique brute pour le template.
+# - Utiliser l'intégration sql (et non command_line) : !secret mariadb_url
+#   fonctionne nativement ici car db_url est une valeur YAML entière.
+# - device_class: data_size → affichage automatique en MiB/GiB dans HA.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Sert à la remontée d'info pour la vignette : [L5C3 Taille DB MariaDB]
 
-# --- taille_db_home_assistant ---
 - name: "Taille Db Home Assistant"
   unique_id: taille_db_home_assistant
   db_url: !secret mariadb_url
@@ -31,9 +29,3 @@
   column: "value"
   unit_of_measurement: "MiB"
   device_class: data_size
-
-# annotations_log:
-#
-# [L1-L3] Redimensionnement boîte ASCII Titre à 74 caractères (Règle Bible).
-# [L27] Appel de la commande complète via !secret pour contourner l'interpolation.
-# [L30] Sécurisation du rendu via float(0) pour éviter les erreurs de type.
