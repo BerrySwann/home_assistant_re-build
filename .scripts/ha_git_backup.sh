@@ -85,6 +85,7 @@ fi
 # ╰──────────────────────────────────────────────────────────────────────────╯
 MSG="HAOS auto-backup: $(date '+%Y-%m-%d %H:%M:%S %Z')"
 [[ "${1:-}" == "weekly" ]] && MSG="HAOS weekly backup: $(date '+%Y-%m-%d %H:%M:%S %Z')"
+[[ "${1:-}" == "Manuel" ]] && MSG="HAOS MANUEL-backup: $(date '+%Y-%m-%d %H:%M:%S %Z')"  # "[L43] modif"
 HA_VER=""
 [[ -f /config/.HA_VERSION ]] && HA_VER="$(cat /config/.HA_VERSION 2>/dev/null)"
 MSG="${MSG}${HA_VER:+ (HA ${HA_VER})}"
