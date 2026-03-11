@@ -1,0 +1,179 @@
+# ╭────────────────────────────────────────────────────────────────────────────╮
+# │ TEMPLATE : CYCLE SOLAIRE (TENDANCE DURÉE JOUR)                             │
+# │ Fichier  : templates/meteo/M_05_cycle_solaire.yaml                         │
+# │ Auteur   : Eric (BerrySwann)                                               │
+# │ Créé     : 2026-02-26                                                      │
+# │ Modifié  : 2026-02-26 - Migration syntaxe moderne (HA 2026.6+)             │
+# ╰────────────────────────────────────────────────────────────────────────────╯
+
+# ══════════════════════════════════════════════════════════════════════════════
+# DESCRIPTION
+# ══════════════════════════════════════════════════════════════════════════════
+# Fichier regroupant les 3 sensors template du cycle solaire :
+# 
+# 1. DURÉE DU JOUR (sensor.duree_du_jour)
+#    - Calcule le nombre d'heures entre lever et coucher du soleil
+#    - Unité : heures (h)
+#    - Icône : mdi:white-balance-sunny
+# 
+# 2. TENDANCE DURÉE JOUR (sensor.tendance_duree_jour)
+#    - Indique si les jours rallongent ou raccourcissent
+#    - États : "Jours rallongent" / "Jours raccourcissent"
+#    - Icône : mdi:arrow-up-thick / mdi:arrow-down-thick
+# 
+# 3. VARIATION QUOTIDIENNE (sensor.variation_quotidienne)
+#    - Calcule la variation de durée du jour en minutes par jour
+#    - Unité : minutes (min)
+#    - Icône : mdi:clock-fast
+#    - Valeurs : -3 à +3 min/jour selon la période de l'année
+# 
+# ══════════════════════════════════════════════════════════════════════════════
+# LOGIQUE CYCLE SOLAIRE
+# ══════════════════════════════════════════════════════════════════════════════
+# 
+# DATES CLÉS (année non bissextile) :
+# - Équinoxe printemps : ~21 mars    (jour 80)  → 12h jour/12h nuit
+# - Solstice d'été     : ~21 juin    (jour 172) → Jour le plus long
+# - Équinoxe automne   : ~21 septembre (jour 264) → 12h jour/12h nuit
+# - Solstice d'hiver   : ~21 décembre (jour 355) → Jour le plus court
+# 
+# PÉRIODES DE VARIATION :
+# 
+# │ Période           │ Jours      │ Tendance        │ Variation (min/jour) │
+# ├───────────────────┼────────────┼─────────────────┼──────────────────────┤
+# │ Hiver stable      │ 355 → 80   │ Rallongent      │ +2 (stable)          │
+# │ Printemps         │ 80 → 172   │ Rallongent      │ 0 → +3 (accélère)    │
+# │ Été               │ 172 → 264  │ Raccourcissent  │ 0 → -3 (décélère)    │
+# │ Automne           │ 264 → 355  │ Raccourcissent  │ -3 (stable)          │
+# └───────────────────┴────────────┴─────────────────┴──────────────────────┘
+# 
+# ══════════════════════════════════════════════════════════════════════════════
+
+  - sensor:
+      # ┌──────────────────────────────────────────────────────────────────────┐
+      # │ SENSOR 1/3 : Durée du jour (VERSION SÉCURISÉE)                       │
+      # └──────────────────────────────────────────────────────────────────────┘
+      - name: "Durée du jour"
+        unique_id: duree_du_jour
+        unit_of_measurement: "h"
+        device_class: duration
+        icon: mdi:white-balance-sunny
+        state: >
+          {% set next_rising = as_timestamp(state_attr('sun.sun', 'next_rising'), 0) %}
+          {% set next_setting = as_timestamp(state_attr('sun.sun', 'next_setting'), 0) %}
+          {% set last_rising = as_timestamp(state_attr('sun.sun', 'last_rising'), 0) %}
+          {% set last_setting = as_timestamp(state_attr('sun.sun', 'last_setting'), 0) %}
+
+          {# Logique pour toujours avoir le lever et le coucher de la même journée #}
+          {% if is_state('sun.sun', 'above_horizon') %}
+            {% set sunrise = last_rising %}
+            {% set sunset = next_setting %}
+          {% else %}
+            {# Si on est de nuit, on prend les prochains événements ou les derniers selon l'heure #}
+            {% if next_rising > next_setting %}
+              {% set sunrise = last_rising %}
+              {% set sunset = next_setting %}
+            {% else %}
+              {% set sunrise = next_rising %}
+              {% set sunset = state_attr('sun.sun', 'next_setting') | as_timestamp %}
+            {% endif %}
+          {% endif %}
+
+          {% if sunrise > 0 and sunset > 0 %}
+            {{ ((sunset - sunrise) / 3600) | abs | round(2) }}
+          {% else %}
+            {# Valeur de secours si le soleil n'est pas encore chargé #}
+            {{ states('sensor.duree_du_jour') if states('sensor.duree_du_jour') | is_number else 12.0 }}
+          {% endif %}
+
+      # ┌──────────────────────────────────────────────────────────────────────┐
+      # │ SENSOR 2/3 : Tendance durée jour (rallongent/raccourcissent)         │
+      # └──────────────────────────────────────────────────────────────────────┘
+      - name: "Tendance durée jour"
+        unique_id: tendance_duree_jour
+        
+        # État du sensor
+        state: >
+          {% set day_of_year = now().timetuple().tm_yday %}
+          {% if day_of_year >= 172 and day_of_year <= 355 %}
+            Jours raccourcissent
+          {% else %}
+            Jours rallongent
+          {% endif %}
+        
+        # Icône dynamique
+        icon: >
+          {% set day_of_year = now().timetuple().tm_yday %}
+          {% if day_of_year >= 172 and day_of_year <= 355 %}
+            mdi:arrow-down-thick
+          {% else %}
+            mdi:arrow-up-thick
+          {% endif %}
+        
+        # Attributs additionnels
+        attributes:
+          jour_annee: "{{ now().timetuple().tm_yday }}"
+          solstice_ete: "172"
+          solstice_hiver: "355"
+          jours_avant_solstice: >
+            {% set day = now().timetuple().tm_yday %}
+            {% if day < 172 %}
+              {{ 172 - day }}
+            {% elif day < 355 %}
+              {{ 355 - day }}
+            {% else %}
+              {{ 172 + (365 - day) }}
+            {% endif %}
+
+      # ┌──────────────────────────────────────────────────────────────────────┐
+      # │ SENSOR 3/3 : Variation quotidienne (en minutes par jour)             │
+      # └──────────────────────────────────────────────────────────────────────┘
+      - name: "Variation quotidienne"
+        unique_id: variation_quotidienne
+        unit_of_measurement: "min"
+        icon: mdi:clock-fast
+        
+        # Calcul variation durée jour/nuit selon la période de l'année
+        state: >
+          {% set day_of_year = now().timetuple().tm_yday %}
+          {% if day_of_year >= 80 and day_of_year <= 172 %}
+            {# Équinoxe printemps (21 mars, jour 80) → Solstice été (21 juin, jour 172) #}
+            {# Variation progressive de 0 à +3 min/jour #}
+            {{ (3 * ((day_of_year - 80) / 92)) | round(1) }}
+          {% elif day_of_year >= 172 and day_of_year <= 264 %}
+            {# Solstice été (21 juin, jour 172) → Équinoxe automne (21 sept, jour 264) #}
+            {# Variation progressive de 0 à -3 min/jour #}
+            {{ (-3 * ((day_of_year - 172) / 92)) | round(1) }}
+          {% elif day_of_year >= 264 and day_of_year <= 355 %}
+            {# Équinoxe automne (21 sept, jour 264) → Solstice hiver (21 déc, jour 355) #}
+            {# Variation stable à -3 min/jour #}
+            {{ -3 | round(1) }}
+          {% else %}
+            {# Solstice hiver (21 déc, jour 355) → Équinoxe printemps (21 mars, jour 80) #}
+            {# Variation stable à +2 min/jour #}
+            {{ 2 | round(1) }}
+          {% endif %}
+        
+        # Attributs additionnels
+        attributes:
+          jour_annee: "{{ now().timetuple().tm_yday }}"
+          periode: >
+            {% set day = now().timetuple().tm_yday %}
+            {% if day >= 80 and day <= 172 %}
+              Printemps (accélération)
+            {% elif day >= 172 and day <= 264 %}
+              Été (décélération)
+            {% elif day >= 264 and day <= 355 %}
+              Automne (raccourcissement max)
+            {% else %}
+              Hiver (rallongement stable)
+            {% endif %}
+          variation_type: >
+            {% set var = states('sensor.variation_quotidienne') | float(0) %}
+            {% if var > 0 %}
+              Rallongement
+            {% elif var < 0 %}
+              Raccourcissement
+            {% else %}
+              Stable
+            {% endif %}
