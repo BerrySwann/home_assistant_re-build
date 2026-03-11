@@ -1,0 +1,58 @@
+# ╭────────────────────────────────────────────────────────────────────────────╮
+# │ TEMPLATE : SÉRIE 15. TEMPS — JOUR & NUIT (07H30 - 21H00)                   │
+# │ Fichier  : templates/temps/15_jour_nuit.yaml                               │
+# │ Auteur   : Eric (BerrySwann)                                               │
+# │ Créé     : 2026-03-11                                                      │
+# │ Modifié  : 2026-03-11 - Création des périodes horaires fixes               │
+# ╰────────────────────────────────────────────────────────────────────────────╯
+
+# ══════════════════════════════════════════════════════════════════════════════
+# DESCRIPTION
+# ══════════════════════════════════════════════════════════════════════════════
+# Fichier regroupant les binary_sensors définissant le cycle d'activité de 
+# la maison selon des horaires fixes (indépendants du cycle solaire).
+# 
+# 1. EST JOUR (binary_sensor.est_jour_7h30_21h)
+#    - Définit la période active de la journée.
+#    - Passe à 'on' (Vrai) à 07h30 précise.
+#    - Passe à 'off' (Faux) à 21h00 précise.
+# 
+# 2. EST NUIT (binary_sensor.est_nuit_21h_7h30)
+#    - Définit la période de repos/nuit.
+#    - Passe à 'on' (Vrai) à 21h00 précise.
+#    - Passe à 'off' (Faux) à 07h30 précise.
+# 
+# ══════════════════════════════════════════════════════════════════════════════
+# LOGIQUE ET UTILISATION
+# ══════════════════════════════════════════════════════════════════════════════
+# 
+# CONTRAINTES HORAIRES :
+# L'utilisation de `today_at("HH:MM")` permet de comparer l'heure actuelle `now()`
+# de manière très optimisée dans Home Assistant, sans créer de boucles infinies.
+# 
+# CAS D'USAGE TYPIQUES :
+# - Automatisations : Bloquer les notifications non urgentes pendant la nuit.
+# - Lumières : Définir des luminosités différentes (ex: allumage à 20% si on 
+#   détecte un mouvement pendant la période "Est Nuit").
+# - Volets : Ouvrir automatiquement à 07h30 (début de "Est Jour").
+# 
+# ══════════════════════════════════════════════════════════════════════════════
+
+- binary_sensor:
+    # ┌───────────────────────────────────┐
+    # │ 1. PÉRIODE : JOUR (07H30 - 21H00) │
+    # └───────────────────────────────────┘
+    # --- est_jour_7h30_21h ---
+    - name: "Est jour (7h30-21h)"
+      unique_id: est_jour_7h30_21h
+      state: >
+        {{ today_at("07:30") <= now() < today_at("21:00") }}
+
+    # ┌───────────────────────────────────┐
+    # │ 2. PÉRIODE : NUIT (21H00 - 07H30) │
+    # └───────────────────────────────────┘
+    # --- est_nuit_21h_7h30 ---
+    - name: "Est Nuit (21h-7h30)"
+      unique_id: est_nuit_21h_7h30
+      state: >
+        {{ now() >= today_at("21:00") or now() < today_at("07:30") }}
