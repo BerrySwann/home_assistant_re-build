@@ -90,8 +90,8 @@
       device_class: energy
       state_class: total_increasing
       icon: mdi:lightbulb
-      state: >
-        {{ states('sensor.conso_total_eclairage_appart_quotidien') | float(0) | round(3) }}
+      state: >        
+        {{ states('sensor.eclairage_total_unit_quotidien_kwh_um') | float(0) | round(3) }}
 
     # --- diag_poste_7_autres_quotidien ---
     - name: "Diag Poste 7 autres Quotidien"
