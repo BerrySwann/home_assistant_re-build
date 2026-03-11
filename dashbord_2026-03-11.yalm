@@ -4238,9 +4238,8 @@ views:
             card_layout: normal
           - type: custom:windrose-card
             title: Direction et Vitesse du Vent avec Rafales
-            max_width: 300
             windspeed_bar_location: bottom
-            windspeed_bar_full: true
+            refresh_interval: 60
             wind_direction_entity:
               entity: sensor.direction_du_vent_vence
               use_statistics: false
@@ -4249,7 +4248,9 @@ views:
               - entity: weather.vence
                 attribute: wind_speed
                 name: Moyenne
+                windspeed_bar_full: true
                 speed_unit: auto
+                output_speed_unit: kph
                 speed_range_beaufort: false
                 speed_range_step: 5
                 speed_range_max: 35
@@ -4257,34 +4258,36 @@ views:
                 current_speed_arrow_size: 60
                 current_speed_arrow_location: below
               - entity: sensor.vence_wind_gust
-                speed_ranges:
-                  - from_value: 110
-                    color: rgb(101, 19, 19)
-                  - from_value: 100
-                    color: rgb(216, 88, 41)
-                  - from_value: 90
-                    color: rgb(255, 105, 49)
-                  - from_value: 80
-                    color: rgb(226, 255, 51)
-                  - from_value: 70
-                    color: rgb(109, 255, 51)
-                  - from_value: 60
-                    color: rgb(51, 255, 109)
-                  - from_value: 50
-                    color: rgb(51, 255, 226)
-                  - from_value: 40
-                    color: rgb(51, 168, 255)
-                  - from_value: 0
-                    color: rgb(51, 51, 255)
                 name: Rafale
+                windspeed_bar_full: true
                 speed_unit: auto
+                output_speed_unit: kph
                 speed_range_beaufort: false
                 current_speed_arrow: true
                 current_speed_arrow_size: 60
                 current_speed_arrow_location: below
-            wind_direction_unit: degrees
-            input_speed_unit: auto
-            output_speed_unit: kph
+                speed_ranges:
+                  - from_value: 0
+                    color: rgb(51, 51, 255)
+                  - from_value: 40
+                    color: rgb(51, 168, 255)
+                  - from_value: 50
+                    color: rgb(51, 255, 226)
+                  - from_value: 60
+                    color: rgb(51, 255, 109)
+                  - from_value: 70
+                    color: rgb(109, 255, 51)
+                  - from_value: 80
+                    color: rgb(226, 255, 51)
+                  - from_value: 90
+                    color: rgb(255, 105, 49)
+                  - from_value: 100
+                    color: rgb(216, 88, 41)
+                  - from_value: 110
+                    color: rgb(101, 19, 19)
+            rose_config:
+              windrose_draw_north_offset: 0
+              center_calm_percentage: true
             direction_labels:
               cardinal_direction_letters: NESO
               show_cardinal_directions: true
@@ -4310,10 +4313,8 @@ views:
                 wsw: OSO
                 wnw: ONO
                 nnw: NNO
-            matching_strategy: full-time
-            direction_speed_time_diff: 1
-            center_calm_percentage: true
-            center_circle_size: 30
+            matching_strategy:
+              name: full-time
             colors:
               rose_lines: rgb(0,255,0)
               rose_cardinal_direction_labels: white
@@ -4327,25 +4328,27 @@ views:
               bar_name: white
               bar_unit_values: white
               bar_percentages: auto
-            data_period:
-              period_selector:
-                location: top
+            buttons_config:
+              location: top
+              default_colors:
                 active_color: black
                 active_bg_color: white
                 color: white
                 bg_color: black
-                buttons:
-                  - hours: 24
-                    title: 1 day
-                    active: true
-                  - hours: 168
-                    title: 7 days
-                  - hours: 360
-                    title: 15 days
-                  - hours: 730
-                    title: 30 days
-            refresh_interval: 60
-            windrose_draw_north_offset: 0
+              buttons:
+                - type: period_selector
+                  button_text: 1 day
+                  period_back: '-24h'
+                  active: true
+                - type: period_selector
+                  button_text: 7 days
+                  period_back: '-168h'
+                - type: period_selector
+                  button_text: 15 days
+                  period_back: '-360h'
+                - type: period_selector
+                  button_text: 30 days
+                  period_back: '-730h'
             current_direction:
               entity: sensor.vence_wind_speed
               show_arrow: true
@@ -4381,7 +4384,7 @@ views:
                 value_text_size: 60
                 input_unit: kph
                 output_unit: kph
-                precision: 1
+                precision: '1'
             actions:
               top_left:
                 tap_action:
@@ -5088,9 +5091,8 @@ views:
                           type: custom:text-divider-row
                           text: Direction et distance du dernier point d'impact
               - type: custom:windrose-card
-                max_width: 300
                 windspeed_bar_location: bottom
-                windspeed_bar_full: true
+                refresh_interval: 60
                 wind_direction_entity:
                   entity: sensor.lightning_bearing
                   use_statistics: false
@@ -5098,6 +5100,9 @@ views:
                 windspeed_entities:
                   - entity: sensor.lightning_distance_km
                     name: Distance
+                    windspeed_bar_full: true
+                    input_speed_unit: kph
+                    output_speed_unit: kph
                     speed_unit: kph
                     speed_range_beaufort: false
                     speed_range_step: 10
@@ -5105,9 +5110,9 @@ views:
                     current_speed_arrow: true
                     current_speed_arrow_size: 60
                     current_speed_arrow_location: below
-                wind_direction_unit: degrees
-                input_speed_unit: kph
-                output_speed_unit: kph
+                rose_config:
+                  windrose_draw_north_offset: 0
+                  center_calm_percentage: true
                 direction_labels:
                   cardinal_direction_letters: NESO
                   show_cardinal_directions: true
@@ -5133,10 +5138,8 @@ views:
                     wsw: OSO
                     wnw: ONO
                     nnw: NNO
-                matching_strategy: full-time
-                direction_speed_time_diff: 1
-                center_calm_percentage: true
-                center_circle_size: 30
+                matching_strategy:
+                  name: full-time
                 colors:
                   rose_lines: rgb(0,255,0)
                   rose_cardinal_direction_labels: white
@@ -5150,25 +5153,27 @@ views:
                   bar_name: white
                   bar_unit_values: white
                   bar_percentages: auto
-                data_period:
-                  period_selector:
-                    location: top
+                buttons_config:
+                  location: top
+                  default_colors:
                     active_color: black
                     active_bg_color: white
                     color: white
                     bg_color: black
-                    buttons:
-                      - hours: 24
-                        title: 1 jour
-                        active: true
-                      - hours: 168
-                        title: 7 jours
-                      - hours: 360
-                        title: 15 jours
-                      - hours: 730
-                        title: 30 jours
-                refresh_interval: 60
-                windrose_draw_north_offset: 0
+                  buttons:
+                    - type: period_selector
+                      button_text: 1 jour
+                      period_back: '-24h'
+                      active: true
+                    - type: period_selector
+                      button_text: 7 jours
+                      period_back: '-168h'
+                    - type: period_selector
+                      button_text: 15 jours
+                      period_back: '-360h'
+                    - type: period_selector
+                      button_text: 30 jours
+                      period_back: '-730h'
                 current_direction:
                   entity: sensor.lightning_bearing
                   show_arrow: true
@@ -5188,7 +5193,7 @@ views:
                     value_text_size: 60
                     input_unit: kph
                     output_unit: kph
-                    precision: 1
+                    precision: '1'
                   top_right:
                     label: Direction de l'éclair
                     color: white
@@ -5230,8 +5235,6 @@ views:
                       border: none !important;
                       box-shadow: none !important;
                       background: none !important;
-                      margin: 0;
-                      padding: 0;
                     }
                     .sensor-1 {
                       line-height: 18px;
@@ -6106,6 +6109,141 @@ views:
                           box-shadow: none !important;
                           background: none !important;
                         }
+              - type: custom:apexcharts-card
+                graph_span: 365d
+                span:
+                  start: year
+                now:
+                  show: true
+                  label: ▼
+                  color: '#FFFFFF'
+                header:
+                  show: true
+                  title: Évolution de la durée du jour - Vence (2026)
+                  show_states: true
+                  colorize_states: true
+                apex_config:
+                  chart:
+                    type: area
+                    height: 350px
+                    toolbar:
+                      show: true
+                  stroke:
+                    width: 2
+                  grid:
+                    borderColor: '#444'
+                    strokeDashArray: 3
+                  legend:
+                    show: true
+                    position: top
+                  annotations:
+                    xaxis:
+                      - x: EVAL:new Date('2026-03-20').getTime()
+                        borderColor: '#10B981'
+                        label:
+                          text: 🌱 Printemps
+                          position: top
+                          orientation: horizontal
+                          style:
+                            background: '#10B981'
+                            color: '#fff'
+                      - x: EVAL:new Date('2026-06-21').getTime()
+                        borderColor: '#F59E0B'
+                        label:
+                          text: ☀️ Été
+                          position: top
+                          orientation: horizontal
+                          style:
+                            background: '#F59E0B'
+                            color: '#fff'
+                      - x: EVAL:new Date('2026-09-22').getTime()
+                        borderColor: '#EF4444'
+                        label:
+                          text: 🍂 Automne
+                          position: top
+                          orientation: horizontal
+                          style:
+                            background: '#EF4444'
+                            color: '#fff'
+                      - x: EVAL:new Date('2026-12-21').getTime()
+                        borderColor: '#3B82F6'
+                        label:
+                          text: ❄️ Hiver
+                          position: top
+                          offsetY: 20
+                          style:
+                            background: '#3B82F6'
+                            color: '#fff'
+                    yaxis:
+                      - 'y': 8.83
+                        borderColor: '#3B82F6'
+                        strokeDashArray: 3
+                        label:
+                          text: Min 8h50
+                          position: right
+                          style:
+                            color: '#fff'
+                            background: '#3B82F6'
+                      - 'y': 15.5
+                        borderColor: '#EF4444'
+                        strokeDashArray: 3
+                        label:
+                          text: Max 15h30
+                          position: right
+                          style:
+                            color: '#fff'
+                            background: '#EF4444'
+                yaxis:
+                  - id: hours
+                    min: 8
+                    max: 16
+                    decimals: 2
+                    apex_config:
+                      tickAmount: 8
+                  - id: variation
+                    min: -5
+                    max: 5
+                    decimals: 2
+                    opposite: true
+                    apex_config:
+                      tickAmount: 10
+                series:
+                  - entity: sensor.duree_du_jour
+                    name: Durée du jour
+                    yaxis_id: hours
+                    type: area
+                    curve: smooth
+                    stroke_width: 2
+                    opacity: 0.2
+                    extend_to: end
+                    fill_raw: last
+                    color_threshold:
+                      - value: 9
+                        color: '#3B82F6'
+                      - value: 12
+                        color: '#10B981'
+                      - value: 15
+                        color: '#EF4444'
+                    show:
+                      extremas: true
+                  - entity: sensor.variation_quotidienne
+                    name: Gain/Perte
+                    yaxis_id: variation
+                    type: column
+                    color: '#8B5CF6'
+                    opacity: 0.3
+                    group_by:
+                      func: last
+                      duration: 1d
+                    show:
+                      extremas: true
+                card_mod:
+                  style: |
+                    ha-card {
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
     cards: []
   - type: sections
     path: lumieres
