@@ -1,20 +1,20 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ UTILITY METER : P2_UM_AMHQ_VEILLES | VEILLES GLOBALES (PÔLE 2)           │
+# │ PÔLE 2. UTILITY METER : VEILLES GLOBALES — AMHQ                          │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Découpage des compteurs d'énergie globaux des veilles (Standby) en 
+# Découpage des compteurs d'énergie globaux des veilles (Standby) en
 # 4 cycles temporels : Annuel, Mensuel, Hebdomadaire, Quotidien (AMHQ).
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Source unique : 'sensor.all_standby_energie_totale_kwh' (Intégration Riemann).
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Les cycles se réinitialisent automatiquement à minuit (ou au changement
-#   de semaine/mois/année). La valeur précédente est stockée dans 'last_period'.
+# Les cycles se réinitialisent automatiquement à minuit (ou au changement
+# de semaine/mois/année). La valeur précédente est stockée dans 'last_period'.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - Alimente la vignette : L2C1 Conso Énergie Générale.
+# - L2C1 Conso Énergie Générale.
 
 # --- all_standby ---
 all_standby_annuel_kwh_um:
@@ -42,4 +42,4 @@ all_standby_quotidien_kwh_um:
   cycle: daily
 
 # annotations_log:
-# - [Création] Fichier dédié pour le découpage AMHQ des veilles. Nommage standardisé.
+# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.

@@ -1,6 +1,31 @@
-# ╭────────────────────────────────────────────────────────────────────────╮
-# │ P3_AVG | PUISSANCE MOYENNE (W) - ÉCLAIRAGE                            │
-# ╰────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. TEMPLATES AVG : PUISSANCE MOYENNE (W) — ÉCLAIRAGE À L'UNITÉ     │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs templates calculant la puissance moyenne (W) pour chaque ampoule
+# individuelle sur 4 périodes (Quotidien/Hebdomadaire/Mensuel/Annuel).
+# 19 ampoules × 4 cycles = 76 sensors. Permet d'identifier les ampoules les
+# plus consommatrices sur le long terme.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : (kWh_UM × 1000) / heures_écoulées = Watts moyens
+# - Sources : sensor.[ampoule]_[cycle]_kwh_um (compteurs UM P3_UM_AMHQ_1_UNITE)
+# - Quotidien  : h = now().hour + (now().minute / 60)
+# - Hebdomadaire : hh = (now().weekday() * 24) + h
+# - Mensuel    : hm = ((now().day - 1) * 24) + h
+# - Annuel     : ha = ((now().timetuple().tm_yday - 1) * 24) + h
+# - Garde division zéro : if h/hh/hm/ha > 0.1 else 0
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - En début de journée (h < 0.1 soit < 6 min), le capteur retourne 0 —
+#   comportement normal, évite la division par zéro.
+# - Ne pas confondre avec P3_01_somme_par_piece.yaml (puissance instantanée).
+# - Les sources _kwh_um dépendent de P3_UM_AMHQ_1_UNITE.yaml (utility_meter).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (puissance moyenne par ampoule)
+
 - sensor:
     # ┌───────────────────────────────────┐
     # │ 1. ENTRÉE                         │

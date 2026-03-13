@@ -1,25 +1,25 @@
-# ╭──────────────────────────────────────────────────────────────────────────────╮
-# │ UTILITY METER : PÔLE 0. ECOJOKO — COMPTEURS MENSUEL / HEBDO / ANNUELS        │
-# │                                   (TOTAL / HP / HC)                          │
-# ╰──────────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. UTILITY METER : ECOJOKO — COÛT AMHQ (TOTAL / HP / HC)            │
+# ╰──────────────────────────────────────────────────────────────────────────╯
 #
-# SOURCES :
-#   - ecojoko_consommation_reseau     → kWh QUOTIDIEN (daily sensor, reset minuit)
-#   - ecojoko_consommation_hp_reseau  → kWh QUOTIDIEN HP (daily sensor, reset minuit)
-#   - ecojoko_consommation_hc_reseau  → kWh QUOTIDIEN HC (daily sensor, reset minuit)
+# ## 📝 DESCRIPTION :
+# Compteurs Utility Meter découpant la consommation Ecojoko réseau en 3 cycles
+# temporels (Mensuel, Hebdomadaire, Annuel) pour Total, Heures Pleines et Heures
+# Creuses. Ces UM permettent le calcul du coût mensuel/annuel en multipliant par
+# le tarif TTC.
 #
-# ⚠️  CES 3 SENSORS SONT DAILY (reset à minuit), PAS mensuels.
-#     → L'UM monthly est OBLIGATOIRE pour calculer le coût mensuel HP/HC/Total.
-#     → Sans cet UM, le coût mensuel = coût du jour en cours seulement (0.45€ bug).
+# ## 🧮 CALCUL & SOURCES :
+# - Sources : sensor.ecojoko_consommation_reseau / sensor.ecojoko_consommation_hp_reseau
+#   / sensor.ecojoko_consommation_hc_reseau (capteurs daily reset minuit).
+# - Les cycles UM accumulent ces valeurs daily sur la période (mensuel, hebdo, annuel).
 #
-# CYCLES :
-#   monthly → reset chaque 1er du mois à minuit
-#   weekly  → reset chaque lundi à minuit
-#   yearly  → reset chaque 1er janvier à minuit
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# Les sources sont des capteurs DAILY (reset minuit), pas des cumulatifs globaux.
+# Sans cet UM monthly, le coût mensuel = coût du jour en cours seulement (bug ~0.45€).
+# Ne pas confondre avec les sensors globaux Linky.
 #
-# ┌───────────────────────────────────┐
-# │ (Ecojoko / Linky)                 │
-# └───────────────────────────────────┘
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (ring-tiles coûts HP/HC, pie charts)
 
 # ─── MENSUEL ─────────────────────────────────────────────────────────────────
 
@@ -89,3 +89,6 @@ ecojoko_hc_reseau_annuel_um:
   name: "Ecojoko HC Réseau Annuel UM"
   unique_id: ecojoko_hc_reseau_annuel_um
   cycle: yearly
+
+# annotations_log:
+# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.

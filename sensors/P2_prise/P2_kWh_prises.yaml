@@ -1,6 +1,27 @@
-# ╭──────────────────────────────────────────────────────────────────────────────╮
-# │ SENSOR : PÔLE 2. ÉNERGIE: [kWh] PRISES                                       │
-# ╰──────────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 2. SENSORS : INTÉGRATION kWh — PRISES CONNECTÉES                   │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs d'intégration Riemann (platform: integration) calculant l'énergie
+# totale cumulée (kWh) pour chaque prise connectée à partir de la puissance
+# instantanée (W). 14 prises réparties sur 5 pièces (Entrée, Salon, Cuisine,
+# Bureau, Chambre). Ces capteurs sont les sources primaires pour les UM P2.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : ∫ Power (W) dt → kWh (méthode left, arrondi 3 décimales)
+# - method: left = utilise la valeur de gauche de l'intervalle (prudent)
+# - unit_prefix: k + unit_time: h → résultat en kWh
+# - Sources : sensor.prise_[appareil]_[marque]_power
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ces sensors s'accumulent depuis la création (ne se remettent pas à zéro).
+#   La remise à zéro périodique (AMHQ) est gérée par utility_meter P2.
+# - Ne pas modifier method: left sans tester — left est plus fiable que
+#   trapezoidal pour des appareils avec variations brusques (LV, LLinge).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (source des UM P2 AMHQ)
 
 # ┌───────────────────────────────────┐
 # │ 1. ENTRÉE                         │
@@ -48,7 +69,7 @@
     unit_time: h
     round: 3
 
-# --- prise_tv_salon_ikea_energie_totale_kwh --- # "[L51] modif: ajout TV Salon"
+# --- prise_tv_salon_ikea_energie_totale_kwh ---
   - platform: integration
     source: sensor.prise_tv_salon_ikea_power
     name: "Prise TV Salon IKEA Energie Totale kWh"
@@ -187,3 +208,15 @@
     unit_time: h
     round: 3
 
+# ┌───────────────────────────────────┐
+# │ 10. AUTRE                         │
+# └───────────────────────────────────┘
+# --- all_standby_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.all_standby_power
+    name: "All Standby Energie Totale kWh"
+    unique_id: all_standby_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3

@@ -1,0 +1,313 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. TEMPLATE : LINKY — HISTORIQUE J0 À J7 (FLEX-TABLE)              │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensors template exposant 8 jours d'historique de consommation :
+# J0 = aujourd'hui via Ecojoko (live), J1..J7 via MyElectricalData/Enedis.
+# Chaque sensor expose les attributs : jour, total_kwh, hp_kwh, hc_kwh, cout.
+# Alimente la flex-table-card de la page Énergie Home.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - J0  : sensor.ecojoko_consommation_hp/hc_reseau (Ecojoko — journée en cours)
+# - J1  : attribut last_period des UM quotidiens Ecojoko
+# - J2..J7 : sensor.linky_25481620821301_consumption attributs day_N_HP/HC (Wh ÷ 1000 = kWh)
+#            libellé jour via attribut dailyweek[N-1], coût via dailyweek_cost[N-1]
+# - Tarifs : sensor.tarif_heures_pleines_ttc / sensor.tarif_heures_creuses_ttc
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - J0 (Ecojoko) et J1..J7 (MEData) ont des sources différentes — légère
+#   incohérence possible en fin de journée (MEData se met à jour en J+1).
+# - Les valeurs MEData sont en Wh → diviser par 1000 pour obtenir kWh.
+# - Le format de date dailyweek peut être 'YYYY-MM-DD' ou 'DD/MM' selon la
+#   version MEData — le template gère les deux formats.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (section tableau Linky 8 jours — flex-table-card)
+
+- sensor:
+    # ┌───────────────────────────────────┐
+    # │ 1. AUJOURD'HUI — J0 (ECOJOKO)    │
+    # └───────────────────────────────────┘
+    # --- linky_jour_0 ---
+    - name: "Linky Jour 0"
+      unique_id: linky_jour_0
+      state: >-
+        {{ ((states('sensor.ecojoko_consommation_hp_reseau') | float(0)) +
+            (states('sensor.ecojoko_consommation_hc_reseau') | float(0))) | round(1) }}
+      unit_of_measurement: kWh
+      icon: mdi:flash-outline
+      attributes:
+        jour: "Aujourd'hui"
+        hp_kwh: >-
+          {{ states('sensor.ecojoko_consommation_hp_reseau') | float(0) | round(1) }}
+        hc_kwh: >-
+          {{ states('sensor.ecojoko_consommation_hc_reseau') | float(0) | round(1) }}
+        total_kwh: >-
+          {{ ((states('sensor.ecojoko_consommation_hp_reseau') | float(0)) +
+              (states('sensor.ecojoko_consommation_hc_reseau') | float(0))) | round(1) }}
+        cout: >-
+          {{ ((states('sensor.ecojoko_consommation_hp_reseau') | float(0) *
+              states('sensor.tarif_heures_pleines_ttc') | float(0)) +
+              (states('sensor.ecojoko_consommation_hc_reseau') | float(0) *
+              states('sensor.tarif_heures_creuses_ttc') | float(0))) | round(2) }}
+
+    # ┌───────────────────────────────────┐
+    # │ 2. HISTORIQUE — J1..J7 (MEDATA)  │
+    # └───────────────────────────────────┘
+    # --- linky_jour_1 ---
+    - name: "Linky Jour 1"
+      unique_id: linky_jour_1
+      state: >-
+        {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_1_HP') | float(0) / 1000) +
+            (state_attr('sensor.linky_25481620821301_consumption', 'day_1_HC') | float(0) / 1000)) | round(1) }}
+      unit_of_measurement: kWh
+      icon: mdi:flash-outline
+      attributes:
+        jour: >-
+          {% set jours = {
+            'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi',
+            'Thursday': 'Jeudi', 'Friday': 'Vendredi',
+            'Saturday': 'Samedi', 'Sunday': 'Dimanche'
+          } %}
+          {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% set date_str = dailyweek[0] if dailyweek else None %}
+          {% if date_str %}
+            {% if '-' in date_str %}
+              {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
+            {% elif '/' in date_str %}
+              {% set p = date_str.split('/') %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+            {% endif %}
+            {{ jours[eng] if eng in jours else eng }}
+          {% else %}Inconnu{% endif %}
+        hp_kwh: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_1_HP') | float(0) / 1000) | round(1) }}
+        hc_kwh: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_1_HC') | float(0) / 1000) | round(1) }}
+        total_kwh: >-
+          {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_1_HP') | float(0) / 1000) +
+              (state_attr('sensor.linky_25481620821301_consumption', 'day_1_HC') | float(0) / 1000)) | round(1) }}
+        cout: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[0] | float(0)) | round(1) }}
+
+    # --- linky_jour_2 ---
+    - name: "Linky Jour 2"
+      unique_id: linky_jour_2
+      state: >-
+        {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_2_HP') | float(0) / 1000) +
+            (state_attr('sensor.linky_25481620821301_consumption', 'day_2_HC') | float(0) / 1000)) | round(1) }}
+      unit_of_measurement: kWh
+      icon: mdi:flash-outline
+      attributes:
+        jour: >-
+          {% set jours = {
+            'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi',
+            'Thursday': 'Jeudi', 'Friday': 'Vendredi',
+            'Saturday': 'Samedi', 'Sunday': 'Dimanche'
+          } %}
+          {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% set date_str = dailyweek[1] if dailyweek else None %}
+          {% if date_str %}
+            {% if '-' in date_str %}
+              {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
+            {% elif '/' in date_str %}
+              {% set p = date_str.split('/') %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+            {% endif %}
+            {{ jours[eng] if eng in jours else eng }}
+          {% else %}Inconnu{% endif %}
+        hp_kwh: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_2_HP') | float(0) / 1000) | round(1) }}
+        hc_kwh: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_2_HC') | float(0) / 1000) | round(1) }}
+        total_kwh: >-
+          {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_2_HP') | float(0) / 1000) +
+              (state_attr('sensor.linky_25481620821301_consumption', 'day_2_HC') | float(0) / 1000)) | round(1) }}
+        cout: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[1] | float(0)) | round(1) }}
+
+    # --- linky_jour_3 ---
+    - name: "Linky Jour 3"
+      unique_id: linky_jour_3
+      state: >-
+        {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_3_HP') | float(0) / 1000) +
+            (state_attr('sensor.linky_25481620821301_consumption', 'day_3_HC') | float(0) / 1000)) | round(1) }}
+      unit_of_measurement: kWh
+      icon: mdi:flash-outline
+      attributes:
+        jour: >-
+          {% set jours = {
+            'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi',
+            'Thursday': 'Jeudi', 'Friday': 'Vendredi',
+            'Saturday': 'Samedi', 'Sunday': 'Dimanche'
+          } %}
+          {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% set date_str = dailyweek[2] if dailyweek else None %}
+          {% if date_str %}
+            {% if '-' in date_str %}
+              {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
+            {% elif '/' in date_str %}
+              {% set p = date_str.split('/') %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+            {% endif %}
+            {{ jours[eng] if eng in jours else eng }}
+          {% else %}Inconnu{% endif %}
+        hp_kwh: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_3_HP') | float(0) / 1000) | round(1) }}
+        hc_kwh: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_3_HC') | float(0) / 1000) | round(1) }}
+        total_kwh: >-
+          {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_3_HP') | float(0) / 1000) +
+              (state_attr('sensor.linky_25481620821301_consumption', 'day_3_HC') | float(0) / 1000)) | round(1) }}
+        cout: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[2] | float(0)) | round(1) }}
+
+    # --- linky_jour_4 ---
+    - name: "Linky Jour 4"
+      unique_id: linky_jour_4
+      state: >-
+        {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_4_HP') | float(0) / 1000) +
+            (state_attr('sensor.linky_25481620821301_consumption', 'day_4_HC') | float(0) / 1000)) | round(1) }}
+      unit_of_measurement: kWh
+      icon: mdi:flash-outline
+      attributes:
+        jour: >-
+          {% set jours = {
+            'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi',
+            'Thursday': 'Jeudi', 'Friday': 'Vendredi',
+            'Saturday': 'Samedi', 'Sunday': 'Dimanche'
+          } %}
+          {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% set date_str = dailyweek[3] if dailyweek else None %}
+          {% if date_str %}
+            {% if '-' in date_str %}
+              {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
+            {% elif '/' in date_str %}
+              {% set p = date_str.split('/') %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+            {% endif %}
+            {{ jours[eng] if eng in jours else eng }}
+          {% else %}Inconnu{% endif %}
+        hp_kwh: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_4_HP') | float(0) / 1000) | round(1) }}
+        hc_kwh: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_4_HC') | float(0) / 1000) | round(1) }}
+        total_kwh: >-
+          {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_4_HP') | float(0) / 1000) +
+              (state_attr('sensor.linky_25481620821301_consumption', 'day_4_HC') | float(0) / 1000)) | round(1) }}
+        cout: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[3] | float(0)) | round(1) }}
+
+    # --- linky_jour_5 ---
+    - name: "Linky Jour 5"
+      unique_id: linky_jour_5
+      state: >-
+        {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_5_HP') | float(0) / 1000) +
+            (state_attr('sensor.linky_25481620821301_consumption', 'day_5_HC') | float(0) / 1000)) | round(1) }}
+      unit_of_measurement: kWh
+      icon: mdi:flash-outline
+      attributes:
+        jour: >-
+          {% set jours = {
+            'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi',
+            'Thursday': 'Jeudi', 'Friday': 'Vendredi',
+            'Saturday': 'Samedi', 'Sunday': 'Dimanche'
+          } %}
+          {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% set date_str = dailyweek[4] if dailyweek else None %}
+          {% if date_str %}
+            {% if '-' in date_str %}
+              {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
+            {% elif '/' in date_str %}
+              {% set p = date_str.split('/') %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+            {% endif %}
+            {{ jours[eng] if eng in jours else eng }}
+          {% else %}Inconnu{% endif %}
+        hp_kwh: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_5_HP') | float(0) / 1000) | round(1) }}
+        hc_kwh: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_5_HC') | float(0) / 1000) | round(1) }}
+        total_kwh: >-
+          {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_5_HP') | float(0) / 1000) +
+              (state_attr('sensor.linky_25481620821301_consumption', 'day_5_HC') | float(0) / 1000)) | round(1) }}
+        cout: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[4] | float(0)) | round(1) }}
+
+    # --- linky_jour_6 ---
+    - name: "Linky Jour 6"
+      unique_id: linky_jour_6
+      state: >-
+        {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_6_HP') | float(0) / 1000) +
+            (state_attr('sensor.linky_25481620821301_consumption', 'day_6_HC') | float(0) / 1000)) | round(1) }}
+      unit_of_measurement: kWh
+      icon: mdi:flash-outline
+      attributes:
+        jour: >-
+          {% set jours = {
+            'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi',
+            'Thursday': 'Jeudi', 'Friday': 'Vendredi',
+            'Saturday': 'Samedi', 'Sunday': 'Dimanche'
+          } %}
+          {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% set date_str = dailyweek[5] if dailyweek else None %}
+          {% if date_str %}
+            {% if '-' in date_str %}
+              {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
+            {% elif '/' in date_str %}
+              {% set p = date_str.split('/') %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+            {% endif %}
+            {{ jours[eng] if eng in jours else eng }}
+          {% else %}Inconnu{% endif %}
+        hp_kwh: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_6_HP') | float(0) / 1000) | round(1) }}
+        hc_kwh: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_6_HC') | float(0) / 1000) | round(1) }}
+        total_kwh: >-
+          {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_6_HP') | float(0) / 1000) +
+              (state_attr('sensor.linky_25481620821301_consumption', 'day_6_HC') | float(0) / 1000)) | round(1) }}
+        cout: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[5] | float(0)) | round(1) }}
+
+    # --- linky_jour_7 ---
+    - name: "Linky Jour 7"
+      unique_id: linky_jour_7
+      state: >-
+        {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_7_HP') | float(0) / 1000) +
+            (state_attr('sensor.linky_25481620821301_consumption', 'day_7_HC') | float(0) / 1000)) | round(1) }}
+      unit_of_measurement: kWh
+      icon: mdi:flash-outline
+      attributes:
+        jour: >-
+          {% set jours = {
+            'Monday': 'Lundi', 'Tuesday': 'Mardi', 'Wednesday': 'Mercredi',
+            'Thursday': 'Jeudi', 'Friday': 'Vendredi',
+            'Saturday': 'Samedi', 'Sunday': 'Dimanche'
+          } %}
+          {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% set date_str = dailyweek[6] if dailyweek else None %}
+          {% if date_str %}
+            {% if '-' in date_str %}
+              {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
+            {% elif '/' in date_str %}
+              {% set p = date_str.split('/') %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+            {% endif %}
+            {{ jours[eng] if eng in jours else eng }}
+          {% else %}Inconnu{% endif %}
+        hp_kwh: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_7_HP') | float(0) / 1000) | round(1) }}
+        hc_kwh: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_7_HC') | float(0) / 1000) | round(1) }}
+        total_kwh: >-
+          {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_7_HP') | float(0) / 1000) +
+              (state_attr('sensor.linky_25481620821301_consumption', 'day_7_HC') | float(0) / 1000)) | round(1) }}
+        cout: >-
+          {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[6] | float(0)) | round(1) }}
+
+# annotations_log:
+#   - 2026-03-07: migration depuis ancien repo (11_2_energie_linky_25481620821301_card.yaml)
+#                 refactoring: dict jours inline, now().year (plus robuste)
+#                 emplacement: templates/P0_Energie_total_diag/Linky/

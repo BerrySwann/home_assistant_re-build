@@ -1,6 +1,29 @@
-# ╭────────────────────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATES : SÉRIE 04_03. LUMIÈRES — ÉTATS ET ICÔNES FUSIONNÉS                          │
-# ╰────────────────────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. UI DASHBOARD : ÉTATS ET ICÔNES DES LUMIÈRES PAR PIÈCE           │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs templates dédiés exclusivement à l'affichage visuel sur le
+# tableau de bord. Génèrent des textes d'état lisibles (Allumé/Éteint/Bureau/
+# Éco./Zone G., etc.) et des icônes dynamiques (mdi:/hue:) pour chaque pièce
+# et sous-zone. Ne contient aucun calcul énergétique (kWh/W).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources : light.[groupe_piece], switch.[prise], binary_sensor.moniteur_pc
+# - Logique conditionnelle Jinja2 : is_state() combiné selon les sous-zones
+# - Pièces couvertes : Appartement (global), Entrée, Salon, Cuisine, Couloir,
+#   Bureau (3 sensors : Bureau/Écran/Bureau-Général), SDB, Chambre (2 sensors)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce fichier est dans ui_dashboard/ : INTERDIT d'y ajouter des kWh ou W.
+# - sensor.lumiere_bureau_etat et sensor.lumiere_ecran_etat sont des sources
+#   l'un pour l'autre — l'ordre de chargement dans HA peut créer un état
+#   'unknown' au démarrage (normal, se résout après le 1er cycle de templates).
+# - Les icônes hue:flourish-alt et hue:flourish nécessitent l'intégration
+#   Hue custom icons pour s'afficher correctement.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L3C1 Commandes Éclairage (états couleur + icônes par pièce)
 
 - sensor:
 # ┌───────────────────────────────────────────────────────────────────┐
@@ -161,7 +184,7 @@
         {% else %}
           mdi:monitor
         {% endif %}
-        
+
 # ┌───────────────────────────────────────────────────────────────────┐
 # │ 7. BUREAU --- Bureau-Général ---                                  │
 # └───────────────────────────────────────────────────────────────────┘
@@ -172,7 +195,7 @@
       state: >
         {% set bureau = states('sensor.lumiere_bureau_etat') %}
         {% set ecran = states('sensor.lumiere_ecran_etat') %}
-        
+
         {% if bureau == 'Allumé' and ecran == 'Allumé' %}
           Allumé
         {% elif bureau == 'Allumé' and ecran == 'Allumé & Sync.' %}
@@ -252,7 +275,7 @@
         {% else %}
           {% set gg = is_state('light.hue_color_candle_chambre_gege', 'on') %}
           {% set er = is_state('light.hue_color_candle_chambre_eric', 'on') %}
-          
+
           {% if gg and er %}
             Tête Lit, allumée
           {% elif gg %}

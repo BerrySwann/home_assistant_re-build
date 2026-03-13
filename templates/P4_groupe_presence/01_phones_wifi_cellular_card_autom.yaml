@@ -1,6 +1,30 @@
 # ╭────────────────────────────────────────────────────────────────────────╮
-# │ SENSOR : SÉRIE 06. TÉLÉPHONES — ÉTAT WI-FI & SYNTHÈSE                  │
+# │ PÔLE 4. TEMPLATE : TÉLÉPHONES — ÉTAT WI-FI & SYNTHÈSE PRÉSENCE        │
 # ╰────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensors template détectant l'état de connexion Wi-Fi individuel des deux
+# téléphones (Mamour : Poco X7 Pro Mamour / Eric : Poco X7 Pro) et
+# calculant un statut de présence combiné (couleur + nombre) pour
+# l'affichage sur le dashboard Wi-Fi/Présence.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - sensor.poco_x7_pro_mamour_network_type → 'wifi' ou autre
+# - sensor.poco_x7_pro_mamour_wi_fi_connection → SSID 'Freebox_GG'
+# - sensor.poco_x7_pro_network_type → 'wifi' ou autre
+# - sensor.poco_x7_pro_wi_fi_connection → SSID 'Freebox_GG'
+# - Résultat : true / wifi_!? / false par téléphone
+# - etat_wifi_maison : 0 / "Mamour" / "Eric" / 2 + attribut couleur
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Le SSID 'Freebox_GG' est codé en dur — à mettre à jour si changement
+#   de box ou de nom réseau.
+# - wifi_!? signifie connecté en Wi-Fi mais PAS sur le bon réseau (voisin).
+# - Dépend de l'intégration Companion App (HA) sur chaque téléphone.
+#   Sans l'app active en background, les sensors peuvent être 'unavailable'.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - WIFI_PRESENCE (Page Home — vignette présence Wi-Fi, bubble-card)
 
 - sensor:
     # ┌───────────────────────────────────┐

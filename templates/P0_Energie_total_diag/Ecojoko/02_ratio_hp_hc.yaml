@@ -1,24 +1,30 @@
-# ╭──────────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATE : PÔLE 0. ECOJOKO — RATIO HC % (MENSUEL)                            │
-# │ Seuil rentabilité : > 25% = limite / > 33% = rentable                        │
-# ╰──────────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. TEMPLATE : ECOJOKO — RATIO RENTABILITÉ HC % (MENSUEL)           │
+# │ Seuils : > 25% = limite / > 33% = rentable                              │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensor template calculant le pourcentage d'Heures Creuses sur la
+# consommation mensuelle totale Ecojoko. Indique si l'abonnement HC
+# est rentable (> 33%) ou limite (> 25%).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : (kWh HC mensuel / kWh Total mensuel) × 100
+# - Source HC  : sensor.ecojoko_hc_reseau_mensuel_um (UM monthly P0)
+# - Source HP  : sensor.ecojoko_hp_reseau_mensuel_um (UM monthly P0)
+# - Garde division zéro : if total > 0 else 0
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - En début de mois (total ~ 0), la valeur retourne 0 — comportement normal.
+# - Les seuils 25% et 33% sont indicatifs selon le différentiel tarifaire
+#   HP/HC en vigueur (peut changer avec les révisions EDF).
+# - Ne pas utiliser les sensors Linky globaux (non découpés HP/HC daily).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (section ratios Linky/HC, slider rentabilité)
 
 - sensor:
-    # --- ecojoko_ratio_hc_quotidien ---
-    - name: "Ecojoko Ratio HC Quotidien"
-      unique_id: ecojoko_ratio_hc_quotidien
-      unit_of_measurement: "%"
-      state_class: measurement
-      icon: mdi:percent
-      state: >
-        {% set hp = states('sensor.ecojoko_hp_reseau_quotidien_um') | float(0) %}
-        {% set hc = states('sensor.ecojoko_hc_reseau_quotidien_um') | float(0) %}
-        {% set total = hp + hc %}
-        {{ ((hc / total) * 100) | round(1) if total > 0 else 0 }}
-      availability: >
-        {{ states('sensor.ecojoko_hp_reseau_quotidien_um') not in ['unavailable','unknown','none']
-          and states('sensor.ecojoko_hc_reseau_quotidien_um') not in ['unavailable','unknown','none'] }}
-    
+
     # --- ecojoko_ratio_hc_mensuel ---
     - name: "Ecojoko Ratio HC Mensuel"
       unique_id: ecojoko_ratio_hc_mensuel

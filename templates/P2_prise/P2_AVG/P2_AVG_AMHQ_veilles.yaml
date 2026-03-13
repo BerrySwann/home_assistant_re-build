@@ -1,23 +1,28 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATE : P2_AVG_VEILLES | PUISSANCE MOYENNE VEILLES (W) AMHQ           │
+# │ TEMPLATE : P2_AVG_VEILLES | PUISSANCE MOYENNE STANDBY (W) AMHQ          │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Calcule la puissance moyenne continue équivalente (en Watts) lissée sur 
-# 4 périodes (Annuel, Mensuel, Hebdomadaire, Quotidien) pour l'ensemble 
-# des veilles globales de l'appartement (Standby).
+# Calcule la puissance moyenne continue équivalente (en Watts) lissée sur
+# 4 périodes : Annuel, Mensuel, Hebdomadaire, Quotidien (AMHQ) pour les
+# veilles globales de l'appartement (all_standby). Complément de
+# P2_AVG_AMHQ_prises.yaml, dédié exclusivement à la consommation fantôme.
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Formule : (Consommation_kWh_UM × 1000) ÷ nombre_heures_écoulées_dans_le_cycle
-# - Sources : Capteurs Utility Meter (_kwh_um) de 'all_standby'.
+# - Source : sensor.all_standby_[cycle]_kwh_um (P2_UM_AMHQ_veilles.yaml)
+# - Quotidien   : h = now().hour + (now().minute / 60)
+# - Hebdomadaire: hh = (now().weekday() * 24) + h
+# - Mensuel     : hm = ((now().day - 1) * 24) + h
+# - Annuel      : ha = ((now().timetuple().tm_yday - 1) * 24) + h
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Ce fichier complète la logique de 'P2_kWh_veilles.yaml'.
-# - La division par zéro au début de chaque cycle est évitée par la 
-#   condition mathématique (if h > 0.1 else 0).
+# - La division par zéro est évitée par la condition (if h > 0.1 else 0).
+# - Ce fichier complète P2_kWh_veilles.yaml (intégration) et
+#   P2_UM_AMHQ_veilles.yaml (utility_meter) dans la chaîne de dépendances.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - Sert à la remontée d'info pour la vignette : L2C1 Conso Énergie Générale
+# - L2C1 Conso Énergie Générale (puissance de croisière veilles).
 
 - sensor:
   # --- all_standby_avg_watts_quotidien ---
@@ -61,5 +66,5 @@
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
 # annotations_log:
-# - [Création] Extraction des calculs AVG pour les veilles dans un fichier dédié.
-# - [L1-18] Ajout de l'en-tête documentaire, de la boîte ASCII et du ciblage de la vignette L2C1.
+# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.
+# - [L34] Source UM veilles : all_standby_[cycle]_kwh_um (sans préfixe prise_).

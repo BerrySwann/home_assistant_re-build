@@ -1,10 +1,26 @@
-# ╭──────────────────────────────────────────────────────────────────────╮
-# │    PÔLE 3. TOTAUX : GROUP (7 zones) + UNIT (19 lampes)               │
-# ╰──────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. UTILITY METER : ÉCLAIRAGE — AMHQ TOTAL APPARTEMENT               │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Compteurs Utility Meter donnant la consommation totale de tout l'éclairage
+# de l'appartement en 4 cycles AMHQ. Représente la somme de toutes les ampoules
+# de toutes les pièces.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : sensor.eclairage_total_appartement_energie_totale_kwh (calculé
+#   dans sensors/P3_eclairage/P3_kWh_3_TOTAL.yaml).
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# Ce total est la somme logique de toutes les zones. Vérifier cohérence avec
+# les UM par zone (2_ZONE) pour détecter les dérives.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (vignette total éclairage)
 
-# ╭──────────────────────────────────────────────────────────────────────╮
-# │    PÔLE 3. TOTAL : PAR REGROUPEMENT (7 zones)                        │
-# ╰──────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │    PÔLE 3. TOTAL : PAR REGROUPEMENT (7 zones)                            │
+# ╰──────────────────────────────────────────────────────────────────────────╯
 
 # --- eclairage_total_group ---
 eclairage_total_group_annuel_kwh_um:
@@ -31,9 +47,9 @@ eclairage_total_group_quotidien_kwh_um:
   unique_id: eclairage_total_group_quotidien_kwh_um
   cycle: daily
 
-# ╭──────────────────────────────────────────────────────────────────────╮
-# │    PÔLE 3. TOTAL : À L'UNITÉ (19 lampes)                             │
-# ╰──────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │    PÔLE 3. TOTAL : À L'UNITÉ (19 lampes)                                 │
+# ╰──────────────────────────────────────────────────────────────────────────╯
 
 # --- eclairage_total_unit ---
 eclairage_total_unit_annuel_kwh_um:
@@ -59,3 +75,6 @@ eclairage_total_unit_quotidien_kwh_um:
   name: "Eclairage Total Unit Quotidien kWh UM"
   unique_id: eclairage_total_unit_quotidien_kwh_um
   cycle: daily
+
+# annotations_log:
+# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.

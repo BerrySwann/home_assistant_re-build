@@ -1,6 +1,23 @@
-# ╭──────────────────────────────────────────────────────────────────────╮
-# │     PÔLE 3. ÉCLAIRAGE : PAR ZONE PAR PIECE ou A L'UNITÉ              │
-# ╰──────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. UTILITY METER : ÉCLAIRAGE — AMHQ PAR ZONE / PIÈCE                │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Compteurs Utility Meter découpant la consommation par zone/pièce (somme de
+# toutes les ampoules d'une pièce) en 4 cycles AMHQ. Zones : Salon (5x),
+# Appart (3x = Entrée+Cuisine+Couloir), Cuisine (1x), Appart (2x = Entrée+Couloir),
+# Bureau (5x), SDB (2x), Chambre (4x).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources : sensor.eclairage_[zone]_energie_totale_kwh (capteurs somme calculés
+#   dans sensors/P3_eclairage/P3_kWh_2_ZONE.yaml via templates P3_01_somme_par_piece.yaml).
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# Les zones APPART regroupent plusieurs pièces (entrée+couloir ou entrée+cuisine+couloir).
+# Ne pas créer de doublons avec les zones par pièce individuelle.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (vue par pièce/zone)
 
 #┌───────────────────────────────────┐
 #│     ZONE 4. (5x) SALON            │
@@ -262,3 +279,6 @@ eclairage_couloir_1_quotidien_kwh_um:
   name: "Eclairage Couloir 1 Quotidien kWh UM"
   unique_id: eclairage_couloir_1_quotidien_kwh_um
   cycle: daily
+
+# annotations_log:
+# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.
