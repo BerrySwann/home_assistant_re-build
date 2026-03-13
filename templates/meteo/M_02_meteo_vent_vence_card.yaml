@@ -1,6 +1,30 @@
 # ╭────────────────────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATES : SÉRIE 01_3. MÉTÉO — VENT VENCE (windrose-card / LABEL / VITESSE)           │
+# │ MÉTÉO. TEMPLATE : VENT VENCE — DIRECTION (windrose-card / LABEL) & VITESSE KM/H        │
 # ╰────────────────────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensors template créant 3 capteurs de vent pour Vence : direction en
+# label 16 points cardinaux (N, NNE, NE...), bearing en degrés (pour
+# windrose-card), et vitesse en km/h (conversion depuis m/s). Alimentent
+# la windrose-card et les indicateurs vent du dashboard météo.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : weather.vence (intégration Météo France ou OpenWeatherMap)
+#   attributs : wind_bearing (°), wind_speed (m/s)
+# - Label direction : tranches de 22.5° → 16 points cardinaux
+# - Bearing : valeur brute arrondie, remplace 0° par 1° (windrose-card
+#   interprète 0 comme "pas de données")
+# - Vitesse : wind_speed × 3.6 → km/h (arrondi 1 décimale)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Si wind_bearing est None (vent nul), label retourne 'Calme' et
+#   bearing retourne 0 — windrose-card affichera une rose vide.
+# - windrose-card nécessite le bearing en degrés (sensor vence_wind_bearing)
+#   et la vitesse en km/h (sensor vence_wind_speed_kmh) — ne pas inverser.
+# - L'intégration weather.vence peut avoir un intervalle de MàJ de 30-60min.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C1 Météo (windrose-card vent, vignette direction/vitesse/label)
 
 - sensor:
 # ┌───────────────────────────────────────────────────────────────────┐

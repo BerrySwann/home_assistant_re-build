@@ -1,25 +1,32 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ UTILITY METER : PÔLE 2. PRISES (DÉCOUPAGE AMHQ)                          │
+# │ PÔLE 2. UTILITY METER : PRISES CONNECTÉES — AMHQ                        │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Découpage des compteurs d'énergie (kWh) des prises physiques en 
-# 4 cycles temporels : Annuel, Mensuel, Hebdomadaire, Quotidien.
+# Compteurs Utility Meter découpant la consommation de chaque prise connectée
+# (17 prises sur 5 pièces) en 4 cycles temporels : Annuel, Mensuel,
+# Hebdomadaire, Quotidien (AMHQ). Ces UM sont les sources primaires pour les
+# templates AVG P2 et pour les diagnostics de conso par pôle.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Sources : Entités d'intégration de Riemann (_energie_totale_kwh) du Pôle 2.
+# - Sources : sensor.prise_[appareil]_energie_totale_kwh (P2_kWh_prises.yaml)
+# - Exception : sensor.four_et_plaque_de_cuisson_energie_totale_kwh (sans prise_)
+# - Couvre : 1.ENTRÉE (×2), 4.SALON (×3), 5.CUISINE (×8), 7.BUREAU (×2), 9.CHAMBRE (×2)
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Ces entités se remettent à zéro automatiquement à la fin de leur cycle.
-# - L'attribut 'last_period' conserve la valeur exacte du cycle précédent.
+# - Les cycles se réinitialisent automatiquement (minuit/lundi/1er du mois/1er janvier).
+# - La valeur précédente est stockée dans 'last_period' (utile pour comparaisons).
+# - Ne pas confondre avec P2_UM_AMHQ_veilles.yaml qui gère uniquement all_standby.
+# - Le four/plaque n'a pas le préfixe 'prise_' dans son nom d'entité.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - Alimente la vignette : L2C3 Commandes Éco et les graphiques de suivi.
+# - L2C1 Conso Énergie Générale (source des templates AVG P2 et diag pôles).
 
 # ┌───────────────────────────────────┐
 # │ 1. ENTRÉE                         │
 # └───────────────────────────────────┘
-# --- prise_box_internet_ikea ---
+
+# --- box_internet ---
 prise_box_internet_ikea_annuel_kwh_um:
   source: sensor.prise_box_internet_ikea_energie_totale_kwh
   name: "Prise Box Internet IKEA Annuel kWh UM"
@@ -44,7 +51,7 @@ prise_box_internet_ikea_quotidien_kwh_um:
   unique_id: prise_box_internet_ikea_quotidien_kwh_um
   cycle: daily
 
-# --- prise_horloge_ikea ---
+# --- horloge ---
 prise_horloge_ikea_annuel_kwh_um:
   source: sensor.prise_horloge_ikea_energie_totale_kwh
   name: "Prise Horloge IKEA Annuel kWh UM"
@@ -72,7 +79,8 @@ prise_horloge_ikea_quotidien_kwh_um:
 # ┌───────────────────────────────────┐
 # │ 4. SALON                          │
 # └───────────────────────────────────┘
-# --- prise_pc_s_gege_ikea ---
+
+# --- pc_s_gege ---
 prise_pc_s_gege_ikea_annuel_kwh_um:
   source: sensor.prise_pc_s_gege_ikea_energie_totale_kwh
   name: "Prise PC S-Gege IKEA Annuel kWh UM"
@@ -97,7 +105,7 @@ prise_pc_s_gege_ikea_quotidien_kwh_um:
   unique_id: prise_pc_s_gege_ikea_quotidien_kwh_um
   cycle: daily
 
-# --- prise_salon_chargeur_nous ---
+# --- chargeur_salon ---
 prise_salon_chargeur_nous_annuel_kwh_um:
   source: sensor.prise_salon_chargeur_nous_energie_totale_kwh
   name: "Prise Salon Chargeur NOUS Annuel kWh UM"
@@ -122,7 +130,7 @@ prise_salon_chargeur_nous_quotidien_kwh_um:
   unique_id: prise_salon_chargeur_nous_quotidien_kwh_um
   cycle: daily
 
-# --- prise_tv_salon_ikea ---
+# --- tv_salon ---
 prise_tv_salon_ikea_annuel_kwh_um:
   source: sensor.prise_tv_salon_ikea_energie_totale_kwh
   name: "Prise TV Salon IKEA Annuel kWh UM"
@@ -150,7 +158,8 @@ prise_tv_salon_ikea_quotidien_kwh_um:
 # ┌───────────────────────────────────┐
 # │ 5. CUISINE                        │
 # └───────────────────────────────────┘
-# --- prise_four_micro_ondes_nous ---
+
+# --- four_micro_ondes ---
 prise_four_micro_ondes_nous_annuel_kwh_um:
   source: sensor.prise_four_micro_ondes_nous_energie_totale_kwh
   name: "Prise Four Micro-ondes NOUS Annuel kWh UM"
@@ -175,7 +184,7 @@ prise_four_micro_ondes_nous_quotidien_kwh_um:
   unique_id: prise_four_micro_ondes_nous_quotidien_kwh_um
   cycle: daily
 
-# --- prise_petit_dejeune_nous ---
+# --- petit_dejeune ---
 prise_petit_dejeune_nous_annuel_kwh_um:
   source: sensor.prise_petit_dejeune_nous_energie_totale_kwh
   name: "Prise Petit Dejeuné NOUS Annuel kWh UM"
@@ -200,7 +209,7 @@ prise_petit_dejeune_nous_quotidien_kwh_um:
   unique_id: prise_petit_dejeune_nous_quotidien_kwh_um
   cycle: daily
 
-# --- prise_lave_linge_nous ---
+# --- lave_linge ---
 prise_lave_linge_nous_annuel_kwh_um:
   source: sensor.prise_lave_linge_nous_energie_totale_kwh
   name: "Prise Lave-Linge NOUS Annuel kWh UM"
@@ -225,7 +234,7 @@ prise_lave_linge_nous_quotidien_kwh_um:
   unique_id: prise_lave_linge_nous_quotidien_kwh_um
   cycle: daily
 
-# --- prise_lave_vaisselle_nous ---
+# --- lave_vaisselle ---
 prise_lave_vaisselle_nous_annuel_kwh_um:
   source: sensor.prise_lave_vaisselle_nous_energie_totale_kwh
   name: "Prise Lave-Vaisselle NOUS Annuel kWh UM"
@@ -250,7 +259,7 @@ prise_lave_vaisselle_nous_quotidien_kwh_um:
   unique_id: prise_lave_vaisselle_nous_quotidien_kwh_um
   cycle: daily
 
-# --- prise_airfryer_ninja_nous ---
+# --- airfryer_ninja ---
 prise_airfryer_ninja_nous_annuel_kwh_um:
   source: sensor.prise_airfryer_ninja_nous_energie_totale_kwh
   name: "Prise AirFryer Ninja NOUS Annuel kWh UM"
@@ -300,7 +309,7 @@ four_et_plaque_de_cuisson_quotidien_kwh_um:
   unique_id: four_et_plaque_de_cuisson_quotidien_kwh_um
   cycle: daily
 
-# --- prise_frigo_cuisine_nous ---
+# --- frigo_cuisine ---
 prise_frigo_cuisine_nous_annuel_kwh_um:
   source: sensor.prise_frigo_cuisine_nous_energie_totale_kwh
   name: "Prise Frigo Cuisine NOUS Annuel kWh UM"
@@ -325,7 +334,7 @@ prise_frigo_cuisine_nous_quotidien_kwh_um:
   unique_id: prise_frigo_cuisine_nous_quotidien_kwh_um
   cycle: daily
 
-# --- prise_congelateur_cuisine_nous ---
+# --- congelateur_cuisine ---
 prise_congelateur_cuisine_nous_annuel_kwh_um:
   source: sensor.prise_congelateur_cuisine_nous_energie_totale_kwh
   name: "Prise Congelateur Cuisine NOUS Annuel kWh UM"
@@ -353,7 +362,8 @@ prise_congelateur_cuisine_nous_quotidien_kwh_um:
 # ┌───────────────────────────────────┐
 # │ 7. BUREAU                         │
 # └───────────────────────────────────┘
-# --- prise_bureau_pc_ikea ---
+
+# --- bureau_pc ---
 prise_bureau_pc_ikea_annuel_kwh_um:
   source: sensor.prise_bureau_pc_ikea_energie_totale_kwh
   name: "Prise Bureau PC IKEA Annuel kWh UM"
@@ -378,7 +388,7 @@ prise_bureau_pc_ikea_quotidien_kwh_um:
   unique_id: prise_bureau_pc_ikea_quotidien_kwh_um
   cycle: daily
 
-# --- prise_bureau_fer_a_repasser_nous ---
+# --- fer_a_repasser ---
 prise_bureau_fer_a_repasser_nous_annuel_kwh_um:
   source: sensor.prise_bureau_fer_a_repasser_nous_energie_totale_kwh
   name: "Prise Bureau Fer à Repasser NOUS Annuel kWh UM"
@@ -406,7 +416,8 @@ prise_bureau_fer_a_repasser_nous_quotidien_kwh_um:
 # ┌───────────────────────────────────┐
 # │ 9. CHAMBRE                        │
 # └───────────────────────────────────┘
-# --- prise_tete_de_lit_chambre ---
+
+# --- tete_de_lit ---
 prise_tete_de_lit_chambre_annuel_kwh_um:
   source: sensor.prise_tete_de_lit_chambre_energie_totale_kwh
   name: "Prise Tete de Lit Chambre Annuel kWh UM"
@@ -431,7 +442,7 @@ prise_tete_de_lit_chambre_quotidien_kwh_um:
   unique_id: prise_tete_de_lit_chambre_quotidien_kwh_um
   cycle: daily
 
-# --- prise_tv_chambre_nous ---
+# --- tv_chambre ---
 prise_tv_chambre_nous_annuel_kwh_um:
   source: sensor.prise_tv_chambre_nous_energie_totale_kwh
   name: "Prise TV Chambre NOUS Annuel kWh UM"
@@ -457,5 +468,5 @@ prise_tv_chambre_nous_quotidien_kwh_um:
   cycle: daily
 
 # annotations_log:
-# - [L1-18] Ajout de l'en-tête documentaire.
-# - [L310-335] Suppression de la catégorie "10. AUTRE". Les Utility Meters 'all_standby' sont migrés vers un fichier dédié.
+# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.
+# - [L29-32] four_et_plaque_de_cuisson : sans préfixe prise_ (exception nomenclature).

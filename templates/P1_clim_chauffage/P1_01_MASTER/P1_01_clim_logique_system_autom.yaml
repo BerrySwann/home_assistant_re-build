@@ -1,6 +1,35 @@
 # ╭────────────────────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATES : SÉRIE 03_05. -=<( SYSTEM CLIM - LOGIQUE COMPLETE )>=-                      │
+# │ PÔLE 1. TEMPLATE MASTER : LOGIQUE SYSTÈME CLIMATISATION COMPLÈTE                       │
 # ╰────────────────────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Fichier master centralisant toute la logique de calcul thermique :
+# détection du mode Été/Hiver, consignes de base, températures cibles,
+# confort jour/nuit, corrections par pièce et deltas ADEME. C'est le
+# cerveau du système thermique — toutes les automations clim en dépendent.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - sensor.th_balcon_nord_temperature : T° extérieure (sonde SONOFF balcon)
+# - sensor.seuil_non_chauffage_bas : 18°C (fixe — seuil bascule heat/fan)
+# - sensor.consigne_de_base : 18°C (hiver) / 28°C (été)
+# - sensor.temperature_differentielle : 19°C (hiver) / 27°C (été)
+# - Deltas fixes : delta_1=1, delta_2=2, delta_3=3, delta_5=5, delta_7=7 (°C)
+# - T° confort = différentielle + (T°cible - consigne_de_base)
+# - T°cible modulée par T°ext (paliers < 8°C, < 10°C, < 12°C, > 32°C, > 40°C)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Fichier CRITIQUE : toute modification impacte ALL les automations clim.
+# - La logique absence (17°C eco, 18°C/19°C selon T°ext) est ici — ne pas
+#   dupliquer dans les automations.
+# - Les sensors Deltas (delta_1..7) sont des constantes déclarées ici pour
+#   éviter les valeurs codées en dur dans 10+ endroits différents.
+# - Dépendance circulaire possible : temperature_confort_jour dépend de
+#   temperature_cible qui dépend de consigne_de_base — ordre de calcul HA
+#   géré automatiquement mais vérifier les états 'unknown' au démarrage.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C3 Commandes Clim (toutes les consignes, états modes, T°cibles)
+# - L1C2 Températures (T° moyenne intérieure, delta intérieur/extérieur)
 
 - sensor:
 # ┌───────────────────────────────────────────────────────────────────┐
@@ -248,8 +277,8 @@
     - name: "Température Delta (Affichage)"
       unique_id: temperature_delta_affichage
       state: >
-        T̄i {{ states('sensor.temperature_moyenne_interieure') | float(0) | round(1) }}°C 
-        Te {{ states('sensor.th_balcon_nord_temperature') | float(0) | round(1) }}°C 
+        T̄i {{ states('sensor.temperature_moyenne_interieure') | float(0) | round(1) }}°C
+        Te {{ states('sensor.th_balcon_nord_temperature') | float(0) | round(1) }}°C
         ΔT = {{ (states('sensor.temperature_moyenne_interieure') | float(0) - states('sensor.th_balcon_nord_temperature') | float(0)) | round(1) }}°C
 
 # --- delta_ademe_recommande ---
@@ -258,5 +287,5 @@
       unit_of_measurement: "°C"
       icon: "mdi:delta"
       state: >
-        {{ (states('sensor.temperature_confort') | float(0) - 
+        {{ (states('sensor.temperature_confort') | float(0) -
             states('sensor.th_balcon_nord_temperature') | float(0)) | round(1) }}

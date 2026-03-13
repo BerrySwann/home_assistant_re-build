@@ -1,3 +1,27 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. SENSORS : INTÉGRATION kWh — ÉCLAIRAGE À L'UNITÉ (19 AMPOULES)   │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs d'intégration Riemann calculant l'énergie totale cumulée (kWh)
+# pour chaque ampoule individuelle (19 ampoules Hue/Sonoff). Sont les sources
+# primaires pour les utility_meter P3_UM_AMHQ_1_UNITE.yaml et les moyennes
+# AVG P3_AVG_AMHQ_1_UNITE.yaml.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : ∫ Power (W) dt → kWh (méthode left, arrondi 3 décimales)
+# - Sources : sensor.[ampoule]_power (capteurs puissance Hue/Zigbee/Sonoff)
+# - 19 ampoules : 1 Entrée + 5 Salon + 1 Cuisine + 1 Couloir + 5 Bureau + 2 SDB + 4 Chambre
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ces sensors s'accumulent sans remise à zéro. Les cycles AMHQ sont dans
+#   utility_meter/ (P3_UM_AMHQ_1_UNITE.yaml).
+# - Les ampoules Hue reportent la puissance uniquement quand allumées (0W sinon).
+#   method: left est préférable pour éviter les artefacts de transition.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (source des UM P3 à l'unité)
+
   # ╭──────────────────────────────────────────────────────────────────────╮
   # │    PÔLE 3. ÉNERGIE: [kWh] ÉCLAIRAGE À L'UNITÉ (19 lampes)            │
   # ╰──────────────────────────────────────────────────────────────────────╯

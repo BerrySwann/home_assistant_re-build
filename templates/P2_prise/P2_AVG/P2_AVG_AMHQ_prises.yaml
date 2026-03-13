@@ -3,7 +3,7 @@
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Calcule la puissance moyenne continue équivalente (en Watts) lissée sur 
+# Calcule la puissance moyenne continue équivalente (en Watts) lissée sur
 # 4 périodes : Annuel, Mensuel, Hebdomadaire, Quotidien (AMHQ) pour les prises.
 #
 # ## 🧮 CALCUL & SOURCES :
@@ -15,10 +15,10 @@
 # - Ce n'est pas la puissance en direct, mais une moyenne de tirage ("Average").
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - Sert aux graphiques de détails affichés au clic depuis la vignette : 
+# - Sert aux graphiques de détails affichés au clic depuis la vignette :
 #   L3C2 Commandes Éco (Prises).
 
-- sensor: 
+- sensor:
   # ┌───────────────────────────────────┐
   # │ 1. ENTRÉE                         │
   # └───────────────────────────────────┘

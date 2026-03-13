@@ -1,6 +1,24 @@
-# ╭──────────────────────────────────────────────────────────────────────╮
-# │         PÔLE 1. ÉNERGIE: [_um] CHAUFFAGE & CLIMATISATION             │
-# ╰──────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 1. UTILITY METER : CHAUFFAGE & CLIMATISATION — AMHQ                 │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Compteurs Utility Meter découpant la consommation énergétique de chaque
+# équipement de chauffage/clim en 4 cycles temporels (Annuel, Mensuel,
+# Hebdomadaire, Quotidien). Couvre 5 pièces : Salon, Cuisine, Bureau, SDB,
+# Chambre.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources : sensor.[equipement]_nous_energy (prises connectées NOUS) pour
+#   les clims et sensor.prise_[equipement]_nous_energy pour soufflant/sèche-
+#   serviette SDB. Intégration via la plateforme Riemann dans sensors/P1_.
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# Ne pas confondre avec les sensors kWh cumulatifs — cet UM est la couche
+# temporelle. Le cycle daily se réinitialise à minuit (pas au démarrage HA).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C2 Conso Énergie Clim/Radiateur/Soufflant
 
 #┌───────────────────────────────────┐
 #│         4. SALON                  │
@@ -124,3 +142,5 @@ clim_chambre_quotidien_um:
   source: sensor.clim_chambre_nous_energy
   cycle: daily
 
+# annotations_log:
+# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.

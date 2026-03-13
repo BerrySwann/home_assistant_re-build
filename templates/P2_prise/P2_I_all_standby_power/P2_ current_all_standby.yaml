@@ -4,11 +4,16 @@
 #
 # ## 📝 DESCRIPTION :
 # Capteur virtuel (Dummy sensor) fixant l'ampérage total des veilles à 0A.
-# Utile uniquement pour satisfaire les exigences de la carte graphique 
+# Utile uniquement pour satisfaire les exigences de la carte graphique
 # (streamline-card / ApexCharts) du Dashboard qui exige cette entité.
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Valeur fixe (0) pour économiser les ressources de calcul du CPU.
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce capteur n'est pas lié à une mesure réelle. Il est purement fonctionnel
+#   pour éviter une erreur de chargement de la carte graphique (entité manquante).
+# - Ne pas supprimer sans vérifier que la carte dashboard ne le référence plus.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Vignette L2C1/L2C3 (Détails de consommation des veilles).

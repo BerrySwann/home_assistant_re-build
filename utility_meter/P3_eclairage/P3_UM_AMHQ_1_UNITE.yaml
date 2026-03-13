@@ -1,6 +1,24 @@
-# ╭──────────────────────────────────────────────────────────────────────╮
-# │     PÔLE 3. ÉCLAIRAGE : PAR PIECE A L'UNITÉ (DÉCOUPAGE A/M/H/Q)      │
-# ╰──────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. UTILITY METER : ÉCLAIRAGE — AMHQ PAR AMPOULE (UNITÉ)             │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Compteurs Utility Meter découpant la consommation de chaque ampoule Hue
+# individuellement en 4 cycles AMHQ. Couvre 7 pièces : Entrée (1x), Salon (5x),
+# Cuisine (1x), Couloir (1x), Bureau (5x), SDB (2x), Chambre (4x).
+# Total : 19 ampoules × 4 cycles = 76 compteurs.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources : sensor.[ampoule]_energie_totale_kwh (capteurs d'intégration
+#   Riemann calculés dans sensors/P3_eclairage/P3_kWh_1_UNITE.yaml).
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# Les sources doivent exister dans HA avant activation. Vérifier que le fichier
+# P3_kWh_1_UNITE.yaml est bien chargé. Ne pas confondre UNITE (ampoule seule)
+# avec ZONE (somme par pièce).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (détail par ampoule)
 
 #┌───────────────────────────────────┐
 #│         1. ENTRÉE                 │
@@ -504,3 +522,6 @@ hue_color_candle_chambre_eric_quotidien_kwh_um:
   name: "Hue Color Candle Chambre Eric Quotidien kWh UM"
   unique_id: hue_color_candle_chambre_eric_quotidien_kwh_um
   cycle: daily
+
+# annotations_log:
+# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.

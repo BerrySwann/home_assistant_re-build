@@ -1,3 +1,29 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. TEMPLATES : SOMMES DE PUISSANCE PAR PIÈCE ET PAR ZONE (W)       │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs templates calculant la puissance instantanée totale (W) pour
+# chaque pièce (7 sensors par pièce) et pour 2 zones transversales (Appart
+# 3x et Appart 2x). Sert de couche d'agrégation entre les ampoules physiques
+# et les capteurs de total global. Inclut aussi 2 totaux croisés (par
+# regroupement et à l'unité).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : somme des sensor.[ampoule]_power | float(0) pour chaque pièce
+# - Sources physiques directes : sensor.hue_*_power, sensor.relais_*_power
+# - Garde | float(0) sur chaque source pour éviter les valeurs nulles
+# - 11 sensors au total : 7 pièces + 2 zones transversales + 2 totaux
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Les totaux eclairage_total_group_puissance et eclairage_total_unit_puissance
+#   doivent toujours donner le même résultat théorique (contrôle de cohérence).
+# - Ne pas confondre ce fichier (puissance instantanée W) avec les fichiers
+#   kWh d'intégration (sensors/) ou les moyennes AVG (P3_AVG/).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (puissance temps réel par pièce)
+
 - sensor:
       # ╭──────────────────────────────────────────────────────────────────────╮
       # │    PÔLE 3. REGROUPEMENTS ÉCLAIRAGE : SOMMES PAR PIÈCE (_puissance)   │

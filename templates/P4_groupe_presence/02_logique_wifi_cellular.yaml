@@ -1,6 +1,31 @@
 # ╭────────────────────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATES : P4 PRÉSENCE — LOGIQUE WIFI / CELLULAIRE (GROUPE & STATUTS)                 │
+# │ PÔLE 4. TEMPLATE : PRÉSENCE — LOGIQUE WIFI / CELLULAIRE (GROUPE & STATUTS)             │
 # ╰────────────────────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensors template calculant l'état de présence global via deux sensors :
+# - sensor.groupe : code numérique (groupe_1=Absent / groupe_2=Mamour /
+#   groupe_3=Eric / groupe_4=Tous) pour déclencher les automations.
+# - sensor.presence : texte formaté affichant les statuts réseau de chaque
+#   téléphone (WIFI / CELL / WIFI_!?) pour le dashboard.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - sensor.poco_x7_pro_mamour_network_type / wi_fi_connection (Mamour)
+# - sensor.poco_x7_pro_network_type / wi_fi_connection (Eric)
+# - SSID cible : 'Freebox_GG' (codé en dur dans les deux sensors)
+# - Logique groupe : AND → groupe_4, Eric seul → groupe_3, Mamour → groupe_2
+# - Logique présence : affichage "[2] en [WIFI]" ou "[Mamour: WIFI/CELL]"
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - sensor.groupe alimente les AUTOMATIONS de présence (volets, clim, etc.)
+#   — toute modification a un impact direct sur le comportement de la maison.
+# - WIFI_!? = connecté Wi-Fi mais SSID inconnu (ex: chez un voisin).
+#   Ne pas traiter comme une présence valide.
+# - Prévoir un délai de confirmation (5-10 min) dans les automations pour
+#   éviter les bascules fugaces lors d'une sortie/entrée rapide.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - WIFI_PRESENCE (Page Home — logique déclenchement mode Absent/Présent)
 
 - sensor:
 # ┌───────────────────────────────────────────────────────────────────┐
@@ -15,12 +40,12 @@
       state: >
         {# 1. Définition de la Cible #}
         {% set target_ssid = "Freebox_GG" %}
-        
+
         {# 2. Vérification Booléenne (Vrai ou Faux) #}
-        {% set mamour_is_home = states('sensor.poco_x7_pro_mamour_network_type') == 'wifi' 
+        {% set mamour_is_home = states('sensor.poco_x7_pro_mamour_network_type') == 'wifi'
                                 and states('sensor.poco_x7_pro_mamour_wi_fi_connection') == target_ssid %}
-        
-        {% set eric_is_home = states('sensor.poco_x7_pro_network_type') == 'wifi' 
+
+        {% set eric_is_home = states('sensor.poco_x7_pro_network_type') == 'wifi'
                               and states('sensor.poco_x7_pro_wi_fi_connection') == target_ssid %}
 
         {# 3. Déduction du Groupe #}

@@ -1,6 +1,28 @@
 # ╭────────────────────────────────────────────────────────────────────────╮
-# │ P1_AVG | PUISSANCE MOYENNE (W)                                         │
+# │ PÔLE 1. TEMPLATE : PUISSANCE MOYENNE (W) CHAUFFAGE & CLIM — AMHQ      │
 # ╰────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensors template calculant la puissance moyenne glissante (W) de chaque
+# équipement chauffage/clim sur 2 périodes : quotidien (depuis minuit) et
+# mensuel (depuis le 1er du mois). Couvre 5 pièces : Salon, Cuisine,
+# Bureau, SDB (soufflant + sèche-serviette), Chambre.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule quotidien : (kWh_UM × 1000) / heures_écoulées_depuis_minuit
+# - Formule mensuel  : (kWh_UM × 1000) / heures_écoulées_depuis_le_1er
+# - Sources UM : sensor.[equipement]_quotidien/mensuel_kwh_um
+#   (utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml)
+# - Garde division zéro : if h > 0.1 else 0
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - En début de journée (h < 0.1h soit < 6 min), retourne 0 — normal.
+# - La puissance moyenne W ≠ puissance instantanée. Ne pas utiliser pour
+#   des alertes de surcharge (utiliser sensor.[equipement]_nous_power).
+# - Les UM sources doivent être chargés AVANT ce template dans HA.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C2 Conso Énergie Clim/Radiateur/Soufflant (puissance de croisière W)
 
 - sensor:
     # ==========================================================================

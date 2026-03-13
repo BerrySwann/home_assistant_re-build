@@ -1,6 +1,32 @@
-# ╭────────────────────────────────────────────────────────────────────────╮
-# │ P3_AVG | PUISSANCE MOYENNE (W) - ÉCLAIRAGE PAR ZONE                   │
-# ╰────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. TEMPLATES AVG : PUISSANCE MOYENNE (W) — ÉCLAIRAGE PAR ZONE      │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs templates calculant la puissance moyenne (W) pour chaque zone
+# d'éclairage (pièce ou groupe transversal) sur 4 périodes AMHQ. Sources les
+# compteurs UM de zone (P3_UM_AMHQ_2_ZONE). Permet une lecture agrégée par
+# pièce plutôt qu'ampoule par ampoule.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : (kWh_UM × 1000) / heures_écoulées = Watts moyens
+# - Sources : sensor.eclairage_[zone]_[cycle]_kwh_um (P3_UM_AMHQ_2_ZONE)
+# - Quotidien  : h = now().hour + (now().minute / 60)
+# - Hebdomadaire : hh = (now().weekday() * 24) + h
+# - Mensuel    : hm = ((now().day - 1) * 24) + h
+# - Annuel     : ha = ((now().timetuple().tm_yday - 1) * 24) + h
+# - Garde division zéro : if h/hh/hm/ha > 0.1 else 0
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Les zones transversales (appart_2, appart_3) ne correspondent pas à une
+#   pièce physique unique — ne pas les confondre avec les zones 1 à 9.
+# - Les sources _kwh_um dépendent de P3_UM_AMHQ_2_ZONE.yaml (utility_meter).
+# - Zones couvertes : Entrée (1x), Salon (5x), Cuisine (1x), Couloir (1x),
+#   Bureau (5x), SDB (2x), Chambre (4x), Appart 3x (E+Cu+Co), Appart 2x (E+Co).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (puissance moyenne par zone/pièce)
+
 - sensor:
     # ┌───────────────────────────────────┐
     # │ ZONE 1. (1x) ENTRÉE               │
