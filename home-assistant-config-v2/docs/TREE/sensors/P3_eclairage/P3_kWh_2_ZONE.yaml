@@ -1,0 +1,159 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. SENSORS : INTÉGRATION kWh — ÉCLAIRAGE PAR ZONE (9 ZONES)        │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs d'intégration Riemann calculant l'énergie totale cumulée (kWh)
+# pour chaque zone d'éclairage (pièce ou groupe transversal). Sont les sources
+# primaires pour les utility_meter P3_UM_AMHQ_2_ZONE.yaml.
+# Sources intermédiaires : les sensors de puissance par zone (P3_01_somme_par_piece).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : ∫ [zone]_puissance (W) dt → kWh (méthode left)
+# - Sources : sensor.eclairage_[zone]_puissance (P3_01_somme_par_piece.yaml)
+# - 7 zones pièces : Entrée (1x), Salon (5x), Cuisine (1x), Couloir (1x),
+#   Bureau (5x), SDB (2x), Chambre (4x)
+# - 2 zones transversales : Appart 3x (E+Cu+Co), Appart 2x (E+Co)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Dépendance en chaîne : P3_01_somme_par_piece → ce fichier → P3_UM_AMHQ_2_ZONE.
+#   Si sensor.eclairage_[zone]_puissance est indisponible, le kWh sera faux.
+# - Les zones transversales (appart_2, appart_3) ne comptent PAS indépendamment
+#   du total — elles se recoupent avec les zones pièces physiques.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (source des UM P3 par zone)
+
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 3. REGROUPEMENTS : SENSORS INTEGRATION PAR PIÈCE (kWh)       │
+  # ╰──────────────────────────────────────────────────────────────────────╯
+
+  #┌───────────────────────────────────┐
+  #│     ZONE 1. (1x) ENTRÉE           │
+  #└───────────────────────────────────┘
+
+  # --- eclairage_entree_1_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.eclairage_entree_1_puissance
+    name: "Eclairage Entree 1 Energie Totale kWh"
+    unique_id: eclairage_entree_1_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  #┌───────────────────────────────────┐
+  #│     ZONE 4. (5x) SALON            │
+  #└───────────────────────────────────┘
+
+  # --- eclairage_salon_5_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.eclairage_salon_5_puissance
+    name: "Eclairage Salon 5 Energie Totale kWh"
+    unique_id: eclairage_salon_5_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  #┌───────────────────────────────────┐
+  #│     ZONE 5. (1x) CUISINE          │
+  #└───────────────────────────────────┘
+
+  # --- eclairage_cuisine_1_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.eclairage_cuisine_1_puissance
+    name: "Eclairage Cuisine 1 Energie Totale kWh"
+    unique_id: eclairage_cuisine_1_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  #┌───────────────────────────────────┐
+  #│     ZONE 6. (1x) COULOIR          │
+  #└───────────────────────────────────┘
+
+  # --- eclairage_couloir_1_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.eclairage_couloir_1_puissance
+    name: "Eclairage Couloir 1 Energie Totale kWh"
+    unique_id: eclairage_couloir_1_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  #┌───────────────────────────────────┐
+  #│     ZONE 7. (5x) BUREAU           │
+  #└───────────────────────────────────┘
+
+  # --- eclairage_bureau_5_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.eclairage_bureau_5_puissance
+    name: "Eclairage Bureau 5 Energie Totale kWh"
+    unique_id: eclairage_bureau_5_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  #┌───────────────────────────────────┐
+  #│     ZONE 8. (2x) SDB              │
+  #└───────────────────────────────────┘
+
+  # --- eclairage_sdb_2_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.eclairage_sdb_2_puissance
+    name: "Eclairage Sdb 2 Energie Totale kWh"
+    unique_id: eclairage_sdb_2_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  #┌───────────────────────────────────┐
+  #│     ZONE 9. (4x) CHAMBRE          │
+  #└───────────────────────────────────┘
+
+  # --- eclairage_chambre_4_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.eclairage_chambre_4_puissance
+    name: "Eclairage Chambre 4 Energie Totale kWh"
+    unique_id: eclairage_chambre_4_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 3. ZONES TRANSVERSALES : HOME 3x + HOME 2x (kWh)             │
+  # ╰──────────────────────────────────────────────────────────────────────╯
+
+  # ╭───────────────────────────────────────────────────────────────╮
+  # │ ZONE HOME. ((3x) Entrée, cuisine & couloir)                   │
+  # ╰───────────────────────────────────────────────────────────────╯
+
+  # --- eclairage_appart_3_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.eclairage_appart_3_puissance
+    name: "Eclairage Appart 3 Energie Totale kWh"
+    unique_id: eclairage_appart_3_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # ╭──────────────────────────────────────────────────────╮
+  # │ ZONE HOME. ((2x) Entrée & couloir)                   │
+  # ╰──────────────────────────────────────────────────────╯
+
+  # --- eclairage_appart_2_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.eclairage_appart_2_puissance
+    name: "Eclairage Appart 2 Energie Totale kWh"
+    unique_id: eclairage_appart_2_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3

@@ -1,2 +1,0 @@
-Tout est appliqué. Récap final de la palette officielle à 10 entrées :
-#PièceCouleurPrimary1ENTRÉEGris clairrgb(220, 220, 220)2CELLIERSablergb(161, 136, 108)3TOILETTEMauvergb(127, 85, 177)4SALONRosergb(215, 95, 115)5CUISINEVioletrgb(118, 93, 160)6COULOIRGris foncérgb(150, 150, 150)7BUREAUOrangergb(255, 165, 0)8SDBBleurgb(3, 155, 229)9CHAMBREVertrgb(88, 130, 70)10AUTRE (Veilles)Marronrgb(109, 76, 65)

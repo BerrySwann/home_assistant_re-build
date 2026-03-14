@@ -1,6 +1,38 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ CONFIGURATION PRINCIPALE                                                 │
 # ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Point d'entrée principal de Home Assistant. Charge tous les modules via
+# !include / !include_dir_merge_list / !include_dir_merge_named.
+# Contient aussi : SmartIR climate (3 clims), recorder MariaDB, panel_custom,
+# powercalc (puissance virtuelle des lampes/relai SONOFF).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - sensor       : !include_dir_merge_list sensors/        (liste de capteurs)
+# - template     : !include_dir_merge_list templates/      (templates Jinja2)
+# - utility_meter: !include_dir_merge_named utility_meter/ (compteurs nommés)
+# - command_line : !include_dir_merge_list command_line/   (cmds shell→sensors)
+# - shell_command: !include shell_command.yaml
+# - camera       : !include camera.yaml
+# - input_button : !include input_button.yaml
+# - group        : !include groups.yaml
+# - sql          : !include sql.yaml
+# - automation   : !include automations.yaml
+# - script       : !include scripts.yaml
+# - scene        : !include scenes.yaml
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ne jamais supprimer default_config (charge les intégrations de base HA).
+# - recorder doit référencer mariadb_url via secrets.yaml (jamais en clair).
+# - SmartIR device_code : 1108 (Bureau + Chambre) / 1082 (Salon) — spécifique
+#   au modèle de clim. Changer ce code casse le contrôle IR de la clim.
+# - !include_dir_merge_named impose que chaque fichier YAML retourne un dict
+#   (pas une liste) → utility_meter uniquement.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Non applicable — fichier système racine. Charge toutes les vignettes
+#   indirectement via les includes vers sensors/, templates/, utility_meter/.
 
 # --- default_config ---
 # Loads default set of integrations. Do not remove.

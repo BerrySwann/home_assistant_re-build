@@ -1,6 +1,28 @@
 # ╭──────────────────────────────────────────────────────────────────╮
 # │ GROUP : REGROUPEMENT D'ENTITÉS (SANTÉ SYSTÈME)                   │
 # ╰──────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Regroupe les capteurs de batteries/piles par fabricant (IKEA, HUE, SONOFF)
+# pour permettre une surveillance centralisée via auto-entities dans le
+# dashboard L5C1 Batteries.
+# Inclus via : group: !include groups.yaml (configuration.yaml)
+#
+# ## 🧮 CALCUL & SOURCES :
+# - group.ikea_devices   → 12 capteurs battery (contacts fenêtre + télécommandes)
+# - group.hue_devices    → 11 capteurs battery (Hue Smart Button par pièce)
+# - group.sonoff_devices → 11 capteurs battery (SNZB-02 T°/Hum + SNZB-04 contacts)
+# - Total surveillé : 34 capteurs de batteries
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - La carte auto-entities (L5C1) filtre via group.ikea_devices etc. :
+#   toute entité absente de ces groupes n'apparaîtra PAS dans la vignette.
+# - Après ajout d'un nouvel appareil, mettre à jour le groupe correspondant
+#   ET vérifier que l'entité battery existe dans HA.
+# - L'intégration group native HA est requise (incluse dans default_config).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert à la remontée d'info pour la vignette : [L5C1 Surveillance Batteries]
 
 # ┌─────────────────────────────────────┐
 # │ 10. AUTRE : SURVEILLANCE BATTERIES  │
