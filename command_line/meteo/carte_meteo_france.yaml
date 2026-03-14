@@ -1,3 +1,32 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ COMMAND_LINE : MÉTÉO FRANCE — TÉLÉCHARGEMENT IMAGES VIGILANCE (J0 / J1) │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Télécharge les images de vigilance Météo France (aujourd'hui J0 et demain J1)
+# via l'API officielle DPVigilance v1 et les sauvegarde en PNG local.
+# Ces PNG sont ensuite lus par camera.yaml (local_file) pour affichage.
+# Inclus via : command_line: !include_dir_merge_list command_line/ (configuration.yaml)
+#
+# ## 🧮 CALCUL & SOURCES :
+# - 2 sensors command_line : today (J0) + tomorrow (J1)
+# - scan_interval: 14400 (toutes les 4h)
+# - API : https://public-api.meteofrance.fr/public/DPVigilance/v1/vignettenationale-J/encours
+# - Réponse base64 → décodée → sauvegardée en PNG dans /config/www/weather/
+# - Retry : boucle 5 tentatives (sleep 1s entre chaque). Si échec → fallback nodata.png
+# - value_template: "{{ value }}" → retourne "on" (succès) ou "unavailable" (échec)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - api_key JWT hardcodée dans le fichier (expiration : 2027-06-22 selon exp JWT).
+#   Surveiller l'expiration et renouveler sur portail-api.meteofrance.fr si besoin.
+# - Le fichier fallback /config/www/weather/meteo_france_alerte_nodata.png DOIT
+#   exister sinon le cp -f échouera silencieusement.
+# - scan_interval trop court = quota API dépassé (60 req/min max selon le JWT).
+# - L'automation ID 1771872569647 force une MAJ au démarrage HA (homeassistant.update_entity).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert à la remontée d'info pour la vignette : [L1C1 Météo — Pop-up #ALERT]
+
 # --- meteo_france_alertes_image_today ---
 - sensor:
     name: "Météo France alertes image today"

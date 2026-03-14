@@ -1,6 +1,34 @@
 # ╭────────────────────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATES : SÉRIE 01_2. MÉTÉO — FOUDRE (windrose-card / LABEL / AZIMUT / TIMER)        │
+# │ MÉTÉO. TEMPLATE : BLITZORTUNG — FOUDRE (windrose-card / LABEL / AZIMUT / TIMER)        │
 # ╰────────────────────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensors template créant 5 capteurs Blitzortung : direction de l'impact
+# en label 16 points, bearing en degrés (windrose-card), distance en km,
+# temps écoulé depuis le dernier impact (timer formaté), et indicateur
+# temps réel depuis input_datetime. Alimentent la windrose-card foudre
+# et les alertes orages du dashboard.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - sensor.maison_lightning_azimuth : azimut de l'impact (°)
+# - sensor.maison_lightning_distance : distance (km)
+# - sensor.maison_lightning_counter : compteur d'impacts (session)
+# - sensor.blitzortung_lightning_last_impact_time : timestamp dernier impact
+# - input_datetime.dernier_eclair : horodatage stocké du dernier éclair
+# - Timer : diff = now() - last_impact. Si > 2h ou counter == 0 → "Calme"
+# - Label : tranches 22.5° → 16 points cardinaux (même logique que vent)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Blitzortung détecte dans un rayon paramétrable (ex: 40km autour de
+#   Vence). Un impact à 39km peut créer une alerte sans danger réel.
+# - La direction est celle de l'impact DEPUIS la maison (pas d'où vient
+#   l'orage) — sens inverse de la direction du vent.
+# - Le bearing retourne 1 si 0° (convention windrose-card identique au vent).
+# - dernier_impact_temps_reel utilise input_datetime.dernier_eclair qui
+#   doit être mis à jour par une automation séparée.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C1 Météo (section foudre/Blitzortung, windrose-card foudre)
 
 - sensor:
 # ┌───────────────────────────────────────────────────────────────────┐
@@ -98,7 +126,7 @@
           {% set h = ((diff // 3600) % 24) | int %}
           {% set d = (diff // 86400) | int %}
 
-          Dernier impact de foudre il y a 
+          Dernier impact de foudre il y a
           {% if d > 0 %}
             {{ d }} jour{{ 's' if d > 1 }}, {{ h }} heure{{ 's' if h > 1 }} et {{ m }} minute{{ 's' if m > 1 }}
           {% elif h > 0 %}
