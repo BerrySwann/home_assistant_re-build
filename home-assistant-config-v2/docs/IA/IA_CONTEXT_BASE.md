@@ -1,5 +1,5 @@
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
-*Dernière mise à jour : 2026-03-08 — Ajout palette couleurs éclairage 9 pièces*
+*Dernière mise à jour : 2026-03-13 — TREE complet, M_05 cycle solaire, docs à jour*
 
 ---
 
@@ -67,6 +67,7 @@ Pour tous les éléments qui ne sont pas rattachés à une pièce physique spéc
 - `M_02_meteo_vent`
 - `M_03_meteo_blitzortung`
 - `M_04_tendances_th_ext_card`
+- `M_05_cycle_solaire`
 
 *(Note : En attente de la définition des prochaines catégories lettrées pour le Réseau, le Système, etc.)*
 
@@ -359,7 +360,7 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 │   ├── Ecojoko
 │   │   ├── 01_UM_AMHQ_cost.yaml
 │   │   └── 02_UM_ecojoko_quotidien_live.yaml
-│   └── Linky
+│   └── Linky                                    (dossier vide — en attente)
 ├── P1_clim_chauffage
 │   └── P1_UM_AMHQ.yaml
 ├── P2_prise
@@ -382,7 +383,8 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 │   │   ├── 02_ratio_hp_hc.yaml
 │   │   └── 03_AVG_ecojoko.yaml
 │   └── Linky
-│       └── MyElectricalData.yaml
+│       ├── MyElectricalData.yaml
+│       └── P0_linky_jour_J0_J7.yaml
 ├── P1_clim_chauffage
 │   ├── P1_01_MASTER
 │   │   └── P1_01_clim_logique_system_autom.yaml
@@ -405,16 +407,18 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 ├── P4_groupe_presence
 │   ├── 01_phones_wifi_cellular_card_autom.yaml
 │   └── 02_logique_wifi_cellular.yaml
-└── meteo
-    ├── M_01_meteo_alertes_card.yaml
-    ├── M_02_meteo_vent_vence_card.yaml
-    ├── M_03_meteo_blitzortung.yaml
-    ├── M_04_tendances_th_ext_card.yaml
+├── meteo
+│   ├── M_01_meteo_alertes_card.yaml
+│   ├── M_02_meteo_vent_vence_card.yaml
+│   ├── M_03_meteo_templates_blitzortung.yaml
+│   ├── M_04_tendances_th_ext_card.yaml
+│   └── M_05_cycle_solaire.yaml
+└── utilitaires                                  (hors nomenclature Pôle — à documenter)
+    └── jour_nuit.yaml
 /config/sensors
 ├── P0_Energie_total_diag
 │   └── Ecojoko_mini_maxi
 │       └── Ecojoko_mini_maxi_avg_1h.yaml
-├── P1_
 ├── P2_prise
 │   ├── P2_kWh_prises.yaml
 │   └── P2_kWh_veilles.yaml
@@ -429,39 +433,34 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 └── docs
     ├── IA
     │   └── IA_CONTEXT_BASE.md
-    |
     ├── L1C1_METEO
     │   ├── L1C1_VIGNETTE_METEO.md
     │   ├── PAGE_METEO.md
     │   └── TUTO_IMAGES_ALERTES_METEO_FRANCE.md
-    |
     ├── L1C2_TEMPERATURES
-    │   ├── L1C3_VIGNETTE_TEMPERATURES.md
+    │   ├── L1C2_VIGNETTE_TEMPERATURES.md
     │   └── PAGE_TEMPERATURES.md
-    |
     ├── L2C1_ENERGIE
+    │   ├── COULEURS_PRISES_PAR_PIECE.md
     │   ├── L2C1_VIGNETTE_ENERGIE.md
-    │   ├── P2_apexcharts_7jours_optimise_CARD.yaml
     │   ├── PAGE_ENERGIE.md
     │   ├── PAGE_ENERGIE_MENSUEL.md
-    │   ├── PAGE_ENERGIE_TEMPS_REEL.md
-    │   └── COULEURS_PRISES_PAR_PIECE.md
-    |
+    │   └── PAGE_ENERGIE_TEMPS_REEL.md
     ├── L2C3_ENERGIE_ECLAIRAGE
+    │   ├── COULEURS_ECLAIRAGE_PAR_PIECE.md
     │   └── L2C3_VIGNETTE_ECLAIRAGE.md
-    |
     ├── L5C1_PILES_BATTERIES
     │   ├── L5C1_VIGNETTE_BATTERIES.md
     │   └── PAGE_BATTERIES.md
-    |
-    ├── WIFI_PRESENCE (PAGE HOME)
+    ├── L5C3_MARIADB
+    │   ├── L5C3_VIGNETTE_MARIADB.md
+    │   └── PAGE_SYSTEME.md
+    ├── WIFI_PRESENCE (Home Page)
     │   └── VIGNETTE_WIFI_PRESENCE.md
-    |
-    └── TEMPLATE_DOC.md
-    |
-    └── REBUILD_SYNC_STATUS.md
+    ├── REBUILD_SYNC_STATUS.md
+    └── _TEMPLATE_DOC.md
 
-40 directories, 59 files
+40 directories, 62 files
 ```
 
 ---
@@ -479,7 +478,8 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml
 
 **Pôle 2 - Prises**
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/P2_prise/P2_AVG/P2_UM_AMHQ.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/P2_prise/P2_AVG/P2_UM_AMHQ_prises.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/P2_prise/P2_AVG/P2_UM_AMHQ_veilles.yaml
 
 **Pôle 3 - Éclairage**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
@@ -496,21 +496,24 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Diag/diag_conso_mois_en_cours.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Ecojoko/01_ecojoko_AMHQ_cost.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Ecojoko/02_ratio_hp_hc.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Ecojoko/03_ecojoko_7jrs_historique.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Ecojoko/04_AVG_ecojoko.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Ecojoko/03_AVG_ecojoko.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Linky/MyElectricalData.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Linky/P0_linky_jour_J0_J7.yaml
 
 **Pôle 1 - Chauffage & Clim**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P1_clim_chauffage/P1_AVG/P1_avg.yaml
 
 **Pôle 2 - Prises**
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P2_prise/P2_AVG/P2_AVG_AMHQ.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_veilles.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P2_prise/P2_I_all_standby_power/P2_%20current_all_standby.yaml
 
 **Pôle 3 - Éclairage & UI**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_01_somme_par_piece.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/ui_dashboard/etats_status.yaml
 
 **Pôle 4 - Groupe Présence**
@@ -520,8 +523,12 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 **Météo**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/meteo/M_01_meteo_alertes_card.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/meteo/M_02_meteo_vent_vence_card.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/meteo/M_03_meteo_blitzortung.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/meteo/M_03_meteo_templates_blitzortung.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/meteo/M_04_tendances_th_ext_card.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/meteo/M_05_cycle_solaire.yaml
+
+**Utilitaires**
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/utilitaires/jour_nuit.yaml
 
 ### 📂 SENSORS
 
@@ -529,7 +536,8 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg_1h.yaml
 
 **Pôle 2 - Prises**
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P2_prise/P2_kWh.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P2_prise/P2_kWh_prises.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P2_prise/P2_kWh_veilles.yaml
 
 **Pôle 3 - Éclairage**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P3_eclairage/P3_kWh_1_UNITE.yaml

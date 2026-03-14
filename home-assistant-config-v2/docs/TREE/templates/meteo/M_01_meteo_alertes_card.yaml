@@ -1,0 +1,273 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ MÉTÉO. TEMPLATE : ALERTES MÉTÉO-FRANCE — VENCE 06140 (10 NIVEAUX)       │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensors template créant 10 indicateurs d'alertes météo pour le
+# département 06 (Alpes-Maritimes / Vence) : vent violent, inondation,
+# orages, pluie-inondation, neige/verglas, grand-froid, canicule,
+# avalanches, vagues-submersion, et synthèse globale. États : Vert /
+# Jaune / Orange / Rouge.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source primaire  : sensor.06_weather_alert (intégration Météo France)
+#   → attributs par type d'alerte (Vent violent, Inondation, etc.)
+# - Source secondaire : binary_sensor.meteoalarm (intégration MeteoAlarm)
+#   → attributs awareness_type, awareness_level, event (chaîne texte)
+# - Logique de fusion : Météo France en priorité, MeteoAlarm en fallback.
+# - Garde | default('') sur l'attribut 'event' pour éviter TypeError
+#   quand meteoalarm n'a pas de phénomène actif.
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - L'alerte est DÉPARTEMENTALE (06 entier) — pas localisée à Vence.
+# - MeteoAlarm peut avoir un décalage de quelques heures vs Météo France.
+# - Sans le | default('') sur 'event', TypeError: 'NoneType' not iterable
+#   quand aucun phénomène n'est actif → obligatoire sur les 9 sensors.
+# - | default('') sur awareness_level dans alerte_meteo → même raison.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C1 Météo (bandeau alertes coloré en haut de la vignette météo)
+
+- sensor:
+
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ MÉTÉO — ALERTES (LOGIQUE ET DÉTAILS)                              │
+# └───────────────────────────────────────────────────────────────────┘
+
+# --- alerte_vent_violent ---
+    - name: 'Alerte Vent violent'
+      unique_id: sensor.alerte_vent_violent
+      state: >-
+        {% set wa = state_attr('sensor.06_weather_alert', 'Vent violent') %}
+        {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
+        {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
+        {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {% set al = wa %}
+        {% elif 'jaune vent-violent' in ev %}
+          {% set al = 'Jaune' %}
+        {% elif 'orange vent-violent' in ev %}
+          {% set al = 'Orange' %}
+        {% elif 'rouge vent-violent' in ev %}
+          {% set al = 'Rouge' %}
+        {% else %}
+          {% set al = 'Vert' %}
+        {% endif %}
+        {{ al }}
+      icon: mdi:weather-windy
+
+# --- alerte_inondation ---
+    - name: 'Alerte Inondation'
+      unique_id: sensor.alerte_inondation
+      state: >-
+        {% set wa = state_attr('sensor.06_weather_alert', 'Inondation') %}
+        {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
+        {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
+        {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {% set al = wa %}
+        {% elif 'jaune inondation' in ev %}
+          {% set al = 'Jaune' %}
+        {% elif 'orange inondation' in ev %}
+          {% set al = 'Orange' %}
+        {% elif 'rouge inondation' in ev %}
+          {% set al = 'Rouge' %}
+        {% else %}
+          {% set al = 'Vert' %}
+        {% endif %}
+        {{ al }}
+      icon: mdi:home-flood
+
+# --- alerte_orages ---
+    - name: 'Alerte Orages'
+      unique_id: sensor.alerte_orages
+      state: >-
+        {% set wa = state_attr('sensor.06_weather_alert', 'Orages') %}
+        {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
+        {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
+        {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {% set al = wa %}
+        {% elif 'jaune orages' in ev %}
+          {% set al = 'Jaune' %}
+        {% elif 'orange orages' in ev %}
+          {% set al = 'Orange' %}
+        {% elif 'rouge orages' in ev %}
+          {% set al = 'Rouge' %}
+        {% else %}
+          {% set al = 'Vert' %}
+        {% endif %}
+        {{ al }}
+      icon: mdi:weather-lightning
+
+# --- alerte_pluie_inondation ---
+    - name: 'Alerte Pluie Inondation'
+      unique_id: sensor.alerte_pluie_inondation
+      state: >-
+        {% set wa = state_attr('sensor.06_weather_alert', 'Pluie-inondation') %}
+        {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
+        {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
+        {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {% set al = wa %}
+        {% elif 'jaune pluie_inondation' in ev %}
+          {% set al = 'Jaune' %}
+        {% elif 'orange pluie_inondation' in ev %}
+          {% set al = 'Orange' %}
+        {% elif 'rouge pluie_inondation' in ev %}
+          {% set al = 'Rouge' %}
+        {% else %}
+          {% set al = 'Vert' %}
+        {% endif %}
+        {{ al }}
+      icon: mdi:weather-pouring
+
+# --- alerte_neige_verglas ---
+    - name: 'Alerte Neige-verglas'
+      unique_id: sensor.alerte_neige_verglas
+      state: >-
+        {% set wa = state_attr('sensor.06_weather_alert', 'Neige-verglas') %}
+        {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
+        {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
+        {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {% set al = wa %}
+        {% elif 'jaune neige-verglas' in ev %}
+          {% set al = 'Jaune' %}
+        {% elif 'orange neige-verglas' in ev %}
+          {% set al = 'Orange' %}
+        {% elif 'rouge neige-verglas' in ev %}
+          {% set al = 'Rouge' %}
+        {% else %}
+          {% set al = 'Vert' %}
+        {% endif %}
+        {{ al }}
+      icon: mdi:weather-snowy-heavy
+
+# --- alerte_grand_froid ---
+    - name: 'Alerte Grand-froid'
+      unique_id: sensor.alerte_grand_froid
+      state: >-
+        {% set wa = state_attr('sensor.06_weather_alert', 'Grand-froid') %}
+        {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
+        {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
+        {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {% set al = wa %}
+        {% elif 'jaune grand-froid' in ev %}
+          {% set al = 'Jaune' %}
+        {% elif 'orange grand-froid' in ev %}
+          {% set al = 'Orange' %}
+        {% elif 'rouge grand-froid' in ev %}
+          {% set al = 'Rouge' %}
+        {% else %}
+          {% set al = 'Vert' %}
+        {% endif %}
+        {{ al }}
+      icon: mdi:snowflake
+
+# --- alerte_canicule ---
+    - name: 'Alerte Canicule'
+      unique_id: sensor.alerte_canicule
+      state: >-
+        {% set wa = state_attr('sensor.06_weather_alert', 'Canicule') %}
+        {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
+        {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
+        {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {% set al = wa %}
+        {% elif 'jaune canicule' in ev %}
+          {% set al = 'Jaune' %}
+        {% elif 'orange canicule' in ev %}
+          {% set al = 'Orange' %}
+        {% elif 'rouge canicule' in ev %}
+          {% set al = 'Rouge' %}
+        {% else %}
+          {% set al = 'Vert' %}
+        {% endif %}
+        {{ al }}
+      icon: mdi:weather-sunny
+
+# --- alerte_avalanches ---
+    - name: 'Alerte Avalanches'
+      unique_id: sensor.alerte_avalanches
+      state: >-
+        {% set wa = state_attr('sensor.06_weather_alert', 'Avalanches') %}
+        {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
+        {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
+        {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {% set al = wa %}
+        {% elif 'jaune avalanches' in ev %}
+          {% set al = 'Jaune' %}
+        {% elif 'orange avalanches' in ev %}
+          {% set al = 'Orange' %}
+        {% elif 'rouge avalanches' in ev %}
+          {% set al = 'Rouge' %}
+        {% else %}
+          {% set al = 'Vert' %}
+        {% endif %}
+        {{ al }}
+      icon: mdi:terrain
+
+# --- alerte_vagues_submersion ---
+    - name: 'Alerte Vagues-submersion'
+      unique_id: sensor.alerte_vagues_submersion
+      state: >-
+        {% set wa = state_attr('sensor.06_weather_alert', 'Vagues-submersion') %}
+        {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
+        {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
+        {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {% set al = wa %}
+        {% elif 'jaune vagues-submersion' in ev %}
+          {% set al = 'Jaune' %}
+        {% elif 'orange vagues-submersion' in ev %}
+          {% set al = 'Orange' %}
+        {% elif 'rouge vagues-submersion' in ev %}
+          {% set al = 'Rouge' %}
+        {% else %}
+          {% set al = 'Vert' %}
+        {% endif %}
+        {{ al }}
+      icon: mdi:waves
+
+# --- alerte_meteo ---
+    - name: 'Alerte Météo'
+      unique_id: sensor.alerte_meteo
+      state: >-
+        {% set wa = states('sensor.06_weather_alert') %}
+        {% set al = state_attr('binary_sensor.meteoalarm', 'awareness_level') | default('') %}
+        {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {% set al = wa %}
+        {% elif '1' in al %}
+          {% set al = 'Vert' %}
+        {% elif '2' in al %}
+          {% set al = 'Jaune' %}
+        {% elif '3' in al %}
+          {% set al = 'Orange' %}
+        {% elif '4' in al %}
+          {% set al = 'Rouge' %}
+        {% else %}
+          {% set al = 'unknown' %}
+        {% endif %}
+        {{ al }}
+      attributes:
+        Date: >-
+          {% set dt = state_attr('binary_sensor.meteoalarm', 'urgency') %}
+          {% if dt == 'Future' %}
+            {% set val = 'Demain' %}
+          {% else %}
+            {% set val = dt %}
+          {% endif %}
+          {{ val }}
+        Vent Violent: "{{ states('sensor.alerte_vent_violent') }}"
+        Inondation: "{{ states('sensor.alerte_inondation') }}"
+        Orages: "{{ states('sensor.alerte_orages') }}"
+        Pluie Inondation: "{{ states('sensor.alerte_pluie_inondation') }}"
+        Neige Verglas: "{{ states('sensor.alerte_neige_verglas') }}"
+        Grand Froid: "{{ states('sensor.alerte_grand_froid') }}"
+        Canicule: "{{ states('sensor.alerte_canicule') }}"
+        Avalanches: "{{ states('sensor.alerte_avalanches') }}"
+        Vagues-submersion: "{{ states('sensor.alerte_vagues_submersion') }}"
+      icon: mdi:alert-outline
+
+# annotations_log:
+# - [Structure] Regroupement par FONCTION (Logique alertes météo).
+# - [Titrage] Titre principal 74 car. arrondi avec '#' de sécurité.
+# - [Titrage] Titre secondaire 37 car. carré avec '#' de sécurité.
+# - [Titrage] Titres tertiaires # --- slug --- systématiques.
+# - [Intégrité] Conservation de 100% des entités et icônes originales.
+# - [modif] ev: | default('') ajouté sur les 9 sensors — TypeError fix.
+# - [modif] al: | default('') ajouté dans alerte_meteo — awareness_level fix.

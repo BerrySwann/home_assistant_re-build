@@ -1,0 +1,79 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. TEMPLATE AVG : PUISSANCE MOYENNE ECOJOKO (W) — AMHQ             │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Quatre capteurs templates calculant la puissance moyenne continue équivalente
+# (en Watts) de la consommation globale du logement (via Ecojoko), lissée sur
+# 4 périodes : Quotidien, Hebdomadaire, Mensuel, Annuel (AMHQ).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : (kWh_cumulé × 1000) / heures_écoulées_depuis_reset → W moyen.
+# - Sources : compteurs Ecojoko HP + HC (utility_meter Quotidien/Hebdo/Mensuel/Annuel).
+# - Quotidien : h = now().hour + (now().minute / 60)
+# - Hebdo     : hh = (now().weekday() * 24) + h
+# - Mensuel   : hm = ((now().day - 1) * 24) + h
+# - Annuel    : ha = ((now().timetuple().tm_yday - 1) * 24) + h
+# - Garde div zéro : if h > 0.1 else 0
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Les sources doivent être les capteurs UM (utility_meter) Ecojoko HP+HC,
+#   PAS les valeurs en direct. La somme HP + HC = consommation totale.
+# - Disponibilité des sources : vérifier que les UM Ecojoko sont correctement
+#   alimentés (cf. utility_meter/P0_Energie_total/Ecojoko/01_UM_AMHQ_cost.yaml).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (puissance de croisière Ecojoko).
+
+- sensor:
+  # --- ecojoko_avg_watts_quotidien ---
+  - name: "Ecojoko Avg Watts Quotidien"
+    unique_id: ecojoko_avg_watts_quotidien
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set hp = states('sensor.ecojoko_hp_reseau_quotidien_um') | float(0) %}
+      {% set hc = states('sensor.ecojoko_hc_reseau_quotidien_um') | float(0) %}
+      {% set conso = hp + hc %}
+      {% set h = now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+  # --- ecojoko_avg_watts_hebdomadaire ---
+  - name: "Ecojoko Avg Watts Hebdomadaire"
+    unique_id: ecojoko_avg_watts_hebdomadaire
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set hp = states('sensor.ecojoko_hp_reseau_hebdomadaire_um') | float(0) %}
+      {% set hc = states('sensor.ecojoko_hc_reseau_hebdomadaire_um') | float(0) %}
+      {% set conso = hp + hc %}
+      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+  # --- ecojoko_avg_watts_mensuel ---
+  - name: "Ecojoko Avg Watts Mensuel"
+    unique_id: ecojoko_avg_watts_mensuel
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set hp = states('sensor.ecojoko_hp_reseau_mensuel_um') | float(0) %}
+      {% set hc = states('sensor.ecojoko_hc_reseau_mensuel_um') | float(0) %}
+      {% set conso = hp + hc %}
+      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+  # --- ecojoko_avg_watts_annuel ---
+  - name: "Ecojoko Avg Watts Annuel"
+    unique_id: ecojoko_avg_watts_annuel
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set hp = states('sensor.ecojoko_hp_reseau_annuel_um') | float(0) %}
+      {% set hc = states('sensor.ecojoko_hc_reseau_annuel_um') | float(0) %}
+      {% set conso = hp + hc %}
+      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+# annotations_log:
+# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.
+# - [L31-66] Formule HP + HC = conso totale pour refléter la logique Ecojoko.

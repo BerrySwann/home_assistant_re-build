@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--02--26-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--03--11-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Vignette%20Doc-ff9800?style=flat-square)](.)
 
 </div>
@@ -14,8 +14,8 @@
 | 🃏 **Type de carte** | `custom:button-card` |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-02-26 |
-| 🏠 **Version HA** | 2025.1.x → 2.0 |
+| 📅 **Modifié le** | 2026-03-11 |
+| 🏠 **Version HA** | 2025.2.x → 2.0 |
 
 ---
 

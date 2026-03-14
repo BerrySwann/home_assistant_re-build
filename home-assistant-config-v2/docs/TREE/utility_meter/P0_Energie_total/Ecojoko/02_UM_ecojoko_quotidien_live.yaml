@@ -1,0 +1,48 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. UTILITY METER : ECOJOKO — QUOTIDIEN LIVE (J-0 / J-1)             │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Compteurs Utility Meter en cycle daily pour la consommation réseau Ecojoko
+# (Total, HP, HC). Fournissent la valeur du jour en cours (state) et
+# automatiquement la valeur J-1 via l'attribut natif 'last_period'.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources : sensor.ecojoko_consommation_reseau / hp / hc.
+# - Reset automatique à minuit. Attribut 'last_period' = kWh du jour précédent
+#   (natif HA, pas besoin de sensor supplémentaire).
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# J-2 à J-7 ne sont PAS fournis par cet UM — ils sont gérés par un fichier
+# snapshot séparé. Ne pas utiliser 'state' pour les calculs J-1 (utiliser
+# 'last_period').
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (section coût quotidien, pie chart journalier)
+
+# --- ecojoko_reseau_quotidien_um ---
+# J-0 live (state) | J-1 automatique (attribut last_period)
+ecojoko_reseau_quotidien_um:
+  source: sensor.ecojoko_consommation_reseau
+  name: "Ecojoko Réseau Quotidien UM"
+  unique_id: ecojoko_reseau_quotidien_um
+  cycle: daily
+
+# --- ecojoko_hp_reseau_quotidien_um ---
+# HP J-0 live (state) | HP J-1 automatique (attribut last_period)
+ecojoko_hp_reseau_quotidien_um:
+  source: sensor.ecojoko_consommation_hp_reseau
+  name: "Ecojoko HP Réseau Quotidien UM"
+  unique_id: ecojoko_hp_reseau_quotidien_um
+  cycle: daily
+
+# --- ecojoko_hc_reseau_quotidien_um ---
+# HC J-0 live (state) | HC J-1 automatique (attribut last_period)
+ecojoko_hc_reseau_quotidien_um:
+  source: sensor.ecojoko_consommation_hc_reseau
+  name: "Ecojoko HC Réseau Quotidien UM"
+  unique_id: ecojoko_hc_reseau_quotidien_um
+  cycle: daily
+
+# annotations_log:
+# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.

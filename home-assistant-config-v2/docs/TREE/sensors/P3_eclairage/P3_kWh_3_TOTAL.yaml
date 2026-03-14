@@ -1,0 +1,57 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. SENSORS : INTÉGRATION kWh — TOTAUX ÉCLAIRAGE (GROUP + UNITÉ)    │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs d'intégration Riemann calculant l'énergie totale cumulée (kWh)
+# pour les deux agrégats globaux d'éclairage : par regroupement (7 zones) et
+# à l'unité (19 lampes). Les deux doivent converger vers la même valeur —
+# utile comme contrôle de cohérence du système.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - sensor.eclairage_total_group_puissance → somme des 7 zones pièces (W)
+# - sensor.eclairage_total_unit_puissance → somme des 19 ampoules individuelles (W)
+# - Formule : ∫ [total]_puissance (W) dt → kWh (méthode left)
+# - Sources définies dans P3_01_somme_par_piece.yaml (templates)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - eclairage_total_group_kwh et eclairage_total_unit_kwh devraient être
+#   identiques en théorie. Un écart persistant indique un bug dans
+#   P3_01_somme_par_piece.yaml (ampoule manquante ou comptée deux fois).
+# - Ces totaux incluent TOUTES les pièces — ne pas les utiliser pour comparer
+#   une pièce spécifique.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (totaux globaux appartement)
+
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 3. TOTAUX : SENSORS INTEGRATION (kWh)                        │
+  # ╰──────────────────────────────────────────────────────────────────────╯
+
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 3. TOTAL : PAR REGROUPEMENT (7 zones)                        │
+  # ╰──────────────────────────────────────────────────────────────────────╯
+
+  # --- eclairage_total_group_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.eclairage_total_group_puissance
+    name: "Eclairage Total Group Energie Totale kWh"
+    unique_id: eclairage_total_group_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3
+
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 3. TOTAL : À L'UNITÉ (19 lampes)                             │
+  # ╰──────────────────────────────────────────────────────────────────────╯
+
+  # --- eclairage_total_unit_energie_totale_kwh ---
+  - platform: integration
+    source: sensor.eclairage_total_unit_puissance
+    name: "Eclairage Total Unit Energie Totale kWh"
+    unique_id: eclairage_total_unit_energie_totale_kwh
+    method: left
+    unit_prefix: k
+    unit_time: h
+    round: 3

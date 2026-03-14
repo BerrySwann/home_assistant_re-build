@@ -1,7 +1,28 @@
 # ╭──────────────────────────────────────────────────────────────────╮
 # │ CAMERA : AFFICHAGE D'IMAGES LOCALES ET FLUX                      │
 # ╰──────────────────────────────────────────────────────────────────╯
-
+#
+# ## 📝 DESCRIPTION :
+# Déclare 2 entités caméra de type local_file qui affichent les images
+# de vigilance Météo France téléchargées localement dans /config/www/weather/.
+# Inclus via : camera: !include camera.yaml (configuration.yaml)
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Pas de calcul — lecture directe d'un fichier PNG sur disque (local_file).
+# - camera.mf_alerte_today    → /config/www/weather/meteo_france_alerte_today.png
+# - camera.mf_alerte_tomorrow → /config/www/weather/meteo_france_alerte_tomorrow.png
+# - Les PNG sont générés par : command_line/meteo/carte_meteo_france.yaml
+#   (appel wget → API Météo France → sauvegarde PNG)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Si le PNG est absent du disque → la carte affiche une image noire/vide.
+# - L'automation ID 1771872569647 gère la MAJ des images (démarrage HA,
+#   06h32 et 16h32) avec 5 tentatives de retry en cas d'échec réseau.
+# - Les fichiers PNG sont dans /config/www/ (servis en http://ha:8123/local/).
+#   Ne jamais placer d'images sensibles dans ce dossier (accès public).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert à la remontée d'info pour la vignette : [L1C1 Météo — Pop-up #ALERT]
 
 # ┌─────────────────────────────────────┐
 # │ 10. AUTRE : MÉTÉO FRANCE (ALERTES)  │
