@@ -657,7 +657,7 @@ Identique mais avec les entités `_mensuel` et `group_by: func: diff, duration: 
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.conso_mini` | Puissance min du jour (W) — talon standby | `sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg_1h.yaml` |
+| `sensor.conso_mini` | Puissance min du jour (W) — talon standby | `sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg.yaml` |
 | `sensor.conso_maxi` | Puissance max du jour (W) — pic | idem |
 | `sensor.ecojoko_avg_watts_quotidien` | Moyenne Wh depuis minuit | `templates/P0_Energie_total_diag/Ecojoko/04_AVG_ecojoko.yaml` |
 | `sensor.ecojoko_avg_watts_mensuel` | Moyenne Wh depuis le 1er du mois | idem |
@@ -812,7 +812,7 @@ Identique mais avec les entités `_mensuel` et `group_by: func: diff, duration: 
 | Moyennes Ecojoko | `templates/P0_Energie_total_diag/Ecojoko/04_AVG_ecojoko.yaml` |
 | Diag postes (jour) | `templates/P0_Energie_total_diag/Diag/diag_conso_jour_en_cours.yaml` |
 | Diag postes (mois) | `templates/P0_Energie_total_diag/Diag/diag_conso_mois_en_cours.yaml` |
-| Mini/Maxi/Moy 1h | `sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg_1h.yaml` |
+| Mini / Maxi (W) | `sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg.yaml` |
 | Vignette d'accès | `docs/L2C1_ENERGIE/L2C1_VIGNETTE_ENERGIE.md` |
 
 ---

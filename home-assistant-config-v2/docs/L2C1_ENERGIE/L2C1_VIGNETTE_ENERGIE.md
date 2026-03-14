@@ -271,11 +271,11 @@ return `<span style="display:block; text-align:right; line-height:1.2;">
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.conso_mini` | Puissance minimale du jour (W) — talon/standby | `sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg_1h.yaml` |
+| `sensor.conso_mini` | Puissance minimale du jour (W) — talon/standby | `sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg.yaml` |
 | `sensor.conso_maxi` | Puissance maximale du jour (W) — pic | idem |
 
 > `platform: statistics` sur `sensor.ecojoko_consommation_temps_reel` — fenêtre 24h.
-> ⚠️ `sensor.conso_moyenne_1h` n'est **pas** dans les `entities:` de la vignette.
+> Source : `sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg.yaml` (2 sensors uniquement — `conso_moyenne_1h` supprimé le 2026-03-14).
 
 ### 🔄 triggers_update
 
@@ -302,7 +302,7 @@ La carte se met à jour sur changement de l'une des 7 entités ci-dessus (pas de
 | Coûts HP/HC (4 périodes) | `templates/P0_Energie_total_diag/Ecojoko/01_ecojoko_AMHQ_cost.yaml` |
 | UM quotidien HP/HC | `utility_meter/P0_Energie_total/Ecojoko/02_UM_ecojoko_quotidien_live.yaml` |
 | UM hebdo + annuel HP/HC | `utility_meter/P0_Energie_total/Ecojoko/01_UM_AMHQ_cost.yaml` |
-| Mini / Maxi / Moy 1h (W) | `sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojojoko_mini_maxi_avg_1h.yaml` |
+| Mini / Maxi (W) | `sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg.yaml` |
 | Page détail | `docs/L2C1_ENERGIE/PAGE_ENERGIE.md` |
 
 ---
