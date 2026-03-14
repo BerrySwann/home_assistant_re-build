@@ -355,6 +355,19 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 ## 🌳 ARBORESCENCE DE HA EN LOCAL RE-BUILD
 
 ```text
+/config/                                         (racine — fichiers de configuration globaux)
+├── configuration.yaml                           (point d'entrée HA : includes, intégrations, packages)
+├── automations.yaml                             (toutes les automations — géré via UI + éditeur YAML)
+├── scripts.yaml                                 (séquences d'actions réutilisables déclenchables manuellement)
+├── scenes.yaml                                  (états prédéfinis multi-entités : ambiances, modes)
+├── camera.yaml                                  (entités caméra : command_line → images vigilance Météo France)
+├── input_button.yaml                            (boutons virtuels helpers : déclencheurs manuels dans l'UI)
+├── groups.yaml                                  (groupes d'entités : regroupement logique pour affichage/automations)
+├── shell_command.yaml                           (commandes shell appelables depuis HA : scripts bash, wget, etc.)
+├── sql.yaml                                     (capteurs SQL : requêtes sur MariaDB — taille DB, stats)
+├── #sensors.yaml                                (désactivé — remplacé par /config/sensors/)
+├── #templates.yaml                              (désactivé — remplacé par /config/templates/)
+└── #utility_meter.yaml                          (désactivé — remplacé par /config/utility_meter/)
 /config/utility_meter
 ├── P0_Energie_total
 │   ├── Ecojoko
@@ -418,7 +431,7 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 /config/sensors
 ├── P0_Energie_total_diag
 │   └── Ecojoko_mini_maxi
-│       └── Ecojoko_mini_maxi_avg_1h.yaml
+│       └── Ecojoko_mini_maxi_avg.yaml
 ├── P2_prise
 │   ├── P2_kWh_prises.yaml
 │   └── P2_kWh_veilles.yaml
@@ -431,6 +444,8 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 
 /config/home-assistant-config-v2
 └── docs
+    ├── CONFIG_ROOT
+    │   └── CONFIG_ROOT.md
     ├── IA
     │   └── IA_CONTEXT_BASE.md
     ├── L1C1_METEO
@@ -460,7 +475,7 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
     ├── REBUILD_SYNC_STATUS.md
     └── _TEMPLATE_DOC.md
 
-40 directories, 62 files
+41 directories, 63 files
 ```
 
 ---
@@ -533,7 +548,7 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 ### 📂 SENSORS
 
 **Pôle 0 - Diag & Énergie Globale**
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg_1h.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg.yaml
 
 **Pôle 2 - Prises**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P2_prise/P2_kWh_prises.yaml
