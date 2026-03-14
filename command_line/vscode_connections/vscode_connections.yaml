@@ -1,6 +1,29 @@
-# ╭──────────────────────────────────────────────────────────────────╮
-# │ COMMAND_LINE : VSCODE (CONNECTIONS)                              │
-# ╰──────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ COMMAND_LINE : VSCODE (CONNECTIONS)                                      │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Surveille en temps réel le nombre de connexions TCP actives sur le serveur
+# VSCode (port 1337) et les processus node/code-server en cours d'exécution.
+# Permet de savoir si VSCode Server est actif et combien de clients sont connectés.
+# Inclus via : command_line: !include_dir_merge_list command_line/ (configuration.yaml)
+#
+# ## 🧮 CALCUL & SOURCES :
+# - sensor 1 : netstat -an | grep :1337 | grep ESTABLISHED | wc -l
+#   → Compte les connexions TCP ESTABLISHED sur le port VSCode 1337
+# - sensor 2 : ps -ef | grep 'node' | grep 'code-server' | grep -v 'grep' | wc -l
+#   → Compte les processus node actifs liés à code-server
+# - scan_interval: 60 (mise à jour toutes les minutes)
+# - Unités : conn (connexions) / proc (processus)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - netstat doit être disponible sur le système (inclus dans le package net-tools).
+#   Sur HA OS, vérifier la disponibilité ou utiliser ss à la place de netstat.
+# - Le port 1337 est le port par défaut de VSCode Server — à adapter si modifié.
+# - sensor 2 peut retourner 0 même si VSCode est actif (si process renommé).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert à la remontée d'info pour la vignette : [L4C2 Mini PC / Système]
 
 # --- visual_code_serveur_connections ---
 - sensor:
