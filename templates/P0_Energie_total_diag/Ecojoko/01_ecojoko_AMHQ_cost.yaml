@@ -63,35 +63,37 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ 2. HEBDOMADAIRE (H)                                                      │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-    # --- ecojoko_cout_hp_hebdo ---
-    - name: "Ecojoko Coût HP Hebdo"
-      unique_id: ecojoko_cout_hp_hebdo
+    # --- ecojoko_cout_hp_hebdomadaire ---
+    - name: "Ecojoko Coût HP Hebdomadaire"
+      unique_id: ecojoko_cout_hp_hebdomadaire
       unit_of_measurement: "€"
       device_class: monetary
       state_class: total
       state: >
-        {% set kwh   = states('sensor.ecojoko_hp_reseau_hebdo_um') | float(0) %}
+        {% set kwh = states('sensor.ecojoko_hp_reseau_hebdomadaire_um') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0) %}
         {{ (kwh * tarif) | round(2) }}
-    # --- ecojoko_cout_hc_hebdo ---
-    - name: "Ecojoko Coût HC Hebdo"
-      unique_id: ecojoko_cout_hc_hebdo
+
+    # --- ecojoko_cout_hc_hebdomadaire ---
+    - name: "Ecojoko Coût HC Hebdomadaire"
+      unique_id: ecojoko_cout_hc_hebdomadaire
       unit_of_measurement: "€"
       device_class: monetary
       state_class: total
       state: >
-        {% set kwh   = states('sensor.ecojoko_hc_reseau_hebdo_um') | float(0) %}
+        {% set kwh = states('sensor.ecojoko_hc_reseau_hebdomadaire_um') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0) %}
         {{ (kwh * tarif) | round(2) }}
-    # --- ecojoko_cout_total_hebdo ---
-    - name: "Ecojoko Coût Total Hebdo"
-      unique_id: ecojoko_cout_total_hebdo
+
+    # --- ecojoko_cout_total_hebdomadaire ---
+    - name: "Ecojoko Coût Total Hebdomadaire"
+      unique_id: ecojoko_cout_total_hebdomadaire
       unit_of_measurement: "€"
       device_class: monetary
       state_class: total
       state: >
-        {% set hp = states('sensor.ecojoko_cout_hp_hebdo') | float(0) %}
-        {% set hc = states('sensor.ecojoko_cout_hc_hebdo') | float(0) %}
+        {% set hp = states('sensor.ecojoko_cout_hp_hebdomadaire') | float(0) %}
+        {% set hc = states('sensor.ecojoko_cout_hc_hebdomadaire') | float(0) %}
         {{ (hp + hc) | round(2) }}
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ 3. MENSUEL (M)                                                           │
