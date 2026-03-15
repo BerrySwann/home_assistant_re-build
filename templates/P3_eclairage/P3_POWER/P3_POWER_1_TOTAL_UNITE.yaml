@@ -1,0 +1,34 @@
+      # ╭──────────────────────────────────────────────────────────────────────╮
+      # │    PÔLE 3. TOTAL : À L'UNITÉ (19 lampes)                             │
+      # ╰──────────────────────────────────────────────────────────────────────╯
+
+- sensor:
+
+      # --- eclairage_total_unit_puissance ---
+      - name: "Eclairage Total Unit Puissance"
+        unique_id: eclairage_total_unit_puissance
+        unit_of_measurement: "W"
+        device_class: power
+        state_class: measurement
+        state: >
+          {{
+            states('sensor.hue_white_lamp_entree_power') | float(0) +
+            states('sensor.hue_white_lamp_table_power') | float(0) +
+            states('sensor.hue_ambiance_lamp_salon_1_power') | float(0) +
+            states('sensor.hue_ambiance_lamp_salon_2_power') | float(0) +
+            states('sensor.hue_ambiance_lamp_salon_3_power') | float(0) +
+            states('sensor.hue_color_candle_salon_1_power') | float(0) +
+            states('sensor.hue_white_lamp_cuisine_power') | float(0) +
+            states('sensor.hue_white_lamp_couloir_power') | float(0) +
+            states('sensor.hue_play_1_pc_bureau_power') | float(0) +
+            states('sensor.hue_play_2_pc_bureau_power') | float(0) +
+            states('sensor.hue_play_3_pc_bureau_power') | float(0) +
+            states('sensor.hue_white_lamp_bureau_1_power') | float(0) +
+            states('sensor.hue_white_lamp_bureau_2_power') | float(0) +
+            states('sensor.relais_lumiere_sdb_sonoff_power') | float(0) +
+            states('sensor.lampe_salle_de_bain_hue_power') | float(0) +
+            states('sensor.hue_white_lamp_chambre_1_power') | float(0) +
+            states('sensor.hue_white_lamp_chambre_2_power') | float(0) +
+            states('sensor.hue_color_candle_chambre_gege_power') | float(0) +
+            states('sensor.hue_color_candle_chambre_eric_power') | float(0)
+          }}
