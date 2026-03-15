@@ -46,25 +46,25 @@ ecojoko_hc_reseau_mensuel_um:
 
 # ─── HEBDOMADAIRE ────────────────────────────────────────────────────────────
 
-# --- ecojoko_reseau_hebdo_um ---
-ecojoko_reseau_hebdo_um:
+# --- ecojoko_reseau_hebdomadaire_um ---
+ecojoko_reseau_hebdomadaire_um:
   source: sensor.ecojoko_consommation_reseau
-  name: "Ecojoko Réseau Hebdo UM"
-  unique_id: ecojoko_reseau_hebdo_um
+  name: "Ecojoko Réseau Hebdomadaire UM"
+  unique_id: ecojoko_reseau_hebdomadaire_um
   cycle: weekly
 
-# --- ecojoko_hp_reseau_hebdo_um ---
-ecojoko_hp_reseau_hebdo_um:
+# --- ecojoko_hp_reseau_hebdomadaire_um ---
+ecojoko_hp_reseau_hebdomadaire_um:
   source: sensor.ecojoko_consommation_hp_reseau
-  name: "Ecojoko HP Réseau Hebdo UM"
-  unique_id: ecojoko_hp_reseau_hebdo_um
+  name: "Ecojoko HP Réseau Hebdomadaire UM"
+  unique_id: ecojoko_hp_reseau_hebdomadaire_um
   cycle: weekly
 
-# --- ecojoko_hc_reseau_hebdo_um ---
-ecojoko_hc_reseau_hebdo_um:
+# --- ecojoko_hc_reseau_hebdomadaire_um ---
+ecojoko_hc_reseau_hebdomadaire_um:
   source: sensor.ecojoko_consommation_hc_reseau
-  name: "Ecojoko HC Réseau Hebdo UM"
-  unique_id: ecojoko_hc_reseau_hebdo_um
+  name: "Ecojoko HC Réseau Hebdomadaire UM"
+  unique_id: ecojoko_hc_reseau_hebdomadaire_um
   cycle: weekly
 
 # ─── ANNUEL ──────────────────────────────────────────────────────────────────
