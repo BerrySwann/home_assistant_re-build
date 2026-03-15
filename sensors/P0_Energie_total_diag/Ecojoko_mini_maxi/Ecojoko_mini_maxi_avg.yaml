@@ -25,7 +25,7 @@
 # - L2C1 Conso Énergie Générale (suivi temps réel min/max/moy).
 
 - platform: statistics
-  name: "Conso Mini"
+  name: "Ecojoko Conso Mini 24h"
   unique_id: ecojoko_conso_mini_24h
   entity_id: sensor.ecojoko_consommation_temps_reel
   state_characteristic: value_min
@@ -34,7 +34,7 @@
     hours: 24
 
 - platform: statistics
-  name: "Conso Maxi"
+  name: "Ecojoko Conso Maxi 24h"
   unique_id: ecojoko_conso_maxi_24h
   entity_id: sensor.ecojoko_consommation_temps_reel
   state_characteristic: value_max
