@@ -53,8 +53,6 @@
   # │    J1 À J7 — HISTORIQUE MEData (Enedis)                              │
   # ╰──────────────────────────────────────────────────────────────────────╯
 
-  {% set jours_fr = {0: 'Lundi', 1: 'Mardi', 2: 'Mercredi', 3: 'Jeudi', 4: 'Vendredi', 5: 'Samedi', 6: 'Dimanche'} %}
-
   # --- linky_jour_j1 ---
   - name: "Linky Jour J1"
     unique_id: linky_jour_j1
@@ -221,3 +219,5 @@
 # - [L44] J0 source Ecojoko temps réel (HP + HC quotidien UM).
 # - [L60-175] J1-J7 sources MEData attributs dailyweek (Wh → /1000 → kWh).
 # - [Remplacement] Remplace P0_linky_jour_J0_J7.yaml (même contenu, nom officiel HA).
+# - [L56 supprimé] modif: bloc Jinja2 orphelin {% set jours_fr %} hors de tout contexte state/attributes
+#                  → YAML parser plantait sur le caractère '%' (non valide au niveau racine YAML).
