@@ -1,6 +1,7 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 0. TEMPLATE : ECOJOKO — RATIO RENTABILITÉ HC % (MENSUEL)           │
-# │ Seuils : > 25% = limite / > 33% = rentable                              │
+# │ PÔLE 0. TEMPLATE : ECOJOKO — RATIO RENTABILITÉ HC %                      │
+# | ( QUOTIDIEN / HEBDOMADAIRE /MENSUEL )                                    │
+# │ Seuils : > 25% = limite / > 33% = rentable                               │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -24,6 +25,36 @@
 # - L2C1 Conso Énergie Générale (section ratios Linky/HC, slider rentabilité)
 
 - sensor:
+
+      # --- ecojoko_ratio_hc_quotidien ---
+    - name: "Ecojoko Ratio HC Quotidien"
+      unique_id: ecojoko_ratio_hc_quotidien
+      unit_of_measurement: "%"
+      state_class: measurement
+      icon: mdi:percent
+      state: >
+        {% set hp = states('sensor.ecojoko_hp_reseau_quotidien_um') | float(0) %}
+        {% set hc = states('sensor.ecojoko_hc_reseau_quotidien_um') | float(0) %}
+        {% set total = hp + hc %}
+        {{ ((hc / total) * 100) | round(1) if total > 0 else 0 }}
+      availability: >
+        {{ states('sensor.ecojoko_hp_reseau_quotidien_um') not in ['unavailable','unknown','none']
+          and states('sensor.ecojoko_hc_reseau_quotidien_um') not in ['unavailable','unknown','none'] }}
+
+    # --- ecojoko_ratio_hc_hebdomadaire ---
+    - name: "Ecojoko Ratio HC Hebdomadaire"
+      unique_id: ecojoko_ratio_hc_hebdomadaire
+      unit_of_measurement: "%"
+      state_class: measurement
+      icon: mdi:percent
+      state: >
+        {% set hp = states('sensor.ecojoko_hp_reseau_hebdomadaire_um') | float(0) %}
+        {% set hc = states('sensor.ecojoko_hc_reseau_hebdomadaire_um') | float(0) %}
+        {% set total = hp + hc %}
+        {{ ((hc / total) * 100) | round(1) if total > 0 else 0 }}
+      availability: >
+        {{ states('sensor.ecojoko_hp_reseau_hebdomadaire_um') not in ['unavailable','unknown','none']
+          and states('sensor.ecojoko_hc_reseau_hebdomadaire_um') not in ['unavailable','unknown','none'] }}
 
     # --- ecojoko_ratio_hc_mensuel ---
     - name: "Ecojoko Ratio HC Mensuel"
