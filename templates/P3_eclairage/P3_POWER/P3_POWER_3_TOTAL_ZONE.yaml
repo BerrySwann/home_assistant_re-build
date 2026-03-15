@@ -1,0 +1,21 @@
+      # ╭──────────────────────────────────────────────────────────────────────╮
+      # │    PÔLE 3. TOTAL : PAR REGROUPEMENT (7 zones)                        │
+      # ╰──────────────────────────────────────────────────────────────────────╯
+
+- sensor:
+      # --- eclairage_total_group_puissance ---
+      - name: "Eclairage Total Group Puissance"
+        unique_id: eclairage_total_group_puissance
+        unit_of_measurement: "W"
+        device_class: power
+        state_class: measurement
+        state: >
+          {{
+            states('sensor.eclairage_entree_1_puissance') | float(0) +
+            states('sensor.eclairage_salon_5_puissance') | float(0) +
+            states('sensor.eclairage_cuisine_1_puissance') | float(0) +
+            states('sensor.eclairage_couloir_1_puissance') | float(0) +
+            states('sensor.eclairage_bureau_5_puissance') | float(0) +
+            states('sensor.eclairage_sdb_2_puissance') | float(0) +
+            states('sensor.eclairage_chambre_4_puissance') | float(0)
+          }}
