@@ -149,8 +149,8 @@
   # │    MAX DYNAMIQUE (axe Y des barres + 0.5 kWh buffer)                 │
   # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_max_poste_quotidien ---
-  - name: "Diag Max Poste Quotidien"
-    unique_id: diag_max_poste_quotidien
+  - name: "Diag Max Poste Quotidien Dynamique"
+    unique_id: diag_max_poste_quotidien_dynamique
     unit_of_measurement: "kWh"
     device_class: energy
     state: >

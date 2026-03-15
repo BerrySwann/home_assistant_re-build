@@ -149,8 +149,8 @@
   # │    MAX DYNAMIQUE (axe Y des barres + 10 kWh buffer mensuel)          │
   # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_max_poste_mensuel ---
-  - name: "Diag Max Poste Mensuel"
-    unique_id: diag_max_poste_mensuel
+  - name: "Diag Max Poste Mensuel Dynamique"
+    unique_id: diag_max_poste_mensuel_dynamique
     unit_of_measurement: "kWh"
     device_class: energy
     state: >

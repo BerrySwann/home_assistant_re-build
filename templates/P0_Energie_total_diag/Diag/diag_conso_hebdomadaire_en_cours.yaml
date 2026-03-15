@@ -152,8 +152,8 @@
   # │    MAX DYNAMIQUE (axe Y des barres + 2 kWh buffer hebdomadaire)      │
   # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_max_poste_hebdomadaire ---
-  - name: "Diag Max Poste Hebdomadaire"
-    unique_id: diag_max_poste_hebdomadaire
+  - name: "Diag Max Poste Hebdomadaire Dynamique"
+    unique_id: diag_max_poste_hebdomadaire_dynamique
     unit_of_measurement: "kWh"
     device_class: energy
     state: >
