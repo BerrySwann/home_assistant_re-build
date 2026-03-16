@@ -16575,400 +16575,6 @@ views:
           - type: vertical-stack
             cards:
               - type: heading
-                icon: mdi:fire
-                heading: Chauffage
-                heading_style: title
-                badges:
-                  - type: entity
-                    entity: sensor.total_poste_chauffage_puissance
-                    show_state: true
-                    color: orange
-              - type: custom:auto-entities
-                card:
-                  type: custom:bar-card
-                  title: ' '
-                  icon: mdi:fire
-                  title_position: inside
-                  height: 38
-                  unit_of_measurement: W
-                  severity:
-                    - color: gainsboro
-                      from: 0
-                      to: 5
-                    - color: '#4caf50'
-                      from: 5.1
-                      to: 249
-                    - color: '#FFCC99'
-                      from: 250
-                      to: 749
-                    - color: '#ff4444'
-                      from: 750
-                      to: 6000
-                  card_mod:
-                    style: >
-                      :host { --ha-card-border-color: transparent !important;
-                      --card-background-color: none !important; }
-
-                      ha-card { font-weight: bold; --mdc-icon-size: 25px;
-                      margin-top: -15px !important; }
-
-                      bar-card-currentbar { border-radius: 10px; height: 6px
-                      !important; margin-top: 34px; }
-                filter:
-                  include:
-                    - options: {}
-                      entity_id: sensor.clim_salon_power
-                    - options: {}
-                      entity_id: sensor.radiateur_elec_cuisine_power
-                    - options: {}
-                      entity_id: sensor.clim_bureau_power
-                    - options: {}
-                      entity_id: sensor.soufflant_sdb_power
-                    - options: {}
-                      entity_id: sensor.seche_serviette_sdb_power
-                    - options: {}
-                      entity_id: sensor.clim_chambre_power
-                  exclude:
-                    - options: {}
-                      state: <= 1
-                sort:
-                  method: state
-                  reverse: true
-                  numeric: true
-              - type: heading
-                icon: mdi:monitor
-                heading: Multimédia
-                heading_style: title
-                badges:
-                  - type: entity
-                    entity: sensor.total_poste_multimedia_puissance
-                    show_state: true
-                    color: blue
-              - type: custom:auto-entities
-                card:
-                  type: custom:bar-card
-                  title: ' '
-                  icon: mdi:monitor
-                  title_position: inside
-                  height: 38
-                  unit_of_measurement: W
-                  severity:
-                    - color: gainsboro
-                      from: 0
-                      to: 5
-                    - color: '#4caf50'
-                      from: 5.1
-                      to: 249
-                    - color: '#FFCC99'
-                      from: 250
-                      to: 749
-                    - color: '#ff4444'
-                      from: 750
-                      to: 6000
-                  card_mod:
-                    style: >
-                      :host { --ha-card-border-color: transparent !important;
-                      --card-background-color: none !important; }
-
-                      ha-card { font-weight: bold; --mdc-icon-size: 25px;
-                      margin-top: -15px !important; }
-
-                      bar-card-currentbar { border-radius: 10px; height: 6px
-                      !important; margin-top: 34px; }
-                filter:
-                  include:
-                    - options: {}
-                      entity_id: sensor.prise_box_internet_ikea_power
-                    - options: {}
-                      entity_id: sensor.prise_tv_salon_ikea_power
-                    - options: {}
-                      entity_id: sensor.prise_tv_chambre_nous_power
-                    - options: {}
-                      entity_id: sensor.prise_pc_s_gege_ikea_power
-                    - options: {}
-                      entity_id: sensor.prise_bureau_pc_ikea_power
-                  exclude:
-                    - options: {}
-                      state: <= 1
-                sort:
-                  method: state
-                  reverse: true
-                  numeric: true
-              - type: heading
-                icon: mdi:stove
-                heading: Cuisson
-                heading_style: title
-                badges:
-                  - type: entity
-                    entity: sensor.total_poste_cuisine_puissance
-                    show_state: true
-                    color: red
-              - type: custom:auto-entities
-                card:
-                  type: custom:bar-card
-                  title: ' '
-                  icon: mdi:stove
-                  title_position: inside
-                  height: 38
-                  unit_of_measurement: W
-                  severity:
-                    - color: gainsboro
-                      from: 0
-                      to: 5
-                    - color: '#4caf50'
-                      from: 5.1
-                      to: 249
-                    - color: '#FFCC99'
-                      from: 250
-                      to: 749
-                    - color: '#ff4444'
-                      from: 750
-                      to: 6000
-                  card_mod:
-                    style: >
-                      :host { --ha-card-border-color: transparent !important;
-                      --card-background-color: none !important; }
-
-                      ha-card { font-weight: bold; --mdc-icon-size: 25px;
-                      margin-top: -15px !important; }
-
-                      bar-card-currentbar { border-radius: 10px; height: 6px
-                      !important; margin-top: 34px; }
-                filter:
-                  include:
-                    - options: {}
-                      entity_id: sensor.prise_four_micro_ondes_nous_power
-                    - options: {}
-                      entity_id: sensor.prise_petit_dejeune_nous_power
-                    - options: {}
-                      entity_id: sensor.prise_airfryer_ninja_nous_power
-                    - options: {}
-                      entity_id: sensor.four_et_plaque_de_cuisson_power
-                  exclude:
-                    - options: {}
-                      state: <= 1
-                sort:
-                  method: state
-                  reverse: true
-                  numeric: true
-              - type: heading
-                icon: mdi:fridge
-                heading: Froid
-                heading_style: title
-                badges:
-                  - type: entity
-                    entity: sensor.total_poste_froid_puissance
-                    show_state: true
-                    color: cyan
-              - type: custom:auto-entities
-                card:
-                  type: custom:bar-card
-                  title: ' '
-                  icon: mdi:fridge
-                  title_position: inside
-                  height: 38
-                  unit_of_measurement: W
-                  severity:
-                    - color: gainsboro
-                      from: 0
-                      to: 5
-                    - color: '#4caf50'
-                      from: 5.1
-                      to: 249
-                    - color: '#FFCC99'
-                      from: 250
-                      to: 749
-                    - color: '#ff4444'
-                      from: 750
-                      to: 6000
-                  card_mod:
-                    style: >
-                      :host { --ha-card-border-color: transparent !important;
-                      --card-background-color: none !important; }
-
-                      ha-card { font-weight: bold; --mdc-icon-size: 25px;
-                      margin-top: -15px !important; }
-
-                      bar-card-currentbar { border-radius: 10px; height: 6px
-                      !important; margin-top: 34px; }
-                filter:
-                  include:
-                    - options: {}
-                      entity_id: sensor.prise_frigo_cuisine_nous_power
-                    - options: {}
-                      entity_id: sensor.prise_congelateur_cuisine_nous_power
-                  exclude:
-                    - options: {}
-                      state: <= 1
-                sort:
-                  method: state
-                  reverse: true
-                  numeric: true
-              - type: heading
-                icon: mdi:washing-machine
-                heading: Hygiène
-                heading_style: title
-                badges:
-                  - type: entity
-                    entity: sensor.total_poste_hygiene_puissance
-                    show_state: true
-                    color: teal
-              - type: custom:auto-entities
-                card:
-                  type: custom:bar-card
-                  title: ' '
-                  icon: mdi:washing-machine
-                  title_position: inside
-                  height: 38
-                  unit_of_measurement: W
-                  severity:
-                    - color: gainsboro
-                      from: 0
-                      to: 5
-                    - color: '#4caf50'
-                      from: 5.1
-                      to: 249
-                    - color: '#FFCC99'
-                      from: 250
-                      to: 749
-                    - color: '#ff4444'
-                      from: 750
-                      to: 6000
-                  card_mod:
-                    style: >
-                      :host { --ha-card-border-color: transparent !important;
-                      --card-background-color: none !important; }
-
-                      ha-card { font-weight: bold; --mdc-icon-size: 25px;
-                      margin-top: -15px !important; }
-
-                      bar-card-currentbar { border-radius: 10px; height: 6px
-                      !important; margin-top: 34px; }
-                filter:
-                  include:
-                    - entity_id: sensor.prise_lave_linge_nous_power
-                    - entity_id: sensor.prise_lave_vaisselle_nous_power
-                    - entity_id: sensor.prise_bureau_fer_a_repasser_nous_power
-                  exclude:
-                    - state: <= 1
-                sort:
-                  method: state
-                  reverse: true
-                  numeric: true
-              - type: heading
-                icon: mdi:lightbulb
-                heading: Lumière
-                heading_style: title
-                badges:
-                  - type: entity
-                    entity: sensor.eclairage_total_unit_puissance
-                    show_state: true
-                    color: yellow
-              - type: custom:auto-entities
-                card:
-                  type: custom:bar-card
-                  title: ' '
-                  icon: mdi:lightbulb
-                  title_position: inside
-                  height: 38
-                  unit_of_measurement: W
-                  severity:
-                    - color: gainsboro
-                      from: 0
-                      to: 5
-                    - color: '#4caf50'
-                      from: 5.1
-                      to: 249
-                    - color: '#FFCC99'
-                      from: 250
-                      to: 749
-                    - color: '#ff4444'
-                      from: 750
-                      to: 6000
-                  card_mod:
-                    style: >
-                      :host { --ha-card-border-color: transparent !important;
-                      --card-background-color: none !important; }
-
-                      ha-card { font-weight: bold; --mdc-icon-size: 25px;
-                      margin-top: -15px !important; }
-
-                      bar-card-currentbar { border-radius: 10px; height: 6px
-                      !important; margin-top: 34px; }
-                filter:
-                  exclude:
-                    - options: {}
-                      last_updated: 1m ago
-                    - options: {}
-                      state: <= 1
-                    - options: {}
-                      state: unavailable
-                  include:
-                    - options: {}
-                      entity_id: ^*relais*power$
-                    - options: {}
-                      entity_id: sensor.lampe_salle_de_bain_hue_power
-                    - options: {}
-                      entity_id: ^sensor.hue*power$
-                sort:
-                  method: state
-                  reverse: true
-                  numeric: true
-              - type: heading
-                icon: mdi:plus-circle
-                heading: Autres
-                heading_style: title
-                badges:
-                  - type: entity
-                    entity: sensor.total_poste_autre_puissance
-                    show_state: true
-                    color: grey
-              - type: custom:auto-entities
-                card:
-                  type: custom:bar-card
-                  title: ' '
-                  icon: mdi:plus-circle
-                  title_position: inside
-                  height: 38
-                  unit_of_measurement: W
-                  severity:
-                    - color: gainsboro
-                      from: 0
-                      to: 5
-                    - color: '#4caf50'
-                      from: 5.1
-                      to: 249
-                    - color: '#FFCC99'
-                      from: 250
-                      to: 749
-                    - color: '#ff4444'
-                      from: 750
-                      to: 6000
-                  card_mod:
-                    style: >
-                      :host { --ha-card-border-color: transparent !important;
-                      --card-background-color: none !important; }
-
-                      ha-card { font-weight: bold; --mdc-icon-size: 25px;
-                      margin-top: -15px !important; }
-
-                      bar-card-currentbar { border-radius: 10px; height: 6px
-                      !important; margin-top: 34px; }
-                filter:
-                  include:
-                    - entity_id: sensor.all_standby_power
-                    - entity_id: sensor.prise_tete_de_lit_chambre_power
-                    - entity_id: sensor.prise_salon_chargeur_nous_power
-                    - entity_id: sensor.prise_horloge_ikea_power
-                  exclude:
-                    - state: <= 1
-                sort:
-                  method: state
-                  reverse: true
-                  numeric: true
-          - type: vertical-stack
-            cards:
-              - type: heading
                 icon: mdi:lightning-bolt
                 heading: Temps Réél
                 heading_style: title
@@ -16985,6 +16591,717 @@ views:
                 tap_action:
                   action: navigate
                   navigation_path: /dashboard-tablette/energie
+              - type: markdown
+                content: ' '
+                card_mod:
+                  style: |
+                    ha-card {
+                      height: 1px !important;
+                      background: rgba(255, 255, 255, 0.4) !important;
+                      margin: 5px 20px 5px 20px !important;
+                      border: none !important;
+                    }
+          - type: vertical-stack
+            cards:
+              - type: conditional
+                conditions:
+                  - entity: sensor.total_poste_chauffage_puissance
+                    state_not: '0.0'
+                  - entity: sensor.total_poste_chauffage_puissance
+                    state_not: '0'
+                  - entity: sensor.total_poste_chauffage_puissance
+                    state_not: unavailable
+                card:
+                  type: vertical-stack
+                  cards:
+                    - type: heading
+                      icon: mdi:hvac
+                      heading: Chauffage
+                      heading_style: title
+                      badges:
+                        - type: entity
+                          entity: sensor.total_poste_chauffage_puissance
+                          show_state: true
+                          color: orange
+                    - type: custom:auto-entities
+                      card:
+                        type: custom:bar-card
+                        title: ' '
+                        icon: mdi:hvac
+                        title_position: inside
+                        height: 38
+                        unit_of_measurement: W
+                        severity:
+                          - color: gainsboro
+                            from: 0
+                            to: 5
+                          - color: '#4caf50'
+                            from: 5.1
+                            to: 249
+                          - color: '#FFCC99'
+                            from: 250
+                            to: 749
+                          - color: '#ff4444'
+                            from: 750
+                            to: 6000
+                        card_mod:
+                          style: >
+                            :host {
+                              --ha-card-border-color: transparent !important;
+                              --card-background-color: none !important;
+                            }
+
+                            ha-card {
+                              font-weight: bold;
+                              --mdc-icon-size: 22px;
+                              --paper-item-icon-color: white;
+                              margin-top: -10px !important;
+                              font-size: 12px;
+                            }
+
+                            bar-card-currentbar { border-radius: 10px; }
+
+                            bar-card-currentbar, bar-card-current,
+                            bar-card-backgroundbar {
+                              height: 6px !important;
+                              margin-top: 34px;
+                            }
+
+                            bar-card-name { font-size: 12px; }
+
+                            bar-card-value { font-size: 12px; }
+                      filter:
+                        include:
+                          - entity_id: sensor.clim_salon_power
+                            options:
+                              icon: mdi:air-conditioner
+                          - entity_id: sensor.radiateur_elec_cuisine_power
+                            options:
+                              icon: mdi:radiator
+                          - entity_id: sensor.clim_bureau_power
+                            options:
+                              icon: mdi:air-conditioner
+                          - entity_id: sensor.soufflant_sdb_power
+                            options:
+                              icon: mdi:fan
+                          - entity_id: sensor.seche_serviette_sdb_power
+                            options:
+                              icon: mdi:radiator-vertical
+                          - entity_id: sensor.clim_chambre_power
+                            options:
+                              icon: mdi:air-conditioner
+                        exclude:
+                          - options: {}
+                            state: <= 1
+                      sort:
+                        method: state
+                        reverse: true
+                        numeric: true
+                    - type: markdown
+                      content: ' '
+                      card_mod:
+                        style: |
+                          ha-card {
+                            height: 1px !important;
+                            background: rgba(255, 255, 255, 0.4) !important;
+                            margin: 5px 20px 5px 20px !important;
+                            border: none !important;
+                          }
+              - type: conditional
+                conditions:
+                  - entity: sensor.total_poste_multimedia_puissance
+                    state_not: '0.0'
+                  - entity: sensor.total_poste_multimedia_puissance
+                    state_not: '0'
+                card:
+                  type: vertical-stack
+                  cards:
+                    - type: heading
+                      icon: mdi:monitor-screenshot
+                      heading: Multimédia
+                      heading_style: title
+                      badges:
+                        - type: entity
+                          entity: sensor.total_poste_multimedia_puissance
+                          show_state: true
+                          color: blue
+                    - type: custom:auto-entities
+                      card:
+                        type: custom:bar-card
+                        title: ' '
+                        icon: mdi:monitor
+                        title_position: inside
+                        height: 38
+                        unit_of_measurement: W
+                        severity:
+                          - color: gainsboro
+                            from: 0
+                            to: 5
+                          - color: '#4caf50'
+                            from: 5.1
+                            to: 249
+                          - color: '#FFCC99'
+                            from: 250
+                            to: 749
+                          - color: '#ff4444'
+                            from: 750
+                            to: 6000
+                        card_mod:
+                          style: >
+                            :host {
+                              --ha-card-border-color: transparent !important;
+                              --card-background-color: none !important;
+                            }
+
+                            ha-card {
+                              font-weight: bold;
+                              --mdc-icon-size: 22px;
+                              --paper-item-icon-color: white;
+                              margin-top: -10px !important;
+                              font-size: 12px;
+                            }
+
+                            bar-card-currentbar { border-radius: 10px; }
+
+                            bar-card-currentbar, bar-card-current,
+                            bar-card-backgroundbar {
+                              height: 6px !important;
+                              margin-top: 34px;
+                            }
+
+                            bar-card-name { font-size: 12px; }
+
+                            bar-card-value { font-size: 12px; }
+                      filter:
+                        include:
+                          - entity_id: sensor.prise_box_internet_ikea_power
+                            options:
+                              icon: mdi:router-wireless
+                          - entity_id: sensor.prise_tv_salon_ikea_power
+                            options:
+                              icon: mdi:television
+                          - entity_id: sensor.prise_tv_chambre_nous_power
+                            options:
+                              icon: mdi:television-classic
+                          - entity_id: sensor.prise_pc_s_gege_ikea_power
+                            options:
+                              icon: mdi:desktop-tower-monitor
+                          - entity_id: sensor.prise_bureau_pc_ikea_power
+                            options:
+                              icon: mdi:laptop
+                        exclude:
+                          - options: {}
+                            state: <= 1
+                      sort:
+                        method: state
+                        reverse: true
+                        numeric: true
+                    - type: markdown
+                      content: ' '
+                      card_mod:
+                        style: |
+                          ha-card {
+                            height: 1px !important;
+                            background: rgba(255, 255, 255, 0.4) !important;
+                            margin: 5px 20px 5px 20px !important;
+                            border: none !important;
+                          }
+              - type: conditional
+                conditions:
+                  - entity: sensor.total_poste_cuisine_puissance
+                    state_not: '0.0'
+                  - entity: sensor.total_poste_cuisine_puissance
+                    state_not: '0'
+                card:
+                  type: vertical-stack
+                  cards:
+                    - type: heading
+                      icon: mdi:stove
+                      heading: Cuisson
+                      heading_style: title
+                      badges:
+                        - type: entity
+                          entity: sensor.total_poste_cuisine_puissance
+                          show_state: true
+                          color: red
+                    - type: custom:auto-entities
+                      card:
+                        type: custom:bar-card
+                        title: ' '
+                        icon: mdi:stove
+                        title_position: inside
+                        height: 38
+                        unit_of_measurement: W
+                        severity:
+                          - color: gainsboro
+                            from: 0
+                            to: 5
+                          - color: '#4caf50'
+                            from: 5.1
+                            to: 249
+                          - color: '#FFCC99'
+                            from: 250
+                            to: 749
+                          - color: '#ff4444'
+                            from: 750
+                            to: 6000
+                        card_mod:
+                          style: >
+                            :host {
+                              --ha-card-border-color: transparent !important;
+                              --card-background-color: none !important;
+                            }
+
+                            ha-card {
+                              font-weight: bold;
+                              --mdc-icon-size: 22px;
+                              --paper-item-icon-color: white;
+                              margin-top: -10px !important;
+                              font-size: 12px;
+                            }
+
+                            bar-card-currentbar { border-radius: 10px; }
+
+                            bar-card-currentbar, bar-card-current,
+                            bar-card-backgroundbar {
+                              height: 6px !important;
+                              margin-top: 34px;
+                            }
+
+                            bar-card-name { font-size: 12px; }
+
+                            bar-card-value { font-size: 12px; }
+                      filter:
+                        include:
+                          - entity_id: sensor.prise_four_micro_ondes_nous_power
+                            options:
+                              icon: mdi:microwave
+                          - entity_id: sensor.prise_petit_dejeune_nous_power
+                            options:
+                              icon: mdi:coffee-maker
+                          - entity_id: sensor.prise_airfryer_ninja_nous_power
+                            options:
+                              icon: mdi:pot-steam
+                          - entity_id: sensor.four_et_plaque_de_cuisson_power
+                            options:
+                              icon: mdi:stove
+                        exclude:
+                          - options: {}
+                            state: <= 1
+                      sort:
+                        method: state
+                        reverse: true
+                        numeric: true
+                    - type: markdown
+                      content: ' '
+                      card_mod:
+                        style: |
+                          ha-card {
+                            height: 1px !important;
+                            background: rgba(255, 255, 255, 0.4) !important;
+                            margin: 5px 20px 5px 20px !important;
+                            border: none !important;
+                          }
+              - type: conditional
+                conditions:
+                  - entity: sensor.total_poste_froid_puissance
+                    state_not: '0.0'
+                  - entity: sensor.total_poste_froid_puissance
+                    state_not: '0'
+                card:
+                  type: vertical-stack
+                  cards:
+                    - type: heading
+                      icon: mdi:fridge-outline
+                      heading: Froid
+                      heading_style: title
+                      badges:
+                        - type: entity
+                          entity: sensor.total_poste_froid_puissance
+                          show_state: true
+                          color: cyan
+                    - type: custom:auto-entities
+                      card:
+                        type: custom:bar-card
+                        title: ' '
+                        icon: mdi:fridge
+                        title_position: inside
+                        height: 38
+                        unit_of_measurement: W
+                        severity:
+                          - color: gainsboro
+                            from: 0
+                            to: 5
+                          - color: '#4caf50'
+                            from: 5.1
+                            to: 249
+                          - color: '#FFCC99'
+                            from: 250
+                            to: 749
+                          - color: '#ff4444'
+                            from: 750
+                            to: 6000
+                        card_mod:
+                          style: >
+                            :host {
+                              --ha-card-border-color: transparent !important;
+                              --card-background-color: none !important;
+                            }
+
+                            ha-card {
+                              font-weight: bold;
+                              --mdc-icon-size: 22px;
+                              --paper-item-icon-color: white;
+                              margin-top: -10px !important;
+                              font-size: 12px;
+                            }
+
+                            bar-card-currentbar { border-radius: 10px; }
+
+                            bar-card-currentbar, bar-card-current,
+                            bar-card-backgroundbar {
+                              height: 6px !important;
+                              margin-top: 34px;
+                            }
+
+                            bar-card-name { font-size: 12px; }
+
+                            bar-card-value { font-size: 12px; }
+                      filter:
+                        include:
+                          - entity_id: sensor.prise_frigo_cuisine_nous_power
+                            options:
+                              icon: mdi:fridge
+                          - entity_id: sensor.prise_congelateur_cuisine_nous_power
+                            options:
+                              icon: mdi:fridge-bottom
+                        exclude:
+                          - options: {}
+                            state: <= 1
+                      sort:
+                        method: state
+                        reverse: true
+                        numeric: true
+                    - type: markdown
+                      content: ' '
+                      card_mod:
+                        style: |
+                          ha-card {
+                            height: 1px !important;
+                            background: rgba(255, 255, 255, 0.4) !important;
+                            margin: 5px 20px 5px 20px !important;
+                            border: none !important;
+                          }
+              - type: conditional
+                conditions:
+                  - entity: sensor.total_poste_hygiene_puissance
+                    state_not: '0.0'
+                  - entity: sensor.total_poste_hygiene_puissance
+                    state_not: '0'
+                card:
+                  type: vertical-stack
+                  cards:
+                    - type: heading
+                      icon: mdi:bubbles
+                      heading: Hygiène
+                      heading_style: title
+                      badges:
+                        - type: entity
+                          entity: sensor.total_poste_hygiene_puissance
+                          show_state: true
+                          color: teal
+                    - type: custom:auto-entities
+                      card:
+                        type: custom:bar-card
+                        title: ' '
+                        icon: mdi:washing-machine
+                        title_position: inside
+                        height: 38
+                        unit_of_measurement: W
+                        severity:
+                          - color: gainsboro
+                            from: 0
+                            to: 5
+                          - color: '#4caf50'
+                            from: 5.1
+                            to: 249
+                          - color: '#FFCC99'
+                            from: 250
+                            to: 749
+                          - color: '#ff4444'
+                            from: 750
+                            to: 6000
+                        card_mod:
+                          style: >
+                            :host {
+                              --ha-card-border-color: transparent !important;
+                              --card-background-color: none !important;
+                            }
+
+                            ha-card {
+                              font-weight: bold;
+                              --mdc-icon-size: 22px;
+                              --paper-item-icon-color: white;
+                              margin-top: -10px !important;
+                              font-size: 12px;
+                            }
+
+                            bar-card-currentbar { border-radius: 10px; }
+
+                            bar-card-currentbar, bar-card-current,
+                            bar-card-backgroundbar {
+                              height: 6px !important;
+                              margin-top: 34px;
+                            }
+
+                            bar-card-name { font-size: 12px; }
+
+                            bar-card-value { font-size: 12px; }
+                      filter:
+                        include:
+                          - entity_id: sensor.prise_lave_linge_nous_power
+                            options:
+                              icon: mdi:washing-machine
+                          - entity_id: sensor.prise_lave_vaisselle_nous_power
+                            options:
+                              icon: mdi:dishwasher
+                          - entity_id: sensor.prise_bureau_fer_a_repasser_nous_power
+                            options:
+                              icon: mdi:iron
+                        exclude:
+                          - state: <= 1
+                      sort:
+                        method: state
+                        reverse: true
+                        numeric: true
+                    - type: markdown
+                      content: ' '
+                      card_mod:
+                        style: |
+                          ha-card {
+                            height: 1px !important;
+                            background: rgba(255, 255, 255, 0.4) !important;
+                            margin: 5px 20px 5px 20px !important;
+                            border: none !important;
+                          }
+              - type: conditional
+                conditions:
+                  - entity: sensor.eclairage_total_unit_puissance
+                    state_not: '0.0'
+                  - entity: sensor.eclairage_total_unit_puissance
+                    state_not: '0'
+                card:
+                  type: vertical-stack
+                  cards:
+                    - type: heading
+                      icon: hue:bulb-group-classic-3-alt
+                      heading: Lumière
+                      heading_style: title
+                      badges:
+                        - type: entity
+                          entity: sensor.eclairage_total_unit_puissance
+                          show_state: true
+                          color: yellow
+                    - type: custom:auto-entities
+                      card:
+                        type: custom:bar-card
+                        title: ' '
+                        icon: mdi:lightbulb
+                        title_position: inside
+                        height: 38
+                        unit_of_measurement: W
+                        severity:
+                          - color: gainsboro
+                            from: 0
+                            to: 5
+                          - color: '#4caf50'
+                            from: 5.1
+                            to: 249
+                          - color: '#FFCC99'
+                            from: 250
+                            to: 749
+                          - color: '#ff4444'
+                            from: 750
+                            to: 6000
+                        card_mod:
+                          style: >
+                            :host {
+                              --ha-card-border-color: transparent !important;
+                              --card-background-color: none !important;
+                            }
+
+                            ha-card {
+                              font-weight: bold;
+                              --mdc-icon-size: 22px;
+                              --paper-item-icon-color: white;
+                              margin-top: -10px !important;
+                              font-size: 12px;
+                            }
+
+                            bar-card-currentbar { border-radius: 10px; }
+
+                            bar-card-currentbar, bar-card-current,
+                            bar-card-backgroundbar {
+                              height: 6px !important;
+                              margin-top: 34px;
+                            }
+
+                            bar-card-name { font-size: 12px; }
+
+                            bar-card-value { font-size: 12px; }
+                      filter:
+                        exclude:
+                          - options: {}
+                            last_updated: 1m ago
+                          - options: {}
+                            state: <= 1
+                          - options: {}
+                            state: unavailable
+                        include:
+                          - entity_id: sensor.hue_white_lamp_entree_power
+                            options:
+                              icon: mdi:ceiling-light
+                          - entity_id: sensor.hue_white_lamp_salon_power
+                            options:
+                              icon: mdi:sofa
+                          - entity_id: sensor.hue_white_lamp_table_power
+                            options:
+                              icon: mdi:table-chair
+                          - entity_id: sensor.hue_white_lamp_cuisine_power
+                            options:
+                              icon: mdi:ceiling-light
+                          - entity_id: sensor.hue_white_lamp_couloir_power
+                            options:
+                              icon: mdi:ceiling-light
+                          - entity_id: sensor.hue_white_lamp_bureau_1_power
+                            options:
+                              icon: hue:flourish-alt
+                          - entity_id: sensor.hue_white_lamp_bureau_2_power
+                            options:
+                              icon: hue:flourish-alt
+                          - entity_id: sensor.hue_play_1_pc_bureau_power
+                            options:
+                              icon: mdi:monitor-dashboard
+                          - entity_id: sensor.hue_play_2_pc_bureau_power
+                            options:
+                              icon: mdi:monitor-dashboard
+                          - entity_id: sensor.hue_play_3_pc_bureau_power
+                            options:
+                              icon: mdi:monitor-dashboard
+                          - entity_id: sensor.lampe_salle_de_bain_hue_power
+                            options:
+                              icon: mdi:ceiling-light
+                          - entity_id: sensor.relais_lumiere_sdb_sonoff_power
+                            options:
+                              icon: mdi:light-switch
+                          - entity_id: sensor.hue_white_lamp_chambre_power
+                            options:
+                              icon: hue:flourish-alt
+                          - entity_id: sensor.hue_color_candle_chambre_gege_power
+                            options:
+                              icon: mdi:bed
+                          - entity_id: sensor.hue_color_candle_chambre_eric_power
+                            options:
+                              icon: mdi:bed
+                      sort:
+                        method: state
+                        reverse: true
+                        numeric: true
+                    - type: markdown
+                      content: ' '
+                      card_mod:
+                        style: |
+                          ha-card {
+                            height: 1px !important;
+                            background: rgba(255, 255, 255, 0.4) !important;
+                            margin: 5px 20px 5px 20px !important;
+                            border: none !important;
+                          }
+              - type: conditional
+                conditions:
+                  - entity: sensor.total_poste_autre_puissance
+                    state_not: '0.0'
+                  - entity: sensor.total_poste_autre_puissance
+                    state_not: '0'
+                card:
+                  type: vertical-stack
+                  cards:
+                    - type: heading
+                      icon: mdi:dots-horizontal-circle
+                      heading: Autres
+                      heading_style: title
+                      badges:
+                        - type: entity
+                          entity: sensor.total_poste_autre_puissance
+                          show_state: true
+                          color: grey
+                    - type: custom:auto-entities
+                      card:
+                        type: custom:bar-card
+                        title: ' '
+                        icon: mdi:plus-circle
+                        title_position: inside
+                        height: 38
+                        unit_of_measurement: W
+                        severity:
+                          - color: gainsboro
+                            from: 0
+                            to: 5
+                          - color: '#4caf50'
+                            from: 5.1
+                            to: 249
+                          - color: '#FFCC99'
+                            from: 250
+                            to: 749
+                          - color: '#ff4444'
+                            from: 750
+                            to: 6000
+                        card_mod:
+                          style: >
+                            :host {
+                              --ha-card-border-color: transparent !important;
+                              --card-background-color: none !important;
+                            }
+
+                            ha-card {
+                              font-weight: bold;
+                              --mdc-icon-size: 22px;
+                              --paper-item-icon-color: white;
+                              margin-top: -10px !important;
+                              font-size: 12px;
+                            }
+
+                            bar-card-currentbar { border-radius: 10px; }
+
+                            bar-card-currentbar, bar-card-current,
+                            bar-card-backgroundbar {
+                              height: 6px !important;
+                              margin-top: 34px;
+                            }
+
+                            bar-card-name { font-size: 12px; }
+
+                            bar-card-value { font-size: 12px; }
+                      filter:
+                        include:
+                          - entity_id: sensor.all_standby_power
+                            options:
+                              icon: mdi:sleep
+                          - entity_id: sensor.prise_tete_de_lit_chambre_power
+                            options:
+                              icon: mdi:bed-empty
+                          - entity_id: sensor.prise_salon_chargeur_nous_power
+                            options:
+                              icon: mdi:battery-charging
+                          - entity_id: sensor.prise_horloge_ikea_power
+                            options:
+                              icon: mdi:clock-digital
+                        exclude:
+                          - state: <= 1
+                      sort:
+                        method: state
+                        reverse: true
+                        numeric: true
           - type: vertical-stack
             cards:
               - type: custom:apexcharts-card
