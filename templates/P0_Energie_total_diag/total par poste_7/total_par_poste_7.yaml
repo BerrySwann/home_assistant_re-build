@@ -36,12 +36,12 @@
       state_class: measurement
       icon: mdi:fire
       state: >
-        {% set cs = states('sensor.clim_salon_power') | float(0) %}
+        {% set cs = states('sensor.clim_salon_nous_power') | float(0) %}
         {% set rc = states('sensor.radiateur_elec_cuisine_power') | float(0) %}
-        {% set cb = states('sensor.clim_bureau_power') | float(0) %}
-        {% set ss = states('sensor.soufflant_sdb_power') | float(0) %}
-        {% set sv = states('sensor.seche_serviette_sdb_power') | float(0) %}
-        {% set cc = states('sensor.clim_chambre_power') | float(0) %}
+        {% set cb = states('sensor.clim_bureau_nous_power') | float(0) %}
+        {% set ss = states('sensor.prise_soufflant_salle_de_bain_nous_power') | float(0) %}
+        {% set sv = states('sensor.prise_seche_serviette_salle_de_bain_nous_power') | float(0) %}
+        {% set cc = states('sensor.clim_chambre_nous_power') | float(0) %}
         {{ (cs + rc + cb + ss + sv + cc) | round(1) }}
 
     # 2. MULTIMÉDIA
