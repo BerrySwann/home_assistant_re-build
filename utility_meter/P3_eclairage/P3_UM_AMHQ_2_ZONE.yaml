@@ -10,7 +10,7 @@
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Sources : sensor.eclairage_[zone]_energie_totale_kwh (capteurs somme calculés
-#   dans sensors/P3_eclairage/P3_kWh_2_ZONE.yaml via templates P3_01_somme_par_piece.yaml).
+#   dans sensors/P3_eclairage/P3_kWh_2_ZONE.yaml via templates P3_POWER_2_TOTAL_MULTI_ZONE.yaml).
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # Les zones APPART regroupent plusieurs pièces (entrée+couloir ou entrée+cuisine+couloir).
@@ -19,9 +19,9 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C3 Conso Énergie Éclairage (vue par pièce/zone)
 
-#┌───────────────────────────────────┐
-#│     ZONE 4. (5x) SALON            │
-#└───────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │     ZONE 4. (5x) SALON            │
+# └───────────────────────────────────┘
 
 # --- eclairage_salon_5 ---
 eclairage_salon_5_annuel_kwh_um:
@@ -77,9 +77,9 @@ eclairage_appart_3_quotidien_kwh_um:
   unique_id: eclairage_appart_3_quotidien_kwh_um
   cycle: daily
 
-#┌───────────────────────────────────┐
-#│     ZONE 5. (1x) CUISINE          │
-#└───────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │     ZONE 5. (1x) CUISINE          │
+# └───────────────────────────────────┘
 
 # --- eclairage_cuisine_1 ---
 eclairage_cuisine_1_annuel_kwh_um:
@@ -135,9 +135,9 @@ eclairage_appart_2_quotidien_kwh_um:
   unique_id: eclairage_appart_2_quotidien_kwh_um
   cycle: daily
 
-#┌───────────────────────────────────┐
-#│     ZONE 7. (5x) BUREAU           │
-#└───────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │     ZONE 7. (5x) BUREAU           │
+# └───────────────────────────────────┘
 
 # --- eclairage_bureau_5 ---
 eclairage_bureau_5_annuel_kwh_um:
@@ -164,9 +164,9 @@ eclairage_bureau_5_quotidien_kwh_um:
   unique_id: eclairage_bureau_5_quotidien_kwh_um
   cycle: daily
 
-#┌───────────────────────────────────┐
-#│     ZONE 8. (2x) SDB              │
-#└───────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │     ZONE 8. (2x) SDB              │
+# └───────────────────────────────────┘
 
 # --- eclairage_sdb_2 ---
 eclairage_sdb_2_annuel_kwh_um:
@@ -193,9 +193,9 @@ eclairage_sdb_2_quotidien_kwh_um:
   unique_id: eclairage_sdb_2_quotidien_kwh_um
   cycle: daily
 
-#┌───────────────────────────────────┐
-#│     ZONE 9. (4x) CHAMBRE          │
-#└───────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │     ZONE 9. (4x) CHAMBRE          │
+# └───────────────────────────────────┘
 
 # --- eclairage_chambre_4 ---
 eclairage_chambre_4_annuel_kwh_um:
@@ -222,9 +222,9 @@ eclairage_chambre_4_quotidien_kwh_um:
   unique_id: eclairage_chambre_4_quotidien_kwh_um
   cycle: daily
 
-#┌───────────────────────────────────┐
-#│     ZONE 1. (1x) ENTRÉE           │
-#└───────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │     ZONE 1. (1x) ENTRÉE           │
+# └───────────────────────────────────┘
 
 # --- eclairage_entree_1 ---
 eclairage_entree_1_annuel_kwh_um:
@@ -251,9 +251,9 @@ eclairage_entree_1_quotidien_kwh_um:
   unique_id: eclairage_entree_1_quotidien_kwh_um
   cycle: daily
 
-#┌───────────────────────────────────┐
-#│     ZONE 6. (1x) COULOIR          │
-#└───────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │     ZONE 6. (1x) COULOIR          │
+# └───────────────────────────────────┘
 
 # --- eclairage_couloir_1 ---
 eclairage_couloir_1_annuel_kwh_um:

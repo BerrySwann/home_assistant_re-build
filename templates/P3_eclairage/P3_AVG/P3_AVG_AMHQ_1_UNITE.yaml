@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 3. TEMPLATES AVG : PUISSANCE MOYENNE (W) — ÉCLAIRAGE À L'UNITÉ     │
+# │ PÔLE 3. TEMPLATES AVG : PUISSANCE MOYENNE (W) — ÉCLAIRAGE À L'UNITÉ      │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -20,7 +20,7 @@
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - En début de journée (h < 0.1 soit < 6 min), le capteur retourne 0 —
 #   comportement normal, évite la division par zéro.
-# - Ne pas confondre avec P3_01_somme_par_piece.yaml (puissance instantanée).
+# - Ne pas confondre avec P3_POWER_2_TOTAL_MULTI_ZONE.yaml (puissance instantanée).
 # - Les sources _kwh_um dépendent de P3_UM_AMHQ_1_UNITE.yaml (utility_meter).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :

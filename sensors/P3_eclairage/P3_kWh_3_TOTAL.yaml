@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 3. SENSORS : INTÉGRATION kWh — TOTAUX ÉCLAIRAGE (GROUP + UNITÉ)    │
+# │ PÔLE 3. SENSORS : INTÉGRATION kWh — TOTAUX ÉCLAIRAGE (GROUP + UNITÉ)     │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -12,12 +12,12 @@
 # - sensor.eclairage_total_group_puissance → somme des 7 zones pièces (W)
 # - sensor.eclairage_total_unit_puissance → somme des 19 ampoules individuelles (W)
 # - Formule : ∫ [total]_puissance (W) dt → kWh (méthode left)
-# - Sources définies dans P3_01_somme_par_piece.yaml (templates)
+# - Sources définies dans P3_POWER_2_TOTAL_MULTI_ZONE.yaml + P3_POWER_1_TOTAL_UNITE.yaml (templates)
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - eclairage_total_group_kwh et eclairage_total_unit_kwh devraient être
 #   identiques en théorie. Un écart persistant indique un bug dans
-#   P3_01_somme_par_piece.yaml (ampoule manquante ou comptée deux fois).
+#   P3_POWER files (ampoule manquante ou comptée deux fois).
 # - Ces totaux incluent TOUTES les pièces — ne pas les utiliser pour comparer
 #   une pièce spécifique.
 #
@@ -55,3 +55,6 @@
     unit_prefix: k
     unit_time: h
     round: 3
+
+# annotations_log:
+# - [L15,20] Refs P3_01_somme_par_piece → P3_POWER_2 + P3_POWER_1 files.

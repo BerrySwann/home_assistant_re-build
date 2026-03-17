@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATE : P2_AVG_VEILLES | PUISSANCE MOYENNE STANDBY (W) AMHQ          │
+# │ PÔLE 2. TEMPLATE AVG : PUISSANCE MOYENNE STANDBY (W) AMHQ — VEILLES      │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -68,3 +68,4 @@
 # annotations_log:
 # - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.
 # - [L34] Source UM veilles : all_standby_[cycle]_kwh_um (sans préfixe prise_).
+# - [L2] Titre box mis à jour : convention PÔLE N. TEMPLATE ... style.

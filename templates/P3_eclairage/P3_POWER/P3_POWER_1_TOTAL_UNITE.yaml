@@ -1,6 +1,27 @@
-      # ╭──────────────────────────────────────────────────────────────────────╮
-      # │    PÔLE 3. TOTAL : À L'UNITÉ (19 lampes)                             │
-      # ╰──────────────────────────────────────────────────────────────────────╯
+# ╭────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. TEMPLATE : TOTAL PUISSANCE ÉCLAIRAGE — À L'UNITÉ (19 lampes)   │
+# ╰────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Un capteur template calculant la puissance instantanée totale (W) de
+# l'éclairage en additionnant les 19 ampoules physiques une par une.
+# Sert de contrôle de cohérence par rapport à eclairage_total_group_puissance.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : somme directe des 19 sensor.[ampoule]_power | float(0).
+# - Sources : hue_white_lamp_entree, hue_white_lamp_table, hue_ambiance_lamp_salon_1/2/3,
+#             hue_color_candle_salon_1, hue_white_lamp_cuisine, hue_white_lamp_couloir,
+#             hue_play_1/2/3_pc_bureau, hue_white_lamp_bureau_1/2,
+#             relais_lumiere_sdb_sonoff, lampe_salle_de_bain_hue,
+#             hue_white_lamp_chambre_1/2, hue_color_candle_chambre_gege/eric.
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Résultat théoriquement identique à sensor.eclairage_total_group_puissance (P3_POWER_3).
+#   En cas d'écart, vérifier qu'aucune ampoule n'a été ajoutée/retirée.
+# - Ne pas confondre avec les fichiers kWh (sensors/) ou AVG (P3_AVG/).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (contrôle cohérence total unité vs total zone).
 
 - sensor:
 
@@ -32,3 +53,6 @@
             states('sensor.hue_color_candle_chambre_gege_power') | float(0) +
             states('sensor.hue_color_candle_chambre_eric_power') | float(0)
           }}
+
+# annotations_log:
+# - [L1-3] Box width 74→76 + titre mis à jour (convention PÔLE N. TEMPLATE).

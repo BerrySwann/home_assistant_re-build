@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATE : P2_CURRENT_VEILLES | AMPÉRAGE FANTÔME (PÔLE 2)                │
+# │ PÔLE 2. TEMPLATE : AMPÉRAGE FANTÔME — ALL STANDBY CURRENT                │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -30,3 +30,4 @@
 # - [Création] Mise en place du dummy sensor pour bypasser l'erreur UI.
 # - [L1-15] Application de l'en-tête modulaire (suppression de l'ancienne Série 09).
 # - [L20] Ajout de la classe d'appareil (device_class: current).
+# - [L2] Titre box mis à jour : convention PÔLE N. TEMPLATE ... style.
