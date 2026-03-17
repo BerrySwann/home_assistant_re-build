@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATE : P2_AVG | PUISSANCE MOYENNE (W) AMHQ (PÔLE 2. PRISES)        │
+# │ PÔLE 2. TEMPLATE AVG : PUISSANCE MOYENNE (W) AMHQ — PRISES CONNECTÉES    │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -717,3 +717,4 @@
 # annotations_log:
 # - [L1-18] Ajout de l'en-tête documentaire (Boîte ASCII, calcul, pièges et lien avec la vignette L3C2).
 # - [Global] Indentation ajustée pour que tous les blocs "name:" soient correctement imbriqués sous la balise "sensor:".
+# - [L2] Titre box mis à jour : convention PÔLE N. TEMPLATE ... style.

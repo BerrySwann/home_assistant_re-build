@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 0. TEMPLATES : DIAGNOSTIC CONSO — MOIS EN COURS (7 PÔLES)          │
+# │ PÔLE 0. TEMPLATES : DIAGNOSTIC CONSO — MOIS EN COURS (7 PÔLES)           │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -148,9 +148,9 @@
   # ╭──────────────────────────────────────────────────────────────────────╮
   # │    MAX DYNAMIQUE (axe Y des barres + 10 kWh buffer mensuel)          │
   # ╰──────────────────────────────────────────────────────────────────────╯
-  # --- diag_max_poste_mensuel ---
-  - name: "Diag Max Poste Mensuel Dynamique"
-    unique_id: diag_max_poste_mensuel_dynamique
+  # --- diag_max_poste_mensuel_dynamique ---
+  - name: "Diag Max Poste Mensuel"
+    unique_id: diag_max_poste_mensuel_dynamique                            # "[L153] modif : _dynamique ajouté — alignement dashboard"
     unit_of_measurement: "kWh"
     device_class: energy
     state: >

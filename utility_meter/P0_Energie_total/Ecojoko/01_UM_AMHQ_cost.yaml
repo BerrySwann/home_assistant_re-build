@@ -47,24 +47,24 @@ ecojoko_hc_reseau_mensuel_um:
 # ─── HEBDOMADAIRE ────────────────────────────────────────────────────────────
 
 # --- ecojoko_reseau_hebdomadaire_um ---
-ecojoko_reseau_hebdomadaire_um:
+ecojoko_reseau_hebdomadaire_um:                # "[L50] modif _hebdo_ → _hebdomadaire_"
   source: sensor.ecojoko_consommation_reseau
-  name: "Ecojoko Réseau Hebdomadaire UM"
-  unique_id: ecojoko_reseau_hebdomadaire_um
+  name: "Ecojoko Réseau Hebdomadaire UM"       # "[L52] modif"
+  unique_id: ecojoko_reseau_hebdomadaire_um    # "[L53] modif"
   cycle: weekly
 
 # --- ecojoko_hp_reseau_hebdomadaire_um ---
-ecojoko_hp_reseau_hebdomadaire_um:
+ecojoko_hp_reseau_hebdomadaire_um:             # "[L57] modif _hebdo_ → _hebdomadaire_"
   source: sensor.ecojoko_consommation_hp_reseau
-  name: "Ecojoko HP Réseau Hebdomadaire UM"
-  unique_id: ecojoko_hp_reseau_hebdomadaire_um
+  name: "Ecojoko HP Réseau Hebdomadaire UM"    # "[L59] modif"
+  unique_id: ecojoko_hp_reseau_hebdomadaire_um # "[L60] modif"
   cycle: weekly
 
 # --- ecojoko_hc_reseau_hebdomadaire_um ---
-ecojoko_hc_reseau_hebdomadaire_um:
+ecojoko_hc_reseau_hebdomadaire_um:             # "[L64] modif _hebdo_ → _hebdomadaire_"
   source: sensor.ecojoko_consommation_hc_reseau
-  name: "Ecojoko HC Réseau Hebdomadaire UM"
-  unique_id: ecojoko_hc_reseau_hebdomadaire_um
+  name: "Ecojoko HC Réseau Hebdomadaire UM"    # "[L66] modif"
+  unique_id: ecojoko_hc_reseau_hebdomadaire_um # "[L67] modif"
   cycle: weekly
 
 # ─── ANNUEL ──────────────────────────────────────────────────────────────────
@@ -92,3 +92,4 @@ ecojoko_hc_reseau_annuel_um:
 
 # annotations_log:
 # - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.
+# - [L50-68] Renommage _hebdo_ → _hebdomadaire_ (alignement GitHub + dashboard).

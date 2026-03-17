@@ -1,6 +1,26 @@
-      # ╭──────────────────────────────────────────────────────────────────────╮
-      # │    PÔLE 3. TOTAL : PAR REGROUPEMENT (7 zones)                        │
-      # ╰──────────────────────────────────────────────────────────────────────╯
+# ╭────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. TEMPLATE : TOTAL PUISSANCE ÉCLAIRAGE — PAR ZONE (7 zones)      │
+# ╰────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Un capteur template calculant la puissance instantanée totale (W) de
+# l'éclairage en additionnant les 7 capteurs de zone (par pièce).
+# C'est la source principale utilisée par total_par_poste_7.yaml (pôle éclairage).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : somme des 7 sensor.eclairage_[piece]_[n]_puissance | float(0).
+# - Sources (P3_POWER_2) : eclairage_entree_1 + eclairage_salon_5 + eclairage_cuisine_1
+#             + eclairage_couloir_1 + eclairage_bureau_5 + eclairage_sdb_2 + eclairage_chambre_4.
+# - Dépendance : P3_POWER_2_TOTAL_MULTI_ZONE.yaml doit être chargé en premier.
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce sensor agrège les zones de P3_POWER_2, pas les ampoules physiques directement.
+# - Résultat théoriquement identique à eclairage_total_unit_puissance (P3_POWER_1).
+# - Utilisé comme source par total_par_poste_7.yaml → ne pas renommer.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (puissance totale temps réel).
+# - Source indirecte de L2C1 via total_par_poste_7 (pôle Éclairage).
 
 - sensor:
       # --- eclairage_total_group_puissance ---
@@ -19,3 +39,6 @@
             states('sensor.eclairage_sdb_2_puissance') | float(0) +
             states('sensor.eclairage_chambre_4_puissance') | float(0)
           }}
+
+# annotations_log:
+# - [L1-3] Box width 74→76 + titre mis à jour (convention PÔLE N. TEMPLATE).

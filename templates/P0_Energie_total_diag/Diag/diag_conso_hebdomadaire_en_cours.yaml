@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 0. TEMPLATES : DIAGNOSTIC CONSO — SEMAINE EN COURS (7 PÔLES)       │
+# │ PÔLE 0. TEMPLATES : DIAGNOSTIC CONSO — SEMAINE EN COURS (7 PÔLES)        │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -151,9 +151,9 @@
   # ╭──────────────────────────────────────────────────────────────────────╮
   # │    MAX DYNAMIQUE (axe Y des barres + 2 kWh buffer hebdomadaire)      │
   # ╰──────────────────────────────────────────────────────────────────────╯
-  # --- diag_max_poste_hebdomadaire ---
-  - name: "Diag Max Poste Hebdomadaire Dynamique"
-    unique_id: diag_max_poste_hebdomadaire_dynamique
+  # --- diag_max_poste_hebdomadaire_dynamique ---
+  - name: "Diag Max Poste Hebdomadaire"
+    unique_id: diag_max_poste_hebdomadaire_dynamique                       # "[L156] modif : _dynamique restauré — alignement dashboard (convention retenue)"
     unit_of_measurement: "kWh"
     device_class: energy
     state: >
@@ -190,9 +190,6 @@
       {{ (poles | sum) | round(2) }}
 
 # annotations_log:
-# - [Création] 2026-03-15 : Fichier créé par transposition de diag_conso_mois_en_cours.yaml.
-# - [Convention] Suffixe _mensuel_ → _hebdomadaire_ sur tous les capteurs UM.
-# - [P1 Chauffage] Pas de suffixe _kwh_ : sensor.clim_salon_hebdomadaire_um (cohérent avec mensuel).
-# - [P2 Prises] Suffixe _kwh_um conservé : sensor.prise_*_hebdomadaire_kwh_um.
-# - [Buffer max] 2 kWh (vs 0.5 kWh/jour, 10 kWh/mois) — échelle hebdomadaire intermédiaire.
-# - [Cycle] Remise à zéro chaque lundi 00h00 (isoweek, cohérent avec P*_UM_AMHQ.yaml).
+# - [Sync GitHub→ReBuild] Fichier manquant ajouté depuis GitHub.
+# - [unique_id max] diag_max_poste_hebdomadaire_dynamique → diag_max_poste_hebdomadaire
+#   (alignement dashboard page_energie_home.yaml et pattern _quotidien/_mensuel).

@@ -20,9 +20,9 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C3 Conso Énergie Éclairage (détail par ampoule)
 
-#┌───────────────────────────────────┐
-#│         1. ENTRÉE                 │
-#└───────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │         1. ENTRÉE                 │
+# └───────────────────────────────────┘
 
 # --- hue_white_lamp_entree ---
 hue_white_lamp_entree_annuel_kwh_um:
@@ -49,9 +49,9 @@ hue_white_lamp_entree_quotidien_kwh_um:
   unique_id: hue_white_lamp_entree_quotidien_kwh_um
   cycle: daily
 
-#┌───────────────────────────────────┐
-#│         4. SALON                  │
-#└───────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │         4. SALON                  │
+# └───────────────────────────────────┘
 
 # --- hue_white_lamp_table ---
 hue_white_lamp_table_annuel_kwh_um:
@@ -178,9 +178,9 @@ hue_color_candle_salon_1_quotidien_kwh_um:
   unique_id: hue_color_candle_salon_1_quotidien_kwh_um
   cycle: daily
 
-#┌───────────────────────────────────┐
-#│         5. CUISINE                │
-#└───────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │         5. CUISINE                │
+# └───────────────────────────────────┘
 
 # --- hue_white_lamp_cuisine ---
 hue_white_lamp_cuisine_annuel_kwh_um:
@@ -207,9 +207,9 @@ hue_white_lamp_cuisine_quotidien_kwh_um:
   unique_id: hue_white_lamp_cuisine_quotidien_kwh_um
   cycle: daily
 
-#┌───────────────────────────────────┐
-#│         6. COULOIR                │
-#└───────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │         6. COULOIR                │
+# └───────────────────────────────────┘
 
 # --- hue_white_lamp_couloir ---
 hue_white_lamp_couloir_annuel_kwh_um:
@@ -236,9 +236,9 @@ hue_white_lamp_couloir_quotidien_kwh_um:
   unique_id: hue_white_lamp_couloir_quotidien_kwh_um
   cycle: daily
 
-#┌───────────────────────────────────┐
-#│         7. BUREAU                 │
-#└───────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │         7. BUREAU                 │
+# └───────────────────────────────────┘
 
 # --- hue_play_1_pc_bureau ---
 hue_play_1_pc_bureau_annuel_kwh_um:
@@ -365,9 +365,9 @@ hue_white_lamp_bureau_2_quotidien_kwh_um:
   unique_id: hue_white_lamp_bureau_2_quotidien_kwh_um
   cycle: daily
 
-#┌───────────────────────────────────┐
-#│         8. SDB                    │
-#└───────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │         8. SDB                    │
+# └───────────────────────────────────┘
 
 # --- relais_lumiere_sdb_sonoff ---
 relais_lumiere_sdb_sonoff_annuel_kwh_um:
@@ -419,9 +419,9 @@ lampe_salle_de_bain_hue_quotidien_kwh_um:
   unique_id: lampe_salle_de_bain_hue_quotidien_kwh_um
   cycle: daily
 
-#┌───────────────────────────────────┐
-#│         9. CHAMBRE                │
-#└───────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │         9. CHAMBRE                │
+# └───────────────────────────────────┘
 
 # --- hue_white_lamp_chambre_1 ---
 hue_white_lamp_chambre_1_annuel_kwh_um:

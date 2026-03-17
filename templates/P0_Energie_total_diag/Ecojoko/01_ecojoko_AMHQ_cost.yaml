@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 0. TEMPLATE : ECOJOKO — CALCUL COÛTS HP/HC/TOTAL (4 PÉRIODES)      │
+# │ PÔLE 0. TEMPLATE : ECOJOKO — CALCUL COÛTS HP/HC/TOTAL (4 PÉRIODES)       │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -64,30 +64,28 @@
 # │ 2. HEBDOMADAIRE (H)                                                      │
 # ╰──────────────────────────────────────────────────────────────────────────╯
     # --- ecojoko_cout_hp_hebdomadaire ---
-    - name: "Ecojoko Coût HP Hebdomadaire"
-      unique_id: ecojoko_cout_hp_hebdomadaire
+    - name: "Ecojoko Coût HP Hebdomadaire"                              # "[L67] modif"
+      unique_id: ecojoko_cout_hp_hebdomadaire                          # "[L68] modif"
       unit_of_measurement: "€"
       device_class: monetary
       state_class: total
       state: >
-        {% set kwh = states('sensor.ecojoko_hp_reseau_hebdomadaire_um') | float(0) %}
+        {% set kwh   = states('sensor.ecojoko_hp_reseau_hebdomadaire_um') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0) %}
         {{ (kwh * tarif) | round(2) }}
-
     # --- ecojoko_cout_hc_hebdomadaire ---
-    - name: "Ecojoko Coût HC Hebdomadaire"
-      unique_id: ecojoko_cout_hc_hebdomadaire
+    - name: "Ecojoko Coût HC Hebdomadaire"                              # "[L77] modif"
+      unique_id: ecojoko_cout_hc_hebdomadaire                          # "[L78] modif"
       unit_of_measurement: "€"
       device_class: monetary
       state_class: total
       state: >
-        {% set kwh = states('sensor.ecojoko_hc_reseau_hebdomadaire_um') | float(0) %}
+        {% set kwh   = states('sensor.ecojoko_hc_reseau_hebdomadaire_um') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0) %}
         {{ (kwh * tarif) | round(2) }}
-
     # --- ecojoko_cout_total_hebdomadaire ---
-    - name: "Ecojoko Coût Total Hebdomadaire"
-      unique_id: ecojoko_cout_total_hebdomadaire
+    - name: "Ecojoko Coût Total Hebdomadaire"                           # "[L86] modif"
+      unique_id: ecojoko_cout_total_hebdomadaire                       # "[L87] modif"
       unit_of_measurement: "€"
       device_class: monetary
       state_class: total
@@ -161,3 +159,6 @@
         {% set hp = states('sensor.ecojoko_cout_hp_annuel') | float(0) %}
         {% set hc = states('sensor.ecojoko_cout_hc_annuel') | float(0) %}
         {{ (hp + hc) | round(2) }}
+
+# annotations_log:
+# - [L67-95] Renommage _hebdo → _hebdomadaire (unique_id, name, sources) — alignement GitHub + dashboard.

@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 0. SENSORS : STATISTIQUES MIN/MAX/MOY — ECOJOKO TEMPS RÉEL         │
+# │ PÔLE 0. SENSORS : STATISTIQUES MIN/MAX/MOY — ECOJOKO TEMPS RÉEL          │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -25,18 +25,20 @@
 # - L2C1 Conso Énergie Générale (suivi temps réel min/max/moy).
 
 - platform: statistics
-  name: "Ecojoko Conso Mini 24h"
+  name: "Conso Mini"
   unique_id: ecojoko_conso_mini_24h
   entity_id: sensor.ecojoko_consommation_temps_reel
   state_characteristic: value_min
+  sampling_size: 6
   max_age:
     hours: 24
 
 - platform: statistics
-  name: "Ecojoko Conso Maxi 24h"
+  name: "Conso Maxi"
   unique_id: ecojoko_conso_maxi_24h
   entity_id: sensor.ecojoko_consommation_temps_reel
   state_characteristic: value_max
+  sampling_size: 6
   max_age:
     hours: 24
 
