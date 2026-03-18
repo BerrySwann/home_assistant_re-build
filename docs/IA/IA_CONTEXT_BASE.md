@@ -1,5 +1,5 @@
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
-*Dernière mise à jour : 2026-03-13 — TREE complet, M_05 cycle solaire, docs à jour*
+*Dernière mise à jour : 2026-03-18*
 
 ---
 
@@ -36,7 +36,7 @@
 ### 1. HIÉRARCHIE VISUELLE (LES TITRES)
 - **TITRE PRINCIPAL (Section / Pôle)**
     - **Format** : Boîte ASCII coins arrondis (`╭`, `─`, `╮`, `│`, `╰`, `╯`).
-    - **Largeur** : 74 caractères (pleine largeur).
+    - **Largeur** : 78 caractères (pleine largeur — standard réel : `# ╭` + 74 tirets + `╮`).
     - **Style** : Texte en MAJUSCULES (Ex: `CAPTEUR : INTÉGRATION KWH (PÔLE 1. CHAUFFAGE)`).
 - **TITRE SECONDAIRE (Pièce)**
     - **Format** : Boîte ASCII coins carrés (`┌`, `─`, `┐`, `│`, `└`, `┘`).
@@ -67,7 +67,6 @@ Pour tous les éléments qui ne sont pas rattachés à une pièce physique spéc
 - `M_02_meteo_vent`
 - `M_03_meteo_blitzortung`
 - `M_04_tendances_th_ext_card`
-- `M_05_cycle_solaire`
 
 *(Note : En attente de la définition des prochaines catégories lettrées pour le Réseau, le Système, etc.)*
 
@@ -118,6 +117,18 @@ Pour tous les éléments qui ne sont pas rattachés à une pièce physique spéc
 3. **EXEMPLE VALIDE** :
    - Titre : `SDB : ARRET` (11 car.)
    - Message : `Minuteur 1h fini. RAZ OK.`
+
+---
+
+## 📋 RÈGLE DOCS VIGNETTES — DÉPENDANCES OBLIGATOIRES
+
+**À chaque création ou modification d'une doc de vignette (`docs/L*`) :**
+
+1. Remplir la section **ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE** dans la doc (fichier source → entité)
+2. **Mettre à jour `docs/DEPENDANCES_GLOBALES.md`** : compléter la chaîne de dépendances et passer le statut 🔲 → ✅
+3. Mettre à jour la date en haut de `DEPENDANCES_GLOBALES.md`
+
+> Référence : `docs/WORKFLOW_REBUILD.md` — section "Workflow création / modification d'une doc vignette"
 
 ---
 
@@ -175,81 +186,6 @@ card_mod:
 - **ZONE 7. (5x) BUREAU** : [somme de] Play 1, 2, 3, Hue White, Hue White. (ex: eclairage_bureau_5_*)
 - **ZONE 8. (2x) SDB** : [somme de] Miroir Sonoff, Hue White. (ex: eclairage_sdb_2_*)
 - **ZONE 9. (4x) CHAMBRE** : [somme de] Hue White 1, 2, Hue Color Zone-1, Hue Color Zone-2. (ex: eclairage_chambre_4_*)
-
-### 🎨 PALETTE COULEURS OFFICIELLE — ÉCLAIRAGE & PRISES (PÔLES 3 & 2)
-> Référence pour `apexcharts-card` (donuts + colonnes) et `--mdc-theme-primary` des `tabbed-card`.
-> Chaque pièce a une famille chromatique distincte pour ses lampes et ses prises. CELLIER et TOILETTE sont en réserve.
-
-| #  | Pièce                    | Couleur     | `--mdc-theme-primary`  | Statut HA   |
-|----|--------------------------|-------------|------------------------|-------------|
-|  1 | ENTRÉE                   | Gris clair  | `rgb(220, 220, 220)`   | ✅ Actif    |
-|  2 | CELLIER                  | Sable       | `rgb(161, 136, 108)`   | 🔒 Réserve  |
-|  3 | TOILETTE                 | Mauve       | `rgb(127, 85, 177)`    | 🔒 Réserve  |
-|  4 | SALON                    | Rose        | `rgb(215, 95, 115)`    | ✅ Actif    |
-|  5 | CUISINE                  | Violet      | `rgb(118, 93, 160)`    | ✅ Actif    |
-|  6 | COULOIR                  | Gris foncé  | `rgb(150, 150, 150)`   | ✅ Actif    |
-|  7 | BUREAU                   | Orange      | `rgb(255, 165, 0)`     | ✅ Actif    |
-|  8 | SDB                      | Bleu        | `rgb(3, 155, 229)`     | ✅ Actif    |
-|  9 | CHAMBRE                  | Vert        | `rgb(88, 130, 70)`     | ✅ Actif    |
-| 10 | AUTRE (Veilles/standby)  | Marron/Gris | `rgb(109, 76, 65)`     | ✅ Actif    |
-
-**Dégradés complets par pièce (foncé -> clair) :**
-
-1. ENTRÉE (Gris clair)
-
-Éclairage (1 lampe) : rgb(220, 220, 220)
-
-Prises (2 appareils) : rgb(183, 183, 183) → rgb(220, 220, 220)
-
-2. CELLIER (Sable - Réserve)
-
-Éclairage : rgb(121, 98, 74)
-
-3. TOILETTE (Mauve - Réserve)
-
-Éclairage : rgba(131, 48, 233, 1)
-
-4. SALON (Rose/Bordeaux)
-
-Éclairage (5 lampes) : rgb(174, 68, 90) → rgb(196, 75, 97) → rgb(215, 95, 115) → rgb(235, 165, 175) → rgb(248, 210, 215)
-
-Prises (3 appareils) : rgb(174, 68, 90) → rgb(196, 75, 97) → rgb(215, 95, 115)
-
-5. CUISINE (Violet)
-
-Éclairage (1 lampe) : rgb(98, 78, 136)
-
-Prises (6 appareils) : rgb(98, 78, 136) → rgb(118, 93, 160) → rgb(137, 103, 179) → rgb(129, 116, 180) → rgb(142, 122, 181) → rgb(162, 148, 249)
-
-Prises (Froid) : rgb(19, 160, 255) → rgb(0, 255, 255)
-
-6. COULOIR (Gris foncé)
-
-Éclairage (1 lampe) : rgb(112, 128, 144)
-
-7. BUREAU (Orange/Or) (Déjà inversé précédemment)
-
-Éclairage (5 lampes) : rgb(255, 165, 0) → rgb(255, 183, 51) → rgb(255, 201, 102) → rgb(255, 219, 153) → rgb(255, 237, 204)
-
-Prises (2 appareils) : rgb(255, 165, 0) → rgb(255, 183, 51)
-
-8. SDB (Bleu)
-
-Éclairage (2 lampes) : rgb(119, 210, 235) → rgb(213, 244, 253)
-
-9. CHAMBRE (Vert)
-
-Éclairage (4 lampes) : rgb(75, 130, 85) → rgb(105, 155, 110) → rgb(135, 180, 135) → rgb(165, 205, 160)
-
-Prises (2 appareils) : rgb(75, 130, 85) → rgb(105, 155, 110)
-
-10. AUTRE/Veilles (Marron)
-
-Prises (Veilles) : rgb(109, 76, 65)
-
-> **Note ECC** : ENTRÉE + CUISINE + COULOIR partagent un seul `tabbed-card` pour l'éclairage avec leur couleur attribuée rgb(220, 220, 220), rgb(98, 78, 136), rgb(112, 128, 144) .
-
----
 
 ### 4. Pôle Groupe Présence (Pôle 4)
 - **Équipements** : Téléphones mobiles (Poco X7 Pro, etc.), capteurs Wi-Fi (SSID/BSSID), réseau mobile.
@@ -317,6 +253,9 @@ Pour séparer la logique de calcul pur de la logique d'affichage, un sous-dossie
   - `..._1_UNITE.yaml` (Ampoules individuelles)
   - `..._2_ZONE.yaml` (Somme par pièce)
   - `..._3_TOTAL.yaml` (Somme globale de l'appartement)
+- **PÔLE 4 (Groupe Présence)** : Séparation entre la logique de détection (Wi-Fi/Réseau mobile) et la carte d'affichage. Deux fichiers distincts sous `P4_groupe_presence` :
+  - `01_phones_wifi_cellular_card_autom.yaml` (Templates d'affichage — carte état des téléphones)
+  - `02_logique_wifi_cellular.yaml` (Logique de calcul — déduction présence/absence)
 
 ### 2. CONVENTION DE NOMMAGE DES FICHIERS
 - **Préfixe Pôle** : Le fichier doit toujours commencer par son pôle (ex: `P2_...` ou `M_...`).
@@ -324,7 +263,7 @@ Pour séparer la logique de calcul pur de la logique d'affichage, un sous-dossie
 - **Le Standard "AMHQ"** : Si le fichier gère des cycles temporels multiples, utiliser l'acronyme `AMHQ` (Annuel, Mensuel, Hebdo, Quotidien) dans le nom du fichier pour raccourcir (ex: `P3_UM_AMHQ_2_ZONE.yaml`).
 
 ### 3. TITRAGE INTERNE DES FICHIERS MODULAIRES
-Même si le fichier ne contient qu'une seule fonction, la règle de la **Boîte ASCII arrondie** (74 caractères) s'applique systématiquement en ligne 1 pour définir le rôle précis de ce fichier.
+Même si le fichier ne contient qu'une seule fonction, la règle de la **Boîte ASCII arrondie** (78 caractères) s'applique systématiquement en ligne 1 pour définir le rôle précis de ce fichier.
 
 ### 4. DOCUMENTATION INTERNE DES FICHIERS (EN-TÊTE OBLIGATOIRE)
 Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement** comporter un bloc de commentaires expliquant son rôle, ses sources, les pièges à éviter, et son lien avec l'interface graphique (les 18 vignettes).
@@ -352,7 +291,70 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 
 ---
 
-## 🌳 ARBORESCENCE DE HA EN LOCAL RE-BUILD
+## 🌳 ARBORESCENCE — DOSSIER DE TRAVAIL LOCAL (ReBuild)
+
+```text
+ReBuild/                                         (dossier de travail local — C:\Users\Berry Swann\Documents\HA\ReBuild\)
+├── CLAUDE.md                                    (instructions IA — contexte projet)
+├── SYNC_REPORT.md                               (rapport de synchronisation GitHub ↔ local)
+├── secrets.yaml                                 (identifiants HA — NE JAMAIS synchroniser sur GitHub)
+│
+├── Dashboard/                                   (dernier dashboard complet — mettre à jour à chaque changement)
+│   └── dashboard_2026-03-16.yaml
+│
+├── TREE_CORRIGE/                                (← COPIER sensors/ templates/ utility_meter/ directement dans /config/)
+│   ├── sensors/                                 (7 fichiers — intégrations kWh & mini/maxi)
+│   ├── templates/                               (27 fichiers — calculs, AVG, UI, météo, présence)
+│   └── utility_meter/                           (9 fichiers — compteurs AMHQ)
+│
+├── TREE_ORIGINE/                                (snapshot GitHub de référence — état avant corrections)
+│   ├── sensors/
+│   ├── templates/
+│   ├── utility_meter/
+│   └── ...                                      (fichiers root : configuration.yaml, groups.yaml, etc.)
+│
+└── docs/                                        (documentation — vignettes, pages, guides)
+    ├── IA/
+    │   └── IA_CONTEXT_BASE.md
+    ├── CONFIG_ROOT/
+    │   └── CONFIG_ROOT.md
+    ├── L1C1_METEO/
+    │   ├── L1C1_VIGNETTE_METEO.md
+    │   ├── PAGE_METEO.md
+    │   └── TUTO_IMAGES_ALERTES_METEO_FRANCE.md
+    ├── L1C2_TEMPERATURES/
+    │   ├── L1C2_VIGNETTE_TEMPERATURES.md
+    │   └── PAGE_TEMPERATURES.md
+    ├── L2C1_ENERGIE/
+    │   ├── L2C1_VIGNETTE_ENERGIE.md
+    │   ├── PAGE_ENERGIE.md
+    │   ├── PAGE_ENERGIE_MENSUEL.md
+    │   ├── PAGE_ENERGIE_TEMPS_REEL.md
+    │   └── COULEURS_PRISES_PAR_PIECE.md
+    ├── L2C3_ENERGIE_ECLAIRAGE/
+    │   ├── L2C3_VIGNETTE_ECLAIRAGE.md
+    │   ├── PAGE_ENERGIE_ECLAIRAGE.md
+    │   └── COULEURS_ECLAIRAGE_PAR_PIECE.md
+    ├── L4C3_MAJ_HA/
+    │   ├── L4C3_VIGNETTE_MAJ.md
+    │   └── PAGE_MAJ.md
+    ├── L5C1_PILES_BATTERIES/
+    │   ├── L5C1_VIGNETTE_BATTERIES.md
+    │   └── PAGE_BATTERIES.md
+    ├── L5C3_MARIADB/
+    │   ├── L5C3_VIGNETTE_MARIADB.md
+    │   └── PAGE_SYSTEME.md
+    ├── WIFI_PRESENCE (Home Page)/
+    │   ├── PAGE_HOME.md
+    │   └── VIGNETTE_WIFI_PRESENCE.md
+    ├── REBUILD_SYNC_STATUS.md
+    ├── CORRECTIONS_HEADERS_2026-03-16.md
+    └── _TEMPLATE_DOC.md
+```
+
+---
+
+## 🌳 ARBORESCENCE — STRUCTURE HA EN PRODUCTION (/config/)
 
 ```text
 /config/                                         (racine — fichiers de configuration globaux)
@@ -373,7 +375,7 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 │   ├── Ecojoko
 │   │   ├── 01_UM_AMHQ_cost.yaml
 │   │   └── 02_UM_ecojoko_quotidien_live.yaml
-│   └── Linky                                    (dossier vide — en attente)
+│   └── Linky                                    (en attente)
 ├── P1_clim_chauffage
 │   └── P1_UM_AMHQ.yaml
 ├── P2_prise
@@ -390,14 +392,14 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 ├── P0_Energie_total_diag
 │   ├── Diag
 │   │   ├── diag_conso_jour_en_cours.yaml
-│   │   └── diag_conso_mois_en_cours.yaml
+│   │   ├── diag_conso_mois_en_cours.yaml
+│   │   └── diag_conso_hebdomadaire_en_cours.yaml
 │   ├── Ecojoko
 │   │   ├── 01_ecojoko_AMHQ_cost.yaml
 │   │   ├── 02_ratio_hp_hc.yaml
 │   │   └── 03_AVG_ecojoko.yaml
 │   └── Linky
-│       ├── MyElectricalData.yaml
-│       └── P0_linky_jour_J0_J7.yaml
+│       └── MyElectricalData.yaml
 ├── P1_clim_chauffage
 │   ├── P1_01_MASTER
 │   │   └── P1_01_clim_logique_system_autom.yaml
@@ -410,7 +412,10 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 │   └── P2_I_all_standby_power
 │       └── P2_ current_all_standby.yaml
 ├── P3_eclairage
-│   ├── P3_01_somme_par_piece.yaml
+│   ├── P3_POWER                                 (remplace P3_01_somme_par_piece.yaml — obsolète)
+│   │   ├── P3_POWER_1_TOTAL_UNITE.yaml
+│   │   ├── P3_POWER_2_TOTAL_MULTI_ZONE.yaml
+│   │   └── P3_POWER_3_TOTAL_ZONE.yaml
 │   ├── P3_AVG
 │   │   ├── P3_AVG_AMHQ_1_UNITE.yaml
 │   │   ├── P3_AVG_AMHQ_2_ZONE.yaml
@@ -426,12 +431,13 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 │   ├── M_03_meteo_templates_blitzortung.yaml
 │   ├── M_04_tendances_th_ext_card.yaml
 │   └── M_05_cycle_solaire.yaml
-└── utilitaires                                  (hors nomenclature Pôle — à documenter)
-    └── jour_nuit.yaml
+└── utilitaires
+    ├── jour_nuit.yaml
+    └── Mise_a_jour_home_assistant.yaml
 /config/sensors
 ├── P0_Energie_total_diag
 │   └── Ecojoko_mini_maxi
-│       └── Ecojoko_mini_maxi_avg.yaml
+│       └── Ecojoko_mini_maxi_avg_1h.yaml
 ├── P2_prise
 │   ├── P2_kWh_prises.yaml
 │   └── P2_kWh_veilles.yaml
@@ -441,41 +447,6 @@ Juste sous la boîte ASCII du titre, chaque fichier YAML doit **obligatoirement*
 │   └── P3_kWh_3_TOTAL.yaml
 └── meteo
     └── M_03_meteo_sensors_blitzortung.yaml
-
-/config/home-assistant-config-v2
-└── docs
-    ├── CONFIG_ROOT
-    │   └── CONFIG_ROOT.md
-    ├── IA
-    │   └── IA_CONTEXT_BASE.md
-    ├── L1C1_METEO
-    │   ├── L1C1_VIGNETTE_METEO.md
-    │   ├── PAGE_METEO.md
-    │   └── TUTO_IMAGES_ALERTES_METEO_FRANCE.md
-    ├── L1C2_TEMPERATURES
-    │   ├── L1C2_VIGNETTE_TEMPERATURES.md
-    │   └── PAGE_TEMPERATURES.md
-    ├── L2C1_ENERGIE
-    │   ├── COULEURS_PRISES_PAR_PIECE.md
-    │   ├── L2C1_VIGNETTE_ENERGIE.md
-    │   ├── PAGE_ENERGIE.md
-    │   ├── PAGE_ENERGIE_MENSUEL.md
-    │   └── PAGE_ENERGIE_TEMPS_REEL.md
-    ├── L2C3_ENERGIE_ECLAIRAGE
-    │   ├── COULEURS_ECLAIRAGE_PAR_PIECE.md
-    │   └── L2C3_VIGNETTE_ECLAIRAGE.md
-    ├── L5C1_PILES_BATTERIES
-    │   ├── L5C1_VIGNETTE_BATTERIES.md
-    │   └── PAGE_BATTERIES.md
-    ├── L5C3_MARIADB
-    │   ├── L5C3_VIGNETTE_MARIADB.md
-    │   └── PAGE_SYSTEME.md
-    ├── WIFI_PRESENCE (Home Page)
-    │   └── VIGNETTE_WIFI_PRESENCE.md
-    ├── REBUILD_SYNC_STATUS.md
-    └── _TEMPLATE_DOC.md
-
-41 directories, 63 files
 ```
 
 ---
@@ -509,11 +480,11 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 **Pôle 0 - Diag & Énergie Globale**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Diag/diag_conso_jour_en_cours.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Diag/diag_conso_mois_en_cours.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Diag/diag_conso_hebdomadaire_en_cours.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Ecojoko/01_ecojoko_AMHQ_cost.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Ecojoko/02_ratio_hp_hc.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Ecojoko/03_AVG_ecojoko.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Linky/MyElectricalData.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Linky/P0_linky_jour_J0_J7.yaml
 
 **Pôle 1 - Chauffage & Clim**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml
@@ -525,7 +496,9 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P2_prise/P2_I_all_standby_power/P2_%20current_all_standby.yaml
 
 **Pôle 3 - Éclairage & UI**
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_01_somme_par_piece.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_POWER/P3_POWER_1_TOTAL_UNITE.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_POWER/P3_POWER_2_TOTAL_MULTI_ZONE.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_POWER/P3_POWER_3_TOTAL_ZONE.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
@@ -544,11 +517,12 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 
 **Utilitaires**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/utilitaires/jour_nuit.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/utilitaires/Mise_a_jour_home_assistant.yaml
 
 ### 📂 SENSORS
 
 **Pôle 0 - Diag & Énergie Globale**
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg.yaml
+- `Ecojoko_mini_maxi_avg_1h.yaml` *(absent sur GitHub — fichier local uniquement)*
 
 **Pôle 2 - Prises**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P2_prise/P2_kWh_prises.yaml
