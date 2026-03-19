@@ -161,3 +161,12 @@ climate:
     controller_data: remote.clim_salon
     temperature_sensor: sensor.th_salon_temperature
     humidity_sensor: sensor.th_salon_humidity
+
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ CLIMATISATION SMARTIR                                                    │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.30.33.0/24  # C'est l'IP de l'Add-on Tailscale en interne
+    - 127.0.0.1       # Toujours bon à avoir pour le local
