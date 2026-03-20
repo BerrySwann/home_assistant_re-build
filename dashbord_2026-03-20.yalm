@@ -16606,8 +16606,6 @@ views:
               - type: conditional
                 conditions:
                   - entity: sensor.total_poste_chauffage_puissance
-                    state_not: '0.0'
-                  - entity: sensor.total_poste_chauffage_puissance
                     state_not: '0'
                   - entity: sensor.total_poste_chauffage_puissance
                     state_not: unavailable
@@ -16634,13 +16632,13 @@ views:
                         severity:
                           - color: gainsboro
                             from: 0
-                            to: 5
+                            to: 4
                           - color: '#4caf50'
-                            from: 5.1
-                            to: 249
+                            from: 4
+                            to: 250
                           - color: '#FFCC99'
                             from: 250
-                            to: 749
+                            to: 750
                           - color: '#ff4444'
                             from: 750
                             to: 6000
@@ -16672,22 +16670,23 @@ views:
                             bar-card-value { font-size: 12px; }
                       filter:
                         include:
-                          - entity_id: sensor.clim_salon_power
+                          - entity_id: sensor.clim_salon_nous_power
                             options:
                               icon: mdi:air-conditioner
                           - entity_id: sensor.radiateur_elec_cuisine_power
                             options:
                               icon: mdi:radiator
-                          - entity_id: sensor.clim_bureau_power
+                          - entity_id: sensor.clim_bureau_nous_power
                             options:
                               icon: mdi:air-conditioner
-                          - entity_id: sensor.soufflant_sdb_power
+                          - entity_id: sensor.prise_soufflant_salle_de_bain_nous_power
                             options:
                               icon: mdi:fan
-                          - entity_id: sensor.seche_serviette_sdb_power
+                          - entity_id: >-
+                              sensor.prise_seche_serviette_salle_de_bain_nous_power
                             options:
                               icon: mdi:radiator-vertical
-                          - entity_id: sensor.clim_chambre_power
+                          - entity_id: sensor.clim_chambre_nous_power
                             options:
                               icon: mdi:air-conditioner
                         exclude:
@@ -16709,8 +16708,6 @@ views:
                           }
               - type: conditional
                 conditions:
-                  - entity: sensor.total_poste_multimedia_puissance
-                    state_not: '0.0'
                   - entity: sensor.total_poste_multimedia_puissance
                     state_not: '0'
                 card:
@@ -16788,7 +16785,7 @@ views:
                               icon: mdi:desktop-tower-monitor
                           - entity_id: sensor.prise_bureau_pc_ikea_power
                             options:
-                              icon: mdi:laptop
+                              icon: mdi:monitor-dashboard
                         exclude:
                           - options: {}
                             state: <= 1
@@ -16808,8 +16805,6 @@ views:
                           }
               - type: conditional
                 conditions:
-                  - entity: sensor.total_poste_cuisine_puissance
-                    state_not: '0.0'
                   - entity: sensor.total_poste_cuisine_puissance
                     state_not: '0'
                 card:
@@ -16905,8 +16900,6 @@ views:
               - type: conditional
                 conditions:
                   - entity: sensor.total_poste_froid_puissance
-                    state_not: '0.0'
-                  - entity: sensor.total_poste_froid_puissance
                     state_not: '0'
                 card:
                   type: vertical-stack
@@ -16994,8 +16987,6 @@ views:
                           }
               - type: conditional
                 conditions:
-                  - entity: sensor.total_poste_hygiene_puissance
-                    state_not: '0.0'
                   - entity: sensor.total_poste_hygiene_puissance
                     state_not: '0'
                 card:
@@ -17087,8 +17078,6 @@ views:
               - type: conditional
                 conditions:
                   - entity: sensor.eclairage_total_unit_puissance
-                    state_not: '0.0'
-                  - entity: sensor.eclairage_total_unit_puissance
                     state_not: '0'
                 card:
                   type: vertical-stack
@@ -17113,16 +17102,16 @@ views:
                         severity:
                           - color: gainsboro
                             from: 0
-                            to: 5
+                            to: 3
                           - color: '#4caf50'
-                            from: 5.1
-                            to: 249
+                            from: 3
+                            to: 6
                           - color: '#FFCC99'
-                            from: 250
-                            to: 749
+                            from: 6
+                            to: 9
                           - color: '#ff4444'
-                            from: 750
-                            to: 6000
+                            from: 9
+                            to: 30
                         card_mod:
                           style: >
                             :host {
@@ -17161,7 +17150,10 @@ views:
                           - entity_id: sensor.hue_white_lamp_entree_power
                             options:
                               icon: mdi:ceiling-light
-                          - entity_id: sensor.hue_white_lamp_salon_power
+                          - entity_id: sensor.hue_ambiance_lamp_salon_*_power
+                            options:
+                              icon: mdi:sofa
+                          - entity_id: sensor.hue_color_candle_salon_1_power
                             options:
                               icon: mdi:sofa
                           - entity_id: sensor.hue_white_lamp_table_power
@@ -17219,8 +17211,6 @@ views:
                           }
               - type: conditional
                 conditions:
-                  - entity: sensor.total_poste_autre_puissance
-                    state_not: '0.0'
                   - entity: sensor.total_poste_autre_puissance
                     state_not: '0'
                 card:
@@ -21114,7 +21104,7 @@ views:
                       color: rgb(215, 95, 115)
                       transform: return x * 1000;
                       unit: W
-                    - entity: sensor.hue_ambiance_lamp_salon_2_quotidien_kwh_um
+                    - entity: sensor.hue_ambiance_lamp_salon_3_quotidien_kwh_um
                       name: Salon 2A (B2)
                       color: rgb(235, 165, 175)
                       transform: return x * 1000;
@@ -21581,7 +21571,7 @@ views:
               - type: entity
                 show_state: true
                 show_icon: true
-                entity: light.bureau_z2m
+                entity: light.bureau
                 name: Bureau
                 icon: hue:wellner-solid
                 color: state
@@ -27194,41 +27184,6 @@ views:
                     }
           - type: custom:bubble-card
             card_type: separator
-            name: Restart VSCode
-            icon: mdi:check-bold
-            rows: 2
-            styles: |-
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 1;
-              }
-            card_layout: normal
-          - type: custom:button-card
-            entity: automation.redemarrage_quotidien_studio_code_server
-            name: Redémarrer Studio Code Server
-            icon: mdi:restart
-            tap_action:
-              action: call-service
-              service: automation.trigger
-              service_data:
-                entity_id: automation.redemarrage_quotidien_studio_code_server
-            styles:
-              card:
-                - background: transparent
-                - border: 0.1px solid white
-                - border-radius: 12px
-                - color: white
-                - font-size: 14px
-                - padding: 4px
-              icon:
-                - width: 40px
-                - height: 40px
-                - color: white
-              name:
-                - font-size: 16px
-                - margin-top: 12px
-          - type: custom:bubble-card
-            card_type: separator
             name: MariaDB
             icon: mdi:database-cog-outline
             rows: 2
@@ -27279,6 +27234,41 @@ views:
               service: automation.trigger
               service_data:
                 entity_id: automation.db_purge_mariadb_repack
+            styles:
+              card:
+                - background: transparent
+                - border: 0.1px solid white
+                - border-radius: 12px
+                - color: white
+                - font-size: 14px
+                - padding: 4px
+              icon:
+                - width: 40px
+                - height: 40px
+                - color: white
+              name:
+                - font-size: 16px
+                - margin-top: 12px
+          - type: custom:bubble-card
+            card_type: separator
+            name: Restart VSCode
+            icon: mdi:check-bold
+            rows: 2
+            styles: |-
+              .bubble-line {
+                background: var(--primary-text-color);
+                opacity: 1;
+              }
+            card_layout: normal
+          - type: custom:button-card
+            entity: automation.redemarrage_quotidien_studio_code_server
+            name: Redémarrer Studio Code Server
+            icon: mdi:restart
+            tap_action:
+              action: call-service
+              service: automation.trigger
+              service_data:
+                entity_id: automation.redemarrage_quotidien_studio_code_server
             styles:
               card:
                 - background: transparent
