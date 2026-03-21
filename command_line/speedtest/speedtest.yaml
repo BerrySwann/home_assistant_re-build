@@ -18,4 +18,5 @@
       - upload
       - server
       - result
-    scan_interval: 1800
+      - isp
+    scan_interval: 900

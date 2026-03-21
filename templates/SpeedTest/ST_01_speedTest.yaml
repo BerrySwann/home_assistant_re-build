@@ -22,3 +22,15 @@
         {% else %}
           Indisponible
         {% endif %}
+
+    - name: "Speedtest CLI Ping"
+      unique_id: speedtest_cli_ping
+      unit_of_measurement: "ms"
+      icon: mdi:timer-outline
+      state: >
+        {% set p = state_attr('sensor.speedtest_cli_data', 'ping') %}
+        {% if p and p.latency is defined %}
+          {{ p.latency | round(1) }}
+        {% else %}
+          Indisponible
+        {% endif %}
