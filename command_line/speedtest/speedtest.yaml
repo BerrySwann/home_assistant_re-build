@@ -1,7 +1,10 @@
 - sensor:
     name: "Speedtest CLI Data"
     unique_id: speedtest_cli_data
-    command: "/config/speedtest --format=json --accept-license --accept-gdpr"
+    # 1. On corrige le chemin double
+    command: "/config/speedtest/speedtest --format=json --accept-license --accept-gdpr"
+    # 2. On ajoute le temps additionnel (très important !)
+    command_timeout: 60
     value_template: >
       {% if value_json is defined and value_json.ping is defined %}
         {{ value_json.ping.latency | round(1) }}
@@ -15,4 +18,4 @@
       - upload
       - server
       - result
-    scan_interval: 3600
+    scan_interval: 1800
