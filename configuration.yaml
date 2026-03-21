@@ -164,6 +164,24 @@ climate:
     temperature_sensor: sensor.th_salon_temperature
     humidity_sensor: sensor.th_salon_humidity
 
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ HTTP://                                                                  │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    # --- Proxy locaux & Add-ons (Tailscale / Cloudflared) ---
+    - 127.0.0.1       # Toujours bon à avoir pour le local
+    - 172.30.33.0/24  # C'est l'IP de l'Add-on Tailscale en interne
+    - 172.30.0.0/16   # Tous les autres add-ons / ingress / tunnels
+    
+    # --- Réseau de la maison ---
+    - 192.168.1.0/24  # Ton LAN local (Vence)
+
+  # --- Sécurité (Bannissement IP) ---
+  ip_ban_enabled: true         # Protège l’accès à HA
+  login_attempts_threshold: 3  # Seuil de tentatives avant bannissement
+
 # annotations_log:
 # - [L95] camera: !include camera.yaml → commenté (obsolète, causait une erreur au démarrage).
 # - [L16] En-tête documentation mis à jour : camera marqué DÉSACTIVÉ.

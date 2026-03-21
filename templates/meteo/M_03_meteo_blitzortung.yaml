@@ -1,34 +1,27 @@
 # ╭────────────────────────────────────────────────────────────────────────────────────────╮
-# │ MÉTÉO. TEMPLATE : BLITZORTUNG — FOUDRE (windrose-card / LABEL / AZIMUT / TIMER)        │
+# │ M_03. MÉTÉO TEMPLATES — FOUDRE BLITZORTUNG (windrose-card / LABEL / AZIMUT / TIMER)    │
 # ╰────────────────────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Sensors template créant 5 capteurs Blitzortung : direction de l'impact
-# en label 16 points, bearing en degrés (windrose-card), distance en km,
-# temps écoulé depuis le dernier impact (timer formaté), et indicateur
-# temps réel depuis input_datetime. Alimentent la windrose-card foudre
-# et les alertes orages du dashboard.
+# Quatre capteurs templates pour la visualisation de la foudre via Blitzortung.
+# Fournit : label de direction (point cardinal FR), distance en km, azimut (bearing)
+# pour la windrose-card, et un timer "temps depuis le dernier impact".
 #
 # ## 🧮 CALCUL & SOURCES :
-# - sensor.maison_lightning_azimuth : azimut de l'impact (°)
-# - sensor.maison_lightning_distance : distance (km)
-# - sensor.maison_lightning_counter : compteur d'impacts (session)
-# - sensor.blitzortung_lightning_last_impact_time : timestamp dernier impact
-# - input_datetime.dernier_eclair : horodatage stocké du dernier éclair
-# - Timer : diff = now() - last_impact. Si > 2h ou counter == 0 → "Calme"
-# - Label : tranches 22.5° → 16 points cardinaux (même logique que vent)
+# - Direction : sensor.maison_lightning_azimuth → conversion bearing → point cardinal FR (16 points).
+# - Distance  : sensor.maison_lightning_distance | float → arrondi km.
+# - Bearing   : sensor.maison_lightning_azimuth | float, 0 remplacé par 1 (windrose-card).
+# - Timer     : sensor.blitzortung_lightning_last_impact_time + sensor.maison_lightning_counter.
+#               Calme si compteur = 0 ou dernier impact > 2h.
+# - Dernier impact : input_datetime.dernier_eclair → calcul diff en j/h/m.
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Blitzortung détecte dans un rayon paramétrable (ex: 40km autour de
-#   Vence). Un impact à 39km peut créer une alerte sans danger réel.
-# - La direction est celle de l'impact DEPUIS la maison (pas d'où vient
-#   l'orage) — sens inverse de la direction du vent.
-# - Le bearing retourne 1 si 0° (convention windrose-card identique au vent).
-# - dernier_impact_temps_reel utilise input_datetime.dernier_eclair qui
-#   doit être mis à jour par une automation séparée.
+# - La windrose-card requiert bearing != 0 → remplacement par 1.
+# - Deux blocs `- sensor:` séparés (contrainte HA pour les attributs du timer).
+# - sensor.maison_lightning_* provient de l'intégration Blitzortung MQTT.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L1C1 Météo (section foudre/Blitzortung, windrose-card foudre)
+# - L1C1 Météo (carte foudre windrose-card, timer dernier impact).
 
 - sensor:
 # ┌───────────────────────────────────────────────────────────────────┐
@@ -126,7 +119,7 @@
           {% set h = ((diff // 3600) % 24) | int %}
           {% set d = (diff // 86400) | int %}
 
-          Dernier impact de foudre il y a
+          Dernier impact de foudre il y a 
           {% if d > 0 %}
             {{ d }} jour{{ 's' if d > 1 }}, {{ h }} heure{{ 's' if h > 1 }} et {{ m }} minute{{ 's' if m > 1 }}
           {% elif h > 0 %}
@@ -137,3 +130,5 @@
         {% else %}
           Aucun impact enregistré
         {% endif %}
+# annotations_log:
+# - [L2] Titre box mis à jour : Série 01_2 → M_03 convention de nommage.
