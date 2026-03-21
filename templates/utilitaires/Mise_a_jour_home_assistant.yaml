@@ -1,42 +1,40 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ UTILITAIRES. TEMPLATES : SYSTÈME — MISES À JOUR DISPONIBLES              │
+# │ TEMPLATE : CAPTEUR NOMBRE DE MISES À JOUR DISPONIBLES (HA + ADD-ONS)    │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
 # Calcule le nombre total de mises à jour disponibles dans Home Assistant
-# (Core, HACS, add-ons, intégrations) en comptant les entités du domaine
+# (Core, HACS, add-ons, intégrations...) en comptant les entités du domaine
 # "update" dont l'état est "on" (= mise à jour en attente).
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Source  : domaine "update" (toutes entités update.*)
-# - Filtre  : state == 'on'  →  mise à jour disponible
-# - Résultat: entier (0 = tout à jour / N = N mises à jour en attente)
+# - Source : domaine "update" (toutes entités update.*)
+# - Filtre : state == 'on'  →  mise à jour disponible
+# - Résultat : entier (0 = tout à jour, N = N mises à jour en attente)
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Les entités update.* "unavailable" sont ignorées par selectattr.
+# - Ne pas utiliser "states.update" si certaines entités update.* sont
+#   "unavailable" — le filtre selectattr gère correctement ce cas.
 # - L'entité générée est sensor.available_updates (unique_id snake_case).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Sert à la remontée d'info pour la vignette : L4C3 Mises à jour HA
 
+# --- available_updates ---
 - sensor:
-    # ┌───────────────────────────────────┐
-    # │ MISE A JOUR HOME ASSISTANT        │
-    # └───────────────────────────────────┘
-    # --- available_updates ---
     - name: "Available Updates"
       unique_id: available_updates
       icon: mdi:update
       state: >
-        {{ 
+        {{
           states.update
-          |selectattr('state', 'eq', 'on')
-          |list
-          |count
+          | selectattr('state', 'eq', 'on')
+          | list
+          | count
         }}
 
 # annotations_log:
-# - [L1-3]   Correction boîte ASCII arrondie → 74 tirets (standard).
-# - [L5-20]  Ajout en-tête de documentation obligatoire (4 sections).
-# - [L22-24] Titre secondaire + tertiaire inchangés.
-# - [L25-32] Sensor inchangé — logique fonctionnelle conservée.
+# - [L1-3]   Ajout boîte ASCII arrondie 74 car. (titre principal obligatoire).
+# - [L5-17]  Ajout en-tête de documentation (Description, Calcul, Pièges, Vignette).
+# - [L19]    Ajout titre tertiaire (slug unique_id).
+# - [L20-28] Sensor inchangé — logique fonctionnelle conservée.

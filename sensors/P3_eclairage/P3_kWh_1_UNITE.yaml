@@ -18,6 +18,8 @@
 #   utility_meter/ (P3_UM_AMHQ_1_UNITE.yaml).
 # - Les ampoules Hue reportent la puissance uniquement quand allumées (0W sinon).
 #   method: left est préférable pour éviter les artefacts de transition.
+# - Les lampes Ambiance/Color Candle (PowerCalc) ont un Riemann fonctionnel confirmé —
+#   ne pas chercher à bypasser vers _energy direct (Riemann retourne bien une valeur stable).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C3 Conso Énergie Éclairage (source des UM P3 à l'unité)
@@ -243,3 +245,10 @@
     unit_prefix: k
     unit_time: h
     round: 3
+
+# annotations_log:
+# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.
+# - [2026-03-18] REVERT complet — hypothèse bypass PowerCalc invalidée :
+#     sensor.hue_ambiance_lamp_salon_1_energie_totale_kwh confirmé fonctionnel (0.344 kWh dans HA).
+#     Tous les Riemann sont restaurés dans leur état original. Aucune neutralisation.
+#     Piège noté dans § PIÈGES : Riemann Ambiance/Color Candle fonctionnel, bypass inutile.
