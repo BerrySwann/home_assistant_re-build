@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--14-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--03--20-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page-03a9f4?style=flat-square)](.)
 
 </div>
@@ -14,8 +14,8 @@
 | 🏗️ **Type carte** | `type: grid` (section unique, `max_columns: 1`) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-14 |
-| 🏠 **Version HA** | 2025.2.x |
+| 📅 **Modifié le** | 2026-03-20 |
+| 🏠 **Version HA** | 2026.3.x |
 
 ---
 
@@ -70,17 +70,15 @@ Le retour vers la page principale se fait via le tap action du heading.
 │  • Airfryer / Four & Plaque / Frigo / Congélateur      │
 ├────────────────────────────────────────────────────────┤
 │  BUREAU (heading)                                      │
-│  • PCe Bureau / Fer à Repasser / Têtes de Lit¹         │  ← 3 streamline cards
+│  • PCe Bureau / Fer à Repasser                         │  ← 2 streamline cards
 ├────────────────────────────────────────────────────────┤
 │  CHAMBRE (heading)                                     │
-│  • TV Chambre                                          │  ← 1 streamline card
+│  • Têtes de Lit chambre / TV Chambre                   │  ← 2 streamline cards
 ├────────────────────────────────────────────────────────┤
 │  ALL STANDBY (heading)                                 │
 │  • Veilles                                             │  ← 1 streamline card
 └────────────────────────────────────────────────────────┘
 ```
-
-> ¹ `Têtes de Lit` est physiquement en chambre mais placé sous le heading `Bureau` dans le YAML.
 
 ```yaml
 type: grid
@@ -94,9 +92,9 @@ cards:
   - type: heading          # CUISINE
   - type: custom:streamline-card   # × 8
   - type: heading          # BUREAU
-  - type: custom:streamline-card   # × 3
+  - type: custom:streamline-card   # × 2
   - type: heading          # CHAMBRE
-  - type: custom:streamline-card   # × 1
+  - type: custom:streamline-card   # × 2
   - type: heading          # ALL STANDBY
   - type: custom:streamline-card   # × 1
 ```
@@ -158,24 +156,24 @@ Chaque série pointe vers un `_mensuel_kwh_um` — compteur `utility_meter` réi
 
 | Nom affiché | Entité sensor | Couleur |
 |:------------|:--------------|:--------|
-| Box (+) | `sensor.prise_box_internet_ikea_mensuel_kwh_um` | `gainsboro` |
-| Horloge (+) | `sensor.prise_horloge_ikea_mensuel_kwh_um` | `rgb(183,183,183)` |
-| PCg | `sensor.prise_pc_s_gege_ikea_mensuel_kwh_um` | `rgb(202,135,135)` |
-| Chargeurs (+) | `sensor.prise_salon_chargeur_nous_mensuel_kwh_um` | `rgb(174,68,90)` |
+| Box (+) | `sensor.prise_box_internet_ikea_mensuel_kwh_um` | `rgb(183, 183, 183)` |
+| Horloge (+) | `sensor.prise_horloge_ikea_mensuel_kwh_um` | `rgb(220, 220, 220)` |
+| PCg | `sensor.prise_pc_s_gege_ikea_mensuel_kwh_um` | `rgb(174, 68, 90)` |
+| Chargeurs (+) | `sensor.prise_salon_chargeur_nous_mensuel_kwh_um` | `rgb(196, 75, 97)` |
 | Four M-O (+) | `sensor.prise_four_micro_ondes_nous_mensuel_kwh_um` | `rgb(98,78,136)` |
 | P'tit Dej. (+) | `sensor.prise_petit_dejeune_nous_mensuel_kwh_um` | `rgb(118,93,160)` |
 | Linge | `sensor.prise_lave_linge_nous_mensuel_kwh_um` | `rgb(137,103,179)` |
 | Vaisselle | `sensor.prise_lave_vaisselle_nous_mensuel_kwh_um` | `rgb(129,116,180)` |
 | Airfryer (+) | `sensor.prise_airfryer_ninja_nous_mensuel_kwh_um` | `rgb(142,122,181)` |
 | Four & Plq Cui. | `sensor.four_et_plaque_de_cuisson_mensuel_kwh_um` | `rgb(162,148,249)` |
-| frigo | `sensor.prise_frigo_cuisine_nous_mensuel_kwh_um` | `cyan` |
-| congél. | `sensor.prise_congelateur_cuisine_nous_mensuel_kwh_um` | `rgb(19,160,255)` |
-| PCe | `sensor.prise_bureau_pc_ikea_mensuel_kwh_um` | `orange` |
-| FàR (+) | `sensor.prise_bureau_fer_a_repasser_nous_mensuel_kwh_um` | `gold` |
-| Têtes L. (+) | `sensor.prise_tete_de_lit_chambre_mensuel_kwh_um` | `rgb(177,194,158)` |
-| TV Salon | `sensor.prise_tv_salon_ikea_mensuel_kwh_um` | `rgb(215,95,115)` |
-| TV (+) | `sensor.prise_tv_chambre_nous_mensuel_kwh_um` | `rgb(30,81,40)` |
-| Veilles | `sensor.all_standby_mensuel_kwh_um` | `grey` |
+| frigo | `sensor.prise_frigo_cuisine_nous_mensuel_kwh_um` | `rgb(19, 160, 255)` |
+| congél. | `sensor.prise_congelateur_cuisine_nous_mensuel_kwh_um` | `rgb(0, 255, 255)` |
+| PCe | `sensor.prise_bureau_pc_ikea_mensuel_kwh_um` | `rgb(255, 165, 0)` |
+| FàR (+) | `sensor.prise_bureau_fer_a_repasser_nous_mensuel_kwh_um` | `rgb(255, 183, 51)` |
+| Têtes L. (+) | `sensor.prise_tete_de_lit_chambre_mensuel_kwh_um` | `rgb(75, 130, 85)` |
+| TV Salon | `sensor.prise_tv_salon_ikea_mensuel_kwh_um` | `rgb(215, 95, 115)` |
+| TV (+) | `sensor.prise_tv_chambre_nous_mensuel_kwh_um` | `rgb(105, 155, 110)` |
+| Veilles | `sensor.all_standby_mensuel_kwh_um` | `rgb(109, 76, 65)` |
 
 > **(+)** : appareils à consommation irrégulière / intermittente.
 
@@ -203,15 +201,15 @@ Chaque appareil est représenté par une `custom:streamline-card` avec le templa
 
 | Title | energy_entity | color | avg_monthly | conso_monthly_kwh |
 |:------|:-------------|:------|:-----------|:-----------------|
-| Box Internet (Hue) | `sensor.prise_box_internet_ikea_energie_totale_kwh` | `gainsboro` | `sensor.box_internet_avg_watts_mensuel` | `sensor.prise_box_internet_ikea_mensuel_kwh_um` |
-| Horloge Entrée (Chargeur) | `sensor.prise_horloge_ikea_energie_totale_kwh` | `rgb(183,183,183)` | `sensor.horloge_avg_watts_mensuel` | `sensor.prise_horloge_ikea_mensuel_kwh_um` |
+| Box Internet (Hue) | `sensor.prise_box_internet_ikea_energie_totale_kwh` | `rgb(183, 183, 183)` | `sensor.box_internet_avg_watts_mensuel` | `sensor.prise_box_internet_ikea_mensuel_kwh_um` |
+| Horloge Entrée (Chargeur) | `sensor.prise_horloge_ikea_energie_totale_kwh` | `rgb(220, 220, 220)` | `sensor.horloge_avg_watts_mensuel` | `sensor.prise_horloge_ikea_mensuel_kwh_um` |
 
 #### 2. SALON (3 appareils)
 
 | Title | energy_entity | color | avg_monthly | conso_monthly_kwh |
 |:------|:-------------|:------|:-----------|:-----------------|
-| PC's Géraldine | `sensor.prise_pc_s_gege_ikea_energie_totale_kwh` | `rgb(202,135,135)` | `sensor.pc_gege_avg_watts_mensuel` | `sensor.prise_pc_s_gege_ikea_mensuel_kwh_um` |
-| Prise Salon (Chargeurs, Vapote, Aspi. & iRobot) | `sensor.prise_salon_chargeur_nous_energie_totale_kwh` | `rgb(174,68,90)` | `sensor.chargeurs_salon_avg_watts_mensuel` | `sensor.prise_salon_chargeur_nous_mensuel_kwh_um` |
+| PC's Géraldine | `sensor.prise_pc_s_gege_ikea_energie_totale_kwh` | `rgb(174, 68, 90)` | `sensor.pc_gege_avg_watts_mensuel` | `sensor.prise_pc_s_gege_ikea_mensuel_kwh_um` |
+| Prise Salon (Chargeurs, Vapote, Aspi. & iRobot) | `sensor.prise_salon_chargeur_nous_energie_totale_kwh` | `rgb(196, 75, 97)` | `sensor.chargeurs_salon_avg_watts_mensuel` | `sensor.prise_salon_chargeur_nous_mensuel_kwh_um` |
 | TV Salon (TV, Barre de son, ect...) | `sensor.prise_tv_salon_ikea_energie_totale_kwh` | `rgb(215,95,115)` | `sensor.tv_salon_avg_watts_mensuel` | `sensor.prise_tv_salon_ikea_mensuel_kwh_um` |
 
 #### 3. CUISINE (8 appareils)
@@ -224,30 +222,28 @@ Chaque appareil est représenté par une `custom:streamline-card` avec le templa
 | Lave-Vaisselle | `sensor.prise_lave_vaisselle_nous_energie_totale_kwh` | `rgb(129,116,180)` | `sensor.lave_vaisselle_avg_watts_mensuel` | `sensor.prise_lave_vaisselle_nous_mensuel_kwh_um` |
 | Airfryer (Cookéo, mixer, ect...) | `sensor.prise_airfryer_ninja_nous_energie_totale_kwh` | `rgb(142,122,181)` | `sensor.airfryer_avg_watts_mensuel` | `sensor.prise_airfryer_ninja_nous_mensuel_kwh_um` |
 | Four et plaque de Cuisson | `sensor.four_et_plaque_de_cuisson_energie_totale_kwh` | `rgb(162,148,249)` | `sensor.plaques_cuisson_avg_watts_mensuel` | `sensor.four_et_plaque_de_cuisson_mensuel_kwh_um` |
-| Frigo | `sensor.prise_frigo_cuisine_nous_energie_totale_kwh` | `cyan` | `sensor.frigo_avg_watts_mensuel` | `sensor.prise_frigo_cuisine_nous_mensuel_kwh_um` |
-| Congélateur | `sensor.prise_congelateur_cuisine_nous_energie_totale_kwh` | `rgb(19,160,255)` | `sensor.congelateur_avg_watts_mensuel` | `sensor.prise_congelateur_cuisine_nous_mensuel_kwh_um` |
+| Frigo | `sensor.prise_frigo_cuisine_nous_energie_totale_kwh` | `rgb(19, 160, 255)` | `sensor.frigo_avg_watts_mensuel` | `sensor.prise_frigo_cuisine_nous_mensuel_kwh_um` |
+| Congélateur | `sensor.prise_congelateur_cuisine_nous_energie_totale_kwh` | `rgb(0, 255, 255)` | `sensor.congelateur_avg_watts_mensuel` | `sensor.prise_congelateur_cuisine_nous_mensuel_kwh_um` |
 
-#### 4. BUREAU (2 appareils + 1 chambre¹)
-
-| Title | energy_entity | color | avg_monthly | conso_monthly_kwh |
-|:------|:-------------|:------|:-----------|:-----------------|
-| PCe Bureau | `sensor.prise_bureau_pc_ikea_energie_totale_kwh` | `orange` | `sensor.pc_bureau_avg_watts_mensuel` | `sensor.prise_bureau_pc_ikea_mensuel_kwh_um` |
-| Fer à Repasser Bureau (Store) | `sensor.prise_bureau_fer_a_repasser_nous_energie_totale_kwh` | `gold` | `sensor.fer_repasser_avg_watts_mensuel` | `sensor.prise_bureau_fer_a_repasser_nous_mensuel_kwh_um` |
-| Têtes de Lit chambre¹ | `sensor.prise_tete_de_lit_chambre_energie_totale_kwh` | `rgb(177,194,158)` | `sensor.tetes_lit_avg_watts_mensuel` | `sensor.prise_tete_de_lit_chambre_mensuel_kwh_um` |
-
-#### 5. CHAMBRE (1 appareil)
+#### 4. BUREAU (2 appareils)
 
 | Title | energy_entity | color | avg_monthly | conso_monthly_kwh |
 |:------|:-------------|:------|:-----------|:-----------------|
-| TV Chambre (Casques, FireTV, ect...) | `sensor.prise_tv_chambre_nous_energie_totale_kwh` | `rgb(30,81,40)` | `sensor.tv_chambre_avg_watts_mensuel` | `sensor.prise_tv_chambre_nous_mensuel_kwh_um` |
+| PCe Bureau | `sensor.prise_bureau_pc_ikea_energie_totale_kwh` | `rgb(255, 165, 0)` | `sensor.pc_bureau_avg_watts_mensuel` | `sensor.prise_bureau_pc_ikea_mensuel_kwh_um` |
+| Fer à Repasser Bureau (Store) | `sensor.prise_bureau_fer_a_repasser_nous_energie_totale_kwh` | `rgb(255, 183, 51)` | `sensor.fer_repasser_avg_watts_mensuel` | `sensor.prise_bureau_fer_a_repasser_nous_mensuel_kwh_um` |
+
+#### 5. CHAMBRE (2 appareils)
+
+| Title | energy_entity | color | avg_monthly | conso_monthly_kwh |
+|:------|:-------------|:------|:-----------|:-----------------|
+| Têtes de Lit chambre | `sensor.prise_tete_de_lit_chambre_energie_totale_kwh` | `rgb(75, 130, 85)` | `sensor.tetes_lit_avg_watts_mensuel` | `sensor.prise_tete_de_lit_chambre_mensuel_kwh_um` |
+| TV Chambre (Casques, FireTV, ect...) | `sensor.prise_tv_chambre_nous_energie_totale_kwh` | `rgb(105, 155, 110)` | `sensor.tv_chambre_avg_watts_mensuel` | `sensor.prise_tv_chambre_nous_mensuel_kwh_um` |
 
 #### 6. ALL STANDBY (1 appareil)
 
 | Title | energy_entity | color | avg_monthly | conso_monthly_kwh |
 |:------|:-------------|:------|:-----------|:-----------------|
-| Veilles | `sensor.all_standby_energie_totale_kwh` | `grey` | `sensor.veilles_avg_watts_mensuel` | `sensor.all_standby_mensuel_kwh_um` |
-
-> ¹ `Têtes de Lit chambre` est positionné sous le heading `Bureau` dans le YAML (ordre d'insertion). Physiquement en chambre.
+| Veilles | `sensor.all_standby_energie_totale_kwh` | `rgb(109, 76, 65)` | `sensor.veilles_avg_watts_mensuel` | `sensor.all_standby_mensuel_kwh_um` |
 
 ---
 
@@ -285,15 +281,15 @@ La palette suit une logique **par fonction** plus que par pièce :
 
 | Gamme | Devices | Teinte |
 |:------|:--------|:-------|
-| Gris clair | Box, Horloge (Standby bas) | `gainsboro`, `rgb(183,183,183)` |
-| Rose/Rouge | PC Géraldine, Chargeurs Salon, TV Salon | `rgb(202,135,135)`, `rgb(174,68,90)`, `rgb(215,95,115)` |
+| Gris clair | Box, Horloge (Standby bas) | `rgb(183, 183, 183)`, `rgb(220, 220, 220)` |
+| Rose/Rouge | PC Géraldine, Chargeurs Salon, TV Salon | `rgb(174, 68, 90)`, `rgb(196, 75, 97)`, `rgb(215, 95, 115)` |
 | Violet foncé → clair | Cuisine (Four M-O → Airfryer) | `rgb(98,78,136)` → `rgb(142,122,181)` |
 | Lavande | Four & Plaque | `rgb(162,148,249)` |
-| Cyan → Bleu | Frigo, Congélateur (froid) | `cyan`, `rgb(19,160,255)` |
-| Orange / Gold | PCe Bureau, Fer à Repasser | `orange`, `gold` |
-| Vert pâle | Têtes de Lit | `rgb(177,194,158)` |
-| Vert foncé | TV Chambre | `rgb(30,81,40)` |
-| Gris | Veilles (All Standby) | `grey` |
+| Bleu → Cyan | Frigo, Congélateur (froid) | `rgb(19, 160, 255)`, `rgb(0, 255, 255)` |
+| Orange → Jaune | PCe Bureau, Fer à Repasser | `rgb(255, 165, 0)`, `rgb(255, 183, 51)` |
+| Vert moyen | Têtes de Lit Chambre | `rgb(75, 130, 85)` |
+| Vert clair | TV Chambre | `rgb(105, 155, 110)` |
+| Brun/Terre | Veilles (All Standby) | `rgb(109, 76, 65)` |
 
 ---
 

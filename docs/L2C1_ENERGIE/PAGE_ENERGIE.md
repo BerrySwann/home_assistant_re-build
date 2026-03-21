@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--14-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--03--20-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Dashboard%20Doc-ff9800?style=flat-square)](.)
 
 </div>
@@ -15,8 +15,8 @@
 | 🏗️ **Layout** | `type: grid` (column_span: 1) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-14 |
-| 🏠 **Version HA** | 2025.2.x → v2.0 |
+| 📅 **Modifié le** | 2026-03-20 |
+| 🏠 **Version HA** | 2026.3.x |
 
 ---
 
@@ -32,17 +32,12 @@
 4. [Section RING TILES — Mini / Réel / Maxi](#section-ring-tiles--mini--réel--maxi)
 5. [Section ENERGY OVERVIEW](#section-energy-overview)
 6. [Section RATIOS LINKY](#section-ratios-linky)
-7. [Section COÛT QUOTIDIEN](#section-coût-quotidien)
-8. [Section PIE CHART QUOTIDIEN + SLIDER HC](#section-pie-chart-quotidien--slider-hc)
-9. [Section COÛT MENSUEL](#section-coût-mensuel)
-10. [Section PIE CHART MENSUEL + SLIDER HC](#section-pie-chart-mensuel--slider-hc)
-11. [Section GRAPHIQUE 24H TEMPS RÉEL](#section-graphique-24h-temps-réel)
-12. [Section HISTORIQUE 7 JOURS (OFFSET)](#section-historique-7-jours-offset)
-13. [Section TABLEAU LINKY (flex-table)](#section-tableau-linky-flex-table)
-14. [Section GRAPHIQUE MENSUEL PAR JOURS](#section-graphique-mensuel-par-jours)
-15. [Section SYNTHÈSE USAGES (Jour + Mois)](#section-synthèse-usages-jour--mois)
-16. [Entités utilisées](#entités-utilisées--provenance-complète)
-17. [Dépannage](#dépannage)
+7. [Section TABBED-CARD (3 onglets)](#section-tabbed-card-3-onglets)
+   - [Onglet JOURNALIER](#onglet-journalier)
+   - [Onglet HEBDOMADAIRE](#onglet-hebdomadaire)
+   - [Onglet MENSUEL](#onglet-mensuel)
+8. [Entités utilisées](#entités-utilisées--provenance-complète)
+9. [Dépannage](#dépannage)
 
 ---
 
@@ -65,7 +60,7 @@ Cette page regroupe toutes les informations de consommation électrique du logem
 - ✅ **Ecojoko** (`little_monkey`) — `sensor.ecojoko_*`
 - ✅ **MyElectricalData / Linky** (`linky_card`) — `sensor.linky_*`
 - ✅ **tarif_edf** (custom component) — `sensor.tarif_heures_*_ttc`
-- ✅ Sensors calculés P0 — `sensor.conso_mini` / `sensor.conso_maxi` / `sensor.ecojoko_*`
+- ✅ Sensors natifs Ecojoko — `sensor.ecojoko_conso_mini_24h` / `sensor.ecojoko_conso_maxi_24h` (fournis directement par l'intégration Ecojoko)
 
 ### Cartes HACS utilisées
 
@@ -75,7 +70,8 @@ Cette page regroupe toutes les informations de consommation électrique du logem
 | `energy-overview-card` | Flux Enedis → Maison animé |
 | `content-card-linky` | Ratios Linky (mois / semaine / annuel) |
 | `apexcharts-card` | Graphiques (24h, 7j, mensuel, pie, donut) |
-| `button-card` | Slider de rentabilité HC (quotidien + mensuel) |
+| `tabbed-card` | Onglets JOURNALIER / HEBDOMADAIRE / MENSUEL |
+| `button-card` | Slider de rentabilité HC (dans chaque onglet) |
 | `flex-table-card` | Tableau Linky 8 jours |
 | `auto-entities` + `bar-card` | Synthèse usages par postes |
 | `stack-in-card` | Regroupement transparent |
@@ -102,37 +98,24 @@ Cette page regroupe toutes les informations de consommation électrique du logem
 │  [SEPARATOR] Ratio Mois A-1 / Semaine / A-1         │
 │  [linky] RatioMois | [linky] RatioSem | [linky] A-1 │
 ├─────────────────────────────────────────────────────┤
-│  [SEPARATOR] Coût Quotidien                         │
-│  Total kWh | HP kWh | HC kWh                        │
-│  Total €   | HP €   | HC €                         │
-├─────────────────────────────────────────────────────┤
-│  [SEPARATOR] Conso. réel sur 24 Heures              │
-│  [Pie chart HP/HC quotidien]                        │
-│  [Slider rentabilité HC quotidien]                  │
-├─────────────────────────────────────────────────────┤
-│  [SEPARATOR] Coût Mensuel                           │
-│  Total kWh | HP kWh | HC kWh                        │
-│  Total €   | HP €   | HC €                         │
-├─────────────────────────────────────────────────────┤
-│  [SEPARATOR] Conso. réel mensuel                    │
-│  [Pie chart HP/HC mensuel]                          │
-│  [Slider rentabilité HC mensuel]                    │
-├─────────────────────────────────────────────────────┤
-│  [ApexCharts 24h] Conso temps réel + moy glissante  │
-├─────────────────────────────────────────────────────┤
-│  [SEPARATOR] Energie Totale consommée sur 7 Jours   │
-│  [ApexCharts] Historique 7 jours (offset -1d→-7d)  │
-├─────────────────────────────────────────────────────┤
-│  [SEPARATOR] Coût totale par Jours (hors Abo.)      │
-│  [flex-table-card] Linky 8 jours                    │
-├─────────────────────────────────────────────────────┤
-│  [SEPARATOR] Conso. Mensuel par Jours               │
-│  [ApexCharts] Colonnes par jour + moy glissante     │
-├─────────────────────────────────────────────────────┤
-│  [bar-card] SYNTHÈSE USAGES (Jour en cours)         │
-│  [donut] Répartition conso aujourd'hui              │
-│  [bar-card] SYNTHÈSE USAGES (Mois en cours)         │
-│  [donut] Répartition conso mois en cours            │
+│  ┌──────────────────────────────────────────────┐   │
+│  │  [tabbed-card]  --mdc-theme-primary: #FFB347 │   │
+│  │  swipeable: true    animated: true           │   │
+│  ├──────────────┬─────────────┬─────────────────┤   │
+│  │ JOURNALIER   │HEBDOMADAIRE │    MENSUEL       │   │
+│  ├──────────────┴─────────────┴─────────────────┤   │
+│  │  [Coût Total / HP / HC : kWh + €]            │   │
+│  │  [Pie chart HP/HC]                           │   │
+│  │  [Slider rentabilité HC]                     │   │
+│  │  (JOURNALIER uniquement :)                   │   │
+│  │    [ApexCharts 24h temps réel]               │   │
+│  │    [ApexCharts Historique 7j offset]         │   │
+│  │    [flex-table-card Linky 8 jours]           │   │
+│  │  (MENSUEL uniquement :)                      │   │
+│  │    [ApexCharts mensuel par jours]            │   │
+│  │  [bar-card SYNTHÈSE USAGES]                  │   │
+│  │  [donut Répartition conso]                   │   │
+│  └──────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -200,7 +183,7 @@ Grid 3 colonnes. Chaque ring-tile est un indicateur circulaire avec arc de coule
 
 | Paramètre | Valeur |
 |-----------|--------|
-| `entity` | `sensor.conso_mini` |
+| `entity` | `sensor.ecojoko_conso_mini_24h` |
 | `min` | 0 |
 | `max` | 100 |
 | `ring_type` | `open` |
@@ -214,7 +197,7 @@ Grid 3 colonnes. Chaque ring-tile est un indicateur circulaire avec arc de coule
 | 65–74 | Orange | À surveiller |
 | ≥ 75 | Rouge | Standby anormal |
 
-> `conso_mini` = valeur min statistique 24h de `sensor.ecojoko_consommation_temps_reel`. Reflète le talon de consommation irréductible (box, standby).
+> `ecojoko_conso_mini_24h` = puissance minimale native Ecojoko sur 24h. Reflète le talon de consommation irréductible (box, standby). Fourni directement par l'intégration Ecojoko [UI].
 
 ---
 
@@ -242,13 +225,13 @@ Grid 3 colonnes. Chaque ring-tile est un indicateur circulaire avec arc de coule
 
 | Paramètre | Valeur |
 |-----------|--------|
-| `entity` | `sensor.conso_maxi` |
+| `entity` | `sensor.ecojoko_conso_maxi_24h` |
 | `min` | 0 |
 | `max` | 6000 |
 
 Même palette couleur que le Temps Réel (seuils 2 000 / 4 000 W).
 
-> `conso_maxi` = valeur max statistique 24h. Reflète le pic de consommation journalier.
+> `ecojoko_conso_maxi_24h` = puissance maximale native Ecojoko sur 24h. Reflète le pic de consommation journalier. Fourni directement par l'intégration Ecojoko [UI].
 
 ---
 
@@ -303,342 +286,272 @@ Toutes utilisent `entity: sensor.linky_25481620821301_consumption` et `ewEntity:
 
 ---
 
-## 💶 SECTION COÛT QUOTIDIEN
+## 🗂️ SECTION TABBED-CARD (3 ONGLETS)
 
+La zone principale de la page est une `custom:tabbed-card` englobant les 3 périodes de suivi. Chaque onglet contient la même structure logique adaptée à sa période.
+
+```yaml
+- type: custom:tabbed-card
+  styles:
+    "--mdc-theme-primary": "#FFB347"
+    "--mdc-tab-text-label-color-default": rgba(255, 255, 255, 0.6)
+    max-width: 100%
+  attributes:
+    animated: true
+    swipeable: true
+  tabs:
+    - attributes:
+        label: JOURNALIER
+        icon: mdi:calendar-today
+      card: ...
+    - attributes:
+        label: HEBDOMADAIRE
+        icon: mdi:calendar-week
+      card: ...
+    - attributes:
+        label: MENSUEL
+        icon: mdi:calendar-month
+      card: ...
 ```
-[separator] Coût Quotidien
 
-[vertical-stack]
-  [horizontal-stack]  Total kWh | HP kWh | HC kWh
-  [horizontal-stack]  Total €   | HP €   | HC €
-```
+**Propriétés communes :**
+- Couleur active : `#FFB347` (orange chaleureux)
+- Onglets inactifs : blanc 60% opacité
+- Swipe activé (`swipeable: true`) — navigation tactile
+- Animation de transition (`animated: true`)
 
-6 cartes `type: entity` avec `card_mod` transparent (fond/ombre/bordure supprimés). Icônes blanches forcées via `.icon { color: white }`.
+---
 
-### Entités
+### Onglet JOURNALIER
 
-| Entité | Rôle |
-|--------|------|
-| `sensor.ecojoko_reseau_quotidien_um` | Total kWh quotidien (UM) |
-| `sensor.ecojoko_hp_reseau_quotidien_um` | HP kWh quotidien (UM) |
-| `sensor.ecojoko_hc_reseau_quotidien_um` | HC kWh quotidien (UM) |
-| `sensor.ecojoko_cout_total_quotidien` | Coût total € quotidien |
-| `sensor.ecojoko_cout_hp_quotidien` | Coût HP € quotidien |
-| `sensor.ecojoko_cout_hc_quotidien` | Coût HC € quotidien |
+Période : jour en cours (remise à zéro à minuit).
+
+**Contenu dans l'ordre :**
+
+**1. Coût Quotidien** — 2 rangées de 3 entités (kWh + €)
+
+| Entité | Type | Rôle |
+|--------|------|------|
+| `sensor.ecojoko_reseau_quotidien_um` | entity | Total kWh quotidien (UM) |
+| `sensor.ecojoko_hp_reseau_quotidien_um` | entity | H.P. kWh quotidien (UM) |
+| `sensor.ecojoko_hc_reseau_quotidien_um` | entity | H.C. kWh quotidien (UM) |
+| `sensor.ecojoko_cout_total_quotidien` | entity | Coût total € quotidien |
+| `sensor.ecojoko_cout_hp_quotidien` | entity | H.P. € quotidien |
+| `sensor.ecojoko_cout_hc_quotidien` | entity | H.C. € quotidien |
 
 > Sources UM : `utility_meter/P0_Energie_total/Ecojoko/02_UM_ecojoko_quotidien_live.yaml`
 > Sources coûts : `templates/P0_Energie_total_diag/Ecojoko/01_ecojoko_AMHQ_cost.yaml`
 
----
-
-## 🥧 SECTION PIE CHART QUOTIDIEN + SLIDER HC
-
-### Pie Chart HP/HC quotidien (ApexCharts)
+**2. Pie Chart HP/HC journalier (ApexCharts)**
 
 ```yaml
-- type: custom:apexcharts-card
-  chart_type: pie
-  graph_span: 24h
-  span:
-    start: day
-  header:
-    title: Conso. journalière H.P./H.C.
-  series:
-    - entity: sensor.ecojoko_hp_reseau_quotidien_um
-      name: Heure pleine
-      color: rgb(211, 58, 79)
-    - entity: sensor.ecojoko_hc_reseau_quotidien_um
-      name: Heure creuse
-      color: rgb(72, 132, 213)
+chart_type: pie
+graph_span: 24h
+span:
+  start: day
+series:
+  - entity: sensor.ecojoko_hp_reseau_quotidien_um
+    name: Heure pleine
+    color: rgb(211, 58, 79)
+  - entity: sensor.ecojoko_hc_reseau_quotidien_um
+    name: Heure creuse
+    color: rgb(72, 132, 213)
 ```
 
-Affiche la répartition HP (rouge `rgb(211,58,79)`) / HC (bleu `rgb(72,132,213)`) du jour en cours. DataLabels en pourcentage arrondi.
+**3. Slider Rentabilité HC quotidien (Button-card)**
 
----
+**Entité :** `sensor.ecojoko_ratio_hc_quotidien`
 
-### Slider Rentabilité HC quotidien (Button-card)
+Layout CSS Grid : `"n s" / "l s" / "bar bar"`. Gradient de fond : rouge < 25% → orange 25–33% → vert > 33%. Curseur `gainsboro` 18px positionné à `left: ${val}%` avec transition `0.6s ease-in-out`.
+
+**4. Graphique 24h Temps Réel (ApexCharts)**
 
 ```yaml
-- type: custom:button-card
-  entity: sensor.ecojoko_ratio_hc_quotidien
-  name: Rentabilité
-  label: Heures Creuses
-  show_state: true
-  show_icon: false
+graph_span: 24h
+cache: false
+span:
+  start: day
 ```
 
-**Layout CSS Grid :**
+| Série | Entité | Type | Rôle |
+|-------|--------|------|------|
+| Conso. temps réel | `sensor.ecojoko_consommation_temps_reel` | area | Courbe puissance instantanée |
+| Moy. glissante 24h | `sensor.ecojoko_consommation_temps_reel` | line | `func: avg, duration: 24h` |
+| Moy. depuis minuit | `sensor.ecojoko_avg_watts_quotidien` | line | Axe secondaire Wh |
+| Moy. 1er du mois | `sensor.ecojoko_avg_watts_mensuel` | — | En-tête uniquement (`in_chart: false`) |
+
+Double axe Y : `TempsReel` (gauche — W) / `Minuit` (droite — Wh).
+
+**5. Historique 7 jours (Offset — ApexCharts)**
+
+Principe : toutes les séries utilisent `sensor.ecojoko_consommation_reseau` avec un `offset` décalant la fenêtre de lecture. Le recorder HA fournit les données historiques.
+
+| Série | Offset | Couleur |
+|-------|--------|---------|
+| Aujourd'hui | aucun | `gainsboro` |
+| J-1 | `-1d` | `rgb(204, 255, 204)` |
+| J-2 | `-2d` | `rgb(153, 255, 153)` |
+| J-3 | `-3d` | `rgb(102, 255, 102)` |
+| J-4 | `-4d` | `rgb(51, 204, 51)` |
+| J-5 | `-5d` | `rgb(0, 153, 0)` |
+| J-6 | `-6d` | `rgb(0, 102, 0)` |
+| J-7 | `-7d` | `rgb(0, 70, 0)` |
+
+`extend_to: false` sur toutes les séries passées. `group_by: func: last, duration: 10m`. Recorder HA ≥ 8 jours requis.
+
+**6. Tableau Linky 8 jours (flex-table-card)**
+
+```yaml
+entities: [sensor.linky_jour_0 … sensor.linky_jour_7]
+columns: Jour | Total kWh | Coût € | HP kWh | HC kWh
 ```
-"n s"     ← Nom | État (%)
-"l s"     ← Label | État (%)
-"bar bar" ← Barre slider pleine largeur
-```
 
-**Barre de fond (gradient fixe) :**
-- 0–25% → Rouge `#f44336` (mauvais)
-- 25–33% → Orange `#ff9800` (limite)
-- 33–100% → Vert `#4caf50` (rentable)
+> `linky_jour_0` = conso Ecojoko du jour en temps réel (pas données Linky). `linky_jour_1-7` = attributs Linky (Wh ÷ 1000). Source : `templates/P0_Energie_total_diag/Linky/MyElectricalData.yaml`
 
-**Curseur mobile (JS) :**
-- Pastille `gainsboro` (18px) positionnée à `left: ${val}%`
-- Transition CSS `0.6s ease-in-out`
-- Valeur clampée entre 0 et 100%
+**7. Synthèse Usages Journaliers + Donut**
 
-**Entité :** `sensor.ecojoko_ratio_hc_quotidien` [templates/P0_Energie_total_diag/Ecojoko/02_ratio_hp_hc.yaml]
+Bar-card `auto-entities` triée par état décroissant. Max dynamique : `sensor.diag_max_poste_quotidien_dynamique`.
+
+| Poste | Entité | Icône | Couleur |
+|-------|--------|-------|---------|
+| Hygiène | `sensor.diag_poste_hygiene_quotidien` | `mdi:water` | `#00BFFF` |
+| Cuisson | `sensor.diag_poste_cuisine_quotidien` | `mdi:stove` | `#FF4500` |
+| Froid | `sensor.diag_poste_froid_quotidien` | `mdi:snowflake` | `#87CEEB` |
+| Chauffage | `sensor.diag_poste_chauffage_quotidien` | `mdi:fire` | `#FFA500` |
+| Multimedia | `sensor.diag_poste_multimedia_quotidien` | `mdi:desktop-tower-monitor` | `#9370DB` |
+| Lumière | `sensor.diag_poste_eclairage_quotidien` | `mdi:lightbulb` | `#ADFF2F` |
+| Autres | `sensor.diag_poste_autre_quotidien` | `mdi:account` | `lightgrey` |
+
+Donut ApexCharts : `graph_span: 24h`, `group_by: func: last, duration: 24h`, DataLabels `%` (1 décimale), tooltip `kWh` (2 décimales).
+
+> Source : `templates/P0_Energie_total_diag/Diag/diag_conso_jour_en_cours.yaml`
 
 ---
 
-## 💶 SECTION COÛT MENSUEL
+### Onglet HEBDOMADAIRE
 
-Structure identique à Coût Quotidien mais sur la période mensuelle.
+Période : semaine en cours (remise à zéro le lundi à minuit).
 
+**1. Coût Hebdomadaire** — 2 rangées de 3 entités (kWh + €)
+
+| Entité | Rôle |
+|--------|------|
+| `sensor.ecojoko_reseau_hebdomadaire_um` | Total kWh hebdo (UM) |
+| `sensor.ecojoko_hp_reseau_hebdomadaire_um` | H.P. kWh hebdo (UM) |
+| `sensor.ecojoko_hc_reseau_hebdomadaire_um` | H.C. kWh hebdo (UM) |
+| `sensor.ecojoko_cout_total_hebdomadaire` | Coût total € hebdo |
+| `sensor.ecojoko_cout_hp_hebdomadaire` | H.P. € hebdo |
+| `sensor.ecojoko_cout_hc_hebdomadaire` | H.C. € hebdo |
+
+> Source UM : `utility_meter/P0_Energie_total/Ecojoko/01_UM_AMHQ_cost.yaml`
+> Source coûts : `templates/P0_Energie_total_diag/Ecojoko/01_ecojoko_AMHQ_cost.yaml`
+
+**2. Pie Chart HP/HC hebdomadaire**
+
+```yaml
+chart_type: pie
+graph_span: 7d
+span:
+  start: week
+series:
+  - entity: sensor.ecojoko_hp_reseau_hebdomadaire_um
+    color: rgb(211, 58, 79)
+  - entity: sensor.ecojoko_hc_reseau_hebdomadaire_um
+    color: rgb(72, 132, 213)
 ```
-[separator] Coût Mensuel
 
-[vertical-stack]
-  [horizontal-stack]  Total kWh (statistic change) | HP kWh (UM) | HC kWh (UM)
-  [horizontal-stack]  Total €   | HP €   | HC €
-```
+**3. Slider Rentabilité HC hebdomadaire**
+
+**Entité :** `sensor.ecojoko_ratio_hc_hebdomadaire` — même structure que le slider journalier.
+
+**4. Synthèse Usages Hebdomadaires + Donut**
+
+Max dynamique : `sensor.diag_max_poste_hebdomadaire_dynamique`.
+
+| Poste | Entité |
+|-------|--------|
+| Hygiène | `sensor.diag_poste_hygiene_hebdomadaire` |
+| Cuisson | `sensor.diag_poste_cuisine_hebdomadaire` |
+| Froid | `sensor.diag_poste_froid_hebdomadaire` |
+| Chauffage | `sensor.diag_poste_chauffage_hebdomadaire` |
+| Multimedia | `sensor.diag_poste_multimedia_hebdomadaire` |
+| Lumière | `sensor.diag_poste_eclairage_hebdomadaire` |
+| Autres | `sensor.diag_poste_autre_hebdomadaire` |
+
+Donut : `group_by: func: last, duration: 7d`.
+
+> Source : `templates/P0_Energie_total_diag/Diag/diag_conso_hebdomadaire_en_cours.yaml`
+
+---
+
+### Onglet MENSUEL
+
+Période : mois en cours (remise à zéro le 1er du mois à minuit).
+
+**1. Coût Mensuel** — 2 rangées de 3 entités (kWh + €)
 
 > ⚠️ **Différence technique** : Le Total kWh mensuel utilise `type: statistic` avec `stat_type: change` et `period: calendar / month` sur `sensor.ecojoko_consommation_reseau` — pas un UM. Les HP/HC utilisent les UM mensuels.
-
-### Entités
 
 | Entité | Type | Rôle |
 |--------|------|------|
 | `sensor.ecojoko_consommation_reseau` | `type: statistic` (change, mois) | Total kWh mensuel |
-| `sensor.ecojoko_hp_reseau_mensuel_um` | entity | HP kWh mensuel (UM) |
-| `sensor.ecojoko_hc_reseau_mensuel_um` | entity | HC kWh mensuel (UM) |
+| `sensor.ecojoko_hp_reseau_mensuel_um` | entity | H.P. kWh mensuel (UM) |
+| `sensor.ecojoko_hc_reseau_mensuel_um` | entity | H.C. kWh mensuel (UM) |
 | `sensor.ecojoko_cout_total_mensuel` | entity | Coût total € mensuel |
-| `sensor.ecojoko_cout_hp_mensuel` | entity | Coût HP € mensuel |
-| `sensor.ecojoko_cout_hc_mensuel` | entity | Coût HC € mensuel |
+| `sensor.ecojoko_cout_hp_mensuel` | entity | H.P. € mensuel |
+| `sensor.ecojoko_cout_hc_mensuel` | entity | H.C. € mensuel |
 
----
-
-## 🥧 SECTION PIE CHART MENSUEL + SLIDER HC
-
-### Pie Chart HP/HC mensuel
+**2. Pie Chart HP/HC mensuel**
 
 ```yaml
-- type: custom:apexcharts-card
-  chart_type: pie
-  graph_span: 1month
-  span:
-    start: month
-  header:
-    title: Conso. mensuelle H.P./H.C.
-  series:
-    - entity: sensor.ecojoko_hp_reseau_mensuel_um
-    - entity: sensor.ecojoko_hc_reseau_mensuel_um
+chart_type: pie
+graph_span: 1month
+span:
+  start: month
+series:
+  - entity: sensor.ecojoko_hp_reseau_mensuel_um
+    color: rgb(211, 58, 79)
+  - entity: sensor.ecojoko_hc_reseau_mensuel_um
+    color: rgb(72, 132, 213)
 ```
 
-Même structure et couleurs que le pie chart quotidien, mais sur le mois en cours (`group_by: func: last, duration: 1month`).
+**3. Slider Rentabilité HC mensuel**
 
----
+**Entité :** `sensor.ecojoko_ratio_hc_mensuel` — même structure que le slider journalier.
 
-### Slider Rentabilité HC mensuel
-
-Même structure que le slider quotidien.
-
-**Entité :** `sensor.ecojoko_ratio_hc_mensuel` [templates/P0_Energie_total_diag/Ecojoko/02_ratio_hp_hc.yaml]
-
----
-
-## 📈 SECTION GRAPHIQUE 24H TEMPS RÉEL
+**4. Graphique Mensuel par Jours (ApexCharts)**
 
 ```yaml
-- type: custom:apexcharts-card
-  graph_span: 24h
-  cache: false
-  span:
-    start: day
-  now:
-    show: true
-    color: darkred
-    label: Now
-  apex_config:
-    chart:
-      height: 400px
+graph_span: 31d
+cache: true
+span:
+  start: month
 ```
-
-### Séries
-
-| Série | Entité | Type | Couleur | Rôle |
-|-------|--------|------|---------|------|
-| Conso. en temps réel | `sensor.ecojoko_consommation_temps_reel` | area | Vert | Courbe de puissance instantanée |
-| Moy. glissante (24h) | `sensor.ecojoko_consommation_temps_reel` | line | Rouge | Moyenne glissante sur 24h (`func: avg, duration: 24h`) |
-| Moy. depuis minuit | `sensor.ecojoko_avg_watts_quotidien` | line | `#FF5252` | Consommation moyenne depuis 00h00 (Wh) |
-| Moy. 1er du mois | `sensor.ecojoko_avg_watts_mensuel` | — | — | Affichage en-tête uniquement (`in_chart: false`) |
-
-### Double axe Y
-
-| Axe | id | Côté | Usage |
-|-----|----|------|-------|
-| Puissance | `TempsReel` | Gauche | W (temps réel + moy glissante) |
-| Quotidien | `Minuit` | Droite | Wh (moy depuis minuit) — max `|+30|` |
-
----
-
-## 📅 SECTION HISTORIQUE 7 JOURS (OFFSET)
-
-```yaml
-- type: custom:apexcharts-card
-  experimental:
-    color_threshold: true
-  graph_span: 24h
-  cache: true
-  span:
-    end: day
-  header:
-    title: Historique 7 jours (offset)
-  apex_config:
-    chart:
-      height: 450px
-      type: area
-```
-
-### Principe technique
-Toutes les séries utilisent **la même entité** `sensor.ecojoko_consommation_reseau` avec un `offset` décalant la fenêtre de lecture dans le passé. Le recorder HA fournit les données historiques.
-
-### Séries
-
-| Série | Offset | Couleur | Description |
-|-------|--------|---------|-------------|
-| (Aujourd'hui) | aucun | `gainsboro` | Jour en cours |
-| J-1 | `-1d` | `rgb(204, 255, 204)` | Hier |
-| J-2 | `-2d` | `rgb(153, 255, 153)` | Avant-hier |
-| J-3 | `-3d` | `rgb(102, 255, 102)` | Il y a 3 jours |
-| J-4 | `-4d` | `rgb(51, 204, 51)` | Il y a 4 jours |
-| J-5 | `-5d` | `rgb(0, 153, 0)` | Il y a 5 jours |
-| J-6 | `-6d` | `rgb(0, 102, 0)` | Il y a 6 jours |
-| J-7 | `-7d` | `rgb(0, 70, 0)` | Il y a 7 jours |
-
-Dégradé de vert clair → vert foncé. `extend_to: false` sur toutes les séries passées. `group_by: func: last, duration: 10m`.
-
-> **Décision d'architecture** : Approche `offset` retenue (vs sensors J1-J7 abandonnés). Lit directement le recorder HA — aucune dépendance externe.
-
-### Entité unique
-- `sensor.ecojoko_consommation_reseau` [Ecojoko - UI]
-
----
-
-## 📋 SECTION TABLEAU LINKY (flex-table)
-
-```yaml
-- type: custom:flex-table-card
-  entities:
-    - sensor.linky_jour_0
-    - sensor.linky_jour_1
-    - ...
-    - sensor.linky_jour_7
-  columns:
-    - name: Jour       / data: jour
-    - name: Total (kWh)/ data: total_kwh
-    - name: Coût (€)   / data: cout
-    - name: HP (kWh)   / data: hp_kwh
-    - name: HC (kWh)   / data: hc_kwh
-```
-
-Tableau de 8 lignes (J0 = aujourd'hui → J7 = il y a 7 jours) affichant jour, total kWh, coût €, détail HP/HC.
-
-### Entités
-- `sensor.linky_jour_0` à `sensor.linky_jour_7` [MyElectricalData - UI]
-
----
-
-## 📊 SECTION GRAPHIQUE MENSUEL PAR JOURS
-
-```yaml
-- type: custom:apexcharts-card
-  graph_span: 31d
-  cache: true
-  span:
-    start: month
-  apex_config:
-    chart:
-      height: 400px
-```
-
-### Séries
 
 | Série | Entité | Type | Axe | Rôle |
 |-------|--------|------|-----|------|
-| Conso. ce jour | `sensor.ecojoko_avg_watts_quotidien` | column | `daily` | Barres journalières kWh (`func: max, duration: 24h`) |
-| Moy. glissante (Mois) | `sensor.ecojoko_consommation_reseau` | line | `daily` | Tendance mensuelle (`func: avg, duration: 730h`) |
+| Conso. ce jour | `sensor.ecojoko_avg_watts_quotidien` | column | `daily` | Barres kWh (`func: max, duration: 24h`) |
+| Moy. glissante mois | `sensor.ecojoko_consommation_reseau` | line | `daily` | `func: avg, duration: 730h` |
 | Moy. depuis minuit | `sensor.ecojoko_avg_watts_quotidien` | line | `moyenne` | Axe secondaire Wh |
-| Moy. 1er du Mois | `sensor.ecojoko_avg_watts_mensuel` | — | `daily` | En-tête uniquement (`in_chart: false`) |
+| Moy. 1er du mois | `sensor.ecojoko_avg_watts_mensuel` | — | `daily` | En-tête uniquement (`in_chart: false`) |
 
-### Double axe Y
+**5. Synthèse Usages Mensuels + Donut**
 
-| Axe | id | Côté | Max |
-|-----|----|------|-----|
-| Journalier | `daily` | Gauche | auto |
-| Moyenne | `moyenne` | Droite (caché) | `~500` |
+Max dynamique : `sensor.diag_max_poste_mensuel_dynamique`.
 
----
+| Poste | Entité |
+|-------|--------|
+| Hygiène | `sensor.diag_poste_hygiene_mensuel` |
+| Cuisson | `sensor.diag_poste_cuisine_mensuel` |
+| Froid | `sensor.diag_poste_froid_mensuel` |
+| Chauffage | `sensor.diag_poste_chauffage_mensuel` |
+| Multimedia | `sensor.diag_poste_multimedia_mensuel` |
+| Lumière | `sensor.diag_poste_eclairage_mensuel` |
+| Autres | `sensor.diag_poste_autre_mensuel` |
 
-## 🏭 SECTION SYNTHÈSE USAGES (JOUR + MOIS)
+Donut : `group_by: func: diff, duration: 24h`.
 
-4 cartes organisées : 2 × bar-card + 2 × donut (ApexCharts).
-
-### Bar-card SYNTHÈSE USAGES — Jour en cours
-
-```yaml
-- type: custom:auto-entities
-  card:
-    type: custom:bar-card
-    title: SYNTHÈSE USAGES ( Jour en cours )
-    height: 35px
-    decimal: 2
-    unit_of_measurement: kWh
-    max: sensor.max_conso_quotidien_dynamique
-```
-
-Barre horizontale pour chaque poste, triée par état décroissant (`sort: method: state, reverse: true`).
-
-### Bar-card SYNTHÈSE USAGES — Mois en cours
-
-Identique avec les entités `_mensuel` et `max: sensor.max_conso_mensuelle_dynamique`.
-
-### Les 7 postes de consommation
-
-| Poste | Entité (quotidien) | Entité (mensuel) | Icône | Couleur |
-|-------|-------------------|-----------------|-------|---------|
-| Hygiène | `sensor.diag_poste_1_hygiene_quotidien` | `..._mensuel` | `mdi:water` | `#00BFFF` |
-| Cuisson | `sensor.diag_poste_2_cuisson_quotidien` | `..._mensuel` | `mdi:stove` | `#FF4500` |
-| Froid | `sensor.diag_poste_3_froid_quotidien` | `..._mensuel` | `mdi:snowflake` | `#87CEEB` |
-| Chauffage | `sensor.diag_poste_4_chauffage_quotidien` | `..._mensuel` | `mdi:fire` | `#FFA500` |
-| Multimedia | `sensor.diag_poste_5_multimedia_quotidien` | `..._mensuel` | `mdi:desktop-tower-monitor` | `#9370DB` |
-| Lumière | `sensor.diag_poste_6_lumiere_quotidien` | `..._mensuel` | `mdi:lightbulb` | `#ADFF2F` |
-| Autres | `sensor.diag_poste_7_autres_quotidien` | `..._mensuel` | `mdi:account` | `lightgrey` |
-
-> Sources : `templates/P0_Energie_total_diag/Diag/diag_conso_jour_en_cours.yaml` (quotidien)
-> et `templates/P0_Energie_total_diag/Diag/diag_conso_mois_en_cours.yaml` (mensuel)
-
----
-
-### Donut ApexCharts — Répartition aujourd'hui
-
-```yaml
-- type: custom:auto-entities
-  card:
-    type: custom:apexcharts-card
-    chart_type: donut
-    graph_span: 24h
-    header:
-      title: Répartition consommation aujourd'hui
-```
-
-- DataLabels en `%` (1 décimale)
-- Tooltip en `kWh` (2 décimales)
-- Légende masquée (`show: false`)
-- `group_by: func: last, duration: 24h`
-
----
-
-### Donut ApexCharts — Répartition mois en cours
-
-Identique mais avec les entités `_mensuel` et `group_by: func: diff, duration: 24h`.
+> Source : `templates/P0_Energie_total_diag/Diag/diag_conso_mois_en_cours.yaml`
 
 ---
 
@@ -657,9 +570,9 @@ Identique mais avec les entités `_mensuel` et `group_by: func: diff, duration: 
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.conso_mini` | Puissance min du jour (W) — talon standby | `sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg.yaml` |
-| `sensor.conso_maxi` | Puissance max du jour (W) — pic | idem |
-| `sensor.ecojoko_avg_watts_quotidien` | Moyenne Wh depuis minuit | `templates/P0_Energie_total_diag/Ecojoko/04_AVG_ecojoko.yaml` |
+| `sensor.ecojoko_conso_mini_24h` | Puissance min sur 24h (W) — talon standby | Intégration Ecojoko [UI] |
+| `sensor.ecojoko_conso_maxi_24h` | Puissance max sur 24h (W) — pic | Intégration Ecojoko [UI] |
+| `sensor.ecojoko_avg_watts_quotidien` | Moyenne Wh depuis minuit | `templates/P0_Energie_total_diag/Ecojoko/03_AVG_ecojoko.yaml` |
 | `sensor.ecojoko_avg_watts_mensuel` | Moyenne Wh depuis le 1er du mois | idem |
 
 ---
@@ -671,6 +584,16 @@ Identique mais avec les entités `_mensuel` et `group_by: func: diff, duration: 
 | `sensor.ecojoko_reseau_quotidien_um` | daily | `utility_meter/P0_Energie_total/Ecojoko/02_UM_ecojoko_quotidien_live.yaml` |
 | `sensor.ecojoko_hp_reseau_quotidien_um` | daily | idem |
 | `sensor.ecojoko_hc_reseau_quotidien_um` | daily | idem |
+
+---
+
+### 🔢 Utility Meters Hebdomadaires (Ecojoko)
+
+| Entité | Cycle | Source |
+|--------|-------|--------|
+| `sensor.ecojoko_reseau_hebdomadaire_um` | weekly | `utility_meter/P0_Energie_total/Ecojoko/01_UM_AMHQ_cost.yaml` |
+| `sensor.ecojoko_hp_reseau_hebdomadaire_um` | weekly | idem |
+| `sensor.ecojoko_hc_reseau_hebdomadaire_um` | weekly | idem |
 
 ---
 
@@ -690,6 +613,9 @@ Identique mais avec les entités `_mensuel` et `group_by: func: diff, duration: 
 | `sensor.ecojoko_cout_total_quotidien` | Quotidien | `templates/P0_Energie_total_diag/Ecojoko/01_ecojoko_AMHQ_cost.yaml` |
 | `sensor.ecojoko_cout_hp_quotidien` | Quotidien | idem |
 | `sensor.ecojoko_cout_hc_quotidien` | Quotidien | idem |
+| `sensor.ecojoko_cout_total_hebdomadaire` | Hebdomadaire | idem |
+| `sensor.ecojoko_cout_hp_hebdomadaire` | Hebdomadaire | idem |
+| `sensor.ecojoko_cout_hc_hebdomadaire` | Hebdomadaire | idem |
 | `sensor.ecojoko_cout_total_mensuel` | Mensuel | idem |
 | `sensor.ecojoko_cout_hp_mensuel` | Mensuel | idem |
 | `sensor.ecojoko_cout_hc_mensuel` | Mensuel | idem |
@@ -701,6 +627,7 @@ Identique mais avec les entités `_mensuel` et `group_by: func: diff, duration: 
 | Entité | Période | Source |
 |--------|---------|--------|
 | `sensor.ecojoko_ratio_hc_quotidien` | Quotidien (%) | `templates/P0_Energie_total_diag/Ecojoko/02_ratio_hp_hc.yaml` |
+| `sensor.ecojoko_ratio_hc_hebdomadaire` | Hebdomadaire (%) | idem |
 | `sensor.ecojoko_ratio_hc_mensuel` | Mensuel (%) | idem |
 
 ---
@@ -726,15 +653,17 @@ Identique mais avec les entités `_mensuel` et `group_by: func: diff, duration: 
 
 ### 🏭 Diagnostic Postes (7 catégories)
 
-| Entité (quotidien) | Entité (mensuel) | Source |
-|-------------------|-----------------|--------|
-| `sensor.diag_poste_1_hygiene_quotidien` | `..._mensuel` | `templates/P0_Energie_total_diag/Diag/diag_conso_jour_en_cours.yaml` |
-| `sensor.diag_poste_2_cuisson_quotidien` | `..._mensuel` | idem |
-| `sensor.diag_poste_3_froid_quotidien` | `..._mensuel` | idem |
-| `sensor.diag_poste_4_chauffage_quotidien` | `..._mensuel` | idem |
-| `sensor.diag_poste_5_multimedia_quotidien` | `..._mensuel` | idem |
-| `sensor.diag_poste_6_lumiere_quotidien` | `..._mensuel` | idem |
-| `sensor.diag_poste_7_autres_quotidien` | `..._mensuel` | idem |
+| Entité (quotidien) | Entité (hebdomadaire) | Entité (mensuel) | Source |
+|-------------------|-----------------------|-----------------|--------|
+| `sensor.diag_poste_hygiene_quotidien` | `..._hebdomadaire` | `..._mensuel` | `templates/P0_Energie_total_diag/Diag/diag_conso_jour_en_cours.yaml` |
+| `sensor.diag_poste_cuisine_quotidien` | `..._hebdomadaire` | `..._mensuel` | idem |
+| `sensor.diag_poste_froid_quotidien` | `..._hebdomadaire` | `..._mensuel` | idem |
+| `sensor.diag_poste_chauffage_quotidien` | `..._hebdomadaire` | `..._mensuel` | idem |
+| `sensor.diag_poste_multimedia_quotidien` | `..._hebdomadaire` | `..._mensuel` | idem |
+| `sensor.diag_poste_eclairage_quotidien` | `..._hebdomadaire` | `..._mensuel` | idem |
+| `sensor.diag_poste_autre_quotidien` | `..._hebdomadaire` | `..._mensuel` | idem |
+
+> ⚠️ **[modif 2026-03-20]** : Les noms de sensors ont été simplifiés — suppression du numéro de poste (ex: `diag_poste_1_hygiene_*` → `diag_poste_hygiene_*`). Le nom `lumiere` a été renommé en `eclairage`. Le nom `cuisson` remplace `2_cuisson`. Vérifier dans États HA les noms exacts en production.
 
 ---
 
@@ -742,17 +671,18 @@ Identique mais avec les entités `_mensuel` et `group_by: func: diff, duration: 
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.max_conso_quotidien_dynamique` | Max du jour (pour échelle bar-card) | `templates/P0_Energie_total_diag/Diag/` |
-| `sensor.max_conso_mensuelle_dynamique` | Max du mois (pour échelle bar-card) | idem |
+| `sensor.diag_max_poste_quotidien_dynamique` | Max du jour (pour échelle bar-card) | `templates/P0_Energie_total_diag/Diag/` |
+| `sensor.diag_max_poste_hebdomadaire_dynamique` | Max de la semaine (pour échelle bar-card) | idem |
+| `sensor.diag_max_poste_mensuel_dynamique` | Max du mois (pour échelle bar-card) | idem |
 
 ---
 
 ## 🐛 DÉPANNAGE
 
 ### Les ring-tiles affichent "unavailable"
-1. Vérifier que `sensor.conso_mini` et `sensor.conso_maxi` existent dans Outils de développement > États
-2. Ces sensors utilisent `platform: statistics` sur `sensor.ecojoko_consommation_temps_reel` — vérifier le fichier `sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/`
-3. Attendre ~1h après redémarrage HA (les statistics ont besoin d'un historique minimal)
+1. Vérifier que `sensor.ecojoko_conso_mini_24h` et `sensor.ecojoko_conso_maxi_24h` existent dans Outils de développement > États
+2. Ces sensors sont fournis nativement par l'intégration Ecojoko (`little_monkey`) — vérifier que l'intégration est active et configurée
+3. Attendre quelques minutes après redémarrage HA si les valeurs n'apparaissent pas immédiatement
 
 ### Les coûts affichent 0 ou "unknown"
 1. Vérifier que `sensor.tarif_heures_pleines_ttc` et `sensor.tarif_heures_creuses_ttc` existent (intégration `tarif_edf`)
@@ -774,7 +704,7 @@ Identique mais avec les entités `_mensuel` et `group_by: func: diff, duration: 
 3. Si les données Linky sont en retard (J-1 max), c'est normal (données Enedis transmises le lendemain)
 
 ### Les donuts SYNTHÈSE USAGES affichent des valeurs incohérentes
-1. Vérifier que les sensors `diag_poste_*_quotidien` existent dans États
+1. Vérifier que les sensors `diag_poste_hygiene_quotidien`, `diag_poste_cuisine_quotidien`, etc. existent dans États (sans numérotation)
 2. Ces sensors proviennent de `templates/P0_Energie_total_diag/Diag/` — vérifier le fichier source
 3. Le `group_by: func: diff, duration: 24h` sur le donut mensuel peut donner des valeurs nulles en début de mois
 
@@ -788,6 +718,7 @@ Identique mais avec les entités `_mensuel` et `group_by: func: diff, duration: 
 | MyElectricalData / Linky | HACS Integration | ✅ Essentiel |
 | `tarif_edf` | Custom component | ✅ Requis pour les coûts |
 | `ring-tile-card` | HACS Frontend | ✅ Essentiel (Mini/Réel/Maxi) |
+| `tabbed-card` | HACS Frontend | ✅ Essentiel (onglets JOURNALIER/HEBDO/MENSUEL) |
 | `energy-overview-card` | HACS Frontend | ✅ Essentiel (flux Enedis) |
 | `content-card-linky` | HACS Frontend | ✅ Essentiel (ratios Linky) |
 | `apexcharts-card` | HACS Frontend | ✅ Essentiel (tous graphiques) |
@@ -811,8 +742,9 @@ Identique mais avec les entités `_mensuel` et `group_by: func: diff, duration: 
 | Ratios HP/HC | `templates/P0_Energie_total_diag/Ecojoko/02_ratio_hp_hc.yaml` |
 | Moyennes Ecojoko | `templates/P0_Energie_total_diag/Ecojoko/04_AVG_ecojoko.yaml` |
 | Diag postes (jour) | `templates/P0_Energie_total_diag/Diag/diag_conso_jour_en_cours.yaml` |
+| Diag postes (hebdo) | `templates/P0_Energie_total_diag/Diag/diag_conso_hebdomadaire_en_cours.yaml` |
 | Diag postes (mois) | `templates/P0_Energie_total_diag/Diag/diag_conso_mois_en_cours.yaml` |
-| Mini / Maxi (W) | `sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg.yaml` |
+| Mini / Maxi (W) | Intégration Ecojoko [UI] — `sensor.ecojoko_conso_mini/maxi_24h` |
 | Vignette d'accès | `docs/L2C1_ENERGIE/L2C1_VIGNETTE_ENERGIE.md` |
 
 ---

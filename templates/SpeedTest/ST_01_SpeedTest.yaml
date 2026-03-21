@@ -8,32 +8,43 @@
 # Conversion bits/s → Mbps pour Download et Upload, ms pour Ping.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Source     : sensor.speedtest_cli_data (attributs JSON : download, upload, ping)
-# - Download   : dl.bandwidth / 125000 → Mbps (1 Mbps = 125 000 octets/s)
-# - Upload     : ul.bandwidth / 125000 → Mbps
-# - Ping       : p.latency → ms (valeur directe, arrondie à 1 décimale)
-# - Fallback   : "Indisponible" si l'attribut est absent ou non défini
+# - Source unique : sensor.speedtest_cli_data [NAT] (attributs JSON imbriqués)
+# - Download      : state_attr(..., 'download').bandwidth / 125000 → Mbps
+# - Upload        : state_attr(..., 'upload').bandwidth / 125000 → Mbps
+# - Ping          : state_attr(..., 'ping').latency → ms (valeur directe)
+# - Fallback      : "Indisponible" si l'attribut est absent ou non défini
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - sensor.speedtest_cli_data doit être configuré via l'intégration Speedtest CLI.
-# - Les attributs .bandwidth et .latency sont dans des sous-objets JSON (download{},
-#   upload{}, ping{}) — ne pas accéder directement à l'attribut racine.
-# - Le test speedtest ne se lance pas en continu : les valeurs sont "gelées"
-#   entre deux exécutions planifiées (toutes les X minutes selon la config).
+# - sensor.speedtest_cli_data ≠ sensor.speedtest_download
+#   └── sensor.speedtest_cli_data  : capteur parent [NAT] source de CE fichier
+#   └── sensor.speedtest_download  : entité native séparée [NAT] utilisée comme
+#       cible du homeassistant.update_entity dans la page L4C1 pour déclencher
+#       le test — elle n'alimente PAS ces templates.
+# - Les attributs .bandwidth et .latency sont dans des sous-objets JSON
+#   (download{}, upload{}, ping{}) — accès direct à l'attribut racine invalide.
+# - Les valeurs sont "gelées" entre deux tests planifiés. Le déclenchement
+#   manuel via update_entity sur sensor.speedtest_download force un nouveau test.
+# - Pas de device_class standard HA pour la vitesse réseau (Mbps) ni le ping (ms).
+#   state_class: measurement activé pour que les valeurs soient enregistrées
+#   correctement dans la base (courbe historique dans les mini-graph-card).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L4C1 : Freebox Pop / Réseau (sensor.speedtest_cli_download / upload / ping)
+# - L4C1 Freebox Pop → Page /systeme-freebox → Pop-up #speedtest_details
+#   └── sensor.speedtest_cli_download → mini-graph 24h (seuils 100/200/400/600/800 Mbps)
+#   └── sensor.speedtest_cli_upload   → mini-graph 24h (seuils 50/100/200/400/600 Mbps)
+#   └── sensor.speedtest_cli_ping     → mini-graph 24h (seuils 40/35/30/25/20 ms)
 
 - sensor:
 
     # ┌───────────────────────────────────┐
-    # │ 1. SPEEDTEST CLI                  │
+    # │ [ ST ] SPEEDTEST CLI              │
     # └───────────────────────────────────┘
 
     # --- speedtest_cli_download ---
     - name: "Speedtest CLI Download"
       unique_id: speedtest_cli_download
       unit_of_measurement: "Mbps"
+      state_class: measurement
       icon: mdi:download-network
       state: >
         {% set dl = state_attr('sensor.speedtest_cli_data', 'download') %}
@@ -47,6 +58,7 @@
     - name: "Speedtest CLI Upload"
       unique_id: speedtest_cli_upload
       unit_of_measurement: "Mbps"
+      state_class: measurement
       icon: mdi:upload-network
       state: >
         {% set ul = state_attr('sensor.speedtest_cli_data', 'upload') %}
@@ -60,6 +72,7 @@
     - name: "Speedtest CLI Ping"
       unique_id: speedtest_cli_ping
       unit_of_measurement: "ms"
+      state_class: measurement
       icon: mdi:timer-outline
       state: >
         {% set p = state_attr('sensor.speedtest_cli_data', 'ping') %}
@@ -70,8 +83,9 @@
         {% endif %}
 
 # annotations_log:
-# - [L1]   Boîte ASCII arrondie 74 tirets ajoutée (absente sur GitHub).
-# - [L2]   Titre ajouté : "[ ST ] TEMPLATES : SPEEDTEST CLI — DOWNLOAD / UPLOAD / PING".
-# - [L4-18] Bloc documentation obligatoire ajouté (DESCRIPTION / CALCUL / PIÈGES / VIGNETTE).
-# - [L22]  Titre secondaire boîte carrée 37 car. ajouté.
-# - [L27,37,47] Titres tertiaires slugs ajoutés (speedtest_cli_download / upload / ping).
+# - [L1]   Boîte ASCII arrondie 74 tirets (absente sur GitHub → ajoutée).
+# - [L2]   Titre : "[ ST ] TEMPLATES : SPEEDTEST CLI — DOWNLOAD / UPLOAD / PING".
+# - [L10]  CALCUL : précision ajoutée — distinction sensor.speedtest_cli_data vs sensor.speedtest_download.
+# - [L18]  IMPORTANT : note critique ajoutée sur les deux entités Speedtest distinctes.
+# - [L27]  TABLEAU DE BORD : chemin L4C1 → page → popup + seuils couleur documentés.
+# - [L39,51,62] state_class: measurement ajouté sur les 3 sensors (historique DB).
