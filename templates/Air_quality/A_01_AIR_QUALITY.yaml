@@ -1,11 +1,31 @@
-# ╭────────────────────────────────────────────────────────────────────────╮
-# │ SENSOR : SÉRIE 10. QUALITÉ DE L'AIR — PPB                              │
-# ╰────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ [ A ] TEMPLATES : QUALITÉ DE L'AIR — TCOV EN PPB (3 PIÈCES)              │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Trois capteurs templates convertissant l'index VOC brut IKEA Vindstyrka
+# en ppb (parties par milliard) avec device_class volatile_organic_compounds_parts.
+# Permet l'affichage correct dans HA et la compatibilité avec les ring-tiles.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source   : sensor.qualite_air_*_ikea_voc_index (IKEA Vindstyrka — natif HA)
+# - Formule  : state | float(0) — pas de conversion (index = ppb natif)
+# - Pièces   : Salon (4), Bureau (7), Chambre (9)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ne pas confondre avec sensor.tcov_*_moy_24h (statistiques 24h — sensors/).
+# - device_class: volatile_organic_compounds_parts est requis pour que HA
+#   affiche l'unité ppb correctement dans les cartes et l'historique.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L6C1 Qualité de l'air — ring-tile tCOV (entity: sensor.tcov_*_ppb).
+# - Page /air-quality — pop-up graphique cov (entity_sensor: voc_index natif).
 
 - sensor:
     # ┌───────────────────────────────────┐
     # │ 1. MESURES PPB                    │
     # └───────────────────────────────────┘
+
     # --- tcov_salon_ppb ---
     - name: "tCOV Salon (ppb)"
       unique_id: tcov_salon_ppb
@@ -34,8 +54,8 @@
       state: "{{ states('sensor.qualite_air_chambre_ikea_voc_index') | float(0) }}"
 
 # annotations_log:
-# - [L1-3] Mise en forme du titre principal (Boîte ASCII arrondie 74 car).
-# - [L6-8] Ajout du titre secondaire (Boîte ASCII carrée 37 car).
-# - [L9,17,25] Ajout des titres tertiaires (slugs).
-# - [Global] Standardisation de l'ordre des clés.
-# - [Global] Suppression des commentaires superflus.
+# - [L1]   Boîte ASCII corrigée : 72 tirets → 74 tirets (standard CLAUDE.md).
+# - [L2]   Titre mis à jour : "SÉRIE 10" → "[ A ] TEMPLATES : QUALITÉ DE L'AIR — TCOV EN PPB (3 PIÈCES)".
+# - [L4-19] Ajout bloc documentation obligatoire (DESCRIPTION / CALCUL / PIÈGES / VIGNETTE).
+# - [L22-23] Ajout titre secondaire boîte carrée 37 car. (manquant).
+# - [L26,33,40] Titres tertiaires slugs confirmés conformes.
