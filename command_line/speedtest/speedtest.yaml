@@ -1,0 +1,18 @@
+- sensor:
+    name: "Speedtest CLI Data"
+    unique_id: speedtest_cli_data
+    command: "/config/speedtest --format=json --accept-license --accept-gdpr"
+    value_template: >
+      {% if value_json is defined and value_json.ping is defined %}
+        {{ value_json.ping.latency | round(1) }}
+      {% else %}
+        Indisponible
+      {% endif %}
+    unit_of_measurement: "ms"
+    json_attributes:
+      - ping
+      - download
+      - upload
+      - server
+      - result
+    scan_interval: 3600
