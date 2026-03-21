@@ -1,0 +1,24 @@
+- sensor:
+    - name: "Speedtest CLI Download"
+      unique_id: speedtest_cli_download
+      unit_of_measurement: "Mbps"
+      icon: mdi:download-network
+      state: >
+        {% set dl = state_attr('sensor.speedtest_cli_data', 'download') %}
+        {% if dl and dl.bandwidth is defined %}
+          {{ (dl.bandwidth / 125000) | round(1) }}
+        {% else %}
+          Indisponible
+        {% endif %}
+
+    - name: "Speedtest CLI Upload"
+      unique_id: speedtest_cli_upload
+      unit_of_measurement: "Mbps"
+      icon: mdi:upload-network
+      state: >
+        {% set ul = state_attr('sensor.speedtest_cli_data', 'upload') %}
+        {% if ul and ul.bandwidth is defined %}
+          {{ (ul.bandwidth / 125000) | round(1) }}
+        {% else %}
+          Indisponible
+        {% endif %}
