@@ -1,5 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES — TOUTES LES VIGNETTES
-*Dernière mise à jour : 2026-03-21 (session 5 — s11)*
+*Dernière mise à jour : 2026-03-21 (session 8 — s16)*
 
 > **RÈGLE :** Ce fichier est mis à jour obligatoirement à chaque création ou modification d'une doc de vignette (`docs/L*`).
 > Format : Vignette → Carte → Template/Sensor → Utility Meter → Source native HA
@@ -172,27 +172,80 @@ L2C3 Éclairage kWh
 
 ## LIGNE 3 — COMMANDES & ACTIONNEURS
 
-### 🔲 L3C1 — Commandes Éclairage
+### ✅ L3C1 — Commandes Éclairage
+`docs/L3C1_ECLAIRAGE/`
 
 ```
 L3C1 Éclairage
-  └── [NAT] light.* (Hue Bridge + Sonoff ZBMINIL2 miroir SDB)
-        └── États UI → [TPL] P3_eclairage/ui_dashboard/etats_status.yaml
+  ├── Vignette (custom:button-card — grid 3 cols Pièce / État / Compteur)
+  │     ├── [TPL] sensor.lumiere_appartement_etat  → etats_status.yaml
+  │     ├── [TPL] sensor.lumiere_salon_etat         → etats_status.yaml
+  │     ├── [TPL] sensor.lumiere_cuisine_etat       → etats_status.yaml
+  │     ├── [TPL] sensor.bureau_etat                → etats_status.yaml
+  │     ├── [TPL] sensor.lumiere_ecran_etat         → etats_status.yaml
+  │     ├── [TPL] sensor.lumiere_salle_de_bain_etat → etats_status.yaml
+  │     ├── [TPL] sensor.chambre_etat               → etats_status.yaml
+  │     ├── [NAT] light.entree / couloir / salon / table / cuisine
+  │     ├── [NAT] light.lampe_salle_de_bain_hue
+  │     ├── [NAT] light.chambre / hue_color_candle_chambre_gege / _eric
+  │     └── [NAT] switch.prise_tete_de_lit_chambre
+  └── Page /dashboard-tablette/lumieres ✅ documentée [s16]
+        ├── mushroom-entity-card × 7 pièces (Entrée/Salon/Table/Cuisine/Couloir/SdB/Chambre)
+        │     └── flame animation card_mod — trigger état natif light.*
+        ├── vertical-stack-in-card Bureau (cols 6) + conditional Ecran (cols 6)
+        │     ├── [TPL] sensor.lumiere_bureau_etat / sensor.lumiere_ecran_etat → etats_status.yaml
+        │     ├── [NAT] light.bureau / hue_white_lamp_bureau_1+2
+        │     ├── [NAT] light.hue_play_1/2/3_pc_bureau + light.moniteur_pc
+        │     ├── [NAT] switch.ecran_p_c_3_play_hue (conditional Ecran)
+        │     └── mushroom-chips-card pastilles → popups #bureau / #ecranpc
+        ├── conditional Têtes de Lit (cols 12) — [NAT] switch.prise_tete_de_lit_chambre
+        │     └── mushroom-chips-card pastille → popup #tete_de_lit
+        ├── Popups bubble-card × 3 (#bureau / #ecranpc / #tete_de_lit)
+        │     └── mushroom-light-card + custom:button-card grilles 25/50/75/100%
+        ├── [NAT] light.hue_color_candle_chambre_gege / _eric (têtes de lit)
+        ├── [NAT] switch.relais_lumiere_sdb_sonoff + light.lampe_salle_de_bain_hue
+        └── streamline-card template: nav_bar
+
+  ✅ [B1] Badge lumiere_ecran_etat `:host` — ajout 'Allumé & Sync.'/'Synchro.' [s16]
+  ✅ [B2] SDB use_number undefined — {% set use_number = false %} ajouté [s16]
+  ✅ [B3] Pastille Ecran — display:none si état ≠ Écran|Allumé [s16]
+  ℹ️ Compteur Chambre dynamique : total 1 si prise OFF / 3 si prise ON (bougies)
+  ℹ️ Compteur Bureau : logique 6 états depuis sensor.bureau_etat + sensor.lumiere_ecran_etat
+  ℹ️ Heading Têtes de Lit masqué si prise OFF — comportement intentionnel (pas d'alim = pas de lampes)
+  ⚡ CHAÎNE ABSENCE : WiFi/Cell OFF → binary_sensor.presence_maison → automation coupe prises éco
+       → switch.ecran_p_c_3_play_hue OFF → carte Ecran disparaît
+       → switch.prise_tete_de_lit_chambre OFF → heading + carte Têtes de Lit disparaissent
+       (logique amont : P4_groupe_presence / docs/WIFI_PRESENCE)
 ```
 
 ---
 
-### 🔲 L3C2 — Commandes Éco (Prises)
+### ✅ L3C2 — Commandes Éco (Prises)
+`docs/L3C2_PRISES/`
 
 ```
 L3C2 Prises
-  ├── Consommation en cours (W)
-  │     └── [NAT] sensor.*_power (Meross / Sonoff)
-  ├── Standby global
-  │     └── [TPL] P2_prise/P2_I_all_standby_power/P2_ current_all_standby.yaml
-  └── kWh prises
-        └── [SNS] P2_prise/P2_kWh_prises.yaml
-              └── [UM] P2_prise/P2_AVG/P2_UM_AMHQ_prises.yaml
+  ├── Vignette (custom:button-card — grid 2 cols Pièce / État)
+  │     ├── [NAT] switch.prise_horloge_ikea          (IKEA — 1. ENTRÉE)
+  │     ├── [NAT] light.hue_smart_eco_salon           (Hue — 4. SALON)
+  │     ├── [NAT] switch.prise_tv_salon_ikea          (IKEA — 4. SALON)
+  │     ├── [NAT] switch.hue_smart_eco_pc_bureau      (Hue — 7. BUREAU)
+  │     ├── [NAT] light.hue_smart_eco_tv_chambre      (Hue — 9. CHAMBRE)
+  │     └── [NAT] switch.prise_tete_de_lit_chambre    (9. CHAMBRE)
+  └── Page /dashboard-tablette/prises ✅ documentée [s14]
+        ├── mushroom-entity-card × 6 (toggle W/A/V badges + animation)
+        │     ├── [NAT] switch.prise_horloge_ikea → sensor.prise_horloge_ikea_*
+        │     ├── [NAT] light.hue_smart_eco_salon → sensor.prise_salon_chargeur_nous_*
+        │     ├── [NAT] switch.prise_tv_salon_ikea → sensor.prise_tv_salon_ikea_* (🐛 corr. L2)
+        │     ├── [NAT] switch.hue_smart_eco_pc_bureau → sensor.prise_bureau_pc_ikea_*
+        │     ├── [NAT] light.hue_smart_eco_tv_chambre → sensor.prise_tv_chambre_nous_*
+        │     └── [NAT] switch.prise_tete_de_lit_chambre → sensor.prise_tete_de_lit_chambre_*
+        └── streamline-card template: nav_bar
+
+  ⚠️ Mix domaines : 2 entités light.* + 4 switch.* — état on/off compatible JS
+  ✅ [L1] TV Salon : show_ma = ture → voulu (affichage mA — confirmé s14)
+  🐛 [L2] TV Salon : sensor.light.hue_smart_tv_salon_* → entity_id invalide
+  ⚠️ [L3] Salon : light.hue_smart_eco_salon togglee mais capteurs = prise_salon_chargeur_nous — à vérifier
 ```
 
 ---
@@ -247,6 +300,7 @@ L4C1 Freebox
         ├── [TPL] sensor.speedtest_cli_upload    → templates/SpeedTest/ST_01_speedTest.yaml
         └── [TPL] sensor.speedtest_cli_ping      → templates/SpeedTest/ST_01_speedTest.yaml
 
+✅ ST_01_speedTest.yaml présent sur GitHub [confirmé s13]
 ⚠️ Page originellement optimisée pour Raspberry Pi — ajustements possibles sur x86-64
 ```
 
@@ -300,11 +354,34 @@ L5C1 Batteries
 
 ---
 
-### 🔲 L5C2 — Batterie Portail
+### ✅ L5C2 — Batteries Portables
+`docs/L5C2_BATTERIES_PORTABLES/`
+
+> ⚠️ Label corrigé : "Batterie Portail" → "Batteries Portables" — le contenu réel est la surveillance des téléphones mobiles.
 
 ```
-L5C2 Batterie Portail
-  └── [NAT] sensor.portail_battery (%) — à préciser
+L5C2 Batteries Portables
+  ├── Vignette (custom:button-card — grid 3 cols : Appareil / Niveau% / État)
+  │     ├── [NAT] sensor.poco_x7_pro_battery_level / _state
+  │     ├── [NAT] sensor.poco_x7_pro_mamour_battery_level / _state
+  │     ├── [NAT] sensor.ne2213_eric_battery_level / _state
+  │     ├── [NAT] sensor.ne2213_mamour_battery_level / _state
+  │     ├── [NAT] sensor.gm1901_battery_level / _state
+  │     ├── [NAT] sensor.sm_a530f_battery_level / _state
+  │     └── [NAT] sensor.tablette_battery_level / _state
+  └── Page /phone (2 grilles : Eric conditional / Mamour sans conditional)
+        ├── Grille Eric (4 appareils — conditional si unavailable/unknown)
+        │     ├── POCO X7 Pro (E)   : streamline portable + 7 entités
+        │     ├── NE2213 Eric       : streamline portable + 7 entités
+        │     ├── SM-A530F          : streamline portable + 5 entités (pas réseau)
+        │     └── Tablette          : streamline portable + 5 entités (pas réseau)
+        └── Grille Mamour (3 appareils — pas de conditional)
+              ├── POCO X7 Pro (M)   : streamline portable + 7 entités
+              ├── NE2213 Mamour     : streamline portable + 7 entités
+              └── GM1901            : streamline portable + 7 entités
+
+  → Toutes entités natives Android Companion App (aucun YAML)
+  → custom:streamline-card template: portable requis
 ```
 
 ---
@@ -357,22 +434,56 @@ L6C1 Air intérieur
 
 ---
 
-### 🔲 L6C2 — Pollution / Pollen (Extérieur)
+### ✅ L6C2 — Pollution / Pollen (Extérieur) — Pollulèn ©
+`docs/L6C2_POLLUTION_POLLEN/`
 
 ```
-L6C2 Pollution ext.
-  └── [NAT] intégration AtmoFrance (HACS custom_components/atmofrance)
-        sensor.atmofrance_*
+L6C2 Pollulèn ©
+  ├── Vignette (custom:button-card — name JS dynamique, échelle 0-7 bicolore)
+  │     ├── [NAT] sensor.qualite_globale_vence        (indice air 0-7, attr: Libellé+Couleur)
+  │     └── [NAT] sensor.qualite_globale_pollen_vence (indice pollen 0-7, attr: Libellé+Couleur)
+  └── Page /pollen-pollution (column_span: 10)
+        ├── Section POLLENS
+        │     ├── entity-progress-card → sensor.qualite_globale_pollen_vence
+        │     └── Grid 3 cols — 6 ring-tile espèces (concentration + niveau)
+        │           Graminées / Ambroisie / Armoise / Aulne / Bouleau / Olivier
+        │           sensor.concentration_*_vence + sensor.niveau_*_vence
+        └── Section QUALITÉ DE L'AIR
+              ├── entity-progress-card → sensor.qualite_globale_vence
+              └── Grid 5 cols — 5 ring-tile polluants
+                    sensor.ozone_vence / dioxyde_d_azote / dioxyde_de_soufre / pm10 / pm25
+
+  → Toutes entités natives AtmoFrance HACS (custom_components/atmofrance — station Vence)
+  ⚠️ Typo à corriger : ring_type: opn → open (capteur O₃)
 ```
 
 ---
 
-### 🔲 L6C3 — Vigilance Eau
+### ✅ L6C3 — Vigilance Eau (Vigieau)
+`docs/L6C3_VIGIEAU/`
 
 ```
 L6C3 Vigieau
-  └── [NAT] intégration Vigieau (HACS custom_components/vigieau)
-        sensor.vigieau_*
+  ├── Vignette (custom:button-card — code à fournir)
+  │     ├── [NAT] sensor.alert_level_in_vence          (état textuel)
+  │     └── [NAT] sensor.alert_level_in_vence_numeric  (0→4, attr: Couleur + icon)
+  └── Page /vigieau (section SÉCHERESSE)
+        ├── custom:button-card — couleur fond dynamique
+        │     └── [NAT] sensor.alert_level_in_vence
+        │           États : null / vigilance / alerte / alerte_renforcee / crise
+        ├── custom:bar-card
+        │     └── [NAT] sensor.alert_level_in_vence_numeric (attr: Couleur)
+        └── custom:auto-entities (grid 4 colonnes)
+              └── [NAT] sensor.*_restrictions_vence
+                    États : Aucune restriction / Sensibilisation /
+                            Interdiction sauf exception / Interdiction
+
+  → Toutes entités natives Vigieau HACS (custom_components/vigieau — commune Vence)
+  ✅ browser_mod.popup OK — fire-dom-event v1 fonctionnel (intégration installée + navigateur rechargé)
+  ✅ Typo corrigé : rgb(254, 178, 76) — état alerte [s12]
+  ✅ Page Vigieau fonctionnelle en production [s13]
+  ✅ Vignette documentée — L6C3_VIGNETTE_VIGIEAU.md complété [s13]
+  ⚠️ Bug corrigé vignette : case 'vigilance' manquait un break — fallthrough vers alerte_renforcee [L1 s13]
 ```
 
 ---
@@ -405,17 +516,17 @@ Présence
 | L2C1 Énergie Générale | ✅ | ✅ |
 | L2C2 Énergie Clim | 🔲 | 🔲 |
 | L2C3 Énergie Éclairage | ✅ | ✅ |
-| L3C1 Commandes Éclairage | 🔲 | 🔲 |
-| L3C2 Commandes Prises | 🔲 | 🔲 |
+| L3C1 Commandes Éclairage | ✅ | ✅ |
+| L3C2 Commandes Prises | ✅ | ✅ |
 | L3C3 Fenêtres + Stores | ✅ | ✅ |
 | L4C1 Freebox | ✅ | ✅ |
 | L4C2 Mini PC | 🔲 | 🔲 |
 | L4C3 MAJ HA | ✅ | ✅ |
 | L5C1 Batteries | ✅ | ✅ |
-| L5C2 Batterie Portail | 🔲 | 🔲 |
+| L5C2 Batteries Portables | ✅ | ✅ |
 | L5C3 MariaDB | ✅ | ✅ |
 | L6C1 Air intérieur | ✅ | ✅ |
-| L6C2 Pollution ext. | 🔲 | 🔲 |
-| L6C3 Vigieau | 🔲 | 🔲 |
+| L6C2 Pollution ext. (Pollulèn ©) | ✅ | ✅ |
+| L6C3 Vigieau | ✅ | ✅ |
 | **PAGE HOME** | | |
 | Wifi / Présence | ✅ | ✅ |
