@@ -3,25 +3,33 @@
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Trois capteurs templates calculant Download (Mbps), Upload (Mbps) et Ping (ms)
-# depuis les attributs bruts de sensor.speedtest_cli_data (intégration CLI).
-# Conversion : bandwidth (bytes/s) / 125000 = Mbps.
+# Trois capteurs templates extrayant les métriques de bande passante depuis
+# le capteur parent sensor.speedtest_cli_data (intégration Speedtest CLI).
+# Conversion bits/s → Mbps pour Download et Upload, ms pour Ping.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Source    : sensor.speedtest_cli_data (intégration Speedtest CLI — command_line/)
-# - Download  : state_attr(..., 'download').bandwidth / 125000 → Mbps
-# - Upload    : state_attr(..., 'upload').bandwidth / 125000   → Mbps
-# - Ping      : state_attr(..., 'ping').latency                → ms
+# - Source     : sensor.speedtest_cli_data (attributs JSON : download, upload, ping)
+# - Download   : dl.bandwidth / 125000 → Mbps (1 Mbps = 125 000 octets/s)
+# - Upload     : ul.bandwidth / 125000 → Mbps
+# - Ping       : p.latency → ms (valeur directe, arrondie à 1 décimale)
+# - Fallback   : "Indisponible" si l'attribut est absent ou non défini
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - La source est speedtest_cli_data (CLI binaire) et NON speedtest_download_speed
-#   (intégration native HA Speedtest.net) — attributs structurés différents.
-# - Si le test n'a pas encore tourné, les attributs sont None → "Indisponible".
+# - sensor.speedtest_cli_data doit être configuré via l'intégration Speedtest CLI.
+# - Les attributs .bandwidth et .latency sont dans des sous-objets JSON (download{},
+#   upload{}, ping{}) — ne pas accéder directement à l'attribut racine.
+# - Le test speedtest ne se lance pas en continu : les valeurs sont "gelées"
+#   entre deux exécutions planifiées (toutes les X minutes selon la config).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L4C1 Freebox Pop (réseau — débit entrant/sortant/latence).
+# - L4C1 : Freebox Pop / Réseau (sensor.speedtest_cli_download / upload / ping)
 
 - sensor:
+
+    # ┌───────────────────────────────────┐
+    # │ 1. SPEEDTEST CLI                  │
+    # └───────────────────────────────────┘
+
     # --- speedtest_cli_download ---
     - name: "Speedtest CLI Download"
       unique_id: speedtest_cli_download
@@ -62,6 +70,8 @@
         {% endif %}
 
 # annotations_log:
-# - [L1-3]  Ajout boîte ASCII arrondie 78 car. (CLAUDE.md — header obligatoire).
-# - [L5-17] Ajout bloc documentation (DESCRIPTION / CALCUL / PIÈGES / VIGNETTE).
-# - [L20,26,32] Ajout titres tertiaires slugs (CLAUDE.md — titres tertiaires).
+# - [L1]   Boîte ASCII arrondie 74 tirets ajoutée (absente sur GitHub).
+# - [L2]   Titre ajouté : "[ ST ] TEMPLATES : SPEEDTEST CLI — DOWNLOAD / UPLOAD / PING".
+# - [L4-18] Bloc documentation obligatoire ajouté (DESCRIPTION / CALCUL / PIÈGES / VIGNETTE).
+# - [L22]  Titre secondaire boîte carrée 37 car. ajouté.
+# - [L27,37,47] Titres tertiaires slugs ajoutés (speedtest_cli_download / upload / ping).
