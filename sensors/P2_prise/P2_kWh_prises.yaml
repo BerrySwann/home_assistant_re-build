@@ -207,16 +207,3 @@
     unit_prefix: k
     unit_time: h
     round: 3
-
-# ┌───────────────────────────────────┐
-# │ 10. AUTRE                         │
-# └───────────────────────────────────┘
-# --- all_standby_energie_totale_kwh ---
-  - platform: integration
-    source: sensor.all_standby_power
-    name: "All Standby Energie Totale kWh"
-    unique_id: all_standby_energie_totale_kwh
-    method: left
-    unit_prefix: k
-    unit_time: h
-    round: 3

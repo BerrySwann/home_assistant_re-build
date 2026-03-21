@@ -141,44 +141,32 @@
 
 # --- alerte_grand_froid ---
     - name: 'Alerte Grand-froid'
-      unique_id: sensor.alerte_grand_froid
+      unique_id: alerte_grand_froid
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Grand-froid') %}
-        {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
-        {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
+        {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('', true) %}
         {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
-          {% set al = wa %}
-        {% elif 'jaune grand-froid' in ev %}
-          {% set al = 'Jaune' %}
-        {% elif 'orange grand-froid' in ev %}
-          {% set al = 'Orange' %}
-        {% elif 'rouge grand-froid' in ev %}
-          {% set al = 'Rouge' %}
+          {{ wa }}
+        {% elif ev is not none and 'grand-froid' in ev | lower %}
+          {% if 'rouge' in ev | lower %} Rouge {% elif 'orange' in ev | lower %} Orange {% else %} Jaune {% endif %}
         {% else %}
-          {% set al = 'Vert' %}
+          Vert
         {% endif %}
-        {{ al }}
       icon: mdi:snowflake
 
 # --- alerte_canicule ---
     - name: 'Alerte Canicule'
-      unique_id: sensor.alerte_canicule
+      unique_id: alerte_canicule
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Canicule') %}
-        {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
-        {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('') %}
+        {% set ev = state_attr('binary_sensor.meteoalarm', 'event') | default('', true) %}
         {% if wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
-          {% set al = wa %}
-        {% elif 'jaune canicule' in ev %}
-          {% set al = 'Jaune' %}
-        {% elif 'orange canicule' in ev %}
-          {% set al = 'Orange' %}
-        {% elif 'rouge canicule' in ev %}
-          {% set al = 'Rouge' %}
+          {{ wa }}
+        {% elif ev is not none and 'canicule' in ev | lower %}
+          {% if 'rouge' in ev | lower %} Rouge {% elif 'orange' in ev | lower %} Orange {% else %} Jaune {% endif %}
         {% else %}
-          {% set al = 'Vert' %}
+          Vert
         {% endif %}
-        {{ al }}
       icon: mdi:weather-sunny
 
 # --- alerte_avalanches ---

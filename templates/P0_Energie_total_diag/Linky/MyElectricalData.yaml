@@ -11,16 +11,13 @@
 # ## 🧮 CALCUL & SOURCES :
 # - J0 (Aujourd'hui) : sensor.ecojoko_hp_reseau_quotidien + sensor.ecojoko_hc_reseau_quotidien.
 # - J1-J7            : attributs dailyweek / dailyweek_cost de l'intégration MEData.
-# - MEData (Wh → kWh) : valeur / 1000.
-# - Noms des jours    : attribut dailyweek → dictionnaire de traduction français.
-# - Coûts             : attribut dailyweek_cost (index correspondant à J1..J7).
+# - Noms des jours   : attribut dailyweek → dictionnaire de traduction français.
+# - Coûts            : attribut dailyweek_cost (index correspondant à J1..J7).
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Vérifications de longueur (|length >= X) pour éviter les erreurs si MEData
-#   n'a pas encore fourni les données Enedis.
-# - Valeurs de repli : "Inconnu" pour les dates, "0" pour les coûts.
+# - Vérifications de longueur ajoutées pour éviter "UndefinedError: None has no element 0".
+# - Valeurs de repli : "Inconnu" pour les dates, "0" pour les coûts si MED n'est pas prêt.
 # - Le numéro de compteur Linky (25481620821301) est lié au compte MEData.
-#   À mettre à jour si le compteur change.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale (tableau J0-J7 barre/courbe).
@@ -65,24 +62,17 @@
       icon: mdi:flash-outline
       attributes:
         jour: >-
-          {% set jours = {
-            'Monday': 'Lundi',
-            'Tuesday': 'Mardi',
-            'Wednesday': 'Mercredi',
-            'Thursday': 'Jeudi',
-            'Friday': 'Vendredi',
-            'Saturday': 'Samedi',
-            'Sunday': 'Dimanche'
-          } %}
-          {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
-          {% set date_str = dailyweek[0] if dailyweek else None %}
-          {% if date_str %}
+          {% set jours = {'Monday':'Lundi','Tuesday':'Mardi','Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'} %}
+          {% set dw = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% if dw and dw | length > 0 %}
+            {% set date_str = dw[0] %}
             {% if '-' in date_str %}
               {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
             {% elif '/' in date_str %}
               {% set p = date_str.split('/') %}
-              {% set annee = now().year %}
-              {% set eng = as_timestamp(annee ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+            {% else %}
+              {% set eng = "Inconnu" %}
             {% endif %}
             {{ jours[eng] if eng in jours else eng }}
           {% else %}
@@ -96,7 +86,12 @@
           {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_1_HP') | float(0) / 1000) +
               (state_attr('sensor.linky_25481620821301_consumption', 'day_1_HC') | float(0) / 1000)) | round(1) }}
         cout: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[0] | float(0)) | round(1) }}
+          {% set dwc = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost') %}
+          {% if dwc and dwc | length > 0 %}
+            {{ (dwc[0] | float(0)) | round(1) }}
+          {% else %}
+            0.0
+          {% endif %}
 
     # --- linky_jour_2 ---
     - name: "Linky Jour 2"
@@ -108,24 +103,17 @@
       icon: mdi:flash-outline
       attributes:
         jour: >-
-          {% set jours = {
-            'Monday': 'Lundi',
-            'Tuesday': 'Mardi',
-            'Wednesday': 'Mercredi',
-            'Thursday': 'Jeudi',
-            'Friday': 'Vendredi',
-            'Saturday': 'Samedi',
-            'Sunday': 'Dimanche'
-          } %}
-          {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
-          {% set date_str = dailyweek[1] if dailyweek else None %}
-          {% if date_str %}
+          {% set jours = {'Monday':'Lundi','Tuesday':'Mardi','Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'} %}
+          {% set dw = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% if dw and dw | length > 1 %}
+            {% set date_str = dw[1] %}
             {% if '-' in date_str %}
               {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
             {% elif '/' in date_str %}
               {% set p = date_str.split('/') %}
-              {% set annee = now().year %}
-              {% set eng = as_timestamp(annee ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+            {% else %}
+              {% set eng = "Inconnu" %}
             {% endif %}
             {{ jours[eng] if eng in jours else eng }}
           {% else %}
@@ -139,7 +127,12 @@
           {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_2_HP') | float(0) / 1000) +
               (state_attr('sensor.linky_25481620821301_consumption', 'day_2_HC') | float(0) / 1000)) | round(1) }}
         cout: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[1] | float(0)) | round(1) }}
+          {% set dwc = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost') %}
+          {% if dwc and dwc | length > 1 %}
+            {{ (dwc[1] | float(0)) | round(1) }}
+          {% else %}
+            0.0
+          {% endif %}
 
     # --- linky_jour_3 ---
     - name: "Linky Jour 3"
@@ -151,24 +144,17 @@
       icon: mdi:flash-outline
       attributes:
         jour: >-
-          {% set jours = {
-            'Monday': 'Lundi',
-            'Tuesday': 'Mardi',
-            'Wednesday': 'Mercredi',
-            'Thursday': 'Jeudi',
-            'Friday': 'Vendredi',
-            'Saturday': 'Samedi',
-            'Sunday': 'Dimanche'
-          } %}
-          {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
-          {% set date_str = dailyweek[2] if dailyweek else None %}
-          {% if date_str %}
+          {% set jours = {'Monday':'Lundi','Tuesday':'Mardi','Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'} %}
+          {% set dw = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% if dw and dw | length > 2 %}
+            {% set date_str = dw[2] %}
             {% if '-' in date_str %}
               {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
             {% elif '/' in date_str %}
               {% set p = date_str.split('/') %}
-              {% set annee = now().year %}
-              {% set eng = as_timestamp(annee ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+            {% else %}
+              {% set eng = "Inconnu" %}
             {% endif %}
             {{ jours[eng] if eng in jours else eng }}
           {% else %}
@@ -182,7 +168,12 @@
           {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_3_HP') | float(0) / 1000) +
               (state_attr('sensor.linky_25481620821301_consumption', 'day_3_HC') | float(0) / 1000)) | round(1) }}
         cout: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[2] | float(0)) | round(1) }}
+          {% set dwc = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost') %}
+          {% if dwc and dwc | length > 2 %}
+            {{ (dwc[2] | float(0)) | round(1) }}
+          {% else %}
+            0.0
+          {% endif %}
 
     # --- linky_jour_4 ---
     - name: "Linky Jour 4"
@@ -194,24 +185,17 @@
       icon: mdi:flash-outline
       attributes:
         jour: >-
-          {% set jours = {
-            'Monday': 'Lundi',
-            'Tuesday': 'Mardi',
-            'Wednesday': 'Mercredi',
-            'Thursday': 'Jeudi',
-            'Friday': 'Vendredi',
-            'Saturday': 'Samedi',
-            'Sunday': 'Dimanche'
-          } %}
-          {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
-          {% set date_str = dailyweek[3] if dailyweek else None %}
-          {% if date_str %}
+          {% set jours = {'Monday':'Lundi','Tuesday':'Mardi','Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'} %}
+          {% set dw = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% if dw and dw | length > 3 %}
+            {% set date_str = dw[3] %}
             {% if '-' in date_str %}
               {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
             {% elif '/' in date_str %}
               {% set p = date_str.split('/') %}
-              {% set annee = now().year %}
-              {% set eng = as_timestamp(annee ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+            {% else %}
+              {% set eng = "Inconnu" %}
             {% endif %}
             {{ jours[eng] if eng in jours else eng }}
           {% else %}
@@ -225,7 +209,12 @@
           {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_4_HP') | float(0) / 1000) +
               (state_attr('sensor.linky_25481620821301_consumption', 'day_4_HC') | float(0) / 1000)) | round(1) }}
         cout: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[3] | float(0)) | round(1) }}
+          {% set dwc = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost') %}
+          {% if dwc and dwc | length > 3 %}
+            {{ (dwc[3] | float(0)) | round(1) }}
+          {% else %}
+            0.0
+          {% endif %}
 
     # --- linky_jour_5 ---
     - name: "Linky Jour 5"
@@ -237,24 +226,17 @@
       icon: mdi:flash-outline
       attributes:
         jour: >-
-          {% set jours = {
-            'Monday': 'Lundi',
-            'Tuesday': 'Mardi',
-            'Wednesday': 'Mercredi',
-            'Thursday': 'Jeudi',
-            'Friday': 'Vendredi',
-            'Saturday': 'Samedi',
-            'Sunday': 'Dimanche'
-          } %}
-          {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
-          {% set date_str = dailyweek[4] if dailyweek else None %}
-          {% if date_str %}
+          {% set jours = {'Monday':'Lundi','Tuesday':'Mardi','Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'} %}
+          {% set dw = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% if dw and dw | length > 4 %}
+            {% set date_str = dw[4] %}
             {% if '-' in date_str %}
               {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
             {% elif '/' in date_str %}
               {% set p = date_str.split('/') %}
-              {% set annee = now().year %}
-              {% set eng = as_timestamp(annee ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+            {% else %}
+              {% set eng = "Inconnu" %}
             {% endif %}
             {{ jours[eng] if eng in jours else eng }}
           {% else %}
@@ -268,7 +250,12 @@
           {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_5_HP') | float(0) / 1000) +
               (state_attr('sensor.linky_25481620821301_consumption', 'day_5_HC') | float(0) / 1000)) | round(1) }}
         cout: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[4] | float(0)) | round(1) }}
+          {% set dwc = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost') %}
+          {% if dwc and dwc | length > 4 %}
+            {{ (dwc[4] | float(0)) | round(1) }}
+          {% else %}
+            0.0
+          {% endif %}
 
     # --- linky_jour_6 ---
     - name: "Linky Jour 6"
@@ -280,24 +267,17 @@
       icon: mdi:flash-outline
       attributes:
         jour: >-
-          {% set jours = {
-            'Monday': 'Lundi',
-            'Tuesday': 'Mardi',
-            'Wednesday': 'Mercredi',
-            'Thursday': 'Jeudi',
-            'Friday': 'Vendredi',
-            'Saturday': 'Samedi',
-            'Sunday': 'Dimanche'
-          } %}
-          {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
-          {% set date_str = dailyweek[5] if dailyweek else None %}
-          {% if date_str %}
+          {% set jours = {'Monday':'Lundi','Tuesday':'Mardi','Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'} %}
+          {% set dw = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% if dw and dw | length > 5 %}
+            {% set date_str = dw[5] %}
             {% if '-' in date_str %}
               {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
             {% elif '/' in date_str %}
               {% set p = date_str.split('/') %}
-              {% set annee = now().year %}
-              {% set eng = as_timestamp(annee ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+            {% else %}
+              {% set eng = "Inconnu" %}
             {% endif %}
             {{ jours[eng] if eng in jours else eng }}
           {% else %}
@@ -311,7 +291,12 @@
           {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_6_HP') | float(0) / 1000) +
               (state_attr('sensor.linky_25481620821301_consumption', 'day_6_HC') | float(0) / 1000)) | round(1) }}
         cout: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[5] | float(0)) | round(1) }}
+          {% set dwc = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost') %}
+          {% if dwc and dwc | length > 5 %}
+            {{ (dwc[5] | float(0)) | round(1) }}
+          {% else %}
+            0.0
+          {% endif %}
 
     # --- linky_jour_7 ---
     - name: "Linky Jour 7"
@@ -323,24 +308,17 @@
       icon: mdi:flash-outline
       attributes:
         jour: >-
-          {% set jours = {
-            'Monday': 'Lundi',
-            'Tuesday': 'Mardi',
-            'Wednesday': 'Mercredi',
-            'Thursday': 'Jeudi',
-            'Friday': 'Vendredi',
-            'Saturday': 'Samedi',
-            'Sunday': 'Dimanche'
-          } %}
-          {% set dailyweek = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
-          {% set date_str = dailyweek[6] if dailyweek else None %}
-          {% if date_str %}
+          {% set jours = {'Monday':'Lundi','Tuesday':'Mardi','Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'} %}
+          {% set dw = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% if dw and dw | length > 6 %}
+            {% set date_str = dw[6] %}
             {% if '-' in date_str %}
               {% set eng = as_timestamp(date_str) | timestamp_custom('%A', true) %}
             {% elif '/' in date_str %}
               {% set p = date_str.split('/') %}
-              {% set annee = now().year %}
-              {% set eng = as_timestamp(annee ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+              {% set eng = as_timestamp(now().year ~ '-' ~ p[1] ~ '-' ~ p[0]) | timestamp_custom('%A', true) %}
+            {% else %}
+              {% set eng = "Inconnu" %}
             {% endif %}
             {{ jours[eng] if eng in jours else eng }}
           {% else %}
@@ -354,4 +332,11 @@
           {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_7_HP') | float(0) / 1000) +
               (state_attr('sensor.linky_25481620821301_consumption', 'day_7_HC') | float(0) / 1000)) | round(1) }}
         cout: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost')[6] | float(0)) | round(1) }}
+          {% set dwc = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost') %}
+          {% if dwc and dwc | length > 6 %}
+            {{ (dwc[6] | float(0)) | round(1) }}
+          {% else %}
+            0.0
+          {% endif %}
+
+# "[L129-140, 178-189, 227-238, 276-287, 325-336, 374-385, 423-434] modif : Ajout des vérifications conditionnelles pour les listes dailyweek et dailyweek_cost pour éviter l'erreur None has no element"

@@ -39,8 +39,8 @@
         unit_of_measurement: "h"
         icon: mdi:weather-sunny
         state: >
-          {# Récupération de la latitude système #}
-          {% set lat = state_attr('zone.home', 'latitude') | float(default=config.latitude) %}
+          {# Récupération sécurisée de la latitude #}
+          {% set lat = state_attr('zone.home', 'latitude') | float(default=43.72) %}
           {% set lat_rad = lat * pi / 180 %}
 
           {# Jour de l'année (1-365) #}
