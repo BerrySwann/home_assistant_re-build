@@ -1,4 +1,28 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ [ ST ] TEMPLATES : SPEEDTEST CLI — DOWNLOAD / UPLOAD / PING              │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Trois capteurs templates calculant Download (Mbps), Upload (Mbps) et Ping (ms)
+# depuis les attributs bruts de sensor.speedtest_cli_data (intégration CLI).
+# Conversion : bandwidth (bytes/s) / 125000 = Mbps.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source    : sensor.speedtest_cli_data (intégration Speedtest CLI — command_line/)
+# - Download  : state_attr(..., 'download').bandwidth / 125000 → Mbps
+# - Upload    : state_attr(..., 'upload').bandwidth / 125000   → Mbps
+# - Ping      : state_attr(..., 'ping').latency                → ms
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - La source est speedtest_cli_data (CLI binaire) et NON speedtest_download_speed
+#   (intégration native HA Speedtest.net) — attributs structurés différents.
+# - Si le test n'a pas encore tourné, les attributs sont None → "Indisponible".
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L4C1 Freebox Pop (réseau — débit entrant/sortant/latence).
+
 - sensor:
+    # --- speedtest_cli_download ---
     - name: "Speedtest CLI Download"
       unique_id: speedtest_cli_download
       unit_of_measurement: "Mbps"
@@ -11,6 +35,7 @@
           Indisponible
         {% endif %}
 
+    # --- speedtest_cli_upload ---
     - name: "Speedtest CLI Upload"
       unique_id: speedtest_cli_upload
       unit_of_measurement: "Mbps"
@@ -23,6 +48,7 @@
           Indisponible
         {% endif %}
 
+    # --- speedtest_cli_ping ---
     - name: "Speedtest CLI Ping"
       unique_id: speedtest_cli_ping
       unit_of_measurement: "ms"
@@ -34,3 +60,8 @@
         {% else %}
           Indisponible
         {% endif %}
+
+# annotations_log:
+# - [L1-3]  Ajout boîte ASCII arrondie 78 car. (CLAUDE.md — header obligatoire).
+# - [L5-17] Ajout bloc documentation (DESCRIPTION / CALCUL / PIÈGES / VIGNETTE).
+# - [L20,26,32] Ajout titres tertiaires slugs (CLAUDE.md — titres tertiaires).

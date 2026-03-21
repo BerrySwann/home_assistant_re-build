@@ -31,7 +31,7 @@
 
   - sensor:
       # ┌───────────────────────────────────┐
-      # │ 1/3 : DURÉE DU JOUR (CORRIGÉ)     │
+      # │ 1/3 : DURÉE DU JOUR               │
       # └───────────────────────────────────┘
       # --- duree_du_jour ---
       - name: "Durée du Jour"
@@ -39,21 +39,25 @@
         unit_of_measurement: "h"
         icon: mdi:weather-sunny
         state: >
-          {# Sécurité : on met la latitude de Vence (43.71) par défaut au lieu de config #}
-          {% set lat = state_attr('zone.home', 'latitude') | float(43.71) %}
+          {# Récupération de la latitude système #}
+          {% set lat = state_attr('zone.home', 'latitude') | float(default=config.latitude) %}
           {% set lat_rad = lat * pi / 180 %}
 
-          {# Remplacement de timetuple() par la fonction native HA #}
-          {% set day = now().strftime('%j') | int %}
+          {# Jour de l'année (1-365) #}
+          {% set day = now().timetuple().tm_yday %}
 
+          {# Calcul de la déclinaison #}
           {% set decl = 23.45 * sin((2 * pi * (day - 80)) / 365) %}
           {% set decl_rad = decl * pi / 180 %}
 
+          {# Calcul de l'angle horaire #}
           {% set cos_h = -(tan(lat_rad) * tan(decl_rad)) %}
 
+          {# Sécurité pour les limites polaires #}
           {% set cos_h = [ [-1, cos_h] | max, 1 ] | min %}
           {% set hour_angle = acos(cos_h) %}
 
+          {# Résultat en heures #}
           {{ (2 * hour_angle * 180 / pi / 15) | round(2) }}
 
       # ┌───────────────────────────────────┐
