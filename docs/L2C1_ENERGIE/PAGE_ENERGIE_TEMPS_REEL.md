@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--14-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--03--20-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Dashboard%20Doc-ff9800?style=flat-square)](.)
 
 </div>
@@ -12,11 +12,11 @@
 | 📁 **Path** | `dashbord/page_energie_temps_reel.yaml` |
 | 🔗 **Accès depuis** | Badge "Réel" de `page_energie_home.yaml` → `/dashboard-tablette/energie-temps-reel` |
 | 🔗 **Retour vers** | Tap titre → `/dashboard-tablette/energie` |
-| 🏗️ **Layout** | `type: grid` — 6 blocs `vertical-stack` |
+| 🏗️ **Layout** | `type: grid` — 4 colonnes `column_span: 1` |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-14 |
-| 🏠 **Version HA** | 2025.2.x → v2.0 |
+| 📅 **Modifié le** | 2026-03-20 |
+| 🏠 **Version HA** | 2026.3.x |
 
 ---
 
@@ -28,25 +28,22 @@
 
 1. [Vue d'ensemble](#vue-densemble)
 2. [Architecture de la page](#architecture-de-la-page)
-3. [Bloc 1 — HEADER](#bloc-1--header)
-4. [Bloc 2 — Bar-card Prises (puissance instantanée)](#bloc-2--bar-card-prises-puissance-instantanée)
-5. [Bloc 3 — Bar-card Lumières (puissance instantanée)](#bloc-3--bar-card-lumières-puissance-instantanée)
-6. [Bloc 4 — Donut journalier (cumul depuis minuit)](#bloc-4--donut-journalier-cumul-depuis-minuit)
-7. [Bloc 5 — ApexCharts 24h (conso instantanée)](#bloc-5--apexcharts-24h-conso-instantanée)
-8. [Bloc 6 — Tabbed-card par pièce (streamline)](#bloc-6--tabbed-card-par-pièce-streamline)
-9. [Entités utilisées](#entités-utilisées--provenance-complète)
-10. [Dépannage](#dépannage)
+3. [Col 1 — HEADER + Sections conditionnelles par catégorie](#col-1--header--sections-conditionnelles-par-catégorie)
+4. [Col 2 — Donut journalier (cumul depuis minuit)](#col-2--donut-journalier-cumul-depuis-minuit)
+5. [Col 3 — ApexCharts 24h (conso instantanée)](#col-3--apexcharts-24h-conso-instantanée)
+6. [Col 4 — Tabbed-card par pièce (streamline)](#col-4--tabbed-card-par-pièce-streamline)
+7. [Entités utilisées](#entités-utilisées--provenance-complète)
+8. [Dépannage](#dépannage)
 
 ---
 
 ## 🎯 VUE D'ENSEMBLE
 
-Cette page offre une vue **temps réel** de la consommation électrique appareil par appareil :
-- Toutes les prises connectées actives triées par puissance décroissante (bar-card dynamique)
-- Toutes les lumières actives triées par puissance décroissante (bar-card dynamique)
-- Donut de répartition par appareil sur la journée (kWh cumulés depuis minuit)
-- Courbe instantanée par appareil sur 24h (W)
-- Détail par pièce via onglets : puissance instantanée + moyenne + kWh du jour par appareil
+Cette page offre une vue **temps réel** de la consommation électrique appareil par appareil, organisée en **4 colonnes** côte à côte :
+- **Col 1** : Heading + 7 sections conditionnelles par catégorie (Chauffage, Multimédia, Cuisson, Froid, Hygiène, Lumière, Autres) — n'affiche que les catégories avec puissance > 0W
+- **Col 2** : Donut de répartition par appareil sur la journée (kWh cumulés depuis minuit)
+- **Col 3** : Courbe instantanée par appareil sur 24h (W)
+- **Col 4** : Détail par pièce via onglets : puissance instantanée + moyenne + kWh du jour par appareil
 
 ### Intégrations requises
 
@@ -74,156 +71,130 @@ Cette page offre une vue **temps réel** de la consommation électrique appareil
 ## 🏗️ ARCHITECTURE DE LA PAGE
 
 ```
-┌─────────────────────────────────────────────────────┐
-│  [HEADER] Temps Réél + Badge conso réelle           │
-│  ← tap : retour /energie                            │
-├─────────────────────────────────────────────────────┤
-│  [BAR-CARD auto-entities] PRISES actives (W)        │
-│  Filtres: exclut hue, relais, poco, device, Freebox │
-│  Inclut: sensor.*power (>1W, tri décroissant)       │
-├─────────────────────────────────────────────────────┤
-│  [BAR-CARD auto-entities] LUMIÈRES actives (W)      │
-│  Inclut: sensor.*relais*power, hue*power            │
-│  Exclut: last_updated > 1m, state ≤ 1              │
-├─────────────────────────────────────────────────────┤
-│  [DONUT ApexCharts] Cumul depuis Minuit (Wh)        │
-│  18 prises × transform: x * 1000 (kWh → Wh)       │
-│  + sensor.all_standby_quotidien_kwh_um              │
-├─────────────────────────────────────────────────────┤
-│  [ApexCharts 24h] Conso. Instantanée (W)            │
-│  18 prises × sensor.*_power + sensor.all_standby   │
-│  group_by: last, duration: 10m — fill_raw: last    │
-├─────────────────────────────────────────────────────┤
-│  [bubble-card separator] Sélectionner une pièce :   │
-│  [TABBED-CARD]                                      │
-│  ┌────────┬────────┬────────┬────────┬────────┬─────┐│
-│  │ Entrée │ Salon  │Cuisine │ Bureau │Chambre │Veill││
-│  └────────┴────────┴────────┴────────┴────────┴─────┘│
-│  [streamline-card × N] par pièce                   │
-│  template: conso_temps_reel_appareil               │
-│  → W instantané + Ampères + Moy. W/j + kWh du jour │
-└─────────────────────────────────────────────────────┘
+type: grid  (4 colonnes — column_span: 1 chacune)
+
+┌──────────────────┬──────────────────┬──────────────────┬──────────────────┐
+│    COL 1         │    COL 2         │    COL 3         │    COL 4         │
+│  [HEADER]        │  [DONUT]         │  [ApexCharts]    │ [bubble-card sep]│
+│  Temps Réél      │  Cumul depuis    │  Conso.          │ Sélectionner     │
+│  ← tap /energie  │  Minuit (Wh)     │  Instantanée     │ une pièce        │
+│  ──────────────  │  18 prises ×     │  (W) 24h         │  ──────────────  │
+│  [conditional]   │  transform ×1000 │  18 prises ×     │ [TABBED-CARD]    │
+│  Chauffage (W)   │  kWh → Wh        │  _power          │ ┌──┬──┬──┬──┬──┐ │
+│  si > 0W ───>   │  + all_standby   │  fill_raw: last  │ │1.│4.│5.│7.│9.│V│ │
+│  bar-card        │                  │  group_by: 10m   │ │En│Sa│Cu│Bu│Ch│e│ │
+│  [conditional]   │                  │                  │ └──┴──┴──┴──┴──┘ │
+│  Multimédia (W)  │                  │                  │ [streamline-card] │
+│  si > 0W ───>   │                  │                  │ template:         │
+│  bar-card        │                  │                  │ conso_temps_reel  │
+│  [conditional]   │                  │                  │ _appareil         │
+│  Cuisson (W)     │                  │                  │ W + A + Moy + kWh │
+│  [conditional]   │                  │                  │                   │
+│  Froid (W)       │                  │                  │                   │
+│  [conditional]   │                  │                  │                   │
+│  Hygiène (W)     │                  │                  │                   │
+│  [conditional]   │                  │                  │                   │
+│  Lumière (W)     │                  │                  │                   │
+│  [conditional]   │                  │                  │                   │
+│  Autres (W)      │                  │                  │                   │
+└──────────────────┴──────────────────┴──────────────────┴──────────────────┘
 ```
+
+> **Principe Col 1** : Chaque catégorie est une `type: conditional` — visible uniquement si `sensor.total_poste_*_puissance ≠ "0"`. La colonne ne montre que les postes actifs au moment de la consultation.
+
+> **Séparateur horizontal** : Un `type: markdown` de 1px blanc semi-transparent (`rgba(255,255,255,0.4)`) sert de diviseur visuel entre les catégories en Col 1.
 
 ---
 
-## 📍 BLOC 1 — HEADER
+## 📍 COL 1 — HEADER + Sections conditionnelles par catégorie
+
+### Header
 
 ```yaml
-- type: vertical-stack
-  cards:
-    - type: heading
-      icon: mdi:lightning-bolt
-      heading: Temps Réél
-      heading_style: title
-      badges:
-        - type: entity
-          entity: sensor.ecojoko_consommation_temps_reel
-          name: Réel
-          color: green
-      tap_action:
-        action: navigate
-        navigation_path: /dashboard-tablette/energie
+- type: heading
+  icon: mdi:lightning-bolt
+  heading: Temps Réél
+  heading_style: title
+  badges:
+    - type: entity
+      entity: sensor.ecojoko_consommation_temps_reel
+      name: Réel
+      color: green
+      show_state: true
+      show_icon: true
+  tap_action:
+    action: navigate
+    navigation_path: /dashboard-tablette/energie
 ```
 
-> ⚠️ Typo dans le titre original : "Temps Réél" (double accent) — à corriger lors du re-build.
+> ⚠️ Typo dans le titre original : "Temps Réél" (double accent) — conservé tel quel pour cohérence avec le YAML en production.
 
-### Entités
-- `sensor.ecojoko_consommation_temps_reel` [Ecojoko - UI] Puissance instantanée totale (W)
+**Entité :** `sensor.ecojoko_consommation_temps_reel` [Ecojoko - UI] Puissance instantanée totale (W)
 
 ---
 
-## 📊 BLOC 2 — Bar-card Prises (puissance instantanée)
+### 7 sections conditionnelles (bar-card par catégorie)
 
-```yaml
-- type: custom:auto-entities
-  card:
-    type: custom:bar-card
-    icon: mdi:lightning-bolt
-    height: 38
-    unit_of_measurement: W
-    severity:
-      - color: gainsboro      from: 0    to: 5
-      - color: rgb(102,255,102) from: 5  to: 49
-      - color: rgb(0,102,0)   from: 50   to: 249
-      - color: orange         from: 250  to: 499
-      - color: darkorange     from: 500  to: 749
-      - color: red            from: 750  to: 999
-      - color: darkred        from: 1000 to: 6000
-  filter:
-    exclude:
-      - entity_id: ^sensor.oneplus*power$
-      - entity_id: ^sensor.eclairage*$
-      - entity_id: ^sensor.lampe*ikea*power$
-      - entity_id: ^*hue*$
-      - entity_id: ^*poco*$
-      - entity_id: ^*device*$
-      - entity_id: ^*relais*$
-      - entity_id: sensor.entree_freebox_pop_power
-      - entity_id: sensor.freebox_v8_r1_power
-      - entity_id: sensor.nvidia_*_gpu_package_power
-      - state: unavailable
-      - state: unknown
-      - state: <= 0.999
-    include:
-      - entity_id: ^sensor.*power$
-  sort:
-    method: state
-    numeric: true
-    reverse: true
-```
+Chaque section est un `type: conditional` avec les conditions :
+- `sensor.total_poste_*_puissance` state_not `"0"` (ET)
+- `sensor.total_poste_*_puissance` state_not `unavailable`
 
-### Palette couleur (seuils W)
+Quand la condition est vraie, s'affiche un `heading` avec badge + `auto-entities bar-card` listant les appareils de la catégorie (état > 1W, triés décroissant) + séparateur `markdown` 1px.
 
-| Seuil | Couleur | Signification |
-|-------|---------|---------------|
-| 0–5 W | Gris clair | Veille/standby |
-| 5–49 W | Vert clair | Faible |
-| 50–249 W | Vert foncé | Normal |
-| 250–499 W | Orange | Élevé |
-| 500–749 W | Orange foncé | Fort |
-| 750–999 W | Rouge | Très fort |
-| ≥ 1 000 W | Rouge foncé | Gros appareil actif |
-
-### Filtres clés
-- **Inclus** : tous `sensor.*power` (regex)
-- **Exclus** : hue, relais, poco (téléphone), device_tracker, Freebox, GPU Nvidia, état ≤ 1W / unavailable / unknown
-- **Tri** : état numérique décroissant → l'appareil le plus gourmand en haut
-- **Dynamique** : seuls les appareils actifs apparaissent
-
----
-
-## 💡 BLOC 3 — Bar-card Lumières (puissance instantanée)
-
-Même structure que le Bloc 2 mais ciblant uniquement les lumières.
-
-```yaml
-  filter:
-    exclude:
-      - last_updated: 1m ago   # exclut les entités non mises à jour depuis 1 min
-      - state: <= 1
-      - state: unavailable
-    include:
-      - entity_id: ^*relais*power$         # Sonoff relais (lumière SDB via relais)
-      - entity_id: sensor.lampe_salle_de_bain_hue_power
-      - entity_id: ^sensor.hue*power$      # Toutes les ampoules Hue
-```
-
-### Palette couleur (seuils W — lumières)
+**Palette couleur commune (bar-card catégories) :**
 
 | Seuil | Couleur |
 |-------|---------|
-| 0–0.99 W | Gris (éteint/veille) |
-| 1–4.99 W | Vert clair |
-| 5–9.99 W | Vert foncé |
-| 10–14.99 W | Orange |
-| ≥ 15 W | Rouge |
+| 0–4 W | `gainsboro` (veille) |
+| 5–249 W | `#4caf50` (vert) |
+| 250–749 W | `#FFCC99` (orange clair) |
+| ≥ 750 W | `#ff4444` (rouge) |
 
-> Les lumières consomment 1–15 W → échelle adaptée (vs 6 000 W max pour les prises).
+#### Section 1 : Chauffage
+
+| Sensor déclencheur | `sensor.total_poste_chauffage_puissance` |
+| Badge icône | `mdi:hvac` — couleur orange |
+| Appareils | clim_salon_nous_power, radiateur_elec_cuisine_power, clim_bureau_nous_power, prise_soufflant_salle_de_bain_nous_power, prise_seche_serviette_salle_de_bain_nous_power, clim_chambre_nous_power |
+
+#### Section 2 : Multimédia
+
+| Sensor déclencheur | `sensor.total_poste_multimedia_puissance` |
+| Badge icône | `mdi:monitor-screenshot` — couleur blue |
+| Appareils | prise_box_internet_ikea_power, prise_tv_salon_ikea_power, prise_tv_chambre_nous_power, prise_pc_s_gege_ikea_power, prise_bureau_pc_ikea_power |
+
+#### Section 3 : Cuisson
+
+| Sensor déclencheur | `sensor.total_poste_cuisine_puissance` |
+| Badge icône | `mdi:stove` — couleur red |
+| Appareils | prise_four_micro_ondes_nous_power, prise_petit_dejeune_nous_power, prise_airfryer_ninja_nous_power, four_et_plaque_de_cuisson_power |
+
+#### Section 4 : Froid
+
+| Sensor déclencheur | `sensor.total_poste_froid_puissance` |
+| Badge icône | `mdi:fridge-outline` — couleur cyan |
+| Appareils | prise_frigo_cuisine_nous_power, prise_congelateur_cuisine_nous_power |
+
+#### Section 5 : Hygiène
+
+| Sensor déclencheur | `sensor.total_poste_hygiene_puissance` |
+| Badge icône | `mdi:bubbles` — couleur teal |
+| Appareils | prise_lave_linge_nous_power, prise_lave_vaisselle_nous_power |
+
+#### Section 6 : Lumière
+
+| Sensor déclencheur | `sensor.total_poste_lumiere_puissance` *(ou équivalent)* |
+| Badge icône | `mdi:lightbulb` — couleur yellow |
+| Appareils | Ampoules Hue actives + relais Sonoff SDB |
+
+#### Section 7 : Autres
+
+| Sensor déclencheur | `sensor.total_poste_autres_puissance` *(ou équivalent)* |
+| Badge icône | `mdi:account` |
+| Appareils | Divers (Fer à repasser, etc.) |
 
 ---
 
-## 🥧 BLOC 4 — Donut journalier (cumul depuis minuit)
+## 🥧 COL 2 — Donut journalier (cumul depuis minuit)
 
 ```yaml
 - type: custom:apexcharts-card
@@ -263,29 +234,31 @@ Même structure que le Bloc 2 mais ciblant uniquement les lumières.
 | Appareil | Entité UM | Couleur |
 |----------|-----------|---------|
 | Box Internet | `prise_box_internet_ikea_quotidien_kwh_um` | gainsboro |
-| Horloge Entrée | `prise_horloge_ikea_quotidien_kwh_um` | rgb(183,183,183) |
-| PCg (Géraldine) | `prise_pc_s_gege_ikea_quotidien_kwh_um` | rgb(202,135,135) |
-| Chargeurs Salon | `prise_salon_chargeur_nous_quotidien_kwh_um` | rgb(174,68,90) |
-| TV Salon | `prise_tv_salon_ikea_quotidien_kwh_um` | rgb(215,95,115) |
-| Four Micro-Ondes | `prise_four_micro_ondes_nous_quotidien_kwh_um` | rgb(98,78,136) |
-| Petit Déjeuner | `prise_petit_dejeune_nous_quotidien_kwh_um` | rgb(118,93,160) |
-| Lave-Linge | `prise_lave_linge_nous_quotidien_kwh_um` | rgb(137,103,179) |
-| Lave-Vaisselle | `prise_lave_vaisselle_nous_quotidien_kwh_um` | rgb(129,116,180) |
-| Airfryer | `prise_airfryer_ninja_nous_quotidien_kwh_um` | rgb(142,122,181) |
-| Four & Plaque | `four_et_plaque_de_cuisson_quotidien_kwh_um` | rgb(162,148,249) |
-| Frigo | `prise_frigo_cuisine_nous_quotidien_kwh_um` | cyan |
-| Congélateur | `prise_congelateur_cuisine_nous_quotidien_kwh_um` | rgb(19,160,255) |
-| PCe (Bureau) | `prise_bureau_pc_ikea_quotidien_kwh_um` | orange |
-| Fer à Repasser | `prise_bureau_fer_a_repasser_nous_quotidien_kwh_um` | gold |
-| Têtes de lit | `prise_tete_de_lit_chambre_quotidien_kwh_um` | rgb(177,194,158) |
-| TV Chambre | `prise_tv_chambre_nous_quotidien_kwh_um` | rgb(30,81,40) |
-| Veilles | `all_standby_quotidien_kwh_um` | grey |
+| Horloge Entrée | `prise_horloge_ikea_quotidien_kwh_um` | `rgb(183, 183, 183)` |
+| PCg (Géraldine) | `prise_pc_s_gege_ikea_quotidien_kwh_um` | `rgb(174, 68, 90)` |
+| Chargeurs Salon | `prise_salon_chargeur_nous_quotidien_kwh_um` | `rgb(196, 75, 97)` |
+| TV Salon | `prise_tv_salon_ikea_quotidien_kwh_um` | `rgb(215,95,115)` |
+| Four Micro-Ondes | `prise_four_micro_ondes_nous_quotidien_kwh_um` | `rgb(98,78,136)` |
+| Petit Déjeuner | `prise_petit_dejeune_nous_quotidien_kwh_um` | `rgb(118,93,160)` |
+| Lave-Linge | `prise_lave_linge_nous_quotidien_kwh_um` | `rgb(137,103,179)` |
+| Lave-Vaisselle | `prise_lave_vaisselle_nous_quotidien_kwh_um` | `rgb(129,116,180)` |
+| Airfryer | `prise_airfryer_ninja_nous_quotidien_kwh_um` | `rgb(142,122,181)` |
+| Four & Plaque | `four_et_plaque_de_cuisson_quotidien_kwh_um` | `rgb(162,148,249)` |
+| Frigo | `prise_frigo_cuisine_nous_quotidien_kwh_um` | `cyan` |
+| Congélateur | `prise_congelateur_cuisine_nous_quotidien_kwh_um` | `rgb(0, 255, 255)` ← `cyan` |
+| PCe (Bureau) | `prise_bureau_pc_ikea_quotidien_kwh_um` | `orange` |
+| Fer à Repasser | `prise_bureau_fer_a_repasser_nous_quotidien_kwh_um` | `gold` |
+| Têtes de lit | `prise_tete_de_lit_chambre_quotidien_kwh_um` | `rgb(75, 130, 85)` |
+| TV Chambre | `prise_tv_chambre_nous_quotidien_kwh_um` | `rgb(105, 155, 110)` |
+| Veilles | `all_standby_quotidien_kwh_um` | `rgb(109, 76, 65)` |
+
+> ⚠️ **[modif 2026-03-20]** : Couleurs mises à jour — PCg `rgb(202,135,135)` → `rgb(174,68,90)`, Chargeurs `rgb(174,68,90)` → `rgb(196,75,97)`, Congél `rgb(19,160,255)` → `rgb(0,255,255)` (cyan), Têtes de Lit `rgb(177,194,158)` → `rgb(75,130,85)`, TV Chambre `rgb(30,81,40)` → `rgb(105,155,110)`, Veilles `grey` → `rgb(109,76,65)`.
 
 > Sources UM : `utility_meter/P2_prise/P2_UM_AMHQ.yaml` (quotidien cycle)
 
 ---
 
-## 📈 BLOC 5 — ApexCharts 24h (conso instantanée)
+## 📈 COL 3 — ApexCharts 24h (conso instantanée)
 
 ```yaml
 - type: custom:apexcharts-card
@@ -334,42 +307,39 @@ Même palette de couleurs que le donut (cohérence visuelle).
 
 ---
 
-## 📱 BLOC 6 — Tabbed-card par pièce (streamline)
+## 📱 COL 4 — Tabbed-card par pièce (streamline)
 
 ```yaml
-- type: vertical-stack
-  cards:
-    - type: custom:bubble-card
-      card_type: separator
-      name: 'Sélectionner une pièce :'
-      icon: mdi:arrow-right-bottom-bold
+- type: custom:bubble-card
+  card_type: separator
+  name: 'Sélectionner une pièce :'
+  icon: mdi:arrow-right-bottom-bold
+  rows: 2
 
-    - type: custom:tabbed-card
-      styles:
-        '--mdc-theme-primary': white
-        '--mdc-tab-text-label-color-default': rgba(255,255,255,0.25)
-      tabs:
-        - attributes:
-            label: Entrée
-            icon: mdi:door
-          card:
-            type: vertical-stack
-            cards:
-              - type: custom:streamline-card
-                template: conso_temps_reel_appareil
-                variables: ...
+- type: custom:tabbed-card
+  styles:
+    "--mdc-theme-primary": white
+    "--mdc-tab-text-label-color-default": rgba(255, 255, 255, 0.25)
+  options: {}
+  tabs:
+    - attributes:
+        label: 1. Entrée
+        icon: mdi:door
+      card: ...
 ```
 
-### 6 onglets
+### 6 onglets (labels numériques conformes à la nomenclature pièces)
 
 | Onglet | Icône | Appareils |
 |--------|-------|-----------|
-| Entrée | `mdi:door` | Box Internet, Horloge |
-| Salon | `mdi:sofa` | PCg Géraldine, Chargeurs Salon, TV Salon |
-| Cuisine | `mdi:fridge` | Four M-O, Petit Déj., Lave-Linge, Lave-Vaisselle, Airfryer, Four & Plaque, Frigo, Congélateur |
-| Bureau | `mdi:desk` | PCe Bureau, Fer à Repasser |
-| Chambre | `mdi:bed` | Tête de lit, TV Chambre |
-| Veilles | `mdi:sleep` | All Standby |
+| `1. Entrée` | `mdi:door` | Box Internet (Hue), Horloge Entrée (Chargeur) |
+| `4. Salon` | `mdi:sofa` | PC's Géraldine, Prise Salon (Chargeurs/Vapote/Aspi.), TV Salon |
+| `5. Cuisine` | `mdi:fridge` | Four Micro-Ondes, Petit Déjeuner, Lave-Linge, Lave-Vaisselle, Airfryer, Four & Plaque, Frigo, Congélateur |
+| `7. Bureau` | `mdi:desk` | PCe Bureau, Fer à Repasser |
+| `9. Chambre` | `mdi:bed` | Têtes de Lit chambre, TV Chambre |
+| `Veilles` | `mdi:sleep` | All Standby |
+
+> ⚠️ **[modif 2026-03-20]** : Les labels des onglets ont été préfixés par le numéro officiel de pièce (`Entrée` → `1. Entrée`, `Salon` → `4. Salon`, etc.) pour cohérence avec la nomenclature du projet. `Veilles` reste sans numéro (hors-pièce).
 
 ### Template `conso_temps_reel_appareil`
 
@@ -389,6 +359,20 @@ Chaque appareil utilise ce template streamline avec 5 variables :
 ---
 
 ## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+
+### 📊 Totaux par poste — Sensors conditionnels Col 1
+
+| Entité | Poste | Usage |
+|--------|-------|-------|
+| `sensor.total_poste_chauffage_puissance` | Chauffage | Condition affichage section + badge |
+| `sensor.total_poste_multimedia_puissance` | Multimédia | Condition affichage section + badge |
+| `sensor.total_poste_cuisine_puissance` | Cuisson | Condition affichage section + badge |
+| `sensor.total_poste_froid_puissance` | Froid | Condition affichage section + badge |
+| `sensor.total_poste_hygiene_puissance` | Hygiène | Condition affichage section + badge |
+
+> Ces sensors sont des sommes de puissances instantanées par catégorie — fournis par `templates/P2_prise/P2_I_all_standby_power/` ou `P1_clim_chauffage/`.
+
+---
 
 ### ⚡ Prises Connectées — Puissance instantanée (W)
 

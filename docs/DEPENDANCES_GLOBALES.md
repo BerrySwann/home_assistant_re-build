@@ -1,5 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES — TOUTES LES VIGNETTES
-*Dernière mise à jour : 2026-03-18 (session 4 — s5)*
+*Dernière mise à jour : 2026-03-21 (session 5 — s11)*
 
 > **RÈGLE :** Ce fichier est mis à jour obligatoirement à chaque création ou modification d'une doc de vignette (`docs/L*`).
 > Format : Vignette → Carte → Template/Sensor → Utility Meter → Source native HA
@@ -79,22 +79,49 @@ L1C3 Commandes Clim
 
 ## LIGNE 2 — CONSOMMATION ÉNERGÉTIQUE
 
-### 🔲 L2C1 — Énergie Générale
+### ✅ L2C1 — Énergie Générale
+`docs/L2C1_ENERGIE/`
 
 ```
 L2C1 Énergie Générale
-  ├── Coûts HP/HC (quotidien, mensuel, annuel)
-  │     └── [TPL] P0_Energie_total_diag/Ecojoko/01_ecojoko_AMHQ_cost.yaml
-  │           └── [UM] P0_Energie_total/Ecojoko/01_UM_AMHQ_cost.yaml
-  │                 └── [NAT] sensor.ecojoko_hp/hc_reseau_* (Ecojoko HACS)
-  ├── Ratio HC/HP
-  │     └── [TPL] P0_Energie_total_diag/Ecojoko/02_ratio_hp_hc.yaml
-  ├── Diag conso (jour / semaine / mois)
-  │     └── [TPL] P0_Energie_total_diag/Diag/diag_conso_*.yaml (x3)
-  │           └── [UM] P0.../Ecojoko/01_UM_AMHQ_cost.yaml + 02_UM_ecojoko_quotidien_live.yaml
-  └── Linky MyElectricalData
-        └── [TPL] P0_Energie_total_diag/Linky/MyElectricalData.yaml
-              └── [NAT] intégration MyElectricalData (HACS)
+  ├── Vignette (ring-tile Mini/Réel/Maxi + badges coût J/M/A)
+  │     ├── [NAT] sensor.ecojoko_conso_mini_24h / ecojoko_conso_maxi_24h (Ecojoko natif)
+  │     ├── [NAT] sensor.ecojoko_puissance_apparente_w (live W)
+  │     ├── [TPL] P0_Energie_total_diag/Ecojoko/01_ecojoko_AMHQ_cost.yaml
+  │     │     └── [UM] P0_Energie_total/Ecojoko/01_UM_AMHQ_cost.yaml
+  │     │           └── [NAT] sensor.ecojoko_hp/hc_reseau_* (Ecojoko HACS)
+  │     └── [TPL] P0_Energie_total_diag/Ecojoko/03_AVG_ecojoko.yaml
+  ├── Page principale /energie (tabbed-card 3 onglets JOURNALIER/HEBDO/MENSUEL)
+  │     ├── Coûts HP/HC (quotidien, hebdo, mensuel, annuel)
+  │     │     └── [TPL] 01_ecojoko_AMHQ_cost.yaml → [UM] 01_UM_AMHQ_cost.yaml
+  │     ├── Ratio HC/HP
+  │     │     └── [TPL] 02_ratio_hp_hc.yaml
+  │     ├── Diag conso (jour / semaine / mois)
+  │     │     └── [TPL] Diag/diag_conso_*.yaml (x3)
+  │     │           └── sensor.diag_poste_*_quotidien / hebdomadaire / mensuel
+  │     │           └── sensor.diag_max_poste_quotidien_dynamique / hebdo / mensuel
+  │     ├── Entités HEBDO : sensor.ecojoko_reseau_hebdomadaire_um
+  │     │     sensor.ecojoko_hp/hc_reseau_hebdomadaire_um
+  │     │     sensor.ecojoko_cout_total/hp/hc_hebdomadaire
+  │     │     sensor.ecojoko_ratio_hc_hebdomadaire
+  │     └── Linky MyElectricalData
+  │           └── [TPL] P0_Energie_total_diag/Linky/MyElectricalData.yaml
+  │                 └── [NAT] intégration MyElectricalData (HACS)
+  ├── Page temps réel /energie-temps-reel (4 colonnes)
+  │     ├── Col 1 : 7 sections conditionnelles par catégorie
+  │     │     └── [NAT] sensor.total_poste_*_puissance (W) — condition ≠ "0"
+  │     ├── Col 2 : Donut journalier (18 prises × _quotidien_kwh_um)
+  │     │     └── [UM] P2_prise/P2_AVG/P2_UM_AMHQ_prises.yaml + veilles
+  │     ├── Col 3 : ApexCharts ligne instantanée
+  │     │     └── [NAT] sensor.ecojoko_puissance_apparente_w
+  │     └── Col 4 : tabbed-card 6 onglets pièces (1/4/5/7/9/Veilles)
+  │           └── [NAT] sensor.*_power (W) par prise connectée
+  └── Page mensuelle /energie-mensuel (streamline par appareil)
+        ├── Donut mensuel (18 séries × _mensuel_kwh_um)
+        │     └── [UM] P2_prise/P2_AVG/P2_UM_AMHQ_prises.yaml + veilles
+        └── Streamline cards (18 appareils — template conso_mensuelle_appareil)
+              ├── [SNS] P2_prise/P2_kWh_prises.yaml (_energie_totale_kwh)
+              └── [TPL] P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml (_avg_watts_mensuel)
 ```
 
 ---
@@ -170,27 +197,57 @@ L3C2 Prises
 
 ---
 
-### 🔲 L3C3 — Fenêtres + Stores
+### ✅ L3C3 — Fenêtres + Stores
+`docs/L3C3_STORES/`
 
 ```
 L3C3 Fenêtres / Stores
-  ├── Contacts fenêtres (ouvert/fermé)
-  │     └── [NAT] binary_sensor.contact_fenetre_* (SONOFF SNZB-04)
-  │           └── group.ikea_devices (groups.yaml)
-  └── Stores Salon / Bureau
-        └── [NAT] cover.store_* (Zigbee)
+  ├── Vignette (button-card 3 colonnes Pièce / Fenêtres / Stores)
+  │     ├── [NAT] binary_sensor.contact_fenetre_* × 4 (SONOFF SNZB-04)
+  │     └── [TPL] sensor.store_salon_status / sensor.store_bureau_status
+  └── Page /stores (2 sections — Salon + Bureau)
+        ├── enhanced-shutter-card
+        │     └── [NAT] cover.store_salon / cover.store_bureau (Zigbee2MQTT)
+        │     └── [NAT] sensor.store_*_signal_strength
+        ├── Boutons position rapide (5 × cover.set_cover_position)
+        │     └── Mapping non-linéaire calibré (Salon: 100/85/70/49/20, Bureau: 100/90/60/45/25)
+        ├── Conditions affichées
+        │     └── [NAT] sensor.th_balcon_nord_temperature (SONOFF SNZB-02 balcon)
+        ├── Batteries contacts
+        │     └── [NAT] sensor.contact_fenetre_salon/bureau_sonoff_battery
+        └── DnD voyants commandes
+              └── [NAT] light.store_salon_dnd / light.store_bureau_dnd (helpers UI)
 ```
 
 ---
 
 ## LIGNE 4 — RÉSEAU & SYSTÈME
 
-### 🔲 L4C1 — Freebox Pop
+### ✅ L4C1 — Freebox Pop
+`docs/L4C1_FREEBOX/`
 
 ```
 L4C1 Freebox
-  └── [NAT] intégration Freebox (natif HA)
-        sensor.freebox_* (débit, connexion)
+  ├── Vignette (custom:button-card — navigation pure, pas d'entité live)
+  ├── Page /systeme-freebox
+  │     ├── Bloc Speedtest
+  │     │     ├── Déclencheur manuel → homeassistant.update_entity
+  │     │     │     └── [NAT] sensor.speedtest_cli_data (Speedtest CLI)
+  │     │     │     └── [NAT] sensor.speedtest_download (Speedtest CLI)
+  │     │     └── Bouton popup → #speedtest_details
+  │     └── Bloc Freebox info (stack-in-card)
+  │           ├── [NAT] device_tracker.freebox_v8_r1 (attr: IPv4, IPv6, uptime, connection_type, firmware_version)
+  │           ├── [NAT] sensor.freebox_download_speed
+  │           ├── [NAT] sensor.freebox_upload_speed
+  │           ├── [NAT] sensor.freebox_temperature_1
+  │           └── [NAT] sensor.freebox_temperature_cpu_b
+  └── Pop-up #speedtest_details (Historique 24h Download/Upload/Ping)
+        ├── [NAT] sensor.speedtest_cli_data (attr: isp, server.name/location/country)
+        ├── [TPL] sensor.speedtest_cli_download  → templates/SpeedTest/ST_01_speedTest.yaml
+        ├── [TPL] sensor.speedtest_cli_upload    → templates/SpeedTest/ST_01_speedTest.yaml
+        └── [TPL] sensor.speedtest_cli_ping      → templates/SpeedTest/ST_01_speedTest.yaml
+
+⚠️ Page originellement optimisée pour Raspberry Pi — ajustements possibles sur x86-64
 ```
 
 ---
@@ -265,12 +322,37 @@ L5C3 MariaDB
 
 ## LIGNE 6 — QUALITÉ & ALERTES
 
-### 🔲 L6C1 — Qualité de l'air (Appartement)
+### ✅ L6C1 — Qualité de l'air (Appartement)
+`docs/L6C1_AIR_QUALITE/`
 
 ```
 L6C1 Air intérieur
-  └── [NAT] sensor.pm25_* + sensor.tcov_* (capteurs PM2.5 / tVOC)
-        └── sensors/meteo/... (à préciser selon intégration)
+  ├── Vignette (custom:button-card 9 lignes × 3 cols — PM2.5 + tCOV × 3 pièces)
+  │     ├── [NAT] sensor.qualite_air_salon_ikea_pm25         (IKEA Vindstyrka)
+  │     ├── [NAT] sensor.qualite_air_salon_ikea_voc_index    (IKEA Vindstyrka)
+  │     ├── [NAT] sensor.qualite_air_bureau_ikea_pm25        (IKEA Vindstyrka)
+  │     ├── [NAT] sensor.qualite_air_bureau_ikea_voc_index   (IKEA Vindstyrka)
+  │     ├── [NAT] sensor.qualite_air_chambre_ikea_pm25       (IKEA Vindstyrka)
+  │     └── [NAT] sensor.qualite_air_chambre_ikea_voc_index  (IKEA Vindstyrka)
+  └── Page /air-quality (3 sections Salon / Bureau / Chambre)
+        ├── Ring-tile PM2.5 (custom:streamline-card — template: pm25_ring-tile)
+        │     ├── entity   → [NAT] sensor.qualite_air_*_ikea_pm25
+        │     └── marker2  → [SNS] sensor.pm2_5_*_moy_24h
+        │                         sensors/air_qualite/pm25_tcov_moy_24h.yaml
+        │                         platform: statistics — mean — max_age: 24h
+        ├── Ring-tile tCOV (custom:streamline-card — template: cov_ring-tile)
+        │     ├── entity   → [TPL] sensor.tcov_*_ppb
+        │     │                    templates/air_qualite/tcov_ppb.yaml
+        │     │                    device_class: volatile_organic_compounds_parts
+        │     │                    source → [NAT] sensor.qualite_air_*_ikea_voc_index
+        │     └── marker2  → [SNS] sensor.tcov_*_moy_24h
+        │                         sensors/air_qualite/pm25_tcov_moy_24h.yaml
+        ├── Boutons pop-up PM2.5 / tCOV (custom:bubble-card button — hash #*pm25 / #*cov)
+        └── Pop-ups graphiques (vertical-stack — bubble-card pop-up + streamline-card)
+              ├── template: pm25 — entity_sensor: [NAT] sensor.qualite_air_*_ikea_pm25
+              │                    mean_24h_entity: [SNS] sensor.pm2_5_*_moy_24h
+              └── template: cov  — entity_sensor: [NAT] sensor.qualite_air_*_ikea_voc_index
+                                   mean_24h_entity: [SNS] sensor.tcov_*_moy_24h
 ```
 
 ---
@@ -320,19 +402,19 @@ Présence
 | L1C1 Météo | ✅ | ✅ |
 | L1C2 Températures | ✅ | ✅ |
 | L1C3 Commandes Clim | 🔲 | 🔲 |
-| L2C1 Énergie Générale | 🔲 | 🔲 |
+| L2C1 Énergie Générale | ✅ | ✅ |
 | L2C2 Énergie Clim | 🔲 | 🔲 |
 | L2C3 Énergie Éclairage | ✅ | ✅ |
 | L3C1 Commandes Éclairage | 🔲 | 🔲 |
 | L3C2 Commandes Prises | 🔲 | 🔲 |
-| L3C3 Fenêtres + Stores | 🔲 | 🔲 |
-| L4C1 Freebox | 🔲 | 🔲 |
+| L3C3 Fenêtres + Stores | ✅ | ✅ |
+| L4C1 Freebox | ✅ | ✅ |
 | L4C2 Mini PC | 🔲 | 🔲 |
 | L4C3 MAJ HA | ✅ | ✅ |
 | L5C1 Batteries | ✅ | ✅ |
 | L5C2 Batterie Portail | 🔲 | 🔲 |
 | L5C3 MariaDB | ✅ | ✅ |
-| L6C1 Air intérieur | 🔲 | 🔲 |
+| L6C1 Air intérieur | ✅ | ✅ |
 | L6C2 Pollution ext. | 🔲 | 🔲 |
 | L6C3 Vigieau | 🔲 | 🔲 |
 | **PAGE HOME** | | |
