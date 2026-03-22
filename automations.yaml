@@ -98,7 +98,7 @@
     data:
       level: info
       message: '[Backup] Weekly exécuté'
-  - action: notify.mobile_app_poco_x7_pro_eric
+  - action: notify.mobile_app_poco_x7_pro_e
     data:
       title: BACKUP WEEKLY
       message: Backup hebdo + tag -> GitHub OK. Semaine {{ now().strftime('%G-W%V')
@@ -148,7 +148,7 @@
       message: 'Echec ou pas de commit depuis 15 min. Verif : /config/.logs/ha_git_backup.log
 
         '
-  - action: notify.mobile_app_poco_x7_pro_eric
+  - action: notify.mobile_app_poco_x7_pro_e
     data:
       title: BACKUP KO
       message: 'Git push KO depuis 15 min. Verif log backup.
@@ -208,7 +208,7 @@
     entity_id: binary_sensor.studio_code_server_running
     state: 'on'
   actions:
-  - action: notify.mobile_app_poco_x7_pro_eric
+  - action: notify.mobile_app_poco_x7_pro_e
     data:
       title: "\U0001F50B Alerte Énergie - Mini-PC"
       message: 'Il est {{ now().strftime(''%H:%M'') }}. Le CPU global est à {{ states(''sensor.system_monitor_utilisation_du_processeur'')
@@ -242,7 +242,7 @@
       - action: hassio.addon_stop
         data:
           addon: a0d7b954_vscode
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_poco_x7_pro_e
         data:
           message: VS Code éteint automatiquement (Économie d'énergie).
     - alias: 'Action : KEEP'
