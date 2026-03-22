@@ -9,7 +9,7 @@
       {% if value_json is defined and value_json.ping is defined %}
         {{ value_json.ping.latency | round(1) }}
       {% else %}
-        Indisponible
+        0
       {% endif %}
     unit_of_measurement: "ms"
     json_attributes:
