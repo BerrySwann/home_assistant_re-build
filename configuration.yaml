@@ -185,3 +185,13 @@ http:
 # annotations_log:
 # - [L95] camera: !include camera.yaml → commenté (obsolète, causait une erreur au démarrage).
 # - [L16] En-tête documentation mis à jour : camera marqué DÉSACTIVÉ.
+
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ RPI_FAN RASPBERRY PI4                                                    │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+fan:
+  - platform: rpi_gpio_pwm
+    fans:
+      - name: RPI Cooling Fan
+        unique_id: rpi_cooling_fan
+        pin: 14
