@@ -132,7 +132,7 @@ clim_chambre_annuel_kwh_um:
   source: sensor.clim_chambre_energie_totale_kwh      # [L6] modif — était: sensor.clim_chambre_nous_energy
   cycle: yearly
 
-clim_chambresensor.clim_chambre_monthly:
+clim_chambre_mensuel_kwh_um:
   source: sensor.clim_chambre_energie_totale_kwh      # [L6] modif
   cycle: monthly
 
@@ -152,3 +152,4 @@ clim_chambre_quotidien_kwh_um:
 # [L5] seche_serviette_sdb ×4: sensor.prise_seche_serviette_salle_de_bain_nous_energy → sensor.seche_serviette_sdb_energie_totale_kwh
 # [L6] clim_chambre ×4       : sensor.clim_chambre_nous_energy → sensor.clim_chambre_energie_totale_kwh
 # Total : 24 sources mises à jour → toutes pointent sur sensors/P1_clim_chauffage/P1_kWh.yaml
+# [Lfix] Convention slug : *_um → *_kwh_um (24 slugs) — règle: source *_kwh → UM *_kwh_um
