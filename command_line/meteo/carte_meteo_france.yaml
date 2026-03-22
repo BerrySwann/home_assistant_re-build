@@ -39,7 +39,7 @@
       while true; do
         today=$(curl -s -X GET "https://public-api.meteofrance.fr/public/DPVigilance/v1/vignettenationale-J/encours" -H "accept: */*" -H "apikey: $api_key" | base64 -w 0);
         i=$((i+1));
-        if [ ${#today} -gt 10000 ];
+        if [ $(echo -n "$today" | wc -c) -gt 10000 ]; then
         then
           echo "$today" | base64 -d > ./www/weather/meteo_france_alerte_today.png;
           echo on;
@@ -66,7 +66,7 @@
       while true; do
         today=$(curl -s -X GET "https://public-api.meteofrance.fr/public/DPVigilance/v1/vignettenationale-J1/encours" -H "accept: */*" -H "apikey: $api_key" | base64 -w 0);
         i=$((i+1));
-        if [ ${#today} -gt 10000 ];
+        if [ $(echo -n "$today" | wc -c) -gt 10000 ]; then
         then
           echo "$today" | base64 -d > ./www/weather/meteo_france_alerte_tomorrow.png;
           echo on;
