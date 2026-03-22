@@ -252,3 +252,29 @@
       sequence:
       - stop: L'utilisateur code encore, on laisse tourner.
   mode: single
+- id: '1774167313491'
+  alias: Raspberry CPU Fan PWM
+  description: Règle la vitesse du ventilateur du Raspberry en fonction de la température
+    du CPU
+  triggers:
+  - trigger: homeassistant
+    event: start
+  - trigger: state
+    entity_id: sensor.processor_temperature
+  actions:
+  - if:
+    - condition: state
+      entity_id: fan.rpi_cooling_fan
+      state: 'off'
+    then:
+    - action: fan.turn_on
+      target:
+        entity_id: fan.rpi_cooling_fan
+  - action: fan.set_percentage
+    target:
+      entity_id: fan.rpi_cooling_fan
+    data:
+      percentage: '{% set temp = states(''sensor.processor_temperature'') | float(100)
+        %} {% if temp < 30 %} 30 {% elif temp < 40 %} 40 {% elif temp < 50 %} 50 {%
+        elif temp < 60 %} 65 {% elif temp < 70 %} 85 {% else %} 100 {% endif %}'
+  mode: single
