@@ -1,0 +1,32 @@
+# ╭────────────────────────────────────────────────────────────────────────╮
+# │ SWITCH : CHAUFFAGE — INTERRUPTEUR/ BP SDB                              │
+# ╰────────────────────────────────────────────────────────────────────────╯
+
+- switch:
+    # ┌───────────────────────────────────┐
+    # │ 1. CONTRÔLE                       │
+    # └───────────────────────────────────┘
+    # --- inter_soufflant_salle_de_bain ---
+    - name: "Inter Soufflant Salle de Bain"
+      unique_id: inter_soufflant_salle_de_bain
+      icon: >
+        {% if is_state('input_boolean.inter_soufflant_salle_de_bain', 'on') %}
+          mdi:radiator
+        {% else %}
+          mdi:radiator-off
+        {% endif %}
+      state: "{{ is_state('input_boolean.inter_soufflant_salle_de_bain', 'on') }}"
+      turn_on:
+        - service: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.inter_soufflant_salle_de_bain
+      turn_off:
+        - service: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.inter_soufflant_salle_de_bain
+
+# annotations_log:
+# - [L1-3] Mise en forme du titre principal (Boîte ASCII arrondie 74 car).
+# - [L6-8] Ajout du titre secondaire (Boîte ASCII carrée 37 car).
+# - [L9] Ajout du titre tertiaire (slug).
+# - [Global] Standardisation de l'indentation et nettoyage de la syntaxe.
