@@ -18,14 +18,14 @@
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Sert aux graphes apexcharts "D.U.T. & Performance SdB" (page energie-clim)
-
-- name: "DUT SdB Total"
-  unique_id: dut_sdb_total
-  unit_of_measurement: "h"
-  icon: mdi:clock-time-eight-outline
-  state: >
-    {{ (states('sensor.dut_sdb_soufflant') | float(0) +
-        states('sensor.dut_sdb_seche_serviettes') | float(0)) | round(2) }}
+- sensor:
+    - name: "DUT SdB Total"
+      unique_id: dut_sdb_total
+      unit_of_measurement: "h"
+      icon: mdi:clock-time-eight-outline
+      state: >
+        {{ (states('sensor.dut_sdb_soufflant') | float(0) +
+            states('sensor.dut_sdb_seche_serviettes') | float(0)) | round(2) }}
 
 # annotations_log:
 # [L1] Somme des 2 DUT SdB (soufflant + sèche-serviettes)
