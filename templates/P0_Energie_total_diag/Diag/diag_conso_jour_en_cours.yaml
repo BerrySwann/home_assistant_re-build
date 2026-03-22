@@ -1,12 +1,11 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 0. TEMPLATES : DIAGNOSTIC CONSO — JOUR EN COURS (7 PÔLES)           │
+# │ PÔLE 0. TEMPLATES : DIAGNOSTIC CONSO — JOUR EN COURS (7 PÔLES)          │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
 # Neuf capteurs templates calculant la consommation journalière identifiée
-# par pôle fonctionnel (7 pôles), plus un capteur de maximum dynamique (pour
-# les graphiques en barres) et un capteur de total identifié. Sources : les
-# utility_meters AMHQ quotidiens de P1, P2 et P3.
+# par pôle fonctionnel (7 pôles), plus un capteur de maximum dynamique et
+# un capteur de total identifié. Sources : utility_meters AMHQ quotidiens P1/P2/P3.
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Pôle 1 Hygiène     : lave_linge + lave_vaisselle + fer_a_repasser (P2 UM Quotidien)
@@ -16,15 +15,12 @@
 # - Pôle 5 Multimédia  : box_internet + tv_salon + tv_chambre + pc_gege + pc_bureau (P2 UM Quotidien)
 # - Pôle 6 Éclairage   : eclairage_total_group (P3 UM Quotidien)
 # - Pôle 7 Autre       : all_standby + tete_de_lit + chargeur_salon + horloge (P2 UM Quotidien)
-# - Max dynamique      : max(pôle1..7) + 0.5 kWh (échelle graphique)
-# - Total identifié    : somme des 7 pôles
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Les UM P1 (chauffage) n'utilisent PAS le suffixe `_kwh_um` — attention
-#   à la nomenclature (ex: sensor.clim_salon_quotidien_um sans _kwh_).
-# - Les UM P2 utilisent le suffixe `_kwh_um`.
-# - Le max dynamique sert à l'axe Y des barres sur le dashboard.
-# - state_class: total_increasing pour compatibilité graphique énergie.
+# - Tous les UM P1/P2/P3 utilisent le suffixe _kwh_um (nomenclature unifiée).
+# - state_class: measurement — ces capteurs reflètent les UM qui resetent à minuit.
+#   Ne PAS utiliser total_increasing (valeur décroissante → WARNING recorder).
+# - Max dynamique : buffer 0.5 kWh (échelle journalière).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale (graphique répartition par pôle — journalier).
@@ -38,7 +34,7 @@
     unique_id: diag_poste_hygiene_quotidien
     unit_of_measurement: "kWh"
     device_class: energy
-    state_class: total_increasing
+    state_class: measurement                          # "[L33] modif: total_increasing → measurement"
     icon: mdi:washing-machine
     state: >
       {% set ll = states('sensor.prise_lave_linge_nous_quotidien_kwh_um') | float(0) %}
@@ -54,7 +50,7 @@
     unique_id: diag_poste_cuisine_quotidien
     unit_of_measurement: "kWh"
     device_class: energy
-    state_class: total_increasing
+    state_class: measurement                          # "[L48] modif: total_increasing → measurement"
     icon: mdi:stove
     state: >
       {% set mo = states('sensor.prise_four_micro_ondes_nous_quotidien_kwh_um') | float(0) %}
@@ -71,7 +67,7 @@
     unique_id: diag_poste_froid_quotidien
     unit_of_measurement: "kWh"
     device_class: energy
-    state_class: total_increasing
+    state_class: measurement                          # "[L62] modif: total_increasing → measurement"
     icon: mdi:fridge
     state: >
       {% set fr = states('sensor.prise_frigo_cuisine_nous_quotidien_kwh_um') | float(0) %}
@@ -86,15 +82,15 @@
     unique_id: diag_poste_chauffage_quotidien
     unit_of_measurement: "kWh"
     device_class: energy
-    state_class: total_increasing
+    state_class: measurement                          # "[L74] modif: total_increasing → measurement"
     icon: mdi:fire
     state: >
-      {% set cs = states('sensor.clim_salon_quotidien_um') | float(0) %}
-      {% set rc = states('sensor.radiateur_elec_cuisine_quotidien_um') | float(0) %}
-      {% set cb = states('sensor.clim_bureau_quotidien_um') | float(0) %}
-      {% set ss = states('sensor.soufflant_sdb_quotidien_um') | float(0) %}
-      {% set sv = states('sensor.seche_serviette_sdb_quotidien_um') | float(0) %}
-      {% set cc = states('sensor.clim_chambre_quotidien_um') | float(0) %}
+      {% set cs = states('sensor.clim_salon_quotidien_kwh_um') | float(0) %}             # "[L77] modif: _um → _kwh_um"
+      {% set rc = states('sensor.radiateur_elec_cuisine_quotidien_kwh_um') | float(0) %} # "[L78] modif: _um → _kwh_um"
+      {% set cb = states('sensor.clim_bureau_quotidien_kwh_um') | float(0) %}            # "[L79] modif: _um → _kwh_um"
+      {% set ss = states('sensor.soufflant_sdb_quotidien_kwh_um') | float(0) %}          # "[L80] modif: _um → _kwh_um"
+      {% set sv = states('sensor.seche_serviette_sdb_quotidien_kwh_um') | float(0) %}    # "[L81] modif: _um → _kwh_um"
+      {% set cc = states('sensor.clim_chambre_quotidien_kwh_um') | float(0) %}           # "[L82] modif: _um → _kwh_um"
       {{ (cs + rc + cb + ss + sv + cc) | round(3) }}
 
   # ╭──────────────────────────────────────────────────────────────────────╮
@@ -105,7 +101,7 @@
     unique_id: diag_poste_multimedia_quotidien
     unit_of_measurement: "kWh"
     device_class: energy
-    state_class: total_increasing
+    state_class: measurement                          # "[L90] modif: total_increasing → measurement"
     icon: mdi:monitor
     state: >
       {% set bx = states('sensor.prise_box_internet_ikea_quotidien_kwh_um') | float(0) %}
@@ -123,7 +119,7 @@
     unique_id: diag_poste_eclairage_quotidien
     unit_of_measurement: "kWh"
     device_class: energy
-    state_class: total_increasing
+    state_class: measurement                          # "[L105] modif: total_increasing → measurement"
     icon: mdi:lightbulb
     state: >
       {{ states('sensor.eclairage_total_group_quotidien_kwh_um') | float(0) | round(3) }}
@@ -136,7 +132,7 @@
     unique_id: diag_poste_autre_quotidien
     unit_of_measurement: "kWh"
     device_class: energy
-    state_class: total_increasing
+    state_class: measurement                          # "[L116] modif: total_increasing → measurement"
     icon: mdi:plus-circle
     state: >
       {% set vs = states('sensor.all_standby_quotidien_kwh_um') | float(0) %}
@@ -148,9 +144,9 @@
   # ╭──────────────────────────────────────────────────────────────────────╮
   # │    MAX DYNAMIQUE (axe Y des barres + 0.5 kWh buffer)                 │
   # ╰──────────────────────────────────────────────────────────────────────╯
-  # --- diag_max_poste_quotidien_dynamique ---
+  # --- diag_max_poste_quotidien ---
   - name: "Diag Max Poste Quotidien"
-    unique_id: diag_max_poste_quotidien_dynamique                          # "[L153] modif : _dynamique ajouté — alignement dashboard"
+    unique_id: diag_max_poste_quotidien
     unit_of_measurement: "kWh"
     device_class: energy
     state: >
@@ -173,7 +169,7 @@
     unique_id: diag_total_identifie_quotidien
     unit_of_measurement: "kWh"
     device_class: energy
-    state_class: total_increasing
+    state_class: measurement                          # "[L150] modif: total_increasing → measurement"
     state: >
       {% set poles = [
         states('sensor.diag_poste_hygiene_quotidien') | float(0),
@@ -187,6 +183,5 @@
       {{ (poles | sum) | round(2) }}
 
 # annotations_log:
-# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.
-# - [L37] Pôle 4 Chauffage : P1 UM sans suffixe _kwh_ (ex: clim_salon_quotidien_um).
-# - [L37] Pôle 2 Prises : P2 UM avec suffixe _kwh_um.
+# [L33,48,62,74,90,105,116,150] state_class: total_increasing → measurement
+# [L77-82] P1 UM Pôle 4 Chauffage : _quotidien_um → _quotidien_kwh_um (×6)

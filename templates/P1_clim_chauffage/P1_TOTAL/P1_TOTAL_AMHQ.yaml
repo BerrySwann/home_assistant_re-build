@@ -1,25 +1,24 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 1. TEMPLATES : TOTAUX ÉNERGIE (kWh) & PUISSANCE P1 — AMHQ          │
+# │ PÔLE 1. TEMPLATE — TOTAUX AMHQ & PUISSANCE INSTANTANÉE CHAUFFAGE & CLIM │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Sensors template agrégeant les 6 équipements P1 en 5 capteurs de synthèse :
-# - Énergie totale × 4 périodes AMHQ (kWh, somme des UM individuels)
-# - Puissance instantanée totale (W, somme des capteurs hardware)
-# NB : Les avg_watts totaux sont dans P1_AVG/P1_AVG_TOTAL_AMHQ.yaml.
+# Cinq capteurs templates agrégeant la consommation totale Pôle 1 (6 appareils)
+# sur 4 cycles temporels (Annuel / Mensuel / Hebdo / Quotidien) + puissance W.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Sources kWh : sensor.*_{période}_kwh_um (P1_UM_AMHQ.yaml)
-# - Puissance   : sensor.*_nous_power / sensor.*_power (hardware NOUS)
-# - Formule     : somme des 6 capteurs UM de la même période
+# - Sources kWh : utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml
+#   → sensor.*_{période}_kwh_um (clim_salon, radiateur_cuisine, clim_bureau,
+#     soufflant_sdb, seche_serviette_sdb, clim_chambre)
+# - Source W   : sensors natifs NOUS (*_nous_power, radiateur_elec_cuisine_power,
+#     prise_soufflant_salle_de_bain_nous_power, prise_seche_serviette_salle_de_bain_nous_power)
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Ces capteurs sont des ORPHELINS : pas de propre UM créé pour ces totaux.
-#   Les unique_ids n'ont PAS de suffixe _kwh_um (ce ne sont pas des outputs UM).
-# - Ne pas confondre avec P1_AVG_TOTAL_AMHQ.yaml (puissances moyennes W).
+# - Le capteur de puissance (conso_clim_rad_total) lit les sensors natifs NOUS
+#   et non les UM — c'est la puissance instantanée, pas l'énergie cumulée.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L2C2 Conso Énergie Clim/Radiateur/Soufflant (totaux kWh et puissance)
+# - L2C2 Conso Énergie Clim / Radiateur / Soufflant (totaux AMHQ + W temps réel)
 
 - sensor:
 
@@ -107,9 +106,3 @@
           states('sensor.prise_soufflant_salle_de_bain_nous_power') | float(0) +
           states('sensor.prise_seche_serviette_salle_de_bain_nous_power') | float(0) +
           states('sensor.clim_chambre_nous_power') | float(0)) | round(3) }}
-
-# annotations_log:
-# [L1] avg_watts extraits → P1_AVG/P1_AVG_TOTAL_AMHQ.yaml (règle 1 fonction = 1 fichier)
-# [L2] +hebdomadaire : conso_clim_rad_total_hebdomadaire (sources *_hebdomadaire_kwh_um ×6)
-# [L3] +annuel       : conso_clim_rad_total_annuel (sources *_annuel_kwh_um ×6)
-# Total : 5 sensors (4 kWh AMHQ + 1 puissance instantanée)
