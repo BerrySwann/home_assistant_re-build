@@ -1,0 +1,112 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 1. TEMPLATES : TOTAUX ÉNERGIE & PUISSANCE CHAUFFAGE / CLIM          │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensors template agrégeant les 6 équipements P1 en 4 capteurs de synthèse :
+# - Puissance moyenne glissante totale (W, depuis minuit)  → clim_rad_total_avg_watts_daily
+# - Énergie totale quotidienne (kWh, UM)                  → conso_clim_rad_total_quotidien
+# - Énergie totale mensuelle (kWh, UM)                    → conso_clim_rad_total_mensuel
+# - Puissance instantanée totale (W)                      → conso_clim_rad_total
+#
+# ## 🧮 CALCUL & SOURCES :
+# - avg_watts (quotidien) : somme des sensor.*_avg_watts_quotidien (P1_avg.yaml)
+# - Énergie quotidienne   : somme des sensor.*_quotidien_kwh_um (P1_UM_AMHQ.yaml)
+# - Énergie mensuelle     : somme des sensor.*_mensuel_kwh_um (P1_UM_AMHQ.yaml)
+# - Puissance instant.    : somme des sensor.*_nous_power (capteurs hardware NOUS)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Les unique_ids "orphelins" (conso_clim_rad_total_quotidien / _mensuel /
+#   clim_rad_total_avg_watts_daily) sont intentionnellement conservés avec
+#   leur suffixe d'origine (_daily / _quotidien / _mensuel sans _kwh_um) :
+#   le dashboard y fait référence sous ces noms.
+# - Ne pas confondre conso_clim_rad_total_quotidien (somme UM) avec les
+#   capteurs UM individuels (*_quotidien_kwh_um). Ici : ORPHELIN = pas de
+#   propre UM créé pour ce total.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C2 Conso Énergie Clim/Radiateur/Soufflant (puissance de croisière et totaux)
+
+- sensor:
+
+    # ┌─────────────────────────────────────┐
+    # │ TOTAUX P1 — AVG WATTS (QUOTIDIEN)   │
+    # └─────────────────────────────────────┘
+
+    # --- clim_rad_total_avg_watts_daily ---
+    - name: "Clim. Rad. Total Avg Watts Daily"
+      unique_id: clim_rad_total_avg_watts_daily
+      device_class: power
+      unit_of_measurement: "W"
+      state: >
+        {{ (states('sensor.clim_salon_avg_watts_quotidien') | float(0) +
+          states('sensor.radiateur_elec_cuisine_avg_watts_quotidien') | float(0) +
+          states('sensor.clim_bureau_avg_watts_quotidien') | float(0) +
+          states('sensor.soufflant_sdb_avg_watts_quotidien') | float(0) +
+          states('sensor.seche_serviette_sdb_avg_watts_quotidien') | float(0) +
+          states('sensor.clim_chambre_avg_watts_quotidien') | float(0)) | round(3) }}
+
+    # ┌─────────────────────────────────────┐
+    # │ TOTAUX P1 — ÉNERGIE QUOTIDIENNE     │
+    # └─────────────────────────────────────┘
+
+    # --- conso_clim_rad_total_quotidien ---
+    - name: "Conso. Clim. Rad. Total QUOTIDIEN"
+      unique_id: conso_clim_rad_total_quotidien
+      device_class: energy
+      unit_of_measurement: "kWh"
+      state: >
+        {{ (states('sensor.clim_salon_quotidien_kwh_um') | float(0) +
+          states('sensor.radiateur_elec_cuisine_quotidien_kwh_um') | float(0) +
+          states('sensor.clim_bureau_quotidien_kwh_um') | float(0) +
+          states('sensor.soufflant_sdb_quotidien_kwh_um') | float(0) +
+          states('sensor.seche_serviette_sdb_quotidien_kwh_um') | float(0) +
+          states('sensor.clim_chambre_quotidien_kwh_um') | float(0)) | round(3) }}
+
+    # ┌─────────────────────────────────────┐
+    # │ TOTAUX P1 — ÉNERGIE MENSUELLE       │
+    # └─────────────────────────────────────┘
+
+    # --- conso_clim_rad_total_mensuel ---
+    - name: "Conso. Clim. Rad. Total MENSUEL"
+      unique_id: conso_clim_rad_total_mensuel
+      device_class: energy
+      unit_of_measurement: "kWh"
+      state: >
+        {{ (states('sensor.clim_salon_mensuel_kwh_um') | float(0) +
+          states('sensor.radiateur_elec_cuisine_mensuel_kwh_um') | float(0) +
+          states('sensor.clim_bureau_mensuel_kwh_um') | float(0) +
+          states('sensor.soufflant_sdb_mensuel_kwh_um') | float(0) +
+          states('sensor.seche_serviette_sdb_mensuel_kwh_um') | float(0) +
+          states('sensor.clim_chambre_mensuel_kwh_um') | float(0)) | round(3) }}
+
+    # ┌─────────────────────────────────────┐
+    # │ TOTAUX P1 — PUISSANCE INSTANTANÉE   │
+    # └─────────────────────────────────────┘
+
+    # --- conso_clim_rad_total ---
+    - name: "Conso Clim Rad Total"
+      unique_id: conso_clim_rad_total
+      device_class: power
+      unit_of_measurement: "W"
+      state: >
+        {{ (states('sensor.clim_salon_nous_power') | float(0) +
+          states('sensor.radiateur_elec_cuisine_power') | float(0) +
+          states('sensor.clim_bureau_nous_power') | float(0) +
+          states('sensor.prise_soufflant_salle_de_bain_nous_power') | float(0) +
+          states('sensor.prise_seche_serviette_salle_de_bain_nous_power') | float(0) +
+          states('sensor.clim_chambre_nous_power') | float(0)) | round(3) }}
+
+# annotations_log:
+# [L1] avg_watts sources ×5 : sensor.*_avg_watts_daily → sensor.*_avg_watts_quotidien
+#      (sources pointent désormais sur P1_avg.yaml renommé en session précédente)
+# [L2] avg_watts radiateur  : sensor.radiateur_cuisine_avg_watts_daily
+#                            → sensor.radiateur_elec_cuisine_avg_watts_quotidien
+#      (double correction : préfixe + suffixe)
+# [L3] total quotidien ×6   : sensor.*_quotidien → sensor.*_quotidien_kwh_um
+#      (sources alignées sur P1_UM_AMHQ.yaml — convention *_kwh_um)
+# [L4] total mensuel ×6     : sensor.*_mensuel → sensor.*_mensuel_kwh_um
+# [L5] puissance instant. : inchangée (hardware sensors NOUS — pas de renommage)
+# ORPHELINS (unique_id conservé tel quel, référencé par le dashboard) :
+#   sensor.clim_rad_total_avg_watts_daily / sensor.conso_clim_rad_total_quotidien
+#   sensor.conso_clim_rad_total_mensuel   / sensor.conso_clim_rad_total
