@@ -4065,8 +4065,8 @@ views:
               - type: markdown
                 content: >
                   <center>Humidité: <ha-icon icon="mdi:water-percent"></ha-icon>
-                  {{ states("sensor.th_balcon_nord_humidity") | round(0)
-                  }}%</center>
+                  {{ states("sensor.th_balcon_nord_humidity") | float(0) |
+                  round(0) }}%</center>
                 card_mod:
                   style: |
                     ha-card {
@@ -22784,7 +22784,7 @@ views:
                     
                     /* --- MAIN SETTINGS --- */
                     {% set max_watts = 250 %}           {# The maximum W your device supports #}
-                    {% set show_ma = ture %}            {# Set to true for mA, false for A #}
+                    {% set show_ma = true %}            {# Set to true for mA, false for A #}
                     {% set custom_msg = "MAX: 250W" %}  {# Text shown bottom right #}
 
                     {% set theme_mode = 'dark' %}        {# 'dark' or 'light' #}
