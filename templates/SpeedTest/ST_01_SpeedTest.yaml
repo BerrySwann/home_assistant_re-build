@@ -12,27 +12,20 @@
 # - Download      : state_attr(..., 'download').bandwidth / 125000 → Mbps
 # - Upload        : state_attr(..., 'upload').bandwidth / 125000 → Mbps
 # - Ping          : state_attr(..., 'ping').latency → ms (valeur directe)
-# - Fallback      : "Indisponible" si l'attribut est absent ou non défini
+# - Fallback      : none (→ état "unknown" HA) si l'attribut est absent
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - sensor.speedtest_cli_data ≠ sensor.speedtest_download
 #   └── sensor.speedtest_cli_data  : capteur parent [NAT] source de CE fichier
-#   └── sensor.speedtest_download  : entité native séparée [NAT] utilisée comme
-#       cible du homeassistant.update_entity dans la page L4C1 pour déclencher
-#       le test — elle n'alimente PAS ces templates.
-# - Les attributs .bandwidth et .latency sont dans des sous-objets JSON
-#   (download{}, upload{}, ping{}) — accès direct à l'attribut racine invalide.
-# - Les valeurs sont "gelées" entre deux tests planifiés. Le déclenchement
-#   manuel via update_entity sur sensor.speedtest_download force un nouveau test.
-# - Pas de device_class standard HA pour la vitesse réseau (Mbps) ni le ping (ms).
-#   state_class: measurement activé pour que les valeurs soient enregistrées
-#   correctement dans la base (courbe historique dans les mini-graph-card).
+#   └── sensor.speedtest_download  : entité native séparée [NAT] — déclenche le test
+# - Les attributs .bandwidth et .latency sont dans des sous-objets JSON.
+# - PIÈGE CRITIQUE : Retourner une chaîne (ex: "Indisponible") avec
+#   unit_of_measurement défini → ERROR "expected a number" en log.
+#   → Utiliser {{ none }} : HA interprète none comme état "unknown" et bypass
+#   la validation numérique. Jamais de string texte comme fallback ici.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L4C1 Freebox Pop → Page /systeme-freebox → Pop-up #speedtest_details
-#   └── sensor.speedtest_cli_download → mini-graph 24h (seuils 100/200/400/600/800 Mbps)
-#   └── sensor.speedtest_cli_upload   → mini-graph 24h (seuils 50/100/200/400/600 Mbps)
-#   └── sensor.speedtest_cli_ping     → mini-graph 24h (seuils 40/35/30/25/20 ms)
 
 - sensor:
 
@@ -51,7 +44,7 @@
         {% if dl and dl.bandwidth is defined %}
           {{ (dl.bandwidth / 125000) | round(1) }}
         {% else %}
-          Indisponible
+          {{ none }}                                  {# "[L50] modif: 'Indisponible' → none" #}
         {% endif %}
 
     # --- speedtest_cli_upload ---
@@ -65,7 +58,7 @@
         {% if ul and ul.bandwidth is defined %}
           {{ (ul.bandwidth / 125000) | round(1) }}
         {% else %}
-          Indisponible
+          {{ none }}                                  {# "[L62] modif: 'Indisponible' → none" #}
         {% endif %}
 
     # --- speedtest_cli_ping ---
@@ -79,13 +72,10 @@
         {% if p and p.latency is defined %}
           {{ p.latency | round(1) }}
         {% else %}
-          Indisponible
+          {{ none }}                                  {# "[L74] modif: 'Indisponible' → none" #}
         {% endif %}
 
 # annotations_log:
-# - [L1]   Boîte ASCII arrondie 74 tirets (absente sur GitHub → ajoutée).
-# - [L2]   Titre : "[ ST ] TEMPLATES : SPEEDTEST CLI — DOWNLOAD / UPLOAD / PING".
-# - [L10]  CALCUL : précision ajoutée — distinction sensor.speedtest_cli_data vs sensor.speedtest_download.
-# - [L18]  IMPORTANT : note critique ajoutée sur les deux entités Speedtest distinctes.
-# - [L27]  TABLEAU DE BORD : chemin L4C1 → page → popup + seuils couleur documentés.
-# - [L39,51,62] state_class: measurement ajouté sur les 3 sensors (historique DB).
+# [L50,62,74] fallback 'Indisponible' → {{ none }} sur les 3 capteurs
+# Cause : HA valide état numérique si unit_of_measurement défini — string → ERROR log
+# Fix : none → état "unknown" HA → bypass validation → plus d'erreur

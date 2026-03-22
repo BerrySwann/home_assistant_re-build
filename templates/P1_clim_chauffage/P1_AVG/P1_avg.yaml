@@ -1,34 +1,29 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 1. TEMPLATE : PUISSANCE MOYENNE (W) CHAUFFAGE & CLIM — AMHQ        │
+# │ PÔLE 1. TEMPLATE : PUISSANCE MOYENNE CHAUFFAGE & CLIM                   │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Sensors template calculant la puissance moyenne glissante (W) de chaque
-# équipement chauffage/clim sur 4 périodes AMHQ : annuel, mensuel, hebdo,
-# quotidien. Couvre 5 pièces : Salon, Cuisine, Bureau, SDB (soufflant +
-# sèche-serviette), Chambre. 6 appareils × 4 périodes = 24 sensors.
+# Capteurs templates calculant la puissance moyenne (W) par équipement P1,
+# sur 4 cycles temporels (Annuel / Mensuel / Hebdo / Quotidien).
+# Formule : (kWh UM × 1000) / heures_écoulées_dans_le_cycle.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Formule : (kWh_UM × 1000) / heures_écoulées_depuis_début_période
-# - Quotidien  : heures depuis minuit
-# - Mensuel    : heures depuis le 1er du mois
-# - Hebdo      : heures depuis lundi 00h00 (weekday() = 0 = lundi)
-# - Annuel     : heures depuis le 1er janvier 00h00
-# - Sources UM : sensor.[equipement]_{période}_kwh_um (P1_UM_AMHQ.yaml)
-# - Garde division zéro : if h > 0.1 else 0
+# - Sources : utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml
+#   → sensor.*_{période}_kwh_um
+# - Quotidien  : h = now().hour + minute/60
+# - Hebdo      : h = weekday × 24 + now().hour + minute/60
+# - Mensuel    : h = (now().day - 1) × 24 + now().hour + minute/60
+# - Annuel     : h = (now() - 1er jan) en secondes / 3600
+# - Guard : h > 0.1 → sinon 0 (évite division par zéro en début de cycle)
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - En début de période (h < 0.1), retourne 0 — normal.
-# - Puissance moyenne W ≠ puissance instantanée.
-# - Les UM sources doivent être chargés AVANT ce template dans HA.
+# - Ces capteurs n'ont pas de state_class (valeur calculée, pas cumulée).
+# - Ne pas utiliser device_class: energy ici — c'est de la puissance (W).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L2C2 Conso Énergie Clim/Radiateur/Soufflant (puissance de croisière W)
+# - L2C2 Conso Énergie Clim / Radiateur / Soufflant (graphes AVG)
 
 - sensor:
-    # ==========================================================================
-    # PÔLE 1. CHAUFFAGE / CLIM
-    # ==========================================================================
 
     # ┌───────────────────────────────────┐
     # │ 4. SALON                          │
@@ -295,10 +290,3 @@
         {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
         {% set h = (now() - debut).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
-
-# annotations_log:
-# [L1] +hebdomadaire ×6 : formule (now().weekday() * 24) + h + m/60
-# [L2] +annuel ×6       : formule timedelta depuis now().replace(month=1, day=1, ...)
-# [L3] radiateur_elec_cuisine ×4 : corrigé (était radiateur_cuisine dans TREE_ORIGINE)
-# [L4] seche_serviette_sdb ×4   : corrigé (était seche_serv dans TREE_ORIGINE)
-# Total : 24 sensors (6 appareils × 4 périodes AMHQ)

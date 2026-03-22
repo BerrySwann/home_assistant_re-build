@@ -1,6 +1,25 @@
-# ╭──────────────────────────────────────────────────────────────────────────────╮
-# │ TEMPLATES : CLIMATISATION & CHAUFFAGE — POWER STATUS ET ÉTATS                │
-# ╰──────────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 1. UI DASHBOARD — ÉTATS & STATUTS CHAUFFAGE / CLIM (P1)            │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Templates d'affichage pour le tableau de bord — états ON/OFF, modes clim,
+# seuils de puissance par pièce. Ne contient aucun calcul kWh ou DUT.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources directes : sensor.*_nous_power (prises NOUS)
+#   → radiateur_elec_cuisine_power, prise_soufflant_salle_de_bain_nous_power,
+#     prise_seche_serviette_salle_de_bain_nous_power
+# - climate.* entités pour les modes clim (off/cool/heat/fan_only)
+# - sensor.mode_ete_hiver pour la logique globale
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Capteurs de statut (on/off) servent aux DUT history_stats en tant que source.
+# - Ne PAS y placer de calculs kWh — ce fichier est ui_dashboard UNIQUEMENT.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C3 Commandes Clim / L2C2 Conso Énergie Clim
+
 - sensor:
 
     # ┌───────────────────────────────────┐
