@@ -114,8 +114,8 @@
       {{ (vs + tl + ch + hr) | round(3) }}
 
   # --- diag_max_poste_mensuel ---
-  - name: "Diag Max Poste Mensuel"
-    unique_id: diag_max_poste_mensuel
+  - name: "Diag Max Poste Mensuel Dynamique"
+    unique_id: diag_max_poste_mensuel_dynamique
     unit_of_measurement: "kWh"
     device_class: energy
     state: >
