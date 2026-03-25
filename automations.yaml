@@ -190,62 +190,81 @@
   mode: single
 - id: '1773253636237'
   alias: Système - Économie Énergie VS Code
-  description: Coupe VS Code si le CPU dépasse 10% ou s'il est inactif, avec confirmation
+  description: Coupe VS Code si son CPU dépasse 10% ou s'il est inactif, avec confirmation
     (H24).
   triggers:
-  - trigger: numeric_state
-    entity_id: sensor.system_monitor_utilisation_du_processeur
+  - entity_id: sensor.studio_code_server_pourcentage_du_processeur
     above: 10
     for:
       minutes: 10
-  - trigger: numeric_state
-    entity_id: sensor.studio_code_server_cpu_percent
+    id: high_cpu
+    trigger: numeric_state
+  - entity_id: sensor.studio_code_server_pourcentage_du_processeur
     below: 0.8
     for:
       minutes: 15
+    id: inactive
+    trigger: numeric_state
   conditions:
   - condition: state
-    entity_id: binary_sensor.studio_code_server_running
+    entity_id: binary_sensor.studio_code_server_en_cours_d_execution
     state: 'on'
   actions:
-  - action: notify.mobile_app_poco_x7_pro_e
-    data:
-      title: "\U0001F50B Alerte Énergie - Mini-PC"
-      message: 'Il est {{ now().strftime(''%H:%M'') }}. Le CPU global est à {{ states(''sensor.system_monitor_utilisation_du_processeur'')
-        }}%. On coupe VS Code pour économiser ?
-
-        '
-      data:
-        actions:
-        - action: STOP_VSC
-          title: Oui, couper
-        - action: KEEP_VSC
-          title: Non, je travaille encore
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: high_cpu
+      sequence:
+      - data:
+          title: ALERTE VSC CPU
+          message: CPU VSC >10% dps 10m. Le couper pour economiser ?
+          data:
+            actions:
+            - action: STOP_VSC
+              title: Oui, couper
+            - action: KEEP_VSC
+              title: Non, ignorer
+        action: notify.mobile_app_poco_x7_pro_e
+    - conditions:
+      - condition: trigger
+        id: inactive
+      sequence:
+      - data:
+          title: ALERTE VSC INAC
+          message: VSC inactif dps 15m. Le couper pour economiser ?
+          data:
+            actions:
+            - action: STOP_VSC
+              title: Oui, couper
+            - action: KEEP_VSC
+              title: Non, ignorer
+        action: notify.mobile_app_poco_x7_pro_e
   - wait_for_trigger:
-    - trigger: event
-      event_type: mobile_app_notification_action
+    - event_type: mobile_app_notification_action
       event_data:
         action: STOP_VSC
-    - trigger: event
-      event_type: mobile_app_notification_action
+      trigger: event
+    - event_type: mobile_app_notification_action
       event_data:
         action: KEEP_VSC
+      trigger: event
     timeout: 00:05:00
     continue_on_timeout: true
   - choose:
-    - alias: 'Action : STOP (ou timeout)'
+    - alias: 'ACTION : STOP (OU TIMEOUT)'
       conditions:
       - condition: template
         value_template: '{{ wait.trigger == none or wait.trigger.event.data.action
           == ''STOP_VSC'' }}'
       sequence:
-      - action: hassio.addon_stop
-        data:
+      - data:
           addon: a0d7b954_vscode
-      - action: notify.mobile_app_poco_x7_pro_e
-        data:
-          message: VS Code éteint automatiquement (Économie d'énergie).
-    - alias: 'Action : KEEP'
+        action: hassio.addon_stop
+      - data:
+          title: VSC ARRETE
+          message: Arret auto VSC OK. (Economie energie).
+        action: notify.mobile_app_poco_x7_pro_e
+    - alias: 'ACTION : KEEP'
       conditions:
       - condition: template
         value_template: '{{ wait.trigger.event.data.action == ''KEEP_VSC'' }}'
