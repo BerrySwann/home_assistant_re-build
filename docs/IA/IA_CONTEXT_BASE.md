@@ -1,5 +1,5 @@
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
-*Dernière mise à jour : 2026-03-18*
+*Dernière mise à jour : 2026-03-25*
 
 ---
 
@@ -62,13 +62,21 @@ Cette numérotation doit être suivie scrupuleusement au sein de chaque bloc de 
 
 ### 4. NOMENCLATURE HORS-PIÈCES (SYSTÈME & DIVERS)
 Pour tous les éléments qui ne sont pas rattachés à une pièce physique spécifique, l'indexation se fait par catégorie lettrée :
+
 **[ M ] - MÉTÉO & ENVIRONNEMENT EXTERNE :**
 - `M_01_meteo_alerte`
 - `M_02_meteo_vent`
 - `M_03_meteo_blitzortung`
 - `M_04_tendances_th_ext_card`
 
-*(Note : En attente de la définition des prochaines catégories lettrées pour le Réseau, le Système, etc.)*
+**[ A ] - QUALITÉ DE L'AIR (Air quality) :**
+- `A_01_AIR_QUALITY` — sensors stats 24h PM2.5 + tCOV (sensors/) + templates ppb tCOV (templates/)
+
+**[ ST ] - SPEEDTEST (SpeedTest) :**
+- `ST_01_speedTest` — capteurs Download / Upload / Ping depuis `sensor.speedtest_cli_data`
+
+**[ S ] - STORES (Volets motorisés) :**
+- `S_01_STORES` — templates d'état `store_salon_status` / `store_bureau_status` (HTML couleur)
 
 ---
 
@@ -300,11 +308,12 @@ ReBuild/                                         (dossier de travail local — C
 ├── secrets.yaml                                 (identifiants HA — NE JAMAIS synchroniser sur GitHub)
 │
 ├── Dashboard/                                   (dernier dashboard complet — mettre à jour à chaque changement)
-│   └── dashboard_2026-03-16.yaml
+│   └── dashboard_2026-03-20.yaml                (⚠️ À copier manuellement depuis GitHub — trop grand pour fetch auto)
+│       [GitHub source: dashbord_2026-03-20.yalm — 2 typos: "dashbord" + ".yalm"]
 │
 ├── TREE_CORRIGE/                                (← COPIER sensors/ templates/ utility_meter/ directement dans /config/)
-│   ├── sensors/                                 (7 fichiers — intégrations kWh & mini/maxi)
-│   ├── templates/                               (27 fichiers — calculs, AVG, UI, météo, présence)
+│   ├── sensors/                                 (12 fichiers — intégrations kWh, mini/maxi, qualité air)
+│   ├── templates/                               (31 fichiers — calculs, AVG, UI, météo, présence, stores, speedtest)
 │   └── utility_meter/                           (9 fichiers — compteurs AMHQ)
 │
 ├── TREE_ORIGINE/                                (snapshot GitHub de référence — état avant corrections)
@@ -335,6 +344,10 @@ ReBuild/                                         (dossier de travail local — C
     │   ├── L2C3_VIGNETTE_ECLAIRAGE.md
     │   ├── PAGE_ENERGIE_ECLAIRAGE.md
     │   └── COULEURS_ECLAIRAGE_PAR_PIECE.md
+    ├── L4C2_MINI_PC/
+    │   ├── L4C2_VIGNETTE_MINI_PC.md
+    │   ├── PAGE_RASPI.md                        (page transitoire RPi4 — conservée jusqu'à migration)
+    │   └── PAGE_MINI_PC.md                      (page définitive Mini PC Intel NUC — à déployer après migration)
     ├── L4C3_MAJ_HA/
     │   ├── L4C3_VIGNETTE_MAJ.md
     │   └── PAGE_MAJ.md
@@ -398,8 +411,10 @@ ReBuild/                                         (dossier de travail local — C
 │   │   ├── 01_ecojoko_AMHQ_cost.yaml
 │   │   ├── 02_ratio_hp_hc.yaml
 │   │   └── 03_AVG_ecojoko.yaml
-│   └── Linky
-│       └── MyElectricalData.yaml
+│   ├── Linky
+│   │   └── MyElectricalData.yaml
+│   └── total par poste_7
+│       └── total_par_poste_7.yaml               (puissance instantanée × 7 pôles fonctionnels)
 ├── P1_clim_chauffage
 │   ├── P1_01_MASTER
 │   │   └── P1_01_clim_logique_system_autom.yaml
@@ -425,6 +440,12 @@ ReBuild/                                         (dossier de travail local — C
 ├── P4_groupe_presence
 │   ├── 01_phones_wifi_cellular_card_autom.yaml
 │   └── 02_logique_wifi_cellular.yaml
+├── Air_quality                                  ([ A ] — catégorie lettrée)
+│   └── A_01_AIR_QUALITY.yaml                    (templates ppb tCOV × 3 pièces)
+├── SpeedTest                                    ([ ST ] — catégorie lettrée)
+│   └── ST_01_speedTest.yaml                     (Download / Upload / Ping depuis speedtest_cli_data)
+├── Stores                                       ([ S ] — catégorie lettrée)
+│   └── S_01_STORES.yaml                         (store_salon_status + store_bureau_status)
 ├── meteo
 │   ├── M_01_meteo_alertes_card.yaml
 │   ├── M_02_meteo_vent_vence_card.yaml
@@ -437,7 +458,9 @@ ReBuild/                                         (dossier de travail local — C
 /config/sensors
 ├── P0_Energie_total_diag
 │   └── Ecojoko_mini_maxi
-│       └── Ecojoko_mini_maxi_avg_1h.yaml
+│       └── Ecojoko_mini_maxi_avg.yaml           (stats min/max 24h sur puissance W Ecojoko)
+├── Air_quality                                  ([ A ] — catégorie lettrée)
+│   └── A_01_AIR_QUALITY.yaml                    (stats mean 24h PM2.5 + tCOV × 3 pièces)
 ├── P2_prise
 │   ├── P2_kWh_prises.yaml
 │   └── P2_kWh_veilles.yaml
@@ -485,6 +508,7 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Ecojoko/02_ratio_hp_hc.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Ecojoko/03_AVG_ecojoko.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Linky/MyElectricalData.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/total%20par%20poste_7/total_par_poste_7.yaml
 
 **Pôle 1 - Chauffage & Clim**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml
@@ -515,6 +539,15 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/meteo/M_04_tendances_th_ext_card.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/meteo/M_05_cycle_solaire.yaml
 
+**Qualité de l'Air [ A ]**
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/Air_quality/A_01_AIR_QUALITY.yaml
+
+**SpeedTest [ ST ]**
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/SpeedTest/ST_01_speedTest.yaml
+
+**Stores [ S ]**
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/Stores/S_01_STORES.yaml
+
 **Utilitaires**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/utilitaires/jour_nuit.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/utilitaires/Mise_a_jour_home_assistant.yaml
@@ -522,7 +555,10 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 ### 📂 SENSORS
 
 **Pôle 0 - Diag & Énergie Globale**
-- `Ecojoko_mini_maxi_avg_1h.yaml` *(absent sur GitHub — fichier local uniquement)*
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P0_Energie_total_diag/Ecojoko_mini_maxi/Ecojoko_mini_maxi_avg.yaml
+
+**Qualité de l'Air [ A ]**
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/Air_quality/A_01_AIR_QUALITY.yaml
 
 **Pôle 2 - Prises**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P2_prise/P2_kWh_prises.yaml

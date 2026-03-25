@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--14-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--03--22-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page%20Doc-ff9800?style=flat-square)](.)
 
 </div>
@@ -23,13 +23,6 @@
 
 ---
 
-> ## ⚠️ NOTE IMPORTANTE — SECTION CONSOMMATION / CLIM
->
-> **La section "Consommation" (chips clim + graphique ApexCharts conso) sera mise à jour ultérieurement** lorsque le Pôle 1 (Chauffage & Climatisation) sera finalisé dans ReBuild.
-> Les entités `sensor.{piece}_power_status`, `sensor.clim_{piece}_etat`, `sensor.temperature_moyenne_interieure`, `sensor.conso_clim_rad_total*` et `sensor.clim_rad_total_avg_watts_daily` sont documentées ici mais marquées comme **dépendantes du Pôle 1**.
-
----
-
 ## 📋 TABLE DES MATIÈRES
 
 1. [Vue d'ensemble](#vue-densemble)
@@ -37,7 +30,7 @@
 3. [Section HEADER](#section-header)
 4. [Section EXTÉRIEUR](#section-extérieur)
 5. [Section TENDANCES](#section-tendances)
-6. [Section CONSOMMATION ⚠️](#section-consommation-)
+6. [Section CONSOMMATION](#section-consommation)
 7. [Section RÉCAP. TEMPÉRATURES](#section-récap-températures)
 8. [Section RÉCAP. HUMIDITÉ](#section-récap-humidité)
 9. [Sections par pièce (SALON → CHAMBRE)](#sections-par-pièce)
@@ -93,7 +86,7 @@ Page complète de suivi thermique et hygrométrique de l'appartement. Elle regro
 │  │ tap → #tcourbe     │  │ tap → #hcourbe     │    │
 │  └────────────────────┘  └────────────────────┘    │
 ├────────────────────────────────────────────────────┤
-│  HEADING : Consommation  ⚠️ (Pôle 1 - à finir)    │
+│  HEADING : Consommation                            │
 │  mushroom-chips-card (chips clim conditionnels)    │
 │  ApexCharts [Conso 24h] T° moy + conso clim        │
 ├────────────────────────────────────────────────────┤
@@ -222,10 +215,7 @@ series:
 
 ---
 
-## ⚡ SECTION CONSOMMATION ⚠️
-
-> **⚠️ Cette section sera mise à jour lorsque le Pôle 1 sera finalisé dans ReBuild.**
-> Les entités suivantes doivent être créées dans `templates/P1_clim_chauffage/`.
+## ⚡ SECTION CONSOMMATION
 
 ### Chips clim (mushroom-chips-card)
 
@@ -259,28 +249,28 @@ Series:
 
 Marqueur `Now` en darkred. `cache: true`, `span: start day`.
 
-### Entités Pôle 1 (à créer)
+### Entités Pôle 1
 
-| Entité | Fichier source prévu | Rôle |
-|--------|---------------------|------|
-| `sensor.salon_power_status` | `templates/P1_clim_chauffage/` | Puissance salon ≠ off |
-| `sensor.cuisine_power_status` | `templates/P1_clim_chauffage/` | Puissance cuisine ≠ off |
-| `sensor.bureau_power_status` | `templates/P1_clim_chauffage/` | Puissance bureau ≠ off |
-| `sensor.sdb_soufflant_power_status` | `templates/P1_clim_chauffage/` | Puissance soufflant SdB |
-| `sensor.sdb_seche_serviette_power_status` | `templates/P1_clim_chauffage/` | Puissance sèche-serviette |
-| `sensor.chambre_power_status` | `templates/P1_clim_chauffage/` | Puissance chambre ≠ off |
-| `sensor.clim_salon_etat` | `templates/P1_clim_chauffage/` | État clim salon |
-| `sensor.radiateur_cuisine_etat` | `templates/P1_clim_chauffage/` | État radiateur cuisine |
-| `sensor.clim_bureau_etat` | `templates/P1_clim_chauffage/` | État clim bureau |
-| `sensor.soufflant_sdb_etat` | `templates/P1_clim_chauffage/` | État soufflant SdB |
-| `sensor.sdb_seche_serviette_etat` | `templates/P1_clim_chauffage/` | État sèche-serviette |
-| `sensor.clim_chambre_etat` | `templates/P1_clim_chauffage/` | État clim chambre |
-| `sensor.temperature_moyenne_interieure` | `templates/P1_clim_chauffage/` | Moyenne T° appart |
-| `sensor.conso_clim_rad_total` | `templates/P1_clim_chauffage/` | Puissance totale clim+rad (W) |
-| `sensor.conso_clim_rad_total_quotidien` | `utility_meter/P1_clim_chauffage/` | Conso journalière (kWh) |
-| `sensor.conso_clim_rad_total_mensuel` | `utility_meter/P1_clim_chauffage/` | Conso mensuelle (kWh) |
-| `sensor.clim_rad_total_avg_watts_daily` | `templates/P1_clim_chauffage/P1_AVG/` | Moyenne watts depuis minuit |
-| `sensor.temperature_delta_affichage` | `templates/P1_clim_chauffage/` | Delta T° int/ext affiché |
+| Entité | Fichier source | Rôle |
+|--------|---------------|------|
+| `sensor.salon_power_status` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | Puissance salon ≠ off |
+| `sensor.cuisine_power_status` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | Puissance cuisine ≠ off |
+| `sensor.bureau_power_status` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | Puissance bureau ≠ off |
+| `sensor.sdb_soufflant_power_status` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | Puissance soufflant SdB |
+| `sensor.sdb_seche_serviette_power_status` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | Puissance sèche-serviette |
+| `sensor.chambre_power_status` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | Puissance chambre ≠ off |
+| `sensor.clim_salon_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État clim salon |
+| `sensor.radiateur_cuisine_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État radiateur cuisine |
+| `sensor.clim_bureau_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État clim bureau |
+| `sensor.soufflant_sdb_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État soufflant SdB |
+| `sensor.sdb_seche_serviette_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État sèche-serviette |
+| `sensor.clim_chambre_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État clim chambre |
+| `sensor.temperature_moyenne_interieure` | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Moyenne T° appart |
+| `sensor.conso_clim_rad_total` | `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` | Puissance totale clim+rad (W) |
+| `sensor.conso_clim_rad_total_quotidien` | `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml` | Conso journalière (kWh) |
+| `sensor.conso_clim_rad_total_mensuel` | `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml` | Conso mensuelle (kWh) |
+| `sensor.clim_rad_total_avg_watts_daily` | `templates/P1_clim_chauffage/P1_AVG/P1_avg.yaml` | Moyenne watts depuis minuit |
+| `sensor.temperature_delta_affichage` | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Delta T° int/ext affiché |
 
 ---
 
@@ -325,7 +315,7 @@ HEADING [icône] [NOM PIÈCE]
   badges: [clim réglé à] + [T° pièce] + [batterie sonde]
   tap_action → pop-up #{piece}
 ↓
-bubble-card climate (si clim présente)  ← ⚠️ dépend du Pôle 1
+bubble-card climate (si clim présente)
 ↓
 streamline-card template: temperature_humidite
   variables: card_title, temperature_entity, humidity_entity, icon
@@ -411,10 +401,10 @@ Nuit (21h-7h30) + groupe_1  → T° éco_hiver_corrige (tous) / T° cible (Cool)
 Nuit (21h-7h30) + groupe_2/3/4 → T° confort_nuit (tous) / T° cible (Cool)
 ```
 
-> ⚠️ Cette logique dépend du Pôle 1 — `sensor.groupe`, `sensor.mode_ete_hiver`,
-> `sensor.presence_clim`, `sensor.temperature_cible`, `sensor.temperature_confort`,
-> `sensor.temperature_confort_nuit`, `sensor.temperature_eco_hiver_corrige`
-> sont des entités du Pôle 1 à créer dans `templates/P1_clim_chauffage/`.
+> Ces entités proviennent de `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` :
+> `sensor.groupe`, `sensor.mode_ete_hiver`, `sensor.presence_clim`,
+> `sensor.temperature_cible`, `sensor.temperature_confort`,
+> `sensor.temperature_confort_nuit`, `sensor.temperature_eco_hiver_corrige`.
 
 ### `#exterieur` — Heatmap T° Extérieure
 
@@ -521,9 +511,14 @@ Contenu : mushroom-template-card (flèche H%) + mini-graph-card (300px, 24h, lab
 
 > Ces capteurs sont **indépendants du cycle solaire** (lever/coucher). Ils représentent le rythme d'activité du foyer.
 
-### 📁 `templates/P1_clim_chauffage/` ⚠️ À créer
+### 📁 `templates/P1_clim_chauffage/`
 
-Voir [Section CONSOMMATION](#section-consommation-) — liste complète des 18 entités Pôle 1.
+| Fichier | Entités fournies |
+|---------|-----------------|
+| `ui_dashboard/ui_dashboard.yaml` | `sensor.*_power_status`, `sensor.*_etat` (statuts et états clim/rad par pièce) |
+| `P1_TOTAL/P1_TOTAL_AMHQ.yaml` | `sensor.conso_clim_rad_total` (W), `sensor.conso_clim_rad_total_quotidien/mensuel` (kWh) |
+| `P1_AVG/P1_avg.yaml` | `sensor.clim_rad_total_avg_watts_daily` (W — moy. depuis minuit) |
+| `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | `sensor.temperature_moyenne_interieure`, `sensor.temperature_delta_affichage`, `sensor.groupe`, `sensor.mode_ete_hiver`, `sensor.temperature_cible/confort/confort_nuit/eco_hiver_corrige` |
 
 ---
 
@@ -553,10 +548,10 @@ Voir [Section CONSOMMATION](#section-consommation-) — liste complète des 18 e
 2. Les templates Streamline se configurent dans `configuration.yaml` sous `custom_templates:`
 
 ### Les chips de consommation ne s'affichent pas
-Normal — ils sont `conditional` : ils n'apparaissent que si `sensor.{piece}_power_status ≠ "off"`. Si la clim ne consomme pas, le chip est masqué.
+Normal — ils sont `conditional` : ils n'apparaissent que si `sensor.{piece}_power_status ≠ "off"`. Si la clim ne consomme pas (puissance < 50 W), le chip est masqué. Source : `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml`.
 
 ### Le graphique de consommation est vide
-Les entités `sensor.conso_clim_rad_total*` dépendent du Pôle 1 — **non encore finalisé dans ReBuild**. Normal que ce graphique soit vide tant que le Pôle 1 n'est pas en place.
+Vérifier que les entités Pôle 1 sont chargées (`templates/P1_clim_chauffage/`). Si `sensor.conso_clim_rad_total` est `unknown`, recharger la config HA (`Configuration → Vérifier la config` puis `Redémarrer`).
 
 ---
 
@@ -567,7 +562,10 @@ Les entités `sensor.conso_clim_rad_total*` dépendent du Pôle 1 — **non enco
 - `templates/meteo/M_04_tendances_th_ext_card.yaml` (tendances T° et humidité)
 - `templates/utilitaires/jour_nuit.yaml` (binary_sensor jour/nuit — popup `#tendances`)
 - `configuration.yaml` (SmartIR : clim salon, bureau, chambre)
-- `templates/P1_clim_chauffage/` ⚠️ (à créer — sensors consommation et états)
+- `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` (statuts et états clim/rad)
+- `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` (totaux kWh + puissance W)
+- `templates/P1_clim_chauffage/P1_AVG/P1_avg.yaml` (moyennes watts AMHQ)
+- `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` (logique groupe, T° cible, delta)
 - `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml` (compteurs kWh clim)
 
 ### Documentation
