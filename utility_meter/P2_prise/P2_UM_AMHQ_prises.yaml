@@ -362,7 +362,6 @@ prise_congelateur_cuisine_nous_quotidien_kwh_um:
 # ┌───────────────────────────────────┐
 # │ 7. BUREAU                         │
 # └───────────────────────────────────┘
-
 # --- bureau_pc ---
 prise_bureau_pc_ikea_annuel_kwh_um:
   source: sensor.prise_bureau_pc_ikea_energie_totale_kwh
@@ -416,7 +415,6 @@ prise_bureau_fer_a_repasser_nous_quotidien_kwh_um:
 # ┌───────────────────────────────────┐
 # │ 9. CHAMBRE                        │
 # └───────────────────────────────────┘
-
 # --- tete_de_lit ---
 prise_tete_de_lit_chambre_annuel_kwh_um:
   source: sensor.prise_tete_de_lit_chambre_energie_totale_kwh
