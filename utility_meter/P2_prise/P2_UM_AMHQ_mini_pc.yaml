@@ -1,0 +1,52 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 2. UTILITY METER : PRISES CONNECTÉES — AMHQ                         │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Compteurs Utility Meter découpant la consommation de chaque prise connectée
+# (18 prises sur 5 pièces + Mini PC) en 4 cycles temporels : Annuel, Mensuel,
+# Hebdomadaire, Quotidien (AMHQ). Ces UM sont les sources primaires pour les
+# templates AVG P2 et pour les diagnostics de conso par pôle.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources : sensor.prise_[appareil]_energie_totale_kwh (P2_kWh_prises.yaml)
+# - Exception : sensor.four_et_plaque_de_cuisson_energie_totale_kwh (sans prise_)
+# - Couvre : 1.ENTRÉE (×2), 4.SALON (×3), 5.CUISINE (×8), 7.BUREAU (×3), 9.CHAMBRE (×2)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Les cycles se réinitialisent automatiquement (minuit/lundi/1er du mois/1er janvier).
+# - La valeur précédente est stockée dans 'last_period' (utile pour comparaisons).
+# - Ne pas confondre avec P2_UM_AMHQ_veilles.yaml qui gère uniquement all_standby.
+# - Le four/plaque n'a pas le préfixe 'prise_' dans son nom d'entité.
+# - [L...] modif — Ajout Mini PC IKEA Inspelning (7. BUREAU)
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L4C2 _____ Mini - P.C. _____.
+
+# ┌───────────────────────────────────┐
+# │ 7. BUREAU                         │
+# └───────────────────────────────────┘
+# --- mini_pc --- # "[L...] modif — Ajout Mini PC IKEA Inspelning"
+prise_mini_pc_ikea_annuel_kwh_um:
+  source: sensor.prise_mini_pc_ikea_energie_totale_kwh
+  name: "Prise Mini PC IKEA Annuel kWh UM"
+  unique_id: prise_mini_pc_ikea_annuel_kwh_um
+  cycle: yearly
+
+prise_mini_pc_ikea_mensuel_kwh_um:
+  source: sensor.prise_mini_pc_ikea_energie_totale_kwh
+  name: "Prise Mini PC IKEA Mensuel kWh UM"
+  unique_id: prise_mini_pc_ikea_mensuel_kwh_um
+  cycle: monthly
+
+prise_mini_pc_ikea_hebdomadaire_kwh_um:
+  source: sensor.prise_mini_pc_ikea_energie_totale_kwh
+  name: "Prise Mini PC IKEA Hebdomadaire kWh UM"
+  unique_id: prise_mini_pc_ikea_hebdomadaire_kwh_um
+  cycle: weekly
+
+prise_mini_pc_ikea_quotidien_kwh_um:
+  source: sensor.prise_mini_pc_ikea_energie_totale_kwh
+  name: "Prise Mini PC IKEA Quotidien kWh UM"
+  unique_id: prise_mini_pc_ikea_quotidien_kwh_um
+  cycle: daily
