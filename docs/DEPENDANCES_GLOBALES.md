@@ -1,5 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES — TOUTES LES VIGNETTES
-*Dernière mise à jour : 2026-03-21 (session 8 — s16)*
+*Dernière mise à jour : 2026-03-25 (session 11 — s21)*
 
 > **RÈGLE :** Ce fichier est mis à jour obligatoirement à chaque création ou modification d'une doc de vignette (`docs/L*`).
 > Format : Vignette → Carte → Template/Sensor → Utility Meter → Source native HA
@@ -54,25 +54,67 @@ L1C1 Météo
 L1C2 Températures
   ├── T° + Humidité (6 pièces + extérieur)
   │     └── [NAT] sensor.th_*_temperature / *_humidity (SONOFF SNZB-02 x7)
-  └── Cycle solaire (lever/coucher)
-        └── [TPL] templates/meteo/M_05_cycle_solaire.yaml
-              └── [NAT] sun.sun
+  ├── Tendances T° / Humidité (extérieur)
+  │     └── [TPL] templates/meteo/M_04_tendances_th_ext_card.yaml
+  │           └── [NAT] sensor.th_balcon_nord_temperature / _humidity
+  ├── Cycle solaire (lever/coucher)
+  │     └── [TPL] templates/meteo/M_05_cycle_solaire.yaml
+  │           └── [NAT] sun.sun
+  ├── Section Consommation — statuts et états clim
+  │     └── [TPL] templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml
+  │           └── [NAT] sensor.*_nous_power / sensor.radiateur_elec_cuisine_power
+  │                 └── [NAT] climate.clim_*_rm4_mini (SmartIR)
+  ├── Section Consommation — totaux kWh + puissance W
+  │     └── [TPL] templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml
+  │           └── [UM] utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml
+  │                 └── [SNS] sensors/P1_clim_chauffage/ (*_energie_totale_kwh Riemann)
+  ├── Section Consommation — moyennes watts
+  │     └── [TPL] templates/P1_clim_chauffage/P1_AVG/P1_avg.yaml
+  │           └── [UM] P1_UM_AMHQ.yaml
+  └── Section Consommation + pop-up #tendances — logique groupe / T° cible
+        └── [TPL] templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml
+              └── [NAT] climate.* / sensor.th_*_temperature / input_number.*
 ```
 
 ---
 
-### 🔲 L1C3 — Commandes Clim
+### ✅ L1C3 — Commandes Clim
+`docs/L1C3_CLIM/`
 
 ```
-L1C3 Commandes Clim
-  ├── Clim Salon / Bureau / Chambre
-  │     └── [NAT] climate.clim_*_rm4_mini (SmartIR — configuration.yaml)
-  ├── Radiateur Cuisine
-  │     └── [NAT] switch.radiateur_cuisine (Meross)
-  ├── Soufflant SDB
-  │     └── [NAT] switch.soufflant_sdb (Sonoff)
-  └── Logique système clim
-        └── [TPL] P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml
+L1C3 Commandes Clim (Vignette)
+  ├── Statuts ON/OFF + modes + consignes × 5 pièces
+  │     └── [TPL] P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml
+  │           └── [NAT] sensor.*_nous_power / climate.*_rm4_mini / climate.radiateur_cuisine
+  ├── T° moyenne appartement + Δ ADEME
+  │     └── [TPL] P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml
+  │           └── [NAT] sensor.th_*_temperature / input_number.*
+  └── Consignes climate
+        └── [NAT] climate.clim_*_rm4_mini (SmartIR) / climate.radiateur_cuisine (Meross)
+              └── climate.soufflant_salle_de_bain (Meross)
+
+L1C3 Commandes Clim (Page /clim)
+  ├── Bilan total + chips conditionnels
+  │     ├── [TPL] P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml
+  │     │     → sensor.*_power_status / sensor.*_power_status_affichage / sensor.*_etat
+  │     └── [TPL] P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml
+  │           → sensor.conso_clim_rad_total (W)
+  ├── Sections Salon / Bureau / Chambre — warnings arrêt sécurisé
+  │     ├── [NAT] input_boolean.clim_*_arret_securise_en_cours (input_boolean.yaml)
+  │     ├── [TPL] sensor.*_power_lock (ui_dashboard.yaml)
+  │     └── [NAT] switch.clim_*_nous (prises NOUS)
+  ├── Thermostats + bar-cards puissance
+  │     └── [NAT] climate.* + sensor.*_nous_power + sensor.radiateur_elec_cuisine_power
+  ├── Section SdB — button-card soufflant (état résistance)
+  │     ├── [TPL] Inter_BP_Virtuel/BI_02_switch_inter_sdb.yaml
+  │     │     → switch.inter_soufflant_salle_de_bain
+  │     └── [NAT] input_select.etat_resistance_soufflant_sdb / sensor.statut_soufflant_sdb
+  ├── Badges schedules × 5 pièces
+  │     └── [NAT] switch.schedule_* (intégration Scheduler HACS — ⚠️ à configurer)
+  ├── Script arrêt intelligent
+  │     └── [NAT] script.j_1_routeur_clim_on_off_intelligent (scripts.yaml)
+  └── Pop-up #calcul
+        └── streamline template: calcule_temp_cible
 ```
 
 ---
@@ -126,16 +168,59 @@ L2C1 Énergie Générale
 
 ---
 
-### 🔲 L2C2 — Énergie Clim / Radiateur / Soufflant
+### ✅ L2C2 — Énergie Clim / Radiateur / Soufflant
+`docs/L2C2_ENERGIE_CLIM/`
 
 ```
-L2C2 Énergie Clim
-  ├── kWh par appareil (clim x3 + radiateur + soufflant + sèche-serviette)
-  │     └── [UM] utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml
-  │           └── [NAT] sensor.*_energy (Meross / Sonoff power sensors)
-  └── Moyennes puissance [AVG]
-        └── [TPL] P1_clim_chauffage/P1_AVG/P1_avg.yaml
-              └── [UM] P1_UM_AMHQ.yaml
+L2C2 Énergie Clim (Vignette)
+  ├── Noms pièces + couleur ON/OFF/mode (colorMap JS)
+  │     └── [TPL] P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml
+  │           → sensor.*_power_status / sensor.*_etat
+  │                 └── [NAT] climate.* (SmartIR / Meross) + sensor.*_nous_power
+  ├── kWh quotidien × 6 appareils + TOTAL
+  │     ├── [UM] utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml
+  │     │     → sensor.*_quotidien_kwh_um (6)
+  │     └── [TPL] P1_TOTAL/P1_TOTAL_AMHQ.yaml
+  │           → sensor.conso_clim_rad_total_quotidien
+  └── kWh mensuel × 6 appareils + TOTAL
+        ├── [UM] P1_UM_AMHQ.yaml → sensor.*_mensuel_kwh_um (6)
+        └── [TPL] P1_TOTAL/P1_TOTAL_AMHQ.yaml → sensor.conso_clim_rad_total_mensuel
+
+L2C2 Énergie Clim (Page /energie-clim)
+  ├── En-tête + Δ T° badge → popup #tendances
+  │     └── [TPL] P1_01_MASTER/P1_01_clim_logique_system_autom.yaml
+  │           → sensor.temperature_delta_affichage
+  ├── Bloc bilan conditionnel (6 *_affichage)
+  │     └── [TPL] ui_dashboard.yaml → sensor.*_power_status_affichage
+  ├── Chips DUT × 4 (Salon/Cuisine/Bureau/Chambre)
+  │     └── [SNS] sensors/P1_clim_chauffage/P1_DUT_clim_chauffage.yaml
+  │           → sensor.dut_clim_salon / dut_radiateur_cuisine / dut_clim_bureau / dut_clim_chambre
+  ├── Chips état conditionnels × 6
+  │     └── [TPL] ui_dashboard.yaml → sensor.*_power_status + sensor.*_etat
+  ├── Bar-card puissance totale
+  │     └── [TPL] P1_TOTAL/P1_TOTAL_AMHQ.yaml → sensor.conso_clim_rad_total (W)
+  ├── Donuts Q + M (6 séries × _kwh_um)
+  │     └── [UM] P1_UM_AMHQ.yaml
+  ├── Graphique multi-yaxis 24h
+  │     ├── sensor.temperature_moyenne_interieure [TPL P1_01_MASTER]
+  │     ├── sensor.th_balcon_nord_temperature [NAT SONOFF]
+  │     ├── sensor.conso_clim_rad_total [TPL P1_TOTAL]
+  │     └── sensor.clim_rad_total_avg_watts_daily [TPL P1_AVG/P1_avg.yaml]
+  ├── Graphique DUT global (5 pièces + T° ext)
+  │     └── [SNS] P1_DUT_clim_chauffage.yaml → sensor.dut_* (5) + dut_sdb_total
+  ├── × 5 pièces (Salon/Cuisine/Bureau/SdB×2/Chambre) :
+  │     ├── bubble-card climate → [NAT] climate.*
+  │     ├── ring-tiles V/A → [NAT] sensor.*_nous_voltage / *_nous_current
+  │     ├── Onglet INSTANTANÉ → streamline conso_temps_reel_clim_rad
+  │     │     → sensor.*_nous_power [NAT] + sensor.*_avg_watts_quotidien [TPL P1_AVG]
+  │     ├── Onglet MENSUEL → streamline conso_mensuelle_clim
+  │     │     → sensor.*_nous_energy [NAT] + sensor.*_avg_watts_mensuel [TPL P1_AVG]
+  │     │       + sensor.*_mensuel_kwh_um [UM P1_UM_AMHQ]
+  │     ├── Onglet PERF/DUT → apexcharts DUT par pièce (color_threshold)
+  │     │     → sensor.dut_* [SNS P1_DUT]
+  │     └── Badges Q/H/M/A kWh → [UM] P1_UM_AMHQ.yaml
+  └── Pop-up #tendances
+        └── streamline calcule_temp_cible [TPL P1_01_MASTER]
 ```
 
 ---
@@ -213,8 +298,9 @@ L3C1 Éclairage
   ℹ️ Compteur Bureau : logique 6 états depuis sensor.bureau_etat + sensor.lumiere_ecran_etat
   ℹ️ Heading Têtes de Lit masqué si prise OFF — comportement intentionnel (pas d'alim = pas de lampes)
   ⚡ CHAÎNE ABSENCE : WiFi/Cell OFF → binary_sensor.presence_maison → automation coupe prises éco
-       → switch.ecran_p_c_3_play_hue OFF → carte Ecran disparaît
-       → switch.prise_tete_de_lit_chambre OFF → heading + carte Têtes de Lit disparaissent
+       → Groupes 2+3+4 OFF : switch.ecran_p_c_3_play_hue OFF → carte Ecran disparaît
+            ↳ Bureau (cols 6) reste visible mais badge lumiere_ecran_etat = Éco. (vert)
+       → Groupes 3+4 OFF   : switch.prise_tete_de_lit_chambre OFF → heading + carte Têtes de Lit disparaissent
        (logique amont : P4_groupe_presence / docs/WIFI_PRESENCE)
 ```
 
@@ -306,12 +392,81 @@ L4C1 Freebox
 
 ---
 
-### 🔲 L4C2 — Mini PC
+### ✅ L4C2 — Mini PC
+`docs/L4C2_MINI_PC/`
 
 ```
-L4C2 Mini PC
-  └── [NAT] command_line/sante_systeme_mini_pc/sante_systeme_mini_pc.yaml
-        sensor.mini_pc_* (CPU, RAM, temp sondes)
+L4C2 Mini PC (Vignette — nom "Mini PC", icône phu:intel-nuc)
+  ├── T° CPU + icône couleur (< 65 vert / 65-74 orange / ≥ 75 rouge)
+  │     └── [NAT] sensor.system_monitor_temperature_du_processeur
+  ├── CPU % / RAM % / Disk %
+  │     └── [NAT] sensor.system_monitor_utilisation_du_processeur
+  │     └── [NAT] sensor.system_monitor_utilisation_de_la_memoire
+  │     └── [NAT] sensor.system_monitor_utilisation_du_disque
+  └── Power W (prise IKEA Inspelning)
+        └── [NAT] sensor.prise_mini_pc_ikea_power
+
+L4C2 Mini PC (Page /raspberry-pi4 — TRANSITOIRE ancienne page RPi4)
+  ├── Image RPi4B3.png [local/images/]
+  ├── IP locale / publique
+  │     └── [NAT] sensor.local_ip / sensor.myip
+  ├── Uptime (depuis dernier boot)
+  │     └── [NAT] sensor.system_monitor_dernier_demarrage
+  ├── Ventilateur RPi (état + toggle + %)
+  │     └── [NAT] fan.rpi_cooling_fan  ← ⚠️ RPi4 uniquement
+  ├── Bar-cards (CPU%, T°, Mem USED/FREE MB, SSD Go, DL/UL MB/s)
+  │     └── [NAT] system_monitor + sensor.system_monitor_*
+  ├── Uptime-card 48h
+  │     └── [NAT] binary_sensor.rpi_power_status  ← ⚠️ RPi4 uniquement
+  ├── 6 boutons commandes ventilateur (30/40/50/65/85/100%)
+  │     └── [NAT] fan.rpi_cooling_fan  ← ⚠️ RPi4 uniquement — à migrer
+  └── Automation régulation ventilateur (DÉPENDANCE VISUELLE)
+        └── [AUTO] automation.ventilateur_rpi_* (nom exact à confirmer)
+              ← pilote fan.set_percentage selon T° CPU
+              ← le % affiché + animation rotation = reflet de cette automation
+              ← ⚠️ RPi4 uniquement — à ne pas migrer Mini PC
+
+⚠️ PAGE_RASPI.md = page temporaire. Remplacée par PAGE_MINI_PC.md (créée s21).
+
+L4C2 Mini PC (Page définitive — Mini PC Intel NUC)
+  ├── Image /local/images/mini pc.png
+  ├── IP locale / publique + Uptime
+  │     └── [NAT] sensor.local_ip / sensor.myip
+  │     └── [NAT] sensor.system_monitor_dernier_demarrage
+  ├── Bar-cards CPU USED + Temp (system_monitor)
+  │     └── [NAT] sensor.system_monitor_utilisation_du_processeur
+  │     └── [NAT] sensor.system_monitor_temperature_du_processeur
+  ├── Bar-cards RAM % + USED/FREE (16 Go max)
+  │     └── [NAT] sensor.system_monitor_utilisation_de_la_memoire
+  │     └── [NAT] sensor.system_monitor_memoire_utilisee / _libre
+  ├── Bar-card SSD SATA 512 Go (524 Go max)
+  │     └── [NAT] sensor.system_monitor_utilisation_du_disque
+  ├── Bar-cards DL / UL via enp1s0
+  │     └── [NAT] sensor.system_monitor_debit_du_reseau_entrant_via_enp1s0
+  │     └── [NAT] sensor.system_monitor_debit_du_reseau_sortant_via_enp1s0
+  ├── ring-tile + mini-graph : CPU Utilisation 24h
+  │     └── [NAT] sensor.system_monitor_utilisation_du_processeur
+  ├── Bar-card CPU SPEED (GHz)
+  │     └── ⚠️ sensor.cpu_speed (provenance à confirmer — command_line probable)
+  ├── Bar-cards Charges système 1m / 5m / 15m
+  │     └── ⚠️ sensor.system_monitor_charge_1m/5m/15m (à activer config)
+  ├── ring-tile + mini-graph : Température CPU 24h
+  │     └── ⚠️ sensor.temperature_cpu_package_sys (command_line thermal zone)
+  ├── Bar-cards Températures cores (Core 0/1/2/3)
+  │     └── ⚠️ sensor.temperature_core_0/1/2_sys + sensor.temperature_core_3_sys_2
+  ├── Bar-card Température Carte Mère
+  │     └── ⚠️ sensor.temperature_carte_mere_sys (command_line thermal zone)
+  ├── ring-tile + mini-graph : Conso. W 24h
+  │     └── [NAT] sensor.prise_mini_pc_ikea_power (Zigbee2MQTT)
+  └── 5 pop-ups : #speed / #temp / #conso / #disk / #memory
+        ├── [NAT] sensor.system_monitor_* (apexcharts CPU, T°, disk, RAM)
+        └── streamline conso_temps_reel + conso_mensuelle (prise IKEA)
+              ├── ⚠️ sensor.mini_pc_daily/monthly (UM à créer P2_UM_AMHQ_prises)
+              └── ⚠️ sensor.mini_pc_avg_watts_daily/monthly (AVG à créer P2_AVG)
+
+✅ PAGE_MINI_PC.md créée [s21 — 2026-03-25]
+⚠️ Sensors spéciaux (temperature_*_sys, cpu_speed, charge_*) = à vérifier lors migration
+⚠️ UM + AVG prise Mini PC = à ajouter dans fichiers P2
 ```
 
 ---
@@ -512,15 +667,15 @@ Présence
 |----------|---------------|-----------------------|
 | L1C1 Météo | ✅ | ✅ |
 | L1C2 Températures | ✅ | ✅ |
-| L1C3 Commandes Clim | 🔲 | 🔲 |
+| L1C3 Commandes Clim | ✅ | ✅ |
 | L2C1 Énergie Générale | ✅ | ✅ |
-| L2C2 Énergie Clim | 🔲 | 🔲 |
+| L2C2 Énergie Clim | ✅ | ✅ |
 | L2C3 Énergie Éclairage | ✅ | ✅ |
 | L3C1 Commandes Éclairage | ✅ | ✅ |
 | L3C2 Commandes Prises | ✅ | ✅ |
 | L3C3 Fenêtres + Stores | ✅ | ✅ |
 | L4C1 Freebox | ✅ | ✅ |
-| L4C2 Mini PC | 🔲 | 🔲 |
+| L4C2 Mini PC | ✅ | ✅ PAGE_RASPI.md (transitoire) + PAGE_MINI_PC.md (définitive) |
 | L4C3 MAJ HA | ✅ | ✅ |
 | L5C1 Batteries | ✅ | ✅ |
 | L5C2 Batteries Portables | ✅ | ✅ |

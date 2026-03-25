@@ -291,14 +291,16 @@ Certaines cartes de cette page disparaissent automatiquement en mode absence. Ce
 
 ### Comportement attendu par carte
 
-| Carte | Switch pilotant | Absent → |
-|-------|----------------|----------|
-| Bouton Ecran (cols 6) | `switch.ecran_p_c_3_play_hue` | ❌ Carte masquée |
-| Heading Têtes de Lit + badges | `switch.prise_tete_de_lit_chambre` | ❌ Heading masqué |
-| Bouton Têtes de Lit (cols 12) | `switch.prise_tete_de_lit_chambre` | ❌ Carte masquée |
-| Bureau (cols 6) | *(pas de switch éco)* | ✅ Toujours visible |
-| SdB (cols 12) | *(pas de switch éco)* | ✅ Toujours visible |
-| Chambre (cols 12) | *(pas de switch éco)* | ✅ Toujours visible |
+| Carte | Switch pilotant | Groupes requis | Absent → |
+|-------|----------------|----------------|----------|
+| Bouton Ecran (cols 6) | `switch.ecran_p_c_3_play_hue` | Groupes 2+3+4 OK | ❌ Carte masquée |
+| Heading Têtes de Lit + badges | `switch.prise_tete_de_lit_chambre` | Groupes 3+4 OK | ❌ Heading masqué |
+| Bouton Têtes de Lit (cols 12) | `switch.prise_tete_de_lit_chambre` | Groupes 3+4 OK | ❌ Carte masquée |
+| Bureau (cols 6) | *(pas de switch éco)* | — | ✅ Toujours visible¹ |
+| SdB (cols 12) | *(pas de switch éco)* | — | ✅ Toujours visible |
+| Chambre (cols 12) | *(pas de switch éco)* | — | ✅ Toujours visible |
+
+> ¹ **Bureau toujours visible** mais quand les groupes 2+3+4 sont OFF (absence) → `switch.ecran_p_c_3_play_hue` est coupé → `sensor.lumiere_ecran_etat` passe à `Éco.` → **badge écran vert** dans le heading Bureau. Comportement attendu et correct.
 
 > **Note séparation des responsabilités :** La logique de coupure (Absent → switch OFF) est gérée dans les automations et `P4_groupe_presence` — pas dans cette page. Cette page se contente de réagir à l'état des switches. Voir `docs/WIFI_PRESENCE (Home Page)/` pour la logique amont.
 
