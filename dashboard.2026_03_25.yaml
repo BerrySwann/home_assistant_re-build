@@ -1,4 +1,87 @@
 streamline_templates:
+  apex_dut_piece:
+    card:
+      type: custom:apexcharts-card
+      experimental:
+        color_threshold: true
+      graph_span: 24h
+      cache: true
+      span:
+        start: day
+        offset: +0m
+      apex_config:
+        chart:
+          height: 340px
+        annotations:
+          yaxis:
+            - 'y': '[[crit_zone]]'
+              y2: 50
+              borderColor: '#f44336'
+              fillColor: '#f44336'
+              opacity: 0.1
+              label:
+                text: '[[annot_text]]'
+                style:
+                  color: '#f44336'
+                  background: transparent
+      now:
+        show: true
+        color: '#f44336'
+        label: Now
+      header:
+        show: true
+        title: '[[title]]'
+        show_states: true
+        colorize_states: true
+      yaxis:
+        - id: temp
+          decimals: 0
+        - id: hours
+          min: 0
+          max: '[[hours]]'
+          decimals: 0
+          opposite: true
+          apex_config:
+            tickAmount: 12
+      all_series_config:
+        show:
+          legend_value: false
+          extremas: true
+        curve: smooth
+      series:
+        - entity: sensor.th_balcon_nord_temperature
+          yaxis_id: temp
+          name: Temp. Extérieure
+          type: area
+          stroke_width: 1
+          color: '#44739e'
+          opacity: 0.2
+        - entity: '[[entity_sensor]]'
+          name: '[[title]]'
+          yaxis_id: hours
+          type: area
+          color: '[[color]]'
+          stroke_width: 1
+          opacity: 0.4
+          group_by:
+            func: last
+            duration: 5m
+          color_threshold:
+            - value: 0
+              color: '#0f9d58'
+            - value: '[[thresh_yellow]]'
+              color: '#fdd835'
+            - value: '[[thresh_orange]]'
+              color: '#ff9800'
+            - value: '[[thresh_red]]'
+              color: '#f44336'
+      card_mod:
+        style: |
+          ha-card {
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+          }
   clim_ampere_ring-tile:
     card:
       type: vertical-stack
@@ -9790,26 +9873,16 @@ views:
                 chip:
                   type: template
                   icon: mdi:air-conditioner
-                  icon_color: |
-                    {% if is_state('sensor.clim_salon_etat', 'Cool') %}
-                      #87CEEB
+                  icon_color: >-
+                    {% if is_state('sensor.clim_salon_etat', 'Cool') %} #87CEEB
+
                     {% elif is_state('sensor.clim_salon_etat', 'Heat') %}
-                      #ff6100
-                    {% elif is_state('sensor.clim_salon_etat', 'Fan') %}
-                      #40E0D0
-                    {% elif is_state('sensor.clim_salon_etat', 'Off') %}
-                      #FF0000
-                    {% endif %}
-                  content: |
-                    Salon: {% if is_state('sensor.clim_salon_etat', 'Heat') %}
-                      Heat
-                    {% elif is_state('sensor.clim_salon_etat', 'Fan') %}
-                      Fan
-                    {% elif is_state('sensor.clim_salon_etat', 'Off') %}
-                      Off
-                    {% else %}
-                      Cool
-                    {% endif %}
+                    #ff6100
+
+                    {% elif is_state('sensor.clim_salon_etat', 'Fan') %} #40E0D0
+
+                    {% else %} #FF0000 {% endif %}
+                  content: 'Salon: {{ states(''sensor.clim_salon_etat'') }}'
                   tap_action:
                     action: none
               - type: conditional
@@ -9819,19 +9892,12 @@ views:
                 chip:
                   type: template
                   icon: mdi:heating-coil
-                  icon_color: |
+                  icon_color: >-
                     {% if is_state('sensor.radiateur_cuisine_etat', 'Heat') %}
-                      #ff6100
-                    {% elif is_state('sensor.radiateur_cuisine_etat', 'Off') %}
-                      #FF0000
-                    {% endif %}
-                  content: >
-                    Cuisine: {% if is_state('sensor.radiateur_cuisine_etat',
-                    'Heat') %}
-                      Heat
-                    {% elif is_state('sensor.radiateur_cuisine_etat', 'Off') %}
-                      Off
-                    {% endif %}
+                    #ff6100
+
+                    {% else %} #FF0000 {% endif %}
+                  content: 'Cuisine: {{ states(''sensor.radiateur_cuisine_etat'') }}'
                   tap_action:
                     action: none
               - type: conditional
@@ -9841,26 +9907,17 @@ views:
                 chip:
                   type: template
                   icon: mdi:air-conditioner
-                  icon_color: |
-                    {% if is_state('sensor.clim_bureau_etat', 'Cool') %}
-                      #87CEEB
+                  icon_color: >-
+                    {% if is_state('sensor.clim_bureau_etat', 'Cool') %} #87CEEB
+
                     {% elif is_state('sensor.clim_bureau_etat', 'Heat') %}
-                      #ff6100
+                    #ff6100
+
                     {% elif is_state('sensor.clim_bureau_etat', 'Fan') %}
-                      #40E0D0
-                    {% elif is_state('sensor.clim_bureau_etat', 'Off') %}
-                      #FF0000
-                    {% endif %}
-                  content: |
-                    Bureau: {% if is_state('sensor.clim_bureau_etat', 'Heat') %}
-                      Heat
-                    {% elif is_state('sensor.clim_bureau_etat', 'Fan') %}
-                      Fan
-                    {% elif is_state('sensor.clim_bureau_etat', 'Off') %}
-                      Off
-                    {% else %}
-                      Cool
-                    {% endif %}
+                    #40E0D0
+
+                    {% else %} #FF0000 {% endif %}
+                  content: 'Bureau: {{ states(''sensor.clim_bureau_etat'') }}'
                   tap_action:
                     action: none
               - type: conditional
@@ -9870,19 +9927,12 @@ views:
                 chip:
                   type: template
                   icon: mdi:heat-wave
-                  icon_color: |
+                  icon_color: >-
                     {% if is_state('sensor.sdb_soufflant_etat', 'Heat') %}
-                      #ff6100
-                    {% elif is_state('sensor.sdb_soufflant_etat', 'Off') %}
-                      #FF0000
-                    {% endif %}
-                  content: >
-                    Salle de Bain: {% if is_state('sensor.sdb_soufflant_etat',
-                    'Heat') %}
-                      Heat
-                    {% else %}
-                      Off
-                    {% endif %}
+                    #ff6100
+
+                    {% else %} #FF0000 {% endif %}
+                  content: 'SdB Soufflant: {{ states(''sensor.sdb_soufflant_etat'') }}'
                   tap_action:
                     action: none
               - type: conditional
@@ -9892,20 +9942,14 @@ views:
                 chip:
                   type: template
                   icon: mdi:heating-coil
-                  icon_color: >
+                  icon_color: >-
                     {% if is_state('sensor.sdb_seche_serviette_etat', 'Heat') %}
-                      #ff6100
-                    {% elif is_state('sensor.sdb_seche_serviette_etat', 'Off')
-                    %}
-                      #FF0000
-                    {% endif %}
-                  content: >
-                    Salle de Bain: {% if
-                    is_state('sensor.sdb_seche_serviette_etat', 'Heat') %}
-                      Heat
-                    {% else %}
-                      Off
-                    {% endif %}
+                    #ff6100
+
+                    {% else %} #FF0000 {% endif %}
+                  content: >-
+                    SdB Serviette: {{ states('sensor.sdb_seche_serviette_etat')
+                    }}
                   tap_action:
                     action: none
               - type: conditional
@@ -9915,27 +9959,18 @@ views:
                 chip:
                   type: template
                   icon: mdi:air-conditioner
-                  icon_color: |
+                  icon_color: >-
                     {% if is_state('sensor.clim_chambre_etat', 'Cool') %}
-                      #87CEEB
+                    #87CEEB
+
                     {% elif is_state('sensor.clim_chambre_etat', 'Heat') %}
-                      #ff6100
+                    #ff6100
+
                     {% elif is_state('sensor.clim_chambre_etat', 'Fan') %}
-                      #40E0D0
-                    {% elif is_state('sensor.clim_chambre_etat', 'Off') %}
-                      #FF0000
-                    {% endif %}
-                  content: >
-                    Chambre: {% if is_state('sensor.clim_chambre_etat', 'Heat')
-                    %}
-                      Heat
-                    {% elif is_state('sensor.clim_chambre_etat', 'Fan') %}
-                      Fan
-                    {% elif is_state('sensor.clim_chambre_etat', 'Off') %}
-                      Off
-                    {% else %}
-                      Cool
-                    {% endif %}
+                    #40E0D0
+
+                    {% else %} #FF0000 {% endif %}
+                  content: 'Chambre: {{ states(''sensor.clim_chambre_etat'') }}'
                   tap_action:
                     action: none
             alignment: center
@@ -11134,19 +11169,16 @@ views:
                   type: template
                   icon: mdi:heat-wave
                   icon_color: >-
-                    {% if is_state('sensor.sdb_soufflant_power_etat', 'Heat') %}
+                    {% if is_state('sensor.sdb_soufflant_etat', 'Heat') %}
                     #ff6100
 
                     {% else %} #FF0000 {% endif %}
-                  content: >-
-                    SdB Soufflant: {{ states('sensor.sdb_soufflant_power_etat')
-                    }}
+                  content: 'SdB Soufflant: {{ states(''sensor.sdb_soufflant_etat'') }}'
                   tap_action:
                     action: none
               - type: conditional
                 conditions:
-                  - condition: state
-                    entity: sensor.sdb_seche_serviette_power_status
+                  - entity: sensor.sdb_seche_serviette_power_status
                     state_not: 'off'
                 chip:
                   type: template
@@ -18069,26 +18101,16 @@ views:
                 chip:
                   type: template
                   icon: mdi:air-conditioner
-                  icon_color: |
-                    {% if is_state('sensor.clim_salon_etat', 'Cool') %}
-                      #87CEEB
+                  icon_color: >-
+                    {% if is_state('sensor.clim_salon_etat', 'Cool') %} #87CEEB
+
                     {% elif is_state('sensor.clim_salon_etat', 'Heat') %}
-                      #ff6100
-                    {% elif is_state('sensor.clim_salon_etat', 'Fan') %}
-                      #40E0D0
-                    {% elif is_state('sensor.clim_salon_etat', 'Off') %}
-                      #FF0000
-                    {% endif %}
-                  content: |
-                    Salon: {% if is_state('sensor.clim_salon_etat', 'Heat') %}
-                      Heat
-                    {% elif is_state('sensor.clim_salon_etat', 'Fan') %}
-                      Fan
-                    {% elif is_state('sensor.clim_salon_etat', 'Off') %}
-                      Off
-                    {% else %}
-                      Cool
-                    {% endif %}
+                    #ff6100
+
+                    {% elif is_state('sensor.clim_salon_etat', 'Fan') %} #40E0D0
+
+                    {% else %} #FF0000 {% endif %}
+                  content: 'Salon: {{ states(''sensor.clim_salon_etat'') }}'
                   tap_action:
                     action: none
               - type: conditional
@@ -18098,19 +18120,12 @@ views:
                 chip:
                   type: template
                   icon: mdi:heating-coil
-                  icon_color: |
+                  icon_color: >-
                     {% if is_state('sensor.radiateur_cuisine_etat', 'Heat') %}
-                      #ff6100
-                    {% elif is_state('sensor.radiateur_cuisine_etat', 'Off') %}
-                      #FF0000
-                    {% endif %}
-                  content: >
-                    Cuisine: {% if is_state('sensor.radiateur_cuisine_etat',
-                    'Heat') %}
-                      Heat
-                    {% elif is_state('sensor.radiateur_cuisine_etat', 'Off') %}
-                      Off
-                    {% endif %}
+                    #ff6100
+
+                    {% else %} #FF0000 {% endif %}
+                  content: 'Cuisine: {{ states(''sensor.radiateur_cuisine_etat'') }}'
                   tap_action:
                     action: none
               - type: conditional
@@ -18120,26 +18135,17 @@ views:
                 chip:
                   type: template
                   icon: mdi:air-conditioner
-                  icon_color: |
-                    {% if is_state('sensor.clim_bureau_etat', 'Cool') %}
-                      #87CEEB
+                  icon_color: >-
+                    {% if is_state('sensor.clim_bureau_etat', 'Cool') %} #87CEEB
+
                     {% elif is_state('sensor.clim_bureau_etat', 'Heat') %}
-                      #ff6100
+                    #ff6100
+
                     {% elif is_state('sensor.clim_bureau_etat', 'Fan') %}
-                      #40E0D0
-                    {% elif is_state('sensor.clim_bureau_etat', 'Off') %}
-                      #FF0000
-                    {% endif %}
-                  content: |
-                    Bureau: {% if is_state('sensor.clim_bureau_etat', 'Heat') %}
-                      Heat
-                    {% elif is_state('sensor.clim_bureau_etat', 'Fan') %}
-                      Fan
-                    {% elif is_state('sensor.clim_bureau_etat', 'Off') %}
-                      Off
-                    {% else %}
-                      Cool
-                    {% endif %}
+                    #40E0D0
+
+                    {% else %} #FF0000 {% endif %}
+                  content: 'Bureau: {{ states(''sensor.clim_bureau_etat'') }}'
                   tap_action:
                     action: none
               - type: conditional
@@ -18149,19 +18155,12 @@ views:
                 chip:
                   type: template
                   icon: mdi:heat-wave
-                  icon_color: |
+                  icon_color: >-
                     {% if is_state('sensor.sdb_soufflant_etat', 'Heat') %}
-                      #ff6100
-                    {% elif is_state('sensor.sdb_soufflant_etat', 'Off') %}
-                      #FF0000
-                    {% endif %}
-                  content: >
-                    Salle de Bain: {% if is_state('sensor.sdb_soufflant_etat',
-                    'Heat') %}
-                      Heat
-                    {% else %}
-                      Off
-                    {% endif %}
+                    #ff6100
+
+                    {% else %} #FF0000 {% endif %}
+                  content: 'SdB Soufflant: {{ states(''sensor.sdb_soufflant_etat'') }}'
                   tap_action:
                     action: none
               - type: conditional
@@ -18171,20 +18170,14 @@ views:
                 chip:
                   type: template
                   icon: mdi:heating-coil
-                  icon_color: >
+                  icon_color: >-
                     {% if is_state('sensor.sdb_seche_serviette_etat', 'Heat') %}
-                      #ff6100
-                    {% elif is_state('sensor.sdb_seche_serviette_etat', 'Off')
-                    %}
-                      #FF0000
-                    {% endif %}
-                  content: >
-                    Salle de Bain: {% if
-                    is_state('sensor.sdb_seche_serviette_etat', 'Heat') %}
-                      Heat
-                    {% else %}
-                      Off
-                    {% endif %}
+                    #ff6100
+
+                    {% else %} #FF0000 {% endif %}
+                  content: >-
+                    SdB Serviette: {{ states('sensor.sdb_seche_serviette_etat')
+                    }}
                   tap_action:
                     action: none
               - type: conditional
@@ -18194,27 +18187,18 @@ views:
                 chip:
                   type: template
                   icon: mdi:air-conditioner
-                  icon_color: |
+                  icon_color: >-
                     {% if is_state('sensor.clim_chambre_etat', 'Cool') %}
-                      #87CEEB
+                    #87CEEB
+
                     {% elif is_state('sensor.clim_chambre_etat', 'Heat') %}
-                      #ff6100
+                    #ff6100
+
                     {% elif is_state('sensor.clim_chambre_etat', 'Fan') %}
-                      #40E0D0
-                    {% elif is_state('sensor.clim_chambre_etat', 'Off') %}
-                      #FF0000
-                    {% endif %}
-                  content: >
-                    Chambre: {% if is_state('sensor.clim_chambre_etat', 'Heat')
-                    %}
-                      Heat
-                    {% elif is_state('sensor.clim_chambre_etat', 'Fan') %}
-                      Fan
-                    {% elif is_state('sensor.clim_chambre_etat', 'Off') %}
-                      Off
-                    {% else %}
-                      Cool
-                    {% endif %}
+                    #40E0D0
+
+                    {% else %} #FF0000 {% endif %}
+                  content: 'Chambre: {{ states(''sensor.clim_chambre_etat'') }}'
                   tap_action:
                     action: none
             alignment: center
@@ -18725,15 +18709,11 @@ views:
                 opposite: false
               - id: hours
                 min: 0
-                max: ~5
+                max: 6
                 decimals: 0
                 opposite: true
                 apex_config:
                   tickAmount: 12
-              - id: perf
-                show: false
-                min: 0
-                max: ~1
             all_series_config:
               curve: smooth
               show:
@@ -18934,94 +18914,21 @@ views:
                         border: none !important;
                       }
               - attributes:
-                  label: PERF / DUT
+                  label: DUT
                   icon: mdi:chart-line
                 card:
-                  type: custom:apexcharts-card
-                  experimental:
-                    color_threshold: true
-                  graph_span: 24h
-                  cache: true
-                  span:
-                    start: day
-                    offset: +0m
-                  apex_config:
-                    chart:
-                      height: 340px
-                    annotations:
-                      yaxis:
-                        - 'y': 5
-                          y2: 50
-                          borderColor: '#f44336'
-                          fillColor: '#f44336'
-                          opacity: 0.1
-                          label:
-                            text: Zone Critique
-                            style:
-                              color: '#f44336'
-                              background: transparent
-                  now:
-                    show: true
-                    color: '#f44336'
-                    label: Now
-                  header:
-                    show: true
-                    title: D.U.T. & Performance Salon
-                    show_states: true
-                    colorize_states: true
-                  yaxis:
-                    - id: temp
-                      decimals: 0
-                    - id: hours
-                      min: 0
-                      max: 24
-                      decimals: 0
-                      opposite: true
-                      apex_config:
-                        tickAmount: 12
-                    - id: perf
-                      show: false
-                      min: 0
-                      max: ~2
-                  all_series_config:
-                    show:
-                      legend_value: false
-                      extremas: true
-                    curve: smooth
-                  series:
-                    - entity: sensor.th_balcon_nord_temperature
-                      yaxis_id: temp
-                      name: Temp. Extérieure
-                      type: area
-                      stroke_width: 1
-                      color: '#44739e'
-                      opacity: 0.2
-                    - entity: sensor.dut_clim_salon
-                      name: D.U.T. Salon
-                      yaxis_id: hours
-                      type: area
-                      color: rgb(174,68,90)
-                      stroke_width: 1
-                      opacity: 0.4
-                      group_by:
-                        func: last
-                        duration: 5m
-                      color_threshold:
-                        - value: 0
-                          color: '#0f9d58'
-                        - value: 4
-                          color: '#fdd835'
-                        - value: 6
-                          color: '#ff9800'
-                        - value: 10
-                          color: '#f44336'
-                  card_mod:
-                    style: |
-                      ha-card {
-                        background: transparent !important;
-                        box-shadow: none !important;
-                        border: none !important;
-                      }
+                  type: custom:streamline-card
+                  template: apex_dut_piece
+                  variables:
+                    title: D.U.T. Salon
+                    entity_sensor: sensor.dut_clim_salon
+                    color: rgb(174,68,90)
+                    annot_text: Zone Critique
+                    hours: 6
+                    crit_zone: 5
+                    thresh_yellow: 4
+                    thresh_orange: 6
+                    thresh_red: 10
           - type: heading
             icon: mdi:sofa
             heading_style: subtitle
@@ -19226,91 +19133,21 @@ views:
                         border: none !important;
                       }
               - attributes:
-                  label: PERF / DUT
+                  label: DUT
                   icon: mdi:chart-line
                 card:
-                  type: custom:apexcharts-card
-                  experimental:
-                    color_threshold: true
-                  graph_span: 24h
-                  cache: true
-                  span:
-                    start: day
-                    offset: +0m
-                  apex_config:
-                    chart:
-                      height: 340px
-                    annotations:
-                      yaxis:
-                        - 'y': 5
-                          y2: 50
-                          yAxisId: perf
-                          borderColor: '#f44336'
-                          fillColor: '#f44336'
-                          opacity: 0.1
-                          label:
-                            text: Performance Faible
-                            style:
-                              color: '#f44336'
-                              background: transparent
-                  now:
-                    show: true
-                    color: '#f44336'
-                    label: Now
-                  header:
-                    show: true
-                    title: D.U.T. & Performance Cuisine
-                    show_states: true
-                    colorize_states: true
-                  yaxis:
-                    - id: temp
-                      decimals: 0
-                    - id: hours
-                      min: 0
-                      max: 24
-                      decimals: 0
-                      opposite: true
-                      apex_config:
-                        tickAmount: 12
-                    - id: perf
-                      show: false
-                      min: 0
-                      max: ~0.5
-                  all_series_config:
-                    show:
-                      legend_value: false
-                      extremas: true
-                    curve: smooth
-                  series:
-                    - entity: sensor.th_balcon_nord_temperature
-                      yaxis_id: temp
-                      name: Temp. Extérieure
-                      type: area
-                      stroke_width: 1
-                      color: '#44739e'
-                      opacity: 0.2
-                    - entity: sensor.dut_radiateur_cuisine
-                      name: D.U.T. Cuisine
-                      yaxis_id: hours
-                      type: area
-                      color: rgb(168, 136, 181)
-                      stroke_width: 1
-                      color_threshold:
-                        - value: 0
-                          color: '#0f9d58'
-                        - value: 4
-                          color: '#fdd835'
-                        - value: 6
-                          color: '#ff9800'
-                        - value: 10
-                          color: '#f44336'
-                  card_mod:
-                    style: |
-                      ha-card {
-                        background: transparent !important;
-                        box-shadow: none !important;
-                        border: none !important;
-                      }
+                  type: custom:streamline-card
+                  template: apex_dut_piece
+                  variables:
+                    title: D.U.T. Cuisine
+                    entity_sensor: sensor.dut_radiateur_cuisine
+                    color: rgb(168, 136, 181)
+                    annot_text: Zone Critique
+                    hours: 6
+                    crit_zone: 5
+                    thresh_yellow: 4
+                    thresh_orange: 6
+                    thresh_red: 10
           - type: heading
             icon: mdi:fridge
             heading_style: title
@@ -19520,95 +19357,21 @@ views:
                         border: none !important;
                       }
               - attributes:
-                  label: PERF / DUT
+                  label: DUT
                   icon: mdi:chart-line
                 card:
-                  type: custom:apexcharts-card
-                  experimental:
-                    color_threshold: true
-                  graph_span: 24h
-                  cache: true
-                  span:
-                    start: day
-                    offset: +0m
-                  apex_config:
-                    chart:
-                      height: 340px
-                    annotations:
-                      yaxis:
-                        - 'y': 5
-                          y2: 50
-                          yAxisId: perf
-                          borderColor: '#f44336'
-                          fillColor: '#f44336'
-                          opacity: 0.1
-                          label:
-                            text: Zone Critique
-                            style:
-                              color: '#f44336'
-                              background: transparent
-                  now:
-                    show: true
-                    color: '#f44336'
-                    label: Now
-                  header:
-                    show: true
-                    title: D.U.T. & Performance Bureau
-                    show_states: true
-                    colorize_states: true
-                  yaxis:
-                    - id: temp
-                      decimals: 0
-                    - id: hours
-                      min: 0
-                      max: 24
-                      decimals: 0
-                      opposite: true
-                      apex_config:
-                        tickAmount: 12
-                    - id: perf
-                      show: false
-                      min: 0
-                      max: ~10
-                  all_series_config:
-                    show:
-                      legend_value: false
-                      extremas: true
-                    curve: smooth
-                  series:
-                    - entity: sensor.th_balcon_nord_temperature
-                      yaxis_id: temp
-                      name: Temp. Extérieure
-                      type: area
-                      stroke_width: 1
-                      color: '#44739e'
-                      opacity: 0.2
-                    - entity: sensor.dut_clim_bureau
-                      name: D.U.T. Bureau
-                      yaxis_id: hours
-                      type: area
-                      color: orange
-                      stroke_width: 1
-                      opacity: 0.4
-                      group_by:
-                        func: last
-                        duration: 5m
-                      color_threshold:
-                        - value: 0
-                          color: '#0f9d58'
-                        - value: 4
-                          color: '#fdd835'
-                        - value: 6
-                          color: '#ff9800'
-                        - value: 10
-                          color: '#f44336'
-                  card_mod:
-                    style: |
-                      ha-card {
-                        background: transparent !important;
-                        box-shadow: none !important;
-                        border: none !important;
-                      }
+                  type: custom:streamline-card
+                  template: apex_dut_piece
+                  variables:
+                    title: D.U.T. Bureau
+                    entity_sensor: sensor.dut_clim_bureau
+                    color: orange
+                    annot_text: Zone Critique
+                    hours: 6
+                    crit_zone: 5
+                    thresh_yellow: 4
+                    thresh_orange: 6
+                    thresh_red: 10
           - type: heading
             icon: mdi:desktop-tower-monitor
             heading_style: title
@@ -19848,100 +19611,21 @@ views:
                         border: none !important;
                       }
               - attributes:
-                  label: PERF / DUT
+                  label: DUT
                   icon: mdi:chart-line
                 card:
-                  type: custom:apexcharts-card
-                  experimental:
-                    color_threshold: true
-                  graph_span: 24h
-                  cache: true
-                  span:
-                    start: day
-                    offset: +0m
-                  apex_config:
-                    chart:
-                      height: 340px
-                    stroke:
-                      dashArray:
-                        - 0
-                        - 0
-                        - 0
-                        - 4
-                    annotations:
-                      yaxis:
-                        - 'y': 5
-                          y2: 50
-                          borderColor: '#f44336'
-                          fillColor: '#f44336'
-                          opacity: 0.1
-                          label:
-                            text: Pic de conso
-                            style:
-                              color: '#f44336'
-                              background: transparent
-                  now:
-                    show: true
-                    color: '#f44336'
-                    label: Now
-                  header:
-                    show: true
-                    title: D.U.T. & Performance SdB
-                    show_states: true
-                    colorize_states: true
-                  yaxis:
-                    - id: temp
-                      decimals: 0
-                    - id: hours
-                      min: 0
-                      max: 24
-                      decimals: 0
-                      opposite: true
-                      apex_config:
-                        tickAmount: 12
-                    - id: perf
-                      show: false
-                      min: 0
-                      max: ~2
-                  all_series_config:
-                    show:
-                      legend_value: false
-                      extremas: true
-                    curve: smooth
-                  series:
-                    - entity: sensor.th_balcon_nord_temperature
-                      yaxis_id: temp
-                      name: Temp. Extérieure
-                      type: area
-                      stroke_width: 1
-                      color: '#44739e'
-                      opacity: 0.2
-                    - entity: sensor.dut_sdb_total
-                      name: D.U.T. SdB
-                      yaxis_id: hours
-                      type: area
-                      color: rgb(218, 112, 214)
-                      stroke_width: 1
-                      opacity: 0.4
-                      group_by:
-                        func: last
-                        duration: 5m
-                      color_threshold:
-                        - value: 0
-                          color: '#0f9d58'
-                        - value: 4
-                          color: '#fdd835'
-                        - value: 6
-                          color: '#ff9800'
-                        - value: 10
-                          color: '#f44336'
-                  card_mod:
-                    style: |
-                      ha-card {
-                        background: transparent !important;
-                        box-shadow: none !important;
-                        border: none !important;
-                      }
+                  type: custom:streamline-card
+                  template: apex_dut_piece
+                  variables:
+                    title: D.U.T. SdB (Soufflant)
+                    entity_sensor: sensor.dut_sdb_total
+                    color: rgb(218, 112, 214)
+                    annot_text: Oubli / Sauna !
+                    hours: 1.5
+                    crit_zone: 0.75
+                    thresh_yellow: 0.3
+                    thresh_orange: 0.5
+                    thresh_red: 0.75
           - type: heading
             icon: mdi:heat-wave
             heading_style: title
@@ -20081,100 +19765,21 @@ views:
                     temp_color: rgb(126, 24, 145)
                     conso_monthly_kwh_entity: sensor.seche_serviette_sdb_mensuel_kwh_um
               - attributes:
-                  label: PERF / DUT
+                  label: DUT
                   icon: mdi:chart-line
                 card:
-                  type: custom:apexcharts-card
-                  experimental:
-                    color_threshold: true
-                  graph_span: 24h
-                  cache: true
-                  span:
-                    start: day
-                    offset: +0m
-                  apex_config:
-                    chart:
-                      height: 340px
-                    stroke:
-                      dashArray:
-                        - 0
-                        - 0
-                        - 0
-                        - 4
-                    annotations:
-                      yaxis:
-                        - 'y': 5
-                          y2: 50
-                          borderColor: '#f44336'
-                          fillColor: '#f44336'
-                          opacity: 0.1
-                          label:
-                            text: Pic de conso
-                            style:
-                              color: '#f44336'
-                              background: transparent
-                  now:
-                    show: true
-                    color: '#f44336'
-                    label: Now
-                  header:
-                    show: true
-                    title: D.U.T. & Performance SdB
-                    show_states: true
-                    colorize_states: true
-                  yaxis:
-                    - id: temp
-                      decimals: 0
-                    - id: hours
-                      min: 0
-                      max: 24
-                      decimals: 0
-                      opposite: true
-                      apex_config:
-                        tickAmount: 12
-                    - id: perf
-                      show: false
-                      min: 0
-                      max: ~2
-                  all_series_config:
-                    show:
-                      legend_value: false
-                      extremas: true
-                    curve: smooth
-                  series:
-                    - entity: sensor.th_balcon_nord_temperature
-                      yaxis_id: temp
-                      name: Temp. Extérieure
-                      type: area
-                      stroke_width: 1
-                      color: '#44739e'
-                      opacity: 0.2
-                    - entity: sensor.dut_sdb_total
-                      name: D.U.T. SdB
-                      yaxis_id: hours
-                      type: area
-                      color: rgb(218, 112, 214)
-                      stroke_width: 1
-                      opacity: 0.4
-                      group_by:
-                        func: last
-                        duration: 5m
-                      color_threshold:
-                        - value: 0
-                          color: '#0f9d58'
-                        - value: 4
-                          color: '#fdd835'
-                        - value: 6
-                          color: '#ff9800'
-                        - value: 10
-                          color: '#f44336'
-                  card_mod:
-                    style: |
-                      ha-card {
-                        background: transparent !important;
-                        box-shadow: none !important;
-                        border: none !important;
-                      }
+                  type: custom:streamline-card
+                  template: apex_dut_piece
+                  variables:
+                    title: D.U.T. SdB (Sèche-Serv.)
+                    entity_sensor: sensor.dut_sdb_total
+                    color: rgb(218, 112, 214)
+                    annot_text: Oubli / Sauna !
+                    hours: 1.5
+                    crit_zone: 0.75
+                    thresh_yellow: 0.3
+                    thresh_orange: 0.5
+                    thresh_red: 0.75
           - type: heading
             icon: mdi:heating-coil
             heading_style: title
@@ -20376,95 +19981,21 @@ views:
                     temp_color: rgb(126, 24, 145)
                     conso_monthly_kwh_entity: sensor.clim_chambre_mensuel_kwh_um
               - attributes:
-                  label: PERF / DUT
+                  label: DUT
                   icon: mdi:chart-line
                 card:
-                  type: custom:apexcharts-card
-                  experimental:
-                    color_threshold: true
-                  graph_span: 24h
-                  cache: true
-                  span:
-                    start: day
-                    offset: +0m
-                  apex_config:
-                    chart:
-                      height: 340px
-                    annotations:
-                      yaxis:
-                        - 'y': 5
-                          y2: 50
-                          yAxisId: perf
-                          borderColor: '#f44336'
-                          fillColor: '#f44336'
-                          opacity: 0.7
-                          label:
-                            text: Zone de déperdition
-                            style:
-                              color: '#f44336'
-                              background: transparent
-                  now:
-                    show: true
-                    color: '#f44336'
-                    label: Now
-                  header:
-                    show: true
-                    title: D.U.T. & Performance Chambre
-                    show_states: true
-                    colorize_states: true
-                  yaxis:
-                    - id: temp
-                      decimals: 0
-                    - id: hours
-                      min: 0
-                      max: 24
-                      decimals: 0
-                      opposite: true
-                      apex_config:
-                        tickAmount: 12
-                    - id: perf
-                      show: false
-                      min: 0
-                      max: ~10
-                  all_series_config:
-                    show:
-                      legend_value: false
-                      extremas: true
-                    curve: smooth
-                  series:
-                    - entity: sensor.th_balcon_nord_temperature
-                      yaxis_id: temp
-                      name: Temp. Extérieure
-                      type: area
-                      stroke_width: 1
-                      color: '#44739e'
-                      opacity: 0.2
-                    - entity: sensor.dut_clim_chambre
-                      name: D.U.T. Chambre
-                      yaxis_id: hours
-                      type: area
-                      color: rgb(30,81,40)
-                      stroke_width: 1
-                      opacity: 0.4
-                      group_by:
-                        func: last
-                        duration: 5m
-                      color_threshold:
-                        - value: 0
-                          color: '#0f9d58'
-                        - value: 4
-                          color: '#fdd835'
-                        - value: 6
-                          color: '#ff9800'
-                        - value: 10
-                          color: '#f44336'
-                  card_mod:
-                    style: |
-                      ha-card {
-                        background: transparent !important;
-                        box-shadow: none !important;
-                        border: none !important;
-                      }
+                  type: custom:streamline-card
+                  template: apex_dut_piece
+                  variables:
+                    title: D.U.T. Chambre
+                    entity_sensor: sensor.dut_clim_chambre
+                    color: rgb(30,81,40)
+                    annot_text: Zone de déperdition
+                    hours: 6
+                    crit_zone: 5
+                    thresh_yellow: 4
+                    thresh_orange: 6
+                    thresh_red: 10
           - type: heading
             icon: mdi:bed
             heading_style: title
