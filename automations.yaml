@@ -402,3 +402,84 @@
           entity_id: input_boolean.inter_soufflant_salle_de_bain
         data: {}
   mode: restart
+- id: '1774452171317'
+  alias: (I) (CLIM DEBUG) Force Mode Correct & Sécurité
+  description: 'WATCHDOG :   1. FORCE OFF si tentative d''allumage alors que Prise
+    OFF ou Arrêt Sécurisé en cours.  2. FORCE SAISON si une clim est allumée mais
+    dans le mauvais mode (ex: Cool au lieu de Heat).
+
+    '
+  triggers:
+  - trigger: state
+    entity_id:
+    - climate.clim_salon_rm4_mini
+    - climate.clim_bureau_rm4_mini
+    - climate.clim_chambre_rm4_mini
+    to:
+  - trigger: state
+    entity_id: sensor.mode_ete_hiver
+    to:
+  conditions: []
+  actions:
+  - delay: 00:00:02
+  - alias: CALCUL DES LISTES D'ERREURS
+    variables:
+      mode_saison: '{{ states(''sensor.mode_ete_hiver'') }}'
+      force_off_list: "{% set liste = [] %} {# SALON #} {% if states('climate.clim_salon_rm4_mini')
+        != 'off' \n      and (is_state('switch.clim_salon_nous', 'off') or is_state('input_boolean.clim_salon_arret_securise_en_cours',
+        'on')) %}\n  {% set liste = liste + ['climate.clim_salon_rm4_mini'] %}\n{%
+        endif %} {# BUREAU #} {% if states('climate.clim_bureau_rm4_mini') != 'off'
+        \n      and (is_state('switch.clim_bureau_nous', 'off') or is_state('input_boolean.clim_bureau_arret_securise_en_cours',
+        'on')) %}\n  {% set liste = liste + ['climate.clim_bureau_rm4_mini'] %}\n{%
+        endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_rm4_mini') != 'off'
+        \n      and (is_state('switch.clim_chambre_nous', 'off') or is_state('input_boolean.clim_chambre_arret_securise_en_cours',
+        'on')) %}\n  {% set liste = liste + ['climate.clim_chambre_rm4_mini'] %}\n{%
+        endif %} {{ liste }}\n"
+      force_mode_list: "{% set liste = [] %} {# SALON #} {% if states('climate.clim_salon_rm4_mini')
+        not in ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_salon_nous',
+        'on') \n      and is_state('input_boolean.clim_salon_arret_securise_en_cours',
+        'off') %}\n  {% set liste = liste + ['climate.clim_salon_rm4_mini'] %}\n{%
+        endif %} {# BUREAU #} {% if states('climate.clim_bureau_rm4_mini') not in
+        ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_bureau_nous',
+        'on') \n      and is_state('input_boolean.clim_bureau_arret_securise_en_cours',
+        'off') %}\n  {% set liste = liste + ['climate.clim_bureau_rm4_mini'] %}\n{%
+        endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_rm4_mini') not in
+        ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_chambre_nous',
+        'on') \n      and is_state('input_boolean.clim_chambre_arret_securise_en_cours',
+        'off') %}\n  {% set liste = liste + ['climate.clim_chambre_rm4_mini'] %}\n{%
+        endif %} {{ liste }}\n"
+  - if:
+    - condition: template
+      value_template: '{{ force_off_list | length > 0 }}'
+    then:
+    - alias: 'NOTIF : INTERDICTION DÉMARRAGE'
+      action: notify.mobile_app_poco_x7_pro_eric
+      data:
+        title: ⛔ SÉCURITÉ CLIM
+        message: "Tentative de démarrage interdite (Prise coupée ou Arrêt en cours).
+          Retour forcé à OFF pour : {% for c in force_off_list %}\n  - {{ state_attr(c,
+          'friendly_name') }}\n{% endfor %}\n"
+    - alias: 'ACTION : FORCER OFF'
+      action: climate.set_hvac_mode
+      target:
+        entity_id: '{{ force_off_list }}'
+      data:
+        hvac_mode: 'off'
+  - if:
+    - condition: template
+      value_template: '{{ force_mode_list | length > 0 }}'
+    then:
+    - alias: 'NOTIF : CORRECTION MODE'
+      action: notify.mobile_app_poco_x7_pro_eric
+      data:
+        title: "\U0001F527 CORRECTION MODE"
+        message: "Mauvais mode détecté. Correction vers {{ mode_saison | upper }}
+          pour : {% for c in force_mode_list %}\n  - {{ state_attr(c, 'friendly_name')
+          }}\n{% endfor %}\n"
+    - alias: 'ACTION : FORCER MODE SAISON'
+      action: climate.set_hvac_mode
+      target:
+        entity_id: '{{ force_mode_list }}'
+      data:
+        hvac_mode: '{{ mode_saison }}'
+  mode: single
