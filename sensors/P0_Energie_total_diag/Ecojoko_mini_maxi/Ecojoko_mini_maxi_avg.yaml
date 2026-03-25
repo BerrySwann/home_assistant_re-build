@@ -29,7 +29,6 @@
   unique_id: ecojoko_conso_mini_24h
   entity_id: sensor.ecojoko_consommation_temps_reel
   state_characteristic: value_min
-  sampling_size: 6
   max_age:
     hours: 24
 
@@ -38,7 +37,6 @@
   unique_id: ecojoko_conso_maxi_24h
   entity_id: sensor.ecojoko_consommation_temps_reel
   state_characteristic: value_max
-  sampling_size: 6
   max_age:
     hours: 24
 
@@ -47,7 +45,6 @@
   unique_id: ecojoko_conso_moyenne_1h
   entity_id: sensor.ecojoko_consommation_temps_reel
   state_characteristic: mean
-  sampling_size: 6
   precision: 1
   max_age:
     hours: 1
