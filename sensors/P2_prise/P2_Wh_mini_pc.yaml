@@ -24,13 +24,13 @@
 # - LxCx Mini-Pc
 
 # ┌───────────────────────────────────┐
-# │ 1. ENTRÉE                         │
+# │ 7. BUREAU                         │
 # └───────────────────────────────────┘
 # --- prise_box_internet_ikea_energie_totale_kwh ---
   - platform: integration
     source: sensor.prise_mini_pc_ikea_power
-    name: "Prise Box Internet IKEA Energie Totale kWh"
-    unique_id: prise_box_internet_ikea_energie_totale_kwh
+    name: "Prise Mini PC IKEA Energie Totale kWh"
+    unique_id: prise_mini_pc_ikea_energie_totale_kwh
     method: left
     unit_prefix: k
     unit_time: h
