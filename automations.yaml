@@ -472,7 +472,7 @@
       value_template: '{{ force_off_list | length > 0 }}'
     then:
     - alias: 'NOTIF : INTERDICTION DÉMARRAGE'
-      action: notify.mobile_app_poco_x7_pro_eric
+      action: notify.mobile_app_poco_x7_pro_e
       data:
         title: ⛔ SÉCURITÉ CLIM
         message: "Tentative de démarrage interdite (Prise coupée ou Arrêt en cours).
@@ -489,7 +489,7 @@
       value_template: '{{ force_mode_list | length > 0 }}'
     then:
     - alias: 'NOTIF : CORRECTION MODE'
-      action: notify.mobile_app_poco_x7_pro_eric
+      action: notify.mobile_app_poco_x7_pro_e
       data:
         title: "\U0001F527 CORRECTION MODE"
         message: "Mauvais mode détecté. Correction vers {{ mode_saison | upper }}
