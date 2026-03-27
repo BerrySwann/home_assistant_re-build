@@ -1,0 +1,33 @@
+# ╭──────────────────────────────────────────────────────────────────╮
+# │ INPUT_BOOLEAN : CLIMATISATION (ARRÊTS SÉCURISÉS)                 │
+# ╰──────────────────────────────────────────────────────────────────╯
+
+# ┌─────────────────────────────────────┐
+# │ 4. SALON                            │
+# └─────────────────────────────────────┘
+
+# --- clim_salon_arret_securise_en_cours ---
+clim_salon_arret_securise_en_cours:
+  name: "Blocage CLIM Salon (Arrêt Sécurisé)"
+  initial: off
+  icon: mdi:lock-alert
+
+# ┌─────────────────────────────────────┐
+# │ 7. BUREAU                           │
+# └─────────────────────────────────────┘
+
+# --- clim_bureau_arret_securise_en_cours ---
+clim_bureau_arret_securise_en_cours:
+  name: "Blocage CLIM Bureau (Arrêt Sécurisé)"
+  initial: off
+  icon: mdi:lock-alert
+
+# ┌─────────────────────────────────────┐
+# │ 9. CHAMBRE                          │
+# └─────────────────────────────────────┘
+
+# --- clim_chambre_arret_securise_en_cours ---
+clim_chambre_arret_securise_en_cours:
+  name: "Blocage CLIM Chambre (Arrêt Sécurisé)"
+  initial: off
+  icon: mdi:lock-alert
