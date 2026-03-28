@@ -18,7 +18,7 @@ j_1_routeur_clim_on_off_intelligent:
       value_template: '{{ is_state(lock_entity, "on") }}'
     then:
     - alias: 'NOTIFICATION : VERROU ACTIF'
-      action: notify.mobile_app_poco_x7_pro
+      action: notify.mobile_app_poco_x7_pro_e
       data:
         title: OULA DOUCEMENT !
         message: Une procédure d'arrêt est déjà en cours sur {{ p | upper }}.
