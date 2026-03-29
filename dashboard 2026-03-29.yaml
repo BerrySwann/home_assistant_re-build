@@ -1310,74 +1310,66 @@ views:
                   box-shadow: none !important;
                   border: none !important;
                 }
-          - type: custom:button-card
-            entity: sensor.studio_code_server_pourcentage_du_processeur
-            name: Visual Server Code
-            icon: mdi:microsoft-visual-studio-code
-            show_state: true
-            show_label: false
-            state_display: |-
-              [[[ 
-                var cpu = states['sensor.studio_code_server_pourcentage_du_processeur'];
-                return cpu ? parseFloat(cpu.state).toFixed(2) + ' %' : '...'; 
-              ]]]
-            layout: icon_name_state
-            tap_action:
-              action: call-service
-              confirmation:
-                text: |-
-                  ⚠️ VS Code semble bloqué ?
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.studio_code_server_pourcentage_du_processeur
+                above: 1
+            card:
+              type: custom:button-card
+              entity: sensor.studio_code_server_pourcentage_du_processeur
+              name: Visual Server Code
+              icon: mdi:microsoft-visual-studio-code
+              show_state: true
+              show_label: false
+              state_display: |
+                [[[ 
+                  return parseFloat(entity.state).toFixed(2) + ' %'; 
+                ]]]
+              layout: icon_name_state
+              tap_action:
+                action: call-service
+                confirmation:
+                  text: |-
+                    ⚠️ VS Code semble bloqué ?
 
-                  Voulez-vous forcer le redémarrage de l'Add-on ?
-              service: hassio.addon_restart
-              service_data:
-                addon: a0d7b954_vscode
-            styles:
-              card:
-                - border-radius: 12px
-                - height: 50px
-                - padding: 0px 15px
-                - background-color: |
-                    [[[
-                      var cpu = states['sensor.studio_code_server_pourcentage_du_processeur'];
-                      if (cpu && cpu.state) {
-                        return (parseFloat(cpu.state) > 20) ? '#f44336' : '#03a9f4';
-                      }
-                      return '#494c4f';
-                    ]]]
-                - animation: |
-                    [[[
-                      var cpu = states['sensor.studio_code_server_pourcentage_du_processeur'];
-                      if (cpu && cpu.state) {
-                        return (parseFloat(cpu.state) > 20) ? 'blink 1s ease infinite' : 'none';
-                      }
-                      return 'none';
-                    ]]]
-              grid:
-                - grid-template-columns: 35px auto 60px
-              icon:
-                - width: 24px
-                - color: white
-              name:
-                - color: white
-                - font-weight: bold
-                - font-size: 14px
-                - justify-self: start
-              state:
-                - color: white
-                - font-weight: bold
-                - font-size: 14px
-                - justify-self: end
-            extra_styles: |
-              @keyframes blink {
-                50% { opacity: 0.5; }
-              }
-            card_mod:
-              style: |
-                ha-card {
-                  border: none !important;
-                  box-shadow: none !important;
-                  background: transparent;
+                    Voulez-vous forcer le redémarrage de l'Add-on ?
+                service: hassio.addon_restart
+                service_data:
+                  addon: a0d7b954_vscode
+              styles:
+                card:
+                  - border-radius: 12px
+                  - height: 50px
+                  - padding: 0px 15px
+                  - border: none
+                  - box-shadow: none
+                  - background-color: |
+                      [[[
+                        return (parseFloat(entity.state) > 20) ? '#f44336' : '#03a9f4';
+                      ]]]
+                  - animation: |
+                      [[[
+                        return (parseFloat(entity.state) > 20) ? 'blink 1s ease infinite' : 'none';
+                      ]]]
+                grid:
+                  - grid-template-columns: 35px auto 60px
+                icon:
+                  - width: 24px
+                  - color: white
+                name:
+                  - color: white
+                  - font-weight: bold
+                  - font-size: 14px
+                  - justify-self: start
+                state:
+                  - color: white
+                  - font-weight: bold
+                  - font-size: 14px
+                  - justify-self: end
+              extra_styles: |
+                @keyframes blink {
+                  50% { opacity: 0.5; }
                 }
           - type: custom:button-card
             entity: sensor.maison_lightning_counter
@@ -10057,7 +10049,7 @@ views:
                 show:
                   in_brush: false
                   in_chart: false
-              - entity: sensor.clim_rad_total_avg_watts_daily
+              - entity: sensor.clim_rad_total_avg_watts_quotidien
                 name: Moy.depuis Minuit
                 yaxis_id: conso_clim
                 type: line
@@ -11085,7 +11077,7 @@ views:
                     entity: sensor.sdb_power_status_affichage
                     state_not: 'off'
                   - condition: state
-                    entity: sensor.sdb_seche_serviettes_power_status_affichage
+                    entity: sensor.sdb_seche_serviette_status_affichage
                     state_not: 'off'
                   - condition: state
                     entity: sensor.chambre_power_status_affichage
@@ -11998,18 +11990,19 @@ views:
               - switch.inter_soufflant_salle_de_bain
               - input_select.etat_resistance_soufflant_sdb
               - sensor.th_salle_de_bain_temperature
+              - climate.soufflant_salle_de_bain
             show_name: true
-            show_icon: true
+            show_icon: false
             show_state: true
             show_label: true
             name: Soufflant SDB
             visible: |
               [[[
-                return states['switch.inter_soufflant_salle_de_bain'].state === 'on';
+                return states['switch.inter_soufflant_salle_de_bain']?.state === 'on';
               ]]]
             icon: |
               [[[
-                const power = states['input_select.etat_resistance_soufflant_sdb'].state;
+                const power = states['input_select.etat_resistance_soufflant_sdb']?.state;
                 if (power === '2000W') return 'mdi:radiator';
                 if (power === '1000W') return 'mdi:radiator';
                 if (power === '0W') return 'mdi:fan';
@@ -12017,43 +12010,28 @@ views:
               ]]]
             styles:
               card:
-                - background: rgba(68, 115, 158, 0.1)
+                - background: transparent
                 - border-radius: 12px
                 - padding: 12px
                 - box-shadow: none
               grid:
                 - grid-template-areas: '"i n" "i s" "i l"'
-                - grid-template-columns: 50px 1fr
+                - grid-template-columns: 0px 1fr
                 - grid-template-rows: min-content min-content min-content
-              icon:
-                - width: 40px
-                - color: |
-                    [[[
-                      const power = states['input_select.etat_resistance_soufflant_sdb'].state;
-                      if (power === '2000W') return '#ff9800';
-                      if (power === '1000W') return '#fdd835';
-                      if (power === '0W') return '#2196f3';
-                      return '#44739e';
-                    ]]]
-                - animation: |
-                    [[[
-                      const power = states['input_select.etat_resistance_soufflant_sdb'].state;
-                      if (power !== '0W') return 'blink 2s ease infinite';
-                      return 'none';
-                    ]]]
               name:
                 - font-size: 14px
                 - font-weight: 500
                 - color: var(--primary-text-color)
-                - justify-self: start
+                - justify-self: center
                 - align-self: center
               state:
                 - font-size: 16px
                 - font-weight: bold
-                - justify-self: start
+                - justify-self: center
+                - margin-top: 2px
                 - color: |
                     [[[
-                      const power = states['input_select.etat_resistance_soufflant_sdb'].state;
+                      const power = states['input_select.etat_resistance_soufflant_sdb']?.state;
                       if (power === '2000W') return '#ff9800';
                       if (power === '1000W') return '#fdd835';
                       if (power === '0W') return '#2196f3';
@@ -12062,15 +12040,21 @@ views:
               label:
                 - font-size: 12px
                 - color: var(--secondary-text-color)
-                - justify-self: start
+                - justify-self: center
+                - margin-top: 2px
             state_display: |
               [[[
-                return states['input_select.etat_resistance_soufflant_sdb'].state;
+                return states['input_select.etat_resistance_soufflant_sdb']?.state || 'Inconnu';
               ]]]
             label: |
               [[[
-                const temp = parseFloat(states['sensor.th_salle_de_bain_temperature'].state).toFixed(1);
-                const target = parseFloat(states['climate.soufflant_salle_de_bain'].attributes.temperature).toFixed(1);
+                const tempState = states['sensor.th_salle_de_bain_temperature'];
+                const climateState = states['climate.soufflant_salle_de_bain'];
+                
+                if (!tempState || !climateState || !climateState.attributes.temperature) return 'Calcul en cours...';
+                
+                const temp = parseFloat(tempState.state).toFixed(1);
+                const target = parseFloat(climateState.attributes.temperature).toFixed(1);
                 const delta = (temp - target).toFixed(1);
                 const sign = delta >= 0 ? '+' : '';
                 return `${temp}°C (${sign}${delta}°C)`;
@@ -12085,7 +12069,7 @@ views:
             card_mod:
               style: |
                 ha-card {
-                  background: none !important;
+                  background: transparent !important;
                   box-shadow: none !important;
                   border: none !important;
                 }
@@ -12500,8 +12484,8 @@ views:
                   # Clim du Salon Semaine
 
                   **Jours de la semaine :** {{
-                  state_attr('switch.schedule_chauffage_salon_week', 'weekdays')
-                  | join(', ') }}
+                  state_attr('switch.schedule_clim_du_salon_week', 'weekdays') |
+                  join(', ') }}
                 card_mod:
                   style: |
                     ha-card {
@@ -12584,7 +12568,7 @@ views:
                   # Clim du Salon Week-End
 
                   **Jours de la semaine :** {{
-                  state_attr('switch.schedule_chauffagee_salon_week_end',
+                  state_attr('switch.schedule_clim_du_salon_week_end',
                   'weekdays') | join(', ') }}
                 card_mod:
                   style: |
@@ -12595,7 +12579,7 @@ views:
                     }
               - type: entities
                 entities:
-                  - entity: switch.schedule_chaufage_week_end
+                  - entity: switch.schedule_clim_du_salon_week_end
                     name: Programmation Climatisation Salon Week-end
                 state_color: true
                 card_mod:
@@ -12609,8 +12593,8 @@ views:
                     }
               - type: markdown
                 content: >
-                  {% set entity_id = 'switch.schedule_chauffage_salon_week_end'
-                  %} {% set timeslots = state_attr(entity_id, 'timeslots') %} {%
+                  {% set entity_id = 'switch.schedule_clim_du_salon_week_end' %}
+                  {% set timeslots = state_attr(entity_id, 'timeslots') %} {%
                   set actions = state_attr(entity_id, 'actions') %}
 
                   **Créneaux horaires et actions :** {% for i in range(timeslots
@@ -18666,7 +18650,7 @@ views:
                 show:
                   in_brush: false
                   in_chart: false
-              - entity: sensor.clim_rad_total_avg_watts_daily
+              - entity: sensor.clim_rad_total_avg_watts_quotidien
                 name: Moy.depuis Minuit
                 yaxis_id: conso_clim
                 type: line
