@@ -27,26 +27,26 @@
 # │ 7. BUREAU                         │
 # └───────────────────────────────────┘
 # --- mini_pc --- # "[L...] modif — Ajout Mini PC IKEA Inspelning"
-prise_mini_pc_ikea_annuel_kwh_um:
-  source: sensor.prise_mini_pc_ikea_energie_totale_kwh
-  name: "Prise Mini PC IKEA Annuel kWh UM"
-  unique_id: prise_mini_pc_ikea_annuel_kwh_um
+prise_mini_pc_ikea_annuel_wh_um:
+  source: sensor.prise_mini_pc_ikea_energie_totale_wh
+  name: "Prise Mini PC IKEA Annuel Wh UM"
+  unique_id: prise_mini_pc_ikea_annuel_wh_um
   cycle: yearly
 
-prise_mini_pc_ikea_mensuel_kwh_um:
-  source: sensor.prise_mini_pc_ikea_energie_totale_kwh
-  name: "Prise Mini PC IKEA Mensuel kWh UM"
-  unique_id: prise_mini_pc_ikea_mensuel_kwh_um
+prise_mini_pc_ikea_mensuel_wh_um:
+  source: sensor.prise_mini_pc_ikea_energie_totale_wh
+  name: "Prise Mini PC IKEA Mensuel Wh UM"
+  unique_id: prise_mini_pc_ikea_mensuel_wh_um
   cycle: monthly
 
-prise_mini_pc_ikea_hebdomadaire_kwh_um:
-  source: sensor.prise_mini_pc_ikea_energie_totale_kwh
-  name: "Prise Mini PC IKEA Hebdomadaire kWh UM"
-  unique_id: prise_mini_pc_ikea_hebdomadaire_kwh_um
+prise_mini_pc_ikea_hebdomadaire_wh_um:
+  source: sensor.prise_mini_pc_ikea_energie_totale_wh
+  name: "Prise Mini PC IKEA Hebdomadaire Wh UM"
+  unique_id: prise_mini_pc_ikea_hebdomadaire_wh_um
   cycle: weekly
 
-prise_mini_pc_ikea_quotidien_kwh_um:
-  source: sensor.prise_mini_pc_ikea_energie_totale_kwh
-  name: "Prise Mini PC IKEA Quotidien kWh UM"
-  unique_id: prise_mini_pc_ikea_quotidien_kwh_um
+prise_mini_pc_ikea_quotidien_wh_um:
+  source: sensor.prise_mini_pc_ikea_energie_totale_wh
+  name: "Prise Mini PC IKEA Quotidien Wh UM"
+  unique_id: prise_mini_pc_ikea_quotidien_wh_um
   cycle: daily

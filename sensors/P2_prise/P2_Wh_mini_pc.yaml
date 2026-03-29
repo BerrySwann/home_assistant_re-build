@@ -26,11 +26,11 @@
 # ┌───────────────────────────────────┐
 # │ 7. BUREAU                         │
 # └───────────────────────────────────┘
-# --- prise_box_internet_ikea_energie_totale_kwh ---
+# --- prise_mini_pc_ikea_energie_totale_wh ---
   - platform: integration
     source: sensor.prise_mini_pc_ikea_power
-    name: "Prise Mini PC IKEA Energie Totale kWh"
-    unique_id: prise_mini_pc_ikea_energie_totale_kwh
+    name: "Prise Mini PC IKEA Energie Totale Wh"
+    unique_id: prise_mini_pc_ikea_energie_totale_wh
     method: left
     unit_time: h
     round: 3
