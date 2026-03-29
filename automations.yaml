@@ -98,7 +98,7 @@
     data:
       level: info
       message: '[Backup] Weekly exécuté'
-  - action: notify.mobile_app_poco_x7_pro_e
+  - action: notify.mobile_app_poco_x7_pro_eric
     data:
       title: BACKUP WEEKLY
       message: Backup hebdo + tag -> GitHub OK. Semaine {{ now().strftime('%G-W%V')
@@ -148,7 +148,7 @@
       message: 'Echec ou pas de commit depuis 15 min. Verif : /config/.logs/ha_git_backup.log
 
         '
-  - action: notify.mobile_app_poco_x7_pro_e
+  - action: notify.mobile_app_poco_x7_pro_eric
     data:
       title: BACKUP KO
       message: 'Git push KO depuis 15 min. Verif log backup.
@@ -224,7 +224,7 @@
               title: Oui, couper
             - action: KEEP_VSC
               title: Non, ignorer
-        action: notify.mobile_app_poco_x7_pro_e
+        action: notify.mobile_app_poco_x7_pro_eric
     - conditions:
       - condition: trigger
         id: inactive
@@ -238,7 +238,7 @@
               title: Oui, couper
             - action: KEEP_VSC
               title: Non, ignorer
-        action: notify.mobile_app_poco_x7_pro_e
+        action: notify.mobile_app_poco_x7_pro_eric
   - wait_for_trigger:
     - event_type: mobile_app_notification_action
       event_data:
@@ -263,7 +263,7 @@
       - data:
           title: VSC ARRETE
           message: Arret auto VSC OK. (Economie energie).
-        action: notify.mobile_app_poco_x7_pro_e
+        action: notify.mobile_app_poco_x7_pro_eric
     - alias: 'ACTION : KEEP'
       conditions:
       - condition: template
@@ -472,9 +472,9 @@
       value_template: '{{ force_off_list | length > 0 }}'
     then:
     - alias: 'NOTIF : INTERDICTION DÉMARRAGE'
-      action: notify.mobile_app_poco_x7_pro_e
+      action: notify.mobile_app_poco_x7_pro_eric
       data:
-        title: ⛔ SÉCURITÉ CLIM
+        title: SÉCURITÉ CLIM
         message: "Tentative de démarrage interdite (Prise coupée ou Arrêt en cours).
           Retour forcé à OFF pour : {% for c in force_off_list %}\n  - {{ state_attr(c,
           'friendly_name') }}\n{% endfor %}\n"
@@ -489,7 +489,7 @@
       value_template: '{{ force_mode_list | length > 0 }}'
     then:
     - alias: 'NOTIF : CORRECTION MODE'
-      action: notify.mobile_app_poco_x7_pro_e
+      action: notify.mobile_app_poco_x7_pro_eric
       data:
         title: "\U0001F527 CORRECTION MODE"
         message: "Mauvais mode détecté. Correction vers {{ mode_saison | upper }}

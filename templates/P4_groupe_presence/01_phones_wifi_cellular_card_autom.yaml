@@ -28,7 +28,7 @@
 
 - sensor:
     # ┌───────────────────────────────────┐
-    # │ 10. AUTRE                         │
+    # │ WiFi                              │
     # └───────────────────────────────────┘
     # --- condition_mamour_wifi ---
     - name: "Condition Mamour Wifi"
