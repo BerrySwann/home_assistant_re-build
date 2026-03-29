@@ -737,7 +737,7 @@
     trigger: state
     entity_id:
     - sensor.poco_x7_pro_mamour_network_type
-    - sensor.poco_x7_pro_network_type
+    - sensor.poco_x7_pro_eric_network_type
     id: force_run
   - alias: 'PRISES : CHANGEMENT ÉTAT ON/OFF'
     trigger: state
@@ -824,8 +824,7 @@
     variables:
       mode_saison: '{% set m = states(''sensor.mode_ete_hiver'') %}  {% if m in [''heat'',
         ''cool'', ''fan_only''] %} {{ m | trim }} {% else %} off {% endif %}'
-      groupe_presence: '{{ states(''sensor.groupe_clim'') | default(''groupe_1'')
-        }}'
+      groupe_presence: '{{ states(''sensor.groupe'') | default(''groupe_1'') }}'
       fenetres_ouvertes: '{{ expand(''binary_sensor.contact_fenetre_salon_sonoff_contact'',
         ''binary_sensor.contact_fenetre_cuisine_sonoff_contact'', ''binary_sensor.contact_fenetre_bureau_sonoff_contact'',
         ''binary_sensor.contact_fenetre_chambre_sonoff_contact'') | selectattr(''state'',
@@ -952,7 +951,7 @@
     - alias: 'NOTIF : RÉSUMÉ DE L''ÉTAT DES CLIMATISATIONS'
       action: notify.mobile_app_poco_x7_pro_eric
       data:
-        title: '[AJ] {{ states(''sensor.presence_clim'') }}'
+        title: '[AJ] {{ states(''sensor.presence'') }}'
         message: "{%- if 'groupe_1' in groupe_presence and mode_saison == 'heat' %}\n
           \ [éCO HEAT]\n  Les 3 Clims : {{ temp_eco_c }}° (Absent)\n{% else %}\n  Mode
           : {{ mode_saison | upper }}\n  Salon: {{ t_salon_target }}°\n  Bureau: {{
