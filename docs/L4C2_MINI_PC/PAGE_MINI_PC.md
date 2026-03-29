@@ -417,8 +417,8 @@ PAGE MINI PC (type: grid)
 | `energy_entity` | `sensor.prise_mini_pc_ikea_power` |
 | `energy_color` | `gainsboro` |
 | `current_entity` | `sensor.prise_mini_pc_ikea_current` |
-| `avg_daily_entity` | `sensor.mini_pc_avg_watts_daily` ⚠️ |
-| `conso_daily_kwh_entity` | `sensor.mini_pc_daily` ⚠️ |
+| `avg_daily_entity` | `sensor.mini_pc_avg_watts_quotidien` |
+| `conso_daily_kwh_entity` | `sensor.prise_mini_pc_ikea_quotidien_wh_um` |
 
 ### Carte 2 : `custom:streamline-card` template `conso_mensuelle_appareil`
 | Variable | Valeur |
@@ -426,10 +426,8 @@ PAGE MINI PC (type: grid)
 | `title` | `Conso. mensuelle Mini P.C.` |
 | `energy_entity` | `sensor.prise_mini_pc_ikea_energy` |
 | `color` | `gainsboro` |
-| `avg_monthly_entity` | `sensor.mini_pc_avg_watts_monthly` ⚠️ |
-| `conso_monthly_kwh_entity` | `sensor.mini_pc_monthly` ⚠️ |
-
-> ⚠️ **`sensor.mini_pc_daily`, `sensor.mini_pc_monthly`, `sensor.mini_pc_avg_watts_daily`, `sensor.mini_pc_avg_watts_monthly`** — Ces entités doivent être créées dans les fichiers UM et AVG du Pôle 2 (`utility_meter/P2_prise/` et `templates/P2_prise/P2_AVG/`).
+| `avg_monthly_entity` | `sensor.mini_pc_avg_watts_mensuel` |
+| `conso_monthly_kwh_entity` | `sensor.prise_mini_pc_ikea_mensuel_wh_um` |
 
 ---
 
@@ -547,13 +545,36 @@ Ces entités ne font **pas** partie de l'intégration `system_monitor` native de
 | `sensor.local_ip` | BLOC 1 (IP interne) |
 | `sensor.myip` | BLOC 1 (IP externe) |
 
-### Utility Meter & AVG (Pôle 2 — À CRÉER) ⚠️
-| Entité | Fichier attendu |
+### Utility Meter & AVG (Pôle 2 — ✅ dans re-build / ⚠️ à déployer en live)
+
+**Chaîne complète (unité Wh — intentionnel, pas kWh) :**
+```
+sensor.prise_mini_pc_ikea_power (W natif NOUS)
+    ↓  sensors/P2_prise/P2_Wh_mini_pc.yaml  (Riemann left, 3 déc., PAS unit_prefix:k → Wh)
+sensor.prise_mini_pc_ikea_energie_totale_wh
+    ↓  utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml
+sensor.prise_mini_pc_ikea_annuel_wh_um
+sensor.prise_mini_pc_ikea_mensuel_wh_um
+sensor.prise_mini_pc_ikea_hebdomadaire_wh_um
+sensor.prise_mini_pc_ikea_quotidien_wh_um
+    ↓  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml  (formule: conso / h → W)
+sensor.mini_pc_avg_watts_annuel
+sensor.mini_pc_avg_watts_mensuel
+sensor.mini_pc_avg_watts_hebdomadaire
+sensor.mini_pc_avg_watts_quotidien
+```
+
+| Entité | Fichier source |
 |--------|----------------|
-| `sensor.mini_pc_daily` | `utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml` |
-| `sensor.mini_pc_monthly` | `utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml` |
-| `sensor.mini_pc_avg_watts_daily` | `templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml` |
-| `sensor.mini_pc_avg_watts_monthly` | `templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml` |
+| `sensor.prise_mini_pc_ikea_energie_totale_wh` | `sensors/P2_prise/P2_Wh_mini_pc.yaml` |
+| `sensor.prise_mini_pc_ikea_annuel_wh_um` | `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml` |
+| `sensor.prise_mini_pc_ikea_mensuel_wh_um` | `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml` |
+| `sensor.prise_mini_pc_ikea_hebdomadaire_wh_um` | `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml` |
+| `sensor.prise_mini_pc_ikea_quotidien_wh_um` | `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml` |
+| `sensor.mini_pc_avg_watts_annuel` | `templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml` |
+| `sensor.mini_pc_avg_watts_mensuel` | `templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml` |
+| `sensor.mini_pc_avg_watts_hebdomadaire` | `templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml` |
+| `sensor.mini_pc_avg_watts_quotidien` | `templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml` |
 
 ---
 
@@ -582,7 +603,11 @@ Ces entités ne font **pas** partie de l'intégration `system_monitor` native de
 5. **Interface réseau `enp1s0`** : confirmée pour le Mini PC (remplace `end0` du RPi4).
 6. **RAM max 16 384 Mo** : confirmé (16 Go) — les bar-cards sont déjà configurées en conséquence.
 7. **SSD max 524 Go** : confirmé (SSD SATA 512 Go formaté ≈ 512 Go utilisables).
-8. **Entités UM prise Mini PC** : `mini_pc_daily`, `mini_pc_monthly`, `mini_pc_avg_watts_daily`, `mini_pc_avg_watts_monthly` → À ajouter dans `P2_UM_AMHQ_prises.yaml` et `P2_AVG_AMHQ_prises.yaml`.
+8. **Entités UM + AVG prise Mini PC** : ⚠️ Fichiers créés dans le repo `home_assistant_re-build` (TREE_CORRIGE) — **pas encore copiés dans la config live**. À déployer :
+   - `sensors/P2_prise/P2_Wh_mini_pc.yaml` (Riemann kWh)
+   - `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml`
+   - `templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml`
+   - Redémarrer HA → les entités `prise_mini_pc_ikea_quotidien/mensuel_kwh_um` et `mini_pc_avg_watts_quotidien/mensuel` seront créées.
 9. **Image** `/local/images/mini pc.png` : à copier sur le serveur HA.
 
 ---
