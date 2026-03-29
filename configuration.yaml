@@ -107,8 +107,11 @@ group: !include groups.yaml
 #renvoi au fichier sql.yaml
 sql: !include sql.yaml
 
+#renvoi au fichier input_select.yaml
+input_select: !include input_select.yaml
+
 # --- input_booleans ---
-#renvoi au fichier sql.yaml
+#renvoi au fichier input_booleans.yaml
 input_boolean: !include_dir_merge_named input_booleans/
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
