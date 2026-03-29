@@ -36,8 +36,8 @@
 # │ DÉTECTION DU MODE GÉNÉRAL ET CONSIGNES DYNAMIQUES                 │
 # └───────────────────────────────────────────────────────────────────┘
 
-# --- mode_ete_hiver ---
 # DÉTECTION DU MODE GÉNÉRAL
+# --- mode_ete_hiver ---
     - name: "Mode Été/Hiver"
       unique_id: mode_ete_hiver
       state: >
@@ -53,18 +53,18 @@
           cool
         {% endif %}
 
-# --- consigne_de_base ---
 # CONSIGNES DYNAMIQUES (Le coeur de la modification)
 # Hiver: 18° / Été: 28°
+# --- consigne_de_base ---
     - name: "Consigne de Base"
       unique_id: consigne_de_base
       unit_of_measurement: "°C"
       state: >
         {% if states('sensor.mode_ete_hiver') == 'cool' %} 28 {% else %} 18 {% endif %}
 
-# --- temperature_differentielle ---
 # Temperature différentielle
 # Hiver: 19° / Été: 27°
+# --- temperature_differentielle ---
     - name: "Temperature différentielle"
       unique_id: temperature_differentielle
       unit_of_measurement: "°C"
@@ -87,27 +87,31 @@
       unit_of_measurement: "°C"
       state: "18"
 
-# --- deltas_fixes ---
+    # --- delta_1 ---
     - name: "Delta_1"
       unique_id: delta_1
       state: "1"
       unit_of_measurement: "°C"
 
+    # --- delta_2 ---
     - name: "Delta_2"
       unique_id: delta_2
       state: "2"
       unit_of_measurement: "°C"
 
+    # --- delta_3 ---
     - name: "Delta_3"
       unique_id: delta_3
       state: "3"
       unit_of_measurement: "°C"
 
+    # --- delta_5 ---
     - name: "Delta_5"
       unique_id: delta_5
       state: "5"
       unit_of_measurement: "°C"
 
+    # --- delta_7 ---
     - name: "Delta_7"
       unique_id: delta_7
       state: "7"
@@ -117,9 +121,9 @@
 # │ CORRECTIONS SPÉCIFIQUES (HIVERNALES)                              │
 # └───────────────────────────────────────────────────────────────────┘
 
-# ┌─────────────────────────────────────┐
-# │ 04. SALON                           │
-# └─────────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │ 04. SALON                         │
+# └───────────────────────────────────┘
 # --- temperature_corrige_mamour_hivers ---
     - name: "Temperature Corrigé Mamour Hivers"
       unique_id: "temperature_corrige_mamour_hivers"
@@ -135,9 +139,9 @@
           {{ [ resultat | float(20), 21.0 ] | min | round(1) }}
         {% endif %}
 
-# ┌─────────────────────────────────────┐
-# │ 07. BUREAU                          │
-# └─────────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │ 07. BUREAU                        │
+# └───────────────────────────────────┘
 # --- temperature_corrige_eric_hivers ---
     - name: "Temperature Corrigé Eric Hivers"
       unique_id: "temperature_corrige_eric_hivers"
@@ -153,9 +157,9 @@
           {{ [ resultat | float(17), 18.0 ] | min | round(1) }}
         {% endif %}
 
-# ┌─────────────────────────────────────┐
-# │ 09. CHAMBRE                         │
-# └─────────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │ 09. CHAMBRE                       │
+# └───────────────────────────────────┘
 # --- temperature_corrige_chambre_hivers ---
     - name: "Temperature Corrigé Chambre Hivers"
       unique_id: temperature_corrige_chambre_hivers

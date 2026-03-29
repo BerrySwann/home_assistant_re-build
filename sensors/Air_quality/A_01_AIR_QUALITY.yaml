@@ -29,7 +29,7 @@
   state_characteristic: mean
   max_age:
     hours: 24
-  precision: 3
+  precision: 1
 
 - platform: statistics
   name: "tCOV Salon (moy 24h)"
@@ -38,7 +38,7 @@
   state_characteristic: mean
   max_age:
     hours: 24
-  precision: 3
+  precision: 1
 
 - platform: statistics
   name: "PM2.5 Bureau (moy 24h)"
@@ -47,7 +47,7 @@
   state_characteristic: mean
   max_age:
     hours: 24
-  precision: 3
+  precision: 1
 
 - platform: statistics
   name: "tCOV Bureau (moy 24h)"
@@ -56,7 +56,7 @@
   state_characteristic: mean
   max_age:
     hours: 24
-  precision: 3
+  precision: 1
 
 - platform: statistics
   name: "PM2.5 Chambre (moy 24h)"
@@ -65,7 +65,7 @@
   state_characteristic: mean
   max_age:
     hours: 24
-  precision: 3
+  precision: 1
 
 - platform: statistics
   name: "tCOV Chambre (moy 24h)"
@@ -74,4 +74,4 @@
   state_characteristic: mean
   max_age:
     hours: 24
-  precision: 3
+  precision: 1

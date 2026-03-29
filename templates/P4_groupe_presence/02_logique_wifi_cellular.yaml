@@ -32,8 +32,8 @@
 # │ P4 : DÉTERMINATION DU GROUPE (PRESENCE AUTOMATION)                │
 # └───────────────────────────────────────────────────────────────────┘
 
-# --- groupe ---
 # Calcul du groupe (1=Personne, 2=Mamour, 3=Eric, 4=Tous)
+# --- groupe ---
     - name: "Groupe"
       unique_id: groupe
       icon: mdi:account-group
@@ -63,8 +63,8 @@
 # │ P4 : CALCUL ET AFFICHAGE DES STATUTS RÉSEAU (INTERFACE)           │
 # └───────────────────────────────────────────────────────────────────┘
 
-# --- presence ---
 # Affichage textuel complexe (WIFI / CELL / WIFI_!?)
+# --- presence ---
     - name: "Presence"
       unique_id: presence
       icon: mdi:cellphone-information

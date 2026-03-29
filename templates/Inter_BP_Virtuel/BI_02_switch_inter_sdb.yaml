@@ -1,10 +1,26 @@
-# ╭────────────────────────────────────────────────────────────────────────╮
-# │ SWITCH : CHAUFFAGE — INTERRUPTEUR/ BP SDB                              │
-# ╰────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ SWITCH : CHAUFFAGE — INTERRUPTEUR / BP SDB                              │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Switch template contrôlant le soufflant SDB via un input_boolean virtuel.
+# Permet un pilotage unifié depuis l'interface (bouton poussoir virtuel).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : input_boolean.inter_soufflant_salle_de_bain
+# - turn_on  → input_boolean.turn_on
+# - turn_off → input_boolean.turn_off
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce switch pilote l'input_boolean, pas directement le relais physique.
+# - Icône dynamique : mdi:radiator (ON) / mdi:radiator-off (OFF).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C3 Commandes Clim (bouton on/off soufflant SDB)
 
 - switch:
     # ┌───────────────────────────────────┐
-    # │ 1. CONTRÔLE                       │
+    # │ 8. SDB                            │
     # └───────────────────────────────────┘
     # --- inter_soufflant_salle_de_bain ---
     - name: "Inter Soufflant Salle de Bain"
@@ -26,7 +42,7 @@
             entity_id: input_boolean.inter_soufflant_salle_de_bain
 
 # annotations_log:
-# - [L1-3] Mise en forme du titre principal (Boîte ASCII arrondie 74 car).
-# - [L6-8] Ajout du titre secondaire (Boîte ASCII carrée 37 car).
-# - [L9] Ajout du titre tertiaire (slug).
-# - [Global] Standardisation de l'indentation et nettoyage de la syntaxe.
+# [L1-3]   Boîte ASCII arrondie mise à 78 chars (standard ReBuild).
+# [L6-17]  En-tête doc obligatoire ajouté (DESCRIPTION, CALCUL, PIÈGES, VIGNETTE).
+# [L20-22] Boîte secondaire carrée 37 chars + numérotation officielle (8. SDB).
+# [L23]    Slug tertiaire présent.

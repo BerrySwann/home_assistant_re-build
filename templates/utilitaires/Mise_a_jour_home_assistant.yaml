@@ -20,8 +20,8 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Sert à la remontée d'info pour la vignette : L4C3 Mises à jour HA
 
-# --- available_updates ---
 - sensor:
+    # --- available_updates ---
     - name: "Available Updates"
       unique_id: available_updates
       icon: mdi:update

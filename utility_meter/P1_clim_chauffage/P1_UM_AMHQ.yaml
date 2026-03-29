@@ -22,9 +22,9 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Alimente la vignette L2C2 (Conso Énergie Clim / Radiateur / Soufflant)
 
-# ┌─────────────────────────────────────┐
-# │ 4. SALON                            │
-# └─────────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │ 4. SALON                          │
+# └───────────────────────────────────┘
 
 # --- clim_salon ---
 clim_salon_annuel_kwh_um:
@@ -43,9 +43,9 @@ clim_salon_quotidien_kwh_um:
   source: sensor.clim_salon_energie_totale_kwh        # [L1] modif
   cycle: daily
 
-# ┌─────────────────────────────────────┐
-# │ 5. CUISINE                          │
-# └─────────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │ 5. CUISINE                        │
+# └───────────────────────────────────┘
 
 # --- radiateur_cuisine ---
 radiateur_elec_cuisine_annuel_kwh_um:
@@ -64,9 +64,9 @@ radiateur_elec_cuisine_quotidien_kwh_um:
   source: sensor.radiateur_elec_cuisine_energie_totale_kwh  # [L2] modif
   cycle: daily
 
-# ┌─────────────────────────────────────┐
-# │ 7. BUREAU                           │
-# └─────────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │ 7. BUREAU                         │
+# └───────────────────────────────────┘
 
 # --- clim_bureau ---
 clim_bureau_annuel_kwh_um:
@@ -85,9 +85,9 @@ clim_bureau_quotidien_kwh_um:
   source: sensor.clim_bureau_energie_totale_kwh       # [L3] modif
   cycle: daily
 
-# ┌─────────────────────────────────────┐
-# │ 8. SDB                              │
-# └─────────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │ 8. SDB                            │
+# └───────────────────────────────────┘
 
 # --- soufflant_sdb ---
 soufflant_sdb_annuel_kwh_um:
@@ -123,9 +123,9 @@ seche_serviette_sdb_quotidien_kwh_um:
   source: sensor.seche_serviette_sdb_energie_totale_kwh  # [L5] modif
   cycle: daily
 
-# ┌─────────────────────────────────────┐
-# │ 9. CHAMBRE                          │
-# └─────────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │ 9. CHAMBRE                        │
+# └───────────────────────────────────┘
 
 # --- clim_chambre ---
 clim_chambre_annuel_kwh_um:
