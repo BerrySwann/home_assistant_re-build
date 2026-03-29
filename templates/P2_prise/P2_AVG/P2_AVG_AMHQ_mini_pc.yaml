@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 2. TEMPLATE AVG : PUISSANCE MOYENNE (W) AMHQ — MINI PC              │
+# │ PÔLE 2. TEMPLATE AVG : PUISSANCE MOYENNE (W) AMHQ — MINI PC (BUREAU)     │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -7,59 +7,29 @@
 # 4 périodes : Annuel, Mensuel, Hebdomadaire, Quotidien (AMHQ) pour le Mini PC.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Formule : (Consommation_wh_um × 1000) ÷ nombre_heures_écoulées_dans_le_cycle
-# - Sources : Capteurs Utility Meter (_wh_um) — fichier P2_UM_AMHQ_mini_pc.yaml
-#   - Quotidien    : sensor.prise_mini_pc_ikea_quotidien_wh_um
-#   - Hebdomadaire : sensor.prise_mini_pc_ikea_hebdomadaire_wh_um
-#   - Mensuel      : sensor.prise_mini_pc_ikea_mensuel_wh_um
+# - Formule : Consommation_Wh_UM ÷ nombre_heures_écoulées_dans_le_cycle = W_moyen
+# - ATTENTION : source en Wh (pas kWh) → formule = conso / h (PAS conso * 1000 / h)
+# - Sources UM (fichier P2_UM_AMHQ_mini_pc.yaml) :
 #   - Annuel       : sensor.prise_mini_pc_ikea_annuel_wh_um
+#   - Mensuel      : sensor.prise_mini_pc_ikea_mensuel_wh_um
+#   - Hebdomadaire : sensor.prise_mini_pc_ikea_hebdomadaire_wh_um
+#   - Quotidien    : sensor.prise_mini_pc_ikea_quotidien_wh_um
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - La division par zéro est évitée par la condition (if h > 0.1 else 0).
+# - Division par zéro évitée : if h > 0.1 else 0.
 # - Ce n'est pas la puissance en direct, mais une moyenne de tirage ("Average").
-# - CORRECTION 2026-03-28 : fichier original corrompu — les 3 sensors
-#   (quotidien, hebdomadaire, mensuel) étaient imbriqués DANS le bloc state: >
-#   du sensor annuel → ils n'existaient pas en HA. unique_id annuel dupliqué.
+# - Formule Wh : conso / h → W  (contrairement aux autres pôles en kWh : conso * 1000 / h)
+# - CORRECTION 2026-03-29 : fichier original corrompu (sensors imbriqués dans state: >
+#   du premier sensor + unique_id dupliqué + noms _kwh erronés → remplacés par _wh).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - Sert aux graphiques de détails affichés au clic depuis la vignette :
-#   L4C2 Mini PC (pop-up #conso — streamline-card avg_daily + avg_monthly).
+# - L4C2 Mini PC — pop-up #conso (streamline-card : avg_daily_entity + avg_monthly_entity)
 
 - sensor:
 
-  # ┌───────────────────────────────────┐
-  # │ 7. BUREAU                         │
-  # └───────────────────────────────────┘
-
-  # --- mini_pc_avg_watts_quotidien ---
-  - name: "Mini PC Avg Watts Quotidien"
-    unique_id: mini_pc_avg_watts_quotidien
-    unit_of_measurement: "W"
-    device_class: power
-    state: >
-      {% set conso = states('sensor.prise_mini_pc_ikea_quotidien_wh_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
-      {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
-
-  # --- mini_pc_avg_watts_hebdomadaire ---
-  - name: "Mini PC Avg Watts Hebdomadaire"
-    unique_id: mini_pc_avg_watts_hebdomadaire
-    unit_of_measurement: "W"
-    device_class: power
-    state: >
-      {% set conso = states('sensor.prise_mini_pc_ikea_hebdomadaire_wh_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
-      {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
-
-  # --- mini_pc_avg_watts_mensuel ---
-  - name: "Mini PC Avg Watts Mensuel"
-    unique_id: mini_pc_avg_watts_mensuel
-    unit_of_measurement: "W"
-    device_class: power
-    state: >
-      {% set conso = states('sensor.prise_mini_pc_ikea_mensuel_wh_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
-      {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+  # ┌─────────────────────────────────────┐
+  # │ 7. BUREAU                           │
+  # └─────────────────────────────────────┘
 
   # --- mini_pc_avg_watts_annuel ---
   - name: "Mini PC Avg Watts Annuel"
@@ -69,12 +39,42 @@
     state: >
       {% set conso = states('sensor.prise_mini_pc_ikea_annuel_wh_um') | float(0) %}
       {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
-      {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+      {{ (conso / ha if ha > 0.1 else 0) | round(1) }}
+
+  # --- mini_pc_avg_watts_mensuel ---
+  - name: "Mini PC Avg Watts Mensuel"
+    unique_id: mini_pc_avg_watts_mensuel
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.prise_mini_pc_ikea_mensuel_wh_um') | float(0) %}
+      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {{ (conso / hm if hm > 0.1 else 0) | round(1) }}
+
+  # --- mini_pc_avg_watts_hebdomadaire ---
+  - name: "Mini PC Avg Watts Hebdomadaire"
+    unique_id: mini_pc_avg_watts_hebdomadaire
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.prise_mini_pc_ikea_hebdomadaire_wh_um') | float(0) %}
+      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {{ (conso / hh if hh > 0.1 else 0) | round(1) }}
+
+  # --- mini_pc_avg_watts_quotidien ---
+  - name: "Mini PC Avg Watts Quotidien"
+    unique_id: mini_pc_avg_watts_quotidien
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.prise_mini_pc_ikea_quotidien_wh_um') | float(0) %}
+      {% set h = now().hour + (now().minute / 60) %}
+      {{ (conso / h if h > 0.1 else 0) | round(1) }}
 
 # annotations_log:
-# - [L20]    CORRECTION : note bug original ajoutée dans l'en-tête
-# - [L35-42] CORRECTION : sensor quotidien sorti du bloc state: annuel
-# - [L44-51] CORRECTION : sensor hebdomadaire sorti du bloc state: annuel
-# - [L53-60] CORRECTION : sensor mensuel sorti du bloc state: annuel
-# - [L62-69] CORRECTION : sensor annuel — suppression de l'occurrence dupliquée (unique_id en double)
-# - FORMAT   : indentation uniforme à 2 espaces pour chaque item de la liste sensor:
+# - [ALL]    Renommage _kwh_um → _wh_um sur toutes les sources (unité réelle = Wh)
+# - [L35,45] Formule corrigée : (conso * 1000) / h → conso / h (Wh ÷ h = W)
+# - [L55,65] Idem hebdomadaire et quotidien
+# - [ORDRE]  Réordonné AMHQ : Annuel → Mensuel → Hebdomadaire → Quotidien
+# - [STRUCT] Indentation corrigée : 4 sensors au bon niveau (2 esp. sous sensor:)
+# - [DUP]    Suppression unique_id dupliqué (mini_pc_avg_watts_annuel × 2 → × 1)

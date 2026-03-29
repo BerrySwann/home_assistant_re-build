@@ -1,50 +1,50 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 2. UTILITY METER : PRISES CONNECTÉES — AMHQ                         │
+# │ PÔLE 2. UTILITY METER AMHQ : MINI PC (BUREAU) — ÉNERGIE Wh               │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Compteurs Utility Meter découpant la consommation de chaque prise connectée
-# (18 prises sur 5 pièces + Mini PC) en 4 cycles temporels : Annuel, Mensuel,
-# Hebdomadaire, Quotidien (AMHQ). Ces UM sont les sources primaires pour les
-# templates AVG P2 et pour les diagnostics de conso par pôle.
+# Compteurs périodiques (Annuel / Mensuel / Hebdo / Quotidien) pour le Mini PC.
+# Unité trackée : Wh (source Riemann en Wh, pas kWh).
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Sources : sensor.prise_[appareil]_energie_totale_kwh (P2_kWh_prises.yaml)
-# - Exception : sensor.four_et_plaque_de_cuisson_energie_totale_kwh (sans prise_)
-# - Couvre : 1.ENTRÉE (×2), 4.SALON (×3), 5.CUISINE (×8), 7.BUREAU (×3), 9.CHAMBRE (×2)
+# - Source : sensors/P2_prise/P2_Wh_mini_pc.yaml → sensor.prise_mini_pc_ikea_energie_totale_wh
+#   (Riemann integration depuis prise_mini_pc_ikea_power, méthode left, sans unit_prefix: k)
+# - Remise à zéro : Quotidien = minuit / Hebdo = lundi / Mensuel = 1er / Annuel = 1er jan
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Les cycles se réinitialisent automatiquement (minuit/lundi/1er du mois/1er janvier).
-# - La valeur précédente est stockée dans 'last_period' (utile pour comparaisons).
-# - Ne pas confondre avec P2_UM_AMHQ_veilles.yaml qui gère uniquement all_standby.
-# - Le four/plaque n'a pas le préfixe 'prise_' dans son nom d'entité.
-# - [L...] modif — Ajout Mini PC IKEA Inspelning (7. BUREAU)
+# - Source en Wh (pas kWh) → les valeurs UM sont en Wh.
+# - Les entités sont nommées _wh_um (pas _kwh_um) pour refléter l'unité réelle.
+# - Le fichier AVG utilise conso / h (Wh ÷ h = W) — pas conso * 1000 / h.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L4C2 _____ Mini - P.C. _____.
+# - Alimente L4C2 Mini PC (pop-up #conso) via AVG → streamline-card
 
-# ┌───────────────────────────────────┐
-# │ 7. BUREAU                         │
-# └───────────────────────────────────┘
-# --- mini_pc --- # "[L...] modif — Ajout Mini PC IKEA Inspelning"
+# ┌─────────────────────────────────────┐
+# │ 7. BUREAU                           │
+# └─────────────────────────────────────┘
+
+# --- prise_mini_pc_ikea_annuel_wh_um ---
 prise_mini_pc_ikea_annuel_wh_um:
   source: sensor.prise_mini_pc_ikea_energie_totale_wh
   name: "Prise Mini PC IKEA Annuel Wh UM"
   unique_id: prise_mini_pc_ikea_annuel_wh_um
   cycle: yearly
 
+# --- prise_mini_pc_ikea_mensuel_wh_um ---
 prise_mini_pc_ikea_mensuel_wh_um:
   source: sensor.prise_mini_pc_ikea_energie_totale_wh
   name: "Prise Mini PC IKEA Mensuel Wh UM"
   unique_id: prise_mini_pc_ikea_mensuel_wh_um
   cycle: monthly
 
+# --- prise_mini_pc_ikea_hebdomadaire_wh_um ---
 prise_mini_pc_ikea_hebdomadaire_wh_um:
   source: sensor.prise_mini_pc_ikea_energie_totale_wh
   name: "Prise Mini PC IKEA Hebdomadaire Wh UM"
   unique_id: prise_mini_pc_ikea_hebdomadaire_wh_um
   cycle: weekly
 
+# --- prise_mini_pc_ikea_quotidien_wh_um ---
 prise_mini_pc_ikea_quotidien_wh_um:
   source: sensor.prise_mini_pc_ikea_energie_totale_wh
   name: "Prise Mini PC IKEA Quotidien Wh UM"
