@@ -1,36 +1,37 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 2. SENSORS : INTÉGRATION kWh — PRISES Mini-Pc                       │
+# │ PÔLE 2. SENSORS : INTÉGRATION Wh — MINI PC (BUREAU)                      │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Capteurs d'intégration Riemann (platform: integration) calculant l'énergie
-# totale cumulée (kWh) pour chaque prise connectée à partir de la puissance
-# instantanée (W). 14 prises réparties sur 5 pièces (Entrée, Salon, Cuisine,
-# Bureau, Chambre). Ces capteurs sont les sources primaires pour les UM P2.
+# Capteur d'intégration Riemann calculant l'énergie totale cumulée (Wh)
+# du Mini PC à partir de la puissance instantanée (W).
+# Unité volontairement en Wh (pas kWh) — Mini PC = faible consommation,
+# la précision Wh est préférable pour les calculs AVG watts.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Formule : ∫ Power (W) dt → kWh (méthode left, arrondi 3 décimales)
+# - Formule : ∫ Power (W) dt → Wh (méthode left, arrondi 3 décimales)
 # - method: left = utilise la valeur de gauche de l'intervalle (prudent)
-# - unit_prefix: k + unit_time: h → résultat en kWh
-# - Sources : sensor.prise_[appareil]_[marque]_power
+# - PAS de unit_prefix: k → résultat en Wh (intentionnel)
+# - Source : sensor.prise_mini_pc_ikea_power (natif NOUS)
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Ces sensors s'accumulent depuis la création (ne se remettent pas à zéro).
-#   La remise à zéro périodique (AMHQ) est gérée par utility_meter P2.
-# - Ne pas modifier method: left sans tester — left est plus fiable que
-#   trapezoidal pour des appareils avec variations brusques (LV, LLinge).
+# - Unité = Wh (pas kWh) → le fichier AVG utilise conso / h (pas conso * 1000 / h).
+# - Ce sensor s'accumule depuis la création. La remise à zéro périodique (AMHQ)
+#   est gérée par utility_meter P2_UM_AMHQ_mini_pc.yaml.
+# - NE PAS ajouter unit_prefix: k sans mettre à jour la formule AVG en conséquence.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - LxCx Mini-Pc
+# - Alimente la vignette L4C2 Mini PC (pop-up #conso via UM → AVG → streamline-card)
 
-# ┌───────────────────────────────────┐
-# │ 7. BUREAU                         │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────────┐
+# │ 7. BUREAU                           │
+# └─────────────────────────────────────┘
+
 # --- prise_mini_pc_ikea_energie_totale_wh ---
-  - platform: integration
-    source: sensor.prise_mini_pc_ikea_power
-    name: "Prise Mini PC IKEA Energie Totale Wh"
-    unique_id: prise_mini_pc_ikea_energie_totale_wh
-    method: left
-    unit_time: h
-    round: 3
+- platform: integration
+  source: sensor.prise_mini_pc_ikea_power
+  name: "Prise Mini PC IKEA Energie Totale Wh"
+  unique_id: prise_mini_pc_ikea_energie_totale_wh
+  method: left
+  unit_time: h
+  round: 3
