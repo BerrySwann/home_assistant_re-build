@@ -31,8 +31,8 @@
 # │ 10. AUTRE : windrose-card - LABEL DIRECTION DU VENT VENCE         │
 # └───────────────────────────────────────────────────────────────────┘
 
-# --- vence_wind_direction_label ---
 # windrose-card - LABEL Direction du Vent Vence
+# --- vence_wind_direction_label ---
     - name: "Direction du Vent Vence label"
       unique_id: vence_wind_direction_label
       state: >
@@ -64,8 +64,8 @@
 # │ 10. AUTRE : windrose-card - DIRECTION ET VITESSE DU VENT          │
 # └───────────────────────────────────────────────────────────────────┘
 
-# --- vence_wind_bearing ---
 # windrose-card - Direction du Vent Vence
+# --- vence_wind_bearing ---
     - name: "Direction du Vent Vence"
       unique_id: vence_wind_bearing
       state: >
@@ -78,8 +78,8 @@
         {% else %} 0 {% endif %}
       unit_of_measurement: "°"
 
-# --- vence_wind_speed_kmh ---
 # windrose-card - Vitesse du Vent Vence
+# --- vence_wind_speed_kmh ---
     - name: "Vitesse du Vent Vence"
       unique_id: vence_wind_speed_kmh
       state: >

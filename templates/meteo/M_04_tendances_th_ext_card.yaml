@@ -33,8 +33,8 @@
 # │ 10. AUTRE : LOGIQUE TENDANCES (BALCON NORD)                       │
 # └───────────────────────────────────────────────────────────────────┘
 
-# --- th_balcon_nord_temperature_trend ---
 # Tendance Température (balcon nord)
+# --- th_balcon_nord_temperature_trend ---
     - name: "th balcon nord temperature trend"
       unique_id: th_balcon_nord_temperature_trend
       state: >
@@ -48,8 +48,8 @@
           stable
         {% endif %}
 
-# --- th_balcon_nord_humidity_trend ---
 # Tendance Humidité (balcon nord)
+# --- th_balcon_nord_humidity_trend ---
     - name: "th balcon nord humidity trend"
       unique_id: th_balcon_nord_humidity_trend
       state: >

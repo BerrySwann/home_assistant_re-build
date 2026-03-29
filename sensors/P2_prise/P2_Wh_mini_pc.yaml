@@ -23,9 +23,9 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Alimente la vignette L4C2 Mini PC (pop-up #conso via UM → AVG → streamline-card)
 
-# ┌─────────────────────────────────────┐
-# │ 7. BUREAU                           │
-# └─────────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │ 7. BUREAU                         │
+# └───────────────────────────────────┘
 
 # --- prise_mini_pc_ikea_energie_totale_wh ---
 - platform: integration

@@ -22,9 +22,9 @@
 
 - sensor:
 
-    # ┌─────────────────────────────────────┐
-    # │ TOTAL P1 kWh — QUOTIDIEN            │
-    # └─────────────────────────────────────┘
+    # ┌───────────────────────────────────┐
+    # │ TOTAL P1 kWh — QUOTIDIEN          │
+    # └───────────────────────────────────┘
 
     # --- conso_clim_rad_total_quotidien ---
     - name: "Conso. Clim. Rad. Total QUOTIDIEN"
@@ -39,9 +39,9 @@
           states('sensor.seche_serviette_sdb_quotidien_kwh_um') | float(0) +
           states('sensor.clim_chambre_quotidien_kwh_um') | float(0)) | round(3) }}
 
-    # ┌─────────────────────────────────────┐
-    # │ TOTAL P1 kWh — MENSUEL              │
-    # └─────────────────────────────────────┘
+    # ┌───────────────────────────────────┐
+    # │ TOTAL P1 kWh — MENSUEL            │
+    # └───────────────────────────────────┘
 
     # --- conso_clim_rad_total_mensuel ---
     - name: "Conso. Clim. Rad. Total MENSUEL"
@@ -56,9 +56,9 @@
           states('sensor.seche_serviette_sdb_mensuel_kwh_um') | float(0) +
           states('sensor.clim_chambre_mensuel_kwh_um') | float(0)) | round(3) }}
 
-    # ┌─────────────────────────────────────┐
-    # │ TOTAL P1 kWh — HEBDOMADAIRE         │
-    # └─────────────────────────────────────┘
+    # ┌───────────────────────────────────┐
+    # │ TOTAL P1 kWh — HEBDOMADAIRE       │
+    # └───────────────────────────────────┘
 
     # --- conso_clim_rad_total_hebdomadaire ---
     - name: "Conso. Clim. Rad. Total HEBDOMADAIRE"
@@ -73,9 +73,9 @@
           states('sensor.seche_serviette_sdb_hebdomadaire_kwh_um') | float(0) +
           states('sensor.clim_chambre_hebdomadaire_kwh_um') | float(0)) | round(3) }}
 
-    # ┌─────────────────────────────────────┐
-    # │ TOTAL P1 kWh — ANNUEL               │
-    # └─────────────────────────────────────┘
+    # ┌───────────────────────────────────┐
+    # │ TOTAL P1 kWh — ANNUEL             │
+    # └───────────────────────────────────┘
 
     # --- conso_clim_rad_total_annuel ---
     - name: "Conso. Clim. Rad. Total ANNUEL"
@@ -90,9 +90,9 @@
           states('sensor.seche_serviette_sdb_annuel_kwh_um') | float(0) +
           states('sensor.clim_chambre_annuel_kwh_um') | float(0)) | round(3) }}
 
-    # ┌─────────────────────────────────────┐
-    # │ TOTAL P1 — PUISSANCE INSTANTANÉE    │
-    # └─────────────────────────────────────┘
+    # ┌───────────────────────────────────┐
+    # │ TOTAL P1 — PUISSANCE INSTANTANÉE  │
+    # └───────────────────────────────────┘
 
     # --- conso_clim_rad_total ---
     - name: "Conso Clim Rad Total"

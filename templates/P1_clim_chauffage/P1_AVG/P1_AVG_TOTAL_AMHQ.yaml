@@ -26,9 +26,9 @@
 
 - sensor:
 
-    # ┌─────────────────────────────────────┐
-    # │ TOTAL AVG P1 — QUOTIDIEN            │
-    # └─────────────────────────────────────┘
+    # ┌───────────────────────────────────┐
+    # │ TOTAL AVG P1 — QUOTIDIEN          │
+    # └───────────────────────────────────┘
 
     # --- clim_rad_total_avg_watts_quotidien ---
     - name: "Clim. Rad. Total Avg Watts Quotidien"
@@ -43,9 +43,9 @@
           states('sensor.seche_serviette_sdb_avg_watts_quotidien') | float(0) +
           states('sensor.clim_chambre_avg_watts_quotidien') | float(0)) | round(3) }}
 
-    # ┌─────────────────────────────────────┐
-    # │ TOTAL AVG P1 — MENSUEL              │
-    # └─────────────────────────────────────┘
+    # ┌───────────────────────────────────┐
+    # │ TOTAL AVG P1 — MENSUEL            │
+    # └───────────────────────────────────┘
 
     # --- clim_rad_total_avg_watts_mensuel ---
     - name: "Clim. Rad. Total Avg Watts Mensuel"
@@ -60,9 +60,9 @@
           states('sensor.seche_serviette_sdb_avg_watts_mensuel') | float(0) +
           states('sensor.clim_chambre_avg_watts_mensuel') | float(0)) | round(3) }}
 
-    # ┌─────────────────────────────────────┐
-    # │ TOTAL AVG P1 — HEBDOMADAIRE         │
-    # └─────────────────────────────────────┘
+    # ┌───────────────────────────────────┐
+    # │ TOTAL AVG P1 — HEBDOMADAIRE       │
+    # └───────────────────────────────────┘
 
     # --- clim_rad_total_avg_watts_hebdomadaire ---
     - name: "Clim. Rad. Total Avg Watts Hebdomadaire"
@@ -77,9 +77,9 @@
           states('sensor.seche_serviette_sdb_avg_watts_hebdomadaire') | float(0) +
           states('sensor.clim_chambre_avg_watts_hebdomadaire') | float(0)) | round(3) }}
 
-    # ┌─────────────────────────────────────┐
-    # │ TOTAL AVG P1 — ANNUEL               │
-    # └─────────────────────────────────────┘
+    # ┌───────────────────────────────────┐
+    # │ TOTAL AVG P1 — ANNUEL             │
+    # └───────────────────────────────────┘
 
     # --- clim_rad_total_avg_watts_annuel ---
     - name: "Clim. Rad. Total Avg Watts Annuel"

@@ -1,6 +1,21 @@
-# ╭────────────────────────────────────────────────────────────────────────╮
-# │ SENSOR : SÉRIE 07. OUVERTURES — COMPTES FENÊTRES                       │
-# ╰────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ SENSOR : OUVERTURES — COMPTEURS FENÊTRES OUVERTES / FERMÉES             │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Deux capteurs comptant le nombre de fenêtres ouvertes et fermées
+# à partir des 4 capteurs de contact Sonoff (salon, cuisine, bureau, chambre).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources : binary_sensor.contact_fenetre_*_sonoff_contact (natifs Sonoff)
+# - Méthode : list.count(true) sur comparaisons état 'on' / 'off'
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - unique_id : nbre_de_fenetres_ouvertes (avec "nbre", PAS "nombre")
+# - automations.yaml doit référencer sensor.nbre_de_fenetres_ouvertes
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L3C3 État des fenêtres + Commandes 2 stores
 
 - sensor:
     # ┌───────────────────────────────────┐
@@ -35,7 +50,7 @@
         }}
 
 # annotations_log:
-# - [L1-3] Mise en forme du titre principal (Boîte ASCII arrondie 74 car).
-# - [L6-8] Ajout du titre secondaire (Boîte ASCII carrée 37 car).
-# - [L9,23] Ajout des titres tertiaires (slugs).
-# - [Global] Fusion des blocs sensor et standardisation de l'indentation.
+# [L1-3] Boîte ASCII arrondie portée à 78 chars (standard ReBuild).
+# [L19-21] Boîte carrée secondaire portée à 37 chars.
+# [L22,36] Slugs tertiaires présents.
+# [L10] Ajout avertissement unique_id nbre vs nombre (cohérence automations.yaml).

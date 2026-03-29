@@ -28,8 +28,8 @@
 # │ 10. AUTRE : windrose-card - LABEL DIRECTION ET DISTANCE           │
 # └───────────────────────────────────────────────────────────────────┘
 
-# --- lightning_direction_label ---
 # windrose-card - LABEL Lightning direction label
+# --- lightning_direction_label ---
     - name: "Lightning direction label"
       unique_id: lightning_direction_label
       state: >
@@ -58,8 +58,8 @@
           {% endif %}
         {% endif %}
 
-# --- lightning_distance_km ---
 # windrose-card - LABEL Lightning distance km
+# --- lightning_distance_km ---
     - name: "Lightning distance km"
       unique_id: lightning_distance_km
       unit_of_measurement: "km"
@@ -69,8 +69,8 @@
         {% else %} {{ (distance_km | float (0)) | round(1) }}
         {% endif %}
 
-# --- lightning_bearing ---
 # windrose-card - LABEL Lightning bearing
+# --- lightning_bearing ---
     - name: "Lightning bearing"
       unique_id: lightning_bearing
       state: >
@@ -107,8 +107,8 @@
           Il y a {% if h > 0 %}{{ h }}h {% endif %}{{ m }}m {{ s }}s
         {% endif %}
 
-# --- dernier_impact_temps_reel ---
 - sensor:
+    # --- dernier_impact_temps_reel ---
     - name: "Dernier impact temps réel"
       unique_id: dernier_impact_temps_reel
       state: >

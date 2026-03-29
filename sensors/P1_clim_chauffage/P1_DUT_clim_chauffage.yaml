@@ -28,9 +28,9 @@
 # - Sert à la vignette L2C2 (Conso Énergie Clim / Radiateur / Soufflant)
 # - Sert aux graphes apexcharts "D.U.T. & Performance" par pièce (page energie-clim)
 
-# ┌─────────────────────────────────────┐
-# │ 4. SALON                            │
-# └─────────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │ 4. SALON                          │
+# └───────────────────────────────────┘
 
 # --- dut_clim_salon ---
 - platform: history_stats
@@ -42,9 +42,9 @@
   start: "{{ now().replace(hour=0, minute=0, second=0) }}"
   end: "{{ now() }}"
 
-# ┌─────────────────────────────────────┐
-# │ 5. CUISINE                          │
-# └─────────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │ 5. CUISINE                        │
+# └───────────────────────────────────┘
 
 # --- dut_radiateur_cuisine ---
 - platform: history_stats
@@ -56,9 +56,9 @@
   start: "{{ now().replace(hour=0, minute=0, second=0) }}"
   end: "{{ now() }}"
 
-# ┌─────────────────────────────────────┐
-# │ 7. BUREAU                           │
-# └─────────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │ 7. BUREAU                         │
+# └───────────────────────────────────┘
 
 # --- dut_clim_bureau ---
 - platform: history_stats
@@ -70,9 +70,9 @@
   start: "{{ now().replace(hour=0, minute=0, second=0) }}"
   end: "{{ now() }}"
 
-# ┌─────────────────────────────────────┐
-# │ 8. SDB                              │
-# └─────────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │ 8. SDB                            │
+# └───────────────────────────────────┘
 
 # --- dut_sdb_soufflant ---
 - platform: history_stats
@@ -94,9 +94,9 @@
   start: "{{ now().replace(hour=0, minute=0, second=0) }}"
   end: "{{ now() }}"
 
-# ┌─────────────────────────────────────┐
-# │ 9. CHAMBRE                          │
-# └─────────────────────────────────────┘
+# ┌───────────────────────────────────┐
+# │ 9. CHAMBRE                        │
+# └───────────────────────────────────┘
 
 # --- dut_clim_chambre ---
 - platform: history_stats
