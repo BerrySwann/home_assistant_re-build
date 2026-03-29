@@ -234,7 +234,7 @@ Condition détection bouton actif : `states['fan.rpi_cooling_fan'].attributes.pe
 
 | Entité | Description | Impact visuel page |
 |--------|-------------|-------------------|
-| `automation.ventilateur_rpi_*` *(nom exact à confirmer)* | Règle automatiquement la vitesse de `fan.rpi_cooling_fan` en fonction de la T° CPU | Le `%` affiché dans le bloc ventilateur et l'animation de rotation **reflètent l'état piloté par cette automation** — sans elle, vitesse figée / manuelle uniquement |
+| `automation.raspberry_cpu_fan_pwm_6_states` | Règle automatiquement la vitesse de `fan.rpi_cooling_fan` selon la T° CPU (6 paliers : ≥30°C→30%, ≥40°C→50%, ≥50°C→70%, ≥60°C→85%, ≥70°C→100%) | Le `%` affiché dans le bloc ventilateur et l'animation de rotation **reflètent l'état piloté par cette automation** — sans elle, vitesse figée / manuelle uniquement |
 
 > ⚠️ **Dépendance visuelle directe** : la page ne pilote pas le ventilateur elle-même. Elle affiche uniquement ce que l'automation a déjà réglé. Le bouton-card lit `fan.rpi_cooling_fan.attributes.percentage` pour déterminer le bouton "actif" (en couleur).
 > ⚠️ **RPi4 uniquement** — À ne pas migrer sur Mini PC (pas de GPIO, pas de ventilateur physique piloté par HA).

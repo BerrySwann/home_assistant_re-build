@@ -484,12 +484,12 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 
 ### Natif HA — input_boolean / input_select
 
-| Entité | Rôle |
-|--------|------|
-| `input_boolean.clim_salon_arret_securise_en_cours` | Warning rouge Salon |
-| `input_boolean.clim_bureau_arret_securise_en_cours` | Warning rouge Bureau |
-| `input_boolean.clim_chambre_arret_securise_en_cours` | Warning rouge Chambre |
-| `input_select.etat_resistance_soufflant_sdb` | État résistance 0W/1000W/2000W |
+| Entité | Rôle | Fichier source |
+|--------|------|----------------|
+| `input_boolean.clim_salon_arret_securise_en_cours` | Verrou arrêt sécurisé Salon | `input_booleans/arret_clim_securises.yaml` |
+| `input_boolean.clim_bureau_arret_securise_en_cours` | Verrou arrêt sécurisé Bureau | `input_booleans/arret_clim_securises.yaml` |
+| `input_boolean.clim_chambre_arret_securise_en_cours` | Verrou arrêt sécurisé Chambre | `input_booleans/arret_clim_securises.yaml` |
+| `input_select.etat_resistance_soufflant_sdb` | État résistance 0W/1000W/2000W | — |
 
 ### Natif HA — Schedules (HACS Scheduler)
 
@@ -508,11 +508,16 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 | `switch.schedule_clim_de_la_chambre_week` | Chambre | Semaine |
 | `switch.schedule_clim_de_la_chambre_week_end` | Chambre | Week-end |
 
-### Script intelligent
+### Scripts intelligents
 
-| Entité | Rôle |
-|--------|------|
-| `script.j_1_routeur_clim_on_off_intelligent` | Extinction sécurisée clim (vérifie puissance avant coupure prise) — paramètre `piece:` |
+> Ces deux scripts fonctionnent en tandem. J-1 est appelé depuis le dashboard, J-2 est appelé par J-1.
+
+| Entité | Rôle | Mode |
+|--------|------|------|
+| `script.j_1_routeur_clim_on_off_intelligent` | **ROUTEUR** — point d'entrée dashboard. Anti-tremblote (vérifie verrou), puis route : allume prise OU appelle J-2. Paramètre `piece:` (salon / bureau / chambre) | `single` |
+| `script.j_2_secu_arret_clim_protege` | **EXÉCUTANT** — arrêt sécurisé en 6 étapes : (1) active verrou → (2) coupe thermostat → (3) vérifie état → (4) attend descente sous 9W (timeout 10 min) → (5) coupe prise NOUS → (6) libère verrou. Protège le compresseur contre la coupure brutale. | `parallel` (max 3) |
+
+**Fichier source** : `scripts.yaml` (racine repo)
 
 ---
 
