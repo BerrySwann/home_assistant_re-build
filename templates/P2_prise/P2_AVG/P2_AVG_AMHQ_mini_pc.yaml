@@ -7,12 +7,12 @@
 # 4 périodes : Annuel, Mensuel, Hebdomadaire, Quotidien (AMHQ) pour le Mini PC.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Formule : (Consommation_kWh_UM × 1000) ÷ nombre_heures_écoulées_dans_le_cycle
-# - Sources : Capteurs Utility Meter (_kwh_um) — fichier P2_UM_AMHQ_mini_pc.yaml
-#   - Quotidien    : sensor.prise_mini_pc_ikea_quotidien_kwh_um
-#   - Hebdomadaire : sensor.prise_mini_pc_ikea_hebdomadaire_kwh_um
-#   - Mensuel      : sensor.prise_mini_pc_ikea_mensuel_kwh_um
-#   - Annuel       : sensor.prise_mini_pc_ikea_annuel_kwh_um
+# - Formule : (Consommation_wh_um × 1000) ÷ nombre_heures_écoulées_dans_le_cycle
+# - Sources : Capteurs Utility Meter (_wh_um) — fichier P2_UM_AMHQ_mini_pc.yaml
+#   - Quotidien    : sensor.prise_mini_pc_ikea_quotidien_wh_um
+#   - Hebdomadaire : sensor.prise_mini_pc_ikea_hebdomadaire_wh_um
+#   - Mensuel      : sensor.prise_mini_pc_ikea_mensuel_wh_um
+#   - Annuel       : sensor.prise_mini_pc_ikea_annuel_wh_um
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - La division par zéro est évitée par la condition (if h > 0.1 else 0).
@@ -37,7 +37,7 @@
     unit_of_measurement: "W"
     device_class: power
     state: >
-      {% set conso = states('sensor.prise_mini_pc_ikea_quotidien_kwh_um') | float(0) %}
+      {% set conso = states('sensor.prise_mini_pc_ikea_quotidien_wh_um') | float(0) %}
       {% set h = now().hour + (now().minute / 60) %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -47,7 +47,7 @@
     unit_of_measurement: "W"
     device_class: power
     state: >
-      {% set conso = states('sensor.prise_mini_pc_ikea_hebdomadaire_kwh_um') | float(0) %}
+      {% set conso = states('sensor.prise_mini_pc_ikea_hebdomadaire_wh_um') | float(0) %}
       {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -57,7 +57,7 @@
     unit_of_measurement: "W"
     device_class: power
     state: >
-      {% set conso = states('sensor.prise_mini_pc_ikea_mensuel_kwh_um') | float(0) %}
+      {% set conso = states('sensor.prise_mini_pc_ikea_mensuel_wh_um') | float(0) %}
       {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -67,7 +67,7 @@
     unit_of_measurement: "W"
     device_class: power
     state: >
-      {% set conso = states('sensor.prise_mini_pc_ikea_annuel_kwh_um') | float(0) %}
+      {% set conso = states('sensor.prise_mini_pc_ikea_annuel_wh_um') | float(0) %}
       {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
