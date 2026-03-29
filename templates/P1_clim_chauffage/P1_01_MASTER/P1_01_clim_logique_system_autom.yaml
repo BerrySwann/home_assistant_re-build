@@ -1,6 +1,6 @@
-# ╭────────────────────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 1. TEMPLATE MASTER : LOGIQUE SYSTÈME CLIMATISATION COMPLÈTE                       │
-# ╰────────────────────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │PÔLE 1. TEMPLATE MASTER : LOGIQUE SYSTÈME CLIMATISATION COMPLÈTE         │
+# ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
 # Fichier master centralisant toute la logique de calcul thermique :
