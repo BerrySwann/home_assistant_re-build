@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 3. UTILITY METER : ÉCLAIRAGE — AMHQ PAR ZONE / PIÈCE                │
+# │ PÔLE 3. UTILITY METER : ÉCLAIRAGE — AMHQ PAR ZONE / PIÈCE               │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -48,9 +48,9 @@ eclairage_salon_5_quotidien_kwh_um:
   unique_id: eclairage_salon_5_quotidien_kwh_um
   cycle: daily
 
-# ╭───────────────────────────────────────────────────────────────╮
-# │ ZONE. ((3x) Entrée, cuisine & couloir) (HOME)                 │
-# ╰───────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ ZONE. ((3x) Entrée, cuisine & couloir) (HOME)                           │
+# ╰──────────────────────────────────────────────────────────────────────────╯
 
 # --- eclairage_appart_3 ---
 eclairage_appart_3_annuel_kwh_um:
@@ -106,9 +106,9 @@ eclairage_cuisine_1_quotidien_kwh_um:
   unique_id: eclairage_cuisine_1_quotidien_kwh_um
   cycle: daily
 
-# ╭──────────────────────────────────────────────────────╮
-# │ ZONE. ((2x) Entrée & couloir) (HOME)                 │
-# ╰──────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ ZONE. ((2x) Entrée & couloir) (HOME)                                    │
+# ╰──────────────────────────────────────────────────────────────────────────╯
 
 # --- eclairage_appart_2 ---
 eclairage_appart_2_annuel_kwh_um:
