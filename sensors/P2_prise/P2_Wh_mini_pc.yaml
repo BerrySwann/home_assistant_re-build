@@ -12,7 +12,7 @@
 # - Formule : ∫ Power (W) dt → Wh (méthode left, arrondi 3 décimales)
 # - method: left = utilise la valeur de gauche de l'intervalle (prudent)
 # - PAS de unit_prefix: k → résultat en Wh (intentionnel)
-# - Source : sensor.prise_mini_pc_ikea_power (natif NOUS)
+# - Source : sensor.prise_mini_pc_ikea_power (natif IKEA)
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Unité = Wh (pas kWh) → le fichier AVG utilise conso / h (pas conso * 1000 / h).
