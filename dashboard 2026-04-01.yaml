@@ -230,9 +230,6 @@ streamline_templates:
               
               **- Calcul T°Diff. si T°Ext. ≤ 10°C [ {{ temp_diff }} + {{ delta_2 }} = {{ (temp_diff + delta_2) | round(0) }}°C ]**
               **- Température confort [ {{ temp_confort | round(0) }}°C ]**
-              - Salon [ {{ tcmh | round(0) }}°C ]
-              - Bureau [ {{ tceh | round(0) }}°C ]   
-              - Chambre [ {{ tcch | round(0) }}°C ]
               
               **- Température confort de nuit [ {{ temp_confort_n | round(0) }}°C ] (21h <-> 7h30)**
               
@@ -244,9 +241,6 @@ streamline_templates:
 
               **- Calcul T°Diff. si T°Ext. ≤ 12°C [ {{ temp_diff }} + {{ delta_1 }} = {{ (temp_diff + delta_1) | round(0) }}°C ]**
               **- Température confort [ {{ temp_confort | round(0) }}°C ]**
-              - Salon [ {{ tcmh | round(0) }}°C ]
-              - Bureau [ {{ tceh | round(0) }}°C ]   
-              - Chambre [ {{ tcch | round(0) }}°C ]
               
               **- Température confort de nuit [ {{ temp_confort_n | round(0) }}°C ] (21h <-> 7h30)**
               **- Température éCO. : {{ temp_eco_c | round(0) }}°C -> (éCO. si absents)**
@@ -343,9 +337,9 @@ streamline_templates:
                 - Climatiseur Bureau : {{ states('sensor.temperature_cible') | int(0) }}°C (Cool)
                 - Climatiseur Chambre : {{ states('sensor.temperature_cible') | int(0) }}°C (Cool)
               {% else %}
-                - Climatiseur Salon : Off
-                - Climatiseur Bureau : Off
-                - Climatiseur Chambre : Off
+                - Climatiseur Salon : {{ states('sensor.mode_ete_hiver') }}
+                - Climatiseur Bureau : {{ states('sensor.mode_ete_hiver') }}
+                - Climatiseur Chambre : {{ states('sensor.mode_ete_hiver') }}
               {% endif %}
             text_only: true
         - type: conditional
@@ -369,9 +363,9 @@ streamline_templates:
                 - Climatiseur Bureau : {{ states('sensor.temperature_confort') | int(0) }}°C (Cool)
                 - Climatiseur Chambre : {{ states('sensor.temperature_cible') | int(0) }}°C (Cool)
               {% else %}
-                - Climatiseur Salon : Off
-                - Climatiseur Bureau : Off
-                - Climatiseur Chambre : Off
+                - Climatiseur Salon : {{ states('sensor.mode_ete_hiver') }}
+                - Climatiseur Bureau : {{ states('sensor.mode_ete_hiver') }}
+                - Climatiseur Chambre : {{ states('sensor.mode_ete_hiver') }}
               {% endif %}    
             text_only: true
         - type: conditional
@@ -395,9 +389,9 @@ streamline_templates:
                 - Climatiseur Bureau : {{ states('sensor.temperature_confort') | int(0) }}°C (Cool)
                 - Climatiseur Chambre : {{ states('sensor.temperature_cible') | int(0) }}°C (Cool)
               {% else %}
-                - Climatiseur Salon : Off
-                - Climatiseur Bureau : Off
-                - Climatiseur Chambre : Off
+                - Climatiseur Salon : {{ states('sensor.mode_ete_hiver') }}
+                - Climatiseur Bureau : {{ states('sensor.mode_ete_hiver') }}
+                - Climatiseur Chambre : {{ states('sensor.mode_ete_hiver') }}
               {% endif %}
             text_only: true
         - type: conditional
@@ -421,9 +415,9 @@ streamline_templates:
                 - Climatiseur Bureau : {{ states('sensor.temperature_cible') | int(0) }}°C (Cool)
                 - Climatiseur Chambre : {{ states('sensor.temperature_cible') | int(0) }}°C (Cool)
               {% else %}
-                - Climatiseur Salon : Fan Only
-                - Climatiseur Bureau : Fan Only
-                - Climatiseur Chambre : Fan Only
+                - Climatiseur Salon : {{ states('sensor.mode_ete_hiver') }}
+                - Climatiseur Bureau : {{ states('sensor.mode_ete_hiver') }}
+                - Climatiseur Chambre : {{ states('sensor.mode_ete_hiver') }}
               {% endif %}
             text_only: true
         - type: conditional
@@ -447,9 +441,9 @@ streamline_templates:
                 - Climatiseur Bureau : {{ states('sensor.temperature_cible') | int(0) }}°C (Cool)
                 - Climatiseur Chambre : {{ states('sensor.temperature_confort_nuit') | int(0) }}°C (Cool)
               {% else %}
-                - Climatiseur Salon : Off
-                - Climatiseur Bureau : Off
-                - Climatiseur Chambre : Off
+                - Climatiseur Salon : {{ states('sensor.mode_ete_hiver') }}
+                - Climatiseur Bureau : {{ states('sensor.mode_ete_hiver') }}
+                - Climatiseur Chambre : {{ states('sensor.mode_ete_hiver') }}
               {% endif %}
             text_only: true
   carte_des_temperatures:
@@ -1087,6 +1081,80 @@ streamline_templates:
         style: >
           ha-card { background: none !important; border: none !important;
           box-shadow: none !important; }
+  conso_mensuelle_mini_pc:
+    card:
+      type: custom:apexcharts-card
+      graph_span: 730h
+      cache: true
+      span:
+        end: day
+      apex_config:
+        chart:
+          height: 340px
+      now:
+        show: false
+      header:
+        show: true
+        title: '[[title]]'
+        show_states: true
+        colorize_states: true
+      yaxis:
+        - id: W_day
+          min: 0
+          max: auto
+          decimals: 0
+          opposite: false
+          apex_config:
+            tickAmount: 10
+        - id: Avg
+          min: 0
+          max: auto
+          decimals: 0
+          opposite: true
+          apex_config:
+            tickAmount: 10
+      all_series_config:
+        show:
+          legend_value: true
+          extremas: true
+      brush:
+        selection_span: 24h
+      series:
+        - entity: '[[energy_entity]]'
+          name: Conso. par jour
+          yaxis_id: W_day
+          type: column
+          color: '[[color]]'
+          unit: Wh
+          transform: return x * 1000;
+          group_by:
+            func: diff
+            duration: 24h
+            start_with_last: true
+        - entity: '[[avg_monthly_entity]]'
+          name: Moy. 1er du mois
+          yaxis_id: Avg
+          type: line
+          color: red
+          unit: W
+          stroke_width: 2.5
+          stroke_dash: 8
+          group_by:
+            func: last
+            duration: 1d
+        - entity: '[[conso_monthly_kwh_entity]]'
+          name: Mois en ccours
+          color: '#F44336'
+          unit: kWh
+          transform: return x / 1000;
+          show:
+            in_header: true
+            in_brush: false
+            in_chart: false
+      card_mod:
+        style: >
+          ha-card { background: none !important; border: none !important;
+          box-shadow: none !important; }
   conso_temps_reel_clim_rad:
     card:
       type: custom:apexcharts-card
@@ -1478,6 +1546,245 @@ views:
               - condition: numeric_state
                 entity: sensor.maison_lightning_counter
                 above: 1
+          - type: custom:mushroom-entity-card
+            entity: sensor.prise_lave_linge_nous_power
+            tap_action:
+              action: toggle
+            icon: mdi:washing-machine
+            icon_color: blue
+            name: Washing Machine
+            card_mod:
+              style:
+                mushroom-shape-icon$: |
+                  .shape {
+                    {# ========== USER CONFIG ========== #}
+                    {# true = number mode, false = state mode #}
+                    {% set use_number      = false %}
+
+                    {# STATE MODE SETTINGS #}
+                    {% set state_entity    = 'switch.plug_6_local' %}
+                    {% set active_value    = 'on' %}
+
+                    {# OPTIONAL: NUMBER MODE SETTINGS #}
+                    {% set number_entity   = 'sensor.plug_power' %}
+                    
+                    {# '>' '<' '=' '>=' '<=' #}
+                    {% set number_operator = '>' %}
+                    
+                    {% set threshold       = 0.0 %}
+                    {# ========== END USER CONFIG ====== #}
+
+                    {# ======== TRIGGER DECISION LOGIC ======== #}
+                    {% if use_number %}
+                      {% set num = states(number_entity) | float(0) %}
+                      {% if number_operator == '>' %}
+                        {% set trigger_active = (num > threshold) %}
+                      {% elif number_operator == '<' %}
+                        {% set trigger_active = (num < threshold) %}
+                      {% elif number_operator == '=' %}
+                        {% set trigger_active = (num == threshold) %}
+                      {% elif number_operator == '>=' %}
+                        {% set trigger_active = (num >= threshold) %}
+                      {% elif number_operator == '<=' %}
+                        {% set trigger_active = (num <= threshold) %}
+                      {% else %}
+                        {% set trigger_active = false %}
+                      {% endif %}
+                    {% else %}
+                      {% set trigger_active = (states(state_entity) == active_value) %}
+                    {% endif %}
+                    {# =========== END TRIGGER LOGIC =========== #}
+
+                    {% if trigger_active %}
+                      --shape-animation: washer-chaos 1.1s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+                      opacity: 1;
+                    {% else %}
+                      --shape-animation: none;
+                      opacity: 0.85;
+                    {% endif %}
+
+                    transform-origin: 50% 55%;
+                    box-shadow:
+                      inset 0 0 0 2px rgba(var(--rgb-{{ config.icon_color }}), 0.5),
+                      0 0 10px 0 rgba(var(--rgb-{{ config.icon_color }}), 0.6);
+                    position: relative;
+                  }
+
+                  @keyframes washer-chaos {
+                    0% {
+                      transform: rotate(0deg) scale(1);
+                      box-shadow:
+                        inset 0 0 0 2px rgba(var(--rgb-{{ config.icon_color }}), 0.7),
+                        0 0 0 0 rgba(var(--rgb-{{ config.icon_color }}), 0.6);
+                    }
+                    15%  { transform: rotate(18deg) translate(1px, -1px) scale(1.02); }
+                    30%  { transform: rotate(60deg) translate(-2px, 2px) scale(0.98); }
+                    45%  { transform: rotate(120deg) translate(3px, -2px) scale(1.03); }
+                    60%  { transform: rotate(190deg) translate(-1px, 3px) scale(0.97); }
+                    75%  { transform: rotate(260deg) translate(1px, -3px) scale(1.04); }
+                    90%  { transform: rotate(330deg) translate(-2px, 1px) scale(1.01); }
+                    100% {
+                      transform: rotate(360deg) translate(0, 0) scale(1);
+                      box-shadow:
+                        inset 0 0 0 2px rgba(var(--rgb-{{ config.icon_color }}), 0.7),
+                        0 0 10px 6px rgba(var(--rgb-{{ config.icon_color }}), 0.0);
+                    }
+                  }
+
+                  @keyframes washer-idle {
+                    0%   { transform: rotate(-2deg); }
+                    50%  { transform: rotate(2deg); }
+                    100% { transform: rotate(-2deg); }
+                  }
+                .: |
+                  mushroom-shape-icon {
+                    --icon-size: 65px;
+                    display: flex;
+                    margin: -22px 0 10px -22px !important;
+                    padding-right: 10px;
+                  }
+                  ha-card {
+                    clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                  }
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+            grid_options:
+              columns: 6
+              rows: 2
+            visibility:
+              - condition: numeric_state
+                entity: sensor.prise_lave_linge_nous_power
+                above: 50
+          - type: custom:mushroom-entity-card
+            entity: sensor.prise_lave_vaisselle_nous_power
+            tap_action:
+              action: toggle
+            icon: mdi:dishwasher
+            icon_color: blue
+            name: Dishwasher
+            card_mod:
+              style:
+                mushroom-shape-icon$: |
+                  .shape {
+                    {# ========== USER CONFIG ========== #}
+                    {# true = number mode, false = state mode #}
+                    {% set use_number      = false %}
+
+                    {# STATE MODE SETTINGS #}
+                    {% set state_entity    = 'switch.plug_6_local' %}
+                    {% set active_value    = 'on' %}
+
+                    {# OPTIONAL: NUMBER MODE SETTINGS #}
+                    {% set number_entity   = 'sensor.plug_power' %}
+                    
+                    {# '>' '<' '=' '>=' '<=' #}
+                    {% set number_operator = '>' %}
+                    
+                    {% set threshold       = 0.0 %}
+                    {# ========== END USER CONFIG ====== #}
+
+                    {# ======== TRIGGER DECISION LOGIC ======== #}
+                    {% if use_number %}
+                      {% set num = states(number_entity) | float(0) %}
+                      {% if number_operator == '>' %}
+                        {% set trigger_active = (num > threshold) %}
+                      {% elif number_operator == '<' %}
+                        {% set trigger_active = (num < threshold) %}
+                      {% elif number_operator == '=' %}
+                        {% set trigger_active = (num == threshold) %}
+                      {% elif number_operator == '>=' %}
+                        {% set trigger_active = (num >= threshold) %}
+                      {% elif number_operator == '<=' %}
+                        {% set trigger_active = (num <= threshold) %}
+                      {% else %}
+                        {% set trigger_active = false %}
+                      {% endif %}
+                    {% else %}
+                      {% set trigger_active = (states(state_entity) == active_value) %}
+                    {% endif %}
+                    {# =========== END TRIGGER LOGIC =========== #}
+
+                    {% if trigger_active %}
+                      --shape-animation: dishwasher-swash 1.5s ease-in-out infinite;
+                      opacity: 1;
+                    {% else %}
+                      --shape-animation: none;
+                      opacity: 0.8;
+                    {% endif %}
+
+                    transform-origin: 50% 55%;
+                  }
+
+                  @keyframes dishwasher-swash {
+                    0% {
+                      transform: scale(1) rotate(0deg);
+                      box-shadow:
+                        0 0 0 0 rgba(var(--rgb-{{ config.icon_color }}), 0.8),
+                        0 0 0 0 rgba(var(--rgb-{{ config.icon_color }}), 0.3);
+                      filter: blur(0);
+                    }
+                    25% {
+                      transform: scale(1.03) rotate(10deg);
+                      box-shadow:
+                        0 0 10px 3px rgba(var(--rgb-{{ config.icon_color }}), 0.9),
+                        0 0 18px 8px rgba(var(--rgb-{{ config.icon_color }}), 0.3);
+                      filter: blur(0.4px);
+                    }
+                    50% {
+                      transform: scale(0.98) rotate(-15deg);
+                      box-shadow:
+                        0 0 14px 6px rgba(var(--rgb-{{ config.icon_color }}), 0.7),
+                        0 0 26px 12px rgba(var(--rgb-{{ config.icon_color }}), 0.2);
+                      filter: blur(0.6px);
+                    }
+                    75% {
+                      transform: scale(1.04) rotate(15deg);
+                      box-shadow:
+                        0 0 10px 3px rgba(var(--rgb-{{ config.icon_color }}), 0.9),
+                        0 0 18px 8px rgba(var(--rgb-{{ config.icon_color }}), 0.3);
+                      filter: blur(0.4px);
+                    }
+                    100% {
+                      transform: scale(1) rotate(0deg);
+                      box-shadow:
+                        0 0 0 0 rgba(var(--rgb-{{ config.icon_color }}), 0.0),
+                        0 0 0 0 rgba(var(--rgb-{{ config.icon_color }}), 0.0);
+                      filter: blur(0);
+                    }
+                  }
+
+                  @keyframes dishwasher-idle {
+                    0%   { transform: scale(1); }
+                    50%  { transform: scale(1.02); }
+                    100% { transform: scale(1); }
+                  }
+                .: |
+                  mushroom-shape-icon {
+                    --icon-size: 65px;
+                    display: flex;
+                    margin: -18px 0 10px -20px !important;
+                    padding-right: 10px;
+                  }
+                  ha-card {
+                    clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+                  }
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+            grid_options:
+              columns: 6
+              rows: 2
+            visibility:
+              - condition: numeric_state
+                entity: sensor.prise_lave_vaisselle_nous_power
+                above: 50
           - type: custom:bubble-card
             card_type: separator
             name: Personne(s)
@@ -7419,9 +7726,6 @@ views:
             icon: mdi:desktop-tower-monitor
             heading_style: title
             heading: Bureau
-            grid_options:
-              columns: 12
-              rows: 1
             badges:
               - type: entity
                 entity: sensor.th_bureau_temperature
@@ -11374,7 +11678,7 @@ views:
               - type: entity
                 show_state: true
                 show_icon: true
-                entity: remote.clim_salon
+                entity: remote.clim_salon_rm4_mini
                 color: state
               - type: entity
                 show_state: true
@@ -11754,7 +12058,7 @@ views:
               - type: entity
                 show_state: true
                 show_icon: true
-                entity: remote.clim_bureau
+                entity: remote.clim_bureau_rm4_mini
                 color: state
               - type: entity
                 show_state: true
@@ -11932,7 +12236,7 @@ views:
               - type: entity
                 show_state: true
                 show_icon: true
-                entity: remote.soufflant_sdb
+                entity: remote.soufflant_sdb_rm4_mini
                 color: state
               - type: entity
                 show_state: true
@@ -12232,7 +12536,7 @@ views:
               - type: entity
                 show_state: true
                 show_icon: true
-                entity: remote.clim_chambre
+                entity: remote.clim_chambre_rm4_mini
                 color: state
               - type: entity
                 show_state: true
@@ -25919,15 +26223,15 @@ views:
                   energy_color: gainsboro
                   current_entity: sensor.prise_mini_pc_ikea_current
                   avg_daily_entity: sensor.mini_pc_avg_watts_quotidien
-                  conso_daily_kwh_entity: sensor.prise_mini_pc_ikea_quotidien_kwh_um
+                  conso_daily_kwh_entity: sensor.prise_mini_pc_ikea_quotidien_wh_um
               - type: custom:streamline-card
-                template: conso_mensuelle_appareil
+                template: conso_mensuelle_mini_pc
                 variables:
                   title: Conso. mensuelle Mini P.C.
                   energy_entity: sensor.prise_mini_pc_ikea_energy
                   color: gainsboro
                   avg_monthly_entity: sensor.mini_pc_avg_watts_mensuel
-                  conso_monthly_kwh_entity: sensor.prise_mini_pc_ikea_quotidien_kwh_um
+                  conso_monthly_kwh_entity: sensor.prise_mini_pc_ikea_quotidien_wh_um
           - type: vertical-stack
             cards:
               - type: custom:bubble-card
