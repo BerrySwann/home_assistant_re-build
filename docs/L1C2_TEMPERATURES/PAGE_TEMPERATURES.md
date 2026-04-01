@@ -226,7 +226,7 @@ Chips **conditionnels** — s'affichent uniquement si `sensor.{piece}_power_stat
 | Salon | `mdi:air-conditioner` | `sensor.clim_salon_etat` | Cool / Heat / Fan / Off |
 | Cuisine | `mdi:heating-coil` | `sensor.radiateur_cuisine_etat` | Heat / Off |
 | Bureau | `mdi:air-conditioner` | `sensor.clim_bureau_etat` | Cool / Heat / Fan / Off |
-| SdB soufflant | `mdi:heat-wave` | `sensor.soufflant_sdb_etat` | Heat / Off |
+| SdB soufflant | `mdi:heat-wave` | `sensor.sdb_soufflant_etat` | Heat / Off |
 | SdB sèche-serviette | `mdi:heating-coil` | `sensor.sdb_seche_serviette_etat` | Heat / Off |
 | Chambre | `mdi:air-conditioner` | `sensor.clim_chambre_etat` | Cool / Heat / Fan / Off |
 
@@ -243,7 +243,7 @@ Series:
   sensor.th_balcon_nord_temperature      → T° Bal.Nrd (vert, stroke 4)
   sensor.conso_clim_rad_total            → Conso. Instan. (colonnes bleues, max/1h)
   sensor.conso_clim_rad_total_quotidien  → Conso. Total (kWh, légende seulement)
-  sensor.clim_rad_total_avg_watts_daily  → Moy. depuis Minuit (ligne rouge, stroke 2)
+  sensor.clim_rad_total_avg_watts_quotidien  → Moy. depuis Minuit (ligne rouge, stroke 2)
   sensor.conso_clim_rad_total_mensuel    → Mois en cours (légende seulement)
 ```
 
@@ -262,14 +262,14 @@ Marqueur `Now` en darkred. `cache: true`, `span: start day`.
 | `sensor.clim_salon_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État clim salon |
 | `sensor.radiateur_cuisine_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État radiateur cuisine |
 | `sensor.clim_bureau_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État clim bureau |
-| `sensor.soufflant_sdb_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État soufflant SdB |
+| `sensor.sdb_soufflant_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État soufflant SdB |
 | `sensor.sdb_seche_serviette_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État sèche-serviette |
 | `sensor.clim_chambre_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État clim chambre |
 | `sensor.temperature_moyenne_interieure` | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Moyenne T° appart |
 | `sensor.conso_clim_rad_total` | `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` | Puissance totale clim+rad (W) |
-| `sensor.conso_clim_rad_total_quotidien` | `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml` | Conso journalière (kWh) |
-| `sensor.conso_clim_rad_total_mensuel` | `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml` | Conso mensuelle (kWh) |
-| `sensor.clim_rad_total_avg_watts_daily` | `templates/P1_clim_chauffage/P1_AVG/P1_avg.yaml` | Moyenne watts depuis minuit |
+| `sensor.conso_clim_rad_total_quotidien` | `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` | Conso journalière (kWh) |
+| `sensor.conso_clim_rad_total_mensuel` | `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` | Conso mensuelle (kWh) |
+| `sensor.clim_rad_total_avg_watts_quotidien` | `templates/P1_clim_chauffage/P1_AVG/P1_AVG_TOTAL_AMHQ.yaml` | Moyenne watts depuis minuit |
 | `sensor.temperature_delta_affichage` | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Delta T° int/ext affiché |
 
 ---
@@ -517,7 +517,7 @@ Contenu : mushroom-template-card (flèche H%) + mini-graph-card (300px, 24h, lab
 |---------|-----------------|
 | `ui_dashboard/ui_dashboard.yaml` | `sensor.*_power_status`, `sensor.*_etat` (statuts et états clim/rad par pièce) |
 | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` | `sensor.conso_clim_rad_total` (W), `sensor.conso_clim_rad_total_quotidien/mensuel` (kWh) |
-| `P1_AVG/P1_avg.yaml` | `sensor.clim_rad_total_avg_watts_daily` (W — moy. depuis minuit) |
+| `P1_AVG/P1_avg.yaml` | `sensor.clim_rad_total_avg_watts_quotidien` (W — moy. depuis minuit) |
 | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | `sensor.temperature_moyenne_interieure`, `sensor.temperature_delta_affichage`, `sensor.groupe`, `sensor.mode_ete_hiver`, `sensor.temperature_cible/confort/confort_nuit/eco_hiver_corrige` |
 
 ---

@@ -203,7 +203,7 @@ Icône/couleur conditionnelle sur `sensor.ete_hiver` : Été = `#03a9f4`, Hiver 
 | `sensor.sdb_seche_serviette_power_status ≠ off` | SdB SèS: Heat/Off | `mdi:heating-coil` | Heat=#ff6100 / Off=#FF0000 |
 | `sensor.chambre_power_status ≠ off` | Chambre: Cool/Heat/Fan/Off | `mdi:air-conditioner` | idem Salon |
 
-Content affiche le mode actif via `sensor.clim_*_etat` / `sensor.radiateur_cuisine_etat` / `sensor.soufflant_sdb_etat` / `sensor.sdb_seche_serviette_etat`.
+Content affiche le mode actif via `sensor.clim_*_etat` / `sensor.radiateur_cuisine_etat` / `sensor.sdb_soufflant_etat` / `sensor.sdb_seche_serviette_etat`.
 
 ---
 
@@ -283,7 +283,7 @@ Même 6 séries que le journalier, mais avec les entités `*_mensuel_kwh_um` :
 | T° Bal.Nrd | `sensor.th_balcon_nord_temperature` | temperature | line | green |
 | Conso. Instan. | `sensor.conso_clim_rad_total` | conso_clim | column | rgb(68,115,158) |
 | Conso. Total (header only) | `sensor.conso_clim_rad_total_quotidien` | – | hidden | rgb(68,115,158) |
-| Moy.depuis Minuit | `sensor.clim_rad_total_avg_watts_daily` | conso_clim | line | #F44336 |
+| Moy.depuis Minuit | `sensor.clim_rad_total_avg_watts_quotidien` | conso_clim | line | #F44336 |
 | Mois en cours (header only) | `sensor.conso_clim_rad_total_mensuel` | – | hidden | red |
 
 Les 2 séries `in_chart: false` servent uniquement à afficher leur valeur dans le header (`show_states: true`).
@@ -536,7 +536,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 | `sensor.clim_salon_etat` | Mode Salon (Cool/Heat/Fan/Off) |
 | `sensor.radiateur_cuisine_etat` | Mode Cuisine (Heat/Off) |
 | `sensor.clim_bureau_etat` | Mode Bureau |
-| `sensor.soufflant_sdb_etat` | Mode Soufflant SdB |
+| `sensor.sdb_soufflant_etat` | Mode Soufflant SdB |
 | `sensor.sdb_seche_serviette_etat` | Mode Sèche-Serv SdB |
 | `sensor.clim_chambre_etat` | Mode Chambre |
 
@@ -578,7 +578,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 |--------|-------------|
 | `sensor.clim_salon_avg_watts_quotidien` | Moy. W depuis minuit (Salon) |
 | `sensor.clim_salon_avg_watts_mensuel` | Moy. W depuis 1er du mois (Salon) |
-| `sensor.clim_rad_total_avg_watts_daily` | Moy. W total depuis minuit |
+| `sensor.clim_rad_total_avg_watts_quotidien` | Moy. W total depuis minuit |
 | `sensor.radiateur_elec_cuisine_avg_watts_quotidien` | Moy. W depuis minuit (Cuisine) |
 | `sensor.radiateur_elec_cuisine_avg_watts_mensuel` | Moy. W depuis 1er du mois (Cuisine) |
 | `sensor.clim_bureau_avg_watts_quotidien` | Moy. W depuis minuit (Bureau) |

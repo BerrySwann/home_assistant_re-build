@@ -281,17 +281,17 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 
 ---
 
-### 📁 `templates/P1_clim_chauffage/P1_AVG/P1_avg.yaml`
+### 📁 `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml`
 > Compteurs kWh quotidiens et mensuels par appareil (Pôle 1).
 
 | Entité | Rôle |
 |--------|------|
-| `sensor.clim_salon_quotidien` / `_mensuel` | Conso clim salon |
-| `sensor.radiateur_elec_cuisine_quotidien` / `_mensuel` | Conso radiateur cuisine |
-| `sensor.clim_bureau_quotidien` / `_mensuel` | Conso clim bureau |
-| `sensor.soufflant_sdb_quotidien` / `_mensuel` | Conso soufflant SDB |
-| `sensor.seche_serviette_sdb_quotidien` / `_mensuel` | Conso sèche-serviette |
-| `sensor.clim_chambre_quotidien` / `_mensuel` | Conso clim chambre |
+| `sensor.clim_salon_quotidien_kwh_um` / `_mensuel_kwh_um` | Conso clim salon |
+| `sensor.radiateur_elec_cuisine_quotidien_kwh_um` / `_mensuel_kwh_um` | Conso radiateur cuisine |
+| `sensor.clim_bureau_quotidien_kwh_um` / `_mensuel_kwh_um` | Conso clim bureau |
+| `sensor.soufflant_sdb_quotidien_kwh_um` / `_mensuel_kwh_um` | Conso soufflant SDB |
+| `sensor.seche_serviette_sdb_quotidien_kwh_um` / `_mensuel_kwh_um` | Conso sèche-serviette |
+| `sensor.clim_chambre_quotidien_kwh_um` / `_mensuel_kwh_um` | Conso clim chambre |
 | `sensor.conso_clim_rad_total_quotidien` / `_mensuel` | Totaux Pôle 1 |
 
 ---

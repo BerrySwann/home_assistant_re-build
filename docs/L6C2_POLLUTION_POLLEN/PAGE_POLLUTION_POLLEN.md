@@ -138,7 +138,7 @@ color: "{{ state_attr(entity, 'Couleur') }}"
 
 > ⚠️ Les polluants utilisent `ring_entity: sensor.*_vence` (même entité que `entity`) — l'anneau et la valeur sont pilotés par la même entité, contrairement aux pollens qui dissocient concentration/niveau.
 
-> ⚠️ **Typo** : O₃ a `ring_type: opn` au lieu de `ring_type: open` — à corriger si l'anneau ne s'affiche pas.
+> ✅ O₃ utilise `ring_type: open` — anneau en mode ouvert.
 
 | Polluant | entity / ring_entity |
 |----------|---------------------|
@@ -208,7 +208,7 @@ Commune à tous les ring-tiles pollens et polluants :
 ## 🐛 DÉPANNAGE
 
 ### Anneau O₃ ne s'affiche pas
-Typo dans le code : `ring_type: opn` → corriger en `ring_type: open`.
+Vérifier que `ring_type: open` est bien présent (typo `opn` corrigée dans dashbord_2026-03-20.yalm).
 
 ### Entités `sensor.*_vence` indisponibles
 1. Vérifier que l'intégration AtmoFrance (HACS) est installée et configurée pour la station **Vence** (06).

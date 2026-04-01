@@ -243,7 +243,7 @@ Chaque appareil est représenté par une `custom:streamline-card` avec le templa
 
 | Title | energy_entity | color | avg_monthly | conso_monthly_kwh |
 |:------|:-------------|:------|:-----------|:-----------------|
-| Veilles | `sensor.all_standby_energie_totale_kwh` | `rgb(109, 76, 65)` | `sensor.veilles_avg_watts_mensuel` | `sensor.all_standby_mensuel_kwh_um` |
+| Veilles | `sensor.all_standby_energie_totale_kwh` | `rgb(109, 76, 65)` | `sensor.all_standby_avg_watts_mensuel` | `sensor.all_standby_mensuel_kwh_um` |
 
 ---
 
@@ -368,7 +368,7 @@ Source : sensors Pôle 2 — `platform: statistics` sur énergie ou puissance.
 | `sensor.fer_repasser_avg_watts_mensuel` | Fer à Repasser |
 | `sensor.tetes_lit_avg_watts_mensuel` | Têtes de Lit |
 | `sensor.tv_chambre_avg_watts_mensuel` | TV Chambre |
-| `sensor.veilles_avg_watts_mensuel` | All Standby |
+| `sensor.all_standby_avg_watts_mensuel` | All Standby |
 
 ---
 
