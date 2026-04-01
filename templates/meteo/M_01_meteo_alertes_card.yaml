@@ -36,7 +36,7 @@
 
 # --- alerte_vent_violent ---
     - name: 'Alerte Vent violent'
-      unique_id: sensor.alerte_vent_violent
+      unique_id: alerte_vent_violent                   # "[L39] modif"
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Vent violent') %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
@@ -57,7 +57,7 @@
 
 # --- alerte_inondation ---
     - name: 'Alerte Inondation'
-      unique_id: sensor.alerte_inondation
+      unique_id: alerte_inondation                     # "[L60] modif"
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Inondation') %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
@@ -78,7 +78,7 @@
 
 # --- alerte_orages ---
     - name: 'Alerte Orages'
-      unique_id: sensor.alerte_orages
+      unique_id: alerte_orages                         # "[L81] modif"
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Orages') %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
@@ -99,7 +99,7 @@
 
 # --- alerte_pluie_inondation ---
     - name: 'Alerte Pluie Inondation'
-      unique_id: sensor.alerte_pluie_inondation
+      unique_id: alerte_pluie_inondation               # "[L102] modif"
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Pluie-inondation') %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
@@ -120,7 +120,7 @@
 
 # --- alerte_neige_verglas ---
     - name: 'Alerte Neige-verglas'
-      unique_id: sensor.alerte_neige_verglas
+      unique_id: alerte_neige_verglas                  # "[L123] modif"
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Neige-verglas') %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
@@ -171,7 +171,7 @@
 
 # --- alerte_avalanches ---
     - name: 'Alerte Avalanches'
-      unique_id: sensor.alerte_avalanches
+      unique_id: alerte_avalanches                     # "[L174] modif"
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Avalanches') %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
@@ -192,7 +192,7 @@
 
 # --- alerte_vagues_submersion ---
     - name: 'Alerte Vagues-submersion'
-      unique_id: sensor.alerte_vagues_submersion
+      unique_id: alerte_vagues_submersion              # "[L195] modif"
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Vagues-submersion') %}
         {% set at = state_attr('binary_sensor.meteoalarm', 'awareness_type') %}
@@ -213,7 +213,7 @@
 
 # --- alerte_meteo ---
     - name: 'Alerte Météo'
-      unique_id: sensor.alerte_meteo
+      unique_id: alerte_meteo                          # "[L216] modif"
       state: >-
         {% set wa = states('sensor.06_weather_alert') %}
         {% set al = state_attr('binary_sensor.meteoalarm', 'awareness_level') | default('') %}
@@ -259,3 +259,5 @@
 # - [Intégrité] Conservation de 100% des entités et icônes originales.
 # - [modif] ev: | default('') ajouté sur les 9 sensors — TypeError fix.
 # - [modif] al: | default('') ajouté dans alerte_meteo — awareness_level fix.
+# - [L39,60,81,102,123,174,195,216] unique_id: préfixe 'sensor.' supprimé (8x)
+#   Règle CLAUDE.md : unique_id ne doit PAS contenir 'sensor.' (slug seul).
