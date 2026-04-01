@@ -1,0 +1,9 @@
+# ┌─────────────────────────────────────┐
+# │ 8. SDB                              │
+# └─────────────────────────────────────┘
+
+# --- inter_soufflant_salle_de_bain ---
+inter_soufflant_salle_de_bain:
+  name: "Inter Soufflant SdB (IKEA RODRET)"
+  initial: off
+  icon: mdi:fan
