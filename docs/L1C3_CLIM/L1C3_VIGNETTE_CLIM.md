@@ -94,7 +94,7 @@ entities:
   - sensor.clim_salon_etat
   - sensor.radiateur_cuisine_etat
   - sensor.clim_bureau_etat
-  - sensor.radiateur_sdb_etat
+  - sensor.sdb_soufflant_etat
   - sensor.clim_chambre_etat
   - sensor.salon_power_status
   - sensor.cuisine_power_status
@@ -113,7 +113,7 @@ triggers_update:
   - sensor.clim_salon_etat
   - sensor.radiateur_cuisine_etat
   - sensor.clim_bureau_etat
-  - sensor.radiateur_sdb_etat
+  - sensor.sdb_soufflant_etat
   - sensor.clim_chambre_etat
   - sensor.salon_power_status
   - sensor.cuisine_power_status
@@ -292,7 +292,7 @@ custom_fields:
 | `sensor.clim_salon_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État clim salon |
 | `sensor.radiateur_cuisine_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État radiateur cuisine |
 | `sensor.clim_bureau_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État clim bureau |
-| `sensor.radiateur_sdb_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État sèche-serviette SdB |
+| `sensor.sdb_soufflant_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État sèche-serviette SdB |
 | `sensor.clim_chambre_etat` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | État clim chambre |
 | `sensor.salon_power_status` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | Puissance salon > 50W → on |
 | `sensor.cuisine_power_status` | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | Puissance cuisine > 50W → on |

@@ -297,7 +297,7 @@ ha-card {
   windspeed_bar_full: true
 
   wind_direction_entity:
-    entity: sensor.direction_du_vent_vence
+    entity: sensor.vence_wind_bearing
     use_statistics: false
     direction_compensation: 0
 
@@ -326,11 +326,11 @@ ha-card {
       entity: sensor.vitesse_du_vent_vence
     top_right:
       label: Direction du Vent
-      entity: sensor.direction_du_vent_vence_label
+      entity: sensor.vence_wind_direction_label
     bottom_left:
       label: Boussole
       unit: °
-      entity: sensor.direction_du_vent_vence
+      entity: sensor.vence_wind_bearing
     bottom_right:
       label: Vitesse de la rafale actuelle
       unit: " km/h"
@@ -359,8 +359,8 @@ Rose des vents complète affichant :
 - Sélecteur de période : 1 jour / 7 jours / 15 jours / 30 jours
 
 ### Entités
-- `sensor.direction_du_vent_vence` [templates/meteo/M_02] (Template sensor - voir `M_02_meteo_vent_vence_card.yaml`)
-- `sensor.direction_du_vent_vence_label` [templates/meteo/M_02] (Template sensor - Nord/Sud/Est/Ouest)
+- `sensor.vence_wind_bearing` [templates/meteo/M_02] (Template sensor - voir `M_02_meteo_vent_vence_card.yaml`)
+- `sensor.vence_wind_direction_label` [templates/meteo/M_02] (Template sensor - Nord/Sud/Est/Ouest)
 - `sensor.vitesse_du_vent_vence` [templates/meteo/M_02] (Template sensor)
 - `sensor.vence_wind_gust` [Météo France - UI] (Météo France)
 - `weather.vence` [Météo France - UI] (attribute: wind_speed)
@@ -566,11 +566,11 @@ Courbe de pluie cumulée sur 24h (mise à jour toutes les minutes).
 | `sensor.maison_lightning_azimuth` [HACS Blitzortung - UI] | Blitzortung | Direction dernier impact (°) |
 | `sensor.dernier_impact_temps_reel` [templates/meteo/M_03] | Template | "Il y a XX minutes" |
 | `sensor.maison_lightning_localisation` [sensors/meteo/M_03_...blitzortung.yaml] | REST API | Ville/lieu proche |
-| `sensor.eclairs_horaire` [utility_meter/meteo/M_03] | Utility meter | Compteur heure |
-| `sensor.eclairs_quotidien` [utility_meter/meteo/M_03] | Utility meter | Compteur jour |
-| `sensor.eclairs_hebdomadaire` [utility_meter/meteo/M_03] | Utility meter | Compteur semaine |
-| `sensor.eclairs_mensuel` [utility_meter/meteo/M_03] | Utility meter | Compteur mois |
-| `sensor.eclairs_annuel` [utility_meter/meteo/M_03] | Utility meter | Compteur année |
+| `sensor.eclair_horaire` [utility_meter/meteo/M_03] | Utility meter | Compteur heure |
+| `sensor.eclair_quotidien` [utility_meter/meteo/M_03] | Utility meter | Compteur jour |
+| `sensor.eclair_hebdomadaire` [utility_meter/meteo/M_03] | Utility meter | Compteur semaine |
+| `sensor.eclair_mensuel` [utility_meter/meteo/M_03] | Utility meter | Compteur mois |
+| `sensor.eclair_annuel` [utility_meter/meteo/M_03] | Utility meter | Compteur année |
 | `sensor.lightning_bearing` [templates/meteo/M_03] | Template | Bearing pour windrose |
 | `sensor.lightning_distance_km` [templates/meteo/M_03] | Template | Distance pour windrose |
 | `sensor.lightning_direction_label` [templates/meteo/M_03] | Template | "Nord", "Sud-Est"... |
@@ -634,11 +634,11 @@ background: |
 
 | Période | Entité | Échelle max | Seuil vert | Seuil rouge |
 |---------|--------|-------------|------------|-------------|
-| Heure | `sensor.eclairs_horaire` [utility_meter/meteo/M_03] | 3 000 | 0-428 | 1715+ |
-| Jour | `sensor.eclairs_quotidien` [utility_meter/meteo/M_03] | 30 000 | 0-4285 | 17143+ |
-| Semaine | `sensor.eclairs_hebdomadaire` [utility_meter/meteo/M_03] | 50 000 | 0-7142 | 28572+ |
-| Mois | `sensor.eclairs_mensuel` [utility_meter/meteo/M_03] | 70 000 | 0-10000 | 40001+ |
-| Année | `sensor.eclairs_annuel` [utility_meter/meteo/M_03] | 150 000 | 0-22000 | 88001+ |
+| Heure | `sensor.eclair_horaire` [utility_meter/meteo/M_03] | 3 000 | 0-428 | 1715+ |
+| Jour | `sensor.eclair_quotidien` [utility_meter/meteo/M_03] | 30 000 | 0-4285 | 17143+ |
+| Semaine | `sensor.eclair_hebdomadaire` [utility_meter/meteo/M_03] | 50 000 | 0-7142 | 28572+ |
+| Mois | `sensor.eclair_mensuel` [utility_meter/meteo/M_03] | 70 000 | 0-10000 | 40001+ |
+| Année | `sensor.eclair_annuel` [utility_meter/meteo/M_03] | 150 000 | 0-22000 | 88001+ |
 
 Gradient de couleurs (7 paliers) : `Green → Gold → Orange → Dark Orange → Red → Dark Red → Purple`
 
@@ -953,8 +953,8 @@ Graphique annuel affiché sous la Glance Cycles, intégré directement dans le p
 
 | Entité | unique_id | Unité | Rôle |
 |--------|-----------|-------|------|
-| `sensor.direction_du_vent_vence` [templates/meteo/M_02] | `vence_wind_bearing` | `°` | Angle du vent (0-360°) |
-| `sensor.direction_du_vent_vence_label` [templates/meteo/M_02] | `vence_wind_direction_label` | — | Direction cardinale (Nord, Sud-Est…) |
+| `sensor.vence_wind_bearing` [templates/meteo/M_02] | `vence_wind_bearing` | `°` | Angle du vent (0-360°) |
+| `sensor.vence_wind_direction_label` [templates/meteo/M_02] | `vence_wind_direction_label` | — | Direction cardinale (Nord, Sud-Est…) |
 | `sensor.vitesse_du_vent_vence` [templates/meteo/M_02] | `vence_wind_speed_kmh` | `km/h` | Vitesse convertie depuis `weather.vence` [Météo France - UI] |
 
 ---
@@ -1008,11 +1008,11 @@ duree = 2 × acos(cos_h) × (180/π) / 15   [en heures]
 
 | Entité | Cycle | unique_id |
 |--------|-------|-----------|
-| `sensor.eclairs_horaire` [utility_meter/meteo/M_03] | hourly | — |
-| `sensor.eclairs_quotidien` [utility_meter/meteo/M_03] | daily | — |
-| `sensor.eclairs_hebdomadaire` [utility_meter/meteo/M_03] | weekly | — |
-| `sensor.eclairs_mensuel` [utility_meter/meteo/M_03] | monthly | — |
-| `sensor.eclairs_annuel` [utility_meter/meteo/M_03] | yearly | — |
+| `sensor.eclair_horaire` [utility_meter/meteo/M_03] | hourly | — |
+| `sensor.eclair_quotidien` [utility_meter/meteo/M_03] | daily | — |
+| `sensor.eclair_hebdomadaire` [utility_meter/meteo/M_03] | weekly | — |
+| `sensor.eclair_mensuel` [utility_meter/meteo/M_03] | monthly | — |
+| `sensor.eclair_annuel` [utility_meter/meteo/M_03] | yearly | — |
 
 ---
 
@@ -1081,7 +1081,7 @@ duree = 2 × acos(cos_h) × (180/π) / 15   [en heures]
 ### La windrose-card ne s'affiche pas
 1. Vérifier l'installation : HACS > Frontend > `windrose-card`
 2. Vider le cache navigateur (`Ctrl+Shift+R`)
-3. Vérifier que l'entité `sensor.direction_du_vent_vence` [templates/meteo/M_02] existe
+3. Vérifier que l'entité `sensor.vence_wind_bearing` [templates/meteo/M_02] existe
 
 ### Le baromètre affiche "N/A"
 1. Vérifier l'état de `sensor.vence_pressure` [Météo France - UI] dans Outils de développement > États

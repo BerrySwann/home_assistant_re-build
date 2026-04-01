@@ -182,7 +182,7 @@ Quand la condition est vraie, s'affiche un `heading` avec badge + `auto-entities
 
 #### Section 6 : Lumière
 
-| Sensor déclencheur | `sensor.total_poste_lumiere_puissance` *(ou équivalent)* |
+| Sensor déclencheur | `sensor.total_poste_eclairage_puissance` *(ou équivalent)* |
 | Badge icône | `mdi:lightbulb` — couleur yellow |
 | Appareils | Ampoules Hue actives + relais Sonoff SDB |
 
@@ -449,7 +449,7 @@ Chaque appareil utilise ce template streamline avec 5 variables :
 | `sensor.fer_repasser_avg_watts_quotidien` | Fer à Repasser |
 | `sensor.tete_lit_avg_watts_quotidien` | Tête de lit |
 | `sensor.tv_chambre_avg_watts_quotidien` | TV Chambre |
-| `sensor.veilles_avg_watts_quotidien` | Veilles |
+| `sensor.all_standby_avg_watts_quotidien` | Veilles |
 
 ---
 
