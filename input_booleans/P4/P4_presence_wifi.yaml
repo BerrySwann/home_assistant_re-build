@@ -1,6 +1,28 @@
 # ╭──────────────────────────────────────────────────────────────────╮
-# │ INPUT_BOOLEAN : PRÉSENCE & SYSTÈME                               │
+# │ INPUT_BOOLEAN : PÔLE 4 — PRÉSENCE & DÉTECTION Wi-Fi             │
 # ╰──────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Déclare les interrupteurs virtuels de présence du Pôle 4.
+# Chaque booléen reflète l'état de connexion Wi-Fi d'un occupant
+# (ON = connecté au réseau local = présent à la maison).
+#
+# ## 🧮 SOURCES :
+# - Écrits par les automations P4 (détection BSSID/SSID via device_tracker
+#   ou ping) déclarées dans templates/P4_groupe_presence/
+# - Fichiers sources :
+#   → 01_phones_wifi_cellular_card_autom.yaml
+#   → 02_logique_wifi_cellular.yaml
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ces booléens sont des flags logiques, pas des device_tracker natifs.
+# - Ne pas les forcer manuellement : ils sont gérés exclusivement
+#   par les automations de présence.
+# - En cas d'absence Wi-Fi temporaire (appel, couloir), prévoir un délai
+#   dans l'automation avant de basculer à OFF pour éviter les faux positifs.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L4C1 Freebox Pop : affichage statut connexion (via template P4)
 
 # ┌─────────────────────────────────────┐
 # │ PRÉSENCE                            │
@@ -19,7 +41,5 @@ mamour_at_home:
   icon: mdi:wifi
 
 # annotations_log:
-# - [L1-5] Ajout du Titre Principal ASCII arrondi conforme BerrySwann.
-# - [L7-37] Réorganisation par pièces (Salon > Bureau > Chambre) selon l'index officiel.
-# - [L39-43] Regroupement de la présence (Eric & Mamour) dans la section 10. AUTRE.
-# - [Global] Ajout systématique des unique_id et des titres tertiaires # --- slug ---.
+# - [L1-18] Ajout en-tête obligatoire (description, sources, pièges, vignettes).
+# - [L20-21] Correction annotations_log : suppression copié-collé P1 hors-sujet.

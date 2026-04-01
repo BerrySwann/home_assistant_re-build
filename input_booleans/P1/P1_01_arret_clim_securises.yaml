@@ -1,6 +1,27 @@
 # ╭──────────────────────────────────────────────────────────────────╮
 # │ INPUT_BOOLEAN : CLIMATISATION (ARRÊTS SÉCURISÉS)                 │
 # ╰──────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Déclare les interrupteurs virtuels du Pôle 1 (Chauffage & Clim).
+# Deux usages distincts :
+# - Flags de blocage temporaire des arrêts sécurisés (Salon, Bureau, Chambre)
+# - État logique du soufflant SdB piloté par le bouton IKEA RODRET (SDB)
+#
+# ## 🧮 SOURCES :
+# - Arrêts sécurisés : écrits par automations P1 (séquence d'arrêt clim)
+# - inter_soufflant_salle_de_bain : écrit par automation MQTT RODRET
+#   (id automations.yaml : 1766777192080)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ne pas confondre avec switch.inter_soufflant_salle_de_bain (template
+#   miroir déclaré dans input_booleans/P1/P1_switch_inter_soufflant_sdb.yaml).
+# - Les flags clim passent à ON en cours d'arrêt sécurisé et reviennent
+#   à OFF automatiquement — ne jamais les forcer manuellement.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C3 Commandes Clim : switch.inter_soufflant_salle_de_bain (via miroir)
+# - Arrêts sécurisés : usage interne automation uniquement (non affiché)
 
 # ┌─────────────────────────────────────┐
 # │ 4. SALON                            │
@@ -23,6 +44,16 @@ clim_bureau_arret_securise_en_cours:
   icon: mdi:lock-alert
 
 # ┌─────────────────────────────────────┐
+# │ 8. SDB                              │
+# └─────────────────────────────────────┘
+
+# --- inter_soufflant_salle_de_bain ---
+inter_soufflant_salle_de_bain:
+  name: "Inter Soufflant SdB (IKEA RODRET)"
+  initial: off
+  icon: mdi:fan
+
+# ┌─────────────────────────────────────┐
 # │ 9. CHAMBRE                          │
 # └─────────────────────────────────────┘
 
@@ -31,3 +62,8 @@ clim_chambre_arret_securise_en_cours:
   name: "Blocage CLIM Chambre (Arrêt Sécurisé)"
   initial: off
   icon: mdi:lock-alert
+
+# annotations_log:
+# - [L1-17] Ajout en-tête obligatoire (description, sources, pièges, vignettes).
+# - [L39-43] Ajout section 8. SDB : inter_soufflant_salle_de_bain (manquant,
+#            référencé automations.yaml id:1766777192080).
