@@ -17,28 +17,28 @@
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L1C1 Météo (section foudre/Blitzortung)
+- sensor:
+    - eclair_annuel:
+        name: "Éclairs Annuel"
+        source: sensor.blitzortung_lightning_counter
+        cycle: yearly
 
-eclair_annuel:
-    name: "Éclairs Annuel"
-    source: sensor.blitzortung_lightning_counter
-    cycle: yearly
+    - eclair_mensuel:
+        name: "Éclairs Mensuel"
+        source: sensor.blitzortung_lightning_counter
+        cycle: monthly
 
-eclair_mensuel:
-    name: "Éclairs Mensuel"
-    source: sensor.blitzortung_lightning_counter
-    cycle: monthly
+    - eclair_hebdomadaire:
+        name: "Éclairs Hebdomadaire"
+        source: sensor.blitzortung_lightning_counter
+        cycle: weekly
 
-eclair_hebdomadaire:
-    name: "Éclairs Hebdomadaire"
-    source: sensor.blitzortung_lightning_counter
-    cycle: weekly
+    - eclair_quotidien:
+        name: "Éclairs Quotidien"
+        source: sensor.blitzortung_lightning_counter
+        cycle: daily
 
-eclair_quotidien:
-    name: "Éclairs Quotidien"
-    source: sensor.blitzortung_lightning_counter
-    cycle: daily
-
-eclair_horaire:
-    name: "Éclairs Horaire"
-    source: sensor.blitzortung_lightning_counter
-    cycle: hourly
+    - eclair_horaire:
+        name: "Éclairs Horaire"
+        source: sensor.blitzortung_lightning_counter
+        cycle: hourly
