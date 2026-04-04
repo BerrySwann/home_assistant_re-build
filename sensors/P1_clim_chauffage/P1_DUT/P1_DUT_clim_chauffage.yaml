@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ P1. SENSORS — DURÉE D'UTILISATION TOTALE [DUT] CHAUFFAGE & CLIM         │
+# │ PÔLE 1. SENSORS — DURÉE D'UTILISATION TOTALE [DUT] CHAUFFAGE & CLIM     │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -22,7 +22,7 @@
 #   sensor.dut_clim_bureau, sensor.dut_sdb_soufflant,
 #   sensor.dut_sdb_seche_serviettes, sensor.dut_clim_chambre
 # - sensor.dut_sdb_total (somme soufflant + sèche-serv.) est un capteur template
-#   → à définir dans templates/P1_clim_chauffage/P1_TOTAL/P1_DUT_TOTAL.yaml
+#   → à définir dans templates/P1_clim_chauffage/P1_DUT_TOTAL/P1_DUT_TOTAL_SDB.yaml
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Sert à la vignette L2C2 (Conso Énergie Clim / Radiateur / Soufflant)
@@ -109,9 +109,9 @@
   end: "{{ now() }}"
 
 # annotations_log:
-# [L1] Source : ancien repo sensors/p1_1_sensors - dut.yaml — porté dans ReBuild
-# [L2] Convention : platform: history_stats — type time — reset minuit
-# [L3] Salon/Cuisine/Bureau/Chambre : entity_id = *_power_status, state = "on"
-# [L4] SdB : entity_id = *_etat (clim mode), state = "Heat" (sensible casse)
-# [L5] dut_sdb_total (somme) → templates/P1_clim_chauffage/P1_TOTAL/P1_DUT_TOTAL.yaml
-# [L6] Fichier absent du ReBuild GitHub → à pousser sur le dépôt
+# [L1]   Titre corrigé : "P1. SENSORS" → "PÔLE 1. SENSORS" (standard CLAUDE.md)
+# [L2]   Source : ancien repo sensors/p1_1_sensors - dut.yaml — porté dans ReBuild
+# [L3]   Convention : platform: history_stats — type time — reset minuit
+# [L4]   Salon/Cuisine/Bureau/Chambre : entity_id = *_power_status, state = "on"
+# [L5]   SdB : entity_id = *_etat (clim mode), state = "Heat" (sensible casse)
+# [L6]   dut_sdb_total (somme) → templates/P1_clim_chauffage/P1_DUT_TOTAL/P1_DUT_TOTAL_SDB.yaml
