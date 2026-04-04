@@ -1553,168 +1553,43 @@
       message: 'Le mode a changé pour: {{ states(''sensor.mode_ete_hiver_etat'') |
         upper }}'
   mode: single
-- id: '1775243789972'
-  alias: (I) (CLIM DEBUG) Force Mode Correct & Sécurité
-  description: 'WATCHDOG :   1. FORCE OFF si tentative d''allumage alors que Prise
-    OFF ou Arrêt Sécurisé en cours.  2. FORCE SAISON si une clim est allumée mais
-    dans le mauvais mode (ex: Cool au lieu de Heat).
-
-    '
-  triggers:
-  - trigger: state
-    entity_id:
-    - climate.clim_salon_rm4_mini
-    - climate.clim_bureau_rm4_mini
-    - climate.clim_chambre_rm4_mini
-    to:
-  - trigger: state
-    entity_id: sensor.mode_ete_hiver
-    to:
-  conditions: []
-  actions:
-  - delay: 00:00:02
-  - alias: CALCUL DES LISTES D'ERREURS
-    variables:
-      mode_saison: '{{ states(''sensor.mode_ete_hiver'') }}'
-      force_off_list: "{% set liste = [] %} {# SALON #} {% if states('climate.clim_salon_rm4_mini')
-        != 'off' \n      and (is_state('switch.clim_salon_nous', 'off') or is_state('input_boolean.clim_salon_arret_securise_en_cours',
-        'on')) %}\n  {% set liste = liste + ['climate.clim_salon_rm4_mini'] %}\n{%
-        endif %} {# BUREAU #} {% if states('climate.clim_bureau_rm4_mini') != 'off'
-        \n      and (is_state('switch.clim_bureau_nous', 'off') or is_state('input_boolean.clim_bureau_arret_securise_en_cours',
-        'on')) %}\n  {% set liste = liste + ['climate.clim_bureau_rm4_mini'] %}\n{%
-        endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_rm4_mini') != 'off'
-        \n      and (is_state('switch.clim_chambre_nous', 'off') or is_state('input_boolean.clim_chambre_arret_securise_en_cours',
-        'on')) %}\n  {% set liste = liste + ['climate.clim_chambre_rm4_mini'] %}\n{%
-        endif %} {{ liste }}\n"
-      force_mode_list: "{% set liste = [] %} {# SALON #} {% if states('climate.clim_salon_rm4_mini')
-        not in ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_salon_nous',
-        'on') \n      and is_state('input_boolean.clim_salon_arret_securise_en_cours',
-        'off') %}\n  {% set liste = liste + ['climate.clim_salon_rm4_mini'] %}\n{%
-        endif %} {# BUREAU #} {% if states('climate.clim_bureau_rm4_mini') not in
-        ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_bureau_nous',
-        'on') \n      and is_state('input_boolean.clim_bureau_arret_securise_en_cours',
-        'off') %}\n  {% set liste = liste + ['climate.clim_bureau_rm4_mini'] %}\n{%
-        endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_rm4_mini') not in
-        ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_chambre_nous',
-        'on') \n      and is_state('input_boolean.clim_chambre_arret_securise_en_cours',
-        'off') %}\n  {% set liste = liste + ['climate.clim_chambre_rm4_mini'] %}\n{%
-        endif %} {{ liste }}\n"
-  - if:
-    - condition: template
-      value_template: '{{ force_off_list | length > 0 }}'
-    then:
-    - alias: 'NOTIF : INTERDICTION DÉMARRAGE'
-      action: notify.mobile_app_eric
-      data:
-        title: ⛔ SÉCURITÉ CLIM
-        message: "Tentative de démarrage interdite (Prise coupée ou Arrêt en cours).
-          Retour forcé à OFF pour : {% for c in force_off_list %}\n  - {{ state_attr(c,
-          'friendly_name') }}\n{% endfor %}\n"
-    - alias: 'ACTION : FORCER OFF'
-      action: climate.set_hvac_mode
-      target:
-        entity_id: '{{ force_off_list }}'
-      data:
-        hvac_mode: 'off'
-  - if:
-    - condition: template
-      value_template: '{{ force_mode_list | length > 0 }}'
-    then:
-    - alias: 'NOTIF : CORRECTION MODE'
-      action: notify.mobile_app_eric
-      data:
-        title: "\U0001F527 CORRECTION MODE"
-        message: "Mauvais mode détecté. Correction vers {{ mode_saison | upper }}
-          pour : {% for c in force_mode_list %}\n  - {{ state_attr(c, 'friendly_name')
-          }}\n{% endfor %}\n"
-    - alias: 'ACTION : FORCER MODE SAISON'
-      action: climate.set_hvac_mode
-      target:
-        entity_id: '{{ force_mode_list }}'
-      data:
-        hvac_mode: '{{ mode_saison }}'
-  mode: single
 - id: '1775243818145'
-  alias: (I) (CLIM DEBUG) Force Mode Correct & Sécurité
-  description: 'WATCHDOG :   1. FORCE OFF si tentative d''allumage alors que Prise
-    OFF ou Arrêt Sécurisé en cours.  2. FORCE SAISON si une clim est allumée mais
-    dans le mauvais mode (ex: Cool au lieu de Heat).
+  alias: (J) Synchro & Notif Clim si Prise Coupée
+  description: 'Met à jour l''état du thermostat et notifie proprement si la prise
+    est coupée.
 
     '
   triggers:
   - trigger: state
     entity_id:
-    - climate.clim_salon_rm4_mini
-    - climate.clim_bureau_rm4_mini
-    - climate.clim_chambre_rm4_mini
-    to:
-  - trigger: state
-    entity_id: sensor.mode_ete_hiver
-    to:
-  conditions: []
+    - switch.clim_salon_nous
+    - switch.clim_bureau_nous
+    - switch.clim_chambre_nous
+    from: 'on'
+    to: 'off'
   actions:
-  - delay: 00:00:02
-  - alias: CALCUL DES LISTES D'ERREURS
-    variables:
-      mode_saison: '{{ states(''sensor.mode_ete_hiver'') }}'
-      force_off_list: "{% set liste = [] %} {# SALON #} {% if states('climate.clim_salon_rm4_mini')
-        != 'off' \n      and (is_state('switch.clim_salon_nous', 'off') or is_state('input_boolean.clim_salon_arret_securise_en_cours',
-        'on')) %}\n  {% set liste = liste + ['climate.clim_salon_rm4_mini'] %}\n{%
-        endif %} {# BUREAU #} {% if states('climate.clim_bureau_rm4_mini') != 'off'
-        \n      and (is_state('switch.clim_bureau_nous', 'off') or is_state('input_boolean.clim_bureau_arret_securise_en_cours',
-        'on')) %}\n  {% set liste = liste + ['climate.clim_bureau_rm4_mini'] %}\n{%
-        endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_rm4_mini') != 'off'
-        \n      and (is_state('switch.clim_chambre_nous', 'off') or is_state('input_boolean.clim_chambre_arret_securise_en_cours',
-        'on')) %}\n  {% set liste = liste + ['climate.clim_chambre_rm4_mini'] %}\n{%
-        endif %} {{ liste }}\n"
-      force_mode_list: "{% set liste = [] %} {# SALON #} {% if states('climate.clim_salon_rm4_mini')
-        not in ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_salon_nous',
-        'on') \n      and is_state('input_boolean.clim_salon_arret_securise_en_cours',
-        'off') %}\n  {% set liste = liste + ['climate.clim_salon_rm4_mini'] %}\n{%
-        endif %} {# BUREAU #} {% if states('climate.clim_bureau_rm4_mini') not in
-        ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_bureau_nous',
-        'on') \n      and is_state('input_boolean.clim_bureau_arret_securise_en_cours',
-        'off') %}\n  {% set liste = liste + ['climate.clim_bureau_rm4_mini'] %}\n{%
-        endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_rm4_mini') not in
-        ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_chambre_nous',
-        'on') \n      and is_state('input_boolean.clim_chambre_arret_securise_en_cours',
-        'off') %}\n  {% set liste = liste + ['climate.clim_chambre_rm4_mini'] %}\n{%
-        endif %} {{ liste }}\n"
+  - action: climate.set_hvac_mode
+    data:
+      hvac_mode: 'off'
+    target:
+      entity_id: "{% if trigger.entity_id == 'switch.clim_salon_nous' %}\n  climate.clim_salon_rm4_mini\n{%
+        elif trigger.entity_id == 'switch.clim_bureau_nous' %}\n  climate.clim_bureau_rm4_mini\n{%
+        elif trigger.entity_id == 'switch.clim_chambre_nous' %}\n  climate.clim_chambre_rm4_mini\n{%
+        endif %}\n"
   - if:
-    - condition: template
-      value_template: '{{ force_off_list | length > 0 }}'
+    - condition: time
+      after: 07:30:00
+      before: '21:00:00'
     then:
-    - alias: 'NOTIF : INTERDICTION DÉMARRAGE'
-      action: notify.mobile_app_eric
+    - action: notify.mobile_app_poco_x7_pro_eric
       data:
-        title: ⛔ SÉCURITÉ CLIM
-        message: "Tentative de démarrage interdite (Prise coupée ou Arrêt en cours).
-          Retour forcé à OFF pour : {% for c in force_off_list %}\n  - {{ state_attr(c,
-          'friendly_name') }}\n{% endfor %}\n"
-    - alias: 'ACTION : FORCER OFF'
-      action: climate.set_hvac_mode
-      target:
-        entity_id: '{{ force_off_list }}'
-      data:
-        hvac_mode: 'off'
-  - if:
-    - condition: template
-      value_template: '{{ force_mode_list | length > 0 }}'
-    then:
-    - alias: 'NOTIF : CORRECTION MODE'
-      action: notify.mobile_app_eric
-      data:
-        title: "\U0001F527 CORRECTION MODE"
-        message: "Mauvais mode détecté. Correction vers {{ mode_saison | upper }}
-          pour : {% for c in force_mode_list %}\n  - {{ state_attr(c, 'friendly_name')
-          }}\n{% endfor %}\n"
-    - alias: 'ACTION : FORCER MODE SAISON'
-      action: climate.set_hvac_mode
-      target:
-        entity_id: '{{ force_mode_list }}'
-      data:
-        hvac_mode: '{{ mode_saison }}'
-  mode: single
+        title: CLIM COUPÉE
+        message: "{% set piece = 'inconnue' %}  {% if 'salon' in trigger.entity_id
+          %}\n  {% set piece = 'du Salon' %}\n{% elif 'bureau' in trigger.entity_id
+          %}\n  {% set piece = 'du Bureau' %}\n{% elif 'chambre' in trigger.entity_id
+          %}\n  {% set piece = 'de la Chambre' %}\n{% endif %}  La prise extérieure
+          {{ piece }} vient d'être éteinte.\n"
+  mode: parallel
 - id: '1775243914127'
   alias: (K) (DEBUG) Notifier les changements de message clim (Mobile)
   description: Surveille et notifie les changements d'état du message personnalisé.
@@ -2265,3 +2140,307 @@
             icon: mdi:eye-outline
             tag: notif_pc_bureau
   mode: parallel
+- id: '1775330762844'
+  alias: 'Gestion TV Chambre : Scène de Fin + Notif'
+  description: 'Éteint les lumières et notifie, mais laisse la prise ON pour le suivi
+    conso  lorsqu''une veille est détectée.
+
+    '
+  triggers:
+  - id: bouton_mqtt
+    trigger: mqtt
+    options:
+      topic: zigbee2mqtt/Inter TV Chambre (IKEA RODRET)
+  - id: allumage_auto
+    trigger: time
+    at: '21:00:00'
+    enabled: false
+  - id: extinction_conso
+    trigger: numeric_state
+    entity_id: sensor.prise_tv_chambre_nous_power
+    below: 20
+    for:
+      minutes: 2
+  actions:
+  - choose:
+    - alias: 'ALLUMAGE : Bouton ON ou 21h00'
+      conditions:
+      - or:
+        - condition: template
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
+            == ''on'' }}'
+        - condition: trigger
+          id: allumage_auto
+      sequence:
+      - action: light.turn_on
+        target:
+          entity_id: light.hue_smart_tv_chambre
+      - action: switch.turn_on
+        target:
+          entity_id: switch.prise_tv_chambre_nous
+    - alias: 'EXTINCTION AMBIANCE : Bouton OFF ou Veille (< 20W)'
+      conditions:
+      - or:
+        - condition: template
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
+            == ''off'' }}'
+        - condition: trigger
+          id: extinction_conso
+      sequence:
+      - action: light.turn_off
+        target:
+          entity_id: light.hue_smart_tv_chambre
+      - action: notify.mobile_app_eric
+        data:
+          title: Veille détectée
+          message: Prise TV [OFF]
+          data:
+            icon: mdi:eye-outline
+            tag: notif_tv_chambre
+  mode: parallel
+- id: '1775331166275'
+  alias: 'D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR'
+  description: Reset physique si T > 25°C, uniquement si la prise est alimentée
+  triggers:
+  - alias: 'TRIGGER : CHANGEMENT TEMPÉRATURE SDB'
+    trigger: state
+    entity_id: sensor.th_salle_de_bain_temperature
+  conditions:
+  - alias: 'CONDITION : VÉRIFICATION ALIMENTATION PRISE'
+    condition: state
+    entity_id: switch.prise_soufflant_salle_de_bain_nous
+    state: 'on'
+  - alias: 'CONDITION : VÉRIFICATION ÉTAT INTERNE'
+    condition: state
+    entity_id: input_boolean.inter_soufflant_salle_de_bain
+    state: 'on'
+  - alias: 'CONDITION : TEMPÉRATURE > 25°C'
+    condition: numeric_state
+    entity_id: sensor.th_salle_de_bain_temperature
+    above: 25
+  - alias: 'CONDITION : DÉRIVE THERMIQUE RAPIDE (+0.5°C)'
+    condition: template
+    value_template: "{{ (states('sensor.th_salle_de_bain_temperature') | float) >=
+      \n   (trigger.from_state.state | float + 0.5) }}\n"
+  actions:
+  - alias: 'ACTION : ATTENTE STABILISATION (1 MIN)'
+    delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  - alias: 'ACTION : ENVOI COMMANDE IR RESET'
+    action: remote.send_command
+    target:
+      entity_id: remote.soufflant_sdb_rm4_mini
+    data:
+      command: on_off
+      device: radiateur_sdb
+      num_repeats: 1
+  - alias: 'ETAT : PASSAGE DU BOOLEAN SUR OFF (SÉCURITÉ)'
+    action: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.inter_soufflant_salle_de_bain
+  - alias: 'ACTION : ATTENTE AVANT COUPURE (1 MIN) SÉCURITÉ'
+    delay: 00:01:00
+  - alias: 'MATÉRIEL : COUPURE PHYSIQUE DE LA PRISE'
+    action: switch.turn_off
+    target:
+      entity_id: switch.prise_soufflant_salle_de_bain_nous
+  - alias: 'NOTIFIER : ALERTE MOBILE DÉRIVE THERMIQUE'
+    action: notify.mobile_app_poco_x7_pro_eric
+    data:
+      title: ⚠️ Watchdog SDB
+      message: Dérive thermique détectée à {{ states('sensor.th_salle_de_bain_temperature')
+        }}°C. Reset IR lancé.
+  mode: single
+- id: '1775331417577'
+  alias: P3_Allumage Lumière Entrée
+  description: 'Gestion de l''éclairage de l''entrée basée sur les transitions des
+    groupes  de présence et la période de la journée.
+
+    '
+  triggers:
+  - alias: SURVEILLANCE DU CHANGEMENT DE GROUPE DE PRÉSENCE
+    trigger: state
+    entity_id: sensor.groupe_clim
+  actions:
+  - alias: CHOIX DE LA LOGIQUE SELON LA TRANSITION DÉTECTÉE
+    choose:
+    - alias: 'CAS 1 : ARRIVÉE INITIALE EN PÉRIODE DIURNE (G1 -> PRÉSENCE)'
+      conditions:
+      - alias: 'VÉRIFICATION : PASSAGE DE ABSENT À PRÉSENT'
+        condition: template
+        value_template: "{{ trigger.from_state.state == 'groupe_1' and \n   trigger.to_state.state
+          in ['groupe_2', 'groupe_3', 'groupe_4'] }}"
+      - alias: 'VÉRIFICATION : PÉRIODE DIURNE (SOLEIL LEVÉ)'
+        condition: state
+        entity_id: sun.sun
+        state: above_horizon
+      sequence:
+      - alias: 'ACTION : ALLUMAGE DE LA LUMIÈRE ENTRÉE'
+        action: light.turn_on
+        target:
+          entity_id: light.entree
+    - alias: 'CAS 2 : RETOUR DE MAMOUR (TRANSITION G3 VERS G4)'
+      conditions:
+      - alias: 'VÉRIFICATION : PASSAGE DE ERIC SEUL À DUO'
+        condition: template
+        value_template: "{{ trigger.from_state.state == 'groupe_3' and \n   trigger.to_state.state
+          == 'groupe_4' }}"
+      sequence:
+      - alias: 'ACTION : ALLUMAGE DE LA LUMIÈRE ENTRÉE'
+        action: light.turn_on
+        target:
+          entity_id: light.entree
+  mode: queued
+- id: '1775331454560'
+  alias: P3_BUREAU - BOUTON RODRET TOGGLE BLANCHES
+  description: Alterne l'allumage des 2 lampes blanches via MQTT (Mode Fainéant)
+  triggers:
+  - alias: RÉCEPTION MESSAGE MQTT BOUTON RODRET
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter Bureau (RODRET)
+  actions:
+  - alias: DÉCISION SELON LE PAYLOAD MQTT (ON OU OFF)
+    choose:
+    - alias: BOUTON ON OU OFF PRESSÉ -> LOGIQUE TOGGLE
+      conditions:
+      - alias: VÉRIFICATION ACTION DANS LE JSON
+        condition: template
+        value_template: '{{ trigger.payload_json.action in [''on'', ''off''] }}'
+      sequence:
+      - alias: LOGIQUE DE BASCULEMENT (TOGGLE)
+        choose:
+        - alias: SI LUMIÈRE PRÉSENTE -> EXTINCTION
+          conditions:
+          - alias: VÉRIFICATION SI UNE LAMPE EST ON
+            condition: or
+            conditions:
+            - condition: state
+              entity_id: light.hue_white_lamp_bureau_1
+              state: 'on'
+            - condition: state
+              entity_id: light.hue_white_lamp_bureau_2
+              state: 'on'
+          sequence:
+          - alias: EXTINCTION DES 2 LAMPES BLANCHES
+            action: light.turn_off
+            target:
+              entity_id:
+              - light.hue_white_lamp_bureau_1
+              - light.hue_white_lamp_bureau_2
+        - alias: SI TOUT EST NOIR -> ALLUMAGE
+          conditions:
+          - alias: VÉRIFICATION SI TOUT EST OFF
+            condition: state
+            entity_id: light.hue_white_lamp_bureau_1
+            state: 'off'
+          - condition: state
+            entity_id: light.hue_white_lamp_bureau_2
+            state: 'off'
+          sequence:
+          - alias: ALLUMAGE DES 2 LAMPES BLANCHES
+            action: light.turn_on
+            target:
+              entity_id:
+              - light.hue_white_lamp_bureau_1
+              - light.hue_white_lamp_bureau_2
+  - alias: FORÇAGE MISE À JOUR DU SENSOR D'ÉTAT
+    action: homeassistant.update_entity
+    target:
+      entity_id: sensor.bureau_etat
+  mode: restart
+- id: '1775331482668'
+  alias: BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES
+  description: Assure que les deux lampes de bureau (1 et 2) sont synchronisées si
+    l'une s'allume
+  triggers:
+  - alias: DÉTECTION ALLUMAGE LAMPE BUREAU 1
+    trigger: state
+    entity_id: light.hue_white_lamp_bureau_1
+    to: 'on'
+    for: 00:00:05
+  - alias: DÉTECTION ALLUMAGE LAMPE BUREAU 2
+    trigger: state
+    entity_id: light.hue_white_lamp_bureau_2
+    to: 'on'
+    for: 00:00:05
+  conditions:
+  - alias: VÉRIFICATION SI UNE DES DEUX LAMPES RESTE ÉTEINTE
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: light.hue_white_lamp_bureau_1
+      state: 'off'
+    - condition: state
+      entity_id: light.hue_white_lamp_bureau_2
+      state: 'off'
+  actions:
+  - alias: FORÇAGE ALLUMAGE DES DEUX LAMPES
+    action: light.turn_on
+    target:
+      entity_id:
+      - light.hue_white_lamp_bureau_1
+      - light.hue_white_lamp_bureau_2
+  - alias: MISE À JOUR FORCÉE DE L'ÉTAT DU BUREAU
+    action: homeassistant.update_entity
+    target:
+      entity_id: sensor.bureau_etat
+  mode: restart
+- id: '1775331547996'
+  alias: Bureau - Forcer Play ON si PC tourne
+  description: Rallume les Hue Play si elles sont éteintes manuellement alors que
+    la synchro PC est active
+  triggers:
+  - entity_id:
+    - light.hue_play_1_pc_bureau
+    - light.hue_play_2_pc_bureau
+    - light.hue_play_3_pc_bureau
+    to: 'off'
+    trigger: state
+  conditions:
+  - condition: state
+    entity_id: binary_sensor.moniteur_pc
+    state: 'on'
+  actions:
+  - target:
+      entity_id: '{{ trigger.entity_id }}'
+    action: light.turn_on
+  mode: parallel
+- id: '1775331623943'
+  alias: BUREAU_ACTIVATION_ECRAN_SYNCHRO
+  description: Synchronise l'état de l'écran avec l'activité du PC bureau.
+  triggers:
+  - alias: 'DÉCLENCHEMENT : PC BUREAU ALLUMÉ'
+    trigger: state
+    entity_id: binary_sensor.bureau_pc_status
+    to: 'on'
+    id: pc_on
+  - alias: 'DÉCLENCHEMENT : PC BUREAU ÉTEINT'
+    trigger: state
+    entity_id: binary_sensor.bureau_pc_status
+    to: 'off'
+    for: 00:02:00
+    id: pc_off
+  conditions: []
+  actions:
+  - alias: 'ACTION : SYNCHRONISATION ALIMENTATION ÉCRAN'
+    choose:
+    - alias: 'CAS : PC ON -> ALLUMER ÉCRAN'
+      conditions:
+      - condition: trigger
+        id: pc_on
+      sequence:
+      - action: switch.turn_on
+        target:
+          entity_id: switch.ecran_p_c_3_play_hue
+    - alias: 'CAS : PC OFF -> ÉTEINDRE ÉCRAN'
+      conditions:
+      - condition: trigger
+        id: pc_off
+      sequence:
+      - action: switch.turn_off
+        target:
+          entity_id: switch.ecran_p_c_3_play_hue
+  mode: restart
