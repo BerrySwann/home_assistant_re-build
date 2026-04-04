@@ -1,6 +1,6 @@
-# ╭────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 4. TEMPLATE : TÉLÉPHONES — ÉTAT WI-FI & SYNTHÈSE PRÉSENCE        │
-# ╰────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │PÔLE 4. TEMPLATE : TÉLÉPHONES — ÉTAT WI-FI & SYNTHÈSE PRÉSENCE           │
+# ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
 # Sensors template détectant l'état de connexion Wi-Fi individuel des deux
@@ -9,16 +9,16 @@
 # l'affichage sur le dashboard Wi-Fi/Présence.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - sensor.poco_x7_pro_mamour_network_type → 'wifi' ou autre
-# - sensor.poco_x7_pro_mamour_wi_fi_connection → SSID 'Module B.E.R.Y.L.'
-# - sensor.poco_x7_pro_network_type → 'wifi' ou autre
-# - sensor.poco_x7_pro_wi_fi_connection → SSID 'Module B.E.R.Y.L.'
+# - sensor.mamour_network_type → 'wifi' ou autre
+# - sensor.mamour_wi_fi_connection → SSID 'Module B.E.R.Y.L.'
+# - sensor.eric_network_type → 'wifi' ou autre
+# - sensor.eric_wi_fi_connection → SSID 'Module B.E.R.Y.L.'
 # - Résultat : true / wifi_!? / false par téléphone
 # - etat_wifi_maison : 0 / "Mamour" / "Eric" / 2 + attribut couleur
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Les SSIDs B.E.R.Y.L. sont codés en dur — à mettre à jour si changement
-#   de module ou de nom réseau.
+# - Le SSID 'Freebox_GG' est codé en dur — à mettre à jour si changement
+#   de box ou de nom réseau.
 # - wifi_!? signifie connecté en Wi-Fi mais PAS sur le bon réseau (voisin).
 # - Dépend de l'intégration Companion App (HA) sur chaque téléphone.
 #   Sans l'app active en background, les sensors peuvent être 'unavailable'.
@@ -28,14 +28,14 @@
 
 - sensor:
     # ┌───────────────────────────────────┐
-    # │ 10. AUTRE                         │
+    # │ WiFi                              │
     # └───────────────────────────────────┘
     # --- condition_mamour_wifi ---
     - name: "Condition Mamour Wifi"
       unique_id: condition_mamour_wifi
       state: >-
-        {% if is_state('sensor.poco_x7_pro_mamour_network_type', 'wifi') %}
-          {% if states('sensor.poco_x7_pro_mamour_wi_fi_connection') in ['Module B.E.R.Y.L. [GG-5.0]', 'Module B.E.R.Y.L. [GG-2.4]'] %}
+        {% if is_state('sensor.mamour_network_type', 'wifi') %}
+          {% if states('sensor.mamour_wi_fi_connection') in ['Module B.E.R.Y.L. [GG-5.0]', 'Module B.E.R.Y.L. [GG-2.4]'] %}
             true
           {% else %}
             wifi_!?
@@ -48,8 +48,8 @@
     - name: "Condition Eric Wifi"
       unique_id: condition_eric_wifi
       state: >-
-        {% if is_state('sensor.poco_x7_pro_network_type', 'wifi') %}
-          {% if states('sensor.poco_x7_pro_wi_fi_connection') in ['Module B.E.R.Y.L. [GG-5.0]', 'Module B.E.R.Y.L. [GG-2.4]'] %}
+        {% if is_state('sensor.eric_network_type', 'wifi') %}
+          {% if states('sensor.eric_wi_fi_connection') in ['Module B.E.R.Y.L. [GG-5.0]', 'Module B.E.R.Y.L. [GG-2.4]'] %}
             true
           {% else %}
             wifi_!?

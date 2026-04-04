@@ -114,6 +114,10 @@ input_select: !include input_select.yaml
 #renvoi au fichier input_booleans.yaml
 input_boolean: !include_dir_merge_named input_booleans/
 
+# --- input_booleans ---
+#renvoi au fichier input_number.yaml
+input_number: !include_dir_merge_named input_number/
+
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ BASE DE DONNEE MARIADB                                                   │
 # ╰──────────────────────────────────────────────────────────────────────────╯
