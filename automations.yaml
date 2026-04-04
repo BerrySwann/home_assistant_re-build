@@ -98,7 +98,7 @@
     data:
       level: info
       message: '[Backup] Weekly exécuté'
-  - action: notify.mobile_app_poco_x7_pro_eric
+  - action: notify.mobile_app_eric
     data:
       title: BACKUP WEEKLY
       message: Backup hebdo + tag -> GitHub OK. Semaine {{ now().strftime('%G-W%V')
@@ -148,7 +148,7 @@
       message: 'Echec ou pas de commit depuis 15 min. Verif : /config/.logs/ha_git_backup.log
 
         '
-  - action: notify.mobile_app_poco_x7_pro_eric
+  - action: notify.mobile_app_eric
     data:
       title: BACKUP KO
       message: 'Git push KO depuis 15 min. Verif log backup.
@@ -224,7 +224,7 @@
               title: Oui, couper
             - action: KEEP_VSC
               title: Non, ignorer
-        action: notify.mobile_app_poco_x7_pro_eric
+        action: notify.mobile_app_eric
     - conditions:
       - condition: trigger
         id: inactive
@@ -238,7 +238,7 @@
               title: Oui, couper
             - action: KEEP_VSC
               title: Non, ignorer
-        action: notify.mobile_app_poco_x7_pro_eric
+        action: notify.mobile_app_eric
   - wait_for_trigger:
     - event_type: mobile_app_notification_action
       event_data:
@@ -263,7 +263,7 @@
       - data:
           title: VSC ARRETE
           message: Arret auto VSC OK. (Economie energie).
-        action: notify.mobile_app_poco_x7_pro_eric
+        action: notify.mobile_app_eric
     - alias: 'ACTION : KEEP'
       conditions:
       - condition: template
@@ -472,7 +472,7 @@
       value_template: '{{ force_off_list | length > 0 }}'
     then:
     - alias: 'NOTIF : INTERDICTION DÉMARRAGE'
-      action: notify.mobile_app_poco_x7_pro_eric
+      action: notify.mobile_app_eric
       data:
         title: SÉCURITÉ CLIM
         message: "Tentative de démarrage interdite (Prise coupée ou Arrêt en cours).
@@ -489,7 +489,7 @@
       value_template: '{{ force_mode_list | length > 0 }}'
     then:
     - alias: 'NOTIF : CORRECTION MODE'
-      action: notify.mobile_app_poco_x7_pro_eric
+      action: notify.mobile_app_eric
       data:
         title: "\U0001F527 CORRECTION MODE"
         message: "Mauvais mode détecté. Correction vers {{ mode_saison | upper }}
@@ -710,7 +710,7 @@
     target:
       entity_id: switch.prise_seche_serviette_salle_de_bain_nous
   - alias: 'NOTIF : ARRÊT AUTO'
-    action: notify.mobile_app_poco_x7_pro_eric
+    action: notify.mobile_app_eric
     data:
       title: Sèche-Serv. OFF
       message: 1h écoulée. Arrêt automatique.
@@ -736,8 +736,8 @@
   - alias: 'RÉSEAU : CHANGEMENT WIFI <-> CELLULAR'
     trigger: state
     entity_id:
-    - sensor.poco_x7_pro_mamour_network_type
-    - sensor.poco_x7_pro_eric_network_type
+    - sensor.mamour_network_type
+    - sensor.eric_network_type
     id: force_run
   - alias: 'PRISES : CHANGEMENT ÉTAT ON/OFF'
     trigger: state
@@ -813,7 +813,7 @@
         value_template: "{{ \n  states('sensor.mode_ete_hiver') in ['unknown', 'unavailable']\n
           \ or\n  states('sensor.groupe') in ['unknown', 'unavailable']\n}}\n"
       - alias: 'NOTIF : ALERTE ATTENTE CAPTEURS'
-        action: notify.mobile_app_poco_x7_pro_eric
+        action: notify.mobile_app_eric
         data:
           title: '[AJ] ATTENTE CAPTEURS'
           message: Essai n°{{ repeat.index }}... Les capteurs de jour ne sont pas
@@ -867,7 +867,7 @@
         data:
           hvac_mode: 'off'
       - alias: 'NOTIF : ALERTE CIBLÉE SUR DÉCLENCHEUR'
-        action: notify.mobile_app_poco_x7_pro_eric
+        action: notify.mobile_app_eric
         data:
           title: '[AJ] CLIM JOUR COUPÉE'
           message: "{% if trigger.entity_id == 'binary_sensor.contact_fenetre_salon_sonoff_contact'
@@ -949,7 +949,7 @@
     - alias: 'PAUSE : SÉCURITÉ RÉCEPTION'
       delay: 00:00:02
     - alias: 'NOTIF : RÉSUMÉ DE L''ÉTAT DES CLIMATISATIONS'
-      action: notify.mobile_app_poco_x7_pro_eric
+      action: notify.mobile_app_eric
       data:
         title: '[AJ] {{ states(''sensor.presence'') }}'
         message: "{%- if 'groupe_1' in groupe_presence and mode_saison == 'heat' %}\n
@@ -972,8 +972,8 @@
   - alias: 'RÉSEAU : CHANGEMENT WIFI <-> CELLULAR'
     trigger: state
     entity_id:
-    - sensor.poco_x7_pro_mamour_network_type
-    - sensor.poco_x7_pro_eric_network_type
+    - sensor.mamour_network_type
+    - sensor.eric_network_type
     id: force_run
   - alias: 'PRISES : CHANGEMENT ÉTAT ON/OFF'
     trigger: state
@@ -1049,7 +1049,7 @@
         value_template: "{{ \n  states('sensor.mode_ete_hiver') in ['unknown', 'unavailable']\n
           \ or\n  states('sensor.groupe') in ['unknown', 'unavailable']\n}}\n"
       - alias: 'NOTIF : ALERTE ATTENTE CAPTEURS'
-        action: notify.mobile_app_poco_x7_pro_eric
+        action: notify.mobile_app_eric
         data:
           title: '[AN] ATTENTE CAPTEURS'
           message: Essai n°{{ repeat.index }}... Les capteurs de nuit ne sont pas
@@ -1095,7 +1095,7 @@
         data:
           hvac_mode: 'off'
       - alias: 'NOTIF : ALERTE CIBLÉE SUR DÉCLENCHEUR'
-        action: notify.mobile_app_poco_x7_pro_eric
+        action: notify.mobile_app_eric
         data:
           title: '[AN] CLIM NUIT COUPÉE'
           message: "{% if trigger.entity_id == 'binary_sensor.contact_fenetre_salon_sonoff_contact'
@@ -1177,7 +1177,7 @@
     - alias: 'PAUSE : SÉCURITÉ RÉCEPTION'
       delay: 00:00:02
     - alias: 'NOTIF : RÉSUMÉ ÉTAT NUIT'
-      action: notify.mobile_app_poco_x7_pro_eric
+      action: notify.mobile_app_eric
       data:
         title: '[AN] {{ states(''sensor.presence'') }}'
         message: "{%- if 'groupe_1' in groupe_presence and mode_saison == 'heat' %}\n
@@ -1228,7 +1228,7 @@
   - action: homeassistant.update_entity
     target:
       entity_id: sensor.blitzortung_lightning_localisation
-  - action: notify.mobile_app_poco_x7_pro_eric
+  - action: notify.mobile_app_eric
     data:
       title: /!\ Attention foudre /!\
       message: "{% set distance = states('sensor.blitzortung_lightning_distance')
@@ -1386,7 +1386,7 @@
         entity_id: climate.clim_chambre_rm4_mini
       data:
         hvac_mode: 'off'
-  - action: notify.mobile_app_poco_x7_pro_eric
+  - action: notify.mobile_app_eric
     data:
       title: Delta T° < -1°C
       message: 'Les clim ont été éteintes. ({{ states(''sensor.temperature_delta_valeur'')
@@ -1415,18 +1415,18 @@
   - if:
     - condition: template
       value_template: "{{ states('sensor.message_clim_personnalise_7h30_21h00') in
-        ['unknown', 'unavailable'] or\n   states('sensor.poco_x7_pro_mamour_wi_fi_connection')
-        in ['unknown', 'unavailable'] or\n   states('sensor.poco_x7_pro_wi_fi_connection')
+        ['unknown', 'unavailable'] or\n   states('sensor.mamour_wi_fi_connection')
+        in ['unknown', 'unavailable'] or\n   states('sensor.eric_wi_fi_connection')
         in ['unknown', 'unavailable'] or\n   states('sensor.th_balcon_nord_temperature')
         in ['unknown', 'unavailable'] }}\n"
     then:
-    - action: notify.mobile_app_poco_x7_pro_eric
+    - action: notify.mobile_app_eric
       data:
         title: '[ANJ] Erreur Capteurs'
         message: Un capteur (Température, Wifi ou Message) est indisponible. Vérifiez
           les entités.
     else:
-    - action: notify.mobile_app_poco_x7_pro_eric
+    - action: notify.mobile_app_eric
       data:
         title: '[Automa. Notif. Jrs]'
         message: '{{ states(''sensor.message_clim_personnalise_7h30_21h00'') }}'
@@ -1451,17 +1451,17 @@
   - if:
     - condition: template
       value_template: "{{ states('sensor.message_clim_personnalise_21h00_7h30') in
-        ['unknown', 'unavailable'] or\n   states('sensor.poco_x7_pro_mamour_wi_fi_connection')
-        in ['unknown', 'unavailable'] or\n   states('sensor.poco_x7_pro_wi_fi_connection')
+        ['unknown', 'unavailable'] or\n   states('sensor.mamour_wi_fi_connection')
+        in ['unknown', 'unavailable'] or\n   states('sensor.eric_wi_fi_connection')
         in ['unknown', 'unavailable'] or\n   states('sensor.th_balcon_nord_temperature')
         in ['unknown', 'unavailable'] }}\n"
     then:
-    - action: notify.mobile_app_poco_x7_pro_eric
+    - action: notify.mobile_app_eric
       data:
         title: '[ANN] Erreur Capteurs'
         message: 'Erreur : Un capteur TENDANCE est indisponible ! Vérifiez les dépendances.'
     else:
-    - action: notify.mobile_app_poco_x7_pro_eric
+    - action: notify.mobile_app_eric
       data:
         title: '[Automa. Notif. Nuit]'
         message: '{{ states(''sensor.message_clim_personnalise_21h00_7h30'') }}'
@@ -1480,7 +1480,7 @@
     to: 'off'
   actions:
   - delay: 00:00:02
-  - action: notify.mobile_app_poco_x7_pro_eric
+  - action: notify.mobile_app_eric
     data:
       title: Fermeture en cours
       message: "{% if trigger.entity_id == 'binary_sensor.contact_fenetre_salon_sonoff_contact'
@@ -1488,7 +1488,7 @@
         %}\n  La fenêtre de la Cuisine a été fermée.\n{% elif trigger.entity_id ==
         'binary_sensor.contact_fenetre_bureau_sonoff_contact' %}\n  La fenêtre du
         Bureau a été fermée.\n{% elif trigger.entity_id == 'binary_sensor.contact_fenetre_chambre_sonoff_contact'
-        %}\n  La fenêtre de la Chambre a été fermée.\n{% endif %}  {% if states('sensor.nbre_de_fenetres_fermees')
+        %}\n  La fenêtre de la Chambre a été fermée.\n{% endif %}  {% if states('sensor.nombre_de_fenetres_fermees')
         == '4' %}\n  Toutes les fenêtres sont maintenant fermées.\n{% endif %}\n"
   mode: queued
 - id: '1775243733692'
@@ -1527,7 +1527,7 @@
     entity_id: binary_sensor.contact_fenetre_chambre_sonoff_contact
     state: 'off'
   actions:
-  - action: notify.mobile_app_poco_x7_pro_eric
+  - action: notify.mobile_app_eric
     data:
       title: ARRÊT CLIM
       message: "{% set pieces = {\n  'climate.clim_salon_rm4_mini': 'du Salon',\n
@@ -1547,7 +1547,7 @@
   conditions: []
   actions:
   - delay: 00:00:03
-  - action: notify.mobile_app_poco_x7_pro_eric
+  - action: notify.mobile_app_eric
     data:
       title: CHANGEMENT DE MODE
       message: 'Le mode a changé pour: {{ states(''sensor.mode_ete_hiver_etat'') |
@@ -1604,7 +1604,7 @@
       value_template: '{{ force_off_list | length > 0 }}'
     then:
     - alias: 'NOTIF : INTERDICTION DÉMARRAGE'
-      action: notify.mobile_app_poco_x7_pro_eric
+      action: notify.mobile_app_eric
       data:
         title: ⛔ SÉCURITÉ CLIM
         message: "Tentative de démarrage interdite (Prise coupée ou Arrêt en cours).
@@ -1621,7 +1621,7 @@
       value_template: '{{ force_mode_list | length > 0 }}'
     then:
     - alias: 'NOTIF : CORRECTION MODE'
-      action: notify.mobile_app_poco_x7_pro_eric
+      action: notify.mobile_app_eric
       data:
         title: "\U0001F527 CORRECTION MODE"
         message: "Mauvais mode détecté. Correction vers {{ mode_saison | upper }}
@@ -1685,7 +1685,7 @@
       value_template: '{{ force_off_list | length > 0 }}'
     then:
     - alias: 'NOTIF : INTERDICTION DÉMARRAGE'
-      action: notify.mobile_app_poco_x7_pro_eric
+      action: notify.mobile_app_eric
       data:
         title: ⛔ SÉCURITÉ CLIM
         message: "Tentative de démarrage interdite (Prise coupée ou Arrêt en cours).
@@ -1702,7 +1702,7 @@
       value_template: '{{ force_mode_list | length > 0 }}'
     then:
     - alias: 'NOTIF : CORRECTION MODE'
-      action: notify.mobile_app_poco_x7_pro_eric
+      action: notify.mobile_app_eric
       data:
         title: "\U0001F527 CORRECTION MODE"
         message: "Mauvais mode détecté. Correction vers {{ mode_saison | upper }}
@@ -1728,7 +1728,7 @@
       - condition: template
         value_template: '{{ ''CELLULAR'' in trigger.to_state.state }}'
       sequence:
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: '[Présence] Personne n''est à la maison (mode CELLULAR/WIFI_?!)'
     - alias: 'Détection : MAMOUR'
@@ -1736,7 +1736,7 @@
       - condition: template
         value_template: '{{ ''MAMOUR'' in trigger.to_state.state }}'
       sequence:
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: '[Présence] Seul Mamour est à la maison (Wi-Fi)'
     - alias: 'Détection : ERIC'
@@ -1744,7 +1744,7 @@
       - condition: template
         value_template: '{{ ''ERIC'' in trigger.to_state.state }}'
       sequence:
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: '[Présence] Seul Eric est à la maison (Wi-Fi)'
     - alias: 'Détection : LES DEUX'
@@ -1752,7 +1752,7 @@
       - condition: template
         value_template: '{{ ''Clim [2] en [WIFI]'' in trigger.to_state.state }}'
       sequence:
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: '[Présence] Mamour et Eric sont à la maison (Wi-Fi)'
     - alias: 'Détection : UP (Hausse)'
@@ -1763,7 +1763,7 @@
       - variables:
           temp_ext: '{{ trigger.to_state.state.split(''|'')[1].split(''Up >>>'')[1].split(''°'')[0].strip()
             }}'
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: '[Tendance] Température extérieure en hausse : {{ temp_ext }}°'
     - alias: 'Détection : DOWN (Baisse)'
@@ -1774,7 +1774,7 @@
       - variables:
           temp_ext: '{{ trigger.to_state.state.split(''|'')[1].split(''Down <<<'')[1].split(''°'')[0].strip()
             }}'
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: '[Tendance] Température extérieure en baisse : {{ temp_ext }}°'
     - alias: 'Détection : STABLE'
@@ -1785,7 +1785,7 @@
       - variables:
           temp_ext: '{{ trigger.to_state.state.split(''|'')[1].split(''°'')[0].split(''stable'')[1].strip()
             }}'
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: '[Tendance] Température extérieure stable : {{ temp_ext }}°'
     - alias: 'Détection : HEAT'
@@ -1795,7 +1795,7 @@
       sequence:
       - variables:
           message_part: '{{ trigger.to_state.state.split(''|'')[2] }}'
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: '[Mode] Chauffage activé : {{ message_part }}'
     - alias: 'Détection : COOL'
@@ -1805,7 +1805,7 @@
       sequence:
       - variables:
           message_part: '{{ trigger.to_state.state.split(''|'')[2] }}'
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: '[Mode] Rafraîchissement activé : {{ message_part }}'
     - alias: 'Détection : FAN'
@@ -1813,7 +1813,7 @@
       - condition: template
         value_template: '{{ ''Fan'' in trigger.to_state.state }}'
       sequence:
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: '[Mode] Ventilation activée'
 - id: '1775244321024'
@@ -1888,7 +1888,7 @@
           entity_id: climate.radiateur_cuisine
         data:
           hvac_mode: 'off'
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: /!\ RADIATEUR CUISINE est 'OFF' FORCE (Fin Semaine) /!\
     - alias: 'ARRÊT FORCE : Fin de période Week-end (08:00)'
@@ -1906,7 +1906,7 @@
           entity_id: climate.radiateur_cuisine
         data:
           hvac_mode: 'off'
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: /!\ RADIATEUR CUISINE est 'OFF' FORCE (Fin W-E) /!\
     - alias: 'ACTION : Allumage (Temp < 19.9)'
@@ -1920,7 +1920,7 @@
           entity_id: climate.radiateur_cuisine
         data:
           hvac_mode: heat
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: /!\ RADIATEUR CUISINE est 'ON' /!\
     - alias: 'ACTION : Extinction (Temp > 20.5)'
@@ -1934,7 +1934,7 @@
           entity_id: climate.radiateur_cuisine
         data:
           hvac_mode: 'off'
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: /!\ RADIATEUR CUISINE est 'OFF' /!\
   mode: single
@@ -1976,7 +1976,7 @@
           entity_id: climate.radiateur_cuisine
         data:
           hvac_mode: heat
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: /!\ Chauffage Cuisine 'ON' /!\
     - alias: 'ARRÊT : Température atteinte'
@@ -1999,7 +1999,7 @@
           entity_id: climate.radiateur_cuisine
         data:
           hvac_mode: 'off'
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           message: /!\ Chauffage Cuisine 'OFF' /!\
   mode: single
@@ -2146,7 +2146,7 @@
           - light.hue_smart_salon
           - switch.ecran_p_c_3_play_hue
           - switch.prise_tete_de_lit_chambre
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           title: '{{ states(''sensor.presence_clim'') }}'
           message: '[5] prises [OFF]'
@@ -2204,7 +2204,7 @@
               - switch.ecran_p_c_3_play_hue
               - switch.prise_tete_de_lit_chambre
       - alias: Notification du nombre de prises actives
-        action: notify.mobile_app_poco_x7_pro_eric
+        action: notify.mobile_app_eric
         data:
           title: '{{ states(''sensor.presence_clim'') }}'
           message: "{% set prises = [\n  'switch.prise_horloge_ikea',\n  'light.hue_smart_salon',\n
@@ -2257,7 +2257,7 @@
       - action: switch.turn_off
         target:
           entity_id: switch.hue_smart_eco_pc_bureau
-      - action: notify.mobile_app_poco_x7_pro_eric
+      - action: notify.mobile_app_eric
         data:
           title: Veille détectée
           message: PC Bureau [OFF]

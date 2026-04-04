@@ -10,7 +10,7 @@
 #
 # ## 🧮 CALCUL & SOURCES :
 # - API : Nominatim reverse geocoding (openstreetmap.org)
-# - Coordonnées source : attributs lat/lon de sensor.maison_lightning_distance
+# - Coordonnées source : attributs lat/lon de sensor.blitzortung_lightning_distance
 # - URL template : https://nominatim.openstreetmap.org/reverse?format=geocodejson&lat={lat}&lon={lon}
 # - Valeur retournée : nombre de features (entier, indicator de succès)
 # - Attributs : features[] (objet GeoJSON complet pour parsing en template)
@@ -32,8 +32,8 @@
     unique_id: blitzortung_lightning_localisation
     scan_interval: 3600
     resource_template: >-
-      {%- set lat = state_attr('sensor.maison_lightning_distance', 'lat') -%}
-      {%- set lon = state_attr('sensor.maison_lightning_distance', 'lon') -%}
+      {%- set lat = state_attr('sensor.blitzortung_lightning_distance', 'lat') -%}
+      {%- set lon = state_attr('sensor.blitzortung_lightning_distance', 'lon') -%}
       https://nominatim.openstreetmap.org/reverse?format=geocodejson&lat={{lat}}&lon={{lon}}
     value_template: '{{ value_json.features | length }}'
     json_attributes:
