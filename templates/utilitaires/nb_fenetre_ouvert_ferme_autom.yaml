@@ -23,7 +23,7 @@
     # └───────────────────────────────────┘
     # --- nbre_de_fenetres_fermees ---
     - name: "Nombre de fenêtres fermées"
-      unique_id: nbre_de_fenetres_fermees
+      unique_id: nombre_de_fenetres_fermees
       icon: mdi:window-shutter
       state: >-
         {{
@@ -37,7 +37,7 @@
 
     # --- nbre_de_fenetres_ouvertes ---
     - name: "Nombre de fenêtres ouvertes"
-      unique_id: nbre_de_fenetres_ouvertes
+      unique_id: nombre_de_fenetres_ouvertes
       icon: mdi:window-shutter-open
       state: >-
         {{
