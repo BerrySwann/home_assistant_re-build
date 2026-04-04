@@ -119,6 +119,15 @@ input_boolean: !include_dir_merge_named input_booleans/
 input_number: !include_dir_merge_named input_number/
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
+# | Zone NOTIFY                                                              |
+# ╰──────────────────────────────────────────────────────────────────────────╯
+notify:
+# diag_conso_elec.txt
+  - platform: file
+    name: diag_log_file
+    filename: diag_conso_elec.txt
+
+# ╭──────────────────────────────────────────────────────────────────────────╮
 # │ BASE DE DONNEE MARIADB                                                   │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 
