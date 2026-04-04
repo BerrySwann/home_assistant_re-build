@@ -7,9 +7,9 @@
 ├── P1_clim_chauffage
 │   └── P1_UM_AMHQ.yaml
 ├── P2_prise
-│   └── P2_AVG
-│       ├── P2_UM_AMHQ_prises.yaml
-│       └── P2_UM_AMHQ_veilles.yaml
+│   ├── P2_UM_AMHQ_mini_pc.yaml
+│   ├── P2_UM_AMHQ_prises.yaml
+│   └── P2_UM_AMHQ_veilles.yaml
 ├── P3_eclairage
 │   ├── P3_UM_AMHQ_1_UNITE.yaml
 │   ├── P3_UM_AMHQ_2_ZONE.yaml
@@ -17,6 +17,13 @@
 └── meteo
     └── M_03_meteo_UM_blitzortung.yaml
 /config/templates
+├── Air_quality
+│   └── A_01_AIR_QUALITY.yaml
+├── Inter_BP_Virtuel
+│   ├── B1_01_inter_sdb.yaml
+│   └── BI_02_switch_inter_sdb.yaml
+├── Mini-PC
+│   └── MP_01_sonde_température_mini-pc.yaml
 ├── P0_Energie_total_diag
 │   ├── Diag
 │   │   ├── diag_conso_hebdomadaire_en_cours.yaml
@@ -32,15 +39,25 @@
 │       └── total_par_poste_7.yaml
 ├── P1_clim_chauffage
 │   ├── P1_01_MASTER
-│   │   └── P1_01_clim_logique_system_autom.yaml
-│   └── P1_AVG
-│       └── P1_avg.yaml
+│   │   ├── P1_01_clim_logique_system_autom.yaml
+│   │   ├── automation message clim 21h 7h30.yaml
+│   │   └── automation_message_clim_7h30_21h.yaml
+│   ├── P1_AVG
+│   │   ├── P1_AVG.yaml
+│   │   └── P1_AVG_TOTAL_AMHQ.yaml
+│   ├── P1_DUT_TOTAL
+│   │   └── P1_DUT_TOTAL_SDB.yaml
+│   ├── P1_TOTAL
+│   │   └── P1_TOTAL_AMHQ.yaml
+│   └── ui_dashboard
+│       └── ui_dashboard.yaml
 ├── P2_prise
 │   ├── P2_AVG
+│   │   ├── P2_AVG_AMHQ_mini_pc.yaml
 │   │   ├── P2_AVG_AMHQ_prises.yaml
 │   │   └── P2_AVG_AMHQ_veilles.yaml
 │   └── P2_I_all_standby_power
-│       └── P2_ current_all_standby.yaml
+│       └── P2_current_all_standby.yaml
 ├── P3_eclairage
 │   ├── P3_AVG
 │   │   ├── P3_AVG_AMHQ_1_UNITE.yaml
@@ -55,6 +72,10 @@
 ├── P4_groupe_presence
 │   ├── 01_phones_wifi_cellular_card_autom.yaml
 │   └── 02_logique_wifi_cellular.yaml
+├── SpeedTest
+│   └── ST_01_SpeedTest.yaml
+├── Stores
+│   └── S_01_STORES.yaml
 ├── meteo
 │   ├── M_01_meteo_alertes_card.yaml
 │   ├── M_02_meteo_vent_vence_card.yaml
@@ -62,13 +83,23 @@
 │   ├── M_04_tendances_th_ext_card.yaml
 │   └── M_05_cycle_solaire.yaml
 └── utilitaires
-    └── jour_nuit.yaml
+    ├── Mise_a_jour_home_assistant.yaml
+    ├── jour_nuit.yaml
+    └── nb_fenetre_ouvert_ferme_autom.yaml
 /config/sensors
+├── Air_quality
+│   └── A_01_AIR_QUALITY.yaml
 ├── P0_Energie_total_diag
 │   └── Ecojoko_mini_maxi
 │       └── Ecojoko_mini_maxi_avg.yaml
-├── P1_
+├── P1_clim_chauffage
+│   ├── P1_DUT
+│   │   └── DUT_TOTAL_UNIT.yaml
+│   ├── P1_DUT_clim_chauffage.yaml
+│   └── P1_kWh
+│       └── P1_kWh_clim_chauffage.yaml
 ├── P2_prise
+│   ├── P2_Wh_mini_pc.yaml
 │   ├── P2_kWh_prises.yaml
 │   └── P2_kWh_veilles.yaml
 ├── P3_eclairage
@@ -77,24 +108,6 @@
 │   └── P3_kWh_3_TOTAL.yaml
 └── meteo
     └── M_03_meteo_sensors_blitzortung.yaml
-/config/home-assistant-config-v2
-└── docs
-    ├── IA
-    │   └── IA_CONTEXT_BASE.md
-    ├── L1C1_METEO
-    │   ├── L1C1_VIGNETTE_METEO.md
-    │   ├── PAGE_METEO.md
-    │   └── TUTO_IMAGES_ALERTES_METEO_FRANCE.md
-    ├── L1C2_TEMPERATURES
-    │   ├── L1C2_VIGNETTE_TEMPERATURES.md
-    │   └── PAGE_TEMPERATURES.md
-    ├── L2C1_ENERGIE
-    │   ├── COULEURS_PRISES_PAR_PIECE.md
-    │   ├── L2C1_VIGNETTE_ENERGIE.md
-    │   └── PAGE_ENERGIE.md
-    ├── REBUILD_SYNC_STATUS.md
-    ├── TREE
-    │   └── _ABSENTS.md
-    └── _TEMPLATE_DOC.md
+/config/home-assistant-config-v2 [error opening dir]
 
-38 directories, 56 files
+42 directories, 65 files
