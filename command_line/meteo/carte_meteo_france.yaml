@@ -39,8 +39,7 @@
       while true; do
         today=$(curl -s -X GET "https://public-api.meteofrance.fr/public/DPVigilance/v1/vignettenationale-J/encours" -H "accept: */*" -H "apikey: $api_key" | base64 -w 0);
         i=$((i+1));
-        if [ $(echo -n "$today" | wc -c) -gt 10000 ];
-        then
+        if [ $(echo -n "$today" | wc -c) -gt 10000 ]; then
           echo "$today" | base64 -d > ./www/weather/meteo_france_alerte_today.png;
           echo on;
           break;
@@ -67,7 +66,6 @@
         today=$(curl -s -X GET "https://public-api.meteofrance.fr/public/DPVigilance/v1/vignettenationale-J1/encours" -H "accept: */*" -H "apikey: $api_key" | base64 -w 0);
         i=$((i+1));
         if [ $(echo -n "$today" | wc -c) -gt 10000 ]; then
-        then
           echo "$today" | base64 -d > ./www/weather/meteo_france_alerte_tomorrow.png;
           echo on;
           break;
@@ -80,3 +78,7 @@
         sleep 1;
       done
     value_template: "{{ value }}"
+
+# annotations_log:
+# - [L44] [L71] Suppression du `then` orphelin (ligne seule après `]; then`) — fix bug sh "unexpected then".
+#   Avant : `if [ ... ]; then\n        then`  →  Après : `if [ ... ]; then`
