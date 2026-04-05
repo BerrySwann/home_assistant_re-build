@@ -4,6 +4,6 @@
 
 # --- inter_soufflant_salle_de_bain ---
 inter_soufflant_salle_de_bain:
-  name: "Inter Soufflant SdB Salle de Bain"
+  name: "Inter Soufflant Salle de Bain"
   initial: off
   icon: mdi:fan

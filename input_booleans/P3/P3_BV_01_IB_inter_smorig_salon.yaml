@@ -1,0 +1,14 @@
+# ┌───────────────────────────────────┐
+# │ INTER SOMRIG SALON                │
+# └───────────────────────────────────┘
+
+# --- inter_somrig_salon ---
+inter_somrig_salon:
+  name: "Inter Somrig Salon"
+  initial: off
+  icon: mdi:lightbulb-off
+
+# annotations_log:
+# - [Correction] Suppression du double underscore dans le slug (inter__somrig_salon -> inter_somrig_salon).
+# - [Correction] Remplacement de l'icône invalide mdi:inter par mdi:remote.
+# - [Formatage] Ajustement de la largeur de la boîte ASCII secondaire.
