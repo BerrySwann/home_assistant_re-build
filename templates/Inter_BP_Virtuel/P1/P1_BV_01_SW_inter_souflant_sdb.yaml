@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ SWITCH : CHAUFFAGE — INTERRUPTEUR / BP SDB                              │
+# │ SWITCH : CHAUFFAGE — INTERRUPTEUR / BP SDB                               │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -25,24 +25,23 @@
     # --- inter_soufflant_salle_de_bain ---
     - name: "Inter Soufflant Salle de Bain"
       unique_id: inter_soufflant_salle_de_bain
+      state: "{{ is_state('input_boolean.inter_soufflant_salle_de_bain', 'on') }}"
       icon: >
         {% if is_state('input_boolean.inter_soufflant_salle_de_bain', 'on') %}
           mdi:radiator
         {% else %}
           mdi:radiator-off
         {% endif %}
-      state: "{{ is_state('input_boolean.inter_soufflant_salle_de_bain', 'on') }}"
       turn_on:
-        - service: input_boolean.turn_on
+        - action: input_boolean.turn_on
           target:
             entity_id: input_boolean.inter_soufflant_salle_de_bain
       turn_off:
-        - service: input_boolean.turn_off
+        - action: input_boolean.turn_off
           target:
             entity_id: input_boolean.inter_soufflant_salle_de_bain
 
 # annotations_log:
-# [L1-3]   Boîte ASCII arrondie mise à 78 chars (standard ReBuild).
-# [L6-17]  En-tête doc obligatoire ajouté (DESCRIPTION, CALCUL, PIÈGES, VIGNETTE).
-# [L20-22] Boîte secondaire carrée 37 chars + numérotation officielle (8. SDB).
-# [L23]    Slug tertiaire présent.
+# - [Standardisation] Alignement complet sur le format ReBuild (Somrig/Rodret).
+# - [Syntaxe] Remplacement de 'service' par 'action' (Norme HA 2026).
+# - [Structure] Maintien du bloc de documentation et des boîtes ASCII.

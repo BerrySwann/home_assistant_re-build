@@ -1,41 +1,21 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ SWITCH : TÉLÉCOMMANDE RODRET SALON                                       │
+# │ SWITCH : INTER RODRET SALON                                              │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-#
-# ## 📝 DESCRIPTION :
-# Création d'un interrupteur virtuel (switch) basé sur l'input_boolean de la 
-# télécommande Rodret du Salon.
-#
-# ## 🏷️ ENTITÉS CRÉÉES & RÔLES :
-# - switch.inter_rodret_salon : Permet de basculer l'état virtuel du bouton 
-#   depuis le dashboard et d'afficher visuellement s'il est allumé ou éteint.
-#
-# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L3C1 Commandes Éclairage (Lampes)
-
-- platform: template
-  switches:
-    # --- inter_rodret_salon ---
-    inter_rodret_salon:
-      friendly_name: "Inter Rodret Salon"
-      value_template: "{{ is_state('input_boolean.inter_rodret_salon', 'on') }}"
-      turn_on:
-        action: input_boolean.turn_on
-        target:
-          entity_id: input_boolean.inter_rodret_salon
-      turn_off:
-        action: input_boolean.turn_off
-        target:
-          entity_id: input_boolean.inter_rodret_salon
-      icon_template: >
+- switch:
+    - name: "Inter Rodret Salon"
+      unique_id: inter_rodret_salon
+      state: "{{ is_state('input_boolean.inter_rodret_salon', 'on') }}"
+      icon: >
         {% if is_state('input_boolean.inter_rodret_salon', 'on') %}
           mdi:lightbulb-on
         {% else %}
           mdi:lightbulb-off
         {% endif %}
-
-# annotations_log:
-# - [Correction] Mise à jour du titre ASCII et du commentaire pour correspondre au modèle Rodret.
-# - [Création] Fichier Template Switch pour l'interrupteur Rodret Salon.
-# - [Logique] Liaison avec input_boolean.inter_rodret_salon via value_template et actions turn_on/turn_off.
-# - [Doc] Intégration de l'en-tête standard ReBuild avec rôles des entités.
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.inter_rodret_salon
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.inter_rodret_salon
