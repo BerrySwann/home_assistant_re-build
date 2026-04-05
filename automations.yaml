@@ -2173,7 +2173,7 @@
       sequence:
       - action: light.turn_on
         target:
-          entity_id: light.hue_smart_tv_chambre
+          entity_id: light.hue_smart_eco_tv_chambre
       - action: switch.turn_on
         target:
           entity_id: switch.prise_tv_chambre_nous
@@ -2188,7 +2188,7 @@
       sequence:
       - action: light.turn_off
         target:
-          entity_id: light.hue_smart_tv_chambre
+          entity_id: light.hue_smart_eco_tv_chambre
       - action: notify.mobile_app_eric
         data:
           title: Veille détectée
@@ -2247,7 +2247,7 @@
     target:
       entity_id: switch.prise_soufflant_salle_de_bain_nous
   - alias: 'NOTIFIER : ALERTE MOBILE DÉRIVE THERMIQUE'
-    action: notify.mobile_app_poco_x7_pro_eric
+    action: notify.mobile_app_eric
     data:
       title: ⚠️ Watchdog SDB
       message: Dérive thermique détectée à {{ states('sensor.th_salle_de_bain_temperature')
@@ -2262,7 +2262,7 @@
   triggers:
   - alias: SURVEILLANCE DU CHANGEMENT DE GROUPE DE PRÉSENCE
     trigger: state
-    entity_id: sensor.groupe_clim
+    entity_id: sensor.groupe
   actions:
   - alias: CHOIX DE LA LOGIQUE SELON LA TRANSITION DÉTECTÉE
     choose:
