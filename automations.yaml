@@ -394,32 +394,43 @@
               action: fan.set_percentage
   mode: single
 - id: '1774183767864'
-  alias: Bouton IKEA RODRET - Soufflant SdB Gestion ON/OFF (JSON)
-  description: Pilotage du chauffage SDB via le bouton RODRET (MQTT)
+  alias: '[P3-SALON] BOUTON IKEA INTER SALON (4) — ON/OFF LIGHT.SALON'
+  description: 'Pilotage de light.salon via le bouton IKEA 4 touches Salon. Topic
+    MQTT : zigbee2mqtt/Inter Salon (4) (IKEA)/action ON -> light.turn_on | OFF ->
+    light.turn_off
+
+    '
   triggers:
-  - trigger: mqtt
-    options:
-      topic: zigbee2mqtt/Inter Radiateur Salle de Bain (IKEA RODRET)
+  - alias: 'DÉCLENCHEMENT : BOUTON ON (MQTT)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter Salon (4) (IKEA)/action
+    payload: 'on'
+    id: bouton_on
+  - alias: 'DÉCLENCHEMENT : BOUTON OFF (MQTT)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter Salon (4) (IKEA)/action
+    payload: 'off'
+    id: bouton_off
+  conditions: []
   actions:
-  - choose:
-    - alias: Bouton ON
+  - alias: 'ACTION : BASCULE LIGHT.SALON'
+    choose:
+    - alias: 'CAS : BOUTON ON PRESSÉ'
       conditions:
-      - condition: template
-        value_template: '{{ trigger.payload_json.action == ''on'' }}'
+      - condition: trigger
+        id: bouton_on
       sequence:
-      - action: input_boolean.turn_on
+      - action: light.turn_on
         target:
-          entity_id: input_boolean.inter_soufflant_salle_de_bain
-        data: {}
-    - alias: Bouton OFF
+          entity_id: light.salon
+    - alias: 'CAS : BOUTON OFF PRESSÉ'
       conditions:
-      - condition: template
-        value_template: '{{ trigger.payload_json.action == ''off'' }}'
+      - condition: trigger
+        id: bouton_off
       sequence:
-      - action: input_boolean.turn_off
+      - action: light.turn_off
         target:
-          entity_id: input_boolean.inter_soufflant_salle_de_bain
-        data: {}
+          entity_id: light.salon
   mode: restart
 - id: '1774452171317'
   alias: (I) (CLIM DEBUG) Force Mode Correct & Sécurité
@@ -2413,12 +2424,12 @@
   triggers:
   - alias: 'DÉCLENCHEMENT : PC BUREAU ALLUMÉ'
     trigger: state
-    entity_id: binary_sensor.bureau_pc_status
+    entity_id: binary_sensor.moniteur_pc
     to: 'on'
     id: pc_on
   - alias: 'DÉCLENCHEMENT : PC BUREAU ÉTEINT'
     trigger: state
-    entity_id: binary_sensor.bureau_pc_status
+    entity_id: binary_sensor.moniteur_pc
     to: 'off'
     for: 00:02:00
     id: pc_off
@@ -2540,35 +2551,61 @@
           entity_id: light.salon
   mode: restart
 - id: '1775387618751'
-  alias: '[P3-Salon] Bouton IKEA SOMRIG — ON/OFF light.salon'
-  description: 'Pilotage de light.salon via le bouton IKEA SOMRIG (2 touches). Topic
-    MQTT : zigbee2mqtt/Inter (SOMRIG)/action 1_short_release -> light.turn_on | 2_short_release
-    -> light.turn_off
+  alias: '[P3-SALON] BOUTON IKEA SOMRIG — TOUT MESSAGE = ON/OFF'
+  description: 'Pilotage simplifié : n''importe quel appui sur le bouton 1 (simple,
+    double, long)  allume le salon. N''importe quel appui sur le bouton 2 éteint le
+    salon.
 
     '
   triggers:
-  - trigger: mqtt
-    options:
-      topic: zigbee2mqtt/Inter (SOMRIG)/action
+  - alias: 'DÉCLENCHEMENT : BOUTON 1 (CLIC SIMPLE)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    payload: 1_short_release
+    id: bouton_on
+  - alias: 'DÉCLENCHEMENT : BOUTON 1 (DOUBLE CLIC)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    payload: 1_double_press
+    id: bouton_on
+  - alias: 'DÉCLENCHEMENT : BOUTON 1 (APPUI LONG)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    payload: 1_long_press
+    id: bouton_on
+  - alias: 'DÉCLENCHEMENT : BOUTON 2 (CLIC SIMPLE)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    payload: 2_short_release
+    id: bouton_off
+  - alias: 'DÉCLENCHEMENT : BOUTON 2 (DOUBLE CLIC)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    payload: 2_double_press
+    id: bouton_off
+  - alias: 'DÉCLENCHEMENT : BOUTON 2 (APPUI LONG)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    payload: 2_long_press
+    id: bouton_off
   conditions: []
   actions:
-  - choose:
-    - alias: 1_SHORT_RELEASE — ON
+  - alias: 'ACTION : ALLUMER OU ÉTEINDRE'
+    choose:
+    - alias: 'CAS : N''IMPORTE QUEL APPUI BOUTON 1 -> ALLUMER'
       conditions:
-      - condition: template
-        value_template: '{{ trigger.payload_json.action == ''1_short_release'' }}'
+      - condition: trigger
+        id: bouton_on
       sequence:
       - action: light.turn_on
         target:
           entity_id: light.salon
-        data: {}
-    - alias: 2_SHORT_RELEASE — OFF
+    - alias: 'CAS : N''IMPORTE QUEL APPUI BOUTON 2 -> ÉTEINDRE'
       conditions:
-      - condition: template
-        value_template: '{{ trigger.payload_json.action == ''2_short_release'' }}'
+      - condition: trigger
+        id: bouton_off
       sequence:
       - action: light.turn_off
         target:
           entity_id: light.salon
-        data: {}
   mode: restart
