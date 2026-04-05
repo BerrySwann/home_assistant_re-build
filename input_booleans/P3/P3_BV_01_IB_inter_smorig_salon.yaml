@@ -5,7 +5,6 @@
 # --- inter_somrig_salon ---
 inter_somrig_salon:
   name: "Inter Somrig Salon"
-  initial: off
   icon: mdi:lightbulb-off
 
 # annotations_log:

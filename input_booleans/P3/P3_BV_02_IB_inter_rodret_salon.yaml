@@ -5,5 +5,4 @@
 # --- inter_rodret_salon ---
 inter_rodret_salon:
   name: "Inter Rodret Salon"
-  initial: off
   icon: mdi:lightbulb-off

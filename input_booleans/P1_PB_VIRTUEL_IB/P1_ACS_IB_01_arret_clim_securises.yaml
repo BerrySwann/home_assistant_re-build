@@ -30,7 +30,6 @@
 # --- clim_salon_arret_securise_en_cours ---
 clim_salon_arret_securise_en_cours:
   name: "Blocage CLIM Salon (Arrêt Sécurisé)"
-  initial: off
   icon: mdi:lock-alert
 
 # ┌─────────────────────────────────────┐
@@ -40,7 +39,6 @@ clim_salon_arret_securise_en_cours:
 # --- clim_bureau_arret_securise_en_cours ---
 clim_bureau_arret_securise_en_cours:
   name: "Blocage CLIM Bureau (Arrêt Sécurisé)"
-  initial: off
   icon: mdi:lock-alert
 
 # ┌─────────────────────────────────────┐
@@ -50,7 +48,6 @@ clim_bureau_arret_securise_en_cours:
 # --- inter_soufflant_salle_de_bain ---
 inter_soufflant_salle_de_bain:
   name: "Inter Soufflant SdB (IKEA RODRET)"
-  initial: off
   icon: mdi:fan
 
 # ┌─────────────────────────────────────┐
@@ -60,7 +57,6 @@ inter_soufflant_salle_de_bain:
 # --- clim_chambre_arret_securise_en_cours ---
 clim_chambre_arret_securise_en_cours:
   name: "Blocage CLIM Chambre (Arrêt Sécurisé)"
-  initial: off
   icon: mdi:lock-alert
 
 # annotations_log:
