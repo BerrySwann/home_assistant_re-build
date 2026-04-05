@@ -558,7 +558,7 @@
       - delay: 00:00:01
       - action: remote.send_command
         target:
-          entity_id: remote.soufflant_sdb_rm4_mini
+          entity_id: remote.soufflant_sdb
         data:
           command: on_off
           device: radiateur_sdb
@@ -572,7 +572,7 @@
           sequence:
           - action: remote.send_command
             target:
-              entity_id: remote.soufflant_sdb_rm4_mini
+              entity_id: remote.soufflant_sdb
             data:
               command: 1000w
               device: radiateur_sdb
@@ -586,7 +586,7 @@
         default:
         - action: remote.send_command
           target:
-            entity_id: remote.soufflant_sdb_rm4_mini
+            entity_id: remote.soufflant_sdb
           data:
             command: 1000w
             device: radiateur_sdb
@@ -598,7 +598,7 @@
       - delay: '00:00:00.8'
       - action: remote.send_command
         target:
-          entity_id: remote.soufflant_sdb_rm4_mini
+          entity_id: remote.soufflant_sdb
         data:
           command: swing
           device: radiateur_sdb
@@ -626,7 +626,7 @@
           ir_repeats: '{{ 2 if current_power == ''1000W'' else 1 }}'
       - action: remote.send_command
         target:
-          entity_id: remote.soufflant_sdb_rm4_mini
+          entity_id: remote.soufflant_sdb
         data:
           command: 1000w
           device: radiateur_sdb
@@ -650,7 +650,7 @@
       sequence:
       - action: remote.send_command
         target:
-          entity_id: remote.soufflant_sdb_rm4_mini
+          entity_id: remote.soufflant_sdb
         data:
           command: 1000w
           device: radiateur_sdb
@@ -680,7 +680,7 @@
             entity_id: switch.inter_soufflant_salle_de_bain
       - action: remote.send_command
         target:
-          entity_id: remote.soufflant_sdb_rm4_mini
+          entity_id: remote.soufflant_sdb
         data:
           command: on_off
           device: radiateur_sdb
@@ -2220,7 +2220,7 @@
   - alias: 'ACTION : ENVOI COMMANDE IR RESET'
     action: remote.send_command
     target:
-      entity_id: remote.soufflant_sdb_rm4_mini
+      entity_id: remote.soufflant_sdb
     data:
       command: on_off
       device: radiateur_sdb
