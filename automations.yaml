@@ -1280,12 +1280,11 @@
   description: Met à jour le temps du dernier impact de foudre lorsque le capteur
     change.
   triggers:
-  - entity_id: sensor.blitzortung_lightning_counter
+  - entity_id: sensor.maison_lightning_counter
     trigger: state
   conditions:
   - condition: template
-    value_template: '{{ states(''sensor.blitzortung_lightning_counter'') | int > 0
-      }}'
+    value_template: '{{ states(''sensor.maison_lightning_counter'') | int > 0 }}'
   actions:
   - target:
       entity_id: input_datetime.dernier_eclair
@@ -1581,7 +1580,7 @@
       after: 07:30:00
       before: '21:00:00'
     then:
-    - action: notify.mobile_app_poco_x7_pro_eric
+    - action: notify.mobile_app_eric
       data:
         title: CLIM COUPÉE
         message: "{% set piece = 'inconnue' %}  {% if 'salon' in trigger.entity_id
