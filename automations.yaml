@@ -2443,3 +2443,67 @@
         target:
           entity_id: switch.ecran_p_c_3_play_hue
   mode: restart
+- id: '1775386133385'
+  alias: Système - Watchdog Piles (HUE/IKEA/SONOFF)
+  description: Vérification 3x/jour basée sur les groupes de la vue synthétique (seuil
+    11%)
+  triggers:
+  - trigger: time
+    at: 08:00:00
+  - trigger: time
+    at: '14:00:00'
+  - trigger: time
+    at: '20:00:00'
+  actions:
+  - variables:
+      low_batt: "{% set sensors = expand('group.hue_devices', 'group.ikea_devices',
+        'group.sonoff_devices') %} {% set ns = namespace(ids=[]) %} {% for s in sensors
+        %}\n  {% if s.state | is_number and s.state | int <= 11 %}\n    {% set ns.ids
+        = ns.ids + [s.entity_id] %}\n  {% endif %}\n{% endfor %} {{ ns.ids }}\n"
+  - if:
+    - condition: template
+      value_template: '{{ low_batt | count > 0 }}'
+    then:
+    - action: notify.mobile_app_eric
+      data:
+        title: "\U0001FAAB Alerte Pile Faible (<10%)"
+        message: "{% for id in low_batt %}\n  - {{ state_attr(id, 'friendly_name')
+          }} : {{ states(id) }}%\n{% endfor %}\n"
+        data:
+          tag: alert-batterie
+          color: '#f44336'
+  mode: single
+- id: '1775386803313'
+  alias: Z2M last_seen
+  description: Surveillance des capteurs Zigbee injoignables (plus de 8h ou indisponibles)
+  triggers:
+  - trigger: time
+    at: 06:00:00
+  - trigger: time_pattern
+    minutes: /15
+  conditions:
+  - condition: template
+    value_template: '{{ sensors != '''' and (day | int == 0 or day | int == now().isoweekday())
+      }}'
+  actions:
+  - action: notify.mobile_app_eric
+    data:
+      title: ⚠️ Problème capteur Zigbee
+      message: 'Des capteurs Zigbee ne répondent plus : {{ sensors }}'
+  variables:
+    day: 0
+    hours: 8
+    exclude:
+      entity_id: []
+    sensors: "{% set result = namespace(sensors=[]) %} {% for state in states.sensor
+      \n   | rejectattr('attributes.device_class', 'undefined') \n   | selectattr('attributes.device_class',
+      '==', 'timestamp') %}\n  {% if 'last_seen' in state.entity_id and state.entity_id
+      not in exclude.entity_id %}\n    {% set last_seen = states(state.entity_id)
+      %}\n    {% if last_seen == 'unavailable' or last_seen == 'unknown' %}\n      {%
+      set result.sensors = result.sensors + [state.name | replace(' last seen', '')
+      ~ ' (Indisponible)'] %}\n    {% elif (as_timestamp(now()) - as_timestamp(last_seen))
+      > (hours | int * 3600) %}\n      {% set result.sensors = result.sensors + [state.name
+      | replace(' last seen', '') ~ ' (' ~ relative_time(strptime(last_seen, '%Y-%m-%dT%H:%M:%S%z'))
+      ~ ')'] %}\n    {% endif %}\n  {% endif %}\n{% endfor %} {{ result.sensors |
+      join(', ') }}\n"
+  mode: single
