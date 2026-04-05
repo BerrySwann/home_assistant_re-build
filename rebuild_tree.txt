@@ -49,15 +49,17 @@
 │   │   └── P1_DUT_TOTAL_SDB.yaml
 │   ├── P1_TOTAL
 │   │   └── P1_TOTAL_AMHQ.yaml
-│   └── ui_dashboard
-│       └── ui_dashboard.yaml
+│   └── P1_ui_dashboard
+│       └── P1_ui_dashboard.yaml
 ├── P2_prise
 │   ├── P2_AVG
 │   │   ├── P2_AVG_AMHQ_mini_pc.yaml
 │   │   ├── P2_AVG_AMHQ_prises.yaml
 │   │   └── P2_AVG_AMHQ_veilles.yaml
-│   └── P2_I_all_standby_power
-│       └── P2_current_all_standby.yaml
+│   ├── P2_I_all_standby_power
+│   │   └── P2_current_all_standby.yaml
+│   └── P2_ui_dashboard
+│       └── P2_ui_dashboard.yaml
 ├── P3_eclairage
 │   ├── P3_AVG
 │   │   ├── P3_AVG_AMHQ_1_UNITE.yaml
@@ -71,6 +73,7 @@
 │       └── etats_status.yaml
 ├── P4_groupe_presence
 │   ├── 01_phones_wifi_cellular_card_autom.yaml
+│   ├── 02_logique_wifi_cellular - Copie.yaml
 │   └── 02_logique_wifi_cellular.yaml
 ├── SpeedTest
 │   └── ST_01_SpeedTest.yaml
@@ -94,8 +97,7 @@
 │       └── Ecojoko_mini_maxi_avg.yaml
 ├── P1_clim_chauffage
 │   ├── P1_DUT
-│   │   └── DUT_TOTAL_UNIT.yaml
-│   ├── P1_DUT_clim_chauffage.yaml
+│   │   └── P1_DUT_clim_chauffage.yaml
 │   └── P1_kWh
 │       └── P1_kWh_clim_chauffage.yaml
 ├── P2_prise
@@ -110,4 +112,4 @@
     └── M_03_meteo_sensors_blitzortung.yaml
 /config/home-assistant-config-v2 [error opening dir]
 
-42 directories, 65 files
+43 directories, 66 files
