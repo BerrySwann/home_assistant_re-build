@@ -1,0 +1,10 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ INPUT DATETIME : VARIABLES DE DATES ET HEURES                            │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+
+# --- dernier_eclair ---
+dernier_eclair:
+  name: "Dernier éclair"
+  has_date: true
+  has_time: true
+  icon: mdi:lightning-bolt-outline
