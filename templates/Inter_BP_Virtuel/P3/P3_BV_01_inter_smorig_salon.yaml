@@ -1,0 +1,41 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ SWITCH : TÉLÉCOMMANDE SOMRIG SALON                                       │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Création d'un interrupteur virtuel (switch) basé sur l'input_boolean de la 
+# télécommande Somrig du Salon.
+#
+# ## 🏷️ ENTITÉS CRÉÉES & RÔLES :
+# - switch.inter_somrig_salon : Permet de basculer l'état virtuel du bouton 
+#   depuis le dashboard et d'afficher visuellement s'il est allumé ou éteint.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L3C1 Commandes Éclairage (Lampes)
+
+- platform: template
+  switches:
+    # --- inter_somrig_salon ---
+    inter_somrig_salon:
+      friendly_name: "Inter Somrig Salon"
+      value_template: "{{ is_state('input_boolean.inter_somrig_salon', 'on') }}"
+      turn_on:
+        action: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.inter_somrig_salon
+      turn_off:
+        action: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.inter_somrig_salon
+      icon_template: >
+        {% if is_state('input_boolean.inter_somrig_salon', 'on') %}
+          mdi:lightbulb-on
+        {% else %}
+          mdi:lightbulb-off
+        {% endif %}
+
+# annotations_log:
+# - [Création] Fichier Template Switch pour l'interrupteur Somrig Salon.
+# - [Logique] Liaison avec input_boolean.inter_somrig_salon via value_template et actions turn_on/turn_off.
+# - [UI] Ajout d'un icon_template dynamique (lightbulb-on/off) selon l'état.
+# - [Doc] Intégration du nouvel en-tête avec les rôles d'entités.
