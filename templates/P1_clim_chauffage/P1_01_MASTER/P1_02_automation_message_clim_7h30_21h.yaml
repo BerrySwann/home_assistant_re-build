@@ -1,6 +1,32 @@
 # ╭────────────────────────────────────────────────────────────────────────────────────────╮
 # │ TEMPLATES : SÉRIE 03_07. CLIM — MESSAGE PERSONNALISÉ (7h30 <-> 21h00)                  │
 # ╰────────────────────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Template sensor générant le message texte envoyé via notification mobile lors des
+# changements d'état de la clim en plage jour (7h30 → 21h00). Le message intègre
+# la tendance de température extérieure, la présence, et le scénario groupe actif
+# (groupe_1 = absent, groupe_2/3/4 = présences avec températures personnalisées).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - sensor.th_balcon_nord_temperature_trend (increasing / decreasing / stable)
+# - sensor.groupe → groupe_1 / groupe_2 / groupe_3 / groupe_4
+# - sensor.presence → texte de présence affiché en en-tête du message
+# - sensor.mode_ete_hiver → heat / cool / fan_only
+# - sensor.temperature_corrige_mamour_hivers / sensor.temperature_corrige_eric_hivers
+# - sensor.temperature_corrige_chambre_hivers / sensor.temperature_cible
+# - sensor.temperature_confort_jour / sensor.temperature_eco_hiver_corrige
+# - switch.clim_*_nous → vérifie alimentation de chaque unité
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce fichier produit : sensor.message_clim_personnalise_7h30_21h00
+# - Disponibilité conditionnée à la présence des 5 capteurs réseau/T°.
+# - Ne pas confondre avec le fichier nuit (21h → 7h30) qui utilise temp_nuit.
+# - Les sauts de ligne \n dans les messages sont intentionnels pour l'affichage mobile.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Déclenché par automation L1C3 (notification clim 7h30-21h)
+# - Indirect : remonte dans la notification mobile via automation D_notif_temp_jour.yaml
 
 - sensor:
 # ┌───────────────────────────────────────────────────────────────────┐
@@ -31,8 +57,8 @@
           {%- set prise_bureau = is_state('switch.clim_bureau_nous', 'on') %}
           {%- set prise_chambre = is_state('switch.clim_chambre_nous', 'on') %}
           {%- set clims_alimentees = prise_salon or prise_bureau or prise_chambre %}
-          {%- set groupe = states('sensor.groupe_clim') %}
-          {%- set presence = states('sensor.presence_clim') %}
+          {%- set groupe = states('sensor.groupe') %}
+          {%- set presence = states('sensor.presence') %}
 
           {# --- PARTIE 1 : TENDANCE --- #}
           {%- if tendance == 'increasing' %}
