@@ -33,45 +33,6 @@
 
 - sensor:
 # ┌───────────────────────────────────────────────────────────────────┐
-# │ DÉTECTION DU MODE GÉNÉRAL ET CONSIGNES DYNAMIQUES                 │
-# └───────────────────────────────────────────────────────────────────┘
-
-# DÉTECTION DU MODE GÉNÉRAL
-# --- mode_ete_hiver ---
-    - name: "Mode Été/Hiver"
-      unique_id: mode_ete_hiver
-      state: >
-        {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(-999) %}
-        {% set temp_no_chauf = states('sensor.seuil_non_chauffage_bas') | float(-999) %}
-        {% if temp_ext == -999 or temp_no_chauf == -999 %}
-          ERREUR
-        {% elif temp_ext < temp_no_chauf %}
-          heat
-        {% elif temp_no_chauf <= temp_ext < 28 %}
-          fan_only
-        {% else %}
-          cool
-        {% endif %}
-
-# CONSIGNES DYNAMIQUES (Le coeur de la modification)
-# Hiver: 18° / Été: 28°
-# --- consigne_de_base ---
-    - name: "Consigne de Base"
-      unique_id: consigne_de_base
-      unit_of_measurement: "°C"
-      state: >
-        {% if states('sensor.mode_ete_hiver') == 'cool' %} 28 {% else %} 18 {% endif %}
-
-# Temperature différentielle
-# Hiver: 19° / Été: 27°
-# --- temperature_differentielle ---
-    - name: "Temperature différentielle"
-      unique_id: temperature_differentielle
-      unit_of_measurement: "°C"
-      state: >
-        {% if states('sensor.mode_ete_hiver') == 'cool' %} 27 {% else %} 19 {% endif %}
-
-# ┌───────────────────────────────────────────────────────────────────┐
 # │ PARAMÈTRES FIXES ET DELTAS DE CALCUL                              │
 # └───────────────────────────────────────────────────────────────────┘
 
@@ -82,10 +43,16 @@
       state: "17"
 
 # --- seuil_non_chauffage_bas ---
-    - name: "Seuil non chauffage bas"
-      unique_id: seuil_non_chauffage_bas
+    - name: "Seuil non chauffage"
+      unique_id: seuil_non_chauffage
       unit_of_measurement: "°C"
       state: "18"
+
+# --- seuil_non_clim_haut ---
+    - name: "Seuil non clim"
+      unique_id: seuil_non_clim
+      unit_of_measurement: "°C"
+      state: "28"
 
     # --- delta_1 ---
     - name: "Delta_1"
@@ -116,6 +83,87 @@
       unique_id: delta_7
       state: "7"
       unit_of_measurement: "°C"
+
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ DÉTECTION DU MODE GÉNÉRAL ET CONSIGNES DYNAMIQUES                 │
+# └───────────────────────────────────────────────────────────────────┘
+
+# DÉTECTION DU MODE GÉNÉRAL
+# --- mode_ete_hiver ---
+    - name: "Mode Été/Hiver"
+      unique_id: mode_ete_hiver
+      state: >
+        {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(-999) %}
+        {% set temp_no_chauf = states('sensor.seuil_non_chauffage') | float(-999) %}
+        {% set temp_no_clim = states('sensor.seuil_non_clim') | float(-999) %}
+        {% if temp_ext == -999 or temp_no_chauf == -999 %}
+          ERREUR
+        {% elif temp_ext < temp_no_chauf %}
+          heat
+        {% elif temp_ext > temp_no_clim %}
+          cool
+        {% else %}
+          fan_only
+        {% endif %}
+
+# CONSIGNES DYNAMIQUES (Le coeur de la modification)
+# Hiver: 18° / Été: 28°
+# --- consigne_de_base ---
+    - name: "Consigne de Base"
+      unique_id: consigne_de_base
+      unit_of_measurement: "°C"
+      state: >
+        {# 1. On récupère les états et on les convertit en nombres #}
+        {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(-999) %}
+        {% set temp_no_chauf = states('sensor.seuil_non_chauffage_bas') | float(-999) %}
+        {% set temp_no_clim = states('sensor.seuil_non_clim_haut') | float(-999) %}
+        {% set mode = states('sensor.mode_ete_hiver') %}
+
+        {# 2. Sécurité : si un capteur est HS, on renvoie une valeur de secours (18) au lieu de 0 #}
+        {% if temp_ext == -999 or temp_no_chauf == -999 or temp_no_clim == -999 %}
+          18
+        {% else %}
+          {# 3. Logique de sélection selon le mode #}
+          {% if mode == 'heat' %}
+            {{ temp_no_chauf }}
+          {% elif mode == 'cool' %}
+            {{ temp_no_clim }}
+          {% else %}
+            {# Mode fan_only ou autre : on reste sur la base chauffage #}
+            {{ temp_no_chauf }}
+          {% endif %}
+        {% endif %}
+
+
+# Temperature différentielle
+# Hiver: 19° / Été: 27°
+# --- temperature_differentielle ---
+    - name: "Temperature différentielle"
+      unique_id: temperature_differentielle
+      unit_of_measurement: "°C"
+      state: >
+        state: >
+        {# 1. Définition des variables (assure-toi que les noms de sensors sont les bons) #}
+        {% set temp_no_chauf = states('sensor.seuil_non_chauffage_bas') | float(-999) %}
+        {% set temp_no_clim = states('sensor.seuil_non_clim_haut') | float(-999) %}
+        {% set d1 = states('sensor.delta_1') | float(1) %}
+        {% set mode = states('sensor.mode_ete_hiver') %}
+
+        {# 2. Sécurité : si un capteur est HS, on renvoie 18 #}
+        {% if temp_ext == -999 or temp_no_chauf == -999 or temp_no_clim == -999 %}
+          18
+        {% else %}
+          {# 3. Logique de calcul selon le mode #}
+          {% if mode == 'heat' %}
+            {# Addition mathématique : 18 + 1 = 19 #}
+            {{ (temp_no_chauf + d1) | round(1) }}
+          {% elif mode == 'cool' %}
+            {# Soustraction mathématique : 28 - 1 = 27 #}
+            {{ (temp_no_clim - d1) | round(1) }}
+          {% else %}
+            {{ temp_no_chauf }}
+          {% endif %}
+        {% endif %}
 
 # ┌───────────────────────────────────────────────────────────────────┐
 # │ CORRECTIONS SPÉCIFIQUES (HIVERNALES)                              │
@@ -201,8 +249,8 @@
       unique_id: temperature_confort_jour
       unit_of_measurement: "°C"
       state: >
-        {% set temp_diff = states('sensor.temperature_differentielle') | int (0) %}
-        {% set consigne_de_base = states('sensor.consigne_de_base') | int (0) %}
+        {% set temp_diff = states('sensor.temperature_differentielle') | int (19) %}
+        {% set consigne_de_base = states('sensor.consigne_de_base') | int (18) %}
         {% set temp_cible = states('sensor.temperature_cible') | int (0) %}
         {{ (temp_diff + (temp_cible - consigne_de_base)) | round(1) | int( 0) }}
 
@@ -212,20 +260,20 @@
       unit_of_measurement: "°C"
       state: >
         {% set temp_ext = states('sensor.th_balcon_nord_temperature') | int (0) %}
-        {% set temp_diff = states('sensor.temperature_differentielle') | int (0) %}
-        {% set consigne_de_base = states('sensor.consigne_de_base') | int (0) %}
+        {% set temp_diff = states('sensor.temperature_differentielle') | int (19) %}
+        {% set consigne_de_base = states('sensor.consigne_de_base') | int (18) %}
         {% set temp_cible = states('sensor.temperature_cible') | int (0) %}
-        {% set delta_1 = states('sensor.delta_1') | int (0) %}
-        {% set delta_2 = states('sensor.delta_2') | int (0) %}
-        {% set delta_3 = states('sensor.delta_3') | int (0) %}
-        {% set delta_5 = states('sensor.delta_5') | int (0) %}
-        {% set delta_7 = states('sensor.delta_7') | int (0) %}
-        {% if   temp_ext < 8  %} {{ ((temp_diff + (temp_cible - consigne_de_base)) - delta_1) | int (0) }}
-        {% elif temp_ext < 10 %} {{ ((temp_diff + (temp_cible - consigne_de_base)) - delta_2) | int (0) }}
-        {% elif temp_ext < 12 %} {{ ((temp_diff + (temp_cible - consigne_de_base)) - delta_2) | int (0) }}
-        {% elif temp_ext < 19 %} {{ ((temp_diff + (temp_cible - consigne_de_base)) - delta_1) | int (0) }}
-        {% elif temp_ext > 40 %} {{ temp_ext - delta_7 | int (0) }}
-        {% elif temp_ext > 32 %} {{ temp_ext - delta_5 | int (0) }}
+        {% set delta_1 = states('sensor.delta_1') | int (1) %}
+        {% set delta_2 = states('sensor.delta_2') | int (2) %}
+        {% set delta_3 = states('sensor.delta_3') | int (3) %}
+        {% set delta_5 = states('sensor.delta_5') | int (5) %}
+        {% set delta_7 = states('sensor.delta_7') | int (7) %}
+        {% if   temp_ext < 8  %} {{ ((temp_diff + (temp_cible - consigne_de_base)) - delta_1) | int (18) }}
+        {% elif temp_ext < 10 %} {{ ((temp_diff + (temp_cible - consigne_de_base)) - delta_2) | int (18) }}
+        {% elif temp_ext < 12 %} {{ ((temp_diff + (temp_cible - consigne_de_base)) - delta_2) | int (18) }}
+        {% elif temp_ext < 19 %} {{ ((temp_diff + (temp_cible - consigne_de_base)) - delta_1) | int (18) }}
+        {% elif temp_ext > 40 %} {{ temp_ext - delta_7 | int (33) }}
+        {% elif temp_ext > 32 %} {{ temp_ext - delta_5 | int (27) }}
         {% else %} {{ (temp_diff + (temp_cible - consigne_de_base)) | int (0) }}
         {% endif %}
 
