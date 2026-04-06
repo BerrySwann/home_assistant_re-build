@@ -1320,7 +1320,7 @@
     before: '21:00:00'
   - condition: template
     value_template: "{{ states('sensor.th_balcon_nord_temperature') | float(0) > \n
-      \  states('sensor.seuil_non_chauffage_bas') | float(15) }}\n"
+      \  states('sensor.seuil_non_chauffage') | float(18) }}\n"
   - condition: numeric_state
     entity_id: sensor.th_balcon_nord_temperature
     below: 25
@@ -1401,7 +1401,7 @@
       title: Delta T° < -1°C
       message: 'Les clim ont été éteintes. ({{ states(''sensor.temperature_delta_valeur'')
         }}°C)  T° Ext.: ({{ states(''sensor.th_balcon_nord_temperature'') }}°C)  Seuil
-        réglé à: {{ states(''sensor.seuil_non_chauffage_bas'') }}°C.
+        réglé à: {{ states(''sensor.seuil_non_chauffage'') }}°C.
 
         '
   mode: single
