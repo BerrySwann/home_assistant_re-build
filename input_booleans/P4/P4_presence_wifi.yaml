@@ -1,45 +1,29 @@
-# ╭──────────────────────────────────────────────────────────────────╮
-# │ INPUT_BOOLEAN : PÔLE 4 — PRÉSENCE & DÉTECTION Wi-Fi             │
-# ╰──────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 4. INPUT BOOLEAN : PRÉSENCE — SUBSTITUTS & SURCHARGES WIFI          │
+# ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Déclare les interrupteurs virtuels de présence du Pôle 4.
-# Chaque booléen reflète l'état de connexion Wi-Fi d'un occupant
-# (ON = connecté au réseau local = présent à la maison).
+# Interrupteurs de présence manuelle permettant de surcharger la détection
+# automatique Wi-Fi/cellulaire. Utiles quand le téléphone n'est pas connecté
+# au Wi-Fi maison mais la personne est physiquement présente (invité, téléphone
+# éteint, réseau en dérangement).
+# Complète la logique de sensor.groupe (groupe_1=Absent → groupe_4=Tous présents).
 #
-# ## 🧮 SOURCES :
-# - Écrits par les automations P4 (détection BSSID/SSID via device_tracker
-#   ou ping) déclarées dans templates/P4_groupe_presence/
-# - Fichiers sources :
-#   → 01_phones_wifi_cellular_card_autom.yaml
-#   → 02_logique_wifi_cellular.yaml
+# ## 🧮 CALCUL & SOURCES :
+# - mode_absence_force :
+#   Forcer manuellement le mode Absent (groupe_1) quelle que soit la détection Wi-Fi.
+#   Utilisé lors de longues absences ou en mode vacances.
+#   Doit être remis à 'off' au retour.
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Ces booléens sont des flags logiques, pas des device_tracker natifs.
-# - Ne pas les forcer manuellement : ils sont gérés exclusivement
-#   par les automations de présence.
-# - En cas d'absence Wi-Fi temporaire (appel, couloir), prévoir un délai
-#   dans l'automation avant de basculer à OFF pour éviter les faux positifs.
+# - Si mode_absence_force est 'on', les automations de clim basculeront en éco.
+# - À documenter dans les automations A0/B0 si intégration future souhaitée.
+# - Actuellement : helper déclaré, intégration automation à venir.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L4C1 Freebox Pop : affichage statut connexion (via template P4)
+# - WIFI_PRESENCE (Page Home — vignette présence Wi-Fi)
 
-# ┌─────────────────────────────────────┐
-# │ PRÉSENCE                            │
-# └─────────────────────────────────────┘
-
-# --- eric_at_home ---
-eric_at_home:
-  name: "Eric à la maison (Wi-Fi)"
-  initial: off
-  icon: mdi:wifi
-
-# --- mamour_at_home ---
-mamour_at_home:
-  name: "Mamour à la maison (Wi-Fi)"
-  initial: off
-  icon: mdi:wifi
-
-# annotations_log:
-# - [L1-18] Ajout en-tête obligatoire (description, sources, pièges, vignettes).
-# - [L20-21] Correction annotations_log : suppression copié-collé P1 hors-sujet.
+# --- mode_absence_force ---
+mode_absence_force:
+  name: "Mode Absence Forcé"
+  icon: mdi:home-export-outline

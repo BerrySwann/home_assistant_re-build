@@ -126,7 +126,7 @@
 # └───────────────────────────────────┘
 # --- temperature_corrige_mamour_hivers ---
     - name: "Temperature Corrigé Mamour Hivers"
-      unique_id: "temperature_corrige_mamour_hivers"
+      unique_id: temperature_corrige_mamour_hivers  # "[L129] modif"
       unit_of_measurement: "°C"
       device_class: temperature
       state: >
@@ -144,7 +144,7 @@
 # └───────────────────────────────────┘
 # --- temperature_corrige_eric_hivers ---
     - name: "Temperature Corrigé Eric Hivers"
-      unique_id: "temperature_corrige_eric_hivers"
+      unique_id: temperature_corrige_eric_hivers  # "[L147] modif"
       unit_of_measurement: "°C"
       device_class: temperature
       state: >
@@ -293,3 +293,7 @@
       state: >
         {{ (states('sensor.temperature_confort') | float(0) -
             states('sensor.th_balcon_nord_temperature') | float(0)) | round(1) }}
+
+# annotations_log:
+# - [L129] unique_id: "temperature_corrige_mamour_hivers" → sans guillemets (convention CLAUDE.md)
+# - [L147] unique_id: "temperature_corrige_eric_hivers" → sans guillemets (convention CLAUDE.md)

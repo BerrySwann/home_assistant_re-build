@@ -1,0 +1,48 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ SWITCH : CHAUFFAGE — INTERRUPTEUR / BP SDB                              │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Switch template contrôlant le soufflant SDB via un input_boolean virtuel.
+# Permet un pilotage unifié depuis l'interface (bouton poussoir virtuel).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : input_boolean.inter_soufflant_salle_de_bain
+# - turn_on  → input_boolean.turn_on
+# - turn_off → input_boolean.turn_off
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce switch pilote l'input_boolean, pas directement le relais physique.
+# - Icône dynamique : mdi:radiator (ON) / mdi:radiator-off (OFF).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C3 Commandes Clim (bouton on/off soufflant SDB)
+
+- switch:
+    # ┌───────────────────────────────────┐
+    # │ 8. SDB                            │
+    # └───────────────────────────────────┘
+    # --- inter_soufflant_salle_de_bain ---
+    - name: "Inter Soufflant Salle de Bain"
+      unique_id: inter_soufflant_salle_de_bain
+      icon: >
+        {% if is_state('input_boolean.inter_soufflant_salle_de_bain', 'on') %}
+          mdi:radiator
+        {% else %}
+          mdi:radiator-off
+        {% endif %}
+      state: "{{ is_state('input_boolean.inter_soufflant_salle_de_bain', 'on') }}"
+      turn_on:
+        - service: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.inter_soufflant_salle_de_bain
+      turn_off:
+        - service: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.inter_soufflant_salle_de_bain
+
+# annotations_log:
+# [L1-3]   Boîte ASCII arrondie mise à 78 chars (standard ReBuild).
+# [L6-17]  En-tête doc obligatoire ajouté (DESCRIPTION, CALCUL, PIÈGES, VIGNETTE).
+# [L20-22] Boîte secondaire carrée 37 chars + numérotation officielle (8. SDB).
+# [L23]    Slug tertiaire présent.
