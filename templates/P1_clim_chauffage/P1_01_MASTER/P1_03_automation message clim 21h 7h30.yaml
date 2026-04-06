@@ -1,6 +1,31 @@
 # ╭────────────────────────────────────────────────────────────────────────────────────────╮
 # │ TEMPLATES : SÉRIE 03_08. CLIM — MESSAGE PERSONNALISÉ (21h00 <-> 7h30)                  │
 # ╰────────────────────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Template sensor générant le message texte envoyé via notification mobile lors des
+# changements d'état de la clim en plage nuit (21h00 → 7h30). Logique simplifiée par
+# rapport à la version jour : en présence, toutes les clims ciblent la température
+# de nuit uniforme. En absence, logique éco-heat identique au mode jour.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - sensor.th_balcon_nord_temperature_trend (increasing / decreasing / stable)
+# - sensor.groupe → groupe_1 (absent) / autre (présence nuit)
+# - sensor.presence → texte de présence en en-tête
+# - sensor.mode_ete_hiver → heat / cool / fan_only
+# - sensor.temperature_confort_nuit → T° cible nuit (toutes pièces)
+# - sensor.temperature_cible / sensor.temperature_eco_hiver_corrige
+# - switch.clim_*_nous → vérifie alimentation de chaque unité
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce fichier produit : sensor.message_clim_personnalise_21h00_7h30
+# - Disponibilité conditionnée à la présence des 4 capteurs réseau/T°.
+# - Ne pas confondre avec le fichier jour (7h30 → 21h00) qui gère 4 groupes distincts.
+# - Nuit : pas de logique groupe_2/3/4 individualisée — température nuit uniforme.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Déclenché par automation L1C3 (notification clim 21h-7h30)
+# - Indirect : remonte dans la notification mobile via automation E_notif_temp_nuit.yaml
 
 - sensor:
 # ┌───────────────────────────────────────────────────────────────────┐
@@ -23,7 +48,7 @@
         {%- set temp_cible = states('sensor.temperature_cible') | float(0) %}
         {%- set temp_eco = states('sensor.temperature_eco_hiver_corrige') | float(17) %}
         {%- set temp_nuit = states('sensor.temperature_confort_nuit') | float(18) %}
-        
+
         {%- set mode = states('sensor.mode_ete_hiver') %}
         {%- set prise_salon = is_state('switch.clim_salon_nous', 'on') %}
         {%- set prise_bureau = is_state('switch.clim_bureau_nous', 'on') %}
