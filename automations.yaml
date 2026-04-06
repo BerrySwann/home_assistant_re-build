@@ -2008,7 +2008,7 @@
     entity_id: sensor.groupe
   - trigger: numeric_state
     entity_id: sensor.prise_bureau_pc_ikea_power
-    above: 20
+    above: 70
     id: pc_working
   - trigger: time
     at:
@@ -2126,7 +2126,7 @@
       sequence:
       - action: switch.turn_off
         target:
-          entity_id: switch.hue_smart_eco_pc_bureau
+          entity_id: light.hue_smart_plug_eco_pc_bureau
       - action: notify.mobile_app_eric
         data:
           title: Veille détectée
