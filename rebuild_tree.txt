@@ -59,11 +59,10 @@
 │       └── total_par_poste_7.yaml
 ├── P1_clim_chauffage
 │   ├── P1_01_MASTER
+│   │   ├── ##P1_01_clim_logique_system_autom.yaml.save
 │   │   ├── P1_01_clim_logique_system_autom.yaml
 │   │   ├── P1_02_automation message clim 21h 7h30.yaml
-│   │   ├── P1_03_automation_message_clim_7h30_21h.yaml
-│   │   ├── automation message clim 21h 7h30.yaml
-│   │   └── automation_message_clim_7h30_21h.yaml
+│   │   └── P1_03_automation_message_clim_7h30_21h.yaml
 │   ├── P1_AVG
 │   │   ├── P1_AVG.yaml
 │   │   └── P1_AVG_TOTAL_AMHQ.yaml
@@ -133,4 +132,4 @@
     └── M_03_meteo_sensors_blitzortung.yaml
 /config/home-assistant-config-v2 [error opening dir]
 
-49 directories, 78 files
+49 directories, 77 files
