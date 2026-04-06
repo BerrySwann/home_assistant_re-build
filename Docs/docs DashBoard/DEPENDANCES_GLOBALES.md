@@ -1,5 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES — TOUTES LES VIGNETTES
-*Dernière mise à jour : 2026-03-28 (session 12 — vérif GitHub + nouveaux fichiers 2026-03-27)*
+*Dernière mise à jour : 2026-04-02 — arborescence docs/ resynchronisée avec état réel local (18/18 vignettes ✅)*
 
 > **RÈGLE :** Ce fichier est mis à jour obligatoirement à chaque création ou modification d'une doc de vignette (`docs/L*`).
 > Format : Vignette → Carte → Template/Sensor → Utility Meter → Source native HA
