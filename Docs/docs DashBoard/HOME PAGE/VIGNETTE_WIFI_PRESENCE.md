@@ -46,12 +46,12 @@ Groupe de 3 cartes bubble-card affiché dans la vue Home. Il permet de visualise
 - L'état global du domicile (les deux présents / un seul / personne) via le **séparateur coloré**
 - La présence individuelle de **Eric** et de **Mamour** avec leur photo de profil et l'heure du dernier changement d'état
 
-La couleur du séparateur est pilotée par `sensor.etat_wifi_maison` qui agrège la connexion WiFi des deux téléphones sur le réseau `Freebox_GG`.
+La couleur du séparateur est pilotée par `sensor.etat_wifi_maison` qui agrège la connexion WiFi des deux téléphones sur les réseaux `Module B.E.R.Y.L. [GG-5.0]` ou `Module B.E.R.Y.L. [GG-2.4]`.
 
 ### Intégrations requises
 
 - ✅ `mobile_app` (Companion App sur Poco X7 Pro × 2) — fournit `device_tracker.*`
-- ✅ `person` (intégration native HA) — combine `device_tracker` + zones
+- ✅ `person` (intégration native HA) — combine `device_tracker` (eric / mamour) + zones
 
 ### Cartes HACS utilisées
 
@@ -74,7 +74,7 @@ La couleur du séparateur est pilotée par `sensor.etat_wifi_maison` qui agrège
 │  └─ Sub-button : person.eric  (photo de profil)          │
 ├──────────────────────────────────────────────────────────┤
 │  BOUTON MAMOUR  [bubble-card button]  grid: 2 col / 1 row│
-│  ├─ Entité principale : device_tracker.poco_x7_pro_mamour│
+│  ├─ Entité principale : device_tracker.mamour            │
 │  └─ Sub-button : person.mamour  (photo de profil)        │
 └──────────────────────────────────────────────────────────┘
 ```
@@ -177,7 +177,7 @@ Affiche l'état de présence de Eric (`home` / `not_home` / nom de zone) avec l'
 - type: custom:bubble-card
   card_type: button
   button_type: state
-  entity: device_tracker.poco_x7_pro_mamour
+  entity: device_tracker.mamour
   show_name: true
   show_last_changed: true
   show_attribute: false
@@ -198,7 +198,7 @@ Affiche l'état de présence de Eric (`home` / `not_home` / nom de zone) avec l'
 
 ### Rôle
 
-Identique à la carte Eric — affiche la présence de Mamour avec sa photo de profil. Le champ `name: Mamour` surcharge le nom de l'entité `device_tracker.poco_x7_pro_mamour` pour un affichage plus lisible.
+Identique à la carte Eric — affiche la présence de Mamour avec sa photo de profil. Le champ `name: Mamour` surcharge le nom de l'entité `device_tracker.mamour` pour un affichage plus lisible.
 
 ---
 
@@ -211,7 +211,7 @@ Identique à la carte Eric — affiche la présence de Mamour avec sa photo de p
 | Entité | Intégration | Configuré via |
 |--------|-------------|---------------|
 | `device_tracker.eric` | `mobile_app` | App Companion → Paramètres > Intégrations |
-| `device_tracker.poco_x7_pro_mamour` | `mobile_app` | App Companion → Paramètres > Intégrations |
+| `device_tracker.mamour` | `mobile_app` | App Companion → Paramètres > Intégrations |
 | `person.eric` | `person` | Paramètres > Personnes |
 | `person.mamour` | `person` | Paramètres > Personnes |
 
@@ -223,8 +223,8 @@ Identique à la carte Eric — affiche la présence de Mamour avec sa photo de p
 
 | Entité | unique_id | Rôle |
 |--------|-----------|------|
-| `sensor.condition_eric_wifi` | `condition_eric_wifi` | `true` si Eric connecté WiFi sur `Freebox_GG` |
-| `sensor.condition_mamour_wifi` | `condition_mamour_wifi` | `true` si Mamour connectée WiFi sur `Freebox_GG` |
+| `sensor.condition_eric_wifi` | `condition_eric_wifi` | `true` si Eric connecté WiFi sur `Module B.E.R.Y.L.` |
+| `sensor.condition_mamour_wifi` | `condition_mamour_wifi` | `true` si Mamour connectée WiFi sur `Module B.E.R.Y.L.` |
 | `sensor.etat_wifi_maison` | `etat_wifi_maison` | Agrégat : `2` / `Eric` / `Mamour` / `0` |
 
 ---
@@ -233,7 +233,7 @@ Identique à la carte Eric — affiche la présence de Mamour avec sa photo de p
 
 ### sensor.condition_eric_wifi / condition_mamour_wifi
 
-Renvoie `true` si le `device_tracker` correspondant est en mode `wifi` ET connecté au SSID `Freebox_GG`. Sinon `false`.
+Renvoie `true` si le `device_tracker` correspondant est en mode `wifi` ET connecté au SSID `Module B.E.R.Y.L. [GG-5.0]` ou `[GG-2.4]`. Sinon `false`.
 
 ### sensor.etat_wifi_maison
 
@@ -263,7 +263,7 @@ Renvoie `true` si le `device_tracker` correspondant est en mode `wifi` ET connec
 ### Le séparateur reste gris alors qu'un téléphone est à la maison
 
 1. Vérifier `sensor.condition_eric_wifi` ou `sensor.condition_mamour_wifi` dans Outils de développement → États
-2. S'assurer que le téléphone est bien connecté à `Freebox_GG` (et non en 4G/5G)
+2. S'assurer que le téléphone est bien connecté à `Module B.E.R.Y.L. [GG-5.0]` ou `[GG-2.4]` (et non en 4G/5G)
 3. Vérifier que l'App Companion est active et que `device_tracker.*` est en état `home`
 
 ### La photo de profil n'apparaît pas
