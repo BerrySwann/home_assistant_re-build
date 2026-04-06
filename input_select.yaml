@@ -1,7 +1,48 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ INPUT SELECT — LISTES DE SÉLECTION PERSISTANTES                         │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Helpers select persistants. Stockent un état choisi parmi une liste finie
+# d'options. Inclus via : input_select: !include input_select.yaml
+#
+# ## 🧮 CALCUL & SOURCES :
+# - etat_resistance_soufflant_sdb :
+#   Représente la puissance active du soufflant SDB (résistance 0 / 1 / 2 kW).
+#   Écrit par automation P1_sdb. Lu par le Dashboard (bubble-card L1C3)
+#   pour l'icône et la couleur de l'état (0W=bleu, 1000W=jaune, 2000W=orange).
+#
+# - saison :
+#   Commutateur manuel Été / Hiver. Utilisé dans etats_status.yaml (P3 UI)
+#   pour adapter l'icône de l'appartement (mdi:home-floor-g si Hiver,
+#   mdi:home-check si Été).
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - etat_resistance_soufflant_sdb : les options DOIVENT correspondre
+#   exactement aux valeurs testées dans le Dashboard JS (=== '2000W', etc.)
+#   Toute coquille (espace, majuscule) casse l'affichage sans erreur visible.
+# - saison : valeur initiale 'Été' — à basculer manuellement en UI
+#   selon la saison réelle (pas d'automatisation temporelle pour l'instant).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C3 Commandes Clim (icône + couleur soufflant SDB)
+# - L3C1 Commandes Éclairage (icône appartement Été/Hiver)
+
+# --- etat_resistance_soufflant_sdb ---
 etat_resistance_soufflant_sdb:
-  name: "Etat Resistance Soufflant SdB"
-  icon: mdi:heating-coil
+  name: "Etat Resistance Soufflant SDB"
   options:
     - "0W"
     - "1000W"
     - "2000W"
+  initial: "0W"
+  icon: mdi:radiator
+
+# --- saison ---
+saison:
+  name: "Saison"
+  options:
+    - "Été"
+    - "Hiver"
+  initial: "Été"
+  icon: mdi:weather-sunny

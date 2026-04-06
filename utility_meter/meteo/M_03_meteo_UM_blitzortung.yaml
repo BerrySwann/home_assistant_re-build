@@ -18,26 +18,31 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L1C1 Météo (section foudre/Blitzortung)
 
+# --- eclair_annuel ---
 eclair_annuel:
     name: "Éclairs Annuel"
     source: sensor.maison_lightning_counter
     cycle: yearly
 
+# --- eclair_mensuel ---
 eclair_mensuel:
     name: "Éclairs Mensuel"
     source: sensor.maison_lightning_counter
     cycle: monthly
 
+# --- eclair_hebdomadaire ---
 eclair_hebdomadaire:
     name: "Éclairs Hebdomadaire"
     source: sensor.maison_lightning_counter
     cycle: weekly
 
+# --- eclair_quotidien ---
 eclair_quotidien:
     name: "Éclairs Quotidien"
     source: sensor.maison_lightning_counter
     cycle: daily
 
+# --- eclair_horaire ---
 eclair_horaire:
     name: "Éclairs Horaire"
     source: sensor.maison_lightning_counter

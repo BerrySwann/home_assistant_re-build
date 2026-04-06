@@ -24,6 +24,7 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale (suivi temps réel min/max/moy).
 
+# --- ecojoko_conso_mini_24h ---
 - platform: statistics
   name: "Conso Mini"
   unique_id: ecojoko_conso_mini_24h
@@ -32,6 +33,7 @@
   max_age:
     hours: 24
 
+# --- ecojoko_conso_maxi_24h ---
 - platform: statistics
   name: "Conso Maxi"
   unique_id: ecojoko_conso_maxi_24h
@@ -40,6 +42,7 @@
   max_age:
     hours: 24
 
+# --- ecojoko_conso_moyenne_1h ---
 - platform: statistics
   name: "Conso Moyenne 1h"
   unique_id: ecojoko_conso_moyenne_1h

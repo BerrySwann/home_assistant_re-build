@@ -22,6 +22,7 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L6C1 : Qualité de l'air intérieur (marker2 des ring-tile PM2.5 + tCOV)
 
+# --- pm2_5_salon_moy_24h ---
 - platform: statistics
   name: "PM2.5 Salon (moy 24h)"
   unique_id: pm2_5_salon_moy_24h
@@ -31,6 +32,7 @@
     hours: 24
   precision: 1
 
+# --- tcov_salon_moy_24h ---
 - platform: statistics
   name: "tCOV Salon (moy 24h)"
   unique_id: tcov_salon_moy_24h
@@ -40,6 +42,7 @@
     hours: 24
   precision: 1
 
+# --- pm2_5_bureau_moy_24h ---
 - platform: statistics
   name: "PM2.5 Bureau (moy 24h)"
   unique_id: pm2_5_bureau_moy_24h
@@ -49,6 +52,7 @@
     hours: 24
   precision: 1
 
+# --- tcov_bureau_moy_24h ---
 - platform: statistics
   name: "tCOV Bureau (moy 24h)"
   unique_id: tcov_bureau_moy_24h
@@ -58,6 +62,7 @@
     hours: 24
   precision: 1
 
+# --- pm2_5_chambre_moy_24h ---
 - platform: statistics
   name: "PM2.5 Chambre (moy 24h)"
   unique_id: pm2_5_chambre_moy_24h
@@ -67,6 +72,7 @@
     hours: 24
   precision: 1
 
+# --- tcov_chambre_moy_24h ---
 - platform: statistics
   name: "tCOV Chambre (moy 24h)"
   unique_id: tcov_chambre_moy_24h
