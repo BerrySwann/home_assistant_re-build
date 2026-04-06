@@ -1643,60 +1643,66 @@
     - alias: 'Détection : UP (Hausse)'
       conditions:
       - condition: template
-        value_template: '{{ ''Up >>>'' in trigger.to_state.state }}'
+        value_template: '{{ ''Up ↗'' in trigger.to_state.state }}'
       sequence:
       - variables:
-          temp_ext: '{{ trigger.to_state.state.split(''|'')[1].split(''Up >>>'')[1].split(''°'')[0].strip()
-            }}'
+          temp_ext: "{% if 'Up ↗' in trigger.to_state.state %}\n  {{ trigger.to_state.state.split('Up
+            ↗ ')[1].split('°')[0].strip() }}\n{% else %}\n  ?\n{% endif %}"
       - action: notify.mobile_app_eric
         data:
           message: '[Tendance] Température extérieure en hausse : {{ temp_ext }}°'
     - alias: 'Détection : DOWN (Baisse)'
       conditions:
       - condition: template
-        value_template: '{{ ''Down <<<'' in trigger.to_state.state }}'
+        value_template: '{{ ''Down ↘'' in trigger.to_state.state }}'
       sequence:
       - variables:
-          temp_ext: '{{ trigger.to_state.state.split(''|'')[1].split(''Down <<<'')[1].split(''°'')[0].strip()
-            }}'
+          temp_ext: "{% if 'Down ↘' in trigger.to_state.state %}\n  {{ trigger.to_state.state.split('Down
+            ↘ ')[1].split('°')[0].strip() }}\n{% else %}\n  ?\n{% endif %}"
       - action: notify.mobile_app_eric
         data:
           message: '[Tendance] Température extérieure en baisse : {{ temp_ext }}°'
     - alias: 'Détection : STABLE'
       conditions:
       - condition: template
-        value_template: '{{ ''stable'' in trigger.to_state.state }}'
+        value_template: '{{ ''stable →'' in trigger.to_state.state }}'
       sequence:
       - variables:
-          temp_ext: '{{ trigger.to_state.state.split(''|'')[1].split(''°'')[0].split(''stable'')[1].strip()
-            }}'
+          temp_ext: "{% if 'stable →' in trigger.to_state.state %}\n  {{ trigger.to_state.state.split('stable
+            → ')[1].split('°')[0].strip() }}\n{% else %}\n  ?\n{% endif %}"
       - action: notify.mobile_app_eric
         data:
           message: '[Tendance] Température extérieure stable : {{ temp_ext }}°'
     - alias: 'Détection : HEAT'
       conditions:
       - condition: template
-        value_template: '{{ ''Heat'' in trigger.to_state.state }}'
+        value_template: '{{ ''HEAT]'' in trigger.to_state.state }}'
       sequence:
       - variables:
-          message_part: '{{ trigger.to_state.state.split(''|'')[2] }}'
+          message_part: "{% if 'HEAT]\\n' in trigger.to_state.state %}\n  {{ trigger.to_state.state.split('HEAT]\\n')[1]
+            }}\n{% else %}\n  Inconnu\n{% endif %}"
       - action: notify.mobile_app_eric
         data:
-          message: '[Mode] Chauffage activé : {{ message_part }}'
+          message: '[Mode] Chauffage activé :
+
+            {{ message_part }}'
     - alias: 'Détection : COOL'
       conditions:
       - condition: template
-        value_template: '{{ ''Cool'' in trigger.to_state.state }}'
+        value_template: '{{ ''COOL]'' in trigger.to_state.state }}'
       sequence:
       - variables:
-          message_part: '{{ trigger.to_state.state.split(''|'')[2] }}'
+          message_part: "{% if 'COOL]\\n' in trigger.to_state.state %}\n  {{ trigger.to_state.state.split('COOL]\\n')[1]
+            }}\n{% else %}\n  Inconnu\n{% endif %}"
       - action: notify.mobile_app_eric
         data:
-          message: '[Mode] Rafraîchissement activé : {{ message_part }}'
+          message: '[Mode] Rafraîchissement activé :
+
+            {{ message_part }}'
     - alias: 'Détection : FAN'
       conditions:
       - condition: template
-        value_template: '{{ ''Fan'' in trigger.to_state.state }}'
+        value_template: '{{ ''FAN ONLY]'' in trigger.to_state.state }}'
       sequence:
       - action: notify.mobile_app_eric
         data:
