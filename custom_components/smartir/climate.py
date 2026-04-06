@@ -365,28 +365,23 @@ class SmartIRClimate(ClimateEntity, RestoreEntity):
                 self._on_by_remote = False
                 operation_mode = self._hvac_mode
                 fan_mode = self._current_fan_mode
+                swing_mode = self._current_swing_mode
                 target_temperature = '{0:g}'.format(self._target_temperature)
 
                 if operation_mode.lower() == HVACMode.OFF:
                     await self._controller.send(self._commands['off'])
                     return
 
-                # --- AJOUT DE SÉCURITÉ ICI ---
-                try:
-                    if self._support_swing == True:
-                        cmd = self._commands[operation_mode][fan_mode][self._current_swing_mode][target_temperature]
-                    else:
-                        cmd = self._commands[operation_mode][fan_mode][target_temperature]
-                except KeyError:
-                    _LOGGER.error(f"Température {target_temperature} non trouvée pour {operation_mode}/{fan_mode}. Utilisation du min_temp.")
-                    target_temperature = '{0:g}'.format(self._min_temperature)
-                    if self._support_swing == True:
-                        cmd = self._commands[operation_mode][fan_mode][self._current_swing_mode][target_temperature]
-                    else:
-                        cmd = self._commands[operation_mode][fan_mode][target_temperature]
-                # --- FIN DE L'AJOUT ---
+                if 'on' in self._commands:
+                    await self._controller.send(self._commands['on'])
+                    await asyncio.sleep(self._delay)
 
-                await self._controller.send(cmd)
+                if self._support_swing == True:
+                    await self._controller.send(
+                        self._commands[operation_mode][fan_mode][swing_mode][target_temperature])
+                else:
+                    await self._controller.send(
+                        self._commands[operation_mode][fan_mode][target_temperature])
 
             except Exception as e:
                 _LOGGER.exception(e)
