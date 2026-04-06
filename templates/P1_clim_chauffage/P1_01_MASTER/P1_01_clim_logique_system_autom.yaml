@@ -113,27 +113,16 @@
       unique_id: consigne_de_base
       unit_of_measurement: "°C"
       state: >
-        {# 1. On récupère les états et on les convertit en nombres #}
-        {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(-999) %}
-        {% set temp_no_chauf = states('sensor.seuil_non_chauffage_bas') | float(-999) %}
-        {% set temp_no_clim = states('sensor.seuil_non_clim_haut') | float(-999) %}
+        {% set temp_no_chauf = states('sensor.seuil_non_chauffage') | float(-999) %}
+        {% set temp_no_clim = states('sensor.seuil_non_clim') | float(-999) %}
         {% set mode = states('sensor.mode_ete_hiver') %}
-
-        {# 2. Sécurité : si un capteur est HS, on renvoie une valeur de secours (18) au lieu de 0 #}
-        {% if temp_ext == -999 or temp_no_chauf == -999 or temp_no_clim == -999 %}
-          18
+        {% if mode == 'heat' %}
+          {{ temp_no_chauf }}
+        {% elif mode == 'cool' %}
+          {{ temp_no_clim }}
         {% else %}
-          {# 3. Logique de sélection selon le mode #}
-          {% if mode == 'heat' %}
-            {{ temp_no_chauf }}
-          {% elif mode == 'cool' %}
-            {{ temp_no_clim }}
-          {% else %}
-            {# Mode fan_only ou autre : on reste sur la base chauffage #}
-            {{ temp_no_chauf }}
-          {% endif %}
+          {{ temp_no_chauf }}
         {% endif %}
-
 
 # Temperature différentielle
 # Hiver: 19° / Été: 27°
@@ -143,26 +132,16 @@
       unit_of_measurement: "°C"
       state: >
         state: >
-        {# 1. Définition des variables (assure-toi que les noms de sensors sont les bons) #}
-        {% set temp_no_chauf = states('sensor.seuil_non_chauffage_bas') | float(-999) %}
-        {% set temp_no_clim = states('sensor.seuil_non_clim_haut') | float(-999) %}
+        {% set temp_no_chauf = states('sensor.seuil_non_chauffage') | float(-999) %}
+        {% set temp_no_clim = states('sensor.seuil_non_clim') | float(-999) %}
         {% set d1 = states('sensor.delta_1') | float(1) %}
         {% set mode = states('sensor.mode_ete_hiver') %}
-
-        {# 2. Sécurité : si un capteur est HS, on renvoie 18 #}
-        {% if temp_ext == -999 or temp_no_chauf == -999 or temp_no_clim == -999 %}
-          18
+        {% if mode == 'heat' %}
+          {{ (temp_no_chauf + d1) | round(1) }}
+        {% elif mode == 'cool' %}
+          {{ (temp_no_clim - d1) | round(1) }}
         {% else %}
-          {# 3. Logique de calcul selon le mode #}
-          {% if mode == 'heat' %}
-            {# Addition mathématique : 18 + 1 = 19 #}
-            {{ (temp_no_chauf + d1) | round(1) }}
-          {% elif mode == 'cool' %}
-            {# Soustraction mathématique : 28 - 1 = 27 #}
-            {{ (temp_no_clim - d1) | round(1) }}
-          {% else %}
-            {{ temp_no_chauf }}
-          {% endif %}
+          {{ temp_no_chauf }}
         {% endif %}
 
 # ┌───────────────────────────────────────────────────────────────────┐
