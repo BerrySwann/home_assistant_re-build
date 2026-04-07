@@ -2598,7 +2598,7 @@
         | round(2) %} {% set p2 = states(''sensor.diag_poste_cuisine_quotidien'')
         | float(0) | round(2) %} {% set p3 = states(''sensor.diag_poste_froid_quotidien'')
         | float(0) | round(2) %} {% set p4 = states(''sensor.diag_poste_chauffage_quotidien'')
-        | float(0) | round(2) %} {% set agv_clim = states(''sensor.clim_rad_total_avg_watts_daily'')
+        | float(0) | round(2) %} {% set agv_clim = states(''sensor.clim_rad_total_avg_watts_quotidien'')
         | float(0) | round(2) %} {% set p5 = states(''sensor.diag_poste_multimedia_quotidien'')
         | float(0) | round(2) %} {% set p6 = states(''sensor.diag_poste_eclairage_quotidien'')
         | float(0) | round(2) %} {% set p7 = states(''sensor.diag_poste_autre_quotidien'')
