@@ -1412,17 +1412,22 @@
 
     '
   triggers:
-  - trigger: state
+  - alias: 'DÉCLENCHEUR : CAPTEUR TEMPÉRATURE'
+    trigger: state
     entity_id: sensor.th_balcon_nord_temperature
-  - trigger: time
+  - alias: 'DÉCLENCHEUR : HORAIRE FIXE 07H30'
+    trigger: time
     at: 07:30:00
   conditions: []
   actions:
-  - condition: time
+  - alias: 'CONDITION : PÉRIODE DIURNE'
+    condition: time
     after: 07:30:00
     before: '21:00:00'
-  - delay: 00:00:02
-  - if:
+  - alias: 'ACTION : PAUSE 2 SECONDES'
+    delay: 00:00:02
+  - alias: 'LOGIQUE : VÉRIFICATION CAPTEURS'
+    if:
     - condition: template
       value_template: "{{ states('sensor.message_clim_personnalise_7h30_21h00') in
         ['unknown', 'unavailable'] or\n   states('sensor.mamour_wi_fi_connection')
@@ -1430,13 +1435,16 @@
         in ['unknown', 'unavailable'] or\n   states('sensor.th_balcon_nord_temperature')
         in ['unknown', 'unavailable'] }}\n"
     then:
-    - action: notify.mobile_app_eric
+    - alias: 'ACTION : NOTIF ERREUR (MAX 15 CAR)'
+      action: notify.mobile_app_eric
       data:
         title: '[ANJ] Erreur Capteurs'
-        message: Un capteur (Température, Wifi ou Message) est indisponible. Vérifiez
-          les entités.
+        message: 'Un capteur (Temperature, Wifi ou Message) est indisponible. Verifiez
+          les entites. # "[L...] modif" (Retrait des accents problématiques si nécessaire
+          pour ASCII pur)'
     else:
-    - action: notify.mobile_app_eric
+    - alias: 'ACTION : NOTIF TENDANCE (MAX 15 CAR)'
+      action: notify.mobile_app_eric
       data:
         title: '[Automa. Notif. Jrs]'
         message: '{{ states(''sensor.message_clim_personnalise_7h30_21h00'') }}'
@@ -1448,17 +1456,22 @@
 
     '
   triggers:
-  - trigger: state
+  - alias: 'DÉCLENCHEUR : CAPTEUR TEMPÉRATURE'
+    trigger: state
     entity_id: sensor.th_balcon_nord_temperature
-  - trigger: time
+  - alias: 'DÉCLENCHEUR : HORAIRE FIXE 21H00'
+    trigger: time
     at: '21:00:00'
   conditions: []
   actions:
-  - condition: time
+  - alias: 'CONDITION : PÉRIODE NOCTURNE'
+    condition: time
     after: '21:00:00'
     before: 07:30:00
-  - delay: 00:00:02
-  - if:
+  - alias: 'ACTION : PAUSE 2 SECONDES'
+    delay: 00:00:02
+  - alias: 'LOGIQUE : VÉRIFICATION CAPTEURS'
+    if:
     - condition: template
       value_template: "{{ states('sensor.message_clim_personnalise_21h00_7h30') in
         ['unknown', 'unavailable'] or\n   states('sensor.mamour_wi_fi_connection')
@@ -1466,12 +1479,15 @@
         in ['unknown', 'unavailable'] or\n   states('sensor.th_balcon_nord_temperature')
         in ['unknown', 'unavailable'] }}\n"
     then:
-    - action: notify.mobile_app_eric
+    - alias: 'ACTION : NOTIF ERREUR (MAX 15 CAR)'
+      action: notify.mobile_app_eric
       data:
         title: '[ANN] Erreur Capteurs'
-        message: 'Erreur : Un capteur TENDANCE est indisponible ! Vérifiez les dépendances.'
+        message: 'Erreur: Un capteur TENDANCE est indisponible! Verifiez les dependances.
+          # "[L...] modif"'
     else:
-    - action: notify.mobile_app_eric
+    - alias: 'ACTION : NOTIF TENDANCE (MAX 15 CAR)'
+      action: notify.mobile_app_eric
       data:
         title: '[Automa. Notif. Nuit]'
         message: '{{ states(''sensor.message_clim_personnalise_21h00_7h30'') }}'
