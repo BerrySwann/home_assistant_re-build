@@ -2076,12 +2076,15 @@
       entity_id: switch.prise_tete_de_lit_chambre
   - action: notify.mobile_app_eric
     data:
-      title: '{{ states(''sensor.presence'') }}'
-      message: "{% set prises = [\n  'switch.prise_tv_salon_ikea',\n  'switch.prise_horloge_ikea',\n
-        \ 'light.hue_smart_salon',\n  'switch.ecran_p_c_3_play_hue',\n  'light.hue_smart_plug_eco_pc_bureau',\n
-        \ 'switch.prise_tete_de_lit_chambre'\n] %} {% set count_on = prises | select('is_state',
-        'on') | list | count %} [{{ count_on }}] prises [ON]{% if pc_active %} PC:{{
-        states('sensor.prise_bureau_pc_ikea_power') | int }}W{% endif %}\n"
+      title: '{{ states(''sensor.groupe'') }}'
+      message: "{% set prises = [\n    'switch.prise_horloge_ikea',\n    'switch.ecran_p_c_3_play_hue',\n
+        \   'light.hue_play_1_pc_bureau',\n    'switch.prise_tete_de_lit_chambre',\n
+        \   'switch.prise_tv_salon_ikea',\n    'light.hue_smart_salon'\n] %} {% set
+        count_on = namespace(value=0) %} {% for p in prises %}\n  {% if p in states
+        and (states(p) == 'on' or (state_attr(p) is defined and state_attr(p).brightness
+        is defined and state_attr(p).brightness > 0)) %}\n    {% set count_on.value
+        = count_on.value + 1 %}\n  {% endif %}\n{% endfor %} [{{ count_on.value }}]
+        ON | PC: {{ states('sensor.prise_bureau_pc_ikea_power') | int }}W\n"
   mode: queued
 - id: '1775245732227'
   alias: 'Gestion PC bureau : Scène de Fin + Notif'
@@ -2096,7 +2099,7 @@
   - id: extinction_conso
     trigger: numeric_state
     entity_id: sensor.prise_bureau_pc_ikea_power
-    below: 80
+    below: 40
     for:
       minutes: 2
   actions:
