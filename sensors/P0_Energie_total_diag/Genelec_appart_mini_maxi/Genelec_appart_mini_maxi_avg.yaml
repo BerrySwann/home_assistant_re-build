@@ -25,7 +25,7 @@
 
 # --- genelec_appart_conso_mini_24h ---
 - platform: statistics
-  name: "Conso Mini"
+  name: "Genelec Appart Conso Mini 24h"
   unique_id: genelec_appart_conso_mini_24h
   entity_id: sensor.general_electric_appart_power                          # "[L31] modif"
   state_characteristic: value_min
@@ -34,7 +34,7 @@
 
 # --- genelec_appart_conso_maxi_24h ---
 - platform: statistics
-  name: "Conso Maxi"
+  name: "Genelec Appart Conso Maxi 24h"
   unique_id: genelec_appart_conso_maxi_24h
   entity_id: sensor.general_electric_appart_power                          # "[L40] modif"
   state_characteristic: value_max
