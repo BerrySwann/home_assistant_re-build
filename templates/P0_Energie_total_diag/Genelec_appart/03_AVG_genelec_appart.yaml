@@ -1,0 +1,72 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. TEMPLATE AVG : PUISSANCE MOYENNE APPART (W) — AMHQ               │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Quatre capteurs templates calculant la puissance moyenne continue équivalente
+# (en Watts) de la consommation globale du logement, lissée sur 4 périodes :
+# Quotidien, Hebdomadaire, Mensuel, Annuel (AMHQ).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : (kWh_cumulé × 1000) / heures_écoulées_depuis_reset → W moyen.
+# - Source unique : sensor.ecojoko_reseau_*_um (UM total — plus de split HP/HC). # "[modif] : HP+HC supprimés, source = UM total"
+# - Quotidien : h = now().hour + (now().minute / 60)
+# - Hebdo     : hh = (now().weekday() * 24) + h
+# - Mensuel   : hm = ((now().day - 1) * 24) + h
+# - Annuel    : ha = ((now().timetuple().tm_yday - 1) * 24) + h
+# - Garde div zéro : if h > 0.1 else 0
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Source = UM total (utility_meter/P0_Energie_total/Ecojoko/).
+#   HP et HC ne sont plus distingués — source Ecojoko remplacée par
+#   sensor.general_electric_appart_energy.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (puissance de croisière appartement).
+
+- sensor:
+  # --- genelec_appart_avg_watts_quotidien ---
+  - name: "Genelec Appart Avg Watts Quotidien"
+    unique_id: genelec_appart_avg_watts_quotidien
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.genelec_appart_quotidien_um') | float(0) %}  {# "[modif] : hp+hc → reseau_quotidien_um" #}
+      {% set h = now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+  # --- genelec_appart_avg_watts_hebdomadaire ---
+  - name: "Genelec Appart Avg Watts Hebdomadaire"
+    unique_id: genelec_appart_avg_watts_hebdomadaire
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.genelec_appart_hebdomadaire_um') | float(0) %}  {# "[modif] : hp+hc → reseau_hebdomadaire_um" #}
+      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+  # --- genelec_appart_avg_watts_mensuel ---
+  - name: "Genelec Appart Avg Watts Mensuel"
+    unique_id: genelec_appart_avg_watts_mensuel
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.genelec_appart_mensuel_um') | float(0) %}  {# "[modif] : hp+hc → reseau_mensuel_um" #}
+      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+  # --- genelec_appart_avg_watts_annuel ---
+  - name: "Genelec Appart Avg Watts Annuel"
+    unique_id: genelec_appart_avg_watts_annuel
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.genelec_appart_annuel_um') | float(0) %}  {# "[modif] : hp+hc → reseau_annuel_um" #}
+      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+# annotations_log:
+# - [L35] modif : hp + hc → sensor.genelec_appart_quotidien_um (source unique)
+# - [L42] modif : hp + hc → sensor.genelec_appart_hebdomadaire_um (source unique)
+# - [L49] modif : hp + hc → sensor.genelec_appart_mensuel_um (source unique)
+# - [L56] modif : hp + hc → sensor.genelec_appart_annuel_um (source unique)

@@ -1,0 +1,79 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. UTILITY METER : GENELEC APPART — HP/HC AMHQ (4 PÉRIODES)         │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Compteurs Utility Meter avec split tarifaire HP/HC pour la consommation
+# totale de l'appartement. Chaque UM génère deux sous-capteurs automatiques :
+#   - sensor.genelec_appart_hphc_*_um_hp  (Heures Pleines)
+#   - sensor.genelec_appart_hphc_*_um_hc  (Heures Creuses)
+# Le basculement HP ↔ HC est piloté par l'automation energie/basculement_tarif_hphc.yaml.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : sensor.general_electric_appart_energy (kWh cumulatif total).
+# - Plages HC  : 01:00→07:30 et 13:00→14:30.
+# - Plages HP  : 07:30→13:00 et 14:30→01:00.
+# - Basculement : action utility_meter.select_tariff → HP ou HC.
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ces UM ne fonctionnent QUE si l'automation de basculement est active.
+#   Sans elle, le tarif reste figé sur le dernier sélectionné.
+# - Au 1er démarrage HA, initialiser manuellement le tarif courant via
+#   Outils développeur → Services → utility_meter.select_tariff.
+# - Les entités select générées : select.genelec_appart_hphc_*_um
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (coûts HP/HC, ratio HC, pie charts)
+
+# ─── QUOTIDIEN ────────────────────────────────────────────────────────────────
+
+# --- genelec_appart_hphc_quotidien_um ---
+genelec_appart_hphc_quotidien_um:
+  source: sensor.general_electric_appart_energy
+  name: "Genelec Appart HP/HC Quotidien UM"
+  unique_id: genelec_appart_hphc_quotidien_um
+  cycle: daily
+  tariffs:
+    - HP
+    - HC
+
+# ─── HEBDOMADAIRE ─────────────────────────────────────────────────────────────
+
+# --- genelec_appart_hphc_hebdomadaire_um ---
+genelec_appart_hphc_hebdomadaire_um:
+  source: sensor.general_electric_appart_energy
+  name: "Genelec Appart HP/HC Hebdomadaire UM"
+  unique_id: genelec_appart_hphc_hebdomadaire_um
+  cycle: weekly
+  tariffs:
+    - HP
+    - HC
+
+# ─── MENSUEL ──────────────────────────────────────────────────────────────────
+
+# --- genelec_appart_hphc_mensuel_um ---
+genelec_appart_hphc_mensuel_um:
+  source: sensor.general_electric_appart_energy
+  name: "Genelec Appart HP/HC Mensuel UM"
+  unique_id: genelec_appart_hphc_mensuel_um
+  cycle: monthly
+  tariffs:
+    - HP
+    - HC
+
+# ─── ANNUEL ───────────────────────────────────────────────────────────────────
+
+# --- genelec_appart_hphc_annuel_um ---
+genelec_appart_hphc_annuel_um:
+  source: sensor.general_electric_appart_energy
+  name: "Genelec Appart HP/HC Annuel UM"
+  unique_id: genelec_appart_hphc_annuel_um
+  cycle: yearly
+  tariffs:
+    - HP
+    - HC
+
+# annotations_log:
+# - [Création] 4 UM HP/HC AMHQ — source sensor.general_electric_appart_energy
+# - Entités générées : *_um_hp et *_um_hc pour chaque période
+# - Basculement piloté par : automations_corrige/energie/basculement_tarif_hphc.yaml
