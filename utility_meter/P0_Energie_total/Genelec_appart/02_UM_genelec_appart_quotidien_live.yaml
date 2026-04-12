@@ -22,11 +22,12 @@
 
 # --- genelec_appart_quotidien_um ---
 # J-0 live (state) | J-1 automatique (attribut last_period)
-genelec_appart_quotidien_um:
-  source: sensor.general_electric_appart_energy                            # "[L26] modif"
-  name: "Réseau Quotidien UM"
-  unique_id: genelec_appart_quotidien_um
-  cycle: daily
+- sensor:
+    genelec_appart_quotidien_um:
+      source: sensor.general_electric_appart_energy                            # "[L26] modif"
+      name: "Réseau Quotidien UM"
+      unique_id: genelec_appart_quotidien_um
+      cycle: daily
 
 # annotations_log:
 # - [L26] modif : source ecojoko_consommation_reseau → general_electric_appart_energy
