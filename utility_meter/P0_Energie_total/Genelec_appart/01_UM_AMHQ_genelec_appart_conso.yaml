@@ -1,15 +1,15 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 0. UTILITY METER : ÉNERGIE APPART — COÛT AMHQ (TOTAL)               │
+# │ PÔLE 0. UTILITY METER : ÉNERGIE APPART — CONSO AMHQ (TOTAL)               │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
 # Compteurs Utility Meter découpant la consommation totale de l'appartement
-# en 3 cycles temporels (Mensuel, Hebdomadaire, Annuel).
+# en 4 cycles temporels : Annuel, Mensuel, Hebdomadaire, Quotidien (AMHQ).
 # Source unique : sensor.general_electric_appart_energy (plus de split HP/HC).
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Source : sensor.general_electric_appart_energy (kWh cumulatif total).    # "[modif] : ecojoko_consommation_reseau → general_electric_appart_energy / HP+HC supprimés"
-# - Les cycles UM accumulent ces valeurs sur la période (mensuel, hebdo, annuel).
+# - Source : sensor.general_electric_appart_energy (kWh cumulatif total).
+# - Les cycles UM accumulent ces valeurs sur la période (AMHQ).
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # Les entrées HP et HC ont été supprimées (source Ecojoko remplacée par
@@ -20,47 +20,53 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale (coûts mensuel/annuel)
 
-# ─── ANNUEL ──────────────────────────────────────────────────────────────────
+- sensor:
 
-# --- genelec_appart_annuel_um ---
-genelec_appart_conso_annuel_um:
-  source: sensor.general_electric_appart_energy                            # "[L41] modif"
-  name: "Genelec Appart Annuel UM"
-  unique_id: genelec_appart_annuel_um
-  cycle: yearly
+  # ┌─────────────────────────────────────────┐
+  # │   GENELEC APPART : ANNUEL (kWh)         │
+  # └─────────────────────────────────────────┘
+  # --- genelec_appart_conso_annuel_um ---
+  genelec_appart_conso_annuel_um:
+    source: sensor.general_electric_appart_energy  # "[L41] modif"
+    name: "Genelec Appart Conso Annuel UM"
+    unique_id: genelec_appart_conso_annuel_um
+    cycle: yearly
 
-# ─── MENSUEL ─────────────────────────────────────────────────────────────────
+  # ┌─────────────────────────────────────────┐
+  # │   GENELEC APPART : MENSUEL (kWh)        │
+  # └─────────────────────────────────────────┘
+  # --- genelec_appart_conso_mensuel_um ---
+  genelec_appart_conso_mensuel_um:
+    source: sensor.general_electric_appart_energy  # "[L27] modif"
+    name: "Genelec Appart Conso Mensuel UM"
+    unique_id: genelec_appart_conso_mensuel_um
+    cycle: monthly
 
-# --- genelec_appart_mensuel_um ---
-genelec_appart_conso_mensuel_um:
-  source: sensor.general_electric_appart_energy                            # "[L27] modif"
-  name: "Genelec Appart Mensuel UM"
-  unique_id: genelec_appart_mensuel_um
-  cycle: monthly
+  # ┌─────────────────────────────────────────┐
+  # │   GENELEC APPART : HEBDOMADAIRE (kWh)   │
+  # └─────────────────────────────────────────┘
+  # --- genelec_appart_conso_hebdomadaire_um ---
+  genelec_appart_conso_hebdomadaire_um:
+    source: sensor.general_electric_appart_energy  # "[L34] modif"
+    name: "Genelec Appart Conso Hebdomadaire UM"
+    unique_id: genelec_appart_conso_hebdomadaire_um
+    cycle: weekly
 
-# ─── HEBDOMADAIRE ────────────────────────────────────────────────────────────
-
-# --- genelec_appart_hebdomadaire_um ---
-genelec_appart_conso_hebdomadaire_um:
-  source: sensor.general_electric_appart_energy                            # "[L34] modif"
-  name: "Genelec Appart Hebdomadaire UM"
-  unique_id: genelec_appart_hebdomadaire_um
-  cycle: weekly
-
-# ─── HEBDOMADAIRE ────────────────────────────────────────────────────────────
-
-# --- genelec_appart_hebdomadaire_um ---
-genelec_appart_conso_quotidien_um:
-  source: sensor.general_electric_appart_energy                            # "[L34] modif"
-  name: "Genelec Appart Quotidien UM"
-  unique_id: genelec_appart_quotidien_um
-  cycle: weekly
-
+  # ┌─────────────────────────────────────────┐
+  # │   GENELEC APPART : QUOTIDIEN (kWh)      │
+  # └─────────────────────────────────────────┘
+  # --- genelec_appart_conso_quotidien_um ---
+  genelec_appart_conso_quotidien_um:
+    source: sensor.general_electric_appart_energy  # "[L45] modif"
+    name: "Genelec Appart Conso Quotidien UM"
+    unique_id: genelec_appart_conso_quotidien_um
+    cycle: daily
 
 # annotations_log:
 # - [L27] modif : source ecojoko_consommation_reseau → general_electric_appart_energy
 # - [L34] modif : source ecojoko_consommation_reseau → general_electric_appart_energy
 # - [L41] modif : source ecojoko_consommation_reseau → general_electric_appart_energy
+# - [L45] ajout : cycle daily pour conso quotidienne
 # - [SUPPRIMÉ] ecojoko_hp_reseau_mensuel_um / ecojoko_hc_reseau_mensuel_um
 # - [SUPPRIMÉ] ecojoko_hp_reseau_hebdomadaire_um / ecojoko_hc_reseau_hebdomadaire_um
 # - [SUPPRIMÉ] ecojoko_hp_reseau_annuel_um / ecojoko_hc_reseau_annuel_um
