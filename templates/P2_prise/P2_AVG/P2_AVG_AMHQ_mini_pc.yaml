@@ -1,5 +1,6 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ PÔLE 2. TEMPLATE AVG : PUISSANCE MOYENNE (W) AMHQ — MINI PC (BUREAU)     │
+# │ PÔLE 2. PRISES : MOYENNE WATTS MINI PC                                   │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -26,6 +27,24 @@
 # - L4C2 Mini PC — pop-up #conso (streamline-card : avg_daily_entity + avg_monthly_entity)
 
 - sensor:
+    # ┌─────────────────────────────────────────┐
+    # │   MINI PC : MOYENNE WATTS QUOTIDIENNE   │
+    # └─────────────────────────────────────────┘
+    - name: "mini_pc_avg_watts_quotidien"
+      unit_of_measurement: "W"
+      state_class: measurement
+      device_class: power
+      icon: mdi:chart-bell-curve-cumulative
+      state: >
+        {% set start = now().replace(hour=0, minute=0, second=0, microsecond=0) %}
+        {% set seconds_elapsed = (now() - start).total_seconds() %}
+        {% set hours_elapsed = seconds_elapsed / 3600 %}
+        {% set kwh = states('sensor.prise_mini_pc_ikea_quotidien_kwh_um') | float(0) %}
+        {% if hours_elapsed > 0 %}
+          {{ ((kwh * 1000) / hours_elapsed) | round(2) }}
+        {% else %}
+          0
+        {% endif %}
 
   # ┌───────────────────────────────────┐
   # │ 7. BUREAU                         │
@@ -78,3 +97,21 @@
 # - [ORDRE]  Réordonné AMHQ : Annuel → Mensuel → Hebdomadaire → Quotidien
 # - [STRUCT] Indentation corrigée : 4 sensors au bon niveau (2 esp. sous sensor:)
 # - [DUP]    Suppression unique_id dupliqué (mini_pc_avg_watts_annuel × 2 → × 1)
+    # ┌─────────────────────────────────────────┐
+    # │   MINI PC : MOYENNE WATTS MENSUELLE     │
+    # └─────────────────────────────────────────┘
+    - name: "mini_pc_avg_watts_mensuel"
+      unit_of_measurement: "W"
+      state_class: measurement
+      device_class: power
+      icon: mdi:chart-bell-curve-cumulative
+      state: >
+        {% set start = now().replace(day=1, hour=0, minute=0, second=0, microsecond=0) %}
+        {% set seconds_elapsed = (now() - start).total_seconds() %}
+        {% set hours_elapsed = seconds_elapsed / 3600 %}
+        {% set kwh = states('sensor.prise_mini_pc_ikea_mensuel_kwh_um') | float(0) %}
+        {% if hours_elapsed > 0 %}
+          {{ ((kwh * 1000) / hours_elapsed) | round(2) }}
+        {% else %}
+          0
+        {% endif %}

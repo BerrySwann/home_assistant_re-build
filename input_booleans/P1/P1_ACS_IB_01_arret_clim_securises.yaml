@@ -1,65 +1,38 @@
-# ╭──────────────────────────────────────────────────────────────────╮
-# │ INPUT_BOOLEAN : CLIMATISATION (ARRÊTS SÉCURISÉS)                 │
-# ╰──────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 1. INPUT BOOLEAN : ARRÊT SÉCURISÉ CLIM (×3)                        │
+# ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Déclare les interrupteurs virtuels du Pôle 1 (Chauffage & Clim).
-# Deux usages distincts :
-# - Flags de blocage temporaire des arrêts sécurisés (Salon, Bureau, Chambre)
-# - État logique du soufflant SdB piloté par le bouton IKEA RODRET (SDB)
+# Drapeaux booléens indiquant qu'un arrêt de sécurité est en cours sur une clim.
+# Activés par l'automation G_arret_clim_notif.yaml ou I_debug_force_mode.yaml
+# quand une clim passe en mode 'off' de façon non planifiée.
+# Permettent d'éviter les boucles de relance automatique pendant la séquence
+# d'arrêt sécurisé.
 #
-# ## 🧮 SOURCES :
-# - Arrêts sécurisés : écrits par automations P1 (séquence d'arrêt clim)
-# - inter_soufflant_salle_de_bain : écrit par automation MQTT RODRET
-#   (id automations.yaml : 1766777192080)
+# ## 🧮 CALCUL & SOURCES :
+# - Écrit par : automations P1 clim (A0, B0, I_debug_force_mode)
+# - Lu par    : automation A0_clim_jour et B0_clim_nuit (condition "arret en cours")
+# - Logique   : si 'on' → la clim ne sera pas rallumée par l'automation principale
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Ne pas confondre avec switch.inter_soufflant_salle_de_bain (template
-#   miroir déclaré dans input_booleans/P1/P1_switch_inter_soufflant_sdb.yaml).
-# - Les flags clim passent à ON en cours d'arrêt sécurisé et reviennent
-#   à OFF automatiquement — ne jamais les forcer manuellement.
+# - Ces booleans doivent être remis à 'off' en fin de séquence d'arrêt.
+# - Ne pas confondre avec switch.clim_*_nous (alimentation physique).
+# - Nommage intentionnel : *_arret_securise_en_cours (état transitoire).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L1C3 Commandes Clim : switch.inter_soufflant_salle_de_bain (via miroir)
-# - Arrêts sécurisés : usage interne automation uniquement (non affiché)
-
-# ┌─────────────────────────────────────┐
-# │ 4. SALON                            │
-# └─────────────────────────────────────┘
+# - Non affiché directement — usage interne automation uniquement.
 
 # --- clim_salon_arret_securise_en_cours ---
 clim_salon_arret_securise_en_cours:
-  name: "Blocage CLIM Salon (Arrêt Sécurisé)"
-  icon: mdi:lock-alert
-
-# ┌─────────────────────────────────────┐
-# │ 7. BUREAU                           │
-# └─────────────────────────────────────┘
+  name: "Clim Salon Arrêt Sécurisé en Cours"
+  icon: mdi:shield-alert
 
 # --- clim_bureau_arret_securise_en_cours ---
 clim_bureau_arret_securise_en_cours:
-  name: "Blocage CLIM Bureau (Arrêt Sécurisé)"
-  icon: mdi:lock-alert
-
-# ┌─────────────────────────────────────┐
-# │ 8. SDB                              │
-# └─────────────────────────────────────┘
-
-# --- inter_soufflant_salle_de_bain ---
-inter_soufflant_salle_de_bain:
-  name: "Inter Soufflant SdB (IKEA RODRET)"
-  icon: mdi:fan
-
-# ┌─────────────────────────────────────┐
-# │ 9. CHAMBRE                          │
-# └─────────────────────────────────────┘
+  name: "Clim Bureau Arrêt Sécurisé en Cours"
+  icon: mdi:shield-alert
 
 # --- clim_chambre_arret_securise_en_cours ---
 clim_chambre_arret_securise_en_cours:
-  name: "Blocage CLIM Chambre (Arrêt Sécurisé)"
-  icon: mdi:lock-alert
-
-# annotations_log:
-# - [L1-17] Ajout en-tête obligatoire (description, sources, pièges, vignettes).
-# - [L39-43] Ajout section 8. SDB : inter_soufflant_salle_de_bain (manquant,
-#            référencé automations.yaml id:1766777192080).
+  name: "Clim Chambre Arrêt Sécurisé en Cours"
+  icon: mdi:shield-alert
