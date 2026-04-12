@@ -1,7 +1,0 @@
-- utility_meter:
-  - energy_hc_hp:
-    source: sensor.general_electric_appart_energy
-    name: "select_tariff"
-    tariffs:
-      - HP
-      - HC
