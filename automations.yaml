@@ -2014,75 +2014,62 @@
           entity_id: cover.store_salon
   mode: single
 - id: '1775245530054'
-  alias: AUTO. ECO. Prises — Pilotage dynamique
-  description: 'Pilotage des 6 prises par groupe de présence (G1 à G4). Override HC
-    : horloge + vapote ON si HC et (G1 ou nuit 21h-7h30). Secu PC : alim bureau garantie
-    si conso > 100W.
+  alias: Eco. PRISES DINAMIQUE -> By-Présence/Groupe
+  description: 'Pilotage des 6 prises en fonction du groupe de présence (G1 à G4).
+    Sécurité PC : alim bureau garantie si conso > 100W.
 
     '
   triggers:
-  - trigger: state
-    entity_id: sensor.groupe
-  - trigger: numeric_state
-    entity_id: sensor.prise_bureau_pc_ikea_power
+  - entity_id: sensor.groupe
+    id: groupe_change
+    trigger: state
+  - entity_id: sensor.prise_bureau_pc_ikea_power
     above: 100
     id: pc_allume
-  - trigger: numeric_state
-    entity_id: sensor.prise_bureau_pc_ikea_power
-    below: 60
+    trigger: numeric_state
+  - entity_id: sensor.prise_bureau_pc_ikea_power
+    below: 40
     id: pc_eteint
-  - trigger: time
-    at:
-    - 01:00:00
-    - 07:30:00
-    - '13:00:00'
-    - '14:30:00'
-    - '21:00:00'
+    trigger: numeric_state
   actions:
   - variables:
-      h: '{{ now().strftime(''%H:%M'') }}'
-      is_hc: '{{ (''01:00'' <= h < ''07:30'') or (''13:00'' <= h < ''14:30'') }}'
-      is_nuit: '{{ h >= ''21:00'' or h < ''07:30'' }}'
-      g: '{{ states(''sensor.groupe_clim'') }}'
+      g: '{{ states(''sensor.groupe'') }}'
       pc_active: '{{ states(''sensor.prise_bureau_pc_ikea_power'') | float(0) > 100
         }}'
-      hc_on: '{{ is_hc and (g == ''groupe_1'' or is_nuit) }}'
-      vapote: '{{ ''on'' if (g in [''groupe_2'', ''groupe_4''] or hc_on) else ''off''
-        }}'
-      horloge: '{{ ''on'' if (g in [''groupe_2'', ''groupe_4''] or hc_on) else ''off''
-        }}'
+      vapote: '{{ ''on'' if g in [''groupe_2'', ''groupe_4''] else ''off'' }}'
+      horloge: '{{ ''on'' if g in [''groupe_2'', ''groupe_4''] else ''off'' }}'
       play3: '{{ ''on'' if g in [''groupe_2'', ''groupe_3'', ''groupe_4''] else ''off''
         }}'
       pc_bureau: '{{ ''on'' if (g in [''groupe_3'', ''groupe_4''] or pc_active) else
         ''off'' }}'
       tete_lit: '{{ ''on'' if g in [''groupe_2'', ''groupe_4''] else ''off'' }}'
-  - action: homeassistant.turn_off
-    target:
+  - target:
       entity_id: switch.prise_tv_salon_ikea
-  - action: homeassistant.turn_{{ vapote }}
-    target:
+    action: homeassistant.turn_off
+  - target:
       entity_id: light.hue_smart_salon
-  - action: homeassistant.turn_{{ horloge }}
-    target:
+    action: homeassistant.turn_{{ vapote }}
+  - target:
       entity_id: switch.prise_horloge_ikea
-  - action: homeassistant.turn_{{ play3 }}
-    target:
+    action: homeassistant.turn_{{ horloge }}
+  - target:
       entity_id: switch.ecran_p_c_3_play_hue
-  - action: homeassistant.turn_{{ pc_bureau }}
-    target:
+    action: homeassistant.turn_{{ play3 }}
+  - target:
       entity_id: light.hue_smart_plug_eco_pc_bureau
-  - action: homeassistant.turn_{{ tete_lit }}
-    target:
+    action: homeassistant.turn_{{ pc_bureau }}
+  - target:
       entity_id: switch.prise_tete_de_lit_chambre
-  - action: notify.mobile_app_eric
-    data:
-      title: '{{ states(''sensor.groupe'') }}'
-      message: "{% set prises = [\n    'switch.prise_tv_salon_ikea',\n    'switch.prise_horloge_ikea',\n
-        \   'light.hue_smart_salon',\n    'switch.ecran_p_c_3_play_hue',\n    'light.hue_smart_eco_pc_bureau',\n
-        \   'switch.prise_tete_de_lit_chambre'\n] %} {% set count_on = namespace(value=0)
+    action: homeassistant.turn_{{ tete_lit }}
+  - data:
+      title: 'Groupe: {{ g }}'
+      message: "{% set prises = [\n  'switch.prise_tv_salon_ikea',\n  'switch.prise_horloge_ikea',\n
+        \ 'light.hue_smart_salon',\n  'switch.ecran_p_c_3_play_hue',\n  'light.hue_smart_eco_pc_bureau',\n
+        \ 'switch.prise_tete_de_lit_chambre'\n] %} {% set count_on = namespace(value=0)
         %} {% for p in prises %}\n  {% if states(p) == 'on' %}\n    {% set count_on.value
         = count_on.value + 1 %}\n  {% endif %}\n{% endfor %} [{{ count_on.value }}]
-        ON | PC: {{ states('sensor.prise_bureau_pc_ikea_power') | int }}W\n"
+        prises ON | PC: {{ states('sensor.prise_bureau_pc_ikea_power') | int }}W\n"
+    action: notify.mobile_app_eric
   mode: queued
 - id: '1775245732227'
   alias: 'Gestion PC bureau : Scène de Fin + Notif'
