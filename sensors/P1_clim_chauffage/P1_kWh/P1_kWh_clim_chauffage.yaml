@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 1 — CAPTEURS INTÉGRATION kWh : CHAUFFAGE & CLIMATISATION           │
+# │ PÔLE 1 — CAPTEURS INTÉGRATION kWh : CHAUFFAGE & CLIMATISATION            │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -28,7 +28,7 @@
 # │ 4. SALON                          │
 # └───────────────────────────────────┘
 
-# --- clim_salon ---
+# --- clim_salon_energie_totale_kwh ---
 - platform: integration
   source: sensor.clim_salon_nous_power
   name: "Clim Salon Energie Totale kWh"
@@ -42,7 +42,7 @@
 # │ 5. CUISINE                        │
 # └───────────────────────────────────┘
 
-# --- radiateur_cuisine ---
+# --- radiateur_elec_cuisine_energie_totale_kwh ---
 - platform: integration
   source: sensor.radiateur_elec_cuisine_power
   name: "Radiateur Elec Cuisine Energie Totale kWh"
@@ -56,7 +56,7 @@
 # │ 7. BUREAU                         │
 # └───────────────────────────────────┘
 
-# --- clim_bureau ---
+# --- clim_bureau_energie_totale_kwh ---
 - platform: integration
   source: sensor.clim_bureau_nous_power
   name: "Clim Bureau Energie Totale kWh"
@@ -70,7 +70,7 @@
 # │ 8. SDB                            │
 # └───────────────────────────────────┘
 
-# --- soufflant_sdb ---
+# --- soufflant_sdb_energie_totale_kwh ---
 - platform: integration
   source: sensor.prise_soufflant_salle_de_bain_nous_power
   name: "Soufflant SDB Energie Totale kWh"
@@ -80,7 +80,7 @@
   unit_time: h
   round: 3
 
-# --- seche_serviette_sdb ---
+# --- seche_serviette_sdb_energie_totale_kwh ---
 - platform: integration
   source: sensor.prise_seche_serviette_salle_de_bain_nous_power
   name: "Seche Serviette SDB Energie Totale kWh"
@@ -94,7 +94,7 @@
 # │ 9. CHAMBRE                        │
 # └───────────────────────────────────┘
 
-# --- clim_chambre ---
+# --- clim_chambre_energie_totale_kwh ---
 - platform: integration
   source: sensor.clim_chambre_nous_power
   name: "Clim Chambre Energie Totale kWh"
@@ -103,3 +103,11 @@
   unit_prefix: k
   unit_time: h
   round: 3
+
+# annotations_log:
+# - [slug] MOD L31: # --- clim_salon --- → # --- clim_salon_energie_totale_kwh ---
+# - [slug] MOD L45: # --- radiateur_cuisine --- → # --- radiateur_elec_cuisine_energie_totale_kwh ---
+# - [slug] MOD L59: # --- clim_bureau --- → # --- clim_bureau_energie_totale_kwh ---
+# - [slug] MOD L73: # --- soufflant_sdb --- → # --- soufflant_sdb_energie_totale_kwh ---
+# - [slug] MOD L83: # --- seche_serviette_sdb --- → # --- seche_serviette_sdb_energie_totale_kwh ---
+# - [slug] MOD L97: # --- clim_chambre --- → # --- clim_chambre_energie_totale_kwh ---

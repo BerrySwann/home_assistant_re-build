@@ -1,6 +1,6 @@
-# ╭────────────────────────────────────────────────────────────────────────────────────────╮
-# │ M_03. MÉTÉO TEMPLATES — FOUDRE BLITZORTUNG (windrose-card / LABEL / AZIMUT / TIMER)    │
-# ╰────────────────────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ M_03. MÉTÉO TEMPLATES — FOUDRE BLITZORTUNG (windrose-card / LABEL / AZIMUT / TIMER) │
+# ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
 # Quatre capteurs templates pour la visualisation de la foudre via Blitzortung.

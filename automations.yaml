@@ -2620,3 +2620,60 @@
 
         '
   mode: single
+- id: '1775997999740'
+  alias: AUTO. ENERGIE. Basculement Tarif HC/HP — Genelec Appart
+  description: 'Bascule le tarif des 4 UM Genelec Appart HP/HC aux heures de transition
+    : HC : 01h00 et 13h00 / HP : 07h30 et 14h30.'
+  triggers:
+  - alias: 'DÉCLENCHEUR : HC DÉBUT 01H00'
+    trigger: time
+    at: 01:00:00
+    id: hc_1
+  - alias: 'DÉCLENCHEUR : HP DÉBUT 07H30'
+    trigger: time
+    at: 07:30:00
+    id: hp_1
+  - alias: 'DÉCLENCHEUR : HC DÉBUT 13H00'
+    trigger: time
+    at: '13:00:00'
+    id: hc_2
+  - alias: 'DÉCLENCHEUR : HP DÉBUT 14H30'
+    trigger: time
+    at: '14:30:00'
+    id: hp_2
+  conditions: []
+  actions:
+  - choose:
+    - alias: 'ACTION : PASSAGE EN HEURES CREUSES'
+      conditions:
+      - condition: trigger
+        id:
+        - hc_1
+        - hc_2
+      sequence:
+      - action: utility_meter.select_tariff
+        target:
+          entity_id:
+          - select.genelec_appart_hphc_quotidien_um
+          - select.genelec_appart_hphc_hebdomadaire_um
+          - select.genelec_appart_hphc_mensuel_um
+          - select.genelec_appart_hphc_annuel_um
+        data:
+          tariff: HC
+    - alias: 'ACTION : PASSAGE EN HEURES PLEINES'
+      conditions:
+      - condition: trigger
+        id:
+        - hp_1
+        - hp_2
+      sequence:
+      - action: utility_meter.select_tariff
+        target:
+          entity_id:
+          - select.genelec_appart_hphc_quotidien_um
+          - select.genelec_appart_hphc_hebdomadaire_um
+          - select.genelec_appart_hphc_mensuel_um
+          - select.genelec_appart_hphc_annuel_um
+        data:
+          tariff: HP
+  mode: single
