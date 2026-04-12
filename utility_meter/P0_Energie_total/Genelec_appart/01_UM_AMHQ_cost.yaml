@@ -20,15 +20,6 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale (coûts mensuel/annuel)
 
-# ─── ANNUEL ──────────────────────────────────────────────────────────────────
-
-# --- genelec_appart_annuel_um ---
-genelec_appart_annuel_um:
-  source: sensor.general_electric_appart_energy                            # "[L41] modif"
-  name: "Réseau Annuel UM"
-  unique_id: genelec_appart_annuel_um
-  cycle: yearly
-
 # ─── MENSUEL ─────────────────────────────────────────────────────────────────
 
 # --- genelec_appart_mensuel_um ---
@@ -47,14 +38,14 @@ genelec_appart_hebdomadaire_um:
   unique_id: genelec_appart_hebdomadaire_um
   cycle: weekly
 
-# ─── QUOTIDIEN ───────────────────────────────────────────────────────────────
+# ─── ANNUEL ──────────────────────────────────────────────────────────────────
 
-# --- genelec_appart_quotidien_um ---
-genelec_appart_quotidien_um:
-  source: sensor.general_electric_appart_energy                            # "[L34] modif"
-  name: "Réseau quotidien UM"
-  unique_id: genelec_appart_quotidien_um
-  cycle: daily
+# --- genelec_appart_annuel_um ---
+genelec_appart_annuel_um:
+  source: sensor.general_electric_appart_energy                            # "[L41] modif"
+  name: "Réseau Annuel UM"
+  unique_id: genelec_appart_annuel_um
+  cycle: yearly
 
 # annotations_log:
 # - [L27] modif : source ecojoko_consommation_reseau → general_electric_appart_energy
