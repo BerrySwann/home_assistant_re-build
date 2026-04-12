@@ -28,90 +28,61 @@
 
 - sensor:
     # ┌─────────────────────────────────────────┐
+    # │   MINI PC : MOYENNE WATTS ANNUELLE      │
+    # └─────────────────────────────────────────┘
+    - name: "Mini PC Avg Watts Annuel"
+      unique_id: mini_pc_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% set conso = states('sensor.prise_mini_pc_ikea_annuel_wh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ (conso / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ┌─────────────────────────────────────────┐
+    # │   MINI PC : MOYENNE WATTS MENSUELLE     │
+    # └─────────────────────────────────────────┘
+    - name: "Mini PC Avg Watts Mensuel"
+      unique_id: mini_pc_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% set conso = states('sensor.prise_mini_pc_ikea_mensuel_wh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ (conso / hm if hm > 0.1 else 0) | round(1) }}
+
+    # ┌─────────────────────────────────────────┐
+    # │   MINI PC : MOYENNE WATTS HEBDOMADAIRE  │
+    # └─────────────────────────────────────────┘
+    - name: "Mini PC Avg Watts Hebdomadaire"
+      unique_id: mini_pc_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% set conso = states('sensor.prise_mini_pc_ikea_hebdomadaire_wh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ (conso / hh if hh > 0.1 else 0) | round(1) }}
+
+    # ┌─────────────────────────────────────────┐
     # │   MINI PC : MOYENNE WATTS QUOTIDIENNE   │
     # └─────────────────────────────────────────┘
-    - name: "mini_pc_avg_watts_quotidien"
+    - name: "Mini PC Avg Watts Quotidien"
+      unique_id: mini_pc_avg_watts_quotidien
       unit_of_measurement: "W"
-      state_class: measurement
       device_class: power
-      icon: mdi:chart-bell-curve-cumulative
+      state_class: measurement
       state: >
-        {% set start = now().replace(hour=0, minute=0, second=0, microsecond=0) %}
-        {% set seconds_elapsed = (now() - start).total_seconds() %}
-        {% set hours_elapsed = seconds_elapsed / 3600 %}
-        {% set kwh = states('sensor.prise_mini_pc_ikea_quotidien_kwh_um') | float(0) %}
-        {% if hours_elapsed > 0 %}
-          {{ ((kwh * 1000) / hours_elapsed) | round(2) }}
-        {% else %}
-          0
-        {% endif %}
-
-  # ┌───────────────────────────────────┐
-  # │ 7. BUREAU                         │
-  # └───────────────────────────────────┘
-
-  # --- mini_pc_avg_watts_annuel ---
-  - name: "Mini PC Avg Watts Annuel"
-    unique_id: mini_pc_avg_watts_annuel
-    unit_of_measurement: "W"
-    device_class: power
-    state: >
-      {% set conso = states('sensor.prise_mini_pc_ikea_annuel_wh_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
-      {{ (conso / ha if ha > 0.1 else 0) | round(1) }}
-
-  # --- mini_pc_avg_watts_mensuel ---
-  - name: "Mini PC Avg Watts Mensuel"
-    unique_id: mini_pc_avg_watts_mensuel
-    unit_of_measurement: "W"
-    device_class: power
-    state: >
-      {% set conso = states('sensor.prise_mini_pc_ikea_mensuel_wh_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
-      {{ (conso / hm if hm > 0.1 else 0) | round(1) }}
-
-  # --- mini_pc_avg_watts_hebdomadaire ---
-  - name: "Mini PC Avg Watts Hebdomadaire"
-    unique_id: mini_pc_avg_watts_hebdomadaire
-    unit_of_measurement: "W"
-    device_class: power
-    state: >
-      {% set conso = states('sensor.prise_mini_pc_ikea_hebdomadaire_wh_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
-      {{ (conso / hh if hh > 0.1 else 0) | round(1) }}
-
-  # --- mini_pc_avg_watts_quotidien ---
-  - name: "Mini PC Avg Watts Quotidien"
-    unique_id: mini_pc_avg_watts_quotidien
-    unit_of_measurement: "W"
-    device_class: power
-    state: >
-      {% set conso = states('sensor.prise_mini_pc_ikea_quotidien_wh_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
-      {{ (conso / h if h > 0.1 else 0) | round(1) }}
+        {% set conso = states('sensor.prise_mini_pc_ikea_quotidien_wh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ (conso / h if h > 0.1 else 0) | round(1) }}
 
 # annotations_log:
 # - [ALL]    Renommage _kwh_um → _wh_um sur toutes les sources (unité réelle = Wh)
 # - [L35,45] Formule corrigée : (conso * 1000) / h → conso / h (Wh ÷ h = W)
 # - [L55,65] Idem hebdomadaire et quotidien
 # - [ORDRE]  Réordonné AMHQ : Annuel → Mensuel → Hebdomadaire → Quotidien
-# - [STRUCT] Indentation corrigée : 4 sensors au bon niveau (2 esp. sous sensor:)
+# - [STRUCT] Indentation corrigée : 4 sensors au bon niveau (2 espaces sous sensor:)
 # - [DUP]    Suppression unique_id dupliqué (mini_pc_avg_watts_annuel × 2 → × 1)
-    # ┌─────────────────────────────────────────┐
-    # │   MINI PC : MOYENNE WATTS MENSUELLE     │
-    # └─────────────────────────────────────────┘
-    - name: "mini_pc_avg_watts_mensuel"
-      unit_of_measurement: "W"
-      state_class: measurement
-      device_class: power
-      icon: mdi:chart-bell-curve-cumulative
-      state: >
-        {% set start = now().replace(day=1, hour=0, minute=0, second=0, microsecond=0) %}
-        {% set seconds_elapsed = (now() - start).total_seconds() %}
-        {% set hours_elapsed = seconds_elapsed / 3600 %}
-        {% set kwh = states('sensor.prise_mini_pc_ikea_mensuel_kwh_um') | float(0) %}
-        {% if hours_elapsed > 0 %}
-          {{ ((kwh * 1000) / hours_elapsed) | round(2) }}
-        {% else %}
-          0
-        {% endif %}

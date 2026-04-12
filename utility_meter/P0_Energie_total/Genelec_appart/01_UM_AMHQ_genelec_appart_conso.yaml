@@ -20,32 +20,42 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale (coûts mensuel/annuel)
 
+# ─── ANNUEL ──────────────────────────────────────────────────────────────────
+
+# --- genelec_appart_annuel_um ---
+genelec_appart_conso_annuel_um:
+  source: sensor.general_electric_appart_energy                            # "[L41] modif"
+  name: "Genelec Appart Annuel UM"
+  unique_id: genelec_appart_annuel_um
+  cycle: yearly
+
 # ─── MENSUEL ─────────────────────────────────────────────────────────────────
 
 # --- genelec_appart_mensuel_um ---
-genelec_appart_mensuel_um:
+genelec_appart_conso_mensuel_um:
   source: sensor.general_electric_appart_energy                            # "[L27] modif"
-  name: "Réseau Mensuel UM"
+  name: "Genelec Appart Mensuel UM"
   unique_id: genelec_appart_mensuel_um
   cycle: monthly
 
 # ─── HEBDOMADAIRE ────────────────────────────────────────────────────────────
 
 # --- genelec_appart_hebdomadaire_um ---
-genelec_appart_hebdomadaire_um:
+genelec_appart_conso_hebdomadaire_um:
   source: sensor.general_electric_appart_energy                            # "[L34] modif"
-  name: "Réseau Hebdomadaire UM"
+  name: "Genelec Appart Hebdomadaire UM"
   unique_id: genelec_appart_hebdomadaire_um
   cycle: weekly
 
-# ─── ANNUEL ──────────────────────────────────────────────────────────────────
+# ─── HEBDOMADAIRE ────────────────────────────────────────────────────────────
 
-# --- genelec_appart_annuel_um ---
-genelec_appart_annuel_um:
-  source: sensor.general_electric_appart_energy                            # "[L41] modif"
-  name: "Réseau Annuel UM"
-  unique_id: genelec_appart_annuel_um
-  cycle: yearly
+# --- genelec_appart_hebdomadaire_um ---
+genelec_appart_conso_quotidien_um:
+  source: sensor.general_electric_appart_energy                            # "[L34] modif"
+  name: "Genelec Appart Quotidien UM"
+  unique_id: genelec_appart_quotidien_um
+  cycle: weekly
+
 
 # annotations_log:
 # - [L27] modif : source ecojoko_consommation_reseau → general_electric_appart_energy
