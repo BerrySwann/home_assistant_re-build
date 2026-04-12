@@ -1,7 +1,7 @@
 - utility_meter:
     energy_daily:
       source: sensor.general_electric_appart_energy
-      name: "utility_meter.tariff"
+      name: "select_tariff"
       tariffs:
         - HP
         - HC
