@@ -25,6 +25,8 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale (coûts HP/HC, ratio HC, pie charts)
 
+- sensor:
+
     # ─── QUOTIDIEN ────────────────────────────────────────────────────────────────
 
     # --- genelec_appart_hphc_quotidien_um ---
