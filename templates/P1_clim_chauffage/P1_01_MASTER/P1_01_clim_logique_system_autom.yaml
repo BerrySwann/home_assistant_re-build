@@ -99,12 +99,12 @@
         {% set temp_no_clim = states('sensor.seuil_non_clim') | float(28) %}
         {% if temp_ext == -999 %}
           unknown
-        {% elif temp_ext <= temp_no_chauf %}
+        {% elif temp_ext < temp_no_chauf %}
           heat
-        {% elif temp_ext >= temp_no_clim %}
-          cool
-        {% else %}
+        {% elif temp_ext < temp_no_clim %}
           fan_only
+        {% else %}
+          cool
         {% endif %}
 
 # --- consigne_de_base ---

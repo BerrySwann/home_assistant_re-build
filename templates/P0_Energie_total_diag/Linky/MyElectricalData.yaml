@@ -9,7 +9,7 @@
 # (MyElectricalData / Enedis).
 #
 # ## 🧮 CALCUL & SOURCES :
-# - J0 (Aujourd'hui) : sensor.ecojoko_hp_reseau_quotidien + sensor.ecojoko_hc_reseau_quotidien.
+# - J0 (Aujourd'hui) : sensor.genelec_appart_quotidien_um (UM daily — general_electric_appart_energy). # "[modif] : ecojoko_hp + ecojoko_hc → UM quotidien total"
 # - J1-J7            : attributs dailyweek / dailyweek_cost de l'intégration MEData.
 # - Noms des jours   : attribut dailyweek → dictionnaire de traduction français.
 # - Coûts            : attribut dailyweek_cost (index correspondant à J1..J7).
@@ -24,30 +24,29 @@
 
 - sensor:
   # ╭──────────────────────────────────────────────────────────────────────╮
-  # │    J0 — AUJOURD'HUI (via Ecojoko temps réel)                         │
+  # │    J0 — AUJOURD'HUI (via UM quotidien general_electric_appart)       │
   # ╰──────────────────────────────────────────────────────────────────────╯
       # --- linky_jour_0 ---
     - name: "Linky Jour 0"
       unique_id: linky_jour_0
       state: >-
-        {{ ((states('sensor.ecojoko_consommation_hp_reseau') | float(0)) +
-            (states('sensor.ecojoko_consommation_hc_reseau') | float(0))) | round(1) }}
+        {{ states('sensor.genelec_appart_quotidien_um') | float(0) | round(1) }}  {# "[modif] : ecojoko_hp + hc → UM quotidien total" #}
       unit_of_measurement: kWh
       icon: mdi:flash-outline
       attributes:
         jour: "Aujourd'hui"
         hp_kwh: >-
-          {{ states('sensor.ecojoko_consommation_hp_reseau') | float(0) | round(1) }}
+          {{ states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) | round(2) }}   {# "[modif] : split HP natif UM tariff" #}
         hc_kwh: >-
-          {{ states('sensor.ecojoko_consommation_hc_reseau') | float(0) | round(1) }}
+          {{ states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) | round(2) }}   {# "[modif] : split HC natif UM tariff" #}
         total_kwh: >-
-          {{ ((states('sensor.ecojoko_consommation_hp_reseau') | float(0)) +
-              (states('sensor.ecojoko_consommation_hc_reseau') | float(0))) | round(1) }}
+          {{ states('sensor.genelec_appart_quotidien_um') | float(0) | round(1) }}            {# "[modif]" #}
         cout: >-
-          {{ ((states('sensor.ecojoko_consommation_hp_reseau') | float(0) *
-              states('sensor.tarif_heures_pleines_ttc') | float(0)) +
-              (states('sensor.ecojoko_consommation_hc_reseau') | float(0) *
-              states('sensor.tarif_heures_creuses_ttc') | float(0))) | round(2) }}
+          {% set hp_kwh = states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) %}
+          {% set hc_kwh = states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) %}
+          {% set hp_trf = states('sensor.edf_tempo_price_blue_hp') | float(0) %}
+          {% set hc_trf = states('sensor.edf_tempo_price_blue_hc') | float(0) %}
+          {{ ((hp_kwh * hp_trf) + (hc_kwh * hc_trf)) | round(2) }}                           {# "[modif] : HP×0.1494 + HC×0.1232 (EDF Tempo Bleu)" #}
 
     # ┌───────────────────────────────────┐
     # │ 2. HISTORIQUE (LINKY)             │
@@ -339,4 +338,11 @@
             0.0
           {% endif %}
 
-# "[L129-140, 178-189, 227-238, 276-287, 325-336, 374-385, 423-434] modif : Ajout des vérifications conditionnelles pour les listes dailyweek et dailyweek_cost pour éviter l'erreur None has no element"
+# annotations_log:
+# - [L12]  modif : source J0 → sensor.genelec_appart_quotidien_um (UM daily total)
+# - [L33]  modif : state J0 ecojoko_hp + ecojoko_hc → genelec_appart_quotidien_um
+# - [L38]  modif : hp_kwh → "N/A" (plus de split HP/HC disponible)
+# - [L39]  modif : hc_kwh → "N/A" (plus de split HP/HC disponible)
+# - [L41]  modif : total_kwh → genelec_appart_quotidien_um
+# - [L43]  modif : cout J0 → UM quotidien × tarif HP (approché, surestimé ~10-15%)
+# - [J1-J7] inchangés (source MEData / Linky — HP/HC toujours disponibles via Enedis)

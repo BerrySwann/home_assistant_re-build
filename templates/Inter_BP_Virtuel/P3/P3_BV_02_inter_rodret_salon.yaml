@@ -1,7 +1,31 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ SWITCH : INTER RODRET SALON                                              │
+# │ SWITCH : ÉCLAIRAGE — INTERRUPTEUR BP VIRTUEL RODRET SALON                │
 # ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Switch template contrôlant la lampe IKEA TRADFRI Rodret du salon via un
+# input_boolean virtuel. Permet un pilotage unifié depuis l'interface
+# (bouton poussoir virtuel) sans dépendance directe à l'entité lumière.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : input_boolean.inter_rodret_salon
+# - turn_on  → input_boolean.turn_on
+# - turn_off → input_boolean.turn_off
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce switch pilote l'input_boolean, pas directement la lampe physique.
+# - L'input_boolean déclarant (inter_rodret_salon) est dans :
+#   input_booleans/P3/P3_BV_inter_salon.yaml
+# - Icône dynamique : mdi:lightbulb-on (ON) / mdi:lightbulb-off (OFF).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L3C1 Commandes Éclairage (bouton on/off Rodret salon)
+
 - switch:
+    # ┌───────────────────────────────────┐
+    # │ 4. SALON                          │
+    # └───────────────────────────────────┘
+    # --- inter_rodret_salon ---
     - name: "Inter Rodret Salon"
       unique_id: inter_rodret_salon
       state: "{{ is_state('input_boolean.inter_rodret_salon', 'on') }}"
@@ -19,3 +43,8 @@
         - action: input_boolean.turn_off
           target:
             entity_id: input_boolean.inter_rodret_salon
+
+# annotations_log:
+# - [Ajout] Bloc documentation complet (DESCRIPTION / CALCUL / PIÈGES / VIGNETTE).
+# - [Ajout] Titre secondaire boîte carrée 4. SALON.
+# - [Ajout] Slug # --- inter_rodret_salon --- au-dessus du bloc entité.

@@ -25,7 +25,7 @@
 
 # --- genelec_appart_conso_mini_24h ---
 - platform: statistics
-  name: "Genelec Appart Conso Mini 24h"
+  name: "Genelec Appart Conso Mini 24h"                                      # "[L28] modif"
   unique_id: genelec_appart_conso_mini_24h
   entity_id: sensor.general_electric_appart_power                          # "[L31] modif"
   state_characteristic: value_min
@@ -34,7 +34,7 @@
 
 # --- genelec_appart_conso_maxi_24h ---
 - platform: statistics
-  name: "Genelec Appart Conso Maxi 24h"
+  name: "Genelec Appart Conso Maxi 24h"                                      # "[L37] modif"
   unique_id: genelec_appart_conso_maxi_24h
   entity_id: sensor.general_electric_appart_power                          # "[L40] modif"
   state_characteristic: value_max
@@ -43,7 +43,7 @@
 
 # --- genelec_appart_conso_moyenne_1h ---
 - platform: statistics
-  name: "Conso Moyenne 1h"
+  name: "Genelec Appart Conso Moyenne 1h"                                    # "[L46] modif"
   unique_id: genelec_appart_conso_moyenne_1h
   entity_id: sensor.general_electric_appart_power                          # "[L49] modif"
   state_characteristic: mean
@@ -53,6 +53,9 @@
 
 # annotations_log:
 # - [L12] modif : source ecojoko_consommation_temps_reel → general_electric_appart_power
+# - [L28] modif : name "Conso Mini" → "Genelec Appart Conso Mini 24h" (convention CLAUDE.md)
 # - [L31] modif : entity_id ecojoko_consommation_temps_reel → general_electric_appart_power
+# - [L37] modif : name "Conso Maxi" → "Genelec Appart Conso Maxi 24h" (convention CLAUDE.md)
 # - [L40] modif : entity_id ecojoko_consommation_temps_reel → general_electric_appart_power
+# - [L46] modif : name "Conso Moyenne 1h" → "Genelec Appart Conso Moyenne 1h" (convention CLAUDE.md)
 # - [L49] modif : entity_id ecojoko_consommation_temps_reel → general_electric_appart_power
