@@ -154,7 +154,7 @@
 # │ 7. BUREAU --- Écran ---                                           │
 # └───────────────────────────────────────────────────────────────────┘
 
-# --- lumiere_Écran_etat ---
+# --- lumiere_ecran_etat ---
     - name: "Lumière Écran État"
       unique_id: lumiere_ecran_etat
       state: >
@@ -294,3 +294,6 @@
         {% else %}
           mdi:bed
         {% endif %}
+
+# annotations_log:
+# - [slug] MOD L157: # --- lumiere_Écran_etat --- → # --- lumiere_ecran_etat ---

@@ -16,25 +16,28 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale.
 
-# --- all_standby ---
+# --- all_standby_annuel_kwh_um ---
 all_standby_annuel_kwh_um:
   source: sensor.all_standby_energie_totale_kwh
   name: "All Standby Annuel kWh UM"
   unique_id: all_standby_annuel_kwh_um
   cycle: yearly
 
+# --- all_standby_mensuel_kwh_um ---
 all_standby_mensuel_kwh_um:
   source: sensor.all_standby_energie_totale_kwh
   name: "All Standby Mensuel kWh UM"
   unique_id: all_standby_mensuel_kwh_um
   cycle: monthly
 
+# --- all_standby_hebdomadaire_kwh_um ---
 all_standby_hebdomadaire_kwh_um:
   source: sensor.all_standby_energie_totale_kwh
   name: "All Standby Hebdomadaire kWh UM"
   unique_id: all_standby_hebdomadaire_kwh_um
   cycle: weekly
 
+# --- all_standby_quotidien_kwh_um ---
 all_standby_quotidien_kwh_um:
   source: sensor.all_standby_energie_totale_kwh
   name: "All Standby Quotidien kWh UM"
@@ -42,4 +45,7 @@ all_standby_quotidien_kwh_um:
   cycle: daily
 
 # annotations_log:
-# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.
+# - [slug] MOD L19: # --- all_standby --- → # --- all_standby_annuel_kwh_um ---
+# - [slug] INS avant L26: # --- all_standby_mensuel_kwh_um ---
+# - [slug] INS avant L33: # --- all_standby_hebdomadaire_kwh_um ---
+# - [slug] INS avant L40: # --- all_standby_quotidien_kwh_um ---

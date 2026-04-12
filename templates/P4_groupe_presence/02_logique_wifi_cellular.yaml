@@ -1,6 +1,6 @@
-# ╭────────────────────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 4. TEMPLATE : PRÉSENCE — LOGIQUE WIFI / CELLULAIRE (GROUPE & STATUTS)             │
-# ╰────────────────────────────────────────────────────────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 4. TEMPLATE : PRÉSENCE — LOGIQUE WIFI / CELLULAIRE (GROUPE & STATUTS) │
+# ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
 # Sensors template calculant l'état de présence global via deux sensors :

@@ -1,0 +1,56 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. UTILITY METER : ÉNERGIE APPART — COÛT AMHQ (TOTAL)               │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Compteurs Utility Meter découpant la consommation totale de l'appartement
+# en 3 cycles temporels (Mensuel, Hebdomadaire, Annuel).
+# Source unique : sensor.general_electric_appart_energy (plus de split HP/HC).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : sensor.general_electric_appart_energy (kWh cumulatif total).    # "[modif] : ecojoko_consommation_reseau → general_electric_appart_energy / HP+HC supprimés"
+# - Les cycles UM accumulent ces valeurs sur la période (mensuel, hebdo, annuel).
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# Les entrées HP et HC ont été supprimées (source Ecojoko remplacée par
+# sensor.general_electric_appart_energy qui ne distingue plus HP/HC).
+# Pour le coût, utiliser sensor.tarif_heures_pleines_ttc comme tarif approché
+# (légèrement surestimé — remplacer par tarif moyen pondéré si disponible).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (coûts mensuel/annuel)
+
+# ─── MENSUEL ─────────────────────────────────────────────────────────────────
+
+# --- genelec_appart_mensuel_um ---
+genelec_appart_mensuel_um:
+  source: sensor.general_electric_appart_energy                            # "[L27] modif"
+  name: "Réseau Mensuel UM"
+  unique_id: genelec_appart_mensuel_um
+  cycle: monthly
+
+# ─── HEBDOMADAIRE ────────────────────────────────────────────────────────────
+
+# --- genelec_appart_hebdomadaire_um ---
+genelec_appart_hebdomadaire_um:
+  source: sensor.general_electric_appart_energy                            # "[L34] modif"
+  name: "Réseau Hebdomadaire UM"
+  unique_id: genelec_appart_hebdomadaire_um
+  cycle: weekly
+
+# ─── ANNUEL ──────────────────────────────────────────────────────────────────
+
+# --- genelec_appart_annuel_um ---
+genelec_appart_annuel_um:
+  source: sensor.general_electric_appart_energy                            # "[L41] modif"
+  name: "Réseau Annuel UM"
+  unique_id: genelec_appart_annuel_um
+  cycle: yearly
+
+# annotations_log:
+# - [L27] modif : source ecojoko_consommation_reseau → general_electric_appart_energy
+# - [L34] modif : source ecojoko_consommation_reseau → general_electric_appart_energy
+# - [L41] modif : source ecojoko_consommation_reseau → general_electric_appart_energy
+# - [SUPPRIMÉ] ecojoko_hp_reseau_mensuel_um / ecojoko_hc_reseau_mensuel_um
+# - [SUPPRIMÉ] ecojoko_hp_reseau_hebdomadaire_um / ecojoko_hc_reseau_hebdomadaire_um
+# - [SUPPRIMÉ] ecojoko_hp_reseau_annuel_um / ecojoko_hc_reseau_annuel_um
