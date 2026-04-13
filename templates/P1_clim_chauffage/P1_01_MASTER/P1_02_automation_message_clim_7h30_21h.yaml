@@ -29,6 +29,7 @@
 # - Indirect : remonte dans la notification mobile via automation D_notif_temp_jour.yaml
 
 - sensor:
+
 # ┌───────────────────────────────────────────────────────────────────┐
 # │ 10. AUTRE : GÉNÉRATEUR DE MESSAGE (LOGIQUE SCÉNARIOS)             │
 # └───────────────────────────────────────────────────────────────────┘
