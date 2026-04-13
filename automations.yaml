@@ -502,7 +502,7 @@
     - alias: 'NOTIF : CORRECTION MODE'
       action: notify.mobile_app_eric
       data:
-        title: "\U0001F527 CORRECTION MODE"
+        title: CORRECTION MODE
         message: "Mauvais mode détecté. Correction vers {{ mode_saison | upper }}
           pour : {% for c in force_mode_list %}\n  - {{ state_attr(c, 'friendly_name')
           }}\n{% endfor %}\n"
