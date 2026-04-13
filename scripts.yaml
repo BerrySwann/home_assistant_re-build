@@ -18,7 +18,7 @@ j_1_routeur_clim_on_off_intelligent:
       value_template: '{{ is_state(lock_entity, "on") }}'
     then:
     - alias: 'NOTIFICATION : VERROU ACTIF'
-      action: notify.mobile_app_poco_x7_pro_e
+      action: notify.mobile_app_eric
       data:
         title: OULA DOUCEMENT !
         message: Une procédure d'arrêt est déjà en cours sur {{ p | upper }}.
@@ -81,7 +81,7 @@ j_2_secu_arret_clim_protege:
           entity_id: '{{ switch_entity }}'
         action: switch.turn_off
       - alias: 'NOTIFICATION : REPOS COMPLET'
-        action: notify.mobile_app_poco_x7_pro
+        action: notify.mobile_app_eric
         data:
           title: Prise clim {{ p | upper }}
           message: La Clim {{ piece_nom }} est coupée (Repos complet).
@@ -91,7 +91,7 @@ j_2_secu_arret_clim_protege:
         value_template: '{{ is_state(power_lock_sensor, "on") }}'
       sequence:
       - alias: 'NOTIFICATION : ATTENTE DESCENTE WATTS'
-        action: notify.mobile_app_poco_x7_pro
+        action: notify.mobile_app_eric
         data:
           title: ARRÊT CLIM EN COURS
           message: La Clim {{ piece_nom }} est active. Attente de descente sous 9W
@@ -112,14 +112,14 @@ j_2_secu_arret_clim_protege:
             entity_id: '{{ switch_entity }}'
           action: switch.turn_off
         - alias: 'NOTIFICATION : ARRÊT RÉUSSI'
-          action: notify.mobile_app_poco_x7_pro
+          action: notify.mobile_app_eric
           data:
             title: CLIM À L'ARRÊT
             message: La prise de la Clim {{ piece_nom }} a été coupée proprement (<
               9W).
         else:
         - alias: 'NOTIFICATION : ÉCHEC SÉCURITÉ'
-          action: notify.mobile_app_poco_x7_pro
+          action: notify.mobile_app_eric
           data:
             title: ERREUR ARRÊT CLIM
             message: 'ÉCHEC : La Clim {{ piece_nom }} consomme toujours > 9W après
