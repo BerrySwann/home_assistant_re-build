@@ -252,12 +252,5 @@
       icon: mdi:alert-outline
 
 # annotations_log:
-# - [Structure] Regroupement par FONCTION (Logique alertes météo).
-# - [Titrage] Titre principal 74 car. arrondi avec '#' de sécurité.
-# - [Titrage] Titre secondaire 37 car. carré avec '#' de sécurité.
-# - [Titrage] Titres tertiaires # --- slug --- systématiques.
-# - [Intégrité] Conservation de 100% des entités et icônes originales.
-# - [modif] ev: | default('') ajouté sur les 9 sensors — TypeError fix.
-# - [modif] al: | default('') ajouté dans alerte_meteo — awareness_level fix.
 # - [L39,60,81,102,123,174,195,216] unique_id: préfixe 'sensor.' supprimé (8x)
 #   Règle CLAUDE.md : unique_id ne doit PAS contenir 'sensor.' (slug seul).
