@@ -38,8 +38,8 @@
     - name: "Message Clim Personnalise 7h30 <-> 21h00"
       unique_id: message_clim_personnalise_7h30_21h00
       state: >
-        {%- if states('sensor.poco_x7_pro_mamour_network_type') in ['unknown', 'unavailable'] or
-              states('sensor.poco_x7_pro_network_type') in ['unknown', 'unavailable'] or
+        {%- if states('sensor.mamour_network_type') in ['unknown', 'unavailable'] or
+              states('sensor.eric_network_type') in ['unknown', 'unavailable'] or
               states('sensor.th_balcon_nord_temperature') in ['unknown', 'unavailable'] or
               states('sensor.groupe') in ['unknown', 'unavailable'] or
               states('sensor.presence') in ['unknown', 'unavailable'] %}
@@ -133,8 +133,8 @@
         {%- endif %}
 
       availability: >
-        {{ states('sensor.poco_x7_pro_mamour_network_type') not in ['unknown', 'unavailable'] and
-          states('sensor.poco_x7_pro_network_type') not in ['unknown', 'unavailable'] and
+        {{ states('sensor.mamour_network_type') not in ['unknown', 'unavailable'] and
+          states('sensor.eric_network_type') not in ['unknown', 'unavailable'] and
           states('sensor.th_balcon_nord_temperature') not in ['unknown', 'unavailable'] and
           states('sensor.groupe') not in ['unknown', 'unavailable'] and
           states('sensor.presence') not in ['unknown', 'unavailable'] }}
