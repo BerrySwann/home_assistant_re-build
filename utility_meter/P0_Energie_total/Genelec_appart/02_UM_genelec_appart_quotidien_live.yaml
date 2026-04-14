@@ -25,7 +25,7 @@
 - sensor:
     genelec_appart_quotidien_um:
       source: sensor.general_electric_appart_energy                            # "[L26] modif"
-      name: "Réseau Quotidien UM"
+      name: "Genelec Appart Quotidien UM"
       unique_id: genelec_appart_quotidien_um
       cycle: daily
 
