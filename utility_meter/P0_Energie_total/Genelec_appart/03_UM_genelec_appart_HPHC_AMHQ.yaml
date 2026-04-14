@@ -25,57 +25,57 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale (coûts HP/HC, ratio HC, pie charts)
 
-- sensor:
+# ─── QUOTIDIEN ────────────────────────────────────────────────────────────────
 
-    # ─── QUOTIDIEN ────────────────────────────────────────────────────────────────
+# --- genelec_appart_hphc_quotidien_um ---
+genelec_appart_hphc_quotidien_um:
+  source: sensor.general_electric_appart_energy
+  name: "Genelec Appart HP/HC Quotidien UM"
+  unique_id: genelec_appart_hphc_quotidien_um
+  cycle: daily
+  tariffs:
+    - HP
+    - HC
 
-    # --- genelec_appart_hphc_quotidien_um ---
-    genelec_appart_hphc_quotidien_um:
-      source: sensor.general_electric_appart_energy
-      name: "Genelec Appart HP/HC Quotidien UM"
-      unique_id: genelec_appart_hphc_quotidien_um
-      cycle: daily
-      tariffs:
-        - HP
-        - HC
+# ─── HEBDOMADAIRE ─────────────────────────────────────────────────────────────
 
-    # ─── HEBDOMADAIRE ─────────────────────────────────────────────────────────────
+# --- genelec_appart_hphc_hebdomadaire_um ---
+genelec_appart_hphc_hebdomadaire_um:
+  source: sensor.general_electric_appart_energy
+  name: "Genelec Appart HP/HC Hebdomadaire UM"
+  unique_id: genelec_appart_hphc_hebdomadaire_um
+  cycle: weekly
+  tariffs:
+    - HP
+    - HC
 
-    # --- genelec_appart_hphc_hebdomadaire_um ---
-    genelec_appart_hphc_hebdomadaire_um:
-      source: sensor.general_electric_appart_energy
-      name: "Genelec Appart HP/HC Hebdomadaire UM"
-      unique_id: genelec_appart_hphc_hebdomadaire_um
-      cycle: weekly
-      tariffs:
-        - HP
-        - HC
+# ─── MENSUEL ──────────────────────────────────────────────────────────────────
 
-    # ─── MENSUEL ──────────────────────────────────────────────────────────────────
+# --- genelec_appart_hphc_mensuel_um ---
+genelec_appart_hphc_mensuel_um:
+  source: sensor.general_electric_appart_energy
+  name: "Genelec Appart HP/HC Mensuel UM"
+  unique_id: genelec_appart_hphc_mensuel_um
+  cycle: monthly
+  tariffs:
+    - HP
+    - HC
 
-    # --- genelec_appart_hphc_mensuel_um ---
-    genelec_appart_hphc_mensuel_um:
-      source: sensor.general_electric_appart_energy
-      name: "Genelec Appart HP/HC Mensuel UM"
-      unique_id: genelec_appart_hphc_mensuel_um
-      cycle: monthly
-      tariffs:
-        - HP
-        - HC
+# ─── ANNUEL ───────────────────────────────────────────────────────────────────
 
-    # ─── ANNUEL ───────────────────────────────────────────────────────────────────
+# --- genelec_appart_hphc_annuel_um ---
+genelec_appart_hphc_annuel_um:
+  source: sensor.general_electric_appart_energy
+  name: "Genelec Appart HP/HC Annuel UM"
+  unique_id: genelec_appart_hphc_annuel_um
+  cycle: yearly
+  tariffs:
+    - HP
+    - HC
 
-    # --- genelec_appart_hphc_annuel_um ---
-    genelec_appart_hphc_annuel_um:
-      source: sensor.general_electric_appart_energy
-      name: "Genelec Appart HP/HC Annuel UM"
-      unique_id: genelec_appart_hphc_annuel_um
-      cycle: yearly
-      tariffs:
-        - HP
-        - HC
-
-    # annotations_log:
-    # - [Création] 4 UM HP/HC AMHQ — source sensor.general_electric_appart_energy
-    # - Entités générées : *_um_hp et *_um_hc pour chaque période
-    # - Basculement piloté par : automations_corrige/energie/basculement_tarif_hphc.yaml
+# annotations_log:
+# - [Création] 4 UM HP/HC AMHQ — source sensor.general_electric_appart_energy
+# - Entités générées : *_um_hp et *_um_hc pour chaque période
+# - Basculement piloté par : automations_corrige/energie/basculement_tarif_hphc.yaml
+# - [modif] Suppression du wrapper "- sensor:" erroné — incompatible avec
+#   !include_dir_merge_named. Chaque entrée doit être à la racine du dict.
