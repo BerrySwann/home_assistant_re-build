@@ -9,12 +9,14 @@
 # powercalc (puissance virtuelle des lampes/relai SONOFF).
 #
 # ## 🧮 CALCUL & SOURCES :
+# - homeassistant : allowlist_external_dirs → /config (requis pour File integration)
 # - sensor       : !include_dir_merge_list sensors/        (liste de capteurs)
 # - template     : !include_dir_merge_list templates/      (templates Jinja2)
 # - utility_meter: !include_dir_merge_named utility_meter/ (compteurs nommés)
 # - command_line : !include_dir_merge_list command_line/   (cmds shell→sensors)
 # - shell_command: !include shell_command.yaml
 # - camera       : DÉSACTIVÉ (obsolète — supprimé de la config active)
+# - notify       : SUPPRIMÉ YAML (migré vers intégration File UI — HA 2024.12+)
 # - input_button : !include input_button.yaml
 # - group        : !include groups.yaml
 # - sql          : !include sql.yaml
@@ -29,10 +31,22 @@
 #   au modèle de clim. Changer ce code casse le contrôle IR de la clim.
 # - !include_dir_merge_named impose que chaque fichier YAML retourne un dict
 #   (pas une liste) → utility_meter uniquement.
+# - notify platform: file SUPPRIMÉ depuis HA 2024.12 → configurer via UI :
+#   Paramètres → Appareils & services → + Ajouter → File.
+#   Dans les automations : remplacer notify.diag_log_file par notify.send_message
+#   avec target: entity_id: notify.<nom_entité_créée_dans_UI>.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Non applicable — fichier système racine. Charge toutes les vignettes
 #   indirectement via les includes vers sensors/, templates/, utility_meter/.
+
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ HOMEASSISTANT CORE (allowlist, etc.)                                     │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+# --- homeassistant ---
+homeassistant:
+  allowlist_external_dirs:
+    - "/config"          # Requis pour l'intégration File (notify → fichier)
 
 # --- default_config ---
 # Loads default set of integrations. Do not remove.
@@ -67,6 +81,10 @@ panel_custom:
 # --- powercalc ---
 powercalc:
 
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ Pour Mobile App (Portable)                                               │
+# ╰──────────────────────────────────────────────────────────────────────────╯  
+# --- mobile_app ---  
 mobile_app:
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
@@ -122,18 +140,25 @@ input_number: !include_dir_merge_named input_number/
 #renvoi au fichier input_datetime.yaml
 input_datetime: !include input_datetime.yaml
 
-# ==========================================================================
-# Zone NOTIFY
-# ==========================================================================
-notify:
-# diag_conso_elec.txt
-  - platform: file
-    name: diag_log_file
-    filename: diag_conso_elec.txt
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ NOTIFY — MIGRÉ VERS INTÉGRATION FILE (UI)                                │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+# ⛔ SUPPRIMÉ depuis HA 2024.12 — platform: file en YAML n'est plus supporté.   # "[L128] modif"
+# ✅ Migration : Paramètres → Appareils & services → + Ajouter → "File"
+#    Fichier cible : /config/diag_conso_elec.txt | Timestamp : Oui
+#    Dans les automations, remplacer :
+#      action: notify.diag_log_file   →   action: notify.send_message
+#      data: message: "..."               target: entity_id: notify.<id_entité_UI>
+#                                         data: message: "..."
+#notify:                                                                         # "[L128] modif"
+#  - platform: file                                                              # "[L130] modif"
+#    name: diag_log_file                                                         # "[L131] modif"
+#    filename: diag_conso_elec.txt                                               # "[L132] modif"
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ BASE DE DONNEE MARIADB                                                   │
 # ╰──────────────────────────────────────────────────────────────────────────╯
+
 # --- recorder ---
 recorder:
   db_url: !secret mariadb_url
@@ -206,8 +231,11 @@ http:
   login_attempts_threshold: 3  # Seuil de tentatives avant bannissement
 
 # annotations_log:
-# - [L95] camera: !include camera.yaml → commenté (obsolète, causait une erreur au démarrage).
-# - [L16] En-tête documentation mis à jour : camera marqué DÉSACTIVÉ.
+# - [L95]  camera: !include camera.yaml → commenté (obsolète, causait une erreur au démarrage).
+# - [L16]  En-tête documentation mis à jour : camera marqué DÉSACTIVÉ.
+# - [L37]  Ajout bloc homeassistant: allowlist_external_dirs: /config (requis File integration).
+# - [L128] notify: platform: file → commenté + remplacé par bloc explicatif migration UI.
+# - [L10]  En-tête mis à jour : notify supprimé YAML / allowlist_external_dirs documenté.
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ RPI_FAN RASPBERRY PI4                                                    │

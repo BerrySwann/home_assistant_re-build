@@ -20,53 +20,55 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale (coûts mensuel/annuel)
 
-- sensor:
+# ┌─────────────────────────────────────────┐
+# │   GENELEC APPART : ANNUEL (kWh)         │
+# └─────────────────────────────────────────┘
+# --- genelec_appart_conso_annuel_um ---
+genelec_appart_conso_annuel_um:                                                  # "[L23] modif : suppression wrapper '- sensor:' erroné (format !include_dir_merge_named)"
+  source: sensor.general_electric_appart_energy
+  name: "Genelec Appart Conso Annuel UM"
+  unique_id: genelec_appart_conso_annuel_um
+  cycle: yearly
 
-  # ┌─────────────────────────────────────────┐
-  # │   GENELEC APPART : ANNUEL (kWh)         │
-  # └─────────────────────────────────────────┘
-  # --- genelec_appart_conso_annuel_um ---
-  genelec_appart_conso_annuel_um:
-    source: sensor.general_electric_appart_energy  # "[L41] modif"
-    name: "Genelec Appart Conso Annuel UM"
-    unique_id: genelec_appart_conso_annuel_um
-    cycle: yearly
+# ┌─────────────────────────────────────────┐
+# │   GENELEC APPART : MENSUEL (kWh)        │
+# └─────────────────────────────────────────┘
+# --- genelec_appart_conso_mensuel_um ---
+genelec_appart_conso_mensuel_um:
+  source: sensor.general_electric_appart_energy
+  name: "Genelec Appart Conso Mensuel UM"
+  unique_id: genelec_appart_conso_mensuel_um
+  cycle: monthly
 
-  # ┌─────────────────────────────────────────┐
-  # │   GENELEC APPART : MENSUEL (kWh)        │
-  # └─────────────────────────────────────────┘
-  # --- genelec_appart_conso_mensuel_um ---
-  genelec_appart_conso_mensuel_um:
-    source: sensor.general_electric_appart_energy  # "[L27] modif"
-    name: "Genelec Appart Conso Mensuel UM"
-    unique_id: genelec_appart_conso_mensuel_um
-    cycle: monthly
+# ┌─────────────────────────────────────────┐
+# │   GENELEC APPART : HEBDOMADAIRE (kWh)   │
+# └─────────────────────────────────────────┘
+# --- genelec_appart_conso_hebdomadaire_um ---
+genelec_appart_conso_hebdomadaire_um:
+  source: sensor.general_electric_appart_energy
+  name: "Genelec Appart Conso Hebdomadaire UM"
+  unique_id: genelec_appart_conso_hebdomadaire_um
+  cycle: weekly
 
-  # ┌─────────────────────────────────────────┐
-  # │   GENELEC APPART : HEBDOMADAIRE (kWh)   │
-  # └─────────────────────────────────────────┘
-  # --- genelec_appart_conso_hebdomadaire_um ---
-  genelec_appart_conso_hebdomadaire_um:
-    source: sensor.general_electric_appart_energy  # "[L34] modif"
-    name: "Genelec Appart Conso Hebdomadaire UM"
-    unique_id: genelec_appart_conso_hebdomadaire_um
-    cycle: weekly
-
-  # ┌─────────────────────────────────────────┐
-  # │   GENELEC APPART : QUOTIDIEN (kWh)      │
-  # └─────────────────────────────────────────┘
-  # --- genelec_appart_conso_quotidien_um ---
-  genelec_appart_conso_quotidien_um:
-    source: sensor.general_electric_appart_energy  # "[L45] modif"
-    name: "Genelec Appart Conso Quotidien UM"
-    unique_id: genelec_appart_conso_quotidien_um
-    cycle: daily
+# ┌─────────────────────────────────────────┐
+# │   GENELEC APPART : QUOTIDIEN (kWh)      │
+# └─────────────────────────────────────────┘
+# --- genelec_appart_conso_quotidien_um ---
+genelec_appart_conso_quotidien_um:
+  source: sensor.general_electric_appart_energy
+  name: "Genelec Appart Conso Quotidien UM"
+  unique_id: genelec_appart_conso_quotidien_um
+  cycle: daily
 
 # annotations_log:
 # - [L27] modif : source ecojoko_consommation_reseau → general_electric_appart_energy
 # - [L34] modif : source ecojoko_consommation_reseau → general_electric_appart_energy
 # - [L41] modif : source ecojoko_consommation_reseau → general_electric_appart_energy
 # - [L45] ajout : cycle daily pour conso quotidienne
+# - [L23] modif : suppression du wrapper "- sensor:" erroné — incompatible avec
+#   !include_dir_merge_named. Ce format est réservé aux templates/. En utility_meter/,
+#   chaque entrée doit être à la racine du dict sans préfixe liste.
+#   Sans ce fix, HA ignorait le fichier → sensor.genelec_appart_conso_*_um inexistants.
 # - [SUPPRIMÉ] ecojoko_hp_reseau_mensuel_um / ecojoko_hc_reseau_mensuel_um
 # - [SUPPRIMÉ] ecojoko_hp_reseau_hebdomadaire_um / ecojoko_hc_reseau_hebdomadaire_um
 # - [SUPPRIMÉ] ecojoko_hp_reseau_annuel_um / ecojoko_hc_reseau_annuel_um
