@@ -4602,3 +4602,4 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 15/04 17:30 | Hyg:0.41 | Cuis:0.09 | Froid:0.64 | Chauff:0.07 | Avg 4:5.0 | Multi:1.75 | Lum:0.16 | Autres:0.28 |T̄i:22.2°C | Ext:23.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0 %}
 15/04 17:45 | Hyg:0.41 | Cuis:0.1 | Froid:0.66 | Chauff:0.07 | Avg 4:4.9 | Multi:1.83 | Lum:0.17 | Autres:0.28 |T̄i:22.2°C | Ext:22.7°C | DUT S/R/B/C:0.0/0.0/0.0/0.0 %}
 15/04 18:00 | Hyg:0.41 | Cuis:0.1 | Froid:0.65 | Chauff:0.09 | Avg 4:4.8 | Multi:1.87 | Lum:0.19 | Autres:0.16 | Ti:22.2°C | Ext:22.7°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+15/04 18:15 | Hyg:0.41 | Cuis:0.1 | Froid:0.66 | Chauff:0.09 | Avg 4:4.8 | Multi:1.95 | Lum:0.19 | Autres:0.16 | Ti:22.2°C | Ext:21.9°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
