@@ -2651,7 +2651,7 @@
         - hc_1
         - hc_2
       sequence:
-      - action: utility_meter.select_tariff
+      - action: select.select_option
         target:
           entity_id:
           - select.genelec_appart_hphc_quotidien_um
@@ -2659,7 +2659,7 @@
           - select.genelec_appart_hphc_mensuel_um
           - select.genelec_appart_hphc_annuel_um
         data:
-          tariff: HC
+          option: HC
     - alias: 'ACTION : PASSAGE EN HEURES PLEINES'
       conditions:
       - condition: trigger
@@ -2667,7 +2667,7 @@
         - hp_1
         - hp_2
       sequence:
-      - action: utility_meter.select_tariff
+      - action: select.select_option
         target:
           entity_id:
           - select.genelec_appart_hphc_quotidien_um
@@ -2675,5 +2675,5 @@
           - select.genelec_appart_hphc_mensuel_um
           - select.genelec_appart_hphc_annuel_um
         data:
-          tariff: HP
+          option: HP
   mode: single
