@@ -111,3 +111,8 @@ Pattern général : `sensor.prise_{slug}_{marque}_{periode}_kwh_um`
 
 > **Synchronisation** : Les couleurs de ce fichier sont synchronisées avec la section
 > `### 🎨 PALETTE COULEURS OFFICIELLE` de `docs/IA/IA_CONTEXT_BASE.md`.
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[L2C1_VIGNETTE_ENERGIE]]  [[L3C2_VIGNETTE_PRISES]]*

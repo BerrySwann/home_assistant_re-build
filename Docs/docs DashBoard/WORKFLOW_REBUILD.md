@@ -218,3 +218,8 @@ Chaque fois qu'une doc `docs/L*` est créée ou modifiée :
 | 2026-03-27 (s13) | Création `input_booleans/P1/P1_arret_clim_securises.yaml` (arrêts sécurisés clim Salon/Bureau/Chambre + `inter_soufflant_salle_de_bain`). Création `input_booleans/P4/P4_presence_wifi.yaml` (détection présence Wi-Fi). Création `TABLETTE_card_conso_clim_FIXED.yaml` (button-card conso clim — entités corrigées `_kwh_um` vs anciens `_um`). Confirmation par Gemini : gm1901 + sm_a530f OBSOLÈTES → à supprimer du dashboard TABLETTE. Identification duplicate : `P1_switch_inter_soufflant_sdb.yaml` = doublon de `templates/Inter_BP_Virtuel/BI_02_switch_inter_sdb.yaml` → à supprimer. |
 | 2026-03-28 (s14) | Vérification synchronisation GitHub ↔ local. Complétion `DEPENDANCES_GLOBALES.md` : **18/18 vignettes ✅** avec chaînes de dépendances complètes. Mise à jour date `DEPENDANCES_GLOBALES.md`. |
 | 2026-04-02 (s15) | Analyse énergétique Jan-Mar 2026 (`diag_conso_elec.txt` — 8329 entrées 15min). Résultat : Jan 384 kWh / Fév 339 kWh / Mar ~166 kWh corrigé (anomalie UM reset 18-22/03 — 69.92 kWh était cumul 5 jours, pas 1 jour). Recommandation rideaux occultants : Chambre priorité 1. Comparaison rapport Spook (62 entités) vs `orphelin.yaml` → couverture 100%, statut P1 PARTIEL → ✅ COUVERT (doc `L2C2_VIGNETTE_ENERGIE_CLIM.md` confirmée existante). Création `Orphelin/orphelin.md` (version lisible et structurée par priorité d'action). Mise à jour `CLAUDE.md` arborescence `docs/` (10 dossiers manquants ajoutés, noms corrigés, fichiers fantômes supprimés). Mise à jour date `DEPENDANCES_GLOBALES.md` (2026-04-02). Mise à jour date `WORKFLOW_REBUILD.md`. |
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]*

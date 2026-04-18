@@ -277,3 +277,8 @@ custom_fields:
 ---
 
 ← Retour : `L5C2_BATTERIE_PORTAIL` | → Suivant : `L6C1_QUALITE_AIR`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_SYSTEME]]  [[L5C1_VIGNETTE_BATTERIES]]  [[L5C2_VIGNETTE_BATTERIES_PORTABLES]]*

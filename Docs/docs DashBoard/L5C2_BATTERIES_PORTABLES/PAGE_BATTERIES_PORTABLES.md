@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--21-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--04--17-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page-ff9800?style=flat-square)](.)
 
 </div>
@@ -14,7 +14,7 @@
 | 🏗️ **Layout** | `type: grid` — 2 grilles distinctes (Eric / Mamour) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-21 |
+| 📅 **Modifié le** | 2026-04-17 |
 | 🏠 **Version HA** | 2026.3 |
 
 ---
@@ -217,7 +217,7 @@ cards:
 
 | Élément | Type | Statut |
 |---------|------|--------|
-| HA Companion App (Android) — 7 appareils | Intégration native | ✅ Essentiel |
+| HA Companion App (Android) — 7 appareils (NE2213 Mamour actif 2026-04-17) | Intégration native | ✅ Essentiel |
 | `custom:streamline-card` + template `portable` | HACS | ✅ Essentiel |
 | `card_mod` | HACS | ✅ Essentiel |
 
@@ -231,3 +231,8 @@ cards:
 ---
 
 ← Retour : `L5C1_PILES_BATTERIES/` | → Suivant : `L5C3_MARIADB/`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L5C2_VIGNETTE_BATTERIES_PORTABLES]]*

@@ -362,3 +362,8 @@ Chip [Tag weekly] (hold)
 ---
 
 ← Retour : `HOME` | → Suivant : `PAGE_RESERVE`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L5C3_VIGNETTE_MARIADB]]*

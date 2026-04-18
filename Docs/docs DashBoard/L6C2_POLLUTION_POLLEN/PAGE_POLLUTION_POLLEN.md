@@ -243,3 +243,8 @@ Vérifier que l'attribut `Couleur` de l'entité AtmoFrance est bien une couleur 
 ---
 
 ← Retour : `L6C1_AIR_QUALITE/` | → Suivant : `L6C3_VIGIEAU/`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L6C2_VIGNETTE_POLLUTION_POLLEN]]*

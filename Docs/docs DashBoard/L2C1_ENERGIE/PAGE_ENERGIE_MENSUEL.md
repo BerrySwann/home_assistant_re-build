@@ -400,3 +400,8 @@ Source : sensors Pôle 2 — `platform: statistics` sur énergie ou puissance.
 ---
 
 ← Retour : `docs/L2C1_ENERGIE/PAGE_ENERGIE_TEMPS_REEL.md` | → Suivant : `docs/L2C2_*/`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L2C1_VIGNETTE_ENERGIE]]  [[PAGE_ENERGIE]]  [[PAGE_ENERGIE_TEMPS_REEL]]*

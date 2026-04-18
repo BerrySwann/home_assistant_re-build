@@ -346,3 +346,8 @@ Comportement voulu — `isEcoSensitive = true` maintient la couleur blanche en m
 ---
 
 ← Retour : [`PAGE_HOME.md`](../WIFI_PRESENCE%20(Home%20Page)/PAGE_HOME.md) | → Suite : [`PAGE_ENERGIE_ECLAIRAGE.md`](./PAGE_ENERGIE_ECLAIRAGE.md)
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_ENERGIE_ECLAIRAGE]]  [[COULEURS_ECLAIRAGE_PAR_PIECE]]  [[L2C1_VIGNETTE_ENERGIE]]  [[L2C2_VIGNETTE_ENERGIE_CLIM]]  [[L3C1_VIGNETTE_ECLAIRAGE]]*

@@ -325,3 +325,8 @@ Le total de la chambre dépend de l'état de `switch.prise_tete_de_lit_chambre` 
 ---
 
 ← Retour : Ligne 3 | → Suite : `L3C2_PRISES/`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_ECLAIRAGE]]  [[L2C3_VIGNETTE_ECLAIRAGE]]  [[L3C2_VIGNETTE_PRISES]]  [[L3C3_VIGNETTE_STORES]]*

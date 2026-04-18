@@ -212,3 +212,8 @@ Récupère l'état d'une entité avec protection contre `unavailable` / `unknown
 ---
 
 ← Retour : `L3C1_ECLAIRAGE/` | → Suite : `L3C3_STORES/`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_PRISES]]  [[COULEURS_PRISES_PAR_PIECE]]  [[L3C1_VIGNETTE_ECLAIRAGE]]  [[L3C3_VIGNETTE_STORES]]*

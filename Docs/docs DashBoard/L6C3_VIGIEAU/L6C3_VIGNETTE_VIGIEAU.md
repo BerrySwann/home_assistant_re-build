@@ -177,3 +177,8 @@ case 'alerte_renforcee':
 # [L1] break ajouté — case 'vigilance (pas de restriction)' — fallthrough vers alerte_renforcee corrigé
 
 ← Retour : `L6C2_POLLUTION_POLLEN/` | → Fin Ligne 6
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_VIGIEAU]]  [[L6C1_VIGNETTE_AIR_QUALITE]]  [[L6C2_VIGNETTE_POLLUTION_POLLEN]]*

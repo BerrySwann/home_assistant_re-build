@@ -310,3 +310,8 @@ Le seuil `entity.state` dans `styles.icon` utilise la comparaison `< 65` sans `p
 | `configuration.yaml` | Déclaration intégration `system_monitor` |
 | `sensors/sensors_mini_pc.yaml` *(archive TREE_ORIGINE)* | Anciens sensors RPi — à vérifier si migré |
 | *(futur)* `docs/L4C2_MINI_PC/PAGE_MINI_PC.md` | Page dédiée Mini PC — à créer après migration |
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_MINI_PC]]  [[PAGE_RASPI]]  [[L4C1_VIGNETTE_empty]]  [[L4C3_VIGNETTE_MAJ]]*

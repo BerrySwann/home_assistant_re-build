@@ -1230,3 +1230,8 @@ cards:
 ---
 
 ← Retour : [`L4C3_VIGNETTE_MAJ.md`](./L4C3_VIGNETTE_MAJ.md)
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L4C3_VIGNETTE_MAJ]]*

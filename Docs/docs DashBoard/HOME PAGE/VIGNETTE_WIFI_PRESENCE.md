@@ -302,3 +302,8 @@ Renvoie `true` si le `device_tracker` correspondant est en mode `wifi` ET connec
 ---
 
 ← Retour : `L1C1_METEO/PAGE_METEO.md` | → Suivant : `L1C3_TEMPERATURES/L1C3_VIGNETTE_TEMPERATURES.md`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_HOME]]*

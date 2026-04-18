@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--21-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--04--17-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Vignette-ff9800?style=flat-square)](.)
 
 </div>
@@ -14,7 +14,7 @@
 | 🏗️ **Layout** | `custom:button-card` — grid 3 colonnes (nom / batterie / état) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-21 |
+| 📅 **Modifié le** | 2026-04-17 |
 | 🏠 **Version HA** | 2026.3 |
 
 > 📝 **Note** : L5C2 était initialement documenté comme "Batterie Portail" dans CLAUDE.md — le contenu réel est "Batterie Portables" (7 téléphones + tablette). CLAUDE.md mis à jour en conséquence.
@@ -235,7 +235,7 @@ custom_fields:
 
 | Élément | Type | Statut |
 |---------|------|--------|
-| HA Companion App — 7 appareils | Intégration native | ✅ Essentiel |
+| HA Companion App — 7 appareils (NE2213 Mamour actif 2026-04-17) | Intégration native | ✅ Essentiel |
 | `custom:button-card` | HACS | ✅ Essentiel |
 
 ---
@@ -248,3 +248,8 @@ custom_fields:
 ---
 
 ← Retour : `L5C1_PILES_BATTERIES/` | → Suivant : `L5C3_MARIADB/`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_BATTERIES_PORTABLES]]  [[L5C1_VIGNETTE_BATTERIES]]  [[L5C3_VIGNETTE_MARIADB]]*

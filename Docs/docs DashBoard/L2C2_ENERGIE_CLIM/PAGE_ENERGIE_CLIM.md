@@ -675,3 +675,8 @@ Le hash `#tendances` doit être déclaré dans la page. Vérifier que la `bubble
 | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | power_status + etat + affichage |
 | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Logique T° cible + delta ADEME |
 | `sensors/P1_clim_chauffage/P1_DUT_clim_chauffage.yaml` | DUT history_stats + intégration kWh |
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L2C2_VIGNETTE_ENERGIE_CLIM]]  [[L1C3_VIGNETTE_CLIM]]*

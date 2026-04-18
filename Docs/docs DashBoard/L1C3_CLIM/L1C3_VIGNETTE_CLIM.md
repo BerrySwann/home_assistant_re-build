@@ -442,3 +442,8 @@ return 'N/A'
 - Page destination : `docs/L1C3_CLIM/PAGE_CLIM.md`
 - Templates P1 : `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml`
 - Templates P1 Master : `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_CLIM]]  [[L1C1_VIGNETTE_METEO]]  [[L1C2_VIGNETTE_TEMPERATURES]]  [[L2C2_VIGNETTE_ENERGIE_CLIM]]*

@@ -1,4 +1,83 @@
-/config/docs [error opening dir]
+/config/Docs
+├── docs Automations
+│   ├── AUTOMATIONS_IDS_REF.md
+│   ├── AUTOMATIONS_MIGRATION_REPORT.md
+│   ├── PROD_LISTING_2026-04-05.md
+│   └── TRIAGE_PROD_2026-04-05.md
+└── docs DashBoard
+    ├── AUTOMATIONS
+    │   ├── AUTOMATIONS.md
+    │   └── PROD_vs_REBUILD_DIFF.md
+    ├── CONFIG_ROOT
+    │   └── CONFIG_ROOT.md
+    ├── DEPENDANCES_GLOBALES.md
+    ├── HOME PAGE
+    │   ├── PAGE_HOME.md
+    │   └── VIGNETTE_WIFI_PRESENCE.md
+    ├── IA
+    │   └── IA_CONTEXT_BASE.md
+    ├── L1C1_METEO
+    │   ├── L1C1_VIGNETTE_METEO.md
+    │   ├── PAGE_METEO.md
+    │   └── TUTO_IMAGES_ALERTES_METEO_FRANCE.md
+    ├── L1C2_TEMPERATURES
+    │   ├── L1C2_VIGNETTE_TEMPERATURES.md
+    │   └── PAGE_TEMPERATURES.md
+    ├── L1C3_CLIM
+    │   ├── L1C3_VIGNETTE_CLIM.md
+    │   └── PAGE_CLIM.md
+    ├── L2C1_ENERGIE
+    │   ├── COULEURS_PRISES_PAR_PIECE.md
+    │   ├── L2C1_VIGNETTE_ENERGIE.md
+    │   ├── PAGE_ENERGIE.md
+    │   ├── PAGE_ENERGIE_MENSUEL.md
+    │   └── PAGE_ENERGIE_TEMPS_REEL.md
+    ├── L2C2_ENERGIE_CLIM
+    │   ├── L2C2_VIGNETTE_ENERGIE_CLIM.md
+    │   └── PAGE_ENERGIE_CLIM.md
+    ├── L2C3_ENERGIE_ECLAIRAGE
+    │   ├── COULEURS_ECLAIRAGE_PAR_PIECE.md
+    │   ├── L2C3_VIGNETTE_ECLAIRAGE.md
+    │   └── PAGE_ENERGIE_ECLAIRAGE.md
+    ├── L3C1_ECLAIRAGE
+    │   ├── L3C1_VIGNETTE_ECLAIRAGE.md
+    │   └── PAGE_ECLAIRAGE.md
+    ├── L3C2_PRISES
+    │   ├── L3C2_VIGNETTE_PRISES.md
+    │   └── PAGE_PRISES.md
+    ├── L3C3_STORES
+    │   ├── L3C3_VIGNETTE_STORES.md
+    │   └── PAGE_STORES.md
+    ├── L4C1_FREEBOX
+    │   ├── L4C1_VIGNETTE_FREEBOX.md
+    │   └── PAGE_FREEBOX.md
+    ├── L4C2_MINI_PC
+    │   ├── L4C2_VIGNETTE_MINI_PC.md
+    │   ├── PAGE_MINI_PC.md
+    │   └── PAGE_RASPI.md
+    ├── L4C3_MAJ_HA
+    │   ├── L4C3_VIGNETTE_MAJ.md
+    │   └── PAGE_MAJ.md
+    ├── L5C1_PILES_BATTERIES
+    │   ├── L5C1_VIGNETTE_BATTERIES.md
+    │   └── PAGE_BATTERIES.md
+    ├── L5C2_BATTERIES_PORTABLES
+    │   ├── L5C2_VIGNETTE_BATTERIES_PORTABLES.md
+    │   └── PAGE_BATTERIES_PORTABLES.md
+    ├── L5C3_MARIADB
+    │   ├── L5C3_VIGNETTE_MARIADB.md
+    │   └── PAGE_SYSTEME.md
+    ├── L6C1_AIR_QUALITE
+    │   ├── L6C1_VIGNETTE_AIR_QUALITE.md
+    │   └── PAGE_AIR_QUALITE.md
+    ├── L6C2_POLLUTION_POLLEN
+    │   ├── L6C2_VIGNETTE_POLLUTION_POLLEN.md
+    │   └── PAGE_POLLUTION_POLLEN.md
+    ├── L6C3_VIGIEAU
+    │   ├── L6C3_VIGNETTE_VIGIEAU.md
+    │   └── PAGE_VIGIEAU.md
+    ├── WORKFLOW_REBUILD.md
+    └── _TEMPLATE_DOC.md
 /config/input_booleans
 ├── P1
 │   ├── P1_ACS_IB_01_arret_clim_securises.yaml
@@ -12,12 +91,9 @@
 └── input_number.yaml
 /config/utility_meter
 ├── P0_Energie_total
-│   ├── Genelec_appart
-│   │   ├── 01_UM_AMHQ_cost.yaml
-│   │   ├── 01_UM_AMHQ_genelec_appart_conso.yaml
-│   │   ├── 02_UM_genelec_appart_quotidien_live.yaml
-│   │   └── 03_UM_genelec_appart_HPHC_AMHQ.yaml
-│   └── Linky
+│   └── Genelec_appart
+│       ├── 01_UM_AMHQ.yaml
+│       └── 02_UM_genelec_appart_HPHC_AMHQ.yaml
 ├── P1_clim_chauffage
 │   └── P1_UM_AMHQ.yaml
 ├── P2_prise
@@ -108,9 +184,11 @@
 /config/sensors
 ├── Air_quality
 │   └── A_01_AIR_QUALITY.yaml
-├── P0_Energie_total_diag
-│   └── Genelec_appart_mini_maxi
-│       └── Genelec_appart_mini_maxi_avg.yaml
+├── P0_Energie_total_min_maxi_diag
+│   ├── P0_Genelec_appart
+│   │   └── P0_kWh_genelec_appart.yaml
+│   └── P0_Genelec_appart_mini_maxi
+│       └── P0_MINI_MAXI_AVG_Genelec_appart.yaml
 ├── P1_clim_chauffage
 │   ├── P1_DUT
 │   │   └── P1_DUT_clim_chauffage.yaml
@@ -128,4 +206,4 @@
     └── M_03_meteo_sensors_blitzortung.yaml
 /config/home-assistant-config-v2 [error opening dir]
 
-48 directories, 74 files
+72 directories, 128 files

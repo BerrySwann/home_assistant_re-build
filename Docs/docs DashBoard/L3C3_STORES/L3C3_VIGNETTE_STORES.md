@@ -288,3 +288,8 @@ Lit l'état textuel du `sensor.store_*_status` (template) et l'affiche brut. Les
 ---
 
 ← Retour : `docs/L3C2_*/` | → Suivant : `docs/L3C3_STORES/PAGE_STORES.md`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_STORES]]  [[L3C1_VIGNETTE_ECLAIRAGE]]  [[L3C2_VIGNETTE_PRISES]]*

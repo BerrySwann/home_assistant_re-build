@@ -622,3 +622,8 @@ sensor.mini_pc_avg_watts_quotidien
 | `utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml` | UM prise Mini PC (à compléter) |
 | `templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml` | AVG watts prise Mini PC (à compléter) |
 | `sensors/P2_prise/P2_kWh_prises.yaml` | kWh intégration prise IKEA |
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L4C2_VIGNETTE_MINI_PC]]  [[PAGE_RASPI]]*

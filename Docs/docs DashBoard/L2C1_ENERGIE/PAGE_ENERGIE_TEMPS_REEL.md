@@ -514,3 +514,8 @@ Chaque appareil utilise ce template streamline avec 5 variables :
 ---
 
 ← Retour : `docs/L2C1_ENERGIE/PAGE_ENERGIE.md` | → Suivant : `PAGE_ENERGIE_MENSUEL.md`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L2C1_VIGNETTE_ENERGIE]]  [[PAGE_ENERGIE]]  [[PAGE_ENERGIE_MENSUEL]]*

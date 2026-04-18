@@ -326,3 +326,8 @@ custom_fields:
 ---
 
 ← Retour : `docs/WIFI_PRESENCE/VIGNETTE_WIFI_PRESENCE.md` | → Suivant : `PAGE_BATTERIES.md`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_BATTERIES]]  [[L5C2_VIGNETTE_BATTERIES_PORTABLES]]  [[L5C3_VIGNETTE_MARIADB]]*

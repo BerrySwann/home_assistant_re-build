@@ -1151,3 +1151,8 @@ duree = 2 × acos(cos_h) × (180/π) / 15   [en heures]
 ---
 
 ← Retour : `docs/L1C1_METEO/L1C1_VIGNETTE_METEO.md` | → Suivant : `docs/L1C2_METEO/` *(à venir)*
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L1C1_VIGNETTE_METEO]]  [[TUTO_IMAGES_ALERTES_METEO_FRANCE]]*
