@@ -1239,7 +1239,7 @@
   - action: homeassistant.update_entity
     target:
       entity_id: sensor.blitzortung_lightning_localisation
-  - action: notify.mobile_app_eric
+  - action: notify.mobile_app_poco_x7_pro_eric
     data:
       title: /!\ Attention foudre /!\
       message: "{% set distance = states('sensor.blitzortung_lightning_distance')
