@@ -28,30 +28,33 @@
 - platform: statistics
   name: "Genelec Appart Conso Mini 24h"
   unique_id: genelec_appart_conso_mini_24h
-  entity_id: sensor.genelec_appart_quotidien_kwh_um
+  entity_id: sensor.general_electric_appart_power
   state_characteristic: value_min
   max_age:
     hours: 24
+  sampling_size: 1000
 
 # --- genelec_appart_conso_maxi_24h ---
 - platform: statistics
   name: "Genelec Appart Conso Maxi 24h"
   unique_id: genelec_appart_conso_maxi_24h
-  entity_id: sensor.general_electric_appart_power                          # "[L40] modif"
+  entity_id: sensor.general_electric_appart_power
   state_characteristic: value_max
   max_age:
     hours: 24
+  sampling_size: 1000
 
 # --- genelec_appart_conso_moyenne_1h ---
 - platform: statistics
   name: "Genelec Appart Conso Moyenne 1h"
   unique_id: genelec_appart_conso_moyenne_1h
-  entity_id: sensor.general_electric_appart_power                          # "[L49] modif"
+  entity_id: sensor.general_electric_appart_power
   state_characteristic: mean
   precision: 1
   max_age:
     hours: 1
-
+  sampling_size: 1000
+  
 # annotations_log:
 # - [Création] 3 statistics sensors min/max/moy — source ecojoko_consommation_temps_reel
 # - [modif] source → general_electric_appart_power (NODON — remplacement Ecojoko)
