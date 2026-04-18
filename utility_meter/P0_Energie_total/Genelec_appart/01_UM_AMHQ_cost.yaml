@@ -8,7 +8,9 @@
 # Pour le split tarifaire HP/HC, voir : 03_UM_genelec_appart_HPHC_AMHQ.yaml
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Source : sensor.genelec_appart_totale_kwh (index kWh cumulatif Ecojoko).
+# - Source : sensor.genelec_appart_totale_kwh (Riemann tampon — isolé des aberrations NODON).
+#   → Ne jamais pointer directement sur sensor.general_electric_appart_energy (NODON brut)
+#      car les resets/aberrations NODON provoqueraient des sauts sur les UM.
 # - Chaque UM accumule les incréments de la source sur sa période, puis remet
 #   à zéro automatiquement (minuit / lundi / 1er du mois / 1er janvier).
 #
@@ -25,7 +27,7 @@
 # ─── QUOTIDIEN ────────────────────────────────────────────────────────────────
 
 # --- genelec_appart_quotidien_kwh_um ---
-genelec_appart_quotidien_um:
+genelec_appart_quotidien_kwh_um:
   source: sensor.genelec_appart_totale_kwh
   name: "Genelec Appart Quotidien kWh UM"
   unique_id: genelec_appart_quotidien_kwh_um
@@ -52,14 +54,19 @@ genelec_appart_mensuel_kwh_um:
 # ─── ANNUEL ──────────────────────────────────────────────────────────────────
 
 # --- genelec_appart_annuel_kwh_um ---
-genelec_appart_annuel_khw_um:
+genelec_appart_annuel_kwh_um:
   source: sensor.genelec_appart_totale_kwh
   name: "Genelec Appart Annuel kWh UM"
   unique_id: genelec_appart_annuel_kwh_um
   cycle: yearly
 
 # annotations_log:
-# - [AJOUT] genelec_appart_quotidien_um (cycle daily manquant) — requis par 03_AVG_genelec_appart.yaml
-# - [L29,37,45,53] name: "Réseau *" → "Genelec Appart * UM" (conformité convention)
-# - [L27,34,41] source inchangée : sensor.genelec_appart_totale_kwh
-# - [SUPPRIMÉ] ecojoko_hp/hc_reseau_*_um (source Ecojoko remplacée)
+# - [Création] 4 UM kWh AMHQ — source sensor.genelec_appart_totale_kwh (Riemann tampon NODON)
+# - [CONTEXTE] Ecojoko entièrement retiré de l'installation — remplacé par NODON (smart plug général)
+#   Les anciens UM ecojoko_hp/hc_reseau_*_um sont supprimés sans remplacement direct.
+# - [AJOUT] genelec_appart_quotidien_kwh_um (cycle daily manquant) — requis par 03_AVG_genelec_appart.yaml
+# - [name] ajout suffixe "kWh" pour cohérence avec convention de nommage du projet
+# - [unique_id + clé] ajout "_kwh_" uniformisé sur les 4 entrées (clé yaml = unique_id)
+# - [slug] alignés exactement sur les unique_id (règle slug tertiaire)
+# - [source] sensor.general_electric_appart_energy → sensor.genelec_appart_totale_kwh
+#   (isolation des aberrations/resets NODON via intégration Riemann méthode left)
