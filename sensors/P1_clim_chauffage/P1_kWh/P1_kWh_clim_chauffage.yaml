@@ -1,32 +1,4 @@
-# ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 1 — CAPTEURS INTÉGRATION kWh : CHAUFFAGE & CLIMATISATION            │
-# ╰──────────────────────────────────────────────────────────────────────────╯
-#
-# ## 📝 DESCRIPTION :
-# Intégration Riemann (méthode left) de la puissance instantanée (W) vers
-# l'énergie cumulée (kWh) pour les 6 équipements du Pôle 1.
-# Ces capteurs constituent la SOURCE des utility_meter P1_UM_AMHQ.yaml.
-#
-# ## 🧮 CALCUL & SOURCES :
-# - Formule : ∫ Power (W) dt → kWh (méthode left, arrondi 3 décimales)
-# - Sources  : sensor.*_power (W) — prises NOUS connectées
-# - Valeurs s'accumulent depuis la création (pas de RAZ auto)
-# - La gestion périodique (AMHQ) relève de utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml
-#
-# ## ⚠️ IMPORTANT (PIÈGES) :
-# - Ne pas confondre avec les sensor.*_energy natifs des prises NOUS (cumulatif matériel).
-#   Ces capteurs Riemann sont indépendants et démarrent à 0 à la création.
-# - Méthode LEFT choisie (vs trapezoidal) : meilleure gestion des variations
-#   brusques (clim en démarrage, cycles ON/OFF radiateur).
-# - Si HA redémarre, un petit écart peut apparaître sur la dernière mesure —
-#   comportement normal avec la méthode left.
-#
-# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - Alimente via P1_UM_AMHQ.yaml → vignette L2C2 (Conso Énergie Clim/Rad/Soufflant)
 
-# ┌───────────────────────────────────┐
-# │ 4. SALON                          │
-# └───────────────────────────────────┘
 
 # --- clim_salon_energie_totale_kwh ---
 - platform: integration
