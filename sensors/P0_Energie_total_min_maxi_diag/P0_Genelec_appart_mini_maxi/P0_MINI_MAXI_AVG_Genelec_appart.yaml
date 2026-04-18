@@ -32,7 +32,6 @@
   state_characteristic: value_min
   max_age:
     hours: 24
-  sampling_size: 1000
 
 # --- genelec_appart_conso_maxi_24h ---
 - platform: statistics
@@ -42,7 +41,6 @@
   state_characteristic: value_max
   max_age:
     hours: 24
-  sampling_size: 1000
 
 # --- genelec_appart_conso_moyenne_1h ---
 - platform: statistics
@@ -53,7 +51,6 @@
   precision: 1
   max_age:
     hours: 1
-  sampling_size: 1000
   
 # annotations_log:
 # - [Création] 3 statistics sensors min/max/moy — source ecojoko_consommation_temps_reel
