@@ -1,8 +1,8 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--22-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--04--17-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page%20Doc-ff9800?style=flat-square)](.)
 
 </div>
@@ -14,8 +14,8 @@
 | 🏗️ **Layout** | `type: grid` (colonne unique) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-22 |
-| 🏠 **Version HA** | 2025.2.x → 2.0 |
+| 📅 **Modifié le** | 2026-04-17 |
+| 🏠 **Version HA** | 2026.3 |
 
 ---
 
@@ -202,7 +202,7 @@ conditions:
 | Sem. | `switch.schedule_clim_du_salon_week` | Programme semaine |
 | Week-End | `switch.schedule_clim_du_salon_week_end` | Programme week-end |
 | Power W | `sensor.clim_salon_nous_power` | Conso instantanée |
-| Power ON/OFF | `switch.clim_salon_nous` → `script.j_1_routeur_clim_on_off_intelligent` `piece: salon` | Coupe/allume la prise |
+| Power ON/OFF | `switch.clim_salon_nous` → `script.j_1_1_salon_clim_on_off_intelligent` | Coupe/allume la prise |
 
 > Tap heading → `/dashboard-tablette/prog-clim-salon`
 
@@ -277,7 +277,7 @@ entity: input_boolean.clim_bureau_arret_securise_en_cours (off) + switch.clim_bu
 | Sem. | `switch.schedule_clim_du_bureau_week` | Programme semaine |
 | Week-End | `switch.schedule_clim_du_bureau_week_end` | Programme week-end |
 | Power W | `sensor.clim_bureau_nous_power` | Conso instantanée |
-| Power ON/OFF | `switch.clim_bureau_nous` → `script.j_1_routeur_clim_on_off_intelligent` `piece: bureau` | Coupe/allume prise |
+| Power ON/OFF | `switch.clim_bureau_nous` → `script.j_1_2_bureau_clim_on_off_intelligent` | Coupe/allume prise |
 
 > Tap heading → `/dashboard-tablette/prog-clim-bureau`
 
@@ -375,7 +375,7 @@ entity: input_boolean.clim_chambre_arret_securise_en_cours (off) + switch.clim_c
 | Sem. | `switch.schedule_clim_de_la_chambre_week` | Programme semaine |
 | Week-End | `switch.schedule_clim_de_la_chambre_week_end` | Programme week-end |
 | Power W | `sensor.clim_chambre_nous_power` | Conso instantanée |
-| Power ON/OFF | `switch.clim_chambre_nous` → `script.j_1_routeur_clim_on_off_intelligent` `piece: chambre` | Coupe/allume prise |
+| Power ON/OFF | `switch.clim_chambre_nous` → `script.j_1_3_chambre_clim_on_off_intelligent` | Coupe/allume prise |
 
 > Tap heading → `/dashboard-tablette/prog-clim-chambre`
 
@@ -510,14 +510,18 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 
 ### Scripts intelligents
 
-> Ces deux scripts fonctionnent en tandem. J-1 est appelé depuis le dashboard, J-2 est appelé par J-1.
+> Les J-1 sont appelés depuis le dashboard. Chaque J-1 appelle J 2-0 (commun). Architecture 3+1 : un routeur par pièce + un exécuteur commun.
 
-| Entité | Rôle | Mode |
-|--------|------|------|
-| `script.j_1_routeur_clim_on_off_intelligent` | **ROUTEUR** — point d'entrée dashboard. Anti-tremblote (vérifie verrou), puis route : allume prise OU appelle J-2. Paramètre `piece:` (salon / bureau / chambre) | `single` |
-| `script.j_2_secu_arret_clim_protege` | **EXÉCUTANT** — arrêt sécurisé en 6 étapes : (1) active verrou → (2) coupe thermostat → (3) vérifie état → (4) attend descente sous 9W (timeout 10 min) → (5) coupe prise NOUS → (6) libère verrou. Protège le compresseur contre la coupure brutale. | `parallel` (max 3) |
+| Entité | Alias | Rôle | Mode |
+|--------|-------|------|------|
+| `script.j_1_1_salon_clim_on_off_intelligent` | J 1-1 SALON | **ROUTEUR SALON** — anti-tremblote + route ON/OFF | `single` |
+| `script.j_1_2_bureau_clim_on_off_intelligent` | J 1-2 BUREAU | **ROUTEUR BUREAU** — anti-tremblote + route ON/OFF | `single` |
+| `script.j_1_3_chambre_clim_on_off_intelligent` | J 1-3 CHAMBRE | **ROUTEUR CHAMBRE** — anti-tremblote + route ON/OFF | `single` |
+| `script.j_2_0_secu_arret_clim_protege` | J 2-0 SECU | **EXÉCUTANT commun** — (1) active verrou → (2) coupe thermostat → (3) vérifie état → (4) attend descente sous 9W (timeout 10 min) → (5) coupe prise NOUS → (6) libère verrou | `parallel` (max 3) |
 
-**Fichier source** : `scripts.yaml` (racine repo)
+> **Pourquoi 3 routeurs ?** Chaque `mode: single` est isolé par pièce. Avec un routeur unique, arrêter salon bloquait silencieusement bureau pendant 10 min (J-1 attendait la fin de J-2).
+
+**Fichier source** : `scripts.yaml` (racine) — voir aussi `docs Scripts/SCRIPTS_CLIM_ON_OFF.md`
 
 ---
 
@@ -558,3 +562,8 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 - Templates P1 total : `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml`
 - Templates P1 master : `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml`
 - Templates Inter SdB : `templates/Inter_BP_Virtuel/BI_02_switch_inter_sdb.yaml`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L1C3_VIGNETTE_CLIM]]  [[L2C2_VIGNETTE_ENERGIE_CLIM]]*

@@ -355,3 +355,8 @@ Vérifier `sensor.conso_clim_rad_total_quotidien` et `sensor.conso_clim_rad_tota
 | `templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml` | Templates power_status + etat |
 | `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` | TOTAL quotidien + mensuel kWh |
 | `sensors/P1_clim_chauffage/P1_DUT_clim_chauffage.yaml` | Intégration Riemann (kWh source UM) |
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_ENERGIE_CLIM]]  [[L1C3_VIGNETTE_CLIM]]  [[L2C1_VIGNETTE_ENERGIE]]  [[L2C3_VIGNETTE_ECLAIRAGE]]*

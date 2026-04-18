@@ -249,3 +249,8 @@ Vérifier dans Outils développeur > États : filtrer `update.` et regarder si `
 ---
 
 ← Retour : [`PAGE_HOME.md`](../WIFI_PRESENCE%20(Home%20Page)/PAGE_HOME.md) | → Suite : [`PAGE_MAJ.md`](./PAGE_MAJ.md)
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_MAJ]]  [[L4C1_VIGNETTE_empty]]  [[L4C2_VIGNETTE_MINI_PC]]*

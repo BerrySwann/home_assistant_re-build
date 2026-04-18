@@ -205,3 +205,8 @@ L'entité togglee est `light.hue_smart_eco_salon` mais les capteurs pointent ver
 # [L3] light.hue_smart_eco_salon togglee mais capteurs = prise_salon_chargeur_nous — mismatch à vérifier
 
 ← Retour : `L3C1_ECLAIRAGE/` | → Suite : `L3C3_STORES/`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L3C2_VIGNETTE_PRISES]]*

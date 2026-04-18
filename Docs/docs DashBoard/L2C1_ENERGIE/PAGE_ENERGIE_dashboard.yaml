@@ -1,0 +1,2126 @@
+type: grid
+cards:
+  - type: heading
+    icon: mdi:transmission-tower
+    heading: ENERGIE HOME
+    heading_style: title
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.general_electric_appart_power
+        color: green
+        state_content:
+          - name
+          - state
+        name: Réel
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/energie-temps-reel
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.general_electric_appart_energy
+        color: green
+        state_content:
+          - name
+          - state
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/energie-mensuel
+        name: Cumul Jrs
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: false
+      margin: false
+      border_radius: false
+      background: false
+      outer_padding: false
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 1px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: Appartement
+  - square: false
+    type: grid
+    columns: 3
+    cards:
+      - type: custom:ring-tile
+        entity: sensor.genelec_appart_conso_mini_24h
+        name: Conso. Mini.
+        ring_entity: sensor.genelec_appart_conso_mini_24h
+        ring_type: open
+        ring_size: 3
+        scale: ticks_with_labels
+        middle_element: value_with_unit
+        bottom_element: name
+        colorize_icon: true
+        indicator: dot
+        min: 0
+        max: 20
+        max_decimals: 3
+        colour:
+          "0": green
+          "8": green
+          "15": orange
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: none !important;
+              align-items: center;
+              justify-content: center;
+              transform: scale(0.8);
+              margin: 21px 0px 0px 0px;
+            }
+      - type: custom:ring-tile
+        entity: sensor.general_electric_appart_power
+        name: Conso. Temps Réel
+        ring_entity: sensor.general_electric_appart_power
+        ring_type: open
+        ring_size: 3
+        scale: ticks_with_labels
+        middle_element: value_with_unit
+        bottom_element: name
+        colorize_icon: true
+        indicator: dot
+        min: 0
+        max: 6000
+        max_decimals: 0
+        colour:
+          "0": green
+          "1700": green
+          "2000": orange
+          "3700": orange
+          "4000": red
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: none !important;
+              align-items: center;
+              justify-content: center;
+              transform: scale(1.10);
+              margin: 0px 0px 0px 0px;
+            }
+      - type: custom:ring-tile
+        entity: sensor.genelec_appart_conso_maxi_24h
+        name: Conso. Maxi.
+        ring_entity: sensor.genelec_appart_conso_maxi_24h
+        ring_type: open
+        ring_size: 3
+        scale: ticks_with_labels
+        middle_element: value_with_unit
+        bottom_element: name
+        colorize_icon: true
+        indicator: dot
+        min: 0
+        max: 20
+        max_decimals: 3
+        colour:
+          "0": green
+          "8": green
+          "15": orange
+          "18": red
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: none !important;
+              align-items: center;
+              justify-content: center;
+              transform: scale(0.8);
+              margin: 21px 0px 0px 0px;
+            }
+  - type: vertical-stack
+    cards:
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:energy-overview-card
+            entities:
+              - power: sensor.general_electric_appart_energy
+                current: sensor.general_electric_appart_power
+                label_leading: Enedis
+                label_trailing: Maison
+                icon_leading: mdi:transmission-tower
+                icon_trailing: mdi:home-lightning-bolt
+                color: "#488fc2"
+                animation:
+                  power: 1000
+                  min_duration: 1
+                  max_duration: 5
+            card_mod:
+              style: |
+                :host {
+                  --card-mod-icon-color: #488fc2;
+                  --mdc-icon-size: 20px;
+                }
+                ha-card {
+                  font-weight: bold;
+                  background: transparent;
+                }
+        card_mod:
+          style: |
+            ha-card {
+              --text-divider-color: rgb(68, 115, 158);
+              --text-divider-line-size: 3px;
+              --text-divider-font-size: 15px;
+              background: none !important;
+              box-shadow: none !important;
+              border: none !important;
+            }
+    grid_options:
+      columns: 24
+      rows: auto
+  - card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: false
+      margin: false
+      border_radius: false
+      background: false
+      outer_padding: false
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 1px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: Ratio Mois A-1 / Semaine dernière / A-1
+  - type: custom:content-card-linky
+    entity: sensor.linky_25481620821301_consumption
+    ewEntity: sensor.linky_25481620821301_consumption
+    show_inject: true
+    show_history: true
+    show_injection: false
+    showEcoWatt: false
+    showError: false
+    showYesterdayRatio: false
+    showHistory: false
+    showIcon: false
+    showTitle: false
+    showPeakOffPeak: false
+    showDayPrice: false
+    showPrice: false
+    showDayMaxPower: false
+    showCurrentMonthRatio: true
+    showTitleLign: false
+    showHeader: false
+    showEcoWattJ12: false
+    showTempoColor: false
+    showTempo: false
+    showWeekRatio: false
+    showInTableUnit: false
+    showDayPriceHCHP: false
+    showDayHCHP: false
+    showYearRatio: false
+    showMonthRatio: false
+    showDayName: long
+    nbJoursAffichage: "7"
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+    grid_options:
+      columns: 4
+      rows: auto
+  - type: custom:content-card-linky
+    entity: sensor.linky_25481620821301_consumption
+    ewEntity: sensor.linky_25481620821301_consumption
+    show_inject: true
+    show_history: true
+    show_injection: false
+    showEcoWatt: false
+    showError: false
+    showYesterdayRatio: false
+    showHistory: false
+    showIcon: false
+    showTitle: false
+    showPeakOffPeak: false
+    showDayPrice: false
+    showPrice: false
+    showDayMaxPower: false
+    showCurrentMonthRatio: false
+    showTitleLign: false
+    showHeader: false
+    showEcoWattJ12: false
+    showTempoColor: false
+    showTempo: false
+    showWeekRatio: true
+    showInTableUnit: false
+    showDayPriceHCHP: false
+    showDayHCHP: false
+    showYearRatio: false
+    showMonthRatio: false
+    showDayName: long
+    nbJoursAffichage: "7"
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+    grid_options:
+      columns: 4
+      rows: auto
+  - type: custom:content-card-linky
+    entity: sensor.linky_25481620821301_consumption
+    ewEntity: sensor.linky_25481620821301_consumption
+    show_inject: true
+    show_history: true
+    show_injection: false
+    showEcoWatt: false
+    showError: false
+    showYesterdayRatio: false
+    showHistory: false
+    showIcon: false
+    showTitle: false
+    showPeakOffPeak: false
+    showDayPrice: false
+    showPrice: false
+    showDayMaxPower: false
+    showCurrentMonthRatio: false
+    showTitleLign: false
+    showHeader: false
+    showEcoWattJ12: false
+    showTempoColor: false
+    showTempo: false
+    showWeekRatio: false
+    showInTableUnit: false
+    showDayPriceHCHP: false
+    showDayHCHP: false
+    showYearRatio: true
+    showMonthRatio: false
+    showDayName: long
+    nbJoursAffichage: "7"
+    grid_options:
+      columns: 4
+      rows: auto
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  - type: custom:tabbed-card
+    styles:
+      "--mdc-theme-primary": "#FFB347"
+      "--mdc-tab-text-label-color-default": rgba(255, 255, 255, 0.6)
+      max-width: 100%
+    attributes:
+      animated: true
+      swipeable: true
+    tabs:
+      - attributes:
+          label: JOURNALIER
+          icon: mdi:calendar-today
+        card:
+          type: vertical-stack
+          cards:
+            - card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+              type: custom:stack-in-card
+              mode: vertical
+              keep:
+                box_shadow: false
+                margin: false
+                border_radius: false
+                background: false
+                outer_padding: false
+              cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:mod-card
+                      card_mod:
+                        style:
+                          .: |
+                            :host {
+                              --text-divider-color: white;
+                              --text-divider-line-size: 1px;
+                            }
+                      card:
+                        type: custom:text-divider-row
+                        text: Coût Quotidien
+            - type: vertical-stack
+              cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: entity
+                      entity: sensor.genelec_appart_quotidien_kwh_um
+                      name: Total kWh
+                      icon: mdi:lightning-bolt-outline
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                    - type: entity
+                      entity: sensor.genelec_appart_hphc_quotidien_um_hp
+                      name: H.P. kWh
+                      icon: mdi:lightning-bolt
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                    - type: entity
+                      entity: sensor.genelec_appart_hphc_quotidien_um_hc
+                      name: H.C. kWh
+                      icon: mdi:lightning-bolt-outline
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                - type: horizontal-stack
+                  cards:
+                    - type: entity
+                      entity: sensor.genelec_appart_cout_total_quotidien
+                      name: Total €
+                      icon: mdi:currency-eur
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                    - type: entity
+                      entity: sensor.genelec_appart_cout_hp_quotidien
+                      name: H.P. €
+                      icon: mdi:currency-eur
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                    - type: entity
+                      entity: sensor.genelec_appart_cout_hc_quotidien
+                      name: H.C. €
+                      icon: mdi:currency-eur
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+              grid_options:
+                columns: 36
+                rows: auto
+            - card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+              type: custom:stack-in-card
+              mode: vertical
+              keep:
+                box_shadow: false
+                margin: false
+                border_radius: false
+                background: false
+                outer_padding: false
+              cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:mod-card
+                      card_mod:
+                        style:
+                          .: |
+                            :host {
+                              --text-divider-color: white;
+                              --text-divider-line-size: 1px;
+                            }
+                      card:
+                        type: custom:text-divider-row
+                        text: Conso. réelle sur 24 Heures
+            - type: custom:apexcharts-card
+              chart_type: pie
+              graph_span: 24h
+              cache: true
+              span:
+                start: day
+              apex_config:
+                chart:
+                  height: 200px
+                legend:
+                  show: false
+                dataLabels:
+                  enabled: true
+                  formatter: |
+                    EVAL:function(val) {
+                      return val.toFixed(0) + "%";
+                    }
+              header:
+                show: true
+                title: Conso. journalière H.P./H.C.
+                show_states: true
+                colorize_states: true
+              all_series_config:
+                group_by:
+                  func: last
+                  duration: 24h
+                show:
+                  legend_value: false
+                  extremas: false
+              show:
+                loading: true
+                last_updated: false
+              series:
+                - entity: sensor.genelec_appart_hphc_quotidien_um_hp
+                  name: Heure pleine
+                  color: rgb(211, 58, 79)
+                - entity: sensor.genelec_appart_hphc_quotidien_um_hc
+                  name: Heure creuse
+                  color: rgb(72, 132, 213)
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+            - type: custom:button-card
+              entity: sensor.genelec_appart_ratio_hc_quotidien
+              name: Rentabilité
+              show_state: true
+              show_icon: false
+              show_label: true
+              label: Heures Creuses
+              decimal: 1
+              styles:
+                grid:
+                  - grid-template-areas: "\"n s\" \"l s\" \"bar bar\""
+                  - grid-template-columns: 1fr auto
+                  - grid-template-rows: auto auto 28px
+                card:
+                  - padding: 12px
+                  - background: transparent
+                  - border: none
+                  - box-shadow: none
+                name:
+                  - justify-self: start
+                  - font-weight: bold
+                  - font-size: 16px
+                label:
+                  - justify-self: start
+                  - font-size: 11px
+                  - opacity: 0.6
+                  - margin-top: "-2px"
+                state:
+                  - justify-self: end
+                  - align-self: center
+                  - font-weight: bold
+                  - font-size: 19px
+                  - opacity: 0.9
+                custom_fields:
+                  bar:
+                    - position: relative
+                    - width: 100%
+                    - height: 25px
+                    - align-self: center
+                    - border-radius: 10px
+                    - background: >-
+                        linear-gradient(90deg, #f44336 0%, #f44336 25%, #ff9800
+                        25%, #ff9800 33%, #4caf50 33%, #4caf50 100%)
+                    - border: 2px solid rgba(255,255,255,1)
+              custom_fields:
+                bar: |
+                  [[[
+                    let val = parseFloat(states['sensor.genelec_appart_ratio_hc_quotidien'].state);
+                    if (isNaN(val)) return "";
+                    let pos = val;
+                    if (pos > 100) pos = 100;
+                    if (pos < 0) pos = 0;
+                    return `
+                      <div style="
+                        position: absolute;
+                        left: ${pos}%;
+                        top: 50%;
+                        width: 18px;
+                        height: 18px;
+                        background: gainsboro;
+                        border-radius: 10px;
+                        border: 1.5px solid black;
+                        transform: translate(-50%, -50%);
+                        transition: left 0.6s ease-in-out;
+                        z-index: 5;
+                      "></div>
+                    `;
+                  ]]]
+              card_mod:
+                style: |
+                  ha-card {
+                    border: none !important;
+                    box-shadow: none !important;
+                    background: transparent;
+                  }
+            - type: custom:apexcharts-card
+              graph_span: 24h
+              cache: false
+              apex_config:
+                chart:
+                  height: 400px
+                legend:
+                  show: true
+              span:
+                start: day
+              now:
+                show: true
+                color: darkred
+                label: Now
+              header:
+                show: true
+                title: " "
+                show_states: true
+                colorize_states: true
+              yaxis:
+                - id: TempsReel
+                  min: 0
+                  max: auto
+                  opposite: false
+                  decimals: 0
+                  apex_config:
+                    tickAmount: 20
+                - id: Minuit
+                  min: 0
+                  max: "|+30|"
+                  opposite: true
+                  decimals: 0
+                  apex_config:
+                    tickAmount: 20
+              all_series_config:
+                group_by:
+                  func: last
+                  duration: 10m
+                show:
+                  legend_value: false
+                  extremas: true
+              series:
+                - entity: sensor.general_electric_appart_power
+                  yaxis_id: TempsReel
+                  name: conso. en temps réel
+                  color: green
+                  type: area
+                  stroke_width: 1
+                - entity: sensor.general_electric_appart_power
+                  name: Moy. glissante (24h)
+                  yaxis_id: TempsReel
+                  unit: W
+                  color: red
+                  type: line
+                  stroke_width: 1
+                  group_by:
+                    func: avg
+                    duration: 24h
+                - entity: sensor.genelec_appart_avg_watts_quotidien
+                  yaxis_id: Minuit
+                  name: Moy. depuis minuit
+                  unit: Wh
+                  color: "#FF5252"
+                  type: line
+                  stroke_width: 1.5
+                - entity: sensor.genelec_appart_avg_watts_mensuel
+                  name: Moy. 1er du mois
+                  unit: Wh
+                  show:
+                    in_chart: false
+                    in_header: true
+                  opacity: 0
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+            - type: custom:auto-entities
+              card:
+                type: custom:bar-card
+                title: SYNTHÈSE USAGES ( Jour en cours )
+                height: 35px
+                decimal: 2
+                unit_of_measurement: kWh
+                min: 0
+                max: sensor.diag_max_poste_quotidien_dynamique
+                positions:
+                  icon: inside
+                  indicator: inside
+                  name: inside
+                  value: inside
+                card_mod:
+                  style: |
+                    bar-card-value {
+                      font-size: 15px;
+                      font-weight: bold;
+                      margin-right: 10px;
+                      padding-bottom: 10px;
+                    }
+                    bar-card-title {
+                      font-size: 15px;
+                      font-weight: bold;
+                      padding-bottom: 10px;
+                      text-align: left;
+                      padding-left: 10px;
+                    }
+                    bar-card-currentbar, bar-card-backgroundbar {
+                        height: 4px !important;
+                        border-radius: 4px;
+                        margin-top: 24px;
+                    }
+                    ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                        border-radius: 10px !important;
+                        padding: 10px !important;
+                    }
+                    ha-icon {
+                      color: white !important;
+                      padding-bottom: 15px;
+                    }
+                    bar-card-name {
+                      padding-bottom: 15px;
+                      font-weight: bold;
+                    }
+              filter:
+                include:
+                  - entity_id: sensor.diag_poste_hygiene_quotidien
+                    options:
+                      name: Hygiène
+                      icon: mdi:water
+                      color: "#00BFFF"
+                  - entity_id: sensor.diag_poste_cuisine_quotidien
+                    options:
+                      name: Cuisson
+                      icon: mdi:stove
+                      color: "#FF4500"
+                  - entity_id: sensor.diag_poste_froid_quotidien
+                    options:
+                      name: Froid
+                      icon: mdi:snowflake
+                      color: "#87CEEB"
+                  - entity_id: sensor.diag_poste_chauffage_quotidien
+                    options:
+                      name: Chauffage
+                      icon: mdi:fire
+                      color: "#FFA500"
+                  - entity_id: sensor.diag_poste_multimedia_quotidien
+                    options:
+                      name: Multimedia
+                      icon: mdi:desktop-tower-monitor
+                      color: "#9370DB"
+                  - entity_id: sensor.diag_poste_eclairage_quotidien
+                    options:
+                      name: Lumière
+                      icon: mdi:lightbulb
+                      color: "#ADFF2F"
+                  - entity_id: sensor.diag_poste_autre_quotidien
+                    options:
+                      name: Autres
+                      icon: mdi:account
+                      color: lightgrey
+              sort:
+                method: state
+                numeric: true
+                reverse: true
+            - type: custom:auto-entities
+              card:
+                type: custom:apexcharts-card
+                chart_type: donut
+                graph_span: 24h
+                header:
+                  show: true
+                  title: Répartition consommation aujourd'hui
+                  show_states: true
+                  colorize_states: true
+                apex_config:
+                  chart:
+                    height: 400px
+                  legend:
+                    show: false
+                  dataLabels:
+                    enabled: true
+                    formatter: |
+                      EVAL:function(val) {
+                        return val.toFixed(1) + "%";
+                      }
+                  tooltip:
+                    "y":
+                      formatter: |
+                        EVAL:function(val) {
+                          return val.toFixed(2) + " kWh";
+                        }
+                card_mod:
+                  style: |
+                    div#state__value {
+                    font-size: 10px;
+                    }
+                    ha-card {
+                      background: none !important;
+                      box-shadow: none !important;
+                      border: none !important;
+                    }
+              filter:
+                include:
+                  - entity_id: sensor.diag_poste_hygiene_quotidien
+                    options:
+                      name: Hygiène
+                      color: "#00BFFF"
+                  - entity_id: sensor.diag_poste_cuisine_quotidien
+                    options:
+                      name: Cuisson
+                      color: "#FF4500"
+                  - entity_id: sensor.diag_poste_froid_quotidien
+                    options:
+                      name: Froid
+                      color: "#87CEEB"
+                  - entity_id: sensor.diag_poste_chauffage_quotidien
+                    options:
+                      name: Chauffage
+                      color: "#FFA500"
+                  - entity_id: sensor.diag_poste_multimedia_quotidien
+                    options:
+                      name: Multimedia
+                      color: "#9370DB"
+                  - entity_id: sensor.diag_poste_eclairage_quotidien
+                    options:
+                      name: Lumière
+                      color: "#ADFF2F"
+                  - entity_id: sensor.diag_poste_autre_quotidien
+                    options:
+                      name: Autres
+                      color: lightgrey
+                options:
+                  group_by:
+                    func: last
+                    duration: 24h
+              sort:
+                method: state
+                reverse: true
+                numeric: true
+      - attributes:
+          label: HEBDOMADAIRE
+          icon: mdi:calendar-week
+        card:
+          type: vertical-stack
+          cards:
+            - card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+              type: custom:stack-in-card
+              mode: vertical
+              keep:
+                box_shadow: false
+                margin: false
+                border_radius: false
+                background: false
+                outer_padding: false
+              cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:mod-card
+                      card_mod:
+                        style:
+                          .: |
+                            :host {
+                              --text-divider-color: white;
+                              --text-divider-line-size: 1px;
+                            }
+                      card:
+                        type: custom:text-divider-row
+                        text: Coût Hebdomadaire
+            - type: vertical-stack
+              cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: entity
+                      entity: sensor.genelec_appart_hebdomadaire_kwh_um
+                      name: Total kWh
+                      icon: mdi:lightning-bolt-outline
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                    - type: entity
+                      entity: sensor.genelec_appart_hphc_hebdomadaire_um_hp
+                      name: H.P. kWh
+                      icon: mdi:lightning-bolt
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                    - type: entity
+                      entity: sensor.genelec_appart_hphc_hebdomadaire_um_hc
+                      name: H.C. kWh
+                      icon: mdi:lightning-bolt-outline
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                - type: horizontal-stack
+                  cards:
+                    - type: entity
+                      entity: sensor.genelec_appart_cout_total_hebdomadaire
+                      name: Total €
+                      icon: mdi:currency-eur
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                    - type: entity
+                      entity: sensor.genelec_appart_cout_hp_hebdomadaire
+                      name: H.P. €
+                      icon: mdi:currency-eur
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                    - type: entity
+                      entity: sensor.genelec_appart_cout_hc_hebdomadaire
+                      name: H.C. €
+                      icon: mdi:currency-eur
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+              grid_options:
+                columns: 36
+                rows: auto
+            - card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+              type: custom:stack-in-card
+              mode: vertical
+              keep:
+                box_shadow: false
+                margin: false
+                border_radius: false
+                background: false
+                outer_padding: false
+              cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:mod-card
+                      card_mod:
+                        style:
+                          .: |
+                            :host {
+                              --text-divider-color: white;
+                              --text-divider-line-size: 1px;
+                            }
+                      card:
+                        type: custom:text-divider-row
+                        text: Conso. réelle sur 7 Jours
+            - type: custom:apexcharts-card
+              chart_type: pie
+              graph_span: 7d
+              cache: true
+              span:
+                start: week
+              apex_config:
+                chart:
+                  height: 200px
+                legend:
+                  show: false
+                dataLabels:
+                  enabled: true
+                  formatter: |
+                    EVAL:function(val) {
+                      return val.toFixed(0) + "%";
+                    }
+              header:
+                show: true
+                title: Conso. hebdomadaire H.P./H.C.
+                show_states: true
+                colorize_states: true
+              all_series_config:
+                group_by:
+                  func: last
+                  duration: 7d
+                show:
+                  legend_value: false
+                  extremas: false
+              show:
+                loading: true
+                last_updated: false
+              series:
+                - entity: sensor.genelec_appart_hphc_hebdomadaire_um_hp
+                  name: Heure pleine
+                  color: rgb(211, 58, 79)
+                - entity: sensor.genelec_appart_hphc_hebdomadaire_um_hc
+                  name: Heure creuse
+                  color: rgb(72, 132, 213)
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+            - type: custom:button-card
+              entity: sensor.genelec_appart_ratio_hc_hebdomadaire
+              name: Rentabilité
+              show_state: true
+              show_icon: false
+              show_label: true
+              label: Heures Creuses
+              decimal: 1
+              styles:
+                grid:
+                  - grid-template-areas: "\"n s\" \"l s\" \"bar bar\""
+                  - grid-template-columns: 1fr auto
+                  - grid-template-rows: auto auto 28px
+                card:
+                  - padding: 12px
+                  - background: transparent
+                  - border: none
+                  - box-shadow: none
+                name:
+                  - justify-self: start
+                  - font-weight: bold
+                  - font-size: 16px
+                label:
+                  - justify-self: start
+                  - font-size: 11px
+                  - opacity: 0.6
+                  - margin-top: "-2px"
+                state:
+                  - justify-self: end
+                  - align-self: center
+                  - font-weight: bold
+                  - font-size: 19px
+                  - opacity: 0.9
+                custom_fields:
+                  bar:
+                    - position: relative
+                    - width: 100%
+                    - height: 25px
+                    - align-self: center
+                    - border-radius: 10px
+                    - background: >-
+                        linear-gradient(90deg, #f44336 0%, #f44336 25%, #ff9800
+                        25%, #ff9800 33%, #4caf50 33%, #4caf50 100%)
+                    - border: 2px solid rgba(255,255,255,1)
+              custom_fields:
+                bar: |
+                  [[[
+                    let val = parseFloat(states['sensor.genelec_appart_ratio_hc_hebdomadaire'].state);
+                    if (isNaN(val)) return "";
+                    let pos = val;
+                    if (pos > 100) pos = 100;
+                    if (pos < 0) pos = 0;
+                    return `
+                      <div style="
+                        position: absolute;
+                        left: ${pos}%;
+                        top: 50%;
+                        width: 18px;
+                        height: 18px;
+                        background: gainsboro;
+                        border-radius: 10px;
+                        border: 1.5px solid black;
+                        transform: translate(-50%, -50%);
+                        transition: left 0.6s ease-in-out;
+                        z-index: 5;
+                      "></div>
+                    `;
+                  ]]]
+              card_mod:
+                style: |
+                  ha-card {
+                    border: none !important;
+                    box-shadow: none !important;
+                    background: transparent;
+                  }
+            - card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+              type: custom:stack-in-card
+              mode: vertical
+              keep:
+                box_shadow: false
+                margin: false
+                border_radius: false
+                background: false
+                outer_padding: false
+              cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:mod-card
+                      card_mod:
+                        style:
+                          .: |
+                            :host {
+                              --text-divider-color: white;
+                              --text-divider-line-size: 1px;
+                            }
+                      card:
+                        type: custom:text-divider-row
+                        text: Énergie totale consommée sur 7 Jours
+            - type: custom:apexcharts-card
+              experimental:
+                color_threshold: true
+              graph_span: 24h
+              cache: true
+              span:
+                end: day
+              now:
+                show: true
+                color: darkred
+                label: Now
+              header:
+                show: true
+                show_states: true
+                colorize_states: true
+                title: " "
+              apex_config:
+                chart:
+                  height: 450px
+                  type: area
+                stroke:
+                  show: true
+                dataLabels:
+                  enabled: true
+                legend:
+                  show: true
+                fill:
+                  type: gradient
+                  gradient:
+                    inverseColors: true
+                    type: vertical
+                    shadeIntensity: 0.1
+                    opacityFrom: 0.5
+                    opacityTo: 0.15
+                    stops:
+                      - 0
+                      - 50
+                      - 100
+                grid:
+                  show: true
+                tooltip:
+                  "y":
+                    formatter: >
+                      EVAL:(val) => (val === null || isNaN(val)) ? '' :
+                      `${Number(val).toFixed(1)} kWh`
+              all_series_config:
+                group_by:
+                  func: last
+                  duration: 10m
+                curve: smooth
+                type: area
+              yaxis:
+                - id: kWh
+                  min: 0
+                  max: auto
+                  decimals: 1
+                  opposite: true
+                  apex_config:
+                    tickAmount: 20
+              series:
+                - entity: sensor.genelec_appart_quotidien_kwh_um
+                  color: gainsboro
+                  extend_to: false
+                  name: (Aujourd'hui)
+                  unit: kWh
+                  stroke_width: 3
+                  float_precision: 2
+                  show:
+                    legend_value: false
+                    extremas: max
+                - entity: sensor.genelec_appart_quotidien_kwh_um
+                  color: rgb(204, 255, 204)
+                  extend_to: false
+                  name: " "
+                  unit: kWh
+                  stroke_width: 2
+                  float_precision: 1
+                  show:
+                    legend_value: false
+                    extremas: max
+                  offset: "-1d"
+                - entity: sensor.genelec_appart_quotidien_kwh_um
+                  color: rgb(153, 255, 153)
+                  extend_to: false
+                  name: " "
+                  unit: kWh
+                  stroke_width: 2
+                  float_precision: 1
+                  show:
+                    legend_value: false
+                    extremas: max
+                  offset: "-2d"
+                - entity: sensor.genelec_appart_quotidien_kwh_um
+                  color: rgb(102, 255, 102)
+                  extend_to: false
+                  name: " "
+                  unit: kWh
+                  stroke_width: 2
+                  float_precision: 1
+                  show:
+                    legend_value: false
+                    extremas: max
+                  offset: "-3d"
+                - entity: sensor.genelec_appart_quotidien_kwh_um
+                  color: rgb(51, 204, 51)
+                  extend_to: false
+                  name: " "
+                  unit: kWh
+                  stroke_width: 2
+                  float_precision: 1
+                  show:
+                    legend_value: false
+                    extremas: max
+                  offset: "-4d"
+                - entity: sensor.genelec_appart_quotidien_kwh_um
+                  color: rgb(0, 153, 0)
+                  extend_to: false
+                  name: " "
+                  unit: kWh
+                  stroke_width: 2
+                  float_precision: 1
+                  show:
+                    legend_value: false
+                    extremas: max
+                  offset: "-5d"
+                - entity: sensor.genelec_appart_quotidien_kwh_um
+                  color: rgb(0, 102, 0)
+                  extend_to: false
+                  name: " "
+                  unit: kWh
+                  stroke_width: 2
+                  float_precision: 1
+                  show:
+                    legend_value: false
+                    extremas: max
+                  offset: "-6d"
+                - entity: sensor.genelec_appart_quotidien_kwh_um
+                  color: rgb(0, 70, 0)
+                  extend_to: false
+                  name: " "
+                  unit: kWh
+                  stroke_width: 2
+                  float_precision: 1
+                  show:
+                    legend_value: false
+                    extremas: max
+                  offset: "-7d"
+              card_mod:
+                style: |
+                  div#state__value {
+                    font-size: 8.5px;
+                  }
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+            - card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+              type: custom:stack-in-card
+              mode: vertical
+              keep:
+                box_shadow: false
+                margin: false
+                border_radius: false
+                background: false
+                outer_padding: false
+              cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:mod-card
+                      card_mod:
+                        style:
+                          .: |
+                            :host {
+                              --text-divider-color: white;
+                              --text-divider-line-size: 1px;
+                            }
+                      card:
+                        type: custom:text-divider-row
+                        text: Coût total par jour (hors Abo.)
+            - card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+              type: custom:flex-table-card
+              entities:
+                - entity: sensor.linky_jour_0
+                - entity: sensor.linky_jour_1
+                - entity: sensor.linky_jour_2
+                - entity: sensor.linky_jour_3
+                - entity: sensor.linky_jour_4
+                - entity: sensor.linky_jour_5
+                - entity: sensor.linky_jour_6
+                - entity: sensor.linky_jour_7
+              columns:
+                - name: Jour
+                  data: jour
+                  align: left
+                - name: Total (kWh)
+                  data: total_kwh
+                  align: center
+                - name: Coût (€)
+                  data: cout
+                  align: center
+                - name: HP (kWh)
+                  data: hp_kwh
+                  align: center
+                - name: HC (kWh)
+                  data: hc_kwh
+                  align: center
+            - type: custom:auto-entities
+              card:
+                type: custom:bar-card
+                title: SYNTHÈSE USAGES ( Semaine en cours )
+                height: 35px
+                decimal: 2
+                unit_of_measurement: kWh
+                min: 0
+                max: sensor.diag_max_poste_hebdomadaire_dynamique
+                positions:
+                  icon: inside
+                  indicator: inside
+                  name: inside
+                  value: inside
+                card_mod:
+                  style: |
+                    bar-card-value {
+                      font-size: 15px;
+                      font-weight: bold;
+                      margin-right: 10px;
+                      padding-bottom: 10px;
+                    }
+                    bar-card-title {
+                      font-size: 15px;
+                      font-weight: bold;
+                      padding-bottom: 10px;
+                      text-align: left;
+                      padding-left: 10px;
+                    }
+                    bar-card-currentbar, bar-card-backgroundbar {
+                        height: 4px !important;
+                        border-radius: 4px;
+                        margin-top: 24px;
+                    }
+                    ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                        border-radius: 10px !important;
+                        padding: 10px !important;
+                    }
+                    ha-icon {
+                      color: white !important;
+                      padding-bottom: 15px;
+                    }
+                    bar-card-name {
+                      padding-bottom: 15px;
+                      font-weight: bold;
+                    }
+              filter:
+                include:
+                  - entity_id: sensor.diag_poste_hygiene_hebdomadaire
+                    options:
+                      name: Hygiène
+                      icon: mdi:water
+                      color: "#00BFFF"
+                  - entity_id: sensor.diag_poste_cuisine_hebdomadaire
+                    options:
+                      name: Cuisson
+                      icon: mdi:stove
+                      color: "#FF4500"
+                  - entity_id: sensor.diag_poste_froid_hebdomadaire
+                    options:
+                      name: Froid
+                      icon: mdi:snowflake
+                      color: "#87CEEB"
+                  - entity_id: sensor.diag_poste_chauffage_hebdomadaire
+                    options:
+                      name: Chauffage
+                      icon: mdi:fire
+                      color: "#FFA500"
+                  - entity_id: sensor.diag_poste_multimedia_hebdomadaire
+                    options:
+                      name: Multimedia
+                      icon: mdi:desktop-tower-monitor
+                      color: "#9370DB"
+                  - entity_id: sensor.diag_poste_eclairage_hebdomadaire
+                    options:
+                      name: Lumière
+                      icon: mdi:lightbulb
+                      color: "#ADFF2F"
+                  - entity_id: sensor.diag_poste_autre_hebdomadaire
+                    options:
+                      name: Autres
+                      icon: mdi:account
+                      color: lightgrey
+              sort:
+                method: state
+                numeric: true
+                reverse: true
+            - type: custom:auto-entities
+              card:
+                type: custom:apexcharts-card
+                chart_type: donut
+                graph_span: 7d
+                header:
+                  show: true
+                  title: Répartition consommation semaine en cours
+                  show_states: true
+                  colorize_states: true
+                apex_config:
+                  chart:
+                    height: 400px
+                  legend:
+                    show: false
+                  dataLabels:
+                    enabled: true
+                    formatter: |
+                      EVAL:function(val) {
+                        return val.toFixed(1) + "%";
+                      }
+                  tooltip:
+                    "y":
+                      formatter: |
+                        EVAL:function(val) {
+                          return val.toFixed(2) + " kWh";
+                        }
+                card_mod:
+                  style: |
+                    div#state__value {
+                    font-size: 10px;
+                    }
+                    ha-card {
+                      background: none !important;
+                      box-shadow: none !important;
+                      border: none !important;
+                    }
+              filter:
+                include:
+                  - entity_id: sensor.diag_poste_hygiene_hebdomadaire
+                    options:
+                      name: Hygiène
+                      color: "#00BFFF"
+                  - entity_id: sensor.diag_poste_cuisine_hebdomadaire
+                    options:
+                      name: Cuisson
+                      color: "#FF4500"
+                  - entity_id: sensor.diag_poste_froid_hebdomadaire
+                    options:
+                      name: Froid
+                      color: "#87CEEB"
+                  - entity_id: sensor.diag_poste_chauffage_hebdomadaire
+                    options:
+                      name: Chauffage
+                      color: "#FFA500"
+                  - entity_id: sensor.diag_poste_multimedia_hebdomadaire
+                    options:
+                      name: Multimedia
+                      color: "#9370DB"
+                  - entity_id: sensor.diag_poste_eclairage_hebdomadaire
+                    options:
+                      name: Lumière
+                      color: "#ADFF2F"
+                  - entity_id: sensor.diag_poste_autre_hebdomadaire
+                    options:
+                      name: Autres
+                      color: lightgrey
+                options:
+                  group_by:
+                    func: last
+                    duration: 7d
+              sort:
+                method: state
+                reverse: true
+                numeric: true
+      - attributes:
+          label: MENSUEL
+          icon: mdi:calendar-month
+        card:
+          type: vertical-stack
+          cards:
+            - card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+              type: custom:stack-in-card
+              mode: vertical
+              keep:
+                box_shadow: false
+                margin: false
+                border_radius: false
+                background: false
+                outer_padding: false
+              cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:mod-card
+                      card_mod:
+                        style:
+                          .: |
+                            :host {
+                              --text-divider-color: white;
+                              --text-divider-line-size: 1px;
+                            }
+                      card:
+                        type: custom:text-divider-row
+                        text: Coût Mensuel
+            - type: vertical-stack
+              cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: entity
+                      entity: sensor.genelec_appart_mensuel_kwh_um
+                      name: Total kWh
+                      icon: mdi:lightning-bolt-outline
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                    - type: entity
+                      entity: sensor.genelec_appart_hphc_mensuel_um_hp
+                      name: H.P. kWh
+                      icon: mdi:lightning-bolt
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                    - type: entity
+                      entity: sensor.genelec_appart_hphc_mensuel_um_hc
+                      name: H.C. kWh
+                      icon: mdi:lightning-bolt-outline
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                - type: horizontal-stack
+                  cards:
+                    - type: entity
+                      entity: sensor.genelec_appart_cout_total_mensuel
+                      name: Total €
+                      icon: mdi:currency-eur
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                    - type: entity
+                      entity: sensor.genelec_appart_cout_hp_mensuel
+                      name: H.P. €
+                      icon: mdi:currency-eur
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+                    - type: entity
+                      entity: sensor.genelec_appart_cout_hc_mensuel
+                      name: H.C. €
+                      icon: mdi:currency-eur
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background: none !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                          }
+                          .icon {
+                            color: white !important;
+                          }
+              grid_options:
+                columns: 36
+                rows: auto
+            - card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+              type: custom:stack-in-card
+              mode: vertical
+              keep:
+                box_shadow: false
+                margin: false
+                border_radius: false
+                background: false
+                outer_padding: false
+              cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:mod-card
+                      card_mod:
+                        style:
+                          .: |
+                            :host {
+                              --text-divider-color: white;
+                              --text-divider-line-size: 1px;
+                            }
+                      card:
+                        type: custom:text-divider-row
+                        text: Conso. réelle mensuelle
+            - type: custom:apexcharts-card
+              chart_type: pie
+              graph_span: 1month
+              cache: true
+              span:
+                start: month
+              apex_config:
+                chart:
+                  height: 200px
+                legend:
+                  show: false
+                dataLabels:
+                  enabled: true
+                  formatter: |
+                    EVAL:function(val) {
+                      return val.toFixed(0) + "%";
+                    }
+              header:
+                show: true
+                title: Conso. mensuelle H.P./H.C.
+                show_states: true
+                colorize_states: true
+              all_series_config:
+                group_by:
+                  func: last
+                  duration: 1month
+                show:
+                  legend_value: false
+                  extremas: false
+              show:
+                loading: true
+                last_updated: false
+              series:
+                - entity: sensor.genelec_appart_hphc_mensuel_um_hp
+                  name: Heure pleine
+                  color: rgb(211, 58, 79)
+                - entity: sensor.genelec_appart_hphc_mensuel_um_hc
+                  name: Heure creuse
+                  color: rgb(72, 132, 213)
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+            - type: custom:button-card
+              entity: sensor.genelec_appart_ratio_hc_mensuel
+              name: Rentabilité
+              show_state: true
+              show_icon: false
+              show_label: true
+              label: Heures Creuses
+              decimal: 1
+              styles:
+                grid:
+                  - grid-template-areas: "\"n s\" \"l s\" \"bar bar\""
+                  - grid-template-columns: 1fr auto
+                  - grid-template-rows: auto auto 28px
+                card:
+                  - padding: 12px
+                  - background: transparent
+                  - border: none
+                  - box-shadow: none
+                name:
+                  - justify-self: start
+                  - font-weight: bold
+                  - font-size: 16px
+                label:
+                  - justify-self: start
+                  - font-size: 11px
+                  - opacity: 0.6
+                  - margin-top: "-2px"
+                state:
+                  - justify-self: end
+                  - align-self: center
+                  - font-weight: bold
+                  - font-size: 19px
+                  - opacity: 0.9
+                custom_fields:
+                  bar:
+                    - position: relative
+                    - width: 100%
+                    - height: 25px
+                    - align-self: center
+                    - border-radius: 10px
+                    - background: >-
+                        linear-gradient(90deg, #f44336 0%, #f44336 25%, #ff9800
+                        25%, #ff9800 33%, #4caf50 33%, #4caf50 100%)
+                    - border: 2px solid rgba(255,255,255,1)
+              custom_fields:
+                bar: |
+                  [[[
+                    let val = parseFloat(states['sensor.genelec_appart_ratio_hc_mensuel'].state);
+                    if (isNaN(val)) return "";
+                    let pos = val;
+                    if (pos > 100) pos = 100;
+                    if (pos < 0) pos = 0;
+                    return `
+                      <div style="
+                        position: absolute;
+                        left: ${pos}%;
+                        top: 50%;
+                        width: 18px;
+                        height: 18px;
+                        background: gainsboro;
+                        border-radius: 10px;
+                        border: 1.5px solid black;
+                        transform: translate(-50%, -50%);
+                        transition: left 0.6s ease-in-out;
+                        z-index: 5;
+                      "></div>
+                    `;
+                  ]]]
+              card_mod:
+                style: |
+                  ha-card {
+                    border: none !important;
+                    box-shadow: none !important;
+                    background: transparent;
+                  }
+            - card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+              type: custom:stack-in-card
+              mode: vertical
+              keep:
+                box_shadow: false
+                margin: false
+                border_radius: false
+                background: false
+                outer_padding: false
+              cards:
+                - type: horizontal-stack
+                  cards:
+                    - type: custom:mod-card
+                      card_mod:
+                        style:
+                          .: |
+                            :host {
+                              --text-divider-color: white;
+                              --text-divider-line-size: 1px;
+                            }
+                      card:
+                        type: custom:text-divider-row
+                        text: Conso. mensuelle par jour
+            - type: custom:apexcharts-card
+              graph_span: 31d
+              cache: true
+              span:
+                start: month
+              apex_config:
+                chart:
+                  height: 400px
+                legend:
+                  show: true
+              header:
+                show: true
+                title: " "
+                show_states: true
+                colorize_states: true
+              yaxis:
+                - id: daily
+                  min: ~0
+                  max: auto
+                  apex_config:
+                    tickAmount: 10
+                - id: moyenne
+                  min: ~0
+                  max: ~500
+                  decimals: 0
+                  show: false
+                  opposite: true
+              all_series_config:
+                group_by:
+                  func: last
+                  duration: 24h
+                show:
+                  legend_value: false
+                  extremas: true
+              series:
+                - entity: sensor.genelec_appart_quotidien_kwh_um
+                  yaxis_id: daily
+                  name: Conso. ce jour
+                  color: rgb(68,115,158)
+                  type: column
+                  unit: kWh
+                  group_by:
+                    func: max
+                    duration: 1d
+                - entity: sensor.genelec_appart_totale_kwh
+                  yaxis_id: daily
+                  type: line
+                  color: red
+                  stroke_width: 3
+                  name: Moy. glissante (Mois)
+                  group_by:
+                    func: avg
+                    duration: 730h
+                - entity: sensor.genelec_appart_avg_watts_quotidien
+                  yaxis_id: moyenne
+                  type: line
+                  color: "#FF5252"
+                  stroke_width: 1.5
+                  name: Moy. depuis minuit
+                  unit: Wh
+                - entity: sensor.genelec_appart_avg_watts_mensuel
+                  name: Moy. 1er du Mois
+                  unit: Wh
+                  show:
+                    in_chart: false
+                    in_header: true
+                  opacity: 0
+                  yaxis_id: daily
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+            - type: custom:auto-entities
+              card:
+                type: custom:bar-card
+                title: SYNTHÈSE USAGES ( Mois en cours )
+                height: 35px
+                decimal: 2
+                unit_of_measurement: kWh
+                min: 0
+                max: sensor.diag_max_poste_mensuel_dynamique
+                positions:
+                  icon: inside
+                  indicator: inside
+                  name: inside
+                  value: inside
+                card_mod:
+                  style: |
+                    bar-card-value {
+                      font-size: 15px;
+                      font-weight: bold;
+                      margin-right: 10px;
+                      padding-bottom: 10px;
+                    }
+                    bar-card-title {
+                      font-size: 15px;
+                      font-weight: bold;
+                      padding-bottom: 10px;
+                      text-align: left;
+                      padding-left: 10px;
+                    }
+                    bar-card-currentbar, bar-card-backgroundbar {
+                        height: 4px !important;
+                        border-radius: 4px;
+                        margin-top: 24px;
+                    }
+                    ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                        border-radius: 10px !important;
+                        padding: 10px !important;
+                    }
+                    ha-icon {
+                      color: white !important;
+                      padding-bottom: 15px;
+                    }
+                    bar-card-name {
+                      padding-bottom: 15px;
+                      font-weight: bold;
+                    }
+              filter:
+                include:
+                  - entity_id: sensor.diag_poste_hygiene_mensuel
+                    options:
+                      name: Hygiène
+                      icon: mdi:water
+                      color: "#00BFFF"
+                  - entity_id: sensor.diag_poste_cuisine_mensuel
+                    options:
+                      name: Cuisson
+                      icon: mdi:stove
+                      color: "#FF4500"
+                  - entity_id: sensor.diag_poste_froid_mensuel
+                    options:
+                      name: Froid
+                      icon: mdi:snowflake
+                      color: "#87CEEB"
+                  - entity_id: sensor.diag_poste_chauffage_mensuel
+                    options:
+                      name: Chauffage
+                      icon: mdi:fire
+                      color: "#FFA500"
+                  - entity_id: sensor.diag_poste_multimedia_mensuel
+                    options:
+                      name: Multimedia
+                      icon: mdi:desktop-tower-monitor
+                      color: "#9370DB"
+                  - entity_id: sensor.diag_poste_eclairage_mensuel
+                    options:
+                      name: Lumière
+                      icon: mdi:lightbulb
+                      color: "#ADFF2F"
+                  - entity_id: sensor.diag_poste_autre_mensuel
+                    options:
+                      name: Autres
+                      icon: mdi:account
+                      color: lightgrey
+              sort:
+                method: state
+                numeric: true
+                reverse: true
+            - type: custom:auto-entities
+              card:
+                type: custom:apexcharts-card
+                chart_type: donut
+                graph_span: 24h
+                header:
+                  show: true
+                  title: Répartition Consommation mois en cours
+                  show_states: true
+                  colorize_states: true
+                apex_config:
+                  chart:
+                    height: 400px
+                  legend:
+                    show: false
+                  dataLabels:
+                    enabled: true
+                    formatter: |
+                      EVAL:function(val) {
+                        return val.toFixed(1) + "%";
+                      }
+                  tooltip:
+                    "y":
+                      formatter: |
+                        EVAL:function(val) {
+                          return val.toFixed(2) + " kWh";
+                        }
+                card_mod:
+                  style: |
+                    div#state__value {
+                    font-size: 10px;
+                    }
+                    ha-card {
+                      background: none !important;
+                      box-shadow: none !important;
+                      border: none !important;
+                    }
+              filter:
+                include:
+                  - entity_id: sensor.diag_poste_hygiene_mensuel
+                    options:
+                      name: Hygiène
+                      color: "#00BFFF"
+                  - entity_id: sensor.diag_poste_cuisine_mensuel
+                    options:
+                      name: Cuisson
+                      color: "#FF4500"
+                  - entity_id: sensor.diag_poste_froid_mensuel
+                    options:
+                      name: Froid
+                      color: "#87CEEB"
+                  - entity_id: sensor.diag_poste_chauffage_mensuel
+                    options:
+                      name: Chauffage
+                      color: "#FFA500"
+                  - entity_id: sensor.diag_poste_multimedia_mensuel
+                    options:
+                      name: Multimedia
+                      color: "#9370DB"
+                  - entity_id: sensor.diag_poste_eclairage_mensuel
+                    options:
+                      name: Lumière
+                      color: "#ADFF2F"
+                  - entity_id: sensor.diag_poste_autre_mensuel
+                    options:
+                      name: Autres
+                      color: lightgrey
+                options:
+                  group_by:
+                    func: last
+                    duration: 24h
+              sort:
+                method: state
+                reverse: true
+                numeric: true
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: transparent;
+        }
+column_span: 1

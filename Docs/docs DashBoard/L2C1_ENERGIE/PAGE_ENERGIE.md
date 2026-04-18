@@ -2,25 +2,27 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--20-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--04--18-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Dashboard%20Doc-ff9800?style=flat-square)](.)
 
 </div>
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `dashbord/page_energie_home.yaml` (Sections → Vue : energie) |
+| 📁 **Path** | `docs DashBoard/L2C1_ENERGIE/PAGE_ENERGIE_dashboard.yaml` |
 | 🔗 **Accès depuis** | Vignette L2C1 → Dashboard HOME → tap → `/dashboard-tablette/energie` |
 | 🔗 **Liens vers** | Badge "Réel" → `/dashboard-tablette/energie-temps-reel` · Badge "Cumul Jrs" → `/dashboard-tablette/energie-mensuel` |
 | 🏗️ **Layout** | `type: grid` (column_span: 1) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-20 |
+| 📅 **Modifié le** | 2026-04-18 |
 | 🏠 **Version HA** | 2026.3.x |
 
 ---
 
 # ⚡ PAGE ÉNERGIE HOME — DOCUMENTATION COMPLÈTE
+
+> ⚠️ **[2026-04-18] Migration Ecojoko → NODON** : Ecojoko entièrement retiré de l'installation. Toutes les entités `ecojoko_*` remplacées par les capteurs NODON (`general_electric_appart_*`) et les capteurs Genelec Appart (`genelec_appart_*`). Le tarif `tarif_heures_*_ttc` est remplacé par `edf_tempo_price_blue_hp/hc`.
 
 ---
 
@@ -44,23 +46,25 @@
 ## 🎯 VUE D'ENSEMBLE
 
 Cette page regroupe toutes les informations de consommation électrique du logement en temps réel et sur les périodes passées :
-- Puissance instantanée (Mini / Temps réel / Maxi) via ring-tile-card
-- Flux Enedis → Maison via energy-overview-card
+- Puissance instantanée NODON (Mini kWh / Temps réel W / Maxi kWh) via ring-tile-card
+- Flux Enedis → Maison via energy-overview-card (source : capteur NODON brut)
 - Ratios Linky A-1 / Semaine / Annuel
-- Coûts journaliers et mensuels HP/HC détaillés
+- Coûts journaliers et mensuels HP/HC détaillés (UM Genelec Appart × tarif EDF Tempo Bleu)
 - Pie charts HP/HC + sliders de rentabilité HC
 - Graphique 24h temps réel + moyennes glissantes
-- Historique 7 jours superposé (offset ApexCharts)
+- Historique 7 jours superposé (offset ApexCharts — source : UM quotidien NODON)
 - Tableau Linky 8 jours (coût + HP/HC)
 - Graphique mensuel par jours
 - Synthèse par postes (7 catégories, jour + mois) avec donut
 
 ### Intégrations requises
 
-- ✅ **Ecojoko** (`little_monkey`) — `sensor.ecojoko_*`
+- ✅ **NODON** (smart plug général appartement) — `sensor.general_electric_appart_*`
+- ✅ **Riemann tampon** — `sensor.genelec_appart_totale_kwh` (source des UM)
+- ✅ **UM Genelec Appart** — `sensor.genelec_appart_*_kwh_um` et `sensor.genelec_appart_hphc_*_um_hp/hc`
 - ✅ **MyElectricalData / Linky** (`linky_card`) — `sensor.linky_*`
-- ✅ **tarif_edf** (custom component) — `sensor.tarif_heures_*_ttc`
-- ✅ Sensors natifs Ecojoko — `sensor.ecojoko_conso_mini_24h` / `sensor.ecojoko_conso_maxi_24h` (fournis directement par l'intégration Ecojoko)
+- ✅ **tarif_edf** (custom component) — `sensor.edf_tempo_price_blue_hp` / `sensor.edf_tempo_price_blue_hc`
+- ✅ Sensors Genelec Appart mini/maxi — `sensor.genelec_appart_conso_mini_24h` / `sensor.genelec_appart_conso_maxi_24h` (via `Genelec_appart_mini_maxi_avg.yaml`)
 
 ### Cartes HACS utilisées
 
@@ -90,7 +94,7 @@ Cette page regroupe toutes les informations de consommation électrique du logem
 ├─────────────────────────────────────────────────────┤
 │  ┌────────┐   ┌────────┐   ┌────────┐              │
 │  │  Mini  │   │  Réel  │   │  Maxi  │  ← ring-tile │
-│  │  (W)   │   │  (W)   │   │  (W)   │              │
+│  │ (kWh)  │   │  (W)   │   │ (kWh)  │              │
 │  └────────┘   └────────┘   └────────┘              │
 ├─────────────────────────────────────────────────────┤
 │  [energy-overview-card] Enedis → Maison             │
@@ -130,14 +134,14 @@ Cette page regroupe toutes les informations de consommation électrique du logem
   heading_style: title
   badges:
     - type: entity
-      entity: sensor.ecojoko_consommation_temps_reel
+      entity: sensor.general_electric_appart_power
       name: Réel
       color: green
       tap_action:
         action: navigate
         navigation_path: /dashboard-tablette/energie-temps-reel
     - type: entity
-      entity: sensor.ecojoko_consommation_reseau
+      entity: sensor.general_electric_appart_energy
       name: Cumul Jrs
       color: green
       tap_action:
@@ -153,15 +157,15 @@ Cette page regroupe toutes les informations de consommation électrique du logem
 
 ### Rôle
 - Titre principal : "ENERGIE HOME" avec icône pylône électrique
-- Badge **Réel** : Puissance instantanée Ecojoko (W) — tap → `/dashboard-tablette/energie-temps-reel` *(page dédiée temps réel)*
-- Badge **Cumul Jrs** : Consommation réseau cumulée du jour (kWh) — tap → `/dashboard-tablette/energie-mensuel` *(page dédiée mensuel)*
+- Badge **Réel** : Puissance instantanée NODON (W) — tap → `/dashboard-tablette/energie-temps-reel`
+- Badge **Cumul Jrs** : Énergie cumulée brute NODON (kWh) — tap → `/dashboard-tablette/energie-mensuel`
 - Navigation retour : Clic titre → `/dashboard-tablette/0` (dashboard HOME)
 
-> **Pages liées** : `energie-temps-reel` et `energie-mensuel` sont 2 pages séparées accessibles uniquement depuis les badges. Documentation : `PAGE_ENERGIE_TEMPS_REEL.md` et `PAGE_ENERGIE_MENSUEL.md`.
+> **Pages liées** : `energie-temps-reel` et `energie-mensuel` sont 2 pages séparées. Documentation : `PAGE_ENERGIE_TEMPS_REEL.md` et `PAGE_ENERGIE_MENSUEL.md`.
 
 ### Entités
-- `sensor.ecojoko_consommation_temps_reel` [Ecojoko - UI] Puissance instantanée (W)
-- `sensor.ecojoko_consommation_reseau` [Ecojoko - UI] Consommation réseau cumulée (kWh)
+- `sensor.general_electric_appart_power` [NODON - UI] Puissance instantanée (W)
+- `sensor.general_electric_appart_energy` [NODON - UI] Énergie cumulée brute (kWh)
 
 ---
 
@@ -174,38 +178,40 @@ Grid 3 colonnes. Chaque ring-tile est un indicateur circulaire avec arc de coule
   type: grid
   columns: 3
   cards:
-    - type: custom:ring-tile    # Mini
-    - type: custom:ring-tile    # Réel
-    - type: custom:ring-tile    # Maxi
+    - type: custom:ring-tile    # Mini (kWh)
+    - type: custom:ring-tile    # Réel (W)
+    - type: custom:ring-tile    # Maxi (kWh)
 ```
 
-### Ring-tile : Conso. Mini (talon standby)
+### Ring-tile : Conso. Mini (kWh — talon reset minuit)
 
 | Paramètre | Valeur |
 |-----------|--------|
-| `entity` | `sensor.ecojoko_conso_mini_24h` |
+| `entity` | `sensor.genelec_appart_conso_mini_24h` |
 | `min` | 0 |
-| `max` | 100 |
+| `max` | 20 |
+| `max_decimals` | 3 |
 | `ring_type` | `open` |
 
 **Palette couleur :**
 
-| Seuil (W) | Couleur | Signification |
-|-----------|---------|---------------|
-| 0–49 | Vert | Standby normal |
-| 50–64 | Orange | Standby élevé |
-| 65–74 | Orange | À surveiller |
-| ≥ 75 | Rouge | Standby anormal |
+| Seuil (kWh) | Couleur | Signification |
+|-------------|---------|---------------|
+| 0–7.99 | Vert | Normal (en pratique toujours 0) |
+| 8–14.99 | Vert | — |
+| ≥ 15 | Orange | Anormal — sensor à vérifier |
 
-> `ecojoko_conso_mini_24h` = puissance minimale native Ecojoko sur 24h. Reflète le talon de consommation irréductible (box, standby). Fourni directement par l'intégration Ecojoko [UI].
+> `genelec_appart_conso_mini_24h` = `value_min` sur 24h de `sensor.genelec_appart_quotidien_kwh_um`.
+> **Valeur toujours 0** — l'UM repart de 0 à minuit et ne peut que croître. Sert de marqueur de reset.
+> Source : `sensors/P0_Energie_total_diag/Genelec_appart/Genelec_appart_mini_maxi_avg.yaml`
 
 ---
 
-### Ring-tile : Conso. Temps Réel
+### Ring-tile : Conso. Temps Réel (W)
 
 | Paramètre | Valeur |
 |-----------|--------|
-| `entity` | `sensor.ecojoko_consommation_temps_reel` |
+| `entity` | `sensor.general_electric_appart_power` |
 | `min` | 0 |
 | `max` | 6000 |
 
@@ -214,24 +220,32 @@ Grid 3 colonnes. Chaque ring-tile est un indicateur circulaire avec arc de coule
 | Seuil (W) | Couleur | Signification |
 |-----------|---------|---------------|
 | 0–1 699 | Vert | Consommation normale |
-| 1 700–1 999 | Vert | Légère montée |
 | 2 000–3 699 | Orange | Consommation élevée |
-| 3 700–3 999 | Orange | Approche du seuil fort |
 | ≥ 4 000 | Rouge | Forte consommation (clim + tout) |
 
 ---
 
-### Ring-tile : Conso. Maxi
+### Ring-tile : Conso. Maxi (kWh — total journalier accumulé)
 
 | Paramètre | Valeur |
 |-----------|--------|
-| `entity` | `sensor.ecojoko_conso_maxi_24h` |
+| `entity` | `sensor.genelec_appart_conso_maxi_24h` |
 | `min` | 0 |
-| `max` | 6000 |
+| `max` | 20 |
+| `max_decimals` | 3 |
 
-Même palette couleur que le Temps Réel (seuils 2 000 / 4 000 W).
+**Palette couleur :**
 
-> `ecojoko_conso_maxi_24h` = puissance maximale native Ecojoko sur 24h. Reflète le pic de consommation journalier. Fourni directement par l'intégration Ecojoko [UI].
+| Seuil (kWh) | Couleur | Signification |
+|-------------|---------|---------------|
+| 0–7.99 | Vert | Journée économique |
+| 8–14.99 | Orange | Journée modérée |
+| 15–17.99 | Orange | Journée élevée |
+| ≥ 18 | Rouge | Journée très élevée |
+
+> `genelec_appart_conso_maxi_24h` = `value_max` sur 24h de `sensor.genelec_appart_quotidien_kwh_um`.
+> Représente le **total journalier kWh accumulé** (pic = valeur courante de l'UM).
+> Source : `sensors/P0_Energie_total_diag/Genelec_appart/Genelec_appart_mini_maxi_avg.yaml`
 
 ---
 
@@ -244,8 +258,8 @@ Même palette couleur que le Temps Réel (seuils 2 000 / 4 000 W).
       cards:
         - type: custom:energy-overview-card
           entities:
-            - power: sensor.ecojoko_consommation_reseau
-              current: sensor.ecojoko_consommation_temps_reel
+            - power: sensor.general_electric_appart_energy
+              current: sensor.general_electric_appart_power
               label_leading: Enedis
               label_trailing: Maison
               icon_leading: mdi:transmission-tower
@@ -255,17 +269,14 @@ Même palette couleur que le Temps Réel (seuils 2 000 / 4 000 W).
                 power: 1000
                 min_duration: 1
                 max_duration: 5
-  grid_options:
-    columns: 24
-    rows: auto
 ```
 
 ### Rôle
 Affiche un flux animé Enedis → Maison. La vitesse d'animation est proportionnelle à la consommation (seuil : 1 000 W, durée 1–5s).
 
 ### Entités
-- `sensor.ecojoko_consommation_reseau` [Ecojoko - UI] Consommation réseau cumulée (kWh)
-- `sensor.ecojoko_consommation_temps_reel` [Ecojoko - UI] Puissance instantanée (W)
+- `sensor.general_electric_appart_energy` [NODON - UI] Énergie cumulée brute (kWh) — champ `power` de la carte
+- `sensor.general_electric_appart_power` [NODON - UI] Puissance instantanée (W) — champ `current`
 
 ---
 
@@ -288,7 +299,7 @@ Toutes utilisent `entity: sensor.linky_25481620821301_consumption` et `ewEntity:
 
 ## 🗂️ SECTION TABBED-CARD (3 ONGLETS)
 
-La zone principale de la page est une `custom:tabbed-card` englobant les 3 périodes de suivi. Chaque onglet contient la même structure logique adaptée à sa période.
+La zone principale de la page est une `custom:tabbed-card` englobant les 3 périodes de suivi.
 
 ```yaml
 - type: custom:tabbed-card
@@ -303,15 +314,12 @@ La zone principale de la page est une `custom:tabbed-card` englobant les 3 péri
     - attributes:
         label: JOURNALIER
         icon: mdi:calendar-today
-      card: ...
     - attributes:
         label: HEBDOMADAIRE
         icon: mdi:calendar-week
-      card: ...
     - attributes:
         label: MENSUEL
         icon: mdi:calendar-month
-      card: ...
 ```
 
 **Propriétés communes :**
@@ -326,21 +334,20 @@ La zone principale de la page est une `custom:tabbed-card` englobant les 3 péri
 
 Période : jour en cours (remise à zéro à minuit).
 
-**Contenu dans l'ordre :**
-
 **1. Coût Quotidien** — 2 rangées de 3 entités (kWh + €)
 
 | Entité | Type | Rôle |
 |--------|------|------|
-| `sensor.ecojoko_reseau_quotidien_um` | entity | Total kWh quotidien (UM) |
-| `sensor.ecojoko_hp_reseau_quotidien_um` | entity | H.P. kWh quotidien (UM) |
-| `sensor.ecojoko_hc_reseau_quotidien_um` | entity | H.C. kWh quotidien (UM) |
-| `sensor.ecojoko_cout_total_quotidien` | entity | Coût total € quotidien |
-| `sensor.ecojoko_cout_hp_quotidien` | entity | H.P. € quotidien |
-| `sensor.ecojoko_cout_hc_quotidien` | entity | H.C. € quotidien |
+| `sensor.genelec_appart_quotidien_kwh_um` | entity | Total kWh quotidien (UM) |
+| `sensor.genelec_appart_hphc_quotidien_um_hp` | entity | H.P. kWh quotidien (UM HP) |
+| `sensor.genelec_appart_hphc_quotidien_um_hc` | entity | H.C. kWh quotidien (UM HC) |
+| `sensor.genelec_appart_cout_total_quotidien` | entity | Coût total € quotidien |
+| `sensor.genelec_appart_cout_hp_quotidien` | entity | H.P. € quotidien |
+| `sensor.genelec_appart_cout_hc_quotidien` | entity | H.C. € quotidien |
 
-> Sources UM : `utility_meter/P0_Energie_total/Ecojoko/02_UM_ecojoko_quotidien_live.yaml`
-> Sources coûts : `templates/P0_Energie_total_diag/Ecojoko/01_ecojoko_AMHQ_cost.yaml`
+> Sources UM total : `utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ_cost.yaml`
+> Sources UM HP/HC : `utility_meter/P0_Energie_total/Genelec_appart/03_UM_genelec_appart_HPHC_AMHQ.yaml`
+> Sources coûts : `templates/P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml`
 
 **2. Pie Chart HP/HC journalier (ApexCharts)**
 
@@ -350,17 +357,17 @@ graph_span: 24h
 span:
   start: day
 series:
-  - entity: sensor.ecojoko_hp_reseau_quotidien_um
+  - entity: sensor.genelec_appart_hphc_quotidien_um_hp
     name: Heure pleine
     color: rgb(211, 58, 79)
-  - entity: sensor.ecojoko_hc_reseau_quotidien_um
+  - entity: sensor.genelec_appart_hphc_quotidien_um_hc
     name: Heure creuse
     color: rgb(72, 132, 213)
 ```
 
 **3. Slider Rentabilité HC quotidien (Button-card)**
 
-**Entité :** `sensor.ecojoko_ratio_hc_quotidien`
+**Entité :** `sensor.genelec_appart_ratio_hc_quotidien`
 
 Layout CSS Grid : `"n s" / "l s" / "bar bar"`. Gradient de fond : rouge < 25% → orange 25–33% → vert > 33%. Curseur `gainsboro` 18px positionné à `left: ${val}%` avec transition `0.6s ease-in-out`.
 
@@ -375,16 +382,16 @@ span:
 
 | Série | Entité | Type | Rôle |
 |-------|--------|------|------|
-| Conso. temps réel | `sensor.ecojoko_consommation_temps_reel` | area | Courbe puissance instantanée |
-| Moy. glissante 24h | `sensor.ecojoko_consommation_temps_reel` | line | `func: avg, duration: 24h` |
-| Moy. depuis minuit | `sensor.ecojoko_avg_watts_quotidien` | line | Axe secondaire Wh |
-| Moy. 1er du mois | `sensor.ecojoko_avg_watts_mensuel` | — | En-tête uniquement (`in_chart: false`) |
+| Conso. temps réel | `sensor.general_electric_appart_power` | area | Courbe puissance instantanée (W) |
+| Moy. glissante 24h | `sensor.general_electric_appart_power` | line | `func: avg, duration: 24h` |
+| Moy. depuis minuit | `sensor.genelec_appart_avg_watts_quotidien` | line | Axe secondaire |
+| Moy. 1er du mois | `sensor.genelec_appart_avg_watts_mensuel` | — | En-tête uniquement (`in_chart: false`) |
 
-Double axe Y : `TempsReel` (gauche — W) / `Minuit` (droite — Wh).
+Double axe Y : `TempsReel` (gauche — W) / `Minuit` (droite).
 
 **5. Historique 7 jours (Offset — ApexCharts)**
 
-Principe : toutes les séries utilisent `sensor.ecojoko_consommation_reseau` avec un `offset` décalant la fenêtre de lecture. Le recorder HA fournit les données historiques.
+Principe : toutes les séries utilisent `sensor.genelec_appart_quotidien_kwh_um` avec un `offset` décalant la fenêtre de lecture. Le recorder HA fournit les données historiques.
 
 | Série | Offset | Couleur |
 |-------|--------|---------|
@@ -406,7 +413,7 @@ entities: [sensor.linky_jour_0 … sensor.linky_jour_7]
 columns: Jour | Total kWh | Coût € | HP kWh | HC kWh
 ```
 
-> `linky_jour_0` = conso Ecojoko du jour en temps réel (pas données Linky). `linky_jour_1-7` = attributs Linky (Wh ÷ 1000). Source : `templates/P0_Energie_total_diag/Linky/MyElectricalData.yaml`
+> `linky_jour_0` = conso NODON du jour en temps réel (pas données Linky). `linky_jour_1-7` = attributs Linky (Wh ÷ 1000). Source : `templates/P0_Energie_total_diag/Linky/MyElectricalData.yaml`
 
 **7. Synthèse Usages Journaliers + Donut**
 
@@ -436,15 +443,16 @@ Période : semaine en cours (remise à zéro le lundi à minuit).
 
 | Entité | Rôle |
 |--------|------|
-| `sensor.ecojoko_reseau_hebdomadaire_um` | Total kWh hebdo (UM) |
-| `sensor.ecojoko_hp_reseau_hebdomadaire_um` | H.P. kWh hebdo (UM) |
-| `sensor.ecojoko_hc_reseau_hebdomadaire_um` | H.C. kWh hebdo (UM) |
-| `sensor.ecojoko_cout_total_hebdomadaire` | Coût total € hebdo |
-| `sensor.ecojoko_cout_hp_hebdomadaire` | H.P. € hebdo |
-| `sensor.ecojoko_cout_hc_hebdomadaire` | H.C. € hebdo |
+| `sensor.genelec_appart_hebdomadaire_kwh_um` | Total kWh hebdo (UM) |
+| `sensor.genelec_appart_hphc_hebdomadaire_um_hp` | H.P. kWh hebdo (UM HP) |
+| `sensor.genelec_appart_hphc_hebdomadaire_um_hc` | H.C. kWh hebdo (UM HC) |
+| `sensor.genelec_appart_cout_total_hebdomadaire` | Coût total € hebdo |
+| `sensor.genelec_appart_cout_hp_hebdomadaire` | H.P. € hebdo |
+| `sensor.genelec_appart_cout_hc_hebdomadaire` | H.C. € hebdo |
 
-> Source UM : `utility_meter/P0_Energie_total/Ecojoko/01_UM_AMHQ_cost.yaml`
-> Source coûts : `templates/P0_Energie_total_diag/Ecojoko/01_ecojoko_AMHQ_cost.yaml`
+> Source UM total : `utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ_cost.yaml`
+> Source UM HP/HC : `utility_meter/P0_Energie_total/Genelec_appart/03_UM_genelec_appart_HPHC_AMHQ.yaml`
+> Source coûts : `templates/P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml`
 
 **2. Pie Chart HP/HC hebdomadaire**
 
@@ -454,15 +462,15 @@ graph_span: 7d
 span:
   start: week
 series:
-  - entity: sensor.ecojoko_hp_reseau_hebdomadaire_um
+  - entity: sensor.genelec_appart_hphc_hebdomadaire_um_hp
     color: rgb(211, 58, 79)
-  - entity: sensor.ecojoko_hc_reseau_hebdomadaire_um
+  - entity: sensor.genelec_appart_hphc_hebdomadaire_um_hc
     color: rgb(72, 132, 213)
 ```
 
 **3. Slider Rentabilité HC hebdomadaire**
 
-**Entité :** `sensor.ecojoko_ratio_hc_hebdomadaire` — même structure que le slider journalier.
+**Entité :** `sensor.genelec_appart_ratio_hc_hebdomadaire` — même structure que le slider journalier.
 
 **4. Synthèse Usages Hebdomadaires + Donut**
 
@@ -490,16 +498,18 @@ Période : mois en cours (remise à zéro le 1er du mois à minuit).
 
 **1. Coût Mensuel** — 2 rangées de 3 entités (kWh + €)
 
-> ⚠️ **Différence technique** : Le Total kWh mensuel utilise `type: statistic` avec `stat_type: change` et `period: calendar / month` sur `sensor.ecojoko_consommation_reseau` — pas un UM. Les HP/HC utilisent les UM mensuels.
-
 | Entité | Type | Rôle |
 |--------|------|------|
-| `sensor.ecojoko_consommation_reseau` | `type: statistic` (change, mois) | Total kWh mensuel |
-| `sensor.ecojoko_hp_reseau_mensuel_um` | entity | H.P. kWh mensuel (UM) |
-| `sensor.ecojoko_hc_reseau_mensuel_um` | entity | H.C. kWh mensuel (UM) |
-| `sensor.ecojoko_cout_total_mensuel` | entity | Coût total € mensuel |
-| `sensor.ecojoko_cout_hp_mensuel` | entity | H.P. € mensuel |
-| `sensor.ecojoko_cout_hc_mensuel` | entity | H.C. € mensuel |
+| `sensor.genelec_appart_mensuel_kwh_um` | entity | Total kWh mensuel (UM) |
+| `sensor.genelec_appart_hphc_mensuel_um_hp` | entity | H.P. kWh mensuel (UM HP) |
+| `sensor.genelec_appart_hphc_mensuel_um_hc` | entity | H.C. kWh mensuel (UM HC) |
+| `sensor.genelec_appart_cout_total_mensuel` | entity | Coût total € mensuel |
+| `sensor.genelec_appart_cout_hp_mensuel` | entity | H.P. € mensuel |
+| `sensor.genelec_appart_cout_hc_mensuel` | entity | H.C. € mensuel |
+
+> Source UM total : `utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ_cost.yaml`
+> Source UM HP/HC : `utility_meter/P0_Energie_total/Genelec_appart/03_UM_genelec_appart_HPHC_AMHQ.yaml`
+> Source coûts : `templates/P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml`
 
 **2. Pie Chart HP/HC mensuel**
 
@@ -509,15 +519,15 @@ graph_span: 1month
 span:
   start: month
 series:
-  - entity: sensor.ecojoko_hp_reseau_mensuel_um
+  - entity: sensor.genelec_appart_hphc_mensuel_um_hp
     color: rgb(211, 58, 79)
-  - entity: sensor.ecojoko_hc_reseau_mensuel_um
+  - entity: sensor.genelec_appart_hphc_mensuel_um_hc
     color: rgb(72, 132, 213)
 ```
 
 **3. Slider Rentabilité HC mensuel**
 
-**Entité :** `sensor.ecojoko_ratio_hc_mensuel` — même structure que le slider journalier.
+**Entité :** `sensor.genelec_appart_ratio_hc_mensuel` — même structure que le slider journalier.
 
 **4. Graphique Mensuel par Jours (ApexCharts)**
 
@@ -530,10 +540,10 @@ span:
 
 | Série | Entité | Type | Axe | Rôle |
 |-------|--------|------|-----|------|
-| Conso. ce jour | `sensor.ecojoko_avg_watts_quotidien` | column | `daily` | Barres kWh (`func: max, duration: 24h`) |
-| Moy. glissante mois | `sensor.ecojoko_consommation_reseau` | line | `daily` | `func: avg, duration: 730h` |
-| Moy. depuis minuit | `sensor.ecojoko_avg_watts_quotidien` | line | `moyenne` | Axe secondaire Wh |
-| Moy. 1er du mois | `sensor.ecojoko_avg_watts_mensuel` | — | `daily` | En-tête uniquement (`in_chart: false`) |
+| Conso. ce jour | `sensor.genelec_appart_avg_watts_quotidien` | column | `daily` | Barres kWh (`func: max, duration: 24h`) |
+| Moy. glissante mois | `sensor.genelec_appart_totale_kwh` | line | `daily` | `func: avg, duration: 730h` |
+| Moy. depuis minuit | `sensor.genelec_appart_avg_watts_quotidien` | line | `moyenne` | Axe secondaire |
+| Moy. 1er du mois | `sensor.genelec_appart_avg_watts_mensuel` | — | `daily` | En-tête uniquement (`in_chart: false`) |
 
 **5. Synthèse Usages Mensuels + Donut**
 
@@ -557,12 +567,20 @@ Donut : `group_by: func: diff, duration: 24h`.
 
 ## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
 
-### ⚡ Ecojoko — Temps réel
+### ⚡ NODON — Puissance & Énergie brute
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.ecojoko_consommation_temps_reel` | Puissance instantanée (W) | Intégration Ecojoko [UI] |
-| `sensor.ecojoko_consommation_reseau` | Consommation réseau cumulée (kWh) | Intégration Ecojoko [UI] |
+| `sensor.general_electric_appart_power` | Puissance instantanée (W) | Smart plug NODON [UI] |
+| `sensor.general_electric_appart_energy` | Énergie cumulée brute (kWh) | Smart plug NODON [UI] |
+
+---
+
+### 🔄 Riemann tampon
+
+| Entité | Rôle | Source |
+|--------|------|--------|
+| `sensor.genelec_appart_totale_kwh` | kWh local stable (Riemann left) — source des UM | `sensors/P0_Energie_total_diag/Genelec_appart/P0_kWh_genelec_appart.yaml` |
 
 ---
 
@@ -570,39 +588,41 @@ Donut : `group_by: func: diff, duration: 24h`.
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.ecojoko_conso_mini_24h` | Puissance min sur 24h (W) — talon standby | Intégration Ecojoko [UI] |
-| `sensor.ecojoko_conso_maxi_24h` | Puissance max sur 24h (W) — pic | Intégration Ecojoko [UI] |
-| `sensor.ecojoko_avg_watts_quotidien` | Moyenne Wh depuis minuit | `templates/P0_Energie_total_diag/Ecojoko/03_AVG_ecojoko.yaml` |
-| `sensor.ecojoko_avg_watts_mensuel` | Moyenne Wh depuis le 1er du mois | idem |
+| `sensor.genelec_appart_conso_mini_24h` | `value_min` 24h UM quotidien — toujours 0 (reset minuit) | `sensors/P0_Energie_total_diag/Genelec_appart/Genelec_appart_mini_maxi_avg.yaml` |
+| `sensor.genelec_appart_conso_maxi_24h` | `value_max` 24h UM quotidien — total journalier kWh | idem |
+| `sensor.genelec_appart_conso_moyenne_1h` | `mean` 1h UM quotidien — conso lissée (kWh) | idem |
+| `sensor.genelec_appart_avg_watts_quotidien` | Moyenne Watts depuis minuit | `templates/P0_Energie_total_diag/Genelec_appart/03_AVG_genelec_appart.yaml` |
+| `sensor.genelec_appart_avg_watts_hebdomadaire` | Moyenne Watts depuis lundi | idem |
+| `sensor.genelec_appart_avg_watts_mensuel` | Moyenne Watts depuis le 1er du mois | idem |
+| `sensor.genelec_appart_avg_watts_annuel` | Moyenne Watts depuis le 1er janvier | idem |
 
 ---
 
-### 🔢 Utility Meters Quotidiens (Ecojoko)
+### 🔢 Utility Meters — Total kWh (sans split HP/HC)
 
 | Entité | Cycle | Source |
 |--------|-------|--------|
-| `sensor.ecojoko_reseau_quotidien_um` | daily | `utility_meter/P0_Energie_total/Ecojoko/02_UM_ecojoko_quotidien_live.yaml` |
-| `sensor.ecojoko_hp_reseau_quotidien_um` | daily | idem |
-| `sensor.ecojoko_hc_reseau_quotidien_um` | daily | idem |
+| `sensor.genelec_appart_quotidien_kwh_um` | daily | `utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ_cost.yaml` |
+| `sensor.genelec_appart_hebdomadaire_kwh_um` | weekly | idem |
+| `sensor.genelec_appart_mensuel_kwh_um` | monthly | idem |
+| `sensor.genelec_appart_annuel_kwh_um` | yearly | idem |
 
 ---
 
-### 🔢 Utility Meters Hebdomadaires (Ecojoko)
+### 🔢 Utility Meters — HP/HC (avec split tarifaire)
 
-| Entité | Cycle | Source |
-|--------|-------|--------|
-| `sensor.ecojoko_reseau_hebdomadaire_um` | weekly | `utility_meter/P0_Energie_total/Ecojoko/01_UM_AMHQ_cost.yaml` |
-| `sensor.ecojoko_hp_reseau_hebdomadaire_um` | weekly | idem |
-| `sensor.ecojoko_hc_reseau_hebdomadaire_um` | weekly | idem |
+| Entité | Cycle | Tarif | Source |
+|--------|-------|-------|--------|
+| `sensor.genelec_appart_hphc_quotidien_um_hp` | daily | HP | `utility_meter/P0_Energie_total/Genelec_appart/03_UM_genelec_appart_HPHC_AMHQ.yaml` |
+| `sensor.genelec_appart_hphc_quotidien_um_hc` | daily | HC | idem |
+| `sensor.genelec_appart_hphc_hebdomadaire_um_hp` | weekly | HP | idem |
+| `sensor.genelec_appart_hphc_hebdomadaire_um_hc` | weekly | HC | idem |
+| `sensor.genelec_appart_hphc_mensuel_um_hp` | monthly | HP | idem |
+| `sensor.genelec_appart_hphc_mensuel_um_hc` | monthly | HC | idem |
+| `sensor.genelec_appart_hphc_annuel_um_hp` | yearly | HP | idem |
+| `sensor.genelec_appart_hphc_annuel_um_hc` | yearly | HC | idem |
 
----
-
-### 🔢 Utility Meters Mensuels (Ecojoko)
-
-| Entité | Cycle | Source |
-|--------|-------|--------|
-| `sensor.ecojoko_hp_reseau_mensuel_um` | monthly | `utility_meter/P0_Energie_total/Ecojoko/01_UM_AMHQ_cost.yaml` |
-| `sensor.ecojoko_hc_reseau_mensuel_um` | monthly | idem |
+> Basculement HP ↔ HC piloté par : `automations_corrige/energie/basculement_tarif_hphc.yaml`
 
 ---
 
@@ -610,15 +630,20 @@ Donut : `group_by: func: diff, duration: 24h`.
 
 | Entité | Période | Source |
 |--------|---------|--------|
-| `sensor.ecojoko_cout_total_quotidien` | Quotidien | `templates/P0_Energie_total_diag/Ecojoko/01_ecojoko_AMHQ_cost.yaml` |
-| `sensor.ecojoko_cout_hp_quotidien` | Quotidien | idem |
-| `sensor.ecojoko_cout_hc_quotidien` | Quotidien | idem |
-| `sensor.ecojoko_cout_total_hebdomadaire` | Hebdomadaire | idem |
-| `sensor.ecojoko_cout_hp_hebdomadaire` | Hebdomadaire | idem |
-| `sensor.ecojoko_cout_hc_hebdomadaire` | Hebdomadaire | idem |
-| `sensor.ecojoko_cout_total_mensuel` | Mensuel | idem |
-| `sensor.ecojoko_cout_hp_mensuel` | Mensuel | idem |
-| `sensor.ecojoko_cout_hc_mensuel` | Mensuel | idem |
+| `sensor.genelec_appart_cout_hp_quotidien` | Quotidien | `templates/P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml` |
+| `sensor.genelec_appart_cout_hc_quotidien` | Quotidien | idem |
+| `sensor.genelec_appart_cout_total_quotidien` | Quotidien | idem |
+| `sensor.genelec_appart_cout_hp_hebdomadaire` | Hebdomadaire | idem |
+| `sensor.genelec_appart_cout_hc_hebdomadaire` | Hebdomadaire | idem |
+| `sensor.genelec_appart_cout_total_hebdomadaire` | Hebdomadaire | idem |
+| `sensor.genelec_appart_cout_hp_mensuel` | Mensuel | idem |
+| `sensor.genelec_appart_cout_hc_mensuel` | Mensuel | idem |
+| `sensor.genelec_appart_cout_total_mensuel` | Mensuel | idem |
+| `sensor.genelec_appart_cout_hp_annuel` | Annuel | idem |
+| `sensor.genelec_appart_cout_hc_annuel` | Annuel | idem |
+| `sensor.genelec_appart_cout_total_annuel` | Annuel | idem |
+
+> Tarifs EDF Tempo Bleu : HP = `sensor.edf_tempo_price_blue_hp` (0.1494 €/kWh) · HC = `sensor.edf_tempo_price_blue_hc` (0.1232 €/kWh)
 
 ---
 
@@ -626,9 +651,10 @@ Donut : `group_by: func: diff, duration: 24h`.
 
 | Entité | Période | Source |
 |--------|---------|--------|
-| `sensor.ecojoko_ratio_hc_quotidien` | Quotidien (%) | `templates/P0_Energie_total_diag/Ecojoko/02_ratio_hp_hc.yaml` |
-| `sensor.ecojoko_ratio_hc_hebdomadaire` | Hebdomadaire (%) | idem |
-| `sensor.ecojoko_ratio_hc_mensuel` | Mensuel (%) | idem |
+| `sensor.genelec_appart_ratio_hc_quotidien` | Quotidien (%) | `templates/P0_Energie_total_diag/Genelec_appart/02_ratio_hp_hc.yaml` |
+| `sensor.genelec_appart_ratio_hc_hebdomadaire` | Hebdomadaire (%) | idem |
+| `sensor.genelec_appart_ratio_hc_mensuel` | Mensuel (%) | idem |
+| `sensor.genelec_appart_ratio_hc_annuel` | Annuel (%) | idem |
 
 ---
 
@@ -642,11 +668,11 @@ Donut : `group_by: func: diff, duration: 24h`.
 
 | Entité | Rôle | Source réelle |
 |--------|------|---------------|
-| `sensor.linky_jour_0` | Aujourd'hui : HP+HC (kWh) + coût (€) | **Ecojoko** — `sensor.ecojoko_consommation_hp/hc_reseau` × `sensor.tarif_heures_*_ttc` |
+| `sensor.linky_jour_0` | Aujourd'hui : HP+HC (kWh) + coût (€) | **NODON** — `sensor.general_electric_appart_power` × tarif EDF Tempo Bleu |
 | `sensor.linky_jour_1` à `sensor.linky_jour_7` | J-1 à J-7 : HP+HC (kWh) + coût + jour de semaine | **Attributs Linky** — `state_attr('sensor.linky_25481620821301_consumption', 'day_X_HP/HC')` + `dailyweek_cost` |
 
 > Fichier source : `templates/P0_Energie_total_diag/Linky/MyElectricalData.yaml`
-> ⚠️ `linky_jour_0` n'est **pas** une donnée Linky — c'est la conso Ecojoko du jour en temps réel (J0 = Aujourd'hui).
+> ⚠️ `linky_jour_0` n'est **pas** une donnée Linky — c'est la conso NODON du jour en temps réel (J0 = Aujourd'hui).
 > ⚠️ Les attributs Linky sont en **Wh** dans l'intégration → division par 1000 dans le template pour obtenir des kWh.
 
 ---
@@ -663,8 +689,6 @@ Donut : `group_by: func: diff, duration: 24h`.
 | `sensor.diag_poste_eclairage_quotidien` | `..._hebdomadaire` | `..._mensuel` | idem |
 | `sensor.diag_poste_autre_quotidien` | `..._hebdomadaire` | `..._mensuel` | idem |
 
-> ⚠️ **[modif 2026-03-20]** : Les noms de sensors ont été simplifiés — suppression du numéro de poste (ex: `diag_poste_1_hygiene_*` → `diag_poste_hygiene_*`). Le nom `lumiere` a été renommé en `eclairage`. Le nom `cuisson` remplace `2_cuisson`. Vérifier dans États HA les noms exacts en production.
-
 ---
 
 ### 📊 Max dynamiques (échelle bar-card)
@@ -672,41 +696,42 @@ Donut : `group_by: func: diff, duration: 24h`.
 | Entité | Rôle | Source |
 |--------|------|--------|
 | `sensor.diag_max_poste_quotidien_dynamique` | Max du jour (pour échelle bar-card) | `templates/P0_Energie_total_diag/Diag/` |
-| `sensor.diag_max_poste_hebdomadaire_dynamique` | Max de la semaine (pour échelle bar-card) | idem |
-| `sensor.diag_max_poste_mensuel_dynamique` | Max du mois (pour échelle bar-card) | idem |
+| `sensor.diag_max_poste_hebdomadaire_dynamique` | Max de la semaine | idem |
+| `sensor.diag_max_poste_mensuel_dynamique` | Max du mois | idem |
 
 ---
 
 ## 🐛 DÉPANNAGE
 
-### Les ring-tiles affichent "unavailable"
-1. Vérifier que `sensor.ecojoko_conso_mini_24h` et `sensor.ecojoko_conso_maxi_24h` existent dans Outils de développement > États
-2. Ces sensors sont fournis nativement par l'intégration Ecojoko (`little_monkey`) — vérifier que l'intégration est active et configurée
-3. Attendre quelques minutes après redémarrage HA si les valeurs n'apparaissent pas immédiatement
+### Les ring-tiles Mini/Maxi affichent "unavailable"
+1. Vérifier que `sensor.genelec_appart_conso_mini_24h` et `sensor.genelec_appart_conso_maxi_24h` existent dans Outils de développement > États
+2. Ces sensors sont des `platform: statistics` sur `sensor.genelec_appart_quotidien_kwh_um` — vérifier que l'UM quotidien est actif
+3. La moyenne 1h peut être indisponible pendant les 60 premières minutes après redémarrage HA
+4. Source : `sensors/P0_Energie_total_diag/Genelec_appart/Genelec_appart_mini_maxi_avg.yaml`
+
+### Le ring-tile Mini affiche toujours 0
+C'est **normal**. `value_min` sur 24h d'un UM qui repart de 0 à minuit sera toujours 0. Ce champ sert de marqueur visuel de reset plutôt que de donnée opérationnelle.
 
 ### Les coûts affichent 0 ou "unknown"
-1. Vérifier que `sensor.tarif_heures_pleines_ttc` et `sensor.tarif_heures_creuses_ttc` existent (intégration `tarif_edf`)
-2. Vérifier les sensors dans `templates/P0_Energie_total_diag/Ecojoko/01_ecojoko_AMHQ_cost.yaml`
-3. Les UM quotidiens se remettent à 0 à minuit — normal si c'est le début de journée
+1. Vérifier que `sensor.edf_tempo_price_blue_hp` et `sensor.edf_tempo_price_blue_hc` existent (intégration `tarif_edf`)
+2. Vérifier les UM HP/HC dans `03_UM_genelec_appart_HPHC_AMHQ.yaml`
+3. Vérifier que l'automation de basculement HP/HC est active
+4. Source coûts : `templates/P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml`
 
 ### Le graphique offset 7 jours ne montre pas tous les jours
-1. Le recorder HA doit avoir au moins 7 jours d'historique pour `sensor.ecojoko_consommation_reseau`
+1. Le recorder HA doit avoir au moins 7 jours d'historique pour `sensor.genelec_appart_quotidien_kwh_um`
 2. Vérifier `configuration.yaml` → paramètre `recorder: purge_keep_days:` (doit être ≥ 8)
-3. Si récent redémarrage : les données sont présentes, `cache: true` peut ralentir l'affichage (vider cache navigateur)
+3. L'UM a été créé récemment → les données historiques ne remontent qu'à sa date de création
+
+### Le graphique Moy. glissante (onglet MENSUEL) ne s'affiche pas
+Source : `sensor.genelec_appart_totale_kwh` (Riemann tampon). Ce sensor démarre à 0 à la création — il n'y a pas de back-fill historique. Attendre quelques jours pour avoir un historique suffisant.
 
 ### Le pie chart HP/HC affiche une seule tranche
-1. Normal si aucune consommation HC aujourd'hui (hors plage horaire HC)
-2. Vérifier les plages HC configurées dans l'intégration Ecojoko
-
-### Le tableau flex-table-card ne s'affiche pas
-1. Vérifier que les entités `sensor.linky_jour_0` à `sensor.linky_jour_7` existent
-2. Ces entités sont créées par l'intégration MyElectricalData
-3. Si les données Linky sont en retard (J-1 max), c'est normal (données Enedis transmises le lendemain)
+Normal si aucune consommation HC aujourd'hui (hors plage horaire HC). Vérifier les plages HC et l'automation de basculement.
 
 ### Les donuts SYNTHÈSE USAGES affichent des valeurs incohérentes
-1. Vérifier que les sensors `diag_poste_hygiene_quotidien`, `diag_poste_cuisine_quotidien`, etc. existent dans États (sans numérotation)
-2. Ces sensors proviennent de `templates/P0_Energie_total_diag/Diag/` — vérifier le fichier source
-3. Le `group_by: func: diff, duration: 24h` sur le donut mensuel peut donner des valeurs nulles en début de mois
+1. Vérifier que les sensors `diag_poste_hygiene_quotidien`, etc. existent dans États
+2. Source : `templates/P0_Energie_total_diag/Diag/` — vérifier les fichiers source
 
 ---
 
@@ -714,11 +739,14 @@ Donut : `group_by: func: diff, duration: 24h`.
 
 | Élément | Type | Statut |
 |---------|------|--------|
-| Intégration Ecojoko (`little_monkey`) | Custom component | ✅ Essentiel |
-| MyElectricalData / Linky | HACS Integration | ✅ Essentiel |
-| `tarif_edf` | Custom component | ✅ Requis pour les coûts |
+| Smart plug NODON (appartement général) | Intégration HA [UI] | ✅ Essentiel |
+| `sensor.genelec_appart_totale_kwh` (Riemann) | Sensor integration | ✅ Essentiel — tampon NODON |
+| UM Genelec Appart (01 + 03) | Utility Meter | ✅ Essentiel — kWh + HP/HC |
+| `tarif_edf` (`edf_tempo_price_blue_hp/hc`) | Custom component | ✅ Requis pour les coûts |
+| Automation basculement HP/HC | HA Automation | ✅ Requis — split HP/HC correct |
+| MyElectricalData / Linky | HACS Integration | ✅ Requis pour ratios + tableau |
 | `ring-tile-card` | HACS Frontend | ✅ Essentiel (Mini/Réel/Maxi) |
-| `tabbed-card` | HACS Frontend | ✅ Essentiel (onglets JOURNALIER/HEBDO/MENSUEL) |
+| `tabbed-card` | HACS Frontend | ✅ Essentiel (onglets) |
 | `energy-overview-card` | HACS Frontend | ✅ Essentiel (flux Enedis) |
 | `content-card-linky` | HACS Frontend | ✅ Essentiel (ratios Linky) |
 | `apexcharts-card` | HACS Frontend | ✅ Essentiel (tous graphiques) |
@@ -735,18 +763,23 @@ Donut : `group_by: func: diff, duration: 24h`.
 
 | Rôle | Chemin |
 |------|--------|
-| Dashboard principal | `dashbord/page_energie_home.yaml` |
-| UM quotidien HP/HC (live) | `utility_meter/P0_Energie_total/Ecojoko/02_UM_ecojoko_quotidien_live.yaml` |
-| UM AMHQ (coûts) | `utility_meter/P0_Energie_total/Ecojoko/01_UM_AMHQ_cost.yaml` |
-| Coûts HP/HC (4 périodes) | `templates/P0_Energie_total_diag/Ecojoko/01_ecojoko_AMHQ_cost.yaml` |
-| Ratios HP/HC | `templates/P0_Energie_total_diag/Ecojoko/02_ratio_hp_hc.yaml` |
-| Moyennes Ecojoko | `templates/P0_Energie_total_diag/Ecojoko/04_AVG_ecojoko.yaml` |
-| Diag postes (jour) | `templates/P0_Energie_total_diag/Diag/diag_conso_jour_en_cours.yaml` |
-| Diag postes (hebdo) | `templates/P0_Energie_total_diag/Diag/diag_conso_hebdomadaire_en_cours.yaml` |
-| Diag postes (mois) | `templates/P0_Energie_total_diag/Diag/diag_conso_mois_en_cours.yaml` |
-| Mini / Maxi (W) | Intégration Ecojoko [UI] — `sensor.ecojoko_conso_mini/maxi_24h` |
-| Vignette d'accès | `docs/L2C1_ENERGIE/L2C1_VIGNETTE_ENERGIE.md` |
+| Dashboard YAML corrigé | `docs DashBoard/L2C1_ENERGIE/PAGE_ENERGIE_dashboard.yaml` |
+| Riemann tampon NODON | `TREE_CORRIGE/sensors/P0_Energie_total_diag/Genelec_appart/P0_kWh_genelec_appart.yaml` |
+| UM kWh total AMHQ | `TREE_CORRIGE/utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ_cost.yaml` |
+| UM HP/HC AMHQ | `TREE_CORRIGE/utility_meter/P0_Energie_total/Genelec_appart/03_UM_genelec_appart_HPHC_AMHQ.yaml` |
+| Statistiques mini/maxi/moy | `TREE_CORRIGE/sensors/P0_Energie_total_diag/Genelec_appart/Genelec_appart_mini_maxi_avg.yaml` |
+| Coûts HP/HC (12 sensors) | `TREE_CORRIGE/templates/P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml` |
+| Ratios HC (4 sensors) | `TREE_CORRIGE/templates/P0_Energie_total_diag/Genelec_appart/02_ratio_hp_hc.yaml` |
+| Moyennes AVG Watts | `TREE_CORRIGE/templates/P0_Energie_total_diag/Genelec_appart/03_AVG_genelec_appart.yaml` |
+| Diag postes (jour/hebdo/mois) | `TREE_CORRIGE/templates/P0_Energie_total_diag/Diag/` |
+| Linky / MyElectricalData | `TREE_CORRIGE/templates/P0_Energie_total_diag/Linky/MyElectricalData.yaml` |
+| Vignette d'accès | `docs DashBoard/L2C1_ENERGIE/L2C1_VIGNETTE_ENERGIE.md` |
 
 ---
 
-← Retour : `docs/L2C1_ENERGIE/L2C1_VIGNETTE_ENERGIE.md` | → Pages liées : `PAGE_ENERGIE_TEMPS_REEL.md` · `PAGE_ENERGIE_MENSUEL.md`
+← Retour : `docs DashBoard/L2C1_ENERGIE/L2C1_VIGNETTE_ENERGIE.md` | → Pages liées : `PAGE_ENERGIE_TEMPS_REEL.md` · `PAGE_ENERGIE_MENSUEL.md`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L2C1_VIGNETTE_ENERGIE]]  [[PAGE_ENERGIE_MENSUEL]]  [[PAGE_ENERGIE_TEMPS_REEL]]*

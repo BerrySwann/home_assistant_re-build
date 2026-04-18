@@ -274,3 +274,8 @@ tap_action:
 ---
 
 ← Retour : `L6C2_POLLUTION_POLLEN/` | → Fin Ligne 6
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L6C3_VIGNETTE_VIGIEAU]]*

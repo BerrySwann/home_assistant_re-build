@@ -391,3 +391,8 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 ---
 
 ← Retour : `docs/` | → Détail présence : `VIGNETTE_WIFI_PRESENCE.md`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[VIGNETTE_WIFI_PRESENCE]]*

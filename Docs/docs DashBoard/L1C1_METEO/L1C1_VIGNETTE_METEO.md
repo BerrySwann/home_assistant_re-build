@@ -235,3 +235,8 @@ border-color: white !important
 ---
 
 → **Prochaine étape :** Consulter `PAGE_METEO.md` pour la documentation complète de la page de destination.
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_METEO]]  [[TUTO_IMAGES_ALERTES_METEO_FRANCE]]  [[L1C2_VIGNETTE_TEMPERATURES]]  [[L1C3_VIGNETTE_CLIM]]*

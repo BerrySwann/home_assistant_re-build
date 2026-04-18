@@ -576,3 +576,8 @@ Vérifier que les entités Pôle 1 sont chargées (`templates/P1_clim_chauffage/
 ---
 
 ← Retour : `docs/L1C2_TEMPERATURES/L1C2_VIGNETTE_TEMPERATURES.md` | → Suivant : `docs/L1C3_COMMANDES_CLIM/` *(à venir)*
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L1C2_VIGNETTE_TEMPERATURES]]*

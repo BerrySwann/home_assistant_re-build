@@ -335,3 +335,8 @@ Si le sensor est `unknown`, `unavailable` ou absent → affiche `N/A` en gris.
 ---
 
 → **Prochaine étape :** Consulter `PAGE_TEMPERATURES.md` pour la documentation complète de la page.
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_TEMPERATURES]]  [[L1C1_VIGNETTE_METEO]]  [[L1C3_VIGNETTE_CLIM]]*

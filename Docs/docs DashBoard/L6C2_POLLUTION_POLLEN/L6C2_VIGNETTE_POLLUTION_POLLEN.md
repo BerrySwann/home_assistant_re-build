@@ -182,3 +182,8 @@ La fonction `getColor()` retourne `'black'` si la valeur est hors de la plage 0-
 ---
 
 ← Retour : `L6C1_AIR_QUALITE/` | → Suivant : `L6C3_VIGIEAU/`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[PAGE_POLLUTION_POLLEN]]  [[L6C1_VIGNETTE_AIR_QUALITE]]  [[L6C3_VIGNETTE_VIGIEAU]]*

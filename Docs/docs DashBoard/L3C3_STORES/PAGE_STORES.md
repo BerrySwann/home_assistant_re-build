@@ -355,3 +355,8 @@ Affichées via `custom:mushroom-light-card` avec icône `phu:roller-shutter-swit
 ---
 
 ← Retour : `docs/L3C3_STORES/L3C3_VIGNETTE_STORES.md` | → Suivant : `docs/L4C1_*/`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L3C3_VIGNETTE_STORES]]*

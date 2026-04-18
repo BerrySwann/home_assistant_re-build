@@ -327,3 +327,8 @@ Source : `templates/air_qualite/tcov_ppb.yaml` — `device_class: volatile_organ
 ---
 
 ← Retour : `docs/L6C1_AIR_QUALITE/L6C1_VIGNETTE_AIR_QUALITE.md` | → Suivant : `docs/L6C2_*/`
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L6C1_VIGNETTE_AIR_QUALITE]]*

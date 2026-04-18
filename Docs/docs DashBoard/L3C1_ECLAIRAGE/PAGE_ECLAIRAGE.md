@@ -316,3 +316,8 @@ Certaines cartes de cette page disparaissent automatiquement en mode absence. Ce
 ---
 
 ← Retour : [`L3C1_VIGNETTE_ECLAIRAGE.md`](./L3C1_VIGNETTE_ECLAIRAGE.md) | → Suite : [`L3C2_PRISES/`](../L3C2_PRISES/)
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L3C1_VIGNETTE_ECLAIRAGE]]*

@@ -1,5 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES — TOUTES LES VIGNETTES
-*Dernière mise à jour : 2026-04-02 — arborescence docs/ resynchronisée avec état réel local (18/18 vignettes ✅)*
+*Dernière mise à jour : 2026-04-18 — L2C1 migré Ecojoko → NODON/Genelec_appart (18/18 vignettes ✅)*
 
 > **RÈGLE :** Ce fichier est mis à jour obligatoirement à chaque création ou modification d'une doc de vignette (`docs/L*`).
 > Format : Vignette → Carte → Template/Sensor → Utility Meter → Source native HA
@@ -127,28 +127,48 @@ L1C3 Commandes Clim (Page /clim)
 ### ✅ L2C1 — Énergie Générale
 `docs/L2C1_ENERGIE/`
 
+> ⚠️ **[2026-04-18] Migration Ecojoko → NODON** : Ecojoko retiré de l'installation. Toutes les entités `ecojoko_*` remplacées par NODON + capteurs Genelec Appart.
+
 ```
 L2C1 Énergie Générale
-  ├── Vignette (ring-tile Mini/Réel/Maxi + badges coût J/M/A)
-  │     ├── [NAT] sensor.ecojoko_conso_mini_24h / ecojoko_conso_maxi_24h (Ecojoko natif)
-  │     ├── [NAT] sensor.ecojoko_puissance_apparente_w (live W)
-  │     ├── [TPL] P0_Energie_total_diag/Ecojoko/01_ecojoko_AMHQ_cost.yaml
-  │     │     └── [UM] P0_Energie_total/Ecojoko/01_UM_AMHQ_cost.yaml
-  │     │           └── [NAT] sensor.ecojoko_hp/hc_reseau_* (Ecojoko HACS)
-  │     └── [TPL] P0_Energie_total_diag/Ecojoko/03_AVG_ecojoko.yaml
+  ├── Vignette (button-card — Mini kWh / Réel W / Maxi kWh + coûts HP/HC inline)
+  │     ├── [SNS] sensor.genelec_appart_conso_mini_24h  (value_min 24h sur UM quotidien — toujours 0)
+  │     │     └── sensors/P0_Energie_total_diag/Genelec_appart/Genelec_appart_mini_maxi_avg.yaml
+  │     │           └── [UM] sensor.genelec_appart_quotidien_kwh_um
+  │     │                 └── utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ_cost.yaml
+  │     │                       └── [SNS] sensor.genelec_appart_totale_kwh (Riemann tampon)
+  │     │                             └── [NAT] sensor.general_electric_appart_energy (NODON)
+  │     ├── [SNS] sensor.genelec_appart_conso_maxi_24h  (value_max 24h — total journalier kWh)
+  │     │     └── (même source que mini ci-dessus)
+  │     ├── [NAT] sensor.general_electric_appart_power  (live W — NODON)
+  │     ├── [UM]  sensor.genelec_appart_hphc_mensuel_um_hp / *_hc  (base calcul coûts inline)
+  │     │     └── utility_meter/P0_Energie_total/Genelec_appart/03_UM_genelec_appart_HPHC_AMHQ.yaml
+  │     │           └── [SNS] sensor.genelec_appart_totale_kwh (Riemann tampon)
+  │     └── [NAT] sensor.edf_tempo_price_blue_hp / _hc  (tarifs EDF Tempo Bleu)
   ├── Page principale /energie (tabbed-card 3 onglets JOURNALIER/HEBDO/MENSUEL)
-  │     ├── Coûts HP/HC (quotidien, hebdo, mensuel, annuel)
-  │     │     └── [TPL] 01_ecojoko_AMHQ_cost.yaml → [UM] 01_UM_AMHQ_cost.yaml
+  │     ├── Ring-tiles Mini(kWh) / Réel(W) / Maxi(kWh)
+  │     │     ├── [SNS] sensor.genelec_appart_conso_mini_24h (max: 20 kWh)
+  │     │     ├── [NAT] sensor.general_electric_appart_power (max: 6000 W)
+  │     │     └── [SNS] sensor.genelec_appart_conso_maxi_24h (max: 20 kWh)
+  │     ├── Energy overview card
+  │     │     ├── [NAT] sensor.general_electric_appart_energy (champ power)
+  │     │     └── [NAT] sensor.general_electric_appart_power  (champ current)
+  │     ├── Coûts HP/HC (quotidien, hebdo, mensuel)
+  │     │     ├── [TPL] P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml
+  │     │     │     └── [UM] 03_UM_genelec_appart_HPHC_AMHQ.yaml → *_um_hp / *_um_hc
+  │     │     │           └── [SNS] sensor.genelec_appart_totale_kwh (Riemann)
+  │     │     └── [NAT] sensor.edf_tempo_price_blue_hp / _hc
   │     ├── Ratio HC/HP
-  │     │     └── [TPL] 02_ratio_hp_hc.yaml
+  │     │     └── [TPL] P0_Energie_total_diag/Genelec_appart/02_ratio_hp_hc.yaml
+  │     ├── Moyennes AVG Watts (AMHQ)
+  │     │     └── [TPL] P0_Energie_total_diag/Genelec_appart/03_AVG_genelec_appart.yaml
+  │     │           └── [UM] sensor.genelec_appart_*_kwh_um (01_UM_AMHQ_cost.yaml)
+  │     ├── Historique 7j offset (ApexCharts)
+  │     │     └── [UM] sensor.genelec_appart_quotidien_kwh_um (×8 séries offset J0→J-7)
   │     ├── Diag conso (jour / semaine / mois)
   │     │     └── [TPL] Diag/diag_conso_*.yaml (x3)
   │     │           └── sensor.diag_poste_*_quotidien / hebdomadaire / mensuel
   │     │           └── sensor.diag_max_poste_quotidien_dynamique / hebdo / mensuel
-  │     ├── Entités HEBDO : sensor.ecojoko_reseau_hebdomadaire_um
-  │     │     sensor.ecojoko_hp/hc_reseau_hebdomadaire_um
-  │     │     sensor.ecojoko_cout_total/hp/hc_hebdomadaire
-  │     │     sensor.ecojoko_ratio_hc_hebdomadaire
   │     └── Linky MyElectricalData
   │           └── [TPL] P0_Energie_total_diag/Linky/MyElectricalData.yaml
   │                 └── [NAT] intégration MyElectricalData (HACS)
@@ -158,7 +178,7 @@ L2C1 Énergie Générale
   │     ├── Col 2 : Donut journalier (18 prises × _quotidien_kwh_um)
   │     │     └── [UM] P2_prise/P2_AVG/P2_UM_AMHQ_prises.yaml + veilles
   │     ├── Col 3 : ApexCharts ligne instantanée
-  │     │     └── [NAT] sensor.ecojoko_puissance_apparente_w
+  │     │     └── [NAT] sensor.general_electric_appart_power (NODON)
   │     └── Col 4 : tabbed-card 6 onglets pièces (1/4/5/7/9/Veilles)
   │           └── [NAT] sensor.*_power (W) par prise connectée
   └── Page mensuelle /energie-mensuel (streamline par appareil)
@@ -690,3 +710,8 @@ Présence
 | L6C3 Vigieau | ✅ | ✅ |
 | **PAGE HOME** | | |
 | Wifi / Présence | ✅ | ✅ |
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[WORKFLOW_REBUILD]]  [[CONFIG_ROOT]]  [[L1C1_VIGNETTE_METEO]]  [[L1C2_VIGNETTE_TEMPERATURES]]  [[L1C3_VIGNETTE_CLIM]]  [[L2C1_VIGNETTE_ENERGIE]]  [[L2C2_VIGNETTE_ENERGIE_CLIM]]  [[L2C3_VIGNETTE_ECLAIRAGE]]  [[L3C1_VIGNETTE_ECLAIRAGE]]  [[L3C2_VIGNETTE_PRISES]]  [[L3C3_VIGNETTE_STORES]]  [[L4C1_VIGNETTE_empty]]  [[L4C2_VIGNETTE_MINI_PC]]  [[L4C3_VIGNETTE_MAJ]]  [[L5C1_VIGNETTE_BATTERIES]]  [[L5C2_VIGNETTE_BATTERIES_PORTABLES]]  [[L5C3_VIGNETTE_MARIADB]]  [[L6C1_VIGNETTE_AIR_QUALITE]]  [[L6C2_VIGNETTE_POLLUTION_POLLEN]]  [[L6C3_VIGNETTE_VIGIEAU]]  [[PAGE_HOME]]  [[VIGNETTE_WIFI_PRESENCE]]*

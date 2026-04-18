@@ -243,3 +243,8 @@ Les `filter/exclude` ne filtrent que les entités exclues — les entités d'une
 ---
 
 ← Retour : `L5C1_VIGNETTE_BATTERIES.md` | → Suivant : —
+
+
+<!-- obsidian-wikilinks -->
+---
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L5C1_VIGNETTE_BATTERIES]]*
