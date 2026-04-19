@@ -12,6 +12,13 @@
 # - backup_github_journal : python3 extrait les 10 dernières lignes OK du log → JSON {text}
 # - github_default_branch : git rev-parse --abbrev-ref HEAD → branche courante
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | GitHub API (git) | git log / git status → stdout                      | github_last_commit / github_sync_status            | L4C2 Mini PC / L5C3 MariaDB        |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ce fichier est un YAML — ne jamais y coller le contenu de ha_git_backup.sh
 # - Le script bash appartient dans /config/.scripts/ha_git_backup.sh

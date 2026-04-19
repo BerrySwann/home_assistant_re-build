@@ -13,6 +13,13 @@
 # - Sources : sensor.[ampoule]_power (capteurs puissance Hue/Zigbee/Sonoff)
 # - 19 ampoules : 1 Entrée + 5 Salon + 1 Cuisine + 1 Couloir + 5 Bureau + 2 SDB + 4 Chambre
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Hue Bridge / Sonoff (Z2M) | sensor.*_power (ampoules individuelles)            | eclairage_*_kwh_unite (×17 ampoules)               | P3_kWh_2_ZONE.yaml / P3_UM_AMHQ_1_UNITE.yaml → L2C3 |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces sensors s'accumulent sans remise à zéro. Les cycles AMHQ sont dans
 #   utility_meter/ (P3_UM_AMHQ_1_UNITE.yaml).

@@ -12,6 +12,13 @@
 # - Chaque UM accumule les incréments de la source sur sa période, puis remet
 #   à zéro automatiquement (minuit / lundi / 1er du mois / 1er janvier).
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.genelec_appart_kwh_cumulative               | genelec_appart_*_{annuel|mensuel|hebdo|quotidien}  | 01_genelec_appart_AMHQ_cost.yaml → L2C1 |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces capteurs mesurent du kWh (énergie), PAS des euros (coût).
 # - Si créés en cours de journée/période, ils démarrent à 0 et n'accumulent

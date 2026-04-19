@@ -11,6 +11,13 @@
 # - turn_on  → input_boolean.turn_on
 # - turn_off → input_boolean.turn_off
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | input_boolean.inter_soufflant_sdb                  | switch.inter_soufflant_salle_de_bain               | L1C3 Commandes Clim / automations SDB |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ce switch pilote l'input_boolean, pas directement le relais physique.
 # - Icône dynamique : mdi:radiator (ON) / mdi:radiator-off (OFF).

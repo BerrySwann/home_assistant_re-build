@@ -13,6 +13,14 @@
 # - climate.* entités pour les modes clim (off/cool/heat/fan_only)
 # - sensor.mode_ete_hiver pour la logique globale
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | NOUS SP (Z2M)  | sensor.*_nous_power → seuil 50W                    | clim_*_power_status (on/off/standby)               | P1_DUT_clim_chauffage.yaml → L1C3 / L2C2 |
+# | [calculé]      | climate.* → hvac_mode / temperature                | clim_*_etat (HTML couleur)                         | L1C3 Commandes Clim                |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Capteurs de statut (on/off) servent aux DUT history_stats en tant que source.
 # - Ne PAS y placer de calculs kWh — ce fichier est ui_dashboard UNIQUEMENT.

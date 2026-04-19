@@ -14,6 +14,15 @@
 # - Source tCOV   : sensor.qualite_air_*_ikea_voc_index (IKEA Vindstyrka Zigbee)
 # - Pièces        : Salon, Bureau, Chambre
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Capteur PM2.5/tCOV (Z2M) | sensor.salon_pm25 / sensor.salon_tcov              | salon_pm25_mean_24h / salon_tvoc_ppb_mean_24h      | A_01_AIR_QUALITY.yaml (templates) → L6C1 |
+# | Capteur PM2.5/tCOV (Z2M) | sensor.bureau_pm25 / sensor.bureau_tcov            | bureau_pm25_mean_24h / bureau_tvoc_ppb_mean_24h    | A_01_AIR_QUALITY.yaml (templates) → L6C1 |
+# | Capteur PM2.5/tCOV (Z2M) | sensor.chambre_pm25 / sensor.chambre_tcov          | chambre_pm25_mean_24h / chambre_tvoc_ppb_mean_24h  | A_01_AIR_QUALITY.yaml (templates) → L6C1 |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - La moyenne 24h se recalcule en continu (fenêtre glissante, pas reset minuit).
 # - Si le capteur IKEA est indisponible, la stat retourne "unavailable".

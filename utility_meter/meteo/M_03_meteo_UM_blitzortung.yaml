@@ -11,6 +11,13 @@
 # - Source : sensor.maison_lightning_counter (intégration Blitzortung, compteur
 #   d'impacts dans un rayon défini autour de Vence 06140).
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.blitzortung_count_* / distance_*            | blitzortung_um_*_{quotidien|mensuel}               | M_03_meteo_blitzortung.yaml → L1C1 |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # Ce sont des compteurs d'événements (nombre d'éclairs), pas des kWh. Ne pas
 # mélanger avec les sensors de localisation ou de distance (M_03_meteo_templates_blitzortung.yaml).

@@ -10,6 +10,13 @@
 # - Sources : binary_sensor.contact_fenetre_*_sonoff_contact (natifs Sonoff)
 # - Méthode : list.count(true) sur comparaisons état 'on' / 'off'
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Zigbee (Z2M)   | binary_sensor.fenetre_* (contact sensors)          | nbre_de_fenetres_ouvertes / _fermees               | L3C3 Stores / automations fenêtres |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - unique_id : nbre_de_fenetres_ouvertes (avec "nbre", PAS "nombre")
 # - automations.yaml doit référencer sensor.nbre_de_fenetres_ouvertes

@@ -18,6 +18,13 @@
 # - Éclairage  : sensor.eclairage_total_group_puissance (P3_POWER_3_TOTAL_ZONE).
 # - Autre      : all_standby + tete_de_lit + chargeur_salon + horloge.
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.P1/P2/P3 puissances instantanées            | total_par_poste_puissance_*                        | L2C1 Énergie Générale (temps réel) |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Pôle Éclairage source : sensor.eclairage_total_group_puissance (P3_POWER_3).
 #   Ne pas utiliser sensor.eclairage_total_group_power (nom non défini).

@@ -14,6 +14,13 @@
 # - Ping          : state_attr(..., 'ping').latency → ms (valeur directe)
 # - Fallback      : none (→ état "unknown" HA) si l'attribut est absent
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | command_line (speedtest-cli) | sensor.speedtest_cli_data (JSON)                   | speedtest_download_mbps / _upload_mbps / _ping_ms  | L4C2 Mini PC                       |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - sensor.speedtest_cli_data ≠ sensor.speedtest_download
 #   └── sensor.speedtest_cli_data  : capteur parent [NAT] source de CE fichier

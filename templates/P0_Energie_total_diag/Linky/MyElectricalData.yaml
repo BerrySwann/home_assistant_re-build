@@ -14,6 +14,13 @@
 # - Noms des jours   : attribut dailyweek → dictionnaire de traduction français.
 # - Coûts            : attribut dailyweek_cost (index correspondant à J1..J7).
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Linky (MyElectricalData) | sensor.myelectricaldata_*                          | linky_cout_* / linky_index_*                       | L2C1 Énergie Générale              |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Vérifications de longueur ajoutées pour éviter "UndefinedError: None has no element 0".
 # - Valeurs de repli : "Inconnu" pour les dates, "0" pour les coûts si MED n'est pas prêt.
@@ -30,7 +37,7 @@
     - name: "Linky Jour 0"
       unique_id: linky_jour_0
       state: >-
-        {{ states('sensor.genelec_appart_quotidien_kwh_um') | float(0) | round(1) }}  {# "[modif] : ecojoko_hp + hc → UM quotidien total" #}
+        {{ states('sensor.genelec_appart_quotidien_um') | float(0) | round(1) }}  {# "[modif] : ecojoko_hp + hc → UM quotidien total" #}
       unit_of_measurement: kWh
       icon: mdi:flash-outline
       attributes:
@@ -40,7 +47,7 @@
         hc_kwh: >-
           {{ states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) | round(2) }}   {# "[modif] : split HC natif UM tariff" #}
         total_kwh: >-
-          {{ states('sensor.genelec_appart_quotidien_kwh_um') | float(0) | round(1) }}            {# "[modif]" #}
+          {{ states('sensor.genelec_appart_quotidien_um') | float(0) | round(1) }}            {# "[modif]" #}
         cout: >-
           {% set hp_kwh = states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) %}
           {% set hc_kwh = states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) %}

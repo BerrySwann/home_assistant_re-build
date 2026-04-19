@@ -16,6 +16,13 @@
 # - UM source : utility_meter/P0_Energie_total/Genelec_appart/03_UM_genelec_appart_HPHC_AMHQ.yaml
 # - Basculement : automation energie/basculement_tarif_hphc.yaml
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.genelec_appart_hp/hc_*_{periode} (02_UM_HPHC) | ratio_hp_hc_* / part_hc_*                          | L2C1 Énergie Générale              |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - En début de période (total ~ 0), la valeur retourne 0 — comportement normal.
 # - Les seuils 25% et 33% sont indicatifs selon le différentiel tarifaire HP/HC.

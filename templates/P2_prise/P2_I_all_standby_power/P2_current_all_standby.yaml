@@ -10,6 +10,13 @@
 # ## 🧮 CALCUL & SOURCES :
 # - Valeur fixe (0) pour économiser les ressources de calcul du CPU.
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | NOUS SP (Z2M)  | sensor.*_power (veilles actives)                   | all_standby_current_power                          | L3C2 Commandes Éco (standby)       |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ce capteur n'est pas lié à une mesure réelle. Il est purement fonctionnel
 #   pour éviter une erreur de chargement de la carte graphique (entité manquante).

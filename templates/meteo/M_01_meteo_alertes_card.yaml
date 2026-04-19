@@ -18,6 +18,13 @@
 # - Garde | default('') sur l'attribut 'event' pour éviter TypeError
 #   quand meteoalarm n'a pas de phénomène actif.
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | command_line (Météo France) | sensor.carte_meteo_france_* (images)               | meteo_alerte_card_html                             | L1C1 Météo                         |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - L'alerte est DÉPARTEMENTALE (06 entier) — pas localisée à Vence.
 # - MeteoAlarm peut avoir un décalage de quelques heures vs Météo France.

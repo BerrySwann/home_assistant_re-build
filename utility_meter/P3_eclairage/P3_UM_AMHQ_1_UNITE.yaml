@@ -14,6 +14,13 @@
 #   Lampes concernées   : hue_ambiance_lamp_salon_1/2/3, hue_color_candle_salon_1,
 #                         hue_color_candle_chambre_gege, hue_color_candle_chambre_eric
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.eclairage_*_kwh_unite (×17)                 | eclairage_*_unite_{annuel|mensuel|hebdo|quotidien} | P3_AVG_AMHQ_1_UNITE.yaml → L2C3    |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ne pas confondre UNITE (ampoule seule) avec ZONE (somme par pièce).
 # - Lampes PowerCalc : _power = 'unavailable' quand éteinte → Riemann bascule unavailable

@@ -13,6 +13,13 @@
 #             + eclairage_couloir_1 + eclairage_bureau_5 + eclairage_sdb_2 + eclairage_chambre_4.
 # - Dépendance : P3_POWER_2_TOTAL_MULTI_ZONE.yaml doit être chargé en premier.
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.eclairage_*_power_zone (P3_POWER_2)         | eclairage_appart_total_power                       | L2C3 Énergie Éclairage             |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ce sensor agrège les zones de P3_POWER_2, pas les ampoules physiques directement.
 # - Résultat théoriquement identique à eclairage_total_unit_puissance (P3_POWER_1).

@@ -13,6 +13,13 @@
 # - Exception : sensor.four_et_plaque_de_cuisson_energie_totale_kwh (sans prise_)
 # - Couvre : 1.ENTRÉE (×2), 4.SALON (×3), 5.CUISINE (×8), 7.BUREAU (×2), 9.CHAMBRE (×2)
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.*_energie_totale_kwh (prises)               | p2_prise_*_{annuel|mensuel|hebdo|quotidien}        | P2_AVG_AMHQ_prises.yaml → L3C2     |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Les cycles se réinitialisent automatiquement (minuit/lundi/1er du mois/1er janvier).
 # - La valeur précédente est stockée dans 'last_period' (utile pour comparaisons).

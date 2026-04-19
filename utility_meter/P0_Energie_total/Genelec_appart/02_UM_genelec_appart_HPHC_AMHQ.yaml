@@ -16,6 +16,14 @@
 # - Plages HP  : 07:30→13:00 et 14:30→01:00.
 # - Basculement : action utility_meter.select_tariff → HP ou HC.
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.genelec_appart_kwh_hp_cumulative            | genelec_appart_hp_*_{annuel|mensuel|hebdo|quotidien} | 02_ratio_hp_hc.yaml → L2C1         |
+# | [calculé]      | sensor.genelec_appart_kwh_hc_cumulative            | genelec_appart_hc_*_{annuel|mensuel|hebdo|quotidien} | 02_ratio_hp_hc.yaml → L2C1         |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces UM ne fonctionnent QUE si l'automation de basculement est active.
 #   Sans elle, le tarif reste figé sur le dernier sélectionné.

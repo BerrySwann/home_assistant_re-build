@@ -16,6 +16,13 @@
 # - Hebdo      : depuis lundi 00h00
 # - Annuel     : depuis le 1er janvier 00h00
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.clim_*_avg_w_* (P1_AVG)                     | p1_total_avg_w_{periode}                           | L2C2 Énergie Clim                  |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces capteurs ne sont PAS des UM — ce sont des templates de synthèse.
 # - En début de période (sources = 0), le total retourne aussi 0.

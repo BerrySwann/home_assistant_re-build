@@ -10,6 +10,13 @@
 # - Formule : (Consommation_kWh_UM × 1000) ÷ nombre_heures_écoulées_dans_le_cycle
 # - Sources : Capteurs Utility Meter (_kwh_um) du Pôle 2.
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.p2_prise_*_{periode} (P2_UM_AMHQ_prises)    | p2_prise_*_avg_w_{periode}                         | L3C2 Commandes Éco / L2C1          |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - La division par zéro est évitée par la condition (if h > 0.1 else 0).
 # - Ce n'est pas la puissance en direct, mais une moyenne de tirage ("Average").

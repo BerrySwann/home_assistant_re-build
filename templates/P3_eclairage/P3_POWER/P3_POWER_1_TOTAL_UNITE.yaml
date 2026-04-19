@@ -15,6 +15,13 @@
 #             relais_lumiere_sdb_sonoff, lampe_salle_de_bain_hue,
 #             hue_white_lamp_chambre_1/2, hue_color_candle_chambre_gege/eric.
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Hue Bridge / Sonoff (Z2M) | sensor.*_power (ampoules individuelles)            | eclairage_*_power_unite (×17)                      | P3_POWER_2_TOTAL_MULTI_ZONE → L2C3 |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Résultat théoriquement identique à sensor.eclairage_total_group_puissance (P3_POWER_3).
 #   En cas d'écart, vérifier qu'aucune ampoule n'a été ajoutée/retirée.

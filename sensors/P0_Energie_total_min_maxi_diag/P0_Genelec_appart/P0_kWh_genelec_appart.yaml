@@ -16,6 +16,13 @@
 #   Le capteur Riemann démarre à 0 à la création et s'accumule sans RAZ auto.
 #   La gestion périodique (AMHQ) relève des utility_meter P0.
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Ecojoko        | sensor.lixee_tic_power                             | genelec_appart_kwh_cumulative                      | 01_UM_AMHQ.yaml → L2C1             |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ce capteur démarre à 0 à la création — pas de back-fill historique.
 # - Méthode LEFT choisie (vs trapezoidal) : plus stable sur les variations

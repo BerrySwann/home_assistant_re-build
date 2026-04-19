@@ -14,6 +14,14 @@
 # - Le seuil 5W est cohérent avec l'animation des cartes mushroom HOME PAGE.
 # - Visibilité carte HOME PAGE : above 50W (cycle significatif).
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | NOUS SP (Z2M)  | sensor.lave_linge_power → seuil 5W/50W             | lave_linge_en_cours (bool HTML)                    | L3C2 Commandes Éco                 |
+# | NOUS SP (Z2M)  | sensor.lave_vaisselle_power → seuil 5W/50W         | lave_vaisselle_en_cours (bool HTML)                | L3C2 Commandes Éco                 |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ne pas confondre avec le seuil de visibilité carte (50W) vs seuil template (5W).
 #   Le template 5W sert aux automations (déclenchement fin de cycle).

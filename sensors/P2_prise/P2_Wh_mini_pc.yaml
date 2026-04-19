@@ -14,6 +14,13 @@
 # - PAS de unit_prefix: k → résultat en Wh (intentionnel)
 # - Source : sensor.prise_mini_pc_ikea_power (natif IKEA)
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | NOUS SP (Z2M)  | sensor.mini_pc_power                               | mini_pc_energie_totale_wh                          | P2_UM_AMHQ_mini_pc.yaml → L4C2     |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Unité = Wh (pas kWh) → le fichier AVG utilise conso / h (pas conso * 1000 / h).
 # - Ce sensor s'accumule depuis la création. La remise à zéro périodique (AMHQ)

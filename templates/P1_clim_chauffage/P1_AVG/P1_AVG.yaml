@@ -16,6 +16,13 @@
 # - Annuel     : h = (now() - 1er jan) en secondes / 3600
 # - Guard : h > 0.1 → sinon 0 (évite division par zéro en début de cycle)
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.p1_*_{periode}_kwh_um (P1_UM_AMHQ)          | clim_*_avg_w_{periode}                             | L2C2 Énergie Clim                  |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces capteurs n'ont pas de state_class (valeur calculée, pas cumulée).
 # - Ne pas utiliser device_class: energy ici — c'est de la puissance (W).

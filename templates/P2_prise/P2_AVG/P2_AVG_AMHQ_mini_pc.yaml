@@ -1,7 +1,6 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ PÔLE 2. TEMPLATE AVG : PUISSANCE MOYENNE (W) AMHQ — MINI PC (BUREAU)     │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-# ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
 # Calcule la puissance moyenne continue équivalente (en Watts) lissée sur
@@ -15,6 +14,13 @@
 #   - Mensuel      : sensor.prise_mini_pc_ikea_mensuel_wh_um
 #   - Hebdomadaire : sensor.prise_mini_pc_ikea_hebdomadaire_wh_um
 #   - Quotidien    : sensor.prise_mini_pc_ikea_quotidien_wh_um
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.p2_mini_pc_*_{periode} (P2_UM_AMHQ_mini_pc) | p2_mini_pc_*_avg_wh_{periode}                      | L4C2 Mini PC                       |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Division par zéro évitée : if h > 0.1 else 0.
@@ -30,6 +36,7 @@
     # ┌─────────────────────────────────────────┐
     # │   MINI PC : MOYENNE WATTS ANNUELLE      │
     # └─────────────────────────────────────────┘
+    # --- mini_pc_avg_watts_annuel ---
     - name: "Mini PC Avg Watts Annuel"
       unique_id: mini_pc_avg_watts_annuel
       unit_of_measurement: "W"
@@ -43,6 +50,7 @@
     # ┌─────────────────────────────────────────┐
     # │   MINI PC : MOYENNE WATTS MENSUELLE     │
     # └─────────────────────────────────────────┘
+    # --- mini_pc_avg_watts_mensuel ---
     - name: "Mini PC Avg Watts Mensuel"
       unique_id: mini_pc_avg_watts_mensuel
       unit_of_measurement: "W"
@@ -56,6 +64,7 @@
     # ┌─────────────────────────────────────────┐
     # │   MINI PC : MOYENNE WATTS HEBDOMADAIRE  │
     # └─────────────────────────────────────────┘
+    # --- mini_pc_avg_watts_hebdomadaire ---
     - name: "Mini PC Avg Watts Hebdomadaire"
       unique_id: mini_pc_avg_watts_hebdomadaire
       unit_of_measurement: "W"
@@ -69,6 +78,7 @@
     # ┌─────────────────────────────────────────┐
     # │   MINI PC : MOYENNE WATTS QUOTIDIENNE   │
     # └─────────────────────────────────────────┘
+    # --- mini_pc_avg_watts_quotidien ---
     - name: "Mini PC Avg Watts Quotidien"
       unique_id: mini_pc_avg_watts_quotidien
       unit_of_measurement: "W"

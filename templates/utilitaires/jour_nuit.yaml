@@ -14,6 +14,13 @@
 # - Nuit  : actif de 21h00 à 07h30.
 # - Utilise today_at() pour éviter les boucles infinies dans les templates HA.
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Intégration Sun (HA natif) | sun.sun → state / elevation                        | is_jour / is_nuit (binary)                         | Automations générales / stores     |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces capteurs sont INDÉPENDANTS du soleil (lever/coucher). Pour les
 #   automatisations liées au soleil, utiliser sun.sun directement.

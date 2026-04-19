@@ -13,6 +13,13 @@
 # - Source W   : sensors natifs NOUS (*_nous_power, radiateur_elec_cuisine_power,
 #     prise_soufflant_salle_de_bain_nous_power, prise_seche_serviette_salle_de_bain_nous_power)
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.p1_*_{periode}_kwh_um (×6 équipements)      | p1_total_kwh_{periode}                             | L2C2 Énergie Clim                  |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Le capteur de puissance (conso_clim_rad_total) lit les sensors natifs NOUS
 #   et non les UM — c'est la puissance instantanée, pas l'énergie cumulée.

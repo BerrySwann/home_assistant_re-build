@@ -19,6 +19,13 @@
 # - Annuel      : ha = ((now().timetuple().tm_yday - 1) * 24) + h
 # - Garde div zéro : if h/hh/hm/ha > 0.1 else 0
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.eclairage_appart_total_{periode} (P3_UM_AMHQ_3) | eclairage_appart_total_avg_w_{periode}             | L2C3 Énergie Éclairage             |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - GROUP et UNIT doivent être proches mais peuvent diverger si une ampoule
 #   est mal configurée dans une zone ou en double dans la somme.
