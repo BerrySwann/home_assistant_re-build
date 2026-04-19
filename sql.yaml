@@ -19,6 +19,7 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Sert à la remontée d'info pour la vignette : [L5C3 Taille DB MariaDB]
 
+# --- taille_db_home_assistant ---
 - name: "Taille Db Home Assistant"
   unique_id: taille_db_home_assistant
   db_url: !secret mariadb_url
