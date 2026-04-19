@@ -12,6 +12,13 @@
 # - Source : sensor.all_standby_power (calculé dans P2_I_all_standby_power/)
 # - unit_prefix: k + unit_time: h → résultat en kWh
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | NOUS SP (Z2M)  | sensor.*_power (veilles)                           | *.._veille_kwh (×N veilles)                        | P2_UM_AMHQ_veilles.yaml → L2C1     |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ce sensor s'accumule indéfiniment depuis sa création.
 #   La remise à zéro AMHQ est assurée par utility_meter P2_UM_AMHQ_veilles.yaml.

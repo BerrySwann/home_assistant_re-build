@@ -1,3 +1,34 @@
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ CAPTEUR : INTÉGRATION KWH (PÔLE 1. CHAUFFAGE & CLIMATISATION)               │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Intégration Riemann (method: left) des puissances NOUS smart plugs → kWh
+# cumulatif pour les 6 équipements P1 (clim salon, radiateur cuisine,
+# clim bureau, soufflant SDB, sèche-serv SDB, clim chambre).
+#
+# ## 🧮 CALCUL & SOURCES :
+# sensor.*_nous_power (W) → integration (method: left, unit_prefix: k, unit_time: h)
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | NOUS SP (Z2M)  | sensor.clim_salon_nous_power                       | clim_salon_energie_totale_kwh                      | P1_UM_AMHQ.yaml → L2C2             |
+# | NOUS SP (Z2M)  | sensor.radiateur_elec_cuisine_power                | radiateur_elec_cuisine_energie_totale_kwh          | P1_UM_AMHQ.yaml → L2C2             |
+# | NOUS SP (Z2M)  | sensor.clim_bureau_nous_power                      | clim_bureau_energie_totale_kwh                     | P1_UM_AMHQ.yaml → L2C2             |
+# | NOUS SP (Z2M)  | sensor.prise_soufflant_salle_de_bain_nous_power    | soufflant_sdb_energie_totale_kwh                   | P1_UM_AMHQ.yaml → L2C2             |
+# | NOUS SP (Z2M)  | sensor.prise_seche_serviette_salle_de_bain_nous_power | seche_serviette_sdb_energie_totale_kwh             | P1_UM_AMHQ.yaml → L2C2             |
+# | NOUS SP (Z2M)  | sensor.clim_chambre_nous_power                     | clim_chambre_energie_totale_kwh                    | P1_UM_AMHQ.yaml → L2C2             |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# Ne pas changer method: left → perte rétroactive des données historiques.
+# Source doit être en Watts. unit_prefix: k obligatoire.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# L2C2 Énergie Clim — source des utility_meter P1_UM_AMHQ.yaml
+#
 
 
 # --- clim_salon_energie_totale_kwh ---

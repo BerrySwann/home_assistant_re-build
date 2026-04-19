@@ -15,6 +15,13 @@
 #   Bureau (5x), SDB (2x), Chambre (4x)
 # - 2 zones transversales : Appart 3x (E+Cu+Co), Appart 2x (E+Co)
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.eclairage_*_kwh_unite (P3_kWh_1_UNITE)      | eclairage_*_kwh_zone (×7 zones)                    | P3_UM_AMHQ_2_ZONE.yaml / P3_kWh_3_TOTAL.yaml → L2C3 |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Dépendance en chaîne : P3_POWER_2_TOTAL_MULTI_ZONE → ce fichier → P3_UM_AMHQ_2_ZONE.
 #   Si sensor.eclairage_[zone]_puissance est indisponible, le kWh sera faux.

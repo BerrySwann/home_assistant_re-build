@@ -11,6 +11,13 @@
 # - Sources : sensor.thermal_zone_0_temp, sensor.temperature_cpu_package,
 #             sensor.temperature_core_0/1/2/3
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Mini-PC (thermal_zone Linux) | sensor.mini_pc_thermal_zone_* (command_line)       | mini_pc_temp_cpu_* / mini_pc_temp_carte_mere       | L4C2 Mini PC                       |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Les sources remontent des millidegrés (entiers), la division /1000 est obligatoire.
 # - float(0) → valeur par défaut 0 en cas d'indisponibilité du capteur source.

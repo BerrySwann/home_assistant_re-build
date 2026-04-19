@@ -16,6 +16,13 @@
 #   interprète 0 comme "pas de données")
 # - Vitesse : wind_speed × 3.6 → km/h (arrondi 1 décimale)
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Intégration Météo (OpenMet/MF) | sensor.wind_speed / wind_bearing / wind_gust       | meteo_vent_vence_html                              | L1C1 Météo                         |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Si wind_bearing est None (vent nul), label retourne 'Calme' et
 #   bearing retourne 0 — windrose-card affichera une rose vide.

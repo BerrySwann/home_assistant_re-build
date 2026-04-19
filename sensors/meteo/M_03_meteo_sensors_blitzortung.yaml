@@ -15,6 +15,13 @@
 # - Valeur retournée : nombre de features (entier, indicator de succès)
 # - Attributs : features[] (objet GeoJSON complet pour parsing en template)
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Blitzortung (intégration HA) | sensor.blitzortung_lightning_*                     | blitzortung_count_* / blitzortung_distance_*       | M_03_meteo_UM_blitzortung.yaml / M_03_meteo_blitzortung.yaml → L1C1 |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - scan_interval: 3600 obligatoire — Nominatim interdit les requêtes fréquentes
 #   (limite usage équitable : max 1 req/s, mais 1/h recommandé pour HA).

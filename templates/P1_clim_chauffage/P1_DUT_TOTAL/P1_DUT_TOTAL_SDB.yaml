@@ -11,6 +11,13 @@
 # - sensor.dut_sdb_soufflant        (sensors/P1_clim_chauffage/P1_DUT_clim_chauffage.yaml)
 # - sensor.dut_sdb_seche_serviettes (même fichier)
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.dut_sdb_soufflant + sensor.dut_sdb_seche_serviettes | dut_sdb_total                                      | L2C2 Énergie Clim (SDB)            |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ce capteur n'a PAS d'UM propre (orphelin de type "total") — pas de _kwh_um.
 # - Ne pas le confondre avec les DUT individuels (history_stats dans sensors/).

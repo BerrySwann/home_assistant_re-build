@@ -14,6 +14,13 @@
 # - Pièces couvertes : Appartement (global), Entrée, Salon, Cuisine, Couloir,
 #   Bureau (3 sensors : Bureau/Écran/Bureau-Général), SDB, Chambre (2 sensors)
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | light.* (Hue/Sonoff) → is_on / brightness          | eclairage_*_etat / eclairage_*_nb_allumes          | L3C1 Commandes Éclairage           |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ce fichier est dans ui_dashboard/ : INTERDIT d'y ajouter des kWh ou W.
 # - sensor.lumiere_bureau_etat et sensor.lumiere_ecran_etat sont des sources

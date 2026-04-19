@@ -11,6 +11,13 @@
 # - Même structure que le fichier journalier — cycle mensuel AMHQ.
 # - Max dynamique : buffer 10 kWh (échelle mensuelle).
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.genelec_appart_mensuel / P1/P2/P3 mensuels  | diag_conso_mois_*                                  | L2C1 Énergie Générale (diagnostic) |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Tous les UM P1/P2/P3 utilisent le suffixe _kwh_um (nomenclature unifiée).
 # - state_class: measurement — reset le 1er du mois via UM.

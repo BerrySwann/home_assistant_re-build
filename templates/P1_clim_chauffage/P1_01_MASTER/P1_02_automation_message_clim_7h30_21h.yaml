@@ -18,6 +18,13 @@
 # - sensor.temperature_confort_jour / sensor.temperature_eco_hiver_corrige
 # - switch.clim_*_nous → vérifie alimentation de chaque unité
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.clim_*_temperature_cible / climate.*        | message_clim_7h30_21h_*                            | L1C3 Commandes Clim (notifications) |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ce fichier produit : sensor.message_clim_personnalise_7h30_21h00
 # - Disponibilité conditionnée à la présence des 5 capteurs réseau/T°.

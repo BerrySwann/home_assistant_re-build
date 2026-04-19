@@ -16,6 +16,13 @@
 # - Résultat : true / wifi_!? / false par téléphone
 # - etat_wifi_maison : 0 / "Mamour" / "Eric" / 2 + attribut couleur
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | device_tracker.* / sensor.*_wifi_ssid              | phone_*_status_card (HTML)                         | Home Page / VIGNETTE_WIFI_PRESENCE |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Le SSID 'Freebox_GG' est codé en dur — à mettre à jour si changement
 #   de box ou de nom réseau.

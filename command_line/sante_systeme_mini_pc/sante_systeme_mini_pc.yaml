@@ -1,6 +1,10 @@
 # ╭──────────────────────────────────────────────────────────────────╮
 # │ COMMAND_LINE : SANTÉ SYSTÈME (MINI-PC)                           │
 # ╰──────────────────────────────────────────────────────────────────╯
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | Mini-PC (thermal_zone Linux) | cat /sys/class/thermal/thermal_zone*/temp          | temperature_carte_mere_sys / temperature_cpu_*     | MP_01_sonde_température_mini-pc.yaml → L4C2 |
 
 # --- temperature_carte_mere_sys ---
 - sensor:

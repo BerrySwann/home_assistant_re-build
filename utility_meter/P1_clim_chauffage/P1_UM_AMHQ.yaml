@@ -13,6 +13,13 @@
 # - Chaque source = énergie cumulée depuis création du capteur Riemann
 # - Remise à zéro : Quotidien = minuit / Hebdo = lundi / Mensuel = 1er / Annuel = 1er jan
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.*_energie_totale_kwh (×6 équipements)       | p1_*_{annuel|mensuel|hebdo|quotidien}_kwh_um       | P1_AVG.yaml / P1_TOTAL_AMHQ.yaml → L2C2 |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Les sources pointent désormais sur les capteurs Riemann *_energie_totale_kwh
 #   et NON plus sur les sensor.*_nous_energy natifs des prises NOUS.

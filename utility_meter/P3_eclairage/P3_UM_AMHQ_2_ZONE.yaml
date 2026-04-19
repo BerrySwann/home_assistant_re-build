@@ -12,6 +12,13 @@
 # - Sources : sensor.eclairage_[zone]_energie_totale_kwh (capteurs somme calculés
 #   dans sensors/P3_eclairage/P3_kWh_2_ZONE.yaml via templates P3_POWER_2_TOTAL_MULTI_ZONE.yaml).
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.eclairage_*_kwh_zone (×7)                   | eclairage_*_zone_{annuel|mensuel|hebdo|quotidien}  | P3_AVG_AMHQ_2_ZONE.yaml → L2C3     |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # Les zones APPART regroupent plusieurs pièces (entrée+couloir ou entrée+cuisine+couloir).
 # Ne pas créer de doublons avec les zones par pièce individuelle.

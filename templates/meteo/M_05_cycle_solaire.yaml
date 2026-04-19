@@ -19,6 +19,13 @@
 # - Dates clés : Équinoxe printemps j80 | Solstice été j172 | Équinoxe automne j264
 #                Solstice hiver j355.
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Intégration Sun (HA natif) | sun.sun → next_rising / next_setting               | lever_soleil / coucher_soleil / duree_jour         | L1C1 Météo / automations stores    |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - La durée du jour est calculée astronomiquement — PAS via sun.sun (next_rising/setting).
 #   Elle est donc disponible même si l'intégration Sun est absente ou en erreur.

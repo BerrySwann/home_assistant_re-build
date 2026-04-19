@@ -16,6 +16,13 @@
 # - Logique groupe : AND → groupe_4, Eric seul → groupe_3, Mamour → groupe_2
 # - Logique présence : affichage "[2] en [WIFI]" ou "[Mamour: WIFI/CELL]"
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | device_tracker.* / sensor.*_network_type           | presence_maison (présent/absent)                   | Home Page / automations présence   |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - sensor.groupe alimente les AUTOMATIONS de présence (volets, clim, etc.)
 #   — toute modification a un impact direct sur le comportement de la maison.

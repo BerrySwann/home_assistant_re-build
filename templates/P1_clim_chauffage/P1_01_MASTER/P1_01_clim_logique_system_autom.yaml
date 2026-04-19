@@ -18,6 +18,13 @@
 # - T° confort = différentielle + (T°cible - consigne_de_base)
 # - T°cible modulée par T°ext (paliers < 12°C, > 32°C, > 40°C)
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.temperature_ext / input_number.* / input_boolean.* | clim_*_temperature_cible / clim_*_mode_logique     | L1C3 Commandes Clim                |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Fichier CRITIQUE : toute modification impacte TOUTES les automations clim.
 # - seuil_non_clim remplace l'ancien seuil_non_chauffage_bas (même valeur 28°C).

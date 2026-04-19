@@ -15,6 +15,13 @@
 #               Calme si compteur = 0 ou dernier impact > 2h.
 # - Dernier impact : input_datetime.dernier_eclair → calcul diff en j/h/m.
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.blitzortung_*_um (M_03_meteo_UM_blitzortung) | blitzortung_card_html / _distance_label            | L1C1 Météo                         |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - La windrose-card requiert bearing != 0 → remplacement par 1.
 # - Deux blocs `- sensor:` séparés (contrainte HA pour les attributs du timer).

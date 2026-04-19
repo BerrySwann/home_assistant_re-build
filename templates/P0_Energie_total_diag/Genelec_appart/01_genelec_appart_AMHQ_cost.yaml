@@ -17,6 +17,13 @@
 #     HC : sensor.edf_tempo_price_blue_hc  (0.1232 €/kWh)
 # - Basculement HP ↔ HC : automation energie/basculement_tarif_hphc.yaml
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.genelec_appart_*_{periode} (01_UM_AMHQ)     | genelec_appart_cout_*_{periode}                    | L2C1 Énergie Générale              |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Les entités UM génèrent des sous-capteurs automatiques :
 #     sensor.genelec_appart_hphc_*_um_hp  (Heures Pleines)

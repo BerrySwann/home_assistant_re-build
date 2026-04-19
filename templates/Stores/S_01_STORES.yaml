@@ -13,6 +13,14 @@
 # - Logique       : position=0 → Fermé (rouge) / en mouvement → orange gras
 #                   position=100 → Ouvert (vert) / 0<pos<100 → Ouvert partiel (orange)
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Zigbee (Z2M)   | cover.store_salon / position                       | store_salon_status (HTML couleur)                  | L3C3 Stores                        |
+# | Zigbee (Z2M)   | cover.store_bureau / position                      | store_bureau_status (HTML couleur)                 | L3C3 Stores                        |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Les covers Zigbee peuvent émettre un état "unavailable" pendant ~2s au démarrage.
 # - Ne pas utiliser cover.position directement dans l'UI : utiliser ces templates

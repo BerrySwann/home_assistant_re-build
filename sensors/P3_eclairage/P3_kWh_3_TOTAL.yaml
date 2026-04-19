@@ -14,6 +14,13 @@
 # - Formule : ∫ [total]_puissance (W) dt → kWh (méthode left)
 # - Sources définies dans P3_POWER_2_TOTAL_MULTI_ZONE.yaml + P3_POWER_1_TOTAL_UNITE.yaml (templates)
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.eclairage_*_kwh_zone (P3_kWh_2_ZONE)        | eclairage_appart_total_kwh                         | P3_UM_AMHQ_3_TOTAL.yaml → L2C3     |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - eclairage_total_group_kwh et eclairage_total_unit_kwh devraient être
 #   identiques en théorie. Un écart persistant indique un bug dans

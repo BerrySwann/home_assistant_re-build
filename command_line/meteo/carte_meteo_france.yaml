@@ -16,6 +16,13 @@
 # - Retry : boucle 5 tentatives (sleep 1s entre chaque). Si échec → fallback nodata.png
 # - value_template: "{{ value }}" → retourne "on" (succès) ou "unavailable" (échec)
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Météo France (API web) | URL vigilance.meteo.fr / wget → images PNG         | carte_meteo_france_url / _derniere_maj             | M_01_meteo_alertes_card.yaml → L1C1 |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - api_key JWT hardcodée dans le fichier (expiration : 2027-06-22 selon exp JWT).
 #   Surveiller l'expiration et renouveler sur portail-api.meteofrance.fr si besoin.

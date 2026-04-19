@@ -16,6 +16,13 @@
 # - Logique : current > previous → increasing / < → decreasing / = → stable
 # - Les input_number sont mis à jour par une automation externe (périodique).
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Intégration Météo | sensor.temperature_exterieure / humidity_ext       | tendance_th_ext_html                               | L1C1 Météo / L1C2 Températures     |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - La tendance dépend de la fréquence de MàJ des input_number_previous.
 #   Si l'automation de snapshot est trop fréquente (<5min), la tendance

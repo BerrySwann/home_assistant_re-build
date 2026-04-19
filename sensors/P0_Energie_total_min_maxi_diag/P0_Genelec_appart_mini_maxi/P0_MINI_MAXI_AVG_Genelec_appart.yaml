@@ -14,6 +14,13 @@
 # - Conso Maxi  : max sur 24h (value_max) → total journalier accumulé (pic).
 # - Conso Moy 1h: moyenne sur 1h (mean) → consommation kWh lissée sur la dernière heure.
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.genelec_appart_kwh_cumulative               | genelec_appart_power_min / _max / _mean_24h        | 03_AVG_genelec_appart.yaml → L2C1  |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces capteurs opèrent sur l'ÉNERGIE (kWh), pas sur la puissance (W).
 #   Ne pas les utiliser comme sources pour un utility_meter (déjà un UM).

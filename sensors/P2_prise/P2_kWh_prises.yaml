@@ -14,6 +14,13 @@
 # - unit_prefix: k + unit_time: h → résultat en kWh
 # - Sources : sensor.prise_[appareil]_[marque]_power
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | NOUS SP (Z2M)  | sensor.*_power (prises connectées)                 | *.._energie_totale_kwh (×10 prises)                | P2_UM_AMHQ_prises.yaml → L3C2 / L2C1 |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces sensors s'accumulent depuis la création (ne se remettent pas à zéro).
 #   La remise à zéro périodique (AMHQ) est gérée par utility_meter P2.

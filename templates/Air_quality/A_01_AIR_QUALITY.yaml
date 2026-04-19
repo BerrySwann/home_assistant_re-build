@@ -12,6 +12,13 @@
 # - Formule  : state | float(0) — pas de conversion (index = ppb natif)
 # - Pièces   : Salon (4), Bureau (7), Chambre (9)
 #
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.*_pm25_mean_24h / *_tcov_mean_24h (sensors/Air_quality) | salon/bureau/chambre_tvoc_ppb / *_pm25_label       | L6C1 Qualité de l'air              |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ne pas confondre avec sensor.tcov_*_moy_24h (statistiques 24h — sensors/).
 # - device_class: volatile_organic_compounds_parts est requis pour que HA
