@@ -246,3 +246,16 @@ fan:
       - name: RPI Cooling Fan
         unique_id: rpi_cooling_fan
         pin: 14
+
+# --- feedreader ---
+feedreader:
+  urls:
+    - https://github.com/home-assistant/core/releases.atom
+    - https://github.com/hacs/integration/releases.atom
+    - https://github.com/RomRider/apexcharts-card/releases.atom
+    - https://github.com/piitaya/lovelace-mushroom/releases.atom
+    - https://github.com/Clooos/bubble-card/releases.atom
+    - https://github.com/kalkih/mini-graph-card/releases.atom
+    - https://github.com/thomasloven/lovelace-card-mod/releases.atom
+  scan_interval:
+    hours: 6
