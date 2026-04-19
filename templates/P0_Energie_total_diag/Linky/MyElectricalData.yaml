@@ -30,7 +30,7 @@
     - name: "Linky Jour 0"
       unique_id: linky_jour_0
       state: >-
-        {{ states('sensor.genelec_appart_quotidien_um') | float(0) | round(1) }}  {# "[modif] : ecojoko_hp + hc → UM quotidien total" #}
+        {{ states('sensor.genelec_appart_quotidien_kwh_um') | float(0) | round(1) }}  {# "[modif] : ecojoko_hp + hc → UM quotidien total" #}
       unit_of_measurement: kWh
       icon: mdi:flash-outline
       attributes:
@@ -40,7 +40,7 @@
         hc_kwh: >-
           {{ states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) | round(2) }}   {# "[modif] : split HC natif UM tariff" #}
         total_kwh: >-
-          {{ states('sensor.genelec_appart_quotidien_um') | float(0) | round(1) }}            {# "[modif]" #}
+          {{ states('sensor.genelec_appart_quotidien_kwh_um') | float(0) | round(1) }}            {# "[modif]" #}
         cout: >-
           {% set hp_kwh = states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) %}
           {% set hc_kwh = states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) %}
