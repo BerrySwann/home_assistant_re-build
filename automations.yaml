@@ -890,7 +890,7 @@
             'on') %}\n  La fenêtre du Bureau a été ouverte.\n{% elif trigger.entity_id
             == 'binary_sensor.contact_fenetre_chambre_sonoff_contact' and is_state('binary_sensor.contact_fenetre_chambre_sonoff_contact',
             'on') %}\n  La fenêtre de la Chambre a été ouverte.\n{% else %}\n  Une
-            fenêtre est ouverte (Mise à jour globale).\n{% endif %} {% if states('sensor.nbre_de_fenetres_ouvertes')
+            fenêtre est ouverte (Mise à jour globale).\n{% endif %} {% if states('sensor.nombre_de_fenetres_ouvertes')
             | int == 4 %}\n  Toutes les fenêtres sont ouvertes.\n{% endif %}\n"
       - alias: 'SÉCURITÉ : ARRÊT IMMÉDIAT POUR ÉVITER DOUBLON'
         stop: Coupure fenêtre effectuée
@@ -1129,7 +1129,7 @@
             'on') %}\n  La fenêtre du Bureau a été ouverte.\n{% elif trigger.entity_id
             == 'binary_sensor.contact_fenetre_chambre_sonoff_contact' and is_state('binary_sensor.contact_fenetre_chambre_sonoff_contact',
             'on') %}\n  La fenêtre de la Chambre a été ouverte.\n{% else %}\n  Une
-            fenêtre est ouverte (Mise à jour globale).\n{% endif %} {% if states('sensor.nbre_de_fenetres_ouvertes')
+            fenêtre est ouverte (Mise à jour globale).\n{% endif %} {% if states('sensor.nombre_de_fenetres_ouvertes')
             | int == 4 %}\n  Toutes les fenêtres sont ouvertes.\n{% endif %}\n"
       - alias: 'SÉCURITÉ : ARRÊT IMMÉDIAT POUR ÉVITER DOUBLON'
         stop: Coupure fenêtre effectuée
