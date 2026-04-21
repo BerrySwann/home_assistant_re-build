@@ -1,0 +1,14 @@
+id: '1766779005298'
+alias: Update previous humidity
+description: "Enregistre l'humidité toutes les 30 minutes pour calculer la tendance."
+triggers:
+- trigger: time_pattern
+  minutes: /30
+conditions: []
+actions:
+- action: input_number.set_value
+  target:
+    entity_id: input_number.th_balcon_nord_humidity_previous
+  data:
+    value: '{{ states(''sensor.th_balcon_nord_humidity'') | float(0) }}'
+mode: single

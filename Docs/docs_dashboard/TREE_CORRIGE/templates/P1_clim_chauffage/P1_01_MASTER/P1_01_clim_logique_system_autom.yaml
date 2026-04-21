@@ -1,0 +1,316 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 1. TEMPLATE MASTER : LOGIQUE SYSTÈME CLIMATISATION COMPLÈTE         │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Fichier master centralisant toute la logique de calcul thermique :
+# détection du mode Été/Hiver, consignes de base, températures cibles,
+# confort jour/nuit, corrections par pièce et deltas ADEME. C'est le
+# cerveau du système thermique — toutes les automations clim en dépendent.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - sensor.th_balcon_nord_temperature : T° extérieure (sonde SONOFF balcon)
+# - sensor.seuil_non_chauffage : 18°C — seuil bascule heat/fan_only
+# - sensor.seuil_non_clim    : 28°C — seuil bascule fan_only/cool
+# - sensor.consigne_de_base : lit seuil_non_chauffage (18°C) ou seuil_non_clim (28°C)
+# - sensor.temperature_differentielle : consigne_de_base ± delta_1 (19°C hiver / 27°C été)
+# - Deltas fixes : delta_1=1, delta_2=2, delta_3=3, delta_5=5, delta_7=7 (°C)
+# - T° confort = différentielle + (T°cible - consigne_de_base)
+# - T°cible modulée par T°ext (paliers < 12°C, > 32°C, > 40°C)
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.temperature_ext / input_number.* / input_boolean.* | clim_*_temperature_cible / clim_*_mode_logique     | L1C3 Commandes Clim                |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Fichier CRITIQUE : toute modification impacte TOUTES les automations clim.
+# - seuil_non_clim remplace l'ancien seuil_non_chauffage_bas (même valeur 28°C).
+# - La logique absence (17°C eco, 18°C/19°C selon T°ext) est ici — ne pas
+#   dupliquer dans les automations.
+# - Les sensors Deltas (delta_1..7) sont des constantes déclarées ici pour
+#   éviter les valeurs codées en dur dans 10+ endroits différents.
+# - temperature_moyenne_interieure exclut les sondes à 0 (reject '==0')
+#   pour éviter de baisser la moyenne sur une sonde hors ligne.
+# - delta_ademe_recommande utilise temperature_confort_JOUR (et non temperature_confort).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C3 Commandes Clim (toutes les consignes, états modes, T°cibles)
+# - L1C2 Températures (T° moyenne intérieure, delta intérieur/extérieur)
+
+- sensor:
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ PARAMÈTRES FIXES ET DELTAS DE CALCUL                              │
+# └───────────────────────────────────────────────────────────────────┘
+
+# --- temperature_eco_hiver ---
+    - name: "Temperature éCO. Hiver"
+      unique_id: temperature_eco_hiver
+      unit_of_measurement: "°C"
+      state: "17"
+
+# --- seuil_non_chauffage ---
+    - name: "Seuil non chauffage"
+      unique_id: seuil_non_chauffage
+      unit_of_measurement: "°C"
+      state: "18"
+
+# --- seuil_non_clim ---
+    - name: "Seuil non clim"
+      unique_id: seuil_non_clim
+      unit_of_measurement: "°C"
+      state: "28"
+
+# --- delta_1 ---
+    - name: "Delta_1"
+      unique_id: delta_1
+      state: "1"
+      unit_of_measurement: "°C"
+
+# --- delta_2 ---
+    - name: "Delta_2"
+      unique_id: delta_2
+      state: "2"
+      unit_of_measurement: "°C"
+
+# --- delta_3 ---
+    - name: "Delta_3"
+      unique_id: delta_3
+      state: "3"
+      unit_of_measurement: "°C"
+
+# --- delta_5 ---
+    - name: "Delta_5"
+      unique_id: delta_5
+      state: "5"
+      unit_of_measurement: "°C"
+
+# --- delta_7 ---
+    - name: "Delta_7"
+      unique_id: delta_7
+      state: "7"
+      unit_of_measurement: "°C"
+
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ DÉTECTION DU MODE GÉNÉRAL ET CONSIGNES DYNAMIQUES                 │
+# └───────────────────────────────────────────────────────────────────┘
+
+# --- mode_ete_hiver ---
+    - name: "Mode Été/Hiver"
+      unique_id: mode_ete_hiver
+      state: >
+        {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(-999) %}
+        {% set temp_no_chauf = states('sensor.seuil_non_chauffage') | float(18) %}
+        {% set temp_no_clim = states('sensor.seuil_non_clim') | float(28) %}
+        {% if temp_ext == -999 %}
+          unknown
+        {% elif temp_ext < temp_no_chauf %}
+          heat
+        {% elif temp_ext < temp_no_clim %}
+          fan_only
+        {% else %}
+          cool
+        {% endif %}
+
+# --- consigne_de_base ---
+    - name: "Consigne de Base"
+      unique_id: consigne_de_base
+      unit_of_measurement: "°C"
+      state: >
+        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
+          {{ states('sensor.seuil_non_clim') | float(28) }}
+        {% else %}
+          {{ states('sensor.seuil_non_chauffage') | float(18) }}
+        {% endif %}
+
+# --- temperature_differentielle ---
+    - name: "Temperature différentielle"
+      unique_id: temperature_differentielle
+      unit_of_measurement: "°C"
+      state: >
+        {% set base = states('sensor.consigne_de_base') | float(18) %}
+        {% set d1 = states('sensor.delta_1') | float(1) %}
+        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
+          {{ (base - d1) | round(1) }}
+        {% else %}
+          {{ (base + d1) | round(1) }}
+        {% endif %}
+
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ CORRECTIONS SPÉCIFIQUES (HIVERNALES)                              │
+# └───────────────────────────────────────────────────────────────────┘
+
+# ┌───────────────────────────────────┐
+# │ 04. SALON                         │
+# └───────────────────────────────────┘
+# --- temperature_corrige_mamour_hivers ---
+    - name: "Temperature Corrigé Mamour Hivers"
+      unique_id: temperature_corrige_mamour_hivers
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state: >
+        {% set temp_conf_m = states('sensor.temperature_confort_jour') | float(20) %}
+        {% set delta_1 = states('sensor.delta_1') | float(1) %}
+        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
+          {{ temp_conf_m }}
+        {% else %}
+          {{ [ (temp_conf_m + delta_1), 21.0 ] | min | round(1) }}
+        {% endif %}
+
+# ┌───────────────────────────────────┐
+# │ 07. BUREAU                        │
+# └───────────────────────────────────┘
+# --- temperature_corrige_eric_hivers ---
+    - name: "Temperature Corrigé Eric Hivers"
+      unique_id: temperature_corrige_eric_hivers
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state: >
+        {% set temp_conf_e = states('sensor.temperature_confort_jour') | float(18) %}
+        {% set delta_2 = states('sensor.delta_2') | float(2) %}
+        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
+          {{ temp_conf_e }}
+        {% else %}
+          {{ [ (temp_conf_e - delta_2), 18.0 ] | min | round(1) }}
+        {% endif %}
+
+# ┌───────────────────────────────────┐
+# │ 09. CHAMBRE                       │
+# └───────────────────────────────────┘
+# --- temperature_corrige_chambre_hivers ---
+    - name: "Temperature Corrigé Chambre Hivers"
+      unique_id: temperature_corrige_chambre_hivers
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state: >
+        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
+          {{ states('sensor.temperature_confort_jour') | float(0) }}
+        {% else %}
+          {{ states('sensor.consigne_de_base') | float(0) }}
+        {% endif %}
+
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ MOTEURS DE CALCUL DYNAMIQUES (CIBLE / CONFORT)                    │
+# └───────────────────────────────────────────────────────────────────┘
+
+# --- temperature_cible ---
+    - name: "Temperature Cible"
+      unique_id: temperature_cible
+      unit_of_measurement: "°C"
+      state: >
+        {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+        {% set base = states('sensor.consigne_de_base') | float(18) %}
+        {% set d1 = states('sensor.delta_1') | float(1) %}
+        {% set d5 = states('sensor.delta_5') | float(5) %}
+        {% set d7 = states('sensor.delta_7') | float(7) %}
+        {% if temp_ext < 12 %} {{ (base + d1) | int }}
+        {% elif temp_ext > 40 %} {{ (temp_ext - d7) | int }}
+        {% elif temp_ext > 32 %} {{ (temp_ext - d5) | int }}
+        {% else %} {{ base | int }}
+        {% endif %}
+
+# --- temperature_confort_jour ---
+    - name: "Temperature confort Jour"
+      unique_id: temperature_confort_jour
+      unit_of_measurement: "°C"
+      state: >
+        {% set diff = states('sensor.temperature_differentielle') | float(19) %}
+        {% set base = states('sensor.consigne_de_base') | float(18) %}
+        {% set cible = states('sensor.temperature_cible') | float(18) %}
+        {{ (diff + (cible - base)) | round(1) }}
+
+# --- temperature_confort_nuit ---
+    - name: "Temperature confort nuit"
+      unique_id: temperature_confort_nuit
+      unit_of_measurement: "°C"
+      state: >
+        {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(15) %}
+        {% set conf_j = states('sensor.temperature_confort_jour') | float(20) %}
+        {% set d1 = states('sensor.delta_1') | float(1) %}
+        {% set d2 = states('sensor.delta_2') | float(2) %}
+        {% set d5 = states('sensor.delta_5') | float(5) %}
+        {% set d7 = states('sensor.delta_7') | float(7) %}
+        {% if t_ext < 8 %} {{ (conf_j - d1) | round(1) }}
+        {% elif t_ext < 12 %} {{ (conf_j - d2) | round(1) }}
+        {% elif t_ext < 19 %} {{ (conf_j - d1) | round(1) }}
+        {% elif t_ext > 40 %} {{ (t_ext - d7) | round(1) }}
+        {% elif t_ext > 32 %} {{ (t_ext - d5) | round(1) }}
+        {% else %} {{ conf_j }}
+        {% endif %}
+
+# --- temperature_eco_hiver_corrige ---
+    - name: "Temperature éCO. Hiver Corrigé"
+      unique_id: temperature_eco_hiver_corrige
+      unit_of_measurement: "°C"
+      state: >
+        {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+        {% set temp_eco = states('sensor.temperature_eco_hiver') | float(17) %}
+        {% set d1 = states('sensor.delta_1') | float(1) %}
+        {% set d2 = states('sensor.delta_2') | float(2) %}
+        {% if temp_ext < 8 %} {{ temp_eco + d2 }}
+        {% elif temp_ext < 12 %} {{ temp_eco + d1 }}
+        {% else %} {{ temp_eco }}
+        {% endif %}
+
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ MOYENNES, DELTAS INTERNES ET RECOMMANDATIONS ADEME                │
+# └───────────────────────────────────────────────────────────────────┘
+
+# --- temperature_moyenne_interieure ---
+    - name: "Température moyenne intérieure"
+      unique_id: temperature_moyenne_interieure
+      unit_of_measurement: "°C"
+      icon: "mdi:home-thermometer"
+      state: >
+        {% set sensors = [
+          states('sensor.th_salon_temperature'),
+          states('sensor.th_cellier_temperature'),
+          states('sensor.th_cuisine_temperature'),
+          states('sensor.th_bureau_temperature'),
+          states('sensor.th_salle_de_bain_temperature'),
+          states('sensor.th_chambre_temperature')
+        ] %}
+        {% set values = sensors | map('float', 0) | reject('==', 0) | list %}
+        {{ (values | sum / values | count) | round(1) if values | count > 0 else 0 }}
+
+# --- temperature_delta_value ---
+    - name: "Temperature Delta (valeur)"
+      unique_id: temperature_delta_value
+      unit_of_measurement: "°C"
+      state: >
+        {% set t_int = states('sensor.temperature_moyenne_interieure') | float(0) %}
+        {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+        {{ (t_int - t_ext) | round(1) }}
+
+# --- temperature_delta_affichage ---
+    - name: "Température Delta (Affichage)"
+      unique_id: temperature_delta_affichage
+      state: >
+        T̄i {{ states('sensor.temperature_moyenne_interieure') | float(0) | round(1) }}°C
+        Te {{ states('sensor.th_balcon_nord_temperature') | float(0) | round(1) }}°C
+        ΔT = {{ (states('sensor.temperature_moyenne_interieure') | float(0) - states('sensor.th_balcon_nord_temperature') | float(0)) | round(1) }}°C
+
+# --- delta_ademe_recommande ---
+    - name: "Delta ADEME Recommandé"
+      unique_id: delta_ademe_recommande
+      unit_of_measurement: "°C"
+      icon: "mdi:delta"
+      state: >
+        {{ (states('sensor.temperature_confort_jour') | float(20) -
+            states('sensor.th_balcon_nord_temperature') | float(0)) | round(1) }}
+
+# annotations_log:
+# - [Struct]  Ordre sections : PARAMÈTRES FIXES avant DÉTECTION DU MODE.
+# - [Rename]  seuil_non_chauffage → seuil_non_clim (unique_id + name).
+# - [Fix]     mode_ete_hiver : fallback 'unknown' au lieu de 'ERREUR' + 2 seuils dynamiques.
+# - [Fix]     consigne_de_base : lit les sensors seuil_* (dynamique) au lieu de hardcode.
+# - [Fix]     temperature_differentielle : calcul base±d1 au lieu de valeurs fixes 19/27.
+# - [Fix]     temperature_corrige_mamour/eric : suppression variable resultat intermédiaire.
+# - [Fix]     temperature_corrige_chambre : if/else direct (suppression re-affectation var).
+# - [Fix]     temperature_cible : conditions simplifiées (3 au lieu de 5 redondants).
+# - [Fix]     temperature_confort_nuit : variable conf_j + float(15/20) fallbacks corrects.
+# - [Fix]     temperature_eco_hiver_corrige : fallback float(17) + suppression palier <10.
+# - [Fix]     temperature_moyenne_interieure : reject('==', 0) pour exclure sondes offline.
+# - [Fix]     delta_ademe_recommande : source temperature_confort_JOUR (était temperature_confort).

@@ -1,0 +1,50 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 1. TEMPLATES — DUT TOTAL SDB : SOMME SOUFFLANT + SÈCHE-SERVIETTES   │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteur template agrégeant la durée d'utilisation totale de la SdB :
+# somme de dut_sdb_soufflant + dut_sdb_seche_serviettes.
+# Produit : sensor.dut_sdb_total (déjà présent en prod HA).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - sensor.dut_sdb_soufflant        (sensors/P1_clim_chauffage/P1_DUT_clim_chauffage.yaml)
+# - sensor.dut_sdb_seche_serviettes (même fichier)
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.dut_sdb_soufflant + sensor.dut_sdb_seche_serviettes | dut_sdb_total                                      | L2C2 Énergie Clim (SDB)            |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce capteur n'a PAS d'UM propre (orphelin de type "total") — pas de _kwh_um.
+# - Ne pas le confondre avec les DUT individuels (history_stats dans sensors/).
+# - Unité : h (heures flottantes, ex: 2.75 = 2h45).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert aux graphes apexcharts "D.U.T. & Performance SdB" (page energie-clim)
+
+- sensor:
+
+  # ┌───────────────────────────────────┐
+  # │ 8. SDB                            │
+  # └───────────────────────────────────┘
+
+  # --- dut_sdb_total ---
+  - name: "DUT SdB Total"
+    unique_id: dut_sdb_total
+    unit_of_measurement: "h"
+    icon: mdi:clock-time-eight-outline
+    state: >
+      {{ (states('sensor.dut_sdb_soufflant') | float(0) +
+          states('sensor.dut_sdb_seche_serviettes') | float(0)) | round(2) }}
+
+# annotations_log:
+# [L1]   Titre corrigé : "P1. TEMPLATES" → "PÔLE 1. TEMPLATES" (standard CLAUDE.md)
+# [L2]   TITRE SECONDAIRE ajouté : boîte carrée 37 chars "8. SDB" (était absent)
+# [L3]   Slug tertiaire ajouté : "# --- dut_sdb_total ---" (était absent)
+# [L4]   Somme des 2 DUT SdB (soufflant + sèche-serviettes)
+# [L5]   Déjà présent en production HA — ce fichier documente et formalise la source
+# [L6]   Pas de UM associé (capteur orphelin de type total)

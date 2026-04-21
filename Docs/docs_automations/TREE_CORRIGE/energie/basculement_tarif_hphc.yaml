@@ -1,0 +1,65 @@
+alias: "AUTO. ENERGIE. Basculement Tarif HC/HP — Genelec Appart"
+description: >-
+  Bascule le tarif des 4 UM Genelec Appart HP/HC aux heures de transition :
+  HC : 01h00 et 13h00 / HP : 07h30 et 14h30.
+triggers:
+  - alias: "DÉCLENCHEUR : HC DÉBUT 01H00"
+    trigger: time
+    at: "01:00:00"
+    id: hc_1
+  - alias: "DÉCLENCHEUR : HP DÉBUT 07H30"
+    trigger: time
+    at: "07:30:00"
+    id: hp_1
+  - alias: "DÉCLENCHEUR : HC DÉBUT 13H00"
+    trigger: time
+    at: "13:00:00"
+    id: hc_2
+  - alias: "DÉCLENCHEUR : HP DÉBUT 14H30"
+    trigger: time
+    at: "14:30:00"
+    id: hp_2
+conditions: []
+actions:
+  - choose:
+      - alias: "ACTION : PASSAGE EN HEURES CREUSES"
+        conditions:
+          - condition: trigger
+            id:
+              - hc_1
+              - hc_2
+        sequence:
+          - action: select.select_option                                          # "[L32] modif : utility_meter.select_tariff supprimé → select.select_option"
+            target:
+              entity_id:
+                - select.genelec_appart_hphc_quotidien_um
+                - select.genelec_appart_hphc_hebdomadaire_um
+                - select.genelec_appart_hphc_mensuel_um
+                - select.genelec_appart_hphc_annuel_um
+            data:
+              option: HC                                                          # "[L40] modif : tariff: → option:"
+      - alias: "ACTION : PASSAGE EN HEURES PLEINES"
+        conditions:
+          - condition: trigger
+            id:
+              - hp_1
+              - hp_2
+        sequence:
+          - action: select.select_option                                          # "[L48] modif : utility_meter.select_tariff supprimé → select.select_option"
+            target:
+              entity_id:
+                - select.genelec_appart_hphc_quotidien_um
+                - select.genelec_appart_hphc_hebdomadaire_um
+                - select.genelec_appart_hphc_mensuel_um
+                - select.genelec_appart_hphc_annuel_um
+            data:
+              option: HP                                                          # "[L56] modif : tariff: → option:"
+mode: single
+
+# annotations_log:
+# - [L32] modif : utility_meter.select_tariff → select.select_option
+#   (breaking change HA : utility_meter.select_tariff supprimé — basculement
+#   tarifaire maintenant via l'entité select native + select.select_option)
+# - [L40] modif : data.tariff → data.option (clé renommée avec le nouveau service)
+# - [L48] modif : idem HC → HP
+# - [L56] modif : idem

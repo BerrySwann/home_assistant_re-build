@@ -1,0 +1,32 @@
+id: '1767179354047'
+alias: ÉNERGIE - SURVEILLANCE GROS ÉLECTRO EN HP
+description: 'Alerte si le lave-linge ou le lave-vaisselle tourne en Heures Pleines.'
+triggers:
+- alias: 'DÉCLENCHEUR : LAVE-LINGE DÉMARRE'
+  trigger: numeric_state
+  entity_id: sensor.prise_lave_linge_nous_power
+  above: 100
+  for:
+    minutes: 2
+- alias: 'DÉCLENCHEUR : LAVE-VAISSELLE DÉMARRE'
+  trigger: numeric_state
+  entity_id: sensor.prise_lave_linge_nous_power
+  above: 100
+  for:
+    minutes: 2
+conditions:
+- alias: 'CONDITION : NOUS SOMMES EN HEURES PLEINES'
+  condition: state
+  entity_id: binary_sensor.heures_creuses_electriques
+  state: 'off'
+actions:
+- alias: 'ACTION : NOTIFICATION SUR LE POCO'
+  action: notify.mobile_app_eric
+  data:
+    title: ⚡ Alerte Conso. HP
+    message: 'Un appareil de gros électroménager vient de démarrer en Heures Pleines
+      ! Il est {{ now().strftime(''%H:%M'') }}.  Vérifiez si le départ différé a bien
+      été activé.
+
+      '
+mode: single

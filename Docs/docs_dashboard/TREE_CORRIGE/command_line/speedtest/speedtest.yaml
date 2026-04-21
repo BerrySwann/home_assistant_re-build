@@ -1,0 +1,57 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ COMMAND_LINE : RÉSEAU & SPEEDTEST                                        │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Lance un test de vitesse réseau (ping, download, upload) via l'outil CLI
+# officiel Speedtest (Ookla) et retourne un JSON structuré comme état du sensor.
+# Inclus via : command_line: !include_dir_merge_list command_line/ (configuration.yaml)
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Binaire : /config/3rdparty/speedtest/speedtest (CLI Ookla officiel)
+# - Serveur forcé : -s 48616 (Free / Freebox — serveur Vence/PACA)
+# - Format de sortie : --format=json
+# - Données extraites via value_template → dictionnaire JSON :
+#   ping, download (bps), upload (bps), isp, country, location, id, server_name, server_host
+# - scan_interval: 3600 (toutes les heures)
+# - command_timeout: 60 (le test peut prendre ~30s)
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | speedtest-cli (Internet) | speedtest-cli --json → stdout                      | speedtest_cli_data (JSON brut)                     | ST_01_SpeedTest.yaml → L4C2        |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Le binaire CLI doit être présent dans /config/3rdparty/speedtest/ et exécutable.
+#   Télécharger depuis : https://www.speedtest.net/fr/apps/cli
+# - --accept-license et --accept-gdpr sont OBLIGATOIRES (sinon le CLI interrompt et demande confirmation).
+# - Les valeurs download/upload sont en bps (bits/s) → diviser par 1 000 000 pour Mbps.
+# - Si le serveur -s 48616 est hors ligne, supprimer ce paramètre pour sélection auto.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert à la remontée d'info pour la vignette : [L4C1 Freebox Pop / Réseau]
+
+# --- speedtest_cli_data ---
+- sensor:
+    name: "SpeedTest CLI Data"
+    unique_id: speedtest_cli_data
+    command: "/config/3rdparty/speedtest/speedtest --format=json --accept-license --accept-gdpr -s 48616"
+    scan_interval: 3600
+    command_timeout: 60
+    value_template: >-
+      {{
+        {
+          "ping": value_json.ping.latency,
+          "download": value_json.download.bandwidth,
+          "upload": value_json.upload.bandwidth,
+          "isp": value_json.isp,
+          "country": value_json.server.country,
+          "location": value_json.server.location,
+          "id": value_json.server.id,
+          "server_name": value_json.server.name,
+          "server_host": value_json.server.host
+        }
+        | to_json
+      }}

@@ -1,0 +1,60 @@
+id: '1766776971420'
+alias: Gestion Optimisée du Store Bureau
+description: 'Priorité Sommeil et Anti-Reflet. Sécurité : Bloque tout mouvement si la fenêtre est ouverte.'
+triggers:
+- id: reveil
+  trigger: time
+  at: 07:00:00
+- trigger: state
+  entity_id: sensor.th_balcon_nord_temperature
+- trigger: sun
+  event: sunset
+- id: fenetre
+  trigger: state
+  entity_id: binary_sensor.contact_fenetre_bureau_sonoff_contact
+  to: 'off'
+conditions:
+- alias: 'SÉCURITÉ : La fenêtre doit être FERMÉE pour bouger le store'
+  condition: state
+  entity_id: binary_sensor.contact_fenetre_bureau_sonoff_contact
+  state: 'off'
+actions:
+- choose:
+  - alias: 'SCÉNARIO A : Ouverture Travail (Printemps/Automne)'
+    conditions:
+    - condition: time
+      after: 07:00:00
+    - condition: sun
+      before: sunset
+    - condition: numeric_state
+      entity_id: sensor.th_balcon_nord_temperature
+      above: 18
+      below: 25
+    - condition: numeric_state
+      entity_id: cover.store_bureau
+      attribute: current_position
+      below: 1
+    sequence:
+    - action: cover.open_cover
+      target:
+        entity_id: cover.store_bureau
+  - alias: 'SCÉNARIO B : Fermeture Chaleur (Été)'
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.th_balcon_nord_temperature
+      above: 25
+    - condition: sun
+      before: sunset
+    sequence:
+    - action: cover.close_cover
+      target:
+        entity_id: cover.store_bureau
+  - alias: 'SCÉNARIO C : Fermeture Nuit'
+    conditions:
+    - condition: sun
+      after: sunset
+    sequence:
+    - action: cover.close_cover
+      target:
+        entity_id: cover.store_bureau
+mode: single

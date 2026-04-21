@@ -1,0 +1,101 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 1. TEMPLATE : PUISSANCE MOYENNE TOTALE (W) P1 — AMHQ                │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensors template calculant la somme des 6 puissances moyennes glissantes
+# P1 (clim + radiateur + soufflant + sèche-serviette) sur 4 périodes AMHQ.
+# Ces capteurs agrègent les sorties de P1_avg.yaml en un total unique par
+# période. 4 sensors (1 par période).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources : sensor.*_avg_watts_{période} (P1_avg.yaml)
+# - Formule  : somme des 6 avg_watts individuels de la même période
+# - Quotidien  : depuis minuit
+# - Mensuel    : depuis le 1er du mois
+# - Hebdo      : depuis lundi 00h00
+# - Annuel     : depuis le 1er janvier 00h00
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ces capteurs ne sont PAS des UM — ce sont des templates de synthèse.
+# - En début de période (sources = 0), le total retourne aussi 0.
+# - Ne pas confondre avec conso_clim_rad_total_* (kWh UM) de P1_TOTAL_AMHQ.yaml.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C2 Conso Énergie Clim/Radiateur/Soufflant (courbe "Moy. depuis Minuit")
+
+- sensor:
+
+    # ┌───────────────────────────────────┐
+    # │ TOTAL AVG P1 — QUOTIDIEN          │
+    # └───────────────────────────────────┘
+
+    # --- clim_rad_total_avg_watts_quotidien ---
+    - name: "Clim. Rad. Total Avg Watts Quotidien"
+      unique_id: clim_rad_total_avg_watts_quotidien
+      device_class: power
+      unit_of_measurement: "W"
+      state: >
+        {{ (states('sensor.clim_salon_avg_watts_quotidien') | float(0) +
+          states('sensor.radiateur_elec_cuisine_avg_watts_quotidien') | float(0) +
+          states('sensor.clim_bureau_avg_watts_quotidien') | float(0) +
+          states('sensor.soufflant_sdb_avg_watts_quotidien') | float(0) +
+          states('sensor.seche_serviette_sdb_avg_watts_quotidien') | float(0) +
+          states('sensor.clim_chambre_avg_watts_quotidien') | float(0)) | round(3) }}
+
+    # ┌───────────────────────────────────┐
+    # │ TOTAL AVG P1 — MENSUEL            │
+    # └───────────────────────────────────┘
+
+    # --- clim_rad_total_avg_watts_mensuel ---
+    - name: "Clim. Rad. Total Avg Watts Mensuel"
+      unique_id: clim_rad_total_avg_watts_mensuel
+      device_class: power
+      unit_of_measurement: "W"
+      state: >
+        {{ (states('sensor.clim_salon_avg_watts_mensuel') | float(0) +
+          states('sensor.radiateur_elec_cuisine_avg_watts_mensuel') | float(0) +
+          states('sensor.clim_bureau_avg_watts_mensuel') | float(0) +
+          states('sensor.soufflant_sdb_avg_watts_mensuel') | float(0) +
+          states('sensor.seche_serviette_sdb_avg_watts_mensuel') | float(0) +
+          states('sensor.clim_chambre_avg_watts_mensuel') | float(0)) | round(3) }}
+
+    # ┌───────────────────────────────────┐
+    # │ TOTAL AVG P1 — HEBDOMADAIRE       │
+    # └───────────────────────────────────┘
+
+    # --- clim_rad_total_avg_watts_hebdomadaire ---
+    - name: "Clim. Rad. Total Avg Watts Hebdomadaire"
+      unique_id: clim_rad_total_avg_watts_hebdomadaire
+      device_class: power
+      unit_of_measurement: "W"
+      state: >
+        {{ (states('sensor.clim_salon_avg_watts_hebdomadaire') | float(0) +
+          states('sensor.radiateur_elec_cuisine_avg_watts_hebdomadaire') | float(0) +
+          states('sensor.clim_bureau_avg_watts_hebdomadaire') | float(0) +
+          states('sensor.soufflant_sdb_avg_watts_hebdomadaire') | float(0) +
+          states('sensor.seche_serviette_sdb_avg_watts_hebdomadaire') | float(0) +
+          states('sensor.clim_chambre_avg_watts_hebdomadaire') | float(0)) | round(3) }}
+
+    # ┌───────────────────────────────────┐
+    # │ TOTAL AVG P1 — ANNUEL             │
+    # └───────────────────────────────────┘
+
+    # --- clim_rad_total_avg_watts_annuel ---
+    - name: "Clim. Rad. Total Avg Watts Annuel"
+      unique_id: clim_rad_total_avg_watts_annuel
+      device_class: power
+      unit_of_measurement: "W"
+      state: >
+        {{ (states('sensor.clim_salon_avg_watts_annuel') | float(0) +
+          states('sensor.radiateur_elec_cuisine_avg_watts_annuel') | float(0) +
+          states('sensor.clim_bureau_avg_watts_annuel') | float(0) +
+          states('sensor.soufflant_sdb_avg_watts_annuel') | float(0) +
+          states('sensor.seche_serviette_sdb_avg_watts_annuel') | float(0) +
+          states('sensor.clim_chambre_avg_watts_annuel') | float(0)) | round(3) }}
+
+# annotations_log:
+# Nouveau fichier — extrait de P1_TOTAL_AMHQ.yaml (règle 1 fonction = 1 fichier)
+# +hebdomadaire : clim_rad_total_avg_watts_hebdomadaire (sources P1_avg.yaml)
+# +annuel       : clim_rad_total_avg_watts_annuel (sources P1_avg.yaml)
+# Total : 4 sensors (1 par période AMHQ)

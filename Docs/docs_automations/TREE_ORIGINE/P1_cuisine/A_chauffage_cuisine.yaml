@@ -1,0 +1,118 @@
+id: '1766775970172'
+alias: A - Chauffage Cuisine (entre 4h45 & 7h LMMJ ou 5:45h & 8h VSD avec T° 19,9° <-> 20.5°)
+description: 'Allume ou éteint le chauffage selon la température (19,9° <-> 20.5°)  aux conditions horaires spécifiques et si Eric OU Mamour est à la maison.\n'
+triggers:
+- trigger: time
+  at: 04:45:00
+- trigger: time
+  at: 05:45:00
+- trigger: time
+  at: 07:00:00
+- trigger: time
+  at: 08:00:00
+- trigger: numeric_state
+  entity_id: sensor.th_cuisine_temperature
+  below: 19.9
+- trigger: numeric_state
+  entity_id: sensor.th_cuisine_temperature
+  above: 20.5
+conditions:
+- alias: Présence Eric ou Mamour
+  condition: or
+  conditions:
+  - condition: zone
+    entity_id: person.eric
+    zone: zone.home
+  - condition: zone
+    entity_id: person.mamour
+    zone: zone.home
+- alias: Vérification Plage Horaire et Jour
+  condition: or
+  conditions:
+  - condition: and
+    conditions:
+    - condition: time
+      after: 04:45:00
+      before: 07:00:01
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+  - condition: and
+    conditions:
+    - condition: time
+      after: 05:45:00
+      before: 08:00:01
+      weekday:
+      - fri
+      - sat
+      - sun
+actions:
+- choose:
+  - alias: 'ARRÊT FORCE : Fin de période Semaine (07:00)'
+    conditions:
+    - condition: template
+      value_template: '{{ now().hour == 7 and now().minute == 0 }}'
+    - condition: time
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+    sequence:
+    - action: climate.set_hvac_mode
+      target:
+        entity_id: climate.radiateur_cuisine
+      data:
+        hvac_mode: 'off'
+    - action: notify.mobile_app_eric
+      data:
+        message: /!\ RADIATEUR CUISINE est 'OFF' FORCE (Fin Semaine) /!\
+  - alias: 'ARRÊT FORCE : Fin de période Week-end (08:00)'
+    conditions:
+    - condition: template
+      value_template: '{{ now().hour == 8 and now().minute == 0 }}'
+    - condition: time
+      weekday:
+      - fri
+      - sat
+      - sun
+    sequence:
+    - action: climate.set_hvac_mode
+      target:
+        entity_id: climate.radiateur_cuisine
+      data:
+        hvac_mode: 'off'
+    - action: notify.mobile_app_eric
+      data:
+        message: /!\ RADIATEUR CUISINE est 'OFF' FORCE (Fin W-E) /!\
+  - alias: 'ACTION : Allumage (Temp < 19.9)'
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.th_cuisine_temperature
+      below: 19.9
+    sequence:
+    - action: climate.set_hvac_mode
+      target:
+        entity_id: climate.radiateur_cuisine
+      data:
+        hvac_mode: heat
+    - action: notify.mobile_app_eric
+      data:
+        message: /!\ RADIATEUR CUISINE est 'ON' /!\
+  - alias: 'ACTION : Extinction (Temp > 20.5)'
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.th_cuisine_temperature
+      above: 20.5
+    sequence:
+    - action: climate.set_hvac_mode
+      target:
+        entity_id: climate.radiateur_cuisine
+      data:
+        hvac_mode: 'off'
+    - action: notify.mobile_app_eric
+      data:
+        message: /!\ RADIATEUR CUISINE est 'OFF' /!\
+mode: single

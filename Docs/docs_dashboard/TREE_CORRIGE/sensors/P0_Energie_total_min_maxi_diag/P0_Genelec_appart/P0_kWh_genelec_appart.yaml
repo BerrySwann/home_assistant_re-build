@@ -1,0 +1,52 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0 — CAPTEUR INTÉGRATION kWh : ÉNERGIE TOTALE APPARTEMENT            │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Intégration Riemann (méthode left) de sensor.general_electric_appart_energy
+# vers un capteur kWh local stable (sensor.genelec_appart_totale_kwh).
+# Ce capteur constitue la SOURCE des utility_meter
+# utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ_cost.yaml
+# et 03_UM_genelec_appart_HPHC_AMHQ.yaml
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source   : sensor.general_electric_appart_energy (index capteur NODON — cumulatif)
+# - Formule  : ∫ source dt → kWh local (méthode left, arrondi 3 décimales)
+# - Objectif : isoler les utility_meter des aberrations/resets capteur NODON.
+#   Le capteur Riemann démarre à 0 à la création et s'accumule sans RAZ auto.
+#   La gestion périodique (AMHQ) relève des utility_meter P0.
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Ecojoko        | sensor.lixee_tic_power                             | genelec_appart_kwh_cumulative                      | 01_UM_AMHQ.yaml → L2C1             |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce capteur démarre à 0 à la création — pas de back-fill historique.
+# - Méthode LEFT choisie (vs trapezoidal) : plus stable sur les variations
+#   brusques ou les décrochages de source.
+# - Si HA redémarre, un petit écart peut apparaître sur la dernière mesure —
+#   comportement normal avec la méthode left.
+# - Les UM P0 (01_UM_AMHQ_cost.yaml et 03_UM_genelec_appart_HPHC_AMHQ.yaml)
+#   pointent déjà sur sensor.genelec_appart_totale_kwh — aucune action requise.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Alimente via P0_UM_AMHQ → L2C1 (Conso Énergie Générale)
+# - Page Énergie ApexCharts  : onglets Journalier / Hebdomadaire / Mensuel (kWh)
+
+# ┌───────────────────────────────────┐
+# │ 0. ENERGIE APPARTEMENT            │
+# └───────────────────────────────────┘
+
+# --- genelec_appart_totale_kwh ---
+- platform: integration
+  source: sensor.general_electric_appart_power
+  name: "Genelec Appart Totale kWh"
+  unique_id: genelec_appart_totale_kwh
+  method: left
+  unit_prefix: k
+  unit_time: h
+  round: 3
+
