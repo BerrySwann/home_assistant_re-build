@@ -1,0 +1,60 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. SENSORS : STATISTIQUES MIN/MAX/MOY — PUISSANCE APPART TEMPS RÉEL │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs de statistiques calculant la consommation minimale, maximale et
+# moyenne sur la puissance temps réel de l'appartement. Période glissante
+# de 24h pour min/max et 1h pour la moyenne. Ces capteurs permettent de suivre
+# les extrêmes de consommation et la tendance horaire.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : sensor.genelec_appart_quotidien_kwh_um (UM kWh — remise à 0 à minuit).
+# - Conso Mini  : min sur 24h (value_min) → 0 juste après minuit (reset UM).
+# - Conso Maxi  : max sur 24h (value_max) → total journalier accumulé (pic).
+# - Conso Moy 1h: moyenne sur 1h (mean) → consommation kWh lissée sur la dernière heure.
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ces capteurs opèrent sur l'ÉNERGIE (kWh), pas sur la puissance (W).
+#   Ne pas les utiliser comme sources pour un utility_meter (déjà un UM).
+# - La valeur Mini sera toujours 0 (reset minuit) — utile comme marqueur de reset.
+# - La moyenne 1h peut être indisponible pendant les 60 premières minutes
+#   après le démarrage de HA (pas assez d'échantillons).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (suivi temps réel min/max/moy).
+
+# --- genelec_appart_conso_mini_24h ---
+- platform: statistics
+  name: "Genelec Appart Conso Mini 24h"
+  unique_id: genelec_appart_conso_mini_24h
+  entity_id: sensor.general_electric_appart_power
+  state_characteristic: value_min
+  max_age:
+    hours: 24
+
+# --- genelec_appart_conso_maxi_24h ---
+- platform: statistics
+  name: "Genelec Appart Conso Maxi 24h"
+  unique_id: genelec_appart_conso_maxi_24h
+  entity_id: sensor.general_electric_appart_power
+  state_characteristic: value_max
+  max_age:
+    hours: 24
+
+# --- genelec_appart_conso_moyenne_1h ---
+- platform: statistics
+  name: "Genelec Appart Conso Moyenne 1h"
+  unique_id: genelec_appart_conso_moyenne_1h
+  entity_id: sensor.general_electric_appart_power
+  state_characteristic: mean
+  precision: 1
+  max_age:
+    hours: 1
+  
+# annotations_log:
+# - [Création] 3 statistics sensors min/max/moy — source ecojoko_consommation_temps_reel
+# - [modif] source → general_electric_appart_power (NODON — remplacement Ecojoko)
+# - [modif] source → sensor.genelec_appart_quotidien_kwh_um (UM kWh reset minuit)
+#   Logique : value_max 24h = total journalier / mean 1h = conso lissée dernière heure
+# - [CONTEXTE] Ecojoko entièrement retiré — remplacé par NODON

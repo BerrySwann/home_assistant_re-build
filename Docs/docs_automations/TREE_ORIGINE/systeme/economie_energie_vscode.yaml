@@ -1,0 +1,63 @@
+id: '1766779612030'
+alias: Système - Économie Énergie VS Code
+description: "Coupe VS Code si le CPU dépasse 10% ou s'il est inactif, avec confirmation (H24)."
+triggers:
+- trigger: numeric_state
+  entity_id: sensor.system_monitor_utilisation_du_processeur
+  above: 10
+  for:
+    minutes: 10
+- trigger: numeric_state
+  entity_id: sensor.studio_code_server_cpu_percent
+  below: 0.8
+  for:
+    minutes: 15
+conditions:
+- condition: state
+  entity_id: binary_sensor.studio_code_server_running
+  state: 'on'
+actions:
+- action: notify.mobile_app_eric
+  data:
+    title: 🔋 Alerte Énergie - Mini-PC
+    message: 'Il est {{ now().strftime(''%H:%M'') }}. Le CPU global est à {{ states(''sensor.system_monitor_utilisation_du_processeur'')
+      }}%. On coupe VS Code pour économiser ?
+
+      '
+    data:
+      actions:
+      - action: STOP_VSC
+        title: Oui, couper
+      - action: KEEP_VSC
+        title: Non, je travaille encore
+- wait_for_trigger:
+  - trigger: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: STOP_VSC
+  - trigger: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: KEEP_VSC
+  timeout: 00:05:00
+  continue_on_timeout: true
+- choose:
+  - alias: 'Action : STOP (ou timeout)'
+    conditions:
+    - condition: template
+      value_template: '{{ wait.trigger == none or wait.trigger.event.data.action ==
+        ''STOP_VSC'' }}'
+    sequence:
+    - action: hassio.addon_stop
+      data:
+        addon: a0d7b954_vscode
+    - action: notify.mobile_app_eric
+      data:
+        message: VS Code éteint automatiquement (Économie d'énergie).
+  - alias: 'Action : KEEP'
+    conditions:
+    - condition: template
+      value_template: '{{ wait.trigger.event.data.action == ''KEEP_VSC'' }}'
+    sequence:
+    - stop: L'utilisateur code encore, on laisse tourner.
+mode: single

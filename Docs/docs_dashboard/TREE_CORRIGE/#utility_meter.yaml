@@ -1,0 +1,994 @@
+# ╭──────────────────────────────────────────────────────────────────────╮
+# │         PÔLE 1. ÉNERGIE: [_um] CHAUFFAGE & CLIMATISATION             │
+# ╰──────────────────────────────────────────────────────────────────────╯
+
+#┌───────────────────────────────────┐
+#│         4. SALON                  │
+#└───────────────────────────────────┘
+
+# --- clim_salon ---
+clim_salon_annuel_um:
+  source: sensor.clim_salon_nous_power
+  cycle: yearly
+
+clim_salon_mensuel_um:
+  source: sensor.clim_salon_nous_power
+  cycle: monthly
+
+clim_salon_hebdomadaire_um:
+  source: sensor.clim_salon_nous_power
+  cycle: weekly
+
+clim_salon_quotidien_um:
+  source: sensor.clim_salon_nous_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         5. CUISINE                │
+#└───────────────────────────────────┘
+
+# --- radiateur_cuisine ---
+radiateur_elec_cuisine_annuel_um:
+  source: sensor.radiateur_elec_cuisine_power
+  cycle: yearly
+
+radiateur_elec_cuisine_mensuel_um:
+  source: sensor.radiateur_elec_cuisine_power
+  cycle: monthly
+
+radiateur_elec_cuisine_hebdomadaire_um:
+  source: sensor.radiateur_elec_cuisine_power
+  cycle: weekly
+
+radiateur_elec_cuisine_quotidien_um:
+  source: sensor.radiateur_elec_cuisine_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         7. BUREAU                 │
+#└───────────────────────────────────┘
+
+# --- clim_bureau ---
+clim_bureau_annuel_um:
+  source: sensor.clim_bureau_nous_power
+  cycle: yearly
+
+clim_bureau_mensuel_um:
+  source: sensor.clim_bureau_nous_power
+  cycle: monthly
+
+clim_bureau_hebdomadaire_um:
+  source: sensor.clim_bureau_nous_power
+  cycle: weekly
+
+clim_bureau_quotidien_um:
+  source: sensor.clim_bureau_nous_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         8. SDB                    │
+#└───────────────────────────────────┘
+
+# --- soufflant_sdb ---
+soufflant_sdb_annuel_um:
+  source: sensor.prise_soufflant_salle_de_bain_nous_power
+  cycle: yearly
+
+soufflant_sdb_mensuel_um:
+  source: sensor.prise_soufflant_salle_de_bain_nous_power
+  cycle: monthly
+
+soufflant_sdb_hebdomadaire_um:
+  source: sensor.prise_soufflant_salle_de_bain_nous_power
+  cycle: weekly
+
+soufflant_sdb_quotidien_um:
+  source: sensor.prise_soufflant_salle_de_bain_nous_power
+  cycle: daily
+
+# --- seche_serviette_sdb ---
+seche_serviette_sdb_annuel_um:
+  source: sensor.prise_seche_serviette_salle_de_bain_nous_power
+  cycle: yearly
+
+seche_serviette_sdb_mensuel_um:
+  source: sensor.prise_seche_serviette_salle_de_bain_nous_power
+  cycle: monthly
+
+seche_serviette_sdb_hebdomadaire_um:
+  source: sensor.prise_seche_serviette_salle_de_bain_nous_power
+  cycle: weekly
+
+seche_serviette_sdb_quotidien_um:
+  source: sensor.prise_seche_serviette_salle_de_bain_nous_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         9. CHAMBRE                │
+#└───────────────────────────────────┘
+
+# --- clim_chambre ---
+clim_chambre_annuel_um:
+  source: sensor.clim_chambre_nous_power
+  cycle: yearly
+
+clim_chambre_mensuel_um:
+  source: sensor.clim_chambre_nous_power
+  cycle: monthly
+
+clim_chambre_hebdomadaire_um:
+  source: sensor.clim_chambre_nous_power
+  cycle: weekly
+
+clim_chambre_quotidien_um:
+  source: sensor.clim_chambre_nous_power
+  cycle: daily
+
+# ╭──────────────────────────────────────────────────────────────────────╮
+# │     PÔLE 2. ÉNERGIE: [kWh] PRISES CONNECTÉES -> (Daily + Monthly)   │
+# ╰──────────────────────────────────────────────────────────────────────╯
+
+#┌───────────────────────────────────┐
+#│         1. ENTRÉE                 │
+#└───────────────────────────────────┘
+
+# --- box_internet_entree ---
+box_internet_annuel_um:
+  source: sensor.prise_box_internet_ikea_power
+  cycle: yearly
+
+box_internet_mensuel_um:
+  source: sensor.prise_box_internet_ikea_power
+  cycle: monthly
+
+box_internet_hebdomadaire_um:
+  source: sensor.prise_box_internet_ikea_power
+  cycle: weekly
+
+box_internet_quotidien_um:
+  source: sensor.prise_box_internet_ikea_power
+  cycle: daily
+
+# --- horloge_entree ---
+horloge_annuel_um:
+  source: sensor.prise_horloge_ikea_power
+  cycle: yearly
+
+horloge_mensuel_um:
+  source: sensor.prise_horloge_ikea_power
+  cycle: monthly
+
+horloge_hebdomadaire_um:
+  source: sensor.prise_horloge_ikea_power
+  cycle: weekly
+
+horloge_quotidien_um:
+  source: sensor.prise_horloge_ikea_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         4. SALON                  │
+#└───────────────────────────────────┘
+
+# --- pc_s_gege_salon ---
+pc_s_gege_salon_annuel_um:
+  source: sensor.prise_pc_s_gege_ikea_power
+  cycle: yearly
+
+pc_s_gege_salon_mensuel_um:
+  source: sensor.prise_pc_s_gege_ikea_power
+  cycle: monthly
+
+pc_s_gege_salon_hebdomadaire_um:
+  source: sensor.prise_pc_s_gege_ikea_power
+  cycle: weekly
+
+pc_s_gege_salon_quotidien_um:
+  source: sensor.prise_pc_s_gege_ikea_power
+  cycle: daily
+
+# --- salon_chargeur ---
+salon_chargeur_annuel_um:
+  source: sensor.prise_salon_chargeur_nous_power
+  cycle: yearly
+
+salon_chargeur_mensuel_um:
+  source: sensor.prise_salon_chargeur_nous_power
+  cycle: monthly
+
+salon_chargeur_hebdomadaire_um:
+  source: sensor.prise_salon_chargeur_nous_power
+  cycle: weekly
+
+salon_chargeur_quotidien_um:
+  source: sensor.prise_salon_chargeur_nous_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         5. CUISINE                │
+#└───────────────────────────────────┘
+
+# --- micro_ondes_cuisine ---
+micro_ondes_cuisine_annuel_um:
+  source: sensor.prise_four_micro_ondes_nous_power
+  cycle: yearly
+
+micro_ondes_cuisine_mensuel_um:
+  source: sensor.prise_four_micro_ondes_nous_power
+  cycle: monthly
+
+micro_ondes_cuisine_hebdomadaire_um:
+  source: sensor.prise_four_micro_ondes_nous_power
+  cycle: weekly
+
+micro_ondes_cuisine_quotidien_um:
+  source: sensor.prise_four_micro_ondes_nous_power
+  cycle: daily
+
+# --- lave_linge_cuisine ---
+lave_linge_cuisine_annuel_um:
+  source: sensor.prise_lave_linge_nous_power
+  cycle: yearly
+
+lave_linge_cuisine_mensuel_um:
+  source: sensor.prise_lave_linge_nous_power
+  cycle: monthly
+
+lave_linge_cuisine_hebdomadaire_um:
+  source: sensor.prise_lave_linge_nous_power
+  cycle: weekly
+
+lave_linge_cuisine_quotidien_um:
+  source: sensor.prise_lave_linge_nous_power
+  cycle: daily
+
+# --- lave_vaisselle_cuisine ---
+lave_vaisselle_cuisine_annuel_um:
+  source: sensor.prise_lave_vaisselle_nous_power
+  cycle: yearly
+
+lave_vaisselle_cuisine_mensuel_um:
+  source: sensor.prise_lave_vaisselle_nous_power
+  cycle: monthly
+
+lave_vaisselle_cuisine_hebdomadaire_um:
+  source: sensor.prise_lave_vaisselle_nous_power
+  cycle: weekly
+
+lave_vaisselle_cuisine_quotidien_um:
+  source: sensor.prise_lave_vaisselle_nous_power
+  cycle: daily
+
+# --- airfryer_cuisine ---
+airfryer_cuisine_annuel_um:
+  source: sensor.prise_airfryer_ninja_nous_power
+  cycle: yearly
+
+airfryer_cuisine_mensuel_um:
+  source: sensor.prise_airfryer_ninja_nous_power
+  cycle: monthly
+
+airfryer_cuisine_hebdomadaire_um:
+  source: sensor.prise_airfryer_ninja_nous_power
+  cycle: weekly
+
+airfryer_cuisine_quotidien_um:
+  source: sensor.prise_airfryer_ninja_nous_power
+  cycle: daily
+
+# --- four_plaque_cuisine ---
+four_plaque_cuisine_annuel_um:
+  source: sensor.four_et_plaque_de_cuisson_power
+  cycle: yearly
+
+four_plaque_cuisine_mensuel_um:
+  source: sensor.four_et_plaque_de_cuisson_power
+  cycle: monthly
+
+four_plaque_cuisine_hebdomadaire_um:
+  source: sensor.four_et_plaque_de_cuisson_power
+  cycle: weekly
+
+four_plaque_cuisine_quotidien_um:
+  source: sensor.four_et_plaque_de_cuisson_power
+  cycle: daily
+
+# --- frigo_cuisine ---
+frigo_cuisine_annuel_um:
+  source: sensor.prise_frigo_cuisine_nous_power
+  cycle: yearly
+
+frigo_cuisine_mensuel_um:
+  source: sensor.prise_frigo_cuisine_nous_power
+  cycle: monthly
+
+frigo_cuisine_hebdomadaire_um:
+  source: sensor.prise_frigo_cuisine_nous_power
+  cycle: weekly
+
+frigo_cuisine_quotidien_um:
+  source: sensor.prise_frigo_cuisine_nous_power
+  cycle: daily
+
+# --- congel_cuisine ---
+congel_cuisine_annuel_um:
+  source: sensor.prise_congelateur_cuisine_nous_power
+  cycle: yearly
+
+congel_cuisine_mensuel_um:
+  source: sensor.prise_congelateur_cuisine_nous_power
+  cycle: monthly
+
+congel_cuisine_hebdomadaire_um:
+  source: sensor.prise_congelateur_cuisine_nous_power
+  cycle: weekly
+
+congel_cuisine_quotidien_um:
+  source: sensor.prise_congelateur_cuisine_nous_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         7. BUREAU                 │
+#└───────────────────────────────────┘
+
+# --- bureau_pc ---
+bureau_pc_annuel_um:
+  source: sensor.prise_bureau_pc_ikea_power
+  cycle: yearly
+
+bureau_pc_mensuel_um:
+  source: sensor.prise_bureau_pc_ikea_power
+  cycle: monthly
+
+bureau_pc_hebdomadaire_um:
+  source: sensor.prise_bureau_pc_ikea_power
+  cycle: weekly
+
+bureau_pc_quotidien_um:
+  source: sensor.prise_bureau_pc_ikea_power
+  cycle: daily
+
+# --- fer_a_repasser_bureau ---
+fer_a_repasser_bureau_annuel_um:
+  source: sensor.prise_bureau_fer_a_repasser_nous_power
+  cycle: yearly
+
+fer_a_repasser_bureau_mensuel_um:
+  source: sensor.prise_bureau_fer_a_repasser_nous_power
+  cycle: monthly
+
+fer_a_repasser_bureau_hebdomadaire_um:
+  source: sensor.prise_bureau_fer_a_repasser_nous_power
+  cycle: weekly
+
+fer_a_repasser_bureau_quotidien_um:
+  source: sensor.prise_bureau_fer_a_repasser_nous_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         9. CHAMBRE                │
+#└───────────────────────────────────┘
+
+# --- tete_de_lit_chambre ---
+tete_de_lit_chambre_annuel_um:
+  source: sensor.prise_tete_de_lit_chambre_power
+  cycle: yearly
+
+tete_de_lit_chambre_mensuel_um:
+  source: sensor.prise_tete_de_lit_chambre_power
+  cycle: monthly
+
+tete_de_lit_chambre_hebdomadaire_um:
+  source: sensor.prise_tete_de_lit_chambre_power
+  cycle: weekly
+
+tete_de_lit_chambre_quotidien_um:
+  source: sensor.prise_tete_de_lit_chambre_power
+  cycle: daily
+
+# --- tv_chambre ---
+tv_chambre_annuel_um:
+  source: sensor.prise_tv_chambre_nous_power
+  cycle: yearly
+
+tv_chambre_mensuel_um:
+  source: sensor.prise_tv_chambre_nous_power
+  cycle: monthly
+
+tv_chambre_hebdomadaire_um:
+  source: sensor.prise_tv_chambre_nous_power
+  cycle: weekly
+
+tv_chambre_quotidien_um:
+  source: sensor.prise_tv_chambre_nous_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         10. AUTRE                 │
+#└───────────────────────────────────┘
+
+# --- all_standby ---
+all_standby_annuel_um:
+  source: sensor.all_standby_power
+  cycle: yearly
+
+all_standby_mensuel_um:
+  source: sensor.all_standby_power
+  cycle: monthly
+
+all_standby_hebdomadaire_um:
+  source: sensor.all_standby_power
+  cycle: weekly
+
+all_standby_quotidien_um:
+  source: sensor.all_standby_power
+  cycle: daily
+
+# --- mini_pc ---
+mini_pc_annuel_um:
+  source: sensor.prise_mini_pc_ikea_power
+  cycle: yearly
+
+mini_pc_mensuel_um:
+  source: sensor.prise_mini_pc_ikea_power
+  cycle: monthly
+
+mini_pc_hebdomadaire_um:
+  source: sensor.prise_mini_pc_ikea_power
+  cycle: weekly
+
+mini_pc_quotidien_um:
+  source: sensor.prise_mini_pc_ikea_power
+  cycle: daily
+
+# ╭──────────────────────────────────────────────────────────────────────╮
+# │     PÔLE 3. ÉCLAIRAGE : PAR ZONE PAR PIECE ou A L'UNITÉ              │
+# ╰──────────────────────────────────────────────────────────────────────╯
+
+#┌───────────────────────────────────┐
+#│     ZONE 4. (5x) SALON            │
+#└───────────────────────────────────┘
+
+# --- eclairage_salon_5 ---
+eclairage_salon_5_annuel_um:
+  source: sensor.eclairage_salon_5_energie
+  cycle: yearly
+
+eclairage_salon_5_mensuel_um:
+  source: sensor.eclairage_salon_5_energie
+  cycle: monthly
+
+eclairage_salon_5_hebdomadaire_um:
+  source: sensor.eclairage_salon_5_energie
+  cycle: weekly
+
+eclairage_salon_5_quotidien_um:
+  source: sensor.eclairage_salon_5_energie
+  cycle: daily
+
+# ╭───────────────────────────────────────────────────────────────╮
+# │ ZONE. ((3x) Entrée, cuisine & couloir) (HOME)                 │
+# ╰───────────────────────────────────────────────────────────────╯
+
+# --- eclairage_appart_3 ---
+eclairage_appart_3_annuel_um:
+  source: sensor.eclairage_appart_3_energie
+  cycle: yearly
+
+eclairage_appart_3_mensuel_um:
+  source: sensor.eclairage_appart_3_energie
+  cycle: monthly
+
+eclairage_appart_3_hebdomadaire_um:
+  source: sensor.eclairage_appart_3_energie
+  cycle: weekly
+
+eclairage_appart_3_quotidien_um:
+  source: sensor.eclairage_appart_3_energie
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│     ZONE 5. (1x) CUISINE          │
+#└───────────────────────────────────┘
+
+# --- eclairage_cuisine_1 ---
+eclairage_cuisine_1_annuel_um:
+  source: sensor.eclairage_cuisine_1_energie
+  cycle: yearly
+
+eclairage_cuisine_1_mensuel_um:
+  source: sensor.eclairage_cuisine_1_energie
+  cycle: monthly
+
+eclairage_cuisine_1_hebdomadaire_um:
+  source: sensor.eclairage_cuisine_1_energie
+  cycle: weekly
+
+eclairage_cuisine_1_quotidien_um:
+  source: sensor.eclairage_cuisine_1_energie
+  cycle: daily
+
+# ╭──────────────────────────────────────────────────────╮
+# │ ZONE. ((2x) Entrée & couloir) (HOME)                 │
+# ╰──────────────────────────────────────────────────────╯
+
+# --- eclairage_appart_2 ---
+eclairage_appart_2_annuel_um:
+  source: sensor.eclairage_appart_2_energie
+  cycle: yearly
+
+eclairage_appart_2_mensuel_um:
+  source: sensor.eclairage_appart_2_energie
+  cycle: monthly
+
+eclairage_appart_2_hebdomadaire_um:
+  source: sensor.eclairage_appart_2_energie
+  cycle: weekly
+
+eclairage_appart_2_quotidien_um:
+  source: sensor.eclairage_appart_2_energie
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│     ZONE 7. (5x) BUREAU           │
+#└───────────────────────────────────┘
+
+# --- eclairage_bureau_5 ---
+eclairage_bureau_5_annuel_um:
+  source: sensor.eclairage_bureau_5_energie
+  cycle: yearly
+
+eclairage_bureau_5_mensuel_um:
+  source: sensor.eclairage_bureau_5_energie
+  cycle: monthly
+
+eclairage_bureau_5_hebdomadaire_um:
+  source: sensor.eclairage_bureau_5_energie
+  cycle: weekly
+
+eclairage_bureau_5_quotidien_um:
+  source: sensor.eclairage_bureau_5_energie
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│     ZONE 8. (2x) SDB              │
+#└───────────────────────────────────┘
+
+# --- eclairage_sdb_2 ---
+eclairage_sdb_2_annuel_um:
+  source: sensor.eclairage_sdb_2_energie
+  cycle: yearly
+
+eclairage_sdb_2_mensuel_um:
+  source: sensor.eclairage_sdb_2_energie
+  cycle: monthly
+
+eclairage_sdb_2_hebdomadaire_um:
+  source: sensor.eclairage_sdb_2_energie
+  cycle: weekly
+
+eclairage_sdb_2_quotidien_um:
+  source: sensor.eclairage_sdb_2_energie
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│     ZONE 9. (4x) CHAMBRE          │
+#└───────────────────────────────────┘
+
+# --- eclairage_chambre_4 ---
+eclairage_chambre_4_annuel_um:
+  source: sensor.eclairage_chambre_4_energie
+  cycle: yearly
+
+eclairage_chambre_4_mensuel_um:
+  source: sensor.eclairage_chambre_4_energie
+  cycle: monthly
+
+eclairage_chambre_4_hebdomadaire_um:
+  source: sensor.eclairage_chambre_4_energie
+  cycle: weekly
+
+eclairage_chambre_4_quotidien_um:
+  source: sensor.eclairage_chambre_4_energie
+  cycle: daily
+
+# ╭──────────────────────────────────────────────────────────────────────╮
+# │          PÔLE 3. ÉCLAIRAGE : PAR PIECE A L'UNITÉ                     │
+# ╰──────────────────────────────────────────────────────────────────────╯
+
+#┌───────────────────────────────────┐
+#│         1. ENTRÉE                 │
+#└───────────────────────────────────┘
+
+# --- hue_white_lamp_entree ---
+hue_white_lamp_entree_annuel_um:
+  source: sensor.hue_white_lamp_entree_power
+  cycle: yearly
+
+hue_white_lamp_entree_mensuel_um:
+  source: sensor.hue_white_lamp_entree_power
+  cycle: monthly
+
+hue_white_lamp_entree_hebdomadaire_um:
+  source: sensor.hue_white_lamp_entree_power
+  cycle: weekly
+
+hue_white_lamp_entree_quotidien_um:
+  source: sensor.hue_white_lamp_entree_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         4. SALON                  │
+#└───────────────────────────────────┘
+
+# --- hue_white_lamp_salon ---
+hue_white_lamp_salon_annuel_um:
+  source: sensor.hue_white_lamp_salon_power
+  cycle: yearly
+
+hue_white_lamp_salon_mensuel_um:
+  source: sensor.hue_white_lamp_salon_power
+  cycle: monthly
+
+hue_white_lamp_salon_hebdomadaire_um:
+  source: sensor.hue_white_lamp_salon_power
+  cycle: weekly
+
+hue_white_lamp_salon_quotidien_um:
+  source: sensor.hue_white_lamp_salon_power
+  cycle: daily
+
+# --- hue_ambiance_lamp_salon_1 ---
+hue_ambiance_lamp_salon_1_annuel_um:
+  source: sensor.hue_ambiance_lamp_salon_1_power
+  cycle: yearly
+
+hue_ambiance_lamp_salon_1_mensuel_um:
+  source: sensor.hue_ambiance_lamp_salon_1_power
+  cycle: monthly
+
+hue_ambiance_lamp_salon_1_hebdomadaire_um:
+  source: sensor.hue_ambiance_lamp_salon_1_power
+  cycle: weekly
+
+hue_ambiance_lamp_salon_1_quotidien_um:
+  source: sensor.hue_ambiance_lamp_salon_1_power
+  cycle: daily
+
+# --- hue_ambiance_lamp_salon_2 ---
+hue_ambiance_lamp_salon_2_annuel_um:
+  source: sensor.hue_ambiance_lamp_salon_2_power
+  cycle: yearly
+
+hue_ambiance_lamp_salon_2_mensuel_um:
+  source: sensor.hue_ambiance_lamp_salon_2_power
+  cycle: monthly
+
+hue_ambiance_lamp_salon_2_hebdomadaire_um:
+  source: sensor.hue_ambiance_lamp_salon_2_power
+  cycle: weekly
+
+hue_ambiance_lamp_salon_2_quotidien_um:
+  source: sensor.hue_ambiance_lamp_salon_2_power
+  cycle: daily
+
+# --- hue_ambiance_lamp_salon_3 ---
+hue_ambiance_lamp_salon_3_annuel_um:
+  source: sensor.hue_ambiance_lamp_salon_3_power
+  cycle: yearly
+
+hue_ambiance_lamp_salon_3_mensuel_um:
+  source: sensor.hue_ambiance_lamp_salon_3_power
+  cycle: monthly
+
+hue_ambiance_lamp_salon_3_hebdomadaire_um:
+  source: sensor.hue_ambiance_lamp_salon_3_power
+  cycle: weekly
+
+hue_ambiance_lamp_salon_3_quotidien_um:
+  source: sensor.hue_ambiance_lamp_salon_3_power
+  cycle: daily
+
+# --- hue_color_candle_salon_1 ---
+hue_color_candle_salon_1_annuel_um:
+  source: sensor.hue_color_candle_salon_1_power
+  cycle: yearly
+
+hue_color_candle_salon_1_mensuel_um:
+  source: sensor.hue_color_candle_salon_1_power
+  cycle: monthly
+
+hue_color_candle_salon_1_hebdomadaire_um:
+  source: sensor.hue_color_candle_salon_1_power
+  cycle: weekly
+
+hue_color_candle_salon_1_quotidien_um:
+  source: sensor.hue_color_candle_salon_1_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         5. CUISINE                │
+#└───────────────────────────────────┘
+
+# --- hue_white_lamp_cuisine ---
+hue_white_lamp_cuisine_annuel_um:
+  source: sensor.hue_white_lamp_cuisine_power
+  cycle: yearly
+
+hue_white_lamp_cuisine_mensuel_um:
+  source: sensor.hue_white_lamp_cuisine_power
+  cycle: monthly
+
+hue_white_lamp_cuisine_hebdomadaire_um:
+  source: sensor.hue_white_lamp_cuisine_power
+  cycle: weekly
+
+hue_white_lamp_cuisine_quotidien_um:
+  source: sensor.hue_white_lamp_cuisine_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         6. COULOIR                │
+#└───────────────────────────────────┘
+
+# --- hue_white_lamp_couloir ---
+hue_white_lamp_couloir_annuel_um:
+  source: sensor.hue_white_lamp_couloir_power
+  cycle: yearly
+
+hue_white_lamp_couloir_mensuel_um:
+  source: sensor.hue_white_lamp_couloir_power
+  cycle: monthly
+
+hue_white_lamp_couloir_hebdomadaire_um:
+  source: sensor.hue_white_lamp_couloir_power
+  cycle: weekly
+
+hue_white_lamp_couloir_quotidien_um:
+  source: sensor.hue_white_lamp_couloir_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         7. BUREAU                 │
+#└───────────────────────────────────┘
+
+# --- hue_play_1_pc_bureau ---
+hue_play_1_pc_bureau_annuel_um:
+  source: sensor.hue_play_1_pc_bureau_power
+  cycle: yearly
+
+hue_play_1_pc_bureau_mensuel_um:
+  source: sensor.hue_play_1_pc_bureau_power
+  cycle: monthly
+
+hue_play_1_pc_bureau_hebdomadaire_um:
+  source: sensor.hue_play_1_pc_bureau_power
+  cycle: weekly
+
+hue_play_1_pc_bureau_quotidien_um:
+  source: sensor.hue_play_1_pc_bureau_power
+  cycle: daily
+
+# --- hue_play_2_pc_bureau ---
+hue_play_2_pc_bureau_annuel_um:
+  source: sensor.hue_play_2_pc_bureau_power
+  cycle: yearly
+
+hue_play_2_pc_bureau_mensuel_um:
+  source: sensor.hue_play_2_pc_bureau_power
+  cycle: monthly
+
+hue_play_2_pc_bureau_hebdomadaire_um:
+  source: sensor.hue_play_2_pc_bureau_power
+  cycle: weekly
+
+hue_play_2_pc_bureau_quotidien_um:
+  source: sensor.hue_play_2_pc_bureau_power
+  cycle: daily
+
+# --- hue_play_3_pc_bureau ---
+hue_play_3_pc_bureau_annuel_um:
+  source: sensor.hue_play_3_pc_bureau_power
+  cycle: yearly
+
+hue_play_3_pc_bureau_mensuel_um:
+  source: sensor.hue_play_3_pc_bureau_power
+  cycle: monthly
+
+hue_play_3_pc_bureau_hebdomadaire_um:
+  source: sensor.hue_play_3_pc_bureau_power
+  cycle: weekly
+
+hue_play_3_pc_bureau_quotidien_um:
+  source: sensor.hue_play_3_pc_bureau_power
+  cycle: daily
+
+# --- lampe_bureau_1_hue ---
+lampe_bureau_1_hue_annuel_um:
+  source: sensor.lampe_bureau_1_hue_power
+  cycle: yearly
+
+lampe_bureau_1_hue_mensuel_um:
+  source: sensor.lampe_bureau_1_hue_power
+  cycle: monthly
+
+lampe_bureau_1_hue_hebdomadaire_um:
+  source: sensor.lampe_bureau_1_hue_power
+  cycle: weekly
+
+lampe_bureau_1_hue_quotidien_um:
+  source: sensor.lampe_bureau_1_hue_power
+  cycle: daily
+
+# --- lampe_bureau_2_hue ---
+lampe_bureau_2_hue_annuel_um:
+  source: sensor.lampe_bureau_2_hue_power
+  cycle: yearly
+
+lampe_bureau_2_hue_mensuel_um:
+  source: sensor.lampe_bureau_2_hue_power
+  cycle: monthly
+
+lampe_bureau_2_hue_hebdomadaire_um:
+  source: sensor.lampe_bureau_2_hue_power
+  cycle: weekly
+
+lampe_bureau_2_hue_quotidien_um:
+  source: sensor.lampe_bureau_2_hue_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         8. SDB                    │
+#└───────────────────────────────────┘
+
+# --- relais_lumiere_sdb_sonoff ---
+relais_lumiere_sdb_sonoff_annuel_um:
+  source: sensor.relais_lumiere_sdb_sonoff_power
+  cycle: yearly
+
+relais_lumiere_sdb_sonoff_mensuel_um:
+  source: sensor.relais_lumiere_sdb_sonoff_power
+  cycle: monthly
+
+relais_lumiere_sdb_sonoff_hebdomadaire_um:
+  source: sensor.relais_lumiere_sdb_sonoff_power
+  cycle: weekly
+
+relais_lumiere_sdb_sonoff_quotidien_um:
+  source: sensor.relais_lumiere_sdb_sonoff_power
+  cycle: daily
+
+# --- lampe_salle_de_bain_hue ---
+lampe_salle_de_bain_hue_annuel_um:
+  source: sensor.lampe_salle_de_bain_hue_power
+  cycle: yearly
+
+lampe_salle_de_bain_hue_mensuel_um:
+  source: sensor.lampe_salle_de_bain_hue_power
+  cycle: monthly
+
+lampe_salle_de_bain_hue_hebdomadaire_um:
+  source: sensor.lampe_salle_de_bain_hue_power
+  cycle: weekly
+
+lampe_salle_de_bain_hue_quotidien_um:
+  source: sensor.lampe_salle_de_bain_hue_power
+  cycle: daily
+
+#┌───────────────────────────────────┐
+#│         9. CHAMBRE                │
+#└───────────────────────────────────┘
+
+# --- hue_white_lamp_chambre_1 ---
+hue_white_lamp_chambre_1_annuel_um:
+  source: sensor.hue_white_lamp_chambre_1_power
+  cycle: yearly
+
+hue_white_lamp_chambre_1_mensuel_um:
+  source: sensor.hue_white_lamp_chambre_1_power
+  cycle: monthly
+
+hue_white_lamp_chambre_1_hebdomadaire_um:
+  source: sensor.hue_white_lamp_chambre_1_power
+  cycle: weekly
+
+hue_white_lamp_chambre_1_quotidien_um:
+  source: sensor.hue_white_lamp_chambre_1_power
+  cycle: daily
+
+# --- hue_white_lamp_chambre_2 ---
+hue_white_lamp_chambre_2_annuel_um:
+  source: sensor.hue_white_lamp_chambre_2_power
+  cycle: yearly
+
+hue_white_lamp_chambre_2_mensuel_um:
+  source: sensor.hue_white_lamp_chambre_2_power
+  cycle: monthly
+
+hue_white_lamp_chambre_2_hebdomadaire_um:
+  source: sensor.hue_white_lamp_chambre_2_power
+  cycle: weekly
+
+hue_white_lamp_chambre_2_quotidien_um:
+  source: sensor.hue_white_lamp_chambre_2_power
+  cycle: daily
+
+# --- hue_color_candle_chambre_gege ---
+hue_color_candle_chambre_gege_annuel_um:
+  source: sensor.hue_color_candle_chambre_gege_power
+  cycle: yearly
+
+hue_color_candle_chambre_gege_mensuel_um:
+  source: sensor.hue_color_candle_chambre_gege_power
+  cycle: monthly
+
+hue_color_candle_chambre_gege_hebdomadaire_um:
+  source: sensor.hue_color_candle_chambre_gege_power
+  cycle: weekly
+
+hue_color_candle_chambre_gege_quotidien_um:
+  source: sensor.hue_color_candle_chambre_gege_power
+  cycle: daily
+
+# --- hue_color_candle_chambre_eric ---
+hue_color_candle_chambre_eric_annuel_um:
+  source: sensor.hue_color_candle_chambre_eric_power
+  cycle: yearly
+
+hue_color_candle_chambre_eric_mensuel_um:
+  source: sensor.hue_color_candle_chambre_eric_power
+  cycle: monthly
+
+hue_color_candle_chambre_eric_hebdomadaire_um:
+  source: sensor.hue_color_candle_chambre_eric_power
+  cycle: weekly
+
+hue_color_candle_chambre_eric_quotidien_um:
+  source: sensor.hue_color_candle_chambre_eric_power
+  cycle: daily
+
+# ╭──────────────────────────────────────────────────────────────────────╮
+# │     PÔLE 3. REGROUPEMENTS ADDITIONNELS : ENTRÉE + TOTAL             │
+# ╰──────────────────────────────────────────────────────────────────────╯
+
+#┌───────────────────────────────────┐
+#│     ZONE 1. (1x) ENTRÉE           │
+#└───────────────────────────────────┘
+
+# --- eclairage_entree_1 ---
+eclairage_entree_1_annuel_um:
+  source: sensor.eclairage_entree_1_energie
+  cycle: yearly
+
+eclairage_entree_1_mensuel_um:
+  source: sensor.eclairage_entree_1_energie
+  cycle: monthly
+
+eclairage_entree_1_hebdomadaire_um:
+  source: sensor.eclairage_entree_1_energie
+  cycle: weekly
+
+eclairage_entree_1_quotidien_um:
+  source: sensor.eclairage_entree_1_energie
+  cycle: daily
+
+# ╭──────────────────────────────────────────────────────────────────────╮
+# │     ZONE TOTAL. (19x) TOUTES LES LUMIÈRES                           │
+# ╰──────────────────────────────────────────────────────────────────────╯
+
+# --- eclairage_total ---
+eclairage_total_annuel_um:
+  source: sensor.eclairage_total_energie
+  cycle: yearly
+
+eclairage_total_mensuel_um:
+  source: sensor.eclairage_total_energie
+  cycle: monthly
+
+eclairage_total_hebdomadaire_um:
+  source: sensor.eclairage_total_energie
+  cycle: weekly
+
+eclairage_total_quotidien_um:
+  source: sensor.eclairage_total_energie
+  cycle: daily

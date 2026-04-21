@@ -1,0 +1,130 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. TEMPLATES : PUISSANCE INSTANTANÉE TOTALE PAR POSTE (7 PÔLES)     │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sept capteurs templates calculant la puissance instantanée totale (W) par
+# pôle fonctionnel : Chauffage, Multimédia, Cuisine, Froid, Hygiène,
+# Éclairage, Autre. Permet de visualiser la répartition de la puissance
+# en temps réel sur le dashboard.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : somme des sensor.[appareil]_power | float(0) par pôle.
+# - Chauffage  : clim_salon + radiateur_cuisine + clim_bureau + soufflant_sdb + seche_serviette + clim_chambre.
+# - Multimédia : box_internet + tv_salon + tv_chambre + pc_gege + pc_bureau.
+# - Cuisine    : micro_ondes + petit_dejeune + airfryer + four_plaque.
+# - Froid      : frigo + congelateur.
+# - Hygiène    : lave_linge + lave_vaisselle + fer_a_repasser.
+# - Éclairage  : sensor.eclairage_total_group_puissance (P3_POWER_3_TOTAL_ZONE).
+# - Autre      : all_standby + tete_de_lit + chargeur_salon + horloge.
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Pôle Éclairage source : sensor.eclairage_total_group_puissance (P3_POWER_3).
+#   Ne pas utiliser sensor.eclairage_total_group_power (nom non défini).
+# - Les sources _power proviennent directement des prises connectées (Nous/IKEA).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (répartition puissance temps réel par pôle).
+# - Page énergie temps réel (bar-chart puissance instantanée).
+
+- sensor:
+    # 1. CHAUFFAGE
+    # --- total_poste_chauffage_puissance ---
+    - name: "Total Poste Chauffage Puissance"
+      unique_id: total_poste_chauffage_puissance
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      icon: mdi:fire
+      state: >
+        {% set cs = states('sensor.clim_salon_nous_power') | float(0) %}
+        {% set rc = states('sensor.radiateur_elec_cuisine_power') | float(0) %}
+        {% set cb = states('sensor.clim_bureau_nous_power') | float(0) %}
+        {% set ss = states('sensor.prise_soufflant_salle_de_bain_nous_power') | float(0) %}
+        {% set sv = states('sensor.prise_seche_serviette_salle_de_bain_nous_power') | float(0) %}
+        {% set cc = states('sensor.clim_chambre_nous_power') | float(0) %}
+        {{ (cs + rc + cb + ss + sv + cc) | round(1) }}
+
+    # 2. MULTIMÉDIA
+    # --- total_poste_multimedia_puissance ---
+    - name: "Total Poste Multimedia Puissance"
+      unique_id: total_poste_multimedia_puissance
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      icon: mdi:monitor
+      state: >
+        {% set bx = states('sensor.prise_box_internet_ikea_power') | float(0) %}
+        {% set ts = states('sensor.prise_tv_salon_ikea_power') | float(0) %}
+        {% set tc = states('sensor.prise_tv_chambre_nous_power') | float(0) %}
+        {% set pg = states('sensor.prise_pc_s_gege_ikea_power') | float(0) %}
+        {% set pb = states('sensor.prise_bureau_pc_ikea_power') | float(0) %}
+        {{ (bx + ts + tc + pg + pb) | round(1) }}
+
+    # 3. CUISSON
+    # --- total_poste_cuisine_puissance ---
+    - name: "Total Poste Cuisine Puissance"
+      unique_id: total_poste_cuisine_puissance
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      icon: mdi:stove
+      state: >
+        {% set mo = states('sensor.prise_four_micro_ondes_nous_power') | float(0) %}
+        {% set pd = states('sensor.prise_petit_dejeune_nous_power') | float(0) %}
+        {% set af = states('sensor.prise_airfryer_ninja_nous_power') | float(0) %}
+        {% set fp = states('sensor.four_et_plaque_de_cuisson_power') | float(0) %}
+        {{ (mo + pd + af + fp) | round(1) }}
+
+    # 4. FROID
+    # --- total_poste_froid_puissance ---
+    - name: "Total Poste Froid Puissance"
+      unique_id: total_poste_froid_puissance
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      icon: mdi:fridge
+      state: >
+        {% set fr = states('sensor.prise_frigo_cuisine_nous_power') | float(0) %}
+        {% set cg = states('sensor.prise_congelateur_cuisine_nous_power') | float(0) %}
+        {{ (fr + cg) | round(1) }}
+
+    # 5. HYGIÈNE
+    # --- total_poste_hygiene_puissance ---
+    - name: "Total Poste Hygiene Puissance"
+      unique_id: total_poste_hygiene_puissance
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      icon: mdi:washing-machine
+      state: >
+        {% set ll = states('sensor.prise_lave_linge_nous_power') | float(0) %}
+        {% set lv = states('sensor.prise_lave_vaisselle_nous_power') | float(0) %}
+        {% set fr = states('sensor.prise_bureau_fer_a_repasser_nous_power') | float(0) %}
+        {{ (ll + lv + fr) | round(1) }}
+
+    # 6. ÉCLAIRAGE
+    # --- total_poste_eclairage_puissance ---
+    - name: "Total Poste Eclairage Puissance"
+      unique_id: total_poste_eclairage_puissance
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      icon: mdi:lightbulb
+      state: >
+        {{ states('sensor.eclairage_total_group_puissance') | float(0) | round(1) }}
+
+    # 7. AUTRE
+    # --- total_poste_autre_puissance ---
+    - name: "Total Poste Autre Puissance"
+      unique_id: total_poste_autre_puissance
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      icon: mdi:plus-circle
+      state: >
+        {% set vs = states('sensor.all_standby_power') | float(0) %}
+        {% set tl = states('sensor.prise_tete_de_lit_chambre_power') | float(0) %}
+        {% set ch = states('sensor.prise_salon_chargeur_nous_power') | float(0) %}
+        {% set hr = states('sensor.prise_horloge_ikea_power') | float(0) %}
+        {{ (vs + tl + ch + hr) | round(1) }}

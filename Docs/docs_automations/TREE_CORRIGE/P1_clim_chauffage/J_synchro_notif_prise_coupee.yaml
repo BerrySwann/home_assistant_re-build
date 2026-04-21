@@ -1,0 +1,34 @@
+id: '1766772481056'
+alias: (J) Synchro & Notif Clim si Prise Coupée
+description: "Met à jour l'état du thermostat et notifie proprement si la prise est coupée.\n"
+triggers:
+- trigger: state
+  entity_id:
+  - switch.clim_salon_nous
+  - switch.clim_bureau_nous
+  - switch.clim_chambre_nous
+  from: 'on'
+  to: 'off'
+actions:
+- action: climate.set_hvac_mode
+  data:
+    hvac_mode: 'off'
+  target:
+    entity_id: "{% if trigger.entity_id == 'switch.clim_salon_nous' %}\n  climate.clim_salon_rm4_mini\n\
+      {% elif trigger.entity_id == 'switch.clim_bureau_nous' %}\n  climate.clim_bureau_rm4_mini\n\
+      {% elif trigger.entity_id == 'switch.clim_chambre_nous' %}\n  climate.clim_chambre_rm4_mini\n\
+      {% endif %}\n"
+- if:
+  - condition: time
+    after: 07:30:00
+    before: '21:00:00'
+  then:
+  - action: notify.mobile_app_eric
+    data:
+      title: CLIM COUPÉE
+      message: "{% set piece = 'inconnue' %}  {% if 'salon' in trigger.entity_id %}\n\
+        \  {% set piece = 'du Salon' %}\n{% elif 'bureau' in trigger.entity_id %}\n\
+        \  {% set piece = 'du Bureau' %}\n{% elif 'chambre' in trigger.entity_id %}\n\
+        \  {% set piece = 'de la Chambre' %}\n{% endif %}  La prise extérieure {{\
+        \ piece }} vient d'être éteinte.\n"
+mode: parallel

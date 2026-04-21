@@ -1,0 +1,72 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. UTILITY METER : GENELEC APPART — ÉNERGIE TOTAL AMHQ (kWh)        │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# 4 compteurs Utility Meter (Quotidien, Hebdomadaire, Mensuel, Annuel) mesurant
+# la consommation totale de l'appartement en kWh, sans distinction HP/HC.
+# Pour le split tarifaire HP/HC, voir : 03_UM_genelec_appart_HPHC_AMHQ.yaml
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : sensor.genelec_appart_totale_kwh (index kWh cumulatif Ecojoko).
+# - Chaque UM accumule les incréments de la source sur sa période, puis remet
+#   à zéro automatiquement (minuit / lundi / 1er du mois / 1er janvier).
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.genelec_appart_kwh_cumulative               | genelec_appart_*_{annuel|mensuel|hebdo|quotidien}  | 01_genelec_appart_AMHQ_cost.yaml → L2C1 |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ces capteurs mesurent du kWh (énergie), PAS des euros (coût).
+# - Si créés en cours de journée/période, ils démarrent à 0 et n'accumulent
+#   que depuis leur date de création — pas de back-fill historique.
+# - Ne pas utiliser comme source d'un utility_meter (déjà des UM).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale : source des templates AVG Watts (03_AVG_genelec_appart.yaml)
+# - Page Énergie ApexCharts     : onglets Journalier / Hebdomadaire / Mensuel (kWh total)
+
+# ─── QUOTIDIEN ────────────────────────────────────────────────────────────────
+
+# --- genelec_appart_quotidien_kwh_um ---
+genelec_appart_quotidien_um:
+  source: sensor.genelec_appart_totale_kwh
+  name: "Genelec Appart Quotidien kWh UM"
+  unique_id: genelec_appart_quotidien_kwh_um
+  cycle: daily
+
+# ─── HEBDOMADAIRE ────────────────────────────────────────────────────────────
+
+# --- genelec_appart_hebdomadaire_kwh_um ---
+genelec_appart_hebdomadaire_kwh_um:
+  source: sensor.genelec_appart_totale_kwh
+  name: "Genelec Appart Hebdomadaire kWh UM"
+  unique_id: genelec_appart_hebdomadaire_kwh_um
+  cycle: weekly
+
+# ─── MENSUEL ─────────────────────────────────────────────────────────────────
+
+# --- genelec_appart_mensuel_kwh_um ---
+genelec_appart_mensuel_kwh_um:
+  source: sensor.genelec_appart_totale_kwh
+  name: "Genelec Appart Mensuel kWh UM"
+  unique_id: genelec_appart_mensuel_kwh_um
+  cycle: monthly
+
+# ─── ANNUEL ──────────────────────────────────────────────────────────────────
+
+# --- genelec_appart_annuel_kwh_um ---
+genelec_appart_annuel_khw_um:
+  source: sensor.genelec_appart_totale_kwh
+  name: "Genelec Appart Annuel kWh UM"
+  unique_id: genelec_appart_annuel_kwh_um
+  cycle: yearly
+
+# annotations_log:
+# - [AJOUT] genelec_appart_quotidien_um (cycle daily manquant) — requis par 03_AVG_genelec_appart.yaml
+# - [L29,37,45,53] name: "Réseau *" → "Genelec Appart * UM" (conformité convention)
+# - [L27,34,41] source inchangée : sensor.genelec_appart_totale_kwh
+# - [SUPPRIMÉ] ecojoko_hp/hc_reseau_*_um (source Ecojoko remplacée)

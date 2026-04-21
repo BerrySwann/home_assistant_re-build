@@ -1,0 +1,13 @@
+id: '1766777745005'
+alias: 'Bureau : Allumage Manu PC (MQTT) Poussoir (IKEA TRADFRI)'
+description: 'Allume la prise PC dès que le bouton IKEA envoie le signal ON via MQTT'
+triggers:
+- trigger: mqtt
+  topic: zigbee2mqtt/Poussoir (IKEA TRADFRI)/action
+  payload: 'on'
+conditions: []
+actions:
+- action: switch.turn_on
+  target:
+    entity_id: switch.hue_smart_eco_pc_bureau
+mode: single

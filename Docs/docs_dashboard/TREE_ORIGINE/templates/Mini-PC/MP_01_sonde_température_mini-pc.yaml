@@ -1,0 +1,71 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ SENSOR : SYSTÈME — TEMPÉRATURES MINI PC (6 SONDES)                       │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# 6 capteurs de température du Mini PC Intel NUC :
+# carte mère (zone thermique 0), CPU Package, et 4 cores individuels.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : valeur_brute (millidegrés) / 1000 → °C (arrondi 1 décimale)
+# - Sources : sensor.thermal_zone_0_temp, sensor.temperature_cpu_package,
+#             sensor.temperature_core_0/1/2/3
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Les sources remontent des millidegrés (entiers), la division /1000 est obligatoire.
+# - float(0) → valeur par défaut 0 en cas d'indisponibilité du capteur source.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L4C2 Mini PC (surveillance thermique)
+
+- sensor:
+    # ┌───────────────────────────────────┐
+    # │ [ MP ] MINI-PC                    │
+    # └───────────────────────────────────┘
+    # --- temperature_carte_mere ---
+    - name: "Température Carte Mère"
+      unique_id: temperature_carte_mere
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state: "{{ (states('sensor.thermal_zone_0_temp') | float(0) / 1000) | round(1) }}"
+
+    # --- temperature_cpu_package ---
+    - name: "Température CPU (Package)"
+      unique_id: temperature_cpu_package
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state: "{{ (states('sensor.temperature_cpu_package') | float(0) / 1000) | round(1) }}"
+
+    # --- temperature_core_0 ---
+    - name: "Température Core 0"
+      unique_id: temperature_core_0
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state: "{{ (states('sensor.temperature_core_0') | float(0) / 1000) | round(1) }}"
+
+    # --- temperature_core_1 ---
+    - name: "Température Core 1"
+      unique_id: temperature_core_1
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state: "{{ (states('sensor.temperature_core_1') | float(0) / 1000) | round(1) }}"
+
+    # --- temperature_core_2 ---
+    - name: "Température Core 2"
+      unique_id: temperature_core_2
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state: "{{ (states('sensor.temperature_core_2') | float(0) / 1000) | round(1) }}"
+
+    # --- temperature_core_3 ---
+    - name: "Température Core 3"
+      unique_id: temperature_core_3
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state: "{{ (states('sensor.temperature_core_3') | float(0) / 1000) | round(1) }}"
+
+# annotations_log:
+# [L1-3]         Boîte ASCII arrondie mise à 78 chars (standard ReBuild).
+# [L6-17]        En-tête doc obligatoire ajouté (DESCRIPTION, CALCUL, PIÈGES, VIGNETTE).
+# [L20-22]       Boîte secondaire carrée 37 chars, libellé catégorie lettrée [ MP ].
+# [L23,30,37,44,51,58] Slugs tertiaires présents.

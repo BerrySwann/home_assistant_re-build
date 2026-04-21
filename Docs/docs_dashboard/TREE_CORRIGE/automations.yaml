@@ -732,7 +732,7 @@
     target:
       entity_id: switch.prise_seche_serviette_salle_de_bain_nous
   mode: single
-- id: '1767373340706'
+- id: '1774803767999'
   alias: (A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00)
   description: Pilotage clims jour avec boucle de relance et notification ciblée fenêtres
   triggers:
@@ -963,23 +963,12 @@
       action: notify.mobile_app_eric
       data:
         title: '[AJ] {{ states(''sensor.presence'') }}'
-        message: "{%- set prise_salon   = is_state('switch.clim_salon_nous',   'on')
-          %} {%- set prise_bureau  = is_state('switch.clim_bureau_nous',  'on') %}
-          {%- set prise_chambre = is_state('switch.clim_chambre_nous', 'on') %} {%-
-          set clims_alimentees = prise_salon or prise_bureau or prise_chambre %} {%-
-          if not clims_alimentees %}\n  [UNITS OFF] Aucune clim alimentee.\n{%- elif
-          'groupe_1' in groupe_presence and mode_saison == 'heat' %}\n  [ECO HEAT]\n
-          \ {%- if prise_salon %}   Salon  : {{ temp_eco_c }}°{% else %}   Salon  :
-          [OFF]{% endif %}\n  {%- if prise_bureau %}  Bureau : {{ temp_eco_c }}°{%
-          else %}   Bureau : [OFF]{% endif %}\n  {%- if prise_chambre %} Chambre:
-          {{ temp_eco_c }}°{% else %}   Chambre: [OFF]{% endif %}\n{%- else %}\n  Mode
-          : {{ mode_saison | upper }}\n  {%- if prise_salon %}   Salon  : {{ t_salon_target
-          }}°{% else %}   Salon  : [OFF]{% endif %}\n  {%- if prise_bureau %}  Bureau
-          : {{ t_bureau_target }}°{% else %}   Bureau : [OFF]{% endif %}\n  {%- if
-          prise_chambre %} Chambre: {{ t_chambre_target }}°{% else %}   Chambre: [OFF]{%
-          endif %}\n{%- endif %}"
+        message: "{%- if 'groupe_1' in groupe_presence and mode_saison == 'heat' %}\n
+          \ [éCO HEAT]\n  Les 3 Clims : {{ temp_eco_c }}° (Absent)\n{% else %}\n  Mode
+          : {{ mode_saison | upper }}\n  Salon: {{ t_salon_target }}°\n  Bureau: {{
+          t_bureau_target }}°\n  Chambre: {{ t_chambre_target }}°\n{% endif %}\n"
   mode: queued
-- id: '1767373801871'
+- id: '1774803964324'
   alias: (B - 0) 2026-01-11 AUTOMATISATION CLIM NUIT (21H00 <-> 07H30)
   description: Pilotage clims nuit avec boucle de relance et notification ciblée fenêtres
   triggers:
@@ -1202,21 +1191,10 @@
       action: notify.mobile_app_eric
       data:
         title: '[AN] {{ states(''sensor.presence'') }}'
-        message: "{%- set prise_salon   = is_state('switch.clim_salon_nous',   'on')
-          %} {%- set prise_bureau  = is_state('switch.clim_bureau_nous',  'on') %}
-          {%- set prise_chambre = is_state('switch.clim_chambre_nous', 'on') %} {%-
-          set clims_alimentees = prise_salon or prise_bureau or prise_chambre %} {%-
-          if not clims_alimentees %}\n  [UNITS OFF] Aucune clim alimentee.\n{%- elif
-          'groupe_1' in groupe_presence and mode_saison == 'heat' %}\n  [ECO HEAT]\n
-          \ {%- if prise_salon %}   Salon  : {{ temp_eco_c }}°{% else %}   Salon  :
-          [OFF]{% endif %}\n  {%- if prise_bureau %}  Bureau : {{ temp_eco_c }}°{%
-          else %}   Bureau : [OFF]{% endif %}\n  {%- if prise_chambre %} Chambre:
-          {{ temp_eco_c }}°{% else %}   Chambre: [OFF]{% endif %}\n{%- else %}\n  Mode
-          : {{ mode_saison | upper }} (NUIT)\n  {%- if prise_salon %}   Salon  : {{
-          t_salon_target }}°{% else %}   Salon  : [OFF]{% endif %}\n  {%- if prise_bureau
-          %}  Bureau : {{ t_bureau_target }}°{% else %}   Bureau : [OFF]{% endif %}\n
-          \ {%- if prise_chambre %} Chambre: {{ t_chambre_target }}°{% else %}   Chambre:
-          [OFF]{% endif %}\n{%- endif %}"
+        message: "{%- if 'groupe_1' in groupe_presence and mode_saison == 'heat' %}\n
+          \ [éCO HEAT]\n  Les 3 Clims : {{ temp_eco_c }}° (Absent)\n{% else %}\n  Mode
+          : {{ mode_saison | upper }} (NUIT)\n  Salon: {{ t_salon_target }}°\n  Bureau:
+          {{ t_bureau_target }}°\n  Chambre: {{ t_chambre_target }}°\n{% endif %}\n"
   mode: queued
 - id: '1775243120444'
   alias: Update previous temperature
@@ -1252,10 +1230,10 @@
     des impacts.
   triggers:
   - trigger: state
-    entity_id: sensor.maison_lightning_counter
+    entity_id: sensor.blitzortung_lightning_counter
   conditions:
   - condition: numeric_state
-    entity_id: sensor.maison_lightning_counter
+    entity_id: sensor.blitzortung_lightning_counter
     above: 0
   actions:
   - action: homeassistant.update_entity
@@ -1264,11 +1242,11 @@
   - action: notify.mobile_app_eric
     data:
       title: /!\ Attention foudre /!\
-      message: "{% set distance = states('sensor.maison_lightning_distance') | float(0)
-        %} {% set azimuth = states('sensor.maison_lightning_azimuth') | float(0) %}
-        {% set impactCount = states('sensor.maison_lightning_counter') | int(0) %}
-        {% set timeSinceLastLightning = states('input_datetime.dernier_eclair)') %}
-        {% set localisation = states('sensor.blitzortung_lightning_localisation')
+      message: "{% set distance = states('sensor.blitzortung_lightning_distance')
+        | float(0) %} {% set azimuth = states('sensor.blitzortung_lightning_azimuth')
+        | float(0) %} {% set impactCount = states('sensor.blitzortung_lightning_counter')
+        | int(0) %} {% set timeSinceLastLightning = states('input_text.dernier_impact_de_foudre_temps_ecoule')
+        %} {% set localisation = states('sensor.blitzortung_lightning_localisation')
         %} {% set city = None %} {% if localisation and localisation != '0' %}\n  {%
         set location = state_attr('sensor.blitzortung_lightning_localisation', 'features')
         %}\n  {% if location and location[0] and location[0].properties and location[0].properties.geocoding
@@ -1332,10 +1310,6 @@
 
     '
   triggers:
-  - alias: 'ENVIRONNEMENT : MISE À JOUR TEMPÉRATURES OU MODE'
-    trigger: state
-    entity_id:
-    - sensor.th_balcon_nord_temperature
   - trigger: numeric_state
     entity_id: sensor.temperature_delta_valeur
     below: -1
@@ -1425,9 +1399,11 @@
   - action: notify.mobile_app_eric
     data:
       title: Delta T° < -1°C
-      message: 'Les clim ont été éteintes.  ΔT: ({{ states(''sensor.temperature_delta_valeur'')
-        }}°C) T° Ext.: ({{ states(''sensor.th_balcon_nord_temperature'') }}°C)  Seuil
-        réglé à: {{ states(''sensor.seuil_non_chauffage'') }}°C.'
+      message: 'Les clim ont été éteintes. ({{ states(''sensor.temperature_delta_valeur'')
+        }}°C)  T° Ext.: ({{ states(''sensor.th_balcon_nord_temperature'') }}°C)  Seuil
+        réglé à: {{ states(''sensor.seuil_non_chauffage'') }}°C.
+
+        '
   mode: single
 - id: '1775243646439'
   alias: (D) Notification température Up ou Down de (7h30 -> 21h00)
@@ -2071,7 +2047,7 @@
       entity_id: switch.prise_tv_salon_ikea
     action: homeassistant.turn_off
   - target:
-      entity_id: light.hue_smart_eco_salon
+      entity_id: light.hue_smart_salon
     action: homeassistant.turn_{{ vapote }}
   - target:
       entity_id: switch.prise_horloge_ikea
@@ -2080,7 +2056,7 @@
       entity_id: switch.ecran_p_c_3_play_hue
     action: homeassistant.turn_{{ play3 }}
   - target:
-      entity_id: light.hue_smart_eco_pc_bureau
+      entity_id: light.hue_smart_plug_eco_pc_bureau
     action: homeassistant.turn_{{ pc_bureau }}
   - target:
       entity_id: switch.prise_tete_de_lit_chambre
@@ -2088,7 +2064,7 @@
   - data:
       title: 'Groupe: {{ g }}'
       message: "{% set prises = [\n  'switch.prise_tv_salon_ikea',\n  'switch.prise_horloge_ikea',\n
-        \ 'light.hue_smart_eco_salon',\n  'switch.ecran_p_c_3_play_hue',\n  'light.hue_smart_eco_pc_bureau',\n
+        \ 'light.hue_smart_salon',\n  'switch.ecran_p_c_3_play_hue',\n  'light.hue_smart_eco_pc_bureau',\n
         \ 'switch.prise_tete_de_lit_chambre'\n] %} {% set count_on = namespace(value=0)
         %} {% for p in prises %}\n  {% if states(p) == 'on' %}\n    {% set count_on.value
         = count_on.value + 1 %}\n  {% endif %}\n{% endfor %} [{{ count_on.value }}]
@@ -2701,51 +2677,3 @@
         data:
           option: HP
   mode: single
-- id: '1776624322644'
-  alias: VEILLE GITHUB — Nouvelle release détectée
-  description: 'Surveille les flux Feedreader GitHub (HA core + HACS + cartes HACS).
-    Envoie une notif Telegram à chaque nouvelle release. Double notif si le titre
-    contient un breaking change / deprecation.
-
-    '
-  triggers:
-  - event_type: feedreader_entry_added
-    alias: DÉCLENCHEUR — Nouvelle entrée Feedreader
-    trigger: event
-  conditions: []
-  actions:
-  - alias: VARIABLES — Extraire titre + lien + source
-    variables:
-      titre: '{{ trigger.event.data.title | default(''Sans titre'') }}'
-      lien: '{{ trigger.event.data.link | default('''') }}'
-      source: '{{ trigger.event.data.feed_url | default('''') }}'
-      est_breaking: '{{ (''breaking'' in titre | lower) or (''deprecated'' in titre
-        | lower) or (''removed'' in titre | lower) or (''breaking'' in (trigger.event.data.summary
-        | default('''') | lower)) or (''deprecated'' in (trigger.event.data.summary
-        | default('''') | lower)) }}
-
-        '
-  - alias: ACTION — Notif standard (toutes releases)
-    data:
-      title: RELEASE GITHUB
-      message: '{{ source.split(''github.com/'')[1].split(''/releases'')[0] if ''github.com''
-        in source else source }} >> {{ titre[:80] }} Lien: {{ lien }}
-
-        '
-    action: notify.mobile_app_eric
-  - alias: CONDITION — Breaking change détecté ?
-    if:
-    - condition: template
-      value_template: '{{ est_breaking }}'
-    then:
-    - alias: ACTION — Notif alerte breaking change
-      data:
-        title: '! BREAKING CHANGE !'
-        message: '[ATTENTION] {{ source.split(''github.com/'')[1].split(''/releases'')[0]
-          if ''github.com'' in source else source }} >> {{ titre[:80] }} Verifie avant
-          de mettre a jour ! Lien: {{ lien }}
-
-          '
-      action: notify.mobile_app_eric
-  mode: queued
-  max: 10

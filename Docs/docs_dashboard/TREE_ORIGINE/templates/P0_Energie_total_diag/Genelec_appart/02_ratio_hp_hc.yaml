@@ -1,0 +1,110 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. TEMPLATE : GENELEC APPART — RATIO RENTABILITÉ HC %  (AMHQ)       │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensors template calculant le pourcentage d'Heures Creuses sur la
+# consommation totale de l'appartement sur 4 périodes (AMHQ).
+# Indique si l'abonnement HC est rentable (> 33%) ou limite (> 25%).
+# Split HP/HC issu des utility_meters tariff natifs HA.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule  : (kWh HC / (kWh HP + kWh HC)) × 100
+# - Source HP : sensor.genelec_appart_hphc_{periode}_um_hp
+# - Source HC : sensor.genelec_appart_hphc_{periode}_um_hc
+# - Garde division zéro : if total > 0 else 0
+# - UM source : utility_meter/P0_Energie_total/Genelec_appart/03_UM_genelec_appart_HPHC_AMHQ.yaml
+# - Basculement : automation energie/basculement_tarif_hphc.yaml
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - En début de période (total ~ 0), la valeur retourne 0 — comportement normal.
+# - Les seuils 25% et 33% sont indicatifs selon le différentiel tarifaire HP/HC.
+# - L'automation de basculement DOIT être active pour un split correct.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (section ratios HC, curseur rentabilité)
+
+- sensor:
+
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ 1. QUOTIDIEN (Q)                                                         │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+
+    # --- genelec_appart_ratio_hc_quotidien ---
+    - name: "Genelec Appart Ratio HC Quotidien"
+      unique_id: genelec_appart_ratio_hc_quotidien
+      unit_of_measurement: "%"
+      state_class: measurement
+      icon: mdi:percent
+      state: >
+        {% set hp    = states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) %}
+        {% set hc    = states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) %}
+        {% set total = hp + hc %}
+        {{ ((hc / total) * 100) | round(1) if total > 0 else 0 }}
+      availability: >
+        {{ states('sensor.genelec_appart_hphc_quotidien_um_hp') not in ['unavailable','unknown','none']
+          and states('sensor.genelec_appart_hphc_quotidien_um_hc') not in ['unavailable','unknown','none'] }}
+
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ 2. HEBDOMADAIRE (H)                                                      │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+
+    # --- genelec_appart_ratio_hc_hebdomadaire ---
+    - name: "Genelec Appart Ratio HC Hebdomadaire"
+      unique_id: genelec_appart_ratio_hc_hebdomadaire
+      unit_of_measurement: "%"
+      state_class: measurement
+      icon: mdi:percent
+      state: >
+        {% set hp    = states('sensor.genelec_appart_hphc_hebdomadaire_um_hp') | float(0) %}
+        {% set hc    = states('sensor.genelec_appart_hphc_hebdomadaire_um_hc') | float(0) %}
+        {% set total = hp + hc %}
+        {{ ((hc / total) * 100) | round(1) if total > 0 else 0 }}
+      availability: >
+        {{ states('sensor.genelec_appart_hphc_hebdomadaire_um_hp') not in ['unavailable','unknown','none']
+          and states('sensor.genelec_appart_hphc_hebdomadaire_um_hc') not in ['unavailable','unknown','none'] }}
+
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ 3. MENSUEL (M)                                                           │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+
+    # --- genelec_appart_ratio_hc_mensuel ---
+    - name: "Genelec Appart Ratio HC Mensuel"
+      unique_id: genelec_appart_ratio_hc_mensuel
+      unit_of_measurement: "%"
+      state_class: measurement
+      icon: mdi:percent
+      state: >
+        {% set hp    = states('sensor.genelec_appart_hphc_mensuel_um_hp') | float(0) %}
+        {% set hc    = states('sensor.genelec_appart_hphc_mensuel_um_hc') | float(0) %}
+        {% set total = hp + hc %}
+        {{ ((hc / total) * 100) | round(1) if total > 0 else 0 }}
+      availability: >
+        {{ states('sensor.genelec_appart_hphc_mensuel_um_hp') not in ['unavailable','unknown','none']
+          and states('sensor.genelec_appart_hphc_mensuel_um_hc') not in ['unavailable','unknown','none'] }}
+
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ 4. ANNUEL (A)                                                            │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+
+    # --- genelec_appart_ratio_hc_annuel ---
+    - name: "Genelec Appart Ratio HC Annuel"
+      unique_id: genelec_appart_ratio_hc_annuel
+      unit_of_measurement: "%"
+      state_class: measurement
+      icon: mdi:percent
+      state: >
+        {% set hp    = states('sensor.genelec_appart_hphc_annuel_um_hp') | float(0) %}
+        {% set hc    = states('sensor.genelec_appart_hphc_annuel_um_hc') | float(0) %}
+        {% set total = hp + hc %}
+        {{ ((hc / total) * 100) | round(1) if total > 0 else 0 }}
+      availability: >
+        {{ states('sensor.genelec_appart_hphc_annuel_um_hp') not in ['unavailable','unknown','none']
+          and states('sensor.genelec_appart_hphc_annuel_um_hc') not in ['unavailable','unknown','none'] }}
+
+# annotations_log:
+# - [RESTAURÉ] Fichier sorti de l'état OBSOLÈTE — split HP/HC recréé via UM tariff natif
+# - [RENOMMÉ] ecojoko_ratio_hc_* → genelec_appart_ratio_hc_*
+# - [RENOMMÉ] Sources ecojoko_hp/hc_reseau_*_um → genelec_appart_hphc_*_um_hp / *_hc
+# - [AJOUT] sensor annuel (4ème période manquante dans la version d'origine)
+# - [AJOUT] bloc availability sur chaque sensor

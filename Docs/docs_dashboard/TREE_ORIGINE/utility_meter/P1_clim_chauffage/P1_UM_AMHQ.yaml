@@ -1,0 +1,155 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 1 — UTILITY METER AMHQ : CHAUFFAGE & CLIMATISATION                  │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Compteurs périodiques (Annuel / Mensuel / Hebdo / Quotidien) pour les 6
+# équipements du Pôle 1 : 3 clims, 1 radiateur cuisine, 1 soufflant SDB,
+# 1 sèche-serviette SDB.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources : sensors/P1_clim_chauffage/P1_kWh.yaml → sensor.*_energie_totale_kwh
+#   (Riemann integration depuis *_power, méthode left)
+# - Chaque source = énergie cumulée depuis création du capteur Riemann
+# - Remise à zéro : Quotidien = minuit / Hebdo = lundi / Mensuel = 1er / Annuel = 1er jan
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Les sources pointent désormais sur les capteurs Riemann *_energie_totale_kwh
+#   et NON plus sur les sensor.*_nous_energy natifs des prises NOUS.
+# - Ne pas confondre les outputs UM (sensor.*_quotidien_kwh_um, etc.) avec les sources.
+# - Si HA redémarre en milieu de période, la RAZ reste sur le cycle configuré.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Alimente la vignette L2C2 (Conso Énergie Clim / Radiateur / Soufflant)
+
+# ┌───────────────────────────────────┐
+# │ 4. SALON                          │
+# └───────────────────────────────────┘
+
+# --- clim_salon ---
+clim_salon_annuel_kwh_um:
+  source: sensor.clim_salon_energie_totale_kwh        # [L1] modif — était: sensor.clim_salon_nous_energy
+  cycle: yearly
+
+clim_salon_mensuel_kwh_um:
+  source: sensor.clim_salon_energie_totale_kwh        # [L1] modif
+  cycle: monthly
+
+clim_salon_hebdomadaire_kwh_um:
+  source: sensor.clim_salon_energie_totale_kwh        # [L1] modif
+  cycle: weekly
+
+clim_salon_quotidien_kwh_um:
+  source: sensor.clim_salon_energie_totale_kwh        # [L1] modif
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │ 5. CUISINE                        │
+# └───────────────────────────────────┘
+
+# --- radiateur_cuisine ---
+radiateur_elec_cuisine_annuel_kwh_um:
+  source: sensor.radiateur_elec_cuisine_energie_totale_kwh  # [L2] modif — était: sensor.radiateur_elec_cuisine_energy
+  cycle: yearly
+
+radiateur_elec_cuisine_mensuel_kwh_um:
+  source: sensor.radiateur_elec_cuisine_energie_totale_kwh  # [L2] modif
+  cycle: monthly
+
+radiateur_elec_cuisine_hebdomadaire_kwh_um:
+  source: sensor.radiateur_elec_cuisine_energie_totale_kwh  # [L2] modif
+  cycle: weekly
+
+radiateur_elec_cuisine_quotidien_kwh_um:
+  source: sensor.radiateur_elec_cuisine_energie_totale_kwh  # [L2] modif
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │ 7. BUREAU                         │
+# └───────────────────────────────────┘
+
+# --- clim_bureau ---
+clim_bureau_annuel_kwh_um:
+  source: sensor.clim_bureau_energie_totale_kwh       # [L3] modif — était: sensor.clim_bureau_nous_energy
+  cycle: yearly
+
+clim_bureau_mensuel_kwh_um:
+  source: sensor.clim_bureau_energie_totale_kwh       # [L3] modif
+  cycle: monthly
+
+clim_bureau_hebdomadaire_kwh_um:
+  source: sensor.clim_bureau_energie_totale_kwh       # [L3] modif
+  cycle: weekly
+
+clim_bureau_quotidien_kwh_um:
+  source: sensor.clim_bureau_energie_totale_kwh       # [L3] modif
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │ 8. SDB                            │
+# └───────────────────────────────────┘
+
+# --- soufflant_sdb ---
+soufflant_sdb_annuel_kwh_um:
+  source: sensor.soufflant_sdb_energie_totale_kwh     # [L4] modif — était: sensor.prise_soufflant_salle_de_bain_nous_energy
+  cycle: yearly
+
+soufflant_sdb_mensuel_kwh_um:
+  source: sensor.soufflant_sdb_energie_totale_kwh     # [L4] modif
+  cycle: monthly
+
+soufflant_sdb_hebdomadaire_kwh_um:
+  source: sensor.soufflant_sdb_energie_totale_kwh     # [L4] modif
+  cycle: weekly
+
+soufflant_sdb_quotidien_kwh_um:
+  source: sensor.soufflant_sdb_energie_totale_kwh     # [L4] modif
+  cycle: daily
+
+# --- seche_serviette_sdb ---
+seche_serviette_sdb_annuel_kwh_um:
+  source: sensor.seche_serviette_sdb_energie_totale_kwh  # [L5] modif — était: sensor.prise_seche_serviette_salle_de_bain_nous_energy
+  cycle: yearly
+
+seche_serviette_sdb_mensuel_kwh_um:
+  source: sensor.seche_serviette_sdb_energie_totale_kwh  # [L5] modif
+  cycle: monthly
+
+seche_serviette_sdb_hebdomadaire_kwh_um:
+  source: sensor.seche_serviette_sdb_energie_totale_kwh  # [L5] modif
+  cycle: weekly
+
+seche_serviette_sdb_quotidien_kwh_um:
+  source: sensor.seche_serviette_sdb_energie_totale_kwh  # [L5] modif
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │ 9. CHAMBRE                        │
+# └───────────────────────────────────┘
+
+# --- clim_chambre ---
+clim_chambre_annuel_kwh_um:
+  source: sensor.clim_chambre_energie_totale_kwh      # [L6] modif — était: sensor.clim_chambre_nous_energy
+  cycle: yearly
+
+clim_chambre_mensuel_kwh_um:
+  source: sensor.clim_chambre_energie_totale_kwh      # [L6] modif
+  cycle: monthly
+
+clim_chambre_hebdomadaire_kwh_um:
+  source: sensor.clim_chambre_energie_totale_kwh      # [L6] modif
+  cycle: weekly
+
+clim_chambre_quotidien_kwh_um:
+  source: sensor.clim_chambre_energie_totale_kwh      # [L6] modif
+  cycle: daily
+
+# annotations_log:
+# [L1] clim_salon ×4         : sensor.clim_salon_nous_energy → sensor.clim_salon_energie_totale_kwh
+# [L2] radiateur_cuisine ×4  : sensor.radiateur_elec_cuisine_energy → sensor.radiateur_elec_cuisine_energie_totale_kwh
+# [L3] clim_bureau ×4        : sensor.clim_bureau_nous_energy → sensor.clim_bureau_energie_totale_kwh
+# [L4] soufflant_sdb ×4      : sensor.prise_soufflant_salle_de_bain_nous_energy → sensor.soufflant_sdb_energie_totale_kwh
+# [L5] seche_serviette_sdb ×4: sensor.prise_seche_serviette_salle_de_bain_nous_energy → sensor.seche_serviette_sdb_energie_totale_kwh
+# [L6] clim_chambre ×4       : sensor.clim_chambre_nous_energy → sensor.clim_chambre_energie_totale_kwh
+# Total : 24 sources mises à jour → toutes pointent sur sensors/P1_clim_chauffage/P1_kWh.yaml
+# [Lfix] Convention slug : *_um → *_kwh_um (24 slugs) — règle: source *_kwh → UM *_kwh_um

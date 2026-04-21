@@ -1,0 +1,32 @@
+id: '1766776781417'
+alias: E - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 2h)
+description: 'Timer de 2h après détection de chauffe. Sécurité anti-redémarrage incluse.'
+triggers:
+- alias: 'START : DÉTECTION PUISSANCE > 50W'
+  trigger: numeric_state
+  entity_id: sensor.prise_seche_serviette_salle_de_bain_nous_power
+  above: 50
+conditions: []
+actions:
+- alias: 'CHRONO : DÉCOMPTE DE 2 HEURES'
+  delay: 02:00:00
+- alias: 'VERIF : EST-IL TOUJOURS ALLUMÉ ?'
+  condition: state
+  entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+  state: 'on'
+- alias: 'ACTION : COUPURE DE SÉCURITÉ'
+  action: switch.turn_off
+  target:
+    entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+- alias: 'NOTIF : ARRÊT AUTO'
+  action: notify.mobile_app_eric
+  data:
+    title: Sèche-Serv. OFF
+    message: 2h écoulees. Arret automatique.
+- alias: 'RESET : ATTENTE 1 MIN'
+  delay: 00:01:00
+- alias: 'ACTION : RÉARMEMENT (VEILLE)'
+  action: switch.turn_on
+  target:
+    entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+mode: single

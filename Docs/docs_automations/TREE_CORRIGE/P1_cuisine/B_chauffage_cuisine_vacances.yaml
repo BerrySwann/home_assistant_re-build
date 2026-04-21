@@ -1,0 +1,62 @@
+id: '1766776086135'
+alias: B - Chauffage Cuisine Vacances
+description: 'Allume ou éteint le chauffage selon la température entre 6h00 et 8h30  pendant les vacances (Tous les jours).\n'
+triggers:
+- trigger: time
+  at: 06:00:00
+- trigger: numeric_state
+  entity_id: sensor.th_cuisine_temperature
+  below: 19.9
+- trigger: numeric_state
+  entity_id: sensor.th_cuisine_temperature
+  above: 20.5
+conditions: []
+actions:
+- choose:
+  - alias: 'DÉMARRAGE : Mode Chauffage'
+    conditions:
+    - condition: zone
+      entity_id: person.mamour
+      zone: zone.home
+    - condition: zone
+      entity_id: person.eric
+      zone: zone.home
+    - condition: time
+      after: 06:00:00
+      before: 08:30:00
+    - condition: numeric_state
+      entity_id: sensor.th_cuisine_temperature
+      below: 19.9
+    sequence:
+    - action: climate.set_hvac_mode
+      target:
+        entity_id: climate.radiateur_cuisine
+      data:
+        hvac_mode: heat
+    - action: notify.mobile_app_eric
+      data:
+        message: /!\ Chauffage Cuisine 'ON' /!\
+  - alias: 'ARRÊT : Température atteinte'
+    conditions:
+    - condition: zone
+      entity_id: person.mamour
+      zone: zone.home
+    - condition: zone
+      entity_id: person.eric
+      zone: zone.home
+    - condition: time
+      after: 06:00:00
+      before: 08:30:00
+    - condition: numeric_state
+      entity_id: sensor.th_cuisine_temperature
+      above: 20.5
+    sequence:
+    - action: climate.set_hvac_mode
+      target:
+        entity_id: climate.radiateur_cuisine
+      data:
+        hvac_mode: 'off'
+    - action: notify.mobile_app_eric
+      data:
+        message: /!\ Chauffage Cuisine 'OFF' /!\
+mode: single

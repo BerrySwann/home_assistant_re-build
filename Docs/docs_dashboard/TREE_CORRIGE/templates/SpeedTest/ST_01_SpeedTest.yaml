@@ -1,0 +1,88 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ [ ST ] TEMPLATES : SPEEDTEST CLI — DOWNLOAD / UPLOAD / PING              │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Trois capteurs templates extrayant les métriques de bande passante depuis
+# le capteur parent sensor.speedtest_cli_data (intégration Speedtest CLI).
+# Conversion bits/s → Mbps pour Download et Upload, ms pour Ping.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source unique : sensor.speedtest_cli_data [NAT] (attributs JSON imbriqués)
+# - Download      : state_attr(..., 'download').bandwidth / 125000 → Mbps
+# - Upload        : state_attr(..., 'upload').bandwidth / 125000 → Mbps
+# - Ping          : state_attr(..., 'ping').latency → ms (valeur directe)
+# - Fallback      : none (→ état "unknown" HA) si l'attribut est absent
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | command_line (speedtest-cli) | sensor.speedtest_cli_data (JSON)                   | speedtest_download_mbps / _upload_mbps / _ping_ms  | L4C2 Mini PC                       |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - sensor.speedtest_cli_data ≠ sensor.speedtest_download
+#   └── sensor.speedtest_cli_data  : capteur parent [NAT] source de CE fichier
+#   └── sensor.speedtest_download  : entité native séparée [NAT] — déclenche le test
+# - Les attributs .bandwidth et .latency sont dans des sous-objets JSON.
+# - PIÈGE CRITIQUE : Retourner une chaîne (ex: "Indisponible") avec
+#   unit_of_measurement défini → ERROR "expected a number" en log.
+#   → Utiliser {{ none }} : HA interprète none comme état "unknown" et bypass
+#   la validation numérique. Jamais de string texte comme fallback ici.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L4C1 Freebox Pop → Page /systeme-freebox → Pop-up #speedtest_details
+
+- sensor:
+
+    # ┌───────────────────────────────────┐
+    # │ [ ST ] SPEEDTEST CLI              │
+    # └───────────────────────────────────┘
+
+    # --- speedtest_cli_download ---
+    - name: "Speedtest CLI Download"
+      unique_id: speedtest_cli_download
+      unit_of_measurement: "Mbps"
+      state_class: measurement
+      icon: mdi:download-network
+      state: >
+        {% set dl = state_attr('sensor.speedtest_cli_data', 'download') %}
+        {% if dl and dl.bandwidth is defined %}
+          {{ (dl.bandwidth / 125000) | round(1) }}
+        {% else %}
+          {{ none }}                                  {# "[L50] modif: 'Indisponible' → none" #}
+        {% endif %}
+
+    # --- speedtest_cli_upload ---
+    - name: "Speedtest CLI Upload"
+      unique_id: speedtest_cli_upload
+      unit_of_measurement: "Mbps"
+      state_class: measurement
+      icon: mdi:upload-network
+      state: >
+        {% set ul = state_attr('sensor.speedtest_cli_data', 'upload') %}
+        {% if ul and ul.bandwidth is defined %}
+          {{ (ul.bandwidth / 125000) | round(1) }}
+        {% else %}
+          {{ none }}                                  {# "[L62] modif: 'Indisponible' → none" #}
+        {% endif %}
+
+    # --- speedtest_cli_ping ---
+    - name: "Speedtest CLI Ping"
+      unique_id: speedtest_cli_ping
+      unit_of_measurement: "ms"
+      state_class: measurement
+      icon: mdi:timer-outline
+      state: >
+        {% set p = state_attr('sensor.speedtest_cli_data', 'ping') %}
+        {% if p and p.latency is defined %}
+          {{ p.latency | round(1) }}
+        {% else %}
+          {{ none }}                                  {# "[L74] modif: 'Indisponible' → none" #}
+        {% endif %}
+
+# annotations_log:
+# [L50,62,74] fallback 'Indisponible' → {{ none }} sur les 3 capteurs
+# Cause : HA valide état numérique si unit_of_measurement défini — string → ERROR log
+# Fix : none → état "unknown" HA → bypass validation → plus d'erreur

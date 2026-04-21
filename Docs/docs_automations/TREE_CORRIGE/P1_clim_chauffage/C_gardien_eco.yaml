@@ -1,0 +1,99 @@
+id: '1766771907739'
+alias: (C) (CLIM OFF) Gardien Éco (Delta T < -1 et T°Ext > Seuil Non-Chauffage)
+description: "Module de sécurité ÉCO. Coupe les climatiseurs si l'air extérieur est plus chaud  que le seuil de non-chauffage et que le Delta est favorable.\n"
+triggers:
+- trigger: numeric_state
+  entity_id: sensor.temperature_delta_valeur
+  below: -1
+  for: 00:10:00
+conditions:
+- condition: time
+  after: 07:30:00
+  before: '21:00:00'
+- condition: template
+  value_template: "{{ states('sensor.th_balcon_nord_temperature') | float(0) > \n\
+    \   states('sensor.seuil_non_chauffage_bas') | float(15) }}\n"
+- condition: numeric_state
+  entity_id: sensor.th_balcon_nord_temperature
+  below: 25
+- condition: or
+  conditions:
+  - condition: state
+    entity_id: climate.clim_salon_rm4_mini
+    state:
+    - cool
+    - heat
+    - fan_only
+    - dry
+    - auto
+  - condition: state
+    entity_id: climate.clim_bureau_rm4_mini
+    state:
+    - cool
+    - heat
+    - fan_only
+    - dry
+    - auto
+  - condition: state
+    entity_id: climate.clim_chambre_rm4_mini
+    state:
+    - cool
+    - heat
+    - fan_only
+    - dry
+    - auto
+actions:
+- if:
+  - condition: state
+    entity_id: climate.clim_salon_rm4_mini
+    state:
+    - cool
+    - heat
+    - fan_only
+    - dry
+    - auto
+  then:
+  - action: climate.set_hvac_mode
+    target:
+      entity_id: climate.clim_salon_rm4_mini
+    data:
+      hvac_mode: 'off'
+- if:
+  - condition: state
+    entity_id: climate.clim_bureau_rm4_mini
+    state:
+    - cool
+    - heat
+    - fan_only
+    - dry
+    - auto
+  then:
+  - action: climate.set_hvac_mode
+    target:
+      entity_id: climate.clim_bureau_rm4_mini
+    data:
+      hvac_mode: 'off'
+- if:
+  - condition: state
+    entity_id: climate.clim_chambre_rm4_mini
+    state:
+    - cool
+    - heat
+    - fan_only
+    - dry
+    - auto
+  then:
+  - action: climate.set_hvac_mode
+    target:
+      entity_id: climate.clim_chambre_rm4_mini
+    data:
+      hvac_mode: 'off'
+- action: notify.mobile_app_eric
+  data:
+    title: Delta T° < -1°C
+    message: 'Les clim ont été éteintes. ({{ states(''sensor.temperature_delta_valeur'')
+      }}°C)  T° Ext.: ({{ states(''sensor.th_balcon_nord_temperature'') }}°C)  Seuil
+      réglé à: {{ states(''sensor.seuil_non_chauffage_bas'') }}°C.
+
+      '
+mode: single
