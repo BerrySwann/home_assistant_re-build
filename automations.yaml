@@ -2069,7 +2069,7 @@
       entity_id: switch.prise_tv_salon_ikea
     action: homeassistant.turn_off
   - target:
-      entity_id: light.hue_smart_salon
+      entity_id: light.hue_smart_eco_salon
     action: homeassistant.turn_{{ vapote }}
   - target:
       entity_id: switch.prise_horloge_ikea
@@ -2078,7 +2078,7 @@
       entity_id: switch.ecran_p_c_3_play_hue
     action: homeassistant.turn_{{ play3 }}
   - target:
-      entity_id: light.hue_smart_plug_eco_pc_bureau
+      entity_id: light.hue_smart_eco_pc_bureau
     action: homeassistant.turn_{{ pc_bureau }}
   - target:
       entity_id: switch.prise_tete_de_lit_chambre
@@ -2086,7 +2086,7 @@
   - data:
       title: 'Groupe: {{ g }}'
       message: "{% set prises = [\n  'switch.prise_tv_salon_ikea',\n  'switch.prise_horloge_ikea',\n
-        \ 'light.hue_smart_salon',\n  'switch.ecran_p_c_3_play_hue',\n  'light.hue_smart_eco_pc_bureau',\n
+        \ 'light.hue_smart_eco_salon',\n  'switch.ecran_p_c_3_play_hue',\n  'light.hue_smart_eco_pc_bureau',\n
         \ 'switch.prise_tete_de_lit_chambre'\n] %} {% set count_on = namespace(value=0)
         %} {% for p in prises %}\n  {% if states(p) == 'on' %}\n    {% set count_on.value
         = count_on.value + 1 %}\n  {% endif %}\n{% endfor %} [{{ count_on.value }}]
