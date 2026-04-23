@@ -2610,37 +2610,20 @@
           entity_id: light.salon
   mode: restart
 - id: '1775501235942'
-  alias: DIAG - ENREGISTREMENT JOURNALIER (7 POSTES + DUT)
-  description: Log toutes les 15 min la consommation des 7 postes, la température
-    extérieure et le DUT chauffage (Ordre S/R/B/C) dans un fichier.
+  alias: Duel Linky vs Nodon - Log Quotidien
+  description: Enregistre l'écart à 23:59 pile
   triggers:
-  - alias: 'DÉCLENCHEUR : TOUTES LES 15 MINUTES'
-    trigger: time_pattern
-    minutes: /15
-  conditions: []
+  - trigger: time
+    at: '23:59:00'
   actions:
-  - alias: 'ACTION : ENREGISTREMENT DANS LE FICHIER'
-    action: notify.send_message
+  - action: notify.send_message
     target:
-      entity_id: notify.file
+      entity_id: notify.file_2
     data:
-      message: '{% set p1 = states(''sensor.diag_poste_hygiene_quotidien'')    | float(0)
-        | round(2) %} {% set p2 = states(''sensor.diag_poste_cuisine_quotidien'')    |
-        float(0) | round(2) %} {% set p3 = states(''sensor.diag_poste_froid_quotidien'')      |
-        float(0) | round(2) %} {% set p4 = states(''sensor.diag_poste_chauffage_quotidien'')  |
-        float(0) | round(2) %} {% set agv_clim = states(''sensor.clim_rad_total_avg_watts_quotidien'')
-        | float(0) | round(2) %} {% set p5 = states(''sensor.diag_poste_multimedia_quotidien'')
-        | float(0) | round(2) %} {% set p6 = states(''sensor.diag_poste_eclairage_quotidien'')  |
-        float(0) | round(2) %} {% set p7 = states(''sensor.diag_poste_autre_quotidien'')      |
-        float(0) | round(2) %} {% set ext = states(''sensor.th_balcon_nord_temperature'')     |
-        float(0) %} {% set int = states(''sensor.temperature_moyenne_interieure'')
-        | float(0) %} {% set dut_s = states(''sensor.dut_clim_salon'')        | float(0)
-        | round(1) %} {% set dut_r = states(''sensor.dut_radiateur_cuisine'') | float(0)
-        | round(1) %} {% set dut_b = states(''sensor.dut_clim_bureau'')       | float(0)
-        | round(1) %} {% set dut_c = states(''sensor.dut_clim_chambre'')      | float(0)
-        | round(1) %} {% set t = now().strftime(''%d/%m %H:%M'') %} {{t}} | Hyg:{{p1}}
-        | Cuis:{{p2}} | Froid:{{p3}} | Chauff:{{p4}} | Avg 4:{{agv_clim}} | Multi:{{p5}}
-        | Lum:{{p6}} | Autres:{{p7}} | Ti:{{int}}°C | Ext:{{ext}}°C | DUT S/R/B/C:{{dut_s}}/{{dut_r}}/{{dut_b}}/{{dut_c}}
+      message: '{% set l = states(''sensor.linky_quotidien'') | float(0) %} {% set
+        n = states(''sensor.genelec_appart_quotidien_kwh_um'') | float(0) %} {% set
+        diff = (l - n) | round(3) %} {% set t = now().strftime(''%d/%m %H:%M'') %}
+        {{t}} | Linky: {{l}} | Nodon: {{n}} | Écart: {{diff}} kWh
 
         '
   mode: single
@@ -2756,14 +2739,7 @@
   - at: '23:59:00'
     trigger: time
   actions:
-  - data:
-      message: "{# --- CONFIGURATION DES NOMS D'ENTITÉS --- #} {% set linky_entity
-        = 'sensor.linky_25481620821301_consumption_history' %} {% set nodon_entity
-        = 'sensor.genelec_appart_quotidien_kwh_um' %}\n{# --- RÉCUPÉRATION DES VALEURS
-        --- #} {% set l = states(linky_entity) | float(0) %} {% set n = states(nodon_entity)
-        | float(0) %}\n{# --- CALCULS --- #} {% if l > 0 %}\n  {% set diff = (l -
-        n) | round(3) %}\n  {% set pourcent = ((diff / l) * 100) | round(2) %}\n{%
-        else %}\n  {% set diff = 0 %}\n  {% set pourcent = 0 %}\n{% endif %}\n{# ---
-        LA LIGNE DE LOG --- #} {{ now().strftime('%d/%m/%Y %H:%M') }} | Linky: {{
-        l }} kWh | Nodon: {{ n }} kWh | Écart: {{ diff }} kWh ({{ pourcent }}%)\n"
-    action: notify.log_ecart_energie
+  - action: notify.send_message
+    target:
+      entity_id: notify.file_2
+    data: {}
