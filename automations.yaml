@@ -2726,12 +2726,15 @@
     target:
       entity_id: notify.log_ecart_energie
     data:
-      message: '{% set l = states(''sensor.linky_25481620821301_consumption_history'')
-        | float(0) %} {% set n = states(''sensor.genelec_appart_quotidien_kwh_um'')
-        | float(0) %} {% set diff = (l - n) | round(3) %} {% set pct = ((diff / l
-        * 100) | round(1)) if l > 0 else 0 %} {% set t = now().strftime(''%d/%m %H:%M'')
-        %} {{t}} | Linky: {{l}} | Nodon: {{n}} | Écart: {{diff}} kWh ({{pct}}%) {%
-        set linky_age = (now() - states.sensor.linky_quotidien.last_changed).total_seconds()
-        / 3600 %} Linky MàJ: il y a {{linky_age | round(1)}}h
+      message: '{% set l   = states(''sensor.linky_25481620821301_consumption_history'')
+        | float(0) %} {% set n1  = state_attr(''sensor.genelec_appart_quotidien_kwh_um'',
+        ''last_period'') | float(0) %} {% set n2  = state_attr(''sensor.genelec_appart_quotidien_um'',
+        ''last_period'') | float(0) %} {% set d1  = (l - n1) | round(3) %} {% set
+        d2  = (l - n2) | round(3) %} {% set p1  = ((d1 / l * 100) | round(1)) if l
+        > 0 else 0 %} {% set p2  = ((d2 / l * 100) | round(1)) if l > 0 else 0 %}
+        {% set t   = now().strftime(''%d/%m %H:%M'') %} {% set lc  = states.sensor.linky_quotidien
+        %} {% set age = ((now() - lc.last_changed).total_seconds() / 3600) | round(1)
+        if lc else ''N/A'' %} {{t}} | Linky: {{l}} kWh (age: {{age}}h) Riemann: {{n1}}
+        kWh | Ecart: {{d1}} ({{p1}}%) Direct:  {{n2}} kWh | Ecart: {{d2}} ({{p2}}%)
 
         '
