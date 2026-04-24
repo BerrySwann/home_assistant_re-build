@@ -2730,6 +2730,8 @@
         | float(0) %} {% set n = states(''sensor.genelec_appart_quotidien_kwh_um'')
         | float(0) %} {% set diff = (l - n) | round(3) %} {% set pct = ((diff / l
         * 100) | round(1)) if l > 0 else 0 %} {% set t = now().strftime(''%d/%m %H:%M'')
-        %} {{t}} | Linky: {{l}} | Nodon: {{n}} | Écart: {{diff}} kWh ({{pct}}%)
+        %} {{t}} | Linky: {{l}} | Nodon: {{n}} | Écart: {{diff}} kWh ({{pct}}%) {%
+        set linky_age = (now() - states.sensor.linky_quotidien.last_changed).total_seconds()
+        / 3600 %} Linky MàJ: il y a {{linky_age | round(1)}}h
 
         '
