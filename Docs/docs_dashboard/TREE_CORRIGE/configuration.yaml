@@ -246,3 +246,4 @@ fan:
       - name: RPI Cooling Fan
         unique_id: rpi_cooling_fan
         pin: 14
+

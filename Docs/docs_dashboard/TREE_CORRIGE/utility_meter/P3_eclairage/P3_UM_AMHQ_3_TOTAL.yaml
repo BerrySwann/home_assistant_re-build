@@ -1,100 +1,103 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 3. UTILITY METER : ÉCLAIRAGE — AMHQ TOTAL APPARTEMENT               │
+# │ PÔLE 3. UTILITY METER : ÉCLAIRAGE — AMHQ TOTAUX APPARTEMENT              │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Compteurs Utility Meter donnant la consommation totale de tout l'éclairage
-# de l'appartement en 4 cycles AMHQ. Représente la somme de toutes les ampoules
-# de toutes les pièces.
+# Compteurs Utility Meter calculant la consommation totale de l'éclairage
+# de l'appartement selon 2 méthodes de calcul complémentaires, en 4 cycles
+# AMHQ. Total : 2 totaux × 4 cycles = 8 compteurs.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Source : sensor.eclairage_total_appartement_energie_totale_kwh (calculé
-#   dans sensors/P3_eclairage/P3_kWh_3_TOTAL.yaml).
-#
+# - eclairage_total_unit_* : source = sensor.eclairage_total_unit_energie
+#   (P3_ENERGIE_1_TOTAL_UNITE.yaml — somme directe des 19 ampoules _energy).
+# - eclairage_total_group_* : source = sensor.eclairage_total_group_energie
+#   (P3_ENERGIE_3_TOTAL_ZONE.yaml — somme des 7 zones physiques _energie).
+# - Les deux résultats sont théoriquement identiques (cross-check de cohérence).
+# - Riemann (_energie_totale_kwh) supprimé — sources remplacées par templates.
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
-# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
-# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.eclairage_appart_total_kwh                  | eclairage_appart_total_{annuel|mensuel|hebdo|quotidien} | P3_AVG_AMHQ_3_TOTAL.yaml → L2C3    |
+# | MATÉRIEL    | CAPTEUR BRUT (source)                         | CE FICHIER (unique_id)                                  | AVAL       |
+# |:------------|:----------------------------------------------|:--------------------------------------------------------|:-----------|
+# | [calculé]   | sensor.eclairage_total_unit_energie           | eclairage_total_unit_{annuel|mensuel|hebdo|quotidien}_um | L2C3       |
+# | [calculé]   | sensor.eclairage_total_group_energie          | eclairage_total_group_{annuel|mensuel|hebdo|quotidien}_um| L2C3       |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# Ce total est la somme logique de toutes les zones. Vérifier cohérence avec
-# les UM par zone (2_ZONE) pour détecter les dérives.
+# - eclairage_total_unit et eclairage_total_group doivent rester cohérents.
+#   Tout écart indique une ampoule manquante ou doublée dans l'une des sources.
+# - Ne jamais pointer sur eclairage_appart_2/3 ici — zones transversales = double-comptage.
+# - Pas de tariff HP/HC — ces UM sont simples (pas de split tarifaire).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L2C3 Conso Énergie Éclairage (vignette total éclairage)
+# - L2C3 Conso Énergie Éclairage (total appartement — graphes AMHQ)
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │    PÔLE 3. TOTAL : PAR REGROUPEMENT (7 zones)                            │
+# │    TOTAL UNITÉ (somme directe 19 ampoules)                                │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 
-# --- eclairage_total_group_annuel_kwh_um ---
-eclairage_total_group_annuel_kwh_um:
-  source: sensor.eclairage_total_group_energie_totale_kwh
-  name: "Eclairage Total Group Annuel kWh UM"
-  unique_id: eclairage_total_group_annuel_kwh_um
+# --- eclairage_total_unit_annuel_um ---
+eclairage_total_unit_annuel_um:
+  source: sensor.eclairage_total_unit_energie
+  name: "Eclairage Total Unit Annuel UM"
+  unique_id: eclairage_total_unit_annuel_um
   cycle: yearly
 
-# --- eclairage_total_group_mensuel_kwh_um ---
-eclairage_total_group_mensuel_kwh_um:
-  source: sensor.eclairage_total_group_energie_totale_kwh
-  name: "Eclairage Total Group Mensuel kWh UM"
-  unique_id: eclairage_total_group_mensuel_kwh_um
+# --- eclairage_total_unit_mensuel_um ---
+eclairage_total_unit_mensuel_um:
+  source: sensor.eclairage_total_unit_energie
+  name: "Eclairage Total Unit Mensuel UM"
+  unique_id: eclairage_total_unit_mensuel_um
   cycle: monthly
 
-# --- eclairage_total_group_hebdomadaire_kwh_um ---
-eclairage_total_group_hebdomadaire_kwh_um:
-  source: sensor.eclairage_total_group_energie_totale_kwh
-  name: "Eclairage Total Group Hebdomadaire kWh UM"
-  unique_id: eclairage_total_group_hebdomadaire_kwh_um
+# --- eclairage_total_unit_hebdomadaire_um ---
+eclairage_total_unit_hebdomadaire_um:
+  source: sensor.eclairage_total_unit_energie
+  name: "Eclairage Total Unit Hebdomadaire UM"
+  unique_id: eclairage_total_unit_hebdomadaire_um
   cycle: weekly
 
-# --- eclairage_total_group_quotidien_kwh_um ---
-eclairage_total_group_quotidien_kwh_um:
-  source: sensor.eclairage_total_group_energie_totale_kwh
-  name: "Eclairage Total Group Quotidien kWh UM"
-  unique_id: eclairage_total_group_quotidien_kwh_um
+# --- eclairage_total_unit_quotidien_um ---
+eclairage_total_unit_quotidien_um:
+  source: sensor.eclairage_total_unit_energie
+  name: "Eclairage Total Unit Quotidien UM"
+  unique_id: eclairage_total_unit_quotidien_um
   cycle: daily
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │    PÔLE 3. TOTAL : À L'UNITÉ (19 lampes)                                 │
+# │    TOTAL GROUP (somme des 7 zones physiques)                              │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 
-# --- eclairage_total_unit_annuel_kwh_um ---
-eclairage_total_unit_annuel_kwh_um:
-  source: sensor.eclairage_total_unit_energie_totale_kwh
-  name: "Eclairage Total Unit Annuel kWh UM"
-  unique_id: eclairage_total_unit_annuel_kwh_um
+# --- eclairage_total_group_annuel_um ---
+eclairage_total_group_annuel_um:
+  source: sensor.eclairage_total_group_energie
+  name: "Eclairage Total Group Annuel UM"
+  unique_id: eclairage_total_group_annuel_um
   cycle: yearly
 
-# --- eclairage_total_unit_mensuel_kwh_um ---
-eclairage_total_unit_mensuel_kwh_um:
-  source: sensor.eclairage_total_unit_energie_totale_kwh
-  name: "Eclairage Total Unit Mensuel kWh UM"
-  unique_id: eclairage_total_unit_mensuel_kwh_um
+# --- eclairage_total_group_mensuel_um ---
+eclairage_total_group_mensuel_um:
+  source: sensor.eclairage_total_group_energie
+  name: "Eclairage Total Group Mensuel UM"
+  unique_id: eclairage_total_group_mensuel_um
   cycle: monthly
 
-# --- eclairage_total_unit_hebdomadaire_kwh_um ---
-eclairage_total_unit_hebdomadaire_kwh_um:
-  source: sensor.eclairage_total_unit_energie_totale_kwh
-  name: "Eclairage Total Unit Hebdomadaire kWh UM"
-  unique_id: eclairage_total_unit_hebdomadaire_kwh_um
+# --- eclairage_total_group_hebdomadaire_um ---
+eclairage_total_group_hebdomadaire_um:
+  source: sensor.eclairage_total_group_energie
+  name: "Eclairage Total Group Hebdomadaire UM"
+  unique_id: eclairage_total_group_hebdomadaire_um
   cycle: weekly
 
-# --- eclairage_total_unit_quotidien_kwh_um ---
-eclairage_total_unit_quotidien_kwh_um:
-  source: sensor.eclairage_total_unit_energie_totale_kwh
-  name: "Eclairage Total Unit Quotidien kWh UM"
-  unique_id: eclairage_total_unit_quotidien_kwh_um
+# --- eclairage_total_group_quotidien_um ---
+eclairage_total_group_quotidien_um:
+  source: sensor.eclairage_total_group_energie
+  name: "Eclairage Total Group Quotidien UM"
+  unique_id: eclairage_total_group_quotidien_um
   cycle: daily
 
 # annotations_log:
-# - [slug] MOD L25: # --- eclairage_total_group --- → # --- eclairage_total_group_annuel_kwh_um ---
-# - [slug] INS avant L32: # --- eclairage_total_group_mensuel_kwh_um ---
-# - [slug] INS avant L39: # --- eclairage_total_group_hebdomadaire_kwh_um ---
-# - [slug] INS avant L46: # --- eclairage_total_group_quotidien_kwh_um ---
-# - [slug] MOD L57: # --- eclairage_total_unit --- → # --- eclairage_total_unit_annuel_kwh_um ---
-# - [slug] INS avant L64: # --- eclairage_total_unit_mensuel_kwh_um ---
-# - [slug] INS avant L71: # --- eclairage_total_unit_hebdomadaire_kwh_um ---
-# - [slug] INS avant L78: # --- eclairage_total_unit_quotidien_kwh_um ---
+# - [Création] Nouveau fichier canonique — remplace version dans TREE_CORRIGE/Docs/ (mauvais chemin).
+# - [Migration] eclairage_total_group_energie_totale_kwh → sensor.eclairage_total_group_energie (P3_ENERGIE_3_TOTAL_ZONE).
+# - [Migration] eclairage_total_unit_energie_totale_kwh → sensor.eclairage_total_unit_energie (P3_ENERGIE_1_TOTAL_UNITE).
+# - [Riemann supprimé] Plus de platform: integration dans la chaîne source.
+# - [Chemin] TREE_CORRIGE/utility_meter/P3_eclairage/ (chemin canonique déployable).

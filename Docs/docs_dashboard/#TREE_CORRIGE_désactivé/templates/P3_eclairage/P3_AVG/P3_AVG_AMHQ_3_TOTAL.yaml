@@ -1,0 +1,127 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. TEMPLATES AVG : PUISSANCE MOYENNE (W) — ÉCLAIRAGE TOTAL APPART   │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs templates calculant la puissance moyenne (W) pour l'éclairage total
+# de l'appartement sur 4 périodes AMHQ. Deux lectures parallèles :
+# - GROUP : somme des zones (7 zones regroupées).
+# - UNIT  : somme des ampoules à l'unité (19 ampoules).
+# Ces deux totaux doivent converger — un écart indique un problème de mesure.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : (kWh_UM × 1000) / heures_écoulées = Watts moyens
+# - GROUP : sensor.eclairage_total_group_[cycle]_um (P3_UM_AMHQ_3_TOTAL)
+# - UNIT  : sensor.eclairage_total_unit_[cycle]_um (P3_UM_AMHQ_3_TOTAL)
+# - Quotidien   : h = now().hour + (now().minute / 60)
+# - Hebdomadaire: hh = (now().weekday() * 24) + h
+# - Mensuel     : hm = ((now().day - 1) * 24) + h
+# - Annuel      : ha = ((now().timetuple().tm_yday - 1) * 24) + h
+# - Garde div zéro : if h/hh/hm/ha > 0.1 else 0
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.eclairage_appart_total_{periode} (P3_UM_AMHQ_3) | eclairage_appart_total_avg_w_{periode}             | L2C3 Énergie Éclairage             |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - GROUP et UNIT doivent être proches mais peuvent diverger si une ampoule
+#   est mal configurée dans une zone ou en double dans la somme.
+# - Vérifier la cohérence via L2C3 (graphique superposition GROUP vs UNIT).
+# - La source UNIT provient de P3_kWh_3_TOTAL.yaml → eclairage_total_unit.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (total appartement, double lecture GROUP/UNIT).
+
+- sensor:
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    TOTAL GROUP (somme des 7 zones)                                   │
+  # ╰──────────────────────────────────────────────────────────────────────╯
+  # --- eclairage_total_group_avg_watts_quotidien ---
+  - name: "Eclairage Total Group Avg Watts Quotidien"
+    unique_id: eclairage_total_group_avg_watts_quotidien
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.eclairage_total_group_quotidien_um') | float(0) %}
+      {% set h = now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+  # --- eclairage_total_group_avg_watts_hebdomadaire ---
+  - name: "Eclairage Total Group Avg Watts Hebdomadaire"
+    unique_id: eclairage_total_group_avg_watts_hebdomadaire
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.eclairage_total_group_hebdomadaire_um') | float(0) %}
+      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+  # --- eclairage_total_group_avg_watts_mensuel ---
+  - name: "Eclairage Total Group Avg Watts Mensuel"
+    unique_id: eclairage_total_group_avg_watts_mensuel
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.eclairage_total_group_mensuel_um') | float(0) %}
+      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+  # --- eclairage_total_group_avg_watts_annuel ---
+  - name: "Eclairage Total Group Avg Watts Annuel"
+    unique_id: eclairage_total_group_avg_watts_annuel
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.eclairage_total_group_annuel_um') | float(0) %}
+      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    TOTAL UNIT (somme des 19 ampoules à l'unité)                      │
+  # ╰──────────────────────────────────────────────────────────────────────╯
+  # --- eclairage_total_unit_avg_watts_quotidien ---
+  - name: "Eclairage Total Unit Avg Watts Quotidien"
+    unique_id: eclairage_total_unit_avg_watts_quotidien
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.eclairage_total_unit_quotidien_um') | float(0) %}
+      {% set h = now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+  # --- eclairage_total_unit_avg_watts_hebdomadaire ---
+  - name: "Eclairage Total Unit Avg Watts Hebdomadaire"
+    unique_id: eclairage_total_unit_avg_watts_hebdomadaire
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.eclairage_total_unit_hebdomadaire_um') | float(0) %}
+      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+  # --- eclairage_total_unit_avg_watts_mensuel ---
+  - name: "Eclairage Total Unit Avg Watts Mensuel"
+    unique_id: eclairage_total_unit_avg_watts_mensuel
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.eclairage_total_unit_mensuel_um') | float(0) %}
+      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+  # --- eclairage_total_unit_avg_watts_annuel ---
+  - name: "Eclairage Total Unit Avg Watts Annuel"
+    unique_id: eclairage_total_unit_avg_watts_annuel
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.eclairage_total_unit_annuel_um') | float(0) %}
+      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+# annotations_log:
+# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.
+# - [L36-87] Double lecture GROUP/UNIT pour contrôle de cohérence éclairage total.

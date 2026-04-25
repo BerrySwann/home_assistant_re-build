@@ -1,0 +1,2679 @@
+- id: '1771872569647'
+  alias: Alerte Météo France actualisation des "CARTES"
+  description: 'Force la mise à jour des images d''alerte Météo France au démarrage,  aux
+    heures clés, ou toutes les 5 min si elles sont indisponibles.
+
+    '
+  triggers:
+  - trigger: homeassistant
+    event: start
+    id: Start
+  - trigger: time
+    at: 06:32:00
+    id: Heure632
+  - trigger: time
+    at: '16:32:00'
+    id: Heure1632
+  - trigger: time_pattern
+    minutes: /5
+    id: Toutesles5minutes
+  conditions:
+  - condition: or
+    conditions:
+    - condition: trigger
+      id:
+      - Start
+      - Heure632
+      - Heure1632
+    - alias: Vérif si Today est HS
+      condition: and
+      conditions:
+      - condition: trigger
+        id: Toutesles5minutes
+      - condition: state
+        entity_id: sensor.meteo_france_alertes_image_today
+        state: unavailable
+    - alias: Vérif si Tomorrow est HS
+      condition: and
+      conditions:
+      - condition: trigger
+        id: Toutesles5minutes
+      - condition: state
+        entity_id: sensor.meteo_france_alertes_image_tomorrow
+        state: unavailable
+  actions:
+  - alias: Premier essai de mise à jour
+    action: homeassistant.update_entity
+    target:
+      entity_id:
+      - sensor.meteo_france_alertes_image_today
+      - sensor.meteo_france_alertes_image_tomorrow
+  - delay: 00:00:05
+  - alias: Répéter MAJ Today si toujours indisponible
+    repeat:
+      count: 1
+      sequence:
+      - if:
+        - condition: state
+          entity_id: sensor.meteo_france_alertes_image_today
+          state: unavailable
+        then:
+        - action: homeassistant.update_entity
+          target:
+            entity_id: sensor.meteo_france_alertes_image_today
+        - delay: 00:00:05
+  - alias: Répéter MAJ Tomorrow si toujours indisponible
+    repeat:
+      count: 1
+      sequence:
+      - if:
+        - condition: state
+          entity_id: sensor.meteo_france_alertes_image_tomorrow
+          state: unavailable
+        then:
+        - action: homeassistant.update_entity
+          target:
+            entity_id: sensor.meteo_france_alertes_image_tomorrow
+        - delay: 00:00:05
+  - alias: Rafraîchir les caméras finales
+    action: homeassistant.update_entity
+    target:
+      entity_id:
+      - camera.mf_alerte_today
+      - camera.mf_alerte_tomorrow
+  mode: single
+- id: '1772274292302'
+  alias: '[03-Backup] Git weekly (dim 01:30)'
+  description: Backup natif HA + push + tag weekly chaque dimanche à 01:30
+  triggers:
+  - trigger: time
+    at: 01:30:00
+  conditions:
+  - condition: time
+    weekday:
+    - sun
+  actions:
+  - action: shell_command.git_backup_push_weekly
+  - action: system_log.write
+    data:
+      level: info
+      message: '[Backup] Weekly exécuté'
+  - action: notify.mobile_app_eric
+    data:
+      title: BACKUP WEEKLY
+      message: Backup hebdo + tag -> GitHub OK. Semaine {{ now().strftime('%G-W%V')
+        }}
+  mode: single
+- id: '1772274342928'
+  alias: '[01-Backup] Git hourly H+10'
+  description: Push Git + backup natif HA toutes les heures à H+10
+  triggers:
+  - trigger: time_pattern
+    minutes: '10'
+  conditions: []
+  actions:
+  - action: shell_command.git_backup_push
+  - action: system_log.write
+    data:
+      level: info
+      message: '[Backup] Horaire H+10 exécuté'
+  mode: single
+- id: '1772274384811'
+  alias: '[02-Backup] Git daily (03:00)'
+  description: Backup natif HA + push Git quotidien à 03h00
+  triggers:
+  - trigger: time
+    at: 03:00:00
+  conditions: []
+  actions:
+  - action: shell_command.git_backup_push
+  - action: system_log.write
+    data:
+      level: info
+      message: '[Backup] Daily 03:00 exécuté'
+  mode: single
+- id: '1772275440416'
+  alias: '[00-Backup] Alerte si KO 15 min'
+  description: Notification si le backup reste en KO pendant 15 minutes
+  triggers:
+  - trigger: state
+    entity_id: sensor.backup_github_status
+    to: KO
+    for: 00:15:00
+  conditions: []
+  actions:
+  - action: persistent_notification.create
+    data:
+      title: BACKUP GITHUB KO
+      message: 'Echec ou pas de commit depuis 15 min. Verif : /config/.logs/ha_git_backup.log
+
+        '
+  - action: notify.mobile_app_eric
+    data:
+      title: BACKUP KO
+      message: 'Git push KO depuis 15 min. Verif log backup.
+
+        '
+  - action: system_log.write
+    data:
+      level: error
+      message: '[Backup] KO depuis 15 min — vérifier ha_git_backup.log'
+  mode: single
+- id: '1772276622703'
+  alias: '[04-Backup] Git push manuel'
+  triggers:
+  - trigger: state
+    entity_id: input_button.git_push_manuel
+  actions:
+  - action: shell_command.git_backup_push_manual
+- id: '1772289095104'
+  alias: '[05-Backup] Git push weekly manuel'
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id: input_button.git_push_weekly_manuel
+  actions:
+  - action: shell_command.git_backup_push_weekly
+- id: '1773253598751'
+  alias: DB Purge MariaDB + Repack
+  description: Ménage nocturne pour réduire la taille de la base de données (7 jours
+    de rétention + Repack)
+  triggers:
+  - trigger: time
+    at: 00:30:00
+  conditions: []
+  actions:
+  - action: recorder.purge
+    data:
+      keep_days: 7
+      repack: true
+  mode: single
+- id: '1773253636237'
+  alias: Système - Économie Énergie VS Code
+  description: Coupe VS Code si son CPU dépasse 10% ou s'il est inactif, avec confirmation
+    (H24).
+  triggers:
+  - entity_id: sensor.studio_code_server_pourcentage_du_processeur
+    above: 10
+    for:
+      minutes: 10
+    id: high_cpu
+    trigger: numeric_state
+  - entity_id: sensor.studio_code_server_pourcentage_du_processeur
+    below: 0.8
+    for:
+      minutes: 15
+    id: inactive
+    trigger: numeric_state
+  conditions:
+  - condition: state
+    entity_id: binary_sensor.studio_code_server_en_cours_d_execution
+    state: 'on'
+  actions:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: high_cpu
+      sequence:
+      - data:
+          title: ALERTE VSC CPU
+          message: CPU VSC >10% dps 10m. Le couper pour economiser ?
+          data:
+            actions:
+            - action: STOP_VSC
+              title: Oui, couper
+            - action: KEEP_VSC
+              title: Non, ignorer
+        action: notify.mobile_app_eric
+    - conditions:
+      - condition: trigger
+        id: inactive
+      sequence:
+      - data:
+          title: ALERTE VSC INAC
+          message: VSC inactif dps 15m. Le couper pour economiser ?
+          data:
+            actions:
+            - action: STOP_VSC
+              title: Oui, couper
+            - action: KEEP_VSC
+              title: Non, ignorer
+        action: notify.mobile_app_eric
+  - wait_for_trigger:
+    - event_type: mobile_app_notification_action
+      event_data:
+        action: STOP_VSC
+      trigger: event
+    - event_type: mobile_app_notification_action
+      event_data:
+        action: KEEP_VSC
+      trigger: event
+    timeout: 00:05:00
+    continue_on_timeout: true
+  - choose:
+    - alias: 'ACTION : STOP (OU TIMEOUT)'
+      conditions:
+      - condition: template
+        value_template: '{{ wait.trigger == none or wait.trigger.event.data.action
+          == ''STOP_VSC'' }}'
+      sequence:
+      - data:
+          addon: a0d7b954_vscode
+        action: hassio.addon_stop
+      - data:
+          title: VSC ARRETE
+          message: Arret auto VSC OK. (Economie energie).
+        action: notify.mobile_app_eric
+    - alias: 'ACTION : KEEP'
+      conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == ''KEEP_VSC'' }}'
+      sequence:
+      - stop: L'utilisateur code encore, on laisse tourner.
+  mode: single
+- id: '1774167313491'
+  alias: Raspberry CPU Fan PWM 6 States
+  description: Règle la vitesse du ventilateur du Raspberry en fonction de la température
+    du CPU
+  triggers:
+  - event: start
+    id: HomeAssistant_Start
+    trigger: homeassistant
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    above: 30
+    id: above_30
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    above: 40
+    id: above_40
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    above: 50
+    id: above_50
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    above: 60
+    id: above_60
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    above: 70
+    id: above_70
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    below: 30
+    id: below_30
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    below: 40
+    id: below_40
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    below: 50
+    id: below_50
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    below: 60
+    id: below_60
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    below: 70
+    id: below_70
+    trigger: numeric_state
+  conditions: []
+  actions:
+  - alias: Régler la vitesse du ventilateur de l'unité centrale au démarrage
+    if:
+    - condition: trigger
+      id: HomeAssistant_Start
+    then:
+    - data:
+        percentage: 100
+      target:
+        entity_id: fan.rpi_cooling_fan
+      action: fan.turn_on
+  - alias: Régler la vitesse du ventilateur en fonction de la température
+    if:
+    - condition: numeric_state
+      entity_id: sensor.system_monitor_temperature_du_processeur
+      below: 30
+    then:
+    - data:
+        percentage: 30
+      target:
+        entity_id: fan.rpi_cooling_fan
+      action: fan.set_percentage
+    else:
+    - if:
+      - condition: numeric_state
+        entity_id: sensor.system_monitor_temperature_du_processeur
+        below: 40
+      then:
+      - data:
+          percentage: 40
+        target:
+          entity_id: fan.rpi_cooling_fan
+        action: fan.set_percentage
+      else:
+      - if:
+        - condition: numeric_state
+          entity_id: sensor.system_monitor_temperature_du_processeur
+          below: 50
+        then:
+        - data:
+            percentage: 50
+          target:
+            entity_id: fan.rpi_cooling_fan
+          action: fan.set_percentage
+        else:
+        - if:
+          - condition: numeric_state
+            entity_id: sensor.system_monitor_temperature_du_processeur
+            below: 60
+          then:
+          - data:
+              percentage: 65
+            target:
+              entity_id: fan.rpi_cooling_fan
+            action: fan.set_percentage
+          else:
+          - if:
+            - condition: numeric_state
+              entity_id: sensor.system_monitor_temperature_du_processeur
+              below: 70
+            then:
+            - data:
+                percentage: 85
+              target:
+                entity_id: fan.rpi_cooling_fan
+              action: fan.set_percentage
+            else:
+            - data:
+                percentage: 100
+              target:
+                entity_id: fan.rpi_cooling_fan
+              action: fan.set_percentage
+  mode: single
+- id: '1774183767864'
+  alias: '[P3-SALON] BOUTON IKEA INTER SALON (4) — ON/OFF LIGHT.SALON'
+  description: 'Pilotage de light.salon via le bouton IKEA 4 touches Salon. Topic
+    MQTT : zigbee2mqtt/Inter Salon (4) (IKEA)/action ON -> light.turn_on | OFF ->
+    light.turn_off
+
+    '
+  triggers:
+  - alias: 'DÉCLENCHEMENT : BOUTON ON (MQTT)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter Salon (4) (IKEA)/action
+    payload: 'on'
+    id: bouton_on
+  - alias: 'DÉCLENCHEMENT : BOUTON OFF (MQTT)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter Salon (4) (IKEA)/action
+    payload: 'off'
+    id: bouton_off
+  conditions: []
+  actions:
+  - alias: 'ACTION : BASCULE LIGHT.SALON'
+    choose:
+    - alias: 'CAS : BOUTON ON PRESSÉ'
+      conditions:
+      - condition: trigger
+        id: bouton_on
+      sequence:
+      - action: light.turn_on
+        target:
+          entity_id: light.salon
+    - alias: 'CAS : BOUTON OFF PRESSÉ'
+      conditions:
+      - condition: trigger
+        id: bouton_off
+      sequence:
+      - action: light.turn_off
+        target:
+          entity_id: light.salon
+  mode: restart
+- id: '1774452171317'
+  alias: (I) (CLIM DEBUG) Force Mode Correct & Sécurité
+  description: 'WATCHDOG :   1. FORCE OFF si tentative d''allumage alors que Prise
+    OFF ou Arrêt Sécurisé en cours.  2. FORCE SAISON si une clim est allumée mais
+    dans le mauvais mode (ex: Cool au lieu de Heat).
+
+    '
+  triggers:
+  - trigger: state
+    entity_id:
+    - climate.clim_salon_rm4_mini
+    - climate.clim_bureau_rm4_mini
+    - climate.clim_chambre_rm4_mini
+    to:
+  - trigger: state
+    entity_id: sensor.mode_ete_hiver
+    to:
+  conditions: []
+  actions:
+  - delay: 00:00:02
+  - alias: CALCUL DES LISTES D'ERREURS
+    variables:
+      mode_saison: '{{ states(''sensor.mode_ete_hiver'') }}'
+      force_off_list: "{% set liste = [] %} {# SALON #} {% if states('climate.clim_salon_rm4_mini')
+        != 'off' \n      and (is_state('switch.clim_salon_nous', 'off') or is_state('input_boolean.clim_salon_arret_securise_en_cours',
+        'on')) %}\n  {% set liste = liste + ['climate.clim_salon_rm4_mini'] %}\n{%
+        endif %} {# BUREAU #} {% if states('climate.clim_bureau_rm4_mini') != 'off'
+        \n      and (is_state('switch.clim_bureau_nous', 'off') or is_state('input_boolean.clim_bureau_arret_securise_en_cours',
+        'on')) %}\n  {% set liste = liste + ['climate.clim_bureau_rm4_mini'] %}\n{%
+        endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_rm4_mini') != 'off'
+        \n      and (is_state('switch.clim_chambre_nous', 'off') or is_state('input_boolean.clim_chambre_arret_securise_en_cours',
+        'on')) %}\n  {% set liste = liste + ['climate.clim_chambre_rm4_mini'] %}\n{%
+        endif %} {{ liste }}\n"
+      force_mode_list: "{% set liste = [] %} {# SALON #} {% if states('climate.clim_salon_rm4_mini')
+        not in ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_salon_nous',
+        'on') \n      and is_state('input_boolean.clim_salon_arret_securise_en_cours',
+        'off') %}\n  {% set liste = liste + ['climate.clim_salon_rm4_mini'] %}\n{%
+        endif %} {# BUREAU #} {% if states('climate.clim_bureau_rm4_mini') not in
+        ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_bureau_nous',
+        'on') \n      and is_state('input_boolean.clim_bureau_arret_securise_en_cours',
+        'off') %}\n  {% set liste = liste + ['climate.clim_bureau_rm4_mini'] %}\n{%
+        endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_rm4_mini') not in
+        ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_chambre_nous',
+        'on') \n      and is_state('input_boolean.clim_chambre_arret_securise_en_cours',
+        'off') %}\n  {% set liste = liste + ['climate.clim_chambre_rm4_mini'] %}\n{%
+        endif %} {{ liste }}\n"
+  - if:
+    - condition: template
+      value_template: '{{ force_off_list | length > 0 }}'
+    then:
+    - alias: 'NOTIF : INTERDICTION DÉMARRAGE'
+      action: notify.mobile_app_eric
+      data:
+        title: SÉCURITÉ CLIM
+        message: "Tentative de démarrage interdite (Prise coupée ou Arrêt en cours).
+          Retour forcé à OFF pour : {% for c in force_off_list %}\n  - {{ state_attr(c,
+          'friendly_name') }}\n{% endfor %}\n"
+    - alias: 'ACTION : FORCER OFF'
+      action: climate.set_hvac_mode
+      target:
+        entity_id: '{{ force_off_list }}'
+      data:
+        hvac_mode: 'off'
+  - if:
+    - condition: template
+      value_template: '{{ force_mode_list | length > 0 }}'
+    then:
+    - alias: 'NOTIF : CORRECTION MODE'
+      action: notify.mobile_app_eric
+      data:
+        title: CORRECTION MODE
+        message: "Mauvais mode détecté. Correction vers {{ mode_saison | upper }}
+          pour : {% for c in force_mode_list %}\n  - {{ state_attr(c, 'friendly_name')
+          }}\n{% endfor %}\n"
+    - alias: 'ACTION : FORCER MODE SAISON'
+      action: climate.set_hvac_mode
+      target:
+        entity_id: '{{ force_mode_list }}'
+      data:
+        hvac_mode: '{{ mode_saison }}'
+  mode: single
+- id: '1774803407558'
+  alias: A - 2026/02/01 - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT
+  description: 'Cycle complet : Démarrage, Régulation, et Auto-off 60 min avec refroidissement'
+  triggers:
+  - alias: CHANGEMENT ÉTAT INTERRUPTEUR
+    trigger: state
+    entity_id: switch.inter_soufflant_salle_de_bain
+    id: inter_change
+  - alias: TEMPÉRATURE > 23°C
+    trigger: numeric_state
+    entity_id: sensor.th_salle_de_bain_temperature
+    above: 22.9
+    for: 00:01:00
+    id: temp_high
+  - alias: TEMPÉRATURE < 22°C
+    trigger: numeric_state
+    entity_id: sensor.th_salle_de_bain_temperature
+    below: 21.9
+    id: temp_low
+  - alias: SÉCURITÉ AUTO-OFF 60 MIN
+    trigger: state
+    entity_id: switch.inter_soufflant_salle_de_bain
+    to: 'on'
+    for: 01:00:00
+    id: auto_off
+  actions:
+  - alias: ROUTAGE DES ACTIONS PAR TRIGGER
+    choose:
+    - alias: CAS ALLUMAGE INTER
+      conditions:
+      - condition: trigger
+        id: inter_change
+      - condition: state
+        entity_id: switch.inter_soufflant_salle_de_bain
+        state: 'on'
+      - condition: numeric_state
+        entity_id: sensor.th_salle_de_bain_temperature
+        below: 25
+      sequence:
+      - action: switch.turn_on
+        target:
+          entity_id: switch.prise_soufflant_salle_de_bain_nous
+      - delay: 00:00:01
+      - action: remote.send_command
+        target:
+          entity_id: remote.soufflant_sdb
+        data:
+          command: on_off
+          device: radiateur_sdb
+      - delay: '00:00:00.8'
+      - choose:
+        - alias: DÉMARRAGE 2000W (< 21°C)
+          conditions:
+          - condition: numeric_state
+            entity_id: sensor.th_salle_de_bain_temperature
+            below: 21
+          sequence:
+          - action: remote.send_command
+            target:
+              entity_id: remote.soufflant_sdb
+            data:
+              command: 1000w
+              device: radiateur_sdb
+              num_repeats: 2
+              delay_secs: 0.8
+          - action: input_select.select_option
+            target:
+              entity_id: input_select.etat_resistance_soufflant_sdb
+            data:
+              option: 2000W
+        default:
+        - action: remote.send_command
+          target:
+            entity_id: remote.soufflant_sdb
+          data:
+            command: 1000w
+            device: radiateur_sdb
+        - action: input_select.select_option
+          target:
+            entity_id: input_select.etat_resistance_soufflant_sdb
+          data:
+            option: 1000W
+      - delay: '00:00:00.8'
+      - action: remote.send_command
+        target:
+          entity_id: remote.soufflant_sdb
+        data:
+          command: swing
+          device: radiateur_sdb
+      - action: climate.set_hvac_mode
+        target:
+          entity_id: climate.soufflant_salle_de_bain
+        data:
+          hvac_mode: heat
+    - alias: CAS TEMPÉRATURE > 23°C
+      conditions:
+      - condition: trigger
+        id: temp_high
+      - condition: state
+        entity_id: switch.inter_soufflant_salle_de_bain
+        state: 'on'
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: input_select.etat_resistance_soufflant_sdb
+          state: 0W
+      sequence:
+      - variables:
+          current_power: '{{ states(''input_select.etat_resistance_soufflant_sdb'')
+            }}'
+          ir_repeats: '{{ 2 if current_power == ''1000W'' else 1 }}'
+      - action: remote.send_command
+        target:
+          entity_id: remote.soufflant_sdb
+        data:
+          command: 1000w
+          device: radiateur_sdb
+          num_repeats: '{{ ir_repeats }}'
+          delay_secs: 0.8
+      - action: input_select.select_option
+        target:
+          entity_id: input_select.etat_resistance_soufflant_sdb
+        data:
+          option: 0W
+    - alias: CAS TEMPÉRATURE < 22°C
+      conditions:
+      - condition: trigger
+        id: temp_low
+      - condition: state
+        entity_id: switch.inter_soufflant_salle_de_bain
+        state: 'on'
+      - condition: state
+        entity_id: input_select.etat_resistance_soufflant_sdb
+        state: 0W
+      sequence:
+      - action: remote.send_command
+        target:
+          entity_id: remote.soufflant_sdb
+        data:
+          command: 1000w
+          device: radiateur_sdb
+      - action: input_select.select_option
+        target:
+          entity_id: input_select.etat_resistance_soufflant_sdb
+        data:
+          option: 1000W
+    - alias: CAS EXTINCTION (MANUELLE OU AUTO)
+      conditions:
+      - or:
+        - and:
+          - condition: trigger
+            id: inter_change
+          - condition: state
+            entity_id: switch.inter_soufflant_salle_de_bain
+            state: 'off'
+        - condition: trigger
+          id: auto_off
+      sequence:
+      - if:
+        - condition: trigger
+          id: auto_off
+        then:
+        - action: switch.turn_off
+          target:
+            entity_id: switch.inter_soufflant_salle_de_bain
+      - action: remote.send_command
+        target:
+          entity_id: remote.soufflant_sdb
+        data:
+          command: on_off
+          device: radiateur_sdb
+      - delay: 00:01:00
+      - action: climate.set_hvac_mode
+        target:
+          entity_id: climate.soufflant_salle_de_bain
+        data:
+          hvac_mode: 'off'
+      - action: switch.turn_off
+        target:
+          entity_id: switch.prise_soufflant_salle_de_bain_nous
+      - action: input_select.select_option
+        target:
+          entity_id: input_select.etat_resistance_soufflant_sdb
+        data:
+          option: 0W
+  mode: queued
+  max: 3
+- id: '1766776781417'
+  alias: E - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 2h)
+  description: Timer de 2h après détection de chauffe. Sécurité anti-redémarrage incluse.
+  triggers:
+  - alias: 'START : DÉTECTION PUISSANCE > 50W'
+    trigger: numeric_state
+    entity_id: sensor.prise_seche_serviette_salle_de_bain_nous_power
+    above: 50
+  conditions: []
+  actions:
+  - alias: 'CHRONO : DÉCOMPTE DE 2 HEURES'
+    delay: 02:00:00
+  - alias: 'VERIF : EST-IL TOUJOURS ALLUMÉ ?'
+    condition: state
+    entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+    state: 'on'
+  - alias: 'ACTION : COUPURE DE SÉCURITÉ'
+    action: switch.turn_off
+    target:
+      entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+  - alias: 'NOTIF : ARRÊT AUTO'
+    action: notify.mobile_app_eric
+    data:
+      title: Sèche-Serv. OFF
+      message: 2h écoulees. Arret automatique.
+  - alias: 'RESET : ATTENTE 1 MIN'
+    delay: 00:01:00
+  - alias: 'ACTION : RÉARMEMENT (VEILLE)'
+    action: switch.turn_on
+    target:
+      entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+  mode: single
+- id: '1774803767999'
+  alias: (A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00)
+  description: Pilotage clims jour avec boucle de relance et notification ciblée fenêtres
+  triggers:
+  - alias: 'SYSTEM : REDÉMARRAGE HOME ASSISTANT'
+    trigger: homeassistant
+    event: start
+    id: ha_restart
+  - alias: 'HORAIRE : DÉMARRAGE 07H30'
+    trigger: time
+    at: 07:30:00
+    id: force_run
+  - alias: 'RÉSEAU : CHANGEMENT WIFI <-> CELLULAR'
+    trigger: state
+    entity_id:
+    - sensor.mamour_network_type
+    - sensor.eric_network_type
+    id: force_run
+  - alias: 'PRISES : CHANGEMENT ÉTAT ON/OFF'
+    trigger: state
+    entity_id:
+    - switch.clim_salon_nous
+    - switch.clim_bureau_nous
+    - switch.clim_chambre_nous
+    id: force_run
+  - alias: 'FENÊTRES : OUVERTURE (COUPURE URGENCE)'
+    trigger: state
+    entity_id:
+    - binary_sensor.contact_fenetre_salon_sonoff_contact
+    - binary_sensor.contact_fenetre_cuisine_sonoff_contact
+    - binary_sensor.contact_fenetre_bureau_sonoff_contact
+    - binary_sensor.contact_fenetre_chambre_sonoff_contact
+    from: 'off'
+    to: 'on'
+    id: window_open
+  - alias: 'FENÊTRES : FERMETURE (RÉTABLISSEMENT)'
+    trigger: state
+    entity_id:
+    - binary_sensor.contact_fenetre_salon_sonoff_contact
+    - binary_sensor.contact_fenetre_cuisine_sonoff_contact
+    - binary_sensor.contact_fenetre_bureau_sonoff_contact
+    - binary_sensor.contact_fenetre_chambre_sonoff_contact
+    from: 'on'
+    to: 'off'
+    id: window_close
+  - alias: 'ENVIRONNEMENT : MISE À JOUR TEMPÉRATURES OU MODE'
+    trigger: state
+    entity_id:
+    - sensor.th_balcon_nord_temperature
+    - sensor.temperature_cible
+    - sensor.mode_ete_hiver
+    - sensor.temperature_confort_jour
+    id: sensor_update
+  conditions:
+  - alias: 'SÉCURITÉ : EXÉCUTION UNIQUEMENT EN PÉRIODE DIURNE'
+    condition: time
+    after: 07:30:00
+    before: '21:00:00'
+  actions:
+  - alias: 'LOGIQUE : DÉLAI DE SÉCURITÉ AU REDÉMARRAGE'
+    choose:
+    - alias: 'CAS : REDÉMARRAGE SYSTÈME DÉTECTÉ'
+      conditions:
+      - condition: trigger
+        id: ha_restart
+      sequence:
+      - alias: 'ATTENTE : 1 MINUTE POUR STABILISATION'
+        delay: 00:01:00
+  - alias: 'SÉCURITÉ : BOUCLE D''ATTENTE DES CAPTEURS'
+    repeat:
+      until:
+      - alias: 'VÉRIFICATION : TOUS LES CAPTEURS SONT PRÊTS OU LIMITE ATTEINTE'
+        condition: or
+        conditions:
+        - alias: 'ÉTAT : TOUS OK'
+          condition: template
+          value_template: "{{ \n  states('sensor.mode_ete_hiver') not in ['unknown',
+            'unavailable'] and\n  states('sensor.groupe') not in ['unknown', 'unavailable']
+            and\n  states('sensor.temperature_cible') not in ['unknown', 'unavailable']
+            and\n  states('sensor.temperature_eco_hiver_corrige') not in ['unknown',
+            'unavailable'] and\n  states('sensor.temperature_corrige_mamour_hivers')
+            not in ['unknown', 'unavailable'] and\n  states('sensor.temperature_corrige_eric_hivers')
+            not in ['unknown', 'unavailable']\n}}\n"
+        - alias: 'LIMITE : 10 TENTATIVES (5 MIN)'
+          condition: template
+          value_template: '{{ repeat.index >= 10 }}'
+      sequence:
+      - alias: 'CONDITION : NOTIF UNIQUEMENT SI ÉCHEC'
+        condition: template
+        value_template: "{{ \n  states('sensor.mode_ete_hiver') in ['unknown', 'unavailable']\n
+          \ or\n  states('sensor.groupe') in ['unknown', 'unavailable']\n}}\n"
+      - alias: 'NOTIF : ALERTE ATTENTE CAPTEURS'
+        action: notify.mobile_app_eric
+        data:
+          title: '[AJ] ATTENTE CAPTEURS'
+          message: Essai n°{{ repeat.index }}... Les capteurs de jour ne sont pas
+            prêts. Pause 30s.
+      - alias: 'PAUSE : AVANT NOUVEL ESSAI'
+        delay: 00:00:30
+  - alias: 'INIT : CALCUL GLOBAL DES VARIABLES'
+    variables:
+      mode_saison: '{% set m = states(''sensor.mode_ete_hiver'') %}  {% if m in [''heat'',
+        ''cool'', ''fan_only''] %} {{ m | trim }} {% else %} off {% endif %}'
+      groupe_presence: '{{ states(''sensor.groupe'') | default(''groupe_1'') }}'
+      fenetres_ouvertes: '{{ expand(''binary_sensor.contact_fenetre_salon_sonoff_contact'',
+        ''binary_sensor.contact_fenetre_cuisine_sonoff_contact'', ''binary_sensor.contact_fenetre_bureau_sonoff_contact'',
+        ''binary_sensor.contact_fenetre_chambre_sonoff_contact'') | selectattr(''state'',
+        ''eq'', ''on'') | list | count > 0 }}'
+      temp_eco_c: '{{ states(''sensor.temperature_eco_hiver_corrige'') | float(17)
+        }}'
+      temp_cible: '{{ states(''sensor.temperature_cible'') | float(18) }}'
+      temp_conf_m: '{{ states(''sensor.temperature_corrige_mamour_hivers'') | float(19)
+        }}'
+      temp_conf_e: '{{ states(''sensor.temperature_corrige_eric_hivers'') | float(19)
+        }}'
+      temp_conf_c: '{{ states(''sensor.temperature_corrige_chambre_hivers'') | float(18)
+        }}'
+      t_salon_target: "{% if 'groupe_1' in groupe_presence %} \n  {{ temp_eco_c if
+        mode_saison == 'heat' else temp_cible }}\n    {% elif 'groupe_2' in groupe_presence
+        or 'groupe_4' in groupe_presence %}\n      {{ temp_conf_m }}\n    {% else
+        %}\n  {{ temp_cible }}\n{% endif %}"
+      t_bureau_target: "{% if 'groupe_1' in groupe_presence %} \n  {{ temp_eco_c if
+        mode_saison =='heat' else temp_cible }}\n    {% elif 'groupe_2' in groupe_presence
+        or 'groupe_3' in groupe_presence or 'groupe_4' in groupe_presence %}\n      {{
+        temp_conf_e }}\n    {% else %}\n  {{ temp_cible }}\n{% endif %}"
+      t_chambre_target: "{% if 'groupe_1' in groupe_presence %}\n  {{ temp_eco_c if
+        mode_saison == 'heat' else temp_cible }}\n{% else %}\n  {{ temp_conf_c }}\n{%
+        endif %}"
+  - alias: 'LOGIQUE : SÉCURITÉ FENÊTRES VS GESTION STANDARD'
+    choose:
+    - alias: 'CAS URGENCE : FENÊTRE OUVERTE DÉTECTÉE'
+      conditions:
+      - alias: 'VÉRIFICATION : ÉTAT DES CAPTEURS FENÊTRES'
+        condition: template
+        value_template: '{{ fenetres_ouvertes }}'
+      sequence:
+      - alias: 'ACTION : ARRÊT FORCÉ DES UNITÉS CLIM'
+        action: climate.set_hvac_mode
+        target:
+          entity_id:
+          - climate.clim_salon_rm4_mini
+          - climate.clim_bureau_rm4_mini
+          - climate.clim_chambre_rm4_mini
+        data:
+          hvac_mode: 'off'
+      - alias: 'NOTIF : ALERTE CIBLÉE SUR DÉCLENCHEUR'
+        action: notify.mobile_app_eric
+        data:
+          title: '[AJ] CLIM JOUR COUPÉE'
+          message: "{% if trigger.entity_id == 'binary_sensor.contact_fenetre_salon_sonoff_contact'
+            and is_state('binary_sensor.contact_fenetre_salon_sonoff_contact', 'on')
+            %}\n  La fenêtre du Salon a été ouverte.\n{% elif trigger.entity_id ==
+            'binary_sensor.contact_fenetre_cuisine_sonoff_contact' and is_state('binary_sensor.contact_fenetre_cuisine_sonoff_contact',
+            'on') %}\n  La fenêtre de la Cuisine a été ouverte.\n{% elif trigger.entity_id
+            == 'binary_sensor.contact_fenetre_bureau_sonoff_contact' and is_state('binary_sensor.contact_fenetre_bureau_sonoff_contact',
+            'on') %}\n  La fenêtre du Bureau a été ouverte.\n{% elif trigger.entity_id
+            == 'binary_sensor.contact_fenetre_chambre_sonoff_contact' and is_state('binary_sensor.contact_fenetre_chambre_sonoff_contact',
+            'on') %}\n  La fenêtre de la Chambre a été ouverte.\n{% else %}\n  Une
+            fenêtre est ouverte (Mise à jour globale).\n{% endif %} {% if states('sensor.nombre_de_fenetres_ouvertes')
+            | int == 4 %}\n  Toutes les fenêtres sont ouvertes.\n{% endif %}\n"
+      - alias: 'SÉCURITÉ : ARRÊT IMMÉDIAT POUR ÉVITER DOUBLON'
+        stop: Coupure fenêtre effectuée
+    default:
+    - alias: 'ACTION : ENVOI DES COMMANDES AUX PIÈCES EN PARALLÈLE'
+      parallel:
+      - alias: LOGIQUE SALON
+        choose:
+        - alias: 'VÉRIFICATION : SÉCURITÉ SALON (PRISE + ARRET)'
+          conditions:
+          - condition: state
+            entity_id: switch.clim_salon_nous
+            state: 'on'
+          - condition: state
+            entity_id: input_boolean.clim_salon_arret_securise_en_cours
+            state: 'off'
+          sequence:
+          - alias: 'COMMANDE : RÉGLAGE TEMPÉRATURE ET MODE SALON'
+            action: climate.set_temperature
+            target:
+              entity_id: climate.clim_salon_rm4_mini
+            data:
+              hvac_mode: "{% if trigger is defined and trigger.id == 'sensor_update'
+                and is_state('climate.clim_salon_rm4_mini', 'off') %}\n  off\n{% else
+                %}\n  {{ mode_saison }}\n{% endif %}\n"
+              temperature: '{{ t_salon_target }}'
+      - alias: LOGIQUE BUREAU
+        choose:
+        - alias: 'VÉRIFICATION : SÉCURITÉ BUREAU (PRISE + ARRET)'
+          conditions:
+          - condition: state
+            entity_id: switch.clim_bureau_nous
+            state: 'on'
+          - condition: state
+            entity_id: input_boolean.clim_bureau_arret_securise_en_cours
+            state: 'off'
+          sequence:
+          - alias: 'COMMANDE : RÉGLAGE TEMPÉRATURE ET MODE BUREAU'
+            action: climate.set_temperature
+            target:
+              entity_id: climate.clim_bureau_rm4_mini
+            data:
+              hvac_mode: "{% if trigger is defined and trigger.id == 'sensor_update'
+                and is_state('climate.clim_bureau_rm4_mini', 'off') %}\n  off\n{%
+                else %}\n  {{ mode_saison }}\n{% endif %}\n"
+              temperature: '{{ t_bureau_target }}'
+      - alias: LOGIQUE CHAMBRE
+        choose:
+        - alias: 'VÉRIFICATION : SÉCURITÉ CHAMBRE (PRISE + ARRET)'
+          conditions:
+          - condition: state
+            entity_id: switch.clim_chambre_nous
+            state: 'on'
+          - condition: state
+            entity_id: input_boolean.clim_chambre_arret_securise_en_cours
+            state: 'off'
+          sequence:
+          - alias: 'COMMANDE : RÉGLAGE TEMPÉRATURE ET MODE CHAMBRE'
+            action: climate.set_temperature
+            target:
+              entity_id: climate.clim_chambre_rm4_mini
+            data:
+              hvac_mode: "{% if trigger is defined and trigger.id == 'sensor_update'
+                and is_state('climate.clim_chambre_rm4_mini', 'off') %}\n  off\n{%
+                else %}\n  {{ mode_saison }}\n{% endif %}\n"
+              temperature: '{{ t_chambre_target }}'
+    - alias: 'PAUSE : SÉCURITÉ RÉCEPTION'
+      delay: 00:00:02
+    - alias: 'NOTIF : RÉSUMÉ DE L''ÉTAT DES CLIMATISATIONS'
+      action: notify.mobile_app_eric
+      data:
+        title: '[AJ] {{ states(''sensor.presence'') }}'
+        message: "{%- if 'groupe_1' in groupe_presence and mode_saison == 'heat' %}\n
+          \ [éCO HEAT]\n  Les 3 Clims : {{ temp_eco_c }}° (Absent)\n{% else %}\n  Mode
+          : {{ mode_saison | upper }}\n  Salon: {{ t_salon_target }}°\n  Bureau: {{
+          t_bureau_target }}°\n  Chambre: {{ t_chambre_target }}°\n{% endif %}\n"
+  mode: queued
+- id: '1774803964324'
+  alias: (B - 0) 2026-01-11 AUTOMATISATION CLIM NUIT (21H00 <-> 07H30)
+  description: Pilotage clims nuit avec boucle de relance et notification ciblée fenêtres
+  triggers:
+  - alias: 'SYSTEM : REDÉMARRAGE HOME ASSISTANT'
+    trigger: homeassistant
+    event: start
+    id: ha_restart
+  - alias: 'HORAIRE : DÉMARRAGE 21H00'
+    trigger: time
+    at: '21:00:00'
+    id: force_run
+  - alias: 'RÉSEAU : CHANGEMENT WIFI <-> CELLULAR'
+    trigger: state
+    entity_id:
+    - sensor.mamour_network_type
+    - sensor.eric_network_type
+    id: force_run
+  - alias: 'PRISES : CHANGEMENT ÉTAT ON/OFF'
+    trigger: state
+    entity_id:
+    - switch.clim_salon_nous
+    - switch.clim_bureau_nous
+    - switch.clim_chambre_nous
+    id: force_run
+  - alias: 'FENÊTRES : OUVERTURE (COUPURE URGENCE)'
+    trigger: state
+    entity_id:
+    - binary_sensor.contact_fenetre_salon_sonoff_contact
+    - binary_sensor.contact_fenetre_cuisine_sonoff_contact
+    - binary_sensor.contact_fenetre_bureau_sonoff_contact
+    - binary_sensor.contact_fenetre_chambre_sonoff_contact
+    from: 'off'
+    to: 'on'
+    id: window_open
+  - alias: 'FENÊTRES : FERMETURE (RÉTABLISSEMENT)'
+    trigger: state
+    entity_id:
+    - binary_sensor.contact_fenetre_salon_sonoff_contact
+    - binary_sensor.contact_fenetre_cuisine_sonoff_contact
+    - binary_sensor.contact_fenetre_bureau_sonoff_contact
+    - binary_sensor.contact_fenetre_chambre_sonoff_contact
+    from: 'on'
+    to: 'off'
+    id: window_close
+  - alias: 'ENVIRONNEMENT : MISE À JOUR TEMPÉRATURES OU MODE'
+    trigger: state
+    entity_id:
+    - sensor.th_balcon_nord_temperature
+    - sensor.temperature_cible
+    - sensor.mode_ete_hiver
+    - sensor.temperature_confort_nuit
+    id: sensor_update
+  conditions:
+  - alias: 'SÉCURITÉ : EXÉCUTION UNIQUEMENT EN PÉRIODE NOCTURNE'
+    condition: time
+    after: '21:00:00'
+    before: 07:30:00
+  actions:
+  - alias: 'LOGIQUE : DÉLAI DE SÉCURITÉ AU REDÉMARRAGE'
+    choose:
+    - alias: 'CAS : REDÉMARRAGE SYSTÈME DÉTECTÉ'
+      conditions:
+      - condition: trigger
+        id: ha_restart
+      sequence:
+      - alias: 'ATTENTE : 1 MINUTE POUR STABILISATION'
+        delay: 00:01:00
+  - alias: 'SÉCURITÉ : BOUCLE D''ATTENTE DES CAPTEURS'
+    repeat:
+      until:
+      - alias: 'VÉRIFICATION : TOUS LES CAPTEURS SONT PRÊTS OU LIMITE ATTEINTE'
+        condition: or
+        conditions:
+        - alias: 'ÉTAT : TOUS OK'
+          condition: template
+          value_template: "{{ \n  states('sensor.mode_ete_hiver') not in ['unknown',
+            'unavailable'] and\n  states('sensor.groupe') not in ['unknown', 'unavailable']
+            and\n  states('sensor.temperature_cible') not in ['unknown', 'unavailable']
+            and\n  states('sensor.temperature_eco_hiver_corrige') not in ['unknown',
+            'unavailable'] and\n  states('sensor.temperature_corrige_mamour_hivers')
+            not in ['unknown', 'unavailable'] and\n  states('sensor.temperature_corrige_eric_hivers')
+            not in ['unknown', 'unavailable']\n}}\n"
+        - alias: 'LIMITE : 10 TENTATIVES (5 MIN)'
+          condition: template
+          value_template: '{{ repeat.index >= 10 }}'
+      sequence:
+      - alias: 'CONDITION : NOTIF UNIQUEMENT SI ÉCHEC'
+        condition: template
+        value_template: "{{ \n  states('sensor.mode_ete_hiver') in ['unknown', 'unavailable']\n
+          \ or\n  states('sensor.groupe') in ['unknown', 'unavailable']\n}}\n"
+      - alias: 'NOTIF : ALERTE ATTENTE CAPTEURS'
+        action: notify.mobile_app_eric
+        data:
+          title: '[AN] ATTENTE CAPTEURS'
+          message: Essai n°{{ repeat.index }}... Les capteurs de nuit ne sont pas
+            prêts. Pause 30s.
+      - alias: 'PAUSE : AVANT NOUVEL ESSAI'
+        delay: 00:00:30
+  - alias: 'INIT : CALCUL GLOBAL DES VARIABLES'
+    variables:
+      mode_saison: '{% set m = states(''sensor.mode_ete_hiver'') %}  {% if m in [''heat'',
+        ''cool'', ''fan_only''] %} {{ m | trim }} {% else %} off {% endif %}'
+      groupe_presence: '{{ states(''sensor.groupe'') | default(''groupe_1'') }}'
+      fenetres_ouvertes: '{{ expand(''binary_sensor.contact_fenetre_salon_sonoff_contact'',
+        ''binary_sensor.contact_fenetre_cuisine_sonoff_contact'', ''binary_sensor.contact_fenetre_bureau_sonoff_contact'',
+        ''binary_sensor.contact_fenetre_chambre_sonoff_contact'') | selectattr(''state'',
+        ''eq'', ''on'') | list | count > 0 }}'
+      temp_eco_c: '{{ states(''sensor.temperature_eco_hiver_corrige'') | float(17)
+        }}'
+      temp_cible: '{{ states(''sensor.temperature_cible'') | float(19) }}'
+      temp_nuit: '{{ states(''sensor.temperature_confort_nuit'') | float(18) }}'
+      t_salon_target: '{% if ''groupe_1'' in groupe_presence %} {{ temp_eco_c if mode_saison
+        == ''heat'' else temp_cible }} {% else %} {{ temp_nuit }} {% endif %}'
+      t_bureau_target: '{% if ''groupe_1'' in groupe_presence %} {{ temp_eco_c if
+        mode_saison == ''heat'' else temp_cible }} {% else %} {{ temp_nuit }} {% endif
+        %}'
+      t_chambre_target: '{% if ''groupe_1'' in groupe_presence %} {{ temp_eco_c if
+        mode_saison == ''heat'' else temp_cible }} {% else %} {{ temp_nuit }} {% endif
+        %}'
+  - alias: 'LOGIQUE : SÉCURITÉ FENÊTRES VS GESTION STANDARD'
+    choose:
+    - alias: 'CAS URGENCE : FENÊTRE OUVERTE DÉTECTÉE'
+      conditions:
+      - alias: 'VÉRIFICATION : ÉTAT DES CAPTEURS FENÊTRES'
+        condition: template
+        value_template: '{{ fenetres_ouvertes }}'
+      sequence:
+      - alias: 'ACTION : ARRÊT FORCÉ DES UNITÉS CLIM'
+        action: climate.set_hvac_mode
+        target:
+          entity_id:
+          - climate.clim_salon_rm4_mini
+          - climate.clim_bureau_rm4_mini
+          - climate.clim_chambre_rm4_mini
+        data:
+          hvac_mode: 'off'
+      - alias: 'NOTIF : ALERTE CIBLÉE SUR DÉCLENCHEUR'
+        action: notify.mobile_app_eric
+        data:
+          title: '[AN] CLIM NUIT COUPÉE'
+          message: "{% if trigger.entity_id == 'binary_sensor.contact_fenetre_salon_sonoff_contact'
+            and is_state('binary_sensor.contact_fenetre_salon_sonoff_contact', 'on')
+            %}\n  La fenêtre du Salon a été ouverte.\n{% elif trigger.entity_id ==
+            'binary_sensor.contact_fenetre_cuisine_sonoff_contact' and is_state('binary_sensor.contact_fenetre_cuisine_sonoff_contact',
+            'on') %}\n  La fenêtre de la Cuisine a été ouverte.\n{% elif trigger.entity_id
+            == 'binary_sensor.contact_fenetre_bureau_sonoff_contact' and is_state('binary_sensor.contact_fenetre_bureau_sonoff_contact',
+            'on') %}\n  La fenêtre du Bureau a été ouverte.\n{% elif trigger.entity_id
+            == 'binary_sensor.contact_fenetre_chambre_sonoff_contact' and is_state('binary_sensor.contact_fenetre_chambre_sonoff_contact',
+            'on') %}\n  La fenêtre de la Chambre a été ouverte.\n{% else %}\n  Une
+            fenêtre est ouverte (Mise à jour globale).\n{% endif %} {% if states('sensor.nombre_de_fenetres_ouvertes')
+            | int == 4 %}\n  Toutes les fenêtres sont ouvertes.\n{% endif %}\n"
+      - alias: 'SÉCURITÉ : ARRÊT IMMÉDIAT POUR ÉVITER DOUBLON'
+        stop: Coupure fenêtre effectuée
+    default:
+    - alias: 'ACTION : ENVOI PARALLÈLE DES COMMANDES NUIT'
+      parallel:
+      - alias: LOGIQUE SALON
+        choose:
+        - alias: 'VÉRIFICATION : SÉCURITÉ SALON'
+          conditions:
+          - condition: state
+            entity_id: switch.clim_salon_nous
+            state: 'on'
+          - condition: state
+            entity_id: input_boolean.clim_salon_arret_securise_en_cours
+            state: 'off'
+          sequence:
+          - alias: 'COMMANDE : RÉGLAGE SALON'
+            action: climate.set_temperature
+            target:
+              entity_id: climate.clim_salon_rm4_mini
+            data:
+              hvac_mode: "{% if trigger is defined and trigger.id == 'sensor_update'
+                and is_state('climate.clim_salon_rm4_mini', 'off') %}\n  off\n{% else
+                %}\n  {{ mode_saison }}\n{% endif %}\n"
+              temperature: '{{ t_salon_target }}'
+      - alias: LOGIQUE BUREAU
+        choose:
+        - alias: 'VÉRIFICATION : SÉCURITÉ BUREAU'
+          conditions:
+          - condition: state
+            entity_id: switch.clim_bureau_nous
+            state: 'on'
+          - condition: state
+            entity_id: input_boolean.clim_bureau_arret_securise_en_cours
+            state: 'off'
+          sequence:
+          - alias: 'COMMANDE : RÉGLAGE BUREAU'
+            action: climate.set_temperature
+            target:
+              entity_id: climate.clim_bureau_rm4_mini
+            data:
+              hvac_mode: "{% if trigger is defined and trigger.id == 'sensor_update'
+                and is_state('climate.clim_bureau_rm4_mini', 'off') %}\n  off\n{%
+                else %}\n  {{ mode_saison }}\n{% endif %}\n"
+              temperature: '{{ t_bureau_target }}'
+      - alias: LOGIQUE CHAMBRE
+        choose:
+        - alias: 'VÉRIFICATION : SÉCURITÉ CHAMBRE'
+          conditions:
+          - condition: state
+            entity_id: switch.clim_chambre_nous
+            state: 'on'
+          - condition: state
+            entity_id: input_boolean.clim_chambre_arret_securise_en_cours
+            state: 'off'
+          sequence:
+          - alias: 'COMMANDE : RÉGLAGE CHAMBRE'
+            action: climate.set_temperature
+            target:
+              entity_id: climate.clim_chambre_rm4_mini
+            data:
+              hvac_mode: "{% if trigger is defined and trigger.id == 'sensor_update'
+                and is_state('climate.clim_chambre_rm4_mini', 'off') %}\n  off\n{%
+                else %}\n  {{ mode_saison }}\n{% endif %}\n"
+              temperature: '{{ t_chambre_target }}'
+    - alias: 'PAUSE : SÉCURITÉ RÉCEPTION'
+      delay: 00:00:02
+    - alias: 'NOTIF : RÉSUMÉ ÉTAT NUIT'
+      action: notify.mobile_app_eric
+      data:
+        title: '[AN] {{ states(''sensor.presence'') }}'
+        message: "{%- if 'groupe_1' in groupe_presence and mode_saison == 'heat' %}\n
+          \ [éCO HEAT]\n  Les 3 Clims : {{ temp_eco_c }}° (Absent)\n{% else %}\n  Mode
+          : {{ mode_saison | upper }} (NUIT)\n  Salon: {{ t_salon_target }}°\n  Bureau:
+          {{ t_bureau_target }}°\n  Chambre: {{ t_chambre_target }}°\n{% endif %}\n"
+  mode: queued
+- id: '1775243120444'
+  alias: Update previous temperature
+  description: Enregistre la température toutes les 30 minutes pour calculer la tendance.
+  triggers:
+  - trigger: time_pattern
+    minutes: /30
+  conditions: []
+  actions:
+  - action: input_number.set_value
+    target:
+      entity_id: input_number.th_balcon_nord_temperature_previous
+    data:
+      value: '{{ states(''sensor.th_balcon_nord_temperature'') | float(0) }}'
+  mode: single
+- id: '1775243176772'
+  alias: Update previous humidity
+  description: Enregistre l'humidité toutes les 30 minutes pour calculer la tendance.
+  triggers:
+  - trigger: time_pattern
+    minutes: /30
+  conditions: []
+  actions:
+  - action: input_number.set_value
+    target:
+      entity_id: input_number.th_balcon_nord_humidity_previous
+    data:
+      value: '{{ states(''sensor.th_balcon_nord_humidity'') | float(0) }}'
+  mode: single
+- id: '1775243260631'
+  alias: Notification de la foudre
+  description: Alerte sur Poco X7 Pro avec distance, ville ou direction et décompte
+    des impacts.
+  triggers:
+  - trigger: state
+    entity_id: sensor.blitzortung_lightning_counter
+  conditions:
+  - condition: numeric_state
+    entity_id: sensor.blitzortung_lightning_counter
+    above: 0
+  actions:
+  - action: homeassistant.update_entity
+    target:
+      entity_id: sensor.blitzortung_lightning_localisation
+  - action: notify.mobile_app_eric
+    data:
+      title: /!\ Attention foudre /!\
+      message: "{% set distance = states('sensor.blitzortung_lightning_distance')
+        | float(0) %} {% set azimuth = states('sensor.blitzortung_lightning_azimuth')
+        | float(0) %} {% set impactCount = states('sensor.blitzortung_lightning_counter')
+        | int(0) %} {% set timeSinceLastLightning = states('input_text.dernier_impact_de_foudre_temps_ecoule')
+        %} {% set localisation = states('sensor.blitzortung_lightning_localisation')
+        %} {% set city = None %} {% if localisation and localisation != '0' %}\n  {%
+        set location = state_attr('sensor.blitzortung_lightning_localisation', 'features')
+        %}\n  {% if location and location[0] and location[0].properties and location[0].properties.geocoding
+        and location[0].properties.geocoding.city %}\n    {% set city = location[0].properties.geocoding.city
+        %}\n  {% endif %}\n{% endif %} {% if distance > 0 %}\n  {% if city %}\n    {%
+        set msg = 'Un éclair a été détecté à ' ~ distance ~ ' Km de la maison à '
+        ~ city ~ '.' %}\n  {% elif azimuth is not none %}\n    {% if 348.75 <= azimuth
+        or azimuth < 11.25 %} {% set msg = 'Un éclair a été détecté à ' ~ distance
+        ~ ' Km au nord.' %}\n    {% elif 11.25 <= azimuth < 33.75 %} {% set msg =
+        'Un éclair a été détecté à ' ~ distance ~ ' Km au nord-nord-est.' %}\n    {%
+        elif 33.75 <= azimuth < 56.25 %} {% set msg = 'Un éclair a été détecté à '
+        ~ distance ~ ' Km au nord-est.' %}\n    {% elif 56.25 <= azimuth < 78.75 %}
+        {% set msg = 'Un éclair a été détecté à ' ~ distance ~ ' Km à l\\'est-nord-est.'
+        %}\n    {% elif 78.75 <= azimuth < 101.25 %} {% set msg = 'Un éclair a été
+        détecté à ' ~ distance ~ ' Km à l\\'est.' %}\n    {% elif 101.25 <= azimuth
+        < 123.75 %} {% set msg = 'Un éclair a été détecté à ' ~ distance ~ ' Km à
+        l\\'est-sud-est.' %}\n    {% elif 123.75 <= azimuth < 146.25 %} {% set msg
+        = 'Un éclair a été détecté à ' ~ distance ~ ' Km au sud-est.' %}\n    {% elif
+        146.25 <= azimuth < 168.75 %} {% set msg = 'Un éclair a été détecté à ' ~
+        distance ~ ' Km au sud-south-est.' %}\n    {% elif 168.75 <= azimuth < 191.25
+        %} {% set msg = 'Un éclair a été détecté à ' ~ distance ~ ' Km au sud.' %}\n
+        \   {% elif 191.25 <= azimuth < 213.75 %} {% set msg = 'Un éclair a été détecté
+        à ' ~ distance ~ ' Km au sud-sud-ouest.' %}\n    {% elif 213.75 <= azimuth
+        < 236.25 %} {% set msg = 'Un éclair a été détecté à ' ~ distance ~ ' Km au
+        sud-ouest.' %}\n    {% elif 236.25 <= azimuth < 258.75 %} {% set msg = 'Un
+        éclair a été détecté à ' ~ distance ~ ' Km à l\\'ouest-sud-ouest.' %}\n    {%
+        elif 258.75 <= azimuth < 281.25 %} {% set msg = 'Un éclair a été détecté à
+        ' ~ distance ~ ' Km à l\\'ouest.' %}\n    {% elif 281.25 <= azimuth < 303.75
+        %} {% set msg = 'Un éclair a été détecté à ' ~ distance ~ ' Km à l\\'ouest-nord-ouest.'
+        %}\n    {% elif 303.75 <= azimuth < 326.25 %} {% set msg = 'Un éclair a été
+        détecté à ' ~ distance ~ ' Km au nord-ouest.' %}\n    {% elif 326.25 <= azimuth
+        < 348.75 %} {% set msg = 'Un éclair a été détecté à ' ~ distance ~ ' Km au
+        nord-nord-ouest.' %}\n    {% endif %}\n  {% else %}\n    {% set msg = 'Un
+        éclair a été détecté à ' ~ distance ~ ' Km.' %}\n  {% endif %}\n{% else %}\n
+        \ {% set msg = 'Pas d\\'impact de foudre détecté.' %}\n{% endif %} {{ msg
+        }} {{ timeSinceLastLightning }}. {% if impactCount > 0 %}\n  {{ impactCount
+        }} impact(s) détecté(s).\n{% endif %}\n"
+  - delay: 00:01:00
+  mode: single
+- id: '1775243312985'
+  alias: Mettre à jour le temps du dernier impact de foudre
+  description: Met à jour le temps du dernier impact de foudre lorsque le capteur
+    change.
+  triggers:
+  - entity_id: sensor.maison_lightning_counter
+    trigger: state
+  conditions:
+  - condition: template
+    value_template: '{{ states(''sensor.maison_lightning_counter'') | int > 0 }}'
+  actions:
+  - target:
+      entity_id: input_datetime.dernier_eclair
+    data:
+      datetime: '{{ now().isoformat() }}'
+    action: input_datetime.set_datetime
+  mode: single
+- id: '1775243602925'
+  alias: (C) (CLIM OFF) Gardien Éco (Delta T < -1 et T°Ext > Seuil Non-Chauffage)
+  description: 'Module de sécurité ÉCO. Coupe les climatiseurs si l''air extérieur
+    est plus chaud  que le seuil de non-chauffage et que le Delta est favorable.
+
+    '
+  triggers:
+  - trigger: numeric_state
+    entity_id: sensor.temperature_delta_valeur
+    below: -1
+    for: 00:10:00
+  conditions:
+  - condition: time
+    after: 07:30:00
+    before: '21:00:00'
+  - condition: template
+    value_template: "{{ states('sensor.th_balcon_nord_temperature') | float(0) > \n
+      \  states('sensor.seuil_non_chauffage') | float(18) }}\n"
+  - condition: numeric_state
+    entity_id: sensor.th_balcon_nord_temperature
+    below: 25
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: climate.clim_salon_rm4_mini
+      state:
+      - cool
+      - heat
+      - fan_only
+      - dry
+      - auto
+    - condition: state
+      entity_id: climate.clim_bureau_rm4_mini
+      state:
+      - cool
+      - heat
+      - fan_only
+      - dry
+      - auto
+    - condition: state
+      entity_id: climate.clim_chambre_rm4_mini
+      state:
+      - cool
+      - heat
+      - fan_only
+      - dry
+      - auto
+  actions:
+  - if:
+    - condition: state
+      entity_id: climate.clim_salon_rm4_mini
+      state:
+      - cool
+      - heat
+      - fan_only
+      - dry
+      - auto
+    then:
+    - action: climate.set_hvac_mode
+      target:
+        entity_id: climate.clim_salon_rm4_mini
+      data:
+        hvac_mode: 'off'
+  - if:
+    - condition: state
+      entity_id: climate.clim_bureau_rm4_mini
+      state:
+      - cool
+      - heat
+      - fan_only
+      - dry
+      - auto
+    then:
+    - action: climate.set_hvac_mode
+      target:
+        entity_id: climate.clim_bureau_rm4_mini
+      data:
+        hvac_mode: 'off'
+  - if:
+    - condition: state
+      entity_id: climate.clim_chambre_rm4_mini
+      state:
+      - cool
+      - heat
+      - fan_only
+      - dry
+      - auto
+    then:
+    - action: climate.set_hvac_mode
+      target:
+        entity_id: climate.clim_chambre_rm4_mini
+      data:
+        hvac_mode: 'off'
+  - action: notify.mobile_app_eric
+    data:
+      title: Delta T° < -1°C
+      message: 'Les clim ont été éteintes. ({{ states(''sensor.temperature_delta_valeur'')
+        }}°C)  T° Ext.: ({{ states(''sensor.th_balcon_nord_temperature'') }}°C)  Seuil
+        réglé à: {{ states(''sensor.seuil_non_chauffage'') }}°C.
+
+        '
+  mode: single
+- id: '1775243646439'
+  alias: (D) Notification température Up ou Down de (7h30 -> 21h00)
+  description: 'Envoie le message personnalisé de clim si le texte change, OU au réveil
+    à 07h30.
+
+    '
+  triggers:
+  - alias: 'DÉCLENCHEUR : CAPTEUR TEMPÉRATURE'
+    trigger: state
+    entity_id: sensor.th_balcon_nord_temperature
+  - alias: 'DÉCLENCHEUR : HORAIRE FIXE 07H30'
+    trigger: time
+    at: 07:30:00
+  conditions: []
+  actions:
+  - alias: 'CONDITION : PÉRIODE DIURNE'
+    condition: time
+    after: 07:30:00
+    before: '21:00:00'
+  - alias: 'ACTION : PAUSE 2 SECONDES'
+    delay: 00:00:02
+  - alias: 'LOGIQUE : VÉRIFICATION CAPTEURS'
+    if:
+    - condition: template
+      value_template: "{{ states('sensor.message_clim_personnalise_7h30_21h00') in
+        ['unknown', 'unavailable'] or\n   states('sensor.mamour_wi_fi_connection')
+        in ['unknown', 'unavailable'] or\n   states('sensor.eric_wi_fi_connection')
+        in ['unknown', 'unavailable'] or\n   states('sensor.th_balcon_nord_temperature')
+        in ['unknown', 'unavailable'] }}\n"
+    then:
+    - alias: 'ACTION : NOTIF ERREUR (MAX 15 CAR)'
+      action: notify.mobile_app_eric
+      data:
+        title: '[ANJ] Erreur Capteurs'
+        message: 'Un capteur (Temperature, Wifi ou Message) est indisponible. Verifiez
+          les entites. # "[L...] modif" (Retrait des accents problématiques si nécessaire
+          pour ASCII pur)'
+    else:
+    - alias: 'ACTION : NOTIF TENDANCE (MAX 15 CAR)'
+      action: notify.mobile_app_eric
+      data:
+        title: '[Automa. Notif. Jrs]'
+        message: '{{ states(''sensor.message_clim_personnalise_7h30_21h00'') }}'
+  mode: queued
+- id: '1775243679316'
+  alias: (E) Notification température Up ou Down de (21h00 -> 7h30)
+  description: 'Envoie le message personnalisé de clim si le texte change, OU au début
+    de la nuit à 21h00.
+
+    '
+  triggers:
+  - alias: 'DÉCLENCHEUR : CAPTEUR TEMPÉRATURE'
+    trigger: state
+    entity_id: sensor.th_balcon_nord_temperature
+  - alias: 'DÉCLENCHEUR : HORAIRE FIXE 21H00'
+    trigger: time
+    at: '21:00:00'
+  conditions: []
+  actions:
+  - alias: 'CONDITION : PÉRIODE NOCTURNE'
+    condition: time
+    after: '21:00:00'
+    before: 07:30:00
+  - alias: 'ACTION : PAUSE 2 SECONDES'
+    delay: 00:00:02
+  - alias: 'LOGIQUE : VÉRIFICATION CAPTEURS'
+    if:
+    - condition: template
+      value_template: "{{ states('sensor.message_clim_personnalise_21h00_7h30') in
+        ['unknown', 'unavailable'] or\n   states('sensor.mamour_wi_fi_connection')
+        in ['unknown', 'unavailable'] or\n   states('sensor.eric_wi_fi_connection')
+        in ['unknown', 'unavailable'] or\n   states('sensor.th_balcon_nord_temperature')
+        in ['unknown', 'unavailable'] }}\n"
+    then:
+    - alias: 'ACTION : NOTIF ERREUR (MAX 15 CAR)'
+      action: notify.mobile_app_eric
+      data:
+        title: '[ANN] Erreur Capteurs'
+        message: 'Erreur: Un capteur TENDANCE est indisponible! Verifiez les dependances.
+          # "[L...] modif"'
+    else:
+    - alias: 'ACTION : NOTIF TENDANCE (MAX 15 CAR)'
+      action: notify.mobile_app_eric
+      data:
+        title: '[Automa. Notif. Nuit]'
+        message: '{{ states(''sensor.message_clim_personnalise_21h00_7h30'') }}'
+  mode: queued
+- id: '1775243705781'
+  alias: (F) (CLIM) Notification de fermeture des fenêtres
+  description: Envoie une notification lorsqu'une fenêtre est fermée.
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.contact_fenetre_salon_sonoff_contact
+    - binary_sensor.contact_fenetre_cuisine_sonoff_contact
+    - binary_sensor.contact_fenetre_bureau_sonoff_contact
+    - binary_sensor.contact_fenetre_chambre_sonoff_contact
+    from: 'on'
+    to: 'off'
+  actions:
+  - delay: 00:00:02
+  - action: notify.mobile_app_eric
+    data:
+      title: Fermeture en cours
+      message: "{% if trigger.entity_id == 'binary_sensor.contact_fenetre_salon_sonoff_contact'
+        %}\n  La fenêtre du Salon a été fermée.\n{% elif trigger.entity_id == 'binary_sensor.contact_fenetre_cuisine_sonoff_contact'
+        %}\n  La fenêtre de la Cuisine a été fermée.\n{% elif trigger.entity_id ==
+        'binary_sensor.contact_fenetre_bureau_sonoff_contact' %}\n  La fenêtre du
+        Bureau a été fermée.\n{% elif trigger.entity_id == 'binary_sensor.contact_fenetre_chambre_sonoff_contact'
+        %}\n  La fenêtre de la Chambre a été fermée.\n{% endif %}  {% if states('sensor.nombre_de_fenetres_fermees')
+        == '4' %}\n  Toutes les fenêtres sont maintenant fermées.\n{% endif %}\n"
+  mode: queued
+- id: '1775243733692'
+  alias: (G) (CLIM) Automatisation Arrêt Clim Notification
+  description: 'Notification quand une clim est coupée manuellement, seulement si
+    fenêtres fermées et prises actives.
+
+    '
+  triggers:
+  - trigger: state
+    entity_id:
+    - climate.clim_salon_rm4_mini
+    - climate.clim_bureau_rm4_mini
+    - climate.clim_chambre_rm4_mini
+    to: 'off'
+  conditions:
+  - condition: state
+    entity_id: switch.clim_salon_nous
+    state: 'on'
+  - condition: state
+    entity_id: switch.clim_bureau_nous
+    state: 'on'
+  - condition: state
+    entity_id: switch.clim_chambre_nous
+    state: 'on'
+  - condition: state
+    entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+    state: 'off'
+  - condition: state
+    entity_id: binary_sensor.contact_fenetre_cuisine_sonoff_contact
+    state: 'off'
+  - condition: state
+    entity_id: binary_sensor.contact_fenetre_bureau_sonoff_contact
+    state: 'off'
+  - condition: state
+    entity_id: binary_sensor.contact_fenetre_chambre_sonoff_contact
+    state: 'off'
+  actions:
+  - action: notify.mobile_app_eric
+    data:
+      title: ARRÊT CLIM
+      message: "{% set pieces = {\n  'climate.clim_salon_rm4_mini': 'du Salon',\n
+        \ 'climate.clim_bureau_rm4_mini': 'du Bureau',\n  'climate.clim_chambre_rm4_mini':
+        'de la Chambre'\n} %} La clim. {{ pieces.get(trigger.entity_id, 'inconnue')
+        }} a été coupée.\n"
+  mode: queued
+- id: '1775243761515'
+  alias: (H) (CLIM) Notification de changement de mode Été/Fan/Hiver
+  description: 'Notification lorsque le mode change entre Été, Ventilateur ou Hiver
+    (cool / fan_only / heat)
+
+    '
+  triggers:
+  - trigger: state
+    entity_id: sensor.mode_ete_hiver
+  conditions: []
+  actions:
+  - delay: 00:00:03
+  - action: notify.mobile_app_eric
+    data:
+      title: CHANGEMENT DE MODE
+      message: 'Le mode a changé pour: {{ states(''sensor.mode_ete_hiver_etat'') |
+        upper }}'
+  mode: single
+- id: '1775243818145'
+  alias: (J) Synchro & Notif Clim si Prise Coupée
+  description: 'Met à jour l''état du thermostat et notifie proprement si la prise
+    est coupée.
+
+    '
+  triggers:
+  - trigger: state
+    entity_id:
+    - switch.clim_salon_nous
+    - switch.clim_bureau_nous
+    - switch.clim_chambre_nous
+    from: 'on'
+    to: 'off'
+  actions:
+  - action: climate.set_hvac_mode
+    data:
+      hvac_mode: 'off'
+    target:
+      entity_id: "{% if trigger.entity_id == 'switch.clim_salon_nous' %}\n  climate.clim_salon_rm4_mini\n{%
+        elif trigger.entity_id == 'switch.clim_bureau_nous' %}\n  climate.clim_bureau_rm4_mini\n{%
+        elif trigger.entity_id == 'switch.clim_chambre_nous' %}\n  climate.clim_chambre_rm4_mini\n{%
+        endif %}\n"
+  - if:
+    - condition: time
+      after: 07:30:00
+      before: '21:00:00'
+    then:
+    - action: notify.mobile_app_eric
+      data:
+        title: CLIM COUPÉE
+        message: "{% set piece = 'inconnue' %}  {% if 'salon' in trigger.entity_id
+          %}\n  {% set piece = 'du Salon' %}\n{% elif 'bureau' in trigger.entity_id
+          %}\n  {% set piece = 'du Bureau' %}\n{% elif 'chambre' in trigger.entity_id
+          %}\n  {% set piece = 'de la Chambre' %}\n{% endif %}  La prise extérieure
+          {{ piece }} vient d'être éteinte.\n"
+  mode: parallel
+- id: '1775243914127'
+  alias: (K) (DEBUG) Notifier les changements de message clim (Mobile)
+  description: Surveille et notifie les changements d'état du message personnalisé.
+  triggers:
+  - trigger: state
+    entity_id: sensor.message_clim_personnalise_7h30_21h00
+  actions:
+  - choose:
+    - alias: 'Détection : CELLULAR'
+      conditions:
+      - condition: template
+        value_template: '{{ ''CELLULAR'' in trigger.to_state.state }}'
+      sequence:
+      - action: notify.mobile_app_eric
+        data:
+          message: '[Présence] Personne n''est à la maison (mode CELLULAR/WIFI_?!)'
+    - alias: 'Détection : MAMOUR'
+      conditions:
+      - condition: template
+        value_template: '{{ ''MAMOUR'' in trigger.to_state.state }}'
+      sequence:
+      - action: notify.mobile_app_eric
+        data:
+          message: '[Présence] Seul Mamour est à la maison (Wi-Fi)'
+    - alias: 'Détection : ERIC'
+      conditions:
+      - condition: template
+        value_template: '{{ ''ERIC'' in trigger.to_state.state }}'
+      sequence:
+      - action: notify.mobile_app_eric
+        data:
+          message: '[Présence] Seul Eric est à la maison (Wi-Fi)'
+    - alias: 'Détection : LES DEUX'
+      conditions:
+      - condition: template
+        value_template: '{{ ''Clim [2] en [WIFI]'' in trigger.to_state.state }}'
+      sequence:
+      - action: notify.mobile_app_eric
+        data:
+          message: '[Présence] Mamour et Eric sont à la maison (Wi-Fi)'
+    - alias: 'Détection : UP (Hausse)'
+      conditions:
+      - condition: template
+        value_template: '{{ ''Up ↗'' in trigger.to_state.state }}'
+      sequence:
+      - variables:
+          temp_ext: "{% if 'Up ↗' in trigger.to_state.state %}\n  {{ trigger.to_state.state.split('Up
+            ↗ ')[1].split('°')[0].strip() }}\n{% else %}\n  ?\n{% endif %}"
+      - action: notify.mobile_app_eric
+        data:
+          message: '[Tendance] Température extérieure en hausse : {{ temp_ext }}°'
+    - alias: 'Détection : DOWN (Baisse)'
+      conditions:
+      - condition: template
+        value_template: '{{ ''Down ↘'' in trigger.to_state.state }}'
+      sequence:
+      - variables:
+          temp_ext: "{% if 'Down ↘' in trigger.to_state.state %}\n  {{ trigger.to_state.state.split('Down
+            ↘ ')[1].split('°')[0].strip() }}\n{% else %}\n  ?\n{% endif %}"
+      - action: notify.mobile_app_eric
+        data:
+          message: '[Tendance] Température extérieure en baisse : {{ temp_ext }}°'
+    - alias: 'Détection : STABLE'
+      conditions:
+      - condition: template
+        value_template: '{{ ''stable →'' in trigger.to_state.state }}'
+      sequence:
+      - variables:
+          temp_ext: "{% if 'stable →' in trigger.to_state.state %}\n  {{ trigger.to_state.state.split('stable
+            → ')[1].split('°')[0].strip() }}\n{% else %}\n  ?\n{% endif %}"
+      - action: notify.mobile_app_eric
+        data:
+          message: '[Tendance] Température extérieure stable : {{ temp_ext }}°'
+    - alias: 'Détection : HEAT'
+      conditions:
+      - condition: template
+        value_template: '{{ ''HEAT]'' in trigger.to_state.state }}'
+      sequence:
+      - variables:
+          message_part: "{% if 'HEAT]\\n' in trigger.to_state.state %}\n  {{ trigger.to_state.state.split('HEAT]\\n')[1]
+            }}\n{% else %}\n  Inconnu\n{% endif %}"
+      - action: notify.mobile_app_eric
+        data:
+          message: '[Mode] Chauffage activé :
+
+            {{ message_part }}'
+    - alias: 'Détection : COOL'
+      conditions:
+      - condition: template
+        value_template: '{{ ''COOL]'' in trigger.to_state.state }}'
+      sequence:
+      - variables:
+          message_part: "{% if 'COOL]\\n' in trigger.to_state.state %}\n  {{ trigger.to_state.state.split('COOL]\\n')[1]
+            }}\n{% else %}\n  Inconnu\n{% endif %}"
+      - action: notify.mobile_app_eric
+        data:
+          message: '[Mode] Rafraîchissement activé :
+
+            {{ message_part }}'
+    - alias: 'Détection : FAN'
+      conditions:
+      - condition: template
+        value_template: '{{ ''FAN ONLY]'' in trigger.to_state.state }}'
+      sequence:
+      - action: notify.mobile_app_eric
+        data:
+          message: '[Mode] Ventilation activée'
+- id: '1775244321024'
+  alias: A - Chauffage Cuisine (entre 4h45 & 7h LMMJ ou 5:45h & 8h VSD avec T° 19,9°
+    <-> 20.5°)
+  description: 'Allume ou éteint le chauffage selon la température (19,9° <-> 20.5°)  aux
+    conditions horaires spécifiques et si Eric OU Mamour est à la maison.
+
+    '
+  triggers:
+  - trigger: time
+    at: 04:45:00
+  - trigger: time
+    at: 05:45:00
+  - trigger: time
+    at: 07:00:00
+  - trigger: time
+    at: 08:00:00
+  - trigger: numeric_state
+    entity_id: sensor.th_cuisine_temperature
+    below: 19.9
+  - trigger: numeric_state
+    entity_id: sensor.th_cuisine_temperature
+    above: 20.5
+  conditions:
+  - alias: Présence Eric ou Mamour
+    condition: or
+    conditions:
+    - condition: zone
+      entity_id: person.eric
+      zone: zone.home
+    - condition: zone
+      entity_id: person.mamour
+      zone: zone.home
+  - alias: Vérification Plage Horaire et Jour
+    condition: or
+    conditions:
+    - condition: and
+      conditions:
+      - condition: time
+        after: 04:45:00
+        before: 07:00:01
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+    - condition: and
+      conditions:
+      - condition: time
+        after: 05:45:00
+        before: 08:00:01
+        weekday:
+        - fri
+        - sat
+        - sun
+  actions:
+  - choose:
+    - alias: 'ARRÊT FORCE : Fin de période Semaine (07:00)'
+      conditions:
+      - condition: template
+        value_template: '{{ now().hour == 7 and now().minute == 0 }}'
+      - condition: time
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+      sequence:
+      - action: climate.set_hvac_mode
+        target:
+          entity_id: climate.radiateur_cuisine
+        data:
+          hvac_mode: 'off'
+      - action: notify.mobile_app_eric
+        data:
+          message: /!\ RADIATEUR CUISINE est 'OFF' FORCE (Fin Semaine) /!\
+    - alias: 'ARRÊT FORCE : Fin de période Week-end (08:00)'
+      conditions:
+      - condition: template
+        value_template: '{{ now().hour == 8 and now().minute == 0 }}'
+      - condition: time
+        weekday:
+        - fri
+        - sat
+        - sun
+      sequence:
+      - action: climate.set_hvac_mode
+        target:
+          entity_id: climate.radiateur_cuisine
+        data:
+          hvac_mode: 'off'
+      - action: notify.mobile_app_eric
+        data:
+          message: /!\ RADIATEUR CUISINE est 'OFF' FORCE (Fin W-E) /!\
+    - alias: 'ACTION : Allumage (Temp < 19.9)'
+      conditions:
+      - condition: numeric_state
+        entity_id: sensor.th_cuisine_temperature
+        below: 19.9
+      sequence:
+      - action: climate.set_hvac_mode
+        target:
+          entity_id: climate.radiateur_cuisine
+        data:
+          hvac_mode: heat
+      - action: notify.mobile_app_eric
+        data:
+          message: /!\ RADIATEUR CUISINE est 'ON' /!\
+    - alias: 'ACTION : Extinction (Temp > 20.5)'
+      conditions:
+      - condition: numeric_state
+        entity_id: sensor.th_cuisine_temperature
+        above: 20.5
+      sequence:
+      - action: climate.set_hvac_mode
+        target:
+          entity_id: climate.radiateur_cuisine
+        data:
+          hvac_mode: 'off'
+      - action: notify.mobile_app_eric
+        data:
+          message: /!\ RADIATEUR CUISINE est 'OFF' /!\
+  mode: single
+- id: '1775244397523'
+  alias: B - Chauffage Cuisine Vacances
+  description: 'Allume ou éteint le chauffage selon la température entre 6h00 et 8h30  pendant
+    les vacances (Tous les jours).
+
+    '
+  triggers:
+  - trigger: time
+    at: 06:00:00
+  - trigger: numeric_state
+    entity_id: sensor.th_cuisine_temperature
+    below: 19.9
+  - trigger: numeric_state
+    entity_id: sensor.th_cuisine_temperature
+    above: 20.5
+  conditions: []
+  actions:
+  - choose:
+    - alias: 'DÉMARRAGE : Mode Chauffage'
+      conditions:
+      - condition: zone
+        entity_id: person.mamour
+        zone: zone.home
+      - condition: zone
+        entity_id: person.eric
+        zone: zone.home
+      - condition: time
+        after: 06:00:00
+        before: 08:30:00
+      - condition: numeric_state
+        entity_id: sensor.th_cuisine_temperature
+        below: 19.9
+      sequence:
+      - action: climate.set_hvac_mode
+        target:
+          entity_id: climate.radiateur_cuisine
+        data:
+          hvac_mode: heat
+      - action: notify.mobile_app_eric
+        data:
+          message: /!\ Chauffage Cuisine 'ON' /!\
+    - alias: 'ARRÊT : Température atteinte'
+      conditions:
+      - condition: zone
+        entity_id: person.mamour
+        zone: zone.home
+      - condition: zone
+        entity_id: person.eric
+        zone: zone.home
+      - condition: time
+        after: 06:00:00
+        before: 08:30:00
+      - condition: numeric_state
+        entity_id: sensor.th_cuisine_temperature
+        above: 20.5
+      sequence:
+      - action: climate.set_hvac_mode
+        target:
+          entity_id: climate.radiateur_cuisine
+        data:
+          hvac_mode: 'off'
+      - action: notify.mobile_app_eric
+        data:
+          message: /!\ Chauffage Cuisine 'OFF' /!\
+  mode: single
+- id: '1775244953345'
+  alias: Gestion Optimisée du Store Bureau
+  description: 'Priorité Sommeil et Anti-Reflet. Sécurité : Bloque tout mouvement
+    si la fenêtre est ouverte.'
+  triggers:
+  - id: reveil
+    trigger: time
+    at: 07:00:00
+  - trigger: state
+    entity_id: sensor.th_balcon_nord_temperature
+  - trigger: sun
+    event: sunset
+  - id: fenetre
+    trigger: state
+    entity_id: binary_sensor.contact_fenetre_bureau_sonoff_contact
+    to: 'off'
+  conditions:
+  - alias: 'SÉCURITÉ : La fenêtre doit être FERMÉE pour bouger le store'
+    condition: state
+    entity_id: binary_sensor.contact_fenetre_bureau_sonoff_contact
+    state: 'off'
+  actions:
+  - choose:
+    - alias: 'SCÉNARIO A : Ouverture Travail (Printemps/Automne)'
+      conditions:
+      - condition: time
+        after: 07:00:00
+      - condition: sun
+        before: sunset
+      - condition: numeric_state
+        entity_id: sensor.th_balcon_nord_temperature
+        above: 18
+        below: 25
+      - condition: numeric_state
+        entity_id: cover.store_bureau
+        attribute: current_position
+        below: 1
+      sequence:
+      - action: cover.open_cover
+        target:
+          entity_id: cover.store_bureau
+    - alias: 'SCÉNARIO B : Fermeture Chaleur (Été)'
+      conditions:
+      - condition: numeric_state
+        entity_id: sensor.th_balcon_nord_temperature
+        above: 25
+      - condition: sun
+        before: sunset
+      sequence:
+      - action: cover.close_cover
+        target:
+          entity_id: cover.store_bureau
+    - alias: 'SCÉNARIO C : Fermeture Nuit'
+      conditions:
+      - condition: sun
+        after: sunset
+      sequence:
+      - action: cover.close_cover
+        target:
+          entity_id: cover.store_bureau
+  mode: single
+- id: '1775244989013'
+  alias: Gestion Simple du Store Salon (Matin/Soir)
+  description: Ouvre le store au lever du soleil (pas avant 6h30) et le ferme au coucher.
+  triggers:
+  - id: ouverture
+    trigger: time
+    at: 06:30:00
+  - id: ouverture
+    trigger: sun
+    event: sunrise
+  - id: fermeture
+    trigger: sun
+    event: sunset
+  conditions:
+  - alias: 'SÉCURITÉ : La fenêtre doit être FERMÉE'
+    condition: state
+    entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+    state: 'off'
+  actions:
+  - choose:
+    - alias: 'Matin : Ouverture si > 6h30 ET Soleil levé'
+      conditions:
+      - condition: trigger
+        id: ouverture
+      - condition: time
+        after: 06:29:00
+      - condition: state
+        entity_id: sun.sun
+        state: above_horizon
+      sequence:
+      - action: cover.open_cover
+        target:
+          entity_id: cover.store_salon
+    - alias: 'Soir : Fermeture au coucher du soleil'
+      conditions:
+      - condition: trigger
+        id: fermeture
+      sequence:
+      - action: cover.close_cover
+        target:
+          entity_id: cover.store_salon
+  mode: single
+- id: '1775245530054'
+  alias: Eco. PRISES DINAMIQUE -> By-Présence/Groupe
+  description: 'Pilotage des 6 prises en fonction du groupe de présence (G1 à G4).
+    Sécurité PC : alim bureau garantie si conso > 100W.
+
+    '
+  triggers:
+  - entity_id: sensor.groupe
+    id: groupe_change
+    trigger: state
+  - entity_id: sensor.prise_bureau_pc_ikea_power
+    above: 100
+    id: pc_allume
+    trigger: numeric_state
+  - entity_id: sensor.prise_bureau_pc_ikea_power
+    below: 40
+    id: pc_eteint
+    trigger: numeric_state
+  actions:
+  - variables:
+      g: '{{ states(''sensor.groupe'') }}'
+      pc_active: '{{ states(''sensor.prise_bureau_pc_ikea_power'') | float(0) > 100
+        }}'
+      vapote: '{{ ''on'' if g in [''groupe_2'', ''groupe_4''] else ''off'' }}'
+      horloge: '{{ ''on'' if g in [''groupe_2'', ''groupe_4''] else ''off'' }}'
+      play3: '{{ ''on'' if g in [''groupe_2'', ''groupe_3'', ''groupe_4''] else ''off''
+        }}'
+      pc_bureau: '{{ ''on'' if (g in [''groupe_3'', ''groupe_4''] or pc_active) else
+        ''off'' }}'
+      tete_lit: '{{ ''on'' if g in [''groupe_2'', ''groupe_4''] else ''off'' }}'
+  - target:
+      entity_id: switch.prise_tv_salon_ikea
+    action: homeassistant.turn_off
+  - target:
+      entity_id: light.hue_smart_salon
+    action: homeassistant.turn_{{ vapote }}
+  - target:
+      entity_id: switch.prise_horloge_ikea
+    action: homeassistant.turn_{{ horloge }}
+  - target:
+      entity_id: switch.ecran_p_c_3_play_hue
+    action: homeassistant.turn_{{ play3 }}
+  - target:
+      entity_id: light.hue_smart_plug_eco_pc_bureau
+    action: homeassistant.turn_{{ pc_bureau }}
+  - target:
+      entity_id: switch.prise_tete_de_lit_chambre
+    action: homeassistant.turn_{{ tete_lit }}
+  - data:
+      title: 'Groupe: {{ g }}'
+      message: "{% set prises = [\n  'switch.prise_tv_salon_ikea',\n  'switch.prise_horloge_ikea',\n
+        \ 'light.hue_smart_salon',\n  'switch.ecran_p_c_3_play_hue',\n  'light.hue_smart_eco_pc_bureau',\n
+        \ 'switch.prise_tete_de_lit_chambre'\n] %} {% set count_on = namespace(value=0)
+        %} {% for p in prises %}\n  {% if states(p) == 'on' %}\n    {% set count_on.value
+        = count_on.value + 1 %}\n  {% endif %}\n{% endfor %} [{{ count_on.value }}]
+        prises ON | PC: {{ states('sensor.prise_bureau_pc_ikea_power') | int }}W\n"
+    action: notify.mobile_app_eric
+  mode: queued
+- id: '1775245732227'
+  alias: 'Gestion PC bureau : Scène de Fin + Notif'
+  description: 'Éteint la prise du PC et notifie, mais laisse la prise ON pour le
+    suivi conso  lorsqu''une veille est détectée.
+
+    '
+  triggers:
+  - id: bouton_mqtt
+    trigger: mqtt
+    topic: zigbee2mqtt/Poussoir (IKEA TRADFRI)/action
+  - id: extinction_conso
+    trigger: numeric_state
+    entity_id: sensor.prise_bureau_pc_ikea_power
+    below: 40
+    for:
+      minutes: 2
+  actions:
+  - choose:
+    - alias: 'ALLUMAGE : Bouton ON'
+      conditions:
+      - or:
+        - condition: template
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
+            == ''on'' }}'
+        - condition: trigger
+          id: bouton_mqtt
+      sequence:
+      - action: light.turn_on
+        target:
+          entity_id: light.hue_smart_eco_pc_bureau
+        data: {}
+      - action: light.turn_on
+        target:
+          entity_id: light.hue_smart_eco_pc_bureau
+        data: {}
+    - alias: 'EXTINCTION PRISE PC: Bouton OFF ou Veille (< 80W)'
+      conditions:
+      - or:
+        - condition: template
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
+            == ''off'' }}'
+        - condition: trigger
+          id: extinction_conso
+      sequence:
+      - action: light.turn_off
+        target:
+          entity_id: light.hue_smart_eco_pc_bureau
+      - action: notify.mobile_app_eric
+        data:
+          title: Veille détectée
+          message: PC Bureau [OFF]
+          data:
+            icon: mdi:eye-outline
+            tag: notif_pc_bureau
+  mode: parallel
+- id: '1775330762844'
+  alias: 'Gestion TV Chambre : Scène de Fin + Notif'
+  description: 'Éteint les lumières et notifie, mais laisse la prise ON pour le suivi
+    conso  lorsqu''une veille est détectée.
+
+    '
+  triggers:
+  - id: bouton_mqtt
+    trigger: mqtt
+    options:
+      topic: zigbee2mqtt/Inter TV Chambre (IKEA RODRET)
+  - id: allumage_auto
+    trigger: time
+    at: '21:00:00'
+    enabled: false
+  - id: extinction_conso
+    trigger: numeric_state
+    entity_id: sensor.prise_tv_chambre_nous_power
+    below: 20
+    for:
+      minutes: 2
+  actions:
+  - choose:
+    - alias: 'ALLUMAGE : Bouton ON ou 21h00'
+      conditions:
+      - or:
+        - condition: template
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
+            == ''on'' }}'
+        - condition: trigger
+          id: allumage_auto
+      sequence:
+      - action: light.turn_on
+        target:
+          entity_id: light.hue_smart_eco_tv_chambre
+      - action: switch.turn_on
+        target:
+          entity_id: switch.prise_tv_chambre_nous
+    - alias: 'EXTINCTION AMBIANCE : Bouton OFF ou Veille (< 20W)'
+      conditions:
+      - or:
+        - condition: template
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
+            == ''off'' }}'
+        - condition: trigger
+          id: extinction_conso
+      sequence:
+      - action: light.turn_off
+        target:
+          entity_id: light.hue_smart_eco_tv_chambre
+      - action: notify.mobile_app_eric
+        data:
+          title: Veille détectée
+          message: Prise TV [OFF]
+          data:
+            icon: mdi:eye-outline
+            tag: notif_tv_chambre
+  mode: parallel
+- id: '1775331166275'
+  alias: 'D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR'
+  description: Reset physique si T > 25°C, uniquement si la prise est alimentée
+  triggers:
+  - alias: 'TRIGGER : CHANGEMENT TEMPÉRATURE SDB'
+    trigger: state
+    entity_id: sensor.th_salle_de_bain_temperature
+  conditions:
+  - alias: 'CONDITION : VÉRIFICATION ALIMENTATION PRISE'
+    condition: state
+    entity_id: switch.prise_soufflant_salle_de_bain_nous
+    state: 'on'
+  - alias: 'CONDITION : VÉRIFICATION ÉTAT INTERNE'
+    condition: state
+    entity_id: input_boolean.inter_soufflant_salle_de_bain
+    state: 'on'
+  - alias: 'CONDITION : TEMPÉRATURE > 25°C'
+    condition: numeric_state
+    entity_id: sensor.th_salle_de_bain_temperature
+    above: 25
+  - alias: 'CONDITION : DÉRIVE THERMIQUE RAPIDE (+0.5°C)'
+    condition: template
+    value_template: "{{ (states('sensor.th_salle_de_bain_temperature') | float) >=
+      \n   (trigger.from_state.state | float + 0.5) }}\n"
+  actions:
+  - alias: 'ACTION : ATTENTE STABILISATION (1 MIN)'
+    delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  - alias: 'ACTION : ENVOI COMMANDE IR RESET'
+    action: remote.send_command
+    target:
+      entity_id: remote.soufflant_sdb
+    data:
+      command: on_off
+      device: radiateur_sdb
+      num_repeats: 1
+  - alias: 'ETAT : PASSAGE DU BOOLEAN SUR OFF (SÉCURITÉ)'
+    action: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.inter_soufflant_salle_de_bain
+  - alias: 'ACTION : ATTENTE AVANT COUPURE (1 MIN) SÉCURITÉ'
+    delay: 00:01:00
+  - alias: 'MATÉRIEL : COUPURE PHYSIQUE DE LA PRISE'
+    action: switch.turn_off
+    target:
+      entity_id: switch.prise_soufflant_salle_de_bain_nous
+  - alias: 'NOTIFIER : ALERTE MOBILE DÉRIVE THERMIQUE'
+    action: notify.mobile_app_eric
+    data:
+      title: ⚠️ Watchdog SDB
+      message: Dérive thermique détectée à {{ states('sensor.th_salle_de_bain_temperature')
+        }}°C. Reset IR lancé.
+  mode: single
+- id: '1775331417577'
+  alias: P3_Allumage Lumière Entrée
+  description: 'Gestion de l''éclairage de l''entrée basée sur les transitions des
+    groupes  de présence et la période de la journée.
+
+    '
+  triggers:
+  - alias: SURVEILLANCE DU CHANGEMENT DE GROUPE DE PRÉSENCE
+    trigger: state
+    entity_id: sensor.groupe
+  actions:
+  - alias: CHOIX DE LA LOGIQUE SELON LA TRANSITION DÉTECTÉE
+    choose:
+    - alias: 'CAS 1 : ARRIVÉE INITIALE EN PÉRIODE DIURNE (G1 -> PRÉSENCE)'
+      conditions:
+      - alias: 'VÉRIFICATION : PASSAGE DE ABSENT À PRÉSENT'
+        condition: template
+        value_template: "{{ trigger.from_state.state == 'groupe_1' and \n   trigger.to_state.state
+          in ['groupe_2', 'groupe_3', 'groupe_4'] }}"
+      - alias: 'VÉRIFICATION : PÉRIODE DIURNE (SOLEIL LEVÉ)'
+        condition: state
+        entity_id: sun.sun
+        state: above_horizon
+      sequence:
+      - alias: 'ACTION : ALLUMAGE DE LA LUMIÈRE ENTRÉE'
+        action: light.turn_on
+        target:
+          entity_id: light.entree
+    - alias: 'CAS 2 : RETOUR DE MAMOUR (TRANSITION G3 VERS G4)'
+      conditions:
+      - alias: 'VÉRIFICATION : PASSAGE DE ERIC SEUL À DUO'
+        condition: template
+        value_template: "{{ trigger.from_state.state == 'groupe_3' and \n   trigger.to_state.state
+          == 'groupe_4' }}"
+      sequence:
+      - alias: 'ACTION : ALLUMAGE DE LA LUMIÈRE ENTRÉE'
+        action: light.turn_on
+        target:
+          entity_id: light.entree
+  mode: queued
+- id: '1775331454560'
+  alias: P3_BUREAU - BOUTON RODRET TOGGLE BLANCHES
+  description: Alterne l'allumage des 2 lampes blanches via MQTT (Mode Fainéant)
+  triggers:
+  - alias: RÉCEPTION MESSAGE MQTT BOUTON RODRET
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter Bureau (RODRET)
+  actions:
+  - alias: DÉCISION SELON LE PAYLOAD MQTT (ON OU OFF)
+    choose:
+    - alias: BOUTON ON OU OFF PRESSÉ -> LOGIQUE TOGGLE
+      conditions:
+      - alias: VÉRIFICATION ACTION DANS LE JSON
+        condition: template
+        value_template: '{{ trigger.payload_json.action in [''on'', ''off''] }}'
+      sequence:
+      - alias: LOGIQUE DE BASCULEMENT (TOGGLE)
+        choose:
+        - alias: SI LUMIÈRE PRÉSENTE -> EXTINCTION
+          conditions:
+          - alias: VÉRIFICATION SI UNE LAMPE EST ON
+            condition: or
+            conditions:
+            - condition: state
+              entity_id: light.hue_white_lamp_bureau_1
+              state: 'on'
+            - condition: state
+              entity_id: light.hue_white_lamp_bureau_2
+              state: 'on'
+          sequence:
+          - alias: EXTINCTION DES 2 LAMPES BLANCHES
+            action: light.turn_off
+            target:
+              entity_id:
+              - light.hue_white_lamp_bureau_1
+              - light.hue_white_lamp_bureau_2
+        - alias: SI TOUT EST NOIR -> ALLUMAGE
+          conditions:
+          - alias: VÉRIFICATION SI TOUT EST OFF
+            condition: state
+            entity_id: light.hue_white_lamp_bureau_1
+            state: 'off'
+          - condition: state
+            entity_id: light.hue_white_lamp_bureau_2
+            state: 'off'
+          sequence:
+          - alias: ALLUMAGE DES 2 LAMPES BLANCHES
+            action: light.turn_on
+            target:
+              entity_id:
+              - light.hue_white_lamp_bureau_1
+              - light.hue_white_lamp_bureau_2
+  - alias: FORÇAGE MISE À JOUR DU SENSOR D'ÉTAT
+    action: homeassistant.update_entity
+    target:
+      entity_id: sensor.bureau_etat
+  mode: restart
+- id: '1775331482668'
+  alias: BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES
+  description: Assure que les deux lampes de bureau (1 et 2) sont synchronisées si
+    l'une s'allume
+  triggers:
+  - alias: DÉTECTION ALLUMAGE LAMPE BUREAU 1
+    trigger: state
+    entity_id: light.hue_white_lamp_bureau_1
+    to: 'on'
+    for: 00:00:05
+  - alias: DÉTECTION ALLUMAGE LAMPE BUREAU 2
+    trigger: state
+    entity_id: light.hue_white_lamp_bureau_2
+    to: 'on'
+    for: 00:00:05
+  conditions:
+  - alias: VÉRIFICATION SI UNE DES DEUX LAMPES RESTE ÉTEINTE
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: light.hue_white_lamp_bureau_1
+      state: 'off'
+    - condition: state
+      entity_id: light.hue_white_lamp_bureau_2
+      state: 'off'
+  actions:
+  - alias: FORÇAGE ALLUMAGE DES DEUX LAMPES
+    action: light.turn_on
+    target:
+      entity_id:
+      - light.hue_white_lamp_bureau_1
+      - light.hue_white_lamp_bureau_2
+  - alias: MISE À JOUR FORCÉE DE L'ÉTAT DU BUREAU
+    action: homeassistant.update_entity
+    target:
+      entity_id: sensor.bureau_etat
+  mode: restart
+- id: '1775331547996'
+  alias: Bureau - Forcer Play ON si PC tourne
+  description: Rallume les Hue Play si elles sont éteintes manuellement alors que
+    la synchro PC est active
+  triggers:
+  - entity_id:
+    - light.hue_play_1_pc_bureau
+    - light.hue_play_2_pc_bureau
+    - light.hue_play_3_pc_bureau
+    to: 'off'
+    trigger: state
+  conditions:
+  - condition: state
+    entity_id: binary_sensor.moniteur_pc
+    state: 'on'
+  actions:
+  - target:
+      entity_id: '{{ trigger.entity_id }}'
+    action: light.turn_on
+  mode: parallel
+- id: '1775331623943'
+  alias: BUREAU_ACTIVATION_ECRAN_SYNCHRO
+  description: Synchronise l'état de l'écran avec l'activité du PC bureau.
+  triggers:
+  - alias: 'DÉCLENCHEMENT : PC BUREAU ALLUMÉ'
+    trigger: state
+    entity_id: binary_sensor.moniteur_pc
+    to: 'on'
+    id: pc_on
+  - alias: 'DÉCLENCHEMENT : PC BUREAU ÉTEINT'
+    trigger: state
+    entity_id: binary_sensor.moniteur_pc
+    to: 'off'
+    for: 00:02:00
+    id: pc_off
+  conditions: []
+  actions:
+  - alias: 'ACTION : SYNCHRONISATION ALIMENTATION ÉCRAN'
+    choose:
+    - alias: 'CAS : PC ON -> ALLUMER ÉCRAN'
+      conditions:
+      - condition: trigger
+        id: pc_on
+      sequence:
+      - action: switch.turn_on
+        target:
+          entity_id: switch.ecran_p_c_3_play_hue
+    - alias: 'CAS : PC OFF -> ÉTEINDRE ÉCRAN'
+      conditions:
+      - condition: trigger
+        id: pc_off
+      sequence:
+      - action: switch.turn_off
+        target:
+          entity_id: switch.ecran_p_c_3_play_hue
+  mode: restart
+- id: '1775386133385'
+  alias: Système - Watchdog Piles (HUE/IKEA/SONOFF)
+  description: Vérification 3x/jour basée sur les groupes de la vue synthétique (seuil
+    11%)
+  triggers:
+  - trigger: time
+    at: 08:00:00
+  - trigger: time
+    at: '14:00:00'
+  - trigger: time
+    at: '20:00:00'
+  actions:
+  - variables:
+      low_batt: "{% set sensors = expand('group.hue_devices', 'group.ikea_devices',
+        'group.sonoff_devices') %} {% set ns = namespace(ids=[]) %} {% for s in sensors
+        %}\n  {% if s.state | is_number and s.state | int <= 11 %}\n    {% set ns.ids
+        = ns.ids + [s.entity_id] %}\n  {% endif %}\n{% endfor %} {{ ns.ids }}\n"
+  - if:
+    - condition: template
+      value_template: '{{ low_batt | count > 0 }}'
+    then:
+    - action: notify.mobile_app_eric
+      data:
+        title: "\U0001FAAB Alerte Pile Faible (<10%)"
+        message: "{% for id in low_batt %}\n  - {{ state_attr(id, 'friendly_name')
+          }} : {{ states(id) }}%\n{% endfor %}\n"
+        data:
+          tag: alert-batterie
+          color: '#f44336'
+  mode: single
+- id: '1775386803313'
+  alias: Z2M last_seen
+  description: Surveillance des capteurs Zigbee injoignables (plus de 8h ou indisponibles)
+  triggers:
+  - trigger: time
+    at: 06:00:00
+  - trigger: time_pattern
+    minutes: /15
+  conditions:
+  - condition: template
+    value_template: '{{ sensors != '''' and (day | int == 0 or day | int == now().isoweekday())
+      }}'
+  actions:
+  - action: notify.mobile_app_eric
+    data:
+      title: ⚠️ Problème capteur Zigbee
+      message: 'Des capteurs Zigbee ne répondent plus : {{ sensors }}'
+  variables:
+    day: 0
+    hours: 8
+    exclude:
+      entity_id: []
+    sensors: "{% set result = namespace(sensors=[]) %} {% for state in states.sensor
+      \n   | rejectattr('attributes.device_class', 'undefined') \n   | selectattr('attributes.device_class',
+      '==', 'timestamp') %}\n  {% if 'last_seen' in state.entity_id and state.entity_id
+      not in exclude.entity_id %}\n    {% set last_seen = states(state.entity_id)
+      %}\n    {% if last_seen == 'unavailable' or last_seen == 'unknown' %}\n      {%
+      set result.sensors = result.sensors + [state.name | replace(' last seen', '')
+      ~ ' (Indisponible)'] %}\n    {% elif (as_timestamp(now()) - as_timestamp(last_seen))
+      > (hours | int * 3600) %}\n      {% set result.sensors = result.sensors + [state.name
+      | replace(' last seen', '') ~ ' (' ~ relative_time(strptime(last_seen, '%Y-%m-%dT%H:%M:%S%z'))
+      ~ ')'] %}\n    {% endif %}\n  {% endif %}\n{% endfor %} {{ result.sensors |
+      join(', ') }}\n"
+  mode: single
+- id: '1775387556140'
+  alias: '[P3-Salon] Bouton IKEA Inter Salon (4) — ON/OFF light.salon'
+  description: 'Pilotage de light.salon via le bouton IKEA 4 touches Salon. Topic
+    MQTT : zigbee2mqtt/Inter Salon (4) (IKEA)/action ON -> light.turn_on | OFF ->
+    light.turn_off
+
+    '
+  triggers:
+  - alias: TRIGGER MQTT INTER SALON (4) IKEA
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter Salon (4) (IKEA)/action
+  conditions: []
+  actions:
+  - alias: ACTION ON/OFF LIGHT.SALON
+    choose:
+    - alias: BOUTON ON
+      conditions:
+      - condition: template
+        value_template: '{{ trigger.payload_json.action == ''on'' }}'
+      sequence:
+      - action: light.turn_on
+        target:
+          entity_id: light.salon
+    - alias: BOUTON OFF
+      conditions:
+      - condition: template
+        value_template: '{{ trigger.payload_json.action == ''off'' }}'
+      sequence:
+      - action: light.turn_off
+        target:
+          entity_id: light.salon
+  mode: restart
+- id: '1775387618751'
+  alias: '[P3-SALON] BOUTON IKEA SOMRIG — TOUT MESSAGE = ON/OFF'
+  description: 'Pilotage simplifié : n''importe quel appui sur le bouton 1 (simple,
+    double, long)  allume le salon. N''importe quel appui sur le bouton 2 éteint le
+    salon.
+
+    '
+  triggers:
+  - alias: 'DÉCLENCHEMENT : BOUTON 1 (CLIC SIMPLE)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    payload: 1_short_release
+    id: bouton_on
+  - alias: 'DÉCLENCHEMENT : BOUTON 1 (DOUBLE CLIC)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    payload: 1_double_press
+    id: bouton_on
+  - alias: 'DÉCLENCHEMENT : BOUTON 1 (APPUI LONG)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    payload: 1_long_press
+    id: bouton_on
+  - alias: 'DÉCLENCHEMENT : BOUTON 2 (CLIC SIMPLE)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    payload: 2_short_release
+    id: bouton_off
+  - alias: 'DÉCLENCHEMENT : BOUTON 2 (DOUBLE CLIC)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    payload: 2_double_press
+    id: bouton_off
+  - alias: 'DÉCLENCHEMENT : BOUTON 2 (APPUI LONG)'
+    trigger: mqtt
+    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    payload: 2_long_press
+    id: bouton_off
+  conditions: []
+  actions:
+  - alias: 'ACTION : ALLUMER OU ÉTEINDRE'
+    choose:
+    - alias: 'CAS : N''IMPORTE QUEL APPUI BOUTON 1 -> ALLUMER'
+      conditions:
+      - condition: trigger
+        id: bouton_on
+      sequence:
+      - action: light.turn_on
+        target:
+          entity_id: light.salon
+    - alias: 'CAS : N''IMPORTE QUEL APPUI BOUTON 2 -> ÉTEINDRE'
+      conditions:
+      - condition: trigger
+        id: bouton_off
+      sequence:
+      - action: light.turn_off
+        target:
+          entity_id: light.salon
+  mode: restart
+- id: '1775501235942'
+  alias: DIAG - ENREGISTREMENT JOURNALIER (7 POSTES + DUT)
+  description: Log toutes les 15 min la consommation des 7 postes, la température
+    extérieure et le DUT chauffage (Ordre S/R/B/C) dans un fichier.
+  triggers:
+  - alias: 'DÉCLENCHEUR : TOUTES LES 15 MINUTES'
+    trigger: time_pattern
+    minutes: /15
+  conditions: []
+  actions:
+  - alias: 'ACTION : ENREGISTREMENT DANS LE FICHIER'
+    action: notify.send_message
+    target:
+      entity_id: notify.file
+    data:
+      message: '{% set p1 = states(''sensor.diag_poste_hygiene_quotidien'')    | float(0)
+        | round(2) %} {% set p2 = states(''sensor.diag_poste_cuisine_quotidien'')    |
+        float(0) | round(2) %} {% set p3 = states(''sensor.diag_poste_froid_quotidien'')      |
+        float(0) | round(2) %} {% set p4 = states(''sensor.diag_poste_chauffage_quotidien'')  |
+        float(0) | round(2) %} {% set agv_clim = states(''sensor.clim_rad_total_avg_watts_quotidien'')
+        | float(0) | round(2) %} {% set p5 = states(''sensor.diag_poste_multimedia_quotidien'')
+        | float(0) | round(2) %} {% set p6 = states(''sensor.diag_poste_eclairage_quotidien'')  |
+        float(0) | round(2) %} {% set p7 = states(''sensor.diag_poste_autre_quotidien'')      |
+        float(0) | round(2) %} {% set ext = states(''sensor.th_balcon_nord_temperature'')     |
+        float(0) %} {% set int = states(''sensor.temperature_moyenne_interieure'')
+        | float(0) %} {% set dut_s = states(''sensor.dut_clim_salon'')        | float(0)
+        | round(1) %} {% set dut_r = states(''sensor.dut_radiateur_cuisine'') | float(0)
+        | round(1) %} {% set dut_b = states(''sensor.dut_clim_bureau'')       | float(0)
+        | round(1) %} {% set dut_c = states(''sensor.dut_clim_chambre'')      | float(0)
+        | round(1) %} {% set t = now().strftime(''%d/%m %H:%M'') %} {{t}} | Hyg:{{p1}}
+        | Cuis:{{p2}} | Froid:{{p3}} | Chauff:{{p4}} | Avg 4:{{agv_clim}} | Multi:{{p5}}
+        | Lum:{{p6}} | Autres:{{p7}} | Ti:{{int}}°C | Ext:{{ext}}°C | DUT S/R/B/C:{{dut_s}}/{{dut_r}}/{{dut_b}}/{{dut_c}}
+
+        '
+  mode: single
+- id: '1775997999740'
+  alias: AUTO. ENERGIE. Basculement Tarif HC/HP — Genelec Appart
+  description: 'Bascule le tarif des 4 UM Genelec Appart HP/HC aux heures de transition
+    : HC : 01h00 et 13h00 / HP : 07h30 et 14h30.'
+  triggers:
+  - alias: 'DÉCLENCHEUR : HC DÉBUT 01H00'
+    trigger: time
+    at: 01:00:00
+    id: hc_1
+  - alias: 'DÉCLENCHEUR : HP DÉBUT 07H30'
+    trigger: time
+    at: 07:30:00
+    id: hp_1
+  - alias: 'DÉCLENCHEUR : HC DÉBUT 13H00'
+    trigger: time
+    at: '13:00:00'
+    id: hc_2
+  - alias: 'DÉCLENCHEUR : HP DÉBUT 14H30'
+    trigger: time
+    at: '14:30:00'
+    id: hp_2
+  conditions: []
+  actions:
+  - choose:
+    - alias: 'ACTION : PASSAGE EN HEURES CREUSES'
+      conditions:
+      - condition: trigger
+        id:
+        - hc_1
+        - hc_2
+      sequence:
+      - action: select.select_option
+        target:
+          entity_id:
+          - select.genelec_appart_hphc_quotidien_um
+          - select.genelec_appart_hphc_hebdomadaire_um
+          - select.genelec_appart_hphc_mensuel_um
+          - select.genelec_appart_hphc_annuel_um
+        data:
+          option: HC
+    - alias: 'ACTION : PASSAGE EN HEURES PLEINES'
+      conditions:
+      - condition: trigger
+        id:
+        - hp_1
+        - hp_2
+      sequence:
+      - action: select.select_option
+        target:
+          entity_id:
+          - select.genelec_appart_hphc_quotidien_um
+          - select.genelec_appart_hphc_hebdomadaire_um
+          - select.genelec_appart_hphc_mensuel_um
+          - select.genelec_appart_hphc_annuel_um
+        data:
+          option: HP
+  mode: single

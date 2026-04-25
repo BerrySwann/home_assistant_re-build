@@ -9,663 +9,606 @@
 # Total : 19 ampoules × 4 cycles = 76 compteurs.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Sources White/Play  : sensor.[ampoule]_energie_totale_kwh (Riemann — P3_kWh_1_UNITE.yaml)
-# - Sources PowerCalc   : sensor.[ampoule]_energy (direct — bypass Riemann)
-#   Lampes concernées   : hue_ambiance_lamp_salon_1/2/3, hue_color_candle_salon_1,
-#                         hue_color_candle_chambre_gege, hue_color_candle_chambre_eric
-#
+# - Toutes les sources : sensor.[ampoule]_energy (firmware direct — kWh cumulatif).
+# - Riemann (_energie_totale_kwh) supprimé — plus de platform: integration.
+# - PowerCalc (ambiance/color) exposait déjà _energy nativement — inchangé.
+# - White/Play utilisaient _energie_totale_kwh (Riemann) → migrés vers _energy.
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
-# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
-# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.eclairage_*_kwh_unite (×17)                 | eclairage_*_unite_{annuel|mensuel|hebdo|quotidien} | P3_AVG_AMHQ_1_UNITE.yaml → L2C3    |
+# | MATÉRIEL          | CAPTEUR BRUT (source)                     | CE FICHIER (unique_id)                             | AVAL                            |
+# |:------------------|:------------------------------------------|:---------------------------------------------------|:--------------------------------|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_entree_energy       | hue_white_lamp_entree_{annuel|mensuel|hebdo|quot}  | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_table_energy        | hue_white_lamp_table_{annuel|mensuel|hebdo|quot}   | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | PowerCalc         | sensor.hue_ambiance_lamp_salon_1_energy   | hue_ambiance_lamp_salon_1_*_um                     | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | PowerCalc         | sensor.hue_ambiance_lamp_salon_2_energy   | hue_ambiance_lamp_salon_2_*_um                     | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | PowerCalc         | sensor.hue_ambiance_lamp_salon_3_energy   | hue_ambiance_lamp_salon_3_*_um                     | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | PowerCalc         | sensor.hue_color_candle_salon_1_energy    | hue_color_candle_salon_1_*_um                      | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_cuisine_energy      | hue_white_lamp_cuisine_{annuel|mensuel|hebdo|quot} | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_couloir_energy      | hue_white_lamp_couloir_{annuel|mensuel|hebdo|quot} | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_play_1_pc_bureau_energy        | hue_play_1_pc_bureau_*_um                          | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_play_2_pc_bureau_energy        | hue_play_2_pc_bureau_*_um                          | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_play_3_pc_bureau_energy        | hue_play_3_pc_bureau_*_um                          | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_bureau_1_energy     | hue_white_lamp_bureau_1_*_um                       | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_bureau_2_energy     | hue_white_lamp_bureau_2_*_um                       | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Sonoff (Z2M)      | sensor.relais_lumiere_sdb_sonoff_energy   | relais_lumiere_sdb_sonoff_*_um                     | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.lampe_salle_de_bain_hue_energy     | lampe_salle_de_bain_hue_*_um                       | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_chambre_1_energy    | hue_white_lamp_chambre_1_*_um                      | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_chambre_2_energy    | hue_white_lamp_chambre_2_*_um                      | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | PowerCalc         | sensor.hue_color_candle_chambre_gege_energy| hue_color_candle_chambre_gege_*_um                | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | PowerCalc         | sensor.hue_color_candle_chambre_eric_energy| hue_color_candle_chambre_eric_*_um                | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Ne pas confondre UNITE (ampoule seule) avec ZONE (somme par pièce).
-# - Lampes PowerCalc : _power = 'unavailable' quand éteinte → Riemann bascule unavailable
-#   → Si minuit tombe avec Riemann unavailable, le UM quotidien ne peut pas stocker son
-#   baseline → il retourne 0 toute la journée même si la lampe est utilisée.
-#   FIX : pointer le UM sur sensor.[lampe]_energy (PowerCalc) qui, lui, conserve sa
-#   dernière valeur kWh même lampe éteinte — baseline de minuit toujours valide.
+# - Toutes les sources sont _energy (total_increasing, kWh cumulatif).
+# - Ne jamais pointer sur _energie_totale_kwh (Riemann supprimé).
+# - | float(0) dans les templates sources absorbe les unavailable nocturnes.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L2C3 Conso Énergie Éclairage (détail par ampoule)
+# - L2C3 Conso Énergie Éclairage (détail par ampoule via P3_AVG_AMHQ_1_UNITE)
 
 # ┌───────────────────────────────────┐
-# │         1. ENTRÉE                 │
+# │         1. ENTRÉE (1x)            │
 # └───────────────────────────────────┘
 
-# --- hue_white_lamp_entree_annuel_kwh_um ---
-hue_white_lamp_entree_annuel_kwh_um:
-  source: sensor.hue_white_lamp_entree_energie_totale_kwh
-  name: "Hue White Lamp Entree Annuel kWh UM"
-  unique_id: hue_white_lamp_entree_annuel_kwh_um
+# --- hue_white_lamp_entree_annuel_um ---
+hue_white_lamp_entree_annuel_um:
+  source: sensor.hue_white_lamp_entree_energy
+  name: "Hue White Lamp Entree Annuel UM"
+  unique_id: hue_white_lamp_entree_annuel_um
   cycle: yearly
 
-# --- hue_white_lamp_entree_mensuel_kwh_um ---
-hue_white_lamp_entree_mensuel_kwh_um:
-  source: sensor.hue_white_lamp_entree_energie_totale_kwh
-  name: "Hue White Lamp Entree Mensuel kWh UM"
-  unique_id: hue_white_lamp_entree_mensuel_kwh_um
+# --- hue_white_lamp_entree_mensuel_um ---
+hue_white_lamp_entree_mensuel_um:
+  source: sensor.hue_white_lamp_entree_energy
+  name: "Hue White Lamp Entree Mensuel UM"
+  unique_id: hue_white_lamp_entree_mensuel_um
   cycle: monthly
 
-# --- hue_white_lamp_entree_hebdomadaire_kwh_um ---
-hue_white_lamp_entree_hebdomadaire_kwh_um:
-  source: sensor.hue_white_lamp_entree_energie_totale_kwh
-  name: "Hue White Lamp Entree Hebdomadaire kWh UM"
-  unique_id: hue_white_lamp_entree_hebdomadaire_kwh_um
+# --- hue_white_lamp_entree_hebdomadaire_um ---
+hue_white_lamp_entree_hebdomadaire_um:
+  source: sensor.hue_white_lamp_entree_energy
+  name: "Hue White Lamp Entree Hebdomadaire UM"
+  unique_id: hue_white_lamp_entree_hebdomadaire_um
   cycle: weekly
 
-# --- hue_white_lamp_entree_quotidien_kwh_um ---
-hue_white_lamp_entree_quotidien_kwh_um:
-  source: sensor.hue_white_lamp_entree_energie_totale_kwh
-  name: "Hue White Lamp Entree Quotidien kWh UM"
-  unique_id: hue_white_lamp_entree_quotidien_kwh_um
-  cycle: daily
-
-# ┌───────────────────────────────────┐
-# │         4. SALON                  │
-# └───────────────────────────────────┘
-
-# --- hue_white_lamp_table_annuel_kwh_um ---
-hue_white_lamp_table_annuel_kwh_um:
-  source: sensor.hue_white_lamp_table_energie_totale_kwh
-  name: "Hue White Lamp Table Annuel kWh UM"
-  unique_id: hue_white_lamp_table_annuel_kwh_um
-  cycle: yearly
-
-# --- hue_white_lamp_table_mensuel_kwh_um ---
-hue_white_lamp_table_mensuel_kwh_um:
-  source: sensor.hue_white_lamp_table_energie_totale_kwh
-  name: "Hue White Lamp Table Mensuel kWh UM"
-  unique_id: hue_white_lamp_table_mensuel_kwh_um
-  cycle: monthly
-
-# --- hue_white_lamp_table_hebdomadaire_kwh_um ---
-hue_white_lamp_table_hebdomadaire_kwh_um:
-  source: sensor.hue_white_lamp_table_energie_totale_kwh
-  name: "Hue White Lamp Table Hebdomadaire kWh UM"
-  unique_id: hue_white_lamp_table_hebdomadaire_kwh_um
-  cycle: weekly
-
-# --- hue_white_lamp_table_quotidien_kwh_um ---
-hue_white_lamp_table_quotidien_kwh_um:
-  source: sensor.hue_white_lamp_table_energie_totale_kwh
-  name: "Hue White Lamp Table Quotidien kWh UM"
-  unique_id: hue_white_lamp_table_quotidien_kwh_um
-  cycle: daily
-
-# --- hue_ambiance_lamp_salon_1_annuel_kwh_um ---
-hue_ambiance_lamp_salon_1_annuel_kwh_um:
-  source: sensor.hue_ambiance_lamp_salon_1_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Ambiance Lamp Salon 1 Annuel kWh UM"
-  unique_id: hue_ambiance_lamp_salon_1_annuel_kwh_um
-  cycle: yearly
-
-# --- hue_ambiance_lamp_salon_1_mensuel_kwh_um ---
-hue_ambiance_lamp_salon_1_mensuel_kwh_um:
-  source: sensor.hue_ambiance_lamp_salon_1_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Ambiance Lamp Salon 1 Mensuel kWh UM"
-  unique_id: hue_ambiance_lamp_salon_1_mensuel_kwh_um
-  cycle: monthly
-
-# --- hue_ambiance_lamp_salon_1_hebdomadaire_kwh_um ---
-hue_ambiance_lamp_salon_1_hebdomadaire_kwh_um:
-  source: sensor.hue_ambiance_lamp_salon_1_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Ambiance Lamp Salon 1 Hebdomadaire kWh UM"
-  unique_id: hue_ambiance_lamp_salon_1_hebdomadaire_kwh_um
-  cycle: weekly
-
-# --- hue_ambiance_lamp_salon_1_quotidien_kwh_um ---
-hue_ambiance_lamp_salon_1_quotidien_kwh_um:
-  source: sensor.hue_ambiance_lamp_salon_1_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Ambiance Lamp Salon 1 Quotidien kWh UM"
-  unique_id: hue_ambiance_lamp_salon_1_quotidien_kwh_um
-  cycle: daily
-
-# --- hue_ambiance_lamp_salon_2_annuel_kwh_um ---
-hue_ambiance_lamp_salon_2_annuel_kwh_um:
-  source: sensor.hue_ambiance_lamp_salon_2_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Ambiance Lamp Salon 2 Annuel kWh UM"
-  unique_id: hue_ambiance_lamp_salon_2_annuel_kwh_um
-  cycle: yearly
-
-# --- hue_ambiance_lamp_salon_2_mensuel_kwh_um ---
-hue_ambiance_lamp_salon_2_mensuel_kwh_um:
-  source: sensor.hue_ambiance_lamp_salon_2_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Ambiance Lamp Salon 2 Mensuel kWh UM"
-  unique_id: hue_ambiance_lamp_salon_2_mensuel_kwh_um
-  cycle: monthly
-
-# --- hue_ambiance_lamp_salon_2_hebdomadaire_kwh_um ---
-hue_ambiance_lamp_salon_2_hebdomadaire_kwh_um:
-  source: sensor.hue_ambiance_lamp_salon_2_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Ambiance Lamp Salon 2 Hebdomadaire kWh UM"
-  unique_id: hue_ambiance_lamp_salon_2_hebdomadaire_kwh_um
-  cycle: weekly
-
-# --- hue_ambiance_lamp_salon_2_quotidien_kwh_um ---
-hue_ambiance_lamp_salon_2_quotidien_kwh_um:
-  source: sensor.hue_ambiance_lamp_salon_2_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Ambiance Lamp Salon 2 Quotidien kWh UM"
-  unique_id: hue_ambiance_lamp_salon_2_quotidien_kwh_um
-  cycle: daily
-
-# --- hue_ambiance_lamp_salon_3_annuel_kwh_um ---
-hue_ambiance_lamp_salon_3_annuel_kwh_um:
-  source: sensor.hue_ambiance_lamp_salon_3_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Ambiance Lamp Salon 3 Annuel kWh UM"
-  unique_id: hue_ambiance_lamp_salon_3_annuel_kwh_um
-  cycle: yearly
-
-# --- hue_ambiance_lamp_salon_3_mensuel_kwh_um ---
-hue_ambiance_lamp_salon_3_mensuel_kwh_um:
-  source: sensor.hue_ambiance_lamp_salon_3_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Ambiance Lamp Salon 3 Mensuel kWh UM"
-  unique_id: hue_ambiance_lamp_salon_3_mensuel_kwh_um
-  cycle: monthly
-
-# --- hue_ambiance_lamp_salon_3_hebdomadaire_kwh_um ---
-hue_ambiance_lamp_salon_3_hebdomadaire_kwh_um:
-  source: sensor.hue_ambiance_lamp_salon_3_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Ambiance Lamp Salon 3 Hebdomadaire kWh UM"
-  unique_id: hue_ambiance_lamp_salon_3_hebdomadaire_kwh_um
-  cycle: weekly
-
-# --- hue_ambiance_lamp_salon_3_quotidien_kwh_um ---
-hue_ambiance_lamp_salon_3_quotidien_kwh_um:
-  source: sensor.hue_ambiance_lamp_salon_3_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Ambiance Lamp Salon 3 Quotidien kWh UM"
-  unique_id: hue_ambiance_lamp_salon_3_quotidien_kwh_um
-  cycle: daily
-
-# --- hue_color_candle_salon_1_annuel_kwh_um ---
-hue_color_candle_salon_1_annuel_kwh_um:
-  source: sensor.hue_color_candle_salon_1_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Color Candle Salon 1 Annuel kWh UM"
-  unique_id: hue_color_candle_salon_1_annuel_kwh_um
-  cycle: yearly
-
-# --- hue_color_candle_salon_1_mensuel_kwh_um ---
-hue_color_candle_salon_1_mensuel_kwh_um:
-  source: sensor.hue_color_candle_salon_1_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Color Candle Salon 1 Mensuel kWh UM"
-  unique_id: hue_color_candle_salon_1_mensuel_kwh_um
-  cycle: monthly
-
-# --- hue_color_candle_salon_1_hebdomadaire_kwh_um ---
-hue_color_candle_salon_1_hebdomadaire_kwh_um:
-  source: sensor.hue_color_candle_salon_1_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Color Candle Salon 1 Hebdomadaire kWh UM"
-  unique_id: hue_color_candle_salon_1_hebdomadaire_kwh_um
-  cycle: weekly
-
-# --- hue_color_candle_salon_1_quotidien_kwh_um ---
-hue_color_candle_salon_1_quotidien_kwh_um:
-  source: sensor.hue_color_candle_salon_1_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Color Candle Salon 1 Quotidien kWh UM"
-  unique_id: hue_color_candle_salon_1_quotidien_kwh_um
+# --- hue_white_lamp_entree_quotidien_um ---
+hue_white_lamp_entree_quotidien_um:
+  source: sensor.hue_white_lamp_entree_energy
+  name: "Hue White Lamp Entree Quotidien UM"
+  unique_id: hue_white_lamp_entree_quotidien_um
   cycle: daily
 
 # ┌───────────────────────────────────┐
-# │         5. CUISINE                │
+# │         4. SALON (5x)             │
 # └───────────────────────────────────┘
 
-# --- hue_white_lamp_cuisine_annuel_kwh_um ---
-hue_white_lamp_cuisine_annuel_kwh_um:
-  source: sensor.hue_white_lamp_cuisine_energie_totale_kwh
-  name: "Hue White Lamp Cuisine Annuel kWh UM"
-  unique_id: hue_white_lamp_cuisine_annuel_kwh_um
+# --- hue_white_lamp_table_annuel_um ---
+hue_white_lamp_table_annuel_um:
+  source: sensor.hue_white_lamp_table_energy
+  name: "Hue White Lamp Table Annuel UM"
+  unique_id: hue_white_lamp_table_annuel_um
   cycle: yearly
 
-# --- hue_white_lamp_cuisine_mensuel_kwh_um ---
-hue_white_lamp_cuisine_mensuel_kwh_um:
-  source: sensor.hue_white_lamp_cuisine_energie_totale_kwh
-  name: "Hue White Lamp Cuisine Mensuel kWh UM"
-  unique_id: hue_white_lamp_cuisine_mensuel_kwh_um
+# --- hue_white_lamp_table_mensuel_um ---
+hue_white_lamp_table_mensuel_um:
+  source: sensor.hue_white_lamp_table_energy
+  name: "Hue White Lamp Table Mensuel UM"
+  unique_id: hue_white_lamp_table_mensuel_um
   cycle: monthly
 
-# --- hue_white_lamp_cuisine_hebdomadaire_kwh_um ---
-hue_white_lamp_cuisine_hebdomadaire_kwh_um:
-  source: sensor.hue_white_lamp_cuisine_energie_totale_kwh
-  name: "Hue White Lamp Cuisine Hebdomadaire kWh UM"
-  unique_id: hue_white_lamp_cuisine_hebdomadaire_kwh_um
+# --- hue_white_lamp_table_hebdomadaire_um ---
+hue_white_lamp_table_hebdomadaire_um:
+  source: sensor.hue_white_lamp_table_energy
+  name: "Hue White Lamp Table Hebdomadaire UM"
+  unique_id: hue_white_lamp_table_hebdomadaire_um
   cycle: weekly
 
-# --- hue_white_lamp_cuisine_quotidien_kwh_um ---
-hue_white_lamp_cuisine_quotidien_kwh_um:
-  source: sensor.hue_white_lamp_cuisine_energie_totale_kwh
-  name: "Hue White Lamp Cuisine Quotidien kWh UM"
-  unique_id: hue_white_lamp_cuisine_quotidien_kwh_um
+# --- hue_white_lamp_table_quotidien_um ---
+hue_white_lamp_table_quotidien_um:
+  source: sensor.hue_white_lamp_table_energy
+  name: "Hue White Lamp Table Quotidien UM"
+  unique_id: hue_white_lamp_table_quotidien_um
+  cycle: daily
+
+# --- hue_ambiance_lamp_salon_1_annuel_um ---
+hue_ambiance_lamp_salon_1_annuel_um:
+  source: sensor.hue_ambiance_lamp_salon_1_energy
+  name: "Hue Ambiance Lamp Salon 1 Annuel UM"
+  unique_id: hue_ambiance_lamp_salon_1_annuel_um
+  cycle: yearly
+
+# --- hue_ambiance_lamp_salon_1_mensuel_um ---
+hue_ambiance_lamp_salon_1_mensuel_um:
+  source: sensor.hue_ambiance_lamp_salon_1_energy
+  name: "Hue Ambiance Lamp Salon 1 Mensuel UM"
+  unique_id: hue_ambiance_lamp_salon_1_mensuel_um
+  cycle: monthly
+
+# --- hue_ambiance_lamp_salon_1_hebdomadaire_um ---
+hue_ambiance_lamp_salon_1_hebdomadaire_um:
+  source: sensor.hue_ambiance_lamp_salon_1_energy
+  name: "Hue Ambiance Lamp Salon 1 Hebdomadaire UM"
+  unique_id: hue_ambiance_lamp_salon_1_hebdomadaire_um
+  cycle: weekly
+
+# --- hue_ambiance_lamp_salon_1_quotidien_um ---
+hue_ambiance_lamp_salon_1_quotidien_um:
+  source: sensor.hue_ambiance_lamp_salon_1_energy
+  name: "Hue Ambiance Lamp Salon 1 Quotidien UM"
+  unique_id: hue_ambiance_lamp_salon_1_quotidien_um
+  cycle: daily
+
+# --- hue_ambiance_lamp_salon_2_annuel_um ---
+hue_ambiance_lamp_salon_2_annuel_um:
+  source: sensor.hue_ambiance_lamp_salon_2_energy
+  name: "Hue Ambiance Lamp Salon 2 Annuel UM"
+  unique_id: hue_ambiance_lamp_salon_2_annuel_um
+  cycle: yearly
+
+# --- hue_ambiance_lamp_salon_2_mensuel_um ---
+hue_ambiance_lamp_salon_2_mensuel_um:
+  source: sensor.hue_ambiance_lamp_salon_2_energy
+  name: "Hue Ambiance Lamp Salon 2 Mensuel UM"
+  unique_id: hue_ambiance_lamp_salon_2_mensuel_um
+  cycle: monthly
+
+# --- hue_ambiance_lamp_salon_2_hebdomadaire_um ---
+hue_ambiance_lamp_salon_2_hebdomadaire_um:
+  source: sensor.hue_ambiance_lamp_salon_2_energy
+  name: "Hue Ambiance Lamp Salon 2 Hebdomadaire UM"
+  unique_id: hue_ambiance_lamp_salon_2_hebdomadaire_um
+  cycle: weekly
+
+# --- hue_ambiance_lamp_salon_2_quotidien_um ---
+hue_ambiance_lamp_salon_2_quotidien_um:
+  source: sensor.hue_ambiance_lamp_salon_2_energy
+  name: "Hue Ambiance Lamp Salon 2 Quotidien UM"
+  unique_id: hue_ambiance_lamp_salon_2_quotidien_um
+  cycle: daily
+
+# --- hue_ambiance_lamp_salon_3_annuel_um ---
+hue_ambiance_lamp_salon_3_annuel_um:
+  source: sensor.hue_ambiance_lamp_salon_3_energy
+  name: "Hue Ambiance Lamp Salon 3 Annuel UM"
+  unique_id: hue_ambiance_lamp_salon_3_annuel_um
+  cycle: yearly
+
+# --- hue_ambiance_lamp_salon_3_mensuel_um ---
+hue_ambiance_lamp_salon_3_mensuel_um:
+  source: sensor.hue_ambiance_lamp_salon_3_energy
+  name: "Hue Ambiance Lamp Salon 3 Mensuel UM"
+  unique_id: hue_ambiance_lamp_salon_3_mensuel_um
+  cycle: monthly
+
+# --- hue_ambiance_lamp_salon_3_hebdomadaire_um ---
+hue_ambiance_lamp_salon_3_hebdomadaire_um:
+  source: sensor.hue_ambiance_lamp_salon_3_energy
+  name: "Hue Ambiance Lamp Salon 3 Hebdomadaire UM"
+  unique_id: hue_ambiance_lamp_salon_3_hebdomadaire_um
+  cycle: weekly
+
+# --- hue_ambiance_lamp_salon_3_quotidien_um ---
+hue_ambiance_lamp_salon_3_quotidien_um:
+  source: sensor.hue_ambiance_lamp_salon_3_energy
+  name: "Hue Ambiance Lamp Salon 3 Quotidien UM"
+  unique_id: hue_ambiance_lamp_salon_3_quotidien_um
+  cycle: daily
+
+# --- hue_color_candle_salon_1_annuel_um ---
+hue_color_candle_salon_1_annuel_um:
+  source: sensor.hue_color_candle_salon_1_energy
+  name: "Hue Color Candle Salon 1 Annuel UM"
+  unique_id: hue_color_candle_salon_1_annuel_um
+  cycle: yearly
+
+# --- hue_color_candle_salon_1_mensuel_um ---
+hue_color_candle_salon_1_mensuel_um:
+  source: sensor.hue_color_candle_salon_1_energy
+  name: "Hue Color Candle Salon 1 Mensuel UM"
+  unique_id: hue_color_candle_salon_1_mensuel_um
+  cycle: monthly
+
+# --- hue_color_candle_salon_1_hebdomadaire_um ---
+hue_color_candle_salon_1_hebdomadaire_um:
+  source: sensor.hue_color_candle_salon_1_energy
+  name: "Hue Color Candle Salon 1 Hebdomadaire UM"
+  unique_id: hue_color_candle_salon_1_hebdomadaire_um
+  cycle: weekly
+
+# --- hue_color_candle_salon_1_quotidien_um ---
+hue_color_candle_salon_1_quotidien_um:
+  source: sensor.hue_color_candle_salon_1_energy
+  name: "Hue Color Candle Salon 1 Quotidien UM"
+  unique_id: hue_color_candle_salon_1_quotidien_um
   cycle: daily
 
 # ┌───────────────────────────────────┐
-# │         6. COULOIR                │
+# │         5. CUISINE (1x)           │
 # └───────────────────────────────────┘
 
-# --- hue_white_lamp_couloir_annuel_kwh_um ---
-hue_white_lamp_couloir_annuel_kwh_um:
-  source: sensor.hue_white_lamp_couloir_energie_totale_kwh
-  name: "Hue White Lamp Couloir Annuel kWh UM"
-  unique_id: hue_white_lamp_couloir_annuel_kwh_um
+# --- hue_white_lamp_cuisine_annuel_um ---
+hue_white_lamp_cuisine_annuel_um:
+  source: sensor.hue_white_lamp_cuisine_energy
+  name: "Hue White Lamp Cuisine Annuel UM"
+  unique_id: hue_white_lamp_cuisine_annuel_um
   cycle: yearly
 
-# --- hue_white_lamp_couloir_mensuel_kwh_um ---
-hue_white_lamp_couloir_mensuel_kwh_um:
-  source: sensor.hue_white_lamp_couloir_energie_totale_kwh
-  name: "Hue White Lamp Couloir Mensuel kWh UM"
-  unique_id: hue_white_lamp_couloir_mensuel_kwh_um
+# --- hue_white_lamp_cuisine_mensuel_um ---
+hue_white_lamp_cuisine_mensuel_um:
+  source: sensor.hue_white_lamp_cuisine_energy
+  name: "Hue White Lamp Cuisine Mensuel UM"
+  unique_id: hue_white_lamp_cuisine_mensuel_um
   cycle: monthly
 
-# --- hue_white_lamp_couloir_hebdomadaire_kwh_um ---
-hue_white_lamp_couloir_hebdomadaire_kwh_um:
-  source: sensor.hue_white_lamp_couloir_energie_totale_kwh
-  name: "Hue White Lamp Couloir Hebdomadaire kWh UM"
-  unique_id: hue_white_lamp_couloir_hebdomadaire_kwh_um
+# --- hue_white_lamp_cuisine_hebdomadaire_um ---
+hue_white_lamp_cuisine_hebdomadaire_um:
+  source: sensor.hue_white_lamp_cuisine_energy
+  name: "Hue White Lamp Cuisine Hebdomadaire UM"
+  unique_id: hue_white_lamp_cuisine_hebdomadaire_um
   cycle: weekly
 
-# --- hue_white_lamp_couloir_quotidien_kwh_um ---
-hue_white_lamp_couloir_quotidien_kwh_um:
-  source: sensor.hue_white_lamp_couloir_energie_totale_kwh
-  name: "Hue White Lamp Couloir Quotidien kWh UM"
-  unique_id: hue_white_lamp_couloir_quotidien_kwh_um
+# --- hue_white_lamp_cuisine_quotidien_um ---
+hue_white_lamp_cuisine_quotidien_um:
+  source: sensor.hue_white_lamp_cuisine_energy
+  name: "Hue White Lamp Cuisine Quotidien UM"
+  unique_id: hue_white_lamp_cuisine_quotidien_um
   cycle: daily
 
 # ┌───────────────────────────────────┐
-# │         7. BUREAU                 │
+# │         6. COULOIR (1x)           │
 # └───────────────────────────────────┘
 
-# --- hue_play_1_pc_bureau_annuel_kwh_um ---
-hue_play_1_pc_bureau_annuel_kwh_um:
-  source: sensor.hue_play_1_pc_bureau_energie_totale_kwh
-  name: "Hue Play 1 Pc Bureau Annuel kWh UM"
-  unique_id: hue_play_1_pc_bureau_annuel_kwh_um
+# --- hue_white_lamp_couloir_annuel_um ---
+hue_white_lamp_couloir_annuel_um:
+  source: sensor.hue_white_lamp_couloir_energy
+  name: "Hue White Lamp Couloir Annuel UM"
+  unique_id: hue_white_lamp_couloir_annuel_um
   cycle: yearly
 
-# --- hue_play_1_pc_bureau_mensuel_kwh_um ---
-hue_play_1_pc_bureau_mensuel_kwh_um:
-  source: sensor.hue_play_1_pc_bureau_energie_totale_kwh
-  name: "Hue Play 1 Pc Bureau Mensuel kWh UM"
-  unique_id: hue_play_1_pc_bureau_mensuel_kwh_um
+# --- hue_white_lamp_couloir_mensuel_um ---
+hue_white_lamp_couloir_mensuel_um:
+  source: sensor.hue_white_lamp_couloir_energy
+  name: "Hue White Lamp Couloir Mensuel UM"
+  unique_id: hue_white_lamp_couloir_mensuel_um
   cycle: monthly
 
-# --- hue_play_1_pc_bureau_hebdomadaire_kwh_um ---
-hue_play_1_pc_bureau_hebdomadaire_kwh_um:
-  source: sensor.hue_play_1_pc_bureau_energie_totale_kwh
-  name: "Hue Play 1 Pc Bureau Hebdomadaire kWh UM"
-  unique_id: hue_play_1_pc_bureau_hebdomadaire_kwh_um
+# --- hue_white_lamp_couloir_hebdomadaire_um ---
+hue_white_lamp_couloir_hebdomadaire_um:
+  source: sensor.hue_white_lamp_couloir_energy
+  name: "Hue White Lamp Couloir Hebdomadaire UM"
+  unique_id: hue_white_lamp_couloir_hebdomadaire_um
   cycle: weekly
 
-# --- hue_play_1_pc_bureau_quotidien_kwh_um ---
-hue_play_1_pc_bureau_quotidien_kwh_um:
-  source: sensor.hue_play_1_pc_bureau_energie_totale_kwh
-  name: "Hue Play 1 Pc Bureau Quotidien kWh UM"
-  unique_id: hue_play_1_pc_bureau_quotidien_kwh_um
-  cycle: daily
-
-# --- hue_play_2_pc_bureau_annuel_kwh_um ---
-hue_play_2_pc_bureau_annuel_kwh_um:
-  source: sensor.hue_play_2_pc_bureau_energie_totale_kwh
-  name: "Hue Play 2 Pc Bureau Annuel kWh UM"
-  unique_id: hue_play_2_pc_bureau_annuel_kwh_um
-  cycle: yearly
-
-# --- hue_play_2_pc_bureau_mensuel_kwh_um ---
-hue_play_2_pc_bureau_mensuel_kwh_um:
-  source: sensor.hue_play_2_pc_bureau_energie_totale_kwh
-  name: "Hue Play 2 Pc Bureau Mensuel kWh UM"
-  unique_id: hue_play_2_pc_bureau_mensuel_kwh_um
-  cycle: monthly
-
-# --- hue_play_2_pc_bureau_hebdomadaire_kwh_um ---
-hue_play_2_pc_bureau_hebdomadaire_kwh_um:
-  source: sensor.hue_play_2_pc_bureau_energie_totale_kwh
-  name: "Hue Play 2 Pc Bureau Hebdomadaire kWh UM"
-  unique_id: hue_play_2_pc_bureau_hebdomadaire_kwh_um
-  cycle: weekly
-
-# --- hue_play_2_pc_bureau_quotidien_kwh_um ---
-hue_play_2_pc_bureau_quotidien_kwh_um:
-  source: sensor.hue_play_2_pc_bureau_energie_totale_kwh
-  name: "Hue Play 2 Pc Bureau Quotidien kWh UM"
-  unique_id: hue_play_2_pc_bureau_quotidien_kwh_um
-  cycle: daily
-
-# --- hue_play_3_pc_bureau_annuel_kwh_um ---
-hue_play_3_pc_bureau_annuel_kwh_um:
-  source: sensor.hue_play_3_pc_bureau_energie_totale_kwh
-  name: "Hue Play 3 Pc Bureau Annuel kWh UM"
-  unique_id: hue_play_3_pc_bureau_annuel_kwh_um
-  cycle: yearly
-
-# --- hue_play_3_pc_bureau_mensuel_kwh_um ---
-hue_play_3_pc_bureau_mensuel_kwh_um:
-  source: sensor.hue_play_3_pc_bureau_energie_totale_kwh
-  name: "Hue Play 3 Pc Bureau Mensuel kWh UM"
-  unique_id: hue_play_3_pc_bureau_mensuel_kwh_um
-  cycle: monthly
-
-# --- hue_play_3_pc_bureau_hebdomadaire_kwh_um ---
-hue_play_3_pc_bureau_hebdomadaire_kwh_um:
-  source: sensor.hue_play_3_pc_bureau_energie_totale_kwh
-  name: "Hue Play 3 Pc Bureau Hebdomadaire kWh UM"
-  unique_id: hue_play_3_pc_bureau_hebdomadaire_kwh_um
-  cycle: weekly
-
-# --- hue_play_3_pc_bureau_quotidien_kwh_um ---
-hue_play_3_pc_bureau_quotidien_kwh_um:
-  source: sensor.hue_play_3_pc_bureau_energie_totale_kwh
-  name: "Hue Play 3 Pc Bureau Quotidien kWh UM"
-  unique_id: hue_play_3_pc_bureau_quotidien_kwh_um
-  cycle: daily
-
-# --- hue_white_lamp_bureau_1_annuel_kwh_um ---
-hue_white_lamp_bureau_1_annuel_kwh_um:
-  source: sensor.hue_white_lamp_bureau_1_energie_totale_kwh
-  name: "Hue White Lamp Bureau 1 Annuel kWh UM"
-  unique_id: hue_white_lamp_bureau_1_annuel_kwh_um
-  cycle: yearly
-
-# --- hue_white_lamp_bureau_1_mensuel_kwh_um ---
-hue_white_lamp_bureau_1_mensuel_kwh_um:
-  source: sensor.hue_white_lamp_bureau_1_energie_totale_kwh
-  name: "Hue White Lamp Bureau 1 Mensuel kWh UM"
-  unique_id: hue_white_lamp_bureau_1_mensuel_kwh_um
-  cycle: monthly
-
-# --- hue_white_lamp_bureau_1_hebdomadaire_kwh_um ---
-hue_white_lamp_bureau_1_hebdomadaire_kwh_um:
-  source: sensor.hue_white_lamp_bureau_1_energie_totale_kwh
-  name: "Hue White Lamp Bureau 1 Hebdomadaire kWh UM"
-  unique_id: hue_white_lamp_bureau_1_hebdomadaire_kwh_um
-  cycle: weekly
-
-# --- hue_white_lamp_bureau_1_quotidien_kwh_um ---
-hue_white_lamp_bureau_1_quotidien_kwh_um:
-  source: sensor.hue_white_lamp_bureau_1_energie_totale_kwh
-  name: "Hue White Lamp Bureau 1 Quotidien kWh UM"
-  unique_id: hue_white_lamp_bureau_1_quotidien_kwh_um
-  cycle: daily
-
-# --- hue_white_lamp_bureau_2_annuel_kwh_um ---
-hue_white_lamp_bureau_2_annuel_kwh_um:
-  source: sensor.hue_white_lamp_bureau_2_energie_totale_kwh
-  name: "Hue White Lamp Bureau 2 Annuel kWh UM"
-  unique_id: hue_white_lamp_bureau_2_annuel_kwh_um
-  cycle: yearly
-
-# --- hue_white_lamp_bureau_2_mensuel_kwh_um ---
-hue_white_lamp_bureau_2_mensuel_kwh_um:
-  source: sensor.hue_white_lamp_bureau_2_energie_totale_kwh
-  name: "Hue White Lamp Bureau 2 Mensuel kWh UM"
-  unique_id: hue_white_lamp_bureau_2_mensuel_kwh_um
-  cycle: monthly
-
-# --- hue_white_lamp_bureau_2_hebdomadaire_kwh_um ---
-hue_white_lamp_bureau_2_hebdomadaire_kwh_um:
-  source: sensor.hue_white_lamp_bureau_2_energie_totale_kwh
-  name: "Hue White Lamp Bureau 2 Hebdomadaire kWh UM"
-  unique_id: hue_white_lamp_bureau_2_hebdomadaire_kwh_um
-  cycle: weekly
-
-# --- hue_white_lamp_bureau_2_quotidien_kwh_um ---
-hue_white_lamp_bureau_2_quotidien_kwh_um:
-  source: sensor.hue_white_lamp_bureau_2_energie_totale_kwh
-  name: "Hue White Lamp Bureau 2 Quotidien kWh UM"
-  unique_id: hue_white_lamp_bureau_2_quotidien_kwh_um
+# --- hue_white_lamp_couloir_quotidien_um ---
+hue_white_lamp_couloir_quotidien_um:
+  source: sensor.hue_white_lamp_couloir_energy
+  name: "Hue White Lamp Couloir Quotidien UM"
+  unique_id: hue_white_lamp_couloir_quotidien_um
   cycle: daily
 
 # ┌───────────────────────────────────┐
-# │         8. SDB                    │
+# │         7. BUREAU (5x)            │
 # └───────────────────────────────────┘
 
-# --- relais_lumiere_sdb_sonoff_annuel_kwh_um ---
-relais_lumiere_sdb_sonoff_annuel_kwh_um:
-  source: sensor.relais_lumiere_sdb_sonoff_energie_totale_kwh
-  name: "Relais Lumiere Sdb Sonoff Annuel kWh UM"
-  unique_id: relais_lumiere_sdb_sonoff_annuel_kwh_um
+# --- hue_play_1_pc_bureau_annuel_um ---
+hue_play_1_pc_bureau_annuel_um:
+  source: sensor.hue_play_1_pc_bureau_energy
+  name: "Hue Play 1 Pc Bureau Annuel UM"
+  unique_id: hue_play_1_pc_bureau_annuel_um
   cycle: yearly
 
-# --- relais_lumiere_sdb_sonoff_mensuel_kwh_um ---
-relais_lumiere_sdb_sonoff_mensuel_kwh_um:
-  source: sensor.relais_lumiere_sdb_sonoff_energie_totale_kwh
-  name: "Relais Lumiere Sdb Sonoff Mensuel kWh UM"
-  unique_id: relais_lumiere_sdb_sonoff_mensuel_kwh_um
+# --- hue_play_1_pc_bureau_mensuel_um ---
+hue_play_1_pc_bureau_mensuel_um:
+  source: sensor.hue_play_1_pc_bureau_energy
+  name: "Hue Play 1 Pc Bureau Mensuel UM"
+  unique_id: hue_play_1_pc_bureau_mensuel_um
   cycle: monthly
 
-# --- relais_lumiere_sdb_sonoff_hebdomadaire_kwh_um ---
-relais_lumiere_sdb_sonoff_hebdomadaire_kwh_um:
-  source: sensor.relais_lumiere_sdb_sonoff_energie_totale_kwh
-  name: "Relais Lumiere Sdb Sonoff Hebdomadaire kWh UM"
-  unique_id: relais_lumiere_sdb_sonoff_hebdomadaire_kwh_um
+# --- hue_play_1_pc_bureau_hebdomadaire_um ---
+hue_play_1_pc_bureau_hebdomadaire_um:
+  source: sensor.hue_play_1_pc_bureau_energy
+  name: "Hue Play 1 Pc Bureau Hebdomadaire UM"
+  unique_id: hue_play_1_pc_bureau_hebdomadaire_um
   cycle: weekly
 
-# --- relais_lumiere_sdb_sonoff_quotidien_kwh_um ---
-relais_lumiere_sdb_sonoff_quotidien_kwh_um:
-  source: sensor.relais_lumiere_sdb_sonoff_energie_totale_kwh
-  name: "Relais Lumiere Sdb Sonoff Quotidien kWh UM"
-  unique_id: relais_lumiere_sdb_sonoff_quotidien_kwh_um
+# --- hue_play_1_pc_bureau_quotidien_um ---
+hue_play_1_pc_bureau_quotidien_um:
+  source: sensor.hue_play_1_pc_bureau_energy
+  name: "Hue Play 1 Pc Bureau Quotidien UM"
+  unique_id: hue_play_1_pc_bureau_quotidien_um
   cycle: daily
 
-# --- lampe_salle_de_bain_hue_annuel_kwh_um ---
-lampe_salle_de_bain_hue_annuel_kwh_um:
-  source: sensor.lampe_salle_de_bain_hue_energie_totale_kwh
-  name: "Lampe Salle De Bain Hue Annuel kWh UM"
-  unique_id: lampe_salle_de_bain_hue_annuel_kwh_um
+# --- hue_play_2_pc_bureau_annuel_um ---
+hue_play_2_pc_bureau_annuel_um:
+  source: sensor.hue_play_2_pc_bureau_energy
+  name: "Hue Play 2 Pc Bureau Annuel UM"
+  unique_id: hue_play_2_pc_bureau_annuel_um
   cycle: yearly
 
-# --- lampe_salle_de_bain_hue_mensuel_kwh_um ---
-lampe_salle_de_bain_hue_mensuel_kwh_um:
-  source: sensor.lampe_salle_de_bain_hue_energie_totale_kwh
-  name: "Lampe Salle De Bain Hue Mensuel kWh UM"
-  unique_id: lampe_salle_de_bain_hue_mensuel_kwh_um
+# --- hue_play_2_pc_bureau_mensuel_um ---
+hue_play_2_pc_bureau_mensuel_um:
+  source: sensor.hue_play_2_pc_bureau_energy
+  name: "Hue Play 2 Pc Bureau Mensuel UM"
+  unique_id: hue_play_2_pc_bureau_mensuel_um
   cycle: monthly
 
-# --- lampe_salle_de_bain_hue_hebdomadaire_kwh_um ---
-lampe_salle_de_bain_hue_hebdomadaire_kwh_um:
-  source: sensor.lampe_salle_de_bain_hue_energie_totale_kwh
-  name: "Lampe Salle De Bain Hue Hebdomadaire kWh UM"
-  unique_id: lampe_salle_de_bain_hue_hebdomadaire_kwh_um
+# --- hue_play_2_pc_bureau_hebdomadaire_um ---
+hue_play_2_pc_bureau_hebdomadaire_um:
+  source: sensor.hue_play_2_pc_bureau_energy
+  name: "Hue Play 2 Pc Bureau Hebdomadaire UM"
+  unique_id: hue_play_2_pc_bureau_hebdomadaire_um
   cycle: weekly
 
-# --- lampe_salle_de_bain_hue_quotidien_kwh_um ---
-lampe_salle_de_bain_hue_quotidien_kwh_um:
-  source: sensor.lampe_salle_de_bain_hue_energie_totale_kwh
-  name: "Lampe Salle De Bain Hue Quotidien kWh UM"
-  unique_id: lampe_salle_de_bain_hue_quotidien_kwh_um
+# --- hue_play_2_pc_bureau_quotidien_um ---
+hue_play_2_pc_bureau_quotidien_um:
+  source: sensor.hue_play_2_pc_bureau_energy
+  name: "Hue Play 2 Pc Bureau Quotidien UM"
+  unique_id: hue_play_2_pc_bureau_quotidien_um
+  cycle: daily
+
+# --- hue_play_3_pc_bureau_annuel_um ---
+hue_play_3_pc_bureau_annuel_um:
+  source: sensor.hue_play_3_pc_bureau_energy
+  name: "Hue Play 3 Pc Bureau Annuel UM"
+  unique_id: hue_play_3_pc_bureau_annuel_um
+  cycle: yearly
+
+# --- hue_play_3_pc_bureau_mensuel_um ---
+hue_play_3_pc_bureau_mensuel_um:
+  source: sensor.hue_play_3_pc_bureau_energy
+  name: "Hue Play 3 Pc Bureau Mensuel UM"
+  unique_id: hue_play_3_pc_bureau_mensuel_um
+  cycle: monthly
+
+# --- hue_play_3_pc_bureau_hebdomadaire_um ---
+hue_play_3_pc_bureau_hebdomadaire_um:
+  source: sensor.hue_play_3_pc_bureau_energy
+  name: "Hue Play 3 Pc Bureau Hebdomadaire UM"
+  unique_id: hue_play_3_pc_bureau_hebdomadaire_um
+  cycle: weekly
+
+# --- hue_play_3_pc_bureau_quotidien_um ---
+hue_play_3_pc_bureau_quotidien_um:
+  source: sensor.hue_play_3_pc_bureau_energy
+  name: "Hue Play 3 Pc Bureau Quotidien UM"
+  unique_id: hue_play_3_pc_bureau_quotidien_um
+  cycle: daily
+
+# --- hue_white_lamp_bureau_1_annuel_um ---
+hue_white_lamp_bureau_1_annuel_um:
+  source: sensor.hue_white_lamp_bureau_1_energy
+  name: "Hue White Lamp Bureau 1 Annuel UM"
+  unique_id: hue_white_lamp_bureau_1_annuel_um
+  cycle: yearly
+
+# --- hue_white_lamp_bureau_1_mensuel_um ---
+hue_white_lamp_bureau_1_mensuel_um:
+  source: sensor.hue_white_lamp_bureau_1_energy
+  name: "Hue White Lamp Bureau 1 Mensuel UM"
+  unique_id: hue_white_lamp_bureau_1_mensuel_um
+  cycle: monthly
+
+# --- hue_white_lamp_bureau_1_hebdomadaire_um ---
+hue_white_lamp_bureau_1_hebdomadaire_um:
+  source: sensor.hue_white_lamp_bureau_1_energy
+  name: "Hue White Lamp Bureau 1 Hebdomadaire UM"
+  unique_id: hue_white_lamp_bureau_1_hebdomadaire_um
+  cycle: weekly
+
+# --- hue_white_lamp_bureau_1_quotidien_um ---
+hue_white_lamp_bureau_1_quotidien_um:
+  source: sensor.hue_white_lamp_bureau_1_energy
+  name: "Hue White Lamp Bureau 1 Quotidien UM"
+  unique_id: hue_white_lamp_bureau_1_quotidien_um
+  cycle: daily
+
+# --- hue_white_lamp_bureau_2_annuel_um ---
+hue_white_lamp_bureau_2_annuel_um:
+  source: sensor.hue_white_lamp_bureau_2_energy
+  name: "Hue White Lamp Bureau 2 Annuel UM"
+  unique_id: hue_white_lamp_bureau_2_annuel_um
+  cycle: yearly
+
+# --- hue_white_lamp_bureau_2_mensuel_um ---
+hue_white_lamp_bureau_2_mensuel_um:
+  source: sensor.hue_white_lamp_bureau_2_energy
+  name: "Hue White Lamp Bureau 2 Mensuel UM"
+  unique_id: hue_white_lamp_bureau_2_mensuel_um
+  cycle: monthly
+
+# --- hue_white_lamp_bureau_2_hebdomadaire_um ---
+hue_white_lamp_bureau_2_hebdomadaire_um:
+  source: sensor.hue_white_lamp_bureau_2_energy
+  name: "Hue White Lamp Bureau 2 Hebdomadaire UM"
+  unique_id: hue_white_lamp_bureau_2_hebdomadaire_um
+  cycle: weekly
+
+# --- hue_white_lamp_bureau_2_quotidien_um ---
+hue_white_lamp_bureau_2_quotidien_um:
+  source: sensor.hue_white_lamp_bureau_2_energy
+  name: "Hue White Lamp Bureau 2 Quotidien UM"
+  unique_id: hue_white_lamp_bureau_2_quotidien_um
   cycle: daily
 
 # ┌───────────────────────────────────┐
-# │         9. CHAMBRE                │
+# │         8. SDB (2x)               │
 # └───────────────────────────────────┘
 
-# --- hue_white_lamp_chambre_1_annuel_kwh_um ---
-hue_white_lamp_chambre_1_annuel_kwh_um:
-  source: sensor.hue_white_lamp_chambre_1_energie_totale_kwh
-  name: "Hue White Lamp Chambre 1 Annuel kWh UM"
-  unique_id: hue_white_lamp_chambre_1_annuel_kwh_um
+# --- relais_lumiere_sdb_sonoff_annuel_um ---
+relais_lumiere_sdb_sonoff_annuel_um:
+  source: sensor.relais_lumiere_sdb_sonoff_energy
+  name: "Relais Lumiere Sdb Sonoff Annuel UM"
+  unique_id: relais_lumiere_sdb_sonoff_annuel_um
   cycle: yearly
 
-# --- hue_white_lamp_chambre_1_mensuel_kwh_um ---
-hue_white_lamp_chambre_1_mensuel_kwh_um:
-  source: sensor.hue_white_lamp_chambre_1_energie_totale_kwh
-  name: "Hue White Lamp Chambre 1 Mensuel kWh UM"
-  unique_id: hue_white_lamp_chambre_1_mensuel_kwh_um
+# --- relais_lumiere_sdb_sonoff_mensuel_um ---
+relais_lumiere_sdb_sonoff_mensuel_um:
+  source: sensor.relais_lumiere_sdb_sonoff_energy
+  name: "Relais Lumiere Sdb Sonoff Mensuel UM"
+  unique_id: relais_lumiere_sdb_sonoff_mensuel_um
   cycle: monthly
 
-# --- hue_white_lamp_chambre_1_hebdomadaire_kwh_um ---
-hue_white_lamp_chambre_1_hebdomadaire_kwh_um:
-  source: sensor.hue_white_lamp_chambre_1_energie_totale_kwh
-  name: "Hue White Lamp Chambre 1 Hebdomadaire kWh UM"
-  unique_id: hue_white_lamp_chambre_1_hebdomadaire_kwh_um
+# --- relais_lumiere_sdb_sonoff_hebdomadaire_um ---
+relais_lumiere_sdb_sonoff_hebdomadaire_um:
+  source: sensor.relais_lumiere_sdb_sonoff_energy
+  name: "Relais Lumiere Sdb Sonoff Hebdomadaire UM"
+  unique_id: relais_lumiere_sdb_sonoff_hebdomadaire_um
   cycle: weekly
 
-# --- hue_white_lamp_chambre_1_quotidien_kwh_um ---
-hue_white_lamp_chambre_1_quotidien_kwh_um:
-  source: sensor.hue_white_lamp_chambre_1_energie_totale_kwh
-  name: "Hue White Lamp Chambre 1 Quotidien kWh UM"
-  unique_id: hue_white_lamp_chambre_1_quotidien_kwh_um
+# --- relais_lumiere_sdb_sonoff_quotidien_um ---
+relais_lumiere_sdb_sonoff_quotidien_um:
+  source: sensor.relais_lumiere_sdb_sonoff_energy
+  name: "Relais Lumiere Sdb Sonoff Quotidien UM"
+  unique_id: relais_lumiere_sdb_sonoff_quotidien_um
   cycle: daily
 
-# --- hue_white_lamp_chambre_2_annuel_kwh_um ---
-hue_white_lamp_chambre_2_annuel_kwh_um:
-  source: sensor.hue_white_lamp_chambre_2_energie_totale_kwh
-  name: "Hue White Lamp Chambre 2 Annuel kWh UM"
-  unique_id: hue_white_lamp_chambre_2_annuel_kwh_um
+# --- lampe_salle_de_bain_hue_annuel_um ---
+lampe_salle_de_bain_hue_annuel_um:
+  source: sensor.lampe_salle_de_bain_hue_energy
+  name: "Lampe Salle De Bain Hue Annuel UM"
+  unique_id: lampe_salle_de_bain_hue_annuel_um
   cycle: yearly
 
-# --- hue_white_lamp_chambre_2_mensuel_kwh_um ---
-hue_white_lamp_chambre_2_mensuel_kwh_um:
-  source: sensor.hue_white_lamp_chambre_2_energie_totale_kwh
-  name: "Hue White Lamp Chambre 2 Mensuel kWh UM"
-  unique_id: hue_white_lamp_chambre_2_mensuel_kwh_um
+# --- lampe_salle_de_bain_hue_mensuel_um ---
+lampe_salle_de_bain_hue_mensuel_um:
+  source: sensor.lampe_salle_de_bain_hue_energy
+  name: "Lampe Salle De Bain Hue Mensuel UM"
+  unique_id: lampe_salle_de_bain_hue_mensuel_um
   cycle: monthly
 
-# --- hue_white_lamp_chambre_2_hebdomadaire_kwh_um ---
-hue_white_lamp_chambre_2_hebdomadaire_kwh_um:
-  source: sensor.hue_white_lamp_chambre_2_energie_totale_kwh
-  name: "Hue White Lamp Chambre 2 Hebdomadaire kWh UM"
-  unique_id: hue_white_lamp_chambre_2_hebdomadaire_kwh_um
+# --- lampe_salle_de_bain_hue_hebdomadaire_um ---
+lampe_salle_de_bain_hue_hebdomadaire_um:
+  source: sensor.lampe_salle_de_bain_hue_energy
+  name: "Lampe Salle De Bain Hue Hebdomadaire UM"
+  unique_id: lampe_salle_de_bain_hue_hebdomadaire_um
   cycle: weekly
 
-# --- hue_white_lamp_chambre_2_quotidien_kwh_um ---
-hue_white_lamp_chambre_2_quotidien_kwh_um:
-  source: sensor.hue_white_lamp_chambre_2_energie_totale_kwh
-  name: "Hue White Lamp Chambre 2 Quotidien kWh UM"
-  unique_id: hue_white_lamp_chambre_2_quotidien_kwh_um
+# --- lampe_salle_de_bain_hue_quotidien_um ---
+lampe_salle_de_bain_hue_quotidien_um:
+  source: sensor.lampe_salle_de_bain_hue_energy
+  name: "Lampe Salle De Bain Hue Quotidien UM"
+  unique_id: lampe_salle_de_bain_hue_quotidien_um
   cycle: daily
 
-# --- hue_color_candle_chambre_gege_annuel_kwh_um ---
-hue_color_candle_chambre_gege_annuel_kwh_um:
-  source: sensor.hue_color_candle_chambre_gege_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Color Candle Chambre Gege Annuel kWh UM"
-  unique_id: hue_color_candle_chambre_gege_annuel_kwh_um
+# ┌───────────────────────────────────┐
+# │         9. CHAMBRE (4x)           │
+# └───────────────────────────────────┘
+
+# --- hue_white_lamp_chambre_1_annuel_um ---
+hue_white_lamp_chambre_1_annuel_um:
+  source: sensor.hue_white_lamp_chambre_1_energy
+  name: "Hue White Lamp Chambre 1 Annuel UM"
+  unique_id: hue_white_lamp_chambre_1_annuel_um
   cycle: yearly
 
-# --- hue_color_candle_chambre_gege_mensuel_kwh_um ---
-hue_color_candle_chambre_gege_mensuel_kwh_um:
-  source: sensor.hue_color_candle_chambre_gege_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Color Candle Chambre Gege Mensuel kWh UM"
-  unique_id: hue_color_candle_chambre_gege_mensuel_kwh_um
+# --- hue_white_lamp_chambre_1_mensuel_um ---
+hue_white_lamp_chambre_1_mensuel_um:
+  source: sensor.hue_white_lamp_chambre_1_energy
+  name: "Hue White Lamp Chambre 1 Mensuel UM"
+  unique_id: hue_white_lamp_chambre_1_mensuel_um
   cycle: monthly
 
-# --- hue_color_candle_chambre_gege_hebdomadaire_kwh_um ---
-hue_color_candle_chambre_gege_hebdomadaire_kwh_um:
-  source: sensor.hue_color_candle_chambre_gege_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Color Candle Chambre Gege Hebdomadaire kWh UM"
-  unique_id: hue_color_candle_chambre_gege_hebdomadaire_kwh_um
+# --- hue_white_lamp_chambre_1_hebdomadaire_um ---
+hue_white_lamp_chambre_1_hebdomadaire_um:
+  source: sensor.hue_white_lamp_chambre_1_energy
+  name: "Hue White Lamp Chambre 1 Hebdomadaire UM"
+  unique_id: hue_white_lamp_chambre_1_hebdomadaire_um
   cycle: weekly
 
-# --- hue_color_candle_chambre_gege_quotidien_kwh_um ---
-hue_color_candle_chambre_gege_quotidien_kwh_um:
-  source: sensor.hue_color_candle_chambre_gege_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Color Candle Chambre Gege Quotidien kWh UM"
-  unique_id: hue_color_candle_chambre_gege_quotidien_kwh_um
+# --- hue_white_lamp_chambre_1_quotidien_um ---
+hue_white_lamp_chambre_1_quotidien_um:
+  source: sensor.hue_white_lamp_chambre_1_energy
+  name: "Hue White Lamp Chambre 1 Quotidien UM"
+  unique_id: hue_white_lamp_chambre_1_quotidien_um
   cycle: daily
 
-# --- hue_color_candle_chambre_eric_annuel_kwh_um ---
-hue_color_candle_chambre_eric_annuel_kwh_um:
-  source: sensor.hue_color_candle_chambre_eric_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Color Candle Chambre Eric Annuel kWh UM"
-  unique_id: hue_color_candle_chambre_eric_annuel_kwh_um
+# --- hue_white_lamp_chambre_2_annuel_um ---
+hue_white_lamp_chambre_2_annuel_um:
+  source: sensor.hue_white_lamp_chambre_2_energy
+  name: "Hue White Lamp Chambre 2 Annuel UM"
+  unique_id: hue_white_lamp_chambre_2_annuel_um
   cycle: yearly
 
-# --- hue_color_candle_chambre_eric_mensuel_kwh_um ---
-hue_color_candle_chambre_eric_mensuel_kwh_um:
-  source: sensor.hue_color_candle_chambre_eric_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Color Candle Chambre Eric Mensuel kWh UM"
-  unique_id: hue_color_candle_chambre_eric_mensuel_kwh_um
+# --- hue_white_lamp_chambre_2_mensuel_um ---
+hue_white_lamp_chambre_2_mensuel_um:
+  source: sensor.hue_white_lamp_chambre_2_energy
+  name: "Hue White Lamp Chambre 2 Mensuel UM"
+  unique_id: hue_white_lamp_chambre_2_mensuel_um
   cycle: monthly
 
-# --- hue_color_candle_chambre_eric_hebdomadaire_kwh_um ---
-hue_color_candle_chambre_eric_hebdomadaire_kwh_um:
-  source: sensor.hue_color_candle_chambre_eric_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Color Candle Chambre Eric Hebdomadaire kWh UM"
-  unique_id: hue_color_candle_chambre_eric_hebdomadaire_kwh_um
+# --- hue_white_lamp_chambre_2_hebdomadaire_um ---
+hue_white_lamp_chambre_2_hebdomadaire_um:
+  source: sensor.hue_white_lamp_chambre_2_energy
+  name: "Hue White Lamp Chambre 2 Hebdomadaire UM"
+  unique_id: hue_white_lamp_chambre_2_hebdomadaire_um
   cycle: weekly
 
-# --- hue_color_candle_chambre_eric_quotidien_kwh_um ---
-hue_color_candle_chambre_eric_quotidien_kwh_um:
-  source: sensor.hue_color_candle_chambre_eric_energy  # [modif] PowerCalc _energy — bypass Riemann (unavailable nocturne)
-  name: "Hue Color Candle Chambre Eric Quotidien kWh UM"
-  unique_id: hue_color_candle_chambre_eric_quotidien_kwh_um
+# --- hue_white_lamp_chambre_2_quotidien_um ---
+hue_white_lamp_chambre_2_quotidien_um:
+  source: sensor.hue_white_lamp_chambre_2_energy
+  name: "Hue White Lamp Chambre 2 Quotidien UM"
+  unique_id: hue_white_lamp_chambre_2_quotidien_um
+  cycle: daily
+
+# --- hue_color_candle_chambre_gege_annuel_um ---
+hue_color_candle_chambre_gege_annuel_um:
+  source: sensor.hue_color_candle_chambre_gege_energy
+  name: "Hue Color Candle Chambre Gege Annuel UM"
+  unique_id: hue_color_candle_chambre_gege_annuel_um
+  cycle: yearly
+
+# --- hue_color_candle_chambre_gege_mensuel_um ---
+hue_color_candle_chambre_gege_mensuel_um:
+  source: sensor.hue_color_candle_chambre_gege_energy
+  name: "Hue Color Candle Chambre Gege Mensuel UM"
+  unique_id: hue_color_candle_chambre_gege_mensuel_um
+  cycle: monthly
+
+# --- hue_color_candle_chambre_gege_hebdomadaire_um ---
+hue_color_candle_chambre_gege_hebdomadaire_um:
+  source: sensor.hue_color_candle_chambre_gege_energy
+  name: "Hue Color Candle Chambre Gege Hebdomadaire UM"
+  unique_id: hue_color_candle_chambre_gege_hebdomadaire_um
+  cycle: weekly
+
+# --- hue_color_candle_chambre_gege_quotidien_um ---
+hue_color_candle_chambre_gege_quotidien_um:
+  source: sensor.hue_color_candle_chambre_gege_energy
+  name: "Hue Color Candle Chambre Gege Quotidien UM"
+  unique_id: hue_color_candle_chambre_gege_quotidien_um
+  cycle: daily
+
+# --- hue_color_candle_chambre_eric_annuel_um ---
+hue_color_candle_chambre_eric_annuel_um:
+  source: sensor.hue_color_candle_chambre_eric_energy
+  name: "Hue Color Candle Chambre Eric Annuel UM"
+  unique_id: hue_color_candle_chambre_eric_annuel_um
+  cycle: yearly
+
+# --- hue_color_candle_chambre_eric_mensuel_um ---
+hue_color_candle_chambre_eric_mensuel_um:
+  source: sensor.hue_color_candle_chambre_eric_energy
+  name: "Hue Color Candle Chambre Eric Mensuel UM"
+  unique_id: hue_color_candle_chambre_eric_mensuel_um
+  cycle: monthly
+
+# --- hue_color_candle_chambre_eric_hebdomadaire_um ---
+hue_color_candle_chambre_eric_hebdomadaire_um:
+  source: sensor.hue_color_candle_chambre_eric_energy
+  name: "Hue Color Candle Chambre Eric Hebdomadaire UM"
+  unique_id: hue_color_candle_chambre_eric_hebdomadaire_um
+  cycle: weekly
+
+# --- hue_color_candle_chambre_eric_quotidien_um ---
+hue_color_candle_chambre_eric_quotidien_um:
+  source: sensor.hue_color_candle_chambre_eric_energy
+  name: "Hue Color Candle Chambre Eric Quotidien UM"
+  unique_id: hue_color_candle_chambre_eric_quotidien_um
   cycle: daily
 
 # annotations_log:
-# - [slug] MOD L32: # --- hue_white_lamp_entree --- → # --- hue_white_lamp_entree_annuel_kwh_um ---
-# - [slug] INS avant L39: # --- hue_white_lamp_entree_mensuel_kwh_um ---
-# - [slug] INS avant L46: # --- hue_white_lamp_entree_hebdomadaire_kwh_um ---
-# - [slug] INS avant L53: # --- hue_white_lamp_entree_quotidien_kwh_um ---
-# - [slug] MOD L64: # --- hue_white_lamp_table --- → # --- hue_white_lamp_table_annuel_kwh_um ---
-# - [slug] INS avant L71: # --- hue_white_lamp_table_mensuel_kwh_um ---
-# - [slug] INS avant L78: # --- hue_white_lamp_table_hebdomadaire_kwh_um ---
-# - [slug] INS avant L85: # --- hue_white_lamp_table_quotidien_kwh_um ---
-# - [slug] MOD L92: # --- hue_ambiance_lamp_salon_1 --- → # --- hue_ambiance_lamp_salon_1_annuel_kwh_um ---
-# - [slug] INS avant L99: # --- hue_ambiance_lamp_salon_1_mensuel_kwh_um ---
-# - [slug] INS avant L106: # --- hue_ambiance_lamp_salon_1_hebdomadaire_kwh_um ---
-# - [slug] INS avant L113: # --- hue_ambiance_lamp_salon_1_quotidien_kwh_um ---
-# - [slug] MOD L120: # --- hue_ambiance_lamp_salon_2 --- → # --- hue_ambiance_lamp_salon_2_annuel_kwh_um ---
-# - [slug] INS avant L127: # --- hue_ambiance_lamp_salon_2_mensuel_kwh_um ---
-# - [slug] INS avant L134: # --- hue_ambiance_lamp_salon_2_hebdomadaire_kwh_um ---
-# - [slug] INS avant L141: # --- hue_ambiance_lamp_salon_2_quotidien_kwh_um ---
-# - [slug] MOD L148: # --- hue_ambiance_lamp_salon_3 --- → # --- hue_ambiance_lamp_salon_3_annuel_kwh_um ---
-# - [slug] INS avant L155: # --- hue_ambiance_lamp_salon_3_mensuel_kwh_um ---
-# - [slug] INS avant L162: # --- hue_ambiance_lamp_salon_3_hebdomadaire_kwh_um ---
-# - [slug] INS avant L169: # --- hue_ambiance_lamp_salon_3_quotidien_kwh_um ---
-# - [slug] MOD L176: # --- hue_color_candle_salon_1 --- → # --- hue_color_candle_salon_1_annuel_kwh_um ---
-# - [slug] INS avant L183: # --- hue_color_candle_salon_1_mensuel_kwh_um ---
-# - [slug] INS avant L190: # --- hue_color_candle_salon_1_hebdomadaire_kwh_um ---
-# - [slug] INS avant L197: # --- hue_color_candle_salon_1_quotidien_kwh_um ---
-# - [slug] MOD L208: # --- hue_white_lamp_cuisine --- → # --- hue_white_lamp_cuisine_annuel_kwh_um ---
-# - [slug] INS avant L215: # --- hue_white_lamp_cuisine_mensuel_kwh_um ---
-# - [slug] INS avant L222: # --- hue_white_lamp_cuisine_hebdomadaire_kwh_um ---
-# - [slug] INS avant L229: # --- hue_white_lamp_cuisine_quotidien_kwh_um ---
-# - [slug] MOD L240: # --- hue_white_lamp_couloir --- → # --- hue_white_lamp_couloir_annuel_kwh_um ---
-# - [slug] INS avant L247: # --- hue_white_lamp_couloir_mensuel_kwh_um ---
-# - [slug] INS avant L254: # --- hue_white_lamp_couloir_hebdomadaire_kwh_um ---
-# - [slug] INS avant L261: # --- hue_white_lamp_couloir_quotidien_kwh_um ---
-# - [slug] MOD L272: # --- hue_play_1_pc_bureau --- → # --- hue_play_1_pc_bureau_annuel_kwh_um ---
-# - [slug] INS avant L279: # --- hue_play_1_pc_bureau_mensuel_kwh_um ---
-# - [slug] INS avant L286: # --- hue_play_1_pc_bureau_hebdomadaire_kwh_um ---
-# - [slug] INS avant L293: # --- hue_play_1_pc_bureau_quotidien_kwh_um ---
-# - [slug] MOD L300: # --- hue_play_2_pc_bureau --- → # --- hue_play_2_pc_bureau_annuel_kwh_um ---
-# - [slug] INS avant L307: # --- hue_play_2_pc_bureau_mensuel_kwh_um ---
-# - [slug] INS avant L314: # --- hue_play_2_pc_bureau_hebdomadaire_kwh_um ---
-# - [slug] INS avant L321: # --- hue_play_2_pc_bureau_quotidien_kwh_um ---
-# - [slug] MOD L328: # --- hue_play_3_pc_bureau --- → # --- hue_play_3_pc_bureau_annuel_kwh_um ---
-# - [slug] INS avant L335: # --- hue_play_3_pc_bureau_mensuel_kwh_um ---
-# - [slug] INS avant L342: # --- hue_play_3_pc_bureau_hebdomadaire_kwh_um ---
-# - [slug] INS avant L349: # --- hue_play_3_pc_bureau_quotidien_kwh_um ---
-# - [slug] MOD L356: # --- hue_white_lamp_bureau_1 --- → # --- hue_white_lamp_bureau_1_annuel_kwh_um ---
-# - [slug] INS avant L363: # --- hue_white_lamp_bureau_1_mensuel_kwh_um ---
-# - [slug] INS avant L370: # --- hue_white_lamp_bureau_1_hebdomadaire_kwh_um ---
-# - [slug] INS avant L377: # --- hue_white_lamp_bureau_1_quotidien_kwh_um ---
-# - [slug] MOD L384: # --- hue_white_lamp_bureau_2 --- → # --- hue_white_lamp_bureau_2_annuel_kwh_um ---
-# - [slug] INS avant L391: # --- hue_white_lamp_bureau_2_mensuel_kwh_um ---
-# - [slug] INS avant L398: # --- hue_white_lamp_bureau_2_hebdomadaire_kwh_um ---
-# - [slug] INS avant L405: # --- hue_white_lamp_bureau_2_quotidien_kwh_um ---
-# - [slug] MOD L416: # --- relais_lumiere_sdb_sonoff --- → # --- relais_lumiere_sdb_sonoff_annuel_kwh_um ---
-# - [slug] INS avant L423: # --- relais_lumiere_sdb_sonoff_mensuel_kwh_um ---
-# - [slug] INS avant L430: # --- relais_lumiere_sdb_sonoff_hebdomadaire_kwh_um ---
-# - [slug] INS avant L437: # --- relais_lumiere_sdb_sonoff_quotidien_kwh_um ---
-# - [slug] MOD L444: # --- lampe_salle_de_bain_hue --- → # --- lampe_salle_de_bain_hue_annuel_kwh_um ---
-# - [slug] INS avant L451: # --- lampe_salle_de_bain_hue_mensuel_kwh_um ---
-# - [slug] INS avant L458: # --- lampe_salle_de_bain_hue_hebdomadaire_kwh_um ---
-# - [slug] INS avant L465: # --- lampe_salle_de_bain_hue_quotidien_kwh_um ---
-# - [slug] MOD L476: # --- hue_white_lamp_chambre_1 --- → # --- hue_white_lamp_chambre_1_annuel_kwh_um ---
-# - [slug] INS avant L483: # --- hue_white_lamp_chambre_1_mensuel_kwh_um ---
-# - [slug] INS avant L490: # --- hue_white_lamp_chambre_1_hebdomadaire_kwh_um ---
-# - [slug] INS avant L497: # --- hue_white_lamp_chambre_1_quotidien_kwh_um ---
-# - [slug] MOD L504: # --- hue_white_lamp_chambre_2 --- → # --- hue_white_lamp_chambre_2_annuel_kwh_um ---
-# - [slug] INS avant L511: # --- hue_white_lamp_chambre_2_mensuel_kwh_um ---
-# - [slug] INS avant L518: # --- hue_white_lamp_chambre_2_hebdomadaire_kwh_um ---
-# - [slug] INS avant L525: # --- hue_white_lamp_chambre_2_quotidien_kwh_um ---
-# - [slug] MOD L532: # --- hue_color_candle_chambre_gege --- → # --- hue_color_candle_chambre_gege_annuel_kwh_um ---
-# - [slug] INS avant L539: # --- hue_color_candle_chambre_gege_mensuel_kwh_um ---
-# - [slug] INS avant L546: # --- hue_color_candle_chambre_gege_hebdomadaire_kwh_um ---
-# - [slug] INS avant L553: # --- hue_color_candle_chambre_gege_quotidien_kwh_um ---
-# - [slug] MOD L560: # --- hue_color_candle_chambre_eric --- → # --- hue_color_candle_chambre_eric_annuel_kwh_um ---
-# - [slug] INS avant L567: # --- hue_color_candle_chambre_eric_mensuel_kwh_um ---
-# - [slug] INS avant L574: # --- hue_color_candle_chambre_eric_hebdomadaire_kwh_um ---
-# - [slug] INS avant L581: # --- hue_color_candle_chambre_eric_quotidien_kwh_um ---
+# - [Création] Nouveau fichier canonique — remplace version dans TREE_CORRIGE/Docs/ (mauvais chemin).
+# - [Migration] 13 sources _energie_totale_kwh (Riemann supprimé) → sensor.*_energy (firmware direct).
+# - [Inchangé] 6 ampoules PowerCalc (ambiance/color) — déjà sur _energy — aucune modif.
+# - [Source] Toutes les sources : sensor.*_energy (total_increasing, kWh cumulatif firmware).
+# - [Chemin] TREE_CORRIGE/utility_meter/P3_eclairage/ (chemin canonique déployable).

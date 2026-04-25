@@ -1,0 +1,180 @@
+
+  - sensor:
+      # ╭──────────────────────────────────────────────────────────────────────╮
+      # │    PÔLE 3. REGROUPEMENTS ÉCLAIRAGE : SOMMES PAR PIÈCE (_energie)     │
+      # ╰──────────────────────────────────────────────────────────────────────╯
+
+      #┌───────────────────────────────────┐
+      #│         1. ENTRÉE (1x)            │
+      #└───────────────────────────────────┘
+
+      # --- eclairage_entree_1_energie ---
+      - name: "Eclairage Entree 1 Energie"
+        unique_id: eclairage_entree_1_energie
+        unit_of_measurement: "kWh"
+        device_class: power
+        state_class: measurement
+        state: >
+          {{
+            states('sensor.hue_white_lamp_entree_energy') | float(0)
+          }}
+
+      #┌───────────────────────────────────┐
+      #│         4. SALON (5x)             │
+      #└───────────────────────────────────┘
+
+      # --- eclairage_salon_5_energie ---
+      - name: "Eclairage Salon 5 Energie"
+        unique_id: eclairage_salon_5_energie
+        unit_of_measurement: "kWh"
+        device_class: power
+        state_class: measurement
+        state: >
+          {{
+            states('sensor.hue_white_lamp_salon_energy') | float(0) +
+            states('sensor.hue_ambiance_lamp_salon_1_energy') | float(0) +
+            states('sensor.hue_ambiance_lamp_salon_2_energy') | float(0) +
+            states('sensor.hue_ambiance_lamp_salon_3_energy') | float(0) +
+            states('sensor.hue_color_candle_salon_1_energy') | float(0)
+          }}
+
+      #┌───────────────────────────────────┐
+      #│         5. CUISINE (1x)           │
+      #└───────────────────────────────────┘
+
+      # --- eclairage_cuisine_1_energie ---
+      - name: "Eclairage Cuisine 1 Energie"
+        unique_id: eclairage_cuisine_1_energie
+        unit_of_measurement: "kWh"
+        device_class: power
+        state_class: measurement
+        state: >
+          {{
+            states('sensor.hue_white_lamp_cuisine_energy') | float(0)
+          }}
+
+      #┌───────────────────────────────────┐
+      #│         6. COULOIR (1x)           │
+      #└───────────────────────────────────┘
+
+      # --- eclairage_couloir_1_energie ---
+      - name: "Eclairage Couloir 1 Energie"
+        unique_id: eclairage_couloir_1_energie
+        unit_of_measurement: "kWh"
+        device_class: power
+        state_class: measurement
+        state: >
+          {{
+            states('sensor.hue_white_lamp_couloir_energy') | float(0)
+          }}
+
+      #┌───────────────────────────────────┐
+      #│         7. BUREAU (5x)            │
+      #└───────────────────────────────────┘
+
+      # --- eclairage_bureau_5_energie ---
+      - name: "Eclairage Bureau 5 Energie"
+        unique_id: eclairage_bureau_5_energie
+        unit_of_measurement: "kWh"
+        device_class: power
+        state_class: measurement
+        state: >
+          {{
+            states('sensor.hue_play_1_pc_bureau_energy') | float(0) +
+            states('sensor.hue_play_2_pc_bureau_energy') | float(0) +
+            states('sensor.hue_play_3_pc_bureau_energy') | float(0) +
+            states('sensor.lampe_bureau_1_hue_energy') | float(0) +
+            states('sensor.lampe_bureau_2_hue_energy') | float(0)
+          }}
+
+      #┌───────────────────────────────────┐
+      #│         8. SDB (2x)               │
+      #└───────────────────────────────────┘
+
+      # --- eclairage_sdb_2_energie ---
+      - name: "Eclairage Sdb 2 Energie"
+        unique_id: eclairage_sdb_2_energie
+        unit_of_measurement: "kWh"
+        device_class: power
+        state_class: measurement
+        state: >
+          {{
+            states('sensor.relais_lumiere_sdb_sonoff_energy') | float(0) +
+            states('sensor.lampe_salle_de_bain_hue_energy') | float(0)
+          }}
+
+      #┌───────────────────────────────────┐
+      #│         9. CHAMBRE (4x)           │
+      #└───────────────────────────────────┘
+
+      # --- eclairage_chambre_4_energie ---
+      - name: "Eclairage Chambre 4 Energie"
+        unique_id: eclairage_chambre_4_energie
+        unit_of_measurement: "kWh"
+        device_class: power
+        state_class: measurement
+        state: >
+          {{
+            states('sensor.hue_white_lamp_chambre_1_energy') | float(0) +
+            states('sensor.hue_white_lamp_chambre_2_energy') | float(0) +
+            states('sensor.hue_color_candle_chambre_gege_energy') | float(0) +
+            states('sensor.hue_color_candle_chambre_eric_energy') | float(0)
+          }}
+
+      # ╭──────────────────────────────────────────────────────────────────────╮
+      # │    PÔLE 3. REGROUPEMENTS ÉCLAIRAGE : ZONES TRANSVERSALES             │
+      # ╰──────────────────────────────────────────────────────────────────────╯
+
+      #┌───────────────────────────────────┐
+      #│   ZONE HOME (3x) E+Cu+Co          │
+      #└───────────────────────────────────┘
+
+      # --- eclairage_appart_3_energie ---
+      - name: "Eclairage Appart 3 Energie"
+        unique_id: eclairage_appart_3_energie
+        unit_of_measurement: "kWh"
+        device_class: power
+        state_class: measurement
+        state: >
+          {{
+            states('sensor.hue_white_lamp_entree_energy') | float(0) +
+            states('sensor.hue_white_lamp_cuisine_energy') | float(0) +
+            states('sensor.hue_white_lamp_couloir_energy') | float(0)
+          }}
+
+      #┌───────────────────────────────────┐
+      #│   ZONE HOME (2x) E+Co             │
+      #└───────────────────────────────────┘
+
+      # --- eclairage_appart_2_energie ---
+      - name: "Eclairage Appart 2 Energie"
+        unique_id: eclairage_appart_2_energie
+        unit_of_measurement: "kWh"
+        device_class: power
+        state_class: measurement
+        state: >
+          {{
+            states('sensor.hue_white_lamp_entree_energy') | float(0) +
+            states('sensor.hue_white_lamp_couloir_energy') | float(0)
+          }}
+
+      # ╭──────────────────────────────────────────────────────────────────────╮
+      # │    PÔLE 3. REGROUPEMENT TOTAL : TOUTES LES LUMIÈRES (19x)           │
+      # ╰──────────────────────────────────────────────────────────────────────╯
+
+      # --- eclairage_total_energie ---
+      - name: "Eclairage Total Energie"
+        unique_id: eclairage_total_energie
+        unit_of_measurement: "kWh"
+        device_class: power
+        state_class: measurement
+        state: >
+          {{
+            states('sensor.eclairage_entree_1_energie') | float(0) +
+            states('sensor.eclairage_salon_5_energie') | float(0) +
+            states('sensor.eclairage_cuisine_1_energie') | float(0) +
+            states('sensor.eclairage_couloir_1_energie') | float(0) +
+            states('sensor.eclairage_bureau_5_energie') | float(0) +
+            states('sensor.eclairage_sdb_2_energie') | float(0) +
+            states('sensor.eclairage_chambre_4_energie') | float(0)
+          }}

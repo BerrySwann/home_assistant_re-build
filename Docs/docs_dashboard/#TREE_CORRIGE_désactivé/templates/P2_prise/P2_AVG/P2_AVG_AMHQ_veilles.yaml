@@ -1,0 +1,78 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 2. TEMPLATE AVG : PUISSANCE MOYENNE STANDBY (W) AMHQ — VEILLES      │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Calcule la puissance moyenne continue équivalente (en Watts) lissée sur
+# 4 périodes : Annuel, Mensuel, Hebdomadaire, Quotidien (AMHQ) pour les
+# veilles globales de l'appartement (all_standby). Complément de
+# P2_AVG_AMHQ_prises.yaml, dédié exclusivement à la consommation fantôme.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : (Consommation_kWh_UM × 1000) ÷ nombre_heures_écoulées_dans_le_cycle
+# - Source : sensor.all_standby_[cycle]_um (P2_UM_AMHQ_veilles.yaml)
+# - Quotidien   : h = now().hour + (now().minute / 60)
+# - Hebdomadaire: hh = (now().weekday() * 24) + h
+# - Mensuel     : hm = ((now().day - 1) * 24) + h
+# - Annuel      : ha = ((now().timetuple().tm_yday - 1) * 24) + h
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.p2_veille_*_{periode} (P2_UM_AMHQ_veilles)  | p2_veille_*_avg_w_{periode}                        | L2C1 Énergie Générale              |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - La division par zéro est évitée par la condition (if h > 0.1 else 0).
+# - Ce fichier complète P2_kWh_veilles.yaml (intégration) et
+#   P2_UM_AMHQ_veilles.yaml (utility_meter) dans la chaîne de dépendances.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (puissance de croisière veilles).
+
+- sensor:
+  # --- all_standby_avg_watts_quotidien ---
+  - name: "All Standby Avg Watts Quotidien"
+    unique_id: all_standby_avg_watts_quotidien
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.all_standby_quotidien_um') | float(0) %}
+      {% set h = now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+  # --- all_standby_avg_watts_hebdomadaire ---
+  - name: "All Standby Avg Watts Hebdomadaire"
+    unique_id: all_standby_avg_watts_hebdomadaire
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.all_standby_hebdomadaire_um') | float(0) %}
+      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+  # --- all_standby_avg_watts_mensuel ---
+  - name: "All Standby Avg Watts Mensuel"
+    unique_id: all_standby_avg_watts_mensuel
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.all_standby_mensuel_um') | float(0) %}
+      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+  # --- all_standby_avg_watts_annuel ---
+  - name: "All Standby Avg Watts Annuel"
+    unique_id: all_standby_avg_watts_annuel
+    unit_of_measurement: "W"
+    device_class: power
+    state: >
+      {% set conso = states('sensor.all_standby_annuel_um') | float(0) %}
+      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+# annotations_log:
+# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.
+# - [L34] Source UM veilles : all_standby_[cycle]_um (sans préfixe prise_).
+# - [L2] Titre box mis à jour : convention PÔLE N. TEMPLATE ... style.

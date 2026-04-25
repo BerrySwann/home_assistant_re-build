@@ -27,7 +27,7 @@
 # - Ce n'est pas la puissance en direct, mais une moyenne de tirage ("Average").
 # - Formule Wh : conso / h → W  (contrairement aux autres pôles en kWh : conso * 1000 / h)
 # - CORRECTION 2026-03-29 : fichier original corrompu (sensors imbriqués dans state: >
-#   du premier sensor + unique_id dupliqué + noms _kwh erronés → remplacés par _wh).
+#   du premier sensor + unique_id dupliqué + noms  erronés → remplacés par _wh).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L4C2 Mini PC — pop-up #conso (streamline-card : avg_daily_entity + avg_monthly_entity)
@@ -90,7 +90,7 @@
         {{ (conso / h if h > 0.1 else 0) | round(1) }}
 
 # annotations_log:
-# - [ALL]    Renommage _kwh_um → _wh_um sur toutes les sources (unité réelle = Wh)
+# - [ALL]    Renommage _um → _wh_um sur toutes les sources (unité réelle = Wh)
 # - [L35,45] Formule corrigée : (conso * 1000) / h → conso / h (Wh ÷ h = W)
 # - [L55,65] Idem hebdomadaire et quotidien
 # - [ORDRE]  Réordonné AMHQ : Annuel → Mensuel → Hebdomadaire → Quotidien

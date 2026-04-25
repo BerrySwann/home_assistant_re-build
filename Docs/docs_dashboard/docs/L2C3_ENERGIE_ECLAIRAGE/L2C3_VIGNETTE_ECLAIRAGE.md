@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--18-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026-04-25-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Vignette-ff9800?style=flat-square)](.)
 
 </div>
@@ -15,7 +15,7 @@
 | 🏗️ **Layout** | `custom:button-card` — grille 3 colonnes |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-18 |
+| 📅 **Modifié le** | 2026-04-25 |
 | 🏠 **Version HA** | 2026.3 |
 
 ---
@@ -44,7 +44,7 @@ Les pièces Bureau et Chambre ont une logique `isEcoSensitive` : le mode `Éco.`
 ### Intégrations requises
 
 - ✅ **Philips Hue** (bridge natif) — états et puissance lampes
-- ✅ **Utility Meters P3** — `sensor.eclairage_*_quotidien/mensuel_kwh_um`
+- ✅ **Utility Meters P3** — `sensor.eclairage_*_quotidien/mensuel_um`
 - ✅ **Templates P3** — `sensor.lumiere_*_etat` (états par pièce)
 
 ### Cartes HACS
@@ -91,20 +91,20 @@ entities:
   - sensor.lumiere_bureau_etat
   - sensor.lumiere_salle_de_bain_etat
   - sensor.lumiere_chambre_etat
-  - sensor.eclairage_appart_2_quotidien_kwh_um
-  - sensor.eclairage_salon_5_quotidien_kwh_um
-  - sensor.eclairage_cuisine_1_quotidien_kwh_um
-  - sensor.eclairage_bureau_5_quotidien_kwh_um
-  - sensor.eclairage_sdb_2_quotidien_kwh_um
-  - sensor.eclairage_chambre_4_quotidien_kwh_um
-  - sensor.eclairage_total_unit_quotidien_kwh_um
-  - sensor.eclairage_appart_2_mensuel_kwh_um
-  - sensor.eclairage_salon_5_mensuel_kwh_um
-  - sensor.eclairage_cuisine_1_mensuel_kwh_um
-  - sensor.eclairage_bureau_5_mensuel_kwh_um
-  - sensor.eclairage_sdb_2_mensuel_kwh_um
-  - sensor.eclairage_chambre_4_mensuel_kwh_um
-  - sensor.eclairage_total_unit_mensuel_kwh_um
+  - sensor.eclairage_appart_2_quotidien_um
+  - sensor.eclairage_salon_5_quotidien_um
+  - sensor.eclairage_cuisine_1_quotidien_um
+  - sensor.eclairage_bureau_5_quotidien_um
+  - sensor.eclairage_sdb_2_quotidien_um
+  - sensor.eclairage_chambre_4_quotidien_um
+  - sensor.eclairage_total_unit_quotidien_um
+  - sensor.eclairage_appart_2_mensuel_um
+  - sensor.eclairage_salon_5_mensuel_um
+  - sensor.eclairage_cuisine_1_mensuel_um
+  - sensor.eclairage_bureau_5_mensuel_um
+  - sensor.eclairage_sdb_2_mensuel_um
+  - sensor.eclairage_chambre_4_mensuel_um
+  - sensor.eclairage_total_unit_mensuel_um
 triggers_update:
   - sensor.lumiere_appartement_etat
   - sensor.lumiere_salon_etat
@@ -112,20 +112,20 @@ triggers_update:
   - sensor.lumiere_bureau_etat
   - sensor.lumiere_salle_de_bain_etat
   - sensor.lumiere_chambre_etat
-  - sensor.eclairage_appart_2_quotidien_kwh_um
-  - sensor.eclairage_salon_5_quotidien_kwh_um
-  - sensor.eclairage_cuisine_1_quotidien_kwh_um
-  - sensor.eclairage_bureau_5_quotidien_kwh_um
-  - sensor.eclairage_sdb_2_quotidien_kwh_um
-  - sensor.eclairage_chambre_4_quotidien_kwh_um
-  - sensor.eclairage_total_unit_quotidien_kwh_um
-  - sensor.eclairage_appart_2_mensuel_kwh_um
-  - sensor.eclairage_salon_5_mensuel_kwh_um
-  - sensor.eclairage_cuisine_1_mensuel_kwh_um
-  - sensor.eclairage_bureau_5_mensuel_kwh_um
-  - sensor.eclairage_sdb_2_mensuel_kwh_um
-  - sensor.eclairage_chambre_4_mensuel_kwh_um
-  - sensor.eclairage_total_unit_mensuel_kwh_um
+  - sensor.eclairage_appart_2_quotidien_um
+  - sensor.eclairage_salon_5_quotidien_um
+  - sensor.eclairage_cuisine_1_quotidien_um
+  - sensor.eclairage_bureau_5_quotidien_um
+  - sensor.eclairage_sdb_2_quotidien_um
+  - sensor.eclairage_chambre_4_quotidien_um
+  - sensor.eclairage_total_unit_quotidien_um
+  - sensor.eclairage_appart_2_mensuel_um
+  - sensor.eclairage_salon_5_mensuel_um
+  - sensor.eclairage_cuisine_1_mensuel_um
+  - sensor.eclairage_bureau_5_mensuel_um
+  - sensor.eclairage_sdb_2_mensuel_um
+  - sensor.eclairage_chambre_4_mensuel_um
+  - sensor.eclairage_total_unit_mensuel_um
 styles:
   card:
     - aspect-ratio: 1/1
@@ -197,13 +197,13 @@ custom_fields:
         return val.toFixed(2) + ' <span style="font-size: 5px;">kWh</span>';
       }
       const sensors = [
-        'sensor.eclairage_appart_2_quotidien_kwh_um',
-        'sensor.eclairage_salon_5_quotidien_kwh_um',
-        'sensor.eclairage_cuisine_1_quotidien_kwh_um',
-        'sensor.eclairage_bureau_5_quotidien_kwh_um',
-        'sensor.eclairage_sdb_2_quotidien_kwh_um',
-        'sensor.eclairage_chambre_4_quotidien_kwh_um',
-        'sensor.eclairage_total_unit_quotidien_kwh_um'
+        'sensor.eclairage_appart_2_quotidien_um',
+        'sensor.eclairage_salon_5_quotidien_um',
+        'sensor.eclairage_cuisine_1_quotidien_um',
+        'sensor.eclairage_bureau_5_quotidien_um',
+        'sensor.eclairage_sdb_2_quotidien_um',
+        'sensor.eclairage_chambre_4_quotidien_um',
+        'sensor.eclairage_total_unit_quotidien_um'
       ];
       return sensors.map((s, i) => {
         const isLast = i === sensors.length - 1;
@@ -221,13 +221,13 @@ custom_fields:
         return val.toFixed(2) + ' <span style="font-size: 5px;">kWh</span>';
       }
       const sensors = [
-        'sensor.eclairage_appart_2_mensuel_kwh_um',
-        'sensor.eclairage_salon_5_mensuel_kwh_um',
-        'sensor.eclairage_cuisine_1_mensuel_kwh_um',
-        'sensor.eclairage_bureau_5_mensuel_kwh_um',
-        'sensor.eclairage_sdb_2_mensuel_kwh_um',
-        'sensor.eclairage_chambre_4_mensuel_kwh_um',
-        'sensor.eclairage_total_unit_mensuel_kwh_um'
+        'sensor.eclairage_appart_2_mensuel_um',
+        'sensor.eclairage_salon_5_mensuel_um',
+        'sensor.eclairage_cuisine_1_mensuel_um',
+        'sensor.eclairage_bureau_5_mensuel_um',
+        'sensor.eclairage_sdb_2_mensuel_um',
+        'sensor.eclairage_chambre_4_mensuel_um',
+        'sensor.eclairage_total_unit_mensuel_um'
       ];
       return sensors.map((s, i) => {
         const isLast = i === sensors.length - 1;
@@ -275,33 +275,33 @@ Bureau et Chambre passent `isEcoSensitive = true` : le mode Éco ne colore pas l
 | `sensor.lumiere_salle_de_bain_etat` | SDB | non |
 | `sensor.lumiere_chambre_etat` | Chambre | **oui** |
 
-### Utility Meters quotidiens — `sensor.eclairage_*_quotidien_kwh_um`
+### Utility Meters quotidiens — `sensor.eclairage_*_quotidien_um`
 
 > Définis dans `utility_meter/P3_eclairage/P3_UM_AMHQ_*.yaml`
 
 | Entité | Zone / Pièce |
 |--------|-------------|
-| `sensor.eclairage_appart_2_quotidien_kwh_um` | Entrée + couloir (2 lampes) |
-| `sensor.eclairage_salon_5_quotidien_kwh_um` | Salon (5 lampes) |
-| `sensor.eclairage_cuisine_1_quotidien_kwh_um` | Cuisine (1 lampe) |
-| `sensor.eclairage_bureau_5_quotidien_kwh_um` | Bureau (5 lampes) |
-| `sensor.eclairage_sdb_2_quotidien_kwh_um` | SDB (2 lampes) |
-| `sensor.eclairage_chambre_4_quotidien_kwh_um` | Chambre (4 lampes) |
-| `sensor.eclairage_total_unit_quotidien_kwh_um` | **TOTAL appartement** |
+| `sensor.eclairage_appart_2_quotidien_um` | Entrée + couloir (2 lampes) |
+| `sensor.eclairage_salon_5_quotidien_um` | Salon (5 lampes) |
+| `sensor.eclairage_cuisine_1_quotidien_um` | Cuisine (1 lampe) |
+| `sensor.eclairage_bureau_5_quotidien_um` | Bureau (5 lampes) |
+| `sensor.eclairage_sdb_2_quotidien_um` | SDB (2 lampes) |
+| `sensor.eclairage_chambre_4_quotidien_um` | Chambre (4 lampes) |
+| `sensor.eclairage_total_unit_quotidien_um` | **TOTAL appartement** |
 
-### Utility Meters mensuels — `sensor.eclairage_*_mensuel_kwh_um`
+### Utility Meters mensuels — `sensor.eclairage_*_mensuel_um`
 
 > Mêmes zones, cycle mensuel — `utility_meter/P3_eclairage/P3_UM_AMHQ_*.yaml`
 
 | Entité | Zone / Pièce |
 |--------|-------------|
-| `sensor.eclairage_appart_2_mensuel_kwh_um` | Entrée + couloir |
-| `sensor.eclairage_salon_5_mensuel_kwh_um` | Salon |
-| `sensor.eclairage_cuisine_1_mensuel_kwh_um` | Cuisine |
-| `sensor.eclairage_bureau_5_mensuel_kwh_um` | Bureau |
-| `sensor.eclairage_sdb_2_mensuel_kwh_um` | SDB |
-| `sensor.eclairage_chambre_4_mensuel_kwh_um` | Chambre |
-| `sensor.eclairage_total_unit_mensuel_kwh_um` | **TOTAL appartement** |
+| `sensor.eclairage_appart_2_mensuel_um` | Entrée + couloir |
+| `sensor.eclairage_salon_5_mensuel_um` | Salon |
+| `sensor.eclairage_cuisine_1_mensuel_um` | Cuisine |
+| `sensor.eclairage_bureau_5_mensuel_um` | Bureau |
+| `sensor.eclairage_sdb_2_mensuel_um` | SDB |
+| `sensor.eclairage_chambre_4_mensuel_um` | Chambre |
+| `sensor.eclairage_total_unit_mensuel_um` | **TOTAL appartement** |
 
 ---
 
@@ -323,8 +323,8 @@ Comportement voulu — `isEcoSensitive = true` maintient la couleur blanche en m
 | Élément | Fichier source | Statut |
 |---------|---------------|--------|
 | `sensor.lumiere_*_etat` | `templates/P3_eclairage/ui_dashboard/etats_status.yaml` | ✅ Essentiel |
-| `sensor.eclairage_*_quotidien_kwh_um` | `utility_meter/P3_eclairage/P3_UM_AMHQ_*.yaml` | ✅ Essentiel |
-| `sensor.eclairage_*_mensuel_kwh_um` | `utility_meter/P3_eclairage/P3_UM_AMHQ_*.yaml` | ✅ Essentiel |
+| `sensor.eclairage_*_quotidien_um` | `utility_meter/P3_eclairage/P3_UM_AMHQ_*.yaml` | ✅ Essentiel |
+| `sensor.eclairage_*_mensuel_um` | `utility_meter/P3_eclairage/P3_UM_AMHQ_*.yaml` | ✅ Essentiel |
 | `custom:button-card` | HACS | ✅ Essentiel |
 
 ---

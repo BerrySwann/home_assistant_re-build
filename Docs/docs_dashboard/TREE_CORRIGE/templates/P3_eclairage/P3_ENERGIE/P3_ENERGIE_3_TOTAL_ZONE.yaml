@@ -1,0 +1,55 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. TEMPLATES : ÉNERGIE TOTALE ÉCLAIRAGE — PAR ZONES (kWh)           │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteur template calculant l'énergie cumulée totale (kWh) de l'éclairage
+# en sommant les 7 zones physiques (issues de P3_ENERGIE_2_ZONE.yaml).
+# Sert de source directe pour P3_UM_AMHQ_3_TOTAL.yaml (eclairage_total_group_*_um).
+# Remplace le Riemann sensor.eclairage_total_group_energie_totale_kwh (supprimé).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : somme des 7 sensors eclairage_*_energie (zones physiques uniquement).
+# - NE PAS inclure eclairage_appart_2/3 (transversaux — double-comptage).
+# - Résultat théoriquement identique à eclairage_total_unit_energie (P3_ENERGIE_1).
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL    | CAPTEUR BRUT (source)                      | CE FICHIER (unique_id)           | AVAL                            |
+# |:------------|:-------------------------------------------|:---------------------------------|:--------------------------------|
+# | [calculé]   | sensor.eclairage_*_energie (7 zones)       | eclairage_total_group_energie    | P3_UM_AMHQ_3_TOTAL.yaml → L2C3 |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Valeur cumulative croissante (total_increasing) — source UM uniquement.
+# - eclairage_appart_2 et eclairage_appart_3 EXCLUS intentionnellement
+#   (zones transversales = sous-ensemble des 7 pièces — inclure = double-comptage).
+# - Doit être cohérent avec eclairage_total_unit_energie (P3_ENERGIE_1).
+#   En cas d'écart, vérifier qu'aucune pièce n'est absente ou doublée.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (via P3_UM_AMHQ_3_TOTAL → eclairage_total_group_*_um).
+
+- sensor:
+
+    # --- eclairage_total_group_energie ---
+    - name: "Eclairage Total Group Energie"
+      unique_id: eclairage_total_group_energie
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: >
+        {{
+          states('sensor.eclairage_entree_1_energie') | float(0) +
+          states('sensor.eclairage_salon_5_energie') | float(0) +
+          states('sensor.eclairage_cuisine_1_energie') | float(0) +
+          states('sensor.eclairage_couloir_1_energie') | float(0) +
+          states('sensor.eclairage_bureau_5_energie') | float(0) +
+          states('sensor.eclairage_sdb_2_energie') | float(0) +
+          states('sensor.eclairage_chambre_4_energie') | float(0)
+        }}
+
+# annotations_log:
+# - [Création] Nouveau fichier — remplace Riemann P3_kWh_3_TOTAL.yaml (désactivé).
+# - [Logique] Source = zones physiques P3_ENERGIE_2_ZONE (pas les transversaux).
+# - [Piège] eclairage_appart_2/3 exclus — double-comptage si inclus.
+# - Source UM : sensor.eclairage_total_group_energie → P3_UM_AMHQ_3_TOTAL.yaml.

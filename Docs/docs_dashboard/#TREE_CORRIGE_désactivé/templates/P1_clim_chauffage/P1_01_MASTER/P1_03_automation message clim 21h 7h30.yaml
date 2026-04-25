@@ -1,0 +1,144 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ TEMPLATES : SÉRIE 03_08. CLIM — MESSAGE PERSONNALISÉ (21h00 <-> 7h30)    │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Template sensor générant le message texte envoyé via notification mobile lors des
+# changements d'état de la clim en plage nuit (21h00 → 7h30). Logique simplifiée par
+# rapport à la version jour : en présence, toutes les clims ciblent la température
+# de nuit uniforme. En absence, logique éco-heat identique au mode jour.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - sensor.th_balcon_nord_temperature_trend (increasing / decreasing / stable)
+# - sensor.groupe → groupe_1 (absent) / autre (présence nuit)
+# - sensor.presence → texte de présence en en-tête
+# - sensor.mode_ete_hiver → heat / cool / fan_only
+# - sensor.temperature_confort_nuit → T° cible nuit (toutes pièces)
+# - sensor.temperature_cible / sensor.temperature_eco_hiver_corrige
+# - switch.clim_*_nous → vérifie alimentation de chaque unité
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                                     |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------------|
+# | [calculé]      | sensor.clim_*_temperature_cible / climate.*        | message_clim_21h_7h30_*                            | L1C3 Commandes Clim (notifications nuit) |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce fichier produit : sensor.message_clim_personnalise_21h00_7h30
+# - Disponibilité conditionnée à la présence des 4 capteurs réseau/T°.
+# - Ne pas confondre avec le fichier jour (7h30 → 21h00) qui gère 4 groupes distincts.
+# - Nuit : pas de logique groupe_2/3/4 individualisée — température nuit uniforme.
+# - Labels pré-calculés s_*/b_*/c_* AVANT le bloc groupe → [OFF] si prise coupée.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Déclenché par automation L1C3 (notification clim 21h-7h30)
+# - Indirect : remonte dans la notification mobile via automation E_notif_temp_nuit.yaml
+
+- sensor:
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : GÉNÉRATEUR DE MESSAGE NUIT (LOGIQUE SCÉNARIOS)        │
+# └───────────────────────────────────────────────────────────────────┘
+
+# --- message_clim_personnalise_21h00_7h30 ---
+    - name: "Message Clim personnalisé 21h00 <-> 7h30"
+      unique_id: message_clim_personnalise_21h00_7h30
+      state: >
+        {%- if states('sensor.mamour_network_type') in ['unknown', 'unavailable'] or
+              states('sensor.eric_network_type') in ['unknown', 'unavailable'] or
+              states('sensor.th_balcon_nord_temperature') in ['unknown', 'unavailable'] or
+              states('sensor.groupe') in ['unknown', 'unavailable'] or
+              states('sensor.presence') in ['unknown', 'unavailable'] %}
+          En attente des capteurs...
+        {%- else %}
+          {%- set tendance     = states('sensor.th_balcon_nord_temperature_trend') %}
+          {%- set temp_ext     = states('sensor.th_balcon_nord_temperature') | float(0) %}
+          {%- set temp_cible   = states('sensor.temperature_cible') | float(0) %}
+          {%- set temp_eco     = states('sensor.temperature_eco_hiver_corrige') | float(17) %}
+          {%- set temp_nuit    = states('sensor.temperature_confort_nuit') | float(18) %}
+          {%- set mode         = states('sensor.mode_ete_hiver') %}
+          {%- set groupe       = states('sensor.groupe') %}
+          {%- set presence     = states('sensor.presence') %}
+          {%- set prise_salon   = is_state('switch.clim_salon_nous',   'on') %}
+          {%- set prise_bureau  = is_state('switch.clim_bureau_nous',  'on') %}
+          {%- set prise_chambre = is_state('switch.clim_chambre_nous', 'on') %}
+          {%- set clims_alimentees = prise_salon or prise_bureau or prise_chambre %}
+
+          {#- Pré-calcul labels par prise — [OFF] si prise coupée -#}
+          {%- set s_eco    = "[OFF]" if not prise_salon   else temp_eco  ~ "°" %}
+          {%- set s_cible  = "[OFF]" if not prise_salon   else temp_cible ~ "°" %}
+          {%- set s_nuit   = "[OFF]" if not prise_salon   else temp_nuit ~ "°" %}
+          {%- set b_eco    = "[OFF]" if not prise_bureau  else temp_eco  ~ "°" %}
+          {%- set b_cible  = "[OFF]" if not prise_bureau  else temp_cible ~ "°" %}
+          {%- set b_nuit   = "[OFF]" if not prise_bureau  else temp_nuit ~ "°" %}
+          {%- set c_eco    = "[OFF]" if not prise_chambre else temp_eco  ~ "°" %}
+          {%- set c_cible  = "[OFF]" if not prise_chambre else temp_cible ~ "°" %}
+          {%- set c_nuit   = "[OFF]" if not prise_chambre else temp_nuit ~ "°" %}
+          {%- set s_fan    = "[OFF]" if not prise_salon   else "[FAN]" %}
+          {%- set b_fan    = "[OFF]" if not prise_bureau  else "[FAN]" %}
+          {%- set c_fan    = "[OFF]" if not prise_chambre else "[FAN]" %}
+
+          {# --- PARTIE 1 : TENDANCE --- #}
+          {%- if tendance == 'increasing' %}
+            {%- set message_tendance = "T°Ext Up -> " ~ temp_ext ~ "°" %}
+          {%- elif tendance == 'decreasing' %}
+            {%- set message_tendance = "T°Ext Down -> " ~ temp_ext ~ "°" %}
+          {%- else %}
+            {%- set message_tendance = "T°Ext stable -> " ~ temp_ext ~ "°" %}
+          {%- endif %}
+
+          {# --- PARTIE 2 : HEADER --- EN-TÊTE --- #}
+          {%- set message_header = presence %}
+
+          {# --- PARTIE 3 : MODE --- SCÉNARIO STANDARD --- #}
+          {%- if not clims_alimentees %}
+            {%- set message_mode = "[UNITS OFF]" %}
+          {%- else %}
+
+            {%- if 'groupe_1' in groupe %}
+              {# --- CAS ABSENT --- #}
+              {%- if mode == 'heat' %}
+                {%- set message_mode = "[ECO HEAT]\nSalon " ~ s_eco ~ "\nBureau " ~ b_eco ~ "\nChambre " ~ c_eco %}
+              {%- elif mode == 'cool' %}
+                {%- set message_mode = "[COOL]\nSalon " ~ s_cible ~ "\nBureau " ~ b_cible ~ "\nChambre " ~ c_cible %}
+              {%- elif mode == 'fan_only' %}
+                {%- set message_mode = "[FAN ONLY]\nSalon " ~ s_fan ~ "\nBureau " ~ b_fan ~ "\nChambre " ~ c_fan %}
+              {%- else %}
+                {%- set message_mode = "Mode clim inconnu" %}
+              {%- endif %}
+
+            {%- else %}
+              {# --- CAS PRÉSENCE NUIT (Temp Nuit Partout) --- #}
+              {%- if mode == 'heat' %}
+                {%- set message_mode = "[HEAT]\nSalon " ~ s_nuit ~ "\nBureau " ~ b_nuit ~ "\nChambre " ~ c_nuit %}
+              {%- elif mode == 'cool' %}
+                {%- set message_mode = "[COOL]\nSalon " ~ s_nuit ~ "\nBureau " ~ b_nuit ~ "\nChambre " ~ c_nuit %}
+              {%- elif mode == 'fan_only' %}
+                {%- set message_mode = "[FAN ONLY]\nSalon " ~ s_fan ~ "\nBureau " ~ b_fan ~ "\nChambre " ~ c_fan %}
+              {%- else %}
+                {%- set message_mode = "Mode clim inconnu" %}
+              {%- endif %}
+            {%- endif %}
+          {%- endif %}
+
+          {# --- ASSEMBLAGE FINAL --- #}
+          {{ message_header }}
+          {{ message_tendance }}
+          {{ message_mode }}
+        {%- endif %}
+
+      availability: >
+        {{ states('sensor.mamour_network_type') not in ['unknown', 'unavailable'] and
+           states('sensor.eric_network_type') not in ['unknown', 'unavailable'] and
+           states('sensor.th_balcon_nord_temperature') not in ['unknown', 'unavailable'] and
+           states('sensor.groupe') not in ['unknown', 'unavailable'] and
+           states('sensor.presence') not in ['unknown', 'unavailable'] }}
+
+# annotations_log:
+# [AJOUT]  12 labels pré-calculés s_*/b_*/c_*/s_fan/b_fan/c_fan avant bloc groupe
+# [MODIF]  groupe_1 heat/cool : "Les 3 Clim à X°" → 3 lignes individuelles avec [OFF] possible
+# [MODIF]  présence nuit heat/cool : "Salon/Bureau/Chambre X°" → labels s_nuit/b_nuit/c_nuit
+# [MODIF]  fan_only : "[FAN ONLY]" fixe → [FAN] ou [OFF] par prise
+# [MODIF]  [éCO HEAT] → [ECO HEAT] (ASCII strict montre)
+# [MODIF]  ↗ ↘ → -> (ASCII strict montre)
+# [CORR]   indentation sensor block : 2 espaces → 4 espaces (alignement correct)
