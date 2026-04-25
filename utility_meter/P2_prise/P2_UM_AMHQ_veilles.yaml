@@ -7,52 +7,52 @@
 # 4 cycles temporels : Annuel, Mensuel, Hebdomadaire, Quotidien (AMHQ).
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Source unique : 'sensor.all_standby_energie_totale_kwh' (Intégration Riemann).
-#
+# - Source unique : sensor.all_standby_energy (Riemann — exception maintenue).
+# - all_standby est un sensor template (somme de puissances) → pas de firmware _energy natif.
+#   Riemann est le seul chemin possible pour ce cas.
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
-# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
-# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.*_veille_kwh                                | p2_veille_*_{annuel|mensuel|hebdo|quotidien}       | P2_AVG_AMHQ_veilles.yaml → L2C1    |
+# | MATÉRIEL   | CAPTEUR BRUT (source)                         | CE FICHIER (unique_id)                    | AVAL                          |
+# |:-----------|:----------------------------------------------|:------------------------------------------|:------------------------------|
+# | [calculé]  | sensor.all_standby_energy         | all_standby_*_um                          | P2_AVG_AMHQ_veilles.yaml → L2C1 |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# Les cycles se réinitialisent automatiquement à minuit (ou au changement
-# de semaine/mois/année). La valeur précédente est stockée dans 'last_period'.
+# - Riemann conservé intentionnellement : sensor.all_standby est un template, pas un device physique.
+# - Suffixe _um (sans _kwh_) : convention uniforme depuis refactoring 2026-04-25.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale.
 
-# --- all_standby_annuel_kwh_um ---
-all_standby_annuel_kwh_um:
-  source: sensor.all_standby_energie_totale_kwh
-  name: "All Standby Annuel kWh UM"
-  unique_id: all_standby_annuel_kwh_um
+# --- all_standby_annuel_um ---
+all_standby_annuel_um:
+  source: sensor.all_standby_energy
+  name: "All Standby Annuel UM"
+  unique_id: all_standby_annuel_um
   cycle: yearly
 
-# --- all_standby_mensuel_kwh_um ---
-all_standby_mensuel_kwh_um:
-  source: sensor.all_standby_energie_totale_kwh
-  name: "All Standby Mensuel kWh UM"
-  unique_id: all_standby_mensuel_kwh_um
+# --- all_standby_mensuel_um ---
+all_standby_mensuel_um:
+  source: sensor.all_standby_energy
+  name: "All Standby Mensuel UM"
+  unique_id: all_standby_mensuel_um
   cycle: monthly
 
-# --- all_standby_hebdomadaire_kwh_um ---
-all_standby_hebdomadaire_kwh_um:
-  source: sensor.all_standby_energie_totale_kwh
-  name: "All Standby Hebdomadaire kWh UM"
-  unique_id: all_standby_hebdomadaire_kwh_um
+# --- all_standby_hebdomadaire_um ---
+all_standby_hebdomadaire_um:
+  source: sensor.all_standby_energy
+  name: "All Standby Hebdomadaire UM"
+  unique_id: all_standby_hebdomadaire_um
   cycle: weekly
 
-# --- all_standby_quotidien_kwh_um ---
-all_standby_quotidien_kwh_um:
-  source: sensor.all_standby_energie_totale_kwh
-  name: "All Standby Quotidien kWh UM"
-  unique_id: all_standby_quotidien_kwh_um
+# --- all_standby_quotidien_um ---
+all_standby_quotidien_um:
+  source: sensor.all_standby_energy
+  name: "All Standby Quotidien UM"
+  unique_id: all_standby_quotidien_um
   cycle: daily
 
 # annotations_log:
-# - [slug] MOD L19: # --- all_standby --- → # --- all_standby_annuel_kwh_um ---
-# - [slug] INS avant L26: # --- all_standby_mensuel_kwh_um ---
-# - [slug] INS avant L33: # --- all_standby_hebdomadaire_kwh_um ---
-# - [slug] INS avant L40: # --- all_standby_quotidien_kwh_um ---
+# - [2026-04-25] Refactoring naming : suppression de _kwh_ dans tous les keys/unique_id/names (4 entrées).
+# - [2026-04-25] Convention unifiée : suffixe _um sans marqueur Riemann (remplace _kwh_um).
+# - [2026-04-25] Source IN

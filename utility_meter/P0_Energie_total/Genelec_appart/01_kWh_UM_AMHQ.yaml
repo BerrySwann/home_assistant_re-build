@@ -1,72 +1,62 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 0. UTILITY METER : GENELEC APPART — ÉNERGIE TOTAL AMHQ (kWh)        │
+# │ PÔLE 2. UTILITY METER AMHQ : MINI PC (BUREAU) — ÉNERGIE Wh               │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# 4 compteurs Utility Meter (Quotidien, Hebdomadaire, Mensuel, Annuel) mesurant
-# la consommation totale de l'appartement en kWh, sans distinction HP/HC.
-# Pour le split tarifaire HP/HC, voir : 03_UM_genelec_appart_HPHC_AMHQ.yaml
+# Compteurs périodiques (Annuel / Mensuel / Hebdo / Quotidien) pour le Mini PC.
+# Unité : Wh (faible consommation — précision Wh préférable à kWh).
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Source : sensor.genelec_appart_totale_kwh (index kWh cumulatif Ecojoko).
-# - Chaque UM accumule les incréments de la source sur sa période, puis remet
-#   à zéro automatiquement (minuit / lundi / 1er du mois / 1er janvier).
-#
+# - Source : sensor.prise_mini_pc_ikea_energy (énergie native IKEA Z2M — Wh)
+# - Remise à zéro : Quotidien = minuit / Hebdo = lundi / Mensuel = 1er / Annuel = 1er jan
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
-# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
-# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.genelec_appart_kwh_cumulative               | genelec_appart_*_{annuel|mensuel|hebdo|quotidien}  | 01_genelec_appart_AMHQ_cost.yaml → L2C1 |
+# | MATÉRIEL    | CAPTEUR BRUT (source)             | CE FICHIER (unique_id)                       | AVAL                          |
+# |:------------|:----------------------------------|:---------------------------------------------|:------------------------------|
+# | IKEA (Z2M)  | sensor.prise_mini_pc_ikea_energy  | prise_mini_pc_ikea_*_{annuel|...|quotidien}_wh_um | P2_AVG_AMHQ_mini_pc.yaml → L4C2 |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Ces capteurs mesurent du kWh (énergie), PAS des euros (coût).
-# - Si créés en cours de journée/période, ils démarrent à 0 et n'accumulent
-#   que depuis leur date de création — pas de back-fill historique.
-# - Ne pas utiliser comme source d'un utility_meter (déjà des UM).
+# - Unité = Wh → P2_AVG_AMHQ_mini_pc.yaml utilise conso / h (pas × 1000).
+# - P2_Wh_mini_pc.yaml (Riemann) → obsolète, à supprimer de TREE_CORRIGE.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L2C1 Conso Énergie Générale : source des templates AVG Watts (03_AVG_genelec_appart.yaml)
-# - Page Énergie ApexCharts     : onglets Journalier / Hebdomadaire / Mensuel (kWh total)
+# - Vignette L4C2 Mini PC (pop-up #conso via AVG → streamline-card)
 
-# ─── QUOTIDIEN ────────────────────────────────────────────────────────────────
+# ┌───────────────────────────────────┐
+# │ 7. BUREAU                         │
+# └───────────────────────────────────┘
 
-# --- genelec_appart_quotidien_kwh_um ---
-genelec_appart_quotidien_um:
-  source: sensor.genelec_appart_totale_kwh
-  name: "Genelec Appart Quotidien kWh UM"
-  unique_id: genelec_appart_quotidien_kwh_um
-  cycle: daily
-
-# ─── HEBDOMADAIRE ────────────────────────────────────────────────────────────
-
-# --- genelec_appart_hebdomadaire_kwh_um ---
-genelec_appart_hebdomadaire_kwh_um:
-  source: sensor.genelec_appart_totale_kwh
-  name: "Genelec Appart Hebdomadaire kWh UM"
-  unique_id: genelec_appart_hebdomadaire_kwh_um
-  cycle: weekly
-
-# ─── MENSUEL ─────────────────────────────────────────────────────────────────
-
-# --- genelec_appart_mensuel_kwh_um ---
-genelec_appart_mensuel_kwh_um:
-  source: sensor.genelec_appart_totale_kwh
-  name: "Genelec Appart Mensuel kWh UM"
-  unique_id: genelec_appart_mensuel_kwh_um
-  cycle: monthly
-
-# ─── ANNUEL ──────────────────────────────────────────────────────────────────
-
-# --- genelec_appart_annuel_kwh_um ---
-genelec_appart_annuel_khw_um:
-  source: sensor.genelec_appart_totale_kwh
-  name: "Genelec Appart Annuel kWh UM"
-  unique_id: genelec_appart_annuel_kwh_um
+# --- prise_mini_pc_ikea_annuel_wh_um ---
+prise_mini_pc_ikea_annuel_wh_um:
+  source: sensor.prise_mini_pc_ikea_energy
+  name: "Prise Mini PC IKEA Annuel Wh UM"
+  unique_id: prise_mini_pc_ikea_annuel_wh_um
   cycle: yearly
 
+# --- prise_mini_pc_ikea_mensuel_wh_um ---
+prise_mini_pc_ikea_mensuel_wh_um:
+  source: sensor.prise_mini_pc_ikea_energy
+  name: "Prise Mini PC IKEA Mensuel Wh UM"
+  unique_id: prise_mini_pc_ikea_mensuel_wh_um
+  cycle: monthly
+
+# --- prise_mini_pc_ikea_hebdomadaire_wh_um ---
+prise_mini_pc_ikea_hebdomadaire_wh_um:
+  source: sensor.prise_mini_pc_ikea_energy
+  name: "Prise Mini PC IKEA Hebdomadaire Wh UM"
+  unique_id: prise_mini_pc_ikea_hebdomadaire_wh_um
+  cycle: weekly
+
+# --- prise_mini_pc_ikea_quotidien_wh_um ---
+prise_mini_pc_ikea_quotidien_wh_um:
+  source: sensor.prise_mini_pc_ikea_energy
+  name: "Prise Mini PC IKEA Quotidien Wh UM"
+  unique_id: prise_mini_pc_ikea_quotidien_wh_um
+  cycle: daily
+
 # annotations_log:
-# - [AJOUT] genelec_appart_quotidien_um (cycle daily manquant) — requis par 03_AVG_genelec_appart.yaml
-# - [L29,37,45,53] name: "Réseau *" → "Genelec Appart * UM" (conformité convention)
-# - [L27,34,41] source inchangée : sensor.genelec_appart_totale_kwh
-# - [SUPPRIMÉ] ecojoko_hp/hc_reseau_*_um (source Ecojoko remplacée)
+# - MIGRATION Riemann → Direct : source *_energie_totale_wh → sensor.prise_mini_pc_ikea_energy
+# - Suppression marqueur _kwh_ : convention Riemann obsolète — UM direct = unité brute
+# - Unité conservée en Wh (faible conso Mini PC — précision requise)
+# - P2_Wh_mini_pc.yaml (Riemann) → obsolète, à supprimer de TREE_CORRIGE
