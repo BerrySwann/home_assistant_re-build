@@ -9,8 +9,8 @@
 # P2_AVG_AMHQ_prises.yaml, dédié exclusivement à la consommation fantôme.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Formule : (Consommation_kWh_UM × 1000) ÷ nombre_heures_écoulées_dans_le_cycle
-# - Source : sensor.all_standby_[cycle]_kwh_um (P2_UM_AMHQ_veilles.yaml)
+# - Formule : (Consommation_UM × 1000) ÷ nombre_heures_écoulées_dans_le_cycle
+# - Source : sensor.all_standby_[cycle]_um (P2_UM_AMHQ_veilles.yaml)
 # - Quotidien   : h = now().hour + (now().minute / 60)
 # - Hebdomadaire: hh = (now().weekday() * 24) + h
 # - Mensuel     : hm = ((now().day - 1) * 24) + h
@@ -25,7 +25,7 @@
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - La division par zéro est évitée par la condition (if h > 0.1 else 0).
-# - Ce fichier complète P2_kWh_veilles.yaml (intégration) et
+# - Ce fichier complète P2_veilles.yaml (intégration) et
 #   P2_UM_AMHQ_veilles.yaml (utility_meter) dans la chaîne de dépendances.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
@@ -38,7 +38,7 @@
     unit_of_measurement: "W"
     device_class: power
     state: >
-      {% set conso = states('sensor.all_standby_quotidien_kwh_um') | float(0) %}
+      {% set conso = states('sensor.all_standby_quotidien_um') | float(0) %}
       {% set h = now().hour + (now().minute / 60) %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -48,7 +48,7 @@
     unit_of_measurement: "W"
     device_class: power
     state: >
-      {% set conso = states('sensor.all_standby_hebdomadaire_kwh_um') | float(0) %}
+      {% set conso = states('sensor.all_standby_hebdomadaire_um') | float(0) %}
       {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -58,7 +58,7 @@
     unit_of_measurement: "W"
     device_class: power
     state: >
-      {% set conso = states('sensor.all_standby_mensuel_kwh_um') | float(0) %}
+      {% set conso = states('sensor.all_standby_mensuel_um') | float(0) %}
       {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -68,11 +68,11 @@
     unit_of_measurement: "W"
     device_class: power
     state: >
-      {% set conso = states('sensor.all_standby_annuel_kwh_um') | float(0) %}
+      {% set conso = states('sensor.all_standby_annuel_um') | float(0) %}
       {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
 # annotations_log:
 # - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md.
-# - [L34] Source UM veilles : all_standby_[cycle]_kwh_um (sans préfixe prise_).
+# - [L34] Source UM veilles : all_standby_[cycle]_um (sans préfixe prise_).
 # - [L2] Titre box mis à jour : convention PÔLE N. TEMPLATE ... style.

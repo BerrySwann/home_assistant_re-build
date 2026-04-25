@@ -37,23 +37,23 @@
     - name: "Linky Jour 0"
       unique_id: linky_jour_0
       state: >-
-        {{ states('sensor.genelec_appart_quotidien_kwh_um') | float(0) | round(1) }}  {# "[modif] : ecojoko_hp + hc → UM quotidien total" #}
+        {{ states('sensor.genelec_appart_quotidien_um') | float(0) | round(1) }}  {# "[modif] : ecojoko_hp + hc → UM quotidien total" #}
       unit_of_measurement: kWh
       icon: mdi:flash-outline
       attributes:
         jour: "Aujourd'hui"
-        hp_kwh: >-
+        hp: >-
           {{ states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) | round(2) }}   {# "[modif] : split HP natif UM tariff" #}
-        hc_kwh: >-
+        hc: >-
           {{ states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) | round(2) }}   {# "[modif] : split HC natif UM tariff" #}
-        total_kwh: >-
-          {{ states('sensor.genelec_appart_quotidien_kwh_um') | float(0) | round(1) }}            {# "[modif]" #}
+        total: >-
+          {{ states('sensor.genelec_appart_quotidien_um') | float(0) | round(1) }}            {# "[modif]" #}
         cout: >-
-          {% set hp_kwh = states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) %}
-          {% set hc_kwh = states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) %}
+          {% set hp = states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) %}
+          {% set hc = states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) %}
           {% set hp_trf = states('sensor.edf_tempo_price_blue_hp') | float(0) %}
           {% set hc_trf = states('sensor.edf_tempo_price_blue_hc') | float(0) %}
-          {{ ((hp_kwh * hp_trf) + (hc_kwh * hc_trf)) | round(2) }}                           {# "[modif] : HP×0.1494 + HC×0.1232 (EDF Tempo Bleu)" #}
+          {{ ((hp * hp_trf) + (hc * hc_trf)) | round(2) }}                           {# "[modif] : HP×0.1494 + HC×0.1232 (EDF Tempo Bleu)" #}
 
     # ┌───────────────────────────────────┐
     # │ 2. HISTORIQUE (LINKY)             │
@@ -84,11 +84,11 @@
           {% else %}
             Inconnu
           {% endif %}
-        hp_kwh: >-
+        hp: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_1_HP') | float(0) / 1000) | round(1) }}
-        hc_kwh: >-
+        hc: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_1_HC') | float(0) / 1000) | round(1) }}
-        total_kwh: >-
+        total: >-
           {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_1_HP') | float(0) / 1000) +
               (state_attr('sensor.linky_25481620821301_consumption', 'day_1_HC') | float(0) / 1000)) | round(1) }}
         cout: >-
@@ -125,11 +125,11 @@
           {% else %}
             Inconnu
           {% endif %}
-        hp_kwh: >-
+        hp: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_2_HP') | float(0) / 1000) | round(1) }}
-        hc_kwh: >-
+        hc: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_2_HC') | float(0) / 1000) | round(1) }}
-        total_kwh: >-
+        total: >-
           {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_2_HP') | float(0) / 1000) +
               (state_attr('sensor.linky_25481620821301_consumption', 'day_2_HC') | float(0) / 1000)) | round(1) }}
         cout: >-
@@ -166,11 +166,11 @@
           {% else %}
             Inconnu
           {% endif %}
-        hp_kwh: >-
+        hp: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_3_HP') | float(0) / 1000) | round(1) }}
-        hc_kwh: >-
+        hc: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_3_HC') | float(0) / 1000) | round(1) }}
-        total_kwh: >-
+        total: >-
           {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_3_HP') | float(0) / 1000) +
               (state_attr('sensor.linky_25481620821301_consumption', 'day_3_HC') | float(0) / 1000)) | round(1) }}
         cout: >-
@@ -207,11 +207,11 @@
           {% else %}
             Inconnu
           {% endif %}
-        hp_kwh: >-
+        hp: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_4_HP') | float(0) / 1000) | round(1) }}
-        hc_kwh: >-
+        hc: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_4_HC') | float(0) / 1000) | round(1) }}
-        total_kwh: >-
+        total: >-
           {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_4_HP') | float(0) / 1000) +
               (state_attr('sensor.linky_25481620821301_consumption', 'day_4_HC') | float(0) / 1000)) | round(1) }}
         cout: >-
@@ -248,11 +248,11 @@
           {% else %}
             Inconnu
           {% endif %}
-        hp_kwh: >-
+        hp: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_5_HP') | float(0) / 1000) | round(1) }}
-        hc_kwh: >-
+        hc: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_5_HC') | float(0) / 1000) | round(1) }}
-        total_kwh: >-
+        total: >-
           {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_5_HP') | float(0) / 1000) +
               (state_attr('sensor.linky_25481620821301_consumption', 'day_5_HC') | float(0) / 1000)) | round(1) }}
         cout: >-
@@ -290,11 +290,11 @@
           {% else %}
             Inconnu
           {% endif %}
-        hp_kwh: >-
+        hp: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_6_HP') | float(0) / 1000) | round(1) }}
-        hc_kwh: >-
+        hc: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_6_HC') | float(0) / 1000) | round(1) }}
-        total_kwh: >-
+        total: >-
           {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_6_HP') | float(0) / 1000) +
               (state_attr('sensor.linky_25481620821301_consumption', 'day_6_HC') | float(0) / 1000)) | round(1) }}
         cout: >-
@@ -332,11 +332,11 @@
           {% else %}
             Inconnu
           {% endif %}
-        hp_kwh: >-
+        hp: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_7_HP') | float(0) / 1000) | round(1) }}
-        hc_kwh: >-
+        hc: >-
           {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_7_HC') | float(0) / 1000) | round(1) }}
-        total_kwh: >-
+        total: >-
           {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_7_HP') | float(0) / 1000) +
               (state_attr('sensor.linky_25481620821301_consumption', 'day_7_HC') | float(0) / 1000)) | round(1) }}
         cout: >-
@@ -350,8 +350,8 @@
 # annotations_log:
 # - [L12]  modif : source J0 → sensor.genelec_appart_quotidien_um (UM daily total)
 # - [L33]  modif : state J0 ecojoko_hp + ecojoko_hc → genelec_appart_quotidien_um
-# - [L38]  modif : hp_kwh → "N/A" (plus de split HP/HC disponible)
-# - [L39]  modif : hc_kwh → "N/A" (plus de split HP/HC disponible)
-# - [L41]  modif : total_kwh → genelec_appart_quotidien_um
+# - [L38]  modif : hp → "N/A" (plus de split HP/HC disponible)
+# - [L39]  modif : hc → "N/A" (plus de split HP/HC disponible)
+# - [L41]  modif : total → genelec_appart_quotidien_um
 # - [L43]  modif : cout J0 → UM quotidien × tarif HP (approché, surestimé ~10-15%)
 # - [J1-J7] inchangés (source MEData / Linky — HP/HC toujours disponibles via Enedis)

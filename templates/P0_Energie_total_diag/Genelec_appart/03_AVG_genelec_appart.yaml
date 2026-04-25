@@ -9,7 +9,7 @@
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Formule : (kWh_cumulé × 1000) / heures_écoulées_depuis_reset → W moyen.
-# - Source unique : sensor.genelec_appart_*_kwh_um (UM total — utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ_cost.yaml)
+# - Source unique : sensor.genelec_appart_*_um (UM total — utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ_cost.yaml)
 # - Quotidien : h = now().hour + (now().minute / 60)
 # - Hebdo     : hh = (now().weekday() * 24) + h
 # - Mensuel   : hm = ((now().day - 1) * 24) + h
@@ -25,7 +25,7 @@
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Source = UM total (utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ_cost.yaml).
-#   HP et HC ne sont pas distingués — source NODON via Riemann (genelec_appart_totale_kwh).
+#   HP et HC ne sont pas distingués — source NODON via Riemann (genelec_appart_totale).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale (puissance de croisière appartement).
@@ -37,7 +37,7 @@
     unit_of_measurement: "W"
     device_class: power
     state: >
-      {% set conso = states('sensor.genelec_appart_quotidien_kwh_um') | float(0) %}
+      {% set conso = states('sensor.genelec_appart_quotidien_um') | float(0) %}
       {% set h = now().hour + (now().minute / 60) %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -47,7 +47,7 @@
     unit_of_measurement: "W"
     device_class: power
     state: >
-      {% set conso = states('sensor.genelec_appart_hebdomadaire_kwh_um') | float(0) %}
+      {% set conso = states('sensor.genelec_appart_hebdomadaire_um') | float(0) %}
       {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -57,7 +57,7 @@
     unit_of_measurement: "W"
     device_class: power
     state: >
-      {% set conso = states('sensor.genelec_appart_mensuel_kwh_um') | float(0) %}
+      {% set conso = states('sensor.genelec_appart_mensuel_um') | float(0) %}
       {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -67,13 +67,13 @@
     unit_of_measurement: "W"
     device_class: power
     state: >
-      {% set conso = states('sensor.genelec_appart_annuel_kwh_um') | float(0) %}
+      {% set conso = states('sensor.genelec_appart_annuel_um') | float(0) %}
       {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
 # annotations_log:
 # - [Création] 4 AVG Watts AMHQ — formule kWh × 1000 / heures écoulées
-# - [modif] Sources ecojoko_reseau_*_um → genelec_appart_*_kwh_um (NODON via Riemann)
+# - [modif] Sources ecojoko_reseau_*_um → genelec_appart_*_um (NODON via Riemann)
 # - [modif] Header CALCUL/PIÈGES : refs Ecojoko → NODON/Genelec_appart
-# - [L35,43,52,62] sensor.genelec_appart_*_um → sensor.genelec_appart_*_kwh_um
+# - [L35,43,52,62] sensor.genelec_appart_*_um → sensor.genelec_appart_*_um
 #   (alignement sur les nouvelles clés yaml de 01_UM_AMHQ_cost.yaml)

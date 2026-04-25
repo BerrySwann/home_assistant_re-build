@@ -9,7 +9,7 @@
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Sources : utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml
-#   → sensor.*_{période}_kwh_um
+#   → sensor.*_{période}_um
 # - Quotidien  : h = now().hour + minute/60
 # - Hebdo      : h = weekday × 24 + now().hour + minute/60
 # - Mensuel    : h = (now().day - 1) × 24 + now().hour + minute/60
@@ -21,7 +21,7 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.p1_*_{periode}_kwh_um (P1_UM_AMHQ)          | clim_*_avg_w_{periode}                             | L2C2 Énergie Clim                  |
+# | [calculé]      | sensor.p1_*_{periode}_um (P1_UM_AMHQ)          | clim_*_avg_w_{periode}                             | L2C2 Énergie Clim                  |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces capteurs n'ont pas de state_class (valeur calculée, pas cumulée).
@@ -42,7 +42,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.clim_salon_quotidien_kwh_um') | float(0) %}
+        {% set conso = states('sensor.clim_salon_quotidien_um') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -52,7 +52,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.clim_salon_mensuel_kwh_um') | float(0) %}
+        {% set conso = states('sensor.clim_salon_mensuel_um') | float(0) %}
         {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -62,7 +62,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.clim_salon_hebdomadaire_kwh_um') | float(0) %}
+        {% set conso = states('sensor.clim_salon_hebdomadaire_um') | float(0) %}
         {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -72,7 +72,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.clim_salon_annuel_kwh_um') | float(0) %}
+        {% set conso = states('sensor.clim_salon_annuel_um') | float(0) %}
         {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
         {% set h = (now() - debut).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
@@ -87,7 +87,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.radiateur_elec_cuisine_quotidien_kwh_um') | float(0) %}
+        {% set conso = states('sensor.radiateur_elec_cuisine_quotidien_um') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -97,7 +97,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.radiateur_elec_cuisine_mensuel_kwh_um') | float(0) %}
+        {% set conso = states('sensor.radiateur_elec_cuisine_mensuel_um') | float(0) %}
         {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -107,7 +107,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.radiateur_elec_cuisine_hebdomadaire_kwh_um') | float(0) %}
+        {% set conso = states('sensor.radiateur_elec_cuisine_hebdomadaire_um') | float(0) %}
         {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -117,7 +117,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.radiateur_elec_cuisine_annuel_kwh_um') | float(0) %}
+        {% set conso = states('sensor.radiateur_elec_cuisine_annuel_um') | float(0) %}
         {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
         {% set h = (now() - debut).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
@@ -132,7 +132,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.clim_bureau_quotidien_kwh_um') | float(0) %}
+        {% set conso = states('sensor.clim_bureau_quotidien_um') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -142,7 +142,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.clim_bureau_mensuel_kwh_um') | float(0) %}
+        {% set conso = states('sensor.clim_bureau_mensuel_um') | float(0) %}
         {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -152,7 +152,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.clim_bureau_hebdomadaire_kwh_um') | float(0) %}
+        {% set conso = states('sensor.clim_bureau_hebdomadaire_um') | float(0) %}
         {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -162,7 +162,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.clim_bureau_annuel_kwh_um') | float(0) %}
+        {% set conso = states('sensor.clim_bureau_annuel_um') | float(0) %}
         {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
         {% set h = (now() - debut).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
@@ -177,7 +177,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.soufflant_sdb_quotidien_kwh_um') | float(0) %}
+        {% set conso = states('sensor.soufflant_sdb_quotidien_um') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -187,7 +187,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.soufflant_sdb_mensuel_kwh_um') | float(0) %}
+        {% set conso = states('sensor.soufflant_sdb_mensuel_um') | float(0) %}
         {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -197,7 +197,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.soufflant_sdb_hebdomadaire_kwh_um') | float(0) %}
+        {% set conso = states('sensor.soufflant_sdb_hebdomadaire_um') | float(0) %}
         {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -207,7 +207,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.soufflant_sdb_annuel_kwh_um') | float(0) %}
+        {% set conso = states('sensor.soufflant_sdb_annuel_um') | float(0) %}
         {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
         {% set h = (now() - debut).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
@@ -218,7 +218,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.seche_serviette_sdb_quotidien_kwh_um') | float(0) %}
+        {% set conso = states('sensor.seche_serviette_sdb_quotidien_um') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -228,7 +228,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.seche_serviette_sdb_mensuel_kwh_um') | float(0) %}
+        {% set conso = states('sensor.seche_serviette_sdb_mensuel_um') | float(0) %}
         {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -238,7 +238,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.seche_serviette_sdb_hebdomadaire_kwh_um') | float(0) %}
+        {% set conso = states('sensor.seche_serviette_sdb_hebdomadaire_um') | float(0) %}
         {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -248,7 +248,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.seche_serviette_sdb_annuel_kwh_um') | float(0) %}
+        {% set conso = states('sensor.seche_serviette_sdb_annuel_um') | float(0) %}
         {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
         {% set h = (now() - debut).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
@@ -263,7 +263,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.clim_chambre_quotidien_kwh_um') | float(0) %}
+        {% set conso = states('sensor.clim_chambre_quotidien_um') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -273,7 +273,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.clim_chambre_mensuel_kwh_um') | float(0) %}
+        {% set conso = states('sensor.clim_chambre_mensuel_um') | float(0) %}
         {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -283,7 +283,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.clim_chambre_hebdomadaire_kwh_um') | float(0) %}
+        {% set conso = states('sensor.clim_chambre_hebdomadaire_um') | float(0) %}
         {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -293,7 +293,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.clim_chambre_annuel_kwh_um') | float(0) %}
+        {% set conso = states('sensor.clim_chambre_annuel_um') | float(0) %}
         {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
         {% set h = (now() - debut).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}

@@ -19,7 +19,7 @@
 # | [calculé]      | sensor.dut_sdb_soufflant + sensor.dut_sdb_seche_serviettes | dut_sdb_total                                      | L2C2 Énergie Clim (SDB)            |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Ce capteur n'a PAS d'UM propre (orphelin de type "total") — pas de _kwh_um.
+# - Ce capteur n'a PAS d'UM propre (orphelin de type "total") — pas de _um.
 # - Ne pas le confondre avec les DUT individuels (history_stats dans sensors/).
 # - Unité : h (heures flottantes, ex: 2.75 = 2h45).
 #
