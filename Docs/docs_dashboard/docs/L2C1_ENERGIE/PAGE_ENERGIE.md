@@ -2,27 +2,27 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--04--18-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--04--23-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Dashboard%20Doc-ff9800?style=flat-square)](.)
 
 </div>
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `docs DashBoard/L2C1_ENERGIE/PAGE_ENERGIE_dashboard.yaml` |
+| 📁 **Path** | `Dashboard/L2C1_Energie/page_L2C1_energie_2026-04-23.yaml` |
 | 🔗 **Accès depuis** | Vignette L2C1 → Dashboard HOME → tap → `/dashboard-tablette/energie` |
 | 🔗 **Liens vers** | Badge "Réel" → `/dashboard-tablette/energie-temps-reel` · Badge "Cumul Jrs" → `/dashboard-tablette/energie-mensuel` |
 | 🏗️ **Layout** | `type: grid` (column_span: 1) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-04-18 |
+| 📅 **Modifié le** | 2026-04-23 |
 | 🏠 **Version HA** | 2026.3.x |
 
 ---
 
 # ⚡ PAGE ÉNERGIE HOME — DOCUMENTATION COMPLÈTE
 
-> ⚠️ **[2026-04-18] Migration Ecojoko → NODON** : Ecojoko entièrement retiré de l'installation. Toutes les entités `ecojoko_*` remplacées par les capteurs NODON (`general_electric_appart_*`) et les capteurs Genelec Appart (`genelec_appart_*`). Le tarif `tarif_heures_*_ttc` est remplacé par `edf_tempo_price_blue_hp/hc`.
+> ⚠️ **[2026-04-23] Refonte structure onglets** : L'overlay 7 jours et le tableau Linky sont déplacés dans l'onglet HEBDOMADAIRE. L'onglet JOURNALIER ne contient plus que la conso 24h + pie + slider + synthèse.
 
 ---
 
@@ -113,6 +113,7 @@ Cette page regroupe toutes les informations de consommation électrique du logem
 │  │  [Slider rentabilité HC]                     │   │
 │  │  (JOURNALIER uniquement :)                   │   │
 │  │    [ApexCharts 24h temps réel]               │   │
+│  │  (HEBDOMADAIRE uniquement :)                 │   │
 │  │    [ApexCharts Historique 7j offset]         │   │
 │  │    [flex-table-card Linky 8 jours]           │   │
 │  │  (MENSUEL uniquement :)                      │   │
@@ -239,7 +240,7 @@ Grid 3 colonnes. Chaque ring-tile est un indicateur circulaire avec arc de coule
 | Seuil (kWh) | Couleur | Signification |
 |-------------|---------|---------------|
 | 0–7.99 | Vert | Journée économique |
-| 8–14.99 | Orange | Journée modérée |
+| 8–14.99 | Vert | Journée normale |
 | 15–17.99 | Orange | Journée élevée |
 | ≥ 18 | Rouge | Journée très élevée |
 
@@ -389,33 +390,7 @@ span:
 
 Double axe Y : `TempsReel` (gauche — W) / `Minuit` (droite).
 
-**5. Historique 7 jours (Offset — ApexCharts)**
-
-Principe : toutes les séries utilisent `sensor.genelec_appart_quotidien_kwh_um` avec un `offset` décalant la fenêtre de lecture. Le recorder HA fournit les données historiques.
-
-| Série | Offset | Couleur |
-|-------|--------|---------|
-| Aujourd'hui | aucun | `gainsboro` |
-| J-1 | `-1d` | `rgb(204, 255, 204)` |
-| J-2 | `-2d` | `rgb(153, 255, 153)` |
-| J-3 | `-3d` | `rgb(102, 255, 102)` |
-| J-4 | `-4d` | `rgb(51, 204, 51)` |
-| J-5 | `-5d` | `rgb(0, 153, 0)` |
-| J-6 | `-6d` | `rgb(0, 102, 0)` |
-| J-7 | `-7d` | `rgb(0, 70, 0)` |
-
-`extend_to: false` sur toutes les séries passées. `group_by: func: last, duration: 10m`. Recorder HA ≥ 8 jours requis.
-
-**6. Tableau Linky 8 jours (flex-table-card)**
-
-```yaml
-entities: [sensor.linky_jour_0 … sensor.linky_jour_7]
-columns: Jour | Total kWh | Coût € | HP kWh | HC kWh
-```
-
-> `linky_jour_0` = conso NODON du jour en temps réel (pas données Linky). `linky_jour_1-7` = attributs Linky (Wh ÷ 1000). Source : `templates/P0_Energie_total_diag/Linky/MyElectricalData.yaml`
-
-**7. Synthèse Usages Journaliers + Donut**
+**5. Synthèse Usages Journaliers + Donut**
 
 Bar-card `auto-entities` triée par état décroissant. Max dynamique : `sensor.diag_max_poste_quotidien_dynamique`.
 
@@ -472,7 +447,45 @@ series:
 
 **Entité :** `sensor.genelec_appart_ratio_hc_hebdomadaire` — même structure que le slider journalier.
 
-**4. Synthèse Usages Hebdomadaires + Donut**
+**4. Historique 7 jours superposé (Overlay — ApexCharts)**
+
+Principe : 8 séries sur `sensor.genelec_appart_quotidien_kwh_um` avec `offset` décalant la fenêtre de lecture. Chaque courbe représente un jour complet de 0 → total kWh, toutes alignées sur le même axe 24h.
+
+```yaml
+graph_span: 24h
+span:
+  end: day
+experimental:
+  color_threshold: true
+cache: true
+```
+
+| Série | Offset | Couleur |
+|-------|--------|---------|
+| Aujourd'hui | aucun | `gainsboro` (stroke_width: 3) |
+| J-1 | `-1d` | `rgb(204, 255, 204)` |
+| J-2 | `-2d` | `rgb(153, 255, 153)` |
+| J-3 | `-3d` | `rgb(102, 255, 102)` |
+| J-4 | `-4d` | `rgb(51, 204, 51)` |
+| J-5 | `-5d` | `rgb(0, 153, 0)` |
+| J-6 | `-6d` | `rgb(0, 102, 0)` |
+| J-7 | `-7d` | `rgb(0, 70, 0)` |
+
+`extend_to: false` sur toutes les séries. `group_by: func: last, duration: 10m`. DataLabels activés. Recorder HA ≥ 8 jours requis.
+
+**5. Tableau Linky 8 jours (flex-table-card)**
+
+```yaml
+entities:
+  - sensor.linky_jour_0   # Aujourd'hui (NODON temps réel)
+  - sensor.linky_jour_7   # J-7
+  - sensor.linky_jour_1 … sensor.linky_jour_6
+columns: Jour | Total (kWh) | Coût (€) | HP (kWh) | HC (kWh)
+```
+
+> `linky_jour_0` = conso NODON du jour en temps réel. `linky_jour_1-7` = attributs Linky (Wh ÷ 1000). Source : `templates/P0_Energie_total_diag/Linky/MyElectricalData.yaml`
+
+**6. Synthèse Usages Hebdomadaires + Donut**
 
 Max dynamique : `sensor.diag_max_poste_hebdomadaire_dynamique`.
 
@@ -713,12 +726,12 @@ Donut : `group_by: func: diff, duration: 24h`.
 C'est **normal**. `value_min` sur 24h d'un UM qui repart de 0 à minuit sera toujours 0. Ce champ sert de marqueur visuel de reset plutôt que de donnée opérationnelle.
 
 ### Les coûts affichent 0 ou "unknown"
-1. Vérifier que `sensor.edf_tempo_price_blue_hp` et `sensor.edf_tempo_price_blue_hc` existent (intégration `tarif_edf`)
+1. Vérifier que `sensor.genelec_appart_cout_total_quotidien` (et `_hp`, `_hc`) existent dans États
 2. Vérifier les UM HP/HC dans `03_UM_genelec_appart_HPHC_AMHQ.yaml`
 3. Vérifier que l'automation de basculement HP/HC est active
-4. Source coûts : `templates/P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml`
+4. Source coûts pré-calculés : `templates/P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml`
 
-### Le graphique offset 7 jours ne montre pas tous les jours
+### Le graphique overlay 7 jours (onglet HEBDOMADAIRE) ne montre pas tous les jours
 1. Le recorder HA doit avoir au moins 7 jours d'historique pour `sensor.genelec_appart_quotidien_kwh_um`
 2. Vérifier `configuration.yaml` → paramètre `recorder: purge_keep_days:` (doit être ≥ 8)
 3. L'UM a été créé récemment → les données historiques ne remontent qu'à sa date de création
@@ -742,7 +755,7 @@ Normal si aucune consommation HC aujourd'hui (hors plage horaire HC). Vérifier 
 | Smart plug NODON (appartement général) | Intégration HA [UI] | ✅ Essentiel |
 | `sensor.genelec_appart_totale_kwh` (Riemann) | Sensor integration | ✅ Essentiel — tampon NODON |
 | UM Genelec Appart (01 + 03) | Utility Meter | ✅ Essentiel — kWh + HP/HC |
-| `tarif_edf` (`edf_tempo_price_blue_hp/hc`) | Custom component | ✅ Requis pour les coûts |
+| `01_genelec_appart_AMHQ_cost.yaml` (templates) | Template coûts | ✅ Requis — fournit `cout_total/hp/hc_*` |
 | Automation basculement HP/HC | HA Automation | ✅ Requis — split HP/HC correct |
 | MyElectricalData / Linky | HACS Integration | ✅ Requis pour ratios + tableau |
 | `ring-tile-card` | HACS Frontend | ✅ Essentiel (Mini/Réel/Maxi) |
@@ -763,7 +776,7 @@ Normal si aucune consommation HC aujourd'hui (hors plage horaire HC). Vérifier 
 
 | Rôle | Chemin |
 |------|--------|
-| Dashboard YAML corrigé | `docs DashBoard/L2C1_ENERGIE/PAGE_ENERGIE_dashboard.yaml` |
+| Dashboard YAML corrigé | `Dashboard/L2C1_Energie/page_L2C1_energie_2026-04-23.yaml` |
 | Riemann tampon NODON | `TREE_CORRIGE/sensors/P0_Energie_total_diag/Genelec_appart/P0_kWh_genelec_appart.yaml` |
 | UM kWh total AMHQ | `TREE_CORRIGE/utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ_cost.yaml` |
 | UM HP/HC AMHQ | `TREE_CORRIGE/utility_meter/P0_Energie_total/Genelec_appart/03_UM_genelec_appart_HPHC_AMHQ.yaml` |

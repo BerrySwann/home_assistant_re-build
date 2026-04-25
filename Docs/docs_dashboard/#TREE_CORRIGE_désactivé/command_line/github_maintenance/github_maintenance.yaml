@@ -1,0 +1,75 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ COMMAND LINE : MONITORING BACKUP GITHUB (RE-BUILD)                       │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensors command_line surveillant l'état du backup Git vers GitHub.
+# Lit le log /config/.logs/ha_git_backup.log et interroge git en local.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - backup_github_status  : grep "Backup GitHub OK:" dans le log → OK/KO + timestamp
+# - git_last_weekly_tag   : git tag --sort=-creatordate | grep "^weekly-" → dernier tag hebdo
+# - backup_github_journal : python3 extrait les 10 dernières lignes OK du log → JSON {text}
+# - github_default_branch : git rev-parse --abbrev-ref HEAD → branche courante
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | GitHub API (git) | git log / git status → stdout                      | github_last_commit / github_sync_status            | L4C2 Mini PC / L5C3 MariaDB        |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce fichier est un YAML — ne jamais y coller le contenu de ha_git_backup.sh
+# - Le script bash appartient dans /config/.scripts/ha_git_backup.sh
+# - scan_interval 10s sur status/journal = polling fréquent voulu (dashboard temps réel)
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert à la remontée d'info pour la vignette : L5C3 (GitHub/Système)
+# - backup_github_status  → chip mushroom statut OK/KO + timestamp
+# - git_last_weekly_tag   → chip mushroom tag hebdomadaire
+# - backup_github_journal → carte markdown journal des 10 derniers backups.
+# - github_default_branch → chip mushroom branche active.
+
+# --- backup_github_status ---
+- sensor:
+    name: "Backup GitHub Status"
+    unique_id: backup_github_status
+    command: >-
+      bash -lc 'if grep -F "Backup GitHub OK:" /config/.logs/ha_git_backup.log >/dev/null 2>&1;
+      then TS=$(grep -F "Backup GitHub OK:" /config/.logs/ha_git_backup.log | tail -n1 | sed -E "s/^.*OK: (.*)$/\1/");
+      echo "{\"ok\":true,\"ts\":\"$TS\"}";
+      else echo "{\"ok\":false,\"ts\":\"\"}"; fi'
+    scan_interval: 10
+    value_template: '{{ "OK" if value_json.ok else "KO" }}'
+    json_attributes:
+      - ts
+
+# --- git_last_weekly_tag ---
+- sensor:
+    name: "Git Last Weekly Tag"
+    unique_id: git_last_weekly_tag
+    command: >-
+      bash -lc 'git -C /config tag --sort=-creatordate 2>/dev/null | grep "^weekly-" | head -n1 || echo ""'
+    scan_interval: 3600
+    value_template: '{{ value | trim }}'
+
+# --- backup_github_journal ---
+- sensor:
+    name: "Backup GitHub Journal"
+    unique_id: backup_github_journal
+    command: >-
+      bash -lc 'python3 -c "import json,os; f=\"/config/.logs/ha_git_backup.log\"; lines=open(f).readlines() if os.path.exists(f) else []; k=[l.strip() for l in lines if \"OK:\" in l]; print(json.dumps({\"text\":chr(10).join(k[-10:]) or \"-\"}))" 2>/dev/null || echo "{\"text\":\"-\"}"'
+    scan_interval: 10
+    value_template: 'OK'
+    json_attributes:
+      - text
+
+# --- github_default_branch ---
+- sensor:
+    name: "GitHub Default Branch"
+    unique_id: github_default_branch
+    command: >-
+      bash -lc 'git -C /config rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown"'
+    scan_interval: 3600
+    value_template: '{{ value | trim }}'

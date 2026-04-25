@@ -1,0 +1,8 @@
+# ┌───────────────────────────────────┐
+# │ INTER RODRET SALON                │
+# └───────────────────────────────────┘
+
+# --- inter_rodret_salon ---
+inter_rodret_salon:
+  name: "Inter Rodret Salon"
+  icon: mdi:lightbulb-off

@@ -87,11 +87,11 @@
 
           {# --- PARTIE 1 : TENDANCE --- #}
           {%- if tendance == 'increasing' %}
-            {%- set message_tendance = "T°Ext Up -> " ~ temp_ext ~ "°" %}
+            {%- set message_tendance = "T°Ext Up ↗ " ~ temp_ext ~ "°" %}
           {%- elif tendance == 'decreasing' %}
-            {%- set message_tendance = "T°Ext Down -> " ~ temp_ext ~ "°" %}
+            {%- set message_tendance = "T°Ext Down ↘ " ~ temp_ext ~ "°" %}
           {%- else %}
-            {%- set message_tendance = "T°Ext stable -> " ~ temp_ext ~ "°" %}
+            {%- set message_tendance = "T°Ext stable → " ~ temp_ext ~ "°" %}
           {%- endif %}
 
           {# --- PARTIE 2 : HEADER --- EN-TÊTE --- #}
@@ -159,10 +159,10 @@
 
       availability: >
         {{ states('sensor.mamour_network_type') not in ['unknown', 'unavailable'] and
-           states('sensor.eric_network_type') not in ['unknown', 'unavailable'] and
-           states('sensor.th_balcon_nord_temperature') not in ['unknown', 'unavailable'] and
-           states('sensor.groupe') not in ['unknown', 'unavailable'] and
-           states('sensor.presence') not in ['unknown', 'unavailable'] }}
+            states('sensor.eric_network_type') not in ['unknown', 'unavailable'] and
+            states('sensor.th_balcon_nord_temperature') not in ['unknown', 'unavailable'] and
+            states('sensor.groupe') not in ['unknown', 'unavailable'] and
+            states('sensor.presence') not in ['unknown', 'unavailable'] }}
 
 # annotations_log:
 # [AJOUT]  13 labels pré-calculés s_*/b_*/c_*/s_fan/b_fan/c_fan avant bloc groupe

@@ -1,0 +1,98 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 2. TEMPLATE AVG : PUISSANCE MOYENNE (W) AMHQ — MINI PC (BUREAU)     │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Calcule la puissance moyenne continue équivalente (en Watts) lissée sur
+# 4 périodes : Annuel, Mensuel, Hebdomadaire, Quotidien (AMHQ) pour le Mini PC.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : Consommation_Wh_UM ÷ nombre_heures_écoulées_dans_le_cycle = W_moyen
+# - ATTENTION : source en Wh (pas kWh) → formule = conso / h (PAS conso * 1000 / h)
+# - Sources UM (fichier P2_UM_AMHQ_mini_pc.yaml) :
+#   - Annuel       : sensor.prise_mini_pc_ikea_annuel_wh_um
+#   - Mensuel      : sensor.prise_mini_pc_ikea_mensuel_wh_um
+#   - Hebdomadaire : sensor.prise_mini_pc_ikea_hebdomadaire_wh_um
+#   - Quotidien    : sensor.prise_mini_pc_ikea_quotidien_wh_um
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.p2_mini_pc_*_{periode} (P2_UM_AMHQ_mini_pc) | p2_mini_pc_*_avg_wh_{periode}                      | L4C2 Mini PC                       |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Division par zéro évitée : if h > 0.1 else 0.
+# - Ce n'est pas la puissance en direct, mais une moyenne de tirage ("Average").
+# - Formule Wh : conso / h → W  (contrairement aux autres pôles en kWh : conso * 1000 / h)
+# - CORRECTION 2026-03-29 : fichier original corrompu (sensors imbriqués dans state: >
+#   du premier sensor + unique_id dupliqué + noms _kwh erronés → remplacés par _wh).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L4C2 Mini PC — pop-up #conso (streamline-card : avg_daily_entity + avg_monthly_entity)
+
+- sensor:
+    # ┌─────────────────────────────────────────┐
+    # │   MINI PC : MOYENNE WATTS ANNUELLE      │
+    # └─────────────────────────────────────────┘
+    # --- mini_pc_avg_watts_annuel ---
+    - name: "Mini PC Avg Watts Annuel"
+      unique_id: mini_pc_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% set conso = states('sensor.prise_mini_pc_ikea_annuel_wh_um') | float(0) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ (conso / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ┌─────────────────────────────────────────┐
+    # │   MINI PC : MOYENNE WATTS MENSUELLE     │
+    # └─────────────────────────────────────────┘
+    # --- mini_pc_avg_watts_mensuel ---
+    - name: "Mini PC Avg Watts Mensuel"
+      unique_id: mini_pc_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% set conso = states('sensor.prise_mini_pc_ikea_mensuel_wh_um') | float(0) %}
+        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ (conso / hm if hm > 0.1 else 0) | round(1) }}
+
+    # ┌─────────────────────────────────────────┐
+    # │   MINI PC : MOYENNE WATTS HEBDOMADAIRE  │
+    # └─────────────────────────────────────────┘
+    # --- mini_pc_avg_watts_hebdomadaire ---
+    - name: "Mini PC Avg Watts Hebdomadaire"
+      unique_id: mini_pc_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% set conso = states('sensor.prise_mini_pc_ikea_hebdomadaire_wh_um') | float(0) %}
+        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ (conso / hh if hh > 0.1 else 0) | round(1) }}
+
+    # ┌─────────────────────────────────────────┐
+    # │   MINI PC : MOYENNE WATTS QUOTIDIENNE   │
+    # └─────────────────────────────────────────┘
+    # --- mini_pc_avg_watts_quotidien ---
+    - name: "Mini PC Avg Watts Quotidien"
+      unique_id: mini_pc_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% set conso = states('sensor.prise_mini_pc_ikea_quotidien_wh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ (conso / h if h > 0.1 else 0) | round(1) }}
+
+# annotations_log:
+# - [ALL]    Renommage _um → _wh_um sur toutes les sources (unité réelle = Wh)
+# - [L35,45] Formule corrigée : (conso * 1000) / h → conso / h (Wh ÷ h = W)
+# - [L55,65] Idem hebdomadaire et quotidien
+# - [ORDRE]  Réordonné AMHQ : Annuel → Mensuel → Hebdomadaire → Quotidien
+# - [STRUCT] Indentation corrigée : 4 sensors au bon niveau (2 espaces sous sensor:)
+# - [DUP]    Suppression unique_id dupliqué (mini_pc_avg_watts_annuel × 2 → × 1)

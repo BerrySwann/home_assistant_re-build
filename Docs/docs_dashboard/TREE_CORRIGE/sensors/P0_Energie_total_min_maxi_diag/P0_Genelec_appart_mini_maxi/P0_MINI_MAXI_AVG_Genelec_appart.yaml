@@ -9,7 +9,7 @@
 # les extrêmes de consommation et la tendance horaire.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Source : sensor.genelec_appart_quotidien_kwh_um (UM kWh — remise à 0 à minuit).
+# - Source : sensor.genelec_appart_quotidien_um (UM kWh — remise à 0 à minuit).
 # - Conso Mini  : min sur 24h (value_min) → 0 juste après minuit (reset UM).
 # - Conso Maxi  : max sur 24h (value_max) → total journalier accumulé (pic).
 # - Conso Moy 1h: moyenne sur 1h (mean) → consommation kWh lissée sur la dernière heure.
@@ -19,7 +19,7 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.genelec_appart_kwh_cumulative               | genelec_appart_power_min / _max / _mean_24h        | 03_AVG_genelec_appart.yaml → L2C1  |
+# | [calculé]      | sensor.genelec_appart_cumulative               | genelec_appart_power_min / _max / _mean_24h        | 03_AVG_genelec_appart.yaml → L2C1  |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces capteurs opèrent sur l'ÉNERGIE (kWh), pas sur la puissance (W).
@@ -62,6 +62,6 @@
 # annotations_log:
 # - [Création] 3 statistics sensors min/max/moy — source ecojoko_consommation_temps_reel
 # - [modif] source → general_electric_appart_power (NODON — remplacement Ecojoko)
-# - [modif] source → sensor.genelec_appart_quotidien_kwh_um (UM kWh reset minuit)
+# - [modif] source → sensor.genelec_appart_quotidien_um (UM kWh reset minuit)
 #   Logique : value_max 24h = total journalier / mean 1h = conso lissée dernière heure
 # - [CONTEXTE] Ecojoko entièrement retiré — remplacé par NODON

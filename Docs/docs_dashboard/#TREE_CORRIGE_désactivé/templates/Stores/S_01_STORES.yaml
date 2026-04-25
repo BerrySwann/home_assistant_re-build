@@ -1,0 +1,82 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ [ S ] TEMPLATES : STORES — ÉTATS VOLETS (SALON / BUREAU)                 │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Deux capteurs templates générant un label HTML coloré pour l'état visuel
+# des volets motorisés du Salon (Sud) et du Bureau (Nord).
+# Utilisés dans les vignettes du Dashboard pour un rendu couleur immédiat.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source Salon  : cover.store_salon — attribut current_position (0-100)
+# - Source Bureau : cover.store_bureau — attribut current_position (0-100)
+# - Logique       : position=0 → Fermé (rouge) / en mouvement → orange gras
+#                   position=100 → Ouvert (vert) / 0<pos<100 → Ouvert partiel (orange)
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | Zigbee (Z2M)   | cover.store_salon / position                       | store_salon_status (HTML couleur)                  | L3C3 Stores                        |
+# | Zigbee (Z2M)   | cover.store_bureau / position                      | store_bureau_status (HTML couleur)                 | L3C3 Stores                        |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Les covers Zigbee peuvent émettre un état "unavailable" pendant ~2s au démarrage.
+# - Ne pas utiliser cover.position directement dans l'UI : utiliser ces templates
+#   pour garantir la cohérence des couleurs avec la palette officielle CLAUDE.md.
+# - Vérifier que is_volume_on / is_opening / is_closing est correct pour ta cover.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L3C3 : État des fenêtres + Commandes stores (sensor.store_*_status)
+
+- sensor:
+
+    # ┌───────────────────────────────────┐
+    # │ 4. SALON                          │
+    # └───────────────────────────────────┘
+
+    # --- store_salon_status ---
+    - name: "Store Salon Status"
+      unique_id: store_salon_status
+      state: >
+        {% set pos = state_attr('cover.store_salon', 'current_position') | int(-1) %}
+        {% if is_state('cover.store_salon', 'opening') or is_state('cover.store_salon', 'closing') %}
+          <b style="color:#FFA500">Up/Down</b>
+        {% elif pos == 0 %}
+          <span style="color:rgb(244,67,54)">Fermé</span>
+        {% elif pos == 100 %}
+          <span style="color:lightgreen">Ouvert</span>
+        {% elif pos > 0 %}
+          <span style="color:#FFA500">Ouvert {{ pos }}%</span>
+        {% else %}
+          <span style="color:#44739e">Inconnu</span>
+        {% endif %}
+
+    # ┌───────────────────────────────────┐
+    # │ 7. BUREAU                         │
+    # └───────────────────────────────────┘
+
+    # --- store_bureau_status ---
+    - name: "Store Bureau Status"
+      unique_id: store_bureau_status
+      state: >
+        {% set pos = state_attr('cover.store_bureau', 'current_position') | int(-1) %}
+        {% if is_state('cover.store_bureau', 'opening') or is_state('cover.store_bureau', 'closing') %}
+          <b style="color:#FFA500">Up/Down</b>
+        {% elif pos == 0 %}
+          <span style="color:rgb(244,67,54)">Fermé</span>
+        {% elif pos == 100 %}
+          <span style="color:lightgreen">Ouvert</span>
+        {% elif pos > 0 %}
+          <span style="color:#FFA500">Ouvert {{ pos }}%</span>
+        {% else %}
+          <span style="color:#44739e">Inconnu</span>
+        {% endif %}
+
+# annotations_log:
+# - [L1]   Boîte ASCII corrigée : 72 tirets → 74 tirets (standard CLAUDE.md).
+# - [L2]   Titre mis à jour : "SENSOR : STORES — ÉTATS (SALON / BUREAU)" → "[ S ] TEMPLATES : STORES — ÉTATS VOLETS (SALON / BUREAU)".
+# - [L4-18] Ajout bloc documentation obligatoire (DESCRIPTION / CALCUL / PIÈGES / VIGNETTE).
+# - [L20]  Ajout titre secondaire boîte carrée 37 car. SALON + BUREAU.
+# - [L26,47] Titres tertiaires slugs ajoutés (store_salon_status / store_bureau_status).
