@@ -10,7 +10,7 @@
 # Le basculement HP ↔ HC est piloté par l'automation energie/basculement_tarif_hphc.yaml.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Source : sensor.genelec_appart_totale_kwh (Riemann tampon — isolé des aberrations NODON).
+# - Source : ensor.linky_25481620821301_consumption (Riemann tampon — isolé des aberrations NODON).
 #   → Ne jamais pointer sur sensor.general_electric_appart_energy (NODON brut).
 # - Plages HC  : 01:00→07:30 et 13:00→14:30.
 # - Plages HP  : 07:30→13:00 et 14:30→01:00.
@@ -38,7 +38,7 @@
 
 # --- genelec_appart_hphc_quotidien_um ---
 genelec_appart_hphc_quotidien_um:
-  source: sensor.genelec_appart_totale_kwh    # [modif] NODON brut → Riemann tampon
+  source: sensor.general_electric_appart_energy    # [modif] NODON brut → Riemann tampon
   name: "Genelec Appart HP/HC Quotidien UM"
   unique_id: genelec_appart_hphc_quotidien_um
   cycle: daily
@@ -50,7 +50,7 @@ genelec_appart_hphc_quotidien_um:
 
 # --- genelec_appart_hphc_hebdomadaire_um ---
 genelec_appart_hphc_hebdomadaire_um:
-  source: sensor.genelec_appart_totale_kwh    # [modif] NODON brut → Riemann tampon
+  source: sensor.general_electric_appart_energy    # [modif] NODON brut → Riemann tampon
   name: "Genelec Appart HP/HC Hebdomadaire UM"
   unique_id: genelec_appart_hphc_hebdomadaire_um
   cycle: weekly
@@ -62,7 +62,7 @@ genelec_appart_hphc_hebdomadaire_um:
 
 # --- genelec_appart_hphc_mensuel_um ---
 genelec_appart_hphc_mensuel_um:
-  source: sensor.genelec_appart_totale_kwh    # [modif] NODON brut → Riemann tampon
+  source: sensor.general_electric_appart_energy    # [modif] NODON brut → Riemann tampon
   name: "Genelec Appart HP/HC Mensuel UM"
   unique_id: genelec_appart_hphc_mensuel_um
   cycle: monthly
@@ -74,7 +74,7 @@ genelec_appart_hphc_mensuel_um:
 
 # --- genelec_appart_hphc_annuel_um ---
 genelec_appart_hphc_annuel_um:
-  source: sensor.genelec_appart_totale_kwh    # [modif] NODON brut → Riemann tampon
+  source: sensor.general_electric_appart_energy    # [modif] NODON brut → Riemann tampon
   name: "Genelec Appart HP/HC Annuel UM"
   unique_id: genelec_appart_hphc_annuel_um
   cycle: yearly
@@ -83,11 +83,11 @@ genelec_appart_hphc_annuel_um:
     - HC
 
 # annotations_log:
-# - [Création] 4 UM HP/HC AMHQ — source sensor.genelec_appart_totale_kwh (Riemann tampon NODON)
+# - [Création] 4 UM HP/HC AMHQ — source ensor.linky_25481620821301_consumption (Riemann tampon NODON)
 # - [CONTEXTE] Ecojoko entièrement retiré — remplacé par NODON (smart plug général)
 # - Entités générées : *_um_hp et *_um_hc pour chaque période
 # - Basculement piloté par : automations_corrige/energie/basculement_tarif_hphc.yaml
 # - [modif] Suppression du wrapper "- sensor:" erroné — incompatible avec
 #   !include_dir_merge_named. Chaque entrée doit être à la racine du dict.
-# - [L32,44,56,68] source: sensor.general_electric_appart_energy → sensor.genelec_appart_totale_kwh
+# - [L32,44,56,68] source: sensor.general_electric_appart_energy → ensor.linky_25481620821301_consumption
 #   (isolation des aberrations/resets NODON via intégration Riemann méthode left)
