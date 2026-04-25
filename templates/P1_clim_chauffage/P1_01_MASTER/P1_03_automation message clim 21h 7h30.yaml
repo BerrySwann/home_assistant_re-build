@@ -80,11 +80,11 @@
 
           {# --- PARTIE 1 : TENDANCE --- #}
           {%- if tendance == 'increasing' %}
-            {%- set message_tendance = "T°Ext Up -> " ~ temp_ext ~ "°" %}
+            {%- set message_tendance = "T°Ext Up ↗ " ~ temp_ext ~ "°" %}
           {%- elif tendance == 'decreasing' %}
-            {%- set message_tendance = "T°Ext Down -> " ~ temp_ext ~ "°" %}
+            {%- set message_tendance = "T°Ext Down ↘ " ~ temp_ext ~ "°" %}
           {%- else %}
-            {%- set message_tendance = "T°Ext stable -> " ~ temp_ext ~ "°" %}
+            {%- set message_tendance = "T°Ext stable → " ~ temp_ext ~ "°" %}
           {%- endif %}
 
           {# --- PARTIE 2 : HEADER --- EN-TÊTE --- #}

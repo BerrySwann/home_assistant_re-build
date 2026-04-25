@@ -8,7 +8,7 @@
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Sources kWh : utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml
-#   → sensor.*_{période}_kwh_um (clim_salon, radiateur_cuisine, clim_bureau,
+#   → sensor.*_{période}_um (clim_salon, radiateur_cuisine, clim_bureau,
 #     soufflant_sdb, seche_serviette_sdb, clim_chambre)
 # - Source W   : sensors natifs NOUS (*_nous_power, radiateur_elec_cuisine_power,
 #     prise_soufflant_salle_de_bain_nous_power, prise_seche_serviette_salle_de_bain_nous_power)
@@ -18,7 +18,7 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.p1_*_{periode}_kwh_um (×6 équipements)      | p1_total_kwh_{periode}                             | L2C2 Énergie Clim                  |
+# | [calculé]      | sensor.p1_*_{periode}_um (×6 équipements)      | p1_total_{periode}                             | L2C2 Énergie Clim                  |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Le capteur de puissance (conso_clim_rad_total) lit les sensors natifs NOUS
@@ -39,12 +39,12 @@
       device_class: energy
       unit_of_measurement: "kWh"
       state: >
-        {{ (states('sensor.clim_salon_quotidien_kwh_um') | float(0) +
-          states('sensor.radiateur_elec_cuisine_quotidien_kwh_um') | float(0) +
-          states('sensor.clim_bureau_quotidien_kwh_um') | float(0) +
-          states('sensor.soufflant_sdb_quotidien_kwh_um') | float(0) +
-          states('sensor.seche_serviette_sdb_quotidien_kwh_um') | float(0) +
-          states('sensor.clim_chambre_quotidien_kwh_um') | float(0)) | round(3) }}
+        {{ (states('sensor.clim_salon_quotidien_um') | float(0) +
+          states('sensor.radiateur_elec_cuisine_quotidien_um') | float(0) +
+          states('sensor.clim_bureau_quotidien_um') | float(0) +
+          states('sensor.soufflant_sdb_quotidien_um') | float(0) +
+          states('sensor.seche_serviette_sdb_quotidien_um') | float(0) +
+          states('sensor.clim_chambre_quotidien_um') | float(0)) | round(3) }}
 
     # ┌───────────────────────────────────┐
     # │ TOTAL P1 kWh — MENSUEL            │
@@ -56,12 +56,12 @@
       device_class: energy
       unit_of_measurement: "kWh"
       state: >
-        {{ (states('sensor.clim_salon_mensuel_kwh_um') | float(0) +
-          states('sensor.radiateur_elec_cuisine_mensuel_kwh_um') | float(0) +
-          states('sensor.clim_bureau_mensuel_kwh_um') | float(0) +
-          states('sensor.soufflant_sdb_mensuel_kwh_um') | float(0) +
-          states('sensor.seche_serviette_sdb_mensuel_kwh_um') | float(0) +
-          states('sensor.clim_chambre_mensuel_kwh_um') | float(0)) | round(3) }}
+        {{ (states('sensor.clim_salon_mensuel_um') | float(0) +
+          states('sensor.radiateur_elec_cuisine_mensuel_um') | float(0) +
+          states('sensor.clim_bureau_mensuel_um') | float(0) +
+          states('sensor.soufflant_sdb_mensuel_um') | float(0) +
+          states('sensor.seche_serviette_sdb_mensuel_um') | float(0) +
+          states('sensor.clim_chambre_mensuel_um') | float(0)) | round(3) }}
 
     # ┌───────────────────────────────────┐
     # │ TOTAL P1 kWh — HEBDOMADAIRE       │
@@ -73,12 +73,12 @@
       device_class: energy
       unit_of_measurement: "kWh"
       state: >
-        {{ (states('sensor.clim_salon_hebdomadaire_kwh_um') | float(0) +
-          states('sensor.radiateur_elec_cuisine_hebdomadaire_kwh_um') | float(0) +
-          states('sensor.clim_bureau_hebdomadaire_kwh_um') | float(0) +
-          states('sensor.soufflant_sdb_hebdomadaire_kwh_um') | float(0) +
-          states('sensor.seche_serviette_sdb_hebdomadaire_kwh_um') | float(0) +
-          states('sensor.clim_chambre_hebdomadaire_kwh_um') | float(0)) | round(3) }}
+        {{ (states('sensor.clim_salon_hebdomadaire_um') | float(0) +
+          states('sensor.radiateur_elec_cuisine_hebdomadaire_um') | float(0) +
+          states('sensor.clim_bureau_hebdomadaire_um') | float(0) +
+          states('sensor.soufflant_sdb_hebdomadaire_um') | float(0) +
+          states('sensor.seche_serviette_sdb_hebdomadaire_um') | float(0) +
+          states('sensor.clim_chambre_hebdomadaire_um') | float(0)) | round(3) }}
 
     # ┌───────────────────────────────────┐
     # │ TOTAL P1 kWh — ANNUEL             │
@@ -90,12 +90,12 @@
       device_class: energy
       unit_of_measurement: "kWh"
       state: >
-        {{ (states('sensor.clim_salon_annuel_kwh_um') | float(0) +
-          states('sensor.radiateur_elec_cuisine_annuel_kwh_um') | float(0) +
-          states('sensor.clim_bureau_annuel_kwh_um') | float(0) +
-          states('sensor.soufflant_sdb_annuel_kwh_um') | float(0) +
-          states('sensor.seche_serviette_sdb_annuel_kwh_um') | float(0) +
-          states('sensor.clim_chambre_annuel_kwh_um') | float(0)) | round(3) }}
+        {{ (states('sensor.clim_salon_annuel_um') | float(0) +
+          states('sensor.radiateur_elec_cuisine_annuel_um') | float(0) +
+          states('sensor.clim_bureau_annuel_um') | float(0) +
+          states('sensor.soufflant_sdb_annuel_um') | float(0) +
+          states('sensor.seche_serviette_sdb_annuel_um') | float(0) +
+          states('sensor.clim_chambre_annuel_um') | float(0)) | round(3) }}
 
     # ┌───────────────────────────────────┐
     # │ TOTAL P1 — PUISSANCE INSTANTANÉE  │
