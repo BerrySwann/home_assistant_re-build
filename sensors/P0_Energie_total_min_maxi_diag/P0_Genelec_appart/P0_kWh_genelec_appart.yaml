@@ -40,11 +40,11 @@
 # │ 0. ENERGIE APPARTEMENT            │
 # └───────────────────────────────────┘
 
-# --- genelec_appart_totale ---
+# --- genelec_appart_totale_kwh ---
 - platform: integration
   source: sensor.general_electric_appart_power
   name: "Genelec Appart Totale kWh"
-  unique_id: genelec_appart_totale
+  unique_id: genelec_appart_totale_kwh
   method: left
   unit_prefix: k
   unit_time: h
