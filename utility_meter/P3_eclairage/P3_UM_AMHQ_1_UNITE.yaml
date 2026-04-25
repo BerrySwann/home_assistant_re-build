@@ -9,33 +9,45 @@
 # Total : 19 ampoules × 4 cycles = 76 compteurs.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Sources White/Play  : sensor.[ampoule]_energy (Riemann — P3_kWh_1_UNITE.yaml)
-#   Hue Bridge ne fournit pas de sensor _energy natif → Riemann est le seul chemin possible.
-# - Sources PowerCalc   : sensor.[ampoule]_energy (direct — bypass Riemann)
-#   Lampes concernées   : hue_ambiance_lamp_salon_1/2/3, hue_color_candle_salon_1,
-#                         hue_color_candle_chambre_gege, hue_color_candle_chambre_eric
-#   Raison du bypass    : _power = 'unavailable' quand éteinte → Riemann bascule unavailable
-#                         → baseline de minuit invalide → UM retourne 0 toute la journée.
-#                         PowerCalc _energy conserve la valeur même lampe éteinte.
+# - Toutes les sources : sensor.[ampoule]_energy (firmware direct — kWh cumulatif).
+# - Riemann (_energie_totale_kwh) supprimé — plus de platform: integration.
+# - PowerCalc (ambiance/color) exposait déjà _energy nativement — inchangé.
+# - White/Play utilisaient _energie_totale_kwh (Riemann) → migrés vers _energy.
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
-# | MATÉRIEL              | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                          | AVAL                            |
-# |:----------------------|:---------------------------------------------------|:------------------------------------------------|:--------------------------------|
-# | Hue Bridge (Riemann)  | sensor.*_energy (×13 White/Play)       | *_annuel/mensuel/hebdomadaire/quotidien_um      | P3_AVG_AMHQ_1_UNITE.yaml → L2C3 |
-# | PowerCalc (×6 Color)  | sensor.*_energy (ambiance_salon 1/2/3, color ×3)   | *_annuel/mensuel/hebdomadaire/quotidien_um      | P3_AVG_AMHQ_1_UNITE.yaml → L2C3 |
+# | MATÉRIEL          | CAPTEUR BRUT (source)                     | CE FICHIER (unique_id)                             | AVAL                            |
+# |:------------------|:------------------------------------------|:---------------------------------------------------|:--------------------------------|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_entree_energy       | hue_white_lamp_entree_{annuel|mensuel|hebdo|quot}  | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_table_energy        | hue_white_lamp_table_{annuel|mensuel|hebdo|quot}   | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | PowerCalc         | sensor.hue_ambiance_lamp_salon_1_energy   | hue_ambiance_lamp_salon_1_*_um                     | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | PowerCalc         | sensor.hue_ambiance_lamp_salon_2_energy   | hue_ambiance_lamp_salon_2_*_um                     | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | PowerCalc         | sensor.hue_ambiance_lamp_salon_3_energy   | hue_ambiance_lamp_salon_3_*_um                     | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | PowerCalc         | sensor.hue_color_candle_salon_1_energy    | hue_color_candle_salon_1_*_um                      | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_cuisine_energy      | hue_white_lamp_cuisine_{annuel|mensuel|hebdo|quot} | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_couloir_energy      | hue_white_lamp_couloir_{annuel|mensuel|hebdo|quot} | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_play_1_pc_bureau_energy        | hue_play_1_pc_bureau_*_um                          | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_play_2_pc_bureau_energy        | hue_play_2_pc_bureau_*_um                          | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_play_3_pc_bureau_energy        | hue_play_3_pc_bureau_*_um                          | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_bureau_1_energy     | hue_white_lamp_bureau_1_*_um                       | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_bureau_2_energy     | hue_white_lamp_bureau_2_*_um                       | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Sonoff (Z2M)      | sensor.relais_lumiere_sdb_sonoff_energy   | relais_lumiere_sdb_sonoff_*_um                     | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.lampe_salle_de_bain_hue_energy     | lampe_salle_de_bain_hue_*_um                       | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_chambre_1_energy    | hue_white_lamp_chambre_1_*_um                      | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_chambre_2_energy    | hue_white_lamp_chambre_2_*_um                      | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | PowerCalc         | sensor.hue_color_candle_chambre_gege_energy| hue_color_candle_chambre_gege_*_um                | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | PowerCalc         | sensor.hue_color_candle_chambre_eric_energy| hue_color_candle_chambre_eric_*_um                | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Riemann White/Play : accumulation sans remise à zéro — cycles AMHQ ici.
-# - PowerCalc bypass : sensor.*_energy (PowerCalc) stable même lampe éteinte → baseline minuit OK.
-# - Ne pas confondre UNITE (ampoule seule) avec ZONE (somme par pièce).
-# - Suffixe _um (sans _kwh_) : convention uniforme depuis refactoring 2026-04-25.
+# - Toutes les sources sont _energy (total_increasing, kWh cumulatif).
+# - Ne jamais pointer sur _energie_totale_kwh (Riemann supprimé).
+# - | float(0) dans les templates sources absorbe les unavailable nocturnes.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L2C3 Conso Énergie Éclairage (détail par ampoule)
+# - L2C3 Conso Énergie Éclairage (détail par ampoule via P3_AVG_AMHQ_1_UNITE)
 
 # ┌───────────────────────────────────┐
-# │         1. ENTRÉE                 │
+# │         1. ENTRÉE (1x)            │
 # └───────────────────────────────────┘
 
 # --- hue_white_lamp_entree_annuel_um ---
@@ -67,7 +79,7 @@ hue_white_lamp_entree_quotidien_um:
   cycle: daily
 
 # ┌───────────────────────────────────┐
-# │         4. SALON                  │
+# │         4. SALON (5x)             │
 # └───────────────────────────────────┘
 
 # --- hue_white_lamp_table_annuel_um ---
@@ -100,118 +112,118 @@ hue_white_lamp_table_quotidien_um:
 
 # --- hue_ambiance_lamp_salon_1_annuel_um ---
 hue_ambiance_lamp_salon_1_annuel_um:
-  source: sensor.hue_ambiance_lamp_salon_1_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_ambiance_lamp_salon_1_energy
   name: "Hue Ambiance Lamp Salon 1 Annuel UM"
   unique_id: hue_ambiance_lamp_salon_1_annuel_um
   cycle: yearly
 
 # --- hue_ambiance_lamp_salon_1_mensuel_um ---
 hue_ambiance_lamp_salon_1_mensuel_um:
-  source: sensor.hue_ambiance_lamp_salon_1_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_ambiance_lamp_salon_1_energy
   name: "Hue Ambiance Lamp Salon 1 Mensuel UM"
   unique_id: hue_ambiance_lamp_salon_1_mensuel_um
   cycle: monthly
 
 # --- hue_ambiance_lamp_salon_1_hebdomadaire_um ---
 hue_ambiance_lamp_salon_1_hebdomadaire_um:
-  source: sensor.hue_ambiance_lamp_salon_1_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_ambiance_lamp_salon_1_energy
   name: "Hue Ambiance Lamp Salon 1 Hebdomadaire UM"
   unique_id: hue_ambiance_lamp_salon_1_hebdomadaire_um
   cycle: weekly
 
 # --- hue_ambiance_lamp_salon_1_quotidien_um ---
 hue_ambiance_lamp_salon_1_quotidien_um:
-  source: sensor.hue_ambiance_lamp_salon_1_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_ambiance_lamp_salon_1_energy
   name: "Hue Ambiance Lamp Salon 1 Quotidien UM"
   unique_id: hue_ambiance_lamp_salon_1_quotidien_um
   cycle: daily
 
 # --- hue_ambiance_lamp_salon_2_annuel_um ---
 hue_ambiance_lamp_salon_2_annuel_um:
-  source: sensor.hue_ambiance_lamp_salon_2_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_ambiance_lamp_salon_2_energy
   name: "Hue Ambiance Lamp Salon 2 Annuel UM"
   unique_id: hue_ambiance_lamp_salon_2_annuel_um
   cycle: yearly
 
 # --- hue_ambiance_lamp_salon_2_mensuel_um ---
 hue_ambiance_lamp_salon_2_mensuel_um:
-  source: sensor.hue_ambiance_lamp_salon_2_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_ambiance_lamp_salon_2_energy
   name: "Hue Ambiance Lamp Salon 2 Mensuel UM"
   unique_id: hue_ambiance_lamp_salon_2_mensuel_um
   cycle: monthly
 
 # --- hue_ambiance_lamp_salon_2_hebdomadaire_um ---
 hue_ambiance_lamp_salon_2_hebdomadaire_um:
-  source: sensor.hue_ambiance_lamp_salon_2_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_ambiance_lamp_salon_2_energy
   name: "Hue Ambiance Lamp Salon 2 Hebdomadaire UM"
   unique_id: hue_ambiance_lamp_salon_2_hebdomadaire_um
   cycle: weekly
 
 # --- hue_ambiance_lamp_salon_2_quotidien_um ---
 hue_ambiance_lamp_salon_2_quotidien_um:
-  source: sensor.hue_ambiance_lamp_salon_2_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_ambiance_lamp_salon_2_energy
   name: "Hue Ambiance Lamp Salon 2 Quotidien UM"
   unique_id: hue_ambiance_lamp_salon_2_quotidien_um
   cycle: daily
 
 # --- hue_ambiance_lamp_salon_3_annuel_um ---
 hue_ambiance_lamp_salon_3_annuel_um:
-  source: sensor.hue_ambiance_lamp_salon_3_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_ambiance_lamp_salon_3_energy
   name: "Hue Ambiance Lamp Salon 3 Annuel UM"
   unique_id: hue_ambiance_lamp_salon_3_annuel_um
   cycle: yearly
 
 # --- hue_ambiance_lamp_salon_3_mensuel_um ---
 hue_ambiance_lamp_salon_3_mensuel_um:
-  source: sensor.hue_ambiance_lamp_salon_3_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_ambiance_lamp_salon_3_energy
   name: "Hue Ambiance Lamp Salon 3 Mensuel UM"
   unique_id: hue_ambiance_lamp_salon_3_mensuel_um
   cycle: monthly
 
 # --- hue_ambiance_lamp_salon_3_hebdomadaire_um ---
 hue_ambiance_lamp_salon_3_hebdomadaire_um:
-  source: sensor.hue_ambiance_lamp_salon_3_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_ambiance_lamp_salon_3_energy
   name: "Hue Ambiance Lamp Salon 3 Hebdomadaire UM"
   unique_id: hue_ambiance_lamp_salon_3_hebdomadaire_um
   cycle: weekly
 
 # --- hue_ambiance_lamp_salon_3_quotidien_um ---
 hue_ambiance_lamp_salon_3_quotidien_um:
-  source: sensor.hue_ambiance_lamp_salon_3_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_ambiance_lamp_salon_3_energy
   name: "Hue Ambiance Lamp Salon 3 Quotidien UM"
   unique_id: hue_ambiance_lamp_salon_3_quotidien_um
   cycle: daily
 
 # --- hue_color_candle_salon_1_annuel_um ---
 hue_color_candle_salon_1_annuel_um:
-  source: sensor.hue_color_candle_salon_1_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_color_candle_salon_1_energy
   name: "Hue Color Candle Salon 1 Annuel UM"
   unique_id: hue_color_candle_salon_1_annuel_um
   cycle: yearly
 
 # --- hue_color_candle_salon_1_mensuel_um ---
 hue_color_candle_salon_1_mensuel_um:
-  source: sensor.hue_color_candle_salon_1_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_color_candle_salon_1_energy
   name: "Hue Color Candle Salon 1 Mensuel UM"
   unique_id: hue_color_candle_salon_1_mensuel_um
   cycle: monthly
 
 # --- hue_color_candle_salon_1_hebdomadaire_um ---
 hue_color_candle_salon_1_hebdomadaire_um:
-  source: sensor.hue_color_candle_salon_1_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_color_candle_salon_1_energy
   name: "Hue Color Candle Salon 1 Hebdomadaire UM"
   unique_id: hue_color_candle_salon_1_hebdomadaire_um
   cycle: weekly
 
 # --- hue_color_candle_salon_1_quotidien_um ---
 hue_color_candle_salon_1_quotidien_um:
-  source: sensor.hue_color_candle_salon_1_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_color_candle_salon_1_energy
   name: "Hue Color Candle Salon 1 Quotidien UM"
   unique_id: hue_color_candle_salon_1_quotidien_um
   cycle: daily
 
 # ┌───────────────────────────────────┐
-# │         5. CUISINE                │
+# │         5. CUISINE (1x)           │
 # └───────────────────────────────────┘
 
 # --- hue_white_lamp_cuisine_annuel_um ---
@@ -243,7 +255,7 @@ hue_white_lamp_cuisine_quotidien_um:
   cycle: daily
 
 # ┌───────────────────────────────────┐
-# │         6. COULOIR                │
+# │         6. COULOIR (1x)           │
 # └───────────────────────────────────┘
 
 # --- hue_white_lamp_couloir_annuel_um ---
@@ -275,7 +287,7 @@ hue_white_lamp_couloir_quotidien_um:
   cycle: daily
 
 # ┌───────────────────────────────────┐
-# │         7. BUREAU                 │
+# │         7. BUREAU (5x)            │
 # └───────────────────────────────────┘
 
 # --- hue_play_1_pc_bureau_annuel_um ---
@@ -419,7 +431,7 @@ hue_white_lamp_bureau_2_quotidien_um:
   cycle: daily
 
 # ┌───────────────────────────────────┐
-# │         8. SDB                    │
+# │         8. SDB (2x)               │
 # └───────────────────────────────────┘
 
 # --- relais_lumiere_sdb_sonoff_annuel_um ---
@@ -479,7 +491,7 @@ lampe_salle_de_bain_hue_quotidien_um:
   cycle: daily
 
 # ┌───────────────────────────────────┐
-# │         9. CHAMBRE                │
+# │         9. CHAMBRE (4x)           │
 # └───────────────────────────────────┘
 
 # --- hue_white_lamp_chambre_1_annuel_um ---
@@ -540,63 +552,63 @@ hue_white_lamp_chambre_2_quotidien_um:
 
 # --- hue_color_candle_chambre_gege_annuel_um ---
 hue_color_candle_chambre_gege_annuel_um:
-  source: sensor.hue_color_candle_chambre_gege_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_color_candle_chambre_gege_energy
   name: "Hue Color Candle Chambre Gege Annuel UM"
   unique_id: hue_color_candle_chambre_gege_annuel_um
   cycle: yearly
 
 # --- hue_color_candle_chambre_gege_mensuel_um ---
 hue_color_candle_chambre_gege_mensuel_um:
-  source: sensor.hue_color_candle_chambre_gege_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_color_candle_chambre_gege_energy
   name: "Hue Color Candle Chambre Gege Mensuel UM"
   unique_id: hue_color_candle_chambre_gege_mensuel_um
   cycle: monthly
 
 # --- hue_color_candle_chambre_gege_hebdomadaire_um ---
 hue_color_candle_chambre_gege_hebdomadaire_um:
-  source: sensor.hue_color_candle_chambre_gege_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_color_candle_chambre_gege_energy
   name: "Hue Color Candle Chambre Gege Hebdomadaire UM"
   unique_id: hue_color_candle_chambre_gege_hebdomadaire_um
   cycle: weekly
 
 # --- hue_color_candle_chambre_gege_quotidien_um ---
 hue_color_candle_chambre_gege_quotidien_um:
-  source: sensor.hue_color_candle_chambre_gege_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_color_candle_chambre_gege_energy
   name: "Hue Color Candle Chambre Gege Quotidien UM"
   unique_id: hue_color_candle_chambre_gege_quotidien_um
   cycle: daily
 
 # --- hue_color_candle_chambre_eric_annuel_um ---
 hue_color_candle_chambre_eric_annuel_um:
-  source: sensor.hue_color_candle_chambre_eric_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_color_candle_chambre_eric_energy
   name: "Hue Color Candle Chambre Eric Annuel UM"
   unique_id: hue_color_candle_chambre_eric_annuel_um
   cycle: yearly
 
 # --- hue_color_candle_chambre_eric_mensuel_um ---
 hue_color_candle_chambre_eric_mensuel_um:
-  source: sensor.hue_color_candle_chambre_eric_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_color_candle_chambre_eric_energy
   name: "Hue Color Candle Chambre Eric Mensuel UM"
   unique_id: hue_color_candle_chambre_eric_mensuel_um
   cycle: monthly
 
 # --- hue_color_candle_chambre_eric_hebdomadaire_um ---
 hue_color_candle_chambre_eric_hebdomadaire_um:
-  source: sensor.hue_color_candle_chambre_eric_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_color_candle_chambre_eric_energy
   name: "Hue Color Candle Chambre Eric Hebdomadaire UM"
   unique_id: hue_color_candle_chambre_eric_hebdomadaire_um
   cycle: weekly
 
 # --- hue_color_candle_chambre_eric_quotidien_um ---
 hue_color_candle_chambre_eric_quotidien_um:
-  source: sensor.hue_color_candle_chambre_eric_energy  # PowerCalc — bypass Riemann (unavailable nocturne)
+  source: sensor.hue_color_candle_chambre_eric_energy
   name: "Hue Color Candle Chambre Eric Quotidien UM"
   unique_id: hue_color_candle_chambre_eric_quotidien_um
   cycle: daily
 
 # annotations_log:
-# - [2026-04-25] Refactoring naming : suppression de _kwh_ dans tous les keys/unique_id/names (76 entrées).
-# - [2026-04-25] Convention unifiée : suffixe _um sans marqueur de technologie (remplace _kwh_um).
-# - [2026-04-25] Sources INCHANGÉES : 13 White/Play → Riemann _energy (seul chemin Hue Bridge).
-#                                      6 PowerCalc → _energy (bypass Riemann nocturne conservé).
-# - [2026-04-25] En-tête mis à jour : chaîne de dépendances + explication Riemann vs PowerCalc.
+# - [Création] Nouveau fichier canonique — remplace version dans TREE_CORRIGE/Docs/ (mauvais chemin).
+# - [Migration] 13 sources _energie_totale_kwh (Riemann supprimé) → sensor.*_energy (firmware direct).
+# - [Inchangé] 6 ampoules PowerCalc (ambiance/color) — déjà sur _energy — aucune modif.
+# - [Source] Toutes les sources : sensor.*_energy (total_increasing, kWh cumulatif firmware).
+# - [Chemin] TREE_CORRIGE/utility_meter/P3_eclairage/ (chemin canonique déployable).

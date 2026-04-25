@@ -1,0 +1,334 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. UTILITY METER : ÉCLAIRAGE — AMHQ PAR ZONE / PIÈCE               │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Compteurs Utility Meter découpant la consommation de l'éclairage par zone
+# (pièce physique ou groupe transversal) en 4 cycles AMHQ.
+# Couvre 7 pièces + 2 zones transversales = 9 zones × 4 cycles = 36 compteurs.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources : sensor.eclairage_*_energie (templates P3_ENERGIE_2_ZONE.yaml).
+# - Ces templates calculent la somme kWh de chaque zone à partir des _energy ampoules.
+# - Riemann (_energie_totale_kwh) supprimé — sources remplacées par templates zone.
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL    | CAPTEUR BRUT (source)                       | CE FICHIER (unique_id)                                | AVAL                            |
+# |:------------|:--------------------------------------------|:------------------------------------------------------|:--------------------------------|
+# | [calculé]   | sensor.eclairage_entree_1_energie           | eclairage_entree_1_{annuel|mensuel|hebdo|quotidien}_um | P3_AVG_AMHQ_2_ZONE.yaml → L2C3 |
+# | [calculé]   | sensor.eclairage_salon_5_energie            | eclairage_salon_5_{annuel|mensuel|hebdo|quotidien}_um  | P3_AVG_AMHQ_2_ZONE.yaml → L2C3 |
+# | [calculé]   | sensor.eclairage_cuisine_1_energie          | eclairage_cuisine_1_*_um                              | P3_AVG_AMHQ_2_ZONE.yaml → L2C3 |
+# | [calculé]   | sensor.eclairage_couloir_1_energie          | eclairage_couloir_1_*_um                              | P3_AVG_AMHQ_2_ZONE.yaml → L2C3 |
+# | [calculé]   | sensor.eclairage_bureau_5_energie           | eclairage_bureau_5_*_um                               | P3_AVG_AMHQ_2_ZONE.yaml → L2C3 |
+# | [calculé]   | sensor.eclairage_sdb_2_energie              | eclairage_sdb_2_*_um                                  | P3_AVG_AMHQ_2_ZONE.yaml → L2C3 |
+# | [calculé]   | sensor.eclairage_chambre_4_energie          | eclairage_chambre_4_*_um                              | P3_AVG_AMHQ_2_ZONE.yaml → L2C3 |
+# | [calculé]   | sensor.eclairage_appart_3_energie           | eclairage_appart_3_*_um                               | P3_AVG_AMHQ_2_ZONE.yaml → L2C3 |
+# | [calculé]   | sensor.eclairage_appart_2_energie           | eclairage_appart_2_*_um                               | P3_AVG_AMHQ_2_ZONE.yaml → L2C3 |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Sources = templates zone (P3_ENERGIE_2_ZONE.yaml) — PAS les _energie_totale_kwh Riemann.
+# - eclairage_appart_2/3 sont des zones transversales (sous-ensemble) — ne pas inclure
+#   dans les calculs de total global (double-comptage).
+# - eclairage_couloir_1 : pas d'UM dans le dashboard — inclus ici pour complétude.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (détail par zone via P3_AVG_AMHQ_2_ZONE)
+
+# ┌───────────────────────────────────┐
+# │         1. ENTRÉE (1x)            │
+# └───────────────────────────────────┘
+
+# --- eclairage_entree_1_annuel_um ---
+eclairage_entree_1_annuel_um:
+  source: sensor.eclairage_entree_1_energie
+  name: "Eclairage Entree 1 Annuel UM"
+  unique_id: eclairage_entree_1_annuel_um
+  cycle: yearly
+
+# --- eclairage_entree_1_mensuel_um ---
+eclairage_entree_1_mensuel_um:
+  source: sensor.eclairage_entree_1_energie
+  name: "Eclairage Entree 1 Mensuel UM"
+  unique_id: eclairage_entree_1_mensuel_um
+  cycle: monthly
+
+# --- eclairage_entree_1_hebdomadaire_um ---
+eclairage_entree_1_hebdomadaire_um:
+  source: sensor.eclairage_entree_1_energie
+  name: "Eclairage Entree 1 Hebdomadaire UM"
+  unique_id: eclairage_entree_1_hebdomadaire_um
+  cycle: weekly
+
+# --- eclairage_entree_1_quotidien_um ---
+eclairage_entree_1_quotidien_um:
+  source: sensor.eclairage_entree_1_energie
+  name: "Eclairage Entree 1 Quotidien UM"
+  unique_id: eclairage_entree_1_quotidien_um
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │         4. SALON (5x)             │
+# └───────────────────────────────────┘
+
+# --- eclairage_salon_5_annuel_um ---
+eclairage_salon_5_annuel_um:
+  source: sensor.eclairage_salon_5_energie
+  name: "Eclairage Salon 5 Annuel UM"
+  unique_id: eclairage_salon_5_annuel_um
+  cycle: yearly
+
+# --- eclairage_salon_5_mensuel_um ---
+eclairage_salon_5_mensuel_um:
+  source: sensor.eclairage_salon_5_energie
+  name: "Eclairage Salon 5 Mensuel UM"
+  unique_id: eclairage_salon_5_mensuel_um
+  cycle: monthly
+
+# --- eclairage_salon_5_hebdomadaire_um ---
+eclairage_salon_5_hebdomadaire_um:
+  source: sensor.eclairage_salon_5_energie
+  name: "Eclairage Salon 5 Hebdomadaire UM"
+  unique_id: eclairage_salon_5_hebdomadaire_um
+  cycle: weekly
+
+# --- eclairage_salon_5_quotidien_um ---
+eclairage_salon_5_quotidien_um:
+  source: sensor.eclairage_salon_5_energie
+  name: "Eclairage Salon 5 Quotidien UM"
+  unique_id: eclairage_salon_5_quotidien_um
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │         5. CUISINE (1x)           │
+# └───────────────────────────────────┘
+
+# --- eclairage_cuisine_1_annuel_um ---
+eclairage_cuisine_1_annuel_um:
+  source: sensor.eclairage_cuisine_1_energie
+  name: "Eclairage Cuisine 1 Annuel UM"
+  unique_id: eclairage_cuisine_1_annuel_um
+  cycle: yearly
+
+# --- eclairage_cuisine_1_mensuel_um ---
+eclairage_cuisine_1_mensuel_um:
+  source: sensor.eclairage_cuisine_1_energie
+  name: "Eclairage Cuisine 1 Mensuel UM"
+  unique_id: eclairage_cuisine_1_mensuel_um
+  cycle: monthly
+
+# --- eclairage_cuisine_1_hebdomadaire_um ---
+eclairage_cuisine_1_hebdomadaire_um:
+  source: sensor.eclairage_cuisine_1_energie
+  name: "Eclairage Cuisine 1 Hebdomadaire UM"
+  unique_id: eclairage_cuisine_1_hebdomadaire_um
+  cycle: weekly
+
+# --- eclairage_cuisine_1_quotidien_um ---
+eclairage_cuisine_1_quotidien_um:
+  source: sensor.eclairage_cuisine_1_energie
+  name: "Eclairage Cuisine 1 Quotidien UM"
+  unique_id: eclairage_cuisine_1_quotidien_um
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │         6. COULOIR (1x)           │
+# └───────────────────────────────────┘
+
+# --- eclairage_couloir_1_annuel_um ---
+eclairage_couloir_1_annuel_um:
+  source: sensor.eclairage_couloir_1_energie
+  name: "Eclairage Couloir 1 Annuel UM"
+  unique_id: eclairage_couloir_1_annuel_um
+  cycle: yearly
+
+# --- eclairage_couloir_1_mensuel_um ---
+eclairage_couloir_1_mensuel_um:
+  source: sensor.eclairage_couloir_1_energie
+  name: "Eclairage Couloir 1 Mensuel UM"
+  unique_id: eclairage_couloir_1_mensuel_um
+  cycle: monthly
+
+# --- eclairage_couloir_1_hebdomadaire_um ---
+eclairage_couloir_1_hebdomadaire_um:
+  source: sensor.eclairage_couloir_1_energie
+  name: "Eclairage Couloir 1 Hebdomadaire UM"
+  unique_id: eclairage_couloir_1_hebdomadaire_um
+  cycle: weekly
+
+# --- eclairage_couloir_1_quotidien_um ---
+eclairage_couloir_1_quotidien_um:
+  source: sensor.eclairage_couloir_1_energie
+  name: "Eclairage Couloir 1 Quotidien UM"
+  unique_id: eclairage_couloir_1_quotidien_um
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │         7. BUREAU (5x)            │
+# └───────────────────────────────────┘
+
+# --- eclairage_bureau_5_annuel_um ---
+eclairage_bureau_5_annuel_um:
+  source: sensor.eclairage_bureau_5_energie
+  name: "Eclairage Bureau 5 Annuel UM"
+  unique_id: eclairage_bureau_5_annuel_um
+  cycle: yearly
+
+# --- eclairage_bureau_5_mensuel_um ---
+eclairage_bureau_5_mensuel_um:
+  source: sensor.eclairage_bureau_5_energie
+  name: "Eclairage Bureau 5 Mensuel UM"
+  unique_id: eclairage_bureau_5_mensuel_um
+  cycle: monthly
+
+# --- eclairage_bureau_5_hebdomadaire_um ---
+eclairage_bureau_5_hebdomadaire_um:
+  source: sensor.eclairage_bureau_5_energie
+  name: "Eclairage Bureau 5 Hebdomadaire UM"
+  unique_id: eclairage_bureau_5_hebdomadaire_um
+  cycle: weekly
+
+# --- eclairage_bureau_5_quotidien_um ---
+eclairage_bureau_5_quotidien_um:
+  source: sensor.eclairage_bureau_5_energie
+  name: "Eclairage Bureau 5 Quotidien UM"
+  unique_id: eclairage_bureau_5_quotidien_um
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │         8. SDB (2x)               │
+# └───────────────────────────────────┘
+
+# --- eclairage_sdb_2_annuel_um ---
+eclairage_sdb_2_annuel_um:
+  source: sensor.eclairage_sdb_2_energie
+  name: "Eclairage Sdb 2 Annuel UM"
+  unique_id: eclairage_sdb_2_annuel_um
+  cycle: yearly
+
+# --- eclairage_sdb_2_mensuel_um ---
+eclairage_sdb_2_mensuel_um:
+  source: sensor.eclairage_sdb_2_energie
+  name: "Eclairage Sdb 2 Mensuel UM"
+  unique_id: eclairage_sdb_2_mensuel_um
+  cycle: monthly
+
+# --- eclairage_sdb_2_hebdomadaire_um ---
+eclairage_sdb_2_hebdomadaire_um:
+  source: sensor.eclairage_sdb_2_energie
+  name: "Eclairage Sdb 2 Hebdomadaire UM"
+  unique_id: eclairage_sdb_2_hebdomadaire_um
+  cycle: weekly
+
+# --- eclairage_sdb_2_quotidien_um ---
+eclairage_sdb_2_quotidien_um:
+  source: sensor.eclairage_sdb_2_energie
+  name: "Eclairage Sdb 2 Quotidien UM"
+  unique_id: eclairage_sdb_2_quotidien_um
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │         9. CHAMBRE (4x)           │
+# └───────────────────────────────────┘
+
+# --- eclairage_chambre_4_annuel_um ---
+eclairage_chambre_4_annuel_um:
+  source: sensor.eclairage_chambre_4_energie
+  name: "Eclairage Chambre 4 Annuel UM"
+  unique_id: eclairage_chambre_4_annuel_um
+  cycle: yearly
+
+# --- eclairage_chambre_4_mensuel_um ---
+eclairage_chambre_4_mensuel_um:
+  source: sensor.eclairage_chambre_4_energie
+  name: "Eclairage Chambre 4 Mensuel UM"
+  unique_id: eclairage_chambre_4_mensuel_um
+  cycle: monthly
+
+# --- eclairage_chambre_4_hebdomadaire_um ---
+eclairage_chambre_4_hebdomadaire_um:
+  source: sensor.eclairage_chambre_4_energie
+  name: "Eclairage Chambre 4 Hebdomadaire UM"
+  unique_id: eclairage_chambre_4_hebdomadaire_um
+  cycle: weekly
+
+# --- eclairage_chambre_4_quotidien_um ---
+eclairage_chambre_4_quotidien_um:
+  source: sensor.eclairage_chambre_4_energie
+  name: "Eclairage Chambre 4 Quotidien UM"
+  unique_id: eclairage_chambre_4_quotidien_um
+  cycle: daily
+
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │    ZONES TRANSVERSALES (APPART)                                           │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+
+# ┌───────────────────────────────────┐
+# │   ZONE HOME (3x) E+Cu+Co          │
+# └───────────────────────────────────┘
+
+# --- eclairage_appart_3_annuel_um ---
+eclairage_appart_3_annuel_um:
+  source: sensor.eclairage_appart_3_energie
+  name: "Eclairage Appart 3 Annuel UM"
+  unique_id: eclairage_appart_3_annuel_um
+  cycle: yearly
+
+# --- eclairage_appart_3_mensuel_um ---
+eclairage_appart_3_mensuel_um:
+  source: sensor.eclairage_appart_3_energie
+  name: "Eclairage Appart 3 Mensuel UM"
+  unique_id: eclairage_appart_3_mensuel_um
+  cycle: monthly
+
+# --- eclairage_appart_3_hebdomadaire_um ---
+eclairage_appart_3_hebdomadaire_um:
+  source: sensor.eclairage_appart_3_energie
+  name: "Eclairage Appart 3 Hebdomadaire UM"
+  unique_id: eclairage_appart_3_hebdomadaire_um
+  cycle: weekly
+
+# --- eclairage_appart_3_quotidien_um ---
+eclairage_appart_3_quotidien_um:
+  source: sensor.eclairage_appart_3_energie
+  name: "Eclairage Appart 3 Quotidien UM"
+  unique_id: eclairage_appart_3_quotidien_um
+  cycle: daily
+
+# ┌───────────────────────────────────┐
+# │   ZONE HOME (2x) E+Co             │
+# └───────────────────────────────────┘
+
+# --- eclairage_appart_2_annuel_um ---
+eclairage_appart_2_annuel_um:
+  source: sensor.eclairage_appart_2_energie
+  name: "Eclairage Appart 2 Annuel UM"
+  unique_id: eclairage_appart_2_annuel_um
+  cycle: yearly
+
+# --- eclairage_appart_2_mensuel_um ---
+eclairage_appart_2_mensuel_um:
+  source: sensor.eclairage_appart_2_energie
+  name: "Eclairage Appart 2 Mensuel UM"
+  unique_id: eclairage_appart_2_mensuel_um
+  cycle: monthly
+
+# --- eclairage_appart_2_hebdomadaire_um ---
+eclairage_appart_2_hebdomadaire_um:
+  source: sensor.eclairage_appart_2_energie
+  name: "Eclairage Appart 2 Hebdomadaire UM"
+  unique_id: eclairage_appart_2_hebdomadaire_um
+  cycle: weekly
+
+# --- eclairage_appart_2_quotidien_um ---
+eclairage_appart_2_quotidien_um:
+  source: sensor.eclairage_appart_2_energie
+  name: "Eclairage Appart 2 Quotidien UM"
+  unique_id: eclairage_appart_2_quotidien_um
+  cycle: daily
+
+# annotations_log:
+# - [Création] Nouveau fichier canonique — remplace version dans TREE_CORRIGE/Docs/ (mauvais chemin).
+# - [Migration] Toutes les sources _energie_totale_kwh (Riemann) → sensor.eclairage_*_energie (templates P3_ENERGIE_2_ZONE).
+# - [Source] P3_ENERGIE_2_ZONE.yaml produit les 9 sensors eclairage_*_energie.
+# - [Chemin] TREE_CORRIGE/utility_meter/P3_eclairage/ (chemin canonique déployable).
