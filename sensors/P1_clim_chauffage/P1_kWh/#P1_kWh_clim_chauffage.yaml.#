@@ -63,7 +63,7 @@
 - platform: integration
   source: sensor.clim_bureau_nous_power
   name: "Clim Bureau Energie Totale UM"
-  unique_id: clim_bureau_energie_totale_UM
+  unique_id: clim_bureau_energie_totale_um
   method: left
   unit_prefix: k
   unit_time: h
@@ -77,7 +77,7 @@
 - platform: integration
   source: sensor.prise_soufflant_salle_de_bain_nous_power
   name: "Soufflant SDB Energie Totale UM"
-  unique_id: soufflant_sdb_energie_totale_UM
+  unique_id: soufflant_sdb_energie_totale_um
   method: left
   unit_prefix: k
   unit_time: h
@@ -87,7 +87,7 @@
 - platform: integration
   source: sensor.prise_seche_serviette_salle_de_bain_nous_power
   name: "Seche Serviette SDB Energie Totale UM"
-  unique_id: seche_serviette_sdb_energie_totale_UM
+  unique_id: seche_serviette_sdb_energie_totale_um
   method: left
   unit_prefix: k
   unit_time: h
