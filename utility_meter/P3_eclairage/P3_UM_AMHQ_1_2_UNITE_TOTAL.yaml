@@ -1,0 +1,148 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. UTILITY METER : TOTAL ÉCLAIRAGE — AMHQ (19 LAMPES À L'UNITÉ)       │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Utility Meter pour le total général de l'éclairage (19 lampes) en AMHQ.
+# Somme directe des sensor.*_energy (kWh) pour chaque cycle.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : somme des 19 sensor.*_energy (kWh).
+# - Sources : hue_white_lamp_entree_energy, hue_white_lamp_table_energy,
+#             hue_ambiance_lamp_salon_1/2/3_energy, hue_color_candle_salon_1_energy,
+#             hue_white_lamp_cuisine_energy, hue_white_lamp_couloir_energy,
+#             hue_play_1/2/3_pc_bureau_energy, hue_white_lamp_bureau_1/2_energy,
+#             relais_lumiere_sdb_sonoff_energy, lampe_salle_de_bain_hue_energy,
+#             hue_white_lamp_chambre_1/2_energy, hue_color_candle_chambre_gege/eric_energy.
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+# | MATÉRIEL       | CAPTEUR BRUT (source)       | CE FICHIER (unique_id)       | AVAL               |
+# |:---------------|:----------------------------|:-----------------------------|:-------------------|
+# | Hue Bridge / Sonoff (Z2M) | sensor.*_energy (19 lampes) | eclairage_total_*_um        | L2C3               |
+#
+# ## ⚠️ IMPORTANT :
+# - Les sensor.*_energy sont déjà en kWh → pas de division ni de unit_prefix.
+# - Utility Meter réinitialise automatiquement les compteurs pour chaque cycle.
+#
+# ## 🖥️ TABLEAU DE BORD :
+# - L2C3 Conso Énergie Éclairage (total général AMHQ)
+
+# ┌───────────────────────────────────┐
+# │       TOTAL ÉCLAIRAGE (19x)        │
+# └───────────────────────────────────┘
+
+# --- eclairage_total_annuel_um ---
+eclairage_total_annuel_um:
+  source: >
+    {{ (
+        states('sensor.hue_white_lamp_entree_energy') | float(0) +
+        states('sensor.hue_white_lamp_table_energy') | float(0) +
+        states('sensor.hue_ambiance_lamp_salon_1_energy') | float(0) +
+        states('sensor.hue_ambiance_lamp_salon_2_energy') | float(0) +
+        states('sensor.hue_ambiance_lamp_salon_3_energy') | float(0) +
+        states('sensor.hue_color_candle_salon_1_energy') | float(0) +
+        states('sensor.hue_white_lamp_cuisine_energy') | float(0) +
+        states('sensor.hue_white_lamp_couloir_energy') | float(0) +
+        states('sensor.hue_play_1_pc_bureau_energy') | float(0) +
+        states('sensor.hue_play_2_pc_bureau_energy') | float(0) +
+        states('sensor.hue_play_3_pc_bureau_energy') | float(0) +
+        states('sensor.hue_white_lamp_bureau_1_energy') | float(0) +
+        states('sensor.hue_white_lamp_bureau_2_energy') | float(0) +
+        states('sensor.relais_lumiere_sdb_sonoff_energy') | float(0) +
+        states('sensor.lampe_salle_de_bain_hue_energy') | float(0) +
+        states('sensor.hue_white_lamp_chambre_1_energy') | float(0) +
+        states('sensor.hue_white_lamp_chambre_2_energy') | float(0) +
+        states('sensor.hue_color_candle_chambre_gege_energy') | float(0) +
+        states('sensor.hue_color_candle_chambre_eric_energy') | float(0)
+       ) }}
+  name: "Eclairage Total Annuel UM"
+  unique_id: eclairage_total_annuel_um
+  cycle: yearly
+  
+
+# --- eclairage_total_mensuel_um ---
+eclairage_total_mensuel_um:
+  source: >
+    {{ (
+        states('sensor.hue_white_lamp_entree_energy') | float(0) +
+        states('sensor.hue_white_lamp_table_energy') | float(0) +
+        states('sensor.hue_ambiance_lamp_salon_1_energy') | float(0) +
+        states('sensor.hue_ambiance_lamp_salon_2_energy') | float(0) +
+        states('sensor.hue_ambiance_lamp_salon_3_energy') | float(0) +
+        states('sensor.hue_color_candle_salon_1_energy') | float(0) +
+        states('sensor.hue_white_lamp_cuisine_energy') | float(0) +
+        states('sensor.hue_white_lamp_couloir_energy') | float(0) +
+        states('sensor.hue_play_1_pc_bureau_energy') | float(0) +
+        states('sensor.hue_play_2_pc_bureau_energy') | float(0) +
+        states('sensor.hue_play_3_pc_bureau_energy') | float(0) +
+        states('sensor.hue_white_lamp_bureau_1_energy') | float(0) +
+        states('sensor.hue_white_lamp_bureau_2_energy') | float(0) +
+        states('sensor.relais_lumiere_sdb_sonoff_energy') | float(0) +
+        states('sensor.lampe_salle_de_bain_hue_energy') | float(0) +
+        states('sensor.hue_white_lamp_chambre_1_energy') | float(0) +
+        states('sensor.hue_white_lamp_chambre_2_energy') | float(0) +
+        states('sensor.hue_color_candle_chambre_gege_energy') | float(0) +
+        states('sensor.hue_color_candle_chambre_eric_energy') | float(0)
+       ) }}
+  name: "Eclairage Total Mensuel UM"
+  unique_id: eclairage_total_mensuel_um
+  cycle: monthly
+  
+
+# --- eclairage_total_hebdomadaire_um ---
+eclairage_total_hebdomadaire_um:
+  source: >
+    {{ (
+        states('sensor.hue_white_lamp_entree_energy') | float(0) +
+        states('sensor.hue_white_lamp_table_energy') | float(0) +
+        states('sensor.hue_ambiance_lamp_salon_1_energy') | float(0) +
+        states('sensor.hue_ambiance_lamp_salon_2_energy') | float(0) +
+        states('sensor.hue_ambiance_lamp_salon_3_energy') | float(0) +
+        states('sensor.hue_color_candle_salon_1_energy') | float(0) +
+        states('sensor.hue_white_lamp_cuisine_energy') | float(0) +
+        states('sensor.hue_white_lamp_couloir_energy') | float(0) +
+        states('sensor.hue_play_1_pc_bureau_energy') | float(0) +
+        states('sensor.hue_play_2_pc_bureau_energy') | float(0) +
+        states('sensor.hue_play_3_pc_bureau_energy') | float(0) +
+        states('sensor.hue_white_lamp_bureau_1_energy') | float(0) +
+        states('sensor.hue_white_lamp_bureau_2_energy') | float(0) +
+        states('sensor.relais_lumiere_sdb_sonoff_energy') | float(0) +
+        states('sensor.lampe_salle_de_bain_hue_energy') | float(0) +
+        states('sensor.hue_white_lamp_chambre_1_energy') | float(0) +
+        states('sensor.hue_white_lamp_chambre_2_energy') | float(0) +
+        states('sensor.hue_color_candle_chambre_gege_energy') | float(0) +
+        states('sensor.hue_color_candle_chambre_eric_energy') | float(0)
+       ) }}
+  name: "Eclairage Total Hebdomadaire UM"
+  unique_id: eclairage_total_hebdomadaire_um
+  cycle: weekly
+  
+
+# --- eclairage_total_quotidien_um ---
+eclairage_total_quotidien_um:
+  source: >
+    {{ (
+        states('sensor.hue_white_lamp_entree_energy') | float(0) +
+        states('sensor.hue_white_lamp_table_energy') | float(0) +
+        states('sensor.hue_ambiance_lamp_salon_1_energy') | float(0) +
+        states('sensor.hue_ambiance_lamp_salon_2_energy') | float(0) +
+        states('sensor.hue_ambiance_lamp_salon_3_energy') | float(0) +
+        states('sensor.hue_color_candle_salon_1_energy') | float(0) +
+        states('sensor.hue_white_lamp_cuisine_energy') | float(0) +
+        states('sensor.hue_white_lamp_couloir_energy') | float(0) +
+        states('sensor.hue_play_1_pc_bureau_energy') | float(0) +
+        states('sensor.hue_play_2_pc_bureau_energy') | float(0) +
+        states('sensor.hue_play_3_pc_bureau_energy') | float(0) +
+        states('sensor.hue_white_lamp_bureau_1_energy') | float(0) +
+        states('sensor.hue_white_lamp_bureau_2_energy') | float(0) +
+        states('sensor.relais_lumiere_sdb_sonoff_energy') | float(0) +
+        states('sensor.lampe_salle_de_bain_hue_energy') | float(0) +
+        states('sensor.hue_white_lamp_chambre_1_energy') | float(0) +
+        states('sensor.hue_white_lamp_chambre_2_energy') | float(0) +
+        states('sensor.hue_color_candle_chambre_gege_energy') | float(0) +
+        states('sensor.hue_color_candle_chambre_eric_energy') | float(0)
+       ) }}
+  name: "Eclairage Total Quotidien UM"
+  unique_id: eclairage_total_quotidien_um
+  cycle: daily
+  

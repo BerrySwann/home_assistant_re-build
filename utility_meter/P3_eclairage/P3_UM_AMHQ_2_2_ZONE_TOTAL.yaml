@@ -1,0 +1,108 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. UTILITY METER : ÉCLAIRAGE — AMHQ TOTAL APPARTEMENT               │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Compteurs Utility Meter donnant la consommation totale de tout l'éclairage
+# de l'appartement en 4 cycles AMHQ. 2 totaux × 4 cycles = 8 compteurs.
+# - Total GROUP : somme des 7 zones (Entrée, Salon, Cuisine, Couloir, Bureau, SDB, Chambre).
+# - Total UNIT  : somme des 19 ampoules (pour vérification).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - GROUP : Somme des UM des 7 zones (P3_UM_AMHQ_2_ZONE).
+# - UNIT  : Somme des UM des 19 ampoules (P3_UM_AMHQ_1_UNITE).
+# - Les sources _um sont en kWh (pas de conversion nécessaire).
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)       | CE FICHIER (unique_id)              | AVAL               |
+# |:---------------|:----------------------------|:------------------------------------|:-------------------|
+# | UM Zones       | sensor.eclairage_*_*_um (kWh) | eclairage_total_group_*_um (kWh)   | P3_AVG_AMHQ_3_TOTAL |
+# | UM Ampoules    | sensor.hue_*_*_um (kWh)     | eclairage_total_unit_*_um (kWh)     | P3_AVG_AMHQ_3_TOTAL |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Les zones transversales (appart_3, appart_2) NE SONT PAS incluses dans GROUP
+#   pour éviter le double comptage (Entrée, Cuisine, Couloir sont déjà comptées).
+# - Les deux totaux (GROUP et UNIT) doivent converger. Un écart persistant
+#   indique une source manquante ou un double comptage.
+# - Suffixe _um : convention uniforme depuis refactoring 2026-04-25.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (vignette total éclairage)
+
+# ┌───────────────────────────────────┐
+# │  TOTAL : PAR REGROUPEMENT (7 zones) │
+# └───────────────────────────────────┘
+
+# --- eclairage_total_group_annuel_um ---
+eclairage_total_group_annuel_um:
+  source: >
+    {{ (
+        states('sensor.eclairage_entree_1_annuel_um') | float(0) +
+        states('sensor.eclairage_salon_5_annuel_um') | float(0) +
+        states('sensor.eclairage_cuisine_1_annuel_um') | float(0) +
+        states('sensor.eclairage_couloir_1_annuel_um') | float(0) +
+        states('sensor.eclairage_bureau_5_annuel_um') | float(0) +
+        states('sensor.eclairage_sdb_2_annuel_um') | float(0) +
+        states('sensor.eclairage_chambre_4_annuel_um') | float(0)
+       ) }}
+  name: "Eclairage Total Group Annuel UM"
+  unique_id: eclairage_total_group_annuel_um
+  cycle: yearly
+  
+
+# --- eclairage_total_group_mensuel_um ---
+eclairage_total_group_mensuel_um:
+  source: >
+    {{ (
+        states('sensor.eclairage_entree_1_mensuel_um') | float(0) +
+        states('sensor.eclairage_salon_5_mensuel_um') | float(0) +
+        states('sensor.eclairage_cuisine_1_mensuel_um') | float(0) +
+        states('sensor.eclairage_couloir_1_mensuel_um') | float(0) +
+        states('sensor.eclairage_bureau_5_mensuel_um') | float(0) +
+        states('sensor.eclairage_sdb_2_mensuel_um') | float(0) +
+        states('sensor.eclairage_chambre_4_mensuel_um') | float(0)
+       ) }}
+  name: "Eclairage Total Group Mensuel UM"
+  unique_id: eclairage_total_group_mensuel_um
+  cycle: monthly
+  
+
+# --- eclairage_total_group_hebdomadaire_um ---
+eclairage_total_group_hebdomadaire_um:
+  source: >
+    {{ (
+        states('sensor.eclairage_entree_1_hebdomadaire_um') | float(0) +
+        states('sensor.eclairage_salon_5_hebdomadaire_um') | float(0) +
+        states('sensor.eclairage_cuisine_1_hebdomadaire_um') | float(0) +
+        states('sensor.eclairage_couloir_1_hebdomadaire_um') | float(0) +
+        states('sensor.eclairage_bureau_5_hebdomadaire_um') | float(0) +
+        states('sensor.eclairage_sdb_2_hebdomadaire_um') | float(0) +
+        states('sensor.eclairage_chambre_4_hebdomadaire_um') | float(0)
+       ) }}
+  name: "Eclairage Total Group Hebdomadaire UM"
+  unique_id: eclairage_total_group_hebdomadaire_um
+  cycle: weekly
+  
+
+# --- eclairage_total_group_quotidien_um ---
+eclairage_total_group_quotidien_um:
+  source: >
+    {{ (
+        states('sensor.eclairage_entree_1_quotidien_um') | float(0) +
+        states('sensor.eclairage_salon_5_quotidien_um') | float(0) +
+        states('sensor.eclairage_cuisine_1_quotidien_um') | float(0) +
+        states('sensor.eclairage_couloir_1_quotidien_um') | float(0) +
+        states('sensor.eclairage_bureau_5_quotidien_um') | float(0) +
+        states('sensor.eclairage_sdb_2_quotidien_um') | float(0) +
+        states('sensor.eclairage_chambre_4_quotidien_um') | float(0)
+       ) }}
+  name: "Eclairage Total Group Quotidien UM"
+  unique_id: eclairage_total_group_quotidien_um
+  cycle: daily
+  
+
+
+# annotations_log:
+# - [2026-04-25] Création des UM totaux GROUP (7 zones).
+# - [2026-04-25] Correction : suppression de appart_3 et appart_2 dans GROUP pour éviter le double comptage.
