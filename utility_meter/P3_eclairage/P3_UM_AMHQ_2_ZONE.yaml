@@ -4,24 +4,26 @@
 #
 # ## 📝 DESCRIPTION :
 # Compteurs Utility Meter découpant la consommation par zone/pièce (somme de
-# toutes les ampoules d'une pièce) en 4 cycles AMHQ. Zones : Salon (5x),
-# Appart (3x = Entrée+Cuisine+Couloir), Cuisine (1x), Appart (2x = Entrée+Couloir),
-# Bureau (5x), SDB (2x), Chambre (4x).
+# toutes les ampoules d'une pièce) en 4 cycles AMHQ. 9 zones × 4 cycles = 36 compteurs.
+# Zones : Salon (5x), Appart_3 (Entrée+Cuisine+Couloir), Cuisine (1x),
+#         Appart_2 (Entrée+Couloir), Bureau (5x), SDB (2x), Chambre (4x),
+#         Entrée (1x), Couloir (1x).
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Sources : sensor.eclairage_[zone]_energie_totale_kwh (capteurs somme calculés
 #   dans sensors/P3_eclairage/P3_kWh_2_ZONE.yaml via templates P3_POWER_2_TOTAL_MULTI_ZONE.yaml).
-#
+# - Zones APPART regroupent plusieurs pièces — ne pas confondre avec les zones individuelles.
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
-# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
-# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.eclairage_*_kwh_zone (×7)                   | eclairage_*_zone_{annuel|mensuel|hebdo|quotidien}  | P3_AVG_AMHQ_2_ZONE.yaml → L2C3     |
+# | MATÉRIEL   | CAPTEUR BRUT (source)                             | CE FICHIER (unique_id)                    | AVAL                           |
+# |:-----------|:--------------------------------------------------|:------------------------------------------|:-------------------------------|
+# | [calculé]  | sensor.eclairage_*_energie_totale_kwh (×9 zones)  | *_annuel/mensuel/hebdomadaire/quotidien_um | P3_AVG_AMHQ_2_ZONE.yaml → L2C3 |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# Les zones APPART regroupent plusieurs pièces (entrée+couloir ou entrée+cuisine+couloir).
-# Ne pas créer de doublons avec les zones par pièce individuelle.
+# - Zones APPART : regroupent plusieurs pièces physiques (entrée+couloir ou +cuisine).
+#   Ne pas créer de doublons avec les zones par pièce individuelle.
+# - Suffixe _um (sans _kwh_) : convention uniforme depuis refactoring 2026-04-25.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C3 Conso Énergie Éclairage (vue par pièce/zone)
@@ -30,324 +32,293 @@
 # │     ZONE 4. (5x) SALON            │
 # └───────────────────────────────────┘
 
-# --- eclairage_salon_5_annuel_kwh_um ---
-eclairage_salon_5_annuel_kwh_um:
+# --- eclairage_salon_5_annuel_um ---
+eclairage_salon_5_annuel_um:
   source: sensor.eclairage_salon_5_energie_totale_kwh
-  name: "Eclairage Salon 5 Annuel kWh UM"
-  unique_id: eclairage_salon_5_annuel_kwh_um
+  name: "Eclairage Salon 5 Annuel UM"
+  unique_id: eclairage_salon_5_annuel_um
   cycle: yearly
 
-# --- eclairage_salon_5_mensuel_kwh_um ---
-eclairage_salon_5_mensuel_kwh_um:
+# --- eclairage_salon_5_mensuel_um ---
+eclairage_salon_5_mensuel_um:
   source: sensor.eclairage_salon_5_energie_totale_kwh
-  name: "Eclairage Salon 5 Mensuel kWh UM"
-  unique_id: eclairage_salon_5_mensuel_kwh_um
+  name: "Eclairage Salon 5 Mensuel UM"
+  unique_id: eclairage_salon_5_mensuel_um
   cycle: monthly
 
-# --- eclairage_salon_5_hebdomadaire_kwh_um ---
-eclairage_salon_5_hebdomadaire_kwh_um:
+# --- eclairage_salon_5_hebdomadaire_um ---
+eclairage_salon_5_hebdomadaire_um:
   source: sensor.eclairage_salon_5_energie_totale_kwh
-  name: "Eclairage Salon 5 Hebdomadaire kWh UM"
-  unique_id: eclairage_salon_5_hebdomadaire_kwh_um
+  name: "Eclairage Salon 5 Hebdomadaire UM"
+  unique_id: eclairage_salon_5_hebdomadaire_um
   cycle: weekly
 
-# --- eclairage_salon_5_quotidien_kwh_um ---
-eclairage_salon_5_quotidien_kwh_um:
+# --- eclairage_salon_5_quotidien_um ---
+eclairage_salon_5_quotidien_um:
   source: sensor.eclairage_salon_5_energie_totale_kwh
-  name: "Eclairage Salon 5 Quotidien kWh UM"
-  unique_id: eclairage_salon_5_quotidien_kwh_um
+  name: "Eclairage Salon 5 Quotidien UM"
+  unique_id: eclairage_salon_5_quotidien_um
   cycle: daily
 
-# ╭──────────────────────────────────────────────────────────────────────────╮
-# │ ZONE. ((3x) Entrée, cuisine & couloir) (HOME)                           │
-# ╰──────────────────────────────────────────────────────────────────────────╯
+# ┌───────────────────────────────────┐
+# │  ZONE (3x) APPART (E+C+Coul)      │
+# └───────────────────────────────────┘
 
-# --- eclairage_appart_3_annuel_kwh_um ---
-eclairage_appart_3_annuel_kwh_um:
+# --- eclairage_appart_3_annuel_um ---
+eclairage_appart_3_annuel_um:
   source: sensor.eclairage_appart_3_energie_totale_kwh
-  name: "Eclairage Appart 3 Annuel kWh UM"
-  unique_id: eclairage_appart_3_annuel_kwh_um
+  name: "Eclairage Appart 3 Annuel UM"
+  unique_id: eclairage_appart_3_annuel_um
   cycle: yearly
 
-# --- eclairage_appart_3_mensuel_kwh_um ---
-eclairage_appart_3_mensuel_kwh_um:
+# --- eclairage_appart_3_mensuel_um ---
+eclairage_appart_3_mensuel_um:
   source: sensor.eclairage_appart_3_energie_totale_kwh
-  name: "Eclairage Appart 3 Mensuel kWh UM"
-  unique_id: eclairage_appart_3_mensuel_kwh_um
+  name: "Eclairage Appart 3 Mensuel UM"
+  unique_id: eclairage_appart_3_mensuel_um
   cycle: monthly
 
-# --- eclairage_appart_3_hebdomadaire_kwh_um ---
-eclairage_appart_3_hebdomadaire_kwh_um:
+# --- eclairage_appart_3_hebdomadaire_um ---
+eclairage_appart_3_hebdomadaire_um:
   source: sensor.eclairage_appart_3_energie_totale_kwh
-  name: "Eclairage Appart 3 Hebdomadaire kWh UM"
-  unique_id: eclairage_appart_3_hebdomadaire_kwh_um
+  name: "Eclairage Appart 3 Hebdomadaire UM"
+  unique_id: eclairage_appart_3_hebdomadaire_um
   cycle: weekly
 
-# --- eclairage_appart_3_quotidien_kwh_um ---
-eclairage_appart_3_quotidien_kwh_um:
+# --- eclairage_appart_3_quotidien_um ---
+eclairage_appart_3_quotidien_um:
   source: sensor.eclairage_appart_3_energie_totale_kwh
-  name: "Eclairage Appart 3 Quotidien kWh UM"
-  unique_id: eclairage_appart_3_quotidien_kwh_um
+  name: "Eclairage Appart 3 Quotidien UM"
+  unique_id: eclairage_appart_3_quotidien_um
   cycle: daily
 
 # ┌───────────────────────────────────┐
 # │     ZONE 5. (1x) CUISINE          │
 # └───────────────────────────────────┘
 
-# --- eclairage_cuisine_1_annuel_kwh_um ---
-eclairage_cuisine_1_annuel_kwh_um:
+# --- eclairage_cuisine_1_annuel_um ---
+eclairage_cuisine_1_annuel_um:
   source: sensor.eclairage_cuisine_1_energie_totale_kwh
-  name: "Eclairage Cuisine 1 Annuel kWh UM"
-  unique_id: eclairage_cuisine_1_annuel_kwh_um
+  name: "Eclairage Cuisine 1 Annuel UM"
+  unique_id: eclairage_cuisine_1_annuel_um
   cycle: yearly
 
-# --- eclairage_cuisine_1_mensuel_kwh_um ---
-eclairage_cuisine_1_mensuel_kwh_um:
+# --- eclairage_cuisine_1_mensuel_um ---
+eclairage_cuisine_1_mensuel_um:
   source: sensor.eclairage_cuisine_1_energie_totale_kwh
-  name: "Eclairage Cuisine 1 Mensuel kWh UM"
-  unique_id: eclairage_cuisine_1_mensuel_kwh_um
+  name: "Eclairage Cuisine 1 Mensuel UM"
+  unique_id: eclairage_cuisine_1_mensuel_um
   cycle: monthly
 
-# --- eclairage_cuisine_1_hebdomadaire_kwh_um ---
-eclairage_cuisine_1_hebdomadaire_kwh_um:
+# --- eclairage_cuisine_1_hebdomadaire_um ---
+eclairage_cuisine_1_hebdomadaire_um:
   source: sensor.eclairage_cuisine_1_energie_totale_kwh
-  name: "Eclairage Cuisine 1 Hebdomadaire kWh UM"
-  unique_id: eclairage_cuisine_1_hebdomadaire_kwh_um
+  name: "Eclairage Cuisine 1 Hebdomadaire UM"
+  unique_id: eclairage_cuisine_1_hebdomadaire_um
   cycle: weekly
 
-# --- eclairage_cuisine_1_quotidien_kwh_um ---
-eclairage_cuisine_1_quotidien_kwh_um:
+# --- eclairage_cuisine_1_quotidien_um ---
+eclairage_cuisine_1_quotidien_um:
   source: sensor.eclairage_cuisine_1_energie_totale_kwh
-  name: "Eclairage Cuisine 1 Quotidien kWh UM"
-  unique_id: eclairage_cuisine_1_quotidien_kwh_um
+  name: "Eclairage Cuisine 1 Quotidien UM"
+  unique_id: eclairage_cuisine_1_quotidien_um
   cycle: daily
 
-# ╭──────────────────────────────────────────────────────────────────────────╮
-# │ ZONE. ((2x) Entrée & couloir) (HOME)                                    │
-# ╰──────────────────────────────────────────────────────────────────────────╯
+# ┌───────────────────────────────────┐
+# │   ZONE (2x) APPART (E+Coul)       │
+# └───────────────────────────────────┘
 
-# --- eclairage_appart_2_annuel_kwh_um ---
-eclairage_appart_2_annuel_kwh_um:
+# --- eclairage_appart_2_annuel_um ---
+eclairage_appart_2_annuel_um:
   source: sensor.eclairage_appart_2_energie_totale_kwh
-  name: "Eclairage Appart 2 Annuel kWh UM"
-  unique_id: eclairage_appart_2_annuel_kwh_um
+  name: "Eclairage Appart 2 Annuel UM"
+  unique_id: eclairage_appart_2_annuel_um
   cycle: yearly
 
-# --- eclairage_appart_2_mensuel_kwh_um ---
-eclairage_appart_2_mensuel_kwh_um:
+# --- eclairage_appart_2_mensuel_um ---
+eclairage_appart_2_mensuel_um:
   source: sensor.eclairage_appart_2_energie_totale_kwh
-  name: "Eclairage Appart 2 Mensuel kWh UM"
-  unique_id: eclairage_appart_2_mensuel_kwh_um
+  name: "Eclairage Appart 2 Mensuel UM"
+  unique_id: eclairage_appart_2_mensuel_um
   cycle: monthly
 
-# --- eclairage_appart_2_hebdomadaire_kwh_um ---
-eclairage_appart_2_hebdomadaire_kwh_um:
+# --- eclairage_appart_2_hebdomadaire_um ---
+eclairage_appart_2_hebdomadaire_um:
   source: sensor.eclairage_appart_2_energie_totale_kwh
-  name: "Eclairage Appart 2 Hebdomadaire kWh UM"
-  unique_id: eclairage_appart_2_hebdomadaire_kwh_um
+  name: "Eclairage Appart 2 Hebdomadaire UM"
+  unique_id: eclairage_appart_2_hebdomadaire_um
   cycle: weekly
 
-# --- eclairage_appart_2_quotidien_kwh_um ---
-eclairage_appart_2_quotidien_kwh_um:
+# --- eclairage_appart_2_quotidien_um ---
+eclairage_appart_2_quotidien_um:
   source: sensor.eclairage_appart_2_energie_totale_kwh
-  name: "Eclairage Appart 2 Quotidien kWh UM"
-  unique_id: eclairage_appart_2_quotidien_kwh_um
+  name: "Eclairage Appart 2 Quotidien UM"
+  unique_id: eclairage_appart_2_quotidien_um
   cycle: daily
 
 # ┌───────────────────────────────────┐
 # │     ZONE 7. (5x) BUREAU           │
 # └───────────────────────────────────┘
 
-# --- eclairage_bureau_5_annuel_kwh_um ---
-eclairage_bureau_5_annuel_kwh_um:
+# --- eclairage_bureau_5_annuel_um ---
+eclairage_bureau_5_annuel_um:
   source: sensor.eclairage_bureau_5_energie_totale_kwh
-  name: "Eclairage Bureau 5 Annuel kWh UM"
-  unique_id: eclairage_bureau_5_annuel_kwh_um
+  name: "Eclairage Bureau 5 Annuel UM"
+  unique_id: eclairage_bureau_5_annuel_um
   cycle: yearly
 
-# --- eclairage_bureau_5_mensuel_kwh_um ---
-eclairage_bureau_5_mensuel_kwh_um:
+# --- eclairage_bureau_5_mensuel_um ---
+eclairage_bureau_5_mensuel_um:
   source: sensor.eclairage_bureau_5_energie_totale_kwh
-  name: "Eclairage Bureau 5 Mensuel kWh UM"
-  unique_id: eclairage_bureau_5_mensuel_kwh_um
+  name: "Eclairage Bureau 5 Mensuel UM"
+  unique_id: eclairage_bureau_5_mensuel_um
   cycle: monthly
 
-# --- eclairage_bureau_5_hebdomadaire_kwh_um ---
-eclairage_bureau_5_hebdomadaire_kwh_um:
+# --- eclairage_bureau_5_hebdomadaire_um ---
+eclairage_bureau_5_hebdomadaire_um:
   source: sensor.eclairage_bureau_5_energie_totale_kwh
-  name: "Eclairage Bureau 5 Hebdomadaire kWh UM"
-  unique_id: eclairage_bureau_5_hebdomadaire_kwh_um
+  name: "Eclairage Bureau 5 Hebdomadaire UM"
+  unique_id: eclairage_bureau_5_hebdomadaire_um
   cycle: weekly
 
-# --- eclairage_bureau_5_quotidien_kwh_um ---
-eclairage_bureau_5_quotidien_kwh_um:
+# --- eclairage_bureau_5_quotidien_um ---
+eclairage_bureau_5_quotidien_um:
   source: sensor.eclairage_bureau_5_energie_totale_kwh
-  name: "Eclairage Bureau 5 Quotidien kWh UM"
-  unique_id: eclairage_bureau_5_quotidien_kwh_um
+  name: "Eclairage Bureau 5 Quotidien UM"
+  unique_id: eclairage_bureau_5_quotidien_um
   cycle: daily
 
 # ┌───────────────────────────────────┐
 # │     ZONE 8. (2x) SDB              │
 # └───────────────────────────────────┘
 
-# --- eclairage_sdb_2_annuel_kwh_um ---
-eclairage_sdb_2_annuel_kwh_um:
+# --- eclairage_sdb_2_annuel_um ---
+eclairage_sdb_2_annuel_um:
   source: sensor.eclairage_sdb_2_energie_totale_kwh
-  name: "Eclairage Sdb 2 Annuel kWh UM"
-  unique_id: eclairage_sdb_2_annuel_kwh_um
+  name: "Eclairage Sdb 2 Annuel UM"
+  unique_id: eclairage_sdb_2_annuel_um
   cycle: yearly
 
-# --- eclairage_sdb_2_mensuel_kwh_um ---
-eclairage_sdb_2_mensuel_kwh_um:
+# --- eclairage_sdb_2_mensuel_um ---
+eclairage_sdb_2_mensuel_um:
   source: sensor.eclairage_sdb_2_energie_totale_kwh
-  name: "Eclairage Sdb 2 Mensuel kWh UM"
-  unique_id: eclairage_sdb_2_mensuel_kwh_um
+  name: "Eclairage Sdb 2 Mensuel UM"
+  unique_id: eclairage_sdb_2_mensuel_um
   cycle: monthly
 
-# --- eclairage_sdb_2_hebdomadaire_kwh_um ---
-eclairage_sdb_2_hebdomadaire_kwh_um:
+# --- eclairage_sdb_2_hebdomadaire_um ---
+eclairage_sdb_2_hebdomadaire_um:
   source: sensor.eclairage_sdb_2_energie_totale_kwh
-  name: "Eclairage Sdb 2 Hebdomadaire kWh UM"
-  unique_id: eclairage_sdb_2_hebdomadaire_kwh_um
+  name: "Eclairage Sdb 2 Hebdomadaire UM"
+  unique_id: eclairage_sdb_2_hebdomadaire_um
   cycle: weekly
 
-# --- eclairage_sdb_2_quotidien_kwh_um ---
-eclairage_sdb_2_quotidien_kwh_um:
+# --- eclairage_sdb_2_quotidien_um ---
+eclairage_sdb_2_quotidien_um:
   source: sensor.eclairage_sdb_2_energie_totale_kwh
-  name: "Eclairage Sdb 2 Quotidien kWh UM"
-  unique_id: eclairage_sdb_2_quotidien_kwh_um
+  name: "Eclairage Sdb 2 Quotidien UM"
+  unique_id: eclairage_sdb_2_quotidien_um
   cycle: daily
 
 # ┌───────────────────────────────────┐
 # │     ZONE 9. (4x) CHAMBRE          │
 # └───────────────────────────────────┘
 
-# --- eclairage_chambre_4_annuel_kwh_um ---
-eclairage_chambre_4_annuel_kwh_um:
+# --- eclairage_chambre_4_annuel_um ---
+eclairage_chambre_4_annuel_um:
   source: sensor.eclairage_chambre_4_energie_totale_kwh
-  name: "Eclairage Chambre 4 Annuel kWh UM"
-  unique_id: eclairage_chambre_4_annuel_kwh_um
+  name: "Eclairage Chambre 4 Annuel UM"
+  unique_id: eclairage_chambre_4_annuel_um
   cycle: yearly
 
-# --- eclairage_chambre_4_mensuel_kwh_um ---
-eclairage_chambre_4_mensuel_kwh_um:
+# --- eclairage_chambre_4_mensuel_um ---
+eclairage_chambre_4_mensuel_um:
   source: sensor.eclairage_chambre_4_energie_totale_kwh
-  name: "Eclairage Chambre 4 Mensuel kWh UM"
-  unique_id: eclairage_chambre_4_mensuel_kwh_um
+  name: "Eclairage Chambre 4 Mensuel UM"
+  unique_id: eclairage_chambre_4_mensuel_um
   cycle: monthly
 
-# --- eclairage_chambre_4_hebdomadaire_kwh_um ---
-eclairage_chambre_4_hebdomadaire_kwh_um:
+# --- eclairage_chambre_4_hebdomadaire_um ---
+eclairage_chambre_4_hebdomadaire_um:
   source: sensor.eclairage_chambre_4_energie_totale_kwh
-  name: "Eclairage Chambre 4 Hebdomadaire kWh UM"
-  unique_id: eclairage_chambre_4_hebdomadaire_kwh_um
+  name: "Eclairage Chambre 4 Hebdomadaire UM"
+  unique_id: eclairage_chambre_4_hebdomadaire_um
   cycle: weekly
 
-# --- eclairage_chambre_4_quotidien_kwh_um ---
-eclairage_chambre_4_quotidien_kwh_um:
+# --- eclairage_chambre_4_quotidien_um ---
+eclairage_chambre_4_quotidien_um:
   source: sensor.eclairage_chambre_4_energie_totale_kwh
-  name: "Eclairage Chambre 4 Quotidien kWh UM"
-  unique_id: eclairage_chambre_4_quotidien_kwh_um
+  name: "Eclairage Chambre 4 Quotidien UM"
+  unique_id: eclairage_chambre_4_quotidien_um
   cycle: daily
 
 # ┌───────────────────────────────────┐
 # │     ZONE 1. (1x) ENTRÉE           │
 # └───────────────────────────────────┘
 
-# --- eclairage_entree_1_annuel_kwh_um ---
-eclairage_entree_1_annuel_kwh_um:
+# --- eclairage_entree_1_annuel_um ---
+eclairage_entree_1_annuel_um:
   source: sensor.eclairage_entree_1_energie_totale_kwh
-  name: "Eclairage Entree 1 Annuel kWh UM"
-  unique_id: eclairage_entree_1_annuel_kwh_um
+  name: "Eclairage Entree 1 Annuel UM"
+  unique_id: eclairage_entree_1_annuel_um
   cycle: yearly
 
-# --- eclairage_entree_1_mensuel_kwh_um ---
-eclairage_entree_1_mensuel_kwh_um:
+# --- eclairage_entree_1_mensuel_um ---
+eclairage_entree_1_mensuel_um:
   source: sensor.eclairage_entree_1_energie_totale_kwh
-  name: "Eclairage Entree 1 Mensuel kWh UM"
-  unique_id: eclairage_entree_1_mensuel_kwh_um
+  name: "Eclairage Entree 1 Mensuel UM"
+  unique_id: eclairage_entree_1_mensuel_um
   cycle: monthly
 
-# --- eclairage_entree_1_hebdomadaire_kwh_um ---
-eclairage_entree_1_hebdomadaire_kwh_um:
+# --- eclairage_entree_1_hebdomadaire_um ---
+eclairage_entree_1_hebdomadaire_um:
   source: sensor.eclairage_entree_1_energie_totale_kwh
-  name: "Eclairage Entree 1 Hebdomadaire kWh UM"
-  unique_id: eclairage_entree_1_hebdomadaire_kwh_um
+  name: "Eclairage Entree 1 Hebdomadaire UM"
+  unique_id: eclairage_entree_1_hebdomadaire_um
   cycle: weekly
 
-# --- eclairage_entree_1_quotidien_kwh_um ---
-eclairage_entree_1_quotidien_kwh_um:
+# --- eclairage_entree_1_quotidien_um ---
+eclairage_entree_1_quotidien_um:
   source: sensor.eclairage_entree_1_energie_totale_kwh
-  name: "Eclairage Entree 1 Quotidien kWh UM"
-  unique_id: eclairage_entree_1_quotidien_kwh_um
+  name: "Eclairage Entree 1 Quotidien UM"
+  unique_id: eclairage_entree_1_quotidien_um
   cycle: daily
 
 # ┌───────────────────────────────────┐
 # │     ZONE 6. (1x) COULOIR          │
 # └───────────────────────────────────┘
 
-# --- eclairage_couloir_1_annuel_kwh_um ---
-eclairage_couloir_1_annuel_kwh_um:
+# --- eclairage_couloir_1_annuel_um ---
+eclairage_couloir_1_annuel_um:
   source: sensor.eclairage_couloir_1_energie_totale_kwh
-  name: "Eclairage Couloir 1 Annuel kWh UM"
-  unique_id: eclairage_couloir_1_annuel_kwh_um
+  name: "Eclairage Couloir 1 Annuel UM"
+  unique_id: eclairage_couloir_1_annuel_um
   cycle: yearly
 
-# --- eclairage_couloir_1_mensuel_kwh_um ---
-eclairage_couloir_1_mensuel_kwh_um:
+# --- eclairage_couloir_1_mensuel_um ---
+eclairage_couloir_1_mensuel_um:
   source: sensor.eclairage_couloir_1_energie_totale_kwh
-  name: "Eclairage Couloir 1 Mensuel kWh UM"
-  unique_id: eclairage_couloir_1_mensuel_kwh_um
+  name: "Eclairage Couloir 1 Mensuel UM"
+  unique_id: eclairage_couloir_1_mensuel_um
   cycle: monthly
 
-# --- eclairage_couloir_1_hebdomadaire_kwh_um ---
-eclairage_couloir_1_hebdomadaire_kwh_um:
+# --- eclairage_couloir_1_hebdomadaire_um ---
+eclairage_couloir_1_hebdomadaire_um:
   source: sensor.eclairage_couloir_1_energie_totale_kwh
-  name: "Eclairage Couloir 1 Hebdomadaire kWh UM"
-  unique_id: eclairage_couloir_1_hebdomadaire_kwh_um
+  name: "Eclairage Couloir 1 Hebdomadaire UM"
+  unique_id: eclairage_couloir_1_hebdomadaire_um
   cycle: weekly
 
-# --- eclairage_couloir_1_quotidien_kwh_um ---
-eclairage_couloir_1_quotidien_kwh_um:
+# --- eclairage_couloir_1_quotidien_um ---
+eclairage_couloir_1_quotidien_um:
   source: sensor.eclairage_couloir_1_energie_totale_kwh
-  name: "Eclairage Couloir 1 Quotidien kWh UM"
-  unique_id: eclairage_couloir_1_quotidien_kwh_um
+  name: "Eclairage Couloir 1 Quotidien UM"
+  unique_id: eclairage_couloir_1_quotidien_um
   cycle: daily
 
 # annotations_log:
-# - [slug] MOD L26: # --- eclairage_salon_5 --- → # --- eclairage_salon_5_annuel_kwh_um ---
-# - [slug] INS avant L33: # --- eclairage_salon_5_mensuel_kwh_um ---
-# - [slug] INS avant L40: # --- eclairage_salon_5_hebdomadaire_kwh_um ---
-# - [slug] INS avant L47: # --- eclairage_salon_5_quotidien_kwh_um ---
-# - [slug] MOD L58: # --- eclairage_appart_3 --- → # --- eclairage_appart_3_annuel_kwh_um ---
-# - [slug] INS avant L65: # --- eclairage_appart_3_mensuel_kwh_um ---
-# - [slug] INS avant L72: # --- eclairage_appart_3_hebdomadaire_kwh_um ---
-# - [slug] INS avant L79: # --- eclairage_appart_3_quotidien_kwh_um ---
-# - [slug] MOD L90: # --- eclairage_cuisine_1 --- → # --- eclairage_cuisine_1_annuel_kwh_um ---
-# - [slug] INS avant L97: # --- eclairage_cuisine_1_mensuel_kwh_um ---
-# - [slug] INS avant L104: # --- eclairage_cuisine_1_hebdomadaire_kwh_um ---
-# - [slug] INS avant L111: # --- eclairage_cuisine_1_quotidien_kwh_um ---
-# - [slug] MOD L122: # --- eclairage_appart_2 --- → # --- eclairage_appart_2_annuel_kwh_um ---
-# - [slug] INS avant L129: # --- eclairage_appart_2_mensuel_kwh_um ---
-# - [slug] INS avant L136: # --- eclairage_appart_2_hebdomadaire_kwh_um ---
-# - [slug] INS avant L143: # --- eclairage_appart_2_quotidien_kwh_um ---
-# - [slug] MOD L154: # --- eclairage_bureau_5 --- → # --- eclairage_bureau_5_annuel_kwh_um ---
-# - [slug] INS avant L161: # --- eclairage_bureau_5_mensuel_kwh_um ---
-# - [slug] INS avant L168: # --- eclairage_bureau_5_hebdomadaire_kwh_um ---
-# - [slug] INS avant L175: # --- eclairage_bureau_5_quotidien_kwh_um ---
-# - [slug] MOD L186: # --- eclairage_sdb_2 --- → # --- eclairage_sdb_2_annuel_kwh_um ---
-# - [slug] INS avant L193: # --- eclairage_sdb_2_mensuel_kwh_um ---
-# - [slug] INS avant L200: # --- eclairage_sdb_2_hebdomadaire_kwh_um ---
-# - [slug] INS avant L207: # --- eclairage_sdb_2_quotidien_kwh_um ---
-# - [slug] MOD L218: # --- eclairage_chambre_4 --- → # --- eclairage_chambre_4_annuel_kwh_um ---
-# - [slug] INS avant L225: # --- eclairage_chambre_4_mensuel_kwh_um ---
-# - [slug] INS avant L232: # --- eclairage_chambre_4_hebdomadaire_kwh_um ---
-# - [slug] INS avant L239: # --- eclairage_chambre_4_quotidien_kwh_um ---
-# - [slug] MOD L250: # --- eclairage_entree_1 --- → # --- eclairage_entree_1_annuel_kwh_um ---
-# - [slug] INS avant L257: # --- eclairage_entree_1_mensuel_kwh_um ---
-# - [slug] INS avant L264: # --- eclairage_entree_1_hebdomadaire_kwh_um ---
-# - [slug] INS avant L271: # --- eclairage_entree_1_quotidien_kwh_um ---
-# - [slug] MOD L282: # --- eclairage_couloir_1 --- → # --- eclairage_couloir_1_annuel_kwh_um ---
-# - [slug] INS avant L289: # --- eclairage_couloir_1_mensuel_kwh_um ---
-# - [slug] INS avant L296: # --- eclairage_couloir_1_hebdomadaire_kwh_um ---
-# - [slug] INS avant L303: # --- eclairage_couloir_1_quotidien_kwh_um ---
+# - [2026-04-25] Refactoring naming : suppression de _kwh_ dans tous les keys/unique_id/names (36 entrées).
+# - [2026-04-25] Convention unifiée : suffixe _um sans marqueur de technologie (remplace _kwh_um).
+# - [2026-04-25] Sources INCHANGÉES : toutes → sensor.*_energie_totale_kwh (Riemann zone — P3_kWh_2_ZONE.yaml).
+# - [2026-04-25] Fix bordures ASCII : zones APPART corrigées de ╭─╮ (principal) → ┌─┐ (secondaire).
+# - [2026-04-25] En-tête mis à jour : chaîne de dépendances + description zones complétée.
