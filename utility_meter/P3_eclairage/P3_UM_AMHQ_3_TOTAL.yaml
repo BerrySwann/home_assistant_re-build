@@ -9,15 +9,15 @@
 # - Total UNIT  : somme des 19 ampoules (P3_kWh_1_UNITE → P3_POWER_1_TOTAL_UNITE)
 #
 # ## 🧮 CALCUL & SOURCES :
-# - sensor.eclairage_total_group_energie_totale_kwh (calculé — P3_kWh_3_TOTAL.yaml)
-# - sensor.eclairage_total_unit_energie_totale_kwh  (calculé — P3_kWh_3_TOTAL.yaml)
+# - sensor.eclairage_total_group_energy (calculé — P3_kWh_3_TOTAL.yaml)
+# - sensor.eclairage_total_unit_energy  (calculé — P3_kWh_3_TOTAL.yaml)
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
 # | MATÉRIEL   | CAPTEUR BRUT (source)                                 | CE FICHIER (unique_id)                              | AVAL                            |
 # |:-----------|:------------------------------------------------------|:----------------------------------------------------|:--------------------------------|
-# | [calculé]  | sensor.eclairage_total_group_energie_totale_kwh       | eclairage_total_group_*_um                          | P3_AVG_AMHQ_3_TOTAL.yaml → L2C3 |
-# | [calculé]  | sensor.eclairage_total_unit_energie_totale_kwh        | eclairage_total_unit_*_um                           | P3_AVG_AMHQ_3_TOTAL.yaml → L2C3 |
+# | [calculé]  | sensor.eclairage_total_group_energy       | eclairage_total_group_*_um                          | P3_AVG_AMHQ_3_TOTAL.yaml → L2C3 |
+# | [calculé]  | sensor.eclairage_total_unit_energy        | eclairage_total_unit_*_um                           | P3_AVG_AMHQ_3_TOTAL.yaml → L2C3 |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Les deux totaux (GROUP et UNIT) doivent converger. Un écart persistant
@@ -33,28 +33,28 @@
 
 # --- eclairage_total_group_annuel_um ---
 eclairage_total_group_annuel_um:
-  source: sensor.eclairage_total_group_energie_totale_kwh
+  source: sensor.eclairage_total_group_energy
   name: "Eclairage Total Group Annuel UM"
   unique_id: eclairage_total_group_annuel_um
   cycle: yearly
 
 # --- eclairage_total_group_mensuel_um ---
 eclairage_total_group_mensuel_um:
-  source: sensor.eclairage_total_group_energie_totale_kwh
+  source: sensor.eclairage_total_group_energy
   name: "Eclairage Total Group Mensuel UM"
   unique_id: eclairage_total_group_mensuel_um
   cycle: monthly
 
 # --- eclairage_total_group_hebdomadaire_um ---
 eclairage_total_group_hebdomadaire_um:
-  source: sensor.eclairage_total_group_energie_totale_kwh
+  source: sensor.eclairage_total_group_energy
   name: "Eclairage Total Group Hebdomadaire UM"
   unique_id: eclairage_total_group_hebdomadaire_um
   cycle: weekly
 
 # --- eclairage_total_group_quotidien_um ---
 eclairage_total_group_quotidien_um:
-  source: sensor.eclairage_total_group_energie_totale_kwh
+  source: sensor.eclairage_total_group_energy
   name: "Eclairage Total Group Quotidien UM"
   unique_id: eclairage_total_group_quotidien_um
   cycle: daily
@@ -65,28 +65,28 @@ eclairage_total_group_quotidien_um:
 
 # --- eclairage_total_unit_annuel_um ---
 eclairage_total_unit_annuel_um:
-  source: sensor.eclairage_total_unit_energie_totale_kwh
+  source: sensor.eclairage_total_unit_energy
   name: "Eclairage Total Unit Annuel UM"
   unique_id: eclairage_total_unit_annuel_um
   cycle: yearly
 
 # --- eclairage_total_unit_mensuel_um ---
 eclairage_total_unit_mensuel_um:
-  source: sensor.eclairage_total_unit_energie_totale_kwh
+  source: sensor.eclairage_total_unit_energy
   name: "Eclairage Total Unit Mensuel UM"
   unique_id: eclairage_total_unit_mensuel_um
   cycle: monthly
 
 # --- eclairage_total_unit_hebdomadaire_um ---
 eclairage_total_unit_hebdomadaire_um:
-  source: sensor.eclairage_total_unit_energie_totale_kwh
+  source: sensor.eclairage_total_unit_energy
   name: "Eclairage Total Unit Hebdomadaire UM"
   unique_id: eclairage_total_unit_hebdomadaire_um
   cycle: weekly
 
 # --- eclairage_total_unit_quotidien_um ---
 eclairage_total_unit_quotidien_um:
-  source: sensor.eclairage_total_unit_energie_totale_kwh
+  source: sensor.eclairage_total_unit_energy
   name: "Eclairage Total Unit Quotidien UM"
   unique_id: eclairage_total_unit_quotidien_um
   cycle: daily
@@ -94,6 +94,6 @@ eclairage_total_unit_quotidien_um:
 # annotations_log:
 # - [2026-04-25] Refactoring naming : suppression de _kwh_ dans tous les keys/unique_id/names (8 entrées).
 # - [2026-04-25] Convention unifiée : suffixe _um sans marqueur de technologie (remplace _kwh_um).
-# - [2026-04-25] Sources INCHANGÉES : sensor.eclairage_total_group/unit_energie_totale_kwh.
+# - [2026-04-25] Sources INCHANGÉES : sensor.eclairage_total_group/unit_energy.
 # - [2026-04-25] Fix bordures ASCII : sections internes corrigées de ╭─╮ (principal) → ┌─┐ (secondaire).
 # - [2026-04-25] En-tête enrichi : 2 totaux documentés, chaîne de dépendances complète.
