@@ -31,7 +31,7 @@
 
 # ─── QUOTIDIEN ────────────────────────────────────────────────────────────────
 
-# --- genelec_appart_quotidien_kwh_kwh_um ---
+# --- genelec_appart_quotidien_kwh_um ---
 genelec_appart_quotidien_kwh_um:
   source: sensor.genelec_appart_totale_kwh
   name: "Genelec Appart Quotidien kWh UM"
@@ -40,28 +40,28 @@ genelec_appart_quotidien_kwh_um:
 
 # ─── HEBDOMADAIRE ────────────────────────────────────────────────────────────
 
-# --- genelec_appart_hebdomadaire_kwh_kwh_um ---
-genelec_appart_hebdomadaire_kwh_kwh_um:
+# --- genelec_appart_hebdomadaire_kwh_um ---
+genelec_appart_hebdomadaire_kwh_um:
   source: sensor.genelec_appart_totale_kwh
-  name: "Genelec Appart Hebdomadaire UM"
+  name: "Genelec Appart Hebdomadaire kWh UM"
   unique_id: genelec_appart_hebdomadaire_kwh_um
   cycle: weekly
 
 # ─── MENSUEL ─────────────────────────────────────────────────────────────────
 
-# --- genelec_appart_mensuel_kwh_kwh_um ---
-genelec_appart_mensuel_kwh_kwh_um:
+# --- genelec_appart_mensuel_kwh_um ---
+genelec_appart_mensuel_kwh_um:
   source: sensor.genelec_appart_totale_kwh
-  name: "Genelec Appart Mensuel UM"
+  name: "Genelec Appart Mensuel kWh UM"
   unique_id: genelec_appart_mensuel_kwh_um
   cycle: monthly
 
 # ─── ANNUEL ──────────────────────────────────────────────────────────────────
 
-# --- genelec_appart_annuel_kwh_kwh_um ---
-genelec_appart_annuel_khw_kwh_um:
+# --- genelec_appart_annuel_kwh_um ---
+genelec_appart_annuel_kwh_um:
   source: sensor.genelec_appart_totale_kwh
-  name: "Genelec Appart Annuel UM"
+  name: "Genelec Appart Annuel kWh UM"
   unique_id: genelec_appart_annuel_kwh_um
   cycle: yearly
 
