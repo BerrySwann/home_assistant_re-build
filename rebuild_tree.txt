@@ -1,83 +1,563 @@
 /config/Docs
-├── docs Automations
-│   ├── AUTOMATIONS_IDS_REF.md
-│   ├── AUTOMATIONS_MIGRATION_REPORT.md
-│   ├── PROD_LISTING_2026-04-05.md
-│   └── TRIAGE_PROD_2026-04-05.md
-└── docs DashBoard
-    ├── AUTOMATIONS
-    │   ├── AUTOMATIONS.md
-    │   └── PROD_vs_REBUILD_DIFF.md
-    ├── CONFIG_ROOT
-    │   └── CONFIG_ROOT.md
-    ├── DEPENDANCES_GLOBALES.md
-    ├── HOME PAGE
-    │   ├── PAGE_HOME.md
-    │   └── VIGNETTE_WIFI_PRESENCE.md
-    ├── IA
-    │   └── IA_CONTEXT_BASE.md
-    ├── L1C1_METEO
-    │   ├── L1C1_VIGNETTE_METEO.md
-    │   ├── PAGE_METEO.md
-    │   └── TUTO_IMAGES_ALERTES_METEO_FRANCE.md
-    ├── L1C2_TEMPERATURES
-    │   ├── L1C2_VIGNETTE_TEMPERATURES.md
-    │   └── PAGE_TEMPERATURES.md
-    ├── L1C3_CLIM
-    │   ├── L1C3_VIGNETTE_CLIM.md
-    │   └── PAGE_CLIM.md
-    ├── L2C1_ENERGIE
-    │   ├── COULEURS_PRISES_PAR_PIECE.md
-    │   ├── L2C1_VIGNETTE_ENERGIE.md
-    │   ├── PAGE_ENERGIE.md
-    │   ├── PAGE_ENERGIE_MENSUEL.md
-    │   └── PAGE_ENERGIE_TEMPS_REEL.md
-    ├── L2C2_ENERGIE_CLIM
-    │   ├── L2C2_VIGNETTE_ENERGIE_CLIM.md
-    │   └── PAGE_ENERGIE_CLIM.md
-    ├── L2C3_ENERGIE_ECLAIRAGE
-    │   ├── COULEURS_ECLAIRAGE_PAR_PIECE.md
-    │   ├── L2C3_VIGNETTE_ECLAIRAGE.md
-    │   └── PAGE_ENERGIE_ECLAIRAGE.md
-    ├── L3C1_ECLAIRAGE
-    │   ├── L3C1_VIGNETTE_ECLAIRAGE.md
-    │   └── PAGE_ECLAIRAGE.md
-    ├── L3C2_PRISES
-    │   ├── L3C2_VIGNETTE_PRISES.md
-    │   └── PAGE_PRISES.md
-    ├── L3C3_STORES
-    │   ├── L3C3_VIGNETTE_STORES.md
-    │   └── PAGE_STORES.md
-    ├── L4C1_FREEBOX
-    │   ├── L4C1_VIGNETTE_FREEBOX.md
-    │   └── PAGE_FREEBOX.md
-    ├── L4C2_MINI_PC
-    │   ├── L4C2_VIGNETTE_MINI_PC.md
-    │   ├── PAGE_MINI_PC.md
-    │   └── PAGE_RASPI.md
-    ├── L4C3_MAJ_HA
-    │   ├── L4C3_VIGNETTE_MAJ.md
-    │   └── PAGE_MAJ.md
-    ├── L5C1_PILES_BATTERIES
-    │   ├── L5C1_VIGNETTE_BATTERIES.md
-    │   └── PAGE_BATTERIES.md
-    ├── L5C2_BATTERIES_PORTABLES
-    │   ├── L5C2_VIGNETTE_BATTERIES_PORTABLES.md
-    │   └── PAGE_BATTERIES_PORTABLES.md
-    ├── L5C3_MARIADB
-    │   ├── L5C3_VIGNETTE_MARIADB.md
-    │   └── PAGE_SYSTEME.md
-    ├── L6C1_AIR_QUALITE
-    │   ├── L6C1_VIGNETTE_AIR_QUALITE.md
-    │   └── PAGE_AIR_QUALITE.md
-    ├── L6C2_POLLUTION_POLLEN
-    │   ├── L6C2_VIGNETTE_POLLUTION_POLLEN.md
-    │   └── PAGE_POLLUTION_POLLEN.md
-    ├── L6C3_VIGIEAU
-    │   ├── L6C3_VIGNETTE_VIGIEAU.md
-    │   └── PAGE_VIGIEAU.md
-    ├── WORKFLOW_REBUILD.md
-    └── _TEMPLATE_DOC.md
+├── DEPENDANCES_GLOBALES.md
+├── IA
+│   ├── IA_CONTEXT_BASE.md
+│   └── analyse_energetique_appart.md
+├── docs_automations
+│   ├── TREE_CORRIGE
+│   │   ├── P1_clim_chauffage
+│   │   │   ├── A0_clim_jour_2026-01-11.yaml
+│   │   │   ├── B0_clim_nuit_2026-01-11.yaml
+│   │   │   ├── C_gardien_eco.yaml
+│   │   │   ├── D_notif_temp_jour.yaml
+│   │   │   ├── E_notif_temp_nuit.yaml
+│   │   │   ├── F_notif_fermeture_fenetres.yaml
+│   │   │   ├── G_arret_clim_notif.yaml
+│   │   │   ├── H_notif_mode_changement.yaml
+│   │   │   ├── I_debug_force_mode.yaml
+│   │   │   ├── J_synchro_notif_prise_coupee.yaml
+│   │   │   ├── L_debug_notif_message_clim.yaml
+│   │   │   └── old
+│   │   │       ├── A0_clim_jour_2026-01-01.yaml
+│   │   │       └── B0_clim_nuit_2026-01-02.yaml
+│   │   ├── P1_cuisine
+│   │   │   ├── A_chauffage_cuisine.yaml
+│   │   │   └── B_chauffage_cuisine_vacances.yaml
+│   │   ├── P1_sdb
+│   │   │   └── E_minuterie_seche_serviettes.yaml
+│   │   ├── P2_bouton_rodret_soufflant_sdb.yaml
+│   │   ├── P2_prises
+│   │   │   ├── bureau_allumage_pc.yaml
+│   │   │   ├── eco_prises.yaml
+│   │   │   ├── gestion_pc_bureau.yaml
+│   │   │   ├── gestion_tv_chambre.yaml
+│   │   │   ├── rodret_soufflant_sdb.yaml
+│   │   │   └── rodret_tv_chambre.yaml
+│   │   ├── P3_eclairage
+│   │   │   └── allumage_lumiere_entree.yaml
+│   │   ├── P3_salon_bouton_inter_ikea_4.yaml
+│   │   ├── P3_salon_bouton_inter_somrig.yaml
+│   │   ├── backup
+│   │   │   ├── git_alerte_ko.yaml
+│   │   │   ├── git_au_demarrage.yaml
+│   │   │   ├── git_hourly.yaml
+│   │   │   └── git_weekly.yaml
+│   │   ├── energie
+│   │   │   ├── basculement_tarif_hphc.yaml
+│   │   │   └── surveillance_gros_electro_hp.yaml
+│   │   ├── meteo
+│   │   │   ├── alerte_meteo_cartes.yaml
+│   │   │   ├── maj_temps_foudre.yaml
+│   │   │   ├── notif_foudre.yaml
+│   │   │   ├── update_prev_humidity.yaml
+│   │   │   └── update_prev_temperature.yaml
+│   │   ├── stores
+│   │   │   ├── gestion_store_bureau.yaml
+│   │   │   └── gestion_store_salon.yaml
+│   │   └── systeme
+│   │       ├── db_purge_mariadb.yaml
+│   │       ├── diag_enregistrement_journalier.yaml
+│   │       ├── economie_energie_vscode.yaml
+│   │       ├── veille_github_releases.yaml
+│   │       ├── watchdog_piles.yaml
+│   │       └── z2m_last_seen.yaml
+│   ├── TREE_ORIGINE
+│   │   ├── P1_clim_chauffage
+│   │   │   ├── A0_clim_jour_2026-01-01.yaml
+│   │   │   ├── A0_clim_jour_2026-01-11.yaml
+│   │   │   ├── B0_clim_nuit_2026-01-02.yaml
+│   │   │   ├── B0_clim_nuit_2026-01-11.yaml
+│   │   │   ├── C_gardien_eco.yaml
+│   │   │   ├── D_notif_temp_jour.yaml
+│   │   │   ├── E_notif_temp_nuit.yaml
+│   │   │   ├── F_notif_fermeture_fenetres.yaml
+│   │   │   ├── G_arret_clim_notif.yaml
+│   │   │   ├── H_notif_mode_changement.yaml
+│   │   │   ├── I_debug_force_mode.yaml
+│   │   │   ├── J_synchro_notif_prise_coupee.yaml
+│   │   │   └── L_debug_notif_message_clim.yaml
+│   │   ├── P1_cuisine
+│   │   │   ├── A_chauffage_cuisine.yaml
+│   │   │   └── B_chauffage_cuisine_vacances.yaml
+│   │   ├── P1_sdb
+│   │   │   └── E_minuterie_seche_serviettes.yaml
+│   │   ├── P2_prises
+│   │   │   ├── bureau_allumage_pc.yaml
+│   │   │   ├── eco_prises.yaml
+│   │   │   ├── gestion_pc_bureau.yaml
+│   │   │   ├── gestion_tv_chambre.yaml
+│   │   │   ├── rodret_soufflant_sdb.yaml
+│   │   │   └── rodret_tv_chambre.yaml
+│   │   ├── P3_eclairage
+│   │   │   └── allumage_lumiere_entree.yaml
+│   │   ├── backup
+│   │   │   ├── git_alerte_ko.yaml
+│   │   │   ├── git_au_demarrage.yaml
+│   │   │   ├── git_hourly.yaml
+│   │   │   └── git_weekly.yaml
+│   │   ├── energie
+│   │   │   └── surveillance_gros_electro_hp.yaml
+│   │   ├── meteo
+│   │   │   ├── alerte_meteo_cartes.yaml
+│   │   │   ├── maj_temps_foudre.yaml
+│   │   │   ├── notif_foudre.yaml
+│   │   │   ├── update_prev_humidity.yaml
+│   │   │   └── update_prev_temperature.yaml
+│   │   ├── stores
+│   │   │   ├── gestion_store_bureau.yaml
+│   │   │   └── gestion_store_salon.yaml
+│   │   └── systeme
+│   │       ├── db_purge_mariadb.yaml
+│   │       ├── diag_enregistrement_journalier.yaml
+│   │       ├── economie_energie_vscode.yaml
+│   │       ├── watchdog_piles.yaml
+│   │       └── z2m_last_seen.yaml
+│   └── docs
+│       ├── AUTOMATIONS
+│       │   ├── AUTOMATIONS.md
+│       │   └── PROD_vs_REBUILD_DIFF.md
+│       ├── AUTOMATIONS_IDS_REF.md
+│       ├── AUTOMATIONS_MIGRATION_REPORT.md
+│       ├── BACKUP
+│       │   ├── GIT_ALERTE_KO.md
+│       │   ├── GIT_AU_DEMARRAGE.md
+│       │   ├── GIT_HOURLY.md
+│       │   └── GIT_WEEKLY.md
+│       ├── ENERGIE
+│       │   └── SURVEILLANCE_GROS_ELECTRO_HP.md
+│       ├── INDEX_AUTOMATIONS.md
+│       ├── METEO
+│       │   ├── ALERTE_METEO_CARTES.md
+│       │   ├── MAJ_TEMPS_FOUDRE.md
+│       │   ├── NOTIF_FOUDRE.md
+│       │   ├── UPDATE_PREV_HUMIDITY.md
+│       │   └── UPDATE_PREV_TEMPERATURE.md
+│       ├── P1_CLIM_CHAUFFAGE
+│       │   ├── A0_CLIM_JOUR.md
+│       │   ├── B0_CLIM_NUIT.md
+│       │   ├── C_GARDIEN_ECO.md
+│       │   ├── D_NOTIF_TEMP_JOUR.md
+│       │   ├── E_NOTIF_TEMP_NUIT.md
+│       │   ├── F_NOTIF_FERMETURE_FENETRES.md
+│       │   ├── G_ARRET_CLIM_NOTIF.md
+│       │   ├── H_NOTIF_MODE_CHANGEMENT.md
+│       │   ├── I_DEBUG_FORCE_MODE.md
+│       │   ├── J_SYNCHRO_NOTIF_PRISE_COUPEE.md
+│       │   └── L_DEBUG_NOTIF_MESSAGE_CLIM.md
+│       ├── P1_CUISINE
+│       │   ├── A_CHAUFFAGE_CUISINE.md
+│       │   └── B_CHAUFFAGE_CUISINE_VACANCES.md
+│       ├── P1_SDB
+│       │   └── E_MINUTERIE_SECHE_SERVIETTES.md
+│       ├── P2_PRISES
+│       │   ├── BUREAU_ALLUMAGE_PC.md
+│       │   ├── ECO_PRISES.md
+│       │   ├── GESTION_PC_BUREAU.md
+│       │   ├── GESTION_TV_CHAMBRE.md
+│       │   ├── RODRET_SOUFFLANT_SDB.md
+│       │   └── RODRET_TV_CHAMBRE.md
+│       ├── P3_ECLAIRAGE
+│       │   ├── ALLUMAGE_LUMIERE_ENTREE.md
+│       │   ├── BOUTON_INTER_IKEA_4.md
+│       │   └── BOUTON_INTER_SOMRIG.md
+│       ├── PROD_LISTING_2026-04-05.md
+│       ├── STORES
+│       │   ├── GESTION_STORE_BUREAU.md
+│       │   └── GESTION_STORE_SALON.md
+│       ├── SYSTEME
+│       │   ├── DB_PURGE_MARIADB.md
+│       │   ├── DIAG_ENREGISTREMENT_JOURNALIER.md
+│       │   ├── ECONOMIE_ENERGIE_VSCODE.md
+│       │   ├── WATCHDOG_PILES.md
+│       │   └── Z2M_LAST_SEEN.md
+│       └── TRIAGE_PROD_2026-04-05.md
+├── docs_dashboard
+│   ├── TREE_CORRIGE
+│   │   ├── #camera.yaml
+│   │   ├── #sensors.yaml
+│   │   ├── #templates.yaml
+│   │   ├── #utility_meter.yaml
+│   │   ├── Dashboard 2026-04-15.yaml
+│   │   ├── Dashboard_2026-04-19.yaml
+│   │   ├── automations.yaml
+│   │   ├── command_line
+│   │   │   ├── github_maintenance
+│   │   │   │   └── github_maintenance.yaml
+│   │   │   ├── meteo
+│   │   │   │   └── carte_meteo_france.yaml
+│   │   │   └── sante_systeme_mini_pc
+│   │   │       └── sante_systeme_mini_pc.yaml
+│   │   ├── configuration.yaml
+│   │   ├── groups.yaml
+│   │   ├── input_booleans
+│   │   │   ├── P1
+│   │   │   │   ├── P1_ACS_IB_01_arret_clim_securises.yaml
+│   │   │   │   └── P1_BV_BI_02_inter_soufflant_sdb.yaml
+│   │   │   ├── P3
+│   │   │   │   ├── P3_BV_01_IB_inter_smorig_salon.yaml
+│   │   │   │   └── P3_BV_02_IB_inter_rodret_salon.yaml
+│   │   │   └── P4
+│   │   │       └── P4_presence_wifi.yaml
+│   │   ├── input_button.yaml
+│   │   ├── input_datetime.yaml
+│   │   ├── input_number
+│   │   │   └── input_number.yaml
+│   │   ├── input_select.yaml
+│   │   ├── scenes.yaml
+│   │   ├── scripts.yaml
+│   │   ├── sensors
+│   │   │   ├── Air_quality
+│   │   │   │   └── A_01_AIR_QUALITY.yaml
+│   │   │   ├── P0_Energie_total_min_maxi_diag
+│   │   │   │   ├── P0_Genelec_appart
+│   │   │   │   │   └── P0_kWh_genelec_appart.yaml
+│   │   │   │   └── P0_Genelec_appart_mini_maxi
+│   │   │   │       └── P0_MINI_MAXI_AVG_Genelec_appart.yaml
+│   │   │   ├── P1_clim_chauffage
+│   │   │   │   ├── P1_DUT
+│   │   │   │   │   └── P1_DUT_clim_chauffage.yaml
+│   │   │   │   └── P1_kWh
+│   │   │   │       ├── #P1_kWh_clim_chauffage.yaml.#
+│   │   │   ├── P2_prise
+│   │   │   │   ├── #3_P2_kWh_veilles.yaml.#
+│   │   │   │   ├── #P2_Wh_mini_pc.yaml
+│   │   │   │   ├── #P2_kWh_prises.yaml
+│   │   │   ├── P3_eclairage
+│   │   │   │   ├── #P3_kWh_1_UNITE.yaml
+│   │   │   │   ├── #P3_kWh_2_ZONE.yaml
+│   │   │   │   ├── #P3_kWh_3_TOTAL.yaml
+│   │   │   └── meteo
+│   │   │       └── M_03_meteo_sensors_blitzortung.yaml
+│   │   ├── shell_command.yaml
+│   │   ├── sql.yaml
+│   │   ├── templates
+│   │   │   ├── Air_quality
+│   │   │   │   └── A_01_AIR_QUALITY.yaml
+│   │   │   ├── Inter_BP_Virtuel
+│   │   │   │   ├── P1
+│   │   │   │   │   └── P1_BV_01_SW_inter_souflant_sdb.yaml
+│   │   │   │   └── P3
+│   │   │   │       ├── P3_BV_01_inter_smorig_salon.yaml
+│   │   │   │       └── P3_BV_02_inter_rodret_salon.yaml
+│   │   │   ├── Mini-PC
+│   │   │   │   └── MP_01_sonde_température_mini-pc.yaml
+│   │   │   ├── P0_Energie_total_diag
+│   │   │   │   ├── Diag
+│   │   │   │   │   ├── diag_conso_hebdomadaire_en_cours.yaml
+│   │   │   │   │   ├── diag_conso_jour_en_cours.yaml
+│   │   │   │   │   └── diag_conso_mois_en_cours.yaml
+│   │   │   │   ├── Genelec_appart
+│   │   │   │   │   ├── 01_genelec_appart_AMHQ_cost.yaml
+│   │   │   │   │   ├── 02_ratio_hp_hc.yaml
+│   │   │   │   │   └── 03_AVG_genelec_appart.yaml
+│   │   │   │   ├── Linky
+│   │   │   │   │   └── MyElectricalData.yaml
+│   │   │   │   └── total_pour_les_7_postes
+│   │   │   │       └── total_pour_les_7_postes.yaml
+│   │   │   ├── P1_clim_chauffage
+│   │   │   │   ├── P1_01_MASTER
+│   │   │   │   │   ├── P1_01_clim_logique_system_autom.yaml
+│   │   │   │   │   ├── P1_02_automation_message_clim_7h30_21h.yaml
+│   │   │   │   │   └── P1_03_automation message clim 21h 7h30.yaml
+│   │   │   │   ├── P1_AVG
+│   │   │   │   │   ├── P1_AVG.yaml
+│   │   │   │   │   └── P1_AVG_TOTAL_AMHQ.yaml
+│   │   │   │   ├── P1_DUT_TOTAL
+│   │   │   │   │   └── P1_DUT_TOTAL_SDB.yaml
+│   │   │   │   ├── P1_TOTAL
+│   │   │   │   │   └── P1_TOTAL_AMHQ.yaml
+│   │   │   │   └── P1_ui_dashboard
+│   │   │   │       └── P1_ui_dashboard.yaml
+│   │   │   ├── P2_prise
+│   │   │   │   ├── P2_AVG
+│   │   │   │   │   ├── P2_AVG_AMHQ_mini_pc.yaml
+│   │   │   │   │   ├── P2_AVG_AMHQ_prises.yaml
+│   │   │   │   │   └── P2_AVG_AMHQ_veilles.yaml
+│   │   │   │   ├── P2_I_all_standby_power
+│   │   │   │   │   └── P2_current_all_standby.yaml
+│   │   │   │   └── P2_ui_dashboard
+│   │   │   │       └── P2_ui_dashboard.yaml
+│   │   │   ├── P3_eclairage
+│   │   │   │   ├── P3_AVG
+│   │   │   │   │   ├── P3_AVG_AMHQ_1_UNITE.yaml
+│   │   │   │   │   ├── P3_AVG_AMHQ_2_ZONE.yaml
+│   │   │   │   │   └── P3_AVG_AMHQ_3_TOTAL.yaml
+│   │   │   │   ├── P3_ENERGIE
+│   │   │   │   │   ├── P3_ENERGIE_1_TOTAL_UNITE.yaml
+│   │   │   │   │   ├── P3_ENERGIE_2_ZONE.yaml
+│   │   │   │   │   └── P3_ENERGIE_3_TOTAL_ZONE.yaml
+│   │   │   │   └── ui_dashboard
+│   │   │   │       └── etats_status.yaml
+│   │   │   ├── P4_groupe_presence
+│   │   │   │   ├── 01_phones_wifi_cellular_card_autom.yaml
+│   │   │   │   └── 02_logique_wifi_cellular.yaml
+│   │   │   ├── Stores
+│   │   │   │   └── S_01_STORES.yaml
+│   │   │   ├── meteo
+│   │   │   │   ├── M_01_meteo_alertes_card.yaml
+│   │   │   │   ├── M_02_meteo_vent_vence_card.yaml
+│   │   │   │   ├── M_03_meteo_blitzortung.yaml
+│   │   │   │   ├── M_04_tendances_th_ext_card.yaml
+│   │   │   │   └── M_05_cycle_solaire.yaml
+│   │   │   └── utilitaires
+│   │   │       ├── Mise_a_jour_home_assistant.yaml
+│   │   │       ├── jour_nuit.yaml
+│   │   │       └── nb_fenetre_ouvert_ferme_autom.yaml
+│   │   └── utility_meter
+│   │       ├── P0_Energie_total
+│   │       │   └── Genelec_appart
+│   │       │       ├── 01_kWh_UM_AMHQ.yaml
+│   │       │       ├── 02_UM_AMHQ.yaml
+│   │       │       └── 03_UM_genelec_appart_HPHC_AMHQ.yaml
+│   │       ├── P1_clim_chauffage
+│   │       │   └── P1_UM_AMHQ.yaml
+│   │       ├── P2_prise
+│   │       │   ├── #P2_UM_AMHQ_mini_pc.yaml.#
+│   │       │   ├── #P2_UM_AMHQ_prises.yaml.#
+│   │       │   ├── #P2_UM_AMHQ_veilles.yaml.#
+│   │       ├── P3_eclairage
+│   │       │   ├── P3_UM_AMHQ_1_UNITE.yaml
+│   │       │   ├── P3_UM_AMHQ_2_ZONE.yaml
+│   │       │   └── P3_UM_AMHQ_3_TOTAL.yaml
+│   │       └── meteo
+│   │           └── M_03_meteo_UM_blitzortung.yaml
+│   ├── TREE_ORIGINE
+│   │   ├── camera.yaml
+│   │   ├── command_line
+│   │   │   ├── github_maintenance
+│   │   │   │   └── github_maintenance.yaml
+│   │   │   ├── meteo
+│   │   │   │   └── carte_meteo_france.yaml
+│   │   │   ├── speedtest
+│   │   │   │   └── speedtest.yaml
+│   │   │   └── vscode_connections
+│   │   │       └── vscode_connections.yaml
+│   │   ├── configuration.yaml
+│   │   ├── groups.yaml
+│   │   ├── input_booleans
+│   │   │   ├── P1
+│   │   │   └── P4
+│   │   ├── input_button.yaml
+│   │   ├── sensors
+│   │   │   ├── Air_quality
+│   │   │   │   └── A_01_AIR_QUALITY.yaml
+│   │   │   ├── P0_Energie_total_diag
+│   │   │   │   └── Ecojoko_mini_maxi
+│   │   │   │       ├── Ecojoko_mini_maxi_avg.yaml
+│   │   │   │       └── Ecojoko_mini_maxi_avg_1h.yaml
+│   │   │   ├── P0_Energie_total_min_maxi_diag
+│   │   │   │   ├── P0_Genelec_appart
+│   │   │   │   │   └── P0_kWh_genelec_appart.yaml
+│   │   │   │   └── P0_Genelec_appart_mini_maxi
+│   │   │   │       └── P0_MINI_MAXI_AVG_Genelec_appart.yaml
+│   │   │   ├── P1_clim_chauffage
+│   │   │   │   ├── P1_DUT
+│   │   │   │   │   ├── DUT_TOTAL_UNIT.yaml
+│   │   │   │   │   └── P1_DUT_clim_chauffage.yaml
+│   │   │   │   └── P1_kWh
+│   │   │   │       └── P1_kWh_clim_chauffage.yaml
+│   │   │   ├── P2_prise
+│   │   │   │   ├── P2_Wh_mini_pc.yaml
+│   │   │   │   ├── P2_kWh_prises.yaml
+│   │   │   │   └── P2_kWh_veilles.yaml
+│   │   │   ├── P3_eclairage
+│   │   │   │   ├── P3_kWh_1_UNITE.yaml
+│   │   │   │   ├── P3_kWh_2_ZONE.yaml
+│   │   │   │   └── P3_kWh_3_TOTAL.yaml
+│   │   │   └── meteo
+│   │   │       └── M_03_meteo_sensors_blitzortung.yaml
+│   │   ├── shell_command.yaml
+│   │   ├── sql.yaml
+│   │   ├── templates
+│   │   │   ├── Air_quality
+│   │   │   │   └── A_01_AIR_QUALITY.yaml
+│   │   │   ├── Inter_BP_Virtuel
+│   │   │   │   ├── P1
+│   │   │   │   │   └── P1_BV_01_SW_inter_souflant_sdb.yaml
+│   │   │   │   └── P3
+│   │   │   │       ├── P3_BV_01_inter_smorig_salon.yaml
+│   │   │   │       └── P3_BV_02_inter_rodret_salon.yaml
+│   │   │   ├── Mini-PC
+│   │   │   │   └── MP_01_sonde_température_mini-pc.yaml
+│   │   │   ├── P0_Energie_total_diag
+│   │   │   │   ├── Diag
+│   │   │   │   │   ├── diag_conso_hebdomadaire_en_cours.yaml
+│   │   │   │   │   ├── diag_conso_jour_en_cours.yaml
+│   │   │   │   │   └── diag_conso_mois_en_cours.yaml
+│   │   │   │   ├── Ecojoko
+│   │   │   │   │   ├── 01_ecojoko_AMHQ_cost.yaml
+│   │   │   │   │   ├── 02_ratio_hp_hc.yaml
+│   │   │   │   │   └── 03_AVG_ecojoko.yaml
+│   │   │   │   ├── Genelec_appart
+│   │   │   │   │   ├── 01_genelec_appart_AMHQ_cost.yaml
+│   │   │   │   │   ├── 02_ratio_hp_hc.yaml
+│   │   │   │   │   └── 03_AVG_genelec_appart.yaml
+│   │   │   │   ├── Linky
+│   │   │   │   │   ├── MyElectricalData.yaml
+│   │   │   │   │   └── P0_linky_jour_J0_J7.yaml
+│   │   │   │   └── total par poste_7
+│   │   │   │       └── total_par_poste_7.yaml
+│   │   │   ├── P1_clim_chauffage
+│   │   │   │   ├── P1_01_MASTER
+│   │   │   │   │   ├── P1_01_clim_logique_system_autom.yaml
+│   │   │   │   │   ├── P1_02_automation_message_clim_7h30_21h.yaml
+│   │   │   │   │   ├── P1_03_automation message clim 21h 7h30.yaml
+│   │   │   │   │   ├── automation message clim 21h 7h30.yaml
+│   │   │   │   │   └── automation_message_clim_7h30_21h.yaml
+│   │   │   │   ├── P1_AVG
+│   │   │   │   │   ├── P1_AVG_TOTAL_AMHQ.yaml
+│   │   │   │   │   └── P1_avg.yaml
+│   │   │   │   ├── P1_DUT_TOTAL
+│   │   │   │   │   └── P1_DUT_TOTAL_SDB.yaml
+│   │   │   │   ├── P1_TOTAL
+│   │   │   │   │   └── P1_TOTAL_AMHQ.yaml
+│   │   │   │   └── P1_ui_dashboard
+│   │   │   │       └── P1_ui_dashboard.yaml
+│   │   │   ├── P2_prise
+│   │   │   │   ├── P2_AVG
+│   │   │   │   │   ├── P2_AVG_AMHQ_mini_pc.yaml
+│   │   │   │   │   ├── P2_AVG_AMHQ_prises.yaml
+│   │   │   │   │   └── P2_AVG_AMHQ_veilles.yaml
+│   │   │   │   ├── P2_I_all_standby_power
+│   │   │   │   │   ├── P2_ current_all_standby.yaml
+│   │   │   │   │   └── P2_current_all_standby.yaml
+│   │   │   │   └── P2_ui_dashboard
+│   │   │   │       └── P2_ui_dashboard.yaml
+│   │   │   ├── P3_eclairage
+│   │   │   │   ├── P3_01_somme_par_piece.yaml
+│   │   │   │   ├── P3_AVG
+│   │   │   │   │   ├── P3_AVG_AMHQ_1_UNITE.yaml
+│   │   │   │   │   ├── P3_AVG_AMHQ_2_ZONE.yaml
+│   │   │   │   │   └── P3_AVG_AMHQ_3_TOTAL.yaml
+│   │   │   │   ├── P3_POWER
+│   │   │   │   │   ├── P3_POWER_1_TOTAL_UNITE.yaml
+│   │   │   │   │   ├── P3_POWER_2_TOTAL_MULTI_ZONE.yaml
+│   │   │   │   │   └── P3_POWER_3_TOTAL_ZONE.yaml
+│   │   │   │   └── ui_dashboard
+│   │   │   │       └── etats_status.yaml
+│   │   │   ├── P4_groupe_presence
+│   │   │   │   ├── 01_phones_wifi_cellular_card_autom.yaml
+│   │   │   │   └── 02_logique_wifi_cellular.yaml
+│   │   │   ├── SpeedTest
+│   │   │   │   └── ST_01_SpeedTest.yaml
+│   │   │   ├── Stores
+│   │   │   │   └── S_01_STORES.yaml
+│   │   │   ├── meteo
+│   │   │   │   ├── M_01_meteo_alertes_card.yaml
+│   │   │   │   ├── M_02_meteo_vent_vence_card.yaml
+│   │   │   │   ├── M_03_meteo_blitzortung.yaml
+│   │   │   │   ├── M_03_meteo_templates_blitzortung.yaml
+│   │   │   │   ├── M_04_tendances_th_ext_card.yaml
+│   │   │   │   └── M_05_cycle_solaire.yaml
+│   │   │   └── utilitaires
+│   │   │       ├── Mise_a_jour_home_assistant.yaml
+│   │   │       ├── jour_nuit.yaml
+│   │   │       └── nb_fenetre_ouvert_ferme_autom.yaml
+│   │   └── utility_meter
+│   │       ├── P0_Energie_total
+│   │       │   ├── Ecojoko
+│   │       │   │   ├── 01_UM_AMHQ_cost.yaml
+│   │       │   │   └── 02_UM_ecojoko_quotidien_live.yaml
+│   │       │   ├── Genelec_appart
+│   │       │   │   ├── 01_UM_AMHQ.yaml
+│   │       │   │   └── 02_UM_genelec_appart_HPHC_AMHQ.yaml
+│   │       │   └── Linky
+│   │       ├── P1_clim_chauffage
+│   │       │   └── P1_UM_AMHQ.yaml
+│   │       ├── P2_prise
+│   │       │   ├── P2_AVG
+│   │       │   │   └── P2_UM_AMHQ_prises.yaml
+│   │       │   ├── P2_UM_AMHQ_mini_pc.yaml
+│   │       │   ├── P2_UM_AMHQ_prises.yaml
+│   │       │   └── P2_UM_AMHQ_veilles.yaml
+│   │       ├── P3_eclairage
+│   │       │   ├── P3_UM_AMHQ_1_UNITE.yaml
+│   │       │   ├── P3_UM_AMHQ_2_ZONE.yaml
+│   │       │   └── P3_UM_AMHQ_3_TOTAL.yaml
+│   │       └── meteo
+│   │           └── M_03_meteo_UM_blitzortung.yaml
+│   └── docs
+│       ├── AUTOMATIONS_IDS_REF.md
+│       ├── CONFIG_ROOT
+│       │   └── CONFIG_ROOT.md
+│       ├── DEPENDANCES_GLOBALES.md
+│       ├── HOME PAGE
+│       │   ├── PAGE_HOME.md
+│       │   └── VIGNETTE_WIFI_PRESENCE.md
+│       ├── IA
+│       │   └── IA_CONTEXT_BASE.md
+│       ├── INDEX_PAGES.md
+│       ├── L1C1_METEO
+│       │   ├── L1C1_VIGNETTE_METEO.md
+│       │   ├── PAGE_METEO.md
+│       │   └── TUTO_IMAGES_ALERTES_METEO_FRANCE.md
+│       ├── L1C2_TEMPERATURES
+│       │   ├── L1C2_VIGNETTE_TEMPERATURES.md
+│       │   └── PAGE_TEMPERATURES.md
+│       ├── L1C3_CLIM
+│       │   ├── L1C3_VIGNETTE_CLIM.md
+│       │   └── PAGE_CLIM.md
+│       ├── L2C1_ENERGIE
+│       │   ├── COULEURS_PRISES_PAR_PIECE.md
+│       │   ├── L2C1_VIGNETTE_ENERGIE.md
+│       │   ├── PAGE_ENERGIE.md
+│       │   ├── PAGE_ENERGIE_MENSUEL.md
+│       │   └── PAGE_ENERGIE_TEMPS_REEL.md
+│       ├── L2C2_ENERGIE_CLIM
+│       │   ├── L2C2_VIGNETTE_ENERGIE_CLIM.md
+│       │   └── PAGE_ENERGIE_CLIM.md
+│       ├── L2C3_ENERGIE_ECLAIRAGE
+│       │   ├── COULEURS_ECLAIRAGE_PAR_PIECE.md
+│       │   ├── L2C3_VIGNETTE_ECLAIRAGE.md
+│       │   └── PAGE_ENERGIE_ECLAIRAGE.md
+│       ├── L3C1_ECLAIRAGE
+│       │   ├── L3C1_VIGNETTE_ECLAIRAGE.md
+│       │   └── PAGE_ECLAIRAGE.md
+│       ├── L3C2_PRISES
+│       │   ├── L3C2_VIGNETTE_PRISES.md
+│       │   └── PAGE_PRISES.md
+│       ├── L3C3_STORES
+│       │   ├── L3C3_VIGNETTE_STORES.md
+│       │   └── PAGE_STORES.md
+│       ├── L4C1_FREEBOX
+│       │   ├── L4C1_VIGNETTE_empty.md
+│       │   └── PAGE_empty.md
+│       ├── L4C2_MINI_PC
+│       │   ├── L4C2_VIGNETTE_MINI_PC.md
+│       │   ├── PAGE_MINI_PC.md
+│       │   └── PAGE_RASPI.md
+│       ├── L4C3_MAJ_HA
+│       │   ├── L4C3_VIGNETTE_MAJ.md
+│       │   └── PAGE_MAJ.md
+│       ├── L5C1_PILES_BATTERIES
+│       │   ├── L5C1_VIGNETTE_BATTERIES.md
+│       │   └── PAGE_BATTERIES.md
+│       ├── L5C2_BATTERIES_PORTABLES
+│       │   ├── L5C2_VIGNETTE_BATTERIES_PORTABLES.md
+│       │   └── PAGE_BATTERIES_PORTABLES.md
+│       ├── L5C3_MARIADB
+│       │   ├── L5C3_VIGNETTE_MARIADB.md
+│       │   └── PAGE_SYSTEME.md
+│       ├── L6C1_AIR_QUALITE
+│       │   ├── L6C1_VIGNETTE_AIR_QUALITE.md
+│       │   └── PAGE_AIR_QUALITE.md
+│       ├── L6C2_POLLUTION_POLLEN
+│       │   ├── L6C2_VIGNETTE_POLLUTION_POLLEN.md
+│       │   └── PAGE_POLLUTION_POLLEN.md
+│       ├── L6C3_VIGIEAU
+│       │   ├── L6C3_VIGNETTE_VIGIEAU.md
+│       │   └── PAGE_VIGIEAU.md
+│       ├── MOC_DASHBOARD.md
+│       ├── PROD_LISTING_2026-04-05.md
+│       ├── WORKFLOW_REBUILD.md
+│       └── _TEMPLATE_DOC.md
+└── docs_scripts
+    ├── TREE_CORRIGE
+    ├── TREE_ORIGINE
+    └── docs
+        ├── INDEX_SCRIPTS.md
+        ├── SCRIPTS_CLIM_ON_OFF.md
+        └── SCRIPT_J2_0_SECU_ARRET_CLIM.md
 /config/input_booleans
 ├── P1
 │   ├── P1_ACS_IB_01_arret_clim_securises.yaml
@@ -92,8 +572,9 @@
 /config/utility_meter
 ├── P0_Energie_total
 │   └── Genelec_appart
-│       ├── 01_UM_AMHQ.yaml
-│       └── 02_UM_genelec_appart_HPHC_AMHQ.yaml
+│       ├── 01_kWh_UM_AMHQ.yaml
+│       ├── 02_UM_AMHQ.yaml
+│       └── 03_UM_genelec_appart_HPHC_AMHQ.yaml
 ├── P1_clim_chauffage
 │   └── P1_UM_AMHQ.yaml
 ├── P2_prise
@@ -128,8 +609,8 @@
 │   │   └── 03_AVG_genelec_appart.yaml
 │   ├── Linky
 │   │   └── MyElectricalData.yaml
-│   └── total par poste_7
-│       └── total_par_poste_7.yaml
+│   └── total_pour_les_7_postes
+│       └── total_pour_les_7_postes.yaml
 ├── P1_clim_chauffage
 │   ├── P1_01_MASTER
 │   │   ├── P1_01_clim_logique_system_autom.yaml
@@ -158,17 +639,15 @@
 │   │   ├── P3_AVG_AMHQ_1_UNITE.yaml
 │   │   ├── P3_AVG_AMHQ_2_ZONE.yaml
 │   │   └── P3_AVG_AMHQ_3_TOTAL.yaml
-│   ├── P3_POWER
-│   │   ├── P3_POWER_1_TOTAL_UNITE.yaml
-│   │   ├── P3_POWER_2_TOTAL_MULTI_ZONE.yaml
-│   │   └── P3_POWER_3_TOTAL_ZONE.yaml
+│   ├── P3_ENERGIE
+│   │   ├── P3_ENERGIE_1_TOTAL_UNITE.yaml
+│   │   ├── P3_ENERGIE_2_ZONE.yaml
+│   │   └── P3_ENERGIE_3_TOTAL_ZONE.yaml
 │   └── ui_dashboard
 │       └── etats_status.yaml
 ├── P4_groupe_presence
 │   ├── 01_phones_wifi_cellular_card_autom.yaml
 │   └── 02_logique_wifi_cellular.yaml
-├── SpeedTest
-│   └── ST_01_SpeedTest.yaml
 ├── Stores
 │   └── S_01_STORES.yaml
 ├── meteo
@@ -186,24 +665,24 @@
 │   └── A_01_AIR_QUALITY.yaml
 ├── P0_Energie_total_min_maxi_diag
 │   ├── P0_Genelec_appart
-│   │   └── P0_kWh_genelec_appart.yaml
+│   │   ├── #P0_kWh_genelec_appart.yaml.#
 │   └── P0_Genelec_appart_mini_maxi
 │       └── P0_MINI_MAXI_AVG_Genelec_appart.yaml
 ├── P1_clim_chauffage
 │   ├── P1_DUT
 │   │   └── P1_DUT_clim_chauffage.yaml
 │   └── P1_kWh
-│       └── P1_kWh_clim_chauffage.yaml
+│       ├── #P1_kWh_clim_chauffage.yaml.#
 ├── P2_prise
-│   ├── P2_Wh_mini_pc.yaml
-│   ├── P2_kWh_prises.yaml
-│   └── P2_kWh_veilles.yaml
+│   ├── #3 P2_kWh_veilles.yaml.#
+│   ├── #P2_Wh_mini_pc.yaml.#
+│   ├── #P2_kWh_prises.yaml.#
 ├── P3_eclairage
-│   ├── P3_kWh_1_UNITE.yaml
-│   ├── P3_kWh_2_ZONE.yaml
-│   └── P3_kWh_3_TOTAL.yaml
+│   ├── #P3_kWh_1_UNITE.yaml.#
+│   ├── #P3_kWh_2_ZONE.yaml.#
+│   ├── #P3_kWh_3_TOTAL.yaml.#
 └── meteo
     └── M_03_meteo_sensors_blitzortung.yaml
 /config/home-assistant-config-v2 [error opening dir]
 
-72 directories, 128 files
+231 directories, 448 files

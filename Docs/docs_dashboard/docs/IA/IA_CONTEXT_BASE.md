@@ -1,7 +1,7 @@
 > **REGLE ABSOLUE :** Ne pas caresser dans le sens du poil. Etre honnete. Ne pas mentir. Ne pas tricher.
 
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
-*Dernière mise à jour : 2026-04-19*
+*Dernière mise à jour : 2026-04-26*
 
 ---
 
@@ -60,33 +60,6 @@
 > - On ne modifie **jamais** `automations.yaml` en direct — tout changement passe par l'éditeur UI de HA, un par un, en s'appuyant sur les fichiers de `automations_corrige/`
  **Même logique pour les scripts :**
  
----
-
-# 🏠 STRUCTURE DU LOGEMENT 
-(uniquement pour l'analyse des consommations électriques)
-- **Localisation :** 06140 Vence (Altitude ~360m).
-- **Type :** Immeuble début 1980, 4ème et dernier étage (Sous toiture).
-- **Caractéristiques :** Traversant SUD/NORD, Simple vitrage partout.
-- **VMC :** Présente en SDB (Crée une dépression thermique).
-
-# 📏 DIMENSIONS & PÔLES 
-(uniquement pour l'analyse des consommations électriques)
-1. **SALON (Sud) :** 6.52m x 3.97m (25.88 m²). 
-   - *Équipement :* Split mural, Volet motorisé (Auto: 7h30 -> Coucher soleil / Fermé si Absent / Fermé si >34°C).
-   - *Note :* Apport solaire crucial dès 15h.
-2. **CUISINE (Nord) :** 4.86m x 2.18m (10.59 m²).
-   - *Équipement : "radiateur_cuisine" (Bain d'huile avec relais connecté). 
-   - *Auto :* L-Ma-Me-Je (4h45-7h), Ve-Sa-Di (5h45-8h).
-3. **BUREAU (Nord) :** 3.95m x 2.67m (10.55 m²).
-   - *Équipement :* Split mural, Volet motorisé. 
-   - *Auto :* Ouvert uniquement si T° Ext [18°C - 25°C].
-4. **SDB (Interne) :** 1.96m x 1.58m (3.13 m²) Pas de fenêtre.
-   - *Équipement :* Soufflant (2x1000W), Sèche-serviette (150W).
-   - *Auto :* Soufflant OFF si >23°C. Sèche-serviette 1h après douche.
-5. **CHAMBRE (Nord) :** 3.95m x 2.85m (11.26 m²).
-   - *Équipement :* Split mural. Pas de volet motorisé.
-   - *Note :* Forte dissipation thermique (DUT élevé).
-  
 ---
 
 ## 📋 RÈGLES DES FICHIERS YAML — CRITÈRES DE CONFORMITÉ
@@ -163,7 +136,9 @@ Juste après `## 🧮 CALCUL & SOURCES :` et avant `## ⚠️ IMPORTANT`, insér
 - Format : `unique_id: prefixe_nom_lisible_periode`
 - Tout en **minuscules**, séparateurs **underscores**
 - Doit décrire la même chose que le `name` (cohérence croisée obligatoire)
-- Exemples : `genelec_appart_cout_hp_quotidien`, `clim_salon_energie_totale_kwh`
+- Exemples (toujours afficher la paire `name` / `unique_id`) :
+  - `name: "Genelec Appart Cout Hp Quotidien"` → `unique_id: genelec_appart_cout_hp_quotidien`
+  - `name: "Clim Salon Energie Totale kWh"`    → `unique_id: clim_salon_energie_totale_kwh`
 
 ---
 
@@ -195,9 +170,6 @@ Pour tous les éléments qui ne sont pas rattachés à une pièce physique spéc
 
 **[ A ] - QUALITÉ DE L'AIR (Air quality) :**
 - `A_01_AIR_QUALITY` — sensors stats 24h PM2.5 + tCOV (sensors/) + templates ppb tCOV (templates/)
-
-**[ ST ] - SPEEDTEST (SpeedTest) :**
-- `ST_01_SpeedTest` — capteurs Download / Upload / Ping depuis `sensor.speedtest_cli_data`
 
 **[ S ] - STORES (Volets motorisés) :**
 - `S_01_STORES` — templates d'état `store_salon_status` / `store_bureau_status` (HTML couleur)
@@ -300,19 +272,6 @@ Pour tous les éléments qui ne sont pas rattachés à une pièce physique spéc
 
 ---
 
-## 🌡️ STRATÉGIE THERMIQUE & MONITORING
-*(Uniquement pour l'analyse des consommations électriques — cœur décisionnel Pôle 1)*
-
-- **Sondes :** Thermostats SONOFF dans TOUTES les pièces + T° Extérieure (Balcon Nord).
-- **Mode Absence :**
-  - **Hiver** : 17°C par défaut — Si T° Ext < 10°C → 18°C — Si T° Ext < 8°C → 19°C.
-  - **Été** : T° Cible = 28°C.
-- **Logique "Cœur du Système" (T° Extérieure → Cible → Confort) :**
-
-  ![Confort Cible Calcul Flow](https://github.com/user-attachments/assets/f18e24a2-1441-482b-af70-537a7b208e15)
-
----
-
 ## 🖥️ CARTOGRAPHIE DU TABLEAU DE BORD PRINCIPAL (MATRICE DES 18 VIGNETTES)
 Cette matrice permet de cibler exactement quelle entité remonte dans quelle carte visuelle du Dashboard. Elle est indispensable pour la documentation interne des fichiers YAML.
 Format : Ligne (L) / Colonne (C).
@@ -396,6 +355,48 @@ Cette liste sert de référence pour la création de nouveaux Dashboards afin de
 
 ---
 
+## 🔌 RÉFÉRENTIEL — INTÉGRATIONS HA INSTALLÉES
+
+### HACS — Custom Components
+
+| Slug | Nom | Rôle |
+|:-----|:----|:-----|
+| `spook` | Spook | Extension HA (entités et services supplémentaires) |
+| `powercalc` | PowerCalc | Calcul puissance virtuelle (ampoules sans wattmètre) |
+| `browser_mod` | Browser Mod | Contrôle navigateur depuis HA |
+| `smartir` | SmartIR | Télécommandes IR (clim salon, bureau, chambre) |
+| `scheduler` | Scheduler | Planificateur avancé (custom:scheduler-card) |
+| `meross_lan` | Meross LAN | Prises Meross en local sans cloud |
+| `blitzortung` | Blitzortung | Détection foudre temps réel |
+| `meteo_france` | Météo France | Alertes vigilance, prévisions, cameras cartes |
+| `atmo_france` | Atmo France | Qualité air extérieur (IQA) |
+| `vigieau` | VigiEau | Restrictions d'eau en vigueur (L6C3) |
+| `lune` | Lune | Phase lunaire |
+| `saison` | Saison | Détection saison courante (été/hiver) |
+| `soleil` | Soleil (Sun2) | Lever/coucher + azimut/élévation solaire précis |
+| `tarifs_edf` | Tarifs EDF | Index HP/HC, coûts Tempo/Base (P0) |
+| `feedreader` | Feed Reader | Suivi flux RSS (releases GitHub) |
+
+### Officielles HA Core
+
+| Intégration | Rôle |
+|:------------|:-----|
+| `mqtt` | Bus Z2M, Blitzortung, capteurs divers |
+| `philips_hue` | Pont Hue (toutes ampoules P3) |
+| `broadlink` | Émetteur IR (relai SmartIR) |
+| `meross` | Prises Meross (cloud — fallback si LAN KO) |
+| `raspberry_pi` | Supervision RPi4 (transitoire — migration Mini-PC) |
+| `github` | Veille releases + backup config |
+
+### Règle d'audit — Fichier dashboard fourni
+
+À chaque fichier YAML dashboard fourni par l'utilisateur, vérifier systématiquement :
+- Les `type: custom:*` présents → croiser avec **RÉFÉRENTIEL UI — CARTES HACS ET NATIVES**
+- Les intégrations référencées → croiser avec **RÉFÉRENTIEL — INTÉGRATIONS HA INSTALLÉES**
+- Tout élément absent de ces deux référentiels doit être **signalé immédiatement** pour ajout éventuel.
+
+---
+
 ## 🖥️ RÈGLES DE STRUCTURATION DES TEMPLATES D'INTERFACE (`ui_dashboard`)
 Pour séparer la logique de calcul pur de la logique d'affichage, un sous-dossier `ui_dashboard` est utilisé dans les Pôles (ex: `P3_eclairage/ui_dashboard/`).
 
@@ -450,9 +451,9 @@ ReBuild/                                         (dossier de travail local — C
 ├── docs_dashboard/                              (tout ce qui concerne le dashboard HA config)
 │   ├── TREE_CORRIGE/                            (← image exacte du GitHub re-build — dernière sync: 2026-04-19)
 │   │   ├── sensors/                             (13 fichiers — intégrations kWh, mini/maxi, qualité air)
-│   │   ├── templates/                           (34 fichiers — calculs, AVG, UI, météo, présence, stores, speedtest)
+│   │   ├── templates/                           (34 fichiers — calculs, AVG, UI, météo, présence, stores)
 │   │   ├── utility_meter/                       (10 fichiers — compteurs AMHQ)
-│   │   ├── command_line/                        (3 fichiers — météo, speedtest, github_maintenance)
+│   │   ├── command_line/                        (2 fichiers — météo, github_maintenance)
 │   │   ├── input_booleans/                      (5 fichiers — P1, P3, P4)
 │   │   ├── input_number/                        (1 fichier)
 │   │   └── [root]                               (configuration.yaml, groups.yaml, scripts.yaml, shell_command.yaml, sql.yaml, scenes.yaml, input_button.yaml, input_datetime.yaml, input_select.yaml, automations.yaml, #*.yaml ×4)
@@ -645,8 +646,8 @@ Dashboard/
 │   │   └── 03_AVG_genelec_appart.yaml
 │   ├── Linky
 │   │   └── MyElectricalData.yaml
-│   └── total par poste_7
-│       └── total_par_poste_7.yaml               (puissance instantanée × 7 pôles fonctionnels)
+│   └── total_pour_les_7_postes
+│       └── total_pour_les_7_postes.yaml         (puissance instantanée × 7 pôles fonctionnels)
 ├── P1_clim_chauffage
 │   ├── P1_01_MASTER
 │   │   ├── P1_01_clim_logique_system_autom.yaml
@@ -671,10 +672,10 @@ Dashboard/
 │   └── P2_ui_dashboard
 │       └── P2_ui_dashboard.yaml                 (lave_linge_en_cours / lave_vaisselle_en_cours — seuils 5W/50W)
 ├── P3_eclairage
-│   ├── P3_POWER                                 (remplace P3_01_somme_par_piece.yaml — obsolète)
-│   │   ├── P3_POWER_1_TOTAL_UNITE.yaml
-│   │   ├── P3_POWER_2_TOTAL_MULTI_ZONE.yaml
-│   │   └── P3_POWER_3_TOTAL_ZONE.yaml
+│   ├── P3_ENERGIE                               (remplace P3_POWER — puissance temps réel → énergie kWh)
+│   │   ├── P3_ENERGIE_1_TOTAL_UNITE.yaml
+│   │   ├── P3_ENERGIE_2_ZONE.yaml
+│   │   └── P3_ENERGIE_3_TOTAL_ZONE.yaml
 │   ├── P3_AVG
 │   │   ├── P3_AVG_AMHQ_1_UNITE.yaml
 │   │   ├── P3_AVG_AMHQ_2_ZONE.yaml
@@ -686,8 +687,6 @@ Dashboard/
 │   └── 02_logique_wifi_cellular.yaml
 ├── Air_quality                                  ([ A ] — catégorie lettrée)
 │   └── A_01_AIR_QUALITY.yaml                    (templates ppb tCOV × 3 pièces)
-├── SpeedTest                                    ([ ST ] — catégorie lettrée)
-│   └── ST_01_SpeedTest.yaml                     (Download / Upload / Ping depuis speedtest_cli_data)
 ├── Stores                                       ([ S ] — catégorie lettrée)
 │   └── S_01_STORES.yaml                         (store_salon_status + store_bureau_status)
 ├── meteo
@@ -790,9 +789,9 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P2_prise/P2_ui_dashboard/P2_ui_dashboard.yaml
 
 **Pôle 3 - Éclairage & UI**
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_POWER/P3_POWER_1_TOTAL_UNITE.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_POWER/P3_POWER_2_TOTAL_MULTI_ZONE.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_POWER/P3_POWER_3_TOTAL_ZONE.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_ENERGIE/P3_ENERGIE_1_TOTAL_UNITE.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_ENERGIE/P3_ENERGIE_2_ZONE.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_ENERGIE/P3_ENERGIE_3_TOTAL_ZONE.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
@@ -811,9 +810,6 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 
 **Qualité de l'Air [ A ]**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/Air_quality/A_01_AIR_QUALITY.yaml
-
-**SpeedTest [ ST ]**
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/SpeedTest/ST_01_SpeedTest.yaml
 
 **Stores [ S ]**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/Stores/S_01_STORES.yaml
@@ -859,7 +855,6 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 
 ### 📂 COMMAND_LINE
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/command_line/meteo/carte_meteo_france.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/command_line/speedtest/speedtest.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/command_line/github_maintenance/github_maintenance.yaml
 
 ---
@@ -1195,4 +1190,46 @@ T°Ext Up/Down/stable -> X° ← tendance T° extérieure
 
 | Condition       | Texte généré              |
 | :-------------- | :------------------------ |
-| `increasing`    | `T°Ext Up ↗ XX°`          
+| `increasing`    | `T°Ext Up ↗ XX°`          |
+| `decreasing`    | `T°Ext Down ↘ XX°`        |
+| `stable`        | `T°Ext stable → XX°`      |
+
+---
+
+# 🏠 LOGEMENT & STRATÉGIE THERMIQUE
+*(Uniquement pour l'analyse des consommations électriques — Pôle 1)*
+
+## Structure & Localisation
+
+- **Localisation :** 06140 Vence (Altitude ~360m).
+- **Type :** Immeuble début 1980, 4ème et dernier étage (Sous toiture).
+- **Caractéristiques :** Traversant SUD/NORD, Simple vitrage partout.
+- **VMC :** Présente en SDB (Crée une dépression thermique).
+
+## Dimensions & Équipements par Pièce
+
+1. **SALON (Sud) :** 6.52m x 3.97m (25.88 m²).
+   - *Équipement :* Split mural, Volet motorisé (Auto: 7h30 -> Coucher soleil / Fermé si Absent / Fermé si >34°C).
+   - *Note :* Apport solaire crucial dès 15h.
+2. **CUISINE (Nord) :** 4.86m x 2.18m (10.59 m²).
+   - *Équipement :* "radiateur_cuisine" (Bain d'huile avec relais connecté).
+   - *Auto :* L-Ma-Me-Je (4h45-7h), Ve-Sa-Di (5h45-8h).
+3. **BUREAU (Nord) :** 3.95m x 2.67m (10.55 m²).
+   - *Équipement :* Split mural, Volet motorisé.
+   - *Auto :* Ouvert uniquement si T° Ext [18°C - 25°C].
+4. **SDB (Interne) :** 1.96m x 1.58m (3.13 m²) Pas de fenêtre.
+   - *Équipement :* Soufflant (2x1000W), Sèche-serviette (150W).
+   - *Auto :* Soufflant OFF si >23°C. Sèche-serviette 1h après douche.
+5. **CHAMBRE (Nord) :** 3.95m x 2.85m (11.26 m²).
+   - *Équipement :* Split mural. Pas de volet motorisé.
+   - *Note :* Forte dissipation thermique (DUT élevé).
+
+## Sondes & Stratégie Thermique
+
+- **Sondes :** Thermostats SONOFF dans TOUTES les pièces + T° Extérieure (Balcon Nord).
+- **Mode Absence :**
+  - **Hiver** : 17°C par défaut — Si T° Ext < 10°C → 18°C — Si T° Ext < 8°C → 19°C.
+  - **Été** : T° Cible = 28°C.
+- **Logique "Cœur du Système" (T° Extérieure → Cible → Confort) :**
+
+  ![Confort Cible Calcul Flow](https://github.com/user-attachments/assets/f18e24a2-1441-482b-af70-537a7b208e15)
