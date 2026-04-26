@@ -30,23 +30,21 @@
 # - L2C3 Conso Énergie Éclairage (via P3_UM_AMHQ_3_TOTAL → eclairage_total_group_*_um).
 
 - sensor:
-
-    # --- eclairage_total_group_energie ---
     - name: "Eclairage Total Group Energie"
       unique_id: eclairage_total_group_energie
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
       state: >
-        {{
-          states('sensor.eclairage_entree_1_energie') | float(0) +
-          states('sensor.eclairage_salon_5_energie') | float(0) +
-          states('sensor.eclairage_cuisine_1_energie') | float(0) +
-          states('sensor.eclairage_couloir_1_energie') | float(0) +
-          states('sensor.eclairage_bureau_5_energie') | float(0) +
-          states('sensor.eclairage_sdb_2_energie') | float(0) +
-          states('sensor.eclairage_chambre_4_energie') | float(0)
-        }}
+        {% set zones = [
+          'sensor.eclairage_entree_1_energie', 'sensor.eclairage_salon_5_energie',
+          'sensor.eclairage_cuisine_1_energie', 'sensor.eclairage_couloir_1_energie',
+          'sensor.eclairage_bureau_5_energie', 'sensor.eclairage_sdb_2_energie',
+          'sensor.eclairage_chambre_4_energie'
+        ] %}
+        {{ zones | map('states') | map('float', 0) | sum | round(3) }}
+      availability: >
+        {{ states('sensor.eclairage_entree_1_energie') not in ['unavailable', 'unknown'] }}
 
 # annotations_log:
 # - [Création] Nouveau fichier — remplace Riemann P3_kWh_3_TOTAL.yaml (désactivé).
