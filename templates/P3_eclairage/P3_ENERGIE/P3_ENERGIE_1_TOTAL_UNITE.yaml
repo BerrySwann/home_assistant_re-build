@@ -33,35 +33,28 @@
 # - L2C3 Conso Énergie Éclairage (via P3_UM_AMHQ_3_TOTAL → eclairage_total_unit_*_um).
 
 - sensor:
-
-    # --- eclairage_total_unit_energie ---
     - name: "Eclairage Total Unit Energie"
       unique_id: eclairage_total_unit_energie
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
       state: >
-        {{
-          states('sensor.hue_white_lamp_entree_energy') | float(0) +
-          states('sensor.hue_white_lamp_table_energy') | float(0) +
-          states('sensor.hue_ambiance_lamp_salon_1_energy') | float(0) +
-          states('sensor.hue_ambiance_lamp_salon_2_energy') | float(0) +
-          states('sensor.hue_ambiance_lamp_salon_3_energy') | float(0) +
-          states('sensor.hue_color_candle_salon_1_energy') | float(0) +
-          states('sensor.hue_white_lamp_cuisine_energy') | float(0) +
-          states('sensor.hue_white_lamp_couloir_energy') | float(0) +
-          states('sensor.hue_play_1_pc_bureau_energy') | float(0) +
-          states('sensor.hue_play_2_pc_bureau_energy') | float(0) +
-          states('sensor.hue_play_3_pc_bureau_energy') | float(0) +
-          states('sensor.hue_white_lamp_bureau_1_energy') | float(0) +
-          states('sensor.hue_white_lamp_bureau_2_energy') | float(0) +
-          states('sensor.relais_lumiere_sdb_sonoff_energy') | float(0) +
-          states('sensor.lampe_salle_de_bain_hue_energy') | float(0) +
-          states('sensor.hue_white_lamp_chambre_1_energy') | float(0) +
-          states('sensor.hue_white_lamp_chambre_2_energy') | float(0) +
-          states('sensor.hue_color_candle_chambre_gege_energy') | float(0) +
-          states('sensor.hue_color_candle_chambre_eric_energy') | float(0)
-        }}
+        {% set lampes = [
+          'sensor.hue_white_lamp_entree_energy', 'sensor.hue_white_lamp_table_energy',
+          'sensor.hue_ambiance_lamp_salon_1_energy', 'sensor.hue_ambiance_lamp_salon_2_energy',
+          'sensor.hue_ambiance_lamp_salon_3_energy', 'sensor.hue_color_candle_salon_1_energy',
+          'sensor.hue_white_lamp_cuisine_energy', 'sensor.hue_white_lamp_couloir_energy',
+          'sensor.hue_play_1_pc_bureau_energy', 'sensor.hue_play_2_pc_bureau_energy',
+          'sensor.hue_play_3_pc_bureau_energy', 'sensor.hue_white_lamp_bureau_1_energy',
+          'sensor.hue_white_lamp_bureau_2_energy', 'sensor.relais_lumiere_sdb_sonoff_energy',
+          'sensor.lampe_salle_de_bain_hue_energy', 'sensor.hue_white_lamp_chambre_1_energy',
+          'sensor.hue_white_lamp_chambre_2_energy', 'sensor.hue_color_candle_chambre_gege_energy',
+          'sensor.hue_color_candle_chambre_eric_energy'
+        ] %}
+        {{ lampes | map('states') | map('float', 0) | sum | round(3) }}
+      availability: >
+        {# On ne rend le capteur dispo que si l'Entrée (référence) est là, pour éviter le calcul à 0 au reboot #}
+        {{ states('sensor.hue_white_lamp_entree_energy') not in ['unavailable', 'unknown'] }}
 
 # annotations_log:
 # - [Création] Nouveau fichier — remplace Riemann P3_kWh_3_TOTAL.yaml (désactivé).
