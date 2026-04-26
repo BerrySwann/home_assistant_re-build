@@ -8,7 +8,7 @@
 # Pour le split tarifaire HP/HC, voir : 03_kwh_um_genelec_appart_HPHC_AMHQ.yaml
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Source : sensor.genelec_appart_totale_kwh (index kWh cumulatif Ecojoko).
+# - Source : sensor.general_electric_appart_energy (index kWh cumulatif Ecojoko).
 # - Chaque UM accumule les incréments de la source sur sa période, puis remet
 #   à zéro automatiquement (minuit / lundi / 1er du mois / 1er janvier).
 #
@@ -33,7 +33,7 @@
 
 # --- genelec_appart_quotidien_kwh_um ---
 genelec_appart_quotidien_kwh_um:
-  source: sensor.genelec_appart_totale_kwh
+  source: sensor.general_electric_appart_energy
   name: "Genelec Appart Quotidien kWh UM"
   unique_id: genelec_appart_quotidien_kwh_um
   cycle: daily
@@ -42,7 +42,7 @@ genelec_appart_quotidien_kwh_um:
 
 # --- genelec_appart_hebdomadaire_kwh_um ---
 genelec_appart_hebdomadaire_kwh_um:
-  source: sensor.genelec_appart_totale_kwh
+  source: sensor.general_electric_appart_energy
   name: "Genelec Appart Hebdomadaire kWh UM"
   unique_id: genelec_appart_hebdomadaire_kwh_um
   cycle: weekly
@@ -51,7 +51,7 @@ genelec_appart_hebdomadaire_kwh_um:
 
 # --- genelec_appart_mensuel_kwh_um ---
 genelec_appart_mensuel_kwh_um:
-  source: sensor.genelec_appart_totale_kwh
+  source: sensor.general_electric_appart_energy
   name: "Genelec Appart Mensuel kWh UM"
   unique_id: genelec_appart_mensuel_kwh_um
   cycle: monthly
@@ -60,7 +60,7 @@ genelec_appart_mensuel_kwh_um:
 
 # --- genelec_appart_annuel_kwh_um ---
 genelec_appart_annuel_kwh_um:
-  source: sensor.genelec_appart_totale_kwh
+  source: sensor.general_electric_appart_energy
   name: "Genelec Appart Annuel kWh UM"
   unique_id: genelec_appart_annuel_kwh_um
   cycle: yearly
@@ -68,5 +68,5 @@ genelec_appart_annuel_kwh_um:
 # annotations_log:
 # - [AJOUT] genelec_appart_quotidien_kwh_um (cycle daily manquant) — requis par 03_AVG_genelec_appart.yaml
 # - [L29,37,45,53] name: "Réseau *" → "Genelec Appart * UM" (conformité convention)
-# - [L27,34,41] source inchangée : sensor.genelec_appart_totale_kwh
+# - [L27,34,41] source inchangée : sensor.general_electric_appart_energy
 # - [SUPPRIMÉ] ecojoko_hp/hc_reseau_*_kwh_um (source Ecojoko remplacée)
