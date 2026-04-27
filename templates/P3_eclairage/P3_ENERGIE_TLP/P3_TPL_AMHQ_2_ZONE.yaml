@@ -9,28 +9,27 @@
 # 9 zones × 4 cycles = 36 sensors _tpl.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Source : sensor.eclairage_*_*_um (sorties UM par zone — 9 zones physiques + transversales)
+# - Source : sensor.eclairage_*_*_um (sorties UM par zone — 9 zones)
 # - Formule : relay direct | float(0)
-# - state_class: measurement → permet l'affichage sans cumul HA supplémentaire.
+# - state_class: measurement → les UM se réinitialisent à chaque cycle.
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
-# | MATÉRIEL    | CAPTEUR BRUT (source)                        | CE FICHIER (unique_id)                   | AVAL        |
-# |:------------|:---------------------------------------------|:-----------------------------------------|:------------|
-# | [UM]        | sensor.eclairage_entree_1_*_um               | eclairage_entree_1_*_tpl                 | L2C3 → page |
-# | [UM]        | sensor.eclairage_salon_5_*_um                | eclairage_salon_5_*_tpl                  | L2C3 → vignette/page |
-# | [UM]        | sensor.eclairage_cuisine_1_*_um              | eclairage_cuisine_1_*_tpl                | L2C3 → page |
-# | [UM]        | sensor.eclairage_couloir_1_*_um              | eclairage_couloir_1_*_tpl                | L2C3 → page |
-# | [UM]        | sensor.eclairage_bureau_5_*_um               | eclairage_bureau_5_*_tpl                 | L2C3 → vignette/page |
-# | [UM]        | sensor.eclairage_sdb_2_*_um                  | eclairage_sdb_2_*_tpl                    | L2C3 → vignette/page |
-# | [UM]        | sensor.eclairage_chambre_4_*_um              | eclairage_chambre_4_*_tpl                | L2C3 → vignette/page |
-# | [UM]        | sensor.eclairage_appart_3_*_um               | eclairage_appart_3_*_tpl                 | L2C3 → page |
-# | [UM]        | sensor.eclairage_appart_2_*_um               | eclairage_appart_2_*_tpl                 | L2C3 → vignette/page |
+# | MATÉRIEL    | CAPTEUR BRUT (source)               | CE FICHIER (unique_id)        | AVAL                 |
+# |:------------|:------------------------------------|:------------------------------|:---------------------|
+# | [UM]        | sensor.eclairage_entree_1_*_um      | eclairage_entree_1_*_tpl      | L2C3 → page          |
+# | [UM]        | sensor.eclairage_salon_5_*_um       | eclairage_salon_5_*_tpl       | L2C3 → vignette/page |
+# | [UM]        | sensor.eclairage_cuisine_1_*_um     | eclairage_cuisine_1_*_tpl     | L2C3 → vignette/page |
+# | [UM]        | sensor.eclairage_couloir_1_*_um     | eclairage_couloir_1_*_tpl     | L2C3 → page          |
+# | [UM]        | sensor.eclairage_bureau_5_*_um      | eclairage_bureau_5_*_tpl      | L2C3 → vignette/page |
+# | [UM]        | sensor.eclairage_sdb_2_*_um         | eclairage_sdb_2_*_tpl         | L2C3 → vignette/page |
+# | [UM]        | sensor.eclairage_chambre_4_*_um     | eclairage_chambre_4_*_tpl     | L2C3 → vignette/page |
+# | [UM]        | sensor.eclairage_appart_3_*_um      | eclairage_appart_3_*_tpl      | L2C3 → page          |
+# | [UM]        | sensor.eclairage_appart_2_*_um      | eclairage_appart_2_*_tpl      | L2C3 → vignette/page |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - state_class: measurement (pas total_increasing) — les UM se réinitialisent.
-# - eclairage_appart_2/3 = zones transversales — affichage seulement, pas inclus dans totaux.
-# - eclairage_couloir_1 inclus pour complétude (peut ne pas apparaître dans la vignette).
+# - eclairage_appart_2/3 = zones transversales — affichage seulement.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C3 Conso Énergie Éclairage — détail par zone/pièce (vignette + page)
@@ -406,4 +405,3 @@
 # - [Logique] state_class: measurement (UM se réinitialise → pas total_increasing).
 # - [Source] sensor.eclairage_*_*_um → P3_UM_AMHQ_2_ZONE.yaml (9 zones × 4 cycles).
 # - [Dashboard] L2C3 vignette (salon/bureau/sdb/chambre/appart_2) + page (toutes zones).
-# - [Transversaux] appart_2/3 inclus — affichage uniquement, pas dans les totaux.
