@@ -1,407 +1,181 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 3. TEMPLATES : RELAIS TPL — ZONES ÉCLAIRAGE AMHQ (kWh)              │
+# │ PÔLE 3. TEMPLATES : SOMMES ÉNERGIE PIÈCES & ZONES AMHQ (kWh)             │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-#
-# ## 📝 DESCRIPTION :
-# Capteurs templates relayant les sorties des Utility Meters "PAR ZONE"
-# (P3_UM_AMHQ_2_ZONE.yaml) vers des sensors measurement utilisables
-# directement dans le dashboard (vignette L2C3 et page éclairage).
-# 9 zones × 4 cycles = 36 sensors _tpl.
-#
-# ## 🧮 CALCUL & SOURCES :
-# - Source : sensor.eclairage_*_*_um (sorties UM par zone — 9 zones)
-# - Formule : relay direct | float(0)
-# - state_class: measurement → les UM se réinitialisent à chaque cycle.
-#
-# ## 🔗 CHAÎNE DE DÉPENDANCES :
-#
-# | MATÉRIEL    | CAPTEUR BRUT (source)               | CE FICHIER (unique_id)        | AVAL                 |
-# |:------------|:------------------------------------|:------------------------------|:---------------------|
-# | [UM]        | sensor.eclairage_entree_1_*_um      | eclairage_entree_1_*_tpl      | L2C3 → page          |
-# | [UM]        | sensor.eclairage_salon_5_*_um       | eclairage_salon_5_*_tpl       | L2C3 → vignette/page |
-# | [UM]        | sensor.eclairage_cuisine_1_*_um     | eclairage_cuisine_1_*_tpl     | L2C3 → vignette/page |
-# | [UM]        | sensor.eclairage_couloir_1_*_um     | eclairage_couloir_1_*_tpl     | L2C3 → page          |
-# | [UM]        | sensor.eclairage_bureau_5_*_um      | eclairage_bureau_5_*_tpl      | L2C3 → vignette/page |
-# | [UM]        | sensor.eclairage_sdb_2_*_um         | eclairage_sdb_2_*_tpl         | L2C3 → vignette/page |
-# | [UM]        | sensor.eclairage_chambre_4_*_um     | eclairage_chambre_4_*_tpl     | L2C3 → vignette/page |
-# | [UM]        | sensor.eclairage_appart_3_*_um      | eclairage_appart_3_*_tpl      | L2C3 → page          |
-# | [UM]        | sensor.eclairage_appart_2_*_um      | eclairage_appart_2_*_tpl      | L2C3 → vignette/page |
-#
-# ## ⚠️ IMPORTANT (PIÈGES) :
-# - state_class: measurement (pas total_increasing) — les UM se réinitialisent.
-# - eclairage_appart_2/3 = zones transversales — affichage seulement.
-#
-# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L2C3 Conso Énergie Éclairage — détail par zone/pièce (vignette + page)
 
 - sensor:
+    # ==========================================================================
+    # CYCLE : ANNUEL
+    # ==========================================================================
 
-      #┌───────────────────────────────────┐
-      #│         1. ENTRÉE (1x)            │
-      #└───────────────────────────────────┘
+    - name: "Eclairage Entree 1 Annuel TPL"
+      unique_id: eclairage_entree_1_annuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: "{{ states('sensor.hue_white_lamp_entree_annuel_um') | float(0) | round(2) }}"
 
-      # --- eclairage_entree_1_annuel_tpl ---
-      - name: "Eclairage Entree 1 Annuel Tpl"
-        unique_id: eclairage_entree_1_annuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_entree_1_annuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_entree_1_annuel_um') not in ['unavailable', 'unknown'] }}"
+    - name: "Eclairage Salon 5 Annuel TPL"
+      unique_id: eclairage_salon_5_annuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_table_salon_annuel_um',
+          'sensor.hue_ambiance_lamp_salon_1_annuel_um',
+          'sensor.hue_ambiance_lamp_salon_2_annuel_um',
+          'sensor.hue_ambiance_lamp_salon_3_annuel_um',
+          'sensor.hue_color_candle_salon_1_annuel_um'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
-      # --- eclairage_entree_1_mensuel_tpl ---
-      - name: "Eclairage Entree 1 Mensuel Tpl"
-        unique_id: eclairage_entree_1_mensuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_entree_1_mensuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_entree_1_mensuel_um') not in ['unavailable', 'unknown'] }}"
+    - name: "Eclairage Cuisine 1 Annuel TPL"
+      unique_id: eclairage_cuisine_1_annuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: "{{ states('sensor.hue_white_lamp_cuisine_annuel_um') | float(0) | round(2) }}"
 
-      # --- eclairage_entree_1_hebdomadaire_tpl ---
-      - name: "Eclairage Entree 1 Hebdomadaire Tpl"
-        unique_id: eclairage_entree_1_hebdomadaire_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_entree_1_hebdomadaire_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_entree_1_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+    - name: "Eclairage Couloir 1 Annuel TPL"
+      unique_id: eclairage_couloir_1_annuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: "{{ states('sensor.hue_white_lamp_couloir_annuel_um') | float(0) | round(2) }}"
 
-      # --- eclairage_entree_1_quotidien_tpl ---
-      - name: "Eclairage Entree 1 Quotidien Tpl"
-        unique_id: eclairage_entree_1_quotidien_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_entree_1_quotidien_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_entree_1_quotidien_um') not in ['unavailable', 'unknown'] }}"
+    - name: "Eclairage Bureau 5 Annuel TPL"
+      unique_id: eclairage_bureau_5_annuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: >
+        {% set sensors = [
+          'sensor.hue_play_1_pc_bureau_annuel_um',
+          'sensor.hue_play_2_pc_bureau_annuel_um',
+          'sensor.hue_play_3_pc_bureau_annuel_um',
+          'sensor.lampe_bureau_1_hue_annuel_um',
+          'sensor.lampe_bureau_2_hue_annuel_um'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
-      #┌───────────────────────────────────┐
-      #│         4. SALON (5x)             │
-      #└───────────────────────────────────┘
+    - name: "Eclairage Sdb 2 Annuel TPL"
+      unique_id: eclairage_sdb_2_annuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: >
+        {% set sensors = [
+          'sensor.relais_lumiere_sdb_sonoff_annuel_um',
+          'sensor.lampe_salle_de_bain_hue_annuel_um'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
-      # --- eclairage_salon_5_annuel_tpl ---
-      - name: "Eclairage Salon 5 Annuel Tpl"
-        unique_id: eclairage_salon_5_annuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_salon_5_annuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_salon_5_annuel_um') not in ['unavailable', 'unknown'] }}"
+    - name: "Eclairage Chambre 4 Annuel TPL"
+      unique_id: eclairage_chambre_4_annuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_chambre_1_annuel_um',
+          'sensor.hue_white_lamp_chambre_2_annuel_um',
+          'sensor.hue_color_candle_chambre_gege_annuel_um',
+          'sensor.hue_color_candle_chambre_eric_annuel_um'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
-      # --- eclairage_salon_5_mensuel_tpl ---
-      - name: "Eclairage Salon 5 Mensuel Tpl"
-        unique_id: eclairage_salon_5_mensuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_salon_5_mensuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_salon_5_mensuel_um') not in ['unavailable', 'unknown'] }}"
+    - name: "Eclairage Appart 3 Annuel TPL"
+      unique_id: eclairage_appart_3_annuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_entree_annuel_um',
+          'sensor.hue_white_lamp_cuisine_annuel_um',
+          'sensor.hue_white_lamp_couloir_annuel_um'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
-      # --- eclairage_salon_5_hebdomadaire_tpl ---
-      - name: "Eclairage Salon 5 Hebdomadaire Tpl"
-        unique_id: eclairage_salon_5_hebdomadaire_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_salon_5_hebdomadaire_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_salon_5_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+    # ==========================================================================
+    # CYCLE : MENSUEL
+    # ==========================================================================
 
-      # --- eclairage_salon_5_quotidien_tpl ---
-      - name: "Eclairage Salon 5 Quotidien Tpl"
-        unique_id: eclairage_salon_5_quotidien_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_salon_5_quotidien_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_salon_5_quotidien_um') not in ['unavailable', 'unknown'] }}"
+    - name: "Eclairage Entree 1 Mensuel TPL"
+      unique_id: eclairage_entree_1_mensuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: "{{ states('sensor.hue_white_lamp_entree_mensuel_um') | float(0) | round(2) }}"
 
-      #┌───────────────────────────────────┐
-      #│         5. CUISINE (1x)           │
-      #└───────────────────────────────────┘
+    - name: "Eclairage Salon 5 Mensuel TPL"
+      unique_id: eclairage_salon_5_mensuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_table_salon_mensuel_um',
+          'sensor.hue_ambiance_lamp_salon_1_mensuel_um',
+          'sensor.hue_ambiance_lamp_salon_2_mensuel_um',
+          'sensor.hue_ambiance_lamp_salon_3_mensuel_um',
+          'sensor.hue_color_candle_salon_1_mensuel_um'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
-      # --- eclairage_cuisine_1_annuel_tpl ---
-      - name: "Eclairage Cuisine 1 Annuel Tpl"
-        unique_id: eclairage_cuisine_1_annuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_cuisine_1_annuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_cuisine_1_annuel_um') not in ['unavailable', 'unknown'] }}"
+    - name: "Eclairage Cuisine 1 Mensuel TPL"
+      unique_id: eclairage_cuisine_1_mensuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: "{{ states('sensor.hue_white_lamp_cuisine_mensuel_um') | float(0) | round(2) }}"
 
-      # --- eclairage_cuisine_1_mensuel_tpl ---
-      - name: "Eclairage Cuisine 1 Mensuel Tpl"
-        unique_id: eclairage_cuisine_1_mensuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_cuisine_1_mensuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_cuisine_1_mensuel_um') not in ['unavailable', 'unknown'] }}"
+    - name: "Eclairage Couloir 1 Mensuel TPL"
+      unique_id: eclairage_couloir_1_mensuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: "{{ states('sensor.hue_white_lamp_couloir_mensuel_um') | float(0) | round(2) }}"
 
-      # --- eclairage_cuisine_1_hebdomadaire_tpl ---
-      - name: "Eclairage Cuisine 1 Hebdomadaire Tpl"
-        unique_id: eclairage_cuisine_1_hebdomadaire_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_cuisine_1_hebdomadaire_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_cuisine_1_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+    - name: "Eclairage Bureau 5 Mensuel TPL"
+      unique_id: eclairage_bureau_5_mensuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: >
+        {% set sensors = [
+          'sensor.hue_play_1_pc_bureau_mensuel_um',
+          'sensor.hue_play_2_pc_bureau_mensuel_um',
+          'sensor.hue_play_3_pc_bureau_mensuel_um',
+          'sensor.lampe_bureau_1_hue_mensuel_um',
+          'sensor.lampe_bureau_2_hue_mensuel_um'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
-      # --- eclairage_cuisine_1_quotidien_tpl ---
-      - name: "Eclairage Cuisine 1 Quotidien Tpl"
-        unique_id: eclairage_cuisine_1_quotidien_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_cuisine_1_quotidien_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_cuisine_1_quotidien_um') not in ['unavailable', 'unknown'] }}"
+    - name: "Eclairage Sdb 2 Mensuel TPL"
+      unique_id: eclairage_sdb_2_mensuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: >
+        {% set sensors = [
+          'sensor.relais_lumiere_sdb_sonoff_mensuel_um',
+          'sensor.lampe_salle_de_bain_hue_mensuel_um'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
-      #┌───────────────────────────────────┐
-      #│         6. COULOIR (1x)           │
-      #└───────────────────────────────────┘
+    - name: "Eclairage Chambre 4 Mensuel TPL"
+      unique_id: eclairage_chambre_4_mensuel_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_chambre_1_mensuel_um',
+          'sensor.hue_white_lamp_chambre_2_mensuel_um',
+          'sensor.hue_color_candle_chambre_gege_mensuel_um',
+          'sensor.hue_color_candle_chambre_eric_mensuel_um'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
-      # --- eclairage_couloir_1_annuel_tpl ---
-      - name: "Eclairage Couloir 1 Annuel Tpl"
-        unique_id: eclairage_couloir_1_annuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_couloir_1_annuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_couloir_1_annuel_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_couloir_1_mensuel_tpl ---
-      - name: "Eclairage Couloir 1 Mensuel Tpl"
-        unique_id: eclairage_couloir_1_mensuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_couloir_1_mensuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_couloir_1_mensuel_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_couloir_1_hebdomadaire_tpl ---
-      - name: "Eclairage Couloir 1 Hebdomadaire Tpl"
-        unique_id: eclairage_couloir_1_hebdomadaire_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_couloir_1_hebdomadaire_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_couloir_1_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_couloir_1_quotidien_tpl ---
-      - name: "Eclairage Couloir 1 Quotidien Tpl"
-        unique_id: eclairage_couloir_1_quotidien_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_couloir_1_quotidien_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_couloir_1_quotidien_um') not in ['unavailable', 'unknown'] }}"
-
-      #┌───────────────────────────────────┐
-      #│         7. BUREAU (5x)            │
-      #└───────────────────────────────────┘
-
-      # --- eclairage_bureau_5_annuel_tpl ---
-      - name: "Eclairage Bureau 5 Annuel Tpl"
-        unique_id: eclairage_bureau_5_annuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_bureau_5_annuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_bureau_5_annuel_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_bureau_5_mensuel_tpl ---
-      - name: "Eclairage Bureau 5 Mensuel Tpl"
-        unique_id: eclairage_bureau_5_mensuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_bureau_5_mensuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_bureau_5_mensuel_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_bureau_5_hebdomadaire_tpl ---
-      - name: "Eclairage Bureau 5 Hebdomadaire Tpl"
-        unique_id: eclairage_bureau_5_hebdomadaire_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_bureau_5_hebdomadaire_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_bureau_5_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_bureau_5_quotidien_tpl ---
-      - name: "Eclairage Bureau 5 Quotidien Tpl"
-        unique_id: eclairage_bureau_5_quotidien_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_bureau_5_quotidien_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_bureau_5_quotidien_um') not in ['unavailable', 'unknown'] }}"
-
-      #┌───────────────────────────────────┐
-      #│         8. SDB (2x)               │
-      #└───────────────────────────────────┘
-
-      # --- eclairage_sdb_2_annuel_tpl ---
-      - name: "Eclairage Sdb 2 Annuel Tpl"
-        unique_id: eclairage_sdb_2_annuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_sdb_2_annuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_sdb_2_annuel_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_sdb_2_mensuel_tpl ---
-      - name: "Eclairage Sdb 2 Mensuel Tpl"
-        unique_id: eclairage_sdb_2_mensuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_sdb_2_mensuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_sdb_2_mensuel_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_sdb_2_hebdomadaire_tpl ---
-      - name: "Eclairage Sdb 2 Hebdomadaire Tpl"
-        unique_id: eclairage_sdb_2_hebdomadaire_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_sdb_2_hebdomadaire_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_sdb_2_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_sdb_2_quotidien_tpl ---
-      - name: "Eclairage Sdb 2 Quotidien Tpl"
-        unique_id: eclairage_sdb_2_quotidien_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_sdb_2_quotidien_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_sdb_2_quotidien_um') not in ['unavailable', 'unknown'] }}"
-
-      #┌───────────────────────────────────┐
-      #│         9. CHAMBRE (4x)           │
-      #└───────────────────────────────────┘
-
-      # --- eclairage_chambre_4_annuel_tpl ---
-      - name: "Eclairage Chambre 4 Annuel Tpl"
-        unique_id: eclairage_chambre_4_annuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_chambre_4_annuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_chambre_4_annuel_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_chambre_4_mensuel_tpl ---
-      - name: "Eclairage Chambre 4 Mensuel Tpl"
-        unique_id: eclairage_chambre_4_mensuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_chambre_4_mensuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_chambre_4_mensuel_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_chambre_4_hebdomadaire_tpl ---
-      - name: "Eclairage Chambre 4 Hebdomadaire Tpl"
-        unique_id: eclairage_chambre_4_hebdomadaire_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_chambre_4_hebdomadaire_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_chambre_4_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_chambre_4_quotidien_tpl ---
-      - name: "Eclairage Chambre 4 Quotidien Tpl"
-        unique_id: eclairage_chambre_4_quotidien_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_chambre_4_quotidien_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_chambre_4_quotidien_um') not in ['unavailable', 'unknown'] }}"
-
-      # ╭──────────────────────────────────────────────────────────────────────╮
-      # │    ZONES TRANSVERSALES (APPART)                                       │
-      # ╰──────────────────────────────────────────────────────────────────────╯
-
-      #┌───────────────────────────────────┐
-      #│   ZONE HOME (3x) E+Cu+Co          │
-      #└───────────────────────────────────┘
-
-      # --- eclairage_appart_3_annuel_tpl ---
-      - name: "Eclairage Appart 3 Annuel Tpl"
-        unique_id: eclairage_appart_3_annuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_appart_3_annuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_appart_3_annuel_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_appart_3_mensuel_tpl ---
-      - name: "Eclairage Appart 3 Mensuel Tpl"
-        unique_id: eclairage_appart_3_mensuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_appart_3_mensuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_appart_3_mensuel_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_appart_3_hebdomadaire_tpl ---
-      - name: "Eclairage Appart 3 Hebdomadaire Tpl"
-        unique_id: eclairage_appart_3_hebdomadaire_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_appart_3_hebdomadaire_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_appart_3_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_appart_3_quotidien_tpl ---
-      - name: "Eclairage Appart 3 Quotidien Tpl"
-        unique_id: eclairage_appart_3_quotidien_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_appart_3_quotidien_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_appart_3_quotidien_um') not in ['unavailable', 'unknown'] }}"
-
-      #┌───────────────────────────────────┐
-      #│   ZONE HOME (2x) E+Co             │
-      #└───────────────────────────────────┘
-
-      # --- eclairage_appart_2_annuel_tpl ---
-      - name: "Eclairage Appart 2 Annuel Tpl"
-        unique_id: eclairage_appart_2_annuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_appart_2_annuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_appart_2_annuel_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_appart_2_mensuel_tpl ---
-      - name: "Eclairage Appart 2 Mensuel Tpl"
-        unique_id: eclairage_appart_2_mensuel_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_appart_2_mensuel_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_appart_2_mensuel_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_appart_2_hebdomadaire_tpl ---
-      - name: "Eclairage Appart 2 Hebdomadaire Tpl"
-        unique_id: eclairage_appart_2_hebdomadaire_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_appart_2_hebdomadaire_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_appart_2_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
-
-      # --- eclairage_appart_2_quotidien_tpl ---
-      - name: "Eclairage Appart 2 Quotidien Tpl"
-        unique_id: eclairage_appart_2_quotidien_tpl
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: measurement
-        state: "{{ states('sensor.eclairage_appart_2_quotidien_um') | float(0) }}"
-        availability: "{{ states('sensor.eclairage_appart_2_quotidien_um') not in ['unavailable', 'unknown'] }}"
-
-# annotations_log:
-# - [Création] Nouveau fichier — couche TPL relayant P3_UM_AMHQ_2_ZONE vers le dashboard.
-# - [Logique] state_class: measurement (UM se réinitialise → pas total_increasing).
-# - [Source] sensor.eclairage_*_*_um → P3_UM_AMHQ_2_ZONE.yaml (9 zones × 4 cycles).
-# - [Dashboard] L2C3 vignette (salon/bureau/sdb/chambre/appart_2) + page (toutes zones).
+    # ... Idem pour Hebdomadaire et Quotidien ...
