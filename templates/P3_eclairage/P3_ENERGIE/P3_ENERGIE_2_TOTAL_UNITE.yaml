@@ -1,3 +1,5 @@
+
+- sensor:
 # --- TOTAL UNITAIRE ANNUEL ---
     - name: "Eclairage Total Unit Annuel TPL"
       unique_id: eclairage_total_unit_annuel_tpl
