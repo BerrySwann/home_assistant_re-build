@@ -13,8 +13,8 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
-      availability: "{{ states('sensor.eclairage_hue_white_lamp_entree_annuel_um') | is_number }}"
-      state: "{{ states('sensor.eclairage_hue_white_lamp_entree_annuel_um') | float(0) | round(2) }}"
+      availability: "{{ states('sensor.hue_white_lamp_entree_annuel_um') | is_number }}"
+      state: "{{ states('sensor.hue_white_lamp_entree_annuel_um') | float(0) | round(2) }}"
 
     # --- 4. SALON ---
     - name: "Eclairage Salon 5 Annuel TPL"
@@ -24,20 +24,20 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_table_salon_annuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_1_annuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_2_annuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_3_annuel_um',
-          'sensor.eclairage_hue_color_candle_salon_1_annuel_um'
+          'sensor.hue_white_lamp_table_salon_annuel_um',
+          'sensor.hue_ambiance_lamp_salon_1_annuel_um',
+          'sensor.hue_ambiance_lamp_salon_2_annuel_um',
+          'sensor.hue_ambiance_lamp_salon_3_annuel_um',
+          'sensor.hue_color_candle_salon_1_annuel_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_table_salon_annuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_1_annuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_2_annuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_3_annuel_um',
-          'sensor.eclairage_hue_color_candle_salon_1_annuel_um'
+          'sensor.hue_white_lamp_table_salon_annuel_um',
+          'sensor.hue_ambiance_lamp_salon_1_annuel_um',
+          'sensor.hue_ambiance_lamp_salon_2_annuel_um',
+          'sensor.hue_ambiance_lamp_salon_3_annuel_um',
+          'sensor.hue_color_candle_salon_1_annuel_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -47,8 +47,8 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
-      availability: "{{ states('sensor.eclairage_hue_white_lamp_cuisine_annuel_um') | is_number }}"
-      state: "{{ states('sensor.eclairage_hue_white_lamp_cuisine_annuel_um') | float(0) | round(2) }}"
+      availability: "{{ states('sensor.hue_white_lamp_cuisine_annuel_um') | is_number }}"
+      state: "{{ states('sensor.hue_white_lamp_cuisine_annuel_um') | float(0) | round(2) }}"
 
     # --- 6. COULOIR ---
     - name: "Eclairage Couloir 1 Annuel TPL"
@@ -56,8 +56,8 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
-      availability: "{{ states('sensor.eclairage_hue_white_lamp_couloir_annuel_um') | is_number }}"
-      state: "{{ states('sensor.eclairage_hue_white_lamp_couloir_annuel_um') | float(0) | round(2) }}"
+      availability: "{{ states('sensor.hue_white_lamp_couloir_annuel_um') | is_number }}"
+      state: "{{ states('sensor.hue_white_lamp_couloir_annuel_um') | float(0) | round(2) }}"
 
     # --- 7. BUREAU ---
     - name: "Eclairage Bureau 5 Annuel TPL"
@@ -67,20 +67,20 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_play_1_pc_bureau_annuel_um',
-          'sensor.eclairage_hue_play_2_pc_bureau_annuel_um',
-          'sensor.eclairage_hue_play_3_pc_bureau_annuel_um',
-          'sensor.eclairage_lampe_bureau_1_hue_annuel_um',
-          'sensor.eclairage_lampe_bureau_2_hue_annuel_um'
+          'sensor.hue_play_1_pc_bureau_annuel_um',
+          'sensor.hue_play_2_pc_bureau_annuel_um',
+          'sensor.hue_play_3_pc_bureau_annuel_um',
+          'sensor.lampe_bureau_1_hue_annuel_um',
+          'sensor.lampe_bureau_2_hue_annuel_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_play_1_pc_bureau_annuel_um',
-          'sensor.eclairage_hue_play_2_pc_bureau_annuel_um',
-          'sensor.eclairage_hue_play_3_pc_bureau_annuel_um',
-          'sensor.eclairage_lampe_bureau_1_hue_annuel_um',
-          'sensor.eclairage_lampe_bureau_2_hue_annuel_um'
+          'sensor.hue_play_1_pc_bureau_annuel_um',
+          'sensor.hue_play_2_pc_bureau_annuel_um',
+          'sensor.hue_play_3_pc_bureau_annuel_um',
+          'sensor.lampe_bureau_1_hue_annuel_um',
+          'sensor.lampe_bureau_2_hue_annuel_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -92,14 +92,14 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_relais_lumiere_sdb_sonoff_annuel_um',
-          'sensor.eclairage_lampe_salle_de_bain_hue_annuel_um'
+          'sensor.relais_lumiere_sdb_sonoff_annuel_um',
+          'sensor.lampe_salle_de_bain_hue_annuel_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_relais_lumiere_sdb_sonoff_annuel_um',
-          'sensor.eclairage_lampe_salle_de_bain_hue_annuel_um'
+          'sensor.relais_lumiere_sdb_sonoff_annuel_um',
+          'sensor.lampe_salle_de_bain_hue_annuel_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -111,18 +111,18 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_chambre_1_annuel_um',
-          'sensor.eclairage_hue_white_lamp_chambre_2_annuel_um',
-          'sensor.eclairage_hue_color_candle_chambre_gege_annuel_um',
-          'sensor.eclairage_hue_color_candle_chambre_eric_annuel_um'
+          'sensor.hue_white_lamp_chambre_1_annuel_um',
+          'sensor.hue_white_lamp_chambre_2_annuel_um',
+          'sensor.hue_color_candle_chambre_gege_annuel_um',
+          'sensor.hue_color_candle_chambre_eric_annuel_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_chambre_1_annuel_um',
-          'sensor.eclairage_hue_white_lamp_chambre_2_annuel_um',
-          'sensor.eclairage_hue_color_candle_chambre_gege_annuel_um',
-          'sensor.eclairage_hue_color_candle_chambre_eric_annuel_um'
+          'sensor.hue_white_lamp_chambre_1_annuel_um',
+          'sensor.hue_white_lamp_chambre_2_annuel_um',
+          'sensor.hue_color_candle_chambre_gege_annuel_um',
+          'sensor.hue_color_candle_chambre_eric_annuel_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -134,16 +134,16 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_annuel_um',
-          'sensor.eclairage_hue_white_lamp_cuisine_annuel_um',
-          'sensor.eclairage_hue_white_lamp_couloir_annuel_um'
+          'sensor.hue_white_lamp_entree_annuel_um',
+          'sensor.hue_white_lamp_cuisine_annuel_um',
+          'sensor.hue_white_lamp_couloir_annuel_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_annuel_um',
-          'sensor.eclairage_hue_white_lamp_cuisine_annuel_um',
-          'sensor.eclairage_hue_white_lamp_couloir_annuel_um'
+          'sensor.hue_white_lamp_entree_annuel_um',
+          'sensor.hue_white_lamp_cuisine_annuel_um',
+          'sensor.hue_white_lamp_couloir_annuel_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -155,14 +155,14 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_annuel_um',
-          'sensor.eclairage_hue_white_lamp_couloir_annuel_um'
+          'sensor.hue_white_lamp_entree_annuel_um',
+          'sensor.hue_white_lamp_couloir_annuel_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_annuel_um',
-          'sensor.eclairage_hue_white_lamp_couloir_annuel_um'
+          'sensor.hue_white_lamp_entree_annuel_um',
+          'sensor.hue_white_lamp_couloir_annuel_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -176,8 +176,8 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
-      availability: "{{ states('sensor.eclairage_hue_white_lamp_entree_mensuel_um') | is_number }}"
-      state: "{{ states('sensor.eclairage_hue_white_lamp_entree_mensuel_um') | float(0) | round(2) }}"
+      availability: "{{ states('sensor.hue_white_lamp_entree_mensuel_um') | is_number }}"
+      state: "{{ states('sensor.hue_white_lamp_entree_mensuel_um') | float(0) | round(2) }}"
 
     # --- 4. SALON ---
     - name: "Eclairage Salon 5 Mensuel TPL"
@@ -187,20 +187,20 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_table_salon_mensuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_1_mensuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_2_mensuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_3_mensuel_um',
-          'sensor.eclairage_hue_color_candle_salon_1_mensuel_um'
+          'sensor.hue_white_lamp_table_salon_mensuel_um',
+          'sensor.hue_ambiance_lamp_salon_1_mensuel_um',
+          'sensor.hue_ambiance_lamp_salon_2_mensuel_um',
+          'sensor.hue_ambiance_lamp_salon_3_mensuel_um',
+          'sensor.hue_color_candle_salon_1_mensuel_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_table_salon_mensuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_1_mensuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_2_mensuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_3_mensuel_um',
-          'sensor.eclairage_hue_color_candle_salon_1_mensuel_um'
+          'sensor.hue_white_lamp_table_salon_mensuel_um',
+          'sensor.hue_ambiance_lamp_salon_1_mensuel_um',
+          'sensor.hue_ambiance_lamp_salon_2_mensuel_um',
+          'sensor.hue_ambiance_lamp_salon_3_mensuel_um',
+          'sensor.hue_color_candle_salon_1_mensuel_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -210,8 +210,8 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
-      availability: "{{ states('sensor.eclairage_hue_white_lamp_cuisine_mensuel_um') | is_number }}"
-      state: "{{ states('sensor.eclairage_hue_white_lamp_cuisine_mensuel_um') | float(0) | round(2) }}"
+      availability: "{{ states('sensor.hue_white_lamp_cuisine_mensuel_um') | is_number }}"
+      state: "{{ states('sensor.hue_white_lamp_cuisine_mensuel_um') | float(0) | round(2) }}"
 
     # --- 6. COULOIR ---
     - name: "Eclairage Couloir 1 Mensuel TPL"
@@ -219,8 +219,8 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
-      availability: "{{ states('sensor.eclairage_hue_white_lamp_couloir_mensuel_um') | is_number }}"
-      state: "{{ states('sensor.eclairage_hue_white_lamp_couloir_mensuel_um') | float(0) | round(2) }}"
+      availability: "{{ states('sensor.hue_white_lamp_couloir_mensuel_um') | is_number }}"
+      state: "{{ states('sensor.hue_white_lamp_couloir_mensuel_um') | float(0) | round(2) }}"
 
     # --- 7. BUREAU ---
     - name: "Eclairage Bureau 5 Mensuel TPL"
@@ -230,20 +230,20 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_play_1_pc_bureau_mensuel_um',
-          'sensor.eclairage_hue_play_2_pc_bureau_mensuel_um',
-          'sensor.eclairage_hue_play_3_pc_bureau_mensuel_um',
-          'sensor.eclairage_lampe_bureau_1_hue_mensuel_um',
-          'sensor.eclairage_lampe_bureau_2_hue_mensuel_um'
+          'sensor.hue_play_1_pc_bureau_mensuel_um',
+          'sensor.hue_play_2_pc_bureau_mensuel_um',
+          'sensor.hue_play_3_pc_bureau_mensuel_um',
+          'sensor.lampe_bureau_1_hue_mensuel_um',
+          'sensor.lampe_bureau_2_hue_mensuel_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_play_1_pc_bureau_mensuel_um',
-          'sensor.eclairage_hue_play_2_pc_bureau_mensuel_um',
-          'sensor.eclairage_hue_play_3_pc_bureau_mensuel_um',
-          'sensor.eclairage_lampe_bureau_1_hue_mensuel_um',
-          'sensor.eclairage_lampe_bureau_2_hue_mensuel_um'
+          'sensor.hue_play_1_pc_bureau_mensuel_um',
+          'sensor.hue_play_2_pc_bureau_mensuel_um',
+          'sensor.hue_play_3_pc_bureau_mensuel_um',
+          'sensor.lampe_bureau_1_hue_mensuel_um',
+          'sensor.lampe_bureau_2_hue_mensuel_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -255,14 +255,14 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_relais_lumiere_sdb_sonoff_mensuel_um',
-          'sensor.eclairage_lampe_salle_de_bain_hue_mensuel_um'
+          'sensor.relais_lumiere_sdb_sonoff_mensuel_um',
+          'sensor.lampe_salle_de_bain_hue_mensuel_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_relais_lumiere_sdb_sonoff_mensuel_um',
-          'sensor.eclairage_lampe_salle_de_bain_hue_mensuel_um'
+          'sensor.relais_lumiere_sdb_sonoff_mensuel_um',
+          'sensor.lampe_salle_de_bain_hue_mensuel_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -274,18 +274,18 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_chambre_1_mensuel_um',
-          'sensor.eclairage_hue_white_lamp_chambre_2_mensuel_um',
-          'sensor.eclairage_hue_color_candle_chambre_gege_mensuel_um',
-          'sensor.eclairage_hue_color_candle_chambre_eric_mensuel_um'
+          'sensor.hue_white_lamp_chambre_1_mensuel_um',
+          'sensor.hue_white_lamp_chambre_2_mensuel_um',
+          'sensor.hue_color_candle_chambre_gege_mensuel_um',
+          'sensor.hue_color_candle_chambre_eric_mensuel_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_chambre_1_mensuel_um',
-          'sensor.eclairage_hue_white_lamp_chambre_2_mensuel_um',
-          'sensor.eclairage_hue_color_candle_chambre_gege_mensuel_um',
-          'sensor.eclairage_hue_color_candle_chambre_eric_mensuel_um'
+          'sensor.hue_white_lamp_chambre_1_mensuel_um',
+          'sensor.hue_white_lamp_chambre_2_mensuel_um',
+          'sensor.hue_color_candle_chambre_gege_mensuel_um',
+          'sensor.hue_color_candle_chambre_eric_mensuel_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -297,16 +297,16 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_mensuel_um',
-          'sensor.eclairage_hue_white_lamp_cuisine_mensuel_um',
-          'sensor.eclairage_hue_white_lamp_couloir_mensuel_um'
+          'sensor.hue_white_lamp_entree_mensuel_um',
+          'sensor.hue_white_lamp_cuisine_mensuel_um',
+          'sensor.hue_white_lamp_couloir_mensuel_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_mensuel_um',
-          'sensor.eclairage_hue_white_lamp_cuisine_mensuel_um',
-          'sensor.eclairage_hue_white_lamp_couloir_mensuel_um'
+          'sensor.hue_white_lamp_entree_mensuel_um',
+          'sensor.hue_white_lamp_cuisine_mensuel_um',
+          'sensor.hue_white_lamp_couloir_mensuel_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -318,14 +318,14 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_mensuel_um',
-          'sensor.eclairage_hue_white_lamp_couloir_mensuel_um'
+          'sensor.hue_white_lamp_entree_mensuel_um',
+          'sensor.hue_white_lamp_couloir_mensuel_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_mensuel_um',
-          'sensor.eclairage_hue_white_lamp_couloir_mensuel_um'
+          'sensor.hue_white_lamp_entree_mensuel_um',
+          'sensor.hue_white_lamp_couloir_mensuel_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -339,8 +339,8 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
-      availability: "{{ states('sensor.eclairage_hue_white_lamp_entree_hebdomadaire_um') | is_number }}"
-      state: "{{ states('sensor.eclairage_hue_white_lamp_entree_hebdomadaire_um') | float(0) | round(2) }}"
+      availability: "{{ states('sensor.hue_white_lamp_entree_hebdomadaire_um') | is_number }}"
+      state: "{{ states('sensor.hue_white_lamp_entree_hebdomadaire_um') | float(0) | round(2) }}"
 
     # --- 4. SALON ---
     - name: "Eclairage Salon 5 Hebdomadaire TPL"
@@ -350,20 +350,20 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_table_salon_hebdomadaire_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_1_hebdomadaire_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_2_hebdomadaire_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_3_hebdomadaire_um',
-          'sensor.eclairage_hue_color_candle_salon_1_hebdomadaire_um'
+          'sensor.hue_white_lamp_table_salon_hebdomadaire_um',
+          'sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um',
+          'sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um',
+          'sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um',
+          'sensor.hue_color_candle_salon_1_hebdomadaire_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_table_salon_hebdomadaire_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_1_hebdomadaire_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_2_hebdomadaire_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_3_hebdomadaire_um',
-          'sensor.eclairage_hue_color_candle_salon_1_hebdomadaire_um'
+          'sensor.hue_white_lamp_table_salon_hebdomadaire_um',
+          'sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um',
+          'sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um',
+          'sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um',
+          'sensor.hue_color_candle_salon_1_hebdomadaire_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -373,8 +373,8 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
-      availability: "{{ states('sensor.eclairage_hue_white_lamp_cuisine_hebdomadaire_um') | is_number }}"
-      state: "{{ states('sensor.eclairage_hue_white_lamp_cuisine_hebdomadaire_um') | float(0) | round(2) }}"
+      availability: "{{ states('sensor.hue_white_lamp_cuisine_hebdomadaire_um') | is_number }}"
+      state: "{{ states('sensor.hue_white_lamp_cuisine_hebdomadaire_um') | float(0) | round(2) }}"
 
     # --- 6. COULOIR ---
     - name: "Eclairage Couloir 1 Hebdomadaire TPL"
@@ -382,8 +382,8 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
-      availability: "{{ states('sensor.eclairage_hue_white_lamp_couloir_hebdomadaire_um') | is_number }}"
-      state: "{{ states('sensor.eclairage_hue_white_lamp_couloir_hebdomadaire_um') | float(0) | round(2) }}"
+      availability: "{{ states('sensor.hue_white_lamp_couloir_hebdomadaire_um') | is_number }}"
+      state: "{{ states('sensor.hue_white_lamp_couloir_hebdomadaire_um') | float(0) | round(2) }}"
 
     # --- 7. BUREAU ---
     - name: "Eclairage Bureau 5 Hebdomadaire TPL"
@@ -393,20 +393,20 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_play_1_pc_bureau_hebdomadaire_um',
-          'sensor.eclairage_hue_play_2_pc_bureau_hebdomadaire_um',
-          'sensor.eclairage_hue_play_3_pc_bureau_hebdomadaire_um',
-          'sensor.eclairage_lampe_bureau_1_hue_hebdomadaire_um',
-          'sensor.eclairage_lampe_bureau_2_hue_hebdomadaire_um'
+          'sensor.hue_play_1_pc_bureau_hebdomadaire_um',
+          'sensor.hue_play_2_pc_bureau_hebdomadaire_um',
+          'sensor.hue_play_3_pc_bureau_hebdomadaire_um',
+          'sensor.lampe_bureau_1_hue_hebdomadaire_um',
+          'sensor.lampe_bureau_2_hue_hebdomadaire_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_play_1_pc_bureau_hebdomadaire_um',
-          'sensor.eclairage_hue_play_2_pc_bureau_hebdomadaire_um',
-          'sensor.eclairage_hue_play_3_pc_bureau_hebdomadaire_um',
-          'sensor.eclairage_lampe_bureau_1_hue_hebdomadaire_um',
-          'sensor.eclairage_lampe_bureau_2_hue_hebdomadaire_um'
+          'sensor.hue_play_1_pc_bureau_hebdomadaire_um',
+          'sensor.hue_play_2_pc_bureau_hebdomadaire_um',
+          'sensor.hue_play_3_pc_bureau_hebdomadaire_um',
+          'sensor.lampe_bureau_1_hue_hebdomadaire_um',
+          'sensor.lampe_bureau_2_hue_hebdomadaire_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -418,14 +418,14 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_relais_lumiere_sdb_sonoff_hebdomadaire_um',
-          'sensor.eclairage_lampe_salle_de_bain_hue_hebdomadaire_um'
+          'sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um',
+          'sensor.lampe_salle_de_bain_hue_hebdomadaire_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_relais_lumiere_sdb_sonoff_hebdomadaire_um',
-          'sensor.eclairage_lampe_salle_de_bain_hue_hebdomadaire_um'
+          'sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um',
+          'sensor.lampe_salle_de_bain_hue_hebdomadaire_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -437,18 +437,18 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_chambre_1_hebdomadaire_um',
-          'sensor.eclairage_hue_white_lamp_chambre_2_hebdomadaire_um',
-          'sensor.eclairage_hue_color_candle_chambre_gege_hebdomadaire_um',
-          'sensor.eclairage_hue_color_candle_chambre_eric_hebdomadaire_um'
+          'sensor.hue_white_lamp_chambre_1_hebdomadaire_um',
+          'sensor.hue_white_lamp_chambre_2_hebdomadaire_um',
+          'sensor.hue_color_candle_chambre_gege_hebdomadaire_um',
+          'sensor.hue_color_candle_chambre_eric_hebdomadaire_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_chambre_1_hebdomadaire_um',
-          'sensor.eclairage_hue_white_lamp_chambre_2_hebdomadaire_um',
-          'sensor.eclairage_hue_color_candle_chambre_gege_hebdomadaire_um',
-          'sensor.eclairage_hue_color_candle_chambre_eric_hebdomadaire_um'
+          'sensor.hue_white_lamp_chambre_1_hebdomadaire_um',
+          'sensor.hue_white_lamp_chambre_2_hebdomadaire_um',
+          'sensor.hue_color_candle_chambre_gege_hebdomadaire_um',
+          'sensor.hue_color_candle_chambre_eric_hebdomadaire_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -460,16 +460,16 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_hebdomadaire_um',
-          'sensor.eclairage_hue_white_lamp_cuisine_hebdomadaire_um',
-          'sensor.eclairage_hue_white_lamp_couloir_hebdomadaire_um'
+          'sensor.hue_white_lamp_entree_hebdomadaire_um',
+          'sensor.hue_white_lamp_cuisine_hebdomadaire_um',
+          'sensor.hue_white_lamp_couloir_hebdomadaire_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_hebdomadaire_um',
-          'sensor.eclairage_hue_white_lamp_cuisine_hebdomadaire_um',
-          'sensor.eclairage_hue_white_lamp_couloir_hebdomadaire_um'
+          'sensor.hue_white_lamp_entree_hebdomadaire_um',
+          'sensor.hue_white_lamp_cuisine_hebdomadaire_um',
+          'sensor.hue_white_lamp_couloir_hebdomadaire_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -481,14 +481,14 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_hebdomadaire_um',
-          'sensor.eclairage_hue_white_lamp_couloir_hebdomadaire_um'
+          'sensor.hue_white_lamp_entree_hebdomadaire_um',
+          'sensor.hue_white_lamp_couloir_hebdomadaire_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_hebdomadaire_um',
-          'sensor.eclairage_hue_white_lamp_couloir_hebdomadaire_um'
+          'sensor.hue_white_lamp_entree_hebdomadaire_um',
+          'sensor.hue_white_lamp_couloir_hebdomadaire_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -502,8 +502,8 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
-      availability: "{{ states('sensor.eclairage_hue_white_lamp_entree_quotidien_um') | is_number }}"
-      state: "{{ states('sensor.eclairage_hue_white_lamp_entree_quotidien_um') | float(0) | round(2) }}"
+      availability: "{{ states('sensor.hue_white_lamp_entree_quotidien_um') | is_number }}"
+      state: "{{ states('sensor.hue_white_lamp_entree_quotidien_um') | float(0) | round(2) }}"
 
     # --- 4. SALON ---
     - name: "Eclairage Salon 5 Quotidien TPL"
@@ -513,20 +513,20 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_table_salon_quotidien_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_1_quotidien_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_2_quotidien_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_3_quotidien_um',
-          'sensor.eclairage_hue_color_candle_salon_1_quotidien_um'
+          'sensor.hue_white_lamp_table_salon_quotidien_um',
+          'sensor.hue_ambiance_lamp_salon_1_quotidien_um',
+          'sensor.hue_ambiance_lamp_salon_2_quotidien_um',
+          'sensor.hue_ambiance_lamp_salon_3_quotidien_um',
+          'sensor.hue_color_candle_salon_1_quotidien_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_table_salon_quotidien_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_1_quotidien_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_2_quotidien_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_3_quotidien_um',
-          'sensor.eclairage_hue_color_candle_salon_1_quotidien_um'
+          'sensor.hue_white_lamp_table_salon_quotidien_um',
+          'sensor.hue_ambiance_lamp_salon_1_quotidien_um',
+          'sensor.hue_ambiance_lamp_salon_2_quotidien_um',
+          'sensor.hue_ambiance_lamp_salon_3_quotidien_um',
+          'sensor.hue_color_candle_salon_1_quotidien_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -536,8 +536,8 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
-      availability: "{{ states('sensor.eclairage_hue_white_lamp_cuisine_quotidien_um') | is_number }}"
-      state: "{{ states('sensor.eclairage_hue_white_lamp_cuisine_quotidien_um') | float(0) | round(2) }}"
+      availability: "{{ states('sensor.hue_white_lamp_cuisine_quotidien_um') | is_number }}"
+      state: "{{ states('sensor.hue_white_lamp_cuisine_quotidien_um') | float(0) | round(2) }}"
 
     # --- 6. COULOIR ---
     - name: "Eclairage Couloir 1 Quotidien TPL"
@@ -545,8 +545,8 @@
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
-      availability: "{{ states('sensor.eclairage_hue_white_lamp_couloir_quotidien_um') | is_number }}"
-      state: "{{ states('sensor.eclairage_hue_white_lamp_couloir_quotidien_um') | float(0) | round(2) }}"
+      availability: "{{ states('sensor.hue_white_lamp_couloir_quotidien_um') | is_number }}"
+      state: "{{ states('sensor.hue_white_lamp_couloir_quotidien_um') | float(0) | round(2) }}"
 
     # --- 7. BUREAU ---
     - name: "Eclairage Bureau 5 Quotidien TPL"
@@ -556,20 +556,20 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_play_1_pc_bureau_quotidien_um',
-          'sensor.eclairage_hue_play_2_pc_bureau_quotidien_um',
-          'sensor.eclairage_hue_play_3_pc_bureau_quotidien_um',
-          'sensor.eclairage_lampe_bureau_1_hue_quotidien_um',
-          'sensor.eclairage_lampe_bureau_2_hue_quotidien_um'
+          'sensor.hue_play_1_pc_bureau_quotidien_um',
+          'sensor.hue_play_2_pc_bureau_quotidien_um',
+          'sensor.hue_play_3_pc_bureau_quotidien_um',
+          'sensor.lampe_bureau_1_hue_quotidien_um',
+          'sensor.lampe_bureau_2_hue_quotidien_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_play_1_pc_bureau_quotidien_um',
-          'sensor.eclairage_hue_play_2_pc_bureau_quotidien_um',
-          'sensor.eclairage_hue_play_3_pc_bureau_quotidien_um',
-          'sensor.eclairage_lampe_bureau_1_hue_quotidien_um',
-          'sensor.eclairage_lampe_bureau_2_hue_quotidien_um'
+          'sensor.hue_play_1_pc_bureau_quotidien_um',
+          'sensor.hue_play_2_pc_bureau_quotidien_um',
+          'sensor.hue_play_3_pc_bureau_quotidien_um',
+          'sensor.lampe_bureau_1_hue_quotidien_um',
+          'sensor.lampe_bureau_2_hue_quotidien_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -581,14 +581,14 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_relais_lumiere_sdb_sonoff_quotidien_um',
-          'sensor.eclairage_lampe_salle_de_bain_hue_quotidien_um'
+          'sensor.relais_lumiere_sdb_sonoff_quotidien_um',
+          'sensor.lampe_salle_de_bain_hue_quotidien_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_relais_lumiere_sdb_sonoff_quotidien_um',
-          'sensor.eclairage_lampe_salle_de_bain_hue_quotidien_um'
+          'sensor.relais_lumiere_sdb_sonoff_quotidien_um',
+          'sensor.lampe_salle_de_bain_hue_quotidien_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -600,18 +600,18 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_chambre_1_quotidien_um',
-          'sensor.eclairage_hue_white_lamp_chambre_2_quotidien_um',
-          'sensor.eclairage_hue_color_candle_chambre_gege_quotidien_um',
-          'sensor.eclairage_hue_color_candle_chambre_eric_quotidien_um'
+          'sensor.hue_white_lamp_chambre_1_quotidien_um',
+          'sensor.hue_white_lamp_chambre_2_quotidien_um',
+          'sensor.hue_color_candle_chambre_gege_quotidien_um',
+          'sensor.hue_color_candle_chambre_eric_quotidien_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_chambre_1_quotidien_um',
-          'sensor.eclairage_hue_white_lamp_chambre_2_quotidien_um',
-          'sensor.eclairage_hue_color_candle_chambre_gege_quotidien_um',
-          'sensor.eclairage_hue_color_candle_chambre_eric_quotidien_um'
+          'sensor.hue_white_lamp_chambre_1_quotidien_um',
+          'sensor.hue_white_lamp_chambre_2_quotidien_um',
+          'sensor.hue_color_candle_chambre_gege_quotidien_um',
+          'sensor.hue_color_candle_chambre_eric_quotidien_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -623,16 +623,16 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_quotidien_um',
-          'sensor.eclairage_hue_white_lamp_cuisine_quotidien_um',
-          'sensor.eclairage_hue_white_lamp_couloir_quotidien_um'
+          'sensor.hue_white_lamp_entree_quotidien_um',
+          'sensor.hue_white_lamp_cuisine_quotidien_um',
+          'sensor.hue_white_lamp_couloir_quotidien_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_quotidien_um',
-          'sensor.eclairage_hue_white_lamp_cuisine_quotidien_um',
-          'sensor.eclairage_hue_white_lamp_couloir_quotidien_um'
+          'sensor.hue_white_lamp_entree_quotidien_um',
+          'sensor.hue_white_lamp_cuisine_quotidien_um',
+          'sensor.hue_white_lamp_couloir_quotidien_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
 
@@ -644,13 +644,13 @@
       state_class: total_increasing
       availability: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_quotidien_um',
-          'sensor.eclairage_hue_white_lamp_couloir_quotidien_um'
+          'sensor.hue_white_lamp_entree_quotidien_um',
+          'sensor.hue_white_lamp_couloir_quotidien_um'
         ] %}
         {{ sensors | map('states') | select('is_number') | list | count > 0 }}
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_quotidien_um',
-          'sensor.eclairage_hue_white_lamp_couloir_quotidien_um'
+          'sensor.hue_white_lamp_entree_quotidien_um',
+          'sensor.hue_white_lamp_couloir_quotidien_um'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
