@@ -1,0 +1,768 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. TEMPLATES : RELAIS TPL — AMPOULES INDIVIDUELLES AMHQ (kWh)       │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs templates relayant les sorties des Utility Meters "PAR AMPOULE"
+# (P3_UM_AMHQ_1_UNITE.yaml) vers des sensors measurement utilisables
+# directement dans le dashboard (page éclairage — détail par lampe).
+# 19 ampoules × 4 cycles = 76 sensors _tpl.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : sensor.[lampe]_*_um (sorties UM par ampoule physique — 19 lampes)
+# - Formule : relay direct | float(0)
+# - state_class: measurement → permet l'affichage sans cumul HA supplémentaire.
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL              | CAPTEUR BRUT (source)                      | CE FICHIER (unique_id)                    | AVAL        |
+# |:----------------------|:-------------------------------------------|:------------------------------------------|:------------|
+# | Hue Bridge            | sensor.hue_white_lamp_entree_*_um          | hue_white_lamp_entree_*_tpl               | L2C3 → page |
+# | Hue Bridge            | sensor.hue_white_lamp_table_salon_*_um     | hue_white_lamp_table_salon_*_tpl          | L2C3 → page |
+# | Hue Bridge            | sensor.hue_ambiance_lamp_salon_1_*_um      | hue_ambiance_lamp_salon_1_*_tpl           | L2C3 → page |
+# | Hue Bridge            | sensor.hue_ambiance_lamp_salon_2_*_um      | hue_ambiance_lamp_salon_2_*_tpl           | L2C3 → page |
+# | Hue Bridge            | sensor.hue_ambiance_lamp_salon_3_*_um      | hue_ambiance_lamp_salon_3_*_tpl           | L2C3 → page |
+# | Hue Bridge            | sensor.hue_color_candle_salon_1_*_um       | hue_color_candle_salon_1_*_tpl            | L2C3 → page |
+# | Hue Bridge            | sensor.hue_white_lamp_cuisine_*_um         | hue_white_lamp_cuisine_*_tpl              | L2C3 → page |
+# | Hue Bridge            | sensor.hue_white_lamp_couloir_*_um         | hue_white_lamp_couloir_*_tpl              | L2C3 → page |
+# | Hue Bridge            | sensor.hue_play_1_pc_bureau_*_um           | hue_play_1_pc_bureau_*_tpl               | L2C3 → page |
+# | Hue Bridge            | sensor.hue_play_2_pc_bureau_*_um           | hue_play_2_pc_bureau_*_tpl               | L2C3 → page |
+# | Hue Bridge            | sensor.hue_play_3_pc_bureau_*_um           | hue_play_3_pc_bureau_*_tpl               | L2C3 → page |
+# | Hue Bridge            | sensor.lampe_bureau_1_hue_*_um             | lampe_bureau_1_hue_*_tpl                 | L2C3 → page |
+# | Hue Bridge            | sensor.lampe_bureau_2_hue_*_um             | lampe_bureau_2_hue_*_tpl                 | L2C3 → page |
+# | Sonoff (Z2M)          | sensor.relais_lumiere_sdb_sonoff_*_um      | relais_lumiere_sdb_sonoff_*_tpl          | L2C3 → page |
+# | Hue Bridge            | sensor.lampe_salle_de_bain_hue_*_um        | lampe_salle_de_bain_hue_*_tpl            | L2C3 → page |
+# | Hue Bridge            | sensor.hue_white_lamp_chambre_1_*_um       | hue_white_lamp_chambre_1_*_tpl           | L2C3 → page |
+# | Hue Bridge            | sensor.hue_white_lamp_chambre_2_*_um       | hue_white_lamp_chambre_2_*_tpl           | L2C3 → page |
+# | Hue Bridge            | sensor.hue_color_candle_chambre_gege_*_um  | hue_color_candle_chambre_gege_*_tpl      | L2C3 → page |
+# | Hue Bridge            | sensor.hue_color_candle_chambre_eric_*_um  | hue_color_candle_chambre_eric_*_tpl      | L2C3 → page |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - state_class: measurement (pas total_increasing) — les UM se réinitialisent.
+# - Noms bureau : lampe_bureau_1/2_hue (pas hue_white_lamp_bureau_1/2 — UM renommés).
+# - Noms table salon : hue_white_lamp_table_salon (avec _salon — aligné sur UM).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage — détail par ampoule (page éclairage)
+
+- sensor:
+
+      #┌───────────────────────────────────┐
+      #│         1. ENTRÉE (1x)            │
+      #└───────────────────────────────────┘
+
+      # --- hue_white_lamp_entree_annuel_tpl ---
+      - name: "Hue White Lamp Entree Annuel Tpl"
+        unique_id: hue_white_lamp_entree_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_entree_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_entree_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_entree_mensuel_tpl ---
+      - name: "Hue White Lamp Entree Mensuel Tpl"
+        unique_id: hue_white_lamp_entree_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_entree_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_entree_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_entree_hebdomadaire_tpl ---
+      - name: "Hue White Lamp Entree Hebdomadaire Tpl"
+        unique_id: hue_white_lamp_entree_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_entree_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_entree_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_entree_quotidien_tpl ---
+      - name: "Hue White Lamp Entree Quotidien Tpl"
+        unique_id: hue_white_lamp_entree_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_entree_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_entree_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      #┌───────────────────────────────────┐
+      #│         4. SALON (5x)             │
+      #└───────────────────────────────────┘
+
+      # --- hue_white_lamp_table_salon_annuel_tpl ---
+      - name: "Hue White Lamp Table Salon Annuel Tpl"
+        unique_id: hue_white_lamp_table_salon_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_table_salon_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_table_salon_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_table_salon_mensuel_tpl ---
+      - name: "Hue White Lamp Table Salon Mensuel Tpl"
+        unique_id: hue_white_lamp_table_salon_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_table_salon_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_table_salon_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_table_salon_hebdomadaire_tpl ---
+      - name: "Hue White Lamp Table Salon Hebdomadaire Tpl"
+        unique_id: hue_white_lamp_table_salon_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_table_salon_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_table_salon_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_table_salon_quotidien_tpl ---
+      - name: "Hue White Lamp Table Salon Quotidien Tpl"
+        unique_id: hue_white_lamp_table_salon_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_table_salon_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_table_salon_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_ambiance_lamp_salon_1_annuel_tpl ---
+      - name: "Hue Ambiance Lamp Salon 1 Annuel Tpl"
+        unique_id: hue_ambiance_lamp_salon_1_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_ambiance_lamp_salon_1_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_ambiance_lamp_salon_1_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_ambiance_lamp_salon_1_mensuel_tpl ---
+      - name: "Hue Ambiance Lamp Salon 1 Mensuel Tpl"
+        unique_id: hue_ambiance_lamp_salon_1_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_ambiance_lamp_salon_1_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_ambiance_lamp_salon_1_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_ambiance_lamp_salon_1_hebdomadaire_tpl ---
+      - name: "Hue Ambiance Lamp Salon 1 Hebdomadaire Tpl"
+        unique_id: hue_ambiance_lamp_salon_1_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_ambiance_lamp_salon_1_quotidien_tpl ---
+      - name: "Hue Ambiance Lamp Salon 1 Quotidien Tpl"
+        unique_id: hue_ambiance_lamp_salon_1_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_ambiance_lamp_salon_1_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_ambiance_lamp_salon_1_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_ambiance_lamp_salon_2_annuel_tpl ---
+      - name: "Hue Ambiance Lamp Salon 2 Annuel Tpl"
+        unique_id: hue_ambiance_lamp_salon_2_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_ambiance_lamp_salon_2_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_ambiance_lamp_salon_2_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_ambiance_lamp_salon_2_mensuel_tpl ---
+      - name: "Hue Ambiance Lamp Salon 2 Mensuel Tpl"
+        unique_id: hue_ambiance_lamp_salon_2_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_ambiance_lamp_salon_2_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_ambiance_lamp_salon_2_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_ambiance_lamp_salon_2_hebdomadaire_tpl ---
+      - name: "Hue Ambiance Lamp Salon 2 Hebdomadaire Tpl"
+        unique_id: hue_ambiance_lamp_salon_2_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_ambiance_lamp_salon_2_quotidien_tpl ---
+      - name: "Hue Ambiance Lamp Salon 2 Quotidien Tpl"
+        unique_id: hue_ambiance_lamp_salon_2_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_ambiance_lamp_salon_2_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_ambiance_lamp_salon_2_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_ambiance_lamp_salon_3_annuel_tpl ---
+      - name: "Hue Ambiance Lamp Salon 3 Annuel Tpl"
+        unique_id: hue_ambiance_lamp_salon_3_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_ambiance_lamp_salon_3_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_ambiance_lamp_salon_3_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_ambiance_lamp_salon_3_mensuel_tpl ---
+      - name: "Hue Ambiance Lamp Salon 3 Mensuel Tpl"
+        unique_id: hue_ambiance_lamp_salon_3_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_ambiance_lamp_salon_3_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_ambiance_lamp_salon_3_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_ambiance_lamp_salon_3_hebdomadaire_tpl ---
+      - name: "Hue Ambiance Lamp Salon 3 Hebdomadaire Tpl"
+        unique_id: hue_ambiance_lamp_salon_3_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_ambiance_lamp_salon_3_quotidien_tpl ---
+      - name: "Hue Ambiance Lamp Salon 3 Quotidien Tpl"
+        unique_id: hue_ambiance_lamp_salon_3_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_ambiance_lamp_salon_3_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_ambiance_lamp_salon_3_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_color_candle_salon_1_annuel_tpl ---
+      - name: "Hue Color Candle Salon 1 Annuel Tpl"
+        unique_id: hue_color_candle_salon_1_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_color_candle_salon_1_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_color_candle_salon_1_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_color_candle_salon_1_mensuel_tpl ---
+      - name: "Hue Color Candle Salon 1 Mensuel Tpl"
+        unique_id: hue_color_candle_salon_1_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_color_candle_salon_1_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_color_candle_salon_1_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_color_candle_salon_1_hebdomadaire_tpl ---
+      - name: "Hue Color Candle Salon 1 Hebdomadaire Tpl"
+        unique_id: hue_color_candle_salon_1_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_color_candle_salon_1_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_color_candle_salon_1_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_color_candle_salon_1_quotidien_tpl ---
+      - name: "Hue Color Candle Salon 1 Quotidien Tpl"
+        unique_id: hue_color_candle_salon_1_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_color_candle_salon_1_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_color_candle_salon_1_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      #┌───────────────────────────────────┐
+      #│         5. CUISINE (1x)           │
+      #└───────────────────────────────────┘
+
+      # --- hue_white_lamp_cuisine_annuel_tpl ---
+      - name: "Hue White Lamp Cuisine Annuel Tpl"
+        unique_id: hue_white_lamp_cuisine_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_cuisine_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_cuisine_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_cuisine_mensuel_tpl ---
+      - name: "Hue White Lamp Cuisine Mensuel Tpl"
+        unique_id: hue_white_lamp_cuisine_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_cuisine_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_cuisine_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_cuisine_hebdomadaire_tpl ---
+      - name: "Hue White Lamp Cuisine Hebdomadaire Tpl"
+        unique_id: hue_white_lamp_cuisine_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_cuisine_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_cuisine_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_cuisine_quotidien_tpl ---
+      - name: "Hue White Lamp Cuisine Quotidien Tpl"
+        unique_id: hue_white_lamp_cuisine_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_cuisine_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_cuisine_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      #┌───────────────────────────────────┐
+      #│         6. COULOIR (1x)           │
+      #└───────────────────────────────────┘
+
+      # --- hue_white_lamp_couloir_annuel_tpl ---
+      - name: "Hue White Lamp Couloir Annuel Tpl"
+        unique_id: hue_white_lamp_couloir_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_couloir_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_couloir_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_couloir_mensuel_tpl ---
+      - name: "Hue White Lamp Couloir Mensuel Tpl"
+        unique_id: hue_white_lamp_couloir_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_couloir_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_couloir_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_couloir_hebdomadaire_tpl ---
+      - name: "Hue White Lamp Couloir Hebdomadaire Tpl"
+        unique_id: hue_white_lamp_couloir_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_couloir_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_couloir_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_couloir_quotidien_tpl ---
+      - name: "Hue White Lamp Couloir Quotidien Tpl"
+        unique_id: hue_white_lamp_couloir_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_couloir_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_couloir_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      #┌───────────────────────────────────┐
+      #│         7. BUREAU (5x)            │
+      #└───────────────────────────────────┘
+
+      # --- hue_play_1_pc_bureau_annuel_tpl ---
+      - name: "Hue Play 1 Pc Bureau Annuel Tpl"
+        unique_id: hue_play_1_pc_bureau_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_play_1_pc_bureau_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_play_1_pc_bureau_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_play_1_pc_bureau_mensuel_tpl ---
+      - name: "Hue Play 1 Pc Bureau Mensuel Tpl"
+        unique_id: hue_play_1_pc_bureau_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_play_1_pc_bureau_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_play_1_pc_bureau_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_play_1_pc_bureau_hebdomadaire_tpl ---
+      - name: "Hue Play 1 Pc Bureau Hebdomadaire Tpl"
+        unique_id: hue_play_1_pc_bureau_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_play_1_pc_bureau_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_play_1_pc_bureau_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_play_1_pc_bureau_quotidien_tpl ---
+      - name: "Hue Play 1 Pc Bureau Quotidien Tpl"
+        unique_id: hue_play_1_pc_bureau_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_play_1_pc_bureau_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_play_1_pc_bureau_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_play_2_pc_bureau_annuel_tpl ---
+      - name: "Hue Play 2 Pc Bureau Annuel Tpl"
+        unique_id: hue_play_2_pc_bureau_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_play_2_pc_bureau_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_play_2_pc_bureau_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_play_2_pc_bureau_mensuel_tpl ---
+      - name: "Hue Play 2 Pc Bureau Mensuel Tpl"
+        unique_id: hue_play_2_pc_bureau_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_play_2_pc_bureau_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_play_2_pc_bureau_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_play_2_pc_bureau_hebdomadaire_tpl ---
+      - name: "Hue Play 2 Pc Bureau Hebdomadaire Tpl"
+        unique_id: hue_play_2_pc_bureau_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_play_2_pc_bureau_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_play_2_pc_bureau_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_play_2_pc_bureau_quotidien_tpl ---
+      - name: "Hue Play 2 Pc Bureau Quotidien Tpl"
+        unique_id: hue_play_2_pc_bureau_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_play_2_pc_bureau_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_play_2_pc_bureau_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_play_3_pc_bureau_annuel_tpl ---
+      - name: "Hue Play 3 Pc Bureau Annuel Tpl"
+        unique_id: hue_play_3_pc_bureau_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_play_3_pc_bureau_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_play_3_pc_bureau_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_play_3_pc_bureau_mensuel_tpl ---
+      - name: "Hue Play 3 Pc Bureau Mensuel Tpl"
+        unique_id: hue_play_3_pc_bureau_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_play_3_pc_bureau_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_play_3_pc_bureau_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_play_3_pc_bureau_hebdomadaire_tpl ---
+      - name: "Hue Play 3 Pc Bureau Hebdomadaire Tpl"
+        unique_id: hue_play_3_pc_bureau_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_play_3_pc_bureau_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_play_3_pc_bureau_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_play_3_pc_bureau_quotidien_tpl ---
+      - name: "Hue Play 3 Pc Bureau Quotidien Tpl"
+        unique_id: hue_play_3_pc_bureau_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_play_3_pc_bureau_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_play_3_pc_bureau_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- lampe_bureau_1_hue_annuel_tpl ---
+      - name: "Lampe Bureau 1 Hue Annuel Tpl"
+        unique_id: lampe_bureau_1_hue_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.lampe_bureau_1_hue_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.lampe_bureau_1_hue_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- lampe_bureau_1_hue_mensuel_tpl ---
+      - name: "Lampe Bureau 1 Hue Mensuel Tpl"
+        unique_id: lampe_bureau_1_hue_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.lampe_bureau_1_hue_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.lampe_bureau_1_hue_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- lampe_bureau_1_hue_hebdomadaire_tpl ---
+      - name: "Lampe Bureau 1 Hue Hebdomadaire Tpl"
+        unique_id: lampe_bureau_1_hue_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.lampe_bureau_1_hue_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.lampe_bureau_1_hue_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- lampe_bureau_1_hue_quotidien_tpl ---
+      - name: "Lampe Bureau 1 Hue Quotidien Tpl"
+        unique_id: lampe_bureau_1_hue_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.lampe_bureau_1_hue_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.lampe_bureau_1_hue_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- lampe_bureau_2_hue_annuel_tpl ---
+      - name: "Lampe Bureau 2 Hue Annuel Tpl"
+        unique_id: lampe_bureau_2_hue_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.lampe_bureau_2_hue_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.lampe_bureau_2_hue_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- lampe_bureau_2_hue_mensuel_tpl ---
+      - name: "Lampe Bureau 2 Hue Mensuel Tpl"
+        unique_id: lampe_bureau_2_hue_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.lampe_bureau_2_hue_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.lampe_bureau_2_hue_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- lampe_bureau_2_hue_hebdomadaire_tpl ---
+      - name: "Lampe Bureau 2 Hue Hebdomadaire Tpl"
+        unique_id: lampe_bureau_2_hue_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.lampe_bureau_2_hue_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.lampe_bureau_2_hue_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- lampe_bureau_2_hue_quotidien_tpl ---
+      - name: "Lampe Bureau 2 Hue Quotidien Tpl"
+        unique_id: lampe_bureau_2_hue_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.lampe_bureau_2_hue_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.lampe_bureau_2_hue_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      #┌───────────────────────────────────┐
+      #│         8. SDB (2x)               │
+      #└───────────────────────────────────┘
+
+      # --- relais_lumiere_sdb_sonoff_annuel_tpl ---
+      - name: "Relais Lumiere Sdb Sonoff Annuel Tpl"
+        unique_id: relais_lumiere_sdb_sonoff_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.relais_lumiere_sdb_sonoff_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.relais_lumiere_sdb_sonoff_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- relais_lumiere_sdb_sonoff_mensuel_tpl ---
+      - name: "Relais Lumiere Sdb Sonoff Mensuel Tpl"
+        unique_id: relais_lumiere_sdb_sonoff_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.relais_lumiere_sdb_sonoff_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.relais_lumiere_sdb_sonoff_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- relais_lumiere_sdb_sonoff_hebdomadaire_tpl ---
+      - name: "Relais Lumiere Sdb Sonoff Hebdomadaire Tpl"
+        unique_id: relais_lumiere_sdb_sonoff_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- relais_lumiere_sdb_sonoff_quotidien_tpl ---
+      - name: "Relais Lumiere Sdb Sonoff Quotidien Tpl"
+        unique_id: relais_lumiere_sdb_sonoff_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.relais_lumiere_sdb_sonoff_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.relais_lumiere_sdb_sonoff_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- lampe_salle_de_bain_hue_annuel_tpl ---
+      - name: "Lampe Salle De Bain Hue Annuel Tpl"
+        unique_id: lampe_salle_de_bain_hue_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.lampe_salle_de_bain_hue_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.lampe_salle_de_bain_hue_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- lampe_salle_de_bain_hue_mensuel_tpl ---
+      - name: "Lampe Salle De Bain Hue Mensuel Tpl"
+        unique_id: lampe_salle_de_bain_hue_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.lampe_salle_de_bain_hue_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.lampe_salle_de_bain_hue_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- lampe_salle_de_bain_hue_hebdomadaire_tpl ---
+      - name: "Lampe Salle De Bain Hue Hebdomadaire Tpl"
+        unique_id: lampe_salle_de_bain_hue_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.lampe_salle_de_bain_hue_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.lampe_salle_de_bain_hue_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- lampe_salle_de_bain_hue_quotidien_tpl ---
+      - name: "Lampe Salle De Bain Hue Quotidien Tpl"
+        unique_id: lampe_salle_de_bain_hue_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.lampe_salle_de_bain_hue_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.lampe_salle_de_bain_hue_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      #┌───────────────────────────────────┐
+      #│         9. CHAMBRE (4x)           │
+      #└───────────────────────────────────┘
+
+      # --- hue_white_lamp_chambre_1_annuel_tpl ---
+      - name: "Hue White Lamp Chambre 1 Annuel Tpl"
+        unique_id: hue_white_lamp_chambre_1_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_chambre_1_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_chambre_1_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_chambre_1_mensuel_tpl ---
+      - name: "Hue White Lamp Chambre 1 Mensuel Tpl"
+        unique_id: hue_white_lamp_chambre_1_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_chambre_1_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_chambre_1_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_chambre_1_hebdomadaire_tpl ---
+      - name: "Hue White Lamp Chambre 1 Hebdomadaire Tpl"
+        unique_id: hue_white_lamp_chambre_1_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_chambre_1_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_chambre_1_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_chambre_1_quotidien_tpl ---
+      - name: "Hue White Lamp Chambre 1 Quotidien Tpl"
+        unique_id: hue_white_lamp_chambre_1_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_chambre_1_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_chambre_1_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_chambre_2_annuel_tpl ---
+      - name: "Hue White Lamp Chambre 2 Annuel Tpl"
+        unique_id: hue_white_lamp_chambre_2_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_chambre_2_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_chambre_2_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_chambre_2_mensuel_tpl ---
+      - name: "Hue White Lamp Chambre 2 Mensuel Tpl"
+        unique_id: hue_white_lamp_chambre_2_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_chambre_2_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_chambre_2_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_chambre_2_hebdomadaire_tpl ---
+      - name: "Hue White Lamp Chambre 2 Hebdomadaire Tpl"
+        unique_id: hue_white_lamp_chambre_2_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_chambre_2_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_chambre_2_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_white_lamp_chambre_2_quotidien_tpl ---
+      - name: "Hue White Lamp Chambre 2 Quotidien Tpl"
+        unique_id: hue_white_lamp_chambre_2_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_white_lamp_chambre_2_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_white_lamp_chambre_2_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_color_candle_chambre_gege_annuel_tpl ---
+      - name: "Hue Color Candle Chambre Gege Annuel Tpl"
+        unique_id: hue_color_candle_chambre_gege_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_color_candle_chambre_gege_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_color_candle_chambre_gege_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_color_candle_chambre_gege_mensuel_tpl ---
+      - name: "Hue Color Candle Chambre Gege Mensuel Tpl"
+        unique_id: hue_color_candle_chambre_gege_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_color_candle_chambre_gege_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_color_candle_chambre_gege_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_color_candle_chambre_gege_hebdomadaire_tpl ---
+      - name: "Hue Color Candle Chambre Gege Hebdomadaire Tpl"
+        unique_id: hue_color_candle_chambre_gege_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_color_candle_chambre_gege_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_color_candle_chambre_gege_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_color_candle_chambre_gege_quotidien_tpl ---
+      - name: "Hue Color Candle Chambre Gege Quotidien Tpl"
+        unique_id: hue_color_candle_chambre_gege_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_color_candle_chambre_gege_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_color_candle_chambre_gege_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_color_candle_chambre_eric_annuel_tpl ---
+      - name: "Hue Color Candle Chambre Eric Annuel Tpl"
+        unique_id: hue_color_candle_chambre_eric_annuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_color_candle_chambre_eric_annuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_color_candle_chambre_eric_annuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_color_candle_chambre_eric_mensuel_tpl ---
+      - name: "Hue Color Candle Chambre Eric Mensuel Tpl"
+        unique_id: hue_color_candle_chambre_eric_mensuel_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_color_candle_chambre_eric_mensuel_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_color_candle_chambre_eric_mensuel_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_color_candle_chambre_eric_hebdomadaire_tpl ---
+      - name: "Hue Color Candle Chambre Eric Hebdomadaire Tpl"
+        unique_id: hue_color_candle_chambre_eric_hebdomadaire_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_color_candle_chambre_eric_hebdomadaire_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_color_candle_chambre_eric_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+
+      # --- hue_color_candle_chambre_eric_quotidien_tpl ---
+      - name: "Hue Color Candle Chambre Eric Quotidien Tpl"
+        unique_id: hue_color_candle_chambre_eric_quotidien_tpl
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: measurement
+        state: "{{ states('sensor.hue_color_candle_chambre_eric_quotidien_um') | float(0) }}"
+        availability: "{{ states('sensor.hue_color_candle_chambre_eric_quotidien_um') not in ['unavailable', 'unknown'] }}"
+
+# annotations_log:
+# - [Création] Nouveau fichier — couche TPL relayant P3_UM_AMHQ_1_UNITE vers le dashboard.
+# - [Logique] state_class: measurement (UM se réinitialise → pas total_increasing).
+# - [Source] sensor.[lampe]_*_um → P3_UM_AMHQ_1_UNITE.yaml (19 ampoules × 4 cycles).
+# - [Nommage bureau] lampe_bureau_1/2_hue (aligné UM — pas hue_white_lamp_bureau_1/2).
+# - [Nommage table] hue_white_lamp_table_salon (avec _salon — aligné UM).
+# - [Dashboard] L2C3 page éclairage — détail par ampoule (quotidien + mensuel).
