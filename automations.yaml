@@ -2762,3 +2762,54 @@
         kWh | Ecart: {{d1}} ({{p1}}%) Direct:  {{n2}} kWh | Ecart: {{d2}} ({{p2}}%)
 
         '
+- id: '1777395823092'
+  alias: '[Énergie] Reset Complet des Utility Meters'
+  description: Force la remise à zéro de tous les compteurs d'éclairage du Pôle 3
+  triggers: []
+  actions:
+  - target:
+      entity_id:
+      - sensor.hue_white_lamp_table_quotidien_um
+      - sensor.hue_white_lamp_table_hebdomadaire_um
+      - sensor.hue_white_lamp_table_mensuel_um
+      - sensor.hue_white_lamp_table_annuel_um
+      - sensor.hue_color_candle_salon_1_quotidien_um
+      - sensor.hue_color_candle_salon_1_hebdomadaire_um
+      - sensor.hue_color_candle_salon_1_mensuel_um
+      - sensor.hue_color_candle_salon_1_annuel_um
+      - sensor.hue_ambiance_lamp_salon_1_quotidien_um
+      - sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um
+      - sensor.hue_ambiance_lamp_salon_1_mensuel_um
+      - sensor.hue_ambiance_lamp_salon_1_annuel_um
+      - sensor.hue_ambiance_lamp_salon_2_quotidien_um
+      - sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um
+      - sensor.hue_ambiance_lamp_salon_2_mensuel_um
+      - sensor.hue_ambiance_lamp_salon_2_annuel_um
+      - sensor.hue_ambiance_lamp_salon_3_quotidien_um
+      - sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um
+      - sensor.hue_ambiance_lamp_salon_3_mensuel_um
+      - sensor.hue_ambiance_lamp_salon_3_annuel_um
+      - sensor.hue_play_1_pc_bureau_quotidien_um
+      - sensor.hue_play_1_pc_bureau_mensuel_um
+      - sensor.hue_play_2_pc_bureau_quotidien_um
+      - sensor.hue_play_2_pc_bureau_mensuel_um
+      - sensor.hue_play_3_pc_bureau_quotidien_um
+      - sensor.hue_play_3_pc_bureau_mensuel_um
+      - sensor.hue_white_lamp_bureau_1_quotidien_um
+      - sensor.hue_white_lamp_bureau_1_mensuel_um
+      - sensor.hue_white_lamp_bureau_2_quotidien_um
+      - sensor.hue_white_lamp_bureau_2_mensuel_um
+      - sensor.hue_white_lamp_entree_quotidien_um
+      - sensor.hue_white_lamp_entree_mensuel_um
+      - sensor.hue_white_lamp_cuisine_quotidien_um
+      - sensor.hue_white_lamp_cuisine_mensuel_um
+      - sensor.hue_white_lamp_couloir_quotidien_um
+      - sensor.hue_white_lamp_couloir_mensuel_um
+      - sensor.lampe_salle_de_bain_hue_quotidien_um
+      - sensor.lampe_salle_de_bain_hue_mensuel_um
+      - sensor.relais_lumiere_sdb_sonoff_quotidien_um
+      - sensor.relais_lumiere_sdb_sonoff_mensuel_um
+    data:
+      value: '0'
+    action: utility_meter.calibrate
+  mode: single
