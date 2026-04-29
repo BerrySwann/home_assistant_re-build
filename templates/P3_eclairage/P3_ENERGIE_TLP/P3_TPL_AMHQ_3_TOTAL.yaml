@@ -1,124 +1,148 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 3. TEMPLATES : SOMMES TOTALES UNITAIRES AMHQ (kWh)                  │
+# │ PÔLE 3. TEMPLATES TPL : TOTAL kWh UM — ÉCLAIRAGE TOUTES AMPOULES (19x)  │
 # ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs templates calculant la somme totale des kWh de toutes les ampoules
+# de l'appartement (19 unités). 4 cycles AMHQ = 4 sensors _kwh_tpl.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : sensor.{slug}_{cycle}_um_kwh_tpl (P3_TPL_AMHQ_1_UNITE — 19 ampoules)
+# - Formule : sum(float(default=0)) sur les 19 _um_kwh_tpl
+# - state_class: measurement (hérite du reset UM sous-jacent)
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL   | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                  | AVAL  |
+# |:-----------|:---------------------------------------------------|:----------------------------------------|:------|
+# | [calculé]  | sensor.{slug}_{cycle}_um_kwh_tpl × 19 (TPL_1_UNITE) | eclairage_total_unit_{cycle}_kwh_tpl   | L2C3  |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Source = _um_kwh_tpl (P3_TPL_AMHQ_1_UNITE), PAS les _um bruts du UM.
+# - 19 ampoules : 1 Entrée, 5 Salon, 1 Cuisine, 1 Couloir, 5 Bureau, 2 SDB, 4 Chambre.
+# - state_class: measurement — reset à chaque cycle.
+# - Pas d'availability : float(default=0) absorbe les unavailable.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (total appartement)
 
 - sensor:
-    # --- ANNUEL ---
-    - name: "Eclairage Total Unit Annuel TPL"
-      unique_id: eclairage_total_unit_annuel_tpl
+    # --- eclairage_total_unit_quotidien_kwh_tpl ---
+    - name: "Eclairage Total Unit Quotidien Kwh Tpl"
+      unique_id: eclairage_total_unit_quotidien_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing
+      state_class: measurement
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_annuel_um',
-          'sensor.eclairage_hue_white_lamp_table_salon_annuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_1_annuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_2_annuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_3_annuel_um',
-          'sensor.eclairage_hue_color_candle_salon_1_annuel_um',
-          'sensor.eclairage_hue_white_lamp_cuisine_annuel_um',
-          'sensor.eclairage_hue_white_lamp_couloir_annuel_um',
-          'sensor.eclairage_hue_play_1_pc_bureau_annuel_um',
-          'sensor.eclairage_hue_play_2_pc_bureau_annuel_um',
-          'sensor.eclairage_hue_play_3_pc_bureau_annuel_um',
-          'sensor.eclairage_lampe_bureau_1_hue_annuel_um',
-          'sensor.eclairage_lampe_bureau_2_hue_annuel_um',
-          'sensor.eclairage_relais_lumiere_sdb_sonoff_annuel_um',
-          'sensor.eclairage_lampe_salle_de_bain_hue_annuel_um',
-          'sensor.eclairage_hue_white_lamp_chambre_1_annuel_um',
-          'sensor.eclairage_hue_white_lamp_chambre_2_annuel_um',
-          'sensor.eclairage_hue_color_candle_chambre_gege_annuel_um',
-          'sensor.eclairage_hue_color_candle_chambre_eric_annuel_um'
+          'sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl',
+          'sensor.hue_white_lamp_table_quotidien_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_1_quotidien_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_2_quotidien_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_3_quotidien_um_kwh_tpl',
+          'sensor.hue_color_candle_salon_1_quotidien_um_kwh_tpl',
+          'sensor.hue_white_lamp_cuisine_quotidien_um_kwh_tpl',
+          'sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl',
+          'sensor.hue_play_1_pc_bureau_quotidien_um_kwh_tpl',
+          'sensor.hue_play_2_pc_bureau_quotidien_um_kwh_tpl',
+          'sensor.hue_play_3_pc_bureau_quotidien_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_1_quotidien_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_2_quotidien_um_kwh_tpl',
+          'sensor.relais_lumiere_sdb_sonoff_quotidien_um_kwh_tpl',
+          'sensor.lampe_salle_de_bain_hue_quotidien_um_kwh_tpl',
+          'sensor.hue_white_lamp_chambre_1_quotidien_um_kwh_tpl',
+          'sensor.hue_white_lamp_chambre_2_quotidien_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_gege_quotidien_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_eric_quotidien_um_kwh_tpl'
         ] %}
-        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
-    # --- MENSUEL ---
-    - name: "Eclairage Total Unit Mensuel TPL"
-      unique_id: eclairage_total_unit_mensuel_tpl
+    # --- eclairage_total_unit_hebdomadaire_kwh_tpl ---
+    - name: "Eclairage Total Unit Hebdomadaire Kwh Tpl"
+      unique_id: eclairage_total_unit_hebdomadaire_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing
+      state_class: measurement
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_mensuel_um',
-          'sensor.eclairage_hue_white_lamp_table_salon_mensuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_1_mensuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_2_mensuel_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_3_mensuel_um',
-          'sensor.eclairage_hue_color_candle_salon_1_mensuel_um',
-          'sensor.eclairage_hue_white_lamp_cuisine_mensuel_um',
-          'sensor.eclairage_hue_white_lamp_couloir_mensuel_um',
-          'sensor.eclairage_hue_play_1_pc_bureau_mensuel_um',
-          'sensor.eclairage_hue_play_2_pc_bureau_mensuel_um',
-          'sensor.eclairage_hue_play_3_pc_bureau_mensuel_um',
-          'sensor.eclairage_lampe_bureau_1_hue_mensuel_um',
-          'sensor.eclairage_lampe_bureau_2_hue_mensuel_um',
-          'sensor.eclairage_relais_lumiere_sdb_sonoff_mensuel_um',
-          'sensor.eclairage_lampe_salle_de_bain_hue_mensuel_um',
-          'sensor.eclairage_hue_white_lamp_chambre_1_mensuel_um',
-          'sensor.eclairage_hue_white_lamp_chambre_2_mensuel_um',
-          'sensor.eclairage_hue_color_candle_chambre_gege_mensuel_um',
-          'sensor.eclairage_hue_color_candle_chambre_eric_mensuel_um'
+          'sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_white_lamp_table_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_color_candle_salon_1_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_white_lamp_cuisine_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_white_lamp_couloir_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_play_1_pc_bureau_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_play_2_pc_bureau_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_play_3_pc_bureau_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_1_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_2_hebdomadaire_um_kwh_tpl',
+          'sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um_kwh_tpl',
+          'sensor.lampe_salle_de_bain_hue_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_white_lamp_chambre_1_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_white_lamp_chambre_2_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_gege_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_eric_hebdomadaire_um_kwh_tpl'
         ] %}
-        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
-    # --- HEBDOMADAIRE ---
-    - name: "Eclairage Total Unit Hebdomadaire TPL"
-      unique_id: eclairage_total_unit_hebdomadaire_tpl
+    # --- eclairage_total_unit_mensuel_kwh_tpl ---
+    - name: "Eclairage Total Unit Mensuel Kwh Tpl"
+      unique_id: eclairage_total_unit_mensuel_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing
+      state_class: measurement
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_hebdomadaire_um',
-          'sensor.eclairage_hue_white_lamp_table_salon_hebdomadaire_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_1_hebdomadaire_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_2_hebdomadaire_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_3_hebdomadaire_um',
-          'sensor.eclairage_hue_color_candle_salon_1_hebdomadaire_um',
-          'sensor.eclairage_hue_white_lamp_cuisine_hebdomadaire_um',
-          'sensor.eclairage_hue_white_lamp_couloir_hebdomadaire_um',
-          'sensor.eclairage_hue_play_1_pc_bureau_hebdomadaire_um',
-          'sensor.eclairage_hue_play_2_pc_bureau_hebdomadaire_um',
-          'sensor.eclairage_hue_play_3_pc_bureau_hebdomadaire_um',
-          'sensor.eclairage_lampe_bureau_1_hue_hebdomadaire_um',
-          'sensor.eclairage_lampe_bureau_2_hue_hebdomadaire_um',
-          'sensor.eclairage_relais_lumiere_sdb_sonoff_hebdomadaire_um',
-          'sensor.eclairage_lampe_salle_de_bain_hue_hebdomadaire_um',
-          'sensor.eclairage_hue_white_lamp_chambre_1_hebdomadaire_um',
-          'sensor.eclairage_hue_white_lamp_chambre_2_hebdomadaire_um',
-          'sensor.eclairage_hue_color_candle_chambre_gege_hebdomadaire_um',
-          'sensor.eclairage_hue_color_candle_chambre_eric_hebdomadaire_um'
+          'sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_table_mensuel_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_1_mensuel_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_2_mensuel_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_3_mensuel_um_kwh_tpl',
+          'sensor.hue_color_candle_salon_1_mensuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_cuisine_mensuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_couloir_mensuel_um_kwh_tpl',
+          'sensor.hue_play_1_pc_bureau_mensuel_um_kwh_tpl',
+          'sensor.hue_play_2_pc_bureau_mensuel_um_kwh_tpl',
+          'sensor.hue_play_3_pc_bureau_mensuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_1_mensuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_2_mensuel_um_kwh_tpl',
+          'sensor.relais_lumiere_sdb_sonoff_mensuel_um_kwh_tpl',
+          'sensor.lampe_salle_de_bain_hue_mensuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_chambre_1_mensuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_chambre_2_mensuel_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_gege_mensuel_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_eric_mensuel_um_kwh_tpl'
         ] %}
-        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
-    # --- QUOTIDIEN ---
-    - name: "Eclairage Total Unit Quotidien TPL"
-      unique_id: eclairage_total_unit_quotidien_tpl
+    # --- eclairage_total_unit_annuel_kwh_tpl ---
+    - name: "Eclairage Total Unit Annuel Kwh Tpl"
+      unique_id: eclairage_total_unit_annuel_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing
+      state_class: measurement
       state: >
         {% set sensors = [
-          'sensor.eclairage_hue_white_lamp_entree_quotidien_um',
-          'sensor.eclairage_hue_white_lamp_table_salon_quotidien_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_1_quotidien_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_2_quotidien_um',
-          'sensor.eclairage_hue_ambiance_lamp_salon_3_quotidien_um',
-          'sensor.eclairage_hue_color_candle_salon_1_quotidien_um',
-          'sensor.eclairage_hue_white_lamp_cuisine_quotidien_um',
-          'sensor.eclairage_hue_white_lamp_couloir_quotidien_um',
-          'sensor.eclairage_hue_play_1_pc_bureau_quotidien_um',
-          'sensor.eclairage_hue_play_2_pc_bureau_quotidien_um',
-          'sensor.eclairage_hue_play_3_pc_bureau_quotidien_um',
-          'sensor.eclairage_lampe_bureau_1_hue_quotidien_um',
-          'sensor.eclairage_lampe_bureau_2_hue_quotidien_um',
-          'sensor.eclairage_relais_lumiere_sdb_sonoff_quotidien_um',
-          'sensor.eclairage_lampe_salle_de_bain_hue_quotidien_um',
-          'sensor.eclairage_hue_white_lamp_chambre_1_quotidien_um',
-          'sensor.eclairage_hue_white_lamp_chambre_2_quotidien_um',
-          'sensor.eclairage_hue_color_candle_chambre_gege_quotidien_um',
-          'sensor.eclairage_hue_color_candle_chambre_eric_quotidien_um'
+          'sensor.hue_white_lamp_entree_annuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_table_annuel_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_1_annuel_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_2_annuel_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_3_annuel_um_kwh_tpl',
+          'sensor.hue_color_candle_salon_1_annuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_cuisine_annuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_couloir_annuel_um_kwh_tpl',
+          'sensor.hue_play_1_pc_bureau_annuel_um_kwh_tpl',
+          'sensor.hue_play_2_pc_bureau_annuel_um_kwh_tpl',
+          'sensor.hue_play_3_pc_bureau_annuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_1_annuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_2_annuel_um_kwh_tpl',
+          'sensor.relais_lumiere_sdb_sonoff_annuel_um_kwh_tpl',
+          'sensor.lampe_salle_de_bain_hue_annuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_chambre_1_annuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_chambre_2_annuel_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_gege_annuel_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_eric_annuel_um_kwh_tpl'
         ] %}
-        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
