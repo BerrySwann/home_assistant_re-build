@@ -10,7 +10,7 @@
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Formule : (kWh_UM × 1000) / heures_écoulées = Watts moyens
-# - Sources : sensor.[ampoule]_[cycle]_um (compteurs UM P3_UM_AMHQ_1_UNITE)
+# - Sources : sensor.[ampoule]_[cycle]_um_kwh_tpl (P3_TPL_AMHQ_1_UNITE)
 # - Quotidien  : h = now().hour + (now().minute / 60)
 # - Hebdomadaire : hh = (now().weekday() * 24) + h
 # - Mensuel    : hm = ((now().day - 1) * 24) + h
@@ -43,7 +43,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_entree_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -53,7 +53,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_entree_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -63,7 +63,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_entree_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -73,7 +73,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_entree_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_entree_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -86,7 +86,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_table_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_table_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -96,7 +96,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_table_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_table_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -106,7 +106,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_table_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_table_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -116,7 +116,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_table_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_table_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -126,7 +126,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_ambiance_lamp_salon_1_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_1_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -136,7 +136,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -146,7 +146,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_ambiance_lamp_salon_1_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_1_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -156,7 +156,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_ambiance_lamp_salon_1_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_1_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -166,7 +166,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_ambiance_lamp_salon_2_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_2_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -176,7 +176,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -186,7 +186,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_ambiance_lamp_salon_2_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_2_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -196,7 +196,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_ambiance_lamp_salon_2_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_2_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -206,7 +206,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_ambiance_lamp_salon_3_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_3_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -216,7 +216,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -226,7 +226,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_ambiance_lamp_salon_3_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_3_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -236,7 +236,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_ambiance_lamp_salon_3_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_ambiance_lamp_salon_3_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -246,7 +246,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_color_candle_salon_1_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_color_candle_salon_1_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -256,7 +256,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_color_candle_salon_1_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_color_candle_salon_1_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -266,7 +266,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_color_candle_salon_1_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_color_candle_salon_1_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -276,7 +276,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_color_candle_salon_1_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_color_candle_salon_1_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -289,7 +289,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_cuisine_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_cuisine_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -299,7 +299,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_cuisine_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_cuisine_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -309,7 +309,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_cuisine_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_cuisine_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -319,7 +319,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_cuisine_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_cuisine_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -332,7 +332,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_couloir_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -342,7 +342,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_couloir_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_couloir_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -352,7 +352,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_couloir_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_couloir_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -362,7 +362,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_couloir_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_couloir_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -375,7 +375,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_play_1_pc_bureau_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_play_1_pc_bureau_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -385,7 +385,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_play_1_pc_bureau_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_play_1_pc_bureau_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -395,7 +395,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_play_1_pc_bureau_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_play_1_pc_bureau_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -405,7 +405,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_play_1_pc_bureau_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_play_1_pc_bureau_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -415,7 +415,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_play_2_pc_bureau_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_play_2_pc_bureau_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -425,7 +425,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_play_2_pc_bureau_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_play_2_pc_bureau_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -435,7 +435,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_play_2_pc_bureau_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_play_2_pc_bureau_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -445,7 +445,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_play_2_pc_bureau_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_play_2_pc_bureau_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -455,7 +455,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_play_3_pc_bureau_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_play_3_pc_bureau_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -465,7 +465,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_play_3_pc_bureau_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_play_3_pc_bureau_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -475,7 +475,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_play_3_pc_bureau_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_play_3_pc_bureau_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -485,7 +485,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_play_3_pc_bureau_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_play_3_pc_bureau_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -495,7 +495,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_bureau_1_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_bureau_1_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -505,7 +505,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_bureau_1_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_bureau_1_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -515,7 +515,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_bureau_1_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_bureau_1_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -525,7 +525,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_bureau_1_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_bureau_1_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -535,7 +535,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_bureau_2_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_bureau_2_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -545,7 +545,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_bureau_2_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_bureau_2_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -555,7 +555,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_bureau_2_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_bureau_2_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -565,7 +565,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_bureau_2_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_bureau_2_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -578,7 +578,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.relais_lumiere_sdb_sonoff_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.relais_lumiere_sdb_sonoff_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -588,7 +588,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -598,7 +598,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.relais_lumiere_sdb_sonoff_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.relais_lumiere_sdb_sonoff_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -608,7 +608,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.relais_lumiere_sdb_sonoff_annuel_um') | float(0) %}
+        {% set conso = states('sensor.relais_lumiere_sdb_sonoff_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -618,7 +618,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.lampe_salle_de_bain_hue_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.lampe_salle_de_bain_hue_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -628,7 +628,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.lampe_salle_de_bain_hue_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.lampe_salle_de_bain_hue_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -638,7 +638,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.lampe_salle_de_bain_hue_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.lampe_salle_de_bain_hue_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -648,7 +648,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.lampe_salle_de_bain_hue_annuel_um') | float(0) %}
+        {% set conso = states('sensor.lampe_salle_de_bain_hue_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -661,7 +661,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_chambre_1_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_chambre_1_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -671,7 +671,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_chambre_1_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_chambre_1_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -681,7 +681,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_chambre_1_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_chambre_1_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -691,7 +691,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_chambre_1_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_chambre_1_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -701,7 +701,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_chambre_2_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_chambre_2_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -711,7 +711,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_chambre_2_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_chambre_2_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -721,7 +721,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_chambre_2_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_chambre_2_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -731,7 +731,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_white_lamp_chambre_2_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_chambre_2_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -741,7 +741,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_color_candle_chambre_gege_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_color_candle_chambre_gege_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -751,7 +751,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_color_candle_chambre_gege_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_color_candle_chambre_gege_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -761,7 +761,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_color_candle_chambre_gege_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_color_candle_chambre_gege_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -771,7 +771,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_color_candle_chambre_gege_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_color_candle_chambre_gege_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
@@ -781,7 +781,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_color_candle_chambre_eric_quotidien_um') | float(0) %}
+        {% set conso = states('sensor.hue_color_candle_chambre_eric_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
@@ -791,7 +791,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_color_candle_chambre_eric_hebdomadaire_um') | float(0) %}
+        {% set conso = states('sensor.hue_color_candle_chambre_eric_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
@@ -801,7 +801,7 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_color_candle_chambre_eric_mensuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_color_candle_chambre_eric_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
@@ -811,6 +811,6 @@
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.hue_color_candle_chambre_eric_annuel_um') | float(0) %}
+        {% set conso = states('sensor.hue_color_candle_chambre_eric_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}

@@ -1,181 +1,530 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 3. TEMPLATES : SOMMES ÉNERGIE PIÈCES & ZONES AMHQ (kWh)             │
+# │ PÔLE 3. TEMPLATES TPL : RELAIS kWh UM — ÉCLAIRAGE PAR ZONE (8 ZONES)    │
 # ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs templates agrégeant les kWh par zone (pièce ou groupe de pièces).
+# 8 zones × 4 cycles AMHQ = 32 sensors _um_kwh_tpl.
+# Zones : ENTRÉE×1, SALON×5, CUISINE×1, COULOIR×1, BUREAU×5, SDB×2, CHAMBRE×4,
+# APPART_3 (Entrée+Cuisine+Couloir).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : sensor.{slug}_{cycle}_um_kwh_tpl (P3_TPL_AMHQ_1_UNITE)
+# - Formule : sum(float(default=0)) sur la liste des _um_kwh_tpl de chaque zone.
+# - state_class: measurement (hérite du reset UM sous-jacent)
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL   | CAPTEUR BRUT (source)                            | CE FICHIER (unique_id)                    | AVAL                      |
+# |:-----------|:-------------------------------------------------|:------------------------------------------|:--------------------------|
+# | [calculé]  | sensor.hue_white_lamp_entree_{c}_um_kwh_tpl      | eclairage_entree_1_{c}_um_kwh_tpl         | P3_AVG_AMHQ_2_ZONE → L2C3 |
+# | [calculé]  | sensor.hue_white_lamp_table_{c}_um_kwh_tpl … ×5 | eclairage_salon_5_{c}_um_kwh_tpl          | P3_AVG_AMHQ_2_ZONE → L2C3 |
+# | [calculé]  | sensor.hue_white_lamp_cuisine_{c}_um_kwh_tpl     | eclairage_cuisine_1_{c}_um_kwh_tpl        | P3_AVG_AMHQ_2_ZONE → L2C3 |
+# | [calculé]  | sensor.hue_white_lamp_couloir_{c}_um_kwh_tpl     | eclairage_couloir_1_{c}_um_kwh_tpl        | P3_AVG_AMHQ_2_ZONE → L2C3 |
+# | [calculé]  | sensor.hue_play_1_pc_bureau_{c}_um_kwh_tpl … ×5 | eclairage_bureau_5_{c}_um_kwh_tpl         | P3_AVG_AMHQ_2_ZONE → L2C3 |
+# | [calculé]  | sensor.relais_lumiere_sdb_sonoff_{c}_um_kwh_tpl … ×2 | eclairage_sdb_2_{c}_um_kwh_tpl       | P3_AVG_AMHQ_2_ZONE → L2C3 |
+# | [calculé]  | sensor.hue_white_lamp_chambre_1_{c}_um_kwh_tpl … ×4 | eclairage_chambre_4_{c}_um_kwh_tpl   | P3_AVG_AMHQ_2_ZONE → L2C3 |
+# | [calculé]  | entree + cuisine + couloir _um_kwh_tpl           | eclairage_appart_3_{c}_um_kwh_tpl         | P3_AVG_AMHQ_2_ZONE → L2C3 |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Source = _um_kwh_tpl (P3_TPL_AMHQ_1_UNITE), PAS les _um bruts du UM.
+# - Slugs CANONIQUES obligatoires (hue_white_lamp_bureau_1, hue_white_lamp_table…).
+# - state_class: measurement — les sources _um_kwh_tpl remettent à 0 à chaque cycle.
+# - Multi-sources : pas d'availability (float(default=0) absorbe les unavailable).
+# - eclairage_appart_3 = ENTRÉE + CUISINE + COULOIR uniquement.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (agrégat par zone/pièce)
 
 - sensor:
-    # ==========================================================================
-    # CYCLE : ANNUEL
-    # ==========================================================================
+    # ┌───────────────────────────────────┐
+    # │         1. ENTRÉE (1x)            │
+    # └───────────────────────────────────┘
 
-    - name: "Eclairage Entree 1 Annuel TPL"
-      unique_id: eclairage_entree_1_annuel_tpl
+    # --- eclairage_entree_1_quotidien_um_kwh_tpl ---
+    - name: "Eclairage Entree 1 Quotidien Um Kwh Tpl"
+      unique_id: eclairage_entree_1_quotidien_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing
-      state: "{{ states('sensor.hue_white_lamp_entree_annuel_um') | float(0) | round(2) }}"
+      state_class: measurement
+      state: "{{ states('sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
 
-    - name: "Eclairage Salon 5 Annuel TPL"
-      unique_id: eclairage_salon_5_annuel_tpl
+    # --- eclairage_entree_1_hebdomadaire_um_kwh_tpl ---
+    - name: "Eclairage Entree 1 Hebdomadaire Um Kwh Tpl"
+      unique_id: eclairage_entree_1_hebdomadaire_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing
+      state_class: measurement
+      state: "{{ states('sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
+
+    # --- eclairage_entree_1_mensuel_um_kwh_tpl ---
+    - name: "Eclairage Entree 1 Mensuel Um Kwh Tpl"
+      unique_id: eclairage_entree_1_mensuel_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: "{{ states('sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
+
+    # --- eclairage_entree_1_annuel_um_kwh_tpl ---
+    - name: "Eclairage Entree 1 Annuel Um Kwh Tpl"
+      unique_id: eclairage_entree_1_annuel_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: "{{ states('sensor.hue_white_lamp_entree_annuel_um_kwh_tpl') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_entree_annuel_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
+
+    # ┌───────────────────────────────────┐
+    # │         4. SALON (5x)             │
+    # └───────────────────────────────────┘
+
+    # --- eclairage_salon_5_quotidien_um_kwh_tpl ---
+    - name: "Eclairage Salon 5 Quotidien Um Kwh Tpl"
+      unique_id: eclairage_salon_5_quotidien_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
       state: >
         {% set sensors = [
-          'sensor.hue_white_lamp_table_salon_annuel_um',
-          'sensor.hue_ambiance_lamp_salon_1_annuel_um',
-          'sensor.hue_ambiance_lamp_salon_2_annuel_um',
-          'sensor.hue_ambiance_lamp_salon_3_annuel_um',
-          'sensor.hue_color_candle_salon_1_annuel_um'
+          'sensor.hue_white_lamp_table_quotidien_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_1_quotidien_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_2_quotidien_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_3_quotidien_um_kwh_tpl',
+          'sensor.hue_color_candle_salon_1_quotidien_um_kwh_tpl'
         ] %}
-        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
-    - name: "Eclairage Cuisine 1 Annuel TPL"
-      unique_id: eclairage_cuisine_1_annuel_tpl
+    # --- eclairage_salon_5_hebdomadaire_um_kwh_tpl ---
+    - name: "Eclairage Salon 5 Hebdomadaire Um Kwh Tpl"
+      unique_id: eclairage_salon_5_hebdomadaire_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing
-      state: "{{ states('sensor.hue_white_lamp_cuisine_annuel_um') | float(0) | round(2) }}"
-
-    - name: "Eclairage Couloir 1 Annuel TPL"
-      unique_id: eclairage_couloir_1_annuel_tpl
-      unit_of_measurement: "kWh"
-      device_class: energy
-      state_class: total_increasing
-      state: "{{ states('sensor.hue_white_lamp_couloir_annuel_um') | float(0) | round(2) }}"
-
-    - name: "Eclairage Bureau 5 Annuel TPL"
-      unique_id: eclairage_bureau_5_annuel_tpl
-      unit_of_measurement: "kWh"
-      device_class: energy
-      state_class: total_increasing
+      state_class: measurement
       state: >
         {% set sensors = [
-          'sensor.hue_play_1_pc_bureau_annuel_um',
-          'sensor.hue_play_2_pc_bureau_annuel_um',
-          'sensor.hue_play_3_pc_bureau_annuel_um',
-          'sensor.lampe_bureau_1_hue_annuel_um',
-          'sensor.lampe_bureau_2_hue_annuel_um'
+          'sensor.hue_white_lamp_table_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_color_candle_salon_1_hebdomadaire_um_kwh_tpl'
         ] %}
-        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
-    - name: "Eclairage Sdb 2 Annuel TPL"
-      unique_id: eclairage_sdb_2_annuel_tpl
+    # --- eclairage_salon_5_mensuel_um_kwh_tpl ---
+    - name: "Eclairage Salon 5 Mensuel Um Kwh Tpl"
+      unique_id: eclairage_salon_5_mensuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing
+      state_class: measurement
       state: >
         {% set sensors = [
-          'sensor.relais_lumiere_sdb_sonoff_annuel_um',
-          'sensor.lampe_salle_de_bain_hue_annuel_um'
+          'sensor.hue_white_lamp_table_mensuel_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_1_mensuel_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_2_mensuel_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_3_mensuel_um_kwh_tpl',
+          'sensor.hue_color_candle_salon_1_mensuel_um_kwh_tpl'
         ] %}
-        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
-    - name: "Eclairage Chambre 4 Annuel TPL"
-      unique_id: eclairage_chambre_4_annuel_tpl
+    # --- eclairage_salon_5_annuel_um_kwh_tpl ---
+    - name: "Eclairage Salon 5 Annuel Um Kwh Tpl"
+      unique_id: eclairage_salon_5_annuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing
+      state_class: measurement
       state: >
         {% set sensors = [
-          'sensor.hue_white_lamp_chambre_1_annuel_um',
-          'sensor.hue_white_lamp_chambre_2_annuel_um',
-          'sensor.hue_color_candle_chambre_gege_annuel_um',
-          'sensor.hue_color_candle_chambre_eric_annuel_um'
+          'sensor.hue_white_lamp_table_annuel_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_1_annuel_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_2_annuel_um_kwh_tpl',
+          'sensor.hue_ambiance_lamp_salon_3_annuel_um_kwh_tpl',
+          'sensor.hue_color_candle_salon_1_annuel_um_kwh_tpl'
         ] %}
-        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
-    - name: "Eclairage Appart 3 Annuel TPL"
-      unique_id: eclairage_appart_3_annuel_tpl
+    # ┌───────────────────────────────────┐
+    # │         5. CUISINE (1x)           │
+    # └───────────────────────────────────┘
+
+    # --- eclairage_cuisine_1_quotidien_um_kwh_tpl ---
+    - name: "Eclairage Cuisine 1 Quotidien Um Kwh Tpl"
+      unique_id: eclairage_cuisine_1_quotidien_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing
+      state_class: measurement
+      state: "{{ states('sensor.hue_white_lamp_cuisine_quotidien_um_kwh_tpl') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_cuisine_quotidien_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
+
+    # --- eclairage_cuisine_1_hebdomadaire_um_kwh_tpl ---
+    - name: "Eclairage Cuisine 1 Hebdomadaire Um Kwh Tpl"
+      unique_id: eclairage_cuisine_1_hebdomadaire_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: "{{ states('sensor.hue_white_lamp_cuisine_hebdomadaire_um_kwh_tpl') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_cuisine_hebdomadaire_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
+
+    # --- eclairage_cuisine_1_mensuel_um_kwh_tpl ---
+    - name: "Eclairage Cuisine 1 Mensuel Um Kwh Tpl"
+      unique_id: eclairage_cuisine_1_mensuel_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: "{{ states('sensor.hue_white_lamp_cuisine_mensuel_um_kwh_tpl') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_cuisine_mensuel_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
+
+    # --- eclairage_cuisine_1_annuel_um_kwh_tpl ---
+    - name: "Eclairage Cuisine 1 Annuel Um Kwh Tpl"
+      unique_id: eclairage_cuisine_1_annuel_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: "{{ states('sensor.hue_white_lamp_cuisine_annuel_um_kwh_tpl') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_cuisine_annuel_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
+
+    # ┌───────────────────────────────────┐
+    # │         6. COULOIR (1x)           │
+    # └───────────────────────────────────┘
+
+    # --- eclairage_couloir_1_quotidien_um_kwh_tpl ---
+    - name: "Eclairage Couloir 1 Quotidien Um Kwh Tpl"
+      unique_id: eclairage_couloir_1_quotidien_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: "{{ states('sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
+
+    # --- eclairage_couloir_1_hebdomadaire_um_kwh_tpl ---
+    - name: "Eclairage Couloir 1 Hebdomadaire Um Kwh Tpl"
+      unique_id: eclairage_couloir_1_hebdomadaire_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: "{{ states('sensor.hue_white_lamp_couloir_hebdomadaire_um_kwh_tpl') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_couloir_hebdomadaire_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
+
+    # --- eclairage_couloir_1_mensuel_um_kwh_tpl ---
+    - name: "Eclairage Couloir 1 Mensuel Um Kwh Tpl"
+      unique_id: eclairage_couloir_1_mensuel_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: "{{ states('sensor.hue_white_lamp_couloir_mensuel_um_kwh_tpl') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_couloir_mensuel_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
+
+    # --- eclairage_couloir_1_annuel_um_kwh_tpl ---
+    - name: "Eclairage Couloir 1 Annuel Um Kwh Tpl"
+      unique_id: eclairage_couloir_1_annuel_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: "{{ states('sensor.hue_white_lamp_couloir_annuel_um_kwh_tpl') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_couloir_annuel_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
+
+    # ┌───────────────────────────────────┐
+    # │         7. BUREAU (5x)            │
+    # └───────────────────────────────────┘
+
+    # --- eclairage_bureau_5_quotidien_um_kwh_tpl ---
+    - name: "Eclairage Bureau 5 Quotidien Um Kwh Tpl"
+      unique_id: eclairage_bureau_5_quotidien_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
       state: >
         {% set sensors = [
-          'sensor.hue_white_lamp_entree_annuel_um',
-          'sensor.hue_white_lamp_cuisine_annuel_um',
-          'sensor.hue_white_lamp_couloir_annuel_um'
+          'sensor.hue_play_1_pc_bureau_quotidien_um_kwh_tpl',
+          'sensor.hue_play_2_pc_bureau_quotidien_um_kwh_tpl',
+          'sensor.hue_play_3_pc_bureau_quotidien_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_1_quotidien_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_2_quotidien_um_kwh_tpl'
         ] %}
-        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
-    # ==========================================================================
-    # CYCLE : MENSUEL
-    # ==========================================================================
-
-    - name: "Eclairage Entree 1 Mensuel TPL"
-      unique_id: eclairage_entree_1_mensuel_tpl
+    # --- eclairage_bureau_5_hebdomadaire_um_kwh_tpl ---
+    - name: "Eclairage Bureau 5 Hebdomadaire Um Kwh Tpl"
+      unique_id: eclairage_bureau_5_hebdomadaire_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing
-      state: "{{ states('sensor.hue_white_lamp_entree_mensuel_um') | float(0) | round(2) }}"
-
-    - name: "Eclairage Salon 5 Mensuel TPL"
-      unique_id: eclairage_salon_5_mensuel_tpl
-      unit_of_measurement: "kWh"
-      device_class: energy
-      state_class: total_increasing
+      state_class: measurement
       state: >
         {% set sensors = [
-          'sensor.hue_white_lamp_table_salon_mensuel_um',
-          'sensor.hue_ambiance_lamp_salon_1_mensuel_um',
-          'sensor.hue_ambiance_lamp_salon_2_mensuel_um',
-          'sensor.hue_ambiance_lamp_salon_3_mensuel_um',
-          'sensor.hue_color_candle_salon_1_mensuel_um'
+          'sensor.hue_play_1_pc_bureau_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_play_2_pc_bureau_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_play_3_pc_bureau_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_1_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_2_hebdomadaire_um_kwh_tpl'
         ] %}
-        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
-    - name: "Eclairage Cuisine 1 Mensuel TPL"
-      unique_id: eclairage_cuisine_1_mensuel_tpl
+    # --- eclairage_bureau_5_mensuel_um_kwh_tpl ---
+    - name: "Eclairage Bureau 5 Mensuel Um Kwh Tpl"
+      unique_id: eclairage_bureau_5_mensuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing
-      state: "{{ states('sensor.hue_white_lamp_cuisine_mensuel_um') | float(0) | round(2) }}"
-
-    - name: "Eclairage Couloir 1 Mensuel TPL"
-      unique_id: eclairage_couloir_1_mensuel_tpl
-      unit_of_measurement: "kWh"
-      device_class: energy
-      state_class: total_increasing
-      state: "{{ states('sensor.hue_white_lamp_couloir_mensuel_um') | float(0) | round(2) }}"
-
-    - name: "Eclairage Bureau 5 Mensuel TPL"
-      unique_id: eclairage_bureau_5_mensuel_tpl
-      unit_of_measurement: "kWh"
-      device_class: energy
-      state_class: total_increasing
+      state_class: measurement
       state: >
         {% set sensors = [
-          'sensor.hue_play_1_pc_bureau_mensuel_um',
-          'sensor.hue_play_2_pc_bureau_mensuel_um',
-          'sensor.hue_play_3_pc_bureau_mensuel_um',
-          'sensor.lampe_bureau_1_hue_mensuel_um',
-          'sensor.lampe_bureau_2_hue_mensuel_um'
+          'sensor.hue_play_1_pc_bureau_mensuel_um_kwh_tpl',
+          'sensor.hue_play_2_pc_bureau_mensuel_um_kwh_tpl',
+          'sensor.hue_play_3_pc_bureau_mensuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_1_mensuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_2_mensuel_um_kwh_tpl'
         ] %}
-        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
-    - name: "Eclairage Sdb 2 Mensuel TPL"
-      unique_id: eclairage_sdb_2_mensuel_tpl
+    # --- eclairage_bureau_5_annuel_um_kwh_tpl ---
+    - name: "Eclairage Bureau 5 Annuel Um Kwh Tpl"
+      unique_id: eclairage_bureau_5_annuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing
+      state_class: measurement
       state: >
         {% set sensors = [
-          'sensor.relais_lumiere_sdb_sonoff_mensuel_um',
-          'sensor.lampe_salle_de_bain_hue_mensuel_um'
+          'sensor.hue_play_1_pc_bureau_annuel_um_kwh_tpl',
+          'sensor.hue_play_2_pc_bureau_annuel_um_kwh_tpl',
+          'sensor.hue_play_3_pc_bureau_annuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_1_annuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_bureau_2_annuel_um_kwh_tpl'
         ] %}
-        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
-    - name: "Eclairage Chambre 4 Mensuel TPL"
-      unique_id: eclairage_chambre_4_mensuel_tpl
+    # ┌───────────────────────────────────┐
+    # │         8. SDB (2x)               │
+    # └───────────────────────────────────┘
+
+    # --- eclairage_sdb_2_quotidien_um_kwh_tpl ---
+    - name: "Eclairage Sdb 2 Quotidien Um Kwh Tpl"
+      unique_id: eclairage_sdb_2_quotidien_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing
+      state_class: measurement
       state: >
         {% set sensors = [
-          'sensor.hue_white_lamp_chambre_1_mensuel_um',
-          'sensor.hue_white_lamp_chambre_2_mensuel_um',
-          'sensor.hue_color_candle_chambre_gege_mensuel_um',
-          'sensor.hue_color_candle_chambre_eric_mensuel_um'
+          'sensor.relais_lumiere_sdb_sonoff_quotidien_um_kwh_tpl',
+          'sensor.lampe_salle_de_bain_hue_quotidien_um_kwh_tpl'
         ] %}
-        {{ sensors | map('states') | map('float', default=0) | sum | round(2) }}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
-    # ... Idem pour Hebdomadaire et Quotidien ...
+    # --- eclairage_sdb_2_hebdomadaire_um_kwh_tpl ---
+    - name: "Eclairage Sdb 2 Hebdomadaire Um Kwh Tpl"
+      unique_id: eclairage_sdb_2_hebdomadaire_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um_kwh_tpl',
+          'sensor.lampe_salle_de_bain_hue_hebdomadaire_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+    # --- eclairage_sdb_2_mensuel_um_kwh_tpl ---
+    - name: "Eclairage Sdb 2 Mensuel Um Kwh Tpl"
+      unique_id: eclairage_sdb_2_mensuel_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.relais_lumiere_sdb_sonoff_mensuel_um_kwh_tpl',
+          'sensor.lampe_salle_de_bain_hue_mensuel_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+    # --- eclairage_sdb_2_annuel_um_kwh_tpl ---
+    - name: "Eclairage Sdb 2 Annuel Um Kwh Tpl"
+      unique_id: eclairage_sdb_2_annuel_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.relais_lumiere_sdb_sonoff_annuel_um_kwh_tpl',
+          'sensor.lampe_salle_de_bain_hue_annuel_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+    # ┌───────────────────────────────────┐
+    # │         9. CHAMBRE (4x)           │
+    # └───────────────────────────────────┘
+
+    # --- eclairage_chambre_4_quotidien_um_kwh_tpl ---
+    - name: "Eclairage Chambre 4 Quotidien Um Kwh Tpl"
+      unique_id: eclairage_chambre_4_quotidien_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_chambre_1_quotidien_um_kwh_tpl',
+          'sensor.hue_white_lamp_chambre_2_quotidien_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_gege_quotidien_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_eric_quotidien_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+    # --- eclairage_chambre_4_hebdomadaire_um_kwh_tpl ---
+    - name: "Eclairage Chambre 4 Hebdomadaire Um Kwh Tpl"
+      unique_id: eclairage_chambre_4_hebdomadaire_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_chambre_1_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_white_lamp_chambre_2_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_gege_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_eric_hebdomadaire_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+    # --- eclairage_chambre_4_mensuel_um_kwh_tpl ---
+    - name: "Eclairage Chambre 4 Mensuel Um Kwh Tpl"
+      unique_id: eclairage_chambre_4_mensuel_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_chambre_1_mensuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_chambre_2_mensuel_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_gege_mensuel_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_eric_mensuel_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+    # --- eclairage_chambre_4_annuel_um_kwh_tpl ---
+    - name: "Eclairage Chambre 4 Annuel Um Kwh Tpl"
+      unique_id: eclairage_chambre_4_annuel_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_chambre_1_annuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_chambre_2_annuel_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_gege_annuel_um_kwh_tpl',
+          'sensor.hue_color_candle_chambre_eric_annuel_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+    # ┌───────────────────────────────────┐
+    # │  APPART 3 (Entrée+Cuis+Couloir)   │
+    # └───────────────────────────────────┘
+
+    # --- eclairage_appart_3_quotidien_um_kwh_tpl ---
+    - name: "Eclairage Appart 3 Quotidien Um Kwh Tpl"
+      unique_id: eclairage_appart_3_quotidien_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl',
+          'sensor.hue_white_lamp_cuisine_quotidien_um_kwh_tpl',
+          'sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+    # --- eclairage_appart_3_hebdomadaire_um_kwh_tpl ---
+    - name: "Eclairage Appart 3 Hebdomadaire Um Kwh Tpl"
+      unique_id: eclairage_appart_3_hebdomadaire_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_white_lamp_cuisine_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_white_lamp_couloir_hebdomadaire_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+    # --- eclairage_appart_3_mensuel_um_kwh_tpl ---
+    - name: "Eclairage Appart 3 Mensuel Um Kwh Tpl"
+      unique_id: eclairage_appart_3_mensuel_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_cuisine_mensuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_couloir_mensuel_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+    # --- eclairage_appart_3_annuel_um_kwh_tpl ---
+    - name: "Eclairage Appart 3 Annuel Um Kwh Tpl"
+      unique_id: eclairage_appart_3_annuel_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_entree_annuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_cuisine_annuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_couloir_annuel_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+    # ┌───────────────────────────────────┐
+    # │   APPART 2 (Entrée + Couloir)     │
+    # └───────────────────────────────────┘
+
+    # --- eclairage_appart_2_quotidien_um_kwh_tpl ---
+    - name: "Eclairage Appart 2 Quotidien Um Kwh Tpl"
+      unique_id: eclairage_appart_2_quotidien_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl',
+          'sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+    # --- eclairage_appart_2_hebdomadaire_um_kwh_tpl ---
+    - name: "Eclairage Appart 2 Hebdomadaire Um Kwh Tpl"
+      unique_id: eclairage_appart_2_hebdomadaire_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl',
+          'sensor.hue_white_lamp_couloir_hebdomadaire_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+    # --- eclairage_appart_2_mensuel_um_kwh_tpl ---
+    - name: "Eclairage Appart 2 Mensuel Um Kwh Tpl"
+      unique_id: eclairage_appart_2_mensuel_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_couloir_mensuel_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+    # --- eclairage_appart_2_annuel_um_kwh_tpl ---
+    - name: "Eclairage Appart 2 Annuel Um Kwh Tpl"
+      unique_id: eclairage_appart_2_annuel_um_kwh_tpl
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: measurement
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_entree_annuel_um_kwh_tpl',
+          'sensor.hue_white_lamp_couloir_annuel_um_kwh_tpl'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
