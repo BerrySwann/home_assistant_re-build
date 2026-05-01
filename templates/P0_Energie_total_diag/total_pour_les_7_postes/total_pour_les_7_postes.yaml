@@ -15,7 +15,7 @@
 # - Cuisine    : micro_ondes + petit_dejeune + airfryer + four_plaque.
 # - Froid      : frigo + congelateur.
 # - Hygiène    : lave_linge + lave_vaisselle + fer_a_repasser.
-# - Éclairage  : sensor.eclairage_total_group_puissance (P3_POWER_3_TOTAL_ZONE).
+# - Éclairage  : sensor.eclairage_total_group_puissance_tpl (P3_POWER_TPL).
 # - Autre      : all_standby + tete_de_lit + chargeur_salon + horloge.
 #
 #
@@ -26,8 +26,8 @@
 # | [calculé]      | sensor.P1/P2/P3 puissances instantanées            | total_par_poste_puissance_*                        | L2C1 Énergie Générale (temps réel) |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Pôle Éclairage source : sensor.eclairage_total_group_puissance (P3_POWER_3).
-#   Ne pas utiliser sensor.eclairage_total_group_power (nom non défini).
+# - Pôle Éclairage source : sensor.eclairage_total_group_puissance_tpl (P3_POWER_TPL).
+#   Ne pas utiliser sensor.eclairage_total_group_puissance (ancien nom, supprimé).
 # - Les sources _power proviennent directement des prises connectées (Nous/IKEA).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
@@ -119,7 +119,7 @@
       state_class: measurement
       icon: mdi:lightbulb
       state: >
-        {{ states('sensor.eclairage_total_unit_quotidien_kwh_tpl') | float(0) | round(1) }}
+        {{ states('sensor.eclairage_total_group_puissance_tpl') | float(0) | round(1) }}
 
     # 7. AUTRE
     # --- total_poste_autre_puissance ---
@@ -135,3 +135,8 @@
         {% set ch = states('sensor.prise_salon_chargeur_nous_power') | float(0) %}
         {% set hr = states('sensor.prise_horloge_ikea_power') | float(0) %}
         {{ (vs + tl + ch + hr) | round(1) }}
+
+# annotations_log:
+# [L17] eclairage_total_group_puissance → eclairage_total_group_puissance_tpl (header CALCUL)
+# [L29] eclairage_total_group_puissance → eclairage_total_group_puissance_tpl (header IMPORTANT)
+# [L122] sensor.eclairage_total_group_puissance → sensor.eclairage_total_group_puissance_tpl

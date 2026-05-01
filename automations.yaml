@@ -2828,24 +2828,25 @@
     target:
       entity_id: notify.file_diag_log_file
     data:
-      message: '{% set pres = states(''sensor.presence'') %} {% set p1 = states(''sensor.diag_poste_hygiene_quotidien'')   |
-        float(0) | round(2) %} {% set p2 = states(''sensor.diag_poste_cuisine_quotidien'')   |
-        float(0) | round(2) %} {% set p3 = states(''sensor.diag_poste_froid_quotidien'')     |
-        float(0) | round(2) %} {% set p4 = states(''sensor.diag_poste_chauffage_quotidien'')
-        | float(0) | round(2) %} {% set agv_clim = states(''sensor.clim_rad_total_avg_watts_quotidien'')
-        | float(0) | round(2) %} {% set p5 = states(''sensor.diag_poste_multimedia_quotidien'')
-        | float(0) | round(2) %} {% set p6 = states(''sensor.diag_poste_eclairage_quotidien'')
-        | float(0) | round(2) %} {% set p7 = states(''sensor.diag_poste_autre_quotidien'')     |
-        float(0) | round(2) %} {% set ext = states(''sensor.th_balcon_nord_temperature'')    |
-        float(0) %} {% set int = states(''sensor.temperature_moyenne_interieure'')
-        | float(0) %} {% set dut_s = states(''sensor.dut_clim_salon'')         | float(0)
-        | round(1) %} {% set dut_r = states(''sensor.dut_radiateur_cuisine'')  | float(0)
-        | round(1) %} {% set dut_b = states(''sensor.dut_clim_bureau'')        | float(0)
-        | round(1) %} {% set dut_c = states(''sensor.dut_clim_chambre'')       | float(0)
-        | round(1) %} {% set t = now().strftime(''%d/%m %H:%M'') %} {{pres}} | {{t}}
-        | Hyg:{{p1}} | Cuis:{{p2}} | Froid:{{p3}} | Chauff:{{p4}} | Avg 4:{{agv_clim}}
-        | Multi:{{p5}} | Lum:{{p6}} | Autres:{{p7}} | Ti:{{int}}°C | Ext:{{ext}}°C
-        | DUT S/R/B/C:{{dut_s}}/{{dut_r}}/{{dut_b}}/{{dut_c}}
+      message: '{% set pres     = states(''sensor.presence'') %} {% set p1       =
+        states(''sensor.diag_poste_hygiene_quotidien'')    | float(0) | round(2) %}
+        {% set p2       = states(''sensor.diag_poste_cuisine_quotidien'')    | float(0)
+        | round(2) %} {% set p3       = states(''sensor.diag_poste_froid_quotidien'')      |
+        float(0) | round(2) %} {% set p4       = states(''sensor.diag_poste_chauffage_quotidien'')  |
+        float(0) | round(2) %} {% set agv_clim = states(''sensor.clim_rad_total_avg_watts_quotidien'')
+        | float(0) | round(2) %} {% set p5       = states(''sensor.diag_poste_multimedia_quotidien'')
+        | float(0) | round(2) %} {% set p6       = states(''sensor.diag_poste_eclairage_quotidien'')  |
+        float(0) | round(2) %} {% set p7       = states(''sensor.diag_poste_autre_quotidien'')      |
+        float(0) | round(2) %} {% set ext      = states(''sensor.th_balcon_nord_temperature'')      |
+        float(0) %} {% set int      = states(''sensor.temperature_moyenne_interieure'')  |
+        float(0) %} {% set dut_s    = states(''sensor.dut_clim_salon'')                  |
+        float(0) | round(1) %} {% set dut_r    = states(''sensor.dut_radiateur_cuisine'')           |
+        float(0) | round(1) %} {% set dut_b    = states(''sensor.dut_clim_bureau'')                 |
+        float(0) | round(1) %} {% set dut_c    = states(''sensor.dut_clim_chambre'')                |
+        float(0) | round(1) %} {% set t        = now().strftime(''%d/%m %H:%M'') %}
+        {{pres}} | {{t}} | Hyg:{{p1}} | Cuis:{{p2}} | Froid:{{p3}} | Chauff:{{p4}}
+        | Avg 4:{{agv_clim}} | Multi:{{p5}} | Lum:{{p6}} | Autres:{{p7}} | Ti:{{int}}°C
+        | Ext:{{ext}}°C | DUT S/R/B/C:{{dut_s}}/{{dut_r}}/{{dut_b}}/{{dut_c}}
 
         '
   mode: single
