@@ -119,7 +119,7 @@
       state_class: measurement
       icon: mdi:lightbulb
       state: >
-        {{ states('sensor.eclairage_total_group_puissance') | float(0) | round(1) }}
+        {{ states('sensor.eclairage_total_unit_quotidien_kwh_tpl') | float(0) | round(1) }}
 
     # 7. AUTRE
     # --- total_poste_autre_puissance ---
