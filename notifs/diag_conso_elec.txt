@@ -5644,3 +5644,7 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [CELL] | 02/05 12:30 | Hyg:0.01 | Cuis:0.13 | Froid:0.48 | Chauff:0.0 | Avg 4:0.0 | Multi:1.43 | Lum:0.14 | Autres:0.31 | Ti:22.8°C | Ext:21.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
 [2] en [CELL] | 02/05 12:45 | Hyg:0.01 | Cuis:0.13 | Froid:0.49 | Chauff:0.0 | Avg 4:0.0 | Multi:1.43 | Lum:0.14 | Autres:0.32 | Ti:22.8°C | Ext:21.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
 [2] en [CELL] | 02/05 13:00 | Hyg:0.01 | Cuis:0.13 | Froid:0.49 | Chauff:0.0 | Avg 4:0.0 | Multi:1.43 | Lum:0.14 | Autres:0.32 | Ti:22.8°C | Ext:21.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [CELL] | 02/05 13:15 | Hyg:0.01 | Cuis:0.13 | Froid:0.5 | Chauff:0.0 | Avg 4:0.0 | Multi:1.45 | Lum:0.14 | Autres:0.32 | Ti:22.8°C | Ext:21.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 02/05 13:30 | Hyg:0.01 | Cuis:0.14 | Froid:0.51 | Chauff:0.0 | Avg 4:0.0 | Multi:1.45 | Lum:0.21 | Autres:0.33 | Ti:22.8°C | Ext:21.7°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[Eric: WIFI/CELL] | 02/05 13:45 | Hyg:0.01 | Cuis:0.15 | Froid:0.53 | Chauff:0.0 | Avg 4:0.0 | Multi:1.45 | Lum:0.22 | Autres:0.33 | Ti:22.8°C | Ext:21.7°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 02/05 14:00 | Hyg:0.01 | Cuis:0.15 | Froid:0.55 | Chauff:0.0 | Avg 4:0.0 | Multi:1.55 | Lum:0.23 | Autres:0.33 | Ti:22.8°C | Ext:21.9°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
