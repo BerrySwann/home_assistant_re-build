@@ -40,8 +40,8 @@
     - name: "Eclairage Total Group Puissance TPL"
       unique_id: eclairage_total_group_puissance_tpl
       unit_of_measurement: "W"
-      device_class: power
-      state_class: measurement
+      device_class: energy
+      state_class: total
       icon: mdi:lightbulb-group
       state: >
         {% set sensors = [
