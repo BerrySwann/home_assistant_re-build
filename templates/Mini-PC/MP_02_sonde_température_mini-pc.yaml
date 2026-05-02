@@ -1,0 +1,96 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ TEMPLATE : SANTÉ SYSTÈME MINI-PC — RELAI MQTT (6 SONDES)                 │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Wrappeurs template des 6 capteurs température Proxmox reçus via MQTT Discovery.
+# Conserve les unique_id originaux (_sys) pour préserver l'historique HA.
+# Remplace command_line/sante_systeme_mini_pc/sante_systeme_mini_pc.yaml
+# (obsolète en VM — ne peut plus lire /sys/ du host physique).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : entités MQTT Discovery publiées par publish_temp.sh (host Proxmox)
+# - Pas de calcul : float passthrough direct (valeur déjà en °C arrondi 1 déc.)
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL              | CAPTEUR BRUT (source)              | CE FICHIER (unique_id)          | AVAL        |
+# |:----------------------|:-----------------------------------|:--------------------------------|:------------|
+# | Intel NUC (acpitz)    | sensor.proxmox_carte_mere          | temperature_carte_mere_sys      | L4C2        |
+# | Intel NUC (pkg_temp)  | sensor.proxmox_cpu_package         | temperature_cpu_package_sys     | L4C2        |
+# | Intel NUC (coretemp)  | sensor.proxmox_core_0              | temperature_core_0_sys          | L4C2        |
+# | Intel NUC (coretemp)  | sensor.proxmox_core_1              | temperature_core_1_sys          | L4C2        |
+# | Intel NUC (coretemp)  | sensor.proxmox_core_2              | temperature_core_2_sys          | L4C2        |
+# | Intel NUC (coretemp)  | sensor.proxmox_core_3              | temperature_core_3_sys          | L4C2        |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Les unique_id *_sys sont volontairement conservés (= anciens IDs command_line)
+#   pour éviter toute rupture d'historique dans HA.
+# - Si sensor.proxmox_* est indisponible → float(0) retourne 0°C (pas d'erreur).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L4C2 Mini PC (surveillance thermique)
+
+- sensor:
+    # ┌───────────────────────────────────┐
+    # │ [ MP ] MINI-PC — RELAI MQTT       │
+    # └───────────────────────────────────┘
+
+    # --- temperature_carte_mere_sys ---
+    - name: "Température Carte Mère (sys)"
+      unique_id: temperature_carte_mere_sys
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state_class: measurement
+      icon: mdi:chip
+      state: "{{ states('sensor.proxmox_carte_mere') | float(0) }}"
+
+    # --- temperature_cpu_package_sys ---
+    - name: "Température CPU Package (sys)"
+      unique_id: temperature_cpu_package_sys
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state_class: measurement
+      icon: mdi:thermometer
+      state: "{{ states('sensor.proxmox_cpu_package') | float(0) }}"
+
+    # --- temperature_core_0_sys ---
+    - name: "Température Core 0 (sys)"
+      unique_id: temperature_core_0_sys
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state_class: measurement
+      icon: mdi:thermometer
+      state: "{{ states('sensor.proxmox_core_0') | float(0) }}"
+
+    # --- temperature_core_1_sys ---
+    - name: "Température Core 1 (sys)"
+      unique_id: temperature_core_1_sys
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state_class: measurement
+      icon: mdi:thermometer
+      state: "{{ states('sensor.proxmox_core_1') | float(0) }}"
+
+    # --- temperature_core_2_sys ---
+    - name: "Température Core 2 (sys)"
+      unique_id: temperature_core_2_sys
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state_class: measurement
+      icon: mdi:thermometer
+      state: "{{ states('sensor.proxmox_core_2') | float(0) }}"
+
+    # --- temperature_core_3_sys ---
+    - name: "Température Core 3 (sys)"
+      unique_id: temperature_core_3_sys
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state_class: measurement
+      icon: mdi:thermometer
+      state: "{{ states('sensor.proxmox_core_3') | float(0) }}"
+
+# annotations_log:
+# Migration command_line → template MQTT.
+# unique_id *_sys conservés pour continuité historique HA.
+# Sources : sensor.proxmox_* créées par MQTT Discovery (publish_temp.sh).
