@@ -1,5 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES — TABLEAU DE BORD HA
-*Dernière mise à jour : 2026-04-25*
+*Dernière mise à jour : 2026-05-01*
 
 ---
 
@@ -24,7 +24,7 @@
 | L1C1 | Météo | 🔲 |
 | L1C2 | Températures | 🔲 |
 | L1C3 | Commandes Clim | 🔲 |
-| L2C1 | Énergie Générale | 🔲 |
+| L2C1 | Énergie Générale | ⚠️ |
 | **L2C2** | **Énergie Clim / Rad / Soufflant** | ✅ |
 | **L2C3** | **Énergie Éclairage** | ✅ |
 | L3C1 | Commandes Éclairage | 🔲 |
@@ -110,28 +110,23 @@ MATÉRIEL (NOUS SP via Z2M)
 ---
 
 ## ✅ L2C3 — ÉNERGIE ÉCLAIRAGE (LAMPES)
-*Validée le 2026-04-25 — Migration Riemann → firmware direct complète*
+*Validée le 2026-04-29 — Migration TPL kWh complète (_um → _um_kwh_tpl)*
 
 ### Chaîne de dépendances
 
 ```
 MATÉRIEL (Hue Bridge / Sonoff via Z2M)
-  └─→ light.*/switch.* + _energy (firmware direct, kWh cumulatif)
-        └─→ TPL: P3_POWER_1_TOTAL_UNITE.yaml  (eclairage_total_unit_energie)
-        └─→ TPL: P3_POWER_2_TOTAL_MULTI_ZONE.yaml (sommes multi-zones)
-        └─→ TPL: P3_POWER_3_TOTAL_ZONE.yaml   (eclairage_*_zone_energie)
-              └─→ SEN: P3_kWh_1_UNITE.yaml    (Riemann individuel par ampoule)
-              └─→ SEN: P3_kWh_2_ZONE.yaml     (Riemann par zone)
-              └─→ SEN: P3_kWh_3_TOTAL.yaml    (Riemann totaux)
-                    └─→ UM: P3_UM_AMHQ_1_UNITE.yaml  (19 ampoules × 4 cycles = 76 UM)
-                    └─→ UM: P3_UM_AMHQ_2_ZONE.yaml   (9 zones × 4 cycles = 36 UM)
-                    └─→ UM: P3_UM_AMHQ_3_TOTAL.yaml  (2 totaux × 4 cycles = 8 UM)
-                          └─→ TPL: P3_AVG_AMHQ_1_UNITE.yaml (AVG W par ampoule)
-                          └─→ TPL: P3_AVG_AMHQ_2_ZONE.yaml  (AVG W par zone)
-                          └─→ TPL: P3_AVG_AMHQ_3_TOTAL.yaml (AVG W totaux)
-                          └─→ TPL: ui_dashboard/etats_status.yaml (lumiere_*_etat)
-                                └─→ VIGNETTE L2C3 (button-card 3 colonnes)
-                                └─→ PAGE energie-lampes (tabbed-card 5 pièces)
+  └─→ _energy (firmware direct, kWh cumulatif)
+        └─→ UM: P3_UM_AMHQ_1_UNITE.yaml  (19 ampoules × 4 cycles = 76 _um)
+              └─→ TPL: P3_ENERGIE_TLP/P3_TPL_AMHQ_1_UNITE.yaml  (76 _um_kwh_tpl)
+                    └─→ TPL: P3_ENERGIE_TLP/P3_TPL_AMHQ_2_ZONE.yaml  (zones → 40 _um_kwh_tpl)
+                    └─→ TPL: P3_ENERGIE_TLP/P3_TPL_AMHQ_3_TOTAL.yaml (4 total _kwh_tpl)
+                    └─→ TPL: P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml (AVG W/ampoule, src _um_kwh_tpl)
+                    └─→ TPL: P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml  (AVG W/zone, src _um_kwh_tpl)
+                    └─→ TPL: P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml (AVG W total, src _um_kwh_tpl)
+                    └─→ TPL: ui_dashboard/etats_status.yaml   (lumiere_*_etat)
+                          └─→ VIGNETTE L2C3 (button-card 3 colonnes)
+                          └─→ PAGE energie-lampes (tabbed-card 5 pièces)
 ```
 
 ### Entités consommées par la vignette
@@ -144,30 +139,30 @@ MATÉRIEL (Hue Bridge / Sonoff via Z2M)
 | `sensor.lumiere_bureau_etat` | TPL | idem |
 | `sensor.lumiere_salle_de_bain_etat` | TPL | idem |
 | `sensor.lumiere_chambre_etat` | TPL | idem |
-| `sensor.eclairage_appart_2_quotidien_um` | UM | `P3_UM_AMHQ_2_ZONE.yaml` |
-| `sensor.eclairage_salon_5_quotidien_um` | UM | idem |
-| `sensor.eclairage_cuisine_1_quotidien_um` | UM | idem |
-| `sensor.eclairage_bureau_5_quotidien_um` | UM | idem |
-| `sensor.eclairage_sdb_2_quotidien_um` | UM | idem |
-| `sensor.eclairage_chambre_4_quotidien_um` | UM | idem |
-| `sensor.eclairage_total_unit_quotidien_um` | UM | `P3_UM_AMHQ_3_TOTAL.yaml` |
-| `sensor.eclairage_appart_2_mensuel_um` | UM | `P3_UM_AMHQ_2_ZONE.yaml` |
-| `sensor.eclairage_salon_5_mensuel_um` | UM | idem |
-| `sensor.eclairage_cuisine_1_mensuel_um` | UM | idem |
-| `sensor.eclairage_bureau_5_mensuel_um` | UM | idem |
-| `sensor.eclairage_sdb_2_mensuel_um` | UM | idem |
-| `sensor.eclairage_chambre_4_mensuel_um` | UM | idem |
-| `sensor.eclairage_total_unit_mensuel_um` | UM | `P3_UM_AMHQ_3_TOTAL.yaml` |
+| `sensor.eclairage_appart_2_quotidien_um_kwh_tpl` | TPL | `P3_ENERGIE_TLP/P3_TPL_AMHQ_2_ZONE.yaml` |
+| `sensor.eclairage_salon_5_quotidien_um_kwh_tpl` | TPL | idem |
+| `sensor.eclairage_cuisine_1_quotidien_um_kwh_tpl` | TPL | idem |
+| `sensor.eclairage_bureau_5_quotidien_um_kwh_tpl` | TPL | idem |
+| `sensor.eclairage_sdb_2_quotidien_um_kwh_tpl` | TPL | idem |
+| `sensor.eclairage_chambre_4_quotidien_um_kwh_tpl` | TPL | idem |
+| `sensor.eclairage_total_unit_quotidien_kwh_tpl` | TPL | `P3_ENERGIE_TLP/P3_TPL_AMHQ_3_TOTAL.yaml` |
+| `sensor.eclairage_appart_2_mensuel_um_kwh_tpl` | TPL | `P3_ENERGIE_TLP/P3_TPL_AMHQ_2_ZONE.yaml` |
+| `sensor.eclairage_salon_5_mensuel_um_kwh_tpl` | TPL | idem |
+| `sensor.eclairage_cuisine_1_mensuel_um_kwh_tpl` | TPL | idem |
+| `sensor.eclairage_bureau_5_mensuel_um_kwh_tpl` | TPL | idem |
+| `sensor.eclairage_sdb_2_mensuel_um_kwh_tpl` | TPL | idem |
+| `sensor.eclairage_chambre_4_mensuel_um_kwh_tpl` | TPL | idem |
+| `sensor.eclairage_total_unit_mensuel_kwh_tpl` | TPL | `P3_ENERGIE_TLP/P3_TPL_AMHQ_3_TOTAL.yaml` |
 
-### UM — Détail des 3 fichiers P3
+### TPL ENERGIE — Détail des 3 fichiers P3_ENERGIE_TLP
 
-| Fichier UM | Contenu | Nb entrées | Statut |
-|:-----------|:--------|:----------:|:------:|
-| `P3_UM_AMHQ_1_UNITE.yaml` | 19 ampoules × 4 cycles | 76 | ✅ |
-| `P3_UM_AMHQ_2_ZONE.yaml` | 9 zones × 4 cycles | 36 | ✅ |
-| `P3_UM_AMHQ_3_TOTAL.yaml` | 2 totaux × 4 cycles | 8 | ✅ |
+| Fichier TPL | Contenu | Nb sensors | Statut |
+|:------------|:--------|:----------:|:------:|
+| `P3_TPL_AMHQ_1_UNITE.yaml` | 19 ampoules × 4 cycles | 76 | ✅ |
+| `P3_TPL_AMHQ_2_ZONE.yaml` | 10 zones × 4 cycles | 40 | ✅ |
+| `P3_TPL_AMHQ_3_TOTAL.yaml` | 1 total × 4 cycles | 4 | ✅ |
 
-### Zones couvertes par P3_UM_AMHQ_2_ZONE
+### Zones couvertes par P3_TPL_AMHQ_2_ZONE
 
 | Zone (unique_id prefix) | Ampoules |
 |:------------------------|:--------:|
@@ -181,23 +176,56 @@ MATÉRIEL (Hue Bridge / Sonoff via Z2M)
 | `eclairage_appart_3` | 3 (entrée+cuisine+couloir) |
 | `eclairage_appart_2` | 2 (entrée+couloir) |
 
+### Entité puissance temps réel (W)
+
+| Entité | Type | Fichier source |
+|:-------|:----:|:--------------|
+| `sensor.eclairage_total_group_puissance_tpl` | TPL | `P3_eclairage/P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml` |
+
+> Somme des 19 `{slug}_power` (PowerCalc). Consommé par `total_pour_les_7_postes.yaml` (Pôle 6) → L2C1.
+
 ### Fichiers YAML déployables
 
 | Fichier | Statut |
 |:--------|:------:|
-| `sensors/P3_eclairage/P3_kWh_1_UNITE.yaml` | ✅ |
-| `sensors/P3_eclairage/P3_kWh_2_ZONE.yaml` | ✅ |
-| `sensors/P3_eclairage/P3_kWh_3_TOTAL.yaml` | ✅ |
 | `utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml` | ✅ |
-| `utility_meter/P3_eclairage/P3_UM_AMHQ_2_ZONE.yaml` | ✅ |
-| `utility_meter/P3_eclairage/P3_UM_AMHQ_3_TOTAL.yaml` | ✅ |
-| `templates/P3_eclairage/P3_POWER/P3_POWER_1_TOTAL_UNITE.yaml` | ✅ |
-| `templates/P3_eclairage/P3_POWER/P3_POWER_2_TOTAL_MULTI_ZONE.yaml` | ✅ |
-| `templates/P3_eclairage/P3_POWER/P3_POWER_3_TOTAL_ZONE.yaml` | ✅ |
+| `templates/P3_eclairage/P3_ENERGIE_TLP/P3_TPL_AMHQ_1_UNITE.yaml` | ✅ |
+| `templates/P3_eclairage/P3_ENERGIE_TLP/P3_TPL_AMHQ_2_ZONE.yaml` | ✅ |
+| `templates/P3_eclairage/P3_ENERGIE_TLP/P3_TPL_AMHQ_3_TOTAL.yaml` | ✅ |
+| `templates/P3_eclairage/P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml` | ✅ |
 | `templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml` | ✅ |
 | `templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml` | ✅ |
 | `templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml` | ✅ |
 | `templates/P3_eclairage/ui_dashboard/etats_status.yaml` | ✅ |
+
+---
+
+## ⚠️ L2C1 — ÉNERGIE GÉNÉRALE
+*Corrections validées le 2026-05-01 — Documentation partielle (vignette complète à finaliser)*
+
+### Fichiers corrigés cette session
+
+| Fichier | Correction | Statut |
+|:--------|:-----------|:------:|
+| `templates/P0_Energie_total_diag/total_pour_les_7_postes/total_pour_les_7_postes.yaml` | Pôle 6 : `eclairage_total_group_puissance` → `eclairage_total_group_puissance_tpl` | ✅ |
+| `templates/P0_Energie_total_diag/Diag/diag_conso_jour_en_cours.yaml` | Pôle 6 éclairage : `eclairage_total_group_quotidien_um` → `eclairage_total_unit_quotidien_kwh_tpl` | ✅ |
+| `templates/P0_Energie_total_diag/Diag/diag_conso_mois_en_cours.yaml` | Pôle 6 éclairage : `eclairage_total_group_mensuel_um` → `eclairage_total_unit_mensuel_kwh_tpl` | ✅ |
+| `templates/P0_Energie_total_diag/Diag/diag_conso_hebdomadaire_en_cours.yaml` | Pôle 6 éclairage : `eclairage_total_group_hebdomadaire_um` → `eclairage_total_unit_hebdomadaire_kwh_tpl` | ✅ |
+
+### Entités Pôle 6 (Éclairage) alimentant L2C1
+
+| Entité | Type | Fichier source |
+|:-------|:----:|:--------------|
+| `sensor.eclairage_total_group_puissance_tpl` | TPL | `P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml` |
+| `sensor.eclairage_total_unit_quotidien_kwh_tpl` | TPL | `P3_ENERGIE_TLP/P3_TPL_AMHQ_3_TOTAL.yaml` |
+| `sensor.eclairage_total_unit_mensuel_kwh_tpl` | TPL | idem |
+| `sensor.eclairage_total_unit_hebdomadaire_kwh_tpl` | TPL | idem |
+
+### Automation log (hors dashboard)
+
+| Fichier | Correction | Statut |
+|:--------|:-----------|:------:|
+| `docs_automations/TREE_CORRIGE/systeme/diag_enregistrement_journalier.yaml` | `notify.file` → `notify.file_diag_log_file` + artefact Markdown `sensor.th_balcon_nord_temperature` | ✅ |
 
 ---
 
@@ -211,7 +239,7 @@ Remplir lors de la validation ou modification du fichier YAML correspondant.
 | L1C1 | Météo | `command_line/meteo/`, `templates/meteo/M_01/02/04.yaml` |
 | L1C2 | Températures | `climate.*` natif SONOFF, `templates/P1_ui_dashboard.yaml` |
 | L1C3 | Commandes Clim | `climate.*`, `P1_ui_dashboard.yaml`, `P1_AVG.yaml` |
-| L2C1 | Énergie Générale | `P0_kWh_genelec_appart.yaml`, `01_UM_AMHQ.yaml`, `02_UM_HPHC.yaml` |
+| L2C1 | Énergie Générale *(partiel)* | `total_pour_les_7_postes.yaml` ✅, `diag_conso_*.yaml` ✅, `P0_kWh_genelec_appart.yaml` 🔲 |
 | L3C1 | Commandes Éclairage | `light.*` natif Hue, `ui_dashboard/etats_status.yaml` |
 | L3C2 | Commandes Prises | `switch.*` natif Z2M, `P2_ui_dashboard.yaml` |
 | L3C3 | Stores / Fenêtres | `Stores/S_01_STORES.yaml`, `binary_sensor.*` fenêtres |

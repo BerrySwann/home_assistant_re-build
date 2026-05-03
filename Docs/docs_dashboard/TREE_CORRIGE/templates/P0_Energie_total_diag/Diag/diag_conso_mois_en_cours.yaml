@@ -5,11 +5,16 @@
 # ## 📝 DESCRIPTION :
 # Neuf capteurs templates calculant la consommation mensuelle identifiée
 # par pôle fonctionnel (7 pôles), plus un capteur de maximum dynamique et
-# un capteur de total identifié. Même logique que diag_conso_jour_en_cours.yaml.
+# un capteur de total identifié. Sources : utility_meters AMHQ mensuels P1/P2/P3.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Même structure que le fichier journalier — cycle mensuel AMHQ.
-# - Max dynamique : buffer 10 kWh (échelle mensuelle).
+# - Pôle 1 Hygiène     : lave_linge + lave_vaisselle + fer_a_repasser (P2 UM Mensuel)
+# - Pôle 2 Cuisine     : four_mo + petit_dej + airfryer + four_plaque (P2 UM Mensuel)
+# - Pôle 3 Froid       : frigo + congelateur (P2 UM Mensuel)
+# - Pôle 4 Chauffage   : clim_salon + radiateur + clim_bureau + soufflant + seche_serv + clim_chambre (P1 UM Mensuel)
+# - Pôle 5 Multimédia  : box_internet + tv_salon + tv_chambre + pc_gege + pc_bureau (P2 UM Mensuel)
+# - Pôle 6 Éclairage   : eclairage_total_unit_mensuel_kwh_tpl (P3 TPL AMHQ 3 TOTAL)
+# - Pôle 7 Autre       : all_standby + tete_de_lit + chargeur_salon + horloge (P2 UM Mensuel)
 #
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
@@ -20,12 +25,18 @@
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Tous les UM P1/P2/P3 utilisent le suffixe _um (nomenclature unifiée).
-# - state_class: measurement — reset le 1er du mois via UM.
+# - state_class: total — ces capteurs reflètent les UM qui se resetent le 1er du mois.
+#   Ne PAS utiliser total_increasing (valeur décroissante → WARNING recorder).
+# - Max dynamique : buffer 10 kWh (échelle mensuelle).
+# - Pôle 6 source : eclairage_total_unit_mensuel_kwh_tpl (TPL layer) — PAS un _um brut.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale (graphique répartition par pôle — mensuel).
 
 - sensor:
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 1 — HYGIÈNE (Lave-linge, Lave-vaisselle, Fer)                │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_poste_hygiene_mensuel ---
   - name: "Diag Poste Hygiene Mensuel"
     unique_id: diag_poste_hygiene_mensuel
@@ -39,6 +50,9 @@
       {% set fr = states('sensor.prise_bureau_fer_a_repasser_nous_mensuel_um') | float(0) %}
       {{ (ll + lv + fr) | round(3) }}
 
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 2 — CUISINE (Micro-ondes, Petit-dej, AirFryer, Four/Plaque)  │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_poste_cuisine_mensuel ---
   - name: "Diag Poste Cuisine Mensuel"
     unique_id: diag_poste_cuisine_mensuel
@@ -53,6 +67,9 @@
       {% set fp = states('sensor.four_et_plaque_de_cuisson_mensuel_um') | float(0) %}
       {{ (mo + pd + af + fp) | round(3) }}
 
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 3 — FROID (Frigo, Congélateur)                               │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_poste_froid_mensuel ---
   - name: "Diag Poste Froid Mensuel"
     unique_id: diag_poste_froid_mensuel
@@ -65,6 +82,9 @@
       {% set cg = states('sensor.prise_congelateur_cuisine_nous_mensuel_um') | float(0) %}
       {{ (fr + cg) | round(3) }}
 
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 4 — CHAUFFAGE/CLIM (Salon, Cuisine, Bureau, SDB, Chambre)    │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_poste_chauffage_mensuel ---
   - name: "Diag Poste Chauffage Mensuel"
     unique_id: diag_poste_chauffage_mensuel
@@ -81,6 +101,9 @@
       {% set cc = states('sensor.clim_chambre_mensuel_um') | float(0) %}
       {{ (cs + rc + cb + ss + sv + cc) | round(3) }}
 
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 5 — MULTIMÉDIA (Box, TV×2, PC×2)                             │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_poste_multimedia_mensuel ---
   - name: "Diag Poste Multimedia Mensuel"
     unique_id: diag_poste_multimedia_mensuel
@@ -96,6 +119,9 @@
       {% set pb = states('sensor.prise_bureau_pc_ikea_mensuel_um') | float(0) %}
       {{ (bx + ts + tc + pg + pb) | round(3) }}
 
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 6 — ÉCLAIRAGE (Total appartement)                            │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_poste_eclairage_mensuel ---
   - name: "Diag Poste Eclairage Mensuel"
     unique_id: diag_poste_eclairage_mensuel
@@ -104,8 +130,11 @@
     state_class: total
     icon: mdi:lightbulb
     state: >
-      {{ states('sensor.eclairage_total_group_mensuel_um') | float(0) | round(3) }}
+      {{ states('sensor.eclairage_total_unit_mensuel_kwh_tpl') | float(0) | round(3) }}
 
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 7 — AUTRE (Veilles, Têtes de lit, Chargeurs, Horloge)        │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_poste_autre_mensuel ---
   - name: "Diag Poste Autre Mensuel"
     unique_id: diag_poste_autre_mensuel
@@ -120,7 +149,10 @@
       {% set hr = states('sensor.prise_horloge_ikea_mensuel_um') | float(0) %}
       {{ (vs + tl + ch + hr) | round(3) }}
 
-  # --- diag_max_poste_mensuel ---
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    MAX DYNAMIQUE (axe Y des barres + 10 kWh buffer)                  │
+  # ╰──────────────────────────────────────────────────────────────────────╯
+  # --- diag_max_poste_mensuel_dynamique ---
   - name: "Diag Max Poste Mensuel Dynamique"
     unique_id: diag_max_poste_mensuel_dynamique
     unit_of_measurement: "kWh"
@@ -137,6 +169,9 @@
       ] %}
       {{ (poles | max + 10) | round(2) }}
 
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    TOTAL IDENTIFIÉ (somme des 7 pôles)                               │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_total_identifie_mensuel ---
   - name: "Diag Total Identifie Mensuel"
     unique_id: diag_total_identifie_mensuel
@@ -156,5 +191,8 @@
       {{ (poles | sum) | round(2) }}
 
 # annotations_log:
-# [Toutes state_class] total_increasing → measurement (reset 1er du mois)
-# [Pôle 4] _mensuel_um → _mensuel_um (×6 sources P1)
+# [Toutes state_class] total_increasing → total (reset 1er du mois)
+# [Header CALCUL] détail des 7 pôles ajouté (était "Même structure...")
+# [Header IMPORTANT] measurement → total + ajout note Pôle 6 TPL
+# [Tous pôles] boîtes ASCII secondaires ╭─╮ ajoutées (alignement avec quotidien)
+# [Pôle 6] eclairage_total_group_mensuel_um → eclairage_total_unit_mensuel_kwh_tpl (P3_TPL_AMHQ_3_TOTAL)

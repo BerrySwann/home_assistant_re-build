@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--18-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--04--29-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page-ff9800?style=flat-square)](.)
 
 </div>
@@ -14,7 +14,7 @@
 | 🏗️ **Layout** | `type: grid` — `column_span: 3` |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-18 |
+| 📅 **Modifié le** | 2026-04-29 |
 | 🏠 **Version HA** | 2026.3 |
 
 ---
@@ -56,8 +56,8 @@ Un badge subtitle sous chaque tabbed-card affiche les 4 périodes Q/H/M/A de la 
 ├── SALON (5 lampes — rgb(215, 95, 115))
 │   ├── Heading title (badges light.salon + light.table)
 │   ├── tabbed-card
-│   │   ├── JOUR  → donut 5 lampes (sensor.hue_*_quotidien_kwh_um)
-│   │   ├── MOIS  → donut 5 lampes (sensor.hue_*_mensuel_kwh_um)
+│   │   ├── JOUR  → donut 5 lampes (sensor.hue_*_quotidien_um_kwh_tpl)
+│   │   ├── MOIS  → donut 5 lampes (sensor.hue_*_mensuel_um_kwh_tpl)
 │   │   └── 30J   → colonnes eclairage_salon_5 + AVG mensuel
 │   ├── Heading subtitle (badges Q/H/M/A eclairage_salon_5_*)
 │   └── Séparateur
@@ -192,27 +192,27 @@ cards:
             loading: true
             last_updated: false
           series:
-            - entity: sensor.hue_white_lamp_table_quotidien_kwh_um
+            - entity: sensor.hue_white_lamp_table_quotidien_um_kwh_tpl
               name: Table
               color: rgb(174, 68, 90)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_color_candle_salon_1_quotidien_kwh_um
+            - entity: sensor.hue_color_candle_salon_1_quotidien_um_kwh_tpl
               name: Salon 1C (L1)
               color: rgb(196, 75, 97)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_ambiance_lamp_salon_3_quotidien_kwh_um
+            - entity: sensor.hue_ambiance_lamp_salon_3_quotidien_um_kwh_tpl
               name: Salon 3A (L1)
               color: rgb(215, 95, 115)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_ambiance_lamp_salon_2_quotidien_kwh_um
+            - entity: sensor.hue_ambiance_lamp_salon_2_quotidien_um_kwh_tpl
               name: Salon 2A (B2)
               color: rgb(235, 165, 175)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_ambiance_lamp_salon_1_quotidien_kwh_um
+            - entity: sensor.hue_ambiance_lamp_salon_1_quotidien_um_kwh_tpl
               name: Salon 1A (B1)
               color: rgb(248, 210, 215)
               transform: return x * 1000;
@@ -249,27 +249,27 @@ cards:
             loading: true
             last_updated: false
           series:
-            - entity: sensor.hue_white_lamp_table_mensuel_kwh_um
+            - entity: sensor.hue_white_lamp_table_mensuel_um_kwh_tpl
               name: Table
               color: rgb(174, 68, 90)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_color_candle_salon_1_mensuel_kwh_um
+            - entity: sensor.hue_color_candle_salon_1_mensuel_um_kwh_tpl
               name: Salon 1C (L1)
               color: rgb(196, 75, 97)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_ambiance_lamp_salon_3_mensuel_kwh_um
+            - entity: sensor.hue_ambiance_lamp_salon_3_mensuel_um_kwh_tpl
               name: Salon 3A (L1)
               color: rgb(215, 95, 115)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_ambiance_lamp_salon_2_mensuel_kwh_um
+            - entity: sensor.hue_ambiance_lamp_salon_2_mensuel_um_kwh_tpl
               name: Salon 2A (B2)
               color: rgb(235, 165, 175)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_ambiance_lamp_salon_1_mensuel_kwh_um
+            - entity: sensor.hue_ambiance_lamp_salon_1_mensuel_um_kwh_tpl
               name: Salon 1A (B1)
               color: rgb(248, 210, 215)
               transform: return x * 1000;
@@ -320,7 +320,7 @@ cards:
               legend_value: true
               extremas: true
           series:
-            - entity: sensor.eclairage_salon_5_mensuel_kwh_um
+            - entity: sensor.eclairage_salon_5_mensuel_um_kwh_tpl
               transform: return x * 1000;
               unit: W
               name: Conso. par jours
@@ -360,12 +360,12 @@ cards:
         state_content:
           - name
           - state
-        entity: sensor.eclairage_salon_5_quotidien_kwh_um
+        entity: sensor.eclairage_salon_5_quotidien_um_kwh_tpl
         name: Q
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_salon_5_hebdomadaire_kwh_um
+        entity: sensor.eclairage_salon_5_hebdomadaire_um_kwh_tpl
         name: H
         color: orange
         state_content:
@@ -374,7 +374,7 @@ cards:
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_salon_5_mensuel_kwh_um
+        entity: sensor.eclairage_salon_5_mensuel_um_kwh_tpl
         name: M
         color: deep-orange
         state_content:
@@ -383,7 +383,7 @@ cards:
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_salon_5_annuel_kwh_um
+        entity: sensor.eclairage_salon_5_annuel_um_kwh_tpl
         name: A
         color: red
         state_content:
@@ -471,17 +471,17 @@ cards:
             loading: true
             last_updated: false
           series:
-            - entity: sensor.hue_white_lamp_entree_quotidien_kwh_um
+            - entity: sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl
               name: Entrée
               color: rgb(220, 220, 220)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_white_lamp_cuisine_quotidien_kwh_um
+            - entity: sensor.hue_white_lamp_cuisine_quotidien_um_kwh_tpl
               name: Cuisine
               color: rgb(137, 103, 179)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_white_lamp_couloir_quotidien_kwh_um
+            - entity: sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl
               name: Couloir
               color: rgb(150, 150, 150)
               transform: return x * 1000;
@@ -518,17 +518,17 @@ cards:
             loading: true
             last_updated: false
           series:
-            - entity: sensor.hue_white_lamp_couloir_mensuel_kwh_um
+            - entity: sensor.hue_white_lamp_couloir_mensuel_um_kwh_tpl
               name: Couloir
               color: rgb(150, 150, 150)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_white_lamp_cuisine_mensuel_kwh_um
+            - entity: sensor.hue_white_lamp_cuisine_mensuel_um_kwh_tpl
               name: Cuisine
               color: rgb(137, 103, 179)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_white_lamp_entree_mensuel_kwh_um
+            - entity: sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl
               name: Entrée
               color: rgb(220, 220, 220)
               transform: return x * 1000;
@@ -579,7 +579,7 @@ cards:
               legend_value: true
               extremas: true
           series:
-            - entity: sensor.eclairage_appart_3_mensuel_kwh_um
+            - entity: sensor.eclairage_appart_3_mensuel_um_kwh_tpl
               transform: return x * 1000;
               unit: W
               name: Conso. par jours
@@ -619,12 +619,12 @@ cards:
         state_content:
           - name
           - state
-        entity: sensor.eclairage_appart_3_quotidien_kwh_um
+        entity: sensor.eclairage_appart_3_quotidien_um_kwh_tpl
         name: Q
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_appart_3_hebdomadaire_kwh_um
+        entity: sensor.eclairage_appart_3_hebdomadaire_um_kwh_tpl
         name: H
         color: orange
         state_content:
@@ -633,7 +633,7 @@ cards:
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_appart_3_mensuel_kwh_um
+        entity: sensor.eclairage_appart_3_mensuel_um_kwh_tpl
         name: M
         color: deep-orange
         state_content:
@@ -642,7 +642,7 @@ cards:
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_appart_3_annuel_kwh_um
+        entity: sensor.eclairage_appart_3_annuel_um_kwh_tpl
         name: A
         color: red
         state_content:
@@ -727,27 +727,27 @@ cards:
             loading: true
             last_updated: false
           series:
-            - entity: sensor.hue_white_lamp_bureau_2_quotidien_kwh_um
+            - entity: sensor.hue_white_lamp_bureau_2_quotidien_um_kwh_tpl
               name: Bureau HUE 2
               color: rgb(255, 165, 0)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_white_lamp_bureau_1_quotidien_kwh_um
+            - entity: sensor.hue_white_lamp_bureau_1_quotidien_um_kwh_tpl
               name: Bureau HUE 1
               color: rgb(255, 183, 51)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_play_3_pc_bureau_quotidien_kwh_um
+            - entity: sensor.hue_play_3_pc_bureau_quotidien_um_kwh_tpl
               name: play 3
               color: rgb(255, 201, 102)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_play_2_pc_bureau_quotidien_kwh_um
+            - entity: sensor.hue_play_2_pc_bureau_quotidien_um_kwh_tpl
               name: play 2
               color: rgb(255, 219, 153)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_play_1_pc_bureau_quotidien_kwh_um
+            - entity: sensor.hue_play_1_pc_bureau_quotidien_um_kwh_tpl
               name: play 1
               color: rgb(255, 237, 204)
               transform: return x * 1000;
@@ -784,27 +784,27 @@ cards:
             loading: true
             last_updated: false
           series:
-            - entity: sensor.hue_white_lamp_bureau_2_mensuel_kwh_um
+            - entity: sensor.hue_white_lamp_bureau_2_mensuel_um_kwh_tpl
               name: Bureau HUE 2
               color: rgb(255, 165, 0)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_white_lamp_bureau_1_mensuel_kwh_um
+            - entity: sensor.hue_white_lamp_bureau_1_mensuel_um_kwh_tpl
               name: Bureau HUE 1
               color: rgb(255, 183, 51)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_play_3_pc_bureau_mensuel_kwh_um
+            - entity: sensor.hue_play_3_pc_bureau_mensuel_um_kwh_tpl
               name: play 3
               color: rgb(255, 201, 102)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_play_2_pc_bureau_mensuel_kwh_um
+            - entity: sensor.hue_play_2_pc_bureau_mensuel_um_kwh_tpl
               name: play 2
               color: rgb(255, 219, 153)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_play_1_pc_bureau_mensuel_kwh_um
+            - entity: sensor.hue_play_1_pc_bureau_mensuel_um_kwh_tpl
               name: play 1
               color: rgb(255, 237, 204)
               transform: return x * 1000;
@@ -855,7 +855,7 @@ cards:
               legend_value: true
               extremas: true
           series:
-            - entity: sensor.eclairage_bureau_5_mensuel_kwh_um
+            - entity: sensor.eclairage_bureau_5_mensuel_um_kwh_tpl
               transform: return x * 1000;
               unit: W
               name: Conso. par jours
@@ -895,12 +895,12 @@ cards:
         state_content:
           - name
           - state
-        entity: sensor.eclairage_bureau_5_quotidien_kwh_um
+        entity: sensor.eclairage_bureau_5_quotidien_um_kwh_tpl
         name: Q
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_bureau_5_hebdomadaire_kwh_um
+        entity: sensor.eclairage_bureau_5_hebdomadaire_um_kwh_tpl
         name: H
         color: orange
         state_content:
@@ -909,7 +909,7 @@ cards:
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_bureau_5_mensuel_kwh_um
+        entity: sensor.eclairage_bureau_5_mensuel_um_kwh_tpl
         name: M
         color: deep-orange
         state_content:
@@ -918,7 +918,7 @@ cards:
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_bureau_5_annuel_kwh_um
+        entity: sensor.eclairage_bureau_5_annuel_um_kwh_tpl
         name: A
         color: red
         state_content:
@@ -998,12 +998,12 @@ cards:
             loading: true
             last_updated: false
           series:
-            - entity: sensor.relais_lumiere_sdb_sonoff_quotidien_kwh_um
+            - entity: sensor.relais_lumiere_sdb_sonoff_quotidien_um_kwh_tpl
               name: Miroir
               color: rgb(3, 155, 229)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.lampe_salle_de_bain_hue_quotidien_kwh_um
+            - entity: sensor.lampe_salle_de_bain_hue_quotidien_um_kwh_tpl
               name: Salle de bain
               color: rgb(119, 210, 235)
               transform: return x * 1000;
@@ -1040,12 +1040,12 @@ cards:
             loading: true
             last_updated: false
           series:
-            - entity: sensor.relais_lumiere_sdb_sonoff_mensuel_kwh_um
+            - entity: sensor.relais_lumiere_sdb_sonoff_mensuel_um_kwh_tpl
               name: Miroir
               color: rgb(3, 155, 229)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.lampe_salle_de_bain_hue_mensuel_kwh_um
+            - entity: sensor.lampe_salle_de_bain_hue_mensuel_um_kwh_tpl
               name: Salle de bain
               color: rgb(119, 210, 235)
               transform: return x * 1000;
@@ -1096,7 +1096,7 @@ cards:
               legend_value: true
               extremas: true
           series:
-            - entity: sensor.eclairage_sdb_2_mensuel_kwh_um
+            - entity: sensor.eclairage_sdb_2_mensuel_um_kwh_tpl
               transform: return x * 1000;
               unit: W
               name: Conso. par jours
@@ -1136,12 +1136,12 @@ cards:
         state_content:
           - name
           - state
-        entity: sensor.eclairage_sdb_2_quotidien_kwh_um
+        entity: sensor.eclairage_sdb_2_quotidien_um_kwh_tpl
         name: Q
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_sdb_2_hebdomadaire_kwh_um
+        entity: sensor.eclairage_sdb_2_hebdomadaire_um_kwh_tpl
         name: H
         color: orange
         state_content:
@@ -1150,7 +1150,7 @@ cards:
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_sdb_2_mensuel_kwh_um
+        entity: sensor.eclairage_sdb_2_mensuel_um_kwh_tpl
         name: M
         color: deep-orange
         state_content:
@@ -1159,7 +1159,7 @@ cards:
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_sdb_2_annuel_kwh_um
+        entity: sensor.eclairage_sdb_2_annuel_um_kwh_tpl
         name: A
         color: red
         state_content:
@@ -1240,22 +1240,22 @@ cards:
             loading: true
             last_updated: false
           series:
-            - entity: sensor.hue_color_candle_chambre_eric_quotidien_kwh_um
+            - entity: sensor.hue_color_candle_chambre_eric_quotidien_um_kwh_tpl
               name: Eric (TL2)
               color: rgb(75, 130, 85)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_color_candle_chambre_gege_quotidien_kwh_um
+            - entity: sensor.hue_color_candle_chambre_gege_quotidien_um_kwh_tpl
               name: Géraldine (TL1)
               color: rgb(105, 155, 110)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_white_lamp_chambre_2_quotidien_kwh_um
+            - entity: sensor.hue_white_lamp_chambre_2_quotidien_um_kwh_tpl
               name: Chambre 2 (B2)
               color: rgb(135, 180, 135)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_white_lamp_chambre_1_quotidien_kwh_um
+            - entity: sensor.hue_white_lamp_chambre_1_quotidien_um_kwh_tpl
               name: Chambre 1 (B1)
               color: rgb(165, 205, 160)
               transform: return x * 1000;
@@ -1292,22 +1292,22 @@ cards:
             loading: true
             last_updated: false
           series:
-            - entity: sensor.hue_white_lamp_chambre_1_mensuel_kwh_um
+            - entity: sensor.hue_white_lamp_chambre_1_mensuel_um_kwh_tpl
               name: Chambre 1 (B1)
               color: rgb(165, 205, 160)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_white_lamp_chambre_2_mensuel_kwh_um
+            - entity: sensor.hue_white_lamp_chambre_2_mensuel_um_kwh_tpl
               name: Chambre 2 (B2)
               color: rgb(135, 180, 135)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_color_candle_chambre_gege_mensuel_kwh_um
+            - entity: sensor.hue_color_candle_chambre_gege_mensuel_um_kwh_tpl
               name: Géraldine (TL1)
               color: rgb(105, 155, 110)
               transform: return x * 1000;
               unit: W
-            - entity: sensor.hue_color_candle_chambre_eric_mensuel_kwh_um
+            - entity: sensor.hue_color_candle_chambre_eric_mensuel_um_kwh_tpl
               name: Eric (TL2)
               color: rgb(75, 130, 85)
               transform: return x * 1000;
@@ -1358,7 +1358,7 @@ cards:
               legend_value: true
               extremas: true
           series:
-            - entity: sensor.eclairage_chambre_4_mensuel_kwh_um
+            - entity: sensor.eclairage_chambre_4_mensuel_um_kwh_tpl
               transform: return x * 1000;
               unit: W
               name: Conso. par jours
@@ -1398,12 +1398,12 @@ cards:
         state_content:
           - name
           - state
-        entity: sensor.eclairage_chambre_4_quotidien_kwh_um
+        entity: sensor.eclairage_chambre_4_quotidien_um_kwh_tpl
         name: Q
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_chambre_4_hebdomadaire_kwh_um
+        entity: sensor.eclairage_chambre_4_hebdomadaire_um_kwh_tpl
         name: H
         color: orange
         state_content:
@@ -1412,7 +1412,7 @@ cards:
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_chambre_4_mensuel_kwh_um
+        entity: sensor.eclairage_chambre_4_mensuel_um_kwh_tpl
         name: M
         color: deep-orange
         state_content:
@@ -1421,7 +1421,7 @@ cards:
       - type: entity
         show_state: true
         show_icon: true
-        entity: sensor.eclairage_chambre_4_annuel_kwh_um
+        entity: sensor.eclairage_chambre_4_annuel_um_kwh_tpl
         name: A
         color: red
         state_content:
@@ -1439,41 +1439,41 @@ column_span: 3
 
 ### Lampes individuelles — Utility Meters quotidiens/mensuels
 
-| Pièce | Entité (quotidien `_kwh_um`) | Entité (mensuel `_kwh_um`) |
+| Pièce | Entité (quotidien `_um_kwh_tpl`) | Entité (mensuel `_um_kwh_tpl`) |
 |-------|------------------------------|----------------------------|
-| **Salon — Table** | `sensor.hue_white_lamp_table_quotidien_kwh_um` | `..._mensuel_...` |
-| **Salon — Color 1** | `sensor.hue_color_candle_salon_1_quotidien_kwh_um` | `..._mensuel_...` |
-| **Salon — Ambiance 3** | `sensor.hue_ambiance_lamp_salon_3_quotidien_kwh_um` | `..._mensuel_...` |
-| **Salon — Ambiance 2** | `sensor.hue_ambiance_lamp_salon_2_quotidien_kwh_um` | `..._mensuel_...` |
-| **Salon — Ambiance 1** | `sensor.hue_ambiance_lamp_salon_1_quotidien_kwh_um` | `..._mensuel_...` |
-| **Entrée** | `sensor.hue_white_lamp_entree_quotidien_kwh_um` | `..._mensuel_...` |
-| **Cuisine** | `sensor.hue_white_lamp_cuisine_quotidien_kwh_um` | `..._mensuel_...` |
-| **Couloir** | `sensor.hue_white_lamp_couloir_quotidien_kwh_um` | `..._mensuel_...` |
-| **Bureau — HUE 1** | `sensor.hue_white_lamp_bureau_1_quotidien_kwh_um` | `..._mensuel_...` |
-| **Bureau — HUE 2** | `sensor.hue_white_lamp_bureau_2_quotidien_kwh_um` | `..._mensuel_...` |
-| **Bureau — Play 1** | `sensor.hue_play_1_pc_bureau_quotidien_kwh_um` | `..._mensuel_...` |
-| **Bureau — Play 2** | `sensor.hue_play_2_pc_bureau_quotidien_kwh_um` | `..._mensuel_...` |
-| **Bureau — Play 3** | `sensor.hue_play_3_pc_bureau_quotidien_kwh_um` | `..._mensuel_...` |
-| **SDB — Miroir Sonoff** | `sensor.relais_lumiere_sdb_sonoff_quotidien_kwh_um` | `..._mensuel_...` |
-| **SDB — Hue** | `sensor.lampe_salle_de_bain_hue_quotidien_kwh_um` | `..._mensuel_...` |
-| **Chambre — Eric TL2** | `sensor.hue_color_candle_chambre_eric_quotidien_kwh_um` | `..._mensuel_...` |
-| **Chambre — Géraldine TL1** | `sensor.hue_color_candle_chambre_gege_quotidien_kwh_um` | `..._mensuel_...` |
-| **Chambre — B1** | `sensor.hue_white_lamp_chambre_1_quotidien_kwh_um` | `..._mensuel_...` |
-| **Chambre — B2** | `sensor.hue_white_lamp_chambre_2_quotidien_kwh_um` | `..._mensuel_...` |
+| **Salon — Table** | `sensor.hue_white_lamp_table_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Salon — Color 1** | `sensor.hue_color_candle_salon_1_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Salon — Ambiance 3** | `sensor.hue_ambiance_lamp_salon_3_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Salon — Ambiance 2** | `sensor.hue_ambiance_lamp_salon_2_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Salon — Ambiance 1** | `sensor.hue_ambiance_lamp_salon_1_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Entrée** | `sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Cuisine** | `sensor.hue_white_lamp_cuisine_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Couloir** | `sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Bureau — HUE 1** | `sensor.hue_white_lamp_bureau_1_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Bureau — HUE 2** | `sensor.hue_white_lamp_bureau_2_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Bureau — Play 1** | `sensor.hue_play_1_pc_bureau_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Bureau — Play 2** | `sensor.hue_play_2_pc_bureau_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Bureau — Play 3** | `sensor.hue_play_3_pc_bureau_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **SDB — Miroir Sonoff** | `sensor.relais_lumiere_sdb_sonoff_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **SDB — Hue** | `sensor.lampe_salle_de_bain_hue_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Chambre — Eric TL2** | `sensor.hue_color_candle_chambre_eric_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Chambre — Géraldine TL1** | `sensor.hue_color_candle_chambre_gege_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Chambre — B1** | `sensor.hue_white_lamp_chambre_1_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Chambre — B2** | `sensor.hue_white_lamp_chambre_2_quotidien_um_kwh_tpl` | `..._mensuel_...` |
 
-> Source : `utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml`
+> Source : `templates/P3_eclairage/P3_ENERGIE_TLP/P3_TPL_AMHQ_1_UNITE.yaml`
 
 ### Zones — Utility Meters Q/H/M/A (badges subtitle)
 
 | Zone | Q/H/M/A |
 |------|---------|
-| `sensor.eclairage_salon_5_[quotidien/hebdomadaire/mensuel/annuel]_kwh_um` | SALON |
-| `sensor.eclairage_appart_3_[...]_kwh_um` | ENTREE + CUISINE + COULOIR |
-| `sensor.eclairage_bureau_5_[...]_kwh_um` | BUREAU |
-| `sensor.eclairage_sdb_2_[...]_kwh_um` | SALLE DE BAIN |
-| `sensor.eclairage_chambre_4_[...]_kwh_um` | CHAMBRE |
+| `sensor.eclairage_salon_5_[quotidien/hebdomadaire/mensuel/annuel]_um_kwh_tpl` | SALON |
+| `sensor.eclairage_appart_3_[...]_um_kwh_tpl` | ENTREE + CUISINE + COULOIR |
+| `sensor.eclairage_bureau_5_[...]_um_kwh_tpl` | BUREAU |
+| `sensor.eclairage_sdb_2_[...]_um_kwh_tpl` | SALLE DE BAIN |
+| `sensor.eclairage_chambre_4_[...]_um_kwh_tpl` | CHAMBRE |
 
-> Source : `utility_meter/P3_eclairage/P3_UM_AMHQ_2_ZONE.yaml`
+> Source : `templates/P3_eclairage/P3_ENERGIE_TLP/P3_TPL_AMHQ_2_ZONE.yaml`
 
 ### Moyennes mensuelles — AVG (ligne rouge 30 JOURS)
 

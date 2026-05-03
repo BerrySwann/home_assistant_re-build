@@ -87,14 +87,28 @@ actions:
     sequence:
     - alias: 'CONDITION : NOTIF UNIQUEMENT SI ÉCHEC'
       condition: template
-      value_template: "{{ \n  states('sensor.mode_ete_hiver') in ['unknown', 'unavailable']\n\
-        \  or\n  states('sensor.groupe') in ['unknown', 'unavailable']\n}}\n"
+      value_template: >
+        {{
+          states('sensor.mode_ete_hiver') in ['unknown', 'unavailable'] or
+          states('sensor.groupe') in ['unknown', 'unavailable'] or
+          states('sensor.temperature_cible') in ['unknown', 'unavailable'] or
+          states('sensor.temperature_eco_hiver_corrige') in ['unknown', 'unavailable'] or
+          states('sensor.temperature_corrige_mamour_hivers') in ['unknown', 'unavailable'] or
+          states('sensor.temperature_corrige_eric_hivers') in ['unknown', 'unavailable']
+        }}
     - alias: 'NOTIF : ALERTE ATTENTE CAPTEURS'
       action: notify.mobile_app_eric
       data:
         title: '[AJ] ATTENTE CAPTEURS'
-        message: Essai n°{{ repeat.index }}... Les capteurs de jour ne sont pas prêts.
-          Pause 30s.
+        message: >
+          KO:
+          {%- if states('sensor.mode_ete_hiver') in ['unknown', 'unavailable'] %} mode_ete_hiver{%- endif %}
+          {%- if states('sensor.groupe') in ['unknown', 'unavailable'] %} groupe{%- endif %}
+          {%- if states('sensor.temperature_cible') in ['unknown', 'unavailable'] %} temp_cible{%- endif %}
+          {%- if states('sensor.temperature_eco_hiver_corrige') in ['unknown', 'unavailable'] %} temp_eco{%- endif %}
+          {%- if states('sensor.temperature_corrige_mamour_hivers') in ['unknown', 'unavailable'] %} temp_mamour{%- endif %}
+          {%- if states('sensor.temperature_corrige_eric_hivers') in ['unknown', 'unavailable'] %} temp_eric{%- endif %}
+          Essai n{{ repeat.index }}... Pause 30s.
     - alias: 'PAUSE : AVANT NOUVEL ESSAI'
       delay: 00:00:30
 - alias: 'INIT : CALCUL GLOBAL DES VARIABLES'

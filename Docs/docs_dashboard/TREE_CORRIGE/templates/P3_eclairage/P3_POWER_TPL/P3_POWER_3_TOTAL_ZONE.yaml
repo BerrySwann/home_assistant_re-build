@@ -1,0 +1,73 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. TEMPLATE : TOTAL PUISSANCE ÉCLAIRAGE — 19 AMPOULES (W)           │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Un capteur template calculant la puissance instantanée totale (W) de
+# l'éclairage en additionnant les 19 ampoules directement via leurs entités
+# PowerCalc (_power). Source principale du pôle Éclairage dans
+# total_pour_les_7_postes.yaml.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : sum(sensor.{slug}_power | float(0)) sur les 19 ampoules.
+# - Slugs canoniques P3 (CLAUDE.md) + suffixe _power :
+#   1. ENTRÉE  : hue_white_lamp_entree
+#   2-6 SALON  : hue_white_lamp_table, hue_ambiance_lamp_salon_1/2/3, hue_color_candle_salon_1
+#   7. CUISINE : hue_white_lamp_cuisine
+#   8. COULOIR : hue_white_lamp_couloir
+#   9-13 BUREAU: hue_play_1/2/3_pc_bureau, hue_white_lamp_bureau_1/2
+#   14-15 SDB  : relais_lumiere_sdb_sonoff, lampe_salle_de_bain_hue
+#   16-19 CHAMBRE: hue_white_lamp_chambre_1/2, hue_color_candle_chambre_gege/eric
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL     | CAPTEUR BRUT (source)              | CE FICHIER (unique_id)              | AVAL                                      |
+# |:-------------|:-----------------------------------|:------------------------------------|:------------------------------------------|
+# | PowerCalc    | sensor.{slug}_power × 19           | eclairage_total_group_puissance_tpl | total_pour_les_7_postes.yaml → L2C1/L2C3 |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Sources = slugs canoniques P3 (CLAUDE.md) + _power — NE PAS inventer de variantes.
+# - PowerCalc doit être actif pour que les _power soient disponibles.
+# - Ce fichier remplace l'ancienne chaîne P3_POWER_2 → P3_POWER_3 (zones intermédiaires
+#   supprimées — on somme directement les 19 ampoules).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (répartition puissance temps réel — pôle Éclairage).
+# - L2C3 Conso Énergie Éclairage (puissance totale instantanée).
+
+- sensor:
+    # --- eclairage_total_group_puissance_tpl ---
+    - name: "Eclairage Total Group Puissance TPL"
+      unique_id: eclairage_total_group_puissance_tpl
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      icon: mdi:lightbulb-group
+      state: >
+        {% set sensors = [
+          'sensor.hue_white_lamp_entree_power',
+          'sensor.hue_white_lamp_table_power',
+          'sensor.hue_ambiance_lamp_salon_1_power',
+          'sensor.hue_ambiance_lamp_salon_2_power',
+          'sensor.hue_ambiance_lamp_salon_3_power',
+          'sensor.hue_color_candle_salon_1_power',
+          'sensor.hue_white_lamp_cuisine_power',
+          'sensor.hue_white_lamp_couloir_power',
+          'sensor.hue_play_1_pc_bureau_power',
+          'sensor.hue_play_2_pc_bureau_power',
+          'sensor.hue_play_3_pc_bureau_power',
+          'sensor.hue_white_lamp_bureau_1_power',
+          'sensor.hue_white_lamp_bureau_2_power',
+          'sensor.relais_lumiere_sdb_sonoff_power',
+          'sensor.lampe_salle_de_bain_hue_power',
+          'sensor.hue_white_lamp_chambre_1_power',
+          'sensor.hue_white_lamp_chambre_2_power',
+          'sensor.hue_color_candle_chambre_gege_power',
+          'sensor.hue_color_candle_chambre_eric_power'
+        ] %}
+        {{ sensors | map('states') | map('float', default=0) | sum | round(1) }}
+
+# annotations_log:
+# [Rebuild] Remplace ancienne chaîne P3_POWER_2 (zones) → P3_POWER_3.
+# [Sources] 19 ampoules directes via slugs canoniques P3 (CLAUDE.md) + _power.
+# [unique_id] eclairage_total_group_puissance_tpl — suffixe _tpl ajouté (cohérence archi TPL).
