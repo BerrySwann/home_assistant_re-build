@@ -130,7 +130,7 @@
     state_class: total
     icon: mdi:lightbulb
     state: >
-      {{ states('sensor.eclairage_total_group_quotidien_um') | float(0) | round(3) }}
+      {{ states('sensor.eclairage_total_unit_quotidien_kwh_tpl') | float(0) | round(3) }}
 
   # ╭──────────────────────────────────────────────────────────────────────╮
   # │    PÔLE 7 — AUTRE (Veilles, Têtes de lit, Chargeurs, Horloge)        │
@@ -193,3 +193,4 @@
 # annotations_log:
 # [L33,48,62,74,90,105,116,150] state_class: total_increasing → measurement
 # [L77-82] P1 UM Pôle 4 Chauffage : _quotidien_um → _quotidien_um (×6)
+# [Pôle 6] eclairage_total_group_quotidien_um → eclairage_total_unit_quotidien_kwh_tpl (source P3_TPL_AMHQ_3_TOTAL)

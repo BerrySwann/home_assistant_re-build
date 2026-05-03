@@ -5,11 +5,16 @@
 # ## 📝 DESCRIPTION :
 # Neuf capteurs templates calculant la consommation hebdomadaire identifiée
 # par pôle fonctionnel (7 pôles), plus un capteur de maximum dynamique et
-# un capteur de total identifié.
+# un capteur de total identifié. Sources : utility_meters AMHQ hebdomadaires P1/P2/P3.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Même structure que le fichier journalier — cycle hebdomadaire AMHQ.
-# - Reset le lundi 00h00. Max dynamique : buffer 2 kWh.
+# - Pôle 1 Hygiène     : lave_linge + lave_vaisselle + fer_a_repasser (P2 UM Hebdomadaire)
+# - Pôle 2 Cuisine     : four_mo + petit_dej + airfryer + four_plaque (P2 UM Hebdomadaire)
+# - Pôle 3 Froid       : frigo + congelateur (P2 UM Hebdomadaire)
+# - Pôle 4 Chauffage   : clim_salon + radiateur + clim_bureau + soufflant + seche_serv + clim_chambre (P1 UM Hebdomadaire)
+# - Pôle 5 Multimédia  : box_internet + tv_salon + tv_chambre + pc_gege + pc_bureau (P2 UM Hebdomadaire)
+# - Pôle 6 Éclairage   : eclairage_total_unit_hebdomadaire_kwh_tpl (P3 TPL AMHQ 3 TOTAL)
+# - Pôle 7 Autre       : all_standby + tete_de_lit + chargeur_salon + horloge (P2 UM Hebdomadaire)
 #
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
@@ -20,12 +25,18 @@
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Tous les UM P1/P2/P3 utilisent le suffixe _um (nomenclature unifiée).
-# - state_class: measurement — reset le lundi 00h00 via UM.
+# - state_class: total — ces capteurs reflètent les UM qui se resetent le lundi 00h00.
+#   Ne PAS utiliser total_increasing (valeur décroissante → WARNING recorder).
+# - Max dynamique : buffer 2 kWh (échelle hebdomadaire).
+# - Pôle 6 source : eclairage_total_unit_hebdomadaire_kwh_tpl (TPL layer) — PAS un _um brut.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale (graphique répartition par pôle — hebdomadaire).
 
 - sensor:
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 1 — HYGIÈNE (Lave-linge, Lave-vaisselle, Fer)                │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_poste_hygiene_hebdomadaire ---
   - name: "Diag Poste Hygiene Hebdomadaire"
     unique_id: diag_poste_hygiene_hebdomadaire
@@ -39,6 +50,9 @@
       {% set fr = states('sensor.prise_bureau_fer_a_repasser_nous_hebdomadaire_um') | float(0) %}
       {{ (ll + lv + fr) | round(3) }}
 
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 2 — CUISINE (Micro-ondes, Petit-dej, AirFryer, Four/Plaque)  │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_poste_cuisine_hebdomadaire ---
   - name: "Diag Poste Cuisine Hebdomadaire"
     unique_id: diag_poste_cuisine_hebdomadaire
@@ -53,6 +67,9 @@
       {% set fp = states('sensor.four_et_plaque_de_cuisson_hebdomadaire_um') | float(0) %}
       {{ (mo + pd + af + fp) | round(3) }}
 
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 3 — FROID (Frigo, Congélateur)                               │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_poste_froid_hebdomadaire ---
   - name: "Diag Poste Froid Hebdomadaire"
     unique_id: diag_poste_froid_hebdomadaire
@@ -65,6 +82,9 @@
       {% set cg = states('sensor.prise_congelateur_cuisine_nous_hebdomadaire_um') | float(0) %}
       {{ (fr + cg) | round(3) }}
 
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 4 — CHAUFFAGE/CLIM (Salon, Cuisine, Bureau, SDB, Chambre)    │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_poste_chauffage_hebdomadaire ---
   - name: "Diag Poste Chauffage Hebdomadaire"
     unique_id: diag_poste_chauffage_hebdomadaire
@@ -81,6 +101,9 @@
       {% set cc = states('sensor.clim_chambre_hebdomadaire_um') | float(0) %}
       {{ (cs + rc + cb + ss + sv + cc) | round(3) }}
 
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 5 — MULTIMÉDIA (Box, TV×2, PC×2)                             │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_poste_multimedia_hebdomadaire ---
   - name: "Diag Poste Multimedia Hebdomadaire"
     unique_id: diag_poste_multimedia_hebdomadaire
@@ -96,6 +119,9 @@
       {% set pb = states('sensor.prise_bureau_pc_ikea_hebdomadaire_um') | float(0) %}
       {{ (bx + ts + tc + pg + pb) | round(3) }}
 
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 6 — ÉCLAIRAGE (Total appartement)                            │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_poste_eclairage_hebdomadaire ---
   - name: "Diag Poste Eclairage Hebdomadaire"
     unique_id: diag_poste_eclairage_hebdomadaire
@@ -104,8 +130,11 @@
     state_class: total
     icon: mdi:lightbulb
     state: >
-      {{ states('sensor.eclairage_total_group_hebdomadaire_um') | float(0) | round(3) }}
+      {{ states('sensor.eclairage_total_unit_hebdomadaire_kwh_tpl') | float(0) | round(3) }}
 
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    PÔLE 7 — AUTRE (Veilles, Têtes de lit, Chargeurs, Horloge)        │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_poste_autre_hebdomadaire ---
   - name: "Diag Poste Autre Hebdomadaire"
     unique_id: diag_poste_autre_hebdomadaire
@@ -120,7 +149,10 @@
       {% set hr = states('sensor.prise_horloge_ikea_hebdomadaire_um') | float(0) %}
       {{ (vs + tl + ch + hr) | round(3) }}
 
-  # --- diag_max_poste_hebdomadaire ---
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    MAX DYNAMIQUE (axe Y des barres + 2 kWh buffer)                   │
+  # ╰──────────────────────────────────────────────────────────────────────╯
+  # --- diag_max_poste_hebdomadaire_dynamique ---
   - name: "Diag Max Poste Hebdomadaire Dynamique"
     unique_id: diag_max_poste_hebdomadaire_dynamique
     unit_of_measurement: "kWh"
@@ -137,6 +169,9 @@
       ] %}
       {{ (poles | max + 2) | round(2) }}
 
+  # ╭──────────────────────────────────────────────────────────────────────╮
+  # │    TOTAL IDENTIFIÉ (somme des 7 pôles)                               │
+  # ╰──────────────────────────────────────────────────────────────────────╯
   # --- diag_total_identifie_hebdomadaire ---
   - name: "Diag Total Identifie Hebdomadaire"
     unique_id: diag_total_identifie_hebdomadaire
@@ -156,6 +191,8 @@
       {{ (poles | sum) | round(2) }}
 
 # annotations_log:
-# [Toutes state_class] measurement (reset lundi 00h00)
-# [Pôle 4] _hebdomadaire_um sur toutes les sources P1
-# [Max buffer] 2 kWh
+# [Toutes state_class] total_increasing → total (reset lundi 00h00)
+# [Header CALCUL] détail complet des 7 pôles ajouté (était "Même structure...")
+# [Header IMPORTANT] measurement → total + ajout note Pôle 6 TPL
+# [Tous pôles] boîtes ASCII secondaires ╭─╮ ajoutées (alignement avec quotidien)
+# [Pôle 6] eclairage_total_group_hebdomadaire_um → eclairage_total_unit_hebdomadaire_kwh_tpl (P3_TPL_AMHQ_3_TOTAL)

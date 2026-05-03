@@ -1,9 +1,9 @@
 # L4C2 — VIGNETTE : Mini PC
-*Dernière mise à jour : 2026-03-24*
+*Dernière mise à jour : 2026-05-03*
 
-> ⚠️ **NOTE TRANSITION :** La vignette affiche déjà le nom "Mini PC" (icône `phu:intel-nuc`).
-> La page associée pointe encore vers `/dashboard-tablette/raspberry-pi4` (ancienne page RPi4).
-> Une `PAGE_MINI_PC.md` sera créée lors de la bascule définitive vers le Mini PC.
+> ✅ **STATUT : DÉPLOYÉE — Mini PC Intel NUC en production.**
+> Entité principale : `sensor.temperature_cpu_package` (commande linux `sensors`).
+> Navigation : `/dashboard-tablette/systeme-mini-pc` (page Mini PC définitive).
 
 ---
 
@@ -23,9 +23,9 @@
 
 **Type de carte :** `custom:button-card`
 **Position dashboard :** L4C2 (Ligne 4, Colonne 2)
-**tap_action :** Navigue vers `/dashboard-tablette/raspberry-pi4` *(temporaire — ancienne page RPi4)*
+**tap_action :** Navigue vers `/dashboard-tablette/systeme-mini-pc`
 
-Vignette carrée affichant 5 métriques système du Mini PC (via intégration `system_monitor`) + consommation de la prise IKEA :
+Vignette carrée affichant 5 métriques système du Mini PC (via intégration `system_monitor` + `sensors` Linux) + consommation de la prise IKEA :
 
 | Zone grille | Contenu |
 |-------------|---------|
@@ -63,25 +63,25 @@ Vignette carrée affichant 5 métriques système du Mini PC (via intégration `s
 
 ```yaml
 type: custom:button-card
-entity: sensor.system_monitor_temperature_du_processeur
+entity: sensor.temperature_cpu_package
 icon: phu:intel-nuc
 aspect_ratio: 1/1
 name: _____ Mini - P.C. _____
 entities:
-  - sensor.system_monitor_temperature_du_processeur
+  - sensor.temperature_cpu_package
   - sensor.system_monitor_utilisation_du_processeur
   - sensor.system_monitor_utilisation_de_la_memoire
   - sensor.system_monitor_utilisation_du_disque
   - sensor.prise_mini_pc_ikea_power
 triggers_update:
-  - sensor.system_monitor_temperature_du_processeur
+  - sensor.temperature_cpu_package
   - sensor.system_monitor_utilisation_du_processeur
   - sensor.system_monitor_utilisation_de_la_memoire
   - sensor.system_monitor_utilisation_du_disque
   - sensor.prise_mini_pc_ikea_power
 tap_action:
   action: navigate
-  navigation_path: /dashboard-tablette/raspberry-pi4
+  navigation_path: /dashboard-tablette/systeme-mini-pc
 styles:
   card:
     - border-radius: 10px
@@ -111,9 +111,11 @@ styles:
   icon:
     - color: |
         [[[
-          if (entity.state < 65) return 'rgb(70, 175, 75)';
-          if (entity.state >= 65 && entity.state < 75) return 'orange';
-          else return 'rgb(244,67,54)';
+          if (!entity || entity.state === 'unavailable' || entity.state === 'unknown') return '#aaaaaa';
+          const t = parseFloat(entity.state);
+          if (t < 65) return 'rgb(70, 175, 75)';
+          if (t < 75) return 'orange';
+          return 'rgb(244,67,54)';
         ]]]
     - width: 100%
   custom_fields:
@@ -222,13 +224,13 @@ custom_fields:
 
 | Entité | Type | Rôle | Source |
 |--------|------|------|--------|
-| `sensor.system_monitor_temperature_du_processeur` | NAT | T° CPU (°C) — entité principale | Intégration `system_monitor` (HA) |
-| `sensor.system_monitor_utilisation_du_processeur` | NAT | CPU % | Intégration `system_monitor` |
+| `sensor.temperature_cpu_package` | MQTT | T° CPU Package (°C) — entité principale | Script `lm-sensors` (VM) → MQTT |
+| `sensor.system_monitor_utilisation_du_processeur` | NAT | CPU % | Intégration `system_monitor` (HA) |
 | `sensor.system_monitor_utilisation_de_la_memoire` | NAT | RAM % | Intégration `system_monitor` |
-| `sensor.system_monitor_utilisation_du_disque` | NAT | Disk % | Intégration `system_monitor` |
+| `sensor.system_monitor_utilisation_du_disque` | NAT | Disk % (VM ~30 GiB) | Intégration `system_monitor` |
 | `sensor.prise_mini_pc_ikea_power` | NAT | Puissance W (prise IKEA Inspelning) | Intégration Zigbee2MQTT / IKEA |
 
-> **Note :** `sensor.prise_mini_pc_ikea_power` est la prise IKEA Inspelning alimentant le Mini PC. Unité : W.
+> **Note T° :** `sensor.temperature_cpu_package` est publié via MQTT par un script `lm-sensors` tournant dans la VM. `system_monitor` ne remonte aucune T° en contexte VM Proxmox.
 
 ---
 
@@ -283,7 +285,8 @@ Les icônes (server, lightning, memory, harddisk) restent en `rgb(70,175,75)` fi
 | Border | `3px double white` |
 | Font size | `11px` (valeurs) / `13px` (nom) |
 | Grid areas | `"i temp" / "n n" / "cpu cpu" / "conso conso" / "ram ram" / "sd sd"` |
-| tap_action | navigate → `/dashboard-tablette/raspberry-pi4` *(à migrer)* |
+| tap_action | navigate → `/dashboard-tablette/systeme-mini-pc` |
+| Entité principale | `sensor.temperature_cpu_package` (MP_01 — sensors Linux) |
 
 ---
 

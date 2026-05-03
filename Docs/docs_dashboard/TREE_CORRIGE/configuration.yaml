@@ -17,6 +17,7 @@
 # - shell_command: !include shell_command.yaml
 # - camera       : DÉSACTIVÉ (obsolète — supprimé de la config active)
 # - notify       : SUPPRIMÉ YAML (migré vers intégration File UI — HA 2024.12+)
+# - fan          : SUPPRIMÉ YAML (rpi_gpio_pwm — spécifique RPi4, incompatible Mini-PC)
 # - input_button : !include input_button.yaml
 # - group        : !include groups.yaml
 # - sql          : !include sql.yaml
@@ -35,6 +36,8 @@
 #   Paramètres → Appareils & services → + Ajouter → File.
 #   Dans les automations : remplacer notify.diag_log_file par notify.send_message
 #   avec target: entity_id: notify.<nom_entité_créée_dans_UI>.
+# - fan: rpi_gpio_pwm SUPPRIMÉ — incompatible Mini-PC Intel NUC (pas de GPIO).
+#   Supervision thermique → MP_01_sonde_température_mini-pc.yaml.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Non applicable — fichier système racine. Charge toutes les vignettes
@@ -156,7 +159,7 @@ input_datetime: !include input_datetime.yaml
 #    filename: diag_conso_elec.txt                                               # "[L132] modif"
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ BASE DE DONNEE MARIADB                                                   │
+# │ BASE DE DONNEE MARIADB (LXC 201 — 10.32.154.201)                        │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 
 # --- recorder ---
@@ -224,26 +227,32 @@ http:
     - 172.30.0.0/16   # Tous les autres add-ons / ingress / tunnels
 
     # --- Réseau de la maison ---
-    - 192.168.1.0/24  # Ton LAN local (Vence)
+    - 10.32.154.0/24  # LAN local (Vence — GL-iNet MT3000)     # "[modif] 192.168.1.0/24 → 10.32.154.0/24"
 
   # --- Sécurité (Bannissement IP) ---
   ip_ban_enabled: true         # Protège l'accès à HA
   login_attempts_threshold: 3  # Seuil de tentatives avant bannissement
 
 # annotations_log:
-# - [L95]  camera: !include camera.yaml → commenté (obsolète, causait une erreur au démarrage).
-# - [L16]  En-tête documentation mis à jour : camera marqué DÉSACTIVÉ.
-# - [L37]  Ajout bloc homeassistant: allowlist_external_dirs: /config (requis File integration).
-# - [L128] notify: platform: file → commenté + remplacé par bloc explicatif migration UI.
-# - [L10]  En-tête mis à jour : notify supprimé YAML / allowlist_external_dirs documenté.
+# - [L95]   camera: !include camera.yaml → commenté (obsolète, causait une erreur au démarrage).
+# - [L16]   En-tête documentation mis à jour : camera marqué DÉSACTIVÉ.
+# - [L37]   Ajout bloc homeassistant: allowlist_external_dirs: /config (requis File integration).
+# - [L128]  notify: platform: file → commenté + remplacé par bloc explicatif migration UI.
+# - [L10]   En-tête mis à jour : notify supprimé YAML / allowlist_external_dirs documenté.
+# - [modif] fan: rpi_gpio_pwm → commenté (incompatible Mini-PC Intel NUC — pas de GPIO).
+# - [modif] http: trusted_proxies: 192.168.1.0/24 → 10.32.154.0/24 (LAN Vence réel).
+# - [modif] recorder: titre boîte ASCII mis à jour → LXC 201 — 10.32.154.201.
+# - [modif] En-tête : fan SUPPRIMÉ documenté dans DESCRIPTION et PIÈGES.
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ RPI_FAN RASPBERRY PI4                                                    │
+# │ FAN — DÉSACTIVÉ (RPi4 → Mini-PC Intel NUC)                              │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-fan:
-  - platform: rpi_gpio_pwm
-    fans:
-      - name: RPI Cooling Fan
-        unique_id: rpi_cooling_fan
-        pin: 14
+# ⛔ SUPPRIMÉ — rpi_gpio_pwm incompatible Mini-PC Intel NUC (pas de GPIO).   # "[modif] supprimé"
+# ✅ Supervision thermique Mini-PC → MP_01_sonde_température_mini-pc.yaml
+#fan:                                                                         # "[modif] supprimé"
+#  - platform: rpi_gpio_pwm                                                   # "[modif] supprimé"
+#    fans:                                                                     # "[modif] supprimé"
+#      - name: RPI Cooling Fan                                                 # "[modif] supprimé"
+#        unique_id: rpi_cooling_fan                                            # "[modif] supprimé"
+#        pin: 14                                                               # "[modif] supprimé"
 

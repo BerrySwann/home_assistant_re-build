@@ -449,14 +449,14 @@ ReBuild/                                         (dossier de travail local — C
 │   └── [sous-dossiers par vignette/page — voir règle ci-dessous]
 │
 ├── docs_dashboard/                              (tout ce qui concerne le dashboard HA config)
-│   ├── TREE_CORRIGE/                            (← image exacte du GitHub re-build — dernière sync: 2026-04-19)
-│   │   ├── sensors/                             (13 fichiers — intégrations kWh, mini/maxi, qualité air)
+│   ├── TREE_CORRIGE/                            (← image exacte du GitHub re-build — dernière sync: 2026-04-26)
+│   │   ├── sensors/                             (P0 actif, P1_DUT actif — P1_kWh/#, P2_prise/#×3, P3/#×3 désactivés)
 │   │   ├── templates/                           (34 fichiers — calculs, AVG, UI, météo, présence, stores)
-│   │   ├── utility_meter/                       (10 fichiers — compteurs AMHQ)
-│   │   ├── command_line/                        (2 fichiers — météo, github_maintenance)
-│   │   ├── input_booleans/                      (5 fichiers — P1, P3, P4)
+│   │   ├── utility_meter/                       (P0×3, P1×1, P2/#×3 désactivés, P3×3, meteo×1)
+│   │   ├── command_line/                        (3 dossiers — meteo, github_maintenance, sante_systeme_mini_pc)
+│   │   ├── input_booleans/                      (5 fichiers — P1×2, P3×2, P4×1)
 │   │   ├── input_number/                        (1 fichier)
-│   │   └── [root]                               (configuration.yaml, groups.yaml, scripts.yaml, shell_command.yaml, sql.yaml, scenes.yaml, input_button.yaml, input_datetime.yaml, input_select.yaml, automations.yaml, #*.yaml ×4)
+│   │   └── [root]                               (configuration.yaml, groups.yaml, scripts.yaml, shell_command.yaml, sql.yaml, scenes.yaml, input_button.yaml, input_datetime.yaml, input_select.yaml, automations.yaml, Dashboard ×2, #*.yaml ×4)
 │   ├── TREE_ORIGINE/                            (snapshot GitHub de référence — état avant corrections)
 │   │   ├── sensors/
 │   │   ├── templates/
@@ -466,23 +466,26 @@ ReBuild/                                         (dossier de travail local — C
 │
 ├── docs_automations/                            (tout ce qui concerne les automations)
 │   ├── TREE_CORRIGE/                            (← SOURCE DE VÉRITÉ — coller dans HA UI un par un)
-│   │   ├── P1_clim_chauffage/                   (13 fichiers — clim, gardien, notifs)
+│   │   ├── P1_clim_chauffage/                   (11 fichiers A0→L + old/ — clim, gardien, notifs)
 │   │   ├── P1_cuisine/                          (2 fichiers — radiateur)
-│   │   ├── P1_sdb/                              (1 fichier — minuterie sèche-serv 2h ✅)
-│   │   ├── P2_prises/                           (6 fichiers — PC, TV, prises éco)
+│   │   ├── P1_sdb/                              (1 fichier — minuterie sèche-serv)
+│   │   ├── P2_prises/                           (6 fichiers — PC, TV, prises éco, rodret)
 │   │   ├── P3_eclairage/                        (1 fichier — lumière entrée)
+│   │   ├── P2_bouton_rodret_soufflant_sdb.yaml  (root — bouton BP virtuel SDB)
+│   │   ├── P3_salon_bouton_inter_ikea_4.yaml    (root — bouton inter IKEA salon)
+│   │   ├── P3_salon_bouton_inter_somrig.yaml    (root — bouton inter SOMRIG salon)
 │   │   ├── backup/                              (4 fichiers — git hourly/weekly/alerte/démarrage)
-│   │   ├── energie/                             (1 fichier — surveillance gros électro HP)
+│   │   ├── energie/                             (2 fichiers — surveillance HP + basculement HPHC)
 │   │   ├── meteo/                               (5 fichiers — alertes, foudre, tendances)
 │   │   ├── stores/                              (2 fichiers — salon, bureau)
-│   │   └── systeme/                             (4 fichiers — diag, purge DB, VSCode, watchdog piles, Z2M)
+│   │   └── systeme/                             (6 fichiers — diag, purge DB, VSCode, watchdog, Z2M, veille_github)
 │   ├── TREE_ORIGINE/                            (snapshot avant corrections — référence historique)
 │   └── docs/                                    (INDEX_AUTOMATIONS, TRIAGE, PROD_vs_REBUILD_DIFF, IDs REF...)
 │
 └── docs_scripts/                                (tout ce qui concerne les scripts HA)
     ├── TREE_CORRIGE/                            (scripts YAML corrigés)
     ├── TREE_ORIGINE/                            (scripts YAML originaux)
-    └── docs/                                    (SCRIPTS_CLIM_ON_OFF.md)
+    └── docs/                                    (INDEX_SCRIPTS.md, SCRIPTS_CLIM_ON_OFF.md, SCRIPT_J2_0_SECU_ARRET_CLIM.md)
 ```
 
 > **Note :** La documentation vignettes (18 vignettes) est dans `docs_dashboard/docs/`
@@ -490,9 +493,12 @@ ReBuild/                                         (dossier de travail local — C
 ```text
 docs_dashboard/docs/                             (documentation — vignettes, pages, guides — 17 vignettes actives)
     ├── IA/
-    │   └── IA_CONTEXT_BASE.md
+    │   ├── IA_CONTEXT_BASE.md
+    │   └── analyse_energetique_appart.md
     ├── CONFIG_ROOT/
     │   └── CONFIG_ROOT.md
+    ├── MOC_DASHBOARD.md                         (vue d'ensemble — Map Of Content dashboard)
+    ├── INDEX_PAGES.md
     ├── L1C1_METEO/
     │   ├── L1C1_VIGNETTE_METEO.md
     │   ├── PAGE_METEO.md
@@ -526,8 +532,8 @@ docs_dashboard/docs/                             (documentation — vignettes, p
     │   ├── L3C3_VIGNETTE_STORES.md
     │   └── PAGE_STORES.md
     ├── L4C1_FREEBOX/                                ⚠️ Obsolète — Freebox supprimée du setup
-    │   ├── L4C1_VIGNETTE_FREEBOX.md
-    │   └── PAGE_FREEBOX.md
+    │   ├── L4C1_VIGNETTE_empty.md
+    │   └── PAGE_empty.md
     ├── L4C2_MINI_PC/
     │   ├── L4C2_VIGNETTE_MINI_PC.md
     │   ├── PAGE_RASPI.md                        (page transitoire RPi4 — conservée jusqu'à migration)
@@ -558,7 +564,8 @@ docs_dashboard/docs/                             (documentation — vignettes, p
     │   └── VIGNETTE_WIFI_PRESENCE.md
     ├── DEPENDANCES_GLOBALES.md                  (chaîne complète de dépendances — toutes vignettes)
     ├── WORKFLOW_REBUILD.md                      (workflow création/modification doc vignette)
-    └── _TEMPLATE_DOC.md
+    ├── _TEMPLATE_DOC.md
+    └── PROD_LISTING_2026-04-05.md
 ```
 
 ---
@@ -617,11 +624,21 @@ Dashboard/
 ├── #sensors.yaml                                (désactivé — remplacé par /config/sensors/)
 ├── #templates.yaml                              (désactivé — remplacé par /config/templates/)
 └── #utility_meter.yaml                          (désactivé — remplacé par /config/utility_meter/)
+/config/input_booleans
+├── P1
+│   ├── P1_ACS_IB_01_arret_clim_securises.yaml
+│   └── P1_BV_BI_02_inter_soufflant_sdb.yaml
+├── P3
+│   ├── P3_BV_01_IB_inter_smorig_salon.yaml
+│   └── P3_BV_02_IB_inter_rodret_salon.yaml
+└── P4
+    └── P4_presence_wifi.yaml
 /config/utility_meter
 ├── P0_Energie_total
 │   └── Genelec_appart
-│       ├── 01_UM_AMHQ.yaml
-│       └── 02_UM_genelec_appart_HPHC_AMHQ.yaml
+│       ├── 01_kWh_UM_AMHQ.yaml                 (Riemann — A/B test vs 02)
+│       ├── 02_UM_AMHQ.yaml                     (direct Ecojoko — A/B test vs 01)
+│       └── 03_UM_genelec_appart_HPHC_AMHQ.yaml (HP/HC AMHQ)
 ├── P1_clim_chauffage
 │   └── P1_UM_AMHQ.yaml
 ├── P2_prise
@@ -708,26 +725,26 @@ Dashboard/
     ├── Mise_a_jour_home_assistant.yaml
     └── nb_fenetre_ouvert_ferme_autom.yaml       (nbre_de_fenetres_ouvertes/fermees ×2)
 /config/sensors
-├── P0_Energie_total_min_maxi_diag
-│   ├── P0_Genelec_appart
-│   │   └── P0_kWh_genelec_appart.yaml           (Riemann kWh — index cumulatif Genelec appart)
-│   └── P0_Genelec_appart_mini_maxi
-│       └── P0_MINI_MAXI_AVG_Genelec_appart.yaml (stats min/max AVG — puissance W Genelec)
 ├── Air_quality                                  ([ A ] — catégorie lettrée)
 │   └── A_01_AIR_QUALITY.yaml                    (stats mean 24h PM2.5 + tCOV × 3 pièces)
+├── P0_Energie_total_min_maxi_diag
+│   ├── P0_Genelec_appart
+│   │   └── #P0_kWh_genelec_appart.yaml.#        (désactivé — Riemann kWh Genelec appart)
+│   └── P0_Genelec_appart_mini_maxi
+│       └── P0_MINI_MAXI_AVG_Genelec_appart.yaml (stats min/max AVG — puissance W Genelec)
 ├── P1_clim_chauffage
 │   ├── P1_DUT
 │   │   └── P1_DUT_clim_chauffage.yaml           (history_stats DUT × 6 équipements P1)
 │   └── P1_kWh
-│       └── P1_kWh_clim_chauffage.yaml           (Riemann kWh — sources NOUS smart plugs P1)
+│       └── #P1_kWh_clim_chauffage.yaml.#        (désactivé — Riemann kWh NOUS smart plugs P1)
 ├── P2_prise
-│   ├── P2_kWh_prises.yaml
-│   ├── P2_kWh_veilles.yaml
-│   └── P2_Wh_mini_pc.yaml                          (Riemann Wh — intentionnel, sans unit_prefix:k → AVG formule conso/h)
+│   ├── #P2_kWh_prises.yaml.#                    (désactivé)
+│   ├── #3 P2_kWh_veilles.yaml.#                 (désactivé)
+│   └── #P2_Wh_mini_pc.yaml.#                    (désactivé — Riemann Wh mini-PC)
 ├── P3_eclairage
-│   ├── P3_kWh_1_UNITE.yaml
-│   ├── P3_kWh_2_ZONE.yaml
-│   └── P3_kWh_3_TOTAL.yaml
+│   ├── #P3_kWh_1_UNITE.yaml.#                   (désactivé)
+│   ├── #P3_kWh_2_ZONE.yaml.#                    (désactivé)
+│   └── #P3_kWh_3_TOTAL.yaml.#                   (désactivé)
 └── meteo
     └── M_03_meteo_sensors_blitzortung.yaml
 ```
@@ -740,8 +757,9 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 ### 📂 UTILITY METER
 
 **Pôle 0 - Énergie Globale**
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/P0_Energie_total/Genelec_appart/02_UM_genelec_appart_HPHC_AMHQ.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/P0_Energie_total/Genelec_appart/01_kWh_UM_AMHQ.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/P0_Energie_total/Genelec_appart/02_UM_AMHQ.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/P0_Energie_total/Genelec_appart/03_UM_genelec_appart_HPHC_AMHQ.yaml
 
 **Pôle 1 - Chauffage & Clim**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml
@@ -769,7 +787,7 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Genelec_appart/02_ratio_hp_hc.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Genelec_appart/03_AVG_genelec_appart.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/Linky/MyElectricalData.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/total%20par%20poste_7/total_par_poste_7.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P0_Energie_total_diag/total_pour_les_7_postes/total_pour_les_7_postes.yaml
 
 **Pôle 1 - Chauffage & Clim**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml

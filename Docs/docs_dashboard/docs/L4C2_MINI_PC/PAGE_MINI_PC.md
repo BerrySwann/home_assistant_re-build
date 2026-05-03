@@ -1,13 +1,12 @@
 # PAGE MINI PC — Documentation complète
 
-> ⚠️ **STATUT : PAGE DÉFINITIVE MINI PC — À DÉPLOYER après migration RPi4 → Mini PC**
-> Cette page remplacera `PAGE_RASPI.md` une fois le Mini PC opérationnel en production HA.
+> ✅ **STATUT : PAGE DÉPLOYÉE — Mini PC Intel NUC en production (2026-05-03)**
 
 ---
 
-![Badge](https://img.shields.io/badge/HA-2026.3-blue)
-![Badge](https://img.shields.io/badge/Modifié_le-2026--03--25-lightgrey)
-![Badge](https://img.shields.io/badge/Statut-PRÊT_migration-orange)
+![Badge](https://img.shields.io/badge/HA-2026.4-blue)
+![Badge](https://img.shields.io/badge/Modifié_le-2026--05--03-lightgrey)
+![Badge](https://img.shields.io/badge/Statut-PROD-green)
 
 ---
 
@@ -15,7 +14,7 @@
 
 | Champ | Valeur |
 |-------|--------|
-| **Path dashboard** | `/dashboard-tablette/raspberry-pi4` ← chemin actuel (conservé, aucun impact) |
+| **Path dashboard** | `/dashboard-tablette/systeme-mini-pc` |
 | **Heading** | `Mini - P.C.` |
 | **Icône heading** | `phu:intel-nuc` |
 | **Retour (tap heading)** | `/dashboard-tablette/0` |
@@ -36,7 +35,7 @@ PAGE MINI PC (type: grid)
 │   ├── BLOC 2 — Bar-cards CPU (USED + Temp)
 │   ├── BLOC 3 — Bar-cards RAM (% + USED MB + FREE MB)
 │   ├── BLOC 4 — Bar-card SSD SATA 512 Go
-│   ├── BLOC 5 — Bar-cards Réseau (DL + UL via enp1s0)
+│   ├── BLOC 5 — Bar-cards Réseau (DL + UL via enp6s18)
 │   ├── BLOC 6 — ring-tile + mini-graph : Utilisation CPU (24h)
 │   ├── BLOC 7 — Bar-card CPU SPEED (GHz)
 │   ├── BLOC 8 — Bar-cards Charges système (1m / 5m / 15m)
@@ -69,7 +68,7 @@ PAGE MINI PC (type: grid)
 |-------|--------|-----------|
 | IP Int. (label) | — | `action: none` |
 | IP locale | `sensor.local_ip` | navigate `#temp` |
-| IP publique | `sensor.myip` | `action: none` |
+| IP publique | `sensor.ip_externe` | `action: none` |
 
 ### Uptime
 | Carte | Source | Format |
@@ -106,7 +105,7 @@ PAGE MINI PC (type: grid)
 ### `bar-card` CPU Temp.
 | Paramètre | Valeur |
 |-----------|--------|
-| Entité | `sensor.system_monitor_temperature_du_processeur` |
+| Entité | `sensor.temperature_cpu_package` |
 | Min/Max | 0 – 100 °C |
 | Target | 75 °C |
 | Tap | `action: none` |
@@ -138,42 +137,43 @@ PAGE MINI PC (type: grid)
 | Paramètre | Valeur |
 |-----------|--------|
 | Entité | `sensor.system_monitor_memoire_utilisee` |
-| Min/Max | 0 – **16 384 Mo** |
-| Target | 7 500 Mo |
+| Min/Max | 0 – **8 192 MiB** (VM = 8 Go alloués) |
+| Target | 5 000 MiB |
 | Tap | navigate `#memory` |
 
 ### `bar-card` FREE (Mo)
 | Paramètre | Valeur |
 |-----------|--------|
 | Entité | `sensor.system_monitor_memoire_libre` |
-| Min/Max | 0 – **16 384 Mo** |
-| Target | 7 500 Mo |
+| Min/Max | 0 – **8 192 MiB** (VM = 8 Go alloués) |
+| Target | 3 000 MiB |
 | Tap | navigate `#memory` |
 
 ---
 
 ## 📦 BLOC 4 — SSD SATA 512 Go
 
-### `bar-card` SSD SATA 512 Go
+### `bar-card` VM Disk (~30 GiB)
 | Paramètre | Valeur |
 |-----------|--------|
 | Entité | `sensor.system_monitor_utilisation_du_disque` |
-| Min/Max | 0 – **524 Go** |
-| Target | 470 Go |
+| Min/Max | 0 – **30 GiB** (disque virtuel VM ≈ 29.5 GiB) |
+| Target | 24 GiB |
 | Tap | navigate `#disk` |
 
 > Pas de severity intégrée (couleur fixe `rgb(142,142,142)` — gris).
+> Note : le disque physique du NUC est 512 Go (SSD SATA), mais Proxmox alloue ~30 GiB à la VM HA.
 
 ---
 
-## 📦 BLOC 5 — Réseau (interface `enp1s0`)
+## 📦 BLOC 5 — Réseau (interface `enp6s18`)
 
-> ⚠️ **Interface réseau Mini PC = `enp1s0`** (≠ RPi4 qui utilisait `end0`)
+> ⚠️ **Interface réseau Mini PC = `enp6s18`** (≠ RPi4 qui utilisait `end0`)
 
 ### `bar-card` Download
 | Paramètre | Valeur |
 |-----------|--------|
-| Entité | `sensor.system_monitor_debit_du_reseau_entrant_via_enp1s0` |
+| Entité | `sensor.system_monitor_debit_du_reseau_entrant_via_enp6s18` |
 | Min/Max | 0 – 130 MB/s |
 | Target | 20 MB/s |
 | Couleur | `rgb(81,140,67)` vert |
@@ -181,7 +181,7 @@ PAGE MINI PC (type: grid)
 ### `bar-card` Upload
 | Paramètre | Valeur |
 |-----------|--------|
-| Entité | `sensor.system_monitor_debit_du_reseau_sortant_via_enp1s0` |
+| Entité | `sensor.system_monitor_debit_du_reseau_sortant_via_enp6s18` |
 | Min/Max | 0 – 130 MB/s |
 | Target | 20 MB/s |
 | Couleur | `rgb(244,67,54)` rouge |
@@ -252,14 +252,12 @@ PAGE MINI PC (type: grid)
 
 ## 📦 BLOC 9 — ring-tile + mini-graph : Température CPU (24h)
 
-> ⚠️ **`sensor.temperature_cpu_package_sys`** — Sensor NON natif `system_monitor`.
-> Provenance : template `command_line` (lecture `/sys/class/thermal/thermal_zone*/temp` ÷ 1000).
-> Voir section **SENSORS SPÉCIAUX** ci-dessous.
+> Entité : `sensor.temperature_cpu_package` — Provenance : `command_line` / `sensors` Linux (`MP_01_sonde_température_mini-pc.yaml`).
 
 ### `custom:ring-tile` Température CPU
 | Paramètre | Valeur |
 |-----------|--------|
-| Entité | `sensor.temperature_cpu_package_sys` |
+| Entité | `sensor.temperature_cpu_package` |
 | Min/Max | 0 – 100 °C |
 | Tap | navigate `#temp` |
 
@@ -271,7 +269,7 @@ PAGE MINI PC (type: grid)
 ### `custom:mini-graph-card` T° CPU 24h
 | Paramètre | Valeur |
 |-----------|--------|
-| Entité | `sensor.temperature_cpu_package_sys` |
+| Entité | `sensor.temperature_cpu_package` |
 | Couleur | `rgb(255,193,7)` |
 | Durée | 24h |
 | Tap | navigate `#temp` |
@@ -280,17 +278,15 @@ PAGE MINI PC (type: grid)
 
 ## 📦 BLOC 10 — Températures cores (Core 0/1/2/3)
 
-> ⚠️ **`sensor.temperature_core_X_sys`** — Sensors NON natifs `system_monitor`.
-> Voir section **SENSORS SPÉCIAUX** ci-dessous.
-> Note : Core 3 porte l'ID `sensor.temperature_core_3_sys_2` (suffixe `_2` = doublon automatique HA).
+> Entités `sensor.temperature_core_X` — Provenance : `command_line` / `sensors` Linux (`MP_01_sonde_température_mini-pc.yaml`).
 
 ### 4 `bar-card` : Core 0 / 1 / 2 / 3
 | Entité | Min/Max | Target |
 |--------|---------|--------|
-| `sensor.temperature_core_0_sys` | 0–100 °C | 75 °C |
-| `sensor.temperature_core_1_sys` | 0–100 °C | 75 °C |
-| `sensor.temperature_core_2_sys` | 0–100 °C | 75 °C |
-| `sensor.temperature_core_3_sys_2` | 0–100 °C | 75 °C |
+| `sensor.temperature_core_0` | 0–100 °C | 75 °C |
+| `sensor.temperature_core_1` | 0–100 °C | 75 °C |
+| `sensor.temperature_core_2` | 0–100 °C | 75 °C |
+| `sensor.temperature_core_3` | 0–100 °C | 75 °C |
 
 **Severity identique pour tous** :
 - 0–64 °C → `rgb(81,140,67)` vert
@@ -301,12 +297,12 @@ PAGE MINI PC (type: grid)
 
 ## 📦 BLOC 11 — Température CPU Package (résumé mini)
 
-> ⚠️ Même entité que BLOC 9 — `sensor.temperature_cpu_package_sys`.
+> Même entité que BLOC 9 — `sensor.temperature_cpu_package`.
 
 ### `bar-card` Température CPU (mini)
 | Paramètre | Valeur |
 |-----------|--------|
-| Entité | `sensor.temperature_cpu_package_sys` |
+| Entité | `sensor.temperature_cpu_package` |
 | Min/Max | 0 – 100 °C |
 | Target | 88 °C |
 | Tap | navigate `#temp` |
@@ -315,13 +311,12 @@ PAGE MINI PC (type: grid)
 
 ## 📦 BLOC 12 — Température Carte Mère
 
-> ⚠️ **`sensor.temperature_carte_mere_sys`** — Sensor NON natif `system_monitor`.
-> Voir section **SENSORS SPÉCIAUX** ci-dessous.
+> Entité `sensor.temperature_carte_mere` — Provenance : `command_line` / `sensors` Linux (`MP_01_sonde_température_mini-pc.yaml`).
 
 ### `bar-card` Température Carte Mère
 | Paramètre | Valeur |
 |-----------|--------|
-| Entité | `sensor.temperature_carte_mere_sys` |
+| Entité | `sensor.temperature_carte_mere` |
 | Min/Max | 0 – 100 °C |
 | Target | 88 °C |
 | Tap | navigate `#temp` |
@@ -396,7 +391,7 @@ PAGE MINI PC (type: grid)
 **3 séries** :
 | Série | Entité | Type | Description |
 |-------|--------|------|-------------|
-| Instantané | `sensor.system_monitor_temperature_du_processeur` | area | color_threshold : vert → jaune (55°C) → rouge (70°C) |
+| Instantané | `sensor.temperature_cpu_package` | area | color_threshold : vert → jaune (55°C) → rouge (70°C) |
 | Moy.(24h) | même entité | line | `group_by avg 1h` — rouge |
 | Moy.(730hrs) | même entité | — | hors graphique |
 
@@ -418,7 +413,7 @@ PAGE MINI PC (type: grid)
 | `energy_color` | `gainsboro` |
 | `current_entity` | `sensor.prise_mini_pc_ikea_current` |
 | `avg_daily_entity` | `sensor.mini_pc_avg_watts_quotidien` |
-| `conso_daily_kwh_entity` | `sensor.prise_mini_pc_ikea_quotidien_wh_um` |
+| `conso_daily_kwh_entity` | `sensor.prise_mini_pc_ikea_quotidien_um` |
 
 ### Carte 2 : `custom:streamline-card` template `conso_mensuelle_appareil`
 | Variable | Valeur |
@@ -427,7 +422,7 @@ PAGE MINI PC (type: grid)
 | `energy_entity` | `sensor.prise_mini_pc_ikea_energy` |
 | `color` | `gainsboro` |
 | `avg_monthly_entity` | `sensor.mini_pc_avg_watts_mensuel` |
-| `conso_monthly_kwh_entity` | `sensor.prise_mini_pc_ikea_mensuel_wh_um` |
+| `conso_monthly_kwh_entity` | `sensor.prise_mini_pc_ikea_mensuel_um` |
 
 ---
 
@@ -465,22 +460,21 @@ PAGE MINI PC (type: grid)
 
 Ces entités ne font **pas** partie de l'intégration `system_monitor` native de HA.
 
-### Groupe A : Températures via `command_line` / fichiers `/sys/`
+### Groupe A : Températures via script MQTT (dans la VM)
 
-> **Provenance probable** : template `command_line` dans l'ancienne config (`12_1_sonde_température_mini-pc.yaml` → TREE_ORIGINE). Ces sensors lisent les fichiers de température Linux (thermal zones, hwmon) en millidegrees Kelvin / Celsius et divisent par 1000.
+> **Provenance** : `lm-sensors` (paquet Linux) tourne dans la VM HA via un script shell.
+> La chaîne complète : `sensors` (VM) → **script** → **MQTT broker** → `sensor.temperature_*` dans HA.
+> 
+> ⚠️ `system_monitor` ne remonte **aucune** température dans un contexte VM Proxmox — les capteurs hwmon physiques ne sont pas accessibles depuis le guest. Cette solution MQTT contourne la limitation.
 
-| Entité | Source hardware | Fichier probable |
-|--------|-----------------|-----------------|
-| `sensor.temperature_cpu_package_sys` | CPU Package global | `/sys/class/hwmon/hwmon*/temp1_input` ÷ 1000 |
-| `sensor.temperature_core_0_sys` | Core 0 | `/sys/class/hwmon/hwmon*/temp2_input` ÷ 1000 |
-| `sensor.temperature_core_1_sys` | Core 1 | `/sys/class/hwmon/hwmon*/temp3_input` ÷ 1000 |
-| `sensor.temperature_core_2_sys` | Core 2 | `/sys/class/hwmon/hwmon*/temp4_input` ÷ 1000 |
-| `sensor.temperature_core_3_sys_2` | Core 3 | `/sys/class/hwmon/hwmon*/temp5_input` ÷ 1000 |
-| `sensor.temperature_carte_mere_sys` | Carte mère (Acpi / Board) | `/sys/class/thermal/thermal_zone0/temp` ÷ 1000 |
-
-> ⚠️ Le suffixe `_sys` provient du `unique_id` de l'entité dans HA. Le `_2` de `temperature_core_3_sys_2` indique une collision de nom corrigée automatiquement par HA.
-
-> ⚠️ **Action requise lors de la migration** : vérifier que ces sensors remontent bien les bonnes valeurs sur le Mini PC (les chemins `/sys/class/hwmon/` peuvent varier selon le chipset `x86_64` vs RPi ARM).
+| Entité | Source hardware | Chaîne |
+|--------|-----------------|--------|
+| `sensor.temperature_cpu_package` | CPU Package global | `sensors` (VM) → script → MQTT |
+| `sensor.temperature_core_0` | Core 0 | `sensors` (VM) → script → MQTT |
+| `sensor.temperature_core_1` | Core 1 | `sensors` (VM) → script → MQTT |
+| `sensor.temperature_core_2` | Core 2 | `sensors` (VM) → script → MQTT |
+| `sensor.temperature_core_3` | Core 3 | `sensors` (VM) → script → MQTT |
+| `sensor.temperature_carte_mere` | Carte mère (Acpi / Board) | `sensors` (VM) → script → MQTT |
 
 ### Groupe B : CPU Speed
 
@@ -508,14 +502,13 @@ Ces entités ne font **pas** partie de l'intégration `system_monitor` native de
 | Entité | Usage dans la page |
 |--------|-------------------|
 | `sensor.system_monitor_utilisation_du_processeur` | BLOCS 2, 6 + pop-up `#speed` |
-| `sensor.system_monitor_temperature_du_processeur` | BLOC 2 + pop-up `#temp` |
 | `sensor.system_monitor_utilisation_de_la_memoire` | BLOC 3 |
 | `sensor.system_monitor_memoire_utilisee` | BLOC 3 + pop-up `#memory` |
 | `sensor.system_monitor_memoire_libre` | BLOC 3 |
 | `sensor.system_monitor_utilisation_du_disque` | BLOC 4 |
 | `sensor.system_monitor_espace_utilise` | pop-up `#disk` |
-| `sensor.system_monitor_debit_du_reseau_entrant_via_enp1s0` | BLOC 5 |
-| `sensor.system_monitor_debit_du_reseau_sortant_via_enp1s0` | BLOC 5 |
+| `sensor.system_monitor_debit_du_reseau_entrant_via_enp6s18` | BLOC 5 |
+| `sensor.system_monitor_debit_du_reseau_sortant_via_enp6s18` | BLOC 5 |
 | `sensor.system_monitor_dernier_demarrage` | BLOC 1 (Uptime template) |
 | `sensor.system_monitor_charge_1m` | BLOC 8 ⚠️ à activer |
 | `sensor.system_monitor_charge_5m` | BLOC 8 ⚠️ à activer |
@@ -528,35 +521,35 @@ Ces entités ne font **pas** partie de l'intégration `system_monitor` native de
 | `sensor.prise_mini_pc_ikea_current` | pop-up `#conso` (streamline) |
 | `sensor.prise_mini_pc_ikea_energy` | pop-up `#conso` (streamline mensuel) |
 
-### Sensors spéciaux (command_line / thermal zones) ⚠️
+### Sensors spéciaux (script MQTT / lm-sensors dans la VM)
 | Entité | Usage |
 |--------|-------|
-| `sensor.temperature_cpu_package_sys` | BLOCS 9, 11 + pop-up (ring/mini-graph) |
-| `sensor.temperature_core_0_sys` | BLOC 10 |
-| `sensor.temperature_core_1_sys` | BLOC 10 |
-| `sensor.temperature_core_2_sys` | BLOC 10 |
-| `sensor.temperature_core_3_sys_2` | BLOC 10 ⚠️ ID avec `_2` |
-| `sensor.temperature_carte_mere_sys` | BLOC 12 |
+| `sensor.temperature_cpu_package` | BLOCS 2, 9, 11 + pop-up `#temp` (ring/mini-graph/apexcharts) |
+| `sensor.temperature_core_0` | BLOC 10 |
+| `sensor.temperature_core_1` | BLOC 10 |
+| `sensor.temperature_core_2` | BLOC 10 |
+| `sensor.temperature_core_3` | BLOC 10 |
+| `sensor.temperature_carte_mere` | BLOC 12 |
 | `sensor.cpu_speed` | BLOC 7 ⚠️ à vérifier dans config |
 
 ### Réseau / IP
 | Entité | Usage |
 |--------|-------|
 | `sensor.local_ip` | BLOC 1 (IP interne) |
-| `sensor.myip` | BLOC 1 (IP externe) |
+| `sensor.ip_externe` | BLOC 1 (IP externe) |
 
 ### Utility Meter & AVG (Pôle 2 — ✅ dans re-build / ⚠️ à déployer en live)
 
 **Chaîne complète (unité Wh — intentionnel, pas kWh) :**
 ```
-sensor.prise_mini_pc_ikea_power (W natif NOUS)
+sensor.prise_mini_pc_ikea_power (W natif IKEA Inspelning)
     ↓  sensors/P2_prise/P2_Wh_mini_pc.yaml  (Riemann left, 3 déc., PAS unit_prefix:k → Wh)
 sensor.prise_mini_pc_ikea_energie_totale_wh
     ↓  utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml
-sensor.prise_mini_pc_ikea_annuel_wh_um
-sensor.prise_mini_pc_ikea_mensuel_wh_um
-sensor.prise_mini_pc_ikea_hebdomadaire_wh_um
-sensor.prise_mini_pc_ikea_quotidien_wh_um
+sensor.prise_mini_pc_ikea_annuel_um
+sensor.prise_mini_pc_ikea_mensuel_um
+sensor.prise_mini_pc_ikea_hebdomadaire_um
+sensor.prise_mini_pc_ikea_quotidien_um
     ↓  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml  (formule: conso / h → W)
 sensor.mini_pc_avg_watts_annuel
 sensor.mini_pc_avg_watts_mensuel
@@ -567,10 +560,10 @@ sensor.mini_pc_avg_watts_quotidien
 | Entité | Fichier source |
 |--------|----------------|
 | `sensor.prise_mini_pc_ikea_energie_totale_wh` | `sensors/P2_prise/P2_Wh_mini_pc.yaml` |
-| `sensor.prise_mini_pc_ikea_annuel_wh_um` | `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml` |
-| `sensor.prise_mini_pc_ikea_mensuel_wh_um` | `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml` |
-| `sensor.prise_mini_pc_ikea_hebdomadaire_wh_um` | `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml` |
-| `sensor.prise_mini_pc_ikea_quotidien_wh_um` | `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml` |
+| `sensor.prise_mini_pc_ikea_annuel_um` | `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml` |
+| `sensor.prise_mini_pc_ikea_mensuel_um` | `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml` |
+| `sensor.prise_mini_pc_ikea_hebdomadaire_um` | `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml` |
+| `sensor.prise_mini_pc_ikea_quotidien_um` | `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml` |
 | `sensor.mini_pc_avg_watts_annuel` | `templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml` |
 | `sensor.mini_pc_avg_watts_mensuel` | `templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml` |
 | `sensor.mini_pc_avg_watts_hebdomadaire` | `templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml` |
@@ -594,21 +587,21 @@ sensor.mini_pc_avg_watts_quotidien
 
 ---
 
-## ⚠️ LISTE DES POINTS À VÉRIFIER LORS DE LA MIGRATION
+## ⚠️ LISTE DES POINTS À VÉRIFIER
 
-1. **`sensor.temperature_cpu_package_sys`** et les `sensor.temperature_core_X_sys` : vérifier que les chemins `/sys/class/hwmon/` sont corrects sur le Mini PC (Intel NUC / x86-64).
-2. **`sensor.temperature_carte_mere_sys`** : idem, le chemin thermal_zone peut différer.
+1. **`sensor.temperature_cpu_package`** et `sensor.temperature_core_X` : entités actives via `MP_01_sonde_température_mini-pc.yaml` — confirmer que `sensors` (lm-sensors) retourne bien les valeurs sur le NUC.
+2. **`sensor.temperature_carte_mere`** : idem — vérifier la ligne correspondante dans la sortie `sensors`.
 3. **`sensor.cpu_speed`** : localiser le sensor dans la config HA (TREE_ORIGINE / `command_line` ?) et vérifier qu'il fonctionne sur le Mini PC.
 4. **`sensor.system_monitor_charge_1m/5m/15m`** : activer les conditions load dans `configuration.yaml`.
-5. **Interface réseau `enp1s0`** : confirmée pour le Mini PC (remplace `end0` du RPi4).
-6. **RAM max 16 384 Mo** : confirmé (16 Go) — les bar-cards sont déjà configurées en conséquence.
-7. **SSD max 524 Go** : confirmé (SSD SATA 512 Go formaté ≈ 512 Go utilisables).
-8. **Entités UM + AVG prise Mini PC** : ⚠️ Fichiers créés dans le repo `home_assistant_re-build` (TREE_CORRIGE) — **pas encore copiés dans la config live**. À déployer :
-   - `sensors/P2_prise/P2_Wh_mini_pc.yaml` (Riemann kWh)
+5. **Interface réseau `enp6s18`** : confirmée pour le Mini PC Intel NUC (remplace `end0` du RPi4).
+6. **RAM VM = 8 Go** : max bar-cards calé sur 8 192 MiB (RAM allouée à la VM Proxmox). NUC physique = 16 Go.
+7. **Disk VM ≈ 30 GiB** : disque virtuel Proxmox alloué à la VM HA (~29.5 GiB). NUC physique = 512 Go SSD.
+8. **Entités UM + AVG prise Mini PC** : ⚠️ Fichiers créés dans TREE_CORRIGE — **à déployer en live si pas encore fait** :
+   - `sensors/P2_prise/P2_Wh_mini_pc.yaml` (Riemann Wh)
    - `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml`
    - `templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml`
-   - Redémarrer HA → les entités `prise_mini_pc_ikea_quotidien/mensuel_kwh_um` et `mini_pc_avg_watts_quotidien/mensuel` seront créées.
-9. **Image** `/local/images/mini pc.png` : à copier sur le serveur HA.
+   - Redémarrer HA → entités `prise_mini_pc_ikea_quotidien/mensuel_um` et `mini_pc_avg_watts_*` créées.
+9. **Image** `/local/images/mini pc.png` : à copier sur le serveur HA si absente.
 
 ---
 

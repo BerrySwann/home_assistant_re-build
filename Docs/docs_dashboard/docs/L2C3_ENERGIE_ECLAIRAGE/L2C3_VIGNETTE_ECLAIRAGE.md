@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026-04-25-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026-04-29-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Vignette-ff9800?style=flat-square)](.)
 
 </div>
@@ -15,7 +15,7 @@
 | 🏗️ **Layout** | `custom:button-card` — grille 3 colonnes |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-04-25 |
+| 📅 **Modifié le** | 2026-04-29 |
 | 🏠 **Version HA** | 2026.3 |
 
 ---
@@ -41,11 +41,23 @@ Vignette affichant la consommation kWh de l'éclairage par pièce, en colonnes Q
 
 Les pièces Bureau et Chambre ont une logique `isEcoSensitive` : le mode `Éco.` n'allume pas la couleur verte (ampoules à faible consommation considérées comme éteintes).
 
+### Chaîne TPL (depuis 2026-04-29)
+
+Les entités kWh proviennent désormais de la chaîne template P3_ENERGIE_TLP — plus des Utility Meters bruts :
+
+```
+P3_UM_AMHQ_1_UNITE  →  {slug}_{cycle}_um
+P3_TPL_AMHQ_1_UNITE →  {slug}_{cycle}_um_kwh_tpl
+P3_TPL_AMHQ_2_ZONE  →  eclairage_{zone}_{cycle}_um_kwh_tpl   ← vignette
+P3_TPL_AMHQ_3_TOTAL →  eclairage_total_unit_{cycle}_kwh_tpl  ← vignette
+```
+
 ### Intégrations requises
 
 - ✅ **Philips Hue** (bridge natif) — états et puissance lampes
-- ✅ **Utility Meters P3** — `sensor.eclairage_*_quotidien/mensuel_um`
-- ✅ **Templates P3** — `sensor.lumiere_*_etat` (états par pièce)
+- ✅ **Utility Meters P3** — `P3_UM_AMHQ_1_UNITE.yaml` (source de base)
+- ✅ **Templates P3_ENERGIE_TLP** — `_um_kwh_tpl` (relais kWh)
+- ✅ **Templates P3_eclairage/ui_dashboard** — `sensor.lumiere_*_etat`
 
 ### Cartes HACS
 
@@ -91,20 +103,20 @@ entities:
   - sensor.lumiere_bureau_etat
   - sensor.lumiere_salle_de_bain_etat
   - sensor.lumiere_chambre_etat
-  - sensor.eclairage_appart_2_quotidien_um
-  - sensor.eclairage_salon_5_quotidien_um
-  - sensor.eclairage_cuisine_1_quotidien_um
-  - sensor.eclairage_bureau_5_quotidien_um
-  - sensor.eclairage_sdb_2_quotidien_um
-  - sensor.eclairage_chambre_4_quotidien_um
-  - sensor.eclairage_total_unit_quotidien_um
-  - sensor.eclairage_appart_2_mensuel_um
-  - sensor.eclairage_salon_5_mensuel_um
-  - sensor.eclairage_cuisine_1_mensuel_um
-  - sensor.eclairage_bureau_5_mensuel_um
-  - sensor.eclairage_sdb_2_mensuel_um
-  - sensor.eclairage_chambre_4_mensuel_um
-  - sensor.eclairage_total_unit_mensuel_um
+  - sensor.eclairage_appart_2_quotidien_um_kwh_tpl
+  - sensor.eclairage_salon_5_quotidien_um_kwh_tpl
+  - sensor.eclairage_cuisine_1_quotidien_um_kwh_tpl
+  - sensor.eclairage_bureau_5_quotidien_um_kwh_tpl
+  - sensor.eclairage_sdb_2_quotidien_um_kwh_tpl
+  - sensor.eclairage_chambre_4_quotidien_um_kwh_tpl
+  - sensor.eclairage_total_unit_quotidien_kwh_tpl
+  - sensor.eclairage_appart_2_mensuel_um_kwh_tpl
+  - sensor.eclairage_salon_5_mensuel_um_kwh_tpl
+  - sensor.eclairage_cuisine_1_mensuel_um_kwh_tpl
+  - sensor.eclairage_bureau_5_mensuel_um_kwh_tpl
+  - sensor.eclairage_sdb_2_mensuel_um_kwh_tpl
+  - sensor.eclairage_chambre_4_mensuel_um_kwh_tpl
+  - sensor.eclairage_total_unit_mensuel_kwh_tpl
 triggers_update:
   - sensor.lumiere_appartement_etat
   - sensor.lumiere_salon_etat
@@ -112,20 +124,20 @@ triggers_update:
   - sensor.lumiere_bureau_etat
   - sensor.lumiere_salle_de_bain_etat
   - sensor.lumiere_chambre_etat
-  - sensor.eclairage_appart_2_quotidien_um
-  - sensor.eclairage_salon_5_quotidien_um
-  - sensor.eclairage_cuisine_1_quotidien_um
-  - sensor.eclairage_bureau_5_quotidien_um
-  - sensor.eclairage_sdb_2_quotidien_um
-  - sensor.eclairage_chambre_4_quotidien_um
-  - sensor.eclairage_total_unit_quotidien_um
-  - sensor.eclairage_appart_2_mensuel_um
-  - sensor.eclairage_salon_5_mensuel_um
-  - sensor.eclairage_cuisine_1_mensuel_um
-  - sensor.eclairage_bureau_5_mensuel_um
-  - sensor.eclairage_sdb_2_mensuel_um
-  - sensor.eclairage_chambre_4_mensuel_um
-  - sensor.eclairage_total_unit_mensuel_um
+  - sensor.eclairage_appart_2_quotidien_um_kwh_tpl
+  - sensor.eclairage_salon_5_quotidien_um_kwh_tpl
+  - sensor.eclairage_cuisine_1_quotidien_um_kwh_tpl
+  - sensor.eclairage_bureau_5_quotidien_um_kwh_tpl
+  - sensor.eclairage_sdb_2_quotidien_um_kwh_tpl
+  - sensor.eclairage_chambre_4_quotidien_um_kwh_tpl
+  - sensor.eclairage_total_unit_quotidien_kwh_tpl
+  - sensor.eclairage_appart_2_mensuel_um_kwh_tpl
+  - sensor.eclairage_salon_5_mensuel_um_kwh_tpl
+  - sensor.eclairage_cuisine_1_mensuel_um_kwh_tpl
+  - sensor.eclairage_bureau_5_mensuel_um_kwh_tpl
+  - sensor.eclairage_sdb_2_mensuel_um_kwh_tpl
+  - sensor.eclairage_chambre_4_mensuel_um_kwh_tpl
+  - sensor.eclairage_total_unit_mensuel_kwh_tpl
 styles:
   card:
     - aspect-ratio: 1/1
@@ -197,13 +209,13 @@ custom_fields:
         return val.toFixed(2) + ' <span style="font-size: 5px;">kWh</span>';
       }
       const sensors = [
-        'sensor.eclairage_appart_2_quotidien_um',
-        'sensor.eclairage_salon_5_quotidien_um',
-        'sensor.eclairage_cuisine_1_quotidien_um',
-        'sensor.eclairage_bureau_5_quotidien_um',
-        'sensor.eclairage_sdb_2_quotidien_um',
-        'sensor.eclairage_chambre_4_quotidien_um',
-        'sensor.eclairage_total_unit_quotidien_um'
+        'sensor.eclairage_appart_2_quotidien_um_kwh_tpl',
+        'sensor.eclairage_salon_5_quotidien_um_kwh_tpl',
+        'sensor.eclairage_cuisine_1_quotidien_um_kwh_tpl',
+        'sensor.eclairage_bureau_5_quotidien_um_kwh_tpl',
+        'sensor.eclairage_sdb_2_quotidien_um_kwh_tpl',
+        'sensor.eclairage_chambre_4_quotidien_um_kwh_tpl',
+        'sensor.eclairage_total_unit_quotidien_kwh_tpl'
       ];
       return sensors.map((s, i) => {
         const isLast = i === sensors.length - 1;
@@ -221,13 +233,13 @@ custom_fields:
         return val.toFixed(2) + ' <span style="font-size: 5px;">kWh</span>';
       }
       const sensors = [
-        'sensor.eclairage_appart_2_mensuel_um',
-        'sensor.eclairage_salon_5_mensuel_um',
-        'sensor.eclairage_cuisine_1_mensuel_um',
-        'sensor.eclairage_bureau_5_mensuel_um',
-        'sensor.eclairage_sdb_2_mensuel_um',
-        'sensor.eclairage_chambre_4_mensuel_um',
-        'sensor.eclairage_total_unit_mensuel_um'
+        'sensor.eclairage_appart_2_mensuel_um_kwh_tpl',
+        'sensor.eclairage_salon_5_mensuel_um_kwh_tpl',
+        'sensor.eclairage_cuisine_1_mensuel_um_kwh_tpl',
+        'sensor.eclairage_bureau_5_mensuel_um_kwh_tpl',
+        'sensor.eclairage_sdb_2_mensuel_um_kwh_tpl',
+        'sensor.eclairage_chambre_4_mensuel_um_kwh_tpl',
+        'sensor.eclairage_total_unit_mensuel_kwh_tpl'
       ];
       return sensors.map((s, i) => {
         const isLast = i === sensors.length - 1;
@@ -275,40 +287,41 @@ Bureau et Chambre passent `isEcoSensitive = true` : le mode Éco ne colore pas l
 | `sensor.lumiere_salle_de_bain_etat` | SDB | non |
 | `sensor.lumiere_chambre_etat` | Chambre | **oui** |
 
-### Utility Meters quotidiens — `sensor.eclairage_*_quotidien_um`
+### kWh quotidiens — `sensor.eclairage_*_quotidien_um_kwh_tpl`
 
-> Définis dans `utility_meter/P3_eclairage/P3_UM_AMHQ_*.yaml`
+> Source : `P3_UM_AMHQ_1_UNITE` → `P3_TPL_AMHQ_1_UNITE` → `P3_TPL_AMHQ_2_ZONE` / `P3_TPL_AMHQ_3_TOTAL`
 
-| Entité | Zone / Pièce |
-|--------|-------------|
-| `sensor.eclairage_appart_2_quotidien_um` | Entrée + couloir (2 lampes) |
-| `sensor.eclairage_salon_5_quotidien_um` | Salon (5 lampes) |
-| `sensor.eclairage_cuisine_1_quotidien_um` | Cuisine (1 lampe) |
-| `sensor.eclairage_bureau_5_quotidien_um` | Bureau (5 lampes) |
-| `sensor.eclairage_sdb_2_quotidien_um` | SDB (2 lampes) |
-| `sensor.eclairage_chambre_4_quotidien_um` | Chambre (4 lampes) |
-| `sensor.eclairage_total_unit_quotidien_um` | **TOTAL appartement** |
+| Entité | Zone / Pièce | Fichier source |
+|--------|-------------|----------------|
+| `sensor.eclairage_appart_2_quotidien_um_kwh_tpl` | Entrée + Couloir (2 lampes) | `P3_TPL_AMHQ_2_ZONE` |
+| `sensor.eclairage_salon_5_quotidien_um_kwh_tpl` | Salon (5 lampes) | `P3_TPL_AMHQ_2_ZONE` |
+| `sensor.eclairage_cuisine_1_quotidien_um_kwh_tpl` | Cuisine (1 lampe) | `P3_TPL_AMHQ_2_ZONE` |
+| `sensor.eclairage_bureau_5_quotidien_um_kwh_tpl` | Bureau (5 lampes) | `P3_TPL_AMHQ_2_ZONE` |
+| `sensor.eclairage_sdb_2_quotidien_um_kwh_tpl` | SDB (2 lampes) | `P3_TPL_AMHQ_2_ZONE` |
+| `sensor.eclairage_chambre_4_quotidien_um_kwh_tpl` | Chambre (4 lampes) | `P3_TPL_AMHQ_2_ZONE` |
+| `sensor.eclairage_total_unit_quotidien_kwh_tpl` | **TOTAL appartement (19)** | `P3_TPL_AMHQ_3_TOTAL` |
 
-### Utility Meters mensuels — `sensor.eclairage_*_mensuel_um`
+### kWh mensuels — `sensor.eclairage_*_mensuel_um_kwh_tpl`
 
-> Mêmes zones, cycle mensuel — `utility_meter/P3_eclairage/P3_UM_AMHQ_*.yaml`
+> Mêmes zones, cycle mensuel
 
-| Entité | Zone / Pièce |
-|--------|-------------|
-| `sensor.eclairage_appart_2_mensuel_um` | Entrée + couloir |
-| `sensor.eclairage_salon_5_mensuel_um` | Salon |
-| `sensor.eclairage_cuisine_1_mensuel_um` | Cuisine |
-| `sensor.eclairage_bureau_5_mensuel_um` | Bureau |
-| `sensor.eclairage_sdb_2_mensuel_um` | SDB |
-| `sensor.eclairage_chambre_4_mensuel_um` | Chambre |
-| `sensor.eclairage_total_unit_mensuel_um` | **TOTAL appartement** |
+| Entité | Zone / Pièce | Fichier source |
+|--------|-------------|----------------|
+| `sensor.eclairage_appart_2_mensuel_um_kwh_tpl` | Entrée + Couloir | `P3_TPL_AMHQ_2_ZONE` |
+| `sensor.eclairage_salon_5_mensuel_um_kwh_tpl` | Salon | `P3_TPL_AMHQ_2_ZONE` |
+| `sensor.eclairage_cuisine_1_mensuel_um_kwh_tpl` | Cuisine | `P3_TPL_AMHQ_2_ZONE` |
+| `sensor.eclairage_bureau_5_mensuel_um_kwh_tpl` | Bureau | `P3_TPL_AMHQ_2_ZONE` |
+| `sensor.eclairage_sdb_2_mensuel_um_kwh_tpl` | SDB | `P3_TPL_AMHQ_2_ZONE` |
+| `sensor.eclairage_chambre_4_mensuel_um_kwh_tpl` | Chambre | `P3_TPL_AMHQ_2_ZONE` |
+| `sensor.eclairage_total_unit_mensuel_kwh_tpl` | **TOTAL appartement** | `P3_TPL_AMHQ_3_TOTAL` |
 
 ---
 
 ## 🐛 DÉPANNAGE
 
 ### Toutes les valeurs affichent N/A
-Vérifier que les UM `P3_UM_AMHQ_*.yaml` sont bien chargés dans HA (`utility_meter/P3_eclairage/`).
+Vérifier la chaîne en ordre : `P3_UM_AMHQ_1_UNITE` → `P3_TPL_AMHQ_1_UNITE` → `P3_TPL_AMHQ_2_ZONE`.
+Les `_um_kwh_tpl` dépendent des `_um` qui dépendent eux-mêmes du Hue Bridge.
 
 ### Une pièce reste blanche alors que la lumière est allumée
 L'état du `sensor.lumiere_*_etat` n'est pas `Éteint` mais pas non plus reconnu comme allumé. Vérifier les valeurs possibles dans `etats_status.yaml`.
@@ -323,8 +336,10 @@ Comportement voulu — `isEcoSensitive = true` maintient la couleur blanche en m
 | Élément | Fichier source | Statut |
 |---------|---------------|--------|
 | `sensor.lumiere_*_etat` | `templates/P3_eclairage/ui_dashboard/etats_status.yaml` | ✅ Essentiel |
-| `sensor.eclairage_*_quotidien_um` | `utility_meter/P3_eclairage/P3_UM_AMHQ_*.yaml` | ✅ Essentiel |
-| `sensor.eclairage_*_mensuel_um` | `utility_meter/P3_eclairage/P3_UM_AMHQ_*.yaml` | ✅ Essentiel |
+| `sensor.{slug}_{cycle}_um` | `utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml` | ✅ Base |
+| `sensor.{slug}_{cycle}_um_kwh_tpl` | `templates/P3_eclairage/P3_ENERGIE_TLP/P3_TPL_AMHQ_1_UNITE.yaml` | ✅ Relais |
+| `sensor.eclairage_{zone}_{cycle}_um_kwh_tpl` | `templates/P3_eclairage/P3_ENERGIE_TLP/P3_TPL_AMHQ_2_ZONE.yaml` | ✅ Essentiel |
+| `sensor.eclairage_total_unit_{cycle}_kwh_tpl` | `templates/P3_eclairage/P3_ENERGIE_TLP/P3_TPL_AMHQ_3_TOTAL.yaml` | ✅ Essentiel |
 | `custom:button-card` | HACS | ✅ Essentiel |
 
 ---
@@ -334,18 +349,19 @@ Comportement voulu — `isEcoSensitive = true` maintient la couleur blanche en m
 ### Configuration YAML (sources HA — ReBuild)
 
 - `templates/P3_eclairage/ui_dashboard/etats_status.yaml` — `sensor.lumiere_*_etat`
-- `utility_meter/P3_eclairage/P3_UM_AMHQ_2_ZONE.yaml` — UM quotidien/mensuel par zone
-- `utility_meter/P3_eclairage/P3_UM_AMHQ_3_TOTAL.yaml` — UM TOTAL appartement
+- `utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml` — UM source (19 ampoules)
+- `templates/P3_eclairage/P3_ENERGIE_TLP/P3_TPL_AMHQ_1_UNITE.yaml` — relais kWh unité
+- `templates/P3_eclairage/P3_ENERGIE_TLP/P3_TPL_AMHQ_2_ZONE.yaml` — agrégat par zone
+- `templates/P3_eclairage/P3_ENERGIE_TLP/P3_TPL_AMHQ_3_TOTAL.yaml` — total appartement
 
 ### Documentation
 
-- [`PAGE_ENERGIE_ECLAIRAGE.md`](./PAGE_ENERGIE_ECLAIRAGE.md) — YAML complet de la page `/dashboard-tablette/energie-lampes` (5 sections pièces, tabbed-card)
-- [`docs/WIFI_PRESENCE (Home Page)/PAGE_HOME.md`](../WIFI_PRESENCE%20(Home%20Page)/PAGE_HOME.md) — vue d'ensemble des 18 vignettes
-- [`docs/DEPENDANCES_GLOBALES.md`](DEPENDANCES_GLOBALES.md) — chaîne de dépendances L2C3
+- [`PAGE_ENERGIE_ECLAIRAGE.md`](./PAGE_ENERGIE_ECLAIRAGE.md) — YAML complet de la page `/dashboard-tablette/energie-lampes`
+- [`docs/DEPENDANCES_GLOBALES.md`](../DEPENDANCES_GLOBALES.md) — chaîne de dépendances L2C3
 
 ---
 
-← Retour : [`PAGE_HOME.md`](../WIFI_PRESENCE%20(Home%20Page)/PAGE_HOME.md) | → Suite : [`PAGE_ENERGIE_ECLAIRAGE.md`](./PAGE_ENERGIE_ECLAIRAGE.md)
+← Retour : [`PAGE_HOME.md`](../HOME%20PAGE/PAGE_HOME.md) | → Suite : [`PAGE_ENERGIE_ECLAIRAGE.md`](./PAGE_ENERGIE_ECLAIRAGE.md)
 
 
 <!-- obsidian-wikilinks -->

@@ -5,12 +5,14 @@
 # ## 📝 DESCRIPTION :
 # 6 capteurs de température du Mini PC Intel NUC :
 # carte mère (zone thermique 0), CPU Package, et 4 cores individuels.
+# ⚠️ DÉSACTIVÉ — command_line non fonctionnel depuis passage en VM HA.
+# Remplacé par MQTT Discovery (publish_temp.sh sur host Proxmox).
+# Entités actives : sensor.proxmox_carte_mere / proxmox_cpu_package / proxmox_core_0→3
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Formule : valeur_brute (millidegrés) / 1000 → °C (arrondi 1 décimale)
 # - Sources : sensor.thermal_zone_0_temp, sensor.temperature_cpu_package,
 #             sensor.temperature_core_0/1/2/3
-#
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
@@ -72,7 +74,4 @@
       state: "{{ (states('sensor.temperature_core_3') | float(0) / 1000) | round(1) }}"
 
 # annotations_log:
-# [L1-3]         Boîte ASCII arrondie mise à 78 chars (standard ReBuild).
-# [L6-17]        En-tête doc obligatoire ajouté (DESCRIPTION, CALCUL, PIÈGES, VIGNETTE).
-# [L20-22]       Boîte secondaire carrée 37 chars, libellé catégorie lettrée [ MP ].
-# [L23,30,37,44,51,58] Slugs tertiaires présents.
+# [L7-9] Ajout note désactivation + entités MQTT de remplacement.

@@ -1,0 +1,97 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ TEMPLATE : MINI-PC — RELAI MQTT → SENSORS T° (6 SONDES)                 │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Wrappeurs template des 6 capteurs température Proxmox reçus via MQTT Discovery.
+# Remplace #MP_01_sonde_température_mini-pc.yaml (command_line — mort en VM).
+# Source : publish_temp.sh sur host Proxmox → sensor.proxmox_* via MQTT Discovery.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Pas de calcul : float passthrough direct (valeur déjà en °C, 1 décimale).
+# - Si sensor.proxmox_* indisponible → float(0) = 0°C (pas d'erreur template).
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL              | CAPTEUR BRUT (source)      | CE FICHIER (unique_id)      | AVAL  |
+# |:----------------------|:---------------------------|:----------------------------|:------|
+# | Intel NUC (acpitz)    | sensor.proxmox_carte_mere  | temperature_carte_mere      | L4C2  |
+# | Intel NUC (pkg_temp)  | sensor.proxmox_cpu_package | temperature_cpu_package     | L4C2  |
+# | Intel NUC (coretemp)  | sensor.proxmox_core_0      | temperature_core_0          | L4C2  |
+# | Intel NUC (coretemp)  | sensor.proxmox_core_1      | temperature_core_1          | L4C2  |
+# | Intel NUC (coretemp)  | sensor.proxmox_core_2      | temperature_core_2          | L4C2  |
+# | Intel NUC (coretemp)  | sensor.proxmox_core_3      | temperature_core_3          | L4C2  |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - publish_temp.sh tourne en service systemd (5s) sur le host Proxmox.
+# - Les sensor.proxmox_* sont créés par MQTT Discovery (retain=true).
+# - unique_id sans suffixe _sys — les anciens _sys étaient conflictuels
+#   (doublons _2 dans le registre HA) → supprimés et recréés proprement.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L4C2 Mini PC (surveillance thermique — ring-tile-card + apexcharts)
+
+- sensor:
+    # ┌───────────────────────────────────┐
+    # │ 9. MINI-PC — TEMPÉRATURES MQTT    │
+    # └───────────────────────────────────┘
+
+    # --- temperature_carte_mere ---
+    - name: "Température Carte Mère"
+      unique_id: temperature_carte_mere
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state_class: measurement
+      icon: mdi:chip
+      state: "{{ states('sensor.proxmox_carte_mere') | float(0) }}"
+
+    # --- temperature_cpu_package ---
+    - name: "Température CPU Package"
+      unique_id: temperature_cpu_package
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state_class: measurement
+      icon: mdi:cpu-64-bit
+      state: "{{ states('sensor.proxmox_cpu_package') | float(0) }}"
+
+    # --- temperature_core_0 ---
+    - name: "Température Core 0"
+      unique_id: temperature_core_0
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state_class: measurement
+      icon: mdi:thermometer
+      state: "{{ states('sensor.proxmox_core_0') | float(0) }}"
+
+    # --- temperature_core_1 ---
+    - name: "Température Core 1"
+      unique_id: temperature_core_1
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state_class: measurement
+      icon: mdi:thermometer
+      state: "{{ states('sensor.proxmox_core_1') | float(0) }}"
+
+    # --- temperature_core_2 ---
+    - name: "Température Core 2"
+      unique_id: temperature_core_2
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state_class: measurement
+      icon: mdi:thermometer
+      state: "{{ states('sensor.proxmox_core_2') | float(0) }}"
+
+    # --- temperature_core_3 ---
+    - name: "Température Core 3"
+      unique_id: temperature_core_3
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state_class: measurement
+      icon: mdi:thermometer
+      state: "{{ states('sensor.proxmox_core_3') | float(0) }}"
+
+# annotations_log:
+# - Migration command_line → template MQTT (publish_temp.sh systemd 5s).
+# - unique_id sans _sys (anciens _sys supprimés — conflits registre HA _2).
+# - Cohérent avec dashboard page_L4C2_mini_pc_2026-05-02.yaml.
+# - Fichier renommé : MP_02_sante_systeme_mini_pc_mqtt.yaml → MP_02_sonde_température_mini-pc.yaml
