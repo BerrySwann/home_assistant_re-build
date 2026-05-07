@@ -218,9 +218,10 @@ climate:
 http:
   use_x_forwarded_for: true
   trusted_proxies:
-    # --- Interne HA & Add-ons ---
-    - 127.0.0.1
-    - 172.30.0.0/16
+    # --- Proxy locaux & Add-ons (Tailscale / Cloudflared) ---
+    - 127.0.0.1       # Toujours bon à avoir pour le local
+    - 172.30.33.0/24  # C'est l'IP de l'Add-on Tailscale en interne
+    - 172.30.0.0/16   # Tous les autres add-ons / ingress / tunnels
 
     # --- Réseau de la casba (Nouveau) ---
     - 10.32.154.0/24   # Autorise tout ton nouveau réseau local
@@ -241,10 +242,10 @@ http:
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ RPI_FAN RASPBERRY PI4                                                    │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-fan:
-  - platform: rpi_gpio_pwm
-    fans:
-      - name: RPI Cooling Fan
-        unique_id: rpi_cooling_fan
-        pin: 14
+#fan:
+#  - platform: rpi_gpio_pwm
+#   fans:
+#     - name: RPI Cooling Fan
+#       unique_id: rpi_cooling_fan
+#       pin: 14
 
