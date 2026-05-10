@@ -1,3 +1,39 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. TEMPLATE : ÉNERGIE APPART — CALCUL COÛTS HP/HC + TOTAL (AMHQ)    │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensors template calculant les coûts HP, HC et Total en euros de la
+# consommation de l'appartement sur 4 périodes (Quotidien, Hebdo, Mensuel,
+# Annuel). Split HP/HC géré nativement via utility_meter tariffs.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule HP   : sensor.genelec_appart_hphc_[periode]_um_hp × sensor.edf_tempo_price_blue_hp
+# - Formule HC   : sensor.genelec_appart_hphc_[periode]_um_hc × sensor.edf_tempo_price_blue_hc
+# - Formule TOTAL: cout_hp + cout_hc
+# - Sources UM   : utility_meter/P0_Energie_total/Genelec_appart/03_UM_genelec_appart_HPHC_AMHQ.yaml
+# - Tarifs EDF HPHC 6kVA :
+#     HP : sensor.tarif_heures_pleines_ttc  (0.2065 €/kWh — 2026)
+#     HC : sensor.tarif_heures_creuses_ttc  (0.1578 €/kWh — 2026)
+# - Basculement HP ↔ HC : automation energie/basculement_tarif_hphc.yaml
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | sensor.genelec_appart_*_{periode} (01_UM_AMHQ)     | genelec_appart_cout_*_{periode}                    | L2C1 Énergie Générale              |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Les entités UM génèrent des sous-capteurs automatiques :
+#     sensor.genelec_appart_hphc_*_um_hp  (Heures Pleines)
+#     sensor.genelec_appart_hphc_*_um_hc  (Heures Creuses)
+# - L'automation de basculement DOIT être active pour que le split soit correct.
+# - Sans automation, le tarif reste figé sur le dernier sélectionné.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (section coûts HP/HC/Total par période)
+
 - sensor:
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
@@ -9,7 +45,7 @@
       unique_id: genelec_appart_cout_hp_quotidien
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
@@ -23,7 +59,7 @@
       unique_id: genelec_appart_cout_hc_quotidien
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
@@ -37,7 +73,7 @@
       unique_id: genelec_appart_cout_total_quotidien
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set hp_kwh  = states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) %}
         {% set hc_kwh  = states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) %}
@@ -59,7 +95,7 @@
       unique_id: genelec_appart_cout_hp_hebdomadaire
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_hebdomadaire_um_hp') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
@@ -73,7 +109,7 @@
       unique_id: genelec_appart_cout_hc_hebdomadaire
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_hebdomadaire_um_hc') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
@@ -87,7 +123,7 @@
       unique_id: genelec_appart_cout_total_hebdomadaire
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set hp_kwh  = states('sensor.genelec_appart_hphc_hebdomadaire_um_hp') | float(0) %}
         {% set hc_kwh  = states('sensor.genelec_appart_hphc_hebdomadaire_um_hc') | float(0) %}
@@ -109,7 +145,7 @@
       unique_id: genelec_appart_cout_hp_mensuel
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_mensuel_um_hp') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
@@ -123,7 +159,7 @@
       unique_id: genelec_appart_cout_hc_mensuel
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_mensuel_um_hc') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
@@ -137,7 +173,7 @@
       unique_id: genelec_appart_cout_total_mensuel
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set hp_kwh  = states('sensor.genelec_appart_hphc_mensuel_um_hp') | float(0) %}
         {% set hc_kwh  = states('sensor.genelec_appart_hphc_mensuel_um_hc') | float(0) %}
@@ -159,7 +195,7 @@
       unique_id: genelec_appart_cout_hp_annuel
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_annuel_um_hp') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
@@ -173,7 +209,7 @@
       unique_id: genelec_appart_cout_hc_annuel
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_annuel_um_hc') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
@@ -187,7 +223,7 @@
       unique_id: genelec_appart_cout_total_annuel
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set hp_kwh  = states('sensor.genelec_appart_hphc_annuel_um_hp') | float(0) %}
         {% set hc_kwh  = states('sensor.genelec_appart_hphc_annuel_um_hc') | float(0) %}
@@ -199,3 +235,12 @@
           and states('sensor.genelec_appart_hphc_annuel_um_hc') not in ['unavailable','unknown','none']
           and states('sensor.tarif_heures_pleines_ttc') not in ['unavailable','unknown','none']
           and states('sensor.tarif_heures_creuses_ttc') not in ['unavailable','unknown','none'] }}
+
+# annotations_log:
+# - [REFONTE] Remplacement du calcul approximatif (× tarif HP unique) par split HP/HC réel
+# - [AJOUT] 8 nouveaux sensors HP + HC individuels (2 par période × 4 périodes)
+# - [MODIF] Sources : genelec_appart_*_um → genelec_appart_hphc_*_um_hp + *_hc
+# - [MODIF 2026-04-26] Tarif : sensor.edf_tempo_price_blue_hp/_hc (unknown) →
+#   sensor.tarif_heures_pleines_ttc / sensor.tarif_heures_creuses_ttc (intégration tarifs_edf HPHC 6kVA)
+# - [TARIFS 2026] HP = 0.2065 €/kWh / HC = 0.1578 €/kWh (EDF HPHC 6kVA TTC)
+# - [PRECISION] round(3) pour HP/HC individuels, round(2) pour total
