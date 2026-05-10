@@ -1941,22 +1941,14 @@
   mode: single
 - id: '1775245530054'
   alias: Eco. PRISES DINAMIQUE -> By-Présence/Groupe
-  description: 'Pilotage des 6 prises en fonction du groupe de présence (G1 à G4).
-    Sécurité PC : alim bureau garantie si conso > 100W.
+  description: 'Pilotage des 5 prises en fonction du groupe de présence (G1 à G4).
+    Sécurité PC intégrée.
 
     '
   triggers:
   - entity_id: sensor.groupe
     id: groupe_change
     trigger: state
-  - entity_id: sensor.prise_bureau_pc_ikea_power
-    above: 100
-    id: pc_allume
-    trigger: numeric_state
-  - entity_id: sensor.prise_bureau_pc_ikea_power
-    below: 40
-    id: pc_eteint
-    trigger: numeric_state
   actions:
   - variables:
       g: '{{ states(''sensor.groupe'') }}'
@@ -1966,35 +1958,29 @@
       horloge: '{{ ''on'' if g in [''groupe_2'', ''groupe_4''] else ''off'' }}'
       play3: '{{ ''on'' if g in [''groupe_2'', ''groupe_3'', ''groupe_4''] else ''off''
         }}'
-      pc_bureau: '{{ ''on'' if (g in [''groupe_3'', ''groupe_4''] or pc_active) else
-        ''off'' }}'
       tete_lit: '{{ ''on'' if g in [''groupe_2'', ''groupe_4''] else ''off'' }}'
   - target:
       entity_id: switch.prise_tv_salon_ikea
-    action: homeassistant.turn_off
+    action: switch.turn_off
   - target:
       entity_id: light.hue_smart_eco_salon
-    action: homeassistant.turn_{{ vapote }}
+    action: light.turn_{{ vapote }}
   - target:
       entity_id: switch.prise_horloge_ikea
-    action: homeassistant.turn_{{ horloge }}
+    action: switch.turn_{{ horloge }}
   - target:
       entity_id: switch.ecran_p_c_3_play_hue
-    action: homeassistant.turn_{{ play3 }}
-  - target:
-      entity_id: light.hue_smart_eco_pc_bureau
-    action: homeassistant.turn_{{ pc_bureau }}
+    action: switch.turn_{{ play3 }}
   - target:
       entity_id: switch.prise_tete_de_lit_chambre
-    action: homeassistant.turn_{{ tete_lit }}
+    action: switch.turn_{{ tete_lit }}
   - data:
       title: 'Groupe: {{ g }}'
       message: "{% set prises = [\n  'switch.prise_tv_salon_ikea',\n  'switch.prise_horloge_ikea',\n
-        \ 'light.hue_smart_eco_salon',\n  'switch.ecran_p_c_3_play_hue',\n  'light.hue_smart_eco_pc_bureau',\n
-        \ 'switch.prise_tete_de_lit_chambre'\n] %} {% set count_on = namespace(value=0)
-        %} {% for p in prises %}\n  {% if states(p) == 'on' %}\n    {% set count_on.value
-        = count_on.value + 1 %}\n  {% endif %}\n{% endfor %} [{{ count_on.value }}]
-        prises ON | PC: {{ states('sensor.prise_bureau_pc_ikea_power') | int }}W\n"
+        \ 'light.hue_smart_eco_salon',\n  'switch.ecran_p_c_3_play_hue',\n  'switch.prise_tete_de_lit_chambre'
+        \n] %} {% set count_on = namespace(value=0) %} {% for p in prises %}\n  {%
+        if states(p) == 'on' %}\n    {% set count_on.value = count_on.value + 1 %}\n
+        \ {% endif %}\n{% endfor %} [{{ count_on.value }}] prises ON\n"
     action: notify.mobile_app_eric
   mode: queued
 - id: '1775245732227'
