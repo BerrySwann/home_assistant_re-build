@@ -23,7 +23,7 @@
 #
 # | MATÉRIEL     | CAPTEUR BRUT (source)              | CE FICHIER (unique_id)              | AVAL                                      |
 # |:-------------|:-----------------------------------|:------------------------------------|:------------------------------------------|
-# | PowerCalc    | sensor.{slug}_power × 19           | eclairage_total_group_puissance     | total_pour_les_7_postes.yaml → L2C1/L2C3 |
+# | PowerCalc    | sensor.{slug}_power × 19           | eclairage_total_group_puissance_tpl | total_pour_les_7_postes.yaml → L2C1/L2C3 |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Sources = slugs canoniques P3 (CLAUDE.md) + _power — NE PAS inventer de variantes.
@@ -36,12 +36,12 @@
 # - L2C3 Conso Énergie Éclairage (puissance totale instantanée).
 
 - sensor:
-    # --- eclairage_total_group_puissance ---
+    # --- eclairage_total_group_puissance_tpl ---
     - name: "Eclairage Total Group Puissance TPL"
       unique_id: eclairage_total_group_puissance_tpl
       unit_of_measurement: "W"
-      device_class: energy
-      state_class: total
+      device_class: power
+      state_class: measurement
       icon: mdi:lightbulb-group
       state: >
         {% set sensors = [
@@ -70,4 +70,4 @@
 # annotations_log:
 # [Rebuild] Remplace ancienne chaîne P3_POWER_2 (zones) → P3_POWER_3.
 # [Sources] 19 ampoules directes via slugs canoniques P3 (CLAUDE.md) + _power.
-# [unique_id] eclairage_total_group_puissance — inchangé (compatibilité total_pour_les_7_postes).
+# [unique_id] eclairage_total_group_puissance_tpl — suffixe _tpl ajouté (cohérence archi TPL).
