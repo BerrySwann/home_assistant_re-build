@@ -33,24 +33,18 @@
       unique_id: eco_prises_config
       state: "ok"
       attributes:
-        prises:
-          # ──────────────────────────────────────────────────────────────────
-          # FORMAT : - entity: <entity_id>
-          #            groupes: [groupe_1, groupe_2, groupe_3, groupe_4]
-          #          groupes: [] = TOUJOURS OFF
-          # ──────────────────────────────────────────────────────────────────
-          - entity: switch.prise_tv_salon_ikea
-            groupes: []
-          - entity: light.hue_smart_eco_salon
-            groupes: [groupe_2, groupe_4]
-          - entity: switch.prise_horloge_ikea
-            groupes: [groupe_2, groupe_4]
-          - entity: switch.ecran_p_c_3_play_hue
-            groupes: [groupe_2, groupe_3, groupe_4]
-          - entity: switch.prise_tete_de_lit_chambre
-            groupes: [groupe_2, groupe_4]
-          # ──────────────────────────────────────────────────────────────────
-          # AJOUTER UNE PRISE ICI :
-          # - entity: switch.nouvelle_prise
-          #   groupes: [groupe_X, groupe_Y]
-          # ──────────────────────────────────────────────────────────────────
+        # HA exige une string template — utiliser tojson pour sérialiser la liste.  # "[modif] liste YAML brute → tojson"
+        # Consommé par l'automation avec from_json : state_attr(...,'prises') | from_json
+        #
+        # FORMAT : {'entity': '<entity_id>', 'groupes': ['groupe_X', ...]}
+        #          groupes: [] = TOUJOURS OFF
+        #
+        # AJOUTER UNE PRISE : copier une ligne {'entity':..., 'groupes':[...]} dans la liste.
+        prises: >-
+          {{ [
+            {'entity': 'switch.prise_tv_salon_ikea',       'groupes': []},
+            {'entity': 'light.hue_smart_eco_salon',        'groupes': ['groupe_2', 'groupe_4']},
+            {'entity': 'switch.prise_horloge_ikea',        'groupes': ['groupe_2', 'groupe_4']},
+            {'entity': 'switch.ecran_p_c_3_play_hue',      'groupes': ['groupe_2', 'groupe_3', 'groupe_4']},
+            {'entity': 'switch.prise_tete_de_lit_chambre', 'groupes': ['groupe_2', 'groupe_4']}
+          ] | tojson }}

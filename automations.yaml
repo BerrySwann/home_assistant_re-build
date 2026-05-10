@@ -1955,7 +1955,8 @@
   - alias: VARIABLES — Groupe actif + liste des prises (source externe)
     variables:
       g: '{{ states(''sensor.groupe'') }}'
-      prises: '{{ state_attr(''sensor.eco_prises_config'', ''prises'') }}'
+      prises: '{{ state_attr(''sensor.eco_prises_config'', ''prises'') | from_json
+        }}'
   - alias: ACTION — ON/OFF chaque prise selon groupe
     repeat:
       for_each: '{{ prises }}'
