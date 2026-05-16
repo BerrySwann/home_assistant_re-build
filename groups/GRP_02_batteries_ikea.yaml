@@ -27,10 +27,6 @@
 ikea_devices:
   name: "IKEA Devices"
   entities:
-    - sensor.contact_fenetre_bureau_ikea_battery
-    - sensor.contact_fenetre_chambre_ikea_battery
-    - sensor.contact_fenetre_cuisine_ikea_battery
-    - sensor.contact_fenetre_salon_ikea_battery
     - sensor.detecteur_de_fuite_ikea_battery
     - sensor.inter_salon_4_ikea_battery
     - sensor.detecteur_vallhorn_battery
