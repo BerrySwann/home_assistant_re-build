@@ -1,0 +1,154 @@
+type: custom:button-card
+tap_action:
+  action: navigate
+  navigation_path: /dashboard-tablette/energie-lampes
+entities:
+  - sensor.lumiere_appartement_etat
+  - sensor.lumiere_salon_etat
+  - sensor.lumiere_cuisine_etat
+  - sensor.lumiere_bureau_etat
+  - sensor.lumiere_salle_de_bain_etat
+  - sensor.lumiere_chambre_etat
+  - sensor.eclairage_appart_2_quotidien_um_kwh_tpl
+  - sensor.eclairage_salon_5_quotidien_um_kwh_tpl
+  - sensor.eclairage_cuisine_1_quotidien_um_kwh_tpl
+  - sensor.eclairage_bureau_5_quotidien_um_kwh_tpl
+  - sensor.eclairage_sdb_2_quotidien_um_kwh_tpl
+  - sensor.eclairage_chambre_4_quotidien_um_kwh_tpl
+  - sensor.eclairage_total_unit_quotidien_kwh_tpl
+  - sensor.eclairage_appart_2_mensuel_um_kwh_tpl
+  - sensor.eclairage_salon_5_mensuel_um_kwh_tpl
+  - sensor.eclairage_cuisine_1_mensuel_um_kwh_tpl
+  - sensor.eclairage_bureau_5_mensuel_um_kwh_tpl
+  - sensor.eclairage_sdb_2_mensuel_um_kwh_tpl
+  - sensor.eclairage_chambre_4_mensuel_um_kwh_tpl
+  - sensor.eclairage_total_unit_mensuel_kwh_tpl
+triggers_update:
+  - sensor.lumiere_appartement_etat
+  - sensor.lumiere_salon_etat
+  - sensor.lumiere_cuisine_etat
+  - sensor.lumiere_bureau_etat
+  - sensor.lumiere_salle_de_bain_etat
+  - sensor.lumiere_chambre_etat
+  - sensor.eclairage_appart_2_quotidien_um_kwh_tpl
+  - sensor.eclairage_salon_5_quotidien_um_kwh_tpl
+  - sensor.eclairage_cuisine_1_quotidien_um_kwh_tpl
+  - sensor.eclairage_bureau_5_quotidien_um_kwh_tpl
+  - sensor.eclairage_sdb_2_quotidien_um_kwh_tpl
+  - sensor.eclairage_chambre_4_quotidien_um_kwh_tpl
+  - sensor.eclairage_total_unit_quotidien_kwh_tpl
+  - sensor.eclairage_appart_2_mensuel_um_kwh_tpl
+  - sensor.eclairage_salon_5_mensuel_um_kwh_tpl
+  - sensor.eclairage_cuisine_1_mensuel_um_kwh_tpl
+  - sensor.eclairage_bureau_5_mensuel_um_kwh_tpl
+  - sensor.eclairage_sdb_2_mensuel_um_kwh_tpl
+  - sensor.eclairage_chambre_4_mensuel_um_kwh_tpl
+  - sensor.eclairage_total_unit_mensuel_kwh_tpl
+styles:
+  card:
+    - aspect-ratio: 1/1
+    - border-radius: 10px
+    - background: transparent
+    - border-width: 3px
+    - border-color: white
+    - border-style: double
+    - color: white
+    - font-size: 11px
+    - line-height: 1.2
+  grid:
+    - grid-template-areas: |
+        "titre titre titre"
+        "piece quotidien mensuel"
+    - grid-template-columns: 1fr 1fr 1fr
+    - grid-template-rows: auto
+    - margin-top: 4.5px
+  custom_fields:
+    titre:
+      - grid-area: titre
+      - justify-self: center
+      - text-align: center
+      - font-weight: bold
+    piece:
+      - justify-self: start
+      - margin-left: 8px
+      - text-align: left
+    quotidien:
+      - justify-self: start
+      - margin-left: 15px
+      - text-align: left
+    mensuel:
+      - justify-self: end
+      - margin-right: 6px
+      - text-align: right
+custom_fields:
+  titre: |
+    [[[ return 'Consommation LAMPES' ]]]
+  piece: |
+    [[[
+      function getCol(entityId, isEcoSensitive = false) {
+        const s = states[entityId]?.state;
+        if (!s || s === 'Éteint') return 'white';
+        if (isEcoSensitive && s === 'Éco.') return 'white';
+        return 'lightgreen';
+      }
+      const pieces = [
+        { name: 'Appart.', color: getCol('sensor.lumiere_appartement_etat') },
+        { name: 'Salon',   color: getCol('sensor.lumiere_salon_etat') },
+        { name: 'Cuisine', color: getCol('sensor.lumiere_cuisine_etat') },
+        { name: 'Bureau',  color: getCol('sensor.lumiere_bureau_etat', true) },
+        { name: 'SdB',     color: getCol('sensor.lumiere_salle_de_bain_etat') },
+        { name: 'Chambre', color: getCol('sensor.lumiere_chambre_etat', true) },
+        { name: 'TOTAL',   color: 'lightgreen', bold: true }
+      ];
+      return pieces.map(p =>
+        `<span style="display: block; text-align: left; line-height: 1.2; color: ${p.color}; ${p.bold ? 'font-weight: bold;' : ''}">${p.name}</span>`
+      ).join('');
+    ]]]
+  quotidien: |
+    [[[
+      function safeState(entityId) {
+        const entity = states[entityId];
+        if (!entity || ['unavailable', 'unknown'].includes(entity.state)) return '<span style="color: #aaaaaa;">N/A</span>';
+        var val = parseFloat(entity.state);
+        if (isNaN(val)) return '<span style="color: #aaaaaa;">N/A</span>';
+        if (val < 1) return (val * 1000).toFixed(0) + ' <span style="font-size: 5px;">Wh</span>';
+        return val.toFixed(2) + ' <span style="font-size: 5px;">kWh</span>';
+      }
+      const sensors = [
+        'sensor.eclairage_appart_2_quotidien_um_kwh_tpl',
+        'sensor.eclairage_salon_5_quotidien_um_kwh_tpl',
+        'sensor.eclairage_cuisine_1_quotidien_um_kwh_tpl',
+        'sensor.eclairage_bureau_5_quotidien_um_kwh_tpl',
+        'sensor.eclairage_sdb_2_quotidien_um_kwh_tpl',
+        'sensor.eclairage_chambre_4_quotidien_um_kwh_tpl',
+        'sensor.eclairage_total_unit_quotidien_kwh_tpl'
+      ];
+      return sensors.map((s, i) => {
+        const isLast = i === sensors.length - 1;
+        return `<span style="display: block; text-align: right; line-height: 1.2; ${isLast ? 'color: lightgreen; font-weight: bold;' : ''}">${safeState(s)}</span>`;
+      }).join('');
+    ]]]
+  mensuel: |
+    [[[
+      function safeState(entityId) {
+        const entity = states[entityId];
+        if (!entity || ['unavailable', 'unknown'].includes(entity.state)) return '<span style="color: #aaaaaa;">N/A</span>';
+        var val = parseFloat(entity.state);
+        if (isNaN(val)) return '<span style="color: #aaaaaa;">N/A</span>';
+        if (val < 1) return (val * 1000).toFixed(0) + ' <span style="font-size: 5px;">Wh</span>';
+        return val.toFixed(2) + ' <span style="font-size: 5px;">kWh</span>';
+      }
+      const sensors = [
+        'sensor.eclairage_appart_2_mensuel_um_kwh_tpl',
+        'sensor.eclairage_salon_5_mensuel_um_kwh_tpl',
+        'sensor.eclairage_cuisine_1_mensuel_um_kwh_tpl',
+        'sensor.eclairage_bureau_5_mensuel_um_kwh_tpl',
+        'sensor.eclairage_sdb_2_mensuel_um_kwh_tpl',
+        'sensor.eclairage_chambre_4_mensuel_um_kwh_tpl',
+        'sensor.eclairage_total_unit_mensuel_kwh_tpl'
+      ];
+      return sensors.map((s, i) => {
+        const isLast = i === sensors.length - 1;
+        return `<span style="display: block; text-align: right; line-height: 1.2; ${isLast ? 'color: lightgreen; font-weight: bold;' : ''}">${safeState(s)}</span>`;
+      }).join('');
+    ]]]

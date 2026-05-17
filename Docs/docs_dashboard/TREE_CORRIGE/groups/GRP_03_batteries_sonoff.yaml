@@ -1,0 +1,40 @@
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ GRP 03 — BATTERIES : SONOFF DEVICES                                         │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Groupe des capteurs de batteries des équipements SONOFF Zigbee.
+# Thermostats SNZB-02 (T°/Hum par pièce) + contacts fenêtres SNZB-04 (11 unités).
+# Utilisé par auto-entities (L5C1) pour la surveillance centralisée des piles.
+#
+# ## 🧮 CALCUL & SOURCES :
+# Source : Zigbee2MQTT (Z2M) → intégration MQTT HA
+# Entités : sensor.th_*_battery (SNZB-02) + sensor.contact_fenetre_*_sonoff_battery (SNZB-04)
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+# | MATÉRIEL        | CAPTEUR BRUT (source)                        | CE FICHIER            | AVAL          |
+# |:----------------|:---------------------------------------------|:----------------------|:--------------|
+# | SONOFF (Z2M)    | sensor.th_*_battery / sensor.*_sonoff_battery | group.sonoff_devices  | auto-entities → L5C1 |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Chaque entité doit exister dans HA avant d'être ajoutée ici.
+# - Après ajout d'un capteur SONOFF, recharger via Outils dev → YAML → Recharger groupes.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# L5C1 — Surveillance Batteries / Piles
+
+# --- sonoff_devices ---
+sonoff_devices:
+  name: "SONOFF Devices"
+  entities:
+    - sensor.th_balcon_nord_battery
+    - sensor.th_bureau_battery
+    - sensor.th_chambre_battery
+    - sensor.th_cuisine_battery
+    - sensor.th_salle_de_bain_battery
+    - sensor.th_salon_battery
+    - sensor.th_cellier_battery
+    - sensor.contact_fenetre_salon_sonoff_battery
+    - sensor.contact_fenetre_cuisine_sonoff_battery
+    - sensor.contact_fenetre_bureau_sonoff_battery
+    - sensor.contact_fenetre_chambre_sonoff_battery

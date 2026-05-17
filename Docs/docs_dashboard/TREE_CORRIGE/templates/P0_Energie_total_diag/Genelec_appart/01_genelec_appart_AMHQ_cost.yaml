@@ -45,7 +45,7 @@
       unique_id: genelec_appart_cout_hp_quotidien
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
@@ -59,7 +59,7 @@
       unique_id: genelec_appart_cout_hc_quotidien
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
@@ -73,7 +73,7 @@
       unique_id: genelec_appart_cout_total_quotidien
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set hp_kwh  = states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) %}
         {% set hc_kwh  = states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) %}
@@ -95,7 +95,7 @@
       unique_id: genelec_appart_cout_hp_hebdomadaire
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_hebdomadaire_um_hp') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
@@ -109,7 +109,7 @@
       unique_id: genelec_appart_cout_hc_hebdomadaire
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_hebdomadaire_um_hc') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
@@ -123,7 +123,7 @@
       unique_id: genelec_appart_cout_total_hebdomadaire
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set hp_kwh  = states('sensor.genelec_appart_hphc_hebdomadaire_um_hp') | float(0) %}
         {% set hc_kwh  = states('sensor.genelec_appart_hphc_hebdomadaire_um_hc') | float(0) %}
@@ -145,7 +145,7 @@
       unique_id: genelec_appart_cout_hp_mensuel
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_mensuel_um_hp') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
@@ -159,7 +159,7 @@
       unique_id: genelec_appart_cout_hc_mensuel
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_mensuel_um_hc') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
@@ -173,7 +173,7 @@
       unique_id: genelec_appart_cout_total_mensuel
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set hp_kwh  = states('sensor.genelec_appart_hphc_mensuel_um_hp') | float(0) %}
         {% set hc_kwh  = states('sensor.genelec_appart_hphc_mensuel_um_hc') | float(0) %}
@@ -195,7 +195,7 @@
       unique_id: genelec_appart_cout_hp_annuel
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_annuel_um_hp') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
@@ -209,7 +209,7 @@
       unique_id: genelec_appart_cout_hc_annuel
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_annuel_um_hc') | float(0) %}
         {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
@@ -223,7 +223,7 @@
       unique_id: genelec_appart_cout_total_annuel
       unit_of_measurement: "€"
       device_class: monetary
-      state_class: total_increasing
+      state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set hp_kwh  = states('sensor.genelec_appart_hphc_annuel_um_hp') | float(0) %}
         {% set hc_kwh  = states('sensor.genelec_appart_hphc_annuel_um_hc') | float(0) %}

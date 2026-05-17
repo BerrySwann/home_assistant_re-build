@@ -23,7 +23,7 @@
 # | Intel NUC (coretemp)  | sensor.proxmox_core_3      | temperature_core_3          | L4C2  |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - publish_temp.sh tourne en service systemd (5s) sur le host Proxmox.
+# - publish_temp.sh tourne en service systemd (10s) sur le host Proxmox.
 # - Les sensor.proxmox_* sont créés par MQTT Discovery (retain=true).
 # - unique_id sans suffixe _sys — les anciens _sys étaient conflictuels
 #   (doublons _2 dans le registre HA) → supprimés et recréés proprement.
@@ -91,7 +91,7 @@
       state: "{{ states('sensor.proxmox_core_3') | float(0) }}"
 
 # annotations_log:
-# - Migration command_line → template MQTT (publish_temp.sh systemd 5s).
+# - Migration command_line → template MQTT (publish_temp.sh systemd 10s). # "[L94] modif"
 # - unique_id sans _sys (anciens _sys supprimés — conflits registre HA _2).
 # - Cohérent avec dashboard page_L4C2_mini_pc_2026-05-02.yaml.
 # - Fichier renommé : MP_02_sante_systeme_mini_pc_mqtt.yaml → MP_02_sonde_température_mini-pc.yaml

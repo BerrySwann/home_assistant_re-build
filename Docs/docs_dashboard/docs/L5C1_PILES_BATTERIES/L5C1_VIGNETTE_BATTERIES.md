@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--07-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--05--10-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Vignette-ff9800?style=flat-square)](.)
 
 </div>
@@ -15,7 +15,7 @@
 | 🏗️ **Layout** | `custom:button-card` — grille 6 colonnes |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-07 |
+| 📅 **Modifié le** | 2026-05-10 |
 | 🏠 **Version HA** | 2025.2.x → v2.0 |
 
 ---
@@ -283,7 +283,7 @@ custom_fields:
 
 ---
 
-## ⚙️ ENTITÉS — GROUPES HA (`group.yaml`)
+## ⚙️ ENTITÉS — GROUPES HA (`groups/`)
 
 > Contenir uniquement des `sensor.*` à état numérique (%). Un `light.*` ou `switch.*` retourne `NaN`.
 
@@ -298,7 +298,7 @@ custom_fields:
 ## 🐛 DÉPANNAGE
 
 ### Vignette affiche 0 partout
-1. Vérifier les 3 groupes dans `group.yaml`
+1. Vérifier les 3 fichiers dans `groups/` (`GRP_01_batteries_hue.yaml`, `GRP_02_batteries_ikea.yaml`, `GRP_03_batteries_sonoff.yaml`)
 2. Leurs entités doivent être des `sensor.*` à état numérique
 3. Tester : `{{ states.group.hue_devices.attributes.entity_id }}`
 

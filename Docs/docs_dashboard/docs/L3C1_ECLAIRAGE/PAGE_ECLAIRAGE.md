@@ -96,7 +96,7 @@ type: grid
 ├── [HEADING] Têtes de Lit   [badges: light.zone_eric, light.zone_gege]
 │   visibility: switch.prise_tete_de_lit_chambre = ON   ← heading masqué si prise coupée
 ├── [conditional] switch.prise_tete_de_lit_chambre = ON → Bouton Têtes de Lit (cols 12)
-│   ├── mushroom-entity-card sensor.lumiere_tete_de_lit_etat  ← toggle hue_color_candle ×2
+│   ├── mushroom-entity-card sensor.lumiere_tete_de_lit_etat  ← toggle light.lit (groupe gege+eric)
 │   └── mushroom-chips-card pastille → popup #tete_de_lit
 │
 ├── [vertical-stack] Popup #tete_de_lit
@@ -140,7 +140,25 @@ Affiché **uniquement** si `switch.ecran_p_c_3_play_hue = "on"`. La Hue Play Syn
 
 Flame animation déclenchée par `light.moniteur_pc = "on"`.
 
-**Pastille** → navigate `#ecranpc`. Visible **uniquement** si `sensor.lumiere_ecran_etat in ['Écran', 'Allumé']`. Masquée si `Synchro.`, `Allumé & Sync.`, `Éco.`, `Éteint` (contrôle manuel sans sens en mode sync).
+**Chip gradateur** (`mushroom-chips-card` en overlay) → navigate `#ecranpc` (popup 4 boutons brightness 25/50/75/100% pour les Play bars). Visible **uniquement** si `sensor.lumiere_ecran_etat in ['Écran', 'Allumé']`. Masquée si `Synchro.`, `Allumé & Sync.`, `Éco.`, `Éteint`.
+
+**Logique complète des états — conditions exactes :**
+
+> `binary_sensor.moniteur_pc = on` = moniteur PC allumé = **Hue Sync Box active**.
+
+| # | État (`sensor.lumiere_ecran_etat`) | Condition | Carte Écran | Chip gradateur #ecranpc |
+|---|-------------------------------------|-----------|-------------|-------------------|
+| 1 | `Éco.` | `switch.ecran_p_c_3_play_hue = off` | **Carte masquée** (conditional) | — |
+| 2 | `Synchro.` | switch ON + Play bars ON + moniteur ON + Boules lumineuses OFF | Visible | **Masquée** |
+| 3 | `Allumé & Sync.` | switch ON + Play bars ON + moniteur ON + Boules lumineuses ON | Visible | **Masquée** |
+| 4 | `Écran` | switch ON + Play bars ON + moniteur OFF + Boules lumineuses OFF | Visible | **Visible** |
+| 5 | `Allumé` | switch ON + Play bars ON + moniteur OFF + Boules lumineuses ON | Visible | **Visible** |
+
+**Pourquoi `Éco.` masque la CARTE ENTIÈRE :** la carte Bouton Écran est un `conditional` conditionné à `switch.ecran_p_c_3_play_hue = on`. Prise OFF → Play bars hors tension → la carte disparaît.
+
+**Pourquoi `Synchro.` et `Allumé & Sync.` masquent la PASTILLE :** le moniteur PC est allumé → la Hue Sync Box synchronise les couleurs/brightness des Play bars en temps réel depuis l'écran. Envoyer un `brightness_pct` via HA serait écrasé immédiatement. Le popup #ecranpc n'a aucun sens en mode sync.
+
+**Pourquoi `Écran` et `Allumé` affichent la PASTILLE :** moniteur OFF → Hue Sync inactive → les Play bars sont sous contrôle HA. Le popup brightness est pertinent.
 
 ### Heading Têtes de Lit — visibility condition
 
@@ -187,6 +205,27 @@ Pattern identique pour toutes les grilles (bureau, écranpc, tête de lit Gégé
 {# true = number mode, false = state mode #}
 {% set use_number = false %}
 ```
+
+### [B4] Tête de Lit — tap_action alternait gege/eric au lieu de toggler les deux
+
+**Symptôme** : clic sur la carte "Tête de Lit" alternait les deux lumières (gege ON/eric OFF → gege OFF/eric ON) au lieu de les allumer/éteindre ensemble.
+
+**Cause** : `light.toggle` ciblant une liste d'entités les toggle indépendamment. Si les deux sont dans des états différents, ils s'échangent à chaque clic.
+
+**Fix** : cibler le groupe `light.lit` qui contrôle les deux candles simultanément :
+```yaml
+# AVANT
+target:
+  entity_id:
+    - light.hue_color_candle_chambre_gege
+    - light.hue_color_candle_chambre_eric
+
+# APRÈS
+target:
+  entity_id: light.lit
+```
+
+---
 
 ### [B3] Pastille Ecran — visible en mode sync (design)
 

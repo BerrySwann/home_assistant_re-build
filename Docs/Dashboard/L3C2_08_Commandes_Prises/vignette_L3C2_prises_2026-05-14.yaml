@@ -1,0 +1,102 @@
+type: custom:button-card
+tap_action:
+  action: navigate
+  navigation_path: /dashboard-tablette/prises
+entities:
+  - switch.prise_tv_salon_ikea
+  - light.hue_smart_eco_salon
+  - switch.prise_horloge_ikea
+  - light.hue_smart_eco_pc_bureau
+  - switch.prise_tete_de_lit_chambre
+  - light.hue_smart_eco_tv_chambre
+triggers_update:
+  - switch.prise_tv_salon_ikea
+  - light.hue_smart_eco_salon
+  - switch.prise_horloge_ikea
+  - light.hue_smart_eco_pc_bureau
+  - switch.prise_tete_de_lit_chambre
+  - light.hue_smart_eco_tv_chambre
+styles:
+  card:
+    - aspect-ratio: 1/1
+    - border-radius: 10px
+    - background: transparent
+    - border-width: 3px
+    - border-color: white
+    - border-style: double
+    - color: white
+    - font-size: 11px
+    - line-height: 1.2
+  grid:
+    - grid-template-areas: |
+        "titre titre"
+        "piece etat"
+    - grid-template-columns: 1fr 1fr
+    - grid-template-rows: auto
+    - margin-top: 4.5px
+  custom_fields:
+    titre:
+      - grid-area: titre
+      - justify-self: center
+      - text-align: center
+      - font-weight: bold
+    piece:
+      - grid-area: piece
+      - justify-self: start
+      - margin-left: 8px
+      - text-align: left
+    etat:
+      - grid-area: etat
+      - justify-self: start
+      - margin-left: 8px
+      - text-align: left
+custom_fields:
+  titre: |
+    [[[ return 'Commande éCO.' ]]]
+  piece: |
+    [[[
+      return `
+      <div>
+        <div>Horloge</div>
+        <div>Salon</div>
+        <div>TV Salon</div>
+        <div>PC Bureau</div>
+        <div>TV Chambre</div>
+        <div>Tête de Lit</div>
+      </div>
+      `;
+    ]]]
+  etat: |
+    [[[
+      function safeState(entityId) {
+        const entity = states[entityId];
+        if (!entity || entity.state === 'unavailable' || entity.state === 'unknown') {
+          return 'N/A';
+        }
+        return entity.state;
+      }
+      function getColorForStatus(status) {
+        if (status === 'N/A') return '#aaaaaa';
+        return status === 'on' ? 'lightgreen' : 'rgb(244,67,54)';
+      }
+      function getStatusText(status) {
+        if (status === 'N/A') return 'N/A';
+        return status === 'on' ? 'Allumé' : 'Éteint';
+      }
+      const hStat = safeState('switch.prise_horloge_ikea');
+      const sStat = safeState('light.hue_smart_eco_salon');
+      const tsStat = safeState('switch.prise_tv_salon_ikea');
+      const pStat = safeState('light.hue_smart_eco_pc_bureau');
+      const tcStat = safeState('light.hue_smart_eco_tv_chambre');
+      const tlStat = safeState('switch.prise_tete_de_lit_chambre');
+      return `
+      <div>
+        <div style="color: ${getColorForStatus(hStat)};">${getStatusText(hStat)}</div>
+        <div style="color: ${getColorForStatus(sStat)};">${getStatusText(sStat)}</div>
+        <div style="color: ${getColorForStatus(tsStat)};">${getStatusText(tsStat)}</div>
+        <div style="color: ${getColorForStatus(pStat)};">${getStatusText(pStat)}</div>
+        <div style="color: ${getColorForStatus(tcStat)};">${getStatusText(tcStat)}</div>
+        <div style="color: ${getColorForStatus(tlStat)};">${getStatusText(tlStat)}</div>
+      </div>
+      `;
+    ]]]

@@ -1,0 +1,55 @@
+type: custom:button-card
+icon: |
+  [[[
+    // Récupère l'entité
+    var sensor = states['sensor.alert_level_in_vence'];
+    // Récupère le nom de l'icône ou une icône par défaut
+    var iconName = sensor && sensor.attributes && sensor.attributes.icon ? sensor.attributes.icon : 'mdi:water-outline';
+    return iconName;
+  ]]]
+tap_action:
+  action: navigate
+  navigation_path: /dashboard-tablette/vigieau
+name: |
+  [[[
+    var sensor = states['sensor.alert_level_in_vence'];
+    var alertLevel = sensor.state;
+    var alertColor = (sensor.attributes && sensor.attributes.Couleur) ? sensor.attributes.Couleur : 'grey';
+    switch(alertLevel) {
+      case 'vigilance (pas de restriction)':
+        alertLevel = 'Aucune restriction';
+      case 'alerte_renforcee':
+        alertLevel = 'Alerte renforcée';
+        break;
+    }
+    return `<div style="text-align: left; color: white; font-size: 13px; margin-bottom: 4px;">Vigieau / Vigi-Eau</div>
+            <div><span style="color: ${alertColor}; font-weight: bold;">${alertLevel}</span></div>`;
+  ]]]
+size: 60%
+styles:
+  card:
+    - aspect-ratio: 1/1
+    - border-radius: 10px
+    - background: transparent
+    - border-width: 3px
+    - border-color: white
+    - border-style: double
+    - color: white
+    - font-size: 15px
+    - line-height: 1.2
+  icon:
+    - transform: rotate(350deg)
+    - left: 15%
+    - top: 15%
+    - color: |
+        [[[
+            var sensor = states['sensor.alert_level_in_vence'];
+            return (sensor && sensor.attributes && sensor.attributes.Couleur) ? sensor.attributes.Couleur : 'white';
+        ]]]
+  name:
+    - color: white
+    - top: 10px
+    - left: 10px
+    - font-size: 80%
+    - font-weight: bold
+    - position: absolute

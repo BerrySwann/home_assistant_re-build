@@ -11,7 +11,7 @@
 # ## 🧮 CALCUL & SOURCES :
 # - Source : sensor.{slug}_{cycle}_um_kwh_tpl (P3_TPL_AMHQ_1_UNITE)
 # - Formule : sum(float(default=0)) sur la liste des _um_kwh_tpl de chaque zone.
-# - state_class: measurement (hérite du reset UM sous-jacent)
+# - state_class: total_increasing — requis par device_class: energy (HA refuse measurement).
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
@@ -46,7 +46,7 @@
       unique_id: eclairage_entree_1_quotidien_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: "{{ states('sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl') | float(0) }}"
       availability: "{{ states('sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
 
@@ -55,7 +55,7 @@
       unique_id: eclairage_entree_1_hebdomadaire_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: "{{ states('sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl') | float(0) }}"
       availability: "{{ states('sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
 
@@ -64,7 +64,7 @@
       unique_id: eclairage_entree_1_mensuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: "{{ states('sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl') | float(0) }}"
       availability: "{{ states('sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
 
@@ -73,7 +73,7 @@
       unique_id: eclairage_entree_1_annuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: "{{ states('sensor.hue_white_lamp_entree_annuel_um_kwh_tpl') | float(0) }}"
       availability: "{{ states('sensor.hue_white_lamp_entree_annuel_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
 
@@ -86,7 +86,7 @@
       unique_id: eclairage_salon_5_quotidien_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_table_quotidien_um_kwh_tpl',
@@ -102,7 +102,7 @@
       unique_id: eclairage_salon_5_hebdomadaire_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_table_hebdomadaire_um_kwh_tpl',
@@ -118,7 +118,7 @@
       unique_id: eclairage_salon_5_mensuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_table_mensuel_um_kwh_tpl',
@@ -134,7 +134,7 @@
       unique_id: eclairage_salon_5_annuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_table_annuel_um_kwh_tpl',
@@ -154,7 +154,7 @@
       unique_id: eclairage_cuisine_1_quotidien_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: "{{ states('sensor.hue_white_lamp_cuisine_quotidien_um_kwh_tpl') | float(0) }}"
       availability: "{{ states('sensor.hue_white_lamp_cuisine_quotidien_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
 
@@ -163,7 +163,7 @@
       unique_id: eclairage_cuisine_1_hebdomadaire_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: "{{ states('sensor.hue_white_lamp_cuisine_hebdomadaire_um_kwh_tpl') | float(0) }}"
       availability: "{{ states('sensor.hue_white_lamp_cuisine_hebdomadaire_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
 
@@ -172,7 +172,7 @@
       unique_id: eclairage_cuisine_1_mensuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: "{{ states('sensor.hue_white_lamp_cuisine_mensuel_um_kwh_tpl') | float(0) }}"
       availability: "{{ states('sensor.hue_white_lamp_cuisine_mensuel_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
 
@@ -181,7 +181,7 @@
       unique_id: eclairage_cuisine_1_annuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: "{{ states('sensor.hue_white_lamp_cuisine_annuel_um_kwh_tpl') | float(0) }}"
       availability: "{{ states('sensor.hue_white_lamp_cuisine_annuel_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
 
@@ -194,7 +194,7 @@
       unique_id: eclairage_couloir_1_quotidien_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: "{{ states('sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl') | float(0) }}"
       availability: "{{ states('sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
 
@@ -203,7 +203,7 @@
       unique_id: eclairage_couloir_1_hebdomadaire_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: "{{ states('sensor.hue_white_lamp_couloir_hebdomadaire_um_kwh_tpl') | float(0) }}"
       availability: "{{ states('sensor.hue_white_lamp_couloir_hebdomadaire_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
 
@@ -212,7 +212,7 @@
       unique_id: eclairage_couloir_1_mensuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: "{{ states('sensor.hue_white_lamp_couloir_mensuel_um_kwh_tpl') | float(0) }}"
       availability: "{{ states('sensor.hue_white_lamp_couloir_mensuel_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
 
@@ -221,7 +221,7 @@
       unique_id: eclairage_couloir_1_annuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: "{{ states('sensor.hue_white_lamp_couloir_annuel_um_kwh_tpl') | float(0) }}"
       availability: "{{ states('sensor.hue_white_lamp_couloir_annuel_um_kwh_tpl') not in ['unavailable', 'unknown'] }}"
 
@@ -234,7 +234,7 @@
       unique_id: eclairage_bureau_5_quotidien_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_play_1_pc_bureau_quotidien_um_kwh_tpl',
@@ -250,7 +250,7 @@
       unique_id: eclairage_bureau_5_hebdomadaire_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_play_1_pc_bureau_hebdomadaire_um_kwh_tpl',
@@ -266,7 +266,7 @@
       unique_id: eclairage_bureau_5_mensuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_play_1_pc_bureau_mensuel_um_kwh_tpl',
@@ -282,7 +282,7 @@
       unique_id: eclairage_bureau_5_annuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_play_1_pc_bureau_annuel_um_kwh_tpl',
@@ -302,7 +302,7 @@
       unique_id: eclairage_sdb_2_quotidien_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.relais_lumiere_sdb_sonoff_quotidien_um_kwh_tpl',
@@ -315,7 +315,7 @@
       unique_id: eclairage_sdb_2_hebdomadaire_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um_kwh_tpl',
@@ -328,7 +328,7 @@
       unique_id: eclairage_sdb_2_mensuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.relais_lumiere_sdb_sonoff_mensuel_um_kwh_tpl',
@@ -341,7 +341,7 @@
       unique_id: eclairage_sdb_2_annuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.relais_lumiere_sdb_sonoff_annuel_um_kwh_tpl',
@@ -358,7 +358,7 @@
       unique_id: eclairage_chambre_4_quotidien_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_chambre_1_quotidien_um_kwh_tpl',
@@ -373,7 +373,7 @@
       unique_id: eclairage_chambre_4_hebdomadaire_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_chambre_1_hebdomadaire_um_kwh_tpl',
@@ -388,7 +388,7 @@
       unique_id: eclairage_chambre_4_mensuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_chambre_1_mensuel_um_kwh_tpl',
@@ -403,7 +403,7 @@
       unique_id: eclairage_chambre_4_annuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_chambre_1_annuel_um_kwh_tpl',
@@ -422,7 +422,7 @@
       unique_id: eclairage_appart_3_quotidien_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl',
@@ -436,7 +436,7 @@
       unique_id: eclairage_appart_3_hebdomadaire_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl',
@@ -450,7 +450,7 @@
       unique_id: eclairage_appart_3_mensuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl',
@@ -464,7 +464,7 @@
       unique_id: eclairage_appart_3_annuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_entree_annuel_um_kwh_tpl',
@@ -482,7 +482,7 @@
       unique_id: eclairage_appart_2_quotidien_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl',
@@ -495,7 +495,7 @@
       unique_id: eclairage_appart_2_hebdomadaire_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl',
@@ -508,7 +508,7 @@
       unique_id: eclairage_appart_2_mensuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl',
@@ -521,7 +521,7 @@
       unique_id: eclairage_appart_2_annuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: measurement
+      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_entree_annuel_um_kwh_tpl',

@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--21-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--05--04-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Vignette-ff9800?style=flat-square)](.)
 
 </div>
@@ -14,8 +14,8 @@
 | 🏗️ **Layout** | `custom:button-card` — grid 3 cols (Pièce / État / Compteur) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-21 |
-| 🏠 **Version HA** | 2026.3 |
+| 📅 **Modifié le** | 2026-05-04 |
+| 🏠 **Version HA** | 2026.5 |
 
 ---
 
@@ -230,14 +230,29 @@ custom_fields:
 
 Source : `sensor.lumiere_*_etat` → `[TPL] P3_eclairage/ui_dashboard/etats_status.yaml`
 
-| État reçu | Couleur | Signification |
-|-----------|---------|---------------|
-| `Allumé` | `lightgreen` | Toutes les lumières de la pièce ON |
-| `Éteint` | `rgb(244,67,54)` | Toutes éteintes |
-| `AlluSync` / `Synchro` / `Éco.` | `#FFA500` | État partiel ou économie |
-| `Entrée`, `Couloir`, `Salon`… | `lightgreen` | Seul ce groupe allumé |
-| `Ch.+zG` / `Ch.+zÉ` | `lightgreen` | Chambre + zone ambiance |
-| `N/A` / `erreur` | `#aaaaaa` | Entité indisponible |
+| État reçu | Couleur | Condition source |
+|-----------|---------|-----------------|
+| `Allumé` | `lightgreen` | Toutes entités ON (toutes pièces) |
+| `Éteint` | `rgb(244,67,54)` | Toutes entités OFF |
+| `AlluSync` / `Synchro` / `Éco.` | `#FFA500` | Bureau partiel / écran sync / prise coupée |
+| `Entrée` / `Couloir` / `Salon` / `Table` / `Bureau` / `Écran` | `lightgreen` | Ce groupe seul allumé |
+| `Chambre` / `Tête Lit` / `Ch.+zG` / `Ch.+zÉ` / `Zone G.` / `Zone É.` | `lightgreen` | État partiel chambre (prise ON ou OFF) |
+| `N/A` / `erreur` | `#aaaaaa` | Entité indisponible / unknown |
+
+#### Chambre — Tous les cas (couches 1+2+3)
+
+| État `chambre_etat` | Prise | Actifs | Couleur `etat` | Couleur `active` |
+|:--------------------|:-----:|:------:|:--------------:|:----------------:|
+| `Allumé` | ON | 3/3 | vert | vert |
+| `Ch.+zG` | ON | 2/3 | vert | orange |
+| `Ch.+zÉ` | ON | 2/3 | vert | orange |
+| `Tête Lit` | ON | 2/3 | vert | orange |
+| `Chambre` | ON | 1/3 | vert | orange |
+| `Zone G.` | ON | 1/3 | vert | orange |
+| `Zone É.` | ON | 1/3 | vert | orange |
+| `Éteint` | ON | 0/3 | rouge | rouge |
+| `Chambre` | OFF | 1/1 | vert | vert |
+| `Éco.` | OFF | 0/1 → override | orange | orange |
 
 ### Colonne `active` — Compteur X/N
 
@@ -248,7 +263,7 @@ Source : `sensor.lumiere_*_etat` → `[TPL] P3_eclairage/ui_dashboard/etats_stat
 | Cuisine | `light.cuisine` | 1 | vert=1/1, rouge=0/1 |
 | Bureau | Logique complexe *(voir ci-dessous)* | 1 ou 2 | — |
 | SdB | `light.lampe_salle_de_bain_hue` | 1 | vert=1/1, rouge=0/1 |
-| Chambre | `light.chambre` + bougies si prise ON | 1 ou 3 | — |
+| Chambre | `light.chambre` + bougies si prise ON | 1 ou 3 | vert=`Allumé` (3/3) ou chambre seule (1/1 prise OFF), orange=partiel (1/3 ou 2/3) ou `Éco.` (override) |
 
 #### Bureau — Logique spécifique
 
@@ -272,6 +287,22 @@ Le total de la chambre dépend de l'état de `switch.prise_tete_de_lit_chambre` 
 - **Prise ON** → 3 entités (chambre + `hue_color_candle_chambre_gege` + `hue_color_candle_chambre_eric`) → total = 3
 
 **Cas spécial `Éco.`** : si `chambre_etat === 'Éco.'` et prise OFF et 0 lampes allumées → forcer orange (signale l'état éco de la prise même sans lampe active).
+
+---
+
+## ⚠️ ENTITÉS DISPONIBLES NON ENCORE INTÉGRÉES (etats_status.yaml)
+
+Les sensors suivants existent dans `P3_eclairage/ui_dashboard/etats_status.yaml` mais ne sont pas encore
+référencés dans le code de cette vignette. À intégrer lors d'une prochaine révision si la logique le justifie :
+
+| Entité | Remplace / Complète | Note |
+|:-------|:--------------------|:-----|
+| `sensor.lumiere_bureau_etat` | `sensor.bureau_etat` | Nouveau slug unifié (préfixe `lumiere_`) |
+| `sensor.lumiere_chambre_etat` | `sensor.chambre_etat` | Idem — slug harmonisé |
+| `sensor.lumiere_tete_de_lit_etat` | *(absent)* | Nouvel état dédié tête de lit chambre |
+
+> **Note :** Les anciens `sensor.bureau_etat` et `sensor.chambre_etat` sont toujours présents dans
+> `etats_status.yaml` et fonctionnels — pas de migration urgente.
 
 ---
 
@@ -303,6 +334,154 @@ Le total de la chambre dépend de l'état de `switch.prise_tete_de_lit_chambre` 
 | `light.hue_color_candle_chambre_gege` | 9. CHAMBRE | Hue Bridge |
 | `light.hue_color_candle_chambre_eric` | 9. CHAMBRE | Hue Bridge |
 | `switch.prise_tete_de_lit_chambre` | 9. CHAMBRE | Intégration native |
+
+---
+
+## 📁 YAML SOURCE — `etats_status.yaml`
+
+> Fichier : `templates/P3_eclairage/ui_dashboard/etats_status.yaml`
+> C'est lui qui génère **tous** les `sensor.lumiere_*_etat` lus par cette vignette.
+
+### 🖥️ Setup Bureau — à lire avant le code
+
+Le bureau a **3 couches** d'éclairage :
+1. **Lumières blanches** : `light.hue_white_lamp_bureau_1` + `light.hue_white_lamp_bureau_2` (boules lumineuses)
+2. **Play bars** : `light.hue_play_1/2/3_pc_bureau` (rétroéclairage moniteur — Hue Sync)
+3. **Switch Sync** : `switch.ecran_p_c_3_play_hue` — coupe la prise Hue Sync Box (économie énergie)
+
+Cela donne **3 sensors** distincts : `lumiere_bureau_etat` (boules lumineuses seuls), `lumiere_ecran_etat` (Play bars + Sync), `bureau_etat` (synthèse des deux).
+
+```yaml
+# ┌──────────────────────────────────────┐
+# │ 0. APPARTEMENT (GLOBAL)              │
+# └──────────────────────────────────────┘
+- name: "Lumière Appartement État"
+  unique_id: lumiere_appartement_etat
+  state: >
+    {% if is_state('light.entree', 'on') and is_state('light.couloir', 'on') %}
+      Allumé
+    {% elif is_state('light.entree', 'off') and is_state('light.couloir', 'off') %}
+      Éteint
+    {% elif is_state('light.entree', 'on') and is_state('light.couloir', 'off')%}
+      Entrée
+    {% elif is_state('light.couloir', 'on') and is_state('light.entree', 'off')%}
+      Couloir
+    {% else %}
+      erreur
+    {% endif %}
+
+# ┌──────────────────────────────────────┐
+# │ 4. SALON                             │
+# └──────────────────────────────────────┘
+- name: "Lumière Salon État"
+  unique_id: lumiere_salon_etat
+  state: >
+    {% if is_state('light.salon', 'on') and is_state('light.table', 'on') %}
+      Allumé
+    {% elif is_state('light.salon', 'off') and is_state('light.table', 'off') %}
+      Éteint
+    {% elif is_state('light.salon', 'on') and is_state('light.table', 'off') %}
+      Salon
+    {% elif is_state('light.salon', 'off') and is_state('light.table', 'on') %}
+      Table
+    {% else %}
+      erreur
+    {% endif %}
+
+# ┌──────────────────────────────────────┐
+# │ 7. BUREAU — Plafonniers              │
+# └──────────────────────────────────────┘
+- name: "Lumière Bureau État"
+  unique_id: lumiere_bureau_etat
+  state: >
+    {% set bureau_on = is_state('light.hue_white_lamp_bureau_1', 'on') or
+                       is_state('light.hue_white_lamp_bureau_2', 'on') %}
+    {% set ecran3_off = is_state('switch.ecran_p_c_3_play_hue', 'off') %}
+    {% set ecrans_pc_on = is_state('light.hue_play_1_pc_bureau', 'on') or
+                          is_state('light.hue_play_2_pc_bureau', 'on') or
+                          is_state('light.hue_play_3_pc_bureau', 'on') %}
+    {% if ecran3_off %}
+      {{ 'Bureau' if bureau_on else 'Éteint' }}
+    {% else %}
+      {{ 'Allumé' if (bureau_on and ecrans_pc_on) else ('Bureau' if bureau_on else 'Éteint') }}
+    {% endif %}
+
+# ┌──────────────────────────────────────┐
+# │ 7. BUREAU — Écran / Hue Sync         │
+# └──────────────────────────────────────┘
+# switch.ecran_p_c_3_play_hue = prise Hue Sync Box
+# Éco. = prise coupée (économie)
+# Synchro. = Play bars ON + PC actif, sans plafonnier
+# Allumé & Sync. = plafonnier + Play bars + PC actif
+- name: "Lumière Écran État"
+  unique_id: lumiere_ecran_etat
+  state: >
+    {% set switch_on = is_state('switch.ecran_p_c_3_play_hue', 'on') %}
+    {% set bureau_on = is_state('light.hue_white_lamp_bureau_1', 'on') or
+                       is_state('light.hue_white_lamp_bureau_2', 'on') %}
+    {% set play_on = is_state('light.hue_play_1_pc_bureau', 'on') or
+                     is_state('light.hue_play_2_pc_bureau', 'on') or
+                     is_state('light.hue_play_3_pc_bureau', 'on') %}
+    {% set pc_running = is_state('binary_sensor.moniteur_pc', 'on') %}
+    {% if not switch_on %}
+      Éco.
+    {% elif bureau_on and play_on and pc_running %}
+      Allumé & Sync.
+    {% elif not bureau_on and play_on and pc_running %}
+      Synchro.
+    {% elif bureau_on and play_on %}
+      Allumé
+    {% elif not bureau_on and play_on %}
+      Écran
+    {% else %}
+      Éteint
+    {% endif %}
+
+# ┌──────────────────────────────────────┐
+# │ 7. BUREAU — Synthèse (bureau_etat)   │
+# └──────────────────────────────────────┘
+# Agrège lumiere_bureau_etat + lumiere_ecran_etat
+- name: "Bureau État"
+  unique_id: bureau_etat
+  state: >
+    {% set bureau = states('sensor.lumiere_bureau_etat') %}
+    {% set ecran  = states('sensor.lumiere_ecran_etat') %}
+    {% if   bureau == 'Allumé' and ecran == 'Allumé' %}          Allumé
+    {% elif bureau == 'Allumé' and ecran == 'Allumé & Sync.' %}  AlluSync
+    {% elif bureau == 'Éteint' and ecran == 'Synchro.' %}        Synchro
+    {% elif bureau == 'Bureau' and ecran == 'Éteint' %}          Bureau
+    {% elif bureau == 'Éteint' and ecran == 'Écran' %}           Écran
+    {% elif bureau in ['Bureau','Éteint'] and ecran == 'Éco.' %} {{ 'Bureau' if bureau == 'Bureau' else 'Éco.' }}
+    {% elif bureau == 'Éteint' and ecran == 'Éteint' %}          Éteint
+    {% else %}                                                    erreur
+    {% endif %}
+
+# ┌──────────────────────────────────────┐
+# │ 9. CHAMBRE                           │
+# └──────────────────────────────────────┘
+# switch.prise_tete_de_lit_chambre = prise alimentant les bougies Hue Color
+# Éco. (prise OFF) = bougies hors tension, seule light.chambre peut être ON
+# Ch.+zG / Ch.+zÉ = chambre + zone Géraldine ou zone Éric (bougie individuelle)
+- name: "Chambre État"
+  unique_id: chambre_etat
+  state: >
+    {% if is_state('switch.prise_tete_de_lit_chambre', 'off') %}
+      {{ 'Chambre' if is_state('light.chambre', 'on') else 'Éco.' }}
+    {% else %}
+      {% set ch = is_state('light.chambre', 'on') %}
+      {% set zg = is_state('light.hue_color_candle_chambre_gege', 'on') %}
+      {% set ze = is_state('light.hue_color_candle_chambre_eric', 'on') %}
+      {% if ch and zg and ze %}     Allumé
+      {% elif ch and zg %}          Ch.+zG
+      {% elif ch and ze %}          Ch.+zÉ
+      {% elif ch %}                 Chambre
+      {% elif zg and ze %}          Tête Lit
+      {% elif zg %}                 Zone G.
+      {% elif ze %}                 Zone É.
+      {% else %}                    Éteint
+      {% endif %}
+    {% endif %}
+```
 
 ---
 

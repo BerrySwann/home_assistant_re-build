@@ -1,6 +1,6 @@
 # 🖥️ MOC — DASHBOARD
 *Map of Content — Vignettes et Pages du tableau de bord HA*
-*Dernière mise à jour : 2026-04-19*
+*Dernière mise à jour : 2026-05-14*
 
 ---
 
@@ -73,4 +73,4 @@
 
 ## 🔗 Vers la couche dépendances
 
-→ [[MOC_DEPENDANCES]] — Sources, capteurs, chaîne YAML → Dashboard
+→ [[DEPENDANCES_GLOBALES]] — Sources, capteurs, chaîne YAML → Dashboard

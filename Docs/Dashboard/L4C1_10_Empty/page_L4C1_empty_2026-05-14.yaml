@@ -1,0 +1,13 @@
+type: grid
+cards:
+  - type: heading
+    icon: mdi:flask-empty-outline
+    heading: EMPTY
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1

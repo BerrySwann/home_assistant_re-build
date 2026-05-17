@@ -1,7 +1,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--04--19-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--05--14-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Index_Pages-03a9f4?style=flat-square)](.)
 
 </div>
