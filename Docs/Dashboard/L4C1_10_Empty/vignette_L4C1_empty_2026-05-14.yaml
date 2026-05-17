@@ -1,0 +1,31 @@
+type: custom:button-card
+icon: mdi:flask-empty-outline
+tap_action:
+  action: navigate
+  navigation_path: /dashboard-tablette/systeme-freebox
+name: Empty
+size: 60%
+styles:
+  card:
+    - aspect-ratio: 1/1
+    - border-radius: 10px
+    - background: transparent
+    - border-width: 3px
+    - border-color: white
+    - border-style: double
+    - color: white
+    - font-size: 15px
+    - line-height: 1.2
+  icon:
+    - transform: rotate(340deg)
+    - left: 19%
+    - top: 18%
+    - color: white
+    - opacity: 1
+  name:
+    - color: white
+    - top: 12%
+    - left: 5%
+    - font-size: 80%
+    - font-weight: bold
+    - position: absolute

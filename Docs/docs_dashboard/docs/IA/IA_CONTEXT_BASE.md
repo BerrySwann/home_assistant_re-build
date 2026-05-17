@@ -456,7 +456,8 @@ ReBuild/                                         (dossier de travail local — C
 │   │   ├── command_line/                        (3 dossiers — meteo, github_maintenance, sante_systeme_mini_pc)
 │   │   ├── input_booleans/                      (5 fichiers — P1×2, P3×2, P4×1)
 │   │   ├── input_number/                        (1 fichier)
-│   │   └── [root]                               (configuration.yaml, groups.yaml, scripts.yaml, shell_command.yaml, sql.yaml, scenes.yaml, input_button.yaml, input_datetime.yaml, input_select.yaml, automations.yaml, Dashboard ×2, #*.yaml ×4)
+│   │   ├── groups/                              (GRP_01_batteries_hue.yaml / GRP_02_batteries_ikea.yaml / GRP_03_batteries_sonoff.yaml)
+│   │   └── [root]                               (configuration.yaml, scripts.yaml, shell_command.yaml, sql.yaml, scenes.yaml, input_button.yaml, input_datetime.yaml, input_select.yaml, automations.yaml, Dashboard ×2, #*.yaml ×4)
 │   ├── TREE_ORIGINE/                            (snapshot GitHub de référence — état avant corrections)
 │   │   ├── sensors/
 │   │   ├── templates/
@@ -618,7 +619,10 @@ Dashboard/
 ├── scenes.yaml                                  (états prédéfinis multi-entités : ambiances, modes)
 ├── camera.yaml                                  (entités caméra : command_line → images vigilance Météo France)
 ├── input_button.yaml                            (boutons virtuels helpers : déclencheurs manuels dans l'UI)
-├── groups.yaml                                  (groupes d'entités : regroupement logique pour affichage/automations)
+├── groups/                                      (répertoire — !include_dir_merge_named)
+│   ├── GRP_01_batteries_hue.yaml               (hue_devices — 11 sensors Hue Smart Button)
+│   ├── GRP_02_batteries_ikea.yaml              (ikea_devices — 12 sensors IKEA contacts/remotes)
+│   └── GRP_03_batteries_sonoff.yaml            (sonoff_devices — 11 sensors SNZB-02/04)
 ├── shell_command.yaml                           (commandes shell appelables depuis HA : scripts bash, wget, etc.)
 ├── sql.yaml                                     (capteurs SQL : requêtes sur MariaDB — taille DB, stats)
 ├── #sensors.yaml                                (désactivé — remplacé par /config/sensors/)

@@ -65,8 +65,8 @@ GRILLE 1 — ERIC (conditional: masqué si unavailable/unknown)
 ├─────────────────────────────────────────────┤
 │  Samsung A8 SM-A530F                        │
 │  └── entities: level / state / charger /    │
-│      health / temperature                   │
-│      (pas network_type / wi_fi_connection)  │
+│      health / temperature /                 │
+│      network_type / wi_fi_connection ✅     │
 ├─────────────────────────────────────────────┤
 │  Tablette                                   │
 │  └── (idem Samsung)                         │
@@ -192,7 +192,7 @@ cards:
 | **OnePlus 10 Pro (Eric)** | `sensor.ne2213_eric_battery_level/state/charger_type/battery_health/battery_temperature/network_type/wi_fi_connection` |
 | **OnePlus 10 Pro (Mamour)** | `sensor.ne2213_mamour_battery_level/state/charger_type/battery_health/battery_temperature/network_type/wi_fi_connection` |
 | **OnePlus 7 GM1901** | `sensor.gm1901_battery_level/state/charger_type/battery_health/battery_temperature/network_type/wi_fi_connection` |
-| **Samsung A8 SM-A530F** | `sensor.sm_a530f_battery_level/state/charger_type/battery_health/battery_temperature` |
+| **Samsung A8 SM-A530F** | `sensor.sm_a530f_battery_level/state/charger_type/battery_health/battery_temperature/network_type/wi_fi_connection` |
 | **Tablette** | `sensor.tablette_battery_level/state/charger_type/battery_health/battery_temperature` |
 
 ---

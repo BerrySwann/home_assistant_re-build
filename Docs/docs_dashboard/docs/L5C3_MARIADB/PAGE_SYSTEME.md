@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--11-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--05--10-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Dashboard%20Doc-ff9800?style=flat-square)](.)
 
 </div>
@@ -28,11 +28,10 @@
 1. [Vue d'ensemble](#vue-densemble)
 2. [Architecture de la page](#architecture-de-la-page)
 3. [Section GITHUB](#section-github)
-4. [Section RESTART VSCODE](#section-restart-vscode)
-5. [Section MARIADB](#section-mariadb)
-6. [Entités utilisées](#entités-utilisées--provenance-complète)
-7. [Automations liées](#automations-liées)
-8. [Dépannage](#dépannage)
+4. [Section MARIADB](#section-mariadb)
+5. [Entités utilisées](#entités-utilisées--provenance-complète)
+6. [Automations liées](#automations-liées)
+7. [Dépannage](#dépannage)
 
 ---
 
@@ -40,15 +39,13 @@
 
 Page de maintenance système regroupant 3 blocs fonctionnels :
 - **GitHub** : statut du backup Git, tag hebdomadaire, branche active, journal des 10 derniers backups, graphique OK/KO 7 jours, boutons push manuel et weekly.
-- **Restart VSCode** : bouton de redémarrage de Studio Code Server.
 - **MariaDB** : graphique d'évolution de la taille de la base sur 7 jours, bouton de purge + repack.
 
 ### Intégrations requises
 
 - ✅ **command_line** — sensors `sensor.backup_github_status`, `sensor.git_last_weekly_tag`, `sensor.backup_github_journal`, `sensor.github_default_branch`
 - ✅ **sql** — `sensor.taille_db_home_assistant`
-- ✅ **input_button** — `input_button.git_push_manuel`, `input_button.git_push_weekly_manuel`
-- ✅ **shell_command** — `git_backup_push_manual`, `git_backup_push_weekly`
+- ✅ **shell_command** — `shell_command.git_backup_push_manual`, `shell_command.git_backup_push_weekly`
 
 ### Cartes HACS utilisées
 
@@ -76,10 +73,6 @@ Page de maintenance système regroupant 3 blocs fonctionnels :
 │  ├── title : Journal Backup (10 derniers)   │
 │  ├── markdown : journal des backups         │
 │  └── apexcharts : OK/KO 7 jours            │
-├─────────────────────────────────────────────┤
-│  SEPARATOR : Restart VSCode                 │
-├─────────────────────────────────────────────┤
-│  button-card : Redémarrer Studio Code       │
 ├─────────────────────────────────────────────┤
 │  SEPARATOR : MariaDB                        │
 ├─────────────────────────────────────────────┤
@@ -117,14 +110,11 @@ Pas d'action au tap ni au hold (lecture seule).
 
 | Chip | Tap | Hold |
 |------|-----|------|
-| **Tag weekly** | Ouvre GitHub/tags | Lance `input_button.git_push_weekly_manuel` + confirmation |
+| **Tag weekly** | Ouvre GitHub/tags | `call-service: shell_command.git_backup_push_weekly` + confirmation |
 | **Branche** | Ouvre GitHub repo principal | — |
-| **Push** | Lance `input_button.git_push_manuel` | Ouvre GitHub/commits/main |
+| **Push** | `call-service: shell_command.git_backup_push_manual` + confirmation | Ouvre GitHub/commits/main |
 
-> ⚠️ **Pièges :**
-> - Utiliser `perform-action` (pas `call-service`) pour appeler `input_button.press`
-> - La `confirmation` doit être **dans** `hold_action`, pas au même niveau
-> - Appeler `input_button.*` et non `shell_command.*` directement (les chips mushroom ne supportent pas bien l'appel direct aux shell_command)
+> ℹ️ Les chips appellent `shell_command.*` directement via `call-service` (sans intermédiaire `input_button`). Fonctionnel sur HA actuel.
 
 ```yaml
 - type: template
@@ -179,13 +169,14 @@ Pas d'action au tap ni au hold (lecture seule).
 
 Affiche les 10 dernières lignes `OK` du log `/config/.logs/ha_git_backup.log`.
 
-> ⚠️ **Pièges :**
-> - Ne pas entourer le template de triple backticks — cela crée un bloc `<pre>` qui résiste au `font-size`
-> - `font-size` et `text-align` doivent être sur `.card-content`, pas sur `ha-card`
+> ⚠️ **Piège :** Le contenu est dans des triple backticks YAML pour forcer un rendu `<pre>`, puis `font-size: 0px` sur `ha-markdown$ pre, code` annule la mise en forme de bloc et laisse le texte brut avec `line-height: 2.3`.
 
 ```yaml
 - type: markdown
-  content: "{{ state_attr('sensor.backup_github_journal','text') or '—' }}"
+  content: |-
+    ```
+    {{ state_attr('sensor.backup_github_journal','text') or '—' }}
+    ```
   card_mod:
     style: |
       ha-card {
@@ -193,23 +184,16 @@ Affiche les 10 dernières lignes `OK` du log `/config/.logs/ha_git_backup.log`.
         box-shadow: none !important;
         background: transparent;
       }
-      .card-content {
-        font-size: 11px;
-        text-align: center;
-      }
+      ha-markdown$: |
+        pre, code {
+          font-size: 0px !important;
+          line-height: 2.3 !important;
+        }
 ```
 
 ### Graphique ApexCharts OK/KO
 
 Graphique en colonnes sur 7 jours — transforme `OK` → `1` et `KO` → `0`, groupé par tranches de 6h.
-
----
-
-## 📍 SECTION RESTART VSCODE
-
-Bouton déclenchant l'automation `automation.redemarrage_quotidien_studio_code_server`.
-
-> ⚠️ Utilise encore `call-service` / `automation.trigger` — fonctionnel mais à migrer vers `perform-action` / `automation.trigger` si HA >= 2024.8.
 
 ---
 
@@ -242,12 +226,6 @@ Déclenche l'automation `automation.db_purge_mariadb_repack`.
 |--------|-----------|------|
 | `sensor.taille_db_home_assistant` | `taille_db_home_assistant` | Taille DB MariaDB en MiB |
 
-### 📁 `input_button.yaml`
-| Entité | Rôle |
-|--------|------|
-| `input_button.git_push_manuel` | Déclenche automation `[04-Backup]` → push manuel |
-| `input_button.git_push_weekly_manuel` | Déclenche automation `[05-Backup]` → push + tag weekly |
-
 ### 📁 `shell_command.yaml`
 | Commande | Rôle |
 |----------|------|
@@ -262,45 +240,53 @@ Auth HTTPS via token dans l'URL remote Git (`.git/config`).
 
 ## ⚙️ AUTOMATIONS LIÉES
 
-> Toutes les automations ci-dessous sont définies dans `automations.yaml`.
+### Chaîne complète : script → log → sensors
 
-### Automations actives (backup GitHub)
+```
+.scripts/ha_git_backup.sh  (3 modes)
+  ├── auto      ← appelé par git_hourly (H+10) et git_au_demarrage (boot) — silencieux
+  ├── "Manuel"  ← appelé par shell_command.git_backup_push_manual
+  └── weekly    ← appelé par shell_command.git_backup_push_weekly
+        │
+        ├── Filtre : .yaml / .yml / .md uniquement — guard anti-secrets.yaml
+        ├── Tag ISO : weekly-YYYY-WXX[-HHMM] (anti-collision heure)
+        ├── Auth HTTPS : token dans URL remote .git/config (NON dans secrets.yaml)
+        │
+        ├── → /config/.logs/ha_git_backup.log  (append — toutes actions)
+        │     └─→ command_line/github_maintenance/github_maintenance.yaml (4 sensors)
+        │           ├── sensor.backup_github_status   scan 10s  grep "OK:" → JSON {ok, ts}
+        │           ├── sensor.backup_github_journal  scan 10s  python3 → 10 dernières lignes OK → JSON {text}
+        │           ├── sensor.git_last_weekly_tag    scan 3600s  git tag | grep weekly-
+        │           └── sensor.github_default_branch  scan 3600s  git rev-parse --abbrev-ref HEAD
+        │
+        └── → HA persistent_notification (modes Manuel + auto) via supervisor API
+              /config/.secrets/ha_token (NON notify.mobile_app_*)
+```
 
-| ID | Alias | Déclencheur | Action principale |
-|----|-------|-------------|-------------------|
-| `1772274342928` | **[01-Backup] Git hourly H+10** | Toutes les heures à H+10 | `shell_command.git_backup_push` |
-| `1772274384811` | **[02-Backup] Git daily (03:00)** | Tous les jours à 03:00 | `shell_command.git_backup_push` |
-| `1772274292302` | **[03-Backup] Git weekly (dim 01:30)** | Dimanche 01:30 | `shell_command.git_backup_push_weekly` + notif mobile |
-| `1772276622703` | **[04-Backup] Git push manuel** | `input_button.git_push_manuel` → `on` | `shell_command.git_backup_push_manual` |
-| `1772289095104` | **[05-Backup] Git push weekly manuel** | `input_button.git_push_weekly_manuel` → `on` | `shell_command.git_backup_push_weekly` |
-| `1772275440416` | **[00-Backup] Alerte si KO 15 min** | `sensor.backup_github_status` = `KO` pendant 15 min | Notification persistante + mobile + log erreur |
+### Automations documentées (celles qui remontent une info ou ont une action visible)
+
+| Fichier TREE_CORRIGE | Alias | Déclencheur | Action | Notif visible |
+|:---------------------|:------|:------------|:-------|:-------------|
+| `backup/git_alerte_ko.yaml` | **[Backup] Alerte si KO 15 min** | `backup_github_status = KO` pendant 15 min | `persistent_notification.create` | ✅ tableau de bord HA |
+| `backup/git_weekly.yaml` | **[Backup] Git weekly (dim 01:30)** | Dimanche 01:30 | `shell_command.git_backup_push_weekly` | ✅ `notify.mobile_app_eric` |
+| `backup/git_push_manuel.yaml` | **[Backup] Git push manuel** | `input_button.git_push_manuel = on` | `shell_command.git_backup_push_manual` | ✅ `persistent_notification` (via script) |
+| `systeme/veille_github_releases.yaml` | **VEILLE GITHUB — Nouvelle release détectée** | `feedreader_entry_added` | Notif release + 2ème notif si breaking/deprecated | ✅ `notify.mobile_app_poco_x7_pro` |
+
+> Automations silencieuses (non documentées ici) : `git_hourly` (H+10, `system_log` only), `git_au_demarrage` (boot, `system_log` only).
 
 ### Chaîne d'appel complète (boutons dashboard → script)
 
 ```
-Chip [Push]
-  └─ perform-action: input_button.press
-       └─ input_button.git_push_manuel → state: on
-            └─ Automation [04-Backup] (trigger: state)
-                 └─ shell_command.git_backup_push_manual
-                      └─ .scripts/ha_git_backup.sh "Manuel"
+Chip [Push]  (tap)
+  └─ call-service: shell_command.git_backup_push_manual  (confirmation: "Lancer un push Git manuel ?")
+       └─ .scripts/ha_git_backup.sh "Manuel"
+            └─ → /config/.logs/ha_git_backup.log
 
-Chip [Tag weekly] (hold)
-  └─ perform-action: input_button.press
-       └─ input_button.git_push_weekly_manuel → state: on
-            └─ Automation [05-Backup] (trigger: state)
-                 └─ shell_command.git_backup_push_weekly
-                      └─ .scripts/ha_git_backup.sh weekly
+Chip [Tag weekly]  (hold)
+  └─ call-service: shell_command.git_backup_push_weekly  (confirmation: "Créer un tag hebdomadaire ?")
+       └─ .scripts/ha_git_backup.sh weekly
+            └─ → /config/.logs/ha_git_backup.log + tag ISO weekly-YYYY-WXX
 ```
-
-### Automations à créer (non présentes dans automations.yaml)
-
-| Alias futur | Rôle | Déclencheur prévu |
-|-------------|------|--------------------|
-| `redemarrage_quotidien_studio_code_server` | Redémarrer addon Studio Code Server | Bouton dashboard → `button-card: call-service` |
-| `db_purge_mariadb_repack` | Purge + repack base MariaDB | Bouton dashboard → `call-service: recorder.purge` |
-
-> ⚠️ Ces deux automations sont référencées dans le code YAML du dashboard mais n'existent pas encore dans `automations.yaml`. Le bouton Restart VSCode et Purge MariaDB ne fonctionneront pas tant qu'elles ne seront pas créées.
 
 ---
 

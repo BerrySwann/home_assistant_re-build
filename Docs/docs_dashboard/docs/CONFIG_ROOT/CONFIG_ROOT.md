@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--13-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--05--10-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Config%20Racine-ff9800?style=flat-square)](.)
 
 </div>
@@ -14,7 +14,7 @@
 | 🏗️ **Layout** | — |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-13 |
+| 📅 **Modifié le** | 2026-05-10 |
 | 🏠 **Version HA** | 2025.2.x → 2.0 |
 
 ---
@@ -30,7 +30,7 @@ Documentation des 6 fichiers YAML à la racine de `/config/` qui ne sont pas des
 1. [configuration.yaml](#1-configurationyaml)
 2. [camera.yaml](#2-camerayaml)
 3. [input_button.yaml](#3-input_buttonyaml)
-4. [groups.yaml](#4-groupsyaml)
+4. [groups/](#4-groups)
 5. [shell_command.yaml](#5-shell_commandyaml)
 6. [sql.yaml](#6-sqlyaml)
 7. [Dépendances croisées](#7-dépendances-croisées)
@@ -55,7 +55,7 @@ Documentation des 6 fichiers YAML à la racine de `/config/` qui ne sont pas des
 | `shell_command` | `shell_command.yaml` | include |
 | `camera` | `camera.yaml` | include |
 | `input_button` | `input_button.yaml` | include |
-| `group` | `groups.yaml` | include |
+| `group` | `groups/` | include_dir_merge_named |
 | `sql` | `sql.yaml` | include |
 
 ### Entités générées (climate SmartIR)
@@ -122,19 +122,21 @@ Documentation des 6 fichiers YAML à la racine de `/config/` qui ne sont pas des
 
 ---
 
-## 4. `groups.yaml`
+## 4. `groups/`
 
-**Rôle :** Regroupe les capteurs de batteries par fabricant (IKEA, HUE, SONOFF) pour la surveillance centralisée dans la vignette **L5C1 Batteries**.
+**Rôle :** Regroupe les capteurs de batteries par fabricant (IKEA, HUE, SONOFF) pour la surveillance centralisée dans la vignette **L5C1 Batteries**. Anciennement `groups.yaml` — migré en répertoire `groups/` via `!include_dir_merge_named` (2026-05-10).
 
-### Groupes
+### Fichiers du répertoire
 
-| Groupe | Nom | Nb entités |
-|--------|-----|------------|
-| `group.ikea_devices` | IKEA Devices | 12 capteurs battery |
-| `group.hue_devices` | HUE Devices | 11 capteurs battery |
-| `group.sonoff_devices` | SONOFF Devices | 11 capteurs battery |
+| Fichier | Dict key | Nb entités |
+|---------|----------|------------|
+| `GRP_01_batteries_hue.yaml` | `hue_devices` | 11 capteurs battery |
+| `GRP_02_batteries_ikea.yaml` | `ikea_devices` | 12 capteurs battery |
+| `GRP_03_batteries_sonoff.yaml` | `sonoff_devices` | 11 capteurs battery |
 
 **Total surveillé : 34 capteurs de batteries.**
+
+> ⚠️ Chaque fichier retourne un **dict** (pas une liste) — requis par `!include_dir_merge_named`. Le dict key devient l'identifiant du groupe HA (ex: `group.hue_devices`).
 
 ### Entités incluses dans `group.ikea_devices`
 
@@ -212,7 +214,10 @@ configuration.yaml
   │     └── dépend de command_line/meteo/carte_meteo_france.yaml
   ├── !include input_button.yaml   → git_push_manuel / git_push_weekly_manuel
   │     └── déclenchent shell_command.yaml
-  ├── !include groups.yaml         → ikea_devices / hue_devices / sonoff_devices
+  ├── !include_dir_merge_named groups/ → ikea_devices / hue_devices / sonoff_devices
+  │     ├── GRP_01_batteries_hue.yaml   (hue_devices — 11 sensors)
+  │     ├── GRP_02_batteries_ikea.yaml  (ikea_devices — 12 sensors)
+  │     ├── GRP_03_batteries_sonoff.yaml (sonoff_devices — 11 sensors)
   │     └── utilisés par L5C1 Batteries (auto-entities)
   ├── !include shell_command.yaml  → git_backup_push*
   │     └── appellent /config/.scripts/ha_git_backup.sh
@@ -246,7 +251,7 @@ configuration.yaml
 - `command_line/meteo/carte_meteo_france.yaml` — génère les PNG pour `camera.yaml`
 - `/config/.scripts/ha_git_backup.sh` — script appelé par `shell_command.yaml`
 - `secrets.yaml` — `mariadb_url` (non versionné)
-- `docs/L5C1_PILES_BATTERIES/` — dashboard batteries (utilise `groups.yaml`)
+- `docs/L5C1_PILES_BATTERIES/` — dashboard batteries (utilise `groups/`)
 - `docs/L5C3_MARIADB/` — dashboard MariaDB (utilise `sql.yaml`)
 
 ---

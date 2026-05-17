@@ -1,28 +1,33 @@
 # 🔄 WORKFLOW — ORGANISATION & MAINTENANCE DU DOSSIER REBUILD
-*Dernière mise à jour : 2026-04-02*
+*Dernière mise à jour : 2026-05-14*
 
 ---
 
 ## 📁 STRUCTURE DU DOSSIER REBUILD
 
 ```
-ReBuild/
-├── CLAUDE.md                   ← Instructions IA (contexte projet)
-├── SYNC_REPORT.md              ← Rapport de synchronisation
+ReBuild/                        ← C:\Users\Berry Swann\Documents\HA\ReBuild\
+├── CLAUDE.md                   ← Instructions IA (contexte projet — source de vérité)
+├── README.md / SYNC_REPORT.md
 ├── secrets.yaml                ← NE JAMAIS synchroniser sur GitHub
-├── Dashboard/                  ← Dernier dashboard complet (1 fichier à jour)
-├── TREE_CORRIGE/               ← Fichiers corrigés → copier dans /config/
-│   ├── sensors/
-│   ├── templates/
-│   └── utility_meter/
-├── TREE_ORIGINE/               ← Snapshot GitHub de référence (avant corrections)
-└── docs/                       ← Documentation (vignettes, guides, workflow)
-    └── IA/
-        └── IA_CONTEXT_BASE.md  ← Copie synchronisée de CLAUDE.md
+├── Analyse énergétique/  HTML/  IA/  Infra/  Orphelin/  historique/
+│
+├── Dashboard/                  ← YAML vignettes + pages (18 sous-dossiers + Dashboard_COMPLET/)
+│   ├── Dashboard_COMPLET/      ← dashboards complets — conservation illimitée
+│   ├── L*C*_NN_NomVignette/    ← 1 sous-dossier par vignette (L1C1→L6C3) — max 3 versions
+│   └── PAGE_*/                 ← pages orphelines (PAGE_RASPI, PAGE_ENERGIE_ECLAIRAGE)
+│
+├── docs_dashboard/             ← tout ce qui concerne la config dashboard HA
+│   ├── TREE_CORRIGE/           ← SOURCE DE VÉRITÉ config → sensors/ templates/ utility_meter/
+│   ├── TREE_ORIGINE/           ← snapshot GitHub avant corrections (référence historique)
+│   └── docs/                   ← 18 vignettes documentées + DEPENDANCES_GLOBALES
+│
+├── docs_automations/           ← TREE_CORRIGE/ TREE_ORIGINE/ docs/
+└── docs_scripts/               ← TREE_CORRIGE/ TREE_ORIGINE/ docs/
 ```
 
-**Règle d'or :** `TREE_CORRIGE/` est la seule source de vérité à déployer sur HA.
-Copier les 3 sous-dossiers (`sensors/`, `templates/`, `utility_meter/`) directement dans `/config/`.
+**Règle d'or :** `docs_dashboard/TREE_CORRIGE/` est la seule source de vérité à déployer sur HA.
+Copier `sensors/`, `templates/`, `utility_meter/` directement dans `/config/`.
 
 ---
 
@@ -159,13 +164,13 @@ Objectif : maintenir les deux fichiers de contexte synchronisés.
 - Index GitHub (section INDEX INTÉGRAL) si de nouvelles URLs sont disponibles
 - Date de dernière mise à jour en haut du fichier
 
-**6b. Copier CLAUDE.md → `docs/IA/IA_CONTEXT_BASE.md`** :
+**6b. Copier CLAUDE.md → `docs_dashboard/docs/IA/IA_CONTEXT_BASE.md`** :
 
 ```bash
-cp ReBuild/CLAUDE.md ReBuild/docs/IA/IA_CONTEXT_BASE.md
+cp ReBuild/CLAUDE.md ReBuild/docs_dashboard/docs/IA/IA_CONTEXT_BASE.md
 ```
 
-> `IA_CONTEXT_BASE.md` est la copie de référence de `CLAUDE.md` accessible depuis le dossier `docs/`.
+> `IA_CONTEXT_BASE.md` est la copie de référence de `CLAUDE.md` accessible depuis Obsidian.
 > Ces deux fichiers doivent toujours être identiques après chaque session.
 
 ---
@@ -191,7 +196,7 @@ Chaque fois qu'une doc `docs/L*` est créée ou modifiée :
 |-------|--------|
 | `secrets.yaml` | Ne jamais synchroniser sur GitHub — gestion manuelle uniquement |
 | `TREE_ORIGINE/` | Ne jamais modifier — snapshot de référence en lecture seule |
-| `Dashboard/` | 1 seul fichier à la fois (le plus récent) |
+| `Dashboard/` | 18 sous-dossiers versionnés — max 3 fichiers par vignette (demander avant de supprimer la v1) |
 | `TREE_CORRIGE/` | Seul répertoire à déployer sur `/config/` |
 | `IA_CONTEXT_BASE.md` | Toujours = copie de `CLAUDE.md` (étape 6 obligatoire) |
 
@@ -218,6 +223,9 @@ Chaque fois qu'une doc `docs/L*` est créée ou modifiée :
 | 2026-03-27 (s13) | Création `input_booleans/P1/P1_arret_clim_securises.yaml` (arrêts sécurisés clim Salon/Bureau/Chambre + `inter_soufflant_salle_de_bain`). Création `input_booleans/P4/P4_presence_wifi.yaml` (détection présence Wi-Fi). Création `TABLETTE_card_conso_clim_FIXED.yaml` (button-card conso clim — entités corrigées `_kwh_um` vs anciens `_um`). Confirmation par Gemini : gm1901 + sm_a530f OBSOLÈTES → à supprimer du dashboard TABLETTE. Identification duplicate : `P1_switch_inter_soufflant_sdb.yaml` = doublon de `templates/Inter_BP_Virtuel/BI_02_switch_inter_sdb.yaml` → à supprimer. |
 | 2026-03-28 (s14) | Vérification synchronisation GitHub ↔ local. Complétion `DEPENDANCES_GLOBALES.md` : **18/18 vignettes ✅** avec chaînes de dépendances complètes. Mise à jour date `DEPENDANCES_GLOBALES.md`. |
 | 2026-04-02 (s15) | Analyse énergétique Jan-Mar 2026 (`diag_conso_elec.txt` — 8329 entrées 15min). Résultat : Jan 384 kWh / Fév 339 kWh / Mar ~166 kWh corrigé (anomalie UM reset 18-22/03 — 69.92 kWh était cumul 5 jours, pas 1 jour). Recommandation rideaux occultants : Chambre priorité 1. Comparaison rapport Spook (62 entités) vs `orphelin.yaml` → couverture 100%, statut P1 PARTIEL → ✅ COUVERT (doc `L2C2_VIGNETTE_ENERGIE_CLIM.md` confirmée existante). Création `Orphelin/orphelin.md` (version lisible et structurée par priorité d'action). Mise à jour `CLAUDE.md` arborescence `docs/` (10 dossiers manquants ajoutés, noms corrigés, fichiers fantômes supprimés). Mise à jour date `DEPENDANCES_GLOBALES.md` (2026-04-02). Mise à jour date `WORKFLOW_REBUILD.md`. |
+| 2026-04-19→26 (s16-17) | Restructuration majeure TREE_CORRIGE : P3 éclairage refonte complète (`P3_ENERGIE_TLP/` = 76+40+4 sensors, P3_UM réduit à 1 fichier 1_UNITE, `P3_TPL_AMHQ_*.yaml` ×3). P0 Energie : ajout `01_kWh_UM_AMHQ.yaml` (test A/B vs Ecojoko). Suppression ancien repo prod (`home-assistant-config` effacé — `home_assistant_re-build` = prod unique). Ajout `groups/` (GRP_01/02/03 batteries Hue/IKEA/SONOFF). Refonte `command_line/` (ajout `sante_systeme_mini_pc/`). Mise à jour CLAUDE.md globale (date 2026-04-29, arbo prod complète). Sync GitHub ↔ local documentée dans `SYNC_REPORT.md`. |
+| 2026-05-01→06 (s18-19) | Archivage Dashboard vignettes L1C1→L5C3 (15 vignettes + pages YAML). Création sous-dossiers `Dashboard/L*C*_NN_*/` avec versioning daté. Docs vignettes complétées. `DEPENDANCES_GLOBALES.md` enrichi (L1C1→L5C3 ✅). Corrections L5C1 (batteries tronquées — TODO #1 en attente). L5C2 (NE2213 Mamour — TODO #2). L5C3 (chip Weekly amber logique — TODO #3). |
+| 2026-05-14 (s20) | Archivage L6C1/L6C2/L6C3 (vignettes + pages YAML + docs + DEPENDANCES). **18/18 vignettes archivées ✅**. Ajout TODO #4 (entity-progress-card-template absent du référentiel). Suppression doublons `docs/` (AUTOMATIONS_IDS_REF.md, PROD_LISTING). Mise à jour CLAUDE.md arborescence (HTML/, IA/, Infra/, historique/, 18 Dashboard sous-dossiers, raspi/). MOC_DASHBOARD.md : date + lien [[MOC_DEPENDANCES]] → [[DEPENDANCES_GLOBALES]]. WORKFLOW_REBUILD.md : structure + historique mis à jour. |
 
 
 <!-- obsidian-wikilinks -->
