@@ -2003,15 +2003,11 @@
       conditions:
       - or:
         - condition: template
-          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
-            == ''on'' }}'
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json
+            is defined and trigger.payload_json.action == ''on'' }}'
         - condition: trigger
           id: bouton_mqtt
       sequence:
-      - action: light.turn_on
-        target:
-          entity_id: light.hue_smart_eco_pc_bureau
-        data: {}
       - action: light.turn_on
         target:
           entity_id: light.hue_smart_eco_pc_bureau
@@ -2020,8 +2016,8 @@
       conditions:
       - or:
         - condition: template
-          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
-            == ''off'' }}'
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json
+            is defined and trigger.payload_json.action == ''off'' }}'
         - condition: trigger
           id: extinction_conso
       sequence:
@@ -2048,7 +2044,8 @@
       topic: zigbee2mqtt/Poussoir TV (IKEA TRADFRI)/action
   - id: extinction_conso
     trigger: numeric_state
-    entity_id: sensor.prise_tv_chambre_power
+    entity_id:
+    - sensor.prise_tv_chambre_nous_power
     below: 20
     for:
       minutes: 2
@@ -2058,15 +2055,11 @@
       conditions:
       - or:
         - condition: template
-          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
-            == ''on'' }}'
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json
+            is defined and trigger.payload_json.action == ''on'' }}'
         - condition: trigger
           id: bouton_mqtt
       sequence:
-      - action: light.turn_on
-        target:
-          entity_id: light.hue_smart_eco_tv_chambre
-        data: {}
       - action: light.turn_on
         target:
           entity_id: light.hue_smart_eco_tv_chambre
@@ -2075,14 +2068,15 @@
       conditions:
       - or:
         - condition: template
-          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
-            == ''off'' }}'
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json
+            is defined and trigger.payload_json.action == ''off'' }}'
         - condition: trigger
           id: extinction_conso
       sequence:
       - action: light.turn_off
         target:
           entity_id: light.hue_smart_eco_tv_chambre
+        data: {}
       - action: notify.mobile_app_eric
         data:
           title: Veille détectée
