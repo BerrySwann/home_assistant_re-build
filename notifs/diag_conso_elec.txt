@@ -7237,3 +7237,7 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [CELL] | 20/05 14:30 | Hyg:0.01 | Cuis:0.13 | Froid:0.56 | Chauff:0.06 | Avg 4:4.1 | Multi:0.61 | Lum:0.12 | Autres:0.24 | Ti:22.3°C | Ext:21.8°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
 [2] en [CELL] | 20/05 14:45 | Hyg:0.01 | Cuis:0.13 | Froid:0.57 | Chauff:0.06 | Avg 4:4.1 | Multi:0.61 | Lum:0.13 | Autres:0.25 | Ti:22.3°C | Ext:22.0°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
 [2] en [CELL] | 20/05 15:00 | Hyg:0.01 | Cuis:0.13 | Froid:0.57 | Chauff:0.06 | Avg 4:4.0 | Multi:0.63 | Lum:0.13 | Autres:0.25 | Ti:22.3°C | Ext:22.4°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [CELL] | 20/05 15:15 | Hyg:0.01 | Cuis:0.13 | Froid:0.58 | Chauff:0.07 | Avg 4:4.6 | Multi:0.63 | Lum:0.13 | Autres:0.25 | Ti:22.3°C | Ext:22.6°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[Mamour: WIFI/CELL] | 20/05 15:30 | Hyg:0.01 | Cuis:0.13 | Froid:0.59 | Chauff:0.07 | Avg 4:4.5 | Multi:0.63 | Lum:0.13 | Autres:0.26 | Ti:22.3°C | Ext:22.8°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[Mamour: WIFI/CELL] | 20/05 15:45 | Hyg:0.01 | Cuis:0.13 | Froid:0.59 | Chauff:0.07 | Avg 4:4.4 | Multi:0.63 | Lum:0.13 | Autres:0.26 | Ti:22.3°C | Ext:23.0°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[Mamour: WIFI/CELL] | 20/05 16:00 | Hyg:0.01 | Cuis:0.13 | Froid:0.6 | Chauff:0.07 | Avg 4:4.4 | Multi:0.65 | Lum:0.13 | Autres:0.26 | Ti:22.3°C | Ext:23.4°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
