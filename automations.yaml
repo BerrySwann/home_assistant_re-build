@@ -271,6 +271,128 @@
       sequence:
       - stop: L'utilisateur code encore, on laisse tourner.
   mode: single
+- id: '1774167313491'
+  alias: Raspberry CPU Fan PWM 6 States
+  description: Règle la vitesse du ventilateur du Raspberry en fonction de la température
+    du CPU
+  triggers:
+  - event: start
+    id: HomeAssistant_Start
+    trigger: homeassistant
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    above: 30
+    id: above_30
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    above: 40
+    id: above_40
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    above: 50
+    id: above_50
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    above: 60
+    id: above_60
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    above: 70
+    id: above_70
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    below: 30
+    id: below_30
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    below: 40
+    id: below_40
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    below: 50
+    id: below_50
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    below: 60
+    id: below_60
+    trigger: numeric_state
+  - entity_id: sensor.system_monitor_temperature_du_processeur
+    below: 70
+    id: below_70
+    trigger: numeric_state
+  conditions: []
+  actions:
+  - alias: Régler la vitesse du ventilateur de l'unité centrale au démarrage
+    if:
+    - condition: trigger
+      id: HomeAssistant_Start
+    then:
+    - data:
+        percentage: 100
+      target:
+        entity_id: fan.rpi_cooling_fan
+      action: fan.turn_on
+  - alias: Régler la vitesse du ventilateur en fonction de la température
+    if:
+    - condition: numeric_state
+      entity_id: sensor.system_monitor_temperature_du_processeur
+      below: 30
+    then:
+    - data:
+        percentage: 30
+      target:
+        entity_id: fan.rpi_cooling_fan
+      action: fan.set_percentage
+    else:
+    - if:
+      - condition: numeric_state
+        entity_id: sensor.system_monitor_temperature_du_processeur
+        below: 40
+      then:
+      - data:
+          percentage: 40
+        target:
+          entity_id: fan.rpi_cooling_fan
+        action: fan.set_percentage
+      else:
+      - if:
+        - condition: numeric_state
+          entity_id: sensor.system_monitor_temperature_du_processeur
+          below: 50
+        then:
+        - data:
+            percentage: 50
+          target:
+            entity_id: fan.rpi_cooling_fan
+          action: fan.set_percentage
+        else:
+        - if:
+          - condition: numeric_state
+            entity_id: sensor.system_monitor_temperature_du_processeur
+            below: 60
+          then:
+          - data:
+              percentage: 65
+            target:
+              entity_id: fan.rpi_cooling_fan
+            action: fan.set_percentage
+          else:
+          - if:
+            - condition: numeric_state
+              entity_id: sensor.system_monitor_temperature_du_processeur
+              below: 70
+            then:
+            - data:
+                percentage: 85
+              target:
+                entity_id: fan.rpi_cooling_fan
+              action: fan.set_percentage
+            else:
+            - data:
+                percentage: 100
+              target:
+                entity_id: fan.rpi_cooling_fan
+              action: fan.set_percentage
+  mode: single
 - id: '1774183767864'
   alias: '[P3-SALON] BOUTON IKEA INTER SALON (4) — ON/OFF LIGHT.SALON'
   description: 'Pilotage de light.salon via le bouton IKEA 4 touches Salon. Topic
@@ -699,26 +821,14 @@
       sequence:
       - alias: 'CONDITION : NOTIF UNIQUEMENT SI ÉCHEC'
         condition: template
-        value_template: "{{\n  states('sensor.mode_ete_hiver') in ['unknown', 'unavailable']
-          or\n  states('sensor.groupe') in ['unknown', 'unavailable'] or\n  states('sensor.temperature_cible')
-          in ['unknown', 'unavailable'] or\n  states('sensor.temperature_eco_hiver_corrige')
-          in ['unknown', 'unavailable'] or\n  states('sensor.temperature_corrige_mamour_hivers')
-          in ['unknown', 'unavailable'] or\n  states('sensor.temperature_corrige_eric_hivers')
-          in ['unknown', 'unavailable']\n}}\n"
+        value_template: "{{ \n  states('sensor.mode_ete_hiver') in ['unknown', 'unavailable']\n
+          \ or\n  states('sensor.groupe') in ['unknown', 'unavailable']\n}}\n"
       - alias: 'NOTIF : ALERTE ATTENTE CAPTEURS'
         action: notify.mobile_app_eric
         data:
           title: '[AJ] ATTENTE CAPTEURS'
-          message: 'KO: {%- if states(''sensor.mode_ete_hiver'') in [''unknown'',
-            ''unavailable''] %} mode_ete_hiver{%- endif %} {%- if states(''sensor.groupe'')
-            in [''unknown'', ''unavailable''] %} groupe{%- endif %} {%- if states(''sensor.temperature_cible'')
-            in [''unknown'', ''unavailable''] %} temp_cible{%- endif %} {%- if states(''sensor.temperature_eco_hiver_corrige'')
-            in [''unknown'', ''unavailable''] %} temp_eco{%- endif %} {%- if states(''sensor.temperature_corrige_mamour_hivers'')
-            in [''unknown'', ''unavailable''] %} temp_mamour{%- endif %} {%- if states(''sensor.temperature_corrige_eric_hivers'')
-            in [''unknown'', ''unavailable''] %} temp_eric{%- endif %} Essai n°{{
-            repeat.index }}... Les capteurs de jour ne sont pas prêts. Pause 30s.
-
-            '
+          message: Essai n°{{ repeat.index }}... Les capteurs de jour ne sont pas
+            prêts. Pause 30s.
       - alias: 'PAUSE : AVANT NOUVEL ESSAI'
         delay: 00:00:30
   - alias: 'INIT : CALCUL GLOBAL DES VARIABLES'
@@ -958,26 +1068,14 @@
       sequence:
       - alias: 'CONDITION : NOTIF UNIQUEMENT SI ÉCHEC'
         condition: template
-        value_template: "{{\n  states('sensor.mode_ete_hiver') in ['unknown', 'unavailable']
-          or\n  states('sensor.groupe') in ['unknown', 'unavailable'] or\n  states('sensor.temperature_cible')
-          in ['unknown', 'unavailable'] or\n  states('sensor.temperature_eco_hiver_corrige')
-          in ['unknown', 'unavailable'] or\n  states('sensor.temperature_corrige_mamour_hivers')
-          in ['unknown', 'unavailable'] or\n  states('sensor.temperature_corrige_eric_hivers')
-          in ['unknown', 'unavailable']\n}}\n"
+        value_template: "{{ \n  states('sensor.mode_ete_hiver') in ['unknown', 'unavailable']\n
+          \ or\n  states('sensor.groupe') in ['unknown', 'unavailable']\n}}\n"
       - alias: 'NOTIF : ALERTE ATTENTE CAPTEURS'
         action: notify.mobile_app_eric
         data:
           title: '[AN] ATTENTE CAPTEURS'
-          message: 'KO: {%- if states(''sensor.mode_ete_hiver'') in [''unknown'',
-            ''unavailable''] %} mode_ete_hiver{%- endif %} {%- if states(''sensor.groupe'')
-            in [''unknown'', ''unavailable''] %} groupe{%- endif %} {%- if states(''sensor.temperature_cible'')
-            in [''unknown'', ''unavailable''] %} temp_cible{%- endif %} {%- if states(''sensor.temperature_eco_hiver_corrige'')
-            in [''unknown'', ''unavailable''] %} temp_eco{%- endif %} {%- if states(''sensor.temperature_corrige_mamour_hivers'')
-            in [''unknown'', ''unavailable''] %} temp_mamour{%- endif %} {%- if states(''sensor.temperature_corrige_eric_hivers'')
-            in [''unknown'', ''unavailable''] %} temp_eric{%- endif %} Essai n°{{
-            repeat.index }}... Les capteurs de jour ne sont pas prêts. Pause 30s.
-
-            '
+          message: Essai n°{{ repeat.index }}... Les capteurs de nuit ne sont pas
+            prêts. Pause 30s.
       - alias: 'PAUSE : AVANT NOUVEL ESSAI'
         delay: 00:00:30
   - alias: 'INIT : CALCUL GLOBAL DES VARIABLES'
@@ -1940,45 +2038,62 @@
           entity_id: cover.store_salon
   mode: single
 - id: '1775245530054'
-  alias: ECO. PRISES DINAMIQUE -> By-Présence/Groupe
-  description: 'Pilotage des prises selon le groupe de présence (G1 à G4). La liste
-    des prises et leurs groupes est externalisée dans : templates/P2_prise/P2_eco_prises_config.yaml
-    Ajouter une prise = 1 entrée dans ce fichier + recharger templates.
+  alias: Eco. PRISES DINAMIQUE -> By-Présence/Groupe
+  description: 'Pilotage des 6 prises en fonction du groupe de présence (G1 à G4).
+    Sécurité PC : alim bureau garantie si conso > 100W.
 
     '
   triggers:
-  - trigger: state
-    entity_id: sensor.groupe
+  - entity_id: sensor.groupe
     id: groupe_change
-    alias: DÉCLENCHEUR — Changement de groupe
+    trigger: state
+  - entity_id: sensor.prise_bureau_pc_ikea_power
+    above: 100
+    id: pc_allume
+    trigger: numeric_state
+  - entity_id: sensor.prise_bureau_pc_ikea_power
+    below: 40
+    id: pc_eteint
+    trigger: numeric_state
   actions:
-  - alias: VARIABLES — Groupe actif + liste des prises (source externe)
-    variables:
+  - variables:
       g: '{{ states(''sensor.groupe'') }}'
-      prises: '{{ state_attr(''sensor.eco_prises_config'', ''prises'') | from_json
+      pc_active: '{{ states(''sensor.prise_bureau_pc_ikea_power'') | float(0) > 100
         }}'
-  - alias: ACTION — ON/OFF chaque prise selon groupe
-    repeat:
-      for_each: '{{ prises }}'
-      sequence:
-      - choose:
-        - conditions: '{{ g in repeat.item.groupes }}'
-          sequence:
-          - action: homeassistant.turn_on
-            target:
-              entity_id: '{{ repeat.item.entity }}'
-        default:
-        - action: homeassistant.turn_off
-          target:
-            entity_id: '{{ repeat.item.entity }}'
-  - alias: ACTION — Notification résumé prises
+      vapote: '{{ ''on'' if g in [''groupe_2'', ''groupe_4''] else ''off'' }}'
+      horloge: '{{ ''on'' if g in [''groupe_2'', ''groupe_4''] else ''off'' }}'
+      play3: '{{ ''on'' if g in [''groupe_2'', ''groupe_3'', ''groupe_4''] else ''off''
+        }}'
+      pc_bureau: '{{ ''on'' if (g in [''groupe_3'', ''groupe_4''] or pc_active) else
+        ''off'' }}'
+      tete_lit: '{{ ''on'' if g in [''groupe_2'', ''groupe_4''] else ''off'' }}'
+  - target:
+      entity_id: switch.prise_tv_salon_ikea
+    action: homeassistant.turn_off
+  - target:
+      entity_id: light.hue_smart_eco_salon
+    action: homeassistant.turn_{{ vapote }}
+  - target:
+      entity_id: switch.prise_horloge_ikea
+    action: homeassistant.turn_{{ horloge }}
+  - target:
+      entity_id: switch.ecran_p_c_3_play_hue
+    action: homeassistant.turn_{{ play3 }}
+  - target:
+      entity_id: light.hue_smart_eco_pc_bureau
+    action: homeassistant.turn_{{ pc_bureau }}
+  - target:
+      entity_id: switch.prise_tete_de_lit_chambre
+    action: homeassistant.turn_{{ tete_lit }}
+  - data:
+      title: 'Groupe: {{ g }}'
+      message: "{% set prises = [\n  'switch.prise_tv_salon_ikea',\n  'switch.prise_horloge_ikea',\n
+        \ 'light.hue_smart_eco_salon',\n  'switch.ecran_p_c_3_play_hue',\n  'light.hue_smart_eco_pc_bureau',\n
+        \ 'switch.prise_tete_de_lit_chambre'\n] %} {% set count_on = namespace(value=0)
+        %} {% for p in prises %}\n  {% if states(p) == 'on' %}\n    {% set count_on.value
+        = count_on.value + 1 %}\n  {% endif %}\n{% endfor %} [{{ count_on.value }}]
+        prises ON | PC: {{ states('sensor.prise_bureau_pc_ikea_power') | int }}W\n"
     action: notify.mobile_app_eric
-    data:
-      title: 'ECO PRISES: {{ g | upper }}'
-      message: "{% set count_on = namespace(value=0) %} {% for p in prises %}\n  {%
-        if states(p.entity) == 'on' %}\n    {% set count_on.value = count_on.value
-        + 1 %}\n  {% endif %}\n{% endfor %} [{{ count_on.value }}/{{ prises | count
-        }}] prises ON\n"
   mode: queued
 - id: '1775245732227'
   alias: 'Gestion PC bureau : Scène de Fin + Notif'
@@ -1989,8 +2104,7 @@
   triggers:
   - id: bouton_mqtt
     trigger: mqtt
-    options:
-      topic: zigbee2mqtt/Poussoir PC (IKEA TRADFRI)/action
+    topic: zigbee2mqtt/Poussoir (IKEA TRADFRI)/action
   - id: extinction_conso
     trigger: numeric_state
     entity_id: sensor.prise_bureau_pc_ikea_power
@@ -2003,11 +2117,15 @@
       conditions:
       - or:
         - condition: template
-          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json
-            is defined and trigger.payload_json.action == ''on'' }}'
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
+            == ''on'' }}'
         - condition: trigger
           id: bouton_mqtt
       sequence:
+      - action: light.turn_on
+        target:
+          entity_id: light.hue_smart_eco_pc_bureau
+        data: {}
       - action: light.turn_on
         target:
           entity_id: light.hue_smart_eco_pc_bureau
@@ -2016,8 +2134,8 @@
       conditions:
       - or:
         - condition: template
-          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json
-            is defined and trigger.payload_json.action == ''off'' }}'
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
+            == ''off'' }}'
         - condition: trigger
           id: extinction_conso
       sequence:
@@ -2034,53 +2152,58 @@
   mode: parallel
 - id: '1775330762844'
   alias: 'Gestion TV Chambre : Scène de Fin + Notif'
-  description: 'Éteint la lumière TV et notifie lorsqu''une veille est détectée.
+  description: 'Éteint les lumières et notifie, mais laisse la prise ON pour le suivi
+    conso  lorsqu''une veille est détectée.
 
     '
   triggers:
   - id: bouton_mqtt
     trigger: mqtt
     options:
-      topic: zigbee2mqtt/Poussoir TV (IKEA TRADFRI)/action
+      topic: zigbee2mqtt/Inter TV Chambre (IKEA RODRET)
+  - id: allumage_auto
+    trigger: time
+    at: '21:00:00'
+    enabled: false
   - id: extinction_conso
     trigger: numeric_state
-    entity_id:
-    - sensor.prise_tv_chambre_nous_power
+    entity_id: sensor.prise_tv_chambre_nous_power
     below: 20
     for:
       minutes: 2
   actions:
   - choose:
-    - alias: 'ALLUMAGE : Bouton ON'
+    - alias: 'ALLUMAGE : Bouton ON ou 21h00'
       conditions:
       - or:
         - condition: template
-          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json
-            is defined and trigger.payload_json.action == ''on'' }}'
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
+            == ''on'' }}'
         - condition: trigger
-          id: bouton_mqtt
+          id: allumage_auto
       sequence:
       - action: light.turn_on
         target:
           entity_id: light.hue_smart_eco_tv_chambre
-        data: {}
-    - alias: 'EXTINCTION TV: Bouton OFF ou Veille (< 20W)'
+      - action: switch.turn_on
+        target:
+          entity_id: switch.prise_tv_chambre_nous
+    - alias: 'EXTINCTION AMBIANCE : Bouton OFF ou Veille (< 20W)'
       conditions:
       - or:
         - condition: template
-          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json
-            is defined and trigger.payload_json.action == ''off'' }}'
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
+            == ''off'' }}'
         - condition: trigger
           id: extinction_conso
       sequence:
       - action: light.turn_off
         target:
           entity_id: light.hue_smart_eco_tv_chambre
-        data: {}
       - action: notify.mobile_app_eric
         data:
           title: Veille détectée
-          message: TV Chambre [OFF]
+          message: Prise TV [OFF]
           data:
             icon: mdi:eye-outline
             tag: notif_tv_chambre
@@ -2604,7 +2727,7 @@
       entity_id: notify.log_ecart_energie
     data:
       message: '{% set l   = states(''sensor.linky_25481620821301_consumption_history'')
-        | float(0) %} {% set n1  = state_attr(''sensor.genelec_appart_quotidien_kwh_um'',
+        | float(0) %} {% set n1  = state_attr(''sensor.genelec_appart_quotidien_um'',
         ''last_period'') | float(0) %} {% set n2  = state_attr(''sensor.genelec_appart_quotidien_um'',
         ''last_period'') | float(0) %} {% set d1  = (l - n1) | round(3) %} {% set
         d2  = (l - n2) | round(3) %} {% set p1  = ((d1 / l * 100) | round(1)) if l
@@ -2615,91 +2738,3 @@
         kWh | Ecart: {{d1}} ({{p1}}%) Direct:  {{n2}} kWh | Ecart: {{d2}} ({{p2}}%)
 
         '
-- id: '1777395823092'
-  alias: '[Énergie] Reset Complet des Utility Meters'
-  description: Force la remise à zéro de tous les compteurs d'éclairage du Pôle 3
-  triggers: []
-  actions:
-  - target:
-      entity_id:
-      - sensor.hue_white_lamp_table_quotidien_um
-      - sensor.hue_white_lamp_table_hebdomadaire_um
-      - sensor.hue_white_lamp_table_mensuel_um
-      - sensor.hue_white_lamp_table_annuel_um
-      - sensor.hue_color_candle_salon_1_quotidien_um
-      - sensor.hue_color_candle_salon_1_hebdomadaire_um
-      - sensor.hue_color_candle_salon_1_mensuel_um
-      - sensor.hue_color_candle_salon_1_annuel_um
-      - sensor.hue_ambiance_lamp_salon_1_quotidien_um
-      - sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um
-      - sensor.hue_ambiance_lamp_salon_1_mensuel_um
-      - sensor.hue_ambiance_lamp_salon_1_annuel_um
-      - sensor.hue_ambiance_lamp_salon_2_quotidien_um
-      - sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um
-      - sensor.hue_ambiance_lamp_salon_2_mensuel_um
-      - sensor.hue_ambiance_lamp_salon_2_annuel_um
-      - sensor.hue_ambiance_lamp_salon_3_quotidien_um
-      - sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um
-      - sensor.hue_ambiance_lamp_salon_3_mensuel_um
-      - sensor.hue_ambiance_lamp_salon_3_annuel_um
-      - sensor.hue_play_1_pc_bureau_quotidien_um
-      - sensor.hue_play_1_pc_bureau_mensuel_um
-      - sensor.hue_play_2_pc_bureau_quotidien_um
-      - sensor.hue_play_2_pc_bureau_mensuel_um
-      - sensor.hue_play_3_pc_bureau_quotidien_um
-      - sensor.hue_play_3_pc_bureau_mensuel_um
-      - sensor.hue_white_lamp_bureau_1_quotidien_um
-      - sensor.hue_white_lamp_bureau_1_mensuel_um
-      - sensor.hue_white_lamp_bureau_2_quotidien_um
-      - sensor.hue_white_lamp_bureau_2_mensuel_um
-      - sensor.hue_white_lamp_entree_quotidien_um
-      - sensor.hue_white_lamp_entree_mensuel_um
-      - sensor.hue_white_lamp_cuisine_quotidien_um
-      - sensor.hue_white_lamp_cuisine_mensuel_um
-      - sensor.hue_white_lamp_couloir_quotidien_um
-      - sensor.hue_white_lamp_couloir_mensuel_um
-      - sensor.lampe_salle_de_bain_hue_quotidien_um
-      - sensor.lampe_salle_de_bain_hue_mensuel_um
-      - sensor.relais_lumiere_sdb_sonoff_quotidien_um
-      - sensor.relais_lumiere_sdb_sonoff_mensuel_um
-    data:
-      value: '0'
-    action: utility_meter.calibrate
-  mode: single
-- id: '1777482314506'
-  alias: DIAG - ENREGISTREMENT JOURNALIER (7 POSTES + DUT)
-  description: Log toutes les 15 min la consommation des 7 postes, la température
-    extérieure et le DUT chauffage (Ordre S/R/B/C) dans un fichier.
-  triggers:
-  - alias: 'DÉCLENCHEUR : TOUTES LES 15 MINUTES'
-    trigger: time_pattern
-    minutes: /15
-  conditions: []
-  actions:
-  - alias: 'ACTION : ENREGISTREMENT DANS LE FICHIER'
-    action: notify.send_message
-    target:
-      entity_id: notify.file_diag_log_file
-    data:
-      message: '{% set pres     = states(''sensor.presence'') %} {% set p1       =
-        states(''sensor.diag_poste_hygiene_quotidien'')    | float(0) | round(2) %}
-        {% set p2       = states(''sensor.diag_poste_cuisine_quotidien'')    | float(0)
-        | round(2) %} {% set p3       = states(''sensor.diag_poste_froid_quotidien'')      |
-        float(0) | round(2) %} {% set p4       = states(''sensor.diag_poste_chauffage_quotidien'')  |
-        float(0) | round(2) %} {% set agv_clim = states(''sensor.clim_rad_total_avg_watts_quotidien'')
-        | float(0) | round(2) %} {% set p5       = states(''sensor.diag_poste_multimedia_quotidien'')
-        | float(0) | round(2) %} {% set p6       = states(''sensor.diag_poste_eclairage_quotidien'')  |
-        float(0) | round(2) %} {% set p7       = states(''sensor.diag_poste_autre_quotidien'')      |
-        float(0) | round(2) %} {% set ext      = states(''sensor.th_balcon_nord_temperature'')      |
-        float(0) %} {% set int      = states(''sensor.temperature_moyenne_interieure'')  |
-        float(0) %} {% set dut_s    = states(''sensor.dut_clim_salon'')                  |
-        float(0) | round(1) %} {% set dut_r    = states(''sensor.dut_radiateur_cuisine'')           |
-        float(0) | round(1) %} {% set dut_b    = states(''sensor.dut_clim_bureau'')                 |
-        float(0) | round(1) %} {% set dut_c    = states(''sensor.dut_clim_chambre'')                |
-        float(0) | round(1) %} {% set t        = now().strftime(''%d/%m %H:%M'') %}
-        {{pres}} | {{t}} | Hyg:{{p1}} | Cuis:{{p2}} | Froid:{{p3}} | Chauff:{{p4}}
-        | Avg 4:{{agv_clim}} | Multi:{{p5}} | Lum:{{p6}} | Autres:{{p7}} | Ti:{{int}}°C
-        | Ext:{{ext}}°C | DUT S/R/B/C:{{dut_s}}/{{dut_r}}/{{dut_b}}/{{dut_c}}
-
-        '
-  mode: single

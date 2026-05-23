@@ -4,12 +4,13 @@
 #
 # ## 📝 DESCRIPTION :
 # Groupe des capteurs de batteries des équipements IKEA Zigbee.
-# Contacts fenêtres, télécommandes, interrupteurs, détecteur de fuite (12 unités).
+# Télécommandes, interrupteurs, détecteur de fuite, vallhorn (8 unités).
+# Contacts fenêtres IKEA supprimés — remplacés par capteurs SONOFF (GRP_03).
 # Utilisé par auto-entities (L5C1) pour la surveillance centralisée des piles.
 #
 # ## 🧮 CALCUL & SOURCES :
 # Source : Zigbee2MQTT (Z2M) → intégration MQTT HA
-# Entités : sensor.*_battery (contacts IKEA, rodret, somrig, poussoir, vallhorn)
+# Entités : sensor.*_battery (rodret, somrig, poussoir, vallhorn, fuite)
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 # | MATÉRIEL      | CAPTEUR BRUT (source)                      | CE FICHIER          | AVAL          |
@@ -30,9 +31,8 @@ ikea_devices:
     - sensor.detecteur_de_fuite_ikea_battery
     - sensor.inter_salon_4_ikea_battery
     - sensor.detecteur_vallhorn_battery
-    - sensor.inter_reserve_ikea_rodret_battery
+    - sensor.inter_tv_chambre_ikea_rodret_battery
     - sensor.inter_somrig_battery
     - sensor.inter_bureau_rodret_battery
-    - sensor.poussoir_pc_ikea_tradfri_battery
-    - sensor.poussoir_tv_ikea_tradfri_battery
+    - sensor.poussoir_ikea_tradfri_battery
     - sensor.inter_radiateur_salle_de_bain_ikea_rodret_battery
