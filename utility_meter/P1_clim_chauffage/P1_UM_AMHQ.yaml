@@ -221,7 +221,7 @@ clim_chambre_quotidien_um:
 # annotations_log:
 # - [2026-04-25] Migration Riemann → direct : toutes sources *_energie_totale_kwh
 #               remplacées par sensor.*_nous_energy (firmware NOUS Z2M, kWh natif).
-# - [2026-04-25] Naming : _kwh_um → _um (convention uniforme — 24 entrées).
+# - [2026-04-25] Naming : _um → _um (convention uniforme — 24 entrées).
 # - [2026-04-25] Ajout name: + unique_id: par entrée (manquants).
 # - [2026-04-25] Ajout slug tertiaire individuel par entrée (était groupé par équipement).
 # - [2026-04-25] En-tête : chaîne de dépendances complète + PIÈGES mis à jour.

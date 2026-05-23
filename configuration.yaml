@@ -51,6 +51,19 @@ homeassistant:
   allowlist_external_dirs:
     - "/config"          # Requis pour l'intégration File (notify → fichier)
 
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ LOGGER — FILTRES BRUIT CONNU                                             │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+# --- logger ---
+logger:
+  default: warning
+  filters:
+    # linky-card 1.6 : import_statistics sans mean_type/unit_class — bug HACS
+    # Disparaîtra avec une prochaine mise à jour de la carte
+    homeassistant.components.recorder.websocket_api:
+      - "WS command recorder/import_statistics called without specifying mean_type"
+      - "WS command recorder/import_statistics called without specifying unit_class"
+
 # --- default_config ---
 # Loads default set of integrations. Do not remove.
 default_config:
@@ -122,8 +135,8 @@ shell_command: !include shell_command.yaml
 input_button: !include input_button.yaml
 #input_button: !include_dir_merge_list input_button/
 
-#renvoi au repertoire groups/  # "[modif] groups.yaml → !include_dir_merge_named groups/"
-group: !include_dir_merge_named groups/
+#renvoi au repertoire groups/
+group: !include_dir_merge_named groups/  # "[modif] groups.yaml → !include_dir_merge_named groups/"
 #group: !include groups.yaml
 
 #renvoi au fichier sql.yaml
@@ -235,6 +248,7 @@ http:
   login_attempts_threshold: 3  # Seuil de tentatives avant bannissement
 
 # annotations_log:
+# - [2026-05-10] Ajout section logger: filtres rpi_power (critical) + linky-card import_statistics.
 # - [L95]   camera: !include camera.yaml → commenté (obsolète, causait une erreur au démarrage).
 # - [L16]   En-tête documentation mis à jour : camera marqué DÉSACTIVÉ.
 # - [L37]   Ajout bloc homeassistant: allowlist_external_dirs: /config (requis File integration).

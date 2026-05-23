@@ -267,6 +267,21 @@
           {% endif %}
         {% endif %}
 
+# --- chambre_nb_allumes ---
+    - name: "Chambre Nb Allumés"
+      unique_id: chambre_nb_allumes
+      state: >
+        {% set prise = is_state('switch.prise_tete_de_lit_chambre', 'on') %}
+        {% if prise %}
+          {% set n = [is_state('light.chambre', 'on'),
+                      is_state('light.hue_color_candle_chambre_gege', 'on'),
+                      is_state('light.hue_color_candle_chambre_eric', 'on')]
+                     | select('equalto', True) | list | count %}
+          {{ n }}/3
+        {% else %}
+          {{ '1/1' if is_state('light.chambre', 'on') else '0/1' }}
+        {% endif %}
+
 # --- lumiere_chambre_etat ---
     - name: "Lumière Chambre État"
       unique_id: lumiere_chambre_etat

@@ -54,5 +54,5 @@ all_standby_quotidien_um:
 
 # annotations_log:
 # - [2026-04-25] Refactoring naming : suppression de _kwh_ dans tous les keys/unique_id/names (4 entrées).
-# - [2026-04-25] Convention unifiée : suffixe _um sans marqueur Riemann (remplace _kwh_um).
+# - [2026-04-25] Convention unifiée : suffixe _um sans marqueur Riemann (remplace _um).
 # - [2026-04-25] Source IN
