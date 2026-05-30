@@ -1,261 +1,244 @@
 # 📇 INDEX NAVIGATION — Dashboard HA
 
 *Navigation complète des 18 vignettes — Accès direct aux docs, YAML et pop-ups*
+*Chemins relatifs depuis la racine du repo GitHub `home_assistant_re-build`*
 
 ---
 
-## L1C1_01_METEO
+## L1C1 — MÉTÉO
 
-### Vignette L1C1
-- [📄 Docs Vignette](Dashboard/L1C1_01_METEO/L1C1_VIGNETTE_METEO.md)
-- [⚙️ YAML Vignette](Dashboard/L1C1_01_METEO/vignette_L1C1_meteo_2026-05-29.yaml)
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L1C1_METEO/L1C1_VIGNETTE_METEO.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L1C1_01_Meteo/vignette_L1C1_meteo_2026-05-16.yaml)
 
-### Page L1C1
-- [📄 Docs Page](Dashboard/L1C1_01_METEO/PAGE_METEO.md)
-- [⚙️ YAML Page](Dashboard/L1C1_01_METEO/page_L1C1_meteo_2026-05-29.yaml)
+### Page
+- [📄 Doc Page](Docs/docs_dashboard/docs/L1C1_METEO/PAGE_METEO.md)
+- [⚙️ YAML Page](Docs/Dashboard/L1C1_01_Meteo/page_L1C1_meteo_2026-05-09.yaml)
 
-#### Pop-up #ALERT
-- [→ Section](Dashboard/L1C1_01_METEO/PAGE_METEO.md#pop-up-alert)
-- *(Extraction de page_L1C1_meteo_2026-05-29.yaml)*
-
-#### Pop-up #FOUDRE
-- [→ Section](Dashboard/L1C1_01_METEO/PAGE_METEO.md#pop-up-foudre)
-- *(Extraction de page_L1C1_meteo_2026-05-29.yaml)*
-
-#### Pop-up #SUN
-- [→ Section](Dashboard/L1C1_01_METEO/PAGE_METEO.md#pop-up-sun)
-- *(Extraction de page_L1C1_meteo_2026-05-29.yaml)*
-
-### Entités — Groupées par fichier source
-
-#### [`docs_dashboard/TREE_CORRIGE/templates/meteo/M_02_meteo_vent_vence_card.yaml`](docs_dashboard/TREE_CORRIGE/templates/meteo/M_02_meteo_vent_vence_card.yaml)
-- `sensor.meteo_france_wind_speed`
-- `sensor.meteo_france_wind_bearing`
-- `sensor.meteo_france_vent_vence_card_content`
-
-#### [`docs_dashboard/TREE_CORRIGE/templates/meteo/M_01_meteo_alertes_card.yaml`](docs_dashboard/TREE_CORRIGE/templates/meteo/M_01_meteo_alertes_card.yaml)
-- `sensor.meteo_france_alerte_card_content`
-
-#### [`docs_dashboard/TREE_CORRIGE/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml`](docs_dashboard/TREE_CORRIGE/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml)
-- `sensor.blitzortung_lightning_count`
-- `sensor.blitzortung_lightning_distance`
-
-#### [`docs_dashboard/TREE_CORRIGE/templates/meteo/M_03_meteo_blitzortung.yaml`](docs_dashboard/TREE_CORRIGE/templates/meteo/M_03_meteo_blitzortung.yaml)
-- `sensor.blitzortung_card_content`
-
-#### [`docs_dashboard/TREE_CORRIGE/templates/meteo/M_04_tendances_th_ext_card.yaml`](docs_dashboard/TREE_CORRIGE/templates/meteo/M_04_tendances_th_ext_card.yaml)
-- `sensor.tendances_th_ext_card_content`
-
-#### NAT — Intégrations natives HA
-- `sensor.th_balcon_nord_temperature` (Z2M SONOFF balcon Nord)
-- `sensor.th_balcon_nord_humidity` (Z2M SONOFF balcon Nord)
-- `sensor.sun_next_rising` (HA Core — sun.sun)
-- `sensor.sun_next_setting` (HA Core — sun.sun)
+### Divers
+- [📄 Tuto Images Alertes Météo France](Docs/docs_dashboard/docs/L1C1_METEO/TUTO_IMAGES_ALERTES_METEO_FRANCE.md)
+- [⚙️ Card Durée du Jour](Docs/Dashboard/L1C1_01_Meteo/card_duree_du_jour_2026-05-03.yaml)
 
 ---
 
-## L1C2_02_TEMPERATURES
+## L1C2 — TEMPÉRATURES
 
-### Vignette L1C2
-- [📄 Docs Vignette](Dashboard/L1C2_02_TEMPERATURES/L1C2_VIGNETTE_TEMPERATURES.md)
-- [⚙️ YAML Vignette](Dashboard/L1C2_02_TEMPERATURES/vignette_L1C2_temperatures_*.yaml)
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L1C2_TEMPERATURES/L1C2_VIGNETTE_TEMPERATURES.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L1C2_02_Temperatures/vignette_L1C2_temperatures_2026-05-12.yaml)
 
-### Page L1C2
-- [📄 Docs Page](Dashboard/L1C2_02_TEMPERATURES/PAGE_TEMPERATURES.md)
-- [⚙️ YAML Page](Dashboard/L1C2_02_TEMPERATURES/page_L1C2_temperatures_*.yaml)
-
----
-
-## L1C3_03_CLIM
-
-### Vignette L1C3
-- [📄 Docs Vignette](Dashboard/L1C3_03_CLIM/L1C3_VIGNETTE_CLIM.md)
-- [⚙️ YAML Vignette](Dashboard/L1C3_03_CLIM/vignette_L1C3_clim_*.yaml)
-
-### Page L1C3
-- [📄 Docs Page](Dashboard/L1C3_03_CLIM/PAGE_CLIM.md)
-- [⚙️ YAML Page](Dashboard/L1C3_03_CLIM/page_L1C3_clim_*.yaml)
+### Page
+- [📄 Doc Page](Docs/docs_dashboard/docs/L1C2_TEMPERATURES/PAGE_TEMPERATURES.md)
+- [⚙️ YAML Page](Docs/Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-05-12.yaml)
 
 ---
 
-## L2C1_01_ENERGIE
+## L1C3 — COMMANDES CLIM
 
-### Vignette L2C1
-- [📄 Docs Vignette](Dashboard/L2C1_01_ENERGIE/L2C1_VIGNETTE_ENERGIE.md)
-- [⚙️ YAML Vignette](Dashboard/L2C1_01_ENERGIE/vignette_L2C1_energie_*.yaml)
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L1C3_CLIM/L1C3_VIGNETTE_CLIM.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L1C3_03_Commandes_Clim/vignette_L1C3_clim_2026-05-13.yaml)
 
-### Page L2C1
-- [📄 Docs Page](Dashboard/L2C1_01_ENERGIE/PAGE_ENERGIE.md)
-- [⚙️ YAML Page](Dashboard/L2C1_01_ENERGIE/page_L2C1_energie_*.yaml)
-
----
-
-## L2C2_02_ENERGIE_CLIM
-
-### Vignette L2C2
-- [📄 Docs Vignette](Dashboard/L2C2_02_ENERGIE_CLIM/L2C2_VIGNETTE_ENERGIE_CLIM.md)
-- [⚙️ YAML Vignette](Dashboard/L2C2_02_ENERGIE_CLIM/vignette_L2C2_energie_clim_*.yaml)
-
-### Page L2C2
-- [📄 Docs Page](Dashboard/L2C2_02_ENERGIE_CLIM/PAGE_ENERGIE_CLIM.md)
-- [⚙️ YAML Page](Dashboard/L2C2_02_ENERGIE_CLIM/page_L2C2_energie_clim_*.yaml)
+### Page
+- [📄 Doc Page](Docs/docs_dashboard/docs/L1C3_CLIM/PAGE_CLIM.md)
+- [⚙️ YAML Page](Docs/Dashboard/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-05-13.yaml)
 
 ---
 
-## L2C3_03_ENERGIE_ECLAIRAGE
+## L2C1 — ÉNERGIE GÉNÉRALE
 
-### Vignette L2C3
-- [📄 Docs Vignette](Dashboard/L2C3_03_ENERGIE_ECLAIRAGE/L2C3_VIGNETTE_ENERGIE_ECLAIRAGE.md)
-- [⚙️ YAML Vignette](Dashboard/L2C3_03_ENERGIE_ECLAIRAGE/vignette_L2C3_energie_eclairage_*.yaml)
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L2C1_ENERGIE/L2C1_VIGNETTE_ENERGIE.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L2C1_04_Energie_Generale/vignette_L2C1_energie_2026-05-12.yaml)
 
-### Page L2C3
-- [📄 Docs Page](Dashboard/L2C3_03_ENERGIE_ECLAIRAGE/PAGE_ENERGIE_ECLAIRAGE.md)
-- [⚙️ YAML Page](Dashboard/L2C3_03_ENERGIE_ECLAIRAGE/page_L2C3_energie_eclairage_*.yaml)
+### Pages (3)
+- [📄 Doc Page Principale](Docs/docs_dashboard/docs/L2C1_ENERGIE/PAGE_ENERGIE.md)
+- [⚙️ YAML Page Principale](Docs/Dashboard/L2C1_04_Energie_Generale/page_L2C1_energie_principale_2026-05-12.yaml)
+- [📄 Doc Page Mensuel](Docs/docs_dashboard/docs/L2C1_ENERGIE/PAGE_ENERGIE_MENSUEL.md)
+- [⚙️ YAML Page Mensuel](Docs/Dashboard/L2C1_04_Energie_Generale/page_L2C1_energie_mensuel_2026-05-12.yaml)
+- [📄 Doc Page Temps Réel](Docs/docs_dashboard/docs/L2C1_ENERGIE/PAGE_ENERGIE_TEMPS_REEL.md)
+- [⚙️ YAML Page Temps Réel](Docs/Dashboard/L2C1_04_Energie_Generale/page_L2C1_energie_temps_reel_2026-05-12.yaml)
 
----
-
-## L3C1_01_ECLAIRAGE
-
-### Vignette L3C1
-- [📄 Docs Vignette](Dashboard/L3C1_01_ECLAIRAGE/L3C1_VIGNETTE_ECLAIRAGE.md)
-- [⚙️ YAML Vignette](Dashboard/L3C1_01_ECLAIRAGE/vignette_L3C1_eclairage_*.yaml)
-
-### Page L3C1
-- [📄 Docs Page](Dashboard/L3C1_01_ECLAIRAGE/PAGE_ECLAIRAGE.md)
-- [⚙️ YAML Page](Dashboard/L3C1_01_ECLAIRAGE/page_L3C1_eclairage_*.yaml)
+### Divers
+- [📄 Couleurs Prises par Pièce](Docs/docs_dashboard/docs/L2C1_ENERGIE/COULEURS_PRISES_PAR_PIECE.md)
 
 ---
 
-## L3C2_02_PRISES
+## L2C2 — ÉNERGIE CLIM
 
-### Vignette L3C2
-- [📄 Docs Vignette](Dashboard/L3C2_02_PRISES/L3C2_VIGNETTE_PRISES.md)
-- [⚙️ YAML Vignette](Dashboard/L3C2_02_PRISES/vignette_L3C2_prises_*.yaml)
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L2C2_ENERGIE_CLIM/L2C2_VIGNETTE_ENERGIE_CLIM.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L2C2_05_Energie_Clim/vignette_L2C2_energie_clim_2026-05-13.yaml)
 
-### Page L3C2
-- [📄 Docs Page](Dashboard/L3C2_02_PRISES/PAGE_PRISES.md)
-- [⚙️ YAML Page](Dashboard/L3C2_02_PRISES/page_L3C2_prises_*.yaml)
-
----
-
-## L3C3_03_STORES
-
-### Vignette L3C3
-- [📄 Docs Vignette](Dashboard/L3C3_03_STORES/L3C3_VIGNETTE_STORES.md)
-- [⚙️ YAML Vignette](Dashboard/L3C3_03_STORES/vignette_L3C3_stores_*.yaml)
-
-### Page L3C3
-- [📄 Docs Page](Dashboard/L3C3_03_STORES/PAGE_STORES.md)
-- [⚙️ YAML Page](Dashboard/L3C3_03_STORES/page_L3C3_stores_*.yaml)
+### Page
+- [📄 Doc Page](Docs/docs_dashboard/docs/L2C2_ENERGIE_CLIM/PAGE_ENERGIE_CLIM.md)
+- [⚙️ YAML Page](Docs/Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-05-13.yaml)
 
 ---
 
-## L4C1_01_PROXMOX
+## L2C3 — ÉNERGIE ÉCLAIRAGE
 
-### Vignette L4C1
-- [📄 Docs Vignette](Dashboard/L4C1_01_PROXMOX/L4C1_VIGNETTE_PROXMOX.md)
-- [⚙️ YAML Vignette](Dashboard/L4C1_01_PROXMOX/vignette_L4C1_proxmox_*.yaml)
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L2C3_ENERGIE_ECLAIRAGE/L2C3_VIGNETTE_ECLAIRAGE.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L2C3_06_Energie_Eclairage/vignette_L2C3_energie_eclairage_2026-05-13.yaml)
 
-### Page L4C1
-- [📄 Docs Page](Dashboard/L4C1_01_PROXMOX/PAGE_PROXMOX.md)
-- [⚙️ YAML Page](Dashboard/L4C1_01_PROXMOX/page_L4C1_proxmox_*.yaml)
+### Page
+- [📄 Doc Page](Docs/docs_dashboard/docs/L2C3_ENERGIE_ECLAIRAGE/PAGE_ENERGIE_ECLAIRAGE.md)
+- [⚙️ YAML Page](Docs/Dashboard/L2C3_06_Energie_Eclairage/page_L2C3_energie_eclairage_2026-05-13.yaml)
 
----
-
-## L4C2_02_MINI_PC
-
-### Vignette L4C2
-- [📄 Docs Vignette](Dashboard/L4C2_02_MINI_PC/L4C2_VIGNETTE_MINI_PC.md)
-- [⚙️ YAML Vignette](Dashboard/L4C2_02_MINI_PC/vignette_L4C2_mini_pc_*.yaml)
-
-### Page L4C2
-- [📄 Docs Page](Dashboard/L4C2_02_MINI_PC/PAGE_MINI_PC.md)
-- [⚙️ YAML Page](Dashboard/L4C2_02_MINI_PC/page_L4C2_mini_pc_*.yaml)
+### Divers
+- [📄 Couleurs Éclairage par Pièce](Docs/docs_dashboard/docs/L2C3_ENERGIE_ECLAIRAGE/COULEURS_ECLAIRAGE_PAR_PIECE.md)
 
 ---
 
-## L4C3_03_MAJ_HA
+## L3C1 — COMMANDES ÉCLAIRAGE
 
-### Vignette L4C3
-- [📄 Docs Vignette](Dashboard/L4C3_03_MAJ_HA/L4C3_VIGNETTE_MAJ.md)
-- [⚙️ YAML Vignette](Dashboard/L4C3_03_MAJ_HA/vignette_L4C3_maj_*.yaml)
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L3C1_ECLAIRAGE/L3C1_VIGNETTE_ECLAIRAGE.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L3C1_07_Commandes_Eclairage/vignette_L3C1_eclairage_2026-05-13.yaml)
 
-### Page L4C3
-- [📄 Docs Page](Dashboard/L4C3_03_MAJ_HA/PAGE_MAJ.md)
-- [⚙️ YAML Page](Dashboard/L4C3_03_MAJ_HA/page_L4C3_maj_*.yaml)
-
----
-
-## L5C1_01_BATTERIES
-
-### Vignette L5C1
-- [📄 Docs Vignette](Dashboard/L5C1_01_BATTERIES/L5C1_VIGNETTE_BATTERIES.md)
-- [⚙️ YAML Vignette](Dashboard/L5C1_01_BATTERIES/vignette_L5C1_batteries_*.yaml)
-
-### Page L5C1
-- [📄 Docs Page](Dashboard/L5C1_01_BATTERIES/PAGE_BATTERIES.md)
-- [⚙️ YAML Page](Dashboard/L5C1_01_BATTERIES/page_L5C1_batteries_*.yaml)
+### Pages (2)
+- [📄 Doc Page](Docs/docs_dashboard/docs/L3C1_ECLAIRAGE/PAGE_ECLAIRAGE.md)
+- [⚙️ YAML Page Gauche](Docs/Dashboard/L3C1_07_Commandes_Eclairage/page_L3C1_eclairage_gauche_2026-05-13.yaml)
+- [⚙️ YAML Page Droite](Docs/Dashboard/L3C1_07_Commandes_Eclairage/page_L3C1_eclairage_droite_2026-05-13.yaml)
 
 ---
 
-## L5C2_02_BATTERIES_PORTABLES
+## L3C2 — COMMANDES PRISES
 
-### Vignette L5C2
-- [📄 Docs Vignette](Dashboard/L5C2_02_BATTERIES_PORTABLES/L5C2_VIGNETTE_BATTERIES_PORTABLES.md)
-- [⚙️ YAML Vignette](Dashboard/L5C2_02_BATTERIES_PORTABLES/vignette_L5C2_batteries_portables_*.yaml)
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L3C2_PRISES/L3C2_VIGNETTE_PRISES.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L3C2_08_Commandes_Prises/vignette_L3C2_prises_2026-05-14.yaml)
 
-### Page L5C2
-- [📄 Docs Page](Dashboard/L5C2_02_BATTERIES_PORTABLES/PAGE_BATTERIES_PORTABLES.md)
-- [⚙️ YAML Page](Dashboard/L5C2_02_BATTERIES_PORTABLES/page_L5C2_batteries_portables_*.yaml)
-
----
-
-## L5C3_03_MARIADB
-
-### Vignette L5C3
-- [📄 Docs Vignette](Dashboard/L5C3_03_MARIADB/L5C3_VIGNETTE_MARIADB.md)
-- [⚙️ YAML Vignette](Dashboard/L5C3_03_MARIADB/vignette_L5C3_mariadb_*.yaml)
-
-### Page L5C3
-- [📄 Docs Page](Dashboard/L5C3_03_MARIADB/PAGE_MARIADB.md)
-- [⚙️ YAML Page](Dashboard/L5C3_03_MARIADB/page_L5C3_mariadb_*.yaml)
+### Page
+- [📄 Doc Page](Docs/docs_dashboard/docs/L3C2_PRISES/PAGE_PRISES.md)
+- [⚙️ YAML Page](Docs/Dashboard/L3C2_08_Commandes_Prises/page_L3C2_prises_2026-05-14.yaml)
 
 ---
 
-## L6C1_01_AIR_QUALITE
+## L3C3 — STORES & FENÊTRES
 
-### Vignette L6C1
-- [📄 Docs Vignette](Dashboard/L6C1_01_AIR_QUALITE/L6C1_VIGNETTE_AIR_QUALITE.md)
-- [⚙️ YAML Vignette](Dashboard/L6C1_01_AIR_QUALITE/vignette_L6C1_air_qualite_*.yaml)
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L3C3_STORES/L3C3_VIGNETTE_STORES.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L3C3_09_Stores_Fenetres/vignette_L3C3_stores_2026-05-14.yaml)
 
-### Page L6C1
-- [📄 Docs Page](Dashboard/L6C1_01_AIR_QUALITE/PAGE_AIR_QUALITE.md)
-- [⚙️ YAML Page](Dashboard/L6C1_01_AIR_QUALITE/page_L6C1_air_qualite_*.yaml)
-
----
-
-## L6C2_02_POLLUTION_POLLEN
-
-### Vignette L6C2
-- [📄 Docs Vignette](Dashboard/L6C2_02_POLLUTION_POLLEN/L6C2_VIGNETTE_POLLUTION_POLLEN.md)
-- [⚙️ YAML Vignette](Dashboard/L6C2_02_POLLUTION_POLLEN/vignette_L6C2_pollution_pollen_*.yaml)
-
-### Page L6C2
-- [📄 Docs Page](Dashboard/L6C2_02_POLLUTION_POLLEN/PAGE_POLLUTION_POLLEN.md)
-- [⚙️ YAML Page](Dashboard/L6C2_02_POLLUTION_POLLEN/page_L6C2_pollution_pollen_*.yaml)
+### Page
+- [📄 Doc Page](Docs/docs_dashboard/docs/L3C3_STORES/PAGE_STORES.md)
+- [⚙️ YAML Page](Docs/Dashboard/L3C3_09_Stores_Fenetres/page_L3C3_stores_2026-05-14.yaml)
 
 ---
 
-## L6C3_03_VIGIEAU
+## L4C1 — PROXMOX (PVE)
 
-### Vignette L6C3
-- [📄 Docs Vignette](Dashboard/L6C3_03_VIGIEAU/L6C3_VIGNETTE_VIGIEAU.md)
-- [⚙️ YAML Vignette](Dashboard/L6C3_03_VIGIEAU/vignette_L6C3_vigieau_*.yaml)
+> ⚠️ En cours : vignette Proxmox créée (2026-05-17), page non encore pushée. Doc vignette à créer.
 
-### Page L6C3
-- [📄 Docs Page](Dashboard/L6C3_03_VIGIEAU/PAGE_VIGIEAU.md)
-- [⚙️ YAML Page](Dashboard/L6C3_03_VIGIEAU/page_L6C3_vigieau_*.yaml)
+### Vignette
+- *(📄 Doc Vignette — à créer dans `Docs/docs_dashboard/docs/`)*
+- [⚙️ YAML Vignette](Docs/Dashboard/L4C1_10_Proxmox/vignette_L4C1_proxmox_2026-05-17.yaml)
+
+### Page
+- *(📄 Doc Page — à créer)*
+- *(⚙️ YAML Page — à pusher depuis local `Dashboard/L4C1_PROXMOX/page_L4C1_proxmox_2026-05-29.yaml`)*
 
 ---
 
-**Navigation GitHub:** Clique sur les liens pour accéder directement aux fichiers. Les chemins relatifs fonctionnent sur GitHub.
+## L4C2 — MINI PC (NUC)
+
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L4C2_MINI_PC/L4C2_VIGNETTE_MINI_PC.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L4C2_11_Mini_PC/vignette_L4C2_mini_pc_2026-05-10.yaml)
+
+### Page
+- [📄 Doc Page Mini PC](Docs/docs_dashboard/docs/L4C2_MINI_PC/PAGE_MINI_PC.md)
+- [📄 Doc Page RPi (transitoire)](Docs/docs_dashboard/docs/L4C2_MINI_PC/PAGE_RASPI.md)
+- [⚙️ YAML Page](Docs/Dashboard/L4C2_11_Mini_PC/page_L4C2_mini_pc_2026-05-14.yaml)
+
+---
+
+## L4C3 — MISES À JOUR HA
+
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L4C3_MAJ_HA/L4C3_VIGNETTE_MAJ.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L4C3_12_MAJ_HA/vignette_L4C3_maj_ha_2026-05-14.yaml)
+
+### Pages (2)
+- [📄 Doc Page](Docs/docs_dashboard/docs/L4C3_MAJ_HA/PAGE_MAJ.md)
+- [⚙️ YAML Page Gauche](Docs/Dashboard/L4C3_12_MAJ_HA/page_L4C3_maj_ha_gauche_2026-05-14.yaml)
+- [⚙️ YAML Page Droite](Docs/Dashboard/L4C3_12_MAJ_HA/page_L4C3_maj_ha_droite_2026-05-14.yaml)
+
+---
+
+## L5C1 — PILES & BATTERIES
+
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L5C1_PILES_BATTERIES/L5C1_VIGNETTE_BATTERIES.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L5C1_13_Batteries_Piles/vignette_L5C1_batteries_piles_2026-05-14.yaml)
+
+### Page
+- [📄 Doc Page](Docs/docs_dashboard/docs/L5C1_PILES_BATTERIES/PAGE_BATTERIES.md)
+- [⚙️ YAML Page](Docs/Dashboard/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-05-14.yaml)
+
+---
+
+## L5C2 — BATTERIES PORTABLES
+
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L5C2_BATTERIES_PORTABLES/L5C2_VIGNETTE_BATTERIES_PORTABLES.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L5C2_14_Batteries_Portables/vignette_L5C2_batteries_portables_2026-05-12.yaml)
+
+### Pages (2)
+- [📄 Doc Page](Docs/docs_dashboard/docs/L5C2_BATTERIES_PORTABLES/PAGE_BATTERIES_PORTABLES.md)
+- [⚙️ YAML Page Gauche](Docs/Dashboard/L5C2_14_Batteries_Portables/page_L5C2_batteries_portables_gauche_2026-05-12.yaml)
+- [⚙️ YAML Page Droite](Docs/Dashboard/L5C2_14_Batteries_Portables/page_L5C2_batteries_portables_droite_2026-05-12.yaml)
+
+---
+
+## L5C3 — MARIADB
+
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L5C3_MARIADB/L5C3_VIGNETTE_MARIADB.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L5C3_15_MariaDB/vignette_L5C3_mariadb_2026-05-10.yaml)
+
+### Page
+- [📄 Doc Page](Docs/docs_dashboard/docs/L5C3_MARIADB/PAGE_SYSTEME.md)
+- [⚙️ YAML Page](Docs/Dashboard/L5C3_15_MariaDB/page_L5C3_mariadb_2026-05-10.yaml)
+
+---
+
+## L6C1 — QUALITÉ AIR (APPART)
+
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L6C1_AIR_QUALITE/L6C1_VIGNETTE_AIR_QUALITE.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L6C1_16_Air_Qualite/vignette_L6C1_air_qualite_2026-05-14.yaml)
+
+### Page
+- [📄 Doc Page](Docs/docs_dashboard/docs/L6C1_AIR_QUALITE/PAGE_AIR_QUALITE.md)
+- [⚙️ YAML Page](Docs/Dashboard/L6C1_16_Air_Qualite/page_L6C1_air_qualite_2026-05-14.yaml)
+
+---
+
+## L6C2 — POLLUTION & POLLEN
+
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L6C2_POLLUTION_POLLEN/L6C2_VIGNETTE_POLLUTION_POLLEN.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L6C2_17_Pollution_Pollen/vignette_L6C2_pollution_pollen_2026-05-14.yaml)
+
+### Page
+- [📄 Doc Page](Docs/docs_dashboard/docs/L6C2_POLLUTION_POLLEN/PAGE_POLLUTION_POLLEN.md)
+- [⚙️ YAML Page](Docs/Dashboard/L6C2_17_Pollution_Pollen/page_L6C2_pollution_pollen_2026-05-14.yaml)
+
+---
+
+## L6C3 — VIGILANCE EAU
+
+### Vignette
+- [📄 Doc Vignette](Docs/docs_dashboard/docs/L6C3_VIGIEAU/L6C3_VIGNETTE_VIGIEAU.md)
+- [⚙️ YAML Vignette](Docs/Dashboard/L6C3_18_VigiEau/vignette_L6C3_vigieau_2026-05-14.yaml)
+
+### Page
+- [📄 Doc Page](Docs/docs_dashboard/docs/L6C3_VIGIEAU/PAGE_VIGIEAU.md)
+- [⚙️ YAML Page](Docs/Dashboard/L6C3_18_VigiEau/page_L6C3_vigieau_2026-05-14.yaml)
+
+---
+
+*Dernière mise à jour : 2026-05-30*
