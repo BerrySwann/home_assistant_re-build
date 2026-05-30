@@ -77,6 +77,9 @@
           {%- set s_fan    = "[OFF]" if not prise_salon   else "[FAN]" %}
           {%- set b_fan    = "[OFF]" if not prise_bureau  else "[FAN]" %}
           {%- set c_fan    = "[OFF]" if not prise_chambre else "[FAN]" %}
+          {%- set s_off    = "[OFF]" if not prise_salon   else "[OFF]" %}
+          {%- set b_off    = "[OFF]" if not prise_bureau  else "[OFF]" %}
+          {%- set c_off    = "[OFF]" if not prise_chambre else "[OFF]" %}
 
           {# --- PARTIE 1 : TENDANCE --- #}
           {%- if tendance == 'increasing' %}
@@ -103,6 +106,8 @@
                 {%- set message_mode = "[COOL]\nSalon " ~ s_cible ~ "\nBureau " ~ b_cible ~ "\nChambre " ~ c_cible %}
               {%- elif mode == 'fan_only' %}
                 {%- set message_mode = "[FAN ONLY]\nSalon " ~ s_fan ~ "\nBureau " ~ b_fan ~ "\nChambre " ~ c_fan %}
+              {%- elif mode == 'off' %}
+                {%- set message_mode = "[OFF]\nSalon " ~ s_off ~ "\nBureau " ~ b_off ~ "\nChambre " ~ c_off %}
               {%- else %}
                 {%- set message_mode = "Mode clim inconnu" %}
               {%- endif %}
@@ -115,6 +120,8 @@
                 {%- set message_mode = "[COOL]\nSalon " ~ s_nuit ~ "\nBureau " ~ b_nuit ~ "\nChambre " ~ c_nuit %}
               {%- elif mode == 'fan_only' %}
                 {%- set message_mode = "[FAN ONLY]\nSalon " ~ s_fan ~ "\nBureau " ~ b_fan ~ "\nChambre " ~ c_fan %}
+              {%- elif mode == 'off' %}
+                {%- set message_mode = "[OFF]\nSalon " ~ s_off ~ "\nBureau " ~ b_off ~ "\nChambre " ~ c_off %}
               {%- else %}
                 {%- set message_mode = "Mode clim inconnu" %}
               {%- endif %}
