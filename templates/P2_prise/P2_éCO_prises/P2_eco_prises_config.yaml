@@ -42,7 +42,7 @@
         # AJOUTER UNE PRISE : copier une ligne {'entity':..., 'groupes':[...]} dans la liste.
         prises: >-
           {{ [
-            {'entity': 'switch.prise_tv_salon_ikea',       'groupes': []},
+            {'entity': 'light.hue_smart_eco_tv_salon',     'groupes': []},
             {'entity': 'light.hue_smart_eco_salon',        'groupes': ['groupe_2', 'groupe_4']},
             {'entity': 'switch.prise_horloge_ikea',        'groupes': ['groupe_2', 'groupe_4']},
             {'entity': 'switch.ecran_p_c_3_play_hue',      'groupes': ['groupe_2', 'groupe_3', 'groupe_4']},
