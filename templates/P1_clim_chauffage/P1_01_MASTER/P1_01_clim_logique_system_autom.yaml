@@ -11,7 +11,7 @@
 # ## 🧮 CALCUL & SOURCES :
 # - sensor.th_balcon_nord_temperature : T° extérieure (sonde SONOFF balcon)
 # - sensor.seuil_non_chauffage : 18°C — seuil bascule heat/fan_only
-# - sensor.seuil_non_clim    : 28°C — seuil bascule fan_only/cool
+# - sensor.seuil_non_clim    : 27°C — seuil bascule off/cool
 # - sensor.consigne_de_base : lit seuil_non_chauffage (18°C) ou seuil_non_clim (28°C)
 # - sensor.temperature_differentielle : consigne_de_base ± delta_1 (19°C hiver / 27°C été)
 # - Deltas fixes : delta_1=1, delta_2=2, delta_3=3, delta_5=5, delta_7=7 (°C)
@@ -61,7 +61,7 @@
     - name: "Seuil non clim"
       unique_id: seuil_non_clim
       unit_of_measurement: "°C"
-      state: "28"
+      state: "27"
 
 # --- delta_1 ---
     - name: "Delta_1"
@@ -109,7 +109,7 @@
         {% elif temp_ext < temp_no_chauf %}
           heat
         {% elif temp_ext < temp_no_clim %}
-          fan_only
+          off
         {% else %}
           cool
         {% endif %}
@@ -139,19 +139,19 @@
         {% endif %}
 
 # ┌───────────────────────────────────────────────────────────────────┐
-# │ CORRECTIONS SPÉCIFIQUES (HIVERNALES)                              │
+# │ CORRECTIONS SPÉCIFIQUES                                           │
 # └───────────────────────────────────────────────────────────────────┘
 
 # ┌───────────────────────────────────┐
 # │ 04. SALON                         │
 # └───────────────────────────────────┘
 # --- temperature_corrige_mamour_hivers ---
-    - name: "Temperature Corrigé Mamour Hivers"
-      unique_id: temperature_corrige_mamour_hivers
+    - name: "Temperature Corrigé Mamour"
+      unique_id: temperature_corrige_mamour
       unit_of_measurement: "°C"
       device_class: temperature
       state: >
-        {% set temp_conf_m = states('sensor.temperature_confort_jour') | float(20) %}
+        {% set temp_conf_m = states('sensor.temperature_confort_jour') | float(0) %}
         {% set delta_1 = states('sensor.delta_1') | float(1) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {{ temp_conf_m }}
@@ -163,12 +163,12 @@
 # │ 07. BUREAU                        │
 # └───────────────────────────────────┘
 # --- temperature_corrige_eric_hivers ---
-    - name: "Temperature Corrigé Eric Hivers"
-      unique_id: temperature_corrige_eric_hivers
+    - name: "Temperature Corrigé Eric"
+      unique_id: temperature_corrige_eric
       unit_of_measurement: "°C"
       device_class: temperature
       state: >
-        {% set temp_conf_e = states('sensor.temperature_confort_jour') | float(18) %}
+        {% set temp_conf_e = states('sensor.temperature_confort_jour') | float(0) %}
         {% set delta_2 = states('sensor.delta_2') | float(2) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {{ temp_conf_e }}
@@ -180,8 +180,8 @@
 # │ 09. CHAMBRE                       │
 # └───────────────────────────────────┘
 # --- temperature_corrige_chambre_hivers ---
-    - name: "Temperature Corrigé Chambre Hivers"
-      unique_id: temperature_corrige_chambre_hivers
+    - name: "Temperature Corrigé Chambre"
+      unique_id: temperature_corrige_chambre
       unit_of_measurement: "°C"
       device_class: temperature
       state: >
@@ -216,7 +216,7 @@
       unique_id: temperature_confort_jour
       unit_of_measurement: "°C"
       state: >
-        {% set diff = states('sensor.temperature_differentielle') | float(19) %}
+        {% set diff = states('sensor.temperature_differentielle') | float(0) %}
         {% set base = states('sensor.consigne_de_base') | float(18) %}
         {% set cible = states('sensor.temperature_cible') | float(18) %}
         {{ (diff + (cible - base)) | round(1) }}
