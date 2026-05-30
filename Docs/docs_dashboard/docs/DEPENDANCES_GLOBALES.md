@@ -1,5 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES — TABLEAU DE BORD HA
-*Dernière mise à jour : 2026-05-17 (L4C1 → Proxmox PVE — remplacement vignette Empty)*
+*Dernière mise à jour : 2026-05-29 (L4C1 → Proxmox PVE — snapshots supprimés, entités corrigées)*
 
 ---
 
@@ -30,7 +30,7 @@
 | **L3C1** | **Commandes Éclairage** | ✅ |
 | **L3C2** | **Commandes Éco/Prises** | ✅ |
 | **L3C3** | **Stores / Fenêtres** | ✅ |
-| L4C1 | Proxmox PVE (CPU T°, CPU %, RAM %, Storage %, Status) | 🔲 |
+| **L4C1** | **Proxmox PVE** | ✅ |
 | **L4C2** | **Mini-PC** | ✅ |
 | **L4C3** | **Mises à jour HA** | ✅ |
 | **L5C1** | **Batteries / Piles** | ✅ |
@@ -702,37 +702,107 @@ MATÉRIEL / INTÉGRATION
 
 ---
 
-## 🔲 L4C1 — PROXMOX PVE (VIGNETTE)
-*Créée le 2026-05-17 — page à définir*
+## ✅ L4C1 — PROXMOX PVE (VIGNETTE + PAGE)
+*Validée le 2026-05-29*
 
-> Vignette `button-card` affichant l'état du serveur Proxmox (PVE).
-> Icône colorée selon T° CPU. 5 métriques inline : CPU T°, CPU %, Status, RAM %, Storage %.
-> Tap → `/dashboard-tablette/systeme-proxmox` (page à créer).
+> Page complète supervision infrastructure Proxmox VE.
+> Vignette : température CPU, CPU %, RAM %, Storage %, PVE Status.
+> Page : 4 sections (PVE, HA, Z2M, MariaDB) × métriques détaillées + contrôles.
+> Path → `/dashboard-tablette/systeme-proxmox`.
 
-### Vignette — Chaîne de dépendances
+### Vignette — Entités consommées
 
-| Matériel / Intégration | Capteur brut | Rôle dans la vignette |
-|:-----------------------|:-------------|:----------------------|
-| Intel NUC → MQTT (MP_01) | `sensor.temperature_cpu_package` | Entité principale — couleur icône + champ temp |
-| Proxmox integration HA | `sensor.pve_utilisation_du_processeur` | Ligne CPU % |
-| Proxmox integration HA | `sensor.pve_memory_usage_percentage` | Ligne RAM % |
-| Proxmox integration HA | `sensor.storage_local_storage_usage_percentage` | Ligne Storage % |
-| Proxmox integration HA | `binary_sensor.pve_status` | Ligne ONLINE/OFFLINE |
+| Entité | Type | Source |
+|:-------|:----:|:-------|
+| `sensor.temperature_cpu_package` | NAT | MQTT (Mini-PC) |
+| `sensor.pve_utilisation_du_processeur` | NAT | Proxmox VE |
+| `sensor.pve_memory_usage_percentage` | NAT | Proxmox VE |
+| `sensor.storage_local_storage_usage_percentage` | NAT | Proxmox VE |
+| `binary_sensor.pve_status` | NAT | Proxmox VE |
+
+### Page — Entités consommées (complet)
+
+**PROXMOX VE**
+| Entité | Métrique |
+|:-------|:---------|
+| `sensor.pve_statut` | Status |
+| `sensor.pve_utilisation_du_processeur` | CPU % |
+| `sensor.pve_memory_usage_percentage` | RAM % |
+| `sensor.pve_utilisation_du_disque` | Disk GiB |
+| `sensor.pve_uptime` | Uptime |
+| `binary_sensor.pve_backup_status` | Backup |
+| `sensor.pve_max_cpu` | vCPU |
+| `button.pve_tout_demarrer` | Start All |
+| `button.pve_tout_stopper` | Stop All |
+| `button.pve_redemarrer` | Reboot |
+| `button.pve_shut_down` | Shutdown |
+
+**HOME ASSISTANT**
+| Entité | Métrique |
+|:-------|:---------|
+| `sensor.homeassistant_statut` | Status |
+| `sensor.homeassistant_utilisation_du_processeur` | CPU % |
+| `sensor.homeassistant_memory_usage_percentage` | RAM % |
+| `sensor.homeassistant_utilisation_du_disque` | Disk GiB |
+| `sensor.homeassistant_uptime` | Uptime |
+| `sensor.homeassistant_max_cpu` | vCPU |
+| `button.homeassistant_demarrer` | Start |
+| `button.homeassistant_stopper` | Stop |
+| `button.homeassistant_redemarrer` | Restart LXC |
+| `button.homeassistant_restart` | Restart HA |
+| `button.homeassistant_reload` | Reload |
+
+**ZIGBEE2MQTT**
+| Entité | Métrique |
+|:-------|:---------|
+| `sensor.z2m_statut` | Status |
+| `sensor.z2m_utilisation_du_processeur` | CPU % |
+| `sensor.z2m_memory_usage_percentage` | RAM % |
+| `sensor.z2m_utilisation_du_disque` | Disk GiB |
+| `sensor.z2m_uptime` | Uptime |
+| `sensor.z2m_max_cpu` | vCPU |
+| `button.z2m_demarrer` | Start |
+| `button.z2m_stopper` | Stop |
+| `button.z2m_redemarrer` | Restart |
+
+**MARIADB**
+| Entité | Métrique |
+|:-------|:---------|
+| `sensor.mariadb_statut` | Status |
+| `sensor.mariadb_utilisation_du_processeur` | CPU % |
+| `sensor.mariadb_memory_usage_percentage` | RAM % |
+| `sensor.mariadb_utilisation_du_disque` | Disk GiB |
+| `sensor.mariadb_uptime` | Uptime |
+| `sensor.mariadb_max_cpu` | vCPU |
+| `button.mariadb_demarrer` | Start |
+| `button.mariadb_stopper` | Stop |
+| `button.mariadb_redemarrer` | Restart |
 
 ### Seuils de couleur
 
-| Métrique | Vert | Orange | Rouge |
-|:---------|:-----|:-------|:------|
-| T° CPU | < 65°C | 65–75°C | ≥ 75°C |
-| CPU % / RAM % / Storage % | < 75% | 75–90% | ≥ 90% |
-| Status | `on` = ONLINE | — | `off` = OFFLINE |
+| Section | Métrique | Vert | Orange | Rouge |
+|:--------|:---------|:-----|:--------|:------|
+| **PVE** | CPU % | ≤75% | 75–90% | >90% |
+| **PVE** | RAM % | ≤75% | 75–90% | >90% |
+| **PVE** | Storage % | ≤60% | 60–80% | >80% |
+| **HA** | CPU % | ≤75% | 75–90% | >90% |
+| **HA** | RAM % | ≤75% | 75–90% | >90% |
+| **HA** | Disk GiB | ≤20 | 20–28 | >28 |
+| **Z2M** | CPU % | ≤40% | 40–60% | >60% |
+| **Z2M** | RAM % | ≤50% | 50–70% | >70% |
+| **Z2M** | Disk GiB | ≤2.5 | 2.5–3.4 | >3.4 |
+| **MDB** | CPU % | ≤50% | 50–75% | >75% |
+| **MDB** | RAM % | ≤60% | 60–80% | >80% |
+| **MDB** | Disk GiB | ≤5 | 5–7 | >7 |
 
 ### Fichiers YAML Dashboard
 
 | Fichier | Statut |
 |:--------|:------:|
-| `Dashboard/L4C1_10_Proxmox/vignette_L4C1_proxmox_2026-05-17.yaml` | 🔲 (à déployer) |
-| Page `/systeme-proxmox` | 🔲 (à créer) |
+| `docs_dashboard/docs/L4C1_PROXMOX/L4C1_VIGNETTE_PROXMOX.md` | ✅ |
+| `Dashboard/L4C1_PROXMOX/vignette_L4C1_proxmox_2026-05-29.yaml` | ✅ |
+| `docs_dashboard/docs/L4C1_PROXMOX/PAGE_PROXMOX.md` | ✅ |
+| `Dashboard/L4C1_PROXMOX/page_L4C1_proxmox_2026-05-29.yaml` | ✅ |
 
 ---
 
@@ -1046,12 +1116,55 @@ MariaDB
 | `shell_command.git_backup_push_weekly` | NAT | `shell_command.yaml` |
 | `shell_command.git_backup_push_manual` | NAT | `shell_command.yaml` |
 
+### Page — Chaîne de dépendances (NOUVEAU 2026-05-18)
+
+```
+Proxmox VE (intégration superviseur)
+  ├─→ Home Assistant Container (Proxmox)
+  │     ├─→ sensor.homeassistant_utilisation_du_processeur  (NAT)
+  │     ├─→ sensor.homeassistant_uptime  (NAT)
+  │     ├─→ sensor.homeassistant_memory_usage_percentage  (NAT)
+  │     └─→ sensor.homeassistant_utilisation_de_la_memoire  (NAT)
+  │           └─→ PAGE RÉSERVE SYSTÈME (page_L5C3_systeme_reserve)
+  ├─→ Z2M (Zigbee2MQTT) Container (Proxmox)
+  │     ├─→ sensor.z2m_utilisation_du_processeur  (NAT)
+  │     ├─→ sensor.z2m_uptime  (NAT)
+  │     ├─→ sensor.z2m_memory_usage_percentage  (NAT)
+  │     └─→ sensor.z2m_utilisation_de_la_memoire  (NAT)
+  └─→ MariaDB Container (Proxmox)
+        ├─→ sensor.mariadb_utilisation_du_processeur  (NAT)
+        ├─→ sensor.mariadb_uptime  (NAT)
+        ├─→ sensor.mariadb_memory_usage_percentage  (NAT)
+        ├─→ sensor.mariadb_utilisation_de_la_memoire  (NAT)
+        └─→ sensor.taille_db_home_assistant  (NAT — SQL)
+```
+
+### Entités consommées par la page RÉSERVE SYSTÈME
+
+| Entité | Type | Fichier source |
+|:-------|:----:|:--------------|
+| `sensor.homeassistant_utilisation_du_processeur` | NAT | `proxmox_ve` (intégration) |
+| `sensor.homeassistant_uptime` | NAT | `proxmox_ve` (intégration) |
+| `sensor.homeassistant_memory_usage_percentage` | NAT | `proxmox_ve` (intégration) |
+| `sensor.homeassistant_utilisation_de_la_memoire` | NAT | `proxmox_ve` (intégration) |
+| `sensor.z2m_utilisation_du_processeur` | NAT | `proxmox_ve` (intégration) |
+| `sensor.z2m_uptime` | NAT | `proxmox_ve` (intégration) |
+| `sensor.z2m_memory_usage_percentage` | NAT | `proxmox_ve` (intégration) |
+| `sensor.z2m_utilisation_de_la_memoire` | NAT | `proxmox_ve` (intégration) |
+| `sensor.mariadb_utilisation_du_processeur` | NAT | `proxmox_ve` (intégration) |
+| `sensor.mariadb_uptime` | NAT | `proxmox_ve` (intégration) |
+| `sensor.mariadb_memory_usage_percentage` | NAT | `proxmox_ve` (intégration) |
+| `sensor.mariadb_utilisation_de_la_memoire` | NAT | `proxmox_ve` (intégration) |
+| `sensor.taille_db_home_assistant` | NAT | `sql.yaml` (requête MariaDB) |
+
 ### Fichiers YAML Dashboard
 
 | Fichier | Statut |
 |:--------|:------:|
 | `Dashboard/L5C3_15_MariaDB/vignette_L5C3_mariadb_2026-05-10.yaml` | ✅ |
-| `Dashboard/L5C3_15_MariaDB/page_L5C3_mariadb_2026-05-10.yaml` | ✅ |
+| `Dashboard/L5C3_15_MariaDB/page_L5C3_mariadb_2026-05-10.yaml` (GitHub + MariaDB) | ✅ |
+| `Dashboard/L5C3_15_MariaDB/card_mariadb_2026-05-18.yaml` | ✅ |
+| `Dashboard/L5C3_15_MariaDB/page_L5C3_systeme_reserve_2026-05-18.yaml` (HA + Z2M + MariaDB) | ✅ |
 
 ---
 
@@ -1287,3 +1400,4 @@ VigiEau (intégration HACS) — Section SÉCHERESSE
 |:--------|:------:|
 | `Dashboard/L6C3_18_VigiEau/vignette_L6C3_vigieau_2026-05-14.yaml` | ✅ |
 | `Dashboard/L6C3_18_VigiEau/page_L6C3_vigieau_2026-05-14.yaml` | ✅ |
+

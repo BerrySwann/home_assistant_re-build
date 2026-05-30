@@ -1,7 +1,7 @@
-> **REGLE ABSOLUE :** Ne pas caresser dans le sens du poil. Etre honnete. Ne pas mentir. Ne pas tricher.
+> **REGLE ABSOLUE :** J'aimerais que dorénavant tu sois 100% objectif et que tu aies l'interdiction de me flater pour me flater. Et qui si une de mas répose, une de mes solution ou une idées de "codage" (yaml) que je pourrais avoir ne te semble pas bonne, que tu me le fasse s'avoir sans aller systématiquement dans mon sens. Etre honnete. Ne pas mentir. Ne pas tricher.
 
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
-*Dernière mise à jour : 2026-04-26*
+*Dernière mise à jour : 2026-05-23*
 
 ---
 
@@ -36,23 +36,27 @@
 
 ---
 
-## ⚠️ CONTEXTE DU PROJET : NETTOYAGE ET RE-BUILD DE HA
+## ⚠️ CONTEXTE DU PROJET : HA RE-BUILD DEVENU LA PROD
 
-> **Ce dossier ReBuild est le dépôt CIBLE — pas la production.**
+> **Ce dossier ReBuild est le dépôt CIBLE ET la production.**
 > Toute modification, correction ou création de fichier doit cibler **TREE_CORRIGE** en priorité.
 > Ne jamais aligner TREE_CORRIGE sur la prod — c'est TREE_CORRIGE qui fait référence.
 
 | | Dépôt GitHub | Rôle |
 |:---|:---|:---|
-| **HA PROD** | https://github.com/BerrySwann/home-assistant-config | Config actuelle en production — état brut, non nettoyé |
-| **HA RE-BUILD** | https://github.com/BerrySwann/home_assistant_re-build | Config cible refactorisée — **source de vérité absolu** |
+| **HA PROD (ancienne)** | ~~https://github.com/BerrySwann/home-assistant-config~~ | **SUPPRIMÉ** — repo effacé (2026-04-27). N'existe plus. |
+| **HA RE-BUILD = PROD** | https://github.com/BerrySwann/home_assistant_re-build | **SOURCE DE VÉRITÉ UNIQUE** — config refactorisée déployée en prod. Garde le nom "re-build" provisoirement. |
+
+> **⚠️ IMPORTANT :** L'ancien repo `home-assistant-config` (HA PROD brut) a été **supprimé définitivement**.
+> Le repo `home_assistant_re-build` est désormais la configuration de production active.
+> Il n'existe plus de "prod séparée" — TREE_CORRIGE → GitHub re-build = prod.
 
 ### Règle fondamentale
 - `le repertoire devra commencer par P*_ selon les types d'équipements (Pôles) voir plus bas pour les pôles`
 - `TREE_CORRIGE/` = état cible déployable — **c'est lui qui a raison** (doit etre audité une foi par semaine)
 - `TREE_ORIGINE/` = snapshot GitHub re-build avant corrections (référence historique)
 - Les fichiers **absents de TREE_CORRIGE** mais présents sur GitHub = **anciens fichiers à supprimer de la prod**
-- On ne copie **jamais** un fichier de la prod vers TREE_CORRIGE sans le valider et le corriger d'abord
+- On ne copie **jamais** un fichier sans le valider et le corriger d'abord dans TREE_CORRIGE
 
 > **Même logique pour les automations :**
 > - `automations_corrige/` = état cible déployable — **c'est lui qui a raison**
@@ -193,7 +197,7 @@ Pour tous les éléments qui ne sont pas rattachés à une pièce physique spéc
 
 - **MODIFICATIONS** : 
   - Annoter chaque ligne modifiée : `# "[L...] modif"`.
-  - Bloc final obligatoire à la fin de la réponse : `# annotations_log:`.
+  - Bloc final obligatoire à la fin de la response : `# annotations_log:`.
 
 ---
 
@@ -227,6 +231,41 @@ Pour tous les éléments qui ne sont pas rattachés à une pièce physique spéc
 
 ---
 
+## ⚙️ Système & Matériel (PROXMOX)
+
+| Composant | Détail |
+|-----------|--------|
+| **OS** | Home Assistant OS (HAOS) — VM Proxmox |
+| **Matériel** | Mini-PC Intel NUC — SSD SATA 512 Go / RAM 16 Go |
+| **Hyperviseur** | Proxmox VE 7.0.0-3 |
+| Zigbee | Sonoff EFR32MG21 — Clé V2 (Reçue 22/05/2026) |
+| Services LXC | LXC 200 : Zigbee2MQTT + Mosquitto (Host: Mini-PC Intel NUC) |
+| Note Matériel | Ancienne clé Sonoff (2024) archivée. |
+
+### 📦 Add-ons principaux & Services
+
+| Type | Nom | Localisation |
+|:-----|:----|:-------------|
+| **LXC 200** | Zigbee2MQTT | Proxmox (10.32.154.244:8099) |
+| **LXC 200** | Mosquitto | Proxmox (10.32.154.244:1883) |
+| **LXC 201** | MariaDB | Proxmox (10.32.154.201) |
+| **Add-on** | Cloudflared | HA Supervisor |
+| **Add-on** | Tailscale | HA Supervisor |
+| **Add-on** | Studio Code Server | HA Supervisor |
+
+---
+
+## 🧩 Intégrations
+
+| Catégorie | Intégrations |
+|-----------|-------------|
+| **Énergie** | `MyElectricalData` (Linky HP/HC) · `Ecojoko` (conso réseau temps réel) |
+| **Météo & Env.** | `Météo France` · `Blitzortung` (foudre) · `AtmoFrance` (pollution/pollen) · `Vigieau` (restrictions eau) |
+| **Hardware** | `Meross LAN` · `Philips HUE` · `Zigbee2MQTT` (SONOFF, IKEA, NOUS) |
+| **UI & Logique** | `Browser Mod` (pop-ups) · `Streamline Card` · `HACS` |
+
+---
+
 ## 🔌 DÉTAILS DES ÉQUIPEMENTS PAR PÔLE
 
 ### 0. Pôle Énergie Globale (Pôle 0)
@@ -248,6 +287,53 @@ Pour tous les éléments qui ne sont pas rattachés à une pièce physique spéc
 - **9. CHAMBRE** : tete_de_lit_chambre, tv_chambre.
 
 ### 3. Pôle Éclairage (Pôle 3)
+
+#### 🔴 SLUGS CANONIQUES P3 — SOURCE DE VÉRITÉ (P3_UM_AMHQ_1_UNITE)
+> Utiliser UNIQUEMENT ces slugs dans tous les fichiers P3 (TPL, AVG, ZONE, TOTAL).
+> Ne jamais inventer de variantes (_salon, _hue_, eclairage_, lampe_bureau_X_hue, etc.).
+
+| # | Pièce | Slug base (sans suffixe _cycle_um) |
+|:--|:------|:-----------------------------------|
+| 1 | ENTRÉE | `hue_white_lamp_entree` |
+| 2 | SALON | `hue_white_lamp_table` |
+| 3 | SALON | `hue_ambiance_lamp_salon_1` |
+| 4 | SALON | `hue_ambiance_lamp_salon_2` |
+| 5 | SALON | `hue_ambiance_lamp_salon_3` |
+| 6 | SALON | `hue_color_candle_salon_1` |
+| 7 | CUISINE | `hue_white_lamp_cuisine` |
+| 8 | COULOIR | `hue_white_lamp_couloir` |
+| 9 | BUREAU | `hue_play_1_pc_bureau` |
+| 10 | BUREAU | `hue_play_2_pc_bureau` |
+| 11 | BUREAU | `hue_play_3_pc_bureau` |
+| 12 | BUREAU | `hue_white_lamp_bureau_1` |
+| 13 | BUREAU | `hue_white_lamp_bureau_2` |
+| 14 | SDB | `relais_lumiere_sdb_sonoff` |
+| 15 | SDB | `lampe_salle_de_bain_hue` |
+| 16 | CHAMBRE | `hue_white_lamp_chambre_1` |
+| 17 | CHAMBRE | `hue_white_lamp_chambre_2` |
+| 18 | CHAMBRE | `hue_color_candle_chambre_gege` |
+| 19 | CHAMBRE | `hue_color_candle_chambre_eric` |
+
+> **Règle de construction UM** : `sensor.{slug}_{cycle}_um` (ex: `sensor.hue_white_lamp_table_quotidien_um`)
+> **Cycles** : `quotidien` | `hebdomadaire` | `mensuel` | `annuel`
+> **Erreurs connues à bannir** : `hue_white_lamp_table_salon_*` ❌ / `lampe_bureau_1_hue_*` ❌ / `eclairage_hue_*` ❌
+
+#### 🔗 CONVENTION DE NOMMAGE TPL — CHAÎNE COMPLÈTE
+
+La chaîne se lit dans l'ID de bout en bout :
+
+```
+[matériel] → _energy → _um → _um_kwh_tpl  (relais kWh)
+                            → _um_avg_tpl  (moyenne W)
+```
+
+| Étape | Pattern unique_id | Fichier | Exemple |
+|:------|:------------------|:--------|:--------|
+| Firmware Hue | `{slug}_energy` | (natif HA) | `hue_white_lamp_table_energy` |
+| Utility Meter | `{slug}_{cycle}_um` | `P3_UM_AMHQ_1_UNITE` | `hue_white_lamp_table_quotidien_um` |
+| Relais kWh | `{slug}_{cycle}_um_kwh_tpl` | `P3_ENERGIE_TLP` | `hue_white_lamp_table_quotidien_um_kwh_tpl` |
+| Moyenne W | `{zone}_{cycle}_um_avg_tpl` | `P3_AVG` | `eclairage_salon_5_quotidien_um_avg_tpl` |
+
 *Logique Physique (Ampoules) :*
 - **1. ENTRÉE** : Hue White.
 - **4. SALON** : Table: Hue White, Hue Ambiance 1, 2, 3, Hue Color 1.
@@ -292,7 +378,7 @@ Format : Ligne (L) / Colonne (C).
 - **L3C3** : État des fenêtres + Commandes 2 stores
 
 **LIGNE 4 : RÉSEAU & SYSTÈME**
-- **L4C1** : *(supprimée — Freebox retirée du setup)*
+- **L4C1** : Proxmox (PVE) — CPU T°, CPU %, RAM %, Storage %, Status ONLINE/OFFLINE
 - **L4C2** : Mini PC
 - **L4C3** : Mises à jour HA
 
@@ -333,9 +419,9 @@ Cette liste sert de référence pour la création de nouveaux Dashboards afin de
 | :----------------| :------------------------------------------------| :------------------------------------------------------ |
 | **Graph/Data**   | `apexcharts-card`                                | Graphiques énergie, moyennes glissantes, seuils couleur |
 |                  | `mini-graph-card`                                | Tendances rapides (températures, humidité)              |
-|                  | `plotly-graph`                                   | Analyse de données complexe                             |
 |                  | `bar-card`                                       | Jauges de consommation et niveaux de batteries          |
-|                  | `history-explorer-card`                          | Exploration interactive de l'historique                 |
+|                  | `energy-overview-card`                           | Vue d'ensemble consommation énergétique                 |
+|                  | `flex-table-card`                                | Tableaux flexibles multi-entités                        |
 | **UI/Design**    | `bubble-card`                                    | Navigation, Pop-ups par pièce, boutons tactiles         |
 |                  | `mushroom-card`                                  | Éclairage (Mushroom Light), Titres, Chips d'état        |
 |                  | `mod-card` (card-mod)                            | Personnalisation CSS avancée des cartes                 |
@@ -343,15 +429,31 @@ Cette liste sert de référence pour la création de nouveaux Dashboards afin de
 |                  | `stack-in-card` / `vertical-stack-in-card`       | Groupement de cartes sans bordures                      |
 |                  | `swipe-card`                                     | Carrousels (Météo, Caméras)                             |
 |                  | `auto-entities`                                  | Listes dynamiques (Fenêtres ouvertes, Piles faibles)    |
-| **Spécialisées** | `enhanced-shutter-card`                          | Gestion visuelle des stores (Série 08)                  |
-|                  | `tempometer-gauge-card`                          | Jauges de température et humidité pro                   |
+|                  | `tabbed-card`                                    | Onglets glissants JOUR/MOIS/30J (pages éclairage, énergie) |
+|                  | `button-card`                                    | Boutons programmables avancés (templates, actions)      |
+|                  | `streamline-card`                                | Templates de cartes réutilisables                       |
+| **Spécialisées** | `battery-state-card`                             | Surveillance état batteries/piles par groupe (L5C1)     |
+|                  | `entity-progress-card`                           | Barre de progression avec label dynamique (L6C2)        |
+|                  | `enhanced-shutter-card`                          | Gestion visuelle des stores (L3C3)                      |
 |                  | `ring-tile-card`                                 | Indicateurs circulaires (Statut MariaDB, CPU)           |
+|                  | `flex-horseshoe-card`                            | Jauges en fer à cheval (puissance, CPU…)                |
 |                  | `multiple-entity-row`                            | Multi-affichage sur une seule ligne d'entité            |
 |                  | `text-divider-row`                               | Séparateurs de sections textuels                        |
 |                  | `navbar-card`                                    | Barre de navigation personnalisée                       |
 |                  | `linky-card`                                     | Suivi MyElectricalData (Compteur Linky)                 |
 |                  | `rain-gauge-card`                                | Visualisation de la pluviométrie                        |
-|                  | `uv-index-card`                                  | Affichage de l'indice UV (Série 01)                     |
+|                  | `uv-index-card`                                  | Affichage de l'indice UV (L1C1)                         |
+|                  | `windrose-card`                                  | Rose des vents (L1C1 Météo)                             |
+|                  | `meteoalarm-card`                                | Alertes Météo-Alarm européen (L1C1)                     |
+|                  | `uptime-card`                                    | Disponibilité / uptime services                         |
+|                  | `ha-tbaro-card`                                  | Baromètre (pression atmosphérique)                      |
+|                  | `horizon-card`                                   | Visualisation lever/coucher soleil sur l'horizon        |
+|                  | `temperature-heatmap-card`                       | Heatmap températures                                    |
+|                  | `meteofranceweathercard`                         | Carte dédiée intégration Météo-France (L1C1)            |
+|                  | `linky-content-card`                             | Affichage données Linky (page énergie)                  |
+|                  | `tsmoon-card`                                    | Phase lunaire (HACS : "Simple Moon Card")               |
+| **Icônes**       | `hass-hue-icons`                                 | Pack icônes Hue — prefix `hue:` (ampoules, fixtures)    |
+|                  | `custom-brand-icons`                             | Pack icônes marques — prefix `phu:` (ex: `phu:proxmox`) |
 
 ---
 
@@ -366,27 +468,32 @@ Cette liste sert de référence pour la création de nouveaux Dashboards afin de
 | `browser_mod` | Browser Mod | Contrôle navigateur depuis HA |
 | `smartir` | SmartIR | Télécommandes IR (clim salon, bureau, chambre) |
 | `scheduler` | Scheduler | Planificateur avancé (custom:scheduler-card) |
-| `meross_lan` | Meross LAN | Prises Meross en local sans cloud |
-| `blitzortung` | Blitzortung | Détection foudre temps réel |
-| `meteo_france` | Météo France | Alertes vigilance, prévisions, cameras cartes |
-| `atmo_france` | Atmo France | Qualité air extérieur (IQA) |
-| `vigieau` | VigiEau | Restrictions d'eau en vigueur (L6C3) |
-| `lune` | Lune | Phase lunaire |
-| `saison` | Saison | Détection saison courante (été/hiver) |
-| `soleil` | Soleil (Sun2) | Lever/coucher + azimut/élévation solaire précis |
-| `tarifs_edf` | Tarifs EDF | Index HP/HC, coûts Tempo/Base (P0) |
-| `feedreader` | Feed Reader | Suivi flux RSS (releases GitHub) |
+| `meteo_france` | Météo France | Alertes vigilance, prévisions, cameras cartes (Core HA) |
+| `moon` | Phase lunaire (`lune` = nom FR de l'intégration Core `moon`) |
+| `season` | Détection saison courante (`saison` = nom FR de l'intégration Core `season`) |
+| `feedreader` | Suivi flux RSS (releases GitHub) (Core HA) |
+| `proxmox_ve` | Supervision Proxmox PVE — CPU %, RAM %, Storage %, Status (L4C1) — 6 appareils |
+| `system_monitor` | Supervision système Mini PC — CPU, RAM, disque (L4C2) — inclut "Vitesse CPU" |
+| `mobile_app` | 7 appareils : 2 Poco (accroche WiFi présence P4) + autres (L5C2 batteries portables) |
+| `local_file` | 2 entités météo : `MF_alerte_today` + `MF_alerte_tomorrow` (images vigilance Météo France) |
+| `file` | 2 entités notify : `diag_conso_elec.txt` + `ecart_liky_vs_nodon.txt` (logs /config/notifs/) |
+| `restful` | 1 entité : `sensor.blitzortung_lightning_localisation` |
+| `backup` | Sauvegardes HA (core) |
+| `adresse_ip_locale` | 1 entité IP du Mini PC |
 
-### Officielles HA Core
+### Add-ons Supervisor (Mosquitto, Z2M, etc.)
 
-| Intégration | Rôle |
-|:------------|:-----|
-| `mqtt` | Bus Z2M, Blitzortung, capteurs divers |
-| `philips_hue` | Pont Hue (toutes ampoules P3) |
-| `broadlink` | Émetteur IR (relai SmartIR) |
-| `meross` | Prises Meross (cloud — fallback si LAN KO) |
-| `raspberry_pi` | Supervision RPi4 (transitoire — migration Mini-PC) |
-| `github` | Veille releases + backup config |
+> Ces add-ons sont gérés via **Home Assistant Supervisor** (11 services / 63 entités).
+
+| Add-on | Rôle |
+|:-------|:-----|
+| `mosquitto` | Broker MQTT — bus de communication Z2M + Blitzortung + capteurs MQTT |
+| `zigbee2mqtt` | Passerelle Zigbee → MQTT (thermostats SONOFF, contacts fenêtres, prises NOUS…) |
+| `myelectricaldata` | Données Linky (index HP/HC, historique conso) → P0 Énergie Globale |
+| `studio_code_server` | VSCode intégré HA (édition fichiers YAML en prod) |
+| `samba_share` | Accès réseau aux fichiers /config/ |
+| `tailscale` | VPN accès distant sécurisé à HA |
+| `advanced_ssh` | Terminal SSH + Web Terminal |
 
 ### Règle d'audit — Fichier dashboard fourni
 
@@ -441,29 +548,52 @@ Pour séparer la logique de calcul pur de la logique d'affichage, un sous-dossie
 ```text
 ReBuild/                                         (dossier de travail local — C:\Users\Berry Swann\Documents\HA\ReBuild\)
 ├── CLAUDE.md                                    (instructions IA — contexte projet)
+├── README.md                                    (readme GitHub)
 ├── SYNC_REPORT.md                               (rapport de synchronisation GitHub ↔ local)
 ├── secrets.yaml                                 (identifiants HA — NE JAMAIS synchroniser sur GitHub)
 │
-├── Dashboard/                                   (YAML complets du dashboard + saves)
-│   ├── dashboard_2026-04-15.yaml
-│   └── [sous-dossiers par vignette/page — voir règle ci-dessous]
+├── Analyse énergétique/                         (analyses ad-hoc conso électrique)
+├── HTML/                                        (export dashboard HTML — ha_dashboard_vence_v2.html)
+├── IA/                                          (contexte IA — IA_CONTEXT_BASE.md)
+├── Infra/                                       (infra réseau — Proxmox.crt, import_proxmox_cert.ps1, reseau.md)
+├── Orphelin/                                    (fichiers non rattachés — myelectricaldata/)
+├── historique/                                  (journal de bord sessions — histo_*.txt, AUDIT_REPORT, SESSION_LOG)
+│
+├── Dashboard/                                   (YAML dashboard — vignettes + pages — 18 vignettes + 2 pages orphelines)
+│   ├── Dashboard_COMPLET/                       (dashboards complets — conservation illimitée)
+│   ├── L1C1_01_Meteo/
+│   ├── L1C2_02_Temperatures/
+│   ├── L1C3_03_Commandes_Clim/
+│   ├── L2C1_04_Energie_Generale/
+│   ├── L2C2_05_Energie_Clim/
+│   ├── L2C3_06_Energie_Eclairage/
+│   ├── L3C1_07_Commandes_Eclairage/
+│   ├── L3C2_08_Commandes_Prises/
+│   ├── L3C3_09_Stores_Fenetres/
+│   ├── L4C1_10_Proxmox/
+│   ├── L4C2_11_Mini_PC/
+│   ├── L4C3_12_MAJ_HA/
+│   ├── L5C1_13_Batteries_Piles/
+│   ├── L5C2_14_Batteries_Portables/
+│   ├── L5C3_15_MariaDB/
+│   ├── L6C1_16_Air_Qualite/
+│   ├── L6C2_17_Pollution_Pollen/
+│   ├── L6C3_18_VigiEau/
+│   ├── PAGE_ENERGIE_ECLAIRAGE/                  (page orpheline — non rattachée à une vignette)
+│   └── PAGE_RASPI/                              (page orpheline — RPi4 transitoire)
 │
 ├── docs_dashboard/                              (tout ce qui concerne le dashboard HA config)
 │   ├── TREE_CORRIGE/                            (← image exacte du GitHub re-build — dernière sync: 2026-04-26)
-│   │   ├── sensors/                             (P0 actif, P1_DUT actif — P1_kWh/#, P2_prise/#×3, P3/#×3 désactivés)
-│   │   ├── templates/                           (34 fichiers — calculs, AVG, UI, météo, présence, stores)
-│   │   ├── utility_meter/                       (P0×3, P1×1, P2/#×3 désactivés, P3×3, meteo×1)
+│   │   ├── sensors/                             (P0 actif, P1_DUT actif — P1_kWh/#, P2/#×3, P3/#×3 désactivés)
+│   │   ├── templates/                           (calculs, AVG, UI, météo, présence, stores — voir arbo prod)
+│   │   ├── utility_meter/                       (P0×3, P1×1, P2/#×3 désactivés, P3×1, meteo×1)
 │   │   ├── command_line/                        (3 dossiers — meteo, github_maintenance, sante_systeme_mini_pc)
 │   │   ├── input_booleans/                      (5 fichiers — P1×2, P3×2, P4×1)
 │   │   ├── input_number/                        (1 fichier)
 │   │   ├── groups/                              (GRP_01_batteries_hue.yaml / GRP_02_batteries_ikea.yaml / GRP_03_batteries_sonoff.yaml)
 │   │   └── [root]                               (configuration.yaml, scripts.yaml, shell_command.yaml, sql.yaml, scenes.yaml, input_button.yaml, input_datetime.yaml, input_select.yaml, automations.yaml, Dashboard ×2, #*.yaml ×4)
 │   ├── TREE_ORIGINE/                            (snapshot GitHub de référence — état avant corrections)
-│   │   ├── sensors/
-│   │   ├── templates/
-│   │   ├── utility_meter/
-│   │   └── ...
-│   └── docs/                                    (documentation vignettes + dépendances)
+│   └── docs/                                    (documentation vignettes + dépendances — voir bloc ci-dessous)
 │
 ├── docs_automations/                            (tout ce qui concerne les automations)
 │   ├── TREE_CORRIGE/                            (← SOURCE DE VÉRITÉ — coller dans HA UI un par un)
@@ -472,6 +602,7 @@ ReBuild/                                         (dossier de travail local — C
 │   │   ├── P1_sdb/                              (1 fichier — minuterie sèche-serv)
 │   │   ├── P2_prises/                           (6 fichiers — PC, TV, prises éco, rodret)
 │   │   ├── P3_eclairage/                        (1 fichier — lumière entrée)
+│   │   ├── raspi/                               (automations RPi4 — conservées pendant migration)
 │   │   ├── P2_bouton_rodret_soufflant_sdb.yaml  (root — bouton BP virtuel SDB)
 │   │   ├── P3_salon_bouton_inter_ikea_4.yaml    (root — bouton inter IKEA salon)
 │   │   ├── P3_salon_bouton_inter_somrig.yaml    (root — bouton inter SOMRIG salon)
@@ -484,15 +615,15 @@ ReBuild/                                         (dossier de travail local — C
 │   └── docs/                                    (INDEX_AUTOMATIONS, TRIAGE, PROD_vs_REBUILD_DIFF, IDs REF...)
 │
 └── docs_scripts/                                (tout ce qui concerne les scripts HA)
-    ├── TREE_CORRIGE/                            (scripts YAML corrigés)
-    ├── TREE_ORIGINE/                            (scripts YAML originaux)
+    ├── TREE_CORRIGE/                            (A_rpi_fan_pwm_6_states.yaml — script ventilateur RPi)
+    ├── TREE_ORIGINE/                            (scripts originaux)
     └── docs/                                    (INDEX_SCRIPTS.md, SCRIPTS_CLIM_ON_OFF.md, SCRIPT_J2_0_SECU_ARRET_CLIM.md)
 ```
 
 > **Note :** La documentation vignettes (18 vignettes) est dans `docs_dashboard/docs/`
 
 ```text
-docs_dashboard/docs/                             (documentation — vignettes, pages, guides — 17 vignettes actives)
+docs_dashboard/docs/                             (documentation — vignettes, pages, guides — 18 vignettes actives)
     ├── IA/
     │   ├── IA_CONTEXT_BASE.md
     │   └── analyse_energetique_appart.md
@@ -532,9 +663,8 @@ docs_dashboard/docs/                             (documentation — vignettes, p
     ├── L3C3_STORES/
     │   ├── L3C3_VIGNETTE_STORES.md
     │   └── PAGE_STORES.md
-    ├── L4C1_FREEBOX/                                ⚠️ Obsolète — Freebox supprimée du setup
-    │   ├── L4C1_VIGNETTE_empty.md
-    │   └── PAGE_empty.md
+    ├── L4C1_PROXMOX/                                (vignette Proxmox PVE — 2026-05-17)
+    │   └── L4C1_VIGNETTE_PROXMOX.md               (à créer)
     ├── L4C2_MINI_PC/
     │   ├── L4C2_VIGNETTE_MINI_PC.md
     │   ├── PAGE_RASPI.md                        (page transitoire RPi4 — conservée jusqu'à migration)
@@ -565,8 +695,7 @@ docs_dashboard/docs/                             (documentation — vignettes, p
     │   └── VIGNETTE_WIFI_PRESENCE.md
     ├── DEPENDANCES_GLOBALES.md                  (chaîne complète de dépendances — toutes vignettes)
     ├── WORKFLOW_REBUILD.md                      (workflow création/modification doc vignette)
-    ├── _TEMPLATE_DOC.md
-    └── PROD_LISTING_2026-04-05.md
+    └── _TEMPLATE_DOC.md
 ```
 
 ---
@@ -650,9 +779,7 @@ Dashboard/
 │   ├── P2_UM_AMHQ_veilles.yaml
 │   └── P2_UM_AMHQ_mini_pc.yaml
 ├── P3_eclairage
-│   ├── P3_UM_AMHQ_1_UNITE.yaml
-│   ├── P3_UM_AMHQ_2_ZONE.yaml
-│   └── P3_UM_AMHQ_3_TOTAL.yaml
+│   └── P3_UM_AMHQ_1_UNITE.yaml          (zones + total → calculés en TPL layer)
 └── meteo
     └── M_03_meteo_UM_blitzortung.yaml
 /config/templates
@@ -693,10 +820,10 @@ Dashboard/
 │   └── P2_ui_dashboard
 │       └── P2_ui_dashboard.yaml                 (lave_linge_en_cours / lave_vaisselle_en_cours — seuils 5W/50W)
 ├── P3_eclairage
-│   ├── P3_ENERGIE                               (remplace P3_POWER — puissance temps réel → énergie kWh)
-│   │   ├── P3_ENERGIE_1_TOTAL_UNITE.yaml
-│   │   ├── P3_ENERGIE_2_ZONE.yaml
-│   │   └── P3_ENERGIE_3_TOTAL_ZONE.yaml
+│   ├── P3_ENERGIE_TLP                           (relais _um → _um_kwh_tpl + zones + total)
+│   │   ├── P3_TPL_AMHQ_1_UNITE.yaml             (76 sensors — 19 ampoules × 4 cycles)
+│   │   ├── P3_TPL_AMHQ_2_ZONE.yaml              (40 sensors — 10 zones × 4 cycles)
+│   │   └── P3_TPL_AMHQ_3_TOTAL.yaml             (4 sensors — total appart × 4 cycles)
 │   ├── P3_AVG
 │   │   ├── P3_AVG_AMHQ_1_UNITE.yaml
 │   │   ├── P3_AVG_AMHQ_2_ZONE.yaml
@@ -775,8 +902,6 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 
 **Pôle 3 - Éclairage**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/P3_eclairage/P3_UM_AMHQ_2_ZONE.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/P3_eclairage/P3_UM_AMHQ_3_TOTAL.yaml
 
 **Météo**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml
@@ -811,9 +936,9 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P2_prise/P2_ui_dashboard/P2_ui_dashboard.yaml
 
 **Pôle 3 - Éclairage & UI**
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_ENERGIE/P3_ENERGIE_1_TOTAL_UNITE.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_ENERGIE/P3_ENERGIE_2_ZONE.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_ENERGIE/P3_ENERGIE_3_TOTAL_ZONE.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_ENERGIE_TLP/P3_TPL_AMHQ_1_UNITE.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_ENERGIE_TLP/P3_TPL_AMHQ_2_ZONE.yaml
+- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_ENERGIE_TLP/P3_TPL_AMHQ_3_TOTAL.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
@@ -868,9 +993,7 @@ Dépôt Re-build : https://github.com/BerrySwann/home_assistant_re-build
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P2_prise/P2_Wh_mini_pc.yaml
 
 **Pôle 3 - Éclairage**
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P3_eclairage/P3_kWh_1_UNITE.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P3_eclairage/P3_kWh_2_ZONE.yaml
-- https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/P3_eclairage/P3_kWh_3_TOTAL.yaml
+*(désactivés en prod — Riemann kWh remplacé par TPL layer `P3_ENERGIE_TLP/`)*
 
 **Météo**
 - https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/sensors/meteo/M_03_meteo_sensors_blitzortung.yaml
@@ -1004,7 +1127,7 @@ T°Ext Up/Down/stable -> X° ← tendance T° extérieure
 | `[FAN ONLY]\nSalon [FAN/OFF]\nBureau [FAN/OFF]\nChambre [FAN/OFF]` | tous groupes + fan_only |
 | `[OFF]` *(par prise)* | Prise individuelle coupée — remplace la température |
 
-> **Différence Jour/Nuit :** la nuit, groupe_2/3/4 utilisent tous `temp_nuit` uniforme (pas de T° personnalisée par personne).
+> **Différence Jour/Nuit :** la nuit, groupe_2/3/4 utilisent tous `temp_nuit` uniforme (pas de T° personnaisée par personne).
 
 **F — Notif Fermeture Fenêtres**
 
@@ -1035,7 +1158,7 @@ T°Ext Up/Down/stable -> X° ← tendance T° extérieure
 
 | Titre | Message |
 | :---- | :------ |
-| `CLIM COUPÉE` | `La prise extérieure [du Salon / du Bureau / de la Chambre] vient d'être éteinte.` |
+| `CLIM COUPÉE` | `La prise extérieure [du Salon / du Bureau / de la Chambre] vient'être éteinte.` |
 
 **L — Debug Notif Message Clim** *(DEBUG — sans titre)*
 
@@ -1181,7 +1304,7 @@ T°Ext Up/Down/stable -> X° ← tendance T° extérieure
 | `Prise clim {{ p \| upper }}` | `La Clim {{ piece_nom }} est coupée (Repos complet).` | Clim déjà à 0W — coupure immédiate |
 | `ARRÊT CLIM EN COURS` | `La Clim {{ piece_nom }} est active. Attente de descente sous 9W (max 10 min).` | Cycle d'arrêt en cours |
 | `CLIM À L'ARRÊT` | `La prise de la Clim {{ piece_nom }} a été coupée proprement (< 9W).` | Coupure réussie |
-| `ERREUR ARRÊT CLIM` | `ÉCHEC : La Clim {{ piece_nom }} consomme toujours > 9W après 10 min. Prise maintenue.` | Timeout 10 min dépassé |
+| `ERREUR ARRÊT CLIM` | `ÉCHEC : La Clim {{ piece_nom }} consomme toujours > 9W après 10 min. Prise maintenue\.` | Timeout 10 min dépassé |
 
 **J 1-1/1-2/1-3 — Clim ON/OFF Intelligent** (Salon / Bureau / Chambre) — script routeur
 
