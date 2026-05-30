@@ -109,48 +109,48 @@
 <details>
 <summary>💬 Pop-up <code>#foudre</code> — 11 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.dernier_impact_temps_reel</code></li>
-<li><code>sensor.eclairs_annuel</code></li>
-<li><code>sensor.eclairs_hebdomadaire</code></li>
-<li><code>sensor.eclairs_horaire</code></li>
-<li><code>sensor.eclairs_mensuel</code></li>
-<li><code>sensor.eclairs_quotidien</code></li>
-<li><code>sensor.lightning_bearing</code></li>
-<li><code>sensor.lightning_direction_label</code></li>
-<li><code>sensor.lightning_distance_km</code></li>
-<li><code>sensor.maison_lightning_counter</code></li>
-<li><code>sensor.maison_lightning_distance</code></li>
+<li><code>sensor.dernier_impact_temps_reel</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclairs_annuel</code> — <i>Natif HA</i></li>
+<li><code>sensor.eclairs_hebdomadaire</code> — <i>Natif HA</i></li>
+<li><code>sensor.eclairs_horaire</code> — <i>Natif HA</i></li>
+<li><code>sensor.eclairs_mensuel</code> — <i>Natif HA</i></li>
+<li><code>sensor.eclairs_quotidien</code> — <i>Natif HA</i></li>
+<li><code>sensor.lightning_bearing</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.lightning_direction_label</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.lightning_distance_km</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.maison_lightning_counter</code> — <i>Natif HA</i></li>
+<li><code>sensor.maison_lightning_distance</code> — <i>Natif HA</i></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#alert</code> — 13 entité(s)</summary>
 <blockquote><ul>
-<li><code>camera.mf_alerte_today</code></li>
-<li><code>camera.mf_alerte_tomorrow</code></li>
-<li><code>sensor.06_weather_alert</code></li>
-<li><code>sensor.alerte_avalanches</code></li>
-<li><code>sensor.alerte_canicule</code></li>
-<li><code>sensor.alerte_grand_froid</code></li>
-<li><code>sensor.alerte_inondation</code></li>
-<li><code>sensor.alerte_meteo</code></li>
-<li><code>sensor.alerte_neige_verglas</code></li>
-<li><code>sensor.alerte_orages</code></li>
-<li><code>sensor.alerte_pluie_inondation</code></li>
-<li><code>sensor.alerte_vagues_submersion</code></li>
-<li><code>sensor.alerte_vent_violent</code></li>
+<li><code>camera.mf_alerte_today</code> — <i>Natif HA</i></li>
+<li><code>camera.mf_alerte_tomorrow</code> — <i>Natif HA</i></li>
+<li><code>sensor.06_weather_alert</code> — <i>Natif HA</i></li>
+<li><code>sensor.alerte_avalanches</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_canicule</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_grand_froid</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_inondation</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_meteo</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_neige_verglas</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_orages</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_pluie_inondation</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_vagues_submersion</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_vent_violent</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#sun</code> — 6 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.duree_du_jour</code></li>
-<li><code>sensor.moon_phase</code></li>
-<li><code>sensor.season</code></li>
-<li><code>sensor.tendance_duree_jour</code></li>
-<li><code>sensor.variation_quotidienne</code></li>
-<li><code>sun.sun</code></li>
+<li><code>sensor.duree_du_jour</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
+<li><code>sensor.moon_phase</code> — <i>Natif HA</i></li>
+<li><code>sensor.season</code> — <i>Natif HA</i></li>
+<li><code>sensor.tendance_duree_jour</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
+<li><code>sensor.variation_quotidienne</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
+<li><code>sun.sun</code> — <i>Natif HA</i></li>
 </ul></blockquote>
 </details>
 
@@ -333,64 +333,64 @@
 <details>
 <summary>💬 Pop-up <code>#exterieur</code> — 2 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_temperature</code></li>
-<li><code>weather.vence</code></li>
+<li><code>sensor.th_balcon_nord_temperature</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>weather.vence</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#salon</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.th_salon_temperature</code></li>
+<li><code>sensor.th_salon_temperature</code> — <i>Natif HA</i></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#cellier</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.th_cellier_temperature</code></li>
+<li><code>sensor.th_cellier_temperature</code> — <i>Natif HA</i></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#cuisine</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.th_cuisine_temperature</code></li>
+<li><code>sensor.th_cuisine_temperature</code> — <i>Natif HA</i></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#bureau</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.th_bureau_temperature</code></li>
+<li><code>sensor.th_bureau_temperature</code> — <i>Natif HA</i></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#salle_de_bain</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.th_salle_de_bain_temperature</code></li>
+<li><code>sensor.th_salle_de_bain_temperature</code> — <i>Natif HA</i></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#chambre</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.th_chambre_temperature</code></li>
+<li><code>sensor.th_chambre_temperature</code> — <i>Natif HA</i></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#tcourbe</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_temperature</code></li>
+<li><code>sensor.th_balcon_nord_temperature</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#hcourbe</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_humidity</code></li>
+<li><code>sensor.th_balcon_nord_humidity</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -1696,22 +1696,22 @@
 <details>
 <summary>💬 Pop-up <code>#tete_de_lit</code> — 2 entité(s)</summary>
 <blockquote><ul>
-<li><code>light.hue_color_candle_chambre_eric</code></li>
-<li><code>light.hue_color_candle_chambre_gege</code></li>
+<li><code>light.hue_color_candle_chambre_eric</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml">voir fichier</a></li>
+<li><code>light.hue_color_candle_chambre_gege</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#bureau</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>light.bureau</code></li>
+<li><code>light.bureau</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#ecranpc</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>light.moniteur_pc</code></li>
+<li><code>light.moniteur_pc</code> — <i>Natif HA</i></li>
 </ul></blockquote>
 </details>
 
@@ -2036,41 +2036,41 @@
 <details>
 <summary>💬 Pop-up <code>#speed</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.system_monitor_utilisation_du_processeur</code></li>
+<li><code>sensor.system_monitor_utilisation_du_processeur</code> — <i>Natif HA</i></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#temp</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.temperature_cpu_package</code></li>
+<li><code>sensor.temperature_cpu_package</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/Mini-PC/MP_02_sonde_température_mini-pc.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#conso</code> — 7 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.mini_pc_avg_watts_mensuel</code></li>
-<li><code>sensor.mini_pc_avg_watts_quotidien</code></li>
-<li><code>sensor.prise_mini_pc_ikea_current</code></li>
-<li><code>sensor.prise_mini_pc_ikea_energy</code></li>
-<li><code>sensor.prise_mini_pc_ikea_mensuel_um</code></li>
-<li><code>sensor.prise_mini_pc_ikea_power</code></li>
-<li><code>sensor.prise_mini_pc_ikea_quotidien_um</code></li>
+<li><code>sensor.mini_pc_avg_watts_mensuel</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.mini_pc_avg_watts_quotidien</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.prise_mini_pc_ikea_current</code> — <i>Natif HA</i></li>
+<li><code>sensor.prise_mini_pc_ikea_energy</code> — <i>Natif HA</i></li>
+<li><code>sensor.prise_mini_pc_ikea_mensuel_um</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.prise_mini_pc_ikea_power</code> — <i>Natif HA</i></li>
+<li><code>sensor.prise_mini_pc_ikea_quotidien_um</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#disk</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.system_monitor_espace_utilise</code></li>
+<li><code>sensor.system_monitor_espace_utilise</code> — <i>Natif HA</i></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#memory</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.system_monitor_memoire_utilisee</code></li>
+<li><code>sensor.system_monitor_memoire_utilisee</code> — <i>Natif HA</i></li>
 </ul></blockquote>
 </details>
 
@@ -2501,46 +2501,46 @@
 <details>
 <summary>💬 Pop-up <code>#spm25</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.pm2_5_salon_moy_24h</code></li>
+<li><code>sensor.pm2_5_salon_moy_24h</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#scov</code> — 3 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.qualite_air_bureau_ikea_pm25</code></li>
-<li><code>sensor.tcov_bureau_ppb</code></li>
-<li><code>sensor.tcov_salon_moy_24h</code></li>
+<li><code>sensor.qualite_air_bureau_ikea_pm25</code> — <i>Natif HA</i></li>
+<li><code>sensor.tcov_bureau_ppb</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_salon_moy_24h</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#bpm25</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.pm2_5_bureau_moy_24h</code></li>
+<li><code>sensor.pm2_5_bureau_moy_24h</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#bcov</code> — 3 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.qualite_air_chambre_ikea_pm25</code></li>
-<li><code>sensor.tcov_bureau_moy_24h</code></li>
-<li><code>sensor.tcov_chambre_ppb</code></li>
+<li><code>sensor.qualite_air_chambre_ikea_pm25</code> — <i>Natif HA</i></li>
+<li><code>sensor.tcov_bureau_moy_24h</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_chambre_ppb</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#cpm25</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.pm2_5_chambre_moy_24h</code></li>
+<li><code>sensor.pm2_5_chambre_moy_24h</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#ccov</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.tcov_chambre_moy_24h</code></li>
+<li><code>sensor.tcov_chambre_moy_24h</code> — <a href="Docs/docs_dashboard/TREE_CORRIGE/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
