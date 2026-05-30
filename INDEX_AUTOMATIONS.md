@@ -32,8 +32,8 @@
 <summary>✅ <b>[00-Backup] Alerte si KO 15 min</b></summary>
 <blockquote>
 <i>Notification si le backup reste en KO pendant 15 minutes</i><br><br>
-📄 <a href="docs_automations/docs/BACKUP/GIT_ALERTE_KO.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/backup/git_alerte_ko.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/BACKUP/GIT_ALERTE_KO.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/backup/git_alerte_ko.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -49,8 +49,8 @@
 <summary>✅ <b>[01-Backup] Git hourly H+10</b></summary>
 <blockquote>
 <i>Push Git + backup natif HA toutes les heures à H+10</i><br><br>
-📄 <a href="docs_automations/docs/BACKUP/GIT_HOURLY.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/backup/git_hourly.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/BACKUP/GIT_HOURLY.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/backup/git_hourly.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time_pattern`<br>
 
 </blockquote>
@@ -60,7 +60,7 @@
 <summary>⚠️ <b>[02-Backup] Git daily (03:00)</b></summary>
 <blockquote>
 <i>Backup natif HA + push Git quotidien à 03h00</i><br><br>
-📄 <a href="docs_automations/docs/BACKUP/GIT_DAILY.md">Documentation</a><br>
+📄 <a href="Docs/docs_automations/docs/BACKUP/GIT_DAILY.md">Documentation</a><br>
 ⚙️ <i>Pas de fichier TREE_CORRIGE</i><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 
@@ -71,8 +71,8 @@
 <summary>✅ <b>[03-Backup] Git weekly (dim 01:30)</b></summary>
 <blockquote>
 <i>Backup natif HA + push + tag weekly chaque dimanche à 01:30</i><br><br>
-📄 <a href="docs_automations/docs/BACKUP/GIT_WEEKLY.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/backup/git_weekly.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/BACKUP/GIT_WEEKLY.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/backup/git_weekly.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 
 </blockquote>
@@ -81,8 +81,8 @@
 <details>
 <summary>✅ <b>[04-Backup] Git push manuel</b></summary>
 <blockquote>
-📄 <a href="docs_automations/docs/BACKUP/GIT_PUSH_MANUEL.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/backup/git_push_manuel.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/BACKUP/GIT_PUSH_MANUEL.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/backup/git_push_manuel.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -97,8 +97,8 @@
 <details>
 <summary>✅ <b>[05-Backup] Git push weekly manuel</b></summary>
 <blockquote>
-📄 <a href="docs_automations/docs/BACKUP/GIT_PUSH_WEEKLY_MANUEL.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/backup/git_push_weekly_manuel.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/BACKUP/GIT_PUSH_WEEKLY_MANUEL.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/backup/git_push_weekly_manuel.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -113,8 +113,8 @@
 <details>
 <summary>✅ <b>Git au démarrage</b></summary>
 <blockquote>
-📄 <a href="docs_automations/docs/BACKUP/GIT_AU_DEMARRAGE.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/backup/git_au_demarrage.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/BACKUP/GIT_AU_DEMARRAGE.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/backup/git_au_demarrage.yaml">YAML source</a><br>
 
 </blockquote>
 </details>
@@ -132,8 +132,8 @@
 <summary>✅ <b>Alerte Météo France actualisation des "CARTES</b></summary>
 <blockquote>
 <i>Force la mise à jour des images d''alerte Météo France au démarrage,  aux</i><br><br>
-📄 <a href="docs_automations/docs/METEO/ALERTE_METEO_CARTES.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/meteo/alerte_meteo_cartes.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/METEO/ALERTE_METEO_CARTES.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/meteo/alerte_meteo_cartes.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · ⏰`time` · ⏰`time_pattern`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -150,8 +150,8 @@
 <summary>✅ <b>Update previous temperature</b></summary>
 <blockquote>
 <i>Enregistre la température toutes les 30 minutes pour calculer la tendance.</i><br><br>
-📄 <a href="docs_automations/docs/METEO/UPDATE_PREV_TEMPERATURE.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/meteo/update_prev_temperature.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/METEO/UPDATE_PREV_TEMPERATURE.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/meteo/update_prev_temperature.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time_pattern`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -167,8 +167,8 @@
 <summary>✅ <b>Update previous humidity</b></summary>
 <blockquote>
 <i>Enregistre l'humidité toutes les 30 minutes pour calculer la tendance.</i><br><br>
-📄 <a href="docs_automations/docs/METEO/UPDATE_PREV_HUMIDITY.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/meteo/update_prev_humidity.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/METEO/UPDATE_PREV_HUMIDITY.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/meteo/update_prev_humidity.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time_pattern`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -184,8 +184,8 @@
 <summary>✅ <b>Notification de la foudre</b></summary>
 <blockquote>
 <i>Alerte sur Poco X7 Pro avec distance, ville ou direction et décompte</i><br><br>
-📄 <a href="docs_automations/docs/METEO/NOTIF_FOUDRE.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/meteo/notif_foudre.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/METEO/NOTIF_FOUDRE.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/meteo/notif_foudre.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -202,8 +202,8 @@
 <summary>✅ <b>Mettre à jour le temps du dernier impact de foudre</b></summary>
 <blockquote>
 <i>Met à jour le temps du dernier impact de foudre lorsque le capteur</i><br><br>
-📄 <a href="docs_automations/docs/METEO/MAJ_TEMPS_FOUDRE.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/meteo/maj_temps_foudre.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/METEO/MAJ_TEMPS_FOUDRE.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/meteo/maj_temps_foudre.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -229,8 +229,8 @@
 <summary>✅ <b>(A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00)</b></summary>
 <blockquote>
 <i>Pilotage clims jour avec boucle de relance et notification ciblée fenêtres</i><br><br>
-📄 <a href="docs_automations/docs/P1_CLIM_CHAUFFAGE/A0_CLIM_JOUR.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_clim_chauffage/A0_clim_jour_2026-01-11.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_CLIM_CHAUFFAGE/A0_CLIM_JOUR.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_clim_chauffage/A0_clim_jour_2026-01-11.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · ⏰`time` · 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (8)</summary>
@@ -253,8 +253,8 @@
 <summary>✅ <b>(B - 0) 2026-01-11 AUTOMATISATION CLIM NUIT (21H00 <-> 07H30)</b></summary>
 <blockquote>
 <i>Pilotage clims nuit avec boucle de relance et notification ciblée fenêtres</i><br><br>
-📄 <a href="docs_automations/docs/P1_CLIM_CHAUFFAGE/B0_CLIM_NUIT.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_clim_chauffage/B0_clim_nuit_2026-01-11.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_CLIM_CHAUFFAGE/B0_CLIM_NUIT.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_clim_chauffage/B0_clim_nuit_2026-01-11.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · ⏰`time` · 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (8)</summary>
@@ -277,8 +277,8 @@
 <summary>✅ <b>(C) (CLIM OFF) Gardien Éco (Delta T < -1 et T°Ext > Seuil Non-Chauffage)</b></summary>
 <blockquote>
 <i>Module de sécurité ÉCO. Coupe les climatiseurs si l''air extérieur</i><br><br>
-📄 <a href="docs_automations/docs/P1_CLIM_CHAUFFAGE/C_GARDIEN_ECO.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_clim_chauffage/C_gardien_eco.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_CLIM_CHAUFFAGE/C_GARDIEN_ECO.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_clim_chauffage/C_gardien_eco.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (5)</summary>
@@ -298,8 +298,8 @@
 <summary>✅ <b>(D) Notification température Up ou Down de (7h30 -> 21h00)</b></summary>
 <blockquote>
 <i>Envoie le message personnalisé de clim si le texte change, OU au réveil</i><br><br>
-📄 <a href="docs_automations/docs/P1_CLIM_CHAUFFAGE/D_NOTIF_TEMP_JOUR.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_clim_chauffage/D_notif_temp_jour.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_CLIM_CHAUFFAGE/D_NOTIF_TEMP_JOUR.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_clim_chauffage/D_notif_temp_jour.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · ⏰`time`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -315,8 +315,8 @@
 <summary>✅ <b>(E) Notification température Up ou Down de (21h00 -> 7h30)</b></summary>
 <blockquote>
 <i>Envoie le message personnalisé de clim si le texte change, OU au début</i><br><br>
-📄 <a href="docs_automations/docs/P1_CLIM_CHAUFFAGE/E_NOTIF_TEMP_NUIT.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_clim_chauffage/E_notif_temp_nuit.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_CLIM_CHAUFFAGE/E_NOTIF_TEMP_NUIT.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_clim_chauffage/E_notif_temp_nuit.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · ⏰`time`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -332,8 +332,8 @@
 <summary>✅ <b>(F) (CLIM) Notification de fermeture des fenêtres</b></summary>
 <blockquote>
 <i>Envoie une notification lorsqu'une fenêtre est fermée.</i><br><br>
-📄 <a href="docs_automations/docs/P1_CLIM_CHAUFFAGE/F_NOTIF_FERMETURE_FENETRES.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_clim_chauffage/F_notif_fermeture_fenetres.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_CLIM_CHAUFFAGE/F_NOTIF_FERMETURE_FENETRES.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_clim_chauffage/F_notif_fermeture_fenetres.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 
 </blockquote>
@@ -343,8 +343,8 @@
 <summary>✅ <b>(G) (CLIM) Automatisation Arrêt Clim Notification</b></summary>
 <blockquote>
 <i>Notification quand une clim est coupée manuellement, seulement si</i><br><br>
-📄 <a href="docs_automations/docs/P1_CLIM_CHAUFFAGE/G_ARRET_CLIM_NOTIF.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_clim_chauffage/G_arret_clim_notif.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_CLIM_CHAUFFAGE/G_ARRET_CLIM_NOTIF.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_clim_chauffage/G_arret_clim_notif.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (7)</summary>
@@ -366,8 +366,8 @@
 <summary>✅ <b>(H) (CLIM) Notification de changement de mode Été/Fan/Hiver</b></summary>
 <blockquote>
 <i>Notification lorsque le mode change entre Été, Ventilateur ou Hiver</i><br><br>
-📄 <a href="docs_automations/docs/P1_CLIM_CHAUFFAGE/H_NOTIF_MODE_CHANGEMENT.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_clim_chauffage/H_notif_mode_changement.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_CLIM_CHAUFFAGE/H_NOTIF_MODE_CHANGEMENT.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_clim_chauffage/H_notif_mode_changement.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -383,8 +383,8 @@
 <summary>✅ <b>(I) (CLIM DEBUG) Force Mode Correct & Sécurité</b></summary>
 <blockquote>
 <i>WATCHDOG :   1. FORCE OFF si tentative d''allumage alors que Prise</i><br><br>
-📄 <a href="docs_automations/docs/P1_CLIM_CHAUFFAGE/I_DEBUG_FORCE_MODE.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_clim_chauffage/I_debug_force_mode.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_CLIM_CHAUFFAGE/I_DEBUG_FORCE_MODE.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_clim_chauffage/I_debug_force_mode.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -400,8 +400,8 @@
 <summary>✅ <b>(J) Synchro & Notif Clim si Prise Coupée</b></summary>
 <blockquote>
 <i>Met à jour l''état du thermostat et notifie proprement si la prise</i><br><br>
-📄 <a href="docs_automations/docs/P1_CLIM_CHAUFFAGE/J_SYNCHRO_NOTIF_PRISE_COUPEE.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_clim_chauffage/J_synchro_notif_prise_coupee.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_CLIM_CHAUFFAGE/J_SYNCHRO_NOTIF_PRISE_COUPEE.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_clim_chauffage/J_synchro_notif_prise_coupee.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 
 </blockquote>
@@ -411,8 +411,8 @@
 <summary>✅ <b>(K) (DEBUG) Notifier les changements de message clim (Mobile)</b></summary>
 <blockquote>
 <i>Surveille et notifie les changements d'état du message personnalisé.</i><br><br>
-📄 <a href="docs_automations/docs/P1_CLIM_CHAUFFAGE/L_DEBUG_NOTIF_MESSAGE_CLIM.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_clim_chauffage/L_debug_notif_message_clim.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_CLIM_CHAUFFAGE/L_DEBUG_NOTIF_MESSAGE_CLIM.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_clim_chauffage/L_debug_notif_message_clim.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -437,8 +437,8 @@
 <summary>✅ <b>A - Chauffage Cuisine (entre 4h45 & 7h LMMJ ou 5:45h & 8h VSD avec T° 19,9°</b></summary>
 <blockquote>
 <i>Allume ou éteint le chauffage selon la température (19,9° <-> 20.5°)  aux</i><br><br>
-📄 <a href="docs_automations/docs/P1_CUISINE/A_CHAUFFAGE_CUISINE.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_cuisine/A_chauffage_cuisine.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_CUISINE/A_CHAUFFAGE_CUISINE.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_cuisine/A_chauffage_cuisine.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (4)</summary>
@@ -457,8 +457,8 @@
 <summary>✅ <b>B - Chauffage Cuisine Vacances</b></summary>
 <blockquote>
 <i>Allume ou éteint le chauffage selon la température entre 6h00 et 8h30  pendant</i><br><br>
-📄 <a href="docs_automations/docs/P1_CUISINE/B_CHAUFFAGE_CUISINE_VACANCES.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_cuisine/B_chauffage_cuisine_vacances.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_CUISINE/B_CHAUFFAGE_CUISINE_VACANCES.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_cuisine/B_chauffage_cuisine_vacances.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (4)</summary>
@@ -486,8 +486,8 @@
 <summary>✅ <b>A - 2026/02/01 - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT</b></summary>
 <blockquote>
 <i>Cycle complet : Démarrage, Régulation, et Auto-off 60 min avec refroidissement</i><br><br>
-📄 <a href="docs_automations/docs/P1_SDB/A_SOUFFLANT_SDB.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_sdb/A_soufflant_sdb_gestion_intelligente.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_SDB/A_SOUFFLANT_SDB.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_sdb/A_soufflant_sdb_gestion_intelligente.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (6)</summary>
@@ -508,8 +508,8 @@
 <summary>✅ <b>D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR</b></summary>
 <blockquote>
 <i>Reset physique si T > 25°C, uniquement si la prise est alimentée</i><br><br>
-📄 <a href="docs_automations/docs/P1_SDB/D_WATCHDOG_RADIATEUR_SDB.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_sdb/D_sdb_watchdog_radiateur.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_SDB/D_WATCHDOG_RADIATEUR_SDB.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_sdb/D_sdb_watchdog_radiateur.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (4)</summary>
@@ -528,8 +528,8 @@
 <summary>✅ <b>E - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 2h)</b></summary>
 <blockquote>
 <i>Timer de 2h après détection de chauffe. Sécurité anti-redémarrage incluse.</i><br><br>
-📄 <a href="docs_automations/docs/P1_SDB/E_MINUTERIE_SECHE_SERVIETTES.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P1_sdb/E_minuterie_seche_serviettes.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P1_SDB/E_MINUTERIE_SECHE_SERVIETTES.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P1_sdb/E_minuterie_seche_serviettes.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -555,8 +555,8 @@
 <summary>✅ <b>Eco. PRISES DINAMIQUE -> By-Présence/Groupe</b></summary>
 <blockquote>
 <i>Pilotage des 6 prises en fonction du groupe de présence (G1 à G4).</i><br><br>
-📄 <a href="docs_automations/docs/P2_PRISES/ECO_PRISES_DYNAMIQUE.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P2_prises/P2_eco_prises_dynamique.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P2_PRISES/ECO_PRISES_DYNAMIQUE.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P2_prises/P2_eco_prises_dynamique.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (8)</summary>
@@ -579,8 +579,8 @@
 <summary>✅ <b>Gestion PC bureau : Scène de Fin + Notif</b></summary>
 <blockquote>
 <i>Éteint la prise du PC et notifie, mais laisse la prise ON pour le</i><br><br>
-📄 <a href="docs_automations/docs/P2_PRISES/GESTION_PC_BUREAU.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P2_prises/gestion_pc_bureau.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P2_PRISES/GESTION_PC_BUREAU.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P2_prises/gestion_pc_bureau.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📡`mqtt` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -597,8 +597,8 @@
 <summary>✅ <b>Gestion TV Chambre : Scène de Fin + Notif</b></summary>
 <blockquote>
 <i>Éteint les lumières et notifie, mais laisse la prise ON pour le suivi</i><br><br>
-📄 <a href="docs_automations/docs/P2_PRISES/GESTION_TV_CHAMBRE.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P2_prises/gestion_tv_chambre.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P2_PRISES/GESTION_TV_CHAMBRE.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P2_prises/gestion_tv_chambre.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📡`mqtt` · ⏰`time` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (3)</summary>
@@ -625,8 +625,8 @@
 <summary>✅ <b>P3_Allumage Lumière Entrée</b></summary>
 <blockquote>
 <i>Gestion de l''éclairage de l''entrée basée sur les transitions des</i><br><br>
-📄 <a href="docs_automations/docs/P3_ECLAIRAGE/ALLUMAGE_LUMIERE_ENTREE.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P3_eclairage/allumage_lumiere_entree.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P3_ECLAIRAGE/ALLUMAGE_LUMIERE_ENTREE.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P3_eclairage/allumage_lumiere_entree.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (3)</summary>
@@ -644,8 +644,8 @@
 <summary>✅ <b>[P3-SALON] BOUTON IKEA INTER SALON (4) — ON/OFF LIGHT.SALON</b></summary>
 <blockquote>
 <i>Pilotage de light.salon via le bouton IKEA 4 touches Salon. Topic</i><br><br>
-📄 <a href="docs_automations/docs/P3_ECLAIRAGE/BOUTON_INTER_IKEA_4.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P3_salon_bouton_inter_ikea_4.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P3_ECLAIRAGE/BOUTON_INTER_IKEA_4.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P3_salon_bouton_inter_ikea_4.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📡`mqtt`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -661,8 +661,8 @@
 <summary>✅ <b>[P3-Salon] Bouton IKEA Inter Salon (4) — ON/OFF light.salon</b></summary>
 <blockquote>
 <i>Pilotage de light.salon via le bouton IKEA 4 touches Salon. Topic</i><br><br>
-📄 <a href="docs_automations/docs/P3_ECLAIRAGE/BOUTON_INTER_IKEA_4.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P3_salon_bouton_inter_ikea_4.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P3_ECLAIRAGE/BOUTON_INTER_IKEA_4.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P3_salon_bouton_inter_ikea_4.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📡`mqtt`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -678,8 +678,8 @@
 <summary>✅ <b>[P3-SALON] BOUTON IKEA SOMRIG — TOUT MESSAGE = ON/OFF</b></summary>
 <blockquote>
 <i>Pilotage simplifié : n''importe quel appui sur le bouton 1 (simple,</i><br><br>
-📄 <a href="docs_automations/docs/P3_ECLAIRAGE/BOUTON_INTER_SOMRIG.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P3_salon_bouton_inter_somrig.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P3_ECLAIRAGE/BOUTON_INTER_SOMRIG.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P3_salon_bouton_inter_somrig.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📡`mqtt`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -695,8 +695,8 @@
 <summary>✅ <b>P3_BUREAU - BOUTON RODRET TOGGLE BLANCHES</b></summary>
 <blockquote>
 <i>Alterne l'allumage des 2 lampes blanches via MQTT (Mode Fainéant)</i><br><br>
-📄 <a href="docs_automations/docs/P3_ECLAIRAGE/BUREAU_RODRET_TOGGLE_BLANCHES.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P3_eclairage/P3_bureau_bouton_rodret_toggle_blanches.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P3_ECLAIRAGE/BUREAU_RODRET_TOGGLE_BLANCHES.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P3_eclairage/P3_bureau_bouton_rodret_toggle_blanches.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📡`mqtt`<br>
 <br><details>
 <summary>🔌 Entités (3)</summary>
@@ -714,8 +714,8 @@
 <summary>✅ <b>BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES</b></summary>
 <blockquote>
 <i>Assure que les deux lampes de bureau (1 et 2) sont synchronisées si</i><br><br>
-📄 <a href="docs_automations/docs/P3_ECLAIRAGE/BUREAU_WATCHDOG_SYNCHRO_LAMPES.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P3_eclairage/bureau_watchdog_synchro_lampes.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P3_ECLAIRAGE/BUREAU_WATCHDOG_SYNCHRO_LAMPES.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P3_eclairage/bureau_watchdog_synchro_lampes.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (3)</summary>
@@ -733,8 +733,8 @@
 <summary>✅ <b>Bureau - Forcer Play ON si PC tourne</b></summary>
 <blockquote>
 <i>Rallume les Hue Play si elles sont éteintes manuellement alors que</i><br><br>
-📄 <a href="docs_automations/docs/P3_ECLAIRAGE/BUREAU_FORCER_PLAY_ON.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P3_eclairage/bureau_forcer_play_on_si_pc.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P3_ECLAIRAGE/BUREAU_FORCER_PLAY_ON.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P3_eclairage/bureau_forcer_play_on_si_pc.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -750,8 +750,8 @@
 <summary>✅ <b>BUREAU_ACTIVATION_ECRAN_SYNCHRO</b></summary>
 <blockquote>
 <i>Synchronise l'état de l'écran avec l'activité du PC bureau.</i><br><br>
-📄 <a href="docs_automations/docs/P3_ECLAIRAGE/BUREAU_ACTIVATION_ECRAN_SYNCHRO.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/P3_eclairage/bureau_activation_ecran_synchro.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/P3_ECLAIRAGE/BUREAU_ACTIVATION_ECRAN_SYNCHRO.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/P3_eclairage/bureau_activation_ecran_synchro.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -777,8 +777,8 @@
 <summary>✅ <b>Gestion Simple du Store Salon (Matin/Soir)</b></summary>
 <blockquote>
 <i>Ouvre le store au lever du soleil (pas avant 6h30) et le ferme au coucher.</i><br><br>
-📄 <a href="docs_automations/docs/STORES/GESTION_STORE_SALON.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/stores/gestion_store_salon.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/STORES/GESTION_STORE_SALON.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/stores/gestion_store_salon.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time` · ☀️`sun`<br>
 <br><details>
 <summary>🔌 Entités (3)</summary>
@@ -796,8 +796,8 @@
 <summary>✅ <b>Gestion Optimisée du Store Bureau</b></summary>
 <blockquote>
 <i>Priorité Sommeil et Anti-Reflet. Sécurité : Bloque tout mouvement</i><br><br>
-📄 <a href="docs_automations/docs/STORES/GESTION_STORE_BUREAU.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/stores/gestion_store_bureau.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/STORES/GESTION_STORE_BUREAU.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/stores/gestion_store_bureau.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time` · 🔄`state` · ☀️`sun`<br>
 <br><details>
 <summary>🔌 Entités (3)</summary>
@@ -824,8 +824,8 @@
 <summary>✅ <b>AUTO. ENERGIE. Basculement Tarif HC/HP — Genelec Appart</b></summary>
 <blockquote>
 <i>Bascule le tarif des 4 UM Genelec Appart HP/HC aux heures de transition</i><br><br>
-📄 <a href="docs_automations/docs/ENERGIE/BASCULEMENT_TARIF_HPHC.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/energie/basculement_tarif_hphc.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/ENERGIE/BASCULEMENT_TARIF_HPHC.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/energie/basculement_tarif_hphc.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 
 </blockquote>
@@ -835,8 +835,8 @@
 <summary>✅ <b>Log Écart Linky vs Nodon</b></summary>
 <blockquote>
 <i>Enregistre l'écart à 23:59 pile</i><br><br>
-📄 <a href="docs_automations/docs/ENERGIE/LOG_ECART_LINKY_NODON.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/energie/log_ecart_linky_nodon.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/ENERGIE/LOG_ECART_LINKY_NODON.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/energie/log_ecart_linky_nodon.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -861,8 +861,8 @@
 <summary>✅ <b>DB Purge MariaDB + Repack</b></summary>
 <blockquote>
 <i>Ménage nocturne pour réduire la taille de la base de données (7 jours</i><br><br>
-📄 <a href="docs_automations/docs/SYSTEME/DB_PURGE_MARIADB.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/systeme/db_purge_mariadb.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/SYSTEME/DB_PURGE_MARIADB.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/systeme/db_purge_mariadb.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 
 </blockquote>
@@ -872,8 +872,8 @@
 <summary>✅ <b>Système - Économie Énergie VS Code</b></summary>
 <blockquote>
 <i>Coupe VS Code si son CPU dépasse 10% ou s'il est inactif, avec confirmation</i><br><br>
-📄 <a href="docs_automations/docs/SYSTEME/ECONOMIE_ENERGIE_VSCODE.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/systeme/economie_energie_vscode.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/SYSTEME/ECONOMIE_ENERGIE_VSCODE.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/systeme/economie_energie_vscode.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📊`numeric_state` · ⚡`event`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -890,8 +890,8 @@
 <summary>✅ <b>VEILLE GITHUB — Nouvelle release détectée</b></summary>
 <blockquote>
 <i>Surveille les flux Feedreader GitHub (HA core + HACS + cartes HACS).</i><br><br>
-📄 <a href="docs_automations/docs/SYSTEME/VEILLE_GITHUB_RELEASES.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/systeme/veille_github_releases.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/SYSTEME/VEILLE_GITHUB_RELEASES.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/systeme/veille_github_releases.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⚡`event`<br>
 
 </blockquote>
@@ -901,8 +901,8 @@
 <summary>✅ <b>Système - Watchdog Piles (HUE/IKEA/SONOFF)</b></summary>
 <blockquote>
 <i>Vérification 3x/jour basée sur les groupes de la vue synthétique (seuil</i><br><br>
-📄 <a href="docs_automations/docs/SYSTEME/WATCHDOG_PILES.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/systeme/watchdog_piles.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/SYSTEME/WATCHDOG_PILES.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/systeme/watchdog_piles.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 
 </blockquote>
@@ -912,8 +912,8 @@
 <summary>✅ <b>Z2M last_seen</b></summary>
 <blockquote>
 <i>Surveillance des capteurs Zigbee injoignables (plus de 8h ou indisponibles)</i><br><br>
-📄 <a href="docs_automations/docs/SYSTEME/Z2M_LAST_SEEN.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/systeme/z2m_last_seen.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/SYSTEME/Z2M_LAST_SEEN.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/systeme/z2m_last_seen.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time` · ⏰`time_pattern`<br>
 
 </blockquote>
@@ -922,8 +922,8 @@
 <details>
 <summary>✅ <b>DIAG - ENREGISTREMENT JOURNALIER (7 POSTES + DUT)</b></summary>
 <blockquote>
-📄 <a href="docs_automations/docs/SYSTEME/DIAG_ENREGISTREMENT_JOURNALIER.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/systeme/diag_enregistrement_journalier.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/SYSTEME/DIAG_ENREGISTREMENT_JOURNALIER.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/systeme/diag_enregistrement_journalier.yaml">YAML source</a><br>
 
 </blockquote>
 </details>
@@ -941,8 +941,8 @@
 <summary>✅ <b>Raspberry CPU Fan PWM 6 States</b></summary>
 <blockquote>
 <i>Règle la vitesse du ventilateur du Raspberry en fonction de la température</i><br><br>
-📄 <a href="docs_automations/docs/RASPI/RPi4_FAN_PWM.md">Documentation</a><br>
-⚙️ <a href="docs_automations/TREE_CORRIGE/raspi/A_rpi_fan_pwm_6_states.yaml">YAML source</a><br>
+📄 <a href="Docs/docs_automations/docs/RASPI/RPi4_FAN_PWM.md">Documentation</a><br>
+⚙️ <a href="Docs/docs_automations/TREE_CORRIGE/raspi/A_rpi_fan_pwm_6_states.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
