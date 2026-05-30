@@ -91,6 +91,7 @@ panel_custom:
     module_url: /api/hassio/app/entrypoint.js
     embed_iframe: true
 
+
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ Pour powercalc (puissance virtuel des lampes et du relai SONOFF)         │
 # ╰──────────────────────────────────────────────────────────────────────────╯
@@ -196,6 +197,8 @@ recorder:
       - sensor.*last_seen
       - sensor.date*
       - sensor.time*
+      - sensor.*device_energy
+      - sensor.*device_power
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ CLIMATISATION SMARTIR                                                    │

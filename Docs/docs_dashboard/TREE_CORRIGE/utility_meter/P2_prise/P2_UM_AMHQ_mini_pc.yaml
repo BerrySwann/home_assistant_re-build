@@ -1,0 +1,63 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 2. UTILITY METER AMHQ : MINI PC (BUREAU) — ÉNERGIE kWh              │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Compteurs périodiques (Annuel / Mensuel / Hebdo / Quotidien) pour le Mini PC.
+# Source directe firmware IKEA (kWh natif) — Riemann supprimé.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : sensor.prise_mini_pc_ikea_energy (firmware IKEA Z2M — kWh natif direct)
+# - Remise à zéro : Quotidien = minuit / Hebdo = lundi / Mensuel = 1er / Annuel = 1er jan
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL        | CAPTEUR BRUT (source)              | CE FICHIER (unique_id)          | AVAL                             |
+# |:----------------|:-----------------------------------|:--------------------------------|:---------------------------------|
+# | IKEA plug (Z2M) | sensor.prise_mini_pc_ikea_energy   | prise_mini_pc_ikea_*_um         | P2_AVG_AMHQ_mini_pc.yaml → L4C2  |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Source kWh (firmware direct) — P2_AVG_AMHQ_mini_pc.yaml doit être mis à jour
+#   si la formule attendait du Wh (÷h) → adapter en kWh (×1000÷h selon calcul AVG).
+# - sensor.prise_mini_pc_ikea_energie_totale_wh (Riemann Wh) est désormais OBSOLÈTE.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Alimente L4C2 Mini PC (pop-up #conso) via AVG → streamline-card
+
+# ┌───────────────────────────────────┐
+# │ 7. BUREAU                         │
+# └───────────────────────────────────┘
+
+# --- prise_mini_pc_ikea_annuel_um ---
+prise_mini_pc_ikea_annuel_um:
+  source: sensor.prise_mini_pc_ikea_energy
+  name: "Prise Mini PC IKEA Annuel UM"
+  unique_id: prise_mini_pc_ikea_annuel_um
+  cycle: yearly
+
+# --- prise_mini_pc_ikea_mensuel_um ---
+prise_mini_pc_ikea_mensuel_um:
+  source: sensor.prise_mini_pc_ikea_energy
+  name: "Prise Mini PC IKEA Mensuel UM"
+  unique_id: prise_mini_pc_ikea_mensuel_um
+  cycle: monthly
+
+# --- prise_mini_pc_ikea_hebdomadaire_um ---
+prise_mini_pc_ikea_hebdomadaire_um:
+  source: sensor.prise_mini_pc_ikea_energy
+  name: "Prise Mini PC IKEA Hebdomadaire UM"
+  unique_id: prise_mini_pc_ikea_hebdomadaire_um
+  cycle: weekly
+
+# --- prise_mini_pc_ikea_quotidien_um ---
+prise_mini_pc_ikea_quotidien_um:
+  source: sensor.prise_mini_pc_ikea_energy
+  name: "Prise Mini PC IKEA Quotidien UM"
+  unique_id: prise_mini_pc_ikea_quotidien_um
+  cycle: daily
+
+# annotations_log:
+# - [2026-04-25] Migration Riemann → direct : sensor.prise_mini_pc_ikea_energie_totale_wh
+#               remplacée par sensor.prise_mini_pc_ikea_energy (firmware IKEA Z2M, kWh natif).
+# - [2026-04-25] Naming : _wh_um → _um (unité kWh désormais, pas Wh).
+# - [2026-04-25] ⚠️ AVAL : P2_AVG_AMHQ_mini_pc.yaml à vérifier — formule Wh potentiellement cassée.

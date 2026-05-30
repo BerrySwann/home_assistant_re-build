@@ -1,7 +1,7 @@
-> **REGLE ABSOLUE :** J'aimerais que dorénavant tu sois 100% objectif et que tu aies l'interdiction de me flater pour me flater. Et que si une de mes réponse, une de mes solution ou une idées de "codage" (yaml) que je pourrais avoir ne te semble pas bonne, que tu me le fasse s'avoir sans aller systématiquement dans mon sens. Etre honnete. Ne pas mentir. Ne pas tricher.
+> **REGLE ABSOLUE :** J'aimerais que dorénavant tu sois 100% objectif et que tu aies l'interdiction de me flater pour me flater. Et qui si une de mas répose, une de mes solution ou une idées de "codage" (yaml) que je pourrais avoir ne te semble pas bonne, que tu me le fasse s'avoir sans aller systématiquement dans mon sens. Etre honnete. Ne pas mentir. Ne pas tricher.
 
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
-*Dernière mise à jour : 2026-05-17*
+*Dernière mise à jour : 2026-05-23*
 
 ---
 
@@ -197,7 +197,7 @@ Pour tous les éléments qui ne sont pas rattachés à une pièce physique spéc
 
 - **MODIFICATIONS** : 
   - Annoter chaque ligne modifiée : `# "[L...] modif"`.
-  - Bloc final obligatoire à la fin de la réponse : `# annotations_log:`.
+  - Bloc final obligatoire à la fin de la response : `# annotations_log:`.
 
 ---
 
@@ -228,6 +228,41 @@ Pour tous les éléments qui ne sont pas rattachés à une pièce physique spéc
 3. Mettre à jour la date en haut de `DEPENDANCES_GLOBALES.md`
 
 > Référence : `docs/WORKFLOW_REBUILD.md` — section "Workflow création / modification d'une doc vignette"
+
+---
+
+## ⚙️ Système & Matériel (PROXMOX)
+
+| Composant | Détail |
+|-----------|--------|
+| **OS** | Home Assistant OS (HAOS) — VM Proxmox |
+| **Matériel** | Mini-PC Intel NUC — SSD SATA 512 Go / RAM 16 Go |
+| **Hyperviseur** | Proxmox VE 7.0.0-3 |
+| Zigbee | Sonoff EFR32MG21 — Clé V2 (Reçue 22/05/2026) |
+| Services LXC | LXC 200 : Zigbee2MQTT + Mosquitto (Host: Mini-PC Intel NUC) |
+| Note Matériel | Ancienne clé Sonoff (2024) archivée. |
+
+### 📦 Add-ons principaux & Services
+
+| Type | Nom | Localisation |
+|:-----|:----|:-------------|
+| **LXC 200** | Zigbee2MQTT | Proxmox (10.32.154.244:8099) |
+| **LXC 200** | Mosquitto | Proxmox (10.32.154.244:1883) |
+| **LXC 201** | MariaDB | Proxmox (10.32.154.201) |
+| **Add-on** | Cloudflared | HA Supervisor |
+| **Add-on** | Tailscale | HA Supervisor |
+| **Add-on** | Studio Code Server | HA Supervisor |
+
+---
+
+## 🧩 Intégrations
+
+| Catégorie | Intégrations |
+|-----------|-------------|
+| **Énergie** | `MyElectricalData` (Linky HP/HC) · `Ecojoko` (conso réseau temps réel) |
+| **Météo & Env.** | `Météo France` · `Blitzortung` (foudre) · `AtmoFrance` (pollution/pollen) · `Vigieau` (restrictions eau) |
+| **Hardware** | `Meross LAN` · `Philips HUE` · `Zigbee2MQTT` (SONOFF, IKEA, NOUS) |
+| **UI & Logique** | `Browser Mod` (pop-ups) · `Streamline Card` · `HACS` |
 
 ---
 
@@ -1106,7 +1141,7 @@ T°Ext Up/Down/stable -> X° ← tendance T° extérieure
 | `[FAN ONLY]\nSalon [FAN/OFF]\nBureau [FAN/OFF]\nChambre [FAN/OFF]` | tous groupes + fan_only |
 | `[OFF]` *(par prise)* | Prise individuelle coupée — remplace la température |
 
-> **Différence Jour/Nuit :** la nuit, groupe_2/3/4 utilisent tous `temp_nuit` uniforme (pas de T° personnalisée par personne).
+> **Différence Jour/Nuit :** la nuit, groupe_2/3/4 utilisent tous `temp_nuit` uniforme (pas de T° personnaisée par personne).
 
 **F — Notif Fermeture Fenêtres**
 
@@ -1283,7 +1318,7 @@ T°Ext Up/Down/stable -> X° ← tendance T° extérieure
 | `Prise clim {{ p \| upper }}` | `La Clim {{ piece_nom }} est coupée (Repos complet).` | Clim déjà à 0W — coupure immédiate |
 | `ARRÊT CLIM EN COURS` | `La Clim {{ piece_nom }} est active. Attente de descente sous 9W (max 10 min).` | Cycle d'arrêt en cours |
 | `CLIM À L'ARRÊT` | `La prise de la Clim {{ piece_nom }} a été coupée proprement (< 9W).` | Coupure réussie |
-| `ERREUR ARRÊT CLIM` | `ÉCHEC : La Clim {{ piece_nom }} consomme toujours > 9W après 10 min. Prise maintenue.` | Timeout 10 min dépassé |
+| `ERREUR ARRÊT CLIM` | `ÉCHEC : La Clim {{ piece_nom }} consomme toujours > 9W après 10 min. Prise maintenue\.` | Timeout 10 min dépassé |
 
 **J 1-1/1-2/1-3 — Clim ON/OFF Intelligent** (Salon / Bureau / Chambre) — script routeur
 
