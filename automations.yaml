@@ -1962,7 +1962,7 @@
   triggers:
   - id: bouton_mqtt
     trigger: mqtt
-    topic: zigbee2mqtt2/Poussoir (IKEA TRADFRI)/action
+    topic: zigbee2mqtt2/Poussoir TV (IKEA TRADFRI)/action
   - id: extinction_conso
     trigger: numeric_state
     entity_id: sensor.prise_bureau_pc_ikea_power
@@ -2018,7 +2018,7 @@
   - id: bouton_mqtt
     trigger: mqtt
     options:
-      topic: zigbee2mqtt2/Inter TV Chambre (IKEA RODRET)
+      topic: zigbee2mqtt2/Poussoir TV (IKEA TRADFRI)/action
   - id: allumage_auto
     trigger: time
     at: '21:00:00'
