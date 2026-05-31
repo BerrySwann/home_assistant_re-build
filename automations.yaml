@@ -274,19 +274,19 @@
 - id: '1774183767864'
   alias: '[P3-SALON] BOUTON IKEA INTER SALON (4) — ON/OFF LIGHT.SALON'
   description: 'Pilotage de light.salon via le bouton IKEA 4 touches Salon. Topic
-    MQTT : zigbee2mqtt/Inter Salon (4) (IKEA)/action ON -> light.turn_on | OFF ->
+    MQTT : zigbee2mqtt2/Inter Salon (4) (IKEA)/action ON -> light.turn_on | OFF ->
     light.turn_off
 
     '
   triggers:
   - alias: 'DÉCLENCHEMENT : BOUTON ON (MQTT)'
     trigger: mqtt
-    topic: zigbee2mqtt/Inter Salon (4) (IKEA)/action
+    topic: zigbee2mqtt2/Inter Salon (4) (IKEA)/action
     payload: 'on'
     id: bouton_on
   - alias: 'DÉCLENCHEMENT : BOUTON OFF (MQTT)'
     trigger: mqtt
-    topic: zigbee2mqtt/Inter Salon (4) (IKEA)/action
+    topic: zigbee2mqtt2/Inter Salon (4) (IKEA)/action
     payload: 'off'
     id: bouton_off
   conditions: []
@@ -2385,38 +2385,6 @@
       ~ ')'] %}\n    {% endif %}\n  {% endif %}\n{% endfor %} {{ result.sensors |
       join(', ') }}\n"
   mode: single
-- id: '1775387556140'
-  alias: '[P3-Salon] Bouton IKEA Inter Salon (4) — ON/OFF light.salon'
-  description: 'Pilotage de light.salon via le bouton IKEA 4 touches Salon. Topic
-    MQTT : zigbee2mqtt/Inter Salon (4) (IKEA)/action ON -> light.turn_on | OFF ->
-    light.turn_off
-
-    '
-  triggers:
-  - alias: TRIGGER MQTT INTER SALON (4) IKEA
-    trigger: mqtt
-    topic: zigbee2mqtt/Inter Salon (4) (IKEA)/action
-  conditions: []
-  actions:
-  - alias: ACTION ON/OFF LIGHT.SALON
-    choose:
-    - alias: BOUTON ON
-      conditions:
-      - condition: template
-        value_template: '{{ trigger.payload_json.action == ''on'' }}'
-      sequence:
-      - action: light.turn_on
-        target:
-          entity_id: light.salon
-    - alias: BOUTON OFF
-      conditions:
-      - condition: template
-        value_template: '{{ trigger.payload_json.action == ''off'' }}'
-      sequence:
-      - action: light.turn_off
-        target:
-          entity_id: light.salon
-  mode: restart
 - id: '1775387618751'
   alias: '[P3-SALON] BOUTON IKEA SOMRIG — TOUT MESSAGE = ON/OFF'
   description: 'Pilotage simplifié : n''importe quel appui sur le bouton 1 (simple,
@@ -2427,32 +2395,32 @@
   triggers:
   - alias: 'DÉCLENCHEMENT : BOUTON 1 (CLIC SIMPLE)'
     trigger: mqtt
-    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    topic: zigbee2mqtt2/Inter (SOMRIG)/action
     payload: 1_short_release
     id: bouton_on
   - alias: 'DÉCLENCHEMENT : BOUTON 1 (DOUBLE CLIC)'
     trigger: mqtt
-    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    topic: zigbee2mqtt2/Inter (SOMRIG)/action
     payload: 1_double_press
     id: bouton_on
   - alias: 'DÉCLENCHEMENT : BOUTON 1 (APPUI LONG)'
     trigger: mqtt
-    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    topic: zigbee2mqtt2/Inter (SOMRIG)/action
     payload: 1_long_press
     id: bouton_on
   - alias: 'DÉCLENCHEMENT : BOUTON 2 (CLIC SIMPLE)'
     trigger: mqtt
-    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    topic: zigbee2mqtt2/Inter (SOMRIG)/action
     payload: 2_short_release
     id: bouton_off
   - alias: 'DÉCLENCHEMENT : BOUTON 2 (DOUBLE CLIC)'
     trigger: mqtt
-    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    topic: zigbee2mqtt2/Inter (SOMRIG)/action
     payload: 2_double_press
     id: bouton_off
   - alias: 'DÉCLENCHEMENT : BOUTON 2 (APPUI LONG)'
     trigger: mqtt
-    topic: zigbee2mqtt/Inter (SOMRIG)/action
+    topic: zigbee2mqtt2/Inter (SOMRIG)/action
     payload: 2_long_press
     id: bouton_off
   conditions: []
@@ -2605,3 +2573,52 @@
         kWh | Ecart: {{d1}} ({{p1}}%) Direct:  {{n2}} kWh | Ecart: {{d2}} ({{p2}}%)
 
         '
+- id: '1780200461358'
+  alias: P3_SDB - BOUTON RODRET TOGGLE SDB
+  description: Alterne l'allumage de la lumière et du relais SDB via MQTT (Mode Fainéant)
+  triggers:
+  - alias: RÉCEPTION MESSAGE MQTT BOUTON RODRET SDB
+    trigger: mqtt
+    topic: zigbee2mqtt2/Inter SDB (RODRET)
+  actions:
+  - alias: DÉCISION SELON LE PAYLOAD MQTT (ON OU OFF)
+    choose:
+    - alias: BOUTON ON OU OFF PRESSÉ -> LOGIQUE TOGGLE
+      conditions:
+      - alias: VÉRIFICATION ACTION DANS LE JSON
+        condition: template
+        value_template: '{{ trigger.payload_json.action in [''on'', ''off''] }}'
+      sequence:
+      - alias: LOGIQUE DE BASCULEMENT (TOGGLE)
+        choose:
+        - alias: SI LUMIÈRE OU RELAIS PRÉSENT -> EXTINCTION GLOBALE
+          conditions:
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: light.hue_white_lamp_salle_de_bain
+              state: 'on'
+            - condition: state
+              entity_id: switch.relais_lumiere_sdb_sonoff
+              state: 'on'
+          sequence:
+          - alias: EXTINCTION LUMIÈRE ET RELAIS
+            action: light.turn_off
+            target:
+              entity_id: light.hue_white_lamp_salle_de_bain
+          - action: switch.turn_off
+            target:
+              entity_id: switch.relais_lumiere_sdb_sonoff
+        default:
+        - alias: ALLUMAGE SÉCURISÉ DES 2 ENTITÉS
+          action: light.turn_on
+          target:
+            entity_id: light.hue_white_lamp_salle_de_bain
+        - action: switch.turn_on
+          target:
+            entity_id: switch.relais_lumiere_sdb_sonoff
+  - alias: FORÇAGE MISE À JOUR DU SENSOR D'ÉTAT SDB
+    action: homeassistant.update_entity
+    target:
+      entity_id: sensor.sdb_etat
+  mode: restart
