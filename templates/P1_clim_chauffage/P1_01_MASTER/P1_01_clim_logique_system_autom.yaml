@@ -61,7 +61,7 @@
     - name: "Seuil non clim"
       unique_id: seuil_non_clim
       unit_of_measurement: "°C"
-      state: "27"
+      state: "26"
 
 # --- delta_1 ---
     - name: "Delta_1"
