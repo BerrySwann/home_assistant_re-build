@@ -2140,7 +2140,7 @@
         }}°C. Reset IR lancé.
   mode: single
 - id: '1775331417577'
-  alias: P3_Allumage Lumière Entrée
+  alias: P3_ENTREE_ALLUMAGE_LUMIERE
   description: 'Gestion de l''éclairage de l''entrée basée sur les transitions des
     groupes  de présence et la période de la journée.
 
