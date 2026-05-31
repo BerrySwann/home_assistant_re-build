@@ -934,8 +934,8 @@
             'unavailable'] and\n  states('sensor.groupe') not in ['unknown', 'unavailable']
             and\n  states('sensor.temperature_cible') not in ['unknown', 'unavailable']
             and\n  states('sensor.temperature_eco_hiver_corrige') not in ['unknown',
-            'unavailable'] and\n  states('sensor.temperature_corrige_mamour_hivers')
-            not in ['unknown', 'unavailable'] and\n  states('sensor.temperature_corrige_eric_hivers')
+            'unavailable'] and\n  states('sensor.temperature_corrige_mamour') not
+            in ['unknown', 'unavailable'] and\n  states('sensor.temperature_corrige_eric')
             not in ['unknown', 'unavailable']\n}}\n"
         - alias: 'LIMITE : 10 TENTATIVES (5 MIN)'
           condition: template
