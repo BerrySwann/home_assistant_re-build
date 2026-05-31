@@ -145,7 +145,7 @@
 # ┌───────────────────────────────────┐
 # │ 04. SALON                         │
 # └───────────────────────────────────┘
-# --- temperature_corrige_mamour_hivers ---
+# --- temperature_corrige_mamour ---
     - name: "Temperature Corrigé Mamour"
       unique_id: temperature_corrige_mamour
       unit_of_measurement: "°C"
@@ -154,39 +154,40 @@
         {% set temp_conf_m = states('sensor.temperature_confort_jour') | float(0) %}
         {% set delta_1 = states('sensor.delta_1') | float(1) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
-          {{ temp_conf_m }}
+          {{ [ (temp_conf_m + delta_1), 24.0 ] | min | round(1) }}
         {% else %}
-          {{ [ (temp_conf_m + delta_1), 21.0 ] | min | round(1) }}
+          {{ [ (temp_conf_m - delta_1), 24.0 ] | min | round(1) }}
         {% endif %}
 
 # ┌───────────────────────────────────┐
 # │ 07. BUREAU                        │
 # └───────────────────────────────────┘
-# --- temperature_corrige_eric_hivers ---
+# --- temperature_corrige_eric ---
     - name: "Temperature Corrigé Eric"
       unique_id: temperature_corrige_eric
       unit_of_measurement: "°C"
       device_class: temperature
       state: >
         {% set temp_conf_e = states('sensor.temperature_confort_jour') | float(0) %}
+        {% set delta_1 = states('sensor.delta_1') | float(1) %}
         {% set delta_2 = states('sensor.delta_2') | float(2) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
-          {{ temp_conf_e }}
+          {{ [ (temp_conf_e + delta_1), 25.0 ] | min | round(1) }}
         {% else %}
-          {{ [ (temp_conf_e - delta_2), 18.0 ] | min | round(1) }}
+          {{ [ (temp_conf_e - delta_2), 21.0 ] | min | round(1) }}
         {% endif %}
 
 # ┌───────────────────────────────────┐
 # │ 09. CHAMBRE                       │
 # └───────────────────────────────────┘
-# --- temperature_corrige_chambre_hivers ---
+# --- temperature_corrige_chambre ---
     - name: "Temperature Corrigé Chambre"
       unique_id: temperature_corrige_chambre
       unit_of_measurement: "°C"
       device_class: temperature
       state: >
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
-          {{ states('sensor.temperature_confort_jour') | float(0) }}
+          {{ states('sensor.consigne_de_base') | float(0) }}
         {% else %}
           {{ states('sensor.consigne_de_base') | float(0) }}
         {% endif %}
