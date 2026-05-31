@@ -1979,7 +1979,7 @@
   triggers:
   - id: bouton_mqtt
     trigger: mqtt
-    topic: zigbee2mqtt/Poussoir (IKEA TRADFRI)/action
+    topic: zigbee2mqtt2/Poussoir (IKEA TRADFRI)/action
   - id: extinction_conso
     trigger: numeric_state
     entity_id: sensor.prise_bureau_pc_ikea_power
@@ -2035,7 +2035,7 @@
   - id: bouton_mqtt
     trigger: mqtt
     options:
-      topic: zigbee2mqtt/Inter TV Chambre (IKEA RODRET)
+      topic: zigbee2mqtt2/Inter TV Chambre (IKEA RODRET)
   - id: allumage_auto
     trigger: time
     at: '21:00:00'
@@ -2237,7 +2237,7 @@
       entity_id: sensor.bureau_etat
   mode: restart
 - id: '1775331482668'
-  alias: BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES
+  alias: P3_BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES
   description: Assure que les deux lampes de bureau (1 et 2) sont synchronisées si
     l'une s'allume
   triggers:
@@ -2274,7 +2274,7 @@
       entity_id: sensor.bureau_etat
   mode: restart
 - id: '1775331547996'
-  alias: Bureau - Forcer Play ON si PC tourne
+  alias: P3_BUREAU - Forcer Play ON si PC tourne
   description: Rallume les Hue Play si elles sont éteintes manuellement alors que
     la synchro PC est active
   triggers:
@@ -2294,7 +2294,7 @@
     action: light.turn_on
   mode: parallel
 - id: '1775331623943'
-  alias: BUREAU_ACTIVATION_ECRAN_SYNCHRO
+  alias: P3_BUREAU_ACTIVATION_ECRAN_SYNCHRO
   description: Synchronise l'état de l'écran avec l'activité du PC bureau.
   triggers:
   - alias: 'DÉCLENCHEMENT : PC BUREAU ALLUMÉ'
@@ -2574,49 +2574,32 @@
 
         '
 - id: '1780200461358'
-  alias: P3_SDB - BOUTON RODRET TOGGLE SDB
-  description: Alterne l'allumage de la lumière et du relais SDB via MQTT (Mode Fainéant)
+  alias: P3_SDB - SYNC MIROIR LAMPE ET RELAIS SDB
+  description: Aligne le relais Sonoff sur l'état de la lampe Hue (ON/OFF) et sécurise
+    l'allumage des deux
   triggers:
-  - alias: RÉCEPTION MESSAGE MQTT BOUTON RODRET SDB
-    trigger: mqtt
-    topic: zigbee2mqtt2/Inter SDB (RODRET)
+  - alias: CHANGEMENT D'ÉTAT DE LA LAMPE SDB
+    trigger: state
+    entity_id: light.hue_white_lamp_salle_de_bain
   actions:
-  - alias: DÉCISION SELON LE PAYLOAD MQTT (ON OU OFF)
+  - alias: SYNCHRONISATION DU RELAIS SUR LA LAMPE
+    action: switch.turn_{{ trigger.to_state.state }}
+    target:
+      entity_id: switch.relais_lumiere_sdb_sonoff
+  - alias: S'ASSURER QUE LES DEUX SOIENT BIEN ALLUMÉS (SÉCURITÉ ON)
     choose:
-    - alias: BOUTON ON OU OFF PRESSÉ -> LOGIQUE TOGGLE
+    - alias: SI LA LAMPE EST ON -> FORCE LE RELAIS ET LA LAMPE
       conditions:
-      - alias: VÉRIFICATION ACTION DANS LE JSON
-        condition: template
-        value_template: '{{ trigger.payload_json.action in [''on'', ''off''] }}'
+      - condition: state
+        entity_id: light.hue_white_lamp_salle_de_bain
+        state: 'on'
       sequence:
-      - alias: LOGIQUE DE BASCULEMENT (TOGGLE)
-        choose:
-        - alias: SI LUMIÈRE OU RELAIS PRÉSENT -> EXTINCTION GLOBALE
-          conditions:
-          - condition: or
-            conditions:
-            - condition: state
-              entity_id: light.hue_white_lamp_salle_de_bain
-              state: 'on'
-            - condition: state
-              entity_id: switch.relais_lumiere_sdb_sonoff
-              state: 'on'
-          sequence:
-          - alias: EXTINCTION LUMIÈRE ET RELAIS
-            action: light.turn_off
-            target:
-              entity_id: light.hue_white_lamp_salle_de_bain
-          - action: switch.turn_off
-            target:
-              entity_id: switch.relais_lumiere_sdb_sonoff
-        default:
-        - alias: ALLUMAGE SÉCURISÉ DES 2 ENTITÉS
-          action: light.turn_on
-          target:
-            entity_id: light.hue_white_lamp_salle_de_bain
-        - action: switch.turn_on
-          target:
-            entity_id: switch.relais_lumiere_sdb_sonoff
+      - action: light.turn_on
+        target:
+          entity_id: light.hue_white_lamp_salle_de_bain
+      - action: switch.turn_on
+        target:
+          entity_id: switch.relais_lumiere_sdb_sonoff
   - alias: FORÇAGE MISE À JOUR DU SENSOR D'ÉTAT SDB
     action: homeassistant.update_entity
     target:
