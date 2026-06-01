@@ -1956,53 +1956,6 @@
 - id: '1775245732227'
   alias: 'Gestion TV Chambre : Scène de Fin + Notif'
   description: 'Éteint les lumières et notifie, mais laisse la prise ON pour le suivi
-    conso lorsqu''une veille est détectée.
-
-    '
-  triggers:
-  - id: bouton_mqtt
-    trigger: mqtt
-    options:
-      topic: zigbee2mqtt2/Poussoir TV (IKEA TRADFRI)/action
-  - id: extinction_conso
-    trigger: numeric_state
-    entity_id: sensor.prise_tv_chambre_nous_power
-    below: 20
-    for:
-      minutes: 2
-  actions:
-  - choose:
-    - alias: 'ALLUMAGE : Bouton ON'
-      conditions:
-      - condition: template
-        value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload == ''on''
-          }}'
-      sequence:
-      - action: light.turn_on
-        target:
-          entity_id: light.hue_smart_eco_tv_chambre
-      - action: switch.turn_on
-        target:
-          entity_id: switch.prise_tv_chambre_nous
-    - alias: 'EXTINCTION AMBIANCE : Veille (< 20W)'
-      conditions:
-      - condition: trigger
-        id: extinction_conso
-      sequence:
-      - action: light.turn_off
-        target:
-          entity_id: light.hue_smart_eco_tv_chambre
-      - action: notify.mobile_app_eric
-        data:
-          title: Veille détectée
-          message: Prise TV [OFF]
-          data:
-            icon: mdi:eye-outline
-            tag: notif_tv_chambre
-  mode: parallel
-- id: '1775330762844'
-  alias: 'Gestion TV Chambre : Scène de Fin + Notif'
-  description: 'Éteint les lumières et notifie, mais laisse la prise ON pour le suivi
     conso  lorsqu''une veille est détectée.
 
     '
@@ -2010,7 +1963,7 @@
   - id: bouton_mqtt
     trigger: mqtt
     options:
-      topic: zigbee2mqtt2/Poussoir TV (IKEA TRADFRI)/action
+      topic: zigbee2mqtt/Inter TV Chambre (IKEA RODRET)
   - id: allumage_auto
     trigger: time
     at: '21:00:00'
@@ -2058,6 +2011,77 @@
             icon: mdi:eye-outline
             tag: notif_tv_chambre
   mode: parallel
+- id: '1775330762844'
+  alias: 'Gestion TV Chambre : Scène de Fin + Notif'
+  description: 'Éteint les lumières et notifie, mais laisse la prise ON pour le suivi
+    conso lorsqu''une veille est détectée.
+
+    '
+  triggers:
+  - id: bouton_mqtt
+    trigger: mqtt
+    topic: zigbee2mqtt2/Poussoir TV (IKEA TRADFRI)/action
+  - id: extinction_conso
+    trigger: numeric_state
+    entity_id: sensor.prise_tv_chambre_nous_power
+    below: 20
+    for:
+      minutes: 2
+  actions:
+  - choose:
+    - alias: 'ALLUMAGE : Bouton ON'
+      conditions:
+      - condition: trigger
+        id: bouton_mqtt
+      - condition: template
+        value_template: '{{ trigger.payload == ''on'' }}'
+      - condition: state
+        entity_id: light.hue_smart_eco_tv_chambre
+        state: 'off'
+      sequence:
+      - action: light.turn_on
+        target:
+          entity_id: light.hue_smart_eco_tv_chambre
+      - action: switch.turn_on
+        target:
+          entity_id: switch.prise_tv_chambre_nous
+      - action: notify.mobile_app_eric
+        data:
+          title: Allumage TV
+          message: Prise TV [ON]
+          data:
+            icon: mdi:eye-outline
+            tag: notif_tv_chambre
+    - alias: 'EXTINCTION AMBIANCE : Bouton OFF ou Veille (< 20W)'
+      conditions:
+      - or:
+        - condition: template
+          value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload ==
+            ''off'' }}'
+        - condition: trigger
+          id: extinction_conso
+      sequence:
+      - if:
+        - condition: trigger
+          id: extinction_conso
+        then:
+        - wait_template: '{{ states(''sensor.prise_tv_chambre_nous_power'') | float
+            > 20 }}'
+          timeout: 00:00:20
+          continue_on_timeout: true
+        - condition: template
+          value_template: '{{ not wait.completed }}'
+      - action: light.turn_off
+        target:
+          entity_id: light.hue_smart_eco_tv_chambre
+      - action: notify.mobile_app_eric
+        data:
+          title: Veille détectée
+          message: Prise TV [OFF]
+          data:
+            icon: mdi:eye-outline
+            tag: notif_tv_chambre
+  mode: restart
 - id: '1775331166275'
   alias: 'D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR'
   description: Reset physique si T > 25°C, uniquement si la prise est alimentée
