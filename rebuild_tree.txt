@@ -4209,7 +4209,7 @@
 │   │   │   ├── P3_AVG_AMHQ_1_UNITE.yaml
 │   │   │   ├── P3_AVG_AMHQ_2_ZONE.yaml
 │   │   │   └── P3_AVG_AMHQ_3_TOTAL.yaml
-│   │   ├── P3_ENERGIE_TLP
+│   │   ├── P3_ENERGIE_TPL
 │   │   │   ├── P3_TPL_AMHQ_1_UNITE.yaml
 │   │   │   ├── P3_TPL_AMHQ_2_ZONE.yaml
 │   │   │   └── P3_TPL_AMHQ_3_TOTAL.yaml
@@ -4236,9 +4236,8 @@
 ├── utility_meter
 │   ├── P0_Energie_total
 │   │   └── Genelec_appart
-│   │       ├── 01_kWh_UM_AMHQ.yaml
-│   │       ├── 02_UM_AMHQ.yaml
-│   │       └── 03_UM_genelec_appart_HPHC_AMHQ.yaml
+│   │       ├── 01_UM_AMHQ.yaml
+│   │       └── 02_UM_genelec_appart_HPHC_AMHQ.yaml
 │   ├── P1_clim_chauffage
 │   │   └── P1_UM_AMHQ.yaml
 │   ├── P2_prise
@@ -5740,9 +5739,8 @@
 /config/utility_meter
 ├── P0_Energie_total
 │   └── Genelec_appart
-│       ├── 01_kWh_UM_AMHQ.yaml
-│       ├── 02_UM_AMHQ.yaml
-│       └── 03_UM_genelec_appart_HPHC_AMHQ.yaml
+│       ├── 01_UM_AMHQ.yaml
+│       └── 02_UM_genelec_appart_HPHC_AMHQ.yaml
 ├── P1_clim_chauffage
 │   └── P1_UM_AMHQ.yaml
 ├── P2_prise
@@ -5805,7 +5803,7 @@
 │   │   ├── P3_AVG_AMHQ_1_UNITE.yaml
 │   │   ├── P3_AVG_AMHQ_2_ZONE.yaml
 │   │   └── P3_AVG_AMHQ_3_TOTAL.yaml
-│   ├── P3_ENERGIE_TLP
+│   ├── P3_ENERGIE_TPL
 │   │   ├── P3_TPL_AMHQ_1_UNITE.yaml
 │   │   ├── P3_TPL_AMHQ_2_ZONE.yaml
 │   │   └── P3_TPL_AMHQ_3_TOTAL.yaml
@@ -5843,4 +5841,4 @@
     └── M_03_meteo_sensors_blitzortung.yaml
 /config/home-assistant-config-v2 [error opening dir]
 
-795 directories, 5041 files
+795 directories, 5039 files
