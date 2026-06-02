@@ -73,3 +73,18 @@
       bash -lc 'git -C /config rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown"'
     scan_interval: 3600
     value_template: '{{ value | trim }}'
+
+# --- backup_github_status ---
+- sensor:
+    name: "Backup GitHub Status"
+    unique_id: backup_github_status
+    command: >-
+      bash -lc 'LAST=$(tail -n1 /config/.logs/ha_git_backup.log 2>/dev/null || echo "");
+      if [[ -z "$LAST" ]] || echo "$LAST" | grep -qF "❌";
+      then echo "{\"ok\":false,\"ts\":\"\"}";
+      else TS=$(echo "$LAST" | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" | head -1 || echo "");
+      echo "{\"ok\":true,\"ts\":\"$TS\"}"; fi'
+    scan_interval: 10
+    value_template: '{{ "OK" if value_json.ok else "KO" }}'
+    json_attributes:
+      - ts
