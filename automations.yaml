@@ -1966,7 +1966,7 @@
   - id: extinction_conso
     trigger: numeric_state
     entity_id: sensor.prise_bureau_pc_ikea_power
-    below: 40
+    below: 60
     for:
       minutes: 2
   actions:
