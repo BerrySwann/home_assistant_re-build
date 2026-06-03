@@ -817,8 +817,6 @@
 ├── Air_quality
 │   └── A_01_AIR_QUALITY.yaml
 ├── P0_Energie_total_min_maxi_diag
-│   ├── P0_Genelec_appart
-│   │   └── P0_kWh_genelec_appart.yaml
 │   └── P0_Genelec_appart_mini_maxi
 │       └── P0_MINI_MAXI_AVG_Genelec_appart.yaml
 ├── P1_clim_chauffage
@@ -828,4 +826,4 @@
     └── M_03_meteo_sensors_blitzortung.yaml
 /config/home-assistant-config-v2 [error opening dir]
 
-260 directories, 562 files
+259 directories, 561 files
