@@ -1858,7 +1858,8 @@
   triggers:
   - id: bouton_mqtt
     trigger: mqtt
-    topic: zigbee2mqtt/Poussoir (IKEA TRADFRI)/action
+    options:
+      topic: zigbee2mqtt2/Poussoir PC (IKEA TRADFRI)/action
   - id: extinction_conso
     trigger: numeric_state
     entity_id: sensor.prise_bureau_pc_ikea_power
@@ -1882,7 +1883,7 @@
           title: Allumage PC
           message: PC Bureau [ON]
           data:
-            icon: mdi:eye-outline
+            icon: mdi:monitor-dashboard
             tag: notif_pc_bureau
     - alias: 'EXTINCTION AMBIANCE : Veille (< 40W)'
       conditions:
@@ -1903,7 +1904,7 @@
           title: Veille détectée
           message: PC Bureau [OFF]
           data:
-            icon: mdi:eye-outline
+            icon: mdi:monitor-dashboard
             tag: notif_pc_bureau
   mode: single
 - id: '1775330762844'
@@ -1942,7 +1943,7 @@
           title: Allumage TV
           message: Prise TV [ON]
           data:
-            icon: mdi:eye-outline
+            icon: mdi:television-off
             tag: notif_tv_chambre
     - alias: 'EXTINCTION AMBIANCE : Veille (< 20W)'
       conditions:
@@ -1963,7 +1964,7 @@
           title: Veille détectée
           message: Prise TV [OFF]
           data:
-            icon: mdi:eye-outline
+            icon: mdi:television
             tag: notif_tv_chambre
   mode: single
 - id: '1775331166275'
