@@ -48,7 +48,7 @@
         {% elif pos == 100 %}
           <span style="color:lightgreen">Ouvert</span>
         {% elif pos > 0 %}
-          <span style="color:#FFA500">Ouvert {{ pos }}%</span>
+          <span style="color:#FFA500">Ouvert</span>
         {% else %}
           <span style="color:#44739e">Inconnu</span>
         {% endif %}
@@ -69,7 +69,7 @@
         {% elif pos == 100 %}
           <span style="color:lightgreen">Ouvert</span>
         {% elif pos > 0 %}
-          <span style="color:#FFA500">Ouvert {{ pos }}%</span>
+          <span style="color:#FFA500">Ouvert</span>
         {% else %}
           <span style="color:#44739e">Inconnu</span>
         {% endif %}
