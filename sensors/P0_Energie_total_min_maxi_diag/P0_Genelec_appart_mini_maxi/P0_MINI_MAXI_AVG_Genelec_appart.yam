@@ -9,17 +9,17 @@
 # les extrêmes de consommation et la tendance horaire.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Source : sensor.genelec_appart_quotidien_um (UM kWh — remise à 0 à minuit).
-# - Conso Mini  : min sur 24h (value_min) → 0 juste après minuit (reset UM).
-# - Conso Maxi  : max sur 24h (value_max) → total journalier accumulé (pic).
-# - Conso Moy 1h: moyenne sur 1h (mean) → consommation kWh lissée sur la dernière heure.
+# - Source : sensor.general_electric_appart_power (puissance W temps réel — Nodon).
+# - Conso Mini  : min sur 24h (value_min) → puissance minimale de la journée.
+# - Conso Maxi  : max sur 24h (value_max) → pic de puissance de la journée.
+# - Conso Moy 1h: moyenne sur 1h (mean) → consommation W lissée sur la dernière heure.
 #
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.genelec_appart_cumulative               | genelec_appart_power_min / _max / _mean_24h        | 03_AVG_genelec_appart.yaml → L2C1  |
+# | Nodon (Z2M)    | sensor.general_electric_appart_power           | genelec_appart_conso_mini_24h / _maxi_24h / _moy_1h | 03_AVG_genelec_appart.yaml → L2C1 |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces capteurs opèrent sur l'ÉNERGIE (kWh), pas sur la puissance (W).
@@ -35,7 +35,7 @@
 - platform: statistics
   name: "Genelec Appart Conso Mini 24h"
   unique_id: genelec_appart_conso_mini_24h
-  entity_id: sensor.general_electric_appart_power
+  entity_id: sensor.genelec_appart_quotidien_um
   state_characteristic: value_min
   max_age:
     hours: 24
@@ -44,7 +44,7 @@
 - platform: statistics
   name: "Genelec Appart Conso Maxi 24h"
   unique_id: genelec_appart_conso_maxi_24h
-  entity_id: sensor.general_electric_appart_power
+  entity_id: sensor.genelec_appart_quotidien_um
   state_characteristic: value_max
   max_age:
     hours: 24
@@ -53,7 +53,7 @@
 - platform: statistics
   name: "Genelec Appart Conso Moyenne 1h"
   unique_id: genelec_appart_conso_moyenne_1h
-  entity_id: sensor.general_electric_appart_power
+  entity_id: sensor.genelec_appart_quotidien_um
   state_characteristic: mean
   precision: 1
   max_age:
