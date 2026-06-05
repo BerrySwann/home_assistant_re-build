@@ -38,6 +38,7 @@
   state_characteristic: value_min
   max_age:
     hours: 24
+
 # --- genelec_appart_conso_maxi_24h ---
 - platform: statistics
   name: "Genelec Appart Conso Maxi 24h"
@@ -46,6 +47,7 @@
   state_characteristic: value_max
   max_age:
     hours: 24
+
 # --- genelec_appart_conso_moyenne_1h ---
 - platform: statistics
   name: "Genelec Appart Conso Moyenne 1h"
