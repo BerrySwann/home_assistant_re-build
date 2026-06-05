@@ -7738,3 +7738,4 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [Mamour: WIFI/CELL] | 05/06 16:30 | Hyg:1.08 | Cuis:0.68 | Froid:0.71 | Chauff:0.1 | Avg 4:6.0 | Multi:0.82 | Lum:0.2 | Autres:0.23 | Ti:24.7°C | Ext:24.5°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
 [Mamour: WIFI/CELL] | 05/06 16:45 | Hyg:1.08 | Cuis:0.77 | Froid:0.71 | Chauff:0.11 | Avg 4:6.6 | Multi:0.82 | Lum:0.2 | Autres:0.23 | Ti:24.7°C | Ext:24.7°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
 [2] en [WIFI] | 05/06 17:00 | Hyg:1.08 | Cuis:0.85 | Froid:0.72 | Chauff:0.11 | Avg 4:6.5 | Multi:0.92 | Lum:0.21 | Autres:0.24 | Ti:24.8°C | Ext:25.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 05/06 17:15 | Hyg:1.08 | Cuis:0.91 | Froid:0.75 | Chauff:0.11 | Avg 4:6.4 | Multi:0.92 | Lum:0.21 | Autres:0.24 | Ti:24.8°C | Ext:24.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
