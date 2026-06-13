@@ -1,0 +1,50 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ COMMAND LINE : ADRESSE IP EXTERNE                                        │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensor command_line qui interroge un service externe pour récupérer
+# l'adresse IP publique du réseau (WAN IP).
+# Utile pour détecter un changement d'IP (FAI redémarre la box, etc.)
+# et pour afficher l'IP courante dans le dashboard.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Appel curl vers https://api.ipify.org (retourne l'IP en texte brut)
+# - Fallback : https://ifconfig.me/ip si ipify ne répond pas
+# - Scan toutes les 30 min (l'IP change rarement, évite le flood)
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL          | CAPTEUR BRUT (source)        | CE FICHIER (unique_id) | AVAL           |
+# |:------------------|:-----------------------------|:-----------------------|:---------------|
+# | Internet (WAN)    | api.ipify.org → stdout       | ip_externe_wan         | L4C2 Mini PC   |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - bash -lc requis pour accès PATH complet (curl accessible)
+# - Si Tailscale ou Cloudflared est actif, l'IP retournée est bien l'IP WAN FAI
+#   (curl sort par l'interface physique, pas le tunnel)
+# - En cas d'indisponibilité des deux services → retourne "unavailable"
+# - scan_interval en secondes : 1800 = 30 minutes
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L4C2 Mini PC (NUC) — section réseau
+
+# --- ip_externe_wan ---
+- sensor:
+    name: "IP Externe WAN"
+    unique_id: ip_externe_wan
+    command: >-
+      bash -lc '
+        IP=$(curl -sf --max-time 5 https://api.ipify.org 2>/dev/null);
+        if [[ -z "$IP" ]]; then
+          IP=$(curl -sf --max-time 5 https://ifconfig.me/ip 2>/dev/null);
+        fi;
+        echo "${IP:-unavailable}"
+      '
+    scan_interval: 1800
+    value_template: '{{ value | trim }}'
+
+# annotations_log:
+# [2026-06-13] Création — sensor IP publique WAN
+#              curl ipify.org + fallback ifconfig.me + timeout 5s
+#              scan_interval 1800s (30 min)
