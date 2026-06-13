@@ -51,6 +51,9 @@ homeassistant:
   allowlist_external_dirs:
     - "/config"          # Requis pour l'intégration File (notify → fichier)
 
+  packages:
+    cssmeteo: !include packages/cssmeteo.yaml
+
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ LOGGER — FILTRES BRUIT CONNU                                             │
 # ╰──────────────────────────────────────────────────────────────────────────╯
@@ -247,6 +250,7 @@ http:
   ip_ban_enabled: true         # Protège l'accès à HA
   login_attempts_threshold: 3  # Seuil de tentatives avant bannissement
 
+
 # annotations_log:
 # - [2026-05-10] Ajout section logger: filtres rpi_power (critical) + linky-card import_statistics.
 # - [L95]   camera: !include camera.yaml → commenté (obsolète, causait une erreur au démarrage).
@@ -270,4 +274,3 @@ http:
 #      - name: RPI Cooling Fan                                                 # "[modif] supprimé"
 #        unique_id: rpi_cooling_fan                                            # "[modif] supprimé"
 #        pin: 14                                                               # "[modif] supprimé"
-
