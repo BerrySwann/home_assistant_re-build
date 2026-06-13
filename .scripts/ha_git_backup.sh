@@ -45,6 +45,9 @@ LOG="$LOG_DIR/ha_git_backup.log"
 mkdir -p "$LOG_DIR"
 cd /config
 
+# "[L-checkout] force branche main — évite push en detached HEAD"
+git checkout main 2>/dev/null || true
+
 # Trap global : log toute erreur non gérée avec numéro de ligne
 # "[L-trap] catch erreurs inattendues"
 trap 'echo "$(date "+%Y-%m-%d %H:%M:%S %Z") ❌ Erreur inattendue ligne $LINENO — script interrompu" >> "$LOG"' ERR
@@ -128,7 +131,7 @@ do_push() {
     PUSH_OUT=$(git push origin "$BRANCH" 2>&1)
     PUSH_RC=$?
     if [[ $PUSH_RC -ne 0 ]]; then
-      echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ❌ Push impossible après rebase : $PUSH_OUT" >> "$LOG"
+      echo "$(date '+%Y-%m-%d %H:%M:%S %Z") ❌ Push impossible après rebase : $PUSH_OUT" >> "$LOG"
       return 1
     fi
     echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Push OK après rebase automatique" >> "$LOG"
@@ -177,6 +180,7 @@ if [[ -f "$TOKEN_FILE" ]]; then
 fi
 
 # annotations_log:
+# [2026-06-13] Ajout git checkout main après cd /config — évite push en detached HEAD
 # [2026-02-28] L8  user.name  : "Eric Rodi (HAOS)"               → "BerrySwann (HAOS)"
 # [2026-02-28] L9  user.email : "erodi@users.noreply.github.com" → "BerrySwann@users.noreply.github.com"
 # [2026-02-28] SSH supprimé  : re-build HTTPS uniquement (token dans URL remote)
