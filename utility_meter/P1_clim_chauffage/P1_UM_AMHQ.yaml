@@ -9,6 +9,7 @@
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Sources : firmware direct NOUS (Z2M) — sensor.*_nous_energy (kWh natif)
+# - Exception cuisine : Riemann — sensor.radiateur_elec_cuisine_energie_totale_kwh
 # - Remise à zéro : Quotidien = minuit / Hebdo = lundi / Mensuel = 1er / Annuel = 1er jan
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
@@ -16,15 +17,17 @@
 # | MATÉRIEL             | CAPTEUR BRUT (source)                                    | CE FICHIER (unique_id)              | AVAL                                |
 # |:---------------------|:---------------------------------------------------------|:------------------------------------|:------------------------------------|
 # | NOUS plug (Z2M)      | sensor.clim_salon_nous_energy                            | clim_salon_*_um                     | P1_AVG.yaml / P1_TOTAL_AMHQ → L2C2 |
-# | NOUS plug (Z2M)      | sensor.radiateur_elec_cuisine_energy                     | radiateur_elec_cuisine_*_um         | P1_AVG.yaml / P1_TOTAL_AMHQ → L2C2 |
+# | Shelly 1PM Gen4 [calculé] | sensor.radiateur_elec_cuisine_energie_totale_kwh    | radiateur_elec_cuisine_*_um         | P1_AVG.yaml / P1_TOTAL_AMHQ → L2C2 |
 # | NOUS plug (Z2M)      | sensor.clim_bureau_nous_energy                           | clim_bureau_*_um                    | P1_AVG.yaml / P1_TOTAL_AMHQ → L2C2 |
 # | NOUS plug (Z2M)      | sensor.prise_soufflant_salle_de_bain_nous_energy         | soufflant_sdb_*_um                  | P1_AVG.yaml / P1_TOTAL_AMHQ → L2C2 |
 # | NOUS plug (Z2M)      | sensor.prise_seche_serviette_salle_de_bain_nous_energy   | seche_serviette_sdb_*_um            | P1_AVG.yaml / P1_TOTAL_AMHQ → L2C2 |
 # | NOUS plug (Z2M)      | sensor.clim_chambre_nous_energy                          | clim_chambre_*_um                   | P1_AVG.yaml / P1_TOTAL_AMHQ → L2C2 |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Sources firmware direct (kWh natif NOUS Z2M) — Riemann supprimé.
-# - P1_kWh_clim_chauffage.yaml (Riemann) désormais OBSOLÈTE pour ces UM.
+# - Sources firmware direct (kWh natif NOUS Z2M) pour clims, soufflant, sèche-serviette.
+# - EXCEPTION cuisine : Shelly 1PM Gen4 bug firmware (UNREPORTABLE_ATTRIBUTE kWh natif Z2M)
+#   → source via Riemann dans P1_kWh_clim_chauffage.yaml.
+#   Dès que fix firmware Shelly disponible (20250819-150402/ga0def2d) → restaurer source directe.
 # - Suffixe _um (sans _kwh_) : convention uniforme depuis refactoring 2026-04-25.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
@@ -67,29 +70,53 @@ clim_salon_quotidien_um:
 # └───────────────────────────────────┘
 
 # --- radiateur_elec_cuisine_annuel_um ---
+# <- en attente de maj z2m (fix firmware Shelly 1PM Gen4)
+# radiateur_elec_cuisine_annuel_um:
+#   source: sensor.radiateur_elec_cuisine_energy
+#   name: "Radiateur Elec Cuisine Annuel UM"
+#   unique_id: radiateur_elec_cuisine_annuel_um
+#   cycle: yearly
 radiateur_elec_cuisine_annuel_um:
-  source: sensor.radiateur_elec_cuisine_energy
+  source: sensor.radiateur_elec_cuisine_energie_totale_kwh # <- en attente de maj z2m (fix firmware Shelly 1PM Gen4)
   name: "Radiateur Elec Cuisine Annuel UM"
   unique_id: radiateur_elec_cuisine_annuel_um
   cycle: yearly
 
 # --- radiateur_elec_cuisine_mensuel_um ---
+# <- en attente de maj z2m (fix firmware Shelly 1PM Gen4)
+# radiateur_elec_cuisine_mensuel_um:
+#   source: sensor.radiateur_elec_cuisine_energy
+#   name: "Radiateur Elec Cuisine Mensuel UM"
+#   unique_id: radiateur_elec_cuisine_mensuel_um
+#   cycle: monthly
 radiateur_elec_cuisine_mensuel_um:
-  source: sensor.radiateur_elec_cuisine_energy
+  source: sensor.radiateur_elec_cuisine_energie_totale_kwh # <- en attente de maj z2m (fix firmware Shelly 1PM Gen4)
   name: "Radiateur Elec Cuisine Mensuel UM"
   unique_id: radiateur_elec_cuisine_mensuel_um
   cycle: monthly
 
 # --- radiateur_elec_cuisine_hebdomadaire_um ---
+# <- en attente de maj z2m (fix firmware Shelly 1PM Gen4)
+# radiateur_elec_cuisine_hebdomadaire_um:
+#   source: sensor.radiateur_elec_cuisine_energy
+#   name: "Radiateur Elec Cuisine Hebdomadaire UM"
+#   unique_id: radiateur_elec_cuisine_hebdomadaire_um
+#   cycle: weekly
 radiateur_elec_cuisine_hebdomadaire_um:
-  source: sensor.radiateur_elec_cuisine_energy
+  source: sensor.radiateur_elec_cuisine_energie_totale_kwh # <- en attente de maj z2m (fix firmware Shelly 1PM Gen4)
   name: "Radiateur Elec Cuisine Hebdomadaire UM"
   unique_id: radiateur_elec_cuisine_hebdomadaire_um
   cycle: weekly
 
 # --- radiateur_elec_cuisine_quotidien_um ---
+# <- en attente de maj z2m (fix firmware Shelly 1PM Gen4)
+# radiateur_elec_cuisine_quotidien_um:
+#   source: sensor.radiateur_elec_cuisine_energy
+#   name: "Radiateur Elec Cuisine Quotidien UM"
+#   unique_id: radiateur_elec_cuisine_quotidien_um
+#   cycle: daily
 radiateur_elec_cuisine_quotidien_um:
-  source: sensor.radiateur_elec_cuisine_energy
+  source: sensor.radiateur_elec_cuisine_energie_totale_kwh # <- en attente de maj z2m (fix firmware Shelly 1PM Gen4)
   name: "Radiateur Elec Cuisine Quotidien UM"
   unique_id: radiateur_elec_cuisine_quotidien_um
   cycle: daily
@@ -188,40 +215,4 @@ seche_serviette_sdb_quotidien_um:
 
 # ┌───────────────────────────────────┐
 # │ 9. CHAMBRE                        │
-# └───────────────────────────────────┘
-
-# --- clim_chambre_annuel_um ---
-clim_chambre_annuel_um:
-  source: sensor.clim_chambre_nous_energy
-  name: "Clim Chambre Annuel UM"
-  unique_id: clim_chambre_annuel_um
-  cycle: yearly
-
-# --- clim_chambre_mensuel_um ---
-clim_chambre_mensuel_um:
-  source: sensor.clim_chambre_nous_energy
-  name: "Clim Chambre Mensuel UM"
-  unique_id: clim_chambre_mensuel_um
-  cycle: monthly
-
-# --- clim_chambre_hebdomadaire_um ---
-clim_chambre_hebdomadaire_um:
-  source: sensor.clim_chambre_nous_energy
-  name: "Clim Chambre Hebdomadaire UM"
-  unique_id: clim_chambre_hebdomadaire_um
-  cycle: weekly
-
-# --- clim_chambre_quotidien_um ---
-clim_chambre_quotidien_um:
-  source: sensor.clim_chambre_nous_energy
-  name: "Clim Chambre Quotidien UM"
-  unique_id: clim_chambre_quotidien_um
-  cycle: daily
-
-# annotations_log:
-# - [2026-04-25] Migration Riemann → direct : toutes sources *_energie_totale_kwh
-#               remplacées par sensor.*_nous_energy (firmware NOUS Z2M, kWh natif).
-# - [2026-04-25] Naming : _um → _um (convention uniforme — 24 entrées).
-# - [2026-04-25] Ajout name: + unique_id: par entrée (manquants).
-# - [2026-04-25] Ajout slug tertiaire individuel par entrée (était groupé par équipement).
-# - [2026-04-25] En-tête : chaîne de dépendances complète + PIÈGES mis à jour.
+# └────────�
