@@ -9,7 +9,7 @@
 # ## 🧮 CALCUL & SOURCES :
 # - Source : sensor.{slug}_{cycle}_um_kwh_tpl (P3_TPL_AMHQ_1_UNITE — 19 ampoules)
 # - Formule : sum(float(default=0)) sur les 19 _um_kwh_tpl
-# - state_class: total_increasing — requis par device_class: energy (HA refuse measurement).
+# - state_class: total — UM relay pouvant reseter à 0. total_increasing compenserait les resets et accumulerait sur plusieurs cycles.
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
@@ -20,7 +20,7 @@
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Source = _um_kwh_tpl (P3_TPL_AMHQ_1_UNITE), PAS les _um bruts du UM.
 # - 19 ampoules : 1 Entrée, 5 Salon, 1 Cuisine, 1 Couloir, 5 Bureau, 2 SDB, 4 Chambre.
-# - state_class: total_increasing — requis par device_class: energy.
+# - state_class: total — UM relay pouvant reseter à 0 (total_increasing accumulerait les cycles).
 # - Pas d'availability : float(default=0) absorbe les unavailable.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
@@ -32,7 +32,7 @@
       unique_id: eclairage_total_unit_quotidien_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
+      state_class: total                  # "[modif] measurement → total (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl',
@@ -62,7 +62,7 @@
       unique_id: eclairage_total_unit_hebdomadaire_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
+      state_class: total                  # "[modif] measurement → total (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl',
@@ -92,7 +92,7 @@
       unique_id: eclairage_total_unit_mensuel_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
+      state_class: total                  # "[modif] measurement → total (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl',
@@ -122,7 +122,7 @@
       unique_id: eclairage_total_unit_annuel_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
-      state_class: total_increasing   # "[modif] measurement → total_increasing (device_class: energy)"
+      state_class: total                  # "[modif] measurement → total (device_class: energy)"
       state: >
         {% set sensors = [
           'sensor.hue_white_lamp_entree_annuel_um_kwh_tpl',
@@ -146,3 +146,7 @@
           'sensor.hue_color_candle_chambre_eric_annuel_um_kwh_tpl'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
+
+# annotations_log:
+# - [Création] 1 total appart × 4 cycles = 4 sensors _kwh_tpl.
+# - [2026-06-14] state_class: total_increasing → total (relay UM qui reset à chaque cycle — total_increasing accumulerait les kWh entre cycles)
