@@ -88,6 +88,15 @@ if [[ -z "$CHANGED" ]]; then
   if [[ -z "$STATUS_LINES" ]]; then
     if [[ "${1:-}" != "weekly" ]]; then
       echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ℹ️  GitHub deja a jour - rien a committer" >> "$LOG"
+      TOKEN_FILE="/config/.secrets/ha_token"
+      if [[ -f "$TOKEN_FILE" ]]; then
+        TOKEN="$(cat "$TOKEN_FILE")"
+        curl -s -X POST \
+          -H "Authorization: Bearer ${TOKEN}" \
+          -H "Content-Type: application/json" \
+          -d '{"title":"Backup GitHub","message":"GitHub deja a jour - rien a committer"}' \
+          http://supervisor/core/api/services/persistent_notification/create >/dev/null 2>/dev/null || true
+      fi
       exit 0
     fi
   fi
@@ -115,6 +124,15 @@ elif [[ "${1:-}" != "weekly" ]]; then
     echo "$(date '+%Y-%m-%d %H:%M:%S %Z') 📤 Commit local non pushé ($AHEAD) — push en cours..." >> "$LOG"
   else
     echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ℹ️  GitHub deja a jour - rien a committer" >> "$LOG"
+    TOKEN_FILE="/config/.secrets/ha_token"
+    if [[ -f "$TOKEN_FILE" ]]; then
+      TOKEN="$(cat "$TOKEN_FILE")"
+      curl -s -X POST \
+        -H "Authorization: Bearer ${TOKEN}" \
+        -H "Content-Type: application/json" \
+        -d '{"title":"Backup GitHub","message":"GitHub deja a jour - rien a committer"}' \
+        http://supervisor/core/api/services/persistent_notification/create >/dev/null 2>/dev/null || true
+    fi
     exit 0
   fi
 else
