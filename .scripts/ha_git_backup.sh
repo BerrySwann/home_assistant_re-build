@@ -97,6 +97,7 @@ if [[ -z "$CHANGED" ]]; then
           -d '{"title":"Backup GitHub","message":"GitHub deja a jour - rien a committer"}' \
           http://supervisor/core/api/services/persistent_notification/create >/dev/null 2>/dev/null || true
       fi
+      echo "$(date '+%Y-%m-%d %H:%M:%S %Z') 🔍 DEBUG rien-1 atteint" >> "$LOG"
       exit 0
     fi
   fi
