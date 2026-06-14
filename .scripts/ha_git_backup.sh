@@ -46,7 +46,9 @@ mkdir -p "$LOG_DIR"
 cd /config
 
 # "[L-checkout] force branche main — évite push en detached HEAD"
-git checkout main >/dev/null 2>&1 || true
+# Nettoyage rebase-merge orphelin (laissé par un rebase échoué)
+[ -d /config/.git/rebase-merge ] && { git rebase --abort 2>/dev/null || rm -fr /config/.git/rebase-merge 2>/dev/null; } || true
+git checkout main 2>/dev/null || git switch main 2>/dev/null || true
 
 # Trap global : log toute erreur non gérée avec numéro de ligne
 # "[L-trap] catch erreurs inattendues"
@@ -67,8 +69,10 @@ if git ls-files --error-unmatch secrets.yaml >/dev/null 2>&1; then
 fi
 
 BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo main)"
+# Guard détached HEAD
+[[ "$BRANCH" == "HEAD" ]] && { git switch main 2>/dev/null || true; BRANCH="main"; }
 if ! git rev-parse --abbrev-ref --symbolic-full-name "@{u}" >/dev/null 2>&1; then
-  git branch -u "origin/${BRANCH}" || true
+  git branch -u "origin/${BRANCH}" 2>/dev/null || true
 fi
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
@@ -129,8 +133,23 @@ do_push() {
     REBASE_RC=$?
     echo "$REBASE_OUT" >> "$LOG"
     if [[ $REBASE_RC -ne 0 ]]; then
-      echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ❌ Rebase échoué — intervention manuelle requise" >> "$LOG"
-      return 1
+      if echo "$REBASE_OUT" | grep -q "CONFLICT"; then
+        # Résolution auto : garder version locale (ours)
+        git checkout --ours . 2>/dev/null || true
+        git add -A 2>/dev/null || true
+        GIT_EDITOR=true git rebase --continue 2>/dev/null
+        CONT_RC=$?
+        if [[ $CONT_RC -ne 0 ]]; then
+          git rebase --abort 2>/dev/null || rm -fr /config/.git/rebase-merge 2>/dev/null || true
+          echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ❌ Rebase échoué après résolution auto" >> "$LOG"
+          return 1
+        fi
+        echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Conflit résolu (ours) — rebase continué" >> "$LOG"
+      else
+        git rebase --abort 2>/dev/null || rm -fr /config/.git/rebase-merge 2>/dev/null || true
+        echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ❌ Rebase échoué — abort" >> "$LOG"
+        return 1
+      fi
     fi
     # Retry push après rebase
     PUSH_OUT=$(git push origin "$BRANCH" 2>&1)
