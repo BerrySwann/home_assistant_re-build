@@ -613,7 +613,7 @@
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_salle_de_bain_avg_watts_quotidien ---
-    - name: "Lampe Salle De Bain Hue Avg Watts Quotidien"
+    - name: "Hue White Lamp Salle De Bain Avg Watts Quotidien"
       unique_id: hue_white_lamp_salle_de_bain_avg_watts_quotidien
       unit_of_measurement: "W"
       device_class: power
@@ -623,7 +623,7 @@
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_salle_de_bain_avg_watts_hebdomadaire ---
-    - name: "Lampe Salle De Bain Hue Avg Watts Hebdomadaire"
+    - name: "Hue White Lamp Salle De Bain Avg Watts Hebdomadaire"
       unique_id: hue_white_lamp_salle_de_bain_avg_watts_hebdomadaire
       unit_of_measurement: "W"
       device_class: power
@@ -633,7 +633,7 @@
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_salle_de_bain_avg_watts_mensuel ---
-    - name: "Lampe Salle De Bain Hue Avg Watts Mensuel"
+    - name: "Hue White Lamp Salle De Bain Avg Watts Mensuel"
       unique_id: hue_white_lamp_salle_de_bain_avg_watts_mensuel
       unit_of_measurement: "W"
       device_class: power
@@ -643,7 +643,7 @@
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_salle_de_bain_avg_watts_annuel ---
-    - name: "Lampe Salle De Bain Hue Avg Watts Annuel"
+    - name: "Hue White Lamp Salle De Bain Avg Watts Annuel"
       unique_id: hue_white_lamp_salle_de_bain_avg_watts_annuel
       unit_of_measurement: "W"
       device_class: power
