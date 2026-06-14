@@ -48,14 +48,15 @@ cd /config
 # Fonction notification HA (réutilisable)
 send_notif() {
   local title="$1" msg="$2"
-  TOKEN_FILE="/config/.secrets/ha_token"
+  local TOKEN_FILE="/config/.secrets/ha_token"
   [[ -f "$TOKEN_FILE" ]] || return 0
+  local TOKEN
   TOKEN="$(cat "$TOKEN_FILE")"
   curl -s -X POST \
     -H "Authorization: Bearer ${TOKEN}" \
     -H "Content-Type: application/json" \
-    -d "{"title":"${title}","message":"${msg}"}" \
-    http://supervisor/core/api/services/persistent_notification/create >/dev/null || true
+    -d '{"title":"'"${title}"'","message":"'"${msg}"'","notification_id":"ha_git_backup"}' \
+    http://supervisor/core/api/services/persistent_notification/create >/dev/null 2>/dev/null || true
 }
 
 # "[L-checkout] force branche main — évite push en detached HEAD"
