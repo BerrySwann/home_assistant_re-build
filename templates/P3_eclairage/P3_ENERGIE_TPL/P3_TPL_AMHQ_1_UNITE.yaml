@@ -740,6 +740,6 @@
 # annotations_log:
 # - [Création] 19 ampoules × 4 cycles = 76 sensors _um_kwh_tpl.
 # - [Nomenclature] {slug}_{cycle}_um_kwh_tpl — chaîne lisible dans l'ID.
-# - [state_class] measurement — UM remet à 0 à chaque cycle.
+# - [state_class] total_increasing — requis par device_class: energy (HA 2022.11+). UM remet à 0 à chaque cycle → HA détecte le reset et continue l'accumulation.
 # - [availability] guard unavailable/unknown sur chaque UM source.
 # - [Slugs] Alignés sur CLAUDE.md — table (sans _salon), bureau_1/2 (sans lampe_bureau_X_hue).
