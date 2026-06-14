@@ -103,7 +103,12 @@ git add -A
 if git commit -m "$MSG" 2>/dev/null; then
   echo "$(date '+%Y-%m-%d %H:%M:%S %Z') 📝 Commit créé : $MSG" >> "$LOG"
 elif [[ "${1:-}" != "weekly" ]]; then
-  echo "ℹ️  Rien à committer" >> "$LOG"; exit 0
+  AHEAD="$(git rev-list @{u}..HEAD --count 2>/dev/null || echo 0)"
+  if [[ "$AHEAD" -gt 0 ]]; then
+    echo "$(date '+%Y-%m-%d %H:%M:%S %Z') 📤 Commit local non pushé ($AHEAD) — push en cours..." >> "$LOG"
+  else
+    echo "ℹ️  Rien à committer" >> "$LOG"; exit 0
+  fi
 else
   echo "ℹ️  Rien à committer — tag weekly posé quand même" >> "$LOG"
 fi
