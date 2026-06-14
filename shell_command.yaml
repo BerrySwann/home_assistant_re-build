@@ -35,7 +35,22 @@ git_backup_push_manual: >-
 git_backup_push_weekly: >-
   bash -lc '/config/.scripts/ha_git_backup.sh weekly >> /config/.logs/ha_git_backup.log 2>&1'
 
+# --- audit_yaml ---
+audit_yaml: >-
+  bash -lc '/config/.scripts/audit_yaml.sh >> /config/.logs/audit_yaml.log 2>&1'
+
+# --- audit_atma ---
+audit_atma: >-
+  bash -lc '/config/.scripts/audit_atma.sh >> /config/.logs/audit_atma.log 2>&1'
+
+# --- audit_full ---
+audit_full: >-
+  bash -lc '/config/.scripts/audit_full.sh >> /config/.logs/audit_full.log 2>&1'
+
 # annotations_log:
 # [2026-02-28] git_backup_push        : appel automatique (horaire/daily)
 # [2026-02-28] git_backup_push_manual : passe l'argument "Manuel" → visible dans le journal
 # [2026-02-28] git_backup_push_weekly : passe l'argument weekly → tag ISO
+# [2026-06-14] audit_yaml             : audit MD5 sensors/templates/utility_meter/command_line vs GitHub
+# [2026-06-14] audit_atma             : audit MD5 + alias automations.yaml vs GitHub
+# [2026-06-14] audit_full             : lance audit_yaml + audit_atma en séquence

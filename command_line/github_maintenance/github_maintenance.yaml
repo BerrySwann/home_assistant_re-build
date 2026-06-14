@@ -59,7 +59,7 @@
     name: "Backup GitHub Journal"
     unique_id: backup_github_journal
     command: >-
-      bash -lc 'python3 -c "import json,os; f=\"/config/.logs/ha_git_backup.log\"; lines=open(f).readlines() if os.path.exists(f) else []; k=[l.strip() for l in lines if \"OK:\" in l]; print(json.dumps({\"text\":chr(10).join(k[-10:]) or \"-\"}))" 2>/dev/null || echo "{\"text\":\"-\"}"'
+      bash -lc 'python3 -c "import json,os; f=\"/config/.logs/ha_git_backup.log\"; lines=open(f).readlines() if os.path.exists(f) else []; k=[l.strip() for l in lines if any(x in l for x in [\"OK:\",\"deja a jour\",\"rien a committer\",\"\U0001F4E4\",\"\U0000274C\",\"⚠️\"])]; print(json.dumps({\"text\":chr(10).join(k[-10:]) or \"-\"}))" 2>/dev/null || echo "{\"text\":\"-\"}"'
     scan_interval: 10
     value_template: 'OK'
     json_attributes:
@@ -75,4 +75,4 @@
     value_template: '{{ value | trim }}'
 
 # annotations_log:
-# [2026-06-13] Supprimé doublon backup_github_status (tail -n1 — fragile) — conservé grep OK: (v1)
+# [2026-
