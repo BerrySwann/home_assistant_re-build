@@ -121,48 +121,22 @@ fi
 # │ PUSH — AVEC GESTION FETCH FIRST                                          │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 do_push() {
-  # "[L-push] tente push, gère fetch first automatiquement"
-  local PUSH_OUT PUSH_RC
+  # "[L-push] tente push direct, fallback force-with-lease si divergence"
+  local PUSH_OUT
   PUSH_OUT=$(git push origin "$BRANCH" 2>&1) && return 0
-  PUSH_RC=$?
 
   if echo "$PUSH_OUT" | grep -qE "fetch first|non-fast-forward|rejected"; then
-    echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ⚠️  Push rejeté (fetch first) — git pull --rebase en cours..." >> "$LOG"
-    local REBASE_OUT REBASE_RC
-    REBASE_OUT=$(git pull --rebase origin "$BRANCH" 2>&1)
-    REBASE_RC=$?
-    echo "$REBASE_OUT" >> "$LOG"
-    if [[ $REBASE_RC -ne 0 ]]; then
-      if echo "$REBASE_OUT" | grep -q "CONFLICT"; then
-        # Résolution auto : garder version locale (ours)
-        git checkout --ours . 2>/dev/null || true
-        git add -A 2>/dev/null || true
-        GIT_EDITOR=true git rebase --continue 2>/dev/null
-        CONT_RC=$?
-        if [[ $CONT_RC -ne 0 ]]; then
-          git rebase --abort 2>/dev/null || rm -fr /config/.git/rebase-merge 2>/dev/null || true
-          echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ❌ Rebase échoué après résolution auto" >> "$LOG"
-          return 1
-        fi
-        echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Conflit résolu (ours) — rebase continué" >> "$LOG"
-      else
-        git rebase --abort 2>/dev/null || rm -fr /config/.git/rebase-merge 2>/dev/null || true
-        echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ❌ Rebase échoué — abort" >> "$LOG"
-        return 1
-      fi
+    echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ⚠️  Push rejeté (divergence) — fetch + force-with-lease..." >> "$LOG"
+    git fetch origin "$BRANCH" 2>/dev/null || true
+    PUSH_OUT=$(git push --force-with-lease origin "$BRANCH" 2>&1)
+    if [[ $? -eq 0 ]]; then
+      echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Push OK (force-with-lease)" >> "$LOG"
+      return 0
     fi
-    # Retry push après rebase
-    PUSH_OUT=$(git push origin "$BRANCH" 2>&1)
-    PUSH_RC=$?
-    if [[ $PUSH_RC -ne 0 ]]; then
-      echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ❌ Push impossible après rebase : $PUSH_OUT" >> "$LOG"
-      return 1
-    fi
-    echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Push OK après rebase automatique" >> "$LOG"
-    return 0
+    echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ❌ Push impossible : $PUSH_OUT" >> "$LOG"
+    return 1
   fi
 
-  # Autre erreur
   echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ❌ Push impossible : $PUSH_OUT" >> "$LOG"
   return 1
 }
