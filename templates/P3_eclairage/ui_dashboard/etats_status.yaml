@@ -230,8 +230,8 @@
 # --- lumiere_salle_de_bain_etat ---
     - name: "Lumière Salle de Bain État"
       unique_id: lumiere_salle_de_bain_etat
-      state: "{{ 'Allumé' if is_state('light.lampe_salle_de_bain_hue', 'on') else 'Éteint' }}"
-      icon: "{{ 'mdi:ceiling-light' if is_state('light.lampe_salle_de_bain_hue', 'on') else 'mdi:ceiling-light-outline' }}"
+      state: "{{ 'Allumé' if is_state('light.hue_white_lamp_salle_de_bain', 'on') else 'Éteint' }}"
+      icon: "{{ 'mdi:ceiling-light' if is_state('light.hue_white_lamp_salle_de_bain', 'on') else 'mdi:ceiling-light-outline' }}"
 
 # ┌───────────────────────────────────────────────────────────────────┐
 # │ 9. CHAMBRE                                                        │

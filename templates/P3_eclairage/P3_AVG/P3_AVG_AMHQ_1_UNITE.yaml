@@ -612,43 +612,43 @@
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
-    # --- lampe_salle_de_bain_hue_avg_watts_quotidien ---
+    # --- hue_white_lamp_salle_de_bain_avg_watts_quotidien ---
     - name: "Lampe Salle De Bain Hue Avg Watts Quotidien"
-      unique_id: lampe_salle_de_bain_hue_avg_watts_quotidien
+      unique_id: hue_white_lamp_salle_de_bain_avg_watts_quotidien
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.lampe_salle_de_bain_hue_quotidien_um_kwh_tpl') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_salle_de_bain_quotidien_um_kwh_tpl') | float(0) %}
         {% set h = now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
-    # --- lampe_salle_de_bain_hue_avg_watts_hebdomadaire ---
+    # --- hue_white_lamp_salle_de_bain_avg_watts_hebdomadaire ---
     - name: "Lampe Salle De Bain Hue Avg Watts Hebdomadaire"
-      unique_id: lampe_salle_de_bain_hue_avg_watts_hebdomadaire
+      unique_id: hue_white_lamp_salle_de_bain_avg_watts_hebdomadaire
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.lampe_salle_de_bain_hue_hebdomadaire_um_kwh_tpl') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_salle_de_bain_hebdomadaire_um_kwh_tpl') | float(0) %}
         {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
-    # --- lampe_salle_de_bain_hue_avg_watts_mensuel ---
+    # --- hue_white_lamp_salle_de_bain_avg_watts_mensuel ---
     - name: "Lampe Salle De Bain Hue Avg Watts Mensuel"
-      unique_id: lampe_salle_de_bain_hue_avg_watts_mensuel
+      unique_id: hue_white_lamp_salle_de_bain_avg_watts_mensuel
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.lampe_salle_de_bain_hue_mensuel_um_kwh_tpl') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_salle_de_bain_mensuel_um_kwh_tpl') | float(0) %}
         {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
-    # --- lampe_salle_de_bain_hue_avg_watts_annuel ---
+    # --- hue_white_lamp_salle_de_bain_avg_watts_annuel ---
     - name: "Lampe Salle De Bain Hue Avg Watts Annuel"
-      unique_id: lampe_salle_de_bain_hue_avg_watts_annuel
+      unique_id: hue_white_lamp_salle_de_bain_avg_watts_annuel
       unit_of_measurement: "W"
       device_class: power
       state: >
-        {% set conso = states('sensor.lampe_salle_de_bain_hue_annuel_um_kwh_tpl') | float(0) %}
+        {% set conso = states('sensor.hue_white_lamp_salle_de_bain_annuel_um_kwh_tpl') | float(0) %}
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 

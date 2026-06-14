@@ -314,7 +314,7 @@
         {% set h = now().hour + (now().minute / 60) %}
         {% set conso =
           states('sensor.relais_lumiere_sdb_sonoff_quotidien_um_kwh_tpl') | float(0) +
-          states('sensor.lampe_salle_de_bain_hue_quotidien_um_kwh_tpl')   | float(0) %}
+          states('sensor.hue_white_lamp_salle_de_bain_quotidien_um_kwh_tpl')   | float(0) %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- eclairage_sdb_2_avg_watts_hebdomadaire ---
@@ -327,7 +327,7 @@
         {% set hh = (now().weekday() * 24) + h %}
         {% set conso =
           states('sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um_kwh_tpl') | float(0) +
-          states('sensor.lampe_salle_de_bain_hue_hebdomadaire_um_kwh_tpl')   | float(0) %}
+          states('sensor.hue_white_lamp_salle_de_bain_hebdomadaire_um_kwh_tpl')   | float(0) %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- eclairage_sdb_2_avg_watts_mensuel ---
@@ -340,7 +340,7 @@
         {% set hm = ((now().day - 1) * 24) + h %}
         {% set conso =
           states('sensor.relais_lumiere_sdb_sonoff_mensuel_um_kwh_tpl') | float(0) +
-          states('sensor.lampe_salle_de_bain_hue_mensuel_um_kwh_tpl')   | float(0) %}
+          states('sensor.hue_white_lamp_salle_de_bain_mensuel_um_kwh_tpl')   | float(0) %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- eclairage_sdb_2_avg_watts_annuel ---
@@ -353,7 +353,7 @@
         {% set ha = ((now().timetuple().tm_yday - 1) * 24) + h %}
         {% set conso =
           states('sensor.relais_lumiere_sdb_sonoff_annuel_um_kwh_tpl') | float(0) +
-          states('sensor.lampe_salle_de_bain_hue_annuel_um_kwh_tpl')   | float(0) %}
+          states('sensor.hue_white_lamp_salle_de_bain_annuel_um_kwh_tpl')   | float(0) %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # ┌───────────────────────────────────┐

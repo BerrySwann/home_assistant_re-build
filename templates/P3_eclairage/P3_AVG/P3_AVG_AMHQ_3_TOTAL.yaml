@@ -54,7 +54,7 @@
           states('sensor.hue_white_lamp_bureau_1_quotidien_um_kwh_tpl')         | float(0) +
           states('sensor.hue_white_lamp_bureau_2_quotidien_um_kwh_tpl')         | float(0) +
           states('sensor.relais_lumiere_sdb_sonoff_quotidien_um_kwh_tpl')       | float(0) +
-          states('sensor.lampe_salle_de_bain_hue_quotidien_um_kwh_tpl')         | float(0) +
+          states('sensor.hue_white_lamp_salle_de_bain_quotidien_um_kwh_tpl')         | float(0) +
           states('sensor.hue_white_lamp_chambre_1_quotidien_um_kwh_tpl')        | float(0) +
           states('sensor.hue_white_lamp_chambre_2_quotidien_um_kwh_tpl')        | float(0) +
           states('sensor.hue_color_candle_chambre_gege_quotidien_um_kwh_tpl')   | float(0) +
@@ -84,7 +84,7 @@
           states('sensor.hue_white_lamp_bureau_1_hebdomadaire_um_kwh_tpl')         | float(0) +
           states('sensor.hue_white_lamp_bureau_2_hebdomadaire_um_kwh_tpl')         | float(0) +
           states('sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um_kwh_tpl')       | float(0) +
-          states('sensor.lampe_salle_de_bain_hue_hebdomadaire_um_kwh_tpl')         | float(0) +
+          states('sensor.hue_white_lamp_salle_de_bain_hebdomadaire_um_kwh_tpl')         | float(0) +
           states('sensor.hue_white_lamp_chambre_1_hebdomadaire_um_kwh_tpl')        | float(0) +
           states('sensor.hue_white_lamp_chambre_2_hebdomadaire_um_kwh_tpl')        | float(0) +
           states('sensor.hue_color_candle_chambre_gege_hebdomadaire_um_kwh_tpl')   | float(0) +
@@ -114,7 +114,7 @@
           states('sensor.hue_white_lamp_bureau_1_mensuel_um_kwh_tpl')         | float(0) +
           states('sensor.hue_white_lamp_bureau_2_mensuel_um_kwh_tpl')         | float(0) +
           states('sensor.relais_lumiere_sdb_sonoff_mensuel_um_kwh_tpl')       | float(0) +
-          states('sensor.lampe_salle_de_bain_hue_mensuel_um_kwh_tpl')         | float(0) +
+          states('sensor.hue_white_lamp_salle_de_bain_mensuel_um_kwh_tpl')         | float(0) +
           states('sensor.hue_white_lamp_chambre_1_mensuel_um_kwh_tpl')        | float(0) +
           states('sensor.hue_white_lamp_chambre_2_mensuel_um_kwh_tpl')        | float(0) +
           states('sensor.hue_color_candle_chambre_gege_mensuel_um_kwh_tpl')   | float(0) +
@@ -144,7 +144,7 @@
           states('sensor.hue_white_lamp_bureau_1_annuel_um_kwh_tpl')         | float(0) +
           states('sensor.hue_white_lamp_bureau_2_annuel_um_kwh_tpl')         | float(0) +
           states('sensor.relais_lumiere_sdb_sonoff_annuel_um_kwh_tpl')       | float(0) +
-          states('sensor.lampe_salle_de_bain_hue_annuel_um_kwh_tpl')         | float(0) +
+          states('sensor.hue_white_lamp_salle_de_bain_annuel_um_kwh_tpl')         | float(0) +
           states('sensor.hue_white_lamp_chambre_1_annuel_um_kwh_tpl')        | float(0) +
           states('sensor.hue_white_lamp_chambre_2_annuel_um_kwh_tpl')        | float(0) +
           states('sensor.hue_color_candle_chambre_gege_annuel_um_kwh_tpl')   | float(0) +

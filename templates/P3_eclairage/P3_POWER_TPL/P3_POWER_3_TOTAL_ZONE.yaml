@@ -16,7 +16,7 @@
 #   7. CUISINE : hue_white_lamp_cuisine
 #   8. COULOIR : hue_white_lamp_couloir
 #   9-13 BUREAU: hue_play_1/2/3_pc_bureau, hue_white_lamp_bureau_1/2
-#   14-15 SDB  : relais_lumiere_sdb_sonoff, lampe_salle_de_bain_hue
+#   14-15 SDB  : relais_lumiere_sdb_sonoff, hue_white_lamp_salle_de_bain
 #   16-19 CHAMBRE: hue_white_lamp_chambre_1/2, hue_color_candle_chambre_gege/eric
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
@@ -59,7 +59,7 @@
           'sensor.hue_white_lamp_bureau_1_power',
           'sensor.hue_white_lamp_bureau_2_power',
           'sensor.relais_lumiere_sdb_sonoff_power',
-          'sensor.lampe_salle_de_bain_hue_power',
+          'sensor.hue_white_lamp_salle_de_bain_power',
           'sensor.hue_white_lamp_chambre_1_power',
           'sensor.hue_white_lamp_chambre_2_power',
           'sensor.hue_color_candle_chambre_gege_power',
