@@ -553,41 +553,41 @@
       state: "{{ states('sensor.relais_lumiere_sdb_sonoff_annuel_um') | float(0) }}"
       availability: "{{ states('sensor.relais_lumiere_sdb_sonoff_annuel_um') not in ['unavailable', 'unknown'] }}"
 
-    # --- lampe_salle_de_bain_hue_quotidien_um_kwh_tpl ---
+    # --- hue_white_lamp_salle_de_bain_quotidien_um_kwh_tpl ---
     - name: "Lampe Salle De Bain Hue Quotidien Um Kwh Tpl"
-      unique_id: lampe_salle_de_bain_hue_quotidien_um_kwh_tpl
+      unique_id: hue_white_lamp_salle_de_bain_quotidien_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total                  # "[modif] measurement → total (device_class: energy)"
-      state: "{{ states('sensor.lampe_salle_de_bain_hue_quotidien_um') | float(0) }}"
-      availability: "{{ states('sensor.lampe_salle_de_bain_hue_quotidien_um') not in ['unavailable', 'unknown'] }}"
+      state: "{{ states('sensor.hue_white_lamp_salle_de_bain_quotidien_um') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_salle_de_bain_quotidien_um') not in ['unavailable', 'unknown'] }}"
 
-    # --- lampe_salle_de_bain_hue_hebdomadaire_um_kwh_tpl ---
+    # --- hue_white_lamp_salle_de_bain_hebdomadaire_um_kwh_tpl ---
     - name: "Lampe Salle De Bain Hue Hebdomadaire Um Kwh Tpl"
-      unique_id: lampe_salle_de_bain_hue_hebdomadaire_um_kwh_tpl
+      unique_id: hue_white_lamp_salle_de_bain_hebdomadaire_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total                  # "[modif] measurement → total (device_class: energy)"
-      state: "{{ states('sensor.lampe_salle_de_bain_hue_hebdomadaire_um') | float(0) }}"
-      availability: "{{ states('sensor.lampe_salle_de_bain_hue_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
+      state: "{{ states('sensor.hue_white_lamp_salle_de_bain_hebdomadaire_um') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_salle_de_bain_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
 
-    # --- lampe_salle_de_bain_hue_mensuel_um_kwh_tpl ---
+    # --- hue_white_lamp_salle_de_bain_mensuel_um_kwh_tpl ---
     - name: "Lampe Salle De Bain Hue Mensuel Um Kwh Tpl"
-      unique_id: lampe_salle_de_bain_hue_mensuel_um_kwh_tpl
+      unique_id: hue_white_lamp_salle_de_bain_mensuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total                  # "[modif] measurement → total (device_class: energy)"
-      state: "{{ states('sensor.lampe_salle_de_bain_hue_mensuel_um') | float(0) }}"
-      availability: "{{ states('sensor.lampe_salle_de_bain_hue_mensuel_um') not in ['unavailable', 'unknown'] }}"
+      state: "{{ states('sensor.hue_white_lamp_salle_de_bain_mensuel_um') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_salle_de_bain_mensuel_um') not in ['unavailable', 'unknown'] }}"
 
-    # --- lampe_salle_de_bain_hue_annuel_um_kwh_tpl ---
+    # --- hue_white_lamp_salle_de_bain_annuel_um_kwh_tpl ---
     - name: "Lampe Salle De Bain Hue Annuel Um Kwh Tpl"
-      unique_id: lampe_salle_de_bain_hue_annuel_um_kwh_tpl
+      unique_id: hue_white_lamp_salle_de_bain_annuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total                  # "[modif] measurement → total (device_class: energy)"
-      state: "{{ states('sensor.lampe_salle_de_bain_hue_annuel_um') | float(0) }}"
-      availability: "{{ states('sensor.lampe_salle_de_bain_hue_annuel_um') not in ['unavailable', 'unknown'] }}"
+      state: "{{ states('sensor.hue_white_lamp_salle_de_bain_annuel_um') | float(0) }}"
+      availability: "{{ states('sensor.hue_white_lamp_salle_de_bain_annuel_um') not in ['unavailable', 'unknown'] }}"
 
     # ┌───────────────────────────────────┐
     # │         9. CHAMBRE (4x)           │
@@ -742,4 +742,4 @@
 # - [Nomenclature] {slug}_{cycle}_um_kwh_tpl — chaîne lisible dans l'ID.
 # - [state_class] total — relay d'un UM qui reset à chaque cycle. total_increasing accumulerait les kWh entre cycles et casserait l'affichage historique.
 # - [availability] guard unavailable/unknown sur chaque UM source.
-# - [2026-06-14] state_class: total_increasing → total (relay UM qui reset à chaque cycle — total_increasing accumulerait les kWh entre cycles)
+# - [2026-06-14] state_class: total_increasing → total (relay UM qui reset à chaque cycle — tot

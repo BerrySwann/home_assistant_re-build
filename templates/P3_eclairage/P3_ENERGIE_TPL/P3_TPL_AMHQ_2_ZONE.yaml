@@ -306,7 +306,7 @@
       state: >
         {% set sensors = [
           'sensor.relais_lumiere_sdb_sonoff_quotidien_um_kwh_tpl',
-          'sensor.lampe_salle_de_bain_hue_quotidien_um_kwh_tpl'
+          'sensor.hue_white_lamp_salle_de_bain_quotidien_um_kwh_tpl'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
@@ -319,7 +319,7 @@
       state: >
         {% set sensors = [
           'sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um_kwh_tpl',
-          'sensor.lampe_salle_de_bain_hue_hebdomadaire_um_kwh_tpl'
+          'sensor.hue_white_lamp_salle_de_bain_hebdomadaire_um_kwh_tpl'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
@@ -332,7 +332,7 @@
       state: >
         {% set sensors = [
           'sensor.relais_lumiere_sdb_sonoff_mensuel_um_kwh_tpl',
-          'sensor.lampe_salle_de_bain_hue_mensuel_um_kwh_tpl'
+          'sensor.hue_white_lamp_salle_de_bain_mensuel_um_kwh_tpl'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
@@ -345,7 +345,7 @@
       state: >
         {% set sensors = [
           'sensor.relais_lumiere_sdb_sonoff_annuel_um_kwh_tpl',
-          'sensor.lampe_salle_de_bain_hue_annuel_um_kwh_tpl'
+          'sensor.hue_white_lamp_salle_de_bain_annuel_um_kwh_tpl'
         ] %}
         {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
