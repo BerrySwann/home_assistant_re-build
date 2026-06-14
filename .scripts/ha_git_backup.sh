@@ -97,7 +97,6 @@ if [[ -z "$CHANGED" ]]; then
           -d '{"title":"Backup GitHub","message":"GitHub deja a jour - rien a committer"}' \
           http://supervisor/core/api/services/persistent_notification/create >/dev/null 2>/dev/null || true
       fi
-      echo "$(date '+%Y-%m-%d %H:%M:%S %Z') 🔍 DEBUG rien-1 atteint" >> "$LOG"
       exit 0
     fi
   fi
@@ -133,7 +132,6 @@ elif [[ "${1:-}" != "weekly" ]]; then
         -H "Content-Type: application/json" \
         -d '{"title":"Backup GitHub","message":"GitHub deja a jour - rien a committer"}' \
         http://supervisor/core/api/services/persistent_notification/create >/dev/null 2>/dev/null || true
-    echo "$(date '+%Y-%m-%d %H:%M:%S %Z') 🔍 DEBUG curl rien-2 token=$([ -f /config/.secrets/ha_token ] && echo OK || echo ABSENT)" >> "$LOG"
     fi
     exit 0
   fi
