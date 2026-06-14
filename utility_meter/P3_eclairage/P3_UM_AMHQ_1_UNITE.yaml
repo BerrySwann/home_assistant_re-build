@@ -32,7 +32,7 @@
 # | Hue Bridge (Z2M)  | sensor.hue_white_lamp_bureau_1_energy     | hue_white_lamp_bureau_1_*_um                       | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
 # | Hue Bridge (Z2M)  | sensor.hue_white_lamp_bureau_2_energy     | hue_white_lamp_bureau_2_*_um                       | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
 # | Sonoff (Z2M)      | sensor.relais_lumiere_sdb_sonoff_energy   | relais_lumiere_sdb_sonoff_*_um                     | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
-# | Hue Bridge (Z2M)  | sensor.lampe_salle_de_bain_hue_energy     | lampe_salle_de_bain_hue_*_um                       | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
+# | Hue Bridge (Z2M)  | sensor.hue_white_lamp_salle_de_bain_energy     | hue_white_lamp_salle_de_bain_*_um                       | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
 # | Hue Bridge (Z2M)  | sensor.hue_white_lamp_chambre_1_energy    | hue_white_lamp_chambre_1_*_um                      | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
 # | Hue Bridge (Z2M)  | sensor.hue_white_lamp_chambre_2_energy    | hue_white_lamp_chambre_2_*_um                      | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
 # | PowerCalc         | sensor.hue_color_candle_chambre_gege_energy| hue_color_candle_chambre_gege_*_um                | P3_AVG_AMHQ_1_UNITE.yaml → L2C3|
@@ -462,32 +462,32 @@ relais_lumiere_sdb_sonoff_quotidien_um:
   unique_id: relais_lumiere_sdb_sonoff_quotidien_um
   cycle: daily
 
-# --- lampe_salle_de_bain_hue_annuel_um ---
-lampe_salle_de_bain_hue_annuel_um:
-  source: sensor.lampe_salle_de_bain_hue_energy
+# --- hue_white_lamp_salle_de_bain_annuel_um ---
+hue_white_lamp_salle_de_bain_annuel_um:
+  source: sensor.hue_white_lamp_salle_de_bain_energy
   name: "Lampe Salle De Bain Hue Annuel UM"
-  unique_id: lampe_salle_de_bain_hue_annuel_um
+  unique_id: hue_white_lamp_salle_de_bain_annuel_um
   cycle: yearly
 
-# --- lampe_salle_de_bain_hue_mensuel_um ---
-lampe_salle_de_bain_hue_mensuel_um:
-  source: sensor.lampe_salle_de_bain_hue_energy
+# --- hue_white_lamp_salle_de_bain_mensuel_um ---
+hue_white_lamp_salle_de_bain_mensuel_um:
+  source: sensor.hue_white_lamp_salle_de_bain_energy
   name: "Lampe Salle De Bain Hue Mensuel UM"
-  unique_id: lampe_salle_de_bain_hue_mensuel_um
+  unique_id: hue_white_lamp_salle_de_bain_mensuel_um
   cycle: monthly
 
-# --- lampe_salle_de_bain_hue_hebdomadaire_um ---
-lampe_salle_de_bain_hue_hebdomadaire_um:
-  source: sensor.lampe_salle_de_bain_hue_energy
+# --- hue_white_lamp_salle_de_bain_hebdomadaire_um ---
+hue_white_lamp_salle_de_bain_hebdomadaire_um:
+  source: sensor.hue_white_lamp_salle_de_bain_energy
   name: "Lampe Salle De Bain Hue Hebdomadaire UM"
-  unique_id: lampe_salle_de_bain_hue_hebdomadaire_um
+  unique_id: hue_white_lamp_salle_de_bain_hebdomadaire_um
   cycle: weekly
 
-# --- lampe_salle_de_bain_hue_quotidien_um ---
-lampe_salle_de_bain_hue_quotidien_um:
-  source: sensor.lampe_salle_de_bain_hue_energy
+# --- hue_white_lamp_salle_de_bain_quotidien_um ---
+hue_white_lamp_salle_de_bain_quotidien_um:
+  source: sensor.hue_white_lamp_salle_de_bain_energy
   name: "Lampe Salle De Bain Hue Quotidien UM"
-  unique_id: lampe_salle_de_bain_hue_quotidien_um
+  unique_id: hue_white_lamp_salle_de_bain_quotidien_um
   cycle: daily
 
 # ┌───────────────────────────────────┐
