@@ -55,7 +55,7 @@ send_notif() {
   HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
     -H "Authorization: Bearer ${TOKEN}" \
     -H "Content-Type: application/json" \
-    -d '{"title":"'"${title}"'","message":"'"${msg}"'","notification_id":"ha_git_backup"}' \
+    -d '{"title":"'"${title}"'","message":"'"${msg}"'"}' \
     http://supervisor/core/api/services/persistent_notification/create 2>/dev/null || echo "FAILED")
   [[ "$HTTP_CODE" == "200" ]] || echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ⚠️ Notif HTTP: $HTTP_CODE" >> "$LOG"
 }
