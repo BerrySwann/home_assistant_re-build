@@ -465,28 +465,28 @@ relais_lumiere_sdb_sonoff_quotidien_um:
 # --- hue_white_lamp_salle_de_bain_annuel_um ---
 hue_white_lamp_salle_de_bain_annuel_um:
   source: sensor.hue_white_lamp_salle_de_bain_energy
-  name: "Lampe Salle De Bain Hue Annuel UM"
+  name: "Hue white lamp Salle de Bain Annuel UM"
   unique_id: hue_white_lamp_salle_de_bain_annuel_um
   cycle: yearly
 
 # --- hue_white_lamp_salle_de_bain_mensuel_um ---
 hue_white_lamp_salle_de_bain_mensuel_um:
   source: sensor.hue_white_lamp_salle_de_bain_energy
-  name: "Lampe Salle De Bain Hue Mensuel UM"
+  name: "Hue white lamp Salle de Bain Mensuel UM"
   unique_id: hue_white_lamp_salle_de_bain_mensuel_um
   cycle: monthly
 
 # --- hue_white_lamp_salle_de_bain_hebdomadaire_um ---
 hue_white_lamp_salle_de_bain_hebdomadaire_um:
   source: sensor.hue_white_lamp_salle_de_bain_energy
-  name: "Lampe Salle De Bain Hue Hebdomadaire UM"
+  name: "Hue white lamp Salle de Bain Hebdomadaire UM"
   unique_id: hue_white_lamp_salle_de_bain_hebdomadaire_um
   cycle: weekly
 
 # --- hue_white_lamp_salle_de_bain_quotidien_um ---
 hue_white_lamp_salle_de_bain_quotidien_um:
   source: sensor.hue_white_lamp_salle_de_bain_energy
-  name: "Lampe Salle De Bain Hue Quotidien UM"
+  name: "Hue white lamp Salle de Bain Quotidien UM"
   unique_id: hue_white_lamp_salle_de_bain_quotidien_um
   cycle: daily
 
