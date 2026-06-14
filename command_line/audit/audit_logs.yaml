@@ -1,56 +1,41 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ COMMAND LINE : LECTURE LOGS AUDIT MD5 (YAML · ATMA · FULL)              │
+# │ COMMAND LINE : LECTURE LOG AUDIT MD5                                     │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# 3 sensors qui lisent les 5 dernières lignes de chaque log d'audit.
-# Alimentent les cartes journal sur la page Système (L5C3).
+# Sensor qui lit les 25 dernières lignes du rapport MD5 le plus récent.
+# Alimente la carte journal audit sur la page Système (L5C3).
 #
 # ## 🧮 CALCUL & SOURCES :
-# Sources : /config/.logs/audit_yaml.log · audit_atma.log · audit_full.log
-# Générés par : shell_command.audit_yaml · audit_atma · audit_full
+# Source : /config/.logs/md5_audit_YYYY-MM-DD.txt
+# Généré par : shell_command.audit_md5 → .scripts/audit_md5.sh
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL     | CAPTEUR BRUT (source)                  | CE FICHIER (unique_id) | AVAL         |
+# |:-------------|:---------------------------------------|:-----------------------|:-------------|
+# | [calculé]    | /config/.logs/md5_audit_YYYY-MM-DD.txt | audit_md5_journal      | L5C3 Système |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - scan_interval: 30 → rafraîchi 30s après l'appel du bouton
-# - Si le log n'existe pas encore → sensor retourne '—'
-# - Format obligatoire : - sensor: (merge_list)
+# - glob prend le fichier le plus récent (tri alphabétique = tri date YYYY-MM-DD)
+# - scan_interval: 30 → rafraîchi ~30s après l'appel du bouton
+# - Si aucun log n'existe encore → retourne '-'
+# - python3 doit être SUR UNE SEULE LIGNE dans le >- YAML (multiligne = erreur parser)
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# L5C3 Système — carte "Journal Audit GitHub"
+# L5C3 Système — carte "Journal Audit MD5"
 
-# --- audit_yaml_journal ---
+# --- audit_md5_journal ---
 - sensor:
-    name: "Audit Yaml Journal"
-    unique_id: audit_yaml_journal
+    name: "Audit MD5 Journal"
+    unique_id: audit_md5_journal
     command: >-
-      bash -lc 'python3 -c "import json,os; f=\"/config/.logs/audit_yaml.log\"; lines=open(f).readlines() if os.path.exists(f) else []; k=[l.strip() for l in lines]; print(json.dumps({\"text\":chr(10).join(k[-5:]) or \"-\"}))" 2>/dev/null || echo "{\"text\":\"-\"}"'
-    scan_interval: 30
-    value_template: 'OK'
-    json_attributes:
-      - text
-
-# --- audit_atma_journal ---
-- sensor:
-    name: "Audit Atma Journal"
-    unique_id: audit_atma_journal
-    command: >-
-      bash -lc 'python3 -c "import json,os; f=\"/config/.logs/audit_atma.log\"; lines=open(f).readlines() if os.path.exists(f) else []; k=[l.strip() for l in lines]; print(json.dumps({\"text\":chr(10).join(k[-5:]) or \"-\"}))" 2>/dev/null || echo "{\"text\":\"-\"}"'
-    scan_interval: 30
-    value_template: 'OK'
-    json_attributes:
-      - text
-
-# --- audit_full_journal ---
-- sensor:
-    name: "Audit Full Journal"
-    unique_id: audit_full_journal
-    command: >-
-      bash -lc 'python3 -c "import json,os; f=\"/config/.logs/audit_full.log\"; lines=open(f).readlines() if os.path.exists(f) else []; k=[l.strip() for l in lines]; print(json.dumps({\"text\":chr(10).join(k[-5:]) or \"-\"}))" 2>/dev/null || echo "{\"text\":\"-\"}"'
+      bash -lc 'python3 -c "import json,os,glob; files=sorted(glob.glob(\"/config/.logs/md5_audit_*.txt\")); f=files[-1] if files else None; lines=open(f).readlines()[-25:] if f else []; k=[l.rstrip() for l in lines]; print(json.dumps({\"text\":chr(10).join(k) or \"—\"}))" 2>/dev/null || echo "{\"text\":\"—\"}"'
     scan_interval: 30
     value_template: 'OK'
     json_attributes:
       - text
 
 # annotations_log:
-# [2026-06-14] Création — 3 sensors lecture 5 dernières lignes logs audit
-# [2026-06-14] Fix format : - sensor: (merge_list) + json_attributes (modèle backup_github_journal)
+# [2026-06-14] Remplacement audit_yaml/atma/full_journal → audit_md5_journal
+# [2026-06-14] FIX : python3 -c SUR UNE SEULE LIGNE (multiligne → erreur YAML col 0)
