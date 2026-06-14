@@ -53,7 +53,7 @@ echo "" >> "$LOG"
 
 # ── PASS 3 : MD5 GITHUB + COMPARAISON ────────────────────────────────────
 echo "── PASS 3 : MD5 GITHUB (git fetch) ─────────────────────────────────────────" >> "$LOG"
-git fetch origin main >/dev/null 2>&1
+git fetch origin >/dev/null 2>&1
 echo "  → fetch OK" >> "$LOG"
 echo "" >> "$LOG"
 
@@ -100,3 +100,5 @@ rm -f "$TMP_TREE" "$TMP_PROD"
 
 # Résumé vers stdout pour le log shell_command
 echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 terminé : $TOTAL fichiers · $OK SYNC · $DIFF_COUNT DIFF · $PUSH_MANQUANT PUSH MANQUANT → $LOG"
+# [2026-06-14] FIX : git fetch origin main → git fetch origin
+# (git fetch origin main ne met pas à jour refs/remotes/origin/main → git show stale)
