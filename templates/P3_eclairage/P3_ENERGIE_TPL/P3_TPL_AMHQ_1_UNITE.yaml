@@ -554,7 +554,7 @@
       availability: "{{ states('sensor.relais_lumiere_sdb_sonoff_annuel_um') not in ['unavailable', 'unknown'] }}"
 
     # --- hue_white_lamp_salle_de_bain_quotidien_um_kwh_tpl ---
-    - name: "Lampe Salle De Bain Hue Quotidien Um Kwh Tpl"
+    - name: "Hue White Lamp Salle De Bain Quotidien Um Kwh Tpl"
       unique_id: hue_white_lamp_salle_de_bain_quotidien_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
@@ -563,7 +563,7 @@
       availability: "{{ states('sensor.hue_white_lamp_salle_de_bain_quotidien_um') not in ['unavailable', 'unknown'] }}"
 
     # --- hue_white_lamp_salle_de_bain_hebdomadaire_um_kwh_tpl ---
-    - name: "Lampe Salle De Bain Hue Hebdomadaire Um Kwh Tpl"
+    - name: "Hue White Lamp Salle De Bain Hebdomadaire Um Kwh Tpl"
       unique_id: hue_white_lamp_salle_de_bain_hebdomadaire_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
@@ -572,7 +572,7 @@
       availability: "{{ states('sensor.hue_white_lamp_salle_de_bain_hebdomadaire_um') not in ['unavailable', 'unknown'] }}"
 
     # --- hue_white_lamp_salle_de_bain_mensuel_um_kwh_tpl ---
-    - name: "Lampe Salle De Bain Hue Mensuel Um Kwh Tpl"
+    - name: "Hue White Lamp Salle De Bain Mensuel Um Kwh Tpl"
       unique_id: hue_white_lamp_salle_de_bain_mensuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
@@ -581,7 +581,7 @@
       availability: "{{ states('sensor.hue_white_lamp_salle_de_bain_mensuel_um') not in ['unavailable', 'unknown'] }}"
 
     # --- hue_white_lamp_salle_de_bain_annuel_um_kwh_tpl ---
-    - name: "Lampe Salle De Bain Hue Annuel Um Kwh Tpl"
+    - name: "Hue White Lamp Salle De Bain Annuel Um Kwh Tpl"
       unique_id: hue_white_lamp_salle_de_bain_annuel_um_kwh_tpl
       unit_of_measurement: "kWh"
       device_class: energy
