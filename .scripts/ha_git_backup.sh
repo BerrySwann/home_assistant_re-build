@@ -45,6 +45,19 @@ LOG="$LOG_DIR/ha_git_backup.log"
 mkdir -p "$LOG_DIR"
 cd /config
 
+# Fonction notification HA (réutilisable)
+send_notif() {
+  local title="$1" msg="$2"
+  TOKEN_FILE="/config/.secrets/ha_token"
+  [[ -f "$TOKEN_FILE" ]] || return 0
+  TOKEN="$(cat "$TOKEN_FILE")"
+  curl -s -X POST \
+    -H "Authorization: Bearer ${TOKEN}" \
+    -H "Content-Type: application/json" \
+    -d "{"title":"${title}","message":"${msg}"}" \
+    http://supervisor/core/api/services/persistent_notification/create >/dev/null || true
+}
+
 # "[L-checkout] force branche main — évite push en detached HEAD"
 # Nettoyage rebase-merge orphelin (laissé par un rebase échoué)
 [ -d /config/.git/rebase-merge ] && { git rebase --abort 2>/dev/null || rm -fr /config/.git/rebase-merge 2>/dev/null; } || true
@@ -85,7 +98,9 @@ if [[ -z "$CHANGED" ]]; then
   STATUS_LINES="$(git status --porcelain || true)"
   if [[ -z "$STATUS_LINES" ]]; then
     if [[ "${1:-}" != "weekly" ]]; then
-      echo "ℹ️  Aucun changement" >> "$LOG"; exit 0
+      echo "ℹ️  Aucun changement" >> "$LOG"
+      send_notif "Backup GitHub" "Rien a committer — GitHub deja a jour."
+      exit 0
     fi
   fi
 fi
@@ -111,7 +126,9 @@ elif [[ "${1:-}" != "weekly" ]]; then
   if [[ "$AHEAD" -gt 0 ]]; then
     echo "$(date '+%Y-%m-%d %H:%M:%S %Z') 📤 Commit local non pushé ($AHEAD) — push en cours..." >> "$LOG"
   else
-    echo "ℹ️  Rien à committer" >> "$LOG"; exit 0
+    echo "ℹ️  Rien à committer" >> "$LOG"
+    send_notif "Backup GitHub" "Rien a committer — GitHub deja a jour."
+    exit 0
   fi
 else
   echo "ℹ️  Rien à committer — tag weekly posé quand même" >> "$LOG"
@@ -167,15 +184,7 @@ fi
 # ╰──────────────────────────────────────────────────────────────────────────╯
 echo "✅ Backup GitHub OK: $MSG" >> "$LOG"
 
-TOKEN_FILE="/config/.secrets/ha_token"
-if [[ -f "$TOKEN_FILE" ]]; then
-  TOKEN="$(cat "$TOKEN_FILE")"
-  curl -s -X POST \
-    -H "Authorization: Bearer ${TOKEN}" \
-    -H "Content-Type: application/json" \
-    -d '{"title":"Backup GitHub","message":"'"$MSG"'"}' \
-    http://supervisor/core/api/services/persistent_notification/create >/dev/null || true
-fi
+send_notif "Backup GitHub" "$MSG"
 
 # annotations_log:
 # [2026-06-13] BUG FIX CRITIQUE — ligne 134 : %Z"') → %Z') — le " était dans la single-quote
