@@ -49,14 +49,15 @@ cd /config
 send_notif() {
   local title="$1" msg="$2"
   local TOKEN_FILE="/config/.secrets/ha_token"
-  [[ -f "$TOKEN_FILE" ]] || return 0
-  local TOKEN
+  [[ -f "$TOKEN_FILE" ]] || { echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ⚠️ Notif: token absent" >> "$LOG"; return 0; }
+  local TOKEN HTTP_CODE
   TOKEN="$(cat "$TOKEN_FILE")"
-  curl -s -X POST \
+  HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
     -H "Authorization: Bearer ${TOKEN}" \
     -H "Content-Type: application/json" \
     -d '{"title":"'"${title}"'","message":"'"${msg}"'","notification_id":"ha_git_backup"}' \
-    http://supervisor/core/api/services/persistent_notification/create >/dev/null 2>/dev/null || true
+    http://supervisor/core/api/services/persistent_notification/create 2>/dev/null || echo "FAILED")
+  [[ "$HTTP_CODE" == "200" ]] || echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ⚠️ Notif HTTP: $HTTP_CODE" >> "$LOG"
 }
 
 # "[L-checkout] force branche main — évite push en detached HEAD"
