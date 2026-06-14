@@ -45,20 +45,6 @@ LOG="$LOG_DIR/ha_git_backup.log"
 mkdir -p "$LOG_DIR"
 cd /config
 
-# Fonction notification HA (réutilisable)
-send_notif() {
-  local title="$1" msg="$2"
-  local TOKEN_FILE="/config/.secrets/ha_token"
-  [[ -f "$TOKEN_FILE" ]] || { echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ⚠️ Notif: token absent" >> "$LOG"; return 0; }
-  local TOKEN HTTP_CODE
-  TOKEN="$(cat "$TOKEN_FILE")"
-  HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
-    -H "Authorization: Bearer ${TOKEN}" \
-    -H "Content-Type: application/json" \
-    -d '{"title":"'"${title}"'","message":"'"${msg}"'"}' \
-    http://supervisor/core/api/services/persistent_notification/create 2>/dev/null || echo "FAILED")
-  [[ "$HTTP_CODE" == "200" ]] || echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ⚠️ Notif HTTP: $HTTP_CODE" >> "$LOG"
-}
 
 # "[L-checkout] force branche main — évite push en detached HEAD"
 # Nettoyage rebase-merge orphelin (laissé par un rebase échoué)
@@ -87,7 +73,7 @@ BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo main)"
 # Guard détached HEAD
 [[ "$BRANCH" == "HEAD" ]] && { git switch main 2>/dev/null || true; BRANCH="main"; }
 if ! git rev-parse --abbrev-ref --symbolic-full-name "@{u}" >/dev/null 2>&1; then
-  git branch -u "origin/${BRANCH}" 2>/dev/null || true
+  git branch -u "origin/${BRANCH}" >/dev/null 2>&1 || true
 fi
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
@@ -100,8 +86,7 @@ if [[ -z "$CHANGED" ]]; then
   STATUS_LINES="$(git status --porcelain || true)"
   if [[ -z "$STATUS_LINES" ]]; then
     if [[ "${1:-}" != "weekly" ]]; then
-      echo "ℹ️  Aucun changement" >> "$LOG"
-      send_notif "Backup GitHub" "Rien a committer — GitHub deja a jour."
+      echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ℹ️  GitHub deja a jour - rien a committer" >> "$LOG"
       exit 0
     fi
   fi
@@ -120,16 +105,15 @@ MSG="${MSG}${HA_VER:+ (HA ${HA_VER})}"
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ COMMIT                                                                   │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-git add -A
-if git commit -m "$MSG" 2>/dev/null; then
+git add -A >/dev/null 2>&1
+if git commit -m "$MSG" >/dev/null 2>&1; then
   echo "$(date '+%Y-%m-%d %H:%M:%S %Z') 📝 Commit créé : $MSG" >> "$LOG"
 elif [[ "${1:-}" != "weekly" ]]; then
   AHEAD="$(git rev-list @{u}..HEAD --count 2>/dev/null || echo 0)"
   if [[ "$AHEAD" -gt 0 ]]; then
     echo "$(date '+%Y-%m-%d %H:%M:%S %Z') 📤 Commit local non pushé ($AHEAD) — push en cours..." >> "$LOG"
   else
-    echo "ℹ️  Rien à committer" >> "$LOG"
-    send_notif "Backup GitHub" "Rien a committer — GitHub deja a jour."
+    echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ℹ️  GitHub deja a jour - rien a committer" >> "$LOG"
     exit 0
   fi
 else
@@ -146,7 +130,7 @@ do_push() {
 
   if echo "$PUSH_OUT" | grep -qE "fetch first|non-fast-forward|rejected"; then
     echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ⚠️  Push rejeté (divergence) — fetch + force-with-lease..." >> "$LOG"
-    git fetch origin "$BRANCH" 2>/dev/null || true
+    git fetch origin "$BRANCH" >/dev/null 2>&1 || true
     PUSH_OUT=$(git push --force-with-lease origin "$BRANCH" 2>&1)
     if [[ $? -eq 0 ]]; then
       echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Push OK (force-with-lease)" >> "$LOG"
@@ -174,7 +158,7 @@ if [[ "${1:-}" == "weekly" ]]; then
     TAG="${TAG_BASE}-$(date +'%H%M')"
   fi
   git tag -a "$TAG" -m "Weekly backup $(date +'%F')${HA_VER:+ (HA ${HA_VER})}"
-  if git push origin --tags 2>/dev/null; then
+  if git push origin --tags >/dev/null 2>&1; then
     echo "🏷️  Tag créé et poussé : $TAG" >> "$LOG"
   else
     echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ❌ Push tag $TAG échoué" >> "$LOG"
@@ -186,7 +170,15 @@ fi
 # ╰──────────────────────────────────────────────────────────────────────────╯
 echo "✅ Backup GitHub OK: $MSG" >> "$LOG"
 
-send_notif "Backup GitHub" "$MSG"
+TOKEN_FILE="/config/.secrets/ha_token"
+if [[ -f "$TOKEN_FILE" ]]; then
+  TOKEN="$(cat "$TOKEN_FILE")"
+  curl -s -X POST \
+    -H "Authorization: Bearer ${TOKEN}" \
+    -H "Content-Type: application/json" \
+    -d '{"title":"Backup GitHub","message":"'"$MSG"'"}' \
+    http://supervisor/core/api/services/persistent_notification/create >/dev/null || true
+fi
 
 # annotations_log:
 # [2026-06-13] BUG FIX CRITIQUE — ligne 134 : %Z"') → %Z') — le " était dans la single-quote
