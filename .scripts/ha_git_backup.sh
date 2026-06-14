@@ -43,6 +43,7 @@ set -euo pipefail
 LOG_DIR="/config/.logs"
 LOG="$LOG_DIR/ha_git_backup.log"
 mkdir -p "$LOG_DIR"
+exec 1>/dev/null   # Bloquer tout stdout parasite — seuls >> "$LOG" comptent
 cd /config
 
 
