@@ -19,8 +19,8 @@ GH_BASE="https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/ma
 
 cd /config
 
-DIRS="sensors templates utility_meter command_line"
-EXTRA_FILES="automations.yaml"
+DIRS="sensors templates utility_meter command_line groups input_booleans input_number"
+EXTRA_FILES="automations.yaml scripts.yaml shell_command.yaml configuration.yaml sql.yaml input_select.yaml input_datetime.yaml input_button.yaml"
 
 # ── PASS 1 : TREE ─────────────────────────────────────────────────────────
 {
@@ -110,3 +110,6 @@ echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 terminé : $TOTAL fichiers �
 # [2026-06-15] FIX CRITIQUE : echo "$github_raw" | md5sum → $() strip trailing newlines
 #              → remplacement par curl -o TMP_GH + md5sum TMP_GH (bytes exacts préservés)
 #              → TMP_GH = 1 fichier yaml à la fois (~KB), réutilisé → impact RAM nul
+# [2026-06-15] EXTRA_FILES étendu : ajout scripts.yaml shell_command.yaml configuration.yaml
+#              sql.yaml input_select.yaml input_datetime.yaml input_button.yaml
+# [2026-06-15] DIRS étendu : ajout groups/ input_booleans/ input_number/
