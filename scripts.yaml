@@ -189,3 +189,11 @@ j_1_3_chambre_clim_on_off_intelligent:
       action: script.j_2_0_secu_arret_clim_protege
       data:
         piece: '{{ p }}'
+
+audit_md5:
+  alias: "Audit MD5 GitHub"
+  icon: mdi:shield-search
+  mode: single
+  sequence:
+    - alias: "RUN AUDIT MD5"
+      action: shell_command.audit_md5
