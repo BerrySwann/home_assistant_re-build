@@ -66,8 +66,9 @@ github_md5=""
 while IFS='|' read -r file prod_md5; do
     rm -f "$TMP_GH"
     # curl -f : silent fail sur HTTP 4xx/5xx → exit non-zero → TMP_GH absent
+    encoded_file="${file// /%20}"
     HTTP_CODE=$(curl -sf --max-time 15 -o "$TMP_GH" \
-        -w '%{http_code}' "${GH_BASE}/${file}" 2>/dev/null || echo "000")
+        -w '%{http_code}' "${GH_BASE}/${encoded_file}" 2>/dev/null || echo "000")
 
     if [[ "$HTTP_CODE" != "200" ]] || [[ ! -s "$TMP_GH" ]]; then
         github_md5=""
@@ -97,6 +98,10 @@ printf '%.0s─' {1..105}; echo ""
 } >> "$LOG"
 
 rm -f "$TMP_TREE" "$TMP_PROD" "$TMP_GH"
+
+# Copie symlink latest dans .logs/
+cp "$LOG" /config/.logs/md5_audit_latest.txt 2>/dev/null || true
+
 echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 terminé : $TOTAL fichiers · $OK SYNC · $DIFF_COUNT DIFF · $PUSH_MANQUANT PUSH MANQUANT → $LOG"
 
 # annotations_log:
