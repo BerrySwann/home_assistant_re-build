@@ -8693,3 +8693,4 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [WIFI] | 15/06 21:15 | Hyg:0.45 | Cuis:0.76 | Froid:0.86 | Chauff:0.06 | Avg 4:2.9 | Multi:2.35 | Lum:0.41 | Autres:0.2 | Ti:25.4°C | Ext:22.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
 [2] en [WIFI] | 15/06 21:30 | Hyg:0.45 | Cuis:0.76 | Froid:0.88 | Chauff:0.06 | Avg 4:2.8 | Multi:2.45 | Lum:0.43 | Autres:0.2 | Ti:25.4°C | Ext:22.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
 [2] en [WIFI] | 15/06 21:45 | Hyg:0.45 | Cuis:0.76 | Froid:0.9 | Chauff:0.06 | Avg 4:2.8 | Multi:2.45 | Lum:0.45 | Autres:0.2 | Ti:25.5°C | Ext:21.9°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 15/06 22:00 | Hyg:0.45 | Cuis:0.76 | Froid:0.91 | Chauff:0.06 | Avg 4:2.8 | Multi:2.55 | Lum:0.46 | Autres:0.21 | Ti:25.5°C | Ext:21.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
