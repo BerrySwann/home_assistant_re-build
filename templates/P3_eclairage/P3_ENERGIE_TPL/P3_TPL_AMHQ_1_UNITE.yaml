@@ -742,4 +742,4 @@
 # - [Nomenclature] {slug}_{cycle}_um_kwh_tpl — chaîne lisible dans l'ID.
 # - [state_class] total — relay d'un UM qui reset à chaque cycle. total_increasing accumulerait les kWh entre cycles et casserait l'affichage historique.
 # - [availability] guard unavailable/unknown sur chaque UM source.
-# - [2026-06-14] state_class: total_increasing → total (relay UM qui reset à chaque cycle — tot
+# - [2026-06-14] state_class: total_increasing → total (relay UM qui reset à chaque cycle — total_increasing accumulerait les kWh entre cycles)
