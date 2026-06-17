@@ -1,103 +1,284 @@
-=== REBUILD TREE REPORT — 2026-06-17 ===
+/config/.scripts
+├── #MP_01_monitor_temp.sh.#
+├── audit_md5.sh
+└── ha_git_backup.sh
+/config/command_line
+├── audit
+│   └── audit_logs.yaml
+├── github_maintenance
+│   └── github_maintenance.yaml
+├── ip_externe
+│   └── ip_externe.yaml
+└── meteo
+    └── carte_meteo_france.yaml
+/confog/groups [error opening dir]
+/config/input_booleans
+├── P1
+│   ├── P1_ACS_IB_01_arret_clim_securises.yaml
+│   └── P1_BV_BI_02_inter_soufflant_sdb.yaml
+├── P3
+│   ├── P3_BV_01_IB_inter_smorig_salon.yaml
+│   └── P3_BV_02_IB_inter_rodret_salon.yaml
+└── P4
+    └── P4_presence_wifi.yaml
+/config/input_number
+└── input_number.yaml
+/config/notifs
+├── diag_conso_elec.txt
+├── ecart_liky_vs_nodon.txt
+└── save maria db.txt
+/config/packages
+├── cssmeteo.yaml
+└── demometeo.yaml
+/config/sensors
+├── Air_quality
+│   └── A_01_AIR_QUALITY.yaml
+├── P0_Energie_total_min_maxi_diag
+│   └── P0_Genelec_appart_mini_maxi
+│       └── P0_MINI_MAXI_AVG_Genelec_appart.yaml
+├── P1_clim_chauffage
+│   ├── P1_DUT
+│   │   └── P1_DUT_clim_chauffage.yaml
+│   └── P1_kWh
+│       └── P1_kWh_clim_chauffage.yaml
+└── meteo
+    └── M_03_meteo_sensors_blitzortung.yaml
+/config/shell_command
+├── Ghithub
+│   └── backup_github.yaml
+└── P4
+    └── P4_log_eric_zone.yaml
+/config/templates
+├── Air_quality
+│   └── A_01_AIR_QUALITY.yaml
+├── Inter_BP_Virtuel
+│   ├── P1
+│   │   └── P1_BV_01_SW_inter_souflant_sdb.yaml
+│   └── P3
+│       ├── P3_BV_01_inter_smorig_salon.yaml
+│       └── P3_BV_02_inter_rodret_salon.yaml
+├── P0_Energie_total_diag
+│   ├── Diag
+│   │   ├── diag_conso_hebdomadaire_en_cours.yaml
+│   │   ├── diag_conso_jour_en_cours.yaml
+│   │   └── diag_conso_mois_en_cours.yaml
+│   ├── Genelec_appart
+│   │   ├── 01_genelec_appart_AMHQ_cost.yaml
+│   │   ├── 02_ratio_hp_hc.yaml
+│   │   └── 03_AVG_genelec_appart.yaml
+│   ├── Linky
+│   │   └── MyElectricalData.yaml
+│   └── total_pour_les_7_postes
+│       └── total_pour_les_7_postes.yaml
+├── P1_clim_chauffage
+│   ├── P1_01_MASTER
+│   │   ├── P1_01_clim_logique_system_autom.yaml
+│   │   ├── P1_02_automation_message_clim_7h30_21h.yaml
+│   │   └── P1_03_automation_message_clim_21h_7h30.yaml
+│   ├── P1_AVG
+│   │   ├── P1_AVG.yaml
+│   │   └── P1_AVG_TOTAL_AMHQ.yaml
+│   ├── P1_DUT_TOTAL
+│   │   └── P1_DUT_TOTAL_SDB.yaml
+│   ├── P1_TOTAL
+│   │   └── P1_TOTAL_AMHQ.yaml
+│   ├── P1_kWh_riemann_cuisine
+│   │   └── P1_kWh_riemann_cuisine.yaml
+│   └── P1_ui_dashboard
+│       └── P1_ui_dashboard.yaml
+├── P2_prise
+│   ├── P2_AVG
+│   │   ├── P2_AVG_AMHQ_mini_pc.yaml
+│   │   ├── P2_AVG_AMHQ_prises.yaml
+│   │   └── P2_AVG_AMHQ_veilles.yaml
+│   ├── P2_I_all_standby_power
+│   │   └── P2_current_all_standby.yaml
+│   ├── P2_eCO_prises
+│   │   └── P2_eco_prises_config.yaml
+│   └── P2_ui_dashboard
+│       └── P2_ui_dashboard.yaml
+├── P3_eclairage
+│   ├── P3_AVG
+│   │   ├── P3_AVG_AMHQ_1_UNITE.yaml
+│   │   ├── P3_AVG_AMHQ_2_ZONE.yaml
+│   │   └── P3_AVG_AMHQ_3_TOTAL.yaml
+│   ├── P3_ENERGIE_TPL
+│   │   ├── P3_TPL_AMHQ_1_UNITE.yaml
+│   │   ├── P3_TPL_AMHQ_2_ZONE.yaml
+│   │   └── P3_TPL_AMHQ_3_TOTAL.yaml
+│   ├── P3_POWER_TPL
+│   │   └── P3_POWER_3_TOTAL_ZONE.yaml
+│   └── ui_dashboard
+│       └── etats_status.yaml
+├── P4_groupe_presence
+│   ├── 01_phones_wifi_cellular_card_autom.yaml
+│   └── 02_logique_wifi_cellular.yaml
+├── Stores
+│   └── S_01_STORES.yaml
+├── meteo
+│   ├── M_01_meteo_alertes_card.yaml
+│   ├── M_02_meteo_vent_vence_card.yaml
+│   ├── M_03_meteo_blitzortung.yaml
+│   ├── M_04_tendances_th_ext_card.yaml
+│   └── M_05_cycle_solaire.yaml
+└── utilitaires
+    ├── Mise_a_jour_home_assistant.yaml
+    ├── jour_nuit.yaml
+    └── nb_fenetre_ouvert_ferme_autom.yaml
+/config/utility_meter
+├── P0_Energie_total
+│   └── Genelec_appart
+│       ├── 01_UM_AMHQ.yaml
+│       └── 02_UM_genelec_appart_HPHC_AMHQ.yaml
+├── P1_clim_chauffage
+│   └── P1_UM_AMHQ.yaml
+├── P2_prise
+│   ├── P2_UM_AMHQ_mini_pc.yaml
+│   ├── P2_UM_AMHQ_prises.yaml
+│   └── P2_UM_AMHQ_veilles.yaml
+├── P3_eclairage
+│   └── P3_UM_AMHQ_1_UNITE.yaml
+└── meteo
+    └── M_03_meteo_UM_blitzortung.yaml
+tree [error opening dir]
+/config/.script [error opening dir]
+/config/command_line
+├── audit
+│   └── audit_logs.yaml
+├── github_maintenance
+│   └── github_maintenance.yaml
+├── ip_externe
+│   └── ip_externe.yaml
+└── meteo
+    └── carte_meteo_france.yaml
+/confog/groups [error opening dir]
+/config/input_booleans
+├── P1
+│   ├── P1_ACS_IB_01_arret_clim_securises.yaml
+│   └── P1_BV_BI_02_inter_soufflant_sdb.yaml
+├── P3
+│   ├── P3_BV_01_IB_inter_smorig_salon.yaml
+│   └── P3_BV_02_IB_inter_rodret_salon.yaml
+└── P4
+    └── P4_presence_wifi.yaml
+/config/input_number
+└── input_number.yaml
+/config/notifs
+├── diag_conso_elec.txt
+├── ecart_liky_vs_nodon.txt
+└── save maria db.txt
+/config/packages
+├── cssmeteo.yaml
+└── demometeo.yaml
+/config/sensors
+├── Air_quality
+│   └── A_01_AIR_QUALITY.yaml
+├── P0_Energie_total_min_maxi_diag
+│   └── P0_Genelec_appart_mini_maxi
+│       └── P0_MINI_MAXI_AVG_Genelec_appart.yaml
+├── P1_clim_chauffage
+│   ├── P1_DUT
+│   │   └── P1_DUT_clim_chauffage.yaml
+│   └── P1_kWh
+│       └── P1_kWh_clim_chauffage.yaml
+└── meteo
+    └── M_03_meteo_sensors_blitzortung.yaml
+/config/shell_command
+├── Ghithub
+│   └── backup_github.yaml
+└── P4
+    └── P4_log_eric_zone.yaml
+/config/templates
+├── Air_quality
+│   └── A_01_AIR_QUALITY.yaml
+├── Inter_BP_Virtuel
+│   ├── P1
+│   │   └── P1_BV_01_SW_inter_souflant_sdb.yaml
+│   └── P3
+│       ├── P3_BV_01_inter_smorig_salon.yaml
+│       └── P3_BV_02_inter_rodret_salon.yaml
+├── P0_Energie_total_diag
+│   ├── Diag
+│   │   ├── diag_conso_hebdomadaire_en_cours.yaml
+│   │   ├── diag_conso_jour_en_cours.yaml
+│   │   └── diag_conso_mois_en_cours.yaml
+│   ├── Genelec_appart
+│   │   ├── 01_genelec_appart_AMHQ_cost.yaml
+│   │   ├── 02_ratio_hp_hc.yaml
+│   │   └── 03_AVG_genelec_appart.yaml
+│   ├── Linky
+│   │   └── MyElectricalData.yaml
+│   └── total_pour_les_7_postes
+│       └── total_pour_les_7_postes.yaml
+├── P1_clim_chauffage
+│   ├── P1_01_MASTER
+│   │   ├── P1_01_clim_logique_system_autom.yaml
+│   │   ├── P1_02_automation_message_clim_7h30_21h.yaml
+│   │   └── P1_03_automation_message_clim_21h_7h30.yaml
+│   ├── P1_AVG
+│   │   ├── P1_AVG.yaml
+│   │   └── P1_AVG_TOTAL_AMHQ.yaml
+│   ├── P1_DUT_TOTAL
+│   │   └── P1_DUT_TOTAL_SDB.yaml
+│   ├── P1_TOTAL
+│   │   └── P1_TOTAL_AMHQ.yaml
+│   ├── P1_kWh_riemann_cuisine
+│   │   └── P1_kWh_riemann_cuisine.yaml
+│   └── P1_ui_dashboard
+│       └── P1_ui_dashboard.yaml
+├── P2_prise
+│   ├── P2_AVG
+│   │   ├── P2_AVG_AMHQ_mini_pc.yaml
+│   │   ├── P2_AVG_AMHQ_prises.yaml
+│   │   └── P2_AVG_AMHQ_veilles.yaml
+│   ├── P2_I_all_standby_power
+│   │   └── P2_current_all_standby.yaml
+│   ├── P2_eCO_prises
+│   │   └── P2_eco_prises_config.yaml
+│   └── P2_ui_dashboard
+│       └── P2_ui_dashboard.yaml
+├── P3_eclairage
+│   ├── P3_AVG
+│   │   ├── P3_AVG_AMHQ_1_UNITE.yaml
+│   │   ├── P3_AVG_AMHQ_2_ZONE.yaml
+│   │   └── P3_AVG_AMHQ_3_TOTAL.yaml
+│   ├── P3_ENERGIE_TPL
+│   │   ├── P3_TPL_AMHQ_1_UNITE.yaml
+│   │   ├── P3_TPL_AMHQ_2_ZONE.yaml
+│   │   └── P3_TPL_AMHQ_3_TOTAL.yaml
+│   ├── P3_POWER_TPL
+│   │   └── P3_POWER_3_TOTAL_ZONE.yaml
+│   └── ui_dashboard
+│       └── etats_status.yaml
+├── P4_groupe_presence
+│   ├── 01_phones_wifi_cellular_card_autom.yaml
+│   └── 02_logique_wifi_cellular.yaml
+├── Stores
+│   └── S_01_STORES.yaml
+├── meteo
+│   ├── M_01_meteo_alertes_card.yaml
+│   ├── M_02_meteo_vent_vence_card.yaml
+│   ├── M_03_meteo_blitzortung.yaml
+│   ├── M_04_tendances_th_ext_card.yaml
+│   └── M_05_cycle_solaire.yaml
+└── utilitaires
+    ├── Mise_a_jour_home_assistant.yaml
+    ├── jour_nuit.yaml
+    └── nb_fenetre_ouvert_ferme_autom.yaml
+/config/utility_meter
+├── P0_Energie_total
+│   └── Genelec_appart
+│       ├── 01_UM_AMHQ.yaml
+│       └── 02_UM_genelec_appart_HPHC_AMHQ.yaml
+├── P1_clim_chauffage
+│   └── P1_UM_AMHQ.yaml
+├── P2_prise
+│   ├── P2_UM_AMHQ_mini_pc.yaml
+│   ├── P2_UM_AMHQ_prises.yaml
+│   └── P2_UM_AMHQ_veilles.yaml
+├── P3_eclairage
+│   └── P3_UM_AMHQ_1_UNITE.yaml
+└── meteo
+    └── M_03_meteo_UM_blitzortung.yaml
 
-SOURCE VERITE  : HA Prod (10.32.154.243)
-COMPARE AVEC   : TREE_CORRIGE local + CLAUDE.md arborescence cible
-
-========================================
-SECTION 1 - PROD TREE (recupere 2026-06-17)
-========================================
-
-input_booleans/
-  P1/P1_ACS_IB_01_arret_clim_securises.yaml
-  P1/P1_BV_BI_02_inter_soufflant_sdb.yaml
-  P3/P3_BV_01_IB_inter_smorig_salon.yaml
-  P3/P3_BV_02_IB_inter_rodret_salon.yaml
-  P4/P4_presence_wifi.yaml
-
-input_number/
-  input_number.yaml
-
-utility_meter/
-  meteo/M_03_meteo_UM_blitzortung.yaml
-  P0_Energie_total/Genelec_appart/01_UM_AMHQ.yaml
-  P0_Energie_total/Genelec_appart/02_UM_genelec_appart_HPHC_AMHQ.yaml
-  P1_clim_chauffage/P1_UM_AMHQ.yaml
-  P2_prise/P2_UM_AMHQ_mini_pc.yaml
-  P2_prise/P2_UM_AMHQ_prises.yaml
-  P2_prise/P2_UM_AMHQ_veilles.yaml
-  P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-
-sensors/
-  Air_quality/A_01_AIR_QUALITY.yaml
-  meteo/M_03_meteo_sensors_blitzortung.yaml
-  P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml
-  P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml
-  [P1_clim_chauffage/P1_kWh/P1_kWh_clim_chauffage.yaml - DEPLOYE 2026-06-17]
-
-templates/ (46 fichiers - synchronises TREE_CORRIGE OK)
-
-command_line/
-  audit/audit_logs.yaml
-  github_maintenance/github_maintenance.yaml
-  ip_externe/ip_externe.yaml
-  meteo/carte_meteo_france.yaml
-
-shell_command/
-  Ghithub/backup_github.yaml
-  P4/P4_log_eric_zone.yaml
-
-home-assistant-config-v2/ : ABSENT OK
-Docs/ : ABSENT OK
-
-========================================
-SECTION 2 - DELTA : ACTIONS EFFECTUEES 2026-06-17
-========================================
-
-[DEPLOYE PROD]
-  + sensors/P1_clim_chauffage/P1_kWh/P1_kWh_clim_chauffage.yaml
-  ! RELOAD YAML requis (Outils dev -> YAML -> Tout recharger)
-
-[TREE_CORRIGE RESTRUCTURE]
-  + shell_command/Ghithub/backup_github.yaml  (4 cmds : 3 git + audit_md5)
-  + shell_command/P4/P4_log_eric_zone.yaml    (zone_log_eric)
-  - shell_command.yaml                         (ancien monolithique - supprime)
-  - shell_command/shell_command_github.yaml    (ancien split - supprime)
-  - shell_command/shell_command_md5.yaml       (obsolete audit_yaml/atma/full - supprime)
-  - shell_command/P4_zone_log_eric.yaml        (mauvais chemin - supprime)
-
-========================================
-SECTION 3 - MANQUANTS PARTOUT (a creer)
-========================================
-
-utility_meter/ :
-  MANQUE P3_eclairage/P3_UM_AMHQ_2_ZONE.yaml     (jamais cree)
-  MANQUE P3_eclairage/P3_UM_AMHQ_3_TOTAL.yaml    (jamais cree)
-
-sensors/ :
-  MANQUE P0_Energie_total_min_maxi_diag/P0_Genelec_appart/P0_kWh_genelec_appart.yaml
-  MANQUE P2_prise/P2_kWh_prises.yaml
-  MANQUE P2_prise/P2_kWh_veilles.yaml
-  MANQUE P2_prise/P2_Wh_mini_pc.yaml
-  MANQUE P3_eclairage/P3_kWh_1_UNITE.yaml
-  MANQUE P3_eclairage/P3_kWh_2_ZONE.yaml
-  MANQUE P3_eclairage/P3_kWh_3_TOTAL.yaml
-
-templates/ :
-  MANQUE SpeedTest/ST_01_SpeedTest.yaml
-  MANQUE Mini-PC/MP_01_sonde_temperature_mini-pc.yaml
-  MANQUE P3_eclairage/P3_POWER_TPL/P3_POWER_1_TOTAL_UNITE.yaml
-  MANQUE P3_eclairage/P3_POWER_TPL/P3_POWER_2_TOTAL_MULTI_ZONE.yaml
-
-========================================
-SECTION 4 - ETAT FINAL TREE_CORRIGE
-========================================
-
-OK input_booleans/  - 5 fichiers - SYNC PROD
-OK input_number/    - 1 fichier  - SYNC PROD
-OK utility_meter/   - 8 fichiers - SYNC PROD (manque P3 zones 2/3 partout)
-OK sensors/         - 5 fichiers - SYNC PROD apres deploiement P1_kWh
-OK templates/       - 46 fichiers - SYNC PROD
-OK command_line/    - 4 fichiers - SYNC PROD
-OK shell_command/   - 2 fichiers (Ghithub/ + P4/) - SYNC PROD
-
-=== FIN RAPPORT ===
+104 directories, 155 files
