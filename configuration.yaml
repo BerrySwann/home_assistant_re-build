@@ -14,7 +14,6 @@
 # - template     : !include_dir_merge_list templates/      (templates Jinja2)
 # - utility_meter: !include_dir_merge_named utility_meter/ (compteurs nommés)
 # - command_line : !include_dir_merge_list command_line/   (cmds shell→sensors)
-# - shell_command: !include shell_command.yaml
 # - camera       : DÉSACTIVÉ (obsolète — supprimé de la config active)
 # - notify       : SUPPRIMÉ YAML (migré vers intégration File UI — HA 2024.12+)
 # - fan          : SUPPRIMÉ YAML (rpi_gpio_pwm — spécifique RPi4, incompatible Mini-PC)
@@ -126,9 +125,7 @@ utility_meter: !include_dir_merge_named utility_meter/
 command_line: !include_dir_merge_list command_line/
 #command_line: !include command_line.yaml
 
-# --- shell_command ---
-#shell_command: !include shell_command.yaml
-shell_command: !include_dir_merge_list shell_command/
+shell_command: !include_dir_merge_named shell_command/
 
 # --- camera (DÉSACTIVÉ — obsolète) ---               # "[L95] modif"
 #camera: !include camera.yaml
@@ -274,3 +271,5 @@ http:
 #      - name: RPI Cooling Fan                                                 # "[modif] supprimé"
 #        unique_id: rpi_cooling_fan                                            # "[modif] supprimé"
 #        pin: 14                                                               # "[modif] supprimé"
+
+
