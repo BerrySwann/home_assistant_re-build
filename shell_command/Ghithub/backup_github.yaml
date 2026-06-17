@@ -1,11 +1,11 @@
-﻿# ╭──────────────────────────────────────────────────────────────────────────╮
+# ╭──────────────────────────────────────────────────────────────────────────╮
 # │ SHELL COMMAND : BACKUP GITHUB (RE-BUILD)                                 │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
 # Expose 3 commandes shell appelables depuis HA (via automation ou bouton)
 # pour exécuter le script de sauvegarde Git de la config Home Assistant.
-# Inclus via : shell_command: !include shell_command.yaml (configuration.yaml)
+# Inclus via : shell_command: !include_dir_merge_named shell_command/ (configuration.yaml)
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Script appelé : /config/.scripts/ha_git_backup.sh
