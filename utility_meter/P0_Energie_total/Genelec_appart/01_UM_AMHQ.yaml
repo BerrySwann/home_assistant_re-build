@@ -8,7 +8,7 @@
 # Pour le split tarifaire HP/HC, voir : 03_UM_genelec_appart_HPHC_AMHQ.yaml
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Source : sensor.general_electric_appart_energy (index kWh cumulatif Ecojoko).
+# - Source : sensor.general_electric_appart_energy (index kWh cumulatif — Nodon SEM-4-1-00).
 # - Chaque UM accumule les incréments de la source sur sa période, puis remet
 #   à zéro automatiquement (minuit / lundi / 1er du mois / 1er janvier).
 #
@@ -69,4 +69,4 @@ genelec_appart_annuel_um:
 # - [AJOUT] genelec_appart_quotidien_um (cycle daily manquant) — requis par 03_AVG_genelec_appart.yaml
 # - [L29,37,45,53] name: "Réseau *" → "Genelec Appart * UM" (conformité convention)
 # - [L27,34,41] source inchangée : sensor.general_electric_appart_energy
-# - [SUPPRIMÉ] ecojoko_hp/hc_reseau_*_um (source Ecojoko remplacée)
+# - [SUPPRIMÉ] Nodon SEM-4-1-00 → sensor.general_electric_appart_energy

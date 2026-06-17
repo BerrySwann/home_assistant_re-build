@@ -73,7 +73,7 @@
 
 # annotations_log:
 # - [Création] 4 AVG Watts AMHQ — formule kWh × 1000 / heures écoulées
-# - [modif] Sources ecojoko_reseau_*_um → genelec_appart_*_um (NODON via Riemann)
-# - [modif] Header CALCUL/PIÈGES : refs Ecojoko → NODON/Genelec_appart
+# - [modif] Sources : Nodon SEM-4-1-00 → genelec_appart_*_um
+# - [modif] Header CALCUL/PIÈGES : refs mises à jour → Nodon SEM-4-1-00 / General Electric Appart
 # - [L35,43,52,62] sensor.genelec_appart_*_um → sensor.genelec_appart_*_um
 #   (alignement sur les nouvelles clés yaml de 01_UM_AMHQ_cost.yaml)

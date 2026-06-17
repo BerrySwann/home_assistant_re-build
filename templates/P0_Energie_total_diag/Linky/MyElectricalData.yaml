@@ -5,11 +5,11 @@
 # ## 📝 DESCRIPTION :
 # Huit capteurs templates fournissant les données de consommation journalière
 # Linky sur une fenêtre glissante de 8 jours (J0 à J7). J0 = aujourd'hui
-# (données temps réel via Ecojoko), J1 à J7 = historique via l'API MEData
+# (données temps réel via Nodon SEM-4-1-00 — General Electric Appart), J1 à J7 = historique via l'API MEData
 # (MyElectricalData / Enedis).
 #
 # ## 🧮 CALCUL & SOURCES :
-# - J0 (Aujourd'hui) : sensor.genelec_appart_quotidien_um (UM daily — general_electric_appart_energy). # "[modif] : ecojoko_hp + ecojoko_hc → UM quotidien total"
+# - J0 (Aujourd'hui) : sensor.genelec_appart_quotidien_um (UM daily — general_electric_appart_energy). # "[modif] : Nodon SEM-4-1-00 → UM quotidien total "
 # - J1-J7            : attributs dailyweek / dailyweek_cost de l'intégration MEData.
 # - Noms des jours   : attribut dailyweek → dictionnaire de traduction français.
 # - Coûts            : attribut dailyweek_cost (index correspondant à J1..J7).
@@ -37,7 +37,7 @@
     - name: "Linky Jour 0"
       unique_id: linky_jour_0
       state: >-
-        {{ states('sensor.genelec_appart_quotidien_um') | float(0) | round(1) }}  {# "[modif] : ecojoko_hp + hc → UM quotidien total" #}
+        {{ states('sensor.genelec_appart_quotidien_um') | float(0) | round(1) }}  {# "[modif] : Nodon SEM-4-1-00 → UM quotidien total " #}
       unit_of_measurement: kWh
       icon: mdi:flash-outline
       attributes:
@@ -349,7 +349,7 @@
 
 # annotations_log:
 # - [L12]  modif : source J0 → sensor.genelec_appart_quotidien_um (UM daily total)
-# - [L33]  modif : state J0 ecojoko_hp + ecojoko_hc → genelec_appart_quotidien_um
+# - [L33] modif : state J0 Nodon SEM-4-1-00 → genelec_appart_quotidien_um
 # - [L38]  modif : hp → "N/A" (plus de split HP/HC disponible)
 # - [L39]  modif : hc → "N/A" (plus de split HP/HC disponible)
 # - [L41]  modif : total → genelec_appart_quotidien_um

@@ -75,4 +75,5 @@
     value_template: '{{ value | trim }}'
 
 # annotations_log:
-# [2026-
+# [2026-06-13] Supprimé doublon backup_github_status (tail -n1 — fragile) — conservé grep OK: (v1)
+# [2026-06-14] backup_github_journal : filtre élargi — ajout ℹ️ (deja a jour/rien a committer) + 📤 ❌ ⚠️

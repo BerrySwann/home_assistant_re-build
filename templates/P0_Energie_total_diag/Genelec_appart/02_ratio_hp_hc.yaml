@@ -111,7 +111,7 @@
 
 # annotations_log:
 # - [RESTAURÉ] Fichier sorti de l'état OBSOLÈTE — split HP/HC recréé via UM tariff natif
-# - [RENOMMÉ] ecojoko_ratio_hc_* → genelec_appart_ratio_hc_*
-# - [RENOMMÉ] Sources ecojoko_hp/hc_reseau_*_um → genelec_appart_hphc_*_um_hp / *_hc
+# - [RENOMMÉ] Nodon SEM-4-1-00 → genelec_appart_ratio_hc_*
+# - [RENOMMÉ] Sources : Nodon SEM-4-1-00 → genelec_appart_hphc_*_um_hp / *_hc
 # - [AJOUT] sensor annuel (4ème période manquante dans la version d'origine)
 # - [AJOUT] bloc availability sur chaque sensor
