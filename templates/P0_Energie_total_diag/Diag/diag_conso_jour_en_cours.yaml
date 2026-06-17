@@ -25,7 +25,7 @@
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Tous les UM P1/P2/P3 utilisent le suffixe _um (nomenclature unifiée).
-# - state_class: measurement — ces capteurs reflètent les UM qui resetent à minuit.
+# - state_class: total — ces capteurs reflètent les UM qui resetent à minuit.
 #   Ne PAS utiliser total_increasing (valeur décroissante → WARNING recorder).
 # - Max dynamique : buffer 0.5 kWh (échelle journalière).
 #
@@ -191,6 +191,7 @@
       {{ (poles | sum) | round(2) }}
 
 # annotations_log:
-# [L33,48,62,74,90,105,116,150] state_class: total_increasing → measurement
+# [L33,48,62,74,90,105,116,150] state_class: total_increasing → total (reset minuit — valeur peut décroître)
+# [L28] PIÈGES : measurement → total (alignement commentaire sur code réel)
 # [L77-82] P1 UM Pôle 4 Chauffage : _quotidien_um → _quotidien_um (×6)
 # [Pôle 6] eclairage_total_group_quotidien_um → eclairage_total_unit_quotidien_kwh_tpl (source P3_TPL_AMHQ_3_TOTAL)

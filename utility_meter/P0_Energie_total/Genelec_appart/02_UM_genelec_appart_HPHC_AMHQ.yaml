@@ -85,7 +85,7 @@ genelec_appart_hphc_annuel_um:
 
 # annotations_log:
 # - [Création] 4 UM HP/HC AMHQ — source sensor.general_electric_appart_energy (NODON direct)
-# - [CONTEXTE] Ecojoko retiré. Linky écarté (24h de délai — incompatible temps réel HP/HC).
+# - [CONTEXTE] Linky écarté (24h de délai — incompatible temps réel HP/HC).
 #   Source retenue : NODON SP via sensor.general_electric_appart_energy (_energy firmware direct).
 # - Entités générées : *_um_hp et *_um_hc pour chaque période
 # - Basculement piloté par : automations_corrige/energie/basculement_tarif_hphc.yaml

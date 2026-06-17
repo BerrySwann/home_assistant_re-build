@@ -38,3 +38,4 @@ zone_log_eric: >-
 
 # annotations_log:
 # [2026-06-17] Création — log append zone_eric.txt, variables Jinja2 (ts/from_z/to_z)
+# [2026-06-17] Alignement sur prod : shell_command/P4/P4_log_eric_zone.yaml
