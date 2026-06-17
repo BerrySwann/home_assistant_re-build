@@ -2539,3 +2539,26 @@
       level: info
       message: '[Backup] Démarrage HA — push Git exécuté'
   mode: single
+- id: '1781715097077'
+  alias: '[P4] Eric — Log Zones'
+  description: Enregistre chaque changement de zone dans /config/.logs/zone_eric.txt
+  triggers:
+  - alias: CHANGEMENT ZONE ERIC
+    entity_id: device_tracker.poco
+    not_from:
+    - unavailable
+    - unknown
+    not_to:
+    - unavailable
+    - unknown
+    trigger: state
+  conditions: []
+  actions:
+  - alias: ÉCRITURE LOG ZONE
+    action: shell_command.zone_log_eric
+    data:
+      ts: '{{ now().strftime(''%Y-%m-%d %H:%M:%S'') }}'
+      from_z: '{{ trigger.from_state.state }}'
+      to_z: '{{ trigger.to_state.state }}'
+  mode: queued
+  max: 10
