@@ -120,7 +120,7 @@
       unit_of_measurement: "°C"
       state: >
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
-          {{ states('sensor.seuil_non_clim') | float(28) }}
+          {{ states('sensor.seuil_non_clim') | float(27) }}
         {% else %}
           {{ states('sensor.seuil_non_chauffage') | float(18) }}
         {% endif %}
@@ -218,8 +218,8 @@
       unit_of_measurement: "°C"
       state: >
         {% set diff = states('sensor.temperature_differentielle') | float(0) %}
-        {% set base = states('sensor.consigne_de_base') | float(18) %}
-        {% set cible = states('sensor.temperature_cible') | float(18) %}
+        {% set base = states('sensor.consigne_de_base') | float(0) %}
+        {% set cible = states('sensor.temperature_cible') | float(0) %}
         {{ (diff + (cible - base)) | round(1) }}
 
 # --- temperature_confort_nuit ---
@@ -227,8 +227,8 @@
       unique_id: temperature_confort_nuit
       unit_of_measurement: "°C"
       state: >
-        {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(15) %}
-        {% set conf_j = states('sensor.temperature_confort_jour') | float(20) %}
+        {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+        {% set conf_j = states('sensor.temperature_confort_jour') | float(0) %}
         {% set d1 = states('sensor.delta_1') | float(1) %}
         {% set d2 = states('sensor.delta_2') | float(2) %}
         {% set d5 = states('sensor.delta_5') | float(5) %}
@@ -299,7 +299,7 @@
       unit_of_measurement: "°C"
       icon: "mdi:delta"
       state: >
-        {{ (states('sensor.temperature_confort_jour') | float(20) -
+        {{ (states('sensor.temperature_confort_jour') | float(0) -
             states('sensor.th_balcon_nord_temperature') | float(0)) | round(1) }}
 
 # annotations_log:
