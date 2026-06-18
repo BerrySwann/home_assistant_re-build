@@ -1381,12 +1381,178 @@ views:
     sections:
       - type: grid
         cards:
+          - type: picture-elements
+            image: /local/meteo/empty.png
+            card_mod:
+              style: |-
+                :host {
+                  display: block;
+                  overflow: hidden;
+                }
+                ha-card {
+                  background: transparent !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+            elements:
+              - type: custom:html-template-card
+                title: ""
+                ignore_line_breaks: true
+                picture_elements_mode: true
+                content: |-
+                  {%- from 'meteo.jinja' import generate_content -%}
+                    {{ generate_content('background','html')|replace('"','') }}
+                card_mod:
+                  style: |-
+                    {%- from 'meteo.jinja' import generate_content -%}
+                      {{ generate_content('background','css')|replace('"','') }}
+                style:
+                  top: 50%
+                  left: 50%
+                  width: 100%
+                  height: 100%
+              - type: custom:html-template-card
+                title: ""
+                ignore_line_breaks: true
+                picture_elements_mode: true
+                content: |-
+                  <div style="position:absolute;top:62%;left:50%;
+                    transform:translate(-50%,-50%) perspective(180px) rotateX(62deg);
+                    width:190px;height:190px;opacity:0.25;pointer-events:none;">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="100" cy="100" r="78" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+                      <polygon points="146,54 108,100 146,146 100,108 54,146 92,100 54,54 100,92"
+                        fill="rgba(180,200,230,0.6)"/>
+                      <polygon points="100,38 106,94 162,100 106,106 100,162 94,106 38,100 94,94"
+                        fill="rgba(255,255,255,0.9)"/>
+                      <circle cx="100" cy="100" r="9" fill="rgba(20,30,50,0.8)" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+                      <text x="100" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="white" font-family="Arial,sans-serif">S</text>
+                      <text x="100" y="174" text-anchor="middle" font-size="20" font-weight="bold" fill="rgba(200,215,235,0.85)" font-family="Arial,sans-serif">N</text>
+                      <text x="22" y="106" text-anchor="middle" font-size="20" font-weight="bold" fill="rgba(200,215,235,0.85)" font-family="Arial,sans-serif">E</text>
+                      <text x="180" y="106" text-anchor="middle" font-size="20" font-weight="bold" fill="white" font-family="Arial,sans-serif">W</text>
+                    </svg>
+                  </div>
+                style:
+                  top: 50%
+                  left: 50%
+                  width: 100%
+                  height: 100%
+              - type: custom:html-template-card
+                title: ""
+                ignore_line_breaks: true
+                picture_elements_mode: true
+                content: >-
+                  <img src="/local/meteo/sun.png" style="width:16%; left:{{
+                  states('sensor.sun_left') }}%; top:{{ states('sensor.sun_top')
+                  }}%; opacity:{{ states('sensor.sun_opacity') }};
+                  padding:0;margin:0;position:absolute;transform:translate(-50%,-50%);"
+                  /> <img
+                  src="/local/images/moon_phases/{{states('sensor.moon_phase')}}.png"
+                  style="width:5%; left:{{ states('sensor.moon_left') }}%;
+                  top:{{ states('sensor.moon_top') }}%; opacity:{{
+                  states('sensor.moon_opacity') }};
+                  padding:0;margin:0;position:absolute;
+                  rotate:{{state_attr('sensor.moon_api','moon_parallactic_angle')}}deg;
+                  transform:translate(-50%,-50%);" />
+                style:
+                  top: 50%
+                  left: 50%
+                  width: 100%
+                  height: 100%
+              - type: custom:html-template-card
+                title: ""
+                ignore_line_breaks: true
+                picture_elements_mode: true
+                content: |-
+                  {%- from 'meteo.jinja' import generate_content -%}
+                    {{ generate_content('foreground','html')|replace('"','') }}
+                card_mod:
+                  style: |-
+                    {%- from 'meteo.jinja' import generate_content -%}
+                      {{ generate_content('foreground','css')|replace('"','') }}
+                style:
+                  top: 50%
+                  left: 50%
+                  width: 100%
+                  height: 100%
+              - type: custom:html-template-card
+                title: ""
+                ignore_line_breaks: true
+                picture_elements_mode: true
+                content: >-
+                  {% if is_state('sensor.alerte_meteo', 'Orange') or
+                  is_state('sensor.alerte_meteo', 'Rouge') %} <div
+                  style="position:absolute;top:70%;left:50%;
+                    transform:translateX(-50%);
+                    font-size:13px;font-weight:bold;letter-spacing:4px;
+                    font-variant:small-caps;color:rgba(255,255,255,0.65);
+                    text-shadow:0px 1px 4px rgba(0,0,0,0.8);
+                    white-space:nowrap;pointer-events:none;">
+                    {% if is_state('sensor.alerte_meteo', 'Orange') %}! Vigilance Orange !
+                    {% elif is_state('sensor.alerte_meteo', 'Rouge') %}! Vigilance Rouge !
+                    {% endif %}
+                  </div> {% endif %}
+                style:
+                  top: 50%
+                  left: 50%
+                  width: 100%
+                  height: 100%
+              - type: custom:html-template-card
+                title: ""
+                ignore_line_breaks: true
+                picture_elements_mode: true
+                content: |-
+                  <div style="
+                    position:absolute;
+                    bottom:8px;
+                    left:50%;
+                    transform:translateX(-50%);
+                    font-size:14px;
+                    font-weight:bold;
+                    letter-spacing:4px;
+                    font-variant:small-caps;
+                    color:rgba(255,255,255,0.65);
+                    text-shadow:0px 1px 4px rgba(0,0,0,0.8);
+                    white-space:nowrap;
+                    pointer-events:none;
+                  ">
+                    {{ states('sensor.vence_original_condition') }} — {{ states('sensor.th_balcon_nord_temperature') | round(1) }}°C
+                  </div>
+                style:
+                  top: 50%
+                  left: 50%
+                  width: 100%
+                  height: 100%
+              - type: custom:html-template-card
+                title: ""
+                ignore_line_breaks: true
+                picture_elements_mode: true
+                content: |-
+                  <div style="
+                    position:absolute;
+                    top:8px;
+                    left:50%;
+                    transform:translateX(-50%);
+                    font-size:18px;
+                    font-weight:bold;
+                    letter-spacing:4px;
+                    font-variant:small-caps;
+                    color:rgba(255,255,255,0.65);
+                    text-shadow:0px 1px 4px rgba(0,0,0,0.8);
+                    white-space:nowrap;
+                    pointer-events:none;
+                  ">VENCE — {{ now().strftime('%H:%M') }}</div>
+                style:
+                  top: 50%
+                  left: 50%
+                  width: 100%
+                  height: 100%
           - type: custom:meteofrance-weather-card
             entity: weather.vence
             animated_icons: true
             alert_forecast: true
             details: false
-            current: true
+            current: false
             one_hour_forecast: true
             forecast: true
             rainChanceEntity: sensor.vence_rain_chance
@@ -1845,16 +2011,15 @@ views:
               .bubble-sub-button {
                 background-color: black !important;
               }
-
               .bubble-button-background {
                 background-color:
                   ${ state === 'home'
                     ? 'green'
                     : state === 'not_home'
                       ? 'rgb(255, 103, 0)'
-                      : state === 'Boulot'
-                      ? 'rgb(0,87,81)'
-                      : 'grey'
+                      : ['SNEF Bureau','Fabron','Trotabas','Liégeard','George V','Menton'].includes(state)
+                        ? 'lightgreen'
+                        : 'grey'
                   } !important;
               }
               .bubble-icon,
@@ -1864,18 +2029,17 @@ views:
                     ? 'darkgreen'
                     : state === 'not_home'
                       ? 'rgb(255, 103, 0)'
-                      : state === 'Boulot'
-                        ? 'rgb(0,87,81)'
+                      : ['SNEF Bureau','Fabron','Trotabas','Liégeard','George V','Menton'].includes(state)
+                        ? 'lightgreen'
                         : 'grey'
                   } !important;
               }
-
               ${subButtonIcon[0].setAttribute("icon",
                 state === 'home'
                   ? 'mdi:home'
                   : state === 'not_home'
                     ? 'mdi:home-off'
-                    : state === 'Boulot'
+                    : ['SNEF Bureau','Fabron','Trotabas','Liégeard','George V','Menton'].includes(state)
                       ? 'mdi:hammer-screwdriver'
                       : 'mdi:crosshairs-question'
               )}
@@ -1905,18 +2069,19 @@ views:
               .bubble-sub-button {
                 background-color: black !important;
               }
-
               .bubble-button-background {
                 background-color:
                   ${ state === 'home'
                     ? 'darkgreen'
                     : state === 'not_home'
                       ? 'rgb(255, 103, 0)'
-                      : state === 'LECLERC VENCE'
+                      : state === 'LECLERC VENCE' || state === 'MONOPRIX' || state === 'AUCHAN'
                         ? 'rgb(0, 102, 204)'
                         : state === 'Primark'
-                        ? 'rgb(4,155,216)'
-                        : 'grey'
+                          ? 'rgb(4,155,216)'
+                          : state === 'ANITA' || state === 'KIPUE'
+                            ? 'rgb(144, 238, 144)'
+                            : 'lightgreen'
                   } !important;
               }
               .bubble-icon,
@@ -1926,14 +2091,15 @@ views:
                     ? 'darkgreen'
                     : state === 'not_home'
                       ? 'rgb(255, 103, 0)'
-                      : state === 'LECLERC VENCE'
+                      : state === 'LECLERC VENCE' || state === 'MONOPRIX' || state === 'AUCHAN'
                         ? 'rgb(0, 102, 204)'
                         : state === 'Primark'
-                        ? 'rgb(4,155,216)'
-                        : 'grey'
+                          ? 'rgb(4,155,216)'
+                          : state === 'ANITA' || state === 'KIPUE'
+                            ? 'rgb(144, 238, 144)'
+                            : 'lightgreen'
                   } !important;
               }
-
               ${subButtonIcon[0].setAttribute("icon",
                 state === 'home'
                   ? 'mdi:home'
@@ -1941,9 +2107,15 @@ views:
                     ? 'mdi:home-off'
                     : state === 'LECLERC VENCE'
                       ? 'mdi:basket-check'
-                      : state === 'Primark'
-                        ? 'mdi:hanger'
-                        : 'mdi:crosshairs-question'
+                      : state === 'MONOPRIX'
+                        ? 'mdi:shopping'
+                        : state === 'AUCHAN'
+                          ? 'mdi:cart-check'
+                          : state === 'Primark'
+                            ? 'mdi:hanger'
+                            : state === 'ANITA' || state === 'KIPUE'
+                              ? 'mdi:home-heart'
+                              : 'mdi:home-heart'
               )}
             name: Mamour
           - type: custom:mushroom-entity-card
@@ -1994,9 +2166,9 @@ views:
                 custom_fields:
                   info: >-
                     [[[ return states['sensor.vence_original_condition'].state +
-                    ' - ' +
-                    Math.round(parseFloat(states['sensor.th_balcon_nord_temperature'].state))
-                    + '°' ]]]
+                    ' — ' +
+                    parseFloat(states['sensor.th_balcon_nord_temperature'].state).toFixed(1)
+                    + '°C' ]]]
                 styles:
                   card:
                     - aspect-ratio: 1/1
@@ -2953,7 +3125,6 @@ views:
                         if (status === 'Allumé') return 'lightgreen';
                         if (status === 'Éteint') return 'rgb(244,67,54)';
                         if (status === 'AlluSync' || status === 'Synchro' || status === 'Éco.') return '#FFA500';
-
                         const greenStates = [
                           'Entrée', 'Couloir', 'Salon', 'Table', 'Bureau', 
                           'Écran', 'Chambre', 'Zone G.', 'Zone É.', 
@@ -2962,19 +3133,16 @@ views:
                         if (greenStates.includes(status)) return 'lightgreen';
                         return 'white';
                       }
-
                       function safeState(entityId) {
                         const state = states[entityId]?.state;
                         return (!state || state === 'unavailable' || state === 'unknown') ? 'N/A' : state;
                       }
-
                       var appStat = safeState('sensor.lumiere_appartement_etat');
                       var salStat = safeState('sensor.lumiere_salon_etat');
                       var cuiStat = safeState('sensor.lumiere_cuisine_etat');
                       var burStat = safeState('sensor.bureau_etat');
                       var sdbStat = safeState('sensor.lumiere_salle_de_bain_etat');
                       var chaStat = safeState('sensor.chambre_etat');
-
                       return `<div>
                         <div style="color: ${getColorForStatus(appStat)};">${appStat}</div>
                         <div style="color: ${getColorForStatus(salStat)};">${salStat}</div>
@@ -2994,7 +3162,6 @@ views:
                         if (activeCount === 0) return 'rgb(244,67,54)';
                         return '#FFA500';
                       }
-
                       var appartement = { activeCount: countActiveEntities(['light.entree', 'light.couloir']), totalCount: 2 };
                       var salon = { activeCount: countActiveEntities(['light.salon', 'light.table']), totalCount: 2 };
                       var cuisine = { activeCount: countActiveEntities(['light.cuisine']), totalCount: 1 };
@@ -3003,7 +3170,6 @@ views:
                       var ecranS = states['sensor.lumiere_ecran_etat']?.state;
                       var bTxt = "0/2";
                       var bCol = "rgb(244,67,54)";
-
                       if (statusB === 'AlluSync') { bTxt = "2/2"; bCol = "#FFA500"; }
                       else if (statusB === 'Synchro') { bTxt = "1/2"; bCol = "#FFA500"; }
                       else if (statusB === 'Allumé') { bTxt = "2/2"; bCol = "lightgreen"; }
@@ -3014,7 +3180,6 @@ views:
                       else if (statusB === 'Écran') { bTxt = "1/2"; bCol = "#FFA500"; }
                       else if (statusB === 'Éco.') { bTxt = "0/1"; bCol = "#FFA500"; }
                       else { bTxt = "0/2"; bCol = "rgb(244,67,54)"; }
-
                       var sdbActive = states['light.hue_white_lamp_salle_de_bain']?.state === 'on' ? 1 : 0;
                       
                       // ═══════════════════════════════════════════════════════════════════════════
@@ -3036,7 +3201,6 @@ views:
                       if (statusCh === 'Éco.' && chActive === 0 && chEnt.length === 1) {
                         chCol = '#FFA500';
                       }
-
                       return `<div>
                         <div style="color: ${getColorForCount(appartement.activeCount, 2)};">${appartement.activeCount}/2</div>
                         <div style="color: ${getColorForCount(salon.activeCount, 2)};">${salon.activeCount}/2</div>
@@ -6497,7 +6661,7 @@ views:
                               border: none !important;
                               margin-top: -40px;
                             }
-                      - type: custom:entity-progress-card-template
+                      - type: custom:entity-progress-card
                         name: >
                           {% set sunrise =
                           as_datetime(states('sensor.sun_next_rising')) %} {%
@@ -17074,27 +17238,19 @@ views:
                             :host {
                               --ha-card-border-color: transparent !important;
                               --card-background-color: none !important;
-                            }
-
-                            ha-card {
+                            } ha-card {
                               font-weight: bold;
                               --mdc-icon-size: 22px;
                               --paper-item-icon-color: white;
                               margin-top: -10px !important;
                               font-size: 12px;
-                            }
-
-                            bar-card-currentbar { border-radius: 10px; }
-
+                            } bar-card-currentbar { border-radius: 10px; }
                             bar-card-currentbar, bar-card-current,
                             bar-card-backgroundbar {
                               height: 6px !important;
                               margin-top: 34px;
-                            }
-
-                            bar-card-name { font-size: 12px; }
-
-                            bar-card-value { font-size: 12px; }
+                            } bar-card-name { font-size: 12px; } bar-card-value
+                            { font-size: 12px; }
                       filter:
                         include:
                           - entity_id: sensor.clim_salon_nous_power
@@ -17176,27 +17332,19 @@ views:
                             :host {
                               --ha-card-border-color: transparent !important;
                               --card-background-color: none !important;
-                            }
-
-                            ha-card {
+                            } ha-card {
                               font-weight: bold;
                               --mdc-icon-size: 22px;
                               --paper-item-icon-color: white;
                               margin-top: -10px !important;
                               font-size: 12px;
-                            }
-
-                            bar-card-currentbar { border-radius: 10px; }
-
+                            } bar-card-currentbar { border-radius: 10px; }
                             bar-card-currentbar, bar-card-current,
                             bar-card-backgroundbar {
                               height: 6px !important;
                               margin-top: 34px;
-                            }
-
-                            bar-card-name { font-size: 12px; }
-
-                            bar-card-value { font-size: 12px; }
+                            } bar-card-name { font-size: 12px; } bar-card-value
+                            { font-size: 12px; }
                       filter:
                         include:
                           - entity_id: sensor.prise_box_internet_ikea_power
@@ -17274,27 +17422,19 @@ views:
                             :host {
                               --ha-card-border-color: transparent !important;
                               --card-background-color: none !important;
-                            }
-
-                            ha-card {
+                            } ha-card {
                               font-weight: bold;
                               --mdc-icon-size: 22px;
                               --paper-item-icon-color: white;
                               margin-top: -10px !important;
                               font-size: 12px;
-                            }
-
-                            bar-card-currentbar { border-radius: 10px; }
-
+                            } bar-card-currentbar { border-radius: 10px; }
                             bar-card-currentbar, bar-card-current,
                             bar-card-backgroundbar {
                               height: 6px !important;
                               margin-top: 34px;
-                            }
-
-                            bar-card-name { font-size: 12px; }
-
-                            bar-card-value { font-size: 12px; }
+                            } bar-card-name { font-size: 12px; } bar-card-value
+                            { font-size: 12px; }
                       filter:
                         include:
                           - entity_id: sensor.prise_four_micro_ondes_nous_power
@@ -17369,27 +17509,19 @@ views:
                             :host {
                               --ha-card-border-color: transparent !important;
                               --card-background-color: none !important;
-                            }
-
-                            ha-card {
+                            } ha-card {
                               font-weight: bold;
                               --mdc-icon-size: 22px;
                               --paper-item-icon-color: white;
                               margin-top: -10px !important;
                               font-size: 12px;
-                            }
-
-                            bar-card-currentbar { border-radius: 10px; }
-
+                            } bar-card-currentbar { border-radius: 10px; }
                             bar-card-currentbar, bar-card-current,
                             bar-card-backgroundbar {
                               height: 6px !important;
                               margin-top: 34px;
-                            }
-
-                            bar-card-name { font-size: 12px; }
-
-                            bar-card-value { font-size: 12px; }
+                            } bar-card-name { font-size: 12px; } bar-card-value
+                            { font-size: 12px; }
                       filter:
                         include:
                           - entity_id: sensor.prise_frigo_cuisine_nous_power
@@ -17458,27 +17590,19 @@ views:
                             :host {
                               --ha-card-border-color: transparent !important;
                               --card-background-color: none !important;
-                            }
-
-                            ha-card {
+                            } ha-card {
                               font-weight: bold;
                               --mdc-icon-size: 22px;
                               --paper-item-icon-color: white;
                               margin-top: -10px !important;
                               font-size: 12px;
-                            }
-
-                            bar-card-currentbar { border-radius: 10px; }
-
+                            } bar-card-currentbar { border-radius: 10px; }
                             bar-card-currentbar, bar-card-current,
                             bar-card-backgroundbar {
                               height: 6px !important;
                               margin-top: 34px;
-                            }
-
-                            bar-card-name { font-size: 12px; }
-
-                            bar-card-value { font-size: 12px; }
+                            } bar-card-name { font-size: 12px; } bar-card-value
+                            { font-size: 12px; }
                       filter:
                         include:
                           - entity_id: sensor.prise_lave_linge_nous_power
@@ -17549,27 +17673,19 @@ views:
                             :host {
                               --ha-card-border-color: transparent !important;
                               --card-background-color: none !important;
-                            }
-
-                            ha-card {
+                            } ha-card {
                               font-weight: bold;
                               --mdc-icon-size: 22px;
                               --paper-item-icon-color: white;
                               margin-top: -10px !important;
                               font-size: 12px;
-                            }
-
-                            bar-card-currentbar { border-radius: 10px; }
-
+                            } bar-card-currentbar { border-radius: 10px; }
                             bar-card-currentbar, bar-card-current,
                             bar-card-backgroundbar {
                               height: 6px !important;
                               margin-top: 34px;
-                            }
-
-                            bar-card-name { font-size: 12px; }
-
-                            bar-card-value { font-size: 12px; }
+                            } bar-card-name { font-size: 12px; } bar-card-value
+                            { font-size: 12px; }
                       filter:
                         exclude:
                           - options: {}
@@ -17612,7 +17728,7 @@ views:
                           - entity_id: sensor.hue_play_3_pc_bureau_power
                             options:
                               icon: mdi:monitor-dashboard
-                          - entity_id: sensor.lampe_salle_de_bain_hue_power
+                          - entity_id: sensor.hue_white_lamp_salle_de_bain_power
                             options:
                               icon: mdi:ceiling-light
                           - entity_id: sensor.relais_lumiere_sdb_sonoff_power
@@ -17684,27 +17800,19 @@ views:
                             :host {
                               --ha-card-border-color: transparent !important;
                               --card-background-color: none !important;
-                            }
-
-                            ha-card {
+                            } ha-card {
                               font-weight: bold;
                               --mdc-icon-size: 22px;
                               --paper-item-icon-color: white;
                               margin-top: -10px !important;
                               font-size: 12px;
-                            }
-
-                            bar-card-currentbar { border-radius: 10px; }
-
+                            } bar-card-currentbar { border-radius: 10px; }
                             bar-card-currentbar, bar-card-current,
                             bar-card-backgroundbar {
                               height: 6px !important;
                               margin-top: 34px;
-                            }
-
-                            bar-card-name { font-size: 12px; }
-
-                            bar-card-value { font-size: 12px; }
+                            } bar-card-name { font-size: 12px; } bar-card-value
+                            { font-size: 12px; }
                       filter:
                         include:
                           - entity_id: sensor.all_standby_power
@@ -21539,7 +21647,7 @@ views:
                       color: rgb(3, 155, 229)
                       transform: return x * 1000;
                       unit: W
-                    - entity: sensor.lampe_salle_de_bain_hue_quotidien_um_kwh_tpl
+                    - entity: sensor.hue_white_lamp_salle_de_bain_quotidien_um_kwh_tpl
                       name: Salle de bain
                       color: rgb(119, 210, 235)
                       transform: return x * 1000;
@@ -21581,7 +21689,7 @@ views:
                       color: rgb(3, 155, 229)
                       transform: return x * 1000;
                       unit: W
-                    - entity: sensor.lampe_salle_de_bain_hue_mensuel_um_kwh_tpl
+                    - entity: sensor.hue_white_lamp_salle_de_bain_mensuel_um_kwh_tpl
                       name: Salle de bain
                       color: rgb(119, 210, 235)
                       transform: return x * 1000;
@@ -27676,6 +27784,123 @@ views:
             layout_options:
               grid_columns: full
               grid_rows: 1
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: separator
+                name: Audit GitHub MD5
+                icon: mdi:shield-check
+                rows: 2
+                styles: |-
+                  .bubble-line {
+                    background: var(--primary-text-color);
+                    opacity: 1;
+                  }
+                card_layout: normal
+              - type: custom:button-card
+                entity: script.audit_md5
+                show_state: false
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.audit_md5
+                name: |
+                  [[[
+                    return entity.state === 'on' ? 'Audit en cours...' : 'Audit MD5 GitHub';
+                  ]]]
+                icon: mdi:shield-search
+                styles:
+                  grid:
+                    - grid-template-areas: "\"i n n btn\" \"i s s btn\""
+                    - grid-template-columns: 0.6fr 1fr 1.6fr 0.7fr
+                    - grid-template-rows: repeat(2, 50%)
+                    - gap: 0px
+                  card:
+                    - padding: 8px
+                    - background: |
+                        [[[
+                          return entity.state === 'on'
+                            ? 'rgba(255, 152, 0, 0.10)'
+                            : 'rgba(3, 169, 244, 0.08)';
+                        ]]]
+                    - border: |
+                        [[[
+                          return entity.state === 'on'
+                            ? '1px solid #ff9800'
+                            : '1px solid #03a9f4';
+                        ]]]
+                    - border-radius: 12px
+                  icon:
+                    - color: |
+                        [[[
+                          return entity.state === 'on' ? '#ff9800' : '#03a9f4';
+                        ]]]
+                    - width: 42px
+                    - align-self: center
+                    - left: 20%
+                  name:
+                    - justify-self: start
+                    - font-size: 0.9em
+                    - font-weight: 600
+                    - color: |
+                        [[[
+                          return entity.state === 'on' ? '#ff9800' : '#03a9f4';
+                        ]]]
+                    - padding-top: 6px
+                  state:
+                    - justify-self: start
+                    - font-size: 0.72em
+                    - padding-bottom: 6px
+                custom_fields:
+                  btn:
+                    card:
+                      type: custom:button-card
+                      entity: script.audit_md5
+                      show_name: false
+                      icon: |
+                        [[[
+                          return entity.state === 'on' ? 'mdi:rotate-right' : 'mdi:upload-circle';
+                        ]]]
+                      tap_action:
+                        action: call-service
+                        service: script.turn_on
+                        service_data:
+                          entity_id: script.audit_md5
+                      styles:
+                        card:
+                          - background: none
+                          - border: none
+                          - box-shadow: none
+                        icon:
+                          - animation: |
+                              [[[
+                                return entity.state === 'on' ? 'rotating 1s linear infinite' : '';
+                              ]]]
+                          - color: |
+                              [[[
+                                return entity.state === 'on' ? '#ff9800' : 'rgba(85, 252, 252, 1)';
+                              ]]]
+                          - width: 32px
+                          - left: 17%
+              - type: markdown
+                content: >
+                  {% set text = state_attr('sensor.audit_md5_journal', 'text')
+                  or '' %} {% set r = namespace(res='', ter='') %} {% for line
+                  in text.split('\n') %}
+                    {% if 'RÉSULTAT' in line %}{% set r.res = line %}{% endif %}
+                    {% if 'Audit MD5 terminé' in line %}{% set r.ter = line.split(' · ')[0] %}{% endif %}
+                  {% endfor %} {% if r.res %} {{ r.res }}<br>{{ r.ter }}<br>→
+                  /config/.logs/md5_audit_{{ now().strftime('%Y-%m-%d') }}.txt
+                  {% else %}*— Aucun audit lancé —*{% endif %}
+                card_mod:
+                  style: |
+                    ha-card {
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: transparent;
+                    }
+                    ha-markdown { font-size: 12px; line-height: 1.8; }
           - type: custom:bubble-card
             card_type: separator
             name: GitHub
@@ -29539,7 +29764,7 @@ views:
             cards:
               - type: vertical-stack
                 cards:
-                  - type: custom:entity-progress-card-template
+                  - type: custom:entity-progress-card
                     entity: sensor.qualite_globale_pollen_vence
                     name: Qualité Pollens
                     icon: mdi:flower-pollen
@@ -29809,7 +30034,7 @@ views:
             cards:
               - type: vertical-stack
                 cards:
-                  - type: custom:entity-progress-card-template
+                  - type: custom:entity-progress-card
                     entity: sensor.qualite_globale_vence
                     name: Qualité Air
                     secondary: "{{ state_attr(entity, 'Libellé') }} ({{ states(entity) }})"
