@@ -15,7 +15,7 @@
     {# Calcul du cosinus de l'élévation en radians #}
     {%- set cos_elevation = cos(elevation_rad) -%}
     {# Calcul de la coordonnée "top" en fonction des cosinus, résultat converti en entier (50% - 49% facteur de l'élevation pour avoir une valeur entre 1 et 99) #}
-    {{- (50 - 45 * cos_azimuth * cos_elevation) | int(0) -}}
+    {{- (40 - 45 * cos_azimuth * cos_elevation) | int(0) -}}
 
 {%- endmacro -%}
 
@@ -30,7 +30,7 @@
     {# Calcul du cosinus de l'élévation en radians #}
     {%- set cos_elevation = cos(elevation_rad) -%}
     {# Calcul de la coordonnée "left" en fonction du sinus et du cosinus, résultat converti en entier (50% - 49% facteur de l'élevation pour avoir une valeur entre 1 et 99) #}
-    {{- (50 - 45 * sin_azimuth * cos_elevation) | int(0) -}}
+    {{- (40 - 45 * sin_azimuth * cos_elevation) | int(0) -}}
 {%- endmacro -%}
 
 {# Macro pour calculer la coordonnée "top" avec l'angle de la maison défini #}
