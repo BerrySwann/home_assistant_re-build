@@ -1,0 +1,37 @@
+id: '1766948374171'
+alias: Allumage Lumière Entrée
+description: "Gestion de l'éclairage de l'entrée basée sur les transitions des groupes  de présence et la période de la journée.\n"
+triggers:
+- alias: SURVEILLANCE DU CHANGEMENT DE GROUPE DE PRÉSENCE
+  trigger: state
+  entity_id: sensor.groupe
+actions:
+- alias: CHOIX DE LA LOGIQUE SELON LA TRANSITION DÉTECTÉE
+  choose:
+  - alias: 'CAS 1 : ARRIVÉE INITIALE EN PÉRIODE DIURNE (G1 -> PRÉSENCE)'
+    conditions:
+    - alias: 'VÉRIFICATION : PASSAGE DE ABSENT À PRÉSENT'
+      condition: template
+      value_template: "{{ trigger.from_state.state == 'groupe_1' and \n   trigger.to_state.state\
+        \ in ['groupe_2', 'groupe_3', 'groupe_4'] }}"
+    - alias: 'VÉRIFICATION : PÉRIODE DIURNE (SOLEIL LEVÉ)'
+      condition: state
+      entity_id: sun.sun
+      state: above_horizon
+    sequence:
+    - alias: 'ACTION : ALLUMAGE DE LA LUMIÈRE ENTRÉE'
+      action: light.turn_on
+      target:
+        entity_id: light.entree
+  - alias: 'CAS 2 : RETOUR DE MAMOUR (TRANSITION G3 VERS G4)'
+    conditions:
+    - alias: 'VÉRIFICATION : PASSAGE DE ERIC SEUL À DUO'
+      condition: template
+      value_template: "{{ trigger.from_state.state == 'groupe_3' and \n   trigger.to_state.state\
+        \ == 'groupe_4' }}"
+    sequence:
+    - alias: 'ACTION : ALLUMAGE DE LA LUMIÈRE ENTRÉE'
+      action: light.turn_on
+      target:
+        entity_id: light.entree
+mode: queued

@@ -1,0 +1,7 @@
+id: '1772276622703'
+alias: '[04-Backup] Git push manuel'
+triggers:
+- trigger: state
+  entity_id: input_button.git_push_manuel
+actions:
+- action: shell_command.git_backup_push_manual

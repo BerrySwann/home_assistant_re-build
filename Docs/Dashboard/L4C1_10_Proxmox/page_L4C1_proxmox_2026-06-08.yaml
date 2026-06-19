@@ -1,0 +1,1707 @@
+type: grid
+cards:
+  - type: heading
+    icon: phu:proxmox
+    heading: PROXMOX
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - type: custom:stack-in-card
+    mode: vertical
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style: |-
+                bar-card-currentbar { border-radius: 10px; }
+                  bar-card-currentbar, bar-card-current, bar-card-backgroundbar {
+                  height: 6px !important;
+                    }
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: Proxmox VE
+      - type: custom:button-card
+        entity: sensor.pve_statut
+        name: PROXMOX VE
+        icon: phu:proxmox
+        show_state: true
+        state:
+          - value: online
+            styles:
+              state:
+                - color: rgb(15,157,88)
+                - background: rgba(15,157,88,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+          - value: offline
+            styles:
+              state:
+                - color: rgb(244,67,54)
+                - background: rgba(244,67,54,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+        styles:
+          card:
+            - padding: 8px 12px
+            - background: >-
+                linear-gradient(90deg, rgba(15,157,88,0.12) 0%,
+                rgba(15,157,88,0.02) 100%)
+            - border-left: "3px solid #0f9d58 !important"
+            - border-radius: 8px !important
+            - margin-bottom: 2px
+          grid:
+            - grid-template-areas: "\"i n s\""
+            - grid-template-columns: min-content 1fr min-content
+          name:
+            - font-size: 13px
+            - font-weight: bold
+            - justify-self: start
+            - padding-left: 8px
+            - color: "#0f9d58"
+            - letter-spacing: 0.5px
+          state:
+            - font-size: 11px
+            - font-weight: bold
+          icon:
+            - width: 22px
+            - color: "#0f9d58"
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: none !important;
+            }
+      - type: horizontal-stack
+        cards:
+          - type: custom:bar-card
+            entity: sensor.pve_utilisation_du_processeur
+            name: CPU %
+            icon: mdi:cpu-64-bit
+            height: 42px
+            min: 0
+            max: 100
+            decimal: 1
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 75
+              - color: rgb(255,152,0)
+                from: 75.1
+                to: 90
+              - color: rgb(244,67,54)
+                from: 90.1
+                to: 100
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+          - type: custom:bar-card
+            entity: sensor.pve_memory_usage_percentage
+            name: RAM %
+            icon: mdi:memory
+            height: 42px
+            min: 0
+            max: 100
+            decimal: 1
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 75
+              - color: rgb(255,152,0)
+                from: 75.1
+                to: 90
+              - color: rgb(244,67,54)
+                from: 90.1
+                to: 100
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+          - type: custom:bar-card
+            entity: sensor.pve_utilisation_du_disque
+            name: Disk GiB
+            icon: mdi:harddisk
+            height: 42px
+            min: 0
+            max: 94
+            decimal: 2
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 60
+              - color: rgb(255,152,0)
+                from: 60.1
+                to: 80
+              - color: rgb(244,67,54)
+                from: 80.1
+                to: 94
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: sensor.pve_uptime
+            show_name: false
+            show_state: false
+            show_label: true
+            icon: mdi:clock-outline
+            label: |
+              [[[
+                if (!entity || entity.state === "unavailable" || entity.state === "unknown") return "Uptime: N/A";
+                return "Uptime: " + parseFloat(entity.state).toFixed(0) + " h";
+              ]]]
+            styles:
+              card:
+                - padding: 6px 10px
+                - background: rgba(15,157,88,0.05) !important
+              grid:
+                - grid-template-areas: "\"i l\""
+                - grid-template-columns: min-content min-content
+                - align-items: center
+                - justify-content: center
+              label:
+                - font-size: 12px
+                - font-weight: bold
+                - color: white
+                - padding-left: 6px
+              icon:
+                - width: 16px
+                - color: "#0f9d58"
+            tap_action:
+              action: none
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: binary_sensor.pve_backup_status
+            show_name: false
+            show_state: false
+            show_label: true
+            icon: mdi:backup-restore
+            label: |
+              [[[
+                if (!entity || entity.state === "unavailable" || entity.state === "unknown") return "Backup: N/A";
+                return "Backup: " + (entity.state === "off" ? "OK" : "ERREUR");
+              ]]]
+            state:
+              - value: "off"
+                styles:
+                  label:
+                    - color: rgb(15,157,88)
+                  icon:
+                    - color: rgb(15,157,88)
+              - value: "on"
+                styles:
+                  label:
+                    - color: rgb(244,67,54)
+                  icon:
+                    - color: rgb(244,67,54)
+            styles:
+              card:
+                - padding: 6px 10px
+                - background: rgba(15,157,88,0.05) !important
+              grid:
+                - grid-template-areas: "\"i l\""
+                - grid-template-columns: min-content min-content
+                - align-items: center
+                - justify-content: center
+              label:
+                - font-size: 12px
+                - font-weight: bold
+                - padding-left: 6px
+              icon:
+                - width: 16px
+            tap_action:
+              action: none
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: sensor.pve_max_cpu
+            show_name: false
+            show_state: false
+            show_label: true
+            icon: mdi:chip
+            label: |
+              [[[
+                if (!entity || entity.state === "unavailable" || entity.state === "unknown") return "vCPU: N/A";
+                return "vCPU: " + entity.state;
+              ]]]
+            styles:
+              card:
+                - padding: 6px 10px
+                - background: rgba(15,157,88,0.05) !important
+              grid:
+                - grid-template-areas: "\"i l\""
+                - grid-template-columns: min-content min-content
+                - align-items: center
+                - justify-content: center
+              label:
+                - font-size: 12px
+                - font-weight: bold
+                - color: white
+                - padding-left: 6px
+              icon:
+                - width: 16px
+                - color: "#0f9d58"
+            tap_action:
+              action: none
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: button.pve_tout_demarrer
+            name: Tout ON
+            icon: mdi:play
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.pve_tout_demarrer
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(15,157,88,0.1) !important
+              name:
+                - font-size: 11px
+                - font-weight: bold
+                - color: rgb(15,157,88)
+              icon:
+                - color: rgb(15,157,88)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: button.pve_tout_stopper
+            name: Tout OFF
+            icon: mdi:stop
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.pve_tout_stopper
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(244,67,54,0.1) !important
+              name:
+                - font-size: 11px
+                - font-weight: bold
+                - color: rgb(244,67,54)
+              icon:
+                - color: rgb(244,67,54)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: button.pve_redemarrer
+            name: Reboot
+            icon: mdi:restart
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.pve_redemarrer
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(255,152,0,0.1) !important
+              name:
+                - font-size: 11px
+                - font-weight: bold
+                - color: rgb(255,152,0)
+              icon:
+                - color: rgb(255,152,0)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: button.pve_arreter
+            name: Arrêter
+            icon: mdi:power
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.pve_arreter
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(244,67,54,0.15) !important
+              name:
+                - font-size: 11px
+                - font-weight: bold
+                - color: rgb(244,67,54)
+              icon:
+                - color: rgb(244,67,54)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: Home Assistant
+      - type: custom:button-card
+        entity: sensor.homeassistant_statut
+        name: HOME ASSISTANT
+        icon: mdi:home-assistant
+        show_state: true
+        state:
+          - value: running
+            styles:
+              state:
+                - color: rgb(15,157,88)
+                - background: rgba(15,157,88,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+          - value: stopped
+            styles:
+              state:
+                - color: rgb(244,67,54)
+                - background: rgba(244,67,54,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+        styles:
+          card:
+            - padding: 8px 12px
+            - background: >-
+                linear-gradient(90deg, rgba(3,169,244,0.12) 0%,
+                rgba(3,169,244,0.02) 100%)
+            - border-left: "3px solid #03a9f4 !important"
+            - border-radius: 8px !important
+            - margin-bottom: 2px
+          grid:
+            - grid-template-areas: "\"i n s\""
+            - grid-template-columns: min-content 1fr min-content
+          name:
+            - font-size: 13px
+            - font-weight: bold
+            - justify-self: start
+            - padding-left: 8px
+            - color: "#03a9f4"
+            - letter-spacing: 0.5px
+          state:
+            - font-size: 11px
+            - font-weight: bold
+          icon:
+            - width: 22px
+            - color: "#03a9f4"
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: none !important;
+            }
+      - type: horizontal-stack
+        cards:
+          - type: custom:bar-card
+            entity: sensor.system_monitor_utilisation_du_processeur
+            name: CPU %
+            icon: mdi:cpu-64-bit
+            height: 42px
+            min: 0
+            max: 100
+            target: 82
+            decimal: 1
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 75
+              - color: rgb(255,152,0)
+                from: 75.1
+                to: 90
+              - color: rgb(244,67,54)
+                from: 90.1
+                to: 100
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+          - type: custom:bar-card
+            entity: sensor.system_monitor_utilisation_de_la_memoire
+            name: RAM %
+            icon: mdi:memory
+            height: 42px
+            min: 0
+            max: 100
+            target: 72
+            decimal: 1
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 75
+              - color: rgb(255,152,0)
+                from: 75.1
+                to: 90
+              - color: rgb(244,67,54)
+                from: 90.1
+                to: 100
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+          - type: custom:bar-card
+            entity: sensor.system_monitor_utilisation_du_disque
+            name: Disk GiB
+            icon: mdi:harddisk
+            height: 42px
+            min: 0
+            max: 32
+            target: 22
+            decimal: 1
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 20
+              - color: rgb(255,152,0)
+                from: 20.1
+                to: 28
+              - color: rgb(244,67,54)
+                from: 28.1
+                to: 32
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: sensor.homeassistant_uptime
+            show_name: false
+            show_state: false
+            show_label: true
+            icon: mdi:clock-outline
+            label: |
+              [[[
+                if (!entity || entity.state === "unavailable" || entity.state === "unknown") return "Uptime: N/A";
+                return "Uptime: " + parseFloat(entity.state).toFixed(0) + " h";
+              ]]]
+            styles:
+              card:
+                - padding: 6px 10px
+                - background: rgba(3,169,244,0.05) !important
+              grid:
+                - grid-template-areas: "\"i l\""
+                - grid-template-columns: min-content min-content
+                - align-items: center
+                - justify-content: center
+              label:
+                - font-size: 12px
+                - font-weight: bold
+                - color: white
+                - padding-left: 6px
+              icon:
+                - width: 16px
+                - color: "#03a9f4"
+            tap_action:
+              action: none
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: sensor.homeassistant_max_cpu
+            show_name: false
+            show_state: false
+            show_label: true
+            icon: mdi:chip
+            label: |
+              [[[
+                if (!entity || entity.state === "unavailable" || entity.state === "unknown") return "vCPU: N/A";
+                return "vCPU: " + entity.state;
+              ]]]
+            styles:
+              card:
+                - padding: 6px 10px
+                - background: rgba(3,169,244,0.05) !important
+              grid:
+                - grid-template-areas: "\"i l\""
+                - grid-template-columns: min-content min-content
+                - align-items: center
+                - justify-content: center
+              label:
+                - font-size: 12px
+                - font-weight: bold
+                - color: white
+                - padding-left: 6px
+              icon:
+                - width: 16px
+                - color: "#03a9f4"
+            tap_action:
+              action: none
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: button.homeassistant_demarrer
+            name: Démarrer
+            icon: mdi:play
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.homeassistant_demarrer
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(15,157,88,0.1) !important
+              name:
+                - font-size: 10px
+                - font-weight: bold
+                - color: rgb(15,157,88)
+              icon:
+                - color: rgb(15,157,88)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: button.homeassistant_stopper
+            name: Stopper
+            icon: mdi:stop
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.homeassistant_stopper
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(244,67,54,0.1) !important
+              name:
+                - font-size: 10px
+                - font-weight: bold
+                - color: rgb(244,67,54)
+              icon:
+                - color: rgb(244,67,54)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: button.homeassistant_redemarrer
+            name: LXC
+            icon: mdi:restart
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.homeassistant_redemarrer
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(255,152,0,0.1) !important
+              name:
+                - font-size: 10px
+                - font-weight: bold
+                - color: rgb(255,152,0)
+              icon:
+                - color: rgb(255,152,0)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: button.homeassistant_restart
+            name: HA
+            icon: mdi:home-circle-outline
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.homeassistant_restart
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(255,193,7,0.1) !important
+              name:
+                - font-size: 10px
+                - font-weight: bold
+                - color: rgb(255,193,7)
+              icon:
+                - color: rgb(255,193,7)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: button.homeassistant_reload
+            name: Reload
+            icon: mdi:auto-fix
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.homeassistant_reload
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(33,150,243,0.1) !important
+              name:
+                - font-size: 10px
+                - font-weight: bold
+                - color: rgb(33,150,243)
+              icon:
+                - color: rgb(33,150,243)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: ZigBee2MQTT
+      - type: custom:button-card
+        entity: sensor.z2m_statut
+        name: ZIGBEE2MQTT
+        icon: mdi:zigbee
+        show_state: true
+        state:
+          - value: running
+            styles:
+              state:
+                - color: rgb(15,157,88)
+                - background: rgba(15,157,88,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+          - value: stopped
+            styles:
+              state:
+                - color: rgb(244,67,54)
+                - background: rgba(244,67,54,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+        styles:
+          card:
+            - padding: 8px 12px
+            - background: >-
+                linear-gradient(90deg, rgba(255,152,0,0.12) 0%,
+                rgba(255,152,0,0.02) 100%)
+            - border-left: "3px solid #ff9800 !important"
+            - border-radius: 8px !important
+            - margin-bottom: 2px
+          grid:
+            - grid-template-areas: "\"i n s\""
+            - grid-template-columns: min-content 1fr min-content
+          name:
+            - font-size: 13px
+            - font-weight: bold
+            - justify-self: start
+            - padding-left: 8px
+            - color: "#ff9800"
+            - letter-spacing: 0.5px
+          state:
+            - font-size: 11px
+            - font-weight: bold
+          icon:
+            - width: 22px
+            - color: "#ff9800"
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: none !important;
+            }
+      - type: horizontal-stack
+        cards:
+          - type: custom:bar-card
+            entity: sensor.z2m_utilisation_du_processeur
+            name: CPU %
+            icon: mdi:cpu-64-bit
+            height: 42px
+            min: 0
+            max: 100
+            decimal: 1
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 40
+              - color: rgb(255,152,0)
+                from: 40.1
+                to: 60
+              - color: rgb(244,67,54)
+                from: 60.1
+                to: 100
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+          - type: custom:bar-card
+            entity: sensor.z2m_memory_usage_percentage
+            name: RAM %
+            icon: mdi:memory
+            height: 42px
+            min: 0
+            max: 100
+            decimal: 1
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 50
+              - color: rgb(255,152,0)
+                from: 50.1
+                to: 70
+              - color: rgb(244,67,54)
+                from: 70.1
+                to: 100
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+          - type: custom:bar-card
+            entity: sensor.z2m_utilisation_du_disque
+            name: Disk GiB
+            icon: mdi:harddisk
+            height: 42px
+            min: 0
+            max: 3.86
+            decimal: 2
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 2.5
+              - color: rgb(255,152,0)
+                from: 2.51
+                to: 3.4
+              - color: rgb(244,67,54)
+                from: 3.41
+                to: 3.86
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: sensor.z2m_uptime
+            show_name: false
+            show_state: false
+            show_label: true
+            icon: mdi:clock-outline
+            label: |
+              [[[
+                if (!entity || entity.state === "unavailable" || entity.state === "unknown") return "Uptime: N/A";
+                return "Uptime: " + parseFloat(entity.state).toFixed(0) + " h";
+              ]]]
+            styles:
+              card:
+                - padding: 6px 10px
+                - background: rgba(255,152,0,0.05) !important
+              grid:
+                - grid-template-areas: "\"i l\""
+                - grid-template-columns: min-content min-content
+                - align-items: center
+                - justify-content: center
+              label:
+                - font-size: 12px
+                - font-weight: bold
+                - color: white
+                - padding-left: 6px
+              icon:
+                - width: 16px
+                - color: "#ff9800"
+            tap_action:
+              action: none
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: sensor.z2m_max_cpu
+            show_name: false
+            show_state: false
+            show_label: true
+            icon: mdi:chip
+            label: |
+              [[[
+                if (!entity || entity.state === "unavailable" || entity.state === "unknown") return "vCPU: N/A";
+                return "vCPU: " + entity.state;
+              ]]]
+            styles:
+              card:
+                - padding: 6px 10px
+                - background: rgba(255,152,0,0.05) !important
+              grid:
+                - grid-template-areas: "\"i l\""
+                - grid-template-columns: min-content min-content
+                - align-items: center
+                - justify-content: center
+              label:
+                - font-size: 12px
+                - font-weight: bold
+                - color: white
+                - padding-left: 6px
+              icon:
+                - width: 16px
+                - color: "#ff9800"
+            tap_action:
+              action: none
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: button.z2m_demarrer
+            name: Démarrer
+            icon: mdi:play
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.z2m_demarrer
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(15,157,88,0.1) !important
+              name:
+                - font-size: 11px
+                - font-weight: bold
+                - color: rgb(15,157,88)
+              icon:
+                - color: rgb(15,157,88)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: button.z2m_stopper
+            name: Stopper
+            icon: mdi:stop
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.z2m_stopper
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(244,67,54,0.1) !important
+              name:
+                - font-size: 11px
+                - font-weight: bold
+                - color: rgb(244,67,54)
+              icon:
+                - color: rgb(244,67,54)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: button.z2m_redemarrer
+            name: Relancer
+            icon: mdi:restart
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.z2m_redemarrer
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(255,152,0,0.1) !important
+              name:
+                - font-size: 11px
+                - font-weight: bold
+                - color: rgb(255,152,0)
+              icon:
+                - color: rgb(255,152,0)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: MariaDB
+      - type: custom:button-card
+        entity: sensor.mariadb_statut
+        name: MARIADB
+        icon: mdi:database
+        show_state: true
+        state:
+          - value: running
+            styles:
+              state:
+                - color: rgb(15,157,88)
+                - background: rgba(15,157,88,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+          - value: stopped
+            styles:
+              state:
+                - color: rgb(244,67,54)
+                - background: rgba(244,67,54,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+        styles:
+          card:
+            - padding: 8px 12px
+            - background: >-
+                linear-gradient(90deg, rgba(244,67,54,0.12) 0%,
+                rgba(244,67,54,0.02) 100%)
+            - border-left: "3px solid #f44336 !important"
+            - border-radius: 8px !important
+            - margin-bottom: 2px
+          grid:
+            - grid-template-areas: "\"i n s\""
+            - grid-template-columns: min-content 1fr min-content
+          name:
+            - font-size: 13px
+            - font-weight: bold
+            - justify-self: start
+            - padding-left: 8px
+            - color: "#f44336"
+            - letter-spacing: 0.5px
+          state:
+            - font-size: 11px
+            - font-weight: bold
+          icon:
+            - width: 22px
+            - color: "#f44336"
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: none !important;
+            }
+      - type: horizontal-stack
+        cards:
+          - type: custom:bar-card
+            entity: sensor.mariadb_utilisation_du_processeur
+            name: CPU %
+            icon: mdi:cpu-64-bit
+            height: 42px
+            min: 0
+            max: 100
+            decimal: 1
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 50
+              - color: rgb(255,152,0)
+                from: 50.1
+                to: 75
+              - color: rgb(244,67,54)
+                from: 75.1
+                to: 100
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+          - type: custom:bar-card
+            entity: sensor.mariadb_memory_usage_percentage
+            name: RAM %
+            icon: mdi:memory
+            height: 42px
+            min: 0
+            max: 100
+            decimal: 1
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 60
+              - color: rgb(255,152,0)
+                from: 60.1
+                to: 80
+              - color: rgb(244,67,54)
+                from: 80.1
+                to: 100
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+          - type: custom:bar-card
+            entity: sensor.mariadb_utilisation_du_disque
+            name: Disk GiB
+            icon: mdi:harddisk
+            height: 42px
+            min: 0
+            max: 7.78
+            decimal: 2
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 5
+              - color: rgb(255,152,0)
+                from: 5.01
+                to: 7
+              - color: rgb(244,67,54)
+                from: 7.01
+                to: 7.78
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: sensor.mariadb_uptime
+            show_name: false
+            show_state: false
+            show_label: true
+            icon: mdi:clock-outline
+            label: |
+              [[[
+                if (!entity || entity.state === "unavailable" || entity.state === "unknown") return "Uptime: N/A";
+                return "Uptime: " + parseFloat(entity.state).toFixed(0) + " h";
+              ]]]
+            styles:
+              card:
+                - padding: 6px 10px
+                - background: rgba(244,67,54,0.05) !important
+              grid:
+                - grid-template-areas: "\"i l\""
+                - grid-template-columns: min-content min-content
+                - align-items: center
+                - justify-content: center
+              label:
+                - font-size: 12px
+                - font-weight: bold
+                - color: white
+                - padding-left: 6px
+              icon:
+                - width: 16px
+                - color: "#f44336"
+            tap_action:
+              action: none
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: sensor.mariadb_max_cpu
+            show_name: false
+            show_state: false
+            show_label: true
+            icon: mdi:chip
+            label: |
+              [[[
+                if (!entity || entity.state === "unavailable" || entity.state === "unknown") return "vCPU: N/A";
+                return "vCPU: " + entity.state;
+              ]]]
+            styles:
+              card:
+                - padding: 6px 10px
+                - background: rgba(244,67,54,0.05) !important
+              grid:
+                - grid-template-areas: "\"i l\""
+                - grid-template-columns: min-content min-content
+                - align-items: center
+                - justify-content: center
+              label:
+                - font-size: 12px
+                - font-weight: bold
+                - color: white
+                - padding-left: 6px
+              icon:
+                - width: 16px
+                - color: "#f44336"
+            tap_action:
+              action: none
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: button.mariadb_demarrer
+            name: Démarrer
+            icon: mdi:play
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.mariadb_demarrer
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(15,157,88,0.1) !important
+              name:
+                - font-size: 11px
+                - font-weight: bold
+                - color: rgb(15,157,88)
+              icon:
+                - color: rgb(15,157,88)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: button.mariadb_stopper
+            name: Stopper
+            icon: mdi:stop
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.mariadb_stopper
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(244,67,54,0.1) !important
+              name:
+                - font-size: 11px
+                - font-weight: bold
+                - color: rgb(244,67,54)
+              icon:
+                - color: rgb(244,67,54)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: button.mariadb_redemarrer
+            name: Relancer
+            icon: mdi:restart
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.mariadb_redemarrer
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(255,152,0,0.1) !important
+              name:
+                - font-size: 11px
+                - font-weight: bold
+                - color: rgb(255,152,0)
+              icon:
+                - color: rgb(255,152,0)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+      # ─────────────────────────────────────────────
+      # LXC 202 — MYELECTRICALDATA (.245)
+      # ─────────────────────────────────────────────
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: MyElectricalData
+      - type: custom:button-card
+        entity: sensor.myelectricaldata_statut
+        name: MYELECTRICALDATA
+        icon: mdi:transmission-tower
+        show_state: true
+        state:
+          - value: running
+            styles:
+              state:
+                - color: rgb(0,188,212)
+                - background: rgba(0,188,212,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+          - value: stopped
+            styles:
+              state:
+                - color: rgb(244,67,54)
+                - background: rgba(244,67,54,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+        styles:
+          card:
+            - padding: 8px 12px
+            - background: >-
+                linear-gradient(90deg, rgba(0,188,212,0.12) 0%,
+                rgba(0,188,212,0.02) 100%)
+            - border-left: "3px solid #00bcd4 !important"
+            - border-radius: 8px !important
+            - margin-bottom: 2px
+          grid:
+            - grid-template-areas: "\"i n s\""
+            - grid-template-columns: min-content 1fr min-content
+          name:
+            - font-size: 13px
+            - font-weight: bold
+            - justify-self: start
+            - padding-left: 8px
+            - color: "#00bcd4"
+            - letter-spacing: 0.5px
+          state:
+            - font-size: 11px
+            - font-weight: bold
+          icon:
+            - width: 22px
+            - color: "#00bcd4"
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: none !important;
+            }
+      - type: horizontal-stack
+        cards:
+          - type: custom:bar-card
+            entity: sensor.myelectricaldata_utilisation_du_processeur
+            name: CPU %
+            icon: mdi:cpu-64-bit
+            height: 42px
+            min: 0
+            max: 100
+            decimal: 1
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 40
+              - color: rgb(255,152,0)
+                from: 40.1
+                to: 60
+              - color: rgb(244,67,54)
+                from: 60.1
+                to: 100
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+          - type: custom:bar-card
+            entity: sensor.myelectricaldata_memory_usage_percentage
+            name: RAM %
+            icon: mdi:memory
+            height: 42px
+            min: 0
+            max: 100
+            decimal: 1
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 50
+              - color: rgb(255,152,0)
+                from: 50.1
+                to: 70
+              - color: rgb(244,67,54)
+                from: 70.1
+                to: 100
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+          - type: custom:bar-card
+            entity: sensor.myelectricaldata_utilisation_du_disque
+            name: Disk GiB
+            icon: mdi:harddisk
+            height: 42px
+            min: 0
+            max: 10  # ⚠️ À ajuster selon allocation réelle LXC 202
+            decimal: 2
+            animation:
+              state: "on"
+            positions:
+              icon: inside
+              indicator: inside
+            entity_row: true
+            tap_action:
+              action: none
+            severity:
+              - color: rgb(15,157,88)
+                from: 0
+                to: 6
+              - color: rgb(255,152,0)
+                from: 6.01
+                to: 8.5
+              - color: rgb(244,67,54)
+                from: 8.51
+                to: 10
+            card_mod:
+              style: |
+                ha-card {
+                  font-size: 12px; font-weight: bold;
+                  --mdc-icon-size: 26px;
+                  --paper-item-icon-color: white !important;
+                  border: none !important; box-shadow: none !important; background: none !important;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: sensor.myelectricaldata_uptime
+            show_name: false
+            show_state: false
+            show_label: true
+            icon: mdi:clock-outline
+            label: |
+              [[[
+                if (!entity || entity.state === "unavailable" || entity.state === "unknown") return "Uptime: N/A";
+                return "Uptime: " + parseFloat(entity.state).toFixed(0) + " h";
+              ]]]
+            styles:
+              card:
+                - padding: 6px 10px
+                - background: rgba(0,188,212,0.05) !important
+              grid:
+                - grid-template-areas: "\"i l\""
+                - grid-template-columns: min-content min-content
+                - align-items: center
+                - justify-content: center
+              label:
+                - font-size: 12px
+                - font-weight: bold
+                - color: white
+                - padding-left: 6px
+              icon:
+                - width: 16px
+                - color: "#00bcd4"
+            tap_action:
+              action: none
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: sensor.myelectricaldata_max_cpu
+            show_name: false
+            show_state: false
+            show_label: true
+            icon: mdi:chip
+            label: |
+              [[[
+                if (!entity || entity.state === "unavailable" || entity.state === "unknown") return "vCPU: N/A";
+                return "vCPU: " + entity.state;
+              ]]]
+            styles:
+              card:
+                - padding: 6px 10px
+                - background: rgba(0,188,212,0.05) !important
+              grid:
+                - grid-template-areas: "\"i l\""
+                - grid-template-columns: min-content min-content
+                - align-items: center
+                - justify-content: center
+              label:
+                - font-size: 12px
+                - font-weight: bold
+                - color: white
+                - padding-left: 6px
+              icon:
+                - width: 16px
+                - color: "#00bcd4"
+            tap_action:
+              action: none
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: button.myelectricaldata_demarrer
+            name: Démarrer
+            icon: mdi:play
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.myelectricaldata_demarrer
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(15,157,88,0.1) !important
+              name:
+                - font-size: 11px
+                - font-weight: bold
+                - color: rgb(15,157,88)
+              icon:
+                - color: rgb(15,157,88)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: button.myelectricaldata_stopper
+            name: Stopper
+            icon: mdi:stop
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.myelectricaldata_stopper
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(244,67,54,0.1) !important
+              name:
+                - font-size: 11px
+                - font-weight: bold
+                - color: rgb(244,67,54)
+              icon:
+                - color: rgb(244,67,54)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+          - type: custom:button-card
+            entity: button.myelectricaldata_redemarrer
+            name: Relancer
+            icon: mdi:restart
+            tap_action:
+              action: call-service
+              service: button.press
+              target:
+                entity_id: button.myelectricaldata_redemarrer
+            styles:
+              card:
+                - padding: 6px
+                - background: rgba(0,188,212,0.1) !important
+              name:
+                - font-size: 11px
+                - font-weight: bold
+                - color: rgb(0,188,212)
+              icon:
+                - color: rgb(0,188,212)
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important;
+                }
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }

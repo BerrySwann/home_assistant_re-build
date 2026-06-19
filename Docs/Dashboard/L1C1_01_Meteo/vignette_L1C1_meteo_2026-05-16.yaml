@@ -1,0 +1,42 @@
+type: custom:button-card
+show_icon: false
+show_entity_picture: true
+entity_picture: "[[[ return '/local/images/meteocons/' + states['weather.vence'].state + '.svg'; ]]]"
+tap_action:
+  action: navigate
+  navigation_path: /dashboard-tablette/meteo
+name: Météo
+custom_fields:
+  info: "[[[ return states['sensor.vence_original_condition'].state + ' - ' + Math.round(parseFloat(states['sensor.th_balcon_nord_temperature'].state)) + '°' ]]]"
+styles:
+  card:
+    - aspect-ratio: 1/1
+    - border-radius: 10px
+    - background: transparent
+    - border-width: 3px
+    - border-color: white
+    - border-style: double
+    - color: white
+    - font-size: 15px
+  entity_picture:
+    - width: 55%
+    - height: auto
+    - position: absolute
+    - left: 24%
+    - top: 19%
+  name:
+    - color: white
+    - top: 12%
+    - left: 10%
+    - font-size: 80%
+    - font-weight: bold
+    - position: absolute
+  custom_fields:
+    info:
+      - position: absolute
+      - bottom: 10%
+      - width: 100%
+      - text-align: center
+      - color: white
+      - font-size: 80%
+      - font-weight: bold

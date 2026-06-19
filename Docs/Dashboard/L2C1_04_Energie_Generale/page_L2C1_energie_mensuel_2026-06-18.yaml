@@ -1,0 +1,233 @@
+# Page Mensuel L2C1 — Navigation: /dashboard-tablette/energie-mensuel
+# Sauvegardé: 2026-06-18
+
+type: grid
+columns: 1
+square: false
+cards:
+  - type: vertical-stack
+    cards:
+      - type: heading
+        icon: mdi:calendar-month-outline
+        heading: Consommations Mensuelles
+        heading_style: title
+        badges:
+          - type: entity
+            entity: sensor.genelec_appart_mensuel_um
+            show_state: true
+            show_icon: true
+            name: Mois
+            color: blue
+            state_content:
+              - name
+              - state
+          - type: entity
+            entity: sensor.genelec_appart_cout_total_mensuel
+            show_state: true
+            show_icon: true
+            name: Coût
+            color: yellow
+            state_content:
+              - name
+              - state
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/energie
+  - type: custom:apexcharts-card
+    chart_type: donut
+    apex_config:
+      chart:
+        height: 400px
+    header:
+      show: true
+      title: Répartition Mensuelle par Appareil
+      show_states: true
+      colorize_states: true
+    all_series_config:
+      show: { legend_value: true }
+    series:
+      - { entity: sensor.prise_box_internet_ikea_mensuel_um, transform: "return x * 1000;", unit: Wh, name: "Box (+)", color: "rgb(183, 183, 183)" }
+      - { entity: sensor.prise_horloge_ikea_mensuel_um, transform: "return x * 1000;", unit: Wh, name: "Horloge (+)", color: "rgb(220, 220, 220)" }
+      - { entity: sensor.prise_pc_s_gege_ikea_mensuel_um, transform: "return x * 1000;", unit: Wh, name: PCg, color: "rgb(174, 68, 90)" }
+      - { entity: sensor.prise_salon_chargeur_nous_mensuel_um, transform: "return x * 1000;", unit: Wh, name: "Charge (+)", color: "rgb(196, 75, 97)" }
+      - { entity: sensor.prise_tv_salon_ikea_mensuel_um, transform: "return x * 1000;", unit: Wh, name: "TV Salon", color: "rgb(215, 95, 115)" }
+      - { entity: sensor.prise_four_micro_ondes_nous_mensuel_um, transform: "return x * 1000;", unit: Wh, name: "Four M.O. (+)", color: "rgb(98, 78, 136)" }
+      - { entity: sensor.prise_petit_dejeune_nous_mensuel_um, transform: "return x * 1000;", unit: Wh, name: "P'tit Dej. (+)", color: "rgb(118, 93, 160)" }
+      - { entity: sensor.prise_lave_linge_nous_mensuel_um, transform: "return x * 1000;", unit: Wh, name: Linge, color: "rgb(137, 103, 179)" }
+      - { entity: sensor.prise_lave_vaisselle_nous_mensuel_um, transform: "return x * 1000;", unit: Wh, name: Vaisselle, color: "rgb(129, 116, 180)" }
+      - { entity: sensor.prise_airfryer_ninja_nous_mensuel_um, transform: "return x * 1000;", unit: Wh, name: "Airfryer (+)", color: "rgb(142, 122, 181)" }
+      - { entity: sensor.four_et_plaque_de_cuisson_mensuel_um, transform: "return x * 1000;", unit: Wh, name: "Four/Plq.", color: "rgb(162, 148, 249)" }
+      - { entity: sensor.prise_frigo_cuisine_nous_mensuel_um, transform: "return x * 1000;", unit: Wh, name: Frigo, color: "rgb(19, 160, 255)" }
+      - { entity: sensor.prise_congelateur_cuisine_nous_mensuel_um, transform: "return x * 1000;", unit: Wh, name: "Congél.", color: "rgb(0, 255, 255)" }
+      - { entity: sensor.prise_bureau_pc_ikea_mensuel_um, transform: "return x * 1000;", unit: Wh, name: PCe, color: "rgb(255, 165, 0)" }
+      - { entity: sensor.prise_bureau_fer_a_repasser_nous_mensuel_um, transform: "return x * 1000;", unit: Wh, name: "FàR (+)", color: "rgb(255, 183, 51)" }
+      - { entity: sensor.prise_tete_de_lit_chambre_mensuel_um, transform: "return x * 1000;", unit: Wh, name: "Têtes L. (+)", color: "rgb(75, 130, 85)" }
+      - { entity: sensor.prise_tv_chambre_nous_mensuel_um, transform: "return x * 1000;", unit: Wh, name: "TV (+)", color: "rgb(105, 155, 110)" }
+      - { entity: sensor.all_standby_mensuel_um, transform: "return x * 1000;", unit: Wh, name: Veilles, color: "rgb(109, 76, 65)" }
+    card_mod:
+      style: |
+        ha-card { background: none !important; box-shadow: none !important; border: none !important; }
+  - type: vertical-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: separator
+        name: "Détails par pièce"
+        icon: mdi:arrow-right-bottom-bold
+        rows: 2
+        styles: |
+          .bubble-line { background: var(--primary-text-color); opacity: 1; }
+      - type: custom:tabbed-card
+        styles:
+          "--mdc-theme-primary": white
+          "--mdc-tab-text-label-color-default": rgba(255, 255, 255, 0.25)
+        tabs:
+          - attributes: { label: "1. Entrée", icon: mdi:door }
+            card:
+              type: vertical-stack
+              cards:
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: Box Internet
+                    - energy_color: rgb(183, 183, 183)
+                    - conso_monthly_entity: sensor.prise_box_internet_ikea_mensuel_um
+                    - avg_monthly_entity: sensor.box_internet_avg_watts_mensuel
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: Horloge Entrée
+                    - energy_color: rgb(220, 220, 220)
+                    - conso_monthly_entity: sensor.prise_horloge_ikea_mensuel_um
+                    - avg_monthly_entity: sensor.horloge_avg_watts_mensuel
+          - attributes: { label: "4. Salon", icon: mdi:sofa }
+            card:
+              type: vertical-stack
+              cards:
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: PC's Géraldine
+                    - energy_color: rgb(174, 68, 90)
+                    - conso_monthly_entity: sensor.prise_pc_s_gege_ikea_mensuel_um
+                    - avg_monthly_entity: sensor.pc_gege_avg_watts_mensuel
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: Prise Salon (Chargeurs)
+                    - energy_color: rgb(196, 75, 97)
+                    - conso_monthly_entity: sensor.prise_salon_chargeur_nous_mensuel_um
+                    - avg_monthly_entity: sensor.chargeurs_salon_avg_watts_mensuel
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: TV Salon
+                    - energy_color: rgb(215, 95, 115)
+                    - conso_monthly_entity: sensor.prise_tv_salon_ikea_mensuel_um
+                    - avg_monthly_entity: sensor.tv_salon_avg_watts_mensuel
+          - attributes: { label: "5. Cuisine", icon: mdi:fridge }
+            card:
+              type: vertical-stack
+              cards:
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: Four Micro-Ondes
+                    - energy_color: rgb(98, 78, 136)
+                    - conso_monthly_entity: sensor.prise_four_micro_ondes_nous_mensuel_um
+                    - avg_monthly_entity: sensor.four_mo_avg_watts_mensuel
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: Petit Déjeuner
+                    - energy_color: rgb(118, 93, 160)
+                    - conso_monthly_entity: sensor.prise_petit_dejeune_nous_mensuel_um
+                    - avg_monthly_entity: sensor.petit_dej_avg_watts_mensuel
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: Lave-Linge
+                    - energy_color: rgb(137, 103, 179)
+                    - conso_monthly_entity: sensor.prise_lave_linge_nous_mensuel_um
+                    - avg_monthly_entity: sensor.lave_linge_avg_watts_mensuel
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: Lave-Vaisselle
+                    - energy_color: rgb(129, 116, 180)
+                    - conso_monthly_entity: sensor.prise_lave_vaisselle_nous_mensuel_um
+                    - avg_monthly_entity: sensor.lave_vaisselle_avg_watts_mensuel
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: Airfryer / Divers
+                    - energy_color: rgb(142, 122, 181)
+                    - conso_monthly_entity: sensor.prise_airfryer_ninja_nous_mensuel_um
+                    - avg_monthly_entity: sensor.airfryer_avg_watts_mensuel
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: Four & Plaque
+                    - energy_color: rgb(162, 148, 249)
+                    - conso_monthly_entity: sensor.four_et_plaque_de_cuisson_mensuel_um
+                    - avg_monthly_entity: sensor.plaques_cuisson_avg_watts_mensuel
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: Frigo
+                    - energy_color: rgb(19, 160, 255)
+                    - conso_monthly_entity: sensor.prise_frigo_cuisine_nous_mensuel_um
+                    - avg_monthly_entity: sensor.frigo_avg_watts_mensuel
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: Congélateur
+                    - energy_color: rgb(0, 255, 255)
+                    - conso_monthly_entity: sensor.prise_congelateur_cuisine_nous_mensuel_um
+                    - avg_monthly_entity: sensor.congelateur_avg_watts_mensuel
+          - attributes: { label: "7. Bureau", icon: mdi:desktop-tower-monitor }
+            card:
+              type: vertical-stack
+              cards:
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: PC Bureau
+                    - energy_color: rgb(255, 165, 0)
+                    - conso_monthly_entity: sensor.prise_bureau_pc_ikea_mensuel_um
+                    - avg_monthly_entity: sensor.pc_bureau_avg_watts_mensuel
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: Fer à Repasser
+                    - energy_color: rgb(255, 183, 51)
+                    - conso_monthly_entity: sensor.prise_bureau_fer_a_repasser_nous_mensuel_um
+                    - avg_monthly_entity: sensor.fer_repasser_avg_watts_mensuel
+          - attributes: { label: "9. Chambre", icon: mdi:bed }
+            card:
+              type: vertical-stack
+              cards:
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: Têtes de Lit
+                    - energy_color: rgb(75, 130, 85)
+                    - conso_monthly_entity: sensor.prise_tete_de_lit_chambre_mensuel_um
+                    - avg_monthly_entity: sensor.tetes_lit_avg_watts_mensuel
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: TV Chambre
+                    - energy_color: rgb(105, 155, 110)
+                    - conso_monthly_entity: sensor.prise_tv_chambre_nous_mensuel_um
+                    - avg_monthly_entity: sensor.tv_chambre_avg_watts_mensuel
+          - attributes: { label: Veilles, icon: mdi:sleep }
+            card:
+              type: vertical-stack
+              cards:
+                - type: custom:streamline-card
+                  template: conso_mensuelle_appareil
+                  variables:
+                    - card_title: Veilles Globales
+                    - energy_color: rgb(109, 76, 65)
+                    - conso_monthly_entity: sensor.all_standby_mensuel_um
+                    - avg_monthly_entity: sensor.all_standby_avg_watts_mensuel

@@ -1,0 +1,13 @@
+id: '1766779705982'
+alias: DB Purge MariaDB + Repack
+description: 'Ménage nocturne pour réduire la taille de la base de données (7 jours de rétention + Repack)'
+triggers:
+- trigger: time
+  at: 00:30:00
+conditions: []
+actions:
+- action: recorder.purge
+  data:
+    keep_days: 7
+    repack: true
+mode: single

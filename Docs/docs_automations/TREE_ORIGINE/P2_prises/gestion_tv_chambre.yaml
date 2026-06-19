@@ -1,0 +1,53 @@
+id: '1766777579708'
+alias: 'Gestion TV Chambre : Scène de Fin + Notif'
+description: "Éteint les lumières et notifie, mais laisse la prise ON pour le suivi conso  lorsqu'une veille est détectée.\n"
+triggers:
+- id: bouton_mqtt
+  trigger: mqtt
+  topic: zigbee2mqtt/Inter TV Chambre (IKEA RODRET)
+- id: allumage_auto
+  trigger: time
+  at: '21:00:00'
+- id: extinction_conso
+  trigger: numeric_state
+  entity_id: sensor.prise_tv_chambre_nous_power
+  below: 20
+  for:
+    minutes: 2
+actions:
+- choose:
+  - alias: 'ALLUMAGE : Bouton ON ou 21h00'
+    conditions:
+    - or:
+      - condition: template
+        value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
+          == ''on'' }}'
+      - condition: trigger
+        id: allumage_auto
+    sequence:
+    - action: light.turn_on
+      target:
+        entity_id: light.hue_smart_tv_chambre
+    - action: switch.turn_on
+      target:
+        entity_id: switch.prise_tv_chambre_nous
+  - alias: 'EXTINCTION AMBIANCE : Bouton OFF ou Veille (< 20W)'
+    conditions:
+    - or:
+      - condition: template
+        value_template: '{{ trigger.id == ''bouton_mqtt'' and trigger.payload_json.action
+          == ''off'' }}'
+      - condition: trigger
+        id: extinction_conso
+    sequence:
+    - action: light.turn_off
+      target:
+        entity_id: light.hue_smart_tv_chambre
+    - action: notify.mobile_app_eric
+      data:
+        title: Veille détectée
+        message: Prise TV [OFF]
+        data:
+          icon: mdi:eye-outline
+          tag: notif_tv_chambre
+mode: parallel

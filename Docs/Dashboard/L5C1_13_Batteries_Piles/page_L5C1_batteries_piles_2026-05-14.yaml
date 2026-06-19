@@ -1,0 +1,249 @@
+type: grid
+columns: 1
+square: false
+cards:
+  - type: heading
+    icon: mdi:battery-high
+    heading: BATTERIES (Boutons / Thermostats / Détecteurs…)
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - type: heading
+    icon: mdi:battery-high
+    heading_style: title
+    badges: []
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+    heading: Batteries des boutons-poussoirs HUE
+  - type: custom:battery-state-card
+    secondary_info: "{last_changed}"
+    colors:
+      steps:
+        - "#ff0000"
+        - "#ffff00"
+        - "#00ff00"
+      gradient: true
+    filter:
+      exclude:
+        - name: entity_id
+          value: sensor.ne2213_*
+        - name: entity_id
+          value: sensor.gm1901_battery_level
+        - name: entity_id
+          value: sensor.sm_a530f_battery_level
+        - name: entity_id
+          value: sensor.tablette_battery_level
+    collapse:
+      - name: "Boutons HUE (Total : {count} / Mini. : {min} %)"
+        secondary_info: "Niveaux de batterie : {range} %"
+        icon: mdi:light-switch
+        icon_color: first
+        entities:
+          - sensor.hue_smart_button_entee_1_batterie
+          - sensor.hue_smart_button_entee_2_batterie
+          - sensor.hue_smart_button_eco_batterie
+          - sensor.hue_smart_button_table_batterie
+          - sensor.hue_smart_button_cuisine_batterie
+          - sensor.hue_smart_button_couloir_batterie
+          - sensor.hue_smart_button_bureau_batterie
+          - sensor.boutton_salle_de_bain_hue_battery
+          - sensor.hue_smart_button_chambre_batterie
+          - sensor.hue_smart_button_chambre_gege_batterie
+          - sensor.hue_smart_button_chambre_eric_batterie
+    sort:
+      by: state
+    bulk_rename:
+      - from: " Batterie"
+      - from: " Battery"
+      - from: " level"
+      - from: " (HUE)"
+      - from: Hue Smart
+      - from: button
+        to: Bouton
+      - from: Th
+        to: Thermostat
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  - type: heading
+    icon: mdi:battery-high
+    heading_style: title
+    badges: []
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+    heading: Batteries — boutons & détecteurs IKEA
+  - type: custom:battery-state-card
+    secondary_info: "{last_changed}"
+    colors:
+      steps:
+        - "#ff0000"
+        - "#ffff00"
+        - "#00ff00"
+      gradient: true
+    filter:
+      exclude:
+        - name: entity_id
+          value: sensor.ne2213_*
+        - name: entity_id
+          value: sensor.gm1901_battery_level
+        - name: entity_id
+          value: sensor.sm_a530f_battery_level
+        - name: entity_id
+          value: sensor.tablette_battery_level
+    collapse:
+      - name: "Capteurs IKEA (Total : {count} / Mini. : {min} %)"
+        secondary_info: "Niveaux de batterie : {range} %"
+        icon: mdi:hammer-screwdriver
+        icon_color: first
+        entities:
+          - sensor.inter_tv_chambre_ikea_rodret_battery
+          - sensor.inter_bureau_rodret_battery
+          - sensor.inter_somrig_battery
+          - sensor.inter_salon_4_ikea_battery
+          - sensor.detecteur_de_fuite_ikea_battery
+          - sensor.detecteur_vallhorn_battery
+          - sensor.poussoir_ikea_tradfri_battery
+          - sensor.inter_radiateur_salle_de_bain_ikea_rodret_battery
+    sort:
+      by: state
+    bulk_rename:
+      - from: " Batterie"
+      - from: " Battery"
+      - from: " level"
+      - from: " (HUE)"
+      - from: Hue Smart
+      - from: button
+        to: Bouton
+      - from: Th
+        to: Thermostat
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  - type: heading
+    icon: mdi:battery-high
+    heading_style: title
+    badges: []
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+    heading: Batteries — contacts de fenêtres SONOFF
+  - type: custom:battery-state-card
+    secondary_info: "{last_changed}"
+    colors:
+      steps:
+        - "#ff0000"
+        - "#ffff00"
+        - "#00ff00"
+      gradient: true
+    filter:
+      exclude:
+        - name: entity_id
+          value: sensor.ne2213_*
+        - name: entity_id
+          value: sensor.gm1901_battery_level
+        - name: entity_id
+          value: sensor.sm_a530f_battery_level
+        - name: entity_id
+          value: sensor.tablette_battery_level
+    collapse:
+      - name: "Contacts de fenêtres SONOFF (Total : {count} / Mini. : {min} %)"
+        secondary_info: "Niveaux de batterie : {range} %"
+        icon: mdi:window-closed-variant
+        icon_color: first
+        entities:
+          - sensor.contact_fenetre_salon_sonoff_battery
+          - sensor.contact_fenetre_cuisine_sonoff_battery
+          - sensor.contact_fenetre_bureau_sonoff_battery
+          - sensor.contact_fenetre_chambre_sonoff_battery
+    sort:
+      by: state
+    bulk_rename:
+      - from: " Batterie"
+      - from: " Battery"
+      - from: " level"
+      - from: " (HUE)"
+      - from: Hue Smart
+      - from: button
+        to: Bouton
+      - from: Th
+        to: Thermostat
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  - type: heading
+    icon: mdi:battery-high
+    heading_style: title
+    badges: []
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+    heading: Batteries — thermostats SONOFF
+  - type: custom:battery-state-card
+    secondary_info: "{last_changed}"
+    colors:
+      steps:
+        - "#ff0000"
+        - "#ffff00"
+        - "#00ff00"
+      gradient: true
+    filter:
+      exclude:
+        - name: entity_id
+          value: sensor.ne2213_*
+        - name: entity_id
+          value: sensor.gm1901_battery_level
+        - name: entity_id
+          value: sensor.sm_a530f_battery_level
+        - name: entity_id
+          value: sensor.tablette_battery_level
+    collapse:
+      - name: "Thermostats SONOFF (Total : {count} / Mini. : {min} %)"
+        secondary_info: "Niveaux de batterie : {range} %"
+        icon: mdi:thermometer
+        icon_color: first
+        entities:
+          - sensor.th_balcon_nord_battery
+          - sensor.th_salon_battery
+          - sensor.th_cellier_battery
+          - sensor.th_cuisine_battery
+          - sensor.th_bureau_battery
+          - sensor.th_salle_de_bain_battery
+          - sensor.th_chambre_battery
+    sort:
+      by: state
+    bulk_rename:
+      - from: " Batterie"
+      - from: " Battery"
+      - from: " level"
+      - from: " (HUE)"
+      - from: Hue Smart
+      - from: button
+        to: Bouton
+      - from: Th
+        to: Thermostat
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }

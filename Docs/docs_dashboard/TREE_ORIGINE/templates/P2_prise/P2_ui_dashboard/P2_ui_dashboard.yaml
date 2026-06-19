@@ -1,0 +1,85 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 2. UI DASHBOARD — ÉTATS & STATUTS GROS ÉLECTROMÉNAGER (P2)          │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Templates d'affichage pour le tableau de bord — statuts "en cours" des
+# gros électroménagers cuisine (lave-linge, lave-vaisselle).
+# Produit des capteurs "on"/"off" exploitables par automations et cartes UI.
+# Ne contient aucun calcul kWh, DUT ou AVG.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources directes : sensor.prise_*_nous_power (prises NOUS Cuisine)
+#   → seuil 5W : au-dessus = appareil actif, en dessous = veille ou éteint
+# - Le seuil 5W est cohérent avec l'animation des cartes mushroom HOME PAGE.
+# - Visibilité carte HOME PAGE : above 50W (cycle significatif).
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ne pas confondre avec le seuil de visibilité carte (50W) vs seuil template (5W).
+#   Le template 5W sert aux automations (déclenchement fin de cycle).
+#   La carte HOME PAGE s'affiche seulement quand > 50W (cycle actif visible).
+# - Ces capteurs PEUVENT être utilisés dans les history_stats DUT si besoin futur.
+# - Ne PAS y placer de calculs kWh — ce fichier est ui_dashboard UNIQUEMENT.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - HOME PAGE : cartes flottantes lave-linge / lave-vaisselle (visibility > 50W)
+# - L3C2 Commandes Éco (Prises) — statut actif/inactif
+# - Automations : déclencheur fin de cycle (transition "on" → "off")
+
+- sensor:
+
+  # ┌───────────────────────────────────┐
+  # │ 5. CUISINE                        │
+  # └───────────────────────────────────┘
+
+  # --- lave_linge_en_cours ---
+  - name: "Lave-Linge En Cours"
+    unique_id: lave_linge_en_cours
+    icon: mdi:washing-machine
+    state: >
+      {% if states('sensor.prise_lave_linge_nous_power') | float(0) > 5 %}
+        on
+      {% else %}
+        off
+      {% endif %}
+
+  # --- lave_linge_cycle_actif ---
+  - name: "Lave-Linge Cycle Actif"
+    unique_id: lave_linge_cycle_actif
+    icon: mdi:washing-machine-alert
+    state: >
+      {% if states('sensor.prise_lave_linge_nous_power') | float(0) > 50 %}
+        on
+      {% else %}
+        off
+      {% endif %}
+
+  # --- lave_vaisselle_en_cours ---
+  - name: "Lave-Vaisselle En Cours"
+    unique_id: lave_vaisselle_en_cours
+    icon: mdi:dishwasher
+    state: >
+      {% if states('sensor.prise_lave_vaisselle_nous_power') | float(0) > 5 %}
+        on
+      {% else %}
+        off
+      {% endif %}
+
+  # --- lave_vaisselle_cycle_actif ---
+  - name: "Lave-Vaisselle Cycle Actif"
+    unique_id: lave_vaisselle_cycle_actif
+    icon: mdi:dishwasher-alert
+    state: >
+      {% if states('sensor.prise_lave_vaisselle_nous_power') | float(0) > 50 %}
+        on
+      {% else %}
+        off
+      {% endif %}
+
+# annotations_log:
+# [Création] Nouveau fichier ui_dashboard P2 — suit le pattern P1 ui_dashboard.yaml
+# [L1] Seuil 5W  → "en_cours"      : détection activité (animation mushroom card)
+# [L2] Seuil 50W → "cycle_actif"   : cohérent avec visibility condition carte HOME PAGE
+# [L3] Sources   : sensor.prise_lave_linge_nous_power / sensor.prise_lave_vaisselle_nous_power
+# [L4] Usage automations : watcher fin de cycle (on → off sur *_en_cours)
+# [L5] Icônes    : mdi:washing-machine / mdi:dishwasher (cohérent avec cartes HOME PAGE)
