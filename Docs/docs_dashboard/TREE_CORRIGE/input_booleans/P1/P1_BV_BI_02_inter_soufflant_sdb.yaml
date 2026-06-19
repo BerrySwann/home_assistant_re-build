@@ -1,0 +1,38 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 1. INPUT BOOLEAN : INTERRUPTEURS VIRTUELS SDB (SOUFFLANT + RAD.)    │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Interrupteurs virtuels (BP) pour le soufflant et le radiateur de la SDB.
+# Ces booleans servent de médiateurs entre le bouton physique IKEA RODRET
+# et les relais connectés. Le switch template (BI_02_switch_inter_sdb.yaml)
+# lit leur état pour piloter les appareils réels.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - inter_soufflant_salle_de_bain :
+#   Écrit par : automation P2_bouton_rodret_soufflant_sdb.yaml (MQTT IKEA RODRET)
+#   Lu par    : templates/Inter_BP_Virtuel/BI_02_switch_inter_sdb.yaml
+#   Effet     : turn_on → active le soufflant / turn_off → coupe le soufflant
+#
+# - inter_radiateur_salle_de_bain :
+#   Écrit par : automation SDB dédiée (minuterie sèche-serviettes)
+#   Lu par    : templates/Inter_BP_Virtuel/B1_01_inter_sdb.yaml
+#   Effet     : état binaire → binary_sensor.radiateur_salle_de_bain_actif
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ces booleans ne pilotent PAS directement le matériel — ils passent par les
+#   switch templates dans templates/Inter_BP_Virtuel/.
+# - Ne pas supprimer : l'absence de ces entités bloque les automations SDB.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C3 Commandes Clim (état soufflant SDB via input_select.etat_resistance_soufflant_sdb)
+
+# --- inter_soufflant_salle_de_bain ---
+inter_soufflant_salle_de_bain:
+  name: "Inter Soufflant Salle de Bain"
+  icon: mdi:fan
+
+# --- inter_radiateur_salle_de_bain ---
+inter_radiateur_salle_de_bain:
+  name: "Inter Radiateur Salle de Bain"
+  icon: mdi:radiator

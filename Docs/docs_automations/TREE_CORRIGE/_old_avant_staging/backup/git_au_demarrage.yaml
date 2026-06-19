@@ -1,0 +1,14 @@
+id: '1766776477442'
+alias: '[Backup] Git au démarrage HA'
+description: 'Push Git immédiatement au boot de Home Assistant'
+triggers:
+- trigger: homeassistant
+  event: start
+conditions: []
+actions:
+- action: shell_command.git_backup_push
+- action: system_log.write
+  data:
+    level: info
+    message: '[Backup] Exécuté au démarrage HA'
+mode: single

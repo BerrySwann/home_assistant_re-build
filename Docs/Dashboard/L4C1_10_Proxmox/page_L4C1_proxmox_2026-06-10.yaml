@@ -1,0 +1,1207 @@
+type: grid
+cards:
+  - type: heading
+    icon: phu:proxmox
+    heading: PROXMOX
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - type: custom:stack-in-card
+    mode: vertical
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+    cards:
+
+      # ══════════════════════════════════════════════
+      # PROXMOX VE (node)
+      # ══════════════════════════════════════════════
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: Proxmox VE
+      - type: custom:button-card
+        entity: sensor.pve_statut
+        name: PROXMOX VE
+        icon: phu:proxmox
+        show_state: true
+        state:
+          - value: online
+            styles:
+              state:
+                - color: rgb(15,157,88)
+                - background: rgba(15,157,88,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+          - value: offline
+            styles:
+              state:
+                - color: rgb(244,67,54)
+                - background: rgba(244,67,54,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+        styles:
+          card:
+            - padding: 8px 12px
+            - background: >-
+                linear-gradient(90deg, rgba(15,157,88,0.12) 0%,
+                rgba(15,157,88,0.02) 100%)
+            - border-left: "3px solid #0f9d58 !important"
+            - border-radius: 8px !important
+            - margin-bottom: 2px
+          grid:
+            - grid-template-areas: "\"i n s\""
+            - grid-template-columns: min-content 1fr min-content
+          name:
+            - font-size: 13px
+            - font-weight: bold
+            - justify-self: start
+            - padding-left: 8px
+            - color: "#0f9d58"
+            - letter-spacing: 0.5px
+          state:
+            - font-size: 11px
+            - font-weight: bold
+          icon:
+            - width: 22px
+            - color: "#0f9d58"
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var cpu = states['sensor.pve_utilisation_du_processeur'];
+            var vcpu = states['sensor.pve_max_cpu'];
+            if (!cpu || cpu.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">CPU: N/A</div>';
+            var pct = parseFloat(cpu.state);
+            var vcpuStr = (vcpu && vcpu.state !== 'unavailable') ? ' (' + vcpu.state + ' vCPU)' : '';
+            var color = pct < 75 ? '#6ea8d7' : pct < 90 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">CPU' + vcpuStr + '</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + pct.toFixed(1) + ' %</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var used = states['sensor.pve_utilisation_de_la_memoire'];
+            var max = states['sensor.pve_utilisation_maximale_de_la_memoire'];
+            if (!used || used.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">RAM: N/A</div>';
+            var usedV = parseFloat(used.state);
+            var maxV = parseFloat(max.state);
+            var pct = maxV > 0 ? (usedV / maxV * 100) : 0;
+            var color = pct < 60 ? '#6ea8d7' : pct < 80 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">RAM</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + pct.toFixed(1) + '%  (' + usedV.toFixed(2) + ' / ' + maxV.toFixed(1) + ' GiB)</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var used = states['sensor.pve_utilisation_du_disque'];
+            var max = states['sensor.pve_utilisation_maximale_du_disque'];
+            if (!used || used.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">Disque: N/A</div>';
+            var usedV = parseFloat(used.state);
+            var maxV = parseFloat(max.state);
+            var pct = maxV > 0 ? (usedV / maxV * 100) : 0;
+            var color = pct < 70 ? '#6ea8d7' : pct < 85 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">Disque</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + usedV.toFixed(2) + ' / ' + maxV.toFixed(1) + ' GiB  (' + pct.toFixed(0) + '%)</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            entity: sensor.pve_uptime
+            show_name: false
+            show_state: false
+            show_icon: false
+            show_label: true
+            label: |
+              [[[
+                if (!entity || entity.state === 'unavailable') return 'Uptime: N/A';
+                var h_total = parseFloat(entity.state);
+                var j = Math.floor(h_total / 24);
+                var h = Math.floor(h_total % 24);
+                return 'Uptime: ' + (j > 0 ? j + 'j ' : '') + h + 'h';
+              ]]]
+            styles:
+              card:
+                - padding: 4px 10px
+                - background: rgba(15,157,88,0.05) !important
+              label:
+                - font-size: 12px
+                - font-weight: bold
+                - color: white
+            tap_action:
+              action: none
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important; }
+          - type: custom:button-card
+            entity: binary_sensor.pve_backup_status
+            show_name: false
+            show_state: false
+            show_icon: false
+            show_label: true
+            label: |
+              [[[
+                if (!entity || entity.state === 'unavailable') return 'Backup: N/A';
+                return 'Backup: ' + (entity.state === 'off' ? '✓ OK' : '⚠ ERREUR');
+              ]]]
+            state:
+              - value: "off"
+                styles:
+                  label:
+                    - color: rgb(15,157,88)
+              - value: "on"
+                styles:
+                  label:
+                    - color: rgb(244,67,54)
+            styles:
+              card:
+                - padding: 4px 10px
+                - background: rgba(15,157,88,0.05) !important
+              label:
+                - font-size: 12px
+                - font-weight: bold
+                - color: white
+            tap_action:
+              action: none
+            card_mod:
+              style: >
+                ha-card { border: none !important; box-shadow: none !important; }
+      - type: custom:apexcharts-card
+        graph_span: 1h
+        cache: true
+        span:
+          offset: +1m
+        header:
+          show: false
+        apex_config:
+          chart:
+            height: 70px
+            toolbar:
+              show: false
+            sparkline:
+              enabled: true
+          tooltip:
+            enabled: false
+          yaxis:
+            min: 0
+            max: 100
+        series:
+          - entity: sensor.pve_utilisation_du_processeur
+            type: area
+            curve: smooth
+            stroke_width: 1.5
+            opacity: 0.4
+            color: "#a0e57c"
+            fill_raw: last
+        card_mod:
+          style: |
+            ha-card { background: none !important; box-shadow: none !important; border: none !important; margin: 0 !important; }
+
+      # ══════════════════════════════════════════════
+      # HOME ASSISTANT (VM)
+      # ══════════════════════════════════════════════
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: Home Assistant
+      - type: custom:button-card
+        entity: sensor.homeassistant_statut
+        name: HOME ASSISTANT
+        icon: mdi:home-assistant
+        show_state: true
+        state:
+          - value: running
+            styles:
+              state:
+                - color: rgb(15,157,88)
+                - background: rgba(15,157,88,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+          - value: stopped
+            styles:
+              state:
+                - color: rgb(244,67,54)
+                - background: rgba(244,67,54,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+        styles:
+          card:
+            - padding: 8px 12px
+            - background: >-
+                linear-gradient(90deg, rgba(3,169,244,0.12) 0%,
+                rgba(3,169,244,0.02) 100%)
+            - border-left: "3px solid #03a9f4 !important"
+            - border-radius: 8px !important
+            - margin-bottom: 2px
+          grid:
+            - grid-template-areas: "\"i n s\""
+            - grid-template-columns: min-content 1fr min-content
+          name:
+            - font-size: 13px
+            - font-weight: bold
+            - justify-self: start
+            - padding-left: 8px
+            - color: "#03a9f4"
+            - letter-spacing: 0.5px
+          state:
+            - font-size: 11px
+            - font-weight: bold
+          icon:
+            - width: 22px
+            - color: "#03a9f4"
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var cpu = states['sensor.homeassistant_utilisation_du_processeur'];
+            var vcpu = states['sensor.homeassistant_max_cpu'];
+            if (!cpu || cpu.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">CPU: N/A</div>';
+            var pct = parseFloat(cpu.state);
+            var vcpuStr = (vcpu && vcpu.state !== 'unavailable') ? ' (' + vcpu.state + ' vCPU)' : '';
+            var color = pct < 75 ? '#6ea8d7' : pct < 90 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">CPU' + vcpuStr + '</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + pct.toFixed(1) + ' %</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var used = states['sensor.homeassistant_utilisation_de_la_memoire'];
+            var max = states['sensor.homeassistant_utilisation_maximale_de_la_memoire'];
+            if (!used || used.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">RAM: N/A</div>';
+            var usedV = parseFloat(used.state);
+            var maxV = parseFloat(max.state);
+            var pct = maxV > 0 ? (usedV / maxV * 100) : 0;
+            var color = pct < 60 ? '#6ea8d7' : pct < 80 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">RAM</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + pct.toFixed(1) + '%  (' + usedV.toFixed(2) + ' / ' + maxV.toFixed(1) + ' GiB)</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var used = states['sensor.system_monitor_utilisation_du_disque'];
+            var max = states['sensor.homeassistant_utilisation_maximale_du_disque'];
+            if (!used || used.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">Disque: N/A</div>';
+            var usedV = parseFloat(used.state);
+            var maxV = parseFloat(max.state);
+            var pct = maxV > 0 ? (usedV / maxV * 100) : 0;
+            var color = pct < 70 ? '#6ea8d7' : pct < 85 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">Disque</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + usedV.toFixed(2) + ' / ' + maxV.toFixed(1) + ' GiB  (' + pct.toFixed(0) + '%)</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        entity: sensor.homeassistant_uptime
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 12px"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
+            var h_total = parseFloat(entity.state);
+            var j = Math.floor(h_total / 24);
+            var h = Math.floor(h_total % 24);
+            var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+            return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
+              '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
+              '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
+            '</div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:apexcharts-card
+        graph_span: 1h
+        cache: true
+        span:
+          offset: +1m
+        header:
+          show: false
+        apex_config:
+          chart:
+            height: 70px
+            toolbar:
+              show: false
+            sparkline:
+              enabled: true
+          tooltip:
+            enabled: false
+          yaxis:
+            min: 0
+            max: 100
+        series:
+          - entity: sensor.homeassistant_utilisation_du_processeur
+            type: area
+            curve: smooth
+            stroke_width: 1.5
+            opacity: 0.4
+            color: "#a0e57c"
+            fill_raw: last
+        card_mod:
+          style: |
+            ha-card { background: none !important; box-shadow: none !important; border: none !important; margin: 0 !important; }
+
+      # ══════════════════════════════════════════════
+      # ZIGBEE2MQTT (LXC 200)
+      # ══════════════════════════════════════════════
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: ZigBee2MQTT
+      - type: custom:button-card
+        entity: sensor.z2m_statut
+        name: ZIGBEE2MQTT
+        icon: mdi:zigbee
+        show_state: true
+        state:
+          - value: running
+            styles:
+              state:
+                - color: rgb(15,157,88)
+                - background: rgba(15,157,88,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+          - value: stopped
+            styles:
+              state:
+                - color: rgb(244,67,54)
+                - background: rgba(244,67,54,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+        styles:
+          card:
+            - padding: 8px 12px
+            - background: >-
+                linear-gradient(90deg, rgba(255,152,0,0.12) 0%,
+                rgba(255,152,0,0.02) 100%)
+            - border-left: "3px solid #ff9800 !important"
+            - border-radius: 8px !important
+            - margin-bottom: 2px
+          grid:
+            - grid-template-areas: "\"i n s\""
+            - grid-template-columns: min-content 1fr min-content
+          name:
+            - font-size: 13px
+            - font-weight: bold
+            - justify-self: start
+            - padding-left: 8px
+            - color: "#ff9800"
+            - letter-spacing: 0.5px
+          state:
+            - font-size: 11px
+            - font-weight: bold
+          icon:
+            - width: 22px
+            - color: "#ff9800"
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var cpu = states['sensor.z2m_utilisation_du_processeur'];
+            var vcpu = states['sensor.z2m_max_cpu'];
+            if (!cpu || cpu.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">CPU: N/A</div>';
+            var pct = parseFloat(cpu.state);
+            var vcpuStr = (vcpu && vcpu.state !== 'unavailable') ? ' (' + vcpu.state + ' vCPU)' : '';
+            var color = pct < 40 ? '#6ea8d7' : pct < 60 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">CPU' + vcpuStr + '</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + pct.toFixed(1) + ' %</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var used = states['sensor.z2m_utilisation_de_la_memoire'];
+            var max = states['sensor.z2m_utilisation_maximale_de_la_memoire'];
+            if (!used || used.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">RAM: N/A</div>';
+            var usedV = parseFloat(used.state);
+            var maxV = parseFloat(max.state);
+            var pct = maxV > 0 ? (usedV / maxV * 100) : 0;
+            var color = pct < 60 ? '#6ea8d7' : pct < 80 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">RAM</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + pct.toFixed(1) + '%  (' + usedV.toFixed(2) + ' / ' + maxV.toFixed(1) + ' GiB)</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var used = states['sensor.z2m_utilisation_du_disque'];
+            var max = states['sensor.z2m_utilisation_maximale_du_disque'];
+            if (!used || used.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">Disque: N/A</div>';
+            var usedV = parseFloat(used.state);
+            var maxV = parseFloat(max.state);
+            var pct = maxV > 0 ? (usedV / maxV * 100) : 0;
+            var color = pct < 70 ? '#6ea8d7' : pct < 85 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">Disque</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + usedV.toFixed(2) + ' / ' + maxV.toFixed(1) + ' GiB  (' + pct.toFixed(0) + '%)</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        entity: sensor.z2m_uptime
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
+            var h_total = parseFloat(entity.state);
+            var j = Math.floor(h_total / 24);
+            var h = Math.floor(h_total % 24);
+            var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+            return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
+              '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
+              '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
+            '</div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:apexcharts-card
+        graph_span: 1h
+        cache: true
+        span:
+          offset: +1m
+        header:
+          show: false
+        apex_config:
+          chart:
+            height: 70px
+            toolbar:
+              show: false
+            sparkline:
+              enabled: true
+          tooltip:
+            enabled: false
+          yaxis:
+            min: 0
+            max: 100
+        series:
+          - entity: sensor.z2m_utilisation_du_processeur
+            type: area
+            curve: smooth
+            stroke_width: 1.5
+            opacity: 0.4
+            color: "#a0e57c"
+            fill_raw: last
+        card_mod:
+          style: |
+            ha-card { background: none !important; box-shadow: none !important; border: none !important; margin: 0 !important; }
+
+      # ══════════════════════════════════════════════
+      # MARIADB (LXC 201)
+      # ══════════════════════════════════════════════
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: MariaDB
+      - type: custom:button-card
+        entity: sensor.mariadb_statut
+        name: MARIADB
+        icon: mdi:database
+        show_state: true
+        state:
+          - value: running
+            styles:
+              state:
+                - color: rgb(15,157,88)
+                - background: rgba(15,157,88,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+          - value: stopped
+            styles:
+              state:
+                - color: rgb(244,67,54)
+                - background: rgba(244,67,54,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+        styles:
+          card:
+            - padding: 8px 12px
+            - background: >-
+                linear-gradient(90deg, rgba(244,67,54,0.12) 0%,
+                rgba(244,67,54,0.02) 100%)
+            - border-left: "3px solid #f44336 !important"
+            - border-radius: 8px !important
+            - margin-bottom: 2px
+          grid:
+            - grid-template-areas: "\"i n s\""
+            - grid-template-columns: min-content 1fr min-content
+          name:
+            - font-size: 13px
+            - font-weight: bold
+            - justify-self: start
+            - padding-left: 8px
+            - color: "#f44336"
+            - letter-spacing: 0.5px
+          state:
+            - font-size: 11px
+            - font-weight: bold
+          icon:
+            - width: 22px
+            - color: "#f44336"
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var cpu = states['sensor.mariadb_utilisation_du_processeur'];
+            var vcpu = states['sensor.mariadb_max_cpu'];
+            if (!cpu || cpu.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">CPU: N/A</div>';
+            var pct = parseFloat(cpu.state);
+            var vcpuStr = (vcpu && vcpu.state !== 'unavailable') ? ' (' + vcpu.state + ' vCPU)' : '';
+            var color = pct < 50 ? '#6ea8d7' : pct < 75 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">CPU' + vcpuStr + '</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + pct.toFixed(1) + ' %</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var used = states['sensor.mariadb_utilisation_de_la_memoire'];
+            var max = states['sensor.mariadb_utilisation_maximale_de_la_memoire'];
+            if (!used || used.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">RAM: N/A</div>';
+            var usedV = parseFloat(used.state);
+            var maxV = parseFloat(max.state);
+            var pct = maxV > 0 ? (usedV / maxV * 100) : 0;
+            var color = pct < 60 ? '#6ea8d7' : pct < 80 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">RAM</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + pct.toFixed(1) + '%  (' + usedV.toFixed(2) + ' / ' + maxV.toFixed(1) + ' GiB)</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var used = states['sensor.mariadb_utilisation_du_disque'];
+            var max = states['sensor.mariadb_utilisation_maximale_du_disque'];
+            if (!used || used.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">Disque: N/A</div>';
+            var usedV = parseFloat(used.state);
+            var maxV = parseFloat(max.state);
+            var pct = maxV > 0 ? (usedV / maxV * 100) : 0;
+            var color = pct < 70 ? '#6ea8d7' : pct < 85 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">Disque</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + usedV.toFixed(2) + ' / ' + maxV.toFixed(1) + ' GiB  (' + pct.toFixed(0) + '%)</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        entity: sensor.mariadb_uptime
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
+            var h_total = parseFloat(entity.state);
+            var j = Math.floor(h_total / 24);
+            var h = Math.floor(h_total % 24);
+            var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+            return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
+              '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
+              '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
+            '</div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:apexcharts-card
+        graph_span: 1h
+        cache: true
+        span:
+          offset: +1m
+        header:
+          show: false
+        apex_config:
+          chart:
+            height: 70px
+            toolbar:
+              show: false
+            sparkline:
+              enabled: true
+          tooltip:
+            enabled: false
+          yaxis:
+            min: 0
+            max: 100
+        series:
+          - entity: sensor.mariadb_utilisation_du_processeur
+            type: area
+            curve: smooth
+            stroke_width: 1.5
+            opacity: 0.4
+            color: "#a0e57c"
+            fill_raw: last
+        card_mod:
+          style: |
+            ha-card { background: none !important; box-shadow: none !important; border: none !important; margin: 0 !important; }
+
+      # ══════════════════════════════════════════════
+      # MYELECTRICALDATA (LXC 202)
+      # ══════════════════════════════════════════════
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: MyElectricalData
+      - type: custom:button-card
+        entity: sensor.myelectricaldata_statut
+        name: MYELECTRICALDATA
+        icon: mdi:transmission-tower
+        show_state: true
+        state:
+          - value: running
+            styles:
+              state:
+                - color: rgb(15,157,88)
+                - background: rgba(15,157,88,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+          - value: stopped
+            styles:
+              state:
+                - color: rgb(244,67,54)
+                - background: rgba(244,67,54,0.15)
+                - border-radius: 10px
+                - padding: 2px 10px
+        styles:
+          card:
+            - padding: 8px 12px
+            - background: >-
+                linear-gradient(90deg, rgba(0,188,212,0.12) 0%,
+                rgba(0,188,212,0.02) 100%)
+            - border-left: "3px solid #00bcd4 !important"
+            - border-radius: 8px !important
+            - margin-bottom: 2px
+          grid:
+            - grid-template-areas: "\"i n s\""
+            - grid-template-columns: min-content 1fr min-content
+          name:
+            - font-size: 13px
+            - font-weight: bold
+            - justify-self: start
+            - padding-left: 8px
+            - color: "#00bcd4"
+            - letter-spacing: 0.5px
+          state:
+            - font-size: 11px
+            - font-weight: bold
+          icon:
+            - width: 22px
+            - color: "#00bcd4"
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var cpu = states['sensor.myelectricaldata_utilisation_du_processeur'];
+            var vcpu = states['sensor.myelectricaldata_max_cpu'];
+            if (!cpu || cpu.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">CPU: N/A</div>';
+            var pct = parseFloat(cpu.state);
+            var vcpuStr = (vcpu && vcpu.state !== 'unavailable') ? ' (' + vcpu.state + ' vCPU)' : '';
+            var color = pct < 40 ? '#6ea8d7' : pct < 60 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">CPU' + vcpuStr + '</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + pct.toFixed(1) + ' %</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var used = states['sensor.myelectricaldata_utilisation_de_la_memoire'];
+            var max = states['sensor.myelectricaldata_utilisation_maximale_de_la_memoire'];
+            if (!used || used.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">RAM: N/A</div>';
+            var usedV = parseFloat(used.state);
+            var maxV = parseFloat(max.state);
+            var pct = maxV > 0 ? (usedV / maxV * 100) : 0;
+            var color = pct < 60 ? '#6ea8d7' : pct < 80 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">RAM</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + pct.toFixed(1) + '%  (' + usedV.toFixed(2) + ' / ' + maxV.toFixed(1) + ' GiB)</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            var used = states['sensor.myelectricaldata_utilisation_du_disque'];
+            var max = states['sensor.myelectricaldata_utilisation_maximale_du_disque'];
+            if (!used || used.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">Disque: N/A</div>';
+            var usedV = parseFloat(used.state);
+            var maxV = parseFloat(max.state);
+            var pct = maxV > 0 ? (usedV / maxV * 100) : 0;
+            var color = pct < 70 ? '#6ea8d7' : pct < 85 ? '#ff9800' : '#f44336';
+            return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+              '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                '<span style="color:#9e9e9e;font-size:12px">Disque</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + usedV.toFixed(2) + ' / ' + maxV.toFixed(1) + ' GiB  (' + pct.toFixed(0) + '%)</span>' +
+              '</div>' +
+              '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+              '</div></div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:button-card
+        entity: sensor.myelectricaldata_uptime
+        show_name: false
+        show_state: false
+        show_icon: false
+        show_label: true
+        label: |
+          [[[
+            if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
+            var h_total = parseFloat(entity.state);
+            var j = Math.floor(h_total / 24);
+            var h = Math.floor(h_total % 24);
+            var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+            return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
+              '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
+              '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
+            '</div>';
+          ]]]
+        styles:
+          card:
+            - padding: 2px 12px
+            - background: none !important
+          label:
+            - width: 100%
+        tap_action:
+          action: none
+        card_mod:
+          style: |
+            ha-card { border: none !important; box-shadow: none !important; background: none !important; }
+      - type: custom:apexcharts-card
+        graph_span: 1h
+        cache: true
+        span:
+          offset: +1m
+        header:
+          show: false
+        apex_config:
+          chart:
+            height: 70px
+            toolbar:
+              show: false
+            sparkline:
+              enabled: true
+          tooltip:
+            enabled: false
+          yaxis:
+            min: 0
+            max: 100
+        series:
+          - entity: sensor.myelectricaldata_utilisation_du_processeur
+            type: area
+            curve: smooth
+            stroke_width: 1.5
+            opacity: 0.4
+            color: "#a0e57c"
+            fill_raw: last
+        card_mod:
+          style: |
+            ha-card { background: none !important; box-shadow: none !important; border: none !important; margin: 0 !important; }
+
+    grid_options:
+      columns: 12
+      rows: auto
+
+# annotations_log:
+# [2026-06-10] Création ex nihilo — redesign complet style Proxmox VE
+# [2026-06-10] Supprimé : bar-cards + boutons Démarrer/Stopper/Relancer (×5 sections)
+# [2026-06-10] Conservé : heading "PROXMOX" + text-divider blancs + status badges
+# [2026-06-10] Ajouté : rows button-card flex (CPU/RAM/Disque/Uptime) + apexcharts CPU 1h (#a0e57c)
+# [2026-06-10] HA Disk : sensor.system_monitor_utilisation_du_disque (homeassistant_utilisation_du_disque = 0.0 GiB cassé)
+# [2026-06-10] PVE Backup row ajoutée (binary_sensor.pve_backup_status : off=OK / on=ERREUR)
+# [2026-06-12] Fix uptime : secondes → heures (sensor retourne des heures flottantes, pas des secondes)
+# [2026-06-12] Fix background : card_mod ajouté sur stack-in-card (fond gris supprimé)
+# [2026-06-12] Fix MyElectricalData running state : cyan → vert (#0f9d58) comme toutes les autres sections
+# [2026-06-12] TODO : créer docs_dashboard/docs/L4C1_PROXMOX/L4C1_VIGNETTE_PROXMOX.md + PAGE_PROXMOX.md

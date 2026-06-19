@@ -1,0 +1,184 @@
+type: grid
+cards:
+  - type: heading
+    icon: mdi:cellphone-nfc
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+    heading: Xiaomi POCO X7 Pro
+  - type: conditional
+    conditions:
+      - entity: sensor.eric_battery_level
+        state_not: unavailable
+      - entity: sensor.eric_battery_level
+        state_not: unknown
+    card:
+      type: vertical-stack
+      cards:
+        - type: custom:streamline-card
+          template: portable
+          variables:
+            entity: sensor.eric_battery_level
+        - type: entities
+          entities:
+            - entity: sensor.eric_battery_level
+            - entity: sensor.eric_battery_state
+              name: Battery state
+            - entity: sensor.eric_charger_type
+              name: Charger type
+              secondary_info: none
+            - entity: sensor.eric_battery_health
+            - entity: sensor.eric_battery_temperature
+            - entity: sensor.eric_network_type
+            - entity: sensor.eric_wi_fi_connection
+          state_color: true
+          show_header_toggle: true
+          card_mod:
+            style: |
+              ha-card {
+                background: none !important;
+                box-shadow: none !important;
+                border: none !important;
+              }
+  - type: heading
+    icon: mdi:cellphone-nfc
+    heading: Oneplus 10Pro NE2213 (E)
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - type: conditional
+    conditions:
+      - entity: sensor.ne2213_eric_battery_level
+        state_not: unavailable
+      - entity: sensor.ne2213_eric_battery_level
+        state_not: unknown
+    card:
+      type: vertical-stack
+      cards:
+        - type: custom:streamline-card
+          template: portable
+          variables:
+            entity: sensor.ne2213_eric_battery_level
+        - type: entities
+          entities:
+            - entity: sensor.ne2213_eric_battery_level
+            - entity: sensor.ne2213_eric_battery_state
+              name: Battery state
+            - entity: sensor.ne2213_eric_charger_type
+              name: Charger type
+              secondary_info: none
+            - entity: sensor.ne2213_eric_battery_health
+              name: Battery health
+              secondary_info: none
+            - entity: sensor.ne2213_eric_battery_temperature
+            - entity: sensor.ne2213_eric_network_type
+            - entity: sensor.ne2213_eric_wi_fi_connection
+          state_color: true
+          show_header_toggle: true
+          card_mod:
+            style: |
+              ha-card {
+                background: none !important;
+                box-shadow: none !important;
+                border: none !important;
+              }
+  - type: heading
+    icon: mdi:cellphone-nfc
+    heading: Samsung A8 SM-A530F
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - type: conditional
+    conditions:
+      - entity: sensor.sm_a530f_battery_level
+        state_not: unavailable
+      - entity: sensor.sm_a530f_battery_level
+        state_not: unknown
+    card:
+      type: vertical-stack
+      cards:
+        - type: custom:streamline-card
+          template: portable
+          variables:
+            entity: sensor.sm_a530f_battery_level
+        - type: entities
+          entities:
+            - entity: sensor.sm_a530f_battery_level
+            - entity: sensor.sm_a530f_battery_state
+              name: Battery state
+            - entity: sensor.sm_a530f_charger_type
+              name: Charger type
+              secondary_info: none
+            - entity: sensor.sm_a530f_battery_health
+            - entity: sensor.sm_a530f_battery_temperature
+            - entity: sensor.sm_a530f_network_type
+            - entity: sensor.sm_a530f_wi_fi_connection
+          state_color: true
+          show_header_toggle: true
+          card_mod:
+            style: |
+              ha-card {
+                background: none !important;
+                box-shadow: none !important;
+                border: none !important;
+              }
+  - type: heading
+    icon: mdi:cellphone-nfc
+    heading: Tablette
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - type: conditional
+    conditions:
+      - entity: sensor.tablette_battery_level
+        state_not: unavailable
+      - entity: sensor.tablette_battery_level
+        state_not: unknown
+    card:
+      type: vertical-stack
+      cards:
+        - type: custom:streamline-card
+          template: portable
+          variables:
+            entity: sensor.tablette_battery_level
+        - type: entities
+          entities:
+            - entity: sensor.tablette_battery_level
+            - entity: sensor.tablette_battery_state
+              name: Battery state
+            - entity: sensor.tablette_charger_type
+              name: Charger type
+              secondary_info: none
+            - entity: sensor.tablette_battery_health
+            - entity: sensor.tablette_battery_temperature
+            - entity: sensor.tablette_network_type
+            - entity: sensor.tablette_wi_fi_connection
+          state_color: true
+          show_header_toggle: true
+          card_mod:
+            style: |
+              ha-card {
+                background: none !important;
+                box-shadow: none !important;
+                border: none !important;
+              }

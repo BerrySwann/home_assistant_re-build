@@ -1,0 +1,82 @@
+# ╭──────────────────────────────────────────────────────────────────╮
+# │ GROUP : REGROUPEMENT D'ENTITÉS (SANTÉ SYSTÈME)                   │
+# ╰──────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Regroupe les capteurs de batteries/piles par fabricant (IKEA, HUE, SONOFF)
+# pour permettre une surveillance centralisée via auto-entities dans le
+# dashboard L5C1 Batteries.
+# Inclus via : group: !include groups.yaml (configuration.yaml)
+#
+# ## 🧮 CALCUL & SOURCES :
+# - group.ikea_devices   → 12 capteurs battery (contacts fenêtre + télécommandes)
+# - group.hue_devices    → 11 capteurs battery (Hue Smart Button par pièce)
+# - group.sonoff_devices → 11 capteurs battery (SNZB-02 T°/Hum + SNZB-04 contacts)
+# - Total surveillé : 34 capteurs de batteries
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - La carte auto-entities (L5C1) filtre via group.ikea_devices etc. :
+#   toute entité absente de ces groupes n'apparaîtra PAS dans la vignette.
+# - Après ajout d'un nouvel appareil, mettre à jour le groupe correspondant
+#   ET vérifier que l'entité battery existe dans HA.
+# - L'intégration group native HA est requise (incluse dans default_config).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert à la remontée d'info pour la vignette : [L5C1 Surveillance Batteries]
+
+# ┌─────────────────────────────────────┐
+# │ 10. AUTRE : SURVEILLANCE BATTERIES  │
+# └─────────────────────────────────────┘
+
+# --- ikea_devices ---
+ikea_devices:
+  name: "IKEA Devices"
+  entities:
+    - sensor.contact_fenetre_bureau_ikea_battery
+    - sensor.contact_fenetre_chambre_ikea_battery
+    - sensor.contact_fenetre_cuisine_ikea_battery
+    - sensor.contact_fenetre_salon_ikea_battery
+    - sensor.detecteur_de_fuite_ikea_battery
+    - sensor.inter_salon_4_ikea_battery
+    - sensor.detecteur_vallhorn_battery
+    - sensor.inter_tv_chambre_ikea_rodret_battery
+    - sensor.inter_somrig_battery
+    - sensor.inter_bureau_rodret_battery
+    - sensor.poussoir_ikea_tradfri_battery
+    - sensor.inter_radiateur_salle_de_bain_ikea_rodret_battery
+
+# --- hue_devices ---
+hue_devices:
+  name: "HUE Devices"
+  entities:
+    - sensor.hue_smart_button_entee_1_batterie
+    - sensor.hue_smart_button_entee_2_batterie
+    - sensor.hue_smart_button_eco_batterie
+    - sensor.hue_smart_button_table_batterie
+    - sensor.hue_smart_button_cuisine_batterie
+    - sensor.hue_smart_button_couloir_batterie
+    - sensor.hue_smart_button_bureau_batterie
+    - sensor.boutton_salle_de_bain_hue_battery
+    - sensor.hue_smart_button_chambre_batterie
+    - sensor.hue_smart_button_chambre_gege_batterie
+    - sensor.hue_smart_button_chambre_eric_batterie
+
+# --- sonoff_devices ---
+sonoff_devices:
+  name: "SONOFF Devices"
+  entities:
+    - sensor.th_balcon_nord_battery
+    - sensor.th_bureau_battery
+    - sensor.th_chambre_battery
+    - sensor.th_cuisine_battery
+    - sensor.th_salle_de_bain_battery
+    - sensor.th_salon_battery
+    - sensor.th_cellier_battery
+    - sensor.contact_fenetre_salon_sonoff_battery
+    - sensor.contact_fenetre_cuisine_sonoff_battery
+    - sensor.contact_fenetre_bureau_sonoff_battery
+    - sensor.contact_fenetre_chambre_sonoff_battery
+
+# annotations_log:
+# - [L47-58] Mise à jour complète du groupe SONOFF avec la liste intégrale d'Eric.
+# - [Global] Maintien de la hiérarchie visuelle ASCII et du tri en section 10. AUTRE.

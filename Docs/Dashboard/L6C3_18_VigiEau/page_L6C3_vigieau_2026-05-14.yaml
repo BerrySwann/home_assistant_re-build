@@ -1,0 +1,312 @@
+type: grid
+cards:
+  - type: heading
+    icon: mdi:water
+    heading: VIGIEAU / VIGI - EAU
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/home
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+          margin: 0;
+          padding: 0;
+        }
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: true
+      margin: false
+      border_radius: true
+      background: false
+      outer_padding: false
+    cards:
+      - type: custom:mod-card
+        card_mod:
+          style: |
+            :host {
+              --text-divider-color: white;
+              --text-divider-line-size: 1px;
+            }
+        card:
+          type: custom:text-divider-row
+          text: SÉCHERESSE
+      - type: custom:mod-card
+        card_mod:
+          style: |
+            :host {
+              --ha-card-border-color: transparent !important;
+              --card-background-color: none !important;
+            }
+            ha-card {
+              margin: 0;
+            }
+        card:
+          type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              entity: sensor.alert_level_in_vence
+              name: "Vigi - Eau Vence:"
+              layout: icon_name_state2nd
+              color_type: icon
+              show_name: true
+              show_state: true
+              state_display: |
+                [[[
+                  if (entity.state === "vigilance (pas de restriction)") return "Aucune restriction";
+                  if (entity.state === "alerte_renforcee") return "Alerte renforcée";
+                  return entity.state;
+                ]]]
+              state:
+                - value: null
+                  operator: "=="
+                  color: grey
+                  icon: mdi:water-off
+                  styles:
+                    state:
+                      - color: grey
+                - value: vigilance (pas de restriction)
+                  operator: "=="
+                  color: rgb(232, 237, 255)
+                  icon: mdi:water-check
+                  styles:
+                    state:
+                      - color: rgb(232, 237, 255)
+                - value: vigilance
+                  operator: "=="
+                  color: rgb(255, 237, 160)
+                  icon: mdi:water-minus
+                  styles:
+                    state:
+                      - color: rgb(255, 237, 160)
+                - value: alerte
+                  operator: "=="
+                  color: rgb(254, 178, 76)
+                  icon: mdi:water-alert
+                  styles:
+                    state:
+                      - color: rgb(254, 178, 76)
+                - value: alerte_renforcee
+                  operator: "=="
+                  color: rgb(252, 78, 42)
+                  icon: mdi:water-remove
+                  styles:
+                    state:
+                      - color: rgb(252, 78, 42)
+                - value: crise
+                  operator: "=="
+                  color: rgb(177, 0, 38)
+                  icon: mdi:water-off
+                  styles:
+                    state:
+                      - color: rgb(177, 0, 38)
+              size: 50%
+              styles:
+                card:
+                  - font-weight: bold
+                  - "--mdc-ripple-color": rgb(68, 115, 158)
+                  - "--mdc-ripple-press-opacity": 0.5
+                name:
+                  - font-size: 15px
+                state:
+                  - font-weight: bold
+                  - font-size: 15px
+            - type: custom:bar-card
+              entities:
+                - entity: sensor.alert_level_in_vence_numeric
+                  name: " "
+                  icon: |
+                    [[[
+                      var iconName = entity.attributes.icon || 'mdi:water-outline';
+                      return iconName;
+                    ]]]
+                  height: 32px
+                  color: |
+                    [[[
+                      var colorName = entity.attributes.Couleur || 'grey';
+                      return colorName;
+                    ]]]
+                  min: 0
+                  max: 4
+                  target: 3.5
+                  animation:
+                    state: "on"
+                  positions:
+                    indicator: inside
+                    icon: inside
+                  severity:
+                    - color: rgb(232, 237, 255)
+                      icon: mdi:water-check
+                      from: 0
+                      to: 0
+                    - color: rgb(255, 237, 160)
+                      icon: mdi:water-minus
+                      from: 1
+                      to: 1
+                    - color: rgb(255, 237, 160)
+                      icon: mdi:water-alert
+                      from: 2
+                      to: 2
+                    - color: rgb(252, 78, 42)
+                      icon: mdi:water-remove
+                      from: 3
+                      to: 3
+                    - color: rgb(254, 178, 76)
+                      from: 4
+                      to: 4
+              card_mod:
+                style: |
+                  bar-card-currentbar,
+                  bar-card-backgroundbar {
+                    border-radius: 10px;
+                  }
+                  bar-card-value {
+                    margin-right: 25px;
+                    font-weight: bold;
+                    font-size: 15px;
+                    color: white;
+                  }
+                  ha-icon{
+                    color: black !important;
+                  }
+      - type: conditional
+        conditions:
+          - entity: sensor.alert_level_in_vence
+            state_not: "null"
+        card:
+          type: custom:mod-card
+          card_mod:
+            style: |
+              ha-card {
+                margin: 7px 2px 5px 2px;
+              }
+          card:
+            type: custom:auto-entities
+            card:
+              type: grid
+              columns: 4
+              square: false
+            card_param: cards
+            filter:
+              include:
+                - entity_id: sensor.*_restrictions_vence
+                  options:
+                    type: custom:button-card
+                    color_type: icon
+                    aspect_ratio: 1/1
+                    show_name: true
+                    show_state: true
+                    name: |
+                      [[[ return entity.attributes.friendly_name; ]]]
+                    color: |
+                      [[[
+                        const state = entity.state;
+                        if (state.length > 30) return "rgb(255, 216, 148)";
+                        if (state === "Aucune restriction") return "rgb(232, 237, 255)";
+                        if (state === "Sensibilisation") return "rgb(255, 237, 160)";
+                        if (state === "Interdiction sauf exception") return "rgb(254, 178, 76)";
+                        if (state === "Interdiction") return "rgb(252, 78, 42)";
+                        if (state === "unknown") return "grey";
+                        return "grey";
+                      ]]]
+                    tap_action:
+                      action: fire-dom-event
+                      browser_mod:
+                        service: browser_mod.popup
+                        data:
+                          title: Détails
+                          content:
+                            type: custom:button-card
+                            entity: this.entity_id
+                            show_name: true
+                            show_state: true
+                            show_icon: true
+                            name: |
+                              [[[ return entity.attributes.friendly_name; ]]]
+                            styles:
+                              name:
+                                - font-size: 16px
+                              state:
+                                - font-size: 22px
+                                - white-space: normal
+                                - font-weight: bold
+                                - color: |
+                                    [[[
+                                      const state = entity.state;
+                                      if (state.length > 30) return "rgb(255, 216, 148)";
+                                      if (state === "Aucune restriction") return "rgb(232, 237, 255)";
+                                      if (state === "Sensibilisation") return "rgb(255, 237, 160)";
+                                      if (state === "Interdiction sauf exception") return "rgb(254, 178, 76)";
+                                      if (state === "Interdiction") return "rgb(252, 78, 42)";
+                                      if (state === "unknown") return "grey";
+                                      return "grey";
+                                    ]]]
+                              icon:
+                                - color: |
+                                    [[[
+                                      const state = entity.state;
+                                      if (state.length > 30) return "rgb(255, 216, 148)";
+                                      if (state === "Aucune restriction") return "rgb(232, 237, 255)";
+                                      if (state === "Sensibilisation") return "rgb(255, 237, 160)";
+                                      if (state === "Interdiction sauf exception") return "rgb(254, 178, 76)";
+                                      if (state === "Interdiction") return "rgb(252, 78, 42)";
+                                      if (state === "unknown") return "grey";
+                                      return "grey";
+                                    ]]]
+                    styles:
+                      card:
+                        - "--mdc-ripple-color": rgb(68, 115, 158)
+                        - "--mdc-ripple-press-opacity": 0.5
+                        - border-radius: 8px
+                        - background: transparent
+                        - box-shadow: |
+                            [[[
+                              const state = entity.state;
+                              if (state.length > 30) return "0px 0px 0px 2px rgb(255, 216, 148)";
+                              if (state === "Aucune restriction") return "0px 0px 0px 2px rgb(232, 237, 255)";
+                              if (state === "Sensibilisation") return "0px 0px 0px 2px rgb(255, 237, 160)";
+                              if (state === "Interdiction sauf exception") return "0px 0px 0px 2px rgb(254, 178, 76)";
+                              if (state === "Interdiction") return "0px 0px 0px 2px rgb(252, 78, 42)";
+                              if (state === "unknown") return "0px 0px 0px 2px grey";
+                              return "0px 0px 0px 2px grey";
+                            ]]]
+                      name:
+                        - font-size: 12px
+                        - white-space: normal
+                      state:
+                        - font-weight: bold
+                        - font-size: 12px
+                        - white-space: normal
+                        - color: |
+                            [[[
+                              const state = entity.state;
+                              if (state.length > 30) return "rgb(255, 216, 148)";
+                              if (state === "Aucune restriction") return "rgb(232, 237, 255)";
+                              if (state === "Sensibilisation") return "rgb(255, 237, 160)";
+                              if (state === "Interdiction sauf exception") return "rgb(254, 178, 76)";
+                              if (state === "Interdiction") return "rgb(252, 78, 42)";
+                              if (state === "unknown") return "grey";
+                              return "grey";
+                            ]]]
+                      icon:
+                        - color: |
+                            [[[
+                              const state = entity.state;
+                              if (state.length > 30) return "rgb(255, 216, 148)";
+                              if (state === "Aucune restriction") return "rgb(232, 237, 255)";
+                              if (state === "Sensibilisation") return "rgb(255, 237, 160)";
+                              if (state === "Interdiction sauf exception") return "rgb(254, 178, 76)";
+                              if (state === "Interdiction") return "rgb(252, 78, 42)";
+                              if (state === "unknown") return "grey";
+                              return "grey";
+                            ]]]
+              exclude:
+                - state: Aucune restriction

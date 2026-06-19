@@ -1,0 +1,604 @@
+type: grid
+cards:
+  - type: heading
+    icon: mdi:window-shutter
+    heading: STORES
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+          margin: 0px 0px -20px 0px;
+          padding: 0;
+        }
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: false
+      margin: false
+      border_radius: false
+      background: false
+      outer_padding: false
+    cards:
+      - type: custom:mod-card
+        card_mod:
+          style: |
+            :host {
+              --text-divider-color: white;
+              --text-divider-line-size: 1px;
+            }
+        card:
+          type: custom:text-divider-row
+          text: CONDITIONS
+      - type: custom:mod-card
+        card_mod:
+          style: |
+            :host {
+              --ha-card-border-color: none !important;
+              --card-background-color: none !important;
+            }
+            ha-card {
+              margin: 0;
+            }
+  - type: heading
+    icon: ""
+    heading_style: title
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.th_balcon_nord_temperature
+        color: green
+    heading: Auto close at +34°
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+          margin: 3px 0px 0px 165px;
+        }
+  - card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+          margin: 0px 0px 0px 0px;
+          padding: 0;
+        }
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: false
+      margin: false
+      border_radius: false
+      background: false
+      outer_padding: false
+    cards:
+      - type: custom:mod-card
+        card_mod:
+          style: |
+            :host {
+              --text-divider-color: white;
+              --text-divider-line-size: 1px;
+            }
+        card:
+          type: custom:text-divider-row
+          text: STORE SALON
+      - type: custom:mod-card
+        card_mod:
+          style: |
+            :host {
+              --ha-card-border-color: none !important;
+              --card-background-color: none !important;
+            }
+            ha-card {
+              margin: 0;
+            }
+  - card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+          margin: 0px 0px 0px 0px;
+          padding: 0;
+        }
+    type: heading
+    icon: phu:sliding-window-door-close
+    heading_style: title
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: binary_sensor.contact_fenetre_salon_sonoff_contact
+        color: green
+        state_content: state
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.contact_fenetre_salon_sonoff_battery
+        color: state
+        tap_action:
+          action: more-info
+    heading: Fenêtre Salon
+  - type: vertical-stack
+    cards:
+      - type: custom:enhanced-shutter-card
+        entities:
+          - entity: cover.store_salon
+            name: Salon
+            name_disabled: true
+            opening_disabled: true
+            passive_mode: false
+            resize_height_pct: 100
+            resize_width_pct: 130
+            title_position: bottom
+            opening_position: bottom
+            inline_header: true
+            view_image: " "
+            buttons_position: left
+            signal_entity: sensor.store_salon_signal_strength
+            shutter_slat_image: esc-shutter-slat.png
+            shutter_bottom_image: esc-shutter-bottom.png
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: none !important;
+              margin: -5px 0px 0px 0px;
+            }
+      - type: custom:button-card
+        entity: sensor.store_salon_status
+        entities:
+          - sensor.store_salon_status
+          - cover.store_salon
+        triggers_update:
+          - sensor.store_salon_status
+          - cover.store_salon
+        show_name: false
+        show_icon: false
+        show_state: true
+        styles:
+          card:
+            - background: transparent
+            - border: none
+            - box-shadow: none
+            - margin-top: "-40px"
+            - height: 30px
+          state:
+            - font-size: 14px
+            - justify-self: center
+        state_display: |
+          [[[
+            return 'Salon : ' + entity.state;
+          ]]]
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: 100%
+            tap_action:
+              action: call-service
+              service: cover.set_cover_position
+              service_data:
+                entity_id: cover.store_salon
+                position: 100
+            styles:
+              card:
+                - background-color: transparent
+                - border: 1px solid white
+                - border-radius: 5px
+                - padding: 10px
+                - height: 40px
+              name:
+                - color: white
+                - font-size: 12px
+                - font-weight: bold
+          - type: custom:button-card
+            name: 75%
+            tap_action:
+              action: call-service
+              service: cover.set_cover_position
+              service_data:
+                entity_id: cover.store_salon
+                position: 85
+            styles:
+              card:
+                - background-color: transparent
+                - border: 1px solid white
+                - border-radius: 5px
+                - padding: 10px
+                - height: 40px
+              name:
+                - color: white
+                - font-size: 12px
+                - font-weight: bold
+          - type: custom:button-card
+            name: 50%
+            tap_action:
+              action: call-service
+              service: cover.set_cover_position
+              service_data:
+                entity_id: cover.store_salon
+                position: 70
+            styles:
+              card:
+                - background-color: transparent
+                - border: 1px solid white
+                - border-radius: 5px
+                - padding: 10px
+                - height: 40px
+              name:
+                - color: white
+                - font-size: 12px
+                - font-weight: bold
+          - type: custom:button-card
+            name: 25%
+            tap_action:
+              action: call-service
+              service: cover.set_cover_position
+              service_data:
+                entity_id: cover.store_salon
+                position: 49
+            styles:
+              card:
+                - background-color: transparent
+                - border: 1px solid white
+                - border-radius: 5px
+                - padding: 10px
+                - height: 40px
+              name:
+                - color: white
+                - font-size: 12px
+                - font-weight: bold
+          - type: custom:button-card
+            name: 10%
+            tap_action:
+              action: call-service
+              service: cover.set_cover_position
+              service_data:
+                entity_id: cover.store_salon
+                position: 20
+            styles:
+              card:
+                - background-color: transparent
+                - border: 1px solid white
+                - border-radius: 5px
+                - padding: 10px
+                - height: 40px
+              name:
+                - color: white
+                - font-size: 12px
+                - font-weight: bold
+  - type: custom:mushroom-light-card
+    entity: light.store_salon_dnd
+    grid_options:
+      columns: full
+      rows: 1
+    primary_info: name
+    secondary_info: state
+    fill_container: true
+    use_light_color: false
+    tap_action:
+      action: toggle
+    icon: phu:roller-shutter-switch
+    icon_color: green
+    icon_type: icon
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    name: Store Salon (Voyants commandes)
+    card_mod:
+      style: |
+        ha-card {
+          background: transparent;
+          border: transparent;
+        }
+  - type: heading
+    icon: mdi:window-shutter
+    heading: STORES
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+          margin: 0px 0px -20px 0px;
+          padding: 0;
+        }
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: false
+      margin: false
+      border_radius: false
+      background: false
+      outer_padding: false
+    cards:
+      - type: custom:mod-card
+        card_mod:
+          style: |
+            :host {
+              --text-divider-color: white;
+              --text-divider-line-size: 1px;
+            }
+        card:
+          type: custom:text-divider-row
+          text: CONDITIONS
+      - type: custom:mod-card
+        card_mod:
+          style: |
+            :host {
+              --ha-card-border-color: none !important;
+              --card-background-color: none !important;
+            }
+            ha-card {
+              margin: 0;
+            }
+  - type: heading
+    icon: ""
+    heading_style: title
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.th_balcon_nord_temperature
+        color: green
+    heading: Auto open at +18° or auto close at +25°
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+          margin: 3px 0px 0px 90px;
+          padding: 0;
+        }
+  - card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+          margin: 0px 0px 0px 0px;
+          padding: 0;
+        }
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: false
+      margin: false
+      border_radius: false
+      background: false
+      outer_padding: false
+    cards:
+      - type: custom:mod-card
+        card_mod:
+          style: |
+            :host {
+              --text-divider-color: white;
+              --text-divider-line-size: 1px;
+            }
+        card:
+          type: custom:text-divider-row
+          text: STORE BUREAU
+      - type: custom:mod-card
+        card_mod:
+          style: |
+            :host {
+              --ha-card-border-color: none !important;
+              --card-background-color: none !important;
+            }
+            ha-card {
+              margin: 0;
+            }
+  - type: heading
+    icon: phu:sliding-window-door-close
+    heading_style: title
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: binary_sensor.contact_fenetre_bureau_sonoff_contact
+        color: green
+        state_content: state
+        icon: mdi:door-open
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.contact_fenetre_bureau_sonoff_battery
+        color: state
+        tap_action:
+          action: more-info
+    heading: Fenêtre Bureau
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+          margin: 0px 0px 0px 0px;
+          padding: 0;
+        }
+  - type: vertical-stack
+    cards:
+      - type: custom:enhanced-shutter-card
+        entities:
+          - entity: cover.store_bureau
+            name: Bureau
+            name_disabled: true
+            opening_disabled: true
+            passive_mode: false
+            resize_height_pct: 100
+            resize_width_pct: 130
+            title_position: bottom
+            opening_position: bottom
+            inline_header: true
+            view_image: " "
+            buttons_position: left
+            signal_entity: sensor.store_bureau_signal_strength
+            shutter_slat_image: esc-shutter-slat.png
+            shutter_bottom_image: esc-shutter-bottom.png
+        card_mod:
+          style: |
+            ha-card {
+              background: none !important;
+              border: none !important;
+              box-shadow: none !important;
+              margin: -5px 0px 0px 0px;
+            }
+      - type: custom:button-card
+        entity: sensor.store_bureau_status
+        entities:
+          - sensor.store_bureau_status
+          - cover.store_bureau
+        triggers_update:
+          - sensor.store_bureau_status
+          - cover.store_bureau
+        show_name: false
+        show_icon: false
+        show_state: true
+        styles:
+          card:
+            - background: transparent
+            - border: none
+            - box-shadow: none
+            - margin-top: "-40px"
+            - height: 30px
+          state:
+            - font-size: 14px
+            - justify-self: center
+        state_display: |
+          [[[
+            return 'Bureau : ' + entity.state;
+          ]]]
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: 100%
+            tap_action:
+              action: call-service
+              service: cover.set_cover_position
+              service_data:
+                entity_id: cover.store_bureau
+                position: 100
+            styles:
+              card:
+                - background-color: transparent
+                - border: 1px solid
+                - border-radius: 5px
+                - padding: 10px
+              name:
+                - color: white
+          - type: custom:button-card
+            name: 75%
+            tap_action:
+              action: call-service
+              service: cover.set_cover_position
+              service_data:
+                entity_id: cover.store_bureau
+                position: 90
+            styles:
+              card:
+                - background-color: transparent
+                - border: 1px solid
+                - border-radius: 5px
+                - padding: 10px
+              name:
+                - color: white
+          - type: custom:button-card
+            name: 50%
+            tap_action:
+              action: call-service
+              service: cover.set_cover_position
+              service_data:
+                entity_id: cover.store_bureau
+                position: 65
+            styles:
+              card:
+                - background-color: transparent
+                - border: 1px solid
+                - border-radius: 5px
+                - padding: 10px
+              name:
+                - color: white
+          - type: custom:button-card
+            name: 25%
+            tap_action:
+              action: call-service
+              service: cover.set_cover_position
+              service_data:
+                entity_id: cover.store_bureau
+                position: 50
+            styles:
+              card:
+                - background-color: transparent
+                - border: 1px solid
+                - border-radius: 5px
+                - padding: 10px
+              name:
+                - color: white
+          - type: custom:button-card
+            name: 10%
+            tap_action:
+              action: call-service
+              service: cover.set_cover_position
+              service_data:
+                entity_id: cover.store_bureau
+                position: 30
+            styles:
+              card:
+                - background-color: transparent
+                - border: 1px solid
+                - border-radius: 5px
+                - padding: 10px
+              name:
+                - color: white
+  - type: custom:mushroom-light-card
+    entity: light.store_bureau_dnd
+    grid_options:
+      columns: full
+      rows: 1
+    primary_info: name
+    secondary_info: state
+    fill_container: true
+    use_light_color: false
+    tap_action:
+      action: toggle
+    icon: phu:roller-shutter-switch
+    icon_color: green
+    icon_type: icon
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    name: Store Bureau (Voyants commandes)
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+  - type: custom:streamline-card
+    template: nav_bar

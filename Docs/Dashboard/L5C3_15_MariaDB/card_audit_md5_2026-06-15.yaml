@@ -1,0 +1,118 @@
+type: vertical-stack
+cards:
+  - type: custom:bubble-card
+    card_type: separator
+    name: Audit GitHub MD5
+    icon: mdi:shield-check
+    rows: 2
+    styles: |-
+      .bubble-line {
+        background: var(--primary-text-color);
+        opacity: 1;
+      }
+    card_layout: normal
+  - type: custom:button-card
+    entity: script.audit_md5
+    show_state: false
+    tap_action:
+      action: call-service
+      service: script.turn_on
+      service_data:
+        entity_id: script.audit_md5
+    name: |
+      [[[
+        return entity.state === 'on' ? 'Audit en cours...' : 'Audit MD5 GitHub';
+      ]]]
+    icon: mdi:shield-search
+    styles:
+      grid:
+        - grid-template-areas: '"i n n btn" "i s s btn"'
+        - grid-template-columns: 0.6fr 1fr 1.6fr 0.7fr
+        - grid-template-rows: repeat(2, 50%)
+        - gap: 0px
+      card:
+        - padding: 8px
+        - background: |
+            [[[
+              return entity.state === 'on'
+                ? 'rgba(255, 152, 0, 0.10)'
+                : 'rgba(3, 169, 244, 0.08)';
+            ]]]
+        - border: |
+            [[[
+              return entity.state === 'on'
+                ? '1px solid #ff9800'
+                : '1px solid #03a9f4';
+            ]]]
+        - border-radius: 12px
+      icon:
+        - color: |
+            [[[
+              return entity.state === 'on' ? '#ff9800' : '#03a9f4';
+            ]]]
+        - width: 42px
+        - align-self: center
+        - left: 20%
+      name:
+        - justify-self: start
+        - font-size: 0.9em
+        - font-weight: 600
+        - color: |
+            [[[
+              return entity.state === 'on' ? '#ff9800' : '#03a9f4';
+            ]]]
+        - padding-top: 6px
+      state:
+        - justify-self: start
+        - font-size: 0.72em
+        - padding-bottom: 6px
+    custom_fields:
+      btn:
+        card:
+          type: custom:button-card
+          entity: script.audit_md5
+          show_name: false
+          icon: |
+            [[[
+              return entity.state === 'on' ? 'mdi:rotate-right' : 'mdi:upload-circle';
+            ]]]
+          tap_action:
+            action: call-service
+            service: script.turn_on
+            service_data:
+              entity_id: script.audit_md5
+          styles:
+            card:
+              - background: none
+              - border: none
+              - box-shadow: none
+            icon:
+              - animation: |
+                  [[[
+                    return entity.state === 'on' ? 'rotating 1s linear infinite' : '';
+                  ]]]
+              - color: |
+                  [[[
+                    return entity.state === 'on' ? '#ff9800' : 'rgba(85, 252, 252, 1)';
+                  ]]]
+              - width: 32px
+              - left: 17%
+  - type: markdown
+    content: >
+      {% set text = state_attr('sensor.audit_md5_journal', 'text') or '' %}
+      {% set r = namespace(res='', ter='') %}
+      {% for line in text.split('\n') %}
+        {% if 'RÉSULTAT' in line %}{% set r.res = line %}{% endif %}
+        {% if 'Audit MD5 terminé' in line %}{% set r.ter = line.split(' · ')[0] %}{% endif %}
+      {% endfor %}
+      {% if r.res %}
+      {{ r.res }}<br>{{ r.ter }}<br>→ /config/.logs/md5_audit_{{ now().strftime('%Y-%m-%d') }}.txt
+      {% else %}*— Aucun audit lancé —*{% endif %}
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: transparent;
+        }
+        ha-markdown { font-size: 12px; line-height: 1.8; }

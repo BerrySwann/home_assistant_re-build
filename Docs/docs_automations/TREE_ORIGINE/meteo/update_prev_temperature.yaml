@@ -1,0 +1,14 @@
+id: '1766778922895'
+alias: Update previous temperature
+description: 'Enregistre la température toutes les 30 minutes pour calculer la tendance.'
+triggers:
+- trigger: time_pattern
+  minutes: /30
+conditions: []
+actions:
+- action: input_number.set_value
+  target:
+    entity_id: input_number.th_balcon_nord_temperature_previous
+  data:
+    value: '{{ states(''sensor.th_balcon_nord_temperature'') | float(0) }}'
+mode: single

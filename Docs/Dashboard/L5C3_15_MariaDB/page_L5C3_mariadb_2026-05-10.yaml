@@ -1,0 +1,231 @@
+type: grid
+cards:
+  - type: heading
+    icon: mdi:cog
+    heading: Système
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - type: custom:bubble-card
+    card_type: separator
+    name: GitHub
+    icon: mdi:github
+    rows: 2
+    styles: |-
+      .bubble-line {
+        background: var(--primary-text-color);
+        opacity: 1;
+      }
+    card_layout: normal
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-chips-card
+        alignment: center
+        chips:
+          - type: template
+            entity: sensor.backup_github_status
+            icon: mdi:github
+            content: >-
+              {{ iif(states('sensor.backup_github_status')=='OK','Backup
+              OK','Backup KO') }} ·  {{
+              state_attr('sensor.backup_github_status','ts') or 'jamais' }}
+            icon_color: >-
+              {{ iif(states('sensor.backup_github_status')=='OK','green','red')
+              }}
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: transparent;
+            }
+      - type: custom:mushroom-chips-card
+        alignment: center
+        chips:
+          - type: template
+            entity: sensor.git_last_weekly_tag
+            icon: mdi:tag
+            content: "{{ states('sensor.git_last_weekly_tag') or 'no tag' }}"
+            icon_color: >-
+              {% set tag = states('sensor.git_last_weekly_tag') %}
+              {% set iso_now = now().isocalendar() %}
+              {% set iso_prev = (now() - timedelta(days=7)).isocalendar() %}
+              {% set current  = "weekly-%04d-W%02d" | format(iso_now[0], iso_now[1]) %}
+              {% set previous = "weekly-%04d-W%02d" | format(iso_prev[0], iso_prev[1]) %}
+              {{ 'green' if (tag and (tag.startswith(current) or tag.startswith(previous))) else 'amber' }}
+            tap_action:
+              action: url
+              url_path: https://github.com/BerrySwann/home_assistant_re-build/tags
+              new_tab: true
+            hold_action:
+              action: call-service
+              service: shell_command.git_backup_push_weekly
+              confirmation:
+                text: Créer un tag hebdomadaire ?
+          - type: template
+            entity: sensor.github_default_branch
+            icon: mdi:source-branch
+            content: "Branche: {{ states('sensor.github_default_branch') or 'unknown' }}"
+            icon_color: >-
+              {% set b = states('sensor.github_default_branch') %}  {{ 'green'
+              if b == 'main' else 'amber' }}
+            tap_action:
+              action: url
+              url_path: https://github.com/BerrySwann/home_assistant_re-build
+              new_tab: true
+          - type: template
+            icon: mdi:cloud-upload-outline
+            content: Push
+            icon_color: deep-orange
+            tap_action:
+              action: call-service
+              service: shell_command.git_backup_push_manual
+              confirmation:
+                text: Lancer un push Git manuel ?
+            hold_action:
+              action: url
+              url_path: >-
+                https://github.com/BerrySwann/home_assistant_re-build/commits/main
+              new_tab: true
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: transparent;
+            }
+      - type: custom:mushroom-title-card
+        title: Journal Backup (10 derniers)
+        alignment: center
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: transparent;
+            }
+      - type: markdown
+        content: |-
+          ```
+          {{ state_attr('sensor.backup_github_journal','text') or '—' }}
+          ```
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: transparent;
+            }
+            ha-markdown$: |
+              pre, code {
+                font-size: 0px !important;
+                line-height: 2.3 !important;
+              }
+      - type: custom:apexcharts-card
+        header:
+          title: Backup GitHub — OK/KO
+        graph_span: 7d
+        span:
+          end: day
+        yaxis:
+          - min: 0
+            max: 1
+            decimals: 0
+        series:
+          - entity: sensor.backup_github_status
+            name: Statut
+            type: column
+            color: "#3498db"
+            transform: "EVAL: return x === 'OK' ? 1 : 0;"
+            group_by:
+              duration: 6h
+              func: last
+        apex_config:
+          yaxis:
+            tickAmount: 2
+            labels:
+              formatter: |
+                EVAL: function (value) { return value === 1 ? 'OK' : 'KO'; }
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: transparent;
+            }
+  - type: custom:bubble-card
+    card_type: separator
+    name: MariaDB
+    icon: mdi:database-cog-outline
+    rows: 2
+    styles: |-
+      .bubble-line {
+        background: var(--primary-text-color);
+        opacity: 1;
+      }
+    card_layout: normal
+  - type: custom:apexcharts-card
+    header:
+      show: true
+      title: Évolution Taille MariaDB
+      show_states: true
+      colorize_states: true
+    graph_span: 7d
+    span:
+      end: day
+    yaxis:
+      - id: db_size
+        min: auto
+        max: auto
+        decimals: 1
+    series:
+      - entity: sensor.taille_db_home_assistant
+        name: Taille (MiB)
+        yaxis_id: db_size
+        type: area
+        color: "#f39c12"
+        opacity: 0.3
+        stroke_width: 2
+        group_by:
+          func: last
+          duration: 1d
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: transparent;
+        }
+  - type: custom:button-card
+    entity: automation.db_purge_mariadb_repack
+    name: "[DB] Purge MariaDB + Repack"
+    icon: mdi:database-check-outline
+    tap_action:
+      action: call-service
+      service: automation.trigger
+      service_data:
+        entity_id: automation.db_purge_mariadb_repack
+    styles:
+      card:
+        - background: transparent
+        - border: 0.1px solid white
+        - border-radius: 12px
+        - color: white
+        - font-size: 14px
+        - padding: 4px
+      icon:
+        - width: 40px
+        - height: 40px
+        - color: white
+      name:
+        - font-size: 16px
+        - margin-top: 12px

@@ -1,0 +1,226 @@
+type: custom:apexcharts-card
+experimental:
+  color_threshold: true
+graph_span: 365d
+span:
+  start: year
+now:
+  show: true
+  label: ▼
+  color: "#FFFFFF"
+header:
+  show: true
+  title: Évolution de la durée du jour - Vence (2026)
+  show_states: true
+  colorize_states: true
+apex_config:
+  chart:
+    type: area
+    height: 350px
+    toolbar:
+      show: true
+  stroke:
+    width: 2
+  grid:
+    borderColor: "#444"
+    strokeDashArray: 3
+  legend:
+    show: true
+    position: top
+  annotations:
+    xaxis:
+      - x: EVAL:new Date('2026-03-20').getTime()
+        borderColor: "#10B981"
+        label:
+          text: 🌱 Printemps
+          offsetY: -10
+          position: top
+          orientation: horizontal
+          style:
+            background: "#10B981"
+            color: "#fff"
+      - x: EVAL:new Date('2026-06-21').getTime()
+        borderColor: "#F59E0B"
+        label:
+          text: ☀️ Été
+          offsetY: -10
+          position: top
+          orientation: horizontal
+          style:
+            background: "#F59E0B"
+            color: "#fff"
+      - x: EVAL:new Date('2026-09-22').getTime()
+        borderColor: "#EF4444"
+        label:
+          text: 🍂 Automne
+          offsetY: -10
+          position: top
+          orientation: horizontal
+          style:
+            background: "#EF4444"
+            color: "#fff"
+      - x: EVAL:new Date('2026-12-21').getTime()
+        borderColor: "#3B82F6"
+        label:
+          text: ❄️ Hiver
+          position: top
+          offsetY: 35
+          style:
+            background: "#3B82F6"
+            color: "#fff"
+    yaxis:
+      - "y": 8.9
+        borderColor: "#3B82F6"
+        strokeDashArray: 3
+        label:
+          text: Min 8h54
+          offsetY: 20
+          position: right
+          style:
+            color: "#fff"
+            background: "#3B82F6"
+      - "y": 15.47
+        borderColor: "#EF4444"
+        strokeDashArray: 3
+        label:
+          text: Max 15h28
+          offsetY: 20
+          position: right
+          style:
+            color: "#fff"
+            background: "#EF4444"
+yaxis:
+  - id: hours
+    min: 8
+    max: 16
+    decimals: 2
+    apex_config:
+      tickAmount: 8
+  - id: variation
+    min: -5
+    max: 5
+    decimals: 1
+    opposite: true
+    apex_config:
+      tickAmount: 10
+series:
+  # Série header-only : affiche l'état formaté du sensor (14,47 h) — sans data_generator
+  - entity: sensor.duree_du_jour
+    name: Durée du jour
+    yaxis_id: hours
+    show:
+      in_header: true
+      in_brush: false
+      in_chart: false
+      extremas: false
+      legend_value: false
+  # Série chart : utilise sensor.duree_du_jour_brut (décimal pur) pour le tracé + extremas
+  - entity: sensor.duree_du_jour_brut
+    name: Durée du jour
+    yaxis_id: hours
+    type: area
+    curve: smooth
+    stroke_width: 4
+    opacity: 0.2
+    extend_to: now
+    fill_raw: last
+    data_generator: |
+      const data = [];
+      const lat = 43.72;
+      const latRad = lat * Math.PI / 180;
+      const now = new Date();
+      const year = 2026;
+      for (let i = 0; i <= 365; i++) {
+        const date = new Date(year, 0, i + 1);
+        if (date > now) break;
+        const dayOfYear = i + 1;
+        const declRad = 23.45 * Math.sin((2 * Math.PI * (dayOfYear - 80)) / 365) * Math.PI / 180;
+        const cosH = -(Math.tan(latRad) * Math.tan(declRad));
+        const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));
+        const dayLength = Math.round((2 * hourAngle * 180 / Math.PI / 15) * 100) / 100;
+        data.push([date.getTime(), dayLength]);
+      }
+      return data;
+    color_threshold:
+      - value: 9
+        color: "#3B82F6"
+      - value: 12
+        color: "#10B981"
+      - value: 15
+        color: "#EF4444"
+    show:
+      in_header: false
+      in_brush: false
+      in_chart: true
+      extremas: true
+      legend_value: false
+  - entity: sun.sun
+    name: " "
+    yaxis_id: hours
+    type: area
+    curve: smooth
+    color: gold
+    stroke_width: 1
+    opacity: 0.1
+    show:
+      in_header: false
+      in_brush: false
+      in_chart: true
+      extremas: false
+      legend_value: false
+    data_generator: |
+      const data = [];
+      const lat = hass.states['zone.home']?.attributes?.latitude
+                  ?? hass.config.latitude
+                  ?? 43.72;
+      const latRad = lat * Math.PI / 180;
+      const year = new Date().getFullYear();
+      for (let i = 0; i <= 365; i += 4) {
+        const date = new Date(year, 0, i + 1);
+        const dayOfYear = i + 1;
+        const declRad = 23.45 * Math.sin((2 * Math.PI * (dayOfYear - 80)) / 365) * Math.PI / 180;
+        const cosH = -(Math.tan(latRad) * Math.tan(declRad));
+        const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));
+        const dayLength = Math.round((2 * hourAngle * 180 / Math.PI / 15) * 100) / 100;
+        data.push([date.getTime(), dayLength]);
+      }
+      return data;
+  - entity: sensor.variation_quotidienne
+    name: Gain/Perte
+    yaxis_id: variation
+    type: area
+    curve: smooth
+    color: "#8B5CF6"
+    stroke_width: 1
+    opacity: 0.1
+    data_generator: |
+      const data = [];
+      const lat = 43.72;
+      const latRad = lat * Math.PI / 180;
+      const year = 2026;
+      function getDayLength(dayOfYear) {
+        const declRad = 23.45 * Math.sin((2 * Math.PI * (dayOfYear - 80)) / 365) * Math.PI / 180;
+        const cosH = -(Math.tan(latRad) * Math.tan(declRad));
+        const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));
+        return (2 * hourAngle * 180 / Math.PI / 15);
+      }
+      for (let i = 1; i <= 365; i++) {
+        const date = new Date(year, 0, i + 1);
+        // [modif] Pas de break → courbe complète jusqu'au 31/12
+        const diffMinutes = (getDayLength(i + 1) - getDayLength(i)) * 60;
+        data.push([date.getTime(), diffMinutes]);
+      }
+      return data;
+    show:
+      in_header: true
+      in_brush: false
+      in_chart: true
+      extremas: true
+      legend_value: false
+card_mod:
+  style: |
+    ha-card {
+      border: none !important;
+      box-shadow: none !important;
+      background: none !important;
+    }

@@ -1,0 +1,57 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. SENSORS : STATISTIQUES MIN/MAX/MOY — ECOJOKO TEMPS RÉEL         │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs de statistiques calculant la consommation minimale, maximale et
+# moyenne sur la puissance temps réel fournie par Ecojoko. Période glissante
+# de 24h pour min/max et 1h pour la moyenne. Ces capteurs permettent de suivre
+# les extrêmes de consommation et la tendance horaire.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : sensor.ecojoko_consommation_temps_reel (puissance instantanée W).
+# - Conso Mini  : min sur 24h (value_min, échantillon ≥ 6).
+# - Conso Maxi  : max sur 24h (value_max, échantillon ≥ 6).
+# - Conso Moy 1h: moyenne sur 1h (mean, précision 1 décimale).
+# - Correction : ancienne source était kWh cumulatif → corrigé en W instantané.
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ces capteurs opèrent sur la PUISSANCE (W), pas sur l'énergie (kWh).
+#   Ne pas les utiliser comme sources pour un utility_meter.
+# - La moyenne 1h peut être indisponible pendant les 60 premières minutes
+#   après le démarrage de HA (pas assez d'échantillons).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (suivi temps réel min/max/moy).
+
+# --- ecojoko_conso_mini_24h ---
+- platform: statistics
+  name: "Conso Mini"
+  unique_id: ecojoko_conso_mini_24h
+  entity_id: sensor.ecojoko_consommation_temps_reel
+  state_characteristic: value_min
+  max_age:
+    hours: 24
+
+# --- ecojoko_conso_maxi_24h ---
+- platform: statistics
+  name: "Conso Maxi"
+  unique_id: ecojoko_conso_maxi_24h
+  entity_id: sensor.ecojoko_consommation_temps_reel
+  state_characteristic: value_max
+  max_age:
+    hours: 24
+
+# --- ecojoko_conso_moyenne_1h ---
+- platform: statistics
+  name: "Conso Moyenne 1h"
+  unique_id: ecojoko_conso_moyenne_1h
+  entity_id: sensor.ecojoko_consommation_temps_reel
+  state_characteristic: mean
+  precision: 1
+  max_age:
+    hours: 1
+
+# annotations_log:
+# - [Renommage] Fichier renommé : Ecojoko_mini_maxi_avg_1h.yaml → Ecojoko_mini_maxi_avg.yaml
+# - [L16] Source confirmée : ecojoko_consommation_temps_reel (W instantané, pas kWh).

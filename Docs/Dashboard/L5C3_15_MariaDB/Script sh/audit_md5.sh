@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ AUDIT MD5 — 3 PASSES : TREE → MD5 PROD → MD5 GITHUB → RAPPORT          │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+# Compare chaque fichier YAML entre la prod HA et GitHub (curl raw URL)
+# Statuts : ✅ SYNC · ❌ DIFF · ⚠️ PUSH MANQUANT
+# Log : /config/.logs/md5_audit_YYYY-MM-DD.txt
+
+set -euo pipefail
+
+LOG_DIR="/config/.logs"
+LOG="$LOG_DIR/md5_audit_$(date '+%Y-%m-%d').txt"
+TMP_TREE="/tmp/audit_tree_$$.txt"
+TMP_PROD="/tmp/audit_prod_$$.txt"
+TMP_GH="/tmp/audit_gh_$$.tmp"    # Fichier unique réutilisé (1 yaml à la fois, ~KB)
+mkdir -p "$LOG_DIR"
+
+GH_BASE="https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main"
+
+cd /config
+
+DIRS="sensors templates utility_meter command_line groups input_booleans input_number"
+EXTRA_FILES="automations.yaml scripts.yaml shell_command.yaml configuration.yaml sql.yaml input_select.yaml input_datetime.yaml input_button.yaml"
+
+# ── PASS 1 : TREE ─────────────────────────────────────────────────────────
+{
+echo "╭──────────────────────────────────────────────────────────────────────────────╮"
+echo "│ AUDIT MD5 — $(date '+%Y-%m-%d %H:%M:%S %Z')"
+echo "╰──────────────────────────────────────────────────────────────────────────────╯"
+echo ""
+echo "── PASS 1 : TREE LOCAL ──────────────────────────────────────────────────────"
+} > "$LOG"
+
+find $DIRS -name "*.yaml" 2>/dev/null | sort > "$TMP_TREE"
+for f in $EXTRA_FILES; do [ -f "$f" ] && echo "$f" >> "$TMP_TREE"; done
+
+TOTAL=$(wc -l < "$TMP_TREE")
+cat "$TMP_TREE" | while read -r f; do echo "  $f"; done >> "$LOG"
+echo "" >> "$LOG"
+echo "  → $TOTAL fichiers" >> "$LOG"
+echo "" >> "$LOG"
+
+# ── PASS 2 : MD5 PROD ─────────────────────────────────────────────────────
+echo "── PASS 2 : MD5 PROD ───────────────────────────────────────────────────────" >> "$LOG"
+> "$TMP_PROD"
+while IFS= read -r file; do
+    md5=$(md5sum "$file" 2>/dev/null | cut -d' ' -f1)
+    echo "$file|$md5" >> "$TMP_PROD"
+done < "$TMP_TREE"
+echo "  → $TOTAL MD5 calculés" >> "$LOG"
+echo "" >> "$LOG"
+
+# ── PASS 3 : MD5 GITHUB (curl → fichier tmp unique, md5sum direct) ────────
+echo "── PASS 3 : MD5 GITHUB (curl raw → md5sum direct) ──────────────────────────" >> "$LOG"
+echo "  → base : $GH_BASE" >> "$LOG"
+echo "  → /tmp usage : 1 fichier yaml à la fois (~KB, réutilisé)" >> "$LOG"
+echo "" >> "$LOG"
+
+echo "── COMPARAISON PROD vs GITHUB ───────────────────────────────────────────────" >> "$LOG"
+printf "%-68s | %-8s | %-8s | %s\n" "FICHIER" "PROD" "GITHUB" "STATUT" >> "$LOG"
+printf '%.0s─' {1..105} >> "$LOG"; echo "" >> "$LOG"
+
+OK=0; DIFF_COUNT=0; PUSH_MANQUANT=0
+github_md5=""
+
+while IFS='|' read -r file prod_md5; do
+    rm -f "$TMP_GH"
+    # curl -f : silent fail sur HTTP 4xx/5xx → exit non-zero → TMP_GH absent
+    encoded_file="${file// /%20}"
+    HTTP_CODE=$(curl -sf --max-time 15 -o "$TMP_GH" \
+        -w '%{http_code}' "${GH_BASE}/${encoded_file}" 2>/dev/null || echo "000")
+
+    if [[ "$HTTP_CODE" != "200" ]] || [[ ! -s "$TMP_GH" ]]; then
+        github_md5=""
+        statut="⚠️  PUSH MANQUANT"
+        PUSH_MANQUANT=$((PUSH_MANQUANT+1))
+    else
+        github_md5=$(md5sum "$TMP_GH" | cut -d' ' -f1)
+        if [[ "$prod_md5" == "$github_md5" ]]; then
+            statut="✅ SYNC"
+            OK=$((OK+1))
+        else
+            statut="❌ DIFF"
+            DIFF_COUNT=$((DIFF_COUNT+1))
+        fi
+    fi
+
+    printf "%-68s | %.8s | %.8s | %s\n" \
+        "$file" "${prod_md5:-??????}" "${github_md5:-??????}" "$statut" >> "$LOG"
+done < "$TMP_PROD"
+
+# ── RÉSUMÉ ────────────────────────────────────────────────────────────────
+{
+echo ""
+printf '%.0s─' {1..105}; echo ""
+echo "RÉSULTAT : $TOTAL fichiers — ✅ $OK SYNC · ❌ $DIFF_COUNT DIFF · ⚠️ $PUSH_MANQUANT PUSH MANQUANT"
+printf '%.0s─' {1..105}; echo ""
+} >> "$LOG"
+
+rm -f "$TMP_TREE" "$TMP_PROD" "$TMP_GH"
+
+# Copie symlink latest dans .logs/
+cp "$LOG" /config/.logs/md5_audit_latest.txt 2>/dev/null || true
+
+echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 terminé : $TOTAL fichiers · $OK SYNC · $DIFF_COUNT DIFF · $PUSH_MANQUANT PUSH MANQUANT → $LOG"
+
+# annotations_log:
+# [2026-06-14] Création — 3 passes : tree → md5 prod → md5 github
+# [2026-06-15] FIX RADICAL : git show → curl raw URL (ref stale non résolvable)
+# [2026-06-15] FIX CRITIQUE : echo "$github_raw" | md5sum → $() strip trailing newlines
+#              → remplacement par curl -o TMP_GH + md5sum TMP_GH (bytes exacts préservés)
+#              → TMP_GH = 1 fichier yaml à la fois (~KB), réutilisé → impact RAM nul
+# [2026-06-15] EXTRA_FILES étendu : ajout scripts.yaml shell_command.yaml configuration.yaml
+#              sql.yaml input_select.yaml input_datetime.yaml input_button.yaml
+# [2026-06-15] DIRS étendu : ajout groups/ input_booleans/ input_number/

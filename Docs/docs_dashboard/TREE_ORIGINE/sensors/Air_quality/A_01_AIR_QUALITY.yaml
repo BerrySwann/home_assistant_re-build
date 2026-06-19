@@ -1,0 +1,83 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ [ A ] SENSORS : QUALITÉ DE L'AIR — MOYENNES 24H (PM2.5 + TCOV × 3)       │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Six capteurs statistiques calculant la moyenne glissante sur 24h des valeurs
+# brutes PM2.5 et tCOV (VOC index) pour les 3 pièces équipées IKEA Vindstyrka.
+# Ces moyennes servent de marqueurs de référence (marker2) sur les ring-tile
+# de la page /air-quality.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Platform      : statistics / state_characteristic: mean / max_age: 24h
+# - Source PM2.5  : sensor.qualite_air_*_ikea_pm25 (IKEA Vindstyrka Zigbee)
+# - Source tCOV   : sensor.qualite_air_*_ikea_voc_index (IKEA Vindstyrka Zigbee)
+# - Pièces        : Salon, Bureau, Chambre
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - La moyenne 24h se recalcule en continu (fenêtre glissante, pas reset minuit).
+# - Si le capteur IKEA est indisponible, la stat retourne "unavailable".
+# - Ne pas confondre avec voc_index (0-500) et pm25 (µg/m³) : unités distinctes.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L6C1 : Qualité de l'air intérieur (marker2 des ring-tile PM2.5 + tCOV)
+
+# --- pm2_5_salon_moy_24h ---
+- platform: statistics
+  name: "PM2.5 Salon (moy 24h)"
+  unique_id: pm2_5_salon_moy_24h
+  entity_id: sensor.qualite_air_salon_ikea_pm25
+  state_characteristic: mean
+  max_age:
+    hours: 24
+  precision: 1
+
+# --- tcov_salon_moy_24h ---
+- platform: statistics
+  name: "tCOV Salon (moy 24h)"
+  unique_id: tcov_salon_moy_24h
+  entity_id: sensor.qualite_air_salon_ikea_voc_index
+  state_characteristic: mean
+  max_age:
+    hours: 24
+  precision: 1
+
+# --- pm2_5_bureau_moy_24h ---
+- platform: statistics
+  name: "PM2.5 Bureau (moy 24h)"
+  unique_id: pm2_5_bureau_moy_24h
+  entity_id: sensor.qualite_air_bureau_ikea_pm25
+  state_characteristic: mean
+  max_age:
+    hours: 24
+  precision: 1
+
+# --- tcov_bureau_moy_24h ---
+- platform: statistics
+  name: "tCOV Bureau (moy 24h)"
+  unique_id: tcov_bureau_moy_24h
+  entity_id: sensor.qualite_air_bureau_ikea_voc_index
+  state_characteristic: mean
+  max_age:
+    hours: 24
+  precision: 1
+
+# --- pm2_5_chambre_moy_24h ---
+- platform: statistics
+  name: "PM2.5 Chambre (moy 24h)"
+  unique_id: pm2_5_chambre_moy_24h
+  entity_id: sensor.qualite_air_chambre_ikea_pm25
+  state_characteristic: mean
+  max_age:
+    hours: 24
+  precision: 1
+
+# --- tcov_chambre_moy_24h ---
+- platform: statistics
+  name: "tCOV Chambre (moy 24h)"
+  unique_id: tcov_chambre_moy_24h
+  entity_id: sensor.qualite_air_chambre_ikea_voc_index
+  state_characteristic: mean
+  max_age:
+    hours: 24
+  precision: 1

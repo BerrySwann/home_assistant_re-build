@@ -1,0 +1,140 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ TEMPLATES : SÉRIE 03_07. CLIM — MESSAGE PERSONNALISÉ (7h30 <-> 21h00)    │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Template sensor générant le message texte envoyé via notification mobile lors des
+# changements d'état de la clim en plage jour (7h30 → 21h00). Le message intègre
+# la tendance de température extérieure, la présence, et le scénario groupe actif
+# (groupe_1 = absent, groupe_2/3/4 = présences avec températures personnalisées).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - sensor.th_balcon_nord_temperature_trend (increasing / decreasing / stable)
+# - sensor.groupe → groupe_1 / groupe_2 / groupe_3 / groupe_4
+# - sensor.presence → texte de présence affiché en en-tête du message
+# - sensor.mode_ete_hiver → heat / cool / fan_only
+# - sensor.temperature_corrige_mamour_hivers / sensor.temperature_corrige_eric_hivers
+# - sensor.temperature_corrige_chambre_hivers / sensor.temperature_cible
+# - sensor.temperature_confort_jour / sensor.temperature_eco_hiver_corrige
+# - switch.clim_*_nous → vérifie alimentation de chaque unité
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce fichier produit : sensor.message_clim_personnalise_7h30_21h00
+# - Disponibilité conditionnée à la présence des 5 capteurs réseau/T°.
+# - Ne pas confondre avec le fichier nuit (21h → 7h30) qui utilise temp_nuit.
+# - Les sauts de ligne \n dans les messages sont intentionnels pour l'affichage mobile.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Déclenché par automation L1C3 (notification clim 7h30-21h)
+# - Indirect : remonte dans la notification mobile via automation D_notif_temp_jour.yaml
+
+- sensor:
+
+# ┌───────────────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : GÉNÉRATEUR DE MESSAGE (LOGIQUE SCÉNARIOS)             │
+# └───────────────────────────────────────────────────────────────────┘
+
+# --- message_clim_personnalise_7h30_21h00 ---
+    - name: "Message Clim Personnalise 7h30 <-> 21h00"
+      unique_id: message_clim_personnalise_7h30_21h00
+      state: >
+        {%- if states('sensor.mamour_network_type') in ['unknown', 'unavailable'] or
+              states('sensor.eric_network_type') in ['unknown', 'unavailable'] or
+              states('sensor.th_balcon_nord_temperature') in ['unknown', 'unavailable'] or
+              states('sensor.groupe') in ['unknown', 'unavailable'] or
+              states('sensor.presence') in ['unknown', 'unavailable'] %}
+          En attente des capteurs...
+        {%- else %}
+          {%- set tendance = states('sensor.th_balcon_nord_temperature_trend') %}
+          {%- set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+          {%- set temp_cible = states('sensor.temperature_cible') | float(0) %}
+          {%- set temp_confort = states('sensor.temperature_confort_jour') | float(19) %}
+          {%- set temp_conf_m = states('sensor.temperature_corrige_mamour_hivers') | float(20) %}
+          {%- set temp_conf_e = states('sensor.temperature_corrige_eric_hivers') | float(18) %}
+          {%- set temp_conf_c = states('sensor.temperature_corrige_chambre_hivers') | float(18) %}
+          {%- set temp_eco = states('sensor.temperature_eco_hiver_corrige') | float(17) %}
+          {%- set mode = states('sensor.mode_ete_hiver') %}
+          {%- set prise_salon = is_state('switch.clim_salon_nous', 'on') %}
+          {%- set prise_bureau = is_state('switch.clim_bureau_nous', 'on') %}
+          {%- set prise_chambre = is_state('switch.clim_chambre_nous', 'on') %}
+          {%- set clims_alimentees = prise_salon or prise_bureau or prise_chambre %}
+          {%- set groupe = states('sensor.groupe') %}
+          {%- set presence = states('sensor.presence') %}
+
+          {# --- PARTIE 1 : TENDANCE --- #}
+          {%- if tendance == 'increasing' %}
+            {%- set message_tendance = "T°Ext Up ↗ " ~ temp_ext ~ "°" %}
+          {%- elif tendance == 'decreasing' %}
+            {%- set message_tendance = "T°Ext Down ↘ " ~ temp_ext ~ "°" %}
+          {%- else %}
+            {%- set message_tendance = "T°Ext stable → " ~ temp_ext ~ "°" %}
+          {%- endif %}
+
+          {# --- PARTIE 2 : HEADER --- EN-TÊTE --- #}
+          {%- set message_header = presence %}
+
+          {# --- PARTIE 3 : MODE --- SCÉNARIO STANDARD --- #}
+          {%- if not clims_alimentees %}
+            {%- set message_mode = "[UNITS OFF]" %}
+          {%- else %}
+            {%- if 'groupe_1' in groupe %}
+              {%- if mode == 'heat' %}
+                {%- set message_mode = "[éCO HEAT]\nLes 3 Clim à " ~ temp_eco ~ "° (Absent)" %}
+              {%- elif mode == 'cool' %}
+                {%- set message_mode = "[COOL]\nLes 3 Clim à " ~ temp_cible ~ "° (Absent)" %}
+              {%- elif mode == 'fan_only' %}
+                {%- set message_mode = "[FAN ONLY]\nLes 3 Clim en [FAN ONLY] (Absent)" %}
+              {%- else %}
+                {%- set message_mode = "Mode clim inconnu" %}
+              {%- endif %}
+
+            {%- elif 'groupe_2' in groupe %}
+              {%- if mode == 'heat' %}
+                {%- set message_mode = "[HEAT]\nSalon " ~ temp_conf_m ~ "°\nBureau " ~ temp_cible ~ "°\nChambre " ~ temp_conf_c ~ "°" %}
+              {%- elif mode == 'cool' %}
+                {%- set message_mode = "[COOL]\nSalon " ~ temp_confort ~ "°\nBureau " ~ temp_cible ~ "°\nChambre " ~ temp_cible ~ "°" %}
+              {%- elif mode == 'fan_only' %}
+                {%- set message_mode = "[FAN ONLY]\nSalon [FAN ONLY]\nBureau [FAN ONLY]\nChambre [FAN ONLY]" %}
+              {%- else %}
+                {%- set message_mode = "Mode clim inconnu" %}
+              {%- endif %}
+
+            {%- elif 'groupe_3' in groupe %}
+              {%- if mode == 'heat' %}
+                {%- set message_mode = "[HEAT]\nSalon " ~ temp_cible ~ "°\nBureau " ~ temp_conf_e ~ "°\nChambre " ~ temp_conf_c ~ "°" %}
+              {%- elif mode == 'cool' %}
+                {%- set message_mode = "[COOL]\nSalon " ~ temp_cible ~ "°\nBureau " ~ temp_confort ~ "°\nChambre " ~ temp_cible ~ "°" %}
+              {%- elif mode == 'fan_only' %}
+                {%- set message_mode = "[FAN ONLY]\nSalon [FAN ONLY]\nBureau [FAN ONLY]\nChambre [FAN ONLY]" %}
+              {%- else %}
+                {%- set message_mode = "Mode clim inconnu" %}
+              {%- endif %}
+
+            {%- elif 'groupe_4' in groupe %}
+              {%- if mode == 'heat' %}
+                {%- set message_mode = "[HEAT]\nSalon " ~ temp_conf_m ~ "°\nBureau " ~ temp_conf_e ~ "°\nChambre " ~ temp_conf_c ~ "°" %}
+              {%- elif mode == 'cool' %}
+                {%- set message_mode = "[COOL]\nSalon & Bureau " ~ temp_confort ~ "°\nChambre " ~ temp_cible ~ "°" %}
+              {%- elif mode == 'fan_only' %}
+                {%- set message_mode = "[FAN ONLY]\nSalon [FAN ONLY]\n Bureau [FAN ONLY]\nChambre [FAN ONLY]" %}
+              {%- else %}
+                {%- set message_mode = "Mode clim inconnu" %}
+              {%- endif %}
+
+            {%- else %}
+              {%- set message_mode = "Scénario groupe non géré" %}
+            {%- endif %}
+          {%- endif %}
+
+          {# --- ASSEMBLAGE FINAL --- #}
+          {{ message_header }}
+          {{ message_tendance }}
+          {{ message_mode }}
+        {%- endif %}
+
+      availability: >
+        {{ states('sensor.mamour_network_type') not in ['unknown', 'unavailable'] and
+          states('sensor.eric_network_type') not in ['unknown', 'unavailable'] and
+          states('sensor.th_balcon_nord_temperature') not in ['unknown', 'unavailable'] and
+          states('sensor.groupe') not in ['unknown', 'unavailable'] and
+          states('sensor.presence') not in ['unknown', 'unavailable'] }}

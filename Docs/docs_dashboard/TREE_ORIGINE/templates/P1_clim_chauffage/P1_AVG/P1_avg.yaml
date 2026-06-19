@@ -1,0 +1,292 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 1. TEMPLATE : PUISSANCE MOYENNE CHAUFFAGE & CLIM                    │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs templates calculant la puissance moyenne (W) par équipement P1,
+# sur 4 cycles temporels (Annuel / Mensuel / Hebdo / Quotidien).
+# Formule : (kWh UM × 1000) / heures_écoulées_dans_le_cycle.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources : utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml
+#   → sensor.*_{période}_kwh_um
+# - Quotidien  : h = now().hour + minute/60
+# - Hebdo      : h = weekday × 24 + now().hour + minute/60
+# - Mensuel    : h = (now().day - 1) × 24 + now().hour + minute/60
+# - Annuel     : h = (now() - 1er jan) en secondes / 3600
+# - Guard : h > 0.1 → sinon 0 (évite division par zéro en début de cycle)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ces capteurs n'ont pas de state_class (valeur calculée, pas cumulée).
+# - Ne pas utiliser device_class: energy ici — c'est de la puissance (W).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C2 Conso Énergie Clim / Radiateur / Soufflant (graphes AVG)
+
+- sensor:
+
+    # ┌───────────────────────────────────┐
+    # │ 4. SALON                          │
+    # └───────────────────────────────────┘
+
+    # --- clim_salon_avg_watts_quotidien ---
+    - name: "Clim Salon Avg Watts Quotidien"
+      unique_id: clim_salon_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.clim_salon_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- clim_salon_avg_watts_mensuel ---
+    - name: "Clim Salon Avg Watts Mensuel"
+      unique_id: clim_salon_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.clim_salon_mensuel_kwh_um') | float(0) %}
+        {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- clim_salon_avg_watts_hebdomadaire ---
+    - name: "Clim Salon Avg Watts Hebdomadaire"
+      unique_id: clim_salon_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.clim_salon_hebdomadaire_kwh_um') | float(0) %}
+        {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- clim_salon_avg_watts_annuel ---
+    - name: "Clim Salon Avg Watts Annuel"
+      unique_id: clim_salon_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.clim_salon_annuel_kwh_um') | float(0) %}
+        {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
+        {% set h = (now() - debut).total_seconds() / 3600 %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ 5. CUISINE                        │
+    # └───────────────────────────────────┘
+
+    # --- radiateur_elec_cuisine_avg_watts_quotidien ---
+    - name: "Radiateur Elec Cuisine Avg Watts Quotidien"
+      unique_id: radiateur_elec_cuisine_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.radiateur_elec_cuisine_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- radiateur_elec_cuisine_avg_watts_mensuel ---
+    - name: "Radiateur Elec Cuisine Avg Watts Mensuel"
+      unique_id: radiateur_elec_cuisine_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.radiateur_elec_cuisine_mensuel_kwh_um') | float(0) %}
+        {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- radiateur_elec_cuisine_avg_watts_hebdomadaire ---
+    - name: "Radiateur Elec Cuisine Avg Watts Hebdomadaire"
+      unique_id: radiateur_elec_cuisine_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.radiateur_elec_cuisine_hebdomadaire_kwh_um') | float(0) %}
+        {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- radiateur_elec_cuisine_avg_watts_annuel ---
+    - name: "Radiateur Elec Cuisine Avg Watts Annuel"
+      unique_id: radiateur_elec_cuisine_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.radiateur_elec_cuisine_annuel_kwh_um') | float(0) %}
+        {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
+        {% set h = (now() - debut).total_seconds() / 3600 %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ 7. BUREAU                         │
+    # └───────────────────────────────────┘
+
+    # --- clim_bureau_avg_watts_quotidien ---
+    - name: "Clim Bureau Avg Watts Quotidien"
+      unique_id: clim_bureau_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.clim_bureau_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- clim_bureau_avg_watts_mensuel ---
+    - name: "Clim Bureau Avg Watts Mensuel"
+      unique_id: clim_bureau_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.clim_bureau_mensuel_kwh_um') | float(0) %}
+        {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- clim_bureau_avg_watts_hebdomadaire ---
+    - name: "Clim Bureau Avg Watts Hebdomadaire"
+      unique_id: clim_bureau_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.clim_bureau_hebdomadaire_kwh_um') | float(0) %}
+        {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- clim_bureau_avg_watts_annuel ---
+    - name: "Clim Bureau Avg Watts Annuel"
+      unique_id: clim_bureau_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.clim_bureau_annuel_kwh_um') | float(0) %}
+        {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
+        {% set h = (now() - debut).total_seconds() / 3600 %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ 8. SDB                            │
+    # └───────────────────────────────────┘
+
+    # --- soufflant_sdb_avg_watts_quotidien ---
+    - name: "Soufflant Sdb Avg Watts Quotidien"
+      unique_id: soufflant_sdb_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.soufflant_sdb_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- soufflant_sdb_avg_watts_mensuel ---
+    - name: "Soufflant Sdb Avg Watts Mensuel"
+      unique_id: soufflant_sdb_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.soufflant_sdb_mensuel_kwh_um') | float(0) %}
+        {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- soufflant_sdb_avg_watts_hebdomadaire ---
+    - name: "Soufflant Sdb Avg Watts Hebdomadaire"
+      unique_id: soufflant_sdb_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.soufflant_sdb_hebdomadaire_kwh_um') | float(0) %}
+        {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- soufflant_sdb_avg_watts_annuel ---
+    - name: "Soufflant Sdb Avg Watts Annuel"
+      unique_id: soufflant_sdb_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.soufflant_sdb_annuel_kwh_um') | float(0) %}
+        {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
+        {% set h = (now() - debut).total_seconds() / 3600 %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- seche_serviette_sdb_avg_watts_quotidien ---
+    - name: "Seche Serviette Sdb Avg Watts Quotidien"
+      unique_id: seche_serviette_sdb_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.seche_serviette_sdb_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- seche_serviette_sdb_avg_watts_mensuel ---
+    - name: "Seche Serviette Sdb Avg Watts Mensuel"
+      unique_id: seche_serviette_sdb_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.seche_serviette_sdb_mensuel_kwh_um') | float(0) %}
+        {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- seche_serviette_sdb_avg_watts_hebdomadaire ---
+    - name: "Seche Serviette Sdb Avg Watts Hebdomadaire"
+      unique_id: seche_serviette_sdb_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.seche_serviette_sdb_hebdomadaire_kwh_um') | float(0) %}
+        {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- seche_serviette_sdb_avg_watts_annuel ---
+    - name: "Seche Serviette Sdb Avg Watts Annuel"
+      unique_id: seche_serviette_sdb_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.seche_serviette_sdb_annuel_kwh_um') | float(0) %}
+        {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
+        {% set h = (now() - debut).total_seconds() / 3600 %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ 9. CHAMBRE                        │
+    # └───────────────────────────────────┘
+
+    # --- clim_chambre_avg_watts_quotidien ---
+    - name: "Clim Chambre Avg Watts Quotidien"
+      unique_id: clim_chambre_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.clim_chambre_quotidien_kwh_um') | float(0) %}
+        {% set h = now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- clim_chambre_avg_watts_mensuel ---
+    - name: "Clim Chambre Avg Watts Mensuel"
+      unique_id: clim_chambre_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.clim_chambre_mensuel_kwh_um') | float(0) %}
+        {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- clim_chambre_avg_watts_hebdomadaire ---
+    - name: "Clim Chambre Avg Watts Hebdomadaire"
+      unique_id: clim_chambre_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.clim_chambre_hebdomadaire_kwh_um') | float(0) %}
+        {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- clim_chambre_avg_watts_annuel ---
+    - name: "Clim Chambre Avg Watts Annuel"
+      unique_id: clim_chambre_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set conso = states('sensor.clim_chambre_annuel_kwh_um') | float(0) %}
+        {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
+        {% set h = (now() - debut).total_seconds() / 3600 %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}

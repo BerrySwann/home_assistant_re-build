@@ -1,0 +1,106 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 1. SENSORS — DURÉE D'UTILISATION TOTALE [DUT] CHAUFFAGE & CLIM      │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs history_stats mesurant le temps de fonctionnement quotidien (DUT)
+# des 6 équipements P1. Remise à zéro à minuit chaque jour.
+# Unité : heures (type: time).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Salon / Cuisine / Bureau / Chambre : surveille sensor.*_power_status → state "on"
+#   (source : templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml)
+# - SdB Soufflant   : surveille sensor.sdb_soufflant_etat → state "Heat"
+# - SdB Sèche-Serv. : surveille sensor.sdb_seche_serviette_etat → state "Heat"
+#   (sources : templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Les capteurs *_power_status (Salon/Cuisine/Bureau/Chambre) sont des status
+#   textuels ("on" / "off") — bien utiliser state: "on" (pas "On").
+# - Les capteurs SdB utilisent l'état du mode clim ("Heat") → sensible à la casse.
+# - Ce fichier produit : sensor.dut_clim_salon, sensor.dut_radiateur_cuisine,
+#   sensor.dut_clim_bureau, sensor.dut_sdb_soufflant,
+#   sensor.dut_sdb_seche_serviettes, sensor.dut_clim_chambre
+# - sensor.dut_sdb_total (somme soufflant + sèche-serv.) est un capteur template
+#   → à définir dans templates/P1_clim_chauffage/P1_DUT_TOTAL/P1_DUT_TOTAL_SDB.yaml
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert à la vignette L2C2 (Conso Énergie Clim / Radiateur / Soufflant)
+# - Sert aux graphes apexcharts "D.U.T. & Performance" par pièce (page energie-clim)
+
+# ┌───────────────────────────────────┐
+# │ 4. SALON                          │
+# └───────────────────────────────────┘
+- platform: history_stats
+  name: "DUT Clim Salon"
+  unique_id: dut_clim_salon
+  entity_id: sensor.salon_power_status
+  state: "on"
+  type: time
+  start: "{{ today_at() }}"
+  end: "{{ now() }}"
+
+# ┌───────────────────────────────────┐
+# │ 5. CUISINE                        │
+# └───────────────────────────────────┘
+- platform: history_stats
+  name: "DUT Radiateur Cuisine"
+  unique_id: dut_radiateur_cuisine
+  entity_id: sensor.cuisine_power_status
+  state: "on"
+  type: time
+  start: "{{ today_at() }}"
+  end: "{{ now() }}"
+
+# ┌───────────────────────────────────┐
+# │ 7. BUREAU                         │
+# └───────────────────────────────────┘
+- platform: history_stats
+  name: "DUT Clim Bureau"
+  unique_id: dut_clim_bureau
+  entity_id: sensor.bureau_power_status
+  state: "on"
+  type: time
+  start: "{{ today_at() }}"
+  end: "{{ now() }}"
+
+# ┌───────────────────────────────────┐
+# │ 8. SDB                            │
+# └───────────────────────────────────┘
+- platform: history_stats
+  name: "DUT SdB Soufflant"
+  unique_id: dut_sdb_soufflant
+  entity_id: sensor.sdb_soufflant_etat
+  state: "Heat"
+  type: time
+  start: "{{ today_at() }}"
+  end: "{{ now() }}"
+
+- platform: history_stats
+  name: "DUT SdB Seche Serviettes"
+  unique_id: dut_sdb_seche_serviettes
+  entity_id: sensor.sdb_seche_serviette_etat
+  state: "Heat"
+  type: time
+  start: "{{ today_at() }}"
+  end: "{{ now() }}"
+
+# ┌───────────────────────────────────┐
+# │ 9. CHAMBRE                        │
+# └───────────────────────────────────┘
+- platform: history_stats
+  name: "DUT Clim Chambre"
+  unique_id: dut_clim_chambre
+  entity_id: sensor.chambre_power_status
+  state: "on"
+  type: time
+  start: "{{ today_at() }}"
+  end: "{{ now() }}"
+  
+# annotations_log:
+# [L1]   Titre corrigé : "P1. SENSORS" → "PÔLE 1. SENSORS" (standard CLAUDE.md)
+# [L2]   Source : ancien repo sensors/p1_1_sensors - dut.yaml — porté dans ReBuild
+# [L3]   Convention : platform: history_stats — type time — reset minuit
+# [L4]   Salon/Cuisine/Bureau/Chambre : entity_id = *_power_status, state = "on"
+# [L5]   SdB : entity_id = *_etat (clim mode), state = "Heat" (sensible casse)
+# [L6]   dut_sdb_total (somme) → templates/P1_clim_chauffage/P1_DUT_TOTAL/P1_DUT_TOTAL_SDB.yaml

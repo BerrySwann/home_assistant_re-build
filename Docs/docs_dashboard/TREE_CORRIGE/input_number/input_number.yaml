@@ -1,0 +1,23 @@
+# ╭──────────────────────────────────────────────────────────────────╮
+# │ INPUT_NUMBER : RÉGLAGES & SEUILS DU SYSTÈME                      │
+# ╰──────────────────────────────────────────────────────────────────╯
+
+# ┌─────────────────────────────────────┐
+# │  MÉTÉO & EXTÉRIEUR                  │
+# └─────────────────────────────────────┘
+
+# --- th_balcon_nord_temperature_previous ---
+th_balcon_nord_temperature_previous:
+  name: "TH Balcon Nord Temperature Previous"
+  initial: 0
+  min: -50
+  max: 100
+  step: 0.01
+
+# --- th_balcon_nord_humidity_previous ---
+th_balcon_nord_humidity_previous:
+  name: "TH Balcon Nord Humidity Previous"
+  initial: 0
+  min: 0    
+  max: 100
+  step: 0.01

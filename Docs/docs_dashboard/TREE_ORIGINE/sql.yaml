@@ -1,0 +1,31 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ SQL : CAPTEURS BASE DE DONNÉES MARIADB                                   │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Utilise l'intégration sql native HA pour interroger MariaDB via
+# db_url: !secret mariadb_url — aucun credentials en clair.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Requête : SUM(data_length + index_length) / POWER(1024,2)
+# - Base ciblée : homeassistant
+# - Résultat : MiB (virgule flottante, 1 décimale)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Utiliser l'intégration sql (et non command_line) : !secret mariadb_url
+#   fonctionne nativement ici car db_url est une valeur YAML entière.
+# - device_class: data_size → affichage automatique en MiB/GiB dans HA.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert à la remontée d'info pour la vignette : [L5C3 Taille DB MariaDB]
+
+- name: "Taille Db Home Assistant"
+  unique_id: taille_db_home_assistant
+  db_url: !secret mariadb_url
+  query: >
+    SELECT Round(Sum(data_length + index_length) / POWER(1024,2), 1) AS value
+    FROM information_schema.tables
+    WHERE table_schema = "homeassistant";
+  column: "value"
+  unit_of_measurement: "MiB"
+  device_class: data_size
