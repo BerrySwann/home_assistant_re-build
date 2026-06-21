@@ -154,7 +154,7 @@
         {% set delta_1 = states('sensor.delta_1') | float(1) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
-          {{ [temp_ext - 1, 27] | min | int }}
+          {{ [temp_ext - delta_1, 27] | min | int }}
         {% else %}
           {% set temp_conf_m = states('sensor.temperature_confort_jour') | float(0) %}
           {{ (temp_conf_m + delta_1) | round(1) }}
@@ -170,9 +170,10 @@
       device_class: temperature
       state: >
         {% set delta_2 = states('sensor.delta_2') | float(2) %}
+        {% set delta_1 = states('sensor.delta_1') | float(1) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
-          {% set t_bureau = states('sensor.th_bureau_temperature') | float(26) %}
-          {{ [t_bureau, 28] | min | int }}
+          {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+          {{ [temp_ext + delta_1, 28] | min | int }}
         {% else %}
           {% set temp_conf_e = states('sensor.temperature_confort_jour') | float(0) %}
           {{ (temp_conf_e - delta_2) | round(1) }}
