@@ -61,7 +61,7 @@
     - name: "Seuil non clim"
       unique_id: seuil_non_clim
       unit_of_measurement: "°C"
-      state: "27"
+      state: "26"
 
 # --- delta_1 ---
     - name: "Delta_1"
@@ -144,18 +144,19 @@
 
 # ┌───────────────────────────────────┐
 # │ 04. SALON                         │
-# └───────────────────────────────────┐
+# └───────────────────────────────────┘
 # --- temperature_corrige_mamour ---
     - name: "Temperature Corrigé Mamour"
       unique_id: temperature_corrige_mamour
       unit_of_measurement: "°C"
       device_class: temperature
       state: >
-        {% set temp_conf_m = states('sensor.temperature_confort_jour') | float(0) %}
         {% set delta_1 = states('sensor.delta_1') | float(1) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
-          {{ (temp_conf_m - delta_1) | round(1) }}
+          {% set t_salon = states('sensor.th_salon_temperature') | float(26) %}
+          {{ [t_salon - 1, 28] | min | int }}
         {% else %}
+          {% set temp_conf_m = states('sensor.temperature_confort_jour') | float(0) %}
           {{ (temp_conf_m + delta_1) | round(1) }}
         {% endif %}
 
@@ -168,12 +169,12 @@
       unit_of_measurement: "°C"
       device_class: temperature
       state: >
-        {% set temp_conf_e = states('sensor.temperature_confort_jour') | float(0) %}
-        {% set delta_1 = states('sensor.delta_1') | float(1) %}
         {% set delta_2 = states('sensor.delta_2') | float(2) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
-          {{ (temp_conf_e + delta_1) | round(1) }}
+          {% set t_bureau = states('sensor.th_bureau_temperature') | float(26) %}
+          {{ [t_bureau, 28] | min | int }}
         {% else %}
+          {% set temp_conf_e = states('sensor.temperature_confort_jour') | float(0) %}
           {{ (temp_conf_e - delta_2) | round(1) }}
         {% endif %}
 
@@ -187,9 +188,10 @@
       device_class: temperature
       state: >
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
-          {{ states('sensor.consigne_de_base') | float(0) }}
+          {% set t_chambre = states('sensor.th_chambre_temperature') | float(26) %}
+          {{ [t_chambre, 28] | min | int }}
         {% else %}
-          {{ states('sensor.consigne_de_base') | float(0) }}
+          {{ states('sensor.consigne_de_base') | float(0) | int }}
         {% endif %}
 
 # ┌───────────────────────────────────────────────────────────────────┐
@@ -302,6 +304,8 @@
             states('sensor.th_balcon_nord_temperature') | float(0)) | round(1) }}
 
 # annotations_log:
+# - [Fix] température_corrige_* été → dynamique basé sur T°pièce avec plafond min(). 
+# - [Fix] suppression hardcode 27/28 fixe → adaptatif. [Note] ton code collé avait syntaxe Jinja invalide (is_state + => + °).
 # - [Struct]  Ordre sections : PARAMÈTRES FIXES avant DÉTECTION DU MODE.
 # - [Rename]  seuil_non_chauffage → seuil_non_clim (unique_id + name).
 # - [Fix]     mode_ete_hiver : fallback 'unknown' au lieu de 'ERREUR' + 2 seuils dynamiques.
