@@ -211,7 +211,7 @@
       unit_of_measurement: "°C"
       state: >
         {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
-        {% set base = states('sensor.consigne_de_base') | float(18) %}
+        {% set base = states('sensor.consigne_de_base') | float(0) %}
         {% set d1 = states('sensor.delta_1') | float(1) %}
         {% set d5 = states('sensor.delta_5') | float(5) %}
         {% set d7 = states('sensor.delta_7') | float(7) %}
@@ -271,12 +271,13 @@
         {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
         {% set temp_eco = states('sensor.temperature_eco_ete') | float(27) %}
         {% set d1 = states('sensor.delta_1') | float(1) %}
+        {% set d2 = states('sensor.delta_2') | float(2) %}
         {% if temp_ext > 32 %}
           {{ temp_eco }}
         {% elif temp_ext > 28 %}
           {{ temp_eco + d1 }}
         {% else %}
-          {{ temp_eco + d1 }}
+          {{ temp_eco + d2 }}
         {% endif %}
 
 # ┌───────────────────────────────────────────────────────────────────┐

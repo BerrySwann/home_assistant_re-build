@@ -693,6 +693,7 @@
             'unavailable'] and\n  states('sensor.temperature_eco_ete_corrige') not
             in ['unknown', 'unavailable'] and\n  states('sensor.temperature_corrige_mamour')
             not in ['unknown', 'unavailable'] and\n  states('sensor.temperature_corrige_eric')
+            not in ['unknown', 'unavailable'] and\n  states('sensor.temperature_corrige_chambre')
             not in ['unknown', 'unavailable']\n}}\n"
         - alias: 'LIMITE : 10 TENTATIVES (5 MIN)'
           condition: template
@@ -727,14 +728,14 @@
       temp_conf_e: '{{ states(''sensor.temperature_corrige_eric'') | float(0) }}'
       temp_conf_c: '{{ states(''sensor.temperature_corrige_chambre'') | float(0) }}'
       t_salon_target: "{% if 'groupe_1' in groupe_presence %} \n  {{ temp_eco_hc if
-        mode_saison == 'heat' else temp_eco_ec }}\n    {% elif 'groupe_2' in groupe_presence
+        mode_saison == 'heat' else temp_eco_ec }} {% elif 'groupe_2' in groupe_presence
         or 'groupe_4' in groupe_presence %}\n      {{ temp_conf_m }}\n    {% else
         %}\n  {{ temp_cible }}\n{% endif %}"
       t_bureau_target: "{% if 'groupe_1' in groupe_presence %} \n  {{ temp_eco_hc
-        if mode_saison =='heat' else temp_eco_ec }}\n    {% elif 'groupe_2' in groupe_presence
-        or 'groupe_3' in groupe_presence or 'groupe_4' in groupe_presence %}\n      {{
-        temp_conf_e }}\n    {% else %}\n  {{ temp_cible }}\n{% endif %}"
-      t_chambre_target: "{% if 'groupe_1' in groupe_presence %}\n  {{ temp_eco_hc
+        if mode_saison =='heat' else temp_eco_ec }} {% elif 'groupe_3' in groupe_presence
+        or 'groupe_4' in groupe_presence %}\n      {{ temp_conf_e }}\n    {% else
+        %}\n  {{ temp_cible }}\n{% endif %}"
+      t_chambre_target: "{% if 'groupe_1' in groupe_presence %} \n  {{ temp_eco_hc
         if mode_saison == 'heat' else temp_eco_ec }}\n{% else %}\n  {{ temp_conf_c
         }}\n{% endif %}"
   - alias: 'LOGIQUE : SÉCURITÉ FENÊTRES VS GESTION STANDARD'
@@ -934,11 +935,13 @@
           condition: template
           value_template: "{{ \n  states('sensor.mode_ete_hiver') not in ['unknown',
             'unavailable'] and\n  states('sensor.groupe') not in ['unknown', 'unavailable']
-            and\n  states('sensor.temperature_cible') not in ['unknown', 'unavailable']
+            and\n  states('sensor.temperature_confort_nuit') not in ['unknown', 'unavailable','0']
             and\n  states('sensor.temperature_eco_hiver_corrige') not in ['unknown',
-            'unavailable'] and\n  states('sensor.temperature_corrige_mamour') not
-            in ['unknown', 'unavailable'] and\n  states('sensor.temperature_corrige_eric')
-            not in ['unknown', 'unavailable']\n}}\n"
+            'unavailable','0'] and\n  states('sensor.temperature_eco_ete_corrige')
+            not in ['unknown', 'unavailable','0'] and\n  states('sensor.temperature_corrige_mamour')
+            not in ['unknown', 'unavailable','0'] and\n  states('sensor.temperature_corrige_eric')
+            not in ['unknown', 'unavailable','0'] and\n  states('sensor.temperature_corrige_chambre')
+            not in ['unknown', 'unavailable','0']\n}}\n"
         - alias: 'LIMITE : 10 TENTATIVES (5 MIN)'
           condition: template
           value_template: '{{ repeat.index >= 10 }}'
@@ -966,7 +969,8 @@
         ''eq'', ''on'') | list | count > 0 }}'
       temp_eco_hc: '{{ states(''sensor.temperature_eco_hiver_corrige'') | float(0)
         }}'
-      temp_cible: '{{ states(''sensor.temperature_cible'') | float(0) }}'
+      temp_eco_ec: '{{ states(''sensor.temperature_eco_hiver_corrige'') | float(0)
+        }}'
       temp_nuit: '{{ states(''sensor.temperature_confort_nuit'') | float(0) }}'
       t_salon_target: '{% if ''groupe_1'' in groupe_presence %} {{ temp_eco_hc if
         mode_saison == ''heat'' else temp_eco_ec }} {% else %} {{ temp_nuit }} {%
