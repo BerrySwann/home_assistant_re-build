@@ -2573,7 +2573,9 @@
     action: shell_command.zone_log_eric
     data:
       ts: '{{ now().strftime(''%Y-%m-%d %H:%M:%S'') }}'
-      from_z: '{{ trigger.from_state.state }}'
-      to_z: '{{ trigger.to_state.state }}'
+      from_z: '{{ trigger.from_state.state if trigger is defined and trigger.from_state
+        else ''n/a'' }}'
+      to_z: '{{ trigger.to_state.state if trigger is defined and trigger.to_state
+        else ''n/a'' }}'
   mode: queued
   max: 10
