@@ -120,7 +120,7 @@
       unit_of_measurement: "°C"
       state: >
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
-          {{ states('sensor.seuil_non_clim') | float(27) }}
+          {{ states('sensor.seuil_non_clim') | float(26) }}
         {% else %}
           {{ states('sensor.seuil_non_chauffage') | float(18) }}
         {% endif %}
@@ -153,8 +153,8 @@
       state: >
         {% set delta_1 = states('sensor.delta_1') | float(1) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
-          {% set t_salon = states('sensor.th_salon_temperature') | float(26) %}
-          {{ [t_salon - 1, 28] | min | int }}
+          {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+          {{ [temp_ext - 1, 27] | min | int }}
         {% else %}
           {% set temp_conf_m = states('sensor.temperature_confort_jour') | float(0) %}
           {{ (temp_conf_m + delta_1) | round(1) }}
@@ -188,8 +188,8 @@
       device_class: temperature
       state: >
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
-          {% set t_chambre = states('sensor.th_chambre_temperature') | float(26) %}
-          {{ [t_chambre, 28] | min | int }}
+          {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+          {{ [temp_ext + 1, 28] | min | int }}
         {% else %}
           {{ states('sensor.consigne_de_base') | float(0) | int }}
         {% endif %}
