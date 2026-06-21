@@ -690,8 +690,9 @@
             'unavailable'] and\n  states('sensor.groupe') not in ['unknown', 'unavailable']
             and\n  states('sensor.temperature_cible') not in ['unknown', 'unavailable']
             and\n  states('sensor.temperature_eco_hiver_corrige') not in ['unknown',
-            'unavailable'] and\n  states('sensor.temperature_corrige_mamour') not
-            in ['unknown', 'unavailable'] and\n  states('sensor.temperature_corrige_eric')
+            'unavailable'] and\n  states('sensor.temperature_eco_ete_corrige') not
+            in ['unknown', 'unavailable'] and\n  states('sensor.temperature_corrige_mamour')
+            not in ['unknown', 'unavailable'] and\n  states('sensor.temperature_corrige_eric')
             not in ['unknown', 'unavailable']\n}}\n"
         - alias: 'LIMITE : 10 TENTATIVES (5 MIN)'
           condition: template
@@ -718,23 +719,24 @@
         ''binary_sensor.contact_fenetre_cuisine_sonoff_contact'', ''binary_sensor.contact_fenetre_bureau_sonoff_contact'',
         ''binary_sensor.contact_fenetre_chambre_sonoff_contact'') | selectattr(''state'',
         ''eq'', ''on'') | list | count > 0 }}'
-      temp_eco_c: '{{ states(''sensor.temperature_eco_hiver_corrige'') | float(0)
+      temp_eco_hc: '{{ states(''sensor.temperature_eco_hiver_corrige'') | float(0)
         }}'
+      temp_eco_ec: '{{ states(''sensor.temperature_eco_ete_corrige'') | float(0) }}'
       temp_cible: '{{ states(''sensor.temperature_cible'') | float(0) }}'
       temp_conf_m: '{{ states(''sensor.temperature_corrige_mamour'') | float(0) }}'
       temp_conf_e: '{{ states(''sensor.temperature_corrige_eric'') | float(0) }}'
       temp_conf_c: '{{ states(''sensor.temperature_corrige_chambre'') | float(0) }}'
-      t_salon_target: "{% if 'groupe_1' in groupe_presence %} \n  {{ temp_eco_c if
-        mode_saison == 'heat' else temp_cible }}\n    {% elif 'groupe_2' in groupe_presence
+      t_salon_target: "{% if 'groupe_1' in groupe_presence %} \n  {{ temp_eco_hc if
+        mode_saison == 'heat' else temp_eco_ec }}\n    {% elif 'groupe_2' in groupe_presence
         or 'groupe_4' in groupe_presence %}\n      {{ temp_conf_m }}\n    {% else
         %}\n  {{ temp_cible }}\n{% endif %}"
-      t_bureau_target: "{% if 'groupe_1' in groupe_presence %} \n  {{ temp_eco_c if
-        mode_saison =='heat' else temp_cible }}\n    {% elif 'groupe_2' in groupe_presence
+      t_bureau_target: "{% if 'groupe_1' in groupe_presence %} \n  {{ temp_eco_hc
+        if mode_saison =='heat' else temp_eco_ec }}\n    {% elif 'groupe_2' in groupe_presence
         or 'groupe_3' in groupe_presence or 'groupe_4' in groupe_presence %}\n      {{
         temp_conf_e }}\n    {% else %}\n  {{ temp_cible }}\n{% endif %}"
-      t_chambre_target: "{% if 'groupe_1' in groupe_presence %}\n  {{ temp_eco_c if
-        mode_saison == 'heat' else temp_cible }}\n{% else %}\n  {{ temp_conf_c }}\n{%
-        endif %}"
+      t_chambre_target: "{% if 'groupe_1' in groupe_presence %}\n  {{ temp_eco_hc
+        if mode_saison == 'heat' else temp_eco_ec }}\n{% else %}\n  {{ temp_conf_c
+        }}\n{% endif %}"
   - alias: 'LOGIQUE : SÉCURITÉ FENÊTRES VS GESTION STANDARD'
     choose:
     - alias: 'CAS URGENCE : FENÊTRE OUVERTE DÉTECTÉE'
@@ -844,15 +846,15 @@
           set clims_alimentees = prise_salon or prise_bureau or prise_chambre %} {%-
           if not clims_alimentees %}\n  [UNITS OFF] Aucune clim alimentee.\n{%- elif
           'groupe_1' in groupe_presence and mode_saison == 'heat' %}\n  [ECO HEAT]\n
-          \ {%- if prise_salon %}   Salon  : {{ temp_eco_c }}°{% else %}   Salon  :
-          [OFF]{% endif %}\n  {%- if prise_bureau %}  Bureau : {{ temp_eco_c }}°{%
-          else %}   Bureau : [OFF]{% endif %}\n  {%- if prise_chambre %} Chambre:
-          {{ temp_eco_c }}°{% else %}   Chambre: [OFF]{% endif %}\n{%- else %}\n  Mode
-          : {{ mode_saison | upper }}\n  {%- if prise_salon %}   Salon  : {{ t_salon_target
-          }}°{% else %}   Salon  : [OFF]{% endif %}\n  {%- if prise_bureau %}  Bureau
-          : {{ t_bureau_target }}°{% else %}   Bureau : [OFF]{% endif %}\n  {%- if
-          prise_chambre %} Chambre: {{ t_chambre_target }}°{% else %}   Chambre: [OFF]{%
-          endif %}\n{%- endif %}"
+          \ {%- if prise_salon %}   Salon  : {{ temp_eco_hc }}°{% else %}   Salon
+          \ : [OFF]{% endif %}\n  {%- if prise_bureau %}  Bureau : {{ temp_eco_hc
+          }}°{% else %}   Bureau : [OFF]{% endif %}\n  {%- if prise_chambre %} Chambre:
+          {{ temp_eco_hc }}°{% else %}   Chambre: [OFF]{% endif %}\n{%- else %}\n
+          \ Mode : {{ mode_saison | upper }}\n  {%- if prise_salon %}   Salon  : {{
+          t_salon_target }}°{% else %}   Salon  : [OFF]{% endif %}\n  {%- if prise_bureau
+          %}  Bureau : {{ t_bureau_target }}°{% else %}   Bureau : [OFF]{% endif %}\n
+          \ {%- if prise_chambre %} Chambre: {{ t_chambre_target }}°{% else %}   Chambre:
+          [OFF]{% endif %}\n{%- endif %}"
   mode: queued
 - id: '1767373801871'
   alias: (B - 0) 2026-01-11 AUTOMATISATION CLIM NUIT (21H00 <-> 07H30)
@@ -962,18 +964,19 @@
         ''binary_sensor.contact_fenetre_cuisine_sonoff_contact'', ''binary_sensor.contact_fenetre_bureau_sonoff_contact'',
         ''binary_sensor.contact_fenetre_chambre_sonoff_contact'') | selectattr(''state'',
         ''eq'', ''on'') | list | count > 0 }}'
-      temp_eco_c: '{{ states(''sensor.temperature_eco_hiver_corrige'') | float(0)
+      temp_eco_hc: '{{ states(''sensor.temperature_eco_hiver_corrige'') | float(0)
         }}'
       temp_cible: '{{ states(''sensor.temperature_cible'') | float(0) }}'
       temp_nuit: '{{ states(''sensor.temperature_confort_nuit'') | float(0) }}'
-      t_salon_target: '{% if ''groupe_1'' in groupe_presence %} {{ temp_eco_c if mode_saison
-        == ''heat'' else temp_cible }} {% else %} {{ temp_nuit }} {% endif %}'
-      t_bureau_target: '{% if ''groupe_1'' in groupe_presence %} {{ temp_eco_c if
-        mode_saison == ''heat'' else temp_cible }} {% else %} {{ temp_nuit }} {% endif
-        %}'
-      t_chambre_target: '{% if ''groupe_1'' in groupe_presence %} {{ temp_eco_c if
-        mode_saison == ''heat'' else temp_cible }} {% else %} {{ temp_nuit }} {% endif
-        %}'
+      t_salon_target: '{% if ''groupe_1'' in groupe_presence %} {{ temp_eco_hc if
+        mode_saison == ''heat'' else temp_eco_ec }} {% else %} {{ temp_nuit }} {%
+        endif %}'
+      t_bureau_target: '{% if ''groupe_1'' in groupe_presence %} {{ temp_eco_hc if
+        mode_saison == ''heat'' else temp_eco_ec }} {% else %} {{ temp_nuit }} {%
+        endif %}'
+      t_chambre_target: '{% if ''groupe_1'' in groupe_presence %} {{ temp_eco_hc if
+        mode_saison == ''heat'' else temp_eco_ec }} {% else %} {{ temp_nuit }} {%
+        endif %}'
   - alias: 'LOGIQUE : SÉCURITÉ FENÊTRES VS GESTION STANDARD'
     choose:
     - alias: 'CAS URGENCE : FENÊTRE OUVERTE DÉTECTÉE'
@@ -1077,21 +1080,21 @@
       action: notify.mobile_app_eric
       data:
         title: '[AN] {{ states(''sensor.presence'') }}'
-        message: "{%- set prise_salon   = is_state('switch.clim_salon_nous',   'on')
+        message: "{%- set prise_salon   = is_state('switch.clim_salon_nous', 'on')
           %} {%- set prise_bureau  = is_state('switch.clim_bureau_nous',  'on') %}
           {%- set prise_chambre = is_state('switch.clim_chambre_nous', 'on') %} {%-
           set clims_alimentees = prise_salon or prise_bureau or prise_chambre %} {%-
           if not clims_alimentees %}\n  [UNITS OFF] Aucune clim alimentee.\n{%- elif
           'groupe_1' in groupe_presence and mode_saison == 'heat' %}\n  [ECO HEAT]\n
-          \ {%- if prise_salon %}   Salon  : {{ temp_eco_c }}°{% else %}   Salon  :
-          [OFF]{% endif %}\n  {%- if prise_bureau %}  Bureau : {{ temp_eco_c }}°{%
-          else %}   Bureau : [OFF]{% endif %}\n  {%- if prise_chambre %} Chambre:
-          {{ temp_eco_c }}°{% else %}   Chambre: [OFF]{% endif %}\n{%- else %}\n  Mode
-          : {{ mode_saison | upper }} (NUIT)\n  {%- if prise_salon %}   Salon  : {{
-          t_salon_target }}°{% else %}   Salon  : [OFF]{% endif %}\n  {%- if prise_bureau
-          %}  Bureau : {{ t_bureau_target }}°{% else %}   Bureau : [OFF]{% endif %}\n
-          \ {%- if prise_chambre %} Chambre: {{ t_chambre_target }}°{% else %}   Chambre:
-          [OFF]{% endif %}\n{%- endif %}"
+          \ {%- if prise_salon %}   Salon  : {{ temp_eco_hc }}°{% else %}   Salon
+          \ : [OFF]{% endif %}\n  {%- if prise_bureau %}  Bureau : {{ temp_eco_hc
+          }}°{% else %}   Bureau : [OFF]{% endif %}\n  {%- if prise_chambre %} Chambre:
+          {{ temp_eco_hc }}°{% else %}   Chambre: [OFF]{% endif %}\n{%- else %}\n
+          \ Mode : {{ mode_saison | upper }} (NUIT)\n  {%- if prise_salon %}   Salon
+          \ : {{ t_salon_target }}°{% else %}   Salon  : [OFF]{% endif %}\n  {%- if
+          prise_bureau %}  Bureau : {{ t_bureau_target }}°{% else %}   Bureau : [OFF]{%
+          endif %}\n  {%- if prise_chambre %} Chambre: {{ t_chambre_target }}°{% else
+          %}   Chambre: [OFF]{% endif %}\n{%- endif %}"
   mode: queued
 - id: '1775243120444'
   alias: Update previous temperature
