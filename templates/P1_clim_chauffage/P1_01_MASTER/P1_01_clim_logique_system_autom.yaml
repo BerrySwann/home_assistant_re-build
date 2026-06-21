@@ -246,7 +246,7 @@
         {% elif t_ext < 19 %} {{ (conf_j - d1) | round(1) }}
         {% elif t_ext > 40 %} {{ (t_ext - d7) | round(1) }}
         {% elif t_ext > 32 %} {{ (t_ext - d5) | round(1) }}
-        {% else %} {{ conf_j }}
+        {% else %} {{ conf_j + d1 }}
         {% endif %}
 
 # --- temperature_eco_hiver_corrige ---
