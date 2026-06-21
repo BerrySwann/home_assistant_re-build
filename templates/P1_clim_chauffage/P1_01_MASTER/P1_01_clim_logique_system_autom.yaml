@@ -51,6 +51,12 @@
       unit_of_measurement: "°C"
       state: "17"
 
+# --- temperature_eco_ete ---
+    - name: "Temperature éCO. Eté"
+      unique_id: temperature_eco_ete
+      unit_of_measurement: "°C"
+      state: "27"
+
 # --- seuil_non_chauffage ---
     - name: "Seuil non chauffage"
       unique_id: seuil_non_chauffage
@@ -255,6 +261,22 @@
         {% if temp_ext < 8 %} {{ temp_eco + d2 }}
         {% elif temp_ext < 12 %} {{ temp_eco + d1 }}
         {% else %} {{ temp_eco }}
+        {% endif %}
+
+# --- temperature_eco_ete_corrige ---
+    - name: "Temperature éCO. Ete Corrigé"
+      unique_id: temperature_eco_ete_corrige
+      unit_of_measurement: "°C"
+      state: >
+        {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+        {% set temp_eco = states('sensor.temperature_eco_ete') | float(27) %}
+        {% set d1 = states('sensor.delta_1') | float(1) %}
+        {% if temp_ext > 32 %}
+          {{ temp_eco }}
+        {% elif temp_ext > 28 %}
+          {{ temp_eco + d1 }}
+        {% else %}
+          {{ temp_eco + d1 }}
         {% endif %}
 
 # ┌───────────────────────────────────────────────────────────────────┐
