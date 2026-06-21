@@ -207,7 +207,6 @@
         {% set d5 = states('sensor.delta_5') | float(5) %}
         {% set d7 = states('sensor.delta_7') | float(7) %}
         {% if temp_ext < 12 %} {{ (base + d1) | int }}
-        {% elif temp_ext > 40 %} {{ (temp_ext - d7) | int }}
         {% elif temp_ext > 32 %} {{ (temp_ext - d5) | int }}
         {% else %} {{ base | int }}
         {% endif %}
