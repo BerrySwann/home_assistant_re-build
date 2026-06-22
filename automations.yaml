@@ -2568,13 +2568,15 @@
     trigger: state
   conditions: []
   actions:
+  - variables:
+      log_from: "{% if 'from_state' in trigger and trigger['from_state'] is not none
+        %}\n  {{ trigger['from_state']['state'] }}\n{% else %}\n  n/a\n{% endif %}"
+      log_to: "{% if 'to_state' in trigger and trigger['to_state'] is not none %}\n
+        \ {{ trigger['to_state']['state'] }}\n{% else %}\n  n/a\n{% endif %}"
   - alias: ÉCRITURE LOG ZONE
-    action: shell_command.zone_log_eric
+    action: notify.zone_eric
     data:
-      ts: '{{ now().strftime(''%Y-%m-%d %H:%M:%S'') }}'
-      from_z: '{{ trigger.from_state.state if trigger is defined and trigger.from_state
-        else ''n/a'' }}'
-      to_z: '{{ trigger.to_state.state if trigger is defined and trigger.to_state
-        else ''n/a'' }}'
+      message: '{{ now().strftime(''%Y-%m-%d %H:%M:%S'') }} | {{ log_from }} → {{
+        log_to }}'
   mode: queued
   max: 10
