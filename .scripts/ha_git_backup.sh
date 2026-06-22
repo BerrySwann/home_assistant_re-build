@@ -123,7 +123,7 @@ elif [[ "${1:-}" != "weekly" ]]; then
   if [[ "$AHEAD" -gt 0 ]]; then
     echo "$(date '+%Y-%m-%d %H:%M:%S %Z') 📤 Commit local non pushé ($AHEAD) — push en cours..." >> "$LOG"
   else
-    echo "ℹ️ GitHub deja a jour - rien a committer $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
+    echo "ℹ️ GitHub deja a jour - rien a committer: $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
     TOKEN_FILE="/config/.secrets/ha_token"
     if [[ -f "$TOKEN_FILE" ]]; then
       TOKEN="$(cat "$TOKEN_FILE")"
@@ -136,7 +136,7 @@ elif [[ "${1:-}" != "weekly" ]]; then
     exit 0
   fi
 else
-  echo "ℹ️  Rien à committer — tag weekly posé quand même:" >> "$LOG"
+  echo "ℹ️ Rien à committer — tag weekly posé quand même:" >> "$LOG"
 fi
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
