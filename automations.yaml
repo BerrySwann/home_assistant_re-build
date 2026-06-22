@@ -2569,12 +2569,16 @@
   conditions: []
   actions:
   - variables:
-      log_from: "{% if 'from_state' in trigger and trigger['from_state'] is not none
-        %}\n  {{ trigger['from_state']['state'] }}\n{% else %}\n  n/a\n{% endif %}"
-      log_to: "{% if 'to_state' in trigger and trigger['to_state'] is not none %}\n
-        \ {{ trigger['to_state']['state'] }}\n{% else %}\n  n/a\n{% endif %}"
+      log_from: "{{ trigger.from_state.state\n   if trigger.from_state is defined
+        and trigger.from_state is not none\n   else 'n/a' }}"
+      log_to: "{{ trigger.to_state.state\n   if trigger.to_state is defined and trigger.to_state
+        is not none\n   else 'n/a' }}"
+  - condition: template
+    value_template: '{{ log_to != ''n/a'' }}'
   - alias: ÉCRITURE LOG ZONE
-    action: notify.zone_eric
+    action: notify.send_message
+    target:
+      entity_id: notify.zone_eric
     data:
       message: '{{ now().strftime(''%Y-%m-%d %H:%M:%S'') }} | {{ log_from }} → {{
         log_to }}'
