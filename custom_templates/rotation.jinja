@@ -1,4 +1,4 @@
-{%- set house_angle_deg = 212 -%}
+{%- set house_angle_deg = 204 -%}
 {# Définition de l'angle de la maison (house) en degrés par rapport au nord. Cet angle sera utilisé pour ajuster les calculs des angles d'azimut soleil/lune #}
 
 {%- set PI = 3.14159265359 -%}
@@ -15,7 +15,7 @@
     {# Calcul du cosinus de l'élévation en radians #}
     {%- set cos_elevation = cos(elevation_rad) -%}
     {# Calcul de la coordonnée "top" en fonction des cosinus, résultat converti en entier (50% - 49% facteur de l'élevation pour avoir une valeur entre 1 et 99) #}
-    {{- (50 - 50 * cos_azimuth * cos_elevation) | int(0) -}}
+    {{- (50 + 40 * cos_azimuth * cos_elevation) | int(0) -}}
 
 {%- endmacro -%}
 
@@ -30,7 +30,7 @@
     {# Calcul du cosinus de l'élévation en radians #}
     {%- set cos_elevation = cos(elevation_rad) -%}
     {# Calcul de la coordonnée "left" en fonction du sinus et du cosinus, résultat converti en entier (50% - 49% facteur de l'élevation pour avoir une valeur entre 1 et 99) #}
-    {{- (50 - 50 * sin_azimuth * cos_elevation) | int(0) -}}
+    {{- (50 + 40 * sin_azimuth * cos_elevation) | int(0) -}}
 {%- endmacro -%}
 
 {# Macro pour calculer la coordonnée "top" avec l'angle de la maison défini #}
