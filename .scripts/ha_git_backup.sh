@@ -87,7 +87,7 @@ if [[ -z "$CHANGED" ]]; then
   STATUS_LINES="$(git status --porcelain || true)"
   if [[ -z "$STATUS_LINES" ]]; then
     if [[ "${1:-}" != "weekly" ]]; then
-      echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ℹ️  GitHub deja a jour - rien a committer" >> "$LOG"
+      echo "ℹ️  GitHub deja a jour - rien a committer $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
       TOKEN_FILE="/config/.secrets/ha_token"
       if [[ -f "$TOKEN_FILE" ]]; then
         TOKEN="$(cat "$TOKEN_FILE")"
@@ -123,7 +123,7 @@ elif [[ "${1:-}" != "weekly" ]]; then
   if [[ "$AHEAD" -gt 0 ]]; then
     echo "$(date '+%Y-%m-%d %H:%M:%S %Z') 📤 Commit local non pushé ($AHEAD) — push en cours..." >> "$LOG"
   else
-    echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ℹ️  GitHub deja a jour - rien a committer" >> "$LOG"
+    echo "ℹ️  GitHub deja a jour - rien a committer $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
     TOKEN_FILE="/config/.secrets/ha_token"
     if [[ -f "$TOKEN_FILE" ]]; then
       TOKEN="$(cat "$TOKEN_FILE")"
