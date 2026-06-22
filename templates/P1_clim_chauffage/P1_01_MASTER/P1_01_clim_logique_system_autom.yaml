@@ -160,7 +160,7 @@
         {% set delta_1 = states('sensor.delta_1') | float(1) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
-          {{ [temp_ext - delta_1, 27] | min | int }}
+          {{ [temp_ext - delta_1, 26] | min | int }}
         {% else %}
           {% set temp_conf_m = states('sensor.temperature_confort_jour') | float(0) %}
           {{ (temp_conf_m + delta_1) | round(1) }}
@@ -179,7 +179,7 @@
         {% set delta_1 = states('sensor.delta_1') | float(1) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
-          {{ [temp_ext + delta_1, 28] | min | int }}
+          {{ [temp_ext + delta_1, 27] | min | int }}
         {% else %}
           {% set temp_conf_e = states('sensor.temperature_confort_jour') | float(0) %}
           {{ (temp_conf_e - delta_2) | round(1) }}
@@ -196,7 +196,7 @@
       state: >
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
-          {{ [temp_ext + 1, 28] | min | int }}
+          {{ [temp_ext + 1, 27] | min | int }}
         {% else %}
           {{ states('sensor.consigne_de_base') | float(0) | int }}
         {% endif %}
