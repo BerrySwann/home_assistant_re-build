@@ -178,9 +178,9 @@ if [[ "${1:-}" == "weekly" ]]; then
   fi
   git tag -a "$TAG" -m "Weekly backup $(date +'%F')${HA_VER:+ (HA ${HA_VER})}"
   if git push origin --tags >/dev/null 2>&1; then
-    echo "🏷️  Tag créé et poussé : $TAG" >> "$LOG"
+    echo "🏷️ Tag créé et poussé: $TAG" >> "$LOG"
   else
-    echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ❌ Push tag $TAG échoué" >> "$LOG"
+    echo "❌ Push tag $TAG échoué: $(date '+%Y-%m-%d %H:%M:%S %Z') " >> "$LOG"
   fi
 fi
 
