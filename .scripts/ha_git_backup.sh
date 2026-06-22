@@ -54,7 +54,7 @@ git checkout main 2>/dev/null || git switch main 2>/dev/null || true
 
 # Trap global : log toute erreur non gérée avec numéro de ligne
 # "[L-trap] catch erreurs inattendues"
-trap 'echo "$(date "+%Y-%m-%d %H:%M:%S %Z") ❌ Erreur inattendue ligne $LINENO — script interrompu" >> "$LOG"' ERR
+trap 'echo "❌ Erreur inattendue ligne $LINENO — script interrompu: $(date "+%Y-%m-%d %H:%M:%S %Z")" >> "$LOG"' ERR
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ IDENTITÉ GIT & AUTHENTIFICATION                                          │
@@ -87,7 +87,7 @@ if [[ -z "$CHANGED" ]]; then
   STATUS_LINES="$(git status --porcelain || true)"
   if [[ -z "$STATUS_LINES" ]]; then
     if [[ "${1:-}" != "weekly" ]]; then
-      echo "ℹ️  GitHub deja a jour - rien a committer $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
+      echo "ℹ️ GitHub deja a jour - rien a committer: $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
       TOKEN_FILE="/config/.secrets/ha_token"
       if [[ -f "$TOKEN_FILE" ]]; then
         TOKEN="$(cat "$TOKEN_FILE")"
@@ -117,11 +117,11 @@ MSG="${MSG}${HA_VER:+ (HA ${HA_VER})}"
 # ╰──────────────────────────────────────────────────────────────────────────╯
 git add -A >/dev/null 2>&1
 if git commit -m "$MSG" >/dev/null 2>&1; then
-  echo "$(date '+%Y-%m-%d %H:%M:%S %Z') 📝 Commit créé : $MSG" >> "$LOG"
+  echo "📝 Commit créé: $MSG" >> "$LOG"
 elif [[ "${1:-}" != "weekly" ]]; then
   AHEAD="$(git rev-list @{u}..HEAD --count 2>/dev/null || echo 0)"
   if [[ "$AHEAD" -gt 0 ]]; then
-    echo "$(date '+%Y-%m-%d %H:%M:%S %Z') 📤 Commit local non pushé ($AHEAD) — push en cours..." >> "$LOG"
+    echo "📤 Commit local non pushé ($AHEAD) — push en cours: $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
   else
     echo "ℹ️ GitHub deja a jour - rien a committer: $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
     TOKEN_FILE="/config/.secrets/ha_token"
@@ -136,7 +136,7 @@ elif [[ "${1:-}" != "weekly" ]]; then
     exit 0
   fi
 else
-  echo "ℹ️ Rien à committer — tag weekly posé quand même:" >> "$LOG"
+  echo "ℹ️ Rien à committer — tag weekly posé quand même" >> "$LOG"
 fi
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
@@ -148,18 +148,18 @@ do_push() {
   PUSH_OUT=$(git push origin "$BRANCH" 2>&1) && return 0
 
   if echo "$PUSH_OUT" | grep -qE "fetch first|non-fast-forward|rejected"; then
-    echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ⚠️  Push rejeté (divergence) — fetch + force-with-lease..." >> "$LOG"
+    echo "⚠️ Push rejeté (divergence) — fetch + force-with-lease: $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
     git fetch origin "$BRANCH" >/dev/null 2>&1 || true
     PUSH_OUT=$(git push --force-with-lease origin "$BRANCH" 2>&1)
     if [[ $? -eq 0 ]]; then
-      echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Push OK (force-with-lease)" >> "$LOG"
+      echo "✅ Push OK (force-with-lease): $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
       return 0
     fi
-    echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ❌ Push impossible : $PUSH_OUT" >> "$LOG"
+    echo "❌ Push impossible: $PUSH_OUT $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
     return 1
   fi
 
-  echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ❌ Push impossible : $PUSH_OUT" >> "$LOG"
+  echo "❌ Push impossible: $PUSH_OUT $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
   return 1
 }
 
@@ -180,7 +180,7 @@ if [[ "${1:-}" == "weekly" ]]; then
   if git push origin --tags >/dev/null 2>&1; then
     echo "🏷️ Tag créé et poussé: $TAG" >> "$LOG"
   else
-    echo "❌ Push tag $TAG échoué: $(date '+%Y-%m-%d %H:%M:%S %Z') " >> "$LOG"
+    echo "❌ Push tag $TAG échoué: $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
   fi
 fi
 
