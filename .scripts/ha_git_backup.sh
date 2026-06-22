@@ -136,7 +136,7 @@ elif [[ "${1:-}" != "weekly" ]]; then
     exit 0
   fi
 else
-  echo "ℹ️  Rien à committer — tag weekly posé quand même" >> "$LOG"
+  echo "ℹ️  Rien à committer — tag weekly posé quand même:" >> "$LOG"
 fi
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
