@@ -846,21 +846,25 @@
       action: notify.mobile_app_eric
       data:
         title: '[AJ] {{ states(''sensor.presence'') }}'
-        message: "{%- set prise_salon   = is_state('switch.clim_salon_nous',   'on')
-          %} {%- set prise_bureau  = is_state('switch.clim_bureau_nous',  'on') %}
-          {%- set prise_chambre = is_state('switch.clim_chambre_nous', 'on') %} {%-
-          set clims_alimentees = prise_salon or prise_bureau or prise_chambre %} {%-
-          if not clims_alimentees %}\n  [UNITS OFF] Aucune clim alimentee.\n{%- elif
-          'groupe_1' in groupe_presence and mode_saison == 'heat' %}\n  [ECO HEAT]\n
-          \ {%- if prise_salon %}   Salon  : {{ temp_eco_hc }}°{% else %} Salon  :
-          [OFF]{% endif %}\n  {%- if prise_bureau %}  Bureau : {{ temp_eco_hc }}°{%
-          else %} Bureau : [OFF]{% endif %}\n  {%- if prise_chambre %} Chambre: {{
-          temp_eco_hc }}°{% else %} Chambre: [OFF]{% endif %}\n{%- else %}\n  Mode
-          : {{ mode_saison | upper }}\n  {%- if prise_salon %}   Salon  : {{ t_salon_target
-          }}°{% else %} Salon  : [OFF]{% endif %}\n  {%- if prise_bureau %}  Bureau
-          : {{ t_bureau_target }}°{% else %} Bureau : [OFF]{% endif %}\n  {%- if prise_chambre
-          %} Chambre: {{ t_chambre_target }}°{% else %} Chambre: [OFF]{% endif %}\n{%-
-          endif %}\n"
+        message: '{%- set prise_salon   = is_state(''switch.clim_salon_nous'',   ''on'')
+          -%} {%- set prise_bureau  = is_state(''switch.clim_bureau_nous'',  ''on'')
+          -%} {%- set prise_chambre = is_state(''switch.clim_chambre_nous'', ''on'')
+          -%} {%- set clims_alimentees = prise_salon or prise_bureau or prise_chambre
+          -%} {%- if not clims_alimentees -%} [UNITS OFF] Aucune clim alimentee. {%-
+          elif ''groupe_1'' in groupe_presence and mode_saison == ''heat'' -%} [ECO
+          HEAT]\n {%- if prise_salon %}Salon  : {{ temp_eco_hc }}°{% else %}Salon  :
+          [OFF]{% endif %}\n {%- if prise_bureau %}Bureau : {{ temp_eco_hc }}°{% else
+          %}Bureau : [OFF]{% endif %}\n {%- if prise_chambre %}Chambre: {{ temp_eco_hc
+          }}°{% else %}Chambre: [OFF]{% endif -%} {%- elif ''groupe_1'' in groupe_presence
+          and mode_saison == ''cool'' -%} [ECO COOL]\n {%- if prise_salon %}Salon  :
+          {{ temp_eco_ec }}°{% else %}Salon  : [OFF]{% endif %}\n {%- if prise_bureau
+          %}Bureau : {{ temp_eco_ec }}°{% else %}Bureau : [OFF]{% endif %}\n {%- if
+          prise_chambre %}Chambre: {{ temp_eco_ec }}°{% else %}Chambre: [OFF]{% endif
+          -%} {%- else -%} Mode : {{ mode_saison | upper }}\n {%- if prise_salon %}Salon  :
+          {{ t_salon_target }}°{% else %}Salon  : [OFF]{% endif %}\n {%- if prise_bureau
+          %}Bureau : {{ t_bureau_target }}°{% else %}Bureau : [OFF]{% endif %}\n {%-
+          if prise_chambre %}Chambre: {{ t_chambre_target }}°{% else %}Chambre: [OFF]{%
+          endif -%} {%- endif -%}'
   mode: queued
 - id: '1767373801871'
   alias: (B - 0) 2026-01-11 AUTOMATISATION CLIM NUIT (21H00 <-> 07H30)
@@ -1091,21 +1095,25 @@
       action: notify.mobile_app_eric
       data:
         title: '[AN] {{ states(''sensor.presence'') }}'
-        message: "{%- set prise_salon   = is_state('switch.clim_salon_nous', 'on')
-          %} {%- set prise_bureau  = is_state('switch.clim_bureau_nous',  'on') %}
-          {%- set prise_chambre = is_state('switch.clim_chambre_nous', 'on') %} {%-
-          set clims_alimentees = prise_salon or prise_bureau or prise_chambre %} {%-
-          if not clims_alimentees %}\n  [UNITS OFF] Aucune clim alimentee.\n{%- elif
-          'groupe_1' in groupe_presence and mode_saison == 'heat' %}\n  [ECO HEAT]\n
-          \ {%- if prise_salon %}   Salon  : {{ temp_eco_hc }}°{% else %}   Salon
-          \ : [OFF]{% endif %}\n  {%- if prise_bureau %}  Bureau : {{ temp_eco_hc
-          }}°{% else %}   Bureau : [OFF]{% endif %}\n  {%- if prise_chambre %} Chambre:
-          {{ temp_eco_hc }}°{% else %}   Chambre: [OFF]{% endif %}\n{%- else %}\n
-          \ Mode : {{ mode_saison | upper }} (NUIT)\n  {%- if prise_salon %}   Salon
-          \ : {{ t_salon_target }}°{% else %}   Salon  : [OFF]{% endif %}\n  {%- if
-          prise_bureau %}  Bureau : {{ t_bureau_target }}°{% else %}   Bureau : [OFF]{%
-          endif %}\n  {%- if prise_chambre %} Chambre: {{ t_chambre_target }}°{% else
-          %}   Chambre: [OFF]{% endif %}\n{%- endif %}"
+        message: '{%- set prise_salon    = is_state(''switch.clim_salon_nous'',   ''on'')
+          -%} {%- set prise_bureau   = is_state(''switch.clim_bureau_nous'',  ''on'')
+          -%} {%- set prise_chambre  = is_state(''switch.clim_chambre_nous'', ''on'')
+          -%} {%- set clims_alimentees = prise_salon or prise_bureau or prise_chambre
+          -%} {%- if not clims_alimentees -%} [UNITS OFF] {%- elif ''groupe_1'' in
+          groupe_presence and mode_saison == ''heat'' -%} [ECO HEAT]\n {%- if prise_salon
+          %}Salon  : {{ temp_eco_hc }}°{% else %}Salon  : [OFF]{% endif %}\n {%- if
+          prise_bureau %}Bureau : {{ temp_eco_hc }}°{% else %}Bureau : [OFF]{% endif
+          %}\n {%- if prise_chambre %}Chambre: {{ temp_eco_hc }}°{% else %}Chambre:
+          [OFF]{% endif -%} {%- elif ''groupe_1'' in groupe_presence and mode_saison
+          == ''cool'' -%} [ECO COOL]\n {%- if prise_salon %}Salon  : {{ temp_eco_ec
+          }}°{% else %}Salon  : [OFF]{% endif %}\n {%- if prise_bureau %}Bureau :
+          {{ temp_eco_ec }}°{% else %}Bureau : [OFF]{% endif %}\n {%- if prise_chambre
+          %}Chambre: {{ temp_eco_ec }}°{% else %}Chambre: [OFF]{% endif -%} {%- else
+          -%} Mode : {{ mode_saison | upper }} (NUIT)\n {%- if prise_salon %}Salon  :
+          {{ t_salon_target }}°{% else %}Salon  : [OFF]{% endif %}\n {%- if prise_bureau
+          %}Bureau : {{ t_bureau_target }}°{% else %}Bureau : [OFF]{% endif %}\n {%-
+          if prise_chambre %}Chambre: {{ t_chambre_target }}°{% else %}Chambre: [OFF]{%
+          endif -%} {%- endif -%}'
   mode: queued
 - id: '1775243120444'
   alias: Update previous temperature
