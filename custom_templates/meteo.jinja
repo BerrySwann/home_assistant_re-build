@@ -99,7 +99,7 @@
             {{ _sky_common('-1%', sun_left=states('sensor.sun_left_demo'), sun_top=states('sensor.sun_top_demo'), elevation = states('input_number.solar_elevation_demo'), rising=states('input_boolean.rising_demo'),  below_horizon=states('binary_sensor.sun_below_horizon_demo'), current_weather=states('input_select.weather_condition_demo')) }}
         {%- endif -%}
     {%- elif inverse | bool-%}
-        {{ _sky_common('-4%', states('sensor.sun_left_inverse'), states('sensor.sun_top_inverse')) }}
+        {{ _sky_common('-4%', states('sensor.sun_left'), states('sensor.sun_top_inverse')) }}
     {%- else -%}
         {{ _sky_common('-1%', states('sensor.sun_left'), states('sensor.sun_top')) }}
     {%- endif -%}
