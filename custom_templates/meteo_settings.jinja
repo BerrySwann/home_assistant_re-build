@@ -1,5 +1,5 @@
 {# Définit l'entité météo spécifique à utiliser pour récupérer les données météo #}
-{%- set location = 'weather.vence' -%}
+{%- set location = 'weather.paris_1er_arrondissement' -%}
 
 {# Ces variables définissent des dégradés de couleurs pour représenter différentes intensités de la nuit #}
 {%- set clear_night='#25259c, #2a2a60, #0f0344' -%}      {# - clear_night : Gradiant CSS pour une nuit claire avec des tons bleus profonds #}
@@ -24,7 +24,7 @@
 {%- set normal_clouds=[20, 6, 2] -%}    {# - normal_clouds : Configuration standard pour des nuages modérés #}
 {%- set heavy_clouds=[30, 7, 3] -%}     {# - heavy_clouds : Configuration pour des nuages très denses #}
 {%- set low_clouds=[10, 3, 1] -%}       {# - low_clouds : Configuration pour peu de nuages #}
-{%- set minimal_clouds=[2, 3, 0] -%}    {# - minimal_clouds : Configuration avec très peu de nuages #}
+{%- set minimal_clouds=[5, 3, 0] -%}    {# - minimal_clouds : Configuration avec très peu de nuages #}
 
 {# Configuration supplémentaire pour les étoiles #}
 {# Chaque liste contient [nombre d'étoiles, nombre d'étoiles filantes] #}
