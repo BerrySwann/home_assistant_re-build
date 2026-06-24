@@ -1,4 +1,4 @@
-{# Définit l'entité météo spécifique à utiliser pour récupérer les données météo #}
+﻿{# Définit l'entité météo spécifique à utiliser pour récupérer les données météo #}
 {%- set location = 'weather.paris_1er_arrondissement' -%}
 
 {# Ces variables définissent des dégradés de couleurs pour représenter différentes intensités de la nuit #}
@@ -16,8 +16,8 @@
 
 {# Dégradés de couleurs pour le lever et le coucher du soleil #}
 {# Définit des transitions de couleurs pour simuler les moments de transition du jour #}
-{%- set sunrise_day='#FFF5C3 5%, #FFD966 20%, #FFA64D 40%, #FF7F50 60%, #FF4D4D 80%, #5D0000 100%' -%}     {# - sunrise_day : Gradiant CSS de couleurs du lever du soleil #}
-{%- set sunset_day='#FEFEFFCC 5%, #ECFF00 10%, #e4716bff 20%, #c04040ff 30%, #c73232ff 45%, #73b0f5ff 100%' -%}    {# - sunset_day : Gradiant CSS de couleurs du coucher du soleil #}
+{%- set sunrise_day='#FFF8E0 5%, #FFE080 18%, #FFB060 32%, #FF8060 50%, #C85060 68%, #502040 84%, #100818 100%' -%}     {# - sunrise_day : Gradiant CSS de couleurs du lever du soleil #}
+{%- set sunset_day='#FFFAF2 5%, #FFE898 14%, #FFBA72 26%, #FF9272 40%, #D06880 56%, #5A2878 74%, #0e1a4e 100%' -%}    {# - sunset_day : Gradiant CSS de couleurs du coucher du soleil #}
 
 {# Configuration de la densité des nuages, permettant de paramétrer l'apparence des nuages selon différentes conditions #}
 {# Chaque liste contient [nombre de nuages, taille des nuages, variation du gris clair/0 à foncé/3] #}
