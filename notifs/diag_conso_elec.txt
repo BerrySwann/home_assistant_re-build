@@ -9443,3 +9443,4 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [WIFI] | 24/06 05:30 | Hyg:1.06 | Cuis:0.01 | Froid:0.32 | Chauff:2.09 | Avg 4:380.0 | Multi:0.4 | Lum:0.03 | Autres:0.05 | Ti:26.4°C | Ext:27.1°C | DUT S/R/B/C:2.9/0.0/2.0/0.5
 [2] en [WIFI] | 24/06 05:45 | Hyg:1.06 | Cuis:0.02 | Froid:0.32 | Chauff:2.2 | Avg 4:382.6 | Multi:0.4 | Lum:0.04 | Autres:0.06 | Ti:26.4°C | Ext:27.3°C | DUT S/R/B/C:3.1/0.0/2.1/0.5
 [2] en [WIFI] | 24/06 06:00 | Hyg:1.06 | Cuis:0.03 | Froid:0.33 | Chauff:2.27 | Avg 4:378.3 | Multi:0.4 | Lum:0.06 | Autres:0.06 | Ti:26.3°C | Ext:27.1°C | DUT S/R/B/C:3.1/0.0/2.3/0.5
+[2] en [WIFI] | 24/06 06:15 | Hyg:1.06 | Cuis:0.03 | Froid:0.34 | Chauff:2.37 | Avg 4:379.2 | Multi:0.4 | Lum:0.08 | Autres:0.06 | Ti:26.4°C | Ext:27.1°C | DUT S/R/B/C:3.2/0.0/2.4/0.7
