@@ -18,7 +18,7 @@
   {{ ((range(min,max+step)| random) // step)*step }}
 {%- endmacro -%}
 
-{%- macro _weather_matrix(weather='') -%}
+{%- macro weather_matrix(weather='') -%}
     {%- set current_weather = 'default' -%}
     {%- if weather in config.conditions %}
         {%- set current_weather = weather %}
@@ -61,7 +61,7 @@
 {%- macro _sky_common(margin_top, sun_left, sun_top, elevation = state_attr('sun.sun','elevation'), rising = state_attr('sun.sun','rising'), below_horizon = is_state('sun.sun', 'below_horizon'), current_weather = states(config.location )) -%}
 
     {# Gestion des conditions météo exceptionnelles #}
-    {%- set current_weather = _weather_matrix(current_weather) %}
+    {%- set current_weather = weather_matrix(current_weather) %}
     "
         ha-card {
             margin-top: {{ margin_top }};
@@ -85,7 +85,7 @@
                         {{ config.conditions[current_weather]['day_sky'] }}
                     {%- endif -%}
                 {%- endif -%}
-            ); !important;
+            );
             overflow: hidden;
         }
     "
@@ -99,7 +99,7 @@
             {{ _sky_common('-1%', sun_left=states('sensor.sun_left_demo'), sun_top=states('sensor.sun_top_demo'), elevation = states('input_number.solar_elevation_demo'), rising=states('input_boolean.rising_demo'),  below_horizon=states('binary_sensor.sun_below_horizon_demo'), current_weather=states('input_select.weather_condition_demo')) }}
         {%- endif -%}
     {%- elif inverse | bool-%}
-        {{ _sky_common('-4%', states('sensor.sun_left'), states('sensor.sun_top_inverse')) }}
+        {{ _sky_common('-4%', states('sensor.sun_left_inverse'), states('sensor.sun_top_inverse')) }}
     {%- else -%}
         {{ _sky_common('-1%', states('sensor.sun_left'), states('sensor.sun_top')) }}
     {%- endif -%}
@@ -494,7 +494,7 @@
     {%- endif -%}
 
     {# Gestion des conditions météo exceptionnelles comme la grêle #}
-    {%- set current_weather = _weather_matrix(current_weather) %}
+    {%- set current_weather = weather_matrix(current_weather) %}
     
     {# Initialisation d'une variable de résultat vide #}
     {%- set html = "" -%}
