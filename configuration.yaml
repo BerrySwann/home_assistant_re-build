@@ -50,8 +50,6 @@
 homeassistant:
   allowlist_external_dirs:
     - "/config"          # Requis pour l'intégration File (notify → fichier)
-  packages:
-    cssmeteo: !include packages/cssmeteo.yaml
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ LOGGER — FILTRES BRUIT CONNU                                             │
