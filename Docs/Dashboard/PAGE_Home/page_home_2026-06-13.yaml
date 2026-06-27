@@ -142,7 +142,7 @@ cards:
             white-space:nowrap;
             pointer-events:none;
           ">
-            {{ states('sensor.vence_original_condition') }} — {{ states('sensor.th_balcon_nord_temperature') | round(1) }}°C
+            {{ states('sensor.vence_original_condition') }} — {{ states('sensor.th_balcon_nord_temperature') | float(0) | round(1) }}°C
           </div>
         style:
           top: 50%
