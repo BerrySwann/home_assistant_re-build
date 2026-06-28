@@ -455,7 +455,7 @@ p1_master_gestion_clim:
         action: notify.mobile_app_eric
         data:
           title: "{{ prefix }} {{ states('sensor.presence') }}"
-          message: >
+          message: >-
             {%- set prise_salon   = is_state('switch.clim_salon_nous',   'on') -%}
             {%- set prise_bureau  = is_state('switch.clim_bureau_nous',  'on') -%}
             {%- set prise_chambre = is_state('switch.clim_chambre_nous', 'on') -%}
@@ -463,18 +463,9 @@ p1_master_gestion_clim:
             {%- if not clims_alimentees -%}
             [UNITS OFF] Aucune clim alimentee.
             {%- elif 'groupe_1' in groupe_presence and mode_saison == 'heat' -%}
-            [ECO HEAT]
-            {%- if prise_salon %}Salon  : {{ temp_eco_hc }}°{% else %}Salon  : [OFF]{% endif %}
-            {%- if prise_bureau %}Bureau : {{ temp_eco_hc }}°{% else %}Bureau : [OFF]{% endif %}
-            {%- if prise_chambre %}Chambre: {{ temp_eco_hc }}°{% else %}Chambre: [OFF]{% endif -%}
+            {{ '[ECO HEAT]\nSalon  : ' + (temp_eco_hc|string+'°' if prise_salon else '[OFF]') + '\nBureau : ' + (temp_eco_hc|string+'°' if prise_bureau else '[OFF]') + '\nChambre: ' + (temp_eco_hc|string+'°' if prise_chambre else '[OFF]') }}
             {%- elif 'groupe_1' in groupe_presence and mode_saison == 'cool' -%}
-            [ECO COOL]
-            {%- if prise_salon %}Salon  : {{ temp_eco_ec }}°{% else %}Salon  : [OFF]{% endif %}
-            {%- if prise_bureau %}Bureau : {{ temp_eco_ec }}°{% else %}Bureau : [OFF]{% endif %}
-            {%- if prise_chambre %}Chambre: {{ temp_eco_ec }}°{% else %}Chambre: [OFF]{% endif -%}
+            {{ '[ECO COOL]\nSalon  : ' + (temp_eco_ec|string+'°' if prise_salon else '[OFF]') + '\nBureau : ' + (temp_eco_ec|string+'°' if prise_bureau else '[OFF]') + '\nChambre: ' + (temp_eco_ec|string+'°' if prise_chambre else '[OFF]') }}
             {%- else -%}
-            Mode : {{ mode_saison | upper }}{% if periode == 'nuit' %} (NUIT){% endif %}
-            {%- if prise_salon %}Salon  : {{ t_salon_target }}°{% else %}Salon  : [OFF]{% endif %}
-            {%- if prise_bureau %}Bureau : {{ t_bureau_target }}°{% else %}Bureau : [OFF]{% endif %}
-            {%- if prise_chambre %}Chambre: {{ t_chambre_target }}°{% else %}Chambre: [OFF]{% endif -%}
+            {{ 'Mode : ' + mode_saison|upper + (' (NUIT)' if periode == 'nuit' else '') + '\nSalon  : ' + (t_salon_target|string+'°' if prise_salon else '[OFF]') + '\nBureau : ' + (t_bureau_target|string+'°' if prise_bureau else '[OFF]') + '\nChambre: ' + (t_chambre_target|string+'°' if prise_chambre else '[OFF]') }}
             {%- endif -%}
