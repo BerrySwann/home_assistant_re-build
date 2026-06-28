@@ -31,16 +31,10 @@ echo ""
 echo "── PASS 1 : TREE LOCAL ──────────────────────────────────────────────────────"
 } > "$LOG"
 
-EXCLUDE_YAML=(
-    "zigbee2mqtt/"
-    "www/community/streamline-card/streamline_templates.example.yaml"
-    "Docs/docs_dashboard/TREE_CORRIGE/scenes.yaml"
-)
-EXCLUDE_PATTERN=$(printf "%s\n" "${EXCLUDE_YAML[@]}" | paste -sd'|')
-
-find $DIRS -name "*.yaml" 2>/dev/null \
-    | grep -Ev "($EXCLUDE_PATTERN)" \
-    | sort > "$TMP_TREE"
+find $DIRS -name "*.yaml" 2>/dev/null | sort > "$TMP_TREE" || true
+sed -i '/streamline_templates\.example\.yaml/d' "$TMP_TREE" || true
+sed -i '/scenes\.yaml$/d' "$TMP_TREE" || true
+find .scripts -name "*.sh" 2>/dev/null | sort >> "$TMP_TREE" || true
 for f in $EXTRA_FILES; do [ -f "$f" ] && echo "$f" >> "$TMP_TREE"; done
 
 TOTAL=$(wc -l < "$TMP_TREE")
@@ -120,6 +114,9 @@ echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 terminé : $TOTAL fichiers �
 #              → remplacement par curl -o TMP_GH + md5sum TMP_GH (bytes exacts préservés)
 #              → TMP_GH = 1 fichier yaml à la fois (~KB), réutilisé → impact RAM nul
 # [2026-06-15] EXTRA_FILES étendu : ajout scripts.yaml shell_command.yaml configuration.yaml
+# [2026-06-28] FIX PIPEFAIL : find $DIRS → || true (dirs absents → exit 1 → pipefail tuait le script)
+#              FIX PATTERN   : TREE_CORRIGE\/scenes\.yaml → scenes\.yaml$ (chemin prod, pas local)
+#              PÉRIMÈTRE +   : find .scripts -name "*.sh" ajouté → audit couvre aussi les scripts bash
 #              sql.yaml input_select.yaml input_datetime.yaml input_button.yaml
 # [2026-06-15] DIRS étendu : ajout groups/ input_booleans/ input_number/
 # [2026-06-17] DIRS : ajout shell_command/ packages/ (restructuration shell_command + Moon API)
