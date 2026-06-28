@@ -1,4 +1,4 @@
-j_2_0_secu_arret_clim_protege:
+﻿j_2_0_secu_arret_clim_protege:
   alias: J 2-0 SECU - ARRÊT CLIM PROTÉGÉ
   description: '[EXÉCUTANT] Protection thermique et coupure sous 9W.'
   mode: parallel
@@ -320,6 +320,8 @@ p1_master_gestion_clim:
         t_salon_target: >
           {% if 'groupe_1' in groupe_presence %}
           {{ temp_eco_hc if mode_saison == 'heat' else temp_eco_ec }}
+          {% elif periode == 'jour' and 'groupe_3' in groupe_presence %}
+          {{ temp_conf_e }}
           {% elif periode == 'jour' and ('groupe_2' in groupe_presence or 'groupe_4' in groupe_presence) %}
           {{ temp_conf_m }}
           {% elif periode == 'jour' %}
