@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--06--13-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--06--28-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page-ff9800?style=flat-square)](.)
 
 </div>
@@ -14,7 +14,7 @@
 | 🏗️ **Layout** | `type: grid` — 1 col (cartes permanentes) + grille 3×6 (18 vignettes) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-06-13 |
+| 📅 **Modifié le** | 2026-06-28 |
 | 🏠 **Version HA** | 2026.6.x |
 
 ---
@@ -112,23 +112,21 @@ Page d'accueil du dashboard. Structure en deux parties :
 
 ### 1 — Météo animée meteocss *(picture-elements)*
 
-**Type :** `type: picture-elements` — 7 layers `custom:html-template-card`
+**Type :** `type: picture-elements` — `custom:meteo-card` + 4 overlays `html-template-card`
 **Toujours visible**
-**Fichier YAML :** `Dashboard/PAGE_Home/card_meteocss_home_2026-06-13.yaml`
+**Fichier YAML :** `Dashboard/PAGE_Home/card_meteocss_home_2026-06-28.yaml`
 
-Carte météo animée générée par le package **meteocss v2.2.1**. Les macros Jinja2 (`meteo.jinja`, `meteo_settings.jinja`, `rotation.jinja`) produisent le rendu du ciel, des nuages, du soleil, de la lune et du foreground. L'ordre des 7 layers dans `elements:` définit le z-index (dernier = devant).
+Carte météo animée utilisant le composant **`custom:meteo-card`** (HACS — lovelace-meteocss-card). Le rendu ciel/soleil/lune/foreground est géré nativement par la carte JS. La lune est positionnée via l'intégration **Luna** (auto-détectée). `house_angle: 180` oriente la vue plein sud : lever ← gauche, midi ↑ haut, coucher → droite.
 
-| # | Layer | Entités / Source |
-|---|-------|-----------------|
-| 1 | Ciel animé (background) | `meteo.jinja → generate_content('background')` |
-| 2 | Rose des vents SVG | Statique (perspective rotateX 62°, opacity 0.25) |
-| 3 | Soleil + Lune | `sensor.sun_left/top/opacity` · `sensor.moon_left/top/opacity/phase` · `sensor.moon_api (moon_parallactic_angle)` |
-| 4 | Foreground (nuages/pluie) | `meteo.jinja → generate_content('foreground')` |
-| 5 | Alerte météo (conditionnel) | `sensor.alerte_meteo` (Orange/Rouge) |
-| 6 | Statut + T°ext (bas) | `sensor.vence_original_condition` · `sensor.th_balcon_nord_temperature` |
-| 7 | Titre VENCE + heure (haut) | `now().strftime('%H:%M')` — font-size 18px |
+| # | Élément | Entités / Source |
+|---|---------|-----------------|
+| 1 | `custom:meteo-card` | `weather.vence` · `sun.sun` · Luna (`sensor.luna_lunar_*` auto) |
+| 2 | Rose des vents SVG | Statique (perspective rotateX 58°, opacity 0.85) |
+| 3 | Alerte météo (conditionnel) | `sensor.alerte_meteo` — Jaune/Orange/Rouge + animation pulse |
+| 4 | Statut + T°ext (bas) | `sensor.vence_original_condition` · `sensor.th_balcon_nord_temperature` |
+| 5 | Titre VENCE + heure (haut) | `now().strftime('%H:%M')` — font-size 19px |
 
-> ⚠️ **Ordre z-index critique** : la rose des vents doit être en position 2 (après le ciel, avant le soleil). Si inversé, elle masque les textes.
+> ⚠️ **Couleurs sunset/sunrise** : modifiées dans `/www/community/meteocss-card/meteocss-card.js` (pêche/mauve/violet). Supprimer `meteocss-card.js.gz` après chaque MAJ HACS pour que le JS custom soit servi.
 
 ---
 
@@ -319,23 +317,20 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 
 ---
 
-### 📁 `packages/meteocss.yaml` + macros Jinja2 (meteocss v2.2.1)
+### 📦 `custom:meteo-card` (HACS — lovelace-meteocss-card)
 > Carte météo animée — picture-elements HOME page.
 
-| Entité | unique_id | Source | Rôle |
-|--------|-----------|--------|------|
-| `sensor.sun_left` | `sun_left` | `rotation.jinja` | Position X soleil (%) |
-| `sensor.sun_top` | `sun_top` | `rotation.jinja` | Position Y soleil (%) |
-| `sensor.sun_opacity` | `sun_opacity` | `rotation.jinja` | Opacité soleil |
-| `sensor.moon_left` | `moon_left` | `rotation.jinja` | Position X lune (%) |
-| `sensor.moon_top` | `moon_top` | `rotation.jinja` | Position Y lune (%) |
-| `sensor.moon_opacity` | `moon_opacity` | `rotation.jinja` | Opacité lune |
-| `sensor.moon_phase` | `moon_phase` | `rotation.jinja` | Phase (nom image) |
-| `sensor.vence_original_condition` | — | `command_line/meteo/carte_meteo_france.yaml` | Condition texte (ex: "Ensoleillé") |
-| `sensor.alerte_meteo` | `alerte_meteo` | `templates/meteo/M_01_meteo_alertes_card.yaml` | Niveau alerte (Vert/Orange/Rouge) |
-| `sensor.th_balcon_nord_temperature` | — | SONOFF via Z2M | T° extérieure affichée (bas carte) |
-
-> ⚠️ **Macros non-modifiables via UI** : `meteo.jinja`, `meteo_settings.jinja`, `rotation.jinja` → édition via Studio Code Server dans `/config/custom_templates/`.
+| Entité | Source | Rôle |
+|--------|--------|------|
+| `weather.vence` | `meteofrance` | Météo principale (ciel, conditions) |
+| `sun.sun` | Natif HA | Position soleil (azimut + élévation) |
+| `sensor.luna_lunar_azimuth` | Intégration Luna | Position lune (auto-détecté par meteo-card) |
+| `sensor.luna_lunar_elevation` | Intégration Luna | Élévation lune (auto-détecté) |
+| `sensor.luna_lunar_phase` | Intégration Luna | Phase lunaire (auto-détecté) |
+| `sensor.luna_lunar_phase_degrees` | Intégration Luna | Degrés phase (auto-détecté) |
+| `sensor.vence_original_condition` | `command_line/meteo/carte_meteo_france.yaml` | Condition texte (ex: "Ensoleillé") |
+| `sensor.alerte_meteo` | `templates/meteo/M_01_meteo_alertes_card.yaml` | Niveau alerte (Vert/Jaune/Orange/Rouge) |
+| `sensor.th_balcon_nord_temperature` | SONOFF via Z2M | T° extérieure affichée (bas carte) |
 
 ---
 
@@ -465,10 +460,7 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 
 ### Configuration YAML (sources HA v2.0)
 
-- `packages/cssmeteo.yaml` — configuration meteocss (macros Jinja2)
-- `custom_templates/meteo.jinja` — rendu background + foreground
-- `custom_templates/rotation.jinja` — positions soleil/lune
-- `custom_templates/meteo_settings.jinja` — paramètres visuels (nuages, couleurs)
+- `www/community/meteocss-card/meteocss-card.js` — carte JS (⚠️ supprimer .gz après MAJ HACS)
 - `templates/meteo/M_01_meteo_alertes_card.yaml` — sensor.alerte_meteo
 - `command_line/meteo/carte_meteo_france.yaml` — sensor.vence_original_condition
 - `templates/P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml`
@@ -485,7 +477,7 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 | Fichier | Carte |
 |:--------|:------|
 | `Dashboard/PAGE_Home/page_home_2026-06-13.yaml` | Page complète (référence) |
-| `Dashboard/PAGE_Home/card_meteocss_home_2026-06-13.yaml` | Météo animée (picture-elements 7 layers) |
+| `Dashboard/PAGE_Home/card_meteocss_home_2026-06-28.yaml` | Météo animée (custom:meteo-card + 4 overlays) |
 | `Dashboard/PAGE_Home/card_vscode_home_2026-06-13.yaml` | VS Code Server (conditional) |
 | `Dashboard/PAGE_Home/card_foudre_home_2026-06-13.yaml` | Foudre Blitzortung (button-card) |
 | `Dashboard/PAGE_Home/card_lave_linge_home_2026-06-13.yaml` | Lave-linge (mushroom animée) |
