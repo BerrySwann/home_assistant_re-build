@@ -55,7 +55,7 @@
     - name: "Temperature éCO. Eté"
       unique_id: temperature_eco_ete
       unit_of_measurement: "°C"
-      state: "27"
+      state: "28"
 
 # --- seuil_non_chauffage ---
     - name: "Seuil non chauffage"
@@ -244,7 +244,7 @@
         {% if t_ext < 8 %} {{ (conf_j - d1) | round(1) }}
         {% elif t_ext < 12 %} {{ (conf_j - d2) | round(1) }}
         {% elif t_ext < 19 %} {{ (conf_j - d1) | round(1) }}
-        {% elif t_ext > 40 %} {{ (t_ext - d7) | round(1) }}
+        {% elif t_ext > 34 %} {{ (t_ext - d7) | round(1) }}
         {% elif t_ext > 32 %} {{ (t_ext - d5) | round(1) }}
         {% else %} {{ conf_j + d1 }}
         {% endif %}
