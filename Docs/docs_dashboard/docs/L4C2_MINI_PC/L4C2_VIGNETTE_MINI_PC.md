@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--06--13-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--06--21-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Vignette-ff9800?style=flat-square)](.)
 
 </div>
@@ -12,7 +12,7 @@
 | 📁 **Fichier YAML** | `Dashboard/L4C2_11_Mini_PC/vignette_L4C2_mini_pc_2026-06-18.yaml` |
 | 🔗 **Accès depuis** | L4C2 — Matrice dashboard principal (ligne 4, colonne 2) |
 | 🏗️ **Type** | `custom:button-card` — grille custom 3×2 |
-| 📅 **Modifié le** | 2026-06-09 |
+| 📅 **Modifié le** | 2026-06-21 |
 | 🏠 **Version HA** | 2025.2+ |
 
 ---
@@ -50,13 +50,15 @@ Vignette de supervision compacte du Mini-PC Intel NUC (hôte Proxmox). Affiche l
 
 ### Couleurs dynamiques
 
-| Champ | Entité | Seuils |
-|-------|--------|--------|
-| Icône + T° | `sensor.proxmox_cpu_package` | <65°C vert · 65-75 orange · >75 rouge |
-| CPU | `sensor.pve_utilisation_du_processeur` | <75% blanc · 75-90 orange · >90 rouge |
-| Power | `sensor.prise_mini_pc_ikea_power` | <15W blanc · 15-19 orange · >19 rouge |
-| RAM | `sensor.pve_memory_usage_percentage` | <75% blanc · 75-90 orange · >90 rouge |
-| SSD | `sensor.storage_local_storage_usage_percentage` | <75% blanc · 75-90 orange · >90 rouge |
+| Champ | Entité | Seuils | Icône dynamique |
+|-------|--------|--------|:---------------:|
+| Icône + T° | `sensor.proxmox_cpu_package` | <65°C vert · 65-75 orange · >75 rouge | ✅ (direct) |
+| CPU | `sensor.pve_utilisation_du_processeur` | <75% blanc · 75-90 orange · >90 rouge | ✅ `--icon-color-sensor` |
+| Power | `sensor.prise_mini_pc_ikea_power` | <15W blanc · 15-19 orange · >19 rouge | ❌ hardcodé vert |
+| RAM | `sensor.pve_memory_usage_percentage` | <75% blanc · 75-90 orange · >90 rouge | ✅ `--icon-color-sensor` |
+| SSD | `sensor.storage_local_storage_usage_percentage` | <75% blanc · 75-90 orange · >90 rouge | ✅ `--icon-color-sensor` |
+
+> 🔧 **Correction 2026-06-21** : RAM et SSD utilisaient `color:rgb(70,175,75)` hardcodé → remplacé par `var(--icon-color-sensor)` avec variable CSS définie dans `card_mod.styles`. L'icône change maintenant de couleur selon le % (identique à L4C1 Proxmox).
 
 ---
 

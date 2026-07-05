@@ -110,7 +110,7 @@ Pattern général : `sensor.prise_{slug}_{marque}_{periode}_kwh_um`
   - `sensor.all_standby_*` (capteur virtuel agrégé)
 
 > **Synchronisation** : Les couleurs de ce fichier sont synchronisées avec la section
-> `### 🎨 PALETTE COULEURS OFFICIELLE` de `docs/IA/IA_CONTEXT_BASE.md`.
+> `### 🎨 PALETTE COULEURS OFFICIELLE` de `IA/IA_INTEGRATIONS_CARTES.md`.
 
 
 <!-- obsidian-wikilinks -->

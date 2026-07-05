@@ -1,16 +1,16 @@
 # (B-0) AUTOMATISATION CLIM NUIT (21H00 ↔ 07H30)
 
-> **Fichier corrigé :** `automations_corrige/P1_clim_chauffage/B0_clim_nuit_2026-01-11.yaml`
-> **Fichier obsolète :** `B0_clim_nuit_2026-01-02.yaml` → ❌ À SUPPRIMER DE LA PROD
-> **Mode HA :** `queued`
+> **Fichier TREE_CORRIGE :** `docs_automations/TREE_CORRIGE/P1_clim_chauffage/b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml`
+> **Mode HA :** `queued` — max: 5
+> **Dernière mise à jour :** 2026-06-28 (refactoring LLM local → délégation script)
 
 ---
 
 ## 📝 Description
 
-Miroir nocturne de l'automation A0. Pilote les 3 clims entre 21h00 et 07h30.
-Même structure (boucle capteurs, sécurité fenêtres, parallèle), mais températures
-cibles simplifiées : une seule `temp_nuit` pour les 3 pièces quand quelqu'un est présent.
+Automation wrapper nocturne (21h00–07h30). Miroir de A0, délègue entièrement la
+logique à `script.p1_master_gestion_clim` avec `periode: "nuit"`.
+La nuit, les 3 pièces utilisent une cible uniforme `temp_nuit` (sauf groupe_1 → eco).
 
 ---
 
@@ -24,63 +24,58 @@ cibles simplifiées : une seule `temp_nuit` pour les 3 pièces quand quelqu'un e
 | `force_run` | `state` | 3 prises clim NOUS |
 | `window_open` | `state` | 4 capteurs fenêtres → `off` → `on` |
 | `window_close` | `state` | 4 capteurs fenêtres → `on` → `off` |
-| `sensor_update` | `state` | `sensor.th_balcon_nord_temperature`, `sensor.temperature_cible`, `sensor.mode_ete_hiver`, `sensor.temperature_confort_nuit` |
+| `sensor_update` | `state` | `sensor.groupe` *(ajouté)*, `sensor.th_balcon_nord_temperature`, `sensor.temperature_cible`, `sensor.mode_ete_hiver`, `sensor.temperature_confort_nuit` |
 
 ---
 
 ## 🔒 Conditions globales
 
-- Plage horaire stricte : `after 21:00 before 07:30`
+- Plage horaire : `after 21:00 before 07:30`
 
 ---
 
-## ⚙️ Actions résumées
+## ⚙️ Actions
 
-1. Délai sécurité si `ha_restart` (1 min)
-2. Boucle capteurs (max 10 × 30s)
-3. Variables : `mode_saison`, `groupe_presence`, `fenetres_ouvertes`, `temp_eco_c`, `temp_cible`, `temp_nuit` — cible uniforme pour les 3 pièces
-4. CAS URGENCE fenêtre → OFF toutes clims + notif ciblée + stop
-5. Cas standard → parallel Salon / Bureau / Chambre
-6. Notification résumé nuit
+Une seule action :
+
+```yaml
+- action: script.p1_master_gestion_clim
+  data:
+    periode: "nuit"
+    trigger_id: "{{ trigger.id if trigger is defined else '' }}"
+    trigger_entity_id: "{{ trigger.entity_id if trigger is defined ... else '' }}"
+```
+
+→ Voir `docs_scripts/docs/P1_MASTER_GESTION_CLIM.md` pour la logique complète.
 
 ---
 
 ## 🔌 DÉPENDANCES
 
-### Entités lues
+### Entités lues (triggers / conditions)
 
 | Entité | Rôle |
 |:---|:---|
-| `sensor.temperature_confort_nuit` | T° confort nuit (unique pour les 3 pièces) |
-| `sensor.mode_ete_hiver` | Mode saison |
-| `sensor.groupe` | Groupe présence |
-| `sensor.temperature_eco_hiver_corrige` | T° éco |
-| `sensor.temperature_cible` | T° cible |
+| `sensor.mamour_network_type` | Présence réseau Mamour |
+| `sensor.eric_network_type` | Présence réseau Eric |
+| `sensor.groupe` | Groupe de présence (trigger sensor_update) |
 | `sensor.th_balcon_nord_temperature` | T° extérieure |
-| `sensor.mamour_network_type` / `sensor.eric_network_type` | Présence réseau |
-| 4× `binary_sensor.contact_fenetre_*` | Sécurité fenêtres |
-| 3× `switch.clim_*_nous` | Sécurité prises |
-| 3× `input_boolean.clim_*_arret_securise_en_cours` | Flags sécurité |
+| `sensor.temperature_cible` | T° cible (utilisée comme fallback dans le script) |
+| `sensor.mode_ete_hiver` | Mode saison |
+| `sensor.temperature_confort_nuit` | T° confort nuit |
+| 4× `binary_sensor.contact_fenetre_*` | Capteurs fenêtres |
+| 3× `switch.clim_*_nous` | Prises clim (sécurité) |
 
-### Entités pilotées
+### Script appelé
 
-| Entité | Action |
-|:---|:---|
-| `climate.clim_salon_rm4_mini` | `set_temperature` |
-| `climate.clim_bureau_rm4_mini` | `set_temperature` |
-| `climate.clim_chambre_rm4_mini` | `set_temperature` |
-
-### Notifications
-
-| Titre | Condition |
-|:---|:---|
-| `[AN] ATTENTE CAPTEURS` | Boucle relance |
-| `[AN] CLIM NUIT COUPÉE` | Fenêtre ouverte |
-| `[AN] presence` | Résumé températures |
+| Script | Paramètres | Doc |
+|:---|:---|:---|
+| `script.p1_master_gestion_clim` | `periode:"nuit"`, `trigger_id`, `trigger_entity_id` | `docs_scripts/docs/P1_MASTER_GESTION_CLIM.md` |
 
 ---
 
 ## ⚠️ Points d'attention
 
-- Contrairement à A0 (jour), la nuit utilise **une seule** `temp_nuit` pour Salon + Bureau + Chambre.
-- La version `2026-01-02` est obsolète.
+- **Refactoring 2026-06** : même architecture que A0 — wrapper 30 lignes + délégation script.
+- La nuit, `t_salon_target` = `t_bureau_target` = `t_chambre_target` = `temp_nuit` (sauf groupe_1 → eco).
+- `sensor.groupe` ajouté au trigger `sensor_update` lors du refactoring.
