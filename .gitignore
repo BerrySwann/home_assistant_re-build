@@ -30,6 +30,7 @@ __pycache__/
 
 # --- HACS (re-générés, bruit énorme) ---
 www/community/
+custom_components/
 
 # --- Images volatiles / météo ---
 www/weather/
