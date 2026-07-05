@@ -256,7 +256,6 @@ configuration.yaml
 
 ---
 
-← Retour : `docs/IA/IA_CONTEXT_BASE.md`
 
 
 <!-- obsidian-wikilinks -->

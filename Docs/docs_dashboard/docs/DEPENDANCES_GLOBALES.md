@@ -1,5 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES — TABLEAU DE BORD HA
-*Dernière mise à jour : 2026-06-19 (section INTÉGRATION FILE ajoutée + command_line/ mis à jour)*
+*Dernière mise à jour : 2026-06-29 (temperature_confort_nuit seuil 29°C ajouté — temperature_eco_ete_corrige courbe 30/29/28 validée — card_mod prise_tete_de_lit fix résidu 2W Zigbee)*
 
 ---
 
@@ -180,7 +180,7 @@ MATÉRIEL (SONOFF TH via Z2M)
 | Template | Rôle |
 |:---------|:-----|
 | `temperature_humidite` | Affichage T°+Humidité par pièce |
-| `calcule_temp_cible` | Pop-up #tendances — calcul T° cible |
+| `calcule_temp_cible` | Pop-up #tendances — calcul T° cible *(corrigé 2026-06-21 : entités + logique cool)* |
 | `carte_des_temperatures` | Pop-ups #salon/#bureau/etc — historique T° |
 
 > ⚠️ **Flag** : `custom:temperature-heatmap-card` utilisé dans le pop-up `#exterieur` — **absent du référentiel HACS officiel**. À vérifier / ajouter si installé.
@@ -265,7 +265,7 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 
 | Template | Rôle |
 |:---------|:-----|
-| `calcule_temp_cible` | Pop-up `#calcul` — delta intérieur/extérieur |
+| `calcule_temp_cible` | Pop-up `#calcul` — delta intérieur/extérieur *(corrigé 2026-06-21)* |
 | `nav_bar` | Barre de navigation bas de page |
 
 ### Fichiers YAML déployables
@@ -274,6 +274,43 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 |:--------|:------:|
 | `Dashboard/L1C3_03_Commandes_Clim/vignette_L1C3_clim_2026-05-13.yaml` | ✅ |
 | `Dashboard/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-05-13.yaml` | ✅ |
+
+### Automations liées (P1 clim chauffage)
+
+| Fichier | Alias | Statut | Modifié le |
+|:--------|:------|:------:|:-----------|
+| `docs_automations/TREE_CORRIGE/P1_clim_chauffage/a_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml` | (A-0) CLIM JOUR | ✅ | 2026-06-21 |
+| `docs_automations/TREE_CORRIGE/P1_clim_chauffage/b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml` | (B-0) CLIM NUIT | ✅ | 2026-06-21 |
+
+### Nouveaux sensors P1_MASTER — session 2026-06-21
+
+| Entité | Type | Fichier source | Consommé par |
+|:-------|:----:|:--------------|:-------------|
+| `sensor.temperature_eco_ete` | TPL | `P1_MASTER_CLIM_TEMPLATES.yaml` | `temperature_eco_ete_corrige`, automations a_0/b_0 |
+| `sensor.temperature_eco_ete_corrige` | TPL | `P1_MASTER_CLIM_TEMPLATES.yaml` | automations a_0 (temp_eco_ec) + b_0 (temp_eco_ec) |
+
+### Corrections sensors P1_MASTER — session 2026-06-21
+
+| Entité | Correction |
+|:-------|:-----------|
+| `sensor.temperature_corrige_mamour` | Été : `min(T°ext - 1, 27)` dynamique |
+| `sensor.temperature_corrige_eric` | Été : `min(T°ext + 1, 28)` dynamique |
+| `sensor.temperature_corrige_chambre` | Été : `min(T°ext + 1, 28)` — hiver : fallback `float(18)` à corriger |
+| `sensor.temperature_eco_hiver_corrige` | Source corrigée : lit `temperature_eco_hiver` (était `temperature_eco_ete`) |
+| `sensor.temperature_confort_jour` | À corriger : ajouter `cool` mode → retourner `base` (26°C) |
+
+### Corrections sensors P1_MASTER — session 2026-06-29
+
+| Entité | Correction | Statut |
+|:-------|:-----------|:------:|
+| `sensor.temperature_eco_ete_corrige` | Courbe validée : ≤28°C→30 / 29-32°C→29 / >32°C→28 (monotone décroissante ✓) | ✅ |
+| `sensor.temperature_confort_nuit` | Seuil 29°C ajouté — zone 26-32°C scindée : ≤29→+d1(26°C) / >29→+d2(27°C) — floor nuit 27°C garanti | ✅ |
+
+### Corrections Dashboard — session 2026-06-29
+
+| Entité / Carte | Correction | Statut |
+|:---------------|:-----------|:------:|
+| `card_mod prise_tete_de_lit_chambre` | `position: relative !important` ajouté — suppression `flex/column/center` (conflit mushroom) — `watts=0` forcé si switch OFF (résidu 2W Zigbee) | ✅ |
 
 ---
 
@@ -423,7 +460,7 @@ MATÉRIEL (NOUS SP via Z2M)
 | `apex_dut_piece` | Onglet DUT — apexcharts durée utilisation par pièce |
 | `clim_voltage_ring-tile` | ring-tile-card tension (V) par appareil |
 | `clim_ampere_ring-tile` | ring-tile-card ampérage (A) par appareil |
-| `calcule_temp_cible` | Pop-up #tendances — logique calcul T° cible |
+| `calcule_temp_cible` | Pop-up #tendances — logique calcul T° cible *(corrigé 2026-06-21)* |
 
 ### Fichiers YAML déployables
 

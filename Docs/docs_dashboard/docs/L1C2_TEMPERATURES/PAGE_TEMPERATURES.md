@@ -389,22 +389,25 @@ Ce template affiche un résumé textuel des **températures cibles actives** sel
 | `groupe_3` | Présent partiel (Bureau prioritaire) |
 | `groupe_4` | Présent total (confort max) |
 
-**Combinaison → Affichage** :
+**Combinaison → Affichage** *(corrigé 2026-06-21)* :
 
 ```
-Jour (7h30-21h) + groupe_1  → T° éco_hiver_corrige (tous) / T° cible (Cool) / Fan Only
-Jour (7h30-21h) + groupe_2  → Salon: T° confort / Bureau+Chambre: T° cible
-Jour (7h30-21h) + groupe_3  → Bureau: T° confort / Salon+Chambre: T° cible
-Jour (7h30-21h) + groupe_4  → Salon+Bureau: T° confort / Chambre: T° cible
+Jour (7h30-21h) + groupe_1  → éco_hiver_corrige (heat) / éco_ete_corrige (cool) / Fan Only
+Jour (7h30-21h) + groupe_2  → Salon: corrige_mamour / Bureau: ECO (heat ou cool) / Chambre: corrige_chambre
+Jour (7h30-21h) + groupe_3  → Salon+Bureau: corrige_eric / Chambre: corrige_chambre
+Jour (7h30-21h) + groupe_4  → Salon: corrige_mamour / Bureau: corrige_eric / Chambre: corrige_chambre
 
-Nuit (21h-7h30) + groupe_1  → T° éco_hiver_corrige (tous) / T° cible (Cool) / Fan Only
-Nuit (21h-7h30) + groupe_2/3/4 → T° confort_nuit (tous) / T° cible (Cool)
+Nuit (21h-7h30) + groupe_1  → éco_hiver_corrige (heat) / éco_ete_corrige (cool) / Fan Only
+Nuit (21h-7h30) + groupe_2/3/4 → confort_nuit (heat + cool, toutes pièces)
 ```
 
-> Ces entités proviennent de `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` :
-> `sensor.groupe`, `sensor.mode_ete_hiver`, `sensor.presence_clim`,
-> `sensor.temperature_cible`, `sensor.temperature_confort`,
-> `sensor.temperature_confort_nuit`, `sensor.temperature_eco_hiver_corrige`.
+> Ces entités proviennent de `P1_MASTER_CLIM_TEMPLATES` :
+> `sensor.groupe`, `sensor.mode_ete_hiver`,
+> `sensor.temperature_eco_hiver_corrige`, `sensor.temperature_eco_ete_corrige`,
+> `sensor.temperature_corrige_mamour`, `sensor.temperature_corrige_eric`,
+> `sensor.temperature_corrige_chambre`, `sensor.temperature_confort_nuit`.
+
+> ⚠️ **Correction 2026-06-21** : entités obsolètes corrigées (`temperature_confort_jour_jour` → `temperature_confort_jour`, `corrige_*_hivers` → `corrige_*`). Logique cool G1 : `temperature_cible` → `temperature_eco_ete_corrige`. Corrections par pièce selon groupe ajoutées (corrige_mamour/eric/chambre).
 
 ### `#exterieur` — Heatmap T° Extérieure
 

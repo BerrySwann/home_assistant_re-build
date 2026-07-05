@@ -114,6 +114,15 @@ styles:
             if (v < 90) return 'orange';
             return 'rgb(244,67,54)';
           ]]]
+      - "--icon-color-sensor": |
+          [[[
+            const s = states['sensor.pve_memory_usage_percentage'];
+            if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
+            const v = parseFloat(s.state);
+            if (v < 75) return 'rgb(70, 175, 75)';
+            if (v < 90) return 'orange';
+            return 'rgb(244,67,54)';
+          ]]]
     sd:
       - padding-bottom: 0px
       - align-self: middle
@@ -124,6 +133,15 @@ styles:
             if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
             const v = parseFloat(s.state);
             if (v < 75) return 'white';
+            if (v < 90) return 'orange';
+            return 'rgb(244,67,54)';
+          ]]]
+      - "--icon-color-sensor": |
+          [[[
+            const s = states['sensor.storage_local_storage_usage_percentage'];
+            if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
+            const v = parseFloat(s.state);
+            if (v < 75) return 'rgb(70, 175, 75)';
             if (v < 90) return 'orange';
             return 'rgb(244,67,54)';
           ]]]
@@ -152,11 +170,11 @@ custom_fields:
     [[[
       const s = states['sensor.pve_memory_usage_percentage'];
       const val = (s && s.state !== 'unavailable' && s.state !== 'unknown') ? parseFloat(s.state).toFixed(1) + '%' : 'N/A';
-      return `<ha-icon icon="mdi:memory" style="width:15px;height:15px;color:rgb(70,175,75);"></ha-icon><span>RAM: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
+      return `<ha-icon icon="mdi:memory" style="width:15px;height:15px;color:var(--icon-color-sensor);"></ha-icon><span>RAM: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
     ]]]
   sd: |
     [[[
       const s = states['sensor.storage_local_storage_usage_percentage'];
       const val = (s && s.state !== 'unavailable' && s.state !== 'unknown') ? parseFloat(s.state).toFixed(1) + '%' : 'N/A';
-      return `<ha-icon icon="mdi:harddisk" style="width:15px;height:15px;color:rgb(70,175,75);"></ha-icon><span>SSD: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
+      return `<ha-icon icon="mdi:harddisk" style="width:15px;height:15px;color:var(--icon-color-sensor);"></ha-icon><span>SSD: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
     ]]]
