@@ -16,6 +16,13 @@
 # (Liaison via automation dans automations.yaml — trigger: platform: event,
 #  event_type: input_button.pressed)
 #
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL     | CAPTEUR BRUT (source) | CE FICHIER (unique_id) | AVAL                                                    |
+# |:-------------|:----------------------|:-----------------------|:--------------------------------------------------------|
+# | [virtuel/UI] | [aucune — bouton UI]  | git_push_manuel        | automations.yaml → shell_command.git_backup_push_manual  |
+# | [virtuel/UI] | [aucune — bouton UI]  | git_push_weekly_manuel | automations.yaml → shell_command.git_backup_push_weekly  |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces boutons sont PASSIFS : ils ne font rien sans l'automation associée.
 # - L'automation doit écouter l'event input_button.pressed pour chaque entité.

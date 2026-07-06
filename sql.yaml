@@ -11,6 +11,12 @@
 # - Base ciblée : homeassistant
 # - Résultat : MiB (virgule flottante, 1 décimale)
 #
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL          | CAPTEUR BRUT (source)         | CE FICHIER (unique_id)   | AVAL                       |
+# |:------------------|:------------------------------|:-------------------------|:-----------------------------|
+# | MariaDB (LXC 201) | information_schema.tables SQL | taille_db_home_assistant | Dashboard → L5C3 (MariaDB)   |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Utiliser l'intégration sql (et non command_line) : !secret mariadb_url
 #   fonctionne nativement ici car db_url est une valeur YAML entière.
