@@ -14,6 +14,14 @@
 # - Lu par    : automation A0_clim_jour et B0_clim_nuit (condition "arret en cours")
 # - Logique   : si 'on' → la clim ne sera pas rallumée par l'automation principale
 #
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL     | CAPTEUR BRUT (source)      | CE FICHIER (unique_id)               | AVAL                                        |
+# |:-------------|:---------------------------|:-------------------------------------|:----------------------------------------------|
+# | [virtuel/UI] | automations P1 clim (écrit)| clim_salon_arret_securise_en_cours   | automations.yaml + scripts.yaml + Dashboard   |
+# | [virtuel/UI] | automations P1 clim (écrit)| clim_bureau_arret_securise_en_cours  | automations.yaml + scripts.yaml + Dashboard   |
+# | [virtuel/UI] | automations P1 clim (écrit)| clim_chambre_arret_securise_en_cours | automations.yaml + scripts.yaml + Dashboard   |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces booleans doivent être remis à 'off' en fin de séquence d'arrêt.
 # - Ne pas confondre avec switch.clim_*_nous (alimentation physique).

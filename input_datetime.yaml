@@ -14,6 +14,12 @@
 #   → {% set last = states('input_datetime.dernier_eclair') %}
 #   → calcul diff j/h/m depuis le dernier impact.
 #
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL     | CAPTEUR BRUT (source)                | CE FICHIER (unique_id) | AVAL                                        |
+# |:-------------|:-------------------------------------|:-----------------------|:---------------------------------------------|
+# | [virtuel/UI] | automation maj_temps_foudre (écriture)| dernier_eclair         | M_03_meteo_blitzortung.yaml → L1C1 (Météo)   |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - has_date: true + has_time: true obligatoire → le template utilise
 #   (now() - last_dt).total_seconds() qui nécessite la partie heure.

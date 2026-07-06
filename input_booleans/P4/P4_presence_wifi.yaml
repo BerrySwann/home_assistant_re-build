@@ -15,6 +15,13 @@
 #   Utilisé lors de longues absences ou en mode vacances.
 #   Doit être remis à 'off' au retour.
 #
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL     | CAPTEUR BRUT (source) | CE FICHIER (unique_id) | AVAL                                                  |
+# |:-------------|:----------------------|:-----------------------|:---------------------------------------------------------|
+# | [virtuel/UI] | [aucune — toggle UI]  | mode_absence_force     | ⚠️ aucun consommateur (audit grep 2026-07-06) —           |
+# |              |                       |                        |    intégration A0/B0 à venir (cf. PIÈGES ci-dessous)      |
+#
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Si mode_absence_force est 'on', les automations de clim basculeront en éco.
 # - À documenter dans les automations A0/B0 si intégration future souhaitée.
