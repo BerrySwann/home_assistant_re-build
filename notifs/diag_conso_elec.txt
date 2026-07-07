@@ -10712,3 +10712,4 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [CELL] | 07/07 11:30 | Hyg:0.02 | Cuis:0.09 | Froid:0.65 | Chauff:2.25 | Avg 4:195.8 | Multi:0.33 | Lum:0.11 | Autres:0.19 | Ti:27.2°C | Ext:31.9°C | DUT S/R/B/C:2.7/0.0/2.5/0.0
 [2] en [CELL] | 07/07 11:45 | Hyg:0.02 | Cuis:0.09 | Froid:0.67 | Chauff:2.31 | Avg 4:196.7 | Multi:0.43 | Lum:0.11 | Autres:0.19 | Ti:27.2°C | Ext:32.1°C | DUT S/R/B/C:2.7/0.0/2.6/0.0
 [2] en [CELL] | 07/07 12:00 | Hyg:0.03 | Cuis:0.09 | Froid:0.69 | Chauff:2.39 | Avg 4:199.4 | Multi:0.44 | Lum:0.11 | Autres:0.19 | Ti:27.2°C | Ext:32.1°C | DUT S/R/B/C:2.8/0.0/2.6/0.0
+[2] en [CELL] | 07/07 12:15 | Hyg:0.03 | Cuis:0.09 | Froid:0.7 | Chauff:2.48 | Avg 4:202.5 | Multi:0.44 | Lum:0.11 | Autres:0.2 | Ti:27.2°C | Ext:31.7°C | DUT S/R/B/C:2.9/0.0/2.7/0.0
