@@ -4,7 +4,7 @@ entities:
   - climate.radiateur_cuisine
   - climate.clim_bureau_rm4_mini
   - climate.soufflant_salle_de_bain
-  - climate.clim_chambre_rm4_mini
+  - climate.clim_chambre_nodon
   - sensor.salon_power_status
   - sensor.cuisine_power_status
   - sensor.bureau_power_status
@@ -30,7 +30,7 @@ triggers_update:
   - climate.radiateur_cuisine
   - climate.clim_bureau_rm4_mini
   - climate.soufflant_salle_de_bain
-  - climate.clim_chambre_rm4_mini
+  - climate.clim_chambre_nodon
   - sensor.salon_power_status
   - sensor.cuisine_power_status
   - sensor.bureau_power_status
