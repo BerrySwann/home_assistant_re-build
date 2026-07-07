@@ -9,7 +9,7 @@ triggers:
   entity_id:
   - climate.clim_salon_rm4_mini
   - climate.clim_bureau_rm4_mini
-  - climate.clim_chambre_rm4_mini
+  - climate.clim_chambre_nodon
   to: 'off'
 conditions:
 - condition: state
@@ -38,7 +38,7 @@ actions:
   data:
     title: ARRÊT CLIM
     message: "{% set pieces = {\n  'climate.clim_salon_rm4_mini': 'du Salon',\n
-      \ 'climate.clim_bureau_rm4_mini': 'du Bureau',\n  'climate.clim_chambre_rm4_mini':
+      \ 'climate.clim_bureau_rm4_mini': 'du Bureau',\n  'climate.clim_chambre_nodon':
       'de la Chambre'\n} %} La clim. {{ pieces.get(trigger.entity_id, 'inconnue')
       }} a été coupée.\n"
 mode: queued

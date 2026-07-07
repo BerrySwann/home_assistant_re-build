@@ -19,7 +19,7 @@ actions:
   target:
     entity_id: "{% if trigger.entity_id == 'switch.clim_salon_nous' %}\n  climate.clim_salon_rm4_mini\n{%
       elif trigger.entity_id == 'switch.clim_bureau_nous' %}\n  climate.clim_bureau_rm4_mini\n{%
-      elif trigger.entity_id == 'switch.clim_chambre_nous' %}\n  climate.clim_chambre_rm4_mini\n{%
+      elif trigger.entity_id == 'switch.clim_chambre_nous' %}\n  climate.clim_chambre_nodon\n{%
       endif %}\n"
 - if:
   - condition: time

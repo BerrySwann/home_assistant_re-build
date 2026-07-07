@@ -10,7 +10,7 @@ triggers:
   entity_id:
   - climate.clim_salon_rm4_mini
   - climate.clim_bureau_rm4_mini
-  - climate.clim_chambre_rm4_mini
+  - climate.clim_chambre_nodon
   to:
 - trigger: state
   entity_id: sensor.mode_ete_hiver
@@ -27,9 +27,9 @@ actions:
       endif %} {# BUREAU #} {% if states('climate.clim_bureau_rm4_mini') != 'off'
       \n      and (is_state('switch.clim_bureau_nous', 'off') or is_state('input_boolean.clim_bureau_arret_securise_en_cours',
       'on')) %}\n  {% set liste = liste + ['climate.clim_bureau_rm4_mini'] %}\n{%
-      endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_rm4_mini') != 'off'
+      endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_nodon') != 'off'
       \n      and (is_state('switch.clim_chambre_nous', 'off') or is_state('input_boolean.clim_chambre_arret_securise_en_cours',
-      'on')) %}\n  {% set liste = liste + ['climate.clim_chambre_rm4_mini'] %}\n{%
+      'on')) %}\n  {% set liste = liste + ['climate.clim_chambre_nodon'] %}\n{%
       endif %} {{ liste }}\n"
     force_mode_list: "{% set liste = [] %} {# SALON #} {% if states('climate.clim_salon_rm4_mini')
       not in ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_salon_nous',
@@ -39,10 +39,10 @@ actions:
       ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_bureau_nous',
       'on') \n      and is_state('input_boolean.clim_bureau_arret_securise_en_cours',
       'off') %}\n  {% set liste = liste + ['climate.clim_bureau_rm4_mini'] %}\n{%
-      endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_rm4_mini') not in
+      endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_nodon') not in
       ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_chambre_nous',
       'on') \n      and is_state('input_boolean.clim_chambre_arret_securise_en_cours',
-      'off') %}\n  {% set liste = liste + ['climate.clim_chambre_rm4_mini'] %}\n{%
+      'off') %}\n  {% set liste = liste + ['climate.clim_chambre_nodon'] %}\n{%
       endif %} {{ liste }}\n"
 - if:
   - condition: template
