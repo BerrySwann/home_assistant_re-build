@@ -1,4 +1,4 @@
-﻿j_2_0_secu_arret_clim_protege:
+j_2_0_secu_arret_clim_protege:
   alias: J 2-0 SECU - ARRÊT CLIM PROTÉGÉ
   description: '[EXÉCUTANT] Protection thermique et coupure sous 9W.'
   mode: parallel
@@ -364,7 +364,7 @@ p1_master_gestion_clim:
             entity_id:
             - climate.clim_salon_rm4_mini
             - climate.clim_bureau_rm4_mini
-            - climate.clim_chambre_rm4_mini
+            - climate.clim_chambre_nodon
           data:
             hvac_mode: 'off'
         - alias: 'NOTIF : ALERTE CIBLÉE SUR DÉCLENCHEUR'
@@ -445,9 +445,9 @@ p1_master_gestion_clim:
             - alias: 'COMMANDE : RÉGLAGE TEMPÉRATURE ET MODE CHAMBRE'
               action: climate.set_temperature
               target:
-                entity_id: climate.clim_chambre_rm4_mini
+                entity_id: climate.clim_chambre_nodon
               data:
-                hvac_mode: "{% if trigger_id == 'sensor_update' and is_state('climate.clim_chambre_rm4_mini', 'off') %}\n  off\n{% else %}\n  {{ mode_saison }}\n{% endif %}"
+                hvac_mode: "{% if trigger_id == 'sensor_update' and is_state('climate.clim_chambre_nodon', 'off') %}\n  off\n{% else %}\n  {{ mode_saison }}\n{% endif %}"
                 temperature: '{{ t_chambre_target }}'
       - alias: 'PAUSE : SÉCURITÉ RÉCEPTION'
         delay: 00:00:02

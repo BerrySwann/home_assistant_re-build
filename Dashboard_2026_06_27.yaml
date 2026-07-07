@@ -2325,7 +2325,7 @@ views:
                   - climate.radiateur_cuisine
                   - climate.clim_bureau_rm4_mini
                   - climate.soufflant_salle_de_bain
-                  - climate.clim_chambre_rm4_mini
+                  - climate.clim_chambre_nodon
                 triggers_update:
                   - sensor.temperature_moyenne_interieure
                   - sensor.delta_ademe_recommande
@@ -2346,7 +2346,7 @@ views:
                   - climate.radiateur_cuisine
                   - climate.clim_bureau_rm4_mini
                   - climate.soufflant_salle_de_bain
-                  - climate.clim_chambre_rm4_mini
+                  - climate.clim_chambre_nodon
                 tap_action:
                   action: navigate
                   navigation_path: /dashboard-tablette/clim
@@ -2507,7 +2507,7 @@ views:
                       const consigneCuisine = safeState('climate.radiateur_cuisine');
                       const consigneBureau = safeState('climate.clim_bureau_rm4_mini');
                       const consigneSdB = safeState('climate.soufflant_salle_de_bain');
-                      const consigneChambre = safeState('climate.clim_chambre_rm4_mini');
+                      const consigneChambre = safeState('climate.clim_chambre_nodon');
 
                       return [
                         `<span style="display: block; text-align: right; line-height: 1.2; color: lightgreen;">${tempMoyenne}°C</span>`,
@@ -2662,7 +2662,7 @@ views:
                   - climate.radiateur_cuisine
                   - climate.clim_bureau_rm4_mini
                   - climate.soufflant_salle_de_bain
-                  - climate.clim_chambre_rm4_mini
+                  - climate.clim_chambre_nodon
                   - sensor.salon_power_status
                   - sensor.cuisine_power_status
                   - sensor.bureau_power_status
@@ -2688,7 +2688,7 @@ views:
                   - climate.radiateur_cuisine
                   - climate.clim_bureau_rm4_mini
                   - climate.soufflant_salle_de_bain
-                  - climate.clim_chambre_rm4_mini
+                  - climate.clim_chambre_nodon
                   - sensor.salon_power_status
                   - sensor.cuisine_power_status
                   - sensor.bureau_power_status
@@ -11042,7 +11042,7 @@ views:
               - type: entity
                 show_state: true
                 show_icon: true
-                entity: climate.clim_chambre_rm4_mini
+                entity: climate.clim_chambre_nodon
                 color: state
                 tap_action:
                   action: more-info
@@ -11074,7 +11074,7 @@ views:
               navigation_path: "#chambre"
           - type: custom:bubble-card
             card_type: climate
-            entity: climate.clim_chambre_rm4_mini
+            entity: climate.clim_chambre_nodon
             state_color: true
             icon: mdi:air-conditioner
             show_icon: true
@@ -11089,7 +11089,7 @@ views:
                 show_arrow: true
                 show_background: true
                 show_attribute: false
-              - entity: climate.clim_chambre_rm4_mini
+              - entity: climate.clim_chambre_nodon
                 select_attribute: fan_modes
                 show_background: true
                 state_background: false
@@ -12807,7 +12807,7 @@ views:
               action: navigate
               navigation_path: /dashboard-tablette/prog-clim-chambre
           - type: thermostat
-            entity: climate.clim_chambre_rm4_mini
+            entity: climate.clim_chambre_nodon
             features:
               - style: icons
                 type: climate-hvac-modes
@@ -13991,7 +13991,7 @@ views:
               columns: full
               rows: 2
           - include:
-              - climate.clim_chambre_rm4_mini
+              - climate.clim_chambre_nodon
             exclude: []
             discover_existing: true
             title: Planificateur Clim. Chambre
@@ -20537,7 +20537,7 @@ views:
               - type: entity
                 show_state: true
                 show_icon: true
-                entity: climate.clim_chambre_rm4_mini
+                entity: climate.clim_chambre_nodon
                 color: state
                 tap_action:
                   action: more-info
@@ -20569,7 +20569,7 @@ views:
                 }
           - type: custom:bubble-card
             card_type: climate
-            entity: climate.clim_chambre_rm4_mini
+            entity: climate.clim_chambre_nodon
             state_color: true
             icon: mdi:air-conditioner
             show_icon: true
@@ -20584,7 +20584,7 @@ views:
                 show_arrow: true
                 show_background: true
                 show_attribute: false
-              - entity: climate.clim_chambre_rm4_mini
+              - entity: climate.clim_chambre_nodon
                 select_attribute: fan_modes
                 show_background: true
                 state_background: false
