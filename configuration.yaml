@@ -157,6 +157,10 @@ input_number: !include_dir_merge_named input_number/
 #renvoi au fichier input_datetime.yaml
 input_datetime: !include input_datetime.yaml
 
+# MQTT manuel (capteurs hors decouverte auto - ex: disponibilite Z2M)
+mqtt:
+  binary_sensor: !include_dir_merge_list mqtt/binary_sensor/
+
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ NOTIFY — MIGRÉ VERS INTÉGRATION FILE (UI)                                │
 # ╰──────────────────────────────────────────────────────────────────────────╯

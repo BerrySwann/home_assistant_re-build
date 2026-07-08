@@ -1,0 +1,40 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ MQTT BS : DISPONIBILITÉ CLIM CHAMBRE NODON (PÔLE 1. CHAUFFAGE/CLIM)      │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteur binaire de disponibilité (En ligne / Hors ligne) du blaster IR
+# NodOn IRB-4-1-00 qui pilote la clim chambre. S'appuie sur la fonction
+# "availability" de Zigbee2MQTT (activée le 2026-07-08) : Z2M publie
+# online/offline sur le topic availability de chaque appareil.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Topic : zigbee2mqtt2/Clim Chambre (NODON)/availability
+# - Payload : "online"/"offline" brut OU JSON {"state":"..."} selon version Z2M
+#   -> template tolerant aux deux formats
+# - Timeouts Z2M : actif 10 min / passif 25 h (réglages par défaut)
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL              | CAPTEUR BRUT (source)                            | CE FICHIER (unique_id)          | AVAL              |
+# |:----------------------|:-------------------------------------------------|:--------------------------------|:-------------------|
+# | NodOn IRB-4-1-00 (Z2M)| topic MQTT .../Clim Chambre (NODON)/availability  | clim_chambre_nodon_en_ligne     | Dashboard L1C3     |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Le topic reprend le friendly name Z2M EXACT ("Clim Chambre (NODON)") —
+#   si l'appareil est renommé dans Z2M, mettre à jour le state_topic ici.
+# - Nécessite availability: enabled dans Z2M (fait le 2026-07-08).
+# - Surveille le module Zigbee, PAS la clim elle-même (l'IR reste en aveugle —
+#   le seul retour réel de la clim = conso de la prise).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C3 Commandes Clim (état opérationnel du contrôleur chambre)
+
+# --- clim_chambre_nodon_en_ligne ---
+- name: "Clim Chambre Nodon En Ligne"
+  unique_id: clim_chambre_nodon_en_ligne
+  state_topic: "zigbee2mqtt2/Clim Chambre (NODON)/availability"
+  value_template: "{{ value_json.state if value.startswith('{') else value }}"
+  payload_on: "online"
+  payload_off: "offline"
+  device_class: connectivity

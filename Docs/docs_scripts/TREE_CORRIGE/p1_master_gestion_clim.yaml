@@ -243,13 +243,19 @@ p1_master_gestion_clim:
               entity_id: input_boolean.clim_chambre_arret_securise_en_cours
               state: 'off'
             sequence:
-            - alias: 'COMMANDE : RÉGLAGE TEMPÉRATURE ET MODE CHAMBRE'
+            - alias: 'COMMANDE : MODE CHAMBRE'
+              action: climate.set_hvac_mode
+              target:
+                entity_id: climate.clim_chambre_nodon
+              data:
+                hvac_mode: "{% if trigger_id == 'sensor_update' and is_state('climate.clim_chambre_nodon', 'off') %}off{% else %}{{ mode_saison }}{% endif %}"
+            - alias: 'COMMANDE : CONSIGNES CHAMBRE (PLAGE LOW/HIGH — NodOn = plage uniquement)'
               action: climate.set_temperature
               target:
                 entity_id: climate.clim_chambre_nodon
               data:
-                hvac_mode: "{% if trigger_id == 'sensor_update' and is_state('climate.clim_chambre_nodon', 'off') %}\n  off\n{% else %}\n  {{ mode_saison }}\n{% endif %}"
-                temperature: '{{ t_chambre_target }}'
+                target_temp_low: "{{ t_chambre_target if mode_saison == 'heat' else 16 }}"
+                target_temp_high: "{{ t_chambre_target if mode_saison == 'cool' else 30 }}"
       - alias: 'PAUSE : SÉCURITÉ RÉCEPTION'
         delay: 00:00:02
       - alias: 'NOTIF : RÉSUMÉ DE L''ÉTAT DES CLIMATISATIONS'
