@@ -1,0 +1,211 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ VIGNETTE L1C3 — COMMANDES CLIM (version 2026-07-08)                      │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+# Changements vs 2026-05-13 :
+# - climate.clim_chambre_rm4_mini → climate.clim_chambre_nodon (entities + triggers_update)
+# - consigneChambre lue depuis sensor.temperature_corrige_chambre (le NodOn n'a pas
+#   d'attribut temperature — plage low/high uniquement, supported_features 394)
+# - NOTE : sensor.temperature_corrige_chambre absent des listes entities/triggers_update
+#   (rafraîchissement indirect via les autres triggers) — à ajouter si besoin
+type: custom:button-card
+entities:
+  - sensor.temperature_moyenne_interieure
+  - sensor.delta_ademe_recommande
+  - sensor.mode_ete_hiver_etat
+  - sensor.clim_salon_etat
+  - sensor.radiateur_cuisine_etat
+  - sensor.clim_bureau_etat
+  - sensor.sdb_soufflant_etat
+  - sensor.sdb_seche_serviette_etat
+  - sensor.clim_chambre_etat
+  - sensor.salon_power_status
+  - sensor.cuisine_power_status
+  - sensor.bureau_power_status
+  - sensor.sdb_soufflant_power_status
+  - sensor.sdb_seche_serviette_power_status
+  - sensor.chambre_power_status
+  - climate.clim_salon_rm4_mini
+  - climate.radiateur_cuisine
+  - climate.clim_bureau_rm4_mini
+  - climate.soufflant_salle_de_bain
+  - climate.clim_chambre_nodon
+triggers_update:
+  - sensor.temperature_moyenne_interieure
+  - sensor.delta_ademe_recommande
+  - sensor.mode_ete_hiver_etat
+  - sensor.clim_salon_etat
+  - sensor.radiateur_cuisine_etat
+  - sensor.clim_bureau_etat
+  - sensor.sdb_soufflant_etat
+  - sensor.sdb_seche_serviette_etat
+  - sensor.clim_chambre_etat
+  - sensor.salon_power_status
+  - sensor.cuisine_power_status
+  - sensor.bureau_power_status
+  - sensor.sdb_soufflant_power_status
+  - sensor.sdb_seche_serviette_power_status
+  - sensor.chambre_power_status
+  - climate.clim_salon_rm4_mini
+  - climate.radiateur_cuisine
+  - climate.clim_bureau_rm4_mini
+  - climate.soufflant_salle_de_bain
+  - climate.clim_chambre_nodon
+tap_action:
+  action: navigate
+  navigation_path: /dashboard-tablette/clim
+styles:
+  card:
+    - aspect-ratio: 1/1
+    - border-radius: 10px
+    - background: transparent
+    - border-width: 3px
+    - border-color: white
+    - border-style: double
+    - color: white
+    - font-size: 11px
+    - line-height: 1.2
+  grid:
+    - grid-template-areas: |
+        "titre titre titre"
+        "piece mode consigne"
+    - grid-template-columns: 1fr 1fr 1fr
+    - grid-template-rows: auto auto auto
+    - margin-top: 3px
+  custom_fields:
+    titre:
+      - grid-area: titre
+      - justify-self: center
+      - text-align: center
+      - font-weight: bold
+    piece:
+      - justify-self: start
+      - margin-left: 8px
+      - text-align: left
+    mode:
+      - justify-self: start
+      - margin-left: 15px
+      - text-align: left
+    consigne:
+      - justify-self: end
+      - margin-right: 6px
+      - text-align: right
+custom_fields:
+  titre: Commande Clim.
+  piece: |
+    [[[
+      const colorMap = {
+        'Fan': '#00FF00',
+        'on': 'lightgreen',
+        'off': 'white',
+        'default': '#aaaaaa'
+      };
+      function safeState(entityId, defaultValue = 'on') {
+        return states[entityId]?.state || defaultValue;
+      }
+      function getColorForPowerStatus(powerStatus, mode) {
+        if (mode === 'Fan') return colorMap['Fan'];
+        if (powerStatus === 'on') return colorMap['on'];
+        if (powerStatus === 'off') return colorMap['off'];
+        return colorMap['default'];
+      }
+      const pieces = [
+        { name: 'T̄ Appart. --------------', color: 'white' },
+        { name: 'Δ Ademe --------------', color: 'white' },
+        { name: 'Mode ->', color: 'white' },
+        { name: 'Salon', power: safeState('sensor.salon_power_status'), mode: safeState('sensor.clim_salon_etat') },
+        { name: 'Cuisine', power: safeState('sensor.cuisine_power_status'), mode: safeState('sensor.radiateur_cuisine_etat') },
+        { name: 'Bureau', power: safeState('sensor.bureau_power_status'), mode: safeState('sensor.clim_bureau_etat') },
+        { name: 'SdB', power: safeState('sensor.sdb_soufflant_power_status'), mode: safeState('sensor.sdb_soufflant_etat') },
+        { name: 'Chambre', power: safeState('sensor.chambre_power_status'), mode: safeState('sensor.clim_chambre_etat') }
+      ];
+      return pieces.map(piece =>
+        `<span style="display: block; text-align: left; line-height: 1.2; color: ${piece.color || getColorForPowerStatus(piece.power, piece.mode)};">${piece.name}</span>`
+      ).join('');
+    ]]]
+  mode: |
+    [[[
+      const colorMap = {
+        'cool': 'skyblue',
+        'heat': '#FFA500',
+        'fan': 'turquoise',
+        'off': '#F44336',
+        'N/A': '#aaaaaa', 
+        'default': '#aaaaaa'
+      };
+      function safeState(entityId, defaultValue = 'off') {
+        const state = states[entityId]?.state?.trim()?.toLowerCase() || defaultValue;
+        if (state === 'unknown' || state === 'unavailable') return 'N/A';
+        return state === 'fan_only' ? 'fan' : state;
+      }
+      function getColorForMode(mode) {
+        return colorMap[mode] || colorMap['default'];
+      }
+      function formatMode(mode) {
+        const color = getColorForMode(mode);
+        const formattedMode = mode.charAt(0).toUpperCase() + mode.slice(1);
+        return `<span style="display: block; text-align: left; line-height: 1.2; color: ${color};">${formattedMode}</span>`;
+      }
+      const modes = [
+        { entity: 'sensor.mode_ete_hiver_etat', label: '.' },
+        { entity: 'sensor.clim_salon_etat', label: 'Salon' },
+        { entity: 'sensor.radiateur_cuisine_etat', label: 'Cuisine' },
+        { entity: 'sensor.clim_bureau_etat', label: 'Bureau' },
+        { entity: 'sensor.sdb_soufflant_etat', label: 'SdB' },
+        { entity: 'sensor.clim_chambre_etat', label: 'Chambre' }
+      ];
+      return [
+        '<span style="display: block; text-align: left; line-height: 1.2; color: transparent;">.</span>',
+        '<span style="display: block; text-align: left; line-height: 1.2; color: transparent;">.</span>',
+        ...modes.map(mode => formatMode(safeState(mode.entity)))
+      ].join('');
+    ]]]
+  consigne: |
+    [[[
+      function safeState(entityId, attribute = 'temperature') {
+        const entity = states[entityId];
+        if (!entity) return 'N/A';
+        if (entity.state && !isNaN(parseFloat(entity.state))) {
+          return parseFloat(entity.state).toFixed(1);
+        }
+        if (entity.attributes && entity.attributes[attribute] !== undefined) {
+          return parseFloat(entity.attributes[attribute]).toFixed(1);
+        }
+        return 'N/A';
+      }
+      // Fonction pour gérer la couleur (Gris si N/A) et le formatage
+      function formatDisplay(value) {
+        const color = value === 'N/A' ? '#aaaaaa' : 'inherit';
+        const text = value === 'N/A' ? 'N/A' : value + '°C';
+        return `<span style="display: block; text-align: right; line-height: 1.2; color: ${color};">${text}</span>`;
+      }
+      // --- LOGIQUE DELTA ADEME RÉUTILISÉE ET FORMATÉE ---
+      const deltaADEME = parseFloat(states['sensor.delta_ademe_recommande']?.state);
+      const isCooling = states['sensor.mode_ete_hiver']?.state === 'cool';
+      const deltaColor = 
+        !isNaN(deltaADEME) && isCooling && deltaADEME >= -8 && deltaADEME <= -4 
+          ? 'lightgreen' // Optimal
+          : !isNaN(deltaADEME) && isCooling
+            ? '#FF0000' // Avertissement
+            : 'white'; // Neutre
+            
+      const ademeDisplayValue = !isNaN(deltaADEME) 
+        ? `${deltaADEME.toFixed(1)}°C` 
+        : 'N/A';
+      // -----------------------------------------------------------
+      const tempMoyenne = safeState('sensor.temperature_moyenne_interieure');
+      const consigneSalon = safeState('climate.clim_salon_rm4_mini');
+      const consigneCuisine = safeState('climate.radiateur_cuisine');
+      const consigneBureau = safeState('climate.clim_bureau_rm4_mini');
+      const consigneSdB = safeState('climate.soufflant_salle_de_bain');
+      const consigneChambre = safeState('sensor.temperature_corrige_chambre');
+      return [
+        `<span style="display: block; text-align: right; line-height: 1.2; color: lightgreen;">${tempMoyenne}°C</span>`,
+        `<span style="display: block; text-align: right; line-height: 1.2; color: ${deltaColor};">${ademeDisplayValue}</span>`,
+        '<span style="display: block; text-align: right; line-height: 1.2;">.</span>',
+        formatDisplay(consigneSalon),
+        formatDisplay(consigneCuisine),
+        formatDisplay(consigneBureau),
+        formatDisplay(consigneSdB),
+        formatDisplay(consigneChambre)
+      ].join('');
+    ]]]

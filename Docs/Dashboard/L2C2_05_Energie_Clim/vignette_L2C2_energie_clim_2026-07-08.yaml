@@ -1,10 +1,13 @@
+# VIGNETTE L2C2 — CONSO CLIM (version 2026-07-08)
+# Base : 2026-05-13 — seul changement : climate.clim_chambre_nodon dans entities + triggers_update
+# A verifier contre l UI (Eric n a pas renvoye la version finale)
 type: custom:button-card
 entities:
   - climate.clim_salon_rm4_mini
   - climate.radiateur_cuisine
   - climate.clim_bureau_rm4_mini
   - climate.soufflant_salle_de_bain
-  - climate.clim_chambre_rm4_mini
+  - climate.clim_chambre_nodon
   - sensor.salon_power_status
   - sensor.cuisine_power_status
   - sensor.bureau_power_status
@@ -30,7 +33,7 @@ triggers_update:
   - climate.radiateur_cuisine
   - climate.clim_bureau_rm4_mini
   - climate.soufflant_salle_de_bain
-  - climate.clim_chambre_rm4_mini
+  - climate.clim_chambre_nodon
   - sensor.salon_power_status
   - sensor.cuisine_power_status
   - sensor.bureau_power_status
