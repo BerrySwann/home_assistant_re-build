@@ -1207,7 +1207,7 @@ cards:
       action: navigate
       navigation_path: /dashboard-tablette/prog-clim-chambre
   - type: thermostat
-    entity: climate.clim_chambre_nodon
+    entity: climate.clim_chambre_rm4_mini
     features:
       - style: icons
         type: climate-hvac-modes

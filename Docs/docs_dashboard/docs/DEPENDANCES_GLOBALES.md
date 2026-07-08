@@ -1,5 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES — TABLEAU DE BORD HA
-*Dernière mise à jour : 2026-06-29 (temperature_confort_nuit seuil 29°C ajouté — temperature_eco_ete_corrige courbe 30/29/28 validée — card_mod prise_tete_de_lit fix résidu 2W Zigbee)*
+*Dernière mise à jour : 2026-07-08 (migration clim chambre RM4→NodOn : climate.clim_chambre_nodon — script master corrigé plage low/high — binary_sensor.clim_chambre_nodon_en_ligne créé (availability Z2M) — temp_step 1 via override discovery)*
 
 ---
 
@@ -173,7 +173,7 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `climate.clim_salon_rm4_mini` | NAT | SmartIR |
 | `climate.radiateur_cuisine` | NAT | Meross |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
-| `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
+| `climate.clim_chambre_nodon` | NAT | NodOn IRB-4-1-00 via Z2M (plage low/high uniquement — features 394) |
 
 ### Streamline templates utilisés
 
@@ -233,7 +233,8 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 | `climate.radiateur_cuisine` | NAT | Meross |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
 | `climate.soufflant_salle_de_bain` | NAT | Meross |
-| `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
+| `climate.clim_chambre_nodon` | NAT | NodOn IRB-4-1-00 via Z2M (plage low/high uniquement — features 394) |
+| `binary_sensor.clim_chambre_nodon_en_ligne` | MQTT | `mqtt/binary_sensor/P1_clim_chauffage/P1_MQTT_BS_01_dispo_clim_chambre_nodon.yaml` — availability Z2M | ✅ |
 
 ### Entités clés de la page
 
@@ -403,7 +404,7 @@ MATÉRIEL (NOUS SP via Z2M)
 | `climate.radiateur_cuisine` | NAT | Meross |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
 | `climate.soufflant_salle_de_bain` | NAT | Meross |
-| `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
+| `climate.clim_chambre_nodon` | NAT | NodOn IRB-4-1-00 via Z2M (plage low/high uniquement — features 394) |
 | `sensor.salon_power_status` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
 | `sensor.cuisine_power_status` | TPL | idem |
 | `sensor.bureau_power_status` | TPL | idem |

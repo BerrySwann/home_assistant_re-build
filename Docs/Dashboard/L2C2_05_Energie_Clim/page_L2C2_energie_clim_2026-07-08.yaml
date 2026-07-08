@@ -1,3 +1,12 @@
+# PAGE L2C2 — ENERGIE CLIM (version 2026-07-08)
+# Base : version 2026-06-18 + migration NodOn chambre :
+# - badge + bubble-card chambre : climate.clim_chambre_nodon
+# - bubble-card chambre : card_layout large-2-rows, sub_button main/bottom
+# - ⚠️ badge chambre "Réglé à" lit l'attribut temperature (inexistant sur NodOn) → à adapter
+# Page L2C2 — Énergie Clim / Radiateur / Soufflant
+# Navigation: /dashboard-tablette/energie-clim
+# Sauvegardé: 2026-06-18
+
 type: grid
 cards:
   - type: heading
@@ -656,7 +665,7 @@ cards:
         legend_value: false
     series:
       - entity: sensor.temperature_moyenne_interieure
-        name: T̄ Appart.
+        name: "T̅ Appart."
         yaxis_id: temperature
         stroke_width: 4
         fill_raw: last
@@ -664,7 +673,7 @@ cards:
         show:
           extremas: true
       - entity: sensor.th_balcon_nord_temperature
-        name: T° Bal.Nrd
+        name: "T° Bal.Nrd"
         yaxis_id: temperature
         stroke_width: 4
         fill_raw: last
@@ -756,22 +765,30 @@ cards:
       - entity: sensor.th_balcon_nord_temperature
         yaxis_id: temp
         name: Temp. Ext.
+        extend_to: now
+        fill_raw: last
         type: area
         opacity: 0.2
         color: "#44739e"
         stroke_width: 1
       - entity: sensor.dut_clim_salon
         name: Salon
+        extend_to: now
+        fill_raw: last
         yaxis_id: hours
         color: rgb(174,68,90)
         stroke_width: 3
       - entity: sensor.dut_radiateur_cuisine
         name: Cuisine
+        extend_to: now
+        fill_raw: last
         yaxis_id: hours
         color: rgb(168, 136, 181)
         stroke_width: 3
       - entity: sensor.dut_clim_bureau
         name: Bureau
+        extend_to: now
+        fill_raw: last
         yaxis_id: hours
         color: orange
         stroke_width: 3
@@ -782,6 +799,8 @@ cards:
         stroke_width: 3
       - entity: sensor.dut_clim_chambre
         name: Chambre
+        extend_to: now
+        fill_raw: last
         yaxis_id: hours
         color: rgb(30,81,40)
         stroke_width: 3
@@ -833,7 +852,7 @@ cards:
         state_content:
           - name
           - temperature
-        name: Réglé à
+        name: "Réglé à"
       - type: entity
         show_state: true
         show_icon: true
@@ -909,7 +928,7 @@ cards:
       swipeable: true
     tabs:
       - attributes:
-          label: INSTANTANÉ
+          label: "INSTANTÉ"
           icon: mdi:flash
         card:
           type: custom:streamline-card
@@ -1054,7 +1073,7 @@ cards:
         state_content:
           - name
           - temperature
-        name: Réglé à
+        name: "Réglé à"
       - type: entity
         show_state: true
         show_icon: true
@@ -1067,7 +1086,7 @@ cards:
     layout_options:
       grid_columns: full
       grid_rows: 1
-    heading: CUISINE  (RADIATEUR)
+    heading: "CUISINE  (RADIATEUR)"
     card_mod:
       style: |
         ha-card {
@@ -1080,21 +1099,24 @@ cards:
     card_type: climate
     entity: climate.radiateur_cuisine
     sub_button:
-      - name: HVAC modes menu
-        select_attribute: hvac_modes
-        state_background: false
-        show_arrow: true
-        show_background: true
-        show_attribute: false
-        entity: climate.radiateur_cuisine
+      main:
+        - name: HVAC modes menu
+          select_attribute: hvac_modes
+          state_background: false
+          show_arrow: true
+          show_background: true
+          show_attribute: false
+          entity: climate.radiateur_cuisine
+          sub_button_type: select
+      bottom: []
     icon: ""
     scrolling_effect: false
     show_icon: true
     force_icon: false
     show_name: true
     show_state: true
-    show_attribute: true
-    attribute: fan_mode
+    show_attribute: false
+    attribute: ""
     name: Radiateur de la Cuisine
     styles: |
       ha-card {
@@ -1126,7 +1148,7 @@ cards:
       swipeable: true
     tabs:
       - attributes:
-          label: INSTANTANÉ
+          label: "INSTANTÉ"
           icon: mdi:flash
         card:
           type: custom:streamline-card
@@ -1273,7 +1295,7 @@ cards:
         state_content:
           - name
           - temperature
-        name: Réglé à
+        name: "Réglé à"
       - type: entity
         show_state: true
         show_icon: true
@@ -1350,7 +1372,7 @@ cards:
       swipeable: true
     tabs:
       - attributes:
-          label: INSTANTANÉ
+          label: "INSTANTÉ"
           icon: mdi:flash
         card:
           type: custom:streamline-card
@@ -1498,7 +1520,7 @@ cards:
         state_content:
           - name
           - temperature
-        name: Réglé à
+        name: "Réglé à"
       - type: entity
         show_state: true
         show_icon: true
@@ -1582,7 +1604,7 @@ cards:
   - type: custom:streamline-card
     template: clim_voltage_ring-tile
     variables:
-      card_name: Souffl. SdB (V)
+      card_name: "Souffl. SdB (V)"
       entity: sensor.prise_soufflant_salle_de_bain_nous_voltage
     grid_options:
       columns: 6
@@ -1590,7 +1612,7 @@ cards:
   - type: custom:streamline-card
     template: clim_ampere_ring-tile
     variables:
-      card_name: Souffl. SdB (A)
+      card_name: "Souffl. SdB (A)"
       entity: sensor.prise_soufflant_salle_de_bain_nous_current
     grid_options:
       columns: 6
@@ -1605,7 +1627,7 @@ cards:
       swipeable: true
     tabs:
       - attributes:
-          label: INSTANTANÉ
+          label: "INSTANTÉ"
           icon: mdi:flash
         card:
           type: custom:streamline-card
@@ -1653,7 +1675,7 @@ cards:
             title: D.U.T. SdB (Soufflant)
             entity_sensor: sensor.dut_sdb_total
             color: rgb(218, 112, 214)
-            annot_text: Oubli / Sauna !
+            annot_text: "Oubli / Sauna !"
             hours: 1.5
             crit_zone: 0.75
             thresh_yellow: 0.3
@@ -1738,11 +1760,11 @@ cards:
                   }
             card:
               type: custom:text-divider-row
-              text: Sèche-Serviettes Salle de Bain
+              text: "Sèche-Serviettes Salle de Bain"
   - type: custom:streamline-card
     template: clim_voltage_ring-tile
     variables:
-      card_name: Sèche-serv. SdB (V)
+      card_name: "Sèche-serv. SdB (V)"
       entity: sensor.prise_seche_serviette_salle_de_bain_nous_voltage
     grid_options:
       columns: 6
@@ -1750,7 +1772,7 @@ cards:
   - type: custom:streamline-card
     template: clim_ampere_ring-tile
     variables:
-      card_name: Sèche-Serv. SdB (A)
+      card_name: "Sèche-Serv. SdB (A)"
       entity: sensor.prise_seche_serviette_salle_de_bain_nous_current
     grid_options:
       columns: 6
@@ -1765,13 +1787,13 @@ cards:
       swipeable: true
     tabs:
       - attributes:
-          label: INSTANTANÉ
+          label: "INSTANTÉ"
           icon: mdi:flash
         card:
           type: custom:streamline-card
           template: conso_temps_reel_clim_rad
           variables:
-            card_title: Conso. Temps Réel Sèche-Serv. Salle de Bain
+            card_title: "Conso. Temps Réel Sèche-Serv. Salle de Bain"
             energy_entity: sensor.prise_seche_serviette_salle_de_bain_nous_power
             energy_color: rgb(218, 112, 214)
             current_entity: sensor.prise_seche_serviette_salle_de_bain_nous_current
@@ -1789,7 +1811,7 @@ cards:
           type: custom:streamline-card
           template: conso_mensuelle_clim
           variables:
-            title: Conso. mensuel Sèche-serviettes SdB
+            title: "Conso. mensuel Sèche-serviettes SdB"
             energy_entity: sensor.prise_seche_serviette_salle_de_bain_nous_energy
             energy_name: Conso. jours en cours
             energy_color: rgb(218, 112, 214)
@@ -1804,10 +1826,10 @@ cards:
           type: custom:streamline-card
           template: apex_dut_piece
           variables:
-            title: D.U.T. SdB (Sèche-Serv.)
+            title: "D.U.T. SdB (Sèche-Serv.)"
             entity_sensor: sensor.dut_sdb_total
             color: rgb(218, 112, 214)
-            annot_text: Oubli / Sauna !
+            annot_text: "Oubli / Sauna !"
             hours: 1.5
             crit_zone: 0.75
             thresh_yellow: 0.3
@@ -1897,7 +1919,7 @@ cards:
       - type: entity
         show_state: true
         show_icon: true
-        entity: climate.clim_chambre_rm4_mini
+        entity: climate.clim_chambre_nodon
         color: state
         tap_action:
           action: more-info
@@ -1905,7 +1927,7 @@ cards:
         state_content:
           - name
           - temperature
-        name: Réglé à
+        name: "Réglé à"
       - type: entity
         show_state: true
         show_icon: true
@@ -1929,7 +1951,8 @@ cards:
         }
   - type: custom:bubble-card
     card_type: climate
-    entity: climate.clim_chambre_rm4_mini
+    card_layout: large-2-rows
+    entity: climate.clim_chambre_nodon
     state_color: true
     icon: mdi:air-conditioner
     show_icon: true
@@ -1938,18 +1961,22 @@ cards:
     show_attribute: true
     attribute: fan_mode
     sub_button:
-      - name: HVAC modes menu
-        select_attribute: hvac_modes
-        state_background: false
-        show_arrow: true
-        show_background: true
-        show_attribute: false
-      - entity: climate.clim_chambre_rm4_mini
-        select_attribute: fan_modes
-        show_background: true
-        state_background: false
-        show_icon: true
-        icon: mdi:fan
+      main:
+        - name: HVAC modes menu
+          select_attribute: hvac_modes
+          state_background: false
+          show_arrow: true
+          show_background: true
+          show_attribute: false
+          sub_button_type: select
+        - entity: climate.clim_chambre_nodon
+          select_attribute: fan_modes
+          show_background: true
+          state_background: false
+          show_icon: true
+          icon: mdi:fan
+          sub_button_type: select
+      bottom: []
     styles: |
       ha-card {
         --bubble-state-climate-fan-only-color: #008B8B;
@@ -1981,7 +2008,7 @@ cards:
       swipeable: true
     tabs:
       - attributes:
-          label: INSTANTANÉ
+          label: "INSTANTÉ"
           icon: mdi:flash
         card:
           type: custom:streamline-card
@@ -2080,24 +2107,12 @@ cards:
           background: none !important;
           margin: -22px 0px 0px 0px;
         }
-  - type: vertical-stack
+  - type: custom:bubble-card
+    card_type: pop-up
+    hash: "#tendances"
+    button_type: name
+    icon: mdi:delta
+    name: "CALCUL DU DELTA Intérieur <-> Extérieur"
     cards:
-      - type: custom:bubble-card
-        card_type: pop-up
-        hash: "#tendances"
-        show_header: true
-        force_icon: false
-        show_state: false
-        show_last_changed: false
-        show_attribute: false
-        button_type: name
-        name: CALCUL DU DELTA Intérieur <-> Extérieur
-        icon: mdi:delta
-        show_icon: true
-        show_name: true
-        card_layout: normal
-        hide_backdrop: false
-        close_on_click: false
-        bg_opacity: "0"
       - type: custom:streamline-card
         template: calcule_temp_cible

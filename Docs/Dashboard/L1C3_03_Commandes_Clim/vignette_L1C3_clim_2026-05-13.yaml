@@ -19,7 +19,7 @@ entities:
   - climate.radiateur_cuisine
   - climate.clim_bureau_rm4_mini
   - climate.soufflant_salle_de_bain
-  - climate.clim_chambre_nodon
+  - climate.clim_chambre_rm4_mini
 triggers_update:
   - sensor.temperature_moyenne_interieure
   - sensor.delta_ademe_recommande
@@ -40,7 +40,7 @@ triggers_update:
   - climate.radiateur_cuisine
   - climate.clim_bureau_rm4_mini
   - climate.soufflant_salle_de_bain
-  - climate.clim_chambre_nodon
+  - climate.clim_chambre_rm4_mini
 tap_action:
   action: navigate
   navigation_path: /dashboard-tablette/clim
@@ -188,7 +188,7 @@ custom_fields:
       const consigneCuisine = safeState('climate.radiateur_cuisine');
       const consigneBureau = safeState('climate.clim_bureau_rm4_mini');
       const consigneSdB = safeState('climate.soufflant_salle_de_bain');
-      const consigneChambre = safeState('climate.clim_chambre_nodon');
+      const consigneChambre = safeState('climate.clim_chambre_rm4_mini');
       return [
         `<span style="display: block; text-align: right; line-height: 1.2; color: lightgreen;">${tempMoyenne}°C</span>`,
         `<span style="display: block; text-align: right; line-height: 1.2; color: ${deltaColor};">${ademeDisplayValue}</span>`,
