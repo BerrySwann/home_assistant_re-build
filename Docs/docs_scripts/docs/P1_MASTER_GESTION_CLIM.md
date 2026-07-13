@@ -5,6 +5,7 @@
 > **Mode :** `queued` — max: 10
 > **Appelé par :** Automation A0 (JOUR) + Automation B0 (NUIT)
 > **Créé par :** Refactoring LLM local — 2026-06
+> **MàJ :** 2026-07-08 — CHAMBRE migrée NodOn IRB-4-1-00 (consigne en plage low/high)
 
 ---
 
@@ -92,7 +93,11 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 **Cas standard (parallel) :**
 - SALON : si `switch.clim_salon_nous ON` et `input_boolean.clim_salon_arret_securise_en_cours OFF` → `climate.set_temperature`
 - BUREAU : idem avec clim bureau
-- CHAMBRE : idem avec clim chambre
+- CHAMBRE : mêmes conditions, MAIS en **2 actions** (NodOn = plage low/high uniquement,
+  `supported_features: 394`, pas d'attribut `temperature`) :
+  1. `climate.set_hvac_mode` (off si `sensor_update` + déjà off, sinon `mode_saison`)
+  2. `climate.set_temperature` avec `target_temp_low` (= cible si heat, sinon 16 parquée)
+     et `target_temp_high` (= cible si cool, sinon 30 parquée)
 - `sensor_update` + clim déjà en `off` → on ne la redémarre pas (protection intentionnelle)
 - Délai 2s
 - Notif résumé `[AJ/AN] presence — Mode / Températures`
@@ -127,8 +132,8 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 |:---|:---|
 | `climate.clim_salon_rm4_mini` | `set_temperature` (hvac_mode + temperature) |
 | `climate.clim_bureau_rm4_mini` | `set_temperature` |
-| `climate.clim_chambre_rm4_mini` | `set_temperature` |
-| `climate.clim_salon_rm4_mini` / `bureau` / `chambre` | `set_hvac_mode: off` (urgence fenêtre) |
+| `climate.clim_chambre_nodon` | `set_hvac_mode` puis `set_temperature` (`target_temp_low`/`high`) |
+| `climate.clim_salon_rm4_mini` / `clim_bureau_rm4_mini` / `clim_chambre_nodon` | `set_hvac_mode: off` (urgence fenêtre) |
 
 ### Notifications
 | Service | Titre | Déclenchement |
