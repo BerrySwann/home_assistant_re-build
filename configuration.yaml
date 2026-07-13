@@ -15,6 +15,7 @@
 # - utility_meter: !include_dir_merge_named utility_meter/ (compteurs nommés)
 # - command_line : !include_dir_merge_list command_line/   (cmds shell→sensors)
 # - shell_command: !include_dir_merge_named shell_command/
+# - mqtt         : binary_sensor !include_dir_merge_list mqtt/binary_sensor/ (capteurs MQTT manuels)
 # - mqtt         : binary_sensor: !include_dir_merge_list mqtt/binary_sensor/ (capteurs MQTT manuels)
 # - camera       : DÉSACTIVÉ (obsolète — supprimé de la config active)
 # - notify       : SUPPRIMÉ YAML (migré vers intégration File UI — HA 2024.12+)
