@@ -11308,3 +11308,7 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [WIFI] | 13/07 16:30 | Hyg:0.02 | Cuis:0.07 | Froid:0.91 | Chauff:5.64 | Avg 4:341.8 | Multi:0.95 | Lum:0.15 | Autres:0.14 | Ti:27.3°C | Ext:33.1°C | DUT S/R/B/C:5.7/0.0/5.9/4.7
 [2] en [WIFI] | 13/07 16:45 | Hyg:0.02 | Cuis:0.07 | Froid:0.92 | Chauff:5.84 | Avg 4:348.7 | Multi:1.05 | Lum:0.15 | Autres:0.14 | Ti:27.3°C | Ext:33.1°C | DUT S/R/B/C:6.0/0.0/6.1/4.7
 [2] en [WIFI] | 13/07 17:00 | Hyg:0.02 | Cuis:0.07 | Froid:0.93 | Chauff:6.03 | Avg 4:354.7 | Multi:1.15 | Lum:0.16 | Autres:0.14 | Ti:27.3°C | Ext:33.5°C | DUT S/R/B/C:6.2/0.0/6.4/4.7
+[2] en [WIFI] | 13/07 17:15 | Hyg:0.02 | Cuis:0.09 | Froid:0.94 | Chauff:6.24 | Avg 4:361.8 | Multi:1.25 | Lum:0.17 | Autres:0.14 | Ti:27.2°C | Ext:33.7°C | DUT S/R/B/C:6.5/0.0/6.6/4.7
+[2] en [WIFI] | 13/07 17:30 | Hyg:0.02 | Cuis:0.09 | Froid:0.94 | Chauff:6.48 | Avg 4:370.2 | Multi:1.25 | Lum:0.18 | Autres:0.14 | Ti:27.2°C | Ext:33.9°C | DUT S/R/B/C:6.7/0.0/6.9/4.7
+[2] en [WIFI] | 13/07 17:45 | Hyg:0.02 | Cuis:0.09 | Froid:0.96 | Chauff:6.66 | Avg 4:375.2 | Multi:1.35 | Lum:0.19 | Autres:0.14 | Ti:27.2°C | Ext:32.9°C | DUT S/R/B/C:7.0/0.0/7.1/4.7
+[2] en [WIFI] | 13/07 18:00 | Hyg:0.02 | Cuis:0.09 | Froid:0.99 | Chauff:6.88 | Avg 4:382.2 | Multi:1.45 | Lum:0.21 | Autres:0.14 | Ti:27.1°C | Ext:32.9°C | DUT S/R/B/C:7.2/0.0/7.4/4.7
