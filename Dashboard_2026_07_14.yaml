@@ -2507,7 +2507,7 @@ views:
                       const consigneCuisine = safeState('climate.radiateur_cuisine');
                       const consigneBureau = safeState('climate.clim_bureau_rm4_mini');
                       const consigneSdB = safeState('climate.soufflant_salle_de_bain');
-                      const consigneChambre = safeState('climate.clim_chambre_nodon');
+                      const consigneChambre = safeState('sensor.temperature_corrige_chambre');
 
                       return [
                         `<span style="display: block; text-align: right; line-height: 1.2; color: lightgreen;">${tempMoyenne}°C</span>`,
@@ -2662,7 +2662,7 @@ views:
                   - climate.radiateur_cuisine
                   - climate.clim_bureau_rm4_mini
                   - climate.soufflant_salle_de_bain
-                  - climate.clim_chambre_nodon
+                  - climate.clim_chambre_rm4_mini
                   - sensor.salon_power_status
                   - sensor.cuisine_power_status
                   - sensor.bureau_power_status
@@ -2688,7 +2688,7 @@ views:
                   - climate.radiateur_cuisine
                   - climate.clim_bureau_rm4_mini
                   - climate.soufflant_salle_de_bain
-                  - climate.clim_chambre_nodon
+                  - climate.clim_chambre_rm4_mini
                   - sensor.salon_power_status
                   - sensor.cuisine_power_status
                   - sensor.bureau_power_status
@@ -6634,7 +6634,7 @@ views:
                               border: none !important;
                               margin-top: -40px;
                             }
-                      - type: custom:entity-progress-card
+                      - type: custom:entity-progress-card-template
                         name: >
                           {% set sunrise =
                           as_datetime(states('sensor.sun_next_rising')) %} {%
@@ -11042,7 +11042,7 @@ views:
               - type: entity
                 show_state: true
                 show_icon: true
-                entity: climate.clim_chambre_nodon
+                entity: climate.clim_chambre_rm4_mini
                 color: state
                 tap_action:
                   action: more-info
@@ -11074,6 +11074,7 @@ views:
               navigation_path: "#chambre"
           - type: custom:bubble-card
             card_type: climate
+            card_layout: large-2-rows
             entity: climate.clim_chambre_nodon
             state_color: true
             icon: mdi:air-conditioner
@@ -11083,18 +11084,22 @@ views:
             show_attribute: true
             attribute: fan_mode
             sub_button:
-              - name: HVAC modes menu
-                select_attribute: hvac_modes
-                state_background: false
-                show_arrow: true
-                show_background: true
-                show_attribute: false
-              - entity: climate.clim_chambre_nodon
-                select_attribute: fan_modes
-                show_background: true
-                state_background: false
-                show_icon: true
-                icon: mdi:fan
+              main:
+                - name: HVAC modes menu
+                  select_attribute: hvac_modes
+                  state_background: false
+                  show_arrow: true
+                  show_background: true
+                  show_attribute: false
+                  sub_button_type: select
+                - entity: climate.clim_chambre_nodon
+                  select_attribute: fan_modes
+                  show_background: true
+                  state_background: false
+                  show_icon: true
+                  icon: mdi:fan
+                  sub_button_type: select
+              bottom: []
             styles: |
               ha-card {
                 --bubble-state-climate-fan-only-color: #008B8B;
@@ -12461,7 +12466,7 @@ views:
                       text: Chauffage Salle de Bain
           - type: heading
             icon: mdi:bathtub
-            heading: Radiateur SdB
+            heading: Soullant SdB
             heading_style: title
             badges:
               - type: entity
@@ -12768,7 +12773,7 @@ views:
               - type: entity
                 show_state: true
                 show_icon: true
-                entity: remote.clim_chambre
+                entity: binary_sensor.clim_chambre_nodon_en_ligne
                 color: state
               - type: entity
                 show_state: true
@@ -13021,6 +13026,7 @@ views:
                   **Jours de la semaine :** {{
                   state_attr('switch.schedule_clim_du_salon_week', 'weekdays') |
                   join(', ') }}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13054,6 +13060,7 @@ views:
                   | length) %}
                     - **{{ timeslots[i] }}** -> {{ actions[i].data.temperature }}°C -> Mode: {{ actions[i].data.hvac_mode }}
                   {% endfor %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13087,6 +13094,7 @@ views:
                   <br> **Prochain déclenchement** {% if next_trigger is not none
                   %} à {{ next_trigger | as_timestamp |
                   timestamp_custom('%H:%M') }} {% else %} Non défini {% endif %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13105,6 +13113,7 @@ views:
                   **Jours de la semaine :** {{
                   state_attr('switch.schedule_clim_du_salon_week_end',
                   'weekdays') | join(', ') }}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13137,6 +13146,7 @@ views:
                     - **{{ timeslots[i] }}** -> {{ actions[i].data.temperature }}°C -> Mode: {{ actions[i].data.hvac_mode }}
                   {% endfor %}
                    <br> <br> <br>
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13170,6 +13180,7 @@ views:
                   timestamp_custom('%d/%m/%y') }} à {{ next_trigger |
                   as_timestamp | timestamp_custom('%H:%M') }} {% else %} Non
                   défini {% endif %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13223,7 +13234,7 @@ views:
             type: clock
             grid_options:
               columns: full
-              rows: 2
+              rows: auto
           - include:
               - person
               - person.eric
@@ -13269,6 +13280,7 @@ views:
                   **Jours de la semaine :** {{
                   state_attr('switch.schedule_radiateur_cuisine_week',
                   'weekdays') | join(', ') }}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13282,6 +13294,8 @@ views:
                 entities:
                   - entity: switch.schedule_radiateur_cuisine_week
                     name: Programmation Radiateur Cuisine Semaine
+                state_color: true
+                show_header_toggle: false
                 card_mod:
                   style: |
                     ha-card {
@@ -13292,14 +13306,21 @@ views:
                       padding: 0;
                     }
               - type: markdown
-                content: >
+                content: |
                   {% set entity_id = 'switch.schedule_radiateur_cuisine_week' %}
-                  {% set timeslots = state_attr(entity_id, 'timeslots') %} {%
-                  set actions = state_attr(entity_id, 'actions') %}
+                  {% set timeslots = state_attr(entity_id, 'timeslots') %}
+                  {% set actions = state_attr(entity_id, 'actions') %}
 
-                  **Créneaux horaires et actions :** {% for i in range(timeslots
-                  | length) %}
-                    - **{{ timeslots[i] }}** -> {% if actions[i].data is defined and actions[i].data.temperature is defined %} {{ actions[i].data.temperature }}°C {% else %} Non défini {% endif %} -> Mode: {% if actions[i].data is defined and actions[i].data.hvac_mode is defined %} {{ actions[i].data.hvac_mode }} {% else %} Non défini {% endif %} {% endfor %}
+                  **Créneaux horaires et actions :**
+                  {% for i in range(timeslots | length) %}
+                    {% set action = actions[i] %}
+                    {% if action.service == 'climate.turn_off' %}
+                    - **{{ timeslots[i] }}** -> Off -> Mode: Off
+                    {% else %}
+                    - **{{ timeslots[i] }}** -> {{ action.data.temperature }}°C -> Mode: {{ action.data.hvac_mode }}
+                    {% endif %}
+                  {% endfor %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13318,15 +13339,15 @@ views:
                   set timeslots = state_attr(entity_id, 'timeslots') %} {% set
                   actions = state_attr(entity_id, 'actions') %}
 
-                  **Créneau actuel :** {% if current_slot is not none %} {{
-                  timeslots[current_slot] }} -> {% if actions[current_slot].data
-                  is defined and actions[current_slot].data.temperature is
-                  defined %} {{ actions[current_slot].data.temperature }}°C {%
-                  else %} Non défini {% endif %} -> Mode: {% if
-                  actions[current_slot].data is defined and
-                  actions[current_slot].data.hvac_mode is defined %} {{
-                  actions[current_slot].data.hvac_mode }} {% else %} Non défini
-                  {% endif %} {% else %} Non défini {% endif %}
+                  **Créneau actuel :** {% if current_slot is not none %}{% set
+                  ca = actions[current_slot] %}{% if ca.service ==
+                  'climate.turn_off' %}{{ timeslots[current_slot] }} -> Off ->
+                  Mode: Off{% else %}{{ timeslots[current_slot] }} -> {{
+                  ca.data.temperature }}°C -> Mode: {{ ca.data.hvac_mode }}{%
+                  endif %}{% else %}{% if next_trigger is not none %}Off ->
+                  jusqu'au : {{ next_trigger | as_timestamp |
+                  timestamp_custom('%d/%m/%Y à %H:%M') }}{% else %}Non défini{%
+                  endif %}{% endif %}
 
                   <br> **Prochain créneau :** {% if next_slot is not none %} {{
                   timeslots[next_slot] }} -> {% if actions[next_slot].data is
@@ -13340,6 +13361,7 @@ views:
                   <br> **Prochain déclenchement** {% if next_trigger is not none
                   %} à {{ next_trigger | as_timestamp |
                   timestamp_custom('%H:%M') }} {% else %} Non défini {% endif %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13358,6 +13380,7 @@ views:
                   **Jours de la semaine :** {{
                   state_attr('switch.schedule_radiateur_cuisine_week_end',
                   'weekdays') | join(', ') }}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13369,6 +13392,7 @@ views:
                 entities:
                   - entity: switch.schedule_radiateur_cuisine_week_end
                     name: Programmation radiateur Cuisine Week-end
+                state_color: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13381,20 +13405,24 @@ views:
               - type: markdown
                 content: >
                   {% set entity_id =
-                  'switch.schedule_radiateur_cuisine_week_end' %} {% set
-                  timeslots = state_attr(entity_id, 'timeslots') %} {% set
-                  actions = state_attr(entity_id, 'actions') %}
+                  'switch.schedule_radiateur_cuisine_week_end' %}
 
-                  **Créneaux horaires et actions :**  {% for i in
-                  range(timeslots | length)%} 
+                  {% set timeslots = state_attr(entity_id, 'timeslots') %}
 
-                  - **{{ timeslots[i] }}** -> {% if actions[i].data is defined
-                  and actions[i].data.temperature is defined %} {{
-                  actions[i].data.temperature }}°C {% else %} Non défini {%
-                  endif %} -> Mode: {% if actions[i].data is defined and
-                  actions[i].data.hvac_mode is defined %} {{
-                  actions[i].data.hvac_mode }} {% else %} Non défini {% endif %}
+                  {% set actions = state_attr(entity_id, 'actions') %}
+
+
+                  **Créneaux horaires et actions :**
+
+                  {% for i in range(timeslots | length) %}
+                    {% set action = actions[i] %}
+                    {% if action.service == 'climate.turn_off' %}
+                    - **{{ timeslots[i] }}** -> Off -> Mode: Off
+                    {% else %}
+                    - **{{ timeslots[i] }}** -> {{ action.data.temperature }}°C -> Mode: {{ action.data.hvac_mode }}
+                    {% endif %}
                   {% endfor %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13412,15 +13440,15 @@ views:
                   timeslots = state_attr(entity_id, 'timeslots') %} {% set
                   actions = state_attr(entity_id, 'actions') %}
 
-                  **Créneau actuel :** {% if current_slot is not none %} {{
-                  timeslots[current_slot] }} -> {% if actions[current_slot].data
-                  is defined and actions[current_slot].data.temperature is
-                  defined %} {{ actions[current_slot].data.temperature }}°C {%
-                  else %} Non défini {% endif %} -> Mode: {% if
-                  actions[current_slot].data is defined and
-                  actions[current_slot].data.hvac_mode is defined %} {{
-                  actions[current_slot].data.hvac_mode }} {% else %} Non défini
-                  {% endif %} {% else %} Non défini {% endif %}
+                  **Créneau actuel :** {% if current_slot is not none %}{% set
+                  ca = actions[current_slot] %}{% if ca.service ==
+                  'climate.turn_off' %}{{ timeslots[current_slot] }} -> Off ->
+                  Mode: Off{% else %}{{ timeslots[current_slot] }} -> {{
+                  ca.data.temperature }}°C -> Mode: {{ ca.data.hvac_mode }}{%
+                  endif %}{% else %}{% if next_trigger is not none %}Off ->
+                  jusqu'au : {{ next_trigger | as_timestamp |
+                  timestamp_custom('%d/%m/%Y à %H:%M') }}{% else %}Non défini{%
+                  endif %}{% endif %}
 
                   <br> **Prochain créneau :** {% if next_slot is not none %} {{
                   timeslots[next_slot] }} -> {% if actions[next_slot].data is
@@ -13436,6 +13464,7 @@ views:
                   timestamp_custom('%d/%m/%y') }} à {{ next_trigger |
                   as_timestamp | timestamp_custom('%H:%M') }} {% else %} Non
                   défini {% endif %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13535,6 +13564,7 @@ views:
                   **Jours de la semaine :** {{
                   state_attr('switch.schedule_clim_du_bureau_week', 'weekdays')
                   | join(', ') }}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13569,6 +13599,7 @@ views:
                   | length) %}
                     - **{{ timeslots[i] }}** -> {{ actions[i].data.temperature }}°C -> Mode: {{ actions[i].data.hvac_mode }}
                   {% endfor %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13602,6 +13633,7 @@ views:
                   <br> **Prochain déclenchement** {% if next_trigger is not none
                   %} à {{ next_trigger | as_timestamp |
                   timestamp_custom('%H:%M') }} {% else %} Non défini {% endif %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13620,6 +13652,7 @@ views:
                   **Jours de la semaine :** {{
                   state_attr('switch.schedule_clim_du_bureau_week_end',
                   'weekdays') | join(', ') }}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13653,6 +13686,7 @@ views:
                     - **{{ timeslots[i] }}** -> {{ actions[i].data.temperature }}°C -> Mode: {{ actions[i].data.hvac_mode }}
                   {% endfor %}
                    <br> <br> <br>
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13686,6 +13720,7 @@ views:
                   timestamp_custom('%d/%m/%y') }} à {{ next_trigger |
                   as_timestamp | timestamp_custom('%H:%M') }} {% else %} Non
                   défini {% endif %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13780,9 +13815,11 @@ views:
                 content: >
                   # Soufflant SdB Semaine
 
+
                   **Jours de la semaine :** {{
                   state_attr('switch.schedule_soufflant_salle_de_bain_week',
                   'weekdays') | join(', ') }}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13813,10 +13850,17 @@ views:
                   timeslots = state_attr(entity_id, 'timeslots') %} {% set
                   actions = state_attr(entity_id, 'actions') %}
 
-                  **Créneaux horaires et actions :** {% for i in range(timeslots
-                  | length) %}
-                    - **{{ timeslots[i] }}** -> {{ actions[i].data.temperature }}°C -> Mode: {{ actions[i].data.hvac_mode }}
-                  {% endfor %}
+                  **Créneaux horaires et actions :**
+
+                  {% for i in range(timeslots | length) %} {% set action =
+                  actions[i] %} {% if action.service == 'climate.turn_off' %}
+
+                    - **{{ timeslots[i] }}** -> Off -> Mode: Off
+                  {% else %}
+
+                    - **{{ timeslots[i] }}** -> {{ action.data.temperature }}°C -> Mode: {{ action.data.hvac_mode }}
+                  {% endif %} {% endfor %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13836,21 +13880,29 @@ views:
                   timeslots = state_attr(entity_id, 'timeslots') %} {% set
                   actions = state_attr(entity_id, 'actions') %}
 
-                  **Créneau actuel :** {% if current_slot is not none %} {{
-                  timeslots[current_slot] }} -> {{
-                  actions[current_slot].data.temperature }}°C -> Mode: {{
-                  actions[current_slot].data.hvac_mode }} {% else %} Non défini
-                  {% endif %}
+                  **Créneau actuel :** {% if current_slot is not none %}{% set
+                  ca = actions[current_slot] %}{% if ca.service ==
+                  'climate.turn_off' %}{{ timeslots[current_slot] }} -> Off ->
+                  Mode: Off{% else %}{{ timeslots[current_slot] }} -> {{
+                  ca.data.temperature }}°C -> Mode: {{ ca.data.hvac_mode }}{%
+                  endif %}{% else %}{% if next_trigger is not none %}Off ->
+                  jusqu'au : {{ next_trigger | as_timestamp |
+                  timestamp_custom('%d/%m/%Y à %H:%M') }}{% else %}Non défini{%
+                  endif %}{% endif %}
 
-                  <br> **Prochain créneau :** {% if next_slot is not none %} {{
-                  timeslots[next_slot] }} -> {{
-                  actions[next_slot].data.temperature }}°C -> Mode: {{
-                  actions[next_slot].data.hvac_mode }} {% else %} Non défini {%
+
+                  **Prochain créneau :** {% if next_slot is not none %}{% set na
+                  = actions[next_slot] %}{% if na.service == 'climate.turn_off'
+                  %}{{ timeslots[next_slot] }} -> Off -> Mode: Off{% else %}{{
+                  timeslots[next_slot] }} -> {{ na.data.temperature }}°C ->
+                  Mode: {{ na.data.hvac_mode }}{% endif %}{% else %}Non défini{%
                   endif %}
 
-                  <br> **Prochain déclenchement :** {% if next_trigger is not
-                  none %} à {{ next_trigger | as_timestamp |
-                  timestamp_custom('%H:%M') }} {% else %} Non défini {% endif %}
+
+                  **Prochain déclenchement :** {% if next_trigger is not none
+                  %}à {{ next_trigger | as_timestamp | timestamp_custom('%H:%M')
+                  }}{% else %}Non défini{% endif %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13866,20 +13918,24 @@ views:
                 content: >
                   # Soufflant SdB Week-End
 
+
                   **Jours de la semaine :** {{
                   state_attr('switch.schedule_soufflant_salle_de_bain_week_end',
                   'weekdays') | join(', ') }}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
                       border: none !important;
                       box-shadow: none !important;
                       background: none !important;
+                      margin: 0;
+                      padding: 0;
                     }
               - type: entities
                 entities:
                   - entity: switch.schedule_soufflant_salle_de_bain_week_end
-                    name: Programmation Souflant SdB Week-End
+                    name: Programmation Soufflant SdB Semaine
                 state_color: true
                 card_mod:
                   style: |
@@ -13889,7 +13945,7 @@ views:
                       background: none !important;
                       margin: 0;
                       padding: 0;
-                    }   
+                    }
               - type: markdown
                 content: >
                   {% set entity_id =
@@ -13898,15 +13954,23 @@ views:
                   actions = state_attr(entity_id, 'actions') %}
 
                   **Créneaux horaires et actions :** {% for i in range(timeslots
-                  | length) %}
-                    - **{{ timeslots[i] }}** -> {{ actions[i].data.temperature }}°C -> Mode: {{ actions[i].data.hvac_mode }}
-                  {% endfor %}
+                  | length) %} {% set action = actions[i] %} {% if
+                  action.service == 'climate.turn_off' %}
+
+                    - **{{ timeslots[i] }}** -> Off -> Mode: Off
+                  {% else %}
+
+                    - **{{ timeslots[i] }}** -> {{ action.data.temperature }}°C -> Mode: {{ action.data.hvac_mode }}
+                  {% endif %} {% endfor %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
                       border: none !important;
                       box-shadow: none !important;
                       background: none !important;
+                      margin: 0;
+                      padding: 0;
                     }
               - type: markdown
                 content: >
@@ -13918,23 +13982,29 @@ views:
                   timeslots = state_attr(entity_id, 'timeslots') %} {% set
                   actions = state_attr(entity_id, 'actions') %}
 
-                  <br><br><br> **Créneau actuel :** {% if current_slot is not
-                  none %} {{ timeslots[current_slot] }} -> {{
-                  actions[current_slot].data.temperature }}°C -> Mode: {{
-                  actions[current_slot].data.hvac_mode }} {% else %} Non défini
-                  {% endif %}
+                  **Créneau actuel :** {% if current_slot is not none %}{% set
+                  ca = actions[current_slot] %}{% if ca.service ==
+                  'climate.turn_off' %}{{ timeslots[current_slot] }} -> Off ->
+                  Mode: Off{% else %}{{ timeslots[current_slot] }} -> {{
+                  ca.data.temperature }}°C -> Mode: {{ ca.data.hvac_mode }}{%
+                  endif %}{% else %}{% if next_trigger is not none %}Off ->
+                  jusqu'au : {{ next_trigger | as_timestamp |
+                  timestamp_custom('%d/%m/%Y à %H:%M') }}{% else %}Non défini{%
+                  endif %}{% endif %}
 
-                  <br> **Prochain créneau :** {% if next_slot is not none %} {{
-                  timeslots[next_slot] }} -> {{
-                  actions[next_slot].data.temperature }}°C -> Mode: {{
-                  actions[next_slot].data.hvac_mode }} {% else %} Non défini {%
+
+                  **Prochain créneau :** {% if next_slot is not none %}{% set na
+                  = actions[next_slot] %}{% if na.service == 'climate.turn_off'
+                  %}{{ timeslots[next_slot] }} -> Off -> Mode: Off{% else %}{{
+                  timeslots[next_slot] }} -> {{ na.data.temperature }}°C ->
+                  Mode: {{ na.data.hvac_mode }}{% endif %}{% else %}Non défini{%
                   endif %}
 
-                  <br> **Prochain déclenchement :** {% if next_trigger is not
-                  none %} le {{ next_trigger | as_timestamp |
-                  timestamp_custom('%d/%m/%y') }} à {{ next_trigger |
-                  as_timestamp | timestamp_custom('%H:%M') }} {% else %} Non
-                  défini {% endif %}
+
+                  **Prochain déclenchement :** {% if next_trigger is not none
+                  %}à {{ next_trigger | as_timestamp | timestamp_custom('%H:%M')
+                  }}{% else %}Non défini{% endif %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -13991,7 +14061,7 @@ views:
               columns: full
               rows: 2
           - include:
-              - climate.clim_chambre_nodon
+              - climate.clim_chambre_rm4_mini
             exclude: []
             discover_existing: true
             title: Planificateur Clim. Chambre
@@ -14033,6 +14103,7 @@ views:
                   **Jours de la semaine :** {{
                   state_attr('switch.schedule_clim_de_la_chambre_week',
                   'weekdays') | join(', ') }}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -14066,6 +14137,7 @@ views:
                   | length) %}
                     - **{{ timeslots[i] }}** -> {{ actions[i].data.temperature }}°C -> Mode: {{ actions[i].data.hvac_mode }}
                   {% endfor %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -14099,6 +14171,7 @@ views:
                   <br> **Prochain déclenchement :** {% if next_trigger is not
                   none %} à {{ next_trigger | as_timestamp |
                   timestamp_custom('%H:%M') }} {% else %} Non défini {% endif %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -14117,6 +14190,7 @@ views:
                   **Jours de la semaine :** {{
                   state_attr('switch.schedule_clim_de_la_chambre_week_end',
                   'weekdays') | join(', ') }}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -14149,6 +14223,7 @@ views:
                   | length) %}
                     - **{{ timeslots[i] }}** -> {{ actions[i].data.temperature }}°C -> Mode: {{ actions[i].data.hvac_mode }}
                   {% endfor %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -14183,6 +14258,7 @@ views:
                   timestamp_custom('%d/%m/%y') }} à {{ next_trigger |
                   as_timestamp | timestamp_custom('%H:%M') }} {% else %} Non
                   défini {% endif %}
+                text_only: true
                 card_mod:
                   style: |
                     ha-card {
@@ -19364,12 +19440,12 @@ views:
               colorize_states: true
             yaxis:
               - id: temp
-                max: ~15
+                max: auto
                 decimals: 0
                 opposite: false
               - id: hours
                 min: 0
-                max: 10
+                max: auto
                 decimals: 0
                 opposite: true
                 apex_config:
@@ -19594,7 +19670,7 @@ views:
                     entity_sensor: sensor.dut_clim_salon
                     color: rgb(174,68,90)
                     annot_text: Zone Critique
-                    hours: 13
+                    hours: auto
                     crit_zone: 5
                     thresh_yellow: 4
                     thresh_orange: 6
@@ -19816,7 +19892,7 @@ views:
                     entity_sensor: sensor.dut_radiateur_cuisine
                     color: rgb(168, 136, 181)
                     annot_text: Zone Critique
-                    hours: 6
+                    hours: auto
                     crit_zone: 5
                     thresh_yellow: 4
                     thresh_orange: 6
@@ -20040,7 +20116,7 @@ views:
                     entity_sensor: sensor.dut_clim_bureau
                     color: orange
                     annot_text: Zone Critique
-                    hours: 10
+                    hours: auto
                     crit_zone: 5
                     thresh_yellow: 4
                     thresh_orange: 6
@@ -20294,7 +20370,7 @@ views:
                     entity_sensor: sensor.dut_sdb_total
                     color: rgb(218, 112, 214)
                     annot_text: Oubli / Sauna !
-                    hours: 1.5
+                    hours: auto
                     crit_zone: 0.75
                     thresh_yellow: 0.3
                     thresh_orange: 0.5
@@ -20448,7 +20524,7 @@ views:
                     entity_sensor: sensor.dut_sdb_total
                     color: rgb(218, 112, 214)
                     annot_text: Oubli / Sauna !
-                    hours: 1.5
+                    hours: auto
                     crit_zone: 0.75
                     thresh_yellow: 0.3
                     thresh_orange: 0.5
@@ -20569,6 +20645,7 @@ views:
                 }
           - type: custom:bubble-card
             card_type: climate
+            card_layout: large-2-rows
             entity: climate.clim_chambre_nodon
             state_color: true
             icon: mdi:air-conditioner
@@ -20578,18 +20655,22 @@ views:
             show_attribute: true
             attribute: fan_mode
             sub_button:
-              - name: HVAC modes menu
-                select_attribute: hvac_modes
-                state_background: false
-                show_arrow: true
-                show_background: true
-                show_attribute: false
-              - entity: climate.clim_chambre_nodon
-                select_attribute: fan_modes
-                show_background: true
-                state_background: false
-                show_icon: true
-                icon: mdi:fan
+              main:
+                - name: HVAC modes menu
+                  select_attribute: hvac_modes
+                  state_background: false
+                  show_arrow: true
+                  show_background: true
+                  show_attribute: false
+                  sub_button_type: select
+                - entity: climate.clim_chambre_nodon
+                  select_attribute: fan_modes
+                  show_background: true
+                  state_background: false
+                  show_icon: true
+                  icon: mdi:fan
+                  sub_button_type: select
+              bottom: []
             styles: |
               ha-card {
                 --bubble-state-climate-fan-only-color: #008B8B;
@@ -20664,7 +20745,7 @@ views:
                     entity_sensor: sensor.dut_clim_chambre
                     color: rgb(30,81,40)
                     annot_text: Zone de déperdition
-                    hours: 10
+                    hours: auto
                     crit_zone: 5
                     thresh_yellow: 4
                     thresh_orange: 6
@@ -23996,9 +24077,10 @@ views:
                     {% endif %}
 
                     /* --- SENSOR LOGIC --- */
-                    {% set watts = states(sensor_power) | float(0) | int %}
+                    {% set is_on = states('switch.prise_tete_de_lit_chambre') == 'on' %}
+                    {% set watts = states(sensor_power) | float(0) | int if is_on else 0 %}
                     {% set volts = states(sensor_voltage) | float(0) | int %}
-                    {% set amps  = states(sensor_current) | float(0) %}
+                    {% set amps  = states(sensor_current) | float(0) if is_on else 0 %}
 
                     /* --- mA vs A LOGIC --- */
                     {% if show_ma %}
