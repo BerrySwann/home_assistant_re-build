@@ -19,7 +19,7 @@ Déclenché par tout changement d'état des clims ou du mode saison.
 
 | Type | Entité |
 |:---|:---|
-| `state` (to: null) | `climate.clim_salon_rm4_mini` / `clim_bureau_rm4_mini` / `clim_chambre_nodon` |
+| `state` (to: null) | `climate.clim_salon_rm4_mini` / `clim_bureau_rm4_mini` / `clim_chambre_rm4_mini` |
 | `state` (to: null) | `sensor.mode_ete_hiver` |
 
 ---
@@ -41,7 +41,7 @@ Déclenché par tout changement d'état des clims ou du mode saison.
 | Entité | Rôle |
 |:---|:---|
 | `sensor.mode_ete_hiver` | Mode saison de référence |
-| `climate.clim_salon/bureau_rm4_mini` + `clim_chambre_nodon` | État courant |
+| `climate.clim_salon/bureau_rm4_mini` + `clim_chambre_rm4_mini` | État courant |
 | `switch.clim_*_nous` ×3 | Prise active ? |
 | `input_boolean.clim_*_arret_securise_en_cours` ×3 | Arrêt sécurisé actif ? |
 
@@ -49,11 +49,8 @@ Déclenché par tout changement d'état des clims ou du mode saison.
 
 | Entité | Action |
 |:---|:---|
-| `climate.clim_salon/bureau_rm4_mini` + `clim_chambre_nodon` (liste dynamique) | `set_hvac_mode: off` ou mode saison |
+| `climate.clim_salon/bureau_rm4_mini` + `clim_chambre_rm4_mini` (liste dynamique) | `set_hvac_mode: off` ou mode saison |
 
 ### Notifications
 
 | Titre | Condition |
-|:---|:---|
-| `⛔ SÉCURITÉ CLIM` | Force OFF |
-| `🔧 CORRECTION MODE` | Force mode saison |
