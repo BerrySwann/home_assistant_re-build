@@ -11347,3 +11347,4 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [WIFI] | 14/07 02:15 | Hyg:0.0 | Cuis:0.02 | Froid:0.11 | Chauff:1.2 | Avg 4:533.4 | Multi:0.25 | Lum:0.01 | Autres:0.02 | Ti:26.9°C | Ext:27.9°C | DUT S/R/B/C:1.6/0.0/2.1/0.0
 [2] en [WIFI] | 14/07 02:30 | Hyg:0.0 | Cuis:0.02 | Froid:0.12 | Chauff:1.32 | Avg 4:528.0 | Multi:0.25 | Lum:0.02 | Autres:0.03 | Ti:26.9°C | Ext:27.5°C | DUT S/R/B/C:1.8/0.0/2.3/0.0
 [2] en [WIFI] | 14/07 02:45 | Hyg:0.0 | Cuis:0.02 | Froid:0.13 | Chauff:1.44 | Avg 4:523.7 | Multi:0.26 | Lum:0.02 | Autres:0.03 | Ti:26.8°C | Ext:26.7°C | DUT S/R/B/C:2.0/0.0/2.6/0.0
+[2] en [WIFI] | 14/07 03:00 | Hyg:0.0 | Cuis:0.02 | Froid:0.14 | Chauff:1.56 | Avg 4:520.0 | Multi:0.26 | Lum:0.02 | Autres:0.03 | Ti:26.8°C | Ext:26.1°C | DUT S/R/B/C:2.2/0.0/2.8/0.0
