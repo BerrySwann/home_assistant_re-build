@@ -328,7 +328,7 @@
     entity_id:
     - climate.clim_salon_rm4_mini
     - climate.clim_bureau_rm4_mini
-    - climate.clim_chambre_rm4_mini
+    - climate.clim_chambre_nodon
     to:
   - trigger: state
     entity_id: sensor.mode_ete_hiver
@@ -345,9 +345,9 @@
         endif %} {# BUREAU #} {% if states('climate.clim_bureau_rm4_mini') != 'off'
         \n      and (is_state('switch.clim_bureau_nous', 'off') or is_state('input_boolean.clim_bureau_arret_securise_en_cours',
         'on')) %}\n  {% set liste = liste + ['climate.clim_bureau_rm4_mini'] %}\n{%
-        endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_rm4_mini') != 'off'
+        endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_nodon') != 'off'
         \n      and (is_state('switch.clim_chambre_nous', 'off') or is_state('input_boolean.clim_chambre_arret_securise_en_cours',
-        'on')) %}\n  {% set liste = liste + ['climate.clim_chambre_rm4_mini'] %}\n{%
+        'on')) %}\n  {% set liste = liste + ['climate.clim_chambre_nodon'] %}\n{%
         endif %} {{ liste }}\n"
       force_mode_list: "{% set liste = [] %} {# SALON #} {% if states('climate.clim_salon_rm4_mini')
         not in ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_salon_nous',
@@ -357,10 +357,10 @@
         ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_bureau_nous',
         'on') \n      and is_state('input_boolean.clim_bureau_arret_securise_en_cours',
         'off') %}\n  {% set liste = liste + ['climate.clim_bureau_rm4_mini'] %}\n{%
-        endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_rm4_mini') not in
+        endif %} {# CHAMBRE #} {% if states('climate.clim_chambre_nodon') not in
         ['off', 'unavailable', 'unknown', mode_saison] \n      and is_state('switch.clim_chambre_nous',
         'on') \n      and is_state('input_boolean.clim_chambre_arret_securise_en_cours',
-        'off') %}\n  {% set liste = liste + ['climate.clim_chambre_rm4_mini'] %}\n{%
+        'off') %}\n  {% set liste = liste + ['climate.clim_chambre_nodon'] %}\n{%
         endif %} {{ liste }}\n"
   - if:
     - condition: template
@@ -978,7 +978,7 @@
     entity_id:
     - climate.clim_salon_rm4_mini
     - climate.clim_bureau_rm4_mini
-    - climate.clim_chambre_rm4_mini
+    - climate.clim_chambre_nodon
     to: 'off'
   conditions:
   - condition: state
@@ -1007,7 +1007,7 @@
     data:
       title: ARRÊT CLIM
       message: "{% set pieces = {\n  'climate.clim_salon_rm4_mini': 'du Salon',\n
-        \ 'climate.clim_bureau_rm4_mini': 'du Bureau',\n  'climate.clim_chambre_rm4_mini':
+        \ 'climate.clim_bureau_rm4_mini': 'du Bureau',\n  'climate.clim_chambre_nodon':
         'de la Chambre'\n} %} La clim. {{ pieces.get(trigger.entity_id, 'inconnue')
         }} a été coupée.\n"
   mode: queued
@@ -1050,7 +1050,7 @@
     target:
       entity_id: "{% if trigger.entity_id == 'switch.clim_salon_nous' %}\n  climate.clim_salon_rm4_mini\n{%
         elif trigger.entity_id == 'switch.clim_bureau_nous' %}\n  climate.clim_bureau_rm4_mini\n{%
-        elif trigger.entity_id == 'switch.clim_chambre_nous' %}\n  climate.clim_chambre_rm4_mini\n{%
+        elif trigger.entity_id == 'switch.clim_chambre_nous' %}\n  climate.clim_chambre_nodon\n{%
         endif %}\n"
   - if:
     - condition: time

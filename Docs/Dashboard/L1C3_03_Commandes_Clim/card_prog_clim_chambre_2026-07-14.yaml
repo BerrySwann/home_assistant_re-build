@@ -39,7 +39,7 @@ cards:
       columns: full
       rows: 2
   - include:
-      - climate.clim_chambre_nodon
+      - climate.clim_chambre_rm4_mini
     exclude: []
     discover_existing: true
     title: Planificateur Clim. Chambre
@@ -231,3 +231,4 @@ cards:
               background: none !important;
             }
 column_span: 2
+   

@@ -1166,11 +1166,6 @@ cards:
       - type: entity
         show_state: true
         show_icon: true
-        entity: binary_sensor.clim_chambre_nodon_en_ligne
-        color: state
-      - type: entity
-        show_state: true
-        show_icon: true
         entity: switch.schedule_clim_de_la_chambre_week
         color: state
         name: Sem.
@@ -1205,7 +1200,7 @@ cards:
       action: navigate
       navigation_path: /dashboard-tablette/prog-clim-chambre
   - type: thermostat
-    entity: climate.clim_chambre_nodon
+    entity: climate.clim_chambre_rm4_mini
     features:
       - style: icons
         type: climate-hvac-modes
