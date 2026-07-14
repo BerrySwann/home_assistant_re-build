@@ -11,7 +11,7 @@ j_2_0_secu_arret_clim_protege:
   variables:
     p: '{{ piece | lower }}'
     lock_entity: input_boolean.clim_{{ p }}_arret_securise_en_cours
-    clim_entity: "{% if p == 'chambre' %}climate.clim_chambre_rm4_mini{% else %}climate.clim_{{ p }}_rm4_mini{% endif %}"
+    clim_entity: "{% if p == 'chambre' %}climate.clim_chambre_nodon{% else %}climate.clim_{{ p }}_rm4_mini{% endif %}"
     switch_entity: switch.clim_{{ p }}_nous
     power_status_sensor: sensor.{{ p }}_power_status
     power_lock_sensor: sensor.{{ p }}_power_lock
@@ -364,7 +364,7 @@ p1_master_gestion_clim:
             entity_id:
             - climate.clim_salon_rm4_mini
             - climate.clim_bureau_rm4_mini
-            - climate.clim_chambre_rm4_mini
+            - climate.clim_chambre_nodon
           data:
             hvac_mode: 'off'
         - alias: 'NOTIF : ALERTE CIBLÉE SUR DÉCLENCHEUR'
@@ -445,13 +445,13 @@ p1_master_gestion_clim:
             - alias: 'COMMANDE : MODE CHAMBRE'
               action: climate.set_hvac_mode
               target:
-                entity_id: climate.clim_chambre_rm4_mini
+                entity_id: climate.clim_chambre_nodon
               data:
-                hvac_mode: "{% if trigger_id == 'sensor_update' and is_state('climate.clim_chambre_rm4_mini', 'off') %}off{% else %}{{ mode_saison }}{% endif %}"
+                hvac_mode: "{% if trigger_id == 'sensor_update' and is_state('climate.clim_chambre_nodon', 'off') %}off{% else %}{{ mode_saison }}{% endif %}"
             - alias: 'COMMANDE : CONSIGNES CHAMBRE (PLAGE LOW/HIGH — NodOn = plage uniquement)'
               action: climate.set_temperature
               target:
-                entity_id: climate.clim_chambre_rm4_mini
+                entity_id: climate.clim_chambre_nodon
               data:
                 target_temp_low: "{{ t_chambre_target if mode_saison == 'heat' else 16 }}"
                 target_temp_high: "{{ t_chambre_target if mode_saison == 'cool' else 30 }}"
