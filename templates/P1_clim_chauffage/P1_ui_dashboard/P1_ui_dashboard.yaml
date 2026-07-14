@@ -39,7 +39,7 @@
       state: >
         {% if is_state('climate.clim_salon_rm4_mini', 'fan_only') and states('sensor.clim_salon_nous_power') | float(0) < 50 %}
           fan
-        {% elif states('sensor.clim_salon_nous_power') | float(0) >= 50 %}
+        {% elif states('sensor.clim_salon_nous_power') | float(0) >= 90 %}
           on
         {% else %}
           off
@@ -49,7 +49,7 @@
     - name: "Salon Power Lock"
       unique_id: salon_power_locks
       state: >
-        {% if states('sensor.clim_salon_nous_power') | float(0) >= 5 %}
+        {% if states('sensor.clim_salon_nous_power') | float(0) >= 9 %}
           on
         {% else %}
           off

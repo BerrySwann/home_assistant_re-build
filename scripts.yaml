@@ -11,7 +11,7 @@ j_2_0_secu_arret_clim_protege:
   variables:
     p: '{{ piece | lower }}'
     lock_entity: input_boolean.clim_{{ p }}_arret_securise_en_cours
-    clim_entity: climate.clim_{{ p }}_rm4_mini
+    clim_entity: "{% if p == 'chambre' %}climate.clim_chambre_nodon{% else %}climate.clim_{{ p }}_rm4_mini{% endif %}"
     switch_entity: switch.clim_{{ p }}_nous
     power_status_sensor: sensor.{{ p }}_power_status
     power_lock_sensor: sensor.{{ p }}_power_lock
