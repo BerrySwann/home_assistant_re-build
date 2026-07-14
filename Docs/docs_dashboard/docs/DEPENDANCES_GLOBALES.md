@@ -1,5 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES — TABLEAU DE BORD HA
-*Dernière mise à jour : 2026-07-08 (migration clim chambre RM4→NodOn : climate.clim_chambre_nodon — script master corrigé plage low/high — binary_sensor.clim_chambre_nodon_en_ligne créé (availability Z2M) — temp_step 1 via override discovery)*
+*Dernière mise à jour : 2026-07-14 (L1C2 + L2C2 migration NodOn — L1C3 prog manuelle — Resync TREE_CORRIGE 19 fichiers prod — P0_Energie_total_diag préfixe P0_ — p1_master_gestion_clim NodOn)*
 
 ---
 
@@ -173,7 +173,7 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `climate.clim_salon_rm4_mini` | NAT | SmartIR |
 | `climate.radiateur_cuisine` | NAT | Meross |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
-| `climate.clim_chambre_nodon` | NAT | NodOn IRB-4-1-00 via Z2M (plage low/high uniquement — features 394) |
+| `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
 
 ### Streamline templates utilisés
 
@@ -190,12 +190,13 @@ MATÉRIEL (SONOFF TH via Z2M)
 | Fichier | Statut |
 |:--------|:------:|
 | `Dashboard/L1C2_02_Temperatures/vignette_L1C2_temperatures_2026-05-12.yaml` | ✅ |
-| `Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-05-12.yaml` | ✅ |
+| `Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-05-22.yaml` | ⚠️ obsolète — `climate.clim_chambre_rm4_mini` |
+| `Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-07-14.yaml` | ✅ Migration NodOn chambre — `climate.clim_chambre_nodon` + `sensor.temperature_corrige_chambre` |
 
 ---
 
 ## ✅ L1C3 — COMMANDES CLIM (VIGNETTE + PAGE)
-*Validée le 2026-05-13*
+*Validée le 2026-05-13 — Migration chambre RM4→NodOn le 2026-07-08 — Programmation manuelle ajoutée le 2026-07-14*
 
 ### Vignette — Chaîne de dépendances
 
@@ -233,8 +234,7 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 | `climate.radiateur_cuisine` | NAT | Meross |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
 | `climate.soufflant_salle_de_bain` | NAT | Meross |
-| `climate.clim_chambre_nodon` | NAT | NodOn IRB-4-1-00 via Z2M (plage low/high uniquement — features 394) |
-| `binary_sensor.clim_chambre_nodon_en_ligne` | MQTT | `mqtt/binary_sensor/P1_clim_chauffage/P1_MQTT_BS_01_dispo_clim_chambre_nodon.yaml` — availability Z2M | ✅ |
+| `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
 
 ### Entités clés de la page
 
@@ -273,8 +273,42 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 
 | Fichier | Statut |
 |:--------|:------:|
-| `Dashboard/L1C3_03_Commandes_Clim/vignette_L1C3_clim_2026-05-13.yaml` | ✅ |
-| `Dashboard/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-05-13.yaml` | ✅ |
+| `Dashboard/L1C3_03_Commandes_Clim/vignette_L1C3_clim_2026-05-13.yaml` | ⚠️ obsolète (rm4_mini) |
+| `Dashboard/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-05-13.yaml` | ⚠️ obsolète (rm4_mini) |
+| `Dashboard/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-05-22.yaml` | ⚠️ obsolète (rm4_mini) |
+| `Dashboard/L1C3_03_Commandes_Clim/vignette_L1C3_clim_2026-07-08.yaml` | ✅ chambre → nodon |
+| `Dashboard/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-07-08.yaml` | ✅ chambre → nodon |
+
+### Entités NodOn Chambre — ajoutées session 2026-07-08
+
+| Entité | Type | Rôle |
+|:-------|:----:|:-----|
+| `climate.clim_chambre_nodon` | Climate (Z2M) | Thermostat chambre — remplace `clim_chambre_rm4_mini` |
+| `binary_sensor.clim_chambre_nodon_en_ligne` | BS (MQTT) | Disponibilité Z2M NodOn |
+| `sensor.temperature_corrige_chambre` | TPL | Consigne chambre (affiché à la place de `temperature` absent sur NodOn) |
+
+> ⚠️ NodOn = `target_temp_low/high` uniquement (supported_features 394) — pas d'attribut `temperature`
+> Script `p1_master_gestion_clim` → bloc chambre scindé : `set_hvac_mode` + `set_temperature` avec `target_temp_low/high`
+| `Dashboard/L1C3_03_Commandes_Clim/card_prog_clim_salon_2026-07-14.yaml` | ✅ |
+| `Dashboard/L1C3_03_Commandes_Clim/card_prog_radiateur_cuisine_2026-07-14.yaml` | ✅ |
+| `Dashboard/L1C3_03_Commandes_Clim/card_prog_clim_bureau_2026-07-14.yaml` | ✅ |
+| `Dashboard/L1C3_03_Commandes_Clim/card_prog_soufflant_sdb_2026-07-14.yaml` | ✅ |
+| `Dashboard/L1C3_03_Commandes_Clim/card_prog_clim_chambre_2026-07-14.yaml` | ✅ |
+
+### Entités Scheduler consommées — Programmation manuelle (ajout 2026-07-14)
+
+| Entité | Equipment | Type |
+|:-------|:----------|:-----|
+| `switch.schedule_clim_du_salon_week` | Clim Salon | Scheduler (Semaine) |
+| `switch.schedule_clim_du_salon_week_end` | Clim Salon | Scheduler (Week-End) |
+| `switch.schedule_radiateur_cuisine_week` | Radiateur Cuisine | Scheduler (Semaine) |
+| `switch.schedule_radiateur_cuisine_week_end` | Radiateur Cuisine | Scheduler (Week-End) |
+| `switch.schedule_clim_du_bureau_week` | Clim Bureau | Scheduler (Semaine) |
+| `switch.schedule_clim_du_bureau_week_end` | Clim Bureau | Scheduler (Week-End) |
+| `switch.schedule_soufflant_salle_de_bain_week` | Soufflant SdB | Scheduler (Semaine) |
+| `switch.schedule_soufflant_salle_de_bain_week_end` | Soufflant SdB | Scheduler (Week-End) |
+| `switch.schedule_clim_de_la_chambre_week` | Clim Chambre | Scheduler (Semaine) |
+| `switch.schedule_clim_de_la_chambre_week_end` | Clim Chambre | Scheduler (Week-End) |
 
 ### Automations liées (P1 clim chauffage)
 
@@ -355,9 +389,9 @@ SENSORS P0
 | `sensor.genelec_appart_conso_mini_24h` | `sensors/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml` | Min W 24h |
 | `sensor.general_electric_appart_power` | Nodon SEM-4-1-00 (natif Z2M) | W temps réel |
 | `sensor.genelec_appart_conso_maxi_24h` | `sensors/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml` | Max W 24h |
-| `sensor.genelec_appart_cout_total_quotidien` | `templates/P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml` | Coût € total J |
-| `sensor.genelec_appart_cout_hp_quotidien` | `templates/P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml` | Coût € HP J |
-| `sensor.genelec_appart_cout_hc_quotidien` | `templates/P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml` | Coût € HC J |
+| `sensor.genelec_appart_cout_total_quotidien` | `templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml` | Coût € total J |
+| `sensor.genelec_appart_cout_hp_quotidien` | `templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml` | Coût € HP J |
+| `sensor.genelec_appart_cout_hc_quotidien` | `templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml` | Coût € HC J |
 
 ### Fichiers YAML déployables (Dashboard versionnés)
 
@@ -374,9 +408,9 @@ SENSORS P0
 |:--------|:----------------|:------:|
 | `utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ.yaml` | source → `general_electric_appart_energy` | ✅ |
 | `utility_meter/P0_Energie_total/Genelec_appart/02_UM_genelec_appart_HPHC_AMHQ.yaml` | source → `general_electric_appart_energy` | ✅ |
-| `templates/P0_Energie_total_diag/Genelec_appart/02_ratio_hp_hc.yaml` | source → Nodon | ✅ |
-| `templates/P0_Energie_total_diag/Genelec_appart/03_AVG_genelec_appart.yaml` | source → Nodon | ✅ |
-| `templates/P0_Energie_total_diag/Linky/MyElectricalData.yaml` | Linky J-1 conservé | ✅ |
+| `templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml` | source → Nodon | ✅ |
+| `templates/P0_Energie_total_diag/P0_Genelec_appart/P0_03_AVG_genelec_appart.yaml` | source → Nodon | ✅ |
+| `templates/P0_Energie_total_diag/P0_Linky/P0_MyElectricalData.yaml` | Linky J-1 conservé | ✅ |
 | Docs vignettes L2C1, L2C2 | Impact Ecojoko → Nodon vérifié : L2C1 ✅, L2C2 ✅ (zero référence Ecojoko en L2C2 — entités P1 pures) | ✅ |
 
 ---
@@ -404,7 +438,7 @@ MATÉRIEL (NOUS SP via Z2M)
 | `climate.radiateur_cuisine` | NAT | Meross |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
 | `climate.soufflant_salle_de_bain` | NAT | Meross |
-| `climate.clim_chambre_nodon` | NAT | NodOn IRB-4-1-00 via Z2M (plage low/high uniquement — features 394) |
+| `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
 | `sensor.salon_power_status` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
 | `sensor.cuisine_power_status` | TPL | idem |
 | `sensor.bureau_power_status` | TPL | idem |
@@ -480,7 +514,8 @@ MATÉRIEL (NOUS SP via Z2M)
 | `Dashboard/L2C2_05_Energie_Clim/vignette_L2C2_energie_clim_2026-05-13.yaml` | ✅ |
 | `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-05-13.yaml` | ✅ |
 | `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-05-22.yaml` | ✅ |
-| `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-06-18.yaml` | ✅ refonte complète 2026-06-18 (61 Ko) |
+| `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-06-18.yaml` | ⚠️ obsolète — `climate.clim_chambre_rm4_mini` |
+| `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-07-14.yaml` | ✅ Migration NodOn chambre — `climate.clim_chambre_nodon` + `sensor.temperature_corrige_chambre` (NOUS SP1 conservé) |
 
 ---
 

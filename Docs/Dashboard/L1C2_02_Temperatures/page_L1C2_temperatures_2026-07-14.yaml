@@ -1,5 +1,3 @@
-# PAGE L1C2 — TEMPERATURES (version 2026-07-08)
-# Base : 2026-05-22 — seul changement : thermostat chambre → climate.clim_chambre_nodon
 type: grid
 cards:
 - type: heading
@@ -920,14 +918,12 @@ cards:
   - type: entity
     show_state: true
     show_icon: true
-    entity: climate.clim_chambre_nodon
-    color: state
-    tap_action:
-      action: more-info
+    entity: sensor.temperature_corrige_chambre
+    color: green
     icon: mdi:thermometer
     state_content:
     - name
-    - temperature
+    - state
     name: Réglé à
   - type: entity
     show_state: true

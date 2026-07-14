@@ -107,7 +107,7 @@ Mêmes 4 groupes de présence. Ajout : gestion de la boucle de relance en cas d'
 
 **Entités clés :**
 - `switch.clim_salon_nous` / `switch.clim_bureau_nous` / `switch.clim_chambre_nous`
-- `climate.clim_salon_rm4_mini` / `climate.clim_bureau_rm4_mini` / `climate.clim_chambre_rm4_mini`
+- `climate.clim_salon_rm4_mini` / `climate.clim_bureau_rm4_mini` / `climate.clim_chambre_nodon`
 - `input_boolean.clim_*_arret_securise_en_cours`
 - `sensor.mamour_network_type` / `sensor.eric_network_type`
 - `sensor.mode_ete_hiver` / `input_number.temperature_confort_*`

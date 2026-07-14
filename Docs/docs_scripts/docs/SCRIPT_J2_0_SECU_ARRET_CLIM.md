@@ -32,7 +32,7 @@ script.j_1_x_<piece>_clim_on_off_intelligent  (sur OFF)
     └── script.j_2_0_secu_arret_clim_protege  (mode: parallel, max: 3)
             │
             ├── 1. Activer verrou  input_boolean.clim_<piece>_arret_securise_en_cours → ON
-            ├── 2. Thermostat OFF  climate.clim_<piece>_rm4_mini → hvac_mode: off
+            ├── 2. Thermostat OFF  climate.clim_<piece>_rm4_mini (salon/bureau) ou clim_chambre_nodon → hvac_mode: off
             ├── 3a. Si power_lock = off (déjà à l'arrêt) → coupure immédiate
             ├── 3b. Si power_lock = on  → attente max 10 min → coupure propre ou erreur
             └── 4. Désactiver verrou → OFF
@@ -62,7 +62,7 @@ j_2_0_secu_arret_clim_protege:
   variables:
     p: '{{ piece | lower }}'
     lock_entity: input_boolean.clim_{{ p }}_arret_securise_en_cours
-    clim_entity: climate.clim_{{ p }}_rm4_mini
+    clim_entity: "{% if p == 'chambre' %}climate.clim_chambre_nodon{% else %}climate.clim_{{ p }}_rm4_mini{% endif %}"
     switch_entity: switch.clim_{{ p }}_nous
     power_status_sensor: sensor.{{ p }}_power_status
     power_lock_sensor: sensor.{{ p }}_power_lock
@@ -147,7 +147,7 @@ j_2_0_secu_arret_clim_protege:
 | Entité | Type | Rôle |
 |--------|------|------|
 | `input_boolean.clim_<piece>_arret_securise_en_cours` | Helper | Verrou anti-double exécution |
-| `climate.clim_<piece>_rm4_mini` | Climate Broadlink | Mise en mode off du thermostat |
+| `climate.clim_<piece>_rm4_mini` (salon/bureau) / `climate.clim_chambre_nodon` (chambre) | Climate | Mise en mode off du thermostat |
 | `switch.clim_<piece>_nous` | Switch NOUS | Coupure alimentation physique |
 | `sensor.<piece>_power_lock` | Template | Détecteur seuil 9W (on = > 9W) |
 
