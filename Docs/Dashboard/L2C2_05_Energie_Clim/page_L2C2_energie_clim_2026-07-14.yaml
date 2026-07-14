@@ -1944,7 +1944,7 @@ cards:
         }
   - type: custom:bubble-card
     card_type: climate
-    entity: climate.clim_chambre_nodon
+    entity: climate.clim_chambre_rm4_mini
     state_color: true
     icon: mdi:air-conditioner
     show_icon: true
@@ -1959,7 +1959,7 @@ cards:
         show_arrow: true
         show_background: true
         show_attribute: false
-      - entity: climate.clim_chambre_nodon
+      - entity: climate.clim_chambre_rm4_mini
         select_attribute: fan_modes
         show_background: true
         state_background: false

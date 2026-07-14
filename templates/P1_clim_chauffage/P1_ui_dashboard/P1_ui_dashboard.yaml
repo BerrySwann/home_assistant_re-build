@@ -221,7 +221,7 @@
     - name: "Chambre Power Status"
       unique_id: chambre_power_status
       state: >
-        {% if is_state('climate.clim_chambre_nodon', 'fan_only') and states('sensor.clim_chambre_nous_power') | float(0) < 50 %}
+        {% if is_state('climate.clim_chambre_rm4_mini', 'fan_only') and states('sensor.clim_chambre_nous_power') | float(0) < 50 %}
           fan
         {% elif states('sensor.clim_chambre_nous_power') | float(0) >= 50 %}
           on
@@ -253,10 +253,10 @@
     - name: "Clim Chambre État"
       unique_id: clim_chambre_etat
       state: >
-        {% if is_state('climate.clim_chambre_nodon', 'off') %} Off
-        {% elif is_state('climate.clim_chambre_nodon', 'cool') %} Cool
-        {% elif is_state('climate.clim_chambre_nodon', 'heat') %} Heat
-        {% elif is_state('climate.clim_chambre_nodon', 'fan_only') %} Fan
+        {% if is_state('climate.clim_chambre_rm4_mini', 'off') %} Off
+        {% elif is_state('climate.clim_chambre_rm4_mini', 'cool') %} Cool
+        {% elif is_state('climate.clim_chambre_rm4_mini', 'heat') %} Heat
+        {% elif is_state('climate.clim_chambre_rm4_mini', 'fan_only') %} Fan
         {% else %} Erreur {% endif %}
 
 
