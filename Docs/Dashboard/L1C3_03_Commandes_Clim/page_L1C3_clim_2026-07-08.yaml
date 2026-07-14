@@ -1,11 +1,3 @@
-# ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PAGE L1C3 — COMMANDES CLIM (version 2026-07-08)                          │
-# ╰──────────────────────────────────────────────────────────────────────────╯
-# Changements vs 2026-05-22 (migration RM4 → NodOn chambre) :
-# - Thermostat chambre : climate.clim_chambre_nodon
-# - Badge chambre : binary_sensor.clim_chambre_nodon_en_ligne (remplace remote.clim_chambre — availability Z2M)
-# - ⚠️ CONNU : fan_modes du thermostat chambre encore ceux du RM4 (breeze/powerful/level1-5)
-#   → à remplacer par les modes NodOn réels : auto, low, medium, high
 type: grid
 cards:
   - type: heading
@@ -303,7 +295,7 @@ cards:
             style:
               .: |
                 :host {
-                  --text-divider-color: #FFA000; /* EMBER */
+                  --text-divider-color: #FFA000;
                   --text-divider-line-size: 3px;
                 }
           card:
@@ -869,7 +861,7 @@ cards:
               text: Chauffage Salle de Bain
   - type: heading
     icon: mdi:bathtub
-    heading: Radiateur SdB
+    heading: Soullant SdB
     heading_style: title
     badges:
       - type: entity
@@ -1160,7 +1152,7 @@ cards:
             style:
               .: |
                 :host {
-                  --text-divider-color: #FFA000; /* EMBER */
+                  --text-divider-color: #FFA000;
                   --text-divider-line-size: 3px;
                 }
           card:
