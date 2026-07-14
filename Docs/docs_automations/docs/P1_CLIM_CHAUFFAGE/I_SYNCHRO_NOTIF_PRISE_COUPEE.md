@@ -35,4 +35,4 @@ si on est en période diurne.
 | Entité | Rôle |
 |:---|:---|
 | `switch.clim_salon/bureau/chambre_nous` | Déclencheurs |
-| `climate.clim_salon/bureau_rm4_mini` + `clim_chambre_nodon` | Cibles synchro |
+| `climate.clim_salon/bureau_rm4_mini` + `clim_chambre_rm4_mini` | Ci

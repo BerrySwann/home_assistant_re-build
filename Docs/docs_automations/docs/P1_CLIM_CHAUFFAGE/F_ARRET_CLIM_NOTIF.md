@@ -19,7 +19,7 @@ pour éviter les faux positifs lors des coupures automatiques.
 |:---|:---|:---|
 | `state` | `climate.clim_salon_rm4_mini` | `off` |
 | `state` | `climate.clim_bureau_rm4_mini` | `off` |
-| `state` | `climate.clim_chambre_nodon` | `off` |
+| `state` | `climate.clim_chambre_rm4_mini` | `off` |
 
 ---
 
@@ -34,7 +34,7 @@ pour éviter les faux positifs lors des coupures automatiques.
 
 | Entité | Rôle |
 |:---|:---|
-| `climate.clim_salon_rm4_mini` / `clim_bureau_rm4_mini` / `clim_chambre_nodon` | Déclencheurs |
+| `climate.clim_salon_rm4_mini` / `clim_bureau_rm4_mini` / `clim_chambre_rm4_mini` | Déclencheurs |
 | `switch.clim_salon_nous` / `bureau` / `chambre` | Conditions |
 | 4× `binary_sensor.contact_fenetre_*` | Conditions |
 
@@ -42,4 +42,4 @@ pour éviter les faux positifs lors des coupures automatiques.
 
 | Titre | Message |
 |:---|:---|
-| `ARRÊT CLIM` | Pièce identifiée depuis `trigger.entity_id` |
+| `ARRÊT CLIM` | Pièce identifiée depuis 
