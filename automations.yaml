@@ -1497,10 +1497,12 @@
           - action: homeassistant.turn_on
             target:
               entity_id: '{{ repeat.item.entity }}'
-        default:
-        - action: homeassistant.turn_off
-          target:
-            entity_id: '{{ repeat.item.entity }}'
+        - conditions: '{{ not repeat.item.get("absent_only", false) or g == "groupe_1"
+            }}'
+          sequence:
+          - action: homeassistant.turn_off
+            target:
+              entity_id: '{{ repeat.item.entity }}'
   - alias: DÉLAI — Attente mise à jour états avant notification
     delay: 00:00:05
   - alias: ACTION — Notification résumé prises
