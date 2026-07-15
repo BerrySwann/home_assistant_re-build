@@ -42,9 +42,11 @@
         # AJOUTER UNE PRISE : copier une ligne {'entity':..., 'groupes':[...]} dans la liste.
         prises: >-
           {{ [
-            {'entity': 'light.hue_smart_eco_tv_salon',     'groupes': []},
-            {'entity': 'light.hue_smart_eco_salon',        'groupes': ['groupe_2', 'groupe_4']},
             {'entity': 'switch.prise_horloge_ikea',        'groupes': ['groupe_2', 'groupe_4']},
+            {'entity': 'light.hue_smart_eco_salon',        'groupes': ['groupe_2', 'groupe_4']},
+            {'entity': 'light.hue_smart_eco_tv_salon',       'groupes': []},
+            {'entity': 'light.hue_smart_eco_pc_bureau',    'groupes': []},
             {'entity': 'switch.ecran_p_c_3_play_hue',      'groupes': ['groupe_2', 'groupe_3', 'groupe_4']},
+            {'entity': 'light.hue_smart_eco_tv_chambre',   'groupes': []},
             {'entity': 'switch.prise_tete_de_lit_chambre', 'groupes': ['groupe_2', 'groupe_4']}
           ] | tojson }}

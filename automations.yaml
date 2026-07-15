@@ -618,7 +618,7 @@
   mode: single
 - id: '1767373340706'
   alias: (A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00)
-  description: "Pilotage clims jour - délègue au script P1_MASTER_gestion_clim"
+  description: Pilotage clims jour - délègue au script P1_MASTER_gestion_clim
   triggers:
   - alias: 'SYSTEM : REDÉMARRAGE HOME ASSISTANT'
     trigger: homeassistant
@@ -677,14 +677,15 @@
   actions:
   - action: script.p1_master_gestion_clim
     data:
-      periode: "jour"
-      trigger_id: "{{ trigger.id if trigger is defined else '' }}"
-      trigger_entity_id: "{{ trigger.entity_id if trigger is defined and trigger.entity_id is defined else '' }}"
+      periode: jour
+      trigger_id: '{{ trigger.id if trigger is defined else '''' }}'
+      trigger_entity_id: '{{ trigger.entity_id if trigger is defined and trigger.entity_id
+        is defined else '''' }}'
   mode: queued
   max: 5
 - id: '1767373801871'
   alias: (B - 0) 2026-01-11 AUTOMATISATION CLIM NUIT (21H00 <-> 07H30)
-  description: "Pilotage clims nuit - délègue au script P1_MASTER_gestion_clim"
+  description: Pilotage clims nuit - délègue au script P1_MASTER_gestion_clim
   triggers:
   - alias: 'SYSTEM : REDÉMARRAGE HOME ASSISTANT'
     trigger: homeassistant
@@ -743,9 +744,10 @@
   actions:
   - action: script.p1_master_gestion_clim
     data:
-      periode: "nuit"
-      trigger_id: "{{ trigger.id if trigger is defined else '' }}"
-      trigger_entity_id: "{{ trigger.entity_id if trigger is defined and trigger.entity_id is defined else '' }}"
+      periode: nuit
+      trigger_id: '{{ trigger.id if trigger is defined else '''' }}'
+      trigger_entity_id: '{{ trigger.entity_id if trigger is defined and trigger.entity_id
+        is defined else '''' }}'
   mode: queued
   max: 5
 - id: '1775243120444'
@@ -1475,6 +1477,11 @@
     entity_id: sensor.groupe
     id: groupe_change
     alias: DÉCLENCHEUR — Changement de groupe
+  conditions:
+  - alias: FILTRE — Ignorer transitions depuis unavailable (boot HA)
+    condition: template
+    value_template: '{{ trigger.from_state is not none and trigger.from_state.state
+      not in [''unavailable'', ''unknown'', ''''] }}'
   actions:
   - alias: VARIABLES — Groupe actif + liste des prises (source externe)
     variables:
@@ -1485,9 +1492,7 @@
       for_each: '{{ prises }}'
       sequence:
       - choose:
-        - conditions:
-          - condition: template
-            value_template: '{{ g in repeat.item.groupes }}'
+        - conditions: '{{ g in repeat.item.groupes }}'
           sequence:
           - action: homeassistant.turn_on
             target:
@@ -1496,6 +1501,8 @@
         - action: homeassistant.turn_off
           target:
             entity_id: '{{ repeat.item.entity }}'
+  - alias: DÉLAI — Attente mise à jour états avant notification
+    delay: 00:00:05
   - alias: ACTION — Notification résumé prises
     action: notify.mobile_app_eric
     data:
@@ -1644,7 +1651,9 @@
     above: 25
   - alias: 'CONDITION : DÉRIVE THERMIQUE RAPIDE (+0.5°C)'
     condition: template
-    value_template: "{{ trigger.from_state is not none and trigger.from_state.state is defined and (states('sensor.th_salle_de_bain_temperature') | float) >= (trigger.from_state.state | float + 0.5) }}"
+    value_template: '{{ trigger.from_state is not none and trigger.from_state.state
+      is defined and (states(''sensor.th_salle_de_bain_temperature'') | float) >=
+      (trigger.from_state.state | float + 0.5) }}'
   actions:
   - alias: 'ACTION : ATTENTE STABILISATION (1 MIN)'
     delay:
