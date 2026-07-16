@@ -35,9 +35,9 @@
 # - WIFI_PRESENCE (Page Home — logique déclenchement mode Absent/Présent)
 
 - sensor:
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ P4 : DÉTERMINATION DU GROUPE (PRESENCE AUTOMATION)                │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌────────────────────────────────────────────────────┐
+# │ P4 : DÉTERMINATION DU GROUPE (PRESENCE AUTOMATION)  │
+# └────────────────────────────────────────────────────┘
 
 # Calcul du groupe (1=Personne, 2=Mamour, 3=Eric, 4=Tous)
 # --- groupe ---
@@ -66,9 +66,9 @@
           groupe_1
         {% endif %}
 
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ P4 : CALCUL ET AFFICHAGE DES STATUTS RÉSEAU (INTERFACE)           │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌─────────────────────────────────────────────────────────┐
+# │ P4 : CALCUL ET AFFICHAGE DES STATUTS RÉSEAU (INTERFACE)  │
+# └─────────────────────────────────────────────────────────┘
 
 # Affichage textuel complexe (WIFI / CELL / WIFI_!?)
 # --- presence ---

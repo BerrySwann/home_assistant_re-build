@@ -36,9 +36,9 @@
 # - Indirect : remonte dans la notification mobile via automation E_notif_temp_nuit.yaml
 
 - sensor:
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : GÉNÉRATEUR DE MESSAGE NUIT (LOGIQUE SCÉNARIOS)        │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌────────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : GÉNÉRATEUR DE MESSAGE NUIT (LOGIQUE SCÉNARIOS)  │
+# └────────────────────────────────────────────────────────────┘
 
 # --- message_clim_personnalise_21h00_7h30 ---
     - name: "Message Clim personnalisé 21h00 <-> 7h30"
