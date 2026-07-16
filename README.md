@@ -2,220 +2,243 @@
 
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2026.x-blue?logo=home-assistant&logoColor=white)](https://www.home-assistant.io/)
 [![GitHub last commit](https://img.shields.io/github/last-commit/BerrySwann/home_assistant_re-build)](https://github.com/BerrySwann/home_assistant_re-build)
-[![Expert HA](https://img.shields.io/badge/Expert-HAOS_x86--64-success)](#)
+[![Expert HA](https://img.shields.io/badge/Expert-HAOS_Proxmox-success)](#)
 [![Powered by Claude IA](https://img.shields.io/badge/AI_Partner-Claude_Sonnet-blueviolet)](#)
 
-Ce dépôt est la **refonte complète et modulaire** de la configuration Home Assistant OS (HAOS) tournant sur un **mini-PC x86-64 (Generic image)**. Il remplace l'ancien dépôt `home-assistant-config` avec une architecture repensée : 1 fonction = 1 fichier YAML, organisation par Pôle fonctionnel, documentation exhaustive par vignette de dashboard.
+Ce depot est la **refonte complete et modulaire** de la configuration Home Assistant OS (HAOS) tournant sur un **mini-PC Intel NUC sous Proxmox VE**. Il remplace l'ancien depot `home-assistant-config` avec une architecture repensee : 1 fonction = 1 fichier YAML, organisation par Pole fonctionnel, documentation exhaustive par vignette de dashboard.
 
 ---
 
-## 📚 Vous voulez comprendre ou réutiliser ce code ?
+## 📚 Vous voulez comprendre ou reutiliser ce code ?
 
-> **Commencez par le répertoire [`docs/`](./docs/)**
+> **Commencez par le repertoire [`DOCS/`](./DOCS/)**
 
-Chaque vignette du dashboard possède sa propre documentation dans `docs/` : entités utilisées, fichiers sources, chaînes de dépendances, pièges à éviter. C'est la **porte d'entrée** pour comprendre comment tout s'articule avant de plonger dans les YAML.
+Chaque vignette du dashboard possede sa propre documentation dans `DOCS/02_docs_dashboard/` : entites utilisees, fichiers sources, chaines de dependances, pieges a eviter. C'est la **porte d'entree** pour comprendre comment tout s'articule avant de plonger dans les YAML.
 
-| Document clé | Rôle |
+| Document cle | Role |
 |---|---|
-| [`INDEX_NAVIGATION.md`](./INDEX_NAVIGATION.md) | Index des 18 vignettes — accès direct docs, YAML, entités, pop-ups (accordéon GitHub) |
-| [`Docs/docs_dashboard/docs/DEPENDANCES_GLOBALES.md`](./Docs/docs_dashboard/docs/DEPENDANCES_GLOBALES.md) | Carte → Template → Sensor → Utility Meter → Source native — pour les 18 vignettes |
-| [`Docs/docs_dashboard/docs/WORKFLOW_REBUILD.md`](./Docs/docs_dashboard/docs/WORKFLOW_REBUILD.md) | Procédure de maintenance + historique de toutes les sessions |
-| [`CLAUDE.md`](./CLAUDE.md) | Règles de codage, nomenclature, arborescences — directives IA complètes |
-| [`Orphelin/orphelin.md`](./Orphelin/orphelin.md) | Inventaire lisible des entités fantômes détectées par Spook |
+| [`INDEX_GLOBAL.md`](./INDEX_GLOBAL.md) | Index unique — 6 sections (IA, config, dashboard, automations, scripts, systeme) — accordeon GitHub |
+| [`DOCS/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md`](./DOCS/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md) | Carte -> Template -> Sensor -> Utility Meter -> Source native — 18 vignettes |
+| [`DOCS/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md`](./DOCS/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md) | Procedure de maintenance + historique des sessions |
+| [`CLAUDE.md`](./CLAUDE.md) | Regles de codage, nomenclature, arborescences — directives IA completes |
 
 ---
 
-## 🧠 Méthodologie & IA Thought Partner
+## 🧠 Methodologie & IA Thought Partner
 
-La configuration est régie par deux fichiers maîtres :
+La configuration est regie par le fichier maitre :
 
-- 👉 **[`CLAUDE.md`](./CLAUDE.md)** — directives IA actives (nomenclature, hiérarchie visuelle, règles de codage, arborescences)
-- 👉 **[`IA/IA_CONTEXT_BASE.md`](./IA/IA_CONTEXT_BASE.md)** — copie synchronisée de `CLAUDE.md` (référence IA)
+- 👉 **[`CLAUDE.md`](./CLAUDE.md)** — directives IA actives (nomenclature, hierarchie visuelle, regles de codage, arborescences)
 
-Développée en collaboration avec **Claude (Anthropic)** pour garantir :
+Developpee en collaboration avec **Claude (Anthropic)** pour garantir :
 
 - **Architecture modulaire stricte** : 1 fonction = 1 fichier `.yaml`, 0 approche monolithique
-- **Standardisation visuelle** : Boîtes ASCII arrondies (78 car.) / carrées (37 car.) / tertiaires `# --- slug ---`
-- **YAML auto-documenté** : chaque fichier embarque un en-tête obligatoire (`## 📝 DESCRIPTION`, `## 🧮 CALCUL & SOURCES`, `## ⚠️ IMPORTANT`, `## 🖥️ TABLEAU DE BORD`) — comprendre à quoi sert chaque entité sans ouvrir la doc
-- **Qualité du code** : Zéro `id:` global dans les automatisations, `unique_id` rigoureuse, annotations `# "[L...] modif"` sur chaque ligne modifiée
-- **Traçabilité** : Inventaire complet des entités fantômes (`Orphelin/orphelin.yaml`), chaînes de dépendances documentées par vignette (`docs/DEPENDANCES_GLOBALES.md`)
+- **Standardisation visuelle** : Boites ASCII arrondies (78 car.) / carrees (37 car.) / tertiaires `# --- slug ---`
+- **YAML auto-documente** : chaque fichier embarque un en-tete obligatoire (`## 📝 DESCRIPTION`, `## 🧮 CALCUL & SOURCES`, `## ⚠️ IMPORTANT`, `## 🖥️ TABLEAU DE BORD`)
+- **Qualite du code** : `unique_id` rigoureuse, chaînes de dependances documentees par vignette
 
 ---
 
-## ⚙️ Système & Matériel
+## ⚙️ Systeme & Materiel
 
-| Composant | Détail |
+| Composant | Detail |
 |-----------|--------|
-| **OS** | Home Assistant OS (HAOS) — image Generic x86-64 |
-| **Matériel** | Mini-PC Intel NUC — SSD SATA 512 Go / RAM 16 Go |
-| **Zigbee** | Sonoff EFR32MG21 — Clé V2 (reçue 22/05/2026) — LXC 200 Proxmox |
-| **Accès** | Samba Share, Studio Code Server, SSH, Cloudflared, Tailscale |
+| **OS** | Home Assistant OS (HAOS) — VM Proxmox VE 7.0.0-3 |
+| **Materiel** | Mini-PC Intel NUC — SSD 512 Go / RAM 16 Go |
+| **Hyperviseur** | Proxmox VE — VM HAOS + LXC services |
+| **Zigbee** | Sonoff EFR32MG21 V2 (recue 22/05/2026) — LXC 200 |
+| **Acces** | Samba Share, Studio Code Server, SSH, Cloudflared, Tailscale |
 
-### 📦 Add-ons principaux
+### 📦 Services
 
-Zigbee2MQTT · Mosquitto (LXC 200) · MariaDB (LXC 201) · Cloudflared · Tailscale · Studio Code Server · Samba Share · Spook
-
----
-
-## 🧩 Intégrations
-
-| Catégorie | Intégrations |
-|-----------|-------------|
-| **Énergie** | `MyElectricalData` (Linky HP/HC) · `Ecojoko` (conso réseau temps réel) |
-| **Météo & Env.** | `Météo France` · `Blitzortung` (foudre) · `AtmoFrance` (pollution/pollen) · `Vigieau` (restrictions eau) |
-| **Hardware** | `Meross LAN` · `Philips HUE` · `IKEA Dirigera` · `NOUS` (prises smart) · `Sonoff SNZB` |
-| **UI & Logique** | `Browser Mod` (pop-ups dynamiques) · `Streamline Card` · `HACS` (cartes custom) |
-| **Qualité d'air** | `IKEA Vindstyrka` (PM2.5 + VOC index) × 3 pièces |
+| Type | Nom | Localisation |
+|:-----|:----|:-------------|
+| LXC 200 | Zigbee2MQTT + Mosquitto | Proxmox (10.32.154.244) |
+| LXC 201 | MariaDB | Proxmox (10.32.154.242) |
+| LXC 202 | MyElectricalData | Proxmox (10.32.154.245) |
+| Add-on | Cloudflared - Tailscale - Studio Code Server | HA Supervisor |
 
 ---
 
-## 📊 Architecture modulaire — Organisation par Pôle
+## 🧩 Integrations
 
-La configuration est **100% éclatée** — zéro fichier monolithique. Chaque fichier a une responsabilité unique, nommée et rangée dans le Pôle fonctionnel correspondant.
+### HACS — Custom Components
+
+| Slug | Nom | Role |
+|:-----|:----|:-----|
+| `spook` | Spook | Extension HA (entites et services supplementaires) |
+| `powercalc` | PowerCalc | Calcul puissance virtuelle (ampoules sans wattmetre) |
+| `browser_mod` | Browser Mod | Controle navigateur depuis HA |
+| `smartir` | SmartIR | Telecommandes IR (clim salon, bureau, chambre) |
+| `scheduler` | Scheduler | Planificateur avance (custom:scheduler-card) |
+| `meross_lan` | Meross LAN | Prises Meross en local sans cloud |
+| `blitzortung` | Blitzortung | Detection foudre temps reel |
+| `atmo_france` | Atmo France | Qualite air exterieur (IQA) |
+| `vigieau` | VigiEau | Restrictions d'eau en vigueur (L6C3) |
+| `soleil` | Soleil (Sun2) | Lever/coucher + azimut/elevation solaire precis |
+| `tarifs_edf` | Tarifs EDF | Index HP/HC, couts Tempo/Base (P0) |
+
+### Officielles HA Core
+
+| Integration | Role |
+|:------------|:-----|
+| `mqtt` | Bus Z2M, Blitzortung, capteurs divers |
+| `philips_hue` | Pont Hue (toutes ampoules P3) |
+| `broadlink` | Emetteur IR (relai SmartIR) |
+| `meteo_france` | Alertes vigilance, previsions, cameras cartes |
+| `moon` | Phase lunaire |
+| `season` | Detection saison courante |
+| `proxmox_ve` | Supervision Proxmox PVE — CPU, RAM, Storage, Status (L4C1) |
+| `system_monitor` | Supervision systeme Mini PC — CPU, RAM, disque (L4C2) |
+| `mobile_app` | Telephones (presence P4 + batteries portables L5C2) |
+| `local_file` | Images vigilance Meteo France |
+| `file` | Logs notify (diag conso, ecart Linky/Nodon) |
+| `restful` | sensor.blitzortung_lightning_localisation |
+| `backup` | Sauvegardes HA |
+
+---
+
+## 🃏 Cartes HACS utilisees
+
+| Type | Carte | Usage principal |
+|:-----|:------|:----------------|
+| **Graph/Data** | `apexcharts-card` | Graphiques energie, moyennes glissantes, seuils couleur |
+| | `mini-graph-card` | Tendances rapides (temperatures, humidite) |
+| | `plotly-graph` | Analyse de donnees complexe |
+| | `bar-card` | Jauges de consommation et batteries |
+| | `flex-table-card` | Tableaux flexibles multi-entites |
+| | `history-explorer-card` | Exploration interactive de l'historique |
+| **UI/Design** | `bubble-card` | Navigation, pop-ups par piece, boutons tactiles |
+| | `mushroom-card` | Eclairage, titres, chips d'etat |
+| | `card-mod` | Personnalisation CSS avancee |
+| | `layout-card` | Structure des vues (Grid, Masonry) |
+| | `stack-in-card` | Groupement de cartes sans bordures |
+| | `swipe-card` | Carousels (Meteo, Cameras) |
+| | `auto-entities` | Listes dynamiques (fenetres ouvertes, piles faibles) |
+| | `tabbed-card` | Onglets glissants JOUR/MOIS/30J |
+| | `button-card` | Boutons programmables avances |
+| | `streamline-card` | Templates de cartes reutilisables |
+| **Specialisees** | `battery-state-card` | Surveillance batteries/piles par groupe (L5C1) |
+| | `entity-progress-card` | Barre de progression avec label dynamique (L6C2) |
+| | `enhanced-shutter-card` | Gestion visuelle des stores (L3C3) |
+| | `tempometer-gauge-card` | Jauges temperature et humidite |
+| | `ring-tile-card` | Indicateurs circulaires (MariaDB, CPU) |
+| | `multiple-entity-row` | Multi-affichage sur une ligne d'entite |
+| | `navbar-card` | Barre de navigation personnalisee |
+| | `linky-card` | Suivi MyElectricalData (L2C1) |
+| | `windrose-card` | Rose des vents (L1C1 Meteo) |
+| | `meteofranceweathercard` | Carte Meteo-France (L1C1) |
+| | `horizon-card` | Visualisation lever/coucher soleil |
+| | `tsmoon-card` | Phase lunaire |
+| | `hass-hue-icons` | Pack icones Hue (prefix `hue:`) |
+| | `custom-brand-icons` | Pack icones marques (prefix `phu:`) |
+
+---
+
+## 📊 Architecture modulaire — Organisation par Pole
+
+La configuration est **100% eclatee** — zero fichier monolithique. Chaque fichier a une responsabilite unique, nommee et rangee dans le Pole fonctionnel correspondant.
 
 ```
-/config/
-├── configuration.yaml          ← point d'entrée (includes, intégrations)
-├── automations.yaml            ← toutes les automations
-├── scripts.yaml / scenes.yaml  ← scripts et scènes
+/homeassistant/
+├── configuration.yaml          <- point d'entree (includes, integrations)
+├── automations.yaml            <- toutes les automations
+├── scripts.yaml / scenes.yaml  <- scripts et scenes
 │
-├── sensors/                    ← intégrations Riemann kWh, stats 24h, DUT
-│   ├── P0_Energie_total_min_maxi_diag/  ← kWh cumulatif + mini/maxi AVG Genelec
-│   ├── P1_clim_chauffage/      ← kWh + DUT chauffage/clim
-│   ├── P2_prise/               ← kWh prises, veilles, mini-pc
-│   ├── P3_eclairage/           ← kWh ampoules (unité / zone / total)
-│   ├── Air_quality/            ← stats PM2.5 + tCOV (mean 24h)
-│   └── meteo/                  ← Blitzortung
+├── sensors/
+│   ├── P0_Energie_total/       <- kWh Nodon + mini/maxi + diag
+│   ├── P1_clim_chauffage/      <- kWh + DUT chauffage/clim
+│   ├── P2_prise/               <- kWh prises, veilles, mini-pc
+│   ├── P3_eclairage/           <- kWh ampoules (unite / zone / total)
+│   ├── Air_quality/            <- stats PM2.5 + tCOV (mean 24h)
+│   └── meteo/                  <- Blitzortung
 │
-├── templates/                  ← calculs, AVG, UI dashboard, logique
-│   ├── P0_Energie_total_diag/  ← coûts HP/HC, ratios, Linky, diag conso
-│   ├── P1_clim_chauffage/      ← logique clim, DUT, AVG, totaux, ui_dashboard
-│   ├── P2_prise/               ← AVG prises/veilles/mini-pc, all_standby
-│   ├── P3_eclairage/           ← puissance (POWER), AVG, ui_dashboard
-│   ├── P4_groupe_presence/     ← détection Wi-Fi/réseau, affichage téléphones
-│   ├── Air_quality/            ← tCOV en ppb (template)
-│   ├── SpeedTest/              ← Download / Upload / Ping
-│   ├── Stores/                 ← états volets motorisés (HTML couleur)
-│   ├── Inter_BP_Virtuel/       ← interrupteur soufflant SdB (binary_sensor + switch)
-│   ├── Mini-PC/                ← 6 capteurs T° CPU/carte mère (command_line)
-│   ├── meteo/                  ← alertes, vent, Blitzortung, tendances, cycle solaire
-│   └── utilitaires/            ← jour/nuit, MAJ HA, fenêtres ouvertes
+├── templates/
+│   ├── P0_Energie_total_diag/  <- couts HP/HC, ratios, Linky, diag conso
+│   ├── P1_clim_chauffage/      <- logique clim, DUT, AVG, totaux, ui_dashboard
+│   ├── P2_prise/               <- AVG prises/veilles/mini-pc, all_standby
+│   ├── P3_eclairage/           <- puissance (POWER), AVG, ui_dashboard
+│   ├── P4_groupe_presence/     <- detection Wi-Fi/reseau, affichage telephones
+│   ├── Air_quality/            <- tCOV en ppb (template)
+│   ├── Stores/                 <- etats volets motorises (HTML couleur)
+│   ├── Inter_BP_Virtuel/       <- interrupteur soufflant SdB (binary_sensor + switch)
+│   └── meteo/                  <- alertes, vent, Blitzortung, tendances
 │
-└── utility_meter/              ← compteurs AMHQ (Annuel/Mensuel/Hebdo/Quotidien)
-    ├── P0_Energie_total/       ← index kWh + HP/HC (sous-dossier Genelec_appart/)
-    ├── P1_clim_chauffage/      ← 6 équipements × 4 périodes
-    ├── P2_prise/               ← prises + veilles + mini-pc
-    ├── P3_eclairage/           ← ampoules (unité / zone / total)
-    └── meteo/                  ← Blitzortung
+└── utility_meter/              <- compteurs AMHQ (Annuel/Mensuel/Hebdo/Quotidien)
+    ├── P0_Energie_total/       <- index kWh + HP/HC
+    ├── P1_clim_chauffage/      <- 6 equipements x 4 periodes
+    ├── P2_prise/               <- prises + veilles + mini-pc
+    └── P3_eclairage/           <- ampoules (unite / zone / total)
 ```
 
-**Pôles fonctionnels :**
+**Poles fonctionnels :**
 
-| Pôle | Périmètre |
+| Pole | Perimetre |
 |------|-----------|
-| **P0** | Énergie globale (Linky, Ecojoko, bilans généraux) |
-| **P1** | Chauffage & Climatisation (5 pièces) |
-| **P2** | Prises connectées (18 appareils + veilles) |
-| **P3** | Éclairage (19 ampoules Hue/Sonoff — unité / zone / total) |
-| **P4** | Groupe Présence (Wi-Fi, réseau mobile, localisation) |
-| **M/A/ST/S/B/MP** | Catégories lettrées : Météo, Air, SpeedTest, Stores, BP Virtuel, Mini-PC |
+| **P0** | Energie globale (Linky, Nodon pince, bilans generaux) |
+| **P1** | Chauffage & Climatisation (5 pieces) |
+| **P2** | Prises connectees (18 appareils + veilles) |
+| **P3** | Eclairage (19 ampoules Hue/Sonoff — unite / zone / total) |
+| **P4** | Groupe Presence (Wi-Fi, reseau mobile, localisation) |
+| **M/A/S/B/MP** | Categories lettrees : Meteo, Air, Stores, BP Virtuel, Mini-PC |
 
 ---
 
 ## 🖥️ Dashboard — Matrice 18 Vignettes
 
-Dashboard optimisé tablette + mobile. Structure en 6 lignes × 3 colonnes.
+Dashboard optimise tablette + mobile. Structure en 6 lignes x 3 colonnes.
 
 | | C1 | C2 | C3 |
 |--|----|----|-----|
-| **L1** | Météo | Températures (6 pièces + ext.) | Commandes Clim |
-| **L2** | Énergie Générale (Ecojoko/Linky) | Énergie Clim / Radiateur | Énergie Éclairage |
-| **L3** | Commandes Éclairage | Commandes Éco (Prises) | Fenêtres + Stores |
-| **L4** | Proxmox (PVE) | Mini-PC (NUC) | Mises à jour HA |
-| **L5** | Batteries / Piles (34 capteurs) | Batteries Portables (7 appareils) | MariaDB |
-| **L6** | Qualité de l'air (PM2.5 + tCOV) | Pollution / Pollen (AtmoFrance) | Vigilance Eau (Vigieau) |
+| **L1** | Meteo | Temperatures (6 pieces + ext.) | Commandes Clim |
+| **L2** | Energie Generale (Nodon/Linky) | Energie Clim / Radiateur | Energie Eclairage |
+| **L3** | Commandes Eclairage | Commandes Eco (Prises) | Fenetres + Stores |
+| **L4** | Proxmox (PVE) | Mini-PC (NUC) | Mises a jour HA |
+| **L5** | Batteries / Piles | Batteries Portables | MariaDB |
+| **L6** | Qualite de l'air (PM2.5 + tCOV) | Pollution / Pollen (AtmoFrance) | Vigilance Eau (Vigieau) |
 
 ---
 
-## 📁 Documentation (`docs/`) — 18 vignettes documentées
-
-Le répertoire `docs/` est la **source de vérité** du projet. Avant de copier un fichier YAML ou de créer une entité, consultez la doc de la vignette concernée : vous y trouverez la liste exacte des entités utilisées, leur fichier source, et les pièges connus.
+## 📁 Documentation (`DOCS/`) — Structure complete
 
 ```
-docs/
-├── DEPENDANCES_GLOBALES.md         ← chaîne complète Carte → Template → Sensor → UM → Source
-├── WORKFLOW_REBUILD.md             ← procédure de maintenance (6 étapes) + historique des sessions
-├── _TEMPLATE_DOC.md                ← modèle de doc vignette
-├── IA/IA_CONTEXT_BASE.md           ← copie de CLAUDE.md (référence IA)
-├── CONFIG_ROOT/                    ← documentation configuration.yaml
-│
-├── L1C1_METEO/                     ✅ Vignette + Page Météo + Tuto alertes
-├── L1C2_TEMPERATURES/              ✅ Vignette + Page Températures
-├── L1C3_CLIM/                      ✅ Vignette + Page Commandes Clim
-├── L2C1_ENERGIE/                   ✅ Vignette + Page Énergie (Mensuel + Temps Réel + Couleurs)
-├── L2C2_ENERGIE_CLIM/              ✅ Vignette + Page Énergie Clim
-├── L2C3_ENERGIE_ECLAIRAGE/         ✅ Vignette + Page Énergie Éclairage + Couleurs
-├── L3C1_ECLAIRAGE/                 ✅ Vignette + Page Éclairage
-├── L3C2_PRISES/                    ✅ Vignette + Page Prises
-├── L3C3_STORES/                    ✅ Vignette + Page Stores
-├── L4C1_PROXMOX/                   ⚠️ En cours — vignette créée, page à finaliser
-├── L4C2_MINI_PC/                   ✅ Vignette + Page Mini-PC (NUC) + Page RPi4 (transitoire)
-├── L4C3_MAJ_HA/                    ✅ Vignette + Page MAJ
-├── L5C1_PILES_BATTERIES/           ✅ Vignette + Page Batteries
-├── L5C2_BATTERIES_PORTABLES/       ✅ Vignette + Page Portables
-├── L5C3_MARIADB/                   ✅ Vignette + Page Système
-├── L6C1_AIR_QUALITE/               ✅ Vignette + Page Qualité de l'air
-├── L6C2_POLLUTION_POLLEN/          ✅ Vignette + Page Pollution/Pollen
-├── L6C3_VIGIEAU/                   ✅ Vignette + Page Vigieau
-└── HOME PAGE/                      ✅ Page Home + Vignette Wi-Fi Présence
+DOCS/
+├── 00_IA/                          <- contextes IA (IA_CONTEXT_BASE + sous_md/)
+├── 01_docs_config_system/
+│   ├── config_system_YAML/         <- YAML config HA (source -> /homeassistant/)
+│   └── config_system_MD/           <- documentation configuration.yaml
+├── 02_docs_dashboard/
+│   ├── dashboard_docs_MD/          <- docs 18 vignettes + DEPENDANCES_GLOBALES
+│   └── dashboard_docs_YAML/        <- YAML vignettes/pages + Dashboard_COMPLET/
+├── 03_docs_automations/
+│   ├── docs_automations_MD/        <- docs par automation
+│   └── docs_automations_YAML/      <- YAML individuels par automation
+├── 04_docs_scripts/
+│   ├── docs_scripts_SH/            <- scripts bash (.sh)
+│   ├── docs_scripts_SH_MD/         <- docs scripts bash
+│   ├── docs_scripts_YAML/          <- scripts HA YAML
+│   └── docs_scripts_YAML_MD/       <- docs scripts HA
+└── 05_docs_MD_system/              <- MOC, templates, workflow, index entites
 ```
-
-> **18 / 18 vignettes actives** *(L4C1 Proxmox en cours de finalisation)* — dépendances complètes dans `DEPENDANCES_GLOBALES.md`
-
----
-
-## 👻 Suivi des entités orphelines
-
-Le fichier [`Orphelin/orphelin.yaml`](./Orphelin/orphelin.yaml) (et sa version lisible [`orphelin.md`](./Orphelin/orphelin.md)) inventorie toutes les entités référencées dans le dashboard mais absentes de HA, détectées via l'intégration **Spook**.
-
-Catégories suivies : ⛔ OBSOLÈTE · 🔴 FANTÔME · 🟡 PARTIEL · 🔲 ORPHELIN · 🔵 NON PRIO · ✅ COUVERT
 
 ---
 
 ## 🏗️ Dossier de travail local (`ReBuild/`)
 
-Le dépôt est maintenu depuis un **dossier de travail local** (`C:\Users\Berry Swann\Documents\HA\ReBuild\`) via Claude (Cowork mode) :
+Le depot est maintenu depuis un **dossier de travail local** (`C:\Users\Berry Swann\Documents\ReBuild\`) via Claude (Cowork mode) :
 
 ```
 ReBuild/
-├── CLAUDE.md                        ← directives IA (source de vérité)
-├── INDEX_NAVIGATION_FULL.md         ← index 18 vignettes (accordéon, entités, pop-ups)
-├── SYNC_REPORT.md                   ← rapport de synchronisation GitHub ↔ local
-├── IA/                              ← contextes IA spécialisés (INTEGRATIONS, ARBO, P4, INDEX…)
-├── Dashboard/                       ← YAMLs dashboard versionnés (max 3 par vignette)
-│   └── Dashboard_COMPLET/           ← exports dashboard complets (conservation illimitée)
-├── docs_dashboard/
-│   ├── TREE_CORRIGE/                ← fichiers corrigés → à copier dans /config/
-│   ├── TREE_ORIGINE/                ← snapshot GitHub de référence (lecture seule)
-│   └── docs/                        ← documentation complète (18 vignettes)
-├── docs_automations/
-│   ├── TREE_CORRIGE/                ← automations cibles → à coller dans HA UI
-│   └── TREE_ORIGINE/                ← snapshot automations avant corrections
-├── docs_scripts/
-│   ├── TREE_CORRIGE/                ← scripts corrigés
-│   └── TREE_ORIGINE/
-└── Orphelin/                        ← inventaire entités fantômes
+├── CLAUDE.md                   <- directives IA (source de verite)
+├── Github/
+│   ├── INDEX_GLOBAL.md         <- index unique 6 sections (accordeon GitHub)
+│   └── README.md
+├── DOCS/                       <- toute la documentation + YAML de travail
+├── historique/                 <- journaux de session
+└── secrets.yaml                <- identifiants (NE PAS synchroniser)
 ```
 
-> Procédure de maintenance détaillée : [`docs/WORKFLOW_REBUILD.md`](./docs/WORKFLOW_REBUILD.md)
-
----
-
-## 📸 Aperçu
-
-<p align="center">
-  <img width="600" height="3520" alt="Dashboard Home Assistant" src="https://github.com/user-attachments/assets/fc33371e-3d93-4102-a357-14aa3a4a8863" />
-</p>
+> Procedure de maintenance detaillee : [`DOCS/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md`](./DOCS/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md)
 
 ---
 
@@ -223,8 +246,8 @@ ReBuild/
 
 - [Forum HACF](https://forum.hacf.fr)
 - [Documentation Officielle HA](https://www.home-assistant.io/docs/)
-- [Ancien dépôt](https://github.com/BerrySwann/home-assistant-config) *(archivé — remplacé par ce re-build)*
+- [Ancien depot](https://github.com/BerrySwann/home-assistant-config) *(archive — remplace par ce re-build)*
 
 ---
 
-✨ **Projet vivant — architecture modulaire, documentée, maintenue avec Claude (Anthropic)**
+✨ **Projet vivant — architecture modulaire, documentee, maintenue avec Claude (Anthropic)**
