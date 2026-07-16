@@ -1,0 +1,33 @@
+id: '1766771622762'
+alias: (D) Notification température Up ou Down de (7h30 -> 21h00)
+description: 'Envoie le message personnalisé de clim si le texte change, OU au réveil à 07h30.\n'
+triggers:
+- trigger: state
+  entity_id: sensor.th_balcon_nord_temperature
+- trigger: time
+  at: 07:30:00
+conditions: []
+actions:
+- condition: time
+  after: 07:30:00
+  before: '21:00:00'
+- delay: 00:00:02
+- if:
+  - condition: template
+    value_template: "{{ states('sensor.message_clim_personnalise_7h30_21h00') in ['unknown',\
+      \ 'unavailable'] or\n   states('sensor.mamour_wi_fi_connection')\
+      \ in ['unknown', 'unavailable'] or\n   states('sensor.eric_wi_fi_connection')\
+      \ in ['unknown', 'unavailable'] or\n   states('sensor.th_balcon_nord_temperature')\
+      \ in ['unknown', 'unavailable'] }}\n"
+  then:
+  - action: notify.mobile_app_eric
+    data:
+      title: '[ANJ] Erreur Capteurs'
+      message: Un capteur (Température, Wifi ou Message) est indisponible. Vérifiez
+        les entités.
+  else:
+  - action: notify.mobile_app_eric
+    data:
+      title: '[Automa. Notif. Jrs]'
+      message: '{{ states(''sensor.message_clim_personnalise_7h30_21h00'') }}'
+mode: queued

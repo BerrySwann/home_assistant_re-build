@@ -1,0 +1,15 @@
+id: '1766776558910'
+alias: '[Backup] Alerte si KO 15 min'
+description: 'Notification si le backup reste en KO pendant 15 minutes'
+triggers:
+- trigger: state
+  entity_id: sensor.backup_github_status
+  to: KO
+  for: 00:15:00
+conditions: []
+actions:
+- action: persistent_notification.create
+  data:
+    title: Backup GitHub
+    message: Échec ou pas de commit depuis 15 min. Vérifie /config/.logs/ha_git_backup.log
+mode: single

@@ -1,0 +1,95 @@
+type: custom:button-card
+show_icon: false
+show_name: false
+styles:
+  grid:
+    - grid-template-areas: '"graph"'
+    - grid-template-columns: 1fr
+    - grid-template-rows: 1fr
+  card:
+    - aspect-ratio: 1/1
+    - border-radius: 10px
+    - background: transparent
+    - border-width: 3px
+    - border-color: white
+    - border-style: double
+    - color: white
+    - font-size: 11px
+    - line-height: 1.2
+  custom_fields:
+    graph:
+      - width: 115%
+      - height: 120%
+      - margin-top: 20px
+      - margin-left: 10px
+      - margin-right: 10px
+      - margin-bottom: 0px
+      - align-self: center
+      - justify-self: center
+custom_fields:
+  graph:
+    card:
+      type: custom:flex-horseshoe-card
+      entities:
+        - entity: sensor.taille_db_home_assistant
+          tap_action:
+            action: navigate
+            navigation_path: /dashboard-tablette/reserve
+          decimals: 1
+          name: MARIADB
+          icon: mdi:database
+      show:
+        horseshoe_style: colorstopgradient
+      layout:
+        icons:
+          - id: 0
+            entity_index: 0
+            xpos: 50
+            ypos: 25
+            size: 5
+        states:
+          - id: 0
+            entity_index: 0
+            xpos: 50
+            ypos: 60
+            styles:
+              - font-weight: bold;
+              - font-size: 30px;
+              - opacity: 0.95;
+        names:
+          - id: 0
+            entity_index: 0
+            xpos: 50
+            ypos: 77
+            styles:
+              - font-weight: 700;
+              - font-size: 15px;
+              - opacity: 0.9;
+        hlines:
+          - id: 0
+            xpos: 50
+            ypos: 37
+            length: 50
+            styles:
+              - stroke: var(--primary-text-color);
+              - stroke-width: 2;
+              - stroke-linecap: round;
+              - opacity: 1;
+      horseshoe_scale:
+        min: 0
+        max: 4000
+        width: 3
+      color_stops:
+        "0": green
+        "1800": gold
+        "2500": rgb(231,180,57)
+        "3000": rgb(225,156,24)
+        "3500": darkorange
+        "4000": red
+      card_mod:
+        style: |
+          ha-card {
+            background: none !important;
+            box-shadow: none !important;
+            border: none !important;
+          }

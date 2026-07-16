@@ -1,0 +1,1326 @@
+type: grid
+cards:
+  - type: heading
+    icon: mdi:sun-snowflake
+    heading: CLIM.  / RADIATEUR
+    heading_style: title
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: false
+        entity: sensor.temperature_delta_affichage
+        tap_action:
+          action: navigate
+          navigation_path: "#calcul"
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - type: conditional
+    conditions:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: sensor.salon_power_status_affichage
+            state_not: "off"
+          - condition: state
+            entity: sensor.cuisine_power_status_affichage
+            state_not: "off"
+          - condition: state
+            entity: sensor.bureau_power_status_affichage
+            state_not: "off"
+          - condition: state
+            entity: sensor.sdb_power_status_affichage
+            state_not: "off"
+          - condition: state
+            entity: sensor.sdb_seche_serviette_status_affichage
+            state_not: "off"
+          - condition: state
+            entity: sensor.chambre_power_status_affichage
+            state_not: "off"
+    card:
+      type: custom:stack-in-card
+      mode: vertical
+      cards:
+        - type: horizontal-stack
+          cards:
+            - type: custom:mod-card
+              card_mod:
+                style:
+                  .: |
+                    :host {
+                      --text-divider-color: white;
+                      --text-divider-line-size: 5px;
+                    }
+              card:
+                type: custom:text-divider-row
+                text: Consomation TOTAL Climatisations & Radiateurs
+      card_mod:
+        style: |
+          ha-card {
+            border: none !important;
+            box-shadow: none !important;
+            background: none !important;
+          }
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: conditional
+        conditions:
+          - entity: sensor.salon_power_status
+            state_not: "off"
+        chip:
+          type: template
+          icon: mdi:air-conditioner
+          icon_color: |-
+            {% if is_state('sensor.clim_salon_etat', 'Cool') %} #87CEEB
+            {% elif is_state('sensor.clim_salon_etat', 'Heat') %} #ff6100
+            {% elif is_state('sensor.clim_salon_etat', 'Fan') %} #40E0D0
+            {% else %} #FF0000 {% endif %}
+          content: "Salon: {{ states('sensor.clim_salon_etat') }}"
+          tap_action:
+            action: none
+      - type: conditional
+        conditions:
+          - entity: sensor.cuisine_power_status
+            state_not: "off"
+        chip:
+          type: template
+          icon: mdi:heating-coil
+          icon_color: |-
+            {% if is_state('sensor.radiateur_cuisine_etat', 'Heat') %} #ff6100
+            {% else %} #FF0000 {% endif %}
+          content: "Cuisine: {{ states('sensor.radiateur_cuisine_etat') }}"
+          tap_action:
+            action: none
+      - type: conditional
+        conditions:
+          - entity: sensor.bureau_power_status
+            state_not: "off"
+        chip:
+          type: template
+          icon: mdi:air-conditioner
+          icon_color: |-
+            {% if is_state('sensor.clim_bureau_etat', 'Cool') %} #87CEEB
+            {% elif is_state('sensor.clim_bureau_etat', 'Heat') %} #ff6100
+            {% elif is_state('sensor.clim_bureau_etat', 'Fan') %} #40E0D0
+            {% else %} #FF0000 {% endif %}
+          content: "Bureau: {{ states('sensor.clim_bureau_etat') }}"
+          tap_action:
+            action: none
+      - type: conditional
+        conditions:
+          - entity: sensor.sdb_soufflant_power_status
+            state_not: "off"
+        chip:
+          type: template
+          icon: mdi:heat-wave
+          icon_color: |-
+            {% if is_state('sensor.sdb_soufflant_etat', 'Heat') %} #ff6100
+            {% else %} #FF0000 {% endif %}
+          content: "SdB Soufflant: {{ states('sensor.sdb_soufflant_etat') }}"
+          tap_action:
+            action: none
+      - type: conditional
+        conditions:
+          - entity: sensor.sdb_seche_serviette_power_status
+            state_not: "off"
+        chip:
+          type: template
+          icon: mdi:heating-coil
+          icon_color: |-
+            {% if is_state('sensor.sdb_seche_serviette_etat', 'Heat') %} #ff6100
+            {% else %} #FF0000 {% endif %}
+          content: "SdB Serviette: {{ states('sensor.sdb_seche_serviette_etat') }}"
+          tap_action:
+            action: none
+      - type: conditional
+        conditions:
+          - entity: sensor.chambre_power_status
+            state_not: "off"
+        chip:
+          type: template
+          icon: mdi:air-conditioner
+          icon_color: |-
+            {% if is_state('sensor.clim_chambre_etat', 'Cool') %} #87CEEB
+            {% elif is_state('sensor.clim_chambre_etat', 'Heat') %} #ff6100
+            {% elif is_state('sensor.clim_chambre_etat', 'Fan') %} #40E0D0
+            {% else %} #FF0000 {% endif %}
+          content: "Chambre: {{ states('sensor.clim_chambre_etat') }}"
+          tap_action:
+            action: none
+    alignment: center
+  - type: vertical-stack
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: custom:bar-card
+          icon: mdi:lightning-bolt-outline
+          title_position: inside
+          height: 38
+          positions:
+            icon: inside
+            indicator: inside
+            name: inside
+            value: inside
+          show_icon: true
+          align: split
+          columns: "1"
+          unit_of_measurement: W
+          severity:
+            - color: gainsboro
+              from: 0
+              to: 5
+            - color: rgb(102, 255, 102)
+              from: 5
+              to: 49
+            - color: rgb(0, 102, 0)
+              from: 50
+              to: 249
+            - color: orange
+              from: 250
+              to: 499
+            - color: darkorange
+              from: 500
+              to: 749
+            - color: red
+              from: 750
+              to: 999
+            - color: darkred
+              from: 1000
+              to: 6000
+          card_mod:
+            style: |
+              :host {
+                --ha-card-border-color: none !important;
+                --card-background-color: none !important;
+                }
+              ha-card {
+                border: none !important;
+                box-shadow: none !important;
+                background: none !important;
+                font-weight: bold;
+                --mdc-icon-size: 25px;
+                --paper-item-icon-color: white;
+              }
+              bar-card-currentbar, bar-card-backgroundbar {
+                height: 6px !important;
+                margin-top: 35px;
+              }
+        filter:
+          include:
+            - options: {}
+              entity_id: sensor.conso_clim_rad_total
+        sort:
+          numeric: true
+          reverse: true
+          ip: false
+          ignore_case: false
+          method: state
+          show_empty: false
+          entity_row: true
+    visibility:
+      - condition: numeric_state
+        entity: sensor.conso_clim_rad_total
+        above: 0.1
+  - card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: false
+      margin: false
+      border_radius: false
+      background: false
+      outer_padding: false
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: Climatiseur du SALON
+  - type: custom:stack-in-card
+    mode: vertical
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+    cards:
+      - type: conditional
+        conditions:
+          - entity: input_boolean.clim_salon_arret_securise_en_cours
+            state: "on"
+          - entity: sensor.salon_power_lock
+            state: "on"
+        card:
+          type: custom:mod-card
+          card_mod:
+            style:
+              .: |
+                :host {
+                  --text-divider-color: rgb(234, 67, 53);
+                  --text-divider-line-size: 5px;
+                }
+          card:
+            type: custom:text-divider-row
+            text: ⚠️ Clim SALON en cours d'arrêt ⚠️
+      - type: conditional
+        conditions:
+          - entity: input_boolean.clim_salon_arret_securise_en_cours
+            state: "off"
+          - entity: switch.clim_salon_nous
+            state: "off"
+          - entity: sensor.salon_power_status_affichage
+            state: "off"
+        card:
+          type: custom:mod-card
+          card_mod:
+            style:
+              .: |
+                :host {
+                  --text-divider-color: #FFA000;
+                  --text-divider-line-size: 3px;
+                }
+          card:
+            type: custom:text-divider-row
+            text: La prise extérieur "CLIM SALON" est coupée
+  - type: heading
+    icon: mdi:sofa
+    heading: Clim. Salon
+    heading_style: title
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: remote.clim_salon
+        color: state
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: switch.schedule_clim_du_salon_week
+        name: Sem.
+        color: state
+        state_content: name
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: switch.schedule_clim_du_salon_week_end
+        name: Week-End
+        color: state
+        state_content: name
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.clim_salon_nous_power
+        color: amber
+      - type: entity
+        show_state: false
+        show_icon: true
+        entity: switch.clim_salon_nous
+        icon: mdi:power
+        color: state
+        tap_action:
+          action: call-service
+          service: script.j_1_1_salon_clim_on_off_intelligent
+          service_data:
+            piece: salon
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/prog-clim-salon
+  - type: thermostat
+    entity: climate.clim_salon_rm4_mini
+    features:
+      - style: icons
+        type: climate-hvac-modes
+        hvac_modes:
+          - "off"
+          - fan_only
+          - heat
+          - cool
+      - style: dropdown
+        type: climate-fan-modes
+        fan_modes:
+          - auto
+          - quiet
+          - high
+          - med
+          - low
+    name: Clim SALON
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  - type: vertical-stack
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: custom:bar-card
+          icon: mdi:lightning-bolt
+          title_position: inside
+          height: 38
+          positions:
+            icon: inside
+            indicator: inside
+            name: inside
+            value: inside
+          show_icon: true
+          align: split
+          columns: "1"
+          unit_of_measurement: W
+          severity:
+            - color: gainsboro
+              from: 0
+              to: 5
+            - color: rgb(102, 255, 102)
+              from: 5
+              to: 49
+            - color: rgb(0, 102, 0)
+              from: 50
+              to: 249
+            - color: orange
+              from: 250
+              to: 499
+            - color: darkorange
+              from: 500
+              to: 749
+            - color: red
+              from: 750
+              to: 999
+            - color: darkred
+              from: 1000
+              to: 6000
+          card_mod:
+            style: |
+              :host {
+                --ha-card-border-color: none !important;
+                --card-background-color: none !important;
+                }
+              ha-card {
+                border: none !important;
+                box-shadow: none !important;
+                background: none !important;
+                font-weight: bold;
+                --mdc-icon-size: 25px;
+                --paper-item-icon-color: white;
+              }
+              bar-card-currentbar, bar-card-backgroundbar {
+                height: 6px !important;
+                margin-top: 35px;
+              }
+        filter:
+          include:
+            - options: {}
+              entity_id: sensor.clim_salon_nous_power
+        sort:
+          numeric: true
+          reverse: true
+          ip: false
+          ignore_case: false
+          method: state
+          show_empty: false
+          entity_row: true
+    visibility:
+      - condition: numeric_state
+        entity: sensor.clim_salon_nous_power
+        above: 0.1
+  - card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: false
+      margin: false
+      border_radius: false
+      background: false
+      outer_padding: false
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: Radiateur électrique de la CUISINE
+  - type: heading
+    icon: mdi:fridge
+    heading: Rad. Cuisine
+    heading_style: title
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: switch.radiateur_elec_cuisine
+        color: state
+        icon: mdi:power
+        tap_action:
+          action: toggle
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: switch.schedule_radiateur_cuisine_week
+        color: state
+        state_content: name
+        name: Sem.
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: switch.schedule_radiateur_cuisine_week_end
+        name: Week-End
+        color: state
+        state_content: name
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.radiateur_elec_cuisine_power
+        color: amber
+      - type: entity
+        show_state: false
+        show_icon: true
+        entity: switch.radiateur_elec_cuisine
+        icon: mdi:power
+        color: state
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/prog-radiateur-cuisine
+  - type: thermostat
+    entity: climate.radiateur_cuisine
+    features:
+      - type: climate-hvac-modes
+    show_current_as_primary: false
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  - type: vertical-stack
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: custom:bar-card
+          icon: mdi:lightning-bolt
+          title_position: inside
+          height: 38
+          positions:
+            icon: inside
+            indicator: inside
+            name: inside
+            value: inside
+          show_icon: true
+          align: split
+          columns: "1"
+          unit_of_measurement: W
+          severity:
+            - color: gainsboro
+              from: 0
+              to: 5
+            - color: rgb(102, 255, 102)
+              from: 5
+              to: 49
+            - color: rgb(0, 102, 0)
+              from: 50
+              to: 249
+            - color: orange
+              from: 250
+              to: 499
+            - color: darkorange
+              from: 500
+              to: 749
+            - color: red
+              from: 750
+              to: 999
+            - color: darkred
+              from: 1000
+              to: 6000
+          card_mod:
+            style: |
+              :host {
+                --ha-card-border-color: none !important;
+                --card-background-color: none !important;
+                }
+              ha-card {
+                border: none !important;
+                box-shadow: none !important;
+                background: none !important;
+                font-weight: bold;
+                --mdc-icon-size: 25px;
+                --paper-item-icon-color: white;
+              }
+              bar-card-currentbar, bar-card-backgroundbar {
+                height: 6px !important;
+                margin-top: 35px;
+              }
+        filter:
+          include:
+            - options: {}
+              entity_id: sensor.radiateur_elec_cuisine_power
+        sort:
+          numeric: true
+          reverse: true
+          ip: false
+          ignore_case: false
+          method: state
+          show_empty: false
+          entity_row: true
+    visibility:
+      - condition: numeric_state
+        entity: sensor.radiateur_elec_cuisine_power
+        above: 0.1
+  - card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: false
+      margin: false
+      border_radius: false
+      background: false
+      outer_padding: false
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: Climatiseur du BUREAU
+  - type: custom:stack-in-card
+    mode: vertical
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+    cards:
+      - type: conditional
+        conditions:
+          - entity: input_boolean.clim_bureau_arret_securise_en_cours
+            state: "on"
+          - entity: sensor.bureau_power_lock
+            state: "on"
+        card:
+          type: custom:mod-card
+          card_mod:
+            style:
+              .: |
+                :host {
+                  --text-divider-color: rgb(234, 67, 53);
+                  --text-divider-line-size: 5px;
+                }
+          card:
+            type: custom:text-divider-row
+            text: ⚠️ Clim BUREAU en cours d'arrêt ⚠️
+      - type: conditional
+        conditions:
+          - entity: input_boolean.clim_bureau_arret_securise_en_cours
+            state: "off"
+          - entity: switch.clim_bureau_nous
+            state: "off"
+          - entity: sensor.bureau_power_status_affichage
+            state: "off"
+        card:
+          type: custom:mod-card
+          card_mod:
+            style:
+              .: |
+                :host {
+                  --text-divider-color: #FFA000;
+                  --text-divider-line-size: 3px;
+                }
+          card:
+            type: custom:text-divider-row
+            text: La prise extérieur "CLIM BUREAU" est coupée
+  - type: heading
+    icon: mdi:desktop-tower-monitor
+    heading: clim. Bureau
+    heading_style: title
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: remote.clim_bureau
+        color: state
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: switch.schedule_clim_du_bureau_week
+        name: Sem.
+        color: state
+        state_content: name
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: switch.schedule_clim_du_bureau_week_end
+        name: Week-End
+        color: state
+        state_content: name
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.clim_bureau_nous_power
+        color: amber
+      - type: entity
+        show_state: false
+        show_icon: true
+        entity: switch.clim_bureau_nous
+        icon: mdi:power
+        color: state
+        tap_action:
+          action: call-service
+          service: script.j_1_2_bureau_clim_on_off_intelligent
+          service_data:
+            piece: bureau
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/prog-clim-bureau
+  - type: thermostat
+    entity: climate.clim_bureau_rm4_mini
+    features:
+      - style: icons
+        type: climate-hvac-modes
+        hvac_modes:
+          - "off"
+          - fan_only
+          - heat
+          - cool
+      - style: dropdown
+        type: climate-fan-modes
+        fan_modes:
+          - auto
+          - comfort
+          - breeze
+          - level1
+          - level2
+          - level3
+          - level4
+          - level5
+          - powerful
+    name: Clim du BUREAU
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  - type: vertical-stack
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: custom:bar-card
+          icon: mdi:lightning-bolt
+          title_position: inside
+          height: 38
+          positions:
+            icon: inside
+            indicator: inside
+            name: inside
+            value: inside
+          show_icon: true
+          align: split
+          columns: "1"
+          unit_of_measurement: W
+          severity:
+            - color: gainsboro
+              from: 0
+              to: 5
+            - color: rgb(102, 255, 102)
+              from: 5
+              to: 49
+            - color: rgb(0, 102, 0)
+              from: 50
+              to: 249
+            - color: orange
+              from: 250
+              to: 499
+            - color: darkorange
+              from: 500
+              to: 749
+            - color: red
+              from: 750
+              to: 999
+            - color: darkred
+              from: 1000
+              to: 6000
+          card_mod:
+            style: |
+              :host {
+                --ha-card-border-color: none !important;
+                --card-background-color: none !important;
+                }
+              ha-card {
+                border: none !important;
+                box-shadow: none !important;
+                background: none !important;
+                font-weight: bold;
+                --mdc-icon-size: 25px;
+                --paper-item-icon-color: white;
+              }
+              bar-card-currentbar, bar-card-backgroundbar {
+                height: 6px !important;
+                margin-top: 35px;
+              }
+        filter:
+          include:
+            - options: {}
+              entity_id: sensor.clim_bureau_nous_power
+        sort:
+          numeric: true
+          reverse: true
+          ip: false
+          ignore_case: false
+          method: state
+          show_empty: false
+          entity_row: true
+    visibility:
+      - condition: numeric_state
+        entity: sensor.clim_bureau_nous_power
+        above: 0.1
+  - card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: false
+      margin: false
+      border_radius: false
+      background: false
+      outer_padding: false
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: Chauffage Salle de Bain
+  - type: heading
+    icon: mdi:bathtub
+    heading: Soullant SdB
+    heading_style: title
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: remote.soufflant_sdb
+        color: state
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: switch.schedule_soufflant_salle_de_bain_week
+        name: Sem.
+        color: state
+        state_content: name
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: switch.schedule_soufflant_salle_de_bain_week_end
+        name: Week-End
+        color: state
+        state_content: name
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.prise_soufflant_salle_de_bain_nous_power
+        color: amber
+      - type: entity
+        show_state: false
+        show_icon: true
+        entity: switch.prise_soufflant_salle_de_bain_nous
+        color: state
+        icon: mdi:power
+        tap_action:
+          action: toggle
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/prog-soufflant-sdb
+  - type: thermostat
+    entity: climate.soufflant_salle_de_bain
+    features:
+      - style: icons
+        type: climate-hvac-modes
+        hvac_modes:
+          - "off"
+          - heat
+    show_current_as_primary: false
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  - type: custom:button-card
+    entity: sensor.sdb_soufflant_power_status
+    triggers_update:
+      - sensor.sdb_soufflant_power_status
+      - switch.inter_soufflant_salle_de_bain
+      - input_select.etat_resistance_soufflant_sdb
+      - sensor.th_salle_de_bain_temperature
+      - climate.soufflant_salle_de_bain
+    show_name: true
+    show_icon: false
+    show_state: true
+    show_label: true
+    name: Soufflant SDB
+    icon: |
+      [[[
+        const power = states['input_select.etat_resistance_soufflant_sdb']?.state;
+        if (power === '2000W') return 'mdi:radiator';
+        if (power === '1000W') return 'mdi:radiator';
+        if (power === '0W') return 'mdi:fan';
+        return 'mdi:radiator-off';
+      ]]]
+    styles:
+      card:
+        - display: |
+            [[[
+              if (states['switch.inter_soufflant_salle_de_bain']?.state === 'off') return 'none';
+              return 'block';
+            ]]]
+        - background: transparent
+        - border-radius: 12px
+        - padding: 12px
+        - box-shadow: none
+      grid:
+        - grid-template-areas: "\"i n\" \"i s\" \"i l\""
+        - grid-template-columns: 0px 1fr
+        - grid-template-rows: min-content min-content min-content
+      name:
+        - font-size: 14px
+        - font-weight: 500
+        - color: var(--primary-text-color)
+        - justify-self: center
+        - align-self: center
+      state:
+        - font-size: 16px
+        - font-weight: bold
+        - justify-self: center
+        - margin-top: 2px
+        - color: |
+            [[[
+              const power = states['input_select.etat_resistance_soufflant_sdb']?.state;
+              if (power === '2000W') return '#ff9800';
+              if (power === '1000W') return '#fdd835';
+              if (power === '0W') return '#2196f3';
+              return '#44739e';
+            ]]]
+      label:
+        - font-size: 12px
+        - color: var(--secondary-text-color)
+        - justify-self: center
+        - margin-top: 2px
+    state_display: |
+      [[[
+        return states['input_select.etat_resistance_soufflant_sdb']?.state || 'Inconnu';
+      ]]]
+    label: |
+      [[[
+        const tempState = states['sensor.th_salle_de_bain_temperature'];
+        const climateState = states['climate.soufflant_salle_de_bain'];
+        if (!tempState || !climateState || !climateState.attributes.temperature) return 'Calcul en cours...';
+        const temp = parseFloat(tempState.state).toFixed(1);
+        const target = parseFloat(climateState.attributes.temperature).toFixed(1);
+        const delta = (temp - target).toFixed(1);
+        const sign = delta >= 0 ? '+' : '';
+        return `${temp}°C (${sign}${delta}°C)`;
+      ]]]
+    tap_action:
+      action: more-info
+    extra_styles: |
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
+      }
+    card_mod:
+      style: |
+        ha-card {
+          background: transparent !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  - type: vertical-stack
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: custom:bar-card
+          icon: mdi:lightning-bolt
+          title_position: inside
+          height: 38
+          positions:
+            icon: inside
+            indicator: inside
+            name: inside
+            value: inside
+          show_icon: true
+          align: split
+          columns: "1"
+          unit_of_measurement: W
+          severity:
+            - color: gainsboro
+              from: 0
+              to: 5
+            - color: rgb(102, 255, 102)
+              from: 5
+              to: 49
+            - color: rgb(0, 102, 0)
+              from: 50
+              to: 249
+            - color: orange
+              from: 250
+              to: 499
+            - color: darkorange
+              from: 500
+              to: 749
+            - color: red
+              from: 750
+              to: 999
+            - color: darkred
+              from: 1000
+              to: 6000
+          card_mod:
+            style: |
+              :host {
+                --ha-card-border-color: none !important;
+                --card-background-color: none !important;
+                }
+              ha-card {
+                border: none !important;
+                box-shadow: none !important;
+                background: none !important;
+                font-weight: bold;
+                --mdc-icon-size: 25px;
+                --paper-item-icon-color: white;
+              }
+              bar-card-currentbar, bar-card-backgroundbar {
+                height: 6px !important;
+                margin-top: 35px;
+              }
+        filter:
+          include:
+            - options: {}
+              entity_id: sensor.prise_soufflant_salle_de_bain_nous_power
+        sort:
+          numeric: true
+          reverse: true
+          ip: false
+          ignore_case: false
+          method: state
+          show_empty: false
+          entity_row: true
+    visibility:
+      - condition: numeric_state
+        entity: sensor.prise_soufflant_salle_de_bain_nous_power
+        above: 1
+  - card_mod:
+      style: |
+        ha-card {
+          margin-top: 25px;
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: false
+      margin: false
+      border_radius: false
+      background: false
+      outer_padding: false
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mod-card
+            card_mod:
+              style:
+                .: |
+                  :host {
+                    --text-divider-color: white;
+                    --text-divider-line-size: 5px;
+                  }
+            card:
+              type: custom:text-divider-row
+              text: Climatiseur de la CHAMBRE
+  - type: custom:stack-in-card
+    mode: vertical
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+    cards:
+      - type: conditional
+        conditions:
+          - entity: input_boolean.clim_chambre_arret_securise_en_cours
+            state: "on"
+          - entity: sensor.chambre_power_lock
+            state: "on"
+        card:
+          type: custom:mod-card
+          card_mod:
+            style:
+              .: |
+                :host {
+                  --text-divider-color: rgb(234, 67, 53);
+                  --text-divider-line-size: 5px;
+                }
+          card:
+            type: custom:text-divider-row
+            text: ⚠️ Clim CHAMBRE en cours d'arrêt ⚠️
+      - type: conditional
+        conditions:
+          - entity: input_boolean.clim_chambre_arret_securise_en_cours
+            state: "off"
+          - entity: switch.clim_chambre_nous
+            state: "off"
+          - entity: sensor.chambre_power_status_affichage
+            state: "off"
+        card:
+          type: custom:mod-card
+          card_mod:
+            style:
+              .: |
+                :host {
+                  --text-divider-color: #FFA000;
+                  --text-divider-line-size: 3px;
+                }
+          card:
+            type: custom:text-divider-row
+            text: La prise extérieur "CLIM CHAMBRE" est coupée
+  - type: heading
+    icon: mdi:bed
+    heading: clim. Chambre
+    heading_style: title
+    badges:
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: switch.schedule_clim_de_la_chambre_week
+        color: state
+        name: Sem.
+        state_content: name
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: switch.schedule_clim_de_la_chambre_week_end
+        state_content: name
+        color: state
+        name: Week-End
+      - type: entity
+        show_state: true
+        show_icon: true
+        entity: sensor.clim_chambre_nous_power
+        color: amber
+      - type: entity
+        show_state: false
+        show_icon: true
+        entity: switch.clim_chambre_nous
+        icon: mdi:power
+        color: state
+        tap_action:
+          action: call-service
+          service: script.j_1_3_chambre_clim_on_off_intelligent
+          service_data:
+            piece: chambre
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/prog-clim-chambre
+  - type: thermostat
+    entity: climate.clim_chambre_rm4_mini
+    features:
+      - style: icons
+        type: climate-hvac-modes
+        hvac_modes:
+          - "off"
+          - fan_only
+          - heat
+          - cool
+      - style: dropdown
+        type: climate-fan-modes
+        fan_modes:
+          - auto
+          - breeze
+          - powerful
+          - level1
+          - level2
+          - level3
+          - level4
+          - level5
+    name: Clim de la CHAMBRE
+    show_current_as_primary: false
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  - type: vertical-stack
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: custom:bar-card
+          icon: mdi:lightning-bolt
+          title_position: inside
+          height: 38
+          positions:
+            icon: inside
+            indicator: inside
+            name: inside
+            value: inside
+          show_icon: true
+          align: split
+          columns: "1"
+          unit_of_measurement: W
+          severity:
+            - color: gainsboro
+              from: 0
+              to: 5
+            - color: rgb(102, 255, 102)
+              from: 5
+              to: 49
+            - color: rgb(0, 102, 0)
+              from: 50
+              to: 249
+            - color: orange
+              from: 250
+              to: 499
+            - color: darkorange
+              from: 500
+              to: 749
+            - color: red
+              from: 750
+              to: 999
+            - color: darkred
+              from: 1000
+              to: 6000
+          card_mod:
+            style: |
+              :host {
+                --ha-card-border-color: none !important;
+                --card-background-color: none !important;
+                }
+              ha-card {
+                border: none !important;
+                box-shadow: none !important;
+                background: none !important;
+                font-weight: bold;
+                --mdc-icon-size: 25px;
+                --paper-item-icon-color: white;
+              }
+              bar-card-currentbar, bar-card-backgroundbar {
+                height: 6px !important;
+                margin-top: 35px;
+              }
+        filter:
+          include:
+            - options: {}
+              entity_id: sensor.clim_chambre_nous_power
+        sort:
+          numeric: true
+          reverse: true
+          ip: false
+          ignore_case: false
+          method: state
+          show_empty: false
+          entity_row: true
+    visibility:
+      - condition: numeric_state
+        entity: sensor.clim_chambre_nous_power
+        above: 0.1
+  - type: custom:bubble-card
+    card_type: pop-up
+    hash: "#calcul"
+    show_header: true
+    force_icon: false
+    show_state: false
+    show_last_changed: false
+    show_attribute: false
+    button_type: name
+    name: CALCUL DU DELTA Intérieur <-> Extérieur
+    icon: mdi:delta
+    show_icon: true
+    show_name: true
+    card_layout: normal
+    hide_backdrop: false
+    close_on_click: false
+    bg_opacity: "0"
+    cards:
+      - type: custom:streamline-card
+        template: calcule_temp_cible
+  - type: custom:streamline-card
+    template: nav_bar

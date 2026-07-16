@@ -1,0 +1,39 @@
+id: '1774183767864'
+alias: '[P3-SALON] BOUTON IKEA INTER SALON (4) — ON/OFF LIGHT.SALON'
+description: 'Pilotage de light.salon via le bouton IKEA 4 touches Salon. Topic
+  MQTT : zigbee2mqtt2/Inter Salon (4) (IKEA)/action ON -> light.turn_on | OFF ->
+  light.turn_off
+
+  '
+triggers:
+- alias: 'DÉCLENCHEMENT : BOUTON ON (MQTT)'
+  trigger: mqtt
+  topic: zigbee2mqtt2/Inter Salon (4) (IKEA)/action
+  payload: 'on'
+  id: bouton_on
+- alias: 'DÉCLENCHEMENT : BOUTON OFF (MQTT)'
+  trigger: mqtt
+  topic: zigbee2mqtt2/Inter Salon (4) (IKEA)/action
+  payload: 'off'
+  id: bouton_off
+conditions: []
+actions:
+- alias: 'ACTION : BASCULE LIGHT.SALON'
+  choose:
+  - alias: 'CAS : BOUTON ON PRESSÉ'
+    conditions:
+    - condition: trigger
+      id: bouton_on
+    sequence:
+    - action: light.turn_on
+      target:
+        entity_id: light.salon
+  - alias: 'CAS : BOUTON OFF PRESSÉ'
+    conditions:
+    - condition: trigger
+      id: bouton_off
+    sequence:
+    - action: light.turn_off
+      target:
+        entity_id: light.salon
+mode: restart

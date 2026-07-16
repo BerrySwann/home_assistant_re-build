@@ -1,0 +1,344 @@
+type: grid
+cards:
+  - type: heading
+    icon: mdi:cog
+    heading: Système
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - type: vertical-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: separator
+        name: Audit GitHub MD5
+        icon: mdi:shield-check
+        rows: 2
+        styles: |-
+          .bubble-line {
+            background: var(--primary-text-color);
+            opacity: 1;
+          }
+        card_layout: normal
+      - type: custom:button-card
+        entity: script.audit_md5
+        show_state: false
+        tap_action:
+          action: call-service
+          service: script.turn_on
+          service_data:
+            entity_id: script.audit_md5
+        name: |
+          [[[
+            return entity.state === 'on' ? 'Audit en cours...' : 'Audit MD5 GitHub';
+          ]]]
+        icon: mdi:shield-search
+        styles:
+          grid:
+            - grid-template-areas: "\"i n n btn\" \"i s s btn\""
+            - grid-template-columns: 0.6fr 1fr 1.6fr 0.7fr
+            - grid-template-rows: repeat(2, 50%)
+            - gap: 0px
+          card:
+            - padding: 8px
+            - background: |
+                [[[
+                  return entity.state === 'on'
+                    ? 'rgba(255, 152, 0, 0.10)'
+                    : 'rgba(3, 169, 244, 0.08)';
+                ]]]
+            - border: |
+                [[[
+                  return entity.state === 'on'
+                    ? '1px solid #ff9800'
+                    : '1px solid #03a9f4';
+                ]]]
+            - border-radius: 12px
+          icon:
+            - color: |
+                [[[
+                  return entity.state === 'on' ? '#ff9800' : '#03a9f4';
+                ]]]
+            - width: 42px
+            - align-self: center
+            - left: 20%
+          name:
+            - justify-self: start
+            - font-size: 0.9em
+            - font-weight: 600
+            - color: |
+                [[[
+                  return entity.state === 'on' ? '#ff9800' : '#03a9f4';
+                ]]]
+            - padding-top: 6px
+          state:
+            - justify-self: start
+            - font-size: 0.72em
+            - padding-bottom: 6px
+        custom_fields:
+          btn:
+            card:
+              type: custom:button-card
+              entity: script.audit_md5
+              show_name: false
+              icon: |
+                [[[
+                  return entity.state === 'on' ? 'mdi:rotate-right' : 'mdi:upload-circle';
+                ]]]
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.audit_md5
+              styles:
+                card:
+                  - background: none
+                  - border: none
+                  - box-shadow: none
+                icon:
+                  - animation: |
+                      [[[
+                        return entity.state === 'on' ? 'rotating 1s linear infinite' : '';
+                      ]]]
+                  - color: |
+                      [[[
+                        return entity.state === 'on' ? '#ff9800' : 'rgba(85, 252, 252, 1)';
+                      ]]]
+                  - width: 32px
+                  - left: 17%
+      - type: markdown
+        content: >
+          {% set text = state_attr('sensor.audit_md5_journal', 'text') or '' %}
+          {% set r = namespace(res='', ter='') %} {% for line in
+          text.split('\n') %}
+            {% if 'RÉSULTAT' in line %}{% set r.res = line %}{% endif %}
+            {% if 'Audit MD5 terminé' in line %}{% set r.ter = line.split(' · ')[0] %}{% endif %}
+          {% endfor %} {% if r.res %} {{ r.res }}<br>{{ r.ter }}<br>→
+          /config/.logs/md5_audit_{{ now().strftime('%Y-%m-%d') }}.txt {% else
+          %}*— Aucun audit lancé —*{% endif %}
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: transparent;
+            }
+            ha-markdown { font-size: 12px; line-height: 1.8; }
+  - type: custom:bubble-card
+    card_type: separator
+    name: GitHub
+    icon: mdi:github
+    rows: 2
+    styles: |-
+      .bubble-line {
+        background: var(--primary-text-color);
+        opacity: 1;
+      }
+    card_layout: normal
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-chips-card
+        alignment: center
+        chips:
+          - type: template
+            entity: sensor.backup_github_status
+            icon: mdi:github
+            content: >-
+              {{ iif(states('sensor.backup_github_status')=='OK','Backup
+              OK','Backup KO') }} ·  {{
+              state_attr('sensor.backup_github_status','ts') or 'jamais' }}
+            icon_color: >-
+              {{ iif(states('sensor.backup_github_status')=='OK','green','red')
+              }}
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: transparent;
+            }
+      - type: custom:mushroom-chips-card
+        alignment: center
+        chips:
+          - type: template
+            entity: sensor.git_last_weekly_tag
+            icon: mdi:tag
+            content: "{{ states('sensor.git_last_weekly_tag') or 'no tag' }}"
+            icon_color: >-
+              {% set tag = states('sensor.git_last_weekly_tag') %} {% set
+              iso_now = now().isocalendar() %} {% set iso_prev = (now() -
+              timedelta(days=7)).isocalendar() %} {% set current  =
+              "weekly-%04d-W%02d" | format(iso_now[0], iso_now[1]) %} {% set
+              previous = "weekly-%04d-W%02d" | format(iso_prev[0], iso_prev[1])
+              %} {{ 'green' if (tag and (tag.startswith(current) or
+              tag.startswith(previous))) else 'amber' }}
+            tap_action:
+              action: url
+              url_path: https://github.com/BerrySwann/home_assistant_re-build/tags
+              new_tab: true
+            hold_action:
+              action: call-service
+              service: shell_command.git_backup_push_weekly
+              confirmation:
+                text: Créer un tag hebdomadaire ?
+          - type: template
+            entity: sensor.github_default_branch
+            icon: mdi:source-branch
+            content: "Branche: {{ states('sensor.github_default_branch') or 'unknown' }}"
+            icon_color: >-
+              {% set b = states('sensor.github_default_branch') %}  {{ 'green'
+              if b == 'main' else 'amber' }}
+            tap_action:
+              action: url
+              url_path: https://github.com/BerrySwann/home_assistant_re-build
+              new_tab: true
+          - type: template
+            icon: mdi:cloud-upload-outline
+            content: Push
+            icon_color: deep-orange
+            tap_action:
+              action: call-service
+              service: shell_command.git_backup_push_manual
+              confirmation:
+                text: Lancer un push Git manuel ?
+            hold_action:
+              action: url
+              url_path: >-
+                https://github.com/BerrySwann/home_assistant_re-build/commits/main
+              new_tab: true
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: transparent;
+            }
+      - type: custom:mushroom-title-card
+        title: Journal Backup (10 derniers)
+        alignment: center
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: transparent;
+            }
+      - type: markdown
+        content: |-
+          ```
+          {{ state_attr('sensor.backup_github_journal','text') or '—' }}
+          ```
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: transparent;
+            }
+      - type: custom:apexcharts-card
+        header:
+          title: Backup GitHub — OK/KO
+        graph_span: 7d
+        span:
+          end: day
+        yaxis:
+          - min: 0
+            max: 1
+            decimals: 0
+        series:
+          - entity: sensor.backup_github_status
+            name: Statut
+            type: column
+            color: "#3498db"
+            transform: "EVAL: return x === 'OK' ? 1 : 0;"
+            group_by:
+              duration: 6h
+              func: last
+        apex_config:
+          yaxis:
+            tickAmount: 2
+            labels:
+              formatter: |
+                EVAL: function (value) { return value === 1 ? 'OK' : 'KO'; }
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: transparent;
+            }
+  - type: custom:bubble-card
+    card_type: separator
+    name: MariaDB
+    icon: mdi:database-cog-outline
+    rows: 2
+    styles: |-
+      .bubble-line {
+        background: var(--primary-text-color);
+        opacity: 1;
+      }
+    card_layout: normal
+  - type: custom:apexcharts-card
+    header:
+      show: true
+      title: Évolution Taille MariaDB
+      show_states: true
+      colorize_states: true
+    graph_span: 7d
+    span:
+      end: day
+    yaxis:
+      - id: db_size
+        min: auto
+        max: auto
+        decimals: 1
+    series:
+      - entity: sensor.taille_db_home_assistant
+        name: Taille (MiB)
+        yaxis_id: db_size
+        type: area
+        color: "#f39c12"
+        opacity: 0.3
+        stroke_width: 2
+        group_by:
+          func: last
+          duration: 1d
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: transparent;
+        }
+  - type: custom:button-card
+    entity: automation.db_purge_mariadb_repack
+    name: "[DB] Purge MariaDB + Repack"
+    icon: mdi:database-check-outline
+    tap_action:
+      action: call-service
+      service: automation.trigger
+      service_data:
+        entity_id: automation.db_purge_mariadb_repack
+    styles:
+      card:
+        - background: transparent
+        - border: 0.1px solid white
+        - border-radius: 12px
+        - color: white
+        - font-size: 14px
+        - padding: 4px
+      icon:
+        - width: 40px
+        - height: 40px
+        - color: white
+      name:
+        - font-size: 16px
+        - margin-top: 12px

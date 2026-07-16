@@ -1,0 +1,52 @@
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ TPL — P2 : ECO PRISES DYNAMIQUES — CONFIG LISTE                              │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Externalise la liste de configuration des prises pilotées par l'automation
+# "Eco. PRISES DINAMIQUE -> By-Présence/Groupe".
+# Chaque entrée définit une entité (switch ou light) et les groupes de présence
+# pour lesquels elle doit être allumée.
+# Ajouter une prise = 1 ligne ici + recharger templates. L'automation ne change pas.
+#
+# ## 🧮 CALCUL & SOURCES :
+# Source : aucune entité source — liste de configuration statique.
+# Consommé par : automation eco_prises_dynamique via state_attr(..., 'prises')
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+# | MATÉRIEL | CAPTEUR BRUT (source) | CE FICHIER                    | AVAL                              |
+# |:---------|:----------------------|:------------------------------|:----------------------------------|
+# | [config] | [liste statique]      | sensor.eco_prises_config      | automation eco_prises_dynamique   |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - 'groupes: []' = toujours OFF (quel que soit le groupe de présence).
+# - Domaines supportés : switch.* et light.* (homeassistant.turn_on/off est domain-agnostic).
+# - Après modification : Outils dev → YAML → Recharger templates.
+# - Ne pas modifier l'automation — elle lit cette liste dynamiquement.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# Indirect — pilote les prises affichées dans L3C2 (Commandes Prises).
+
+# --- eco_prises_config ---
+- sensor:
+    - name: "Eco Prises Config"
+      unique_id: eco_prises_config
+      state: "ok"
+      attributes:
+        # HA exige une string template — utiliser tojson pour sérialiser la liste.  # "[modif] liste YAML brute → tojson"
+        # Consommé par l'automation avec from_json : state_attr(...,'prises') | from_json
+        #
+        # FORMAT : {'entity': '<entity_id>', 'groupes': ['groupe_X', ...]}
+        #          groupes: [] = TOUJOURS OFF
+        #
+        # AJOUTER UNE PRISE : copier une ligne {'entity':..., 'groupes':[...]} dans la liste.
+        prises: >-
+          {{ [
+            {'entity': 'switch.prise_horloge_ikea',        'groupes': ['groupe_2', 'groupe_4']},
+            {'entity': 'light.hue_smart_eco_salon',        'groupes': ['groupe_2', 'groupe_4']},
+            {'entity': 'light.hue_smart_eco_tv_salon',       'groupes': [], 'absent_only': true},
+            {'entity': 'light.hue_smart_eco_pc_bureau',    'groupes': [], 'absent_only': true},
+            {'entity': 'switch.ecran_p_c_3_play_hue',      'groupes': ['groupe_2', 'groupe_3', 'groupe_4']},
+            {'entity': 'light.hue_smart_eco_tv_chambre',   'groupes': [], 'absent_only': true},
+            {'entity': 'switch.prise_tete_de_lit_chambre', 'groupes': ['groupe_2', 'groupe_4']}
+          ] | tojson }}

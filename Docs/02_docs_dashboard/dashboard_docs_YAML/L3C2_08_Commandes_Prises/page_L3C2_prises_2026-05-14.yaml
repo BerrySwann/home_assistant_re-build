@@ -1,0 +1,600 @@
+type: grid
+cards:
+  - type: heading
+    icon: mdi:power-standby
+    heading: PRISES éCO.
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - type: heading
+    icon: phu:rooms-hallway
+    heading: Entrée
+    heading_style: title
+    badges: []
+  - type: custom:mushroom-entity-card
+    entity: switch.prise_horloge_ikea
+    name: Prise Eco. Horloge
+    icon: mdi:power-socket-fr
+    primary_info: name
+    secondary_info: none
+    tap_action:
+      action: toggle
+    layout: horizontal
+    fill_container: false
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            /* ================================ */
+            /* USER CONFIG                      */
+            /* ================================ */
+            
+            /* --- MAIN SETTINGS --- */
+            {% set max_watts = 2500 %}           {# The maximum W your device supports #}
+            {% set show_ma = false %}            {# Set to true for mA, false for A #}
+            {% set custom_msg = "MAX: 2500W" %}  {# Text shown bottom right #}
+            {% set theme_mode = 'dark' %}        {# 'dark' or 'light' #}
+            {% set card_height = '90px' %}      {# card Height #}
+            
+            /* --- SENSORS --- */
+            {% set sensor_power =   'sensor.prise_horloge_ikea_power' %}
+            {% set sensor_voltage = 'sensor.prise_horloge_ikea_voltage' %}
+            {% set sensor_current = 'sensor.prise_horloge_ikea_current' %}
+            /* --- COLORS (RGB Triplets) --- */
+            {% set color_plug = '76, 175, 80' %} 
+            {% set color_bar  = '76, 175, 80' %} 
+            {% set color_watts = '255, 152, 0' %}
+            {% set color_amps  = '33, 150, 243' %}
+            {% set color_volts = '76, 175, 80' %}
+            /* --- FONT SIZES --- */
+            {% set fs_icon   = '65px' %} 
+            {% set fs_main   = '14px' %} 
+            {% set fs_sec    = '11px' %} 
+            {% set fs_badges = '11px' %} 
+            {% set fs_custom = '11px' %} 
+            /* ============================= */
+            {% if theme_mode == 'dark' %}
+               {% set card_bg_color = '28, 28, 28' %}
+               {% set color_text_main = '255, 255, 255' %} 
+               {% set color_text_sec  = '255, 255, 255' %}
+               {% set color_text_msg  = '255, 255, 255' %}
+            {% else %}
+               {% set card_bg_color = '255, 255, 255' %}
+               {% set color_text_main = '33, 33, 33' %} 
+               {% set color_text_sec  = '114, 114, 114' %} 
+               {% set color_text_msg  = '33, 33, 33' %}
+            {% endif %}
+            {% set watts = states(sensor_power) | float(0) | int %}
+            {% set volts = states(sensor_voltage) | float(0) | int %}
+            {% set amps  = states(sensor_current) | float(0) %}
+            {% if show_ma %}
+                {% set str_amps = amps | int ~ " mA" %}
+            {% else %}
+                {% set str_amps = amps | round(2) ~ " A" %}
+            {% endif %}
+            {% set pct = (watts / max_watts * 100) | int %}
+            {% set pct = 100 if pct > 100 else pct %}
+            {% set dur = 2.0 - (watts / max_watts * 1.5) %}
+            {% set dur = 0.4 if dur < 0.4 else dur %}
+            {% if watts > 0 %}
+                {% set anim_shake = 'ultra-plug-on ' ~ dur ~ 's ease-in-out infinite' %}
+                {% set anim_glow  = 'ultra-plug-glow 1.8s ease-in-out infinite' %}
+                {% set anim_arcs  = 'ultra-plug-arcs 1.2s linear infinite' %}
+                {% set glow_bg    = 'inset 0 0 60px rgba(' ~ color_bar ~ ', 0.1)' %}
+            {% else %}
+                {% set anim_shake = 'none' %}
+                {% set anim_glow  = 'none' %}
+                {% set anim_arcs  = 'none' %}
+                {% set glow_bg    = 'none' %}
+            {% endif %}
+            {% set str_watts = watts ~ " W" %}
+            {% set str_volts = volts ~ " V" %}
+            --c-plug:  {{ color_plug }};
+            --c-watts: {{ color_watts }};
+            --c-amps:  {{ color_amps }};
+            --c-volts: {{ color_volts }};
+            --c-bar:   {{ color_bar }};
+            --c-txt-m: {{ color_text_main }};
+            --c-txt-s: {{ color_text_sec }};
+            --c-txt-c: {{ color_text_msg }};
+            --v-watts: "{{ str_watts }}";
+            --v-volts: "{{ str_volts }}";
+            --v-amps:  "{{ str_amps }}";    
+            --v-custom: "{{ custom_msg }}";
+            --anim-shake: {{ anim_shake }};
+            --anim-glow:  {{ anim_glow }};
+            --anim-arcs:  {{ anim_arcs }};
+            --fs-main:   {{ fs_main }};
+            --fs-sec:    {{ fs_sec }};
+            --fs-badges: {{ fs_badges }};
+            --fs-custom: {{ fs_custom }};
+            --fs-icon:   {{ fs_icon }};
+            --bar-width: {{ pct }}%;
+            --card-h: {{ card_height }};
+            --card-b: {{ card_bg_color }};
+            --card-in-glow: {{ glow_bg }};
+            --badge-bg-opacity: 0.15;
+            --badge-width: 58px;
+            --badge-height: 20px;
+            --badge-gap: 6px;
+            --pos-1: 12px;
+            --pos-2: calc(12px + var(--badge-width) + var(--badge-gap));
+            --pos-3: calc(12px + (var(--badge-width) * 2) + (var(--badge-gap) * 2));
+            background: rgb(var(--card-b)) !important;
+            height: var(--card-h) !important;
+            box-shadow: var(--card-in-glow);
+            overflow: hidden !important;
+            width: auto !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+          ha-card::after {
+            content: var(--v-watts);
+            background: color-mix(in srgb, rgb(var(--c-watts)), transparent calc(100% - (var(--badge-bg-opacity) * 100)));
+            border: 1px solid rgb(var(--c-watts));
+            color: rgb(var(--c-watts));
+            box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-watts)), transparent 70%);
+            position: absolute; top: 12px; right: var(--pos-1);
+            width: var(--badge-width); height: var(--badge-height);
+            display: flex; align-items: center; justify-content: center;
+            font-size: var(--fs-badges);
+            font-weight: 700; border-radius: 4px; z-index: 5;
+          }
+          ha-card::before {
+            content: var(--v-amps);
+            background: color-mix(in srgb, rgb(var(--c-amps)), transparent calc(100% - (var(--badge-bg-opacity) * 100)));
+            border: 1px solid rgb(var(--c-amps));
+            color: rgb(var(--c-amps));
+            box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-amps)), transparent 70%);
+            position: absolute; top: 12px; right: var(--pos-2);
+            width: var(--badge-width); height: var(--badge-height);
+            display: flex; align-items: center; justify-content: center;
+            font-size: var(--fs-badges);
+            font-weight: 700; border-radius: 4px; z-index: 5;
+          }
+        mushroom-shape-icon$: |
+          .shape {
+            --icon-size: var(--fs-icon) !important;
+            --shape-color: rgba(var(--c-plug), 0.2) !important;
+            --icon-color: rgb(var(--c-plug)) !important;
+            background: radial-gradient(circle, rgba(var(--c-plug), 0.1) 0%, transparent 70%) !important;
+            overflow: visible !important;
+            transform-origin: 50% 50%;
+            animation: var(--anim-shake);
+          }
+          .shape::before,
+          .shape::after {
+            content: '';
+            position: absolute; inset: -4px; border-radius: 50%;
+            pointer-events: none;
+          }
+          .shape::before { animation: var(--anim-glow); z-index: 0; }
+          .shape::after  { animation: var(--anim-arcs); z-index: 1; }
+          @keyframes ultra-plug-on {
+            0%   { transform: scale(1); }
+            25%  { transform: scale(1.05) translateY(-1px); }
+            50%  { transform: scale(1.08) translateY(-2px); }
+            75%  { transform: scale(1.04) translateY(-1px); }
+            100% { transform: scale(1); }
+          }
+          @keyframes ultra-plug-glow {
+            0%   { box-shadow: 0 0 10px 3px rgba(var(--c-plug), 0.6), 0 0 20px 8px rgba(var(--c-plug), 0.3); }
+            50%  { box-shadow: 0 0 18px 6px rgba(var(--c-plug), 0.9), 0 0 32px 12px rgba(var(--c-plug), 0.4); }
+            100% { box-shadow: 0 0 10px 3px rgba(var(--c-plug), 0.6), 0 0 20px 8px rgba(var(--c-plug), 0.3); }
+          }
+          @keyframes ultra-plug-arcs {
+            0%   { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.0), 12px 4px 0 -4px rgba(var(--c-plug), 0.0); }
+            25%  { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.7), 12px 4px 0 -4px rgba(var(--c-plug), 0.4); }
+            50%  { box-shadow: -6px 2px 0 -4px rgba(var(--c-plug), 0.3), 10px -8px 0 -4px rgba(var(--c-plug), 0.7); }
+            75%  { box-shadow: -12px 4px 0 -4px rgba(var(--c-plug), 0.5), 8px 0 0 -4px rgba(var(--c-plug), 0.2); }
+            100% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.0), 12px 4px 0 -4px rgba(var(--c-plug), 0.0); }
+          }
+          ha-icon { z-index: 2; filter: drop-shadow(0 0 5px rgba(var(--c-plug), 0.8)); }
+        mushroom-state-item$: |
+          .container::before {
+            content: '';
+            position: absolute; bottom: 0px; left: 0;
+            width: var(--bar-width); height: 4px;
+            background: rgb(var(--c-bar));
+            box-shadow: 0 -1px 8px rgba(var(--c-bar), 0.5);
+            border-bottom-left-radius: var(--ha-card-border-radius, 12px);
+            border-bottom-right-radius: 0;
+            transition: width 0.5s ease; z-index: 2;
+          }
+          .container::after {
+            content: var(--v-volts);
+            background: color-mix(in srgb, rgb(var(--c-volts)), transparent calc(100% - (var(--badge-bg-opacity) * 100)));
+            border: 1px solid rgb(var(--c-volts));
+            color: rgb(var(--c-volts));
+            box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-volts)), transparent 70%);
+            position: absolute; top: 12px; right: var(--pos-3);
+            width: var(--badge-width); height: var(--badge-height);
+            display: flex; align-items: center; justify-content: center;
+            font-size: var(--fs-badges);
+            font-weight: 700; border-radius: 4px; z-index: 5;
+          }
+        mushroom-state-info$: |
+          .primary { font-size: var(--fs-main) !important; color: rgb(var(--c-txt-m)) !important; }
+          .secondary { font-size: var(--fs-sec) !important; color: rgb(var(--c-txt-s)) !important; }
+          .container::after {
+            content: var(--v-custom);
+            position: absolute; bottom: 8px; right: 12px;
+            width: 200px; text-align: right;
+            font-size: var(--fs-custom); font-weight: 600;
+            color: rgba(var(--c-txt-c), 0.4);
+            letter-spacing: 1px; z-index: 6;
+          }
+  - type: heading
+    badges: []
+  - type: heading
+    icon: mdi:sofa
+    heading_style: title
+    badges: []
+    heading: Salon
+  - type: custom:mushroom-entity-card
+    entity: light.hue_smart_eco_salon
+    name: Prise Eco. Salon
+    icon: mdi:power-socket-fr
+    primary_info: name
+    secondary_info: none
+    tap_action:
+      action: toggle
+    layout: horizontal
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            {% set max_watts = 2500 %}
+            {% set show_ma = false %}
+            {% set custom_msg = "MAX: 2500W" %}
+            {% set theme_mode = 'dark' %}
+            {% set card_height = '90px' %}
+            {% set sensor_power =   'sensor.prise_salon_chargeur_nous_power' %}
+            {% set sensor_voltage = 'sensor.prise_salon_chargeur_nous_voltage' %}
+            {% set sensor_current = 'sensor.prise_salon_chargeur_nous_current' %}
+            {% set color_plug = '76, 175, 80' %} 
+            {% set color_bar  = '76, 175, 80' %} 
+            {% set color_watts = '255, 152, 0' %}
+            {% set color_amps  = '33, 150, 243' %}
+            {% set color_volts = '76, 175, 80' %}
+            {% set fs_icon = '65px' %}{% set fs_main = '14px' %}{% set fs_sec = '11px' %}{% set fs_badges = '11px' %}{% set fs_custom = '11px' %}
+            {% if theme_mode == 'dark' %}
+               {% set card_bg_color = '28, 28, 28' %}{% set color_text_main = '255, 255, 255' %}{% set color_text_sec = '255, 255, 255' %}{% set color_text_msg = '255, 255, 255' %}
+            {% else %}
+               {% set card_bg_color = '255, 255, 255' %}{% set color_text_main = '33, 33, 33' %}{% set color_text_sec = '114, 114, 114' %}{% set color_text_msg = '33, 33, 33' %}
+            {% endif %}
+            {% set watts = states(sensor_power) | float(0) | int %}
+            {% set volts = states(sensor_voltage) | float(0) | int %}
+            {% set amps  = states(sensor_current) | float(0) %}
+            {% set str_amps = amps | round(2) ~ " A" %}
+            {% set pct = [[(watts / max_watts * 100) | int, 100] | min, 0] | max %}
+            {% set dur = [2.0 - (watts / max_watts * 1.5), 0.4] | max %}
+            {% if watts > 0 %}{% set anim_shake = 'ultra-plug-on ' ~ dur ~ 's ease-in-out infinite' %}{% set anim_glow = 'ultra-plug-glow 1.8s ease-in-out infinite' %}{% set anim_arcs = 'ultra-plug-arcs 1.2s linear infinite' %}{% set glow_bg = 'inset 0 0 60px rgba(' ~ color_bar ~ ', 0.1)' %}
+            {% else %}{% set anim_shake = 'none' %}{% set anim_glow = 'none' %}{% set anim_arcs = 'none' %}{% set glow_bg = 'none' %}{% endif %}
+            --c-plug: {{ color_plug }}; --c-watts: {{ color_watts }}; --c-amps: {{ color_amps }}; --c-volts: {{ color_volts }}; --c-bar: {{ color_bar }};
+            --c-txt-m: {{ color_text_main }}; --c-txt-s: {{ color_text_sec }}; --c-txt-c: {{ color_text_msg }};
+            --v-watts: "{{ watts ~ ' W' }}"; --v-volts: "{{ volts ~ ' V' }}"; --v-amps: "{{ str_amps }}"; --v-custom: "{{ custom_msg }}";
+            --anim-shake: {{ anim_shake }}; --anim-glow: {{ anim_glow }}; --anim-arcs: {{ anim_arcs }};
+            --fs-main: {{ fs_main }}; --fs-sec: {{ fs_sec }}; --fs-badges: {{ fs_badges }}; --fs-custom: {{ fs_custom }}; --fs-icon: {{ fs_icon }};
+            --bar-width: {{ pct }}%; --card-h: {{ card_height }}; --card-b: {{ card_bg_color }}; --card-in-glow: {{ glow_bg }};
+            --badge-bg-opacity: 0.15; --badge-width: 58px; --badge-height: 20px; --badge-gap: 6px;
+            --pos-1: 12px; --pos-2: calc(12px + var(--badge-width) + var(--badge-gap)); --pos-3: calc(12px + (var(--badge-width) * 2) + (var(--badge-gap) * 2));
+            background: rgb(var(--card-b)) !important; height: var(--card-h) !important;
+            box-shadow: var(--card-in-glow); overflow: hidden !important; width: auto !important;
+            display: flex; flex-direction: column; justify-content: center;
+          }
+          ha-card::after { content: var(--v-watts); background: color-mix(in srgb, rgb(var(--c-watts)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-watts)); color: rgb(var(--c-watts)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-watts)), transparent 70%); position: absolute; top: 12px; right: var(--pos-1); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+          ha-card::before { content: var(--v-amps); background: color-mix(in srgb, rgb(var(--c-amps)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-amps)); color: rgb(var(--c-amps)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-amps)), transparent 70%); position: absolute; top: 12px; right: var(--pos-2); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+        mushroom-shape-icon$: |
+          .shape { --icon-size: var(--fs-icon) !important; --shape-color: rgba(var(--c-plug), 0.2) !important; --icon-color: rgb(var(--c-plug)) !important; background: radial-gradient(circle, rgba(var(--c-plug), 0.1) 0%, transparent 70%) !important; overflow: visible !important; transform-origin: 50% 50%; animation: var(--anim-shake); }
+          .shape::before, .shape::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; pointer-events: none; }
+          .shape::before { animation: var(--anim-glow); z-index: 0; }
+          .shape::after { animation: var(--anim-arcs); z-index: 1; }
+          @keyframes ultra-plug-on { 0% { transform: scale(1); } 25% { transform: scale(1.05) translateY(-1px); } 50% { transform: scale(1.08) translateY(-2px); } 75% { transform: scale(1.04) translateY(-1px); } 100% { transform: scale(1); } }
+          @keyframes ultra-plug-glow { 0% { box-shadow: 0 0 10px 3px rgba(var(--c-plug), 0.6), 0 0 20px 8px rgba(var(--c-plug), 0.3); } 50% { box-shadow: 0 0 18px 6px rgba(var(--c-plug), 0.9), 0 0 32px 12px rgba(var(--c-plug), 0.4); } 100% { box-shadow: 0 0 10px 3px rgba(var(--c-plug), 0.6), 0 0 20px 8px rgba(var(--c-plug), 0.3); } }
+          @keyframes ultra-plug-arcs { 0% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.0), 12px 4px 0 -4px rgba(var(--c-plug), 0.0); } 25% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.7), 12px 4px 0 -4px rgba(var(--c-plug), 0.4); } 50% { box-shadow: -6px 2px 0 -4px rgba(var(--c-plug), 0.3), 10px -8px 0 -4px rgba(var(--c-plug), 0.7); } 75% { box-shadow: -12px 4px 0 -4px rgba(var(--c-plug), 0.5), 8px 0 0 -4px rgba(var(--c-plug), 0.2); } 100% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.0), 12px 4px 0 -4px rgba(var(--c-plug), 0.0); } }
+          ha-icon { z-index: 2; filter: drop-shadow(0 0 5px rgba(var(--c-plug), 0.8)); }
+        mushroom-state-item$: |
+          .container::before { content: ''; position: absolute; bottom: 0px; left: 0; width: var(--bar-width); height: 4px; background: rgb(var(--c-bar)); box-shadow: 0 -1px 8px rgba(var(--c-bar), 0.5); border-bottom-left-radius: var(--ha-card-border-radius, 12px); border-bottom-right-radius: 0; transition: width 0.5s ease; z-index: 2; }
+          .container::after { content: var(--v-volts); background: color-mix(in srgb, rgb(var(--c-volts)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-volts)); color: rgb(var(--c-volts)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-volts)), transparent 70%); position: absolute; top: 12px; right: var(--pos-3); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+        mushroom-state-info$: |
+          .primary { font-size: var(--fs-main) !important; color: rgb(var(--c-txt-m)) !important; }
+          .secondary { font-size: var(--fs-sec) !important; color: rgb(var(--c-txt-s)) !important; }
+          .container::after { content: var(--v-custom); position: absolute; bottom: 8px; right: 12px; width: 200px; text-align: right; font-size: var(--fs-custom); font-weight: 600; color: rgba(var(--c-txt-c), 0.4); letter-spacing: 1px; z-index: 6; }
+  - type: heading
+    badges: []
+  - type: heading
+    icon: cil:tv
+    heading_style: title
+    badges: []
+    heading: TV Salon
+  - type: custom:mushroom-entity-card
+    entity: switch.prise_tv_salon_ikea
+    name: Prise Eco. TV Salon
+    icon: mdi:power-socket-fr
+    primary_info: name
+    secondary_info: none
+    tap_action:
+      action: toggle
+    layout: horizontal
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            {% set max_watts = 250 %}
+            {% set show_ma = true %}
+            {% set custom_msg = "MAX: 250W" %}
+            {% set theme_mode = 'dark' %}
+            {% set card_height = '90px' %}
+            {% set sensor_power =   'sensor.prise_tv_salon_ikea_power' %}
+            {% set sensor_voltage = 'sensor.prise_tv_salon_ikea_voltage' %}
+            {% set sensor_current = 'sensor.prise_tv_salon_ikea_current' %}
+            {% set color_plug = '76, 175, 80' %}{% set color_bar = '76, 175, 80' %}
+            {% set color_watts = '255, 152, 0' %}{% set color_amps = '33, 150, 243' %}{% set color_volts = '76, 175, 80' %}
+            {% set fs_icon = '65px' %}{% set fs_main = '14px' %}{% set fs_sec = '11px' %}{% set fs_badges = '11px' %}{% set fs_custom = '11px' %}
+            {% if theme_mode == 'dark' %}{% set card_bg_color = '28, 28, 28' %}{% set color_text_main = '255, 255, 255' %}{% set color_text_sec = '255, 255, 255' %}{% set color_text_msg = '255, 255, 255' %}
+            {% else %}{% set card_bg_color = '255, 255, 255' %}{% set color_text_main = '33, 33, 33' %}{% set color_text_sec = '114, 114, 114' %}{% set color_text_msg = '33, 33, 33' %}{% endif %}
+            {% set watts = states(sensor_power) | float(0) | int %}
+            {% set volts = states(sensor_voltage) | float(0) | int %}
+            {% set amps  = states(sensor_current) | float(0) %}
+            {% set str_amps = amps | int ~ " mA" %}
+            {% set pct = [[(watts / max_watts * 100) | int, 100] | min, 0] | max %}
+            {% set dur = [2.0 - (watts / max_watts * 1.5), 0.4] | max %}
+            {% if watts > 0 %}{% set anim_shake = 'ultra-plug-on ' ~ dur ~ 's ease-in-out infinite' %}{% set anim_glow = 'ultra-plug-glow 1.8s ease-in-out infinite' %}{% set anim_arcs = 'ultra-plug-arcs 1.2s linear infinite' %}{% set glow_bg = 'inset 0 0 60px rgba(' ~ color_bar ~ ', 0.1)' %}
+            {% else %}{% set anim_shake = 'none' %}{% set anim_glow = 'none' %}{% set anim_arcs = 'none' %}{% set glow_bg = 'none' %}{% endif %}
+            --c-plug: {{ color_plug }}; --c-watts: {{ color_watts }}; --c-amps: {{ color_amps }}; --c-volts: {{ color_volts }}; --c-bar: {{ color_bar }};
+            --c-txt-m: {{ color_text_main }}; --c-txt-s: {{ color_text_sec }}; --c-txt-c: {{ color_text_msg }};
+            --v-watts: "{{ watts ~ ' W' }}"; --v-volts: "{{ volts ~ ' V' }}"; --v-amps: "{{ str_amps }}"; --v-custom: "{{ custom_msg }}";
+            --anim-shake: {{ anim_shake }}; --anim-glow: {{ anim_glow }}; --anim-arcs: {{ anim_arcs }};
+            --fs-main: {{ fs_main }}; --fs-sec: {{ fs_sec }}; --fs-badges: {{ fs_badges }}; --fs-custom: {{ fs_custom }}; --fs-icon: {{ fs_icon }};
+            --bar-width: {{ pct }}%; --card-h: {{ card_height }}; --card-b: {{ card_bg_color }}; --card-in-glow: {{ glow_bg }};
+            --badge-bg-opacity: 0.15; --badge-width: 58px; --badge-height: 20px; --badge-gap: 6px;
+            --pos-1: 12px; --pos-2: calc(12px + var(--badge-width) + var(--badge-gap)); --pos-3: calc(12px + (var(--badge-width) * 2) + (var(--badge-gap) * 2));
+            background: rgb(var(--card-b)) !important; height: var(--card-h) !important;
+            box-shadow: var(--card-in-glow); overflow: hidden !important; width: auto !important;
+            display: flex; flex-direction: column; justify-content: center;
+          }
+          ha-card::after { content: var(--v-watts); background: color-mix(in srgb, rgb(var(--c-watts)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-watts)); color: rgb(var(--c-watts)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-watts)), transparent 70%); position: absolute; top: 12px; right: var(--pos-1); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+          ha-card::before { content: var(--v-amps); background: color-mix(in srgb, rgb(var(--c-amps)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-amps)); color: rgb(var(--c-amps)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-amps)), transparent 70%); position: absolute; top: 12px; right: var(--pos-2); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+        mushroom-shape-icon$: |
+          .shape { --icon-size: var(--fs-icon) !important; --shape-color: rgba(var(--c-plug), 0.2) !important; --icon-color: rgb(var(--c-plug)) !important; background: radial-gradient(circle, rgba(var(--c-plug), 0.1) 0%, transparent 70%) !important; overflow: visible !important; transform-origin: 50% 50%; animation: var(--anim-shake); }
+          .shape::before, .shape::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; pointer-events: none; }
+          .shape::before { animation: var(--anim-glow); z-index: 0; } .shape::after { animation: var(--anim-arcs); z-index: 1; }
+          @keyframes ultra-plug-on { 0% { transform: scale(1); } 25% { transform: scale(1.05) translateY(-1px); } 50% { transform: scale(1.08) translateY(-2px); } 75% { transform: scale(1.04) translateY(-1px); } 100% { transform: scale(1); } }
+          @keyframes ultra-plug-glow { 0% { box-shadow: 0 0 10px 3px rgba(var(--c-plug), 0.6), 0 0 20px 8px rgba(var(--c-plug), 0.3); } 50% { box-shadow: 0 0 18px 6px rgba(var(--c-plug), 0.9), 0 0 32px 12px rgba(var(--c-plug), 0.4); } 100% { box-shadow: 0 0 10px 3px rgba(var(--c-plug), 0.6), 0 0 20px 8px rgba(var(--c-plug), 0.3); } }
+          @keyframes ultra-plug-arcs { 0% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.0), 12px 4px 0 -4px rgba(var(--c-plug), 0.0); } 25% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.7), 12px 4px 0 -4px rgba(var(--c-plug), 0.4); } 50% { box-shadow: -6px 2px 0 -4px rgba(var(--c-plug), 0.3), 10px -8px 0 -4px rgba(var(--c-plug), 0.7); } 75% { box-shadow: -12px 4px 0 -4px rgba(var(--c-plug), 0.5), 8px 0 0 -4px rgba(var(--c-plug), 0.2); } 100% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.0), 12px 4px 0 -4px rgba(var(--c-plug), 0.0); } }
+          ha-icon { z-index: 2; filter: drop-shadow(0 0 5px rgba(var(--c-plug), 0.8)); }
+        mushroom-state-item$: |
+          .container::before { content: ''; position: absolute; bottom: 0px; left: 0; width: var(--bar-width); height: 4px; background: rgb(var(--c-bar)); box-shadow: 0 -1px 8px rgba(var(--c-bar), 0.5); border-bottom-left-radius: var(--ha-card-border-radius, 12px); border-bottom-right-radius: 0; transition: width 0.5s ease; z-index: 2; }
+          .container::after { content: var(--v-volts); background: color-mix(in srgb, rgb(var(--c-volts)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-volts)); color: rgb(var(--c-volts)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-volts)), transparent 70%); position: absolute; top: 12px; right: var(--pos-3); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+        mushroom-state-info$: |
+          .primary { font-size: var(--fs-main) !important; color: rgb(var(--c-txt-m)) !important; }
+          .secondary { font-size: var(--fs-sec) !important; color: rgb(var(--c-txt-s)) !important; }
+          .container::after { content: var(--v-custom); position: absolute; bottom: 8px; right: 12px; width: 200px; text-align: right; font-size: var(--fs-custom); font-weight: 600; color: rgba(var(--c-txt-c), 0.4); letter-spacing: 1px; z-index: 6; }
+  - type: heading
+    badges: []
+  - type: heading
+    icon: mdi:desktop-tower-monitor
+    heading_style: title
+    badges: []
+    heading: Bureau
+  - type: custom:mushroom-entity-card
+    entity: light.hue_smart_eco_pc_bureau
+    name: Prise PC Bureau
+    icon: mdi:power-socket-fr
+    primary_info: name
+    tap_action:
+      action: toggle
+    layout: horizontal
+    secondary_info: state
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            {% set max_watts = 500 %}
+            {% set show_ma = false %}
+            {% set custom_msg = "MAX: 500W" %}
+            {% set theme_mode = 'dark' %}
+            {% set card_height = '90px' %}
+            {% set sensor_power =   'sensor.prise_bureau_pc_ikea_power' %}
+            {% set sensor_voltage = 'sensor.prise_bureau_pc_ikea_voltage' %}
+            {% set sensor_current = 'sensor.prise_bureau_pc_ikea_current' %}
+            {% if is_state(config.entity, 'on') %}
+              {% set color_plug = '76, 175, 80' %}{% set color_bar = '76, 175, 80' %}
+            {% else %}
+              {% set color_plug = '158, 158, 158' %}{% set color_bar = '158, 158, 158' %}
+            {% endif %}
+            {% set color_watts = '255, 152, 0' %}{% set color_amps = '33, 150, 243' %}{% set color_volts = '76, 175, 80' %}
+            {% set fs_icon = '65px' %}{% set fs_main = '14px' %}{% set fs_sec = '11px' %}{% set fs_badges = '11px' %}{% set fs_custom = '11px' %}
+            {% if theme_mode == 'dark' %}{% set card_bg_color = '28, 28, 28' %}{% set color_text_main = '255, 255, 255' %}{% set color_text_sec = '255, 255, 255' %}{% set color_text_msg = '255, 255, 255' %}
+            {% else %}{% set card_bg_color = '255, 255, 255' %}{% set color_text_main = '33, 33, 33' %}{% set color_text_sec = '114, 114, 114' %}{% set color_text_msg = '33, 33, 33' %}{% endif %}
+            {% set watts = states(sensor_power) | float(0) | int %}
+            {% set volts = states(sensor_voltage) | float(0) | int %}
+            {% set amps  = states(sensor_current) | float(0) %}
+            {% set str_amps = amps | round(2) ~ " A" %}
+            {% set pct = [[(watts / max_watts * 100) | int, 100] | min, 0] | max %}
+            {% set dur = [2.0 - (watts / max_watts * 1.5), 0.4] | max %}
+            {% if watts > 0 %}{% set anim_shake = 'ultra-plug-on ' ~ dur ~ 's ease-in-out infinite' %}{% set anim_glow = 'ultra-plug-glow 1.8s ease-in-out infinite' %}{% set anim_arcs = 'ultra-plug-arcs 1.2s linear infinite' %}{% set glow_bg = 'inset 0 0 60px rgba(' ~ color_bar ~ ', 0.1)' %}
+            {% else %}{% set anim_shake = 'none' %}{% set anim_glow = 'none' %}{% set anim_arcs = 'none' %}{% set glow_bg = 'none' %}{% endif %}
+            --c-plug: {{ color_plug }}; --c-watts: {{ color_watts }}; --c-amps: {{ color_amps }}; --c-volts: {{ color_volts }}; --c-bar: {{ color_bar }};
+            --c-txt-m: {{ color_text_main }}; --c-txt-s: {{ color_text_sec }}; --c-txt-c: {{ color_text_msg }};
+            --v-watts: "{{ watts ~ ' W' }}"; --v-volts: "{{ volts ~ ' V' }}"; --v-amps: "{{ str_amps }}"; --v-custom: "{{ custom_msg }}";
+            --anim-shake: {{ anim_shake }}; --anim-glow: {{ anim_glow }}; --anim-arcs: {{ anim_arcs }};
+            --fs-main: {{ fs_main }}; --fs-sec: {{ fs_sec }}; --fs-badges: {{ fs_badges }}; --fs-custom: {{ fs_custom }}; --fs-icon: {{ fs_icon }};
+            --bar-width: {{ pct }}%; --card-h: {{ card_height }}; --card-b: {{ card_bg_color }}; --card-in-glow: {{ glow_bg }};
+            --badge-bg-opacity: 0.15; --badge-width: 58px; --badge-height: 20px; --badge-gap: 6px;
+            --pos-1: 12px; --pos-2: calc(12px + var(--badge-width) + var(--badge-gap)); --pos-3: calc(12px + (var(--badge-width) * 2) + (var(--badge-gap) * 2));
+            background: rgb(var(--card-b)) !important; height: var(--card-h) !important;
+            box-shadow: var(--card-in-glow); overflow: hidden !important; width: auto !important;
+            display: flex; flex-direction: column; justify-content: center;
+          }
+          ha-card::after { content: var(--v-watts); background: color-mix(in srgb, rgb(var(--c-watts)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-watts)); color: rgb(var(--c-watts)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-watts)), transparent 70%); position: absolute; top: 12px; right: var(--pos-1); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+          ha-card::before { content: var(--v-amps); background: color-mix(in srgb, rgb(var(--c-amps)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-amps)); color: rgb(var(--c-amps)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-amps)), transparent 70%); position: absolute; top: 12px; right: var(--pos-2); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+        mushroom-shape-icon$: |
+          .shape { --icon-size: var(--fs-icon) !important; --shape-color: rgba(var(--c-plug), 0.2) !important; --icon-color: rgb(var(--c-plug)) !important; background: radial-gradient(circle, rgba(var(--c-plug), 0.1) 0%, transparent 70%) !important; overflow: visible !important; transform-origin: 50% 50%; animation: var(--anim-shake); }
+          .shape::before, .shape::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; pointer-events: none; }
+          .shape::before { animation: var(--anim-glow); z-index: 0; } .shape::after { animation: var(--anim-arcs); z-index: 1; }
+          @keyframes ultra-plug-on { 0% { transform: scale(1); } 25% { transform: scale(1.05) translateY(-1px); } 50% { transform: scale(1.08) translateY(-2px); } 75% { transform: scale(1.04) translateY(-1px); } 100% { transform: scale(1); } }
+          @keyframes ultra-plug-glow { 0% { box-shadow: 0 0 10px 3px rgba(var(--c-plug), 0.6), 0 0 20px 8px rgba(var(--c-plug), 0.3); } 50% { box-shadow: 0 0 18px 6px rgba(var(--c-plug), 0.9), 0 0 32px 12px rgba(var(--c-plug), 0.4); } 100% { box-shadow: 0 0 10px 3px rgba(var(--c-plug), 0.6), 0 0 20px 8px rgba(var(--c-plug), 0.3); } }
+          @keyframes ultra-plug-arcs { 0% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.0), 12px 4px 0 -4px rgba(var(--c-plug), 0.0); } 25% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.7), 12px 4px 0 -4px rgba(var(--c-plug), 0.4); } 50% { box-shadow: -6px 2px 0 -4px rgba(var(--c-plug), 0.3), 10px -8px 0 -4px rgba(var(--c-plug), 0.7); } 75% { box-shadow: -12px 4px 0 -4px rgba(var(--c-plug), 0.5), 8px 0 0 -4px rgba(var(--c-plug), 0.2); } 100% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.0), 12px 4px 0 -4px rgba(var(--c-plug), 0.0); } }
+          ha-icon { z-index: 2; filter: drop-shadow(0 0 5px rgba(var(--c-plug), 0.8)); }
+        mushroom-state-item$: |
+          .container::before { content: ''; position: absolute; bottom: 0px; left: 0; width: var(--bar-width); height: 4px; background: rgb(var(--c-bar)); box-shadow: 0 -1px 8px rgba(var(--c-bar), 0.5); border-bottom-left-radius: var(--ha-card-border-radius, 12px); border-bottom-right-radius: 0; transition: width 0.5s ease; z-index: 2; }
+          .container::after { content: var(--v-volts); background: color-mix(in srgb, rgb(var(--c-volts)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-volts)); color: rgb(var(--c-volts)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-volts)), transparent 70%); position: absolute; top: 12px; right: var(--pos-3); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+        mushroom-state-info$: |
+          .primary { font-size: var(--fs-main) !important; color: rgb(var(--c-txt-m)) !important; }
+          .secondary { font-size: var(--fs-sec) !important; color: rgb(var(--c-txt-s)) !important; }
+          .container::after { content: var(--v-custom); position: absolute; bottom: 8px; right: 12px; width: 200px; text-align: right; font-size: var(--fs-custom); font-weight: 600; color: rgba(var(--c-txt-c), 0.4); letter-spacing: 1px; z-index: 6; }
+  - type: heading
+    badges: []
+  - type: heading
+    icon: mdi:bed
+    heading: Chambre
+    heading_style: title
+    badges: []
+  - type: custom:mushroom-entity-card
+    entity: light.hue_smart_eco_tv_chambre
+    name: Prise Eco. TV Chambre
+    icon: mdi:power-socket-fr
+    primary_info: name
+    secondary_info: none
+    tap_action:
+      action: toggle
+    layout: horizontal
+    fill_container: false
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            {% set max_watts = 500 %}
+            {% set show_ma = false %}
+            {% set custom_msg = "MAX: 500W" %}
+            {% set theme_mode = 'dark' %}
+            {% set card_height = '90px' %}
+            {% set sensor_power =   'sensor.prise_tv_chambre_nous_power' %}
+            {% set sensor_voltage = 'sensor.prise_tv_chambre_nous_voltage' %}
+            {% set sensor_current = 'sensor.prise_tv_chambre_nous_current' %}
+            {% set color_plug = '76, 175, 80' %}{% set color_bar = '76, 175, 80' %}
+            {% set color_watts = '255, 152, 0' %}{% set color_amps = '33, 150, 243' %}{% set color_volts = '76, 175, 80' %}
+            {% set fs_icon = '65px' %}{% set fs_main = '14px' %}{% set fs_sec = '11px' %}{% set fs_badges = '11px' %}{% set fs_custom = '11px' %}
+            {% if theme_mode == 'dark' %}{% set card_bg_color = '28, 28, 28' %}{% set color_text_main = '255, 255, 255' %}{% set color_text_sec = '255, 255, 255' %}{% set color_text_msg = '255, 255, 255' %}
+            {% else %}{% set card_bg_color = '255, 255, 255' %}{% set color_text_main = '33, 33, 33' %}{% set color_text_sec = '114, 114, 114' %}{% set color_text_msg = '33, 33, 33' %}{% endif %}
+            {% set watts = states(sensor_power) | float(0) | int %}
+            {% set volts = states(sensor_voltage) | float(0) | int %}
+            {% set amps  = states(sensor_current) | float(0) %}
+            {% set str_amps = amps | round(2) ~ " A" %}
+            {% set pct = [[(watts / max_watts * 100) | int, 100] | min, 0] | max %}
+            {% set dur = [2.0 - (watts / max_watts * 1.5), 0.4] | max %}
+            {% if watts > 0 %}{% set anim_shake = 'ultra-plug-on ' ~ dur ~ 's ease-in-out infinite' %}{% set anim_glow = 'ultra-plug-glow 1.8s ease-in-out infinite' %}{% set anim_arcs = 'ultra-plug-arcs 1.2s linear infinite' %}{% set glow_bg = 'inset 0 0 60px rgba(' ~ color_bar ~ ', 0.1)' %}
+            {% else %}{% set anim_shake = 'none' %}{% set anim_glow = 'none' %}{% set anim_arcs = 'none' %}{% set glow_bg = 'none' %}{% endif %}
+            --c-plug: {{ color_plug }}; --c-watts: {{ color_watts }}; --c-amps: {{ color_amps }}; --c-volts: {{ color_volts }}; --c-bar: {{ color_bar }};
+            --c-txt-m: {{ color_text_main }}; --c-txt-s: {{ color_text_sec }}; --c-txt-c: {{ color_text_msg }};
+            --v-watts: "{{ watts ~ ' W' }}"; --v-volts: "{{ volts ~ ' V' }}"; --v-amps: "{{ str_amps }}"; --v-custom: "{{ custom_msg }}";
+            --anim-shake: {{ anim_shake }}; --anim-glow: {{ anim_glow }}; --anim-arcs: {{ anim_arcs }};
+            --fs-main: {{ fs_main }}; --fs-sec: {{ fs_sec }}; --fs-badges: {{ fs_badges }}; --fs-custom: {{ fs_custom }}; --fs-icon: {{ fs_icon }};
+            --bar-width: {{ pct }}%; --card-h: {{ card_height }}; --card-b: {{ card_bg_color }}; --card-in-glow: {{ glow_bg }};
+            --badge-bg-opacity: 0.15; --badge-width: 58px; --badge-height: 20px; --badge-gap: 6px;
+            --pos-1: 12px; --pos-2: calc(12px + var(--badge-width) + var(--badge-gap)); --pos-3: calc(12px + (var(--badge-width) * 2) + (var(--badge-gap) * 2));
+            background: rgb(var(--card-b)) !important; height: var(--card-h) !important;
+            box-shadow: var(--card-in-glow); overflow: hidden !important; width: auto !important;
+            display: flex; flex-direction: column; justify-content: center;
+          }
+          ha-card::after { content: var(--v-watts); background: color-mix(in srgb, rgb(var(--c-watts)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-watts)); color: rgb(var(--c-watts)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-watts)), transparent 70%); position: absolute; top: 12px; right: var(--pos-1); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+          ha-card::before { content: var(--v-amps); background: color-mix(in srgb, rgb(var(--c-amps)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-amps)); color: rgb(var(--c-amps)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-amps)), transparent 70%); position: absolute; top: 12px; right: var(--pos-2); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+        mushroom-shape-icon$: |
+          .shape { --icon-size: var(--fs-icon) !important; --shape-color: rgba(var(--c-plug), 0.2) !important; --icon-color: rgb(var(--c-plug)) !important; background: radial-gradient(circle, rgba(var(--c-plug), 0.1) 0%, transparent 70%) !important; overflow: visible !important; transform-origin: 50% 50%; animation: var(--anim-shake); }
+          .shape::before, .shape::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; pointer-events: none; }
+          .shape::before { animation: var(--anim-glow); z-index: 0; } .shape::after { animation: var(--anim-arcs); z-index: 1; }
+          @keyframes ultra-plug-on { 0% { transform: scale(1); } 25% { transform: scale(1.05) translateY(-1px); } 50% { transform: scale(1.08) translateY(-2px); } 75% { transform: scale(1.04) translateY(-1px); } 100% { transform: scale(1); } }
+          @keyframes ultra-plug-glow { 0% { box-shadow: 0 0 10px 3px rgba(var(--c-plug), 0.6), 0 0 20px 8px rgba(var(--c-plug), 0.3); } 50% { box-shadow: 0 0 18px 6px rgba(var(--c-plug), 0.9), 0 0 32px 12px rgba(var(--c-plug), 0.4); } 100% { box-shadow: 0 0 10px 3px rgba(var(--c-plug), 0.6), 0 0 20px 8px rgba(var(--c-plug), 0.3); } }
+          @keyframes ultra-plug-arcs { 0% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.0), 12px 4px 0 -4px rgba(var(--c-plug), 0.0); } 25% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.7), 12px 4px 0 -4px rgba(var(--c-plug), 0.4); } 50% { box-shadow: -6px 2px 0 -4px rgba(var(--c-plug), 0.3), 10px -8px 0 -4px rgba(var(--c-plug), 0.7); } 75% { box-shadow: -12px 4px 0 -4px rgba(var(--c-plug), 0.5), 8px 0 0 -4px rgba(var(--c-plug), 0.2); } 100% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.0), 12px 4px 0 -4px rgba(var(--c-plug), 0.0); } }
+          ha-icon { z-index: 2; filter: drop-shadow(0 0 5px rgba(var(--c-plug), 0.8)); }
+        mushroom-state-item$: |
+          .container::before { content: ''; position: absolute; bottom: 0px; left: 0; width: var(--bar-width); height: 4px; background: rgb(var(--c-bar)); box-shadow: 0 -1px 8px rgba(var(--c-bar), 0.5); border-bottom-left-radius: var(--ha-card-border-radius, 12px); border-bottom-right-radius: 0; transition: width 0.5s ease; z-index: 2; }
+          .container::after { content: var(--v-volts); background: color-mix(in srgb, rgb(var(--c-volts)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-volts)); color: rgb(var(--c-volts)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-volts)), transparent 70%); position: absolute; top: 12px; right: var(--pos-3); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+        mushroom-state-info$: |
+          .primary { font-size: var(--fs-main) !important; color: rgb(var(--c-txt-m)) !important; }
+          .secondary { font-size: var(--fs-sec) !important; color: rgb(var(--c-txt-s)) !important; }
+          .container::after { content: var(--v-custom); position: absolute; bottom: 8px; right: 12px; width: 200px; text-align: right; font-size: var(--fs-custom); font-weight: 600; color: rgba(var(--c-txt-c), 0.4); letter-spacing: 1px; z-index: 6; }
+  - type: heading
+    badges: []
+  - type: heading
+    icon: mdi:bed
+    heading: Tête de Lit
+    heading_style: title
+    badges: []
+  - type: custom:mushroom-entity-card
+    entity: switch.prise_tete_de_lit_chambre
+    name: Prise Eco. Têtes de Lit
+    icon: mdi:power-socket-fr
+    primary_info: name
+    secondary_info: none
+    tap_action:
+      action: toggle
+    layout: horizontal
+    fill_container: false
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            {% set max_watts = 50 %}
+            {% set show_ma = false %}
+            {% set custom_msg = "MAX: 50W" %}
+            {% set theme_mode = 'dark' %}
+            {% set card_height = '90px' %}
+            {% set sensor_power =   'sensor.prise_tete_de_lit_chambre_power' %}
+            {% set sensor_voltage = 'sensor.prise_tete_de_lit_chambre_voltage' %}
+            {% set sensor_current = 'sensor.prise_tete_de_lit_chambre_current' %}
+            {% set color_plug = '76, 175, 80' %}{% set color_bar = '76, 175, 80' %}
+            {% set color_watts = '255, 152, 0' %}{% set color_amps = '33, 150, 243' %}{% set color_volts = '76, 175, 80' %}
+            {% set fs_icon = '65px' %}{% set fs_main = '14px' %}{% set fs_sec = '11px' %}{% set fs_badges = '11px' %}{% set fs_custom = '11px' %}
+            {% if theme_mode == 'dark' %}{% set card_bg_color = '28, 28, 28' %}{% set color_text_main = '255, 255, 255' %}{% set color_text_sec = '255, 255, 255' %}{% set color_text_msg = '255, 255, 255' %}
+            {% else %}{% set card_bg_color = '255, 255, 255' %}{% set color_text_main = '33, 33, 33' %}{% set color_text_sec = '114, 114, 114' %}{% set color_text_msg = '33, 33, 33' %}{% endif %}
+            {% set watts = states(sensor_power) | float(0) | int %}
+            {% set volts = states(sensor_voltage) | float(0) | int %}
+            {% set amps  = states(sensor_current) | float(0) %}
+            {% set str_amps = amps | round(2) ~ " A" %}
+            {% set pct = [[(watts / max_watts * 100) | int, 100] | min, 0] | max %}
+            {% set dur = [2.0 - (watts / max_watts * 1.5), 0.4] | max %}
+            {% if watts > 0 %}{% set anim_shake = 'ultra-plug-on ' ~ dur ~ 's ease-in-out infinite' %}{% set anim_glow = 'ultra-plug-glow 1.8s ease-in-out infinite' %}{% set anim_arcs = 'ultra-plug-arcs 1.2s linear infinite' %}{% set glow_bg = 'inset 0 0 60px rgba(' ~ color_bar ~ ', 0.1)' %}
+            {% else %}{% set anim_shake = 'none' %}{% set anim_glow = 'none' %}{% set anim_arcs = 'none' %}{% set glow_bg = 'none' %}{% endif %}
+            --c-plug: {{ color_plug }}; --c-watts: {{ color_watts }}; --c-amps: {{ color_amps }}; --c-volts: {{ color_volts }}; --c-bar: {{ color_bar }};
+            --c-txt-m: {{ color_text_main }}; --c-txt-s: {{ color_text_sec }}; --c-txt-c: {{ color_text_msg }};
+            --v-watts: "{{ watts ~ ' W' }}"; --v-volts: "{{ volts ~ ' V' }}"; --v-amps: "{{ str_amps }}"; --v-custom: "{{ custom_msg }}";
+            --anim-shake: {{ anim_shake }}; --anim-glow: {{ anim_glow }}; --anim-arcs: {{ anim_arcs }};
+            --fs-main: {{ fs_main }}; --fs-sec: {{ fs_sec }}; --fs-badges: {{ fs_badges }}; --fs-custom: {{ fs_custom }}; --fs-icon: {{ fs_icon }};
+            --bar-width: {{ pct }}%; --card-h: {{ card_height }}; --card-b: {{ card_bg_color }}; --card-in-glow: {{ glow_bg }};
+            --badge-bg-opacity: 0.15; --badge-width: 58px; --badge-height: 20px; --badge-gap: 6px;
+            --pos-1: 12px; --pos-2: calc(12px + var(--badge-width) + var(--badge-gap)); --pos-3: calc(12px + (var(--badge-width) * 2) + (var(--badge-gap) * 2));
+            background: rgb(var(--card-b)) !important; height: var(--card-h) !important;
+            box-shadow: var(--card-in-glow); overflow: hidden !important; width: auto !important;
+            display: flex; flex-direction: column; justify-content: center;
+          }
+          ha-card::after { content: var(--v-watts); background: color-mix(in srgb, rgb(var(--c-watts)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-watts)); color: rgb(var(--c-watts)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-watts)), transparent 70%); position: absolute; top: 12px; right: var(--pos-1); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+          ha-card::before { content: var(--v-amps); background: color-mix(in srgb, rgb(var(--c-amps)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-amps)); color: rgb(var(--c-amps)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-amps)), transparent 70%); position: absolute; top: 12px; right: var(--pos-2); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+        mushroom-shape-icon$: |
+          .shape { --icon-size: var(--fs-icon) !important; --shape-color: rgba(var(--c-plug), 0.2) !important; --icon-color: rgb(var(--c-plug)) !important; background: radial-gradient(circle, rgba(var(--c-plug), 0.1) 0%, transparent 70%) !important; overflow: visible !important; transform-origin: 50% 50%; animation: var(--anim-shake); }
+          .shape::before, .shape::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; pointer-events: none; }
+          .shape::before { animation: var(--anim-glow); z-index: 0; } .shape::after { animation: var(--anim-arcs); z-index: 1; }
+          @keyframes ultra-plug-on { 0% { transform: scale(1); } 25% { transform: scale(1.05) translateY(-1px); } 50% { transform: scale(1.08) translateY(-2px); } 75% { transform: scale(1.04) translateY(-1px); } 100% { transform: scale(1); } }
+          @keyframes ultra-plug-glow { 0% { box-shadow: 0 0 10px 3px rgba(var(--c-plug), 0.6), 0 0 20px 8px rgba(var(--c-plug), 0.3); } 50% { box-shadow: 0 0 18px 6px rgba(var(--c-plug), 0.9), 0 0 32px 12px rgba(var(--c-plug), 0.4); } 100% { box-shadow: 0 0 10px 3px rgba(var(--c-plug), 0.6), 0 0 20px 8px rgba(var(--c-plug), 0.3); } }
+          @keyframes ultra-plug-arcs { 0% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.0), 12px 4px 0 -4px rgba(var(--c-plug), 0.0); } 25% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.7), 12px 4px 0 -4px rgba(var(--c-plug), 0.4); } 50% { box-shadow: -6px 2px 0 -4px rgba(var(--c-plug), 0.3), 10px -8px 0 -4px rgba(var(--c-plug), 0.7); } 75% { box-shadow: -12px 4px 0 -4px rgba(var(--c-plug), 0.5), 8px 0 0 -4px rgba(var(--c-plug), 0.2); } 100% { box-shadow: -10px -6px 0 -4px rgba(var(--c-plug), 0.0), 12px 4px 0 -4px rgba(var(--c-plug), 0.0); } }
+          ha-icon { z-index: 2; filter: drop-shadow(0 0 5px rgba(var(--c-plug), 0.8)); }
+        mushroom-state-item$: |
+          .container::before { content: ''; position: absolute; bottom: 0px; left: 0; width: var(--bar-width); height: 4px; background: rgb(var(--c-bar)); box-shadow: 0 -1px 8px rgba(var(--c-bar), 0.5); border-bottom-left-radius: var(--ha-card-border-radius, 12px); border-bottom-right-radius: 0; transition: width 0.5s ease; z-index: 2; }
+          .container::after { content: var(--v-volts); background: color-mix(in srgb, rgb(var(--c-volts)), transparent calc(100% - (var(--badge-bg-opacity) * 100))); border: 1px solid rgb(var(--c-volts)); color: rgb(var(--c-volts)); box-shadow: 0 0 6px 0 color-mix(in srgb, rgb(var(--c-volts)), transparent 70%); position: absolute; top: 12px; right: var(--pos-3); width: var(--badge-width); height: var(--badge-height); display: flex; align-items: center; justify-content: center; font-size: var(--fs-badges); font-weight: 700; border-radius: 4px; z-index: 5; }
+        mushroom-state-info$: |
+          .primary { font-size: var(--fs-main) !important; color: rgb(var(--c-txt-m)) !important; }
+          .secondary { font-size: var(--fs-sec) !important; color: rgb(var(--c-txt-s)) !important; }
+          .container::after { content: var(--v-custom); position: absolute; bottom: 8px; right: 12px; width: 200px; text-align: right; font-size: var(--fs-custom); font-weight: 600; color: rgba(var(--c-txt-c), 0.4); letter-spacing: 1px; z-index: 6; }
+  - type: heading
+    badges: []
+  - type: custom:streamline-card
+    template: nav_bar
+    variables: {}

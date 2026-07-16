@@ -1,0 +1,234 @@
+type: custom:button-card
+tap_action:
+  action: navigate
+  navigation_path: /dashboard-tablette/battery-bp
+entities:
+  - group.hue_devices
+  - group.ikea_devices
+  - group.sonoff_devices
+triggers_update:
+  - group.hue_devices
+  - group.ikea_devices
+  - group.sonoff_devices
+styles:
+  card:
+    - aspect-ratio: 1/1
+    - border-radius: 10px
+    - background: transparent
+    - border-width: 3px
+    - border-color: white
+    - border-style: double
+    - color: white
+    - font-size: 11px
+    - line-height: 1.2
+  grid:
+    - grid-template-areas: >
+        "title title title title title title" "espace_debut espace_debut
+        espace_debut espace_debut espace_debut espace_debut" "count marque
+        100_75_battery 75_50_battery 50_25_battery 25_0_battery" "espace_fin
+        espace_fin espace_fin espace_fin espace_fin espace_fin"
+    - grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
+    - grid-template-rows: auto 10px auto 18px
+    - margin-top: 4.5px
+  custom_fields:
+    title:
+      - grid-area: title
+      - justify-self: center
+      - text-align: center
+      - font-weight: bold
+    espace_debut:
+      - grid-area: espace_debut
+      - height: 10px
+    count:
+      - grid-area: count
+      - justify-self: start
+      - margin-left: 5px
+      - text-align: right
+    marque:
+      - grid-area: marque
+      - margin-right: "-21px"
+      - text-align: left
+    100_75_battery:
+      - grid-area: 100_75_battery
+      - justify-self: end
+      - margin-right: "-15px"
+      - text-align: right
+    75_50_battery:
+      - grid-area: 75_50_battery
+      - justify-self: end
+      - margin-right: "-9px"
+      - text-align: right
+    50_25_battery:
+      - grid-area: 50_25_battery
+      - justify-self: end
+      - margin-right: "-2px"
+      - text-align: right
+    25_0_battery:
+      - grid-area: 25_0_battery
+      - justify-self: end
+      - margin-right: 5px
+      - text-align: right
+    espace_fin:
+      - grid-area: espace_fin
+      - height: 10px
+custom_fields:
+  title: |
+    [[[
+      return 'Etat des Piles & Batteries<br><br> 100%> 75%> 50%> 25%>';
+    ]]]
+  espace_debut: |
+    [[[
+      return ' ';
+    ]]]
+  count: |
+    [[[
+      function hasBatteryBelowThreshold(groupName, threshold) {
+        var group = states[groupName];
+        if (!group) return false;
+        return group.attributes.entity_id.some(entityId => {
+          var entity = states[entityId];
+          return entity && entity.state && parseInt(entity.state) <= threshold;
+        });
+      }
+      function getStyledCount(groupName) {
+        if (hasBatteryBelowThreshold(groupName, 10)) {
+          return '<span style="color: rgb(244,67,54); font-weight: bold;">⚠️</span>';
+        }
+        var group = states[groupName];
+        return group ? group.attributes.entity_id.length : 0;
+      }
+      var hueCount = getStyledCount('group.hue_devices');
+      var ikeaCount = getStyledCount('group.ikea_devices');
+      var sonoffCount = getStyledCount('group.sonoff_devices');
+      return `<div><div>${hueCount}</div><div>${ikeaCount}</div><div>${sonoffCount}</div></div>`;
+    ]]]
+  marque: |
+    [[[
+      function hasBatteryBelowThreshold(groupName, threshold) {
+        var group = states[groupName];
+        if (!group) return false;
+        return group.attributes.entity_id.some(entityId => {
+          var entity = states[entityId];
+          return entity && entity.state && parseInt(entity.state) <= threshold;
+        });
+      }
+      function getStyledMarque(name, groupName) {
+        if (hasBatteryBelowThreshold(groupName, 10)) {
+          return `<span style="color: rgb(244,67,54); font-weight: bold;">${name}</span>`;
+        }
+        return name;
+      }
+      return `<div><div>${getStyledMarque('HUE', 'group.hue_devices')}</div><div>${getStyledMarque('IKEA', 'group.ikea_devices')}</div><div>${getStyledMarque('SONOFF', 'group.sonoff_devices')}</div></div>`;
+    ]]]
+  100_75_battery: |
+    [[[
+      function countBatteriesInRange(groupName, lowerBound, upperBound) {
+        var group = states[groupName];
+        if (!group) return 0;
+        return group.attributes.entity_id.filter(entityId => {
+          var entity = states[entityId];
+          return entity && entity.state && parseInt(entity.state) <= upperBound && parseInt(entity.state) > lowerBound;
+        }).length;
+      }
+      function getStyledCount(count) {
+        if (count > 0) {
+          return `<span style="color: #FFA500;">${count}</span>`;
+        }
+        return count;
+      }
+      var hue100_75   = getStyledCount(countBatteriesInRange('group.hue_devices',   74, 100)); // "[L101] modif: lo 76→74, up 99→100"
+      var ikea100_75  = getStyledCount(countBatteriesInRange('group.ikea_devices',  74, 100)); // "[L102] modif: lo 76→74, up 99→100"
+      var sonoff100_75 = getStyledCount(countBatteriesInRange('group.sonoff_devices',74, 100)); // "[L103] modif: lo 76→74, up 99→100"
+      return `
+      <div>
+        <div>${hue100_75}</div>
+        <div>${ikea100_75}</div>
+        <div>${sonoff100_75}</div>
+      </div>
+      `;
+    ]]]
+  75_50_battery: |
+    [[[
+      function countBatteriesInRange(groupName, lowerBound, upperBound) {
+        var group = states[groupName];
+        if (!group) return 0;
+        return group.attributes.entity_id.filter(entityId => {
+          var entity = states[entityId];
+          return entity && entity.state && parseInt(entity.state) <= upperBound && parseInt(entity.state) > lowerBound;
+        }).length;
+      }
+      function getStyledCount(count) {
+        if (count > 0) {
+          return `<span style="color: #FFA500;">${count}</span>`;
+        }
+        return count;
+      }
+      var hue75_50   = getStyledCount(countBatteriesInRange('group.hue_devices',   49, 74)); // "[L121] modif: lo 51→49, up 75→74"
+      var ikea75_50  = getStyledCount(countBatteriesInRange('group.ikea_devices',  49, 74)); // "[L122] modif: lo 51→49, up 75→74"
+      var sonoff75_50 = getStyledCount(countBatteriesInRange('group.sonoff_devices',49, 74)); // "[L123] modif: lo 51→49, up 75→74"
+      return `
+      <div>
+        <div>${hue75_50}</div>
+        <div>${ikea75_50}</div>
+        <div>${sonoff75_50}</div>
+      </div>
+      `;
+    ]]]
+  50_25_battery: |
+    [[[
+      function countBatteriesInRange(groupName, lowerBound, upperBound) {
+        var group = states[groupName];
+        if (!group) return 0;
+        return group.attributes.entity_id.filter(entityId => {
+          var entity = states[entityId];
+          return entity && entity.state && parseInt(entity.state) <= upperBound && parseInt(entity.state) > lowerBound;
+        }).length;
+      }
+      function getStyledCount(count) {
+        if (count > 0) {
+          return `<span style="color: #FFA500;">${count}</span>`;
+        }
+        return count;
+      }
+      var hue50_25   = getStyledCount(countBatteriesInRange('group.hue_devices',   24, 49)); // "[L141] modif: lo 26→24, up 50→49"
+      var ikea50_25  = getStyledCount(countBatteriesInRange('group.ikea_devices',  24, 49)); // "[L142] modif: lo 26→24, up 50→49"
+      var sonoff50_25 = getStyledCount(countBatteriesInRange('group.sonoff_devices',24, 49)); // "[L143] modif: lo 26→24, up 50→49"
+      return `
+      <div>
+        <div>${hue50_25}</div>
+        <div>${ikea50_25}</div>
+        <div>${sonoff50_25}</div>
+      </div>
+      `;
+    ]]]
+  25_0_battery: |
+    [[[
+      function countBatteriesInRange(groupName, lowerBound, upperBound) {
+        var group = states[groupName];
+        if (!group) return 0;
+        return group.attributes.entity_id.filter(entityId => {
+          var entity = states[entityId];
+          return entity && entity.state && parseInt(entity.state) <= upperBound && parseInt(entity.state) > lowerBound;
+        }).length;
+      }
+      function getStyledCount(count) {
+        if (count > 0) {
+          return `<span style="color: #FFA500;">${count}</span>`;
+        }
+        return count;
+      }
+      var hue25_0   = getStyledCount(countBatteriesInRange('group.hue_devices',   -1, 24)); // "[L161] modif: lo 0→-1, up 25→24"
+      var ikea25_0  = getStyledCount(countBatteriesInRange('group.ikea_devices',  -1, 24)); // "[L162] modif: lo 0→-1, up 25→24"
+      var sonoff25_0 = getStyledCount(countBatteriesInRange('group.sonoff_devices',-1, 24)); // "[L163] modif: lo 0→-1, up 25→24"
+      return `
+      <div>
+        <div>${hue25_0}</div>
+        <div>${ikea25_0}</div>
+        <div>${sonoff25_0}</div>
+      </div>
+      `;
+    ]]]
+  espace_fin: |
+    [[[
+      return '----------------------------------------';
+    ]]]

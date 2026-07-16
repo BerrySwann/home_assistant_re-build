@@ -1,0 +1,66 @@
+id: '1767373340706'
+alias: (A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00)
+description: "Pilotage clims jour - délègue au script P1_MASTER_gestion_clim"
+triggers:
+- alias: 'SYSTEM : REDÉMARRAGE HOME ASSISTANT'
+  trigger: homeassistant
+  event: start
+  id: ha_restart
+- alias: 'HORAIRE : DÉMARRAGE 07H30'
+  trigger: time
+  at: 07:30:00
+  id: force_run
+- alias: 'RÉSEAU : CHANGEMENT WIFI <-> CELLULAR'
+  trigger: state
+  entity_id:
+  - sensor.mamour_network_type
+  - sensor.eric_network_type
+  id: force_run
+- alias: 'PRISES : CHANGEMENT ÉTAT ON/OFF'
+  trigger: state
+  entity_id:
+  - switch.clim_salon_nous
+  - switch.clim_bureau_nous
+  - switch.clim_chambre_nous
+  id: force_run
+- alias: 'FENÊTRES : OUVERTURE (COUPURE URGENCE)'
+  trigger: state
+  entity_id:
+  - binary_sensor.contact_fenetre_salon_sonoff_contact
+  - binary_sensor.contact_fenetre_cuisine_sonoff_contact
+  - binary_sensor.contact_fenetre_bureau_sonoff_contact
+  - binary_sensor.contact_fenetre_chambre_sonoff_contact
+  from: 'off'
+  to: 'on'
+  id: window_open
+- alias: 'FENÊTRES : FERMETURE (RÉTABLISSEMENT)'
+  trigger: state
+  entity_id:
+  - binary_sensor.contact_fenetre_salon_sonoff_contact
+  - binary_sensor.contact_fenetre_cuisine_sonoff_contact
+  - binary_sensor.contact_fenetre_bureau_sonoff_contact
+  - binary_sensor.contact_fenetre_chambre_sonoff_contact
+  from: 'on'
+  to: 'off'
+  id: window_close
+- alias: 'ENVIRONNEMENT : MISE À JOUR TEMPÉRATURES OU MODE'
+  trigger: state
+  entity_id:
+  - sensor.groupe
+  - sensor.th_balcon_nord_temperature
+  - sensor.temperature_cible
+  - sensor.mode_ete_hiver
+  - sensor.temperature_confort_jour
+  id: sensor_update
+conditions:
+- condition: time
+  after: 07:30:00
+  before: '21:00:00'
+actions:
+- action: script.p1_master_gestion_clim
+  data:
+    periode: "jour"
+    trigger_id: "{{ trigger.id if trigger is defined else '' }}"
+    trigger_entity_id: "{{ trigger.entity_id if trigger is defined and trigger.entity_id is defined else '' }}"
+mode: queued
+max: 5
