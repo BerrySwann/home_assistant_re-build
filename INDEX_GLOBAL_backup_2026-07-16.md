@@ -113,7 +113,7 @@
 ⚙️ <a href="Docs/Dashboard/L1C1_01_Meteo/page_L1C1_meteo_2026-05-09.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -270,7 +270,7 @@
 ⚙️ <a href="Docs/Dashboard/L1C2_02_Temperatures/vignette_L1C2_temperatures_2026-05-12.yaml">YAML Vignette</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -312,7 +312,7 @@
 ⚙️ <a href="Docs/Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-05-12.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -502,7 +502,7 @@
 ⚙️ <a href="Docs/Dashboard/L1C3_03_Commandes_Clim/vignette_L1C3_clim_2026-05-13.yaml">YAML Vignette</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -562,7 +562,7 @@
 ⚙️ <a href="Docs/Dashboard/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-05-13.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -687,7 +687,7 @@
 ⚙️ <a href="Docs/Dashboard/L2C1_04_Energie_Generale/vignette_L2C1_energie_2026-05-12.yaml">YAML Vignette</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -727,7 +727,7 @@
 ⚙️ <a href="Docs/Dashboard/L2C1_04_Energie_Generale/page_L2C1_energie_principale_2026-05-12.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -881,7 +881,7 @@
 ⚙️ <a href="Docs/Dashboard/L2C1_04_Energie_Generale/page_L2C1_energie_mensuel_2026-05-12.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -957,7 +957,7 @@
 ⚙️ <a href="Docs/Dashboard/L2C1_04_Energie_Generale/page_L2C1_energie_temps_reel_2026-05-12.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -1139,7 +1139,7 @@
 ⚙️ <a href="Docs/Dashboard/L2C2_05_Energie_Clim/vignette_L2C2_energie_clim_2026-05-13.yaml">YAML Vignette</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -1210,7 +1210,7 @@
 ⚙️ <a href="Docs/Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-05-13.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -1402,7 +1402,7 @@
 ⚙️ <a href="Docs/Dashboard/L2C3_06_Energie_Eclairage/vignette_L2C3_energie_eclairage_2026-05-13.yaml">YAML Vignette</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -1456,7 +1456,7 @@
 ⚙️ <a href="Docs/Dashboard/L2C3_06_Energie_Eclairage/page_L2C3_energie_eclairage_2026-05-13.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -1597,7 +1597,7 @@
 ⚙️ <a href="Docs/Dashboard/L3C1_07_Commandes_Eclairage/vignette_L3C1_eclairage_2026-05-13.yaml">YAML Vignette</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -1660,7 +1660,7 @@
 ⚙️ <a href="Docs/Dashboard/L3C1_07_Commandes_Eclairage/page_L3C1_eclairage_gauche_2026-05-13.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -1713,7 +1713,7 @@
 ⚙️ <a href="Docs/Dashboard/L3C1_07_Commandes_Eclairage/page_L3C1_eclairage_droite_2026-05-13.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -1823,7 +1823,7 @@
 ⚙️ <a href="Docs/Dashboard/L3C2_08_Commandes_Prises/vignette_L3C2_prises_2026-05-14.yaml">YAML Vignette</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -1857,7 +1857,7 @@
 ⚙️ <a href="Docs/Dashboard/L3C2_08_Commandes_Prises/page_L3C2_prises_2026-05-14.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -1900,7 +1900,7 @@
 ⚙️ <a href="Docs/Dashboard/L3C3_09_Stores_Fenetres/vignette_L3C3_stores_2026-05-14.yaml">YAML Vignette</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -1934,7 +1934,7 @@
 ⚙️ <a href="Docs/Dashboard/L3C3_09_Stores_Fenetres/page_L3C3_stores_2026-05-14.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -1992,7 +1992,7 @@
 ⚙️ <a href="Docs/Dashboard/L4C1_10_Proxmox/vignette_L4C1_proxmox_2026-05-17.yaml">YAML Vignette</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -2034,7 +2034,7 @@
 ⚙️ <a href="Docs/Dashboard/L4C2_11_Mini_PC/vignette_L4C2_mini_pc_2026-05-10.yaml">YAML Vignette</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -2067,7 +2067,7 @@
 ⚙️ <a href="Docs/Dashboard/L4C2_11_Mini_PC/page_L4C2_mini_pc_2026-05-14.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -2189,7 +2189,7 @@
 ⚙️ <a href="Docs/Dashboard/L4C3_12_MAJ_HA/vignette_L4C3_maj_ha_2026-05-14.yaml">YAML Vignette</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -2212,7 +2212,7 @@
 ⚙️ <a href="Docs/Dashboard/L4C3_12_MAJ_HA/page_L4C3_maj_ha_gauche_2026-05-14.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -2238,7 +2238,7 @@
 ⚙️ <a href="Docs/Dashboard/L4C3_12_MAJ_HA/page_L4C3_maj_ha_droite_2026-05-14.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -2276,7 +2276,7 @@
 ⚙️ <a href="Docs/Dashboard/L5C1_13_Batteries_Piles/vignette_L5C1_batteries_piles_2026-05-14.yaml">YAML Vignette</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -2301,7 +2301,7 @@
 ⚙️ <a href="Docs/Dashboard/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-05-14.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -2370,7 +2370,7 @@
 ⚙️ <a href="Docs/Dashboard/L5C2_14_Batteries_Portables/page_L5C2_batteries_portables_gauche_2026-05-12.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -2420,7 +2420,7 @@
 ⚙️ <a href="Docs/Dashboard/L5C2_14_Batteries_Portables/page_L5C2_batteries_portables_droite_2026-05-12.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -2472,7 +2472,7 @@
 ⚙️ <a href="Docs/Dashboard/L5C3_15_MariaDB/vignette_L5C3_mariadb_2026-05-10.yaml">YAML Vignette</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -2495,7 +2495,7 @@
 ⚙️ <a href="Docs/Dashboard/L5C3_15_MariaDB/page_L5C3_mariadb_2026-05-10.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -2551,7 +2551,7 @@
 ⚙️ <a href="Docs/Dashboard/L6C1_16_Air_Qualite/page_L6C1_air_qualite_2026-05-14.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -2660,7 +2660,7 @@
 ⚙️ <a href="Docs/Dashboard/L6C2_17_Pollution_Pollen/page_L6C2_pollution_pollen_2026-05-14.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
@@ -2718,7 +2718,7 @@
 ⚙️ <a href="Docs/Dashboard/L6C3_18_VigiEau/page_L6C3_vigieau_2026-05-14.yaml">YAML Page</a>
 
 <details>
-<summary><b>📂 Fichiers sources (TREE_CORRIGE)</b></summary>
+<summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
 
 <details>
