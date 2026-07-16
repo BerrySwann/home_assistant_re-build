@@ -1,0 +1,146 @@
+type: custom:button-card
+tap_action:
+  action: navigate
+  navigation_path: /dashboard-tablette/temperatures
+entities:
+  - sensor.th_balcon_nord_temperature
+  - sensor.th_balcon_nord_humidity
+  - sensor.th_salon_temperature
+  - sensor.th_salon_humidity
+  - sensor.th_cellier_temperature
+  - sensor.th_cellier_humidity
+  - sensor.th_cuisine_temperature
+  - sensor.th_cuisine_humidity
+  - sensor.th_bureau_temperature
+  - sensor.th_bureau_humidity
+  - sensor.th_salle_de_bain_temperature
+  - sensor.th_salle_de_bain_humidity
+  - sensor.th_chambre_temperature
+  - sensor.th_chambre_humidity
+triggers_update:
+  - sensor.th_balcon_nord_temperature
+  - sensor.th_balcon_nord_humidity
+  - sensor.th_salon_temperature
+  - sensor.th_salon_humidity
+  - sensor.th_cellier_temperature
+  - sensor.th_cellier_humidity
+  - sensor.th_cuisine_temperature
+  - sensor.th_cuisine_humidity
+  - sensor.th_bureau_temperature
+  - sensor.th_bureau_humidity
+  - sensor.th_salle_de_bain_temperature
+  - sensor.th_salle_de_bain_humidity
+  - sensor.th_chambre_temperature
+  - sensor.th_chambre_humidity
+styles:
+  card:
+    - aspect-ratio: 1/1
+    - border-radius: 10px
+    - background: transparent
+    - border-width: 3px
+    - border-color: white
+    - border-style: double
+    - color: white
+    - font-size: 11px
+    - line-height: 1.2
+  grid:
+    - grid-template-areas: |
+        "titre titre titre titre"
+        "piece temp espace humidite"
+    - grid-template-columns: 1fr 1fr 0.5fr 1fr
+    - grid-template-rows: auto
+    - margin-top: 4.5px
+  custom_fields:
+    titre:
+      - grid-area: titre
+      - justify-self: center
+      - text-align: center
+      - font-weight: bold
+    piece:
+      - justify-self: start
+      - margin-left: 8px
+      - text-align: left
+    temp:
+      - justify-self: center
+      - margin-left: 35px
+      - text-align: center
+    espace:
+      - justify-self: center
+      - margin-left: 0px
+      - text-align: center
+    humidite:
+      - justify-self: end
+      - margin-right: 6px
+      - text-align: right
+custom_fields:
+  titre: |
+    [[[ return 'Courbes Température' ]]]
+  piece: |
+    [[[
+      return '<span style="display: block; text-align: left; line-height: 1.2;">Balcon N.</span>' +
+             '<span style="display: block; text-align: left; line-height: 1.2;">Salon</span>' +
+             '<span style="display: block; text-align: left; line-height: 1.2;">Cellier</span>' +
+             '<span style="display: block; text-align: left; line-height: 1.2;">Cuisine</span>' +
+             '<span style="display: block; text-align: left; line-height: 1.2;">Bureau</span>' +
+             '<span style="display: block; text-align: left; line-height: 1.2;">SdB</span>' +
+             '<span style="display: block; text-align: left; line-height: 1.2;">Chambre</span>';
+    ]]]
+  temp: |
+    [[[
+      function getTemperatureColor(temp) {
+        if (temp === 'NaN') return '#aaaaaa';
+        var t = parseFloat(temp);
+        if (t < 5) return '#3674B5';
+        if (t < 13) return '#578FCA';
+        if (t < 19) return '#A1E3F9';
+        if (t < 25) return 'lightgreen';
+        if (t < 32) return '#FFD700';
+        if (t < 36) return '#FFA500';
+        if (t < 40) return '#F44336';
+        return 'lightgreen';
+      }
+
+      function formatTemp(entityId) {
+        var s = states[entityId]?.state;
+        var val = (s && s !== 'unknown' && s !== 'unavailable') ? parseFloat(s).toFixed(1) : 'NaN';
+        var color = getTemperatureColor(val);
+        var text = val === 'NaN' ? 'N/A' : val + '°C';
+        return `<span style="display: block; text-align: center; line-height: 1.2; color: ${color};">${text}</span>`;
+      }
+      return formatTemp('sensor.th_balcon_nord_temperature') +
+             formatTemp('sensor.th_salon_temperature') +
+             formatTemp('sensor.th_cellier_temperature') +
+             formatTemp('sensor.th_cuisine_temperature') +
+             formatTemp('sensor.th_bureau_temperature') +
+             formatTemp('sensor.th_salle_de_bain_temperature') +
+             formatTemp('sensor.th_chambre_temperature');
+    ]]]
+  espace: |
+    [[[
+      return Array(7).fill('<span style="display: block; text-align: center; line-height: 1.2;">&nbsp;&nbsp;</span>').join('');
+    ]]]
+  humidite: |
+    [[[
+      function getHumidityColor(h) {
+        if (h === 'NaN') return '#aaaaaa';
+        var val = parseFloat(h);
+        if (val > 75) return '#F44336';
+        if (val > 55) return '#FFA500';
+        return 'white';
+      }
+
+      function formatHum(entityId) {
+        var s = states[entityId]?.state;
+        var val = (s && s !== 'unknown' && s !== 'unavailable') ? parseFloat(s).toFixed(1) : 'NaN';
+        var color = getHumidityColor(val);
+        var text = val === 'NaN' ? 'N/A' : val + '%';
+        return `<span style="display: block; text-align: right; line-height: 1.2; color: ${color};">${text}</span>`;
+      }
+      return formatHum('sensor.th_balcon_nord_humidity') +
+             formatHum('sensor.th_salon_humidity') +
+             formatHum('sensor.th_cellier_humidity') +
+             formatHum('sensor.th_cuisine_humidity') +
+             formatHum('sensor.th_bureau_humidity') +
+             formatHum('sensor.th_salle_de_bain_humidity') +
+             formatHum('sensor.th_chambre_humidity');
+    ]]]

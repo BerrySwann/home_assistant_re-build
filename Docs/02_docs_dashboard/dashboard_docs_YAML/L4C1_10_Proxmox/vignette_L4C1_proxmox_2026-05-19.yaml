@@ -1,0 +1,175 @@
+type: custom:button-card
+entity: sensor.temperature_cpu_package
+icon: phu:proxmox
+aspect_ratio: 1/1
+name: _____ Proxmox _____
+entities:
+  - sensor.pve_utilisation_du_processeur
+  - sensor.pve_memory_usage_percentage
+  - sensor.storage_local_storage_usage_percentage
+  - binary_sensor.pve_status
+triggers_update:
+  - sensor.pve_utilisation_du_processeur
+  - sensor.pve_memory_usage_percentage
+  - sensor.storage_local_storage_usage_percentage
+  - binary_sensor.pve_status
+tap_action:
+  action: navigate
+  navigation_path: /dashboard-tablette/systeme-proxmox
+styles:
+  card:
+    - border-radius: 10px
+    - background: transparent
+    - border-width: 3px
+    - border-color: white
+    - border-style: double
+    - color: white
+    - font-size: 11px
+    - line-height: 1.2
+    - padding: 3%
+  grid:
+    - grid-template-areas: |
+        "i temp"
+        "n n"
+        "cpu cpu"
+        "status status"
+        "ram ram"
+        "sd sd"
+  name:
+    - font-weight: bold
+    - font-size: 13px
+    - color: white
+    - align-self: middle
+    - justify-self: center
+    - padding-bottom: 7px
+  icon:
+    - color: |
+        [[[
+          if (!entity || entity.state === 'unavailable' || entity.state === 'unknown') return '#aaaaaa';
+          const t = parseFloat(entity.state);
+          if (t < 65) return 'rgb(70, 175, 75)';
+          if (t < 75) return 'orange';
+          return 'rgb(244,67,54)';
+        ]]]
+    - width: 40%
+  custom_fields:
+    temp:
+      - align-self: start
+      - margin-top: 18px
+      - margin-right: 10px
+    cpu:
+      - padding-bottom: 1px
+      - align-self: middle
+      - justify-self: start
+      - "--text-color-sensor": |
+          [[[
+            const s = states["sensor.pve_utilisation_du_processeur"];
+            if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+            const v = parseFloat(s.state);
+            if (v < 75) return "white";
+            if (v < 90) return "orange";
+            return "rgb(244,67,54)";
+          ]]]
+      - "--icon-color-sensor": |
+          [[[
+            const s = states["sensor.pve_utilisation_du_processeur"];
+            if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+            const v = parseFloat(s.state);
+            if (v < 75) return "rgb(70, 175, 75)";
+            if (v < 90) return "orange";
+            return "rgb(244,67,54)";
+          ]]]
+    status:
+      - padding-bottom: 1px
+      - align-self: middle
+      - justify-self: start
+      - "--text-color-sensor": |
+          [[[
+            const s = states["binary_sensor.pve_status"];
+            if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+            return s.state === "on" ? "rgb(70, 175, 75)" : "rgb(244,67,54)";
+          ]]]
+      - "--icon-color-sensor": |
+          [[[
+            const s = states["binary_sensor.pve_status"];
+            if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+            return s.state === "on" ? "rgb(70, 175, 75)" : "rgb(244,67,54)";
+          ]]]
+    ram:
+      - padding-bottom: 1px
+      - align-self: middle
+      - justify-self: start
+      - "--text-color-sensor": |
+          [[[
+            const s = states["sensor.pve_memory_usage_percentage"];
+            if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+            const v = parseFloat(s.state);
+            if (v < 75) return "white";
+            if (v < 90) return "orange";
+            return "rgb(244,67,54)";
+          ]]]
+      - "--icon-color-sensor": |
+          [[[
+            const s = states["sensor.pve_memory_usage_percentage"];
+            if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+            const v = parseFloat(s.state);
+            if (v < 75) return "rgb(70, 175, 75)";
+            if (v < 90) return "orange";
+            return "rgb(244,67,54)";
+          ]]]
+    sd:
+      - padding-bottom: 0px
+      - align-self: middle
+      - justify-self: start
+      - "--text-color-sensor": |
+          [[[
+            const s = states["sensor.storage_local_storage_usage_percentage"];
+            if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+            const v = parseFloat(s.state);
+            if (v < 75) return "white";
+            if (v < 90) return "orange";
+            return "rgb(244,67,54)";
+          ]]]
+      - "--icon-color-sensor": |
+          [[[
+            const s = states["sensor.storage_local_storage_usage_percentage"];
+            if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+            const v = parseFloat(s.state);
+            if (v < 75) return "rgb(70, 175, 75)";
+            if (v < 90) return "orange";
+            return "rgb(244,67,54)";
+          ]]]
+custom_fields:
+  temp: |
+    [[[
+      const s = states["sensor.temperature_cpu_package"];
+      if (!s || s.state === "unavailable" || s.state === "unknown")
+        return `<ha-icon icon="mdi:thermometer" style="width:15px;height:15px;color:#aaaaaa;"></ha-icon> <span style="color:#aaaaaa;">N/A</span>`;
+      const t = parseFloat(s.state);
+      const color = t < 65 ? "rgb(70,175,75)" : t < 75 ? "orange" : "rgb(244,67,54)";
+      return `<ha-icon icon="mdi:thermometer" style="width:15px;height:15px;color:${color};"></ha-icon> <span style="color:${color};">${s.state}°C</span>`;
+    ]]]
+  cpu: |
+    [[[
+      const s = states["sensor.pve_utilisation_du_processeur"];
+      const val = (s && s.state !== "unavailable" && s.state !== "unknown") ? parseFloat(s.state).toFixed(1) + "%" : "N/A";
+      return `<ha-icon icon="mdi:server" style="width:15px;height:15px;color:var(--icon-color-sensor);"></ha-icon><span>PVE CPU: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
+    ]]]
+  status: |
+    [[[
+      const s = states["binary_sensor.pve_status"];
+      const val = (s && s.state !== "unavailable" && s.state !== "unknown") ? (s.state === "on" ? "ONLINE" : "OFFLINE") : "N/A";
+      return `<ha-icon icon="mdi:power-settings" style="width:15px;height:15px;color:var(--icon-color-sensor);"></ha-icon><span>PVE Host: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
+    ]]]
+  ram: |
+    [[[
+      const s = states["sensor.pve_memory_usage_percentage"];
+      const val = (s && s.state !== "unavailable" && s.state !== "unknown") ? parseFloat(s.state).toFixed(1) + "%" : "N/A";
+      return `<ha-icon icon="mdi:memory" style="width:15px;height:15px;color:var(--icon-color-sensor);"></ha-icon><span>PVE RAM: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
+    ]]]
+  sd: |
+    [[[
+      const s = states["sensor.storage_local_storage_usage_percentage"];
+      const val = (s && s.state !== "unavailable" && s.state !== "unknown") ? parseFloat(s.state).toFixed(1) + "%" : "N/A";
+      return `<ha-icon icon="mdi:harddisk" style="width:15px;height:15px;color:var(--icon-color-sensor);"></ha-icon><span>PVE Storage: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
+    ]]]

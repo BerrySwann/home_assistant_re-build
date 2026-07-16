@@ -1,0 +1,520 @@
+type: grid
+cards:
+  - type: heading
+    icon: mdi:decagram
+    heading: POLLULÈNE ©
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/home
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+          margin: 0;
+          padding: 0;
+        }
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: false
+      margin: false
+      border_radius: false
+      background: false
+      outer_padding: false
+    cards:
+      - type: custom:mod-card
+        card_mod:
+          style: |
+            :host {
+              --text-divider-color: white;
+              --text-divider-line-size: 1px;
+            }
+        card:
+          type: custom:text-divider-row
+          text: POLLENS [ Atmo France - Vence ]
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:entity-progress-card
+            entity: sensor.qualite_globale_pollen_vence
+            name: Qualité Pollens
+            icon: mdi:flower-pollen
+            secondary: "{{ state_attr(entity, 'Libellé') }} ({{ states(entity) }})"
+            bar_color: "{{ state_attr(entity, 'Couleur') }}"
+            color: "{{ state_attr(entity, 'Couleur') }}"
+            bar_size: large
+            bar_effect: radius
+            percent: |
+              {% set current = states(entity) | int(0) %}
+              {% set max_value = 7 %}
+              {% set percent = (current / max_value * 100) | round(0) %}
+              {{ percent }}
+            icon_tap_action:
+              action: more-info
+            card_mod:
+              style: |
+                ha-card {
+                  border: none !important;
+                  box-shadow: none !important;
+                  background: none !important;
+                }
+      - type: vertical-stack
+        cards:
+          - type: vertical-stack
+            cards:
+              - square: false
+                type: grid
+                columns: 3
+                cards:
+                  - type: custom:ring-tile
+                    entity: sensor.concentration_gramine_vence
+                    name: Graminées
+                    ring_entity: sensor.niveau_gramine_vence
+                    ring_type: open
+                    ring_size: 3
+                    scale: ticks_with_labels
+                    middle_element: value_with_unit
+                    bottom_element: name
+                    colorize_icon: true
+                    indicator: dot
+                    min: 0
+                    max: 7
+                    colour:
+                      "0": "#ddd"
+                      "1": "#50f0e6"
+                      "2": "#50ccaa"
+                      "3": "#f0e641"
+                      "4": "#ff5050"
+                      "5": "#960032"
+                      "6": "#872181"
+                      "7": "#888"
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none !important;
+                          box-shadow: none !important;
+                          background: none !important;
+                          align-items: center;
+                          justify-content: center;
+                          transform: scale(0.96);
+                          margin: 0px 0px 0px 0px;
+                        }
+                  - type: custom:ring-tile
+                    entity: sensor.concentration_ambroisie_vence
+                    name: Ambroisie
+                    ring_entity: sensor.niveau_ambroisie_vence
+                    ring_type: open
+                    ring_size: 3
+                    scale: ticks_with_labels
+                    middle_element: value_with_unit
+                    bottom_element: name
+                    colorize_icon: true
+                    indicator: dot
+                    min: 0
+                    max: 7
+                    colour:
+                      "0": "#ddd"
+                      "1": "#50f0e6"
+                      "2": "#50ccaa"
+                      "3": "#f0e641"
+                      "4": "#ff5050"
+                      "5": "#960032"
+                      "6": "#872181"
+                      "7": "#888"
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none !important;
+                          box-shadow: none !important;
+                          background: none !important;
+                          align-items: center;
+                          justify-content: center;
+                          transform: scale(0.96);
+                          margin: 0px 0px 0px 0px;
+                        }
+                  - type: custom:ring-tile
+                    entity: sensor.concentration_armoise_vence
+                    name: Armoise
+                    ring_entity: sensor.niveau_armoise_vence
+                    ring_type: open
+                    ring_size: 3
+                    scale: ticks_with_labels
+                    middle_element: value_with_unit
+                    bottom_element: name
+                    colorize_icon: true
+                    indicator: dot
+                    min: 0
+                    max: 7
+                    colour:
+                      "0": "#ddd"
+                      "1": "#50f0e6"
+                      "2": "#50ccaa"
+                      "3": "#f0e641"
+                      "4": "#ff5050"
+                      "5": "#960032"
+                      "6": "#872181"
+                      "7": "#888"
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none !important;
+                          box-shadow: none !important;
+                          background: none !important;
+                          align-items: center;
+                          justify-content: center;
+                          transform: scale(0.96);
+                          margin: 0px 0px 0px 0px;
+                        }
+                  - type: custom:ring-tile
+                    entity: sensor.concentration_aulne_vence
+                    name: Aulne
+                    ring_entity: sensor.niveau_aulne_vence
+                    ring_type: open
+                    ring_size: 3
+                    scale: ticks_with_labels
+                    middle_element: value_with_unit
+                    bottom_element: name
+                    colorize_icon: true
+                    indicator: dot
+                    min: 0
+                    max: 7
+                    colour:
+                      "0": "#ddd"
+                      "1": "#50f0e6"
+                      "2": "#50ccaa"
+                      "3": "#f0e641"
+                      "4": "#ff5050"
+                      "5": "#960032"
+                      "6": "#872181"
+                      "7": "#888"
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none !important;
+                          box-shadow: none !important;
+                          background: none !important;
+                          align-items: center;
+                          justify-content: center;
+                          transform: scale(0.96);
+                          margin: 0px 0px 0px 0px;
+                        }
+                  - type: custom:ring-tile
+                    entity: sensor.concentration_bouleau_vence
+                    name: Bouleau
+                    ring_entity: sensor.niveau_bouleau_vence
+                    ring_type: open
+                    ring_size: 3
+                    scale: ticks_with_labels
+                    middle_element: value_with_unit
+                    bottom_element: name
+                    colorize_icon: true
+                    indicator: dot
+                    min: 0
+                    max: 7
+                    colour:
+                      "0": "#ddd"
+                      "1": "#50f0e6"
+                      "2": "#50ccaa"
+                      "3": "#f0e641"
+                      "4": "#ff5050"
+                      "5": "#960032"
+                      "6": "#872181"
+                      "7": "#888"
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none !important;
+                          box-shadow: none !important;
+                          background: none !important;
+                          align-items: center;
+                          justify-content: center;
+                          transform: scale(0.96);
+                          margin: 0px 0px 0px 0px;
+                        }
+                  - type: custom:ring-tile
+                    entity: sensor.concentration_olivier_vence
+                    name: Olivier
+                    ring_entity: sensor.niveau_olivier_vence
+                    ring_type: open
+                    ring_size: 3
+                    scale: ticks_with_labels
+                    middle_element: value_with_unit
+                    bottom_element: name
+                    colorize_icon: true
+                    indicator: dot
+                    min: 0
+                    max: 7
+                    colour:
+                      "0": "#ddd"
+                      "1": "#50f0e6"
+                      "2": "#50ccaa"
+                      "3": "#f0e641"
+                      "4": "#ff5050"
+                      "5": "#960032"
+                      "6": "#872181"
+                      "7": "#888"
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none !important;
+                          box-shadow: none !important;
+                          background: none !important;
+                          align-items: center;
+                          justify-content: center;
+                          transform: scale(0.96);
+                          margin: 0px 0px 0px 0px;
+                        }
+    card_mod:
+      style: |
+        ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        margin: 0;
+        padding: 0;
+         }
+  - card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+          margin: 0;
+          padding: 0;
+        }
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: true
+      margin: false
+      border_radius: false
+      background: false
+      outer_padding: false
+    cards:
+      - type: custom:mod-card
+        card_mod:
+          style: |
+            :host {
+              --text-divider-color: white;
+              --text-divider-line-size: 1px;
+            }
+        card:
+          type: custom:text-divider-row
+          text: QUALITE DE L'AIR [ Atmo France - Vence ]
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:entity-progress-card
+            entity: sensor.qualite_globale_vence
+            name: Qualité Air
+            secondary: "{{ state_attr(entity, 'Libellé') }} ({{ states(entity) }})"
+            bar_color: "{{ state_attr(entity, 'Couleur') }}"
+            color: "{{ state_attr(entity, 'Couleur') }}"
+            bar_size: large
+            bar_effect: radius
+            percent: |
+              {% set current = states(entity) | int(0) %}
+              {% set max_value = 7 %}
+              {% set percent = (current / max_value * 100) | round(0) %}
+              {{ percent }}
+            icon_tap_action:
+              action: more-info
+            card_mod:
+              style: |
+                ha-card {
+                  border: none !important;
+                  box-shadow: none !important;
+                  background: none !important;
+                }
+      - type: vertical-stack
+        cards:
+          - type: vertical-stack
+            cards:
+              - square: false
+                type: grid
+                columns: 5
+                cards:
+                  - type: custom:ring-tile
+                    entity: sensor.ozone_vence
+                    name: O₃ (Ozone)
+                    ring_entity: sensor.ozone_vence
+                    ring_type: open
+                    ring_size: 3
+                    scale: ticks_with_labels
+                    middle_element: value_with_unit
+                    bottom_element: name
+                    colorize_icon: true
+                    indicator: dot
+                    min: 0
+                    max: 7
+                    colour:
+                      "0": "#ddd"
+                      "1": "#50f0e6"
+                      "2": "#50ccaa"
+                      "3": "#f0e641"
+                      "4": "#ff5050"
+                      "5": "#960032"
+                      "6": "#872181"
+                      "7": "#888"
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none !important;
+                          box-shadow: none !important;
+                          background: none !important;
+                          align-items: center;
+                          justify-content: center;
+                          transform: scale(0.57);
+                          margin: 0px 0px 0px -2px;
+                        }
+                  - type: custom:ring-tile
+                    entity: sensor.dioxyde_d_azote_vence
+                    name: NO₂ (Azote)
+                    ring_entity: sensor.dioxyde_d_azote_vence
+                    ring_type: open
+                    ring_size: 3
+                    scale: ticks_with_labels
+                    middle_element: value_with_unit
+                    bottom_element: name
+                    colorize_icon: true
+                    indicator: dot
+                    min: 0
+                    max: 7
+                    colour:
+                      "0": "#ddd"
+                      "1": "#50f0e6"
+                      "2": "#50ccaa"
+                      "3": "#f0e641"
+                      "4": "#ff5050"
+                      "5": "#960032"
+                      "6": "#872181"
+                      "7": "#888"
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none !important;
+                          box-shadow: none !important;
+                          background: none !important;
+                          align-items: center;
+                          justify-content: center;
+                          transform: scale(0.57);
+                          margin: 0px -2px 0px 0px;
+                        }
+                  - type: custom:ring-tile
+                    entity: sensor.dioxyde_de_soufre_vence
+                    name: SO₂ (Souffre)
+                    ring_entity: sensor.dioxyde_de_soufre_vence
+                    ring_type: open
+                    ring_size: 3
+                    scale: ticks_with_labels
+                    middle_element: value_with_unit
+                    bottom_element: name
+                    colorize_icon: true
+                    indicator: dot
+                    min: 0
+                    max: 7
+                    colour:
+                      "0": "#ddd"
+                      "1": "#50f0e6"
+                      "2": "#50ccaa"
+                      "3": "#f0e641"
+                      "4": "#ff5050"
+                      "5": "#960032"
+                      "6": "#872181"
+                      "7": "#888"
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none !important;
+                          box-shadow: none !important;
+                          background: none !important;
+                          align-items: center;
+                          justify-content: center;
+                          transform: scale(0.57);
+                          margin: 0px 0px 0px 0px;
+                        }
+                  - type: custom:ring-tile
+                    entity: sensor.pm10_vence
+                    name: PM10
+                    ring_entity: sensor.pm10_vence
+                    ring_type: open
+                    ring_size: 3
+                    scale: ticks_with_labels
+                    middle_element: value_with_unit
+                    bottom_element: name
+                    colorize_icon: true
+                    indicator: dot
+                    min: 0
+                    max: 7
+                    colour:
+                      "0": "#ddd"
+                      "1": "#50f0e6"
+                      "2": "#50ccaa"
+                      "3": "#f0e641"
+                      "4": "#ff5050"
+                      "5": "#960032"
+                      "6": "#872181"
+                      "7": "#888"
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none !important;
+                          box-shadow: none !important;
+                          background: none !important;
+                          align-items: center;
+                          justify-content: center;
+                          transform: scale(0.57);
+                          margin: 0px 0px 0px 0px;;
+                        }
+                  - type: custom:ring-tile
+                    entity: sensor.pm25_vence
+                    name: PM25
+                    ring_entity: sensor.pm25_vence
+                    ring_type: open
+                    ring_size: 3
+                    scale: ticks_with_labels
+                    middle_element: value_with_unit
+                    bottom_element: name
+                    colorize_icon: true
+                    indicator: dot
+                    min: 0
+                    max: 7
+                    colour:
+                      "0": "#ddd"
+                      "1": "#50f0e6"
+                      "2": "#50ccaa"
+                      "3": "#f0e641"
+                      "4": "#ff5050"
+                      "5": "#960032"
+                      "6": "#872181"
+                      "7": "#888"
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border: none !important;
+                          box-shadow: none !important;
+                          background: none !important;
+                          align-items: center;
+                          justify-content: center;
+                          transform: scale(0.57);
+                          margin: 0px 0px 0px 0px;
+                        }
+    card_mod:
+      style: |
+        ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        margin: 0;
+        padding: 0;
+         }
+column_span: 10

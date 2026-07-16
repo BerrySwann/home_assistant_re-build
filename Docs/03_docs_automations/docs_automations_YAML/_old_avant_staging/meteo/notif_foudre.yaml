@@ -1,0 +1,62 @@
+id: '1766779193916'
+alias: Notification de la foudre
+description: 'Alerte sur Poco X7 Pro avec distance, ville ou direction et décompte des impacts.'
+triggers:
+- trigger: state
+  entity_id: sensor.maison_lightning_counter
+conditions:
+- condition: numeric_state
+  entity_id: sensor.maison_lightning_counter
+  above: 0
+actions:
+- action: homeassistant.update_entity
+  target:
+    entity_id: sensor.maison_lightning_localisation
+- action: notify.mobile_app_eric
+  data:
+    title: /!\ Attention foudre /!\
+    message: "{% set distance = states('sensor.maison_lightning_distance') |\
+      \ float(0) %} {% set azimuth = states('sensor.maison_lightning_azimuth')\
+      \ | float(0) %} {% set impactCount = states('sensor.maison_lightning_counter')\
+      \ | int(0) %} {% set timeSinceLastLightning = states('sensor.dernier_impact_temps_reel')\
+      \ %} {% set localisation = states('sensor.maison_lightning_localisation')\
+      \ %} {% set city = None %} {% if localisation and localisation != '0' %}\n \
+      \ {% set location = state_attr('sensor.maison_lightning_localisation',\
+      \ 'features') %}\n  {% if location and location[0] and location[0].properties\
+      \ and location[0].properties.geocoding and location[0].properties.geocoding.city\
+      \ %}\n    {% set city = location[0].properties.geocoding.city %}\n  {% endif\
+      \ %}\n{% endif %} {% if distance > 0 %}\n  {% if city %}\n    {% set msg = 'Un\
+      \ éclair a été détecté à ' ~ distance ~ ' Km de la maison à ' ~ city ~ '.' %}\n\
+      \  {% elif azimuth is not none %}\n    {% if 348.75 <= azimuth or azimuth <\
+      \ 11.25 %} {% set msg = 'Un éclair a été détecté à ' ~ distance ~ ' Km au nord.'\
+      \ %}\n    {% elif 11.25 <= azimuth < 33.75 %} {% set msg = 'Un éclair a été\
+      \ détecté à ' ~ distance ~ ' Km au nord-nord-est.' %}\n    {% elif 33.75 <=\
+      \ azimuth < 56.25 %} {% set msg = 'Un éclair a été détecté à ' ~ distance ~\
+      \ ' Km au nord-est.' %}\n    {% elif 56.25 <= azimuth < 78.75 %} {% set msg\
+      \ = 'Un éclair a été détecté à ' ~ distance ~ ' Km à l\\'est-nord-est.' %}\n\
+      \    {% elif 78.75 <= azimuth < 101.25 %} {% set msg = 'Un éclair a été détecté\
+      \ à ' ~ distance ~ ' Km à l\\'est.' %}\n    {% elif 101.25 <= azimuth < 123.75\
+      \ %} {% set msg = 'Un éclair a été détecté à ' ~ distance ~ ' Km à l\\'est-sud-est.'\
+      \ %}\n    {% elif 123.75 <= azimuth < 146.25 %} {% set msg = 'Un éclair a été\
+      \ détecté à ' ~ distance ~ ' Km au sud-est.' %}\n    {% elif 146.25 <= azimuth\
+      \ < 168.75 %} {% set msg = 'Un éclair a été détecté à ' ~ distance ~ ' Km au\
+      \ sud-south-est.' %}\n    {% elif 168.75 <= azimuth < 191.25 %} {% set msg =\
+      \ 'Un éclair a été détecté à ' ~ distance ~ ' Km au sud.' %}\n    {% elif 191.25\
+      \ <= azimuth < 213.75 %} {% set msg = 'Un éclair a été détecté à ' ~ distance\
+      \ ~ ' Km au sud-sud-ouest.' %}\n    {% elif 213.75 <= azimuth < 236.25 %} {%\
+      \ set msg = 'Un éclair a été détecté à ' ~ distance ~ ' Km au sud-ouest.' %}\n\
+      \    {% elif 236.25 <= azimuth < 258.75 %} {% set msg = 'Un éclair a été détecté\
+      \ à ' ~ distance ~ ' Km à l\\'ouest-sud-ouest.' %}\n    {% elif 258.75 <= azimuth\
+      \ < 281.25 %} {% set msg = 'Un éclair a été détecté à ' ~ distance ~ ' Km à\
+      \ l\\'ouest.' %}\n    {% elif 281.25 <= azimuth < 303.75 %} {% set msg = 'Un\
+      \ éclair a été détecté à ' ~ distance ~ ' Km à l\\'ouest-nord-ouest.' %}\n \
+      \   {% elif 303.75 <= azimuth < 326.25 %} {% set msg = 'Un éclair a été détecté\
+      \ à ' ~ distance ~ ' Km au nord-ouest.' %}\n    {% elif 326.25 <= azimuth <\
+      \ 348.75 %} {% set msg = 'Un éclair a été détecté à ' ~ distance ~ ' Km au nord-nord-ouest.'\
+      \ %}\n    {% endif %}\n  {% else %}\n    {% set msg = 'Un éclair a été détecté\
+      \ à ' ~ distance ~ ' Km.' %}\n  {% endif %}\n{% else %}\n  {% set msg = 'Pas\
+      \ d\\'impact de foudre détecté.' %}\n{% endif %} {{ msg }} {{ timeSinceLastLightning\
+      \ }}. {% if impactCount > 0 %}\n  {{ impactCount }} impact(s) détecté(s).\n\
+      {% endif %}\n"
+- delay: 00:01:00
+mode: single

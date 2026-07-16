@@ -1,0 +1,56 @@
+- id: '1775331166275'
+  alias: 'D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR'
+  description: Reset physique si T > 25°C, uniquement si la prise est alimentée
+  triggers:
+  - alias: 'TRIGGER : CHANGEMENT TEMPÉRATURE SDB'
+    trigger: state
+    entity_id: sensor.th_salle_de_bain_temperature
+  conditions:
+  - alias: 'CONDITION : VÉRIFICATION ALIMENTATION PRISE'
+    condition: state
+    entity_id: switch.prise_soufflant_salle_de_bain_nous
+    state: 'on'
+  - alias: 'CONDITION : VÉRIFICATION ÉTAT INTERNE'
+    condition: state
+    entity_id: input_boolean.inter_soufflant_salle_de_bain
+    state: 'on'
+  - alias: 'CONDITION : TEMPÉRATURE > 25°C'
+    condition: numeric_state
+    entity_id: sensor.th_salle_de_bain_temperature
+    above: 25
+  - alias: 'CONDITION : DÉRIVE THERMIQUE RAPIDE (+0.5°C)'
+    condition: template
+    value_template: "{{ (states('sensor.th_salle_de_bain_temperature') | float) >=
+      \n   (trigger.from_state.state | float + 0.5) }}\n"
+  actions:
+  - alias: 'ACTION : ATTENTE STABILISATION (1 MIN)'
+    delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  - alias: 'ACTION : ENVOI COMMANDE IR RESET'
+    action: remote.send_command
+    target:
+      entity_id: remote.soufflant_sdb
+    data:
+      command: on_off
+      device: radiateur_sdb
+      num_repeats: 1
+  - alias: 'ETAT : PASSAGE DU BOOLEAN SUR OFF (SÉCURITÉ)'
+    action: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.inter_soufflant_salle_de_bain
+  - alias: 'ACTION : ATTENTE AVANT COUPURE (1 MIN) SÉCURITÉ'
+    delay: 00:01:00
+  - alias: 'MATÉRIEL : COUPURE PHYSIQUE DE LA PRISE'
+    action: switch.turn_off
+    target:
+      entity_id: switch.prise_soufflant_salle_de_bain_nous
+  - alias: 'NOTIFIER : ALERTE MOBILE DÉRIVE THERMIQUE'
+    action: notify.mobile_app_eric
+    data:
+      title: ⚠️ Watchdog SDB
+      message: Dérive thermique détectée à {{ states('sensor.th_salle_de_bain_temperature')
+        }}°C. Reset IR lancé.
+  mode: single

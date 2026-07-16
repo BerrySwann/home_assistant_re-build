@@ -1,0 +1,14 @@
+id: '1772274342928'
+alias: '[01-Backup] Git hourly H+10'
+description: Push Git + backup natif HA toutes les heures à H+10
+triggers:
+- trigger: time_pattern
+  minutes: '10'
+conditions: []
+actions:
+- action: shell_command.git_backup_push
+- action: system_log.write
+  data:
+    level: info
+    message: '[Backup] Horaire H+10 exécuté'
+mode: single

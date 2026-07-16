@@ -1,0 +1,92 @@
+type: custom:bubble-card
+card_type: pop-up
+hash: "#memory"
+name: Mémoire RAM
+icon: mdi:memory
+button_type: name
+show_header: true
+show_icon: true
+show_name: true
+show_state: false
+show_last_changed: false
+show_attribute: false
+force_icon: false
+card_layout: normal
+close_on_click: false
+hide_backdrop: false
+bg_opacity: "0"
+cards:
+  - type: custom:apexcharts-card
+    experimental:
+      color_threshold: true
+      brush: true
+    graph_span: 24h
+    cache: true
+    span:
+      offset: +1m
+    now:
+      show: true
+      color: "#F44336"
+      label: Now
+    header:
+      show: true
+      title: " "
+      show_states: true
+      colorize_states: true
+    apex_config:
+      chart:
+        height: 320px
+        toolbar:
+          show: true
+      legend:
+        show: false
+      tooltip:
+        shared: true
+        intersect: false
+    all_series_config:
+      show:
+        legend_value: false
+        extremas: true
+    yaxis:
+      - id: Mem
+        min: auto
+        max: auto
+        decimals: 0
+        opposite: true
+        apex_config:
+          tickAmount: 6
+    series:
+      - entity: sensor.pve_memory_usage_percentage
+        name: RAM %
+        yaxis_id: Mem
+        type: area
+        stroke_width: 1
+        opacity: 0.3
+        fill_raw: last
+        color_threshold:
+          - value: 0
+            color: "rgb(142,142,142)"
+          - value: 75
+            color: "#FFC107"
+          - value: 90
+            color: "#F44336"
+      - entity: sensor.pve_memory_usage_percentage
+        name: Moy.(24h)
+        yaxis_id: Mem
+        type: line
+        stroke_dash: 5
+        stroke_width: 2.5
+        color: "rgb(142,142,142)"
+        group_by:
+          func: avg
+          duration: 1h
+      - entity: sensor.pve_memory_usage_percentage
+        name: Moy.(730hrs)
+        color: "rgb(100,100,100)"
+        fill_raw: last
+        group_by:
+          func: avg
+          duration: 730h
+        show:
+          in_brush: false
+          in_chart: false

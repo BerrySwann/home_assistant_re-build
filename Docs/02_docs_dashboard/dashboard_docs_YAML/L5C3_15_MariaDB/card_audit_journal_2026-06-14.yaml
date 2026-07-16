@@ -1,0 +1,34 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ CARTE : JOURNAL AUDIT MD5 (PAGE SYSTÈME / L5C3)                         │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+# Affiche les 25 dernières lignes du rapport md5_audit_YYYY-MM-DD.txt
+# Source : sensor.audit_md5_journal (command_line/audit/audit_logs.yaml)
+
+type: vertical-stack
+cards:
+
+  - type: custom:mushroom-title-card
+    title: "Journal Audit MD5 (25 dernières lignes)"
+    alignment: center
+    card_mod:
+      style: |
+        ha-card { border: none !important; box-shadow: none !important; background: transparent; }
+
+  - type: markdown
+    content: |-
+      ```
+      {{ state_attr('sensor.audit_md5_journal','text') or '— Aucun audit lancé —' }}
+      ```
+    card_mod:
+      style: |
+        ha-card { border: none !important; box-shadow: none !important; background: transparent; }
+        ha-markdown$: |
+          pre, code {
+            font-size: 10px !important;
+            white-space: pre-wrap !important;
+            word-break: break-all;
+            line-height: 1.4;
+          }
+
+# annotations_log:
+# [2026-06-14] Remplacement 3 journaux yaml/atma/full → 1 journal audit_md5_journal

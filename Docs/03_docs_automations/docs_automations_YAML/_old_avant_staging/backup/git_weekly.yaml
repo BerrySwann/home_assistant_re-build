@@ -1,0 +1,21 @@
+id: '1766776680925'
+alias: '[Backup] Git weekly (dim 01:30)'
+description: 'Push + tag weekly chaque dimanche à 01:30'
+triggers:
+- trigger: time
+  at: 01:30:00
+conditions:
+- condition: time
+  weekday:
+  - sun
+actions:
+- action: shell_command.git_backup_push_weekly
+- action: system_log.write
+  data:
+    level: info
+    message: '[Backup] Weekly exécuté'
+- action: notify.mobile_app_eric
+  data:
+    title: 🚀 Sauvegarde Git
+    message: Backup hebdo & tag -> GitHub.
+mode: single
