@@ -29,9 +29,9 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C1 Conso Énergie Générale (source des templates AVG P2 et diag pôles).
 
-# ┌───────────────────────────────────┐
-# │ 1. ENTRÉE                         │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │ 1. ENTRÉE                        │
+# └─────────────────────────────────┘
 
 # --- prise_box_internet_ikea_annuel_um ---
 prise_box_internet_ikea_annuel_um:
@@ -89,9 +89,9 @@ prise_horloge_ikea_quotidien_um:
   unique_id: prise_horloge_ikea_quotidien_um
   cycle: daily
 
-# ┌───────────────────────────────────┐
-# │ 4. SALON                          │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │ 4. SALON                         │
+# └─────────────────────────────────┘
 
 # --- prise_pc_s_gege_ikea_annuel_um ---
 prise_pc_s_gege_ikea_annuel_um:
@@ -177,9 +177,9 @@ prise_tv_salon_ikea_quotidien_um:
   unique_id: prise_tv_salon_ikea_quotidien_um
   cycle: daily
 
-# ┌───────────────────────────────────┐
-# │ 5. CUISINE                        │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │ 5. CUISINE                       │
+# └─────────────────────────────────┘
 
 # --- prise_four_micro_ondes_nous_annuel_um ---
 prise_four_micro_ondes_nous_annuel_um:
@@ -405,9 +405,9 @@ prise_congelateur_cuisine_nous_quotidien_um:
   unique_id: prise_congelateur_cuisine_nous_quotidien_um
   cycle: daily
 
-# ┌───────────────────────────────────┐
-# │ 7. BUREAU                         │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │ 7. BUREAU                        │
+# └─────────────────────────────────┘
 # --- prise_bureau_pc_ikea_annuel_um ---
 prise_bureau_pc_ikea_annuel_um:
   source: sensor.prise_bureau_pc_ikea_energy
@@ -464,9 +464,9 @@ prise_bureau_fer_a_repasser_nous_quotidien_um:
   unique_id: prise_bureau_fer_a_repasser_nous_quotidien_um
   cycle: daily
 
-# ┌───────────────────────────────────┐
-# │ 9. CHAMBRE                        │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │ 9. CHAMBRE                       │
+# └─────────────────────────────────┘
 # --- prise_tete_de_lit_chambre_annuel_um ---
 prise_tete_de_lit_chambre_annuel_um:
   source: sensor.prise_tete_de_lit_chambre_energy

@@ -41,9 +41,9 @@
 # - L1C2 Températures (T° moyenne intérieure, delta intérieur/extérieur)
 
 - sensor:
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ PARAMÈTRES FIXES ET DELTAS DE CALCUL                              │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌──────────────────────────────────────┐
+# │ PARAMÈTRES FIXES ET DELTAS DE CALCUL  │
+# └──────────────────────────────────────┘
 
 # --- temperature_eco_hiver ---
     - name: "Temperature éCO. Hiver"
@@ -99,9 +99,9 @@
       state: "7"
       unit_of_measurement: "°C"
 
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ DÉTECTION DU MODE GÉNÉRAL ET CONSIGNES DYNAMIQUES                 │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌───────────────────────────────────────────────────┐
+# │ DÉTECTION DU MODE GÉNÉRAL ET CONSIGNES DYNAMIQUES  │
+# └───────────────────────────────────────────────────┘
 
 # --- mode_ete_hiver ---
     - name: "Mode Été/Hiver"
@@ -144,13 +144,13 @@
           {{ (base + d1) | round(1) }}
         {% endif %}
 
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ CORRECTIONS SPÉCIFIQUES                                           │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │ CORRECTIONS SPÉCIFIQUES          │
+# └─────────────────────────────────┘
 
-# ┌───────────────────────────────────┐
-# │ 04. SALON                         │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │ 04. SALON                        │
+# └─────────────────────────────────┘
 # --- temperature_corrige_mamour ---
     - name: "Temperature Corrigé Mamour"
       unique_id: temperature_corrige_mamour
@@ -166,9 +166,9 @@
           {{ (temp_conf_m + delta_1) | round(1) }}
         {% endif %}
 
-# ┌───────────────────────────────────┐
-# │ 07. BUREAU                        │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │ 07. BUREAU                       │
+# └─────────────────────────────────┘
 # --- temperature_corrige_eric ---
     - name: "Temperature Corrigé Eric"
       unique_id: temperature_corrige_eric
@@ -185,9 +185,9 @@
           {{ (temp_conf_e - delta_2) | round(1) }}
         {% endif %}
 
-# ┌───────────────────────────────────┐
-# │ 09. CHAMBRE                       │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │ 09. CHAMBRE                      │
+# └─────────────────────────────────┘
 # --- temperature_corrige_chambre ---
     - name: "Temperature Corrigé Chambre"
       unique_id: temperature_corrige_chambre
@@ -201,9 +201,9 @@
           {{ states('sensor.consigne_de_base') | float(0) | int }}
         {% endif %}
 
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ MOTEURS DE CALCUL DYNAMIQUES (CIBLE / CONFORT)                    │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌────────────────────────────────────────────────┐
+# │ MOTEURS DE CALCUL DYNAMIQUES (CIBLE / CONFORT)  │
+# └────────────────────────────────────────────────┘
 
 # --- temperature_cible ---
     - name: "Temperature Cible"
@@ -281,9 +281,9 @@
           {{ temp_eco - d2 }}
         {% endif %}
 
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ MOYENNES, DELTAS INTERNES ET RECOMMANDATIONS ADEME                │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌────────────────────────────────────────────────────┐
+# │ MOYENNES, DELTAS INTERNES ET RECOMMANDATIONS ADEME  │
+# └────────────────────────────────────────────────────┘
 
 # --- temperature_moyenne_interieure ---
     - name: "Température moyenne intérieure"

@@ -31,9 +31,9 @@
 # - L1C1 Météo (carte foudre windrose-card, timer dernier impact).
 
 - sensor:
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : windrose-card - LABEL DIRECTION ET DISTANCE           │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌─────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : windrose-card - LABEL DIRECTION ET DISTANCE  │
+# └─────────────────────────────────────────────────────────┘
 
 # windrose-card - LABEL Lightning direction label
 # --- lightning_direction_label ---
@@ -90,9 +90,9 @@
           {% endif %}
         {% endif %}
 
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : Card - TEMPS DEPUIS IMPACT (TIMER "LAST CHANGE")      │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌──────────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : Card - TEMPS DEPUIS IMPACT (TIMER "LAST CHANGE")  │
+# └──────────────────────────────────────────────────────────────┘
 
 # --- temps_depuis_le_dernier_impact_de_foudre ---
     - name: "Temps depuis le dernier impact de foudre"

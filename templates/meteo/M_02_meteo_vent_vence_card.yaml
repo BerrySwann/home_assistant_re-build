@@ -34,9 +34,9 @@
 # - L1C1 Météo (windrose-card vent, vignette direction/vitesse/label)
 
 - sensor:
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : windrose-card - LABEL DIRECTION DU VENT VENCE         │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌───────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : windrose-card - LABEL DIRECTION DU VENT VENCE  │
+# └───────────────────────────────────────────────────────────┘
 
 # windrose-card - LABEL Direction du Vent Vence
 # --- vence_wind_direction_label ---
@@ -67,9 +67,9 @@
         {% else %} Calme
         {% endif %}
 
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : windrose-card - DIRECTION ET VITESSE DU VENT          │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌──────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : windrose-card - DIRECTION ET VITESSE DU VENT  │
+# └──────────────────────────────────────────────────────────┘
 
 # windrose-card - Direction du Vent Vence
 # --- vence_wind_bearing ---
