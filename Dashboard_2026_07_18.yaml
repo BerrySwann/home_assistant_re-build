@@ -2325,7 +2325,7 @@ views:
                   - climate.radiateur_cuisine
                   - climate.clim_bureau_rm4_mini
                   - climate.soufflant_salle_de_bain
-                  - climate.clim_chambre_nodon
+                  - climate.clim_chambre_rm4_mini
                 triggers_update:
                   - sensor.temperature_moyenne_interieure
                   - sensor.delta_ademe_recommande
@@ -2346,7 +2346,7 @@ views:
                   - climate.radiateur_cuisine
                   - climate.clim_bureau_rm4_mini
                   - climate.soufflant_salle_de_bain
-                  - climate.clim_chambre_nodon
+                  - climate.clim_chambre_rm4_mini
                 tap_action:
                   action: navigate
                   navigation_path: /dashboard-tablette/clim
@@ -2396,18 +2396,15 @@ views:
                         'off': 'white',
                         'default': '#aaaaaa'
                       };
-
                       function safeState(entityId, defaultValue = 'on') {
                         return states[entityId]?.state || defaultValue;
                       }
-
                       function getColorForPowerStatus(powerStatus, mode) {
                         if (mode === 'Fan') return colorMap['Fan'];
                         if (powerStatus === 'on') return colorMap['on'];
                         if (powerStatus === 'off') return colorMap['off'];
                         return colorMap['default'];
                       }
-
                       const pieces = [
                         { name: 'T̄ Appart. --------------', color: 'white' },
                         { name: 'Δ Ademe --------------', color: 'white' },
@@ -2418,7 +2415,6 @@ views:
                         { name: 'SdB', power: safeState('sensor.sdb_soufflant_power_status'), mode: safeState('sensor.sdb_soufflant_etat') },
                         { name: 'Chambre', power: safeState('sensor.chambre_power_status'), mode: safeState('sensor.clim_chambre_etat') }
                       ];
-
                       return pieces.map(piece =>
                         `<span style="display: block; text-align: left; line-height: 1.2; color: ${piece.color || getColorForPowerStatus(piece.power, piece.mode)};">${piece.name}</span>`
                       ).join('');
@@ -2430,26 +2426,22 @@ views:
                         'heat': '#FFA500',
                         'fan': 'turquoise',
                         'off': '#F44336',
-                        'N/A': '#aaaaaa', 
+                        'N/A': '#aaaaaa',
                         'default': '#aaaaaa'
                       };
-
                       function safeState(entityId, defaultValue = 'off') {
                         const state = states[entityId]?.state?.trim()?.toLowerCase() || defaultValue;
                         if (state === 'unknown' || state === 'unavailable') return 'N/A';
                         return state === 'fan_only' ? 'fan' : state;
                       }
-
                       function getColorForMode(mode) {
                         return colorMap[mode] || colorMap['default'];
                       }
-
                       function formatMode(mode) {
                         const color = getColorForMode(mode);
                         const formattedMode = mode.charAt(0).toUpperCase() + mode.slice(1);
                         return `<span style="display: block; text-align: left; line-height: 1.2; color: ${color};">${formattedMode}</span>`;
                       }
-
                       const modes = [
                         { entity: 'sensor.mode_ete_hiver_etat', label: '.' },
                         { entity: 'sensor.clim_salon_etat', label: 'Salon' },
@@ -2458,7 +2450,6 @@ views:
                         { entity: 'sensor.sdb_soufflant_etat', label: 'SdB' },
                         { entity: 'sensor.clim_chambre_etat', label: 'Chambre' }
                       ];
-
                       return [
                         '<span style="display: block; text-align: left; line-height: 1.2; color: transparent;">.</span>',
                         '<span style="display: block; text-align: left; line-height: 1.2; color: transparent;">.</span>',
@@ -2478,37 +2469,32 @@ views:
                         }
                         return 'N/A';
                       }
-
                       // Fonction pour gérer la couleur (Gris si N/A) et le formatage
                       function formatDisplay(value) {
                         const color = value === 'N/A' ? '#aaaaaa' : 'inherit';
                         const text = value === 'N/A' ? 'N/A' : value + '°C';
                         return `<span style="display: block; text-align: right; line-height: 1.2; color: ${color};">${text}</span>`;
                       }
-
                       // --- LOGIQUE DELTA ADEME RÉUTILISÉE ET FORMATÉE ---
                       const deltaADEME = parseFloat(states['sensor.delta_ademe_recommande']?.state);
                       const isCooling = states['sensor.mode_ete_hiver']?.state === 'cool';
-
-                      const deltaColor = 
-                        !isNaN(deltaADEME) && isCooling && deltaADEME >= -8 && deltaADEME <= -4 
+                      const deltaColor =
+                        !isNaN(deltaADEME) && isCooling && deltaADEME >= -8 && deltaADEME <= -4
                           ? 'lightgreen' // Optimal
                           : !isNaN(deltaADEME) && isCooling
                             ? '#FF0000' // Avertissement
                             : 'white'; // Neutre
-                            
-                      const ademeDisplayValue = !isNaN(deltaADEME) 
-                        ? `${deltaADEME.toFixed(1)}°C` 
+
+                      const ademeDisplayValue = !isNaN(deltaADEME)
+                        ? `${deltaADEME.toFixed(1)}°C`
                         : 'N/A';
                       // -----------------------------------------------------------
-
                       const tempMoyenne = safeState('sensor.temperature_moyenne_interieure');
                       const consigneSalon = safeState('climate.clim_salon_rm4_mini');
                       const consigneCuisine = safeState('climate.radiateur_cuisine');
                       const consigneBureau = safeState('climate.clim_bureau_rm4_mini');
                       const consigneSdB = safeState('climate.soufflant_salle_de_bain');
-                      const consigneChambre = safeState('sensor.temperature_corrige_chambre');
-
+                      const consigneChambre = safeState('climate.clim_chambre_rm4_mini');
                       return [
                         `<span style="display: block; text-align: right; line-height: 1.2; color: lightgreen;">${tempMoyenne}°C</span>`,
                         `<span style="display: block; text-align: right; line-height: 1.2; color: ${deltaColor};">${ademeDisplayValue}</span>`,
@@ -11074,8 +11060,7 @@ views:
               navigation_path: "#chambre"
           - type: custom:bubble-card
             card_type: climate
-            card_layout: large-2-rows
-            entity: climate.clim_chambre_nodon
+            entity: climate.clim_chambre_rm4_mini
             state_color: true
             icon: mdi:air-conditioner
             show_icon: true
@@ -11105,6 +11090,7 @@ views:
                 --bubble-state-climate-fan-only-color: #008B8B;
                 --bubble-state-climate-heat-color: #ff6100;
               }
+            rows: 1.125
           - type: custom:streamline-card
             template: temperature_humidite
             variables:
@@ -11900,7 +11886,7 @@ views:
                     style:
                       .: |
                         :host {
-                          --text-divider-color: #FFA000; /* EMBER */
+                          --text-divider-color: #FFA000;
                           --text-divider-line-size: 3px;
                         }
                   card:
@@ -12591,9 +12577,7 @@ views:
               [[[
                 const tempState = states['sensor.th_salle_de_bain_temperature'];
                 const climateState = states['climate.soufflant_salle_de_bain'];
-
                 if (!tempState || !climateState || !climateState.attributes.temperature) return 'Calcul en cours...';
-
                 const temp = parseFloat(tempState.state).toFixed(1);
                 const target = parseFloat(climateState.attributes.temperature).toFixed(1);
                 const delta = (temp - target).toFixed(1);
@@ -12759,7 +12743,7 @@ views:
                     style:
                       .: |
                         :host {
-                          --text-divider-color: #FFA000; /* EMBER */
+                          --text-divider-color: #FFA000;
                           --text-divider-line-size: 3px;
                         }
                   card:
@@ -12773,7 +12757,7 @@ views:
               - type: entity
                 show_state: true
                 show_icon: true
-                entity: binary_sensor.clim_chambre_nodon_en_ligne
+                entity: remote.clim_chambre
                 color: state
               - type: entity
                 show_state: true
@@ -12812,7 +12796,7 @@ views:
               action: navigate
               navigation_path: /dashboard-tablette/prog-clim-chambre
           - type: thermostat
-            entity: climate.clim_chambre_nodon
+            entity: climate.clim_chambre_rm4_mini
             features:
               - style: icons
                 type: climate-hvac-modes
@@ -20613,7 +20597,7 @@ views:
               - type: entity
                 show_state: true
                 show_icon: true
-                entity: climate.clim_chambre_nodon
+                entity: climate.clim_chambre_rm4_mini
                 color: state
                 tap_action:
                   action: more-info
@@ -20645,8 +20629,7 @@ views:
                 }
           - type: custom:bubble-card
             card_type: climate
-            card_layout: large-2-rows
-            entity: climate.clim_chambre_nodon
+            entity: climate.clim_chambre_rm4_mini
             state_color: true
             icon: mdi:air-conditioner
             show_icon: true
@@ -20676,6 +20659,7 @@ views:
                 --bubble-state-climate-fan-only-color: #008B8B;
                 --bubble-state-climate-heat-color: #ff6100;
               }
+            rows: 1.125
           - type: custom:streamline-card
             template: clim_voltage_ring-tile
             variables:

@@ -1,5 +1,6 @@
 # 🔗 DÉPENDANCES GLOBALES — TABLEAU DE BORD HA
-*Dernière mise à jour : 2026-07-14 (Revert NodOn→RM4 Mini chambre — L1C2 + L2C2 + L1C3 + P1_ui_dashboard + automations f/h/i + p1_master + scripts.yaml corrigés)*
+*Dernière mise à jour : 2026-07-18 (Nettoyage résidu chambre : capteur MQTT dispo + bloc mqtt: de configuration.yaml + dossier mqtt/, local + prod H:\)*
+*2026-07-17 (Resync local ← GitHub/prod : configuration.yaml + scripts.yaml — fix chambre script J-2-0)*
 
 ---
 
@@ -191,12 +192,12 @@ MATÉRIEL (SONOFF TH via Z2M)
 |:--------|:------:|
 | `Dashboard/L1C2_02_Temperatures/vignette_L1C2_temperatures_2026-05-12.yaml` | ✅ |
 | `Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-05-22.yaml` | ⚠️ obsolète — `climate.clim_chambre_rm4_mini` |
-| `Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-07-14.yaml` | ✅ Revert NodOn→RM4 — `climate.clim_chambre_rm4_mini` + `sensor.temperature_corrige_chambre` |
+| `Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-07-14.yaml` | ✅ `climate.clim_chambre_rm4_mini` + `sensor.temperature_corrige_chambre` |
 
 ---
 
 ## ✅ L1C3 — COMMANDES CLIM (VIGNETTE + PAGE)
-*Validée le 2026-05-13 — Migration chambre RM4→NodOn le 2026-07-08 — Revert NodOn→RM4 le 2026-07-14 (dual setpoint non gérable)*
+*Validée le 2026-05-13 - chambre sur `climate.clim_chambre_rm4_mini` depuis le 2026-07-14*
 
 ### Vignette — Chaîne de dépendances
 
@@ -256,11 +257,12 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 
 ### Scripts appelés depuis la page
 
-| Script | Déclencheur |
-|:-------|:------------|
-| `script.j_1_1_salon_clim_on_off_intelligent` | Badge power Salon |
-| `script.j_1_2_bureau_clim_on_off_intelligent` | Badge power Bureau |
-| `script.j_1_3_chambre_clim_on_off_intelligent` | Badge power Chambre |
+| Script | Déclencheur | Statut |
+|:-------|:------------|:------:|
+| `script.j_1_1_salon_clim_on_off_intelligent` | Badge power Salon | ✅ |
+| `script.j_1_2_bureau_clim_on_off_intelligent` | Badge power Bureau | ✅ |
+| `script.j_1_3_chambre_clim_on_off_intelligent` | Badge power Chambre | ✅ |
+| `script.j_2_0_secu_arret_clim_protege` | Verrou sécurité (déclenché en interne, pas depuis un badge) | ✅ *(fix 2026-07-17 : `clim_entity` chambre — condition spéciale ajoutée pour pointer sur `climate.clim_chambre_rm4_mini` au lieu du pattern générique `climate.clim_{{p}}_rm4_mini`, synchronisé depuis prod/GitHub)* |
 
 ### Streamline templates utilisés
 
@@ -279,14 +281,12 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 | `Dashboard/L1C3_03_Commandes_Clim/vignette_L1C3_clim_2026-07-08.yaml` | ✅ chambre → rm4_mini (revert 2026-07-14) |
 | `Dashboard/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-07-08.yaml` | ✅ chambre → rm4_mini (revert 2026-07-14) |
 
-### Entités Chambre — revert NodOn→RM4 Mini (2026-07-14)
+### Entités Chambre (RM4 Mini)
 
 | Entité | Type | Rôle |
 |:-------|:----:|:-----|
 | `climate.clim_chambre_rm4_mini` | Climate (Broadlink) | Thermostat chambre — actif |
 | `sensor.temperature_corrige_chambre` | TPL | Consigne chambre affichée dans vignette L1C3 |
-
-> ℹ️ NodOn IRB-4-1-00 retiré : dual setpoint permanent (target_temp_low/high) incompatible avec la thermostat card HA standard.
 | `Dashboard/L1C3_03_Commandes_Clim/card_prog_clim_salon_2026-07-14.yaml` | ✅ |
 | `Dashboard/L1C3_03_Commandes_Clim/card_prog_radiateur_cuisine_2026-07-14.yaml` | ✅ |
 | `Dashboard/L1C3_03_Commandes_Clim/card_prog_clim_bureau_2026-07-14.yaml` | ✅ |
@@ -513,7 +513,7 @@ MATÉRIEL (NOUS SP via Z2M)
 | `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-05-13.yaml` | ✅ |
 | `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-05-22.yaml` | ✅ |
 | `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-06-18.yaml` | ⚠️ obsolète — `climate.clim_chambre_rm4_mini` |
-| `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-07-14.yaml` | ✅ Revert NodOn→RM4 — `climate.clim_chambre_rm4_mini` (NOUS SP1 conservé) |
+| `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-07-14.yaml` | ✅ `climate.clim_chambre_rm4_mini` (NOUS SP1 conservé) |
 
 ---
 
