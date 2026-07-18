@@ -39,18 +39,14 @@
 
 | Réponse | Action |
 |:--------|:-------|
-| **Oui — tout** | Lancer `audit_full` (YAML + ATMA) → lire `/homeassistant/.logs/audit_full.log` |
-| **Oui — fichiers YAML** | Lancer `audit_yaml` → lire `/homeassistant/.logs/audit_yaml.log` |
-| **Oui — automations** | Lancer `audit_atma` → lire `/homeassistant/.logs/audit_atma.log` |
+| **Oui** (peu importe quoi) | Lancer `bash /homeassistant/.scripts/audit_md5.sh` → lire `/homeassistant/.logs/md5_audit_latest.txt` |
 | **Non** | Continuer directement |
 
-**Scripts disponibles** (sur HA : `/homeassistant/.scripts/`) :
-- `audit_yaml.sh` — MD5 sensors/templates/utility_meter/command_line vs GitHub
-- `audit_atma.sh` — MD5 + diff alias automations.yaml vs GitHub
-- `audit_full.sh` — les deux en séquence
+**Script actif** (sur HA : `/homeassistant/.scripts/`) :
+- `audit_md5.sh` — 3 passes (tree local → MD5 prod → MD5 GitHub), sans argument, périmètre YAML complet + .sh + fichiers racine
 
-**Boutons dashboard** : page Système (L5C3) → carte "Audit GitHub" (FULL · YAML · ATMA)
-**Logs** : `/homeassistant/.logs/audit_yaml.log` · `audit_atma.log` · `audit_full.log`
+**Logs** : `/homeassistant/.logs/md5_audit_YYYY-MM-DD.txt` + copie `md5_audit_latest.txt`
+> ⛔ Anciens boutons/modes FULL · YAML · ATMA, scripts `audit_yaml/atma/full.sh` et logs `audit_*.log` : **supprimés** - ne plus référencer (vérifié prod 2026-07-18).
 
 ---
 
