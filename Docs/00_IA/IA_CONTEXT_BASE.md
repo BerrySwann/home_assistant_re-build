@@ -3,7 +3,10 @@
 
 ---
 
-> **REGLE ABSOLUE :** Tu devras être honnete, ne pas mentir, ne pas tricher, être très attentif, et être 100% objectif et que tu aies l'interdiction de me flater pour me flater ou de me donner une réponse pour me faire plaisire, ou pour me donner une réponse quoi qu'il arrive. Et que si une de mes répose, une de mes solution ou une idées de "codage" (yaml) que je pourrais avoir ne te semble pas bonne, il est impératif que tu me le fasse s'avoir sans aller systématiquement dans mon sens.
+> **REGLE ABSOLUE :** Tu devras être honnete, ne pas mentir, ne pas tricher, être très attentif, et être 100% objectif et que tu aies l'interdiction de me flater pour me flater ou de me donner une réponse pour me faire plaisire, ou pour me donner une réponse quoi qu'il arrive. Et que si une de mes répose, une de mes solution ou une idées de "codage" (yaml) ou autres, que je pourrais avoir ne te semble pas bonne, il est impératif que tu me le fasse s'avoir sans aller systématiquement dans mon sens.
+> Si une de mes demandes ou propositions est ambiguë, floue, incompréhensible, contradictoire ou incomplète, tu devras me poser des questions. Et là aussi, interdiction de valider une interprétation au hasard pour me faire plaisir, ou me flater.
+
+> **REGLE ABSOLUE — STYLE :** Ne jamais utiliser de symboles qui trahissent l'écriture d'un LLM et qui n'existent pas sur un clavier standard. Interdit : `—` (em dash), `…` (ellipse typographique), `«»` (guillemets typographiques), `·` (point médian), et tout autre caractère spécial inaccessible sans Alt+code. Utiliser à la place : `-`, `...`, `"`, `-` etc.
 
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
 *Dernière mise à jour : 2026-06-19*
@@ -349,5 +352,34 @@ ReBuild/
 - **Localisation :** 06140 Vence (Altitude ~360m) — Immeuble 1980, 4ème étage sous toiture. Traversant SUD/NORD, simple vitrage. VMC en SDB.
 - **Mode Absence Hiver** : 17°C · si T° Ext < 10°C → 18°C · si T° Ext < 8°C → 19°C.
 - **Mode Absence Été** : T° Cible = 28°C.
+- **Logique "Cœur du Système" (T° Extérieure → Cible → Confort) :**
+
+![Confort Cible Calcul Flow](confort_cible_calcul_flow.png)
+*(copie locale du diagramme - [asset GitHub d'origine](https://github.com/user-attachments/assets/f18e24a2-1441-482b-af70-537a7b208e15))*
+
+## 🏠 STRUCTURE DU LOGEMENT
+*(uniquement pour l'analyse des consommations électriques)*
+- **Localisation :** 06140 Vence (Altitude ~360m).
+- **Type :** Immeuble début 1980, 4ème et dernier étage (Sous toiture).
+- **Caractéristiques :** Traversant SUD/NORD, Simple vitrage partout.
+- **VMC :** Présente en SDB (Crée une dépression thermique).
+
+## 📏 DIMENSIONS & PÔLES
+*(uniquement pour l'analyse des consommations électriques)*
+1. **SALON (Sud) :** 6.52m x 3.97m (25.88 m²).
+   - *Équipement :* Split mural, Volet motorisé (Auto: 7h30 -> Coucher soleil / Fermé si Absent / Fermé si >34°C).
+   - *Note :* Apport solaire crucial dès 15h.
+2. **CUISINE (Nord) :** 4.86m x 2.18m (10.59 m²).
+   - *Équipement :* "radiateur_cuisine" (Bain d'huile avec relais connecté).
+   - *Auto :* L-Ma-Me-Je (4h45-7h), Ve-Sa-Di (5h45-8h).
+3. **BUREAU (Nord) :** 3.95m x 2.67m (10.55 m²).
+   - *Équipement :* Split mural, Volet motorisé.
+   - *Auto :* Ouvert uniquement si T° Ext [18°C - 25°C].
+4. **SDB (Interne) :** 1.96m x 1.58m (3.13 m²) Pas de fenêtre.
+   - *Équipement :* Soufflant (2x1000W), Sèche-serviette (150W).
+   - *Auto :* Soufflant OFF si >23°C. Sèche-serviette 1h après douche.
+5. **CHAMBRE (Nord) :** 3.95m x 2.85m (11.26 m²).
+   - *Équipement :* Split mural. Pas de volet motorisé.
+   - *Note :* Forte dissipation thermique (DUT élevé).
 
  
