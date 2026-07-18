@@ -15,8 +15,6 @@
 # - utility_meter: !include_dir_merge_named utility_meter/ (compteurs nommés)
 # - command_line : !include_dir_merge_list command_line/   (cmds shell→sensors)
 # - shell_command: !include_dir_merge_named shell_command/
-# - mqtt         : binary_sensor !include_dir_merge_list mqtt/binary_sensor/ (capteurs MQTT manuels)
-# - mqtt         : binary_sensor: !include_dir_merge_list mqtt/binary_sensor/ (capteurs MQTT manuels)
 # - camera       : DÉSACTIVÉ (obsolète — supprimé de la config active)
 # - notify       : SUPPRIMÉ YAML (migré vers intégration File UI — HA 2024.12+)
 # - fan          : SUPPRIMÉ YAML (rpi_gpio_pwm — spécifique RPi4, incompatible Mini-PC)
@@ -158,10 +156,6 @@ input_number: !include_dir_merge_named input_number/
 # --- input_datetime.yaml ---
 #renvoi au fichier input_datetime.yaml
 input_datetime: !include input_datetime.yaml
-
-# MQTT manuel (capteurs hors decouverte auto - ex: disponibilite Z2M)
-mqtt:
-  binary_sensor: !include_dir_merge_list mqtt/binary_sensor/
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ NOTIFY — MIGRÉ VERS INTÉGRATION FILE (UI)                                │
