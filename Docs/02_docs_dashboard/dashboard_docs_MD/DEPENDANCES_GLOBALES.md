@@ -1,5 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES — TABLEAU DE BORD HA
-*Dernière mise à jour : 2026-07-18 (Nettoyage résidu chambre : capteur MQTT dispo + bloc mqtt: de configuration.yaml + dossier mqtt/, local + prod H:\)*
+*Dernière mise à jour : 2026-07-18 (Nettoyage résidu chambre : capteur MQTT dispo + bloc mqtt: de configuration.yaml + dossier mqtt/, local + prod H:\ - Versions L1C3 2026-07-18 ajoutées : consigne chambre via climate direct + badge remote rétabli)*
 *2026-07-17 (Resync local ← GitHub/prod : configuration.yaml + scripts.yaml — fix chambre script J-2-0)*
 
 ---
@@ -276,17 +276,17 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 | Fichier | Statut |
 |:--------|:------:|
 | `Dashboard/L1C3_03_Commandes_Clim/vignette_L1C3_clim_2026-05-13.yaml` | ⚠️ obsolète (rm4_mini) |
-| `Dashboard/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-05-13.yaml` | ⚠️ obsolète (rm4_mini) |
 | `Dashboard/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-05-22.yaml` | ⚠️ obsolète (rm4_mini) |
-| `Dashboard/L1C3_03_Commandes_Clim/vignette_L1C3_clim_2026-07-08.yaml` | ✅ chambre → rm4_mini (revert 2026-07-14) |
-| `Dashboard/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-07-08.yaml` | ✅ chambre → rm4_mini (revert 2026-07-14) |
+| `Dashboard/L1C3_03_Commandes_Clim/vignette_L1C3_clim_2026-07-08.yaml` | ⚠️ obsolète - consigne chambre via `sensor.temperature_corrige_chambre` |
+| `Dashboard/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-07-08.yaml` | ⚠️ obsolète - badge `remote.clim_chambre` absent |
+| `Dashboard/L1C3_03_Commandes_Clim/vignette_L1C3_clim_2026-07-18.yaml` | ✅ consigne chambre lue sur `climate.clim_chambre_rm4_mini` |
+| `Dashboard/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-07-18.yaml` | ✅ badge `remote.clim_chambre` rétabli |
 
 ### Entités Chambre (RM4 Mini)
 
 | Entité | Type | Rôle |
 |:-------|:----:|:-----|
-| `climate.clim_chambre_rm4_mini` | Climate (Broadlink) | Thermostat chambre — actif |
-| `sensor.temperature_corrige_chambre` | TPL | Consigne chambre affichée dans vignette L1C3 |
+| `climate.clim_chambre_rm4_mini` | Climate (Broadlink) | Thermostat chambre — actif — consigne lue directement par la vignette depuis le 2026-07-18 |
 | `Dashboard/L1C3_03_Commandes_Clim/card_prog_clim_salon_2026-07-14.yaml` | ✅ |
 | `Dashboard/L1C3_03_Commandes_Clim/card_prog_radiateur_cuisine_2026-07-14.yaml` | ✅ |
 | `Dashboard/L1C3_03_Commandes_Clim/card_prog_clim_bureau_2026-07-14.yaml` | ✅ |
