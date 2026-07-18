@@ -106,14 +106,18 @@ T°Ext Up/Down/stable -> X°  ← tendance T° ext.
 
 **(J) Debug changements message clim** *(sans titre)*
 
-| Message | Condition |
-|:--------|:----------|
-| `[Présence] Personne n'est à la maison (mode CELL/WIFI_?!)` | CELL dans le sensor |
-| `[Présence] Seul Mamour est à la maison (Wi-Fi)` | MAMOUR |
-| `[Présence] Seul Eric est à la maison (Wi-Fi)` | ERIC |
-| `[Présence] Mamour et Eric sont à la maison (Wi-Fi)` | `[2] en [WIFI]` |
-| `[Tendance] T° extérieure en hausse/baisse/stable : {{ temp_ext }}°` | Up / Down / stable |
-| `[Mode] Chauffage activé / Rafraîchissement activé / Ventilation activée` | Heat / Cool / Fan |
+| Message | Condition (`in trigger.to_state.state`) |
+|:--------|:----------------------------------------|
+| `[Présence] Personne n'est à la maison (mode CELL/WIFI_?!)` | `'CELL'` |
+| `[Présence] Seul Mamour est à la maison (Wi-Fi)` | `'Mamour'` |
+| `[Présence] Seul Eric est à la maison (Wi-Fi)` | `'Eric'` |
+| `[Présence] Mamour et Eric sont à la maison (Wi-Fi)` | `'[2] en [WIFI]'` |
+| `[Tendance] Température extérieure en hausse : {{ temp_ext }}°` | `'Up ↗'` |
+| `[Tendance] Température extérieure en baisse : {{ temp_ext }}°` | `'Down ↘'` |
+| `[Tendance] Température extérieure stable : {{ temp_ext }}°` | `'stable →'` |
+| `[Mode] Chauffage activé : {{ message_part }}` | `'HEAT]'` |
+| `[Mode] Rafraîchissement activé : {{ message_part }}` | `'COOL]'` |
+| `[Mode] Ventilation activée` | `'FAN ONLY]'` |
 
 ### 🍳 P1 - CUISINE
 
