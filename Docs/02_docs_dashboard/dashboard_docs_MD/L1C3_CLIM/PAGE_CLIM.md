@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--04--17-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--07--18-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page%20Doc-ff9800?style=flat-square)](.)
 
 </div>
@@ -125,7 +125,7 @@ Affiché si `au moins 1` des entités `*_power_status_affichage ≠ "off"` :
 - `sensor.cuisine_power_status_affichage`
 - `sensor.bureau_power_status_affichage`
 - `sensor.sdb_power_status_affichage`
-- `sensor.sdb_seche_serviettes_power_status_affichage`
+- `sensor.sdb_seche_serviette_power_status_affichage`
 - `sensor.chambre_power_status_affichage`
 
 Seuil `_affichage` = puissance > **1W** (contre > 50W pour `_power_status`). Permet d'afficher le bloc même en veille.
@@ -423,7 +423,7 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 | `sensor.cuisine_power_status_affichage` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Condition bloc bilan |
 | `sensor.bureau_power_status_affichage` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Condition bloc bilan |
 | `sensor.sdb_power_status_affichage` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Condition bloc bilan |
-| `sensor.sdb_seche_serviettes_power_status_affichage` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Condition bloc bilan |
+| `sensor.sdb_seche_serviette_power_status_affichage` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Condition bloc bilan |
 | `sensor.chambre_power_status_affichage` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Condition bloc bilan |
 | `sensor.salon_power_status` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Chips mushroom |
 | `sensor.cuisine_power_status` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Chips mushroom |
