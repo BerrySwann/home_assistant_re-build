@@ -3,8 +3,10 @@
 sur l'efficacité isolation/volets/rideaux, écart théorie (YAML) vs logs réels de conso,
 caractéristiques physiques du logement (dimensions, orientations, équipements par pièce).*
 
-**Version :** v6.2 (2026-02-22 -> convertie en sous_context_ia, renommée, et revue en
-détail avec Eric le 2026-07-19 - voir CHANGELOG pour le détail des corrections)
+**Version :** v6.3 (2026-02-22 -> convertie en sous_context_ia, renommée, et revue en
+détail avec Eric le 2026-07-19 - voir CHANGELOG pour le détail des corrections.
+v6.3 : modèle Hitachi Salon confirmé (RAS-35FH6, ~2008, R410A) + audit complet
+réalisé le 2026-07-19 sur 7 mois de logs, résultats dans RAPPORT_AUDIT_ENERGETIQUE_2026-07-19.md)
 **Auteur :** Eric (BerrySwann)
 **Usage :** Prompt système pour audit Home Assistant avec Claude
 
@@ -33,30 +35,78 @@ directives actives de codage)*
   construction (confirmé par Eric le 2026-07-19). Seule compensation existante : rideaux
   épais Bureau + Chambre (voir CONTEXTE ci-dessus). Cuisine sans aucune compensation.
 
-### Puissances équipements (confirmé Eric 2026-07-19 - pas de fiche technique, valeurs déclaratives)
+### Puissances & modèles équipements (confirmé Eric 2026-07-19)
 
-- **3 splits clim (Salon/Bureau/Chambre) :** 3.5 kW chacun - 2 Daikin + 1 Hitachi
-  (répartition exacte par pièce non précisée, à redemander si besoin d'un calcul PC absolu par marque)
-- **Radiateur cuisine (bain d'huile) :** ~1.4-1.5 kW
+- **Salon :** Hitachi RAS-35FH6 (~2008, gaz R410A) - 3.5 kW
+  - Appareil de ~17 ans. COP chauffage estimé ~2.8-3.2 (génération pré-inverter ou premier
+    inverter). EER refroidissement estimé ~2.5-3.0. A comparer aux Daikin 2018 ci-dessous
+    (COP ~4.5, EER ~4.1). R410A progressivement éliminé (F-gas EU) = maintenance future
+    plus couteuse. Remplacement a planifier lors de la prochaine panne.
+- **Bureau :** Daikin FTX35KNV1B (2018) - 3.5 kW
+  - COP chauffage déclaré ~5.0 (réel ~4.2-4.5). EER refroidissement ~4.1.
+- **Chambre :** Daikin FTX35KNV1B (2018) - 3.5 kW - **modèle identique au Bureau**
+  - Mêmes specs que Bureau.
+- **Radiateur cuisine (bain d'huile) :** ~1.4-1.5 kW (valeur déclarative, pas de fiche technique)
+
+> Note audit : Bureau et Chambre ayant un matériel identique (même Daikin FTX35KNV1B,
+> même année), toute différence de DUT entre ces deux pièces est imputable uniquement
+> à la thermique du bâti (volet motorisé bureau vs store manuel chambre, rideaux, pertes)
+> et non à l'équipement. Comparaison Bureau/Chambre = test le plus propre du fichier.
 
 ### Dimensions & pôles par pièce
 
+> **Matériaux de cloisons intérieures (confirmé Eric 2026-07-19) :**
+> Le carreau de plâtre a une faible inertie thermique et une faible résistance au transfert.
+> Il permet la rediffusion passive de chaleur entre pièces adjacentes.
+> - Bureau : **2 murs en carreau de plâtre** -> bénéficie de l'apport thermique des pièces
+>   voisines (SDB soufflant notamment) = avantage structurel permanent en hiver.
+> - Chambre : **1 seul mur en carreau de plâtre** -> 3 autres murs béton/brique = plus isolée
+>   des pièces intérieures = perd plus de chaleur en hiver, reste plus fraîche en été.
+> Ce différentiel structurel contribue à l'écart DUT Bureau/Chambre indépendamment du volet.
+
 1. **SALON (Sud) :** 6.52m x 3.97m (25.88 m²).
-   - *Équipement :* Split mural 3.5kW, Volet motorisé (Auto théorique v5.2: 7h30 -> Coucher soleil / Fermé si Absent / Fermé si >34°C).
-   - *Note :* Apport solaire crucial dès 15h.
-   - ⚠️ *Voir section 3B* : automation volet actuellement désactivée (état réel 2026-07-19).
+   - *Équipement :* Split mural Hitachi RAS-35FH6, Volet motorisé.
+   - *Protection solaire (2 éléments distincts, confirmé Eric 2026-07-19) :*
+     - **Store en toile** (extérieur, standard immeuble ancien) : atténuation partielle du
+       rayonnement solaire, toujours présent.
+     - **Store en dur / volet roulant** (côté intérieur des vitres) : coupure plus complète,
+       fermé en permanence quand trop chaud (été/canicule).
+   - *Hiver :* Store en dur ouvert en journée, fermé la nuit. Soleil tape directement sur
+     le vitrage = apport solaire massif = principal facteur expliquant le DUT Salon très bas
+     en hiver (moy 3.9h/j en janvier malgré orientation Sud et simple vitrage).
+   - *Été :* Double barrière (toile + store en dur fermé). Malgré les 2 protections, le
+     DUT Salon reste 10-15h/j en juillet (chaleur rayonnée par le mur + conduction vitrage
+     + T_ext 27-30°C). L'orientation plein Sud sans masque naturel reste le facteur limitant.
+   - *Note :* Pièce la plus chaude peu importe la saison (solaire hiver + exposition plein Sud
+     été). L'automation volet avancée (v5.2) est désactivée - voir section 3B.
 2. **CUISINE (Nord) :** 4.86m x 2.18m (10.59 m²).
-   - *Équipement :* "radiateur_cuisine" (Bain d'huile ~1.4-1.5kW avec relais connecté). Pas de rideaux épais (projet en pause).
-   - *Auto :* L-Ma-Me-Je (4h45-7h), Ve-Sa-Di (5h45-8h) + automation "B" tous les jours 6h-8h30 si les 2 sont présents (voir section 3C).
+   - *Équipement :* "radiateur_cuisine" (Bain d'huile ~1.4-1.5kW avec relais connecté).
+   - *Store manuel :* **Fermé en permanence toute l'année** (sauf aération et odeurs cuisine).
+     Protection passive réelle contre les pertes thermiques côté vitrage Nord. Le vitrage
+     est rarement nu - à prendre en compte dans l'analyse thermique.
+   - *Rideaux épais :* Projet EN PAUSE, non posés (confirmé 2026-07-19). La protection
+     actuelle repose entièrement sur la discipline de fermeture du store.
+   - *Auto :* L-Ma-Me-Je (4h45-7h), Ve-Sa-Di (5h45-8h) + automation "B" tous les jours
+     6h-8h30 si Eric OU Mamour présent (voir section 3C).
 3. **BUREAU (Nord) :** 3.95m x 2.67m (10.55 m²).
-   - *Équipement :* Split mural 3.5kW, Volet motorisé. Rideaux épais posés (22/02/2026).
-   - *Auto :* Ouvert uniquement si T° Ext [18°C - 25°C] - confirmé conforme au yaml prod (2026-07-19).
+   - *Équipement :* Split mural Daikin FTX35KNV1B (2018), Volet motorisé. Rideaux épais
+     posés (22/02/2026).
+   - *Structure :* 2 murs en carreau de plâtre (voir note ci-dessus). Rediffusion thermique
+     depuis SDB et pièces adjacentes = avantage en hiver, légère contrainte en été.
+   - *Auto volet :* Ouvert uniquement si T° Ext [18°C - 25°C] - conforme yaml prod.
 4. **SDB (Interne) :** 1.96m x 1.58m (3.13 m²) Pas de fenêtre.
    - *Équipement :* Soufflant (2x1000W), Sèche-serviette (150W).
    - *Auto :* Soufflant OFF si >23°C. Sèche-serviette 1h après douche.
+   - *Note thermique :* Pièce interne toujours chauffée par l'usage (douche, soufflant).
+     Source de chaleur passive pour le Bureau adjacent (cloison carreau de plâtre).
 5. **CHAMBRE (Nord) :** 3.95m x 2.85m (11.26 m²).
-   - *Équipement :* Split mural 3.5kW. Pas de volet motorisé (store manuel). Rideaux épais posés (07/02/2026).
-   - *Note :* Forte dissipation thermique (DUT élevé).
+   - *Équipement :* Split mural Daikin FTX35KNV1B (2018). Pas de volet motorisé (store
+     manuel). Rideaux épais posés (07/02/2026).
+   - *Structure :* 1 seul mur en carreau de plâtre, 3 murs béton/brique. Thermiquement
+     plus isolée des pièces intérieures = pièce la plus froide en hiver, la plus fraîche
+     en été. L'écart DUT Chambre/Bureau (+17% en janvier) est d'origine partiellement
+     structurelle (carreau de plâtre) ET comportementale (store manuel non automatisé).
+     Motoriser le store chambre réduirait l'écart mais ne l'effacerait pas.
 
 > Note : la stratégie thermique active (Mode Absence Hiver/Été, logique "Coeur du Système"
 > température cible/confort) reste dans `CLAUDE.md` (section LOGEMENT & STRATÉGIE THERMIQUE) -
@@ -101,8 +151,27 @@ Tu disposes de sources d'information critiques :
 
 - **Jour (07h30-21h00)** : Pilotage dynamique selon Présence (Wifi/Cell) et Fenêtres
 - **Nuit (21h00-07h30)** : Mode Nuit optimisé
-- **Saison** : Bascule Auto Heat/Cool selon seuil extérieur
-- **Sécurité** : Coupure immédiate si fenêtre ouverte
+- **Saison** : Bascule Auto Heat/Cool selon seuil extérieur (`mode_ete_hiver`)
+  - T_ext < 18°C -> `heat` | 18-26°C -> `off` | > 26°C -> `cool`
+- **Sécurité** : Coupure immédiate si fenêtre ouverte (toutes pièces)
+
+#### Températures cibles par pièce et par mode (hiver, T_ext typique 7-12°C)
+
+> Calculées depuis `P1_01_clim_logique_system_autom.yaml` + `p1_master_gestion_clim.yaml`
+
+| Pièce | G1 (Absent) | G2 (Mamour seule) | G3 (Eric seul) | G4 (Tous les deux) | Nuit |
+|:------|:------------|:------------------|:---------------|:-------------------|:-----|
+| **Salon** | 18°C (eco) | 21°C (confort_m +1) | 18°C (confort_e -2) | 21°C (confort_m +1) | 18°C |
+| **Bureau** | 18°C (eco) | 18°C (eco) | 18°C (confort_e -2) | 18°C (confort_e -2) | 18°C |
+| **Chambre** | 18°C (eco) | 18°C (base) | 18°C (base) | 18°C (base) | 18°C |
+
+> Calcul détaillé (T_ext ~7-12°C) : consigne_base=18°C, temp_cible=19°C,
+> confort_jour=20°C, confort_nuit=18°C, corrige_mamour=21°C, corrige_eric=18°C, corrige_chambre=18°C.
+> Mode absence (T_ext 8-12°C) : eco_hiver_corrige = 17+1 = 18°C.
+
+**Constat clé :** En hiver, **Bureau et Chambre ont la même cible (18°C) dans TOUS les groupes.**
+Seul le Salon se différencie (21°C quand Mamour est présente). L'écart de DUT entre Bureau
+et Chambre est donc exclusivement d'origine thermique, pas de consigne.
 
 ### 🪟 B. GESTION INTELLIGENTE DES OUVRANTS
 
@@ -154,7 +223,7 @@ Tu disposes de sources d'information critiques :
 
 **Équipement :** Fenêtre standard sans volet/store motorisé
 
-- **Compensation en cours** : Rideaux épais (26.52 euros)
+- **Aucune compensation** : Rideaux épais projet EN PAUSE, non posés (confirmé 2026-07-19)
 
 ### 🍳 C. CHAUFFAGE CUISINE (RADIATEUR BAIN D'HUILE, ~1.4-1.5 kW)
 
@@ -480,6 +549,7 @@ Ratio = 0.101 / 0.028 = 3.6x
 
 | Version | Date | Modifications |
 |:--------|:-----|:--------------|
+| **v6.3** | **2026-07-19** | Ajout Daikin FTX35KNV1B Bureau+Chambre / Hitachi Salon. Table températures cibles par pièce/groupe extraite du YAML. Note audit Bureau=Chambre (matériel identique -> diff DUT = purement thermique). Correction x2 : "les 2 présents" -> "Eric OU Mamour" (cuisine ligne dimensions) ; section 3B Cuisine "Compensation en cours" -> "Aucune compensation". |
 | **v6.2** | **2026-07-19** | **Revue detaillee demandee par Eric, questions posees une a une. Corrections factuelles : (1) Store Salon - automations desactivees par Eric (genait Mamour) + tous volets fermes manuellement (canicule en cours), la logique theorique v5.2 n'est PAS active, et meme l'automation prod simplifiee ne la contient plus ; (2) Store Bureau confirme conforme au yaml prod, mais possiblement aussi coupe manuellement en ce moment ; (3) Chauffage cuisine - ajout automation "B-Vacances" non documentee + condition de presence zone.home non documentee sur A et B ; (4) Puissances equipements ajoutees (3 splits 3.5kW - 2 Daikin/1 Hitachi -, radiateur ~1.4-1.5kW) ; (5) Isolation confirmee brute partout, rideaux = seule compensation (bureau+chambre, PAS cuisine) ; (6) Rideaux cuisine confirmes NON poses (projet en pause) ; (7) Sources tarif EDF HP/HC ajoutees (sensor.tarif_heures_pleines_ttc/_creuses_ttc) + nuance ROI (pertinent seulement pour categorie "travaux physiques") ; (8) Limitations mises a jour : tag presence dans les logs resolu depuis ~29/04/2026 (mais absent avant, dont toute la periode rideaux) + derive du format de logs (colonne Autres depuis ~19/01) + artefact template ponctuel note.** |
 | v6.1 | 2026-07-19 | **Renommé IA_ENERGIE.md -> IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md (demande Eric). Ajout section 0 "CARACTERISTIQUES DU LOGEMENT" (dimensions, orientations, equipements par piece), deplacee depuis CLAUDE.md (sections STRUCTURE DU LOGEMENT + DIMENSIONS & PÔLES, marquees "usage limite a l'analyse des consommations electriques"). CLAUDE.md ne garde que la strategie thermique active (Mode Absence, logique Coeur du Systeme).** |
 | v6.0 | 2026-07-19 | Converti en sous_context_ia (IA_ENERGIE.md), depuis `Analyse énergétique/analyse_energetique_appart.md`. Ajout trigger line, références sources corrigées vers l'arborescence DOCS/ actuelle (03_05.../03_06... -> p1_master_gestion_clim.yaml + P1_01_clim_logique_system_autom.yaml + P4_groupe_presence). Contenu méthodologique (missions, calculs PC, biais) inchangé sur le fond. |
