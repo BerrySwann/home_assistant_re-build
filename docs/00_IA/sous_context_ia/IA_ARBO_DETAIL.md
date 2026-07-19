@@ -29,7 +29,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── historique/                         (JOURNAL_COMPLET_*.md · histo_YYYY-MM-DD_S*.txt)
 └── DOCS/
     ├── 00_IA/                          (IA_CONTEXT_BASE.md · confort_cible_calcul_flow.png)
-    │   └── sous_md/                    (7 sous-contextes IA_*.md - ⚠️ prod = "sous_context/")
+    │   └── sous_context_ia/            (7 sous-contextes IA_*.md)
     ├── 01_docs_config_system/
     │   ├── config_system_MD/           (configuration.md)
     │   └── config_system_YAML/         (→ déployé /homeassistant/ - détail = arbo PROD ci-dessous)
@@ -106,7 +106,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   └── meteo/                          (M_03_meteo_UM_blitzortung)
 │
 └── Docs/                               (miroir pushé depuis local DOCS/ - JAMAIS de YAML config ici)
-    ├── 00_IA/                          (1 + sous_context/7  ⚠️ à renommer sous_md/)
+    ├── 00_IA/                          (1 + sous_context_ia/7)
     ├── 01_docs_config_system/          (config_system_MD/1 · config_system_YAML/81)
     ├── 02_docs_dashboard/              (dashboard_docs_MD/52 · dashboard_docs_YAML/73)
     ├── 03_docs_automations/            (docs_automations_MD/59 · docs_automations_YAML/107)
@@ -149,5 +149,4 @@ Exemples :
 
 ## ⚠️ INCOHÉRENCES CONNUES (à régler)
 
-- `H:\Docs\00_IA\sous_context\` vs local `DOCS/00_IA/sous_md/` : renommer côté prod en `sous_md/` (local = vérité docs).
-- Sous-contextes `IA_*.md` datés 05/06-2026 : antérieurs à la réorg du 07-14, en cours de refonte (TODO F-5).
+- Sous-contextes `IA_*.md` : dossier renommé `sous_context_ia/` le 2026-07-18 (local + prod alignés). Restent à refondre : IA_INDEX_NAVIGATION, IA_INDEX_AUTOMATIONS, IA_INTEGRATIONS_CARTES, IA_P4_PRESENCE (TODO F-5).

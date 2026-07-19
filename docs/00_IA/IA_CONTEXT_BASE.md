@@ -9,7 +9,7 @@
 > **REGLE ABSOLUE — STYLE :** Ne jamais utiliser de symboles qui trahissent l'écriture d'un LLM et qui n'existent pas sur un clavier standard. Interdit : `—` (em dash), `…` (ellipse typographique), `«»` (guillemets typographiques), `·` (point médian), et tout autre caractère spécial inaccessible sans Alt+code. Utiliser à la place : `-`, `...`, `"`, `-` etc.
 
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
-*Dernière mise à jour : 2026-06-19*
+*Dernière mise à jour : 2026-07-18*
 
 ---
 
@@ -19,13 +19,13 @@
 
 | Fichier | Lire si… |
 |:--------|:---------|
-| `IA/IA_INTEGRATIONS_CARTES.md` | YAML dashboard à valider, `type: custom:*` inconnu, intégration manquante, palette couleurs |
-| `IA/IA_AUTOMATIONS_NOTIFS.md` | Création/modif automation, écriture message `notify`, script HA |
-| `IA/IA_P4_PRESENCE.md` | `sensor.presence`, format notif avec présence, logique groupe WiFi |
-| `IA/IA_ARBO_DETAIL.md` | Audit fichiers, sync GitHub, arborescence prod complète, URLs raw GitHub |
-| `IA/IA_INDEX_NAVIGATION.md` | Régénération de `INDEX_NAVIGATION_FULL.md`, ajout vignette/page à l'index, mapping entités → fichiers sources, structure accordéon GitHub |
-| `IA/IA_INDEX_AUTOMATIONS.md` | Régénération de `INDEX_AUTOMATIONS.md`, ajout/suppression automation, mapping alias → TREE_CORRIGE → docs, anomalies connues |
-| `IA/IA_CMD_TERMINAL_HA.md` | Commande tree prod, audit MD5, git backup, chemins `/homeassistant/`, logs HA |
+| `DOCS/00_IA/sous_context_ia/IA_INTEGRATIONS_CARTES.md` | YAML dashboard à valider, `type: custom:*` inconnu, intégration manquante, palette couleurs |
+| `DOCS/00_IA/sous_context_ia/IA_AUTOMATIONS_NOTIFS.md` | Création/modif automation, écriture message `notify`, script HA |
+| `DOCS/00_IA/sous_context_ia/IA_P4_PRESENCE.md` | `sensor.presence`, format notif avec présence, logique groupe WiFi |
+| `DOCS/00_IA/sous_context_ia/IA_ARBO_DETAIL.md` | Audit fichiers, sync GitHub, arborescence prod complète, URLs raw GitHub |
+| `DOCS/00_IA/sous_context_ia/IA_INDEX_NAVIGATION.md` | Régénération de `INDEX_NAVIGATION_FULL.md`, ajout vignette/page à l'index, mapping entités → fichiers sources, structure accordéon GitHub |
+| `DOCS/00_IA/sous_context_ia/IA_INDEX_AUTOMATIONS.md` | Régénération de `INDEX_AUTOMATIONS.md`, ajout/suppression automation, mapping alias → DOCS/03 → docs, anomalies connues |
+| `DOCS/00_IA/sous_context_ia/IA_CMD_TERMINAL_HA.md` | Commande tree prod, audit MD5, git backup, chemins `/homeassistant/`, logs HA |
 
 ---
 
@@ -51,8 +51,8 @@
 ---
 
 ## Cohérence Documentaire (anti-oubli)
-- À chaque modif YAML dans `TREE_CORRIGE` → vérifier impact vignette (`docs/L*`) + chaîne dépendances.
-- Si rupture cohérence → proposer update `docs/DEPENDANCES_GLOBALES.md` ou `/sync_index`.
+- À chaque modif YAML dans `DOCS/01_docs_config_system/config_system_YAML/` → vérifier impact vignette (`DOCS/02_docs_dashboard/dashboard_docs_MD/L*`) + chaîne dépendances.
+- Si rupture cohérence → proposer update `DOCS/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md` ou `/sync_index`.
 - Tâche non terminée si code OK mais doc dépendances obsolète.
 
 ## Économie de Tokens
@@ -61,10 +61,14 @@
 - Ne jamais répéter le code YAML déjà validé.
 
 ## Slash Commands
-- `/fix_file` → bloc YAML corrigé uniquement.
-- `/sync_index` → met à jour `DEPENDANCES_GLOBALES.md`.
-- `/status` → résumé 3 points avancement.
-- `/histo` → journal de bord compact à copier en `.txt`.
+- `/fix_file` → analyse erreur HA et retourne bloc YAML corrigé uniquement.
+- `/sync_index` → met à jour `DEPENDANCES_GLOBALES.md` après validation YAML.
+- `/status` → résumé 3 points avancement du projet.
+- `/histo` → journal de bord compact, sauvegarde dans `historique/`.
+- `/ha_new_yaml` → génère un squelette YAML conforme (bordures ASCII, headers, slug, name/unique_id).
+- `/ha_push_yaml` → pousse un fichier YAML de `DOCS/01_docs_config_system/config_system_YAML/` vers prod `H:\`.
+- `/ha_push_docs` → synchronise les docs locales `DOCS/` vers `H:\Docs\`.
+- `/ha_resync_tree` → resynchronise `DOCS/01_docs_config_system/config_system_YAML/` depuis GitHub (audit MD5).
 
 ---
 
@@ -83,21 +87,39 @@
 
 ## ⚠️ SOURCES DE VÉRITÉ
 
+> ⚠️ Deux cascades distinctes selon le type de fichier.
+
+### 🔧 YAML (config HA) — cascade PROD → LOCAL
+
 | Priorité | Source | Rôle |
 |:---------|:-------|:-----|
 | **1** | **Home Assistant (live)** | Prod = référence absolue |
 | **2** | **GitHub `home_assistant_re-build`** | Reflet prod — backup git auto depuis HA |
-| **3** | **Local `ReBuild/`** | Espace de travail — draft uniquement |
+| **3** | **Local `ReBuild/`** | Poste de travail — corrections/modifications YAML |
+
+Sens : **prod → GitHub → local**. Le local doit converger vers prod. Une fois les corrections terminées dans `DOCS/01_docs_config_system/config_system_YAML/`, l'état local doit être équivalent à prod (validé par audit MD5).
+
+### 📄 DOCS (.md) — LOCAL = source de vérité
+
+| Priorité | Source | Rôle |
+|:---------|:-------|:-----|
+| **1** | **Local `ReBuild/DOCS/`** | Source de vérité absolue — authoring et modifications ici |
+| **2** | **`H:\Docs\`** | Copie pushée depuis local — ne jamais modifier directement |
+| **3** | **GitHub `home_assistant_re-build`** | Backup via git auto depuis HA |
+
+Sens : **local → H:\Docs\ → GitHub**. En cas de conflit, local l'emporte toujours.
+`H:\Docs\` ne contient QUE des .md, histo et yaml Dashboard — **jamais de YAML config HA**.
 
 > Ancien repo `home-assistant-config` **supprimé définitivement** (2026-04-27). Seul `home_assistant_re-build` est actif.
 
 ### Règles fondamentales
 - Répertoires préfixés `P*_` selon le Pôle.
-- `TREE_CORRIGE/` = état cible → /homeassistant/ (audité 1×/semaine).
-- `TREE_ORIGINE/` = snapshot GitHub avant corrections.
-- Fichiers absents de `TREE_CORRIGE` mais présents GitHub = à supprimer en prod.
-- Jamais copier un fichier sans le valider dans `TREE_CORRIGE` d'abord.
-- Automations : jamais modifier `automations.yaml` direct → passer par UI HA + `automations_corrige/`.
+- `DOCS/01_docs_config_system/config_system_YAML/` = YAML config HA (état cible → /homeassistant/) — audité 1×/semaine.
+- `DOCS/03_docs_automations/docs_automations_YAML/` = automations individuelles (référence locale).
+- `DOCS/02_docs_dashboard/dashboard_docs_YAML/` = vignettes/pages dashboard.
+- ⛔ `TREE_CORRIGE/` et `TREE_ORIGINE/` **n'existent plus** — tout est sous `DOCS/`.
+- Fichiers absents de `DOCS/01` mais présents GitHub = à supprimer en prod.
+- Automations : jamais modifier `automations.yaml` direct → passer par UI HA + `DOCS/03_docs_automations/docs_automations_YAML/`.
 
 ---
 
@@ -123,23 +145,23 @@ find . -type f -name "*.yaml" -print0 | sort -z | xargs -0 md5sum | sed 's|\./||
 
 | Priorité | Périmètre | Raison |
 |:---------|:----------|:-------|
-| **🔴 CRITIQUE** | `TREE_CORRIGE/` YAML (sensors/, templates/, utility_meter/, command_line/) | Fichiers déployés dans `/homeassistant/` — un écart peut casser HA |
-| **🔴 CRITIQUE** | `automations.yaml` GitHub vs `docs_automations/TREE_CORRIGE/` | 48 automations — détecter ajouts/suppressions/renommages depuis HA |
-| **🟡 SECONDAIRE** | `Dashboard/` vs `Docs/Dashboard/` | UI seulement — ne casse pas HA |
+| **🔴 CRITIQUE** | `DOCS/01_docs_config_system/config_system_YAML/` (sensors/, templates/, utility_meter/, command_line/) | Fichiers déployés dans `/homeassistant/` — un écart peut casser HA |
+| **🔴 CRITIQUE** | `automations.yaml` GitHub vs `DOCS/03_docs_automations/docs_automations_YAML/` | Détecter ajouts/suppressions/renommages depuis HA |
+| **🟡 SECONDAIRE** | `DOCS/02_docs_dashboard/dashboard_docs_YAML/` vs `H:\Docs\` | UI seulement — ne casse pas HA |
 
 ### Audit automations (MD5 + diff alias)
 ```bash
 # Compter et lister les alias top-level dans automations.yaml GitHub
 grep "^  alias:" /tmp/home_assistant_re-build-main/automations.yaml | sed 's/  alias: //' | sort > /tmp/github_aliases.txt
 
-# Compter les fichiers TREE_CORRIGE automations (hors old/)
-find docs_automations/TREE_CORRIGE -name "*.yaml" -not -path "*/old/*" | sort > /tmp/local_autom_files.txt
+# Compter les fichiers automations locaux (hors old/)
+find DOCS/03_docs_automations/docs_automations_YAML -name "*.yaml" -not -path "*/old/*" -not -path "*/_old*" | sort > /tmp/local_autom_files.txt
 
 # Comparer les alias avec les noms de fichiers → détecter les manquants
 wc -l /tmp/github_aliases.txt /tmp/local_autom_files.txt
 ```
 
-**Dashboard complet** : vérifier age avant comparaison (`Dashboard_COMPLET/Dashboard_YYYY_MM_DD.yaml` ≤ 2 jours).
+**Dashboard complet** : vérifier age avant comparaison (`DOCS/02_docs_dashboard/dashboard_docs_YAML/Dashboard_COMPLET/Dashboard_YYYY_MM_DD.yaml` ≤ 2 jours).
 
 ---
 
@@ -195,21 +217,23 @@ wc -l /tmp/github_aliases.txt /tmp/local_autom_files.txt
 
 ## 🛠️ RÈGLE DOCS VIGNETTES — DÉPENDANCES OBLIGATOIRES
 
-À chaque création/modif d'une doc vignette (`docs/L*`) :
+À chaque création/modif d'une doc vignette (`DOCS/02_docs_dashboard/dashboard_docs_MD/L*`) :
 1. Remplir **ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE** dans la doc.
-2. Mettre à jour `docs/DEPENDANCES_GLOBALES.md` (🔲 → ✅).
+2. Mettre à jour `DOCS/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md` (🔲 → ✅).
 3. Mettre à jour la date en haut de `DEPENDANCES_GLOBALES.md`.
 
 ---
 
-## 📋 RÈGLE DASHBOARD/ — VERSIONING
+## 📋 RÈGLE DASHBOARD YAML — VERSIONING
+
+> Tous les yaml dashboard sont dans `DOCS/02_docs_dashboard/dashboard_docs_YAML/`
 
 | Type | Format |
 |:-----|:-------|
-| Dashboard complet | `Dashboard_YYYY_MM_DD.yaml` (conservation illimitée) |
-| Vignette | `vignette_[id]_YYYY-MM-DD.yaml` |
-| Page | `page_[id]_YYYY-MM-DD.yaml` |
-| Carte isolée | `card_[nom]_YYYY-MM-DD.yaml` |
+| Dashboard complet | `Dashboard_COMPLET/Dashboard_YYYY_MM_DD.yaml` (conservation illimitée) |
+| Vignette | `L*C*_*/vignette_[id]_YYYY-MM-DD.yaml` |
+| Page | `L*C*_*/page_[id]_YYYY-MM-DD.yaml` |
+| Carte isolée | `L*C*_*/card_[nom]_YYYY-MM-DD.yaml` |
 
 - Max **3 versions** par sous-dossier vignette/page. Demander autorisation avant suppression de la plus ancienne.
 
@@ -229,7 +253,7 @@ wc -l /tmp/github_aliases.txt /tmp/local_autom_files.txt
 | **Accès** | Samba Share · SSH · Cloudflared · Tailscale |
 
 **Intégrations (compact)** : MyElectricalData · Météo France · Blitzortung · AtmoFrance · Vigieau · Meross LAN · Philips HUE · Z2M · Browser Mod · Streamline Card · HACS
-→ Détail complet : `IA/IA_INTEGRATIONS_CARTES.md`
+→ Détail complet : `DOCS/00_IA/sous_context_ia/IA_INTEGRATIONS_CARTES.md`
 
 ---
 
@@ -309,15 +333,30 @@ wc -l /tmp/github_aliases.txt /tmp/local_autom_files.txt
 
 ```
 ReBuild/
-├── CLAUDE.md · README.md · SYNC_REPORT.md · secrets.yaml
-├── IA/          (IA_INTEGRATIONS_CARTES.md · IA_AUTOMATIONS_NOTIFS.md · IA_P4_PRESENCE.md · IA_ARBO_DETAIL.md)
-├── Dashboard/   (Dashboard_COMPLET/ · L1C1→L6C3 · PAGE_*)
-├── docs_dashboard/ (TREE_CORRIGE/ · TREE_ORIGINE/ · docs/)
-├── docs_automations/ (TREE_CORRIGE/ · TREE_ORIGINE/ · docs/)
-└── docs_scripts/    (TREE_CORRIGE/ · TREE_ORIGINE/ · docs/)
+├── CLAUDE.md · secrets.yaml
+├── IA/              (vide — déplacé vers DOCS/00_IA/)
+├── Github/          (INDEX_AUTOMATIONS.md · INDEX_NAVIGATION.md · README.md)
+├── historique/      (JOURNAL_COMPLET_2026-04-25_2026-07-14.md)
+└── DOCS/
+    ├── 00_IA/                      (IA_CONTEXT_BASE.md · sous_context_ia/ → tous les IA_*.md)
+    ├── 01_docs_config_system/
+    │   ├── config_system_YAML/     (sensors/ · templates/ · utility_meter/ · command_line/ · groups/ · …) → /homeassistant/
+    │   └── config_system_MD/       (configuration.md)
+    ├── 02_docs_dashboard/
+    │   ├── dashboard_docs_MD/      (DEPENDANCES_GLOBALES.md · L*C* docs · PAGE_*.md)  → H:\Docs\
+    │   └── dashboard_docs_YAML/    (L1C1→L6C3 · PAGE_* · Dashboard_COMPLET/)          → H:\Docs\
+    ├── 03_docs_automations/
+    │   ├── docs_automations_MD/    (docs par automation)                               → H:\Docs\
+    │   └── docs_automations_YAML/  (yaml individuels par automation)                   → UI HA
+    ├── 04_docs_scripts/
+    │   ├── docs_scripts_MD/        (docs scripts)                                      → H:\Docs\
+    │   └── docs_scripts_YAML/      (yaml scripts)                                      → /homeassistant/
+    └── 05_docs_MD_system/          (workflow · MOC · templates · github)
 ```
 
-→ Arborescences complètes prod + local : `IA/IA_ARBO_DETAIL.md`
+⛔ `TREE_CORRIGE/`, `TREE_ORIGINE/`, `Dashboard/`, `docs_dashboard/`, `docs_automations/`, `docs_scripts/` **supprimés le 2026-07-14** — tout est sous `DOCS/`.
+
+→ Arborescences complètes prod + local : `DOCS/00_IA/sous_context_ia/IA_ARBO_DETAIL.md`
 
 ---
 
@@ -330,7 +369,7 @@ ReBuild/
 | `groupe_3` | Eric seul |
 | `groupe_4` | Tous les deux |
 
-→ sensor.presence + codes réseau complets : `IA/IA_P4_PRESENCE.md`
+→ sensor.presence + codes réseau complets : `DOCS/00_IA/sous_context_ia/IA_P4_PRESENCE.md`
 
 ---
 
