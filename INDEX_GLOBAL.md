@@ -92,7 +92,7 @@
 ---
 
 <details>
-<summary><b>L1C1 — MÉTÉO</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~31 entités produites (+16 natives)</summary>
+<summary><b>L1C1 — MÉTÉO</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~31 entités produites (+17 natives, corrigé 2026-07-19)</summary>
 <blockquote>
 
 <details>
@@ -100,6 +100,23 @@
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L1C1_METEO/L1C1_VIGNETTE_METEO.md">Doc Vignette</a><br>
 ⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/vignette_L1C1_meteo_2026-05-16.yaml">YAML Vignette</a>
+
+<details>
+<summary><b>📂 Fichiers sources</b> <i>— ajouté 2026-07-19, icône/texte dynamiques</i></summary>
+<blockquote>
+
+<details>
+<summary><i>Entités natives HA / intégrations externes (3)</i></summary>
+<blockquote><ul>
+<li><code>weather.vence</code> — pilote l'icône météo (chemin <code>/local/images/meteocons/{state}.svg</code>, ex: "ciel clair"/"ciel couvert")</li>
+<li><code>sensor.vence_original_condition</code> — texte condition affiché sous l'icône</li>
+<li><code>sensor.th_balcon_nord_temperature</code> — température affichée (SONOFF Z2M)</li>
+</ul></blockquote>
+</details>
+
+</blockquote>
+</details>
+
 </blockquote>
 </details>
 
@@ -239,7 +256,7 @@
 </details>
 
 <details>
-<summary><i>Entités natives HA / intégrations externes (16)</i></summary>
+<summary><i>Entités natives HA / intégrations externes (17)</i></summary>
 <blockquote><ul>
 <li><code>binary_sensor.meteoalarm</code></li>
 <li><code>input_datetime.dernier_eclair</code></li>
@@ -254,6 +271,7 @@
 <li><code>sensor.season</code></li>
 <li><code>sensor.th_balcon_nord_humidity</code></li>
 <li><code>sensor.th_balcon_nord_temperature</code></li>
+<li><code>sensor.vence_original_condition</code> — texte condition (ex: "ciel clair"), utilisé par la Vignette</li>
 <li><code>sun.sun</code></li>
 <li><code>weather.vence</code></li>
 <li><code>zone.home</code></li>
@@ -2048,12 +2066,12 @@ la valeur brute est native. Tout déplacé vers natives.
 <li><code>sensor.pve_memory_usage_percentage</code></li>
 <li><code>sensor.pve_utilisation_du_processeur</code></li>
 <li><code>sensor.storage_local_storage_usage_percentage</code></li>
-<li><code>sensor.temperature_cpu_package</code></li>
+<li><code>sensor.proxmox_cpu_package</code></li>
 </ul></blockquote>
 </details>
 
 <blockquote>
-⚠️ <b>Corrigé le 2026-07-19</b> : <code>sensor.temperature_cpu_package</code> n'existe dans
+⚠️ <b>Corrigé le 2026-07-19</b> : <code>sensor.proxmox_cpu_package</code> n'existe dans
 aucun fichier <code>config_system_YAML/</code> (vérifié) — publié par le script externe
 <code>MP_01_monitor_temp.sh</code> tournant sur le <b>Raspberry Pi</b> (confirmé par Eric
 2026-07-19 : "ça remonte la T° du CPU et d'autres choses"), remonté dans HA
@@ -2104,7 +2122,7 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <li><code>sensor.system_monitor_utilisation_de_la_memoire</code></li>
 <li><code>sensor.system_monitor_utilisation_du_disque</code></li>
 <li><code>sensor.system_monitor_utilisation_du_processeur</code></li>
-<li><code>sensor.temperature_cpu_package</code></li>
+<li><code>sensor.proxmox_cpu_package</code></li>
 </ul></blockquote>
 </details>
 
@@ -2131,7 +2149,7 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <details>
 <summary>💬 Pop-up <code>#temp</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.temperature_cpu_package</code> — <i>Natif HA (MQTT Discovery — MP_01_monitor_temp.sh)</i></li>
+<li><code>sensor.proxmox_cpu_package</code> — <i>Natif HA (MQTT Discovery — MP_01_monitor_temp.sh)</i></li>
 </ul></blockquote>
 </details>
 
@@ -2201,17 +2219,17 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <li><code>sensor.system_monitor_utilisation_de_la_memoire</code></li>
 <li><code>sensor.system_monitor_utilisation_du_disque</code></li>
 <li><code>sensor.system_monitor_utilisation_du_processeur</code></li>
-<li><code>sensor.temperature_carte_mere</code></li>
-<li><code>sensor.temperature_core_0</code></li>
-<li><code>sensor.temperature_core_1</code></li>
-<li><code>sensor.temperature_core_2</code></li>
-<li><code>sensor.temperature_core_3</code></li>
-<li><code>sensor.temperature_cpu_package</code></li>
+<li><code>sensor.proxmox_carte_mere</code></li>
+<li><code>sensor.proxmox_core_0</code></li>
+<li><code>sensor.proxmox_core_1</code></li>
+<li><code>sensor.proxmox_core_2</code></li>
+<li><code>sensor.proxmox_core_3</code></li>
+<li><code>sensor.proxmox_cpu_package</code></li>
 </ul></blockquote>
 </details>
 
 <blockquote>
-⚠️ <b>Corrigé le 2026-07-19</b> : les 6 <code>sensor.temperature_*</code> (carte_mere, core_0-3,
+⚠️ <b>Corrigé le 2026-07-19</b> : les 6 <code>sensor.proxmox_*</code> (carte_mere, core_0-3,
 cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> — publiés par
 <code>MP_01_monitor_temp.sh</code> tournant sur le <b>Raspberry Pi</b> (confirmé par Eric
 2026-07-19) via MQTT Discovery. Reclassés natifs.
@@ -2427,6 +2445,39 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> — 
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/L5C2_VIGNETTE_BATTERIES_PORTABLES.md">Doc Vignette</a><br>
 ⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/vignette_L5C2_batteries_portables_2026-05-12.yaml">YAML Vignette</a>
 
+<details>
+<summary><b>📂 Fichiers sources</b> <i>— ajouté 2026-07-19, remontée résumé batterie/état</i></summary>
+<blockquote>
+
+<details>
+<summary><i>Entités natives HA / intégrations externes (14)</i></summary>
+<blockquote><ul>
+<li><code>sensor.eric_battery_level</code></li>
+<li><code>sensor.eric_battery_state</code></li>
+<li><code>sensor.mamour_battery_level</code></li>
+<li><code>sensor.mamour_battery_state</code></li>
+<li><code>sensor.ne2213_eric_battery_level</code></li>
+<li><code>sensor.ne2213_eric_battery_state</code></li>
+<li><code>sensor.ne2213_mamour_battery_level</code></li>
+<li><code>sensor.ne2213_mamour_battery_state</code></li>
+<li><code>sensor.gm1901_battery_level</code></li>
+<li><code>sensor.gm1901_battery_state</code></li>
+<li><code>sensor.sm_a530f_battery_level</code></li>
+<li><code>sensor.sm_a530f_battery_state</code></li>
+<li><code>sensor.tablette_battery_level</code></li>
+<li><code>sensor.tablette_battery_state</code></li>
+</ul></blockquote>
+</details>
+
+<blockquote>
+ℹ️ Ces 14 entités (battery_level + battery_state des 7 appareils) sont un sous-ensemble
+des entités déjà détaillées dans Page Gauche (eric/ne2213_eric/sm_a530f/tablette) et
+Page Droite (gm1901/mamour/ne2213_mamour) — pas de nouvelles entités, pas d'impact sur
+le total ~49.
+</blockquote>
+
+</blockquote>
+</details>
 
 </blockquote>
 </details>
@@ -2607,7 +2658,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> — 
 ---
 
 <details>
-<summary><b>L6C1 — QUALITÉ AIR (APPART)</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~12 entités</summary>
+<summary><b>L6C1 — QUALITÉ AIR (APPART)</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~15 entités (corrigé 2026-07-19)</summary>
 <blockquote>
 
 <details>
@@ -2615,6 +2666,26 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> — 
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L6C1_AIR_QUALITE/L6C1_VIGNETTE_AIR_QUALITE.md">Doc Vignette</a><br>
 ⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C1_16_Air_Qualite/vignette_L6C1_air_qualite_2026-05-14.yaml">YAML Vignette</a>
+
+<details>
+<summary><b>📂 Fichiers sources</b> <i>— ajouté 2026-07-19, grille PM2.5+tCOV par pièce</i></summary>
+<blockquote>
+
+<details>
+<summary><i>Entités natives HA / intégrations externes (6)</i></summary>
+<blockquote><ul>
+<li><code>sensor.qualite_air_salon_ikea_pm25</code> — déjà listé dans "Fichiers sources" de la Page</li>
+<li><code>sensor.qualite_air_bureau_ikea_pm25</code> — déjà listé dans "Fichiers sources" de la Page</li>
+<li><code>sensor.qualite_air_chambre_ikea_pm25</code> — déjà listé dans "Fichiers sources" de la Page</li>
+<li><code>sensor.qualite_air_salon_ikea_voc_index</code> — nouveau, non consolidé ailleurs (visible en pop-up #scov)</li>
+<li><code>sensor.qualite_air_bureau_ikea_voc_index</code> — nouveau, non consolidé ailleurs (visible en pop-up #bcov)</li>
+<li><code>sensor.qualite_air_chambre_ikea_voc_index</code> — nouveau, non consolidé ailleurs (visible en pop-up #ccov)</li>
+</ul></blockquote>
+</details>
+
+</blockquote>
+</details>
+
 </blockquote>
 </details>
 
@@ -2744,6 +2815,22 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) — complété par c
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L6C2_POLLUTION_POLLEN/L6C2_VIGNETTE_POLLUTION_POLLEN.md">Doc Vignette</a><br>
 ⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C2_17_Pollution_Pollen/vignette_L6C2_pollution_pollen_2026-05-14.yaml">YAML Vignette</a>
+
+<details>
+<summary><b>📂 Fichiers sources</b> <i>— ajouté 2026-07-19, résumé Air/Pollen coloré</i></summary>
+<blockquote>
+
+<details>
+<summary><i>Entités natives HA / intégrations externes (2)</i></summary>
+<blockquote><ul>
+<li><code>sensor.qualite_globale_vence</code> — déjà listé dans "Fichiers sources" de la Page</li>
+<li><code>sensor.qualite_globale_pollen_vence</code> — déjà listé dans "Fichiers sources" de la Page</li>
+</ul></blockquote>
+</details>
+
+</blockquote>
+</details>
+
 </blockquote>
 </details>
 
@@ -2804,6 +2891,21 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) — complété par c
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L6C3_VIGIEAU/L6C3_VIGNETTE_VIGIEAU.md">Doc Vignette</a><br>
 ⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C3_18_VigiEau/vignette_L6C3_vigieau_2026-05-14.yaml">YAML Vignette</a>
+
+<details>
+<summary><b>📂 Fichiers sources</b> <i>— ajouté 2026-07-19, icône/texte niveau alerte</i></summary>
+<blockquote>
+
+<details>
+<summary><i>Entités natives HA / intégrations externes (1)</i></summary>
+<blockquote><ul>
+<li><code>sensor.alert_level_in_vence</code> — déjà listé dans "Fichiers sources" de la Page</li>
+</ul></blockquote>
+</details>
+
+</blockquote>
+</details>
+
 </blockquote>
 </details>
 
@@ -3831,7 +3933,7 @@ Sortie : repo GitHub <code>home_assistant_re-build</code>
 <details>
 <summary><code>#MP_01_monitor_temp.sh.#</code> &nbsp;|&nbsp; Actif — Raspberry Pi</summary>
 <blockquote>
-Script de monitoring température (Raspberry Pi) — publie <code>sensor.temperature_cpu_package</code>,
+Script de monitoring température (Raspberry Pi) — publie <code>sensor.proxmox_cpu_package</code>,
 <code>_carte_mere</code>, <code>_core_0-3</code> (utilisés en L4C1/L4C2) via MQTT Discovery.<br>
 Pas de doc associée.<br><br>
 ✅ <b>Confirmé par Eric (2026-07-19)</b> : "ça remonte la T° du CPU et d'autres choses" —
