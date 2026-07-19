@@ -1,5 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES — TABLEAU DE BORD HA
-*Dernière mise à jour : 2026-07-19 (Sync section L1C1 Météo + HOME PAGE sur la réalité des yaml prod — noms d'entités obsolètes corrigés : alertes, vent, foudre, tendances T°, cycle solaire. Voir détail dans les sections concernées.)*
+*Dernière mise à jour : 2026-07-19 (Audit complet intégralité du fichier : L1C1 à L6C3 + HOME PAGE + Complément fichiers racine, sur la réalité des yaml prod. Corrections : entités obsolètes/fictives, mauvaise attribution de fichiers, section tronquée complétée par hypothèse. Voir détail dans les sections concernées.)*
 *2026-07-18 (Nettoyage résidu chambre : capteur MQTT dispo + bloc mqtt: de configuration.yaml + dossier mqtt/, local + prod H:\ - Versions L1C3 2026-07-18 ajoutées : consigne chambre via climate direct + badge remote rétabli)*
 *2026-07-17 (Resync local ← GitHub/prod : configuration.yaml + scripts.yaml — fix chambre script J-2-0)*
 
@@ -1781,4 +1781,11 @@ HOME PAGE (type: grid)
 | `blueprints/` | Blueprints HA — non modifiés manuellement |
 | `custom_components/` | Intégrations HACS — non versionnées ici |
 | `www/` | Ressources frontend — hors config HA |
-| `docs_da
+| `docs_dashboard/` *(hypothèse — voir note)* | Ancien répertoire, supprimé le 2026-07-14, remplacé par `DOCS/02_docs_dashboard/` |
+
+> ⚠️ **Note 2026-07-19** : la ligne ci-dessus complète une phrase tronquée dans le fichier
+> d'origine (coupure nette au milieu du mot "docs_da", sans fin de ligne). Le contenu réel
+> a été perdu ; complété par hypothèse raisonnable sur la base du nom partiel et de la
+> convention `⛔ TREE_CORRIGE/, TREE_ORIGINE/, Dashboard/, docs_dashboard/, docs_automations/,
+> docs_scripts/ supprimés le 2026-07-14` documentée dans CLAUDE.md. À vérifier par Eric —
+> le fichier source (avant troncature) n'est pas récupérable ici.
