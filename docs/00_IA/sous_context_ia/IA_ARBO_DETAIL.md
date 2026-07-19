@@ -1,5 +1,6 @@
 # 🌳 ARBORESCENCES COMPLÈTES & INDEX GITHUB
-*Dernière mise à jour : 2026-07-19 (correction casse GitHub : Docs/ -> docs/ suite renommage prod)*
+*Dernière mise à jour : 2026-07-19 (correction casse GitHub : Docs/ -> docs/ suite renommage prod ;
+puis retrait Analyse énergétique/ racine (supprimé) + sous_context_ia 7->8 (ajout IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md))*
 *Lire ce fichier si : audit fichiers, sync GitHub, recherche d'un fichier prod, vérification arbo locale, URLs raw GitHub.*
 
 ---
@@ -24,14 +25,13 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── CLAUDE.md                           (source de vérité contexte - sync avec IA_CONTEXT_BASE.md)
 ├── TODO.txt                            (backlog projet)
 ├── autounattend_FR.xml · z2m-backup.*.zip   (hors périmètre HA)
-├── Analyse énergétique/                (analyse_energetique_appart.md - prompt audit 02/2026)
 ├── Github/                             (INDEX_GLOBAL.md · README.md - miroirs travail du repo)
 ├── HTML/                               (exports HTML - ha_erodi_ha_com_*.html)
 ├── Infra_Proxmox/                      (réseau, certs - + save/)
 ├── historique/                         (JOURNAL_COMPLET_*.md · histo_YYYY-MM-DD_S*.txt)
 └── DOCS/
     ├── 00_IA/                          (IA_CONTEXT_BASE.md · confort_cible_calcul_flow.png)
-    │   └── sous_context_ia/            (7 sous-contextes IA_*.md)
+    │   └── sous_context_ia/            (8 sous-contextes IA_*.md, dont IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md ajouté 2026-07-19)
     ├── 01_docs_config_system/
     │   ├── config_system_MD/           (configuration.md)
     │   └── config_system_YAML/         (→ déployé /homeassistant/ - détail = arbo PROD ci-dessous)
@@ -108,7 +108,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   └── meteo/                          (M_03_meteo_UM_blitzortung)
 │
 └── docs/                               (miroir pushé depuis local DOCS/ - JAMAIS de YAML config ici)
-    ├── 00_IA/                          (1 + sous_context_ia/7)
+    ├── 00_IA/                          (1 + sous_context_ia/8 - a jour apres push du 2026-07-19)
     ├── 01_docs_config_system/          (config_system_MD/1 · config_system_YAML/81)
     ├── 02_docs_dashboard/              (dashboard_docs_MD/52 · dashboard_docs_YAML/73)
     ├── 03_docs_automations/            (docs_automations_MD/59 · docs_automations_YAML/107)
