@@ -251,7 +251,7 @@
         {% elif t_ext < 19 %} {{ (conf_j - d1) | round(1) }}
         {% elif t_ext > 34 %} {{ (t_ext - d7) | round(1) }}
         {% elif t_ext > 32 %} {{ (t_ext - d5) | round(1) }}
-        {% elif t_ext > 29 %} {{ conf_j + d2 }}
+        {% elif t_ext > 30 %} {{ conf_j + d2 }}
         {% else %} {{ conf_j + d1 }}
         {% endif %}
 
@@ -348,3 +348,4 @@
 # - [Fix]     temperature_eco_hiver_corrige : fallback float(17) + suppression palier <10.
 # - [Fix]     temperature_moyenne_interieure : reject('==', 0) pour exclure sondes offline.
 # - [Fix]     delta_ademe_recommande : source temperature_confort_JOUR (était temperature_confort).
+# - [Tune]    2026-07-19 temperature_confort_nuit : palier été +d2 relevé de >29 à >30 (confort nuit).
