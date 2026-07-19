@@ -21,8 +21,8 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | Météo France (API DPVigilance v1) | curl API vigilance J0 → PNG local            | meteo_france_alertes_image_today                   | camera.mf_alerte_today → L1C1 Pop-up #ALERT |
-# | Météo France (API DPVigilance v1) | curl API vigilance J1 → PNG local            | meteo_france_alertes_image_tomorrow                | camera.mf_alerte_tomorrow → L1C1 Pop-up #ALERT |
+# | Météo France (API DPVigilance v1) | curl API vigilance J0 → PNG local (/www/weather/meteo_france_alerte_today.png) | meteo_france_alertes_image_today    | PNG statique (pas d'entité camera — intégration camera: désactivée, voir configuration.yaml) → L1C1 Pop-up #ALERT |
+# | Météo France (API DPVigilance v1) | curl API vigilance J1 → PNG local (/www/weather/meteo_france_alerte_tomorrow.png) | meteo_france_alertes_image_tomorrow | PNG statique (pas d'entité camera — intégration camera: désactivée, voir configuration.yaml) → L1C1 Pop-up #ALERT |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - api_key JWT hardcodée dans le fichier (expiration : 2027-06-22 selon exp JWT).
@@ -31,6 +31,11 @@
 #   exister sinon le cp -f échouera silencieusement.
 # - scan_interval trop court = quota API dépassé (60 req/min max selon le JWT).
 # - L'automation ID 1771872569647 force une MAJ au démarrage HA (homeassistant.update_entity).
+# - ⚠️ L'intégration `camera:` est DÉSACTIVÉE dans configuration.yaml (obsolète,
+#   causait une erreur au démarrage) — ces PNG ne sont PAS exposés via une entité
+#   camera.*. Ils sont affichés en dur (chemin fichier direct) dans le dashboard.
+#   Correction 2026-07-19 : l'ancienne doc (et une entête précédente de ce fichier)
+#   mentionnait à tort camera.mf_alerte_today/_tomorrow — ces entités n'existent pas.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Sert à la remontée d'info pour la vignette : [L1C1 Météo — Pop-up #ALERT]

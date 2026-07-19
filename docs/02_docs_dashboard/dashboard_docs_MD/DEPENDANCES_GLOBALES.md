@@ -1,5 +1,6 @@
 # 🔗 DÉPENDANCES GLOBALES — TABLEAU DE BORD HA
-*Dernière mise à jour : 2026-07-18 (Nettoyage résidu chambre : capteur MQTT dispo + bloc mqtt: de configuration.yaml + dossier mqtt/, local + prod H:\ - Versions L1C3 2026-07-18 ajoutées : consigne chambre via climate direct + badge remote rétabli)*
+*Dernière mise à jour : 2026-07-19 (Sync section L1C1 Météo + HOME PAGE sur la réalité des yaml prod — noms d'entités obsolètes corrigés : alertes, vent, foudre, tendances T°, cycle solaire. Voir détail dans les sections concernées.)*
+*2026-07-18 (Nettoyage résidu chambre : capteur MQTT dispo + bloc mqtt: de configuration.yaml + dossier mqtt/, local + prod H:\ - Versions L1C3 2026-07-18 ajoutées : consigne chambre via climate direct + badge remote rétabli)*
 *2026-07-17 (Resync local ← GitHub/prod : configuration.yaml + scripts.yaml — fix chambre script J-2-0)*
 
 ---
@@ -62,44 +63,51 @@ AUCUNE ENTITÉ — Vignette purement navigationnelle
 ```
 MATÉRIEL / INTÉGRATION
   ├─→ Météo France (intégration officielle)
-  │     └─→ sensor.meteo_france_*  (NAT)
+  │     └─→ sensor.06_weather_alert / weather.vence / sensor.vence_*  (NAT)
   ├─→ command_line: carte_meteo_france.yaml
-  │     └─→ camera.carte_vigilance_meteo_france  (command_line → image URL)
-  ├─→ Blitzortung (intégration HACS)
-  │     └─→ sensor.blitzortung_lightning_*  (NAT)
-  │           └─→ UM: M_03_meteo_UM_blitzortung.yaml  (compteurs foudre AMHQ)
-  │           └─→ TPL: M_03_meteo_blitzortung.yaml  (card_content HTML)
+  │     └─→ meteo_france_alertes_image_today / _tomorrow  (PNG statique — PAS d'entité camera, camera: désactivé)
+  ├─→ Blitzortung (intégration MQTT native)
+  │     └─→ sensor.maison_lightning_azimuth / _distance / _counter  (NAT)
+  │           └─→ UM: M_03_meteo_UM_blitzortung.yaml  (eclair_annuel/mensuel/hebdomadaire/quotidien/horaire)
+  │           └─→ SEN: M_03_meteo_sensors_blitzortung.yaml  (blitzortung_lightning_localisation — API Nominatim)
+  │           └─→ TPL: M_03_meteo_blitzortung.yaml  (lightning_direction_label / _distance_km / _bearing / temps_depuis_le_dernier_impact_de_foudre / dernier_impact_temps_reel)
   ├─→ SONOFF (Z2M — balcon nord)
   │     └─→ sensor.th_balcon_nord_temperature / _humidity  (NAT)
-  │           └─→ TPL: M_04_tendances_th_ext_card.yaml  (tendances mini-graph)
-  ├─→ Météo France (alertes)
-  │     └─→ binary_sensor.meteo_france_alerte_*  (NAT)
-  │           └─→ TPL: M_01_meteo_alertes_card.yaml  (card HTML couleurs)
+  │           └─→ TPL: M_04_tendances_th_ext_card.yaml  (th_balcon_nord_temperature_trend / _humidity_trend)
+  ├─→ Météo France (alertes) + MeteoAlarm (fallback)
+  │     └─→ sensor.06_weather_alert / binary_sensor.meteoalarm  (NAT)
+  │           └─→ TPL: M_01_meteo_alertes_card.yaml  (10 sensors : alerte_vent_violent, _inondation, _orages,
+  │               _pluie_inondation, _neige_verglas, _grand_froid, _canicule, _avalanches, _vagues_submersion, alerte_meteo)
   ├─→ Météo France (vent)
-  │     └─→ sensor.meteo_france_wind_speed / _bearing  (NAT)
-  │           └─→ TPL: M_02_meteo_vent_vence_card.yaml  (windrose-card HTML)
-  └─→ sun.sun  (HA natif)
-        └─→ sensor.sun_next_rising / next_setting  (NAT)
-              └─→ apexcharts-card (data_generator JS — courbe durée du jour)
+  │     └─→ weather.vence attributs wind_bearing / wind_speed  (NAT)
+  │           └─→ TPL: M_02_meteo_vent_vence_card.yaml  (vence_wind_direction_label / _bearing / _speed_kmh)
+  └─→ zone.home (latitude) + horloge système  (calculé, PAS sun.sun)
+        └─→ TPL: M_05_cycle_solaire.yaml  (duree_du_jour / tendance_duree_jour / variation_quotidienne)
 ```
+
+> ⚠️ Corrigé le 2026-07-19 : cette section décrivait des noms d'entités obsolètes/inexistants
+> (`binary_sensor.meteo_france_alerte_*`, `sensor.meteo_france_wind_speed/_bearing`,
+> `camera.carte_vigilance_meteo_france`, les 4 `*_card_content` génériques). Noms réels
+> vérifiés directement dans le corps des fichiers yaml le 2026-07-19. `M_05_cycle_solaire.yaml`
+> (absent de cette doc jusqu'ici) ajouté — c'est lui qui calcule la durée du jour, pas `sun.sun`.
 
 ### Entités consommées par la page
 
 | Entité | Type | Fichier source |
 |:-------|:----:|:--------------|
-| `camera.carte_vigilance_meteo_france` | NAT | `command_line/meteo/carte_meteo_france.yaml` |
-| `sensor.meteo_france_*` (prévisions) | NAT | Intégration Météo France |
-| `sensor.blitzortung_lightning_distance` | NAT | Intégration Blitzortung |
-| `sensor.blitzortung_lightning_count` | NAT | Intégration Blitzortung |
-| `sensor.meteo_france_blitzortung_count_quotidien` | UM | `utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml` |
-| `sensor.meteo_france_alerte_card_content` | TPL | `templates/meteo/M_01_meteo_alertes_card.yaml` |
-| `sensor.meteo_france_vent_vence_card_content` | TPL | `templates/meteo/M_02_meteo_vent_vence_card.yaml` |
-| `sensor.blitzortung_card_content` | TPL | `templates/meteo/M_03_meteo_blitzortung.yaml` |
-| `sensor.tendances_th_ext_card_content` | TPL | `templates/meteo/M_04_tendances_th_ext_card.yaml` |
+| `sensor.meteo_france_alertes_image_today` / `_tomorrow` | NAT (command_line) | `command_line/meteo/carte_meteo_france.yaml` |
+| `sensor.06_weather_alert` | NAT | Intégration Météo France |
+| `weather.vence` (+ `sensor.vence_*`) | NAT | Intégration Météo France |
+| `sensor.maison_lightning_azimuth` / `_distance` / `_counter` | NAT | Intégration Blitzortung (MQTT native) |
+| `sensor.eclair_quotidien` / `_hebdomadaire` / `_mensuel` / `_annuel` / `_horaire` | UM | `utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml` |
+| `sensor.blitzortung_lightning_localisation` | SEN (REST) | `sensors/meteo/M_03_meteo_sensors_blitzortung.yaml` |
+| `sensor.alerte_vent_violent` / `_inondation` / `_orages` / `_pluie_inondation` / `_neige_verglas` / `_grand_froid` / `_canicule` / `_avalanches` / `_vagues_submersion` / `alerte_meteo` | TPL | `templates/meteo/M_01_meteo_alertes_card.yaml` |
+| `sensor.vence_wind_direction_label` / `_bearing` / `_speed_kmh` | TPL | `templates/meteo/M_02_meteo_vent_vence_card.yaml` |
+| `sensor.lightning_direction_label` / `_distance_km` / `_bearing` / `temps_depuis_le_dernier_impact_de_foudre` / `dernier_impact_temps_reel` | TPL | `templates/meteo/M_03_meteo_blitzortung.yaml` |
+| `sensor.th_balcon_nord_temperature_trend` / `_humidity_trend` | TPL | `templates/meteo/M_04_tendances_th_ext_card.yaml` |
 | `sensor.th_balcon_nord_temperature` | NAT | SONOFF via Z2M |
 | `sensor.th_balcon_nord_humidity` | NAT | SONOFF via Z2M |
-| `sun.sun` | NAT | HA Core |
-| `sensor.variation_quotidienne` | NAT | Météo France (variation durée jour) |
+| `sensor.duree_du_jour` / `tendance_duree_jour` / `variation_quotidienne` | TPL | `templates/meteo/M_05_cycle_solaire.yaml` (calcul astronomique zone.home, PAS sun.sun) |
 
 ### Entités ApexCharts (data_generator JS — durée du jour)
 
@@ -118,10 +126,12 @@ MATÉRIEL / INTÉGRATION
 | `Dashboard/L1C1_01_Meteo/page_L1C1_meteo_2026-05-09.yaml` | ✅ |
 | `command_line/meteo/carte_meteo_france.yaml` | ✅ |
 | `utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml` | ✅ |
+| `sensors/meteo/M_03_meteo_sensors_blitzortung.yaml` | ✅ *(ajouté 2026-07-19 — manquait)* |
 | `templates/meteo/M_01_meteo_alertes_card.yaml` | ✅ |
 | `templates/meteo/M_02_meteo_vent_vence_card.yaml` | ✅ |
 | `templates/meteo/M_03_meteo_blitzortung.yaml` | ✅ |
 | `templates/meteo/M_04_tendances_th_ext_card.yaml` | ✅ |
+| `templates/meteo/M_05_cycle_solaire.yaml` | ✅ *(ajouté 2026-07-19 — manquait, calcule la durée du jour)* |
 
 ---
 
@@ -1604,11 +1614,11 @@ HOME PAGE (type: grid)
   ├─→ [3] conditional — VS Code Server  (visible si CPU > 1%)
   │     └─→ sensor.studio_code_server_pourcentage_du_processeur  (NAT — Studio Code Server add-on)
   ├─→ [4] button-card — Foudre  (visible si lightning_counter > 1)
-  │     ├─→ sensor.maison_lightning_counter  (TPL — M_03_meteo_blitzortung.yaml)
-  │     ├─→ sensor.maison_lightning_distance  (TPL — idem)
-  │     ├─→ sensor.maison_lightning_localisation  (TPL — idem)
-  │     ├─→ sensor.maison_lightning_azimuth  (TPL — idem)
-  │     └─→ sensor.dernier_impact_temps_reel  (TPL — idem)
+  │     ├─→ sensor.maison_lightning_counter  (NAT — Blitzortung natif, PAS un TPL)
+  │     ├─→ sensor.maison_lightning_distance  (NAT — Blitzortung natif)
+  │     ├─→ sensor.blitzortung_lightning_localisation  (SEN — M_03_meteo_sensors_blitzortung.yaml, REST Nominatim)
+  │     ├─→ sensor.maison_lightning_azimuth  (NAT — Blitzortung natif)
+  │     └─→ sensor.dernier_impact_temps_reel  (TPL — M_03_meteo_blitzortung.yaml, seul vrai TPL de ce bloc)
   ├─→ [5] mushroom — Lave-linge  (visible si power > 50W)
   │     └─→ sensor.prise_lave_linge_nous_power  (NAT — NOUS SP via Z2M)
   ├─→ [6] mushroom — Lave-vaisselle  (visible si power > 50W)
@@ -1645,11 +1655,11 @@ HOME PAGE (type: grid)
 | `sensor.06_weather_alert` | NAT | Météo France | [2] |
 | `sensor.temperature_delta_affichage` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` | [2] |
 | `sensor.studio_code_server_pourcentage_du_processeur` | NAT | Studio Code Server add-on | [3] |
-| `sensor.maison_lightning_counter` | TPL | `templates/meteo/M_03_meteo_blitzortung.yaml` | [4] |
-| `sensor.maison_lightning_distance` | TPL | idem | [4] |
-| `sensor.maison_lightning_localisation` | TPL | idem | [4] |
-| `sensor.maison_lightning_azimuth` | TPL | idem | [4] |
-| `sensor.dernier_impact_temps_reel` | TPL | idem | [4] |
+| `sensor.maison_lightning_counter` | NAT | Intégration Blitzortung (MQTT native) | [4] |
+| `sensor.maison_lightning_distance` | NAT | Intégration Blitzortung (MQTT native) | [4] |
+| `sensor.blitzortung_lightning_localisation` | SEN | `sensors/meteo/M_03_meteo_sensors_blitzortung.yaml` (REST Nominatim) | [4] |
+| `sensor.maison_lightning_azimuth` | NAT | Intégration Blitzortung (MQTT native) | [4] |
+| `sensor.dernier_impact_temps_reel` | TPL | `templates/meteo/M_03_meteo_blitzortung.yaml` | [4] |
 | `sensor.prise_lave_linge_nous_power` | NAT | NOUS SP via Z2M (P2 — cuisine) | [5] |
 | `sensor.prise_lave_vaisselle_nous_power` | NAT | NOUS SP via Z2M (P2 — cuisine) | [6] |
 | `sensor.etat_wifi_maison` | TPL | `templates/P4_groupe_presence/02_logique_wifi_cellular.yaml` | [7] |
