@@ -19,9 +19,9 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | Capteur PM2.5/tCOV (Z2M) | sensor.salon_pm25 / sensor.salon_tcov              | salon_pm25_mean_24h / salon_tvoc_ppb_mean_24h      | A_01_AIR_QUALITY.yaml (templates) → L6C1 |
-# | Capteur PM2.5/tCOV (Z2M) | sensor.bureau_pm25 / sensor.bureau_tcov            | bureau_pm25_mean_24h / bureau_tvoc_ppb_mean_24h    | A_01_AIR_QUALITY.yaml (templates) → L6C1 |
-# | Capteur PM2.5/tCOV (Z2M) | sensor.chambre_pm25 / sensor.chambre_tcov          | chambre_pm25_mean_24h / chambre_tvoc_ppb_mean_24h  | A_01_AIR_QUALITY.yaml (templates) → L6C1 |
+# | IKEA Vindstyrka (Z2M) | sensor.qualite_air_salon_ikea_pm25 / _voc_index    | pm2_5_salon_moy_24h / tcov_salon_moy_24h           | L6C1 Qualité Air (ring-tile marker2) |
+# | IKEA Vindstyrka (Z2M) | sensor.qualite_air_bureau_ikea_pm25 / _voc_index   | pm2_5_bureau_moy_24h / tcov_bureau_moy_24h         | L6C1 Qualité Air (ring-tile marker2) |
+# | IKEA Vindstyrka (Z2M) | sensor.qualite_air_chambre_ikea_pm25 / _voc_index  | pm2_5_chambre_moy_24h / tcov_chambre_moy_24h       | L6C1 Qualité Air (ring-tile marker2) |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - La moyenne 24h se recalcule en continu (fenêtre glissante, pas reset minuit).

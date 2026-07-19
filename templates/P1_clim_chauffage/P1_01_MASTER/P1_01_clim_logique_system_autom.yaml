@@ -23,7 +23,12 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.temperature_ext / input_number.* / input_boolean.* | clim_*_temperature_cible / clim_*_mode_logique     | L1C3 Commandes Clim                |
+# | [calculé] (constantes fixes) | valeurs codées en dur                              | temperature_eco_hiver / _eco_ete / seuil_non_chauffage / seuil_non_clim / delta_1 / _2 / _3 / _5 / _7 | consommées par toutes les lignes suivantes |
+# | Sonde SONOFF Balcon Nord | sensor.th_balcon_nord_temperature                  | mode_ete_hiver / consigne_de_base / temperature_differentielle | L1C3 Commandes Clim |
+# | [calculé] (interne, chaîné) | sensor.consigne_de_base / temperature_confort_jour / delta_1 / _2 | temperature_corrige_mamour / _eric / _chambre       | L1C3 Commandes Clim                |
+# | Sonde SONOFF Balcon Nord + [calculé] | sensor.th_balcon_nord_temperature + consigne_de_base / delta_1 / _2 / _5 / _7 | temperature_cible / temperature_confort_jour / temperature_confort_nuit / temperature_eco_hiver_corrige / temperature_eco_ete_corrige | L1C3 Commandes Clim |
+# | Sondes SONOFF intérieures (6 pièces) | sensor.th_salon / _cellier / _cuisine / _bureau / _salle_de_bain / _chambre_temperature | temperature_moyenne_interieure                      | L1C2 Températures                  |
+# | [calculé]      | sensor.temperature_moyenne_interieure + th_balcon_nord_temperature / temperature_confort_jour | temperature_delta_value / _affichage / delta_ademe_recommande | L1C2 Températures                  |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Fichier CRITIQUE : toute modification impacte TOUTES les automations clim.

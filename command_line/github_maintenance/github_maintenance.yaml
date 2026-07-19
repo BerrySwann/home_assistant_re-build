@@ -17,7 +17,10 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | GitHub API (git) | git log / git status → stdout                      | github_last_commit / github_sync_status            | L4C2 Mini PC / L5C3 MariaDB        |
+# | Fichier log (ha_git_backup.sh) | /config/.logs/ha_git_backup.log (grep "OK:")       | backup_github_status                               | L5C3 Système (chip statut)         |
+# | Git (local)     | git tag --sort=-creatordate                        | git_last_weekly_tag                                | L5C3 Système (chip tag hebdo)      |
+# | Fichier log (ha_git_backup.sh) | /config/.logs/ha_git_backup.log (10 dern. lignes)  | backup_github_journal                              | L5C3 Système (carte journal)       |
+# | Git (local)     | git rev-parse --abbrev-ref HEAD                     | github_default_branch                              | L5C3 Système (chip branche)        |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ce fichier est un YAML — ne jamais y coller le contenu de ha_git_backup.sh

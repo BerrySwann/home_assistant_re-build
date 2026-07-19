@@ -21,7 +21,8 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | Météo France (API web) | URL vigilance.meteo.fr / wget → images PNG         | carte_meteo_france_url / _derniere_maj             | M_01_meteo_alertes_card.yaml → L1C1 |
+# | Météo France (API DPVigilance v1) | curl API vigilance J0 → PNG local            | meteo_france_alertes_image_today                   | camera.mf_alerte_today → L1C1 Pop-up #ALERT |
+# | Météo France (API DPVigilance v1) | curl API vigilance J1 → PNG local            | meteo_france_alertes_image_tomorrow                | camera.mf_alerte_tomorrow → L1C1 Pop-up #ALERT |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - api_key JWT hardcodée dans le fichier (expiration : 2027-06-22 selon exp JWT).
