@@ -47,6 +47,33 @@ directives actives de codage)*
 - **Chambre :** Daikin FTX35KNV1B (2018) - 3.5 kW - **modèle identique au Bureau**
   - Mêmes specs que Bureau.
 - **Radiateur cuisine (bain d'huile) :** ~1.4-1.5 kW (valeur déclarative, pas de fiche technique)
+- **PC Eric (bureau) :** ~180-200W sous charge (référence : 190W). Dissipe cette puissance
+  en chaleur dans le bureau en permanence quand allumé.
+- **PC Mamour (salon, entité `pc_s_gege_salon`) :** ~175W sous charge. Dissipe en chaleur
+  dans le salon quand allumé.
+
+> **Implications thermiques des PC (confirmé Eric 2026-07-19) :**
+> - Quand ils sont à la maison, les PC tournent. Ce n'est pas un usage intermittent.
+> - **Hiver :** PC Eric = ~1.9 kWh/j de chaleur gratuite dans le bureau. Réduit le DUT
+>   bureau (la Daikin n'a pas à compenser). Contribue à l'écart C/B au même titre que
+>   le volet auto et les 2 murs carreau de plâtre.
+> - **Été :** PC Eric = ~1.9 kWh/j de charge thermique supplémentaire que la Daikin bureau
+>   doit évacuer. Explique en partie pourquoi DUT bureau est plus élevé que DUT chambre
+>   en été (chambre = aucune source interne équivalente).
+> - **Salon en été + Mamour (G2/G4) :** exposition plein Sud + 175W PC = charge maximale
+>   sur le Hitachi. Jours G2/G4 devraient montrer un DUT salon > jours G1/G3. Non
+>   vérifiable dans les logs actuels (tag groupe absent avant 29/04/2026).
+> - **Talon nocturne (baseline confirmée) :**
+>   - PC Eric (bureau) : coupure auto après extinction PC -> off max 20h30.
+>   - TV (~180W) : automation coupure -> off max 23h30.
+>   - Box + Beryl : 20W permanent.
+>   - Mini-PC HA (NUC, Proxmox + 3 LXC + VM) : ~20W permanent.
+>   - **Baseline attendue depuis minuit : 40W -> 0.08 kWh à 02h00.**
+>   - Nuits "propres" dans les logs (0.09 kWh / 45W) = conforme. ✅
+>   - Mais moyenne janvier = 0.245 kWh (122W) -> écart de +82W moyen INEXPLIQUÉ.
+>   - PC Mamour (salon, `pc_s_gege_salon`) : automation d'extinction identique au bureau ?
+>     Si non, candidat le plus probable pour les nuits hautes (175W post-minuit).
+>   - Source non identifiable sans regarder les incréments 00h15 et 00h30 dans les logs.
 
 > Note audit : Bureau et Chambre ayant un matériel identique (même Daikin FTX35KNV1B,
 > même année), toute différence de DUT entre ces deux pièces est imputable uniquement
