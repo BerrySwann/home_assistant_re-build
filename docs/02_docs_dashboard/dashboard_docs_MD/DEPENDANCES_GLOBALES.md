@@ -71,9 +71,6 @@ MATÉRIEL / INTÉGRATION
   │           └─→ UM: M_03_meteo_UM_blitzortung.yaml  (eclair_annuel/mensuel/hebdomadaire/quotidien/horaire)
   │           └─→ SEN: M_03_meteo_sensors_blitzortung.yaml  (blitzortung_lightning_localisation — API Nominatim)
   │           └─→ TPL: M_03_meteo_blitzortung.yaml  (lightning_direction_label / _distance_km / _bearing / temps_depuis_le_dernier_impact_de_foudre / dernier_impact_temps_reel)
-  ├─→ SONOFF (Z2M — balcon nord)
-  │     └─→ sensor.th_balcon_nord_temperature / _humidity  (NAT)
-  │           └─→ TPL: M_04_tendances_th_ext_card.yaml  (th_balcon_nord_temperature_trend / _humidity_trend)
   ├─→ Météo France (alertes) + MeteoAlarm (fallback)
   │     └─→ sensor.06_weather_alert / binary_sensor.meteoalarm  (NAT)
   │           └─→ TPL: M_01_meteo_alertes_card.yaml  (10 sensors : alerte_vent_violent, _inondation, _orages,
@@ -104,9 +101,6 @@ MATÉRIEL / INTÉGRATION
 | `sensor.alerte_vent_violent` / `_inondation` / `_orages` / `_pluie_inondation` / `_neige_verglas` / `_grand_froid` / `_canicule` / `_avalanches` / `_vagues_submersion` / `alerte_meteo` | TPL | `templates/meteo/M_01_meteo_alertes_card.yaml` |
 | `sensor.vence_wind_direction_label` / `_bearing` / `_speed_kmh` | TPL | `templates/meteo/M_02_meteo_vent_vence_card.yaml` |
 | `sensor.lightning_direction_label` / `_distance_km` / `_bearing` / `temps_depuis_le_dernier_impact_de_foudre` / `dernier_impact_temps_reel` | TPL | `templates/meteo/M_03_meteo_blitzortung.yaml` |
-| `sensor.th_balcon_nord_temperature_trend` / `_humidity_trend` | TPL | `templates/meteo/M_04_tendances_th_ext_card.yaml` |
-| `sensor.th_balcon_nord_temperature` | NAT | SONOFF via Z2M |
-| `sensor.th_balcon_nord_humidity` | NAT | SONOFF via Z2M |
 | `sensor.duree_du_jour` / `tendance_duree_jour` / `variation_quotidienne` | TPL | `templates/meteo/M_05_cycle_solaire.yaml` (calcul astronomique zone.home, PAS sun.sun) |
 
 ### Entités ApexCharts (data_generator JS — durée du jour)
@@ -130,8 +124,10 @@ MATÉRIEL / INTÉGRATION
 | `templates/meteo/M_01_meteo_alertes_card.yaml` | ✅ |
 | `templates/meteo/M_02_meteo_vent_vence_card.yaml` | ✅ |
 | `templates/meteo/M_03_meteo_blitzortung.yaml` | ✅ |
-| `templates/meteo/M_04_tendances_th_ext_card.yaml` | ✅ |
 | `templates/meteo/M_05_cycle_solaire.yaml` | ✅ *(ajouté 2026-07-19 — manquait, calcule la durée du jour)* |
+
+> `templates/meteo/M_04_tendances_th_ext_card.yaml` retiré de cette liste le 2026-07-19 —
+> son entête déclare lui-même `AVAL : L1C2 Températures`, pas L1C1. Voir section L1C2.
 
 ---
 
@@ -171,20 +167,31 @@ MATÉRIEL (SONOFF TH via Z2M)
 | Entité | Type | Fichier source |
 |:-------|:----:|:--------------|
 | `sensor.vence_temperature` | NAT | Météo France |
-| `sensor.temperature_moyenne_interieure` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.temperature_delta_affichage` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.th_*_temperature_trend` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.th_*_humidity_trend` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
+| `sensor.temperature_moyenne_interieure` | TPL | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
+| `sensor.temperature_delta_value` | TPL | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
+| `sensor.temperature_delta_affichage` | TPL | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
+| `sensor.delta_ademe_recommande` | TPL | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
+| `sensor.th_balcon_nord_temperature_trend` / `_humidity_trend` | TPL | `templates/meteo/M_04_tendances_th_ext_card.yaml` |
+| `sensor.th_balcon_nord_temperature` / `_humidity` | NAT | SONOFF via Z2M |
 | `sensor.conso_clim_rad_total` | TPL | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` |
 | `sensor.conso_clim_rad_total_quotidien` | TPL | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` |
 | `sensor.conso_clim_rad_total_mensuel` | TPL | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` |
 | `sensor.clim_rad_total_avg_watts_quotidien` | TPL | `P1_AVG/P1_AVG_TOTAL_AMHQ.yaml` |
-| `sensor.*_power_status` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.clim_*_etat` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
 | `climate.clim_salon_rm4_mini` | NAT | SmartIR |
 | `climate.radiateur_cuisine` | NAT | Meross |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
 | `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
+
+> ⚠️ **Corrigé le 2026-07-19** : `temperature_moyenne_interieure`, `temperature_delta_affichage`,
+> `delta_ademe_recommande` étaient attribués à tort à `P1_ui_dashboard/P1_ui_dashboard.yaml`
+> (ce fichier ne produit que des entités power_status/clim_*_etat — vérifié dans son propre
+> corps, AVAL déclaré L1C3/L2C2, pas L1C2). Vrai fichier source : `P1_01_clim_logique_system_autom.yaml`
+> (son AVAL déclare lui-même "L1C2 Températures" pour ces 4 sensors). Les entrées fictives
+> `sensor.th_*_temperature_trend` / `_humidity_trend` (génériques, toutes pièces) ont été
+> retirées — seule la sonde balcon nord a un calcul de tendance réel (`M_04_tendances_th_ext_card.yaml`,
+> absent de cette section jusqu'ici — ajouté). `sensor.*_power_status` / `clim_*_etat` retirés
+> d'ici — ce sont des entités Clim ON/OFF, déjà documentées dans la section L1C3 ci-dessous,
+> pas des données de température.
 
 ### Streamline templates utilisés
 
@@ -203,6 +210,8 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `Dashboard/L1C2_02_Temperatures/vignette_L1C2_temperatures_2026-05-12.yaml` | ✅ |
 | `Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-05-22.yaml` | ⚠️ obsolète — `climate.clim_chambre_rm4_mini` |
 | `Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-07-14.yaml` | ✅ `climate.clim_chambre_rm4_mini` + `sensor.temperature_corrige_chambre` |
+| `templates/meteo/M_04_tendances_th_ext_card.yaml` | ✅ *(ajouté 2026-07-19 — manquait)* |
+| `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | ✅ *(fichier partagé — AVAL principal L1C3, voir aussi cette section)* |
 
 ---
 
@@ -215,18 +224,25 @@ MATÉRIEL (SONOFF TH via Z2M)
 MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
   └─→ sensor.*_power / climate.*   (NAT)
         └─→ TPL: P1_ui_dashboard.yaml  (*_power_status / *_etat)
-              └─→ sensor.temperature_moyenne_interieure  (TPL P1_ui_dashboard)
+              └─→ sensor.temperature_moyenne_interieure  (TPL P1_clim_logique)
               └─→ sensor.delta_ademe_recommande          (TPL P1_clim_logique)
               └─→ sensor.mode_ete_hiver_etat             (TPL P1_clim_logique)
                     └─→ VIGNETTE L1C3 (button-card — grille piece/mode/consigne)
                           └─→ tap_action: navigate → /dashboard-tablette/clim
 ```
 
+> ⚠️ Corrigé le 2026-07-19 : `temperature_moyenne_interieure` attribué à tort à
+> `P1_ui_dashboard.yaml` (ce fichier ne contient que des sensors power_status/*_etat,
+> vérifié dans son corps) — vrai fichier source : `P1_01_clim_logique_system_autom.yaml`.
+> `climate.soufflant_salle_de_bain` retiré — n'existe pas (le soufflant SDB est piloté
+> via `switch.inter_soufflant_salle_de_bain` + `input_select.etat_resistance_soufflant_sdb`,
+> pas une entité climate — vérifié, aucune occurrence dans tout `config_system_YAML/`).
+
 ### Entités consommées par la vignette
 
 | Entité | Type | Fichier source |
 |:-------|:----:|:--------------|
-| `sensor.temperature_moyenne_interieure` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
+| `sensor.temperature_moyenne_interieure` | TPL | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
 | `sensor.delta_ademe_recommande` | TPL | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
 | `sensor.mode_ete_hiver_etat` | TPL | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
 | `sensor.clim_salon_etat` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
@@ -244,8 +260,9 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 | `climate.clim_salon_rm4_mini` | NAT | SmartIR |
 | `climate.radiateur_cuisine` | NAT | Meross |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
-| `climate.soufflant_salle_de_bain` | NAT | Meross |
 | `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
+| `switch.inter_soufflant_salle_de_bain` | NAT (switch TPL) | `templates/Inter_BP_Virtuel/P1/P1_BV_01_SW_inter_souflant_sdb.yaml` |
+| `input_select.etat_resistance_soufflant_sdb` | NAT | `input_select.yaml` |
 
 ### Entités clés de la page
 
@@ -379,16 +396,23 @@ MATÉRIEL (Nodon SEM-4-1-00 via Z2M)
               └─→ TPL: 02_ratio_hp_hc.yaml               (genelec_appart_ratio_hc_quotidien/hebdo/mensuel)
               └─→ TPL: 03_AVG_genelec_appart.yaml        (genelec_appart_avg_watts_quotidien/mensuel)
               └─→ TPL: MyElectricalData.yaml             (Linky J-1 — lecture seule)
-MATÉRIEL (PowerCalc P2/P3)
-  └─→ sensor.diag_poste_*_quotidien/hebdomadaire/mensuel → TPL: total_par_poste_7.yaml
-  └─→ sensor.total_poste_*_puissance → TPL: total_par_poste_7.yaml
+MATÉRIEL (PowerCalc P2/P3 + calculé)
+  └─→ sensor.diag_poste_*_quotidien → TPL: P0_Diag/P0_diag_conso_jour_en_cours.yaml
+  └─→ sensor.diag_poste_*_hebdomadaire → TPL: P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml
+  └─→ sensor.diag_poste_*_mensuel → TPL: P0_Diag/P0_diag_conso_mois_en_cours.yaml
+  └─→ sensor.total_poste_*_puissance → TPL: P0_total_pour_les_7_postes/P0_total_pour_les_7_postes.yaml
 SENSORS P0
-  └─→ sensor.genelec_appart_conso_mini_24h / _maxi_24h → sensors/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml
+  └─→ sensor.genelec_appart_conso_mini_24h / _maxi_24h / _moyenne_1h → sensors/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml
                     └─→ VIGNETTE L2C1 ✅
                     └─→ PAGE L2C1 Principale (3 onglets : Journalier/Hebdo/Mensuel) ✅
                     └─→ PAGE L2C1 Temps Réel ✅
                     └─→ PAGE L2C1 Mensuel (détail par appareil) ✅
 ```
+
+> ⚠️ Corrigé le 2026-07-19 : le diagramme référençait un fichier `total_par_poste_7.yaml`
+> qui n'existe pas — les vrais noms sont `P0_diag_conso_{jour,hebdomadaire,mois}_en_cours.yaml`
+> (3 fichiers distincts pour `diag_poste_*`) et `P0_total_pour_les_7_postes.yaml` (pour
+> `total_poste_*_puissance`), vérifiés par grep des `unique_id:` réels.
 
 ### Entités consommées — Vignette L2C1
 
@@ -445,8 +469,8 @@ MATÉRIEL (NOUS SP via Z2M)
 | `climate.clim_salon_rm4_mini` | NAT | SmartIR |
 | `climate.radiateur_cuisine` | NAT | Meross |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
-| `climate.soufflant_salle_de_bain` | NAT | Meross |
 | `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
+| `switch.inter_soufflant_salle_de_bain` | NAT (switch TPL) | `templates/Inter_BP_Virtuel/P1/P1_BV_01_SW_inter_souflant_sdb.yaml` |
 | `sensor.salon_power_status` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
 | `sensor.cuisine_power_status` | TPL | idem |
 | `sensor.bureau_power_status` | TPL | idem |
@@ -537,7 +561,7 @@ MATÉRIEL (Hue Bridge / Sonoff via Z2M)
   └─→ _energy (firmware direct, kWh cumulatif)
         └─→ UM: P3_UM_AMHQ_1_UNITE.yaml  (19 ampoules × 4 cycles = 76 _um)
               └─→ TPL: P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml  (76 _um_kwh_tpl)
-                    └─→ TPL: P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml  (zones → 40 _um_kwh_tpl)
+                    └─→ TPL: P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml  (9 zones → 36 _um_kwh_tpl)
                     └─→ TPL: P3_ENERGIE_TPL/P3_TPL_AMHQ_3_TOTAL.yaml (4 total _kwh_tpl)
                     └─→ TPL: P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml (AVG W/ampoule, src _um_kwh_tpl)
                     └─→ TPL: P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml  (AVG W/zone, src _um_kwh_tpl)
@@ -577,7 +601,7 @@ MATÉRIEL (Hue Bridge / Sonoff via Z2M)
 | Fichier TPL | Contenu | Nb sensors | Statut |
 |:------------|:--------|:----------:|:------:|
 | `P3_TPL_AMHQ_1_UNITE.yaml` | 19 ampoules × 4 cycles | 76 | ✅ |
-| `P3_TPL_AMHQ_2_ZONE.yaml` | 10 zones × 4 cycles | 40 | ✅ |
+| `P3_TPL_AMHQ_2_ZONE.yaml` | 9 zones × 4 cycles | 36 | ✅ *(corrigé 2026-07-19 — était 10 zones/40, doublon d'une erreur déjà présente dans le fichier yaml lui-même, corrigée le même jour)* |
 | `P3_TPL_AMHQ_3_TOTAL.yaml` | 1 total × 4 cycles | 4 | ✅ |
 
 ### Zones couvertes par P3_TPL_AMHQ_2_ZONE
@@ -673,6 +697,7 @@ MATÉRIEL (Hue Bridge / Sonoff)
 | `light.hue_color_candle_chambre_eric` | NAT | Hue Bridge |
 | `light.lit` | NAT | Hue Bridge | Groupe tête de lit — cible du tap_action toggle (fix B4) |
 | `switch.prise_tete_de_lit_chambre` | NAT | Intégration native |
+| `input_select.saison` | NAT | `input_select.yaml` (icône appartement Été/Hiver — ajouté 2026-07-19, manquait) |
 
 ### Entités disponibles (etats_status) non encore intégrées
 
@@ -1071,17 +1096,22 @@ MATÉRIEL / INTÉGRATION
 ### Vignette — Chaîne de dépendances
 
 ```
-HA (intégration native)
-  └─→ sensor.available_updates  (NAT — compteur global MàJ disponibles)
-        └─→ VIGNETTE L4C3 (button-card — couleur orange si > 0, texte MàJ)
-              └─→ tap_action: navigate → /dashboard-tablette/maj
+HA (domaine update.* natif)
+  └─→ TPL: templates/utilitaires/Mise_a_jour_home_assistant.yaml
+        └─→ sensor.available_updates  (compte les update.* à l'état 'on')
+              └─→ VIGNETTE L4C3 (button-card — couleur orange si > 0, texte MàJ)
+                    └─→ tap_action: navigate → /dashboard-tablette/maj
 ```
+
+> ⚠️ Corrigé le 2026-07-19 : `sensor.available_updates` était marqué NAT — c'est en réalité
+> un TPL (`templates/utilitaires/Mise_a_jour_home_assistant.yaml`, absent de cette section
+> jusqu'ici), qui compte les entités `update.*` à l'état "on". Vérifié dans le corps du fichier.
 
 ### Entités consommées par la vignette
 
 | Entité | Type | Fichier source |
 |:-------|:----:|:--------------|
-| `sensor.available_updates` | NAT | HA Core (compteur updates natif) |
+| `sensor.available_updates` | TPL | `templates/utilitaires/Mise_a_jour_home_assistant.yaml` |
 
 ### Page gauche (H.A. SERVER) — Chaîne de dépendances
 
@@ -1114,6 +1144,12 @@ HA Core
         └─→ update.studio_code_server_update  (NAT) → mushroom-update-card
               + chips cpu/memory (system_monitor)
 ```
+
+### Fichiers YAML déployables
+
+| Fichier | Statut |
+|:--------|:------:|
+| `templates/utilitaires/Mise_a_jour_home_assistant.yaml` | ✅ *(ajouté 2026-07-19 — manquait)* |
 
 ### Fichiers YAML Dashboard
 
@@ -1624,7 +1660,7 @@ HOME PAGE (type: grid)
   ├─→ [6] mushroom — Lave-vaisselle  (visible si power > 50W)
   │     └─→ sensor.prise_lave_vaisselle_nous_power  (NAT — NOUS SP via Z2M)
   ├─→ [7] bubble-card separator + 2× button — Présence
-  │     ├─→ sensor.etat_wifi_maison  (TPL — P4/02_logique_wifi_cellular.yaml)
+  │     ├─→ sensor.etat_wifi_maison  (TPL — P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml)
   │     ├─→ device_tracker.poco  (NAT — Mobile App Eric)
   │     ├─→ person.eric  (NAT — HA Personnes)
   │     ├─→ device_tracker.mamour  (NAT — Mobile App Mamour)
@@ -1653,7 +1689,7 @@ HOME PAGE (type: grid)
 | `sensor.vence_rain_chance` / `vence_uv` / `vence_cloud_cover` | NAT | Météo France | [2] |
 | `sensor.vence_freeze_chance` / `vence_snow_chance` / `vence_next_rain` | NAT | Météo France | [2] |
 | `sensor.06_weather_alert` | NAT | Météo France | [2] |
-| `sensor.temperature_delta_affichage` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` | [2] |
+| `sensor.temperature_delta_affichage` | TPL | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | [2] |
 | `sensor.studio_code_server_pourcentage_du_processeur` | NAT | Studio Code Server add-on | [3] |
 | `sensor.maison_lightning_counter` | NAT | Intégration Blitzortung (MQTT native) | [4] |
 | `sensor.maison_lightning_distance` | NAT | Intégration Blitzortung (MQTT native) | [4] |
@@ -1662,7 +1698,7 @@ HOME PAGE (type: grid)
 | `sensor.dernier_impact_temps_reel` | TPL | `templates/meteo/M_03_meteo_blitzortung.yaml` | [4] |
 | `sensor.prise_lave_linge_nous_power` | NAT | NOUS SP via Z2M (P2 — cuisine) | [5] |
 | `sensor.prise_lave_vaisselle_nous_power` | NAT | NOUS SP via Z2M (P2 — cuisine) | [6] |
-| `sensor.etat_wifi_maison` | TPL | `templates/P4_groupe_presence/02_logique_wifi_cellular.yaml` | [7] |
+| `sensor.etat_wifi_maison` | TPL | `templates/P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml` | [7] |
 | `device_tracker.poco` | NAT | Mobile App (Companion) — Eric | [7] |
 | `person.eric` | NAT | HA Personnes | [7] |
 | `device_tracker.mamour` | NAT | Mobile App (Companion) — Mamour | [7] |

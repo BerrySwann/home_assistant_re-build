@@ -92,7 +92,7 @@
 ---
 
 <details>
-<summary><b>L1C1 — MÉTÉO</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~33 entités produites (+16 natives)</summary>
+<summary><b>L1C1 — MÉTÉO</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~31 entités produites (+16 natives)</summary>
 <blockquote>
 
 <details>
@@ -222,14 +222,6 @@
 </details>
 
 <details>
-<summary><code>M_04_tendances_th_ext_card.yaml</code> — 2 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></summary>
-<blockquote><ul>
-<li><code>sensor.th_balcon_nord_humidity_trend</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
-<li><code>sensor.th_balcon_nord_temperature_trend</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
-</ul></blockquote>
-</details>
-
-<details>
 <summary><code>M_05_cycle_solaire.yaml</code> — 3 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.duree_du_jour</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
@@ -273,11 +265,12 @@
 (<code>camera.mf_alerte_today/_tomorrow</code> — n'existent pas, <code>camera:</code> désactivé ;
 <code>sensor.eclairs_*</code> au pluriel — le vrai nom est <code>sensor.eclair_*</code> singulier ;
 <code>sensor.vence_wind_speed</code> — inexistant, vrai nom <code>vence_wind_speed_kmh</code> ;
-<code>sensor.th_balcon_nord_temperature</code> listé à tort comme produit par M_04 — c'est une
-source native SONOFF, M_04 produit les <code>*_trend</code> ; <code>sensor.direction_du_vent_vence</code>,
-<code>sensor.vitesse_du_vent_vence</code> — noms obsolètes sans correspondance réelle, retirés).
+<code>sensor.direction_du_vent_vence</code>, <code>sensor.vitesse_du_vent_vence</code> — noms
+obsolètes sans correspondance réelle, retirés).
 Fichiers <code>M_03_meteo_sensors_blitzortung.yaml</code>, <code>M_03_meteo_UM_blitzortung.yaml</code>
 et <code>carte_meteo_france.yaml</code> étaient absents de "Fichiers sources" — ajoutés.
+<code>M_04_tendances_th_ext_card.yaml</code> était classé à tort ici — son entête déclare
+lui-même <code>AVAL : L1C2 Températures</code>, pas L1C1. Déplacé vers la section L1C2.
 Vérifié directement dans le corps de chaque fichier yaml, en cohérence avec
 DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </blockquote>
@@ -302,7 +295,7 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 ---
 
 <details>
-<summary><b>L1C2 — TEMPÉRATURES</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~41 entités</summary>
+<summary><b>L1C2 — TEMPÉRATURES</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~42 entités (corrigé 2026-07-19)</summary>
 <blockquote>
 
 <details>
@@ -320,8 +313,8 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <details>
 <summary><code>M_04_tendances_th_ext_card.yaml</code> — 2 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_humidity</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
-<li><code>sensor.th_balcon_nord_temperature</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_humidity_trend</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_temperature_trend</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -363,9 +356,11 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary>💬 Pop-up <code>#exterieur</code> — 2 entité(s)</summary>
+<summary>💬 Pop-up <code>#exterieur</code> — 4 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_temperature</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_temperature</code> — <i>Natif HA (SONOFF Z2M)</i></li>
+<li><code>sensor.th_balcon_nord_humidity</code> — <i>Natif HA (SONOFF Z2M)</i></li>
+<li><code>sensor.th_balcon_nord_temperature_trend</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
 <li><code>weather.vence</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
@@ -415,14 +410,14 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <details>
 <summary>💬 Pop-up <code>#tcourbe</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_temperature</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_temperature</code> — <i>Natif HA (SONOFF Z2M — historique graphe)</i></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#hcourbe</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_humidity</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_humidity</code> — <i>Natif HA (SONOFF Z2M — historique graphe)</i></li>
 </ul></blockquote>
 </details>
 
@@ -465,9 +460,8 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> — 7 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_ui_dashboard.yaml</code> — 6 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>climate.radiateur_cuisine</code></li>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.chambre_power_status</code></li>
 <li><code>sensor.cuisine_power_status</code></li>
@@ -487,23 +481,18 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <details>
 <summary><code>M_04_tendances_th_ext_card.yaml</code> — 2 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_humidity</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
-<li><code>sensor.th_balcon_nord_temperature</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_humidity_trend</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_temperature_trend</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>P1_UM_AMHQ.yaml</code> — 1 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml">voir fichier</a></summary>
+<summary><i>Entités natives HA / intégrations externes (23)</i></summary>
 <blockquote><ul>
-<li><code>switch.radiateur_elec_cuisine</code></li>
-</ul></blockquote>
-</details>
-
-<details>
-<summary><i>Entités natives HA / intégrations externes (21)</i></summary>
-<blockquote><ul>
-<li><code>climate.clim_du_bureau</code></li>
+<li><code>climate.radiateur_cuisine</code></li>
 <li><code>sensor.th_balcon_nord_battery</code></li>
+<li><code>sensor.th_balcon_nord_humidity</code></li>
+<li><code>sensor.th_balcon_nord_temperature</code></li>
 <li><code>sensor.th_bureau_battery</code></li>
 <li><code>sensor.th_bureau_humidity</code></li>
 <li><code>sensor.th_bureau_temperature</code></li>
@@ -526,8 +515,20 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </ul></blockquote>
 </details>
 
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : <code>M_04_tendances_th_ext_card.yaml</code> listait à tort
+<code>sensor.th_balcon_nord_temperature</code> / <code>_humidity</code> (valeurs natives brutes)
+comme ses propres entités produites — en réalité ce fichier ne produit que les 2 sensors
+<code>*_trend</code>, vérifié dans son corps. Les pop-up <code>#tcourbe</code>/<code>#hcourbe</code>
+(historique/graphe) reclassés en Natif HA (un graphe historique n'a pas besoin d'un TPL).
+<code>P1_ui_dashboard.yaml</code> listait à tort <code>climate.radiateur_cuisine</code> comme
+produit par ce fichier — c'est une entité native Meross consommée en source, pas produite
+(déplacée vers natives). Bloc <code>P1_UM_AMHQ.yaml — switch.radiateur_elec_cuisine</code>
+retiré entièrement — ce fichier utility_meter ne produit que des <code>sensor.*_um</code>
+(24 compteurs kWh), aucun <code>switch.*</code>, vérifié dans son corps. Entrée native
+<code>climate.clim_du_bureau</code> retirée (nom inexistant, probable coquille de
+<code>climate.clim_bureau_rm4_mini</code> déjà listé ailleurs).
 </blockquote>
-</details>
 
 </blockquote>
 </details>
@@ -538,7 +539,7 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 ---
 
 <details>
-<summary><b>L1C3 — COMMANDES CLIM</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~61 entités</summary>
+<summary><b>L1C3 — COMMANDES CLIM</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~61 entités (corrigé 2026-07-19)</summary>
 <blockquote>
 
 <details>
@@ -571,9 +572,8 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> — 14 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_ui_dashboard.yaml</code> — 13 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>climate.radiateur_cuisine</code></li>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.chambre_power_status</code></li>
 <li><code>sensor.clim_bureau_etat</code></li>
@@ -593,7 +593,7 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <details>
 <summary><i>Entités natives HA / intégrations externes (1)</i></summary>
 <blockquote><ul>
-<li><code>climate.soufflant_salle_de_bain</code></li>
+<li><code>climate.radiateur_cuisine</code></li>
 </ul></blockquote>
 </details>
 
@@ -652,9 +652,8 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> — 12 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_ui_dashboard.yaml</code> — 11 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>climate.radiateur_cuisine</code></li>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.bureau_power_status_affichage</code></li>
 <li><code>sensor.chambre_power_status</code></li>
@@ -670,20 +669,14 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><code>P1_UM_AMHQ.yaml</code> — 5 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml">voir fichier</a></summary>
+<summary><i>Entités natives HA / intégrations externes (34)</i></summary>
 <blockquote><ul>
+<li><code>climate.radiateur_cuisine</code></li>
 <li><code>remote.clim_bureau</code></li>
 <li><code>remote.clim_chambre</code></li>
 <li><code>remote.clim_salon</code></li>
 <li><code>remote.soufflant_sdb</code></li>
 <li><code>switch.radiateur_elec_cuisine</code></li>
-</ul></blockquote>
-</details>
-
-<details>
-<summary><i>Entités natives HA / intégrations externes (29)</i></summary>
-<blockquote><ul>
-<li><code>climate.soufflant_salle_de_bain</code></li>
 <li><code>input_boolean.clim_bureau_arret_securise_en_cours</code></li>
 <li><code>input_boolean.clim_chambre_arret_securise_en_cours</code></li>
 <li><code>input_boolean.clim_salon_arret_securise_en_cours</code></li>
@@ -715,8 +708,16 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </ul></blockquote>
 </details>
 
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : <code>climate.soufflant_salle_de_bain</code> retiré partout —
+entité inexistante (le soufflant SDB n'a pas d'entité climate, vérifié : aucune occurrence
+dans tout <code>config_system_YAML/</code>). <code>climate.radiateur_cuisine</code> déplacé de
+"produit par P1_ui_dashboard.yaml" vers natif (c'est une entité Meross consommée, pas produite).
+Bloc <code>P1_UM_AMHQ.yaml — remote.clim_*/switch.radiateur_elec_cuisine</code> retiré
+entièrement — un fichier utility_meter ne produit que des <code>sensor.*_um</code> (vérifié :
+24 entrées kWh dans son corps, aucun <code>remote.*</code>/<code>switch.*</code>) ; ces 5 entités
+déplacées vers natives.
 </blockquote>
-</details>
 
 </blockquote>
 </details>
@@ -773,13 +774,6 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <details>
 <summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
-
-<details>
-<summary><code>P0_kWh_genelec_appart.yaml</code> — 1 entité(s) — <i>voir fichier (fichier réorganisé — lien retiré 2026-07-18)</i></summary>
-<blockquote><ul>
-<li><code>sensor.genelec_appart_totale_kwh</code></li>
-</ul></blockquote>
-</details>
 
 <details>
 <summary><code>P0_MINI_MAXI_AVG_Genelec_appart.yaml</code> — 2 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml">voir fichier</a></summary>
@@ -875,14 +869,7 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><code>01_kWh_UM_AMHQ.yaml</code> — 1 entité(s) — <i>voir fichier (fichier réorganisé — lien retiré 2026-07-18)</i></summary>
-<blockquote><ul>
-<li><code>sensor.genelec_appart_quotidien_kwh_um</code></li>
-</ul></blockquote>
-</details>
-
-<details>
-<summary><code>02_UM_AMHQ.yaml</code> — 3 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ.yaml">voir fichier</a></summary>
+<summary><code>01_UM_AMHQ.yaml</code> — 3 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_hebdomadaire_um</code></li>
 <li><code>sensor.genelec_appart_mensuel_um</code></li>
@@ -891,7 +878,7 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><code>03_UM_genelec_appart_HPHC_AMHQ.yaml</code> — 6 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P0_Energie_total/Genelec_appart/02_UM_genelec_appart_HPHC_AMHQ.yaml">voir fichier</a></summary>
+<summary><code>02_UM_genelec_appart_HPHC_AMHQ.yaml</code> — 6 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P0_Energie_total/Genelec_appart/02_UM_genelec_appart_HPHC_AMHQ.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_hphc_hebdomadaire_um_hc</code></li>
 <li><code>sensor.genelec_appart_hphc_hebdomadaire_um_hp</code></li>
@@ -1075,7 +1062,7 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><i>Entités natives HA / intégrations externes (58)</i></summary>
+<summary><i>Entités natives HA / intégrations externes (61)</i></summary>
 <blockquote><ul>
 <li><code>sensor.all_standby_power</code></li>
 <li><code>sensor.clim_bureau_nous_power</code></li>
@@ -1084,7 +1071,9 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <li><code>sensor.four_et_plaque_de_cuisson_current</code></li>
 <li><code>sensor.four_et_plaque_de_cuisson_power</code></li>
 <li><code>sensor.general_electric_appart_power</code></li>
-<li><code>sensor.hue_ambiance_lamp_salon_</code></li>
+<li><code>sensor.hue_ambiance_lamp_salon_1_power</code></li>
+<li><code>sensor.hue_ambiance_lamp_salon_2_power</code></li>
+<li><code>sensor.hue_ambiance_lamp_salon_3_power</code></li>
 <li><code>sensor.hue_color_candle_chambre_eric_power</code></li>
 <li><code>sensor.hue_color_candle_chambre_gege_power</code></li>
 <li><code>sensor.hue_color_candle_salon_1_power</code></li>
@@ -1093,7 +1082,8 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <li><code>sensor.hue_play_3_pc_bureau_power</code></li>
 <li><code>sensor.hue_white_lamp_bureau_1_power</code></li>
 <li><code>sensor.hue_white_lamp_bureau_2_power</code></li>
-<li><code>sensor.hue_white_lamp_chambre_</code></li>
+<li><code>sensor.hue_white_lamp_chambre_1_power</code></li>
+<li><code>sensor.hue_white_lamp_chambre_2_power</code></li>
 <li><code>sensor.hue_white_lamp_couloir_power</code></li>
 <li><code>sensor.hue_white_lamp_cuisine_power</code></li>
 <li><code>sensor.hue_white_lamp_entree_power</code></li>
@@ -1220,9 +1210,8 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> — 7 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_ui_dashboard.yaml</code> — 6 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>climate.radiateur_cuisine</code></li>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.chambre_power_status</code></li>
 <li><code>sensor.cuisine_power_status</code></li>
@@ -1253,7 +1242,7 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <details>
 <summary><i>Entités natives HA / intégrations externes (1)</i></summary>
 <blockquote><ul>
-<li><code>climate.soufflant_salle_de_bain</code></li>
+<li><code>climate.radiateur_cuisine</code></li>
 </ul></blockquote>
 </details>
 
@@ -1350,9 +1339,8 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> — 12 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_ui_dashboard.yaml</code> — 11 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>climate.radiateur_cuisine</code></li>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.bureau_power_status_affichage</code></li>
 <li><code>sensor.chambre_power_status</code></li>
@@ -1364,13 +1352,6 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <li><code>sensor.sdb_power_status_affichage</code></li>
 <li><code>sensor.sdb_seche_serviette_power_status</code></li>
 <li><code>sensor.sdb_soufflant_power_status</code></li>
-</ul></blockquote>
-</details>
-
-<details>
-<summary><code>M_04_tendances_th_ext_card.yaml</code> — 1 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></summary>
-<blockquote><ul>
-<li><code>sensor.th_balcon_nord_temperature</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -1405,9 +1386,10 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><i>Entités natives HA / intégrations externes (32)</i></summary>
+<summary><i>Entités natives HA / intégrations externes (33)</i></summary>
 <blockquote><ul>
-<li><code>climate.soufflant_salle_de_bain</code></li>
+<li><code>climate.radiateur_cuisine</code></li>
+<li><code>sensor.th_balcon_nord_temperature</code></li>
 <li><code>sensor.clim_bureau_nous_current</code></li>
 <li><code>sensor.clim_bureau_nous_energy</code></li>
 <li><code>sensor.clim_bureau_nous_power</code></li>
@@ -1526,16 +1508,6 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <blockquote>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> — 4 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
-<blockquote><ul>
-<li><code>light.bureau</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></li>
-<li><code>light.chambre</code></li>
-<li><code>light.cuisine</code></li>
-<li><code>light.salon</code></li>
-</ul></blockquote>
-</details>
-
-<details>
 <summary><code>P3_AVG_AMHQ_2_ZONE.yaml</code> — 5 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.eclairage_appart_3_avg_watts_mensuel</code></li>
@@ -1617,22 +1589,29 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><code>P3_UM_AMHQ_1_UNITE.yaml</code> — 2 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml">voir fichier</a></summary>
+<summary><i>Entités natives HA / intégrations externes (10)</i></summary>
 <blockquote><ul>
+<li><code>light.bureau</code></li>
+<li><code>light.chambre</code></li>
+<li><code>light.couloir</code></li>
+<li><code>light.cuisine</code></li>
+<li><code>light.entree</code></li>
+<li><code>light.lit</code></li>
+<li><code>light.salon</code></li>
+<li><code>light.table</code></li>
 <li><code>light.hue_white_lamp_salle_de_bain</code></li>
 <li><code>switch.relais_lumiere_sdb_sonoff</code></li>
 </ul></blockquote>
 </details>
 
-<details>
-<summary><i>Entités natives HA / intégrations externes (4)</i></summary>
-<blockquote><ul>
-<li><code>light.couloir</code></li>
-<li><code>light.entree</code></li>
-<li><code>light.lit</code></li>
-<li><code>light.table</code></li>
-</ul></blockquote>
-</details>
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : <code>light.bureau/chambre/cuisine/salon</code> étaient
+attribués à tort à <code>P1_ui_dashboard.yaml</code> (fichier Pôle 1 clim — vérifié dans
+son corps, aucune entité <code>light.*</code> nulle part dedans). <code>light.hue_white_lamp_salle_de_bain</code>
+et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
+<code>P3_UM_AMHQ_1_UNITE.yaml</code> (fichier utility_meter — vérifié, ne produit que des
+<code>sensor.*_um</code>, jamais de <code>light.*</code>/<code>switch.*</code>). Les 6 regroupés en natives.
+</blockquote>
 
 </blockquote>
 </details>
@@ -1669,15 +1648,6 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <blockquote>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> — 3 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
-<blockquote><ul>
-<li><code>light.chambre</code></li>
-<li><code>light.cuisine</code></li>
-<li><code>light.salon</code></li>
-</ul></blockquote>
-</details>
-
-<details>
 <summary><code>etats_status.yaml</code> — 7 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P3_eclairage/ui_dashboard/etats_status.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.bureau_etat</code></li>
@@ -1698,22 +1668,26 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><code>P3_UM_AMHQ_1_UNITE.yaml</code> — 3 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml">voir fichier</a></summary>
+<summary><i>Entités natives HA / intégrations externes (9)</i></summary>
 <blockquote><ul>
-<li><code>light.hue_color_candle_chambre_eric</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml">voir fichier</a></li>
-<li><code>light.hue_color_candle_chambre_gege</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml">voir fichier</a></li>
-<li><code>light.hue_white_lamp_salle_de_bain</code></li>
-</ul></blockquote>
-</details>
-
-<details>
-<summary><i>Entités natives HA / intégrations externes (3)</i></summary>
-<blockquote><ul>
+<li><code>light.chambre</code></li>
 <li><code>light.couloir</code></li>
+<li><code>light.cuisine</code></li>
 <li><code>light.entree</code></li>
+<li><code>light.hue_color_candle_chambre_eric</code></li>
+<li><code>light.hue_color_candle_chambre_gege</code></li>
+<li><code>light.hue_white_lamp_salle_de_bain</code></li>
+<li><code>light.salon</code></li>
 <li><code>light.table</code></li>
 </ul></blockquote>
 </details>
+
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : tous les <code>light.*</code> ci-dessus étaient attribués
+à tort à <code>P1_ui_dashboard.yaml</code> (fichier Pôle 1 clim) ou <code>P3_UM_AMHQ_1_UNITE.yaml</code>
+(fichier utility_meter) — vérifié dans les deux corps, aucun des deux ne produit d'entité
+<code>light.*</code>. Ce sont toutes des entités natives Hue Bridge, regroupées en natives.
+</blockquote>
 
 </blockquote>
 </details>
@@ -1722,14 +1696,6 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <details>
 <summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
-
-<details>
-<summary><code>P1_ui_dashboard.yaml</code> — 2 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
-<blockquote><ul>
-<li><code>light.cuisine</code></li>
-<li><code>light.salon</code></li>
-</ul></blockquote>
-</details>
 
 <details>
 <summary><code>etats_status.yaml</code> — 5 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P3_eclairage/ui_dashboard/etats_status.yaml">voir fichier</a></summary>
@@ -1750,10 +1716,12 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><i>Entités natives HA / intégrations externes (5)</i></summary>
+<summary><i>Entités natives HA / intégrations externes (7)</i></summary>
 <blockquote><ul>
 <li><code>light.couloir</code></li>
+<li><code>light.cuisine</code></li>
 <li><code>light.entree</code></li>
+<li><code>light.salon</code></li>
 <li><code>light.table</code></li>
 <li><code>sensor.th_cuisine_temperature</code></li>
 <li><code>sensor.th_salon_temperature</code></li>
@@ -1767,14 +1735,6 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <details>
 <summary><b>📂 Fichiers sources</b></summary>
 <blockquote>
-
-<details>
-<summary><code>P1_ui_dashboard.yaml</code> — 2 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
-<blockquote><ul>
-<li><code>light.bureau</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></li>
-<li><code>light.chambre</code></li>
-</ul></blockquote>
-</details>
 
 <details>
 <summary><code>etats_status.yaml</code> — 6 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P3_eclairage/ui_dashboard/etats_status.yaml">voir fichier</a></summary>
@@ -1803,23 +1763,18 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><code>P3_UM_AMHQ_1_UNITE.yaml</code> — 9 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml">voir fichier</a></summary>
+<summary><i>Entités natives HA / intégrations externes (19)</i></summary>
 <blockquote><ul>
-<li><code>light.hue_color_candle_chambre_eric</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml">voir fichier</a></li>
-<li><code>light.hue_color_candle_chambre_gege</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml">voir fichier</a></li>
+<li><code>light.bureau</code></li>
+<li><code>light.chambre</code></li>
+<li><code>light.hue_color_candle_chambre_eric</code></li>
+<li><code>light.hue_color_candle_chambre_gege</code></li>
 <li><code>light.hue_play_1_pc_bureau</code></li>
 <li><code>light.hue_play_2_pc_bureau</code></li>
 <li><code>light.hue_play_3_pc_bureau</code></li>
 <li><code>light.hue_white_lamp_bureau_1</code></li>
 <li><code>light.hue_white_lamp_bureau_2</code></li>
 <li><code>light.hue_white_lamp_salle_de_bain</code></li>
-<li><code>switch.relais_lumiere_sdb_sonoff</code></li>
-</ul></blockquote>
-</details>
-
-<details>
-<summary><i>Entités natives HA / intégrations externes (8)</i></summary>
-<blockquote><ul>
 <li><code>light.lit</code></li>
 <li><code>light.moniteur_pc</code></li>
 <li><code>light.zone_eric</code></li>
@@ -1828,8 +1783,16 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <li><code>sensor.th_chambre_temperature</code></li>
 <li><code>sensor.th_salle_de_bain_temperature</code></li>
 <li><code>switch.ecran_p_c_3_play_hue</code></li>
+<li><code>switch.relais_lumiere_sdb_sonoff</code></li>
 </ul></blockquote>
 </details>
+
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : <code>light.bureau/chambre</code> (attribués à tort à
+<code>P1_ui_dashboard.yaml</code>) et les 9 <code>light.*</code>/<code>switch.*</code>
+(attribués à tort à <code>P3_UM_AMHQ_1_UNITE.yaml</code>, fichier utility_meter qui ne
+produit que des <code>sensor.*_um</code>) déplacés vers natives.
+</blockquote>
 
 </blockquote>
 </details>
@@ -1857,15 +1820,15 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <details>
 <summary>💬 Pop-up <code>#tete_de_lit</code> — 2 entité(s)</summary>
 <blockquote><ul>
-<li><code>light.hue_color_candle_chambre_eric</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml">voir fichier</a></li>
-<li><code>light.hue_color_candle_chambre_gege</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml">voir fichier</a></li>
+<li><code>light.hue_color_candle_chambre_eric</code> — <i>Natif HA (Hue)</i></li>
+<li><code>light.hue_color_candle_chambre_gege</code> — <i>Natif HA (Hue)</i></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#bureau</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>light.bureau</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></li>
+<li><code>light.bureau</code> — <i>Natif HA (Hue)</i></li>
 </ul></blockquote>
 </details>
 
@@ -1901,22 +1864,22 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <blockquote>
 
 <details>
-<summary><code>P2_UM_AMHQ_prises.yaml</code> — 3 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml">voir fichier</a></summary>
+<summary><i>Entités natives HA / intégrations externes (6)</i></summary>
 <blockquote><ul>
+<li><code>light.hue_smart_eco_pc_bureau</code></li>
+<li><code>light.hue_smart_eco_salon</code></li>
+<li><code>light.hue_smart_eco_tv_chambre</code></li>
 <li><code>switch.prise_horloge_ikea</code></li>
 <li><code>switch.prise_tete_de_lit_chambre</code></li>
 <li><code>switch.prise_tv_salon_ikea</code></li>
 </ul></blockquote>
 </details>
 
-<details>
-<summary><i>Entités natives HA / intégrations externes (3)</i></summary>
-<blockquote><ul>
-<li><code>light.hue_smart_eco_pc_bureau</code></li>
-<li><code>light.hue_smart_eco_salon</code></li>
-<li><code>light.hue_smart_eco_tv_chambre</code></li>
-</ul></blockquote>
-</details>
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : les 3 <code>switch.*</code> étaient attribués à tort à
+<code>P2_UM_AMHQ_prises.yaml</code> (fichier utility_meter — ne produit que des
+<code>sensor.*_um</code>, vérifié). Ce sont des switches natifs Z2M IKEA, déplacés vers natives.
+</blockquote>
 
 </blockquote>
 </details>
@@ -1937,22 +1900,22 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <blockquote>
 
 <details>
-<summary><code>P2_UM_AMHQ_prises.yaml</code> — 3 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml">voir fichier</a></summary>
+<summary><i>Entités natives HA / intégrations externes (6)</i></summary>
 <blockquote><ul>
+<li><code>light.hue_smart_eco_pc_bureau</code></li>
+<li><code>light.hue_smart_eco_salon</code></li>
+<li><code>light.hue_smart_eco_tv_chambre</code></li>
 <li><code>switch.prise_horloge_ikea</code></li>
 <li><code>switch.prise_tete_de_lit_chambre</code></li>
 <li><code>switch.prise_tv_salon_ikea</code></li>
 </ul></blockquote>
 </details>
 
-<details>
-<summary><i>Entités natives HA / intégrations externes (3)</i></summary>
-<blockquote><ul>
-<li><code>light.hue_smart_eco_pc_bureau</code></li>
-<li><code>light.hue_smart_eco_salon</code></li>
-<li><code>light.hue_smart_eco_tv_chambre</code></li>
-</ul></blockquote>
-</details>
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : les 3 <code>switch.*</code> étaient attribués à tort à
+<code>P2_UM_AMHQ_prises.yaml</code> (fichier utility_meter — ne produit que des
+<code>sensor.*_um</code>, vérifié). Ce sont des switches natifs Z2M IKEA, déplacés vers natives.
+</blockquote>
 
 </blockquote>
 </details>
@@ -2018,35 +1981,38 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <blockquote>
 
 <details>
-<summary><code>S_01_STORES.yaml</code> — 4 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/Stores/S_01_STORES.yaml">voir fichier</a></summary>
+<summary><code>S_01_STORES.yaml</code> — 2 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/Stores/S_01_STORES.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>cover.store_bureau</code></li>
-<li><code>cover.store_salon</code></li>
 <li><code>sensor.store_bureau_status</code></li>
 <li><code>sensor.store_salon_status</code></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>M_04_tendances_th_ext_card.yaml</code> — 1 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></summary>
-<blockquote><ul>
-<li><code>sensor.th_balcon_nord_temperature</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
-</ul></blockquote>
-</details>
-
-<details>
-<summary><i>Entités natives HA / intégrations externes (8)</i></summary>
+<summary><i>Entités natives HA / intégrations externes (11)</i></summary>
 <blockquote><ul>
 <li><code>binary_sensor.contact_fenetre_bureau_sonoff_contact</code></li>
 <li><code>binary_sensor.contact_fenetre_salon_sonoff_contact</code></li>
+<li><code>cover.store_bureau</code></li>
+<li><code>cover.store_salon</code></li>
 <li><code>light.store_bureau_dnd</code></li>
 <li><code>light.store_salon_dnd</code></li>
 <li><code>sensor.contact_fenetre_bureau_sonoff_battery</code></li>
 <li><code>sensor.contact_fenetre_salon_sonoff_battery</code></li>
 <li><code>sensor.store_bureau_signal_strength</code></li>
 <li><code>sensor.store_salon_signal_strength</code></li>
+<li><code>sensor.th_balcon_nord_temperature</code></li>
 </ul></blockquote>
 </details>
+
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : <code>cover.store_bureau/salon</code> sont des sources
+consommées par <code>S_01_STORES.yaml</code> (attributs <code>current_position</code>), pas
+des entités produites — vérifié dans le corps du fichier (il ne produit que les 2
+<code>*_status</code>). <code>sensor.th_balcon_nord_temperature</code> était attribué à
+<code>M_04_tendances_th_ext_card.yaml</code> qui ne produit que le sensor <code>*_trend</code> —
+la valeur brute est native. Tout déplacé vers natives.
+</blockquote>
 
 </blockquote>
 </details>
@@ -2076,21 +2042,22 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <blockquote>
 
 <details>
-<summary><code>MP_02_sonde_température_mini-pc.yaml</code> — 1 entité(s) — <i>voir fichier (fichier réorganisé — lien retiré 2026-07-18)</i></summary>
-<blockquote><ul>
-<li><code>sensor.temperature_cpu_package</code></li>
-</ul></blockquote>
-</details>
-
-<details>
-<summary><i>Entités natives HA / intégrations externes (4)</i></summary>
+<summary><i>Entités natives HA / intégrations externes (5)</i></summary>
 <blockquote><ul>
 <li><code>binary_sensor.pve_status</code></li>
 <li><code>sensor.pve_memory_usage_percentage</code></li>
 <li><code>sensor.pve_utilisation_du_processeur</code></li>
 <li><code>sensor.storage_local_storage_usage_percentage</code></li>
+<li><code>sensor.temperature_cpu_package</code></li>
 </ul></blockquote>
 </details>
+
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : <code>sensor.temperature_cpu_package</code> n'existe dans
+aucun fichier <code>config_system_YAML/</code> (vérifié) — publié par le script
+<code>MP_01_monitor_temp.sh</code> tournant sur le Mini-PC (voir TODO.txt), remonté dans HA
+via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
+</blockquote>
 
 </blockquote>
 </details>
@@ -2130,19 +2097,13 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <blockquote>
 
 <details>
-<summary><code>MP_02_sonde_température_mini-pc.yaml</code> — 1 entité(s) — <i>voir fichier (fichier réorganisé — lien retiré 2026-07-18)</i></summary>
-<blockquote><ul>
-<li><code>sensor.temperature_cpu_package</code></li>
-</ul></blockquote>
-</details>
-
-<details>
-<summary><i>Entités natives HA / intégrations externes (4)</i></summary>
+<summary><i>Entités natives HA / intégrations externes (5)</i></summary>
 <blockquote><ul>
 <li><code>sensor.prise_mini_pc_ikea_power</code></li>
 <li><code>sensor.system_monitor_utilisation_de_la_memoire</code></li>
 <li><code>sensor.system_monitor_utilisation_du_disque</code></li>
 <li><code>sensor.system_monitor_utilisation_du_processeur</code></li>
+<li><code>sensor.temperature_cpu_package</code></li>
 </ul></blockquote>
 </details>
 
@@ -2169,7 +2130,7 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <details>
 <summary>💬 Pop-up <code>#temp</code> — 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.temperature_cpu_package</code></li>
+<li><code>sensor.temperature_cpu_package</code> — <i>Natif HA (MQTT Discovery — MP_01_monitor_temp.sh)</i></li>
 </ul></blockquote>
 </details>
 
@@ -2206,18 +2167,6 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <blockquote>
 
 <details>
-<summary><code>MP_02_sonde_température_mini-pc.yaml</code> — 6 entité(s) — <i>voir fichier (fichier réorganisé — lien retiré 2026-07-18)</i></summary>
-<blockquote><ul>
-<li><code>sensor.temperature_carte_mere</code></li>
-<li><code>sensor.temperature_core_0</code></li>
-<li><code>sensor.temperature_core_1</code></li>
-<li><code>sensor.temperature_core_2</code></li>
-<li><code>sensor.temperature_core_3</code></li>
-<li><code>sensor.temperature_cpu_package</code></li>
-</ul></blockquote>
-</details>
-
-<details>
 <summary><code>P2_AVG_AMHQ_mini_pc.yaml</code> — 2 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.mini_pc_avg_watts_mensuel</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
@@ -2234,7 +2183,7 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary><i>Entités natives HA / intégrations externes (15)</i></summary>
+<summary><i>Entités natives HA / intégrations externes (21)</i></summary>
 <blockquote><ul>
 <li><code>sensor.cpu_speed</code></li>
 <li><code>sensor.prise_mini_pc_ikea_current</code></li>
@@ -2251,8 +2200,20 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <li><code>sensor.system_monitor_utilisation_de_la_memoire</code></li>
 <li><code>sensor.system_monitor_utilisation_du_disque</code></li>
 <li><code>sensor.system_monitor_utilisation_du_processeur</code></li>
+<li><code>sensor.temperature_carte_mere</code></li>
+<li><code>sensor.temperature_core_0</code></li>
+<li><code>sensor.temperature_core_1</code></li>
+<li><code>sensor.temperature_core_2</code></li>
+<li><code>sensor.temperature_core_3</code></li>
+<li><code>sensor.temperature_cpu_package</code></li>
 </ul></blockquote>
 </details>
+
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : les 6 <code>sensor.temperature_*</code> (carte_mere, core_0-3,
+cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> — publiés par
+<code>MP_01_monitor_temp.sh</code> sur le Mini-PC via MQTT Discovery. Reclassés natifs.
+</blockquote>
 
 </blockquote>
 </details>
@@ -2673,11 +2634,17 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <details>
 <summary>💬 Pop-up <code>#scov</code> — 3 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.qualite_air_bureau_ikea_pm25</code> — <i>Natif HA</i></li>
-<li><code>sensor.tcov_bureau_ppb</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.qualite_air_salon_ikea_voc_index</code> — <i>Natif HA</i></li>
+<li><code>sensor.tcov_salon_ppb</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 <li><code>sensor.tcov_salon_moy_24h</code> — <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : ce pop-up "Salon COV" contenait à tort une entité PM2.5
+Bureau et un tCOV Bureau — incohérent avec son propre nom et la logique du dashboard
+(un pop-up COV d'une pièce ne montre pas le PM2.5 d'une autre pièce). Recomposé avec les
+3 entités COV/tCOV réelles du Salon (native + TPL + SEN), vérifiées dans les fichiers sources.
+</blockquote>
 
 <details>
 <summary>💬 Pop-up <code>#bpm25</code> — 1 entité(s)</summary>
@@ -2689,11 +2656,16 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <details>
 <summary>💬 Pop-up <code>#bcov</code> — 3 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.qualite_air_chambre_ikea_pm25</code> — <i>Natif HA</i></li>
+<li><code>sensor.qualite_air_bureau_ikea_voc_index</code> — <i>Natif HA</i></li>
+<li><code>sensor.tcov_bureau_ppb</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 <li><code>sensor.tcov_bureau_moy_24h</code> — <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_chambre_ppb</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : ce pop-up "Bureau COV" contenait à tort une entité PM2.5
+Chambre et un tCOV Chambre — même erreur de croisement qu'au pop-up #scov. Recomposé avec
+les 3 entités COV/tCOV réelles du Bureau.
+</blockquote>
 
 <details>
 <summary>💬 Pop-up <code>#cpm25</code> — 1 entité(s)</summary>
@@ -2703,11 +2675,18 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </details>
 
 <details>
-<summary>💬 Pop-up <code>#ccov</code> — 1 entité(s)</summary>
+<summary>💬 Pop-up <code>#ccov</code> — 3 entité(s)</summary>
 <blockquote><ul>
+<li><code>sensor.qualite_air_chambre_ikea_voc_index</code> — <i>Natif HA</i></li>
+<li><code>sensor.tcov_chambre_ppb</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 <li><code>sensor.tcov_chambre_moy_24h</code> — <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : ce pop-up "Chambre COV" n'avait qu'1 entité alors que les
+pop-up COV des autres pièces en ont 3 (native + TPL + SEN) — complété par cohérence avec
+#scov/#bcov, en s'appuyant sur les mêmes 3 fichiers sources déjà vérifiés.
+</blockquote>
 
 
 <details>
@@ -2859,7 +2838,7 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 
 ---
 
-*Dernière mise à jour : 2026-07-16*
+*Dernière mise à jour : 2026-07-19 (audit entites L1C1-L6C3, voir historique en tete de fichier)*
 ---
 
 ## ⚙️ 03 — AUTOMATIONS (48 automations)
