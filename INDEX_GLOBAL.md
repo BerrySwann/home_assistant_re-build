@@ -2054,8 +2054,9 @@ la valeur brute est native. Tout déplacé vers natives.
 
 <blockquote>
 ⚠️ <b>Corrigé le 2026-07-19</b> : <code>sensor.temperature_cpu_package</code> n'existe dans
-aucun fichier <code>config_system_YAML/</code> (vérifié) — publié par le script
-<code>MP_01_monitor_temp.sh</code> tournant sur le Mini-PC (voir TODO.txt), remonté dans HA
+aucun fichier <code>config_system_YAML/</code> (vérifié) — publié par le script externe
+<code>MP_01_monitor_temp.sh</code> tournant sur le <b>Raspberry Pi</b> (confirmé par Eric
+2026-07-19 : "ça remonte la T° du CPU et d'autres choses"), remonté dans HA
 via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 </blockquote>
 
@@ -2212,7 +2213,8 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <blockquote>
 ⚠️ <b>Corrigé le 2026-07-19</b> : les 6 <code>sensor.temperature_*</code> (carte_mere, core_0-3,
 cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> — publiés par
-<code>MP_01_monitor_temp.sh</code> sur le Mini-PC via MQTT Discovery. Reclassés natifs.
+<code>MP_01_monitor_temp.sh</code> tournant sur le <b>Raspberry Pi</b> (confirmé par Eric
+2026-07-19) via MQTT Discovery. Reclassés natifs.
 </blockquote>
 
 </blockquote>
@@ -2852,11 +2854,11 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) — complété par c
 <blockquote>
 <b>🔧 Backup Git</b> (7 automations)<br>
 <b>🌤️ Météo</b> (5 automations)<br>
-<b>🌡️ P1 — Clim & Chauffage</b> (11 automations)<br>
+<b>🌡️ P1 — Clim & Chauffage</b> (10 automations)<br>
 <b>🍳 P1 — Cuisine</b> (2 automations)<br>
 <b>🚿 P1 — Salle de Bain</b> (3 automations)<br>
 <b>🔌 P2 — Prises</b> (3 automations)<br>
-<b>💡 P3 — Éclairage</b> (8 automations)<br>
+<b>💡 P3 — Éclairage</b> (7 automations)<br>
 <b>🏠 Stores</b> (2 automations)<br>
 <b>⚡ Énergie</b> (2 automations)<br>
 <b>🖥️ Système</b> (6 automations)<br>
@@ -2899,10 +2901,11 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) — complété par c
 </details>
 
 <details>
-<summary>⚠️ <b>[02-Backup] Git daily (03:00)</b></summary>
+<summary>✅ <b>[02-Backup] Git daily (03:00)</b></summary>
 <blockquote>
 <i>Backup natif HA + push Git quotidien à 03h00</i><br><br>
 📄 <a href="docs/03_docs_automations/docs_automations_MD/BACKUP/GIT_DAILY.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/github_backup/02_backup_git_daily_03_00.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 
 </blockquote>
@@ -3063,7 +3066,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) — complété par c
 ---
 
 <details>
-<summary><b>🌡️ P1 — Clim & Chauffage</b> &nbsp;|&nbsp; 11 automation(s) &nbsp;|&nbsp; <i>Logique de climatisation, notifications, gardien éco</i></summary>
+<summary><b>🌡️ P1 — Clim & Chauffage</b> &nbsp;|&nbsp; 10 automation(s) &nbsp;|&nbsp; <i>Logique de climatisation, notifications, gardien éco</i></summary>
 <blockquote>
 
 <details>
@@ -3074,17 +3077,28 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) — complété par c
 ⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/a_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · ⏰`time` · 🔄`state`<br>
 <br><details>
-<summary>🔌 Entités (8)</summary>
+<summary>🔌 Entités (14) <i>— corrigé 2026-07-19, triggers réels du fichier</i></summary>
 <blockquote><ul>
+<li><code>sensor.mamour_network_type</code></li>
+<li><code>sensor.eric_network_type</code></li>
 <li><code>switch.clim_salon_nous</code></li>
-<li><code>input_boolean.clim_salon_arret_securise_en_cours</code></li>
-<li><code>climate.clim_salon_rm4_mini</code></li>
 <li><code>switch.clim_bureau_nous</code></li>
-<li><code>input_boolean.clim_bureau_arret_securise_en_cours</code></li>
-<li><code>climate.clim_bureau_rm4_mini</code></li>
 <li><code>switch.clim_chambre_nous</code></li>
-<li><code>input_boolean.clim_chambre_arret_securise_en_cours</code></li>
+<li><code>binary_sensor.contact_fenetre_salon_sonoff_contact</code></li>
+<li><code>binary_sensor.contact_fenetre_cuisine_sonoff_contact</code></li>
+<li><code>binary_sensor.contact_fenetre_bureau_sonoff_contact</code></li>
+<li><code>binary_sensor.contact_fenetre_chambre_sonoff_contact</code></li>
+<li><code>sensor.groupe</code></li>
+<li><code>sensor.th_balcon_nord_temperature</code></li>
+<li><code>sensor.temperature_cible</code></li>
+<li><code>sensor.mode_ete_hiver</code></li>
+<li><code>sensor.temperature_confort_jour</code></li>
 </ul></blockquote>
+<blockquote>
+⚙️ Logique clim (climate.*, input_boolean.*_arret_securise_en_cours) déléguée au
+<a href="docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim.yaml">script p1_master_gestion_clim.yaml</a> —
+ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-dessus.
+</blockquote>
 </details>
 
 </blockquote>
@@ -3098,17 +3112,28 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) — complété par c
 ⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · ⏰`time` · 🔄`state`<br>
 <br><details>
-<summary>🔌 Entités (8)</summary>
+<summary>🔌 Entités (14) <i>— corrigé 2026-07-19, triggers réels du fichier</i></summary>
 <blockquote><ul>
+<li><code>sensor.mamour_network_type</code></li>
+<li><code>sensor.eric_network_type</code></li>
 <li><code>switch.clim_salon_nous</code></li>
-<li><code>input_boolean.clim_salon_arret_securise_en_cours</code></li>
-<li><code>climate.clim_salon_rm4_mini</code></li>
 <li><code>switch.clim_bureau_nous</code></li>
-<li><code>input_boolean.clim_bureau_arret_securise_en_cours</code></li>
-<li><code>climate.clim_bureau_rm4_mini</code></li>
 <li><code>switch.clim_chambre_nous</code></li>
-<li><code>input_boolean.clim_chambre_arret_securise_en_cours</code></li>
+<li><code>binary_sensor.contact_fenetre_salon_sonoff_contact</code></li>
+<li><code>binary_sensor.contact_fenetre_cuisine_sonoff_contact</code></li>
+<li><code>binary_sensor.contact_fenetre_bureau_sonoff_contact</code></li>
+<li><code>binary_sensor.contact_fenetre_chambre_sonoff_contact</code></li>
+<li><code>sensor.groupe</code></li>
+<li><code>sensor.th_balcon_nord_temperature</code></li>
+<li><code>sensor.temperature_cible</code></li>
+<li><code>sensor.mode_ete_hiver</code></li>
+<li><code>sensor.temperature_confort_nuit</code></li>
 </ul></blockquote>
+<blockquote>
+⚙️ Logique clim (climate.*, input_boolean.*_arret_securise_en_cours) déléguée au
+<a href="docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim.yaml">script p1_master_gestion_clim.yaml</a> —
+ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-dessus.
+</blockquote>
 </details>
 
 </blockquote>
@@ -3124,7 +3149,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) — complété par c
 <br><details>
 <summary>🔌 Entités (1)</summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_temperature</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_temperature</code> — <i>Natif HA (SONOFF/Z2M, corrigé 2026-07-19 — pas produit par M_04, qui ne produit que les *_trend)</i></li>
 </ul></blockquote>
 </details>
 
@@ -3141,7 +3166,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) — complété par c
 <br><details>
 <summary>🔌 Entités (1)</summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_temperature</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_temperature</code> — <i>Natif HA (SONOFF/Z2M, corrigé 2026-07-19 — pas produit par M_04, qui ne produit que les *_trend)</i></li>
 </ul></blockquote>
 </details>
 
@@ -3374,22 +3399,27 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) — complété par c
 <details>
 <summary>✅ <b>Eco. PRISES DINAMIQUE -> By-Présence/Groupe</b></summary>
 <blockquote>
-<i>Pilotage des 6 prises en fonction du groupe de présence (G1 à G4).</i><br><br>
+<i>Pilotage des 7 prises en fonction du groupe de présence (G1 à G4).</i><br><br>
 📄 <a href="docs/03_docs_automations/docs_automations_MD/P2_PRISES/ECO_PRISES_DYNAMIQUE.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P2_prises/eco_prises_dinamique_by_presence_groupe.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · 📊`numeric_state`<br>
 <br><details>
-<summary>🔌 Entités (8)</summary>
+<summary>🔌 Entités (8) <i>— corrigé 2026-07-19, liste réelle depuis P2_eco_prises_config.yaml</i></summary>
 <blockquote><ul>
 <li><code>sensor.groupe</code></li>
-<li><code>sensor.prise_bureau_pc_ikea_power</code></li>
-<li><code>switch.prise_tv_salon_ikea</code></li>
-<li><code>light.hue_smart_eco_salon</code></li>
 <li><code>switch.prise_horloge_ikea</code></li>
-<li><code>switch.ecran_p_c_3_play_hue</code></li>
+<li><code>light.hue_smart_eco_salon</code></li>
+<li><code>light.hue_smart_eco_tv_salon</code></li>
 <li><code>light.hue_smart_eco_pc_bureau</code></li>
+<li><code>switch.ecran_p_c_3_play_hue</code></li>
+<li><code>light.hue_smart_eco_tv_chambre</code></li>
 <li><code>switch.prise_tete_de_lit_chambre</code></li>
 </ul></blockquote>
+<blockquote>
+⚠️ Retiré : <code>sensor.prise_bureau_pc_ikea_power</code> (fictif, absent de la config) et
+<code>switch.prise_tv_salon_ikea</code> (mauvais domaine/nom — c'est <code>light.hue_smart_eco_tv_salon</code>).
+Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste précédente).
+</blockquote>
 </details>
 
 </blockquote>
@@ -3605,7 +3635,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) — complété par c
 <br><details>
 <summary>🔌 Entités (3)</summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_temperature</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_temperature</code> — <i>Natif HA (SONOFF/Z2M, corrigé 2026-07-19 — pas produit par M_04, qui ne produit que les *_trend)</i></li>
 <li><code>binary_sensor.contact_fenetre_bureau_sonoff_contact</code></li>
 <li><code>cover.store_bureau</code></li>
 </ul></blockquote>
@@ -3768,7 +3798,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) — complété par c
 
 ---
 
-*Dernière mise à jour : 2026-05-30 | 48 automations*
+*Dernière mise à jour : 2026-07-19 | 48 automations (audit entités + comptages catégories corrigés)*
 ---
 
 ## 🔧 04 — SCRIPTS
@@ -3778,7 +3808,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) — complété par c
 ---
 
 <details>
-<summary><b>🐚 SCRIPTS BASH</b> &nbsp;|&nbsp; 2 actifs + 1 archivé &nbsp;|&nbsp; Prod : <code>/homeassistant/.scripts/</code> &nbsp;|&nbsp; Local : <code>docs_scripts_SH/</code></summary>
+<summary><b>🐚 SCRIPTS BASH</b> &nbsp;|&nbsp; 3 actifs &nbsp;|&nbsp; Prod : <code>/homeassistant/.scripts/</code> &nbsp;|&nbsp; Local : <code>docs_scripts_SH/</code></summary>
 <blockquote>
 
 <details>
@@ -3800,10 +3830,14 @@ Sortie : repo GitHub <code>home_assistant_re-build</code>
 </details>
 
 <details>
-<summary><code>#MP_01_monitor_temp.sh.#</code> &nbsp;|&nbsp; ⚠️ Archivé — hors ReBuild (Raspberry Pi)</summary>
+<summary><code>#MP_01_monitor_temp.sh.#</code> &nbsp;|&nbsp; Actif — Raspberry Pi</summary>
 <blockquote>
-Script de monitoring température Mini-PC — désactivé, conservé pour référence.<br>
-Pas de doc associée.
+Script de monitoring température (Raspberry Pi) — publie <code>sensor.temperature_cpu_package</code>,
+<code>_carte_mere</code>, <code>_core_0-3</code> (utilisés en L4C1/L4C2) via MQTT Discovery.<br>
+Pas de doc associée.<br><br>
+✅ <b>Confirmé par Eric (2026-07-19)</b> : "ça remonte la T° du CPU et d'autres choses" —
+device et fonction confirmés (Raspberry Pi, cf. TODO.txt U-2). Corrige l'ancienne mention
+"désactivé/archivé" de cette entrée, qui contredisait TODO.txt ("actif — NE PAS TOUCHER").
 </blockquote>
 </details>
 
@@ -3815,24 +3849,35 @@ Pas de doc associée.
 <blockquote>
 
 <details>
-<summary><code>p1_master_gestion_clim.yaml</code> &nbsp;|&nbsp; Nœud master — 4 scripts clim (J 1-1 / J 1-2 / J 1-3 / J 2-0)</summary>
+<summary><code>p1_master_gestion_clim.yaml</code> &nbsp;|&nbsp; Script unique — pilotage clim jour/nuit (param <code>periode</code>)</summary>
 <blockquote>
 📄 <a href="docs/04_docs_scripts/docs_scripts_YAML_MD/P1_MASTER_GESTION_CLIM.md">Doc master</a><br>
-⚙️ <a href="docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim.yaml">YAML source</a>
+⚙️ <a href="docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim.yaml">YAML source</a><br>
+Appelé par les automations (A-0) et (B-0) — voir section 03.
+
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : le fichier réel <code>p1_master_gestion_clim.yaml</code> est un
+script unique (pas 4 sous-scripts). Le doc master lui-même
+(<code>P1_MASTER_GESTION_CLIM.md</code>) précise "Créé par Refactoring LLM local - 2026-06"
+et qu'il "remplace le code inline dupliqué dans A0/B0". Les 2 sous-entrées ci-dessous
+(J 1-1/1-2/1-3 et J 2-0) décrivent une architecture pré-refactor (scripts
+<code>j_1_1_salon_clim_on_off_intelligent</code> etc.) dont le yaml n'existe plus dans
+<code>docs_scripts_YAML/</code> — conservées ici à titre historique uniquement.
+</blockquote>
 
 <details>
-<summary>J 1-1 / J 1-2 / J 1-3 &nbsp;|&nbsp; Routeurs CLIM ON/OFF INTELLIGENT (Salon / Bureau / Chambre)</summary>
+<summary>🗄️ ARCHIVÉ (pré-refactor 2026-06) — J 1-1 / J 1-2 / J 1-3 &nbsp;|&nbsp; Routeurs CLIM ON/OFF INTELLIGENT (Salon / Bureau / Chambre)</summary>
 <blockquote>
 📄 <a href="docs/04_docs_scripts/docs_scripts_YAML_MD/SCRIPTS_CLIM_ON_OFF.md">Doc</a><br>
-Scripts : <code>j_1_1_salon_clim_on_off_intelligent</code> · <code>j_1_2_bureau_clim_on_off_intelligent</code> · <code>j_1_3_chambre_clim_on_off_intelligent</code>
+Scripts (obsolètes, non présents dans docs_scripts_YAML/) : <code>j_1_1_salon_clim_on_off_intelligent</code> · <code>j_1_2_bureau_clim_on_off_intelligent</code> · <code>j_1_3_chambre_clim_on_off_intelligent</code>
 </blockquote>
 </details>
 
 <details>
-<summary>J 2-0 &nbsp;|&nbsp; SECU — ARRÊT CLIM PROTÉGÉ</summary>
+<summary>🗄️ ARCHIVÉ (pré-refactor 2026-06) — J 2-0 &nbsp;|&nbsp; SECU — ARRÊT CLIM PROTÉGÉ</summary>
 <blockquote>
 📄 <a href="docs/04_docs_scripts/docs_scripts_YAML_MD/SCRIPT_J2_0_SECU_ARRET_CLIM.md">Doc</a><br>
-Script : <code>j_2_0_secu_arret_clim_protege</code>
+Script (obsolète, non présent dans docs_scripts_YAML/) : <code>j_2_0_secu_arret_clim_protege</code>
 </blockquote>
 </details>
 
