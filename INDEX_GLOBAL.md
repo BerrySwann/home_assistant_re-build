@@ -1,6 +1,7 @@
 # 🗂️ INDEX GLOBAL — HA ReBuild
 
 *Index unique de navigation — YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-07-19 — correction section L1C1 Météo (entités reelles verifiees, voir historique)*
 *Dernière mise à jour : 2026-07-16*
 
 ---
@@ -91,7 +92,7 @@
 ---
 
 <details>
-<summary><b>L1C1 — MÉTÉO</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~40 entités</summary>
+<summary><b>L1C1 — MÉTÉO</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~33 entités produites (+16 natives)</summary>
 <blockquote>
 
 <details>
@@ -110,28 +111,32 @@
 
 
 <details>
-<summary>💬 Pop-up <code>#foudre</code> — 11 entité(s)</summary>
+<summary>💬 Pop-up <code>#foudre</code> — 14 entité(s)</summary>
 <blockquote><ul>
+<li><code>sensor.blitzortung_lightning_localisation</code> — <a href="docs/01_docs_config_system/config_system_YAML/sensors/meteo/M_03_meteo_sensors_blitzortung.yaml">voir fichier</a></li>
 <li><code>sensor.dernier_impact_temps_reel</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.eclairs_annuel</code> — <i>Natif HA</i></li>
-<li><code>sensor.eclairs_hebdomadaire</code> — <i>Natif HA</i></li>
-<li><code>sensor.eclairs_horaire</code> — <i>Natif HA</i></li>
-<li><code>sensor.eclairs_mensuel</code> — <i>Natif HA</i></li>
-<li><code>sensor.eclairs_quotidien</code> — <i>Natif HA</i></li>
+<li><code>sensor.eclair_annuel</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_hebdomadaire</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_horaire</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_mensuel</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_quotidien</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
 <li><code>sensor.lightning_bearing</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
 <li><code>sensor.lightning_direction_label</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
 <li><code>sensor.lightning_distance_km</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.maison_lightning_counter</code> — <i>Natif HA</i></li>
-<li><code>sensor.maison_lightning_distance</code> — <i>Natif HA</i></li>
+<li><code>sensor.temps_depuis_le_dernier_impact_de_foudre</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.maison_lightning_azimuth</code> — <i>Natif HA (Blitzortung)</i></li>
+<li><code>sensor.maison_lightning_counter</code> — <i>Natif HA (Blitzortung)</i></li>
+<li><code>sensor.maison_lightning_distance</code> — <i>Natif HA (Blitzortung)</i></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary>💬 Pop-up <code>#alert</code> — 13 entité(s)</summary>
+<summary>💬 Pop-up <code>#alert</code> — 14 entité(s)</summary>
 <blockquote><ul>
-<li><code>camera.mf_alerte_today</code> — <i>Natif HA</i></li>
-<li><code>camera.mf_alerte_tomorrow</code> — <i>Natif HA</i></li>
 <li><code>sensor.06_weather_alert</code> — <i>Natif HA</i></li>
+<li><code>binary_sensor.meteoalarm</code> — <i>Natif HA (fallback)</i></li>
+<li><code>sensor.meteo_france_alertes_image_today</code> — <a href="docs/01_docs_config_system/config_system_YAML/command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
+<li><code>sensor.meteo_france_alertes_image_tomorrow</code> — <a href="docs/01_docs_config_system/config_system_YAML/command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
 <li><code>sensor.alerte_avalanches</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
 <li><code>sensor.alerte_canicule</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
 <li><code>sensor.alerte_grand_froid</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
@@ -179,27 +184,48 @@
 </details>
 
 <details>
-<summary><code>M_02_meteo_vent_vence_card.yaml</code> — 2 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></summary>
+<summary><code>M_02_meteo_vent_vence_card.yaml</code> — 3 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.vence_wind_speed</code></li>
-<li><code>weather.vence</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
+<li><code>sensor.vence_wind_bearing</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
+<li><code>sensor.vence_wind_direction_label</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
+<li><code>sensor.vence_wind_speed_kmh</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>M_03_meteo_blitzortung.yaml</code> — 4 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></summary>
+<summary><code>M_03_meteo_blitzortung.yaml</code> — 5 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.dernier_impact_temps_reel</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
 <li><code>sensor.lightning_bearing</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
 <li><code>sensor.lightning_direction_label</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
 <li><code>sensor.lightning_distance_km</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.temps_depuis_le_dernier_impact_de_foudre</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>M_04_tendances_th_ext_card.yaml</code> — 1 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></summary>
+<summary><code>M_03_meteo_sensors_blitzortung.yaml</code> — 1 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/sensors/meteo/M_03_meteo_sensors_blitzortung.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_temperature</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.blitzortung_lightning_localisation</code> — <a href="docs/01_docs_config_system/config_system_YAML/sensors/meteo/M_03_meteo_sensors_blitzortung.yaml">voir fichier</a></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary><code>M_03_meteo_UM_blitzortung.yaml</code> — 5 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></summary>
+<blockquote><ul>
+<li><code>sensor.eclair_annuel</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_hebdomadaire</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_horaire</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_mensuel</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_quotidien</code> — <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary><code>M_04_tendances_th_ext_card.yaml</code> — 2 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></summary>
+<blockquote><ul>
+<li><code>sensor.th_balcon_nord_humidity_trend</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_temperature_trend</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -213,30 +239,48 @@
 </details>
 
 <details>
-<summary><i>Entités natives HA / intégrations externes (20)</i></summary>
+<summary><code>carte_meteo_france.yaml</code> — 2 entité(s) — <a href="docs/01_docs_config_system/config_system_YAML/command_line/meteo/carte_meteo_france.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>camera.mf_alerte_today</code></li>
-<li><code>camera.mf_alerte_tomorrow</code></li>
+<li><code>sensor.meteo_france_alertes_image_today</code> — <a href="docs/01_docs_config_system/config_system_YAML/command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
+<li><code>sensor.meteo_france_alertes_image_tomorrow</code> — <a href="docs/01_docs_config_system/config_system_YAML/command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary><i>Entités natives HA / intégrations externes (16)</i></summary>
+<blockquote><ul>
+<li><code>binary_sensor.meteoalarm</code></li>
+<li><code>input_datetime.dernier_eclair</code></li>
+<li><code>input_number.th_balcon_nord_humidity_previous</code></li>
+<li><code>input_number.th_balcon_nord_temperature_previous</code></li>
 <li><code>sensor.06_weather_alert</code></li>
-<li><code>sensor.direction_du_vent_vence</code></li>
-<li><code>sensor.direction_du_vent_vence_label</code></li>
-<li><code>sensor.eclairs_annuel</code></li>
-<li><code>sensor.eclairs_hebdomadaire</code></li>
-<li><code>sensor.eclairs_horaire</code></li>
-<li><code>sensor.eclairs_mensuel</code></li>
-<li><code>sensor.eclairs_quotidien</code></li>
+<li><code>sensor.blitzortung_lightning_last_impact_time</code></li>
+<li><code>sensor.maison_lightning_azimuth</code></li>
 <li><code>sensor.maison_lightning_counter</code></li>
 <li><code>sensor.maison_lightning_distance</code></li>
 <li><code>sensor.moon_phase</code></li>
 <li><code>sensor.season</code></li>
-<li><code>sensor.vence_daily_precipitation</code></li>
-<li><code>sensor.vence_pressure</code></li>
-<li><code>sensor.vence_uv</code></li>
-<li><code>sensor.vence_wind_gust</code></li>
-<li><code>sensor.vitesse_du_vent_vence</code></li>
+<li><code>sensor.th_balcon_nord_humidity</code></li>
+<li><code>sensor.th_balcon_nord_temperature</code></li>
 <li><code>sun.sun</code></li>
+<li><code>weather.vence</code></li>
+<li><code>zone.home</code></li>
 </ul></blockquote>
 </details>
+
+<blockquote>
+⚠️ <b>Corrigé le 2026-07-19</b> : cette section listait des entités obsolètes/inexistantes
+(<code>camera.mf_alerte_today/_tomorrow</code> — n'existent pas, <code>camera:</code> désactivé ;
+<code>sensor.eclairs_*</code> au pluriel — le vrai nom est <code>sensor.eclair_*</code> singulier ;
+<code>sensor.vence_wind_speed</code> — inexistant, vrai nom <code>vence_wind_speed_kmh</code> ;
+<code>sensor.th_balcon_nord_temperature</code> listé à tort comme produit par M_04 — c'est une
+source native SONOFF, M_04 produit les <code>*_trend</code> ; <code>sensor.direction_du_vent_vence</code>,
+<code>sensor.vitesse_du_vent_vence</code> — noms obsolètes sans correspondance réelle, retirés).
+Fichiers <code>M_03_meteo_sensors_blitzortung.yaml</code>, <code>M_03_meteo_UM_blitzortung.yaml</code>
+et <code>carte_meteo_france.yaml</code> étaient absents de "Fichiers sources" — ajoutés.
+Vérifié directement dans le corps de chaque fichier yaml, en cohérence avec
+DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
+</blockquote>
 
 </blockquote>
 </details>
