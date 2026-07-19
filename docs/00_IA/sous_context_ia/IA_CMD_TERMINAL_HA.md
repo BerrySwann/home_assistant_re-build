@@ -83,5 +83,5 @@ tail -20 /homeassistant/notifs/ecart_liky_vs_nodon.txt  # ecart Linky vs pince N
 | Scripts utilitaires | `/homeassistant/.scripts/` (audit_md5.sh · ha_git_backup.sh · #MP_01_monitor_temp.sh.# ⛔ ne pas toucher) |
 | Logs | `/homeassistant/.logs/` |
 | Notifs fichiers (File UI) | `/homeassistant/notifs/` |
-| Docs pushées | `/homeassistant/Docs/` (= H:\Docs - miroir de DOCS/ local) |
+| Docs pushées | `/homeassistant/docs/` (= H:\docs - miroir de DOCS/ local, renommé minuscule 2026-07-19) |
 | Samba accès | `\\10.32.154.243\config` (monté en `H:\`) |
