@@ -15,9 +15,13 @@ Ce depot est la **refonte complete et modulaire** de la configuration Home Assis
 
 Chaque vignette du dashboard possede sa propre documentation dans `DOCS/02_docs_dashboard/` : entites utilisees, fichiers sources, chaines de dependances, pieges a eviter. C'est la **porte d'entree** pour comprendre comment tout s'articule avant de plonger dans les YAML.
 
+### Comment ca s'articule (en 3 phrases)
+
+Une donnee suit toujours le meme chemin : **capteur natif** (Zigbee2MQTT, Hue, Linky...) -> **sensor/template** (calcul, kWh, moyenne) -> **utility_meter** (cumul Annuel/Mensuel/Hebdo/Quotidien si besoin) -> **vignette dashboard**. Cote fiabilite, la prod Home Assistant fait toujours foi ; GitHub est une sauvegarde automatique de la prod ; ce depot local (`ReBuild/`) n'est qu'un poste de travail de correction, jamais une verite en soi. Si un jour vous cherchez pourquoi un fichier `.yaml` a un nom bizarre ou une bordure ASCII, c'est dans `CLAUDE.md`.
+
 | Document cle | Role |
 |---|---|
-| [`INDEX_GLOBAL.md`](./INDEX_GLOBAL.md) | Index unique — 6 sections (IA, config, dashboard, automations, scripts, systeme) — accordeon GitHub |
+| [`INDEX_GLOBAL.md`](./INDEX_GLOBAL.md) | Index unique — 6 sections (IA, config, dashboard, automations, scripts, systeme) — accordeon GitHub. *(3900+ lignes, prevoyez du cafe)* |
 | [`DOCS/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md`](./DOCS/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md) | Carte -> Template -> Sensor -> Utility Meter -> Source native — 18 vignettes |
 | [`DOCS/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md`](./DOCS/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md) | Procedure de maintenance + historique des sessions |
 | [`CLAUDE.md`](./CLAUDE.md) | Regles de codage, nomenclature, arborescences — directives IA completes |
