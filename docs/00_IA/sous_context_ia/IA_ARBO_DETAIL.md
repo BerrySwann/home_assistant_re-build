@@ -1,5 +1,5 @@
 # 🌳 ARBORESCENCES COMPLÈTES & INDEX GITHUB
-*Dernière mise à jour : 2026-07-18 (refonte complète - l'ancienne version décrivait l'arbo d'avant la réorg du 07-14 et était tronquée en fin de fichier)*
+*Dernière mise à jour : 2026-07-19 (correction casse GitHub : Docs/ -> docs/ suite renommage prod)*
 *Lire ce fichier si : audit fichiers, sync GitHub, recherche d'un fichier prod, vérification arbo locale, URLs raw GitHub.*
 
 ---
@@ -8,10 +8,12 @@
 
 | Contexte | Nom du dossier docs |
 |:---------|:--------------------|
-| Local ReBuild | `DOCS/` (majuscules) |
-| Prod H:\ et GitHub | `Docs/` (mixte) |
+| Local ReBuild (Windows, insensible à la casse) | `DOCS/` ou `docs/` - indifférent |
+| Prod H:\ (Windows, insensible à la casse) | `docs/` (renommé 2026-07-19, ex `Docs/`) |
+| **GitHub (case-sensitive)** | `docs/` (tout minuscule depuis 2026-07-19) |
 
-> GitHub est **case-sensitive** : tout lien écrit `DOCS/...` vers le repo est **mort**. Toujours `Docs/...` dans les liens GitHub (INDEX_GLOBAL.md, etc.).
+> ⚠️ **Changement du 2026-07-19** : le dossier était `Docs/` (D majuscule) jusqu'au 07-18. Renommé en `docs/` (tout minuscule) côté H:\, puis pushé sur GitHub qui ne fait plus du tout la distinction historique - **tous les liens doivent utiliser `docs/` minuscule**. Les 385 liens de `INDEX_GLOBAL.md` ont été réécrits en conséquence le 2026-07-19 (247/249 OK, 2 morts = entrée Gardien Éco connue).
+> GitHub reste **case-sensitive** : ne jamais écrire `Docs/` ni `DOCS/` dans un lien vers le repo.
 
 ---
 
@@ -105,7 +107,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   ├── P3_eclairage/                   (P3_UM_AMHQ_1_UNITE - seul actif)
 │   └── meteo/                          (M_03_meteo_UM_blitzortung)
 │
-└── Docs/                               (miroir pushé depuis local DOCS/ - JAMAIS de YAML config ici)
+└── docs/                               (miroir pushé depuis local DOCS/ - JAMAIS de YAML config ici)
     ├── 00_IA/                          (1 + sous_context_ia/7)
     ├── 01_docs_config_system/          (config_system_MD/1 · config_system_YAML/81)
     ├── 02_docs_dashboard/              (dashboard_docs_MD/52 · dashboard_docs_YAML/73)
@@ -136,7 +138,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 Exemples :
 - `https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/configuration.yaml`
 - `https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/meteo/M_01_meteo_alertes_card.yaml`
-- `https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/Docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md`
+- `https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md`
 
 ---
 
