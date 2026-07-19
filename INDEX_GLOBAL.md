@@ -21,49 +21,49 @@
 <details>
 <summary><b>IA_ARBO_DETAIL.md</b> &nbsp;|&nbsp; Arborescence complète prod + local, URLs GitHub raw</summary>
 <blockquote>
-📄 <a href="Docs/00_IA/sous_md/IA_ARBO_DETAIL.md">Doc</a>
+📄 <a href="Docs/00_IA/sous_context_ia/IA_ARBO_DETAIL.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>IA_AUTOMATIONS_NOTIFS.md</b> &nbsp;|&nbsp; Création/modif automations, messages notify, scripts HA</summary>
 <blockquote>
-📄 <a href="Docs/00_IA/sous_md/IA_AUTOMATIONS_NOTIFS.md">Doc</a>
+📄 <a href="Docs/00_IA/sous_context_ia/IA_AUTOMATIONS_NOTIFS.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>IA_CMD_TERMINAL_HA.md</b> &nbsp;|&nbsp; Commandes tree prod, audit MD5, git backup, chemins /homeassistant/, logs HA</summary>
 <blockquote>
-📄 <a href="Docs/00_IA/sous_md/IA_CMD_TERMINAL_HA.md">Doc</a>
+📄 <a href="Docs/00_IA/sous_context_ia/IA_CMD_TERMINAL_HA.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>IA_INDEX_AUTOMATIONS.md</b> &nbsp;|&nbsp; Régénération INDEX_AUTOMATIONS, mapping alias → DOCS/03, anomalies</summary>
 <blockquote>
-📄 <a href="Docs/00_IA/sous_md/IA_INDEX_AUTOMATIONS.md">Doc</a>
+📄 <a href="Docs/00_IA/sous_context_ia/IA_INDEX_AUTOMATIONS.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>IA_INDEX_NAVIGATION.md</b> &nbsp;|&nbsp; Régénération INDEX_GLOBAL, ajout vignette/page, mapping entités → fichiers sources</summary>
 <blockquote>
-📄 <a href="Docs/00_IA/sous_md/IA_INDEX_NAVIGATION.md">Doc</a>
+📄 <a href="Docs/00_IA/sous_context_ia/IA_INDEX_NAVIGATION.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>IA_INTEGRATIONS_CARTES.md</b> &nbsp;|&nbsp; YAML dashboard, custom:*, intégrations manquantes, palette couleurs</summary>
 <blockquote>
-📄 <a href="Docs/00_IA/sous_md/IA_INTEGRATIONS_CARTES.md">Doc</a>
+📄 <a href="Docs/00_IA/sous_context_ia/IA_INTEGRATIONS_CARTES.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>IA_P4_PRESENCE.md</b> &nbsp;|&nbsp; sensor.presence, format notif avec présence, logique groupe Wi-Fi</summary>
 <blockquote>
-📄 <a href="Docs/00_IA/sous_md/IA_P4_PRESENCE.md">Doc</a>
+📄 <a href="Docs/00_IA/sous_context_ia/IA_P4_PRESENCE.md">Doc</a>
 </blockquote>
 </details>
 
