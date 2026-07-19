@@ -23,7 +23,8 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | command_line (Météo France) | sensor.carte_meteo_france_* (images)               | meteo_alerte_card_html                             | L1C1 Météo                         |
+# | Météo France (intégration) | sensor.06_weather_alert (attributs par type)       | alerte_vent_violent / alerte_inondation / alerte_orages / alerte_pluie_inondation / alerte_neige_verglas / alerte_grand_froid / alerte_canicule / alerte_avalanches / alerte_vagues_submersion | L1C1 Météo (bandeau alertes) |
+# | MeteoAlarm (intégration, fallback) | binary_sensor.meteoalarm (awareness_type/level/event) | alerte_meteo (synthèse globale)                  | L1C1 Météo (bandeau alertes) |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - L'alerte est DÉPARTEMENTALE (06 entier) — pas localisée à Vence.

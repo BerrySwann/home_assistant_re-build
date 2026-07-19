@@ -19,8 +19,8 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | NOUS SP (Z2M)  | sensor.lave_linge_power → seuil 5W/50W             | lave_linge_en_cours (bool HTML)                    | L3C2 Commandes Éco                 |
-# | NOUS SP (Z2M)  | sensor.lave_vaisselle_power → seuil 5W/50W         | lave_vaisselle_en_cours (bool HTML)                | L3C2 Commandes Éco                 |
+# | NOUS SP (Z2M)  | sensor.prise_lave_linge_nous_power → seuil 5W (en_cours) / 50W (cycle_actif) | lave_linge_en_cours / lave_linge_cycle_actif       | L3C2 Commandes Éco / Home Page     |
+# | NOUS SP (Z2M)  | sensor.prise_lave_vaisselle_nous_power → seuil 5W (en_cours) / 50W (cycle_actif) | lave_vaisselle_en_cours / lave_vaisselle_cycle_actif | L3C2 Commandes Éco / Home Page   |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ne pas confondre avec le seuil de visibilité carte (50W) vs seuil template (5W).

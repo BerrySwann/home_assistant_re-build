@@ -22,7 +22,7 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.genelec_appart_kwh_hp_cumulative            | genelec_appart_hp_*_{annuel|mensuel|hebdo|quotidien} | 02_ratio_hp_hc.yaml → L2C1         |
+# | Nodon SEM-4-1-00 (Z2M) | sensor.general_electric_appart_energy (tariffs HP/HC via utility_meter.select_tariff) | genelec_appart_hphc_{quotidien\|hebdomadaire\|mensuel\|annuel}_um | P0_02_ratio_hp_hc.yaml → L2C1 |
 # | [calculé]      | sensor.genelec_appart_kwh_hc_cumulative            | genelec_appart_hc_*_{annuel|mensuel|hebdo|quotidien} | 02_ratio_hp_hc.yaml → L2C1         |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :

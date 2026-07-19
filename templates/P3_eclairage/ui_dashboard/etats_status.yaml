@@ -19,7 +19,14 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | light.* (Hue/Sonoff) → is_on / brightness          | eclairage_*_etat / eclairage_*_nb_allumes          | L3C1 Commandes Éclairage           |
+# | [calculé]      | light.entree + light.couloir                       | lumiere_appartement_etat                           | L3C1 Commandes Éclairage           |
+# | [calculé]      | light.entree                                       | lumiere_entree_etat                                | L3C1 Commandes Éclairage           |
+# | [calculé]      | light.salon + light.table                          | lumiere_salon_etat / lumiere_table_etat            | L3C1 Commandes Éclairage           |
+# | [calculé]      | light.cuisine                                      | lumiere_cuisine_etat                               | L3C1 Commandes Éclairage           |
+# | [calculé]      | light.couloir                                       | lumiere_couloir_etat                               | L3C1 Commandes Éclairage           |
+# | [calculé]      | light.hue_white_lamp_bureau_1/_2 + switch.ecran_p_c_3_play_hue + light.hue_play_1/2/3_pc_bureau + binary_sensor.moniteur_pc | lumiere_bureau_etat / lumiere_ecran_etat / bureau_etat | L3C1 Commandes Éclairage |
+# | [calculé]      | light.hue_white_lamp_salle_de_bain                 | lumiere_salle_de_bain_etat                         | L3C1 Commandes Éclairage           |
+# | [calculé]      | light.chambre + light.hue_color_candle_chambre_gege/_eric + switch.prise_tete_de_lit_chambre | chambre_etat / chambre_nb_allumes / lumiere_chambre_etat / lumiere_tete_de_lit_etat | L3C1 Commandes Éclairage |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ce fichier est dans ui_dashboard/ : INTERDIT d'y ajouter des kWh ou W.

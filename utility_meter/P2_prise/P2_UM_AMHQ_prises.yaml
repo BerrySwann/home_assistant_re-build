@@ -18,7 +18,7 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.*_energy (prises — direct firmware NOUS/IKEA)               | p2_prise_*_{annuel|mensuel|hebdo|quotidien}        | P2_AVG_AMHQ_prises.yaml → L3C2     |
+# | NOUS/IKEA (Z2M) | sensor.*_energy (prises — direct firmware, 17 appareils)          | prise_{appareil}_{marque}_{quotidien\|hebdomadaire\|mensuel\|annuel}_um | P2_AVG_AMHQ_prises.yaml → L3C2     |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Les cycles se réinitialisent automatiquement (minuit/lundi/1er du mois/1er janvier).
