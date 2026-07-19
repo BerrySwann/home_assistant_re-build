@@ -776,6 +776,16 @@ déplacées vers natives.
 </blockquote>
 </details>
 
+</blockquote>
+</details>
+
+<details>
+<summary>📄 <b>Page Principale</b></summary>
+<blockquote>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L2C1_ENERGIE/PAGE_ENERGIE.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_principale_2026-06-18.yaml">YAML Page</a>
+
+
 
 <details>
 <summary><b>📂 Fichiers sources</b></summary>
@@ -907,6 +917,15 @@ déplacées vers natives.
 
 </blockquote>
 </details>
+</blockquote>
+</details>
+
+<details>
+<summary>📄 <b>Page Mensuel</b></summary>
+<blockquote>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L2C1_ENERGIE/PAGE_ENERGIE_MENSUEL.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_mensuel_2026-06-18.yaml">YAML Page</a>
+
 
 
 <details>
@@ -975,6 +994,15 @@ déplacées vers natives.
 
 </blockquote>
 </details>
+</blockquote>
+</details>
+
+<details>
+<summary>📄 <b>Page Temps Réel</b></summary>
+<blockquote>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L2C1_ENERGIE/PAGE_ENERGIE_TEMPS_REEL.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_temps_reel_2026-06-18.yaml">YAML Page</a>
+
 
 
 <details>
@@ -1136,37 +1164,6 @@ déplacées vers natives.
 
 </blockquote>
 </details>
-
-</blockquote>
-</details>
-
-<details>
-<summary>📄 <b>Page Principale</b></summary>
-<blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L2C1_ENERGIE/PAGE_ENERGIE.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_principale_2026-06-18.yaml">YAML Page</a>
-
-
-</blockquote>
-</details>
-
-<details>
-<summary>📄 <b>Page Mensuel</b></summary>
-<blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L2C1_ENERGIE/PAGE_ENERGIE_MENSUEL.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_mensuel_2026-06-18.yaml">YAML Page</a>
-
-
-</blockquote>
-</details>
-
-<details>
-<summary>📄 <b>Page Temps Réel</b></summary>
-<blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L2C1_ENERGIE/PAGE_ENERGIE_TEMPS_REEL.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_temps_reel_2026-06-18.yaml">YAML Page</a>
-
-
 </blockquote>
 </details>
 
@@ -1698,6 +1695,16 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 </blockquote>
 </details>
 
+</blockquote>
+</details>
+
+<details>
+<summary>📄 <b>Page Gauche</b></summary>
+<blockquote>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C1_ECLAIRAGE/PAGE_ECLAIRAGE.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/page_L3C1_eclairage_gauche_2026-05-13.yaml">YAML Page</a>
+
+
 
 <details>
 <summary><b>📂 Fichiers sources</b></summary>
@@ -1736,7 +1743,37 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 
 </blockquote>
 </details>
+</blockquote>
+</details>
 
+<details>
+<summary>📄 <b>Page Droite</b> — 3 pop-up(s)</summary>
+<blockquote>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C1_ECLAIRAGE/PAGE_ECLAIRAGE.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/page_L3C1_eclairage_droite_2026-05-22.yaml">YAML Page</a>
+
+
+<details>
+<summary>💬 Pop-up <code>#tete_de_lit</code> — 2 entité(s)</summary>
+<blockquote><ul>
+<li><code>light.hue_color_candle_chambre_eric</code> — <i>Natif HA (Hue)</i></li>
+<li><code>light.hue_color_candle_chambre_gege</code> — <i>Natif HA (Hue)</i></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary>💬 Pop-up <code>#bureau</code> — 1 entité(s)</summary>
+<blockquote><ul>
+<li><code>light.bureau</code> — <i>Natif HA (Hue)</i></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary>💬 Pop-up <code>#ecranpc</code> — 1 entité(s)</summary>
+<blockquote><ul>
+<li><code>light.moniteur_pc</code> — <i>Natif HA</i></li>
+</ul></blockquote>
+</details>
 
 <details>
 <summary><b>📂 Fichiers sources</b></summary>
@@ -1802,49 +1839,6 @@ produit que des <code>sensor.*_um</code>) déplacés vers natives.
 
 </blockquote>
 </details>
-
-</blockquote>
-</details>
-
-<details>
-<summary>📄 <b>Page Gauche</b></summary>
-<blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C1_ECLAIRAGE/PAGE_ECLAIRAGE.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/page_L3C1_eclairage_gauche_2026-05-13.yaml">YAML Page</a>
-
-
-</blockquote>
-</details>
-
-<details>
-<summary>📄 <b>Page Droite</b> — 3 pop-up(s)</summary>
-<blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C1_ECLAIRAGE/PAGE_ECLAIRAGE.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/page_L3C1_eclairage_droite_2026-05-22.yaml">YAML Page</a>
-
-
-<details>
-<summary>💬 Pop-up <code>#tete_de_lit</code> — 2 entité(s)</summary>
-<blockquote><ul>
-<li><code>light.hue_color_candle_chambre_eric</code> — <i>Natif HA (Hue)</i></li>
-<li><code>light.hue_color_candle_chambre_gege</code> — <i>Natif HA (Hue)</i></li>
-</ul></blockquote>
-</details>
-
-<details>
-<summary>💬 Pop-up <code>#bureau</code> — 1 entité(s)</summary>
-<blockquote><ul>
-<li><code>light.bureau</code> — <i>Natif HA (Hue)</i></li>
-</ul></blockquote>
-</details>
-
-<details>
-<summary>💬 Pop-up <code>#ecranpc</code> — 1 entité(s)</summary>
-<blockquote><ul>
-<li><code>light.moniteur_pc</code> — <i>Natif HA</i></li>
-</ul></blockquote>
-</details>
-
 </blockquote>
 </details>
 
@@ -2267,6 +2261,16 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> — 
 </blockquote>
 </details>
 
+</blockquote>
+</details>
+
+<details>
+<summary>📄 <b>Page Gauche</b></summary>
+<blockquote>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C3_MAJ_HA/PAGE_MAJ.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/page_L4C3_maj_ha_gauche_2026-05-14.yaml">YAML Page</a>
+
+
 
 <details>
 <summary><b>📂 Fichiers sources</b></summary>
@@ -2284,6 +2288,15 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> — 
 
 </blockquote>
 </details>
+</blockquote>
+</details>
+
+<details>
+<summary>📄 <b>Page Droite</b></summary>
+<blockquote>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C3_MAJ_HA/PAGE_MAJ.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/page_L4C3_maj_ha_droite_2026-05-14.yaml">YAML Page</a>
+
 
 
 <details>
@@ -2305,27 +2318,6 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> — 
 
 </blockquote>
 </details>
-
-</blockquote>
-</details>
-
-<details>
-<summary>📄 <b>Page Gauche</b></summary>
-<blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C3_MAJ_HA/PAGE_MAJ.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/page_L4C3_maj_ha_gauche_2026-05-14.yaml">YAML Page</a>
-
-
-</blockquote>
-</details>
-
-<details>
-<summary>📄 <b>Page Droite</b></summary>
-<blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C3_MAJ_HA/PAGE_MAJ.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/page_L4C3_maj_ha_droite_2026-05-14.yaml">YAML Page</a>
-
-
 </blockquote>
 </details>
 
@@ -2424,6 +2416,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> — 
 
 ---
 
+
 <details>
 <summary><b>L5C2 — BATTERIES PORTABLES</b> &nbsp;|&nbsp; 2 page(s) &nbsp;|&nbsp; ~49 entités</summary>
 <blockquote>
@@ -2433,6 +2426,18 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> — 
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/L5C2_VIGNETTE_BATTERIES_PORTABLES.md">Doc Vignette</a><br>
 ⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/vignette_L5C2_batteries_portables_2026-05-12.yaml">YAML Vignette</a>
+
+
+</blockquote>
+</details>
+
+<details>
+<summary>📄 <b>Page Gauche</b></summary>
+<blockquote>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/PAGE_BATTERIES_PORTABLES.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/page_L5C2_batteries_portables_gauche_2026-05-12.yaml">YAML Page</a>
+
+
 
 <details>
 <summary><b>📂 Fichiers sources</b></summary>
@@ -2474,6 +2479,15 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> — 
 
 </blockquote>
 </details>
+</blockquote>
+</details>
+
+<details>
+<summary>📄 <b>Page Droite</b></summary>
+<blockquote>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/PAGE_BATTERIES_PORTABLES.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/page_L5C2_batteries_portables_droite_2026-05-12.yaml">YAML Page</a>
+
 
 
 <details>
@@ -2509,27 +2523,6 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> — 
 
 </blockquote>
 </details>
-
-</blockquote>
-</details>
-
-<details>
-<summary>📄 <b>Page Gauche</b></summary>
-<blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/PAGE_BATTERIES_PORTABLES.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/page_L5C2_batteries_portables_gauche_2026-05-12.yaml">YAML Page</a>
-
-
-</blockquote>
-</details>
-
-<details>
-<summary>📄 <b>Page Droite</b></summary>
-<blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/PAGE_BATTERIES_PORTABLES.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/page_L5C2_batteries_portables_droite_2026-05-12.yaml">YAML Page</a>
-
-
 </blockquote>
 </details>
 
