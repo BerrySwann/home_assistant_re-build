@@ -536,6 +536,9 @@ retiré entièrement — ce fichier utility_meter ne produit que des <code>senso
 </blockquote>
 </details>
 
+</blockquote>
+</details>
+
 ---
 
 <details>
@@ -718,6 +721,9 @@ entièrement — un fichier utility_meter ne produit que des <code>sensor.*_um</
 24 entrées kWh dans son corps, aucun <code>remote.*</code>/<code>switch.*</code>) ; ces 5 entités
 déplacées vers natives.
 </blockquote>
+
+</blockquote>
+</details>
 
 </blockquote>
 </details>
