@@ -3092,27 +3092,6 @@
 </details>
 
 <details>
-<summary>⚠️ <b>(C) (CLIM OFF) Gardien Éco — ⚠️ DOC + YAML non migrés (automation supprimée ?)</b></summary>
-<blockquote>
-<i>Module de sécurité ÉCO. Coupe les climatiseurs si l''air extérieur</i><br><br>
-📄 <a href="docs/03_docs_automations/docs_automations_MD/P1_CLIM_CHAUFFAGE/#_GARDIEN_ECO_SUPPRIME.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/#_gardien_eco_SUPPRIME">YAML source</a><br>
-<br><b>Déclencheurs :</b> 🔄`state` · 📊`numeric_state`<br>
-<br><details>
-<summary>🔌 Entités (5)</summary>
-<blockquote><ul>
-<li><code>sensor.temperature_delta_valeur</code></li>
-<li><code>sensor.th_balcon_nord_temperature</code> — <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
-<li><code>climate.clim_salon_rm4_mini</code></li>
-<li><code>climate.clim_bureau_rm4_mini</code></li>
-<li><code>climate.clim_chambre_rm4_mini</code></li>
-</ul></blockquote>
-</details>
-
-</blockquote>
-</details>
-
-<details>
 <summary>✅ <b>(D) Notification température Up ou Down de (7h30 -> 21h00)</b></summary>
 <blockquote>
 <i>Envoie le message personnalisé de clim si le texte change, OU au réveil</i><br><br>
@@ -3436,7 +3415,7 @@
 ---
 
 <details>
-<summary><b>💡 P3 — Éclairage</b> &nbsp;|&nbsp; 8 automation(s) &nbsp;|&nbsp; <i>Boutons IKEA salon, bureau (Rodret/Somrig), watchdogs lampes</i></summary>
+<summary><b>💡 P3 — Éclairage</b> &nbsp;|&nbsp; 7 automation(s) &nbsp;|&nbsp; <i>Boutons IKEA salon, bureau (Rodret/Somrig), watchdogs lampes</i></summary>
 <blockquote>
 
 <details>
@@ -3460,23 +3439,6 @@
 
 <details>
 <summary>✅ <b>[P3-SALON] BOUTON IKEA INTER SALON (4) — ON/OFF LIGHT.SALON</b></summary>
-<blockquote>
-<i>Pilotage de light.salon via le bouton IKEA 4 touches Salon. Topic</i><br><br>
-📄 <a href="docs/03_docs_automations/docs_automations_MD/P3_ECLAIRAGE/BOUTON_INTER_IKEA_4.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P3_eclairage/p3_salon_bouton_ikea_inter_salon.yaml">YAML source</a><br>
-<br><b>Déclencheurs :</b> 📡`mqtt`<br>
-<br><details>
-<summary>🔌 Entités (1)</summary>
-<blockquote><ul>
-<li><code>light.salon</code></li>
-</ul></blockquote>
-</details>
-
-</blockquote>
-</details>
-
-<details>
-<summary>✅ <b>[P3-Salon] Bouton IKEA Inter Salon (4) — ON/OFF light.salon</b></summary>
 <blockquote>
 <i>Pilotage de light.salon via le bouton IKEA 4 touches Salon. Topic</i><br><br>
 📄 <a href="docs/03_docs_automations/docs_automations_MD/P3_ECLAIRAGE/BOUTON_INTER_IKEA_4.md">Documentation</a><br>
