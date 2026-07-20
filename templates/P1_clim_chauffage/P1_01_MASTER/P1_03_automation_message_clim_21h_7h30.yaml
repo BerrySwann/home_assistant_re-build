@@ -14,7 +14,7 @@
 # - sensor.presence → texte de présence en en-tête
 # - sensor.mode_ete_hiver → heat / cool / fan_only
 # - sensor.temperature_confort_nuit → T° cible nuit (toutes pièces)
-# - sensor.temperature_cible / sensor.temperature_eco_hiver_corrige
+# - sensor.temperature_eco_hiver_corrige / sensor.temperature_eco_ete_corrige
 # - switch.clim_*_nous → vérifie alimentation de chaque unité
 #
 #
@@ -30,6 +30,9 @@
 # - Ne pas confondre avec le fichier jour (7h30 → 21h00) qui gère 4 groupes distincts.
 # - Nuit : pas de logique groupe_2/3/4 individualisée — température nuit uniforme.
 # - Labels pré-calculés s_*/b_*/c_* AVANT le bloc groupe → [OFF] si prise coupée.
+# - Les branches groupe/mode reflètent EXACTEMENT t_*_target du script
+#   p1_master_gestion_clim (aligné 2026-07-20) — toute modif du script doit
+#   être répercutée ici (et dans le fichier jour P1_02).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Déclenché par automation L1C3 (notification clim 21h-7h30)
@@ -53,8 +56,8 @@
         {%- else %}
           {%- set tendance     = states('sensor.th_balcon_nord_temperature_trend') %}
           {%- set temp_ext     = states('sensor.th_balcon_nord_temperature') | float(0) %}
-          {%- set temp_cible   = states('sensor.temperature_cible') | float(0) %}
           {%- set temp_eco     = states('sensor.temperature_eco_hiver_corrige') | float(17) %}
+          {%- set temp_eco_ete = states('sensor.temperature_eco_ete_corrige') | float(28) %}
           {%- set temp_nuit    = states('sensor.temperature_confort_nuit') | float(18) %}
           {%- set mode         = states('sensor.mode_ete_hiver') %}
           {%- set groupe       = states('sensor.groupe') %}
@@ -66,13 +69,13 @@
 
           {#- Pré-calcul labels par prise — [OFF] si prise coupée -#}
           {%- set s_eco    = "[OFF]" if not prise_salon   else temp_eco  ~ "°" %}
-          {%- set s_cible  = "[OFF]" if not prise_salon   else temp_cible ~ "°" %}
+          {%- set s_eco_e  = "[OFF]" if not prise_salon   else temp_eco_ete ~ "°" %}
           {%- set s_nuit   = "[OFF]" if not prise_salon   else temp_nuit ~ "°" %}
           {%- set b_eco    = "[OFF]" if not prise_bureau  else temp_eco  ~ "°" %}
-          {%- set b_cible  = "[OFF]" if not prise_bureau  else temp_cible ~ "°" %}
+          {%- set b_eco_e  = "[OFF]" if not prise_bureau  else temp_eco_ete ~ "°" %}
           {%- set b_nuit   = "[OFF]" if not prise_bureau  else temp_nuit ~ "°" %}
           {%- set c_eco    = "[OFF]" if not prise_chambre else temp_eco  ~ "°" %}
-          {%- set c_cible  = "[OFF]" if not prise_chambre else temp_cible ~ "°" %}
+          {%- set c_eco_e  = "[OFF]" if not prise_chambre else temp_eco_ete ~ "°" %}
           {%- set c_nuit   = "[OFF]" if not prise_chambre else temp_nuit ~ "°" %}
           {%- set s_fan    = "[OFF]" if not prise_salon   else "[FAN]" %}
           {%- set b_fan    = "[OFF]" if not prise_bureau  else "[FAN]" %}
@@ -103,7 +106,7 @@
               {%- if mode == 'heat' %}
                 {%- set message_mode = "[ECO HEAT]\nSalon " ~ s_eco ~ "\nBureau " ~ b_eco ~ "\nChambre " ~ c_eco %}
               {%- elif mode == 'cool' %}
-                {%- set message_mode = "[COOL]\nSalon " ~ s_cible ~ "\nBureau " ~ b_cible ~ "\nChambre " ~ c_cible %}
+                {%- set message_mode = "[ECO COOL]\nSalon " ~ s_eco_e ~ "\nBureau " ~ b_eco_e ~ "\nChambre " ~ c_eco_e %}
               {%- elif mode == 'fan_only' %}
                 {%- set message_mode = "[FAN ONLY]\nSalon " ~ s_fan ~ "\nBureau " ~ b_fan ~ "\nChambre " ~ c_fan %}
               {%- elif mode == 'off' %}
@@ -149,3 +152,5 @@
 # [MODIF]  [éCO HEAT] → [ECO HEAT] (ASCII strict montre)
 # [MODIF]  ↗ ↘ → -> (ASCII strict montre)
 # [CORR]   indentation sensor block : 2 espaces → 4 espaces (alignement correct)
+# [ALIGN]  2026-07-20 : g1 cool → [ECO COOL] eco_ete_corrige (était [COOL] cible — jamais appliqué par
+#          le script). Ajout temp_eco_ete + labels *_eco_e ; suppression temp_cible (plus affiché).
