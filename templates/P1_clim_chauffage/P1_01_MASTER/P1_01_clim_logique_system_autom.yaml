@@ -17,6 +17,8 @@
 # - Deltas fixes : delta_1=1, delta_2=2, delta_3=3, delta_5=5, delta_7=7 (°C)
 # - T° confort = différentielle + (T°cible - consigne_de_base)
 # - T°cible modulée par T°ext (paliers < 12°C, > 32°C, > 40°C)
+# - Confort nuit été : palier 26→27 dynamique selon sensor.alerte_canicule
+#   (Vert/indispo = 29, Jaune = 30, Orange = 30, Rouge = 31)
 #
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
@@ -27,6 +29,7 @@
 # | Sonde SONOFF Balcon Nord | sensor.th_balcon_nord_temperature                  | mode_ete_hiver / consigne_de_base / temperature_differentielle | L1C3 Commandes Clim |
 # | [calculé] (interne, chaîné) | sensor.consigne_de_base / temperature_confort_jour / delta_1 / _2 | temperature_corrige_mamour / _eric / _chambre       | L1C3 Commandes Clim                |
 # | Sonde SONOFF Balcon Nord + [calculé] | sensor.th_balcon_nord_temperature + consigne_de_base / delta_1 / _2 / _5 / _7 | temperature_cible / temperature_confort_jour / temperature_confort_nuit / temperature_eco_hiver_corrige / temperature_eco_ete_corrige | L1C3 Commandes Clim |
+# | Météo France via M_01_meteo_alertes_card | sensor.alerte_canicule                         | temperature_confort_nuit (palier dynamique)        | L1C3 Commandes Clim                |
 # | Sondes SONOFF intérieures (6 pièces) | sensor.th_salon / _cellier / _cuisine / _bureau / _salle_de_bain / _chambre_temperature | temperature_moyenne_interieure                      | L1C2 Températures                  |
 # | [calculé]      | sensor.temperature_moyenne_interieure + th_balcon_nord_temperature / temperature_confort_jour | temperature_delta_value / _affichage / delta_ademe_recommande | L1C2 Températures                  |
 #
@@ -40,6 +43,8 @@
 # - temperature_moyenne_interieure exclut les sondes à 0 (reject '==0')
 #   pour éviter de baisser la moyenne sur une sonde hors ligne.
 # - delta_ademe_recommande utilise temperature_confort_JOUR (et non temperature_confort).
+# - temperature_confort_nuit dépend de sensor.alerte_canicule (M_01) —
+#   fallback palier 29 si capteur indisponible ou état inattendu.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L1C3 Commandes Clim (toutes les consignes, états modes, T°cibles)
@@ -246,12 +251,14 @@
         {% set d2 = states('sensor.delta_2') | float(2) %}
         {% set d5 = states('sensor.delta_5') | float(5) %}
         {% set d7 = states('sensor.delta_7') | float(7) %}
+        {% set canicule = states('sensor.alerte_canicule') %}
+        {% set palier = {'Jaune': 30, 'Orange': 30, 'Rouge': 31}.get(canicule, 29) %}
         {% if t_ext < 8 %} {{ (conf_j - d1) | round(1) }}
         {% elif t_ext < 12 %} {{ (conf_j - d2) | round(1) }}
         {% elif t_ext < 19 %} {{ (conf_j - d1) | round(1) }}
         {% elif t_ext > 34 %} {{ (t_ext - d7) | round(1) }}
         {% elif t_ext > 32 %} {{ (t_ext - d5) | round(1) }}
-        {% elif t_ext > 30 %} {{ conf_j + d2 }}
+        {% elif t_ext > palier %} {{ conf_j + d2 }}
         {% else %} {{ conf_j + d1 }}
         {% endif %}
 
@@ -349,3 +356,5 @@
 # - [Fix]     temperature_moyenne_interieure : reject('==', 0) pour exclure sondes offline.
 # - [Fix]     delta_ademe_recommande : source temperature_confort_JOUR (était temperature_confort).
 # - [Tune]    2026-07-19 temperature_confort_nuit : palier été +d2 relevé de >29 à >30 (confort nuit).
+# - [Feat]    2026-07-20 temperature_confort_nuit : palier été dynamique selon vigilance canicule
+#             (Vert/indispo=29, Jaune=30, Orange=30, Rouge=31) — source sensor.alerte_canicule (M_01).
