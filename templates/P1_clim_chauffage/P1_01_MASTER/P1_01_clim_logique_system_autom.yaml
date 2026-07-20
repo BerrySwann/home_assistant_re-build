@@ -177,7 +177,7 @@
         {% endif %}
 
 # ┌─────────────────────────────────┐
-# │ 07. BUREAU                       │
+# │ 07. BUREAU                      │
 # └─────────────────────────────────┘
 # --- temperature_corrige_eric ---
     - name: "Temperature Corrigé Eric"
@@ -189,14 +189,14 @@
         {% set delta_1 = states('sensor.delta_1') | float(1) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
-          {{ [temp_ext + delta_1, 27] | min | int }}
+          {{ [temp_ext + delta_1, 28] | min | int }}
         {% else %}
           {% set temp_conf_e = states('sensor.temperature_confort_jour') | float(0) %}
           {{ (temp_conf_e - delta_2) | round(1) }}
         {% endif %}
 
 # ┌─────────────────────────────────┐
-# │ 09. CHAMBRE                      │
+# │ 09. CHAMBRE                     │
 # └─────────────────────────────────┘
 # --- temperature_corrige_chambre ---
     - name: "Temperature Corrigé Chambre"
@@ -204,15 +204,16 @@
       unit_of_measurement: "°C"
       device_class: temperature
       state: >
+        {% set delta_1 = states('sensor.delta_1') | float(1) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
-          {{ [temp_ext + 1, 27] | min | int }}
+          {{ [temp_ext + delta_1, 28] | min | int }}
         {% else %}
           {{ states('sensor.consigne_de_base') | float(0) | int }}
         {% endif %}
 
 # ┌────────────────────────────────────────────────┐
-# │ MOTEURS DE CALCUL DYNAMIQUES (CIBLE / CONFORT)  │
+# │ MOTEURS DE CALCUL DYNAMIQUES (CIBLE / CONFORT) │
 # └────────────────────────────────────────────────┘
 
 # --- temperature_cible ---
