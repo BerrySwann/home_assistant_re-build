@@ -177,7 +177,7 @@
         {% endif %}
 
 # ┌─────────────────────────────────┐
-# │ 07. BUREAU                      │
+# │ 07. BUREAU                       │
 # └─────────────────────────────────┘
 # --- temperature_corrige_eric ---
     - name: "Temperature Corrigé Eric"
@@ -196,7 +196,7 @@
         {% endif %}
 
 # ┌─────────────────────────────────┐
-# │ 09. CHAMBRE                     │
+# │ 09. CHAMBRE                      │
 # └─────────────────────────────────┘
 # --- temperature_corrige_chambre ---
     - name: "Temperature Corrigé Chambre"
@@ -213,7 +213,7 @@
         {% endif %}
 
 # ┌────────────────────────────────────────────────┐
-# │ MOTEURS DE CALCUL DYNAMIQUES (CIBLE / CONFORT) │
+# │ MOTEURS DE CALCUL DYNAMIQUES (CIBLE / CONFORT)  │
 # └────────────────────────────────────────────────┘
 
 # --- temperature_cible ---
@@ -359,3 +359,6 @@
 # - [Tune]    2026-07-19 temperature_confort_nuit : palier été +d2 relevé de >29 à >30 (confort nuit).
 # - [Feat]    2026-07-20 temperature_confort_nuit : palier été dynamique selon vigilance canicule
 #             (Vert/indispo=29, Jaune=30, Orange=30, Rouge=31) — source sensor.alerte_canicule (M_01).
+# - [Resync]  2026-07-20 (16h07) : modif faite par Eric directement en prod (UI/Studio Code Server) —
+#             plafonds été temperature_corrige_eric/_chambre relevés 27→28 ; réintégrés ici.
+#             Boîtes ASCII 07.BUREAU/09.CHAMBRE/MOTEURS DE CALCUL restaurées à largeur conforme (37 car.).

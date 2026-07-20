@@ -14,7 +14,7 @@
 # - sensor.presence → texte de présence affiché en en-tête du message
 # - sensor.mode_ete_hiver → heat / cool / fan_only
 # - sensor.temperature_corrige_mamour / sensor.temperature_corrige_eric
-# - sensor.temperature_corrige_Chambre: 
+# - sensor.temperature_corrige_chambre
 # - sensor.temperature_eco_hiver_corrige / sensor.temperature_eco_ete_corrige
 # - switch.clim_*_nous → vérifie alimentation de chaque unité
 #
@@ -186,3 +186,5 @@
 # [SIMPLIF] s_off/b_off/c_off étaient devenus des tautologies conditionnelles inutiles
 #           après la casse (toujours "Mode: [OFF]" dans les deux branches) — simplifiées
 #           en constantes. Comportement fonctionnel inchangé.
+# [Resync]  2026-07-20 : local resynchronisé sur la version prod corrigée par Eric —
+#           fix du commentaire ligne 17 (résidu "Chambre: " → "chambre") + newline finale ajoutée.
