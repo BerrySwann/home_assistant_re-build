@@ -98,117 +98,6 @@
 
           {# --- PARTIE 3 : MODE --- SCÉNARIO STANDARD --- #}
           {%- if not clims_alimentees %}
-            {%- set message_mode = "[UNITS OFF]" %}
-          {%- else %}
-
-            {%- if 'groupe_1' in groupe %}
-              {# --- CAS ABSENT --- #}
-              {%- if mode == 'heat' %}
-                {%- set message_mode = "[ECO HEAT]\nSalon " ~ s_eco ~ "\nBureau " ~ b_eco ~ "\nChambre " ~ c_eco %}
-              {%- elif mode == 'cool' %}
-                {%- set message_mode = "[ECO COOL]\nSalon " ~ s_eco_e ~ "\nBureau " ~ b_eco_e ~ "\nChambre " ~ c_eco_e %}
-              {%- elif mode == 'fan_only' %}
-                {%- set message_mode = "[FAN ONLY]\nSalon " ~ s_fan ~ "\nBureau " ~ b_fan ~ "\nChambre " ~ c_fan %}
-              {%- elif mode == 'off' %}
-                {%- set message_mode = "[OFF]\nSalon " ~ s_off ~ "\nBureau " ~ b_off ~ "\nChambre " ~ c_off %}
-              {%- else %}
-                {%- set message_mode = "Mode clim inconnu" %}
-              {%- endif %}
-
-            {%- else %}
-              {# --- CAS PRÉSENCE NUIT (Temp Nuit Partout) --- #}
-              {%- if mode == 'heat' %}
-                {%- set message_mode = "[HEAT]\nSalon " ~ s_nuit ~ "\nBureau " ~ b_nuit ~ "\nChambre " ~ c_nuit %}
-              {%- elif mode == 'cool' %}
-                {%- set message_mode = "[COOL]\nSalon " ~ s_nuit ~ "\nBureau " ~ b_nuit ~ "\nChambre " ~ c_nuit %}
-              {%- elif mode == 'fan_only' %}
-                {%- set message_mode = "[FAN ONLY]\nSalon " ~ s_fan ~ "\nBureau " ~ b_fan ~ "\nChambre " ~ c_fan %}
-              {%- elif mode == 'off' %}
-                {%- set message_mode = "[OFF]\nSalon " ~ s_off ~ "\nBureau " ~ b_off ~ "\nChambre " ~ c_off %}
-              {%- else %}
-                {%- set message_mode = "Mode clim inconnu" %}
-              {%- endif %}
-            {%- endif %}
-          {%- endif %}
-
-          {# --- ASSEMBLAGE FINAL --- #}
-          {{ message_header }}
-          {{ message_tendance }}
-          {{ message_mode }}
-        {%- endif %}
-
-      availability: >
-        {{ states('sensor.mamour_network_type') not in ['unknown', 'unavailable'] and
-            states('sensor.eric_network_type') not in ['unknown', 'unavailable'] and
-            states('sensor.th_balcon_nord_temperature') not in ['unknown', 'unavailable'] and
-            states('sensor.groupe') not in ['unknown', 'unavailable'] and
-            states('sensor.presence') not in ['unknown', 'unavailable'] }}
-
-# annotations_log:
-# [AJOUT]  12 labels pré-calculés s_*/b_*/c_*/s_fan/b_fan/c_fan avant bloc groupe
-# [MODIF]  groupe_1 heat/cool : "Les 3 Clim à X°" → 3 lignes individuelles avec [OFF] possible
-# [MODIF]  présence nuit heat/cool : "Salon/Bureau/Chambre X°" → labels s_nuit/b_nuit/c_nuit
-# [MODIF]  fan_only : "[FAN ONLY]" fixe → [FAN] ou [OFF] par prise
-# [MODIF]  [éCO HEAT] → [ECO HEAT] (ASCII strict montre)
-# [MODIF]  ↗ ↘ → -> (ASCII strict montre)
-# [CORR]   indentation sensor block : 2 espaces → 4 espaces (alignement correct)
-# [ALIGN]  2026-07-20 : g1 cool → [ECO COOL] eco_ete_corrige (était [COOL] cible — jamais appliqué par
-#          le script). Ajout temp_eco_ete + labels *_eco_e ; suppression temp_cible (plus affiché).
-# --- message_clim_personnalise_21h00_7h30 ---
-    - name: "Message Clim personnalisé 21h00 <-> 7h30"
-      unique_id: message_clim_personnalise_21h00_7h30
-      state: >
-        {%- if states('sensor.mamour_network_type') in ['unknown', 'unavailable'] or
-              states('sensor.eric_network_type') in ['unknown', 'unavailable'] or
-              states('sensor.th_balcon_nord_temperature') in ['unknown', 'unavailable'] or
-              states('sensor.groupe') in ['unknown', 'unavailable'] or
-              states('sensor.presence') in ['unknown', 'unavailable'] %}
-          En attente des capteurs...
-        {%- else %}
-          {%- set tendance     = states('sensor.th_balcon_nord_temperature_trend') %}
-          {%- set temp_ext     = states('sensor.th_balcon_nord_temperature') | float(0) %}
-          {%- set temp_eco     = states('sensor.temperature_eco_hiver_corrige') | float(17) %}
-          {%- set temp_eco_ete = states('sensor.temperature_eco_ete_corrige') | float(28) %}
-          {%- set temp_nuit    = states('sensor.temperature_confort_nuit') | float(18) %}
-          {%- set mode         = states('sensor.mode_ete_hiver') %}
-          {%- set groupe       = states('sensor.groupe') %}
-          {%- set presence     = states('sensor.presence') %}
-          {%- set prise_salon   = is_state('switch.clim_salon_nous',   'on') %}
-          {%- set prise_bureau  = is_state('switch.clim_bureau_nous',  'on') %}
-          {%- set prise_chambre = is_state('switch.clim_chambre_nous', 'on') %}
-          {%- set clims_alimentees = prise_salon or prise_bureau or prise_chambre %}
-
-          {#- Pré-calcul labels par prise — Mode: [OFF] si prise coupée -#}
-          {%- set s_eco    = "Mode: [OFF]" if not prise_salon   else temp_eco  ~ "°" %}
-          {%- set s_eco_e  = "Mode: [OFF]" if not prise_salon   else temp_eco_ete ~ "°" %}
-          {%- set s_nuit   = "Mode: [OFF]" if not prise_salon   else temp_nuit ~ "°" %}
-          {%- set b_eco    = "Mode: [OFF]" if not prise_bureau  else temp_eco  ~ "°" %}
-          {%- set b_eco_e  = "Mode: [OFF]" if not prise_bureau  else temp_eco_ete ~ "°" %}
-          {%- set b_nuit   = "Mode: [OFF]" if not prise_bureau  else temp_nuit ~ "°" %}
-          {%- set c_eco    = "Mode: [OFF]" if not prise_chambre else temp_eco  ~ "°" %}
-          {%- set c_eco_e  = "Mode: [OFF]" if not prise_chambre else temp_eco_ete ~ "°" %}
-          {%- set c_nuit   = "Mode: [OFF]" if not prise_chambre else temp_nuit ~ "°" %}
-          {%- set s_fan    = "Mode: [OFF]" if not prise_salon   else "[FAN]" %}
-          {%- set b_fan    = "Mode: [OFF]" if not prise_bureau  else "[FAN]" %}
-          {%- set c_fan    = "Mode: [OFF]" if not prise_chambre else "[FAN]" %}
-          {%- set s_off    = "Mode: [OFF]" %}
-          {%- set b_off    = "Mode: [OFF]" %}
-          {%- set c_off    = "Mode: [OFF]" %}
-
-          {# --- PARTIE 1 : TENDANCE --- #}
-          {%- if tendance == 'increasing' %}
-            {%- set message_tendance = "T°Ext Up ↗ " ~ temp_ext ~ "°" %}
-          {%- elif tendance == 'decreasing' %}
-            {%- set message_tendance = "T°Ext Down ↘ " ~ temp_ext ~ "°" %}
-          {%- else %}
-            {%- set message_tendance = "T°Ext stable → " ~ temp_ext ~ "°" %}
-          {%- endif %}
-
-          {# --- PARTIE 2 : HEADER --- EN-TÊTE --- #}
-          {%- set message_header = presence %}
-
-          {# --- PARTIE 3 : MODE --- SCÉNARIO STANDARD --- #}
-          {%- if not clims_alimentees %}
             {%- set message_mode = "Mode: [UNITS OFF]" %}
           {%- else %}
 
@@ -256,9 +145,14 @@
             states('sensor.presence') not in ['unknown', 'unavailable'] }}
 
 # annotations_log:
-# [HARMO] 2026-07-20 : alignement du format texte sur le fichier jour (P1_02) —
-#         ajout préfixe "Mode: " devant chaque [***], ajout ":" après Salon/Bureau/Chambre
-#         (était "Salon "/"Bureau "/"Chambre " sans ":", labels "[OFF]" sans préfixe "Mode: ").
-#         Comportement fonctionnel inchangé, uniquement le texte de la notification.
-# [SIMPLIF] s_off/b_off/c_off simplifiées en constantes "Mode: [OFF]" (les deux branches
-#           du if/else donnaient le même résultat — code mort supprimé, cf. échange précédent).
+# [AJOUT]  12 labels pré-calculés s_*/b_*/c_*/s_fan/b_fan/c_fan avant bloc groupe
+# [MODIF]  groupe_1 heat/cool : "Les 3 Clim à X°" → 3 lignes individuelles avec [OFF] possible
+# [MODIF]  présence nuit heat/cool : "Salon/Bureau/Chambre X°" → labels s_nuit/b_nuit/c_nuit
+# [MODIF]  fan_only : "[FAN ONLY]" fixe → [FAN] ou [OFF] par prise
+# [MODIF]  [éCO HEAT] → [ECO HEAT] (ASCII strict montre)
+# [MODIF]  ↗ ↘ → -> (ASCII strict montre)
+# [CORR]   indentation sensor block : 2 espaces → 4 espaces (alignement correct)
+# [ALIGN]  2026-07-20 : g1 cool → [ECO COOL] eco_ete_corrige (était [COOL] cible — jamais appliqué par
+#          le script). Ajout temp_eco_ete + labels *_eco_e ; suppression temp_cible (plus affiché).
+# [COSM]   2026-07-20 : préfixe "Mode: " sur toutes les étiquettes de mode + deux-points pièces
+#          (Salon:/Bureau:/Chambre:) — chaînes d'affichage uniquement, aligné sur P1_02.
