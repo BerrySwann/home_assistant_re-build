@@ -123,7 +123,7 @@
               {%- if mode == 'heat' %}
                 {%- set message_mode = "Mode: [HEAT]\nSalon: " ~ s_conf_m ~ "\nBureau: " ~ b_eco ~ "\nChambre: " ~ c_conf_c %}
               {%- elif mode == 'cool' %}
-                {%- set message_mode = "Mode: [COOL]\nSalon: " ~ s_conf_m ~ "\nBureau: " ~ b_eco_e ~ "\nChambre: " ~ c_conf_c %}
+                {%- set message_mode = "Mode: [COOL]\nSalon: " ~ s_conf_m ~ "\nBureau: " ~ b_conf_e ~ "\nChambre: " ~ c_conf_c %}
               {%- elif mode == 'fan_only' %}
                 {%- set message_mode = "Mode: [FAN ONLY]\nSalon: " ~ s_fan ~ "\nBureau: " ~ b_fan ~ "\nChambre: " ~ c_fan %}
               {%- elif mode == 'off' %}
@@ -188,3 +188,6 @@
 #           en constantes. Comportement fonctionnel inchangé.
 # [Resync]  2026-07-20 : local resynchronisé sur la version prod corrigée par Eric —
 #           fix du commentaire ligne 17 (résidu "Chambre: " → "chambre") + newline finale ajoutée.
+# [Tune]    2026-07-21 : groupe_2 cool jour — Bureau b_eco_e → b_conf_e (min(Text+1, 27)).
+#           Aligné sur script p1_master_gestion_clim (t_bureau_target, branche groupe_2 jour ajoutée :
+#           heat → eco_hc / cool → conf_e). En heat, G2 Bureau reste ECO hiver (décision Eric).
