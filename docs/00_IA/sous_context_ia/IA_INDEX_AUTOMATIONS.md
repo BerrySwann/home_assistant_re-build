@@ -1,78 +1,96 @@
-# IA_INDEX_AUTOMATIONS.md — Contexte & Compétence INDEX AUTOMATIONS
+# IA_INDEX_AUTOMATIONS.md — Contexte & Competence INDEX AUTOMATIONS
 
-*Créé le : 2026-05-30*
+*Refait le : 2026-07-21 (ancien fichier 2026-05-30 obsolete — TREE_CORRIGE + INDEX_AUTOMATIONS.md supprimes)*
 
 ---
 
 ## Ce que c'est
 
-Fichier : `docs_automations/docs/INDEX_AUTOMATIONS.md`
-Taille : ~980 lignes
+Les automations sont indexees dans la section `03-AUTOMATIONS` de :
+- **Index principal** : `H:\Docs\INDEX_GLOBAL.md` (source de verite, rendu GitHub)
+- **Copie locale** : `ReBuild/Github/INDEX_GLOBAL.md`
 
-Index de navigation complet des 48 automations HA, organisées en 10 catégories.
-Structure en accordéon HTML (`<details>`/`<summary>`) à 2 niveaux, rendu natif sur GitHub.
+Il n'y a plus de fichier `INDEX_AUTOMATIONS.md` distinct — fusionne dans INDEX_GLOBAL.md (2026-07-16).
 
 ---
 
-## Structure
+## Arborescence locale des automations
 
 ```
-Niveau 1 : Catégorie (nb automations | description)
-  Niveau 2 : ✅/⚠️ Alias automation
-    → Doc + YAML TREE_CORRIGE
-    → Déclencheurs (trigger types)
-    → Entités (accordéon)
-    → Notifications (accordéon)
+DOCS/03_docs_automations/
+- docs_automations_YAML/     <- YAML individuels par automation (reference locale)
+    P1_clim_chauffage/
+    P1_cuisine/
+    P1_sdb/
+    P2_prises/
+    P3_eclairage/
+    backup/
+    meteo/
+    stores/
+    energie/
+    systeme/
+    raspi/
+- docs_automations_MD/       <- Docs texte par automation
 ```
 
----
-
-## Catégories (10)
-
-| Catégorie | Nb | Dossier TREE_CORRIGE |
-|:----------|:---|:---------------------|
-| 🔧 Backup Git | 7 | `backup/` |
-| 🌤️ Météo | 5 | `meteo/` |
-| 🌡️ P1 Clim & Chauffage | 11 | `P1_clim_chauffage/` |
-| 🍳 P1 Cuisine | 2 | `P1_cuisine/` |
-| 🚿 P1 Salle de Bain | 3 | `P1_sdb/` |
-| 🔌 P2 Prises | 3 | `P2_prises/` |
-| 💡 P3 Éclairage | 8 | `P3_eclairage/` |
-| 🏠 Stores | 2 | `stores/` |
-| ⚡ Énergie | 2 | `energie/` |
-| 🖥️ Système | 6 | `systeme/` |
-| 🍓 Raspberry Pi4 (archivé) | 1 | `raspi/` |
+> ⚠️ Ne jamais modifier `automations.yaml` directement.
+> Tout changement passe par l'UI HA, en s'appuyant sur les fichiers `docs_automations_YAML/`.
 
 ---
 
-## Anomalies connues (2026-05-30)
+## Comptage (verifie 2026-07-19)
 
-- `P2_prises/eco_prises.yaml` → ancienne version — à archiver `old/`
-- `P2_prises/bureau_allumage_pc.yaml` → supprimée de HA — à archiver
-- `P2_prises/rodret_soufflant_sdb.yaml` → supprimée de HA — à archiver
-- `P2_prises/rodret_tv_chambre.yaml` → supprimée de HA — à archiver
-- `P2_bouton_rodret_soufflant_sdb.yaml` → mal placé à la racine
-- `systeme/diag_enregistrement_journalier.yaml` → **absent de GitHub — vérifier dans HA live**
+**48 automations** dans `automations.yaml` prod.
 
----
+| Categories | Nb reel |
+|:-----------|:--------|
+| Backup Git | 2 |
+| Meteo | 5 |
+| P1 Clim & Chauffage | 10 |
+| P1 Cuisine | 2 |
+| P1 Salle de Bain | 3 |
+| P2 Prises | 3 |
+| P3 Eclairage | 7 |
+| Stores | 2 |
+| Energie | 2 |
+| Systeme | 6 |
+| Raspberry Pi4 (archive) | 1 |
 
-## Comment régénérer
-
-1. Fetcher `automations.yaml` depuis GitHub raw
-2. Parser les 48 automations top-level par `alias:`
-3. Reconstruire le mapping CATEGORIES (catégorie → liste alias + doc + tree_rel)
-4. Régénérer avec `render_automation_html()`
-5. Sauvegarder dans `docs_automations/docs/INDEX_AUTOMATIONS.md`
-
-**À régénérer après :**
-- Ajout / suppression / renommage d'une automation dans HA
-- Création d'un nouveau fichier dans TREE_CORRIGE
-- Modification d'une catégorie
+> Comptages verifies programmatiquement (audit 2026-07-19).
+> "P1 Clim & Chauffage (11)" et "P3 Eclairage (8)" etaient faux dans INDEX_GLOBAL.md — corriges.
 
 ---
 
-## Docs automations
+## Structure de l'index (section 03-AUTOMATIONS dans INDEX_GLOBAL.md)
 
-14 docs créées le 2026-05-30 (nouvelles automations non documentées).
-Toutes les docs sont dans `docs_automations/docs/[CATEGORIE]/NOM.md`.
-Contenu minimal généré — descriptions à compléter manuellement.
+```
+Niveau 1 : Categorie (nb automations | description)
+  Niveau 2 : Alias automation
+    - Lien doc .md
+    - Lien YAML docs_automations_YAML/
+    - Declencheurs (trigger types)
+    - Entites
+    - Notifications
+```
+
+Structure accordeon HTML (`<details>`/`<summary>`) a 2 niveaux, rendu natif sur GitHub.
+
+---
+
+## Anomalies connues / ouvertes
+
+- `P1-CUISINE-B` : correctif deploye en local (`b_chauffage_cuisine_vacances.yaml`),
+  **PAS encore applique dans HA** — Eric doit le faire via UI HA (voir TODO.txt P1-CUISINE-B).
+
+---
+
+## Comment mettre a jour l'index
+
+Apres ajout/suppression/renommage d'une automation dans HA :
+
+1. Fetcher `automations.yaml` depuis GitHub (raw) ou lire `H:\automations.yaml`
+2. Identifier l'alias concerne
+3. Mettre a jour la section 03-AUTOMATIONS de `INDEX_GLOBAL.md`
+4. Mettre a jour le compteur de la categorie dans le TOC
+5. Creer/archiver le fichier YAML correspondant dans `docs_automations_YAML/`
+6. Push `H:\Docs\INDEX_GLOBAL.md`
