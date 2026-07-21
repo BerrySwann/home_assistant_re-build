@@ -21,11 +21,11 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | device_tracker.* / sensor.*_wifi_ssid              | phone_*_status_card (HTML)                         | Home Page / VIGNETTE_WIFI_PRESENCE |
+# | Companion App (HA natif) | sensor.mamour_network_type / _wi_fi_connection · sensor.eric_network_type / _wi_fi_connection | condition_mamour_wifi / condition_eric_wifi / etat_wifi_maison | Home Page / VIGNETTE_WIFI_PRESENCE |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Le SSID 'Freebox_GG' est codé en dur — à mettre à jour si changement
-#   de box ou de nom réseau.
+# - Le SSID cible est 'Module B.E.R.Y.L. [GG-5.0]' / '[GG-2.4]' — codé en dur
+#   dans le template, à mettre à jour si changement de box ou de nom réseau.
 # - wifi_!? signifie connecté en Wi-Fi mais PAS sur le bon réseau (voisin).
 # - Dépend de l'intégration Companion App (HA) sur chaque téléphone.
 #   Sans l'app active en background, les sensors peuvent être 'unavailable'.

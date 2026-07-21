@@ -19,7 +19,7 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | Intégration Sun (HA natif) | sun.sun → state / elevation                        | is_jour / is_nuit (binary)                         | Automations générales / stores     |
+# | [calculé] (horloge système) | today_at("07:30") / today_at("21:00") — PAS sun.sun (voir PIÈGES) | est_jour_7h30_21h / est_nuit_21h_7h30               | Automations générales / stores (condition, non visible dashboard) |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces capteurs sont INDÉPENDANTS du soleil (lever/coucher). Pour les

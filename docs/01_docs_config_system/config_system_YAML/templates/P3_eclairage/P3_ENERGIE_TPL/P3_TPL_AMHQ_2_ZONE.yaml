@@ -1,12 +1,12 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ PÔLE 3. TEMPLATES TPL : RELAIS kWh UM — ÉCLAIRAGE PAR ZONE (8 ZONES)    │
+# │ PÔLE 3. TEMPLATES TPL : RELAIS kWh UM — ÉCLAIRAGE PAR ZONE (9 ZONES)    │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
 # Capteurs templates agrégeant les kWh par zone (pièce ou groupe de pièces).
-# 8 zones × 4 cycles AMHQ = 32 sensors _um_kwh_tpl.
+# 9 zones × 4 cycles AMHQ = 36 sensors _um_kwh_tpl.
 # Zones : ENTRÉE×1, SALON×5, CUISINE×1, COULOIR×1, BUREAU×5, SDB×2, CHAMBRE×4,
-# APPART_3 (Entrée+Cuisine+Couloir).
+# APPART_3 (Entrée+Cuisine+Couloir), APPART_2 (Entrée+Couloir).
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Source : sensor.{slug}_{cycle}_um_kwh_tpl (P3_TPL_AMHQ_1_UNITE)
@@ -25,6 +25,7 @@
 # | [calculé]  | sensor.relais_lumiere_sdb_sonoff_{c}_um_kwh_tpl … ×2 | eclairage_sdb_2_{c}_um_kwh_tpl       | P3_AVG_AMHQ_2_ZONE → L2C3 |
 # | [calculé]  | sensor.hue_white_lamp_chambre_1_{c}_um_kwh_tpl … ×4 | eclairage_chambre_4_{c}_um_kwh_tpl   | P3_AVG_AMHQ_2_ZONE → L2C3 |
 # | [calculé]  | entree + cuisine + couloir _um_kwh_tpl           | eclairage_appart_3_{c}_um_kwh_tpl         | P3_AVG_AMHQ_2_ZONE → L2C3 |
+# | [calculé]  | entree + couloir _um_kwh_tpl                     | eclairage_appart_2_{c}_um_kwh_tpl         | P3_AVG_AMHQ_2_ZONE → L2C3 |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Source = _um_kwh_tpl (P3_TPL_AMHQ_1_UNITE), PAS les _um bruts du UM.
@@ -530,5 +531,8 @@
         {{ sensors | map('states') | map('float', default=0) | sum | round(3) }}
 
 # annotations_log:
-# - [Création] 10 zones × 4 cycles = 40 sensors _um_kwh_tpl (8 zones pièce + 2 zones appart).
+# - [Création] 9 zones × 4 cycles = 36 sensors _um_kwh_tpl (7 zones pièce + 2 zones appart).
+# - [Fix 2026-07-19] Titre/description disaient "8 zones/32 sensors", annotations_log disait
+#   "10 zones/40 sensors" — les deux etaient faux, le compte reel est 9 zones/36 sensors
+#   (verifie par comptage des unique_id du corps du fichier).
 # - [2026-06-14] state_class: total_increasing → total (relay UM qui reset à chaque cycle — total_increasing accumulerait les kWh entre cycles)

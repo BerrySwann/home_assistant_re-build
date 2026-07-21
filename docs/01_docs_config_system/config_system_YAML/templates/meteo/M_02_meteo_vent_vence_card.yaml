@@ -21,7 +21,7 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | Intégration Météo (OpenMet/MF) | sensor.wind_speed / wind_bearing / wind_gust       | meteo_vent_vence_html                              | L1C1 Météo                         |
+# | Météo France (weather.vence) | attributs wind_bearing / wind_speed                | vence_wind_direction_label / vence_wind_bearing / vence_wind_speed_kmh | L1C1 Météo (windrose-card) |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Si wind_bearing est None (vent nul), label retourne 'Calme' et
@@ -34,9 +34,9 @@
 # - L1C1 Météo (windrose-card vent, vignette direction/vitesse/label)
 
 - sensor:
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : windrose-card - LABEL DIRECTION DU VENT VENCE         │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌───────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : windrose-card - LABEL DIRECTION DU VENT VENCE  │
+# └───────────────────────────────────────────────────────────┘
 
 # windrose-card - LABEL Direction du Vent Vence
 # --- vence_wind_direction_label ---
@@ -67,9 +67,9 @@
         {% else %} Calme
         {% endif %}
 
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : windrose-card - DIRECTION ET VITESSE DU VENT          │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌──────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : windrose-card - DIRECTION ET VITESSE DU VENT  │
+# └──────────────────────────────────────────────────────────┘
 
 # windrose-card - Direction du Vent Vence
 # --- vence_wind_bearing ---

@@ -14,8 +14,8 @@
 # - sensor.presence → texte de présence affiché en en-tête du message
 # - sensor.mode_ete_hiver → heat / cool / fan_only
 # - sensor.temperature_corrige_mamour / sensor.temperature_corrige_eric
-# - sensor.temperature_corrige_chambre / sensor.temperature_cible
-# - sensor.temperature_confort_jour / sensor.temperature_eco_hiver_corrige
+# - sensor.temperature_corrige_chambre
+# - sensor.temperature_eco_hiver_corrige / sensor.temperature_eco_ete_corrige
 # - switch.clim_*_nous → vérifie alimentation de chaque unité
 #
 #
@@ -23,14 +23,17 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                                |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:------------------------------------|
-# | [calculé]      | sensor.clim_*_temperature_cible / climate.*        | message_clim_7h30_21h_*                            | L1C3 Commandes Clim (notifications) |
+# | [calculé]      | sensor.clim_*_temperature_cible / climate.*        | message_clim_personnalise_7h30_21h00               | L1C3 Commandes Clim (notifications) |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ce fichier produit : sensor.message_clim_personnalise_7h30_21h00
 # - Disponibilité conditionnée à la présence des 5 capteurs réseau/T°.
 # - Ne pas confondre avec le fichier nuit (21h → 7h30) qui utilise temp_nuit.
 # - Les sauts de ligne \n dans les messages sont intentionnels pour l'affichage mobile.
-# - Labels pré-calculés s_*/b_*/c_* AVANT le bloc groupe → [OFF] si prise coupée.
+# - Labels pré-calculés s_*/b_*/c_* AVANT le bloc groupe → Mode: [OFF] si prise coupée.
+# - Les branches groupe/mode reflètent EXACTEMENT t_*_target du script
+#   p1_master_gestion_clim (aligné 2026-07-20) — toute modif du script doit
+#   être répercutée ici (et dans le fichier nuit P1_03).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Déclenché par automation L1C3 (notification clim 7h30-21h)
@@ -38,9 +41,9 @@
 
 - sensor:
 
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : GÉNÉRATEUR DE MESSAGE (LOGIQUE SCÉNARIOS)             │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌───────────────────────────────────────────────────────┐
+# │ 10. AUTRE : GÉNÉRATEUR DE MESSAGE (LOGIQUE SCÉNARIOS)  │
+# └───────────────────────────────────────────────────────┘
 
 # --- message_clim_personnalise_7h30_21h00 ---
     - name: "Message Clim Personnalise 7h30 <-> 21h00"
@@ -55,38 +58,36 @@
         {%- else %}
           {%- set tendance     = states('sensor.th_balcon_nord_temperature_trend') %}
           {%- set temp_ext     = states('sensor.th_balcon_nord_temperature') | float(0) %}
-          {%- set temp_cible   = states('sensor.temperature_cible') | float(0) %}
-          {%- set temp_confort = states('sensor.temperature_confort_jour') | float(19) %}
           {%- set temp_conf_m  = states('sensor.temperature_corrige_mamour') | float(20) %}
           {%- set temp_conf_e  = states('sensor.temperature_corrige_eric') | float(18) %}
           {%- set temp_conf_c  = states('sensor.temperature_corrige_chambre') | float(18) %}
           {%- set temp_eco     = states('sensor.temperature_eco_hiver_corrige') | float(17) %}
+          {%- set temp_eco_ete = states('sensor.temperature_eco_ete_corrige') | float(28) %}
           {%- set mode         = states('sensor.mode_ete_hiver') %}
           {%- set groupe       = states('sensor.groupe') %}
           {%- set presence     = states('sensor.presence') %}
-          {%- set prise_salon   = is_state('switch.clim_salon_nous',   'on') %}
-          {%- set prise_bureau  = is_state('switch.clim_bureau_nous',  'on') %}
+          {%- set prise_salon   = is_state('switch.clim_salon_nous', 'on') %}
+          {%- set prise_bureau  = is_state('switch.clim_bureau_nous', 'on') %}
           {%- set prise_chambre = is_state('switch.clim_chambre_nous', 'on') %}
           {%- set clims_alimentees = prise_salon or prise_bureau or prise_chambre %}
 
-          {#- Pré-calcul labels par prise — [OFF] si prise coupée -#}
-          {%- set s_eco    = "[OFF]" if not prise_salon   else temp_eco     ~ "°" %}
-          {%- set s_cible  = "[OFF]" if not prise_salon   else temp_cible   ~ "°" %}
-          {%- set s_conf_m = "[OFF]" if not prise_salon   else temp_conf_m  ~ "°" %}
-          {%- set s_conf   = "[OFF]" if not prise_salon   else temp_confort ~ "°" %}
-          {%- set b_eco    = "[OFF]" if not prise_bureau  else temp_eco     ~ "°" %}
-          {%- set b_cible  = "[OFF]" if not prise_bureau  else temp_cible   ~ "°" %}
-          {%- set b_conf_e = "[OFF]" if not prise_bureau  else temp_conf_e  ~ "°" %}
-          {%- set b_conf   = "[OFF]" if not prise_bureau  else temp_confort ~ "°" %}
-          {%- set c_eco    = "[OFF]" if not prise_chambre else temp_eco     ~ "°" %}
-          {%- set c_cible  = "[OFF]" if not prise_chambre else temp_cible   ~ "°" %}
-          {%- set c_conf_c = "[OFF]" if not prise_chambre else temp_conf_c  ~ "°" %}
-          {%- set s_fan    = "[OFF]" if not prise_salon   else "[FAN]" %}
-          {%- set b_fan    = "[OFF]" if not prise_bureau  else "[FAN]" %}
-          {%- set c_fan    = "[OFF]" if not prise_chambre else "[FAN]" %}
-          {%- set s_off    = "[OFF]" if not prise_salon   else "[OFF]" %}
-          {%- set b_off    = "[OFF]" if not prise_bureau  else "[OFF]" %}
-          {%- set c_off    = "[OFF]" if not prise_chambre else "[OFF]" %}
+          {#- Pré-calcul labels par prise — Mode: [OFF] si prise coupée -#}
+          {%- set s_eco    = "Mode: [OFF]" if not prise_salon   else temp_eco     ~ "°" %}
+          {%- set s_eco_e  = "Mode: [OFF]" if not prise_salon   else temp_eco_ete ~ "°" %}
+          {%- set s_conf_m = "Mode: [OFF]" if not prise_salon   else temp_conf_m  ~ "°" %}
+          {%- set s_conf_e = "Mode: [OFF]" if not prise_salon   else temp_conf_e  ~ "°" %}
+          {%- set b_eco    = "Mode: [OFF]" if not prise_bureau  else temp_eco     ~ "°" %}
+          {%- set b_eco_e  = "Mode: [OFF]" if not prise_bureau  else temp_eco_ete ~ "°" %}
+          {%- set b_conf_e = "Mode: [OFF]" if not prise_bureau  else temp_conf_e  ~ "°" %}
+          {%- set c_eco    = "Mode: [OFF]" if not prise_chambre else temp_eco     ~ "°" %}
+          {%- set c_eco_e  = "Mode: [OFF]" if not prise_chambre else temp_eco_ete ~ "°" %}
+          {%- set c_conf_c = "Mode: [OFF]" if not prise_chambre else temp_conf_c  ~ "°" %}
+          {%- set s_fan    = "Mode: [OFF]" if not prise_salon   else "[FAN]" %}
+          {%- set b_fan    = "Mode: [OFF]" if not prise_bureau  else "[FAN]" %}
+          {%- set c_fan    = "Mode: [OFF]" if not prise_chambre else "[FAN]" %}
+          {%- set s_off    = "Mode: [OFF]" %}
+          {%- set b_off    = "Mode: [OFF]" %}
+          {%- set c_off    = "Mode: [OFF]" %}
 
           {# --- PARTIE 1 : TENDANCE --- #}
           {%- if tendance == 'increasing' %}
@@ -102,57 +103,57 @@
 
           {# --- PARTIE 3 : MODE --- SCÉNARIO STANDARD --- #}
           {%- if not clims_alimentees %}
-            {%- set message_mode = "[UNITS OFF]" %}
+            {%- set message_mode = "Mode: [UNITS OFF]" %}
           {%- else %}
 
             {%- if 'groupe_1' in groupe %}
               {%- if mode == 'heat' %}
-                {%- set message_mode = "[ECO HEAT]\nSalon " ~ s_eco ~ "\nBureau " ~ b_eco ~ "\nChambre " ~ c_eco %}
+                {%- set message_mode = "Mode: [ECO HEAT]\nSalon: " ~ s_eco ~ "\nBureau: " ~ b_eco ~ "\nChambre: " ~ c_eco %}
               {%- elif mode == 'cool' %}
-                {%- set message_mode = "[COOL]\nSalon " ~ s_cible ~ "\nBureau " ~ b_cible ~ "\nChambre " ~ c_cible %}
+                {%- set message_mode = "Mode: [ECO COOL]\nSalon: " ~ s_eco_e ~ "\nBureau: " ~ b_eco_e ~ "\nChambre: " ~ c_eco_e %}
               {%- elif mode == 'fan_only' %}
-                {%- set message_mode = "[FAN ONLY]\nSalon " ~ s_fan ~ "\nBureau " ~ b_fan ~ "\nChambre " ~ c_fan %}
+                {%- set message_mode = "Mode: [FAN ONLY]\nSalon: " ~ s_fan ~ "\nBureau: " ~ b_fan ~ "\nChambre: " ~ c_fan %}
               {%- elif mode == 'off' %}
-                {%- set message_mode = "[OFF]\nSalon " ~ s_off ~ "\nBureau " ~ b_off ~ "\nChambre " ~ c_off %}
+                {%- set message_mode = "Mode: [OFF]\nSalon: " ~ s_off ~ "\nBureau: " ~ b_off ~ "\nChambre: " ~ c_off %}
               {%- else %}
                 {%- set message_mode = "Mode clim inconnu" %}
               {%- endif %}
 
             {%- elif 'groupe_2' in groupe %}
               {%- if mode == 'heat' %}
-                {%- set message_mode = "[HEAT]\nSalon " ~ s_conf_m ~ "\nBureau " ~ b_cible ~ "\nChambre " ~ c_conf_c %}
+                {%- set message_mode = "Mode: [HEAT]\nSalon: " ~ s_conf_m ~ "\nBureau: " ~ b_eco ~ "\nChambre: " ~ c_conf_c %}
               {%- elif mode == 'cool' %}
-                {%- set message_mode = "[COOL]\nSalon " ~ s_conf ~ "\nBureau " ~ b_cible ~ "\nChambre " ~ c_cible %}
+                {%- set message_mode = "Mode: [COOL]\nSalon: " ~ s_conf_m ~ "\nBureau: " ~ b_conf_e ~ "\nChambre: " ~ c_conf_c %}
               {%- elif mode == 'fan_only' %}
-                {%- set message_mode = "[FAN ONLY]\nSalon " ~ s_fan ~ "\nBureau " ~ b_fan ~ "\nChambre " ~ c_fan %}
+                {%- set message_mode = "Mode: [FAN ONLY]\nSalon: " ~ s_fan ~ "\nBureau: " ~ b_fan ~ "\nChambre: " ~ c_fan %}
               {%- elif mode == 'off' %}
-                {%- set message_mode = "[OFF]\nSalon " ~ s_off ~ "\nBureau " ~ b_off ~ "\nChambre " ~ c_off %}
+                {%- set message_mode = "Mode: [OFF]\nSalon: " ~ s_off ~ "\nBureau: " ~ b_off ~ "\nChambre: " ~ c_off %}
               {%- else %}
                 {%- set message_mode = "Mode clim inconnu" %}
               {%- endif %}
 
             {%- elif 'groupe_3' in groupe %}
               {%- if mode == 'heat' %}
-                {%- set message_mode = "[HEAT]\nSalon " ~ s_cible ~ "\nBureau " ~ b_conf_e ~ "\nChambre " ~ c_conf_c %}
+                {%- set message_mode = "Mode: [HEAT]\nSalon: " ~ s_conf_e ~ "\nBureau: " ~ b_conf_e ~ "\nChambre: " ~ c_conf_c %}
               {%- elif mode == 'cool' %}
-                {%- set message_mode = "[COOL]\nSalon " ~ s_cible ~ "\nBureau " ~ b_conf ~ "\nChambre " ~ c_cible %}
+                {%- set message_mode = "Mode: [COOL]\nSalon: " ~ s_conf_e ~ "\nBureau: " ~ b_conf_e ~ "\nChambre: " ~ c_conf_c %}
               {%- elif mode == 'fan_only' %}
-                {%- set message_mode = "[FAN ONLY]\nSalon " ~ s_fan ~ "\nBureau " ~ b_fan ~ "\nChambre " ~ c_fan %}
+                {%- set message_mode = "Mode: [FAN ONLY]\nSalon: " ~ s_fan ~ "\nBureau: " ~ b_fan ~ "\nChambre: " ~ c_fan %}
               {%- elif mode == 'off' %}
-                {%- set message_mode = "[OFF]\nSalon " ~ s_off ~ "\nBureau " ~ b_off ~ "\nChambre " ~ c_off %}
+                {%- set message_mode = "Mode: [OFF]\nSalon: " ~ s_off ~ "\nBureau: " ~ b_off ~ "\nChambre: " ~ c_off %}
               {%- else %}
                 {%- set message_mode = "Mode clim inconnu" %}
               {%- endif %}
 
             {%- elif 'groupe_4' in groupe %}
               {%- if mode == 'heat' %}
-                {%- set message_mode = "[HEAT]\nSalon " ~ s_conf_m ~ "\nBureau " ~ b_conf_e ~ "\nChambre " ~ c_conf_c %}
+                {%- set message_mode = "Mode: [HEAT]\nSalon: " ~ s_conf_m ~ "\nBureau: " ~ b_conf_e ~ "\nChambre: " ~ c_conf_c %}
               {%- elif mode == 'cool' %}
-                {%- set message_mode = "[COOL]\nSalon " ~ s_conf ~ "\nBureau " ~ b_conf ~ "\nChambre " ~ c_cible %}
+                {%- set message_mode = "Mode: [COOL]\nSalon: " ~ s_conf_m ~ "\nBureau: " ~ b_conf_e ~ "\nChambre: " ~ c_conf_c %}
               {%- elif mode == 'fan_only' %}
-                {%- set message_mode = "[FAN ONLY]\nSalon " ~ s_fan ~ "\nBureau " ~ b_fan ~ "\nChambre " ~ c_fan %}
+                {%- set message_mode = "Mode: [FAN ONLY]\nSalon: " ~ s_fan ~ "\nBureau: " ~ b_fan ~ "\nChambre: " ~ c_fan %}
               {%- elif mode == 'off' %}
-                {%- set message_mode = "[OFF]\nSalon " ~ s_off ~ "\nBureau " ~ b_off ~ "\nChambre " ~ c_off %}
+                {%- set message_mode = "Mode: [OFF]\nSalon: " ~ s_off ~ "\nBureau: " ~ b_off ~ "\nChambre: " ~ c_off %}
               {%- else %}
                 {%- set message_mode = "Mode clim inconnu" %}
               {%- endif %}
@@ -176,10 +177,17 @@
             states('sensor.presence') not in ['unknown', 'unavailable'] }}
 
 # annotations_log:
-# [AJOUT]  13 labels pré-calculés s_*/b_*/c_*/s_fan/b_fan/c_fan avant bloc groupe
-# [MODIF]  groupe_1 heat : "Les 3 Clim à X°" → 3 lignes Salon/Bureau/Chambre avec [OFF] possible
-# [MODIF]  fan_only tous groupes : "[FAN ONLY]" fixe → [FAN] ou [OFF] par prise
-# [MODIF]  [éCO HEAT] → [ECO HEAT] (ASCII strict montre)
-# [MODIF]  ↗ ↘ → -> (ASCII strict montre)
-# [MODIF]  groupe_4 cool : "Salon & Bureau" splitté en 2 lignes individuelles avec [OFF]
-# [MODIF]  "Scénario groupe non géré" → ASCII strict
+# [FIX] 2026-07-20 : correction Ctrl+H malheureux ("Bureau"→"Bureau: ", "Chambre"→"Chambre: ", "Salon"→"Salon:")
+#       qui avait cassé : entity_id (switch.clim_Bureau:_nous, switch.clim_Chambre:_nous,
+#       sensor.temperature_corrige_Chambre: → syntaxe entity_id invalide, ":" interdit),
+#       noms de variables Jinja (prise_Salon:, prise_Bureau:, prise_Chambre: → erreur de
+#       compilation du template, ":" interdit dans un nom de variable),
+#       et espacement du texte affiché ("Bureau:  " double espace → "Bureau: " simple).
+# [SIMPLIF] s_off/b_off/c_off étaient devenus des tautologies conditionnelles inutiles
+#           après la casse (toujours "Mode: [OFF]" dans les deux branches) — simplifiées
+#           en constantes. Comportement fonctionnel inchangé.
+# [Resync]  2026-07-20 : local resynchronisé sur la version prod corrigée par Eric —
+#           fix du commentaire ligne 17 (résidu "Chambre: " → "chambre") + newline finale ajoutée.
+# [Tune]    2026-07-21 : groupe_2 cool jour — Bureau b_eco_e → b_conf_e (min(Text+1, 27)).
+#           Aligné sur script p1_master_gestion_clim (t_bureau_target, branche groupe_2 jour ajoutée :
+#           heat → eco_hc / cool → conf_e). En heat, G2 Bureau reste ECO hiver (décision Eric).

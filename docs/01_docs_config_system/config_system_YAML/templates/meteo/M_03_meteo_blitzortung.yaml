@@ -20,7 +20,8 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.blitzortung_*_um (M_03_meteo_UM_blitzortung) | blitzortung_card_html / _distance_label            | L1C1 Météo                         |
+# | Blitzortung (intégration MQTT native) | sensor.maison_lightning_azimuth / _distance / _counter | lightning_direction_label / lightning_distance_km / lightning_bearing | L1C1 Météo (windrose-card foudre) |
+# | Blitzortung + input_datetime | sensor.maison_lightning_counter + sensor.blitzortung_lightning_last_impact_time / input_datetime.dernier_eclair | temps_depuis_le_dernier_impact_de_foudre / dernier_impact_temps_reel | L1C1 Météo (timer dernier impact) |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - La windrose-card requiert bearing != 0 → remplacement par 1.
@@ -31,9 +32,9 @@
 # - L1C1 Météo (carte foudre windrose-card, timer dernier impact).
 
 - sensor:
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : windrose-card - LABEL DIRECTION ET DISTANCE           │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌─────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : windrose-card - LABEL DIRECTION ET DISTANCE  │
+# └─────────────────────────────────────────────────────────┘
 
 # windrose-card - LABEL Lightning direction label
 # --- lightning_direction_label ---
@@ -90,9 +91,9 @@
           {% endif %}
         {% endif %}
 
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : Card - TEMPS DEPUIS IMPACT (TIMER "LAST CHANGE")      │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌──────────────────────────────────────────────────────────────┐
+# │ 10. AUTRE : Card - TEMPS DEPUIS IMPACT (TIMER "LAST CHANGE")  │
+# └──────────────────────────────────────────────────────────────┘
 
 # --- temps_depuis_le_dernier_impact_de_foudre ---
     - name: "Temps depuis le dernier impact de foudre"

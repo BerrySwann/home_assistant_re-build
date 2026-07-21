@@ -50,8 +50,6 @@
 homeassistant:
   allowlist_external_dirs:
     - "/config"          # Requis pour l'intégration File (notify → fichier)
-  packages:
-    cssmeteo: !include packages/cssmeteo.yaml
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ LOGGER — FILTRES BRUIT CONNU                                             │
@@ -127,6 +125,7 @@ command_line: !include_dir_merge_list command_line/
 
 # --- shell_command ---
 shell_command: !include_dir_merge_named shell_command/
+#shell_command: !include shell_command.yaml
 
 # --- camera (DÉSACTIVÉ — obsolète) ---               # "[L95] modif"
 #camera: !include camera.yaml

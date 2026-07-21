@@ -21,7 +21,8 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | device_tracker.* / sensor.*_network_type           | presence_maison (présent/absent)                   | Home Page / automations présence   |
+# | Companion App (HA natif) | sensor.mamour_network_type / _wi_fi_connection · sensor.eric_network_type / _wi_fi_connection | groupe (groupe_1 à groupe_4)                       | Automations présence (volets, clim...) |
+# | Companion App (HA natif) | sensor.mamour_network_type / _wi_fi_connection · sensor.eric_network_type / _wi_fi_connection | presence (texte formaté WIFI/CELL/WIFI_!?)         | Home Page / VIGNETTE_WIFI_PRESENCE  |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - sensor.groupe alimente les AUTOMATIONS de présence (volets, clim, etc.)
@@ -35,9 +36,9 @@
 # - WIFI_PRESENCE (Page Home — logique déclenchement mode Absent/Présent)
 
 - sensor:
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ P4 : DÉTERMINATION DU GROUPE (PRESENCE AUTOMATION)                │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌────────────────────────────────────────────────────┐
+# │ P4 : DÉTERMINATION DU GROUPE (PRESENCE AUTOMATION)  │
+# └────────────────────────────────────────────────────┘
 
 # Calcul du groupe (1=Personne, 2=Mamour, 3=Eric, 4=Tous)
 # --- groupe ---
@@ -66,9 +67,9 @@
           groupe_1
         {% endif %}
 
-# ┌───────────────────────────────────────────────────────────────────┐
-# │ P4 : CALCUL ET AFFICHAGE DES STATUTS RÉSEAU (INTERFACE)           │
-# └───────────────────────────────────────────────────────────────────┘
+# ┌─────────────────────────────────────────────────────────┐
+# │ P4 : CALCUL ET AFFICHAGE DES STATUTS RÉSEAU (INTERFACE)  │
+# └─────────────────────────────────────────────────────────┘
 
 # Affichage textuel complexe (WIFI / CELL / WIFI_!?)
 # --- presence ---
