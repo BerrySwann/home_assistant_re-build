@@ -11,9 +11,9 @@
 # ## 🧮 CALCUL & SOURCES :
 # - sensor.th_balcon_nord_temperature : T° extérieure (sonde SONOFF balcon)
 # - sensor.seuil_non_chauffage : 18°C — seuil bascule heat/fan_only
-# - sensor.seuil_non_clim    : 27°C — seuil bascule off/cool
-# - sensor.consigne_de_base : lit seuil_non_chauffage (18°C) ou seuil_non_clim (28°C)
-# - sensor.temperature_differentielle : consigne_de_base ± delta_1 (19°C hiver / 27°C été)
+# - sensor.seuil_non_clim    : 26°C — seuil bascule off/cool
+# - sensor.consigne_de_base : lit seuil_non_chauffage (18°C) ou seuil_non_clim (26°C)
+# - sensor.temperature_differentielle : consigne_de_base ± delta_1 (19°C hiver / 25°C été)
 # - Deltas fixes : delta_1=1, delta_2=2, delta_3=3, delta_5=5, delta_7=7 (°C)
 # - T° confort = différentielle + (T°cible - consigne_de_base)
 # - T°cible modulée par T°ext (paliers < 12°C, > 32°C, > 40°C)
@@ -51,7 +51,7 @@
 
 - sensor:
 # ┌──────────────────────────────────────┐
-# │ PARAMÈTRES FIXES ET DELTAS DE CALCUL  │
+# │ PARAMÈTRES FIXES ET DELTAS DE CALCUL │
 # └──────────────────────────────────────┘
 
 # --- temperature_eco_hiver ---
@@ -109,7 +109,7 @@
       unit_of_measurement: "°C"
 
 # ┌───────────────────────────────────────────────────┐
-# │ DÉTECTION DU MODE GÉNÉRAL ET CONSIGNES DYNAMIQUES  │
+# │ DÉTECTION DU MODE GÉNÉRAL ET CONSIGNES DYNAMIQUES │
 # └───────────────────────────────────────────────────┘
 
 # --- mode_ete_hiver ---
@@ -154,11 +154,11 @@
         {% endif %}
 
 # ┌─────────────────────────────────┐
-# │ CORRECTIONS SPÉCIFIQUES          │
+# │ CORRECTIONS SPÉCIFIQUES         │
 # └─────────────────────────────────┘
 
 # ┌─────────────────────────────────┐
-# │ 04. SALON                        │
+# │ 04. SALON                       │
 # └─────────────────────────────────┘
 # --- temperature_corrige_mamour ---
     - name: "Temperature Corrigé Mamour"
@@ -176,7 +176,7 @@
         {% endif %}
 
 # ┌─────────────────────────────────┐
-# │ 07. BUREAU                       │
+# │ 07. BUREAU                      │
 # └─────────────────────────────────┘
 # --- temperature_corrige_eric ---
     - name: "Temperature Corrigé Eric"
@@ -195,7 +195,7 @@
         {% endif %}
 
 # ┌─────────────────────────────────┐
-# │ 09. CHAMBRE                      │
+# │ 09. CHAMBRE                     │
 # └─────────────────────────────────┘
 # --- temperature_corrige_chambre ---
     - name: "Temperature Corrigé Chambre"
@@ -206,13 +206,13 @@
         {% set delta_1 = states('sensor.delta_1') | float(1) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
-          {{ [temp_ext + delta_1, 28] | min | int }}
+          {{ [temp_ext + delta_1, 27] | min | int }}
         {% else %}
           {{ states('sensor.consigne_de_base') | float(0) | int }}
         {% endif %}
 
 # ┌────────────────────────────────────────────────┐
-# │ MOTEURS DE CALCUL DYNAMIQUES (CIBLE / CONFORT)  │
+# │ MOTEURS DE CALCUL DYNAMIQUES (CIBLE / CONFORT) │
 # └────────────────────────────────────────────────┘
 
 # --- temperature_cible ---
@@ -288,7 +288,7 @@
         {% endif %}
 
 # ┌────────────────────────────────────────────────────┐
-# │ MOYENNES, DELTAS INTERNES ET RECOMMANDATIONS ADEME  │
+# │ MOYENNES, DELTAS INTERNES ET RECOMMANDATIONS ADEME │
 # └────────────────────────────────────────────────────┘
 
 # --- temperature_moyenne_interieure ---
@@ -356,8 +356,9 @@
 #             plafonds été temperature_corrige_eric/_chambre relevés 27→28 ; réintégrés ici.
 #             Boîtes ASCII 07.BUREAU/09.CHAMBRE/MOTEURS DE CALCUL restaurées à largeur conforme (37 car.).
 # - [Tune]    2026-07-20 (bilan) : temperature_corrige_eric plafond ramené 28→27 (Bureau).
-#             temperature_corrige_chambre reste à 28 (confirmé). temperature_eco_ete_corrige
-#             (absent) inchangé — comportement déjà conforme (26/27/28 selon T°ext).
+#             temperature_eco_ete_corrige (absent) inchangé — déjà conforme (26/27/28 selon T°ext).
+# - [Tune]    2026-07-21 : temperature_corrige_chambre plafond 28→27 confirmé (28° trop chaud).
+#             Code déjà à 27 — seule cette note était restée à 28 (incohérence log corrigée).
 # - [Revert]  2026-07-20 : temperature_confort_nuit en cool = 26°C FIXE quoi qu'il arrive
 #             (sommeil > conso, décision explicite). ANNULE le palier dynamique canicule
 #             (Vert/Jaune/Orange/Rouge) ajouté plus tôt aujourd'hui — sensor.alerte_canicule
