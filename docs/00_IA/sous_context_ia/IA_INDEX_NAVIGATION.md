@@ -1,79 +1,98 @@
-# IA_INDEX_NAVIGATION.md — Contexte & Compétence INDEX NAVIGATION
+# IA_INDEX_NAVIGATION.md — Contexte & Competence INDEX NAVIGATION (dashboard)
 
-*Créé le : 2026-05-30*
+*Refait le : 2026-07-21 (ancien fichier 2026-05-30 obsolete — TREE_CORRIGE + INDEX_NAVIGATION_FULL.md supprimes)*
 
 ---
 
 ## Ce que c'est
 
-Fichier local : `ReBuild/INDEX_NAVIGATION_FULL.md`
-Fichier GitHub : `INDEX_NAVIGATION.md` (racine du repo `home_assistant_re-build`)
-Taille : ~2655 lignes
+La navigation dashboard est indexee dans la section `02-DASHBOARD` de :
+- **Index principal** : `H:\Docs\INDEX_GLOBAL.md` (source de verite, rendu GitHub)
+- **Copie locale** : `ReBuild/Github/INDEX_GLOBAL.md`
 
-Index de navigation complet des 18 vignettes du dashboard HA.
-Structure en accordéon HTML (`<details>`/`<summary>`) à 3 niveaux, rendu natif sur GitHub.
+Il n'y a plus de fichier `INDEX_NAVIGATION_FULL.md` ni `INDEX_NAVIGATION.md` distinct —
+fusionnes dans INDEX_GLOBAL.md (2026-07-16).
 
 ---
 
-## Structure par vignette (L*C*)
+## Arborescence locale dashboard
 
 ```
-Niveau 1 : L*C* — LABEL | X page(s) | ~N entités        ← rétracté par défaut
-  Niveau 2a : 🖼️ Vignette
-    → Doc vignette (lien Docs/docs_dashboard/docs/L*C*_NOM/)
-    → YAML vignette (lien Docs/Dashboard/L*C*_XX_Nom/)
-    → Fichiers sources TREE_CORRIGE (par fichier, entités listées)
-  Niveau 2b : 📄 Page(s)
-    → Doc page + YAML page
-    → Fichiers sources TREE_CORRIGE
-    → 💬 Pop-up #hash — N entités
-        chaque entité : "voir fichier" (lien TREE_CORRIGE) ou "Natif HA"
-  Niveau 2c : 📎 Fichiers complémentaires (si présents)
+DOCS/02_docs_dashboard/
+- dashboard_docs_YAML/       <- YAMLs dashboard (vignettes, pages, cartes isolees)
+    L1C1_01_Meteo/
+    L1C2_02_Temperatures/
+    ... (L*C* pour les 18 vignettes)
+    Dashboard_COMPLET/       <- Exports complets dashboard (Dashboard_YYYY_MM_DD.yaml)
+- dashboard_docs_MD/         <- Docs texte par vignette/page
+    DEPENDANCES_GLOBALES.md  <- Chaînes de dependances toutes vignettes
+    L1C1_*/  L1C2_*/  ...
 ```
 
----
-
-## Chemins — relatifs racine GitHub
-
-| Type | Chemin |
-|:-----|:-------|
-| YAMLs dashboard | `Docs/Dashboard/L*C*_XX_Nom/` |
-| Docs vignettes | `Docs/docs_dashboard/docs/L*C*_NOM/` |
-| Fichiers sources | `Docs/docs_dashboard/TREE_CORRIGE/templates\|sensors\|utility_meter/` |
+Chemin prod config YAML : `DOCS/01_docs_config_system/config_system_YAML/` (sensors/, templates/, utility_meter/)
+Chemin prod dashboard : `H:\Docs\` (push depuis local)
 
 ---
 
-## Comment régénérer le fichier
+## Structure de l'index (section 02-DASHBOARD dans INDEX_GLOBAL.md)
 
-Le fichier est généré par script Python (session Cowork 2026-05-30).
-Les données intermédiaires sont en `/tmp/` (fetched_yaml.pkl, entity_map.pkl) — perdues entre sessions.
+```
+Niveau 1 : L*C* — LABEL | X page(s) | ~N entites       <- retracte par defaut
+  Niveau 2a : Vignette
+    - Doc vignette (lien docs/02_docs_dashboard/dashboard_docs_MD/L*C*_*)
+    - YAML vignette (lien docs/02_docs_dashboard/dashboard_docs_YAML/L*C*_*)
+    - Fichiers sources (par fichier, entites listees)
+  Niveau 2b : Page(s)
+    - Doc page + YAML page
+    - Fichiers sources (sensors/ templates/ utility_meter/)
+    - Pop-up #hash — N entites
+        chaque entite : "voir fichier" (lien config_system_YAML/) ou "Natif HA"
+  Niveau 2c : Fichiers complementaires (si presents)
+```
 
-**À régénérer après :**
-- Ajout ou modification d'une vignette ou page YAML
-- Ajout d'un nouveau fichier dans TREE_CORRIGE
-- Correction d'un unique_id dans TREE_CORRIGE
-
-**Procédure :**
-1. Relancer le fetch des 40 YAMLs dashboard (18 vignettes + pages)
-2. Relancer le fetch/scan TREE_CORRIGE local pour le mapping entity → fichier source
-3. Régénérer avec le script de parsing (parse_page + render_sources_html + render_popup_html)
-4. Sauvegarder dans `ReBuild/INDEX_NAVIGATION_FULL.md`
-5. Pusher sur GitHub en remplacement de `INDEX_NAVIGATION.md`
-
----
-
-## Limites connues
-
-- Entités dans templates Jinja (`states('sensor.xxx')`) **non extraites** par le parser regex
-- Entités dans `button-card` JS inline **non extraites**
-- Réel nb d'entités ~30-40% supérieur sur pages complexes (L2C1, L1C1)
-- **L4C1 Proxmox** : page non pushée sur GitHub, doc vignette à créer
-- Le parser pop-up utilise une logique séquentielle (bubble-card flat) : les entités sont assignées au dernier pop-up défini avant elles dans le fichier
+> Structure accordeon HTML (`<details>`/`<summary>`) a 3 niveaux, rendu natif sur GitHub.
+> Balance globale verifiee apres chaque modif : `<details>` 358/358, `<blockquote>` 376/376.
 
 ---
 
-## Mapping entités → fichiers sources
+## Chemins GitHub (relatifs racine repo `home_assistant_re-build`)
 
-736 `unique_id` mappés depuis TREE_CORRIGE local au 2026-05-30.
-Fichier référence local : `ReBuild/docs_dashboard/TREE_CORRIGE/` (scan complet `.yaml`).
-Cas particulier : Mini-PC supprimé — sensors proxmox_* via MQTT natif directement (pas de fichier YAML dans templates/).
+| Type | Chemin GitHub |
+|:-----|:-------------|
+| YAMLs dashboard | `docs/02_docs_dashboard/dashboard_docs_YAML/L*C*_*/` |
+| Docs vignettes | `docs/02_docs_dashboard/dashboard_docs_MD/L*C*_*/` |
+| Fichiers sources YAML | `docs/01_docs_config_system/config_system_YAML/sensors/\|templates/\|utility_meter/` |
+
+> ⚠️ Casse minuscule `docs/` depuis 2026-07-19 (renommage H:\Docs -> H:\docs + push GitHub).
+> Tous les liens INDEX_GLOBAL.md utilisent `docs/` minuscule (385 liens corriges).
+
+---
+
+## Etat de l'index (audit 2026-07-19)
+
+- **18 vignettes** L1C1 a L6C3 auditees et corrigees integralement (entites verifiees contre YAML reel).
+- **Homepage** corrigee (sensor.etat_wifi_maison, temperature_delta_affichage).
+- Bugs corriges : balises `<details>` non fermees sur L1C2 et L1C3 (tout apres L1C2 etait imbrique).
+- Blocs "Fichiers sources" repositionnes sur les bonnes pages (L2C1, L3C1, L4C3, L5C2).
+
+---
+
+## Limites toujours valides
+
+- Entites dans templates Jinja (`states('sensor.xxx')`) non extraites par un parser automatique.
+- Entites dans `button-card` JS inline non extractibles automatiquement.
+- Reel nb d'entites ~30-40% superieur sur pages complexes (L2C1, L1C1).
+- L3C1 : incoherence structurelle HTML "Page Gauche"/"Page Droite" deconnectees de leurs blocs
+  entites — signalee, non corrigee (hors perimetre exactitude entites).
+
+---
+
+## Comment mettre a jour l'index
+
+Apres ajout/modification d'une vignette, page ou fichier source :
+
+1. Lire le YAML reel concerne (`DOCS/02_docs_dashboard/dashboard_docs_YAML/L*C*/`)
+2. Verifier chaque entite citee contre le YAML prod (`DOCS/01_docs_config_system/config_system_YAML/`)
+3. Mettre a jour la section 02-DASHBOARD de `INDEX_GLOBAL.md` (local puis H:\Docs\)
+4. Verifier la balance `<details>`/`</details>` et `<blockquote>`/`</blockquote>` avant push
+5. Mettre a jour `DEPENDANCES_GLOBALES.md` si necessaire (/sync_index)

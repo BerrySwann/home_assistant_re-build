@@ -16,44 +16,43 @@
 | `scheduler` | Scheduler | Planificateur avancé (custom:scheduler-card) |
 | `meross_lan` | Meross LAN | Prises Meross en local sans cloud |
 | `blitzortung` | Blitzortung | Détection foudre temps réel |
-| `atmo_france` | Atmo France | Qualité air extérieur (IQA) |
+| `atmofrance` | Atmo France | Qualité air extérieur (IQA) |
 | `vigieau` | VigiEau | Restrictions d'eau en vigueur (L6C3) |
-| `soleil` | Soleil (Sun2) | Lever/coucher + azimut/élévation solaire précis (remplace `sun` natif) |
-| `tarifs_edf` | Tarifs EDF | Index HP/HC, coûts Tempo/Base (P0) |
+| `tarif_edf` | Tarifs EDF | Index HP/HC, couts Tempo/Base (P0) |
 
 ### Officielles HA Core
 
 | Intégration | Rôle |
 |:------------|:-----|
 | `mqtt` | Bus Z2M, Blitzortung, capteurs divers |
-| `philips_hue` | Pont Hue (toutes ampoules P3) |
+| `hue` | Pont Hue (toutes ampoules P3) |
 | `broadlink` | Émetteur IR (relai SmartIR) |
 | `meteo_france` | Alertes vigilance, prévisions, cameras cartes |
 | `moon` | Phase lunaire (`lune` = nom FR intégration Core `moon`) |
 | `season` | Détection saison courante (`saison` = nom FR) |
 | `feedreader` | Suivi flux RSS (releases GitHub) |
-| `proxmox_ve` | Supervision Proxmox PVE — CPU %, RAM %, Storage %, Status (L4C1) — 6 appareils |
-| `system_monitor` | Supervision système Mini PC — CPU, RAM, disque (L4C2) — inclut "Vitesse CPU" |
+| `proxmoxve` | Supervision Proxmox PVE — CPU %, RAM %, Storage %, Status (L4C1) — 6 appareils |
+| `systemmonitor` | Supervision systeme Mini PC — CPU, RAM, disque (L4C2) — inclut "Vitesse CPU" |
 | `mobile_app` | 7 appareils : 2 Poco (accroche WiFi présence P4) + autres (L5C2 batteries portables) |
 | `local_file` | 2 entités météo : `MF_alerte_today` + `MF_alerte_tomorrow` (images vigilance Météo France) |
 | `file` | 2 entités notify : `diag_conso_elec.txt` + `ecart_liky_vs_nodon.txt` (logs /homeassistant/notifs/) |
 | `restful` | 1 entité : `sensor.blitzortung_lightning_localisation` |
 | `backup` | Sauvegardes HA (core) |
-| `adresse_ip_locale` | 1 entité IP du Mini PC |
+| `local_ip` | 1 entite IP du Mini PC |
 
-### Add-ons Supervisor
+### Add-ons Supervisor (7 add-ons actifs)
 
-> 11 services / 63 entités
+> ⚠️ Zigbee2MQTT et MariaDB tournent sur LXC Proxmox (LXC 200 / LXC 201) — pas des add-ons HA.
 
-| Add-on | Rôle |
-|:-------|:-----|
-| `mosquitto` | Broker MQTT — bus de communication Z2M + Blitzortung + capteurs MQTT |
-| `zigbee2mqtt` | Passerelle Zigbee → MQTT (thermostats SONOFF, contacts fenêtres, prises NOUS…) |
-| `myelectricaldata` | Données Linky (index HP/HC, historique conso) → P0 Énergie Globale |
-| `studio_code_server` | VSCode intégré HA (édition fichiers YAML en prod) |
-| `samba_share` | Accès réseau aux fichiers /homeassistant/ |
-| `tailscale` | VPN accès distant sécurisé à HA |
-| `advanced_ssh` | Terminal SSH + Web Terminal |
+| Add-on | Slug | Role |
+|:-------|:-----|:-----|
+| Advanced SSH & Web Terminal | `a0d7b954_ssh` | Terminal SSH + Web Terminal |
+| Cloudflared | `9074a9fa_cloudflared` | Tunnel HTTPS acces distant securise |
+| Linky | `cf6b56a3_linky` | Donnees MyElectricalData (index HP/HC, historique conso) -> P0 |
+| Mosquitto broker | `core_mosquitto` | Broker MQTT — bus de communication Blitzortung + capteurs MQTT |
+| Samba share | `core_samba` | Acces reseau aux fichiers /homeassistant/ (H:\) |
+| Studio Code Server | `a0d7b954_vscode` | VSCode integre HA (edition fichiers YAML en prod) |
+| Tailscale | `a0d7b954_tailscale` | VPN acces distant securise a HA |
 
 ---
 
@@ -70,13 +69,11 @@
 
 | Type | Nom de la Carte | Utilisation Principale |
 |:-----|:----------------|:----------------------|
-| **Graph/Data** | `apexcharts-card` | Graphiques énergie, moyennes glissantes, seuils couleur |
-| | `mini-graph-card` | Tendances rapides (températures, humidité) |
-| | `plotly-graph` | Analyse de données complexe |
+| **Graph/Data** | `apexcharts-card` | Graphiques energie, moyennes glissantes, seuils couleur |
+| | `mini-graph-card` | Tendances rapides (temperatures, humidite) |
 | | `bar-card` | Jauges de consommation et niveaux de batteries |
-| | `energy-overview-card` | Vue d'ensemble consommation énergétique |
-| | `flex-table-card` | Tableaux flexibles multi-entités |
-| | `history-explorer-card` | Exploration interactive de l'historique |
+| | `energy-overview-card` | Vue d'ensemble consommation energetique |
+| | `flex-table-card` | Tableaux flexibles multi-entites |
 | **UI/Design** | `bubble-card` | Navigation, Pop-ups par pièce, boutons tactiles |
 | | `mushroom-card` | Éclairage (Mushroom Light), Titres, Chips d'état |
 | | `mod-card` (card-mod) | Personnalisation CSS avancée des cartes |
@@ -90,14 +87,12 @@
 | **Spécialisées** | `battery-state-card` | Surveillance état batteries/piles par groupe (L5C1) |
 | | `entity-progress-card` | Barre de progression avec label dynamique (L6C2) |
 | | `enhanced-shutter-card` | Gestion visuelle des stores (L3C3) |
-| | `tempometer-gauge-card` | Jauges de température et humidité pro |
-| | `ring-tile-card` | Indicateurs circulaires (Statut MariaDB, CPU) |
+| | `ring-tile` | Indicateurs circulaires (Statut MariaDB, CPU) |
 | | `flex-horseshoe-card` | Jauges en fer à cheval (puissance, CPU…) |
 | | `multiple-entity-row` | Multi-affichage sur une seule ligne d'entité |
 | | `text-divider-row` | Séparateurs de sections textuels |
 | | `navbar-card` | Barre de navigation personnalisée |
-| | `linky-card` | Suivi MyElectricalData (Compteur Linky) |
-| | `linky-content-card` | Affichage données Linky (page énergie) |
+| | `content-card-linky` | Affichage donnees Linky (page energie) |
 | | `rain-gauge-card` | Visualisation de la pluviométrie |
 | | `uv-index-card` | Affichage de l'indice UV (L1C1) |
 | | `windrose-card` | Rose des vents (L1C1 Météo) |
@@ -108,6 +103,9 @@
 | | `horizon-card` | Visualisation lever/coucher soleil sur l'horizon |
 | | `temperature-heatmap-card` | Heatmap températures |
 | | `tsmoon-card` | Phase lunaire (HACS : "Simple Moon Card") |
+| | `meteocss-card` | Carte meteo CSS animee (HACS : "MeteoCSS Card") |
+| | `html-jinja2-template-card` | Templates Jinja2 inline dans le dashboard |
+| | `scheduler-card` | Interface visuelle du planificateur (scheduler) |
 | **Icônes** | `hass-hue-icons` | Pack icônes Hue — prefix `hue:` (ampoules, fixtures) |
 | | `custom-brand-icons` | Pack icônes marques — prefix `phu:` (ex: `phu:proxmox`) |
 
