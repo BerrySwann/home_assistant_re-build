@@ -1,5 +1,6 @@
 # 🔗 DÉPENDANCES GLOBALES — TABLEAU DE BORD HA
-*Dernière mise à jour : 2026-07-19 (Audit complet intégralité du fichier : L1C1 à L6C3 + HOME PAGE + Complément fichiers racine, sur la réalité des yaml prod. Corrections : entités obsolètes/fictives, mauvaise attribution de fichiers, section tronquée complétée par hypothèse. Voir détail dans les sections concernées.)*
+*Dernière mise à jour : 2026-07-20 (P1_01 confort_nuit : palier nuit été dynamique selon vigilance canicule - nouvelle dépendance M_01_meteo_alertes_card → P1_01_MASTER → L1C3)*
+*2026-07-19 (Audit complet intégralité du fichier : L1C1 à L6C3 + HOME PAGE + Complément fichiers racine, sur la réalité des yaml prod. Corrections : entités obsolètes/fictives, mauvaise attribution de fichiers, section tronquée complétée par hypothèse. Voir détail dans les sections concernées.)*
 *2026-07-18 (Nettoyage résidu chambre : capteur MQTT dispo + bloc mqtt: de configuration.yaml + dossier mqtt/, local + prod H:\ - Versions L1C3 2026-07-18 ajoutées : consigne chambre via climate direct + badge remote rétabli)*
 *2026-07-17 (Resync local ← GitHub/prod : configuration.yaml + scripts.yaml — fix chambre script J-2-0)*
 
@@ -364,7 +365,19 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 | Entité | Correction | Statut |
 |:-------|:-----------|:------:|
 | `sensor.temperature_eco_ete_corrige` | Courbe validée : ≤28°C→30 / 29-32°C→29 / >32°C→28 (monotone décroissante ✓) | ✅ |
-| `sensor.temperature_confort_nuit` | Seuil 29°C ajouté — zone 26-32°C scindée : ≤29→+d1(26°C) / >29→+d2(27°C) — floor nuit 27°C garanti | ✅ |
+| `sensor.temperature_confort_nuit` | Seuil 29°C ajouté — zone 26-32°C scindée : ≤29→+d1(26°C) / >29→+d2(27°C) — floor nuit 27°C garanti — **remplacé, voir section 2026-07-19/20 ci-dessous** | ✅ |
+
+### Corrections sensors P1_MASTER — sessions 2026-07-19 / 2026-07-20
+
+| Entité | Correction | Statut |
+|:-------|:-----------|:------:|
+| `sensor.temperature_confort_nuit` | 07-19 : palier été +d2 relevé de >29 à >30 (confort nuit) | ✅ |
+| `sensor.temperature_confort_nuit` | 07-20 : palier dynamique selon `sensor.alerte_canicule` (M_01_meteo_alertes_card) : Vert/indispo=29, Jaune=30, Orange=30, Rouge=31 — T°ext ≤ palier → 26°C, au-delà → 27°C — nouvelle dépendance M_01 → P1_01_MASTER → L1C3 | ✅ |
+| `sensor.message_clim_personnalise_7h30_21h00` (P1_02) | 07-20 : 8 branches réalignées sur t_*_target du script p1_master_gestion_clim — g1 cool → [ECO COOL] eco_ete_corrige ; g2/g3/g4 cool → corrige_m/e/c ; g2 heat Bureau → eco ; g3 heat Salon → conf_e. Sources : + `temperature_eco_ete_corrige`, - `temperature_cible` / `temperature_confort_jour` | ✅ |
+| `sensor.message_clim_personnalise_21h00_7h30` (P1_03) | 07-20 : g1 cool → [ECO COOL] eco_ete_corrige (était [COOL] cible). Sources : + `temperature_eco_ete_corrige`, - `temperature_cible` | ✅ |
+| `sensor.temperature_corrige_eric` / `_chambre` (P1_01) | 07-20 (16h07, modif Eric en prod hors session) : plafond été relevé 27→28°C. Réintégré en local + boîtes ASCII 07.BUREAU/09.CHAMBRE/MOTEURS restaurées 37 car. | ✅ |
+| `sensor.message_clim_personnalise_7h30_21h00` (P1_02) | 07-20 (16h, correction Eric en prod) : fix Ctrl+H ayant cassé entity_id/variables Jinja + `s_off/b_off/c_off` simplifiés en constantes. Local resynchronisé sur prod + fix commentaire ligne 17 | ✅ |
+| `sensor.message_clim_personnalise_21h00_7h30` (P1_03) | 07-20 : préfixe "Mode: " + deux-points pièces (Salon:/Bureau:/Chambre:) aligné sur P1_02 | ✅ |
 
 ### Corrections Dashboard — session 2026-06-29
 

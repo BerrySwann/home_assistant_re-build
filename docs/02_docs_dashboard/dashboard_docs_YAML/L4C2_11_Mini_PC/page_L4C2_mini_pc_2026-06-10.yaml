@@ -1,0 +1,2032 @@
+type: grid
+cards:
+  - type: heading
+    icon: phu:intel-nuc
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+    heading: Mini - P.C.
+  - type: vertical-stack
+    cards:
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: picture
+            image: /local/images/mini pc.png
+            card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                  }
+          - type: custom:stack-in-card
+            mode: horizontal
+            cards:
+              - type: custom:mushroom-template-card
+                primary: "IP Int. / Ext.:"
+                secondary: " "
+                icon: mdi:ip
+                icon_color: white
+                tap_action:
+                  action: none
+                card_mod:
+                  style:
+                    mushroom-shape-icon$: |
+                      .shape {
+                        border: 2px rgba(255,255,255,0.5) outset;
+                        --shape-color: rgba(0,0,0,1.0) !important;
+                        --icon-size: 30px;
+                      }
+                    .: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+              - type: custom:mushroom-template-card
+                primary: "{{ states('sensor.local_ip') }}"
+                secondary: " "
+                icon: mdi:ip-network
+                icon_color: white
+                tap_action:
+                  action: navigate
+                  navigation_path: "#temp"
+                card_mod:
+                  style:
+                    mushroom-shape-icon$: |
+                      .shape {
+                        border: 2px rgba(255,255,255,0.5) outset;
+                        --shape-color: rgba(0,0,0,1.0) !important;
+                        --icon-size: 30px;
+                      }
+                    .: |
+                      ha-card {
+                        margin-left: 0px;
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+              - type: custom:mushroom-template-card
+                primary: "{{ states('sensor.ip_externe') }}"
+                secondary: ""
+                icon: mdi:wan
+                icon_color: white
+                tap_action:
+                  action: none
+                card_mod:
+                  style:
+                    mushroom-shape-icon$: |
+                      .shape {
+                        border: 2px rgba(255,255,255,0.5) outset;
+                        --shape-color: rgba(0,0,0,1.0) !important;
+                        --icon-size: 30px;
+                      }
+                    .: |
+                      ha-card {
+                        margin-left: -20px;
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+            card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+          - type: custom:stack-in-card
+            mode: horizontal
+            cards:
+              - type: custom:mushroom-template-card
+                primary: "Uptime:"
+                secondary: " "
+                icon: mdi:clock-outline
+                icon_color: white
+                tap_action:
+                  action: none
+                card_mod:
+                  style:
+                    mushroom-shape-icon$: |
+                      .shape {
+                        border: 2px rgba(255,255,255,0.5) outset;
+                        --shape-color: rgba(0,0,0,1.0) !important;
+                        --icon-size: 30px;
+                      }
+                    .: |
+                      ha-card {
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+              - type: custom:mushroom-template-card
+                primary: >-
+                  {% set uptime = states('sensor.pve_uptime') | float(0) %} {% set
+                  jours = (uptime / 24) | int(0) %} {% set heures = (uptime % 24)
+                  | int(0) %} {% set minutes = ((uptime % 1) * 60) | int(0) %}
+                  {%- if jours > 0 -%} {{ jours }}d {{ "%02d"|format(heures) }}h
+                  {{ "%02d"|format(minutes) }}m {%- else -%} {{
+                  "%02d"|format(heures) }}h {{ "%02d"|format(minutes) }}m {%-
+                  endif -%}
+                secondary: ""
+                icon: mdi:clock-start
+                icon_color: white
+                tap_action:
+                  action: none
+                card_mod:
+                  style:
+                    mushroom-shape-icon$: |
+                      .shape {
+                        border: 2px rgba(255,255,255,0.5) outset;
+                        --shape-color: rgba(0,0,0,1.0) !important;
+                        --icon-size: 30px;
+                      }
+                    .: |
+                      ha-card {
+                        margin-left: -100px;
+                        background: none !important;
+                        box-shadow: none !important;
+                        border: none !important;
+                      }
+            card_mod:
+              style: |
+                ha-card {
+                  margin-top: -15px;
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+        card_mod:
+          style: |
+            ha-card {
+              margin-top: -15px;
+              background: none !important;
+              box-shadow: none !important;
+              border: none !important;
+            }
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:bar-card
+                entities:
+                  - entity: sensor.pve_utilisation_du_processeur
+                    name: CPU USED
+                    icon: mdi:cpu-64-bit
+                    color: rgb(68,115,158)
+                    height: 40px
+                    min: 0
+                    max: 100
+                    target: 82
+                animation:
+                  state: "off"
+                positions:
+                  icon: inside
+                  indicator: inside
+                entity_row: true
+                decimal: 2
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+                severity:
+                  - color: rgb(68,115,158)
+                    from: 0
+                    to: 74
+                  - color: rgb(255,193,7)
+                    from: 75
+                    to: 79
+                  - color: rgb(244,67,54)
+                    from: 90
+                    to: 100
+                card_mod:
+                  style: >
+                    ha-card {
+                      font-size: 12px;
+                      font-weight: bold;
+                      --mdc-icon-size: 30px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    } bar-card-currentbar { border: none !important; box-shadow:
+                    none !important; } bar-card-backgroundbar { border: none
+                    !important; box-shadow: none !important; }
+              - type: custom:bar-card
+                entities:
+                  - entity: sensor.proxmox_cpu_package
+                    name: CPU Temp.
+                    icon: mdi:thermometer
+                    color: rgb(255,193,7)
+                    height: 40px
+                    min: 0
+                    max: 100
+                    target: 75
+                animation:
+                  state: "on"
+                positions:
+                  icon: inside
+                  indicator: inside
+                entity_row: true
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+                severity:
+                  - color: rgb(255,193,7)
+                    from: 0
+                    to: 64
+                  - color: rgb(255,152,1)
+                    from: 65
+                    to: 74
+                  - color: rgb(244,67,54)
+                    from: 75
+                    to: 100
+                card_mod:
+                  style: >
+                    ha-card {
+                      font-size: 12px;
+                      font-weight: bold;
+                      --mdc-icon-size: 30px;
+                      --paper-item-icon-color: white !important;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    } bar-card-currentbar { border: none !important; box-shadow:
+                    none !important; } bar-card-backgroundbar { border: none
+                    !important; box-shadow: none !important; }
+        card_mod:
+          style: >
+            ha-card { background: none !important; box-shadow: none !important;
+            border: none !important; }
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:bar-card
+                tap_action:
+                  action: navigate
+                  navigation_path: "#memory"
+                double_tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                entities:
+                  - entity: sensor.pve_memory_usage_percentage
+                    name: Mem.
+                    icon: mdi:memory
+                    color: rgb(81,140,67)
+                    height: 40px
+                    min: 0
+                    max: 100
+                    target: 65
+                animation:
+                  state: "on"
+                positions:
+                  icon: inside
+                  indicator: inside
+                entity_row: true
+                decimal: 2
+                severity:
+                  - color: rgb(81,140,67)
+                    from: 0
+                    to: 74
+                  - color: rgb(255,152,1)
+                    from: 75
+                    to: 79
+                  - color: rgb(244,67,54)
+                    from: 80
+                    to: 100
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 12px;
+                      font-weight: bold;
+                      --mdc-icon-size: 30px;
+                      --paper-item-icon-color: white;
+                      background: none !important;
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+              - type: custom:bar-card
+                tap_action:
+                  action: navigate
+                  navigation_path: "#memory"
+                double_tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                entities:
+                  - entity: sensor.system_monitor_memoire_utilisee
+                    name: USED
+                    color: rgb(244,67,54)
+                    height: 40px
+                    min: 0
+                    max: 12288
+                    target: 6144
+                animation:
+                  state: "on"
+                positions:
+                  icon: "off"
+                  indicator: inside
+                entity_row: true
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 12px;
+                      font-weight: bold;
+                      background: none !important;
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+              - type: custom:bar-card
+                tap_action:
+                  action: navigate
+                  navigation_path: "#memory"
+                double_tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                entities:
+                  - entity: sensor.system_monitor_memoire_libre
+                    name: FREE
+                    color: rgb(68,115,158)
+                    height: 40px
+                    min: 0
+                    max: 12288
+                    target: 6144
+                animation:
+                  state: "on"
+                positions:
+                  icon: "off"
+                  indicator: inside
+                entity_row: true
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 12px;
+                      font-weight: bold;
+                      background: none !important;
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+        card_mod:
+          style: |
+            ha-card {
+              background: none !important;
+              box-shadow: none !important;
+              border: none !important;
+            }
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mod-card
+                tap_action:
+                  action: navigate
+                  navigation_path: "#disk"
+                card:
+                  type: custom:bar-card
+                  tap_action:
+                    action: none
+                  entities:
+                    - entity: sensor.pve_utilisation_du_disque
+                      name: Disque PVE (VM)
+                      icon: mdi:harddisk
+                      color: rgb(142,142,142)
+                      height: 40px
+                      min: 0
+                      max: 94
+                      target: 75
+                  animation:
+                    state: "on"
+                  positions:
+                    icon: inside
+                    indicator: inside
+                  entity_row: true
+                  decimal: 2
+                  severity:
+                    - color: rgb(81,140,67)
+                      from: 0
+                      to: 70
+                    - color: rgb(255,152,1)
+                      from: 71
+                      to: 79
+                    - color: rgb(244,67,54)
+                      from: 80
+                      to: 94
+                  card_mod:
+                    style: |
+                      ha-card {
+                        font-size: 12px;
+                        font-weight: bold;
+                        --mdc-icon-size: 30px;
+                        --paper-item-icon-color: white;
+                        border: none !important;
+                        box-shadow: none !important;
+                        background: none !important;
+                      }
+        card_mod:
+          style: |
+            ha-card {
+              background: none !important;
+              box-shadow: none !important;
+              border: none !important;
+            }
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:bar-card
+                entities:
+                  - entity: sensor.system_monitor_debit_du_reseau_entrant_via_enp6s18
+                    name: Download
+                    icon: mdi:download
+                    color: rgb(81,140,67)
+                    height: 40px
+                    min: 0
+                    max: 130
+                    target: 20
+                animation:
+                  state: "on"
+                positions:
+                  icon: inside
+                  indicator: inside
+                entity_row: true
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 12px;
+                      font-weight: bold;
+                      --mdc-icon-size: 30px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+              - type: custom:bar-card
+                entities:
+                  - entity: sensor.system_monitor_debit_du_reseau_sortant_via_enp6s18
+                    name: Upload
+                    icon: mdi:upload
+                    color: rgb(244,67,54)
+                    height: 40px
+                    min: 0
+                    max: 130
+                    target: 20
+                animation:
+                  state: "on"
+                positions:
+                  icon: inside
+                  indicator: inside
+                entity_row: true
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 12px;
+                      font-weight: bold;
+                      --mdc-icon-size: 30px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+        card_mod:
+          style: |
+            ha-card {
+              background: none !important;
+              box-shadow: none !important;
+              border: none !important;
+            }
+      - type: horizontal-stack
+        cards:
+          - type: custom:ring-tile
+            icon_tap_action:
+              action: navigate
+              navigation_path: "#speed"
+            entity: sensor.pve_utilisation_du_processeur
+            name: Utilisation CPU
+            ring_entity: sensor.pve_utilisation_du_processeur
+            ring_type: open
+            ring_size: 3
+            scale: ticks_with_labels
+            middle_element: value_with_unit
+            bottom_element: name
+            colorize_icon: true
+            indicator: dot
+            min: 0
+            max: 100
+            max_decimals: 2
+            colour:
+              "0": ha_green
+              "69": ha_green
+              "70": ha_orange
+              "79": ha_orange
+              "80": ha_red
+              "100": ha_red
+            card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                  cursor: pointer;
+                }
+          - type: custom:mini-graph-card
+            tap_action:
+              action: navigate
+              navigation_path: "#speed"
+            entities:
+              - entity: sensor.pve_utilisation_du_processeur
+                color: rgb(68,115,158)
+                name: CPU Use
+            icon: mdi:cpu-64-bit
+            show:
+              labels: true
+              legend: true
+              icon: true
+              name: true
+              fill: true
+              animate: true
+              points: false
+            height: 150
+            align_state: none
+            align_header: none
+            font_size: 70
+            hours_to_show: 24
+            decimals: 2
+            hour24: true
+            line_width: 2
+            points_per_hour: 6
+            card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+                ha-icon {
+                  color: rgb(68,115,158) !important;
+                }
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:bar-card
+                icon_tap_action:
+                  action: navigate
+                  navigation_path: "#speed"
+                entities:
+                  - entity: sensor.cpu_speed
+                    name: CPU SPEED
+                    icon: mdi:waveform
+                    color: rgb(81,140,67)
+                    height: 20px
+                    min: 0
+                    max: 4
+                    target: 3.125
+                animation:
+                  state: "on"
+                positions:
+                  icon: inside
+                  indicator: inside
+                entity_row: true
+                severity:
+                  - color: rgb(81,140,67)
+                    from: 0
+                    to: 2.9
+                  - color: rgb(255,152,1)
+                    from: 3
+                    to: 3.3
+                  - color: rgb(244,67,54)
+                    from: 3.4
+                    to: 4
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 11px;
+                      font-weight: bold;
+                      --mdc-icon-size: 15px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+        card_mod:
+          style: |
+            ha-card {
+              background: none !important;
+              box-shadow: none !important;
+              border: none !important;
+            }
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:bar-card
+                entities:
+                  - entity: sensor.system_monitor_charge_1m
+                    name: Charge 1m
+                    color: rgb(81,140,67)
+                    height: 25px
+                    min: 0
+                    max: 100
+                    target: 75
+                animation:
+                  state: "on"
+                positions:
+                  icon: "off"
+                  indicator: inside
+                entity_row: true
+                severity:
+                  - color: rgb(81,140,67)
+                    from: 0
+                    to: 2
+                  - color: rgb(255,152,1)
+                    from: 2
+                    to: 3
+                  - color: rgb(244,67,54)
+                    from: 3
+                    to: 6
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 12px;
+                      font-weight: bold;
+                      --mdc-icon-size: 30px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+              - type: custom:bar-card
+                entities:
+                  - entity: sensor.system_monitor_charge_5m
+                    name: Charge 5m
+                    color: rgb(81,140,67)
+                    height: 25px
+                    min: 0
+                    max: 100
+                    target: 75
+                animation:
+                  state: "on"
+                positions:
+                  icon: "off"
+                  indicator: inside
+                entity_row: true
+                severity:
+                  - color: rgb(81,140,67)
+                    from: 0
+                    to: 2
+                  - color: rgb(255,152,1)
+                    from: 2
+                    to: 3
+                  - color: rgb(244,67,54)
+                    from: 3
+                    to: 6
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 12px;
+                      font-weight: bold;
+                      --mdc-icon-size: 30px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+              - type: custom:bar-card
+                entities:
+                  - entity: sensor.system_monitor_charge_15m
+                    name: Charge 15m
+                    color: darkgreen
+                    height: 25px
+                    min: 0
+                    max: 100
+                    target: 75
+                animation:
+                  state: "on"
+                positions:
+                  icon: "off"
+                  indicator: inside
+                entity_row: true
+                severity:
+                  - color: rgb(81,140,67)
+                    from: 0
+                    to: 2
+                  - color: rgb(255,152,1)
+                    from: 2
+                    to: 3
+                  - color: rgb(244,67,54)
+                    from: 3
+                    to: 6
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 12px;
+                      font-weight: bold;
+                      --mdc-icon-size: 30px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: none !important;
+            }
+      - type: horizontal-stack
+        cards:
+          - type: custom:ring-tile
+            icon_tap_action:
+              action: navigate
+              navigation_path: "#temp"
+            entity: sensor.proxmox_cpu_package
+            name: Température CPU
+            ring_entity: sensor.proxmox_cpu_package
+            ring_type: open
+            ring_size: 3
+            scale: ticks_with_labels
+            middle_element: value_with_unit
+            bottom_element: name
+            colorize_icon: true
+            indicator: dot
+            min: 0
+            max: 100
+            max_decimals: 0
+            colour:
+              "0": ha_green
+              "60": ha_green
+              "65": ha_orange
+              "70": ha_orange
+              "75": ha_red
+            card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                  cursor: pointer;
+                }
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.proxmox_cpu_package
+                color: rgb(255,193,7)
+                name: Température CPU
+            show:
+              labels: true
+              legend: true
+              icon: true
+              name: true
+              fill: true
+              animate: true
+              points: false
+            height: 150
+            align_state: none
+            align_header: none
+            font_size: 70
+            hours_to_show: 24
+            decimals: 0
+            hour24: true
+            line_width: 2
+            points_per_hour: 6
+            tap_action:
+              action: navigate
+              navigation_path: "#temp"
+            card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+                ha-icon {
+                  color: rgb(255,193,7) !important;
+                }
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:bar-card
+                entities:
+                  - entity: sensor.proxmox_core_0
+                    name: Core 0
+                    color: rgb(81,140,67)
+                    height: 25px
+                    min: 0
+                    max: 100
+                    target: 75
+                animation:
+                  state: "on"
+                positions:
+                  icon: "off"
+                  indicator: inside
+                entity_row: true
+                severity:
+                  - color: rgb(81,140,67)
+                    from: 0
+                    to: 64
+                  - color: rgb(255,152,1)
+                    from: 65
+                    to: 74
+                  - color: rgb(244,67,54)
+                    from: 75
+                    to: 100
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 12px;
+                      font-weight: bold;
+                      --mdc-icon-size: 30px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+              - type: custom:bar-card
+                entities:
+                  - entity: sensor.proxmox_core_1
+                    name: Core 1
+                    color: rgb(81,140,67)
+                    height: 25px
+                    min: 0
+                    max: 100
+                    target: 75
+                animation:
+                  state: "on"
+                positions:
+                  icon: "off"
+                  indicator: inside
+                entity_row: true
+                severity:
+                  - color: rgb(81,140,67)
+                    from: 0
+                    to: 64
+                  - color: rgb(255,152,1)
+                    from: 65
+                    to: 74
+                  - color: rgb(244,67,54)
+                    from: 75
+                    to: 100
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 12px;
+                      font-weight: bold;
+                      --mdc-icon-size: 30px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+              - type: custom:bar-card
+                entities:
+                  - entity: sensor.proxmox_core_2
+                    name: Core 2
+                    color: darkgreen
+                    height: 25px
+                    min: 0
+                    max: 100
+                    target: 75
+                animation:
+                  state: "on"
+                positions:
+                  icon: "off"
+                  indicator: inside
+                entity_row: true
+                severity:
+                  - color: rgb(81,140,67)
+                    from: 0
+                    to: 64
+                  - color: rgb(255,152,1)
+                    from: 65
+                    to: 74
+                  - color: rgb(244,67,54)
+                    from: 75
+                    to: 100
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 12px;
+                      font-weight: bold;
+                      --mdc-icon-size: 30px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+              - type: custom:bar-card
+                entities:
+                  - entity: sensor.proxmox_core_3
+                    name: Core 3
+                    color: darkgreen
+                    height: 25px
+                    min: 0
+                    max: 100
+                    target: 75
+                animation:
+                  state: "on"
+                positions:
+                  icon: "off"
+                  indicator: inside
+                entity_row: true
+                severity:
+                  - color: rgb(81,140,67)
+                    from: 0
+                    to: 64
+                  - color: rgb(255,152,1)
+                    from: 65
+                    to: 74
+                  - color: rgb(244,67,54)
+                    from: 75
+                    to: 100
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 12px;
+                      font-weight: bold;
+                      --mdc-icon-size: 30px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+        card_mod:
+          style: |
+            ha-card {
+              border: none !important;
+              box-shadow: none !important;
+              background: none !important;
+            }
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:bar-card
+                tap_action:
+                  action: navigate
+                  navigation_path: "#temp"
+                entities:
+                  - entity: sensor.proxmox_cpu_package
+                    name: Température CPU
+                    icon: mdi:thermometer
+                    color: rgb(81,140,67)
+                    height: 20px
+                    min: 0
+                    max: 100
+                    target: 88
+                animation:
+                  state: "on"
+                positions:
+                  icon: inside
+                  indicator: inside
+                entity_row: true
+                severity:
+                  - color: rgb(81,140,67)
+                    from: 0
+                    to: 64
+                  - color: rgb(255,152,1)
+                    from: 65
+                    to: 74
+                  - color: rgb(244,67,54)
+                    from: 75
+                    to: 100
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 11px;
+                      font-weight: bold;
+                      --mdc-icon-size: 15px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+        card_mod:
+          style: |
+            ha-card {
+              background: none !important;
+              box-shadow: none !important;
+              border: none !important;
+            }
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:bar-card
+                tap_action:
+                  action: navigate
+                  navigation_path: "#temp"
+                entities:
+                  - entity: sensor.proxmox_carte_mere
+                    name: Température Carte Mère
+                    icon: mdi:thermometer
+                    color: rgb(81,140,67)
+                    height: 20px
+                    min: 0
+                    max: 100
+                    target: 88
+                animation:
+                  state: "on"
+                positions:
+                  icon: inside
+                  indicator: inside
+                entity_row: true
+                severity:
+                  - color: rgb(81,140,67)
+                    from: 0
+                    to: 64
+                  - color: rgb(255,152,1)
+                    from: 65
+                    to: 74
+                  - color: rgb(244,67,54)
+                    from: 75
+                    to: 100
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 11px;
+                      font-weight: bold;
+                      --mdc-icon-size: 15px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+        card_mod:
+          style: |
+            ha-card {
+              background: none !important;
+              box-shadow: none !important;
+              border: none !important;
+            }
+      - type: horizontal-stack
+        cards:
+          - type: custom:ring-tile
+            icon_tap_action:
+              action: navigate
+              navigation_path: "#conso"
+            entity: sensor.prise_mini_pc_ikea_power
+            name: Mini-PC Conso
+            ring_entity: sensor.prise_mini_pc_ikea_power
+            ring_type: open
+            ring_size: 3
+            scale: ticks_with_labels
+            middle_element: value_with_unit
+            bottom_element: name
+            colorize_icon: true
+            indicator: dot
+            min: 0
+            max: 30
+            colour:
+              "0": ha_green
+              "13": ha_green
+              "14": ha_orange
+              "18": ha_orange
+              "19": ha_red
+              "30": ha_red
+            card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.prise_mini_pc_ikea_power
+                color: gainsboro
+                name: Mini-PC Conso
+            show:
+              labels: true
+              legend: true
+              icon: true
+              name: true
+              fill: true
+              animate: true
+              points: false
+            height: 150
+            align_state: none
+            align_header: none
+            font_size: 70
+            hours_to_show: 24
+            decimals: 0
+            hour24: true
+            line_width: 2
+            points_per_hour: 6
+            tap_action:
+              action: navigate
+              navigation_path: "#conso"
+            card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+                ha-icon {
+                  color: gainsboro !important;
+                }
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:bar-card
+                tap_action:
+                  action: navigate
+                  navigation_path: "#conso"
+                entities:
+                  - entity: sensor.prise_mini_pc_ikea_power
+                    name: POWER
+                    icon: mdi:lightning-bolt-outline
+                    color: rgb(81,140,67)
+                    height: 20px
+                    min: 0
+                    max: 25
+                    target: 22
+                animation:
+                  state: "on"
+                positions:
+                  icon: inside
+                  indicator: inside
+                entity_row: true
+                severity:
+                  - color: rgb(81,140,67)
+                    from: 0
+                    to: 13
+                  - color: rgb(255,152,1)
+                    from: 14
+                    to: 18
+                  - color: rgb(244,67,54)
+                    from: 19
+                    to: 30
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 11px;
+                      font-weight: bold;
+                      --mdc-icon-size: 15px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+        card_mod:
+          style: |
+            ha-card {
+              background: none !important;
+              box-shadow: none !important;
+              border: none !important;
+            }
+      - type: horizontal-stack
+        cards:
+          - type: custom:ring-tile
+            icon_tap_action:
+              action: navigate
+              navigation_path: "#memory"
+            entity: sensor.system_monitor_memoire_utilisee
+            name: Conso. Mem.
+            ring_entity: sensor.system_monitor_memoire_utilisee
+            ring_type: open
+            ring_size: 3
+            scale: ticks_with_labels
+            middle_element: value_with_unit
+            bottom_element: name
+            colorize_icon: true
+            indicator: dot
+            min: 0
+            max: 12288
+            max_decimals: 2
+            colour:
+              "0": ha_green
+              "6144": ha_green
+              "6145": ha_orange
+              "9216": ha_orange
+              "9217": ha_red
+              "12288": ha_red
+            card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.system_monitor_memoire_utilisee
+                color: rgb(81,140,67)
+                name: Conso. Mem.
+            show:
+              labels: true
+              legend: true
+              icon: true
+              name: true
+              fill: true
+              animate: true
+              points: false
+            height: 150
+            align_state: none
+            align_header: none
+            font_size: 70
+            hours_to_show: 24
+            decimals: 2
+            hour24: true
+            line_width: 2
+            points_per_hour: 6
+            icon: mdi:memory
+            tap_action:
+              action: navigate
+              navigation_path: "#memory"
+            card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+                ha-icon {
+                  color: gainsboro !important;
+                }
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:bar-card
+                tap_action:
+                  action: navigate
+                  navigation_path: "#memory"
+                entities:
+                  - entity: sensor.system_monitor_memoire_utilisee
+                    name: MEMORY
+                    icon: mdi:memory
+                    color: rgb(81,140,67)
+                    height: 20px
+                    min: 0
+                    max: 12288
+                    target: 11059
+                animation:
+                  state: "on"
+                positions:
+                  icon: inside
+                  indicator: inside
+                entity_row: true
+                severity:
+                  - color: rgb(81,140,67)
+                    from: 0
+                    to: 6144
+                  - color: rgb(255,152,1)
+                    from: 6145
+                    to: 9216
+                  - color: rgb(244,67,54)
+                    from: 9217
+                    to: 12288
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 11px;
+                      font-weight: bold;
+                      --mdc-icon-size: 15px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+        card_mod:
+          style: |
+            ha-card {
+              background: none !important;
+              box-shadow: none !important;
+              border: none !important;
+            }
+      - type: horizontal-stack
+        cards:
+          - type: custom:ring-tile
+            icon_tap_action:
+              action: navigate
+              navigation_path: "#disk"
+            entity: sensor.pve_utilisation_du_disque
+            name: Disque PVE (VM)
+            ring_entity: sensor.pve_utilisation_du_disque
+            ring_type: open
+            ring_size: 3
+            scale: ticks_with_labels
+            middle_element: value_with_unit
+            bottom_element: name
+            colorize_icon: true
+            indicator: dot
+            min: 0
+            max: 94
+            max_decimals: 2
+            colour:
+              "0": ha_green
+              "56": ha_green
+              "71": ha_orange
+              "80": ha_orange
+              "85": ha_red
+              "94": ha_red
+            card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.pve_utilisation_du_disque
+                color: rgb(142,142,142)
+                name: Disque PVE (VM)
+            icon: mdi:harddisk
+            show:
+              labels: true
+              legend: true
+              icon: true
+              name: true
+              fill: true
+              animate: true
+              points: false
+            height: 150
+            align_state: none
+            align_header: none
+            font_size: 70
+            hours_to_show: 24
+            decimals: 2
+            hour24: true
+            line_width: 2
+            points_per_hour: 6
+            tap_action:
+              action: navigate
+              navigation_path: "#disk"
+            card_mod:
+              style: |
+                ha-card {
+                  background: none !important;
+                  box-shadow: none !important;
+                  border: none !important;
+                }
+                ha-icon {
+                  color: rgb(142,142,142) !important;
+                }
+      - type: custom:stack-in-card
+        mode: vertical
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:bar-card
+                tap_action:
+                  action: navigate
+                  navigation_path: "#disk"
+                entities:
+                  - entity: sensor.pve_utilisation_du_disque
+                    name: Disque PVE (VM)
+                    icon: mdi:harddisk
+                    color: rgb(81,140,67)
+                    height: 20px
+                    min: 0
+                    max: 94
+                    target: 75
+                animation:
+                  state: "on"
+                positions:
+                  icon: inside
+                  indicator: inside
+                entity_row: true
+                decimal: 2
+                severity:
+                  - color: rgb(81,140,67)
+                    from: 0
+                    to: 70
+                  - color: rgb(255,152,1)
+                    from: 71
+                    to: 79
+                  - color: rgb(244,67,54)
+                    from: 80
+                    to: 94
+                card_mod:
+                  style: |
+                    ha-card {
+                      font-size: 11px;
+                      font-weight: bold;
+                      --mdc-icon-size: 15px;
+                      --paper-item-icon-color: white;
+                      border: none !important;
+                      box-shadow: none !important;
+                      background: none !important;
+                    }
+                    bar-card-currentbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+                    bar-card-backgroundbar {
+                      border: none !important;
+                      box-shadow: none !important;
+                    }
+        card_mod:
+          style: |
+            ha-card {
+              background: none !important;
+              box-shadow: none !important;
+              border: none !important;
+            }
+    grid_options:
+      columns: 12
+      rows: auto
+  - type: custom:bubble-card
+    card_type: pop-up
+    hash: "#speed"
+    show_header: true
+    force_icon: false
+    show_state: false
+    show_last_changed: false
+    show_attribute: false
+    button_type: name
+    name: Utilisation du CPU
+    icon: mdi:cpu-64-bit
+    show_icon: true
+    show_name: true
+    card_layout: normal
+    hide_backdrop: false
+    close_on_click: false
+    bg_opacity: "0"
+    cards:
+      - type: custom:apexcharts-card
+        experimental:
+          color_threshold: true
+          brush: true
+        graph_span: 24h
+        cache: true
+        span:
+          offset: +1m
+        now:
+          show: true
+          color: "#F44336"
+          label: Now
+        header:
+          show: true
+          title: " "
+          show_states: true
+          colorize_states: true
+        apex_config:
+          chart:
+            height: 320px
+            toolbar:
+              show: true
+          legend:
+            show: false
+          tooltip:
+            shared: true
+            intersect: false
+        all_series_config:
+          show:
+            legend_value: false
+            extremas: true
+        yaxis:
+          - id: Use
+            min: 0
+            max: ~30
+            decimals: 0
+            opposite: true
+            apex_config:
+              tickAmount: 5
+        series:
+          - entity: sensor.pve_utilisation_du_processeur
+            name: SM Instantané
+            yaxis_id: Use
+            type: area
+            curve: stepline
+            stroke_width: 1
+            opacity: 0.3
+            fill_raw: last
+            color: rgb(68,115,158)
+            color_threshold:
+              - value: 0
+                color: rgb(68,115,158)
+              - value: 65
+                color: "#FFC107"
+              - value: 85
+                color: "#F44336"
+          - entity: sensor.pve_utilisation_du_processeur
+            name: PVE Instantané
+            yaxis_id: Use
+            type: area
+            curve: stepline
+            stroke_width: 1
+            opacity: 0.2
+            fill_raw: last
+            color: rgb(149,117,205)
+            color_threshold:
+              - value: 0
+                color: rgb(149,117,205)
+              - value: 65
+                color: "#FFC107"
+              - value: 85
+                color: "#F44336"
+          - entity: sensor.pve_utilisation_du_processeur
+            name: Moy.(24h)
+            yaxis_id: Use
+            type: line
+            curve: smooth
+            stroke_dash: 5
+            stroke_width: 2.5
+            color: red
+            group_by:
+              func: avg
+              duration: 1h
+          - entity: sensor.pve_utilisation_du_processeur
+            name: Moy.(Mois)
+            color: "#FF5252"
+            fill_raw: last
+            group_by:
+              func: avg
+              duration: 730h
+            show:
+              in_brush: false
+              in_chart: false
+  - type: custom:bubble-card
+    card_type: pop-up
+    hash: "#temp"
+    name: Températures processeur
+    icon: mdi:thermometer
+    button_type: name
+    show_header: true
+    show_icon: true
+    show_name: true
+    show_state: false
+    show_last_changed: false
+    show_attribute: false
+    force_icon: false
+    card_layout: normal
+    close_on_click: false
+    hide_backdrop: false
+    bg_opacity: "0"
+    cards:
+      - type: custom:apexcharts-card
+        experimental:
+          color_threshold: true
+          brush: true
+        graph_span: 24h
+        cache: true
+        span:
+          offset: +1m
+        now:
+          show: true
+          color: "#F44336"
+          label: Now
+        header:
+          show: true
+          title: " "
+          show_states: true
+          colorize_states: true
+        apex_config:
+          chart:
+            height: 320px
+            toolbar:
+              show: true
+          legend:
+            show: false
+          tooltip:
+            shared: true
+            intersect: false
+        all_series_config:
+          show:
+            legend_value: false
+            extremas: true
+        yaxis:
+          - id: Temp
+            min: auto
+            max: auto
+            decimals: 0
+            opposite: true
+            apex_config:
+              tickAmount: 6
+        series:
+          - entity: sensor.proxmox_cpu_package
+            name: CPU Package
+            yaxis_id: Temp
+            type: area
+            stroke_width: 1
+            opacity: 0.3
+            fill_raw: last
+            color_threshold:
+              - value: 0
+                color: "#4CAF50"
+              - value: 55
+                color: "#FFC107"
+              - value: 70
+                color: "#F44336"
+          - entity: sensor.proxmox_carte_mere
+            name: Carte Mère
+            yaxis_id: Temp
+            type: line
+            stroke_width: 1.5
+            fill_raw: last
+            color: rgb(33,150,243)
+            color_threshold:
+              - value: 0
+                color: rgb(33,150,243)
+              - value: 55
+                color: "#FFC107"
+              - value: 70
+                color: "#F44336"
+          - entity: sensor.proxmox_cpu_package
+            name: Moy.(24h)
+            yaxis_id: Temp
+            type: line
+            stroke_dash: 5
+            stroke_width: 2.5
+            color: red
+            group_by:
+              func: avg
+              duration: 1h
+          - entity: sensor.proxmox_cpu_package
+            name: Moy.(Mois)
+            color: "#FF5252"
+            fill_raw: last
+            group_by:
+              func: avg
+              duration: 730h
+            show:
+              in_brush: false
+              in_chart: false
+    sub_button:
+      main: []
+      bottom: []
+  - type: custom:bubble-card
+    card_type: pop-up
+    hash: "#conso"
+    name: Consommation Mini-PC
+    icon: mdi:lightning-bolt-circle
+    button_type: name
+    show_header: true
+    show_icon: true
+    show_name: true
+    bg_opacity: "0"
+    cards:
+      - type: custom:streamline-card
+        template: conso_temps_reel_appareil
+        variables:
+          card_title: Prise Mini P.C.
+          energy_entity: sensor.prise_mini_pc_ikea_power
+          energy_color: gainsboro
+          current_entity: sensor.prise_mini_pc_ikea_current
+          avg_daily_entity: sensor.mini_pc_avg_watts_quotidien
+          conso_daily_kwh_entity: sensor.prise_mini_pc_ikea_quotidien_um
+      - type: custom:streamline-card
+        template: conso_mensuelle_mini_pc
+        variables:
+          title: Conso. mensuelle Mini P.C.
+          energy_entity: sensor.prise_mini_pc_ikea_energy
+          color: gainsboro
+          avg_monthly_entity: sensor.mini_pc_avg_watts_mensuel
+          conso_monthly_kwh_entity: sensor.prise_mini_pc_ikea_mensuel_um
+  - type: custom:bubble-card
+    card_type: pop-up
+    hash: "#memory"
+    name: Mémoire RAM
+    icon: mdi:memory
+    button_type: name
+    show_header: true
+    show_icon: true
+    show_name: true
+    show_state: false
+    show_last_changed: false
+    show_attribute: false
+    force_icon: false
+    card_layout: normal
+    close_on_click: false
+    hide_backdrop: false
+    bg_opacity: "0"
+    cards:
+      - type: custom:apexcharts-card
+        experimental:
+          color_threshold: true
+          brush: true
+        graph_span: 24h
+        cache: true
+        span:
+          offset: +1m
+        now:
+          show: true
+          color: "#F44336"
+          label: Now
+        header:
+          show: true
+          title: " "
+          show_states: true
+          colorize_states: true
+        apex_config:
+          chart:
+            height: 320px
+            toolbar:
+              show: true
+          legend:
+            show: false
+          tooltip:
+            shared: true
+            intersect: false
+        all_series_config:
+          show:
+            legend_value: false
+            extremas: true
+        yaxis:
+          - id: Mem
+            min: auto
+            max: auto
+            decimals: 0
+            opposite: true
+            apex_config:
+              tickAmount: 6
+        series:
+          - entity: sensor.pve_memory_usage_percentage
+            name: RAM %
+            yaxis_id: Mem
+            type: area
+            stroke_width: 1
+            opacity: 0.3
+            fill_raw: last
+            color_threshold:
+              - value: 0
+                color: rgb(81,140,67)
+              - value: 75
+                color: "#FFC107"
+              - value: 90
+                color: "#F44336"
+          - entity: sensor.pve_memory_usage_percentage
+            name: Moy.(24h)
+            yaxis_id: Mem
+            type: line
+            stroke_dash: 5
+            stroke_width: 2.5
+            color: red
+            group_by:
+              func: avg
+              duration: 1h
+          - entity: sensor.pve_memory_usage_percentage
+            name: Moy.(Mois)
+            color: "#FF5252"
+            fill_raw: last
+            group_by:
+              func: avg
+              duration: 730h
+            show:
+              in_brush: false
+              in_chart: false
+  - type: custom:bubble-card
+    card_type: pop-up
+    hash: "#disk"
+    show_header: true
+    force_icon: false
+    show_state: false
+    show_last_changed: false
+    show_attribute: false
+    button_type: name
+    name: Espace disque — PVE VM
+    icon: mdi:harddisk
+    show_icon: true
+    show_name: true
+    card_layout: normal
+    hide_backdrop: false
+    close_on_click: false
+    bg_opacity: "0"
+    cards:
+      - type: custom:apexcharts-card
+        experimental:
+          color_threshold: true
+          brush: true
+        graph_span: 24h
+        brush:
+          selection_span: 6h
+          apex_config: null
+        header:
+          show: true
+          title: Disque PVE VM (GiB)
+          show_states: true
+          colorize_states: true
+        yaxis:
+          - id: disk
+            min: 0
+            max: auto
+            opposite: true
+            apex_config:
+              tickAmount: 10
+        series:
+          - entity: sensor.pve_utilisation_du_disque
+            name: Disque utilisé GiB
+            color: green
+            type: area
+            show:
+              legend_value: false
+              extremas: true
+            stroke_width: 1
+            color_threshold:
+              - value: 0
+                color: green
+              - value: 71
+                color: orange
+              - value: 80
+                color: red
+          - entity: sensor.pve_utilisation_du_disque
+            name: Moy.(24h)
+            type: line
+            stroke_dash: 5
+            stroke_width: 2.5
+            color: red
+            group_by:
+              func: avg
+              duration: 1h
+          - entity: sensor.pve_utilisation_du_disque
+            name: Moy.(Mois)
+            color: "#FF5252"
+            fill_raw: last
+            group_by:
+              func: avg
+              duration: 730h
+            show:
+              in_brush: false
+              in_chart: false
+          - entity: sensor.pve_utilisation_du_disque
+            color: green
+            stroke_width: 1
+            float_precision: 0
+            show:
+              in_brush: true
+              in_chart: false
+        card_mod:
+          style: |
+            ha-card {
+              background: none !important;
+              box-shadow: none !important;
+              border: none !important;
+            }
+
+# annotations_log:
+# [2026-06-10] "Conso. CPU" → "Mini-PC Conso" (ring-tile + mini-graph-card)
+# [2026-06-10] Disk : "SSD SATA 512Go" / max:94 → "Disque PVE (VM)" / max:477 GiB (sensor = GiB, pas %)
+# [2026-06-10] #disk popup : toutes séries pve_memory_usage_percentage → pve_utilisation_du_disque
+# [2026-06-10] Typo RAM : max:16348 → max:16384 (×2)
+# [2026-06-10] CPU/Mem/Disk bar-cards : decimal:2 ajouté (×4 bar-cards)
+# [2026-06-10] Disk ring-tile/bar×2 : max:100→94 GiB, target:80→75, couleurs seuils GiB (56/71/80/85/94)
+# [2026-06-10] #disk popup apexcharts : titre % → GiB, color_threshold 75→71, 85→80
+# [2026-06-10] VM RAM 8Go→12Go : max:16384→12288 (×4), targets et seuils severity recalculés en MiB
+# [2026-06-10] TODO : créer docs_dashboard/docs/L4C2_MINI_PC/L4C2_VIGNETTE_MINI_PC.md + PAGE_MINI_PC.md
+# [2026-06-13] BUG FIX uptime : int(0)/86400 → float(0)/24 (sensor.pve_uptime retourne des heures, pas des secondes)

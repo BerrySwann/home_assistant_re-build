@@ -15,11 +15,11 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | Zigbee (Z2M)   | binary_sensor.fenetre_* (contact sensors)          | nbre_de_fenetres_ouvertes / _fermees               | L3C3 Stores / automations fenêtres |
+# | Sonoff (Z2M)   | binary_sensor.contact_fenetre_*_sonoff_contact (salon/cuisine/bureau/chambre) | nombre_de_fenetres_ouvertes / nombre_de_fenetres_fermees | L3C3 Stores / automations fenêtres |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - unique_id : nbre_de_fenetres_ouvertes (avec "nbre", PAS "nombre")
-# - automations.yaml doit référencer sensor.nbre_de_fenetres_ouvertes
+# - unique_id réel : nombre_de_fenetres_ouvertes / _fermees (avec "nombre", PAS "nbre").
+# - automations.yaml doit référencer sensor.nombre_de_fenetres_ouvertes.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L3C3 État des fenêtres + Commandes 2 stores

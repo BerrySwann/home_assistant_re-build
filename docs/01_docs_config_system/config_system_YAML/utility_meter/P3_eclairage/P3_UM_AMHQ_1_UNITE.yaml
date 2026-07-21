@@ -46,9 +46,9 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L2C3 Conso Énergie Éclairage (détail par ampoule via P3_AVG_AMHQ_1_UNITE)
 
-# ┌───────────────────────────────────┐
-# │         1. ENTRÉE (1x)            │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │         1. ENTRÉE (1x)           │
+# └─────────────────────────────────┘
 
 # --- hue_white_lamp_entree_annuel_um ---
 hue_white_lamp_entree_annuel_um:
@@ -78,9 +78,9 @@ hue_white_lamp_entree_quotidien_um:
   unique_id: hue_white_lamp_entree_quotidien_um
   cycle: daily
 
-# ┌───────────────────────────────────┐
-# │         4. SALON (5x)             │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │         4. SALON (5x)            │
+# └─────────────────────────────────┘
 
 # --- hue_white_lamp_table_annuel_um ---
 hue_white_lamp_table_annuel_um:
@@ -222,9 +222,9 @@ hue_color_candle_salon_1_quotidien_um:
   unique_id: hue_color_candle_salon_1_quotidien_um
   cycle: daily
 
-# ┌───────────────────────────────────┐
-# │         5. CUISINE (1x)           │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │         5. CUISINE (1x)          │
+# └─────────────────────────────────┘
 
 # --- hue_white_lamp_cuisine_annuel_um ---
 hue_white_lamp_cuisine_annuel_um:
@@ -254,9 +254,9 @@ hue_white_lamp_cuisine_quotidien_um:
   unique_id: hue_white_lamp_cuisine_quotidien_um
   cycle: daily
 
-# ┌───────────────────────────────────┐
-# │         6. COULOIR (1x)           │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │         6. COULOIR (1x)          │
+# └─────────────────────────────────┘
 
 # --- hue_white_lamp_couloir_annuel_um ---
 hue_white_lamp_couloir_annuel_um:
@@ -286,9 +286,9 @@ hue_white_lamp_couloir_quotidien_um:
   unique_id: hue_white_lamp_couloir_quotidien_um
   cycle: daily
 
-# ┌───────────────────────────────────┐
-# │         7. BUREAU (5x)            │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │         7. BUREAU (5x)           │
+# └─────────────────────────────────┘
 
 # --- hue_play_1_pc_bureau_annuel_um ---
 hue_play_1_pc_bureau_annuel_um:
@@ -430,9 +430,9 @@ hue_white_lamp_bureau_2_quotidien_um:
   unique_id: hue_white_lamp_bureau_2_quotidien_um
   cycle: daily
 
-# ┌───────────────────────────────────┐
-# │         8. SDB (2x)               │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │         8. SDB (2x)              │
+# └─────────────────────────────────┘
 
 # --- relais_lumiere_sdb_sonoff_annuel_um ---
 relais_lumiere_sdb_sonoff_annuel_um:
@@ -490,9 +490,9 @@ hue_white_lamp_salle_de_bain_quotidien_um:
   unique_id: hue_white_lamp_salle_de_bain_quotidien_um
   cycle: daily
 
-# ┌───────────────────────────────────┐
-# │         9. CHAMBRE (4x)           │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │         9. CHAMBRE (4x)          │
+# └─────────────────────────────────┘
 
 # --- hue_white_lamp_chambre_1_annuel_um ---
 hue_white_lamp_chambre_1_annuel_um:

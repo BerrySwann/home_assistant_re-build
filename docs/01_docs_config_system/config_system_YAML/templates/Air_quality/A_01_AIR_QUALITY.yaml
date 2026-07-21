@@ -17,7 +17,9 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.*_pm25_mean_24h / *_tcov_mean_24h (sensors/Air_quality) | salon/bureau/chambre_tvoc_ppb / *_pm25_label       | L6C1 Qualité de l'air              |
+# | IKEA Vindstyrka (Z2M) | sensor.qualite_air_salon_ikea_voc_index            | tcov_salon_ppb                                     | L6C1 (ring-tile tCOV) / page /air-quality |
+# | IKEA Vindstyrka (Z2M) | sensor.qualite_air_bureau_ikea_voc_index           | tcov_bureau_ppb                                    | L6C1 (ring-tile tCOV) / page /air-quality |
+# | IKEA Vindstyrka (Z2M) | sensor.qualite_air_chambre_ikea_voc_index          | tcov_chambre_ppb                                   | L6C1 (ring-tile tCOV) / page /air-quality |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ne pas confondre avec sensor.tcov_*_moy_24h (statistiques 24h — sensors/).

@@ -18,8 +18,13 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | NOUS SP (Z2M)  | sensor.*_nous_power → seuil 50W                    | clim_*_power_status (on/off/standby)               | P1_DUT_clim_chauffage.yaml → L1C3 / L2C2 |
-# | [calculé]      | climate.* → hvac_mode / temperature                | clim_*_etat (HTML couleur)                         | L1C3 Commandes Clim                |
+# | NOUS SP (Z2M) + climate RM4 Mini | sensor.clim_salon_nous_power + climate.clim_salon_rm4_mini | salon_power_status / salon_power_locks / salon_power_status_affichage / clim_salon_etat | L1C3 Commandes Clim |
+# | NOUS SP (Z2M) + climate natif | sensor.radiateur_elec_cuisine_power + climate.radiateur_cuisine | cuisine_power_status / cuisine_power_status_affichage / radiateur_cuisine_etat | L1C3 Commandes Clim |
+# | NOUS SP (Z2M) + climate RM4 Mini | sensor.clim_bureau_nous_power + climate.clim_bureau_rm4_mini | bureau_power_status / bureau_power_locks / bureau_power_status_affichage / clim_bureau_etat | L1C3 Commandes Clim |
+# | NOUS SP (Z2M)  | sensor.prise_soufflant_salle_de_bain_nous_power    | sdb_soufflant_power_status / sdb_power_status_affichage / sdb_soufflant_etat | L1C3 Commandes Clim |
+# | NOUS SP (Z2M)  | sensor.prise_seche_serviette_salle_de_bain_nous_power | sdb_seche_serviette_power_status / sdb_seche_serviette_power_status_affichage / sdb_seche_serviette_etat | L1C3 Commandes Clim |
+# | NOUS SP (Z2M) + climate RM4 Mini | sensor.clim_chambre_nous_power + climate.clim_chambre_rm4_mini | chambre_power_status / chambre_power_locks / chambre_power_status_affichage / clim_chambre_etat | L1C3 Commandes Clim |
+# | [calculé]      | sensor.mode_ete_hiver                               | mode_ete_hiver_etat                                 | L1C3 Commandes Clim                |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Capteurs de statut (on/off) servent aux DUT history_stats en tant que source.

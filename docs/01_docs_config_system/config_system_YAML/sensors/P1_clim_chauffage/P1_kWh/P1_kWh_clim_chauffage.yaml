@@ -30,9 +30,9 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Via P1_UM_AMHQ.yaml → L2C2 (Conso Énergie Clim / Radiateur / Soufflant)
 
-# ┌───────────────────────────────────┐
-# │ 5. CUISINE                        │
-# └───────────────────────────────────┘
+# ┌─────────────────────────────────┐
+# │ 5. CUISINE                       │
+# └─────────────────────────────────┘
 
 # --- radiateur_elec_cuisine_energie_totale_kwh ---
 - platform: integration

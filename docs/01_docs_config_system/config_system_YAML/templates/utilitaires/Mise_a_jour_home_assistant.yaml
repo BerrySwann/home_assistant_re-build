@@ -17,7 +17,7 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | HA natif (update) | update.home_assistant_core_update / supervisor     | ha_update_disponible / ha_version_actuelle         | L4C3 Mises à jour HA               |
+# | HA natif (domaine update) | states.update (toutes entités update.*, filtre state=='on') | available_updates                                  | L4C3 Mises à jour HA               |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ne pas utiliser "states.update" si certaines entités update.* sont

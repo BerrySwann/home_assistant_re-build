@@ -16,7 +16,7 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.blitzortung_count_* / distance_*            | blitzortung_um_*_{quotidien|mensuel}               | M_03_meteo_blitzortung.yaml → L1C1 |
+# | Blitzortung (intégration MQTT native) | sensor.maison_lightning_counter                    | eclair_annuel / eclair_mensuel / eclair_hebdomadaire / eclair_quotidien / eclair_horaire | L1C1 Météo (section foudre) |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # Ce sont des compteurs d'événements (nombre d'éclairs), pas des kWh. Ne pas

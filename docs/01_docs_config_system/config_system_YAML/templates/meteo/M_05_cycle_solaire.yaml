@@ -23,7 +23,7 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | Intégration Sun (HA natif) | sun.sun → next_rising / next_setting               | lever_soleil / coucher_soleil / duree_jour         | L1C1 Météo / automations stores    |
+# | [calculé] (zone.home + horloge système) | zone.home.latitude + now() — calcul astronomique, PAS sun.sun (voir PIÈGES) | duree_du_jour / tendance_duree_jour / variation_quotidienne | L1C1 Météo (données solaires) |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - La durée du jour est calculée astronomiquement — PAS via sun.sun (next_rising/setting).
