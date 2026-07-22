@@ -12185,3 +12185,4 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [WIFI] | 22/07 20:15 | Hyg:0.03 | Cuis:0.4 | Froid:1.23 | Chauff:4.3 | Avg 4:212.4 | Multi:1.82 | Lum:0.4 | Autres:0.25 | Ti:27.1°C | Ext:30.5°C | DUT S/R/B/C:4.6/0.0/4.3/5.5
 [2] en [WIFI] | 22/07 20:30 | Hyg:0.03 | Cuis:0.4 | Froid:1.24 | Chauff:4.43 | Avg 4:216.2 | Multi:1.92 | Lum:0.42 | Autres:0.26 | Ti:27.1°C | Ext:29.5°C | DUT S/R/B/C:4.7/0.0/4.6/5.5
 [2] en [WIFI] | 22/07 20:45 | Hyg:0.03 | Cuis:0.4 | Froid:1.25 | Chauff:4.55 | Avg 4:219.4 | Multi:2.02 | Lum:0.43 | Autres:0.26 | Ti:27.0°C | Ext:29.3°C | DUT S/R/B/C:4.9/0.0/4.7/5.5
+[2] en [WIFI] | 22/07 21:00 | Hyg:0.03 | Cuis:0.4 | Froid:1.27 | Chauff:4.66 | Avg 4:221.9 | Multi:2.12 | Lum:0.43 | Autres:0.26 | Ti:27.0°C | Ext:28.9°C | DUT S/R/B/C:5.0/0.0/4.7/5.5
