@@ -12178,3 +12178,4 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [Eric: WIFI/CELL] | 22/07 18:30 | Hyg:0.02 | Cuis:0.12 | Froid:1.14 | Chauff:3.49 | Avg 4:188.8 | Multi:1.52 | Lum:0.29 | Autres:0.24 | Ti:27.2°C | Ext:32.3°C | DUT S/R/B/C:3.4/0.0/3.5/5.1
 [Eric: WIFI/CELL] | 22/07 18:45 | Hyg:0.02 | Cuis:0.12 | Froid:1.15 | Chauff:3.55 | Avg 4:189.5 | Multi:1.52 | Lum:0.32 | Autres:0.24 | Ti:27.2°C | Ext:32.1°C | DUT S/R/B/C:3.5/0.0/3.6/5.1
 [2] en [WIFI] | 22/07 19:00 | Hyg:0.02 | Cuis:0.12 | Froid:1.15 | Chauff:3.62 | Avg 4:190.6 | Multi:1.62 | Lum:0.33 | Autres:0.25 | Ti:27.3°C | Ext:31.7°C | DUT S/R/B/C:3.6/0.0/3.6/5.1
+[2] en [WIFI] | 22/07 19:15 | Hyg:0.02 | Cuis:0.17 | Froid:1.16 | Chauff:3.77 | Avg 4:195.8 | Multi:1.62 | Lum:0.34 | Autres:0.25 | Ti:27.2°C | Ext:31.7°C | DUT S/R/B/C:3.8/0.0/3.8/5.1
