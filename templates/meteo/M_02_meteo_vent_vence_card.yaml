@@ -1,6 +1,6 @@
-# ╭──────────────────────────────────────────────────────────────────────────╮
+# ╭─────────────────────────────────────────────────────────────────────────────────╮
 # │ MÉTÉO. TEMPLATE : VENT VENCE — DIRECTION (windrose-card / LABEL) & VITESSE KM/H │
-# ╰──────────────────────────────────────────────────────────────────────────╯
+# ╰─────────────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
 # Sensors template créant 3 capteurs de vent pour Vence : direction en
@@ -35,7 +35,7 @@
 
 - sensor:
 # ┌───────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : windrose-card - LABEL DIRECTION DU VENT VENCE  │
+# │ windrose-card - LABEL DIRECTION DU VENT VENCE             │
 # └───────────────────────────────────────────────────────────┘
 
 # windrose-card - LABEL Direction du Vent Vence
