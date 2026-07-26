@@ -12562,3 +12562,7 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [Eric: WIFI/CELL] | 26/07 18:30 | Hyg:0.85 | Cuis:0.1 | Froid:1.0 | Chauff:3.55 | Avg 4:192.0 | Multi:4.23 | Lum:0.32 | Autres:0.25 | Ti:26.9°C | Ext:29.9°C | DUT S/R/B/C:4.5/0.0/3.7/2.1
 [Eric: WIFI/CELL] | 26/07 18:45 | Hyg:0.85 | Cuis:0.1 | Froid:1.01 | Chauff:3.63 | Avg 4:193.7 | Multi:4.43 | Lum:0.32 | Autres:0.25 | Ti:27.0°C | Ext:29.5°C | DUT S/R/B/C:4.7/0.0/3.7/2.1
 [2] en [WIFI] | 26/07 19:00 | Hyg:0.85 | Cuis:0.11 | Froid:1.02 | Chauff:3.7 | Avg 4:194.9 | Multi:4.43 | Lum:0.33 | Autres:0.32 | Ti:27.0°C | Ext:28.9°C | DUT S/R/B/C:4.8/0.0/3.7/2.1
+[2] en [WIFI] | 26/07 19:15 | Hyg:0.85 | Cuis:0.34 | Froid:1.04 | Chauff:3.78 | Avg 4:196.6 | Multi:4.53 | Lum:0.34 | Autres:0.33 | Ti:27.1°C | Ext:28.7°C | DUT S/R/B/C:5.0/0.0/3.7/2.1
+[2] en [WIFI] | 26/07 19:30 | Hyg:0.85 | Cuis:0.58 | Froid:1.07 | Chauff:3.87 | Avg 4:198.7 | Multi:4.73 | Lum:0.35 | Autres:0.33 | Ti:27.2°C | Ext:29.1°C | DUT S/R/B/C:5.2/0.0/3.7/2.1
+[2] en [WIFI] | 26/07 19:45 | Hyg:0.85 | Cuis:0.82 | Froid:1.09 | Chauff:3.96 | Avg 4:200.7 | Multi:4.73 | Lum:0.36 | Autres:0.33 | Ti:27.2°C | Ext:28.7°C | DUT S/R/B/C:5.4/0.0/3.7/2.1
+[2] en [WIFI] | 26/07 20:00 | Hyg:0.85 | Cuis:0.82 | Froid:1.12 | Chauff:4.06 | Avg 4:203.1 | Multi:4.84 | Lum:0.38 | Autres:0.33 | Ti:27.1°C | Ext:28.5°C | DUT S/R/B/C:5.6/0.0/3.8/2.1
