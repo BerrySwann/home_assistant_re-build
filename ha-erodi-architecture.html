@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Architecture HA — BerrySwann</title>
+<meta name="description" content="Architecture du projet Home Assistant ReBuild. 3 types de fichiers, conventions YAML, chaîne de dépendances.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   VARIABLES — identiques ha.erodi-ha.com
+============================================ */
+:root {
+  --bg:          #f7f3eb;
+  --bg-card:     #ede7db;
+  --border:      rgba(29, 77, 46, 0.18);
+  --border-hi:   rgba(29, 77, 46, 0.45);
+  --text:        #2a2420;
+  --text-2:      #5a5040;
+  --text-faint:  #8a7e6e;
+  --green:       #1d4d2e;
+  --green-2:     #3d8856;
+  --amber:       #b45309;
+  --amber-dim:   rgba(180, 83, 9, 0.10);
+  --amber-glow:  rgba(180, 83, 9, 0.55);
+  --shadow:      0 1px 4px rgba(42,36,32,.08), 0 2px 12px rgba(42,36,32,.04);
+  --shadow-hi:   0 2px 20px rgba(180,83,9,.12);
+  --fd:          'Space Grotesk', system-ui, sans-serif;
+  --fb:          'Inter', system-ui, sans-serif;
+  --fm:          'JetBrains Mono', monospace;
+}
+
+/* ============================================
+   RESET & BASE
+============================================ */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { font-size:16px; scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--fb);
+  font-weight: 400;
+  line-height: 1.75;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 6rem;
+}
+h1,h2,h3,h4 { font-family:var(--fd); line-height:1.15; color:var(--text); }
+code {
+  font-family: var(--fm);
+  font-size: .875em;
+  background: rgba(29,77,46,.07);
+  color: var(--green);
+  border: 1px solid rgba(29,77,46,.20);
+  border-radius: 3px;
+  padding: .1em .4em;
+}
+
+/* ============================================
+   LAYOUT
+============================================ */
+.container { max-width:1400px; margin:0 auto; padding:0 2.5rem; }
+section { padding:7rem 0; position:relative; }
+
+.label {
+  display:inline-block;
+  font-family: var(--fm);
+  font-size: .58rem; font-weight:500; letter-spacing:.28em; text-transform:uppercase;
+  color: var(--text-faint); margin-bottom:1rem;
+}
+.section-title {
+  font-size: clamp(1.9rem,3.5vw,2.8rem);
+  font-weight:700; margin-bottom:1rem;
+}
+.section-sub { font-size:1rem; color:var(--text-2); max-width:520px; margin-bottom:3rem; line-height:1.8; }
+
+.reveal { opacity:0; transform:translateY(16px); transition:opacity .7s ease,transform .7s ease; }
+.reveal.visible { opacity:1; transform:none; }
+
+/* ============================================
+   NAV
+============================================ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  padding:1.25rem clamp(1.5rem,5vw,4rem);
+  display:flex; align-items:center; justify-content:space-between;
+  transition:background .4s, border-color .4s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled {
+  background: rgba(247,243,235,.92);
+  backdrop-filter: blur(12px);
+  border-color: var(--border);
+}
+.nav-logo {
+  font-family:var(--fm); font-size:.8rem; font-weight:700;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--text); text-decoration:none;
+}
+.nav-logo span { color:var(--green-2); }
+.nav-back {
+  font-family:var(--fm); font-size:.68rem; font-weight:500; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--text-faint); text-decoration:none;
+  padding:.4rem 1rem; border:1px solid var(--border); transition:all .2s;
+}
+.nav-back:hover { color:var(--green); border-color:var(--border-hi); }
+
+/* ============================================
+   HERO
+============================================ */
+#hero {
+  min-height:100svh; display:flex; align-items:center;
+  padding:120px 2.5rem 80px; max-width:1100px; margin:0 auto;
+}
+.hero-eyebrow {
+  font-family:var(--fm); font-size:.7rem; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--green-2); margin-bottom:1.75rem; opacity:.85;
+}
+#hero h1 {
+  font-size:clamp(2.6rem,5.5vw,4.4rem); font-weight:700;
+  line-height:1.08; margin-bottom:1.75rem;
+}
+#hero h1 em { font-style:italic; font-weight:300; color:var(--amber); }
+#hero .sub {
+  font-size:1.05rem; color:var(--text-2); max-width:540px; line-height:1.85; margin-bottom:3rem;
+}
+
+/* CTA Viewer */
+.btn-viewer {
+  display:inline-flex; align-items:center; gap:10px; cursor:pointer;
+  background:transparent; border:1.5px solid var(--border-hi); color:var(--green);
+  font-family:var(--fm); font-size:.72rem; font-weight:700; letter-spacing:.16em;
+  text-transform:uppercase; padding:13px 28px; transition:all .3s;
+  position:relative; overflow:hidden;
+}
+.btn-viewer::after {
+  content:''; position:absolute; bottom:0; left:0; width:0; height:2px;
+  background:var(--amber); box-shadow:0 0 8px var(--amber-glow);
+  transition:width .5s cubic-bezier(.25,1,.5,1);
+}
+.btn-viewer:hover { border-color:var(--amber); color:var(--amber); box-shadow:var(--shadow-hi); }
+.btn-viewer:hover::after { width:100%; }
+.btn-viewer svg { transition:transform .3s; }
+.btn-viewer:hover svg { transform:translateX(3px); }
+
+/* ============================================
+   STATS BAR
+============================================ */
+.stats-bar {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  border:1px solid var(--border); background:var(--bg-card);
+  box-shadow:var(--shadow); margin:0 2.5rem 5rem;
+  max-width:calc(1100px - 5rem); margin-left:auto; margin-right:auto;
+}
+@media(max-width:640px){ .stats-bar { grid-template-columns:1fr 1fr; } }
+.stat-item {
+  padding:2rem 1.5rem;
+  border-right:1px solid var(--border);
+}
+.stat-item:last-child { border-right:none; }
+.stat-n {
+  font-family:var(--fd); font-size:2.8rem; font-weight:700; line-height:1;
+  background:linear-gradient(110deg,var(--green) 10%,var(--green-2) 90%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  display:block; margin-bottom:.4rem;
+}
+.stat-l { font-size:.72rem; color:var(--text-faint); font-family:var(--fm); letter-spacing:.04em; }
+
+/* ============================================
+   SECTION FOND ALTERNÉ
+============================================ */
+.section-alt {
+  background: var(--bg-card);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+/* ============================================
+   BLOCS ARCHITECTURE — 3 cartes
+============================================ */
+.blocs-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.25rem; margin-bottom:3.5rem; }
+@media(max-width:860px){ .blocs-grid { grid-template-columns:1fr; } }
+
+.bloc {
+  background:var(--bg); border:1px solid var(--border); box-shadow:var(--shadow);
+  overflow:hidden; position:relative; transition:border-color .3s, box-shadow .3s;
+}
+.bloc::after {
+  content:''; position:absolute; bottom:0; left:0; width:0; height:2px;
+  background:var(--amber); box-shadow:0 0 8px var(--amber-glow);
+  transition:width .5s cubic-bezier(.25,1,.5,1);
+}
+.bloc:hover { border-color:var(--amber); box-shadow:var(--shadow-hi); }
+.bloc:hover::after { width:100%; }
+
+.bloc-header {
+  padding:1.5rem 1.6rem 1.2rem; border-bottom:1px solid var(--border);
+}
+.bloc-num {
+  font-family:var(--fm); font-size:.6rem; font-weight:500; color:var(--text-faint);
+  letter-spacing:.14em; margin-bottom:.6rem;
+}
+.bloc-title { font-family:var(--fd); font-size:1.1rem; font-weight:700; margin-bottom:.2rem; }
+.bloc-path { font-family:var(--fm); font-size:.62rem; color:var(--text-faint); }
+
+.bloc-body { padding:1.4rem 1.6rem; }
+.ftree { list-style:none; }
+.ftree .dir { font-family:var(--fm); font-size:.72rem; font-weight:600; color:var(--green); padding:3px 0; }
+.ftree .dir::before { content:'▸ '; opacity:.5; }
+.ftree .file { font-family:var(--fm); font-size:.67rem; color:var(--text-faint); padding:2px 0 2px 14px; }
+.ftree .file::before { content:'· '; color:var(--border-hi); }
+.ftree .sub { padding-left:12px; border-left:1px solid var(--border); margin:2px 0 4px 5px; }
+.ftree .note {
+  font-family:var(--fm); font-size:.62rem; color:var(--amber);
+  background:var(--amber-dim); border:1px solid rgba(180,83,9,.2);
+  padding:4px 10px; margin:6px 0 4px; display:inline-block;
+}
+.tag-pole {
+  font-size:.58rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  padding:1px 5px; margin-left:5px;
+  background:rgba(29,77,46,.08); color:var(--green-2); border:1px solid var(--border);
+}
+
+/* ============================================
+   CALLOUT — formule magique
+============================================ */
+.callout {
+  border:1px solid var(--border);
+  background:rgba(29,77,46,.04);
+  padding:1.75rem 2rem; margin-top:2.5rem;
+  position:relative; overflow:hidden;
+  transition:border-color .3s, box-shadow .3s;
+}
+.callout::after {
+  content:''; position:absolute; top:0; left:0; width:3px; height:0;
+  background:var(--green); box-shadow:0 0 8px rgba(29,77,46,.5);
+  transition:height .5s cubic-bezier(.25,1,.5,1);
+}
+.callout:hover { border-color:var(--green); box-shadow:var(--shadow-hi); }
+.callout:hover::after { height:100%; }
+.callout-title {
+  font-family:var(--fm); font-size:.72rem; font-weight:700; color:var(--green);
+  letter-spacing:.1em; text-transform:uppercase; margin-bottom:1rem;
+}
+.callout pre {
+  font-family:var(--fm); font-size:.72rem; line-height:2; color:var(--text); overflow-x:auto;
+}
+.callout .cm { color:var(--text-faint); font-style:italic; }
+.callout .ky { color:var(--green); font-weight:600; }
+.callout .vl { color:var(--amber); }
+.callout .note-line { font-size:.8rem; color:var(--text-2); margin-top:1.2rem; line-height:1.7; }
+.callout .note-line code { font-size:.72rem; }
+
+/* ============================================
+   CONVENTIONS
+============================================ */
+.conv-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:2.5rem; }
+@media(max-width:640px){ .conv-grid { grid-template-columns:1fr; } }
+
+.conv-card {
+  background:var(--bg); border:1px solid var(--border); box-shadow:var(--shadow);
+  padding:1.6rem 1.8rem; transition:border-color .3s;
+}
+.conv-card:hover { border-color:var(--border-hi); }
+.conv-card-title {
+  font-family:var(--fm); font-size:.65rem; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--text-faint); margin-bottom:1rem;
+}
+
+.ok-bad { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.ok-block, .bad-block {
+  padding:12px 14px; font-family:var(--fm); font-size:.67rem; line-height:1.9;
+}
+.ok-block { background:rgba(29,77,46,.05); border:1px solid rgba(29,77,46,.2); }
+.bad-block { background:rgba(180,83,9,.05); border:1px solid rgba(180,83,9,.18); }
+.ok-label { color:var(--green-2); font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.bad-label { color:var(--amber); font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
+.ok-block code { color:var(--green); background:none; border:none; padding:0; }
+.bad-block code { color:var(--amber); background:none; border:none; padding:0; }
+
+/* ============================================
+   ASCII DEMO — bloc code sombre
+============================================ */
+.ascii-demo {
+  background: #0c0f11;
+  border:1px solid rgba(29,77,46,.3);
+  padding:1.4rem 1.8rem;
+  font-family:var(--fm); font-size:.72rem; line-height:2;
+  overflow-x:auto; margin:1rem 0;
+  white-space: pre;
+}
+/* syntax tokens — contraste fort */
+.ac  { color:#d97706; }                       /* ascii border — amber vif */
+.cc  { color:#5a7a5a; }                       /* comment */
+.hh  { color:#5db87a; font-weight:700; }      /* header ## */
+.sl  { color:#c4973a; font-weight:700; }      /* slug */
+.ky  { color:#88c898; }                       /* yaml key */
+.vl  { color:#e8a84a; }                       /* yaml value */
+.tb  { color:#4a6a4a; }                       /* table */
+.st  { color:#b0c8b0; }                       /* default */
+
+/* ============================================
+   HEADERS LIST
+============================================ */
+.headers-list { display:flex; flex-direction:column; gap:8px; margin:1.2rem 0; }
+.header-row {
+  display:flex; align-items:flex-start; gap:1rem;
+  background:var(--bg); border:1px solid var(--border);
+  padding:1rem 1.25rem; box-shadow:var(--shadow); transition:border-color .3s;
+}
+.header-row:hover { border-color:var(--border-hi); }
+.header-icon { font-size:1rem; flex-shrink:0; margin-top:2px; }
+.header-label { font-family:var(--fm); font-size:.7rem; font-weight:700; color:var(--green); margin-bottom:4px; }
+.header-desc { font-size:.82rem; color:var(--text-2); line-height:1.6; }
+
+/* ============================================
+   CONVENTION SECTION TITLE
+============================================ */
+.conv-section {
+  margin-top:3.5rem;
+}
+.item-card {
+  background:var(--bg); border:1px solid var(--border); border-radius:6px;
+  padding:.7rem 1rem; display:flex; align-items:center; gap:.7rem;
+  position:relative; overflow:hidden;
+  transition:border-color .3s, box-shadow .3s;
+}
+.item-card::after {
+  content:''; position:absolute; bottom:0; left:0; width:0; height:2px;
+  background:var(--amber); box-shadow:0 0 8px var(--amber-glow);
+  transition:width .5s cubic-bezier(.25,1,.5,1);
+}
+.item-card:hover { border-color:var(--amber); box-shadow:var(--shadow-hi); }
+.item-card:hover::after { width:100%; }
+
+.rule-card {
+  background:var(--bg); border:1px solid var(--border-hi); border-radius:8px;
+  padding:1rem 1.4rem; display:flex; align-items:center; gap:1.2rem;
+  position:relative; overflow:hidden;
+  transition:border-color .3s, box-shadow .3s;
+}
+.rule-card::after {
+  content:''; position:absolute; bottom:0; left:0; width:0; height:2px;
+  background:var(--amber); box-shadow:0 0 8px var(--amber-glow);
+  transition:width .5s cubic-bezier(.25,1,.5,1);
+}
+.rule-card:hover { border-color:var(--amber); box-shadow:var(--shadow-hi); }
+.rule-card:hover::after { width:100%; }
+
+.abrev-card {
+  background:var(--bg); border:1px solid var(--border); border-radius:6px;
+  padding:1rem 1.2rem; position:relative; overflow:hidden;
+  transition:border-color .3s, box-shadow .3s;
+}
+.abrev-card::after {
+  content:''; position:absolute; bottom:0; left:0; width:0; height:2px;
+  background:var(--amber); box-shadow:0 0 8px var(--amber-glow);
+  transition:width .5s cubic-bezier(.25,1,.5,1);
+}
+.abrev-card:hover { border-color:var(--amber); box-shadow:var(--shadow-hi); }
+.abrev-card:hover::after { width:100%; }
+.conv-section-h {
+  font-family:var(--fd); font-size:1.15rem; font-weight:700; margin-bottom:.6rem;
+}
+.conv-section-sub { font-size:.88rem; color:var(--text-2); margin-bottom:1.2rem; line-height:1.7; }
+
+/* ============================================
+   VIEWER MODAL — reste sombre (terminal)
+============================================ */
+#viewer-overlay {
+  position:fixed; inset:0; z-index:1000; display:none;
+  background:rgba(10,12,18,.88); backdrop-filter:blur(8px);
+  align-items:center; justify-content:center; padding:20px;
+}
+#viewer-overlay.open { display:flex; }
+#viewer-modal {
+  width:100%; max-width:860px; height:min(82vh,720px);
+  background:#0d1117; border:1px solid rgba(29,77,46,.35);
+  overflow:hidden; display:flex; flex-direction:column;
+  box-shadow:0 32px 80px rgba(0,0,0,.7);
+  animation:mIn .22s ease;
+}
+@keyframes mIn { from{opacity:0;transform:scale(.96)} to{opacity:1;transform:scale(1)} }
+
+.vwr-bar {
+  display:flex; align-items:center; gap:0;
+  background:#080c0f; border-bottom:1px solid rgba(255,255,255,.06);
+  padding:0 14px; flex-shrink:0;
+}
+.vwr-dots { display:flex; gap:6px; padding:13px 0 13px 4px; margin-right:12px; }
+.vwr-dots span { width:11px; height:11px; border-radius:50%; }
+.vwr-dots span:nth-child(1){ background:#f87171; }
+.vwr-dots span:nth-child(2){ background:#fbbf24; }
+.vwr-dots span:nth-child(3){ background:#4ade80; }
+.vwr-tabs { display:flex; gap:2px; flex:1; overflow-x:auto; }
+.vwr-tab {
+  font-family:var(--fm); font-size:.63rem; font-weight:600;
+  color:#4a6a4a; letter-spacing:.06em; padding:0 16px; height:42px;
+  border:none; border-bottom:2px solid transparent;
+  background:none; cursor:pointer; white-space:nowrap; transition:color .2s, border-color .2s;
+}
+.vwr-tab:hover { color:#c0d0c0; }
+.vwr-tab.active { color:#3d8856; border-bottom-color:#1d4d2e; }
+.vwr-close {
+  font-family:var(--fm); font-size:.75rem; color:#4a6a4a;
+  background:none; border:none; cursor:pointer; padding:7px 12px;
+  transition:color .2s; margin-left:8px;
+}
+.vwr-close:hover { color:#c0d0c0; }
+
+.vwr-path {
+  background:#060a0c; border-bottom:1px solid rgba(255,255,255,.04);
+  padding:6px 18px; font-family:var(--fm); font-size:.6rem; color:#3a4a3a; flex-shrink:0;
+}
+.vwr-path .pd { color:#2a5a3a; }
+.vwr-path .pf { color:#4a7a4a; }
+
+.vwr-scroll { flex:1; overflow:hidden; position:relative; }
+#vwr-content {
+  height:100%; overflow-y:scroll; overflow-x:auto; padding:18px 22px;
+  font-family:var(--fm); font-size:.72rem; line-height:2;
+  color:#d0e0d0; scrollbar-width:thin; scrollbar-color:rgba(29,77,46,.3) transparent;
+}
+#vwr-content pre {
+  white-space: pre;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+#vwr-content::-webkit-scrollbar { width:3px; }
+#vwr-content::-webkit-scrollbar-thumb { background:rgba(29,77,46,.3); }
+.vwr-grad {
+  position:absolute; bottom:0; left:0; right:0; height:60px; pointer-events:none;
+  background:linear-gradient(transparent, #0d1117);
+}
+
+/* syntax in viewer — contrastes renforcés */
+.y-ascii  { color:#d97706; }
+.y-slug   { color:#c4973a; font-weight:700; }
+.y-header { color:#5db87a; font-weight:700; }
+.y-comment{ color:#587858; }
+.y-key    { color:#88c898; }
+.y-colon  { color:#4a6a4a; }
+.y-val    { color:#e8a84a; }
+.y-dash   { color:#4a6a4a; }
+.y-table  { color:#4a6a4a; }
+
+/* ============================================
+   FOOTER
+============================================ */
+footer {
+  text-align:center;
+  padding:2.5rem clamp(1.5rem,5vw,4rem);
+  border-top:1px solid var(--border);
+  font-family:var(--fm); font-size:.65rem; color:var(--text-faint); letter-spacing:.08em;
+}
+footer a { color:var(--green-2); text-decoration:none; }
+footer a:hover { color:var(--green); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="https://ha.erodi-ha.com">Berry<span>Swann</span> · HA</a>
+  <a class="nav-back" href="https://ha.erodi-ha.com">← Portfolio</a>
+</nav>
+
+<!-- VIEWER MODAL -->
+<div id="viewer-overlay" onclick="closeViewer(event)">
+  <div id="viewer-modal">
+    <div class="vwr-bar">
+      <div class="vwr-dots"><span></span><span></span><span></span></div>
+      <div class="vwr-tabs">
+        <button class="vwr-tab active" onclick="switchFile(0,event)">P1 · sensor Riemann</button>
+        <button class="vwr-tab" onclick="switchFile(1,event)">P0 · Statistiques</button>
+        <button class="vwr-tab" onclick="switchFile(2,event)">P1 · Utility Meter</button>
+      </div>
+      <button class="vwr-close" onclick="closeViewerBtn()">✕ fermer</button>
+    </div>
+    <div class="vwr-path">
+      <span class="pd" id="vwr-dir">/homeassistant/sensors/P1_clim_chauffage/P1_kWh/</span><span class="pf" id="vwr-file">P1_kWh_clim_chauffage.yaml</span>
+    </div>
+    <div class="vwr-scroll">
+      <div id="vwr-content"></div>
+      <div class="vwr-grad"></div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div id="hero">
+  <div>
+    <div class="hero-eyebrow">Documentation · Architecture</div>
+    <h1>L'infrastructure<br><em>YAML par YAML.</em></h1>
+    <p class="sub">3 types de fichiers. Des conventions strictes. 2 ans de bidouille transformés en architecture modulaire.</p>
+    <button class="btn-viewer" onclick="openViewer()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      Voir un fichier réel
+    </button>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar reveal">
+  <div class="stat-item">
+    <span class="stat-n">3</span>
+    <span class="stat-l">types de fichiers</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-n">24+</span>
+    <span class="stat-l">utility meters</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-n">18</span>
+    <span class="stat-l">vignettes dashboard</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-n">5</span>
+    <span class="stat-l">headers obligatoires</span>
+  </div>
+</div>
+
+<!-- SECTION 1 : ARCHITECTURE -->
+<section id="architecture">
+  <div class="container">
+    <div class="label reveal">01 — Structure</div>
+    <h2 class="section-title reveal">Les 3 types de fichiers</h2>
+    <p class="section-sub reveal">Chaque fichier a sa place, son rôle, son cycle de vie. On ne mélange pas.</p>
+
+    <div class="blocs-grid">
+
+      <!-- BLOC 1 -->
+      <div class="bloc reveal">
+        <div class="bloc-header">
+          <div class="bloc-num">01 · Config YAML</div>
+          <div class="bloc-title">Sensors · Templates · UM</div>
+          <div class="bloc-path">/homeassistant/ → prod HA</div>
+        </div>
+        <div class="bloc-body">
+          <ul class="ftree">
+            <li>
+              <span class="dir">sensors/</span>
+              <ul class="ftree sub">
+                <li><span class="file">P0_Energie_total/ <span class="tag-pole">P0</span></span></li>
+                <li><span class="file">P1_clim_chauffage/ <span class="tag-pole">P1</span></span></li>
+                <li><span class="file">P2_prise/ <span class="tag-pole">P2</span></span></li>
+                <li><span class="file">P3_eclairage/ <span class="tag-pole">P3</span></span></li>
+                <li><span class="file">Air_quality/ · meteo/ · MP_*</span></li>
+              </ul>
+              <div class="note">platform: statistics · integration · ping</div>
+            </li>
+            <li style="margin-top:8px">
+              <span class="dir">templates/</span>
+              <ul class="ftree sub">
+                <li><span class="file">Jinja2 : textes, icônes, statuts</span></li>
+                <li><span class="file">Stores · Tendance T° · Air quality</span></li>
+              </ul>
+            </li>
+            <li style="margin-top:8px">
+              <span class="dir">utility_meter/</span>
+              <ul class="ftree sub">
+                <li><span class="file">P0 → P3 — cycles A M H Q</span></li>
+                <li><span class="file">1 équipement × 4 cycles = 4 compteurs</span></li>
+              </ul>
+              <div class="note">!include_dir_merge_named ← dict obligatoire</div>
+            </li>
+            <li style="margin-top:8px">
+              <span class="dir">command_line/ · groups/ · ...</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BLOC 2 -->
+      <div class="bloc reveal">
+        <div class="bloc-header">
+          <div class="bloc-num">02 · Automations</div>
+          <div class="bloc-title">YAML + documentation</div>
+          <div class="bloc-path">UI HA → DOCS/03_docs_automations/</div>
+        </div>
+        <div class="bloc-body">
+          <ul class="ftree">
+            <li>
+              <span class="dir">automations.yaml</span>
+              <ul class="ftree sub">
+                <li><span class="file">Fichier unique — toutes les automations</span></li>
+                <li><span class="file">Jamais modifié à la main</span></li>
+              </ul>
+              <div class="note">Modification → UI HA uniquement</div>
+            </li>
+            <li style="margin-top:8px">
+              <span class="dir">docs_automations_YAML/</span>
+              <ul class="ftree sub">
+                <li><span class="file">automation_presence_chauffage.yaml</span></li>
+                <li><span class="file">automation_alertes_conso.yaml</span></li>
+                <li><span class="file">... (1 fichier = 1 automation)</span></li>
+              </ul>
+            </li>
+            <li style="margin-top:8px">
+              <span class="dir">docs_automations_MD/</span>
+              <ul class="ftree sub">
+                <li><span class="file">automation_presence_chauffage.md</span></li>
+                <li><span class="file">Description · logique · déclencheurs</span></li>
+              </ul>
+            </li>
+          </ul>
+          <p style="font-size:.7rem;color:var(--text-faint);margin-top:14px;line-height:1.6;">
+            Chaque automation : un <code>.yaml</code> (code) + un <code>.md</code> (doc).
+          </p>
+        </div>
+      </div>
+
+      <!-- BLOC 3 -->
+      <div class="bloc reveal">
+        <div class="bloc-header">
+          <div class="bloc-num">03 · Dashboard YAML</div>
+          <div class="bloc-title">Vignettes · Pages · Complet</div>
+          <div class="bloc-path">DOCS/02_docs_dashboard/ → H:\Docs\</div>
+        </div>
+        <div class="bloc-body">
+          <ul class="ftree">
+            <li>
+              <span class="dir">Dashboard_COMPLET/</span>
+              <ul class="ftree sub">
+                <li><span class="file">Dashboard_2026_07_15.yaml</span></li>
+                <li><span class="file">Dashboard_2026_06_28.yaml</span></li>
+              </ul>
+              <div class="note">Snapshot export UI HA — conservation illimitée</div>
+            </li>
+            <li style="margin-top:8px">
+              <span class="dir">L1C1_Meteo/ · L1C2_Temperatures/ ...</span>
+              <ul class="ftree sub">
+                <li><span class="file">vignette_meteo_2026-07-15.yaml</span></li>
+                <li><span class="file">page_meteo_2026-07-15.yaml</span></li>
+                <li><span class="file">vignette_meteo_2026-07-15.md</span></li>
+              </ul>
+              <div class="note">Max 3 versions par vignette</div>
+            </li>
+            <li style="margin-top:8px">
+              <span class="dir" style="color:var(--text-faint)">18 vignettes (L1C1 → L6C3)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /blocs-grid -->
+
+    <!-- MAGIC FORMULA -->
+    <div class="callout reveal">
+      <div class="callout-title">La formule magique — configuration.yaml</div>
+      <pre><span class="ky">sensor</span><span style="color:var(--text-faint)">:          </span><span class="cm"># charge TOUS les .yaml dans sensors/ — fusionne en liste</span>
+  <span class="vl">!include_dir_merge_list sensors/</span>
+
+<span class="ky">template</span><span style="color:var(--text-faint)">:         </span><span class="cm"># idem pour les templates Jinja2</span>
+  <span class="vl">!include_dir_merge_list templates/</span>
+
+<span class="ky">utility_meter</span><span style="color:var(--text-faint)">:     </span><span class="cm"># chaque fichier doit retourner un DICT (pas une liste)</span>
+  <span class="vl">!include_dir_merge_named utility_meter/</span>
+
+<span class="ky">automation</span><span style="color:var(--text-faint)">: </span><span class="vl">!include automations.yaml</span>    <span class="cm"># fichier centralisé unique</span></pre>
+      <p class="note-line">
+        <code>!include_dir_merge_list</code> fusionne tous les fichiers du dossier en une seule liste — parfait pour <code>sensor:</code> et <code>template:</code> qui acceptent plusieurs entités par fichier.<br>
+        <code>!include_dir_merge_named</code> est obligatoire pour <code>utility_meter:</code> dont chaque compteur est une clé nommée (dict), pas un item de liste.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2 : CONVENTIONS -->
+<section id="conventions" class="section-alt">
+  <div class="container">
+    <div class="label reveal">02 — Conventions</div>
+    <h2 class="section-title reveal">Descendre en enfer.</h2>
+    <p class="section-sub reveal">Les règles que chaque fichier YAML doit respecter. Sans exception.</p>
+
+    <!-- 1. NUMÉROTATION PIÈCES -->
+    <!-- 1. PÔLES + RÈGLE -->
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">1 — Numérotation officielle des pôles</h3>
+      <p class="conv-section-sub">5 pôles, préfixés P0 à P4. Chaque fichier YAML appartient à un seul pôle — jamais deux pôles dans le même fichier.</p>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:.55rem;margin:1.1rem 0 1.2rem;">
+        <div class="item-card"><span style="font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--amber);min-width:1.6rem;flex-shrink:0;">P0</span><span style="font-size:.8rem;font-weight:600;color:var(--text);">ENERGIE</span></div>
+        <div class="item-card"><span style="font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--amber);min-width:1.6rem;flex-shrink:0;">P1</span><span style="font-size:.8rem;font-weight:600;color:var(--text);">CLIM</span></div>
+        <div class="item-card"><span style="font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--amber);min-width:1.6rem;flex-shrink:0;">P2</span><span style="font-size:.8rem;font-weight:600;color:var(--text);">PRISES</span></div>
+        <div class="item-card"><span style="font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--amber);min-width:1.6rem;flex-shrink:0;">P3</span><span style="font-size:.8rem;font-weight:600;color:var(--text);">ECLAIRAGE</span></div>
+        <div class="item-card"><span style="font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--amber);min-width:1.6rem;flex-shrink:0;">P4</span><span style="font-size:.8rem;font-weight:600;color:var(--text);">PRESENCE</span></div>
+      </div>
+      <div class="rule-card">
+        <div style="font-family:var(--fm);font-size:1.6rem;color:var(--amber);flex-shrink:0;">⊡</div>
+        <div>
+          <div style="font-size:.78rem;font-weight:700;color:var(--text);margin-bottom:.3rem;">1 fonction = 1 fichier, par pôle</div>
+          <p style="font-size:.8rem;color:var(--text-2);line-height:1.7;">Chaque fichier YAML ne fait qu'une seule chose : mesurer, compter, calculer, ou afficher. On ne mélange jamais les pôles dans un même fichier. Une prise connectée ne cohabite pas avec un radiateur. L'approche monolithique est interdite.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. PIÈCES -->
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">2 — Numérotation officielle des pièces</h3>
+      <p class="conv-section-sub">Index fixe de 1 à 9 pour chaque pièce. Cet index précède le nom dans tous les titres secondaires de chaque fichier YAML, quel que soit le pôle.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin:1.1rem 0 1rem;">
+        <div class="item-card"><span style="font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--amber);min-width:1.4rem;flex-shrink:0;">1.</span><span style="font-size:.85rem;font-weight:600;color:var(--text);">ENTREE</span></div>
+        <div class="item-card"><span style="font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--amber);min-width:1.4rem;flex-shrink:0;">2.</span><span style="font-size:.85rem;font-weight:600;color:var(--text);">CELLIER</span></div>
+        <div class="item-card"><span style="font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--amber);min-width:1.4rem;flex-shrink:0;">3.</span><span style="font-size:.85rem;font-weight:600;color:var(--text);">TOILETTE</span></div>
+        <div class="item-card"><span style="font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--amber);min-width:1.4rem;flex-shrink:0;">4.</span><span style="font-size:.85rem;font-weight:600;color:var(--green);">SALON</span></div>
+        <div class="item-card"><span style="font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--amber);min-width:1.4rem;flex-shrink:0;">5.</span><span style="font-size:.85rem;font-weight:600;color:var(--text);">CUISINE</span></div>
+        <div class="item-card"><span style="font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--amber);min-width:1.4rem;flex-shrink:0;">6.</span><span style="font-size:.85rem;font-weight:600;color:var(--text);">COULOIR</span></div>
+        <div class="item-card"><span style="font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--amber);min-width:1.4rem;flex-shrink:0;">7.</span><span style="font-size:.85rem;font-weight:600;color:var(--text);">BUREAU</span></div>
+        <div class="item-card"><span style="font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--amber);min-width:1.4rem;flex-shrink:0;">8.</span><span style="font-size:.85rem;font-weight:600;color:var(--text);">SDB</span></div>
+        <div class="item-card"><span style="font-family:var(--fm);font-size:1rem;font-weight:700;color:var(--amber);min-width:1.4rem;flex-shrink:0;">9.</span><span style="font-size:.85rem;font-weight:600;color:var(--text);">CHAMBRE</span></div>
+      </div>
+      <p style="font-size:.82rem;color:var(--text-2);">Exemple : la boite <code>┌ 4. SALON ┐</code> dans un fichier P1 signifie "ce bloc appartient au pôle Chauffage, pièce SALON (index 4)". La numérotation garantit l'ordre et l'unicité dans tout le projet.</p>
+    </div>
+
+    <!-- 3. ABRÉVIATIONS -->
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">3 — Abréviations officielles</h3>
+      <p class="conv-section-sub">Toutes les abréviations utilisées dans les noms de fichiers et les <code>unique_id</code>. Hors de cette liste = interdit.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.1rem 0;">
+        <div class="abrev-card">
+          <div style="font-family:var(--fm);font-size:.62rem;color:var(--amber);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.7rem;">Types de fichiers / entités</div>
+          <div style="display:flex;flex-direction:column;gap:.4rem;">
+            <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:4.5rem;">SNS</span><span style="font-size:.82rem;color:var(--text-2);">Sensor — capteur, statistique, Riemann</span></div>
+            <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:4.5rem;">UM</span><span style="font-size:.82rem;color:var(--text-2);">Utility Meter — compteur à remise à zéro par cycle</span></div>
+            <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:4.5rem;">TPL</span><span style="font-size:.82rem;color:var(--text-2);">Template — entité calculée, aucun hardware</span></div>
+            <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:4.5rem;">AVG</span><span style="font-size:.82rem;color:var(--text-2);">Average — moyenne de puissance en W</span></div>
+            <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:4.5rem;">kWh</span><span style="font-size:.82rem;color:var(--text-2);">kilowatt-heure — unité d'énergie finale</span></div>
+            <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:4.5rem;">CMD</span><span style="font-size:.82rem;color:var(--text-2);">Command Line — sensor via shell/script bash</span></div>
+          </div>
+        </div>
+        <div class="abrev-card">
+          <div style="font-family:var(--fm);font-size:.62rem;color:var(--amber);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.7rem;">Cycles / Divers</div>
+          <div style="display:flex;flex-direction:column;gap:.4rem;">
+            <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:4.5rem;">AMHQ</span><span style="font-size:.82rem;color:var(--text-2);">Annuel / Mensuel / Hebdomadaire / Quotidien</span></div>
+            <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:4.5rem;">HP / HC</span><span style="font-size:.82rem;color:var(--text-2);">Heures Pleines / Heures Creuses (tarif Linky)</span></div>
+            <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:4.5rem;">LxCx</span><span style="font-size:.82rem;color:var(--text-2);">Ligne x Colonne x — vignette du dashboard (ex: L2C2)</span></div>
+            <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:4.5rem;">DUT</span><span style="font-size:.82rem;color:var(--text-2);">Duration Under Threshold — durée sous seuil (thermique)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. CONVENTION NOMMAGE / CHAÎNE SUFFIXES -->
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">4 — Convention de nommage : la chaîne de suffixes</h3>
+      <p class="conv-section-sub">Le suffixe du <code>unique_id</code> documente la dernière transformation subie. Chaque étape ajoute sa marque dans le nom.</p>
+
+      <div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:1.2rem 0;font-family:var(--fm);font-size:.78rem;">
+        <div style="background:#0c0f11;border:1px solid rgba(29,77,46,.35);padding:1rem 1.2rem;min-width:130px;flex:1;">
+          <div style="color:#5db87a;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem;">source brute</div>
+          <div style="color:#88c898;font-weight:700;">{slug}_energy</div>
+          <div style="color:#587858;font-size:.68rem;margin-top:.4rem;">Natif HA — Z2M / Hue / Shelly</div>
+        </div>
+        <div style="display:flex;align-items:center;padding:0 .6rem;color:#3d8856;font-size:1.2rem;flex-shrink:0;">→</div>
+        <div style="background:#0c0f11;border:1px solid rgba(29,77,46,.35);padding:1rem 1.2rem;min-width:155px;flex:1;">
+          <div style="color:#5db87a;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem;">Utility Meter</div>
+          <div><span style="color:#88c898;font-weight:700;">{slug}_{cycle}</span><span style="color:#d97706;font-weight:700;">_um</span></div>
+          <div style="color:#587858;font-size:.68rem;margin-top:.4rem;">Remis à zéro par cycle A/M/H/Q</div>
+        </div>
+        <div style="display:flex;align-items:center;padding:0 .6rem;color:#3d8856;font-size:1.2rem;flex-shrink:0;">→</div>
+        <div style="background:#0c0f11;border:1px solid rgba(29,77,46,.35);padding:1rem 1.2rem;min-width:185px;flex:2;">
+          <div style="color:#5db87a;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem;">Template (2 variantes)</div>
+          <div style="margin-bottom:.6rem;">
+            <div><span style="color:#88c898;font-weight:700;">{slug}_{cycle}</span><span style="color:#d97706;font-weight:700;">_um_kwh_tpl</span></div>
+            <div style="color:#587858;font-size:.68rem;margin-top:.2rem;">Relais kWh — exprime en énergie finale</div>
+          </div>
+          <div style="border-top:1px solid rgba(255,255,255,.06);padding-top:.6rem;">
+            <div><span style="color:#88c898;font-weight:700;">{zone}_{cycle}</span><span style="color:#d97706;font-weight:700;">_um_avg_tpl</span></div>
+            <div style="color:#587858;font-size:.68rem;margin-top:.2rem;">Moyenne W — puissance moyenne sur le cycle</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.5rem;">
+        <div style="background:var(--bg-card);border-left:3px solid var(--green);padding:1rem 1.2rem;border-radius:0 6px 6px 0;">
+          <div style="font-size:.7rem;font-weight:700;color:var(--green);margin-bottom:.5rem;letter-spacing:.06em;text-transform:uppercase;">Règle absolue</div>
+          <p style="font-size:.8rem;color:var(--text-2);line-height:1.75;">Tout sensor sorti d'un Utility Meter finit par <code>_um</code>. Si ce sensor passe dans un template pour exprimer du kWh, il finit par <code>_um_kwh_tpl</code>. Si c'est pour une moyenne W : <code>_um_avg_tpl</code>.</p>
+        </div>
+        <div style="background:var(--bg-card);border-left:3px solid var(--amber);padding:1rem 1.2rem;border-radius:0 6px 6px 0;">
+          <div style="font-size:.7rem;font-weight:700;color:var(--amber);margin-bottom:.5rem;letter-spacing:.06em;text-transform:uppercase;">Règle d'agrégation</div>
+          <p style="font-size:.8rem;color:var(--text-2);line-height:1.75;">Si un fichier <code>_kwh_tpl</code> existe déjà et que tu y ajoutes un nouveau sensor du même type, ce sensor porte aussi le suffixe <code>_kwh_tpl</code> — même logique, même fichier, même suffixe.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. ASCII -->
+    <!-- 5. BORDURES ASCII -->
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">5 — Bordures ASCII</h3>
+      <p class="conv-section-sub">Chaque fichier YAML commence par une boîte ASCII. Deux niveaux : titre principal du fichier, titre secondaire par pièce.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.1rem 0;">
+        <div class="conv-card">
+          <div class="conv-card-title">Titre principal — coins arrondis</div>
+          <p style="font-size:.8rem;color:var(--text-2);line-height:1.9;">
+            Caractères : <code>╭─╮</code> / <code>╰─╯</code><br>
+            Largeur : <strong>78 caractères</strong><br>
+            Texte : <strong>MAJUSCULES</strong><br>
+            Si le texte dépasse 74 car. : élargir la boîte (76, 80+).<br>
+            <span style="color:var(--amber);">Ne jamais supprimer les références techniques du titre.</span>
+          </p>
+        </div>
+        <div class="conv-card">
+          <div class="conv-card-title">Titre secondaire — coins carrés</div>
+          <p style="font-size:.8rem;color:var(--text-2);line-height:1.9;">
+            Caractères : <code>┌─┐</code> / <code>└─┘</code><br>
+            Largeur : <strong>37 caractères</strong><br>
+            Texte : <strong>MAJUSCULES</strong>, numérotation officielle 1-9<br>
+            Un titre secondaire par pièce dans le fichier.<br>
+            &nbsp;
+          </p>
+        </div>
+      </div>
+      <div class="ascii-demo"><span class="cc"># titre principal - coins arrondis - 78 car. [exemple a 60 car.]</span>
+<span class="ac"># ╭──────────────────────────────────────────────────────────╮</span>
+<span class="ac"># │ POLE 1 - UTILITY METER AMHQ : CHAUFFAGE CLIM         │</span>
+<span class="ac"># ╰──────────────────────────────────────────────────────────╯</span>
+
+<span class="cc"># titre secondaire - coins carres - 37 car.</span>
+<span class="ac"># ┌───────────────────────────────────┐</span>
+<span class="ac"># │ 4. SALON                        │</span>
+<span class="ac"># └───────────────────────────────────┘</span></div>
+    </div>
+
+    <!-- 6. HEADERS -->
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">6 — Les 5 headers obligatoires</h3>
+      <p class="conv-section-sub">Juste sous la boîte ASCII principale, dans cet ordre exact. Toujours les 5 — même si une section est vide.</p>
+      <div class="headers-list">
+        <div class="header-row">
+          <div class="header-icon">📝</div>
+          <div>
+            <div class="header-label">## 📝 DESCRIPTION :</div>
+            <div class="header-desc">Ce que fait le fichier, ce qu'il produit comme entités.</div>
+          </div>
+        </div>
+        <div class="header-row">
+          <div class="header-icon">🧮</div>
+          <div>
+            <div class="header-label">## 🧮 CALCUL &amp; SOURCES :</div>
+            <div class="header-desc">Formules utilisées, entités sources, méthode de calcul (Riemann, statistics, mean...).</div>
+          </div>
+        </div>
+        <div class="header-row">
+          <div class="header-icon">🔗</div>
+          <div>
+            <div class="header-label">## 🔗 CHAÎNE DE DÉPENDANCES :</div>
+            <div class="header-desc">Tableau à 4 colonnes : une ligne par entité produite par ce fichier.</div>
+            <div style="margin-top:.6rem;display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;font-family:var(--fm);font-size:.7rem;">
+              <div style="background:var(--bg);border:1px solid var(--border);padding:.4rem .6rem;border-radius:4px;color:var(--green);font-weight:700;">MATÉRIEL</div>
+              <div style="background:var(--bg);border:1px solid var(--border);padding:.4rem .6rem;border-radius:4px;color:var(--green);font-weight:700;">CAPTEUR BRUT</div>
+              <div style="background:var(--bg);border:1px solid var(--border);padding:.4rem .6rem;border-radius:4px;color:var(--green);font-weight:700;">CE FICHIER</div>
+              <div style="background:var(--bg);border:1px solid var(--border);padding:.4rem .6rem;border-radius:4px;color:var(--green);font-weight:700;">AVAL</div>
+              <div style="background:var(--bg);border:1px solid var(--border);padding:.4rem .6rem;border-radius:4px;color:var(--text-2);font-size:.65rem;">Device physique ou intégration HA. Si calculé : <code>[calculé]</code></div>
+              <div style="background:var(--bg);border:1px solid var(--border);padding:.4rem .6rem;border-radius:4px;color:var(--text-2);font-size:.65rem;">Entité source exacte utilisée dans <code>source:</code> ou <code>entity_id:</code></div>
+              <div style="background:var(--bg);border:1px solid var(--border);padding:.4rem .6rem;border-radius:4px;color:var(--text-2);font-size:.65rem;"><code>unique_id</code> exact de l'entité produite par ce fichier</div>
+              <div style="background:var(--bg);border:1px solid var(--border);padding:.4rem .6rem;border-radius:4px;color:var(--text-2);font-size:.65rem;">Fichier(s) consommateurs + vignette. Ex : <code>P1_UM.yaml → L2C2</code></div>
+            </div>
+          </div>
+        </div>
+        <div class="header-row">
+          <div class="header-icon">⚠️</div>
+          <div>
+            <div class="header-label">## ⚠️ IMPORTANT (PIÈGES) :</div>
+            <div class="header-desc">Comportements contre-intuitifs, dépendances critiques, bugs connus. Ce qui peut casser HA si oublié.</div>
+          </div>
+        </div>
+        <div class="header-row">
+          <div class="header-icon">🖥️</div>
+          <div>
+            <div class="header-label">## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :</div>
+            <div class="header-desc">Quelle(s) vignette(s) consomment les entités de ce fichier. Ex : L2C2 Conso Énergie Clim.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Squelette complet -->
+      <div class="ascii-demo" style="margin-top:1.4rem;font-size:.67rem;">
+<span class="hh"># ## 📝 DESCRIPTION :</span>
+<span class="cc"># Ce que fait le fichier...</span>
+<span class="cc">#</span>
+<span class="hh"># ## 🧮 CALCUL & SOURCES :</span>
+<span class="cc"># sensor.source_brute → calcul → résultat</span>
+<span class="cc">#</span>
+<span class="hh"># ## 🔗 CHAÎNE DE DÉPENDANCES :</span>
+<span class="cc">#</span>
+<span class="tb"># | MATÉRIEL    | CAPTEUR BRUT (source)          | CE FICHIER (unique_id)  | AVAL   |</span>
+<span class="tb"># |:------------|:-------------------------------|:------------------------|:-------|</span>
+<span class="tb"># | Nodon (Z2M) | sensor.general_electric_power  | genelec_conso_mini_24h  | L2C1   |</span>
+<span class="cc">#</span>
+<span class="hh"># ## ⚠️ IMPORTANT (PIÈGES) :</span>
+<span class="cc"># - Point d'attention critique...</span>
+<span class="cc">#</span>
+<span class="hh"># ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :</span>
+<span class="cc"># - L2C1 Conso Énergie Générale</span></div>
+    </div>
+
+    <!-- 7. SLUG -->
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">7 — Slug tertiaire</h3>
+      <p class="conv-section-sub">Commentaire repère positionné juste au-dessus de chaque bloc d'entité. Doit être l'image exacte du <code>unique_id</code> qui suit - ni plus, ni moins.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.1rem 0;">
+        <div class="conv-card">
+          <div class="conv-card-title">Format</div>
+          <p style="font-size:.8rem;color:var(--text-2);line-height:1.9;">
+            <code><strong># --- unique_id_exact ---</strong></code><br>
+            Position : <strong>juste au-dessus</strong> de chaque bloc d'entité individuel.<br>
+            Le slug est l'image exacte du <code><strong>unique_id</strong></code> - pas de variation, pas de raccourci.
+          </p>
+        </div>
+        <div class="conv-card">
+          <div class="conv-card-title">Cas particulier : Utility_meter</div>
+          <p style="font-size:.8rem;color:var(--text-2);line-height:1.9;">
+            Un slug <strong>par entrée de cycle</strong> : annuel, mensuel, hebdomadaire, quotidien.<br>
+            <span style="color:var(--amber);"><strong>Interdit : un slug groupé pour les 4 cycles.</strong></span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. NAME + UNIQUE_ID -->
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">8 — name &amp; unique_id</h3>
+      <p class="conv-section-sub">Toujours en paire. Même sens, deux formats. Cohérence croisée obligatoire : ils doivent décrire exactement la même chose.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.1rem 0;">
+        <div class="conv-card">
+          <div class="conv-card-title"><strong>name</strong> - format humain</div>
+          <p style="font-size:.8rem;color:var(--text-2);line-height:1.9;">
+            Format : <code><strong>"Préfixe Nom Lisible Période"</strong></code><br>
+            Majuscules initiales sur <strong>chaque mot</strong>.<br>
+            <strong>Préfixe pôle obligatoire</strong> en premier mot.<br>
+            Période ou cycle lisible à la fin si applicable.
+          </p>
+        </div>
+        <div class="conv-card">
+          <div class="conv-card-title"><strong>unique_id</strong> - format machine</div>
+          <p style="font-size:.8rem;color:var(--text-2);line-height:1.9;">
+            Format : <code><strong>prefixe_nom_lisible_periode</strong></code><br>
+            Tout en <strong>minuscules</strong>, séparateurs <strong>underscores</strong>.<br>
+            Doit décrire la même chose que <code><strong>name</strong></code>.<br>
+            <span style="color:var(--amber);"><strong>Aucune abréviation inventée hors liste officielle.</strong></span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <a href="https://ha.erodi-ha.com">ha.erodi-ha.com</a> &nbsp;·&nbsp; Architecture HA — BerrySwann &nbsp;·&nbsp; 2026
+</footer>
+
+<script>
+// ── YAML FILES ────────────────────────────────────────────────────────────
+
+const FILES = [
+  {
+    dir: '/homeassistant/sensors/P1_clim_chauffage/P1_kWh/',
+    file: 'P1_kWh_clim_chauffage.yaml',
+    content: `# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ CAPTEUR : INTÉGRATION KWH — RADIATEUR CUISINE (RIEMANN P1)               │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Intégration Riemann pour le radiateur cuisine (Shelly 1PM Gen 4).
+# Convertit la puissance instantanée (W) en énergie cumulative (kWh).
+# Nécessaire car le firmware Shelly Gen 4 marque currentSummDelivered
+# comme UNREPORTABLE_ATTRIBUTE — le kWh natif Zigbee est inaccessible.
+#
+# ## 🧮 CALCUL & SOURCES :
+# sensor.radiateur_elec_cuisine_power (W) → intégration Riemann (left) → kWh
+# Méthode left : utilise la valeur de puissance du début de l'intervalle.
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL              | CAPTEUR BRUT (source)               | CE FICHIER (unique_id)                    | AVAL                             |
+# |:----------------------|:------------------------------------|:------------------------------------------|:---------------------------------|
+# | Shelly 1PM Gen4 (Z2M) | sensor.radiateur_elec_cuisine_power | radiateur_elec_cuisine_energie_totale_kwh | P1_UM_AMHQ.yaml → P1_AVG → L2C2 |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Bug firmware Shelly 1PM Gen 4 (S4SW-001P16EU) : UNREPORTABLE_ATTRIBUTE
+#   sur seMetering/currentSummDelivered → kWh natif Z2M inutilisable.
+# - Fix firmware identifié : 20250819-150402/ga0def2d (shellyRPCBugFixed)
+#   → dès que le fix est disponible via Z2M OTA, supprimer ce fichier
+#   et restaurer source directe dans P1_UM_AMHQ.yaml.
+# - Les autres équipements P1 (NOUS plugs, clims) utilisent leur kWh natif
+#   directement — ce fichier est une exception Shelly uniquement.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Via P1_UM_AMHQ.yaml → L2C2 (Conso Énergie Clim / Radiateur / Soufflant)
+
+# ┌─────────────────────────────────┐
+# │ 5. CUISINE                       │
+# └─────────────────────────────────┘
+
+# --- radiateur_elec_cuisine_energie_totale_kwh ---
+- platform: integration
+  source: sensor.radiateur_elec_cuisine_power
+  name: "Radiateur Elec Cuisine Energie Totale kWh"
+  unique_id: radiateur_elec_cuisine_energie_totale_kwh
+  method: left
+
+# annotations_log:
+# - [2026-06-14] Création : Riemann cuisine restauré.
+#   Bug firmware Shelly 1PM Gen4 — UNREPORTABLE_ATTRIBUTE sur kWh natif Z2M.
+#   Source : sensor.radiateur_elec_cuisine_power → kWh calculé par HA.`
+  },
+  {
+    dir: '/homeassistant/sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/',
+    file: 'P0_MINI_MAXI_AVG_Genelec_appart.yaml',
+    content: `# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 0. SENSORS : STATISTIQUES MIN/MAX/MOY — PUISSANCE APPART TEMPS RÉEL │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs de statistiques calculant la puissance minimale, maximale et
+# moyenne sur la puissance temps réel de l'appartement. Période glissante
+# de 24h pour min/max et 1h pour la moyenne.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : sensor.general_electric_appart_power (puissance W — NODON).
+# - Conso Mini  : min sur 24h (value_min) → pic bas de la journée.
+# - Conso Maxi  : max sur 24h (value_max) → pic haut de la journée.
+# - Conso Moy 1h: moyenne sur 1h (mean) → puissance W lissée sur 1h.
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL    | CAPTEUR BRUT (source)                | CE FICHIER (unique_id)           | AVAL  |
+# |:------------|:-------------------------------------|:---------------------------------|:------|
+# | Nodon (Z2M) | sensor.general_electric_appart_power | genelec_appart_conso_mini_24h    | L2C1  |
+# | Nodon (Z2M) | sensor.general_electric_appart_power | genelec_appart_conso_maxi_24h    | L2C1  |
+# | Nodon (Z2M) | sensor.general_electric_appart_power | genelec_appart_conso_moyenne_1h  | L2C1  |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Source = puissance W (NODON) — PAS un utility meter kWh.
+# - value_min 24h = pic bas réel (peut être 0W si tout éteint la nuit).
+# - La moyenne 1h peut être indisponible les 60 premières minutes
+#   après redémarrage HA (pas assez d'échantillons pour mean).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C1 Conso Énergie Générale (suivi temps réel min/max/moy).
+
+# --- genelec_appart_conso_mini_24h ---
+- platform: statistics
+  name: "Genelec Appart Conso Mini 24h"
+  unique_id: genelec_appart_conso_mini_24h
+  entity_id: sensor.general_electric_appart_power
+  state_characteristic: value_min
+  max_age:
+    hours: 24
+
+# --- genelec_appart_conso_maxi_24h ---
+- platform: statistics
+  name: "Genelec Appart Conso Maxi 24h"
+  unique_id: genelec_appart_conso_maxi_24h
+  entity_id: sensor.general_electric_appart_power
+  state_characteristic: value_max
+  max_age:
+    hours: 24
+
+# --- genelec_appart_conso_moyenne_1h ---
+- platform: statistics
+  name: "Genelec Appart Conso Moyenne 1h"
+  unique_id: genelec_appart_conso_moyenne_1h
+  entity_id: sensor.general_electric_appart_power
+  state_characteristic: mean
+  precision: 1
+  max_age:
+    hours: 1`
+  },
+  {
+    dir: '/homeassistant/utility_meter/P1_clim_chauffage/',
+    file: 'P1_UM_AMHQ.yaml',
+    content: `# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 1 — UTILITY METER AMHQ : CHAUFFAGE & CLIMATISATION                  │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Compteurs périodiques (Annuel / Mensuel / Hebdo / Quotidien) pour les 6
+# équipements du Pôle 1 : 3 clims, 1 radiateur cuisine, 1 soufflant SDB,
+# 1 sèche-serviette SDB. 6 équipements × 4 cycles = 24 compteurs.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Sources : firmware direct NOUS (Z2M) — sensor.*_nous_energy (kWh natif)
+# - Exception cuisine : Riemann — sensor.radiateur_elec_cuisine_energie_totale_kwh
+# - Remise à zéro : Quotidien=minuit / Hebdo=lundi / Mensuel=1er / Annuel=1er jan
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL                  | CAPTEUR BRUT (source)                             | CE FICHIER (unique_id)   | AVAL          |
+# |:--------------------------|:--------------------------------------------------|:-------------------------|:--------------|
+# | NOUS plug (Z2M)           | sensor.clim_salon_nous_energy                     | clim_salon_*_um          | P1_AVG → L2C2 |
+# | Shelly 1PM Gen4 [calculé] | sensor.radiateur_elec_cuisine_energie_totale_kwh  | radiateur_elec_cuisine_* | P1_AVG → L2C2 |
+# | NOUS plug (Z2M)           | sensor.clim_bureau_nous_energy                    | clim_bureau_*_um         | P1_AVG → L2C2 |
+# | NOUS plug (Z2M)           | sensor.prise_soufflant_salle_de_bain_nous_energy  | soufflant_sdb_*_um       | P1_AVG → L2C2 |
+# | NOUS plug (Z2M)           | sensor.clim_chambre_nous_energy                   | clim_chambre_*_um        | P1_AVG → L2C2 |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - !include_dir_merge_named : ce fichier retourne un DICT — jamais une liste.
+# - EXCEPTION cuisine : Shelly 1PM Gen4 bug firmware (UNREPORTABLE_ATTRIBUTE)
+#   → source via Riemann (P1_kWh_clim_chauffage.yaml). Fix OTA à venir.
+# - Suffixe _um unifié depuis refactoring 2026-04-25.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C2 (Conso Énergie Clim / Radiateur / Soufflant)
+
+# ┌─────────────────────────────────┐
+# │ 4. SALON                         │
+# └─────────────────────────────────┘
+
+# --- clim_salon_annuel_um ---
+clim_salon_annuel_um:
+  source: sensor.clim_salon_nous_energy
+  name: "Clim Salon Annuel UM"
+  unique_id: clim_salon_annuel_um
+  cycle: yearly
+
+# --- clim_salon_mensuel_um ---
+clim_salon_mensuel_um:
+  source: sensor.clim_salon_nous_energy
+  name: "Clim Salon Mensuel UM"
+  unique_id: clim_salon_mensuel_um
+  cycle: monthly
+
+# --- clim_salon_hebdomadaire_um ---
+clim_salon_hebdomadaire_um:
+  source: sensor.clim_salon_nous_energy
+  name: "Clim Salon Hebdomadaire UM"
+  unique_id: clim_salon_hebdomadaire_um
+  cycle: weekly
+
+# --- clim_salon_quotidien_um ---
+clim_salon_quotidien_um:
+  source: sensor.clim_salon_nous_energy
+  name: "Clim Salon Quotidien UM"
+  unique_id: clim_salon_quotidien_um
+  cycle: daily
+
+# ┌─────────────────────────────────┐
+# │ 5. CUISINE                       │
+# └─────────────────────────────────┘
+
+# --- radiateur_elec_cuisine_annuel_um ---
+radiateur_elec_cuisine_annuel_um:
+  source: sensor.radiateur_elec_cuisine_energie_totale_kwh
+  name: "Radiateur Elec Cuisine Annuel UM"
+  unique_id: radiateur_elec_cuisine_annuel_um
+  cycle: yearly
+
+# --- radiateur_elec_cuisine_mensuel_um ---
+radiateur_elec_cuisine_mensuel_um:
+  source: sensor.radiateur_elec_cuisine_energie_totale_kwh
+  name: "Radiateur Elec Cuisine Mensuel UM"
+  unique_id: radiateur_elec_cuisine_mensuel_um
+  cycle: monthly
+
+# annotations_log:
+# - [2026-04-25] Refactoring : suffixe _um unifié sur tous les compteurs.
+# - [2026-06-14] Exception cuisine : source Riemann (bug Shelly 1PM Gen4).`
+  }
+];
+
+let currentFile = 0;
+let scrollAnim = null;
+let paused = false;
+
+function highlightYAML(text) {
+  return text.split('\n').map(line => {
+    const e = line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    if (/^#\s*[╭╰│╮]/.test(line)) return '<span class="y-ascii">'+e+'</span>';
+    if (/^#\s*[┌┐└┘─│]/.test(line)) return '<span class="y-ascii">'+e+'</span>';
+    if (/^#\s*---\s/.test(line))    return '<span class="y-slug">'+e+'</span>';
+    if (/^#\s*##/.test(line))       return '<span class="y-header">'+e+'</span>';
+    if (/^\s*#\s*\|/.test(line))    return '<span class="y-table">'+e+'</span>';
+    if (/^#/.test(line))            return '<span class="y-comment">'+e+'</span>';
+    if (line.trim() === '')         return '';
+    const kv = e.match(/^(\s*)([\w_-]+)(\s*:\s*)(.*)$/);
+    if (kv) return kv[1]+'<span class="y-key">'+kv[2]+'</span><span class="y-colon">'+kv[3]+'</span><span class="y-val">'+kv[4]+'</span>';
+    const d = e.match(/^(\s*-\s*)(.*)$/);
+    if (d) return '<span class="y-dash">'+d[1]+'</span><span class="y-val">'+d[2]+'</span>';
+    return e;
+  }).join('\n');
+}
+
+function loadFile(idx) {
+  const f = FILES[idx];
+  document.getElementById('vwr-dir').textContent = f.dir;
+  document.getElementById('vwr-file').textContent = f.file;
+  document.getElementById('vwr-content').innerHTML = '<pre>' + highlightYAML(f.content) + '</pre>';
+  document.getElementById('vwr-content').scrollTop = 0;
+}
+
+function startScroll() {
+  if (scrollAnim) cancelAnimationFrame(scrollAnim);
+  const el = document.getElementById('vwr-content');
+  let last = performance.now();
+  function step(now) {
+    if (!paused) {
+      const dt = (now - last) / 1000;
+      el.scrollTop += 26 * dt;
+      if (el.scrollTop >= el.scrollHeight - el.clientHeight - 10) el.scrollTop = 0;
+    }
+    last = now;
+    scrollAnim = requestAnimationFrame(step);
+  }
+  scrollAnim = requestAnimationFrame(step);
+}
+
+function openViewer() {
+  document.getElementById('viewer-overlay').classList.add('open');
+  loadFile(currentFile);
+  paused = false;
+  startScroll();
+  document.body.style.overflow = 'hidden';
+}
+
+function closeViewerBtn() {
+  document.getElementById('viewer-overlay').classList.remove('open');
+  if (scrollAnim) { cancelAnimationFrame(scrollAnim); scrollAnim = null; }
+  document.body.style.overflow = '';
+}
+
+function closeViewer(e) {
+  if (e.target === document.getElementById('viewer-overlay')) closeViewerBtn();
+}
+
+function switchFile(idx, e) {
+  e.stopPropagation();
+  currentFile = idx;
+  document.querySelectorAll('.vwr-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+  loadFile(idx);
+  paused = false;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const el = document.getElementById('vwr-content');
+  el.addEventListener('mouseenter', () => { paused = true; });
+  el.addEventListener('mouseleave', () => { paused = false; });
+});
+
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin:'0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
