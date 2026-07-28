@@ -93,5 +93,6 @@
     value_template: "{{ value }}"
 
 # annotations_log:
+# - [L50 & L76] supression de la aipkye de météo france mis dans le fichier secret
 # - [L44] [L71] Suppression du `then` orphelin (ligne seule après `]; then`) — fix bug sh "unexpected then".
 #   Avant : `if [ ... ]; then\n        then`  →  Après : `if [ ... ]; then`

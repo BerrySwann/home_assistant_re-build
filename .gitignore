@@ -6,6 +6,7 @@
 
 # --- Secrets & jetons (NE PAS PUBLISH) ---
 secrets.yaml
+.secrets/
 .google.token
 .cloud
 .git-credentials
@@ -69,4 +70,4 @@ migration-*-to-*.log
 !rebuild_tree.txt
 !zone_eric.txt
 # "[L65] Force l inclusion du diagnostic conso malgré l interdiction .txt"
-.secrets/
+
