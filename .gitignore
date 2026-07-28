@@ -14,6 +14,7 @@ myelectricaldata/
 zigbee2mqtt/configuration.yaml
 
 # --- HA runtime ---
+command_line/meteo/carte_meteo_france.yaml
 .storage/
 .homeassistant/
 home-assistant.log
