@@ -12918,3 +12918,7 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [CELL] | 30/07 11:30 | Hyg:0.87 | Cuis:0.09 | Froid:0.61 | Chauff:3.9 | Avg 4:339.6 | Multi:0.76 | Lum:0.2 | Autres:0.21 | Ti:27.1°C | Ext:34.3°C | DUT S/R/B/C:3.9/0.0/5.5/3.0
 [2] en [CELL] | 30/07 11:45 | Hyg:0.87 | Cuis:0.09 | Froid:0.62 | Chauff:3.93 | Avg 4:334.9 | Multi:0.76 | Lum:0.2 | Autres:0.21 | Ti:27.2°C | Ext:34.5°C | DUT S/R/B/C:3.9/0.0/5.5/3.0
 [2] en [CELL] | 30/07 12:00 | Hyg:0.87 | Cuis:0.09 | Froid:0.64 | Chauff:3.94 | Avg 4:328.8 | Multi:0.76 | Lum:0.2 | Autres:0.21 | Ti:27.2°C | Ext:34.5°C | DUT S/R/B/C:3.9/0.0/5.5/3.0
+[2] en [CELL] | 30/07 12:15 | Hyg:0.87 | Cuis:0.09 | Froid:0.67 | Chauff:3.97 | Avg 4:324.6 | Multi:0.76 | Lum:0.2 | Autres:0.21 | Ti:27.2°C | Ext:34.5°C | DUT S/R/B/C:3.9/0.0/5.5/3.0
+[2] en [CELL] | 30/07 12:30 | Hyg:0.87 | Cuis:0.09 | Froid:0.7 | Chauff:3.98 | Avg 4:318.8 | Multi:0.77 | Lum:0.2 | Autres:0.21 | Ti:27.2°C | Ext:34.5°C | DUT S/R/B/C:3.9/0.0/5.5/3.0
+[2] en [CELL] | 30/07 12:45 | Hyg:0.87 | Cuis:0.09 | Froid:0.71 | Chauff:4.01 | Avg 4:314.8 | Multi:0.77 | Lum:0.2 | Autres:0.21 | Ti:27.3°C | Ext:34.3°C | DUT S/R/B/C:3.9/0.0/5.6/3.0
+[2] en [CELL] | 30/07 13:00 | Hyg:0.87 | Cuis:0.09 | Froid:0.72 | Chauff:4.04 | Avg 4:311.2 | Multi:0.77 | Lum:0.21 | Autres:0.23 | Ti:27.3°C | Ext:34.3°C | DUT S/R/B/C:3.9/0.0/5.6/3.0
