@@ -47,7 +47,7 @@
 # - L2C3 Conso Énergie Éclairage (détail par ampoule via P3_AVG_AMHQ_1_UNITE)
 
 # ┌─────────────────────────────────┐
-# │         1. ENTRÉE (1x)           │
+# │         1. ENTRÉE (1x)          │
 # └─────────────────────────────────┘
 
 # --- hue_white_lamp_entree_annuel_um ---
