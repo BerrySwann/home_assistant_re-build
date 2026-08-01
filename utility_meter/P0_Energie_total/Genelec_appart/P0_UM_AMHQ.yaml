@@ -5,7 +5,7 @@
 # ## 📝 DESCRIPTION :
 # 4 compteurs Utility Meter (Quotidien, Hebdomadaire, Mensuel, Annuel) mesurant
 # la consommation totale de l'appartement en kWh, sans distinction HP/HC.
-# Pour le split tarifaire HP/HC, voir : 03_UM_genelec_appart_HPHC_AMHQ.yaml
+# Pour le split tarifaire HP/HC, voir : 02_UM_genelec_appart_HPHC_AMHQ.yaml
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Source : sensor.general_electric_appart_energy (index kWh cumulatif — Nodon SEM-4-1-00).
@@ -17,7 +17,7 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé]      | sensor.genelec_appart_kwh_cumulative               | genelec_appart_*_{annuel|mensuel|hebdo|quotidien}  | 01_genelec_appart_AMHQ_cost.yaml → L2C1 |
+# | Nodon SEM-4-1-00 (Z2M) | sensor.general_electric_appart_energy       | genelec_appart_{quotidien|hebdomadaire|mensuel|annuel}_um | P0_03_AVG_genelec_appart.yaml -> L2C1 |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces capteurs mesurent du kWh (énergie), PAS des euros (coût).

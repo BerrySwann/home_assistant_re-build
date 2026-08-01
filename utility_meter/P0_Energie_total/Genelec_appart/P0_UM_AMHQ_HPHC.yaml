@@ -22,8 +22,7 @@
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | Nodon SEM-4-1-00 (Z2M) | sensor.general_electric_appart_energy (tariffs HP/HC via utility_meter.select_tariff) | genelec_appart_hphc_{quotidien\|hebdomadaire\|mensuel\|annuel}_um | P0_02_ratio_hp_hc.yaml → L2C1 |
-# | [calculé]      | sensor.genelec_appart_kwh_hc_cumulative            | genelec_appart_hc_*_{annuel|mensuel|hebdo|quotidien} | 02_ratio_hp_hc.yaml → L2C1         |
+# | Nodon SEM-4-1-00 (Z2M) | sensor.general_electric_appart_energy (tariffs HP/HC via utility_meter.select_tariff) | genelec_appart_hphc_{quotidien\|hebdomadaire\|mensuel\|annuel}_um_{hp\|hc} | P0_02_ratio_hp_hc.yaml -> L2C1 |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ces UM ne fonctionnent QUE si l'automation de basculement est active.
@@ -88,7 +87,7 @@ genelec_appart_hphc_annuel_um:
 # - [CONTEXTE] Linky écarté (24h de délai — incompatible temps réel HP/HC).
 #   Source retenue : NODON SP via sensor.general_electric_appart_energy (_energy firmware direct).
 # - Entités générées : *_um_hp et *_um_hc pour chaque période
-# - Basculement piloté par : automations_corrige/energie/basculement_tarif_hphc.yaml
+# - Basculement piloté par : DOCS/03_docs_automations/docs_automations_YAML/energie/basculement_tarif_hphc.yaml
 # - [modif] Suppression du wrapper "- sensor:" erroné — incompatible avec
 #   !include_dir_merge_named. Chaque entrée doit être à la racine du dict.
 # - [Doc corrigée] En-tête et commentaires inline inversés — la source NODON est intentionnelle.
