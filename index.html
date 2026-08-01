@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Du Débutant Bidouilleur à l'Ingénierie — La genèse d'une architecture Home Assistant.">
+  <title>Du Bidouilleur à l'Ingénierie — Architecture Home Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       VARIABLES
+    ============================================ */
+    :root {
+      --bg:        #f7f3eb;
+      --bg-card:   #ede7db;
+      --border:    rgba(29, 77, 46, 0.18);
+      --border-hi: rgba(29, 77, 46, 0.45);
+      --text:      #2a2420;
+      --text-2:    #5a5040;
+      --text-faint:#8a7e6e;
+      --green:     #1d4d2e;
+      --green-2:   #3d8856;
+      --amber:     #b45309;
+      --shadow:    0 1px 4px rgba(42, 36, 32, 0.08), 0 2px 12px rgba(42, 36, 32, 0.04);
+    }
+
+    /* ============================================
+       RESET & BASE
+    ============================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: auto;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 400;
+      line-height: 1.75;
+      overflow-x: hidden;
+      padding-bottom: 7rem;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1.15;
+      color: var(--text);
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875em;
+      background: rgba(29, 77, 46, 0.07);
+      color: var(--green);
+      border: 1px solid rgba(29, 77, 46, 0.20);
+      border-radius: 3px;
+      padding: 0.1em 0.4em;
+    }
+
+    /* ============================================
+       LAYOUT
+    ============================================ */
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    section {
+      padding: 8rem 0;
+      position: relative;
+      z-index: 1;
+      background: transparent;
+    }
+
+    footer {
+      display: none;
+    }
+
+    .label {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 1.75rem;
+    }
+
+    /* ============================================
+       HERO
+    ============================================ */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+    }
+
+    #constellation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 50;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 2.5rem;
+      max-width: 780px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green-2);
+      margin-bottom: 1.75rem;
+      opacity: 0.85;
+    }
+
+    .hero-h1 {
+      font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-h1 em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--amber);
+    }
+
+    .hero-manifeste {
+      font-size: 1.1rem;
+      color: var(--text-2);
+      max-width: 540px;
+      line-height: 1.8;
+      margin-bottom: 3.5rem;
+    }
+
+    .scroll-hint {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.9rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    .scroll-hint-wrapper {
+      position: relative;
+    }
+
+    .scroll-hint-line {
+      width: 1px;
+      height: 48px;
+      background: rgba(180, 83, 9, 0.30);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-dot {
+      position: absolute;
+      left: 0;
+      width: 1px;
+      height: 8px;
+      background: var(--amber);
+    }
+
+    .scroll-glow {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 8px;
+      background: var(--amber);
+      pointer-events: none;
+      box-shadow: 0 0 6px 2px rgba(180,83,9,0.50), 0 0 12px 3px rgba(180,83,9,0.20);
+    }
+
+    /* ============================================
+       GENESE
+    ============================================ */
+    #genese {
+      border-top: 1px solid var(--border);
+    }
+
+    .genese-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 7rem;
+      align-items: start;
+    }
+
+    .genese-text p {
+      color: var(--text-2);
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+    }
+
+    .genese-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight-green {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .stats-col {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      padding-top: 0.5rem;
+    }
+
+    .stat-item {
+      border-left: 2px solid var(--border-hi);
+      padding-left: 1.5rem;
+    }
+
+    .stat-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1;
+      background: linear-gradient(110deg, var(--green) 10%, var(--green-2) 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--text-faint);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+    }
+
+    /* ============================================
+       PRINCIPES
+    ============================================ */
+    #principes {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .principes-header {
+      max-width: 520px;
+      margin-bottom: 4rem;
+    }
+
+    .principes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .principe-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 2.25rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .principe-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: var(--amber);
+      box-shadow: 0 0 8px rgba(180, 83, 9, 0.55);
+      transition: width 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .principe-card:hover {
+      border-color: var(--amber);
+      box-shadow: 0 2px 20px rgba(180, 83, 9, 0.12);
+    }
+
+    .principe-card:hover::after {
+      width: 100%;
+    }
+
+    .principe-card:hover .principe-titre {
+      font-weight: 700;
+    }
+
+    .principe-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 500;
+      color: var(--text-faint);
+      letter-spacing: 0.12em;
+      margin-bottom: 1.1rem;
+    }
+
+    .principe-titre {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+    }
+
+    .principe-titre .kw {
+      color: var(--green-2);
+    }
+
+    .principe-texte {
+      font-size: 0.92rem;
+      color: var(--text-2);
+      line-height: 1.75;
+    }
+
+    /* ============================================
+       ARCHITECTURE
+    ============================================ */
+    #architecture {
+      border-top: 1px solid var(--border);
+    }
+
+    .archi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7rem;
+      margin-bottom: 5rem;
+      align-items: start;
+    }
+
+    .archi-intro p {
+      color: var(--text-2);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .poles-list {
+      list-style: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .pole-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: padding-left 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease;
+      cursor: default;
+    }
+
+    .pole-item:hover {
+      padding-left: 0.8rem;
+      border-color: var(--amber);
+    }
+
+    .pole-item:hover .pole-nom {
+      color: var(--amber);
+      font-weight: 700;
+    }
+
+    .pole-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .pole-prefixe {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--green-2);
+      letter-spacing: 0.1em;
+      min-width: 22px;
+    }
+
+    .pole-nom {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      transition: color 0.3s ease;
+    }
+
+    .pole-meta {
+      font-size: 0.7rem;
+      color: var(--text-faint);
+      font-family: 'JetBrains Mono', monospace;
+      text-align: right;
+      line-height: 1.5;
+    }
+
+    /* Chain */
+    .chain-block {
+      border-top: 1px solid var(--border);
+      padding-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .chain-frame {
+      border: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .chain-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 0;
+    }
+
+    .chain-flow {
+      display: flex;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: 0;
+      justify-content: center;
+    }
+
+    .chain-step {
+      border: 1px solid var(--border-hi);
+      padding: 0.65rem 1.2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-2);
+      background: var(--bg-card);
+      letter-spacing: 0.02em;
+      transition: border-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+
+    .chain-step:hover {
+      border-color: var(--amber);
+      border-width: 2px;
+      color: var(--amber);
+      font-weight: 700;
+      box-shadow: 0 2px 20px rgba(180, 83, 9, 0.12);
+    }
+
+    .chain-arrow {
+      display: flex;
+      align-items: center;
+      padding: 0 0.6rem;
+      color: var(--green-2);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* ============================================
+       EMOTION
+    ============================================ */
+    #emotion {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .emotion-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .emotion-ornament {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      color: var(--border-hi);
+      line-height: 1;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+
+    .emotion-quote {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+      line-height: 1.4;
+      color: var(--text);
+      margin-bottom: 2.5rem;
+    }
+
+    .emotion-quote strong {
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .emotion-sub {
+      font-size: 1rem;
+      color: var(--text-2);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+
+    /* ============================================
+       REVEAL INIT
+    ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    /* ============================================
+       CADRE — PLANCHE D'ARCHITECTE
+    ============================================ */
+    :root {
+      --marge: clamp(12px, 2vw, 22px);
+    }
+
+    /* Labels maison wireframe */
+    .house-label {
+      position: fixed;
+      left: 84.5%;
+      top: 68%;
+      z-index: 60;
+      pointer-events: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(180,100,30,0.9);
+      opacity: 0;
+      white-space: nowrap;
+    }
+
+    .house-label-after {
+      left: 85.5%;
+    }
+
+    .frame-planche {
+      position: fixed;
+      inset: var(--marge);
+      border: 1px solid var(--border);
+      pointer-events: none;
+      z-index: 90;
+      animation: frame-in 1s cubic-bezier(0.25, 1, 0.5, 1) 0.2s both;
+    }
+
+    @keyframes frame-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* coins */
+    .frame-planche::before, .frame-planche::after,
+    .frame-planche span::before, .frame-planche span::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-color: var(--green-2);
+      border-style: solid;
+      border-width: 0;
+      animation: corner-in 0.5s cubic-bezier(0.25, 1, 0.5, 1) 0.7s both;
+    }
+
+    @keyframes corner-in {
+      from { opacity: 0; transform: scale(0.4); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .frame-planche::before      { top: -1px;    left: -1px;   border-top-width: 1.5px; border-left-width: 1.5px; }
+    .frame-planche::after       { top: -1px;    right: -1px;  border-top-width: 1.5px; border-right-width: 1.5px; }
+    .frame-planche span::before { bottom: -1px; left: -1px;   border-bottom-width: 1.5px; border-left-width: 1.5px; }
+    .frame-planche span::after  { bottom: -1px; right: -1px;  border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+    /* texte vertical gauche — repere de planche */
+    .frame-cote {
+      position: fixed;
+      left: calc(var(--marge) + 11px);
+      top: 50%;
+      writing-mode: vertical-rl;
+      transform: translateY(-50%) rotate(180deg);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      z-index: 91;
+      pointer-events: none;
+      opacity: 0;
+      animation: frame-in 0.7s ease 1.1s both;
+      transform-origin: center center;
+    }
+
+    @media (max-width: 860px) { .frame-cote { display: none; } }
+
+    /* cartouche architecte */
+    .cartouche {
+      position: fixed;
+      bottom: calc(var(--marge) + 1px);
+      left: calc(var(--marge) + 1px);
+      right: calc(var(--marge) + 1px);
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-family: 'JetBrains Mono', monospace;
+      z-index: 91;
+      pointer-events: none;
+      opacity: 0;
+      animation: frame-in 0.7s ease 1.4s both;
+    }
+
+    .cartouche-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    .cartouche-cell {
+      padding: 6px 16px;
+      border-right: 1px solid var(--border);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      white-space: nowrap;
+    }
+
+    .cartouche-cell:last-child { border-right: none; }
+
+    .cartouche-cell.val {
+      border-top: 1px solid var(--border);
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: var(--text-2);
+      font-weight: 500;
+      padding: 7px 16px;
+    }
+
+    .cartouche-titre {
+      border-top: 1px solid var(--border);
+      padding: 7px 16px;
+      text-align: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-2);
+    }
+
+    @media (max-width: 860px) { .cartouche { display: none; } }
+
+    /* ============================================
+       REDUCED MOTION
+    ============================================ */
+    /* ============================================
+       QUADRILLAGE — PLANCHE D'ARCHITECTE
+    ============================================ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(29,77,46,0.14) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(29,77,46,0.14) 1px, transparent 1px),
+        linear-gradient(rgba(29,77,46,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(29,77,46,0.07) 1px, transparent 1px);
+      background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      /* #constellation : on garde visible meme en reduced-motion */
+      * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+
+    /* ============================================
+       RESPONSIVE
+    ============================================ */
+    @media (max-width: 860px) {
+      section { padding: 5rem 0; }
+
+      .genese-grid,
+      .archi-grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+      }
+
+      .principes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chain-flow {
+        gap: 0.25rem;
+      }
+
+      .footer-inner {
+        display: none;
+      }
+    }
+
+    .next-page {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 900px; margin: 4rem auto 0; padding: 2rem 2.5rem;
+      border: 1px solid var(--border-hi);
+      background: var(--bg-card);
+      text-decoration: none; color: inherit;
+      transition: border-color .3s, background .3s, box-shadow .3s;
+      position: relative; overflow: hidden;
+    }
+    .next-page::after {
+      content: ''; position: absolute; left: 0; top: 0; width: 3px; height: 0;
+      background: var(--amber);
+      transition: height .5s cubic-bezier(.25,1,.5,1);
+    }
+    .next-page:hover { border-color: var(--amber); background: rgba(180,83,9,.04); box-shadow: 0 2px 20px rgba(180,83,9,.10); }
+    .next-page:hover::after { height: 100%; }
+    .next-page-label {
+      font-family: 'JetBrains Mono', monospace; font-size: .6rem;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--amber);
+      margin-bottom: .5rem;
+    }
+    .next-page-title {
+      font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 600;
+      color: var(--text);
+    }
+    .next-page-arrow {
+      font-size: 1.8rem; color: var(--amber);
+      transition: transform .3s;
+    }
+    .next-page:hover .next-page-arrow { transform: translateX(6px); }
+  </style>
+</head>
+<body>
+<canvas id="constellation" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:50;pointer-events:none;mix-blend-mode:multiply;"></canvas>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="hero">
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Architecture Home Assistant</p>
+
+    <h1 class="hero-h1">
+      Du Débutant <span id="word-bidouilleur">Bidouilleur</span><br>
+      à <em>l'Ingénierie</em>
+    </h1>
+
+    <p class="hero-manifeste">
+      Comment un appartement apprend à anticiper.
+      La genèse d'une configuration construite ligne par ligne,
+      YAML par YAML, en tandem avec l'IA.
+    </p>
+
+    <div class="scroll-hint">
+      <div class="scroll-hint-wrapper">
+        <div class="scroll-hint-line"><div class="scroll-dot" id="scrollDot"></div></div>
+        <div class="scroll-glow" id="scrollGlow"></div>
+      </div>
+      <span id="scroll-label">scroll</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GENESE
+============================================================ -->
+<section id="genese">
+  <div class="container">
+    <div class="genese-grid">
+
+      <div class="genese-text">
+        <span class="label reveal">Fig. 01 - Genèse -</span>
+        <h2 class="section-title reveal">
+          Il y a deux ans, je ne savais pas ce qu'était un capteur Zigbee.
+        </h2>
+        <p class="reveal">
+          Comme beaucoup, j'ai commencé par l'interface graphique : on clique,
+          on teste, on ajoute des entités. C'est parfait pour débuter, mais à
+          mesure que le système grandit, la dette technique s'accumule &mdash;
+          entités orphelines, absence de versionnage, impossibilité de rejouer
+          la configuration proprement.
+        </p>
+        <p class="reveal">
+          Le déclic : passer d'une logique "utilisateur UI" à une démarche
+          <span class="highlight-green">Infrastructure as Code</span>.
+          Chaque fichier versionné, chaque entité tracée, chaque dépendance documentée.
+        </p>
+        <p class="reveal">
+          Aujourd'hui, l'appartement anticipe les besoins avant même que j'arrive.
+        </p>
+      </div>
+
+      <div class="stats-col">
+        <div class="stat-item reveal">
+          <div class="stat-value" data-target="454" data-suffix="+">0+</div>
+          <div class="stat-label">fichiers YAML découpés,<br>catalogués et indexés</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-value" data-target="18">0</div>
+          <div class="stat-label">vignettes dédiées</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-value" data-target="5">0</div>
+          <div class="stat-label">pôles fonctionnels étanches</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRINCIPES
+============================================================ -->
+<section id="principes">
+  <div class="container">
+
+    <div class="principes-header">
+      <span class="label reveal">Fig. 02 - Méthode -</span>
+      <h2 class="section-title reveal">Quatre règles absolues</h2>
+    </div>
+
+    <div class="principes-grid">
+      <div class="principe-card">
+        <div class="principe-num">01</div>
+        <div class="principe-titre"><span class="kw">Git</span>-First</div>
+        <p class="principe-texte">
+          Chaque modification est tracée et versionnée.
+          Rien n'existe sans un commit. La configuration
+          est entièrement rejouable depuis zéro.
+        </p>
+      </div>
+
+      <div class="principe-card">
+        <div class="principe-num">02</div>
+        <div class="principe-titre"><span class="kw">Code</span>-First</div>
+        <p class="principe-texte">
+          Tout ce qui peut être déclaré en code le devient.
+          Les automatisations restent éditées via l'UI HA,
+          mais chacune est exportée et versionnée individuellement.
+        </p>
+      </div>
+
+      <div class="principe-card">
+        <div class="principe-num">03</div>
+        <div class="principe-titre">Convention de <span class="kw">nommage</span></div>
+        <p class="principe-texte">
+          Une norme unique de la source physique au dashboard.
+          Du capteur brut Z2M jusqu'à l'entité affichée :
+          la chaîne est toujours lisible et traçable.
+        </p>
+      </div>
+
+      <div class="principe-card">
+        <div class="principe-num">04</div>
+        <div class="principe-titre">Documentation &amp; <span class="kw">indexation</span></div>
+        <p class="principe-texte">
+          Chaque fichier embarque sa propre chaîne de dépendances.
+          Recherche instantanée. Travail IA facilité.
+          La documentation n'est pas optionnelle.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     ARCHITECTURE
+============================================================ -->
+<section id="architecture">
+  <div class="container">
+
+    <div class="archi-grid">
+      <div class="archi-intro">
+        <span class="label reveal">Fig. 03 - Architecture -</span>
+        <h2 class="section-title reveal">De la théorie au code</h2>
+        <p class="reveal">
+          Cinq pôles fonctionnels, chacun étanche. Pas de mélange
+          d'équipements au sein d'un même fichier. Une fonction,
+          un fichier YAML, une chaîne de dépendances documentée.
+        </p>
+      </div>
+
+      <ul class="poles-list">
+        <li class="pole-item reveal">
+          <div class="pole-left">
+            <span class="pole-prefixe">P0</span>
+            <span class="pole-nom">Énergie Globale</span>
+          </div>
+          <span class="pole-meta">Linky &middot; Nodon &middot; Bilans</span>
+        </li>
+        <li class="pole-item reveal">
+          <div class="pole-left">
+            <span class="pole-prefixe">P1</span>
+            <span class="pole-nom">Chauffage &amp; Clim</span>
+          </div>
+          <span class="pole-meta">5 pièces &middot; Clim + Radiateurs</span>
+        </li>
+        <li class="pole-item reveal">
+          <div class="pole-left">
+            <span class="pole-prefixe">P2</span>
+            <span class="pole-nom">Prises Connectées</span>
+          </div>
+          <span class="pole-meta">18 appareils &middot; Veilles</span>
+        </li>
+        <li class="pole-item reveal">
+          <div class="pole-left">
+            <span class="pole-prefixe">P3</span>
+            <span class="pole-nom">Éclairage</span>
+          </div>
+          <span class="pole-meta">19 ampoules Hue &middot; Sonoff</span>
+        </li>
+        <li class="pole-item reveal">
+          <div class="pole-left">
+            <span class="pole-prefixe">P4</span>
+            <span class="pole-nom">Présence</span>
+          </div>
+          <span class="pole-meta">Wi-Fi &middot; Mobile &middot; Localisation</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="chain-block reveal">
+      <div class="chain-frame">
+        <div class="chain-title">Chaîne de nommage unifiée</div>
+        <div class="chain-flow">
+          <div class="chain-step">Capteur physique</div>
+          <div class="chain-arrow">-&gt;</div>
+          <div class="chain-step">Z2M / Hue / MED</div>
+          <div class="chain-arrow">-&gt;</div>
+          <div class="chain-step">Entité HA</div>
+          <div class="chain-arrow">-&gt;</div>
+          <div class="chain-step">Template / UM</div>
+          <div class="chain-arrow">-&gt;</div>
+          <div class="chain-step">Dashboard</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     EMOTION
+============================================================ -->
+<section id="emotion">
+  <div class="container">
+    <div class="emotion-inner reveal">
+      <div class="emotion-ornament">"</div>
+      <p class="emotion-quote">
+        <span class="flash-phrase" id="flash-1">Aujourd'hui, l'appartement</span>
+        <strong>anticipe les besoins</strong>
+        <span class="flash-phrase" id="flash-2">avant même que j'arrive.</span>
+      </p>
+      <p class="emotion-sub">
+        Le code est la source unique de vérité.
+        Une infrastructure capable de survivre à une réinstallation complète
+        ou un restore à chaud.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- Labels maison wireframe -->
+<div class="house-label house-label-before" aria-hidden="true">Le Bidouilleur</div>
+<div class="house-label house-label-after"  aria-hidden="true">L'Ingenieur</div>
+
+<!-- Cadre planche + texte vertical -->
+<div class="frame-planche" aria-hidden="true"><span></span></div>
+<div class="frame-cote" id="frame-label" aria-hidden="true">Fig. 00 — Index —</div>
+
+<div class="cartouche" aria-hidden="true">
+  <div class="cartouche-grid">
+    <div class="cartouche-cell">Dessiné par :</div>
+    <div class="cartouche-cell">Le :</div>
+    <div class="cartouche-cell">Vérifié par :</div>
+    <div class="cartouche-cell">Le :</div>
+    <div class="cartouche-cell">Validé par :</div>
+    <div class="cartouche-cell">Le :</div>
+    <div class="cartouche-cell val">Claude A.</div>
+    <div class="cartouche-cell val">21/07/26</div>
+    <div class="cartouche-cell val">Eric R.</div>
+    <div class="cartouche-cell val">24/07/26</div>
+    <div class="cartouche-cell val">Eric R.</div>
+    <div class="cartouche-cell val">26/07/26</div>
+  </div>
+  <div class="cartouche-titre">Architecture Home Assistant — 2024-2026</div>
+</div>
+
+<a href="ha-erodi-architecture.html" class="next-page">
+  <div>
+    <div class="next-page-label">Suite — Documentation technique</div>
+    <div class="next-page-title">L'architecture YAML par YAML</div>
+  </div>
+  <div class="next-page-arrow">→</div>
+</a>
+
+<!-- ============================================================
+     SCRIPTS
+============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+<script>
+// ================================================
+// ================================================
+// MAISON 3D WIREFRAME — arriere-plan fixe
+// ================================================
+var houseProgress = 0;
+
+(function () {
+  var cvs = document.getElementById('constellation');
+  if (!cvs) return;
+  var ctx = cvs.getContext('2d');
+
+  function resize() {
+    cvs.width  = window.innerWidth;
+    cvs.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  // Geometrie : maison toit 4 pans + cheminee — silhouette universelle
+  var V = [
+    // [0-7] Murs
+    [-1.2,-0.9, 0.7],  // 0
+    [ 1.2,-0.9, 0.7],  // 1
+    [ 1.2,-0.9,-0.7],  // 2
+    [-1.2,-0.9,-0.7],  // 3
+    [-1.2, 0.4, 0.7],  // 4
+    [ 1.2, 0.4, 0.7],  // 5
+    [ 1.2, 0.4,-0.7],  // 6
+    [-1.2, 0.4,-0.7],  // 7
+    // [8-11] Gouttieres (leger debord)
+    [-1.32,0.42, 0.82],  // 8
+    [ 1.32,0.42, 0.82],  // 9
+    [ 1.32,0.42,-0.82],  // 10
+    [-1.32,0.42,-0.82],  // 11
+    // [12-13] Faitage
+    [-0.62,1.15, 0.0],   // 12
+    [ 0.62,1.15, 0.0],   // 13
+    // [14-21] Cheminee (sur le faitage, cote droit)
+    [ 0.28,0.95, 0.12],  // 14
+    [ 0.58,0.95, 0.12],  // 15
+    [ 0.58,0.95,-0.12],  // 16
+    [ 0.28,0.95,-0.12],  // 17
+    [ 0.28,1.44, 0.12],  // 18
+    [ 0.58,1.44, 0.12],  // 19
+    [ 0.58,1.44,-0.12],  // 20
+    [ 0.28,1.44,-0.12],  // 21
+    // [22-25] Porte
+    [-0.22,-0.9, 0.7],   // 22
+    [ 0.22,-0.9, 0.7],   // 23
+    [ 0.22,-0.05,0.7],   // 24
+    [-0.22,-0.05,0.7],   // 25
+    // [26-29] Fenetre avant gauche
+    [-0.95,-0.3, 0.7],   // 26
+    [-0.45,-0.3, 0.7],   // 27
+    [-0.45, 0.18,0.7],   // 28
+    [-0.95, 0.18,0.7],   // 29
+    // [30-33] Fenetre avant droite
+    [ 0.45,-0.3, 0.7],   // 30
+    [ 0.95,-0.3, 0.7],   // 31
+    [ 0.95, 0.18,0.7],   // 32
+    [ 0.45, 0.18,0.7],   // 33
+    // [34-37] Fenetre cote droit (face visible)
+    [ 0.45,-0.3,-0.7],   // 34
+    [ 0.95,-0.3,-0.7],   // 35
+    [ 0.95, 0.18,-0.7],  // 36
+    [ 0.45, 0.18,-0.7]   // 37
+  ];
+  var E = [
+    // Murs
+    [0,1],[1,2],[2,3],[3,0],
+    [4,5],[5,6],[6,7],[7,4],
+    [0,4],[1,5],[2,6],[3,7],
+    // Gouttieres
+    [8,9],[9,10],[10,11],[11,8],
+    [4,8],[5,9],[6,10],[7,11],
+    // Toit 4 pans : aretes de hanche + faitage
+    [8,12],[11,12],
+    [9,13],[10,13],
+    [12,13],
+    // Cheminee
+    [14,15],[15,16],[16,17],[17,14],
+    [18,19],[19,20],[20,21],[21,18],
+    [14,18],[15,19],[16,20],[17,21],
+    // Porte
+    [22,23],[23,24],[24,25],[25,22],
+    // Fenetres facade
+    [26,27],[27,28],[28,29],[29,26],
+    [30,31],[31,32],[32,33],[33,30],
+    // Fenetre laterale
+    [34,35],[35,36],[36,37],[37,34]
+  ];
+
+  // Positions initiales : fils eparpilles au sol (RNG deterministe)
+  var rr = 7919;
+  function rnd() { rr = (rr * 16807) % 2147483647; return (rr - 1) / 2147483646; }
+  var S = V.map(function () {
+    return [(rnd()-0.5)*1.8, -1+(rnd()-0.5)*0.3, (rnd()-0.5)*1.8];
+  });
+
+  var yaw  = 0.42;
+  var lastT = 0;
+
+  function easeIO(t) {
+    return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
+  }
+
+  // Camera a distance 8 — evite les depassements de perspective
+  function proj(x, y, z, W, H) {
+    var sc  = Math.min(W, H) * 0.105;
+    var ca  = Math.cos(yaw), sa = Math.sin(yaw);
+    var rx  = x*ca - z*sa;
+    var rz  = x*sa + z*ca;
+    var f   = 8 / (8 + rz);
+    return [W*0.89 + rx*sc*f, H*0.52 - y*sc*f];
+  }
+
+  function lp(a, b, t) { return a + (b-a)*t; }
+
+  function draw(ts) {
+    var dt = Math.min((ts - lastT) * 0.001, 0.05); lastT = ts;
+    yaw += 0.13 * dt;
+
+    var W = cvs.width, H = cvs.height;
+    ctx.clearRect(0, 0, W, H);
+
+    var p  = easeIO(houseProgress);
+    var al = Math.min(1, p * 6) * 1.0;
+
+    if (al < 0.01) { requestAnimationFrame(draw); return; }
+
+    var CV = V.map(function (v, i) {
+      return [lp(S[i][0], v[0], p), lp(S[i][1], v[1], p), lp(S[i][2], v[2], p)];
+    });
+
+    ctx.lineCap = 'round';
+
+    E.forEach(function (e) {
+      var a = proj(CV[e[0]][0], CV[e[0]][1], CV[e[0]][2], W, H);
+      var b = proj(CV[e[1]][0], CV[e[1]][1], CV[e[1]][2], W, H);
+      ctx.strokeStyle = 'rgba(29,77,46,' + al + ')';
+      ctx.lineWidth   = 0.6 + p * 0.8;
+      ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+    });
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+
+  // Progres : 0 en haut de page, 1 quand #emotion entre dans le viewport
+  var lblAfter = document.querySelector('.house-label-after');
+  var flyClone = null;
+  var flyDone  = false;
+
+  // Clone scroll-driven : suit exactement le scroll, pas de one-shot
+  (function () {
+    var wordEl = document.getElementById('word-bidouilleur');
+    if (!wordEl) return;
+
+    var targetX = window.innerWidth  * 0.845;
+    var targetY = window.innerHeight * 0.68;
+    var rect    = wordEl.getBoundingClientRect(); // position initiale (hero en haut)
+    var startX  = rect.left + rect.width  / 2;
+    var startY  = rect.top  + rect.height / 2;
+    var dx = startX - targetX;
+    var dy = startY - targetY;
+
+    flyClone = document.createElement('div');
+    flyClone.textContent = 'Le Bidouilleur';
+    flyClone.style.cssText = [
+      'position:fixed',
+      'left:' + targetX + 'px',
+      'top:'  + targetY + 'px',
+      'font-family:JetBrains Mono,monospace',
+      'font-size:0.85rem',
+      'font-weight:700',
+      'letter-spacing:0.18em',
+      'text-transform:uppercase',
+      'color:rgba(180,100,30,0.9)',
+      'white-space:nowrap',
+      'pointer-events:none',
+      'z-index:60',
+      'opacity:0',
+      'transition:color 0.5s ease'
+    ].join(';');
+    document.body.appendChild(flyClone);
+    gsap.set(flyClone, { x: dx, y: dy });
+
+    ScrollTrigger.create({
+      trigger: '#hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true,
+      onUpdate: function (self) {
+        var p = self.progress;
+        flyDone = (p >= 1);
+        gsap.set(flyClone, {
+          x: dx * (1 - p),
+          y: dy * (1 - p),
+          opacity: p < 0.08 ? 0 : p < 0.20 ? (p - 0.08) / 0.12 : 1
+        });
+        flyClone.style.color = 'rgba(180,100,30,0.9)';
+      }
+    });
+  }());
+
+  window.addEventListener('scroll', function () {
+    var el = document.getElementById('emotion');
+    if (!el) return;
+    var end = el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.45;
+    houseProgress = Math.min(1, Math.max(0, window.scrollY / Math.max(1, end)));
+
+    var p = houseProgress;
+
+    // Clone disparait quand L'Ingenieur prend le relais
+    if (flyClone && flyDone) {
+      var cloneO = p < 0.48 ? 1 : p < 0.75 ? 1 - (p - 0.48) / 0.27 : 0;
+      flyClone.style.opacity = String(cloneO);
+    }
+
+    // "L'Ingenieur" : apparait 0.38->0.52
+    var oAfter = p < 0.38 ? 0 : p < 0.52 ? (p - 0.38) / 0.14 : 1;
+    if (lblAfter) lblAfter.style.opacity = oAfter;
+  }, { passive: true });
+
+}());
+
+
+// ================================================
+// LENIS + GSAP
+// ================================================
+(function () {
+
+  // Lenis
+  if (typeof Lenis !== 'undefined') {
+    var lenis = new Lenis({
+      duration: 1.1,
+      easing: function (t) { return 1 - Math.pow(1 - t, 3); }
+    });
+    var lenisRaf = function (time) {
+      lenis.raf(time);
+      requestAnimationFrame(lenisRaf);
+    };
+    if (typeof gsap !== 'undefined') {
+      if (typeof ScrollTrigger !== 'undefined') {
+        lenis.on('scroll', ScrollTrigger.update);
+      }
+      gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      requestAnimationFrame(lenisRaf);
+    }
+  }
+
+  // GSAP
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // scroll hint — GSAP (ignore prefers-reduced-motion)
+  (function () {
+    var dot  = document.getElementById('scrollDot');
+    var glow = document.getElementById('scrollGlow');
+    var slbl = document.getElementById('scroll-label');
+    if (dot && glow) {
+      gsap.timeline({ repeat: -1, repeatDelay: 0.4 })
+        .set([dot, glow], { top: -2, opacity: 0 })
+        .to([dot, glow],  { opacity: 1, duration: 0.25, ease: 'power2.out' })
+        .to([dot, glow],  { top: 48, duration: 2.0, ease: 'power1.inOut' }, '<')
+        .to([dot, glow],  { opacity: 0, duration: 0.35, ease: 'power2.in' }, '-=0.35');
+    }
+    if (slbl) {
+      gsap.to(slbl, { opacity: 0.3, duration: 1.6, ease: 'sine.inOut',
+        repeat: -1, yoyo: true, repeatDelay: 0.3 });
+    }
+  }());
+
+  // reveals generiques
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    gsap.fromTo(el,
+      { opacity: 0, y: 24 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.75, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 86%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  // cartes principes stagger
+  gsap.set('.principe-card', { opacity: 0, y: 28 });
+  ScrollTrigger.create({
+    trigger: '#principes .principes-grid',
+    start: 'top 72%',
+    onEnter: function () {
+      gsap.to('.principe-card', { opacity: 1, y: 0, duration: 0.68, ease: 'power2.out', stagger: 0.1 });
+    }
+  });
+
+  // poles stagger
+  gsap.set('.pole-item', { opacity: 0, x: -14 });
+  ScrollTrigger.create({
+    trigger: '.poles-list',
+    start: 'top 80%',
+    onEnter: function () {
+      gsap.to('.pole-item', { opacity: 1, x: 0, duration: 0.48, ease: 'power2.out', stagger: 0.07 });
+    }
+  });
+
+  // emotion
+  function flashPhrases() {
+    var phrases = document.querySelectorAll('.flash-phrase');
+    gsap.killTweensOf(phrases);
+    gsap.timeline()
+      .to(phrases, { color: '#b45309', fontWeight: '700', duration: 0.28, ease: 'power2.out' })
+      .to(phrases, { color: '#2a2420', fontWeight: '300', duration: 1.2, ease: 'power3.out', delay: 1.8 });
+  }
+
+  gsap.set('.emotion-inner', { opacity: 0, y: 18 });
+  ScrollTrigger.create({
+    trigger: '#emotion',
+    start: 'top 68%',
+    onEnter: function () {
+      gsap.to('.emotion-inner', { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' });
+      flashPhrases();
+    },
+    onEnterBack: function () { flashPhrases(); }
+  });
+
+  // compteurs
+  document.querySelectorAll('.stat-value[data-target]').forEach(function (el) {
+    var target = parseInt(el.dataset.target, 10);
+    var suffix = el.dataset.suffix || '';
+    var obj    = { val: 0 };
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 85%',
+      onEnter: function () {
+        gsap.to(obj, {
+          val: target, duration: 1.4, ease: 'power2.out',
+          onUpdate: function () { el.textContent = Math.round(obj.val) + suffix; }
+        });
+      }
+    });
+  });
+
+  // --- repere de planche : texte vertical scroll-reactif ---
+  (function () {
+    var label  = document.getElementById('frame-label');
+    if (!label) return;
+
+    var sections = [
+      { id: 'hero',         text: 'Fig. 00 — Index —' },
+      { id: 'genese',       text: 'Fig. 01 — Genèse —' },
+      { id: 'principes',    text: 'Fig. 02 — Méthode —' },
+      { id: 'architecture', text: 'Fig. 03 — Architecture —' },
+      { id: 'emotion',      text: 'Fig. 04 — End —' }
+    ];
+
+    var current = 'Fig. 00 — Index —';
+
+    function flashLabel(newText, sectionId) {
+      if (newText === current) return;
+      current = newText;
+
+      // --- texte vertical : flash amber complet ---
+      gsap.killTweensOf(label);
+      gsap.timeline()
+        .to(label, {
+          opacity: 0, duration: 0.15, ease: 'power2.in'
+        })
+        .call(function () { label.textContent = newText; })
+        .to(label, {
+          opacity: 1,
+          color: '#b45309',
+          fontSize: '0.78rem',
+          letterSpacing: '0.14em',
+          fontWeight: '700',
+          duration: 0.25,
+          ease: 'power2.out'
+        })
+        .to(label, {
+          color: 'var(--text-faint)',
+          fontSize: '0.58rem',
+          letterSpacing: '0.28em',
+          fontWeight: '500',
+          duration: 1.1,
+          ease: 'power3.out',
+          delay: 2.0
+        });
+
+      // --- label horizontal : couleur seule, aucun autre effet ---
+      if (sectionId) {
+        var hLabel = document.querySelector('#' + sectionId + ' .label');
+        if (hLabel) {
+          gsap.killTweensOf(hLabel);
+          gsap.timeline()
+            .to(hLabel, { color: '#b45309', duration: 0.25, ease: 'power2.out' })
+            .to(hLabel, { color: 'var(--text-faint)', duration: 1.1, ease: 'power3.out', delay: 2.0 });
+        }
+      }
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var found = sections.find(function (s) { return s.id === entry.target.id; });
+        if (found) flashLabel(found.text, found.id);
+      });
+    }, { threshold: 0, rootMargin: '-35% 0px -35% 0px' });
+
+    sections.forEach(function (s) {
+      var el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+
+  }());
+
+}());
+</script>
+
+</body>
+</html>
+
+
+
