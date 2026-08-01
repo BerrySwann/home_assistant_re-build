@@ -1064,7 +1064,6 @@ streamline_templates:
             start_with_last: true
         - entity: "[[avg_monthly_entity]]"
           name: Moy. 1er du mois
-          extend_to: now
           fill_raw: last
           yaxis_id: Avg
           type: line
@@ -1139,7 +1138,6 @@ streamline_templates:
             start_with_last: true
         - entity: "[[avg_monthly_entity]]"
           name: Moy. 1er du mois
-          extend_to: now
           fill_raw: last
           yaxis_id: Avg
           type: line
@@ -1319,7 +1317,6 @@ streamline_templates:
             start_with_last: true
         - entity: "[[temp_entity]]"
           name: T.Mini.
-          extend_to: now
           fill_raw: last
           yaxis_id: TH
           type: line
@@ -1334,7 +1331,6 @@ streamline_templates:
             start_with_last: true
         - entity: "[[avg_monthly_entity]]"
           name: Moy. 1er du mois
-          extend_to: now
           fill_raw: last
           yaxis_id: Avg
           type: line
@@ -1468,7 +1464,7 @@ views:
                     font-variant:small-caps;color:rgba(255,255,255,0.85);
                     text-shadow:0px 1px 6px rgba(0,0,0,0.95);
                     white-space:nowrap;pointer-events:none;">
-                    {{ states('sensor.vence_original_condition') }} — {{ states('sensor.th_balcon_nord_temperature') | round(1) }}°C
+                    {{ states('sensor.vence_original_condition') }} — {{ states('sensor.th_balcon_nord_temperature') | float(0) | round(1) }}°C
                   </div>
                 style:
                   top: 47%
