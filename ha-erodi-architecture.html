@@ -49,6 +49,12 @@ body {
   padding-bottom: 6rem;
 }
 h1,h2,h3,h4 { font-family:var(--fd); line-height:1.15; color:var(--text); }
+.bg-grid {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(rgba(29,77,46,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(29,77,46,0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 40%, transparent 100%);
+}
 code {
   font-family: var(--fm);
   font-size: .875em;
@@ -856,6 +862,7 @@ footer a:hover { color:var(--green); }
 </style>
 </head>
 <body>
+<div class="bg-grid"></div>
 
 <!-- NAV -->
 <nav id="nav">
