@@ -2835,6 +2835,89 @@ input_datetime: !include input_datetime.yaml</pre>
       </div>
     </div>
 
+    <!-- ARBO MD -->
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">4 — dashboard_docs_MD/ (documentation)</h3>
+      <p class="conv-section-sub">Contrepartie <code>.md</code> de chaque vignette/page — relevé réel du dossier local (2026-08-02).</p>
+      <pre style="background:#2e3440;border:1px solid #4c566a;border-radius:8px;padding:16px 20px;overflow-x:auto;font-family:var(--fm);font-size:.7rem;line-height:1.7;color:#d8dee9;margin-top:1rem;">dashboard_docs_MD/
+├── CONFIG_ROOT/                    <span style="color:#a0a8b6"># 1 fichier</span>
+│   └── CONFIG_ROOT.md
+├── HOME PAGE/                      <span style="color:#a0a8b6"># L0C0</span>
+│   ├── PAGE_HOME.md
+│   └── VIGNETTE_WIFI_PRESENCE.md
+├── L1C1_METEO/
+│   ├── L1C1_VIGNETTE_METEO.md
+│   ├── PAGE_METEO.md
+│   └── TUTO_IMAGES_ALERTES_METEO_FRANCE.md
+├── L1C2_TEMPERATURES/
+│   ├── L1C2_VIGNETTE_TEMPERATURES.md
+│   └── PAGE_TEMPERATURES.md
+├── L1C3_CLIM/
+│   ├── L1C3_VIGNETTE_CLIM.md
+│   └── PAGE_CLIM.md
+├── L2C1_ENERGIE/                   <span style="color:#a0a8b6"># 5 fichiers</span>
+│   ├── COULEURS_PRISES_PAR_PIECE.md
+│   ├── L2C1_VIGNETTE_ENERGIE.md
+│   ├── PAGE_ENERGIE.md
+│   ├── PAGE_ENERGIE_MENSUEL.md
+│   └── PAGE_ENERGIE_TEMPS_REEL.md
+├── L2C2_ENERGIE_CLIM/
+│   ├── L2C2_VIGNETTE_ENERGIE_CLIM.md
+│   └── PAGE_ENERGIE_CLIM.md
+├── L2C3_ENERGIE_ECLAIRAGE/
+│   ├── COULEURS_ECLAIRAGE_PAR_PIECE.md
+│   ├── L2C3_VIGNETTE_ECLAIRAGE.md
+│   └── PAGE_ENERGIE_ECLAIRAGE.md
+├── L3C1_ECLAIRAGE/
+│   ├── L3C1_VIGNETTE_ECLAIRAGE.md
+│   └── PAGE_ECLAIRAGE.md
+├── L3C2_PRISES/
+│   ├── L3C2_VIGNETTE_PRISES.md
+│   └── PAGE_PRISES.md
+├── L3C3_STORES/
+│   ├── L3C3_VIGNETTE_STORES.md
+│   └── PAGE_STORES.md
+├── L4C1_PROXMOX/
+│   ├── L4C1_VIGNETTE_PROXMOX.md
+│   └── PAGE_PROXMOX.md
+├── L4C2_MINI_PC/                   <span style="color:#a0a8b6"># + PAGE_RASPI.md (colocalisee ici, pas de dossier dedie)</span>
+│   ├── L4C2_VIGNETTE_MINI_PC.md
+│   ├── PAGE_MINI_PC.md
+│   └── PAGE_RASPI.md
+├── L4C3_MAJ_HA/
+│   ├── L4C3_VIGNETTE_MAJ.md
+│   └── PAGE_MAJ.md
+├── L5C1_PILES_BATTERIES/
+│   ├── L5C1_VIGNETTE_BATTERIES.md
+│   └── PAGE_BATTERIES.md
+├── L5C2_BATTERIES_PORTABLES/
+│   ├── L5C2_VIGNETTE_BATTERIES_PORTABLES.md
+│   └── PAGE_BATTERIES_PORTABLES.md
+├── L5C3_MARIADB/                   <span style="color:#a0a8b6"># 3 fichiers, 2 pages distinctes</span>
+│   ├── L5C3_VIGNETTE_MARIADB.md
+│   ├── PAGE_L5C3_SYSTEME_RESERVE.md
+│   └── PAGE_SYSTEME.md
+├── L6C1_AIR_QUALITE/
+│   ├── L6C1_VIGNETTE_AIR_QUALITE.md
+│   └── PAGE_AIR_QUALITE.md
+├── L6C2_POLLUTION_POLLEN/
+│   ├── L6C2_VIGNETTE_POLLUTION_POLLEN.md
+│   └── PAGE_POLLUTION_POLLEN.md
+├── L6C3_VIGIEAU/
+│   ├── L6C3_VIGNETTE_VIGIEAU.md
+│   └── PAGE_VIGIEAU.md
+├── _TEMPLATE_DOC.md
+├── DEPENDANCES_GLOBALES.md
+├── INDEX_PAGES.md
+├── METEOCSS_CARD_MODIF.md
+├── MOC_DASHBOARD.md
+└── WORKFLOW_REBUILD.md</pre>
+      <div style="background:var(--bg-card);border-left:3px solid var(--amber);padding:.8rem 1rem;border-radius:0 6px 6px 0;margin-top:.9rem;">
+        <div style="font-size:.7rem;font-weight:700;color:var(--amber);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.06em;">⚠️ Écart YAML ↔ MD relevé</div>
+        <p style="font-size:.8rem;color:var(--text-2);line-height:1.75;"><code>PAGE_RASPI</code> a son propre dossier côté YAML (<code>PAGE_RASPI/</code>) mais côté MD, sa doc est colocalisée dans <code>L4C2_MINI_PC/</code> — pas de dossier dédié. Asymétrie à connaître si tu cherches ce fichier.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
