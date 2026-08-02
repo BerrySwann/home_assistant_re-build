@@ -1405,6 +1405,7 @@ footer a:hover { color:var(--green); }
       </div>
 
     </div><!-- /blocs-grid -->
+    <div id="types-end" style="height:1px;"></div>
 
     <h2 class="section-title reveal" style="margin-top:3rem">Les Sensors &middot; Templates &middot; UM</h2>
 
@@ -3831,11 +3832,11 @@ function closeScriptModal(e) {
 
 (function() {
   const backBtn = document.getElementById('back-to-types');
-  const archEl = document.getElementById('architecture');
-  if (!backBtn || !archEl) return;
+  const marker = document.getElementById('types-end');
+  if (!backBtn || !marker) return;
   function toggleBack() {
-    const rect = archEl.getBoundingClientRect();
-    backBtn.classList.toggle('show', rect.bottom < 0);
+    const rect = marker.getBoundingClientRect();
+    backBtn.classList.toggle('show', rect.bottom < 90);
   }
   window.addEventListener('scroll', toggleBack, { passive: true });
   toggleBack();
