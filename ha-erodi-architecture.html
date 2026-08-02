@@ -2783,9 +2783,41 @@ input_datetime: !include input_datetime.yaml</pre>
       </div>
     </div>
 
+    <!-- ARBO YAML -->
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">2 — Arborescence réelle dashboard_docs_YAML/</h3>
+      <p class="conv-section-sub">Relevé direct du dossier local (2026-08-02) — 21 dossiers (18 vignettes + Dashboard_COMPLET + 2 hors-matrice).</p>
+      <pre style="background:#2e3440;border:1px solid #4c566a;border-radius:8px;padding:16px 20px;overflow-x:auto;font-family:var(--fm);font-size:.7rem;line-height:1.7;color:#d8dee9;margin-top:1rem;">dashboard_docs_YAML/
+├── Dashboard_COMPLET/               <span style="color:#a0a8b6"># 16 versions</span>
+├── L1C1_01_Meteo/
+├── L1C2_02_Temperatures/            <span style="color:#bf616a"># + .bak residuel</span>
+├── L1C3_03_Commandes_Clim/
+├── L2C1_04_Energie_Generale/
+├── L2C2_05_Energie_Clim/
+├── L2C3_06_Energie_Eclairage/
+├── L3C1_07_Commandes_Eclairage/
+├── L3C2_08_Commandes_Prises/
+├── L3C3_09_Stores_Fenetres/
+├── L4C1_10_Proxmox/
+├── L4C2_11_Mini_PC/
+├── L4C3_12_MAJ_HA/
+├── L5C1_13_Batteries_Piles/
+├── L5C2_14_Batteries_Portables/
+├── L5C3_15_MariaDB/                 <span style="color:#a0a8b6"># + Script sh/ (audit_md5.sh, hors convention yaml)</span>
+├── L6C1_16_Air_Qualite/
+├── L6C2_17_Pollution_Pollen/
+├── L6C3_18_VigiEau/
+├── PAGE_Home/                       <span style="color:#a0a8b6"># + Météo/ et www_meteocons/ (assets meteocss-card)</span>
+├── PAGE_RASPI/
+├── md5_compare_2026-05-23.txt       <span style="color:#bf616a"># residuel racine</span>
+├── md5_compare_2026-05-31.txt       <span style="color:#bf616a"># residuel racine</span>
+└── md5_compare_TREECORRIGE_2026-05-24.txt <span style="color:#bf616a"># residuel racine</span></pre>
+      <p style="font-size:.78rem;color:var(--text-2);line-height:1.75;margin-top:.7rem;">Chaque dossier <code>L{x}C{x}_{nb}_{Nom}/</code> contient ses <code>vignette_*</code>, <code>page_*</code> et éventuellement <code>card_*</code> (détail par vignette : tableau ci-dessous). <code>L5C3_15_MariaDB/Script sh/</code> et les deux sous-dossiers d'assets de <code>PAGE_Home/</code> ne suivent pas la convention <code>.yaml</code> — présents mais hors périmètre des règles de nommage.</p>
+    </div>
+
     <!-- INVENTAIRE -->
     <div class="conv-section reveal">
-      <h3 class="conv-section-h">2 — Inventaire réel des 18 vignettes + 2 hors-matrice</h3>
+      <h3 class="conv-section-h">3 — Inventaire réel des 18 vignettes + 2 hors-matrice</h3>
       <p class="conv-section-sub">Relevé direct du dossier local (2026-08-02). Dernière vignette/page par emplacement.</p>
       <div style="overflow-x:auto;margin:1.1rem 0;">
         <table style="width:100%;border-collapse:collapse;font-size:.78rem;">
@@ -2826,7 +2858,7 @@ input_datetime: !include input_datetime.yaml</pre>
 
     <!-- COMPLET -->
     <div class="conv-section reveal">
-      <h3 class="conv-section-h">3 — Dashboard_COMPLET/</h3>
+      <h3 class="conv-section-h">4 — Dashboard_COMPLET/</h3>
       <p class="conv-section-sub">Export brut de l'UI HA (Paramètres → Tableau de bord → Modifier en YAML). Conservation illimitée, sert de filet de sécurité en cas de restore complet.</p>
       <div style="font-family:var(--fm);font-size:.75rem;color:var(--text-2);line-height:2;margin-top:.8rem;">
         <div><span style="color:var(--green);">Dashboard_2026_08_01.yaml</span> ← le plus récent</div>
@@ -2838,7 +2870,7 @@ input_datetime: !include input_datetime.yaml</pre>
 
     <!-- ARBO MD -->
     <div class="conv-section reveal">
-      <h3 class="conv-section-h">4 — dashboard_docs_MD/ (documentation)</h3>
+      <h3 class="conv-section-h">5 — dashboard_docs_MD/ (documentation)</h3>
       <p class="conv-section-sub">Contrepartie <code>.md</code> de chaque vignette/page — relevé réel du dossier local (2026-08-02).</p>
       <pre style="background:#2e3440;border:1px solid #4c566a;border-radius:8px;padding:16px 20px;overflow-x:auto;font-family:var(--fm);font-size:.7rem;line-height:1.7;color:#d8dee9;margin-top:1rem;">dashboard_docs_MD/
 ├── CONFIG_ROOT/                    <span style="color:#a0a8b6"># 1 fichier</span>
