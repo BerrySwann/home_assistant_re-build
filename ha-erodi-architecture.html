@@ -1409,7 +1409,11 @@ footer a:hover { color:var(--green); }
     </div><!-- /blocs-grid -->
     <div id="types-end" style="height:1px;"></div>
 
-    <h2 id="sensors-templates-um" class="section-title reveal" style="margin-top:3rem">Les Sensors &middot; Templates &middot; UM</h2>
+    <div id="sensors-templates-um" class="reveal" style="margin-top:3rem;margin-bottom:1.5rem;">
+      <h2 class="section-title">01 · Config YAML</h2>
+      <p class="section-sub" style="margin-top:.5rem;">Sensors · Templates · UM<br>/homeassistant/ &rarr; prod HA</p>
+      <p style="font-size:.82rem;color:var(--text-2);line-height:1.8;margin:.9rem 0 0;max-width:760px;">Comme pour les automations : à chaque modification sur la prod, c'est <strong>Claude</strong> qui récupère le code changé et qui le stocke individuellement dans <code>DOCS/01_docs_config_system/config_system_YAML/{pole}/</code>, une fois la modification validée par le créateur.</p>
+    </div>
 
     <!-- 3 TYPES DE FICHIERS -->
     <div class="blocs-grid">
@@ -1462,6 +1466,9 @@ footer a:hover { color:var(--green); }
     <div class="reveal" style="margin-top:3rem;margin-bottom:1.2rem">
       <h3 class="conv-section-h" style="margin-bottom:.3rem;">Voila comment sont organises <span style="color:var(--green)">Sensors</span> &middot; <span style="color:#b45309">Templates</span> &middot; <span style="color:#03a9f4">Utility Meter</span></h3>
       <p style="font-size:0.82rem;color:var(--text-2);margin:6px 0 0">100% eclate - zero fichier monolithique. Chaque fichier = 1 responsabilite, 1 pole, 1 dossier.</p>
+      <div style="display:flex;gap:.7rem;margin:1rem 0 0;flex-wrap:wrap;">
+        <button type="button" class="btn-tree" onclick="openTreeModal('config_yaml')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--green);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;">👁 Aperçu — voir l'arborescence</button>
+      </div>
     </div>
 
 
@@ -1546,6 +1553,70 @@ input_datetime: !include input_datetime.yaml</pre>
         <code>!include_dir_merge_list</code> fusionne tous les fichiers du dossier en une seule liste &mdash; parfait pour <code>sensor:</code> et <code>template:</code>.<br>
         <code>!include_dir_merge_named</code> est obligatoire pour <code>utility_meter:</code> dont chaque compteur est une cle nommee (dict), pas un item de liste.
       </div>
+    </div>
+
+    <!-- ARBO CONFIG YAML (contenu deplace dans modal) -->
+    <div style="display:none;">
+      <pre id="tree-src-config-yaml" style="display:none;">config_system_YAML/
+├── blueprints/                <span style="color:#a0a8b6"># 4 fichiers</span>
+│   ├── automation/
+│   ├── script/
+│   └── template/
+├── command_line/              <span style="color:#a0a8b6"># 4 fichiers</span>
+│   ├── audit/
+│   ├── github_maintenance/
+│   ├── ip_externe/
+│   ├── meteo/
+│   └── sante_systeme_mini_pc/
+├── groups/                    <span style="color:#a0a8b6"># 3 fichiers — batteries par constructeur</span>
+│   ├── GRP_01_batteries_hue.yaml
+│   ├── GRP_02_batteries_ikea.yaml
+│   └── GRP_03_batteries_sonoff.yaml
+├── input_booleans/            <span style="color:#a0a8b6"># 5 fichiers</span>
+│   ├── P1/
+│   ├── P3/
+│   └── P4/
+├── input_number/              <span style="color:#a0a8b6"># 1 fichier</span>
+│   └── input_number.yaml
+├── notifs/                    <span style="color:#a0a8b6"># 2 fichiers</span>
+│   ├── diag_conso_elec.txt
+│   └── ecart_liky_vs_nodon.txt
+├── sensors/                   <span style="color:#a0a8b6"># 5 fichiers</span>
+│   ├── Air_quality/
+│   ├── P0_Energie_total_min_maxi_diag/
+│   ├── P1_clim_chauffage/
+│   ├── P3_eclairage/
+│   └── meteo/
+├── shell_command/             <span style="color:#a0a8b6"># 2 fichiers</span>
+│   ├── Ghithub/
+│   └── P4/
+├── templates/                 <span style="color:#a0a8b6"># 46 fichiers — le plus gros dossier</span>
+│   ├── Air_quality/
+│   ├── Inter_BP_Virtuel/
+│   ├── Mini-PC/
+│   ├── P0_Energie_total_diag/
+│   ├── P1_clim_chauffage/
+│   ├── P2_prise/
+│   ├── P3_eclairage/
+│   ├── P4_groupe_presence/
+│   ├── Stores/
+│   ├── meteo/
+│   └── utilitaires/
+├── utility_meter/             <span style="color:#a0a8b6"># 8 fichiers</span>
+│   ├── P0_Energie_total/
+│   ├── P1_clim_chauffage/
+│   ├── P2_prise/
+│   ├── P3_eclairage/
+│   └── meteo/
+├── configuration.yaml
+├── input_button.yaml
+├── input_datetime.yaml
+├── input_select.yaml
+├── ip_bans.yaml
+├── scenes.yaml
+├── scripts.yaml
+└── sql.yaml</pre>
+      <p id="tree-note-config-yaml" style="display:none;font-size:.78rem;color:var(--text-2);line-height:1.75;margin-top:.7rem;">Arborescence à 2 niveaux (dossiers de pôle uniquement) — <code>templates/</code> contient à lui seul 46 fichiers répartis par pôle.</p>
     </div>
 
     </div>
@@ -2157,7 +2228,7 @@ input_datetime: !include input_datetime.yaml</pre>
     <div class="conv-section reveal">
       <h3 class="conv-section-h">3 — Vue d'ensemble des automations</h3>
       <p class="conv-section-sub">49 automations en prod (relevé 2026-07-18). 25 avec <code>notify</code>. 24 sans notify.</p>
-      <p style="font-size:.82rem;color:var(--text-2);line-height:1.8;margin:.8rem 0 0;">Côté HA, tout vit dans un seul fichier <code>automations.yaml</code> — c'est lui que l'UI HA lit et réécrit. Mais on ne versionne jamais ce fichier entier : à chaque modification (via l'UI, un par un), on récupère uniquement le bloc YAML de l'automation qui vient de changer, et on le stocke individuellement dans <code>docs_automations_YAML/{Pole}/</code> — un fichier = une automation. Chaque fichier a sa doc miroir dans <code>docs_automations_MD/{POLE}/</code>.</p>
+      <p style="font-size:.82rem;color:var(--text-2);line-height:1.8;margin:.8rem 0 0;">Côté HA, tout vit dans un seul fichier <code>automations.yaml</code> — c'est lui que l'UI HA lit et réécrit. Mais on ne versionne jamais ce fichier entier : à chaque modification (via l'UI, un par un), c'est <strong>Claude</strong> qui récupère uniquement le bloc YAML de l'automation qui vient de changer, une fois la modification validée par le créateur, et qui le stocke individuellement dans <code>docs_automations_YAML/{Pole}/</code> — un fichier = une automation. Chaque fichier a sa doc miroir dans <code>docs_automations_MD/{POLE}/</code>.</p>
       <div style="display:flex;gap:.7rem;margin:1rem 0 1.4rem;flex-wrap:wrap;">
         <button type="button" class="btn-tree" onclick="openTreeModal('automations_yaml')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--green);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;">📁 .yaml — voir l'arborescence</button>
         <button type="button" class="btn-tree" onclick="openTreeModal('automations_md')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--amber);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;">📄 .md — voir l'arborescence</button>
@@ -3845,6 +3916,7 @@ function closeScriptModal(e) {
 })();
 
 const TREES = {
+  config_yaml:       { title: 'config_system_YAML/ — arborescence réelle (2026-08-02)',      srcId: 'tree-src-config-yaml', noteId: 'tree-note-config-yaml' },
   yaml:              { title: 'dashboard_docs_YAML/ — arborescence réelle (2026-08-02)',    srcId: 'tree-src-yaml' },
   md:                { title: 'dashboard_docs_MD/ — arborescence réelle (2026-08-02)',       srcId: 'tree-src-md' },
   automations_yaml:  { title: 'docs_automations_YAML/ — arborescence réelle (2026-08-02)',   srcId: 'tree-src-automations-yaml', noteId: 'tree-note-automations-yaml' },
