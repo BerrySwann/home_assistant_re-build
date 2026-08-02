@@ -3504,7 +3504,8 @@ input_datetime: !include input_datetime.yaml</pre>
       <h3 class="conv-section-h">2 — Les slash commands</h3>
       <p class="conv-section-sub">7 commandes utilitaires, plus une qui merite sa propre place.</p>
 
-      <div class="rule-card reveal" style="border-color:var(--amber);box-shadow:var(--shadow-hi);margin:0 0 1.6rem;">
+      <div class="rule-card bloc-clickable reveal" onclick="openTreeModal('dependances')" style="cursor:pointer;border-color:var(--amber);box-shadow:var(--shadow-hi);margin:0 0 1.6rem;animation-delay:0s;">
+        <span class="bloc-tap-hint" style="right:18px;bottom:10px;animation-delay:0s;">👆</span>
         <div style="font-family:var(--fm);font-size:1.6rem;color:var(--amber);flex-shrink:0;">🕸</div>
         <div>
           <div style="font-family:var(--fm);font-size:.6rem;font-weight:700;letter-spacing:.14em;color:var(--amber);text-transform:uppercase;margin-bottom:.35rem;">La colonne vertebrale</div>
@@ -3537,6 +3538,82 @@ input_datetime: !include input_datetime.yaml</pre>
           <p style="font-size:.8rem;color:var(--text-2);line-height:1.7;">Le backlog vit dans un seul fichier texte versionne, jamais dans la memoire d'une conversation. Ce qui n'est pas ecrit la est perdu a la fermeture de la session.</p>
         </div>
       </div>
+    </div>
+
+    <!-- EXTRAIT DEPENDANCES_GLOBALES.md (contenu deplace dans modal) -->
+    <div style="display:none;">
+      <pre id="tree-src-dependances" style="display:none;"># 🔗 DÉPENDANCES GLOBALES — TABLEAU DE BORD HA
+*Dernière mise à jour : 2026-07-20 (P1_01 confort_nuit : palier nuit été dynamique selon vigilance canicule)*
+*2026-07-19 (Audit complet intégralité du fichier : L1C1 à L6C3 + HOME PAGE + fichiers racine)*
+*2026-07-18 (Nettoyage résidu chambre : capteur MQTT dispo + bloc mqtt: configuration.yaml)*
+*2026-07-17 (Resync local ← GitHub/prod : configuration.yaml + scripts.yaml)*
+
+---
+
+## LÉGENDE
+
+| Symbole | Signification |
+|:-------:|:-------------|
+| ✅ | Chaîne validée et opérationnelle |
+| 🔲 | À documenter |
+| ⚠️ | Rupture de chaîne ou entité obsolète |
+| NAT | Entité native HA (intégration directe) |
+| TPL | Template (templates/) |
+| UM | Utility Meter (utility_meter/) |
+| SEN | Sensor (sensors/) |
+
+---
+
+## MATRICE DES 18 VIGNETTES — STATUT DÉPENDANCES
+
+| ID | Vignette | Statut |
+|:---|:---------|:------:|
+| L1C1 | Météo | ✅ |
+| L1C2 | Températures | ✅ |
+| L1C3 | Commandes Clim | ✅ |
+| L2C1 | Énergie Générale | ✅ |
+| L2C2 | Énergie Clim / Rad / Soufflant | ✅ |
+| L2C3 | Énergie Éclairage | ✅ |
+| L3C1 | Commandes Éclairage | ✅ |
+| L3C2 | Commandes Éco/Prises | ✅ |
+| L3C3 | Stores / Fenêtres | ✅ |
+| L4C1 | Proxmox PVE | ✅ |
+| L4C2 | Mini-PC | ✅ |
+| L4C3 | Mises à jour HA | ✅ |
+| L5C1 | Batteries / Piles | ✅ |
+| L5C2 | Batteries portables | ✅ |
+| L5C3 | MariaDB | ✅ |
+| L6C1 | Qualité de l'air | ✅ |
+| L6C2 | Pollution / Pollen | ✅ |
+| L6C3 | Vigilance Eau | ✅ |
+
+---
+
+## ✅ L1C1 — MÉTÉO (VIGNETTE + PAGE)
+*Validée le 2026-05-09*
+
+### Vignette — Chaîne de dépendances
+
+AUCUNE ENTITÉ — Vignette purement navigationnelle
+  └─→ tap_action: navigate → /dashboard-tablette/meteo
+        └─→ PAGE MÉTÉO DÉTAILLÉE (voir ci-dessous)
+
+### Page — Chaîne de dépendances
+
+MATÉRIEL / INTÉGRATION
+  ├─→ Météo France (intégration officielle)
+  │     └─→ sensor.06_weather_alert / weather.vence  (NAT)
+  ├─→ Blitzortung (intégration MQTT native)
+  │     └─→ sensor.maison_lightning_azimuth / _distance / _counter  (NAT)
+  │           └─→ UM: M_03_meteo_UM_blitzortung.yaml
+  │           └─→ TPL: M_03_meteo_blitzortung.yaml
+  ├─→ Météo France (alertes) + MeteoAlarm (fallback)
+  │     └─→ TPL: M_01_meteo_alertes_card.yaml  (10 sensors)
+  └─→ zone.home (latitude) + horloge système  (calculé, PAS sun.sun)
+        └─→ TPL: M_05_cycle_solaire.yaml
+
+[... la meme structure se repete pour les 17 autres vignettes, jusqu'a L6C3 ...]</pre>
+      <p id="tree-note-dependances" style="display:none;">Extrait réel des ~90 premières lignes sur <code>1803</code> au total — la légende, la matrice des 18 vignettes, et la chaîne de dépendances complète de L1C1 (Météo) a titre d'exemple. Le même niveau de détail existe pour les 17 autres.</p>
     </div>
   </div>
 </section>
@@ -4050,7 +4127,8 @@ const TREES = {
   yaml:              { title: 'dashboard_docs_YAML/ — arborescence réelle (2026-08-02)',    srcId: 'tree-src-yaml' },
   md:                { title: 'dashboard_docs_MD/ — arborescence réelle (2026-08-02)',       srcId: 'tree-src-md' },
   automations_yaml:  { title: 'docs_automations_YAML/ — arborescence réelle (2026-08-02)',   srcId: 'tree-src-automations-yaml', noteId: 'tree-note-automations-yaml' },
-  automations_md:    { title: 'docs_automations_MD/ — arborescence réelle (2026-08-02)',     srcId: 'tree-src-automations-md',   noteId: 'tree-note-automations-md' }
+  automations_md:    { title: 'docs_automations_MD/ — arborescence réelle (2026-08-02)',     srcId: 'tree-src-automations-md',   noteId: 'tree-note-automations-md' },
+  dependances:       { title: 'DEPENDANCES_GLOBALES.md — extrait réel (2026-08-02)',          srcId: 'tree-src-dependances',      noteId: 'tree-note-dependances' }
 };
 function openTreeModal(key) {
   const t = TREES[key];
