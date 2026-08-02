@@ -131,7 +131,7 @@ nav.scrolled {
 #back-to-types.show { opacity:1; pointer-events:auto; transform:translateY(0); }
 #back-to-types:hover { border-color:var(--amber); color:var(--amber); }
 
-#architecture, #conventions, #automation, #dashboard-yaml, #sensors-templates-um { scroll-margin-top: 90px; }
+#architecture, #conventions, #automation, #dashboard-yaml, #sensors-templates-um, #outillage { scroll-margin-top: 90px; }
 
 /* ============================================
    HERO
@@ -1440,6 +1440,13 @@ footer a:hover { color:var(--green); }
 
     </div><!-- /blocs-grid -->
     <div id="types-end" style="height:1px;"></div>
+
+    <div class="bloc bloc-clickable reveal" onclick="location.hash='outillage'" style="cursor:pointer;margin-bottom:3.5rem;padding:1.3rem 1.6rem;text-align:center;animation-delay:0s;">
+      <span class="bloc-tap-hint" style="right:22px;bottom:12px;animation-delay:0s;">👆</span>
+      <div style="font-family:var(--fm);font-size:.8rem;font-weight:700;letter-spacing:.05em;color:var(--text-2);">
+        "... si le site t'a fait mal au crâne, ne clique pas ici"
+      </div>
+    </div>
 
     <div id="sensors-templates-um" class="reveal" style="margin-top:3rem;margin-bottom:1.5rem;">
       <h2 class="section-title">01 · Config YAML</h2>
@@ -3446,6 +3453,79 @@ input_datetime: !include input_datetime.yaml</pre>
           <div><span class="y-key">    entity:</span> <span class="y-val">switch.prise_tete_de_lit_chambre</span></div>
           <div><span class="y-key">    state:</span> <span class="y-str">"on"</span></div>
           <div style="margin-top:8px"><span class="y-comment"># P4 absence → automation coupe ces 2 switches → 2 cartes disparaissent</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTILLAGE / PROCESS -->
+<section id="outillage">
+  <div class="container">
+    <div class="label reveal">04 — Process</div>
+    <h2 class="section-title reveal">Ce qui tourne autour</h2>
+    <p class="section-sub reveal">Le code, c'est la partie visible. Voila ce qui verifie, deploie et garde une trace du reste.</p>
+
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">1 — Cascade de verite et audit MD5</h3>
+      <p class="conv-section-sub">Home Assistant (prod live) est la reference absolue. GitHub <code>home_assistant_re-build</code> en est le reflet, pousse automatiquement depuis HA a chaque changement. Le local <code>ReBuild/</code> est le poste de travail : il doit converger vers prod, jamais l'inverse.</p>
+      <div style="overflow-x:auto;margin:1.1rem 0;">
+        <table style="width:100%;border-collapse:collapse;font-size:.8rem;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--border);">
+              <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Perimetre</th>
+              <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Comparaison</th>
+              <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Criticite</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">Config YAML <span style="color:var(--text-faint);">(sensors/templates/UM/command_line)</span></td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">GitHub vs Local</td>
+              <td style="padding:.5rem .8rem;color:var(--amber);font-weight:700;">Critique</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">Automations <span style="color:var(--text-faint);">(alias automations.yaml)</span></td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">GitHub vs Local</td>
+              <td style="padding:.5rem .8rem;color:var(--amber);font-weight:700;">Critique</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">Dashboard YAML</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">Local vs H:\Docs\</td>
+              <td style="padding:.5rem .8rem;color:var(--green);font-weight:700;">Secondaire</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:.78rem;color:var(--text-faint);margin-top:.6rem;">Audit complet 1x/semaine minimum, et avant toute session de travail majeure. MD5 different sur un meme nom = conflit, HA fait foi.</p>
+    </div>
+
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">2 — Les slash commands</h3>
+      <p class="conv-section-sub">8 commandes dediees a ce projet, pour eviter de re-expliquer le contexte a chaque fois.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem;">
+        <div class="item-card"><code>/fix_file</code><span style="font-size:.78rem;color:var(--text-2);">Analyse une erreur HA, retourne uniquement le bloc YAML corrige.</span></div>
+        <div class="item-card"><code>/sync_index</code><span style="font-size:.78rem;color:var(--text-2);">Met a jour DEPENDANCES_GLOBALES.md apres validation d'un YAML.</span></div>
+        <div class="item-card"><code>/status</code><span style="font-size:.78rem;color:var(--text-2);">Resume l'avancement du projet en 3 points.</span></div>
+        <div class="item-card"><code>/histo</code><span style="font-size:.78rem;color:var(--text-2);">Journal de bord compact, sauvegarde dans historique/.</span></div>
+        <div class="item-card"><code>/ha_new_yaml</code><span style="font-size:.78rem;color:var(--text-2);">Genere un squelette YAML conforme (bordures, headers, slug, unique_id).</span></div>
+        <div class="item-card"><code>/ha_push_yaml</code><span style="font-size:.78rem;color:var(--text-2);">Pousse un fichier YAML valide vers la prod H:\.</span></div>
+        <div class="item-card"><code>/ha_push_docs</code><span style="font-size:.78rem;color:var(--text-2);">Synchronise les docs locales DOCS/ vers H:\Docs\.</span></div>
+        <div class="item-card"><code>/ha_resync_tree</code><span style="font-size:.78rem;color:var(--text-2);">Resynchronise le local depuis GitHub, audit MD5 a l'appui.</span></div>
+      </div>
+    </div>
+
+    <div class="conv-grid reveal" style="margin-top:2.5rem;">
+      <div class="item-card" style="align-items:flex-start;padding:1.1rem 1.3rem;">
+        <div>
+          <div style="font-family:var(--fd);font-weight:700;font-size:.92rem;margin-bottom:.4rem;">3 — Protocole de debut de session</div>
+          <p style="font-size:.8rem;color:var(--text-2);line-height:1.7;">A chaque ouverture de session, une question avant tout travail : "As-tu fait des modifications depuis la derniere session (autre outil, etc.) ?" Si oui, l'audit MD5 complet se lance avant toute autre tache.</p>
+        </div>
+      </div>
+      <div class="item-card" style="align-items:flex-start;padding:1.1rem 1.3rem;">
+        <div>
+          <div style="font-family:var(--fd);font-weight:700;font-size:.92rem;margin-bottom:.4rem;">4 — TODO.txt</div>
+          <p style="font-size:.8rem;color:var(--text-2);line-height:1.7;">Le backlog vit dans un seul fichier texte versionne, jamais dans la memoire d'une conversation. Ce qui n'est pas ecrit la est perdu a la fermeture de la session.</p>
         </div>
       </div>
     </div>
