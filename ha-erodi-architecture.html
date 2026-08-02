@@ -720,6 +720,14 @@ footer a:hover { color:var(--green); }
   .badge-r { background:rgba(185,28,28,0.10); color:var(--vg-red); border:1px solid rgba(185,28,28,0.25); }
   .badge-b { background:rgba(61,136,86,0.10); color:var(--vg-green2); border:1px solid rgba(61,136,86,0.25); }
   @media(max-width:700px){ .vg-grid{ grid-template-columns:1fr; } }
+  .vg-val { transition: color .45s ease; }
+  .vg-live-badge {
+    position:absolute; right:8px; bottom:5px;
+    font-size:0.52rem; letter-spacing:0.3px; font-weight:700;
+    color:var(--amber); opacity:0; transition:opacity .3s;
+    text-transform:uppercase; pointer-events:none;
+  }
+  .vg:hover .vg-live-badge { opacity:0.9; }
 
   /* ===== DARK WRAPPER - Dashboard replica ===== */
   .vg-dark-wrap {
@@ -1085,15 +1093,16 @@ footer a:hover { color:var(--green); }
         <div class="vg-center" style="font-size:1.5rem;font-weight:700;color:#ff9800;margin-top:4px">26.9&#176;C</div>
       </div>
       <!-- L1C2 Courbes Temperature -->
-      <div class="vg">
+      <div class="vg" id="vg-l1c2">
         <div class="vg-title">Courbes Temperature</div>
-        <div class="vg-r3"><span class="vg-val g">Balcon N.</span><span class="vg-val" style="color:#ff9800">33.5&#176;C</span><span class="vg-val">34.6%</span></div>
-        <div class="vg-r3"><span class="vg-label">Appart.</span><span class="vg-val" style="color:#ffd700">26.8&#176;C</span><span class="vg-val">47.1%</span></div>
-        <div class="vg-r3"><span class="vg-label">Salon</span><span class="vg-val" style="color:#ffd700">26.7&#176;C</span><span class="vg-val">47.4%</span></div>
-        <div class="vg-r3"><span class="vg-label">Cuisine</span><span class="vg-val" style="color:#ffd700">27.4&#176;C</span><span class="vg-val">47.2%</span></div>
-        <div class="vg-r3"><span class="vg-label">Bureau</span><span class="vg-val" style="color:#ffd700">26.6&#176;C</span><span class="vg-val">50.3%</span></div>
-        <div class="vg-r3"><span class="vg-label">SdB</span><span class="vg-val" style="color:#ffd700">26.9&#176;C</span><span class="vg-val">49.4%</span></div>
-        <div class="vg-r3"><span class="vg-label">Chambre</span><span class="vg-val" style="color:#ffd700">26.4&#176;C</span><span class="vg-val">51.9%</span></div>
+        <div class="vg-r3"><span class="vg-val g">Balcon N.</span><span class="vg-val" id="l1c2-t-balcon" style="color:#ffa500">33.5&#176;C</span><span class="vg-val" id="l1c2-h-balcon" style="color:#fff">34.6%</span></div>
+        <div class="vg-r3"><span class="vg-label">Salon</span><span class="vg-val" id="l1c2-t-salon" style="color:#ffd700">26.7&#176;C</span><span class="vg-val" id="l1c2-h-salon" style="color:#fff">47.4%</span></div>
+        <div class="vg-r3"><span class="vg-label">Cellier</span><span class="vg-val" id="l1c2-t-cellier" style="color:lightgreen">24.1&#176;C</span><span class="vg-val" id="l1c2-h-cellier" style="color:#ffa500">58.2%</span></div>
+        <div class="vg-r3"><span class="vg-label">Cuisine</span><span class="vg-val" id="l1c2-t-cuisine" style="color:#ffd700">27.4&#176;C</span><span class="vg-val" id="l1c2-h-cuisine" style="color:#fff">47.2%</span></div>
+        <div class="vg-r3"><span class="vg-label">Bureau</span><span class="vg-val" id="l1c2-t-bureau" style="color:#ffd700">26.6&#176;C</span><span class="vg-val" id="l1c2-h-bureau" style="color:#fff">50.3%</span></div>
+        <div class="vg-r3"><span class="vg-label">SdB</span><span class="vg-val" id="l1c2-t-sdb" style="color:#ffd700">26.9&#176;C</span><span class="vg-val" id="l1c2-h-sdb" style="color:#f44336">79.4%</span></div>
+        <div class="vg-r3"><span class="vg-label">Chambre</span><span class="vg-val" id="l1c2-t-chambre" style="color:#ffd700">26.4&#176;C</span><span class="vg-val" id="l1c2-h-chambre" style="color:#fff">51.9%</span></div>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L1C3 Etat Clim -->
       <div class="vg">
@@ -4377,6 +4386,62 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     }, { threshold: 0.6 });
     obs.observe(el);
   });
+})();
+
+/* ===== VIGNETTES VIVANTES AU SURVOL - logique reelle portee depuis les fichiers VIGNETTE_*.md ===== */
+(function(){
+  // Fonctions de couleur identiques au JS reel de la vignette L1C2 (custom:button-card)
+  function vgTempColor(t){
+    if (t < 5)  return '#3674B5';
+    if (t < 13) return '#578FCA';
+    if (t < 19) return '#A1E3F9';
+    if (t < 25) return 'lightgreen';
+    if (t < 32) return '#FFD700';
+    if (t < 36) return '#FFA500';
+    if (t < 40) return '#F44336';
+    return 'lightgreen';
+  }
+  function vgHumColor(h){
+    if (h > 75) return '#F44336';
+    if (h > 55) return '#FFA500';
+    return '#fff';
+  }
+
+  // 4 photographies : etat de repos (identique a la legende "figees") + 3 scenarios reels
+  // qui parcourent toute la palette de couleurs (nuit froide / matin frais / canicule)
+  var L1C2_FRAMES = [
+    { balcon:[33.5,34.6], salon:[26.7,47.4], cellier:[24.1,58.2], cuisine:[27.4,47.2], bureau:[26.6,50.3], sdb:[26.9,79.4], chambre:[26.4,51.9] },
+    { balcon:[2.1,88.0],  salon:[17.8,62.0], cellier:[14.3,68.0], cuisine:[18.9,56.0], bureau:[19.6,50.0], sdb:[20.2,91.0], chambre:[18.4,53.0] },
+    { balcon:[9.8,70.0],  salon:[20.5,54.0], cellier:[17.2,60.0], cuisine:[21.7,51.0], bureau:[21.0,46.0], sdb:[22.3,74.0], chambre:[19.9,49.0] },
+    { balcon:[38.4,22.0], salon:[31.8,33.0], cellier:[29.5,44.0], cuisine:[34.2,29.0], bureau:[35.1,27.0], sdb:[33.6,68.0], chambre:[33.9,31.0] }
+  ];
+
+  function applyL1C2Frame(frame){
+    Object.keys(frame).forEach(function(room){
+      var t = frame[room][0], h = frame[room][1];
+      var tEl = document.getElementById('l1c2-t-' + room);
+      var hEl = document.getElementById('l1c2-h-' + room);
+      if (tEl) { tEl.textContent = t.toFixed(1) + '°C'; tEl.style.color = vgTempColor(t); }
+      if (hEl) { hEl.textContent = h.toFixed(1) + '%';       hEl.style.color = vgHumColor(h); }
+    });
+  }
+
+  var vgL1C2 = document.getElementById('vg-l1c2');
+  if (vgL1C2) {
+    var l1c2Timer = null, l1c2Idx = 1;
+    vgL1C2.addEventListener('mouseenter', function(){
+      l1c2Idx = 1;
+      applyL1C2Frame(L1C2_FRAMES[l1c2Idx]);
+      l1c2Timer = setInterval(function(){
+        l1c2Idx = (l1c2Idx % (L1C2_FRAMES.length - 1)) + 1;
+        applyL1C2Frame(L1C2_FRAMES[l1c2Idx]);
+      }, 1600);
+    });
+    vgL1C2.addEventListener('mouseleave', function(){
+      clearInterval(l1c2Timer);
+      applyL1C2Frame(L1C2_FRAMES[0]);
+    });
+  }
 })();
 </script>
 </body>
