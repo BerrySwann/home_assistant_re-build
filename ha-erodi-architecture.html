@@ -584,6 +584,11 @@ nav.scrolled {
   70%  { box-shadow: 0 0 0 10px rgba(217,119,6,0); }
   100% { box-shadow: 0 0 0 0 rgba(217,119,6,0); }
 }
+.bloc-clickable { animation: clickme-pulse 1.6s ease-in-out infinite, clickme-wiggle 4.8s ease-in-out infinite; }
+.bloc-clickable:hover { animation-play-state: paused; }
+.bloc-clickable:nth-of-type(1) { animation-delay: 0s, 0s; }
+.bloc-clickable:nth-of-type(2) { animation-delay: .55s, 1.6s; }
+.bloc-clickable:nth-of-type(3) { animation-delay: 1.1s, 3.2s; }
 @keyframes clickme-wiggle {
   0%, 88%, 100% { transform: rotate(0deg); }
   90%  { transform: rotate(-3deg); }
@@ -1285,7 +1290,7 @@ footer a:hover { color:var(--green); }
 <div class="blocs-grid">
 
       <!-- BLOC 1 -->
-      <div class="bloc reveal" onclick="location.hash='sensors-templates-um'" style="cursor:pointer;">
+      <div class="bloc bloc-clickable reveal" onclick="location.hash='sensors-templates-um'" style="cursor:pointer;">
         <div class="bloc-header">
           <div class="bloc-num">01 · Config YAML</div>
           <div class="bloc-title">Sensors · Templates · UM</div>
@@ -1327,7 +1332,7 @@ footer a:hover { color:var(--green); }
       </div>
 
       <!-- BLOC 2 -->
-      <div class="bloc reveal" onclick="location.hash='automation'" style="cursor:pointer;">
+      <div class="bloc bloc-clickable reveal" onclick="location.hash='automation'" style="cursor:pointer;">
         <div class="bloc-header">
           <div class="bloc-num">02 · Automations</div>
           <div class="bloc-title">YAML + documentation</div>
@@ -1366,7 +1371,7 @@ footer a:hover { color:var(--green); }
       </div>
 
       <!-- BLOC 3 -->
-      <div class="bloc reveal" onclick="location.hash='dashboard-yaml'" style="cursor:pointer;">
+      <div class="bloc bloc-clickable reveal" onclick="location.hash='dashboard-yaml'" style="cursor:pointer;">
         <div class="bloc-header">
           <div class="bloc-num">03 · Dashboard YAML</div>
           <div class="bloc-title">Vignettes · Pages · Complet</div>
@@ -2981,7 +2986,7 @@ input_datetime: !include input_datetime.yaml</pre>
     <div class="reveal" style="margin-top:2.5rem;margin-bottom:2rem;">
       <h2 class="section-title">03 · Dashboard YAML</h2>
       <p class="section-sub" style="margin-top:.5rem;">Vignettes · Pages · Complet<br><code>DOCS/02_docs_dashboard/</code> &rarr; <code>H:\Docs\</code></p>
-      <p style="font-size:.82rem;color:var(--text-2);line-height:1.8;margin:.9rem 0 0;max-width:760px;">Même principe que pour les automations, à une différence près : côté dashboard, il n'y a pas d'extraction automatique. C'est moi qui récupère à la main, dans l'UI HA (Paramètres → Tableau de bord → Modifier en YAML), le code de chaque vignette ou page modifiée, et qui le colle individuellement dans <code>DOCS/02_docs_dashboard/dashboard_docs_YAML/L{x}C{x}_.../</code>.</p>
+      <p style="font-size:.82rem;color:var(--text-2);line-height:1.8;margin:.9rem 0 0;max-width:760px;">Même principe que pour les automations, à une différence près : côté dashboard, il n'y a pas d'extraction automatique. C'est moi qui récupère à la main, dans l'UI HA (Paramètres → Tableau de bord → Modifier en YAML), le code de chaque vignette ou page modifiée. <strong>Claude</strong> vérifie ensuite le fichier, l'horodate (nom de version), le stocke dans <code>DOCS/02_docs_dashboard/dashboard_docs_YAML/L{x}C{x}_.../</code>, et supprime la version la plus ancienne des 3 — après validation.</p>
     </div>
 
     <!-- RÈGLES -->
