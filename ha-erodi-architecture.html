@@ -1115,7 +1115,7 @@ footer a:hover { color:var(--green); }
         <div class="vg-r3"><span class="vg-val" id="l1c3-p-cuisine" style="color:#fff">Cuisine</span><span class="vg-val" id="l1c3-m-cuisine" style="color:#f44336">Off</span><span class="vg-val" id="l1c3-c-cuisine">25.0&#176;C</span></div>
         <div class="vg-r3"><span class="vg-val" id="l1c3-p-bureau" style="color:lightgreen">Bureau</span><span class="vg-val" id="l1c3-m-bureau" style="color:lightgreen">Cool</span><span class="vg-val" id="l1c3-c-bureau">27.0&#176;C</span></div>
         <div class="vg-r3"><span class="vg-val" id="l1c3-p-sdb" style="color:#fff">SdB</span><span class="vg-val" id="l1c3-m-sdb" style="color:#f44336">Off</span><span class="vg-val" id="l1c3-c-sdb">21.0&#176;C</span></div>
-        <div class="vg-r3"><span class="vg-val" id="l1c3-p-chambre" style="color:#fff">Chambre</span><span class="vg-val" id="l1c3-m-chambre" style="color:#f44336">Off</span><span class="vg-val" id="l1c3-c-chambre">27.0&#176;C</span></div>
+        <div class="vg-r3"><span class="vg-val" id="l1c3-p-chambre" style="color:lightgreen">Chambre</span><span class="vg-val" id="l1c3-m-chambre" style="color:lightgreen">Cool</span><span class="vg-val" id="l1c3-c-chambre">27.0&#176;C</span></div>
         <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <div class="row-label">L2 &mdash; Consommation Energetique</div>
@@ -4481,7 +4481,7 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
       cuisine: { power:'off', mode:'off',  c:25.0, q:0,    m:5.00 },
       bureau:  { power:'on',  mode:'cool', c:27.0, q:1.28, m:48.43 },
       sdb:     { power:'off', mode:'off',  c:21.0, q:0,    m:0 },
-      chambre: { power:'off', mode:'off',  c:27.0, q:1.32, m:49.19 },
+      chambre: { power:'on',  mode:'cool', c:27.0, q:1.32, m:49.19 },
       sdbses:  { power:'off', mode:'off',  q:0, m:0 },
       total:   { q:5.31, m:222.89 } },
     { tmoy: 19.4, ademe: 3.2, isCooling: false, mode: 'off',
@@ -4601,7 +4601,8 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
       var pEl = document.getElementById('l2c2-p-' + domId);
       var qEl = document.getElementById('l2c2-q-' + domId);
       var mEl = document.getElementById('l2c2-m-' + domId);
-      if (pEl) pEl.style.color = vgClimEnergyColor(r.power, r.mode);
+      // Exception Eric : le mot "Chambre" reste toujours blanc sur L2C2, meme allumee
+      if (pEl) pEl.style.color = (domId === 'chambre') ? '#fff' : vgClimEnergyColor(r.power, r.mode);
       if (qEl) qEl.textContent = vgFmtKwh(r.q);
       if (mEl) mEl.textContent = vgFmtKwh(r.m);
     });
