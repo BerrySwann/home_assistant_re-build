@@ -537,6 +537,8 @@ nav.scrolled {
 #vwr-content .y-key,    .scr-scroll .y-key     { color:#88c0d0; }
 #vwr-content .y-colon,  .scr-scroll .y-colon   { color:#81a1c1; }
 #vwr-content .y-val,    .scr-scroll .y-val     { color:#ebcb8b; }
+.scr-scroll .tree-note { font-family:var(--fd); font-size:.78rem; line-height:1.75; color:#a0a8b6; white-space:normal; margin-top:14px; padding-top:12px; border-top:1px solid #4c566a; }
+.scr-scroll .tree-note code { color:#88c0d0; background:rgba(255,255,255,.06); border:1px solid #4c566a; }
 .y-dash   { color:#81a1c1; }
 .y-table  { color:#a0a8b6; }
 
@@ -2138,6 +2140,11 @@ input_datetime: !include input_datetime.yaml</pre>
     <div class="conv-section reveal">
       <h3 class="conv-section-h">3 — Vue d'ensemble des automations</h3>
       <p class="conv-section-sub">49 automations en prod (relevé 2026-07-18). 25 avec <code>notify</code>. 24 sans notify.</p>
+      <p style="font-size:.82rem;color:var(--text-2);line-height:1.8;margin:.8rem 0 0;">Côté HA, tout vit dans un seul fichier <code>automations.yaml</code> — c'est lui que l'UI HA lit et réécrit. Mais on ne versionne jamais ce fichier entier : à chaque modification (via l'UI, un par un), on récupère uniquement le bloc YAML de l'automation qui vient de changer, et on le stocke individuellement dans <code>docs_automations_YAML/{Pole}/</code> — un fichier = une automation. Chaque fichier a sa doc miroir dans <code>docs_automations_MD/{POLE}/</code>.</p>
+      <div style="display:flex;gap:.7rem;margin:1rem 0 1.4rem;flex-wrap:wrap;">
+        <button type="button" class="btn-tree" onclick="openTreeModal('automations_yaml')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--green);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;">📁 .yaml — voir l'arborescence</button>
+        <button type="button" class="btn-tree" onclick="openTreeModal('automations_md')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--amber);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;">📄 .md — voir l'arborescence</button>
+      </div>
       <div style="overflow-x:auto;margin:1.1rem 0;">
         <table style="width:100%;border-collapse:collapse;font-size:.8rem;">
           <thead>
@@ -2724,6 +2731,152 @@ input_datetime: !include input_datetime.yaml</pre>
           </tbody>
         </table>
       </div>
+    </div>
+
+    <!-- ARBO AUTOMATIONS (contenu deplace dans modal) -->
+    <div class="conv-section" style="display:none;">
+      <pre id="tree-src-automations-yaml" style="display:none;">docs_automations_YAML/
+├── P1_clim_chauffage/                              <span style="color:#a0a8b6"># (A)-(J), 10 automations</span>
+│   ├── a_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml
+│   ├── b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml
+│   ├── c_notification_temperature_up_ou_down_7h30_21h00.yaml
+│   ├── d_notification_temperature_up_ou_down_21h00_7h30.yaml
+│   ├── e_clim_notification_de_fermeture_des_fenetres.yaml
+│   ├── f_clim_automatisation_arret_clim_notification.yaml
+│   ├── g_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml
+│   ├── h_clim_debug_force_mode_correct_securite.yaml
+│   ├── i_synchro_notif_clim_si_prise_coupee.yaml
+│   ├── j_debug_notifier_les_changements_de_message_clim_mobile.yaml
+│   └── old/                                        <span style="color:#a0a8b6"># 2 versions archivees</span>
+│       ├── A0_clim_jour_2026-01-01.yaml
+│       └── B0_clim_nuit_2026-01-02.yaml
+├── P1_cuisine/
+│   ├── a_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.yaml
+│   └── b_chauffage_cuisine_vacances.yaml
+├── P1_sdb/
+│   ├── a_2026_02_01_salle_de_bain_gestion_intelligente_soufflant.yaml
+│   ├── d_salle_de_bain_watchdog_securite_radiateur.yaml
+│   └── e_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.yaml
+├── P2_prises/
+│   ├── eco_prises_dinamique_by_presence_groupe.yaml
+│   ├── gestion_pc_bureau_scene_de_fin_notif.yaml
+│   └── gestion_tv_chambre_scene_de_fin_notif.yaml
+├── P3_eclairage/
+│   ├── p3_bureau_activation_ecran_synchro.yaml
+│   ├── p3_bureau_bouton_rodret_toggle_blanches.yaml
+│   ├── p3_bureau_forcer_play_on_si_pc_tourne.yaml
+│   ├── p3_bureau_watchdog_synchronisation_lampes_blanches.yaml
+│   ├── p3_entree_allumage_lumiere.yaml
+│   ├── p3_salon_bouton_ikea_inter_salon.yaml
+│   ├── p3_salon_bouton_ikea_somrig.yaml
+│   └── p3_sdb_sync_miroir_lampe_et_relais_sdb.yaml
+├── P4_presence/
+│   └── P4_log_zones_eric.yaml
+├── energie/
+│   ├── auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml
+│   └── log_ecart_linky_vs_nodon.yaml
+├── github_backup/                                  <span style="color:#a0a8b6"># categorie "Backup" du tableau, 7 fichiers</span>
+│   ├── 00_backup_alerte_si_ko_15_min.yaml
+│   ├── 01_backup_git_hourly_h_10.yaml
+│   ├── 02_backup_git_daily_03_00.yaml
+│   ├── 03_backup_git_weekly_dim_01_30.yaml
+│   ├── 04_backup_git_push_manuel.yaml
+│   ├── 05_backup_git_push_weekly_manuel.yaml
+│   └── git_push_au_demarrage_ha.yaml
+├── meteo/
+│   ├── alerte_meteo_france_actualisation_des_cartes.yaml
+│   ├── mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml
+│   ├── notification_de_la_foudre.yaml
+│   ├── update_previous_humidity.yaml
+│   └── update_previous_temperature.yaml
+├── stores/
+│   ├── gestion_optimisee_du_store_bureau.yaml
+│   └── gestion_simple_du_store_salon_matin_soir.yaml
+├── systeme/
+│   ├── db_purge_mariadb_repack.yaml
+│   ├── diag_enregistrement_journalier.yaml
+│   ├── systeme_economie_energie_vs_code.yaml
+│   ├── systeme_watchdog_piles_hue_ikea_sonoff.yaml
+│   ├── veille_github_nouvelle_release_detectee.yaml
+│   └── z2m_last_seen.yaml
+└── _old_avant_staging/                             <span style="color:#bf616a"># archive legacie pre-refonte, hors perimetre actif</span></pre>
+      <p id="tree-note-automations-yaml" style="display:none;font-size:.78rem;color:var(--text-2);line-height:1.75;margin-top:.7rem;">Somme par dossier : 10+2+3+3+8+1+2+7+5+2+6 = 49 fichiers, cohérent avec le total en prod. <code>_old_avant_staging/</code> est une archive de la refonte, hors périmètre actif.</p>
+    </div>
+
+    <div class="conv-section" style="display:none;">
+      <pre id="tree-src-automations-md" style="display:none;">docs_automations_MD/
+├── AUTOMATIONS/
+│   ├── AUTOMATIONS.md
+│   └── PROD_vs_REBUILD_DIFF.md
+├── BACKUP/
+│   ├── GIT_ALERTE_KO.md
+│   ├── GIT_AU_DEMARRAGE.md
+│   ├── GIT_DAILY.md
+│   ├── GIT_HOURLY.md
+│   ├── GIT_PUSH_MANUEL.md
+│   ├── GIT_PUSH_WEEKLY_MANUEL.md
+│   └── GIT_WEEKLY.md
+├── ENERGIE/
+│   ├── BASCULEMENT_TARIF_HPHC.md
+│   ├── LOG_ECART_LINKY_NODON.md
+│   └── SURVEILLANCE_GROS_ELECTRO_HP.md
+├── METEO/
+│   ├── ALERTE_METEO_CARTES.md
+│   ├── MAJ_TEMPS_FOUDRE.md
+│   ├── NOTIF_FOUDRE.md
+│   ├── UPDATE_PREV_HUMIDITY.md
+│   └── UPDATE_PREV_TEMPERATURE.md
+├── P1_CLIM_CHAUFFAGE/
+│   ├── A0_CLIM_JOUR.md
+│   ├── B0_CLIM_NUIT.md
+│   ├── C_NOTIF_TEMP_JOUR.md
+│   ├── D_NOTIF_TEMP_NUIT.md
+│   ├── E_NOTIF_FERMETURE_FENETRES.md
+│   ├── F_ARRET_CLIM_NOTIF.md
+│   ├── G_NOTIF_MODE_CHANGEMENT.md
+│   ├── H_DEBUG_FORCE_MODE.md
+│   ├── I_SYNCHRO_NOTIF_PRISE_COUPEE.md
+│   └── J_DEBUG_NOTIF_MESSAGE_CLIM.md
+├── P1_CUISINE/
+│   ├── A_CHAUFFAGE_CUISINE.md
+│   └── B_CHAUFFAGE_CUISINE_VACANCES.md
+├── P1_SDB/
+│   ├── A_SOUFFLANT_SDB.md
+│   ├── D_WATCHDOG_RADIATEUR_SDB.md
+│   └── E_MINUTERIE_SECHE_SERVIETTES.md
+├── P2_PRISES/
+│   ├── BUREAU_ALLUMAGE_PC.md
+│   ├── ECO_PRISES.md
+│   ├── ECO_PRISES_DYNAMIQUE.md
+│   ├── GESTION_PC_BUREAU.md
+│   ├── GESTION_TV_CHAMBRE.md
+│   ├── RODRET_SOUFFLANT_SDB.md
+│   └── RODRET_TV_CHAMBRE.md
+├── P3_ECLAIRAGE/
+│   ├── ALLUMAGE_LUMIERE_ENTREE.md
+│   ├── BOUTON_INTER_IKEA_4.md
+│   ├── BOUTON_INTER_SOMRIG.md
+│   ├── BUREAU_ACTIVATION_ECRAN_SYNCHRO.md
+│   ├── BUREAU_FORCER_PLAY_ON.md
+│   ├── BUREAU_RODRET_TOGGLE_BLANCHES.md
+│   └── BUREAU_WATCHDOG_SYNCHRO_LAMPES.md
+├── RASPI/                                           <span style="color:#bf616a"># doc presente, pas de dossier YAML actif equivalent</span>
+│   └── RPi4_FAN_PWM.md
+├── STORES/
+│   ├── GESTION_STORE_BUREAU.md
+│   └── GESTION_STORE_SALON.md
+├── SYSTEME/
+│   ├── DB_PURGE_MARIADB.md
+│   ├── DIAG_ENREGISTREMENT_JOURNALIER.md
+│   ├── ECONOMIE_ENERGIE_VSCODE.md
+│   ├── VEILLE_GITHUB_RELEASES.md
+│   ├── WATCHDOG_PILES.md
+│   └── Z2M_LAST_SEEN.md
+├── AUTOMATIONS_IDS_REF.md
+├── AUTOMATIONS_MIGRATION_REPORT.md
+├── PROD_LISTING_2026-04-05.md
+└── TRIAGE_PROD_2026-04-05.md</pre>
+      <p id="tree-note-automations-md" style="display:none;font-size:.78rem;color:var(--text-2);line-height:1.75;margin-top:.7rem;"><code>RASPI/RPi4_FAN_PWM.md</code> existe côté doc mais n'a pas d'équivalent actif dans <code>docs_automations_YAML/</code> (le YAML correspondant est dans <code>_old_avant_staging/raspi/</code>) — asymétrie à vérifier.</p>
     </div>
 
   </div>
@@ -3662,13 +3815,20 @@ function closeScriptModal(e) {
 }
 
 const TREES = {
-  yaml: { title: 'dashboard_docs_YAML/ — arborescence réelle (2026-08-02)', srcId: 'tree-src-yaml' },
-  md:   { title: 'dashboard_docs_MD/ — arborescence réelle (2026-08-02)',   srcId: 'tree-src-md' }
+  yaml:              { title: 'dashboard_docs_YAML/ — arborescence réelle (2026-08-02)',    srcId: 'tree-src-yaml' },
+  md:                { title: 'dashboard_docs_MD/ — arborescence réelle (2026-08-02)',       srcId: 'tree-src-md' },
+  automations_yaml:  { title: 'docs_automations_YAML/ — arborescence réelle (2026-08-02)',   srcId: 'tree-src-automations-yaml', noteId: 'tree-note-automations-yaml' },
+  automations_md:    { title: 'docs_automations_MD/ — arborescence réelle (2026-08-02)',     srcId: 'tree-src-automations-md',   noteId: 'tree-note-automations-md' }
 };
 function openTreeModal(key) {
   const t = TREES[key];
   document.getElementById('scr-title').textContent = t.title;
-  document.getElementById('scr-content').innerHTML = document.getElementById(t.srcId).innerHTML;
+  let html = document.getElementById(t.srcId).innerHTML;
+  if (t.noteId) {
+    const noteHtml = document.getElementById(t.noteId).innerHTML;
+    html += '<div class="tree-note">' + noteHtml + '</div>';
+  }
+  document.getElementById('scr-content').innerHTML = html;
   document.getElementById('script-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
