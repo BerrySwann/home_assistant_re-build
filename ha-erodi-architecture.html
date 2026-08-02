@@ -534,6 +534,78 @@ nav.scrolled {
 .y-table  { color:#4a6a4a; }
 
 /* ============================================
+   BOUTON "CLIQUE-MOI" — script maître P1 clim
+============================================ */
+.btn-clickme {
+  display: block;
+  margin: .6rem auto 0;
+  padding: .5rem 1.1rem;
+  font-family: var(--fm);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: #fff;
+  background: linear-gradient(135deg, var(--amber), #d97706);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(217,119,6,.55);
+  animation: clickme-pulse 1.6s ease-in-out infinite, clickme-wiggle 3.2s ease-in-out infinite;
+  transition: transform .15s;
+}
+.btn-clickme:hover { transform: scale(1.06); animation-play-state: paused; }
+.btn-clickme:active { transform: scale(.96); }
+@keyframes clickme-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(217,119,6,.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(217,119,6,0); }
+  100% { box-shadow: 0 0 0 0 rgba(217,119,6,0); }
+}
+@keyframes clickme-wiggle {
+  0%, 88%, 100% { transform: rotate(0deg); }
+  90%  { transform: rotate(-3deg); }
+  92%  { transform: rotate(3deg); }
+  94%  { transform: rotate(-2deg); }
+  96%  { transform: rotate(2deg); }
+  98%  { transform: rotate(0deg); }
+}
+
+#script-overlay {
+  position: fixed; inset: 0; z-index: 1000; display: none;
+  background: rgba(10,12,18,.88); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+#script-overlay.open { display: flex; }
+#script-modal {
+  width: 100%; max-width: 780px; height: min(80vh, 680px);
+  background: #0d1117; border: 1px solid rgba(217,119,6,.4);
+  overflow: hidden; display: flex; flex-direction: column;
+  box-shadow: 0 32px 80px rgba(0,0,0,.7);
+  animation: mIn .22s ease;
+}
+.scr-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #080c0f; border-bottom: 1px solid rgba(255,255,255,.06);
+  padding: 10px 16px; flex-shrink: 0;
+}
+.scr-title {
+  font-family: var(--fm); font-size: .68rem; font-weight: 700;
+  color: var(--amber); letter-spacing: .06em;
+}
+.scr-close {
+  font-family: var(--fm); font-size: .75rem; color: #4a6a4a;
+  background: none; border: none; cursor: pointer; padding: 4px 8px;
+  transition: color .2s;
+}
+.scr-close:hover { color: #c0d0c0; }
+.scr-scroll { flex: 1; overflow-y: auto; padding: 18px 22px; }
+.scr-scroll pre {
+  white-space: pre; margin: 0; font-family: var(--fm); font-size: .68rem;
+  line-height: 1.85; color: #d0e0d0;
+}
+.scr-scroll::-webkit-scrollbar { width: 3px; }
+.scr-scroll::-webkit-scrollbar-thumb { background: rgba(217,119,6,.3); }
+
+/* ============================================
    FOOTER
 ============================================ */
 footer {
@@ -744,6 +816,19 @@ footer a:hover { color:var(--green); }
     <div class="vwr-scroll">
       <div id="vwr-content"></div>
       <div class="vwr-grad"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT MODAL — p1_master_gestion_clim -->
+<div id="script-overlay" onclick="closeScriptModal(event)">
+  <div id="script-modal">
+    <div class="scr-bar">
+      <div class="scr-title">p1_master_gestion_clim.yaml — script partagé (A) + (B)</div>
+      <button class="scr-close" onclick="closeScriptModalBtn()">✕ fermer</button>
+    </div>
+    <div class="scr-scroll">
+      <pre id="scr-content"></pre>
     </div>
   </div>
 </div>
@@ -2173,8 +2258,9 @@ input_datetime: !include input_datetime.yaml</pre>
               <td style="padding:.5rem .8rem;color:var(--text-2);">Via script — préfixe [AJ] + présence / erreur</td>
             </tr>
             <tr style="border-bottom:none;">
-              <td colspan="3" style="padding:.25rem .8rem .25rem .8rem;font-size:.72rem;color:var(--text-2);background:rgba(255,255,255,.03);">
+              <td colspan="3" style="padding:.4rem .8rem .5rem .8rem;font-size:.72rem;color:var(--text-2);background:rgba(255,255,255,.03);">
                 Script <code style="color:var(--text-2);">p1_master_gestion_clim</code> — prefix <code style="color:var(--text-2);">[AJ]</code> si jour, <code style="color:var(--text-2);">[AN]</code> si nuit — titres : <code style="color:var(--text-2);">[AX] ATTENTE CAPTEURS</code> / <code style="color:var(--text-2);">[AX] CLIM JOUR/NUIT COUPÉE</code> / <code style="color:var(--text-2);">[AX] sensor.presence</code>
+                <button class="btn-clickme" onclick="openScriptModal()" type="button">👉 clique-moi, voir le script complet 👈</button>
               </td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
@@ -3016,6 +3102,139 @@ function closeViewerBtn() {
 
 function closeViewer(e) {
   if (e.target === document.getElementById('viewer-overlay')) closeViewerBtn();
+}
+
+/* ============================================
+   SCRIPT MODAL — p1_master_gestion_clim
+============================================ */
+const SCRIPT_P1_MASTER = `p1_master_gestion_clim:
+  alias: "P1 - MASTER : Gestion centralisée climatisation"
+  description: "Pilotage des 3 clims jour/nuit selon le paramètre periode. Appelé par P1_A_01 et P1_B_01."
+  mode: queued
+  max: 10
+  fields:
+    periode:
+      name: Période
+      description: "jour ou nuit"
+      required: true
+      selector:
+        select:
+          options:
+            - jour
+            - nuit
+    trigger_id:
+      name: Trigger ID
+      description: "ID du trigger ayant déclenché l'appel (passé par l'automation)"
+      required: false
+      default: ""
+      selector:
+        text:
+    trigger_entity_id:
+      name: Trigger Entity ID
+      description: "Entity ID du trigger (pour message fenêtre)"
+      required: false
+      default: ""
+      selector:
+        text:
+  sequence:
+    # ──────────────────────────────────────────────
+    # 1. PREFIX SELON PÉRIODE
+    # ──────────────────────────────────────────────
+    - variables:
+        prefix: "{{ '[AJ]' if periode == 'jour' else '[AN]' }}"
+
+    # ──────────────────────────────────────────────
+    # 2. DÉLAI DE SÉCURITÉ AU REDÉMARRAGE
+    # ──────────────────────────────────────────────
+    - alias: 'LOGIQUE : DÉLAI DE SÉCURITÉ AU REDÉMARRAGE'
+      choose:
+      - alias: 'CAS : REDÉMARRAGE SYSTÈME DÉTECTÉ'
+        conditions:
+        - condition: template
+          value_template: "{{ trigger_id == 'ha_restart' }}"
+        sequence:
+        - alias: 'ATTENTE : 1 MINUTE POUR STABILISATION'
+          delay: 00:01:00
+
+    # ──────────────────────────────────────────────
+    # 3. BOUCLE D'ATTENTE DES CAPTEURS
+    # ──────────────────────────────────────────────
+    - alias: 'SÉCURITÉ : BOUCLE D''ATTENTE DES CAPTEURS'
+      repeat:
+        until:
+        - alias: 'VÉRIFICATION : TOUS LES CAPTEURS SONT PRÊTS OU LIMITE ATTEINTE'
+          condition: or
+          conditions:
+          - alias: 'ÉTAT : TOUS OK'
+            condition: template
+            value_template: >
+              {% set base_ok =
+                states('sensor.mode_ete_hiver') not in ['unknown', 'unavailable'] and
+                states('sensor.groupe') not in ['unknown', 'unavailable'] and
+                states('sensor.temperature_eco_hiver_corrige') not in ['unknown', 'unavailable', '0'] and
+                states('sensor.temperature_eco_ete_corrige') not in ['unknown', 'unavailable', '0'] and
+                states('sensor.temperature_corrige_mamour') not in ['unknown', 'unavailable', '0'] and
+                states('sensor.temperature_corrige_eric') not in ['unknown', 'unavailable', '0']
+              %}
+              {% if periode == 'jour' %}
+                {{ base_ok and
+                   states('sensor.temperature_cible') not in ['unknown', 'unavailable', '0'] and
+                   states('sensor.temperature_corrige_chambre') not in ['unknown', 'unavailable']
+                }}
+              {% else %}
+                {{ base_ok and
+                   states('sensor.temperature_confort_nuit') not in ['unknown', 'unavailable', '0'] and
+                   states('sensor.temperature_corrige_chambre') not in ['unknown', 'unavailable', '0']
+                }}
+              {% endif %}
+          - alias: 'LIMITE : 10 TENTATIVES (5 MIN)'
+            condition: template
+            value_template: '{{ repeat.index >= 10 }}'
+        sequence:
+        - alias: 'CONDITION : NOTIF UNIQUEMENT SI ÉCHEC'
+          condition: template
+          value_template: >
+            {{ states('sensor.mode_ete_hiver') in ['unknown', 'unavailable'] or
+               states('sensor.groupe') in ['unknown', 'unavailable'] }}
+        - alias: 'NOTIF : ALERTE ATTENTE CAPTEURS'
+          action: notify.mobile_app_eric
+          data:
+            title: "{{ prefix }} ATTENTE CAPTEURS"
+            message: >
+              Essai n°{{ repeat.index }}... Les capteurs de {{ periode }} ne sont
+              pas prêts. Pause 30s.
+        - alias: 'PAUSE : AVANT NOUVEL ESSAI'
+          delay: 00:00:30
+
+    # (... calcul des cibles par pièce, sécurité fenêtres, envoi commandes clim,
+    #      notif résumé état — voir fichier complet dans docs_scripts_YAML/)
+
+    - alias: 'NOTIF : RÉSUMÉ DE L''ÉTAT DES CLIMATISATIONS'
+      action: notify.mobile_app_eric
+      data:
+        title: "{{ prefix }} {{ states('sensor.presence') }}"
+        message: >-
+          {%- set clims_alimentees = prise_salon or prise_bureau or prise_chambre -%}
+          {%- if not clims_alimentees -%}
+          [UNITS OFF] Aucune clim alimentee.
+          {%- elif 'groupe_1' in groupe_presence and mode_saison == 'heat' -%}
+          [ECO HEAT] ...
+          {%- else -%}
+          Mode : {{ mode_saison|upper }} ...
+          {%- endif -%}
+`;
+
+function openScriptModal() {
+  document.getElementById('scr-content').innerHTML = highlightYAML(SCRIPT_P1_MASTER);
+  document.getElementById('script-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeScriptModalBtn() {
+  document.getElementById('script-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeScriptModal(e) {
+  if (e.target === document.getElementById('script-overlay')) closeScriptModalBtn();
 }
 
 function switchFile(idx, e) {
