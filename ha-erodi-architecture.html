@@ -1107,13 +1107,13 @@ footer a:hover { color:var(--green); }
       <!-- L1C3 Commande Clim -->
       <div class="vg" id="vg-l1c3">
         <div class="vg-title">Commande Clim.</div>
-        <div class="vg-r3"><span class="vg-label">T Appart.</span><span></span><span class="vg-val" id="l1c3-c-tmoy" style="color:lightgreen">22.1&#176;C</span></div>
-        <div class="vg-r3"><span class="vg-label">&#916; Ademe</span><span></span><span class="vg-val" id="l1c3-c-ademe" style="color:lightgreen">-6.5&#176;C</span></div>
-        <div class="vg-r3"><span class="vg-label">Mode &#8594;</span><span class="vg-val" id="l1c3-m-global" style="color:skyblue">Cool</span><span></span></div>
+        <div class="vg-r3"><span class="vg-label">T Appart. --------------</span><span></span><span class="vg-val" id="l1c3-c-tmoy" style="color:lightgreen">26.8&#176;C</span></div>
+        <div class="vg-r3"><span class="vg-label">&#916; Ademe --------------</span><span></span><span class="vg-val" id="l1c3-c-ademe" style="color:lightgreen">-6.1&#176;C</span></div>
+        <div class="vg-r3"><span class="vg-label">Mode &#8594;</span><span class="vg-val" id="l1c3-m-global" style="color:lightgreen">Cool</span><span>.</span></div>
         <div class="vg-sep"></div>
-        <div class="vg-r3"><span class="vg-val" id="l1c3-p-salon" style="color:lightgreen">Salon</span><span class="vg-val" id="l1c3-m-salon" style="color:skyblue">Cool</span><span class="vg-val" id="l1c3-c-salon">22.0&#176;C</span></div>
-        <div class="vg-r3"><span class="vg-val" id="l1c3-p-cuisine" style="color:#fff">Cuisine</span><span class="vg-val" id="l1c3-m-cuisine" style="color:#f44336">Off</span><span class="vg-val" id="l1c3-c-cuisine">17.5&#176;C</span></div>
-        <div class="vg-r3"><span class="vg-val" id="l1c3-p-bureau" style="color:lightgreen">Bureau</span><span class="vg-val" id="l1c3-m-bureau" style="color:skyblue">Cool</span><span class="vg-val" id="l1c3-c-bureau">27.0&#176;C</span></div>
+        <div class="vg-r3"><span class="vg-val" id="l1c3-p-salon" style="color:lightgreen">Salon</span><span class="vg-val" id="l1c3-m-salon" style="color:lightgreen">Cool</span><span class="vg-val" id="l1c3-c-salon">26.0&#176;C</span></div>
+        <div class="vg-r3"><span class="vg-val" id="l1c3-p-cuisine" style="color:#fff">Cuisine</span><span class="vg-val" id="l1c3-m-cuisine" style="color:#f44336">Off</span><span class="vg-val" id="l1c3-c-cuisine">25.0&#176;C</span></div>
+        <div class="vg-r3"><span class="vg-val" id="l1c3-p-bureau" style="color:lightgreen">Bureau</span><span class="vg-val" id="l1c3-m-bureau" style="color:lightgreen">Cool</span><span class="vg-val" id="l1c3-c-bureau">27.0&#176;C</span></div>
         <div class="vg-r3"><span class="vg-val" id="l1c3-p-sdb" style="color:#fff">SdB</span><span class="vg-val" id="l1c3-m-sdb" style="color:#f44336">Off</span><span class="vg-val" id="l1c3-c-sdb">21.0&#176;C</span></div>
         <div class="vg-r3"><span class="vg-val" id="l1c3-p-chambre" style="color:#fff">Chambre</span><span class="vg-val" id="l1c3-m-chambre" style="color:#f44336">Off</span><span class="vg-val" id="l1c3-c-chambre">27.0&#176;C</span></div>
         <span class="vg-live-badge">Seuils reels - survol actif</span>
@@ -4457,7 +4457,8 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     return '#aaaaaa';
   }
   function vgClimModeColor(mode){
-    var map = { cool:'skyblue', heat:'#FFA500', fan:'turquoise', off:'#F44336', na:'#aaaaaa' };
+    // cool:'lightgreen' fidele au screenshot HA reel (pas skyblue comme documente)
+    var map = { cool:'lightgreen', heat:'#FFA500', fan:'turquoise', off:'#F44336', na:'#aaaaaa' };
     return map[mode] || map.na;
   }
   function vgClimModeLabel(mode){
@@ -4475,9 +4476,9 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
   // avec des etats coherents (si Salon est en Cool ici, il l'est aussi en face).
   var L1C3_ROOMS = ['salon', 'cuisine', 'bureau', 'sdb', 'chambre'];
   var VG_CLIM_SCENARIOS = [
-    { tmoy: 22.1, ademe: -6.5, isCooling: true, mode: 'cool',
-      salon:   { power:'on',  mode:'cool', c:22.0, q:2.71, m:120.27 },
-      cuisine: { power:'off', mode:'off',  c:17.5, q:0,    m:5.00 },
+    { tmoy: 26.8, ademe: -6.1, isCooling: true, mode: 'cool',
+      salon:   { power:'on',  mode:'cool', c:26.0, q:2.71, m:120.27 },
+      cuisine: { power:'off', mode:'off',  c:25.0, q:0,    m:5.00 },
       bureau:  { power:'on',  mode:'cool', c:27.0, q:1.28, m:48.43 },
       sdb:     { power:'off', mode:'off',  c:21.0, q:0,    m:0 },
       chambre: { power:'off', mode:'off',  c:27.0, q:1.32, m:49.19 },
