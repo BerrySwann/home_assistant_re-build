@@ -3567,9 +3567,15 @@ input_datetime: !include input_datetime.yaml</pre>
             <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">t_ext &lt; 12  %}</span> <span class="y-val">{{ eco + 1 }}</span>  <span class="y-comment">{# -&gt; 18°C #}</span></div>
             <div><span class="y-str">    {%</span> <span class="y-key">else</span>             <span class="y-str">%}</span> <span class="y-val">{{ eco }}</span>      <span class="y-comment">{# 17°C #}</span></div>
             <div><span class="y-str">    {%</span> <span class="y-key">endif</span>            <span class="y-str">%}</span></div>
-            <div style="margin-top:8px"><span class="y-comment"># --- temperature_eco_ete_corrige (symetrique, base ~27°C) ---</span></div>
-            <div><span class="y-key">- unique_id:</span> <span class="y-slug">temperature_eco_ete_corrige</span></div>
-            <div><span class="y-str">    {%</span> <span class="y-key">if</span> <span class="y-val">t_ext &gt;= 28 %}</span> <span class="y-val">{{ eco }}</span> <span class="y-str">{%</span> <span class="y-key">else</span> <span class="y-str">%}</span> <span class="y-val">{{ eco - 1 }}</span> <span class="y-str">{% endif %}</span></div>
+            <div style="margin-top:8px"><span class="y-comment"># --- temperature_eco_ete_corrige ---</span></div>
+            <div><span class="y-key">- name:</span> <span class="y-str">"Temperature eCO. Ete Corrige"</span></div>
+            <div><span class="y-key">  unique_id:</span> <span class="y-slug">temperature_eco_ete_corrige</span></div>
+            <div><span class="y-key">  state:</span> <span class="y-val">&gt;</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">eco   = states('sensor.temperature_eco_ete') | float(27) %}</span>  <span class="y-comment">{# sensor different du bloc hiver #}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">if</span>   <span class="y-val">t_ext &gt;= 28 %}</span> <span class="y-val">{{ eco }}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">else</span>             <span class="y-str">%}</span> <span class="y-val">{{ eco - 1 }}</span>  <span class="y-comment">{# vrai fichier: eco - delta_1 #}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">endif</span>            <span class="y-str">%}</span></div>
           </div>
         </div>
       </div>
