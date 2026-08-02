@@ -157,6 +157,9 @@ nav.scrolled {
 .btn-viewer svg { transition:transform .3s; }
 .btn-viewer:hover svg { transform:translateX(3px); }
 
+.btn-tree { border-color:var(--border-hi); }
+.btn-tree:hover { border-color:currentColor; box-shadow:var(--shadow-hi); filter:brightness(1.15); }
+
 /* ============================================
    STATS BAR
 ============================================ */
@@ -2783,11 +2786,9 @@ input_datetime: !include input_datetime.yaml</pre>
       </div>
     </div>
 
-    <!-- ARBO YAML -->
-    <div class="conv-section reveal">
-      <h3 class="conv-section-h">2 — Arborescence réelle dashboard_docs_YAML/</h3>
-      <p class="conv-section-sub">Relevé direct du dossier local (2026-08-02) — 21 dossiers (18 vignettes + Dashboard_COMPLET + 2 hors-matrice).</p>
-      <pre style="background:#2e3440;border:1px solid #4c566a;border-radius:8px;padding:16px 20px;overflow-x:auto;font-family:var(--fm);font-size:.68rem;line-height:1.65;color:#d8dee9;margin-top:1rem;">dashboard_docs_YAML/
+    <!-- ARBO YAML (contenu deplace dans modal, voir boutons section Inventaire) -->
+    <div class="conv-section reveal" style="display:none;">
+      <pre id="tree-src-yaml" style="display:none;">dashboard_docs_YAML/
 ├── Dashboard_COMPLET/                          <span style="color:#a0a8b6"># 16 versions, 2026-03-16 → 2026-08-01</span>
 │   ├── Dashboard_2026_03_16.yaml
 │   ├── Dashboard_2026_03_20.yaml
@@ -2925,13 +2926,21 @@ input_datetime: !include input_datetime.yaml</pre>
 ├── md5_compare_2026-05-23.txt                   <span style="color:#bf616a"># residuel racine</span>
 ├── md5_compare_2026-05-31.txt                   <span style="color:#bf616a"># residuel racine</span>
 └── md5_compare_TREECORRIGE_2026-05-24.txt        <span style="color:#bf616a"># residuel racine</span></pre>
-      <p style="font-size:.78rem;color:var(--text-2);line-height:1.75;margin-top:.7rem;"><code>L5C3_15_MariaDB/Script sh/</code> (script bash) et les deux sous-dossiers d'assets de <code>PAGE_Home/</code> (<code>Météo/</code>, <code>www_meteocons/</code>) ne suivent pas la convention <code>.yaml</code> — présents mais hors périmètre des règles de nommage.</p>
     </div>
 
     <!-- INVENTAIRE -->
     <div class="conv-section reveal">
-      <h3 class="conv-section-h">3 — Inventaire réel des 18 vignettes + 2 hors-matrice</h3>
+      <h3 class="conv-section-h">2 — Inventaire réel des 18 vignettes + 2 hors-matrice</h3>
       <p class="conv-section-sub">Relevé direct du dossier local (2026-08-02). Dernière vignette/page par emplacement.</p>
+      <div style="display:flex;gap:.7rem;margin:1rem 0 1.4rem;flex-wrap:wrap;">
+        <button type="button" class="btn-tree" onclick="openTreeModal('yaml')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--green);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;">📁 .yaml — voir l'arborescence</button>
+        <button type="button" class="btn-tree" onclick="openTreeModal('md')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--amber);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;">📄 .md — voir l'arborescence</button>
+      </div>
+      <p style="font-size:.78rem;color:var(--text-2);line-height:1.75;margin:0 0 .5rem;"><code>L5C3_15_MariaDB/Script sh/</code> (script bash) et les deux sous-dossiers d'assets de <code>PAGE_Home/</code> (<code>Météo/</code>, <code>www_meteocons/</code>) ne suivent pas la convention <code>.yaml</code> — présents mais hors périmètre des règles de nommage.</p>
+      <div style="background:var(--bg-card);border-left:3px solid var(--amber);padding:.8rem 1rem;border-radius:0 6px 6px 0;margin:0 0 1.4rem;">
+        <div style="font-size:.7rem;font-weight:700;color:var(--amber);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.06em;">⚠️ Écart YAML ↔ MD relevé</div>
+        <p style="font-size:.8rem;color:var(--text-2);line-height:1.75;"><code>PAGE_RASPI</code> a son propre dossier côté YAML (<code>PAGE_RASPI/</code>) mais côté MD, sa doc est colocalisée dans <code>L4C2_MINI_PC/</code> — pas de dossier dédié. Asymétrie à connaître si tu cherches ce fichier.</p>
+      </div>
       <div style="overflow-x:auto;margin:1.1rem 0;">
         <table style="width:100%;border-collapse:collapse;font-size:.78rem;">
           <thead>
@@ -2969,11 +2978,9 @@ input_datetime: !include input_datetime.yaml</pre>
       </div>
     </div>
 
-    <!-- ARBO MD -->
-    <div class="conv-section reveal">
-      <h3 class="conv-section-h">4 — dashboard_docs_MD/ (documentation)</h3>
-      <p class="conv-section-sub">Contrepartie <code>.md</code> de chaque vignette/page — relevé réel du dossier local (2026-08-02).</p>
-      <pre style="background:#2e3440;border:1px solid #4c566a;border-radius:8px;padding:16px 20px;overflow-x:auto;font-family:var(--fm);font-size:.7rem;line-height:1.7;color:#d8dee9;margin-top:1rem;">dashboard_docs_MD/
+    <!-- ARBO MD (contenu deplace dans modal, voir boutons section Inventaire) -->
+    <div class="conv-section reveal" style="display:none;">
+      <pre id="tree-src-md" style="display:none;">dashboard_docs_MD/
 ├── CONFIG_ROOT/                    <span style="color:#a0a8b6"># 1 fichier</span>
 │   └── CONFIG_ROOT.md
 ├── HOME PAGE/                      <span style="color:#a0a8b6"># L0C0</span>
@@ -3046,10 +3053,6 @@ input_datetime: !include input_datetime.yaml</pre>
 ├── METEOCSS_CARD_MODIF.md
 ├── MOC_DASHBOARD.md
 └── WORKFLOW_REBUILD.md</pre>
-      <div style="background:var(--bg-card);border-left:3px solid var(--amber);padding:.8rem 1rem;border-radius:0 6px 6px 0;margin-top:.9rem;">
-        <div style="font-size:.7rem;font-weight:700;color:var(--amber);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.06em;">⚠️ Écart YAML ↔ MD relevé</div>
-        <p style="font-size:.8rem;color:var(--text-2);line-height:1.75;"><code>PAGE_RASPI</code> a son propre dossier côté YAML (<code>PAGE_RASPI/</code>) mais côté MD, sa doc est colocalisée dans <code>L4C2_MINI_PC/</code> — pas de dossier dédié. Asymétrie à connaître si tu cherches ce fichier.</p>
-      </div>
     </div>
 
   </div>
@@ -3656,6 +3659,18 @@ function closeScriptModalBtn() {
 }
 function closeScriptModal(e) {
   if (e.target === document.getElementById('script-overlay')) closeScriptModalBtn();
+}
+
+const TREES = {
+  yaml: { title: 'dashboard_docs_YAML/ — arborescence réelle (2026-08-02)', srcId: 'tree-src-yaml' },
+  md:   { title: 'dashboard_docs_MD/ — arborescence réelle (2026-08-02)',   srcId: 'tree-src-md' }
+};
+function openTreeModal(key) {
+  const t = TREES[key];
+  document.getElementById('scr-title').textContent = t.title;
+  document.getElementById('scr-content').innerHTML = document.getElementById(t.srcId).innerHTML;
+  document.getElementById('script-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
 function switchFile(idx, e) {
