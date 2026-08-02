@@ -1123,17 +1123,17 @@ footer a:hover { color:var(--green); }
       <div class="vg" id="vg-l2c1" style="display:flex;flex-direction:column">
         <div class="vg-title">Conso. Appart.</div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;text-align:center;margin:6px 0;font-size:1rem">
-          <div><div class="vg-label" style="font-size:0.65rem">Mini</div><div class="vg-val" style="color:#fff">0 kWh</div></div>
-          <div><div class="vg-label" style="font-size:0.65rem">Reel</div><div class="vg-val" id="l2c1-realtime" style="color:#fff;font-size:1rem;font-weight:700">952 W</div></div>
-          <div><div class="vg-label" style="font-size:0.65rem">Maxi</div><div class="vg-val" id="l2c1-maxi" style="color:#FFA500">9.8 kWh</div></div>
+          <div><div class="vg-label" style="font-size:0.65rem;color:lightgreen">Mini</div><div class="vg-val" id="l2c1-mini" style="color:#fff">93 W</div></div>
+          <div><div class="vg-label" style="font-size:0.65rem;color:#fff">R&eacute;el (W)</div><div class="vg-val" id="l2c1-realtime" style="color:#fff;font-size:1rem;font-weight:700">952 W</div></div>
+          <div><div class="vg-label" style="font-size:0.65rem;color:#f44336">Maxi</div><div class="vg-val" id="l2c1-maxi" style="color:#FFA500">3977 W</div></div>
         </div>
         <div class="vg-sep"></div>
         <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center">
           <div style="color:rgba(255,255,255,0.5);font-size:0.7rem;margin-bottom:4px">Couts Total = H.P. + H.C.</div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;text-align:center;gap:4px;width:100%;font-size:1rem">
-            <div class="vg-val" id="l2c1-toto" style="color:lightgreen">1.76 &euro;</div>
-            <div class="vg-val" id="l2c1-hp">1.16 &euro;</div>
-            <div class="vg-val" id="l2c1-hc" style="color:#fff">0.60 &euro;</div>
+            <div class="vg-val" id="l2c1-toto" style="color:lightgreen">1.54 &euro;</div>
+            <div class="vg-val" id="l2c1-hp" style="color:#fff">0.79 &euro;</div>
+            <div class="vg-val" id="l2c1-hc" style="color:#fff">0.76 &euro;</div>
           </div>
         </div>
         <span class="vg-live-badge">Seuils reels - survol actif</span>
@@ -4529,29 +4529,26 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     });
   }
 
-  // ----- L2C1 : Conso Appart -----
-  function vgRealtimeColor(w){
+  // ----- L2C1 : Conso Appart (Mini/Reel/Maxi tous en W, meme echelle de seuils) -----
+  function vgApptWattColor(w){
     if (w > 4000) return 'rgb(244,67,54)';
     if (w > 2000) return '#FFA500';
     if (w > 1000) return 'lightgreen';
     return '#fff';
   }
-  function vgMaxiColor(kwh){
-    if (kwh > 15) return 'rgb(244,67,54)';
-    if (kwh > 8)  return '#FFA500';
-    return '#fff';
-  }
   var L2C1_FRAMES = [
-    { realtime: 952,  maxi: 9.8,  toto: 1.76, hp: 1.16, hc: 0.60 },
-    { realtime: 340,  maxi: 3.2,  toto: 0.58, hp: 0.22, hc: 0.36 },
-    { realtime: 2650, maxi: 11.4, toto: 2.15, hp: 1.68, hc: 0.47 },
-    { realtime: 4680, maxi: 17.9, toto: 3.42, hp: 2.90, hc: 0.52 }
+    { mini: 93,   realtime: 952,  maxi: 3977, toto: 1.54, hp: 0.79, hc: 0.76 },
+    { mini: 40,   realtime: 340,  maxi: 1180, toto: 0.58, hp: 0.22, hc: 0.36 },
+    { mini: 610,  realtime: 2650, maxi: 3120, toto: 2.15, hp: 1.68, hc: 0.47 },
+    { mini: 1450, realtime: 4680, maxi: 4680, toto: 3.42, hp: 2.90, hc: 0.52 }
   ];
   function applyL2C1Frame(frame){
+    var miEl = document.getElementById('l2c1-mini');
+    if (miEl) { miEl.textContent = frame.mini + ' W'; miEl.style.color = vgApptWattColor(frame.mini); }
     var rEl = document.getElementById('l2c1-realtime');
-    if (rEl) { rEl.textContent = frame.realtime + ' W'; rEl.style.color = vgRealtimeColor(frame.realtime); }
+    if (rEl) { rEl.textContent = frame.realtime + ' W'; rEl.style.color = vgApptWattColor(frame.realtime); }
     var mEl = document.getElementById('l2c1-maxi');
-    if (mEl) { mEl.textContent = frame.maxi.toFixed(1) + ' kWh'; mEl.style.color = vgMaxiColor(frame.maxi); }
+    if (mEl) { mEl.textContent = frame.maxi + ' W'; mEl.style.color = vgApptWattColor(frame.maxi); }
     var totoEl = document.getElementById('l2c1-toto');
     if (totoEl) totoEl.textContent = frame.toto.toFixed(2) + ' €'; // couleur lightgreen fixe, jamais de seuil
     var hpEl = document.getElementById('l2c1-hp');
