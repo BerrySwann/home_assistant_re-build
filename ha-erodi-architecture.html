@@ -585,15 +585,15 @@ nav.scrolled {
   100% { box-shadow: 0 0 0 0 rgba(217,119,6,0); }
 }
 @keyframes bloc-hint-pulse {
-  0%, 20%, 100% { box-shadow: 0 0 0 0 rgba(180,83,9,0); transform: scale(1); }
-  8%  { box-shadow: 0 0 0 8px rgba(180,83,9,.22); transform: scale(1.015); }
-  16% { box-shadow: 0 0 0 0 rgba(180,83,9,0); transform: scale(1); }
+  0%   { box-shadow: 0 0 0 0 rgba(180,83,9,.35); }
+  70%  { box-shadow: 0 0 0 10px rgba(180,83,9,0); }
+  100% { box-shadow: 0 0 0 0 rgba(180,83,9,0); }
 }
-.bloc-clickable { animation: bloc-hint-pulse 12s ease-in-out infinite; }
+.bloc-clickable { animation: bloc-hint-pulse 2s ease-in-out infinite; }
 .bloc-clickable:hover { animation-play-state: paused; }
 .bloc-clickable:nth-of-type(1) { animation-delay: 0s; }
-.bloc-clickable:nth-of-type(2) { animation-delay: 4s; }
-.bloc-clickable:nth-of-type(3) { animation-delay: 8s; }
+.bloc-clickable:nth-of-type(2) { animation-delay: .66s; }
+.bloc-clickable:nth-of-type(3) { animation-delay: 1.33s; }
 @keyframes clickme-wiggle {
   0%, 88%, 100% { transform: rotate(0deg); }
   90%  { transform: rotate(-3deg); }
