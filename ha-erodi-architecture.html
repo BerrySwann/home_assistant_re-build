@@ -4452,8 +4452,8 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     return '#aaaaaa';
   }
   function vgClimModeColor(mode){
-    // Choix Eric : Cool et Heat partagent le meme vert (au lieu du bleu/orange reel de HA)
-    var map = { cool:'lightgreen', heat:'lightgreen', fan:'turquoise', off:'#F44336', na:'#aaaaaa' };
+    // Choix Eric : Cool, Heat et Fan partagent le meme vert (au lieu de bleu/orange/turquoise reels HA)
+    var map = { cool:'lightgreen', heat:'lightgreen', fan:'lightgreen', off:'#F44336', na:'#aaaaaa' };
     return map[mode] || map.na;
   }
   function vgClimModeLabel(mode){
