@@ -3553,7 +3553,6 @@ input_datetime: !include input_datetime.yaml</pre>
           <div class="intel-desc">
             <h4>Consignes eco quand il n'y a personne</h4>
             <p>Meme logique de sensors corriges que la chaine confort, mais pour le mode absence. <code>temperature_eco_hiver_corrige</code> part d'une base de <strong>17°C</strong> et remonte a 18°C si T°ext &lt; 12°C, 19°C si T°ext &lt; 8°C. <code>temperature_eco_ete_corrige</code> fait l'inverse en ete. Ces deux sensors sont lus par le script <code>p1_master_gestion_clim.yaml</code> quand <code>sensor.groupe</code> vaut <code>groupe_1</code> — personne a la maison.</p>
-            <div class="intel-outcome"><strong>✓ Chaine complete</strong><code>sensor.groupe = groupe_1</code> (Absent) → script lit <code>temperature_eco_hiver_corrige</code> / <code>_eco_ete_corrige</code> → consigne eco appliquee aux climatiseurs, pas besoin d'automation dediee en plus.</div>
           </div>
           <div class="yaml-example">
             <div class="yaml-badge">P1_01_MASTER · reel</div>
@@ -3577,6 +3576,7 @@ input_datetime: !include input_datetime.yaml</pre>
             <div><span class="y-str">    {%</span> <span class="y-key">else</span>             <span class="y-str">%}</span> <span class="y-val">{{ eco - 1 }}</span>  <span class="y-comment">{# vrai fichier: eco - delta_1 #}</span></div>
             <div><span class="y-str">    {%</span> <span class="y-key">endif</span>            <span class="y-str">%}</span></div>
           </div>
+          <div class="intel-outcome" style="grid-column:1 / -1;"><strong>✓ Chaine complete</strong><code>sensor.groupe = groupe_1</code> (Absent) → script lit <code>temperature_eco_hiver_corrige</code> / <code>_eco_ete_corrige</code> → consigne eco appliquee aux climatiseurs, pas besoin d'automation dediee en plus.</div>
         </div>
       </div>
     </div>
