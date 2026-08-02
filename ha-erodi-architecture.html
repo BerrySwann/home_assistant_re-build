@@ -802,7 +802,7 @@ footer a:hover { color:var(--green); }
 .intel-tab:hover { border-color:var(--border-hi); color:var(--text); }
 .intel-tab.active { background:rgba(29,77,46,.07); border-color:var(--border-hi); color:var(--green-2); }
 .intel-pane { display:none; }
-.intel-pane.active { display:grid; grid-template-columns:1fr 1.1fr; gap:16px; animation:fadeIn .2s ease; }
+.intel-pane.active { display:flex; flex-direction:column; gap:16px; animation:fadeIn .2s ease; }
 @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
 .intel-desc { padding:4px 0; }
 .intel-desc h4 { font-family:var(--fd); font-size:1rem; font-weight:700; margin-bottom:10px; }
@@ -3553,6 +3553,7 @@ input_datetime: !include input_datetime.yaml</pre>
           <div class="intel-desc">
             <h4>Consignes eco quand il n'y a personne</h4>
             <p>Meme logique de sensors corriges que la chaine confort, mais pour le mode absence. <code>temperature_eco_hiver_corrige</code> part d'une base de <strong>17°C</strong> et remonte a 18°C si T°ext &lt; 12°C, 19°C si T°ext &lt; 8°C. <code>temperature_eco_ete_corrige</code> fait l'inverse en ete. Ces deux sensors sont lus par le script <code>p1_master_gestion_clim.yaml</code> quand <code>sensor.groupe</code> vaut <code>groupe_1</code> — personne a la maison.</p>
+            <div class="intel-outcome"><strong>✓ Chaine complete</strong><code>sensor.groupe = groupe_1</code> (Absent) → script lit <code>temperature_eco_hiver_corrige</code> / <code>_eco_ete_corrige</code> → consigne eco appliquee aux climatiseurs, pas besoin d'automation dediee en plus.</div>
           </div>
           <div class="yaml-example">
             <div class="yaml-badge">P1_01_MASTER · reel</div>
@@ -3576,7 +3577,6 @@ input_datetime: !include input_datetime.yaml</pre>
             <div><span class="y-str">    {%</span> <span class="y-key">else</span>             <span class="y-str">%}</span> <span class="y-val">{{ eco - 1 }}</span>  <span class="y-comment">{# vrai fichier: eco - delta_1 #}</span></div>
             <div><span class="y-str">    {%</span> <span class="y-key">endif</span>            <span class="y-str">%}</span></div>
           </div>
-          <div class="intel-outcome" style="grid-column:1 / -1;"><strong>✓ Chaine complete</strong><code>sensor.groupe = groupe_1</code> (Absent) → script lit <code>temperature_eco_hiver_corrige</code> / <code>_eco_ete_corrige</code> → consigne eco appliquee aux climatiseurs, pas besoin d'automation dediee en plus.</div>
         </div>
       </div>
     </div>
