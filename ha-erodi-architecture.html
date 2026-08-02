@@ -537,9 +537,10 @@ nav.scrolled {
    BOUTON "CLIQUE-MOI" — script maître P1 clim
 ============================================ */
 .btn-clickme {
-  display: block;
-  margin: .6rem auto 0;
-  padding: .5rem 1.1rem;
+  display: inline-block;
+  margin: 0 0 0 .5rem;
+  vertical-align: middle;
+  padding: .3rem .8rem;
   font-family: var(--fm);
   font-size: .68rem;
   font-weight: 700;
@@ -2252,14 +2253,14 @@ input_datetime: !include input_datetime.yaml</pre>
             </tr>
             <!-- P1 CLIM -->
             <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);" rowspan="13">P1 Clim</td>
+              <td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);" rowspan="12">P1 Clim</td>
               <td style="padding:.5rem .8rem;color:var(--text);">(A) Clim Jour 7h30-21h</td>
               <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">[AJ] ...</td>
               <td style="padding:.5rem .8rem;color:var(--text-2);">Via script — préfixe [AJ] + présence / erreur</td>
             </tr>
             <tr style="border-bottom:none;">
               <td colspan="3" style="padding:.25rem .8rem .25rem .8rem;font-size:.72rem;color:var(--text-2);background:rgba(255,255,255,.03);">
-                Script <code style="color:var(--text-2);">p1_master_gestion_clim</code> — prefix <code style="color:var(--text-2);">[AJ]</code> si jour, <code style="color:var(--text-2);">[AN]</code> si nuit — titres : <code style="color:var(--text-2);">[AX] ATTENTE CAPTEURS</code> / <code style="color:var(--text-2);">[AX] CLIM JOUR/NUIT COUPÉE</code> / <code style="color:var(--text-2);">[AX] sensor.presence</code>
+                Script <code style="color:var(--text-2);">p1_master_gestion_clim</code> — prefix <code style="color:var(--text-2);">[AJ]</code> si jour, <code style="color:var(--text-2);">[AN]</code> si nuit — titres : <code style="color:var(--text-2);">[AX] ATTENTE CAPTEURS</code> / <code style="color:var(--text-2);">[AX] CLIM JOUR/NUIT COUPÉE</code> / <code style="color:var(--text-2);">[AX] sensor.presence</code><button class="btn-clickme" onclick="openScriptModal()" type="button">👉 clique-moi 👈</button>
               </td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
@@ -2311,11 +2312,6 @@ input_datetime: !include input_datetime.yaml</pre>
               <td style="padding:.5rem .8rem;color:var(--text);">(J) DEBUG Notif. message clim <em style="font-size:.7rem;">(désactivé)</em></td>
               <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">Notif. Mobile debug</td>
               <td style="padding:.5rem .8rem;color:var(--text-2);">Watchdog msg clim</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border);">
-              <td colspan="3" style="padding:.4rem .8rem .6rem .8rem;text-align:center;background:rgba(255,255,255,.03);">
-                <button class="btn-clickme" onclick="openScriptModal()" type="button">👉 clique-moi, voir le script complet (A)+(B) 👈</button>
-              </td>
             </tr>
             <!-- P1 CUISINE -->
             <tr style="border-bottom:1px solid var(--border);background:rgba(61,136,86,.04);">
