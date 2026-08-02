@@ -3442,126 +3442,135 @@ input_datetime: !include input_datetime.yaml</pre>
     </div>
 
     <div class="conv-section reveal">
-      <h3 class="conv-section-h">5 — Bonus : templates YAML reels</h3>
-      <p class="conv-section-sub">Des templates qui decident, calculent et s'adaptent — pas de simples conversions d'unites. Ce que tout ce process (audit MD5, slash commands, sync_index) protege concretement.</p>
+      <h3 class="conv-section-h">5 — Bonus : YAML Intelligents</h3>
+      <p class="conv-section-sub">Des templates qui decident, calculent et s'adaptent — pas de simples conversions d'unites.</p>
 
-      <div style="display:flex;flex-direction:column;gap:.7rem;max-width:520px;">
-        <button type="button" class="btn-tree" onclick="openTreeModal('bonus_mode_clim')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--green);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;animation-delay:0s;">🧠 Bascule Mode Clim <span class="btn-tap-hint" style="animation-delay:0s;">👆</span></button>
-        <button type="button" class="btn-tree" onclick="openTreeModal('bonus_cible_confort')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--amber);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;animation-delay:.66s;">🧠 Courbe Cible Confort <span class="btn-tap-hint" style="animation-delay:.66s;">👆</span></button>
-        <button type="button" class="btn-tree" onclick="openTreeModal('bonus_labels_eclairage')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--green);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;animation-delay:1.33s;">🧠 Labels Eclairage <span class="btn-tap-hint" style="animation-delay:1.33s;">👆</span></button>
-        <button type="button" class="btn-tree" onclick="openTreeModal('bonus_visibility_eco')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--amber);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;animation-delay:0s;">🧠 Visibility eCO <span class="btn-tap-hint" style="animation-delay:0s;">👆</span></button>
-        <button type="button" class="btn-tree" onclick="openTreeModal('bonus_mode_absence')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--green);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;animation-delay:.66s;">🧠 Mode Absence <span class="btn-tap-hint" style="animation-delay:.66s;">👆</span></button>
-      </div>
-    </div>
-
-    <!-- BONUS TEMPLATES (contenu deplace dans modal) -->
-    <div style="display:none;">
-      <div id="tree-src-bonus-mode-clim">
-        <h4 style="font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:10px;">Bascule automatique <code>heat / off / cool</code></h4>
-        <p style="font-size:.85rem;color:var(--text-2);line-height:1.8;">La T° exterieure pilote le mode via <strong>deux sensors de seuil</strong> — pas de valeurs hardcodees. <code>seuil_non_chauffage</code> (18°C) et <code>seuil_non_clim</code> (27°C) sont des sensors HA modifiables sans toucher au template. Le fallback <code>-999</code> detecte une sonde hors ligne et retourne <code>unknown</code> au lieu de forcer un mode errone.</p>
-        <div class="intel-outcome" style="margin:.8rem 0 1.2rem;"><strong>✓ Resultat</strong>Toutes les automations clim lisent <code>sensor.mode_ete_hiver</code> — un seul point de verite. Modifier le seuil = changer la valeur d'un sensor, le template suit automatiquement.</div>
-        <div class="yaml-example">
-          <div class="yaml-badge">P1_01_MASTER · reel</div>
-          <div><span class="y-comment"># --- mode_ete_hiver ---</span></div>
-          <div><span class="y-key">- name:</span> <span class="y-str">"Mode Ete/Hiver"</span></div>
-          <div><span class="y-key">  unique_id:</span> <span class="y-slug">mode_ete_hiver</span></div>
-          <div><span class="y-key">  state:</span> <span class="y-val">&gt;</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">t   = states('sensor.th_balcon_nord_temperature') | float(-999) %}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">nc  = states('sensor.seuil_non_chauffage') | float(18) %}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">ncl = states('sensor.seuil_non_clim') | float(28) %}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">if</span>   <span class="y-val">t == -999  %}</span> <span class="y-val">unknown</span>  <span class="y-comment">{# sonde hors ligne #}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">t &lt; nc    %}</span> <span class="y-val">heat</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">t &lt; ncl   %}</span> <span class="y-val">off</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">else</span>             <span class="y-str">%}</span> <span class="y-val">cool</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">endif</span>            <span class="y-str">%}</span></div>
+      <div class="reveal">
+        <div class="intel-tabs">
+          <button class="intel-tab active" data-pane="ip-clim-mode">❄️ Bascule Mode Clim</button>
+          <button class="intel-tab" data-pane="ip-clim-cible">🌡️ Courbe Cible Confort</button>
+          <button class="intel-tab" data-pane="ip-labels">💡 Labels Eclairage</button>
+          <button class="intel-tab" data-pane="ip-eco">🔌 Visibility eCO</button>
+          <button class="intel-tab" data-pane="ip-absence">🏠 Mode Absence</button>
         </div>
-      </div>
 
-      <div id="tree-src-bonus-cible-confort">
-        <h4 style="font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:10px;">Chaine thermique — 6 sensors en cascade</h4>
-        <p style="font-size:.85rem;color:var(--text-2);line-height:1.8;">La cible confort n'est <strong>pas un template unique</strong>. C'est une chaine de 6 sensors qui se lisent les uns les autres. Chaque etape a un role clair et un <code>unique_id</code> propre — auditable et debuggable individuellement. Les paliers utilisent des <strong>sensors delta</strong> (delta_1...delta_7) au lieu de valeurs hardcodees.</p>
-        <div class="intel-outcome" style="margin:.8rem 0 1.2rem;"><strong>✓ Chaine complete</strong><code>mode_ete_hiver</code> → <code>consigne_de_base</code> → <code>temperature_differentielle</code> → <code>temperature_cible</code> → <code>temperature_confort_jour</code> → <code>temperature_confort_nuit</code></div>
-        <div class="yaml-example">
-          <div class="yaml-badge">P1_01_MASTER · etape 4/6</div>
-          <div><span class="y-comment"># --- temperature_cible ---</span></div>
-          <div><span class="y-key">- name:</span> <span class="y-str">"Temperature Cible"</span></div>
-          <div><span class="y-key">  unique_id:</span> <span class="y-slug">temperature_cible</span></div>
-          <div><span class="y-key">  unit_of_measurement:</span> <span class="y-str">"°C"</span></div>
-          <div><span class="y-key">  state:</span> <span class="y-val">&gt;</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">t    = states('sensor.th_balcon_nord_temperature') | float(0) %}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">base = states('sensor.consigne_de_base') | float(18) %}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">d5   = states('sensor.delta_5') | float(5) %}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">d7   = states('sensor.delta_7') | float(7) %}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">if</span>   <span class="y-val">t &lt; 12 %}</span> <span class="y-val">{{ (base + 1) | int }}</span>   <span class="y-comment">{# froid → +1 #}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">t &gt; 40 %}</span> <span class="y-val">{{ (t - d7)   | int }}</span>   <span class="y-comment">{# canicule #}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">t &gt; 32 %}</span> <span class="y-val">{{ (t - d5)   | int }}</span>   <span class="y-comment">{# forte chaleur #}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">else</span>         <span class="y-str">%}</span> <span class="y-val">{{ base       | int }}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">endif</span>        <span class="y-str">%}</span></div>
+        <div id="ip-clim-mode" class="intel-pane active">
+          <div class="intel-desc">
+            <h4>Bascule automatique <code>heat / off / cool</code></h4>
+            <p>La T° exterieure pilote le mode via <strong>deux sensors de seuil</strong> — pas de valeurs hardcodees. <code>seuil_non_chauffage</code> (18°C) et <code>seuil_non_clim</code> (27°C) sont des sensors HA modifiables sans toucher au template. Le fallback <code>-999</code> detecte une sonde hors ligne et retourne <code>unknown</code> au lieu de forcer un mode errone.</p>
+            <div class="intel-outcome"><strong>✓ Resultat</strong>Toutes les automations clim lisent <code>sensor.mode_ete_hiver</code> — un seul point de verite. Modifier le seuil = changer la valeur d'un sensor, le template suit automatiquement.</div>
+          </div>
+          <div class="yaml-example">
+            <div class="yaml-badge">P1_01_MASTER · reel</div>
+            <div><span class="y-comment"># --- mode_ete_hiver ---</span></div>
+            <div><span class="y-key">- name:</span> <span class="y-str">"Mode Ete/Hiver"</span></div>
+            <div><span class="y-key">  unique_id:</span> <span class="y-slug">mode_ete_hiver</span></div>
+            <div><span class="y-key">  state:</span> <span class="y-val">&gt;</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">t   = states('sensor.th_balcon_nord_temperature') | float(-999) %}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">nc  = states('sensor.seuil_non_chauffage') | float(18) %}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">ncl = states('sensor.seuil_non_clim') | float(28) %}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">if</span>   <span class="y-val">t == -999  %}</span> <span class="y-val">unknown</span>  <span class="y-comment">{# sonde hors ligne #}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">t &lt; nc    %}</span> <span class="y-val">heat</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">t &lt; ncl   %}</span> <span class="y-val">off</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">else</span>             <span class="y-str">%}</span> <span class="y-val">cool</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">endif</span>            <span class="y-str">%}</span></div>
+          </div>
         </div>
-      </div>
 
-      <div id="tree-src-bonus-labels-eclairage">
-        <h4 style="font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:10px;">Labels semantiques — groupes Hue, pas lampes individuelles</h4>
-        <p style="font-size:.85rem;color:var(--text-2);line-height:1.8;">Le template lit des <strong>groupes Hue natifs</strong> (<code>light.salon</code>, <code>light.table</code>), pas les ampoules une a une. 4 etats propres : <code>Allume</code> / <code>Salon</code> / <code>Table</code> / <code>Eteint</code>. Pour le bureau : 3 sensors imbriquest (<code>lumiere_bureau_etat</code>, <code>lumiere_ecran_etat</code>, <code>bureau_etat</code>) avec 6+ etats selon la combinaison PC / Hue Sync / lampes.</p>
-        <div class="intel-outcome" style="margin:.8rem 0 1.2rem;"><strong>✓ Resultat</strong>"Salon" = salon allume, table eteinte. "Table" = table seule. Bureau : "Allume &amp; Sync." = lampes ON + Hue Sync Box active. Dashboard toujours coherent avec la realite physique.</div>
-        <div class="yaml-example">
-          <div class="yaml-badge">etats_status.yaml · reel</div>
-          <div><span class="y-comment"># --- lumiere_salon_etat ---</span></div>
-          <div><span class="y-key">- name:</span> <span class="y-str">"Lumiere Salon Etat"</span></div>
-          <div><span class="y-key">  unique_id:</span> <span class="y-slug">lumiere_salon_etat</span></div>
-          <div><span class="y-key">  state:</span> <span class="y-val">&gt;</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">if</span>   <span class="y-val">is_state('light.salon','on') and is_state('light.table','on')  %}</span> <span class="y-val">Allume</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">is_state('light.salon','off') and is_state('light.table','off') %}</span> <span class="y-val">Eteint</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">is_state('light.salon','on') and is_state('light.table','off') %}</span> <span class="y-val">Salon</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">is_state('light.salon','off') and is_state('light.table','on') %}</span> <span class="y-val">Table</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">else</span> <span class="y-str">%}</span> <span class="y-val">erreur</span> <span class="y-str">{% endif %}</span></div>
-          <div style="margin-top:8px"><span class="y-comment"># Bureau : 3 sensors imbriquest, 6 etats possibles :</span></div>
-          <div><span class="y-comment"># Eco. / Ecran / Allume / Allume &amp; Sync. / Synchro. / Eteint</span></div>
+        <div id="ip-clim-cible" class="intel-pane">
+          <div class="intel-desc">
+            <h4>Chaine thermique — 6 sensors en cascade</h4>
+            <p>La cible confort n'est <strong>pas un template unique</strong>. C'est une chaine de 6 sensors qui se lisent les uns les autres. Chaque etape a un role clair et un <code>unique_id</code> propre — auditable et debuggable individuellement. Les paliers utilisent des <strong>sensors delta</strong> (delta_1...delta_7) au lieu de valeurs hardcodees.</p>
+            <div class="intel-outcome"><strong>✓ Chaine complete</strong><code>mode_ete_hiver</code> → <code>consigne_de_base</code> → <code>temperature_differentielle</code> → <code>temperature_cible</code> → <code>temperature_confort_jour</code> → <code>temperature_confort_nuit</code></div>
+          </div>
+          <div class="yaml-example">
+            <div class="yaml-badge">P1_01_MASTER · etape 4/6</div>
+            <div><span class="y-comment"># --- temperature_cible ---</span></div>
+            <div><span class="y-key">- name:</span> <span class="y-str">"Temperature Cible"</span></div>
+            <div><span class="y-key">  unique_id:</span> <span class="y-slug">temperature_cible</span></div>
+            <div><span class="y-key">  unit_of_measurement:</span> <span class="y-str">"°C"</span></div>
+            <div><span class="y-key">  state:</span> <span class="y-val">&gt;</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">t    = states('sensor.th_balcon_nord_temperature') | float(0) %}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">base = states('sensor.consigne_de_base') | float(18) %}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">d5   = states('sensor.delta_5') | float(5) %}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">d7   = states('sensor.delta_7') | float(7) %}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">if</span>   <span class="y-val">t &lt; 12 %}</span> <span class="y-val">{{ (base + 1) | int }}</span>   <span class="y-comment">{# froid → +1 #}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">t &gt; 40 %}</span> <span class="y-val">{{ (t - d7)   | int }}</span>   <span class="y-comment">{# canicule #}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">t &gt; 32 %}</span> <span class="y-val">{{ (t - d5)   | int }}</span>   <span class="y-comment">{# forte chaleur #}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">else</span>         <span class="y-str">%}</span> <span class="y-val">{{ base       | int }}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">endif</span>        <span class="y-str">%}</span></div>
+          </div>
         </div>
-      </div>
 
-      <div id="tree-src-bonus-visibility-eco">
-        <h4 style="font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:10px;">Chaine P4 → Absence → Switch → Card disparait</h4>
-        <p style="font-size:.85rem;color:var(--text-2);line-height:1.8;">La carte Ecran (Hue Play) disparait du dashboard quand <code>switch.ecran_p_c_3_play_hue = off</code>. Ce switch est coupe par une <strong>automation d'absence</strong> declenchee depuis <code>binary_sensor.presence_maison</code> (P4). La carte Tetes de Lit + son heading entier disparaissent de la meme facon via <code>switch.prise_tete_de_lit_chambre</code>.</p>
-        <p style="font-size:.85rem;color:var(--text-2);line-height:1.8;margin-top:8px">P3 et P4 restent dans des fichiers YAML <strong>strictement separes</strong> — c'est uniquement la conditional card du dashboard qui croise les poles.</p>
-        <div class="intel-outcome" style="margin:.8rem 0 1.2rem;"><strong>✓ Chaine complete</strong><code>P4 presence_maison = Absent</code> → automation → switch OFF → conditional card → carte masquee. En parallele : <code>sensor.lumiere_ecran_etat</code> passe a <code>Eco.</code> dans le badge Bureau.</div>
-        <div class="yaml-example">
-          <div class="yaml-badge">Dashboard L3C1 · reel</div>
-          <div><span class="y-comment"># Carte Ecran — visible UNIQUEMENT si Hue Sync Box ON</span></div>
-          <div><span class="y-key">type:</span> <span class="y-val">conditional</span></div>
-          <div><span class="y-key">conditions:</span></div>
-          <div><span class="y-str">  - condition:</span> <span class="y-val">state</span></div>
-          <div><span class="y-key">    entity:</span> <span class="y-val">switch.ecran_p_c_3_play_hue</span>  <span class="y-comment"># Hue Play Sync Box</span></div>
-          <div><span class="y-key">    state:</span> <span class="y-str">"on"</span></div>
-          <div><span class="y-comment"># switch OFF → carte masquee (etat "Eco." dans badge)</span></div>
-          <div style="margin-top:8px"><span class="y-comment"># Heading Tetes de Lit — visibility si prise ON</span></div>
-          <div><span class="y-key">visibility:</span></div>
-          <div><span class="y-str">  - condition:</span> <span class="y-val">state</span></div>
-          <div><span class="y-key">    entity:</span> <span class="y-val">switch.prise_tete_de_lit_chambre</span></div>
-          <div><span class="y-key">    state:</span> <span class="y-str">"on"</span></div>
-          <div style="margin-top:8px"><span class="y-comment"># P4 absence → automation coupe ces 2 switches → 2 cartes disparaissent</span></div>
+        <div id="ip-labels" class="intel-pane">
+          <div class="intel-desc">
+            <h4>Labels semantiques — groupes Hue, pas lampes individuelles</h4>
+            <p>Le template lit des <strong>groupes Hue natifs</strong> (<code>light.salon</code>, <code>light.table</code>), pas les ampoules une a une. 4 etats propres : <code>Allume</code> / <code>Salon</code> / <code>Table</code> / <code>Eteint</code>. Pour le bureau : 3 sensors imbriquest (<code>lumiere_bureau_etat</code>, <code>lumiere_ecran_etat</code>, <code>bureau_etat</code>) avec 6+ etats selon la combinaison PC / Hue Sync / lampes.</p>
+            <div class="intel-outcome"><strong>✓ Resultat</strong>"Salon" = salon allume, table eteinte. "Table" = table seule. Bureau : "Allume &amp; Sync." = lampes ON + Hue Sync Box active. Dashboard toujours coherent avec la realite physique.</div>
+          </div>
+          <div class="yaml-example">
+            <div class="yaml-badge">etats_status.yaml · reel</div>
+            <div><span class="y-comment"># --- lumiere_salon_etat ---</span></div>
+            <div><span class="y-key">- name:</span> <span class="y-str">"Lumiere Salon Etat"</span></div>
+            <div><span class="y-key">  unique_id:</span> <span class="y-slug">lumiere_salon_etat</span></div>
+            <div><span class="y-key">  state:</span> <span class="y-val">&gt;</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">if</span>   <span class="y-val">is_state('light.salon','on') and is_state('light.table','on')  %}</span> <span class="y-val">Allume</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">is_state('light.salon','off') and is_state('light.table','off') %}</span> <span class="y-val">Eteint</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">is_state('light.salon','on') and is_state('light.table','off') %}</span> <span class="y-val">Salon</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">is_state('light.salon','off') and is_state('light.table','on') %}</span> <span class="y-val">Table</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">else</span> <span class="y-str">%}</span> <span class="y-val">erreur</span> <span class="y-str">{% endif %}</span></div>
+            <div style="margin-top:8px"><span class="y-comment"># Bureau : 3 sensors imbriquest, 6 etats possibles :</span></div>
+            <div><span class="y-comment"># Eco. / Ecran / Allume / Allume &amp; Sync. / Synchro. / Eteint</span></div>
+          </div>
         </div>
-      </div>
 
-      <div id="tree-src-bonus-mode-absence">
-        <h4 style="font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:10px;">Consignes eco quand il n'y a personne</h4>
-        <p style="font-size:.85rem;color:var(--text-2);line-height:1.8;">Meme logique de sensors corriges que la chaine confort, mais pour le mode absence. <code>temperature_eco_hiver_corrige</code> part d'une base de <strong>17°C</strong> et remonte a 18°C si T°ext &lt; 12°C, 19°C si T°ext &lt; 8°C. <code>temperature_eco_ete_corrige</code> fait l'inverse en ete. Ces deux sensors sont lus par le script <code>p1_master_gestion_clim.yaml</code> quand <code>sensor.groupe</code> vaut <code>groupe_1</code> — personne a la maison.</p>
-        <div class="intel-outcome" style="margin:.8rem 0 1.2rem;"><strong>✓ Chaine complete</strong><code>sensor.groupe = groupe_1</code> (Absent) → script lit <code>temperature_eco_hiver_corrige</code> / <code>_eco_ete_corrige</code> → consigne eco appliquee aux climatiseurs, pas besoin d'automation dediee en plus.</div>
-        <div class="yaml-example">
-          <div class="yaml-badge">P1_01_MASTER · reel</div>
-          <div><span class="y-comment"># --- temperature_eco_hiver_corrige ---</span></div>
-          <div><span class="y-key">- name:</span> <span class="y-str">"Temperature eCO. Hiver Corrige"</span></div>
-          <div><span class="y-key">  unique_id:</span> <span class="y-slug">temperature_eco_hiver_corrige</span></div>
-          <div><span class="y-key">  state:</span> <span class="y-val">&gt;</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">eco   = states('sensor.temperature_eco_hiver') | float(17) %}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">if</span>   <span class="y-val">t_ext &lt; 8   %}</span> <span class="y-val">{{ eco + 2 }}</span>  <span class="y-comment">{# -&gt; 19°C #}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">t_ext &lt; 12  %}</span> <span class="y-val">{{ eco + 1 }}</span>  <span class="y-comment">{# -&gt; 18°C #}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">else</span>             <span class="y-str">%}</span> <span class="y-val">{{ eco }}</span>      <span class="y-comment">{# 17°C #}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">endif</span>            <span class="y-str">%}</span></div>
-          <div style="margin-top:8px"><span class="y-comment"># --- temperature_eco_ete_corrige (symetrique, base ~27°C) ---</span></div>
-          <div><span class="y-key">- unique_id:</span> <span class="y-slug">temperature_eco_ete_corrige</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">if</span> <span class="y-val">t_ext &gt;= 28 %}</span> <span class="y-val">{{ eco }}</span> <span class="y-str">{%</span> <span class="y-key">else</span> <span class="y-str">%}</span> <span class="y-val">{{ eco - 1 }}</span> <span class="y-str">{% endif %}</span></div>
+        <div id="ip-eco" class="intel-pane">
+          <div class="intel-desc">
+            <h4>Chaine P4 → Absence → Switch → Card disparait</h4>
+            <p>La carte Ecran (Hue Play) disparait du dashboard quand <code>switch.ecran_p_c_3_play_hue = off</code>. Ce switch est coupe par une <strong>automation d'absence</strong> declenchee depuis <code>binary_sensor.presence_maison</code> (P4). La carte Tetes de Lit + son heading entier disparaissent de la meme facon via <code>switch.prise_tete_de_lit_chambre</code>.</p>
+            <p style="margin-top:8px">P3 et P4 restent dans des fichiers YAML <strong>strictement separes</strong> — c'est uniquement la conditional card du dashboard qui croise les poles.</p>
+            <div class="intel-outcome"><strong>✓ Chaine complete</strong><code>P4 presence_maison = Absent</code> → automation → switch OFF → conditional card → carte masquee. En parallele : <code>sensor.lumiere_ecran_etat</code> passe a <code>Eco.</code> dans le badge Bureau.</div>
+          </div>
+          <div class="yaml-example">
+            <div class="yaml-badge">Dashboard L3C1 · reel</div>
+            <div><span class="y-comment"># Carte Ecran — visible UNIQUEMENT si Hue Sync Box ON</span></div>
+            <div><span class="y-key">type:</span> <span class="y-val">conditional</span></div>
+            <div><span class="y-key">conditions:</span></div>
+            <div><span class="y-str">  - condition:</span> <span class="y-val">state</span></div>
+            <div><span class="y-key">    entity:</span> <span class="y-val">switch.ecran_p_c_3_play_hue</span>  <span class="y-comment"># Hue Play Sync Box</span></div>
+            <div><span class="y-key">    state:</span> <span class="y-str">"on"</span></div>
+            <div><span class="y-comment"># switch OFF → carte masquee (etat "Eco." dans badge)</span></div>
+            <div style="margin-top:8px"><span class="y-comment"># Heading Tetes de Lit — visibility si prise ON</span></div>
+            <div><span class="y-key">visibility:</span></div>
+            <div><span class="y-str">  - condition:</span> <span class="y-val">state</span></div>
+            <div><span class="y-key">    entity:</span> <span class="y-val">switch.prise_tete_de_lit_chambre</span></div>
+            <div><span class="y-key">    state:</span> <span class="y-str">"on"</span></div>
+            <div style="margin-top:8px"><span class="y-comment"># P4 absence → automation coupe ces 2 switches → 2 cartes disparaissent</span></div>
+          </div>
+        </div>
+
+        <div id="ip-absence" class="intel-pane">
+          <div class="intel-desc">
+            <h4>Consignes eco quand il n'y a personne</h4>
+            <p>Meme logique de sensors corriges que la chaine confort, mais pour le mode absence. <code>temperature_eco_hiver_corrige</code> part d'une base de <strong>17°C</strong> et remonte a 18°C si T°ext &lt; 12°C, 19°C si T°ext &lt; 8°C. <code>temperature_eco_ete_corrige</code> fait l'inverse en ete. Ces deux sensors sont lus par le script <code>p1_master_gestion_clim.yaml</code> quand <code>sensor.groupe</code> vaut <code>groupe_1</code> — personne a la maison.</p>
+            <div class="intel-outcome"><strong>✓ Chaine complete</strong><code>sensor.groupe = groupe_1</code> (Absent) → script lit <code>temperature_eco_hiver_corrige</code> / <code>_eco_ete_corrige</code> → consigne eco appliquee aux climatiseurs, pas besoin d'automation dediee en plus.</div>
+          </div>
+          <div class="yaml-example">
+            <div class="yaml-badge">P1_01_MASTER · reel</div>
+            <div><span class="y-comment"># --- temperature_eco_hiver_corrige ---</span></div>
+            <div><span class="y-key">- name:</span> <span class="y-str">"Temperature eCO. Hiver Corrige"</span></div>
+            <div><span class="y-key">  unique_id:</span> <span class="y-slug">temperature_eco_hiver_corrige</span></div>
+            <div><span class="y-key">  state:</span> <span class="y-val">&gt;</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">eco   = states('sensor.temperature_eco_hiver') | float(17) %}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">if</span>   <span class="y-val">t_ext &lt; 8   %}</span> <span class="y-val">{{ eco + 2 }}</span>  <span class="y-comment">{# -&gt; 19°C #}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">t_ext &lt; 12  %}</span> <span class="y-val">{{ eco + 1 }}</span>  <span class="y-comment">{# -&gt; 18°C #}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">else</span>             <span class="y-str">%}</span> <span class="y-val">{{ eco }}</span>      <span class="y-comment">{# 17°C #}</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">endif</span>            <span class="y-str">%}</span></div>
+            <div style="margin-top:8px"><span class="y-comment"># --- temperature_eco_ete_corrige (symetrique, base ~27°C) ---</span></div>
+            <div><span class="y-key">- unique_id:</span> <span class="y-slug">temperature_eco_ete_corrige</span></div>
+            <div><span class="y-str">    {%</span> <span class="y-key">if</span> <span class="y-val">t_ext &gt;= 28 %}</span> <span class="y-val">{{ eco }}</span> <span class="y-str">{%</span> <span class="y-key">else</span> <span class="y-str">%}</span> <span class="y-val">{{ eco - 1 }}</span> <span class="y-str">{% endif %}</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -4200,12 +4209,7 @@ const TREES = {
   md:                { title: 'dashboard_docs_MD/ — arborescence réelle (2026-08-02)',       srcId: 'tree-src-md' },
   automations_yaml:  { title: 'docs_automations_YAML/ — arborescence réelle (2026-08-02)',   srcId: 'tree-src-automations-yaml', noteId: 'tree-note-automations-yaml' },
   automations_md:    { title: 'docs_automations_MD/ — arborescence réelle (2026-08-02)',     srcId: 'tree-src-automations-md',   noteId: 'tree-note-automations-md' },
-  dependances:       { title: 'DEPENDANCES_GLOBALES.md — extrait réel (2026-08-02)',          srcId: 'tree-src-dependances',      noteId: 'tree-note-dependances' },
-  bonus_mode_clim:        { title: 'Bascule Mode Clim — template réel',      srcId: 'tree-src-bonus-mode-clim' },
-  bonus_cible_confort:    { title: 'Courbe Cible Confort — template réel',   srcId: 'tree-src-bonus-cible-confort' },
-  bonus_labels_eclairage: { title: 'Labels Eclairage — template réel',       srcId: 'tree-src-bonus-labels-eclairage' },
-  bonus_visibility_eco:   { title: 'Visibility eCO — template réel',         srcId: 'tree-src-bonus-visibility-eco' },
-  bonus_mode_absence:     { title: 'Mode Absence — template réel',           srcId: 'tree-src-bonus-mode-absence' }
+  dependances:       { title: 'DEPENDANCES_GLOBALES.md — extrait réel (2026-08-02)',          srcId: 'tree-src-dependances',      noteId: 'tree-note-dependances' }
 };
 function openTreeModal(key) {
   const t = TREES[key];
