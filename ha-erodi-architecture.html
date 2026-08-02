@@ -4623,7 +4623,7 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     vgClimIdx = 1;
     vgClimApplyBoth(VG_CLIM_SCENARIOS[vgClimIdx]);
     vgClimTimer = setInterval(function(){
-      vgClimIdx = (vgClimIdx % (VG_CLIM_SCENARIOS.length - 1)) + 1;
+      vgClimIdx = (vgClimIdx + 1) % VG_CLIM_SCENARIOS.length; // parcourt les 4 etats, Cool inclus
       vgClimApplyBoth(VG_CLIM_SCENARIOS[vgClimIdx]);
     }, 1600);
   }
