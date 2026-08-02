@@ -1497,7 +1497,8 @@ footer a:hover { color:var(--green); }
       <h3 class="conv-section-h" style="margin-bottom:.3rem;">Voila comment sont organises <span style="color:var(--green)">Sensors</span> &middot; <span style="color:#b45309">Templates</span> &middot; <span style="color:#03a9f4">Utility Meter</span></h3>
       <p style="font-size:0.82rem;color:var(--text-2);margin:6px 0 0">100% eclate - zero fichier monolithique. Chaque fichier = 1 responsabilite, 1 pole, 1 dossier.</p>
       <div style="display:flex;gap:.7rem;margin:1rem 0 0;flex-wrap:wrap;">
-        <button type="button" class="btn-tree" onclick="openTreeModal('config_yaml')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--green);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;">👁 Aperçu — voir l'arborescence <span class="btn-tap-hint" style="animation-delay:0s;">👆</span></button>
+        <button type="button" class="btn-tree" onclick="openTreeModal('config_yaml')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--green);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;">📁 .yaml — voir l'arborescence <span class="btn-tap-hint" style="animation-delay:0s;">👆</span></button>
+        <button type="button" class="btn-tree" onclick="openTreeModal('config_md')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--amber);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;">📄 .md — voir l'arborescence <span class="btn-tap-hint" style="animation-delay:.66s;">👆</span></button>
       </div>
     </div>
 
@@ -1647,6 +1648,13 @@ input_datetime: !include input_datetime.yaml</pre>
 ├── scripts.yaml
 └── sql.yaml</pre>
       <p id="tree-note-config-yaml" style="display:none;font-size:.78rem;color:var(--text-2);line-height:1.75;margin-top:.7rem;">Arborescence à 2 niveaux (dossiers de pôle uniquement) — <code>templates/</code> contient à lui seul 46 fichiers répartis par pôle.</p>
+    </div>
+
+    <!-- ARBO CONFIG MD (contenu deplace dans modal) -->
+    <div style="display:none;">
+      <pre id="tree-src-config-md" style="display:none;">config_system_MD/
+└── configuration.md</pre>
+      <p id="tree-note-config-md" style="display:none;font-size:.78rem;color:var(--text-2);line-height:1.75;margin-top:.7rem;">Contrairement aux automations et au dashboard, la doc <code>.md</code> de Config YAML n'est pas éclatée par fichier — un seul <code>configuration.md</code> couvre l'ensemble.</p>
     </div>
 
     </div>
@@ -3947,6 +3955,7 @@ function closeScriptModal(e) {
 
 const TREES = {
   config_yaml:       { title: 'config_system_YAML/ — arborescence réelle (2026-08-02)',      srcId: 'tree-src-config-yaml', noteId: 'tree-note-config-yaml' },
+  config_md:         { title: 'config_system_MD/ — arborescence réelle (2026-08-02)',        srcId: 'tree-src-config-md', noteId: 'tree-note-config-md' },
   yaml:              { title: 'dashboard_docs_YAML/ — arborescence réelle (2026-08-02)',    srcId: 'tree-src-yaml' },
   md:                { title: 'dashboard_docs_MD/ — arborescence réelle (2026-08-02)',       srcId: 'tree-src-md' },
   automations_yaml:  { title: 'docs_automations_YAML/ — arborescence réelle (2026-08-02)',   srcId: 'tree-src-automations-yaml', noteId: 'tree-note-automations-yaml' },
