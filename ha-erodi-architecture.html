@@ -4446,7 +4446,7 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
 
   // ----- L1C3 : Commande Clim -----
   function vgClimPieceColor(power, mode){
-    if (mode === 'fan') return '#00FF00';
+    // Choix Eric : Fan utilise le meme vert que Cool/Heat allumes (pas de vert vif distinct)
     if (power === 'on') return 'lightgreen';
     if (power === 'off') return 'white';
     return '#aaaaaa';
