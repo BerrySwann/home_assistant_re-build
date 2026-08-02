@@ -3359,7 +3359,6 @@ input_datetime: !include input_datetime.yaml</pre>
         <button class="intel-tab" data-pane="ip-clim-cible">🌡️ Courbe Cible Confort</button>
         <button class="intel-tab" data-pane="ip-labels">💡 Labels Eclairage</button>
         <button class="intel-tab" data-pane="ip-eco">🔌 Visibility eCO</button>
-        <button class="intel-tab" data-pane="ip-absence">🏠 Mode Absence</button>
       </div>
 
       <div id="ip-clim-mode" class="intel-pane active">
@@ -3456,30 +3455,6 @@ input_datetime: !include input_datetime.yaml</pre>
           <div style="margin-top:8px"><span class="y-comment"># P4 absence → automation coupe ces 2 switches → 2 cartes disparaissent</span></div>
         </div>
       </div>
-
-      <div id="ip-absence" class="intel-pane">
-        <div class="intel-desc">
-          <h4>Consignes eco quand il n'y a personne</h4>
-          <p>Meme logique de sensors corriges que la chaine confort, mais pour le mode absence. <code>temperature_eco_hiver_corrige</code> part d'une base de <strong>17°C</strong> et remonte a 18°C si T°ext &lt; 12°C, 19°C si T°ext &lt; 8°C. <code>temperature_eco_ete_corrige</code> fait l'inverse en ete. Ces deux sensors sont lus par le script <code>p1_master_gestion_clim.yaml</code> (visible plus haut sur cette page) quand <code>sensor.groupe</code> vaut <code>groupe_1</code> — personne a la maison.</p>
-          <div class="intel-outcome"><strong>✓ Chaine complete</strong><code>sensor.groupe = groupe_1</code> (Absent) → script lit <code>temperature_eco_hiver_corrige</code> / <code>_eco_ete_corrige</code> → consigne eco appliquee aux climatiseurs, pas besoin d'automation dediee en plus.</div>
-        </div>
-        <div class="yaml-example">
-          <div class="yaml-badge">P1_01_MASTER · reel</div>
-          <div><span class="y-comment"># --- temperature_eco_hiver_corrige ---</span></div>
-          <div><span class="y-key">- name:</span> <span class="y-str">"Temperature eCO. Hiver Corrige"</span></div>
-          <div><span class="y-key">  unique_id:</span> <span class="y-slug">temperature_eco_hiver_corrige</span></div>
-          <div><span class="y-key">  state:</span> <span class="y-val">&gt;</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">eco   = states('sensor.temperature_eco_hiver') | float(17) %}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">if</span>   <span class="y-val">t_ext &lt; 8   %}</span> <span class="y-val">{{ eco + 2 }}</span>  <span class="y-comment">{# -&gt; 19°C #}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">t_ext &lt; 12  %}</span> <span class="y-val">{{ eco + 1 }}</span>  <span class="y-comment">{# -&gt; 18°C #}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">else</span>             <span class="y-str">%}</span> <span class="y-val">{{ eco }}</span>      <span class="y-comment">{# 17°C #}</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">endif</span>            <span class="y-str">%}</span></div>
-          <div style="margin-top:8px"><span class="y-comment"># --- temperature_eco_ete_corrige (symetrique, base ~27°C) ---</span></div>
-          <div><span class="y-key">- unique_id:</span> <span class="y-slug">temperature_eco_ete_corrige</span></div>
-          <div><span class="y-str">    {%</span> <span class="y-key">if</span> <span class="y-val">t_ext &gt;= 28 %}</span> <span class="y-val">{{ eco }}</span> <span class="y-str">{%</span> <span class="y-key">else</span> <span class="y-str">%}</span> <span class="y-val">{{ eco - 1 }}</span> <span class="y-str">{% endif %}</span></div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -3562,6 +3537,34 @@ input_datetime: !include input_datetime.yaml</pre>
           <div style="font-family:var(--fd);font-weight:700;font-size:.92rem;margin-bottom:.4rem;">4 — TODO.txt</div>
           <p style="font-size:.8rem;color:var(--text-2);line-height:1.7;">Le backlog vit dans un seul fichier texte versionne, jamais dans la memoire d'une conversation. Ce qui n'est pas ecrit la est perdu a la fermeture de la session.</p>
         </div>
+      </div>
+    </div>
+
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">5 — Bonus : mode absence</h3>
+      <p class="conv-section-sub">Un exemple concret de ce que tout ce process protege — pris dans <code>P1_01_MASTER</code>, le fichier le plus critique du projet.</p>
+
+      <div class="yaml-example">
+        <div class="yaml-badge">P1_01_MASTER · reel</div>
+        <div><span class="y-comment"># --- temperature_eco_hiver_corrige ---</span></div>
+        <div><span class="y-key">- name:</span> <span class="y-str">"Temperature eCO. Hiver Corrige"</span></div>
+        <div><span class="y-key">  unique_id:</span> <span class="y-slug">temperature_eco_hiver_corrige</span></div>
+        <div><span class="y-key">  state:</span> <span class="y-val">&gt;</span></div>
+        <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}</span></div>
+        <div><span class="y-str">    {%</span> <span class="y-key">set</span> <span class="y-val">eco   = states('sensor.temperature_eco_hiver') | float(17) %}</span></div>
+        <div><span class="y-str">    {%</span> <span class="y-key">if</span>   <span class="y-val">t_ext &lt; 8   %}</span> <span class="y-val">{{ eco + 2 }}</span>  <span class="y-comment">{# -&gt; 19°C #}</span></div>
+        <div><span class="y-str">    {%</span> <span class="y-key">elif</span> <span class="y-val">t_ext &lt; 12  %}</span> <span class="y-val">{{ eco + 1 }}</span>  <span class="y-comment">{# -&gt; 18°C #}</span></div>
+        <div><span class="y-str">    {%</span> <span class="y-key">else</span>             <span class="y-str">%}</span> <span class="y-val">{{ eco }}</span>      <span class="y-comment">{# 17°C #}</span></div>
+        <div><span class="y-str">    {%</span> <span class="y-key">endif</span>            <span class="y-str">%}</span></div>
+        <div style="margin-top:8px"><span class="y-comment"># --- temperature_eco_ete_corrige (symetrique, base ~27°C) ---</span></div>
+        <div><span class="y-key">- unique_id:</span> <span class="y-slug">temperature_eco_ete_corrige</span></div>
+        <div><span class="y-str">    {%</span> <span class="y-key">if</span> <span class="y-val">t_ext &gt;= 28 %}</span> <span class="y-val">{{ eco }}</span> <span class="y-str">{%</span> <span class="y-key">else</span> <span class="y-str">%}</span> <span class="y-val">{{ eco - 1 }}</span> <span class="y-str">{% endif %}</span></div>
+      </div>
+
+      <div style="margin-top:1.2rem;">
+        <h4 style="font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:10px;">Consignes eco quand il n'y a personne</h4>
+        <p style="font-size:.85rem;color:var(--text-2);line-height:1.8;">Meme logique de sensors corriges que la chaine confort, mais pour le mode absence. <code>temperature_eco_hiver_corrige</code> part d'une base de <strong>17°C</strong> et remonte a 18°C si T°ext &lt; 12°C, 19°C si T°ext &lt; 8°C. <code>temperature_eco_ete_corrige</code> fait l'inverse en ete. Ces deux sensors sont lus par le script <code>p1_master_gestion_clim.yaml</code> quand <code>sensor.groupe</code> vaut <code>groupe_1</code> — personne a la maison.</p>
+        <div class="intel-outcome" style="margin-top:.8rem;"><strong>✓ Chaine complete</strong><code>sensor.groupe = groupe_1</code> (Absent) → script lit <code>temperature_eco_hiver_corrige</code> / <code>_eco_ete_corrige</code> → consigne eco appliquee aux climatiseurs, pas besoin d'automation dediee en plus.</div>
       </div>
     </div>
 
