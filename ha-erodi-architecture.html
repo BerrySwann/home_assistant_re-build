@@ -1180,15 +1180,15 @@ footer a:hover { color:var(--green); }
         <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L3C2 Commande eCO -->
-      <div class="vg">
+      <div class="vg" id="vg-l3c2">
         <div class="vg-title">Commande eCO.</div>
-        <div class="vg-row"><span class="vg-label">Horloge</span><span class="vg-val" style="color:#4caf50">Allume</span></div>
-        <div class="vg-row"><span class="vg-label">Salon</span><span class="vg-val" style="color:#4caf50">Allume</span></div>
-        <div class="vg-row"><span class="vg-label">TV Salon</span><span class="vg-val" style="color:#f44336">Eteint</span></div>
-        <div class="vg-row"><span class="vg-label">PC Bureau</span><span class="vg-val" style="color:#4caf50">Allume</span></div>
-        <div class="vg-row"><span class="vg-label">Play Bureau</span><span class="vg-val" style="color:#4caf50">Allume</span></div>
-        <div class="vg-row"><span class="vg-label">TV Chambre</span><span class="vg-val" style="color:#f44336">Eteint</span></div>
-        <div class="vg-row"><span class="vg-label">Tete de Lit</span><span class="vg-val" style="color:#4caf50">Allume</span></div>
+        <div class="vg-row"><span class="vg-label">Horloge</span><span class="vg-val" id="l3c2-horloge" style="color:lightgreen">Allume</span></div>
+        <div class="vg-row"><span class="vg-label">Salon</span><span class="vg-val" id="l3c2-salon" style="color:lightgreen">Allume</span></div>
+        <div class="vg-row"><span class="vg-label">TV Salon</span><span class="vg-val" id="l3c2-tvsalon" style="color:#f44336">Eteint</span></div>
+        <div class="vg-row"><span class="vg-label">PC Bureau</span><span class="vg-val" id="l3c2-pcbureau" style="color:lightgreen">Allume</span></div>
+        <div class="vg-row"><span class="vg-label">TV Chambre</span><span class="vg-val" id="l3c2-tvchambre" style="color:#f44336">Eteint</span></div>
+        <div class="vg-row"><span class="vg-label">Tete de Lit</span><span class="vg-val" id="l3c2-tetedelit" style="color:#f44336">Eteint</span></div>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L3C3 Commande Stores -->
       <div class="vg" style="display:flex;flex-direction:column">
@@ -4671,28 +4671,32 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
       bureau:  { etat:'Synchro', active:'1/2', activeColor:'#FFA500', energyEtat:'Éteint', q:0,     m:1.28 },
       sdb:     { etat:'Éteint',  active:'0/1', activeColor:'rgb(244,67,54)', q:0.053, m:4.39 },
       chambre: { etat:'Éco.',    active:'0/1', activeColor:'#FFA500', energyEtat:'Éco.', q:0.060, m:1.22 },
-      total: { q:0.327, m:15.84 } },
+      total: { q:0.327, m:15.84 },
+      prises: { horloge:'on', salon:'on', tvsalon:'off', pcbureau:'on', tvchambre:'off' } },
     { appart:  { etat:'Éteint', active:'0/2', activeColor:'rgb(244,67,54)', q:0, m:0.70 },
       salon:   { etat:'Éteint', active:'0/2', activeColor:'rgb(244,67,54)', q:0, m:6.80 },
       cuisine: { etat:'Éteint', active:'0/1', activeColor:'rgb(244,67,54)', q:0, m:1.48 },
       bureau:  { etat:'Éteint', active:'0/2', activeColor:'rgb(244,67,54)', energyEtat:'Éteint', q:0, m:1.29 },
       sdb:     { etat:'Éteint', active:'0/1', activeColor:'rgb(244,67,54)', q:0, m:4.40 },
       chambre: { etat:'Éteint', active:'0/3', activeColor:'rgb(244,67,54)', energyEtat:'Éteint', q:0, m:1.23 },
-      total: { q:0.00, m:15.90 } },
+      total: { q:0.00, m:15.90 },
+      prises: { horloge:'on', salon:'off', tvsalon:'off', pcbureau:'off', tvchambre:'off' } },
     { appart:  { etat:'Allumé', active:'2/2', activeColor:'lightgreen', q:0.045, m:0.72 },
       salon:   { etat:'Allumé', active:'2/2', activeColor:'lightgreen', q:0.890, m:7.50 },
       cuisine: { etat:'Allumé', active:'1/1', activeColor:'lightgreen', q:0.065, m:1.55 },
       bureau:  { etat:'Allumé', active:'2/2', activeColor:'lightgreen', energyEtat:'Bureau', q:0.210, m:1.45 },
       sdb:     { etat:'Allumé', active:'1/1', activeColor:'lightgreen', q:0.140, m:4.60 },
       chambre: { etat:'Allumé', active:'3/3', activeColor:'lightgreen', energyEtat:'Allumé', q:0.380, m:1.60 },
-      total: { q:1.73, m:17.42 } },
+      total: { q:1.73, m:17.42 },
+      prises: { horloge:'on', salon:'on', tvsalon:'on', pcbureau:'on', tvchambre:'on' } },
     { appart:  { etat:'Entrée',   active:'1/2', activeColor:'#FFA500',       q:0.020, m:0.705 },
       salon:   { etat:'Table',    active:'1/2', activeColor:'#FFA500',       q:0.060, m:6.85 },
       cuisine: { etat:'Éteint',   active:'0/1', activeColor:'rgb(244,67,54)', q:0,     m:1.47 },
       bureau:  { etat:'AlluSync', active:'2/2', activeColor:'#FFA500', energyEtat:'Bureau', q:0.150, m:1.40 },
       sdb:     { etat:'Allumé',   active:'1/1', activeColor:'lightgreen',     q:0.090, m:4.50 },
       chambre: { etat:'Zone G.',  active:'1/3', activeColor:'#FFA500', energyEtat:'Zone G.', q:0.035, m:1.25 },
-      total: { q:0.355, m:16.18 } }
+      total: { q:0.355, m:16.18 },
+      prises: { horloge:'on', salon:'on', tvsalon:'off', pcbureau:'off', tvchambre:'on' } }
   ];
   function applyL3C1Frame(frame){
     LAMP_ROOMS.forEach(function(room){
@@ -4718,12 +4722,34 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     var mTotEl = document.getElementById('l2c3-m-total');
     if (mTotEl) mTotEl.textContent = vgFmtKwh(frame.total.m);
   }
+  // Prise "Tete de Lit" = switch.prise_tete_de_lit_chambre, PARTAGEE avec la logique
+  // Chambre de L3C1/L2C3 : piege reel HA -> si Chambre = "Eco." la prise est OFF,
+  // sinon elle est ON (meme quand aucune bougie n'est allumee dessus).
+  function vgPriseColor(on){ return on ? 'lightgreen' : 'rgb(244,67,54)'; }
+  function vgPriseLabel(on){ return on ? 'Allume' : 'Eteint'; }
+  function applyL3C2Frame(frame){
+    var p = frame.prises;
+    var map = {
+      horloge: p.horloge, salon: p.salon, tvsalon: p.tvsalon,
+      pcbureau: p.pcbureau, tvchambre: p.tvchambre
+    };
+    Object.keys(map).forEach(function(id){
+      var on = map[id] === 'on';
+      var el = document.getElementById('l3c2-' + id);
+      if (el) { el.textContent = vgPriseLabel(on); el.style.color = vgPriseColor(on); }
+    });
+    var teteOn = frame.chambre.etat !== 'Éco.';
+    var teteEl = document.getElementById('l3c2-tetedelit');
+    if (teteEl) { teteEl.textContent = vgPriseLabel(teteOn); teteEl.style.color = vgPriseColor(teteOn); }
+  }
   var vgL2C3 = document.getElementById('vg-l2c3');
   var vgL3C1 = document.getElementById('vg-l3c1');
+  var vgL3C2 = document.getElementById('vg-l3c2');
   var vgLampHoverCount = 0, vgLampTimer = null, vgLampIdx = 1;
   function vgLampApplyBoth(frame){
     applyL3C1Frame(frame);
     applyL2C3Frame(frame);
+    applyL3C2Frame(frame);
   }
   function vgLampStart(){
     if (vgLampTimer) return;
@@ -4739,7 +4765,7 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     vgLampTimer = null;
     vgLampApplyBoth(LAMP_SCENARIOS[0]);
   }
-  [vgL2C3, vgL3C1].forEach(function(el){
+  [vgL2C3, vgL3C1, vgL3C2].forEach(function(el){
     if (!el) return;
     el.addEventListener('mouseenter', function(){
       vgLampHoverCount++;
