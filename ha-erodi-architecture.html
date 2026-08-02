@@ -1191,17 +1191,18 @@ footer a:hover { color:var(--green); }
         <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L3C3 Commande Stores -->
-      <div class="vg" style="display:flex;flex-direction:column">
+      <div class="vg" id="vg-l3c3" style="display:flex;flex-direction:column">
         <div class="vg-title">Commande Stores</div>
         <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;font-size:0.6rem;color:#fff;margin-bottom:6px;text-align:center">
             <span>Piece</span><span>Fenetres</span><span>Stores</span>
           </div>
-          <div class="vg-r3"><span class="vg-val">Salon</span><span class="vg-val" style="color:#4caf50">Ferme</span><span class="vg-val" style="color:#f44336">Ferme</span></div>
-          <div class="vg-r3"><span class="vg-val">Cuisine</span><span class="vg-val" style="color:#4caf50">Ferme</span><span></span></div>
-          <div class="vg-r3"><span class="vg-val">Bureau</span><span class="vg-val" style="color:#4caf50">Ferme</span><span class="vg-val" style="color:#f44336">Ferme</span></div>
-          <div class="vg-r3"><span class="vg-val">Chambre</span><span class="vg-val" style="color:#4caf50">Ferme</span><span></span></div>
+          <div class="vg-r3"><span class="vg-val">Salon</span><span class="vg-val" id="l3c3-f-salon" style="color:lightgreen">Ferme</span><span class="vg-val" id="l3c3-s-salon" style="color:#fff">Ferme</span></div>
+          <div class="vg-r3"><span class="vg-val">Cuisine</span><span class="vg-val" id="l3c3-f-cuisine" style="color:lightgreen">Ferme</span><span class="vg-val" id="l3c3-s-cuisine" style="color:#fff">-</span></div>
+          <div class="vg-r3"><span class="vg-val">Bureau</span><span class="vg-val" id="l3c3-f-bureau" style="color:lightgreen">Ferme</span><span class="vg-val" id="l3c3-s-bureau" style="color:#fff">Ferme</span></div>
+          <div class="vg-r3"><span class="vg-val">Chambre</span><span class="vg-val" id="l3c3-f-chambre" style="color:lightgreen">Ferme</span><span class="vg-val" id="l3c3-s-chambre" style="color:#fff">-</span></div>
         </div>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <div class="row-label">L4 &mdash; Reseau &amp; Systeme</div>
       <!-- L4C1 Proxmox -->
@@ -4776,6 +4777,56 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
       if (vgLampHoverCount === 0) vgLampStop();
     });
   });
+
+  // --- L3C3 Commande Stores ---
+  // binary_sensor.contact_fenetre_*_sonoff_contact : on=Ouvert(rouge) / off=Ferme(lightgreen) / autre=N/A(gris)
+  // sensor.store_salon_status et sensor.store_bureau_status : texte brut (sans couleur, blanc) ; Cuisine/Chambre n'ont pas de sensor store reel -> '-'
+  var L3C3_ROOMS = ['salon', 'cuisine', 'bureau', 'chambre'];
+  var L3C3_SCENARIOS = [
+    { salon:{fenetre:'off',store:'Ferme'}, cuisine:{fenetre:'off',store:null}, bureau:{fenetre:'off',store:'Ferme'}, chambre:{fenetre:'off',store:null} },
+    { salon:{fenetre:'on',store:'Ouvert'}, cuisine:{fenetre:'on',store:null}, bureau:{fenetre:'off',store:'Ferme'}, chambre:{fenetre:'off',store:null} },
+    { salon:{fenetre:'off',store:'Arret'}, cuisine:{fenetre:'off',store:null}, bureau:{fenetre:'on',store:'Ouvert'}, chambre:{fenetre:'na',store:null} },
+    { salon:{fenetre:'on',store:'Ouvert'}, cuisine:{fenetre:'on',store:null}, bureau:{fenetre:'on',store:'Ouvert'}, chambre:{fenetre:'on',store:null} }
+  ];
+  function vgFenetreColor(state){
+    if (state === 'on') return 'rgb(244,67,54)';
+    if (state === 'off') return 'lightgreen';
+    return '#aaaaaa';
+  }
+  function vgFenetreLabel(state){
+    if (state === 'on') return 'Ouvert';
+    if (state === 'off') return 'Ferme';
+    return 'N/A';
+  }
+  function applyL3C3Frame(frame){
+    L3C3_ROOMS.forEach(function(room){
+      var r = frame[room];
+      var fEl = document.getElementById('l3c3-f-' + room);
+      if (fEl) { fEl.textContent = vgFenetreLabel(r.fenetre); fEl.style.color = vgFenetreColor(r.fenetre); }
+      var sEl = document.getElementById('l3c3-s-' + room);
+      if (sEl) { sEl.textContent = r.store === null ? '-' : r.store; sEl.style.color = '#fff'; }
+    });
+  }
+  var vgL3C3 = document.getElementById('vg-l3c3');
+  var vgL3C3Timer = null, vgL3C3Idx = 1;
+  function vgL3C3Start(){
+    if (vgL3C3Timer) return;
+    vgL3C3Idx = 1;
+    applyL3C3Frame(L3C3_SCENARIOS[vgL3C3Idx]);
+    vgL3C3Timer = setInterval(function(){
+      vgL3C3Idx = (vgL3C3Idx + 1) % L3C3_SCENARIOS.length;
+      applyL3C3Frame(L3C3_SCENARIOS[vgL3C3Idx]);
+    }, 1600);
+  }
+  function vgL3C3Stop(){
+    clearInterval(vgL3C3Timer);
+    vgL3C3Timer = null;
+    applyL3C3Frame(L3C3_SCENARIOS[0]);
+  }
+  if (vgL3C3) {
+    vgL3C3.addEventListener('mouseenter', vgL3C3Start);
+    vgL3C3.addEventListener('mouseleave', vgL3C3Stop);
+  }
 })();
 </script>
 </body>
