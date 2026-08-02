@@ -2726,6 +2726,118 @@ input_datetime: !include input_datetime.yaml</pre>
   </div>
 </section>
 
+<!-- DASHBOARD YAML -->
+<section id="dashboard-yaml" style="padding:5rem 0 3rem;border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="label reveal">06 — Dashboard YAML</div>
+    <h2 class="section-title reveal">DASHBOARD YAML</h2>
+    <p class="section-sub reveal">Versioning, nommage et inventaire réel des 18 vignettes + 2 pages hors-matrice.</p>
+
+    <!-- BLOC INTRO -->
+    <div class="reveal" style="margin-top:2.5rem;margin-bottom:2rem;">
+      <h2 class="section-title">03 · Dashboard YAML</h2>
+      <p class="section-sub" style="margin-top:.5rem;">Vignettes · Pages · Complet<br><code>DOCS/02_docs_dashboard/</code> &rarr; <code>H:\Docs\</code></p>
+    </div>
+
+    <!-- RÈGLES -->
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">1 — Versioning et nommage</h3>
+      <p class="conv-section-sub">Un sous-dossier par vignette (<code>L{ligne}C{colonne}_{index}_{Nom}/</code>) — jamais plus de 3 versions par type de fichier.</p>
+      <div style="overflow-x:auto;margin:1.1rem 0;">
+        <table style="width:100%;border-collapse:collapse;font-size:.8rem;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border);">
+              <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Type</th>
+              <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Pattern</th>
+              <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Conservation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">Dashboard complet</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">Dashboard_COMPLET/Dashboard_YYYY_MM_DD.yaml</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Illimitée (16 versions à ce jour, 2026-03-16 → 2026-08-01)</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">Vignette</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">L{x}C{x}_.../vignette_L{x}C{x}_{nom}_YYYY-MM-DD.yaml</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Max 3 versions</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">Page</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">L{x}C{x}_.../page_L{x}C{x}_{nom}_YYYY-MM-DD.yaml</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Max 3 versions</td>
+            </tr>
+            <tr>
+              <td style="padding:.5rem .8rem;color:var(--text);">Carte isolée</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">L{x}C{x}_.../card_{nom}_YYYY-MM-DD.yaml</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Sous-composant réutilisé dans une page</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="background:var(--bg-card);border-left:3px solid var(--amber);padding:.8rem 1rem;border-radius:0 6px 6px 0;margin-top:.9rem;">
+        <div style="font-size:.7rem;font-weight:700;color:var(--amber);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.06em;">⚠️ Anomalie relevée à l'audit</div>
+        <p style="font-size:.8rem;color:var(--text-2);line-height:1.75;">Un fichier <code>.bak</code> oublié dans <code>L1C2_02_Temperatures/</code> : <code>page_L1C2_temperatures_2026-05-22.yaml.bak</code> — résidu d'édition, à supprimer (hors convention de nommage).</p>
+      </div>
+    </div>
+
+    <!-- INVENTAIRE -->
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">2 — Inventaire réel des 18 vignettes + 2 hors-matrice</h3>
+      <p class="conv-section-sub">Relevé direct du dossier local (2026-08-02). Dernière vignette/page par emplacement.</p>
+      <div style="overflow-x:auto;margin:1.1rem 0;">
+        <table style="width:100%;border-collapse:collapse;font-size:.78rem;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--border);">
+              <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Matrice</th>
+              <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Nom</th>
+              <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Dernière vignette</th>
+              <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Dernière page</th>
+              <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L1C1</td><td style="padding:.5rem .8rem;color:var(--text);">Météo</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-16</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-06-13</td><td style="padding:.5rem .8rem;color:var(--text-2);">+ card_duree_du_jour</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L1C2</td><td style="padding:.5rem .8rem;color:var(--text);">Températures</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-12</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-07-14</td><td style="padding:.5rem .8rem;color:var(--amber);">⚠️ .bak résiduel présent</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L1C3</td><td style="padding:.5rem .8rem;color:var(--text);">Commandes Clim</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-07-18</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-07-18</td><td style="padding:.5rem .8rem;color:var(--text-2);">+ 6 card_prog_* (par appareil)</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L2C1</td><td style="padding:.5rem .8rem;color:var(--text);">Énergie Générale</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-06-18</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-06-18</td><td style="padding:.5rem .8rem;color:var(--text-2);">3 pages (mensuel/principale/temps réel)</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L2C2</td><td style="padding:.5rem .8rem;color:var(--text);">Énergie Clim</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-13</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-07-14</td><td style="padding:.5rem .8rem;color:var(--text-2);">-</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L2C3</td><td style="padding:.5rem .8rem;color:var(--text);">Énergie Éclairage</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-13</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-13</td><td style="padding:.5rem .8rem;color:var(--text-2);">1 seule version de chaque (récent)</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L3C1</td><td style="padding:.5rem .8rem;color:var(--text);">Commandes Éclairage</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-13</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-22</td><td style="padding:.5rem .8rem;color:var(--text-2);">2 pages (gauche/droite)</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L3C2</td><td style="padding:.5rem .8rem;color:var(--text);">Commandes Prises</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-14</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-14</td><td style="padding:.5rem .8rem;color:var(--text-2);">-</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L3C3</td><td style="padding:.5rem .8rem;color:var(--text);">Stores + Fenêtres</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-14</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-06-02</td><td style="padding:.5rem .8rem;color:var(--text-2);">-</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L4C1</td><td style="padding:.5rem .8rem;color:var(--text);">Proxmox (PVE)</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-06-18</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-06-18</td><td style="padding:.5rem .8rem;color:var(--text-2);">+ card_services_ha_z2m_mariadb</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L4C2</td><td style="padding:.5rem .8rem;color:var(--text);">Mini PC (NUC)</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-06-18</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-06-18</td><td style="padding:.5rem .8rem;color:var(--text-2);">+ card_popup_memory</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L4C3</td><td style="padding:.5rem .8rem;color:var(--text);">Mises à jour HA</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-14</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-06-15</td><td style="padding:.5rem .8rem;color:var(--text-2);">2 pages legacy (gauche/droite) + 1 fusionnée</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L5C1</td><td style="padding:.5rem .8rem;color:var(--text);">Piles / Batteries</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-14</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-14</td><td style="padding:.5rem .8rem;color:var(--text-2);">-</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L5C2</td><td style="padding:.5rem .8rem;color:var(--text);">Batteries Portables</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-12</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-12</td><td style="padding:.5rem .8rem;color:var(--text-2);">2 pages (gauche/droite)</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L5C3</td><td style="padding:.5rem .8rem;color:var(--text);">MariaDB</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-10</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-06-15</td><td style="padding:.5rem .8rem;color:var(--text-2);">+ 4 card_audit_* + page_systeme_reserve</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L6C1</td><td style="padding:.5rem .8rem;color:var(--text);">Qualité Air</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-14</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-23</td><td style="padding:.5rem .8rem;color:var(--text-2);">-</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L6C2</td><td style="padding:.5rem .8rem;color:var(--text);">Pollution / Pollen</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-14</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-06-13</td><td style="padding:.5rem .8rem;color:var(--text-2);">-</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L6C3</td><td style="padding:.5rem .8rem;color:var(--text);">Vigilance Eau</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-14</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-14</td><td style="padding:.5rem .8rem;color:var(--text-2);">-</td></tr>
+            <tr style="border-bottom:1px solid var(--border);background:rgba(61,136,86,.04);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">—</td><td style="padding:.5rem .8rem;color:var(--text);">PAGE_Home</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">-</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">-</td><td style="padding:.5rem .8rem;color:var(--text-2);">Hors-matrice — 7 card_* individuelles (foudre, lave-linge, presence...)</td></tr>
+            <tr style="background:rgba(61,136,86,.04);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">—</td><td style="padding:.5rem .8rem;color:var(--text);">PAGE_RASPI</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">-</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">2026-05-03</td><td style="padding:.5rem .8rem;color:var(--text-2);">Hors-matrice — page unique, pas de pattern L{x}C{x}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- COMPLET -->
+    <div class="conv-section reveal">
+      <h3 class="conv-section-h">3 — Dashboard_COMPLET/</h3>
+      <p class="conv-section-sub">Export brut de l'UI HA (Paramètres → Tableau de bord → Modifier en YAML). Conservation illimitée, sert de filet de sécurité en cas de restore complet.</p>
+      <div style="font-family:var(--fm);font-size:.75rem;color:var(--text-2);line-height:2;margin-top:.8rem;">
+        <div><span style="color:var(--green);">Dashboard_2026_08_01.yaml</span> ← le plus récent</div>
+        <div><span style="color:var(--green);">Dashboard_2026_07_18.yaml</span></div>
+        <div><span style="color:var(--green);">Dashboard_2026_07_14.yaml</span></div>
+        <div style="color:var(--text-faint);">... 13 versions antérieures (2026-03-16 → 2026-06-18)</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- YAML INTELLIGENTS -->
 <section id="yaml-intelligents" style="padding:2rem 0 3rem;">
   <div class="container">
