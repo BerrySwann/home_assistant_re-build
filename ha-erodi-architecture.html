@@ -1142,16 +1142,17 @@ footer a:hover { color:var(--green); }
         <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L2C2 Conso Clim -->
-      <div class="vg">
+      <div class="vg" id="vg-l2c2">
         <div class="vg-title">Consommation CLIM</div>
-        <div class="vg-r3"><span class="vg-val">Salon</span><span class="vg-val">2.71 kWh</span><span class="vg-val">120.27 kWh</span></div>
-        <div class="vg-r3"><span class="vg-val" style="color:#f44336">Cuisine</span><span class="vg-val">0 kWh</span><span class="vg-val">5 kWh</span></div>
-        <div class="vg-r3"><span class="vg-val" style="color:#03a9f4">Bureau</span><span class="vg-val">1.28 kWh</span><span class="vg-val">48.43 kWh</span></div>
-        <div class="vg-r3"><span class="vg-val" style="color:#f44336">SdB Sft</span><span class="vg-val">0 kWh</span><span class="vg-val">0 kWh</span></div>
-        <div class="vg-r3"><span class="vg-val" style="color:#f44336">SdB SeS</span><span class="vg-val">0 kWh</span><span class="vg-val">0 kWh</span></div>
-        <div class="vg-r3"><span class="vg-val">Chambre</span><span class="vg-val">1.32 kWh</span><span class="vg-val">49.19 kWh</span></div>
+        <div class="vg-r3"><span class="vg-val" id="l2c2-p-salon" style="color:skyblue">Salon</span><span class="vg-val" id="l2c2-q-salon">2.71 kWh</span><span class="vg-val" id="l2c2-m-salon">120.27 kWh</span></div>
+        <div class="vg-r3"><span class="vg-val" id="l2c2-p-cuisine" style="color:#f44336">Cuisine</span><span class="vg-val" id="l2c2-q-cuisine">0 Wh</span><span class="vg-val" id="l2c2-m-cuisine">5.00 kWh</span></div>
+        <div class="vg-r3"><span class="vg-val" id="l2c2-p-bureau" style="color:#FFA500">Bureau</span><span class="vg-val" id="l2c2-q-bureau">1.28 kWh</span><span class="vg-val" id="l2c2-m-bureau">48.43 kWh</span></div>
+        <div class="vg-r3"><span class="vg-val" id="l2c2-p-sdbsft" style="color:#f44336">SdB Sft</span><span class="vg-val" id="l2c2-q-sdbsft">0 Wh</span><span class="vg-val" id="l2c2-m-sdbsft">0 Wh</span></div>
+        <div class="vg-r3"><span class="vg-val" id="l2c2-p-sdbses" style="color:#f44336">SdB SeS</span><span class="vg-val" id="l2c2-q-sdbses">0 Wh</span><span class="vg-val" id="l2c2-m-sdbses">0 Wh</span></div>
+        <div class="vg-r3"><span class="vg-val" id="l2c2-p-chambre" style="color:#fff">Chambre</span><span class="vg-val" id="l2c2-q-chambre">1.32 kWh</span><span class="vg-val" id="l2c2-m-chambre">49.19 kWh</span></div>
         <div class="vg-sep"></div>
-        <div class="vg-r3"><span class="vg-val" style="color:#4caf50">TOTAL</span><span class="vg-val" style="color:#4caf50">5.31 kWh</span><span class="vg-val" style="color:#4caf50">217.90 kWh</span></div>
+        <div class="vg-r3"><span class="vg-val" style="color:lightgreen">TOTAL</span><span class="vg-val" id="l2c2-q-total" style="color:lightgreen">5.31 kWh</span><span class="vg-val" id="l2c2-m-total" style="color:lightgreen">217.90 kWh</span></div>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L2C3 Conso Lampes -->
       <div class="vg">
@@ -4579,6 +4580,78 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     vgL2C1.addEventListener('mouseleave', function(){
       clearInterval(l2c1Timer);
       applyL2C1Frame(L2C1_FRAMES[0]);
+    });
+  }
+
+  // ----- L2C2 : Energie Clim / Radiateur / Soufflant -----
+  function vgClimEnergyColor(power, mode){
+    var map = { off_off:'rgb(244,67,54)', on_cool:'skyblue', on_heat:'#FFA500', on_fan:'turquoise', off:'#fff', on_off:'#aaaaaa' };
+    if (power === 'off') return mode === 'off' ? map.off_off : map.off;
+    return map['on_' + mode] || map.off;
+  }
+  function vgFmtKwh(val){
+    return val < 1 ? (val * 1000).toFixed(0) + ' Wh' : val.toFixed(2) + ' kWh';
+  }
+  var L2C2_ROOMS = ['salon', 'cuisine', 'bureau', 'sdbsft', 'sdbses', 'chambre'];
+  var L2C2_FRAMES = [
+    { salon:   { power:'on',  mode:'cool', q:2.71, m:120.27 },
+      cuisine: { power:'off', mode:'off',  q:0,    m:5.00 },
+      bureau:  { power:'on',  mode:'heat', q:1.28, m:48.43 },
+      sdbsft:  { power:'off', mode:'off',  q:0,    m:0 },
+      sdbses:  { power:'off', mode:'off',  q:0,    m:0 },
+      chambre: { power:'off', mode:'heat', q:1.32, m:49.19 },
+      total: { q:5.31, m:217.90 } },
+    { salon:   { power:'off', mode:'off', q:0, m:125.10 },
+      cuisine: { power:'off', mode:'off', q:0, m:5.00 },
+      bureau:  { power:'off', mode:'off', q:0, m:49.80 },
+      sdbsft:  { power:'off', mode:'off', q:0, m:0 },
+      sdbses:  { power:'off', mode:'off', q:0, m:0 },
+      chambre: { power:'off', mode:'off', q:0, m:50.60 },
+      total: { q:0.00, m:230.50 } },
+    { salon:   { power:'on', mode:'fan', q:0.15, m:125.40 },
+      cuisine: { power:'off', mode:'off', q:0, m:5.00 },
+      bureau:  { power:'on', mode:'fan', q:0.08, m:49.95 },
+      sdbsft:  { power:'off', mode:'off', q:0, m:0 },
+      sdbses:  { power:'off', mode:'off', q:0, m:0 },
+      chambre: { power:'on', mode:'fan', q:0.05, m:50.70 },
+      total: { q:0.28, m:231.05 } },
+    { salon:   { power:'on', mode:'heat', q:3.40, m:132.80 },
+      cuisine: { power:'on', mode:'heat', q:0.62, m:8.50 },
+      bureau:  { power:'on', mode:'heat', q:2.90, m:55.60 },
+      sdbsft:  { power:'on', mode:'heat', q:0.35, m:6.20 },
+      sdbses:  { power:'on', mode:'heat', q:0.28, m:4.90 },
+      chambre: { power:'on', mode:'heat', q:2.15, m:58.30 },
+      total: { q:9.70, m:266.30 } }
+  ];
+  function applyL2C2Frame(frame){
+    L2C2_ROOMS.forEach(function(room){
+      var r = frame[room];
+      var pEl = document.getElementById('l2c2-p-' + room);
+      var qEl = document.getElementById('l2c2-q-' + room);
+      var mEl = document.getElementById('l2c2-m-' + room);
+      if (pEl) pEl.style.color = vgClimEnergyColor(r.power, r.mode);
+      if (qEl) qEl.textContent = vgFmtKwh(r.q);
+      if (mEl) mEl.textContent = vgFmtKwh(r.m);
+    });
+    var qTotEl = document.getElementById('l2c2-q-total');
+    if (qTotEl) qTotEl.textContent = vgFmtKwh(frame.total.q); // toujours lightgreen, jamais de seuil
+    var mTotEl = document.getElementById('l2c2-m-total');
+    if (mTotEl) mTotEl.textContent = vgFmtKwh(frame.total.m);
+  }
+  var vgL2C2 = document.getElementById('vg-l2c2');
+  if (vgL2C2) {
+    var l2c2Timer = null, l2c2Idx = 1;
+    vgL2C2.addEventListener('mouseenter', function(){
+      l2c2Idx = 1;
+      applyL2C2Frame(L2C2_FRAMES[l2c2Idx]);
+      l2c2Timer = setInterval(function(){
+        l2c2Idx = (l2c2Idx % (L2C2_FRAMES.length - 1)) + 1;
+        applyL2C2Frame(L2C2_FRAMES[l2c2Idx]);
+      }, 1600);
+    });
+    vgL2C2.addEventListener('mouseleave', function(){
+      clearInterval(l2c2Timer);
+      applyL2C2Frame(L2C2_FRAMES[0]);
     });
   }
 })();
