@@ -3502,10 +3502,19 @@ input_datetime: !include input_datetime.yaml</pre>
 
     <div class="conv-section reveal">
       <h3 class="conv-section-h">2 — Les slash commands</h3>
-      <p class="conv-section-sub">8 commandes dediees a ce projet, pour eviter de re-expliquer le contexte a chaque fois.</p>
+      <p class="conv-section-sub">7 commandes utilitaires, plus une qui merite sa propre place.</p>
+
+      <div class="rule-card reveal" style="border-color:var(--amber);box-shadow:var(--shadow-hi);margin:0 0 1.6rem;">
+        <div style="font-family:var(--fm);font-size:1.6rem;color:var(--amber);flex-shrink:0;">🕸</div>
+        <div>
+          <div style="font-family:var(--fm);font-size:.6rem;font-weight:700;letter-spacing:.14em;color:var(--amber);text-transform:uppercase;margin-bottom:.35rem;">La colonne vertebrale</div>
+          <div style="font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:.4rem;"><code>/sync_index</code> et <code>DEPENDANCES_GLOBALES.md</code></div>
+          <p style="font-size:.8rem;color:var(--text-2);line-height:1.75;">La "memoire interne" qui dit ou retrouver quoi quand ca foire. A chaque modif YAML qui touche une vignette, <code>/sync_index</code> met a jour la chaine de dependances (entite -&gt; fichier source -&gt; vignette dashboard) et passe le statut de 🔲 a ✅. Sans cette mise a jour, un fichier peut etre "valide" alors que sa doc de dependance est perimee -- et dans ce cas la tache n'est jamais consideree terminee.</p>
+        </div>
+      </div>
+
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem;">
         <div class="item-card"><code>/fix_file</code><span style="font-size:.78rem;color:var(--text-2);">Analyse une erreur HA, retourne uniquement le bloc YAML corrige.</span></div>
-        <div class="item-card"><code>/sync_index</code><span style="font-size:.78rem;color:var(--text-2);">Met a jour DEPENDANCES_GLOBALES.md apres validation d'un YAML.</span></div>
         <div class="item-card"><code>/status</code><span style="font-size:.78rem;color:var(--text-2);">Resume l'avancement du projet en 3 points.</span></div>
         <div class="item-card"><code>/histo</code><span style="font-size:.78rem;color:var(--text-2);">Journal de bord compact, sauvegarde dans historique/.</span></div>
         <div class="item-card"><code>/ha_new_yaml</code><span style="font-size:.78rem;color:var(--text-2);">Genere un squelette YAML conforme (bordures, headers, slug, unique_id).</span></div>
