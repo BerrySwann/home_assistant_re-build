@@ -3612,8 +3612,54 @@ MATÉRIEL / INTÉGRATION
   └─→ zone.home (latitude) + horloge système  (calculé, PAS sun.sun)
         └─→ TPL: M_05_cycle_solaire.yaml
 
-[... la meme structure se repete pour les 17 autres vignettes, jusqu'a L6C3 ...]</pre>
-      <p id="tree-note-dependances" style="display:none;">Extrait réel des ~90 premières lignes sur <code>1803</code> au total — la légende, la matrice des 18 vignettes, et la chaîne de dépendances complète de L1C1 (Météo) a titre d'exemple. Le même niveau de détail existe pour les 17 autres.</p>
+---
+
+## ✅ L1C2 — TEMPÉRATURES (VIGNETTE + PAGE)
+*Validée le 2026-05-13*
+
+### Vignette — Chaîne de dépendances
+
+MATÉRIEL (SONOFF TH via Z2M)
+  └─→ sensor.th_*_temperature / _humidity  (NAT — 7 pièces)
+        └─→ VIGNETTE L1C2 (button-card — grille piece/temp/humidite)
+              └─→ tap_action: navigate → /dashboard-tablette/temperatures
+
+---
+
+## ✅ L1C3 — COMMANDES CLIM (VIGNETTE + PAGE)
+*Validée le 2026-05-13 - chambre sur climate.clim_chambre_rm4_mini depuis le 2026-07-14*
+
+### Vignette — Chaîne de dépendances
+
+MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
+  └─→ sensor.*_power / climate.*   (NAT)
+        └─→ TPL: P1_ui_dashboard.yaml  (*_power_status / *_etat)
+              └─→ sensor.temperature_moyenne_interieure  (TPL P1_clim_logique)
+              └─→ sensor.delta_ademe_recommande          (TPL P1_clim_logique)
+              └─→ sensor.mode_ete_hiver_etat             (TPL P1_clim_logique)
+                    └─→ VIGNETTE L1C3 (button-card — grille piece/mode/consigne)
+                          └─→ tap_action: navigate → /dashboard-tablette/clim
+
+---
+
+## ✅ L2C1 — ÉNERGIE GÉNÉRALE (VIGNETTE + PAGE)
+*Documentée le 2026-06-18 — Source P0 depuis 2026-06-17 : Nodon SEM-4-1-00 (pince Z2M)*
+
+### Chaîne de dépendances
+
+MATÉRIEL (Nodon SEM-4-1-00 via Z2M)
+  └─→ sensor.general_electric_appart_energy (kWh natif)
+  └─→ sensor.general_electric_appart_power  (W natif)
+        └─→ UM: 01_UM_AMHQ.yaml                      (genelec_appart_*_um : Q/H/M/A)
+        └─→ UM: 02_UM_genelec_appart_HPHC_AMHQ.yaml   (HP/HC x 4 cycles)
+              └─→ TPL: 01_genelec_appart_AMHQ_cost.yaml  (couts euros)
+              └─→ TPL: 02_ratio_hp_hc.yaml               (ratio HC)
+              └─→ TPL: 03_AVG_genelec_appart.yaml        (moyenne W)
+                    └─→ VIGNETTE L2C1 ✅
+                    └─→ PAGE L2C1 (3 onglets : Journalier/Hebdo/Mensuel) ✅
+
+[... la meme structure se repete pour les 14 autres vignettes, jusqu'a L6C3 ...]</pre>
+      <p id="tree-note-dependances" style="display:none;">Extrait réel sur <code>1803</code> lignes au total — la légende, la matrice des 18 vignettes, et la chaîne de dépendances des 4 premières vignettes (L1C1 Météo, L1C2 Températures, L1C3 Commandes Clim, L2C1 Énergie Générale) a titre d'exemple. Le même niveau de détail (souvent avec tableaux d'entités complets) existe pour les 14 autres.</p>
     </div>
   </div>
 </section>
