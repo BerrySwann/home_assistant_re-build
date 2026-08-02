@@ -119,6 +119,18 @@ nav.scrolled {
 }
 .nav-back:hover { color:var(--green); border-color:var(--border-hi); }
 
+#back-to-types {
+  position:fixed; bottom:28px; right:28px; z-index:250;
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--bg); border:1.5px solid var(--border-hi); color:var(--text);
+  font-family:var(--fm); font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  padding:11px 22px; border-radius:30px; text-decoration:none; box-shadow:var(--shadow-hi);
+  opacity:0; pointer-events:none; transform:translateY(10px);
+  transition: opacity .3s ease, transform .3s ease, border-color .3s, color .3s;
+}
+#back-to-types.show { opacity:1; pointer-events:auto; transform:translateY(0); }
+#back-to-types:hover { border-color:var(--amber); color:var(--amber); }
+
 /* ============================================
    HERO
 ============================================ */
@@ -808,6 +820,8 @@ footer a:hover { color:var(--green); }
   <a class="nav-back" href="https://ha.erodi-ha.com">← Portfolio</a>
 </nav>
 
+<a href="#architecture" id="back-to-types">‹ Les 3 types de fichiers</a>
+
 <!-- VIEWER MODAL -->
 <div id="viewer-overlay" onclick="closeViewer(event)">
   <div id="viewer-modal">
@@ -1269,7 +1283,7 @@ footer a:hover { color:var(--green); }
 <div class="blocs-grid">
 
       <!-- BLOC 1 -->
-      <div class="bloc reveal">
+      <div class="bloc reveal" onclick="location.hash='conventions'" style="cursor:pointer;">
         <div class="bloc-header">
           <div class="bloc-num">01 · Config YAML</div>
           <div class="bloc-title">Sensors · Templates · UM</div>
@@ -1311,7 +1325,7 @@ footer a:hover { color:var(--green); }
       </div>
 
       <!-- BLOC 2 -->
-      <div class="bloc reveal">
+      <div class="bloc reveal" onclick="location.hash='automation'" style="cursor:pointer;">
         <div class="bloc-header">
           <div class="bloc-num">02 · Automations</div>
           <div class="bloc-title">YAML + documentation</div>
@@ -1350,7 +1364,7 @@ footer a:hover { color:var(--green); }
       </div>
 
       <!-- BLOC 3 -->
-      <div class="bloc reveal">
+      <div class="bloc reveal" onclick="location.hash='dashboard-yaml'" style="cursor:pointer;">
         <div class="bloc-header">
           <div class="bloc-num">03 · Dashboard YAML</div>
           <div class="bloc-title">Vignettes · Pages · Complet</div>
@@ -3814,6 +3828,18 @@ function closeScriptModalBtn() {
 function closeScriptModal(e) {
   if (e.target === document.getElementById('script-overlay')) closeScriptModalBtn();
 }
+
+(function() {
+  const backBtn = document.getElementById('back-to-types');
+  const archEl = document.getElementById('architecture');
+  if (!backBtn || !archEl) return;
+  function toggleBack() {
+    const rect = archEl.getBoundingClientRect();
+    backBtn.classList.toggle('show', rect.bottom < 0);
+  }
+  window.addEventListener('scroll', toggleBack, { passive: true });
+  toggleBack();
+})();
 
 const TREES = {
   yaml:              { title: 'dashboard_docs_YAML/ — arborescence réelle (2026-08-02)',    srcId: 'tree-src-yaml' },
