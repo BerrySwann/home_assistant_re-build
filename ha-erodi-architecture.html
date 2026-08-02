@@ -454,15 +454,17 @@ nav.scrolled {
 /* ============================================
    VIEWER MODAL — reste sombre (terminal)
 ============================================ */
+/* Palette Nord (nordtheme.com) — nord0 #2e3440 bg, nord3 #4c566a comments,
+   nord4 #d8dee9 texte, nord8 #88c0d0 accent, nord11-14 = erreur/warn/succes/caution */
 #viewer-overlay {
   position:fixed; inset:0; z-index:1000; display:none;
-  background:rgba(10,12,18,.88); backdrop-filter:blur(8px);
+  background:rgba(46,52,64,.85); backdrop-filter:blur(8px);
   align-items:center; justify-content:center; padding:20px;
 }
 #viewer-overlay.open { display:flex; }
 #viewer-modal {
   width:100%; max-width:860px; height:min(82vh,720px);
-  background:#0d1117; border:1px solid rgba(29,77,46,.35);
+  background:#2e3440; border:1px solid #4c566a;
   overflow:hidden; display:flex; flex-direction:column;
   box-shadow:0 32px 80px rgba(0,0,0,.7);
   animation:mIn .22s ease;
@@ -471,42 +473,42 @@ nav.scrolled {
 
 .vwr-bar {
   display:flex; align-items:center; gap:0;
-  background:#080c0f; border-bottom:1px solid rgba(255,255,255,.06);
+  background:#3b4252; border-bottom:1px solid #4c566a;
   padding:0 14px; flex-shrink:0;
 }
 .vwr-dots { display:flex; gap:6px; padding:13px 0 13px 4px; margin-right:12px; }
 .vwr-dots span { width:11px; height:11px; border-radius:50%; }
-.vwr-dots span:nth-child(1){ background:#f87171; }
-.vwr-dots span:nth-child(2){ background:#fbbf24; }
-.vwr-dots span:nth-child(3){ background:#4ade80; }
+.vwr-dots span:nth-child(1){ background:#bf616a; }
+.vwr-dots span:nth-child(2){ background:#ebcb8b; }
+.vwr-dots span:nth-child(3){ background:#a3be8c; }
 .vwr-tabs { display:flex; gap:2px; flex:1; overflow-x:auto; }
 .vwr-tab {
   font-family:var(--fm); font-size:.63rem; font-weight:600;
-  color:#4a6a4a; letter-spacing:.06em; padding:0 16px; height:42px;
+  color:#a0a8b6; letter-spacing:.06em; padding:0 16px; height:42px;
   border:none; border-bottom:2px solid transparent;
   background:none; cursor:pointer; white-space:nowrap; transition:color .2s, border-color .2s;
 }
-.vwr-tab:hover { color:#c0d0c0; }
-.vwr-tab.active { color:#3d8856; border-bottom-color:#1d4d2e; }
+.vwr-tab:hover { color:#eceff4; }
+.vwr-tab.active { color:#88c0d0; border-bottom-color:#5e81ac; }
 .vwr-close {
-  font-family:var(--fm); font-size:.75rem; color:#4a6a4a;
+  font-family:var(--fm); font-size:.75rem; color:#a0a8b6;
   background:none; border:none; cursor:pointer; padding:7px 12px;
   transition:color .2s; margin-left:8px;
 }
-.vwr-close:hover { color:#c0d0c0; }
+.vwr-close:hover { color:#eceff4; }
 
 .vwr-path {
-  background:#060a0c; border-bottom:1px solid rgba(255,255,255,.04);
-  padding:6px 18px; font-family:var(--fm); font-size:.6rem; color:#3a4a3a; flex-shrink:0;
+  background:#262b34; border-bottom:1px solid #3b4252;
+  padding:6px 18px; font-family:var(--fm); font-size:.6rem; color:#a0a8b6; flex-shrink:0;
 }
-.vwr-path .pd { color:#2a5a3a; }
-.vwr-path .pf { color:#4a7a4a; }
+.vwr-path .pd { color:#81a1c1; }
+.vwr-path .pf { color:#88c0d0; }
 
 .vwr-scroll { flex:1; overflow:hidden; position:relative; }
 #vwr-content {
   height:100%; overflow-y:scroll; overflow-x:auto; padding:18px 22px;
   font-family:var(--fm); font-size:.72rem; line-height:2;
-  color:#d0e0d0; scrollbar-width:thin; scrollbar-color:rgba(29,77,46,.3) transparent;
+  color:#d8dee9; scrollbar-width:thin; scrollbar-color:#4c566a transparent;
 }
 #vwr-content pre {
   white-space: pre;
@@ -516,22 +518,22 @@ nav.scrolled {
   line-height: inherit;
 }
 #vwr-content::-webkit-scrollbar { width:3px; }
-#vwr-content::-webkit-scrollbar-thumb { background:rgba(29,77,46,.3); }
+#vwr-content::-webkit-scrollbar-thumb { background:#4c566a; }
 .vwr-grad {
   position:absolute; bottom:0; left:0; right:0; height:60px; pointer-events:none;
-  background:linear-gradient(transparent, #0d1117);
+  background:linear-gradient(transparent, #2e3440);
 }
 
-/* syntax in viewer — contrastes renforcés */
-.y-ascii  { color:#d97706; }
-.y-slug   { color:#c4973a; font-weight:700; }
-.y-header { color:#5db87a; font-weight:700; }
-.y-comment{ color:#587858; }
-.y-key    { color:#88c898; }
-.y-colon  { color:#4a6a4a; }
-.y-val    { color:#e8a84a; }
-.y-dash   { color:#4a6a4a; }
-.y-table  { color:#4a6a4a; }
+/* syntax Nord — contrastes verifies (>=4.4:1 sur fond #2e3440) */
+.y-ascii  { color:#d08770; }
+.y-slug   { color:#b48ead; font-weight:700; }
+.y-header { color:#a3be8c; font-weight:700; }
+.y-comment{ color:#a0a8b6; }
+.y-key    { color:#88c0d0; }
+.y-colon  { color:#81a1c1; }
+.y-val    { color:#ebcb8b; }
+.y-dash   { color:#81a1c1; }
+.y-table  { color:#a0a8b6; }
 
 /* ============================================
    BOUTON "CLIQUE-MOI" — script maître P1 clim
@@ -572,39 +574,39 @@ nav.scrolled {
 
 #script-overlay {
   position: fixed; inset: 0; z-index: 1000; display: none;
-  background: rgba(10,12,18,.88); backdrop-filter: blur(8px);
+  background: rgba(46,52,64,.85); backdrop-filter: blur(8px);
   align-items: center; justify-content: center; padding: 20px;
 }
 #script-overlay.open { display: flex; }
 #script-modal {
   width: 100%; max-width: 780px; height: min(80vh, 680px);
-  background: #0d1117; border: 1px solid rgba(217,119,6,.4);
+  background: #2e3440; border: 1px solid #4c566a;
   overflow: hidden; display: flex; flex-direction: column;
   box-shadow: 0 32px 80px rgba(0,0,0,.7);
   animation: mIn .22s ease;
 }
 .scr-bar {
   display: flex; align-items: center; justify-content: space-between;
-  background: #080c0f; border-bottom: 1px solid rgba(255,255,255,.06);
+  background: #3b4252; border-bottom: 1px solid #4c566a;
   padding: 10px 16px; flex-shrink: 0;
 }
 .scr-title {
   font-family: var(--fm); font-size: .68rem; font-weight: 700;
-  color: var(--amber); letter-spacing: .06em;
+  color: #d08770; letter-spacing: .06em;
 }
 .scr-close {
-  font-family: var(--fm); font-size: .75rem; color: #4a6a4a;
+  font-family: var(--fm); font-size: .75rem; color: #a0a8b6;
   background: none; border: none; cursor: pointer; padding: 4px 8px;
   transition: color .2s;
 }
-.scr-close:hover { color: #c0d0c0; }
+.scr-close:hover { color: #eceff4; }
 .scr-scroll { flex: 1; overflow-y: auto; padding: 18px 22px; }
 .scr-scroll pre {
   white-space: pre; margin: 0; font-family: var(--fm); font-size: .68rem;
-  line-height: 1.85; color: #d0e0d0;
+  line-height: 1.85; color: #d8dee9;
 }
 .scr-scroll::-webkit-scrollbar { width: 3px; }
-.scr-scroll::-webkit-scrollbar-thumb { background: rgba(217,119,6,.3); }
+.scr-scroll::-webkit-scrollbar-thumb { background: #4c566a; }
 
 /* ============================================
    FOOTER
