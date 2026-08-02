@@ -1109,13 +1109,13 @@ footer a:hover { color:var(--green); }
         <div class="vg-title">Commande Clim.</div>
         <div class="vg-r3"><span class="vg-label">T Appart.</span><span></span><span class="vg-val" id="l1c3-c-tmoy" style="color:lightgreen">22.1&#176;C</span></div>
         <div class="vg-r3"><span class="vg-label">&#916; Ademe</span><span></span><span class="vg-val" id="l1c3-c-ademe" style="color:lightgreen">-6.5&#176;C</span></div>
-        <div class="vg-r3"><span class="vg-label">Mode &#8594;</span><span class="vg-val" id="l1c3-m-global" style="color:skyblue">Cool</span><span></span></div>
+        <div class="vg-r3"><span class="vg-label">Mode &#8594;</span><span class="vg-val" id="l1c3-m-global" style="color:lightgreen">Cool</span><span></span></div>
         <div class="vg-sep"></div>
-        <div class="vg-r3"><span class="vg-val" id="l1c3-p-salon" style="color:lightgreen">Salon</span><span class="vg-val" id="l1c3-m-salon" style="color:skyblue">Cool</span><span class="vg-val" id="l1c3-c-salon">22.0&#176;C</span></div>
+        <div class="vg-r3"><span class="vg-val" id="l1c3-p-salon" style="color:lightgreen">Salon</span><span class="vg-val" id="l1c3-m-salon" style="color:lightgreen">Cool</span><span class="vg-val" id="l1c3-c-salon">22.0&#176;C</span></div>
         <div class="vg-r3"><span class="vg-val" id="l1c3-p-cuisine" style="color:#fff">Cuisine</span><span class="vg-val" id="l1c3-m-cuisine" style="color:#f44336">Off</span><span class="vg-val" id="l1c3-c-cuisine">17.5&#176;C</span></div>
-        <div class="vg-r3"><span class="vg-val" id="l1c3-p-bureau" style="color:lightgreen">Bureau</span><span class="vg-val" id="l1c3-m-bureau" style="color:skyblue">Cool</span><span class="vg-val" id="l1c3-c-bureau">27.0&#176;C</span></div>
+        <div class="vg-r3"><span class="vg-val" id="l1c3-p-bureau" style="color:lightgreen">Bureau</span><span class="vg-val" id="l1c3-m-bureau" style="color:lightgreen">Cool</span><span class="vg-val" id="l1c3-c-bureau">27.0&#176;C</span></div>
         <div class="vg-r3"><span class="vg-val" id="l1c3-p-sdb" style="color:#fff">SdB</span><span class="vg-val" id="l1c3-m-sdb" style="color:#f44336">Off</span><span class="vg-val" id="l1c3-c-sdb">21.0&#176;C</span></div>
-        <div class="vg-r3"><span class="vg-val" id="l1c3-p-chambre" style="color:lightgreen">Chambre</span><span class="vg-val" id="l1c3-m-chambre" style="color:skyblue">Cool</span><span class="vg-val" id="l1c3-c-chambre">27.0&#176;C</span></div>
+        <div class="vg-r3"><span class="vg-val" id="l1c3-p-chambre" style="color:lightgreen">Chambre</span><span class="vg-val" id="l1c3-m-chambre" style="color:lightgreen">Cool</span><span class="vg-val" id="l1c3-c-chambre">27.0&#176;C</span></div>
         <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <div class="row-label">L2 &mdash; Consommation Energetique</div>
@@ -4452,7 +4452,8 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     return '#aaaaaa';
   }
   function vgClimModeColor(mode){
-    var map = { cool:'skyblue', heat:'#FFA500', fan:'turquoise', off:'#F44336', na:'#aaaaaa' };
+    // Choix Eric : Cool et Heat partagent le meme vert (au lieu du bleu/orange reel de HA)
+    var map = { cool:'lightgreen', heat:'lightgreen', fan:'turquoise', off:'#F44336', na:'#aaaaaa' };
     return map[mode] || map.na;
   }
   function vgClimModeLabel(mode){
