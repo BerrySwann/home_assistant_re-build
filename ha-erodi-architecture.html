@@ -1089,7 +1089,7 @@ footer a:hover { color:var(--green); }
       <!-- L1C1 Meteo -->
       <div class="vg" id="vg-l1c1" style="display:flex;flex-direction:column;align-items:center;justify-content:center">
         <div class="vg-title">Meteo</div>
-        <img id="l1c1-icon" src="meteo/sun.png" style="width:68px;height:68px;object-fit:cover;border-radius:8px;margin:6px auto;display:block">
+        <img id="l1c1-icon" src="meteocons/sunny.svg" style="width:68px;height:68px;margin:6px auto;display:block">
         <div id="l1c1-condition" class="vg-center" style="font-size:1.1rem;font-weight:700;color:#fdd835">Ensoleille</div>
         <div id="l1c1-temp" class="vg-center" style="font-size:1.5rem;font-weight:700;color:#ff9800;margin-top:4px">26.9&#176;C</div>
         <span class="vg-live-badge">Conditions simulees - survol actif</span>
@@ -4412,10 +4412,11 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
 (function(){
   // ----- L1C1 : Meteo (vignette navigationnelle — simulation conditions Vence) -----
   var L1C1_SCENARIOS = [
-    { icon: 'meteo/sun.png',               condition: 'Ensoleille',  condColor: '#fdd835',        temp: '26.9°C', tempColor: '#ff9800' },
-    { icon: 'meteo/raining.png',           condition: 'Pluvieux',    condColor: '#64b5f6',        temp: '15.8°C', tempColor: '#64b5f6' },
-    { icon: 'meteo/lightning-raining.png', condition: 'Orage',       condColor: 'rgb(244,67,54)', temp: '17.2°C', tempColor: '#fff'    },
-    { icon: 'meteo/fog.png',               condition: 'Brouillard',  condColor: '#90a4ae',        temp: '18.5°C', tempColor: '#aaa'    }
+    { icon: 'meteocons/sunny.svg',           condition: 'Ensoleille',       condColor: '#fdd835',        temp: '26.9°C', tempColor: '#ff9800' },
+    { icon: 'meteocons/partlycloudy.svg',    condition: 'Part. nuageux',    condColor: 'gold',           temp: '22.4°C', tempColor: 'orange'  },
+    { icon: 'meteocons/rainy.svg',           condition: 'Pluvieux',         condColor: '#64b5f6',        temp: '15.8°C', tempColor: '#64b5f6' },
+    { icon: 'meteocons/lightning-rainy.svg', condition: 'Orage',            condColor: 'rgb(244,67,54)', temp: '17.2°C', tempColor: '#fff'    },
+    { icon: 'meteocons/fog.svg',             condition: 'Brouillard',       condColor: '#90a4ae',        temp: '18.5°C', tempColor: '#aaa'    }
   ];
   function applyL1C1Frame(frame){
     var iconEl = document.getElementById('l1c1-icon');
