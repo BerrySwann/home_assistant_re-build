@@ -722,7 +722,8 @@ footer a:hover { color:var(--green); }
   @media(max-width:700px){ .vg-grid{ grid-template-columns:1fr; } }
   .vg-val { transition: color .45s ease; }
   .vg-live-badge {
-    position:absolute; right:8px; bottom:5px;
+    display:block; width:100%; text-align:center;
+    margin-top:6px;
     font-size:0.52rem; letter-spacing:0.3px; font-weight:700;
     color:var(--amber); opacity:0; transition:opacity .3s;
     text-transform:uppercase; pointer-events:none;
@@ -1241,7 +1242,7 @@ footer a:hover { color:var(--green); }
         <img id="l1c1-icon" src="meteocons/sunny.svg" style="width:68px;height:68px;margin:6px auto;display:block">
         <div id="l1c1-condition" class="vg-center" style="font-size:1.1rem;font-weight:700;color:#fdd835">Ensoleille</div>
         <div id="l1c1-temp" class="vg-center" style="font-size:1.5rem;font-weight:700;color:#ff9800;margin-top:4px">26.9&#176;C</div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Conditions simulees - survol actif</span>
       </div>
       <!-- L1C2 Courbes Temperature -->
       <div class="vg" id="vg-l1c2">
@@ -1253,7 +1254,7 @@ footer a:hover { color:var(--green); }
         <div class="vg-r3"><span class="vg-label">Bureau</span><span class="vg-val" id="l1c2-t-bureau" style="color:#ffd700">26.6&#176;C</span><span class="vg-val" id="l1c2-h-bureau" style="color:#fff">50.3%</span></div>
         <div class="vg-r3"><span class="vg-label">SdB</span><span class="vg-val" id="l1c2-t-sdb" style="color:#ffd700">26.9&#176;C</span><span class="vg-val" id="l1c2-h-sdb" style="color:#f44336">79.4%</span></div>
         <div class="vg-r3"><span class="vg-label">Chambre</span><span class="vg-val" id="l1c2-t-chambre" style="color:#ffd700">26.4&#176;C</span><span class="vg-val" id="l1c2-h-chambre" style="color:#fff">51.9%</span></div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L1C3 Commande Clim -->
       <div class="vg" id="vg-l1c3">
@@ -1267,7 +1268,7 @@ footer a:hover { color:var(--green); }
         <div class="vg-r3"><span class="vg-val" id="l1c3-p-bureau" style="color:lightgreen">Bureau</span><span class="vg-val" id="l1c3-m-bureau" style="color:skyblue">Cool</span><span class="vg-val" id="l1c3-c-bureau">27.0&#176;C</span></div>
         <div class="vg-r3"><span class="vg-val" id="l1c3-p-sdb" style="color:#fff">SdB</span><span class="vg-val" id="l1c3-m-sdb" style="color:#f44336">Off</span><span class="vg-val" id="l1c3-c-sdb">21.0&#176;C</span></div>
         <div class="vg-r3"><span class="vg-val" id="l1c3-p-chambre" style="color:#fff">Chambre</span><span class="vg-val" id="l1c3-m-chambre" style="color:skyblue">Cool</span><span class="vg-val" id="l1c3-c-chambre">27.0&#176;C</span></div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <div class="row-label">L2 &mdash; Consommation Energetique</div>
       <!-- L2C1 Conso Appart -->
@@ -1290,7 +1291,7 @@ footer a:hover { color:var(--green); }
             <div class="vg-val" id="l2c1-hc" style="color:#fff">0.76 &euro;</div>
           </div>
         </div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L2C2 Conso Clim -->
       <div class="vg" id="vg-l2c2">
@@ -1303,7 +1304,7 @@ footer a:hover { color:var(--green); }
         <div class="vg-r3"><span class="vg-val" id="l2c2-p-chambre" style="color:#fff">Chambre</span><span class="vg-val" id="l2c2-q-chambre">1.32 kWh</span><span class="vg-val" id="l2c2-m-chambre">49.19 kWh</span></div>
         <div class="vg-sep"></div>
         <div class="vg-r3"><span class="vg-val" style="color:lightgreen">TOTAL</span><span class="vg-val" id="l2c2-q-total" style="color:lightgreen">5.31 kWh</span><span class="vg-val" id="l2c2-m-total" style="color:lightgreen">222.89 kWh</span></div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L2C3 Conso Lampes -->
       <div class="vg" id="vg-l2c3">
@@ -1316,7 +1317,7 @@ footer a:hover { color:var(--green); }
         <div class="vg-r3"><span class="vg-val" id="l2c3-p-chambre" style="color:#fff">Chambre</span><span class="vg-val" id="l2c3-q-chambre">60 Wh</span><span class="vg-val" id="l2c3-m-chambre">1.22 kWh</span></div>
         <div class="vg-sep"></div>
         <div class="vg-r3"><span class="vg-val" style="color:lightgreen">TOTAL</span><span class="vg-val" id="l2c3-q-total" style="color:lightgreen">327 Wh</span><span class="vg-val" id="l2c3-m-total" style="color:lightgreen">15.84 kWh</span></div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <div class="row-label">L3 &mdash; Commandes</div>
       <!-- L3C1 Commande Lampes -->
@@ -1328,7 +1329,7 @@ footer a:hover { color:var(--green); }
         <div class="vg-r3"><span class="vg-val">Bureau</span><span class="vg-val" id="l3c1-e-bureau" style="color:#FFA500">Synchro</span><span class="vg-val" id="l3c1-a-bureau" style="color:#FFA500">1/2</span></div>
         <div class="vg-r3"><span class="vg-val">SdB</span><span class="vg-val" id="l3c1-e-sdb" style="color:#f44336">Eteint</span><span class="vg-val" id="l3c1-a-sdb" style="color:#f44336">0/1</span></div>
         <div class="vg-r3"><span class="vg-val">Chambre</span><span class="vg-val" id="l3c1-e-chambre" style="color:#FFA500">Eco.</span><span class="vg-val" id="l3c1-a-chambre" style="color:#FFA500">0/1</span></div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L3C2 Commande eCO -->
       <div class="vg" id="vg-l3c2">
@@ -1339,7 +1340,7 @@ footer a:hover { color:var(--green); }
         <div class="vg-row"><span class="vg-label">PC Bureau</span><span class="vg-val" id="l3c2-pcbureau" style="color:lightgreen">Allume</span></div>
         <div class="vg-row"><span class="vg-label">TV Chambre</span><span class="vg-val" id="l3c2-tvchambre" style="color:#f44336">Eteint</span></div>
         <div class="vg-row"><span class="vg-label">Tete de Lit</span><span class="vg-val" id="l3c2-tetedelit" style="color:#f44336">Eteint</span></div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L3C3 Commande Stores -->
       <div class="vg" id="vg-l3c3" style="display:flex;flex-direction:column">
@@ -1353,7 +1354,7 @@ footer a:hover { color:var(--green); }
           <div class="vg-r3"><span class="vg-val">Bureau</span><span class="vg-val" id="l3c3-f-bureau" style="color:lightgreen">Ferme</span><span class="vg-val" id="l3c3-s-bureau" style="color:#fff">Ferme</span></div>
           <div class="vg-r3"><span class="vg-val">Chambre</span><span class="vg-val" id="l3c3-f-chambre" style="color:lightgreen">Ferme</span><span class="vg-val" id="l3c3-s-chambre" style="color:#fff">-</span></div>
         </div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <div class="row-label">L4 &mdash; Reseau &amp; Systeme</div>
       <!-- L4C1 Proxmox -->
@@ -1366,7 +1367,7 @@ footer a:hover { color:var(--green); }
         <div class="vg-row"><span class="vg-label">PVE Host</span><span class="vg-val" style="color:rgb(70,175,75)">ONLINE</span></div>
         <div class="vg-row"><span class="vg-label">PVE RAM</span><span class="vg-val" id="l4c1-ram" style="color:#fff">42.6%</span></div>
         <div class="vg-row"><span class="vg-label">PVE Storage</span><span class="vg-val" id="l4c1-storage" style="color:#fff">62.9%</span></div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L4C2 Mini PC -->
       <div class="vg" id="vg-l4c2">
@@ -1378,14 +1379,14 @@ footer a:hover { color:var(--green); }
         <div class="vg-row"><span class="vg-label">Power</span><span class="vg-val" id="l4c2-power" style="color:#fff">8.5 W</span></div>
         <div class="vg-row"><span class="vg-label">RAM</span><span class="vg-val" id="l4c2-ram" style="color:#fff">42.6%</span></div>
         <div class="vg-row"><span class="vg-label">SSD</span><span class="vg-val" id="l4c2-storage" style="color:#fff">62.9%</span></div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L4C3 Software -->
       <div class="vg" id="vg-l4c3" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px">
         <div class="vg-title" style="width:100%">Software | modules</div>
         <div style="font-size:2.5rem;margin:10px 0">&#127968;</div>
         <div id="l4c3-text" style="color:#fff;font-weight:700">Tout est a jour</div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <div class="row-label">L5 &mdash; Maintenance Materielle</div>
       <!-- L5C1 Piles Batteries -->
@@ -1417,7 +1418,7 @@ footer a:hover { color:var(--green); }
             <div class="vg-val" id="l5c1-r25-sonoff" style="color:#fff">0</div>
           </div>
         </div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L5C2 Batteries Portables -->
       <div class="vg" id="vg-l5c2" style="display:flex;flex-direction:column">
@@ -1445,7 +1446,7 @@ footer a:hover { color:var(--green); }
             <span style="color:#fff">Tablette</span><span id="l5c2-lvl-tab" style="color:orange;text-align:center">74%</span><span id="l5c2-dot-tab" style="text-align:right">&#128993;</span>
           </div>
         </div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L5C3 MariaDB -->
       <div class="vg" id="vg-l5c3" style="display:flex;flex-direction:column">
@@ -1466,7 +1467,7 @@ footer a:hover { color:var(--green); }
             <div style="font-size:1rem;color:#fff;font-weight:700;letter-spacing:1px;margin-top:4px">MARIADB</div>
           </div>
         </div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <div class="row-label">L6 &mdash; Qualite &amp; Alertes</div>
       <!-- L6C1 Qualite Air -->
@@ -1479,21 +1480,21 @@ footer a:hover { color:var(--green); }
         <div class="vg-row"><span class="vg-label">Salon tCOV</span><span class="vg-val" id="l6c1-voc-salon">119 ppb</span></div>
         <div class="vg-row"><span class="vg-label">Bureau tCOV</span><span class="vg-val" id="l6c1-voc-bureau">153 ppb</span></div>
         <div class="vg-row"><span class="vg-label">Chambre tCOV</span><span class="vg-val" id="l6c1-voc-chambre">138 ppb</span></div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L6C2 Pollution Pollen -->
       <div class="vg" id="vg-l6c2" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px">
         <div class="vg-title" style="width:100%">Pollution &amp; Pollen</div>
         <div style="font-size:1.1rem;font-weight:700;margin:4px 0"><span id="l6c2-air" style="color:orange">Air 4</span> / <span id="l6c2-pollen" style="color:lightgreen">Pollen 2</span></div>
         <div style="font-size:2.5rem;margin-top:8px">&#128567;</div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L6C3 Vigieau -->
       <div class="vg" id="vg-l6c3" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px">
         <div class="vg-title" style="width:100%">Vigieau - Restriction Eau</div>
         <div style="font-size:2.5rem;margin:10px 0">&#128167;</div>
         <div id="l6c3-label" style="color:darkred;font-weight:700;font-size:1.1rem">Crise</div>
-        <span class="vg-live-badge">Survoler pour voir l'interface dans differents etats</span>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
     </div>
     </div>
