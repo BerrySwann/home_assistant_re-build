@@ -1237,34 +1237,35 @@ footer a:hover { color:var(--green); }
       </div>
       <div class="row-label">L5 &mdash; Maintenance Materielle</div>
       <!-- L5C1 Piles Batteries -->
-      <div class="vg" style="display:flex;flex-direction:column">
+      <div class="vg" id="vg-l5c1" style="display:flex;flex-direction:column">
         <div class="vg-title">Etat des Piles &amp; Batteries</div>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px">
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;text-align:center;font-size:0.65rem">
-            <div></div>
-            <div style="color:#fff">100%</div>
-            <div style="color:#fff">75%</div>
-            <div style="color:#fff">50%</div>
-            <div style="color:#fff">25%</div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:5px">
+          <div style="display:grid;grid-template-columns:0.5fr 1fr 1fr 1fr 1fr 1fr;text-align:center;font-size:0.6rem;color:#fff">
+            <div></div><div></div>
+            <div>100%</div><div>75%</div><div>50%</div><div>25%</div>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;text-align:center;gap:2px">
-            <div class="vg-label" style="text-align:left;color:#f44336">&#9888; HUE</div>
-            <div class="vg-val" style="color:#ff9800">6</div>
-            <div class="vg-val" style="color:#ff9800">1</div>
-            <div class="vg-val">0</div>
-            <div class="vg-val" style="color:#ff9800">4</div>
-            <div class="vg-label" style="text-align:left">IKEA</div>
-            <div class="vg-val" style="color:#ff9800">7</div>
-            <div class="vg-val">0</div>
-            <div class="vg-val" style="color:#ff9800">1</div>
-            <div class="vg-val">0</div>
-            <div class="vg-label" style="text-align:left">SONOFF</div>
-            <div class="vg-val" style="color:#ff9800">11</div>
-            <div class="vg-val">0</div>
-            <div class="vg-val">0</div>
-            <div class="vg-val">0</div>
+          <div style="display:grid;grid-template-columns:0.5fr 1fr 1fr 1fr 1fr 1fr;text-align:center;gap:3px">
+            <div class="vg-val" id="l5c1-count-hue" style="color:#fff">11</div>
+            <div class="vg-label" id="l5c1-marque-hue" style="text-align:left;color:#fff">HUE</div>
+            <div class="vg-val" id="l5c1-r100-hue"></div>
+            <div class="vg-val" id="l5c1-r75-hue"></div>
+            <div class="vg-val" id="l5c1-r50-hue"></div>
+            <div class="vg-val" id="l5c1-r25-hue"></div>
+            <div class="vg-val" id="l5c1-count-ikea" style="color:#fff">8</div>
+            <div class="vg-label" id="l5c1-marque-ikea" style="text-align:left;color:#fff">IKEA</div>
+            <div class="vg-val" id="l5c1-r100-ikea"></div>
+            <div class="vg-val" id="l5c1-r75-ikea"></div>
+            <div class="vg-val" id="l5c1-r50-ikea"></div>
+            <div class="vg-val" id="l5c1-r25-ikea"></div>
+            <div class="vg-val" id="l5c1-count-sonoff" style="color:#fff">11</div>
+            <div class="vg-label" id="l5c1-marque-sonoff" style="text-align:left;color:#fff">SONOFF</div>
+            <div class="vg-val" id="l5c1-r100-sonoff"></div>
+            <div class="vg-val" id="l5c1-r75-sonoff"></div>
+            <div class="vg-val" id="l5c1-r50-sonoff"></div>
+            <div class="vg-val" id="l5c1-r25-sonoff"></div>
           </div>
         </div>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L5C2 Batteries Portables -->
       <div class="vg" style="display:flex;flex-direction:column">
@@ -4885,6 +4886,53 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
         sEl.textContent = storeVal; sEl.style.color = storeCol;
       }
     });
+  }
+
+  // --- L5C1 Piles & Batteries ---
+  // 6 frames : repos -> 1 pile par groupe se degrade colonne par colonne -> alerte rouge
+  var L5C1_SCENARIOS = [
+    { hue:{count:11,r100:0,r75:0,r50:0,r25:0}, ikea:{count:8,r100:0,r75:0,r50:0,r25:0}, sonoff:{count:11,r100:0,r75:0,r50:0,r25:0} },
+    { hue:{count:10,r100:1,r75:0,r50:0,r25:0}, ikea:{count:7,r100:1,r75:0,r50:0,r25:0}, sonoff:{count:10,r100:1,r75:0,r50:0,r25:0} },
+    { hue:{count:10,r100:0,r75:1,r50:0,r25:0}, ikea:{count:7,r100:0,r75:1,r50:0,r25:0}, sonoff:{count:10,r100:0,r75:1,r50:0,r25:0} },
+    { hue:{count:10,r100:0,r75:0,r50:1,r25:0}, ikea:{count:7,r100:0,r75:0,r50:1,r25:0}, sonoff:{count:10,r100:0,r75:0,r50:1,r25:0} },
+    { hue:{count:10,r100:0,r75:0,r50:0,r25:1}, ikea:{count:7,r100:0,r75:0,r50:0,r25:1}, sonoff:{count:10,r100:0,r75:0,r50:0,r25:1} },
+    { hue:{count:'!',r100:0,r75:0,r50:0,r25:1,alert:true}, ikea:{count:'!',r100:0,r75:0,r50:0,r25:1,alert:true}, sonoff:{count:'!',r100:0,r75:0,r50:0,r25:1,alert:true} }
+  ];
+  var L5C1_BRANDS = ['hue','ikea','sonoff'];
+  var L5C1_MARQUES = {hue:'HUE',ikea:'IKEA',sonoff:'SONOFF'};
+  function applyL5C1Frame(frame){
+    L5C1_BRANDS.forEach(function(b){
+      var d = frame[b];
+      var countEl = document.getElementById('l5c1-count-' + b);
+      var marqueEl = document.getElementById('l5c1-marque-' + b);
+      if (countEl){ countEl.textContent = d.count; countEl.style.color = d.alert ? 'rgb(244,67,54)' : '#fff'; }
+      if (marqueEl){ marqueEl.textContent = d.alert ? '/!\\ ' + L5C1_MARQUES[b] : L5C1_MARQUES[b]; marqueEl.style.color = d.alert ? 'rgb(244,67,54)' : '#fff'; }
+      function setRange(id, val){
+        var el = document.getElementById('l5c1-' + id + '-' + b);
+        if (!el) return;
+        el.textContent = val > 0 ? val : '';
+        el.style.color = val > 0 ? '#FFA500' : '';
+      }
+      setRange('r100', d.r100);
+      setRange('r75', d.r75);
+      setRange('r50', d.r50);
+      setRange('r25', d.r25);
+    });
+  }
+  var vgL5C1 = document.getElementById('vg-l5c1');
+  var vgBatHoverCount = 0, vgBatTimer = null, vgBatIdx = 0;
+  function vgBatStart(){
+    if (vgBatTimer) return;
+    vgBatIdx = 1; applyL5C1Frame(L5C1_SCENARIOS[vgBatIdx]);
+    vgBatTimer = setInterval(function(){
+      vgBatIdx = (vgBatIdx + 1) % L5C1_SCENARIOS.length;
+      applyL5C1Frame(L5C1_SCENARIOS[vgBatIdx]);
+    }, 1200);
+  }
+  function vgBatStop(){ clearInterval(vgBatTimer); vgBatTimer = null; vgBatIdx = 0; applyL5C1Frame(L5C1_SCENARIOS[0]); }
+  if (vgL5C1){
+    vgL5C1.addEventListener('mouseenter', function(){ vgBatHoverCount++; vgBatStart(); });
+    vgL5C1.addEventListener('mouseleave', function(){ vgBatHoverCount = Math.max(0, vgBatHoverCount-1); if (vgBatHoverCount===0) vgBatStop(); });
   }
 })();
 </script>
