@@ -1218,15 +1218,16 @@ footer a:hover { color:var(--green); }
         <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L4C2 Mini PC -->
-      <div class="vg">
+      <div class="vg" id="vg-l4c2">
         <div class="vg-title">Mini - P.C. (NUC)</div>
         <div class="vg-center" style="font-size:1.6rem">&#128187;</div>
-        <div class="vg-center" style="color:#4caf50;font-weight:700;margin:2px 0">53.0&#176;C</div>
+        <div class="vg-center vg-val" id="l4c2-temp" style="color:rgb(70,175,75);font-weight:700;margin:2px 0">51.0&#176;C</div>
         <div class="vg-sep"></div>
-        <div class="vg-row"><span class="vg-label">CPU</span><span class="vg-val">2.80%</span></div>
-        <div class="vg-row"><span class="vg-label">IP</span><span class="vg-val" style="color:#03a9f4">10.32.154.243</span></div>
-        <div class="vg-row"><span class="vg-label">RAM</span><span class="vg-val">42.63%</span></div>
-        <div class="vg-row"><span class="vg-label">Uptime</span><span class="vg-val">12j 06h</span></div>
+        <div class="vg-row"><span class="vg-label">CPU</span><span class="vg-val" id="l4c2-cpu" style="color:#fff">2.3%</span></div>
+        <div class="vg-row"><span class="vg-label">Power</span><span class="vg-val" id="l4c2-power" style="color:#fff">8.5 W</span></div>
+        <div class="vg-row"><span class="vg-label">RAM</span><span class="vg-val" id="l4c2-ram" style="color:#fff">42.6%</span></div>
+        <div class="vg-row"><span class="vg-label">SSD</span><span class="vg-val" id="l4c2-storage" style="color:#fff">62.9%</span></div>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L4C3 Software -->
       <div class="vg" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px">
@@ -4809,9 +4810,9 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
   function vgPveTempColor(t){ return t > 75 ? 'rgb(244,67,54)' : t > 65 ? 'orange' : 'rgb(70,175,75)'; }
   function vgPveMetricColor(v){ return v > 90 ? 'rgb(244,67,54)' : v > 75 ? 'orange' : '#fff'; }
   var L4C1_SCENARIOS = [
-    { temp:51.0, cpu:2.3,  ram:42.6, storage:62.9 },
-    { temp:68.0, cpu:78.0, ram:77.0, storage:78.5 },
-    { temp:84.0, cpu:95.0, ram:91.0, storage:92.1 }
+    { temp:51.0, cpu:2.3,  ram:42.6, storage:62.9, power:8.5  },
+    { temp:68.0, cpu:78.0, ram:77.0, storage:78.5, power:16.2 },
+    { temp:84.0, cpu:95.0, ram:91.0, storage:92.1, power:21.5 }
   ];
   function applyL4C1Frame(f){
     var tEl = document.getElementById('l4c1-temp');
@@ -4823,23 +4824,37 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     var sEl = document.getElementById('l4c1-storage');
     if (sEl) { sEl.textContent = f.storage.toFixed(1) + '%'; sEl.style.color = vgPveMetricColor(f.storage); }
   }
-  var vgL4C1 = document.getElementById('vg-l4c1');
-  var vgL4C1Timer = null, vgL4C1Idx = 1;
-  if (vgL4C1) {
-    vgL4C1.addEventListener('mouseenter', function(){
-      if (vgL4C1Timer) return;
-      vgL4C1Idx = 1;
-      applyL4C1Frame(L4C1_SCENARIOS[vgL4C1Idx]);
-      vgL4C1Timer = setInterval(function(){
-        vgL4C1Idx = (vgL4C1Idx + 1) % L4C1_SCENARIOS.length;
-        applyL4C1Frame(L4C1_SCENARIOS[vgL4C1Idx]);
-      }, 1600);
-    });
-    vgL4C1.addEventListener('mouseleave', function(){
-      clearInterval(vgL4C1Timer); vgL4C1Timer = null;
-      applyL4C1Frame(L4C1_SCENARIOS[0]);
-    });
+  function vgPvePowerColor(w){ return w > 19 ? 'rgb(244,67,54)' : w > 15 ? 'orange' : '#fff'; }
+  function applyL4C2Frame(f){
+    var tEl = document.getElementById('l4c2-temp');
+    if (tEl) { tEl.textContent = f.temp.toFixed(1) + '°C'; tEl.style.color = vgPveTempColor(f.temp); }
+    var cEl = document.getElementById('l4c2-cpu');
+    if (cEl) { cEl.textContent = f.cpu.toFixed(1) + '%'; cEl.style.color = vgPveMetricColor(f.cpu); }
+    var pEl = document.getElementById('l4c2-power');
+    if (pEl) { pEl.textContent = f.power.toFixed(1) + ' W'; pEl.style.color = vgPvePowerColor(f.power); }
+    var rEl = document.getElementById('l4c2-ram');
+    if (rEl) { rEl.textContent = f.ram.toFixed(1) + '%'; rEl.style.color = vgPveMetricColor(f.ram); }
+    var sEl = document.getElementById('l4c2-storage');
+    if (sEl) { sEl.textContent = f.storage.toFixed(1) + '%'; sEl.style.color = vgPveMetricColor(f.storage); }
   }
+  var vgL4C1 = document.getElementById('vg-l4c1');
+  var vgL4C2 = document.getElementById('vg-l4c2');
+  var vgPveHoverCount = 0, vgPveTimer = null, vgPveIdx = 1;
+  function vgPveApplyBoth(f){ applyL4C1Frame(f); applyL4C2Frame(f); }
+  function vgPveStart(){
+    if (vgPveTimer) return;
+    vgPveIdx = 1; vgPveApplyBoth(L4C1_SCENARIOS[vgPveIdx]);
+    vgPveTimer = setInterval(function(){
+      vgPveIdx = (vgPveIdx + 1) % L4C1_SCENARIOS.length;
+      vgPveApplyBoth(L4C1_SCENARIOS[vgPveIdx]);
+    }, 1600);
+  }
+  function vgPveStop(){ clearInterval(vgPveTimer); vgPveTimer = null; vgPveApplyBoth(L4C1_SCENARIOS[0]); }
+  [vgL4C1, vgL4C2].forEach(function(el){
+    if (!el) return;
+    el.addEventListener('mouseenter', function(){ vgPveHoverCount++; vgPveStart(); });
+    el.addEventListener('mouseleave', function(){ vgPveHoverCount = Math.max(0, vgPveHoverCount-1); if (vgPveHoverCount===0) vgPveStop(); });
+  });
 
   // --- L3C3 Commande Stores — synced avec L1C3/L2C2 (scenarios clim portent le champ stores) ---
   // binary_sensor : on=Ouvert(rouge) / off=Ferme(vert) / autre=N/A(gris)
