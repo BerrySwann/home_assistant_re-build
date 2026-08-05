@@ -1296,24 +1296,25 @@ footer a:hover { color:var(--green); }
         <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L5C3 MariaDB -->
-      <div class="vg" style="display:flex;flex-direction:column">
+      <div class="vg" id="vg-l5c3" style="display:flex;flex-direction:column">
         <div class="vg-title">MariaDB</div>
         <div style="flex:1;display:flex;align-items:center;justify-content:center">
           <div style="display:flex;flex-direction:column;align-items:center">
             <div style="position:relative;width:95px;height:95px">
               <svg viewBox="0 0 90 90" width="95" height="95">
                 <circle cx="45" cy="45" r="36" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="8"/>
-                <circle cx="45" cy="45" r="36" fill="none" stroke="#4caf50" stroke-width="8"
-                        stroke-dasharray="113 226" stroke-linecap="round" transform="rotate(90 45 45)"/>
+                <circle id="l5c3-arc" cx="45" cy="45" r="36" fill="none" stroke="green" stroke-width="8"
+                        stroke-dasharray="58.6 226.2" stroke-linecap="round" transform="rotate(-90 45 45)"/>
               </svg>
               <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
-                <div style="font-size:13px;font-weight:700;color:#4caf50;white-space:nowrap">1036.0</div>
+                <div id="l5c3-val" style="font-size:13px;font-weight:700;color:green;white-space:nowrap">1036.0</div>
                 <div style="font-size:8px;color:#fff">MiB</div>
               </div>
             </div>
             <div style="font-size:1rem;color:#fff;font-weight:700;letter-spacing:1px;margin-top:4px">MARIADB</div>
           </div>
         </div>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <div class="row-label">L6 &mdash; Qualite &amp; Alertes</div>
       <!-- L6C1 Qualite Air -->
@@ -4982,6 +4983,48 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
   if (vgL5C2){
     vgL5C2.addEventListener('mouseenter', function(){ vgMobHoverCount++; vgMobStart(); });
     vgL5C2.addEventListener('mouseleave', function(){ vgMobHoverCount = Math.max(0, vgMobHoverCount-1); if (vgMobHoverCount===0) vgMobStop(); });
+  }
+
+  // --- L5C3 MariaDB ---
+  // sensor.taille_db_home_assistant : 0-4000 MiB
+  // color_stops : <1800 green / <2500 gold / <3000 rgb(231,180,57) / <3500 rgb(225,156,24) / <4000 darkorange / >=4000 red
+  var L5C3_CIRC = 2 * Math.PI * 36;
+  function vgDbColor(mib){
+    if (mib < 1800) return 'green';
+    if (mib < 2500) return 'gold';
+    if (mib < 3000) return 'rgb(231,180,57)';
+    if (mib < 3500) return 'rgb(225,156,24)';
+    if (mib < 4000) return 'darkorange';
+    return 'red';
+  }
+  var L5C3_SCENARIOS = [
+    { mib:1036.0 },
+    { mib:450.0  },
+    { mib:2200.0 },
+    { mib:3700.0 }
+  ];
+  function applyL5C3Frame(frame){
+    var arcEl = document.getElementById('l5c3-arc');
+    var valEl = document.getElementById('l5c3-val');
+    var col = vgDbColor(frame.mib);
+    var dash = (frame.mib / 4000) * L5C3_CIRC;
+    if (arcEl){ arcEl.setAttribute('stroke', col); arcEl.setAttribute('stroke-dasharray', dash.toFixed(1) + ' ' + L5C3_CIRC.toFixed(1)); }
+    if (valEl){ valEl.textContent = frame.mib.toFixed(1); valEl.style.color = col; }
+  }
+  var vgL5C3 = document.getElementById('vg-l5c3');
+  var vgDbHoverCount = 0, vgDbTimer = null, vgDbIdx = 0;
+  function vgDbStart(){
+    if (vgDbTimer) return;
+    vgDbIdx = 1; applyL5C3Frame(L5C3_SCENARIOS[vgDbIdx]);
+    vgDbTimer = setInterval(function(){
+      vgDbIdx = vgDbIdx >= L5C3_SCENARIOS.length - 1 ? 1 : vgDbIdx + 1;
+      applyL5C3Frame(L5C3_SCENARIOS[vgDbIdx]);
+    }, 1400);
+  }
+  function vgDbStop(){ clearInterval(vgDbTimer); vgDbTimer = null; vgDbIdx = 0; applyL5C3Frame(L5C3_SCENARIOS[0]); }
+  if (vgL5C3){
+    vgL5C3.addEventListener('mouseenter', function(){ vgDbHoverCount++; vgDbStart(); });
+    vgL5C3.addEventListener('mouseleave', function(){ vgDbHoverCount = Math.max(0, vgDbHoverCount-1); if (vgDbHoverCount===0) vgDbStop(); });
   }
 })();
 </script>
