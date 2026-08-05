@@ -4485,7 +4485,8 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
       sdb:     { power:'off', mode:'off',  c:21.0, q:0,    m:0 },
       chambre: { power:'on',  mode:'cool', c:27.0, q:1.32, m:49.19 },
       sdbses:  { power:'off', mode:'off',  q:0, m:0 },
-      total:   { q:5.31, m:222.89 } },
+      total:   { q:5.31, m:222.89 },
+      stores:  { salon:{fenetre:'off',store:'Ferme'}, cuisine:{fenetre:'off'}, bureau:{fenetre:'off',store:'Ferme'}, chambre:{fenetre:'off'} } },
     { tmoy: 19.4, ademe: 3.2, isCooling: false, mode: 'off',
       salon:   { power:'off', mode:'off', c:20.0, q:0, m:125.10 },
       cuisine: { power:'off', mode:'off', c:19.5, q:0, m:5.00 },
@@ -4493,7 +4494,8 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
       sdb:     { power:'off', mode:'off', c:21.0, q:0, m:0 },
       chambre: { power:'off', mode:'off', c:19.0, q:0, m:50.60 },
       sdbses:  { power:'off', mode:'off', q:0, m:0 },
-      total:   { q:0.00, m:230.50 } },
+      total:   { q:0.00, m:230.50 },
+      stores:  { salon:{fenetre:'on',store:'Ouvert'}, cuisine:{fenetre:'on'}, bureau:{fenetre:'on',store:'Ouvert'}, chambre:{fenetre:'on'} } },
     { tmoy: 24.6, ademe: -9.4, isCooling: true, mode: 'fan',
       salon:   { power:'on',  mode:'fan', c:24.0, q:0.15, m:125.40 },
       cuisine: { power:'off', mode:'off', c:22.0, q:0,    m:5.00 },
@@ -4501,7 +4503,8 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
       sdb:     { power:'off', mode:'off', c:21.0, q:0,    m:0 },
       chambre: { power:'on',  mode:'fan', c:24.0, q:0.05, m:50.70 },
       sdbses:  { power:'off', mode:'off', q:0, m:0 },
-      total:   { q:0.28, m:231.05 } },
+      total:   { q:0.28, m:231.05 },
+      stores:  { salon:{fenetre:'off',store:'Arret'}, cuisine:{fenetre:'off'}, bureau:{fenetre:'off',store:'Arret'}, chambre:{fenetre:'off'} } },
     { tmoy: 18.2, ademe: 5.0, isCooling: false, mode: 'heat',
       salon:   { power:'on', mode:'heat', c:21.0, q:3.40, m:132.80 },
       cuisine: { power:'on', mode:'heat', c:20.5, q:0.62, m:8.50 },
@@ -4509,7 +4512,8 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
       sdb:     { power:'on', mode:'heat', c:22.0, q:0.35, m:6.20 },
       chambre: { power:'on', mode:'heat', c:19.5, q:2.15, m:58.30 },
       sdbses:  { power:'on', mode:'heat', q:0.28, m:4.90 },
-      total:   { q:9.70, m:266.30 } }
+      total:   { q:9.70, m:266.30 },
+      stores:  { salon:{fenetre:'off',store:'Ferme'}, cuisine:{fenetre:'off'}, bureau:{fenetre:'off',store:'Ferme'}, chambre:{fenetre:'off'} } }
   ];
 
   function applyL1C3Frame(frame){
@@ -4615,13 +4619,15 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     if (mTotEl) mTotEl.textContent = vgFmtKwh(frame.total.m);
   }
 
-  // ----- Synchro L1C3 + L2C2 : survoler l'une OU l'autre anime les deux ensemble -----
+  // ----- Synchro L1C3 + L2C2 + L3C3 : survoler l'une OU l'autre anime les trois ensemble -----
   var vgL1C3 = document.getElementById('vg-l1c3');
   var vgL2C2 = document.getElementById('vg-l2c2');
+  var vgL3C3 = document.getElementById('vg-l3c3');
   var vgClimHoverCount = 0, vgClimTimer = null, vgClimIdx = 1;
   function vgClimApplyBoth(frame){
     applyL1C3Frame(frame);
     applyL2C2Frame(frame);
+    applyL3C3Frame(frame);
   }
   function vgClimStart(){
     if (vgClimTimer) return;
@@ -4637,7 +4643,7 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     vgClimTimer = null;
     vgClimApplyBoth(VG_CLIM_SCENARIOS[0]);
   }
-  [vgL1C3, vgL2C2].forEach(function(el){
+  [vgL1C3, vgL2C2, vgL3C3].forEach(function(el){
     if (!el) return;
     el.addEventListener('mouseenter', function(){
       vgClimHoverCount++;
@@ -4778,16 +4784,10 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     });
   });
 
-  // --- L3C3 Commande Stores ---
-  // binary_sensor.contact_fenetre_*_sonoff_contact : on=Ouvert(rouge) / off=Ferme(lightgreen) / autre=N/A(gris)
-  // sensor.store_salon_status et sensor.store_bureau_status : texte brut (sans couleur, blanc) ; Cuisine/Chambre n'ont pas de sensor store reel -> '-'
+  // --- L3C3 Commande Stores — synced avec L1C3/L2C2 (scenarios clim portent le champ stores) ---
+  // binary_sensor : on=Ouvert(rouge) / off=Ferme(vert) / autre=N/A(gris)
+  // sensor.store_*_status : texte brut blanc ; Cuisine/Chambre pas de store reel -> '-'
   var L3C3_ROOMS = ['salon', 'cuisine', 'bureau', 'chambre'];
-  var L3C3_SCENARIOS = [
-    { salon:{fenetre:'off',store:'Ferme'}, cuisine:{fenetre:'off',store:null}, bureau:{fenetre:'off',store:'Ferme'}, chambre:{fenetre:'off',store:null} },
-    { salon:{fenetre:'on',store:'Ouvert'}, cuisine:{fenetre:'on',store:null}, bureau:{fenetre:'off',store:'Ferme'}, chambre:{fenetre:'off',store:null} },
-    { salon:{fenetre:'off',store:'Arret'}, cuisine:{fenetre:'off',store:null}, bureau:{fenetre:'on',store:'Ouvert'}, chambre:{fenetre:'na',store:null} },
-    { salon:{fenetre:'on',store:'Ouvert'}, cuisine:{fenetre:'on',store:null}, bureau:{fenetre:'on',store:'Ouvert'}, chambre:{fenetre:'on',store:null} }
-  ];
   function vgFenetreColor(state){
     if (state === 'on') return 'rgb(244,67,54)';
     if (state === 'off') return 'lightgreen';
@@ -4799,33 +4799,16 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     return 'N/A';
   }
   function applyL3C3Frame(frame){
+    var stores = frame.stores;
+    if (!stores) return;
     L3C3_ROOMS.forEach(function(room){
-      var r = frame[room];
+      var r = stores[room];
+      if (!r) return;
       var fEl = document.getElementById('l3c3-f-' + room);
       if (fEl) { fEl.textContent = vgFenetreLabel(r.fenetre); fEl.style.color = vgFenetreColor(r.fenetre); }
       var sEl = document.getElementById('l3c3-s-' + room);
-      if (sEl) { sEl.textContent = r.store === null ? '-' : r.store; sEl.style.color = '#fff'; }
+      if (sEl) { sEl.textContent = r.store ? r.store : '-'; sEl.style.color = '#fff'; }
     });
-  }
-  var vgL3C3 = document.getElementById('vg-l3c3');
-  var vgL3C3Timer = null, vgL3C3Idx = 1;
-  function vgL3C3Start(){
-    if (vgL3C3Timer) return;
-    vgL3C3Idx = 1;
-    applyL3C3Frame(L3C3_SCENARIOS[vgL3C3Idx]);
-    vgL3C3Timer = setInterval(function(){
-      vgL3C3Idx = (vgL3C3Idx + 1) % L3C3_SCENARIOS.length;
-      applyL3C3Frame(L3C3_SCENARIOS[vgL3C3Idx]);
-    }, 1600);
-  }
-  function vgL3C3Stop(){
-    clearInterval(vgL3C3Timer);
-    vgL3C3Timer = null;
-    applyL3C3Frame(L3C3_SCENARIOS[0]);
-  }
-  if (vgL3C3) {
-    vgL3C3.addEventListener('mouseenter', vgL3C3Start);
-    vgL3C3.addEventListener('mouseleave', vgL3C3Stop);
   }
 })();
 </script>
