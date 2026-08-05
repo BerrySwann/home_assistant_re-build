@@ -788,6 +788,75 @@ footer a:hover { color:var(--green); }
     background: #1e1e1e;
     border-radius: 3px 0 0 3px;
   }
+  /* ---- phone status bar ---- */
+  .phone-status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 22px 5px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.02em;
+    background: rgba(0,0,0,0.25);
+    font-family: 'Roboto', sans-serif;
+  }
+  .psb-right {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .psb-signal {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 12px;
+  }
+  .psb-signal .bar {
+    display: block;
+    width: 3px;
+    background: #fff;
+    border-radius: 1px;
+  }
+  .psb-signal .b1 { height: 3px; }
+  .psb-signal .b2 { height: 6px; }
+  .psb-signal .b3 { height: 9px; }
+  .psb-signal .b4 { height: 12px; }
+  .psb-4g {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .psb-bat-wrap {
+    display: flex;
+    align-items: center;
+  }
+  .psb-bat-body {
+    width: 22px;
+    height: 11px;
+    border: 1.5px solid rgba(255,255,255,0.85);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .psb-bat-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 72%;
+    background: #4caf50;
+    border-radius: 1px;
+  }
+  .psb-bat-nub {
+    width: 2px;
+    height: 5px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 0 1px 1px 0;
+    margin-left: 1px;
+  }
+  .psb-bat-pct {
+    font-size: 0.68rem;
+    margin-left: 3px;
+  }
   /* ---- vg screen inside phone ---- */
   .vg-dark-wrap {
     background: rgba(0,0,0,0.3);
@@ -1147,6 +1216,23 @@ footer a:hover { color:var(--green); }
         <div class="phone-camera"></div>
       </div>
     <div class="vg-dark-wrap">
+      <div class="phone-status-bar">
+        <span>Operateur F</span>
+        <span class="psb-right">
+          <span class="psb-signal">
+            <span class="bar b1"></span>
+            <span class="bar b2"></span>
+            <span class="bar b3"></span>
+            <span class="bar b4"></span>
+          </span>
+          <span class="psb-4g">4G</span>
+          <span class="psb-bat-wrap">
+            <span class="psb-bat-body"><span class="psb-bat-fill"></span></span>
+            <span class="psb-bat-nub"></span>
+          </span>
+          <span class="psb-bat-pct">72%</span>
+        </span>
+      </div>
     <div class="vg-grid reveal">
       <div class="row-label">L1 &mdash; Environnement &amp; Thermique</div>
       <!-- L1C1 Meteo -->
