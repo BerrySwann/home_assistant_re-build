@@ -1230,10 +1230,11 @@ footer a:hover { color:var(--green); }
         <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L4C3 Software -->
-      <div class="vg" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px">
+      <div class="vg" id="vg-l4c3" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px">
         <div class="vg-title" style="width:100%">Software | modules</div>
         <div style="font-size:2.5rem;margin:10px 0">&#127968;</div>
-        <div style="color:#4caf50;font-weight:700">Tout est &agrave; jour</div>
+        <div id="l4c3-text" style="color:#fff;font-weight:700">Tout est a jour</div>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <div class="row-label">L5 &mdash; Maintenance Materielle</div>
       <!-- L5C1 Piles Batteries -->
@@ -4861,6 +4862,41 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     el.addEventListener('mouseenter', function(){ vgPveHoverCount++; vgPveStart(); });
     el.addEventListener('mouseleave', function(){ vgPveHoverCount = Math.max(0, vgPveHoverCount-1); if (vgPveHoverCount===0) vgPveStop(); });
   });
+
+  // --- L4C3 Software / Mises a jour ---
+  // sensor.available_updates : 0 -> blanc "Tout est a jour" / >=1 -> orange "N mise(s) a jour"
+  var L4C3_SCENARIOS = [
+    { n:0 },
+    { n:0 },
+    { n:1 },
+    { n:8 }
+  ];
+  function applyL4C3Frame(frame){
+    var el = document.getElementById('l4c3-text');
+    if (!el) return;
+    if (frame.n === 0){
+      el.textContent = 'Tout est a jour';
+      el.style.color = '#fff';
+    } else {
+      el.textContent = frame.n + (frame.n === 1 ? ' mise a jour' : ' mises a jour');
+      el.style.color = 'orange';
+    }
+  }
+  var vgL4C3 = document.getElementById('vg-l4c3');
+  var vgMajHoverCount = 0, vgMajTimer = null, vgMajIdx = 0;
+  function vgMajStart(){
+    if (vgMajTimer) return;
+    vgMajIdx = 1; applyL4C3Frame(L4C3_SCENARIOS[vgMajIdx]);
+    vgMajTimer = setInterval(function(){
+      vgMajIdx = vgMajIdx >= L4C3_SCENARIOS.length - 1 ? 1 : vgMajIdx + 1;
+      applyL4C3Frame(L4C3_SCENARIOS[vgMajIdx]);
+    }, 1400);
+  }
+  function vgMajStop(){ clearInterval(vgMajTimer); vgMajTimer = null; vgMajIdx = 0; applyL4C3Frame(L4C3_SCENARIOS[0]); }
+  if (vgL4C3){
+    vgL4C3.addEventListener('mouseenter', function(){ vgMajHoverCount++; vgMajStart(); });
+    vgL4C3.addEventListener('mouseleave', function(){ vgMajHoverCount = Math.max(0, vgMajHoverCount-1); if (vgMajHoverCount===0) vgMajStop(); });
+  }
 
   // --- L3C3 Commande Stores — synced avec L1C3/L2C2 (scenarios clim portent le champ stores) ---
   // binary_sensor : on=Ouvert(rouge) / off=Ferme(vert) / autre=N/A(gris)
