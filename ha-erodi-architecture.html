@@ -4516,6 +4516,10 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
       stores:  { salon:{fenetre:'off',store:'Ferme'}, cuisine:{fenetre:'off'}, bureau:{fenetre:'off',store:'Ferme'}, chambre:{fenetre:'off'} } }
   ];
 
+  function vgAnyFenetreOpen(frame){
+    if (!frame.stores) return false;
+    return ['salon','cuisine','bureau','chambre'].some(function(r){ return frame.stores[r] && frame.stores[r].fenetre === 'on'; });
+  }
   function applyL1C3Frame(frame){
     var tmoyEl = document.getElementById('l1c3-c-tmoy');
     if (tmoyEl) tmoyEl.textContent = frame.tmoy.toFixed(1) + '°C';
@@ -4529,15 +4533,22 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
       globalEl.textContent = vgClimModeLabel(frame.mode);
       globalEl.style.color = vgClimModeColor(frame.mode);
     }
+    var fenetreOpen = vgAnyFenetreOpen(frame);
     L1C3_ROOMS.forEach(function(room){
       var r = frame[room];
       var pEl = document.getElementById('l1c3-p-' + room);
       var mEl = document.getElementById('l1c3-m-' + room);
       var cEl = document.getElementById('l1c3-c-' + room);
-      // Exception Eric : le mot "Chambre" reste toujours blanc sur L1C3 aussi
-      if (pEl) pEl.style.color = (room === 'chambre') ? '#fff' : vgClimPieceColor(r.power, r.mode);
-      if (mEl) { mEl.textContent = vgClimModeLabel(r.mode); mEl.style.color = vgClimModeColor(r.mode); }
-      if (cEl) cEl.textContent = r.c.toFixed(1) + '°C';
+      if (fenetreOpen) {
+        if (pEl) pEl.style.color = '#fff';
+        if (mEl) { mEl.textContent = 'Off'; mEl.style.color = vgClimModeColor('off'); }
+        if (cEl) cEl.textContent = r.c.toFixed(1) + '°C';
+      } else {
+        // Exception Eric : le mot "Chambre" reste toujours blanc sur L1C3 aussi
+        if (pEl) pEl.style.color = (room === 'chambre') ? '#fff' : vgClimPieceColor(r.power, r.mode);
+        if (mEl) { mEl.textContent = vgClimModeLabel(r.mode); mEl.style.color = vgClimModeColor(r.mode); }
+        if (cEl) cEl.textContent = r.c.toFixed(1) + '°C';
+      }
     });
   }
 
@@ -4603,13 +4614,19 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
   // mapping id L2C2 -> cle scenario partage (sdbsft = meme entite que "sdb" cote L1C3)
   var L2C2_ROOM_MAP = { salon:'salon', cuisine:'cuisine', bureau:'bureau', sdbsft:'sdb', sdbses:'sdbses', chambre:'chambre' };
   function applyL2C2Frame(frame){
+    var fenetreOpenL2 = vgAnyFenetreOpen(frame);
     Object.keys(L2C2_ROOM_MAP).forEach(function(domId){
       var r = frame[L2C2_ROOM_MAP[domId]];
       var pEl = document.getElementById('l2c2-p-' + domId);
       var qEl = document.getElementById('l2c2-q-' + domId);
       var mEl = document.getElementById('l2c2-m-' + domId);
-      // Exception Eric : le mot "Chambre" reste toujours blanc sur L2C2, meme allumee
-      if (pEl) pEl.style.color = (domId === 'chambre') ? '#fff' : vgClimEnergyColor(r.power, r.mode);
+      if (fenetreOpenL2) {
+        // fenetre ouverte : toutes les pieces en rouge (conso inchangee)
+        if (pEl) pEl.style.color = 'rgb(244,67,54)';
+      } else {
+        // Exception Eric : le mot "Chambre" reste toujours blanc sur L2C2, meme allumee
+        if (pEl) pEl.style.color = (domId === 'chambre') ? '#fff' : vgClimEnergyColor(r.power, r.mode);
+      }
       if (qEl) qEl.textContent = vgFmtKwh(r.q);
       if (mEl) mEl.textContent = vgFmtKwh(r.m);
     });
@@ -4807,7 +4824,11 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
       var fEl = document.getElementById('l3c3-f-' + room);
       if (fEl) { fEl.textContent = vgFenetreLabel(r.fenetre); fEl.style.color = vgFenetreColor(r.fenetre); }
       var sEl = document.getElementById('l3c3-s-' + room);
-      if (sEl) { sEl.textContent = r.store ? r.store : '-'; sEl.style.color = '#fff'; }
+      if (sEl) {
+        var storeVal = r.store ? r.store : '-';
+        var storeCol = storeVal === 'Ouvert' ? 'lightgreen' : (storeVal === 'Ferme' ? 'rgb(244,67,54)' : '#fff');
+        sEl.textContent = storeVal; sEl.style.color = storeCol;
+      }
     });
   }
 })();
