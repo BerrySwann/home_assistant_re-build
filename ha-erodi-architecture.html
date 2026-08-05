@@ -1245,21 +1245,21 @@ footer a:hover { color:var(--green); }
             <div>100%</div><div>75%</div><div>50%</div><div>25%</div>
           </div>
           <div style="display:grid;grid-template-columns:0.5fr 1fr 1fr 1fr 1fr 1fr;text-align:center;gap:3px">
-            <div class="vg-val" id="l5c1-count-hue" style="color:#fff">11</div>
-            <div class="vg-label" id="l5c1-marque-hue" style="text-align:left;color:#fff">HUE</div>
-            <div class="vg-val" id="l5c1-r100-hue"></div>
-            <div class="vg-val" id="l5c1-r75-hue"></div>
+            <div class="vg-val" id="l5c1-count-hue" style="color:rgb(244,67,54)">11</div>
+            <div class="vg-label" id="l5c1-marque-hue" style="text-align:left;color:rgb(244,67,54)">/!\ HUE</div>
+            <div class="vg-val" id="l5c1-r100-hue" style="color:#FFA500">6</div>
+            <div class="vg-val" id="l5c1-r75-hue" style="color:#FFA500">1</div>
             <div class="vg-val" id="l5c1-r50-hue"></div>
-            <div class="vg-val" id="l5c1-r25-hue"></div>
+            <div class="vg-val" id="l5c1-r25-hue" style="color:#FFA500">4</div>
             <div class="vg-val" id="l5c1-count-ikea" style="color:#fff">8</div>
             <div class="vg-label" id="l5c1-marque-ikea" style="text-align:left;color:#fff">IKEA</div>
-            <div class="vg-val" id="l5c1-r100-ikea"></div>
+            <div class="vg-val" id="l5c1-r100-ikea" style="color:#FFA500">7</div>
             <div class="vg-val" id="l5c1-r75-ikea"></div>
-            <div class="vg-val" id="l5c1-r50-ikea"></div>
+            <div class="vg-val" id="l5c1-r50-ikea" style="color:#FFA500">1</div>
             <div class="vg-val" id="l5c1-r25-ikea"></div>
             <div class="vg-val" id="l5c1-count-sonoff" style="color:#fff">11</div>
             <div class="vg-label" id="l5c1-marque-sonoff" style="text-align:left;color:#fff">SONOFF</div>
-            <div class="vg-val" id="l5c1-r100-sonoff"></div>
+            <div class="vg-val" id="l5c1-r100-sonoff" style="color:#FFA500">11</div>
             <div class="vg-val" id="l5c1-r75-sonoff"></div>
             <div class="vg-val" id="l5c1-r50-sonoff"></div>
             <div class="vg-val" id="l5c1-r25-sonoff"></div>
@@ -4889,14 +4889,15 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
   }
 
   // --- L5C1 Piles & Batteries ---
-  // 6 frames : repos -> 1 pile par groupe se degrade colonne par colonne -> alerte rouge
+  // frame 0 = snapshot reel (repos) / frames 1-6 = animation degradation
   var L5C1_SCENARIOS = [
+    { hue:{count:11,r100:6,r75:1,r50:0,r25:4,alert:true}, ikea:{count:8,r100:7,r75:0,r50:1,r25:0}, sonoff:{count:11,r100:11,r75:0,r50:0,r25:0} },
     { hue:{count:11,r100:0,r75:0,r50:0,r25:0}, ikea:{count:8,r100:0,r75:0,r50:0,r25:0}, sonoff:{count:11,r100:0,r75:0,r50:0,r25:0} },
-    { hue:{count:10,r100:1,r75:0,r50:0,r25:0}, ikea:{count:7,r100:1,r75:0,r50:0,r25:0}, sonoff:{count:10,r100:1,r75:0,r50:0,r25:0} },
-    { hue:{count:10,r100:0,r75:1,r50:0,r25:0}, ikea:{count:7,r100:0,r75:1,r50:0,r25:0}, sonoff:{count:10,r100:0,r75:1,r50:0,r25:0} },
-    { hue:{count:10,r100:0,r75:0,r50:1,r25:0}, ikea:{count:7,r100:0,r75:0,r50:1,r25:0}, sonoff:{count:10,r100:0,r75:0,r50:1,r25:0} },
-    { hue:{count:10,r100:0,r75:0,r50:0,r25:1}, ikea:{count:7,r100:0,r75:0,r50:0,r25:1}, sonoff:{count:10,r100:0,r75:0,r50:0,r25:1} },
-    { hue:{count:'!',r100:0,r75:0,r50:0,r25:1,alert:true}, ikea:{count:'!',r100:0,r75:0,r50:0,r25:1,alert:true}, sonoff:{count:'!',r100:0,r75:0,r50:0,r25:1,alert:true} }
+    { hue:{count:11,r100:1,r75:0,r50:0,r25:0}, ikea:{count:8,r100:1,r75:0,r50:0,r25:0}, sonoff:{count:11,r100:1,r75:0,r50:0,r25:0} },
+    { hue:{count:11,r100:0,r75:1,r50:0,r25:0}, ikea:{count:8,r100:0,r75:1,r50:0,r25:0}, sonoff:{count:11,r100:0,r75:1,r50:0,r25:0} },
+    { hue:{count:11,r100:0,r75:0,r50:1,r25:0}, ikea:{count:8,r100:0,r75:0,r50:1,r25:0}, sonoff:{count:11,r100:0,r75:0,r50:1,r25:0} },
+    { hue:{count:11,r100:0,r75:0,r50:0,r25:1}, ikea:{count:8,r100:0,r75:0,r50:0,r25:1}, sonoff:{count:11,r100:0,r75:0,r50:0,r25:1} },
+    { hue:{count:11,r100:0,r75:0,r50:0,r25:1,alert:true}, ikea:{count:8,r100:0,r75:0,r50:0,r25:1,alert:true}, sonoff:{count:11,r100:0,r75:0,r50:0,r25:1,alert:true} }
   ];
   var L5C1_BRANDS = ['hue','ikea','sonoff'];
   var L5C1_MARQUES = {hue:'HUE',ikea:'IKEA',sonoff:'SONOFF'};
@@ -4925,7 +4926,7 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
     if (vgBatTimer) return;
     vgBatIdx = 1; applyL5C1Frame(L5C1_SCENARIOS[vgBatIdx]);
     vgBatTimer = setInterval(function(){
-      vgBatIdx = (vgBatIdx + 1) % L5C1_SCENARIOS.length;
+      vgBatIdx = vgBatIdx >= L5C1_SCENARIOS.length - 1 ? 1 : vgBatIdx + 1;
       applyL5C1Frame(L5C1_SCENARIOS[vgBatIdx]);
     }, 1200);
   }
