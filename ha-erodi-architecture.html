@@ -1303,11 +1303,11 @@ footer a:hover { color:var(--green); }
             <div style="position:relative;width:95px;height:95px">
               <svg viewBox="0 0 90 90" width="95" height="95">
                 <circle cx="45" cy="45" r="36" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="8"/>
-                <circle id="l5c3-arc" cx="45" cy="45" r="36" fill="none" stroke="green" stroke-width="8"
+                <circle id="l5c3-arc" cx="45" cy="45" r="36" fill="none" stroke="lightgreen" stroke-width="8"
                         stroke-dasharray="58.6 226.2" stroke-linecap="round" transform="rotate(-90 45 45)"/>
               </svg>
               <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
-                <div id="l5c3-val" style="font-size:13px;font-weight:700;color:green;white-space:nowrap">1036.0</div>
+                <div id="l5c3-val" style="font-size:13px;font-weight:700;color:lightgreen;white-space:nowrap">1036.0</div>
                 <div style="font-size:8px;color:#fff">MiB</div>
               </div>
             </div>
@@ -4990,7 +4990,7 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
   // color_stops : <1800 green / <2500 gold / <3000 rgb(231,180,57) / <3500 rgb(225,156,24) / <4000 darkorange / >=4000 red
   var L5C3_CIRC = 2 * Math.PI * 36;
   function vgDbColor(mib){
-    if (mib < 1800) return 'green';
+    if (mib < 1800) return 'lightgreen';
     if (mib < 2500) return 'gold';
     if (mib < 3000) return 'rgb(231,180,57)';
     if (mib < 3500) return 'rgb(225,156,24)';
