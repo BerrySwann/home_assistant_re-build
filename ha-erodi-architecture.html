@@ -1268,31 +1268,32 @@ footer a:hover { color:var(--green); }
         <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L5C2 Batteries Portables -->
-      <div class="vg" style="display:flex;flex-direction:column">
+      <div class="vg" id="vg-l5c2" style="display:flex;flex-direction:column">
         <div class="vg-title">Etat Batterie Portables</div>
         <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:5px">
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;font-size:0.68rem">
-            <span style="color:#fff">POCO_E</span><span style="color:#fdd835;text-align:center">58%</span><span style="text-align:right">&#128993;</span>
+            <span style="color:#fff">POCO_E</span><span id="l5c2-lvl-pocoe" style="color:orange;text-align:center">58%</span><span id="l5c2-dot-pocoe" style="text-align:right">&#128993;</span>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;font-size:0.68rem">
-            <span style="color:#fff">POCO_G</span><span style="color:#fdd835;text-align:center">63%</span><span style="text-align:right">&#128993;</span>
+            <span style="color:#fff">POCO_G</span><span id="l5c2-lvl-pocog" style="color:orange;text-align:center">63%</span><span id="l5c2-dot-pocog" style="text-align:right">&#128993;</span>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;font-size:0.68rem">
-            <span style="color:#fff">1+10P_E</span><span style="color:#fdd835;text-align:center">68%</span><span style="text-align:right">&#128993;</span>
+            <span style="color:#fff">1+10P_E</span><span id="l5c2-lvl-nee" style="color:orange;text-align:center">68%</span><span id="l5c2-dot-nee" style="text-align:right">&#128993;</span>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;font-size:0.68rem">
-            <span style="color:#fff">1+10P_G</span><span style="color:#fdd835;text-align:center">67%</span><span style="text-align:right">&#128993;</span>
+            <span style="color:#fff">1+10P_G</span><span id="l5c2-lvl-neg" style="color:orange;text-align:center">67%</span><span id="l5c2-dot-neg" style="text-align:right">&#128993;</span>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;font-size:0.68rem">
-            <span style="color:#fff">GM1901</span><span style="color:#4caf50;text-align:center">100%</span><span style="text-align:right">&#128994;</span>
+            <span style="color:#fff">GM1901</span><span id="l5c2-lvl-gm" style="color:lightgreen;text-align:center">100%</span><span id="l5c2-dot-gm" style="text-align:right">&#128994;</span>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;font-size:0.68rem">
-            <span style="color:#fff">SM-A53</span><span style="color:#4caf50;text-align:center">98%</span><span style="text-align:right">&#128994;</span>
+            <span style="color:#fff">SM-A53</span><span id="l5c2-lvl-sma" style="color:lightgreen;text-align:center">98%</span><span id="l5c2-dot-sma" style="text-align:right">&#128994;</span>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;font-size:0.68rem">
-            <span style="color:#fff">Tablette</span><span style="color:#fdd835;text-align:center">74%</span><span style="text-align:right">&#128993;</span>
+            <span style="color:#fff">Tablette</span><span id="l5c2-lvl-tab" style="color:orange;text-align:center">74%</span><span id="l5c2-dot-tab" style="text-align:right">&#128993;</span>
           </div>
         </div>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L5C3 MariaDB -->
       <div class="vg" style="display:flex;flex-direction:column">
@@ -4934,6 +4935,53 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
   if (vgL5C1){
     vgL5C1.addEventListener('mouseenter', function(){ vgBatHoverCount++; vgBatStart(); });
     vgL5C1.addEventListener('mouseleave', function(){ vgBatHoverCount = Math.max(0, vgBatHoverCount-1); if (vgBatHoverCount===0) vgBatStop(); });
+  }
+
+  // --- L5C2 Batteries Portables ---
+  // sensor.*.battery_level : >=80 lightgreen / >=50 orange / >=20 rgb(255,152,0) / <20 rouge
+  // sensor.*.battery_state : discharging=🟢 / charging=🟠 / wireless=🟡 / unavailable=⚫
+  function vgBattColor(lvl){
+    if (lvl >= 80) return 'lightgreen';
+    if (lvl >= 50) return 'orange';
+    if (lvl >= 20) return 'rgb(255,152,0)';
+    return 'rgb(244,67,54)';
+  }
+  function vgBattDot(state){
+    if (state === 'discharging') return '🟢';
+    if (state === 'charging')    return '🟠';
+    if (state === 'wireless')    return '🟡';
+    return '⚫';
+  }
+  var L5C2_DEVICES = ['pocoe','pocog','nee','neg','gm','sma','tab'];
+  var L5C2_SCENARIOS = [
+    { pocoe:{lvl:58,state:'wireless'}, pocog:{lvl:63,state:'wireless'}, nee:{lvl:68,state:'wireless'}, neg:{lvl:67,state:'wireless'}, gm:{lvl:100,state:'discharging'}, sma:{lvl:98,state:'discharging'}, tab:{lvl:74,state:'wireless'} },
+    { pocoe:{lvl:95,state:'discharging'}, pocog:{lvl:87,state:'discharging'}, nee:{lvl:92,state:'discharging'}, neg:{lvl:88,state:'discharging'}, gm:{lvl:100,state:'discharging'}, sma:{lvl:96,state:'discharging'}, tab:{lvl:83,state:'discharging'} },
+    { pocoe:{lvl:65,state:'charging'}, pocog:{lvl:52,state:'discharging'}, nee:{lvl:58,state:'discharging'}, neg:{lvl:53,state:'wireless'}, gm:{lvl:71,state:'discharging'}, sma:{lvl:55,state:'charging'}, tab:{lvl:62,state:'discharging'} },
+    { pocoe:{lvl:12,state:'discharging'}, pocog:{lvl:8,state:'discharging'}, nee:{lvl:18,state:'discharging'}, neg:{lvl:15,state:'discharging'}, gm:{lvl:14,state:'discharging'}, sma:{lvl:9,state:'discharging'}, tab:{lvl:16,state:'discharging'} }
+  ];
+  function applyL5C2Frame(frame){
+    L5C2_DEVICES.forEach(function(d){
+      var f = frame[d];
+      var lvlEl = document.getElementById('l5c2-lvl-' + d);
+      var dotEl = document.getElementById('l5c2-dot-' + d);
+      if (lvlEl){ lvlEl.textContent = f.lvl + '%'; lvlEl.style.color = vgBattColor(f.lvl); }
+      if (dotEl){ dotEl.textContent = vgBattDot(f.state); }
+    });
+  }
+  var vgL5C2 = document.getElementById('vg-l5c2');
+  var vgMobHoverCount = 0, vgMobTimer = null, vgMobIdx = 0;
+  function vgMobStart(){
+    if (vgMobTimer) return;
+    vgMobIdx = 1; applyL5C2Frame(L5C2_SCENARIOS[vgMobIdx]);
+    vgMobTimer = setInterval(function(){
+      vgMobIdx = vgMobIdx >= L5C2_SCENARIOS.length - 1 ? 1 : vgMobIdx + 1;
+      applyL5C2Frame(L5C2_SCENARIOS[vgMobIdx]);
+    }, 1400);
+  }
+  function vgMobStop(){ clearInterval(vgMobTimer); vgMobTimer = null; vgMobIdx = 0; applyL5C2Frame(L5C2_SCENARIOS[0]); }
+  if (vgL5C2){
+    vgL5C2.addEventListener('mouseenter', function(){ vgMobHoverCount++; vgMobStart(); });
+    vgL5C2.addEventListener('mouseleave', function(){ vgMobHoverCount = Math.max(0, vgMobHoverCount-1); if (vgMobHoverCount===0) vgMobStop(); });
   }
 })();
 </script>
