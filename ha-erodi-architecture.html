@@ -1330,16 +1330,18 @@ footer a:hover { color:var(--green); }
         <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L6C2 Pollution Pollen -->
-      <div class="vg" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px">
+      <div class="vg" id="vg-l6c2" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px">
         <div class="vg-title" style="width:100%">Pollution &amp; Pollen</div>
-        <div style="font-size:1.1rem;font-weight:700;margin:4px 0"><span style="color:#ff9800">Air 4</span> / <span style="color:#fdd835">Pollen 2</span></div>
+        <div style="font-size:1.1rem;font-weight:700;margin:4px 0"><span id="l6c2-air" style="color:orange">Air 4</span> / <span id="l6c2-pollen" style="color:lightgreen">Pollen 2</span></div>
         <div style="font-size:2.5rem;margin-top:8px">&#128567;</div>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L6C3 Vigieau -->
-      <div class="vg" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px">
+      <div class="vg" id="vg-l6c3" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px">
         <div class="vg-title" style="width:100%">Vigieau - Restriction Eau</div>
         <div style="font-size:2.5rem;margin:10px 0">&#128167;</div>
-        <div style="color:#f44336;font-weight:700;font-size:1.1rem">Crise</div>
+        <div id="l6c3-label" style="color:darkred;font-weight:700;font-size:1.1rem">Crise</div>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
     </div>
     </div>
@@ -5062,6 +5064,67 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
   if (vgL6C1){
     vgL6C1.addEventListener('mouseenter', function(){ vgAirHoverCount++; vgAirStart(); });
     vgL6C1.addEventListener('mouseleave', function(){ vgAirHoverCount = Math.max(0, vgAirHoverCount-1); if (vgAirHoverCount===0) vgAirStop(); });
+  }
+
+  // --- L6C2 Pollution & Pollen ---
+  // sensor.qualite_globale_vence + sensor.qualite_globale_pollen_vence : index 0-7
+  // 0=grey / 1=green / 2=lightgreen / 3=gold / 4=orange / 5=red / 6=darkred / 7=purple
+  var L6C2_COLORS = ['grey','green','lightgreen','gold','orange','red','darkred','purple'];
+  function vgPolColor(v){ return L6C2_COLORS[Math.min(Math.max(Math.round(v),0),7)]; }
+  var L6C2_SCENARIOS = [
+    { air:4, pollen:2 },
+    { air:1, pollen:1 },
+    { air:3, pollen:4 },
+    { air:5, pollen:6 }
+  ];
+  function applyL6C2Frame(frame){
+    var airEl = document.getElementById('l6c2-air');
+    var polEl = document.getElementById('l6c2-pollen');
+    if (airEl){ airEl.textContent = 'Air ' + frame.air; airEl.style.color = vgPolColor(frame.air); }
+    if (polEl){ polEl.textContent = 'Pollen ' + frame.pollen; polEl.style.color = vgPolColor(frame.pollen); }
+  }
+  var vgL6C2 = document.getElementById('vg-l6c2');
+  var vgPolHoverCount = 0, vgPolTimer = null, vgPolIdx = 0;
+  function vgPolStart(){
+    if (vgPolTimer) return;
+    vgPolIdx = 1; applyL6C2Frame(L6C2_SCENARIOS[vgPolIdx]);
+    vgPolTimer = setInterval(function(){
+      vgPolIdx = vgPolIdx >= L6C2_SCENARIOS.length - 1 ? 1 : vgPolIdx + 1;
+      applyL6C2Frame(L6C2_SCENARIOS[vgPolIdx]);
+    }, 1400);
+  }
+  function vgPolStop(){ clearInterval(vgPolTimer); vgPolTimer = null; vgPolIdx = 0; applyL6C2Frame(L6C2_SCENARIOS[0]); }
+  if (vgL6C2){
+    vgL6C2.addEventListener('mouseenter', function(){ vgPolHoverCount++; vgPolStart(); });
+    vgL6C2.addEventListener('mouseleave', function(){ vgPolHoverCount = Math.max(0, vgPolHoverCount-1); if (vgPolHoverCount===0) vgPolStop(); });
+  }
+
+  // --- L6C3 Vigieau ---
+  // sensor.alert_level_in_vence : 4 etats avec couleur attribut
+  var L6C3_SCENARIOS = [
+    { label:'Crise',             color:'darkred'    },
+    { label:'Aucune restriction',color:'lightgreen' },
+    { label:'Alerte',            color:'orange'     },
+    { label:'Crise',             color:'darkred'    }
+  ];
+  function applyL6C3Frame(frame){
+    var el = document.getElementById('l6c3-label');
+    if (el){ el.textContent = frame.label; el.style.color = frame.color; }
+  }
+  var vgL6C3 = document.getElementById('vg-l6c3');
+  var vgVigiHoverCount = 0, vgVigiTimer = null, vgVigiIdx = 0;
+  function vgVigiStart(){
+    if (vgVigiTimer) return;
+    vgVigiIdx = 1; applyL6C3Frame(L6C3_SCENARIOS[vgVigiIdx]);
+    vgVigiTimer = setInterval(function(){
+      vgVigiIdx = vgVigiIdx >= L6C3_SCENARIOS.length - 1 ? 1 : vgVigiIdx + 1;
+      applyL6C3Frame(L6C3_SCENARIOS[vgVigiIdx]);
+    }, 1400);
+  }
+  function vgVigiStop(){ clearInterval(vgVigiTimer); vgVigiTimer = null; vgVigiIdx = 0; applyL6C3Frame(L6C3_SCENARIOS[0]); }
+  if (vgL6C3){
+    vgL6C3.addEventListener('mouseenter', function(){ vgVigiHoverCount++; vgVigiStart(); });
+    vgL6C3.addEventListener('mouseleave', function(){ vgVigiHoverCount = Math.max(0, vgVigiHoverCount-1); if (vgVigiHoverCount===0) vgVigiStop(); });
   }
 })();
 </script>
