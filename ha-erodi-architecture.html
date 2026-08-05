@@ -1245,24 +1245,24 @@ footer a:hover { color:var(--green); }
             <div>100%</div><div>75%</div><div>50%</div><div>25%</div>
           </div>
           <div style="display:grid;grid-template-columns:0.5fr 1fr 1fr 1fr 1fr 1fr;text-align:center;gap:3px">
-            <div class="vg-val" id="l5c1-count-hue" style="color:rgb(244,67,54)">11</div>
-            <div class="vg-label" id="l5c1-marque-hue" style="text-align:left;color:rgb(244,67,54)">/!\ HUE</div>
+            <div class="vg-val" id="l5c1-count-hue" style="color:rgb(244,67,54)">/!\</div>
+            <div class="vg-label" id="l5c1-marque-hue" style="text-align:left;color:rgb(244,67,54)">HUE</div>
             <div class="vg-val" id="l5c1-r100-hue" style="color:#FFA500">6</div>
             <div class="vg-val" id="l5c1-r75-hue" style="color:#FFA500">1</div>
-            <div class="vg-val" id="l5c1-r50-hue"></div>
+            <div class="vg-val" id="l5c1-r50-hue" style="color:#fff">0</div>
             <div class="vg-val" id="l5c1-r25-hue" style="color:#FFA500">4</div>
             <div class="vg-val" id="l5c1-count-ikea" style="color:#fff">8</div>
             <div class="vg-label" id="l5c1-marque-ikea" style="text-align:left;color:#fff">IKEA</div>
             <div class="vg-val" id="l5c1-r100-ikea" style="color:#FFA500">7</div>
-            <div class="vg-val" id="l5c1-r75-ikea"></div>
+            <div class="vg-val" id="l5c1-r75-ikea" style="color:#fff">0</div>
             <div class="vg-val" id="l5c1-r50-ikea" style="color:#FFA500">1</div>
-            <div class="vg-val" id="l5c1-r25-ikea"></div>
+            <div class="vg-val" id="l5c1-r25-ikea" style="color:#fff">0</div>
             <div class="vg-val" id="l5c1-count-sonoff" style="color:#fff">11</div>
             <div class="vg-label" id="l5c1-marque-sonoff" style="text-align:left;color:#fff">SONOFF</div>
             <div class="vg-val" id="l5c1-r100-sonoff" style="color:#FFA500">11</div>
-            <div class="vg-val" id="l5c1-r75-sonoff"></div>
-            <div class="vg-val" id="l5c1-r50-sonoff"></div>
-            <div class="vg-val" id="l5c1-r25-sonoff"></div>
+            <div class="vg-val" id="l5c1-r75-sonoff" style="color:#fff">0</div>
+            <div class="vg-val" id="l5c1-r50-sonoff" style="color:#fff">0</div>
+            <div class="vg-val" id="l5c1-r25-sonoff" style="color:#fff">0</div>
           </div>
         </div>
         <span class="vg-live-badge">Seuils reels - survol actif</span>
@@ -4906,13 +4906,13 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
       var d = frame[b];
       var countEl = document.getElementById('l5c1-count-' + b);
       var marqueEl = document.getElementById('l5c1-marque-' + b);
-      if (countEl){ countEl.textContent = d.count; countEl.style.color = d.alert ? 'rgb(244,67,54)' : '#fff'; }
-      if (marqueEl){ marqueEl.textContent = d.alert ? '/!\\ ' + L5C1_MARQUES[b] : L5C1_MARQUES[b]; marqueEl.style.color = d.alert ? 'rgb(244,67,54)' : '#fff'; }
+      if (countEl){ countEl.textContent = d.alert ? '/!\\' : d.count; countEl.style.color = d.alert ? 'rgb(244,67,54)' : '#fff'; }
+      if (marqueEl){ marqueEl.textContent = L5C1_MARQUES[b]; marqueEl.style.color = d.alert ? 'rgb(244,67,54)' : '#fff'; }
       function setRange(id, val){
         var el = document.getElementById('l5c1-' + id + '-' + b);
         if (!el) return;
-        el.textContent = val > 0 ? val : '';
-        el.style.color = val > 0 ? '#FFA500' : '';
+        el.textContent = val > 0 ? val : '0';
+        el.style.color = val > 0 ? '#FFA500' : '#fff';
       }
       setRange('r100', d.r100);
       setRange('r75', d.r75);
