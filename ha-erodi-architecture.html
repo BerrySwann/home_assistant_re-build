@@ -730,14 +730,69 @@ footer a:hover { color:var(--green); }
   .vg:hover .vg-live-badge { opacity:0.9; }
 
   /* ===== DARK WRAPPER - Dashboard replica ===== */
+  /* ---- phone mockup ---- */
+  .phone-frame {
+    position: relative;
+    background: #111;
+    border-radius: 44px;
+    max-width: 880px;
+    margin: 2rem auto 0;
+    box-shadow: 0 0 0 1px #2c2c2c, 0 0 0 4px #0a0a0a, 0 28px 80px rgba(0,0,0,0.55);
+  }
+  .phone-notch-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 0 10px;
+  }
+  .phone-speaker {
+    width: 70px; height: 5px;
+    background: #2a2a2a;
+    border-radius: 3px;
+  }
+  .phone-camera {
+    width: 11px; height: 11px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    border: 1.5px solid #3a3a3a;
+  }
+  .phone-home-area {
+    display: flex;
+    justify-content: center;
+    padding: 12px 0 18px;
+  }
+  .phone-home-bar {
+    width: 110px; height: 4px;
+    background: #2d2d2d;
+    border-radius: 2px;
+  }
+  .phone-btn-power {
+    position: absolute;
+    right: -4px; top: 100px;
+    width: 4px; height: 56px;
+    background: #1e1e1e;
+    border-radius: 0 3px 3px 0;
+  }
+  .phone-btn-vol-up {
+    position: absolute;
+    left: -4px; top: 80px;
+    width: 4px; height: 38px;
+    background: #1e1e1e;
+    border-radius: 3px 0 0 3px;
+  }
+  .phone-btn-vol-dn {
+    position: absolute;
+    left: -4px; top: 130px;
+    width: 4px; height: 38px;
+    background: #1e1e1e;
+    border-radius: 3px 0 0 3px;
+  }
+  /* ---- vg screen inside phone ---- */
   .vg-dark-wrap {
     background: rgba(0,0,0,0.3);
-    border-radius: 18px;
-    padding: 20px 46px 16px;
-    margin-top: 1.5rem;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 812px;
+    border-radius: 0;
+    padding: 16px 46px 12px;
     font-family: 'Roboto', sans-serif;
   }
   .vg-dark-wrap .vg {
@@ -1083,6 +1138,14 @@ footer a:hover { color:var(--green); }
     <h3 style="text-align:center;font-size:0.85rem;color:rgba(29,77,46,0.5);margin:3rem 0 0.5rem;font-style:italic;font-weight:400;">
       Donnees figees a titre illustratif - 18 vignettes informatives.
     </h3>
+    <div class="phone-frame">
+      <div class="phone-btn-power"></div>
+      <div class="phone-btn-vol-up"></div>
+      <div class="phone-btn-vol-dn"></div>
+      <div class="phone-notch-bar">
+        <div class="phone-speaker"></div>
+        <div class="phone-camera"></div>
+      </div>
     <div class="vg-dark-wrap">
     <div class="vg-grid reveal">
       <div class="row-label">L1 &mdash; Environnement &amp; Thermique</div>
@@ -1347,6 +1410,10 @@ footer a:hover { color:var(--green); }
         <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
     </div>
+    </div>
+      <div class="phone-home-area">
+        <div class="phone-home-bar"></div>
+      </div>
     </div>
 
 </section>
