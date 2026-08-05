@@ -1086,11 +1086,12 @@ footer a:hover { color:var(--green); }
     <div class="vg-grid reveal">
       <div class="row-label">L1 &mdash; Environnement &amp; Thermique</div>
       <!-- L1C1 Meteo -->
-      <div class="vg">
+      <div class="vg" id="vg-l1c1" style="display:flex;flex-direction:column;align-items:center;justify-content:center">
         <div class="vg-title">Meteo</div>
-        <div class="vg-center" style="font-size:2.5rem;margin:6px 0">&#9728;&#65039;</div>
-        <div class="vg-center" style="font-size:1.1rem;font-weight:700;color:#fdd835">Ensoleille</div>
-        <div class="vg-center" style="font-size:1.5rem;font-weight:700;color:#ff9800;margin-top:4px">26.9&#176;C</div>
+        <div id="l1c1-icon" class="vg-center" style="font-size:2.5rem;margin:6px 0">&#9728;&#65039;</div>
+        <div id="l1c1-condition" class="vg-center" style="font-size:1.1rem;font-weight:700;color:#fdd835">Ensoleille</div>
+        <div id="l1c1-temp" class="vg-center" style="font-size:1.5rem;font-weight:700;color:#ff9800;margin-top:4px">26.9&#176;C</div>
+        <span class="vg-live-badge">Conditions simulees - survol actif</span>
       </div>
       <!-- L1C2 Courbes Temperature -->
       <div class="vg" id="vg-l1c2">
@@ -4408,6 +4409,38 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
 
 /* ===== VIGNETTES VIVANTES AU SURVOL - logique reelle portee depuis les fichiers VIGNETTE_*.md ===== */
 (function(){
+  // ----- L1C1 : Meteo (vignette navigationnelle — simulation conditions Vence) -----
+  var L1C1_SCENARIOS = [
+    { icon: '☀️', condition: 'Ensoleille',          condColor: '#fdd835', temp: '26.9°C', tempColor: '#ff9800' },
+    { icon: '⛅',       condition: 'Part. nuageux',       condColor: 'gold',    temp: '22.4°C', tempColor: 'orange'  },
+    { icon: '☔️', condition: 'Pluvieux',            condColor: '#64b5f6', temp: '15.8°C', tempColor: '#64b5f6' },
+    { icon: '⛈️', condition: 'Orage',               condColor: 'rgb(244,67,54)', temp: '17.2°C', tempColor: '#fff' }
+  ];
+  function applyL1C1Frame(frame){
+    var iconEl = document.getElementById('l1c1-icon');
+    var condEl = document.getElementById('l1c1-condition');
+    var tempEl = document.getElementById('l1c1-temp');
+    if (iconEl) iconEl.textContent = frame.icon;
+    if (condEl){ condEl.textContent = frame.condition; condEl.style.color = frame.condColor; }
+    if (tempEl){ tempEl.textContent = frame.temp; tempEl.style.color = frame.tempColor; }
+  }
+  var vgL1C1 = document.getElementById('vg-l1c1');
+  if (vgL1C1){
+    var l1c1Timer = null, l1c1Idx = 0, l1c1Hover = 0;
+    vgL1C1.addEventListener('mouseenter', function(){
+      l1c1Hover++;
+      l1c1Idx = 1; applyL1C1Frame(L1C1_SCENARIOS[1]);
+      l1c1Timer = setInterval(function(){
+        l1c1Idx = l1c1Idx >= L1C1_SCENARIOS.length - 1 ? 1 : l1c1Idx + 1;
+        applyL1C1Frame(L1C1_SCENARIOS[l1c1Idx]);
+      }, 1400);
+    });
+    vgL1C1.addEventListener('mouseleave', function(){
+      l1c1Hover = Math.max(0, l1c1Hover - 1);
+      if (l1c1Hover === 0){ clearInterval(l1c1Timer); l1c1Timer = null; applyL1C1Frame(L1C1_SCENARIOS[0]); }
+    });
+  }
+
   // Fonctions de couleur identiques au JS reel de la vignette L1C2 (custom:button-card)
   function vgTempColor(t){
     if (t < 5)  return '#3674B5';
