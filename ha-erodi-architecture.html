@@ -1206,15 +1206,16 @@ footer a:hover { color:var(--green); }
       </div>
       <div class="row-label">L4 &mdash; Reseau &amp; Systeme</div>
       <!-- L4C1 Proxmox -->
-      <div class="vg" id="vg-l4c1">
-        <div class="vg-title">Proxmox</div>
-        <div class="vg-center" style="font-size:1.6rem">&#128421;&#65039;</div>
-        <div class="vg-center vg-val" id="l4c1-temp" style="color:lightgreen;font-weight:700;margin:2px 0">51.0&#176;C</div>
-        <div class="vg-sep"></div>
-        <div class="vg-row"><span class="vg-label">PVE CPU</span><span class="vg-val" id="l4c1-cpu" style="color:#fff">2.3%</span></div>
-        <div class="vg-row"><span class="vg-label">PVE Host</span><span class="badge badge-g">ONLINE</span></div>
-        <div class="vg-row"><span class="vg-label">PVE RAM</span><span class="vg-val" id="l4c1-ram" style="color:#fff">42.6%</span></div>
-        <div class="vg-row"><span class="vg-label">PVE Storage</span><span class="vg-val" id="l4c1-storage" style="color:#fff">62.9%</span></div>
+      <div class="vg" id="vg-l4c1" style="display:flex;flex-direction:column;padding:6px 8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">
+          <span style="font-size:1.4rem">&#128421;&#65039;</span>
+          <span class="vg-val" id="l4c1-temp" style="color:rgb(70,175,75);font-size:0.8rem">&#127777; 51.0&#176;C</span>
+        </div>
+        <div style="text-align:center;font-weight:700;color:#fff;font-size:0.72rem;margin-bottom:4px">_____ Proxmox _____</div>
+        <div class="vg-row"><span class="vg-label">&#128421; PVE CPU</span><span class="vg-val" id="l4c1-cpu" style="color:#fff">2.3%</span></div>
+        <div class="vg-row"><span class="vg-label">&#9211; PVE Host</span><span class="vg-val" style="color:rgb(70,175,75)">ONLINE</span></div>
+        <div class="vg-row"><span class="vg-label">&#128190; PVE RAM</span><span class="vg-val" id="l4c1-ram" style="color:#fff">42.6%</span></div>
+        <div class="vg-row"><span class="vg-label">&#128190; PVE Storage</span><span class="vg-val" id="l4c1-storage" style="color:#fff">62.9%</span></div>
         <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L4C2 Mini PC -->
@@ -4806,8 +4807,8 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
   // sensor.proxmox_cpu_package : <65 vert / 65-75 orange / >75 rouge
   // sensor.pve_utilisation_du_processeur / pve_memory_usage_percentage / storage_local_storage_usage_percentage : <75 blanc / 75-90 orange / >90 rouge
   // binary_sensor.pve_status : on=ONLINE (jamais offline en prod)
-  function vgPveTempColor(t){ return t > 75 ? 'rgb(244,67,54)' : t > 65 ? '#FFA500' : 'lightgreen'; }
-  function vgPveMetricColor(v){ return v > 90 ? 'rgb(244,67,54)' : v > 75 ? '#FFA500' : '#fff'; }
+  function vgPveTempColor(t){ return t > 75 ? 'rgb(244,67,54)' : t > 65 ? 'orange' : 'rgb(70,175,75)'; }
+  function vgPveMetricColor(v){ return v > 90 ? 'rgb(244,67,54)' : v > 75 ? 'orange' : '#fff'; }
   var L4C1_SCENARIOS = [
     { temp:51.0, cpu:2.3,  ram:42.6, storage:62.9 },
     { temp:68.0, cpu:78.0, ram:77.0, storage:78.5 },
