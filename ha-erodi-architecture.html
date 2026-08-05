@@ -1089,7 +1089,7 @@ footer a:hover { color:var(--green); }
       <!-- L1C1 Meteo -->
       <div class="vg" id="vg-l1c1" style="display:flex;flex-direction:column;align-items:center;justify-content:center">
         <div class="vg-title">Meteo</div>
-        <div id="l1c1-icon" class="vg-center" style="font-size:2.5rem;margin:6px 0">&#9728;&#65039;</div>
+        <img id="l1c1-icon" src="/local/meteo/sun.png" style="width:68px;height:68px;object-fit:cover;border-radius:8px;margin:6px 0;display:block;margin-left:auto;margin-right:auto">
         <div id="l1c1-condition" class="vg-center" style="font-size:1.1rem;font-weight:700;color:#fdd835">Ensoleille</div>
         <div id="l1c1-temp" class="vg-center" style="font-size:1.5rem;font-weight:700;color:#ff9800;margin-top:4px">26.9&#176;C</div>
         <span class="vg-live-badge">Conditions simulees - survol actif</span>
@@ -4412,16 +4412,16 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
 (function(){
   // ----- L1C1 : Meteo (vignette navigationnelle — simulation conditions Vence) -----
   var L1C1_SCENARIOS = [
-    { icon: '☀️', condition: 'Ensoleille',          condColor: '#fdd835', temp: '26.9°C', tempColor: '#ff9800' },
-    { icon: '⛅',       condition: 'Part. nuageux',       condColor: 'gold',    temp: '22.4°C', tempColor: 'orange'  },
-    { icon: '☔️', condition: 'Pluvieux',            condColor: '#64b5f6', temp: '15.8°C', tempColor: '#64b5f6' },
-    { icon: '⛈️', condition: 'Orage',               condColor: 'rgb(244,67,54)', temp: '17.2°C', tempColor: '#fff' }
+    { icon: '/local/meteo/sun.png',               condition: 'Ensoleille',  condColor: '#fdd835',        temp: '26.9°C', tempColor: '#ff9800' },
+    { icon: '/local/meteo/raining.png',           condition: 'Pluvieux',    condColor: '#64b5f6',        temp: '15.8°C', tempColor: '#64b5f6' },
+    { icon: '/local/meteo/lightning-raining.png', condition: 'Orage',       condColor: 'rgb(244,67,54)', temp: '17.2°C', tempColor: '#fff'    },
+    { icon: '/local/meteo/fog.png',               condition: 'Brouillard',  condColor: '#90a4ae',        temp: '18.5°C', tempColor: '#aaa'    }
   ];
   function applyL1C1Frame(frame){
     var iconEl = document.getElementById('l1c1-icon');
     var condEl = document.getElementById('l1c1-condition');
     var tempEl = document.getElementById('l1c1-temp');
-    if (iconEl) iconEl.textContent = frame.icon;
+    if (iconEl) iconEl.src = frame.icon;
     if (condEl){ condEl.textContent = frame.condition; condEl.style.color = frame.condColor; }
     if (tempEl){ tempEl.textContent = frame.temp; tempEl.style.color = frame.tempColor; }
   }
