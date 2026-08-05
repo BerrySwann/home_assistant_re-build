@@ -1206,15 +1206,16 @@ footer a:hover { color:var(--green); }
       </div>
       <div class="row-label">L4 &mdash; Reseau &amp; Systeme</div>
       <!-- L4C1 Proxmox -->
-      <div class="vg">
+      <div class="vg" id="vg-l4c1">
         <div class="vg-title">Proxmox</div>
         <div class="vg-center" style="font-size:1.6rem">&#128421;&#65039;</div>
-        <div class="vg-center" style="color:#4caf50;font-weight:700;margin:2px 0">51.0&#176;C</div>
+        <div class="vg-center vg-val" id="l4c1-temp" style="color:lightgreen;font-weight:700;margin:2px 0">51.0&#176;C</div>
         <div class="vg-sep"></div>
-        <div class="vg-row"><span class="vg-label">PVE CPU</span><span class="vg-val">2.3%</span></div>
+        <div class="vg-row"><span class="vg-label">PVE CPU</span><span class="vg-val" id="l4c1-cpu" style="color:#fff">2.3%</span></div>
         <div class="vg-row"><span class="vg-label">PVE Host</span><span class="badge badge-g">ONLINE</span></div>
-        <div class="vg-row"><span class="vg-label">PVE RAM</span><span class="vg-val">42.6%</span></div>
-        <div class="vg-row"><span class="vg-label">PVE Storage</span><span class="vg-val">62.9%</span></div>
+        <div class="vg-row"><span class="vg-label">PVE RAM</span><span class="vg-val" id="l4c1-ram" style="color:#fff">42.6%</span></div>
+        <div class="vg-row"><span class="vg-label">PVE Storage</span><span class="vg-val" id="l4c1-storage" style="color:#fff">62.9%</span></div>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L4C2 Mini PC -->
       <div class="vg">
@@ -4800,6 +4801,45 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
       if (vgLampHoverCount === 0) vgLampStop();
     });
   });
+
+  // --- L4C1 Proxmox ---
+  // sensor.proxmox_cpu_package : <65 vert / 65-75 orange / >75 rouge
+  // sensor.pve_utilisation_du_processeur / pve_memory_usage_percentage / storage_local_storage_usage_percentage : <75 blanc / 75-90 orange / >90 rouge
+  // binary_sensor.pve_status : on=ONLINE (jamais offline en prod)
+  function vgPveTempColor(t){ return t > 75 ? 'rgb(244,67,54)' : t > 65 ? '#FFA500' : 'lightgreen'; }
+  function vgPveMetricColor(v){ return v > 90 ? 'rgb(244,67,54)' : v > 75 ? '#FFA500' : '#fff'; }
+  var L4C1_SCENARIOS = [
+    { temp:51.0, cpu:2.3,  ram:42.6, storage:62.9 },
+    { temp:68.0, cpu:78.0, ram:77.0, storage:63.5 },
+    { temp:84.0, cpu:95.0, ram:91.0, storage:64.2 }
+  ];
+  function applyL4C1Frame(f){
+    var tEl = document.getElementById('l4c1-temp');
+    if (tEl) { tEl.textContent = f.temp.toFixed(1) + '°C'; tEl.style.color = vgPveTempColor(f.temp); }
+    var cEl = document.getElementById('l4c1-cpu');
+    if (cEl) { cEl.textContent = f.cpu.toFixed(1) + '%'; cEl.style.color = vgPveMetricColor(f.cpu); }
+    var rEl = document.getElementById('l4c1-ram');
+    if (rEl) { rEl.textContent = f.ram.toFixed(1) + '%'; rEl.style.color = vgPveMetricColor(f.ram); }
+    var sEl = document.getElementById('l4c1-storage');
+    if (sEl) { sEl.textContent = f.storage.toFixed(1) + '%'; sEl.style.color = vgPveMetricColor(f.storage); }
+  }
+  var vgL4C1 = document.getElementById('vg-l4c1');
+  var vgL4C1Timer = null, vgL4C1Idx = 1;
+  if (vgL4C1) {
+    vgL4C1.addEventListener('mouseenter', function(){
+      if (vgL4C1Timer) return;
+      vgL4C1Idx = 1;
+      applyL4C1Frame(L4C1_SCENARIOS[vgL4C1Idx]);
+      vgL4C1Timer = setInterval(function(){
+        vgL4C1Idx = (vgL4C1Idx + 1) % L4C1_SCENARIOS.length;
+        applyL4C1Frame(L4C1_SCENARIOS[vgL4C1Idx]);
+      }, 1600);
+    });
+    vgL4C1.addEventListener('mouseleave', function(){
+      clearInterval(vgL4C1Timer); vgL4C1Timer = null;
+      applyL4C1Frame(L4C1_SCENARIOS[0]);
+    });
+  }
 
   // --- L3C3 Commande Stores — synced avec L1C3/L2C2 (scenarios clim portent le champ stores) ---
   // binary_sensor : on=Ouvert(rouge) / off=Ferme(vert) / autre=N/A(gris)
