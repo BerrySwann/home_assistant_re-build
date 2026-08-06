@@ -31,6 +31,8 @@ set -euo pipefail
 # - "Manuel ne fonctionne pas" = en réalité rien à committer (H+10 a déjà tout poussé)
 #   → comportement normal et attendu, pas un bug
 # - Si push rejeté (fetch first) : le script fait git pull --rebase auto + retry
+# - RENOMMAGES : git add -A est fait AVANT la detection — evite les fantomes GitHub
+#   (ancien comportement : detection avant staging = ratait la suppression de l'ancien nom)
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - Aucune vignette directe — ce script alimente GitHub (source externe)
@@ -78,27 +80,29 @@ if ! git rev-parse --abbrev-ref --symbolic-full-name "@{u}" >/dev/null 2>&1; the
 fi
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ DÉTECTION DES CHANGEMENTS                                                │
+# │ STAGING + DÉTECTION DES CHANGEMENTS                                      │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-CHANGED="$( { git diff --name-only; git ls-files -o --exclude-standard; } \
-  | grep -E '\.(ya?ml|md)$' | sort -u || true )"
+# git add -A EN PREMIER — vue atomique du working tree incluant suppressions/renommages
+# Ancienne methode (diff --name-only + ls-files -o) ratait les suppressions si le script
+# tournait entre la creation du nouveau fichier et la suppression de l'ancien (fantomes GitHub)
+git add -A >/dev/null 2>&1
 
-if [[ -z "$CHANGED" ]]; then
-  STATUS_LINES="$(git status --porcelain || true)"
-  if [[ -z "$STATUS_LINES" ]]; then
-    if [[ "${1:-}" != "weekly" ]]; then
-      echo "ℹ️ GitHub deja a jour - rien a committer: $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
-      TOKEN_FILE="/config/.secrets/ha_token"
-      if [[ -f "$TOKEN_FILE" ]]; then
-        TOKEN="$(cat "$TOKEN_FILE")"
-        curl -s -X POST \
-          -H "Authorization: Bearer ${TOKEN}" \
-          -H "Content-Type: application/json" \
-          -d '{"title":"Backup GitHub","message":"GitHub deja a jour - rien a committer"}' \
-          http://supervisor/core/api/services/persistent_notification/create >/dev/null 2>/dev/null || true
-      fi
-      exit 0
+CHANGED="$(git diff --cached --name-only | grep -E '\.(ya?ml|md)$' | sort -u || true)"
+AHEAD="$(git rev-list @{u}..HEAD --count 2>/dev/null || echo 0)"
+
+if [[ -z "$CHANGED" && "$AHEAD" -eq 0 ]]; then
+  if [[ "${1:-}" != "weekly" ]]; then
+    echo "ℹ️ GitHub deja a jour - rien a committer: $(date '+%Y-%m-%d %H:%M:%S %Z')" >> "$LOG"
+    TOKEN_FILE="/config/.secrets/ha_token"
+    if [[ -f "$TOKEN_FILE" ]]; then
+      TOKEN="$(cat "$TOKEN_FILE")"
+      curl -s -X POST \
+        -H "Authorization: Bearer ${TOKEN}" \
+        -H "Content-Type: application/json" \
+        -d '{"title":"Backup GitHub","message":"GitHub deja a jour - rien a committer"}' \
+        http://supervisor/core/api/services/persistent_notification/create >/dev/null 2>/dev/null || true
     fi
+    exit 0
   fi
 fi
 
@@ -115,7 +119,6 @@ MSG="${MSG}${HA_VER:+ (HA ${HA_VER})}"
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ COMMIT                                                                   │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-git add -A >/dev/null 2>&1
 if git commit -m "$MSG" >/dev/null 2>&1; then
   echo "📝 Commit créé: $MSG" >> "$LOG"
 elif [[ "${1:-}" != "weekly" ]]; then
@@ -200,6 +203,13 @@ if [[ -f "$TOKEN_FILE" ]]; then
 fi
 
 # annotations_log:
+# [2026-08-01] BUG FIX — fantomes GitHub apres renommage de fichiers :
+#              Ancienne detection : git diff --name-only + git ls-files -o (unstaged + untracked)
+#              → si script H+10 tournait entre creation du nouveau nom et suppression de l'ancien,
+#                il commitait le nouveau sans supprimer l'ancien = les deux coexistaient sur GitHub
+#              Fix : git add -A deplace AVANT la detection, qui passe a git diff --cached --name-only
+#              → vue atomique du working tree : suppression + addition sont toujours capturees ensemble
+#              Aussi : early exit conditionne sur CHANGED ET AHEAD (plus de STATUS_LINES intermediaire)
 # [2026-06-13] BUG FIX CRITIQUE — ligne 134 : %Z"') → %Z') — le " était dans la single-quote
 #              ce qui empêchait la fermeture du $() → bash scannait jusqu'à EOF → syntax error line 178
 #              Fix 2 : git checkout main >/dev/null 2>&1 (supprime le bruit stdout dans le log)

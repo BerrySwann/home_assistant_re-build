@@ -1,6 +1,5 @@
 # 🌳 ARBORESCENCES COMPLÈTES & INDEX GITHUB
-*Dernière mise à jour : 2026-07-19 (correction casse GitHub : Docs/ -> docs/ suite renommage prod ;
-puis retrait Analyse énergétique/ racine (supprimé) + sous_context_ia 7->8 (ajout IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md))*
+*Dernière mise à jour : 2026-08-01 (renommages convention 9 : P0 UM, P3 ui_dashboard, P4 templates, meteo sensor)*
 *Lire ce fichier si : audit fichiers, sync GitHub, recherche d'un fichier prod, vérification arbo locale, URLs raw GitHub.*
 
 ---
@@ -24,9 +23,12 @@ puis retrait Analyse énergétique/ racine (supprimé) + sous_context_ia 7->8 (a
 ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\)
 ├── CLAUDE.md                           (source de vérité contexte - sync avec IA_CONTEXT_BASE.md)
 ├── TODO.txt                            (backlog projet)
+├── ha-erodi-architecture.html          (doc architecture HA - reference principale)
+├── ha-erodi.html · CLAUDE_backup_*.md  (backups - hors périmètre HA)
 ├── autounattend_FR.xml · z2m-backup.*.zip   (hors périmètre HA)
 ├── Github/                             (INDEX_GLOBAL.md · README.md - miroirs travail du repo)
-├── HTML/                               (exports HTML - ha_erodi_ha_com_*.html)
+├── HTML/                               (vide depuis 2026-08-01 - fichiers migrés vers prompt/)
+├── prompt/                             (maquettes HTML · captures ecran · histo_*.txt)
 ├── Infra_Proxmox/                      (réseau, certs - + save/)
 ├── historique/                         (JOURNAL_COMPLET_*.md · histo_YYYY-MM-DD_S*.txt)
 └── DOCS/
@@ -65,7 +67,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── Dashboard_YYYY_MM_DD.yaml           (export dashboard le plus récent - racine)
 │
 ├── .scripts/                           (3)
-│   ├── audit_md5.sh                    (FULL · YAML · ATMA - log → .logs/audit_md5.log)
+│   ├── audit_md5.sh                    (3 passes sans argument - log → .logs/md5_audit_latest.txt)
 │   ├── ha_git_backup.sh                (backup git → GitHub)
 │   └── #MP_01_monitor_temp.sh.#        (⛔ NE PAS TOUCHER - actif Raspberry Pi)
 │
@@ -101,7 +103,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   └── utilitaires/                    (3)
 │
 ├── utility_meter/                      (8)
-│   ├── P0_Energie_total/Genelec_appart/  (01_UM_AMHQ · 02_UM_genelec_appart_HPHC_AMHQ)
+│   ├── P0_Energie_total/Genelec_appart/  (P0_UM_AMHQ · P0_UM_AMHQ_HPHC)
 │   ├── P1_clim_chauffage/              (P1_UM_AMHQ)
 │   ├── P2_prise/                       (P2_UM_AMHQ_mini_pc · _prises · _veilles)
 │   ├── P3_eclairage/                   (P3_UM_AMHQ_1_UNITE - seul actif)
@@ -144,7 +146,7 @@ Exemples :
 
 ## 🔍 AUDIT & SYNC - RAPPELS
 
-- **Audit MD5** : script unique `audit_md5.sh` (FULL · YAML · ATMA) - boutons dashboard L5C3 - log `/homeassistant/.logs/audit_md5.log`. Commandes détaillées : voir `IA_CMD_TERMINAL_HA.md`.
+- **Audit MD5** : script unique `audit_md5.sh` (3 passes sans argument) - boutons dashboard L5C3 - log `/homeassistant/.logs/md5_audit_latest.txt`. Commandes détaillées : voir `IA_CMD_TERMINAL_HA.md`.
 - **Sens YAML config** : prod → GitHub → local (local converge vers prod).
 - **Sens Docs .md** : local `DOCS/` → `H:\Docs\` → GitHub (local gagne en conflit).
 - **Après tout changement prod** : déclencher le git backup, sinon GitHub reste en retard (liens INDEX cassés, audits faussés).

@@ -232,20 +232,20 @@ climate:
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ HTTP://                                                                  │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-http:
-  use_x_forwarded_for: true
-  trusted_proxies:
-    # --- Proxy locaux & Add-ons (Tailscale / Cloudflared) ---
-    - 127.0.0.1       # Toujours bon à avoir pour le local
-    - 172.30.33.0/24  # C'est l'IP de l'Add-on Tailscale en interne
-    - 172.30.0.0/16   # Tous les autres add-ons / ingress / tunnels
+#http:
+#  use_x_forwarded_for: true
+#  trusted_proxies:
+#    # --- Proxy locaux & Add-ons (Tailscale / Cloudflared) ---
+#    - 127.0.0.1       # Toujours bon à avoir pour le local
+#    - 172.30.33.0/24  # C'est l'IP de l'Add-on Tailscale en interne
+#    - 172.30.0.0/16   # Tous les autres add-ons / ingress / tunnels
 
-    # --- Réseau de la maison ---
-    - 10.32.154.0/24  # LAN local (Vence — GL-iNet MT3000)     # "[modif] 192.168.1.0/24 → 10.32.154.0/24"
+#    # --- Réseau de la maison ---
+#    - 10.32.154.0/24  # LAN local (Vence — GL-iNet MT3000)     # "[modif] 192.168.1.0/24 → 10.32.154.0/24"
 
-  # --- Sécurité (Bannissement IP) ---
-  ip_ban_enabled: true         # Protège l'accès à HA
-  login_attempts_threshold: 3  # Seuil de tentatives avant bannissement
+#  # --- Sécurité (Bannissement IP) ---
+#  ip_ban_enabled: true         # Protège l'accès à HA
+#  login_attempts_threshold: 3  # Seuil de tentatives avant bannissement
 
 # annotations_log:
 # - [2026-05-10] Ajout section logger: filtres rpi_power (critical) + linky-card import_statistics.
