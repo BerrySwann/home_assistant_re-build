@@ -4060,10 +4060,15 @@ genelec_appart_hphc_annuel_um:
 
 <footer>
   <a href="https://ha.erodi-ha.com">ha.erodi-ha.com</a> &nbsp;·&nbsp; Architecture HA — BerrySwann &nbsp;·&nbsp; 2026
-  <div style="margin-top:1.2rem;font-size:0.8rem;font-style:italic;color:rgba(255,255,255,0.55);">
-    ... si le site t'a fait mal au crane, prend 2 caches d'aspirine et surtout
-    <span onclick="this.nextElementSibling.style.display='inline';this.style.display='none';" style="cursor:pointer;text-decoration:underline dotted;color:rgba(255,255,255,0.7);display:inline-block;padding:8px 14px;">ne clique pas ici</span>
-    <span style="display:none;color:#b87333;"> — Tu vois ? On t'avait prevenu. &#x1F48A; Maintenant c'est trop tard.</span>
+  <div style="position:relative;margin-top:1.2rem;display:inline-block;">
+    <!-- boite origine : style intact, texte vide -->
+    <div style="font-size:0.8rem;font-style:italic;color:rgba(255,255,255,0.55);padding:10px 20px;">&nbsp;</div>
+    <!-- boite transparente superposee : contient tout le texte + logique clic -->
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:transparent;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-style:italic;color:rgba(255,255,255,0.55);cursor:default;">
+      ... si le site t'a fait mal au crane, prend 2 cachets d'aspirine, mais surtout
+      <span id="easter-trigger" onclick="document.getElementById('easter-reveal').style.display='inline';this.style.display='none';" style="cursor:pointer;text-decoration:underline dotted;color:rgba(255,255,255,0.7);display:inline-block;padding:12px 18px;">ne clique pas ici</span>
+      <span id="easter-reveal" style="display:none;color:#b87333;"> — Tu vois ? On t'avait prevenu. &#x1F48A; Maintenant c'est trop tard.</span>
+    </div>
   </div>
 </footer>
 
