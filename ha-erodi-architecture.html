@@ -4686,23 +4686,19 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
   obs.observe(counters[0]);
 })();
 
-// ── BLOB ALIGNMENT — blob fixe aligné avec la stats-band en permanence ─────
+// ── BLOB ALIGNMENT — positionnement initial aligné sur stats-band, fixe ensuite
 (function() {
   var blob = document.getElementById('scroll-blob');
   var band = document.getElementById('stats-band');
   if (!blob || !band) return;
 
-  function alignBlob() {
-    var rect = band.getBoundingClientRect();
-    var centerY = rect.top + rect.height / 2;
-    var blobH = blob.offsetHeight || 130;
-    blob.style.top = (centerY - blobH / 2) + 'px';
-    blob.style.bottom = 'auto';
-  }
-
-  alignBlob();
-  window.addEventListener('scroll', alignBlob, { passive: true });
-  window.addEventListener('resize', alignBlob, { passive: true });
+  // Calcul unique au chargement : centre de la stats-band dans le viewport
+  var rect = band.getBoundingClientRect();
+  var centerY = rect.top + rect.height / 2;
+  var blobH = blob.offsetHeight || 130;
+  blob.style.top = (centerY - blobH / 2) + 'px';
+  blob.style.bottom = 'auto';
+  // Le blob reste fixe ici — le scroll ne le deplace pas
 })();
 
 // Counters individuels sur les cartes stat-card
