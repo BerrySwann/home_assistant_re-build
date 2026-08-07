@@ -2323,33 +2323,36 @@ input_datetime: !include input_datetime.yaml</pre>
       <!-- EXEMPLE name + unique_id -->
       <div class="callout" style="margin-top:1.2rem">
         <div class="callout-title">Exemple concret — P3 eclairage</div>
-        <pre>
-<span class="cm"># UTILITY_METER — P3_UM_AMHQ_1_UNITE.yaml</span>
+        <pre style="text-align:left;">
+<span class="cm"># <strong>UTILITY_METER</strong> — P3_UM_AMHQ_1_UNITE.yaml</span>
 
 <span class="cm"># --- hue_white_lamp_entree_annuel_um ---</span>
 <span class="ky">hue_white_lamp_entree_annuel_um</span>:
-  <span class="ky">source</span>: <span class="vl">sensor.hue_white_lamp_entree_energy</span>  <span class="cm">&lt;- source native Hue bridge</span>
+  <span class="ky">source</span>: <span class="vl">sensor.hue_white_lamp_entree_energy</span>  <span class="cm">&lt;- créé par PowerCalc</span>
   <span class="ky">name</span>: <span class="vl">"Hue White Lamp Entree Annuel UM"</span>
   <span class="ky">unique_id</span>: <span class="vl">hue_white_lamp_entree_annuel_um</span>
 
 <span class="cm"># --- hue_white_lamp_entree_quotidien_um ---</span>
 <span class="ky">hue_white_lamp_entree_quotidien_um</span>:
-  <span class="ky">source</span>: <span class="vl">sensor.hue_white_lamp_entree_energy</span>  <span class="cm">&lt;- source native Hue bridge</span>
+  <span class="ky">source</span>: <span class="vl">sensor.hue_white_lamp_entree_energy</span>  <span class="cm">&lt;- créé par PowerCalc</span>
   <span class="ky">name</span>: <span class="vl">"Hue White Lamp Entree Quotidien UM"</span>
   <span class="ky">unique_id</span>: <span class="vl">hue_white_lamp_entree_quotidien_um</span>
   <span class="ky">cycle</span>: <span class="vl">daily</span>
 
-<span class="cm"># TEMPLATE — P3_TPL_AMHQ_1_UNITE.yaml</span>
+<span class="cm"># <strong>TEMPLATE</strong> — P3_TPL_AMHQ_1_UNITE.yaml</span>
 
-<span class="cm">    # --- hue_white_lamp_entree_annuel_um_kwh_tpl ---</span>
-    - <span class="ky">name</span>: <span class="vl">"Hue White Lamp Entree Annuel Um Kwh Tpl"</span>
-      <span class="ky">unique_id</span>: <span class="vl">hue_white_lamp_entree_annuel_um_kwh_tpl</span>
-      <span class="ky">source</span>: <span class="vl">sensor.hue_white_lamp_entree_annuel_um</span>  <span class="cm">&lt;- Depuis utility meter</span>
+<span class="cm"># --- hue_white_lamp_entree_annuel_um_kwh_tpl ---</span>
+- <span class="ky">name</span>: <span class="vl">"Hue White Lamp Entree Annuel Um Kwh Tpl"</span>
+  <span class="ky">unique_id</span>: <span class="vl">hue_white_lamp_entree_annuel_um_kwh_tpl</span>
+  <span class="ky">source</span>: <span class="vl">sensor.hue_white_lamp_entree_annuel_um</span>  <span class="cm">&lt;- Depuis utility meter</span>
 
-<span class="cm">    # --- hue_white_lamp_entree_quotidien_um_kwh_tpl ---</span>
-    - <span class="ky">name</span>: <span class="vl">"Hue White Lamp Entree Quotidien Um Kwh Tpl"</span>
-      <span class="ky">unique_id</span>: <span class="vl">hue_white_lamp_entree_quotidien_um_kwh_tpl</span>
-      <span class="ky">source</span>: <span class="vl">sensor.hue_white_lamp_entree_quotidien_um</span>  <span class="cm">&lt;- Depuis utility meter</span></pre>
+<span class="cm"># --- hue_white_lamp_entree_quotidien_um_kwh_tpl ---</span>
+- <span class="ky">name</span>: <span class="vl">"Hue White Lamp Entree Quotidien Um Kwh Tpl"</span>
+  <span class="ky">unique_id</span>: <span class="vl">hue_white_lamp_entree_quotidien_um_kwh_tpl</span>
+  <span class="ky">source</span>: <span class="vl">sensor.hue_white_lamp_entree_quotidien_um</span>  <span class="cm">&lt;- Depuis utility meter</span></pre>
+        <div style="margin-top:1rem;padding:.8rem 1rem;background:rgba(29,77,46,0.12);border:1px solid rgba(29,77,46,0.3);border-radius:6px;font-size:.78rem;color:var(--text-2);line-height:1.75;">
+          <strong style="color:var(--green);">PowerCalc</strong> est une integration HACS qui génère automatiquement un <code>sensor.*_energy</code> (kWh) pour les appareils sans monitoring natif — notamment les ampoules Hue qui n'exposent pas de capteur de consommation direct. Il calcule l'énergie par modele de puissance fixe (ex: 10W) ou par profil constructeur. Sans PowerCalc, ces ampoules n'auraient aucune entité source pour le Utility Meter.
+        </div>
       </div>
 
       <!-- BOUTON EXEMPLE COMPLET YAML -->
