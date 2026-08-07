@@ -1048,11 +1048,6 @@ footer a:hover { color:var(--green); }
   0%,100% { box-shadow: inset -16px -16px 35px rgba(160,140,100,.18), inset 14px 14px 30px rgba(255,252,244,.92), inset 4px 4px 12px rgba(250,240,215,.70), 0 0 20px rgba(200,185,150,.12); }
   50%     { box-shadow: inset -16px -16px 35px rgba(160,140,100,.18), inset 14px 14px 30px rgba(255,252,244,.92), inset 4px 4px 12px rgba(250,240,215,.70), 0 0 55px rgba(200,185,150,.32); }
 }
-/* easter egg footer */
-.easter-wrap { margin-top:1.2rem; font-size:0.82rem; font-style:italic; color:rgba(255,255,255,0.55); display:block; cursor:default; }
-.easter-wrap:hover { color:rgba(255,255,255,0.9); }
-.easter-reveal { overflow:hidden; max-height:0; transition:max-height .5s ease; color:#b87333; font-size:0.78rem; margin-top:.3rem; }
-.easter-wrap:hover .easter-reveal { max-height:3rem; }
 </style>
 </head>
 <body>
@@ -4060,16 +4055,6 @@ genelec_appart_hphc_annuel_um:
 
 <footer>
   <a href="https://ha.erodi-ha.com">ha.erodi-ha.com</a> &nbsp;·&nbsp; Architecture HA — BerrySwann &nbsp;·&nbsp; 2026
-  <div style="position:relative;margin-top:1.2rem;display:inline-block;">
-    <!-- boite origine : style intact, texte vide -->
-    <div style="font-size:0.8rem;font-style:italic;color:rgba(255,255,255,0.55);padding:10px 20px;">&nbsp;</div>
-    <!-- boite transparente superposee : contient tout le texte + logique clic -->
-    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:transparent;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-style:italic;color:rgba(255,255,255,0.55);cursor:default;">
-      ... si le site t'a fait mal au crane, prend 2 cachets d'aspirine, mais surtout
-      <span id="easter-trigger" onclick="document.getElementById('easter-reveal').style.display='inline';this.style.display='none';" style="cursor:pointer;text-decoration:underline dotted;color:rgba(255,255,255,0.7);display:inline-block;padding:12px 18px;">ne clique pas ici</span>
-      <span id="easter-reveal" style="display:none;color:#b87333;"> — Tu vois ? On t'avait prevenu. &#x1F48A; Maintenant c'est trop tard.</span>
-    </div>
-  </div>
 </footer>
 
 <script>
