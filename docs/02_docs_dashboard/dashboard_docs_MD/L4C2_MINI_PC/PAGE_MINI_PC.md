@@ -102,7 +102,7 @@ Or `sensor.pve_uptime` retourne des **heures flottantes** (confirmé lors du fix
 |--------|--------|------|
 | `/local/images/mini pc.png` | Fichier local HA | Photo du NUC |
 | `sensor.local_ip` | Intégration System Monitor | IP interne |
-| `sensor.ip_externe` | Template/intégration | IP externe WAN |
+| `sensor.ip_externe_wan` | command_line (api.ipify.org) | IP externe WAN |
 
 ### Uptime
 | Entité | Source | Note |

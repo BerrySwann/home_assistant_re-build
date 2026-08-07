@@ -17,7 +17,7 @@ Il n'y a plus de fichier `INDEX_AUTOMATIONS.md` distinct — fusionne dans INDEX
 ## Arborescence locale des automations
 
 ```
-DOCS/03_docs_automations/
+docs/03_docs_automations/
 - docs_automations_YAML/     <- YAML individuels par automation (reference locale)
     P1_clim_chauffage/
     P1_cuisine/

@@ -1056,8 +1056,8 @@ MATÉRIEL / INTÉGRATION
 
 ```
 MATÉRIEL / INTÉGRATION
-  ├─→ local_ip + myip/ipify (intégrations)
-  │     └─→ sensor.local_ip / sensor.ip_externe  (NAT)  ← Bloc 1
+  ├─→ local_ip (intégration System Monitor) + command_line api.ipify.org (fallback ifconfig.me)
+  │     └─→ sensor.local_ip (NAT) / sensor.ip_externe_wan (command_line)  ← Bloc 1
   ├─→ system_monitor (intégration HA)
   │     ├─→ sensor.system_monitor_dernier_demarrage      ← Bloc 1 (Uptime Jinja2)
   │     ├─→ sensor.system_monitor_utilisation_du_processeur  ← Blocs 2, 6, 8
@@ -1794,7 +1794,7 @@ HOME PAGE (type: grid)
 | `blueprints/` | Blueprints HA — non modifiés manuellement |
 | `custom_components/` | Intégrations HACS — non versionnées ici |
 | `www/` | Ressources frontend — hors config HA |
-| `docs_dashboard/` *(hypothèse — voir note)* | Ancien répertoire, supprimé le 2026-07-14, remplacé par `DOCS/02_docs_dashboard/` |
+| `docs_dashboard/` *(hypothèse — voir note)* | Ancien répertoire, supprimé le 2026-07-14, remplacé par `docs/02_docs_dashboard/` |
 
 > ⚠️ **Note 2026-07-19** : la ligne ci-dessus complète une phrase tronquée dans le fichier
 > d'origine (coupure nette au milieu du mot "docs_da", sans fin de ligne). Le contenu réel

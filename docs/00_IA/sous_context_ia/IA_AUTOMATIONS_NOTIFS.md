@@ -11,7 +11,7 @@
 - ✅ **OBLIGATOIRE** : `alias` en MAJUSCULES pour chaque sous-bloc (trigger, condition, action).
 - 🆗 **AUTORISÉ** : `id:` permis UNIQUEMENT à l'intérieur des déclencheurs (ciblage d'actions).
 - **MODIFICATIONS** : Annoter chaque ligne modifiée `# "[L...] modif"` + bloc `# annotations_log:` en fin de réponse.
-- **DÉPLOIEMENT** : jamais de modification directe d'`automations.yaml` - passer par l'UI HA, un par un, en s'appuyant sur `DOCS/03_docs_automations/docs_automations_YAML/`.
+- **DÉPLOIEMENT** : jamais de modification directe d'`automations.yaml` - passer par l'UI HA, un par un, en s'appuyant sur `docs/03_docs_automations/docs_automations_YAML/`.
 
 ---
 
@@ -46,7 +46,7 @@
 
 ## 📲 RÉFÉRENTIEL NOTIFICATIONS - RELEVÉ PROD 2026-07-18
 
-> Source : `automations.yaml` + `scripts.yaml` (GitHub = reflet prod). Yaml individuels : `DOCS/03_docs_automations/docs_automations_YAML/`.
+> Source : `automations.yaml` + `scripts.yaml` (GitHub = reflet prod). Yaml individuels : `docs/03_docs_automations/docs_automations_YAML/`.
 
 ### 🌡️ P1 - CLIM CHAUFFAGE
 

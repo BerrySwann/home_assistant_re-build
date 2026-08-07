@@ -156,10 +156,10 @@ Tu disposes de sources d'information critiques :
 
 | Source | Description |
 |:-------|:------------|
-| `DOCS/00_IA/IA_CONTEXT_BASE.md` | Structure physique (Simple vitrage, Dernier étage, Traversant) |
-| `DOCS/01_docs_config_system/config_system_YAML/notifs/diag_conso_elec.txt` | Logs horaires réels (la vérité du terrain) |
-| `automations.yaml` (+ `DOCS/03_docs_automations/docs_automations_YAML/`) | Le code qui pilote le chauffage et les ouvrants |
-| `DOCS/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim.yaml` | Logique déléguée jour/nuit clim (script maître, créé 2026-06 - remplace l'ancien découpage j_1_1/j_1_2/j_1_3) |
+| `docs/00_IA/IA_CONTEXT_BASE.md` | Structure physique (Simple vitrage, Dernier étage, Traversant) |
+| `docs/01_docs_config_system/config_system_YAML/notifs/diag_conso_elec.txt` | Logs horaires réels (la vérité du terrain) |
+| `automations.yaml` (+ `docs/03_docs_automations/docs_automations_YAML/`) | Le code qui pilote le chauffage et les ouvrants |
+| `docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim.yaml` | Logique déléguée jour/nuit clim (script maître, créé 2026-06 - remplace l'ancien découpage j_1_1/j_1_2/j_1_3) |
 | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Calcul saison (`sensor.mode_ete_hiver`), température cible/confort |
 | `templates/P4_groupe_presence/02_logique_wifi_cellular.yaml` | Logique présence (`sensor.groupe` - voir IA_P4_PRESENCE.md) |
 | `sensor.tarif_heures_pleines_ttc` / `sensor.tarif_heures_creuses_ttc` | Coût kWh HP/HC (0.2065€ / 0.1578€ en 2026, EDF HPHC 6kVA TTC) - pour calculs ROI des recommandations (voir section 6, catégorie "Travaux physiques" uniquement) |
@@ -275,7 +275,7 @@ et Chambre est donc exclusivement d'origine thermique, pas de consigne.
     si le seuil 20.5C n'était franchi qu'après 8h30 (bug confirmé par Eric, corrigé)
 
 ⚠️ **Statut déploiement (2026-07-19)** : correction appliquée dans
-`DOCS/03_docs_automations/docs_automations_YAML/P1_cuisine/b_chauffage_cuisine_vacances.yaml`
+`docs/03_docs_automations/docs_automations_YAML/P1_cuisine/b_chauffage_cuisine_vacances.yaml`
 (état CIBLE). PAS ENCORE déployée en prod HA - à appliquer manuellement via l'UI
 (Paramètres > Automatisations > "B - Chauffage Cuisine Vacances" > éditer en YAML).
 Tant que ce n'est pas fait, le comportement réel en prod reste l'ANCIENNE version
@@ -579,7 +579,7 @@ Ratio = 0.101 / 0.028 = 3.6x
 | **v6.3** | **2026-07-19** | Ajout Daikin FTX35KNV1B Bureau+Chambre / Hitachi Salon. Table températures cibles par pièce/groupe extraite du YAML. Note audit Bureau=Chambre (matériel identique -> diff DUT = purement thermique). Correction x2 : "les 2 présents" -> "Eric OU Mamour" (cuisine ligne dimensions) ; section 3B Cuisine "Compensation en cours" -> "Aucune compensation". |
 | **v6.2** | **2026-07-19** | **Revue detaillee demandee par Eric, questions posees une a une. Corrections factuelles : (1) Store Salon - automations desactivees par Eric (genait Mamour) + tous volets fermes manuellement (canicule en cours), la logique theorique v5.2 n'est PAS active, et meme l'automation prod simplifiee ne la contient plus ; (2) Store Bureau confirme conforme au yaml prod, mais possiblement aussi coupe manuellement en ce moment ; (3) Chauffage cuisine - ajout automation "B-Vacances" non documentee + condition de presence zone.home non documentee sur A et B ; (4) Puissances equipements ajoutees (3 splits 3.5kW - 2 Daikin/1 Hitachi -, radiateur ~1.4-1.5kW) ; (5) Isolation confirmee brute partout, rideaux = seule compensation (bureau+chambre, PAS cuisine) ; (6) Rideaux cuisine confirmes NON poses (projet en pause) ; (7) Sources tarif EDF HP/HC ajoutees (sensor.tarif_heures_pleines_ttc/_creuses_ttc) + nuance ROI (pertinent seulement pour categorie "travaux physiques") ; (8) Limitations mises a jour : tag presence dans les logs resolu depuis ~29/04/2026 (mais absent avant, dont toute la periode rideaux) + derive du format de logs (colonne Autres depuis ~19/01) + artefact template ponctuel note.** |
 | v6.1 | 2026-07-19 | **Renommé IA_ENERGIE.md -> IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md (demande Eric). Ajout section 0 "CARACTERISTIQUES DU LOGEMENT" (dimensions, orientations, equipements par piece), deplacee depuis CLAUDE.md (sections STRUCTURE DU LOGEMENT + DIMENSIONS & PÔLES, marquees "usage limite a l'analyse des consommations electriques"). CLAUDE.md ne garde que la strategie thermique active (Mode Absence, logique Coeur du Systeme).** |
-| v6.0 | 2026-07-19 | Converti en sous_context_ia (IA_ENERGIE.md), depuis `Analyse énergétique/analyse_energetique_appart.md`. Ajout trigger line, références sources corrigées vers l'arborescence DOCS/ actuelle (03_05.../03_06... -> p1_master_gestion_clim.yaml + P1_01_clim_logique_system_autom.yaml + P4_groupe_presence). Contenu méthodologique (missions, calculs PC, biais) inchangé sur le fond. |
+| v6.0 | 2026-07-19 | Converti en sous_context_ia (IA_ENERGIE.md), depuis `Analyse énergétique/analyse_energetique_appart.md`. Ajout trigger line, références sources corrigées vers l'arborescence docs/ actuelle (03_05.../03_06... -> p1_master_gestion_clim.yaml + P1_01_clim_logique_system_autom.yaml + P4_groupe_presence). Contenu méthodologique (missions, calculs PC, biais) inchangé sur le fond. |
 | v5.2 | 2026-02-22 | Correction majeure : Chambre a un store manuel (non "pas de volet"). Ajout méthodes d'analyse avancées, calculs PC, points de vigilance. |
 | v5.1 | 2026-02-22 | Correction pôle Chauff (Sèche-Serviette déplacé de Hyg vers Chauff) |
 | v5.0 | 2026-02-22 | Ajout légende pôles énergétiques détaillée |

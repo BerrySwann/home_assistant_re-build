@@ -2,7 +2,7 @@
 
 > **Script shell :** `ha_git_backup.sh`
 > **Emplacement prod :** `/config/.scripts/ha_git_backup.sh`
-> **Emplacement local :** `DOCS/04_docs_scripts/docs_scripts_YAML/.scripts/ha_git_backup.sh`
+> **Emplacement local :** `docs/04_docs_scripts/docs_scripts_YAML/.scripts/ha_git_backup.sh`
 > **Appelé par :** `shell_command.yaml` → automations backup (auto H+10 · weekly · manuel)
 > **Dernière modif :** 2026-06-22
 

@@ -18,7 +18,7 @@ fusionnes dans INDEX_GLOBAL.md (2026-07-16).
 ## Arborescence locale dashboard
 
 ```
-DOCS/02_docs_dashboard/
+docs/02_docs_dashboard/
 - dashboard_docs_YAML/       <- YAMLs dashboard (vignettes, pages, cartes isolees)
     L1C1_01_Meteo/
     L1C2_02_Temperatures/
@@ -29,7 +29,7 @@ DOCS/02_docs_dashboard/
     L1C1_*/  L1C2_*/  ...
 ```
 
-Chemin prod config YAML : `DOCS/01_docs_config_system/config_system_YAML/` (sensors/, templates/, utility_meter/)
+Chemin prod config YAML : `docs/01_docs_config_system/config_system_YAML/` (sensors/, templates/, utility_meter/)
 Chemin prod dashboard : `H:\Docs\` (push depuis local)
 
 ---
@@ -91,8 +91,8 @@ Niveau 1 : L*C* — LABEL | X page(s) | ~N entites       <- retracte par defaut
 
 Apres ajout/modification d'une vignette, page ou fichier source :
 
-1. Lire le YAML reel concerne (`DOCS/02_docs_dashboard/dashboard_docs_YAML/L*C*/`)
-2. Verifier chaque entite citee contre le YAML prod (`DOCS/01_docs_config_system/config_system_YAML/`)
+1. Lire le YAML reel concerne (`docs/02_docs_dashboard/dashboard_docs_YAML/L*C*/`)
+2. Verifier chaque entite citee contre le YAML prod (`docs/01_docs_config_system/config_system_YAML/`)
 3. Mettre a jour la section 02-DASHBOARD de `INDEX_GLOBAL.md` (local puis H:\Docs\)
 4. Verifier la balance `<details>`/`</details>` et `<blockquote>`/`</blockquote>` avant push
 5. Mettre a jour `DEPENDANCES_GLOBALES.md` si necessaire (/sync_index)

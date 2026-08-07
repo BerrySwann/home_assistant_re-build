@@ -8,12 +8,12 @@
 
 | Contexte | Nom du dossier docs |
 |:---------|:--------------------|
-| Local ReBuild (Windows, insensible à la casse) | `DOCS/` ou `docs/` - indifférent |
+| Local ReBuild (Windows, insensible à la casse) | `docs/` ou `docs/` - indifférent |
 | Prod H:\ (Windows, insensible à la casse) | `docs/` (renommé 2026-07-19, ex `Docs/`) |
 | **GitHub (case-sensitive)** | `docs/` (tout minuscule depuis 2026-07-19) |
 
 > ⚠️ **Changement du 2026-07-19** : le dossier était `Docs/` (D majuscule) jusqu'au 07-18. Renommé en `docs/` (tout minuscule) côté H:\, puis pushé sur GitHub qui ne fait plus du tout la distinction historique - **tous les liens doivent utiliser `docs/` minuscule**. Les 385 liens de `INDEX_GLOBAL.md` ont été réécrits en conséquence le 2026-07-19 (247/249 OK, 2 morts = entrée Gardien Éco connue).
-> GitHub reste **case-sensitive** : ne jamais écrire `Docs/` ni `DOCS/` dans un lien vers le repo.
+> GitHub reste **case-sensitive** : ne jamais écrire `Docs/` ni `docs/` dans un lien vers le repo.
 
 ---
 
@@ -31,7 +31,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── prompt/                             (maquettes HTML · captures ecran · histo_*.txt)
 ├── Infra_Proxmox/                      (réseau, certs - + save/)
 ├── historique/                         (JOURNAL_COMPLET_*.md · histo_YYYY-MM-DD_S*.txt)
-└── DOCS/
+└── docs/
     ├── 00_IA/                          (IA_CONTEXT_BASE.md · confort_cible_calcul_flow.png)
     │   └── sous_context_ia/            (8 sous-contextes IA_*.md, dont IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md ajouté 2026-07-19)
     ├── 01_docs_config_system/
@@ -75,7 +75,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── command_line/                       (4)
 │   ├── audit/audit_logs.yaml           (sensor.audit_md5_journal)
 │   ├── github_maintenance/github_maintenance.yaml
-│   ├── ip_externe/ip_externe.yaml      (sensor.ip_externe)
+│   ├── ip_externe/ip_externe.yaml      (sensor.ip_externe_wan)
 │   └── meteo/carte_meteo_france.yaml
 ├── groups/                             (3 - GRP_01_batteries_hue · GRP_02_ikea · GRP_03_sonoff)
 ├── input_booleans/                     (5 - P1/2 · P3/2 · P4/1)
@@ -91,12 +91,12 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │
 ├── templates/                          (36)
 │   ├── Air_quality/                    (1 - A_01_AIR_QUALITY)
-│   ├── Inter_BP_Virtuel/               (P1/1 · P3/2)
+│   ├── Inter_BP_Virtuel/               (P1/P1_BV_IB_SW · P3/P3_BV_IB_SW_x2)
 │   ├── P0_Energie_total_diag/          (P0_Diag/3 · P0_Genelec_appart/3 · P0_Linky/1 · P0_total_pour_les_7_postes/1)
 │   ├── P1_clim_chauffage/              (P1_01_MASTER/3 · P1_AVG/2 · P1_DUT_TOTAL/1 · P1_TOTAL/1
 │   │                                    · P1_kWh_riemann_cuisine/1 · P1_ui_dashboard/1)
 │   ├── P2_prise/                       (P2_AVG/3 · P2_I_all_standby_power/1 · P2_eCO_prises/1 · P2_ui_dashboard/1)
-│   ├── P3_eclairage/                   (P3_AVG/3 · P3_ENERGIE_TPL/3 · P3_POWER_TPL/1 · ui_dashboard/1)
+│   ├── P3_eclairage/                   (P3_AVG/3 · P3_ENERGIE_TPL/3 · P3_POWER_TPL/1 · P3_ui_dashboard/1)
 │   ├── P4_groupe_presence/             (2)
 │   ├── Stores/                         (1 - S_01_STORES)
 │   ├── meteo/                          (5 - M_01 → M_05)
@@ -109,7 +109,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   ├── P3_eclairage/                   (P3_UM_AMHQ_1_UNITE - seul actif)
 │   └── meteo/                          (M_03_meteo_UM_blitzortung)
 │
-└── docs/                               (miroir pushé depuis local DOCS/ - JAMAIS de YAML config ici)
+└── docs/                               (miroir pushé depuis local docs/ - JAMAIS de YAML config ici)
     ├── 00_IA/                          (1 + sous_context_ia/8 - a jour apres push du 2026-07-19)
     ├── 01_docs_config_system/          (config_system_MD/1 · config_system_YAML/81)
     ├── 02_docs_dashboard/              (dashboard_docs_MD/52 · dashboard_docs_YAML/73)
@@ -148,7 +148,7 @@ Exemples :
 
 - **Audit MD5** : script unique `audit_md5.sh` (3 passes sans argument) - boutons dashboard L5C3 - log `/homeassistant/.logs/md5_audit_latest.txt`. Commandes détaillées : voir `IA_CMD_TERMINAL_HA.md`.
 - **Sens YAML config** : prod → GitHub → local (local converge vers prod).
-- **Sens Docs .md** : local `DOCS/` → `H:\Docs\` → GitHub (local gagne en conflit).
+- **Sens Docs .md** : local `docs/` → `H:\Docs\` → GitHub (local gagne en conflit).
 - **Après tout changement prod** : déclencher le git backup, sinon GitHub reste en retard (liens INDEX cassés, audits faussés).
 
 ## ⚠️ INCOHÉRENCES CONNUES (à régler)

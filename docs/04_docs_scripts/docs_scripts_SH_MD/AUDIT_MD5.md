@@ -2,7 +2,7 @@
 
 > **Script shell :** `audit_md5.sh`
 > **Emplacement prod :** `/config/.scripts/audit_md5.sh`
-> **Emplacement local :** `DOCS/04_docs_scripts/docs_scripts_YAML/.scripts/audit_md5.sh`
+> **Emplacement local :** `docs/04_docs_scripts/docs_scripts_YAML/.scripts/audit_md5.sh`
 > **Appelé par :** Boutons dashboard L5C3 (FULL · YAML · ATMA) via `shell_command`
 > **Dernière modif :** 2026-06-28
 

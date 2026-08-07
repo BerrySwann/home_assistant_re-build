@@ -15,7 +15,7 @@ avril (18 j), juillet (19 j - en cours). Mars, mai, juin : lacunes dans les logs
 |:-----------|:----------------|:--------------------|:-------|:------|
 | Cuisine - Arret semaine (07h00 LMMJ) | DUT R figé a 07h00 | DUT R stable a 07h00 sur 5 jours verifies (03-08/01). Ecart max : +6 min le 07/01 | CONFORME | Latence HA normale (1 interval = 15 min) |
 | Cuisine - Arret WE (08h00 VSD) | DUT R figé a 08h00 | DUT R stable a 08h00 sur 5 WE verifies (11, 17, 18, 24, 25/01) | CONFORME | Aucun depassement detecté |
-| Automation B "Vacances" - Arret forcé 08h30 | Arrêt a 08h30 (version corrigée) | **09/01 (Vendredi) : DUT R = 2.9h >> 2.25h (fenêtre max auto A).** Trace : radiateur encore actif a 08h30, 09h00, 09h15, 09h30 | **BUG CONFIRME** (pré-correction) | Version prod actuelle = ancienne (pas d'arret forcé). Fix dans DOCS/03 PAS ENCORE deploye |
+| Automation B "Vacances" - Arret forcé 08h30 | Arrêt a 08h30 (version corrigée) | **09/01 (Vendredi) : DUT R = 2.9h >> 2.25h (fenêtre max auto A).** Trace : radiateur encore actif a 08h30, 09h00, 09h15, 09h30 | **BUG CONFIRME** (pré-correction) | Version prod actuelle = ancienne (pas d'arret forcé). Fix dans docs/03 PAS ENCORE deploye |
 
 **Trace anomalie 09/01 :**
 
@@ -226,9 +226,9 @@ Eté :    Multi [====52%====] | Froid+Cuis+Hyg [====38%====] | Lum 5%
 
 #### 1. URGENT - Déployer l'automation B corrigée (0€, 30 min)
 
-- **Phase actuelle :** Correction rédigée et validée dans `DOCS/03_docs_automations/docs_automations_YAML/P1_cuisine/b_chauffage_cuisine_vacances.yaml`. PAS encore en prod.
+- **Phase actuelle :** Correction rédigée et validée dans `docs/03_docs_automations/docs_automations_YAML/P1_cuisine/b_chauffage_cuisine_vacances.yaml`. PAS encore en prod.
 - **Risque si non fait :** Le 09/01 a prouvé que le radiateur cuisine peut tourner jusqu'a ~10h30 sans se couper (2.9h vs 2.25h max prévus). Sur une semaine avec 3 matins froids, cela représente +0.5 a 1.5 kWh de surconsommation.
-- **Action :** Paramètres HA > Automatisations > "B - Chauffage Cuisine Vacances" > Modifier en YAML > coller le YAML de DOCS/03.
+- **Action :** Paramètres HA > Automatisations > "B - Chauffage Cuisine Vacances" > Modifier en YAML > coller le YAML de docs/03.
 - **Gain :** 0€ de cout, eliminates un comportement non-prévu. Impact energétique faible mais comportement imprévisible risqué (radiateur chaud sans surveillance).
 
 #### 2. Motoriser le store chambre (ou: automation rappel fermeture nocturne)
@@ -263,7 +263,7 @@ Eté :    Multi [====52%====] | Froid+Cuis+Hyg [====38%====] | Lum 5%
 
 | # | Anomalie | Sévérité | Statut |
 |:--|:---------|:---------|:-------|
-| A1 | Auto B "Vacances" : pas d'arrêt forcé en prod (radiateur peut tourner indéfiniment) | CRITIQUE | Fix DOCS/03 -> deploiement manuel requis |
+| A1 | Auto B "Vacances" : pas d'arrêt forcé en prod (radiateur peut tourner indéfiniment) | CRITIQUE | Fix docs/03 -> deploiement manuel requis |
 | A2 | Chambre +17% DUT vs Bureau (même équipement, même consigne) | MOYEN | Cause : store manuel -> option rideau insuffisante |
 | A3 | Talon nocturne Multi >100W certains soirs (PC non éteint) | FAIBLE | Pas d'automation - discipline utilisateur |
 | A4 | Logs discontinus (mars, mai, juin absents) | INFO | Limite l'analyse de la transition printemps/été |
