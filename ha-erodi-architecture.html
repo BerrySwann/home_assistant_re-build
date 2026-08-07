@@ -1701,12 +1701,12 @@ footer a:hover { color:var(--green); }
 
     <!-- BOUTON PROCESS — 2 messages hover -->
     <div id="btn-process-wrap" class="reveal"
-         style="position:relative;text-align:center;margin:calc(2rem - 96px) 0 3rem;padding:1.8rem 2rem;cursor:pointer;"
+         style="position:relative;text-align:center;margin:calc(2rem - 96px) auto 3rem;width:calc((100% - 2.5rem) / 3);padding:1.8rem 2rem;cursor:pointer;"
          onmouseenter="document.getElementById('btn-msg1').style.opacity='1'"
          onmouseleave="document.getElementById('btn-msg1').style.opacity='0';document.getElementById('btn-msg2').style.opacity='0'"
          onclick="location.hash='outillage'">
       <div id="btn-msg1" style="font-size:.95rem;font-weight:700;font-style:italic;color:#b87333;height:1.5rem;margin-bottom:1rem;opacity:0;transition:opacity .3s;">Attends... t'as vraiment lu jusqu'ici ?</div>
-      <div style="display:inline-block;position:relative;padding:.75rem 3rem;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-family:var(--fm);font-size:.9rem;font-weight:700;color:var(--text);letter-spacing:.05em;transition:color .2s,border-color .2s;animation:bloc-hint-pulse 2s ease-in-out infinite;"
+      <div style="display:inline-block;position:relative;display:block;width:100%;padding:.75rem 1.4rem;box-sizing:border-box;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-family:var(--fm);font-size:.9rem;font-weight:700;color:var(--text);letter-spacing:.05em;transition:color .2s,border-color .2s;animation:bloc-hint-pulse 2s ease-in-out infinite;"
            onmouseenter="document.getElementById('btn-msg1').style.opacity='0';document.getElementById('btn-msg2').style.opacity='1';this.style.color='#b87333';this.style.borderColor='#b87333';this.style.animationPlayState='paused'"
            onmouseleave="document.getElementById('btn-msg1').style.opacity='1';document.getElementById('btn-msg2').style.opacity='0';this.style.color='var(--text)';this.style.borderColor='var(--border)';this.style.animationPlayState='running'">
         <span class="bloc-tap-hint" style="animation-delay:0s;">👆</span>
