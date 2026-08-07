@@ -51,6 +51,10 @@ git_backup_push_weekly: >-
 audit_md5: >-
   bash -lc 'bash /config/.scripts/audit_md5.sh >> /config/.logs/md5_audit_$(date +%Y-%m-%d).txt 2>&1'
 
+# --- audit_md5_docs ---
+audit_md5_docs: >-
+  bash -lc 'bash /config/.scripts/audit_md5_docs.sh 2>&1'
+
 # annotations_log:
 # [2026-02-28] git_backup_push        : appel automatique (horaire/daily)
 # [2026-02-28] git_backup_push_manual : passe l'argument "Manuel" → visible dans le journal

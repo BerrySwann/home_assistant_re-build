@@ -1,4 +1,4 @@
-﻿j_2_0_secu_arret_clim_protege:
+j_2_0_secu_arret_clim_protege:
   alias: J 2-0 SECU - ARRÊT CLIM PROTÉGÉ
   description: '[EXÉCUTANT] Protection thermique et coupure sous 9W.'
   mode: parallel
@@ -197,6 +197,14 @@ audit_md5:
   sequence:
     - alias: "RUN AUDIT MD5"
       action: shell_command.audit_md5
+
+audit_md5_docs:
+  alias: "Audit MD5 Docs"
+  icon: mdi:file-document-check-outline
+  mode: single
+  sequence:
+    - alias: "RUN AUDIT MD5 DOCS"
+      action: shell_command.audit_md5_docs
 p1_master_gestion_clim:
   alias: "P1 - MASTER : Gestion centralisée climatisation"
   description: "Pilotage des 3 clims jour/nuit selon le paramètre periode. Appelé par P1_A_01 et P1_B_01."

@@ -39,3 +39,16 @@
 # annotations_log:
 # [2026-06-14] Remplacement audit_yaml/atma/full_journal → audit_md5_journal
 # [2026-06-14] FIX : python3 -c SUR UNE SEULE LIGNE (multiligne → erreur YAML col 0)
+# --- audit_md5_docs_journal ---
+- sensor:
+    name: "Audit MD5 Docs Journal"
+    unique_id: audit_md5_docs_journal
+    command: >-
+      bash -lc 'python3 -c "import json,os,glob; files=sorted(glob.glob(\"/config/.logs/hermes_md5_audit_docs_*.txt\")); f=files[-1] if files else None; lines=open(f).readlines()[-25:] if f else []; k=[l.rstrip() for l in lines]; print(json.dumps({\"text\":chr(10).join(k) or \"—\"}))" 2>/dev/null || echo "{\"text\":\"—\"}"'
+    scan_interval: 30
+    value_template: 'OK'
+    json_attributes:
+      - text
+
+# annotations_log:
+# [2026-08-07] audit_md5_docs_journal : lecture hermes_md5_audit_docs_latest.txt → carte Audit MD5 Docs L5C3
