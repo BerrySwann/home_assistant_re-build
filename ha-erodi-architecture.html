@@ -999,9 +999,7 @@ footer a:hover { color:var(--green); }
 }
 /* ── BLOB SCROLL ── */
 #scroll-blob {
-  position: fixed;
-  bottom: 32px;
-  right: 32px;
+  position: absolute;
   width: 130px;
   height: 130px;
   border-radius: 42% 58% 54% 46% / 48% 44% 56% 52%;
@@ -1102,6 +1100,10 @@ footer a:hover { color:var(--green); }
     <p class="section-sub reveal">Refonte complete de zero. Architecture rigoureuse, entites 100% tracables, documentation embarquee. Energie - Chauffage - Eclairage - Presence.</p>
 
     <!-- STATS -->
+    <div style="position:relative; overflow:visible;">
+    <div id="blob-anchor" style="position:absolute; right:0; top:50%; margin-top:-65px; pointer-events:none; z-index:999;">
+      <div id="scroll-blob"></div>
+    </div>
     <div class="stats-band reveal" style="display:grid;grid-template-columns:repeat(5,1fr);margin:2rem -9999px 3rem;padding:1.8rem 9999px;text-align:center;background:rgba(29,77,46,0.04);border-top:1px solid rgba(29,77,46,0.1);border-bottom:1px solid rgba(29,77,46,0.1);overflow:hidden;">
       <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 1rem;border-right:1px solid rgba(29,77,46,0.12)">
         <span class="counter" data-target="5" style="font-size:3rem;font-weight:800;color:var(--green);line-height:1">0</span>
@@ -1128,6 +1130,7 @@ footer a:hover { color:var(--green); }
         <span style="font-size:0.8rem;font-weight:700;color:var(--text)">Niveaux</span>
         <span style="font-size:0.7rem;color:var(--text-2)">chaine dependances</span>
       </div>
+    </div>
     </div>
 
     <!-- POINTS FORTS -->
@@ -4047,8 +4050,6 @@ genelec_appart_hphc_annuel_um:
     </div>
   </div>
 </section>
-
-<div id="scroll-blob"></div>
 
 <footer>
   <a href="https://ha.erodi-ha.com">ha.erodi-ha.com</a> &nbsp;·&nbsp; Architecture HA — BerrySwann &nbsp;·&nbsp; 2026
