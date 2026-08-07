@@ -1700,12 +1700,11 @@ footer a:hover { color:var(--green); }
     <div id="types-end" style="height:1px;"></div>
 
     <!-- BOUTON PROCESS — 2 messages hover -->
-    <div id="btn-process-wrap" class="bloc bloc-clickable reveal"
-         style="position:relative;text-align:center;margin:calc(2rem - 96px) 0 3rem;padding:1.8rem 2rem;cursor:pointer;animation-delay:0s;"
+    <div id="btn-process-wrap" class="reveal"
+         style="position:relative;text-align:center;margin:calc(2rem - 96px) 0 3rem;padding:1.8rem 2rem;cursor:pointer;"
          onmouseenter="document.getElementById('btn-msg1').style.opacity='1'"
          onmouseleave="document.getElementById('btn-msg1').style.opacity='0';document.getElementById('btn-msg2').style.opacity='0'"
          onclick="location.hash='outillage'">
-      <span class="bloc-tap-hint" style="animation-delay:0s;">👆</span>
       <div id="btn-msg1" style="font-size:.95rem;font-weight:700;font-style:italic;color:#b87333;height:1.5rem;margin-bottom:1rem;opacity:0;transition:opacity .3s;">Attends... t'as vraiment lu jusqu'ici ?</div>
       <div style="display:inline-block;padding:.75rem 1.4rem;background:var(--bg);border:none;border-radius:8px;font-family:var(--fm);font-size:.9rem;font-weight:700;color:var(--text);letter-spacing:.05em;transition:color .2s;"
            onmouseenter="document.getElementById('btn-msg1').style.opacity='0';document.getElementById('btn-msg2').style.opacity='1';this.style.color='#b87333'"
