@@ -999,29 +999,31 @@ footer a:hover { color:var(--green); }
 }
 /* ── BLOB SCROLL ── */
 #scroll-blob {
-  position: absolute;
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
   width: 130px;
   height: 130px;
   border-radius: 42% 58% 54% 46% / 48% 44% 56% 52%;
   background: radial-gradient(ellipse at 30% 25%,
-    rgba(255,255,255,1.0)   0%,
-    rgba(255,245,255,.95)   12%,
-    rgba(230,240,255,.88)   25%,
-    rgba(255,230,245,.80)   38%,
-    rgba(210,235,255,.70)   52%,
-    rgba(240,220,255,.55)   65%,
-    rgba(190,210,240,.35)   78%,
+    rgba(255,253,248,1.0)   0%,
+    rgba(252,248,238,.95)   14%,
+    rgba(247,243,235,.88)   30%,
+    rgba(240,234,220,.76)   48%,
+    rgba(228,220,205,.58)   64%,
+    rgba(212,202,185,.34)   80%,
     transparent 100%
   );
   box-shadow:
-    inset -16px -16px 35px rgba(180,160,220,.25),
-    inset  14px  14px 30px rgba(255,255,255,.80),
-    inset   4px   4px 12px rgba(255,220,255,.50),
-    0 0 50px rgba(200,180,255,.20);
+    inset -16px -16px 35px rgba(160,140,100,.18),
+    inset  14px  14px 30px rgba(255,252,244,.92),
+    inset   4px   4px 12px rgba(250,240,215,.70),
+    0 0 50px rgba(200,185,150,.22);
   pointer-events: none;
   z-index: 999;
+  transition: top 0.6s ease, bottom 0.6s ease;
   animation: blobDrift 9s ease-in-out infinite, blobBreathe 5s ease-in-out infinite, blobGlow 4.5s ease-in-out infinite;
-  opacity: 0.7;
+  opacity: 0.75;
 }
 @keyframes blobDrift {
   0%,100% { transform: translate(0,0) rotate(0deg); }
@@ -1035,8 +1037,8 @@ footer a:hover { color:var(--green); }
   50%     { transform: scale(1.1); }
 }
 @keyframes blobGlow {
-  0%,100% { box-shadow: inset -12px -12px 28px rgba(29,77,150,.20), inset 8px 8px 20px rgba(255,255,255,.45), 0 0 20px rgba(29,77,150,.10); }
-  50%     { box-shadow: inset -12px -12px 28px rgba(29,77,150,.20), inset 8px 8px 20px rgba(255,255,255,.45), 0 0 60px rgba(29,77,150,.30); }
+  0%,100% { box-shadow: inset -16px -16px 35px rgba(160,140,100,.18), inset 14px 14px 30px rgba(255,252,244,.92), inset 4px 4px 12px rgba(250,240,215,.70), 0 0 20px rgba(200,185,150,.12); }
+  50%     { box-shadow: inset -16px -16px 35px rgba(160,140,100,.18), inset 14px 14px 30px rgba(255,252,244,.92), inset 4px 4px 12px rgba(250,240,215,.70), 0 0 55px rgba(200,185,150,.32); }
 }
 /* easter egg footer */
 .easter-wrap { margin-top:1.2rem; font-size:0.82rem; font-style:italic; color:rgba(255,255,255,0.55); display:block; cursor:default; }
@@ -1100,11 +1102,7 @@ footer a:hover { color:var(--green); }
     <p class="section-sub reveal">Refonte complete de zero. Architecture rigoureuse, entites 100% tracables, documentation embarquee. Energie - Chauffage - Eclairage - Presence.</p>
 
     <!-- STATS -->
-    <div style="position:relative; overflow:visible;">
-    <div id="blob-anchor" style="position:absolute; right:0; top:50%; margin-top:-65px; pointer-events:none; z-index:999;">
-      <div id="scroll-blob"></div>
-    </div>
-    <div class="stats-band reveal" style="display:grid;grid-template-columns:repeat(5,1fr);margin:2rem -9999px 3rem;padding:1.8rem 9999px;text-align:center;background:rgba(29,77,46,0.04);border-top:1px solid rgba(29,77,46,0.1);border-bottom:1px solid rgba(29,77,46,0.1);overflow:hidden;">
+    <div class="stats-band reveal" id="stats-band" style="display:grid;grid-template-columns:repeat(5,1fr);margin:2rem -9999px 3rem;padding:1.8rem 9999px;text-align:center;background:rgba(29,77,46,0.04);border-top:1px solid rgba(29,77,46,0.1);border-bottom:1px solid rgba(29,77,46,0.1);overflow:hidden;">
       <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 1rem;border-right:1px solid rgba(29,77,46,0.12)">
         <span class="counter" data-target="5" style="font-size:3rem;font-weight:800;color:var(--green);line-height:1">0</span>
         <span style="font-size:0.8rem;font-weight:700;color:var(--text)">Poles</span>
@@ -1130,7 +1128,6 @@ footer a:hover { color:var(--green); }
         <span style="font-size:0.8rem;font-weight:700;color:var(--text)">Niveaux</span>
         <span style="font-size:0.7rem;color:var(--text-2)">chaine dependances</span>
       </div>
-    </div>
     </div>
 
     <!-- POINTS FORTS -->
@@ -4051,6 +4048,8 @@ genelec_appart_hphc_annuel_um:
   </div>
 </section>
 
+<div id="scroll-blob"></div>
+
 <footer>
   <a href="https://ha.erodi-ha.com">ha.erodi-ha.com</a> &nbsp;·&nbsp; Architecture HA — BerrySwann &nbsp;·&nbsp; 2026
   <div style="margin-top:1.2rem;font-size:0.8rem;font-style:italic;color:rgba(255,255,255,0.55);">
@@ -4685,6 +4684,39 @@ document.querySelectorAll('.intel-tab').forEach(function(tab) {
   }, { threshold: 0.5 });
 
   obs.observe(counters[0]);
+})();
+
+// ── BLOB ALIGNMENT — aligne le blob avec la stats-band ────────────────────
+(function() {
+  var blob = document.getElementById('scroll-blob');
+  var band = document.getElementById('stats-band');
+  if (!blob || !band) return;
+
+  function alignBlob() {
+    var rect = band.getBoundingClientRect();
+    var centerY = rect.top + rect.height / 2;
+    var blobH = blob.offsetHeight || 130;
+    var top = centerY - blobH / 2;
+    blob.style.top = Math.max(0, top) + 'px';
+    blob.style.bottom = 'auto';
+  }
+
+  var blobObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        alignBlob();
+        window.addEventListener('scroll', alignBlob);
+        window.addEventListener('resize', alignBlob);
+      } else {
+        window.removeEventListener('scroll', alignBlob);
+        window.removeEventListener('resize', alignBlob);
+        blob.style.top = '';
+        blob.style.bottom = '32px';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  blobObs.observe(band.querySelector('.counter') || band);
 })();
 
 // Counters individuels sur les cartes stat-card
