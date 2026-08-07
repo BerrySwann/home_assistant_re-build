@@ -1699,6 +1699,24 @@ footer a:hover { color:var(--green); }
     </div><!-- /blocs-grid -->
     <div id="types-end" style="height:1px;"></div>
 
+    <!-- BOUTON PROCESS — 2 messages hover -->
+    <div id="btn-process-wrap" class="reveal"
+         style="text-align:center;margin:2rem 0 3rem;padding:2rem;cursor:default;"
+         onmouseenter="document.getElementById('btn-msg1').style.opacity='1'"
+         onmouseleave="document.getElementById('btn-msg1').style.opacity='0';document.getElementById('btn-msg2').style.opacity='0'">
+      <div style="font-size:.78rem;font-style:italic;color:var(--text-2);height:1.4rem;margin-bottom:.8rem;transition:opacity .3s;"
+           id="btn-msg1" style="opacity:0;">Attends... t'as vraiment lu jusqu'ici ?</div>
+      <a href="#outillage"
+         style="display:inline-block;padding:.75rem 2.2rem;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;font-family:var(--fm);font-size:.82rem;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:.04em;transition:border-color .2s,color .2s,box-shadow .2s;"
+         onmouseenter="document.getElementById('btn-msg1').style.opacity='0';document.getElementById('btn-msg2').style.opacity='1'"
+         onmouseleave="document.getElementById('btn-msg1').style.opacity='1';document.getElementById('btn-msg2').style.opacity='0'"
+         onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)';this.style.boxShadow='0 0 0 3px rgba(29,77,46,.1)'"
+         onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)';this.style.boxShadow='none'">
+        04 &mdash; Process &rarr;
+      </a>
+      <div style="font-size:.78rem;font-style:italic;color:var(--green);height:1.4rem;margin-top:.8rem;opacity:0;transition:opacity .3s;"
+           id="btn-msg2">Bon. Tu mérites de voir la suite. Clique.</div>
+    </div>
 
     <div id="sensors-templates-um" class="reveal" style="margin-top:3rem;margin-bottom:1.5rem;">
       <h2 class="section-title">01 · Config YAML</h2>
