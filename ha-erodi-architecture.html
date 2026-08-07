@@ -1022,19 +1022,25 @@ footer a:hover { color:var(--green); }
   pointer-events: none;
   z-index: 999;
   transition: top 0.6s ease, bottom 0.6s ease;
-  animation: blobDrift 4s ease-in-out infinite, blobBreathe 2.2s ease-in-out infinite, blobGlow 2s ease-in-out infinite;
+  animation: blobDrift 4s ease-in-out infinite, blobMorph 2.8s ease-in-out infinite, blobGlow 2s ease-in-out infinite;
   opacity: 0.75;
 }
 @keyframes blobDrift {
-  0%,100% { transform: translate(0,0) rotate(0deg); }
-  18%     { transform: translate(8px,-10px) rotate(10deg); }
-  38%     { transform: translate(-6px,-4px) rotate(-8deg); }
-  57%     { transform: translate(9px,9px) rotate(12deg); }
-  76%     { transform: translate(-5px,6px) rotate(-5deg); }
+  0%,100% { transform: translate(0,0) rotate(0deg) scale(1); }
+  18%     { transform: translate(8px,-10px) rotate(10deg) scale(1.09); }
+  38%     { transform: translate(-6px,-4px) rotate(-8deg) scale(0.92); }
+  57%     { transform: translate(9px,9px) rotate(12deg) scale(1.07); }
+  76%     { transform: translate(-5px,6px) rotate(-5deg) scale(0.94); }
 }
-@keyframes blobBreathe {
-  0%,100% { transform: scale(1); }
-  50%     { transform: scale(1.1); }
+@keyframes blobMorph {
+  0%    { border-radius: 42% 58% 54% 46% / 48% 44% 56% 52%; }
+  14%   { border-radius: 66% 34% 38% 62% / 56% 62% 38% 44%; }
+  28%   { border-radius: 30% 70% 67% 33% / 62% 34% 66% 38%; }
+  42%   { border-radius: 72% 28% 44% 56% / 36% 70% 30% 64%; }
+  57%   { border-radius: 36% 64% 74% 26% / 64% 36% 70% 30%; }
+  71%   { border-radius: 54% 46% 28% 72% / 44% 68% 32% 56%; }
+  85%   { border-radius: 28% 72% 58% 42% / 70% 28% 72% 28%; }
+  100%  { border-radius: 42% 58% 54% 46% / 48% 44% 56% 52%; }
 }
 @keyframes blobGlow {
   0%,100% { box-shadow: inset -16px -16px 35px rgba(160,140,100,.18), inset 14px 14px 30px rgba(255,252,244,.92), inset 4px 4px 12px rgba(250,240,215,.70), 0 0 20px rgba(200,185,150,.12); }
