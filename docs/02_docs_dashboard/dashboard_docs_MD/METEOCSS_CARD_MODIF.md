@@ -1,8 +1,8 @@
-# ⚠️ MODIFICATION MANUELLE — meteocss-card.js
+# ⚠️ MODIFICATION MANUELLE - meteocss-card.js
 
 ---
 
-## 🚨 WARNING — MISE À JOUR HACS
+## 🚨 WARNING - MISE À JOUR HACS
 
 > **Si HACS met à jour `meteocss-card`, le fichier JS sera écrasé.**
 > **Les couleurs personnalisées seront PERDUES.**

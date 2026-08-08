@@ -1,4 +1,4 @@
-# [BACKUP] GIT — PUSH AU DÉMARRAGE HA
+# [BACKUP] GIT - PUSH AU DÉMARRAGE HA
 
 > **Fichier :** `TREE_CORRIGE/backup/git_push_au_demarrage_ha.yaml`
 > **Mode HA :** `single`
@@ -23,9 +23,9 @@ Si le push échoue, l'automation horaire H+10 prend le relai automatiquement.
 
 ## ⚙️ Actions
 
-1. `delay: 30s` — attente stabilisation réseau
-2. `shell_command.git_backup_push` — push Git (mode auto)
-3. `system_log.write` (level: info) — `[Backup] Démarrage HA — push Git exécuté`
+1. `delay: 30s` - attente stabilisation réseau
+2. `shell_command.git_backup_push` - push Git (mode auto)
+3. `system_log.write` (level: info) - `[Backup] Démarrage HA - push Git exécuté`
 
 ---
 

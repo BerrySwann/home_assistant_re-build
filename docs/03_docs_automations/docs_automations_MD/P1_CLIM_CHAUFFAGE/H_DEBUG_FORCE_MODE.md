@@ -1,4 +1,4 @@
-# (H) WATCHDOG CLIM — FORCE MODE CORRECT & SÉCURITÉ
+# (H) WATCHDOG CLIM - FORCE MODE CORRECT & SÉCURITÉ
 
 > **Fichier :** `automations_corrige/P1_clim_chauffage/H_debug_force_mode.yaml`
 > **Mode HA :** `single`

@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
@@ -19,22 +19,43 @@
 
 ---
 
-# ⚙️ PAGE SYSTÈME — DOCUMENTATION COMPLÈTE
+# ⚙️ PAGE SYSTÈME - DOCUMENTATION COMPLÈTE
 
 ---
 
 ## 📋 TABLE DES MATIÈRES
 
-1. [Vue d'ensemble](#vue-densemble)
-2. [Architecture de la page](#architecture-de-la-page)
-3. [Section GITHUB](#section-github)
-4. [Section MARIADB](#section-mariadb)
-5. [Entités utilisées](#entités-utilisées--provenance-complète)
-6. [Automations liées](#automations-liées)
-7. [Dépannage](#dépannage)
+1. [Audit MD5 DOCS](#audit-md5-docs)
+2. [Vue d'ensemble](#vue-densemble)
+3. [Architecture de la page](#architecture-de-la-page)
+4. [Section GITHUB](#section-github)
+5. [Section MARIADB](#section-mariadb)
+6. [Entités utilisées](#entités-utilisées--provenance-complète)
+7. [Automations liées](#automations-liées)
+8. [Dépannage](#dépannage)
 
 ---
 
+
+## 📄 AUDIT MD5 DOCS
+
+Script HERMES d'audit 3 niveaux pour les fichiers .md de documentation.
+S'exécute localement depuis **Git Bash Windows** (pas sur HA) - requiert H: monté.
+
+| Propriété | Valeur |
+|:----------|:-------|
+| **Script** | `audit_md5_docs.sh` |
+| **Emplacement** | `docs/04_docs_scripts/scripts/audit_md5_docs.sh` |
+| **Usage** | `bash scripts/audit_md5_docs.sh` (Git Bash) |
+| **Niveaux** | LOCAL `ReBuild/docs/` · PROD `H:\docs\` · GITHUB raw |
+| **Rapport** | `historique/hermes_md5_audit_docs_YYYY-MM-DD.txt` + `latest.txt` |
+| **Doc** | `docs/04_docs_scripts/docs_scripts_SH_MD/AUDIT_MD5_DOCS.md` |
+
+**Statuts :** ✅ SYNC · ⚠️ CRLF · ❌ DIFF · 🚫 ABSENT
+
+> **Après un DIFF** : utiliser le skill `ha_push_md` (Cowork) pour pousser local → prod.
+
+---
 ## 🎯 VUE D'ENSEMBLE
 
 Page de maintenance système regroupant 3 blocs fonctionnels :
@@ -44,10 +65,10 @@ Page de maintenance système regroupant 3 blocs fonctionnels :
 
 ### Intégrations requises
 
-- ✅ **scripts** — `script.audit_md5`
-- ✅ **command_line** — `sensor.audit_md5_journal`, `sensor.backup_github_status`, `sensor.git_last_weekly_tag`, `sensor.backup_github_journal`, `sensor.github_default_branch`
-- ✅ **sql** — `sensor.taille_db_home_assistant`
-- ✅ **shell_command** — `shell_command.git_backup_push_manual`, `shell_command.git_backup_push_weekly`
+- ✅ **scripts** - `script.audit_md5`
+- ✅ **command_line** - `sensor.audit_md5_journal`, `sensor.backup_github_status`, `sensor.git_last_weekly_tag`, `sensor.backup_github_journal`, `sensor.github_default_branch`
+- ✅ **sql** - `sensor.taille_db_home_assistant`
+- ✅ **shell_command** - `shell_command.git_backup_push_manual`, `shell_command.git_backup_push_weekly`
 
 ### Cartes HACS utilisées
 
@@ -110,13 +131,13 @@ Bouton droit (custom_field `btn`) : même logique icône + animation `rotating 1
 ### Résultat (markdown)
 
 Lit `state_attr('sensor.audit_md5_journal', 'text')`, extrait la ligne `RÉSULTAT` et la ligne `Audit MD5 terminé`, affiche aussi le chemin du log (`/config/.logs/md5_audit_YYYY-MM-DD.txt` via `now().strftime`).
-Si aucun audit lancé → `— Aucun audit lancé —`.
+Si aucun audit lancé → `- Aucun audit lancé -`.
 
 ---
 
 ## 📍 SECTION GITHUB
 
-### Chip 1 — Statut backup
+### Chip 1 - Statut backup
 
 Affiche `Backup OK` ou `Backup KO` + le timestamp du dernier backup réussi.
 Pas d'action au tap ni au hold (lecture seule).
@@ -136,12 +157,12 @@ Pas d'action au tap ni au hold (lecture seule).
     action: none
 ```
 
-### Chips 2 — Tag weekly · Branche · Push
+### Chips 2 - Tag weekly · Branche · Push
 
 | Chip | Tap | Hold |
 |------|-----|------|
 | **Tag weekly** | Ouvre GitHub/tags | `call-service: shell_command.git_backup_push_weekly` + confirmation |
-| **Branche** | Ouvre GitHub repo principal | — |
+| **Branche** | Ouvre GitHub repo principal | - |
 | **Push** | `call-service: shell_command.git_backup_push_manual` + confirmation | Ouvre GitHub/commits/main |
 
 > ℹ️ Les chips appellent `shell_command.*` directement via `call-service` (sans intermédiaire `input_button`). Fonctionnel sur HA actuel.
@@ -205,7 +226,7 @@ Affiche les 10 dernières lignes `OK` du log `/config/.logs/ha_git_backup.log`.
 - type: markdown
   content: |-
     ```
-    {{ state_attr('sensor.backup_github_journal','text') or '—' }}
+    {{ state_attr('sensor.backup_github_journal','text') or '-' }}
     ```
   card_mod:
     style: |
@@ -223,7 +244,7 @@ Affiche les 10 dernières lignes `OK` du log `/config/.logs/ha_git_backup.log`.
 
 ### Graphique ApexCharts OK/KO
 
-Graphique en colonnes sur 7 jours — transforme `OK` → `1` et `KO` → `0`, groupé par tranches de 6h.
+Graphique en colonnes sur 7 jours - transforme `OK` → `1` et `KO` → `0`, groupé par tranches de 6h.
 
 ---
 
@@ -231,7 +252,7 @@ Graphique en colonnes sur 7 jours — transforme `OK` → `1` et `KO` → `0`, g
 
 ### Graphique évolution taille DB
 
-ApexCharts area sur 7 jours — `sensor.taille_db_home_assistant` en MiB, groupé par jour (`func: last`).
+ApexCharts area sur 7 jours - `sensor.taille_db_home_assistant` en MiB, groupé par jour (`func: last`).
 
 ### Bouton Purge + Repack
 
@@ -239,13 +260,13 @@ Déclenche l'automation `automation.db_purge_mariadb_repack`.
 
 ---
 
-## 📊 ENTITÉS — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS - PROVENANCE COMPLÈTE
 
 ### 📁 `scripts.yaml`
 
 | Entité | unique_id | Rôle |
 |--------|-----------|------|
-| `script.audit_md5` | `audit_md5` | Déclenche `.scripts/audit_md5.sh` — audit MD5 prod vs GitHub |
+| `script.audit_md5` | `audit_md5` | Déclenche `.scripts/audit_md5.sh` - audit MD5 prod vs GitHub |
 
 ### 📁 `command_line/audit/audit_logs.yaml`
 
@@ -275,7 +296,7 @@ Déclenche l'automation `automation.db_purge_mariadb_repack`.
 | `shell_command.git_backup_push_weekly` | Appelle `.scripts/ha_git_backup.sh weekly` |
 
 ### 📁 `.scripts/ha_git_backup.sh`
-Script bash — 3 modes : `auto` (horaire H+10), `weekly` (dim 01:30 + tag ISO), `Manuel` (bouton dashboard).
+Script bash - 3 modes : `auto` (horaire H+10), `weekly` (dim 01:30 + tag ISO), `Manuel` (bouton dashboard).
 Auth HTTPS via token dans l'URL remote Git (`.git/config`).
 
 ---
@@ -286,15 +307,15 @@ Auth HTTPS via token dans l'URL remote Git (`.git/config`).
 
 ```
 .scripts/ha_git_backup.sh  (3 modes)
-  ├── auto      ← appelé par git_hourly (H+10) et git_au_demarrage (boot) — silencieux
+  ├── auto      ← appelé par git_hourly (H+10) et git_au_demarrage (boot) - silencieux
   ├── "Manuel"  ← appelé par shell_command.git_backup_push_manual
   └── weekly    ← appelé par shell_command.git_backup_push_weekly
         │
-        ├── Filtre : .yaml / .yml / .md uniquement — guard anti-secrets.yaml
+        ├── Filtre : .yaml / .yml / .md uniquement - guard anti-secrets.yaml
         ├── Tag ISO : weekly-YYYY-WXX[-HHMM] (anti-collision heure)
         ├── Auth HTTPS : token dans URL remote .git/config (NON dans secrets.yaml)
         │
-        ├── → /config/.logs/ha_git_backup.log  (append — toutes actions)
+        ├── → /config/.logs/ha_git_backup.log  (append - toutes actions)
         │     └─→ command_line/github_maintenance/github_maintenance.yaml (4 sensors)
         │           ├── sensor.backup_github_status   scan 10s  grep "OK:" → JSON {ok, ts}
         │           ├── sensor.backup_github_journal  scan 10s  python3 → 10 dernières lignes OK → JSON {text}
@@ -312,7 +333,7 @@ Auth HTTPS via token dans l'URL remote Git (`.git/config`).
 | `backup/git_alerte_ko.yaml` | **[Backup] Alerte si KO 15 min** | `backup_github_status = KO` pendant 15 min | `persistent_notification.create` | ✅ tableau de bord HA |
 | `backup/git_weekly.yaml` | **[Backup] Git weekly (dim 01:30)** | Dimanche 01:30 | `shell_command.git_backup_push_weekly` | ✅ `notify.mobile_app_eric` |
 | `backup/git_push_manuel.yaml` | **[Backup] Git push manuel** | `input_button.git_push_manuel = on` | `shell_command.git_backup_push_manual` | ✅ `persistent_notification` (via script) |
-| `systeme/veille_github_releases.yaml` | **VEILLE GITHUB — Nouvelle release détectée** | `feedreader_entry_added` | Notif release + 2ème notif si breaking/deprecated | ✅ `notify.mobile_app_poco_x7_pro` |
+| `systeme/veille_github_releases.yaml` | **VEILLE GITHUB - Nouvelle release détectée** | `feedreader_entry_added` | Notif release + 2ème notif si breaking/deprecated | ✅ `notify.mobile_app_poco_x7_pro` |
 
 > Automations silencieuses (non documentées ici) : `git_hourly` (H+10, `system_log` only), `git_au_demarrage` (boot, `system_log` only).
 
@@ -339,7 +360,7 @@ Chip [Tag weekly]  (hold)
 2. Les chips appellent `shell_command.*` directement via `call-service` (sans `input_button`)
 3. Si pas de réaction : recharger `shell_command` via Outils dev → YAML → Recharger shell_command
 
-### Journal affiche `—`
+### Journal affiche `-`
 1. Vérifier que `/config/.logs/ha_git_backup.log` existe et contient des lignes `Backup GitHub OK:`
 2. Forcer un backup manuel depuis le terminal : `/config/.scripts/ha_git_backup.sh`
 3. Recharger le sensor : **Outils développeur → YAML → Recharger command_line**
@@ -387,9 +408,11 @@ Chip [Tag weekly]  (hold)
 - `sql.yaml`
 - `.scripts/audit_md5.sh`
 - `.scripts/ha_git_backup.sh`
+- `docs/04_docs_scripts/scripts/audit_md5_docs.sh`
 
 ### Documentation
-- `docs/L5C3_MARIADB/L5C3_VIGNETTE_MARIADB.md` — vignette MariaDB (jauge horseshoe)
+- `docs/04_docs_scripts/docs_scripts_SH_MD/AUDIT_MD5_DOCS.md` - script audit MD5 docs 3 niveaux
+- `docs/L5C3_MARIADB/L5C3_VIGNETTE_MARIADB.md` - vignette MariaDB (jauge horseshoe)
 
 ---
 

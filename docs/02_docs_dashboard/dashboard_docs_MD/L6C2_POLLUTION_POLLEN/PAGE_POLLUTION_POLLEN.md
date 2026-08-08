@@ -11,7 +11,7 @@
 |:------|:-------|
 | 📁 **Path** | `/dashboard-tablette/pollen-pollution` |
 | 🔗 **Accès depuis** | Vignette L6C2 (tap) |
-| 🏗️ **Layout** | `type: grid` — `column_span: 10` — 2 sections distinctes |
+| 🏗️ **Layout** | `type: grid` - `column_span: 10` - 2 sections distinctes |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-03-21 |
@@ -19,7 +19,7 @@
 
 ---
 
-# 🌿 L6C2 — Page Pollens & Pollution (Atmo France — Vence)
+# 🌿 L6C2 - Page Pollens & Pollution (Atmo France - Vence)
 
 ---
 
@@ -37,10 +37,10 @@
 
 ## 🎯 VUE D'ENSEMBLE
 
-Page en 2 sections verticales : **Pollens** (6 espèces — grid 3 colonnes) et **Qualité de l'air** (5 polluants — grid 5 colonnes). Toutes les entités proviennent de l'intégration **AtmoFrance** (HACS) — les entités `sensor.qualite_globale_*` exposent des attributs `Libellé` et `Couleur` directement exploitables dans les cartes sans template intermédiaire.
+Page en 2 sections verticales : **Pollens** (6 espèces - grid 3 colonnes) et **Qualité de l'air** (5 polluants - grid 5 colonnes). Toutes les entités proviennent de l'intégration **AtmoFrance** (HACS) - les entités `sensor.qualite_globale_*` exposent des attributs `Libellé` et `Couleur` directement exploitables dans les cartes sans template intermédiaire.
 
 ### Intégrations requises
-- ✅ AtmoFrance (HACS — `custom_components/atmofrance`) — station Vence
+- ✅ AtmoFrance (HACS - `custom_components/atmofrance`) - station Vence
 
 ### Cartes HACS utilisées
 
@@ -59,12 +59,12 @@ Page en 2 sections verticales : **Pollens** (6 espèces — grid 3 colonnes) et 
 
 ```
 ┌─────────────────────────────────────────────────┐
-│  HEADING — POLLENS - POLUTION                   │
+│  HEADING - POLLENS - POLUTION                   │
 ├─────────────────────────────────────────────────┤
 │  ── POLLENS [ Atmo France - Vence ] ──          │
-│  entity-progress-card — qualite_globale_pollen  │
+│  entity-progress-card - qualite_globale_pollen  │
 │  (barre 0→7, libellé + couleur dynamiques)      │
-│  Grid 3 colonnes — 6 ring-tile espèces          │
+│  Grid 3 colonnes - 6 ring-tile espèces          │
 │  ┌─────────┐ ┌─────────┐ ┌─────────┐           │
 │  │Graminées│ │Ambroisie│ │ Armoise │           │
 │  └─────────┘ └─────────┘ └─────────┘           │
@@ -73,9 +73,9 @@ Page en 2 sections verticales : **Pollens** (6 espèces — grid 3 colonnes) et 
 │  └─────────┘ └─────────┘ └─────────┘           │
 ├─────────────────────────────────────────────────┤
 │  ── QUALITE DE L'AIR [ Atmo France - Vence ] ── │
-│  entity-progress-card — qualite_globale_vence   │
+│  entity-progress-card - qualite_globale_vence   │
 │  (barre 0→7, libellé + couleur dynamiques)      │
-│  Grid 5 colonnes — 5 ring-tile polluants        │
+│  Grid 5 colonnes - 5 ring-tile polluants        │
 │  ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐           │
 │  │ O₃ │ │NO₂ │ │SO₂ │ │PM10│ │PM25│           │
 │  └────┘ └────┘ └────┘ └────┘ └────┘           │
@@ -103,7 +103,7 @@ percent: |
   {{ (current / max_value * 100) | round(0) }}
 ```
 
-> Les attributs `Libellé` et `Couleur` sont fournis **nativement** par l'intégration AtmoFrance — pas de template YAML requis.
+> Les attributs `Libellé` et `Couleur` sont fournis **nativement** par l'intégration AtmoFrance - pas de template YAML requis.
 
 ### Ring-tiles par espèce (grid 3 colonnes, scale 0.96)
 
@@ -136,9 +136,9 @@ color: "{{ state_attr(entity, 'Couleur') }}"
 
 ### Ring-tiles par polluant (grid 5 colonnes, scale 0.57)
 
-> ⚠️ Les polluants utilisent `ring_entity: sensor.*_vence` (même entité que `entity`) — l'anneau et la valeur sont pilotés par la même entité, contrairement aux pollens qui dissocient concentration/niveau.
+> ⚠️ Les polluants utilisent `ring_entity: sensor.*_vence` (même entité que `entity`) - l'anneau et la valeur sont pilotés par la même entité, contrairement aux pollens qui dissocient concentration/niveau.
 
-> ✅ O₃ utilise `ring_type: open` — anneau en mode ouvert.
+> ✅ O₃ utilise `ring_type: open` - anneau en mode ouvert.
 
 | Polluant | entity / ring_entity |
 |----------|---------------------|
@@ -165,13 +165,13 @@ Commune à tous les ring-tiles pollens et polluants :
 | 6 | `#872181` | Violet (Très mauvais) |
 | 7 | `#888` | Gris (Extrêmement mauvais) |
 
-> Note : la palette AtmoFrance officielle est légèrement différente de la palette CLAUDE.md — elle est conservée telle quelle pour cohérence avec les données officielles.
+> Note : la palette AtmoFrance officielle est légèrement différente de la palette CLAUDE.md - elle est conservée telle quelle pour cohérence avec les données officielles.
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
-### 🌐 Intégrations natives AtmoFrance (HACS — aucun fichier YAML à créer)
+### 🌐 Intégrations natives AtmoFrance (HACS - aucun fichier YAML à créer)
 
 **Indices globaux :**
 
@@ -199,9 +199,9 @@ Commune à tous les ring-tiles pollens et polluants :
 | `sensor.dioxyde_d_azote_vence` | NO₂ |
 | `sensor.dioxyde_de_soufre_vence` | SO₂ |
 | `sensor.pm10_vence` | PM10 |
-| `sensor.pm25_vence` | PM25 (extérieur AtmoFrance — ≠ `sensor.qualite_air_salon_ikea_pm25` intérieur IKEA) |
+| `sensor.pm25_vence` | PM25 (extérieur AtmoFrance - ≠ `sensor.qualite_air_salon_ikea_pm25` intérieur IKEA) |
 
-> ⚠️ `sensor.pm25_vence` est la mesure **extérieure** AtmoFrance — ne pas confondre avec les capteurs IKEA Vindstyrka intérieurs documentés en L6C1.
+> ⚠️ `sensor.pm25_vence` est la mesure **extérieure** AtmoFrance - ne pas confondre avec les capteurs IKEA Vindstyrka intérieurs documentés en L6C1.
 
 ---
 
@@ -224,7 +224,7 @@ Vérifier que l'attribut `Couleur` de l'entité AtmoFrance est bien une couleur 
 
 | Élément | Type | Statut |
 |---------|------|--------|
-| AtmoFrance (HACS) — station Vence | Intégration native | ✅ Essentiel |
+| AtmoFrance (HACS) - station Vence | Intégration native | ✅ Essentiel |
 | `custom:entity-progress-card` | HACS | ✅ Essentiel |
 | `custom:ring-tile` | HACS | ✅ Essentiel |
 | `custom:text-divider-row` | HACS | ✅ Essentiel |
@@ -237,8 +237,8 @@ Vérifier que l'attribut `Couleur` de l'entité AtmoFrance est bien une couleur 
 ## 🔗 FICHIERS LIÉS
 
 ### Documentation
-- [`L6C2_VIGNETTE_POLLUTION_POLLEN.md`](./L6C2_VIGNETTE_POLLUTION_POLLEN.md) — vignette résumé
-- [`../L6C1_AIR_QUALITE/`](../L6C1_AIR_QUALITE/) — qualité air intérieur (IKEA Vindstyrka)
+- [`L6C2_VIGNETTE_POLLUTION_POLLEN.md`](./L6C2_VIGNETTE_POLLUTION_POLLEN.md) - vignette résumé
+- [`../L6C1_AIR_QUALITE/`](../L6C1_AIR_QUALITE/) - qualité air intérieur (IKEA Vindstyrka)
 
 ---
 

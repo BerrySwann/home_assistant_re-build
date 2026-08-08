@@ -1,4 +1,4 @@
-# GESTION TV CHAMBRE — SCÈNE DE FIN + NOTIF
+# GESTION TV CHAMBRE - SCÈNE DE FIN + NOTIF
 
 > **Fichier :** `docs_automations/TREE_CORRIGE/P2_prises/gestion_tv_chambre_scene_de_fin_notif.yaml`
 > **ID HA :** `1775330762844`
@@ -24,7 +24,7 @@ et la prise `switch.prise_tv_chambre_nous`.
 
 ---
 
-## ⚙️ Actions — Choose
+## ⚙️ Actions - Choose
 
 **ALLUMAGE (bouton ON) :**
 - `trigger.payload == 'on'` ET `switch.prise_tv_chambre_nous` est `off` (garde-fou anti-doublon)
@@ -57,7 +57,7 @@ et la prise `switch.prise_tv_chambre_nous`.
 
 ## ⚠️ Notes techniques
 
-- Topic : `zigbee2mqtt2` (LXC 200) — pas `zigbee2mqtt`.
+- Topic : `zigbee2mqtt2` (LXC 200) - pas `zigbee2mqtt`.
 - `trigger.payload` utilisé (pas `payload_json`) : le topic `/action` sur IKEA envoie une string directe.
 - Garde-fou allumage : `switch.prise_tv_chambre_nous == off` évite le double-allumage.
-- `mode: single` : une seule instance à la fois — pas de chevauchement allumage/extinction.
+- `mode: single` : une seule instance à la fois - pas de chevauchement allumage/extinction.

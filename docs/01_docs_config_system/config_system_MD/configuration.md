@@ -10,8 +10,8 @@
 | Champ | Valeur |
 |:------|:-------|
 | 📁 **Path** | `/config/` (racine HA) |
-| 🔗 **Accès depuis** | Fichiers système — pas de vignette dashboard |
-| 🏗️ **Layout** | — |
+| 🔗 **Accès depuis** | Fichiers système - pas de vignette dashboard |
+| 🏗️ **Layout** | - |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-05-10 |
@@ -19,7 +19,7 @@
 
 ---
 
-# ⚙️ CONFIG RACINE — DOCUMENTATION DES FICHIERS `/config/*.yaml`
+# ⚙️ CONFIG RACINE - DOCUMENTATION DES FICHIERS `/config/*.yaml`
 
 Documentation des 6 fichiers YAML à la racine de `/config/` qui ne sont pas des sous-dossiers modulaires.
 
@@ -66,7 +66,7 @@ Documentation des 6 fichiers YAML à la racine de `/config/` qui ne sont pas des
 | `climate.clim_chambre_rm4_mini` | `remote.clim_chambre` | `sensor.th_chambre_temperature` | `sensor.th_chambre_humidity` |
 | `climate.clim_salon_rm4_mini` | `remote.clim_salon` | `sensor.th_salon_temperature` | `sensor.th_salon_humidity` |
 
-> `device_code: 1108` (Bureau + Chambre) / `device_code: 1082` (Salon) — codes SmartIR pour le modèle de clim.
+> `device_code: 1108` (Bureau + Chambre) / `device_code: 1082` (Salon) - codes SmartIR pour le modèle de clim.
 
 ### Recorder MariaDB
 
@@ -93,8 +93,8 @@ Documentation des 6 fichiers YAML à la racine de `/config/` qui ne sont pas des
 
 | Entité | Fichier source | Usage |
 |--------|---------------|-------|
-| `camera.mf_alerte_today` | `/config/www/weather/meteo_france_alerte_today.png` | Pop-up #ALERT — carte vigilance aujourd'hui |
-| `camera.mf_alerte_tomorrow` | `/config/www/weather/meteo_france_alerte_tomorrow.png` | Pop-up #ALERT — carte vigilance demain |
+| `camera.mf_alerte_today` | `/config/www/weather/meteo_france_alerte_today.png` | Pop-up #ALERT - carte vigilance aujourd'hui |
+| `camera.mf_alerte_tomorrow` | `/config/www/weather/meteo_france_alerte_tomorrow.png` | Pop-up #ALERT - carte vigilance demain |
 
 ### Dépendances
 
@@ -124,7 +124,7 @@ Documentation des 6 fichiers YAML à la racine de `/config/` qui ne sont pas des
 
 ## 4. `groups/`
 
-**Rôle :** Regroupe les capteurs de batteries par fabricant (IKEA, HUE, SONOFF) pour la surveillance centralisée dans la vignette **L5C1 Batteries**. Anciennement `groups.yaml` — migré en répertoire `groups/` via `!include_dir_merge_named` (2026-05-10).
+**Rôle :** Regroupe les capteurs de batteries par fabricant (IKEA, HUE, SONOFF) pour la surveillance centralisée dans la vignette **L5C1 Batteries**. Anciennement `groups.yaml` - migré en répertoire `groups/` via `!include_dir_merge_named` (2026-05-10).
 
 ### Fichiers du répertoire
 
@@ -136,7 +136,7 @@ Documentation des 6 fichiers YAML à la racine de `/config/` qui ne sont pas des
 
 **Total surveillé : 34 capteurs de batteries.**
 
-> ⚠️ Chaque fichier retourne un **dict** (pas une liste) — requis par `!include_dir_merge_named`. Le dict key devient l'identifiant du groupe HA (ex: `group.hue_devices`).
+> ⚠️ Chaque fichier retourne un **dict** (pas une liste) - requis par `!include_dir_merge_named`. Le dict key devient l'identifiant du groupe HA (ex: `group.hue_devices`).
 
 ### Entités incluses dans `group.ikea_devices`
 
@@ -152,7 +152,7 @@ Thermostats SNZB-02 (7 pièces) + contacts fenêtres SNZB-04 (salon, cuisine, bu
 
 ### Vignette dashboard
 
-- **L5C1** Surveillance Batteries / Piles — `docs/L5C1_PILES_BATTERIES/`
+- **L5C1** Surveillance Batteries / Piles - `docs/L5C1_PILES_BATTERIES/`
 
 ---
 
@@ -164,7 +164,7 @@ Thermostats SNZB-02 (7 pièces) + contacts fenêtres SNZB-04 (salon, cuisine, bu
 
 | Clé | Argument passé | Déclencheur typique |
 |-----|---------------|---------------------|
-| `shell_command.git_backup_push` | *(aucun)* | Automatique — horaire/daily |
+| `shell_command.git_backup_push` | *(aucun)* | Automatique - horaire/daily |
 | `shell_command.git_backup_push_manual` | `"Manuel"` | `input_button.git_push_manuel` |
 | `shell_command.git_backup_push_weekly` | `"weekly"` | `input_button.git_push_weekly_manuel` |
 
@@ -197,12 +197,12 @@ FROM information_schema.tables
 WHERE table_schema = 'homeassistant';
 ```
 
-> `db_url: !secret mariadb_url` — credentials non versionnés dans `secrets.yaml`.
+> `db_url: !secret mariadb_url` - credentials non versionnés dans `secrets.yaml`.
 > `device_class: data_size` → HA affiche automatiquement en MiB/GiB selon la valeur.
 
 ### Vignette dashboard
 
-- **L5C3** Taille de la DB MariaDB — `docs/L5C3_MARIADB/`
+- **L5C3** Taille de la DB MariaDB - `docs/L5C3_MARIADB/`
 
 ---
 
@@ -215,9 +215,9 @@ configuration.yaml
   ├── !include input_button.yaml   → git_push_manuel / git_push_weekly_manuel
   │     └── déclenchent shell_command.yaml
   ├── !include_dir_merge_named groups/ → ikea_devices / hue_devices / sonoff_devices
-  │     ├── GRP_01_batteries_hue.yaml   (hue_devices — 11 sensors)
-  │     ├── GRP_02_batteries_ikea.yaml  (ikea_devices — 12 sensors)
-  │     ├── GRP_03_batteries_sonoff.yaml (sonoff_devices — 11 sensors)
+  │     ├── GRP_01_batteries_hue.yaml   (hue_devices - 11 sensors)
+  │     ├── GRP_02_batteries_ikea.yaml  (ikea_devices - 12 sensors)
+  │     ├── GRP_03_batteries_sonoff.yaml (sonoff_devices - 11 sensors)
   │     └── utilisés par L5C1 Batteries (auto-entities)
   ├── !include shell_command.yaml  → git_backup_push*
   │     └── appellent /config/.scripts/ha_git_backup.sh
@@ -248,11 +248,11 @@ configuration.yaml
 
 ## 🔗 Fichiers liés
 
-- `command_line/meteo/carte_meteo_france.yaml` — génère les PNG pour `camera.yaml`
-- `/config/.scripts/ha_git_backup.sh` — script appelé par `shell_command.yaml`
-- `secrets.yaml` — `mariadb_url` (non versionné)
-- `docs/L5C1_PILES_BATTERIES/` — dashboard batteries (utilise `groups/`)
-- `docs/L5C3_MARIADB/` — dashboard MariaDB (utilise `sql.yaml`)
+- `command_line/meteo/carte_meteo_france.yaml` - génère les PNG pour `camera.yaml`
+- `/config/.scripts/ha_git_backup.sh` - script appelé par `shell_command.yaml`
+- `secrets.yaml` - `mariadb_url` (non versionné)
+- `docs/L5C1_PILES_BATTERIES/` - dashboard batteries (utilise `groups/`)
+- `docs/L5C3_MARIADB/` - dashboard MariaDB (utilise `sql.yaml`)
 
 ---
 

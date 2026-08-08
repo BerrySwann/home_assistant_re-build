@@ -1,4 +1,4 @@
-# UPDATE PREVIOUS HUMIDITY — TENDANCE HUMIDITÉ EXT
+# UPDATE PREVIOUS HUMIDITY - TENDANCE HUMIDITÉ EXT
 
 > **Fichier :** `automations_corrige/meteo/update_prev_humidity.yaml`
 > **Mode HA :** `single`

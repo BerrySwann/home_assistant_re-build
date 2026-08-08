@@ -11,17 +11,17 @@
 |:------|:-------|
 | 📁 **Path** | `dashboard-tablette` → Ligne 5, Colonne 2 |
 | 🔗 **Tap** | `/dashboard-tablette/phone` |
-| 🏗️ **Layout** | `custom:button-card` — grid 3 colonnes (nom / batterie / état) |
+| 🏗️ **Layout** | `custom:button-card` - grid 3 colonnes (nom / batterie / état) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-04-17 |
 | 🏠 **Version HA** | 2026.3 |
 
-> 📝 **Note** : L5C2 était initialement documenté comme "Batterie Portail" dans CLAUDE.md — le contenu réel est "Batterie Portables" (7 téléphones + tablette). CLAUDE.md mis à jour en conséquence.
+> 📝 **Note** : L5C2 était initialement documenté comme "Batterie Portail" dans CLAUDE.md - le contenu réel est "Batterie Portables" (7 téléphones + tablette). CLAUDE.md mis à jour en conséquence.
 
 ---
 
-# 📱 L5C2 — Vignette État Batterie Portables
+# 📱 L5C2 - Vignette État Batterie Portables
 
 ---
 
@@ -39,7 +39,7 @@
 Vignette-tableau affichant en temps réel le niveau de batterie et l'état de charge de **7 appareils mobiles** (4 téléphones Eric, 2 téléphones Mamour + 1 tablette). Layout CSS Grid 3 colonnes : Appareil / Niveau % coloré / Icône état.
 
 ### Intégrations requises
-- ✅ Home Assistant Companion App (Android) — 7 appareils
+- ✅ Home Assistant Companion App (Android) - 7 appareils
 
 ### Cartes HACS utilisées
 
@@ -74,7 +74,7 @@ Vignette-tableau affichant en temps réel le niveau de batterie et l'état de ch
 
 ---
 
-## 📍 CODE — VIGNETTE
+## 📍 CODE - VIGNETTE
 
 ```yaml
 type: custom:button-card
@@ -156,7 +156,7 @@ custom_fields:
         }
         const lvl = Number(st.state);
         const color = getColorForBatteryLevel(lvl);
-        const safe = Number.isNaN(lvl) ? '—' : `${lvl}%`;
+        const safe = Number.isNaN(lvl) ? '-' : `${lvl}%`;
         return `<span style="color: ${color};">${safe}</span>`;
       }
       const pocox7_e_Status   = getDeviceStatus('sensor.poco_x7_pro_battery_level');
@@ -213,7 +213,7 @@ custom_fields:
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ### 🌐 Intégrations natives HA (Android Companion App)
 
@@ -227,7 +227,7 @@ custom_fields:
 | Samsung A8 SM-A530F | `sensor.sm_a530f_battery_level` | `sensor.sm_a530f_battery_state` |
 | Tablette | `sensor.tablette_battery_level` | `sensor.tablette_battery_state` |
 
-> Toutes ces entités sont natives — aucun fichier YAML à créer. Configurées automatiquement par l'app Companion HA (Android).
+> Toutes ces entités sont natives - aucun fichier YAML à créer. Configurées automatiquement par l'app Companion HA (Android).
 
 ---
 
@@ -235,7 +235,7 @@ custom_fields:
 
 | Élément | Type | Statut |
 |---------|------|--------|
-| HA Companion App — 7 appareils (NE2213 Mamour actif 2026-04-17) | Intégration native | ✅ Essentiel |
+| HA Companion App - 7 appareils (NE2213 Mamour actif 2026-04-17) | Intégration native | ✅ Essentiel |
 | `custom:button-card` | HACS | ✅ Essentiel |
 
 ---
@@ -243,7 +243,7 @@ custom_fields:
 ## 🔗 FICHIERS LIÉS
 
 ### Documentation
-- [`PAGE_BATTERIES_PORTABLES.md`](./PAGE_BATTERIES_PORTABLES.md) — page détaillée par appareil
+- [`PAGE_BATTERIES_PORTABLES.md`](./PAGE_BATTERIES_PORTABLES.md) - page détaillée par appareil
 
 ---
 

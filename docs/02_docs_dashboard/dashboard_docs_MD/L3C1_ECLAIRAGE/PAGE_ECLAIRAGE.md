@@ -11,7 +11,7 @@
 |:------|:-------|
 | 📁 **Path** | `dashboard-tablette` → vue `lumieres` |
 | 🔗 **Accès depuis** | Tap vignette L3C1 → `/dashboard-tablette/lumieres` |
-| 🏗️ **Layout** | `type: grid` — sections heading + mushroom-entity-card + popups bubble-card |
+| 🏗️ **Layout** | `type: grid` - sections heading + mushroom-entity-card + popups bubble-card |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-03-21 |
@@ -19,7 +19,7 @@
 
 ---
 
-# 💡 L3C1 — Page Commandes Lumieres
+# 💡 L3C1 - Page Commandes Lumieres
 
 ---
 
@@ -64,7 +64,7 @@ Page de commande complète de l'éclairage par pièce. Chaque pièce dispose d'u
 ```
 type: grid
 │
-├── [HEADING] LUMIERES — nav retour dashboard (tap → /dashboard-tablette/0)
+├── [HEADING] LUMIERES - nav retour dashboard (tap → /dashboard-tablette/0)
 │
 ├── [HEADING] Entrée
 ├── [mushroom-entity-card] light.entree (cols 12)
@@ -119,7 +119,7 @@ type: grid
 
 ## 📍 SECTIONS
 
-### Heading Bureau — 4 badges
+### Heading Bureau - 4 badges
 
 | Badge | Entité | Couleur logique |
 |-------|--------|-----------------|
@@ -130,25 +130,25 @@ type: grid
 
 ### Bouton Bureau (vertical-stack-in-card, cols 6)
 
-`mushroom-entity-card` sur `sensor.lumiere_bureau_etat` — affiche l'état textuel du bureau. Flame animation déclenchée si état `in ['Allumé', 'Bureau']`. Bordure et fond ambre si actif, transparent+gris sinon.
+`mushroom-entity-card` sur `sensor.lumiere_bureau_etat` - affiche l'état textuel du bureau. Flame animation déclenchée si état `in ['Allumé', 'Bureau']`. Bordure et fond ambre si actif, transparent+gris sinon.
 
 **Pastille** (`mushroom-chips-card`) positionnée en overlay (margin-left: 180px, bottom: 47px) → navigate `#bureau`. Visible **uniquement** si `sensor.lumiere_bureau_etat in ['Allumé', 'Bureau']`.
 
 ### Bouton Ecran (conditional, cols 6)
 
-Affiché **uniquement** si `switch.ecran_p_c_3_play_hue = "on"`. La Hue Play Sync box pilote les Play bars — quand elle est OFF, la carte entière est masquée.
+Affiché **uniquement** si `switch.ecran_p_c_3_play_hue = "on"`. La Hue Play Sync box pilote les Play bars - quand elle est OFF, la carte entière est masquée.
 
 Flame animation déclenchée par `light.moniteur_pc = "on"`.
 
 **Chip gradateur** (`mushroom-chips-card` en overlay) → navigate `#ecranpc` (popup 4 boutons brightness 25/50/75/100% pour les Play bars). Visible **uniquement** si `sensor.lumiere_ecran_etat in ['Écran', 'Allumé']`. Masquée si `Synchro.`, `Allumé & Sync.`, `Éco.`, `Éteint`.
 
-**Logique complète des états — conditions exactes :**
+**Logique complète des états - conditions exactes :**
 
 > `binary_sensor.moniteur_pc = on` = moniteur PC allumé = **Hue Sync Box active**.
 
 | # | État (`sensor.lumiere_ecran_etat`) | Condition | Carte Écran | Chip gradateur #ecranpc |
 |---|-------------------------------------|-----------|-------------|-------------------|
-| 1 | `Éco.` | `switch.ecran_p_c_3_play_hue = off` | **Carte masquée** (conditional) | — |
+| 1 | `Éco.` | `switch.ecran_p_c_3_play_hue = off` | **Carte masquée** (conditional) | - |
 | 2 | `Synchro.` | switch ON + Play bars ON + moniteur ON + Boules lumineuses OFF | Visible | **Masquée** |
 | 3 | `Allumé & Sync.` | switch ON + Play bars ON + moniteur ON + Boules lumineuses ON | Visible | **Masquée** |
 | 4 | `Écran` | switch ON + Play bars ON + moniteur OFF + Boules lumineuses OFF | Visible | **Visible** |
@@ -160,7 +160,7 @@ Flame animation déclenchée par `light.moniteur_pc = "on"`.
 
 **Pourquoi `Écran` et `Allumé` affichent la PASTILLE :** moniteur OFF → Hue Sync inactive → les Play bars sont sous contrôle HA. Le popup brightness est pertinent.
 
-### Heading Têtes de Lit — visibility condition
+### Heading Têtes de Lit - visibility condition
 
 Le heading entier (et ses badges `zone_eric` / `zone_gege`) est masqué si `switch.prise_tete_de_lit_chambre = "off"`. Comportement **intentionnel** : prise coupée = pas d'alimentation = pas de lampes → inutile d'afficher les badges.
 
@@ -179,9 +179,9 @@ Pattern identique pour toutes les grilles (bureau, écranpc, tête de lit Gégé
 
 ## 🪲 BUGS CORRIGÉS
 
-### [B1] Badge `sensor.lumiere_ecran_etat` — `:host` incomplet
+### [B1] Badge `sensor.lumiere_ecran_etat` - `:host` incomplet
 
-**Symptôme** : badge ambre pour `Écran`/`Allumé` mais gris pour `Synchro.` et `Allumé & Sync.` — incohérence entre `:host` et `ha-state-icon`.
+**Symptôme** : badge ambre pour `Écran`/`Allumé` mais gris pour `Synchro.` et `Allumé & Sync.` - incohérence entre `:host` et `ha-state-icon`.
 
 **Cause** : la condition `elif` du bloc `:host` ne listait que `['Écran', 'Allumé']`. Le bloc `ha-state-icon` avait déjà le fix (`'Allumé & Sync.','Synchro.'`) mais pas `:host`.
 
@@ -194,11 +194,11 @@ Pattern identique pour toutes les grilles (bureau, écranpc, tête de lit Gégé
 {% elif etat in ['Écran', 'Allumé', 'Allumé & Sync.', 'Synchro.'] %}
 ```
 
-### [B2] SDB — `use_number` non défini → UndefinedError Jinja2
+### [B2] SDB - `use_number` non défini → UndefinedError Jinja2
 
 **Symptôme** : animation flame absente sur la carte Salle de Bain.
 
-**Cause** : `{% set use_number = false %}` manquant dans le bloc `USER CONFIG` de la SDB — toutes les autres cartes (Bureau, Chambre, Tête de Lit) l'ont. Sans cette ligne, `{% if use_number %}` lève un `UndefinedError` en Jinja2 → CSS `.shape` vide → pas d'animation.
+**Cause** : `{% set use_number = false %}` manquant dans le bloc `USER CONFIG` de la SDB - toutes les autres cartes (Bureau, Chambre, Tête de Lit) l'ont. Sans cette ligne, `{% if use_number %}` lève un `UndefinedError` en Jinja2 → CSS `.shape` vide → pas d'animation.
 
 **Fix** : ajouter en tête du bloc `USER CONFIG` de la SDB :
 ```yaml
@@ -206,7 +206,7 @@ Pattern identique pour toutes les grilles (bureau, écranpc, tête de lit Gégé
 {% set use_number = false %}
 ```
 
-### [B4] Tête de Lit — tap_action alternait gege/eric au lieu de toggler les deux
+### [B4] Tête de Lit - tap_action alternait gege/eric au lieu de toggler les deux
 
 **Symptôme** : clic sur la carte "Tête de Lit" alternait les deux lumières (gege ON/eric OFF → gege OFF/eric ON) au lieu de les allumer/éteindre ensemble.
 
@@ -227,9 +227,9 @@ target:
 
 ---
 
-### [B3] Pastille Ecran — visible en mode sync (design)
+### [B3] Pastille Ecran - visible en mode sync (design)
 
-**Symptôme** : pastille `#ecranpc` visible même quand les Play bars sont en sync avec le PC — ouvrir le popup brightness n'a pas de sens en mode sync.
+**Symptôme** : pastille `#ecranpc` visible même quand les Play bars sont en sync avec le PC - ouvrir le popup brightness n'a pas de sens en mode sync.
 
 **Fix** : `display: none` conditionnel sur le `mushroom-chips-card` :
 ```yaml
@@ -240,7 +240,7 @@ display: none !important;
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ### 🌐 Intégrations natives HA
 
@@ -278,7 +278,7 @@ display: none !important;
 
 ### 📁 `templates/P3_eclairage/ui_dashboard/etats_status.yaml`
 
-> Templates d'état synthétique par pièce — alimentation des `mushroom-entity-card` et des badges heading.
+> Templates d'état synthétique par pièce - alimentation des `mushroom-entity-card` et des badges heading.
 
 | Entité | Rôle |
 |--------|------|
@@ -309,9 +309,9 @@ display: none !important;
 
 ---
 
-## ⚡ LOGIQUE ABSENCE — CHAÎNE COMPLÈTE
+## ⚡ LOGIQUE ABSENCE - CHAÎNE COMPLÈTE
 
-Certaines cartes de cette page disparaissent automatiquement en mode absence. Ce n'est pas un bug — c'est le résultat d'une **chaîne de dépendances** entre la détection de présence (P4), les automations d'absence et les switches éco qui conditionnent l'affichage.
+Certaines cartes de cette page disparaissent automatiquement en mode absence. Ce n'est pas un bug - c'est le résultat d'une **chaîne de dépendances** entre la détection de présence (P4), les automations d'absence et les switches éco qui conditionnent l'affichage.
 
 ```
 [P4] WiFi / Réseau Mobile
@@ -335,22 +335,22 @@ Certaines cartes de cette page disparaissent automatiquement en mode absence. Ce
 | Bouton Ecran (cols 6) | `switch.ecran_p_c_3_play_hue` | Groupes 2+3+4 OK | ❌ Carte masquée |
 | Heading Têtes de Lit + badges | `switch.prise_tete_de_lit_chambre` | Groupes 3+4 OK | ❌ Heading masqué |
 | Bouton Têtes de Lit (cols 12) | `switch.prise_tete_de_lit_chambre` | Groupes 3+4 OK | ❌ Carte masquée |
-| Bureau (cols 6) | *(pas de switch éco)* | — | ✅ Toujours visible¹ |
-| SdB (cols 12) | *(pas de switch éco)* | — | ✅ Toujours visible |
-| Chambre (cols 12) | *(pas de switch éco)* | — | ✅ Toujours visible |
+| Bureau (cols 6) | *(pas de switch éco)* | - | ✅ Toujours visible¹ |
+| SdB (cols 12) | *(pas de switch éco)* | - | ✅ Toujours visible |
+| Chambre (cols 12) | *(pas de switch éco)* | - | ✅ Toujours visible |
 
 > ¹ **Bureau toujours visible** mais quand les groupes 2+3+4 sont OFF (absence) → `switch.ecran_p_c_3_play_hue` est coupé → `sensor.lumiere_ecran_etat` passe à `Éco.` → **badge écran vert** dans le heading Bureau. Comportement attendu et correct.
 
-> **Note séparation des responsabilités :** La logique de coupure (Absent → switch OFF) est gérée dans les automations et `P4_groupe_presence` — pas dans cette page. Cette page se contente de réagir à l'état des switches. Voir `docs/WIFI_PRESENCE (Home Page)/` pour la logique amont.
+> **Note séparation des responsabilités :** La logique de coupure (Absent → switch OFF) est gérée dans les automations et `P4_groupe_presence` - pas dans cette page. Cette page se contente de réagir à l'état des switches. Voir `docs/WIFI_PRESENCE (Home Page)/` pour la logique amont.
 
 ---
 
 ## 🔗 FICHIERS LIÉS
 
 ### Documentation
-- [`L3C1_VIGNETTE_ECLAIRAGE.md`](./L3C1_VIGNETTE_ECLAIRAGE.md) — vignette d'accès à cette page
-- [`L3C2_PRISES/PAGE_PRISES.md`](../L3C2_PRISES/PAGE_PRISES.md) — page prises (même structure)
-- [`../WIFI_PRESENCE (Home Page)/PAGE_HOME.md`](../WIFI_PRESENCE%20(Home%20Page)/PAGE_HOME.md) — logique présence amont (P4)
+- [`L3C1_VIGNETTE_ECLAIRAGE.md`](./L3C1_VIGNETTE_ECLAIRAGE.md) - vignette d'accès à cette page
+- [`L3C2_PRISES/PAGE_PRISES.md`](../L3C2_PRISES/PAGE_PRISES.md) - page prises (même structure)
+- [`../WIFI_PRESENCE (Home Page)/PAGE_HOME.md`](../WIFI_PRESENCE%20(Home%20Page)/PAGE_HOME.md) - logique présence amont (P4)
 
 ---
 

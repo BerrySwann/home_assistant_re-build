@@ -1,4 +1,4 @@
-# BOUTON IKEA RODRET — SOUFFLANT SDB
+# BOUTON IKEA RODRET - SOUFFLANT SDB
 
 > **Fichiers :**
 > - `automations_corrige/P2_prises/rodret_soufflant_sdb.yaml`
@@ -23,7 +23,7 @@ lequel déclenche la logique de chauffage SDB.
 
 ---
 
-## ⚙️ Actions — Choose
+## ⚙️ Actions - Choose
 
 | Action MQTT | Résultat |
 |:---|:---|

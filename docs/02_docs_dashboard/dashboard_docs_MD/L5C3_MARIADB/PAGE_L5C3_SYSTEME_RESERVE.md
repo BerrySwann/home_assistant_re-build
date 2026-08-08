@@ -19,7 +19,7 @@
 
 ---
 
-# 🖥️ PAGE RÉSERVE SYSTÈME — DOCUMENTATION COMPLÈTE
+# 🖥️ PAGE RÉSERVE SYSTÈME - DOCUMENTATION COMPLÈTE
 
 ---
 
@@ -45,8 +45,8 @@ Page de surveillance des trois services critiques fonctionnant en conteneurs Pro
 
 ### Intégrations requises
 
-- ✅ **proxmox_ve** — 12 sensors (CPU, Uptime, Memory % / Used pour HA, Z2M, MariaDB)
-- ✅ **sql.yaml** — `sensor.taille_db_home_assistant` (taille DB en MiB)
+- ✅ **proxmox_ve** - 12 sensors (CPU, Uptime, Memory % / Used pour HA, Z2M, MariaDB)
+- ✅ **sql.yaml** - `sensor.taille_db_home_assistant` (taille DB en MiB)
 
 ### Cartes HACS utilisées
 
@@ -107,8 +107,8 @@ Page de surveillance des trois services critiques fonctionnant en conteneurs Pro
 |-----------|--------|
 | Type | `custom:button-card` |
 | Icône | `mdi:home-assistant` |
-| Couleur icône | RGB(33, 150, 243) — **Primary** |
-| Fond | RGBA(33, 150, 243, 0.15) — bleu transparent |
+| Couleur icône | RGB(33, 150, 243) - **Primary** |
+| Fond | RGBA(33, 150, 243, 0.15) - bleu transparent |
 | Bordure gauche | 3px solid RGB(33, 150, 243) |
 
 ### Entités
@@ -130,8 +130,8 @@ Page de surveillance des trois services critiques fonctionnant en conteneurs Pro
 |-----------|--------|
 | Type | `custom:button-card` |
 | Icône | `mdi:zigbee` |
-| Couleur icône | RGB(255, 152, 0) — **Warning** |
-| Fond | RGBA(255, 152, 0, 0.15) — orange transparent |
+| Couleur icône | RGB(255, 152, 0) - **Warning** |
+| Fond | RGBA(255, 152, 0, 0.15) - orange transparent |
 | Bordure gauche | 3px solid RGB(255, 152, 0) |
 
 ### Entités
@@ -153,8 +153,8 @@ Page de surveillance des trois services critiques fonctionnant en conteneurs Pro
 |-----------|--------|
 | Type | `custom:button-card` |
 | Icône | `mdi:database` |
-| Couleur icône | RGB(244, 67, 54) — **Error** |
-| Fond | RGBA(244, 67, 54, 0.15) — rouge transparent |
+| Couleur icône | RGB(244, 67, 54) - **Error** |
+| Fond | RGBA(244, 67, 54, 0.15) - rouge transparent |
 | Bordure gauche | 3px solid RGB(244, 67, 54) |
 
 ### Entités
@@ -168,7 +168,7 @@ Page de surveillance des trois services critiques fonctionnant en conteneurs Pro
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ### Home Assistant Container
 
@@ -221,7 +221,7 @@ Page de surveillance des trois services critiques fonctionnant en conteneurs Pro
 
 ### Mémoire Utilisée (GiB/MiB)
 
-- 🔴 **Red** : Fixed — pas d'animation
+- 🔴 **Red** : Fixed - pas d'animation
 
 ---
 

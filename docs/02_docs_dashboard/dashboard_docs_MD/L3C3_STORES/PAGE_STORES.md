@@ -19,7 +19,7 @@
 
 ---
 
-# 🪟 L3C3 — Page : Stores & Fenêtres
+# 🪟 L3C3 - Page : Stores & Fenêtres
 
 ---
 
@@ -51,11 +51,11 @@ Retour vers la vue principale via tap sur le heading STORES.
 
 ### Intégrations requises
 
-- ✅ **Zigbee2MQTT** — `cover.store_salon` / `cover.store_bureau`
-- ✅ **SONOFF SNZB-04** (Zigbee) — contacts fenêtres
-- ✅ **Templates** — `sensor.store_*_status`, `sensor.store_*_signal_strength`
-- ✅ **SONOFF SNZB-02** — `sensor.th_balcon_nord_temperature`
-- ✅ **Entité virtuelle** — `light.store_*_dnd` (helper)
+- ✅ **Zigbee2MQTT** - `cover.store_salon` / `cover.store_bureau`
+- ✅ **SONOFF SNZB-04** (Zigbee) - contacts fenêtres
+- ✅ **Templates** - `sensor.store_*_status`, `sensor.store_*_signal_strength`
+- ✅ **SONOFF SNZB-02** - `sensor.th_balcon_nord_temperature`
+- ✅ **Entité virtuelle** - `light.store_*_dnd` (helper)
 
 ### Cartes HACS utilisées
 
@@ -117,15 +117,15 @@ Retour vers la vue principale via tap sur le heading STORES.
 
 La condition affichée sur la page correspond à la règle d'automatisation réelle du volet Salon :
 
-> **Auto close at +34°C** — le store se ferme automatiquement si la T° extérieure (balcon Nord) dépasse 34°C.
+> **Auto close at +34°C** - le store se ferme automatiquement si la T° extérieure (balcon Nord) dépasse 34°C.
 
 Badge : `sensor.th_balcon_nord_temperature` (température en temps réel).
 
 ### Fenêtre Salon
 
 Heading avec deux badges :
-- `binary_sensor.contact_fenetre_salon_sonoff_contact` — état de la fenêtre (`on` = ouvert / `off` = fermé)
-- `sensor.contact_fenetre_salon_sonoff_battery` — niveau pile du capteur (tap → more-info)
+- `binary_sensor.contact_fenetre_salon_sonoff_contact` - état de la fenêtre (`on` = ouvert / `off` = fermé)
+- `sensor.contact_fenetre_salon_sonoff_battery` - niveau pile du capteur (tap → more-info)
 
 ### Enhanced-Shutter-Card
 
@@ -149,9 +149,9 @@ entities:
     shutter_bottom_image: esc-shutter-bottom.png
 ```
 
-- `opening_disabled: true` — bouton d'ouverture natif de la carte désactivé (remplacé par les boutons personnalisés)
-- `signal_entity` — affiche la qualité du signal Zigbee du store
-- `shutter_slat_image` / `shutter_bottom_image` — images personnalisées des lames et bord bas
+- `opening_disabled: true` - bouton d'ouverture natif de la carte désactivé (remplacé par les boutons personnalisés)
+- `signal_entity` - affiche la qualité du signal Zigbee du store
+- `shutter_slat_image` / `shutter_bottom_image` - images personnalisées des lames et bord bas
 
 ### État textuel (button-card)
 
@@ -183,15 +183,15 @@ Toggle pour activer/désactiver les voyants LED de la télécommande physique du
 
 ### Conditions d'automatisation
 
-> **Auto open at +18° or auto close at +25°C** — le store Bureau s'ouvre automatiquement si la T° ext est entre 18°C et 25°C, et se ferme au-delà de 25°C. (Logique inversée par rapport au Salon — fenêtre thermique optimale pour le bureau Nord.)
+> **Auto open at +18° or auto close at +25°C** - le store Bureau s'ouvre automatiquement si la T° ext est entre 18°C et 25°C, et se ferme au-delà de 25°C. (Logique inversée par rapport au Salon - fenêtre thermique optimale pour le bureau Nord.)
 
 Badge : `sensor.th_balcon_nord_temperature`.
 
 ### Fenêtre Bureau
 
 Heading avec deux badges :
-- `binary_sensor.contact_fenetre_bureau_sonoff_contact` — état fenêtre (+ icône `mdi:door-open`)
-- `sensor.contact_fenetre_bureau_sonoff_battery` — pile (tap → more-info)
+- `binary_sensor.contact_fenetre_bureau_sonoff_contact` - état fenêtre (+ icône `mdi:door-open`)
+- `sensor.contact_fenetre_bureau_sonoff_battery` - pile (tap → more-info)
 
 ### Enhanced-Shutter-Card
 
@@ -257,7 +257,7 @@ Affichées via `custom:mushroom-light-card` avec icône `phu:roller-shutter-swit
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ### Covers (stores motorisés)
 
@@ -310,14 +310,14 @@ Affichées via `custom:mushroom-light-card` avec icône `phu:roller-shutter-swit
 
 ### Le store ne répond pas aux boutons de position
 1. Vérifier que `cover.store_salon` / `cover.store_bureau` est disponible (Zigbee2MQTT actif)
-2. Vérifier le signal : `sensor.store_*_signal_strength` — si faible, rapprocher le coordinateur Zigbee
+2. Vérifier le signal : `sensor.store_*_signal_strength` - si faible, rapprocher le coordinateur Zigbee
 3. Tester via Outils développeur → Services → `cover.set_cover_position`
 
 ### La enhanced-shutter-card n'affiche pas le visuel
 → Vérifier que les images `esc-shutter-slat.png` et `esc-shutter-bottom.png` sont bien dans `/config/www/` (ou le chemin configuré dans `enhanced-shutter-card`)
 
 ### L'état textuel affiche "undefined" ou une erreur
-→ Vérifier que `sensor.store_*_status` existe et est disponible. C'est un template — vérifier dans Outils développeur → États.
+→ Vérifier que `sensor.store_*_status` existe et est disponible. C'est un template - vérifier dans Outils développeur → États.
 
 ### Le DnD ne bascule pas
 → `light.store_*_dnd` doit être un helper HA existant. Vérifier dans Paramètres → Appareils → Helpers.

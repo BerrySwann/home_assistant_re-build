@@ -1,4 +1,4 @@
-# NOTIFICATION FOUDRE — DISTANCE, DIRECTION, IMPACTS
+# NOTIFICATION FOUDRE - DISTANCE, DIRECTION, IMPACTS
 
 > **Fichier :** `automations_corrige/meteo/notif_foudre.yaml`
 > **Mode HA :** `single`

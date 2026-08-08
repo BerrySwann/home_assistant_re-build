@@ -11,15 +11,15 @@
 |:------|:-------|
 | 📁 **Fichier YAML** | `Dashboard/L4C1_10_Proxmox/page_L4C1_proxmox_2026-06-18.yaml` |
 | 🔗 **Accès depuis** | Tap sur vignette L4C1 → `/dashboard-tablette/systeme-proxmox` |
-| 🏗️ **Layout** | `grid` → `stack-in-card` vertical — 5 sections |
+| 🏗️ **Layout** | `grid` → `stack-in-card` vertical - 5 sections |
 | 📅 **Modifié le** | 2026-06-10 |
 | 🏠 **Version HA** | 2025.2+ |
 
 ---
 
-# 🖥️ PAGE PROXMOX — SUPERVISION COMPLÈTE
+# 🖥️ PAGE PROXMOX - SUPERVISION COMPLÈTE
 
-> **2026-06-10** : Refonte complète — style PVE web UI. 5 sections (ajout MyElectricalData). Boutons contrôle supprimés. bar-card remplacée par progress bars inline. apexcharts CPU 1h par section.
+> **2026-06-10** : Refonte complète - style PVE web UI. 5 sections (ajout MyElectricalData). Boutons contrôle supprimés. bar-card remplacée par progress bars inline. apexcharts CPU 1h par section.
 
 ---
 
@@ -37,8 +37,8 @@ Page de supervision de l'infrastructure Proxmox VE. 5 sections indépendantes : 
 | `mod-card` | CSS séparateurs (`--text-divider-color: white`) |
 | `apexcharts-card` | Graphe CPU sparkline 1h par section |
 
-> ⚠️ **bar-card supprimée** — remplacée par barres HTML inline dans `button-card label`
-> ⚠️ **Boutons de contrôle supprimés** — page lecture seule
+> ⚠️ **bar-card supprimée** - remplacée par barres HTML inline dans `button-card label`
+> ⚠️ **Boutons de contrôle supprimés** - page lecture seule
 
 ---
 
@@ -91,7 +91,7 @@ Page de supervision de l'infrastructure Proxmox VE. 5 sections indépendantes : 
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ### 🟢 SECTION PROXMOX VE (nœud)
 
@@ -99,12 +99,12 @@ Page de supervision de l'infrastructure Proxmox VE. 5 sections indépendantes : 
 |--------|------|--------|
 | `sensor.pve_statut` | Badge statut | online/offline |
 | `sensor.pve_utilisation_du_processeur` | CPU % | <75 bleu · 75-90 orange · >90 rouge |
-| `sensor.pve_max_cpu` | Nb vCPU affiché dans label CPU | — |
+| `sensor.pve_max_cpu` | Nb vCPU affiché dans label CPU | - |
 | `sensor.pve_utilisation_de_la_memoire` | RAM utilisée GiB | <70% bleu · 70-85 orange · >85 rouge |
-| `sensor.pve_utilisation_maximale_de_la_memoire` | RAM max GiB | — |
+| `sensor.pve_utilisation_maximale_de_la_memoire` | RAM max GiB | - |
 | `sensor.pve_utilisation_du_disque` | Disque utilisé GiB | <70% bleu · 70-85 orange · >85 rouge |
-| `sensor.pve_utilisation_maximale_du_disque` | Disque max GiB | — |
-| `sensor.pve_uptime` | Uptime (heures flottantes) | — |
+| `sensor.pve_utilisation_maximale_du_disque` | Disque max GiB | - |
+| `sensor.pve_uptime` | Uptime (heures flottantes) | - |
 | `binary_sensor.pve_backup_status` | Statut backup | off=✓ OK · on=⚠ ERREUR |
 
 ### 🔵 SECTION HOME ASSISTANT (QEMU 100)
@@ -112,13 +112,13 @@ Page de supervision de l'infrastructure Proxmox VE. 5 sections indépendantes : 
 | Entité | Rôle | Note |
 |--------|------|------|
 | `sensor.homeassistant_statut` | Badge statut | running/stopped |
-| `sensor.homeassistant_utilisation_du_processeur` | CPU % | — |
-| `sensor.homeassistant_max_cpu` | Nb vCPU | — |
-| `sensor.homeassistant_utilisation_de_la_memoire` | RAM utilisée GiB | — |
-| `sensor.homeassistant_utilisation_maximale_de_la_memoire` | RAM max GiB | — |
+| `sensor.homeassistant_utilisation_du_processeur` | CPU % | - |
+| `sensor.homeassistant_max_cpu` | Nb vCPU | - |
+| `sensor.homeassistant_utilisation_de_la_memoire` | RAM utilisée GiB | - |
+| `sensor.homeassistant_utilisation_maximale_de_la_memoire` | RAM max GiB | - |
 | `sensor.system_monitor_utilisation_du_disque` | Disque utilisé GiB | ⚠️ Utilise system_monitor (homeassistant_* renvoie 0.0) |
-| `sensor.homeassistant_utilisation_maximale_du_disque` | Disque max GiB | — |
-| `sensor.homeassistant_uptime` | Uptime (heures) | — |
+| `sensor.homeassistant_utilisation_maximale_du_disque` | Disque max GiB | - |
+| `sensor.homeassistant_uptime` | Uptime (heures) | - |
 
 ### 🟠 SECTION ZIGBEE2MQTT (LXC 200)
 
@@ -168,7 +168,7 @@ Page de supervision de l'infrastructure Proxmox VE. 5 sections indépendantes : 
 | Disque HA | `sensor.homeassistant_utilisation_du_disque` retourne 0.0 GiB → remplacé par `sensor.system_monitor_utilisation_du_disque` |
 | Uptime | Les sensors PVE retournent des **heures flottantes** (pas des secondes). Formule : `parseFloat / 24` pour jours |
 | stack-in-card fond | Nécessite `card_mod: style: ha-card { background: none !important }` sinon fond gris |
-| MyElectricalData badge | Couleur statut = vert `rgb(15,157,88)` universel — PAS le cyan `#00bcd4` de la section |
+| MyElectricalData badge | Couleur statut = vert `rgb(15,157,88)` universel - PAS le cyan `#00bcd4` de la section |
 
 ---
 

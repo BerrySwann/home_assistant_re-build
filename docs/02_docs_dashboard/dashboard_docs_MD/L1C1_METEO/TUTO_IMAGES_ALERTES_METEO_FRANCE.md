@@ -20,7 +20,7 @@
 
 ---
 
-# 🗺️ TUTO — IMAGES DE VIGILANCE MÉTÉO FRANCE
+# 🗺️ TUTO - IMAGES DE VIGILANCE MÉTÉO FRANCE
 
 > Récupérer et afficher les **cartes nationales de vigilance Météo France** (aujourd'hui et demain)
 > directement dans Home Assistant, via l'API officielle Météo France.
@@ -31,12 +31,12 @@
 
 1. [Principe de fonctionnement](#principe-de-fonctionnement)
 2. [Pré-requis](#pré-requis)
-3. [Étape 1 — Créer le compte API Météo France](#étape-1--créer-le-compte-api-météo-france)
-4. [Étape 2 — Préparer l'image de fallback](#étape-2--préparer-limage-de-fallback)
-5. [Étape 3 — Configurer command_line.yaml](#étape-3--configurer-command_lineyaml)
-6. [Étape 4 — Déclarer les caméras](#étape-4--déclarer-les-caméras)
-7. [Étape 5 — Automatisation de rafraîchissement](#étape-5--automatisation-de-rafraîchissement)
-8. [Étape 6 — Afficher dans le dashboard](#étape-6--afficher-dans-le-dashboard)
+3. [Étape 1 - Créer le compte API Météo France](#étape-1--créer-le-compte-api-météo-france)
+4. [Étape 2 - Préparer l'image de fallback](#étape-2--préparer-limage-de-fallback)
+5. [Étape 3 - Configurer command_line.yaml](#étape-3--configurer-command_lineyaml)
+6. [Étape 4 - Déclarer les caméras](#étape-4--déclarer-les-caméras)
+7. [Étape 5 - Automatisation de rafraîchissement](#étape-5--automatisation-de-rafraîchissement)
+8. [Étape 6 - Afficher dans le dashboard](#étape-6--afficher-dans-le-dashboard)
 9. [Vérification](#vérification)
 10. [Dépannage](#dépannage)
 11. [Fichiers liés](#fichiers-liés)
@@ -85,7 +85,7 @@
 
 ---
 
-## ÉTAPE 1 — CRÉER LE COMPTE API MÉTÉO FRANCE
+## ÉTAPE 1 - CRÉER LE COMPTE API MÉTÉO FRANCE
 
 ### 1.1 Inscription
 
@@ -108,7 +108,7 @@
 2. Donner un nom (ex: `home-assistant`)
 3. Sélectionner la souscription `DonneesPubliquesVigilance`
 4. Cliquer **"Générer les clés"**
-5. Choisir le type **"API Key"** — Durée : `94672800` secondes (≈ 3 ans)
+5. Choisir le type **"API Key"** - Durée : `94672800` secondes (≈ 3 ans)
 6. **Copier la clé générée** et la stocker dans `secrets.yaml` :
 
 ```yaml
@@ -116,11 +116,11 @@
 mf_api_key: "VOTRE_CLE_ICI"
 ```
 
-> ⚠️ **Ne jamais coller la clé en dur dans les fichiers de config** — toujours passer par `secrets.yaml`.
+> ⚠️ **Ne jamais coller la clé en dur dans les fichiers de config** - toujours passer par `secrets.yaml`.
 
 ---
 
-## ÉTAPE 2 — PRÉPARER L'IMAGE DE FALLBACK
+## ÉTAPE 2 - PRÉPARER L'IMAGE DE FALLBACK
 
 L'image `meteo_france_alerte_nodata.png` est utilisée quand l'API est indisponible après 5 tentatives.
 
@@ -144,7 +144,7 @@ Télécharger une image grise/neutre de taille correcte (≈ 600×600 px) et la 
 
 ---
 
-## ÉTAPE 3 — CONFIGURER COMMAND_LINE.YAML
+## ÉTAPE 3 - CONFIGURER COMMAND_LINE.YAML
 
 Fichier concerné dans ReBuild : **`command_line/meteo/carte_meteo_france.yaml`**
 
@@ -160,7 +160,7 @@ command_line: !include command_line.yaml
 > command_line: !include_dir_merge_list command_line/
 > ```
 
-### Code complet — carte_meteo_france.yaml
+### Code complet - carte_meteo_france.yaml
 
 ```yaml
 # --- sensor_meteo_france_alertes_image_today ---
@@ -230,14 +230,14 @@ command_line: !include command_line.yaml
 | `\| base64 -w 0` | Encode le binaire en base64 (chaîne de texte sans saut de ligne) |
 | `expr length "$today" -gt 10000` | Vérifie que la réponse est une vraie image (>10Ko) |
 | `base64 -d > fichier.png` | Décode et écrit le PNG sur disque |
-| `$((i++))` + `"$i" == '5'` | Compteur de tentatives — max 5 avant fallback |
+| `$((i++))` + `"$i" == '5'` | Compteur de tentatives - max 5 avant fallback |
 | `cp nodata.png` | Fallback : copie l'image grise si API KO |
 | `echo on` / `echo unavailable` | État du sensor HA (on = succès, unavailable = échec) |
 | `scan_interval: 14400` | Refresh automatique toutes les 4h |
 
 ---
 
-## ÉTAPE 4 — DÉCLARER LES CAMÉRAS
+## ÉTAPE 4 - DÉCLARER LES CAMÉRAS
 
 Les caméras lisent simplement les fichiers PNG créés par les sensors command_line.
 
@@ -261,7 +261,7 @@ camera:
 
 ---
 
-## ÉTAPE 5 — AUTOMATISATION DE RAFRAÎCHISSEMENT
+## ÉTAPE 5 - AUTOMATISATION DE RAFRAÎCHISSEMENT
 
 Le `scan_interval` suffit pour la mise à jour quotidienne, mais les alertes peuvent changer rapidement. Cette automation force un refresh à des horaires clés.
 
@@ -303,7 +303,7 @@ mode: single
 
 ---
 
-## ÉTAPE 6 — AFFICHER DANS LE DASHBOARD
+## ÉTAPE 6 - AFFICHER DANS LE DASHBOARD
 
 ### Carte basique (image plein format)
 
@@ -395,9 +395,9 @@ Après redémarrage de HA :
 |:------|:---------|
 | API Key incorrecte | Revérifier `secrets.yaml`, recopier la clé depuis le portail |
 | Souscription expirée | Aller sur `portail-api.meteofrance.fr` → renouveler |
-| API Météo France instable | Attendre — l'API MF est connue pour être instable, le retry à 5 tentatives est là pour ça |
+| API Météo France instable | Attendre - l'API MF est connue pour être instable, le retry à 5 tentatives est là pour ça |
 | `curl` non disponible | Vérifier l'environnement HA (HA OS : curl est natif) |
-| Erreur return code 56 | Problème réseau ou API MF HS — transitoire, se résout seul |
+| Erreur return code 56 | Problème réseau ou API MF HS - transitoire, se résout seul |
 
 ### L'image s'affiche mais est grise (nodata)
 
@@ -429,7 +429,7 @@ Après redémarrage de HA :
 - Template des alertes : `templates/meteo/M_01_meteo_alertes_card.yaml`
 
 ### Sources externes
-- [Forum HACF — Alerte météo (thread principal)](https://forum.hacf.fr/t/alerte-meteo/23930)
+- [Forum HACF - Alerte météo (thread principal)](https://forum.hacf.fr/t/alerte-meteo/23930)
 - [Portail API Météo France](https://portail-api.meteofrance.fr/)
 - [Endpoint Vigilance Today](https://public-api.meteofrance.fr/public/DPVigilance/v1/vignettenationale-J/encours)
 - [Endpoint Vigilance Tomorrow](https://public-api.meteofrance.fr/public/DPVigilance/v1/vignettenationale-J1/encours)

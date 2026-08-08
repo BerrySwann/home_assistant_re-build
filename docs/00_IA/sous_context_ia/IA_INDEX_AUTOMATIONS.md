@@ -1,6 +1,6 @@
-# IA_INDEX_AUTOMATIONS.md — Contexte & Competence INDEX AUTOMATIONS
+# IA_INDEX_AUTOMATIONS.md - Contexte & Competence INDEX AUTOMATIONS
 
-*Refait le : 2026-07-21 (ancien fichier 2026-05-30 obsolete — TREE_CORRIGE + INDEX_AUTOMATIONS.md supprimes)*
+*Refait le : 2026-07-21 (ancien fichier 2026-05-30 obsolete - TREE_CORRIGE + INDEX_AUTOMATIONS.md supprimes)*
 
 ---
 
@@ -10,7 +10,7 @@ Les automations sont indexees dans la section `03-AUTOMATIONS` de :
 - **Index principal** : `H:\Docs\INDEX_GLOBAL.md` (source de verite, rendu GitHub)
 - **Copie locale** : `ReBuild/Github/INDEX_GLOBAL.md`
 
-Il n'y a plus de fichier `INDEX_AUTOMATIONS.md` distinct — fusionne dans INDEX_GLOBAL.md (2026-07-16).
+Il n'y a plus de fichier `INDEX_AUTOMATIONS.md` distinct - fusionne dans INDEX_GLOBAL.md (2026-07-16).
 
 ---
 
@@ -57,7 +57,7 @@ docs/03_docs_automations/
 | Raspberry Pi4 (archive) | 1 |
 
 > Comptages verifies programmatiquement (audit 2026-07-19).
-> "P1 Clim & Chauffage (11)" et "P3 Eclairage (8)" etaient faux dans INDEX_GLOBAL.md — corriges.
+> "P1 Clim & Chauffage (11)" et "P3 Eclairage (8)" etaient faux dans INDEX_GLOBAL.md - corriges.
 
 ---
 
@@ -80,7 +80,7 @@ Structure accordeon HTML (`<details>`/`<summary>`) a 2 niveaux, rendu natif sur 
 ## Anomalies connues / ouvertes
 
 - `P1-CUISINE-B` : correctif deploye en local (`b_chauffage_cuisine_vacances.yaml`),
-  **PAS encore applique dans HA** — Eric doit le faire via UI HA (voir TODO.txt P1-CUISINE-B).
+  **PAS encore applique dans HA** - Eric doit le faire via UI HA (voir TODO.txt P1-CUISINE-B).
 
 ---
 

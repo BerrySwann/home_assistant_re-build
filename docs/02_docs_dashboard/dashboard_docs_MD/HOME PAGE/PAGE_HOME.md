@@ -11,7 +11,7 @@
 |:------|:-------|
 | 📁 **Path** | `Dashboard 2026-06-13 → Vue: Home (page principale)` |
 | 🔗 **Accès depuis** | Vue par défaut au démarrage |
-| 🏗️ **Layout** | `type: grid` — 1 col (cartes permanentes) + grille 3×6 (18 vignettes) |
+| 🏗️ **Layout** | `type: grid` - 1 col (cartes permanentes) + grille 3×6 (18 vignettes) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-06-28 |
@@ -19,7 +19,7 @@
 
 ---
 
-# 🏠 PAGE HOME — Dashboard Principal
+# 🏠 PAGE HOME - Dashboard Principal
 
 ---
 
@@ -51,19 +51,19 @@ Page d'accueil du dashboard. Structure en deux parties :
 
 ### Intégrations requises
 
-- ✅ `meteofrance` (HACS) — détails météo + alertes
-- ✅ `meteocss` (HACS) — carte météo animée (picture-elements)
-- ✅ `blitzortung` (HACS) — détection foudre
-- ✅ `mobile_app` — trackers téléphones
-- ✅ `person` (natif HA) — présence globale
-- ✅ `ecojoko` (HACS) — consommation électrique temps réel
-- ✅ `smartir` — entités `climate.*` (clims)
+- ✅ `meteofrance` (HACS) - détails météo + alertes
+- ✅ `meteocss` (HACS) - carte météo animée (picture-elements)
+- ✅ `blitzortung` (HACS) - détection foudre
+- ✅ `mobile_app` - trackers téléphones
+- ✅ `person` (natif HA) - présence globale
+- ✅ `ecojoko` (HACS) - consommation électrique temps réel
+- ✅ `smartir` - entités `climate.*` (clims)
 
 ### Cartes HACS utilisées
 
 | Carte | Usage |
 |-------|-------|
-| `custom:html-template-card` | Météo animée — 7 layers picture-elements (meteocss) |
+| `custom:html-template-card` | Météo animée - 7 layers picture-elements (meteocss) |
 | `meteofrance-weather-card` | Détails météo (prévisions, alertes, UV, pluie…) |
 | `custom:button-card` | Toutes les 18 vignettes + foudre + VS Code |
 | `custom:bubble-card` | Séparateur présence + boutons Eric/Mamour |
@@ -78,7 +78,7 @@ Page d'accueil du dashboard. Structure en deux parties :
 ┌─────────────────────────────────────────────────────────────────┐
 │  picture-elements / meteocss  (7 layers animés)                 │
 ├─────────────────────────────────────────────────────────────────┤
-│  meteofrance-weather-card  (weather.vence — prévisions/alertes) │
+│  meteofrance-weather-card  (weather.vence - prévisions/alertes) │
 ├─────────────────────────────────────────────────────────────────┤
 │  [CONDITIONNEL] button-card VS Code Server  (CPU > 1%)          │
 ├─────────────────────────────────────────────────────────────────┤
@@ -110,27 +110,27 @@ Page d'accueil du dashboard. Structure en deux parties :
 
 ## 📍 CARTES PERMANENTES
 
-### 1 — Météo animée meteocss *(picture-elements)*
+### 1 - Météo animée meteocss *(picture-elements)*
 
-**Type :** `type: picture-elements` — `custom:meteo-card` + 4 overlays `html-template-card`
+**Type :** `type: picture-elements` - `custom:meteo-card` + 4 overlays `html-template-card`
 **Toujours visible**
 **Fichier YAML :** `Dashboard/PAGE_Home/card_meteocss_home_2026-06-28.yaml`
 
-Carte météo animée utilisant le composant **`custom:meteo-card`** (HACS — lovelace-meteocss-card). Le rendu ciel/soleil/lune/foreground est géré nativement par la carte JS. La lune est positionnée via l'intégration **Luna** (auto-détectée). `house_angle: 180` oriente la vue plein sud : lever ← gauche, midi ↑ haut, coucher → droite.
+Carte météo animée utilisant le composant **`custom:meteo-card`** (HACS - lovelace-meteocss-card). Le rendu ciel/soleil/lune/foreground est géré nativement par la carte JS. La lune est positionnée via l'intégration **Luna** (auto-détectée). `house_angle: 180` oriente la vue plein sud : lever ← gauche, midi ↑ haut, coucher → droite.
 
 | # | Élément | Entités / Source |
 |---|---------|-----------------|
 | 1 | `custom:meteo-card` | `weather.vence` · `sun.sun` · Luna (`sensor.luna_lunar_*` auto) |
 | 2 | Rose des vents SVG | Statique (perspective rotateX 58°, opacity 0.85) |
-| 3 | Alerte météo (conditionnel) | `sensor.alerte_meteo` — Jaune/Orange/Rouge + animation pulse |
+| 3 | Alerte météo (conditionnel) | `sensor.alerte_meteo` - Jaune/Orange/Rouge + animation pulse |
 | 4 | Statut + T°ext (bas) | `sensor.vence_original_condition` · `sensor.th_balcon_nord_temperature` |
-| 5 | Titre VENCE + heure (haut) | `now().strftime('%H:%M')` — font-size 19px |
+| 5 | Titre VENCE + heure (haut) | `now().strftime('%H:%M')` - font-size 19px |
 
 > ⚠️ **Couleurs sunset/sunrise** : modifiées dans `/www/community/meteocss-card/meteocss-card.js` (pêche/mauve/violet). Supprimer `meteocss-card.js.gz` après chaque MAJ HACS pour que le JS custom soit servi.
 
 ---
 
-### 2 — Météo France détails *(meteofrance-weather-card)*
+### 2 - Météo France détails *(meteofrance-weather-card)*
 
 **Type :** `custom:meteofrance-weather-card`
 **Entité principale :** `weather.vence`
@@ -152,7 +152,7 @@ Affiche prévisions, alertes vigilance, chances de pluie, UV, couverture nuageus
 
 ---
 
-### 3 — VS Code Server *(conditionnel)*
+### 3 - VS Code Server *(conditionnel)*
 
 **Type :** `custom:button-card` dans `vertical-stack` + `conditional`
 **Visible si :** `sensor.studio_code_server_pourcentage_du_processeur` > 1
@@ -166,7 +166,7 @@ Affiche la charge CPU du serveur VS Code. Fond rouge + animation clignotante si 
 
 ---
 
-### 4 — Foudre Blitzortung *(conditionnel)*
+### 4 - Foudre Blitzortung *(conditionnel)*
 
 **Type :** `custom:button-card`
 **Visible si :** `sensor.maison_lightning_counter` > 1
@@ -188,11 +188,11 @@ Tap → `/meteo/#foudre`
 | `sensor.dernier_impact_temps_reel` | Temps depuis dernier impact |
 | `sensor.maison_lightning_distance` | Distance dernier impact (km) |
 | `sensor.maison_lightning_localisation` | Géocodage ville (attr.features[0].properties.geocoding.city) |
-| `sensor.maison_lightning_azimuth` | Direction (azimut degrés — fallback si pas de ville) |
+| `sensor.maison_lightning_azimuth` | Direction (azimut degrés - fallback si pas de ville) |
 
 ---
 
-### 5 — Lave-linge *(conditionnel)*
+### 5 - Lave-linge *(conditionnel)*
 
 **Type :** `custom:mushroom-entity-card`
 **Visible si :** `sensor.prise_lave_linge_nous_power` > 50 W
@@ -202,11 +202,11 @@ Tap → `/meteo/#foudre`
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.prise_lave_linge_nous_power` | Puissance instantanée (W) — condition + animation | NOUS SP via Z2M (P2) |
+| `sensor.prise_lave_linge_nous_power` | Puissance instantanée (W) - condition + animation | NOUS SP via Z2M (P2) |
 
 ---
 
-### 6 — Lave-vaisselle *(conditionnel)*
+### 6 - Lave-vaisselle *(conditionnel)*
 
 **Type :** `custom:mushroom-entity-card`
 **Visible si :** `sensor.prise_lave_vaisselle_nous_power` > 50 W
@@ -216,16 +216,16 @@ Tap → `/meteo/#foudre`
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.prise_lave_vaisselle_nous_power` | Puissance instantanée (W) — condition + animation | NOUS SP via Z2M (P2) |
+| `sensor.prise_lave_vaisselle_nous_power` | Puissance instantanée (W) - condition + animation | NOUS SP via Z2M (P2) |
 
 ---
 
-### 7 — Présence Personne(s)
+### 7 - Présence Personne(s)
 
 Groupe de 3 cartes. Voir doc dédiée : [`VIGNETTE_WIFI_PRESENCE.md`](./VIGNETTE_WIFI_PRESENCE.md)
 **Fichier YAML :** `Dashboard/PAGE_Home/card_presence_home_2026-06-13.yaml`
 
-**Séparateur** — couleur selon `sensor.etat_wifi_maison` :
+**Séparateur** - couleur selon `sensor.etat_wifi_maison` :
 
 | État | Couleur | Signification |
 |------|---------|---------------|
@@ -234,7 +234,7 @@ Groupe de 3 cartes. Voir doc dédiée : [`VIGNETTE_WIFI_PRESENCE.md`](./VIGNETTE
 | `'Mamour'` | `darkorange` | Mamour seule |
 | autre | `grey` | Personne |
 
-**Carte Eric** — `device_tracker.poco` + photo `person.eric`
+**Carte Eric** - `device_tracker.poco` + photo `person.eric`
 
 Couleurs de fond selon état :
 
@@ -245,13 +245,13 @@ Couleurs de fond selon état :
 | `Boulot` | `rgb(0,87,81)` |
 | autre | gris |
 
-**Carte Mamour** — `device_tracker.mamour` + photo `person.mamour`
+**Carte Mamour** - `device_tracker.mamour` + photo `person.mamour`
 
 Zones supplémentaires reconnues : `LECLERC VENCE` (bleu `rgb(0,102,204)`), `Primark` (bleu clair `rgb(4,155,216)`).
 
 ---
 
-### 8 — Détecteur de fuite *(conditionnel)*
+### 8 - Détecteur de fuite *(conditionnel)*
 
 **Type :** `custom:mushroom-entity-card`
 **Visible si :** `binary_sensor.detecteur_de_fuite_ikea_water_leak` = `on`, `unavailable` ou `unknown`
@@ -288,11 +288,11 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ---
 
-### 🌐 Intégrations natives HA (UI — aucun fichier YAML à créer)
+### 🌐 Intégrations natives HA (UI - aucun fichier YAML à créer)
 
 | Entité | Intégration | Configuré via |
 |--------|-------------|---------------|
@@ -317,8 +317,8 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 
 ---
 
-### 📦 `custom:meteo-card` (HACS — lovelace-meteocss-card)
-> Carte météo animée — picture-elements HOME page.
+### 📦 `custom:meteo-card` (HACS - lovelace-meteocss-card)
+> Carte météo animée - picture-elements HOME page.
 
 | Entité | Source | Rôle |
 |--------|--------|------|
@@ -435,8 +435,8 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 
 ### La carte Foudre ne disparaît pas alors qu'il n'y a pas d'orage
 
-1. Vérifier `sensor.maison_lightning_counter` — doit être ≤ 1 pour masquer la carte
-2. La carte utilise `visibility: condition: numeric_state above: 1` — elle s'affiche dès que counter > 1
+1. Vérifier `sensor.maison_lightning_counter` - doit être ≤ 1 pour masquer la carte
+2. La carte utilise `visibility: condition: numeric_state above: 1` - elle s'affiche dès que counter > 1
 
 ---
 
@@ -460,9 +460,9 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 
 ### Configuration YAML (sources HA v2.0)
 
-- `www/community/meteocss-card/meteocss-card.js` — carte JS (⚠️ supprimer .gz après MAJ HACS)
-- `templates/meteo/M_01_meteo_alertes_card.yaml` — sensor.alerte_meteo
-- `command_line/meteo/carte_meteo_france.yaml` — sensor.vence_original_condition
+- `www/community/meteocss-card/meteocss-card.js` - carte JS (⚠️ supprimer .gz après MAJ HACS)
+- `templates/meteo/M_01_meteo_alertes_card.yaml` - sensor.alerte_meteo
+- `command_line/meteo/carte_meteo_france.yaml` - sensor.vence_original_condition
 - `templates/P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml`
 - `templates/P4_groupe_presence/02_logique_wifi_cellular.yaml`
 - `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml`
@@ -487,7 +487,7 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 
 ### Documentation liée
 
-- [`VIGNETTE_WIFI_PRESENCE.md`](./VIGNETTE_WIFI_PRESENCE.md) — détail cartes présence
+- [`VIGNETTE_WIFI_PRESENCE.md`](./VIGNETTE_WIFI_PRESENCE.md) - détail cartes présence
 
 ---
 

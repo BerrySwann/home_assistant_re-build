@@ -1,7 +1,7 @@
 # (A-0) AUTOMATISATION CLIM JOUR (07H30 ↔ 21H00)
 
 > **Fichier TREE_CORRIGE :** `docs_automations/TREE_CORRIGE/P1_clim_chauffage/a_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml`
-> **Mode HA :** `queued` — max: 5
+> **Mode HA :** `queued` - max: 5
 > **Dernière mise à jour :** 2026-06-28 (refactoring LLM local → délégation script)
 
 ---
@@ -10,7 +10,7 @@
 
 Automation wrapper diurne (07h30–21h00). Surveille tous les événements pertinents
 et délègue **intégralement** la logique à `script.p1_master_gestion_clim` avec
-`periode: "jour"`. Plus de logique inline — tout est centralisé dans le script.
+`periode: "jour"`. Plus de logique inline - tout est centralisé dans le script.
 
 ---
 
@@ -49,7 +49,7 @@ Une seule action :
     trigger_entity_id: "{{ trigger.entity_id if trigger is defined ... else '' }}"
 ```
 
-→ Toute la logique est dans `script.p1_master_gestion_clim` — voir `docs_scripts/docs/P1_MASTER_GESTION_CLIM.md`
+→ Toute la logique est dans `script.p1_master_gestion_clim` - voir `docs_scripts/docs/P1_MASTER_GESTION_CLIM.md`
 
 ---
 

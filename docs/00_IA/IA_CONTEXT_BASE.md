@@ -6,16 +6,16 @@
 > **REGLE ABSOLUE :** Tu devras être honnete, ne pas mentir, ne pas tricher, être très attentif, et être 100% objectif et que tu aies l'interdiction de me flater pour me flater ou de me donner une réponse pour me faire plaisire, ou pour me donner une réponse quoi qu'il arrive. Et que si une de mes répose, une de mes solution ou une idées de "codage" (yaml) ou autres, que je pourrais avoir ne te semble pas bonne, il est impératif que tu me le fasse s'avoir sans aller systématiquement dans mon sens.
 > Si une de mes demandes ou propositions est ambiguë, floue, incompréhensible, contradictoire ou incomplète, tu devras me poser des questions. Et là aussi, interdiction de valider une interprétation au hasard pour me faire plaisir, ou me flater.
 
-> **REGLE ABSOLUE — STYLE :** Ne jamais utiliser de symboles qui trahissent l'écriture d'un LLM et qui n'existent pas sur un clavier standard. Interdit : `—` (em dash), `…` (ellipse typographique), `«»` (guillemets typographiques), `·` (point médian), et tout autre caractère spécial inaccessible sans Alt+code. Utiliser à la place : `-`, `...`, `"`, `-` etc.
+> **REGLE ABSOLUE - STYLE :** Ne jamais utiliser de symboles qui trahissent l'écriture d'un LLM et qui n'existent pas sur un clavier standard. Interdit : `-` (em dash), `…` (ellipse typographique), `«»` (guillemets typographiques), `·` (point médian), et tout autre caractère spécial inaccessible sans Alt+code. Utiliser à la place : `-`, `...`, `"`, `-` etc.
 
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
 *Dernière mise à jour : 2026-07-18*
 
 ---
 
-## 📚 FICHIERS DE RÉFÉRENCE — LIRE À LA DEMANDE
+## 📚 FICHIERS DE RÉFÉRENCE - LIRE À LA DEMANDE
 
-> ⚠️ Ne PAS lire ces fichiers par défaut — uniquement si la tâche le nécessite.
+> ⚠️ Ne PAS lire ces fichiers par défaut - uniquement si la tâche le nécessite.
 
 | Fichier | Lire si… |
 |:--------|:---------|
@@ -43,7 +43,7 @@
 | **Non** | Continuer directement |
 
 **Script actif** (sur HA : `/homeassistant/.scripts/`) :
-- `audit_md5.sh` — 3 passes (tree local → MD5 prod → MD5 GitHub), sans argument, périmètre YAML complet + .sh + fichiers racine
+- `audit_md5.sh` - 3 passes (tree local → MD5 prod → MD5 GitHub), sans argument, périmètre YAML complet + .sh + fichiers racine
 
 **Logs** : `/homeassistant/.logs/md5_audit_YYYY-MM-DD.txt` + copie `md5_audit_latest.txt`
 > ⛔ Anciens boutons/modes FULL · YAML · ATMA, scripts `audit_yaml/atma/full.sh` et logs `audit_*.log` : **supprimés** - ne plus référencer (vérifié prod 2026-07-18).
@@ -77,11 +77,11 @@
 - Passer par l'UI : Paramètres > Appareils > Ajouter Intégration > File.
 - Nom service généré : `notify.file_diag_log_file`.
 
-# CONVENTION POWERCALC — PÉRIMÈTRE STRICT
+# CONVENTION POWERCALC - PÉRIMÈTRE STRICT
 - PowerCalc **uniquement P3 (éclairage)** : ampoules sans monitoring natif (Hue).
 - Exception : `relais_lumiere_sdb_sonoff` (ZBMINIR2) → lampe LED 10W fixe.
 - ⛔ **INTERDIT P2** : toutes prises NOUS/IKEA ont monitoring natif Z2M.
-- Entités `prise_*_device_power` supprimées — ne jamais recréer.
+- Entités `prise_*_device_power` supprimées - ne jamais recréer.
 
 ---
 
@@ -89,41 +89,41 @@
 
 > ⚠️ Deux cascades distinctes selon le type de fichier.
 
-### 🔧 YAML (config HA) — cascade PROD → LOCAL
+### 🔧 YAML (config HA) - cascade PROD → LOCAL
 
 | Priorité | Source | Rôle |
 |:---------|:-------|:-----|
 | **1** | **Home Assistant (live)** | Prod = référence absolue |
-| **2** | **GitHub `home_assistant_re-build`** | Reflet prod — backup git auto depuis HA |
-| **3** | **Local `ReBuild/`** | Poste de travail — corrections/modifications YAML |
+| **2** | **GitHub `home_assistant_re-build`** | Reflet prod - backup git auto depuis HA |
+| **3** | **Local `ReBuild/`** | Poste de travail - corrections/modifications YAML |
 
 Sens : **prod → GitHub → local**. Le local doit converger vers prod. Une fois les corrections terminées dans `docs/01_docs_config_system/config_system_YAML/`, l'état local doit être équivalent à prod (validé par audit MD5).
 
-### 📄 DOCS (.md) — LOCAL = source de vérité
+### 📄 DOCS (.md) - LOCAL = source de vérité
 
 | Priorité | Source | Rôle |
 |:---------|:-------|:-----|
-| **1** | **Local `ReBuild/docs/`** | Source de vérité absolue — authoring et modifications ici |
-| **2** | **`H:\Docs\`** | Copie pushée depuis local — ne jamais modifier directement |
+| **1** | **Local `ReBuild/docs/`** | Source de vérité absolue - authoring et modifications ici |
+| **2** | **`H:\Docs\`** | Copie pushée depuis local - ne jamais modifier directement |
 | **3** | **GitHub `home_assistant_re-build`** | Backup via git auto depuis HA |
 
 Sens : **local → H:\Docs\ → GitHub**. En cas de conflit, local l'emporte toujours.
-`H:\Docs\` ne contient QUE des .md, histo et yaml Dashboard — **jamais de YAML config HA**.
+`H:\Docs\` ne contient QUE des .md, histo et yaml Dashboard - **jamais de YAML config HA**.
 
 > Ancien repo `home-assistant-config` **supprimé définitivement** (2026-04-27). Seul `home_assistant_re-build` est actif.
 
 ### Règles fondamentales
 - Répertoires préfixés `P*_` selon le Pôle.
-- `docs/01_docs_config_system/config_system_YAML/` = YAML config HA (état cible → /homeassistant/) — audité 1×/semaine.
+- `docs/01_docs_config_system/config_system_YAML/` = YAML config HA (état cible → /homeassistant/) - audité 1×/semaine.
 - `docs/03_docs_automations/docs_automations_YAML/` = automations individuelles (référence locale).
 - `docs/02_docs_dashboard/dashboard_docs_YAML/` = vignettes/pages dashboard.
-- ⛔ `TREE_CORRIGE/` et `TREE_ORIGINE/` **n'existent plus** — tout est sous `docs/`.
+- ⛔ `TREE_CORRIGE/` et `TREE_ORIGINE/` **n'existent plus** - tout est sous `docs/`.
 - Fichiers absents de `docs/01` mais présents GitHub = à supprimer en prod.
 - Automations : jamais modifier `automations.yaml` direct → passer par UI HA + `docs/03_docs_automations/docs_automations_YAML/`.
 
 ---
 
-## 🔍 PROTOCOLE AUDIT MD5 — GITHUB vs LOCAL
+## 🔍 PROTOCOLE AUDIT MD5 - GITHUB vs LOCAL
 
 > 1×/semaine minimum, avant toute session majeure.
 
@@ -138,16 +138,16 @@ find . -type f -name "*.yaml" -print0 | sort -z | xargs -0 md5sum | sed 's|\./||
 |:----|:-------|
 | LOCAL absent de GitHub | → push manquant depuis HA |
 | GitHub absent du LOCAL | → ancienne version → supprimer GitHub si plus récente en local |
-| **MD5 différent (même nom)** | → **⚠️ Conflit — HA = vérité** |
+| **MD5 différent (même nom)** | → **⚠️ Conflit - HA = vérité** |
 | MD5 identique | → ✅ Synchronisé |
 
 ### Périmètre de comparaison
 
 | Priorité | Périmètre | Raison |
 |:---------|:----------|:-------|
-| **🔴 CRITIQUE** | `docs/01_docs_config_system/config_system_YAML/` (sensors/, templates/, utility_meter/, command_line/) | Fichiers déployés dans `/homeassistant/` — un écart peut casser HA |
+| **🔴 CRITIQUE** | `docs/01_docs_config_system/config_system_YAML/` (sensors/, templates/, utility_meter/, command_line/) | Fichiers déployés dans `/homeassistant/` - un écart peut casser HA |
 | **🔴 CRITIQUE** | `automations.yaml` GitHub vs `docs/03_docs_automations/docs_automations_YAML/` | Détecter ajouts/suppressions/renommages depuis HA |
-| **🟡 SECONDAIRE** | `docs/02_docs_dashboard/dashboard_docs_YAML/` vs `H:\Docs\` | UI seulement — ne casse pas HA |
+| **🟡 SECONDAIRE** | `docs/02_docs_dashboard/dashboard_docs_YAML/` vs `H:\Docs\` | UI seulement - ne casse pas HA |
 
 ### Audit automations (MD5 + diff alias)
 ```bash
@@ -165,12 +165,12 @@ wc -l /tmp/github_aliases.txt /tmp/local_autom_files.txt
 
 ---
 
-## 📋 RÈGLES YAML — CONVENTIONS (CRITÈRES DE CONFORMITÉ)
+## 📋 RÈGLES YAML - CONVENTIONS (CRITÈRES DE CONFORMITÉ)
 
 > S'appliquent aux fichiers `.yaml` modulaires (sensors/, templates/, utility_meter/, command_line/). Jamais pour les automations.
 
-### 1 — Numérotation officielle des poles
-5 poles, préfixés P0 à P4. 1 fichier YAML = 1 seul pole — jamais deux poles dans le même fichier.
+### 1 - Numérotation officielle des poles
+5 poles, préfixés P0 à P4. 1 fichier YAML = 1 seul pole - jamais deux poles dans le même fichier.
 
 | Pole | Domaine |
 |:-----|:--------|
@@ -180,21 +180,21 @@ wc -l /tmp/github_aliases.txt /tmp/local_autom_files.txt
 | P3 | Éclairage |
 | P4 | Présence (Wi-Fi, mobile) |
 
-### 2 — Numérotation officielle des pièces (index 1-9)
+### 2 - Numérotation officielle des pièces (index 1-9)
 1 Entrée · 2 Cellier · 3 Toilette · 4 Salon · 5 Cuisine · 6 Couloir · 7 Bureau · 8 SDB · 9 Chambre
 
 - Ordre obligatoire au sein de chaque bloc de Pole.
 - ⛔ Jamais mélanger deux Poles dans la même pièce.
 
-### 3 — Hors-pièces (préfixes lettrés)
+### 3 - Hors-pièces (préfixes lettrés)
 `M_` Météo · `A_` Air quality · `S_` Stores · `B_` BP virtuel · `MP_` Mini-PC
 
-### 4 — Bordures ASCII
-- **Titre principal** — coins arrondis `╭─╮/╰─╯` — largeur 78 car. — texte MAJUSCULES.
+### 4 - Bordures ASCII
+- **Titre principal** - coins arrondis `╭─╮/╰─╯` - largeur 78 car. - texte MAJUSCULES.
   - Si >74 car. : élargir la boîte. ⛔ Ne jamais supprimer les références techniques du titre.
-- **Titre secondaire** — coins carrés `┌─┐/└─┘` — largeur 37 car. — texte MAJUSCULES, numérotation 1-9.
+- **Titre secondaire** - coins carrés `┌─┐/└─┘` - largeur 37 car. - texte MAJUSCULES, numérotation 1-9.
 
-### 5 — Headers en-tête obligatoires (juste sous la boite ASCII)
+### 5 - Headers en-tête obligatoires (juste sous la boite ASCII)
 ```yaml
 # ## 📝 DESCRIPTION :
 # ## 🧮 CALCUL & SOURCES :
@@ -204,7 +204,7 @@ wc -l /tmp/github_aliases.txt /tmp/local_autom_files.txt
 ```
 Tableau chaîne dépendances : `MATÉRIEL` = device physique ou intégration HA (si calculé -> `[calculé]`). `AVAL` = fichier(s) consommateurs + vignette (ex: `P1_UM_AMHQ.yaml -> L2C2`).
 
-### 6 — Convention de nommage : chaîne de suffixes
+### 6 - Convention de nommage : chaîne de suffixes
 Chaque suffixe documente la dernière transformation subie par l'entité.
 
 | Étape | Pattern `unique_id` | Fichier source |
@@ -218,20 +218,20 @@ Chaque suffixe documente la dernière transformation subie par l'entité.
 Cycles : `quotidien` | `hebdomadaire` | `mensuel` | `annuel`
 
 - **Règle absolue** : tout sensor sorti d'un UM finit par `_um`. Template kWh -> `_um_kwh_tpl`. Moyenne W -> `_um_avg_tpl`.
-- **Règle d'agrégation** : si un fichier `_kwh_tpl` existe, tout nouveau sensor du même type porte aussi `_kwh_tpl` — même fichier, même suffixe.
+- **Règle d'agrégation** : si un fichier `_kwh_tpl` existe, tout nouveau sensor du même type porte aussi `_kwh_tpl` - même fichier, même suffixe.
 
-### 7 — Slug tertiaire
-- Format : `# --- unique_id_exact ---` — juste au-dessus de chaque bloc d'entité.
+### 7 - Slug tertiaire
+- Format : `# --- unique_id_exact ---` - juste au-dessus de chaque bloc d'entité.
 - Utility_meter : un slug par entrée (annuel/mensuel/hebdo/quotidien).
 - ⛔ Jamais grouper plusieurs entités sous un seul slug. Le slug doit être l'image exacte du `unique_id` qui suit.
 
-### 8 — name & unique_id
-- `name: "Préfixe Nom Lisible Période"` — majuscules initiales — préfixe pôle obligatoire.
-- `unique_id: prefixe_nom_lisible_periode` — minuscules, underscores.
+### 8 - name & unique_id
+- `name: "Préfixe Nom Lisible Période"` - majuscules initiales - préfixe pôle obligatoire.
+- `unique_id: prefixe_nom_lisible_periode` - minuscules, underscores.
 - Cohérence croisée obligatoire : `name` et `unique_id` décrivent la même entité.
 - ⛔ Jamais d'abréviation inventée hors liste officielle.
 
-### 9 — Nommage fichiers YAML
+### 9 - Nommage fichiers YAML
 
 **Pattern général :** `{POLE}_{TYPE}[_AMHQ][_{VARIANTE}].yaml`
 
@@ -252,31 +252,31 @@ Cycles : `quotidien` | `hebdomadaire` | `mensuel` | `annuel`
 **Règles :**
 - `_AMHQ` = present si le fichier couvre les 4 cycles (Annuel/Mensuel/Hebdo/Quotidien)
 - `_VARIANTE` = discriminant si plusieurs fichiers du même TYPE dans le même pole : nom fonctionnel minuscules (`prises`, `mini_pc`) ou niveau numéroté (`1_UNITE`, `2_ZONE`, `3_TOTAL`)
-- Hors-poles : `{LETTRE}_{index}_{description}.yaml` — ex: `M_04_tendances_th_ext_card.yaml`
+- Hors-poles : `{LETTRE}_{index}_{description}.yaml` - ex: `M_04_tendances_th_ext_card.yaml`
 - Groupes : `GRP_{index}_{description}.yaml`
-- 1 fichier = 1 seul pole — jamais deux poles dans le même fichier
-- ⛔ `ui_dashboard/` : templates d'affichage uniquement (texte, couleurs, icônes) — jamais de calculs kWh/W/DUT
-- Fichiers legacy non conformes : pas de renommage sec en prod — renommer uniquement si le fichier est modifié pour autre chose
-- ⚠️ Exception legacy TOTAL : `P0_total_pour_les_7_postes.yaml` agrège 7 postes (chauffage/hygiène/multimédia...) sur 4 cycles — devrait s'appeler `P0_TOTAL_AMHQ.yaml` mais nom d'origine conservé
-- 🧊 Cas particulier en attente : `P2_current_all_standby.yaml` — puissance totale veilles, TYPE non encore formalisé
+- 1 fichier = 1 seul pole - jamais deux poles dans le même fichier
+- ⛔ `ui_dashboard/` : templates d'affichage uniquement (texte, couleurs, icônes) - jamais de calculs kWh/W/DUT
+- Fichiers legacy non conformes : pas de renommage sec en prod - renommer uniquement si le fichier est modifié pour autre chose
+- ⚠️ Exception legacy TOTAL : `P0_total_pour_les_7_postes.yaml` agrège 7 postes (chauffage/hygiène/multimédia...) sur 4 cycles - devrait s'appeler `P0_TOTAL_AMHQ.yaml` mais nom d'origine conservé
+- 🧊 Cas particulier en attente : `P2_current_all_standby.yaml` - puissance totale veilles, TYPE non encore formalisé
 
-### NOTA: PHILOSOPHIE — Zero Helper UI
-Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier. Tout est en YAML — versionnable, auditable, rollbackable sur Git.
+### NOTA: PHILOSOPHIE - Zero Helper UI
+Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier. Tout est en YAML - versionnable, auditable, rollbackable sur Git.
 - ⛔ Helper UI : valeur stockée en base HA, non versionnée, diff illisible (`"entity changed"`), perd sa valeur au crash/restore.
 - ✅ Template YAML : commit Git avec date et contexte, diff lisible (`t >= 26.5` -> `t >= 27`), rollback instantané, restore exact.
 
 ---
 
-## 🛠️ RÈGLE DOCS VIGNETTES — DÉPENDANCES OBLIGATOIRES
+## 🛠️ RÈGLE DOCS VIGNETTES - DÉPENDANCES OBLIGATOIRES
 
 À chaque création/modif d'une doc vignette (`docs/02_docs_dashboard/dashboard_docs_MD/L*`) :
-1. Remplir **ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE** dans la doc.
+1. Remplir **ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE** dans la doc.
 2. Mettre à jour `docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md` (🔲 → ✅).
 3. Mettre à jour la date en haut de `DEPENDANCES_GLOBALES.md`.
 
 ---
 
-## 📋 RÈGLE DASHBOARD YAML — VERSIONING
+## 📋 RÈGLE DASHBOARD YAML - VERSIONING
 
 > Tous les yaml dashboard sont dans `docs/02_docs_dashboard/dashboard_docs_YAML/`
 
@@ -295,8 +295,8 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 
 | Composant | Détail |
 |:----------|:-------|
-| **OS** | HAOS — VM Proxmox VE 7.0.0-3 |
-| **Matériel** | Mini-PC Intel NUC — SSD 512 Go / RAM 16 Go |
+| **OS** | HAOS - VM Proxmox VE 7.0.0-3 |
+| **Matériel** | Mini-PC Intel NUC - SSD 512 Go / RAM 16 Go |
 | **Zigbee** | Sonoff EFR32MG21 V2 (reçue 22/05/2026) |
 | **LXC 200** | Zigbee2MQTT + Mosquitto (10.32.154.244) |
 | **LXC 201** | MariaDB (10.32.154.242) |
@@ -311,22 +311,22 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 
 ## 🔌 ÉQUIPEMENTS PAR PÔLE
 
-### P0 — Énergie Globale : Linky (MyElectricalData J-1 HP/HC), Nodon SEM-4-1-00 (pince Z2M — temps réel).
+### P0 - Énergie Globale : Linky (MyElectricalData J-1 HP/HC), Nodon SEM-4-1-00 (pince Z2M - temps réel).
 - Entités Nodon : `sensor.general_electric_appart_energy` (kWh) · `sensor.general_electric_appart_power` (W)
-- Source UM P0 : `sensor.general_electric_appart_energy` (Nodon direct — Linky = 24h délai)
-### P1 — Chauffage / Clim
+- Source UM P0 : `sensor.general_electric_appart_energy` (Nodon direct - Linky = 24h délai)
+### P1 - Chauffage / Clim
 - 4 SALON : clim_salon_entree · 5 CUISINE : radiateur_cuisine · 7 BUREAU : clim_bureau
 - 8 SDB : soufflant_sdb, seche_serv_sdb · 9 CHAMBRE : clim_chambre
 
-### P2 — Prises
+### P2 - Prises
 - 1 ENTRÉE : box_internet_entree, horloge_entree
 - 4 SALON : pc_s_gege_salon, salon_chargeur_salon, tv_salon
 - 5 CUISINE : micro_ondes, lave_linge, lave_vaisselle, airfryer, four_plaque, frigo, congel, petit_dejeuner
 - 7 BUREAU : bureau_pc, fer_a_repasser_bureau · 9 CHAMBRE : tete_de_lit_chambre, tv_chambre
 
-### P3 — Éclairage
+### P3 - Éclairage
 
-#### SLUGS CANONIQUES P3 — SOURCE DE VÉRITÉ
+#### SLUGS CANONIQUES P3 - SOURCE DE VÉRITÉ
 
 | # | Pièce | Slug base |
 |:--|:------|:----------|
@@ -354,11 +354,11 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 > **Cycles** : `quotidien` | `hebdomadaire` | `mensuel` | `annuel`
 > **Erreurs connues à bannir** : `hue_white_lamp_table_salon_*` ❌ / `lampe_bureau_1_hue_*` ❌
 
-#### CONVENTION NOMMAGE TPL — CHAÎNE COMPLÈTE P3 (3 NIVEAUX)
+#### CONVENTION NOMMAGE TPL - CHAÎNE COMPLÈTE P3 (3 NIVEAUX)
 
 > ⚠️ P3 a 3 niveaux distincts. Le pattern de suffixe change selon le niveau.
 
-**Niveau 1 — UNITÉ** (par lampe individuelle, 19 slugs canoniques) :
+**Niveau 1 - UNITÉ** (par lampe individuelle, 19 slugs canoniques) :
 
 | Étape | Pattern `unique_id` | Fichier |
 |:------|:--------------------|:--------|
@@ -367,7 +367,7 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 | Relais kWh | `{slug}_{cycle}_um_kwh_tpl` | `P3_TPL_AMHQ_1_UNITE.yaml` |
 | Moyenne W | `{slug}_avg_watts_{cycle}` | `P3_AVG_AMHQ_1_UNITE.yaml` |
 
-**Niveau 2 — ZONE** (agrégat par pièce — somme des lampes d'une zone) :
+**Niveau 2 - ZONE** (agrégat par pièce - somme des lampes d'une zone) :
 
 | Étape | Pattern `unique_id` | Fichier |
 |:------|:--------------------|:--------|
@@ -377,7 +377,7 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 Zones définies (slug_zone + nb lampes) : `entree_1` · `salon_5` · `cuisine_1` · `couloir_1` · `bureau_5` · `sdb_2` · `chambre_4`
 Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 
-**Niveau 3 — TOTAL** (appart entier) :
+**Niveau 3 - TOTAL** (appart entier) :
 
 | Étape | Pattern `unique_id` | Fichier |
 |:------|:--------------------|:--------|
@@ -385,14 +385,14 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 | Total AVG W | `eclairage_total_unit_avg_watts_{cycle}` | `P3_AVG_AMHQ_3_TOTAL.yaml` |
 | Total puissance | `eclairage_total_group_puissance_tpl` | `P3_POWER_3_TOTAL_ZONE.yaml` |
 
-**Distinctions critiques — anti-hallucination :**
-- `_um_kwh_tpl` = **niveau 1 ET niveau 2** (lampe individuelle OU zone agrégée) — suffixe identique, pattern de nom différent
-- `_kwh_tpl` (sans `_um_`) = **UNIQUEMENT niveau 3** (total appart) — ne jamais l'utiliser à un autre niveau
-- AVG P3 : calculé depuis `_um_kwh_tpl` (pas depuis `_um` directement). Suffixe de sortie : `_avg_watts_{cycle}` — pas `_um_avg_tpl`
-- AVG P0 + P1 + P2 : calculé directement depuis `_um` — pas de `_um_kwh_tpl` intermédiaire
+**Distinctions critiques - anti-hallucination :**
+- `_um_kwh_tpl` = **niveau 1 ET niveau 2** (lampe individuelle OU zone agrégée) - suffixe identique, pattern de nom différent
+- `_kwh_tpl` (sans `_um_`) = **UNIQUEMENT niveau 3** (total appart) - ne jamais l'utiliser à un autre niveau
+- AVG P3 : calculé depuis `_um_kwh_tpl` (pas depuis `_um` directement). Suffixe de sortie : `_avg_watts_{cycle}` - pas `_um_avg_tpl`
+- AVG P0 + P1 + P2 : calculé directement depuis `_um` - pas de `_um_kwh_tpl` intermédiaire
 - PowerCalc : P3 uniquement, Hue sans monitoring natif + exception `relais_lumiere_sdb_sonoff` (10W fixe)
 
-### P4 — Présence : téléphones mobiles (Poco X7 Pro), capteurs Wi-Fi.
+### P4 - Présence : téléphones mobiles (Poco X7 Pro), capteurs Wi-Fi.
 → Détail complet sensor.presence : `IA/IA_P4_PRESENCE.md`
 
 ---
@@ -415,7 +415,7 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 ```
 ReBuild/
 ├── CLAUDE.md · secrets.yaml
-├── IA/              (vide — déplacé vers docs/00_IA/)
+├── IA/              (vide - déplacé vers docs/00_IA/)
 ├── Github/          (INDEX_AUTOMATIONS.md · INDEX_NAVIGATION.md · README.md)
 ├── historique/      (JOURNAL_COMPLET_2026-04-25_2026-07-14.md)
 └── docs/
@@ -435,13 +435,13 @@ ReBuild/
     └── 05_docs_MD_system/          (workflow · MOC · templates · github)
 ```
 
-⛔ `TREE_CORRIGE/`, `TREE_ORIGINE/`, `Dashboard/`, `docs_dashboard/`, `docs_automations/`, `docs_scripts/` **supprimés le 2026-07-14** — tout est sous `docs/`.
+⛔ `TREE_CORRIGE/`, `TREE_ORIGINE/`, `Dashboard/`, `docs_dashboard/`, `docs_automations/`, `docs_scripts/` **supprimés le 2026-07-14** - tout est sous `docs/`.
 
 → Arborescences complètes prod + local : `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL.md`
 
 ---
 
-## 👥 RÉFÉRENTIEL P4 — VALEURS `sensor.groupe`
+## 👥 RÉFÉRENTIEL P4 - VALEURS `sensor.groupe`
 
 | Valeur | Signification |
 |:-------|:--------------|
@@ -465,7 +465,7 @@ ReBuild/
 ---
 
 # 🏠 LOGEMENT & STRATÉGIE THERMIQUE
-- **Localisation :** 06140 Vence (Altitude ~360m) — Immeuble 1980, 4ème étage sous toiture. Traversant SUD/NORD, simple vitrage. VMC en SDB.
+- **Localisation :** 06140 Vence (Altitude ~360m) - Immeuble 1980, 4ème étage sous toiture. Traversant SUD/NORD, simple vitrage. VMC en SDB.
 - **Mode Absence Hiver** : 17°C · si T° Ext < 10°C → 18°C · si T° Ext < 8°C → 19°C.
 - **Mode Absence Été** : T° Cible = 28°C.
 - **Logique "Cœur du Système" (T° Extérieure → Cible → Confort) :**

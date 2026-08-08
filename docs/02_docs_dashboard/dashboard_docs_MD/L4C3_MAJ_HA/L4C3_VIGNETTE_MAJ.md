@@ -9,12 +9,12 @@
 
 </div>
 
-> **🔒 DOC VERROUILLÉE — VERSION FINALE**
+> **🔒 DOC VERROUILLÉE - VERSION FINALE**
 > Ce fichier est considéré comme terminé. Aucune modification ne doit être apportée sans décision explicite.
 >
 > ⚠️ **2 bugs esthétiques connus (à traiter ultérieurement) :**
-> 1. Icône HA dans la vignette — positionnement à revoir (alignement vertical résiduel à peaufiner)
-> 2. Page MAJ — mise en page des grilles à affiner sur petit écran (espacement entre Grille 1 et Grille 2)
+> 1. Icône HA dans la vignette - positionnement à revoir (alignement vertical résiduel à peaufiner)
+> 2. Page MAJ - mise en page des grilles à affiner sur petit écran (espacement entre Grille 1 et Grille 2)
 
 | Champ | Valeur |
 |:------|:-------|
@@ -28,7 +28,7 @@
 
 ---
 
-# 🔄 L4C3 — MISES À JOUR HOME ASSISTANT
+# 🔄 L4C3 - MISES À JOUR HOME ASSISTANT
 
 ---
 
@@ -52,7 +52,7 @@ La vignette L4C3 affiche le **nombre total de mises à jour disponibles** dans H
 
 ### Intégrations requises
 
-- ✅ Domaine `update` natif HA (Core ≥ 2021.12 — pas d'installation requise)
+- ✅ Domaine `update` natif HA (Core ≥ 2021.12 - pas d'installation requise)
 - ✅ HACS (pour les mises à jour HACS custom)
 - ✅ Supervisor / Add-ons (si HA OS ou Supervised)
 
@@ -60,11 +60,11 @@ La vignette L4C3 affiche le **nombre total de mises à jour disponibles** dans H
 
 | Carte | Usage |
 |-------|-------|
-| `custom:button-card` | Vignette L4C3 — affichage compteur + icône HA |
-| `custom:mushroom-update-card` | Page MAJ — carte individuelle par composant |
-| `custom:mushroom-template-card` | Page MAJ — chips CPU/RAM, versions texte |
-| `custom:auto-entities` | Page MAJ — liste dynamique des mises à jour disponibles |
-| `custom:mushroom-title-card` | Page MAJ — titres de sections |
+| `custom:button-card` | Vignette L4C3 - affichage compteur + icône HA |
+| `custom:mushroom-update-card` | Page MAJ - carte individuelle par composant |
+| `custom:mushroom-template-card` | Page MAJ - chips CPU/RAM, versions texte |
+| `custom:auto-entities` | Page MAJ - liste dynamique des mises à jour disponibles |
+| `custom:mushroom-title-card` | Page MAJ - titres de sections |
 
 ---
 
@@ -82,9 +82,9 @@ La vignette L4C3 affiche le **nombre total de mises à jour disponibles** dans H
 
 ---
 
-## 📍 VIGNETTE L4C3 — button-card
+## 📍 VIGNETTE L4C3 - button-card
 
-### Code (version corrigée — bug margin-left résolu)
+### Code (version corrigée - bug margin-left résolu)
 
 ```yaml
 type: custom:button-card
@@ -154,7 +154,7 @@ Affiche sur une seule vignette carrée : l'icône HA (colorisée selon l'état),
 
 ### Entités
 
-- `sensor.available_updates` [TPL] — compteur template calculé depuis `update.*` (state == 'on')
+- `sensor.available_updates` [TPL] - compteur template calculé depuis `update.*` (state == 'on')
 
 ---
 
@@ -162,13 +162,13 @@ Affiche sur une seule vignette carrée : l'icône HA (colorisée selon l'état),
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 > Chaque entité est listée avec son **fichier source exact** dans le repo ReBuild.
 
 ---
 
-### 🌐 Intégrations natives HA (UI — aucun fichier YAML à créer)
+### 🌐 Intégrations natives HA (UI - aucun fichier YAML à créer)
 
 | Entité | Intégration | Configuré via |
 |--------|-------------|---------------|
@@ -188,7 +188,7 @@ Affiche sur une seule vignette carrée : l'icône HA (colorisée selon l'état),
 
 | Entité | unique_id | Rôle |
 |--------|-----------|------|
-| `sensor.available_updates` | `available_updates` | Compteur — alimente la vignette L4C3 |
+| `sensor.available_updates` | `available_updates` | Compteur - alimente la vignette L4C3 |
 
 ---
 
@@ -202,7 +202,7 @@ Affiche sur une seule vignette carrée : l'icône HA (colorisée selon l'état),
 1. Dans le dashboard, éditer la vignette L4C3.
 2. Dans `styles → custom_fields → icon`, supprimer les lignes `margin-left: 250%` et `margin-top: 0%`.
 3. Vérifier que `justify-self: center` et `align-self: center` sont présents.
-4. Sauvegarder — l'icône HA bleue doit apparaître en haut à gauche de la vignette.
+4. Sauvegarder - l'icône HA bleue doit apparaître en haut à gauche de la vignette.
 
 ### sensor.available_updates indisponible
 
@@ -236,15 +236,15 @@ Vérifier dans Outils développeur > États : filtrer `update.` et regarder si `
 
 ## 🔗 FICHIERS LIÉS
 
-### Configuration YAML (sources HA — ReBuild)
+### Configuration YAML (sources HA - ReBuild)
 
 - `TREE_CORRIGE/templates/utilitaires/Mise_a_jour_home_assistant.yaml`
 
 ### Documentation
 
-- [`PAGE_MAJ.md`](./PAGE_MAJ.md) — YAML complet de la page `/dashboard-tablette/maj` (2 grilles)
-- [`docs/WIFI_PRESENCE (Home Page)/PAGE_HOME.md`](../WIFI_PRESENCE%20(Home%20Page)/PAGE_HOME.md) — vue d'ensemble des 18 vignettes
-- [`docs/DEPENDANCES_GLOBALES.md`](DEPENDANCES_GLOBALES.md) — chaîne de dépendances L4C3
+- [`PAGE_MAJ.md`](./PAGE_MAJ.md) - YAML complet de la page `/dashboard-tablette/maj` (2 grilles)
+- [`docs/WIFI_PRESENCE (Home Page)/PAGE_HOME.md`](../WIFI_PRESENCE%20(Home%20Page)/PAGE_HOME.md) - vue d'ensemble des 18 vignettes
+- [`docs/DEPENDANCES_GLOBALES.md`](DEPENDANCES_GLOBALES.md) - chaîne de dépendances L4C3
 
 ---
 

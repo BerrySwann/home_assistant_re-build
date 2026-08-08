@@ -1,4 +1,4 @@
-# [P3-SALON] BOUTON IKEA SOMRIG (2 TOUCHES) — ON/OFF
+# [P3-SALON] BOUTON IKEA SOMRIG (2 TOUCHES) - ON/OFF
 
 > **Fichier :** `automations_corrige/P3_salon_bouton_inter_somrig.yaml`
 > **Mode HA :** `restart`
@@ -20,7 +20,7 @@ Mappage différent : `1_short_release` → ON, `2_short_release` → OFF.
 
 ---
 
-## ⚙️ Actions — Choose
+## ⚙️ Actions - Choose
 
 | Action MQTT | Résultat |
 |:---|:---|

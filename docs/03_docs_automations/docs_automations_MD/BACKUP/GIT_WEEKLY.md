@@ -1,4 +1,4 @@
-# [BACKUP] GIT — PUSH HEBDO + TAG (DIM 01H30)
+# [BACKUP] GIT - PUSH HEBDO + TAG (DIM 01H30)
 
 > **Fichier :** `automations_corrige/backup/git_weekly.yaml`
 > **Mode HA :** `single`

@@ -19,7 +19,7 @@
 
 ---
 
-# ⚡ L2C1 — Vignette : Consommation Électrique Temps Réel
+# ⚡ L2C1 - Vignette : Consommation Électrique Temps Réel
 
 ---
 
@@ -38,20 +38,20 @@
 
 Vignette carrée (`aspect-ratio: 1/1`) affichant en temps réel la consommation électrique du logement en deux blocs :
 
-**Bloc 1 — Énergie / Puissance** : titre `kWh -- Réel (W) -- kWh` — Mini (kWh) / Temps réel (W) / Maxi (kWh) avec code couleur dynamique sur Realtime et Maxi.
+**Bloc 1 - Énergie / Puissance** : titre `kWh -- Réel (W) -- kWh` - Mini (kWh) / Temps réel (W) / Maxi (kWh) avec code couleur dynamique sur Realtime et Maxi.
 
 > - **Mini** = `value_min` sur 24h de l'UM quotidien → toujours 0 (l'UM part de 0 à minuit, ne peut que croître). Blanc fixe. Sert de marqueur de reset.
 > - **Maxi** = `value_max` sur 24h → total kWh du jour. Seuils : rouge > 15 kWh / orange > 8 kWh.
 
-**Bloc 2 — Coûts (€)** : Coût total **quotidien** + détail Heures Pleines / Heures Creuses, lus directement depuis 3 sensors pré-calculés : `sensor.genelec_appart_cout_total_quotidien`, `_cout_hp_quotidien`, `_cout_hc_quotidien`. Aucun calcul inline — pas de tarif EDF dans la vignette.
+**Bloc 2 - Coûts (€)** : Coût total **quotidien** + détail Heures Pleines / Heures Creuses, lus directement depuis 3 sensors pré-calculés : `sensor.genelec_appart_cout_total_quotidien`, `_cout_hp_quotidien`, `_cout_hc_quotidien`. Aucun calcul inline - pas de tarif EDF dans la vignette.
 
 Tap → navigue vers la page détaillée `/dashboard-tablette/energie`.
 
 ### Intégrations requises
 
-- ✅ **NODON** (smart plug général appartement) — `sensor.general_electric_appart_power`
-- ✅ Sensors Genelec Appart — `sensor.genelec_appart_conso_mini_24h` / `sensor.genelec_appart_conso_maxi_24h` (via `P0_MINI_MAXI_AVG_Genelec_appart.yaml`)
-- ✅ Sensors coûts quotidiens — `sensor.genelec_appart_cout_total/hp/hc_quotidien` (via `01_genelec_appart_AMHQ_cost.yaml`)
+- ✅ **NODON** (smart plug général appartement) - `sensor.general_electric_appart_power`
+- ✅ Sensors Genelec Appart - `sensor.genelec_appart_conso_mini_24h` / `sensor.genelec_appart_conso_maxi_24h` (via `P0_MINI_MAXI_AVG_Genelec_appart.yaml`)
+- ✅ Sensors coûts quotidiens - `sensor.genelec_appart_cout_total/hp/hc_quotidien` (via `01_genelec_appart_AMHQ_cost.yaml`)
 
 ---
 
@@ -106,7 +106,7 @@ styles:
 
 ## 📐 CHAMPS CUSTOM_FIELDS
 
-### titre_1 — En-tête Bloc 1
+### titre_1 - En-tête Bloc 1
 
 ```javascript
 return 'Conso. Appart.<br><br>Mini -- Realtime -- Maxi';
@@ -116,7 +116,7 @@ Texte statique HTML, centré en gras. Le `<br><br>` espace visuellement le titre
 
 ---
 
-### mini — Énergie minimale du jour (kWh)
+### mini - Énergie minimale du jour (kWh)
 
 ```javascript
 const value = parseFloat(states['sensor.genelec_appart_conso_mini_24h']?.state) || 0;
@@ -124,12 +124,12 @@ return `<span style='color:white; font-weight:bold;'>${value.toFixed(0)} kWh</sp
 ```
 
 > `genelec_appart_conso_mini_24h` = `value_min` sur 24h de `sensor.genelec_appart_quotidien_kwh_um`.
-> **Valeur pratique : toujours 0** — l'UM repart de 0 à minuit. Blanc fixe, pas de seuil couleur.
+> **Valeur pratique : toujours 0** - l'UM repart de 0 à minuit. Blanc fixe, pas de seuil couleur.
 > Source : `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml`
 
 ---
 
-### realtime — Puissance temps réel (W)
+### realtime - Puissance temps réel (W)
 
 ```javascript
 const value = parseFloat(states['sensor.general_electric_appart_power']?.state || 0);
@@ -144,7 +144,7 @@ return `<span style='color:${color}; font-weight:bold;'>${value} W</span>`;
 
 ---
 
-### maxi — Énergie maximale du jour (kWh)
+### maxi - Énergie maximale du jour (kWh)
 
 ```javascript
 const value = parseFloat(states['sensor.genelec_appart_conso_maxi_24h']?.state) || 0;
@@ -160,7 +160,7 @@ return `<span style='color:${color}; font-weight:bold;'>${value.toFixed(0)} kWh<
 
 ---
 
-### titre_2 — Séparateur + En-tête Bloc 2
+### titre_2 - Séparateur + En-tête Bloc 2
 
 ```javascript
 return '__________________________<br><br>Coûts Total = H.P. + H.C.';
@@ -170,7 +170,7 @@ La ligne de tirets joue le rôle de séparateur visuel entre les deux blocs.
 
 ---
 
-### toto — Coût total quotidien (€)
+### toto - Coût total quotidien (€)
 
 ```javascript
 const total = parseFloat(states['sensor.genelec_appart_cout_total_quotidien']?.state) || 0;
@@ -184,7 +184,7 @@ return `<span style="display:block; text-align:right; line-height:1.2; color:lig
 
 ---
 
-### hp — Coût Heures Pleines quotidien (€)
+### hp - Coût Heures Pleines quotidien (€)
 
 ```javascript
 const hp_total = parseFloat(states['sensor.genelec_appart_cout_hp_quotidien']?.state) || 0;
@@ -198,7 +198,7 @@ return `<span style="display:block; text-align:right; line-height:1.2;">
 
 ---
 
-### hc — Coût Heures Creuses quotidien (€)
+### hc - Coût Heures Creuses quotidien (€)
 
 ```javascript
 const hc_total = parseFloat(states['sensor.genelec_appart_cout_hc_quotidien']?.state) || 0;
@@ -214,7 +214,7 @@ return `<span style="display:block; text-align:right; line-height:1.2;">
 
 ## 🎨 LOGIQUE JS & PALETTES COULEURS
 
-### Puissance instantanée (realtime) — en W
+### Puissance instantanée (realtime) - en W
 
 | Seuil | Couleur | Code | Signification |
 |:------|:--------|:-----|:--------------|
@@ -223,13 +223,13 @@ return `<span style="display:block; text-align:right; line-height:1.2;">
 | > 1 000 W | Vert clair | `lightgreen` | Consommation modérée |
 | ≤ 1 000 W | Blanc | `white` | Consommation normale |
 
-### Énergie minimale (mini) — en kWh
+### Énergie minimale (mini) - en kWh
 
 | Seuil | Couleur | Signification |
 |:------|:--------|:--------------|
 | Toujours | Blanc | Valeur pratiquement toujours 0 (reset minuit). Pas de seuil. |
 
-### Énergie maximale (maxi) — en kWh — total journalier accumulé
+### Énergie maximale (maxi) - en kWh - total journalier accumulé
 
 | Seuil | Couleur | Signification |
 |:------|:--------|:--------------|
@@ -247,22 +247,22 @@ return `<span style="display:block; text-align:right; line-height:1.2;">
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
-### ⚡ NODON — Puissance temps réel
+### ⚡ NODON - Puissance temps réel
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.general_electric_appart_power` | Puissance instantanée (W) — champ `realtime` | Smart plug NODON [UI] |
+| `sensor.general_electric_appart_power` | Puissance instantanée (W) - champ `realtime` | Smart plug NODON [UI] |
 
 ---
 
-### 📈 Statistiques P0 — Mini / Maxi journaliers (kWh)
+### 📈 Statistiques P0 - Mini / Maxi journaliers (kWh)
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.genelec_appart_conso_mini_24h` | `value_min` 24h de l'UM quotidien — toujours 0 (reset minuit) | `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml` |
-| `sensor.genelec_appart_conso_maxi_24h` | `value_max` 24h de l'UM quotidien — total kWh journalier accumulé | idem |
+| `sensor.genelec_appart_conso_mini_24h` | `value_min` 24h de l'UM quotidien - toujours 0 (reset minuit) | `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml` |
+| `sensor.genelec_appart_conso_maxi_24h` | `value_max` 24h de l'UM quotidien - total kWh journalier accumulé | idem |
 
 ---
 
@@ -270,11 +270,11 @@ return `<span style="display:block; text-align:right; line-height:1.2;">
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.genelec_appart_cout_total_quotidien` | Coût total du jour (€) — champ `toto` | `templates/P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml` |
-| `sensor.genelec_appart_cout_hp_quotidien`    | Coût HP du jour (€) — champ `hp`   | idem |
-| `sensor.genelec_appart_cout_hc_quotidien`    | Coût HC du jour (€) — champ `hc`   | idem |
+| `sensor.genelec_appart_cout_total_quotidien` | Coût total du jour (€) - champ `toto` | `templates/P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml` |
+| `sensor.genelec_appart_cout_hp_quotidien`    | Coût HP du jour (€) - champ `hp`   | idem |
+| `sensor.genelec_appart_cout_hc_quotidien`    | Coût HC du jour (€) - champ `hc`   | idem |
 
-> Les coûts sont **pré-calculés** dans le template YAML côté HA — pas de calcul inline dans la vignette.
+> Les coûts sont **pré-calculés** dans le template YAML côté HA - pas de calcul inline dans la vignette.
 
 ### 🔄 triggers_update
 
@@ -287,11 +287,11 @@ La carte se met à jour sur changement de l'une des 6 entités ci-dessus (event-
 | Élément | Type | Statut |
 |---------|------|--------|
 | `custom:button-card` | HACS | ✅ Essentiel |
-| Smart plug NODON (appartement général) | Intégration HA [UI] | ✅ Essentiel — fournit `general_electric_appart_power` |
-| `sensor.genelec_appart_quotidien_kwh_um` | Utility Meter (utility_meter/) | ✅ Requis — source des stats mini/maxi |
-| `P0_MINI_MAXI_AVG_Genelec_appart.yaml` | platform: statistics | ✅ Requis — fournit mini/maxi kWh |
-| `01_genelec_appart_AMHQ_cost.yaml` | Template coûts | ✅ Requis — fournit `cout_total/hp/hc_quotidien` |
-| Automation basculement HP/HC | `automations_corrige/energie/basculement_tarif_hphc.yaml` | ✅ Requis — split HP/HC correct |
+| Smart plug NODON (appartement général) | Intégration HA [UI] | ✅ Essentiel - fournit `general_electric_appart_power` |
+| `sensor.genelec_appart_quotidien_kwh_um` | Utility Meter (utility_meter/) | ✅ Requis - source des stats mini/maxi |
+| `P0_MINI_MAXI_AVG_Genelec_appart.yaml` | platform: statistics | ✅ Requis - fournit mini/maxi kWh |
+| `01_genelec_appart_AMHQ_cost.yaml` | Template coûts | ✅ Requis - fournit `cout_total/hp/hc_quotidien` |
+| Automation basculement HP/HC | `automations_corrige/energie/basculement_tarif_hphc.yaml` | ✅ Requis - split HP/HC correct |
 
 ---
 

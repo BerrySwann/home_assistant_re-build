@@ -1,4 +1,4 @@
-# BUREAU — ALLUMAGE MANUEL PC (MQTT POUSSOIR IKEA)
+# BUREAU - ALLUMAGE MANUEL PC (MQTT POUSSOIR IKEA)
 
 > **Fichier :** `automations_corrige/P2_prises/bureau_allumage_pc.yaml`
 > **Mode HA :** `single`

@@ -1,4 +1,4 @@
-# Bureau — Bouton RODRET Toggle Lampes Blanches
+# Bureau - Bouton RODRET Toggle Lampes Blanches
 
 **Catégorie :** P3_eclairage
 **Alias HA :** `P3_BUREAU - BOUTON RODRET TOGGLE BLANCHES`

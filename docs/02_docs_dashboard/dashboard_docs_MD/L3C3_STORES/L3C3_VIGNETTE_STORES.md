@@ -10,9 +10,9 @@
 | Champ | Valeur |
 |:------|:-------|
 | 📁 **Path** | `Dashboard/L3C3_09_Stores_Fenetres/vignette_L3C3_stores_2026-05-14.yaml` |
-| 🔗 **Accès depuis** | Vue Home — L3C3 |
+| 🔗 **Accès depuis** | Vue Home - L3C3 |
 | 🔗 **tap →** | `/dashboard-tablette/stores` |
-| 🏗️ **Layout** | `custom:button-card` — grille 3 colonnes (Pièce / Fenêtres / Stores) |
+| 🏗️ **Layout** | `custom:button-card` - grille 3 colonnes (Pièce / Fenêtres / Stores) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-03-21 |
@@ -20,7 +20,7 @@
 
 ---
 
-# 🪟 L3C3 — VIGNETTE FENÊTRES & STORES
+# 🪟 L3C3 - VIGNETTE FENÊTRES & STORES
 
 ---
 
@@ -41,20 +41,20 @@ Vignette affichant en un coup d'œil l'état de 4 fenêtres (ouvert/fermé) et d
 
 Trois colonnes :
 - **Pièce** : nom fixe (Salon / Cuisine / Bureau / Chambre)
-- **Fenêtres** : état coloré — rouge `Ouvert` / vert `Fermé` / gris `N/A`
+- **Fenêtres** : état coloré - rouge `Ouvert` / vert `Fermé` / gris `N/A`
 - **Stores** : état textuel brut du sensor de statut (ex: "Ouvert", "Fermé", "Arrêt")
 
 ### Intégrations requises
 
-- ✅ **SONOFF SNZB-04** (Zigbee) — contacts fenêtres → `binary_sensor.contact_fenetre_*`
-- ✅ **Zigbee2MQTT** (Zigbee) — stores motorisés → `cover.store_*`
-- ✅ **Templates** — `sensor.store_*_status` (texte d'état volet)
+- ✅ **SONOFF SNZB-04** (Zigbee) - contacts fenêtres → `binary_sensor.contact_fenetre_*`
+- ✅ **Zigbee2MQTT** (Zigbee) - stores motorisés → `cover.store_*`
+- ✅ **Templates** - `sensor.store_*_status` (texte d'état volet)
 
 ### Cartes HACS
 
 | Carte | Usage |
 |-------|-------|
-| `custom:button-card` | Vignette — grille 3 colonnes avec JS |
+| `custom:button-card` | Vignette - grille 3 colonnes avec JS |
 
 ---
 
@@ -214,7 +214,7 @@ custom_fields:
 
 ## 🔢 LOGIQUE JS
 
-### Colonne Fenêtres — `getColorForFenetreStatus(entityId)`
+### Colonne Fenêtres - `getColorForFenetreStatus(entityId)`
 
 Lit l'état du `binary_sensor` :
 
@@ -224,7 +224,7 @@ Lit l'état du `binary_sensor` :
 | `off` | Fenêtre fermée (contact établi) | `Fermé` en `lightgreen` |
 | autre / absent | Indisponible | `N/A` en gris `#aaaaaa` |
 
-### Colonne Stores — `getStoreStatus(entityId)`
+### Colonne Stores - `getStoreStatus(entityId)`
 
 Lit l'état textuel du `sensor.store_*_status` (template) et l'affiche brut. Les états `unavailable`, `unknown`, `N/A` sont remplacés par `N/A` gris.
 
@@ -260,7 +260,7 @@ Lit l'état textuel du `sensor.store_*_status` (template) et l'affiche brut. Les
 → Vérifier que le `binary_sensor.contact_fenetre_*_sonoff_contact` est bien disponible (Zigbee2MQTT actif, capteur appairé).
 
 ### Colonne Stores ne se rafraîchit pas (Cuisine / Chambre)
-→ Comportement attendu — `sensor.store_cuisine_status` et `sensor.store_chambre_status` ne sont pas dans `triggers_update:`. Ajouter ces entités si un store Cuisine/Chambre est installé.
+→ Comportement attendu - `sensor.store_cuisine_status` et `sensor.store_chambre_status` ne sont pas dans `triggers_update:`. Ajouter ces entités si un store Cuisine/Chambre est installé.
 
 ### La carte reste blanche ou ne s'affiche pas
 → `custom:button-card` nécessite au moins une entité principale déclarée. Vérifier que la première entité de la liste est disponible.

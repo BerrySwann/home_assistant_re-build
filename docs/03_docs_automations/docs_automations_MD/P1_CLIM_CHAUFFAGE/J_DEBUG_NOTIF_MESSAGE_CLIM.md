@@ -1,4 +1,4 @@
-# (J) DEBUG — NOTIFIER CHANGEMENTS MESSAGE CLIM
+# (J) DEBUG - NOTIFIER CHANGEMENTS MESSAGE CLIM
 
 > **Fichier :** `automations_corrige/P1_clim_chauffage/L_debug_notif_message_clim.yaml`
 > **Mode HA :** `single` (implicite)
@@ -21,7 +21,7 @@ le type de changement détecté (présence, tendance T°, mode chauffage/refroid
 
 ---
 
-## ⚙️ Actions — Choose selon contenu du message
+## ⚙️ Actions - Choose selon contenu du message
 
 | Cas | Détection | Message envoyé |
 |:---|:---|:---|

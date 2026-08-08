@@ -11,7 +11,7 @@
 |:------|:-------|
 | 📁 **Path** | `dashboard-tablette` → Ligne 6, Colonne 2 |
 | 🔗 **Tap** | `/dashboard-tablette/pollen-pollution` |
-| 🏗️ **Layout** | `custom:button-card` — name dynamique JavaScript |
+| 🏗️ **Layout** | `custom:button-card` - name dynamique JavaScript |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-03-21 |
@@ -19,7 +19,7 @@
 
 ---
 
-# 🌿 L6C2 — Vignette Pollulèn ©
+# 🌿 L6C2 - Vignette Pollulèn ©
 
 ---
 
@@ -35,10 +35,10 @@
 
 ## 🎯 VUE D'ENSEMBLE
 
-Vignette "Pollulèn ©" affichant simultanément le **niveau de qualité de l'air** et le **niveau pollen** pour Vence, avec code couleur dynamique sur une échelle 0-7. Le `name` est entièrement généré en JavaScript — pas de texte statique. Navigation vers la page `/dashboard-tablette/pollen-pollution`.
+Vignette "Pollulèn ©" affichant simultanément le **niveau de qualité de l'air** et le **niveau pollen** pour Vence, avec code couleur dynamique sur une échelle 0-7. Le `name` est entièrement généré en JavaScript - pas de texte statique. Navigation vers la page `/dashboard-tablette/pollen-pollution`.
 
 ### Intégrations requises
-- ✅ AtmoFrance (HACS — `custom_components/atmofrance`) ou équivalent fournissant `sensor.qualite_globale_vence` et `sensor.qualite_globale_pollen_vence`
+- ✅ AtmoFrance (HACS - `custom_components/atmofrance`) ou équivalent fournissant `sensor.qualite_globale_vence` et `sensor.qualite_globale_pollen_vence`
 
 ### Cartes HACS utilisées
 
@@ -74,7 +74,7 @@ Niveau X  /  Niveau Y
 
 ---
 
-## 📍 CODE — VIGNETTE
+## 📍 CODE - VIGNETTE
 
 ```yaml
 type: custom:button-card
@@ -139,16 +139,16 @@ styles:
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ### 🌐 Intégrations natives HA
 
 | Entité | Source probable | Rôle |
 |--------|----------------|------|
-| `sensor.qualite_globale_vence` [NAT] | AtmoFrance (HACS) | Indice qualité de l'air 0-7 — attributs `Libellé` + `Couleur` natifs |
-| `sensor.qualite_globale_pollen_vence` [NAT] | AtmoFrance (HACS) | Indice pollen 0-7 — attributs `Libellé` + `Couleur` natifs |
+| `sensor.qualite_globale_vence` [NAT] | AtmoFrance (HACS) | Indice qualité de l'air 0-7 - attributs `Libellé` + `Couleur` natifs |
+| `sensor.qualite_globale_pollen_vence` [NAT] | AtmoFrance (HACS) | Indice pollen 0-7 - attributs `Libellé` + `Couleur` natifs |
 
-> ✅ **Confirmé** : entités natives AtmoFrance (HACS — `custom_components/atmofrance`). Les attributs `Libellé` et `Couleur` sont exposés directement par l'intégration — aucun template YAML intermédiaire requis.
+> ✅ **Confirmé** : entités natives AtmoFrance (HACS - `custom_components/atmofrance`). Les attributs `Libellé` et `Couleur` sont exposés directement par l'intégration - aucun template YAML intermédiaire requis.
 
 ---
 
@@ -177,7 +177,7 @@ La fonction `getColor()` retourne `'black'` si la valeur est hors de la plage 0-
 ## 🔗 FICHIERS LIÉS
 
 ### Documentation
-- `PAGE_POLLUTION_POLLEN.md` — *(à créer — page non encore fournie)*
+- `PAGE_POLLUTION_POLLEN.md` - *(à créer - page non encore fournie)*
 
 ---
 

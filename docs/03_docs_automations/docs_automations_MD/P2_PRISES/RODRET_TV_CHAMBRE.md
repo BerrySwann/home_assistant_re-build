@@ -1,4 +1,4 @@
-# BOUTON IKEA RODRET — TV CHAMBRE
+# BOUTON IKEA RODRET - TV CHAMBRE
 
 > **Fichier :** `automations_corrige/P2_prises/rodret_tv_chambre.yaml`
 > **Mode HA :** `restart`
@@ -20,7 +20,7 @@ Traduit `on`/`off` MQTT en `switch.turn_on/off` direct (sans passer par un helpe
 
 ---
 
-## ⚙️ Actions — Choose
+## ⚙️ Actions - Choose
 
 | Action MQTT | Résultat |
 |:---|:---|

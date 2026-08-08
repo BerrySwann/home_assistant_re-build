@@ -1,4 +1,4 @@
-# (A) CHAUFFAGE CUISINE — PLAGES HORAIRES SEMAINE/WE
+# (A) CHAUFFAGE CUISINE - PLAGES HORAIRES SEMAINE/WE
 
 > **Fichier :** `automations_corrige/P1_cuisine/A_chauffage_cuisine.yaml`
 > **Mode HA :** `single`
@@ -35,7 +35,7 @@ Requiert la présence d'au moins Eric OU Mamour (zone.home).
 
 ---
 
-## ⚙️ Actions — Choose
+## ⚙️ Actions - Choose
 
 | Cas | Action |
 |:---|:---|

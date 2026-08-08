@@ -11,7 +11,7 @@
 |:------|:-------|
 | 📁 **Path** | `dashboard-tablette` → Ligne 3, Colonne 1 |
 | 🔗 **Tap** | `/dashboard-tablette/lumieres` |
-| 🏗️ **Layout** | `custom:button-card` — grid 3 cols (Pièce / État / Compteur) |
+| 🏗️ **Layout** | `custom:button-card` - grid 3 cols (Pièce / État / Compteur) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-05-04 |
@@ -19,7 +19,7 @@
 
 ---
 
-# 💡 L3C1 — Vignette Commandes Éclairage
+# 💡 L3C1 - Vignette Commandes Éclairage
 
 ---
 
@@ -46,7 +46,7 @@ Vignette affichant l'état de l'éclairage par pièce sur **3 colonnes** : nom d
 
 ---
 
-## 📍 CODE — VIGNETTE
+## 📍 CODE - VIGNETTE
 
 ```yaml
 type: custom:button-card
@@ -226,7 +226,7 @@ custom_fields:
 
 ## 🧠 LOGIQUE DES COLONNES
 
-### Colonne `etat` — État textuel (depuis templates)
+### Colonne `etat` - État textuel (depuis templates)
 
 Source : `sensor.lumiere_*_etat` → `[TPL] P3_eclairage/ui_dashboard/etats_status.yaml`
 
@@ -239,7 +239,7 @@ Source : `sensor.lumiere_*_etat` → `[TPL] P3_eclairage/ui_dashboard/etats_stat
 | `Chambre` / `Tête Lit` / `Ch.+zG` / `Ch.+zÉ` / `Zone G.` / `Zone É.` | `lightgreen` | État partiel chambre (prise ON ou OFF) |
 | `N/A` / `erreur` | `#aaaaaa` | Entité indisponible / unknown |
 
-#### Chambre — Tous les cas (couches 1+2+3)
+#### Chambre - Tous les cas (couches 1+2+3)
 
 | État `chambre_etat` | Prise | Actifs | Couleur `etat` | Couleur `active` |
 |:--------------------|:-----:|:------:|:--------------:|:----------------:|
@@ -254,33 +254,33 @@ Source : `sensor.lumiere_*_etat` → `[TPL] P3_eclairage/ui_dashboard/etats_stat
 | `Chambre` | OFF | 1/1 | vert | vert |
 | `Éco.` | OFF | 0/1 → override | orange | orange |
 
-### Colonne `active` — Compteur X/N
+### Colonne `active` - Compteur X/N
 
 | Pièce | Entités comptées | Total | Couleur logique |
 |-------|-----------------|-------|-----------------|
 | Appart. | `light.entree` + `light.couloir` | 2 | vert=2/2, rouge=0/2, orange=1/2 |
 | Salon | `light.salon` + `light.table` | 2 | vert=2/2, rouge=0/2, orange=1/2 |
 | Cuisine | `light.cuisine` | 1 | vert=1/1, rouge=0/1 |
-| Bureau | Logique complexe *(voir ci-dessous)* | 1 ou 2 | — |
+| Bureau | Logique complexe *(voir ci-dessous)* | 1 ou 2 | - |
 | SdB | `light.hue_white_lamp_salle_de_bain` | 1 | vert=1/1, rouge=0/1 |
 | Chambre | `light.chambre` + bougies si prise ON | 1 ou 3 | vert=`Allumé` (3/3) ou chambre seule (1/1 prise OFF), orange=partiel (1/3 ou 2/3) ou `Éco.` (override) |
 
-#### Bureau — Logique spécifique
+#### Bureau - Logique spécifique
 
 Le bureau compte 2 sources : la lumière principale (`light.bureau_*`) et l'écran Hue Sync (`sensor.lumiere_ecran_etat`). Le total affiché varie selon l'état :
 
 | `sensor.bureau_etat` | `sensor.lumiere_ecran_etat` | Affiché | Couleur |
 |----------------------|-----------------------------|---------|---------|
-| `Allumé` | — | `2/2` | vert |
-| `AlluSync` | — | `2/2` | orange |
-| `Synchro` | — | `1/2` | orange |
+| `Allumé` | - | `2/2` | vert |
+| `AlluSync` | - | `2/2` | orange |
+| `Synchro` | - | `1/2` | orange |
 | `Bureau` | `Éco.` | `1/1` | vert |
 | `Bureau` | autre | `1/2` | orange |
-| `Écran` | — | `1/2` | orange |
-| `Éco.` | — | `0/1` | orange |
-| *(autre)* | — | `0/2` | rouge |
+| `Écran` | - | `1/2` | orange |
+| `Éco.` | - | `0/1` | orange |
+| *(autre)* | - | `0/2` | rouge |
 
-#### Chambre — Logique dynamique (totalCount variable)
+#### Chambre - Logique dynamique (totalCount variable)
 
 Le total de la chambre dépend de l'état de `switch.prise_tete_de_lit_chambre` :
 - **Prise OFF** → 1 entité (`light.chambre`) → total = 1
@@ -298,15 +298,15 @@ référencés dans le code de cette vignette. À intégrer lors d'une prochaine 
 | Entité | Remplace / Complète | Note |
 |:-------|:--------------------|:-----|
 | `sensor.lumiere_bureau_etat` | `sensor.bureau_etat` | Nouveau slug unifié (préfixe `lumiere_`) |
-| `sensor.lumiere_chambre_etat` | `sensor.chambre_etat` | Idem — slug harmonisé |
+| `sensor.lumiere_chambre_etat` | `sensor.chambre_etat` | Idem - slug harmonisé |
 | `sensor.lumiere_tete_de_lit_etat` | *(absent)* | Nouvel état dédié tête de lit chambre |
 
 > **Note :** Les anciens `sensor.bureau_etat` et `sensor.chambre_etat` sont toujours présents dans
-> `etats_status.yaml` et fonctionnels — pas de migration urgente.
+> `etats_status.yaml` et fonctionnels - pas de migration urgente.
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ### Templates d'état (colonne `etat`)
 
@@ -337,17 +337,17 @@ référencés dans le code de cette vignette. À intégrer lors d'une prochaine 
 
 ---
 
-## 📁 YAML SOURCE — `etats_status.yaml`
+## 📁 YAML SOURCE - `etats_status.yaml`
 
 > Fichier : `templates/P3_eclairage/ui_dashboard/etats_status.yaml`
 > C'est lui qui génère **tous** les `sensor.lumiere_*_etat` lus par cette vignette.
 
-### 🖥️ Setup Bureau — à lire avant le code
+### 🖥️ Setup Bureau - à lire avant le code
 
 Le bureau a **3 couches** d'éclairage :
 1. **Lumières blanches** : `light.hue_white_lamp_bureau_1` + `light.hue_white_lamp_bureau_2` (boules lumineuses)
-2. **Play bars** : `light.hue_play_1/2/3_pc_bureau` (rétroéclairage moniteur — Hue Sync)
-3. **Switch Sync** : `switch.ecran_p_c_3_play_hue` — coupe la prise Hue Sync Box (économie énergie)
+2. **Play bars** : `light.hue_play_1/2/3_pc_bureau` (rétroéclairage moniteur - Hue Sync)
+3. **Switch Sync** : `switch.ecran_p_c_3_play_hue` - coupe la prise Hue Sync Box (économie énergie)
 
 Cela donne **3 sensors** distincts : `lumiere_bureau_etat` (boules lumineuses seuls), `lumiere_ecran_etat` (Play bars + Sync), `bureau_etat` (synthèse des deux).
 
@@ -389,7 +389,7 @@ Cela donne **3 sensors** distincts : `lumiere_bureau_etat` (boules lumineuses se
     {% endif %}
 
 # ┌──────────────────────────────────────┐
-# │ 7. BUREAU — Plafonniers              │
+# │ 7. BUREAU - Plafonniers              │
 # └──────────────────────────────────────┘
 - name: "Lumière Bureau État"
   unique_id: lumiere_bureau_etat
@@ -407,7 +407,7 @@ Cela donne **3 sensors** distincts : `lumiere_bureau_etat` (boules lumineuses se
     {% endif %}
 
 # ┌──────────────────────────────────────┐
-# │ 7. BUREAU — Écran / Hue Sync         │
+# │ 7. BUREAU - Écran / Hue Sync         │
 # └──────────────────────────────────────┘
 # switch.ecran_p_c_3_play_hue = prise Hue Sync Box
 # Éco. = prise coupée (économie)
@@ -438,7 +438,7 @@ Cela donne **3 sensors** distincts : `lumiere_bureau_etat` (boules lumineuses se
     {% endif %}
 
 # ┌──────────────────────────────────────┐
-# │ 7. BUREAU — Synthèse (bureau_etat)   │
+# │ 7. BUREAU - Synthèse (bureau_etat)   │
 # └──────────────────────────────────────┘
 # Agrège lumiere_bureau_etat + lumiere_ecran_etat
 - name: "Bureau État"
@@ -498,7 +498,7 @@ Cela donne **3 sensors** distincts : `lumiere_bureau_etat` (boules lumineuses se
 
 ## 🔗 FICHIERS LIÉS
 
-- [`PAGE_ECLAIRAGE.md`](./PAGE_ECLAIRAGE.md) — page détaillée lampes *(à créer)*
+- [`PAGE_ECLAIRAGE.md`](./PAGE_ECLAIRAGE.md) - page détaillée lampes *(à créer)*
 - Fichier source templates : `templates/P3_eclairage/ui_dashboard/etats_status.yaml`
 
 ---

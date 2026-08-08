@@ -1,4 +1,4 @@
-# Eco Prises Dynamique — By Présence/Groupe
+# Eco Prises Dynamique - By Présence/Groupe
 
 **Catégorie :** P2_prises
 **Alias HA :** `Eco. PRISES DINAMIQUE -> By-Présence/Groupe`

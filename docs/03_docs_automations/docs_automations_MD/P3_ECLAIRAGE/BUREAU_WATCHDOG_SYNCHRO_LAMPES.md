@@ -1,4 +1,4 @@
-# Bureau — Watchdog Synchronisation Lampes Blanches
+# Bureau - Watchdog Synchronisation Lampes Blanches
 
 **Catégorie :** P3_eclairage
 **Alias HA :** `BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES`

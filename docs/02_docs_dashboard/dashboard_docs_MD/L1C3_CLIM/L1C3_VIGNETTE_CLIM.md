@@ -9,7 +9,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📍 **Position** | Dashboard HOME — Ligne 1, Colonne 3 |
+| 📍 **Position** | Dashboard HOME - Ligne 1, Colonne 3 |
 | 🔗 **Navigation** | `/dashboard-tablette/clim` |
 | 🃏 **Type de carte** | `custom:button-card` |
 | 🌡️ **Entités** | 18 sensors/climates (5 pièces × état + consigne + mode global) |
@@ -30,9 +30,9 @@
 2. [Rendu visuel](#rendu-visuel)
 3. [Code source complet](#code-source-complet)
 4. [Entités utilisées](#entités-utilisées)
-5. [Logique JS — Colonne PIÈCE](#logique-js--colonne-pièce)
-6. [Logique JS — Colonne MODE](#logique-js--colonne-mode)
-7. [Logique JS — Colonne CONSIGNE](#logique-js--colonne-consigne)
+5. [Logique JS - Colonne PIÈCE](#logique-js--colonne-pièce)
+6. [Logique JS - Colonne MODE](#logique-js--colonne-mode)
+7. [Logique JS - Colonne CONSIGNE](#logique-js--colonne-consigne)
 8. [Paramètres clés](#paramètres-clés)
 9. [Dépannage](#dépannage)
 
@@ -305,13 +305,13 @@ custom_fields:
 | `climate.soufflant_salle_de_bain` | `[NAT]` Meross | Consigne T° soufflant SdB (attr: temperature) |
 | `climate.clim_chambre_rm4_mini` | `[NAT]` SmartIR | Consigne T° chambre (attr: temperature) |
 
-> Les 18 entités sont identiques dans `entities:` et `triggers_update:` — recalcul instantané à chaque changement.
+> Les 18 entités sont identiques dans `entities:` et `triggers_update:` - recalcul instantané à chaque changement.
 
-> **Note `sensor.sdb_soufflant_etat`** : utilisé dans le JS colonne `mode` mais **absent de la liste `entities:`** — cela signifie qu'il ne déclenche pas de rafraîchissement automatique. Si nécessaire, l'ajouter à `triggers_update:`.
+> **Note `sensor.sdb_soufflant_etat`** : utilisé dans le JS colonne `mode` mais **absent de la liste `entities:`** - cela signifie qu'il ne déclenche pas de rafraîchissement automatique. Si nécessaire, l'ajouter à `triggers_update:`.
 
 ---
 
-## 🎨 LOGIQUE JS — COLONNE PIÈCE
+## 🎨 LOGIQUE JS - COLONNE PIÈCE
 
 ### Structure des 8 lignes
 ```
@@ -336,7 +336,7 @@ Ligne 8 : Chambre              → couleur selon power_status
 
 ---
 
-## 🎨 LOGIQUE JS — COLONNE MODE
+## 🎨 LOGIQUE JS - COLONNE MODE
 
 ### Rendu des 8 lignes
 ```
@@ -364,7 +364,7 @@ Ligne 8 : Mode Chambre     ← sensor.clim_chambre_etat
 
 ---
 
-## 🎨 LOGIQUE JS — COLONNE CONSIGNE
+## 🎨 LOGIQUE JS - COLONNE CONSIGNE
 
 ### Rendu des 8 lignes
 ```
@@ -420,16 +420,16 @@ return 'N/A'
 
 ### La vignette affiche "N/A" partout
 1. Vérifier que les templates P1 sont chargés : `Configuration → Vérifier la config`
-2. `sensor.temperature_moyenne_interieure` doit être `numeric` — vérifier dans `Outils de développement → États`
+2. `sensor.temperature_moyenne_interieure` doit être `numeric` - vérifier dans `Outils de développement → États`
 3. Si `sensor.mode_ete_hiver_etat` est `unknown` : le template `ui_dashboard.yaml` n'est pas chargé
 
 ### Les modes ne changent pas après modification
-1. `triggers_update` contient bien les 18 entités — la carte se recalcule automatiquement
+1. `triggers_update` contient bien les 18 entités - la carte se recalcule automatiquement
 2. `sensor.sdb_soufflant_etat` absent de `triggers_update` → ajouter si le SdB ne se rafraîchit pas
 
 ### Le Δ ADEME est toujours rouge en été
 - Vérifier `sensor.delta_ademe_recommande` : il doit retourner une valeur négative (T° int < T° ext)
-- Vérifier que `sensor.mode_ete_hiver` (sans `_etat`) retourne bien `cool` — ce sensor est différent de `sensor.mode_ete_hiver_etat`
+- Vérifier que `sensor.mode_ete_hiver` (sans `_etat`) retourne bien `cool` - ce sensor est différent de `sensor.mode_ete_hiver_etat`
 
 ### Les consignes affichent N/A
 - Les entités `climate.*` doivent être disponibles (SmartIR connecté, Meross connecté)

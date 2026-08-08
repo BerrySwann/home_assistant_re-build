@@ -1,4 +1,4 @@
-# (E) MINUTERIE SÈCHE-SERVIETTES SDB — TIMER 2H
+# (E) MINUTERIE SÈCHE-SERVIETTES SDB - TIMER 2H
 
 > **Fichier :** `automations_corrige/P1_sdb/E_minuterie_seche_serviettes.yaml`
 > **Mode HA :** `single`

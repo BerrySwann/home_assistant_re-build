@@ -1,4 +1,4 @@
-# AUTOMATION ÉCO PRISES — PILOTAGE DYNAMIQUE
+# AUTOMATION ÉCO PRISES - PILOTAGE DYNAMIQUE
 
 > **Fichier :** `automations_corrige/P2_prises/eco_prises.yaml`
 > **Mode HA :** `queued`
@@ -41,8 +41,8 @@ Recalcule à chaque changement de groupe et à chaque transition HC/HP (01h, 07h
 |:---:|:---:|:---:|:---:|:---:|:---:|
 | G1 | OFF | HC seulement | OFF | OFF | OFF |
 | G2 | target | target | ON | OFF | ON |
-| G3 | OFF | HC seulement | ON | — | OFF |
-| G4 | target | target | ON | — | ON |
+| G3 | OFF | HC seulement | ON | - | OFF |
+| G4 | target | target | ON | - | ON |
 
 ---
 

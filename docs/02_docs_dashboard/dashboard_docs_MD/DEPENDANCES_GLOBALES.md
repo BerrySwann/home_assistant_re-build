@@ -1,8 +1,8 @@
-# 🔗 DÉPENDANCES GLOBALES — TABLEAU DE BORD HA
+# 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
 *Dernière mise à jour : 2026-07-20 (P1_01 confort_nuit : palier nuit été dynamique selon vigilance canicule - nouvelle dépendance M_01_meteo_alertes_card → P1_01_MASTER → L1C3)*
 *2026-07-19 (Audit complet intégralité du fichier : L1C1 à L6C3 + HOME PAGE + Complément fichiers racine, sur la réalité des yaml prod. Corrections : entités obsolètes/fictives, mauvaise attribution de fichiers, section tronquée complétée par hypothèse. Voir détail dans les sections concernées.)*
 *2026-07-18 (Nettoyage résidu chambre : capteur MQTT dispo + bloc mqtt: de configuration.yaml + dossier mqtt/, local + prod H:\ - Versions L1C3 2026-07-18 ajoutées : consigne chambre via climate direct + badge remote rétabli)*
-*2026-07-17 (Resync local ← GitHub/prod : configuration.yaml + scripts.yaml — fix chambre script J-2-0)*
+*2026-07-17 (Resync local ← GitHub/prod : configuration.yaml + scripts.yaml - fix chambre script J-2-0)*
 
 ---
 
@@ -12,7 +12,7 @@
 |:-------:|:-------------|
 | ✅ | Chaîne validée et opérationnelle |
 | 🔲 | À documenter |
-| ⚠️ | Rupture de chaîne ou entité obsolète — ex : `source:` pointe vers une entité supprimée/renommée, `unique_id` dupliqué, fichier YAML présent en prod mais absent de `TREE_CORRIGE`, ou entité référencée dans le dashboard mais inexistante dans HA |
+| ⚠️ | Rupture de chaîne ou entité obsolète - ex : `source:` pointe vers une entité supprimée/renommée, `unique_id` dupliqué, fichier YAML présent en prod mais absent de `TREE_CORRIGE`, ou entité référencée dans le dashboard mais inexistante dans HA |
 | NAT | Entité native HA (intégration directe) |
 | TPL | Template (`templates/`) |
 | UM | Utility Meter (`utility_meter/`) |
@@ -20,7 +20,7 @@
 
 ---
 
-## MATRICE DES 18 VIGNETTES — STATUT DÉPENDANCES
+## MATRICE DES 18 VIGNETTES - STATUT DÉPENDANCES
 
 | ID | Vignette | Statut |
 |:---|:---------|:------:|
@@ -45,13 +45,13 @@
 
 ---
 
-## ✅ L1C1 — MÉTÉO (VIGNETTE + PAGE)
+## ✅ L1C1 - MÉTÉO (VIGNETTE + PAGE)
 *Validée le 2026-05-09*
 
-### Vignette — Chaîne de dépendances
+### Vignette - Chaîne de dépendances
 
 ```
-AUCUNE ENTITÉ — Vignette purement navigationnelle
+AUCUNE ENTITÉ - Vignette purement navigationnelle
   └─→ tap_action: navigate → /dashboard-tablette/meteo
         └─→ PAGE MÉTÉO DÉTAILLÉE (voir ci-dessous)
 ```
@@ -59,18 +59,18 @@ AUCUNE ENTITÉ — Vignette purement navigationnelle
 > La vignette `custom:button-card` est statique : icône `mdi:weather-partly-cloudy`, nom "Météo".
 > Aucun `triggers_update`, aucun `custom_fields`, aucune entité référencée.
 
-### Page — Chaîne de dépendances
+### Page - Chaîne de dépendances
 
 ```
 MATÉRIEL / INTÉGRATION
   ├─→ Météo France (intégration officielle)
   │     └─→ sensor.06_weather_alert / weather.vence / sensor.vence_*  (NAT)
   ├─→ command_line: carte_meteo_france.yaml
-  │     └─→ meteo_france_alertes_image_today / _tomorrow  (PNG statique — PAS d'entité camera, camera: désactivé)
+  │     └─→ meteo_france_alertes_image_today / _tomorrow  (PNG statique - PAS d'entité camera, camera: désactivé)
   ├─→ Blitzortung (intégration MQTT native)
   │     └─→ sensor.maison_lightning_azimuth / _distance / _counter  (NAT)
   │           └─→ UM: M_03_meteo_UM_blitzortung.yaml  (eclair_annuel/mensuel/hebdomadaire/quotidien/horaire)
-  │           └─→ SEN: M_03_meteo_sensors_blitzortung.yaml  (blitzortung_lightning_localisation — API Nominatim)
+  │           └─→ SEN: M_03_meteo_sensors_blitzortung.yaml  (blitzortung_lightning_localisation - API Nominatim)
   │           └─→ TPL: M_03_meteo_blitzortung.yaml  (lightning_direction_label / _distance_km / _bearing / temps_depuis_le_dernier_impact_de_foudre / dernier_impact_temps_reel)
   ├─→ Météo France (alertes) + MeteoAlarm (fallback)
   │     └─→ sensor.06_weather_alert / binary_sensor.meteoalarm  (NAT)
@@ -87,7 +87,7 @@ MATÉRIEL / INTÉGRATION
 > (`binary_sensor.meteo_france_alerte_*`, `sensor.meteo_france_wind_speed/_bearing`,
 > `camera.carte_vigilance_meteo_france`, les 4 `*_card_content` génériques). Noms réels
 > vérifiés directement dans le corps des fichiers yaml le 2026-07-19. `M_05_cycle_solaire.yaml`
-> (absent de cette doc jusqu'ici) ajouté — c'est lui qui calcule la durée du jour, pas `sun.sun`.
+> (absent de cette doc jusqu'ici) ajouté - c'est lui qui calcule la durée du jour, pas `sun.sun`.
 
 ### Entités consommées par la page
 
@@ -104,12 +104,12 @@ MATÉRIEL / INTÉGRATION
 | `sensor.lightning_direction_label` / `_distance_km` / `_bearing` / `temps_depuis_le_dernier_impact_de_foudre` / `dernier_impact_temps_reel` | TPL | `templates/meteo/M_03_meteo_blitzortung.yaml` |
 | `sensor.duree_du_jour` / `tendance_duree_jour` / `variation_quotidienne` | TPL | `templates/meteo/M_05_cycle_solaire.yaml` (calcul astronomique zone.home, PAS sun.sun) |
 
-### Entités ApexCharts (data_generator JS — durée du jour)
+### Entités ApexCharts (data_generator JS - durée du jour)
 
 | Données | Source | Note |
 |:--------|:-------|:-----|
-| Durée du jour (courbe annuelle théorique) | Calcul JS astronomique | `lat = 43.72°N` — formule déclinaison + angle horaire |
-| Gain/Perte quotidien (area smooth) | Calcul JS différentiel | Plage complète 365j — pas de `extend_to` |
+| Durée du jour (courbe annuelle théorique) | Calcul JS astronomique | `lat = 43.72°N` - formule déclinaison + angle horaire |
+| Gain/Perte quotidien (area smooth) | Calcul JS différentiel | Plage complète 365j - pas de `extend_to` |
 | `sensor.sun_next_rising` | NAT | Lever réel (graphe historique) |
 | `sensor.sun_next_setting` | NAT | Coucher réel (graphe historique) |
 
@@ -121,26 +121,26 @@ MATÉRIEL / INTÉGRATION
 | `Dashboard/L1C1_01_Meteo/page_L1C1_meteo_2026-05-09.yaml` | ✅ |
 | `command_line/meteo/carte_meteo_france.yaml` | ✅ |
 | `utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml` | ✅ |
-| `sensors/meteo/M_03_meteo_sensors_blitzortung.yaml` | ✅ *(ajouté 2026-07-19 — manquait)* |
+| `sensors/meteo/M_03_meteo_sensors_blitzortung.yaml` | ✅ *(ajouté 2026-07-19 - manquait)* |
 | `templates/meteo/M_01_meteo_alertes_card.yaml` | ✅ |
 | `templates/meteo/M_02_meteo_vent_vence_card.yaml` | ✅ |
 | `templates/meteo/M_03_meteo_blitzortung.yaml` | ✅ |
-| `templates/meteo/M_05_cycle_solaire.yaml` | ✅ *(ajouté 2026-07-19 — manquait, calcule la durée du jour)* |
+| `templates/meteo/M_05_cycle_solaire.yaml` | ✅ *(ajouté 2026-07-19 - manquait, calcule la durée du jour)* |
 
-> `templates/meteo/M_04_tendances_th_ext_card.yaml` retiré de cette liste le 2026-07-19 —
+> `templates/meteo/M_04_tendances_th_ext_card.yaml` retiré de cette liste le 2026-07-19 -
 > son entête déclare lui-même `AVAL : L1C2 Températures`, pas L1C1. Voir section L1C2.
 
 ---
 
-## ✅ L1C2 — TEMPÉRATURES (VIGNETTE + PAGE)
+## ✅ L1C2 - TEMPÉRATURES (VIGNETTE + PAGE)
 *Validée le 2026-05-13*
 
-### Vignette — Chaîne de dépendances
+### Vignette - Chaîne de dépendances
 
 ```
 MATÉRIEL (SONOFF TH via Z2M)
-  └─→ sensor.th_*_temperature / _humidity  (NAT — 7 pièces)
-        └─→ VIGNETTE L1C2 (button-card — grille piece/temp/humidite)
+  └─→ sensor.th_*_temperature / _humidity  (NAT - 7 pièces)
+        └─→ VIGNETTE L1C2 (button-card - grille piece/temp/humidite)
               └─→ tap_action: navigate → /dashboard-tablette/temperatures
 ```
 
@@ -163,7 +163,7 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `sensor.th_chambre_temperature` | NAT | SONOFF via Z2M |
 | `sensor.th_chambre_humidity` | NAT | SONOFF via Z2M |
 
-### Page — Entités clés supplémentaires
+### Page - Entités clés supplémentaires
 
 | Entité | Type | Fichier source |
 |:-------|:----:|:--------------|
@@ -185,13 +185,13 @@ MATÉRIEL (SONOFF TH via Z2M)
 
 > ⚠️ **Corrigé le 2026-07-19** : `temperature_moyenne_interieure`, `temperature_delta_affichage`,
 > `delta_ademe_recommande` étaient attribués à tort à `P1_ui_dashboard/P1_ui_dashboard.yaml`
-> (ce fichier ne produit que des entités power_status/clim_*_etat — vérifié dans son propre
+> (ce fichier ne produit que des entités power_status/clim_*_etat - vérifié dans son propre
 > corps, AVAL déclaré L1C3/L2C2, pas L1C2). Vrai fichier source : `P1_01_clim_logique_system_autom.yaml`
 > (son AVAL déclare lui-même "L1C2 Températures" pour ces 4 sensors). Les entrées fictives
 > `sensor.th_*_temperature_trend` / `_humidity_trend` (génériques, toutes pièces) ont été
-> retirées — seule la sonde balcon nord a un calcul de tendance réel (`M_04_tendances_th_ext_card.yaml`,
-> absent de cette section jusqu'ici — ajouté). `sensor.*_power_status` / `clim_*_etat` retirés
-> d'ici — ce sont des entités Clim ON/OFF, déjà documentées dans la section L1C3 ci-dessous,
+> retirées - seule la sonde balcon nord a un calcul de tendance réel (`M_04_tendances_th_ext_card.yaml`,
+> absent de cette section jusqu'ici - ajouté). `sensor.*_power_status` / `clim_*_etat` retirés
+> d'ici - ce sont des entités Clim ON/OFF, déjà documentées dans la section L1C3 ci-dessous,
 > pas des données de température.
 
 ### Streamline templates utilisés
@@ -199,27 +199,27 @@ MATÉRIEL (SONOFF TH via Z2M)
 | Template | Rôle |
 |:---------|:-----|
 | `temperature_humidite` | Affichage T°+Humidité par pièce |
-| `calcule_temp_cible` | Pop-up #tendances — calcul T° cible *(corrigé 2026-06-21 : entités + logique cool)* |
-| `carte_des_temperatures` | Pop-ups #salon/#bureau/etc — historique T° |
+| `calcule_temp_cible` | Pop-up #tendances - calcul T° cible *(corrigé 2026-06-21 : entités + logique cool)* |
+| `carte_des_temperatures` | Pop-ups #salon/#bureau/etc - historique T° |
 
-> ⚠️ **Flag** : `custom:temperature-heatmap-card` utilisé dans le pop-up `#exterieur` — **absent du référentiel HACS officiel**. À vérifier / ajouter si installé.
+> ⚠️ **Flag** : `custom:temperature-heatmap-card` utilisé dans le pop-up `#exterieur` - **absent du référentiel HACS officiel**. À vérifier / ajouter si installé.
 
 ### Fichiers YAML déployables
 
 | Fichier | Statut |
 |:--------|:------:|
 | `Dashboard/L1C2_02_Temperatures/vignette_L1C2_temperatures_2026-05-12.yaml` | ✅ |
-| `Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-05-22.yaml` | ⚠️ obsolète — `climate.clim_chambre_rm4_mini` |
+| `Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-05-22.yaml` | ⚠️ obsolète - `climate.clim_chambre_rm4_mini` |
 | `Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-07-14.yaml` | ✅ `climate.clim_chambre_rm4_mini` + `sensor.temperature_corrige_chambre` |
-| `templates/meteo/M_04_tendances_th_ext_card.yaml` | ✅ *(ajouté 2026-07-19 — manquait)* |
-| `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | ✅ *(fichier partagé — AVAL principal L1C3, voir aussi cette section)* |
+| `templates/meteo/M_04_tendances_th_ext_card.yaml` | ✅ *(ajouté 2026-07-19 - manquait)* |
+| `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | ✅ *(fichier partagé - AVAL principal L1C3, voir aussi cette section)* |
 
 ---
 
-## ✅ L1C3 — COMMANDES CLIM (VIGNETTE + PAGE)
+## ✅ L1C3 - COMMANDES CLIM (VIGNETTE + PAGE)
 *Validée le 2026-05-13 - chambre sur `climate.clim_chambre_rm4_mini` depuis le 2026-07-14*
 
-### Vignette — Chaîne de dépendances
+### Vignette - Chaîne de dépendances
 
 ```
 MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
@@ -228,16 +228,16 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
               └─→ sensor.temperature_moyenne_interieure  (TPL P1_clim_logique)
               └─→ sensor.delta_ademe_recommande          (TPL P1_clim_logique)
               └─→ sensor.mode_ete_hiver_etat             (TPL P1_clim_logique)
-                    └─→ VIGNETTE L1C3 (button-card — grille piece/mode/consigne)
+                    └─→ VIGNETTE L1C3 (button-card - grille piece/mode/consigne)
                           └─→ tap_action: navigate → /dashboard-tablette/clim
 ```
 
 > ⚠️ Corrigé le 2026-07-19 : `temperature_moyenne_interieure` attribué à tort à
 > `P1_ui_dashboard.yaml` (ce fichier ne contient que des sensors power_status/*_etat,
-> vérifié dans son corps) — vrai fichier source : `P1_01_clim_logique_system_autom.yaml`.
-> `climate.soufflant_salle_de_bain` retiré — n'existe pas (le soufflant SDB est piloté
+> vérifié dans son corps) - vrai fichier source : `P1_01_clim_logique_system_autom.yaml`.
+> `climate.soufflant_salle_de_bain` retiré - n'existe pas (le soufflant SDB est piloté
 > via `switch.inter_soufflant_salle_de_bain` + `input_select.etat_resistance_soufflant_sdb`,
-> pas une entité climate — vérifié, aucune occurrence dans tout `config_system_YAML/`).
+> pas une entité climate - vérifié, aucune occurrence dans tout `config_system_YAML/`).
 
 ### Entités consommées par la vignette
 
@@ -290,13 +290,13 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 | `script.j_1_1_salon_clim_on_off_intelligent` | Badge power Salon | ✅ |
 | `script.j_1_2_bureau_clim_on_off_intelligent` | Badge power Bureau | ✅ |
 | `script.j_1_3_chambre_clim_on_off_intelligent` | Badge power Chambre | ✅ |
-| `script.j_2_0_secu_arret_clim_protege` | Verrou sécurité (déclenché en interne, pas depuis un badge) | ✅ *(fix 2026-07-17 : `clim_entity` chambre — condition spéciale ajoutée pour pointer sur `climate.clim_chambre_rm4_mini` au lieu du pattern générique `climate.clim_{{p}}_rm4_mini`, synchronisé depuis prod/GitHub)* |
+| `script.j_2_0_secu_arret_clim_protege` | Verrou sécurité (déclenché en interne, pas depuis un badge) | ✅ *(fix 2026-07-17 : `clim_entity` chambre - condition spéciale ajoutée pour pointer sur `climate.clim_chambre_rm4_mini` au lieu du pattern générique `climate.clim_{{p}}_rm4_mini`, synchronisé depuis prod/GitHub)* |
 
 ### Streamline templates utilisés
 
 | Template | Rôle |
 |:---------|:-----|
-| `calcule_temp_cible` | Pop-up `#calcul` — delta intérieur/extérieur *(corrigé 2026-06-21)* |
+| `calcule_temp_cible` | Pop-up `#calcul` - delta intérieur/extérieur *(corrigé 2026-06-21)* |
 | `nav_bar` | Barre de navigation bas de page |
 
 ### Fichiers YAML déployables
@@ -314,14 +314,14 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 
 | Entité | Type | Rôle |
 |:-------|:----:|:-----|
-| `climate.clim_chambre_rm4_mini` | Climate (Broadlink) | Thermostat chambre — actif — consigne lue directement par la vignette depuis le 2026-07-18 |
+| `climate.clim_chambre_rm4_mini` | Climate (Broadlink) | Thermostat chambre - actif - consigne lue directement par la vignette depuis le 2026-07-18 |
 | `Dashboard/L1C3_03_Commandes_Clim/card_prog_clim_salon_2026-07-14.yaml` | ✅ |
 | `Dashboard/L1C3_03_Commandes_Clim/card_prog_radiateur_cuisine_2026-07-14.yaml` | ✅ |
 | `Dashboard/L1C3_03_Commandes_Clim/card_prog_clim_bureau_2026-07-14.yaml` | ✅ |
 | `Dashboard/L1C3_03_Commandes_Clim/card_prog_soufflant_sdb_2026-07-14.yaml` | ✅ |
 | `Dashboard/L1C3_03_Commandes_Clim/card_prog_clim_chambre_2026-07-14.yaml` | ✅ |
 
-### Entités Scheduler consommées — Programmation manuelle (ajout 2026-07-14)
+### Entités Scheduler consommées - Programmation manuelle (ajout 2026-07-14)
 
 | Entité | Equipment | Type |
 |:-------|:----------|:-----|
@@ -343,59 +343,59 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 | `docs_automations/TREE_CORRIGE/P1_clim_chauffage/a_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml` | (A-0) CLIM JOUR | ✅ | 2026-06-21 |
 | `docs_automations/TREE_CORRIGE/P1_clim_chauffage/b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml` | (B-0) CLIM NUIT | ✅ | 2026-06-21 |
 
-### Nouveaux sensors P1_MASTER — session 2026-06-21
+### Nouveaux sensors P1_MASTER - session 2026-06-21
 
 | Entité | Type | Fichier source | Consommé par |
 |:-------|:----:|:--------------|:-------------|
 | `sensor.temperature_eco_ete` | TPL | `P1_MASTER_CLIM_TEMPLATES.yaml` | `temperature_eco_ete_corrige`, automations a_0/b_0 |
 | `sensor.temperature_eco_ete_corrige` | TPL | `P1_MASTER_CLIM_TEMPLATES.yaml` | automations a_0 (temp_eco_ec) + b_0 (temp_eco_ec) |
 
-### Corrections sensors P1_MASTER — session 2026-06-21
+### Corrections sensors P1_MASTER - session 2026-06-21
 
 | Entité | Correction |
 |:-------|:-----------|
 | `sensor.temperature_corrige_mamour` | Été : `min(T°ext - 1, 27)` dynamique |
 | `sensor.temperature_corrige_eric` | Été : `min(T°ext + 1, 28)` dynamique |
-| `sensor.temperature_corrige_chambre` | Été : `min(T°ext + 1, 28)` — hiver : fallback `float(18)` à corriger |
+| `sensor.temperature_corrige_chambre` | Été : `min(T°ext + 1, 28)` - hiver : fallback `float(18)` à corriger |
 | `sensor.temperature_eco_hiver_corrige` | Source corrigée : lit `temperature_eco_hiver` (était `temperature_eco_ete`) |
 | `sensor.temperature_confort_jour` | À corriger : ajouter `cool` mode → retourner `base` (26°C) |
 
-### Corrections sensors P1_MASTER — session 2026-06-29
+### Corrections sensors P1_MASTER - session 2026-06-29
 
 | Entité | Correction | Statut |
 |:-------|:-----------|:------:|
 | `sensor.temperature_eco_ete_corrige` | Courbe validée : ≤28°C→30 / 29-32°C→29 / >32°C→28 (monotone décroissante ✓) | ✅ |
-| `sensor.temperature_confort_nuit` | Seuil 29°C ajouté — zone 26-32°C scindée : ≤29→+d1(26°C) / >29→+d2(27°C) — floor nuit 27°C garanti — **remplacé, voir section 2026-07-19/20 ci-dessous** | ✅ |
+| `sensor.temperature_confort_nuit` | Seuil 29°C ajouté - zone 26-32°C scindée : ≤29→+d1(26°C) / >29→+d2(27°C) - floor nuit 27°C garanti - **remplacé, voir section 2026-07-19/20 ci-dessous** | ✅ |
 
-### Corrections sensors P1_MASTER — sessions 2026-07-19 / 2026-07-20
+### Corrections sensors P1_MASTER - sessions 2026-07-19 / 2026-07-20
 
 | Entité | Correction | Statut |
 |:-------|:-----------|:------:|
 | `sensor.temperature_confort_nuit` | 07-19 : palier été +d2 relevé de >29 à >30 (confort nuit) | ✅ |
-| `sensor.temperature_confort_nuit` | 07-20 : palier dynamique selon `sensor.alerte_canicule` (M_01_meteo_alertes_card) : Vert/indispo=29, Jaune=30, Orange=30, Rouge=31 — T°ext ≤ palier → 26°C, au-delà → 27°C — nouvelle dépendance M_01 → P1_01_MASTER → L1C3 | ✅ |
-| `sensor.message_clim_personnalise_7h30_21h00` (P1_02) | 07-20 : 8 branches réalignées sur t_*_target du script p1_master_gestion_clim — g1 cool → [ECO COOL] eco_ete_corrige ; g2/g3/g4 cool → corrige_m/e/c ; g2 heat Bureau → eco ; g3 heat Salon → conf_e. Sources : + `temperature_eco_ete_corrige`, - `temperature_cible` / `temperature_confort_jour` | ✅ |
+| `sensor.temperature_confort_nuit` | 07-20 : palier dynamique selon `sensor.alerte_canicule` (M_01_meteo_alertes_card) : Vert/indispo=29, Jaune=30, Orange=30, Rouge=31 - T°ext ≤ palier → 26°C, au-delà → 27°C - nouvelle dépendance M_01 → P1_01_MASTER → L1C3 | ✅ |
+| `sensor.message_clim_personnalise_7h30_21h00` (P1_02) | 07-20 : 8 branches réalignées sur t_*_target du script p1_master_gestion_clim - g1 cool → [ECO COOL] eco_ete_corrige ; g2/g3/g4 cool → corrige_m/e/c ; g2 heat Bureau → eco ; g3 heat Salon → conf_e. Sources : + `temperature_eco_ete_corrige`, - `temperature_cible` / `temperature_confort_jour` | ✅ |
 | `sensor.message_clim_personnalise_21h00_7h30` (P1_03) | 07-20 : g1 cool → [ECO COOL] eco_ete_corrige (était [COOL] cible). Sources : + `temperature_eco_ete_corrige`, - `temperature_cible` | ✅ |
 | `sensor.temperature_corrige_eric` / `_chambre` (P1_01) | 07-20 (16h07, modif Eric en prod hors session) : plafond été relevé 27→28°C. Réintégré en local + boîtes ASCII 07.BUREAU/09.CHAMBRE/MOTEURS restaurées 37 car. | ✅ |
 | `sensor.message_clim_personnalise_7h30_21h00` (P1_02) | 07-20 (16h, correction Eric en prod) : fix Ctrl+H ayant cassé entity_id/variables Jinja + `s_off/b_off/c_off` simplifiés en constantes. Local resynchronisé sur prod + fix commentaire ligne 17 | ✅ |
 | `sensor.message_clim_personnalise_21h00_7h30` (P1_03) | 07-20 : préfixe "Mode: " + deux-points pièces (Salon:/Bureau:/Chambre:) aligné sur P1_02 | ✅ |
 
-### Corrections Dashboard — session 2026-06-29
+### Corrections Dashboard - session 2026-06-29
 
 | Entité / Carte | Correction | Statut |
 |:---------------|:-----------|:------:|
-| `card_mod prise_tete_de_lit_chambre` | `position: relative !important` ajouté — suppression `flex/column/center` (conflit mushroom) — `watts=0` forcé si switch OFF (résidu 2W Zigbee) | ✅ |
+| `card_mod prise_tete_de_lit_chambre` | `position: relative !important` ajouté - suppression `flex/column/center` (conflit mushroom) - `watts=0` forcé si switch OFF (résidu 2W Zigbee) | ✅ |
 
 ---
 
-## ✅ L2C1 — ÉNERGIE GÉNÉRALE (VIGNETTE + PAGE)
+## ✅ L2C1 - ÉNERGIE GÉNÉRALE (VIGNETTE + PAGE)
 *Documentée le 2026-06-18*
-*Source P0 depuis 2026-06-17 : Nodon SEM-4-1-00 (pince Z2M) — Ecojoko retiré*
+*Source P0 depuis 2026-06-17 : Nodon SEM-4-1-00 (pince Z2M) - Ecojoko retiré*
 
 > **Source énergie générale (depuis 2026-06-17) : Nodon SEM-4-1-00** (pince ampèremétrique Z2M)
 > - `sensor.general_electric_appart_energy` (kWh) → source des UM P0
 > - `sensor.general_electric_appart_power` (W) → puissance temps réel
 >
-> **Linky (MyElectricalData)** = J-1 uniquement (HP/HC historique) — source secondaire
+> **Linky (MyElectricalData)** = J-1 uniquement (HP/HC historique) - source secondaire
 
 ### Chaîne de dépendances
 
@@ -408,7 +408,7 @@ MATÉRIEL (Nodon SEM-4-1-00 via Z2M)
               └─→ TPL: 01_genelec_appart_AMHQ_cost.yaml  (coûts € : cout_total/hp/hc_quotidien…)
               └─→ TPL: 02_ratio_hp_hc.yaml               (genelec_appart_ratio_hc_quotidien/hebdo/mensuel)
               └─→ TPL: 03_AVG_genelec_appart.yaml        (genelec_appart_avg_watts_quotidien/mensuel)
-              └─→ TPL: MyElectricalData.yaml             (Linky J-1 — lecture seule)
+              └─→ TPL: MyElectricalData.yaml             (Linky J-1 - lecture seule)
 MATÉRIEL (PowerCalc P2/P3 + calculé)
   └─→ sensor.diag_poste_*_quotidien → TPL: P0_Diag/P0_diag_conso_jour_en_cours.yaml
   └─→ sensor.diag_poste_*_hebdomadaire → TPL: P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml
@@ -423,11 +423,11 @@ SENSORS P0
 ```
 
 > ⚠️ Corrigé le 2026-07-19 : le diagramme référençait un fichier `total_par_poste_7.yaml`
-> qui n'existe pas — les vrais noms sont `P0_diag_conso_{jour,hebdomadaire,mois}_en_cours.yaml`
+> qui n'existe pas - les vrais noms sont `P0_diag_conso_{jour,hebdomadaire,mois}_en_cours.yaml`
 > (3 fichiers distincts pour `diag_poste_*`) et `P0_total_pour_les_7_postes.yaml` (pour
 > `total_poste_*_puissance`), vérifiés par grep des `unique_id:` réels.
 
-### Entités consommées — Vignette L2C1
+### Entités consommées - Vignette L2C1
 
 | Entité | Fichier source | Role |
 |:-------|:---------------|:-----|
@@ -456,11 +456,11 @@ SENSORS P0
 | `templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml` | source → Nodon | ✅ |
 | `templates/P0_Energie_total_diag/P0_Genelec_appart/P0_03_AVG_genelec_appart.yaml` | source → Nodon | ✅ |
 | `templates/P0_Energie_total_diag/P0_Linky/P0_MyElectricalData.yaml` | Linky J-1 conservé | ✅ |
-| Docs vignettes L2C1, L2C2 | Impact Ecojoko → Nodon vérifié : L2C1 ✅, L2C2 ✅ (zero référence Ecojoko en L2C2 — entités P1 pures) | ✅ |
+| Docs vignettes L2C1, L2C2 | Impact Ecojoko → Nodon vérifié : L2C1 ✅, L2C2 ✅ (zero référence Ecojoko en L2C2 - entités P1 pures) | ✅ |
 
 ---
 
-## ✅ L2C2 — ÉNERGIE CLIM / RAD / SOUFFLANT
+## ✅ L2C2 - ÉNERGIE CLIM / RAD / SOUFFLANT
 *Validée le 2026-05-13*
 
 ### Chaîne de dépendances
@@ -535,12 +535,12 @@ MATÉRIEL (NOUS SP via Z2M)
 
 | Template | Usage |
 |:---------|:------|
-| `conso_temps_reel_clim_rad` | Onglet INSTANTANÉ — apexcharts conso en temps réel |
-| `conso_mensuelle_clim` | Onglet MENSUEL — apexcharts conso mensuelle |
-| `apex_dut_piece` | Onglet DUT — apexcharts durée utilisation par pièce |
+| `conso_temps_reel_clim_rad` | Onglet INSTANTANÉ - apexcharts conso en temps réel |
+| `conso_mensuelle_clim` | Onglet MENSUEL - apexcharts conso mensuelle |
+| `apex_dut_piece` | Onglet DUT - apexcharts durée utilisation par pièce |
 | `clim_voltage_ring-tile` | ring-tile-card tension (V) par appareil |
 | `clim_ampere_ring-tile` | ring-tile-card ampérage (A) par appareil |
-| `calcule_temp_cible` | Pop-up #tendances — logique calcul T° cible *(corrigé 2026-06-21)* |
+| `calcule_temp_cible` | Pop-up #tendances - logique calcul T° cible *(corrigé 2026-06-21)* |
 
 ### Fichiers YAML déployables
 
@@ -559,13 +559,13 @@ MATÉRIEL (NOUS SP via Z2M)
 | `Dashboard/L2C2_05_Energie_Clim/vignette_L2C2_energie_clim_2026-05-13.yaml` | ✅ |
 | `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-05-13.yaml` | ✅ |
 | `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-05-22.yaml` | ✅ |
-| `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-06-18.yaml` | ⚠️ obsolète — `climate.clim_chambre_rm4_mini` |
+| `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-06-18.yaml` | ⚠️ obsolète - `climate.clim_chambre_rm4_mini` |
 | `Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-07-14.yaml` | ✅ `climate.clim_chambre_rm4_mini` (NOUS SP1 conservé) |
 
 ---
 
-## ✅ L2C3 — ÉNERGIE ÉCLAIRAGE (LAMPES)
-*Validée le 2026-04-29 — Migration TPL kWh complète (_um → _um_kwh_tpl) | Dashboard archivé le 2026-05-13 | 2026-06-14 state_class total_increasing → total (× 116 sensors)*
+## ✅ L2C3 - ÉNERGIE ÉCLAIRAGE (LAMPES)
+*Validée le 2026-04-29 - Migration TPL kWh complète (_um → _um_kwh_tpl) | Dashboard archivé le 2026-05-13 | 2026-06-14 state_class total_increasing → total (× 116 sensors)*
 
 ### Chaîne de dépendances
 
@@ -609,12 +609,12 @@ MATÉRIEL (Hue Bridge / Sonoff via Z2M)
 | `sensor.eclairage_chambre_4_mensuel_um_kwh_tpl` | TPL | idem |
 | `sensor.eclairage_total_unit_mensuel_kwh_tpl` | TPL | `P3_ENERGIE_TPL/P3_TPL_AMHQ_3_TOTAL.yaml` |
 
-### TPL ENERGIE — Détail des 3 fichiers P3_ENERGIE_TPL
+### TPL ENERGIE - Détail des 3 fichiers P3_ENERGIE_TPL
 
 | Fichier TPL | Contenu | Nb sensors | Statut |
 |:------------|:--------|:----------:|:------:|
 | `P3_TPL_AMHQ_1_UNITE.yaml` | 19 ampoules × 4 cycles | 76 | ✅ |
-| `P3_TPL_AMHQ_2_ZONE.yaml` | 9 zones × 4 cycles | 36 | ✅ *(corrigé 2026-07-19 — était 10 zones/40, doublon d'une erreur déjà présente dans le fichier yaml lui-même, corrigée le même jour)* |
+| `P3_TPL_AMHQ_2_ZONE.yaml` | 9 zones × 4 cycles | 36 | ✅ *(corrigé 2026-07-19 - était 10 zones/40, doublon d'une erreur déjà présente dans le fichier yaml lui-même, corrigée le même jour)* |
 | `P3_TPL_AMHQ_3_TOTAL.yaml` | 1 total × 4 cycles | 4 | ✅ |
 
 ### Zones couvertes par P3_TPL_AMHQ_2_ZONE
@@ -676,14 +676,14 @@ MATÉRIEL (Hue Bridge / Sonoff via Z2M)
 
 ---
 
-## ✅ L3C1 — COMMANDES ÉCLAIRAGE (LAMPES)
+## ✅ L3C1 - COMMANDES ÉCLAIRAGE (LAMPES)
 *Validée le 2026-05-04 | Dashboard archivé le 2026-05-13*
 
 ### Chaîne de dépendances
 
 ```
 MATÉRIEL (Hue Bridge / Sonoff)
-  └─→ light.* / switch.*  (HA natif — state on/off)
+  └─→ light.* / switch.*  (HA natif - state on/off)
         └─→ TPL: ui_dashboard/etats_status.yaml  (lumiere_*_etat / bureau_etat / chambre_etat)
               └─→ VIGNETTE L3C1 (button-card 3 colonnes : pièce / état / compteur X/N)
 ```
@@ -708,16 +708,16 @@ MATÉRIEL (Hue Bridge / Sonoff)
 | `light.chambre` | NAT | Hue Bridge |
 | `light.hue_color_candle_chambre_gege` | NAT | Hue Bridge |
 | `light.hue_color_candle_chambre_eric` | NAT | Hue Bridge |
-| `light.lit` | NAT | Hue Bridge | Groupe tête de lit — cible du tap_action toggle (fix B4) |
+| `light.lit` | NAT | Hue Bridge | Groupe tête de lit - cible du tap_action toggle (fix B4) |
 | `switch.prise_tete_de_lit_chambre` | NAT | Intégration native |
-| `input_select.saison` | NAT | `input_select.yaml` (icône appartement Été/Hiver — ajouté 2026-07-19, manquait) |
+| `input_select.saison` | NAT | `input_select.yaml` (icône appartement Été/Hiver - ajouté 2026-07-19, manquait) |
 
 ### Entités disponibles (etats_status) non encore intégrées
 
 | Entité | Note |
 |:-------|:-----|
-| `sensor.lumiere_bureau_etat` | Nouveau slug unifié — remplacera `bureau_etat` à terme |
-| `sensor.lumiere_chambre_etat` | Idem — remplacera `chambre_etat` à terme |
+| `sensor.lumiere_bureau_etat` | Nouveau slug unifié - remplacera `bureau_etat` à terme |
+| `sensor.lumiere_chambre_etat` | Idem - remplacera `chambre_etat` à terme |
 | `sensor.lumiere_tete_de_lit_etat` | Nouvel état dédié tête de lit |
 
 ### Entités page (toggle + badges + pop-ups)
@@ -762,25 +762,25 @@ MATÉRIEL (Hue Bridge / Sonoff)
 
 ---
 
-## ✅ L3C2 — COMMANDES ÉCO/PRISES
+## ✅ L3C2 - COMMANDES ÉCO/PRISES
 *Archivée le 2026-05-14*
 
-### Vignette — Chaîne de dépendances
+### Vignette - Chaîne de dépendances
 
 ```
 MATÉRIEL / INTÉGRATION
   ├─→ Zigbee2MQTT (Z2M) → MQTT → HA
-  │     ├─→ switch.prise_horloge_ikea          (natif Z2M — IKEA TRADFRI)
-  │     ├─→ switch.prise_tv_salon_ikea          (natif Z2M — IKEA TRADFRI)
-  │     ├─→ switch.prise_tete_de_lit_chambre    (natif Z2M — IKEA TRADFRI)
-  │     ├─→ light.hue_smart_eco_salon           (natif Z2M — Hue Smart Plug)
-  │     ├─→ light.hue_smart_eco_pc_bureau       (natif Z2M — Hue Smart Plug)
-  │     └─→ light.hue_smart_eco_tv_chambre      (natif Z2M — Hue Smart Plug)
+  │     ├─→ switch.prise_horloge_ikea          (natif Z2M - IKEA TRADFRI)
+  │     ├─→ switch.prise_tv_salon_ikea          (natif Z2M - IKEA TRADFRI)
+  │     ├─→ switch.prise_tete_de_lit_chambre    (natif Z2M - IKEA TRADFRI)
+  │     ├─→ light.hue_smart_eco_salon           (natif Z2M - Hue Smart Plug)
+  │     ├─→ light.hue_smart_eco_pc_bureau       (natif Z2M - Hue Smart Plug)
+  │     └─→ light.hue_smart_eco_tv_chambre      (natif Z2M - Hue Smart Plug)
   │           └─→ VIGNETTE L3C2 (button-card 2 colonnes : piece / etat)
   │                 tap_action → /dashboard-tablette/prises
 ```
 
-### Entités utilisées — Vignette
+### Entités utilisées - Vignette
 
 | Entité | Type | Source | Rôle |
 |:-------|:-----|:-------|:-----|
@@ -791,7 +791,7 @@ MATÉRIEL / INTÉGRATION
 | `switch.prise_tete_de_lit_chambre` | switch | Z2M natif | État Têtes de Lit |
 | `light.hue_smart_eco_tv_chambre` | light | Z2M natif | État TV Chambre |
 
-### Entités utilisées — Page
+### Entités utilisées - Page
 
 | Entité contrôlée | Sensor puissance | Sensor tension | Sensor courant | MAX |
 |:-----------------|:-----------------|:---------------|:---------------|:----|
@@ -811,50 +811,50 @@ MATÉRIEL / INTÉGRATION
 
 ---
 
-## ✅ L3C3 — STORES / FENÊTRES (VIGNETTE + PAGE)
+## ✅ L3C3 - STORES / FENÊTRES (VIGNETTE + PAGE)
 *Validée le 2026-05-14*
 
-### Vignette — Chaîne de dépendances
+### Vignette - Chaîne de dépendances
 
 ```
 MATÉRIEL / INTÉGRATION
-  ├─→ Zigbee2MQTT — SONOFF SNZB-04 (4 contacts de fenêtre)
+  ├─→ Zigbee2MQTT - SONOFF SNZB-04 (4 contacts de fenêtre)
   │     ├─→ binary_sensor.contact_fenetre_salon_sonoff_contact   (NAT/Z2M)
   │     ├─→ binary_sensor.contact_fenetre_cuisine_sonoff_contact (NAT/Z2M)
   │     ├─→ binary_sensor.contact_fenetre_bureau_sonoff_contact  (NAT/Z2M)
   │     └─→ binary_sensor.contact_fenetre_chambre_sonoff_contact (NAT/Z2M)
-  │           └─→ VIGNETTE L3C3 — colonne "Fenêtres" (on=rouge Ouvert, off=vert Fermé)
+  │           └─→ VIGNETTE L3C3 - colonne "Fenêtres" (on=rouge Ouvert, off=vert Fermé)
   ├─→ TPL: templates/Stores/S_01_STORES.yaml
-  │     ├─→ sensor.store_salon_status   (TPL — texte état store salon)
-  │     └─→ sensor.store_bureau_status  (TPL — texte état store bureau)
-  │           └─→ VIGNETTE L3C3 — colonne "Stores" (texte brut)
+  │     ├─→ sensor.store_salon_status   (TPL - texte état store salon)
+  │     └─→ sensor.store_bureau_status  (TPL - texte état store bureau)
+  │           └─→ VIGNETTE L3C3 - colonne "Stores" (texte brut)
   └─→ sensor.store_cuisine_status / sensor.store_chambre_status
-        └─→ VIGNETTE L3C3 — colonne "Stores" (placeholders N/A — stores non motorisés)
+        └─→ VIGNETTE L3C3 - colonne "Stores" (placeholders N/A - stores non motorisés)
 ```
 
 ### Entités consommées par la vignette
 
 | Entité | Type | Fichier source | Rôle |
 |:-------|:----:|:--------------|:-----|
-| `binary_sensor.contact_fenetre_salon_sonoff_contact` | NAT | Z2M (SONOFF SNZB-04) | Fenêtre Salon — Ouvert/Fermé |
-| `binary_sensor.contact_fenetre_cuisine_sonoff_contact` | NAT | Z2M (SONOFF SNZB-04) | Fenêtre Cuisine — Ouvert/Fermé |
-| `binary_sensor.contact_fenetre_bureau_sonoff_contact` | NAT | Z2M (SONOFF SNZB-04) | Fenêtre Bureau — Ouvert/Fermé |
-| `binary_sensor.contact_fenetre_chambre_sonoff_contact` | NAT | Z2M (SONOFF SNZB-04) | Fenêtre Chambre — Ouvert/Fermé |
-| `sensor.store_salon_status` | TPL | `templates/Stores/S_01_STORES.yaml` | Store Salon — texte état |
-| `sensor.store_bureau_status` | TPL | `templates/Stores/S_01_STORES.yaml` | Store Bureau — texte état |
+| `binary_sensor.contact_fenetre_salon_sonoff_contact` | NAT | Z2M (SONOFF SNZB-04) | Fenêtre Salon - Ouvert/Fermé |
+| `binary_sensor.contact_fenetre_cuisine_sonoff_contact` | NAT | Z2M (SONOFF SNZB-04) | Fenêtre Cuisine - Ouvert/Fermé |
+| `binary_sensor.contact_fenetre_bureau_sonoff_contact` | NAT | Z2M (SONOFF SNZB-04) | Fenêtre Bureau - Ouvert/Fermé |
+| `binary_sensor.contact_fenetre_chambre_sonoff_contact` | NAT | Z2M (SONOFF SNZB-04) | Fenêtre Chambre - Ouvert/Fermé |
+| `sensor.store_salon_status` | TPL | `templates/Stores/S_01_STORES.yaml` | Store Salon - texte état |
+| `sensor.store_bureau_status` | TPL | `templates/Stores/S_01_STORES.yaml` | Store Bureau - texte état |
 
-### Page — Chaîne de dépendances
+### Page - Chaîne de dépendances
 
 ```
 MATÉRIEL / INTÉGRATION
-  ├─→ SONOFF (Z2M — balcon nord)
+  ├─→ SONOFF (Z2M - balcon nord)
   │     └─→ sensor.th_balcon_nord_temperature  (NAT)  ← badge condition seuil (+34° salon / +18°–+25° bureau)
-  ├─→ Zigbee2MQTT — SONOFF SNZB-04
+  ├─→ Zigbee2MQTT - SONOFF SNZB-04
   │     ├─→ binary_sensor.contact_fenetre_salon_sonoff_contact   (NAT)  ← badge état fenêtre salon
   │     ├─→ sensor.contact_fenetre_salon_sonoff_battery           (NAT)  ← badge batterie fenêtre salon
   │     ├─→ binary_sensor.contact_fenetre_bureau_sonoff_contact  (NAT)  ← badge état fenêtre bureau
   │     └─→ sensor.contact_fenetre_bureau_sonoff_battery          (NAT)  ← badge batterie fenêtre bureau
-  ├─→ Zigbee2MQTT — covers (stores motorisés)
+  ├─→ Zigbee2MQTT - covers (stores motorisés)
   │     ├─→ cover.store_salon   (NAT/Z2M)  ← enhanced-shutter-card + boutons positions (100/85/70/49/20)
   │     └─→ cover.store_bureau  (NAT/Z2M)  ← enhanced-shutter-card + boutons positions (100/90/65/50/30)
   ├─→ sensor.store_salon_signal_strength   (NAT/Z2M)  ← signal_entity enhanced-shutter-card salon
@@ -873,12 +873,12 @@ MATÉRIEL / INTÉGRATION
 | `sensor.contact_fenetre_salon_sonoff_battery` | NAT | Z2M (SONOFF SNZB-04) | Badge batterie fenêtre Salon |
 | `binary_sensor.contact_fenetre_bureau_sonoff_contact` | NAT | Z2M (SONOFF SNZB-04) | Badge état fenêtre Bureau |
 | `sensor.contact_fenetre_bureau_sonoff_battery` | NAT | Z2M (SONOFF SNZB-04) | Badge batterie fenêtre Bureau |
-| `cover.store_salon` | NAT | Z2M (store motorisé) | enhanced-shutter-card — commande store Salon |
-| `cover.store_bureau` | NAT | Z2M (store motorisé) | enhanced-shutter-card — commande store Bureau |
-| `sensor.store_salon_signal_strength` | NAT | Z2M | signal_entity — force signal store Salon |
-| `sensor.store_bureau_signal_strength` | NAT | Z2M | signal_entity — force signal store Bureau |
-| `light.store_salon_dnd` | NAT | Hue Bridge | Voyant DnD mushroom-light-card — Salon |
-| `light.store_bureau_dnd` | NAT | Hue Bridge | Voyant DnD mushroom-light-card — Bureau |
+| `cover.store_salon` | NAT | Z2M (store motorisé) | enhanced-shutter-card - commande store Salon |
+| `cover.store_bureau` | NAT | Z2M (store motorisé) | enhanced-shutter-card - commande store Bureau |
+| `sensor.store_salon_signal_strength` | NAT | Z2M | signal_entity - force signal store Salon |
+| `sensor.store_bureau_signal_strength` | NAT | Z2M | signal_entity - force signal store Bureau |
+| `light.store_salon_dnd` | NAT | Hue Bridge | Voyant DnD mushroom-light-card - Salon |
+| `light.store_bureau_dnd` | NAT | Hue Bridge | Voyant DnD mushroom-light-card - Bureau |
 
 ### Fichiers YAML Dashboard
 
@@ -889,15 +889,15 @@ MATÉRIEL / INTÉGRATION
 
 ---
 
-## ✅ L4C1 — PROXMOX PVE (VIGNETTE + PAGE)
-*Validée le 2026-06-13 (docs entièrement réécrites — +5e section MyElectricalData)*
+## ✅ L4C1 - PROXMOX PVE (VIGNETTE + PAGE)
+*Validée le 2026-06-13 (docs entièrement réécrites - +5e section MyElectricalData)*
 
 > Page complète supervision infrastructure Proxmox VE.
 > Vignette : température CPU, CPU %, RAM %, Storage %, PVE Status.
 > Page : **5 sections** (PVE, HA, Z2M, MariaDB, MyElectricalData) × métriques détaillées + apexcharts CPU 1h.
 > Path → `/dashboard-tablette/systeme-proxmox`.
 
-### Vignette — Entités consommées
+### Vignette - Entités consommées
 
 | Entité | Type | Source |
 |:-------|:----:|:-------|
@@ -907,7 +907,7 @@ MATÉRIEL / INTÉGRATION
 | `sensor.storage_local_storage_usage_percentage` | NAT | Proxmox VE |
 | `binary_sensor.pve_status` | NAT | Proxmox VE |
 
-### Page — Entités consommées (complet)
+### Page - Entités consommées (complet)
 
 **PROXMOX VE**
 | Entité | Métrique |
@@ -974,7 +974,7 @@ MATÉRIEL / INTÉGRATION
 | `sensor.myelectricaldata_memory_usage_percentage` | RAM % | |
 | `sensor.myelectricaldata_utilisation_de_la_memoire` | RAM GiB | |
 | `sensor.myelectricaldata_utilisation_maximale_de_la_memoire` | RAM Max GiB | max allouée = 1.0 GiB |
-| `sensor.myelectricaldata_utilisation_du_disque` | Disk GiB | ⚠️ PAS de % — GiB uniquement |
+| `sensor.myelectricaldata_utilisation_du_disque` | Disk GiB | ⚠️ PAS de % - GiB uniquement |
 | `sensor.myelectricaldata_utilisation_maximale_du_disque` | Disk Max GiB | max = 3.86 GiB |
 | `sensor.myelectricaldata_uptime` | Uptime (h float) | même format que pve_uptime |
 | `sensor.myelectricaldata_max_cpu` | vCPU | = 1 |
@@ -986,8 +986,8 @@ MATÉRIEL / INTÉGRATION
 | `button.myelectricaldata_create_snapshot` | Snapshot | |
 
 > ⚠️ Pas de `binary_sensor.myelectricaldata_backup_status` (contrairement à PVE).
-> Pas de `sensor.myelectricaldata_utilisation_du_disque` en % — seuils page à exprimer en GiB absolu.
-> Badge : vert `rgb(15,157,88)` — couleur section : `#00bcd4`.
+> Pas de `sensor.myelectricaldata_utilisation_du_disque` en % - seuils page à exprimer en GiB absolu.
+> Badge : vert `rgb(15,157,88)` - couleur section : `#00bcd4`.
 
 ### Seuils de couleur
 
@@ -1017,8 +1017,8 @@ MATÉRIEL / INTÉGRATION
 
 ---
 
-## ✅ L4C2 — MINI PC (VIGNETTE + PAGE)
-*Validée le 2026-06-18 — vignette refactorisée : proxmox_cpu_package direct (sans template) | ⚠️ uptime bug non encore corrigé en page*
+## ✅ L4C2 - MINI PC (VIGNETTE + PAGE)
+*Validée le 2026-06-18 - vignette refactorisée : proxmox_cpu_package direct (sans template) | ⚠️ uptime bug non encore corrigé en page*
 
 > ⚠️ **BUG UPTIME CONNU** (non corrigé) : Jinja2 dans la page utilise `| int(0)` + `/ 86400` alors que `sensor.pve_uptime` retourne des **heures** (float), pas des secondes. Résultat : affiche ~0j 0h. Fix à appliquer :
 > ```yaml
@@ -1028,7 +1028,7 @@ MATÉRIEL / INTÉGRATION
 > {% set minutes = ((uptime % 1) * 60) | int(0) %}
 > ```
 
-### Vignette — Chaîne de dépendances
+### Vignette - Chaîne de dépendances
 
 ```
 MATÉRIEL / INTÉGRATION
@@ -1039,20 +1039,20 @@ MATÉRIEL / INTÉGRATION
   │     └─→ sensor.storage_local_storage_usage_percentage (NAT)  ← Disk %
   └─→ Zigbee2MQTT (prise IKEA Inspelning)
         └─→ sensor.prise_mini_pc_ikea_power  (NAT)   ← Watts instantanés
-              └─→ VIGNETTE L4C2 (button-card 6 zones CSS — icône phu:intel-nuc)
+              └─→ VIGNETTE L4C2 (button-card 6 zones CSS - icône phu:intel-nuc)
 ```
 
 ### Entités consommées par la vignette
 
 | Entité | Type | Fichier source | Rôle |
 |:-------|:----:|:--------------|:-----|
-| `sensor.proxmox_cpu_package` | NAT | Proxmox VE (MQTT Discovery) | Entité principale — icône + champ `temp` |
-| `sensor.pve_utilisation_du_processeur` | NAT | Proxmox VE | Champ `cpu` — CPU % |
-| `sensor.pve_memory_usage_percentage` | NAT | Proxmox VE | Champ `ram` — RAM % |
-| `sensor.storage_local_storage_usage_percentage` | NAT | Proxmox VE | Champ `sd` — Disk % |
-| `sensor.prise_mini_pc_ikea_power` | NAT | Z2M (IKEA Inspelning) | Champ `conso` — Watts |
+| `sensor.proxmox_cpu_package` | NAT | Proxmox VE (MQTT Discovery) | Entité principale - icône + champ `temp` |
+| `sensor.pve_utilisation_du_processeur` | NAT | Proxmox VE | Champ `cpu` - CPU % |
+| `sensor.pve_memory_usage_percentage` | NAT | Proxmox VE | Champ `ram` - RAM % |
+| `sensor.storage_local_storage_usage_percentage` | NAT | Proxmox VE | Champ `sd` - Disk % |
+| `sensor.prise_mini_pc_ikea_power` | NAT | Z2M (IKEA Inspelning) | Champ `conso` - Watts |
 
-### Page — Chaîne de dépendances
+### Page - Chaîne de dépendances
 
 ```
 MATÉRIEL / INTÉGRATION
@@ -1070,7 +1070,7 @@ MATÉRIEL / INTÉGRATION
   │     ├─→ sensor.system_monitor_debit_du_reseau_sortant_via_enp6s18  ← Bloc 5
   │     ├─→ sensor.system_monitor_charge_1m / 5m / 15m        ← Bloc 8
   │     └─→ sensor.cpu_speed  (NAT)                           ← Bloc 7
-  ├─→ Proxmox VE (intégration officielle HA — MQTT Discovery)
+  ├─→ Proxmox VE (intégration officielle HA - MQTT Discovery)
   │     └─→ sensor.proxmox_cpu_package / sensor.proxmox_carte_mere / core_0/1/2/3  (NAT)
   │           ├─→ sensor.proxmox_cpu_package   ← Blocs 2, 9, 11
   │           ├─→ sensor.proxmox_core_0 / core_1 / core_2 / core_3  ← Bloc 10
@@ -1085,7 +1085,7 @@ MATÉRIEL / INTÉGRATION
         └─→ sensor.prise_mini_pc_ikea_mensuel_um    (UM)  ← Pop-up #conso
 ```
 
-> ⚠️ Interface réseau : **`enp6s18`** (VirtIO KVM sous Proxmox) — PAS `enp1s0`.
+> ⚠️ Interface réseau : **`enp6s18`** (VirtIO KVM sous Proxmox) - PAS `enp1s0`.
 
 ### Fichiers YAML déployables
 
@@ -1093,7 +1093,7 @@ MATÉRIEL / INTÉGRATION
 |:--------|:------:|
 | `Dashboard/L4C2_11_Mini_PC/vignette_L4C2_mini_pc_2026-06-04.yaml` | ✅ |
 | `Dashboard/L4C2_11_Mini_PC/vignette_L4C2_mini_pc_2026-06-09.yaml` | ✅ |
-| `Dashboard/L4C2_11_Mini_PC/vignette_L4C2_mini_pc_2026-06-18.yaml` | ✅ refonte — proxmox_cpu_package direct (sans template) |
+| `Dashboard/L4C2_11_Mini_PC/vignette_L4C2_mini_pc_2026-06-18.yaml` | ✅ refonte - proxmox_cpu_package direct (sans template) |
 | `Dashboard/L4C2_11_Mini_PC/page_L4C2_mini_pc_2026-06-09.yaml` | ✅ |
 | `Dashboard/L4C2_11_Mini_PC/page_L4C2_mini_pc_2026-06-10.yaml` | ✅ icônes `mdi:cpu-64-bit` + `mdi:harddisk` ajoutées aux mini-graph-cards |
 | `Dashboard/L4C2_11_Mini_PC/page_L4C2_mini_pc_2026-06-18.yaml` | ✅ versioning 2026-06-18 |
@@ -1103,20 +1103,20 @@ MATÉRIEL / INTÉGRATION
 
 ---
 
-## ✅ L4C3 — MISES À JOUR HA (VIGNETTE + 2 PAGES)
+## ✅ L4C3 - MISES À JOUR HA (VIGNETTE + 2 PAGES)
 *Validée le 2026-05-14*
 
-### Vignette — Chaîne de dépendances
+### Vignette - Chaîne de dépendances
 
 ```
 HA (domaine update.* natif)
   └─→ TPL: templates/utilitaires/Mise_a_jour_home_assistant.yaml
         └─→ sensor.available_updates  (compte les update.* à l'état 'on')
-              └─→ VIGNETTE L4C3 (button-card — couleur orange si > 0, texte MàJ)
+              └─→ VIGNETTE L4C3 (button-card - couleur orange si > 0, texte MàJ)
                     └─→ tap_action: navigate → /dashboard-tablette/maj
 ```
 
-> ⚠️ Corrigé le 2026-07-19 : `sensor.available_updates` était marqué NAT — c'est en réalité
+> ⚠️ Corrigé le 2026-07-19 : `sensor.available_updates` était marqué NAT - c'est en réalité
 > un TPL (`templates/utilitaires/Mise_a_jour_home_assistant.yaml`, absent de cette section
 > jusqu'ici), qui compte les entités `update.*` à l'état "on". Vérifié dans le corps du fichier.
 
@@ -1126,7 +1126,7 @@ HA (domaine update.* natif)
 |:-------|:----:|:--------------|
 | `sensor.available_updates` | TPL | `templates/utilitaires/Mise_a_jour_home_assistant.yaml` |
 
-### Page gauche (H.A. SERVER) — Chaîne de dépendances
+### Page gauche (H.A. SERVER) - Chaîne de dépendances
 
 ```
 HA Core (intégration hassio)
@@ -1139,7 +1139,7 @@ HA Core (intégration hassio)
         └─→ update.install (action) → bouton install
 ```
 
-### Page droite (H.A. UPDATE + ADD-ON) — Chaîne de dépendances
+### Page droite (H.A. UPDATE + ADD-ON) - Chaîne de dépendances
 
 ```
 HA Core
@@ -1162,7 +1162,7 @@ HA Core
 
 | Fichier | Statut |
 |:--------|:------:|
-| `templates/utilitaires/Mise_a_jour_home_assistant.yaml` | ✅ *(ajouté 2026-07-19 — manquait)* |
+| `templates/utilitaires/Mise_a_jour_home_assistant.yaml` | ✅ *(ajouté 2026-07-19 - manquait)* |
 
 ### Fichiers YAML Dashboard
 
@@ -1174,10 +1174,10 @@ HA Core
 
 ---
 
-## ✅ L5C1 — BATTERIES / PILES (VIGNETTE + PAGE)
-*Validée le 2026-05-14 — ⚠️ page partiellement tronquée (3 sections HUE/IKEA/SONOFF à compléter)*
+## ✅ L5C1 - BATTERIES / PILES (VIGNETTE + PAGE)
+*Validée le 2026-05-14 - ⚠️ page partiellement tronquée (3 sections HUE/IKEA/SONOFF à compléter)*
 
-### Vignette — Chaîne de dépendances
+### Vignette - Chaîne de dépendances
 
 ```
 groups/ (GRP_01/02/03)
@@ -1198,7 +1198,7 @@ groups/ (GRP_01/02/03)
 | `group.ikea_devices` | GRP | `groups/GRP_02_batteries_ikea.yaml` |
 | `group.sonoff_devices` | GRP | `groups/GRP_03_batteries_sonoff.yaml` |
 
-### Page — Chaîne de dépendances
+### Page - Chaîne de dépendances
 
 ```
 Philips Hue Bridge / Z2M / SONOFF (ZHA/Z2M)
@@ -1223,10 +1223,10 @@ Philips Hue Bridge / Z2M / SONOFF (ZHA/Z2M)
 
 ---
 
-## ✅ L5C2 — BATTERIES PORTABLES (VIGNETTE + 2 PAGES)
-*Validée le 2026-05-12 — ⚠️ todo: vérifier sensor.ne2213_mamour_battery_health + temperature*
+## ✅ L5C2 - BATTERIES PORTABLES (VIGNETTE + 2 PAGES)
+*Validée le 2026-05-12 - ⚠️ todo: vérifier sensor.ne2213_mamour_battery_health + temperature*
 
-### Vignette — Chaîne de dépendances
+### Vignette - Chaîne de dépendances
 
 ```
 HA Companion App (iOS/Android)
@@ -1255,7 +1255,7 @@ HA Companion App (iOS/Android)
 | `sensor.tablette_battery_level` | NAT | HA Companion (Tablette) |
 | `sensor.*_battery_state` | NAT | HA Companion (état charge : charging/discharging/full) |
 
-### Page gauche (Eric + SM-A530F + Tablette) — Chaîne de dépendances
+### Page gauche (Eric + SM-A530F + Tablette) - Chaîne de dépendances
 
 ```
 HA Companion App
@@ -1273,7 +1273,7 @@ HA Companion App
         └─→ entities: level, state, charger_type, health, temperature, network, wifi
 ```
 
-### Page droite (Mamour + GM1901) — Chaîne de dépendances
+### Page droite (Mamour + GM1901) - Chaîne de dépendances
 
 ```
 HA Companion App
@@ -1298,14 +1298,14 @@ HA Companion App
 
 ---
 
-## ✅ L5C3 — MARIADB / SYSTÈME (VIGNETTE + PAGE)
+## ✅ L5C3 - MARIADB / SYSTÈME (VIGNETTE + PAGE)
 *Validée le 2026-05-10*
 
-### Vignette — Chaîne de dépendances
+### Vignette - Chaîne de dépendances
 
 ```
 MariaDB (intégration sql.yaml)
-  └─→ sensor.taille_db_home_assistant  (SQL — taille en MiB)
+  └─→ sensor.taille_db_home_assistant  (SQL - taille en MiB)
         └─→ VIGNETTE L5C3 (custom:flex-horseshoe-card dans button-card)
               ├─→ horseshoe colorstop : 0→vert, 1800→gold, 3500→orange, 4000→red
               └─→ tap_action: navigate → /dashboard-tablette/reserve
@@ -1317,7 +1317,7 @@ MariaDB (intégration sql.yaml)
 |:-------|:----:|:--------------|
 | `sensor.taille_db_home_assistant` | NAT | `sql.yaml` (requête MariaDB) |
 
-### Page — Chaîne de dépendances
+### Page - Chaîne de dépendances
 
 ```
 Audit MD5 (script + template/command_line)
@@ -1350,7 +1350,7 @@ MariaDB
 | `shell_command.git_backup_push_weekly` | NAT | `shell_command/Ghithub/backup_github.yaml` |
 | `shell_command.git_backup_push_manual` | NAT | `shell_command/Ghithub/backup_github.yaml` |
 
-### Page — Chaîne de dépendances (NOUVEAU 2026-05-18)
+### Page - Chaîne de dépendances (NOUVEAU 2026-05-18)
 
 ```
 Proxmox VE (intégration superviseur)
@@ -1370,7 +1370,7 @@ Proxmox VE (intégration superviseur)
         ├─→ sensor.mariadb_uptime  (NAT)
         ├─→ sensor.mariadb_memory_usage_percentage  (NAT)
         ├─→ sensor.mariadb_utilisation_de_la_memoire  (NAT)
-        └─→ sensor.taille_db_home_assistant  (NAT — SQL)
+        └─→ sensor.taille_db_home_assistant  (NAT - SQL)
 ```
 
 ### Entités consommées par la page RÉSERVE SYSTÈME
@@ -1403,10 +1403,10 @@ Proxmox VE (intégration superviseur)
 
 ---
 
-## ✅ L6C1 — QUALITÉ DE L'AIR (VIGNETTE + PAGE)
+## ✅ L6C1 - QUALITÉ DE L'AIR (VIGNETTE + PAGE)
 *Validée le 2026-05-14*
 
-### Vignette — Chaîne de dépendances
+### Vignette - Chaîne de dépendances
 
 ```
 IKEA VINDSTYRKA (Zigbee via Z2M)
@@ -1435,7 +1435,7 @@ IKEA VINDSTYRKA (Zigbee via Z2M)
 | `sensor.qualite_air_bureau_ikea_voc_index` | NAT | IKEA VINDSTYRKA Bureau (Z2M) |
 | `sensor.qualite_air_chambre_ikea_voc_index` | NAT | IKEA VINDSTYRKA Chambre (Z2M) |
 
-### Page — Chaîne de dépendances
+### Page - Chaîne de dépendances
 
 ```
 IKEA VINDSTYRKA (Zigbee via Z2M)
@@ -1446,7 +1446,7 @@ IKEA VINDSTYRKA (Zigbee via Z2M)
   ├─→ sensor.qualite_air_bureau_ikea_voc_index  (NAT) → streamline-card cov_ring-tile + pop-up cov
   └─→ sensor.qualite_air_chambre_ikea_voc_index (NAT) → streamline-card cov_ring-tile + pop-up cov
 
-sensors/Air_quality/A_01_AIR_QUALITY.yaml (SEN — stats mean 24h)
+sensors/Air_quality/A_01_AIR_QUALITY.yaml (SEN - stats mean 24h)
   ├─→ sensor.pm2_5_salon_moy_24h   (SEN) → marker2 ring-tile Salon PM2.5
   ├─→ sensor.pm2_5_bureau_moy_24h  (SEN) → marker2 ring-tile Bureau PM2.5
   ├─→ sensor.pm2_5_chambre_moy_24h (SEN) → marker2 ring-tile Chambre PM2.5
@@ -1454,12 +1454,12 @@ sensors/Air_quality/A_01_AIR_QUALITY.yaml (SEN — stats mean 24h)
   ├─→ sensor.tcov_bureau_moy_24h   (SEN) → marker2 ring-tile Bureau tCOV
   └─→ sensor.tcov_chambre_moy_24h  (SEN) → marker2 ring-tile Chambre tCOV
 
-templates/Air_quality/A_01_AIR_QUALITY.yaml (TPL — conversion ppb)
+templates/Air_quality/A_01_AIR_QUALITY.yaml (TPL - conversion ppb)
   ├─→ sensor.tcov_salon_ppb    (TPL) → entity bouton tCOV Salon + streamline-card cov
   ├─→ sensor.tcov_bureau_ppb   (TPL) → entity bouton tCOV Bureau + streamline-card cov
   └─→ sensor.tcov_chambre_ppb  (TPL) → entity bouton tCOV Chambre + streamline-card cov
 
-        └─→ PAGE L6C1 — 3 sections (SALON / BUREAU / CHAMBRE)
+        └─→ PAGE L6C1 - 3 sections (SALON / BUREAU / CHAMBRE)
               ├─→ custom:streamline-card templates : pm25_ring-tile, cov_ring-tile, pm25, cov
               ├─→ custom:bubble-card pop-up via hash (#spm25, #scov, #bpm25, #bcov, #cpm25, #ccov)
               └─→ bubble-card separator × 3 (SALON, BUREAU, CHAMBRE)
@@ -1494,16 +1494,16 @@ templates/Air_quality/A_01_AIR_QUALITY.yaml (TPL — conversion ppb)
 
 ---
 
-## ✅ L6C2 — POLLUTION / POLLEN (VIGNETTE + PAGE)
+## ✅ L6C2 - POLLUTION / POLLEN (VIGNETTE + PAGE)
 *Validée le 2026-05-14*
 
-### Vignette — Chaîne de dépendances
+### Vignette - Chaîne de dépendances
 
 ```
 Atmo France (intégration HACS)
   ├─→ sensor.qualite_globale_vence        (NAT) → score IQA 0-7 → couleur JS Air
   └─→ sensor.qualite_globale_pollen_vence (NAT) → score pollen 0-7 → couleur JS Pollen
-        └─→ VIGNETTE L6C2 (custom:button-card — name JS)
+        └─→ VIGNETTE L6C2 (custom:button-card - name JS)
               ├─→ Palette couleur 0-7 : grey→green→lightgreen→gold→orange→red→darkred→purple
               ├─→ Affichage : "Air X / Pollen Y" avec couleurs dynamiques
               └─→ tap_action: navigate → /dashboard-tablette/pollen-pollution
@@ -1516,10 +1516,10 @@ Atmo France (intégration HACS)
 | `sensor.qualite_globale_vence` | NAT | Intégration Atmo France |
 | `sensor.qualite_globale_pollen_vence` | NAT | Intégration Atmo France |
 
-### Page — Chaîne de dépendances
+### Page - Chaîne de dépendances
 
 ```
-Atmo France (intégration HACS) — Section POLLENS
+Atmo France (intégration HACS) - Section POLLENS
   ├─→ sensor.qualite_globale_pollen_vence    (NAT) → entity-progress-card (barre globale)
   │     └─→ state_attr('Libellé') + state_attr('Couleur') → label + bar_color dynamiques
   ├─→ sensor.concentration_gramine_vence     (NAT) → ring-tile entity
@@ -1535,7 +1535,7 @@ Atmo France (intégration HACS) — Section POLLENS
   ├─→ sensor.concentration_olivier_vence     (NAT) → ring-tile entity
   └─→ sensor.niveau_olivier_vence            (NAT) → ring-tile ring_entity
 
-Atmo France (intégration HACS) — Section QUALITE DE L'AIR
+Atmo France (intégration HACS) - Section QUALITE DE L'AIR
   ├─→ sensor.qualite_globale_vence           (NAT) → entity-progress-card (barre globale)
   │     └─→ state_attr('Libellé') + state_attr('Couleur') → label + bar_color dynamiques
   ├─→ sensor.ozone_vence                     (NAT) → ring-tile O₃ (entity + ring_entity identiques)
@@ -1544,7 +1544,7 @@ Atmo France (intégration HACS) — Section QUALITE DE L'AIR
   ├─→ sensor.pm10_vence                      (NAT) → ring-tile PM10
   └─→ sensor.pm25_vence                      (NAT) → ring-tile PM25
 
-        └─→ PAGE L6C2 — 2 sections (POLLENS / QUALITE DE L'AIR)
+        └─→ PAGE L6C2 - 2 sections (POLLENS / QUALITE DE L'AIR)
               ├─→ custom:entity-progress-card × 2 (barres globales)
               ├─→ custom:ring-tile × 6 (pollens, grid 3 colonnes, scale 0-7)
               ├─→ custom:ring-tile × 5 (polluants, grid 5 colonnes, scale 0-7)
@@ -1585,15 +1585,15 @@ Atmo France (intégration HACS) — Section QUALITE DE L'AIR
 
 ---
 
-## ✅ L6C3 — VIGILANCE EAU / VIGIEAU (VIGNETTE + PAGE)
+## ✅ L6C3 - VIGILANCE EAU / VIGIEAU (VIGNETTE + PAGE)
 *Validée le 2026-05-14*
 
-### Vignette — Chaîne de dépendances
+### Vignette - Chaîne de dépendances
 
 ```
 VigiEau (intégration HACS)
   └─→ sensor.alert_level_in_vence         (NAT) → icon dynamique (attr.icon) + couleur (attr.Couleur)
-        └─→ VIGNETTE L6C3 (custom:button-card — icon + name JS)
+        └─→ VIGNETTE L6C3 (custom:button-card - icon + name JS)
               ├─→ Icon : sensor.attributes.icon (fourni par l'intégration) ou mdi:water-outline
               ├─→ Couleur icône : sensor.attributes.Couleur ou white
               ├─→ Niveaux : null / vigilance (pas de restriction) / vigilance / alerte / alerte_renforcee / crise
@@ -1606,10 +1606,10 @@ VigiEau (intégration HACS)
 |:-------|:----:|:--------------|
 | `sensor.alert_level_in_vence` | NAT | Intégration VigiEau (HACS) |
 
-### Page — Chaîne de dépendances
+### Page - Chaîne de dépendances
 
 ```
-VigiEau (intégration HACS) — Section SÉCHERESSE
+VigiEau (intégration HACS) - Section SÉCHERESSE
   ├─→ sensor.alert_level_in_vence          (NAT) → button-card état global (6 niveaux colorés)
   │     └─→ states : null/vigilance/alerte/alerte_renforcee/crise → icône + couleur dédiés
   ├─→ sensor.alert_level_in_vence_numeric  (NAT) → bar-card jauge 0-4 (severity colorée)
@@ -1627,7 +1627,7 @@ VigiEau (intégration HACS) — Section SÉCHERESSE
 |:-------|:----:|:--------------|
 | `sensor.alert_level_in_vence` | NAT | Intégration VigiEau (HACS) |
 | `sensor.alert_level_in_vence_numeric` | NAT | Intégration VigiEau (HACS) |
-| `sensor.*_restrictions_vence` (glob) | NAT | Intégration VigiEau (HACS) — entités dynamiques par usage |
+| `sensor.*_restrictions_vence` (glob) | NAT | Intégration VigiEau (HACS) - entités dynamiques par usage |
 
 ### Fichiers YAML Dashboard
 
@@ -1638,7 +1638,7 @@ VigiEau (intégration HACS) — Section SÉCHERESSE
 
 ---
 
-## ✅ HOME PAGE — CARTES PERMANENTES (hors grille 18 vignettes)
+## ✅ HOME PAGE - CARTES PERMANENTES (hors grille 18 vignettes)
 *Validée le 2026-06-13*
 
 > Les 18 vignettes de la grille sont documentées dans leurs sections respectives (L1C1–L6C3).
@@ -1648,42 +1648,42 @@ VigiEau (intégration HACS) — Section SÉCHERESSE
 
 ```
 HOME PAGE (type: grid)
-  ├─→ [1] picture-elements — meteocss v2.2.1
+  ├─→ [1] picture-elements - meteocss v2.2.1
   │     ├─→ packages/cssmeteo.yaml + custom_templates/meteo.jinja
   │     │     └─→ (fond animé ciel + foreground nuages/pluie/neige)
   │     ├─→ custom_templates/rotation.jinja
   │     │     ├─→ sensor.sun_left / sun_top / sun_opacity  (TPL meteocss)
   │     │     └─→ sensor.moon_left / moon_top / moon_opacity / moon_phase  (TPL meteocss)
-  │     ├─→ sensor.moon_api (attr: moon_parallactic_angle)  (NAT — intégration Moon)
-  │     ├─→ sensor.vence_original_condition  (NAT — command_line/meteo/carte_meteo_france.yaml)
-  │     ├─→ sensor.th_balcon_nord_temperature  (NAT — SONOFF via Z2M)
-  │     └─→ sensor.alerte_meteo  (TPL — templates/meteo/M_01_meteo_alertes_card.yaml)
+  │     ├─→ sensor.moon_api (attr: moon_parallactic_angle)  (NAT - intégration Moon)
+  │     ├─→ sensor.vence_original_condition  (NAT - command_line/meteo/carte_meteo_france.yaml)
+  │     ├─→ sensor.th_balcon_nord_temperature  (NAT - SONOFF via Z2M)
+  │     └─→ sensor.alerte_meteo  (TPL - templates/meteo/M_01_meteo_alertes_card.yaml)
   ├─→ [2] meteofrance-weather-card  (toujours visible)
-  │     └─→ weather.vence + sensor.vence_* (NAT — Météo France)
-  ├─→ [3] conditional — VS Code Server  (visible si CPU > 1%)
-  │     └─→ sensor.studio_code_server_pourcentage_du_processeur  (NAT — Studio Code Server add-on)
-  ├─→ [4] button-card — Foudre  (visible si lightning_counter > 1)
-  │     ├─→ sensor.maison_lightning_counter  (NAT — Blitzortung natif, PAS un TPL)
-  │     ├─→ sensor.maison_lightning_distance  (NAT — Blitzortung natif)
-  │     ├─→ sensor.blitzortung_lightning_localisation  (SEN — M_03_meteo_sensors_blitzortung.yaml, REST Nominatim)
-  │     ├─→ sensor.maison_lightning_azimuth  (NAT — Blitzortung natif)
-  │     └─→ sensor.dernier_impact_temps_reel  (TPL — M_03_meteo_blitzortung.yaml, seul vrai TPL de ce bloc)
-  ├─→ [5] mushroom — Lave-linge  (visible si power > 50W)
-  │     └─→ sensor.prise_lave_linge_nous_power  (NAT — NOUS SP via Z2M)
-  ├─→ [6] mushroom — Lave-vaisselle  (visible si power > 50W)
-  │     └─→ sensor.prise_lave_vaisselle_nous_power  (NAT — NOUS SP via Z2M)
-  ├─→ [7] bubble-card separator + 2× button — Présence
-  │     ├─→ sensor.etat_wifi_maison  (TPL — P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml)
-  │     ├─→ device_tracker.poco  (NAT — Mobile App Eric)
-  │     ├─→ person.eric  (NAT — HA Personnes)
-  │     ├─→ device_tracker.mamour  (NAT — Mobile App Mamour)
-  │     └─→ person.mamour  (NAT — HA Personnes)
-  ├─→ [8] mushroom — Détecteur fuite  (visible si on | unavailable | unknown)
-  │     └─→ binary_sensor.detecteur_de_fuite_ikea_water_leak  (NAT — IKEA Vallhorn via Z2M)
-  └─→ [9] type: grid — 18 vignettes  (voir sections L1C1–L6C3)
+  │     └─→ weather.vence + sensor.vence_* (NAT - Météo France)
+  ├─→ [3] conditional - VS Code Server  (visible si CPU > 1%)
+  │     └─→ sensor.studio_code_server_pourcentage_du_processeur  (NAT - Studio Code Server add-on)
+  ├─→ [4] button-card - Foudre  (visible si lightning_counter > 1)
+  │     ├─→ sensor.maison_lightning_counter  (NAT - Blitzortung natif, PAS un TPL)
+  │     ├─→ sensor.maison_lightning_distance  (NAT - Blitzortung natif)
+  │     ├─→ sensor.blitzortung_lightning_localisation  (SEN - M_03_meteo_sensors_blitzortung.yaml, REST Nominatim)
+  │     ├─→ sensor.maison_lightning_azimuth  (NAT - Blitzortung natif)
+  │     └─→ sensor.dernier_impact_temps_reel  (TPL - M_03_meteo_blitzortung.yaml, seul vrai TPL de ce bloc)
+  ├─→ [5] mushroom - Lave-linge  (visible si power > 50W)
+  │     └─→ sensor.prise_lave_linge_nous_power  (NAT - NOUS SP via Z2M)
+  ├─→ [6] mushroom - Lave-vaisselle  (visible si power > 50W)
+  │     └─→ sensor.prise_lave_vaisselle_nous_power  (NAT - NOUS SP via Z2M)
+  ├─→ [7] bubble-card separator + 2× button - Présence
+  │     ├─→ sensor.etat_wifi_maison  (TPL - P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml)
+  │     ├─→ device_tracker.poco  (NAT - Mobile App Eric)
+  │     ├─→ person.eric  (NAT - HA Personnes)
+  │     ├─→ device_tracker.mamour  (NAT - Mobile App Mamour)
+  │     └─→ person.mamour  (NAT - HA Personnes)
+  ├─→ [8] mushroom - Détecteur fuite  (visible si on | unavailable | unknown)
+  │     └─→ binary_sensor.detecteur_de_fuite_ikea_water_leak  (NAT - IKEA Vallhorn via Z2M)
+  └─→ [9] type: grid - 18 vignettes  (voir sections L1C1–L6C3)
 ```
 
-### Entités consommées — Cartes permanentes HOME
+### Entités consommées - Cartes permanentes HOME
 
 | Entité | Type | Fichier source | Carte |
 |:-------|:----:|:--------------|:------|
@@ -1709,12 +1709,12 @@ HOME PAGE (type: grid)
 | `sensor.blitzortung_lightning_localisation` | SEN | `sensors/meteo/M_03_meteo_sensors_blitzortung.yaml` (REST Nominatim) | [4] |
 | `sensor.maison_lightning_azimuth` | NAT | Intégration Blitzortung (MQTT native) | [4] |
 | `sensor.dernier_impact_temps_reel` | TPL | `templates/meteo/M_03_meteo_blitzortung.yaml` | [4] |
-| `sensor.prise_lave_linge_nous_power` | NAT | NOUS SP via Z2M (P2 — cuisine) | [5] |
-| `sensor.prise_lave_vaisselle_nous_power` | NAT | NOUS SP via Z2M (P2 — cuisine) | [6] |
+| `sensor.prise_lave_linge_nous_power` | NAT | NOUS SP via Z2M (P2 - cuisine) | [5] |
+| `sensor.prise_lave_vaisselle_nous_power` | NAT | NOUS SP via Z2M (P2 - cuisine) | [6] |
 | `sensor.etat_wifi_maison` | TPL | `templates/P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml` | [7] |
-| `device_tracker.poco` | NAT | Mobile App (Companion) — Eric | [7] |
+| `device_tracker.poco` | NAT | Mobile App (Companion) - Eric | [7] |
 | `person.eric` | NAT | HA Personnes | [7] |
-| `device_tracker.mamour` | NAT | Mobile App (Companion) — Mamour | [7] |
+| `device_tracker.mamour` | NAT | Mobile App (Companion) - Mamour | [7] |
 | `person.mamour` | NAT | HA Personnes | [7] |
 | `binary_sensor.detecteur_de_fuite_ikea_water_leak` | NAT | IKEA Vallhorn via Z2M | [8] |
 
@@ -1739,10 +1739,10 @@ HOME PAGE (type: grid)
 
 ---
 
-## 📁 COMPLÉMENT — FICHIERS CONFIG RACINE & RÉPERTOIRES HORS DASHBOARD
+## 📁 COMPLÉMENT - FICHIERS CONFIG RACINE & RÉPERTOIRES HORS DASHBOARD
 
 > Ces fichiers font partie intégrante de la config HA et sont audités par `audit_md5.sh`.
-> Ils n'alimentent pas directement d'entités dashboard — référencés ici pour inventaire complet.
+> Ils n'alimentent pas directement d'entités dashboard - référencés ici pour inventaire complet.
 > *Ajouté le 2026-06-15*
 
 ### Fichiers racine `/config/`
@@ -1751,14 +1751,14 @@ HOME PAGE (type: grid)
 |:--------|:-----|:------:|
 | `automations.yaml` | Toutes les automations HA (géré via UI) | ✅ |
 | `scripts.yaml` | Scripts HA (J-1-x, J-2-0, audit_md5) | ✅ |
-| `shell_command/` (répertoire) | Commandes shell (git backup, audit MD5, zone log P4) — `!include_dir_merge_named` | ✅ |
-| `configuration.yaml` | Point d'entrée HA — includes, intégrations | ✅ |
+| `shell_command/` (répertoire) | Commandes shell (git backup, audit MD5, zone log P4) - `!include_dir_merge_named` | ✅ |
+| `configuration.yaml` | Point d'entrée HA - includes, intégrations | ✅ |
 | `sql.yaml` | Capteurs SQL (taille MariaDB) → L5C3 | ✅ |
 | `input_button.yaml` | Boutons virtuels (déclencheurs UI) | ✅ |
 | `input_datetime.yaml` | Helpers date/heure | ✅ |
 | `input_select.yaml` | Helpers liste (mode soufflant SDB, etc.) | ✅ |
 | `scenes.yaml` | Scènes HA | ❌ hors scope |
-| `secrets.yaml` | Identifiants — **NE PAS auditer / synchroniser** | ⛔ |
+| `secrets.yaml` | Identifiants - **NE PAS auditer / synchroniser** | ⛔ |
 
 ### Répertoires audités (DIRS)
 
@@ -1771,10 +1771,10 @@ HOME PAGE (type: grid)
 | `groups/` | Groupes batteries HUE/IKEA/SONOFF → L5C1 | ✅ |
 | `input_booleans/` | Helpers booléens (verrous clim, présence…) | ✅ |
 | `input_number/` | Helpers numériques | ✅ |
-| `packages/` | Packages CSS météo (cssmeteo.yaml, demometeo.yaml) — Moon API | ✅ |
+| `packages/` | Packages CSS météo (cssmeteo.yaml, demometeo.yaml) - Moon API | ✅ |
 | `shell_command/` | Commandes shell (backup Git, audit MD5, zone log P4) | ✅ |
 
-### Intégration FILE (UI uniquement — notify.file interdit en YAML)
+### Intégration FILE (UI uniquement - notify.file interdit en YAML)
 
 > Configurée via : Paramètres → Appareils & Services → Ajouter → File
 > Génère des services `notify.file_*` utilisés par les automations.
@@ -1789,16 +1789,16 @@ HOME PAGE (type: grid)
 
 | Répertoire | Raison |
 |:-----------|:-------|
-| `.scripts/` | Scripts shell — pas des entités HA |
-| `notifs/` | Fichiers .txt — hors périmètre YAML |
-| `blueprints/` | Blueprints HA — non modifiés manuellement |
-| `custom_components/` | Intégrations HACS — non versionnées ici |
-| `www/` | Ressources frontend — hors config HA |
-| `docs_dashboard/` *(hypothèse — voir note)* | Ancien répertoire, supprimé le 2026-07-14, remplacé par `docs/02_docs_dashboard/` |
+| `.scripts/` | Scripts shell - pas des entités HA |
+| `notifs/` | Fichiers .txt - hors périmètre YAML |
+| `blueprints/` | Blueprints HA - non modifiés manuellement |
+| `custom_components/` | Intégrations HACS - non versionnées ici |
+| `www/` | Ressources frontend - hors config HA |
+| `docs_dashboard/` *(hypothèse - voir note)* | Ancien répertoire, supprimé le 2026-07-14, remplacé par `docs/02_docs_dashboard/` |
 
 > ⚠️ **Note 2026-07-19** : la ligne ci-dessus complète une phrase tronquée dans le fichier
 > d'origine (coupure nette au milieu du mot "docs_da", sans fin de ligne). Le contenu réel
 > a été perdu ; complété par hypothèse raisonnable sur la base du nom partiel et de la
 > convention `⛔ TREE_CORRIGE/, TREE_ORIGINE/, Dashboard/, docs_dashboard/, docs_automations/,
-> docs_scripts/ supprimés le 2026-07-14` documentée dans CLAUDE.md. À vérifier par Eric —
+> docs_scripts/ supprimés le 2026-07-14` documentée dans CLAUDE.md. À vérifier par Eric -
 > le fichier source (avant troncature) n'est pas récupérable ici.

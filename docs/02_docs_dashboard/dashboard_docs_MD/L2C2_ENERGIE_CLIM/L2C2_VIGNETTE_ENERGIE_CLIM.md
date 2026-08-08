@@ -1,4 +1,4 @@
-# L2C2 — VIGNETTE : Énergie Clim / Radiateur / Soufflant
+# L2C2 - VIGNETTE : Énergie Clim / Radiateur / Soufflant
 *Dernière mise à jour : 2026-03-24*
 
 ---
@@ -238,7 +238,7 @@ custom_fields:
 
 ---
 
-## Entités utilisées — Provenance complète
+## Entités utilisées - Provenance complète
 
 ### Entités `entities:` et `triggers_update:` (25 total)
 
@@ -289,7 +289,7 @@ custom_fields:
 
 ## Logique JavaScript
 
-### 1. Colonne `piece` — ColorMap 5 états
+### 1. Colonne `piece` - ColorMap 5 états
 
 ```
 powerStatus = 'off' + mode = 'off'  → rgb(244,67,54)  [ROUGE]    Éteint = hors tension
@@ -303,7 +303,7 @@ La ligne **TOTAL** ignore le colorMap : toujours `lightgreen` + `font-weight: bo
 
 Fonction `safeState()` : renvoie `'off'` si l'entité est indisponible (protection NaN/crash).
 
-### 2. Colonnes `quotidien` / `mensuel` — Basculement Wh ↔ kWh
+### 2. Colonnes `quotidien` / `mensuel` - Basculement Wh ↔ kWh
 
 ```javascript
 val < 1  → affiche en Wh  : (val × 1000).toFixed(0) + " Wh"

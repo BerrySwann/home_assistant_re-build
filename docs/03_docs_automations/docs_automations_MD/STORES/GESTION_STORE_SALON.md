@@ -29,14 +29,14 @@ Mode `default` → ouverture si aucun scénario ne correspond.
 
 ---
 
-## ⚙️ Scénarios — Choose
+## ⚙️ Scénarios - Choose
 
 | Scénario | Condition | Action |
 |:---|:---|:---|
-| 1 — Canicule > 34°C | T° > 34°C | G2/G4 → position 50% / sinon → fermeture totale |
-| 2 — Anti-reflet PC | G2/G4 + azimut ∈ `input_number.soleil_azimut_*` + élévation ∈ `input_number.soleil_elevation_*` | position 30% |
-| 3 — Froid < 17°C + sans Mamour | T° < 17°C + G1/G3 | `cover.close_cover` |
-| 4 — Nuit | Après sunset | `cover.close_cover` |
+| 1 - Canicule > 34°C | T° > 34°C | G2/G4 → position 50% / sinon → fermeture totale |
+| 2 - Anti-reflet PC | G2/G4 + azimut ∈ `input_number.soleil_azimut_*` + élévation ∈ `input_number.soleil_elevation_*` | position 30% |
+| 3 - Froid < 17°C + sans Mamour | T° < 17°C + G1/G3 | `cover.close_cover` |
+| 4 - Nuit | Après sunset | `cover.close_cover` |
 | default | Tout autre cas | `cover.open_cover` |
 
 ---

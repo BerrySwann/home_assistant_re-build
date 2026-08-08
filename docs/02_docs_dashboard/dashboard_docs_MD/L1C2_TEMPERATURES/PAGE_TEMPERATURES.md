@@ -19,7 +19,7 @@
 
 ---
 
-# 🌡️ PAGE TEMPÉRATURES — DOCUMENTATION COMPLÈTE
+# 🌡️ PAGE TEMPÉRATURES - DOCUMENTATION COMPLÈTE
 
 ---
 
@@ -91,10 +91,10 @@ Page complète de suivi thermique et hygrométrique de l'appartement. Elle regro
 │  ApexCharts [Conso 24h] T° moy + conso clim        │
 ├────────────────────────────────────────────────────┤
 │  HEADING : Récap. Températures                     │
-│  ApexCharts 24h — 6 pièces                        │
+│  ApexCharts 24h - 6 pièces                        │
 ├────────────────────────────────────────────────────┤
 │  HEADING : Récap. Humidité                         │
-│  ApexCharts 24h — 6 pièces                        │
+│  ApexCharts 24h - 6 pièces                        │
 ├────────────────────────────────────────────────────┤
 │  HEADING SALON   + badge clim + badge T° + batterie│
 │  bubble-card climate (clim_salon_rm4_mini)         │
@@ -119,7 +119,7 @@ Page complète de suivi thermique et hygrométrique de l'appartement. Elle regro
 │  bubble-card climate (clim_chambre_rm4_mini)       │
 │  streamline temperature_humidite                   │
 ├────────────────────────────────────────────────────┤
-│  [POP-UPS — vertical-stack cachés]                 │
+│  [POP-UPS - vertical-stack cachés]                 │
 │  #tendances  #exterieur                            │
 │  #salon  #cellier  #cuisine  #bureau               │
 │  #salle_de_bain  #chambre                          │
@@ -164,8 +164,8 @@ ApexCharts 24h superposant humidité (colonnes) et températures (courbes).
 
 ```yaml
 yaxis:
-  - id: humidity     # axe gauche  — min ~30, max ~70
-  - id: temperature  # axe droit   — min ~10, max ~32
+  - id: humidity     # axe gauche  - min ~30, max ~70
+  - id: temperature  # axe droit   - min ~10, max ~32
 series:
   - sensor.th_balcon_nord_humidity  → colonnes bleues  rgb(19,160,255)
   - sensor.vence_temperature        → courbe orange    (Météo France)
@@ -187,7 +187,7 @@ series:
 
 ### horizontal-stack (2 colonnes)
 
-**Colonne gauche — Température**
+**Colonne gauche - Température**
 
 | Élément | Détail |
 |---------|--------|
@@ -197,7 +197,7 @@ series:
 | `mini-graph-card` | Courbe T° 24h, couleur `#df6366`, hauteur 200px, `fill: fade` |
 | tap_action mushroom | Navigue vers `#tcourbe` |
 
-**Colonne droite — Humidité**
+**Colonne droite - Humidité**
 
 | Élément | Détail |
 |---------|--------|
@@ -219,7 +219,7 @@ series:
 
 ### Chips clim (mushroom-chips-card)
 
-Chips **conditionnels** — s'affichent uniquement si `sensor.{piece}_power_status ≠ "off"` :
+Chips **conditionnels** - s'affichent uniquement si `sensor.{piece}_power_status ≠ "off"` :
 
 | Chip | Icône | Entité état | États affichés |
 |------|-------|------------|----------------|
@@ -276,7 +276,7 @@ Marqueur `Now` en darkred. `cache: true`, `span: start day`.
 
 ## 🌡️ SECTION RÉCAP. TEMPÉRATURES
 
-ApexCharts 24h — 6 pièces intérieures (y-axis droite, 10-32°C, groupé par 1h) :
+ApexCharts 24h - 6 pièces intérieures (y-axis droite, 10-32°C, groupé par 1h) :
 
 | Pièce | Couleur | Entité |
 |-------|---------|--------|
@@ -291,7 +291,7 @@ ApexCharts 24h — 6 pièces intérieures (y-axis droite, 10-32°C, groupé par 
 
 ## 💧 SECTION RÉCAP. HUMIDITÉ
 
-ApexCharts 24h — 6 pièces intérieures (y-axis droite, 30-75%, groupé par 1h, `update_interval: 1m`) :
+ApexCharts 24h - 6 pièces intérieures (y-axis droite, 30-75%, groupé par 1h, `update_interval: 1m`) :
 
 | Pièce | Couleur | Entité |
 |-------|---------|--------|
@@ -325,12 +325,12 @@ streamline-card template: temperature_humidite
 
 | Pièce | Icône | Clim/Chauf | Entité climate | Badge switch |
 |-------|-------|-----------|----------------|-------------|
-| **SALON** | `mdi:sofa` | Clim | `climate.clim_salon_rm4_mini` [SmartIR - configuration.yaml] | — |
-| **CELLIER** | `mdi:food-variant` | Aucun | — | — |
+| **SALON** | `mdi:sofa` | Clim | `climate.clim_salon_rm4_mini` [SmartIR - configuration.yaml] | - |
+| **CELLIER** | `mdi:food-variant` | Aucun | - | - |
 | **CUISINE** | `mdi:fridge` | Radiateur | `climate.radiateur_cuisine` | `switch.radiateur_elec_cuisine` |
-| **BUREAU** | `mdi:desktop-tower-monitor` | Clim | `climate.clim_bureau_rm4_mini` [SmartIR - configuration.yaml] | — |
-| **SALLE DE BAIN** | `mdi:bathtub` | Soufflant/Sèche-serv. | — *(pas de bubble climate)* | — |
-| **CHAMBRE** | `mdi:bed` | Clim | `climate.clim_chambre_rm4_mini` [SmartIR - configuration.yaml] | — |
+| **BUREAU** | `mdi:desktop-tower-monitor` | Clim | `climate.clim_bureau_rm4_mini` [SmartIR - configuration.yaml] | - |
+| **SALLE DE BAIN** | `mdi:bathtub` | Soufflant/Sèche-serv. | - *(pas de bubble climate)* | - |
+| **CHAMBRE** | `mdi:bed` | Clim | `climate.clim_chambre_rm4_mini` [SmartIR - configuration.yaml] | - |
 
 ### bubble-card climate
 
@@ -339,7 +339,7 @@ Chaque bubble-card climate expose :
 - Sélecteur vitesse ventilateur (sous-bouton icône `mdi:fan`)
 - Couleurs : `Heat` → `#ff6100`, `Fan only` → `#008B8B`
 
-> Note Cuisine : `climate.radiateur_cuisine` utilise `entity:` redondant dans `sub_button` — pas d'impact fonctionnel.
+> Note Cuisine : `climate.radiateur_cuisine` utilise `entity:` redondant dans `sub_button` - pas d'impact fonctionnel.
 
 > ✅ Correction appliquée (2026-03-14) : le sous-bouton fan du Bureau référençait `climate.clim_du_bureau` (entité inexistante → fan_modes inopérant). Corrigé en `climate.clim_bureau_rm4_mini`.
 
@@ -353,14 +353,14 @@ variables:
   temperature_entity: sensor.th_{piece}_temperature
   humidity_entity: sensor.th_{piece}_humidity
   icon: mdi:{icone_piece}
-  margin_top: "-150"   # optionnel — Salon uniquement
+  margin_top: "-150"   # optionnel - Salon uniquement
 ```
 
 ---
 
 ## 🪟 POP-UPS
 
-### `#tendances` — Delta Intérieur / Extérieur
+### `#tendances` - Delta Intérieur / Extérieur
 
 ```yaml
 hash: "#tendances"
@@ -373,14 +373,14 @@ Contenu : `streamline-card template: calcule_temp_cible`
 
 Ce template affiche un résumé textuel des **températures cibles actives** selon deux variables combinées :
 
-**Variable 1 — Période de la journée** (via `templates/utilitaires/jour_nuit.yaml`) :
+**Variable 1 - Période de la journée** (via `templates/utilitaires/jour_nuit.yaml`) :
 
 | Sensor | État | Plage horaire |
 |--------|------|---------------|
 | `binary_sensor.est_jour_7h30_21h` | `on` | 7h30 → 21h00 |
 | `binary_sensor.est_nuit_21h_7h30` | `on` | 21h00 → 7h30 |
 
-**Variable 2 — Groupe de présence** (`sensor.groupe`) :
+**Variable 2 - Groupe de présence** (`sensor.groupe`) :
 
 | Valeur | Signification |
 |--------|---------------|
@@ -409,7 +409,7 @@ Nuit (21h-7h30) + groupe_2/3/4 → confort_nuit (heat + cool, toutes pièces)
 
 > ⚠️ **Correction 2026-06-21** : entités obsolètes corrigées (`temperature_confort_jour_jour` → `temperature_confort_jour`, `corrige_*_hivers` → `corrige_*`). Logique cool G1 : `temperature_cible` → `temperature_eco_ete_corrige`. Corrections par pièce selon groupe ajoutées (corrige_mamour/eric/chambre).
 
-### `#exterieur` — Heatmap T° Extérieure
+### `#exterieur` - Heatmap T° Extérieure
 
 ```yaml
 hash: "#exterieur"
@@ -443,7 +443,7 @@ variables:
   card_title: "Carte des T° de/du [PIECE]"
 ```
 
-### `#tcourbe` — Tendance Température (détail)
+### `#tcourbe` - Tendance Température (détail)
 
 ```yaml
 hash: "#tcourbe"
@@ -452,7 +452,7 @@ icon: mdi:thermometer-check
 ```
 Contenu : mushroom-template-card (flèche T°) + mini-graph-card (300px, 24h, labels + extrema + points)
 
-### `#hcourbe` — Tendance Humidité (détail)
+### `#hcourbe` - Tendance Humidité (détail)
 
 ```yaml
 hash: "#hcourbe"
@@ -467,7 +467,7 @@ Contenu : mushroom-template-card (flèche H%) + mini-graph-card (300px, 24h, lab
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ### 🌿 Zigbee - UI (Sonoff SNZB-02)
 
@@ -488,14 +488,14 @@ Contenu : mushroom-template-card (flèche H%) + mini-graph-card (300px, 24h, lab
 | `sensor.vence_temperature` | Météo France | T° extérieure officielle (graphique extérieur) |
 | `weather.vence` | Météo France | Prévisions (heatmap pop-up #exterieur) |
 
-### ⚙️ SmartIR — configuration.yaml
+### ⚙️ SmartIR - configuration.yaml
 
 | Entité | Pièce | Codes IR |
 |--------|-------|----------|
 | `climate.clim_salon_rm4_mini` | Salon | RM4-Mini, code 1082 |
 | `climate.clim_bureau_rm4_mini` | Bureau | RM4-Mini, code 1108 |
 | `climate.clim_chambre_rm4_mini` | Chambre | RM4-Mini, code 1108 |
-| `climate.radiateur_cuisine` | Cuisine | — |
+| `climate.radiateur_cuisine` | Cuisine | - |
 | `switch.radiateur_elec_cuisine` | Cuisine | Zigbee - UI |
 
 ### 📁 `templates/meteo/M_04_tendances_th_ext_card.yaml`
@@ -509,8 +509,8 @@ Contenu : mushroom-template-card (flèche H%) + mini-graph-card (300px, 24h, lab
 
 | Entité | Rôle |
 |--------|------|
-| `binary_sensor.est_jour_7h30_21h` | `on` entre 7h30 et 21h — conditionne l'affichage dans `#tendances` |
-| `binary_sensor.est_nuit_21h_7h30` | `on` entre 21h et 7h30 — conditionne l'affichage dans `#tendances` |
+| `binary_sensor.est_jour_7h30_21h` | `on` entre 7h30 et 21h - conditionne l'affichage dans `#tendances` |
+| `binary_sensor.est_nuit_21h_7h30` | `on` entre 21h et 7h30 - conditionne l'affichage dans `#tendances` |
 
 > Ces capteurs sont **indépendants du cycle solaire** (lever/coucher). Ils représentent le rythme d'activité du foyer.
 
@@ -520,7 +520,7 @@ Contenu : mushroom-template-card (flèche H%) + mini-graph-card (300px, 24h, lab
 |---------|-----------------|
 | `P1_ui_dashboard/P1_ui_dashboard.yaml` | `sensor.*_power_status`, `sensor.*_etat` (statuts et états clim/rad par pièce) |
 | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` | `sensor.conso_clim_rad_total` (W), `sensor.conso_clim_rad_total_quotidien/mensuel` (kWh) |
-| `P1_AVG/P1_AVG.yaml` | `sensor.clim_rad_total_avg_watts_quotidien` (W — moy. depuis minuit) |
+| `P1_AVG/P1_AVG.yaml` | `sensor.clim_rad_total_avg_watts_quotidien` (W - moy. depuis minuit) |
 | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | `sensor.temperature_moyenne_interieure`, `sensor.temperature_delta_affichage`, `sensor.groupe`, `sensor.mode_ete_hiver`, `sensor.temperature_cible/confort/confort_nuit/eco_hiver_corrige` |
 
 ---
@@ -531,10 +531,10 @@ Contenu : mushroom-template-card (flèche H%) + mini-graph-card (300px, 24h, lab
 
 | # | Emplacement | Symptôme | Cause | Correction |
 |---|-------------|----------|-------|------------|
-| 1 | Récap. Humidité — `th_chambre_humidity` | Courbe Chambre invisible | `yaxis_id: TH` (axe inexistant) | → `yaxis_id: humidity` |
-| 2 | Popup `#hcourbe` — mushroom secondary | Valeur humidité affichée `°C` | `}}°C` au lieu de `}}%` | → `}}%` |
-| 3 | Popup `#hcourbe` — mini-graph-card | Légende affiche "Température" | `name: Température` sur entité humidity | → `name: Humidité` |
-| 4 | Bureau — bubble-card fan sub_button | Vitesse ventilateur inopérante | `entity: climate.clim_du_bureau` (inexistante) | → `climate.clim_bureau_rm4_mini` |
+| 1 | Récap. Humidité - `th_chambre_humidity` | Courbe Chambre invisible | `yaxis_id: TH` (axe inexistant) | → `yaxis_id: humidity` |
+| 2 | Popup `#hcourbe` - mushroom secondary | Valeur humidité affichée `°C` | `}}°C` au lieu de `}}%` | → `}}%` |
+| 3 | Popup `#hcourbe` - mini-graph-card | Légende affiche "Température" | `name: Température` sur entité humidity | → `name: Humidité` |
+| 4 | Bureau - bubble-card fan sub_button | Vitesse ventilateur inopérante | `entity: climate.clim_du_bureau` (inexistante) | → `climate.clim_bureau_rm4_mini` |
 
 ---
 
@@ -551,7 +551,7 @@ Contenu : mushroom-template-card (flèche H%) + mini-graph-card (300px, 24h, lab
 2. Les templates Streamline se configurent dans `configuration.yaml` sous `custom_templates:`
 
 ### Les chips de consommation ne s'affichent pas
-Normal — ils sont `conditional` : ils n'apparaissent que si `sensor.{piece}_power_status ≠ "off"`. Si la clim ne consomme pas (puissance < 50 W), le chip est masqué. Source : `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml`.
+Normal - ils sont `conditional` : ils n'apparaissent que si `sensor.{piece}_power_status ≠ "off"`. Si la clim ne consomme pas (puissance < 50 W), le chip est masqué. Source : `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml`.
 
 ### Le graphique de consommation est vide
 Vérifier que les entités Pôle 1 sont chargées (`templates/P1_clim_chauffage/`). Si `sensor.conso_clim_rad_total` est `unknown`, recharger la config HA (`Configuration → Vérifier la config` puis `Redémarrer`).
@@ -563,7 +563,7 @@ Vérifier que les entités Pôle 1 sont chargées (`templates/P1_clim_chauffage/
 ### Configuration YAML
 
 - `templates/meteo/M_04_tendances_th_ext_card.yaml` (tendances T° et humidité)
-- `templates/utilitaires/jour_nuit.yaml` (binary_sensor jour/nuit — popup `#tendances`)
+- `templates/utilitaires/jour_nuit.yaml` (binary_sensor jour/nuit - popup `#tendances`)
 - `configuration.yaml` (SmartIR : clim salon, bureau, chambre)
 - `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` (statuts et états clim/rad)
 - `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` (totaux kWh + puissance W)

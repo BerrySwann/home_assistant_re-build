@@ -20,7 +20,7 @@
 
 ---
 
-# ⚡ PAGE ÉNERGIE HOME — DOCUMENTATION COMPLÈTE
+# ⚡ PAGE ÉNERGIE HOME - DOCUMENTATION COMPLÈTE
 
 > ⚠️ **[2026-04-23] Refonte structure onglets** : L'overlay 7 jours et le tableau Linky sont déplacés dans l'onglet HEBDOMADAIRE. L'onglet JOURNALIER ne contient plus que la conso 24h + pie + slider + synthèse.
 
@@ -31,7 +31,7 @@
 1. [Vue d'ensemble](#vue-densemble)
 2. [Architecture de la page](#architecture-de-la-page)
 3. [Section HEADER](#section-header)
-4. [Section RING TILES — Mini / Réel / Maxi](#section-ring-tiles--mini--réel--maxi)
+4. [Section RING TILES - Mini / Réel / Maxi](#section-ring-tiles--mini--réel--maxi)
 5. [Section ENERGY OVERVIEW](#section-energy-overview)
 6. [Section RATIOS LINKY](#section-ratios-linky)
 7. [Section TABBED-CARD (3 onglets)](#section-tabbed-card-3-onglets)
@@ -52,19 +52,19 @@ Cette page regroupe toutes les informations de consommation électrique du logem
 - Coûts journaliers et mensuels HP/HC détaillés (UM Genelec Appart × tarif EDF Tempo Bleu)
 - Pie charts HP/HC + sliders de rentabilité HC
 - Graphique 24h temps réel + moyennes glissantes
-- Historique 7 jours superposé (offset ApexCharts — source : UM quotidien NODON)
+- Historique 7 jours superposé (offset ApexCharts - source : UM quotidien NODON)
 - Tableau Linky 8 jours (coût + HP/HC)
 - Graphique mensuel par jours
 - Synthèse par postes (7 catégories, jour + mois) avec donut
 
 ### Intégrations requises
 
-- ✅ **NODON** (smart plug général appartement) — `sensor.general_electric_appart_*`
-- ✅ **Riemann tampon** — `sensor.genelec_appart_totale_kwh` (source des UM)
-- ✅ **UM Genelec Appart** — `sensor.genelec_appart_*_kwh_um` et `sensor.genelec_appart_hphc_*_um_hp/hc`
-- ✅ **MyElectricalData / Linky** (`linky_card`) — `sensor.linky_*`
-- ✅ **tarif_edf** (custom component) — `sensor.edf_tempo_price_blue_hp` / `sensor.edf_tempo_price_blue_hc`
-- ✅ Sensors Genelec Appart mini/maxi — `sensor.genelec_appart_conso_mini_24h` / `sensor.genelec_appart_conso_maxi_24h` (via `P0_MINI_MAXI_AVG_Genelec_appart.yaml`)
+- ✅ **NODON** (smart plug général appartement) - `sensor.general_electric_appart_*`
+- ✅ **Riemann tampon** - `sensor.genelec_appart_totale_kwh` (source des UM)
+- ✅ **UM Genelec Appart** - `sensor.genelec_appart_*_kwh_um` et `sensor.genelec_appart_hphc_*_um_hp/hc`
+- ✅ **MyElectricalData / Linky** (`linky_card`) - `sensor.linky_*`
+- ✅ **tarif_edf** (custom component) - `sensor.edf_tempo_price_blue_hp` / `sensor.edf_tempo_price_blue_hc`
+- ✅ Sensors Genelec Appart mini/maxi - `sensor.genelec_appart_conso_mini_24h` / `sensor.genelec_appart_conso_maxi_24h` (via `P0_MINI_MAXI_AVG_Genelec_appart.yaml`)
 
 ### Cartes HACS utilisées
 
@@ -158,8 +158,8 @@ Cette page regroupe toutes les informations de consommation électrique du logem
 
 ### Rôle
 - Titre principal : "ENERGIE HOME" avec icône pylône électrique
-- Badge **Réel** : Puissance instantanée NODON (W) — tap → `/dashboard-tablette/energie-temps-reel`
-- Badge **Cumul Jrs** : Énergie cumulée brute NODON (kWh) — tap → `/dashboard-tablette/energie-mensuel`
+- Badge **Réel** : Puissance instantanée NODON (W) - tap → `/dashboard-tablette/energie-temps-reel`
+- Badge **Cumul Jrs** : Énergie cumulée brute NODON (kWh) - tap → `/dashboard-tablette/energie-mensuel`
 - Navigation retour : Clic titre → `/dashboard-tablette/0` (dashboard HOME)
 
 > **Pages liées** : `energie-temps-reel` et `energie-mensuel` sont 2 pages séparées. Documentation : `PAGE_ENERGIE_TEMPS_REEL.md` et `PAGE_ENERGIE_MENSUEL.md`.
@@ -170,7 +170,7 @@ Cette page regroupe toutes les informations de consommation électrique du logem
 
 ---
 
-## 🔴 SECTION RING TILES — Mini / Réel / Maxi
+## 🔴 SECTION RING TILES - Mini / Réel / Maxi
 
 Grid 3 colonnes. Chaque ring-tile est un indicateur circulaire avec arc de couleur dynamique.
 
@@ -184,7 +184,7 @@ Grid 3 colonnes. Chaque ring-tile est un indicateur circulaire avec arc de coule
     - type: custom:ring-tile    # Maxi (kWh)
 ```
 
-### Ring-tile : Conso. Mini (kWh — talon reset minuit)
+### Ring-tile : Conso. Mini (kWh - talon reset minuit)
 
 | Paramètre | Valeur |
 |-----------|--------|
@@ -199,11 +199,11 @@ Grid 3 colonnes. Chaque ring-tile est un indicateur circulaire avec arc de coule
 | Seuil (kWh) | Couleur | Signification |
 |-------------|---------|---------------|
 | 0–7.99 | Vert | Normal (en pratique toujours 0) |
-| 8–14.99 | Vert | — |
-| ≥ 15 | Orange | Anormal — sensor à vérifier |
+| 8–14.99 | Vert | - |
+| ≥ 15 | Orange | Anormal - sensor à vérifier |
 
 > `genelec_appart_conso_mini_24h` = `value_min` sur 24h de `sensor.genelec_appart_quotidien_kwh_um`.
-> **Valeur toujours 0** — l'UM repart de 0 à minuit et ne peut que croître. Sert de marqueur de reset.
+> **Valeur toujours 0** - l'UM repart de 0 à minuit et ne peut que croître. Sert de marqueur de reset.
 > Source : `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml`
 
 ---
@@ -226,7 +226,7 @@ Grid 3 colonnes. Chaque ring-tile est un indicateur circulaire avec arc de coule
 
 ---
 
-### Ring-tile : Conso. Maxi (kWh — total journalier accumulé)
+### Ring-tile : Conso. Maxi (kWh - total journalier accumulé)
 
 | Paramètre | Valeur |
 |-----------|--------|
@@ -276,8 +276,8 @@ Grid 3 colonnes. Chaque ring-tile est un indicateur circulaire avec arc de coule
 Affiche un flux animé Enedis → Maison. La vitesse d'animation est proportionnelle à la consommation (seuil : 1 000 W, durée 1–5s).
 
 ### Entités
-- `sensor.general_electric_appart_energy` [NODON - UI] Énergie cumulée brute (kWh) — champ `power` de la carte
-- `sensor.general_electric_appart_power` [NODON - UI] Puissance instantanée (W) — champ `current`
+- `sensor.general_electric_appart_energy` [NODON - UI] Énergie cumulée brute (kWh) - champ `power` de la carte
+- `sensor.general_electric_appart_power` [NODON - UI] Puissance instantanée (W) - champ `current`
 
 ---
 
@@ -326,7 +326,7 @@ La zone principale de la page est une `custom:tabbed-card` englobant les 3 péri
 **Propriétés communes :**
 - Couleur active : `#FFB347` (orange chaleureux)
 - Onglets inactifs : blanc 60% opacité
-- Swipe activé (`swipeable: true`) — navigation tactile
+- Swipe activé (`swipeable: true`) - navigation tactile
 - Animation de transition (`animated: true`)
 
 ---
@@ -335,7 +335,7 @@ La zone principale de la page est une `custom:tabbed-card` englobant les 3 péri
 
 Période : jour en cours (remise à zéro à minuit).
 
-**1. Coût Quotidien** — 2 rangées de 3 entités (kWh + €)
+**1. Coût Quotidien** - 2 rangées de 3 entités (kWh + €)
 
 | Entité | Type | Rôle |
 |--------|------|------|
@@ -386,9 +386,9 @@ span:
 | Conso. temps réel | `sensor.general_electric_appart_power` | area | Courbe puissance instantanée (W) |
 | Moy. glissante 24h | `sensor.general_electric_appart_power` | line | `func: avg, duration: 24h` |
 | Moy. depuis minuit | `sensor.genelec_appart_avg_watts_quotidien` | line | Axe secondaire |
-| Moy. 1er du mois | `sensor.genelec_appart_avg_watts_mensuel` | — | En-tête uniquement (`in_chart: false`) |
+| Moy. 1er du mois | `sensor.genelec_appart_avg_watts_mensuel` | - | En-tête uniquement (`in_chart: false`) |
 
-Double axe Y : `TempsReel` (gauche — W) / `Minuit` (droite).
+Double axe Y : `TempsReel` (gauche - W) / `Minuit` (droite).
 
 **5. Synthèse Usages Journaliers + Donut**
 
@@ -414,7 +414,7 @@ Donut ApexCharts : `graph_span: 24h`, `group_by: func: last, duration: 24h`, Dat
 
 Période : semaine en cours (remise à zéro le lundi à minuit).
 
-**1. Coût Hebdomadaire** — 2 rangées de 3 entités (kWh + €)
+**1. Coût Hebdomadaire** - 2 rangées de 3 entités (kWh + €)
 
 | Entité | Rôle |
 |--------|------|
@@ -445,9 +445,9 @@ series:
 
 **3. Slider Rentabilité HC hebdomadaire**
 
-**Entité :** `sensor.genelec_appart_ratio_hc_hebdomadaire` — même structure que le slider journalier.
+**Entité :** `sensor.genelec_appart_ratio_hc_hebdomadaire` - même structure que le slider journalier.
 
-**4. Historique 7 jours superposé (Overlay — ApexCharts)**
+**4. Historique 7 jours superposé (Overlay - ApexCharts)**
 
 Principe : 8 séries sur `sensor.genelec_appart_quotidien_kwh_um` avec `offset` décalant la fenêtre de lecture. Chaque courbe représente un jour complet de 0 → total kWh, toutes alignées sur le même axe 24h.
 
@@ -509,7 +509,7 @@ Donut : `group_by: func: last, duration: 7d`.
 
 Période : mois en cours (remise à zéro le 1er du mois à minuit).
 
-**1. Coût Mensuel** — 2 rangées de 3 entités (kWh + €)
+**1. Coût Mensuel** - 2 rangées de 3 entités (kWh + €)
 
 | Entité | Type | Rôle |
 |--------|------|------|
@@ -540,7 +540,7 @@ series:
 
 **3. Slider Rentabilité HC mensuel**
 
-**Entité :** `sensor.genelec_appart_ratio_hc_mensuel` — même structure que le slider journalier.
+**Entité :** `sensor.genelec_appart_ratio_hc_mensuel` - même structure que le slider journalier.
 
 **4. Graphique Mensuel par Jours (ApexCharts)**
 
@@ -556,7 +556,7 @@ span:
 | Conso. ce jour | `sensor.genelec_appart_avg_watts_quotidien` | column | `daily` | Barres kWh (`func: max, duration: 24h`) |
 | Moy. glissante mois | `sensor.genelec_appart_totale_kwh` | line | `daily` | `func: avg, duration: 730h` |
 | Moy. depuis minuit | `sensor.genelec_appart_avg_watts_quotidien` | line | `moyenne` | Axe secondaire |
-| Moy. 1er du mois | `sensor.genelec_appart_avg_watts_mensuel` | — | `daily` | En-tête uniquement (`in_chart: false`) |
+| Moy. 1er du mois | `sensor.genelec_appart_avg_watts_mensuel` | - | `daily` | En-tête uniquement (`in_chart: false`) |
 
 **5. Synthèse Usages Mensuels + Donut**
 
@@ -578,9 +578,9 @@ Donut : `group_by: func: diff, duration: 24h`.
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
-### ⚡ NODON — Puissance & Énergie brute
+### ⚡ NODON - Puissance & Énergie brute
 
 | Entité | Rôle | Source |
 |--------|------|--------|
@@ -593,17 +593,17 @@ Donut : `group_by: func: diff, duration: 24h`.
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.genelec_appart_totale_kwh` | kWh local stable (Riemann left) — source des UM | `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart/P0_kWh_genelec_appart.yaml` |
+| `sensor.genelec_appart_totale_kwh` | kWh local stable (Riemann left) - source des UM | `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart/P0_kWh_genelec_appart.yaml` |
 
 ---
 
-### 📈 Statistiques P0 — Mini / Maxi / Moyennes
+### 📈 Statistiques P0 - Mini / Maxi / Moyennes
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.genelec_appart_conso_mini_24h` | `value_min` 24h UM quotidien — toujours 0 (reset minuit) | `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml` |
-| `sensor.genelec_appart_conso_maxi_24h` | `value_max` 24h UM quotidien — total journalier kWh | idem |
-| `sensor.genelec_appart_conso_moyenne_1h` | `mean` 1h UM quotidien — conso lissée (kWh) | idem |
+| `sensor.genelec_appart_conso_mini_24h` | `value_min` 24h UM quotidien - toujours 0 (reset minuit) | `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml` |
+| `sensor.genelec_appart_conso_maxi_24h` | `value_max` 24h UM quotidien - total journalier kWh | idem |
+| `sensor.genelec_appart_conso_moyenne_1h` | `mean` 1h UM quotidien - conso lissée (kWh) | idem |
 | `sensor.genelec_appart_avg_watts_quotidien` | Moyenne Watts depuis minuit | `templates/P0_Energie_total_diag/Genelec_appart/03_AVG_genelec_appart.yaml` |
 | `sensor.genelec_appart_avg_watts_hebdomadaire` | Moyenne Watts depuis lundi | idem |
 | `sensor.genelec_appart_avg_watts_mensuel` | Moyenne Watts depuis le 1er du mois | idem |
@@ -611,7 +611,7 @@ Donut : `group_by: func: diff, duration: 24h`.
 
 ---
 
-### 🔢 Utility Meters — Total kWh (sans split HP/HC)
+### 🔢 Utility Meters - Total kWh (sans split HP/HC)
 
 | Entité | Cycle | Source |
 |--------|-------|--------|
@@ -622,7 +622,7 @@ Donut : `group_by: func: diff, duration: 24h`.
 
 ---
 
-### 🔢 Utility Meters — HP/HC (avec split tarifaire)
+### 🔢 Utility Meters - HP/HC (avec split tarifaire)
 
 | Entité | Cycle | Tarif | Source |
 |--------|-------|-------|--------|
@@ -677,15 +677,15 @@ Donut : `group_by: func: diff, duration: 24h`.
 |--------|------|--------|
 | `sensor.linky_25481620821301_consumption` | Index Linky brut (ratios linky-card) | MyElectricalData [UI] |
 
-### 🔢 Templates Linky — Tableau journalier (flex-table)
+### 🔢 Templates Linky - Tableau journalier (flex-table)
 
 | Entité | Rôle | Source réelle |
 |--------|------|---------------|
-| `sensor.linky_jour_0` | Aujourd'hui : HP+HC (kWh) + coût (€) | **NODON** — `sensor.general_electric_appart_power` × tarif EDF Tempo Bleu |
-| `sensor.linky_jour_1` à `sensor.linky_jour_7` | J-1 à J-7 : HP+HC (kWh) + coût + jour de semaine | **Attributs Linky** — `state_attr('sensor.linky_25481620821301_consumption', 'day_X_HP/HC')` + `dailyweek_cost` |
+| `sensor.linky_jour_0` | Aujourd'hui : HP+HC (kWh) + coût (€) | **NODON** - `sensor.general_electric_appart_power` × tarif EDF Tempo Bleu |
+| `sensor.linky_jour_1` à `sensor.linky_jour_7` | J-1 à J-7 : HP+HC (kWh) + coût + jour de semaine | **Attributs Linky** - `state_attr('sensor.linky_25481620821301_consumption', 'day_X_HP/HC')` + `dailyweek_cost` |
 
 > Fichier source : `templates/P0_Energie_total_diag/Linky/MyElectricalData.yaml`
-> ⚠️ `linky_jour_0` n'est **pas** une donnée Linky — c'est la conso NODON du jour en temps réel (J0 = Aujourd'hui).
+> ⚠️ `linky_jour_0` n'est **pas** une donnée Linky - c'est la conso NODON du jour en temps réel (J0 = Aujourd'hui).
 > ⚠️ Les attributs Linky sont en **Wh** dans l'intégration → division par 1000 dans le template pour obtenir des kWh.
 
 ---
@@ -718,7 +718,7 @@ Donut : `group_by: func: diff, duration: 24h`.
 
 ### Les ring-tiles Mini/Maxi affichent "unavailable"
 1. Vérifier que `sensor.genelec_appart_conso_mini_24h` et `sensor.genelec_appart_conso_maxi_24h` existent dans Outils de développement > États
-2. Ces sensors sont des `platform: statistics` sur `sensor.genelec_appart_quotidien_kwh_um` — vérifier que l'UM quotidien est actif
+2. Ces sensors sont des `platform: statistics` sur `sensor.genelec_appart_quotidien_kwh_um` - vérifier que l'UM quotidien est actif
 3. La moyenne 1h peut être indisponible pendant les 60 premières minutes après redémarrage HA
 4. Source : `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml`
 
@@ -737,14 +737,14 @@ C'est **normal**. `value_min` sur 24h d'un UM qui repart de 0 à minuit sera tou
 3. L'UM a été créé récemment → les données historiques ne remontent qu'à sa date de création
 
 ### Le graphique Moy. glissante (onglet MENSUEL) ne s'affiche pas
-Source : `sensor.genelec_appart_totale_kwh` (Riemann tampon). Ce sensor démarre à 0 à la création — il n'y a pas de back-fill historique. Attendre quelques jours pour avoir un historique suffisant.
+Source : `sensor.genelec_appart_totale_kwh` (Riemann tampon). Ce sensor démarre à 0 à la création - il n'y a pas de back-fill historique. Attendre quelques jours pour avoir un historique suffisant.
 
 ### Le pie chart HP/HC affiche une seule tranche
 Normal si aucune consommation HC aujourd'hui (hors plage horaire HC). Vérifier les plages HC et l'automation de basculement.
 
 ### Les donuts SYNTHÈSE USAGES affichent des valeurs incohérentes
 1. Vérifier que les sensors `diag_poste_hygiene_quotidien`, etc. existent dans États
-2. Source : `templates/P0_Energie_total_diag/Diag/` — vérifier les fichiers source
+2. Source : `templates/P0_Energie_total_diag/Diag/` - vérifier les fichiers source
 
 ---
 
@@ -753,10 +753,10 @@ Normal si aucune consommation HC aujourd'hui (hors plage horaire HC). Vérifier 
 | Élément | Type | Statut |
 |---------|------|--------|
 | Smart plug NODON (appartement général) | Intégration HA [UI] | ✅ Essentiel |
-| `sensor.genelec_appart_totale_kwh` (Riemann) | Sensor integration | ✅ Essentiel — tampon NODON |
-| UM Genelec Appart (01 + 03) | Utility Meter | ✅ Essentiel — kWh + HP/HC |
-| `01_genelec_appart_AMHQ_cost.yaml` (templates) | Template coûts | ✅ Requis — fournit `cout_total/hp/hc_*` |
-| Automation basculement HP/HC | HA Automation | ✅ Requis — split HP/HC correct |
+| `sensor.genelec_appart_totale_kwh` (Riemann) | Sensor integration | ✅ Essentiel - tampon NODON |
+| UM Genelec Appart (01 + 03) | Utility Meter | ✅ Essentiel - kWh + HP/HC |
+| `01_genelec_appart_AMHQ_cost.yaml` (templates) | Template coûts | ✅ Requis - fournit `cout_total/hp/hc_*` |
+| Automation basculement HP/HC | HA Automation | ✅ Requis - split HP/HC correct |
 | MyElectricalData / Linky | HACS Integration | ✅ Requis pour ratios + tableau |
 | `ring-tile-card` | HACS Frontend | ✅ Essentiel (Mini/Réel/Maxi) |
 | `tabbed-card` | HACS Frontend | ✅ Essentiel (onglets) |

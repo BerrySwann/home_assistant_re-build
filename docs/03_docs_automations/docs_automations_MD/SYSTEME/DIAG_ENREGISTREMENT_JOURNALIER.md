@@ -1,4 +1,4 @@
-# DIAG — ENREGISTREMENT JOURNALIER (7 POSTES + DUT)
+# DIAG - ENREGISTREMENT JOURNALIER (7 POSTES + DUT)
 
 > **Fichier :** `TREE_CORRIGE/systeme/diag_enregistrement_journalier.yaml`
 > **Mode HA :** `single`

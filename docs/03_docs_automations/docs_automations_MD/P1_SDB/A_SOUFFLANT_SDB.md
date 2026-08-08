@@ -1,4 +1,4 @@
-# Soufflant SDB — Gestion Intelligente
+# Soufflant SDB - Gestion Intelligente
 
 **Catégorie :** P1_sdb
 **Alias HA :** `A - 2026/02/01 - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT`

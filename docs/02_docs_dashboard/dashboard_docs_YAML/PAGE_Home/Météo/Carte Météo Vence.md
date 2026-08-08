@@ -1,4 +1,4 @@
-# Carte Météo Vence Corrigée — YAML
+# Carte Météo Vence Corrigée - YAML
 
 **Dernière mise à jour :** 2026-06-26
 **Carte HACS :** MeteoCSS Card (`Pulpyyyy/meteocss-card`)
@@ -8,7 +8,7 @@
 
 ## ⚠️ À FAIRE À CHAQUE MISE À JOUR DE LA CARTE (HACS)
 
-> **CRITIQUE :** Quand la carte `meteocss-card` est mise à jour via HACS, les valeurs par défaut de couleurs (`sunrise` / `sunset`) du fichier JS sont **réinitialisées** aux couleurs d'origine (hard saturation, peu esthétiques). Le bloc `colors:` personnalisé ci-dessous N'EST PAS affecté par la mise à jour HACS lui-même (il vit dans le YAML, pas dans le JS) — mais il faut **vérifier après chaque MAJ HACS** que :
+> **CRITIQUE :** Quand la carte `meteocss-card` est mise à jour via HACS, les valeurs par défaut de couleurs (`sunrise` / `sunset`) du fichier JS sont **réinitialisées** aux couleurs d'origine (hard saturation, peu esthétiques). Le bloc `colors:` personnalisé ci-dessous N'EST PAS affecté par la mise à jour HACS lui-même (il vit dans le YAML, pas dans le JS) - mais il faut **vérifier après chaque MAJ HACS** que :
 > 1. La structure de configuration (`colors.sunrise`, `colors.sunset`) est toujours supportée par la nouvelle version
 > 2. Aucun nouveau défaut ou breaking change n'écrase silencieusement le bloc `colors:` personnalisé
 > 3. Recoller le bloc `colors:` ci-dessous si la carte semble être revenue aux couleurs d'origine après une MAJ
@@ -40,14 +40,14 @@ Carte météo composite pour le dashboard tablette de Vence, basée sur **MeteoC
 
 | Élément | Emplacement |
 |---|---|
-| Logique de rendu (sky/sun/moon/background/foreground), calcul position soleil, couleurs par défaut | **Fichier JS de la carte HACS** (`meteocss-card.js`) — jamais modifié directement |
+| Logique de rendu (sky/sun/moon/background/foreground), calcul position soleil, couleurs par défaut | **Fichier JS de la carte HACS** (`meteocss-card.js`) - jamais modifié directement |
 | Configuration (entités, angle, layers, couleurs personnalisées) | **YAML de la carte** (ce document) |
-| Anciens fichiers Jinja (`meteo_settings.jinja`, `rotation.jinja`, `meteo.jinja`) | **Obsolètes** — appartenaient à l'ancien système "100% CSS/Jinja", non utilisés par MeteoCSS Card |
+| Anciens fichiers Jinja (`meteo_settings.jinja`, `rotation.jinja`, `meteo.jinja`) | **Obsolètes** - appartenaient à l'ancien système "100% CSS/Jinja", non utilisés par MeteoCSS Card |
 | `demometeo.yaml`, `cssmeteo.yaml` | Probablement **obsolètes** également (à confirmer/nettoyer) |
 
 ---
 
-## ⚙️ Paramètre `house_angle` — rappel important
+## ⚙️ Paramètre `house_angle` - rappel important
 
 `house_angle` **n'est pas** l'orientation géographique de la façade (Sud = 180° n'est qu'une coïncidence pratique). C'est l'**azimut auquel le soleil est centré visuellement** sur la carte.
 
@@ -157,7 +157,7 @@ elements:
         font-variant:small-caps;color:rgba(255,255,255,0.85);
         text-shadow:0px 1px 4px rgba(0,0,0,0.8);
         white-space:nowrap;pointer-events:none;">
-        {{ states('sensor.vence_original_condition') }} — {{ states('sensor.th_balcon_nord_temperature') | round(1) }}°C
+        {{ states('sensor.vence_original_condition') }} - {{ states('sensor.th_balcon_nord_temperature') | round(1) }}°C
       </div>
     style:
       top: 47%
@@ -177,7 +177,7 @@ elements:
         font-variant:small-caps;color:rgba(255,255,255,0.85);
         text-shadow:0px 1px 4px rgba(0,0,0,0.8);
         white-space:nowrap;pointer-events:none;">
-        VENCE — {{ now().strftime('%H:%M') }}
+        VENCE - {{ now().strftime('%H:%M') }}
       </div>
     style:
       top: 50%
@@ -216,11 +216,11 @@ card_mod:
 
 | Règle | Détail |
 |---|---|
-| **2 instances `meteo-card` maximum** | Une pour `sky`+`background`, une pour `sun`+`moon`+`foreground`. Ne jamais dupliquer au-delà — cause directe d'`Unknown type` / conflits de rendu observés le 2026-06-26 |
+| **2 instances `meteo-card` maximum** | Une pour `sky`+`background`, une pour `sun`+`moon`+`foreground`. Ne jamais dupliquer au-delà - cause directe d'`Unknown type` / conflits de rendu observés le 2026-06-26 |
 | **`singleton_id: vence_meteo`** | Obligatoire sur les deux instances pour qu'elles partagent le même état météo/soleil/lune (sinon désynchronisation visuelle) |
 | **Couleurs personnalisées** | Définies une seule fois, sur l'instance qui gère `sky` (pas besoin de répéter sur la seconde instance) |
 | **`card_mod`** | Toujours au niveau racine du `picture-elements`, jamais imbriqué dans un élément de la liste `elements` |
-| **Fichiers `.jinja` (meteo_settings, rotation, meteo)** | Orphelins de l'ancien système, sans effet sur MeteoCSS Card — à nettoyer si confirmé inutilisés ailleurs |
+| **Fichiers `.jinja` (meteo_settings, rotation, meteo)** | Orphelins de l'ancien système, sans effet sur MeteoCSS Card - à nettoyer si confirmé inutilisés ailleurs |
 
 ---
 

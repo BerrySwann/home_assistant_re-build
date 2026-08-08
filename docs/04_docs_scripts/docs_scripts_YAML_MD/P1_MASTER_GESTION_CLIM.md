@@ -1,10 +1,10 @@
-# P1_MASTER_GESTION_CLIM — Script centralisé climatisation
+# P1_MASTER_GESTION_CLIM - Script centralisé climatisation
 
 > **Script HA :** `script.p1_master_gestion_clim`
 > **Fichier TREE_CORRIGE :** `docs_scripts/TREE_CORRIGE/p1_master_gestion_clim.yaml`
-> **Mode :** `queued` — max: 10
+> **Mode :** `queued` - max: 10
 > **Appelé par :** Automation A0 (JOUR) + Automation B0 (NUIT)
-> **Créé par :** Refactoring LLM local — 2026-06
+> **Créé par :** Refactoring LLM local - 2026-06
 
 ---
 
@@ -60,7 +60,7 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 #### SALON
 | Groupe | Période | Cible |
 |:---|:---|:---|
-| `groupe_1` (absent) | — | eco (hc ou ec selon saison) |
+| `groupe_1` (absent) | - | eco (hc ou ec selon saison) |
 | `groupe_2` (Mamour) | JOUR | `temp_conf_m` |
 | `groupe_3` (Eric) | JOUR | `temp_conf_e` |
 | `groupe_4` (Tous) | JOUR | `temp_conf_m` |
@@ -69,7 +69,7 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 #### BUREAU
 | Groupe | Période | Cible |
 |:---|:---|:---|
-| `groupe_1` (absent) | — | eco |
+| `groupe_1` (absent) | - | eco |
 | `groupe_2` (Mamour) | JOUR | eco |
 | `groupe_3` (Eric) | JOUR | `temp_conf_e` |
 | `groupe_4` (Tous) | JOUR | `temp_conf_e` |
@@ -78,13 +78,13 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 #### CHAMBRE
 | Groupe | Période | Cible |
 |:---|:---|:---|
-| `groupe_1` (absent) | — | eco |
+| `groupe_1` (absent) | - | eco |
 | tout autre | JOUR | `temp_conf_c` |
 | tout | NUIT | `temp_nuit` |
 
 ### 6. Exécution
 
-**CAS URGENCE — fenêtre ouverte :**
+**CAS URGENCE - fenêtre ouverte :**
 - `climate.set_hvac_mode → off` sur les 3 clims
 - Notif ciblée sur la fenêtre déclenchante
 - `stop`
@@ -95,7 +95,7 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 - CHAMBRE : idem avec clim chambre
 - `sensor_update` + clim déjà en `off` → on ne la redémarre pas (protection intentionnelle)
 - Délai 2s
-- Notif résumé `[AJ/AN] presence — Mode / Températures`
+- Notif résumé `[AJ/AN] presence - Mode / Températures`
 
 ---
 
@@ -127,7 +127,7 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 |:---|:---|
 | `climate.clim_salon_rm4_mini` | `set_temperature` (hvac_mode + temperature) |
 | `climate.clim_bureau_rm4_mini` | `set_temperature` |
-| `climate.clim_chambre_rm4_mini` | `set_temperature` (target_temp_low/high — NodOn Z2M) |
+| `climate.clim_chambre_rm4_mini` | `set_temperature` (target_temp_low/high - NodOn Z2M) |
 | `climate.clim_salon_rm4_mini` / `clim_bureau_rm4_mini` / `clim_chambre_rm4_mini` | `set_hvac_mode: off` (urgence fenêtre) |
 
 ### Notifications
@@ -143,5 +143,5 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 
 - **SALON groupe_3 JOUR** : Eric seul → `temp_conf_e` (même comportement que l'ancienne version inline).
 - `sensor_update` ne redémarre pas une clim déjà en `off` (protection intentionnelle via `trigger_id`).
-- Script `mode: queued, max: 10` — les déclenchements simultanés sont mis en file.
+- Script `mode: queued, max: 10` - les déclenchements simultanés sont mis en file.
 - Les températures eco ont un fallb

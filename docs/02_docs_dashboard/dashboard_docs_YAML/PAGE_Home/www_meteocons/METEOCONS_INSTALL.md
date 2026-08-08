@@ -1,4 +1,4 @@
-# METEOCONS — Récupération des SVG animés (basmilius)
+# METEOCONS - Récupération des SVG animés (basmilius)
 
 *Dernière mise à jour : 2026-05-16*
 
@@ -7,7 +7,7 @@
 ## Contexte
 
 Les icônes proviennent du package npm `@meteocons/svg` (basmilius/weather-icons).  
-Ce sont des SVG animés via SMIL (`animateTransform`) — pas de JS requis, natif navigateur.
+Ce sont des SVG animés via SMIL (`animateTransform`) - pas de JS requis, natif navigateur.
 
 - Repo GitHub : https://github.com/basmilius/weather-icons
 - Package npm  : https://www.npmjs.com/package/@meteocons/svg
@@ -145,6 +145,6 @@ entity_picture: "[[[ const s = states['weather.vence'].state; const known = ['su
 ## Notes
 
 - Le CDN `cdn.meteocons.com` n'est **pas** utilisable (retourne 404 sur les chemins testés).
-- Le repo GitHub ne publie **pas** les SVG en raw — uniquement via le tarball npm.
-- Les 475 SVG du package couvrent alertes, boussoles, UV, phases lunaires, etc. — utiles pour d'autres vignettes.
-- Les animations sont du SMIL natif SVG (`animateTransform`) — aucune dépendance JS.
+- Le repo GitHub ne publie **pas** les SVG en raw - uniquement via le tarball npm.
+- Les 475 SVG du package couvrent alertes, boussoles, UV, phases lunaires, etc. - utiles pour d'autres vignettes.
+- Les animations sont du SMIL natif SVG (`animateTransform`) - aucune dépendance JS.

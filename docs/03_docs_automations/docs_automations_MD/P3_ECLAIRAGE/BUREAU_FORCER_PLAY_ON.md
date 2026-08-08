@@ -1,4 +1,4 @@
-# Bureau — Forcer Play ON si PC tourne
+# Bureau - Forcer Play ON si PC tourne
 
 **Catégorie :** P3_eclairage
 **Alias HA :** `Bureau - Forcer Play ON si PC tourne`

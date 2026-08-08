@@ -10,14 +10,14 @@
 | Champ | Valeur |
 |:------|:-------|
 | 📁 **Fichier YAML** | `Dashboard/L4C1_10_Proxmox/vignette_L4C1_proxmox_2026-06-18.yaml` |
-| 🔗 **Accès depuis** | L4C1 — Matrice dashboard principal (ligne 4, colonne 1) |
-| 🏗️ **Type** | `custom:button-card` — grille custom 4×2 |
+| 🔗 **Accès depuis** | L4C1 - Matrice dashboard principal (ligne 4, colonne 1) |
+| 🏗️ **Type** | `custom:button-card` - grille custom 4×2 |
 | 📅 **Modifié le** | 2026-06-09 |
 | 🏠 **Version HA** | 2025.2+ |
 
 ---
 
-# 🖥️ L4C1 — VIGNETTE PROXMOX
+# 🖥️ L4C1 - VIGNETTE PROXMOX
 
 ---
 
@@ -29,9 +29,9 @@ Vignette de supervision compacte du nœud Proxmox VE. Affiche la T° CPU package
 
 | Carte | Usage |
 |-------|-------|
-| `button-card` | Carte principale — grille + custom_fields |
+| `button-card` | Carte principale - grille + custom_fields |
 
-> ⚠️ **bar-card supprimée** — remplacée par lignes inline dans `custom_fields`
+> ⚠️ **bar-card supprimée** - remplacée par lignes inline dans `custom_fields`
 
 ---
 
@@ -62,11 +62,11 @@ Vignette de supervision compacte du nœud Proxmox VE. Affiche la T° CPU package
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 | Entité | Source | Rôle |
 |--------|--------|------|
-| `sensor.proxmox_cpu_package` | Intégration `proxmox_ve` | T° CPU package — couleur icône + champ temp |
+| `sensor.proxmox_cpu_package` | Intégration `proxmox_ve` | T° CPU package - couleur icône + champ temp |
 | `sensor.pve_utilisation_du_processeur` | Intégration `proxmox_ve` | CPU % nœud PVE |
 | `sensor.pve_memory_usage_percentage` | Intégration `proxmox_ve` | RAM % nœud PVE |
 | `sensor.storage_local_storage_usage_percentage` | Intégration `proxmox_ve` | Storage local % |

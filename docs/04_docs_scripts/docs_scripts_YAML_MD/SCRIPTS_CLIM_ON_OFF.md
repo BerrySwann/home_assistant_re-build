@@ -18,7 +18,7 @@
 
 ---
 
-# ⚙️ Scripts Clim ON/OFF — Routeurs J 1-1 / J 1-2 / J 1-3
+# ⚙️ Scripts Clim ON/OFF - Routeurs J 1-1 / J 1-2 / J 1-3
 
 > Script exécutant (protection thermique) → [[SCRIPT_J2_0_SECU_ARRET_CLIM]]
 
@@ -32,7 +32,7 @@
 4. [J 1-2 BUREAU](#j-12--bureau)
 5. [J 1-3 CHAMBRE](#j-13--chambre)
 6. [Entités & helpers requis](#entités--helpers-requis)
-7. [Dashboard — tap_action](#dashboard--tap_action)
+7. [Dashboard - tap_action](#dashboard--tap_action)
 
 ---
 
@@ -41,9 +41,9 @@
 ```
 Dashboard tap_action
     │
-    ├── script.j_1_1_salon_clim_on_off_intelligent    (J 1-1 SALON   — mode: single)
-    ├── script.j_1_2_bureau_clim_on_off_intelligent   (J 1-2 BUREAU  — mode: single)
-    └── script.j_1_3_chambre_clim_on_off_intelligent  (J 1-3 CHAMBRE — mode: single)
+    ├── script.j_1_1_salon_clim_on_off_intelligent    (J 1-1 SALON   - mode: single)
+    ├── script.j_1_2_bureau_clim_on_off_intelligent   (J 1-2 BUREAU  - mode: single)
+    └── script.j_1_3_chambre_clim_on_off_intelligent  (J 1-3 CHAMBRE - mode: single)
             │  ON  → switch.clim_<piece>_nous → ON
             └── OFF → script.j_2_0_secu_arret_clim_protege  ← voir [[SCRIPT_J2_0_SECU_ARRET_CLIM]]
 ```
@@ -63,7 +63,7 @@ Dashboard tap_action
 
 **Avant (J-1 unique `mode: single`)** : L'appel à J-2 est bloquant dans HA (`action: script.NOM`
 attend la fin du script). J-1 restait actif jusqu'à 10 min. Avec `mode: single`, tout tap
-sur une autre pièce pendant ce délai était **silencieusement ignoré** — aucune notification,
+sur une autre pièce pendant ce délai était **silencieusement ignoré** - aucune notification,
 aucune action.
 
 **Après (3 × J-1 dédiés)** : chaque script a son propre `mode: single` isolé par pièce.
@@ -71,14 +71,14 @@ Arrêter salon ne bloque plus bureau ni chambre.
 
 ---
 
-## 📍 J 1-1 — SALON
+## 📍 J 1-1 - SALON
 
 **Script ID** : `j_1_1_salon_clim_on_off_intelligent`
 
 ```yaml
 j_1_1_salon_clim_on_off_intelligent:
   alias: J 1-1 SALON - CLIM ON/OFF INTELLIGENT
-  description: '[ROUTEUR SALON] Anti-tremblote et routage ON/OFF — Salon uniquement.'
+  description: '[ROUTEUR SALON] Anti-tremblote et routage ON/OFF - Salon uniquement.'
   mode: single
   variables:
     p: salon
@@ -114,14 +114,14 @@ j_1_1_salon_clim_on_off_intelligent:
 
 ---
 
-## 📍 J 1-2 — BUREAU
+## 📍 J 1-2 - BUREAU
 
 **Script ID** : `j_1_2_bureau_clim_on_off_intelligent`
 
 ```yaml
 j_1_2_bureau_clim_on_off_intelligent:
   alias: J 1-2 BUREAU - CLIM ON/OFF INTELLIGENT
-  description: '[ROUTEUR BUREAU] Anti-tremblote et routage ON/OFF — Bureau uniquement.'
+  description: '[ROUTEUR BUREAU] Anti-tremblote et routage ON/OFF - Bureau uniquement.'
   mode: single
   variables:
     p: bureau
@@ -157,14 +157,14 @@ j_1_2_bureau_clim_on_off_intelligent:
 
 ---
 
-## 📍 J 1-3 — CHAMBRE
+## 📍 J 1-3 - CHAMBRE
 
 **Script ID** : `j_1_3_chambre_clim_on_off_intelligent`
 
 ```yaml
 j_1_3_chambre_clim_on_off_intelligent:
   alias: J 1-3 CHAMBRE - CLIM ON/OFF INTELLIGENT
-  description: '[ROUTEUR CHAMBRE] Anti-tremblote et routage ON/OFF — Chambre uniquement.'
+  description: '[ROUTEUR CHAMBRE] Anti-tremblote et routage ON/OFF - Chambre uniquement.'
   mode: single
   variables:
     p: chambre
@@ -215,7 +215,7 @@ j_1_3_chambre_clim_on_off_intelligent:
 
 ---
 
-## 🖥️ DASHBOARD — TAP_ACTION
+## 🖥️ DASHBOARD - TAP_ACTION
 
 ```yaml
 # SALON
@@ -237,7 +237,7 @@ tap_action:
   service: script.j_1_3_chambre_clim_on_off_intelligent
 ```
 
-> Plus de `service_data: piece:` — chaque script hardcode sa propre pièce.
+> Plus de `service_data: piece:` - chaque script hardcode sa propre pièce.
 
 ---
 

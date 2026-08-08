@@ -10,9 +10,9 @@
 | Champ | Valeur |
 |:------|:-------|
 | 📁 **Path** | `Dashboard/L6C1_16_Air_Qualite/vignette_L6C1_air_qualite_2026-05-14.yaml` |
-| 🔗 **Accès depuis** | Vue Home — L6C1 |
+| 🔗 **Accès depuis** | Vue Home - L6C1 |
 | 🔗 **tap →** | `/dashboard-tablette/air-quality` |
-| 🏗️ **Layout** | `custom:button-card` — grille 9 lignes × 3 colonnes (Pièce / Type / Valeur) |
+| 🏗️ **Layout** | `custom:button-card` - grille 9 lignes × 3 colonnes (Pièce / Type / Valeur) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-03-21 |
@@ -20,7 +20,7 @@
 
 ---
 
-# 🫧 L6C1 — VIGNETTE QUALITÉ DE L'AIR
+# 🫧 L6C1 - VIGNETTE QUALITÉ DE L'AIR
 
 ---
 
@@ -29,7 +29,7 @@
 1. [Vue d'ensemble](#vue-densemble)
 2. [Architecture](#architecture)
 3. [Code](#code)
-4. [Logique JS — Seuils & couleurs](#logique-js--seuils--couleurs)
+4. [Logique JS - Seuils & couleurs](#logique-js--seuils--couleurs)
 5. [Chaîne d'entités](#chaîne-dentités)
 6. [Entités utilisées](#entités-utilisées)
 7. [Dépannage](#dépannage)
@@ -45,15 +45,15 @@ Vignette affichant en temps réel la qualité de l'air de 3 pièces (Salon, Bure
 
 ### Intégrations requises
 
-- ✅ **IKEA Vindstyrka** (Zigbee/Matter) — `sensor.qualite_air_*_ikea_pm25` + `*_voc_index`
-- ✅ **Sensors statistics** — moyennes 24h (`platform: statistics`)
-- ✅ **Templates** — conversion tCOV en ppb avec `device_class: volatile_organic_compounds_parts`
+- ✅ **IKEA Vindstyrka** (Zigbee/Matter) - `sensor.qualite_air_*_ikea_pm25` + `*_voc_index`
+- ✅ **Sensors statistics** - moyennes 24h (`platform: statistics`)
+- ✅ **Templates** - conversion tCOV en ppb avec `device_class: volatile_organic_compounds_parts`
 
 ### Cartes HACS
 
 | Carte | Usage |
 |-------|-------|
-| `custom:button-card` | Vignette — grille 9 lignes × 3 colonnes avec JS |
+| `custom:button-card` | Vignette - grille 9 lignes × 3 colonnes avec JS |
 
 ---
 
@@ -144,7 +144,7 @@ value_pm25_salon: |   # → retourne la valeur + "µg/m³" colorée
 
 ---
 
-## 🔢 LOGIQUE JS — SEUILS & COULEURS
+## 🔢 LOGIQUE JS - SEUILS & COULEURS
 
 Deux fonctions de colorisation sont appliquées en ligne dans chaque champ JS.
 
@@ -152,10 +152,10 @@ Deux fonctions de colorisation sont appliquées en ligne dans chaque champ JS.
 
 | Seuil | Couleur | Signification |
 |:------|:--------|:-------------|
-| `> 35 µg/m³` | `rgb(244, 67, 54)` — rouge | Mauvais (norme OMS 24h) |
+| `> 35 µg/m³` | `rgb(244, 67, 54)` - rouge | Mauvais (norme OMS 24h) |
 | `> 11 µg/m³` | `orange` | Attention (norme OMS annuelle) |
 | `≤ 11 µg/m³` | `white` | Bon |
-| `unavailable` / `unknown` | `#808080` — gris | Capteur indisponible |
+| `unavailable` / `unknown` | `#808080` - gris | Capteur indisponible |
 
 **Unité affichée :** `µg/m³`
 
@@ -163,10 +163,10 @@ Deux fonctions de colorisation sont appliquées en ligne dans chaque champ JS.
 
 | Seuil | Couleur | Signification |
 |:------|:--------|:-------------|
-| `> 1000 ppb` | `rgb(244, 67, 54)` — rouge | Très mauvais |
+| `> 1000 ppb` | `rgb(244, 67, 54)` - rouge | Très mauvais |
 | `> 250 ppb` | `orange` | Attention |
 | `≤ 250 ppb` | `white` | Bon |
-| `unavailable` / `unknown` | `#808080` — gris | Capteur indisponible |
+| `unavailable` / `unknown` | `#808080` - gris | Capteur indisponible |
 
 **Unité affichée :** `ppb`
 
@@ -234,10 +234,10 @@ Source : `templates/air_qualite/tcov_ppb.yaml`
 → Les capteurs IKEA Vindstyrka sont indisponibles. Vérifier Zigbee2MQTT / intégration Matter.
 
 ### Le titre "Qualité de l'Air ambiant" n'apparaît pas dans la bonne position
-→ Bug connu — le style contient `grid-area: title` au lieu de `grid-area: titre`. Corriger dans le YAML.
+→ Bug connu - le style contient `grid-area: title` au lieu de `grid-area: titre`. Corriger dans le YAML.
 
 ### Les valeurs tCOV affichent l'index VOC (ex: "150") au lieu de ppb
-→ Normal pour la vignette — elle lit `sensor.qualite_air_*_ikea_voc_index` directement. Les `sensor.tcov_*_ppb` ne sont utilisés que dans la page détaillée.
+→ Normal pour la vignette - elle lit `sensor.qualite_air_*_ikea_voc_index` directement. Les `sensor.tcov_*_ppb` ne sont utilisés que dans la page détaillée.
 
 ### Les moyennes 24h ne se calculent pas
 → Vérifier que les sensors `platform: statistics` sont bien chargés (`sensors/air_qualite/pm25_tcov_moy_24h.yaml` inclus dans `configuration.yaml`). Il faut 24h de données pour que la moyenne soit stable.

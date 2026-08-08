@@ -9,7 +9,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📍 **Position** | Dashboard HOME — Ligne 1, Colonne 1 |
+| 📍 **Position** | Dashboard HOME - Ligne 1, Colonne 1 |
 | 🔗 **Navigation** | `/dashboard-tablette/meteo` |
 | 🃏 **Type de carte** | `custom:button-card` |
 | ✏️ **Prompt** | Eric · BerrySwann |
@@ -226,7 +226,7 @@ border-color: white !important
 ### Historique des changements
 - `2024-XX-XX` : Création initiale de la vignette
 - `2026-02-26` : Documentation complète pour migration HA 2.0
-- `2026-05-09` : Mise à jour date — aucun changement YAML (vignette inchangée)
+- `2026-05-09` : Mise à jour date - aucun changement YAML (vignette inchangée)
 
 ### Points d'attention
 - Cette vignette est volontairement simple : ne pas ajouter de custom_fields complexes ici

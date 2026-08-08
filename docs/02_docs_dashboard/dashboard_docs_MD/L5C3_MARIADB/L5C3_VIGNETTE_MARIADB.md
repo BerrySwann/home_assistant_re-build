@@ -10,7 +10,7 @@
 | Champ | Valeur |
 |:------|:-------|
 | 📁 **Path** | `Dashboard/L5C3_15_MariaDB/vignette_L5C3_mariadb_2026-05-10.yaml` |
-| 🔗 **Accès depuis** | Vue Home — Ligne 5, Colonne 3 |
+| 🔗 **Accès depuis** | Vue Home - Ligne 5, Colonne 3 |
 | 🔗 **tap →** | `/dashboard-tablette/reserve` |
 | 🏗️ **Layout** | `custom:button-card` → `custom:flex-horseshoe-card` |
 | ✏️ **Prompt** | Eric · BerrySwann |
@@ -20,7 +20,7 @@
 
 ---
 
-# 🗄️ L5C3 — VIGNETTE TAILLE DB MARIADB
+# 🗄️ L5C3 - VIGNETTE TAILLE DB MARIADB
 
 ---
 
@@ -29,8 +29,8 @@
 1. [Vue d'ensemble](#vue-densemble)
 2. [Architecture](#architecture)
 3. [Code](#code)
-4. [Logique couleurs — seuils](#logique-couleurs--seuils)
-5. [Entités — provenance complète](#entités--provenance-complète)
+4. [Logique couleurs - seuils](#logique-couleurs--seuils)
+5. [Entités - provenance complète](#entités--provenance-complète)
 6. [Dépannage](#dépannage)
 
 ---
@@ -41,14 +41,14 @@ Vignette compacte affichant la taille de la base de données MariaDB sous forme 
 
 ### Intégrations requises
 
-- ✅ **sql** (natif HA) — interroge MariaDB via `!secret mariadb_url`
-- ✅ **MariaDB** (addon HA) — base `homeassistant`
+- ✅ **sql** (natif HA) - interroge MariaDB via `!secret mariadb_url`
+- ✅ **MariaDB** (addon HA) - base `homeassistant`
 
 ### Cartes HACS
 
 | Carte | Usage |
 |-------|-------|
-| `custom:button-card` | Wrapper vignette — cadre, ratio 1/1, border double |
+| `custom:button-card` | Wrapper vignette - cadre, ratio 1/1, border double |
 | `custom:flex-horseshoe-card` | Jauge en fer à cheval avec dégradé par seuils |
 
 ---
@@ -58,7 +58,7 @@ Vignette compacte affichant la taille de la base de données MariaDB sous forme 
 ```
 ┌─────────────────────────────────────────┐
 │  custom:button-card (wrapper)           │
-│  aspect-ratio 1/1 — border double white │
+│  aspect-ratio 1/1 - border double white │
 │  ┌───────────────────────────────────┐  │
 │  │  custom_fields: graph             │  │
 │  │  ┌─────────────────────────────┐  │  │
@@ -188,25 +188,25 @@ custom_fields:
 
 ---
 
-## 🎨 LOGIQUE COULEURS — SEUILS
+## 🎨 LOGIQUE COULEURS - SEUILS
 
 | Seuil (MiB) | Couleur | Signification |
 |:-----------:|---------|---------------|
 | 0 | `green` | Base saine, ample marge |
-| 1 800 | `gold` | 45 % — attention à surveiller |
-| 2 500 | `rgb(231,180,57)` | 62.5 % — nettoyage recommandé |
-| 3 000 | `rgb(225,156,24)` | 75 % — action requise |
-| 3 500 | `darkorange` | 87.5 % — critique |
-| 4 000 | `red` | 100 % — saturation |
+| 1 800 | `gold` | 45 % - attention à surveiller |
+| 2 500 | `rgb(231,180,57)` | 62.5 % - nettoyage recommandé |
+| 3 000 | `rgb(225,156,24)` | 75 % - action requise |
+| 3 500 | `darkorange` | 87.5 % - critique |
+| 4 000 | `red` | 100 % - saturation |
 
 > **Rappel :** `max: 4000` MiB = 4 GiB. Ajuster si la base dépasse cette limite.
 
 ---
 
-## 📊 ENTITÉS — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS - PROVENANCE COMPLÈTE
 
 ### 📁 `sql.yaml`
-> Intégration `sql` native HA — interroge `information_schema` via `!secret mariadb_url`.
+> Intégration `sql` native HA - interroge `information_schema` via `!secret mariadb_url`.
 > Aucun credentials en clair dans le YAML. Requête : `SUM(data_length + index_length) / POWER(1024,2)`.
 
 | Entité | unique_id | Rôle |
@@ -249,7 +249,7 @@ custom_fields:
 
 ### tap_action ne fonctionne pas
 - Le `tap_action` doit être **dans** le tableau `entities`, pas à la racine de `flex-horseshoe-card`
-- Ne pas mettre de `tap_action` sur le `button-card` wrapper — il intercepte les taps et bloque la navigation
+- Ne pas mettre de `tap_action` sur le `button-card` wrapper - il intercepte les taps et bloque la navigation
 
 ---
 
@@ -268,11 +268,11 @@ custom_fields:
 ## 🔗 FICHIERS LIÉS
 
 ### Configuration YAML (sources HA v2.0)
-- `sql.yaml` — définition du capteur `sensor.taille_db_home_assistant`
-- `secrets.yaml` — `mariadb_url` (credentials hors repo)
+- `sql.yaml` - définition du capteur `sensor.taille_db_home_assistant`
+- `secrets.yaml` - `mariadb_url` (credentials hors repo)
 
 ### Documentation
-- `docs/L5C1_PILES_BATTERIES/L5C1_VIGNETTE_BATTERIES.md` — vignette L5 adjacente
+- `docs/L5C1_PILES_BATTERIES/L5C1_VIGNETTE_BATTERIES.md` - vignette L5 adjacente
 
 ---
 

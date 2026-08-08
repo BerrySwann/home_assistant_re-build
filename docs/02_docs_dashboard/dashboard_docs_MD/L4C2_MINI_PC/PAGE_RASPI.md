@@ -1,4 +1,4 @@
-# PAGE — Raspberry Pi 4 (ancienne page — transitoire)
+# PAGE - Raspberry Pi 4 (ancienne page - transitoire)
 *Dernière mise à jour : 2026-03-24*
 *Path : `/dashboard-tablette/raspberry-pi4`*
 
@@ -41,15 +41,15 @@
 │
 ├── [bubble-card separator]
 │
-├── [bar-card] CPU %           — target 75, max 100     (rgb(68,115,158))
-├── [bar-card] T° CPU          — target 65, max 100     (orange) + min/max
-├── [bar-card] Mem USED (MB)   — target 3072, max 4096  (red) + min/max
-├── [bar-card] Mem FREE (MB)   — target 3072, max 4096  (rgb(31,111,235)) + min/max
-├── [bar-card] SSD 120Go (GB)  — target 100, max 120    (grey) + min/max  [grid 4 cols]
-├── [bar-card] Download (MB/s) — target 150, max 1000   (green) + min/max
-├── [bar-card] Upload (MB/s)   — target 150, max 1000   (red) + min/max
+├── [bar-card] CPU %           - target 75, max 100     (rgb(68,115,158))
+├── [bar-card] T° CPU          - target 65, max 100     (orange) + min/max
+├── [bar-card] Mem USED (MB)   - target 3072, max 4096  (red) + min/max
+├── [bar-card] Mem FREE (MB)   - target 3072, max 4096  (rgb(31,111,235)) + min/max
+├── [bar-card] SSD 120Go (GB)  - target 100, max 120    (grey) + min/max  [grid 4 cols]
+├── [bar-card] Download (MB/s) - target 150, max 1000   (green) + min/max
+├── [bar-card] Upload (MB/s)   - target 150, max 1000   (red) + min/max
 │
-├── [uptime-card] binary_sensor.rpi_power_status — 48h
+├── [uptime-card] binary_sensor.rpi_power_status - 48h
 │
 └── [layout-card grid 6 zones] Boutons commandes ventilateur
     ├── zone1: Lent   30%  (lightblue,    rotation 3s)
@@ -82,7 +82,7 @@ Image statique du Raspberry Pi 4B. Fichier dans `/config/www/images/`.
 
 Bloc `stack-in-card vertical` contenant 3 `stack-in-card horizontal` :
 
-**Ligne 1 — IP :**
+**Ligne 1 - IP :**
 
 | Colonne | Contenu | Entité |
 |---------|---------|--------|
@@ -90,7 +90,7 @@ Bloc `stack-in-card vertical` contenant 3 `stack-in-card horizontal` :
 | IP locale | `{{ states("sensor.local_ip") }}` | `sensor.local_ip` |
 | IP publique | `{{ states('sensor.myip') }}` | `sensor.myip` |
 
-**Ligne 2 — Uptime :**
+**Ligne 2 - Uptime :**
 Calcule la durée écoulée depuis `sensor.system_monitor_dernier_demarrage` :
 ```jinja
 {% set uptime = (now()|as_timestamp - states('sensor.system_monitor_dernier_demarrage')|as_timestamp) %}
@@ -103,12 +103,12 @@ Calcule la durée écoulée depuis `sensor.system_monitor_dernier_demarrage` :
 ```
 Affiche par ex. `3d 14h 22m` ou `06h 45m`.
 
-**Ligne 3 — Ventilateur RPi :**
+**Ligne 3 - Ventilateur RPi :**
 
 | Colonne | Contenu | Entité |
 |---------|---------|--------|
 | Icône `mdi:fan` | couleur ON=vert / OFF=rouge + animation rotation si ON | `fan.rpi_cooling_fan` |
-| Toggle | "Allumé / Éteint" — `tap_action: toggle` | `fan.rpi_cooling_fan` |
+| Toggle | "Allumé / Éteint" - `tap_action: toggle` | `fan.rpi_cooling_fan` |
 | % vitesse | `state_attr('fan.rpi_cooling_fan', 'percentage')` % | `fan.rpi_cooling_fan` |
 
 L'icône fan a une animation CSS `rotation 2s linear infinite` quand la fan est ON.
@@ -145,7 +145,7 @@ Chaque bar-card est dans un `stack-in-card vertical > horizontal-stack`. Style c
 - CPU : `indicator: inside` uniquement
 - Autres : `indicator: "on"`, `minmax: "on"`
 
-> **Note SSD :** L'entité `system_monitor_utilisation_du_disque` renvoie en % (0-100), mais le max est mis à `120` — à vérifier/corriger lors de la migration Mini PC (SSD réel 120 Go).
+> **Note SSD :** L'entité `system_monitor_utilisation_du_disque` renvoie en % (0-100), mais le max est mis à `120` - à vérifier/corriger lors de la migration Mini PC (SSD réel 120 Go).
 
 ---
 
@@ -173,9 +173,9 @@ Logique inversée : `ok: "off"` = la prise est **sans alerte** (état binaire `o
 
 ---
 
-### 6. Commandes ventilateur — 6 boutons
+### 6. Commandes ventilateur - 6 boutons
 
-`custom:layout-card` avec `custom:grid-layout` — 6 zones égales (`16.75%` chacune).
+`custom:layout-card` avec `custom:grid-layout` - 6 zones égales (`16.75%` chacune).
 
 Chaque bouton `custom:button-card` :
 - `tap_action: call-service` → `fan.set_percentage` avec `entity_id: fan.rpi_cooling_fan`
@@ -194,34 +194,34 @@ Chaque bouton `custom:button-card` :
 Si `fan.rpi_cooling_fan` est `off` : toutes les icônes/noms passent en rouge `rgb(255,0,0)`, animation `none`.
 Condition détection bouton actif : `states['fan.rpi_cooling_fan'].attributes.percentage == XX`.
 
-**Fond des boutons :** `background-color: rgb(255,255,255)` (blanc — contraste pour les couleurs des icônes).
+**Fond des boutons :** `background-color: rgb(255,255,255)` (blanc - contraste pour les couleurs des icônes).
 
 ---
 
-## Entités utilisées — Provenance complète
+## Entités utilisées - Provenance complète
 
-### Catégorie A — System Monitor (intégration HA native)
+### Catégorie A - System Monitor (intégration HA native)
 
 | Entité | Description |
 |--------|-------------|
 | `sensor.system_monitor_temperature_du_processeur` | T° CPU (°C) |
 | `sensor.system_monitor_utilisation_du_processeur` | CPU (%) |
 | `sensor.system_monitor_utilisation_de_la_memoire` | RAM utilisée (%) |
-| `sensor.system_monitor_memoire_utilisee` | RAM utilisée (MB) — bar-card |
-| `sensor.system_monitor_memoire_libre` | RAM libre (MB) — bar-card |
+| `sensor.system_monitor_memoire_utilisee` | RAM utilisée (MB) - bar-card |
+| `sensor.system_monitor_memoire_libre` | RAM libre (MB) - bar-card |
 | `sensor.system_monitor_utilisation_du_disque` | Disque (%) / GB |
 | `sensor.system_monitor_debit_du_reseau_entrant_via_end0` | Download réseau (MB/s) |
 | `sensor.system_monitor_debit_du_reseau_sortant_via_end0` | Upload réseau (MB/s) |
-| `sensor.system_monitor_dernier_demarrage` | Timestamp dernier boot — calcul uptime |
+| `sensor.system_monitor_dernier_demarrage` | Timestamp dernier boot - calcul uptime |
 
-### Catégorie B — Réseau / IP
+### Catégorie B - Réseau / IP
 
 | Entité | Description | Source |
 |--------|-------------|--------|
 | `sensor.local_ip` | IP locale du serveur HA | Intégration `local_ip` |
 | `sensor.myip` | IP publique (WAN) | Intégration externe |
 
-### Catégorie C — RPi matériel
+### Catégorie C - RPi matériel
 
 | Entité | Description | Source |
 |--------|-------------|--------|
@@ -230,18 +230,18 @@ Condition détection bouton actif : `states['fan.rpi_cooling_fan'].attributes.pe
 
 > ⚠️ **Ces entités sont spécifiques au Raspberry Pi 4 et devront être supprimées / remplacées lors de la migration vers le Mini PC.**
 
-### Catégorie D — Automation RPi (régulation ventilateur)
+### Catégorie D - Automation RPi (régulation ventilateur)
 
 | Entité | Description | Impact visuel page |
 |--------|-------------|-------------------|
-| `automation.raspberry_cpu_fan_pwm_6_states` | Règle automatiquement la vitesse de `fan.rpi_cooling_fan` selon la T° CPU (6 paliers : ≥30°C→30%, ≥40°C→50%, ≥50°C→70%, ≥60°C→85%, ≥70°C→100%) | Le `%` affiché dans le bloc ventilateur et l'animation de rotation **reflètent l'état piloté par cette automation** — sans elle, vitesse figée / manuelle uniquement |
+| `automation.raspberry_cpu_fan_pwm_6_states` | Règle automatiquement la vitesse de `fan.rpi_cooling_fan` selon la T° CPU (6 paliers : ≥30°C→30%, ≥40°C→50%, ≥50°C→70%, ≥60°C→85%, ≥70°C→100%) | Le `%` affiché dans le bloc ventilateur et l'animation de rotation **reflètent l'état piloté par cette automation** - sans elle, vitesse figée / manuelle uniquement |
 
 > ⚠️ **Dépendance visuelle directe** : la page ne pilote pas le ventilateur elle-même. Elle affiche uniquement ce que l'automation a déjà réglé. Le bouton-card lit `fan.rpi_cooling_fan.attributes.percentage` pour déterminer le bouton "actif" (en couleur).
-> ⚠️ **RPi4 uniquement** — À ne pas migrer sur Mini PC (pas de GPIO, pas de ventilateur physique piloté par HA).
+> ⚠️ **RPi4 uniquement** - À ne pas migrer sur Mini PC (pas de GPIO, pas de ventilateur physique piloté par HA).
 
 ---
 
-## Logique ventilateur — Animations
+## Logique ventilateur - Animations
 
 L'animation CSS `rotating` est définie dans `card_mod` du `button-card` :
 ```css
@@ -253,20 +253,20 @@ L'animation CSS `rotating` est définie dans `card_mod` du `button-card` :
 
 Appliquée sur `ha-state-icon` conditionnellement. La durée varie selon le % sélectionné, créant un effet visuel de vitesse progressive.
 
-**Condition "bouton actif" :** `states['fan.rpi_cooling_fan'].attributes.percentage == X` — si le % courant correspond, le bouton s'allume en couleur.
+**Condition "bouton actif" :** `states['fan.rpi_cooling_fan'].attributes.percentage == X` - si le % courant correspond, le bouton s'allume en couleur.
 
 ---
 
 ## Dépannage
 
 **Fan.rpi_cooling_fan introuvable :**
-L'entité dépend de la configuration GPIO du RPi4. Non disponible sur Mini PC — à ne pas migrer tel quel.
+L'entité dépend de la configuration GPIO du RPi4. Non disponible sur Mini PC - à ne pas migrer tel quel.
 
 **Upload/Download à 0 ou N/A :**
 Vérifier que l'interface réseau `end0` est bien le bon nom dans `system_monitor`. Sur certains systèmes, c'est `eth0`, `enp3s0`, etc. Ajuster dans `configuration.yaml`.
 
 **Mémoire USED/FREE incohérentes avec % :**
-`memoire_utilisee` et `memoire_libre` sont en MB. Le max est hardcodé à `4096` (4 Go) — correct pour RPi4 4Go. À adapter au Mini PC (RAM différente).
+`memoire_utilisee` et `memoire_libre` sont en MB. Le max est hardcodé à `4096` (4 Go) - correct pour RPi4 4Go. À adapter au Mini PC (RAM différente).
 
 **Image RPi4B3.png absente :**
 Le fichier doit être dans `/config/www/images/`. Sur Mini PC, remplacer par une image appropriée.

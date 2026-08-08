@@ -11,7 +11,7 @@
 |:------|:-------|
 | 📁 **Path** | `dashboard-tablette` → Ligne 3, Colonne 2 |
 | 🔗 **Tap** | `/dashboard-tablette/prises` |
-| 🏗️ **Layout** | `custom:button-card` — grid 2 cols (Pièce / État) |
+| 🏗️ **Layout** | `custom:button-card` - grid 2 cols (Pièce / État) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-03-21 |
@@ -19,7 +19,7 @@
 
 ---
 
-# 🔌 L3C2 — Vignette Commandes Éco (Prises)
+# 🔌 L3C2 - Vignette Commandes Éco (Prises)
 
 ---
 
@@ -40,11 +40,11 @@ Vignette affichant l'état ON/OFF de **6 prises/switches éco** clés de l'appar
 
 | Carte | Usage |
 |-------|-------|
-| `custom:button-card` | Grille custom_fields — 2 colonnes Pièce / État |
+| `custom:button-card` | Grille custom_fields - 2 colonnes Pièce / État |
 
 ---
 
-## 📍 CODE — VIGNETTE
+## 📍 CODE - VIGNETTE
 
 ```yaml
 type: custom:button-card
@@ -174,7 +174,7 @@ Récupère l'état d'une entité avec protection contre `unavailable` / `unknown
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ### 🔌 6 Prises / Switches surveillés
 
@@ -187,7 +187,7 @@ Récupère l'état d'une entité avec protection contre `unavailable` / `unknown
 | TV Chambre | `light.hue_smart_eco_tv_chambre` | light | 9. CHAMBRE |
 | Tête de Lit | `switch.prise_tete_de_lit_chambre` | switch | 9. CHAMBRE |
 
-> ⚠️ **Mix switch / light :** 2 entités sont de type `light` (domaine `light.*`) et non `switch.*` — elles exposent tout de même un `.state` `on`/`off` compatible avec la logique JS.
+> ⚠️ **Mix switch / light :** 2 entités sont de type `light` (domaine `light.*`) et non `switch.*` - elles exposent tout de même un `.state` `on`/`off` compatible avec la logique JS.
 
 ---
 
@@ -207,7 +207,7 @@ Récupère l'état d'une entité avec protection contre `unavailable` / `unknown
 
 ## 🔗 FICHIERS LIÉS
 
-- [`PAGE_PRISES.md`](./PAGE_PRISES.md) — page détaillée des prises *(à créer)*
+- [`PAGE_PRISES.md`](./PAGE_PRISES.md) - page détaillée des prises *(à créer)*
 
 ---
 

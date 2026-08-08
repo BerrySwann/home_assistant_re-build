@@ -1,7 +1,7 @@
-# Veille GitHub — Nouvelle Release
+# Veille GitHub - Nouvelle Release
 
 **Catégorie :** systeme
-**Alias HA :** `VEILLE GITHUB — Nouvelle release détectée`
+**Alias HA :** `VEILLE GITHUB - Nouvelle release détectée`
 
 ## Description
 

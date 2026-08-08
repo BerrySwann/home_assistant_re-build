@@ -1,4 +1,4 @@
-# [BACKUP] GIT — PUSH HORAIRE (H+10)
+# [BACKUP] GIT - PUSH HORAIRE (H+10)
 
 > **Fichier :** `automations_corrige/backup/git_hourly.yaml`
 > **Mode HA :** `single`

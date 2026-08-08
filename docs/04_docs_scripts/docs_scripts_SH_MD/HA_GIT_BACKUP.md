@@ -1,4 +1,4 @@
-# HA_GIT_BACKUP — Script de sauvegarde automatique vers GitHub
+# HA_GIT_BACKUP - Script de sauvegarde automatique vers GitHub
 
 > **Script shell :** `ha_git_backup.sh`
 > **Emplacement prod :** `/config/.scripts/ha_git_backup.sh`
@@ -21,7 +21,7 @@ Gère 3 modes d'exécution selon l'argument passé.
 |:---------|:------------|:-------------|
 | *(aucun)* | Automation H+10 (00:10, 01:10…) | Commit + push si changements `.yaml/.yml/.md` |
 | `weekly` | Dimanche / bouton manuel weekly | Commit + push + **tag ISO hebdomadaire** même si rien à committer |
-| `Manuel` | Bouton dashboard | Commit + push — notifie si déjà à jour |
+| `Manuel` | Bouton dashboard | Commit + push - notifie si déjà à jour |
 
 ---
 
@@ -63,11 +63,11 @@ Anti-collision : si le tag existe déjà → `weekly-YYYY-WXX-HHMM`
 
 ## ⚠️ Points d'attention
 
-- **`secrets.yaml` ne doit JAMAIS être tracké** — le garde-fou ligne 68 bloque le script si c'est le cas.
-- **`!secret` ne fonctionne pas en bash** — le token GitHub est stocké directement dans l'URL remote git (`~/.git/config`), pas dans `secrets.yaml`.
+- **`secrets.yaml` ne doit JAMAIS être tracké** - le garde-fou ligne 68 bloque le script si c'est le cas.
+- **`!secret` ne fonctionne pas en bash** - le token GitHub est stocké directement dans l'URL remote git (`~/.git/config`), pas dans `secrets.yaml`.
 - **"Manuel ne fonctionne pas"** → comportement normal si H+10 a déjà tout poussé (rien à committer).
-- **`set -euo pipefail`** — le `trap ERR` logue toute erreur inattendue avec numéro de ligne.
-- **stdout bloqué** (`exec 1>/dev/null`) — seuls les `>> "$LOG"` explicites apparaissent dans le log.
+- **`set -euo pipefail`** - le `trap ERR` logue toute erreur inattendue avec numéro de ligne.
+- **stdout bloqué** (`exec 1>/dev/null`) - seuls les `>> "$LOG"` explicites apparaissent dans le log.
 
 ---
 

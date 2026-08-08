@@ -33,82 +33,82 @@ Successfully extracted and corrected **40 Home Assistant automations** from the 
 ### 1. **P1_clim_chauffage/** (13 automations)
 Climate control system management - day/night operation, notifications, safety features
 
-- `A0_clim_jour_2026-01-01.yaml` — Daytime climate (07h30-21h00)
-- `A0_clim_jour_2026-01-11.yaml` — Daytime climate (updated version)
-- `B0_clim_nuit_2026-01-02.yaml` — Nighttime climate (21h00-07h30)
-- `B0_clim_nuit_2026-01-11.yaml` — Nighttime climate (updated version)
-- `C_gardien_eco.yaml` — Eco mode safety (delta T threshold)
-- `D_notif_temp_jour.yaml` — Day temperature notifications
-- `E_notif_temp_nuit.yaml` — Night temperature notifications
-- `F_notif_fermeture_fenetres.yaml` — Window closure alerts
-- `G_arret_clim_notif.yaml` — AC shutdown notifications
-- `H_notif_mode_changement.yaml` — Mode change alerts (Heat/Cool/Fan)
-- `I_debug_force_mode.yaml` — System watchdog & safety
-- `J_synchro_notif_prise_coupee.yaml` — Outlet power sync notifications
-- `L_debug_notif_message_clim.yaml` — Debug message logging
+- `A0_clim_jour_2026-01-01.yaml` - Daytime climate (07h30-21h00)
+- `A0_clim_jour_2026-01-11.yaml` - Daytime climate (updated version)
+- `B0_clim_nuit_2026-01-02.yaml` - Nighttime climate (21h00-07h30)
+- `B0_clim_nuit_2026-01-11.yaml` - Nighttime climate (updated version)
+- `C_gardien_eco.yaml` - Eco mode safety (delta T threshold)
+- `D_notif_temp_jour.yaml` - Day temperature notifications
+- `E_notif_temp_nuit.yaml` - Night temperature notifications
+- `F_notif_fermeture_fenetres.yaml` - Window closure alerts
+- `G_arret_clim_notif.yaml` - AC shutdown notifications
+- `H_notif_mode_changement.yaml` - Mode change alerts (Heat/Cool/Fan)
+- `I_debug_force_mode.yaml` - System watchdog & safety
+- `J_synchro_notif_prise_coupee.yaml` - Outlet power sync notifications
+- `L_debug_notif_message_clim.yaml` - Debug message logging
 
 ### 2. **P1_cuisine/** (2 automations)
 Kitchen radiator heating management
 
-- `A_chauffage_cuisine.yaml` — Weekday heating (Mon-Thu)
-- `B_chauffage_cuisine_vacances.yaml` — Holiday heating
+- `A_chauffage_cuisine.yaml` - Weekday heating (Mon-Thu)
+- `B_chauffage_cuisine_vacances.yaml` - Holiday heating
 
 ### 3. **P1_sdb/** (1 automation)
 Bathroom equipment management
 
-- `E_minuterie_seche_serviettes.yaml` — Heated towel timer (1h absolute safety)
+- `E_minuterie_seche_serviettes.yaml` - Heated towel timer (1h absolute safety)
 
 ### 4. **P2_prises/** (6 automations)
 Smart outlet and equipment control
 
-- `rodret_soufflant_sdb.yaml` — IKEA button control (bathroom heater)
-- `rodret_tv_chambre.yaml` — IKEA button control (bedroom TV)
-- `eco_prises.yaml` — Dynamic outlet management (presence-based)
-- `gestion_tv_chambre.yaml` — Bedroom TV scene & standby detection
-- `bureau_allumage_pc.yaml` — Office PC activation via wireless button
-- `gestion_pc_bureau.yaml` — Office PC scene management
+- `rodret_soufflant_sdb.yaml` - IKEA button control (bathroom heater)
+- `rodret_tv_chambre.yaml` - IKEA button control (bedroom TV)
+- `eco_prises.yaml` - Dynamic outlet management (presence-based)
+- `gestion_tv_chambre.yaml` - Bedroom TV scene & standby detection
+- `bureau_allumage_pc.yaml` - Office PC activation via wireless button
+- `gestion_pc_bureau.yaml` - Office PC scene management
 
 ### 5. **P3_eclairage/** (1 automation)
 Lighting control
 
-- `allumage_lumiere_entree.yaml` — Entrance light control on arrival
+- `allumage_lumiere_entree.yaml` - Entrance light control on arrival
 
 ### 6. **backup/** (4 automations)
 GitHub backup automation system
 
-- `git_au_demarrage.yaml` — Backup on HA startup
-- `git_alerte_ko.yaml` — Failure alert (15min threshold)
-- `git_hourly.yaml` — Hourly backup
-- `git_weekly.yaml` — Weekly backup (Sunday 01:30)
+- `git_au_demarrage.yaml` - Backup on HA startup
+- `git_alerte_ko.yaml` - Failure alert (15min threshold)
+- `git_hourly.yaml` - Hourly backup
+- `git_weekly.yaml` - Weekly backup (Sunday 01:30)
 
 ### 7. **stores/** (2 automations)
 Motorized blind/shutter management
 
-- `gestion_store_bureau.yaml` — Office blind optimization
-- `gestion_store_salon.yaml` — Living room blind with anti-glare mode
+- `gestion_store_bureau.yaml` - Office blind optimization
+- `gestion_store_salon.yaml` - Living room blind with anti-glare mode
 
 ### 8. **meteo/** (5 automations)
 Weather monitoring and alerts
 
-- `update_prev_temperature.yaml` — Trend tracking (30min intervals)
-- `update_prev_humidity.yaml` — Humidity trend tracking
-- `alerte_meteo_cartes.yaml` — Weather alert map updates (Météo France)
-- `notif_foudre.yaml` — Lightning strike notifications
-- `maj_temps_foudre.yaml` — Lightning impact timestamp logging
+- `update_prev_temperature.yaml` - Trend tracking (30min intervals)
+- `update_prev_humidity.yaml` - Humidity trend tracking
+- `alerte_meteo_cartes.yaml` - Weather alert map updates (Météo France)
+- `notif_foudre.yaml` - Lightning strike notifications
+- `maj_temps_foudre.yaml` - Lightning impact timestamp logging
 
 ### 9. **systeme/** (5 automations)
 System monitoring and maintenance
 
-- `z2m_last_seen.yaml` — Zigbee2MQTT device timeout detection
-- `watchdog_piles.yaml` — Low battery warnings (Hue/IKEA/Sonoff)
-- `economie_energie_vscode.yaml` — VS Code server power management
-- `db_purge_mariadb.yaml` — Database cleanup (7-day retention) + repack
-- `diag_enregistrement_journalier.yaml` — 15-min consumption logging (6 appliances + DUT)
+- `z2m_last_seen.yaml` - Zigbee2MQTT device timeout detection
+- `watchdog_piles.yaml` - Low battery warnings (Hue/IKEA/Sonoff)
+- `economie_energie_vscode.yaml` - VS Code server power management
+- `db_purge_mariadb.yaml` - Database cleanup (7-day retention) + repack
+- `diag_enregistrement_journalier.yaml` - 15-min consumption logging (6 appliances + DUT)
 
 ### 10. **energie/** (1 automation)
 Energy monitoring
 
-- `surveillance_gros_electro_hp.yaml` — Peak-rate hour warnings (large appliances)
+- `surveillance_gros_electro_hp.yaml` - Peak-rate hour warnings (large appliances)
 
 ---
 
@@ -212,13 +212,13 @@ Total: 40 files ✓
 
 ### Files with Colons in Alias
 The following files had aliases with colons (`:`) or brackets (`[`), which required YAML quoting:
-- `gestion_tv_chambre.yaml` — Contains `:` (quoted)
-- `bureau_allumage_pc.yaml` — Contains `:` (quoted)
-- `gestion_pc_bureau.yaml` — Contains `:` (quoted)
-- `git_alerte_ko.yaml` — Starts with `[` (quoted)
-- `git_au_demarrage.yaml` — Starts with `[` (quoted)
-- `git_hourly.yaml` — Starts with `[` (quoted)
-- `git_weekly.yaml` — Starts with `[` (quoted)
+- `gestion_tv_chambre.yaml` - Contains `:` (quoted)
+- `bureau_allumage_pc.yaml` - Contains `:` (quoted)
+- `gestion_pc_bureau.yaml` - Contains `:` (quoted)
+- `git_alerte_ko.yaml` - Starts with `[` (quoted)
+- `git_au_demarrage.yaml` - Starts with `[` (quoted)
+- `git_hourly.yaml` - Starts with `[` (quoted)
+- `git_weekly.yaml` - Starts with `[` (quoted)
 
 All are now properly quoted in YAML format.
 

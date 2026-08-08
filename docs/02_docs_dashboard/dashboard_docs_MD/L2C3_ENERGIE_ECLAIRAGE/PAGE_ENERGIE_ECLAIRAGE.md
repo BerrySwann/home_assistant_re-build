@@ -11,7 +11,7 @@
 |:------|:-------|
 | 📁 **Path** | `dashboard-tablette` → page `/dashboard-tablette/energie-lampes` |
 | 🔗 **Accès depuis** | Vignette L2C3 (tap_action navigate) |
-| 🏗️ **Layout** | `type: grid` — `column_span: 3` |
+| 🏗️ **Layout** | `type: grid` - `column_span: 3` |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-04-29 |
@@ -19,7 +19,7 @@
 
 ---
 
-# 💡 PAGE — CONSO ÉNERGIE ÉCLAIRAGE (`/dashboard-tablette/energie-lampes`)
+# 💡 PAGE - CONSO ÉNERGIE ÉCLAIRAGE (`/dashboard-tablette/energie-lampes`)
 
 ---
 
@@ -37,9 +37,9 @@
 
 Page de détail de la consommation éclairage par pièce. Accessible depuis la vignette L2C3 via `tap_action: navigate`. Chaque pièce dispose de 3 onglets (tabbed-card) :
 
-- **JOUR** — donut ApexCharts avec diff 24h par ampoule (consommation du jour en cours)
-- **MOIS** — donut ApexCharts avec somme mensuelle par ampoule
-- **30 JOURS** — graphique colonnes (diff quotidien sur 730h) + ligne moyenne mensuelle
+- **JOUR** - donut ApexCharts avec diff 24h par ampoule (consommation du jour en cours)
+- **MOIS** - donut ApexCharts avec somme mensuelle par ampoule
+- **30 JOURS** - graphique colonnes (diff quotidien sur 730h) + ligne moyenne mensuelle
 
 Un badge subtitle sous chaque tabbed-card affiche les 4 périodes Q/H/M/A de la zone.
 
@@ -53,7 +53,7 @@ Un badge subtitle sous chaque tabbed-card affiche les 4 périodes Q/H/M/A de la 
 ├── Heading LAMPES (nav. retour → /home)
 ├── Séparateur ────────────────────────────
 │
-├── SALON (5 lampes — rgb(215, 95, 115))
+├── SALON (5 lampes - rgb(215, 95, 115))
 │   ├── Heading title (badges light.salon + light.table)
 │   ├── tabbed-card
 │   │   ├── JOUR  → donut 5 lampes (sensor.hue_*_quotidien_um_kwh_tpl)
@@ -62,7 +62,7 @@ Un badge subtitle sous chaque tabbed-card affiche les 4 périodes Q/H/M/A de la 
 │   ├── Heading subtitle (badges Q/H/M/A eclairage_salon_5_*)
 │   └── Séparateur
 │
-├── ENTREE - CUISINE - COULOIR (3 lampes — blanc/violet/gris)
+├── ENTREE - CUISINE - COULOIR (3 lampes - blanc/violet/gris)
 │   ├── Heading title (badges light.entree + light.cuisine + light.couloir)
 │   ├── tabbed-card
 │   │   ├── JOUR  → donut 3 lampes
@@ -71,7 +71,7 @@ Un badge subtitle sous chaque tabbed-card affiche les 4 périodes Q/H/M/A de la 
 │   ├── Heading subtitle (badges Q/H/M/A eclairage_appart_3_*)
 │   └── Séparateur
 │
-├── BUREAU (5 lampes — rgb(255, 165, 0))
+├── BUREAU (5 lampes - rgb(255, 165, 0))
 │   ├── Heading title (badges light.bureau x2)
 │   ├── tabbed-card
 │   │   ├── JOUR  → donut 5 lampes (HUE 1/2 + Play 1/2/3)
@@ -80,7 +80,7 @@ Un badge subtitle sous chaque tabbed-card affiche les 4 périodes Q/H/M/A de la 
 │   ├── Heading subtitle (badges Q/H/M/A eclairage_bureau_5_*)
 │   └── Séparateur
 │
-├── SALLE DE BAIN (2 lampes — rgb(3, 155, 229))
+├── SALLE DE BAIN (2 lampes - rgb(3, 155, 229))
 │   ├── Heading title (badges light.lampe_sdb + switch.miroir_sonoff)
 │   ├── tabbed-card
 │   │   ├── JOUR  → donut 2 lampes (Miroir + Hue SDB)
@@ -89,7 +89,7 @@ Un badge subtitle sous chaque tabbed-card affiche les 4 périodes Q/H/M/A de la 
 │   ├── Heading subtitle (badges Q/H/M/A eclairage_sdb_2_*)
 │   └── Séparateur
 │
-└── CHAMBRE (4 lampes — rgb(88, 130, 70))
+└── CHAMBRE (4 lampes - rgb(88, 130, 70))
     ├── Heading title (badges light.chambre + light.lit)
     ├── tabbed-card
     │   ├── JOUR  → donut 4 lampes (Eric TL2 + Géraldine TL1 + B1 + B2)
@@ -1437,33 +1437,33 @@ column_span: 3
 
 ## 📊 ENTITÉS UTILISÉES
 
-### Lampes individuelles — Utility Meters quotidiens/mensuels
+### Lampes individuelles - Utility Meters quotidiens/mensuels
 
 | Pièce | Entité (quotidien `_um_kwh_tpl`) | Entité (mensuel `_um_kwh_tpl`) |
 |-------|------------------------------|----------------------------|
-| **Salon — Table** | `sensor.hue_white_lamp_table_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **Salon — Color 1** | `sensor.hue_color_candle_salon_1_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **Salon — Ambiance 3** | `sensor.hue_ambiance_lamp_salon_3_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **Salon — Ambiance 2** | `sensor.hue_ambiance_lamp_salon_2_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **Salon — Ambiance 1** | `sensor.hue_ambiance_lamp_salon_1_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Salon - Table** | `sensor.hue_white_lamp_table_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Salon - Color 1** | `sensor.hue_color_candle_salon_1_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Salon - Ambiance 3** | `sensor.hue_ambiance_lamp_salon_3_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Salon - Ambiance 2** | `sensor.hue_ambiance_lamp_salon_2_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Salon - Ambiance 1** | `sensor.hue_ambiance_lamp_salon_1_quotidien_um_kwh_tpl` | `..._mensuel_...` |
 | **Entrée** | `sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl` | `..._mensuel_...` |
 | **Cuisine** | `sensor.hue_white_lamp_cuisine_quotidien_um_kwh_tpl` | `..._mensuel_...` |
 | **Couloir** | `sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **Bureau — HUE 1** | `sensor.hue_white_lamp_bureau_1_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **Bureau — HUE 2** | `sensor.hue_white_lamp_bureau_2_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **Bureau — Play 1** | `sensor.hue_play_1_pc_bureau_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **Bureau — Play 2** | `sensor.hue_play_2_pc_bureau_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **Bureau — Play 3** | `sensor.hue_play_3_pc_bureau_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **SDB — Miroir Sonoff** | `sensor.relais_lumiere_sdb_sonoff_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **SDB — Hue** | `sensor.hue_white_lamp_salle_de_bain_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **Chambre — Eric TL2** | `sensor.hue_color_candle_chambre_eric_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **Chambre — Géraldine TL1** | `sensor.hue_color_candle_chambre_gege_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **Chambre — B1** | `sensor.hue_white_lamp_chambre_1_quotidien_um_kwh_tpl` | `..._mensuel_...` |
-| **Chambre — B2** | `sensor.hue_white_lamp_chambre_2_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Bureau - HUE 1** | `sensor.hue_white_lamp_bureau_1_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Bureau - HUE 2** | `sensor.hue_white_lamp_bureau_2_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Bureau - Play 1** | `sensor.hue_play_1_pc_bureau_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Bureau - Play 2** | `sensor.hue_play_2_pc_bureau_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Bureau - Play 3** | `sensor.hue_play_3_pc_bureau_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **SDB - Miroir Sonoff** | `sensor.relais_lumiere_sdb_sonoff_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **SDB - Hue** | `sensor.hue_white_lamp_salle_de_bain_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Chambre - Eric TL2** | `sensor.hue_color_candle_chambre_eric_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Chambre - Géraldine TL1** | `sensor.hue_color_candle_chambre_gege_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Chambre - B1** | `sensor.hue_white_lamp_chambre_1_quotidien_um_kwh_tpl` | `..._mensuel_...` |
+| **Chambre - B2** | `sensor.hue_white_lamp_chambre_2_quotidien_um_kwh_tpl` | `..._mensuel_...` |
 
 > Source : `templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml`
 
-### Zones — Utility Meters Q/H/M/A (badges subtitle)
+### Zones - Utility Meters Q/H/M/A (badges subtitle)
 
 | Zone | Q/H/M/A |
 |------|---------|
@@ -1475,7 +1475,7 @@ column_span: 3
 
 > Source : `templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml`
 
-### Moyennes mensuelles — AVG (ligne rouge 30 JOURS)
+### Moyennes mensuelles - AVG (ligne rouge 30 JOURS)
 
 | Zone | Entité AVG |
 |------|-----------|
@@ -1500,9 +1500,9 @@ column_span: 3
 
 ## 🔗 FICHIERS LIÉS
 
-- [`L2C3_VIGNETTE_ECLAIRAGE.md`](./L2C3_VIGNETTE_ECLAIRAGE.md) — Vignette button-card → accès à cette page
-- [`docs/WIFI_PRESENCE (Home Page)/PAGE_HOME.md`](../WIFI_PRESENCE%20(Home%20Page)/PAGE_HOME.md) — vue d'ensemble des 18 vignettes
-- [`docs/DEPENDANCES_GLOBALES.md`](DEPENDANCES_GLOBALES.md) — chaîne de dépendances L2C3
+- [`L2C3_VIGNETTE_ECLAIRAGE.md`](./L2C3_VIGNETTE_ECLAIRAGE.md) - Vignette button-card → accès à cette page
+- [`docs/WIFI_PRESENCE (Home Page)/PAGE_HOME.md`](../WIFI_PRESENCE%20(Home%20Page)/PAGE_HOME.md) - vue d'ensemble des 18 vignettes
+- [`docs/DEPENDANCES_GLOBALES.md`](DEPENDANCES_GLOBALES.md) - chaîne de dépendances L2C3
 
 ---
 

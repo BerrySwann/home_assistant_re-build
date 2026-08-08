@@ -1,4 +1,4 @@
-# (D) NOTIFICATION TEMPÉRATURE — NUIT (21H00 → 07H30)
+# (D) NOTIFICATION TEMPÉRATURE - NUIT (21H00 → 07H30)
 
 > **Fichier :** `automations_corrige/P1_clim_chauffage/D_notif_temp_nuit.yaml`
 > **Mode HA :** `queued`

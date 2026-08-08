@@ -1,8 +1,8 @@
-# 📋 AUTOMATIONS — INVENTAIRE COMPLET (ReBuild)
+# 📋 AUTOMATIONS - INVENTAIRE COMPLET (ReBuild)
 
 > **Source unique et autoritaire :**
 > `https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/automations.yaml`
-> 52 automations — état au 2026-04-05
+> 52 automations - état au 2026-04-05
 > ⚠️ Ne jamais documenter depuis le dépôt PROD (`home-assistant-config`).
 
 ---
@@ -26,39 +26,39 @@
 | 13 | (K) (DEBUG) Notifier les changements de message clim | P1 / Clim | single | 1 | ✅ |
 | 14 | A - Chauffage Cuisine (LMMJ 4h45-7h / VSD 5h45-8h, 19.9°↔20.5°) | P1 / Cuisine | single | 6 | ✅ |
 | 15 | B - Chauffage Cuisine Vacances | P1 / Cuisine | single | 3 | ✅ |
-| 16 | A - SALLE DE BAIN - DÉMARRAGE ET INITIALISATION DU SOUFFLANT | P1 / SdB | single | 1 | — |
-| 17 | A - 2026/02/01 - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT | P1 / SdB | queued | 4 | — |
-| 18 | A - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT | P1 / SdB | queued | 3 | — |
-| 19 | B - SALLE DE BAIN - GESTION RÉSISTANCES DU SOUFFLANT | P1 / SdB | single | 2 | — |
-| 20 | C - SALLE DE BAIN - GESTION ARRÊT SÉCURISÉ DU SOUFFLANT | P1 / SdB | single | 1 | — |
+| 16 | A - SALLE DE BAIN - DÉMARRAGE ET INITIALISATION DU SOUFFLANT | P1 / SdB | single | 1 | - |
+| 17 | A - 2026/02/01 - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT | P1 / SdB | queued | 4 | - |
+| 18 | A - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT | P1 / SdB | queued | 3 | - |
+| 19 | B - SALLE DE BAIN - GESTION RÉSISTANCES DU SOUFFLANT | P1 / SdB | single | 2 | - |
+| 20 | C - SALLE DE BAIN - GESTION ARRÊT SÉCURISÉ DU SOUFFLANT | P1 / SdB | single | 1 | - |
 | 21 | D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR | P1 / SdB | single | 1 | ✅ |
 | 22 | E - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 1h) | P1 / SdB | single | 1 | ✅ |
-| 23 | Bureau : Allumage Manu PC (MQTT) Poussoir (IKEA TRADFRI) | P2 / Bureau | single | 1 | — |
+| 23 | Bureau : Allumage Manu PC (MQTT) Poussoir (IKEA TRADFRI) | P2 / Bureau | single | 1 | - |
 | 24 | Automation éCO. Prises | P2 / Multi | queued | 2 | ✅ |
 | 25 | Gestion PC bureau : Scène de Fin + Notif | P2 / Bureau | parallel | 2 | ✅ |
 | 26 | Gestion TV Chambre : Scène de Fin + Notif | P2 / Chambre | parallel | 3 | ✅ |
-| 27 | Bouton IKEA RODRET - Soufflant SdB Gestion ON/OFF (JSON) | P2 / SdB | restart | 1 | — |
-| 28 | Bouton IKEA RODRET - TV Chambre (JSON) | P2 / Chambre | restart | 1 | — |
-| 29 | Allumage Lumière Entrée | P3 / Entrée | queued | 1 | — |
-| 30 | BUREAU_ACTIVATION_ECRAN_SYNCHRO | P3 / Bureau | restart | 2 | — |
-| 31 | BUREAU - BOUTON RODRET TOGGLE BLANCHES | P3 / Bureau | restart | 1 | — |
-| 32 | Bureau - Forcer Play ON si PC tourne | P3 / Bureau | parallel | 1 | — |
-| 33 | BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES | P3 / Bureau | restart | 2 | — |
-| 34 | [Backup] Alerte si KO 15 min | Système / Backup | single | 1 | — |
-| 35 | [Backup] Git au démarrage HA | Système / Backup | single | 1 | — |
-| 36 | [Backup] Git hourly H+10 | Système / Backup | single | 1 | — |
+| 27 | Bouton IKEA RODRET - Soufflant SdB Gestion ON/OFF (JSON) | P2 / SdB | restart | 1 | - |
+| 28 | Bouton IKEA RODRET - TV Chambre (JSON) | P2 / Chambre | restart | 1 | - |
+| 29 | Allumage Lumière Entrée | P3 / Entrée | queued | 1 | - |
+| 30 | BUREAU_ACTIVATION_ECRAN_SYNCHRO | P3 / Bureau | restart | 2 | - |
+| 31 | BUREAU - BOUTON RODRET TOGGLE BLANCHES | P3 / Bureau | restart | 1 | - |
+| 32 | Bureau - Forcer Play ON si PC tourne | P3 / Bureau | parallel | 1 | - |
+| 33 | BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES | P3 / Bureau | restart | 2 | - |
+| 34 | [Backup] Alerte si KO 15 min | Système / Backup | single | 1 | - |
+| 35 | [Backup] Git au démarrage HA | Système / Backup | single | 1 | - |
+| 36 | [Backup] Git hourly H+10 | Système / Backup | single | 1 | - |
 | 37 | [Backup] Git weekly (dim 01:30) | Système / Backup | single | 1 | ✅ |
-| 38 | Gestion Optimisée du Store Bureau | Stores | single | 4 | — |
-| 39 | Gestion Optimisée du Store Salon (Avec Mode Anti-Reflet PC) | Stores | single | 4 | — |
-| 40 | Alerte Météo France actualisation des "CARTES" | Météo | single | 4 | — |
-| 41 | Mettre à jour le temps du dernier impact de foudre | Météo | single | 1 | — |
+| 38 | Gestion Optimisée du Store Bureau | Stores | single | 4 | - |
+| 39 | Gestion Optimisée du Store Salon (Avec Mode Anti-Reflet PC) | Stores | single | 4 | - |
+| 40 | Alerte Météo France actualisation des "CARTES" | Météo | single | 4 | - |
+| 41 | Mettre à jour le temps du dernier impact de foudre | Météo | single | 1 | - |
 | 42 | Notification de la foudre | Météo | single | 1 | ✅ |
-| 43 | Update previous humidity | Météo | single | 1 | — |
-| 44 | Update previous temperature | Météo | single | 1 | — |
-| 45 | DB Purge MariaDB + Repack | Système | single | 1 | — |
-| 46 | DIAG - ENREGISTREMENT JOURNALIER (6 POSTES + DUT) | Système | single | 1 | — |
+| 43 | Update previous humidity | Météo | single | 1 | - |
+| 44 | Update previous temperature | Météo | single | 1 | - |
+| 45 | DB Purge MariaDB + Repack | Système | single | 1 | - |
+| 46 | DIAG - ENREGISTREMENT JOURNALIER (6 POSTES + DUT) | Système | single | 1 | - |
 | 47 | Système - Économie Énergie VS Code | Système | single | 4 | ✅ |
-| 48 | Mettre à jour le texte du temps écoulé | Météo | single | 2 | — |
+| 48 | Mettre à jour le texte du temps écoulé | Météo | single | 2 | - |
 | 49 | Système - Watchdog Piles (HUE/IKEA/SONOFF) | Système | single | 3 | ✅ |
 | 50 | Z2M last_seen | Système / Zigbee | single | 2 | ✅ |
 | 51 | NOTIF - Gardien Énergétique (Anomalies) | Énergie | single | 3 | ✅ |
@@ -68,18 +68,18 @@
 
 ## 📝 NOTE SUR LES VERSIONS PARALLÈLES (PAIRES A/B)
 
-Les automations `01/02` (clim jour) et `03/04` (clim nuit) existent en **double version** dans le dépôt ReBuild — c'est intentionnel : la version datée (2026-01-01 / 2026-01-02) est l'ancienne version conservée comme référence, et la version datée 2026-01-11 est la version active corrigée. Les deux sont présentes dans `automations.yaml` mais **une seule doit être active en production** (désactiver la version obsolète via l'UI HA).
+Les automations `01/02` (clim jour) et `03/04` (clim nuit) existent en **double version** dans le dépôt ReBuild - c'est intentionnel : la version datée (2026-01-01 / 2026-01-02) est l'ancienne version conservée comme référence, et la version datée 2026-01-11 est la version active corrigée. Les deux sont présentes dans `automations.yaml` mais **une seule doit être active en production** (désactiver la version obsolète via l'UI HA).
 
-De même pour les automatisations SdB : la `17` (2026/02/01) est la version intermédiaire conservée pour référence — la `18` est la version courante.
-
----
-
-## 🔍 FICHES DÉTAILLÉES — P1 CLIM (13 automations)
+De même pour les automatisations SdB : la `17` (2026/02/01) est la version intermédiaire conservée pour référence - la `18` est la version courante.
 
 ---
 
-### #01 — (A - 0) 2026-01-01 Automatisation CLIM (07h30 <-> 21h00)
-**⚠️ VERSION ARCHIVÉE — Remplacée par #02 (2026-01-11)**
+## 🔍 FICHES DÉTAILLÉES - P1 CLIM (13 automations)
+
+---
+
+### #01 - (A - 0) 2026-01-01 Automatisation CLIM (07h30 <-> 21h00)
+**⚠️ VERSION ARCHIVÉE - Remplacée par #02 (2026-01-11)**
 
 **Rôle :** Pilotage des 3 climatiseurs (Salon, Bureau, Chambre) sur la plage jour 07h30→21h00.
 Logique de présence à 4 groupes : absent (1), Mamour seule (2), Éric seul (3), les deux (4).
@@ -97,7 +97,7 @@ Calcule la température cible en fonction du groupe présent et de la saison (É
 
 ---
 
-### #02 — (A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00)
+### #02 - (A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00)
 **✅ VERSION ACTIVE**
 
 **Rôle :** Version améliorée de #01. Pilotage clims jour avec boucle de relance et notification ciblée fenêtres.
@@ -116,8 +116,8 @@ Mêmes 4 groupes de présence. Ajout : gestion de la boucle de relance en cas d'
 
 ---
 
-### #03 — (B - 0) 2026-01-02 Automatisation CLIM NUIT (21h00 <-> 07h30)
-**⚠️ VERSION ARCHIVÉE — Remplacée par #04 (2026-01-11)**
+### #03 - (B - 0) 2026-01-02 Automatisation CLIM NUIT (21h00 <-> 07h30)
+**⚠️ VERSION ARCHIVÉE - Remplacée par #04 (2026-01-11)**
 
 **Rôle :** Pilotage des clims sur la plage nuit 21h00→07h30.
 Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon coupure.
@@ -128,7 +128,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #04 — (B - 0) 2026-01-11 AUTOMATISATION CLIM NUIT (21H00 <-> 07H30)
+### #04 - (B - 0) 2026-01-11 AUTOMATISATION CLIM NUIT (21H00 <-> 07H30)
 **✅ VERSION ACTIVE**
 
 **Rôle :** Version améliorée de #03. Pilotage clims nuit avec boucle de relance et notification ciblée fenêtres.
@@ -140,7 +140,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #05 — (C) (CLIM OFF) Gardien Éco (Delta T < -1 et T°Ext > Seuil Non-Chauffage)
+### #05 - (C) (CLIM OFF) Gardien Éco (Delta T < -1 et T°Ext > Seuil Non-Chauffage)
 
 **Rôle :** Module de sécurité ÉCO. Coupe tous les climatiseurs si l'air extérieur est plus chaud que l'intérieur (inutile de chauffer) ou si le delta T dépasse le seuil de non-chauffage.
 
@@ -159,7 +159,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #06 — (D) Notification température Up ou Down (7h30 -> 21h00)
+### #06 - (D) Notification température Up ou Down (7h30 -> 21h00)
 
 **Rôle :** Envoie le message personnalisé clim si le texte du capteur change OU au réveil à 07h30.
 
@@ -174,7 +174,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #07 — (E) Notification température Up ou Down (21h00 -> 7h30)
+### #07 - (E) Notification température Up ou Down (21h00 -> 7h30)
 
 **Rôle :** Idem #06 mais sur la plage nuit. Déclenche sur `sensor.message_clim_personnalise_21h00_7h30` OU à 21h00.
 
@@ -186,7 +186,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #08 — (F) (CLIM) Notification de fermeture des fenêtres
+### #08 - (F) (CLIM) Notification de fermeture des fenêtres
 
 **Rôle :** Envoie une notification lorsqu'une fenêtre est fermée (pour information post-coupure clim).
 
@@ -200,9 +200,9 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #09 — (G) (CLIM) Automatisation Arrêt Clim Notification
+### #09 - (G) (CLIM) Automatisation Arrêt Clim Notification
 
-**Rôle :** Notification quand une clim est coupée manuellement (uniquement si fenêtres fermées et prise alimentée — pour éviter les faux positifs).
+**Rôle :** Notification quand une clim est coupée manuellement (uniquement si fenêtres fermées et prise alimentée - pour éviter les faux positifs).
 
 **Trigger (1) :**
 - Passage à `off` de `switch.clim_salon_nous` ou `switch.clim_bureau_nous` ou `switch.clim_chambre_nous`
@@ -215,7 +215,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #10 — (H) (CLIM) Notification changement de mode Été/Fan/Hiver
+### #10 - (H) (CLIM) Notification changement de mode Été/Fan/Hiver
 
 **Rôle :** Notification lorsque `sensor.mode_ete_hiver` change entre Été (`cool`), Ventilateur (`fan_only`) ou Hiver (`heat`).
 
@@ -226,7 +226,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #11 — (I) (CLIM DEBUG) Force Mode Correct & Sécurité
+### #11 - (I) (CLIM DEBUG) Force Mode Correct & Sécurité
 
 **Rôle :** WATCHDOG double :
 1. **FORCE OFF** : Si une clim tente de démarrer alors que sa prise est `off` ou qu'un arrêt sécurisé est en cours → coupure forcée.
@@ -240,7 +240,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #12 — (J) Synchro & Notif Clim si Prise Coupée
+### #12 - (J) Synchro & Notif Clim si Prise Coupée
 
 **Rôle :** Met à jour l'état du thermostat virtuel HA et notifie si la prise physique est coupée manuellement (évite le désalignement état HA / état réel).
 
@@ -251,7 +251,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #13 — (K) (DEBUG) Notifier les changements de message clim
+### #13 - (K) (DEBUG) Notifier les changements de message clim
 
 **Rôle :** Debug/surveillance : notifie chaque changement d'état du sensor `message_clim_personnalise_7h30_21h00` sur le mobile.
 
@@ -266,7 +266,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #14 — A - Chauffage Cuisine (LMMJ 4h45-7h / VSD 5h45-8h, 19.9°↔20.5°)
+### #14 - A - Chauffage Cuisine (LMMJ 4h45-7h / VSD 5h45-8h, 19.9°↔20.5°)
 
 **Rôle :** Régulation du radiateur bain d'huile cuisine (`switch.radiateur_cuisine`) selon plage horaire et hysteresis de température.
 - Lundi→Jeudi : 04h45 → 07h00
@@ -285,7 +285,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #15 — B - Chauffage Cuisine Vacances
+### #15 - B - Chauffage Cuisine Vacances
 
 **Rôle :** Variante vacances : plage 06h00→08h30, même hysteresis 19.9°/20.5°C, sans contrainte de présence.
 
@@ -298,18 +298,18 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-## 🚿 P1 SDB — SOUFFLANT (7 automations)
+## 🚿 P1 SDB - SOUFFLANT (7 automations)
 
 > **Contexte matériel :**
-> Le soufflant SdB (2×1000W) est piloté via une **télécommande IR** (`remote.soufflant_sdb_rm4_mini`) car il n'a pas de commande directe — la prise `switch.prise_soufflant_salle_de_bain_nous` sert à couper l'alimentation physique.
+> Le soufflant SdB (2×1000W) est piloté via une **télécommande IR** (`remote.soufflant_sdb_rm4_mini`) car il n'a pas de commande directe - la prise `switch.prise_soufflant_salle_de_bain_nous` sert à couper l'alimentation physique.
 > L'état logique ON/OFF est géré par `switch.inter_soufflant_salle_de_bain` (helper switch).
 > La puissance active (0W / 1000W / 2000W) est mémorisée dans `input_select.etat_resistance_soufflant_sdb`.
 
 ---
 
-### #16 — A - SALLE DE BAIN — DÉMARRAGE ET INITIALISATION DU SOUFFLANT
+### #16 - A - SALLE DE BAIN - DÉMARRAGE ET INITIALISATION DU SOUFFLANT
 
-**Rôle :** Procédure d'allumage initial — allume la prise physique, envoie IR `on_off`, sélectionne la puissance de démarrage selon la T° (< 21°C → 2000W, > 21°C → 1000W).
+**Rôle :** Procédure d'allumage initial - allume la prise physique, envoie IR `on_off`, sélectionne la puissance de démarrage selon la T° (< 21°C → 2000W, > 21°C → 1000W).
 
 **Trigger (1) :**
 - Passage à `on` de `switch.inter_soufflant_salle_de_bain`
@@ -328,8 +328,8 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #17 — A - 2026/02/01 - SALLE DE BAIN — GESTION INTELLIGENTE SOUFFLANT
-**⚠️ VERSION INTERMÉDIAIRE — Conservée pour référence**
+### #17 - A - 2026/02/01 - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT
+**⚠️ VERSION INTERMÉDIAIRE - Conservée pour référence**
 
 **Rôle :** Version complète avec auto-off 60 min. Gère démarrage, régulation (23°C/22°C) et auto-extinction avec refroidissement.
 
@@ -343,10 +343,10 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #18 — A - SALLE DE BAIN — GESTION INTELLIGENTE SOUFFLANT
+### #18 - A - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT
 **✅ VERSION ACTIVE**
 
-**Rôle :** Version courante — Démarrage selon T°, régulation 23°C/22°C, commandes IR Swing et passage à 0W.
+**Rôle :** Version courante - Démarrage selon T°, régulation 23°C/22°C, commandes IR Swing et passage à 0W.
 
 **Triggers (3) :**
 - Changement état `switch.inter_soufflant_salle_de_bain` → id `inter_change`
@@ -372,7 +372,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #19 — B - SALLE DE BAIN — GESTION RÉSISTANCES DU SOUFFLANT
+### #19 - B - SALLE DE BAIN - GESTION RÉSISTANCES DU SOUFFLANT
 
 **Rôle :** Ajustement ou coupure des résistances selon la T° ambiante et la puissance active actuelle. Complément de #18 pour la régulation fine.
 
@@ -395,7 +395,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #20 — C - SALLE DE BAIN — GESTION ARRÊT SÉCURISÉ DU SOUFFLANT
+### #20 - C - SALLE DE BAIN - GESTION ARRÊT SÉCURISÉ DU SOUFFLANT
 
 **Rôle :** Procédure d'extinction propre : IR d'abord, délai de refroidissement (1 min), puis coupure physique de la prise.
 
@@ -415,7 +415,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #21 — D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR
+### #21 - D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR
 
 **Rôle :** Reset d'urgence physique si T° > 25°C avec dérive rapide (+0.5°C). Prévient la surchauffe.
 
@@ -440,7 +440,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #22 — E - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 1h)
+### #22 - E - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 1h)
 
 **Rôle :** Timer de sécurité 1h sur le sèche-serviettes. Après extinction, réarme la prise en veille pour permettre le suivi conso.
 
@@ -463,16 +463,16 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #23 — Bureau : Allumage Manu PC (MQTT) Poussoir (IKEA TRADFRI)
+### #23 - Bureau : Allumage Manu PC (MQTT) Poussoir (IKEA TRADFRI)
 
 **Rôle :** Allume `switch.hue_smart_eco_pc_bureau` dès réception du signal ON via MQTT (bouton IKEA TRADFRI poussoir bureau).
 
-**Trigger (1) :** MQTT topic Zigbee2MQTT — bouton IKEA TRADFRI bureau
+**Trigger (1) :** MQTT topic Zigbee2MQTT - bouton IKEA TRADFRI bureau
 **Mode :** `single`
 
 ---
 
-### #24 — Automation éCO. Prises
+### #24 - Automation éCO. Prises
 
 **Rôle :** Pilotage dynamique des prises selon le groupe de présence (1→4). Gère : horloge entrée, lampes Hue salon, écrans, PC Bureau, tête de lit chambre.
 
@@ -490,7 +490,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #25 — Gestion PC bureau : Scène de Fin + Notif
+### #25 - Gestion PC bureau : Scène de Fin + Notif
 
 **Rôle :** Éteint la prise logique PC (`switch.hue_smart_eco_pc_bureau`) et notifie quand une veille prolongée ou fin de session est détectée. Laisse la prise physique `switch.prise_bureau_pc_ikea` ON pour continuer le suivi conso.
 
@@ -502,7 +502,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #26 — Gestion TV Chambre : Scène de Fin + Notif
+### #26 - Gestion TV Chambre : Scène de Fin + Notif
 
 **Rôle :** Éteint les lumières chambre et notifie quand la TV chambre passe en veille (<20W) après une durée. Laisse prise physique ON pour suivi conso.
 
@@ -515,20 +515,20 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #27 — Bouton IKEA RODRET - Soufflant SdB Gestion ON/OFF (JSON)
+### #27 - Bouton IKEA RODRET - Soufflant SdB Gestion ON/OFF (JSON)
 
 **Rôle :** Toggle `input_boolean.inter_soufflant_salle_de_bain` via le bouton RODRET physique SdB (MQTT JSON payload).
 
-**Trigger (1) :** MQTT topic `zigbee2mqtt/Bouton SdB RODRET` — payload JSON action
+**Trigger (1) :** MQTT topic `zigbee2mqtt/Bouton SdB RODRET` - payload JSON action
 **Mode :** `restart`
 
 ---
 
-### #28 — Bouton IKEA RODRET - TV Chambre (JSON)
+### #28 - Bouton IKEA RODRET - TV Chambre (JSON)
 
 **Rôle :** Toggle `switch.prise_tv_chambre_nous` via le bouton RODRET chambre (MQTT JSON payload).
 
-**Trigger (1) :** MQTT topic `zigbee2mqtt/Bouton TV Chambre RODRET` — payload JSON action
+**Trigger (1) :** MQTT topic `zigbee2mqtt/Bouton TV Chambre RODRET` - payload JSON action
 **Mode :** `restart`
 
 ---
@@ -537,7 +537,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #29 — Allumage Lumière Entrée
+### #29 - Allumage Lumière Entrée
 
 **Rôle :** Gestion éclairage entrée basée sur les transitions du groupe de présence et la luminosité (sun.sun).
 Allume `light.entree` à l'arrivée si le soleil est couché ou en dessous d'un seuil.
@@ -547,7 +547,7 @@ Allume `light.entree` à l'arrivée si le soleil est couché ou en dessous d'un 
 
 ---
 
-### #30 — BUREAU_ACTIVATION_ECRAN_SYNCHRO
+### #30 - BUREAU_ACTIVATION_ECRAN_SYNCHRO
 
 **Rôle :** Synchronise l'alimentation de l'écran bureau (`switch.prise_ecran_bureau`) avec l'état du PC (`binary_sensor.bureau_pc_status`).
 PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
@@ -560,7 +560,7 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-### #31 — BUREAU - BOUTON RODRET TOGGLE BLANCHES
+### #31 - BUREAU - BOUTON RODRET TOGGLE BLANCHES
 
 **Rôle :** Toggle des 2 lampes blanches bureau (`light.hue_white_lamp_bureau_1` et `_2`) via le bouton RODRET bureau (MQTT). Logique : si l'une est ON → tout éteindre / si tout est OFF → tout allumer.
 
@@ -570,7 +570,7 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-### #32 — Bureau - Forcer Play ON si PC tourne
+### #32 - Bureau - Forcer Play ON si PC tourne
 
 **Rôle :** Si les Hue Play bureau sont éteintes manuellement alors que le PC tourne (`binary_sensor.moniteur_pc = on`), les rallume automatiquement.
 
@@ -581,7 +581,7 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-### #33 — BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES
+### #33 - BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES
 
 **Rôle :** Si l'une des 2 lampes blanches bureau s'allume, force l'allumage de l'autre dans les 5s. Garantit le fonctionnement en paire.
 
@@ -609,7 +609,7 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-### #38 — Gestion Optimisée du Store Bureau
+### #38 - Gestion Optimisée du Store Bureau
 
 **Rôle :** Gestion store bureau avec priorité sommeil et anti-reflet. Bloque tout mouvement si la fenêtre est ouverte.
 
@@ -624,7 +624,7 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-### #39 — Gestion Optimisée du Store Salon (Avec Mode Anti-Reflet PC)
+### #39 - Gestion Optimisée du Store Salon (Avec Mode Anti-Reflet PC)
 
 **Rôle :** Gère : canicule (fermeture si T° > 34°C), froid (ouverture soleil), confort visuel Mamour (anti-reflet écran). Bloque si fenêtre ouverte.
 
@@ -642,7 +642,7 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-### #40 — Alerte Météo France actualisation des "CARTES"
+### #40 - Alerte Météo France actualisation des "CARTES"
 
 **Rôle :** Force la mise à jour des images d'alerte Météo France (vigilances) au démarrage HA, aux heures clés ou sur changement de vigilance.
 
@@ -651,7 +651,7 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-### #41 — Mettre à jour le temps du dernier impact de foudre
+### #41 - Mettre à jour le temps du dernier impact de foudre
 
 **Rôle :** Met à jour `input_datetime.dernier_eclair` à chaque changement du compteur foudre Blitzortung.
 
@@ -660,7 +660,7 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-### #42 — Notification de la foudre
+### #42 - Notification de la foudre
 
 **Rôle :** Alerte mobile avec distance, ville ou direction et décompte des impacts.
 
@@ -670,19 +670,19 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-### #43 — Update previous humidity
+### #43 - Update previous humidity
 **Rôle :** Enregistre `sensor.th_balcon_nord_humidity` dans `input_number.th_balcon_nord_humidity_previous` toutes les 30 min pour calculer la tendance.
 **Trigger :** `time_pattern: minutes: /30` | **Mode :** `single`
 
 ---
 
-### #44 — Update previous temperature
+### #44 - Update previous temperature
 **Rôle :** Enregistre `sensor.th_balcon_nord_temperature` dans `input_number.th_balcon_nord_temperature_previous` toutes les 30 min pour calculer la tendance.
 **Trigger :** `time_pattern: minutes: /30` | **Mode :** `single`
 
 ---
 
-### #48 — Mettre à jour le texte du temps écoulé
+### #48 - Mettre à jour le texte du temps écoulé
 
 **Rôle :** Calcule et met à jour `input_text.dernier_impact_de_foudre_temps_ecoule` toutes les minutes (texte lisible "il y a X minutes/heures").
 
@@ -698,16 +698,16 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-### #45 — DB Purge MariaDB + Repack
+### #45 - DB Purge MariaDB + Repack
 
-**Rôle :** Ménage nocturne MariaDB — purge sur 7 jours de rétention + `OPTIMIZE TABLE` pour réduire la taille sur disque.
+**Rôle :** Ménage nocturne MariaDB - purge sur 7 jours de rétention + `OPTIMIZE TABLE` pour réduire la taille sur disque.
 
 **Trigger (1) :** Horaire nuit
 **Mode :** `single`
 
 ---
 
-### #46 — DIAG - ENREGISTREMENT JOURNALIER (6 POSTES + DUT)
+### #46 - DIAG - ENREGISTREMENT JOURNALIER (6 POSTES + DUT)
 
 **Rôle :** Log toutes les 15 min la consommation des 6 postes (P0→P3), la T° extérieure et le DUT chauffage dans un fichier via `notify.file`.
 
@@ -717,7 +717,7 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-### #47 — Système - Économie Énergie VS Code
+### #47 - Système - Économie Énergie VS Code
 
 **Rôle :** Coupe VS Code serveur si le CPU dépasse 10% ou s'il est inactif, avec demande de confirmation (H24). Évite la consommation inutile du mini-PC.
 
@@ -731,7 +731,7 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-### #49 — Système - Watchdog Piles (HUE/IKEA/SONOFF)
+### #49 - Système - Watchdog Piles (HUE/IKEA/SONOFF)
 
 **Rôle :** Vérification 3×/jour du niveau des piles de tous les capteurs Zigbee (seuil 11%). Si alerte → notification groupée.
 
@@ -740,7 +740,7 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-### #50 — Z2M last_seen
+### #50 - Z2M last_seen
 
 **Rôle :** Surveille les capteurs Zigbee injoignables (last_seen > 8h ou indisponibles). Alerte si un capteur est perdu.
 
@@ -749,11 +749,11 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-## ⚡ ÉNERGIE — ALERTES (2 automations)
+## ⚡ ÉNERGIE - ALERTES (2 automations)
 
 ---
 
-### #51 — NOTIF - Gardien Énergétique (Anomalies)
+### #51 - NOTIF - Gardien Énergétique (Anomalies)
 
 **Rôle :** Surveillance de 3 types d'anomalies énergétiques avec alertes ciblées :
 
@@ -772,7 +772,7 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 ---
 
-### #52 — ÉNERGIE - SURVEILLANCE GROS ÉLECTRO EN HP
+### #52 - ÉNERGIE - SURVEILLANCE GROS ÉLECTRO EN HP
 
 **Rôle :** Alerte si le lave-linge ou le lave-vaisselle démarre pendant les Heures Pleines.
 
@@ -799,9 +799,9 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 | P1 Cuisine | 2 | 2 |
 | P1 SdB Soufflant | 7 | 2 |
 | P2 Prises | 6 | 3 |
-| P3 Éclairage | 5 | — |
+| P3 Éclairage | 5 | - |
 | Backup Git | 4 | 1 |
-| Stores | 2 | — |
+| Stores | 2 | - |
 | Météo | 5 | 2 |
 | Système | 6 | 4 |
 | Énergie Alertes | 2 | 2 |

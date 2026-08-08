@@ -1,4 +1,4 @@
-# [P3-SALON] BOUTON IKEA INTER SALON (4 TOUCHES) — ON/OFF
+# [P3-SALON] BOUTON IKEA INTER SALON (4 TOUCHES) - ON/OFF
 
 > **Fichier :** `automations_corrige/P3_salon_bouton_inter_ikea_4.yaml`
 > **Mode HA :** `restart`
@@ -21,7 +21,7 @@ d'éclairage salon en aval.
 
 ---
 
-## ⚙️ Actions — Choose
+## ⚙️ Actions - Choose
 
 | Action MQTT | Résultat |
 |:---|:---|

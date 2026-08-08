@@ -9,12 +9,12 @@
 
 </div>
 
-> **🔒 DOC VERROUILLÉE — VERSION FINALE**
+> **🔒 DOC VERROUILLÉE - VERSION FINALE**
 > Ce fichier est considéré comme terminé. Aucune modification ne doit être apportée sans décision explicite.
 >
 > ⚠️ **2 bugs esthétiques connus (à traiter ultérieurement) :**
-> 1. Icône HA dans la vignette — positionnement à revoir (alignement vertical résiduel à peaufiner)
-> 2. Page MAJ — mise en page des grilles à affiner sur petit écran (espacement entre Grille 1 et Grille 2)
+> 1. Icône HA dans la vignette - positionnement à revoir (alignement vertical résiduel à peaufiner)
+> 2. Page MAJ - mise en page des grilles à affiner sur petit écran (espacement entre Grille 1 et Grille 2)
 
 | Champ | Valeur |
 |:------|:-------|
@@ -28,15 +28,15 @@
 
 ---
 
-# 🔄 PAGE MAJ — `/dashboard-tablette/maj`
+# 🔄 PAGE MAJ - `/dashboard-tablette/maj`
 
 ---
 
 ## 📋 TABLE DES MATIÈRES
 
 1. [Vue d'ensemble](#vue-densemble)
-2. [Grille 1 — H.A. SERVER](#grille-1--ha-server)
-3. [Grille 2 — H.A. UPDATE](#grille-2--ha-update)
+2. [Grille 1 - H.A. SERVER](#grille-1--ha-server)
+3. [Grille 2 - H.A. UPDATE](#grille-2--ha-update)
 
 ---
 
@@ -68,7 +68,7 @@ La page MAJ est composée de **deux grilles côte à côte** (`type: grid`). Ell
 
 ---
 
-## GRILLE 1 — H.A. SERVER
+## GRILLE 1 - H.A. SERVER
 
 ```yaml
 type: grid
@@ -551,7 +551,7 @@ cards:
 
 ---
 
-## GRILLE 2 — H.A. UPDATE
+## GRILLE 2 - H.A. UPDATE
 
 ```yaml
 type: grid
@@ -1224,8 +1224,8 @@ cards:
 
 ## 🔗 FICHIERS LIÉS
 
-- [`L4C3_VIGNETTE_MAJ.md`](./L4C3_VIGNETTE_MAJ.md) — vignette button-card + bug `margin-left`
-- [`docs/DEPENDANCES_GLOBALES.md`](DEPENDANCES_GLOBALES.md) — chaîne complète L4C3
+- [`L4C3_VIGNETTE_MAJ.md`](./L4C3_VIGNETTE_MAJ.md) - vignette button-card + bug `margin-left`
+- [`docs/DEPENDANCES_GLOBALES.md`](DEPENDANCES_GLOBALES.md) - chaîne complète L4C3
 
 ---
 

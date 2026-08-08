@@ -18,8 +18,8 @@ Sécurité absolue : aucun mouvement si fenêtre ouverte.
 | ID | Type | Condition |
 |:---|:---|:---|
 | `reveil` | `time` | 07:00:00 |
-| — | `state` | `sensor.th_balcon_nord_temperature` |
-| — | `sun` | sunset |
+| - | `state` | `sensor.th_balcon_nord_temperature` |
+| - | `sun` | sunset |
 | `fenetre` | `state` | `binary_sensor.contact_fenetre_bureau_sonoff_contact → off` |
 
 ---
@@ -30,13 +30,13 @@ Sécurité absolue : aucun mouvement si fenêtre ouverte.
 
 ---
 
-## ⚙️ Scénarios — Choose
+## ⚙️ Scénarios - Choose
 
 | Scénario | Condition | Action |
 |:---|:---|:---|
-| A — Ouverture travail | Après 07:00, avant sunset, T° 18–25°C, store fermé | `cover.open_cover` |
-| B — Fermeture chaleur | T° > 25°C, avant sunset | `cover.close_cover` |
-| C — Fermeture nuit | Après sunset | `cover.close_cover` |
+| A - Ouverture travail | Après 07:00, avant sunset, T° 18–25°C, store fermé | `cover.open_cover` |
+| B - Fermeture chaleur | T° > 25°C, avant sunset | `cover.close_cover` |
+| C - Fermeture nuit | Après sunset | `cover.close_cover` |
 
 ---
 

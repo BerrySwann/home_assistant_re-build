@@ -12,7 +12,7 @@
 | 📁 **Path** | `Dashboard/L2C1_04_Energie_Generale/page_L2C1_energie_temps_reel_2026-06-18.yaml` |
 | 🔗 **Accès depuis** | Badge "Réel" de `page_energie_home.yaml` → `/dashboard-tablette/energie-temps-reel` |
 | 🔗 **Retour vers** | Tap titre → `/dashboard-tablette/energie` |
-| 🏗️ **Layout** | `type: grid` — 4 colonnes `column_span: 1` |
+| 🏗️ **Layout** | `type: grid` - 4 colonnes `column_span: 1` |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-03-20 |
@@ -20,7 +20,7 @@
 
 ---
 
-# ⚡ PAGE ÉNERGIE TEMPS RÉEL — DOCUMENTATION COMPLÈTE
+# ⚡ PAGE ÉNERGIE TEMPS RÉEL - DOCUMENTATION COMPLÈTE
 
 ---
 
@@ -28,10 +28,10 @@
 
 1. [Vue d'ensemble](#vue-densemble)
 2. [Architecture de la page](#architecture-de-la-page)
-3. [Col 1 — HEADER + Sections conditionnelles par catégorie](#col-1--header--sections-conditionnelles-par-catégorie)
-4. [Col 2 — Donut journalier (cumul depuis minuit)](#col-2--donut-journalier-cumul-depuis-minuit)
-5. [Col 3 — ApexCharts 24h (conso instantanée)](#col-3--apexcharts-24h-conso-instantanée)
-6. [Col 4 — Tabbed-card par pièce (streamline)](#col-4--tabbed-card-par-pièce-streamline)
+3. [Col 1 - HEADER + Sections conditionnelles par catégorie](#col-1--header--sections-conditionnelles-par-catégorie)
+4. [Col 2 - Donut journalier (cumul depuis minuit)](#col-2--donut-journalier-cumul-depuis-minuit)
+5. [Col 3 - ApexCharts 24h (conso instantanée)](#col-3--apexcharts-24h-conso-instantanée)
+6. [Col 4 - Tabbed-card par pièce (streamline)](#col-4--tabbed-card-par-pièce-streamline)
 7. [Entités utilisées](#entités-utilisées--provenance-complète)
 8. [Dépannage](#dépannage)
 
@@ -40,20 +40,20 @@
 ## 🎯 VUE D'ENSEMBLE
 
 Cette page offre une vue **temps réel** de la consommation électrique appareil par appareil, organisée en **4 colonnes** côte à côte :
-- **Col 1** : Heading + 7 sections conditionnelles par catégorie (Chauffage, Multimédia, Cuisson, Froid, Hygiène, Lumière, Autres) — n'affiche que les catégories avec puissance > 0W
+- **Col 1** : Heading + 7 sections conditionnelles par catégorie (Chauffage, Multimédia, Cuisson, Froid, Hygiène, Lumière, Autres) - n'affiche que les catégories avec puissance > 0W
 - **Col 2** : Donut de répartition par appareil sur la journée (kWh cumulés depuis minuit)
 - **Col 3** : Courbe instantanée par appareil sur 24h (W)
 - **Col 4** : Détail par pièce via onglets : puissance instantanée + moyenne + kWh du jour par appareil
 
 ### Intégrations requises
 
-- ✅ **Zigbee2MQTT (Z2M)** — toutes les prises IKEA et NOUS sans pont : `sensor.prise_*_power` / `sensor.prise_*_current`
-- ✅ **Sonoff** — `sensor.relais_*_power` (lumière SDB via relais Z2M)
-- ✅ **Philips Hue** — `sensor.hue_*_power` / `sensor.lampe_*_hue_power`
-- ✅ **Sensors calculés P2** — `sensor.*_quotidien_kwh_um` (Utility Meters quotidiens)
-- ✅ **Sensors calculés AVG** — `sensor.*_avg_watts_quotidien` (moyennes glissantes quotidiennes)
-- ✅ **custom:streamline-card** (HACS) — template `conso_temps_reel_appareil`
-- ✅ **custom:tabbed-card** (HACS) — navigation par pièce
+- ✅ **Zigbee2MQTT (Z2M)** - toutes les prises IKEA et NOUS sans pont : `sensor.prise_*_power` / `sensor.prise_*_current`
+- ✅ **Sonoff** - `sensor.relais_*_power` (lumière SDB via relais Z2M)
+- ✅ **Philips Hue** - `sensor.hue_*_power` / `sensor.lampe_*_hue_power`
+- ✅ **Sensors calculés P2** - `sensor.*_quotidien_kwh_um` (Utility Meters quotidiens)
+- ✅ **Sensors calculés AVG** - `sensor.*_avg_watts_quotidien` (moyennes glissantes quotidiennes)
+- ✅ **custom:streamline-card** (HACS) - template `conso_temps_reel_appareil`
+- ✅ **custom:tabbed-card** (HACS) - navigation par pièce
 
 ### Cartes HACS utilisées
 
@@ -71,7 +71,7 @@ Cette page offre une vue **temps réel** de la consommation électrique appareil
 ## 🏗️ ARCHITECTURE DE LA PAGE
 
 ```
-type: grid  (4 colonnes — column_span: 1 chacune)
+type: grid  (4 colonnes - column_span: 1 chacune)
 
 ┌──────────────────┬──────────────────┬──────────────────┬──────────────────┐
 │    COL 1         │    COL 2         │    COL 3         │    COL 4         │
@@ -100,13 +100,13 @@ type: grid  (4 colonnes — column_span: 1 chacune)
 └──────────────────┴──────────────────┴──────────────────┴──────────────────┘
 ```
 
-> **Principe Col 1** : Chaque catégorie est une `type: conditional` — visible uniquement si `sensor.total_poste_*_puissance ≠ "0"`. La colonne ne montre que les postes actifs au moment de la consultation.
+> **Principe Col 1** : Chaque catégorie est une `type: conditional` - visible uniquement si `sensor.total_poste_*_puissance ≠ "0"`. La colonne ne montre que les postes actifs au moment de la consultation.
 
 > **Séparateur horizontal** : Un `type: markdown` de 1px blanc semi-transparent (`rgba(255,255,255,0.4)`) sert de diviseur visuel entre les catégories en Col 1.
 
 ---
 
-## 📍 COL 1 — HEADER + Sections conditionnelles par catégorie
+## 📍 COL 1 - HEADER + Sections conditionnelles par catégorie
 
 ### Header
 
@@ -127,7 +127,7 @@ type: grid  (4 colonnes — column_span: 1 chacune)
     navigation_path: /dashboard-tablette/energie
 ```
 
-> ⚠️ Typo dans le titre original : "Temps Réél" (double accent) — conservé tel quel pour cohérence avec le YAML en production.
+> ⚠️ Typo dans le titre original : "Temps Réél" (double accent) - conservé tel quel pour cohérence avec le YAML en production.
 
 **Entité :** `sensor.ecojoko_consommation_temps_reel` [Ecojoko - UI] Puissance instantanée totale (W)
 
@@ -153,37 +153,37 @@ Quand la condition est vraie, s'affiche un `heading` avec badge + `auto-entities
 #### Section 1 : Chauffage
 
 | Sensor déclencheur | `sensor.total_poste_chauffage_puissance` |
-| Badge icône | `mdi:hvac` — couleur orange |
+| Badge icône | `mdi:hvac` - couleur orange |
 | Appareils | clim_salon_nous_power, radiateur_elec_cuisine_power, clim_bureau_nous_power, prise_soufflant_salle_de_bain_nous_power, prise_seche_serviette_salle_de_bain_nous_power, clim_chambre_nous_power |
 
 #### Section 2 : Multimédia
 
 | Sensor déclencheur | `sensor.total_poste_multimedia_puissance` |
-| Badge icône | `mdi:monitor-screenshot` — couleur blue |
+| Badge icône | `mdi:monitor-screenshot` - couleur blue |
 | Appareils | prise_box_internet_ikea_power, prise_tv_salon_ikea_power, prise_tv_chambre_nous_power, prise_pc_s_gege_ikea_power, prise_bureau_pc_ikea_power |
 
 #### Section 3 : Cuisson
 
 | Sensor déclencheur | `sensor.total_poste_cuisine_puissance` |
-| Badge icône | `mdi:stove` — couleur red |
+| Badge icône | `mdi:stove` - couleur red |
 | Appareils | prise_four_micro_ondes_nous_power, prise_petit_dejeune_nous_power, prise_airfryer_ninja_nous_power, four_et_plaque_de_cuisson_power |
 
 #### Section 4 : Froid
 
 | Sensor déclencheur | `sensor.total_poste_froid_puissance` |
-| Badge icône | `mdi:fridge-outline` — couleur cyan |
+| Badge icône | `mdi:fridge-outline` - couleur cyan |
 | Appareils | prise_frigo_cuisine_nous_power, prise_congelateur_cuisine_nous_power |
 
 #### Section 5 : Hygiène
 
 | Sensor déclencheur | `sensor.total_poste_hygiene_puissance` |
-| Badge icône | `mdi:bubbles` — couleur teal |
+| Badge icône | `mdi:bubbles` - couleur teal |
 | Appareils | prise_lave_linge_nous_power, prise_lave_vaisselle_nous_power |
 
 #### Section 6 : Lumière
 
 | Sensor déclencheur | `sensor.total_poste_eclairage_puissance` *(ou équivalent)* |
-| Badge icône | `mdi:lightbulb` — couleur yellow |
+| Badge icône | `mdi:lightbulb` - couleur yellow |
 | Appareils | Ampoules Hue actives + relais Sonoff SDB |
 
 #### Section 7 : Autres
@@ -194,7 +194,7 @@ Quand la condition est vraie, s'affiche un `heading` avec badge + `auto-entities
 
 ---
 
-## 🥧 COL 2 — Donut journalier (cumul depuis minuit)
+## 🥧 COL 2 - Donut journalier (cumul depuis minuit)
 
 ```yaml
 - type: custom:apexcharts-card
@@ -224,7 +224,7 @@ Quand la condition est vraie, s'affiche un `heading` avec badge + `auto-entities
 ```
 
 ### Principe
-- **Source** : Utility Meters quotidiens (`_quotidien_kwh_um`) — se remettent à 0 à minuit
+- **Source** : Utility Meters quotidiens (`_quotidien_kwh_um`) - se remettent à 0 à minuit
 - **Transform** : `× 1000` pour convertir kWh → Wh (meilleure lisibilité pour les petits appareils)
 - **18 séries** : 17 prises individuelles + 1 TV Salon + `sensor.all_standby_quotidien_kwh_um`
 - Pas de `graph_span` / `span` → lecture directe de l'état actuel des UM
@@ -252,13 +252,13 @@ Quand la condition est vraie, s'affiche un `heading` avec badge + `auto-entities
 | TV Chambre | `prise_tv_chambre_nous_quotidien_kwh_um` | `rgb(105, 155, 110)` |
 | Veilles | `all_standby_quotidien_kwh_um` | `rgb(109, 76, 65)` |
 
-> ⚠️ **[modif 2026-03-20]** : Couleurs mises à jour — PCg `rgb(202,135,135)` → `rgb(174,68,90)`, Chargeurs `rgb(174,68,90)` → `rgb(196,75,97)`, Congél `rgb(19,160,255)` → `rgb(0,255,255)` (cyan), Têtes de Lit `rgb(177,194,158)` → `rgb(75,130,85)`, TV Chambre `rgb(30,81,40)` → `rgb(105,155,110)`, Veilles `grey` → `rgb(109,76,65)`.
+> ⚠️ **[modif 2026-03-20]** : Couleurs mises à jour - PCg `rgb(202,135,135)` → `rgb(174,68,90)`, Chargeurs `rgb(174,68,90)` → `rgb(196,75,97)`, Congél `rgb(19,160,255)` → `rgb(0,255,255)` (cyan), Têtes de Lit `rgb(177,194,158)` → `rgb(75,130,85)`, TV Chambre `rgb(30,81,40)` → `rgb(105,155,110)`, Veilles `grey` → `rgb(109,76,65)`.
 
 > Sources UM : `utility_meter/P2_prise/P2_UM_AMHQ.yaml` (quotidien cycle)
 
 ---
 
-## 📈 COL 3 — ApexCharts 24h (conso instantanée)
+## 📈 COL 3 - ApexCharts 24h (conso instantanée)
 
 ```yaml
 - type: custom:apexcharts-card
@@ -295,10 +295,10 @@ Quand la condition est vraie, s'affiche un `heading` avec badge + `auto-entities
 ```
 
 ### Paramètres clés
-- `update_interval: 1m` — rafraîchissement forcé toutes les minutes
-- `cache: false` — pas de cache (données en direct)
-- `fill_raw: last` — évite les trous dans les courbes (maintient la dernière valeur)
-- `group_by: func: last, duration: 10m` — lisse sur 10 min
+- `update_interval: 1m` - rafraîchissement forcé toutes les minutes
+- `cache: false` - pas de cache (données en direct)
+- `fill_raw: last` - évite les trous dans les courbes (maintient la dernière valeur)
+- `group_by: func: last, duration: 10m` - lisse sur 10 min
 - Axe Y unique `Watts` côté droit, auto-scale
 
 ### Même 18 appareils + Veilles que le Donut
@@ -307,7 +307,7 @@ Même palette de couleurs que le donut (cohérence visuelle).
 
 ---
 
-## 📱 COL 4 — Tabbed-card par pièce (streamline)
+## 📱 COL 4 - Tabbed-card par pièce (streamline)
 
 ```yaml
 - type: custom:bubble-card
@@ -348,19 +348,19 @@ Chaque appareil utilise ce template streamline avec 5 variables :
 | Variable | Rôle |
 |----------|------|
 | `card_title` | Nom affiché de l'appareil |
-| `energy_entity` | `sensor.*_power` — puissance instantanée (W) |
+| `energy_entity` | `sensor.*_power` - puissance instantanée (W) |
 | `energy_color` | Couleur cohérente avec donut/graphique |
-| `current_entity` | `sensor.*_current` — intensité (A) |
-| `avg_daily_entity` | `sensor.*_avg_watts_quotidien` — moyenne W depuis minuit |
-| `conso_daily_kwh_entity` | `sensor.*_quotidien_kwh_um` — kWh depuis minuit |
+| `current_entity` | `sensor.*_current` - intensité (A) |
+| `avg_daily_entity` | `sensor.*_avg_watts_quotidien` - moyenne W depuis minuit |
+| `conso_daily_kwh_entity` | `sensor.*_quotidien_kwh_um` - kWh depuis minuit |
 
 > **Note** : Le template `conso_temps_reel_appareil` est défini dans le fichier de configuration streamline (non inclus dans le re-build à ce stade).
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
-### 📊 Totaux par poste — Sensors conditionnels Col 1
+### 📊 Totaux par poste - Sensors conditionnels Col 1
 
 | Entité | Poste | Usage |
 |--------|-------|-------|
@@ -370,11 +370,11 @@ Chaque appareil utilise ce template streamline avec 5 variables :
 | `sensor.total_poste_froid_puissance` | Froid | Condition affichage section + badge |
 | `sensor.total_poste_hygiene_puissance` | Hygiène | Condition affichage section + badge |
 
-> Ces sensors sont des sommes de puissances instantanées par catégorie — fournis par `templates/P2_prise/P2_I_all_standby_power/` ou `P1_clim_chauffage/`.
+> Ces sensors sont des sommes de puissances instantanées par catégorie - fournis par `templates/P2_prise/P2_I_all_standby_power/` ou `P1_clim_chauffage/`.
 
 ---
 
-### ⚡ Prises Connectées — Puissance instantanée (W)
+### ⚡ Prises Connectées - Puissance instantanée (W)
 
 | Entité | Appareil | Intégration |
 |--------|----------|-------------|
@@ -426,7 +426,7 @@ Chaque appareil utilise ce template streamline avec 5 variables :
 
 ---
 
-### 📈 Moyennes Quotidiennes (Wh — AVG)
+### 📈 Moyennes Quotidiennes (Wh - AVG)
 
 > Source : `sensors/P2_prise/P2_kWh.yaml` (sensors AVG)
 
@@ -453,9 +453,9 @@ Chaque appareil utilise ce template streamline avec 5 variables :
 
 ---
 
-### 🔌 Courant instantané (A — pour streamline-card)
+### 🔌 Courant instantané (A - pour streamline-card)
 
-`sensor.prise_*_ikea_current` / `sensor.prise_*_nous_current` — Zigbee2MQTT [Z2M]
+`sensor.prise_*_ikea_current` / `sensor.prise_*_nous_current` - Zigbee2MQTT [Z2M]
 
 ---
 
@@ -479,7 +479,7 @@ Chaque appareil utilise ce template streamline avec 5 variables :
 
 ### Le bar-card prises n'affiche rien
 1. Vérifier que des `sensor.*power` ont un état > 1W dans Outils de développement > États
-2. Les filtres `state: <= 0.999` et `state: unavailable` masquent les appareils inactifs — c'est normal
+2. Les filtres `state: <= 0.999` et `state: unavailable` masquent les appareils inactifs - c'est normal
 3. Vérifier l'intégration NOUS/IKEA dans Paramètres > Appareils
 
 ### Le donut affiche des tranches vides
@@ -495,7 +495,7 @@ Chaque appareil utilise ce template streamline avec 5 variables :
 2. Vérifier que les variables `energy_entity`, `current_entity`, etc. correspondent à des entités existantes
 
 ### Les courbes ApexCharts ont des trous
-1. `fill_raw: last` devrait éviter les trous — vérifier que l'option est bien présente
+1. `fill_raw: last` devrait éviter les trous - vérifier que l'option est bien présente
 2. Si l'entité n'a pas de données récentes (appareil absent), des trous peuvent apparaître malgré `fill_raw`
 
 ---

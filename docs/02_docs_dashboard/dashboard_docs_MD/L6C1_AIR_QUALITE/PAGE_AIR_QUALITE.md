@@ -19,7 +19,7 @@
 
 ---
 
-# 🫧 L6C1 — Page : Qualité de l'Air (Appartement)
+# 🫧 L6C1 - Page : Qualité de l'Air (Appartement)
 
 ---
 
@@ -46,9 +46,9 @@ Page détaillée de qualité de l'air pour 3 pièces : Salon, Bureau, Chambre. C
 
 ### Intégrations requises
 
-- ✅ **IKEA Vindstyrka** (Zigbee/Matter) — PM2.5 + VOC index natifs
-- ✅ **Templates** — `sensor.tcov_*_ppb` (device_class ppb)
-- ✅ **Sensors statistics** — `sensor.pm2_5_*_moy_24h`, `sensor.tcov_*_moy_24h`
+- ✅ **IKEA Vindstyrka** (Zigbee/Matter) - PM2.5 + VOC index natifs
+- ✅ **Templates** - `sensor.tcov_*_ppb` (device_class ppb)
+- ✅ **Sensors statistics** - `sensor.pm2_5_*_moy_24h`, `sensor.tcov_*_moy_24h`
 
 ### Cartes HACS
 
@@ -68,20 +68,20 @@ Page détaillée de qualité de l'air pour 3 pièces : Salon, Bureau, Chambre. C
 │  ══ SALON ══════════════════════════════════════════     │  ← bubble-card separator
 │  [ PM2.5 ring-tile   col:6 ]  [ tCOV ring-tile  col:6 ] │  ← 2 × streamline ring-tile
 │  [ Graph. PM2.5 Salon ↗  ]   [ Graph. tCOV Salon ↗  ]  │  ← 2 × bubble-card button
-│  [pop-up #spm25 — streamline pm25   (hidden)]            │
-│  [pop-up #scov  — streamline cov    (hidden)]            │
+│  [pop-up #spm25 - streamline pm25   (hidden)]            │
+│  [pop-up #scov  - streamline cov    (hidden)]            │
 ├──────────────────────────────────────────────────────────┤
 │  ══ BUREAU ═════════════════════════════════════════     │
 │  [ PM2.5 ring-tile   col:6 ]  [ tCOV ring-tile  col:6 ] │
 │  [ Graph. PM2.5 Bureau ↗ ]   [ Graph. tCOV Bureau ↗ ]  │
-│  [pop-up #bpm25 — streamline pm25   (hidden)]            │
-│  [pop-up #bcov  — streamline cov    (hidden)]            │
+│  [pop-up #bpm25 - streamline pm25   (hidden)]            │
+│  [pop-up #bcov  - streamline cov    (hidden)]            │
 ├──────────────────────────────────────────────────────────┤
 │  ══ CHAMBRE ════════════════════════════════════════     │
 │  [ PM2.5 ring-tile   col:6 ]  [ tCOV ring-tile  col:6 ] │
 │  [ Graph. PM2.5 Chambre ↗]   [ Graph. tCOV Chambre ↗]  │
-│  [pop-up #cpm25 — streamline pm25   (hidden)]            │
-│  [pop-up #ccov  — streamline cov    (hidden)]            │
+│  [pop-up #cpm25 - streamline pm25   (hidden)]            │
+│  [pop-up #ccov  - streamline cov    (hidden)]            │
 └──────────────────────────────────────────────────────────┘
 ```
 
@@ -132,7 +132,7 @@ grid_options:
 ```
 
 - `entity` : valeur instantanée (µg/m³)
-- `marker2` : marqueur moy 24h — positionné sur le ring pour visualiser la tendance
+- `marker2` : marqueur moy 24h - positionné sur le ring pour visualiser la tendance
 
 ### 3. Ring-tile tCOV
 
@@ -148,7 +148,7 @@ grid_options:
   rows: auto
 ```
 
-- `entity` : `sensor.tcov_salon_ppb` — template ppb (device_class correct pour ring-tile)
+- `entity` : `sensor.tcov_salon_ppb` - template ppb (device_class correct pour ring-tile)
 - `marker2` : moy 24h du tCOV brut
 
 ### 4. Bouton lien pop-up PM2.5
@@ -247,7 +247,7 @@ Cette page nécessite **4 templates Streamline** à déclarer dans la configurat
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ### Entités natives IKEA Vindstyrka (source primaire)
 
@@ -262,7 +262,7 @@ Cette page nécessite **4 templates Streamline** à déclarer dans la configurat
 
 ### Sensors statistics 24h
 
-Source : `TREE_CORRIGE/sensors/Air_quality/A_01_AIR_QUALITY.yaml` — `platform: statistics`, `state_characteristic: mean`, `max_age: 24h`
+Source : `TREE_CORRIGE/sensors/Air_quality/A_01_AIR_QUALITY.yaml` - `platform: statistics`, `state_characteristic: mean`, `max_age: 24h`
 
 | Entité | unique_id | Source → |
 |:-------|:----------|:---------|
@@ -275,7 +275,7 @@ Source : `TREE_CORRIGE/sensors/Air_quality/A_01_AIR_QUALITY.yaml` — `platform:
 
 ### Templates ppb
 
-Source : `TREE_CORRIGE/templates/Air_quality/A_01_AIR_QUALITY.yaml` — `device_class: volatile_organic_compounds_parts`, `unit: ppb`
+Source : `TREE_CORRIGE/templates/Air_quality/A_01_AIR_QUALITY.yaml` - `device_class: volatile_organic_compounds_parts`, `unit: ppb`
 
 | Entité | unique_id | Source → |
 |:-------|:----------|:---------|

@@ -19,7 +19,7 @@
 
 ---
 
-# 📊 L2C1 — Page : Énergie Mensuelle (Détail Appareils)
+# 📊 L2C1 - Page : Énergie Mensuelle (Détail Appareils)
 
 ---
 
@@ -27,9 +27,9 @@
 
 1. [Vue d'ensemble](#vue-densemble)
 2. [Architecture de la page](#architecture-de-la-page)
-3. [Bloc 1 — En-tête](#bloc-1--en-tête)
-4. [Bloc 2 — Donut Mensuel](#bloc-2--donut-mensuel)
-5. [Blocs 3-7 — Détail Appareils (Streamline)](#blocs-3-7--détail-appareils-streamline)
+3. [Bloc 1 - En-tête](#bloc-1--en-tête)
+4. [Bloc 2 - Donut Mensuel](#bloc-2--donut-mensuel)
+5. [Blocs 3-7 - Détail Appareils (Streamline)](#blocs-3-7--détail-appareils-streamline)
 6. [Template : conso_mensuelle_appareil](#template--conso_mensuelle_appareil)
 7. [Palette de couleurs](#palette-de-couleurs)
 8. [Entités utilisées](#entités-utilisées)
@@ -103,7 +103,7 @@ cards:
 
 ---
 
-## 📌 BLOC 1 — EN-TÊTE
+## 📌 BLOC 1 - EN-TÊTE
 
 ```yaml
 - type: heading
@@ -125,7 +125,7 @@ cards:
 
 ---
 
-## 🍩 BLOC 2 — DONUT MENSUEL
+## 🍩 BLOC 2 - DONUT MENSUEL
 
 ```yaml
 - type: custom:apexcharts-card
@@ -150,7 +150,7 @@ cards:
 
 ### Données des séries
 
-Chaque série pointe vers un `_mensuel_kwh_um` — compteur `utility_meter` réinitialisé le 1er du mois (`cycle: monthly`). La valeur affichée est donc la consommation **cumulée depuis le début du mois courant**.
+Chaque série pointe vers un `_mensuel_kwh_um` - compteur `utility_meter` réinitialisé le 1er du mois (`cycle: monthly`). La valeur affichée est donc la consommation **cumulée depuis le début du mois courant**.
 
 > ⚠️ Pas de `group_by` / `func` ici : ApexCharts lit directement l'état courant du sensor (valeur accumulée par `utility_meter`).
 
@@ -191,7 +191,7 @@ card_mod:
 
 ---
 
-## 📱 BLOCS 3-7 — DÉTAIL APPAREILS (STREAMLINE)
+## 📱 BLOCS 3-7 - DÉTAIL APPAREILS (STREAMLINE)
 
 Chaque appareil est représenté par une `custom:streamline-card` avec le template `conso_mensuelle_appareil`.
 
@@ -256,10 +256,10 @@ Le template `conso_mensuelle_appareil` est le pendant mensuel de `conso_temps_re
 | Variable | Type | Description |
 |:---------|:-----|:------------|
 | `title` | string | Nom affiché de l'appareil |
-| `energy_entity` | sensor | Énergie totale cumulée (kWh) — `_energie_totale_kwh` |
+| `energy_entity` | sensor | Énergie totale cumulée (kWh) - `_energie_totale_kwh` |
 | `color` | color | Couleur identique au segment donut correspondant |
-| `avg_monthly_entity` | sensor | Puissance moyenne mensuelle (W) — `_avg_watts_mensuel` |
-| `conso_monthly_kwh_entity` | sensor | Consommation mensuelle (kWh) — `_mensuel_kwh_um` |
+| `avg_monthly_entity` | sensor | Puissance moyenne mensuelle (W) - `_avg_watts_mensuel` |
+| `conso_monthly_kwh_entity` | sensor | Consommation mensuelle (kWh) - `_mensuel_kwh_um` |
 
 ### Comparaison avec conso_temps_reel_appareil
 
@@ -297,7 +297,7 @@ La palette suit une logique **par fonction** plus que par pièce :
 
 ### Utility Meters mensuels (`_mensuel_kwh_um`)
 
-Source : `utility_meter.yaml` — cycle `monthly`, réinitialisé le 1er du mois.
+Source : `utility_meter.yaml` - cycle `monthly`, réinitialisé le 1er du mois.
 
 | Entité | Appareil |
 |:-------|:---------|
@@ -322,7 +322,7 @@ Source : `utility_meter.yaml` — cycle `monthly`, réinitialisé le 1er du mois
 
 ### Énergie totale cumulée (`_energie_totale_kwh`)
 
-Source : sensors Pôle 2 — `platform: integration` ou `state_class: total_increasing`.
+Source : sensors Pôle 2 - `platform: integration` ou `state_class: total_increasing`.
 
 | Entité | Appareil |
 |:-------|:---------|
@@ -347,7 +347,7 @@ Source : sensors Pôle 2 — `platform: integration` ou `state_class: total_incr
 
 ### Moyennes mensuelles (`_avg_watts_mensuel`)
 
-Source : sensors Pôle 2 — `platform: statistics` sur énergie ou puissance.
+Source : sensors Pôle 2 - `platform: statistics` sur énergie ou puissance.
 
 | Entité | Appareil |
 |:-------|:---------|

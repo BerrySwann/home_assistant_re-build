@@ -11,7 +11,7 @@
 |:------|:-------|
 | 📁 **Path** | `/dashboard-tablette/phone` |
 | 🔗 **Accès depuis** | Vignette L5C2 (tap) |
-| 🏗️ **Layout** | `type: grid` — 2 grilles distinctes (Eric / Mamour) |
+| 🏗️ **Layout** | `type: grid` - 2 grilles distinctes (Eric / Mamour) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-04-17 |
@@ -19,7 +19,7 @@
 
 ---
 
-# 📱 L5C2 — Page Batteries Portables
+# 📱 L5C2 - Page Batteries Portables
 
 ---
 
@@ -27,8 +27,8 @@
 
 1. [Vue d'ensemble](#vue-densemble)
 2. [Architecture](#architecture)
-3. [Grille 1 — Appareils Eric](#grille-1--appareils-eric-conditional)
-4. [Grille 2 — Appareils Mamour](#grille-2--appareils-mamour)
+3. [Grille 1 - Appareils Eric](#grille-1--appareils-eric-conditional)
+4. [Grille 2 - Appareils Mamour](#grille-2--appareils-mamour)
 5. [Entités utilisées](#entités-utilisées--provenance-complète)
 6. [Dépannage](#dépannage)
 
@@ -36,10 +36,10 @@
 
 ## 🎯 VUE D'ENSEMBLE
 
-Page détaillée par appareil mobile : niveau de batterie, état de charge, type de chargeur, santé, température, réseau et Wi-Fi. Organisée en **2 grilles** : une pour les appareils Eric (avec cartes conditionnelles — masquées si hors ligne), une pour les appareils Mamour (toujours affichées).
+Page détaillée par appareil mobile : niveau de batterie, état de charge, type de chargeur, santé, température, réseau et Wi-Fi. Organisée en **2 grilles** : une pour les appareils Eric (avec cartes conditionnelles - masquées si hors ligne), une pour les appareils Mamour (toujours affichées).
 
 ### Intégrations requises
-- ✅ Home Assistant Companion App (Android) — 7 appareils
+- ✅ Home Assistant Companion App (Android) - 7 appareils
 
 ### Cartes HACS utilisées
 
@@ -53,7 +53,7 @@ Page détaillée par appareil mobile : niveau de batterie, état de charge, type
 ## 🏗️ ARCHITECTURE
 
 ```
-GRILLE 1 — ERIC (conditional: masqué si unavailable/unknown)
+GRILLE 1 - ERIC (conditional: masqué si unavailable/unknown)
 ┌─────────────────────────────────────────────┐
 │  POCO X7 Pro (Eric)                         │
 │  ├── streamline-card template: portable     │
@@ -72,7 +72,7 @@ GRILLE 1 — ERIC (conditional: masqué si unavailable/unknown)
 │  └── (idem Samsung)                         │
 └─────────────────────────────────────────────┘
 
-GRILLE 2 — MAMOUR (pas de conditional — toujours affichée)
+GRILLE 2 - MAMOUR (pas de conditional - toujours affichée)
 ┌─────────────────────────────────────────────┐
 │  POCO X7 Pro (Mamour)                       │
 │  └── streamline-card + entities complètes   │
@@ -85,11 +85,11 @@ GRILLE 2 — MAMOUR (pas de conditional — toujours affichée)
 └─────────────────────────────────────────────┘
 ```
 
-> ⚠️ **Asymétrie** : La grille Eric utilise `type: conditional` (carte masquée si l'appareil est `unavailable` ou `unknown`). La grille Mamour n'utilise **pas** de conditional — les cartes s'affichent même si l'appareil est hors ligne.
+> ⚠️ **Asymétrie** : La grille Eric utilise `type: conditional` (carte masquée si l'appareil est `unavailable` ou `unknown`). La grille Mamour n'utilise **pas** de conditional - les cartes s'affichent même si l'appareil est hors ligne.
 
 ---
 
-## 📍 GRILLE 1 — APPAREILS ERIC (conditional)
+## 📍 GRILLE 1 - APPAREILS ERIC (conditional)
 
 ### Structure conditionnelle (pattern commun)
 
@@ -136,7 +136,7 @@ card:
 
 ---
 
-## 📍 GRILLE 2 — APPAREILS MAMOUR
+## 📍 GRILLE 2 - APPAREILS MAMOUR
 
 ### Structure (pas de conditional)
 
@@ -181,9 +181,9 @@ cards:
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
-### 🌐 Intégrations natives HA (Android Companion App — aucun fichier YAML)
+### 🌐 Intégrations natives HA (Android Companion App - aucun fichier YAML)
 
 | Appareil | Entités |
 |----------|---------|
@@ -217,7 +217,7 @@ cards:
 
 | Élément | Type | Statut |
 |---------|------|--------|
-| HA Companion App (Android) — 7 appareils (NE2213 Mamour actif 2026-04-17) | Intégration native | ✅ Essentiel |
+| HA Companion App (Android) - 7 appareils (NE2213 Mamour actif 2026-04-17) | Intégration native | ✅ Essentiel |
 | `custom:streamline-card` + template `portable` | HACS | ✅ Essentiel |
 | `card_mod` | HACS | ✅ Essentiel |
 
@@ -226,7 +226,7 @@ cards:
 ## 🔗 FICHIERS LIÉS
 
 ### Documentation
-- [`L5C2_VIGNETTE_BATTERIES_PORTABLES.md`](./L5C2_VIGNETTE_BATTERIES_PORTABLES.md) — vignette résumé
+- [`L5C2_VIGNETTE_BATTERIES_PORTABLES.md`](./L5C2_VIGNETTE_BATTERIES_PORTABLES.md) - vignette résumé
 
 ---
 

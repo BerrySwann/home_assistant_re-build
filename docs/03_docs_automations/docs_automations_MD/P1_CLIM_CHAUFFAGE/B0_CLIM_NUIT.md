@@ -1,7 +1,7 @@
 # (B-0) AUTOMATISATION CLIM NUIT (21H00 ↔ 07H30)
 
 > **Fichier TREE_CORRIGE :** `docs_automations/TREE_CORRIGE/P1_clim_chauffage/b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml`
-> **Mode HA :** `queued` — max: 5
+> **Mode HA :** `queued` - max: 5
 > **Dernière mise à jour :** 2026-06-28 (refactoring LLM local → délégation script)
 
 ---
@@ -76,6 +76,6 @@ Une seule action :
 
 ## ⚠️ Points d'attention
 
-- **Refactoring 2026-06** : même architecture que A0 — wrapper 30 lignes + délégation script.
+- **Refactoring 2026-06** : même architecture que A0 - wrapper 30 lignes + délégation script.
 - La nuit, `t_salon_target` = `t_bureau_target` = `t_chambre_target` = `temp_nuit` (sauf groupe_1 → eco).
 - `sensor.groupe` ajouté au trigger `sensor_update` lors du refactoring.

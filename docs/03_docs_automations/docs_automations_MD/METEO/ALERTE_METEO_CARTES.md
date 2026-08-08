@@ -1,4 +1,4 @@
-# ALERTE MÉTÉO FRANCE — ACTUALISATION DES CARTES
+# ALERTE MÉTÉO FRANCE - ACTUALISATION DES CARTES
 
 > **Fichier :** `automations_corrige/meteo/alerte_meteo_cartes.yaml`
 > **Mode HA :** `single`

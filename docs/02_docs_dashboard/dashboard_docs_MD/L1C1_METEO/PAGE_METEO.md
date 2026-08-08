@@ -19,7 +19,7 @@
 
 ---
 
-# 🌤️ PAGE MÉTÉO — DOCUMENTATION COMPLÈTE
+# 🌤️ PAGE MÉTÉO - DOCUMENTATION COMPLÈTE
 
 ---
 
@@ -731,7 +731,7 @@ Gradient de couleurs (7 paliers) : `Green → Gold → Orange → Dark Orange �
 │  (M_05 : duree_du_jour, tendance,       │
 │   variation_quotidienne)                │
 ├─────────────────────────────────────────┤
-│  📈 APEXCHARTS — Durée du jour 2026     │
+│  📈 APEXCHARTS - Durée du jour 2026     │
 │  Courbe annuelle (area)                 │
 │  Courbe théorique (data_generator JS)  │
 │  Courbe Gain/Perte (variation M_05)    │
@@ -863,7 +863,7 @@ percent: >
 
 ---
 
-### ApexCharts — Évolution durée du jour
+### ApexCharts - Évolution durée du jour
 
 Graphique annuel affiché sous la Glance Cycles, intégré directement dans le pop-up.
 
@@ -880,11 +880,11 @@ Graphique annuel affiché sous la Glance Cycles, intégré directement dans le p
 |-------|--------|------|-----|------|
 | Durée du jour | `sensor.duree_du_jour` | area | hours | Valeur calculée M_05 en temps réel (s'arrête à `now`) |
 | Courbe théorique | `sun.sun` + `data_generator` JS | area | hours | Courbe astronomique pure complète (toute l'année) |
-| Gain/Perte | `sensor.variation_quotidienne` | area (smooth) | variation | Courbe théorique complète — variation journalière en minutes |
+| Gain/Perte | `sensor.variation_quotidienne` | area (smooth) | variation | Courbe théorique complète - variation journalière en minutes |
 
 > **[2026-05-09]** Série Gain/Perte : type `column` → `area smooth`, suppression de `extend_to: now` + `fill_raw: last` + `if (date > now) break` → courbe théorique complète sur l'année (comme la série `sun.sun`). `stroke_width: 1`, `opacity: 0.1`.
 
-**Alignement latitude :** le `data_generator` JS utilise `zone.home → hass.config.latitude → 43.72` — même priorité que la formule Jinja2 de M_05 (via `state_attr('zone.home', 'latitude')`). Les deux courbes sont ainsi toujours cohérentes.
+**Alignement latitude :** le `data_generator` JS utilise `zone.home → hass.config.latitude → 43.72` - même priorité que la formule Jinja2 de M_05 (via `state_attr('zone.home', 'latitude')`). Les deux courbes sont ainsi toujours cohérentes.
 
 **Annotations yaxis (valeurs réelles observées à Vence) :**
 
@@ -899,34 +899,34 @@ Graphique annuel affiché sous la Glance Cycles, intégré directement dans le p
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 > Chaque entité est listée avec son **fichier source exact** dans le repo ReBuild.
 
 ---
 
-### 🌐 Intégrations natives HA (UI — aucun fichier YAML à créer)
+### 🌐 Intégrations natives HA (UI - aucun fichier YAML à créer)
 
 | Entité | unique_id | Intégration | Configuré via |
 |--------|-----------|-------------|---------------|
-| `weather.vence` [Météo France - UI] | — | Météo France | Paramètres > Intégrations > Météo France |
-| `sensor.vence_pressure` [Météo France - UI] | — | Météo France | idem |
-| `sensor.vence_uv` [Météo France - UI] | — | Météo France | idem |
-| `sensor.vence_wind_gust` [Météo France - UI] | — | Météo France | idem |
-| `sensor.vence_daily_precipitation` [Météo France - UI] | — | Météo France | idem |
-| `sensor.06_weather_alert` [Météo France - UI] | — | Météo France | idem (département 06) |
-| `sun.sun` [Sun - natif] | — | Sun | Native automatique |
-| `sensor.sun_next_rising` [Sun - natif] | — | Sun | Native automatique |
-| `sensor.sun_next_setting` [Sun - natif] | — | Sun | Native automatique |
-| `sensor.moon_phase` [Moon - natif] | — | Moon | Native automatique |
-| `sensor.season` [Season - natif] | — | Season | Native automatique |
-| `sensor.th_balcon_nord_temperature` [Zigbee - UI] | — | Sonoff SNZB-02 | Zigbee (intégration UI) |
-| `sensor.th_balcon_nord_humidity` [Zigbee - UI] | — | Sonoff SNZB-02 | Zigbee (intégration UI) |
+| `weather.vence` [Météo France - UI] | - | Météo France | Paramètres > Intégrations > Météo France |
+| `sensor.vence_pressure` [Météo France - UI] | - | Météo France | idem |
+| `sensor.vence_uv` [Météo France - UI] | - | Météo France | idem |
+| `sensor.vence_wind_gust` [Météo France - UI] | - | Météo France | idem |
+| `sensor.vence_daily_precipitation` [Météo France - UI] | - | Météo France | idem |
+| `sensor.06_weather_alert` [Météo France - UI] | - | Météo France | idem (département 06) |
+| `sun.sun` [Sun - natif] | - | Sun | Native automatique |
+| `sensor.sun_next_rising` [Sun - natif] | - | Sun | Native automatique |
+| `sensor.sun_next_setting` [Sun - natif] | - | Sun | Native automatique |
+| `sensor.moon_phase` [Moon - natif] | - | Moon | Native automatique |
+| `sensor.season` [Season - natif] | - | Season | Native automatique |
+| `sensor.th_balcon_nord_temperature` [Zigbee - UI] | - | Sonoff SNZB-02 | Zigbee (intégration UI) |
+| `sensor.th_balcon_nord_humidity` [Zigbee - UI] | - | Sonoff SNZB-02 | Zigbee (intégration UI) |
 
 ---
 
 ### 📁 `sensors/meteo/M_03_meteo_sensors_blitzortung.yaml`
-> Sensor REST — Localisation géographique du dernier éclair (API Nominatim / OpenStreetMap)
+> Sensor REST - Localisation géographique du dernier éclair (API Nominatim / OpenStreetMap)
 
 | Entité | unique_id | Type | MAJ |
 |--------|-----------|------|-----|
@@ -937,7 +937,7 @@ Graphique annuel affiché sous la Glance Cycles, intégré directement dans le p
 ---
 
 ### 📁 `templates/meteo/M_01_meteo_alertes_card.yaml`
-> 10 sensors template — Alertes Météo France département 06
+> 10 sensors template - Alertes Météo France département 06
 
 | Entité | unique_id | Rôle |
 |--------|-----------|------|
@@ -957,18 +957,18 @@ Graphique annuel affiché sous la Glance Cycles, intégré directement dans le p
 ---
 
 ### 📁 `templates/meteo/M_02_meteo_vent_vence_card.yaml`
-> 3 sensors template — Vent extrait de `weather.vence` [Météo France - UI] pour windrose-card
+> 3 sensors template - Vent extrait de `weather.vence` [Météo France - UI] pour windrose-card
 
 | Entité | unique_id | Unité | Rôle |
 |--------|-----------|-------|------|
 | `sensor.vence_wind_bearing` [templates/meteo/M_02] | `vence_wind_bearing` | `°` | Angle du vent (0-360°) |
-| `sensor.vence_wind_direction_label` [templates/meteo/M_02] | `vence_wind_direction_label` | — | Direction cardinale (Nord, Sud-Est…) |
+| `sensor.vence_wind_direction_label` [templates/meteo/M_02] | `vence_wind_direction_label` | - | Direction cardinale (Nord, Sud-Est…) |
 | `sensor.vitesse_du_vent_vence` [templates/meteo/M_02] | `vence_wind_speed_kmh` | `km/h` | Vitesse convertie depuis `weather.vence` [Météo France - UI] |
 
 ---
 
 ### 📁 `templates/meteo/M_03_meteo_templates_blitzortung.yaml`
-> 5 sensors template — Traitement des données Blitzortung pour affichage
+> 5 sensors template - Traitement des données Blitzortung pour affichage
 
 | Entité | unique_id | Rôle |
 |--------|-----------|------|
@@ -981,7 +981,7 @@ Graphique annuel affiché sous la Glance Cycles, intégré directement dans le p
 ---
 
 ### 📁 `templates/meteo/M_04_tendances_th_ext_card.yaml`
-> 2 sensors template — Tendances température/humidité balcon Nord
+> 2 sensors template - Tendances température/humidité balcon Nord
 
 | Entité | unique_id | Rôle |
 |--------|-----------|------|
@@ -993,12 +993,12 @@ Graphique annuel affiché sous la Glance Cycles, intégré directement dans le p
 ---
 
 ### 📁 `templates/meteo/M_05_cycle_solaire.yaml`
-> 3 sensors template — Calcul astronomique de la durée du jour et de ses tendances
+> 3 sensors template - Calcul astronomique de la durée du jour et de ses tendances
 
 | Entité | unique_id | Unité | Rôle |
 |--------|-----------|-------|------|
 | `sensor.duree_du_jour` [templates/meteo/M_05] | `duree_du_jour` | `h` | Durée du jour calculée via déclinaison solaire + angle horaire (latitude `zone.home`) |
-| `sensor.tendance_duree_jour` [templates/meteo/M_05] | `tendance_duree_jour` | — | `Les jours rallongent` / `Les jours raccourcissent` + attribut `jours_avant_solstice` |
+| `sensor.tendance_duree_jour` [templates/meteo/M_05] | `tendance_duree_jour` | - | `Les jours rallongent` / `Les jours raccourcissent` + attribut `jours_avant_solstice` |
 | `sensor.variation_quotidienne` [templates/meteo/M_05] | `variation_quotidienne` | `min` | Gain ou perte de lumière du jour en minutes + attributs `periode`, `variation_type` |
 
 **Formule clé (`duree_du_jour`) :**
@@ -1007,25 +1007,25 @@ decl  = 23.45 × sin((2π × (j − 80)) / 365)
 cos_h = −(tan(lat) × tan(decl_rad))
 duree = 2 × acos(cos_h) × (180/π) / 15   [en heures]
 ```
-> Latitude source : `state_attr('zone.home', 'latitude')` — identique au `data_generator` JS du graphique ApexCharts du pop-up #sun (cohérence courbe/point garantie).
+> Latitude source : `state_attr('zone.home', 'latitude')` - identique au `data_generator` JS du graphique ApexCharts du pop-up #sun (cohérence courbe/point garantie).
 
 ---
 
 ### 📁 `utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml`
-> 5 utility meters — Compteurs éclairs par période (source : `sensor.maison_lightning_counter` [HACS Blitzortung - UI])
+> 5 utility meters - Compteurs éclairs par période (source : `sensor.maison_lightning_counter` [HACS Blitzortung - UI])
 
 | Entité | Cycle | unique_id |
 |--------|-------|-----------|
-| `sensor.eclair_horaire` [utility_meter/meteo/M_03] | hourly | — |
-| `sensor.eclair_quotidien` [utility_meter/meteo/M_03] | daily | — |
-| `sensor.eclair_hebdomadaire` [utility_meter/meteo/M_03] | weekly | — |
-| `sensor.eclair_mensuel` [utility_meter/meteo/M_03] | monthly | — |
-| `sensor.eclair_annuel` [utility_meter/meteo/M_03] | yearly | — |
+| `sensor.eclair_horaire` [utility_meter/meteo/M_03] | hourly | - |
+| `sensor.eclair_quotidien` [utility_meter/meteo/M_03] | daily | - |
+| `sensor.eclair_hebdomadaire` [utility_meter/meteo/M_03] | weekly | - |
+| `sensor.eclair_mensuel` [utility_meter/meteo/M_03] | monthly | - |
+| `sensor.eclair_annuel` [utility_meter/meteo/M_03] | yearly | - |
 
 ---
 
 ### 📁 `command_line/meteo/carte_meteo_france.yaml`
-> 2 sensors command_line — Images de vigilance Météo France (téléchargées toutes les 4h)
+> 2 sensors command_line - Images de vigilance Météo France (téléchargées toutes les 4h)
 
 | Entité | unique_id | Source API | Endpoint |
 |--------|-----------|------------|---------|
@@ -1075,7 +1075,7 @@ duree = 2 × acos(cos_h) × (180/π) / 15   [en heures]
 | `camera.mf_alerte_today` | POP-UP #ALERT | Affichage carte vigilance aujourd'hui |
 | `camera.mf_alerte_tomorrow` | POP-UP #ALERT | Affichage carte vigilance demain |
 
-> Ces sensors sont définis dans `command_line/meteo/carte_meteo_france.yaml` — ils téléchargent les images toutes les 4h via l'API Météo France (`scan_interval: 14400`). L'automation complète ce délai en forçant une actualisation immédiate au démarrage et aux heures clés (6h32, 16h32).
+> Ces sensors sont définis dans `command_line/meteo/carte_meteo_france.yaml` - ils téléchargent les images toutes les 4h via l'API Météo France (`scan_interval: 14400`). L'automation complète ce délai en forçant une actualisation immédiate au démarrage et aux heures clés (6h32, 16h32).
 
 ---
 

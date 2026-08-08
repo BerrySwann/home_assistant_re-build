@@ -10,14 +10,14 @@
 | Champ | Valeur |
 |:------|:-------|
 | 📁 **Fichier YAML** | `Dashboard/L4C2_11_Mini_PC/vignette_L4C2_mini_pc_2026-06-18.yaml` |
-| 🔗 **Accès depuis** | L4C2 — Matrice dashboard principal (ligne 4, colonne 2) |
-| 🏗️ **Type** | `custom:button-card` — grille custom 3×2 |
+| 🔗 **Accès depuis** | L4C2 - Matrice dashboard principal (ligne 4, colonne 2) |
+| 🏗️ **Type** | `custom:button-card` - grille custom 3×2 |
 | 📅 **Modifié le** | 2026-06-21 |
 | 🏠 **Version HA** | 2025.2+ |
 
 ---
 
-# 🖥️ L4C2 — VIGNETTE MINI-PC
+# 🖥️ L4C2 - VIGNETTE MINI-PC
 
 ---
 
@@ -29,7 +29,7 @@ Vignette de supervision compacte du Mini-PC Intel NUC (hôte Proxmox). Affiche l
 
 | Carte | Usage |
 |-------|-------|
-| `button-card` | Carte principale — grille + custom_fields |
+| `button-card` | Carte principale - grille + custom_fields |
 
 ---
 
@@ -62,15 +62,15 @@ Vignette de supervision compacte du Mini-PC Intel NUC (hôte Proxmox). Affiche l
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 | Entité | Source | Rôle |
 |--------|--------|------|
-| `sensor.proxmox_cpu_package` | Intégration `proxmox_ve` | T° CPU package — icône + champ temp |
+| `sensor.proxmox_cpu_package` | Intégration `proxmox_ve` | T° CPU package - icône + champ temp |
 | `sensor.pve_utilisation_du_processeur` | Intégration `proxmox_ve` | CPU % nœud PVE |
 | `sensor.pve_memory_usage_percentage` | Intégration `proxmox_ve` | RAM % nœud PVE |
 | `sensor.storage_local_storage_usage_percentage` | Intégration `proxmox_ve` | Storage local % |
-| `sensor.prise_mini_pc_ikea_power` | Z2M — prise IKEA | Consommation W temps réel |
+| `sensor.prise_mini_pc_ikea_power` | Z2M - prise IKEA | Consommation W temps réel |
 
 ---
 
@@ -79,7 +79,7 @@ Vignette de supervision compacte du Mini-PC Intel NUC (hôte Proxmox). Affiche l
 | Élément | Type | Statut |
 |---------|------|--------|
 | `proxmox_ve` | Intégration HA | ✅ Essentiel |
-| Z2M — prise IKEA Mini-PC | Zigbee2MQTT | ✅ Essentiel |
+| Z2M - prise IKEA Mini-PC | Zigbee2MQTT | ✅ Essentiel |
 | `button-card` | HACS | ✅ Essentiel |
 | `phu:intel-nuc` | Icon pack (phu) | ✅ Essentiel |
 

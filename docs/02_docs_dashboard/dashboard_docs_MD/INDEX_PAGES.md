@@ -6,14 +6,14 @@
 
 </div>
 
-# 📋 INDEX PAGES & VIGNETTES — STATUT DOCS
+# 📋 INDEX PAGES & VIGNETTES - STATUT DOCS
 
 > Statut de chaque doc de vignette + page du dashboard.
 > Les chaînes de dépendances complètes sont dans [[DEPENDANCES_GLOBALES]].
 
 ---
 
-## 🖥️ VIGNETTES — MATRICE 18
+## 🖥️ VIGNETTES - MATRICE 18
 
 | Vignette | Doc | Dépendances | Notes |
 |----------|:---:|:-----------:|-------|
@@ -26,7 +26,7 @@
 | **L3C1** Commandes Éclairage | ✅ | ✅ | |
 | **L3C2** Commandes Prises | ✅ | ✅ | |
 | **L3C3** Fenêtres + Stores | ✅ | ✅ | |
-| **L4C1** Freebox | ✅ | ✅ | ⚠️ Obsolète — Freebox supprimée |
+| **L4C1** Freebox | ✅ | ✅ | ⚠️ Obsolète - Freebox supprimée |
 | **L4C2** Mini PC | ✅ | ✅ | PAGE_RASPI.md (transitoire) + PAGE_MINI_PC.md (définitive) |
 | **L4C3** MAJ HA | ✅ | ✅ | |
 | **L5C1** Batteries | ✅ | ✅ | |

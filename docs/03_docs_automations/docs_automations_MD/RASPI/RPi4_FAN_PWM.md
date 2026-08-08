@@ -1,4 +1,4 @@
-# Raspberry Pi4 — CPU Fan PWM 6 States
+# Raspberry Pi4 - CPU Fan PWM 6 States
 
 **Catégorie :** raspi
 **Alias HA :** `Raspberry CPU Fan PWM 6 States`

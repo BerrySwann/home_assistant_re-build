@@ -9,7 +9,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📍 **Position** | Dashboard HOME — Ligne 1, Colonne 2 |
+| 📍 **Position** | Dashboard HOME - Ligne 1, Colonne 2 |
 | 🔗 **Navigation** | `/dashboard-tablette/temperatures` |
 | 🃏 **Type de carte** | `custom:button-card` |
 | 🌡️ **Entités** | 14 sensors (7 pièces × temp + humidité) |
@@ -30,8 +30,8 @@
 2. [Rendu visuel](#rendu-visuel)
 3. [Code source complet](#code-source-complet)
 4. [Entités utilisées](#entités-utilisées)
-5. [Logique JS — Températures](#logique-js--températures)
-6. [Logique JS — Humidités](#logique-js--humidités)
+5. [Logique JS - Températures](#logique-js--températures)
+6. [Logique JS - Humidités](#logique-js--humidités)
 7. [Paramètres clés](#paramètres-clés)
 8. [Dépannage](#dépannage)
 
@@ -248,11 +248,11 @@ custom_fields:
 | `sensor.th_chambre_temperature` | Zigbee - UI (Sonoff SNZB-02) | Chambre |
 | `sensor.th_chambre_humidity` | Zigbee - UI (Sonoff SNZB-02) | Chambre |
 
-> Les 14 entités sont identiques dans `entities:` et `triggers_update:` — la vignette se recalcule instantanément à chaque changement de valeur.
+> Les 14 entités sont identiques dans `entities:` et `triggers_update:` - la vignette se recalcule instantanément à chaque changement de valeur.
 
 ---
 
-## 🌡️ LOGIQUE JS — TEMPÉRATURES
+## 🌡️ LOGIQUE JS - TEMPÉRATURES
 
 ### Gradient de couleurs (`getTemperatureColor`)
 
@@ -276,7 +276,7 @@ Si le sensor est `unknown`, `unavailable` ou absent → affiche `N/A` en gris.
 
 ---
 
-## 💧 LOGIQUE JS — HUMIDITÉS
+## 💧 LOGIQUE JS - HUMIDITÉS
 
 ### Seuils de couleurs (`getHumidityColor`)
 
@@ -318,13 +318,13 @@ Si le sensor est `unknown`, `unavailable` ou absent → affiche `N/A` en gris.
 3. Vider le cache navigateur (`Ctrl+Shift+R`)
 
 ### La grille est désalignée
-1. `font-size: 11px` est critique — ne pas augmenter sans tester visuellement
+1. `font-size: 11px` est critique - ne pas augmenter sans tester visuellement
 2. `line-height: 1.2` doit rester constant sur toute la carte
-3. `margin-left: 35px` sur `temp` est un ajustement empirique — adapter si la police change
+3. `margin-left: 35px` sur `temp` est un ajustement empirique - adapter si la police change
 
 ### Les valeurs se chevauchent
 1. Vérifier que `grid-template-columns: 1fr 1fr 0.5fr 1fr` est bien appliqué
-2. La colonne `espace` (0.5fr) sert de séparateur visuel — ne pas la supprimer
+2. La colonne `espace` (0.5fr) sert de séparateur visuel - ne pas la supprimer
 
 ---
 

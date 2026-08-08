@@ -1,4 +1,4 @@
-# 📇 INDEX ENTITÉS — RÉFÉRENCE BIDIRECTIONNELLE
+# 📇 INDEX ENTITÉS - RÉFÉRENCE BIDIRECTIONNELLE
 
 *Généré depuis docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md (2026-07-14)*
 

@@ -1,4 +1,4 @@
-# AUDIT_MD5 — Script d'audit MD5 PROD vs GitHub
+# AUDIT_MD5 - Script d'audit MD5 PROD vs GitHub
 
 > **Script shell :** `audit_md5.sh`
 > **Emplacement prod :** `/config/.scripts/audit_md5.sh`
@@ -14,24 +14,24 @@ Compare chaque fichier YAML (et script .sh) entre la prod HA (`/config/`) et le 
 Produit un rapport en 3 passes avec statut par fichier.
 
 **Statuts possibles :**
-- `✅ SYNC` — MD5 identique entre prod et GitHub
-- `❌ DIFF` — contenu différent (drift à investiguer)
-- `⚠️ PUSH MANQUANT` — fichier présent en prod, absent de GitHub
+- `✅ SYNC` - MD5 identique entre prod et GitHub
+- `❌ DIFF` - contenu différent (drift à investiguer)
+- `⚠️ PUSH MANQUANT` - fichier présent en prod, absent de GitHub
 
 ---
 
 ## 🔢 Passes d'exécution
 
-### PASS 1 — TREE LOCAL
+### PASS 1 - TREE LOCAL
 Construit la liste des fichiers à auditer via `find` sur les répertoires déclarés.
 Exclut : `streamline_templates.example.yaml`, `scenes.yaml`, `zigbee2mqtt/`.
 
-### PASS 2 — MD5 PROD
+### PASS 2 - MD5 PROD
 Calcule le MD5 de chaque fichier présent localement dans `/config/`.
 
-### PASS 3 — MD5 GITHUB
+### PASS 3 - MD5 GITHUB
 Pour chaque fichier, curl le raw GitHub (`https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/...`) et calcule le MD5 du fichier téléchargé.
-Utilise un fichier tmp unique réutilisé (`/tmp/audit_gh_$$.tmp`) — 1 fichier YAML à la fois, impact RAM nul.
+Utilise un fichier tmp unique réutilisé (`/tmp/audit_gh_$$.tmp`) - 1 fichier YAML à la fois, impact RAM nul.
 
 ---
 
@@ -58,8 +58,8 @@ Format du rapport : tableau `FICHIER | PROD_MD5 | GH_MD5 | STATUT` + résumé fi
 
 ## ⚠️ Points d'attention
 
-- `set -euo pipefail` — toute erreur non gérée stoppe le script. Les `find` utilisent `|| true` pour éviter un exit si un répertoire est absent.
-- Le curl utilise `--max-time 15` — un timeout GitHub fait apparaître le fichier en `⚠️ PUSH MANQUANT` à tort. Relancer l'audit dans ce cas.
+- `set -euo pipefail` - toute erreur non gérée stoppe le script. Les `find` utilisent `|| true` pour éviter un exit si un répertoire est absent.
+- Le curl utilise `--max-time 15` - un timeout GitHub fait apparaître le fichier en `⚠️ PUSH MANQUANT` à tort. Relancer l'audit dans ce cas.
 - `secrets.yaml` n'est jamais dans le scope (non listé dans les répertoires audités).
 
 ---
@@ -70,7 +70,7 @@ Format du rapport : tableau `FICHIER | PROD_MD5 | GH_MD5 | STATUT` + résumé fi
 |:----------|:-----|
 | `shell_command.yaml` | Expose le script à HA via `shell_command.audit_md5` |
 | Dashboard L5C3 | Boutons FULL · YAML · ATMA déclenchent le script |
-| GitHub `home_assistant_re-build` | Source de vérité n°2 — cible des comparaisons |
+| GitHub `home_assistant_re-build` | Source de vérité n°2 - cible des comparaisons |
 
 ---
 
@@ -78,7 +78,7 @@ Format du rapport : tableau `FICHIER | PROD_MD5 | GH_MD5 | STATUT` + résumé fi
 
 | Date | Modification |
 |:-----|:-------------|
-| 2026-06-14 | Création — 3 passes : tree → md5 prod → md5 github |
+| 2026-06-14 | Création - 3 passes : tree → md5 prod → md5 github |
 | 2026-06-15 | FIX : `git show` → `curl raw URL` (ref stale non résolvable) |
 | 2026-06-15 | FIX CRITIQUE : `echo | md5sum` → `curl -o TMP + md5sum TMP` (bytes exacts préservés) |
 | 2026-06-15 | EXTRA_FILES étendu : `scripts.yaml` `shell_command.yaml` `configuration.yaml` |

@@ -1,4 +1,4 @@
-# SYSTÈME — WATCHDOG PILES (HUE/IKEA/SONOFF)
+# SYSTÈME - WATCHDOG PILES (HUE/IKEA/SONOFF)
 
 > **Fichier :** `automations_corrige/systeme/watchdog_piles.yaml`
 > **Mode HA :** `single`

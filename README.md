@@ -1,4 +1,4 @@
-# 🏠 Home Assistant — Re-Build (Berry Swann)
+# 🏠 Home Assistant - Re-Build (Berry Swann)
 
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2026.x-blue?logo=home-assistant&logoColor=white)](https://www.home-assistant.io/)
 [![GitHub last commit](https://img.shields.io/github/last-commit/BerrySwann/home_assistant_re-build)](https://github.com/BerrySwann/home_assistant_re-build)
@@ -11,20 +11,20 @@ Ce depot est la **refonte complete et modulaire** de la configuration Home Assis
 
 ## 📚 Vous voulez comprendre ou reutiliser ce code ?
 
-> **Commencez par le repertoire [`DOCS/`](./DOCS/)**
+> **Commencez par le repertoire [`docs/`](./docs/)**
 
-Chaque vignette du dashboard possede sa propre documentation dans `DOCS/02_docs_dashboard/` : entites utilisees, fichiers sources, chaines de dependances, pieges a eviter. C'est la **porte d'entree** pour comprendre comment tout s'articule avant de plonger dans les YAML.
+Chaque vignette du dashboard possede sa propre documentation dans `docs/02_docs_dashboard/` : entites utilisees, fichiers sources, chaines de dependances, pieges a eviter. C'est la **porte d'entree** pour comprendre comment tout s'articule avant de plonger dans les YAML.
 
 ### Comment ca s'articule (en 3 phrases)
 
-Une donnee suit toujours le meme chemin : **capteur natif** (Zigbee2MQTT, Hue, Linky...) -> **sensor/template** (calcul, kWh, moyenne) -> **utility_meter** (cumul Annuel/Mensuel/Hebdo/Quotidien si besoin) -> **vignette dashboard**. Cote fiabilite, la prod Home Assistant fait toujours foi ; GitHub est une sauvegarde automatique de la prod ; ce depot local (`ReBuild/`) n'est qu'un poste de travail de correction, jamais une verite en soi. Si un jour vous cherchez pourquoi un fichier `.yaml` a un nom bizarre ou une bordure ASCII, c'est dans `CLAUDE.md`.
+Une donnee suit toujours le meme chemin : **capteur natif** (Zigbee2MQTT, Hue, Linky...) -> **sensor/template** (calcul, kWh, moyenne) -> **utility_meter** (cumul Annuel/Mensuel/Hebdo/Quotidien si besoin) -> **vignette dashboard**. Cote fiabilite, la prod Home Assistant fait toujours foi ; GitHub est une sauvegarde automatique de la prod ; ce depot local (`ReBuild/`) n'est qu'un poste de travail de correction, jamais une verite en soi. Si un jour vous cherchez pourquoi un fichier `.yaml` a un nom bizarre ou une bordure ASCII, c'est dans `CLAUDE.md` (local) - copie GitHub : [`docs/00_IA/IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE.md).
 
 | Document cle | Role |
 |---|---|
-| [`INDEX_GLOBAL.md`](./INDEX_GLOBAL.md) | Index unique — 6 sections (IA, config, dashboard, automations, scripts, systeme) — accordeon GitHub. *(3900+ lignes, prevoyez du cafe)* |
-| [`DOCS/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md`](./DOCS/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md) | Carte -> Template -> Sensor -> Utility Meter -> Source native — 18 vignettes |
-| [`DOCS/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md`](./DOCS/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md) | Procedure de maintenance + historique des sessions |
-| [`CLAUDE.md`](./CLAUDE.md) | Regles de codage, nomenclature, arborescences — directives IA completes |
+| [`INDEX_GLOBAL.md`](./INDEX_GLOBAL.md) | Index unique - 6 sections (IA, config, dashboard, automations, scripts, systeme) - accordeon GitHub. *(3900+ lignes, prevoyez du cafe)* |
+| [`docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md`](./docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md) | Carte -> Template -> Sensor -> Utility Meter -> Source native - 18 vignettes |
+| [`docs/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md`](./docs/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md) | Procedure de maintenance + historique des sessions |
+| [`IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE.md) | Regles de codage, nomenclature, arborescences - directives IA completes *(copie GitHub du CLAUDE.md local, prompt de Claude)* |
 
 ---
 
@@ -32,7 +32,7 @@ Une donnee suit toujours le meme chemin : **capteur natif** (Zigbee2MQTT, Hue, L
 
 La configuration est regie par le fichier maitre :
 
-- 👉 **[`CLAUDE.md`](./CLAUDE.md)** — directives IA actives (nomenclature, hierarchie visuelle, regles de codage, arborescences)
+- 👉 **[`IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE.md)** - directives IA actives (nomenclature, hierarchie visuelle, regles de codage, arborescences) *(CLAUDE.md = version locale, prompt de Claude)*
 
 Developpee en collaboration avec **Claude (Anthropic)** pour garantir :
 
@@ -47,10 +47,10 @@ Developpee en collaboration avec **Claude (Anthropic)** pour garantir :
 
 | Composant | Detail |
 |-----------|--------|
-| **OS** | Home Assistant OS (HAOS) — VM Proxmox VE 7.0.0-3 |
-| **Materiel** | Mini-PC Intel NUC — SSD 512 Go / RAM 16 Go |
-| **Hyperviseur** | Proxmox VE — VM HAOS + LXC services |
-| **Zigbee** | Sonoff EFR32MG21 V2 (recue 22/05/2026) — LXC 200 |
+| **OS** | Home Assistant OS (HAOS) - VM Proxmox VE 7.0.0-3 |
+| **Materiel** | Mini-PC Intel NUC - SSD 512 Go / RAM 16 Go |
+| **Hyperviseur** | Proxmox VE - VM HAOS + LXC services |
+| **Zigbee** | Sonoff EFR32MG21 V2 (recue 22/05/2026) - LXC 200 |
 | **Acces** | Samba Share, Studio Code Server, SSH, Cloudflared, Tailscale |
 
 ### 📦 Services
@@ -66,7 +66,7 @@ Developpee en collaboration avec **Claude (Anthropic)** pour garantir :
 
 ## 🧩 Integrations
 
-### HACS — Custom Components
+### HACS - Custom Components
 
 | Slug | Nom | Role |
 |:-----|:----|:-----|
@@ -92,8 +92,8 @@ Developpee en collaboration avec **Claude (Anthropic)** pour garantir :
 | `meteo_france` | Alertes vigilance, previsions, cameras cartes |
 | `moon` | Phase lunaire |
 | `season` | Detection saison courante |
-| `proxmox_ve` | Supervision Proxmox PVE — CPU, RAM, Storage, Status (L4C1) |
-| `system_monitor` | Supervision systeme Mini PC — CPU, RAM, disque (L4C2) |
+| `proxmox_ve` | Supervision Proxmox PVE - CPU, RAM, Storage, Status (L4C1) |
+| `system_monitor` | Supervision systeme Mini PC - CPU, RAM, disque (L4C2) |
 | `mobile_app` | Telephones (presence P4 + batteries portables L5C2) |
 | `local_file` | Images vigilance Meteo France |
 | `file` | Logs notify (diag conso, ecart Linky/Nodon) |
@@ -139,9 +139,9 @@ Developpee en collaboration avec **Claude (Anthropic)** pour garantir :
 
 ---
 
-## 📊 Architecture modulaire — Organisation par Pole
+## 📊 Architecture modulaire - Organisation par Pole
 
-La configuration est **100% eclatee** — zero fichier monolithique. Chaque fichier a une responsabilite unique, nommee et rangee dans le Pole fonctionnel correspondant.
+La configuration est **100% eclatee** - zero fichier monolithique. Chaque fichier a une responsabilite unique, nommee et rangee dans le Pole fonctionnel correspondant.
 
 ```
 /homeassistant/
@@ -182,13 +182,13 @@ La configuration est **100% eclatee** — zero fichier monolithique. Chaque fich
 | **P0** | Energie globale (Linky, Nodon pince, bilans generaux) |
 | **P1** | Chauffage & Climatisation (5 pieces) |
 | **P2** | Prises connectees (18 appareils + veilles) |
-| **P3** | Eclairage (19 ampoules Hue/Sonoff — unite / zone / total) |
+| **P3** | Eclairage (19 ampoules Hue/Sonoff - unite / zone / total) |
 | **P4** | Groupe Presence (Wi-Fi, reseau mobile, localisation) |
 | **M/A/S/B/MP** | Categories lettrees : Meteo, Air, Stores, BP Virtuel, Mini-PC |
 
 ---
 
-## 🖥️ Dashboard — Matrice 18 Vignettes
+## 🖥️ Dashboard - Matrice 18 Vignettes
 
 Dashboard optimise tablette + mobile. Structure en 6 lignes x 3 colonnes.
 
@@ -203,10 +203,10 @@ Dashboard optimise tablette + mobile. Structure en 6 lignes x 3 colonnes.
 
 ---
 
-## 📁 Documentation (`DOCS/`) — Structure complete
+## 📁 Documentation (`docs/`) - Structure complete
 
 ```
-DOCS/
+docs/
 ├── 00_IA/                          <- contextes IA (IA_CONTEXT_BASE + sous_md/)
 ├── 01_docs_config_system/
 │   ├── config_system_YAML/         <- YAML config HA (source -> /homeassistant/)
@@ -237,12 +237,12 @@ ReBuild/
 ├── Github/
 │   ├── INDEX_GLOBAL.md         <- index unique 6 sections (accordeon GitHub)
 │   └── README.md
-├── DOCS/                       <- toute la documentation + YAML de travail
+├── docs/                       <- toute la documentation + YAML de travail
 ├── historique/                 <- journaux de session
 └── secrets.yaml                <- identifiants (NE PAS synchroniser)
 ```
 
-> Procedure de maintenance detaillee : [`DOCS/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md`](./DOCS/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md)
+> Procedure de maintenance detaillee : [`docs/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md`](./docs/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md)
 
 ---
 
@@ -250,8 +250,8 @@ ReBuild/
 
 - [Forum HACF](https://forum.hacf.fr)
 - [Documentation Officielle HA](https://www.home-assistant.io/docs/)
-- [Ancien depot](https://github.com/BerrySwann/home-assistant-config) *(archive — remplace par ce re-build)*
+- [Ancien depot](https://github.com/BerrySwann/home-assistant-config) *(archive - remplace par ce re-build)*
 
 ---
 
-✨ **Projet vivant — architecture modulaire, documentee, maintenue avec Claude (Anthropic)**
+✨ **Projet vivant - architecture modulaire, documentee, maintenue avec Claude (Anthropic)**

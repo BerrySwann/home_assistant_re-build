@@ -1,6 +1,6 @@
-# IA_INDEX_NAVIGATION.md — Contexte & Competence INDEX NAVIGATION (dashboard)
+# IA_INDEX_NAVIGATION.md - Contexte & Competence INDEX NAVIGATION (dashboard)
 
-*Refait le : 2026-07-21 (ancien fichier 2026-05-30 obsolete — TREE_CORRIGE + INDEX_NAVIGATION_FULL.md supprimes)*
+*Refait le : 2026-07-21 (ancien fichier 2026-05-30 obsolete - TREE_CORRIGE + INDEX_NAVIGATION_FULL.md supprimes)*
 
 ---
 
@@ -10,7 +10,7 @@ La navigation dashboard est indexee dans la section `02-DASHBOARD` de :
 - **Index principal** : `H:\Docs\INDEX_GLOBAL.md` (source de verite, rendu GitHub)
 - **Copie locale** : `ReBuild/Github/INDEX_GLOBAL.md`
 
-Il n'y a plus de fichier `INDEX_NAVIGATION_FULL.md` ni `INDEX_NAVIGATION.md` distinct —
+Il n'y a plus de fichier `INDEX_NAVIGATION_FULL.md` ni `INDEX_NAVIGATION.md` distinct -
 fusionnes dans INDEX_GLOBAL.md (2026-07-16).
 
 ---
@@ -37,7 +37,7 @@ Chemin prod dashboard : `H:\Docs\` (push depuis local)
 ## Structure de l'index (section 02-DASHBOARD dans INDEX_GLOBAL.md)
 
 ```
-Niveau 1 : L*C* — LABEL | X page(s) | ~N entites       <- retracte par defaut
+Niveau 1 : L*C* - LABEL | X page(s) | ~N entites       <- retracte par defaut
   Niveau 2a : Vignette
     - Doc vignette (lien docs/02_docs_dashboard/dashboard_docs_MD/L*C*_*)
     - YAML vignette (lien docs/02_docs_dashboard/dashboard_docs_YAML/L*C*_*)
@@ -45,7 +45,7 @@ Niveau 1 : L*C* — LABEL | X page(s) | ~N entites       <- retracte par defaut
   Niveau 2b : Page(s)
     - Doc page + YAML page
     - Fichiers sources (sensors/ templates/ utility_meter/)
-    - Pop-up #hash — N entites
+    - Pop-up #hash - N entites
         chaque entite : "voir fichier" (lien config_system_YAML/) ou "Natif HA"
   Niveau 2c : Fichiers complementaires (si presents)
 ```
@@ -83,7 +83,7 @@ Niveau 1 : L*C* — LABEL | X page(s) | ~N entites       <- retracte par defaut
 - Entites dans `button-card` JS inline non extractibles automatiquement.
 - Reel nb d'entites ~30-40% superieur sur pages complexes (L2C1, L1C1).
 - L3C1 : incoherence structurelle HTML "Page Gauche"/"Page Droite" deconnectees de leurs blocs
-  entites — signalee, non corrigee (hors perimetre exactitude entites).
+  entites - signalee, non corrigee (hors perimetre exactitude entites).
 
 ---
 

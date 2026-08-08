@@ -21,14 +21,14 @@ Allume la lumière de l'entrée lors d'une arrivée. Gère deux cas :
 
 ---
 
-## ⚙️ Actions — Choose
+## ⚙️ Actions - Choose
 
-**CAS 1 — Arrivée initiale diurne :**
+**CAS 1 - Arrivée initiale diurne :**
 - Condition : `from == groupe_1` ET `to in [groupe_2, groupe_3, groupe_4]`
 - Condition : `sun.sun == above_horizon`
 - Action : `light.turn_on → light.entree`
 
-**CAS 2 — Retour Mamour (G3→G4) :**
+**CAS 2 - Retour Mamour (G3→G4) :**
 - Condition : `from == groupe_3` ET `to == groupe_4`
 - Action : `light.turn_on → light.entree`
 

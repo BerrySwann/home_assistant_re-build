@@ -1,4 +1,4 @@
-# UPDATE PREVIOUS TEMPERATURE — TENDANCE T° EXT
+# UPDATE PREVIOUS TEMPERATURE - TENDANCE T° EXT
 
 > **Fichier :** `automations_corrige/meteo/update_prev_temperature.yaml`
 > **Mode HA :** `single`

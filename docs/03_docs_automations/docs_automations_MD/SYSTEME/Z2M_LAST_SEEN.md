@@ -1,4 +1,4 @@
-# Z2M LAST SEEN — SURVEILLANCE CAPTEURS ZIGBEE
+# Z2M LAST SEEN - SURVEILLANCE CAPTEURS ZIGBEE
 
 > **Fichier :** `automations_corrige/systeme/z2m_last_seen.yaml`
 > **Mode HA :** `single`

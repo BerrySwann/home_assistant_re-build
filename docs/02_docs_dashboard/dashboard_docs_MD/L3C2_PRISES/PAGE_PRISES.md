@@ -11,7 +11,7 @@
 |:------|:-------|
 | 📁 **Path** | `/dashboard-tablette/prises` |
 | 🔗 **Accès depuis** | Vignette L3C2 (tap) · Heading "PRISES éCO." (retour → `/dashboard-tablette/0`) |
-| 🏗️ **Layout** | `type: grid` — 5 sections par pièce |
+| 🏗️ **Layout** | `type: grid` - 5 sections par pièce |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-03-21 |
@@ -19,7 +19,7 @@
 
 ---
 
-# 🔌 L3C2 — Page Prises éCO. (Commandes Éco Prises)
+# 🔌 L3C2 - Page Prises éCO. (Commandes Éco Prises)
 
 ---
 
@@ -43,8 +43,8 @@ Page de commande des **prises éco** par pièce. Chaque prise est représentée 
 | Carte | Usage |
 |-------|-------|
 | `custom:mushroom-entity-card` | Commande toggle + badges W/A/V |
-| `card_mod` | CSS avancé — badges, progress bar, animation plug |
-| `custom:streamline-card` | `template: nav_bar` — barre navigation bas de page |
+| `card_mod` | CSS avancé - badges, progress bar, animation plug |
+| `custom:streamline-card` | `template: nav_bar` - barre navigation bas de page |
 
 ---
 
@@ -59,16 +59,16 @@ type: grid
 ├── [4. SALON]
 │     ├── Heading "Salon"    (icon: mdi:sofa)
 │     └── Prise Eco. Salon   (light.hue_smart_eco_salon)
-├── [4. SALON — TV]
+├── [4. SALON - TV]
 │     ├── Heading "TV Salon" (icon: cil:tv)              ⚠️ CoreUI icon (dépendance)
 │     └── Prise Eco. TV Salon (switch.prise_tv_salon_ikea)
 ├── [7. BUREAU]
 │     ├── Heading "Bureau"   (icon: mdi:desktop-tower-monitor)
 │     └── Prise PC Bureau    (switch.hue_smart_eco_pc_bureau)
-├── [9. CHAMBRE — TV]
+├── [9. CHAMBRE - TV]
 │     ├── Heading "Chambre"  (icon: mdi:bed)
 │     └── Prise Eco. TV Chambre (light.hue_smart_eco_tv_chambre)
-├── [9. CHAMBRE — Lit]
+├── [9. CHAMBRE - Lit]
 │     ├── Heading "Tête de Lit" (icon: mdi:bed)
 │     └── Prise Eco. Têtes de Lit (switch.prise_tete_de_lit_chambre)
 └── custom:streamline-card template: nav_bar
@@ -76,7 +76,7 @@ type: grid
 
 ---
 
-## 🎨 TEMPLATE CARD_MOD — PATTERN COMMUN
+## 🎨 TEMPLATE CARD_MOD - PATTERN COMMUN
 
 Chaque carte `mushroom-entity-card` utilise le même bloc `card_mod` paramétrable. Les variables à configurer par carte sont en tête de bloc :
 
@@ -105,7 +105,7 @@ La vitesse d'animation de l'icône est inversement proportionnelle à la charge 
 | Volts (V) | `::after` sur `.container` | Vert `rgb(76,175,80)` | `sensor.*_voltage` |
 
 ### Barre de progression
-`::before` sur `.container` — largeur = `(watts / max_watts * 100)%` — couleur verte, hauteur 4px en bas de carte.
+`::before` sur `.container` - largeur = `(watts / max_watts * 100)%` - couleur verte, hauteur 4px en bas de carte.
 
 ---
 
@@ -113,9 +113,9 @@ La vitesse d'animation de l'icône est inversement proportionnelle à la charge 
 
 | Pièce | Entité (toggle) | Capteurs W/V/A | max_watts | show_ma | Couleur OFF |
 |-------|-----------------|----------------|-----------|---------|-------------|
-| Entrée — Horloge | `switch.prise_horloge_ikea` | `sensor.prise_horloge_ikea_*` | 2500 | false | *(vert toujours)* |
+| Entrée - Horloge | `switch.prise_horloge_ikea` | `sensor.prise_horloge_ikea_*` | 2500 | false | *(vert toujours)* |
 | Salon | `light.hue_smart_eco_salon` | `sensor.prise_salon_chargeur_nous_*` | 2500 | false | *(vert toujours)* |
-| TV Salon | `switch.prise_tv_salon_ikea` | ~~`sensor.light.hue_smart_tv_salon_*`~~ 🐛 | 250 | `ture` ✅ *(voulu — affiche mA)* | *(vert toujours)* |
+| TV Salon | `switch.prise_tv_salon_ikea` | ~~`sensor.light.hue_smart_tv_salon_*`~~ 🐛 | 250 | `ture` ✅ *(voulu - affiche mA)* | *(vert toujours)* |
 | Bureau | `switch.hue_smart_eco_pc_bureau` | `sensor.prise_bureau_pc_ikea_*` | 500 | false | **Gris si OFF** ✅ |
 | TV Chambre | `light.hue_smart_eco_tv_chambre` | `sensor.prise_tv_chambre_nous_*` | 500 | false | *(vert toujours)* |
 | Tête de Lit | `switch.prise_tete_de_lit_chambre` | `sensor.prise_tete_de_lit_chambre_*` | 50 | false | *(vert toujours)* |
@@ -126,13 +126,13 @@ La vitesse d'animation de l'icône est inversement proportionnelle à la charge 
 
 ## 🐛 BUGS IDENTIFIÉS
 
-### [L1] TV Salon — `show_ma = ture` ✅ Voulu
+### [L1] TV Salon - `show_ma = ture` ✅ Voulu
 
-`ture` est une string non-vide → truthy en Jinja2 → les ampères s'affichent en **mA** pour la TV Salon. C'est intentionnel — la TV Salon tire peu de courant et mA est plus lisible à cette échelle.
+`ture` est une string non-vide → truthy en Jinja2 → les ampères s'affichent en **mA** pour la TV Salon. C'est intentionnel - la TV Salon tire peu de courant et mA est plus lisible à cette échelle.
 
 ---
 
-### [L2] TV Salon — `sensor.light.hue_smart_tv_salon_*` (entity_id invalide)
+### [L2] TV Salon - `sensor.light.hue_smart_tv_salon_*` (entity_id invalide)
 
 ```jinja2
 # AVANT (bug)
@@ -150,13 +150,13 @@ La vitesse d'animation de l'icône est inversement proportionnelle à la charge 
 
 ---
 
-### [L3] Salon — mismatch entité/capteurs (à vérifier)
+### [L3] Salon - mismatch entité/capteurs (à vérifier)
 
 L'entité togglee est `light.hue_smart_eco_salon` mais les capteurs pointent vers `sensor.prise_salon_chargeur_nous_*`. Si l'éco-prise salon et le chargeur salon sont deux appareils distincts, les valeurs W/A/V affichées ne correspondent pas à l'entité toggleée.
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ### Switches / Lights (toggle)
 
@@ -175,7 +175,7 @@ L'entité togglee est `light.hue_smart_eco_salon` mais les capteurs pointent ver
 |---------|--------|
 | `sensor.prise_horloge_ikea_power/voltage/current` | IKEA Dirigera |
 | `sensor.prise_salon_chargeur_nous_power/voltage/current` | NOUS (Zigbee) |
-| ~~`sensor.light.hue_smart_tv_salon_*`~~ → à corriger | — |
+| ~~`sensor.light.hue_smart_tv_salon_*`~~ → à corriger | - |
 | `sensor.prise_bureau_pc_ikea_power/voltage/current` | IKEA Dirigera |
 | `sensor.prise_tv_chambre_nous_power/voltage/current` | NOUS (Zigbee) |
 | `sensor.prise_tete_de_lit_chambre_power/voltage/current` | Intégration native |
@@ -195,14 +195,14 @@ L'entité togglee est `light.hue_smart_eco_salon` mais les capteurs pointent ver
 
 ## 🔗 FICHIERS LIÉS
 
-- [`L3C2_VIGNETTE_PRISES.md`](./L3C2_VIGNETTE_PRISES.md) — vignette dashboard
+- [`L3C2_VIGNETTE_PRISES.md`](./L3C2_VIGNETTE_PRISES.md) - vignette dashboard
 
 ---
 
 # annotations_log:
-# [L1] show_ma = ture → voulu (mA pour TV Salon — confirmé s14)
-# [L2] sensor.light.hue_smart_tv_salon_* → entity_id invalide — corrigé : sensor.prise_tv_salon_ikea_* (confirmé s14)
-# [L3] light.hue_smart_eco_salon togglee mais capteurs = prise_salon_chargeur_nous — mismatch à vérifier
+# [L1] show_ma = ture → voulu (mA pour TV Salon - confirmé s14)
+# [L2] sensor.light.hue_smart_tv_salon_* → entity_id invalide - corrigé : sensor.prise_tv_salon_ikea_* (confirmé s14)
+# [L3] light.hue_smart_eco_salon togglee mais capteurs = prise_salon_chargeur_nous - mismatch à vérifier
 
 ← Retour : `L3C1_ECLAIRAGE/` | → Suite : `L3C3_STORES/`
 

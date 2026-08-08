@@ -11,13 +11,13 @@
 |:------|:-------|
 | 📁 **Fichier YAML** | `Dashboard/L4C2_11_Mini_PC/page_L4C2_mini_pc_2026-06-18.yaml` |
 | 🔗 **Accès depuis** | Tap sur vignette L4C2 → `/dashboard-tablette/systeme-mini-pc` |
-| 🏗️ **Layout** | `grid` → `vertical-stack` — sections bar-card + ring-tile + mini-graph + 5 pop-ups |
+| 🏗️ **Layout** | `grid` → `vertical-stack` - sections bar-card + ring-tile + mini-graph + 5 pop-ups |
 | 📅 **Modifié le** | 2026-06-10 |
 | 🏠 **Version HA** | 2025.2+ |
 
 ---
 
-# 🖥️ PAGE MINI-PC — SUPERVISION COMPLÈTE
+# 🖥️ PAGE MINI-PC - SUPERVISION COMPLÈTE
 
 ---
 
@@ -75,7 +75,7 @@ Page de supervision matérielle du Mini-PC Intel NUC (hôte Proxmox). Affiche ph
 
 ---
 
-## ⚠️ BUG CONNU — UPTIME (À CORRIGER)
+## ⚠️ BUG CONNU - UPTIME (À CORRIGER)
 
 La carte Uptime utilise un template Jinja2 qui traite `sensor.pve_uptime` comme des **secondes** :
 ```yaml
@@ -95,7 +95,7 @@ Or `sensor.pve_uptime` retourne des **heures flottantes** (confirmé lors du fix
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ### Image & Réseau
 | Entité | Source | Rôle |
@@ -107,7 +107,7 @@ Or `sensor.pve_uptime` retourne des **heures flottantes** (confirmé lors du fix
 ### Uptime
 | Entité | Source | Note |
 |--------|--------|------|
-| `sensor.pve_uptime` | Intégration `proxmox_ve` | ⚠️ retourne heures — template bugué (traite comme secondes) |
+| `sensor.pve_uptime` | Intégration `proxmox_ve` | ⚠️ retourne heures - template bugué (traite comme secondes) |
 
 ### CPU
 | Entité | Source | Seuils bar-card |
@@ -163,11 +163,11 @@ Or `sensor.pve_uptime` retourne des **heures flottantes** (confirmé lors du fix
 
 | Hash | Titre | Contenu |
 |------|-------|---------|
-| `#speed` | Utilisation du CPU | apexcharts 24h — `pve_utilisation_du_processeur` × 4 series (instant ×2, moy. 24h, moy. mois) |
-| `#temp` | Températures processeur | apexcharts 24h — `proxmox_cpu_package` + `proxmox_carte_mere` (color_threshold) |
-| `#conso` | Consommation Mini-PC | streamline-card temps réel + mensuel — `prise_mini_pc_ikea_power` |
-| `#memory` | Mémoire RAM | apexcharts 24h — `pve_memory_usage_percentage` × 3 series |
-| `#disk` | Espace disque — PVE VM | apexcharts 24h + brush — `pve_utilisation_du_disque` (max 477 GiB) |
+| `#speed` | Utilisation du CPU | apexcharts 24h - `pve_utilisation_du_processeur` × 4 series (instant ×2, moy. 24h, moy. mois) |
+| `#temp` | Températures processeur | apexcharts 24h - `proxmox_cpu_package` + `proxmox_carte_mere` (color_threshold) |
+| `#conso` | Consommation Mini-PC | streamline-card temps réel + mensuel - `prise_mini_pc_ikea_power` |
+| `#memory` | Mémoire RAM | apexcharts 24h - `pve_memory_usage_percentage` × 3 series |
+| `#disk` | Espace disque - PVE VM | apexcharts 24h + brush - `pve_utilisation_du_disque` (max 477 GiB) |
 
 ---
 
@@ -177,7 +177,7 @@ Or `sensor.pve_uptime` retourne des **heures flottantes** (confirmé lors du fix
 |---------|------|--------|
 | `proxmox_ve` | Intégration HA | ✅ Essentiel |
 | System Monitor | Intégration HA | ✅ Essentiel |
-| Z2M — prise IKEA Mini-PC | Zigbee2MQTT | ✅ Essentiel |
+| Z2M - prise IKEA Mini-PC | Zigbee2MQTT | ✅ Essentiel |
 | `bar-card` | HACS | ✅ Essentiel |
 | `ring-tile-card` | HACS | ✅ Essentiel |
 | `mini-graph-card` | HACS | ✅ Essentiel |

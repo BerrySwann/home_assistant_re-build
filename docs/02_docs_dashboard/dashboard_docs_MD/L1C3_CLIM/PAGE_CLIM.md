@@ -34,7 +34,7 @@
 7. [Section SDB](#section-sdb)
 8. [Section CHAMBRE](#section-chambre)
 9. [Pop-up #calcul](#pop-up-calcul)
-10. [Entités utilisées — Provenance complète](#entités-utilisées--provenance-complète)
+10. [Entités utilisées - Provenance complète](#entités-utilisées--provenance-complète)
 11. [Dépannage](#dépannage)
 
 ---
@@ -57,7 +57,7 @@ En tête de page : un bloc bilan global (consommation totale, chips conditionnel
 │
 ├── [CONDITIONAL] Bloc bilan (si au moins 1 pièce active)
 │       ├── text-divider "Consomation TOTAL Climatisations & Radiateurs"
-│       ├── mushroom-chips-card (6 chips conditionnels — 1 par pièce active)
+│       ├── mushroom-chips-card (6 chips conditionnels - 1 par pièce active)
 │       └── bar-card auto-entities → sensor.conso_clim_rad_total (si > 0.1W)
 │
 ├── ── SALON ──
@@ -86,7 +86,7 @@ En tête de page : un bloc bilan global (consommation totale, chips conditionnel
 │       ├── text-divider "Chauffage Salle de Bain"
 │       ├── heading badges (remote / schedules / power W / power switch)
 │       ├── thermostat climate.soufflant_salle_de_bain
-│       ├── button-card soufflant_sdb (état résistance + delta T°) — si inter ON
+│       ├── button-card soufflant_sdb (état résistance + delta T°) - si inter ON
 │       └── bar-card sensor.prise_soufflant_salle_de_bain_nous_power (si > 0.1W)
 │
 ├── ── CHAMBRE ──
@@ -130,7 +130,7 @@ Affiché si `au moins 1` des entités `*_power_status_affichage ≠ "off"` :
 
 Seuil `_affichage` = puissance > **1W** (contre > 50W pour `_power_status`). Permet d'afficher le bloc même en veille.
 
-### mushroom-chips-card — 6 chips conditionnels
+### mushroom-chips-card - 6 chips conditionnels
 
 | Chip | Condition d'affichage | Source état | Icône |
 |------|----------------------|-------------|-------|
@@ -175,7 +175,7 @@ unit_of_measurement: W
 
 ### Warnings conditionnels (2 states mutuellement exclusifs)
 
-**Warning ROUGE** — arrêt sécurisé en cours :
+**Warning ROUGE** - arrêt sécurisé en cours :
 ```yaml
 conditions:
   - entity: input_boolean.clim_salon_arret_securise_en_cours  state: "on"
@@ -184,7 +184,7 @@ conditions:
 # text: "⚠️ Clim SALON en cours d'arrêt ⚠️"
 ```
 
-**Warning AMBER** — prise coupée :
+**Warning AMBER** - prise coupée :
 ```yaml
 conditions:
   - entity: input_boolean.clim_salon_arret_securise_en_cours  state: "off"
@@ -194,7 +194,7 @@ conditions:
 # text: 'La prise extérieur "CLIM SALON" est coupée'
 ```
 
-### Heading Clim. Salon — badges
+### Heading Clim. Salon - badges
 
 | Badge | Entité | Rôle |
 |-------|--------|------|
@@ -228,7 +228,7 @@ sensor.clim_salon_nous_power
 
 > Pas de warning prise coupée (le radiateur cuisine n'a pas de logique arrêt sécurisé).
 
-### Heading Rad. Cuisine — badges
+### Heading Rad. Cuisine - badges
 
 | Badge | Entité | Rôle |
 |-------|--------|------|
@@ -259,17 +259,17 @@ sensor.radiateur_elec_cuisine_power
 
 ### Warnings conditionnels (identiques à Salon)
 
-**Warning ROUGE** — arrêt sécurisé :
+**Warning ROUGE** - arrêt sécurisé :
 ```yaml
 entity: input_boolean.clim_bureau_arret_securise_en_cours + sensor.bureau_power_lock
 ```
 
-**Warning AMBER** — prise coupée :
+**Warning AMBER** - prise coupée :
 ```yaml
 entity: input_boolean.clim_bureau_arret_securise_en_cours (off) + switch.clim_bureau_nous (off) + sensor.bureau_power_status_affichage (off)
 ```
 
-### Heading clim. Bureau — badges
+### Heading clim. Bureau - badges
 
 | Badge | Entité | Rôle |
 |-------|--------|------|
@@ -301,7 +301,7 @@ sensor.clim_bureau_nous_power
 
 > Pas de warning arrêt sécurisé ni prise coupée pour le soufflant.
 
-### Heading Radiateur SdB — badges
+### Heading Radiateur SdB - badges
 
 | Badge | Entité | Rôle |
 |-------|--------|------|
@@ -357,17 +357,17 @@ sensor.prise_soufflant_salle_de_bain_nous_power
 
 ### Warnings conditionnels (identiques à Salon)
 
-**Warning ROUGE** — arrêt sécurisé :
+**Warning ROUGE** - arrêt sécurisé :
 ```yaml
 entity: input_boolean.clim_chambre_arret_securise_en_cours + sensor.chambre_power_lock
 ```
 
-**Warning AMBER** — prise coupée :
+**Warning AMBER** - prise coupée :
 ```yaml
 entity: input_boolean.clim_chambre_arret_securise_en_cours (off) + switch.clim_chambre_nous (off) + sensor.chambre_power_status_affichage (off)
 ```
 
-### Heading clim. Chambre — badges
+### Heading clim. Chambre - badges
 
 | Badge | Entité | Rôle |
 |-------|--------|------|
@@ -408,11 +408,11 @@ icon: mdi:delta
 
 Contenu : `streamline-card template: calcule_temp_cible`
 
-Ce template affiche le détail du calcul du delta T° utilisé pour la recommandation ADEME. Source : streamline templates (non documenté ici — voir template `calcule_temp_cible`).
+Ce template affiche le détail du calcul du delta T° utilisé pour la recommandation ADEME. Source : streamline templates (non documenté ici - voir template `calcule_temp_cible`).
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ### Templates P1 (TREE_CORRIGE)
 
@@ -448,7 +448,7 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 |--------|---------|------|
 | `switch.inter_soufflant_salle_de_bain` | `Inter_BP_Virtuel/BI_02_switch_inter_sdb.yaml` | Visibilité button-card soufflant SdB |
 
-### Natif HA — climate (SmartIR / Meross)
+### Natif HA - climate (SmartIR / Meross)
 
 | Entité | Intégration | Section |
 |--------|------------|---------|
@@ -458,7 +458,7 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 | `climate.soufflant_salle_de_bain` | Meross | SdB |
 | `climate.clim_chambre_rm4_mini` | SmartIR | Chambre |
 
-### Natif HA — power sensors (prises NOUS / Meross)
+### Natif HA - power sensors (prises NOUS / Meross)
 
 | Entité | Section |
 |--------|---------|
@@ -468,7 +468,7 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 | `sensor.prise_soufflant_salle_de_bain_nous_power` | SdB |
 | `sensor.clim_chambre_nous_power` | Chambre |
 
-### Natif HA — switches / remotes
+### Natif HA - switches / remotes
 
 | Entité | Rôle |
 |--------|------|
@@ -482,18 +482,18 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 | `remote.clim_chambre` | SmartIR remote Chambre |
 | `remote.soufflant_sdb` | SmartIR remote SdB |
 
-### Natif HA — input_boolean / input_select
+### Natif HA - input_boolean / input_select
 
 | Entité | Rôle | Fichier source |
 |--------|------|----------------|
 | `input_boolean.clim_salon_arret_securise_en_cours` | Verrou arrêt sécurisé Salon | `input_booleans/arret_clim_securises.yaml` |
 | `input_boolean.clim_bureau_arret_securise_en_cours` | Verrou arrêt sécurisé Bureau | `input_booleans/arret_clim_securises.yaml` |
 | `input_boolean.clim_chambre_arret_securise_en_cours` | Verrou arrêt sécurisé Chambre | `input_booleans/arret_clim_securises.yaml` |
-| `input_select.etat_resistance_soufflant_sdb` | État résistance 0W/1000W/2000W | — |
+| `input_select.etat_resistance_soufflant_sdb` | État résistance 0W/1000W/2000W | - |
 
-### Natif HA — Schedules (HACS Scheduler)
+### Natif HA - Schedules (HACS Scheduler)
 
-> ⚠️ **À configurer** — Les `switch.schedule_*` sont créés par l'intégration **Scheduler** (HACS). Les plages horaires sont définies dans l'UI Scheduler, pas en YAML.
+> ⚠️ **À configurer** - Les `switch.schedule_*` sont créés par l'intégration **Scheduler** (HACS). Les plages horaires sont définies dans l'UI Scheduler, pas en YAML.
 
 | Switch | Pièce | Fréquence |
 |--------|-------|-----------|
@@ -514,14 +514,14 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 
 | Entité | Alias | Rôle | Mode |
 |--------|-------|------|------|
-| `script.j_1_1_salon_clim_on_off_intelligent` | J 1-1 SALON | **ROUTEUR SALON** — anti-tremblote + route ON/OFF | `single` |
-| `script.j_1_2_bureau_clim_on_off_intelligent` | J 1-2 BUREAU | **ROUTEUR BUREAU** — anti-tremblote + route ON/OFF | `single` |
-| `script.j_1_3_chambre_clim_on_off_intelligent` | J 1-3 CHAMBRE | **ROUTEUR CHAMBRE** — anti-tremblote + route ON/OFF | `single` |
-| `script.j_2_0_secu_arret_clim_protege` | J 2-0 SECU | **EXÉCUTANT commun** — (1) active verrou → (2) coupe thermostat → (3) vérifie état → (4) attend descente sous 9W (timeout 10 min) → (5) coupe prise NOUS → (6) libère verrou | `parallel` (max 3) |
+| `script.j_1_1_salon_clim_on_off_intelligent` | J 1-1 SALON | **ROUTEUR SALON** - anti-tremblote + route ON/OFF | `single` |
+| `script.j_1_2_bureau_clim_on_off_intelligent` | J 1-2 BUREAU | **ROUTEUR BUREAU** - anti-tremblote + route ON/OFF | `single` |
+| `script.j_1_3_chambre_clim_on_off_intelligent` | J 1-3 CHAMBRE | **ROUTEUR CHAMBRE** - anti-tremblote + route ON/OFF | `single` |
+| `script.j_2_0_secu_arret_clim_protege` | J 2-0 SECU | **EXÉCUTANT commun** - (1) active verrou → (2) coupe thermostat → (3) vérifie état → (4) attend descente sous 9W (timeout 10 min) → (5) coupe prise NOUS → (6) libère verrou | `parallel` (max 3) |
 
 > **Pourquoi 3 routeurs ?** Chaque `mode: single` est isolé par pièce. Avec un routeur unique, arrêter salon bloquait silencieusement bureau pendant 10 min (J-1 attendait la fin de J-2).
 
-**Fichier source** : `scripts.yaml` (racine) — voir aussi `docs Scripts/SCRIPTS_CLIM_ON_OFF.md`
+**Fichier source** : `scripts.yaml` (racine) - voir aussi `docs Scripts/SCRIPTS_CLIM_ON_OFF.md`
 
 ---
 
@@ -536,8 +536,8 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 - Pour le radiateur cuisine (`climate.radiateur_cuisine`) : vérifier l'intégration Meross dans HA
 
 ### Les warnings rouge/amber ne s'affichent jamais
-- Le warning ROUGE nécessite simultanément `input_boolean.clim_*_arret_securise_en_cours = on` ET `sensor.*_power_lock = on` — les deux conditions doivent être vraies
-- Le warning AMBER nécessite `arret_securise = off` ET `switch.*_nous = off` ET `*_affichage = off` — les trois simultanément
+- Le warning ROUGE nécessite simultanément `input_boolean.clim_*_arret_securise_en_cours = on` ET `sensor.*_power_lock = on` - les deux conditions doivent être vraies
+- Le warning AMBER nécessite `arret_securise = off` ET `switch.*_nous = off` ET `*_affichage = off` - les trois simultanément
 
 ### La bar-card bilan reste masquée
 - `sensor.conso_clim_rad_total` doit retourner une valeur > 0.1W
@@ -551,7 +551,7 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 
 ### Les schedules montrent "unavailable"
 - L'intégration **Scheduler** (HACS) doit être installée et active
-- Les `switch.schedule_*` sont créés depuis l'UI Scheduler — ils n'existent pas sans planification définie
+- Les `switch.schedule_*` sont créés depuis l'UI Scheduler - ils n'existent pas sans planification définie
 
 ---
 

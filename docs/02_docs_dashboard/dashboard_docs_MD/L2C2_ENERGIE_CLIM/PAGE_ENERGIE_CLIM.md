@@ -1,4 +1,4 @@
-# PAGE — Énergie Clim / Radiateur / Soufflant
+# PAGE - Énergie Clim / Radiateur / Soufflant
 *Dernière mise à jour : 2026-03-24*
 *Path : `/dashboard-tablette/energie-clim`*
 
@@ -167,7 +167,7 @@ Si `state_not: "off"` pour au moins une → affiche `text-divider "Consomation T
 
 ---
 
-### 3. Chips DUT — Durées de fonctionnement
+### 3. Chips DUT - Durées de fonctionnement
 
 4 chips `mushroom-chips-card` en ligne horizontale, format `Xh MM` :
 
@@ -190,7 +190,7 @@ Icône/couleur conditionnelle sur `sensor.ete_hiver` : Été = `#03a9f4`, Hiver 
 
 ---
 
-### 4. Chips état — Modes actifs
+### 4. Chips état - Modes actifs
 
 6 chips `conditional` affichés seulement si la prise correspondante est ON :
 
@@ -269,7 +269,7 @@ Même 6 séries que le journalier, mais avec les entités `*_mensuel_kwh_um` :
 
 ### 9. ApexCharts multi-yaxis 24h
 
-**Titre :** affiché vide (`" "`) — les valeurs sont dans `show_states`
+**Titre :** affiché vide (`" "`) - les valeurs sont dans `show_states`
 
 **Axes Y :**
 - `temperature` (gauche) : min ~5, max ~32, 10 ticks
@@ -408,14 +408,14 @@ Les 2 séries `in_chart: false` servent uniquement à afficher leur valeur dans 
 
 ### 15. Section SdB Sèche-Serviettes
 
-**Sub-section** (`text-divider "Sèche-Serviettes Salle de Bain"`) — pas de bubble-card climate, pas de heading dédié.
+**Sub-section** (`text-divider "Sèche-Serviettes Salle de Bain"`) - pas de bubble-card climate, pas de heading dédié.
 
 **Ring-tiles streamline** :
 - Voltage : `sensor.prise_seche_serviette_salle_de_bain_nous_voltage`
 - Ampère : `sensor.prise_seche_serviette_salle_de_bain_nous_current`
 
 **Tabbed-card** :
-- `INSTANTANÉ` → energy=`sensor.prise_seche_serviette_salle_de_bain_nous_power` (rgb(218,112,214)), avg=`sensor.seche_serviette_sdb_avg_watts_quotidien`, kwh=`sensor.seche_serviette_sdb_quotidien_kwh_um`, power_entity=`sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power` (rgb(255,215,0) — IKEA Inspelning)
+- `INSTANTANÉ` → energy=`sensor.prise_seche_serviette_salle_de_bain_nous_power` (rgb(218,112,214)), avg=`sensor.seche_serviette_sdb_avg_watts_quotidien`, kwh=`sensor.seche_serviette_sdb_quotidien_kwh_um`, power_entity=`sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power` (rgb(255,215,0) - IKEA Inspelning)
 - `MENSUEL` → energy=`sensor.prise_seche_serviette_salle_de_bain_nous_energy` (rgb(218,112,214)), avg_monthly=`sensor.seche_serviette_sdb_avg_watts_mensuel`
 - `PERF / DUT` → `sensor.dut_sdb_total` (rgb(218,112,214)), annotation "Pic de conso"
 
@@ -439,7 +439,7 @@ Les 2 séries `in_chart: false` servent uniquement à afficher leur valeur dans 
 **Tabbed-card** :
 - `INSTANTANÉ` → energy=`sensor.clim_chambre_nous_power` (rgb(30,81,40)), avg=`sensor.clim_chambre_avg_watts_quotidien`, kwh=`sensor.clim_chambre_quotidien_kwh_um`
 - `MENSUEL` → energy=`sensor.clim_chambre_nous_energy`, avg_monthly=`sensor.clim_chambre_avg_watts_mensuel`, kwh_monthly=`sensor.clim_chambre_mensuel_kwh_um`
-- `PERF / DUT` → `sensor.dut_clim_chambre` (rgb(30,81,40)), annotation "Zone de déperdition" (opacity 0.7 — chambre = forte déperdition thermique attendue)
+- `PERF / DUT` → `sensor.dut_clim_chambre` (rgb(30,81,40)), annotation "Zone de déperdition" (opacity 0.7 - chambre = forte déperdition thermique attendue)
 
 **Heading subtitle kWh** :
 - Q/H/M/A : `sensor.clim_chambre_*_kwh_um`
@@ -464,9 +464,9 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 
 ---
 
-## Entités utilisées — Provenance complète
+## Entités utilisées - Provenance complète
 
-### Catégorie A — Climate (thermostats natifs)
+### Catégorie A - Climate (thermostats natifs)
 
 | Entité | Source |
 |--------|--------|
@@ -476,7 +476,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 | `climate.soufflant_salle_de_bain` | Meross |
 | `climate.clim_chambre_rm4_mini` | SmartIR |
 
-### Catégorie B — Utility Meters kWh (P1_UM_AMHQ)
+### Catégorie B - Utility Meters kWh (P1_UM_AMHQ)
 
 **Source :** `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml`
 
@@ -505,7 +505,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 | `sensor.clim_chambre_mensuel_kwh_um` | Mensuel |
 | `sensor.clim_chambre_annuel_kwh_um` | Annuel |
 
-### Catégorie C — Templates P1 TOTAL (agrégats)
+### Catégorie C - Templates P1 TOTAL (agrégats)
 
 **Source :** `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml`
 
@@ -515,7 +515,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 | `sensor.conso_clim_rad_total_quotidien` | kWh jour (somme des 6) |
 | `sensor.conso_clim_rad_total_mensuel` | kWh mois (somme des 6) |
 
-### Catégorie D — Templates P1 ui_dashboard
+### Catégorie D - Templates P1 ui_dashboard
 
 **Source :** `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml`
 
@@ -540,7 +540,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 | `sensor.sdb_seche_serviette_etat` | Mode Sèche-Serv SdB |
 | `sensor.clim_chambre_etat` | Mode Chambre |
 
-### Catégorie E — Sensors natifs puissance (W) — prises NOUS/Meross
+### Catégorie E - Sensors natifs puissance (W) - prises NOUS/Meross
 
 | Entité | Appareil |
 |--------|----------|
@@ -570,7 +570,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 | `sensor.clim_chambre_nous_current` | Clim Chambre (A) |
 | `sensor.clim_chambre_nous_energy` | Clim Chambre (kWh natif) |
 
-### Catégorie F — Templates P1 AVG (moyennes)
+### Catégorie F - Templates P1 AVG (moyennes)
 
 **Source :** `templates/P1_clim_chauffage/P1_AVG/P1_AVG.yaml`
 
@@ -590,7 +590,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 | `sensor.clim_chambre_avg_watts_quotidien` | Moy. W depuis minuit (Chambre) |
 | `sensor.clim_chambre_avg_watts_mensuel` | Moy. W depuis 1er du mois (Chambre) |
 
-### Catégorie G — DUT (Durée d'Utilisation Totale)
+### Catégorie G - DUT (Durée d'Utilisation Totale)
 
 **Source :** `sensors/P1_clim_chauffage/P1_DUT_clim_chauffage.yaml`
 
@@ -602,7 +602,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 | `sensor.dut_sdb_total` | Heures de fonctionnement SdB total (soufflant + sèche-serv) |
 | `sensor.dut_clim_chambre` | Heures de fonctionnement Chambre (aujourd'hui) |
 
-### Catégorie H — Températures intérieures + logique système
+### Catégorie H - Températures intérieures + logique système
 
 | Entité | Description |
 |--------|-------------|
@@ -615,7 +615,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 | `sensor.th_balcon_nord_temperature_trend` | Tendance T° (increasing/decreasing/flat) |
 | `sensor.temperature_moyenne_interieure` | T° moyenne intérieure |
 | `sensor.temperature_delta_affichage` | Δ T° intérieur/extérieur (badge en-tête) |
-| `sensor.ete_hiver` | Saison (Été / Hiver) — pour icônes DUT chips |
+| `sensor.ete_hiver` | Saison (Été / Hiver) - pour icônes DUT chips |
 
 ---
 

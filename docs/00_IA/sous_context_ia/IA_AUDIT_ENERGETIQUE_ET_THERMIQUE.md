@@ -90,6 +90,27 @@ directives actives de codage)*
 > - Chambre : **1 seul mur en carreau de plâtre** -> 3 autres murs béton/brique = plus isolée
 >   des pièces intérieures = perd plus de chaleur en hiver, reste plus fraîche en été.
 > Ce différentiel structurel contribue à l'écart DUT Bureau/Chambre indépendamment du volet.
+>
+> **Précision murs, portes & baies vitrées (complément Eric 2026-08-08) :**
+> - **Baies vitrées (communes aux 3 pièces chambre/bureau/salon) :** baie vitrée
+>   coulissante ~80% du mur + 20% isolation polystyrène + plaque de plâtre.
+>   Vitrage SIMPLE (non doublé) - grande surface de déperdition hivernale et
+>   d'apport solaire diurne. Facteur identique pour les 3 pièces, donc neutre
+>   dans la comparaison Chambre/Bureau.
+> - **CHAMBRE (4 murs) :** 2 murs pleins béton SANS porte (aucune communication
+>   d'air) + 1 mur carreau de plâtre **mitoyen SDB** + 1 mur = baie vitrée (80/20).
+>   -> 2 côtés béton = puits thermique ; seule la SDB peut rediffuser via le
+>   carreau de plâtre.
+> - **BUREAU (4 murs) :** 1 mur béton mitoyen chambre + 1 mur carreau de plâtre
+>   AVEC porte donnant dans le **couloir** (reste du mur mitoyen couloir)
+>   + 1 mur carreau de plâtre **mitoyen cuisine** + 1 mur = baie vitrée (80/20).
+>   -> 2 côtés carreau de plâtre (cuisine + couloir) = rediffusion passive ;
+>   1 seul côté béton vers la chambre.
+> - **Implication :** l'avantage hiver du Bureau est DOUBLE : (1) matériau
+>   (2 carreau de plâtre vs 1) et (2) mitoyenneté cuisine chaude. La chambre
+>   cumule béton sans porte + couloir + 1 seul carreau de plâtre = différentiel
+>   structurel permanent. La baie vitrée étant identique, elle n'explique PAS
+>   l'écart Chambre/Bureau.
 
 1. **SALON (Sud) :** 6.52m x 3.97m (25.88 m²).
    - *Équipement :* Split mural Hitachi RAS-35FH6, Volet motorisé.
@@ -118,8 +139,12 @@ directives actives de codage)*
 3. **BUREAU (Nord) :** 3.95m x 2.67m (10.55 m²).
    - *Équipement :* Split mural Daikin FTX35KNV1B (2018), Volet motorisé. Rideaux épais
      posés (22/02/2026).
-   - *Structure :* 2 murs en carreau de plâtre (voir note ci-dessus). Rediffusion thermique
-     depuis SDB et pièces adjacentes = avantage en hiver, légère contrainte en été.
+   - *Structure (4 murs, précision 2026-08-08) :* 1 mur béton mitoyen chambre +
+     1 mur carreau de plâtre avec porte donnant dans le couloir (reste du mur
+     mitoyen couloir) + 1 mur carreau de plâtre mitoyen cuisine + 1 mur = baie
+     vitrée coulissante simple vitrage (80/20, commune aux 3 pièces).
+     Rediffusion thermique depuis la cuisine via la cloison carreau de plâtre =
+     avantage en hiver, légère contrainte en été.
    - *Auto volet :* Ouvert uniquement si T° Ext [18°C - 25°C] - conforme yaml prod.
 4. **SDB (Interne) :** 1.96m x 1.58m (3.13 m²) Pas de fenêtre.
    - *Équipement :* Soufflant (2x1000W), Sèche-serviette (150W).
@@ -129,11 +154,16 @@ directives actives de codage)*
 5. **CHAMBRE (Nord) :** 3.95m x 2.85m (11.26 m²).
    - *Équipement :* Split mural Daikin FTX35KNV1B (2018). Pas de volet motorisé (store
      manuel). Rideaux épais posés (07/02/2026).
-   - *Structure :* 1 seul mur en carreau de plâtre, 3 murs béton/brique. Thermiquement
-     plus isolée des pièces intérieures = pièce la plus froide en hiver, la plus fraîche
-     en été. L'écart DUT Chambre/Bureau (+17% en janvier) est d'origine partiellement
-     structurelle (carreau de plâtre) ET comportementale (store manuel non automatisé).
-     Motoriser le store chambre réduirait l'écart mais ne l'effacerait pas.
+   - *Structure (4 murs, précision 2026-08-08) :* 2 murs pleins béton SANS porte +
+     1 mur carreau de plâtre mitoyen SDB + 1 mur = baie vitrée coulissante simple
+     vitrage (~80%) avec isolation polystyrène + BA13 (20%). La baie vitrée simple
+     est une grande surface de déperdition hivernale (facteur commun aux 3 pièces,
+     neutre dans la comparaison Bureau). Thermiquement la pièce la plus froide en
+     hiver, la plus fraîche en été. L'écart DUT Chambre/Bureau (+17% en janvier)
+     est d'origine partiellement structurelle (2 murs béton sans porte + 1 seul
+     carreau de plâtre + couloir) ET comportementale (store manuel non automatisé).
+     Motoriser le store réduirait l'écart mais ne l'effacerait pas - le facteur
+     structurel (enveloppe) domine.
 
 > Note : la stratégie thermique active (Mode Absence Hiver/Été, logique "Coeur du Système"
 > température cible/confort) reste dans `CLAUDE.md` (section LOGEMENT & STRATÉGIE THERMIQUE) -
@@ -471,6 +501,11 @@ Tableau "Prévu vs Réel" pour chaque automation testée :
 **Catégories de recommandations :**
 - 🔧 Corrections YAML (gratuit, impact immédiat) - **ROI non pertinent** (investissement 0€, ratio infini/instantané, ne pas le calculer)
 - 🏠 Travaux physiques (isolation, motorisation) - **ROI pertinent**, calculer avec le coût kWh réel (`sensor.tarif_heures_pleines_ttc` / `_creuses_ttc`, voir section 2)
+- 🏠 Motorisation store chambre : ne réduit QUE la part comportementale de l'écart
+  Chambre/Bureau - la part structurelle (2 murs béton sans porte + 1 seul carreau
+  de plâtre + couloir) est permanente. La baie vitrée simple vitrage étant commune
+  aux 2 pièces, la remplacer (double vitrage) améliorerait les 2 pièces + le salon,
+  sans réduire l'écart relatif Chambre/Bureau.
 - 📊 Monitoring amélioré (nouveaux capteurs, tags) - **ROI non pertinent** (le gain est qualitatif/informationnel, pas du kWh direct - ne pas forcer un chiffre)
 
 > Note 2026-07-19 : le ROI (Retour Sur Investissement, en mois) n'a de sens que pour la

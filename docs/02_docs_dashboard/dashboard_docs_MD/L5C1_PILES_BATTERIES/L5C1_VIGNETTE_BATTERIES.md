@@ -12,7 +12,7 @@
 | 📁 **Path** | `Dashboard/L5C1_13_Batteries_Piles/vignette_L5C1_batteries_piles_2026-05-14.yaml` |
 | 🔗 **Accès depuis** | Vue Home |
 | 🔗 **tap →** | `/dashboard-tablette/battery-bp` |
-| 🏗️ **Layout** | `custom:button-card` — grille 6 colonnes |
+| 🏗️ **Layout** | `custom:button-card` - grille 6 colonnes |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-05-10 |
@@ -20,7 +20,7 @@
 
 ---
 
-# 🔋 L5C1 — VIGNETTE PILES & BATTERIES
+# 🔋 L5C1 - VIGNETTE PILES & BATTERIES
 
 ---
 
@@ -29,8 +29,8 @@
 1. [Vue d'ensemble](#vue-densemble)
 2. [Architecture](#architecture)
 3. [Code](#code)
-4. [Logique JS — plages](#logique-js--plages)
-5. [Entités — groupes HA](#entités--groupes-ha)
+4. [Logique JS - plages](#logique-js--plages)
+5. [Entités - groupes HA](#entités--groupes-ha)
 6. [Dépannage](#dépannage)
 
 ---
@@ -41,9 +41,9 @@ Vignette compacte affichant un tableau 3 marques × 4 plages de batterie. Si un 
 
 ### Intégrations requises
 
-- ✅ **Philips Hue** (bridge natif) — `sensor.hue_smart_button_*_batterie`
-- ✅ **Zigbee2MQTT [Z2M]** — `sensor.*_battery`
-- ✅ **group** (natif HA) — `group.hue_devices`, `group.ikea_devices`, `group.sonoff_devices`
+- ✅ **Philips Hue** (bridge natif) - `sensor.hue_smart_button_*_batterie`
+- ✅ **Zigbee2MQTT [Z2M]** - `sensor.*_battery`
+- ✅ **group** (natif HA) - `group.hue_devices`, `group.ikea_devices`, `group.sonoff_devices`
 
 ### Cartes HACS
 
@@ -268,9 +268,9 @@ custom_fields:
 
 ---
 
-## 🔢 LOGIQUE JS — PLAGES
+## 🔢 LOGIQUE JS - PLAGES
 
-`state > lo && state <= up` — couverture continue 0–100 % sans trou :
+`state > lo && state <= up` - couverture continue 0–100 % sans trou :
 
 | Colonne | Plage | `lo` | `up` |
 |---------|-------|------|------|
@@ -283,7 +283,7 @@ custom_fields:
 
 ---
 
-## ⚙️ ENTITÉS — GROUPES HA (`groups/`)
+## ⚙️ ENTITÉS - GROUPES HA (`groups/`)
 
 > Contenir uniquement des `sensor.*` à état numérique (%). Un `light.*` ou `switch.*` retourne `NaN`.
 

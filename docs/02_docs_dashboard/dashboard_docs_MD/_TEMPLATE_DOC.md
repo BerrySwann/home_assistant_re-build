@@ -98,17 +98,17 @@
 {DESCRIPTION_ROLE}
 
 ### Entités
-- `{entity.id}` [{SOURCE}] — {DESCRIPTION}
+- `{entity.id}` [{SOURCE}] - {DESCRIPTION}
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 > Chaque entité est listée avec son **fichier source exact** dans le repo ReBuild.
 
 ---
 
-### 🌐 Intégrations natives HA (UI — aucun fichier YAML à créer)
+### 🌐 Intégrations natives HA (UI - aucun fichier YAML à créer)
 
 | Entité | Intégration | Configuré via |
 |--------|-------------|---------------|

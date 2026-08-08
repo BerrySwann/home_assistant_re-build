@@ -1,5 +1,5 @@
-# 🗂️ TRIAGE AUTOMATIONS PROD — VERSION FINALE 2026-04-05 13:03
-> Source : Export HA UI — 36 automations actives
+# 🗂️ TRIAGE AUTOMATIONS PROD - VERSION FINALE 2026-04-05 13:03
+> Source : Export HA UI - 36 automations actives
 
 ---
 
@@ -12,7 +12,7 @@
 | 3 | NOTIF - Gardien Énergétique (Anomalies) | Absent du ReBuild | ✅ FAIT |
 | 4 | ÉNERGIE - SURVEILLANCE GROS ÉLECTRO EN HP | Déclassée (31 déc. 2025) | ✅ FAIT |
 | 5 | Météo Vence : Suivi Barométrique | Absent du ReBuild | ✅ FAIT |
-| 6 | Raspberry CPU Fan PWM 6 States | Legacy RPi — absent du ReBuild | ⏳ À FAIRE |
+| 6 | Raspberry CPU Fan PWM 6 States | Legacy RPi - absent du ReBuild | ⏳ À FAIRE |
 
 ---
 
@@ -47,7 +47,7 @@
 | Gestion PC bureau : Scène de Fin + Notif | P2_prises/ |
 | Gestion TV Chambre : Scène de Fin + Notif | P2_prises/ |
 
-### CAPTEURS TEMPÉRATURE (2 — rangés dans meteo/)
+### CAPTEURS TEMPÉRATURE (2 - rangés dans meteo/)
 | Alias PROD | Dossier ReBuild |
 |:-----------|:----------------|
 | Update previous humidity | meteo/ |
@@ -74,7 +74,7 @@
 | A - Chauffage Cuisine (4h45-7h LMMJ / 5h45-8h VSD) | P1_cuisine/ |
 | B - Chauffage Cuisine Vacances | P1_cuisine/ |
 
-### SDB (2 — déployées)
+### SDB (2 - déployées)
 | Alias PROD | Dossier ReBuild |
 |:-----------|:----------------|
 | A - 2026/02/01 - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT | P1_sdb/ |
@@ -95,25 +95,25 @@
 
 ---
 
-## 🗑️ HORS PROD — ReBuild non déployé
+## 🗑️ HORS PROD - ReBuild non déployé
 
 | # | Alias ReBuild | Raison |
 |:--|:--------------|:-------|
-| 1 | A - SALLE DE BAIN — DÉMARRAGE ET INITIALISATION DU SOUFFLANT | Hors PROD |
-| 2 | A - SALLE DE BAIN — GESTION INTELLIGENTE SOUFFLANT | Hors PROD |
-| 3 | B - SALLE DE BAIN — GESTION RÉSISTANCES DU SOUFFLANT | Hors PROD |
-| 4 | C - SALLE DE BAIN — GESTION ARRÊT SÉCURISÉ DU SOUFFLANT | Hors PROD |
+| 1 | A - SALLE DE BAIN - DÉMARRAGE ET INITIALISATION DU SOUFFLANT | Hors PROD |
+| 2 | A - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT | Hors PROD |
+| 3 | B - SALLE DE BAIN - GESTION RÉSISTANCES DU SOUFFLANT | Hors PROD |
+| 4 | C - SALLE DE BAIN - GESTION ARRÊT SÉCURISÉ DU SOUFFLANT | Hors PROD |
 | 5 | E - Minuterie Sèche Serviettes (Timer 2h) | Hors PROD |
-| 6 | Gestion Optimisée du Store Salon (Anti-Reflet PC) | Abandonné — PROD Simple retenue |
+| 6 | Gestion Optimisée du Store Salon (Anti-Reflet PC) | Abandonné - PROD Simple retenue |
 | 7 | Mettre à jour le texte du temps écoulé | Hors PROD |
 
 ---
 
-## ⏳ À RÉCUPÉRER DEPUIS PROD — YAML HA UI (1)
+## ⏳ À RÉCUPÉRER DEPUIS PROD - YAML HA UI (1)
 
 | # | Alias PROD | Dossier cible | Raison |
 |:--|:-----------|:--------------|:-------|
-| 1 | Gestion Simple du Store Salon (Matin/Soir) | automations_corrige/stores/ | Alias différent du ReBuild — PROD Simple retenue |
+| 1 | Gestion Simple du Store Salon (Matin/Soir) | automations_corrige/stores/ | Alias différent du ReBuild - PROD Simple retenue |
 
 ---
 
@@ -130,4 +130,4 @@
 
 ---
 
-*Version finale — 2026-04-05 13:03*
+*Version finale - 2026-04-05 13:03*

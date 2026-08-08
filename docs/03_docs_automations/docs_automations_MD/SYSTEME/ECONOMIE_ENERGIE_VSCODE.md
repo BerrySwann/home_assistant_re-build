@@ -1,4 +1,4 @@
-# SYSTÈME — ÉCONOMIE ÉNERGIE VS CODE
+# SYSTÈME - ÉCONOMIE ÉNERGIE VS CODE
 
 > **Fichier :** `automations_corrige/systeme/economie_energie_vscode.yaml`
 > **Mode HA :** `single`

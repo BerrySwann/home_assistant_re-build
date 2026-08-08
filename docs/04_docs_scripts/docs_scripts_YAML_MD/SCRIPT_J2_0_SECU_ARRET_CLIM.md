@@ -18,7 +18,7 @@
 
 ---
 
-# 🔒 Script J 2-0 SECU — ARRÊT CLIM PROTÉGÉ
+# 🔒 Script J 2-0 SECU - ARRÊT CLIM PROTÉGÉ
 
 Exécutant commun aux 3 pièces. Gère la **protection thermique** : attend que la clim descende sous 9W avant de couper la prise, avec un timeout de 10 minutes.
 
@@ -44,7 +44,7 @@ script.j_1_x_<piece>_clim_on_off_intelligent  (sur OFF)
 
 ---
 
-## 📍 J 2-0 — YAML COMPLET
+## 📍 J 2-0 - YAML COMPLET
 
 **Script ID** : `j_2_0_secu_arret_clim_protege`
 
@@ -157,7 +157,7 @@ j_2_0_secu_arret_clim_protege:
 
 ## ⚠️ PIÈGES CONNUS
 
-- **Ne jamais appeler J 2-0 directement depuis le dashboard** — toujours passer par J 1-x.
+- **Ne jamais appeler J 2-0 directement depuis le dashboard** - toujours passer par J 1-x.
 - **`mode: parallel`** est obligatoire : sans ça, l'arrêt d'une pièce bloque les autres.
-- **Timeout 10 min** : si la clim consomme toujours > 9W après 10 min, la prise EST MAINTENUE (pas de coupure forcée) — notification `ERREUR ARRÊT CLIM` envoyée.
+- **Timeout 10 min** : si la clim consomme toujours > 9W après 10 min, la prise EST MAINTENUE (pas de coupure forcée) - notification `ERREUR ARRÊT CLIM` envoyée.
 - **Le verrou** (`input_boolean

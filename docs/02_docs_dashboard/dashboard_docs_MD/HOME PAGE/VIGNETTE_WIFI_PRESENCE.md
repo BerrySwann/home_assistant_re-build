@@ -12,8 +12,8 @@
 | 📁 **Path** | `Dashboard/PAGE_Home/card_presence_home_2026-06-13.yaml` |
 | 🔗 **Accès depuis** | Vue principale Home |
 | 🏗️ **Layout** | `bubble-card separator + 2× bubble-card button` |
-| 🔴 **Statut** | Affichage présence ✅ — Liaison clim (P4 → P1) 🔧 à faire en dernier |
-| 🚧 **Bloquant** | Automations clim basées sur `sensor.groupe` — à documenter après finalisation Pôle 1 |
+| 🔴 **Statut** | Affichage présence ✅ - Liaison clim (P4 → P1) 🔧 à faire en dernier |
+| 🚧 **Bloquant** | Automations clim basées sur `sensor.groupe` - à documenter après finalisation Pôle 1 |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-03-01 |
@@ -21,7 +21,7 @@
 
 ---
 
-# 📶 L1C2 — Vignette : Détection WiFi & Présence
+# 📶 L1C2 - Vignette : Détection WiFi & Présence
 
 ---
 
@@ -50,8 +50,8 @@ La couleur du séparateur est pilotée par `sensor.etat_wifi_maison` qui agrège
 
 ### Intégrations requises
 
-- ✅ `mobile_app` (Companion App sur Poco X7 Pro × 2) — fournit `device_tracker.*`
-- ✅ `person` (intégration native HA) — combine `device_tracker` (eric / mamour) + zones
+- ✅ `mobile_app` (Companion App sur Poco X7 Pro × 2) - fournit `device_tracker.*`
+- ✅ `person` (intégration native HA) - combine `device_tracker` (eric / mamour) + zones
 
 ### Cartes HACS utilisées
 
@@ -81,7 +81,7 @@ La couleur du séparateur est pilotée par `sensor.etat_wifi_maison` qui agrège
 
 ---
 
-## 📍 SECTION — Séparateur "Personne(s)"
+## 📍 SECTION - Séparateur "Personne(s)"
 
 ### Code
 
@@ -137,7 +137,7 @@ Séparateur de section avec indicateur coloré global. Le `sub_button` affiche l
 
 ---
 
-## 📍 SECTION — Carte Présence Eric
+## 📍 SECTION - Carte Présence Eric
 
 ### Code
 
@@ -169,7 +169,7 @@ Affiche l'état de présence de Eric (`home` / `not_home` / nom de zone) avec l'
 
 ---
 
-## 📍 SECTION — Carte Présence Mamour
+## 📍 SECTION - Carte Présence Mamour
 
 ### Code
 
@@ -198,15 +198,15 @@ Affiche l'état de présence de Eric (`home` / `not_home` / nom de zone) avec l'
 
 ### Rôle
 
-Identique à la carte Eric — affiche la présence de Mamour avec sa photo de profil. Le champ `name: Mamour` surcharge le nom de l'entité `device_tracker.mamour` pour un affichage plus lisible.
+Identique à la carte Eric - affiche la présence de Mamour avec sa photo de profil. Le champ `name: Mamour` surcharge le nom de l'entité `device_tracker.mamour` pour un affichage plus lisible.
 
 ---
 
-## 📊 ENTITÉS UTILISÉES — PROVENANCE COMPLÈTE
+## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ---
 
-### 🌐 Intégrations natives HA (UI — aucun fichier YAML à créer)
+### 🌐 Intégrations natives HA (UI - aucun fichier YAML à créer)
 
 | Entité | Intégration | Configuré via |
 |--------|-------------|---------------|
@@ -219,7 +219,7 @@ Identique à la carte Eric — affiche la présence de Mamour avec sa photo de p
 
 ### 📁 `templates/06_1_phones_wifi_cellular_card_autom.yaml`
 
-> Capteurs de détection WiFi — vérifient la connexion à `Freebox_GG` pour chaque téléphone et calculent l'état agrégé du domicile.
+> Capteurs de détection WiFi - vérifient la connexion à `Freebox_GG` pour chaque téléphone et calculent l'état agrégé du domicile.
 
 | Entité | unique_id | Rôle |
 |--------|-----------|------|

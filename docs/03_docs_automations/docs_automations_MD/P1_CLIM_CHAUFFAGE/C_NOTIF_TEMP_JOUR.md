@@ -1,4 +1,4 @@
-# (C) NOTIFICATION TEMPÉRATURE — JOUR (07H30 → 21H00)
+# (C) NOTIFICATION TEMPÉRATURE - JOUR (07H30 → 21H00)
 
 > **Fichier :** `automations_corrige/P1_clim_chauffage/C_notif_temp_jour.yaml`
 > **Mode HA :** `queued`
@@ -52,4 +52,4 @@ de disponibilité des capteurs avant envoi.
 | Titre | Condition |
 |:---|:---|
 | `[ANJ] Erreur Capteurs` | Capteur indisponible |
-| `[Automa. Notif. Jrs]` | Normal — contenu du sensor message |
+| `[Automa. Notif. Jrs]` | Normal - contenu du sensor message |

@@ -1,13 +1,13 @@
-# PALETTE COULEURS — PRISES CONNECTÉES PAR PIÈCE (Pôle 2)
+# PALETTE COULEURS - PRISES CONNECTÉES PAR PIÈCE (Pôle 2)
 
 > **Source de vérité** : `IA_CONTEXT_BASE.md` § Palette Officielle (Pôles 3 & 2)
 > **Référence dashboard** : `apexcharts-card` (donuts + barres) et `--mdc-theme-primary` des `tabbed-card`.
 > **Entités sources** : `Dashboard/L2C1_04_Energie_Generale/page_L2C1_energie_mensuel_2026-06-18.yaml` / `Dashboard/L2C1_04_Energie_Generale/page_L2C1_energie_temps_reel_2026-06-18.yaml`
-> **Dernière mise à jour** : 2026-03-08 (Refonte complète — entités réelles + palette Gemini)
+> **Dernière mise à jour** : 2026-03-08 (Refonte complète - entités réelles + palette Gemini)
 
 ---
 
-## 1. ENTRÉE — Gris clair
+## 1. ENTRÉE - Gris clair
 
 | Appareil       | Entité (`_quotidien_kwh_um`)                                  | Couleur              |
 |----------------|---------------------------------------------------------------|----------------------|
@@ -18,7 +18,7 @@
 
 ---
 
-## 4. SALON — Rose (3 appareils)
+## 4. SALON - Rose (3 appareils)
 
 | Appareil       | Entité (`_quotidien_kwh_um`)                                  | Couleur                  |
 |----------------|---------------------------------------------------------------|--------------------------|
@@ -30,7 +30,7 @@
 
 ---
 
-## 5. CUISINE — Violet (8 appareils)
+## 5. CUISINE - Violet (8 appareils)
 
 ### Cuisson / Électroménager chaud (6 appareils)
 
@@ -54,7 +54,7 @@
 
 ---
 
-## 7. BUREAU — Orange (2 appareils)
+## 7. BUREAU - Orange (2 appareils)
 
 | Appareil       | Entité (`_quotidien_kwh_um`)                                  | Couleur                  |
 |----------------|---------------------------------------------------------------|--------------------------|
@@ -65,7 +65,7 @@
 
 ---
 
-## 9. CHAMBRE — Vert (2 appareils)
+## 9. CHAMBRE - Vert (2 appareils)
 
 | Appareil    | Entité (`_quotidien_kwh_um`)                                  | Couleur                  |
 |-------------|---------------------------------------------------------------|--------------------------|
@@ -76,7 +76,7 @@
 
 ---
 
-## 10. AUTRE — Veilles / Standby
+## 10. AUTRE - Veilles / Standby
 
 | Appareil    | Entité                                                        | Couleur |
 |-------------|---------------------------------------------------------------|---------|

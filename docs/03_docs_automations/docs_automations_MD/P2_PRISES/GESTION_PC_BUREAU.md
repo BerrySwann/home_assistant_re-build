@@ -1,4 +1,4 @@
-# GESTION PC BUREAU — SCÈNE DE FIN + NOTIF
+# GESTION PC BUREAU - SCÈNE DE FIN + NOTIF
 
 > **Fichier :** `docs_automations/TREE_CORRIGE/P2_prises/gestion_pc_bureau_scene_de_fin_notif.yaml`
 > **ID HA :** `1775245732227`
@@ -23,7 +23,7 @@ ou détection veille < 40W pendant 2 min. Pilote uniquement l'éclairage `light.
 
 ---
 
-## ⚙️ Actions — Choose
+## ⚙️ Actions - Choose
 
 **ALLUMAGE (bouton ON) :**
 - `trigger.payload_json.action == 'on'` OU `trigger.id == 'bouton_mqtt'`
@@ -54,7 +54,7 @@ ou détection veille < 40W pendant 2 min. Pilote uniquement l'éclairage `light.
 
 ## ⚠️ Notes techniques
 
-- Topic : `zigbee2mqtt2` (LXC 200) — pas `zigbee2mqtt`.
-- `trigger.payload_json.action` utilisé directement — fonctionne car le trigger MQTT fournit toujours du JSON.
+- Topic : `zigbee2mqtt2` (LXC 200) - pas `zigbee2mqtt`.
+- `trigger.payload_json.action` utilisé directement - fonctionne car le trigger MQTT fournit toujours du JSON.
 - Le trigger `extinction_conso` est géré par `condition: trigger id: extinction_conso` (pas de payload_json).
 - `mode: parallel` : permet allumage et extinction simultanés si besoin.

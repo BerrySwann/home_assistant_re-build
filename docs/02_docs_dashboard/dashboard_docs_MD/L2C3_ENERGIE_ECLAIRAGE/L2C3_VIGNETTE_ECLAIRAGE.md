@@ -12,7 +12,7 @@
 | 📁 **Path** | `Dashboard/L2C3_06_Energie_Eclairage/vignette_L2C3_energie_eclairage_2026-05-13.yaml` |
 | 🔗 **Accès depuis** | Vue Home |
 | 🔗 **tap →** | `/dashboard-tablette/energie-lampes` |
-| 🏗️ **Layout** | `custom:button-card` — grille 3 colonnes |
+| 🏗️ **Layout** | `custom:button-card` - grille 3 colonnes |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-04-29 |
@@ -20,7 +20,7 @@
 
 ---
 
-# 💡 L2C3 — VIGNETTE CONSO ÉNERGIE ÉCLAIRAGE
+# 💡 L2C3 - VIGNETTE CONSO ÉNERGIE ÉCLAIRAGE
 
 ---
 
@@ -43,7 +43,7 @@ Les pièces Bureau et Chambre ont une logique `isEcoSensitive` : le mode `Éco.`
 
 ### Chaîne TPL (depuis 2026-04-29)
 
-Les entités kWh proviennent désormais de la chaîne template P3_ENERGIE_TPL — plus des Utility Meters bruts :
+Les entités kWh proviennent désormais de la chaîne template P3_ENERGIE_TPL - plus des Utility Meters bruts :
 
 ```
 P3_UM_AMHQ_1_UNITE  →  {slug}_{cycle}_um
@@ -54,10 +54,10 @@ P3_TPL_AMHQ_3_TOTAL →  eclairage_total_unit_{cycle}_kwh_tpl  ← vignette
 
 ### Intégrations requises
 
-- ✅ **Philips Hue** (bridge natif) — états et puissance lampes
-- ✅ **Utility Meters P3** — `P3_UM_AMHQ_1_UNITE.yaml` (source de base)
-- ✅ **Templates P3_ENERGIE_TPL** — `_um_kwh_tpl` (relais kWh)
-- ✅ **Templates P3_eclairage/ui_dashboard** — `sensor.lumiere_*_etat`
+- ✅ **Philips Hue** (bridge natif) - états et puissance lampes
+- ✅ **Utility Meters P3** - `P3_UM_AMHQ_1_UNITE.yaml` (source de base)
+- ✅ **Templates P3_ENERGIE_TPL** - `_um_kwh_tpl` (relais kWh)
+- ✅ **Templates P3_eclairage/ui_dashboard** - `sensor.lumiere_*_etat`
 
 ### Cartes HACS
 
@@ -252,18 +252,18 @@ custom_fields:
 
 ## 🔢 LOGIQUE JS
 
-### Couleur des pièces — `getCol(entityId, isEcoSensitive)`
+### Couleur des pièces - `getCol(entityId, isEcoSensitive)`
 
 | État sensor | `isEcoSensitive` | Couleur |
 |-------------|-----------------|---------|
-| `Éteint` | — | `white` |
+| `Éteint` | - | `white` |
 | `Éco.` | `true` | `white` |
 | `Éco.` | `false` | `lightgreen` |
-| Tout autre | — | `lightgreen` |
+| Tout autre | - | `lightgreen` |
 
 Bureau et Chambre passent `isEcoSensitive = true` : le mode Éco ne colore pas la pièce en vert.
 
-### Affichage des valeurs — `safeState(entityId)`
+### Affichage des valeurs - `safeState(entityId)`
 
 - `unavailable` / `unknown` / `NaN` → `N/A` en gris
 - `< 1 kWh` → converti en Wh (ex : `345 Wh`)
@@ -274,7 +274,7 @@ Bureau et Chambre passent `isEcoSensitive = true` : le mode Éco ne colore pas l
 
 ## 📊 ENTITÉS UTILISÉES
 
-### États d'allumage — `sensor.lumiere_*_etat`
+### États d'allumage - `sensor.lumiere_*_etat`
 
 > Définis dans `templates/P3_eclairage/ui_dashboard/etats_status.yaml`
 
@@ -287,7 +287,7 @@ Bureau et Chambre passent `isEcoSensitive = true` : le mode Éco ne colore pas l
 | `sensor.lumiere_salle_de_bain_etat` | SDB | non |
 | `sensor.lumiere_chambre_etat` | Chambre | **oui** |
 
-### kWh quotidiens — `sensor.eclairage_*_quotidien_um_kwh_tpl`
+### kWh quotidiens - `sensor.eclairage_*_quotidien_um_kwh_tpl`
 
 > Source : `P3_UM_AMHQ_1_UNITE` → `P3_TPL_AMHQ_1_UNITE` → `P3_TPL_AMHQ_2_ZONE` / `P3_TPL_AMHQ_3_TOTAL`
 
@@ -301,7 +301,7 @@ Bureau et Chambre passent `isEcoSensitive = true` : le mode Éco ne colore pas l
 | `sensor.eclairage_chambre_4_quotidien_um_kwh_tpl` | Chambre (4 lampes) | `P3_TPL_AMHQ_2_ZONE` |
 | `sensor.eclairage_total_unit_quotidien_kwh_tpl` | **TOTAL appartement (19)** | `P3_TPL_AMHQ_3_TOTAL` |
 
-### kWh mensuels — `sensor.eclairage_*_mensuel_um_kwh_tpl`
+### kWh mensuels - `sensor.eclairage_*_mensuel_um_kwh_tpl`
 
 > Mêmes zones, cycle mensuel
 
@@ -327,7 +327,7 @@ Les `_um_kwh_tpl` dépendent des `_um` qui dépendent eux-mêmes du Hue Bridge.
 L'état du `sensor.lumiere_*_etat` n'est pas `Éteint` mais pas non plus reconnu comme allumé. Vérifier les valeurs possibles dans `etats_status.yaml`.
 
 ### Bureau/Chambre toujours blancs en mode Éco
-Comportement voulu — `isEcoSensitive = true` maintient la couleur blanche en mode Éco.
+Comportement voulu - `isEcoSensitive = true` maintient la couleur blanche en mode Éco.
 
 ---
 
@@ -346,18 +346,18 @@ Comportement voulu — `isEcoSensitive = true` maintient la couleur blanche en m
 
 ## 🔗 FICHIERS LIÉS
 
-### Configuration YAML (sources HA — ReBuild)
+### Configuration YAML (sources HA - ReBuild)
 
-- `templates/P3_eclairage/ui_dashboard/etats_status.yaml` — `sensor.lumiere_*_etat`
-- `utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml` — UM source (19 ampoules)
-- `templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml` — relais kWh unité
-- `templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml` — agrégat par zone
-- `templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_3_TOTAL.yaml` — total appartement
+- `templates/P3_eclairage/ui_dashboard/etats_status.yaml` - `sensor.lumiere_*_etat`
+- `utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml` - UM source (19 ampoules)
+- `templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml` - relais kWh unité
+- `templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml` - agrégat par zone
+- `templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_3_TOTAL.yaml` - total appartement
 
 ### Documentation
 
-- [`PAGE_ENERGIE_ECLAIRAGE.md`](./PAGE_ENERGIE_ECLAIRAGE.md) — YAML complet de la page `/dashboard-tablette/energie-lampes`
-- [`docs/DEPENDANCES_GLOBALES.md`](../DEPENDANCES_GLOBALES.md) — chaîne de dépendances L2C3
+- [`PAGE_ENERGIE_ECLAIRAGE.md`](./PAGE_ENERGIE_ECLAIRAGE.md) - YAML complet de la page `/dashboard-tablette/energie-lampes`
+- [`docs/DEPENDANCES_GLOBALES.md`](../DEPENDANCES_GLOBALES.md) - chaîne de dépendances L2C3
 
 ---
 

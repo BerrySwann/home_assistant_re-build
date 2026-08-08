@@ -12,7 +12,7 @@
 | 📁 **Path** | `Dashboard/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-05-14.yaml` |
 | 🔗 **Accès depuis** | Tap vignette L5C1 → `/dashboard-tablette/battery-bp` |
 | 🔗 **Retour vers** | Tap header → `/dashboard-tablette/0` |
-| 🏗️ **Layout** | `type: grid` — 5 sections `battery-state-card` |
+| 🏗️ **Layout** | `type: grid` - 5 sections `battery-state-card` |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
 | 📅 **Modifié le** | 2026-03-07 |
@@ -20,7 +20,7 @@
 
 ---
 
-# 🔋 PAGE BATTERIES — DÉTAIL PAR TYPE
+# 🔋 PAGE BATTERIES - DÉTAIL PAR TYPE
 
 ---
 
@@ -29,11 +29,11 @@
 1. [Vue d'ensemble](#vue-densemble)
 2. [Architecture](#architecture)
 3. [Structure commune](#structure-commune)
-4. [Section 1 — Boutons HUE](#section-1--boutons-hue)
-5. [Section 2 — Boutons & détecteurs IKEA](#section-2--boutons--détecteurs-ikea)
-6. [Section 3 — Contacts fenêtres IKEA](#section-3--contacts-fenêtres-ikea)
-7. [Section 4 — Contacts fenêtres SONOFF](#section-4--contacts-fenêtres-sonoff)
-8. [Section 5 — Thermostats SONOFF](#section-5--thermostats-sonoff)
+4. [Section 1 - Boutons HUE](#section-1--boutons-hue)
+5. [Section 2 - Boutons & détecteurs IKEA](#section-2--boutons--détecteurs-ikea)
+6. [Section 3 - Contacts fenêtres IKEA](#section-3--contacts-fenêtres-ikea)
+7. [Section 4 - Contacts fenêtres SONOFF](#section-4--contacts-fenêtres-sonoff)
+8. [Section 5 - Thermostats SONOFF](#section-5--thermostats-sonoff)
 9. [Dépannage](#dépannage)
 
 ---
@@ -54,7 +54,7 @@ Page complète listant tous les équipements à batterie, découpée en 5 sectio
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  HEADER — "BATTERIES (Boutons / Thermostats…)"      │
+│  HEADER - "BATTERIES (Boutons / Thermostats…)"      │
 │  tap → /dashboard-tablette/0                        │
 ├─────────────────────────────────────────────────────┤
 │  [1] Boutons HUE              11 entités            │
@@ -78,7 +78,7 @@ Page complète listant tous les équipements à batterie, découpée en 5 sectio
 
 ## 📍 STRUCTURE COMMUNE
 
-Chaque section suit le même schéma — seuls le `heading`, l'icône du collapse et la liste d'entités varient.
+Chaque section suit le même schéma - seuls le `heading`, l'icône du collapse et la liste d'entités varient.
 
 ### Blocs identiques dans les 5 sections
 
@@ -123,7 +123,7 @@ card_mod:
 
 ---
 
-## 📍 SECTION 1 — Boutons HUE
+## 📍 SECTION 1 - Boutons HUE
 
 ### Collapse
 `"Boutons HUE (Total : {count} / Mini. : {min} %)"` · `mdi:light-switch`
@@ -146,7 +146,7 @@ card_mod:
 
 ---
 
-## 📍 SECTION 2 — Boutons & détecteurs IKEA
+## 📍 SECTION 2 - Boutons & détecteurs IKEA
 
 ### Collapse
 `"Capteurs IKEA (Total : {count} / Mini. : {min} %)"` · `mdi:hammer-screwdriver`
@@ -166,7 +166,7 @@ card_mod:
 
 ---
 
-## 📍 SECTION 3 — Contacts fenêtres IKEA
+## 📍 SECTION 3 - Contacts fenêtres IKEA
 
 ### Collapse
 `"Contacts de fenêtres IKEA (Total : {count} / Mini. : {min} %)"` · `mdi:window-closed-variant`
@@ -182,7 +182,7 @@ card_mod:
 
 ---
 
-## 📍 SECTION 4 — Contacts fenêtres SONOFF
+## 📍 SECTION 4 - Contacts fenêtres SONOFF
 
 ### Collapse
 `"Contacts de fenêtres SONOFF (Total : {count} / Mini. : {min} %)"` · `mdi:window-closed-variant`
@@ -198,7 +198,7 @@ card_mod:
 
 ---
 
-## 📍 SECTION 5 — Thermostats SONOFF
+## 📍 SECTION 5 - Thermostats SONOFF
 
 ### Collapse
 `"Thermostats SONOFF (Total : {count} / Mini. : {min} %)"` · `mdi:thermometer`
@@ -223,7 +223,7 @@ card_mod:
 Nom HACS exact : `battery-state-card` (pas `batterie-state-card`). Vider le cache navigateur après installation.
 
 ### Une section affiche des appareils d'une autre section
-Les `filter/exclude` ne filtrent que les entités exclues — les entités d'une section peuvent apparaître dans une autre si elles ne sont pas dans le collapse. Vérifier que chaque entité est bien listée dans **une seule** section.
+Les `filter/exclude` ne filtrent que les entités exclues - les entités d'une section peuvent apparaître dans une autre si elles ne sont pas dans le collapse. Vérifier que chaque entité est bien listée dans **une seule** section.
 
 ---
 
@@ -242,7 +242,7 @@ Les `filter/exclude` ne filtrent que les entités exclues — les entités d'une
 
 ---
 
-← Retour : `L5C1_VIGNETTE_BATTERIES.md` | → Suivant : —
+← Retour : `L5C1_VIGNETTE_BATTERIES.md` | → Suivant : -
 
 
 <!-- obsidian-wikilinks -->

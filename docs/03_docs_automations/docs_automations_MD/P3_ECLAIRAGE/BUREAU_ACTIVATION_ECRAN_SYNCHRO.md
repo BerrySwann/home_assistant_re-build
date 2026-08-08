@@ -1,4 +1,4 @@
-# Bureau — Activation Écran Synchronisation
+# Bureau - Activation Écran Synchronisation
 
 **Catégorie :** P3_eclairage
 **Alias HA :** `BUREAU_ACTIVATION_ECRAN_SYNCHRO`

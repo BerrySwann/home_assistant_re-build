@@ -5,7 +5,7 @@
 
 ## 🔌 INTÉGRATIONS HA INSTALLÉES
 
-### HACS — Custom Components
+### HACS - Custom Components
 
 | Slug | Nom | Rôle |
 |:-----|:----|:-----|
@@ -31,8 +31,8 @@
 | `moon` | Phase lunaire (`lune` = nom FR intégration Core `moon`) |
 | `season` | Détection saison courante (`saison` = nom FR) |
 | `feedreader` | Suivi flux RSS (releases GitHub) |
-| `proxmoxve` | Supervision Proxmox PVE — CPU %, RAM %, Storage %, Status (L4C1) — 6 appareils |
-| `systemmonitor` | Supervision systeme Mini PC — CPU, RAM, disque (L4C2) — inclut "Vitesse CPU" |
+| `proxmoxve` | Supervision Proxmox PVE - CPU %, RAM %, Storage %, Status (L4C1) - 6 appareils |
+| `systemmonitor` | Supervision systeme Mini PC - CPU, RAM, disque (L4C2) - inclut "Vitesse CPU" |
 | `mobile_app` | 7 appareils : 2 Poco (accroche WiFi présence P4) + autres (L5C2 batteries portables) |
 | `local_file` | 2 entités météo : `MF_alerte_today` + `MF_alerte_tomorrow` (images vigilance Météo France) |
 | `file` | 2 entités notify : `diag_conso_elec.txt` + `ecart_liky_vs_nodon.txt` (logs /homeassistant/notifs/) |
@@ -42,21 +42,21 @@
 
 ### Add-ons Supervisor (7 add-ons actifs)
 
-> ⚠️ Zigbee2MQTT et MariaDB tournent sur LXC Proxmox (LXC 200 / LXC 201) — pas des add-ons HA.
+> ⚠️ Zigbee2MQTT et MariaDB tournent sur LXC Proxmox (LXC 200 / LXC 201) - pas des add-ons HA.
 
 | Add-on | Slug | Role |
 |:-------|:-----|:-----|
 | Advanced SSH & Web Terminal | `a0d7b954_ssh` | Terminal SSH + Web Terminal |
 | Cloudflared | `9074a9fa_cloudflared` | Tunnel HTTPS acces distant securise |
 | Linky | `cf6b56a3_linky` | Donnees MyElectricalData (index HP/HC, historique conso) -> P0 |
-| Mosquitto broker | `core_mosquitto` | Broker MQTT — bus de communication Blitzortung + capteurs MQTT |
+| Mosquitto broker | `core_mosquitto` | Broker MQTT - bus de communication Blitzortung + capteurs MQTT |
 | Samba share | `core_samba` | Acces reseau aux fichiers /homeassistant/ (H:\) |
 | Studio Code Server | `a0d7b954_vscode` | VSCode integre HA (edition fichiers YAML en prod) |
 | Tailscale | `a0d7b954_tailscale` | VPN acces distant securise a HA |
 
 ---
 
-## ⚠️ RÈGLE D'AUDIT — FICHIER DASHBOARD FOURNI
+## ⚠️ RÈGLE D'AUDIT - FICHIER DASHBOARD FOURNI
 
 À chaque fichier YAML dashboard fourni par l'utilisateur, vérifier **systématiquement** :
 - Les `type: custom:*` présents → croiser avec **CARTES HACS** ci-dessous
@@ -106,8 +106,8 @@
 | | `meteocss-card` | Carte meteo CSS animee (HACS : "MeteoCSS Card") |
 | | `html-jinja2-template-card` | Templates Jinja2 inline dans le dashboard |
 | | `scheduler-card` | Interface visuelle du planificateur (scheduler) |
-| **Icônes** | `hass-hue-icons` | Pack icônes Hue — prefix `hue:` (ampoules, fixtures) |
-| | `custom-brand-icons` | Pack icônes marques — prefix `phu:` (ex: `phu:proxmox`) |
+| **Icônes** | `hass-hue-icons` | Pack icônes Hue - prefix `hue:` (ampoules, fixtures) |
+| | `custom-brand-icons` | Pack icônes marques - prefix `phu:` (ex: `phu:proxmox`) |
 
 ---
 
