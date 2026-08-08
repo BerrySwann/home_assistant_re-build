@@ -1,4 +1,4 @@
-﻿﻿#!/usr/bin/env bash
+﻿﻿﻿﻿﻿#!/usr/bin/env bash
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ AUDIT MD5 — 3 PASSES : TREE → MD5 PROD → MD5 GITHUB → RAPPORT          │
 # ╰──────────────────────────────────────────────────────────────────────────╯
@@ -62,8 +62,8 @@ echo "  → /tmp usage : 1 fichier yaml à la fois (~KB, réutilisé)" >> "$LOG"
 echo "" >> "$LOG"
 
 echo "── COMPARAISON PROD vs GITHUB ───────────────────────────────────────────────" >> "$LOG"
-printf "%-68s | %-8s | %-8s | %s\n" "FICHIER" "PROD" "GITHUB" "STATUT" >> "$LOG"
-printf '%.0s─' {1..105} >> "$LOG"; echo "" >> "$LOG"
+printf "%-110s | %-8s | %-8s | %s\n" "FICHIER" "PROD" "GITHUB" "STATUT" >> "$LOG"
+printf '%.0s─' {1..147} >> "$LOG"; echo "" >> "$LOG"
 
 OK=0; DIFF_COUNT=0; PUSH_MANQUANT=0
 github_md5=""
@@ -90,16 +90,16 @@ while IFS='|' read -r file prod_md5; do
         fi
     fi
 
-    printf "%-68s | %.8s | %.8s | %s\n" \
+    printf "%-110s | %.8s | %.8s | %s\n" \
         "$file" "${prod_md5:-??????}" "${github_md5:-??????}" "$statut" >> "$LOG"
 done < "$TMP_PROD"
 
 # ── RÉSUMÉ ────────────────────────────────────────────────────────────────
 {
 echo ""
-printf '%.0s─' {1..105}; echo ""
+printf '%.0s─' {1..147}; echo ""
 echo "RÉSULTAT : $TOTAL fichiers — ✅ $OK SYNC · ❌ $DIFF_COUNT DIFF · ⚠️ $PUSH_MANQUANT PUSH MANQUANT"
-printf '%.0s─' {1..105}; echo ""
+printf '%.0s─' {1..147}; echo ""
 } >> "$LOG"
 
 rm -f "$TMP_TREE" "$TMP_PROD" "$TMP_GH"

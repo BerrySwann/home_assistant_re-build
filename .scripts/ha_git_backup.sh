@@ -87,7 +87,7 @@ fi
 # tournait entre la creation du nouveau fichier et la suppression de l'ancien (fantomes GitHub)
 git add -A >/dev/null 2>&1
 
-CHANGED="$(git diff --cached --name-only | grep -E '\.(ya?ml|md)$' | sort -u || true)"
+CHANGED="$(git diff --cached --name-only | grep -E '\.(ya?ml|md|sh)$' | sort -u || true)"
 AHEAD="$(git rev-list @{u}..HEAD --count 2>/dev/null || echo 0)"
 
 if [[ -z "$CHANGED" && "$AHEAD" -eq 0 ]]; then

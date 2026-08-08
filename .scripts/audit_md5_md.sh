@@ -1,4 +1,4 @@
-﻿﻿﻿﻿#!/usr/bin/env bash
+﻿﻿﻿﻿﻿﻿﻿﻿#!/usr/bin/env bash
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ AUDIT MD5 DOCS — 3 PASSES : TREE → MD5 PROD → MD5 GITHUB → RAPPORT     │
 # ╰──────────────────────────────────────────────────────────────────────────╯
@@ -57,8 +57,8 @@ echo "  → URL encoding via python3 urllib.parse.quote" >> "$LOG"
 echo "" >> "$LOG"
 
 echo "── COMPARAISON PROD vs GITHUB ───────────────────────────────────────────────" >> "$LOG"
-printf "%-70s | %-8s | %-8s | %s\n" "FICHIER" "PROD" "GITHUB" "STATUT" >> "$LOG"
-printf '%.0s─' {1..107} >> "$LOG"; echo "" >> "$LOG"
+printf "%-100s | %-8s | %-8s | %s\n" "FICHIER" "PROD" "GITHUB" "STATUT" >> "$LOG"
+printf '%.0s─' {1..137} >> "$LOG"; echo "" >> "$LOG"
 
 OK=0; DIFF_COUNT=0; ABSENT=0
 github_md5=""
@@ -84,21 +84,26 @@ while IFS='|' read -r rel prod_md5; do
         fi
     fi
 
-    printf "%-70s | %.8s | %.8s | %s\n" \
+    byte_len=$(echo -n "$rel" | wc -c)
+    char_len=${#rel}
+    extra=$((byte_len - char_len))
+    width=$((100 + extra))
+    printf "%-${width}s | %.8s | %.8s | %s\n" \
         "$rel" "${prod_md5:-??????}" "${github_md5:-??????}" "$statut" >> "$LOG"
 done < "$TMP_PROD"
 
 # ── RÉSUMÉ ────────────────────────────────────────────────────────────────
 {
 echo ""
-printf '%.0s─' {1..107}; echo ""
+printf '%.0s─' {1..137}; echo ""
 echo "RÉSULTAT : $TOTAL fichiers — ✅ $OK SYNC · ❌ $DIFF_COUNT DIFF · ⚠️ $ABSENT ABSENT GITHUB"
-printf '%.0s─' {1..107}; echo ""
+printf '%.0s─' {1..137}; echo ""
 } >> "$LOG"
 
 rm -f "$TMP_TREE" "$TMP_PROD" "$TMP_GH"
 
 cp "$LOG" /config/.logs/md5_audit_md_latest.txt 2>/dev/null || true
+cp "$LOG" /config/www/logs/md5_audit_md_latest.txt 2>/dev/null || true
 
 echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 docs terminé : $TOTAL fichiers · $OK SYNC · $DIFF_COUNT DIFF · $ABSENT ABSENT GITHUB → $LOG"
 
