@@ -7,14 +7,14 @@
 # Alimente la carte journal audit sur la page Système (L5C3).
 #
 # ## 🧮 CALCUL & SOURCES :
-# Source : /config/.logs/md5_audit_YYYY-MM-DD.txt
+# Source : /config/.logs/md5_audit_yaml_YYYY-MM-DD.txt
 # Généré par : shell_command.audit_md5 → .scripts/audit_md5.sh
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
 # | MATÉRIEL     | CAPTEUR BRUT (source)                  | CE FICHIER (unique_id) | AVAL         |
 # |:-------------|:---------------------------------------|:-----------------------|:-------------|
-# | [calculé]    | /config/.logs/md5_audit_YYYY-MM-DD.txt | audit_md5_journal      | L5C3 Système |
+# | [calculé]    | /config/.logs/md5_audit_yaml_YYYY-MM-DD.txt | audit_md5_journal      | L5C3 Système |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - glob prend le fichier le plus récent (tri alphabétique = tri date YYYY-MM-DD)
@@ -30,7 +30,7 @@
     name: "Audit MD5 Journal"
     unique_id: audit_md5_journal
     command: >-
-      bash -lc 'python3 -c "import json,os,glob; files=sorted(glob.glob(\"/config/.logs/md5_audit_*.txt\")); f=files[-1] if files else None; lines=open(f).readlines()[-25:] if f else []; k=[l.rstrip() for l in lines]; print(json.dumps({\"text\":chr(10).join(k) or \"—\"}))" 2>/dev/null || echo "{\"text\":\"—\"}"'
+      bash -lc 'python3 -c "import json,os,glob; files=sorted(glob.glob(\"/config/.logs/md5_audit_yaml_*.txt\")); f=files[-1] if files else None; lines=open(f).readlines()[-25:] if f else []; k=[l.rstrip() for l in lines]; print(json.dumps({\"text\":chr(10).join(k) or \"—\"}))" 2>/dev/null || echo "{\"text\":\"—\"}"'
     scan_interval: 30
     value_template: 'OK'
     json_attributes:

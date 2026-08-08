@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+﻿﻿#!/usr/bin/env bash
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ AUDIT MD5 — 3 PASSES : TREE → MD5 PROD → MD5 GITHUB → RAPPORT          │
 # ╰──────────────────────────────────────────────────────────────────────────╯
@@ -9,11 +9,13 @@
 set -euo pipefail
 
 LOG_DIR="/config/.logs"
-LOG="$LOG_DIR/md5_audit_$(date '+%Y-%m-%d').txt"
+LOG="$LOG_DIR/md5_audit_yaml_$(date '+%Y-%m-%d').txt"
 TMP_TREE="/tmp/audit_tree_$$.txt"
 TMP_PROD="/tmp/audit_prod_$$.txt"
 TMP_GH="/tmp/audit_gh_$$.tmp"    # Fichier unique réutilisé (1 yaml à la fois, ~KB)
 mkdir -p "$LOG_DIR"
+# Rotation : suppression anciens logs
+find "$LOG_DIR" -maxdepth 1 -name "md5_audit_yaml_*.txt" -delete 2>/dev/null || true
 
 GH_BASE="https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main"
 

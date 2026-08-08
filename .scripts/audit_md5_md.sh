@@ -1,19 +1,21 @@
-﻿#!/usr/bin/env bash
+﻿﻿﻿﻿#!/usr/bin/env bash
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ AUDIT MD5 DOCS — 3 PASSES : TREE → MD5 PROD → MD5 GITHUB → RAPPORT     │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 # Compare chaque fichier .md entre la prod HA (/config/docs/) et GitHub
 # Statuts : ✅ SYNC · ❌ DIFF · ⚠️ ABSENT GITHUB
-# Log : /config/.logs/hermes_md5_audit_docs_YYYY-MM-DD.txt
+# Log : /config/.logs/md5_audit_md_YYYY-MM-DD.txt
 
 set -euo pipefail
 
 LOG_DIR="/config/.logs"
-LOG="$LOG_DIR/hermes_md5_audit_docs_$(date '+%Y-%m-%d').txt"
+LOG="$LOG_DIR/md5_audit_md_$(date '+%Y-%m-%d').txt"
 TMP_TREE="/tmp/audit_docs_tree_$$.txt"
 TMP_PROD="/tmp/audit_docs_prod_$$.txt"
 TMP_GH="/tmp/audit_docs_gh_$$.tmp"
 mkdir -p "$LOG_DIR"
+# Rotation : suppression anciens logs
+find "$LOG_DIR" -maxdepth 1 -name "md5_audit_md_*.txt" -delete 2>/dev/null || true
 
 GH_BASE="https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/docs"
 DOCS_ROOT="/config/docs"
@@ -96,7 +98,7 @@ printf '%.0s─' {1..107}; echo ""
 
 rm -f "$TMP_TREE" "$TMP_PROD" "$TMP_GH"
 
-cp "$LOG" /config/.logs/hermes_md5_audit_docs_latest.txt 2>/dev/null || true
+cp "$LOG" /config/.logs/md5_audit_md_latest.txt 2>/dev/null || true
 
 echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 docs terminé : $TOTAL fichiers · $OK SYNC · $DIFF_COUNT DIFF · $ABSENT ABSENT GITHUB → $LOG"
 
