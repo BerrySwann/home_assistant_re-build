@@ -53,7 +53,7 @@ audit_md5: >-
 
 # --- audit_md5_docs ---
 audit_md5_docs: >-
-  bash -lc 'bash /config/.scripts/audit_md5_docs.sh 2>&1'
+  bash -lc 'bash /config/.scripts/audit_md5_docs.sh > /config/.logs/audit_md5_docs_debug.txt 2>&1'
 
 # annotations_log:
 # [2026-02-28] git_backup_push        : appel automatique (horaire/daily)

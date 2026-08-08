@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ AUDIT MD5 DOCS — 3 PASSES : TREE → MD5 PROD → MD5 GITHUB → RAPPORT     │
 # ╰──────────────────────────────────────────────────────────────────────────╯
@@ -101,7 +101,5 @@ cp "$LOG" /config/.logs/hermes_md5_audit_docs_latest.txt 2>/dev/null || true
 echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 docs terminé : $TOTAL fichiers · $OK SYNC · $DIFF_COUNT DIFF · $ABSENT ABSENT GITHUB → $LOG"
 
 # annotations_log:
-# [2026-08-07] Création — miroir de audit_md5.sh pour les fichiers .md de /config/docs/
-#              3 passes : tree → md5 prod → md5 github (curl raw + python3 url-encode)
-#              Statuts : SYNC / DIFF / ABSENT GITHUB
-#              Log prefix : hermes_md5_audit_docs_ (coexistence avec audit_md5.sh)
+# [2026-08-08] Création — miroir de audit_md5.sh pour les fichiers .md de /config/docs/
+# [2026-08-08] FIX : réécriture LF pur (fichier initial écrit en CRLF via Windows → bash error \r)

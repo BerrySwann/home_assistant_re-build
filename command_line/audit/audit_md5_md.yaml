@@ -1,0 +1,41 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ COMMAND LINE : LECTURE LOG AUDIT MD5 DOCS (.md)                          │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Sensor qui lit les 25 dernières lignes du rapport MD5 docs le plus récent.
+# Alimente la carte journal audit docs sur la page Système (L5C3).
+#
+# ## 🧮 CALCUL & SOURCES :
+# Source : /config/.logs/hermes_md5_audit_docs_YYYY-MM-DD.txt
+# Généré par : shell_command.audit_md5_docs → .scripts/audit_md5_docs.sh
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL     | CAPTEUR BRUT (source)                             | CE FICHIER (unique_id)    | AVAL         |
+# |:-------------|:--------------------------------------------------|:--------------------------|:-------------|
+# | [calculé]    | /config/.logs/hermes_md5_audit_docs_YYYY-MM-DD.txt | audit_md5_docs_journal   | L5C3 Système |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - glob prend le fichier le plus récent (tri alphabétique = tri date YYYY-MM-DD)
+# - scan_interval: 30 → rafraîchi ~30s après l'appel du bouton
+# - Si aucun log n'existe encore → retourne '—'
+# - python3 doit être SUR UNE SEULE LIGNE dans le >- YAML (multiligne = erreur parser)
+# - Préfixe hermes_ : coexistence avec les logs audit_md5 YAML (pas de collision glob)
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# L5C3 Système — carte "Journal Audit MD5 Docs"
+
+# --- audit_md5_docs_journal ---
+- sensor:
+    name: "Audit MD5 Docs Journal"
+    unique_id: audit_md5_docs_journal
+    command: >-
+      bash -lc 'python3 -c "import json,os,glob; files=sorted(glob.glob(\"/config/.logs/hermes_md5_audit_docs_*.txt\")); f=files[-1] if files else None; lines=open(f).readlines()[-25:] if f else []; k=[l.rstrip() for l in lines]; print(json.dumps({\"text\":chr(10).join(k) or \"—\"}))" 2>/dev/null || echo "{\"text\":\"—\"}"'
+    scan_interval: 30
+    value_template: 'OK'
+    json_attributes:
+      - text
+
+# annotations_log:
+# [2026-08-07] Création — lecture hermes_md5_audit_docs_*.txt → carte Audit MD5 Docs L5C3
