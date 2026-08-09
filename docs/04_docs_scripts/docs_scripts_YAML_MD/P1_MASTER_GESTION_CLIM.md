@@ -1,7 +1,7 @@
 # P1_MASTER_GESTION_CLIM - Script centralisé climatisation
 
 > **Script HA :** `script.p1_master_gestion_clim`
-> **Fichier TREE_CORRIGE :** `docs_scripts/TREE_CORRIGE/p1_master_gestion_clim.yaml`
+> **Fichier source :** `docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim.yaml`
 > **Mode :** `queued` - max: 10
 > **Appelé par :** Automation A0 (JOUR) + Automation B0 (NUIT)
 > **Créé par :** Refactoring LLM local - 2026-06
