@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ COMMAND LINE : LECTURE LOG AUDIT MD5 DOCS (.md + yaml dashboard)                          │
+# │ COMMAND LINE : LECTURE LOG AUDIT MD5 DOCS (.md + yaml dashboard)         │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -7,14 +7,14 @@
 # Alimente la carte journal audit docs sur la page Système (L5C3).
 #
 # ## 🧮 CALCUL & SOURCES :
-# Source : /config/.logs/md5_audit_md_yaml_YYYY-MM-DD.txt
+# Source : /config/.logs/md5_audit_md_yaml_yaml_YYYY-MM-DD.txt
 # Généré par : shell_command.audit_md5_md_yaml → .scripts/audit_md5_md_yaml.sh
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
-# | MATÉRIEL     | CAPTEUR BRUT (source)                             | CE FICHIER (unique_id)    | AVAL         |
-# |:-------------|:--------------------------------------------------|:--------------------------|:-------------|
-# | [calculé]    | /config/.logs/md5_audit_md_yaml_YYYY-MM-DD.txt | audit_md5_md_yaml_journal   | L5C3 Système |
+# | MATÉRIEL     | CAPTEUR BRUT (source)                                 | CE FICHIER (unique_id)       | AVAL         |
+# |:-------------|:------------------------------------------------------|:-----------------------------|:-------------|
+# | [calculé]    | /config/.logs/md5_audit_md_yaml_yaml_YYYY-MM-DD.txt | audit_md5_md_yaml_journal   | L5C3 Système |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - glob prend le fichier le plus récent (tri alphabétique = tri date YYYY-MM-DD)
@@ -24,7 +24,7 @@
 # - Préfixe hermes_ : coexistence avec les logs audit_md5 YAML (pas de collision glob)
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# L5C3 Système — carte "Journal Audit MD5 Docs"
+# L5C3 Système — carte "Journal Audit MD5 Docs (.md + yaml)"
 
 # --- audit_md5_md_yaml_journal ---
 - sensor:
@@ -38,4 +38,5 @@
       - text
 
 # annotations_log:
-# [2026-08-07] Création — lecture md5_audit_md_yaml_*.txt → carte Audit MD5 Docs L5C3
+# [2026-08-07] Création — lecture md5_audit_md_*.txt → carte Audit MD5 Docs L5C3
+# [2026-08-09] Renommage audit_md5_md → audit_md5_md_yaml (perimetre etendu .md + yaml dashboard)

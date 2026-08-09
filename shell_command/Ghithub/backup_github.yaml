@@ -62,5 +62,6 @@ audit_md5_md_yaml: >-
 # [2026-06-14] audit_yaml/atma/full supprimés — wget /tmp → RAM Proxmox (ralentissement)
 # [2026-06-14] audit_md5 : appel léger (git fetch + git show, zéro /tmp)
 # [2026-06-15] nettoyage lignes orphelines audit_yaml/atma/full
+# [2026-08-09] audit_md5_docs → audit_md5_md_yaml + script audit_md5_md_yaml.sh
 # [2026-06-17] Restructuration TREE_CORRIGE : shell_command_github.yaml + shell_command_md5.yaml
 #              → fusionnés dans ce fichier (alignement sur prod Ghithub/backup_github.yaml)
