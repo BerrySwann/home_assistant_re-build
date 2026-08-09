@@ -1,5 +1,5 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ COMMAND LINE : LECTURE LOG AUDIT MD5 DOCS (.md)                          │
+# │ COMMAND LINE : LECTURE LOG AUDIT MD5 DOCS (.md + yaml dashboard)                          │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
@@ -7,14 +7,14 @@
 # Alimente la carte journal audit docs sur la page Système (L5C3).
 #
 # ## 🧮 CALCUL & SOURCES :
-# Source : /config/.logs/md5_audit_md_YYYY-MM-DD.txt
-# Généré par : shell_command.audit_md5_docs → .scripts/audit_md5_docs.sh
+# Source : /config/.logs/md5_audit_md_yaml_YYYY-MM-DD.txt
+# Généré par : shell_command.audit_md5_md_yaml → .scripts/audit_md5_md_yaml.sh
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
 # | MATÉRIEL     | CAPTEUR BRUT (source)                             | CE FICHIER (unique_id)    | AVAL         |
 # |:-------------|:--------------------------------------------------|:--------------------------|:-------------|
-# | [calculé]    | /config/.logs/md5_audit_md_YYYY-MM-DD.txt | audit_md5_docs_journal   | L5C3 Système |
+# | [calculé]    | /config/.logs/md5_audit_md_yaml_YYYY-MM-DD.txt | audit_md5_md_yaml_journal   | L5C3 Système |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - glob prend le fichier le plus récent (tri alphabétique = tri date YYYY-MM-DD)
@@ -26,16 +26,16 @@
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # L5C3 Système — carte "Journal Audit MD5 Docs"
 
-# --- audit_md5_docs_journal ---
+# --- audit_md5_md_yaml_journal ---
 - sensor:
-    name: "Audit MD5 Docs Journal"
-    unique_id: audit_md5_docs_journal
+    name: "Audit MD5 MD YAML Journal"
+    unique_id: audit_md5_md_yaml_journal
     command: >-
-      bash -lc 'python3 -c "import json,os,glob; files=sorted(glob.glob(\"/config/.logs/md5_audit_md_*.txt\")); f=files[-1] if files else None; lines=open(f).readlines()[-25:] if f else []; k=[l.rstrip() for l in lines]; print(json.dumps({\"text\":chr(10).join(k) or \"—\"}))" 2>/dev/null || echo "{\"text\":\"—\"}"'
+      bash -lc 'python3 -c "import json,os,glob; files=sorted(glob.glob(\"/config/.logs/md5_audit_md_yaml_*.txt\")); f=files[-1] if files else None; lines=open(f).readlines()[-25:] if f else []; k=[l.rstrip() for l in lines]; print(json.dumps({\"text\":chr(10).join(k) or \"—\"}))" 2>/dev/null || echo "{\"text\":\"—\"}"'
     scan_interval: 30
     value_template: 'OK'
     json_attributes:
       - text
 
 # annotations_log:
-# [2026-08-07] Création — lecture md5_audit_md_*.txt → carte Audit MD5 Docs L5C3
+# [2026-08-07] Création — lecture md5_audit_md_yaml_*.txt → carte Audit MD5 Docs L5C3

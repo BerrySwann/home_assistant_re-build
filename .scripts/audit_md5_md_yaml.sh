@@ -1,21 +1,21 @@
-﻿﻿﻿﻿﻿﻿﻿﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ AUDIT MD5 DOCS — 3 PASSES : TREE → MD5 PROD → MD5 GITHUB → RAPPORT     │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-# Compare chaque fichier .md entre la prod HA (/config/docs/) et GitHub
+# Compare TOUS les fichiers docs/ (.md + .yaml + .sh) entre la prod HA (/config/docs/) et GitHub
 # Statuts : ✅ SYNC · ❌ DIFF · ⚠️ ABSENT GITHUB
-# Log : /config/.logs/md5_audit_md_YYYY-MM-DD.txt
+# Log : /config/.logs/md5_audit_md_yaml_YYYY-MM-DD.txt
 
 set -euo pipefail
 
 LOG_DIR="/config/.logs"
-LOG="$LOG_DIR/md5_audit_md_$(date '+%Y-%m-%d').txt"
+LOG="$LOG_DIR/md5_audit_md_yaml_$(date '+%Y-%m-%d').txt"
 TMP_TREE="/tmp/audit_docs_tree_$$.txt"
 TMP_PROD="/tmp/audit_docs_prod_$$.txt"
 TMP_GH="/tmp/audit_docs_gh_$$.tmp"
 mkdir -p "$LOG_DIR"
 # Rotation : suppression anciens logs
-find "$LOG_DIR" -maxdepth 1 -name "md5_audit_md_*.txt" -delete 2>/dev/null || true
+find "$LOG_DIR" -maxdepth 1 -name "md5_audit_md_yaml_*.txt" -delete 2>/dev/null || true
 
 GH_BASE="https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/docs"
 DOCS_ROOT="/config/docs"
@@ -29,14 +29,17 @@ echo ""
 echo "── PASS 1 : TREE LOCAL (/config/docs/) ─────────────────────────────────────"
 } > "$LOG"
 
-find "$DOCS_ROOT" -type f -name "*.md" | sort > "$TMP_TREE" || true
+find "$DOCS_ROOT" -type f \( -name "*.md" -o -name "*.yaml" -o -name "*.sh" \) 2>/dev/null | sort > "$TMP_TREE" || true
 
 TOTAL=$(wc -l < "$TMP_TREE")
+TOTAL_MD=$(grep -c '\.md$' "$TMP_TREE" 2>/dev/null || echo 0)
+TOTAL_YAML=$(grep -c '\.yaml$' "$TMP_TREE" 2>/dev/null || echo 0)
+TOTAL_SH=$(grep -c '\.sh$' "$TMP_TREE" 2>/dev/null || echo 0)
 while IFS= read -r f; do
     echo "  ${f#$DOCS_ROOT/}" >> "$LOG"
 done < "$TMP_TREE"
 echo "" >> "$LOG"
-echo "  → $TOTAL fichiers .md" >> "$LOG"
+echo "  → $TOTAL fichiers ($TOTAL_MD .md · $TOTAL_YAML .yaml · $TOTAL_SH .sh)" >> "$LOG"
 echo "" >> "$LOG"
 
 # ── PASS 2 : MD5 PROD ─────────────────────────────────────────────────────
@@ -96,17 +99,18 @@ done < "$TMP_PROD"
 {
 echo ""
 printf '%.0s─' {1..137}; echo ""
-echo "RÉSULTAT : $TOTAL fichiers — ✅ $OK SYNC · ❌ $DIFF_COUNT DIFF · ⚠️ $ABSENT ABSENT GITHUB"
+echo "RÉSULTAT : $TOTAL fichiers ($TOTAL_MD .md · $TOTAL_YAML .yaml · $TOTAL_SH .sh) — ✅ $OK SYNC · ❌ $DIFF_COUNT DIFF · ⚠️ $ABSENT ABSENT GITHUB"
 printf '%.0s─' {1..137}; echo ""
 } >> "$LOG"
 
 rm -f "$TMP_TREE" "$TMP_PROD" "$TMP_GH"
 
-cp "$LOG" /config/.logs/md5_audit_md_latest.txt 2>/dev/null || true
-cp "$LOG" /config/www/logs/md5_audit_md_latest.txt 2>/dev/null || true
+cp "$LOG" /config/.logs/md5_audit_md_yaml_latest.txt 2>/dev/null || true
+cp "$LOG" /config/www/logs/md5_audit_md_yaml_latest.txt 2>/dev/null || true
 
-echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 docs terminé : $TOTAL fichiers · $OK SYNC · $DIFF_COUNT DIFF · $ABSENT ABSENT GITHUB → $LOG"
+echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 docs terminé : $TOTAL fichiers ($TOTAL_MD .md · $TOTAL_YAML .yaml · $TOTAL_SH .sh) · $OK SYNC · $DIFF_COUNT DIFF · $ABSENT ABSENT GITHUB → $LOG"
 
 # annotations_log:
 # [2026-08-08] Création — miroir de audit_md5.sh pour les fichiers .md de /config/docs/
 # [2026-08-08] FIX : réécriture LF pur (fichier initial écrit en CRLF via Windows → bash error \r)
+# [2026-08-09] Extension périmètre : tout docs/ sans exclusion (.md + .yaml + .sh)
