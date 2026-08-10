@@ -1,0 +1,47 @@
+# GRILLE TARIFAIRE EDF "TARIF BLEU" - APPLICABLE AU 01/08/2026
+# Source : PDF officiel EDF archive dans ce dossier (Grille_prix_Tarif_Bleu_EDF_2026-08-01.pdf)
+#   URL : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/Grille_prix_Tarif_Bleu.pdf
+# Transcription : manuelle depuis le PDF (cents EUR TTC/kWh convertis en EUR, /100)
+# Valeurs 100% TTC, virgule decimale (format compatible data.gouv.fr / integration tarif_edf)
+# Usage : reference fiable quand le dataset data.gouv.fr est en retard
+#   (au 10/08/2026, data.gouv s'arrete au 01/02/2026 : HC 0,1578 / HP 0,2065)
+#   -> valeurs a saisir dans les options de l'integration (override, PR #62) :
+#   tarif_hp_override / tarif_hc_override / tarif_base_override
+# Note : option Base 9-36 kVA en extinction (plus disponibles a la souscription)
+# Note : TVA 20% sur abonnement ET consommation (indique par le PDF)
+
+# === OPTION BASE (TTC) ===
+P_SOUSCRITE_KVA;ABONNEMENT_EUR_TTC_MOIS;PRIX_KWH_EUR_TTC
+3;12,13;0,2001
+6;15,86;0,2001
+9;19,88;0,1985
+12;23,76;0,1985
+15;27,40;0,1985
+18;31,14;0,1985
+24;39,14;0,1985
+30;46,47;0,1985
+36;53,88;0,1985
+
+# === OPTION HEURES PLEINES / HEURES CREUSES (TTC) ===
+P_SOUSCRITE_KVA;ABONNEMENT_EUR_TTC_MOIS;PRIX_KWH_HP_EUR_TTC;PRIX_KWH_HC_EUR_TTC
+3;12,13;0,2142;0,1589
+6;15,86;0,2142;0,1589
+9;19,88;0,2142;0,1589
+12;23,76;0,2142;0,1589
+15;27,40;0,2142;0,1589
+18;31,14;0,2142;0,1589
+24;39,14;0,2142;0,1589
+30;46,47;0,2142;0,1589
+36;53,88;0,2142;0,1589
+
+# === OPTION TEMPO (TTC) ===
+# Colonnes : BLEU_HC / BLEU_HP / BLANC_HC / BLANC_HP / ROUGE_HC / ROUGE_HP
+P_SOUSCRITE_KVA;ABONNEMENT_EUR_TTC_MOIS;BLEU_HC;BLEU_HP;BLANC_HC;BLANC_HP;ROUGE_HC;ROUGE_HP
+6;15,80;0,1356;0,1654;0,1536;0,1921;0,1615;0,7295
+9;19,70;0,1356;0,1654;0,1536;0,1921;0,1615;0,7295
+12;23,50;0,1356;0,1654;0,1536;0,1921;0,1615;0,7295
+15;27,01;0,1356;0,1654;0,1536;0,1921;0,1615;0,7295
+18;30,69;0,1356;0,1654;0,1536;0,1921;0,1615;0,7295
+24;38,21;0,1356;0,1654;0,1536;0,1921;0,1615;0,7295
+30;45,82;0,1356;0,1654;0,1536;0,1921;0,1615;0,7295
+36;53,76;0,1356;0,1654;0,1536;0,1921;0,1615;0,7295
