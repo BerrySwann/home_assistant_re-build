@@ -1,6 +1,6 @@
-# ╭──────────────────────────────────────────────────────────────────────────╮
+# ╭─────────────────────────────────────────────────────────────────────────────────────╮
 # │ M_03. MÉTÉO TEMPLATES — FOUDRE BLITZORTUNG (windrose-card / LABEL / AZIMUT / TIMER) │
-# ╰──────────────────────────────────────────────────────────────────────────╯
+# ╰─────────────────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
 # Quatre capteurs templates pour la visualisation de la foudre via Blitzortung.
@@ -33,7 +33,7 @@
 
 - sensor:
 # ┌─────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : windrose-card - LABEL DIRECTION ET DISTANCE  │
+# │ 10. AUTRE : windrose-card - LABEL DIRECTION ET DISTANCE │
 # └─────────────────────────────────────────────────────────┘
 
 # windrose-card - LABEL Lightning direction label
@@ -92,7 +92,7 @@
         {% endif %}
 
 # ┌──────────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : Card - TEMPS DEPUIS IMPACT (TIMER "LAST CHANGE")  │
+# │ 10. AUTRE : Card - TEMPS DEPUIS IMPACT (TIMER "LAST CHANGE") │
 # └──────────────────────────────────────────────────────────────┘
 
 # --- temps_depuis_le_dernier_impact_de_foudre ---
