@@ -76,7 +76,7 @@
     - name: "Seuil non clim"
       unique_id: seuil_non_clim
       unit_of_measurement: "°C"
-      state: "24"
+      state: "21"
 
 # --- delta_1 ---
     - name: "Delta_1"
@@ -118,7 +118,7 @@
       state: >
         {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(-999) %}
         {% set temp_no_chauf = states('sensor.seuil_non_chauffage') | float(18) %}
-        {% set temp_no_clim = states('sensor.seuil_non_clim') | float(28) %}
+        {% set temp_no_clim = states('sensor.seuil_non_clim') | float(21) %}
         {% if temp_ext == -999 %}
           unknown
         {% elif temp_ext < temp_no_chauf %}
@@ -276,7 +276,7 @@
       unit_of_measurement: "°C"
       state: >
         {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
-        {% set temp_eco = states('sensor.temperature_eco_ete') | float(27) %}
+        {% set temp_eco = states('sensor.temperature_eco_ete') | float(28) %}
         {% set d1 = states('sensor.delta_1') | float(1) %}
         {% set d2 = states('sensor.delta_2') | float(2) %}
         {% if temp_ext >= 28 %}

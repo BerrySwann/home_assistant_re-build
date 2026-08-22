@@ -1,0 +1,7 @@
+{
+  "approval_ttl_minutes": 5,
+  "rules": [],
+  "schema_version": 2,
+  "version": 1,
+  "wait_seconds": 60
+}
