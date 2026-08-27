@@ -1607,7 +1607,7 @@
   - id: extinction_conso
     trigger: numeric_state
     entity_id: sensor.prise_tv_chambre_nous_power
-    below: 20
+    below: 25
     for:
       minutes: 2
   actions:
@@ -1632,13 +1632,13 @@
           data:
             icon: mdi:television-off
             tag: notif_tv_chambre
-    - alias: 'EXTINCTION AMBIANCE : Veille (< 20W)'
+    - alias: 'EXTINCTION AMBIANCE : Veille (< 25W)'
       conditions:
       - condition: trigger
         id: extinction_conso
       sequence:
       - wait_template: '{{ states(''sensor.prise_tv_chambre_nous_power'') | float
-          > 20 }}'
+          > 25 }}'
         timeout: 00:10:00
         continue_on_timeout: true
       - condition: template
