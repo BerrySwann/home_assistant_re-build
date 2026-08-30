@@ -1,5 +1,6 @@
 # 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
-*Dernière mise à jour : 2026-08-08 S3 (Section SCRIPTS créée : script.p1_master_gestion_clim documenté A/B/C/D. MATRICE DES SCRIPTS ajoutée. HOME PAGE déplacée avant L1C1. COMPLÉMENT déplacé en dernière position. Réorganisation finale : HOME PAGE > L1C1-L6C3 > AUTOMATIONS > SCRIPTS > COMPLÉMENT.)*
+*Dernière mise à jour : 2026-08-09 S1 (L5C3 : rename audit_md5_docs → audit_md5_md_yaml + sensor. Page 2026-08-09 ajoutée, 2026-06-02 supprimée. Dashboard_2026_08_09.yaml en local.)*
+*2026-08-08 S3 (Section SCRIPTS créée : script.p1_master_gestion_clim documenté A/B/C/D. MATRICE DES SCRIPTS ajoutée. HOME PAGE déplacée avant L1C1. COMPLÉMENT déplacé en dernière position. Réorganisation finale : HOME PAGE > L1C1-L6C3 > AUTOMATIONS > SCRIPTS > COMPLÉMENT.)*
 *2026-08-08 S1-S2 (Resync GitHub->local : 6 fichiers mis a jour. Renommage ui_dashboard -> P3_ui_dashboard en prod + local. Confirmation section tronquee. Recheck L5C3/L6C1/L6C2/L6C3 : pages manquantes ajoutées, entités audit_md5_docs ajoutées L5C3, page 05-10 supprimée. L5C2 : 2 entités fantômes NE2213 Mamour confirmées. Section AUTOMATIONS créée + enrichissement complet A/B/C/D : 49 automations, 11 groupes, hiérarchie ## groupe / ### automation / #### A/B/C/D appliquée A-Z. MATRICE DES AUTOMATIONS 49 lignes. Emoji 🗂️ sur tous les groupes.)*
 *2026-07-20 (P1_01 confort_nuit : palier nuit été dynamique selon vigilance canicule - nouvelle dépendance M_01_meteo_alertes_card → P1_01_MASTER → L1C3)*
 *2026-07-19 (Audit complet intégralité du fichier : L1C1 à L6C3 + HOME PAGE + Complément fichiers racine, sur la réalité des yaml prod. Corrections : entités obsolètes/fictives, mauvaise attribution de fichiers, section tronquée complétée par hypothèse. Voir détail dans les sections concernées.)*
@@ -40,7 +41,7 @@
 | **L4C3** | **Mises à jour HA** | ✅ recheck 2026-08-08 |
 | **L5C1** | **Batteries / Piles** | ✅ recheck 2026-08-08 |
 | **L5C2** | **Batteries portables** | ✅ recheck 2026-08-08 |
-| **L5C3** | **MariaDB** | ✅ recheck 2026-08-08 |
+| **L5C3** | **MariaDB** | ✅ recheck 2026-08-09 |
 | **L6C1** | **Qualité de l'air** | ✅ recheck 2026-08-08 |
 | **L6C2** | **Pollution / Pollen** | ✅ recheck 2026-08-08 |
 | **L6C3** | **Vigilance Eau** | ✅ recheck 2026-08-08 |
@@ -1473,8 +1474,8 @@ MariaDB (intégration sql.yaml)
 Audit MD5 (script + template/command_line)
   ├─→ script.audit_md5                  (scripts.yaml) → button-card déclencheur
   ├─→ sensor.audit_md5_journal          (attr: text) → markdown résultat + chemin log
-  ├─→ script.audit_md5_docs             (scripts.yaml) → button-card déclencheur audit docs (AJOUT 2026-08-08)
-  └─→ sensor.audit_md5_docs_journal     (attr: text) → markdown résultat audit docs (AJOUT 2026-08-08)
+  ├─→ script.audit_md5_md_yaml          (scripts.yaml) → button-card déclencheur audit docs (renommé 2026-08-09)
+  └─→ sensor.audit_md5_md_yaml_journal  (attr: text) → markdown résultat audit docs (renommé 2026-08-09)
 GitHub (shell_command + command_line)
   ├─→ sensor.backup_github_status       (NAT) → chip OK/KO + apexcharts 7j
   ├─→ sensor.backup_github_journal      (NAT) → markdown journal 10 derniers
@@ -1493,8 +1494,8 @@ MariaDB
 |:-------|:----:|:--------------|
 | `script.audit_md5` | NAT | `scripts.yaml` |
 | `sensor.audit_md5_journal` | NAT | `command_line/audit/audit_logs.yaml` |
-| `script.audit_md5_docs` | NAT | `scripts.yaml` (ajout 2026-08-08) |
-| `sensor.audit_md5_docs_journal` | NAT | `command_line/audit/audit_logs.yaml` (ajout 2026-08-08) |
+| `script.audit_md5_md_yaml` | NAT | `scripts.yaml` (renommé 2026-08-09) |
+| `sensor.audit_md5_md_yaml_journal` | NAT | `command_line/audit/audit_md5_md_yaml.yaml` (renommé 2026-08-09) |
 | `sensor.backup_github_status` | NAT | `command_line/github_maintenance/github_maintenance.yaml` |
 | `sensor.backup_github_journal` | NAT | `command_line/github_maintenance/github_maintenance.yaml` |
 | `sensor.git_last_weekly_tag` | NAT | `command_line/github_maintenance/github_maintenance.yaml` |
@@ -1556,9 +1557,9 @@ Proxmox VE (intégration superviseur)
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/card_audit_journal_2026-06-14.yaml` (journal résultat audit) | ✅ |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/card_audit_md5_2026-06-15.yaml` (carte audit MD5) | ✅ |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/card_audit_recap_2026-06-15.yaml` (recap audit MD5) | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/page_L5C3_mariadb_2026-06-02.yaml` | ✅ |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/page_L5C3_mariadb_2026-06-15.yaml` (Audit MD5 + GitHub + MariaDB) | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/page_L5C3_mariadb_2026-08-08.yaml` (+ Audit MD5 Docs ajout 2026-08-08) | ✅ |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/page_L5C3_mariadb_2026-08-08.yaml` (+ Audit MD5 Docs 2026-08-08) | ✅ |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/page_L5C3_mariadb_2026-08-09.yaml` (rename audit_md5_md_yaml + centrage + retour ligne 2026-08-09) | ✅ |
 
 ---
 
