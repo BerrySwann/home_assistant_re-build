@@ -1,0 +1,25 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │            P0 - SHELL COMMAND RATTRAPAGE LINKY (CORRECT_LINKY)           │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+#   Appelle le script Python correct_linky.py avec un JSON contenant tous les jours
+#   Linky disponibles (day_1 a day_7 > 0). Le script corrige toutes les lignes
+#   MANQUANT correspondantes dans linky_histo.txt.
+#   Utilise par l'automation rattrapage_linky_ecart (23h59:30).
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#   automation rattrapage_linky_ecart -> shell_command.correct_linky_log
+#     -> /config/.scripts/correct_linky.py
+#     -> /config/notifs/linky_histo.txt (modifie : MANQUANT -> RATTRAPÉ)
+#     -> /config/notifs/nodon_histo.txt (lecture)
+#     -> /config/notifs/ecart_histo.txt (append)
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+#   - Le script doit etre present sur le serveur HA : /config/.scripts/correct_linky.py
+#   - data_json est un tableau JSON : [{"date": "28/08", "val": 14.37}, ...]
+#   - Les single quotes autour de data_json sont obligatoires (JSON contient des double quotes)
+#   - Le dossier /config/.scripts/ doit exister (mkdir -p /config/.scripts/)
+
+correct_linky_log: >-
+  python3 /config/.scripts/correct_linky.py '{{ data_json }}'
