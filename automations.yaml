@@ -2297,18 +2297,24 @@
     - condition: template
       value_template: '{{ linky_j1 > 0 }}'
     then:
-    - action: notify.log_linky_histo
+    - action: notify.send_message
+      target:
+        entity_id: notify.log_linky_histo
       data:
         message: '{{ date_j1 }} | Linky : {{ linky_j1 | round(2) }} kWh'
     else:
-    - action: notify.log_linky_histo
+    - action: notify.send_message
+      target:
+        entity_id: notify.log_linky_histo
       data:
         message: '{{ date_j1 }} | Linky : 0.00 kWh (MANQUANT)'
   - if:
     - condition: template
       value_template: '{{ linky_j1 > 0 }}'
     then:
-    - action: notify.log_ecart_histo
+    - action: notify.send_message
+      target:
+        entity_id: notify.log_ecart_histo
       data:
         message: '{% set ecart = (linky_j1 - nodon_j1) | round(2) %} {% set pct =
           ((ecart / linky_j1) * 100) | round(1) if linky_j1 > 0 else 0 %} {{ date_j1
@@ -2335,7 +2341,9 @@
 
         '
       date_j1: '{{ (now() - timedelta(days=1)).strftime(''%d/%m'') }}'
-  - action: notify.log_nodon_histo
+  - action: notify.send_message
+    target:
+      entity_id: notify.log_nodon_histo
     data:
       message: '{{ date_j1 }} | Nodon : {{ nodon_j1 }} kWh'
   mode: single

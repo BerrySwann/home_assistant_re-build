@@ -17,9 +17,11 @@
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 #   - Le script doit etre present sur le serveur HA : /config/.scripts/correct_linky.py
-#   - data_json est un tableau JSON : [{"date": "28/08", "val": 14.37}, ...]
-#   - Les single quotes autour de data_json sont obligatoires (JSON contient des double quotes)
+#   - L'automation passe date_j2 + value_j2 (service data).
+#   - Le template construit le tableau JSON attendu par le script :
+#     [{"date": "28/08", "val": 14.37}, ...]
+#   - Les single quotes autour du JSON sont obligatoires (JSON contient des double quotes)
 #   - Le dossier /config/.scripts/ doit exister (mkdir -p /config/.scripts/)
 
 correct_linky_log: >-
-  python3 /config/.scripts/correct_linky.py '{{ data_json }}'
+  python3 /config/.scripts/correct_linky.py '[{"date": "{{ date_j2 }}", "val": {{ value_j2 }}}]'
