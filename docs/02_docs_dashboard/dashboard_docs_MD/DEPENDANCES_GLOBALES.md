@@ -1,5 +1,6 @@
 # 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
-*Dernière mise à jour : 2026-08-09 S1 (L5C3 : rename audit_md5_docs → audit_md5_md_yaml + sensor. Page 2026-08-09 ajoutée, 2026-06-02 supprimée. Dashboard_2026_08_09.yaml en local.)*
+*Dernière mise à jour : 2026-09-01 (3 automations ENERGIE P0 ajoutées : HISTO_NODON, HISTO_LINKY, RATTRAPAGE_LINKY + script correct_linky.py. Intégrations File log_nodon/linky/ecart_histo. Section COMPLÉMENT fichiers notifs mise à jour.)*
+*2026-08-09 S1 (L5C3 : rename audit_md5_docs → audit_md5_md_yaml + sensor. Page 2026-08-09 ajoutée, 2026-06-02 supprimée. Dashboard_2026_08_09.yaml en local.)*
 *2026-08-08 S3 (Section SCRIPTS créée : script.p1_master_gestion_clim documenté A/B/C/D. MATRICE DES SCRIPTS ajoutée. HOME PAGE déplacée avant L1C1. COMPLÉMENT déplacé en dernière position. Réorganisation finale : HOME PAGE > L1C1-L6C3 > AUTOMATIONS > SCRIPTS > COMPLÉMENT.)*
 *2026-08-08 S1-S2 (Resync GitHub->local : 6 fichiers mis a jour. Renommage ui_dashboard -> P3_ui_dashboard en prod + local. Confirmation section tronquee. Recheck L5C3/L6C1/L6C2/L6C3 : pages manquantes ajoutées, entités audit_md5_docs ajoutées L5C3, page 05-10 supprimée. L5C2 : 2 entités fantômes NE2213 Mamour confirmées. Section AUTOMATIONS créée + enrichissement complet A/B/C/D : 49 automations, 11 groupes, hiérarchie ## groupe / ### automation / #### A/B/C/D appliquée A-Z. MATRICE DES AUTOMATIONS 49 lignes. Emoji 🗂️ sur tous les groupes.)*
 *2026-07-20 (P1_01 confort_nuit : palier nuit été dynamique selon vigilance canicule - nouvelle dépendance M_01_meteo_alertes_card → P1_01_MASTER → L1C3)*
@@ -1840,6 +1841,9 @@ VigiEau (intégration HACS) - Section SÉCHERESSE
 | P4 PRESENCE | [P4] ERIC LOG ZONES | - proto abandon | ✅ enrichi 2026-08-08 |
 | ENERGIE (P0) | BASCULEMENT TARIF HC/HP GENELEC APPART | L2C1 | ✅ enrichi 2026-08-08 |
 | ENERGIE (P0) | LOG ECART LINKY VS NODON | L2C1 | ✅ enrichi 2026-08-08 |
+| ENERGIE (P0) | HISTO NODON QUOTIDIEN | - log | ✅ 2026-09-01 |
+| ENERGIE (P0) | HISTO LINKY QUOTIDIEN + ECART J-1 | - log | ✅ 2026-09-01 |
+| ENERGIE (P0) | RATTRAPAGE LINKY MANQUANT + ECART | - log | ✅ 2026-09-01 |
 | GITHUB BACKUP | [00] ALERTE SI KO 15 MIN | L5C3 | ✅ enrichi 2026-08-08 |
 | GITHUB BACKUP | [01] GIT HOURLY H+10 | L5C3 | ✅ enrichi 2026-08-08 |
 | GITHUB BACKUP | [02] GIT DAILY (03:00) | L5C3 | ✅ enrichi 2026-08-08 |
@@ -2808,6 +2812,109 @@ sensor.linky_*_consumption_history (NAT - MyElectricalData)
 ```
 
 #### D - Vignette : L2C1
+
+---
+
+### ✅ HISTO NODON QUOTIDIEN
+*Fichier : `energie/histo_nodon_quotidien.yaml`*
+
+#### A - Rôle
+
+Enregistre chaque nuit à 23h59 la consommation Nodon J-1 (`last_period` du UM quotidien `sensor.genelec_appart_quotidien_um`) dans `/config/notifs/nodon_histo.txt`. Format : `JJ/MM | Nodon : X.XX kWh`.
+
+#### B - Triggers / Entités
+
+| | Détail |
+|:--|:--|
+| Trigger | 23:59:00 fixe |
+| Condition | Aucune |
+| Entités lues | `sensor.genelec_appart_quotidien_um` (attr `last_period`) |
+| Actions | `notify.send_message → notify.log_nodon_histo` → `/config/notifs/nodon_histo.txt` |
+| Prérequis | Intégration File UI : nom `log_nodon_histo`, fichier `/config/notifs/nodon_histo.txt` |
+
+#### C - Chaîne de dépendances
+
+```
+sensor.genelec_appart_quotidien_um (NAT - Nodon SEM-4-1-00 + UM)
+  [23:59]
+    → attr last_period (kWh J-1)
+        → notify.log_nodon_histo → /config/notifs/nodon_histo.txt
+                └─→ lu par correct_linky.py (rattrapage_linky_ecart)
+```
+
+#### D - Vignette : - log (pas de vignette dashboard)
+
+---
+
+### ✅ HISTO LINKY QUOTIDIEN + ECART J-1
+*Fichier : `energie/histo_linky_quotidien.yaml`*
+
+#### A - Rôle
+
+Enregistre chaque nuit à 23h59 la consommation Linky J-1 (`day_1`) dans `linky_histo.txt`. Si `day_1 = 0` (Enedis non publié) : écrit `(MANQUANT)` pour rattrapage automatique. Si `day_1 > 0` : calcule et logue aussi l'écart Linky/Nodon dans `ecart_histo.txt`.
+
+#### B - Triggers / Entités
+
+| | Détail |
+|:--|:--|
+| Trigger | 23:59:00 fixe |
+| Condition | Aucune |
+| Entités lues | `sensor.linky_25481620821301_consumption` (attr `day_1`), `sensor.genelec_appart_quotidien_um` (attr `last_period`) |
+| Actions | `notify.send_message → notify.log_linky_histo` → `/config/notifs/linky_histo.txt` |
+| Actions (si day_1>0) | `notify.send_message → notify.log_ecart_histo` → `/config/notifs/ecart_histo.txt` |
+| Prérequis | Intégrations File UI : `log_linky_histo` + `log_ecart_histo` |
+
+#### C - Chaîne de dépendances
+
+```
+sensor.linky_25481620821301_consumption (NAT - MyElectricalData)
+  [23:59]
+    → attr day_1 (kWh J-1)
+        ├─ day_1 > 0 → notify.log_linky_histo → linky_histo.txt
+        │                  └─→ lu par correct_linky.py
+        └─ day_1 = 0 → notify.log_linky_histo → linky_histo.txt "(MANQUANT)"
+                           └─→ rattrapage via rattrapage_linky_ecart.yaml
+sensor.genelec_appart_quotidien_um (attr last_period)
+    → si day_1 > 0 : calcul écart → notify.log_ecart_histo → ecart_histo.txt
+```
+
+#### D - Vignette : - log (pas de vignette dashboard)
+
+---
+
+### ✅ RATTRAPAGE LINKY MANQUANT + ECART
+*Fichier : `energie/rattrapage_linky_ecart.yaml`*
+
+#### A - Rôle
+
+Tourne à 23h59:30 (après les 2 autos histo). Construit un JSON `day_1`→`day_7` (valeurs > 0, dates JJ/MM depuis `dailyweek`) et appelle le script Python `correct_linky.py`. Le script corrige toutes les lignes `(MANQUANT)` de `linky_histo.txt`, lit `nodon_histo.txt` pour les valeurs Nodon correspondantes, et calcule les écarts rattrapés dans `ecart_histo.txt`. Couvre jusqu'à 7 jours de retard Enedis.
+
+#### B - Triggers / Entités
+
+| | Détail |
+|:--|:--|
+| Trigger | 23:59:30 fixe |
+| Condition | Aucune (filtrage day_N > 0 dans le template JSON) |
+| Entités lues | `sensor.linky_25481620821301_consumption` (attrs `day_1`→`day_7`, `dailyweek`) |
+| Actions | `shell_command.correct_linky_log` (JSON en argument) |
+| Script | `/config/.scripts/correct_linky.py` |
+| Prérequis | `shell_command.correct_linky_log` dans `shell_command/P0/P0_correct_linky.yaml` |
+
+#### C - Chaîne de dépendances
+
+```
+sensor.linky_25481620821301_consumption (NAT - MyElectricalData)
+  [23:59:30]
+    → day_1..day_7 + dailyweek → JSON [{date, val}, ...]
+        → shell_command.correct_linky_log
+            → /config/.scripts/correct_linky.py
+                ├─ lit   : /config/notifs/linky_histo.txt
+                ├─ lit   : /config/notifs/nodon_histo.txt
+                ├─ écrit : /config/notifs/linky_histo.txt (MANQUANT → RATTRAPÉ)
+                └─ append: /config/notifs/ecart_histo.txt (écart RATTRAPÉ)
+```
+
+#### D - Vignette : - log (pas de vignette dashboard)
 
 ---
 

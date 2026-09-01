@@ -24,4 +24,4 @@
 #   - Le dossier /config/.scripts/ doit exister (mkdir -p /config/.scripts/)
 
 correct_linky_log: >-
-  python3 /config/.scripts/correct_linky.py '[{"date": "{{ date_j2 }}", "val": {{ value_j2 }}}]'
+  python3 /config/.scripts/correct_linky.py '{{ data_json if data_json is defined else "[{\"date\": \"" ~ date_j2 ~ "\", \"val\": " ~ value_j2 ~ "}]" }}'
