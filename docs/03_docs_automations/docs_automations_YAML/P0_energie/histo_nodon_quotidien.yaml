@@ -1,0 +1,22 @@
+id: '1788118227600'
+alias: "[P0] Histo Nodon quotidien"
+description: >
+  Enregistre la conso Nodon J-1 (last_period UM quotidien) dans nodon_histo.txt a 23h59.
+  Prerequis : integration File "log_nodon_histo" creee dans l'UI HA
+  (Parametres > Appareils > Ajouter integration > File > /config/notifs/nodon_histo.txt).
+  Convention projet (breaking change 2026) : notify.send_message + target entity_id.
+triggers:
+  - trigger: time
+    at: '23:59:00'
+conditions: []
+actions:
+  - variables:
+      nodon_j1: >
+        {{ state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) | round(2) }}
+      date_j1: "{{ (now() - timedelta(days=1)).strftime('%d/%m') }}"
+  - action: notify.send_message
+    target:
+      entity_id: notify.log_nodon_histo
+    data:
+      message: "{{ date_j1 }} | Nodon : {{ nodon_j1 }} kWh\n"
+mode: single

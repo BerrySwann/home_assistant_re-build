@@ -1,0 +1,36 @@
+alias: "P2 - ALARME Congélateur : Porte mal fermée (probable)"
+description: >
+  Température >= -15°C pendant 5 min soutenues ET compresseur actif
+  (courant prise > 0.15A) -> le compresseur tourne mais n'arrive pas
+  à compenser, signature typique d'une porte mal fermée.
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.tongel_temperature
+    above: -15
+    for:
+      minutes: 5
+conditions:
+  - condition: state
+    entity_id: binary_sensor.congelateur_compresseur_actif
+    state: "on"
+actions:
+  - action: notify.mobile_app_eric
+    data:
+      title: "Congélateur : porte mal fermée ?"
+      message: >
+        Température {{ states('sensor.tongel_temperature') }}°C depuis au
+        moins 5 min, compresseur actif. Vérifie la fermeture de la porte.
+  - action: notify.mobile_app_mamour
+    data:
+      title: "Congélateur : porte mal fermée ?"
+      message: >
+        Température {{ states('sensor.tongel_temperature') }}°C depuis au
+        moins 5 min, compresseur actif. Vérifie la fermeture de la porte.
+  - action: persistent_notification.create
+    data:
+      notification_id: congelateur_alarme_porte
+      title: "Congélateur : porte mal fermée (probable)"
+      message: >
+        Température {{ states('sensor.tongel_temperature') }}°C, compresseur
+        actif depuis au moins 5 min de dépassement de seuil.
+mode: single

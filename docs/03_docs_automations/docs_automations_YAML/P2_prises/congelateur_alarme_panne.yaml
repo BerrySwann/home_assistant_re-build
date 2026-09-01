@@ -1,0 +1,42 @@
+alias: "P2 - ALARME Congélateur : Panne probable (pas de courant)"
+description: >
+  Température >= -15°C pendant 5 min soutenues ET aucun appel de courant
+  depuis 1h (le compresseur ne redémarre plus) -> panne électrique ou
+  mécanique probable. Voir PIÈGES dans P2_congelateur_compresseur_actif.yaml :
+  peut aussi se déclencher si c'est la PRISE de mesure qui est hors ligne,
+  pas forcément le congélateur.
+triggers:
+  - trigger: numeric_state
+    entity_id: sensor.tongel_temperature
+    above: -15
+    for:
+      minutes: 5
+conditions:
+  - condition: state
+    entity_id: binary_sensor.congelateur_compresseur_actif
+    state: "off"
+    for:
+      hours: 1
+actions:
+  - action: notify.mobile_app_eric
+    data:
+      title: "Congélateur : panne probable"
+      message: >
+        Température {{ states('sensor.tongel_temperature') }}°C, aucun appel
+        de courant du compresseur depuis au moins 1h. Vérifie le congélateur
+        et la prise.
+  - action: notify.mobile_app_mamour
+    data:
+      title: "Congélateur : panne probable"
+      message: >
+        Température {{ states('sensor.tongel_temperature') }}°C, aucun appel
+        de courant du compresseur depuis au moins 1h. Vérifie le congélateur
+        et la prise.
+  - action: persistent_notification.create
+    data:
+      notification_id: congelateur_alarme_panne
+      title: "Congélateur : panne probable"
+      message: >
+        Température {{ states('sensor.tongel_temperature') }}°C, pas de
+        courant compresseur depuis au moins 1h.
+mode: single

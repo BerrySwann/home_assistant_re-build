@@ -1,0 +1,56 @@
+id: '1788118118362'
+alias: "[P0] Histo Linky quotidien + Ecart J-1"
+description: >
+  A 23h59, logue la conso Linky J-1 (day_1) dans linky_histo.txt.
+  Si day_1 = 0 (Enedis pas encore publie) : ecrit "(MANQUANT)" pour rattrapage par auto 3.
+  Si day_1 > 0 : calcule et logue aussi l'ecart Linky/Nodon dans ecart_histo.txt.
+  Prerequis : integrations File creees dans l'UI HA
+  (Parametres > Appareils > Ajouter integration > File).
+  - Fichier "log_linky_histo.txt" -> /config/notifs/linky_histo.txt
+    -> entite cible : notify.log_linky_histo
+  - Fichier "log_ecart_histo.txt" -> /config/notifs/ecart_histo.txt
+    -> entite cible : notify.log_ecart_histo
+  Convention projet (breaking change 2026) : les fichiers ne sont PLUS des
+  services notify.log_* a appeler directement. Le service unique est
+  notify.send_message avec target entity_id = entite du fichier.
+triggers:
+  - trigger: time
+    at: '23:59:00'
+conditions: []
+actions:
+  - variables:
+      linky_j1: >
+        {{ state_attr('sensor.linky_25481620821301_consumption', 'day_1') | float(0) }}
+      nodon_j1: >
+        {{ state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) | round(2) }}
+      date_j1: "{{ (now() - timedelta(days=1)).strftime('%d/%m') }}"
+  # --- Log linky_histo.txt ---
+  - if:
+      - condition: template
+        value_template: "{{ linky_j1 > 0 }}"
+    then:
+      - action: notify.send_message
+        target:
+          entity_id: notify.log_linky_histo
+        data:
+          message: "{{ date_j1 }} | Linky : {{ linky_j1 | round(2) }} kWh\n"
+    else:
+      - action: notify.send_message
+        target:
+          entity_id: notify.log_linky_histo
+        data:
+          message: "{{ date_j1 }} | Linky : 0.00 kWh (MANQUANT)\n"
+  # --- Ecart J-1 si Linky disponible ---
+  - if:
+      - condition: template
+        value_template: "{{ linky_j1 > 0 }}"
+    then:
+      - action: notify.send_message
+        target:
+          entity_id: notify.log_ecart_histo
+        data:
+          message: >-
+            {% set ecart = (linky_j1 - nodon_j1) | round(2) %}
+            {% set pct = ((ecart / linky_j1) * 100) | round(1) if linky_j1 > 0 else 0 %}
+            {{ date_j1 }} | Linky: {{ linky_j1 | round(2) }} kWh | Nodon: {{ nodon_j1 }} kWh | Ecart: {{ ecart }} ({{ pct }}%)
+mode: single
