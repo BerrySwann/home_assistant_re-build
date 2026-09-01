@@ -38,3 +38,4 @@ sonoff_devices:
     - sensor.contact_fenetre_cuisine_sonoff_battery
     - sensor.contact_fenetre_bureau_sonoff_battery
     - sensor.contact_fenetre_chambre_sonoff_battery
+    - sensor.tongel_battery
