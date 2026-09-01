@@ -72,7 +72,7 @@ while IFS='|' read -r rel prod_md5; do
     HTTP_CODE=$(curl -sf --max-time 15 -o "$TMP_GH" \
         -w '%{http_code}' "${GH_BASE}/${encoded}" 2>/dev/null || echo "000")
 
-    if [[ "$HTTP_CODE" != "200" ]] || [[ ! -s "$TMP_GH" ]]; then
+    if [[ "$HTTP_CODE" != "200" ]]; then
         github_md5=""
         statut="⚠️  ABSENT GITHUB"
         ABSENT=$((ABSENT+1))

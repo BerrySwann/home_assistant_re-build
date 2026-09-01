@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿#!/usr/bin/env bash
+﻿﻿﻿﻿#!/usr/bin/env bash
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ AUDIT MD5 — 3 PASSES : TREE → MD5 PROD → MD5 GITHUB → RAPPORT          │
 # ╰──────────────────────────────────────────────────────────────────────────╯
@@ -75,7 +75,7 @@ while IFS='|' read -r file prod_md5; do
     HTTP_CODE=$(curl -sf --max-time 15 -o "$TMP_GH" \
         -w '%{http_code}' "${GH_BASE}/${encoded_file}" 2>/dev/null || echo "000")
 
-    if [[ "$HTTP_CODE" != "200" ]] || [[ ! -s "$TMP_GH" ]]; then
+    if [[ "$HTTP_CODE" != "200" ]]; then
         github_md5=""
         statut="⚠️  PUSH MANQUANT"
         PUSH_MANQUANT=$((PUSH_MANQUANT+1))

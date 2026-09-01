@@ -71,3 +71,9 @@ migration-*-to-*.log
 !zone_eric.txt
 # "[L65] Force l inclusion du diagnostic conso malgré l interdiction .txt"
 
+
+# --- Backups & parasites editeurs ---
+*.bak
+\#*#
+*~
+.ha_run.lock
