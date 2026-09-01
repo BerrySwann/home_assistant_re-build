@@ -1,0 +1,52 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 2. TEMPLATE : CONGÉLATEUR — DÉTECTION COMPRESSEUR ACTIF (COURANT)   │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteur binaire détectant si le compresseur du congélateur cuisine tire du
+# courant (donc actif) à partir de la prise connectée NOUS. Sert de brique
+# de base aux alarmes du congélateur (porte mal fermée / panne), en
+# distinguant "compresseur qui tourne mais n'arrive pas à compenser" de
+# "compresseur qui ne redémarre plus". Créé par Eric (BerrySwann) le 2026-09-01.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : sensor.prise_congelateur_cuisine_nous_current (prise NOUS, courant en A).
+# - Seuil : courant > 0.10 A → compresseur actif (on) ; sinon inactif (off).
+# - Seuil dérivé de l'historique réel (3 derniers jours au 2026-09-01) : cycles
+#   "actif" à 0.15-0.4 A pendant 40-55 min, coupures normales ~5 min à 0 A.
+#   0.10 A filtre le bruit de mesure sans risquer de manquer un vrai cycle.
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | NOUS SP (Z2M)  | sensor.prise_congelateur_cuisine_nous_current      | congelateur_compresseur_actif                       | Automations HA UI : alarmes congélateur (porte / panne) — non versionnées en YAML |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce capteur passe à "off" pendant les brefs décrochages Wi-Fi de la prise
+#   (unavailable/unknown, 2-3 secondes typiquement observées) — sans
+#   conséquence pour un déclencheur avec "for: 1h", mais à savoir si ce
+#   capteur est réutilisé ailleurs avec un délai plus court.
+# - Si la prise elle-même reste unavailable longtemps (panne Wi-Fi/plug,
+#   pas panne du congélateur), ce capteur reste "off" en continu : une
+#   automation "panne probable" basée dessus se déclenchera aussi dans ce
+#   cas, sans distinguer panne congélateur vs panne de la prise de mesure.
+# - Seuil 0.10 A à revoir si le modèle de prise ou le congélateur change.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Aucune vignette dédiée pour l'instant — capteur technique intermédiaire
+#   consommé uniquement par les automations d'alarme congélateur (HA UI).
+
+- binary_sensor:
+  # --- congelateur_compresseur_actif ---
+  - name: "Congélateur Compresseur Actif"
+    unique_id: congelateur_compresseur_actif
+    device_class: running
+    state: >
+      {{ states('sensor.prise_congelateur_cuisine_nous_current') | float(0) > 0.10 }}
+
+# annotations_log:
+# - [Création] Fichier créé avec en-tête de documentation conforme CLAUDE.md,
+#   pour servir de base aux alarmes congélateur (porte mal fermée / panne),
+#   validées avec Eric le 2026-09-01 (seuils dérivés de l'historique réel).

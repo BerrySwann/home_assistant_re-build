@@ -2418,3 +2418,132 @@
     data:
       data_json: '{{ data_json }}'
   mode: single
+- id: '1788279647593'
+  alias: 'P2 - ALARME Congélateur : Porte mal fermée (probable)'
+  description: 'Température >= -15°C pendant 5 min soutenues ET compresseur actif
+    (courant prise > 0.15A) -> le compresseur tourne mais n''arrive pas à compenser,
+    signature typique d''une porte mal fermée.
+
+    '
+  triggers:
+  - trigger: numeric_state
+    entity_id: sensor.tongel_temperature
+    above: -15
+    for:
+      minutes: 5
+  conditions:
+  - condition: state
+    entity_id: binary_sensor.congelateur_compresseur_actif
+    state: 'on'
+  actions:
+  - action: notify.mobile_app_eric
+    data:
+      title: 'Congélateur : porte mal fermée ?'
+      message: 'Température {{ states(''sensor.tongel_temperature'') }}°C depuis au
+        moins 5 min, compresseur actif. Vérifie la fermeture de la porte.
+
+        '
+  - action: notify.mobile_app_mamour
+    data:
+      title: 'Congélateur : porte mal fermée ?'
+      message: 'Température {{ states(''sensor.tongel_temperature'') }}°C depuis au
+        moins 5 min, compresseur actif. Vérifie la fermeture de la porte.
+
+        '
+  - action: persistent_notification.create
+    data:
+      notification_id: congelateur_alarme_porte
+      title: 'Congélateur : porte mal fermée (probable)'
+      message: 'Température {{ states(''sensor.tongel_temperature'') }}°C, compresseur
+        actif depuis au moins 5 min de dépassement de seuil.
+
+        '
+  mode: single
+- id: '1788279708180'
+  alias: 'P2 - ALARME Congélateur : Panne probable (pas de courant)'
+  description: 'Température >= -15°C pendant 5 min soutenues ET aucun appel de courant
+    depuis 1h (le compresseur ne redémarre plus) -> panne électrique ou mécanique
+    probable. Voir PIÈGES dans P2_congelateur_compresseur_actif.yaml : peut aussi
+    se déclencher si c''est la PRISE de mesure qui est hors ligne, pas forcément le
+    congélateur.
+
+    '
+  triggers:
+  - trigger: numeric_state
+    entity_id: sensor.tongel_temperature
+    above: -15
+    for:
+      minutes: 5
+  conditions:
+  - condition: state
+    entity_id: binary_sensor.congelateur_compresseur_actif
+    state: 'off'
+    for:
+      hours: 1
+  actions:
+  - action: notify.mobile_app_eric
+    data:
+      title: 'Congélateur : panne probable'
+      message: 'Température {{ states(''sensor.tongel_temperature'') }}°C, aucun appel
+        de courant du compresseur depuis au moins 1h. Vérifie le congélateur et la
+        prise.
+
+        '
+  - action: notify.mobile_app_mamour
+    data:
+      title: 'Congélateur : panne probable'
+      message: 'Température {{ states(''sensor.tongel_temperature'') }}°C, aucun appel
+        de courant du compresseur depuis au moins 1h. Vérifie le congélateur et la
+        prise.
+
+        '
+  - action: persistent_notification.create
+    data:
+      notification_id: congelateur_alarme_panne
+      title: 'Congélateur : panne probable'
+      message: 'Température {{ states(''sensor.tongel_temperature'') }}°C, pas de
+        courant compresseur depuis au moins 1h.
+
+        '
+  mode: single
+- id: '1788279749343'
+  alias: 'P2 - ALARME Congélateur : Perte de supervision capteur Tongel'
+  description: 'Le capteur de température Tongel ne remonte plus rien (unavailable
+    ou unknown) depuis 2h -> perte de supervision, indépendant de l''état réel du
+    congélateur (peut aussi être une pile morte ou une perte Zigbee).
+
+    '
+  triggers:
+  - trigger: state
+    entity_id: sensor.tongel_temperature
+    to: unavailable
+    for:
+      hours: 2
+  - trigger: state
+    entity_id: sensor.tongel_temperature
+    to: unknown
+    for:
+      hours: 2
+  actions:
+  - action: notify.mobile_app_eric
+    data:
+      title: 'Congélateur : capteur muet'
+      message: 'sensor.tongel_temperature ne remonte plus rien depuis au moins 2h.
+        Plus de supervision du congélateur (pile ? Zigbee ?).
+
+        '
+  - action: notify.mobile_app_mamour
+    data:
+      title: 'Congélateur : capteur muet'
+      message: 'sensor.tongel_temperature ne remonte plus rien depuis au moins 2h.
+        Plus de supervision du congélateur (pile ? Zigbee ?).
+
+        '
+  - action: persistent_notification.create
+    data:
+      notification_id: congelateur_alarme_capteur
+      title: 'Congélateur : capteur muet'
+      message: 'sensor.tongel_temperature unavailable/unknown depuis au moins 2h.
+
+        '
+  mode: single
