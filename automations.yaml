@@ -2279,7 +2279,8 @@
 
     '
   triggers:
-  - trigger: time
+  - alias: 'HORAIRE : EXECUTION 23H59'
+    trigger: time
     at: '23:59:00'
   conditions: []
   actions:
@@ -2335,7 +2336,8 @@
 
     '
   triggers:
-  - trigger: time
+  - alias: 'HORAIRE : EXECUTION 23H59'
+    trigger: time
     at: '23:59:00'
   conditions: []
   actions:
@@ -2366,8 +2368,9 @@
 
     '
   triggers:
-  - trigger: time
-    at: '23:59:30'
+  - alias: 'HORAIRE : EXECUTION 23H59'
+    trigger: time
+    at: '23:59:00'
   conditions:
   - condition: template
     value_template: '{{ state_attr(''sensor.linky_25481620821301_consumption'', ''day_2'')
@@ -2398,7 +2401,8 @@
 
     '
   triggers:
-  - trigger: time
+  - alias: 'HORAIRE : EXECUTION 23H59:30sec'
+    trigger: time
     at: '23:59:30'
   conditions: []
   actions:
