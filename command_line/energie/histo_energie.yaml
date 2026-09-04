@@ -9,7 +9,7 @@
 # Inclus via : command_line: !include_dir_merge_list command_line/ (configuration.yaml)
 #
 # ## FORMAT DES FICHIERS SOURCES :
-# linky_histo.txt : "DD/MM | Linky :  MANQUANT" ou "DD/MM | Linky : 9.22 kWh"
+# linky_histo.txt : "DD/MM | Linky : 7.10 kWh (RATTRAPÉ)" ou "DD/MM | Linky :  MANQUANT"
 # nodon_histo.txt : "DD/MM | Nodon : 9.52 kWh"
 # Fichiers ecrits par automations P0 (p0_histo_linky_quotidien_ecart_j_1, p0_histo_nodon_quotidien).
 #
@@ -31,6 +31,8 @@
 #   Si besoin de maj immediate apres l automation : homeassistant.update_entity.
 # - Si le fichier n existe pas : sensor reste "ERR", attributs vides.
 # - Python3 doit etre disponible dans le container HA (toujours vrai).
+# - Les lignes sont filtrees sur "| Linky :" / "| Nodon :" pour ignorer header/separateur.
+# - Le suffixe "(RATTRAPÉ)" ou autre est ignore : seul le 1er token numerique est lu.
 #
 # ## TABLEAU DE BORD :
 # - Vue Energie (vue index 11), carte "Analyse de Precision"
@@ -48,7 +50,7 @@
       result = {}
       try:
           with open('/config/notifs/linky_histo.txt') as f:
-              lines = [l.strip() for l in f if l.strip()]
+              lines = [l.strip() for l in f if l.strip() and '| Linky :' in l]
           for i, line in enumerate(reversed(lines[-7:])):
               parts = line.split('|')
               if len(parts) >= 2:
@@ -58,7 +60,8 @@
                       result['j'+str(i)+'_val'] = 'MANQUANT'
                   else:
                       try:
-                          num = val.split(':')[-1].strip().replace(' kWh','')
+                          tokens = val.split(':')[-1].strip().split()
+                          num = tokens[0] if tokens else ''
                           result['j'+str(i)+'_val'] = str(round(float(num),2))
                       except Exception:
                           result['j'+str(i)+'_val'] = 'ERR'
@@ -97,14 +100,15 @@
       result = {}
       try:
           with open('/config/notifs/nodon_histo.txt') as f:
-              lines = [l.strip() for l in f if l.strip()]
+              lines = [l.strip() for l in f if l.strip() and '| Nodon :' in l]
           for i, line in enumerate(reversed(lines[-7:])):
               parts = line.split('|')
               if len(parts) >= 2:
                   result['j'+str(i)+'_date'] = parts[0].strip()
                   val = parts[1]
                   try:
-                      num = val.split(':')[-1].strip().replace(' kWh','')
+                      tokens = val.split(':')[-1].strip().split()
+                      num = tokens[0] if tokens else ''
                       result['j'+str(i)+'_val'] = str(round(float(num),2))
                   except Exception:
                       result['j'+str(i)+'_val'] = 'ERR'
