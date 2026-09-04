@@ -1,0 +1,132 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ COMMAND_LINE : HISTORIQUE ENERGIE — LINKY & NODON (lecture fichiers txt)  │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## DESCRIPTION :
+# Lit les fichiers /config/notifs/linky_histo.txt et nodon_histo.txt.
+# Extrait les 7 derniers jours et expose les donnees comme attributs JSON.
+# Utilise par la carte "Analyse de Precision" (dashboard tablette, vue Energie).
+# Inclus via : command_line: !include_dir_merge_list command_line/ (configuration.yaml)
+#
+# ## FORMAT DES FICHIERS SOURCES :
+# linky_histo.txt : "DD/MM | Linky :  MANQUANT" ou "DD/MM | Linky : 9.22 kWh"
+# nodon_histo.txt : "DD/MM | Nodon : 9.52 kWh"
+# Fichiers ecrits par automations P0 (p0_histo_linky_quotidien_ecart_j_1, p0_histo_nodon_quotidien).
+#
+# ## ATTRIBUTS EXPOSES (par sensor) :
+# j0_date : DD/MM du jour le plus recent (J-1)
+# j0_val  : valeur kWh (string) ou "MANQUANT" ou "ERR"
+# j1_date ... j6_date / j1_val ... j6_val : idem pour J-2 a J-7
+# count   : nombre d entrees valides extraites
+#
+# ## CHAINE DE DEPENDANCES :
+#
+# | SOURCE                              | SENSOR (unique_id)          | AVAL                                      |
+# |:------------------------------------|:----------------------------|:------------------------------------------|
+# | /config/notifs/linky_histo.txt      | histo_energie_linky         | Carte Analyse de Precision (vue Energie)  |
+# | /config/notifs/nodon_histo.txt      | histo_energie_nodon         | Carte Analyse de Precision (vue Energie)  |
+#
+# ## AVERTISSEMENTS :
+# - scan_interval 3600 : les fichiers sont ecrits 1x/jour (automation 01h00).
+#   Si besoin de maj immediate apres l automation : homeassistant.update_entity.
+# - Si le fichier n existe pas : sensor reste "ERR", attributs vides.
+# - Python3 doit etre disponible dans le container HA (toujours vrai).
+#
+# ## TABLEAU DE BORD :
+# - Vue Energie (vue index 11), carte "Analyse de Precision"
+# - Vignette : L2C1 04 Energie Generale
+
+# --- histo_energie_linky ---
+- sensor:
+    name: "Histo Energie Linky"
+    unique_id: histo_energie_linky
+    scan_interval: 3600
+    command_timeout: 10
+    command: |-
+      python3 -c "
+      import json
+      result = {}
+      try:
+          with open('/config/notifs/linky_histo.txt') as f:
+              lines = [l.strip() for l in f if l.strip()]
+          for i, line in enumerate(reversed(lines[-7:])):
+              parts = line.split('|')
+              if len(parts) >= 2:
+                  result['j'+str(i)+'_date'] = parts[0].strip()
+                  val = parts[1]
+                  if 'MANQUANT' in val:
+                      result['j'+str(i)+'_val'] = 'MANQUANT'
+                  else:
+                      try:
+                          num = val.split(':')[-1].strip().replace(' kWh','')
+                          result['j'+str(i)+'_val'] = str(round(float(num),2))
+                      except Exception:
+                          result['j'+str(i)+'_val'] = 'ERR'
+          result['count'] = str(len([k for k in result if k.endswith('_val')]))
+      except Exception as e:
+          result['error'] = str(e)
+      print(json.dumps(result))
+      "
+    value_template: "OK"
+    json_attributes:
+      - j0_date
+      - j0_val
+      - j1_date
+      - j1_val
+      - j2_date
+      - j2_val
+      - j3_date
+      - j3_val
+      - j4_date
+      - j4_val
+      - j5_date
+      - j5_val
+      - j6_date
+      - j6_val
+      - count
+
+# --- histo_energie_nodon ---
+- sensor:
+    name: "Histo Energie Nodon"
+    unique_id: histo_energie_nodon
+    scan_interval: 3600
+    command_timeout: 10
+    command: |-
+      python3 -c "
+      import json
+      result = {}
+      try:
+          with open('/config/notifs/nodon_histo.txt') as f:
+              lines = [l.strip() for l in f if l.strip()]
+          for i, line in enumerate(reversed(lines[-7:])):
+              parts = line.split('|')
+              if len(parts) >= 2:
+                  result['j'+str(i)+'_date'] = parts[0].strip()
+                  val = parts[1]
+                  try:
+                      num = val.split(':')[-1].strip().replace(' kWh','')
+                      result['j'+str(i)+'_val'] = str(round(float(num),2))
+                  except Exception:
+                      result['j'+str(i)+'_val'] = 'ERR'
+          result['count'] = str(len([k for k in result if k.endswith('_val')]))
+      except Exception as e:
+          result['error'] = str(e)
+      print(json.dumps(result))
+      "
+    value_template: "OK"
+    json_attributes:
+      - j0_date
+      - j0_val
+      - j1_date
+      - j1_val
+      - j2_date
+      - j2_val
+      - j3_date
+      - j3_val
+      - j4_date
+      - j4_val
+      - j5_date
+      - j5_val
+      - j6_date
+      - j6_val
+      - count
