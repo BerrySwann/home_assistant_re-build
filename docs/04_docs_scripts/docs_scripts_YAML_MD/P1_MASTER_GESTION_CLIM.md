@@ -145,3 +145,10 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 - `sensor_update` ne redémarre pas une clim déjà en `off` (protection intentionnelle via `trigger_id`).
 - Script `mode: queued, max: 10` - les déclenchements simultanés sont mis en file.
 - Les températures eco ont un fallb
+---
+
+## 📋 Changelog
+
+| Date | Session | Modification | config_hash |
+|:---|:---|:---|:---|
+| 2026-09-06 | S1 | **Fix `temp_out_of_range`** : bloc `INIT : CIBLES DE TEMPÉRATURE PAR PIÈCE` reécrit avec clamp Jinja2 `[[_v, min_temp]\|max, max_temp]\|min` sur `state_attr` live pour `t_salon_target`, `t_bureau_target`, `t_chambre_target`. Empêche tout appel `climate.set_temperature` hors plage physique AC (Salon 16–32°C, Bureau/Chambre 18–32°C). 279→291 lignes. | `83cd286eafa2f8df` |

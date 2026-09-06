@@ -1,5 +1,10 @@
 # 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
-*Dernière mise à jour : 2026-09-01 (3 automations ENERGIE P0 ajoutées : HISTO_NODON, HISTO_LINKY, RATTRAPAGE_LINKY + script correct_linky.py. Intégrations File log_nodon/linky/ecart_histo. Section COMPLÉMENT fichiers notifs mise à jour.)*
+*Dernière mise à jour : 2026-09-06 S1 (sync_index : P1_MASTER_GESTION_CLIM.md mis à jour — changelog fix temp_out_of_range ajouté, déploiement confirmé config_hash 83cd286eafa2f8df)*
+*Dernière mise à jour : 2026-09-05 (Repair Spook "TABLETTE" : 4 références fantômes corrigées dans dashboard-tablette (climate.clim_du_bureau, climate.clim_chambre_nodon, sensor.sdb_seche_serviette_status_affichage, sensor.sdb_seche_serviettes_power_status_affichage) repointées vers les entités déjà documentées ici (climate.clim_bureau_rm4_mini, climate.clim_chambre_rm4_mini, sensor.sdb_seche_serviette_power_status_affichage) — vues L1C2 temperatures / L1C3 clim / L2C2 energie-clim. Correctif dashboard live via ha_config_set_dashboard, aucune nouvelle dépendance : la doc était déjà correcte, c'est le dashboard qui avait dérivé.)*
+*Dernière mise à jour : 2026-09-04 (L2C1 page Energie HOME : carte Analyse de Précision mise à jour 5 colonnes Linky|Nodon|Ecart kWh|Ecart% déployée en HA. Page complète archivée : page_L2C1_energie_principale_2026-09-04.yaml 2259 lignes.)*
+*Dernière mise à jour : 2026-09-03 (command_line/energie/histo_energie.yaml créé : sensor.histo_energie_linky + sensor.histo_energie_nodon. Carte Analyse de Précision (L2C1) migrée en markdown card avec écart 7j glissants. energie/rattrapage_linky_ecart.yaml synchro avec P0_energie/.)*
+*Dernière mise à jour : 2026-09-02 (L1C2 : ajout bloc CONGÉLATEUR à la page dashboard - sensor.tongel_temperature/_humidity/_battery (SONOFF via Z2M) - validé en live par Eric. Fichier page_L1C2_temperatures_2026-09-02.yaml archivé.)*
+*2026-09-01 (3 automations ENERGIE P0 ajoutées : HISTO_NODON, HISTO_LINKY, RATTRAPAGE_LINKY + script correct_linky.py. Intégrations File log_nodon/linky/ecart_histo. Section COMPLÉMENT fichiers notifs mise à jour.)*
 *2026-08-09 S1 (L5C3 : rename audit_md5_docs → audit_md5_md_yaml + sensor. Page 2026-08-09 ajoutée, 2026-06-02 supprimée. Dashboard_2026_08_09.yaml en local.)*
 *2026-08-08 S3 (Section SCRIPTS créée : script.p1_master_gestion_clim documenté A/B/C/D. MATRICE DES SCRIPTS ajoutée. HOME PAGE déplacée avant L1C1. COMPLÉMENT déplacé en dernière position. Réorganisation finale : HOME PAGE > L1C1-L6C3 > AUTOMATIONS > SCRIPTS > COMPLÉMENT.)*
 *2026-08-08 S1-S2 (Resync GitHub->local : 6 fichiers mis a jour. Renommage ui_dashboard -> P3_ui_dashboard en prod + local. Confirmation section tronquee. Recheck L5C3/L6C1/L6C2/L6C3 : pages manquantes ajoutées, entités audit_md5_docs ajoutées L5C3, page 05-10 supprimée. L5C2 : 2 entités fantômes NE2213 Mamour confirmées. Section AUTOMATIONS créée + enrichissement complet A/B/C/D : 49 automations, 11 groupes, hiérarchie ## groupe / ### automation / #### A/B/C/D appliquée A-Z. MATRICE DES AUTOMATIONS 49 lignes. Emoji 🗂️ sur tous les groupes.)*
@@ -289,6 +294,9 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `climate.radiateur_cuisine` | NAT | Meross |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
 | `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
+| `sensor.tongel_temperature` | NAT | SONOFF via Z2M *(ajouté 2026-09-02 - bloc Congélateur)* |
+| `sensor.tongel_humidity` | NAT | SONOFF via Z2M *(ajouté 2026-09-02 - bloc Congélateur)* |
+| `sensor.tongel_battery` | NAT | SONOFF via Z2M *(ajouté 2026-09-02 - bloc Congélateur)* |
 
 > ⚠️ **Corrigé le 2026-07-19** : `temperature_moyenne_interieure`, `temperature_delta_affichage`,
 > `delta_ademe_recommande` étaient attribués à tort à `P1_ui_dashboard/P1_ui_dashboard.yaml`
@@ -319,6 +327,7 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-05-22.yaml` | ⚠️ obsolète - `climate.clim_chambre_rm4_mini` |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-05-22.yaml.bak` | ❓ origine inconnue - conservé en attendant clarification |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-07-14.yaml` | ✅ `climate.clim_chambre_rm4_mini` + `sensor.temperature_corrige_chambre` |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-02.yaml` | ✅ dernière version - ajoute bloc CONGÉLATEUR (`sensor.tongel_temperature/_humidity/_battery`), même base que 2026-07-14 sinon |
 | `templates/meteo/M_04_tendances_th_ext_card.yaml` | ✅ *(ajouté 2026-07-19 - manquait)* |
 | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | ✅ *(fichier partagé - AVAL principal L1C3, voir aussi cette section)* |
 
@@ -3607,6 +3616,7 @@ automation P1-B (CLIM NUIT) --+--> script.p1_master_gestion_clim [periode, trigg
 | `templates/` | Calculs, AVG, UI, météo, présence, stores | ✅ |
 | `utility_meter/` | Compteurs AMHQ (P0→P3, météo) | ✅ |
 | `command_line/` | Météo France, GitHub maintenance, audit MD5, IP externe | ✅ |
+| `command_line/energie/histo_energie.yaml` | `sensor.histo_energie_linky` + `sensor.histo_energie_nodon` (lecture linky_histo.txt / nodon_histo.txt, attr j0-j6 JSON) | ✅ (2026-09-03) |
 | `groups/` | Groupes batteries HUE/IKEA/SONOFF → L5C1 | ✅ |
 | `input_booleans/` | Helpers booléens (verrous clim, présence…) | ✅ |
 | `input_number/` | Helpers numériques | ✅ |
