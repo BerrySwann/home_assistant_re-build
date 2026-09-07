@@ -1055,11 +1055,11 @@ MATÉRIEL / INTÉGRATION
 
 | Entité | Type | Source |
 |:-------|:----:|:-------|
-| `sensor.proxmox_cpu_package` | NAT | Proxmox VE (MQTT Discovery) |
-| `sensor.pve_utilisation_du_processeur` | NAT | Proxmox VE |
-| `sensor.pve_memory_usage_percentage` | NAT | Proxmox VE |
-| `sensor.storage_local_storage_usage_percentage` | NAT | Proxmox VE |
-| `binary_sensor.pve_status` | NAT | Proxmox VE |
+| `sensor.proxmox_cpu_package` | NAT | intégration proxmoxve HA (REST API) |
+| `sensor.pve_utilisation_du_processeur` | NAT | intégration proxmoxve HA (REST API) |
+| `sensor.pve_memory_usage_percentage` | NAT | intégration proxmoxve HA (REST API) |
+| `sensor.storage_local_storage_usage_percentage` | NAT | intégration proxmoxve HA (REST API) |
+| `binary_sensor.pve_status` | NAT | intégration proxmoxve HA (REST API) |
 
 ### Page - Entités consommées (complet)
 
@@ -1205,7 +1205,7 @@ MATÉRIEL / INTÉGRATION
 
 | Entité | Type | Fichier source | Rôle |
 |:-------|:----:|:--------------|:-----|
-| `sensor.proxmox_cpu_package` | NAT | Proxmox VE (MQTT Discovery) | Entité principale - icône + champ `temp` |
+| `sensor.proxmox_cpu_package` | NAT | intégration proxmoxve HA (REST API) | Entité principale - icône + champ `temp` |
 | `sensor.pve_utilisation_du_processeur` | NAT | Proxmox VE | Champ `cpu` - CPU % |
 | `sensor.pve_memory_usage_percentage` | NAT | Proxmox VE | Champ `ram` - RAM % |
 | `sensor.storage_local_storage_usage_percentage` | NAT | Proxmox VE | Champ `sd` - Disk % |
@@ -1229,7 +1229,7 @@ MATÉRIEL / INTÉGRATION
   │     ├─→ sensor.system_monitor_debit_du_reseau_sortant_via_enp6s18  ← Bloc 5
   │     ├─→ sensor.system_monitor_charge_1m / 5m / 15m        ← Bloc 8
   │     └─→ sensor.cpu_speed  (NAT)                           ← Bloc 7
-  ├─→ Proxmox VE (intégration officielle HA - MQTT Discovery)
+  ├─→ intégration proxmoxve HA (REST API, lm-sensors via /nodes/pve/sensors)
   │     └─→ sensor.proxmox_cpu_package / sensor.proxmox_carte_mere / core_0/1/2/3  (NAT)
   │           ├─→ sensor.proxmox_cpu_package   ← Blocs 2, 9, 11
   │           ├─→ sensor.proxmox_core_0 / core_1 / core_2 / core_3  ← Bloc 10
