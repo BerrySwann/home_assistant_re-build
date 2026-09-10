@@ -1,7 +1,7 @@
 # [P2] ECO PRISES DYNAMIQUE — By Présence/Groupe
 
 **Catégorie :** P2_prises
-**Alias HA :** `ECO. PRISES DINAMIQUE -> By-Présence/Groupe`
+**Alias HA :** `ECO. PRISES DYNAMIQUE -> By-Présence/Groupe`
 **ID HA :** `1775245530054`
 **Mode HA :** `queued`
 

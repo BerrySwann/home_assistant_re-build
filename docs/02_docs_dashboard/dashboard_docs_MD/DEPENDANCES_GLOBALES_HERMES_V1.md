@@ -5044,7 +5044,7 @@ switch.prise_seche_serviette_salle_de_bain_nous
 
 ### Pole P2_prises (3 automations)
 
-#### P2_prises/eco_prises_dinamique_by_presence_groupe.yaml
+#### P2_prises/eco_prises_dynamique_by_presence_groupe.yaml
 *2 entites*
 
 ```

@@ -4,7 +4,7 @@
 #
 # ## 📝 DESCRIPTION :
 # Externalise la liste de configuration des prises pilotées par l'automation
-# "Eco. PRISES DINAMIQUE -> By-Présence/Groupe".
+# "Eco. PRISES DYNAMIQUE -> By-Présence/Groupe".
 # Chaque entrée définit une entité (switch ou light) et les groupes de présence
 # pour lesquels elle doit être allumée.
 # Ajouter une prise = 1 ligne ici + recharger templates. L'automation ne change pas.

@@ -142,7 +142,7 @@ T°Ext Up/Down/stable -> X°  ← tendance T° ext.
 
 | Automation | Titre | Message |
 |:-----------|:------|:--------|
-| ECO. PRISES DINAMIQUE | `ECO PRISES: {{ g \| upper }}` | Comptage prises ON/OFF (7 prises - absent_only sur TV Salon / PC Bureau / TV Chambre) |
+| ECO. PRISES DYNAMIQUE | `ECO PRISES: {{ g \| upper }}` | Comptage prises ON/OFF (7 prises - absent_only sur TV Salon / PC Bureau / TV Chambre) |
 | Gestion PC Bureau | `Allumage PC` / `Veille détectée` | `PC Bureau [ON]` / `PC Bureau [OFF]` |
 | Gestion TV Chambre | `Allumage TV` / `Veille détectée` | `Prise TV [ON]` / `Prise TV [OFF]` |
 
