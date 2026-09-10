@@ -1,7 +1,7 @@
 # P1_MASTER_GESTION_CLIM - Script centralisé climatisation
 
 > **Script HA :** `script.p1_master_gestion_clim`
-> **Fichier source :** `docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim.yaml`
+> **Fichier source :** `docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim_2026-09-09.yaml` (versions antérieures : `_2026-09-06.yaml`)
 > **Mode :** `queued` - max: 10
 > **Appelé par :** Automation A0 (JOUR) + Automation B0 (NUIT)
 > **Créé par :** Refactoring LLM local - 2026-06
@@ -35,11 +35,12 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 - Si `trigger_id == 'ha_restart'` → attente 1 minute
 
 ### 3. Boucle attente capteurs (max 10 × 30s)
-- Vérifie : `mode_ete_hiver`, `groupe`, `temperature_eco_hiver_corrige`, `temperature_eco_ete_corrige`, `temperature_corrige_mamour/eric`
-- + selon `periode` :
-  - JOUR : `temperature_cible`, `temperature_corrige_chambre`
-  - NUIT : `temperature_confort_nuit`, `temperature_corrige_chambre`
-- Si KO après 10 essais : notif `[AJ/AN] ATTENTE CAPTEURS`
+- Vérifie 9 capteurs : `mode_ete_hiver`, `groupe`, `temperature_eco_hiver_corrige`, `temperature_eco_ete_corrige`, `temperature_corrige_mamour`, `temperature_corrige_eric`, `temperature_corrige_chambre` + selon `periode` : `temperature_cible` (JOUR) ou `temperature_confort_nuit` (NUIT)
+- Aucune notif pendant la boucle (fini le spam par essai)
+- Au 10e cycle, **diagnostic 3 sorties** :
+  - **SORTIE 1 - OFF sécurité** : `mode_ete_hiver` HS, OU éco de saison HS alors qu'on en a besoin (groupe_1, groupe HS, ou une température normale HS) → off des 3 clims + message « Arrêt sécurité capteur HS »
+  - **SORTIE 2 - Mode dégradé éco** : éco de saison OK mais groupe HS ou une température normale HS → les 3 clims réglées sur la température éco de saison (eco heat si saison heat / eco cool si saison cool, lue sur les capteurs éco, jamais en dur) + message « mode dégradé »
+  - **SORTIE 3 - Mode normal** : tout est OK → logique groupe/période normale
 
 ### 4. Calcul variables globales
 | Variable | Source |
@@ -127,7 +128,7 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 |:---|:---|
 | `climate.clim_salon_rm4_mini` | `set_temperature` (hvac_mode + temperature) |
 | `climate.clim_bureau_rm4_mini` | `set_temperature` |
-| `climate.clim_chambre_rm4_mini` | `set_temperature` (target_temp_low/high - NodOn Z2M) |
+| `climate.clim_chambre_rm4_mini` | `set_temperature` (temperature simple - SmartIR Daikin) |
 | `climate.clim_salon_rm4_mini` / `clim_bureau_rm4_mini` / `clim_chambre_rm4_mini` | `set_hvac_mode: off` (urgence fenêtre) |
 
 ### Notifications
@@ -144,11 +145,13 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 - **SALON groupe_3 JOUR** : Eric seul → `temp_conf_e` (même comportement que l'ancienne version inline).
 - `sensor_update` ne redémarre pas une clim déjà en `off` (protection intentionnelle via `trigger_id`).
 - Script `mode: queued, max: 10` - les déclenchements simultanés sont mis en file.
-- Les températures eco ont un fallb
+- **Logique 3 sorties (09-09)** : si un capteur reste HS après les 10 essais, le script ne calcule plus avec des valeurs au hasard : OFF (critique), mode dégradé éco de saison (groupe ou temp normale HS), ou normal. Le message part une seule fois, au 10e cycle.
+- Les températures eco sont lues sur les capteurs (`temperature_eco_hiver_corrige` / `temperature_eco_ete_corrige`) selon la saison - jamais de valeur en dur. Si l'éco de saison est HS et qu'on en a besoin → OFF (sortie 1).
 ---
 
 ## 📋 Changelog
 
 | Date | Session | Modification | config_hash |
 |:---|:---|:---|:---|
-| 2026-09-06 | S1 | **Fix `temp_out_of_range`** : bloc `INIT : CIBLES DE TEMPÉRATURE PAR PIÈCE` reécrit avec clamp Jinja2 `[[_v, min_temp]\|max, max_temp]\|min` sur `state_attr` live pour `t_salon_target`, `t_bureau_target`, `t_chambre_target`. Empêche tout appel `climate.set_temperature` hors plage physique AC (Salon 16–32°C, Bureau/Chambre 18–32°C). 279→291 lignes. | `83cd286eafa2f8df` |
+| 2026-09-09 | Hermes | **Logique 3 sorties** après les 10 essais capteurs (version `_2026-09-09.yaml`) : sortie 1 OFF si `mode_ete_hiver` HS ou éco de saison HS + besoin éco ; sortie 2 mode dégradé éco de saison si groupe HS ou température normale HS ; sortie 3 normal. Clamp du 06-09 retiré (rollback 09-08). Chambre pilotée en `temperature` simple (SmartIR Daikin, plus de NodOn). Notif unique au 10e cycle (plus de notif par essai). | |
+| 2026-09-06 | S1 | **Fix `temp_out_of_range`** : bloc `INIT : CIBLES DE TEMPÉRATURE PAR PIÈCE` reécrit avec clamp Jinja2 `[[_v, min_temp]|max, max_temp]|min` sur `state_attr` live pour `t_salon_target`, `t_bureau_target`, `t_chambre_target`. Empêche tout appel `climate.set_temperature` hors plage physique AC (Salon 16-32°C, Bureau/Chambre 18-32°C). 279→291 lignes. | `83cd286eafa2f8df` |
