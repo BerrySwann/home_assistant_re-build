@@ -95,7 +95,7 @@
 # │ 10. AUTRE : Card - TEMPS DEPUIS IMPACT (TIMER "LAST CHANGE") │
 # └──────────────────────────────────────────────────────────────┘
 
-# --- temps_depuis_le_dernier_impact_de_foudre ---
+    # --- temps_depuis_le_dernier_impact_de_foudre ---
     - name: "Temps depuis le dernier impact de foudre"
       unique_id: temps_depuis_le_dernier_impact_de_foudre
       state: >
