@@ -1,3 +1,17 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ SCRIPT : p1_master_gestion_clim                                            │
+# │ P1 - MASTER : Gestion centralisée climatisation                            │
+# │ Version du 2026-09-09 - logique 3 sorties (OFF / dégradé éco / normal)     │
+# ├──────────────────────────────────────────────────────────────────────────┤
+# │ HISTORIQUE DES VERSIONS                                                   │
+# │ 2026-06-27 : création (refactoring des automations A0/B0)                  │
+# │ 2026-09-06 : ajout clamp min/max (fix temp_out_of_range) - RETIRÉ le 09-09│
+# │ 2026-09-09 : rollback clamp + logique 3 sorties après les 10 essais        │
+# │             - mode_ete_hiver HS => OFF + message                           │
+# │             - éco saison HS + besoin éco => OFF + message                  │
+# │             - groupe HS ou temp normale HS => dégradé éco de saison        │
+# │             - sinon => mode normal                                         │
+# ╰──────────────────────────────────────────────────────────────────────────╯
 p1_master_gestion_clim:
   alias: "P1 - MASTER : Gestion centralisée climatisation"
   description: "Pilotage des 3 clims jour/nuit selon le paramètre periode. Appelé par P1_A_01 et P1_B_01."
@@ -65,41 +79,101 @@ p1_master_gestion_clim:
                 states('sensor.temperature_eco_hiver_corrige') not in ['unknown', 'unavailable', '0'] and
                 states('sensor.temperature_eco_ete_corrige') not in ['unknown', 'unavailable', '0'] and
                 states('sensor.temperature_corrige_mamour') not in ['unknown', 'unavailable', '0'] and
-                states('sensor.temperature_corrige_eric') not in ['unknown', 'unavailable', '0']
+                states('sensor.temperature_corrige_eric') not in ['unknown', 'unavailable', '0'] and
+                states('sensor.temperature_corrige_chambre') not in ['unknown', 'unavailable', '0']
               %}
               {% if periode == 'jour' %}
                 {{ base_ok and
-                   states('sensor.temperature_cible') not in ['unknown', 'unavailable', '0'] and
-                   states('sensor.temperature_corrige_chambre') not in ['unknown', 'unavailable']
+                   states('sensor.temperature_cible') not in ['unknown', 'unavailable', '0']
                 }}
               {% else %}
                 {{ base_ok and
-                   states('sensor.temperature_confort_nuit') not in ['unknown', 'unavailable', '0'] and
-                   states('sensor.temperature_corrige_chambre') not in ['unknown', 'unavailable', '0']
+                   states('sensor.temperature_confort_nuit') not in ['unknown', 'unavailable', '0']
                 }}
               {% endif %}
           - alias: 'LIMITE : 10 TENTATIVES (5 MIN)'
             condition: template
             value_template: '{{ repeat.index >= 10 }}'
         sequence:
-        - alias: 'CONDITION : NOTIF UNIQUEMENT SI ÉCHEC'
-          condition: template
-          value_template: >
-            {{ states('sensor.mode_ete_hiver') in ['unknown', 'unavailable'] or
-               states('sensor.groupe') in ['unknown', 'unavailable'] }}
-        - alias: 'NOTIF : ALERTE ATTENTE CAPTEURS'
-          action: notify.mobile_app_eric
-          data:
-            title: "{{ prefix }} ATTENTE CAPTEURS"
-            message: >
-              Essai n°{{ repeat.index }}... Les capteurs de {{ periode }} ne sont
-              pas prêts. Pause 30s.
         - alias: 'PAUSE : AVANT NOUVEL ESSAI'
           delay: 00:00:30
-
-    # ──────────────────────────────────────────────
-    # 4. INIT : VARIABLES DE CALCUL
-    # ──────────────────────────────────────────────
+    - alias: 'DIAGNOSTIC : CAPTEURS ENCORE HS APRES LES 10 ESSAIS'
+      variables:
+        mode_saison_brut: "{{ states('sensor.mode_ete_hiver') }}"
+        mode_ete_ok: "{{ 'true' if states('sensor.mode_ete_hiver') not in ['unknown', 'unavailable'] else 'false' }}"
+        eco_saison_ok: >-
+          {% if mode_ete_ok == 'true' and mode_saison_brut == 'heat' %}
+          {{ 'true' if states('sensor.temperature_eco_hiver_corrige') not in ['unknown', 'unavailable', '0'] else 'false' }}
+          {% elif mode_ete_ok == 'true' and mode_saison_brut == 'cool' %}
+          {{ 'true' if states('sensor.temperature_eco_ete_corrige') not in ['unknown', 'unavailable', '0'] else 'false' }}
+          {% elif mode_ete_ok == 'true' %}
+          true
+          {% else %}false{% endif %}
+        groupe_ok: "{{ 'true' if states('sensor.groupe') not in ['unknown', 'unavailable'] else 'false' }}"
+        temps_normales_ok: >-
+          {% set base =
+            states('sensor.temperature_corrige_mamour') not in ['unknown', 'unavailable', '0'] and
+            states('sensor.temperature_corrige_eric') not in ['unknown', 'unavailable', '0'] and
+            states('sensor.temperature_corrige_chambre') not in ['unknown', 'unavailable', '0']
+          %}
+          {% if periode == 'jour' %}
+          {{ 'true' if (base and states('sensor.temperature_cible') not in ['unknown', 'unavailable', '0']) else 'false' }}
+          {% else %}
+          {{ 'true' if (base and states('sensor.temperature_confort_nuit') not in ['unknown', 'unavailable', '0']) else 'false' }}
+          {% endif %}
+        hs_list: >-
+          {% set ns = namespace(hs=[]) %}
+          {% if mode_ete_ok == 'false' %}{% set ns.hs = ns.hs + ['mode_ete_hiver'] %}{% endif %}
+          {% if groupe_ok == 'false' %}{% set ns.hs = ns.hs + ['groupe'] %}{% endif %}
+          {% if states('sensor.temperature_eco_hiver_corrige') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['eco_hiver_corrige'] %}{% endif %}
+          {% if states('sensor.temperature_eco_ete_corrige') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['eco_ete_corrige'] %}{% endif %}
+          {% if states('sensor.temperature_corrige_mamour') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['corrige_mamour'] %}{% endif %}
+          {% if states('sensor.temperature_corrige_eric') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['corrige_eric'] %}{% endif %}
+          {% if states('sensor.temperature_corrige_chambre') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['corrige_chambre'] %}{% endif %}
+          {% if periode == 'jour' and states('sensor.temperature_cible') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['temperature_cible'] %}{% endif %}
+          {% if periode == 'nuit' and states('sensor.temperature_confort_nuit') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['temperature_confort_nuit'] %}{% endif %}
+          {{ ns.hs | join(', ') }}
+        besoin_eco: "{{ 'true' if (groupe_ok == 'false' or temps_normales_ok == 'false' or (groupe_ok == 'true' and states('sensor.groupe') == 'groupe_1')) else 'false' }}"
+        mode_degrade_eco: "{{ 'true' if (mode_ete_ok == 'true' and eco_saison_ok == 'true' and (groupe_ok == 'false' or temps_normales_ok == 'false')) else 'false' }}"
+        off_securite: "{{ 'true' if (mode_ete_ok == 'false' or (eco_saison_ok == 'false' and besoin_eco == 'true')) else 'false' }}"
+    - alias: 'DIAGNOSTIC : APPLICATION SORTIE'
+      choose:
+      - alias: 'SORTIE 1 : OFF - CAPTEUR CRITIQUE HS'
+        conditions:
+        - condition: template
+          value_template: "{{ off_securite == 'true' }}"
+        sequence:
+        - alias: 'NOTIF : ARRÊT SÉCURITÉ CAPTEUR HS'
+          action: notify.mobile_app_eric
+          data:
+            title: "{{ prefix }} SÉCURITÉ CLIM"
+            message: >-
+              Capteur(s) HS : {{ hs_list }}. Arrêt sécurité - les climatiseurs
+              sont coupés (mode éco impossible à calculer).
+        - alias: 'ACTION : OFF SÉCURITÉ'
+          action: climate.set_hvac_mode
+          target:
+            entity_id:
+            - climate.clim_salon_rm4_mini
+            - climate.clim_bureau_rm4_mini
+            - climate.clim_chambre_rm4_mini
+          data:
+            hvac_mode: 'off'
+        - alias: 'FIN : ARRÊT APRÈS OFF SÉCURITÉ'
+          stop: Arrêt sécurité capteur HS
+      - alias: 'SORTIE 2 : MODE DÉGRADÉ ÉCO'
+        conditions:
+        - condition: template
+          value_template: "{{ mode_degrade_eco == 'true' }}"
+        sequence:
+        - alias: 'NOTIF : MODE DÉGRADÉ'
+          action: notify.mobile_app_eric
+          data:
+            title: "{{ prefix }} MODE DÉGRADÉ"
+            message: >-
+              Capteur(s) HS : {{ hs_list }}. Mode dégradé - réglage sur
+              {{ 'eco heat' if mode_saison_brut == 'heat' else 'eco cool' }}
+              ({{ 'température éco hiver' if mode_saison_brut == 'heat' else 'température éco été' }}).
     - alias: 'INIT : CALCUL GLOBAL DES VARIABLES'
       variables:
         mode_saison: "{% set m = states('sensor.mode_ete_hiver') %} {% if m in ['heat', 'cool', 'off'] %} {{ m | trim }} {% else %} off {% endif %}"
@@ -118,8 +192,16 @@ p1_master_gestion_clim:
     # ──────────────────────────────────────────────
     - alias: 'INIT : CIBLES DE TEMPÉRATURE PAR PIÈCE'
       variables:
-        t_salon_target: >
-          {% if 'groupe_1' in groupe_presence %}
+        eco_saison_val: >-
+          {% if mode_ete_ok == 'true' and mode_saison_brut == 'heat' %}
+          {{ states('sensor.temperature_eco_hiver_corrige') | float }}
+          {% elif mode_ete_ok == 'true' and mode_saison_brut == 'cool' %}
+          {{ states('sensor.temperature_eco_ete_corrige') | float }}
+          {% else %}{{ states('sensor.temperature_cible') | float }}{% endif %}
+        t_salon_target: >-
+          {% if mode_degrade_eco == 'true' %}
+          {{ eco_saison_val }}
+          {% elif 'groupe_1' in groupe_presence %}
           {{ temp_eco_hc if mode_saison == 'heat' else temp_eco_ec }}
           {% elif periode == 'jour' and 'groupe_3' in groupe_presence %}
           {{ temp_conf_e }}
@@ -130,8 +212,10 @@ p1_master_gestion_clim:
           {% else %}
           {{ temp_nuit }}
           {% endif %}
-        t_bureau_target: >
-          {% if 'groupe_1' in groupe_presence %}
+        t_bureau_target: >-
+          {% if mode_degrade_eco == 'true' %}
+          {{ eco_saison_val }}
+          {% elif 'groupe_1' in groupe_presence %}
           {{ temp_eco_hc if mode_saison == 'heat' else temp_eco_ec }}
           {% elif periode == 'jour' and ('groupe_3' in groupe_presence or 'groupe_4' in groupe_presence) %}
           {{ temp_conf_e }}
@@ -142,18 +226,16 @@ p1_master_gestion_clim:
           {% else %}
           {{ temp_nuit }}
           {% endif %}
-        t_chambre_target: >
-          {% if 'groupe_1' in groupe_presence %}
+        t_chambre_target: >-
+          {% if mode_degrade_eco == 'true' %}
+          {{ eco_saison_val }}
+          {% elif 'groupe_1' in groupe_presence %}
           {{ temp_eco_hc if mode_saison == 'heat' else temp_eco_ec }}
           {% elif periode == 'jour' %}
           {{ temp_conf_c }}
           {% else %}
           {{ temp_nuit }}
           {% endif %}
-
-    # ──────────────────────────────────────────────
-    # 6. SÉCURITÉ FENÊTRES
-    # ──────────────────────────────────────────────
     - alias: 'LOGIQUE : SÉCURITÉ FENÊTRES VS GESTION STANDARD'
       choose:
       - alias: 'CAS URGENCE : FENÊTRE OUVERTE DÉTECTÉE'
@@ -251,7 +333,7 @@ p1_master_gestion_clim:
                 entity_id: climate.clim_chambre_rm4_mini
               data:
                 hvac_mode: "{% if trigger_id == 'sensor_update' and is_state('climate.clim_chambre_rm4_mini', 'off') %}off{% else %}{{ mode_saison }}{% endif %}"
-            - alias: 'COMMANDE : CONSIGNES CHAMBRE (SmartIR Daikin — temperature simple)'
+            - alias: 'COMMANDE : CONSIGNES CHAMBRE (SmartIR Daikin - temperature simple)'
               action: climate.set_temperature
               target:
                 entity_id: climate.clim_chambre_rm4_mini
