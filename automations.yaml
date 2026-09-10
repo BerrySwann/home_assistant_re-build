@@ -1489,7 +1489,7 @@
           entity_id: cover.store_salon
   mode: single
 - id: '1775245530054'
-  alias: ECO. PRISES DINAMIQUE -> By-Présence/Groupe
+  alias: ECO. PRISES DYNAMIQUE -> By-Présence/Groupe
   description: 'Pilotage des prises selon le groupe de présence (G1 à G4). La liste
     des prises et leurs groupes est externalisée dans : templates/P2_prise/P2_eco_prises_config.yaml
     Ajouter une prise = 1 entrée dans ce fichier + recharger templates.
@@ -1515,13 +1515,17 @@
       for_each: '{{ prises }}'
       sequence:
       - choose:
-        - conditions: '{{ g in repeat.item.groupes }}'
+        - conditions:
+          - condition: template
+            value_template: '{{ g in repeat.item.groupes }}'
           sequence:
           - action: homeassistant.turn_on
             target:
               entity_id: '{{ repeat.item.entity }}'
-        - conditions: '{{ not repeat.item.get("absent_only", false) or g == "groupe_1"
-            }}'
+        - conditions:
+          - condition: template
+            value_template: '{{ not repeat.item.get("absent_only", false) or g ==
+              "groupe_1" }}'
           sequence:
           - action: homeassistant.turn_off
             target:

@@ -1,0 +1,28 @@
+id: '1780200461358'
+alias: P3_SDB - SYNC MIROIR LAMPE ET RELAIS SDB
+description: Aligne le relais Sonoff sur l'état de la lampe Hue (ON/OFF) et sécurise
+  l'allumage des deux
+triggers:
+- alias: CHANGEMENT D'ÉTAT DE LA LAMPE SDB
+  trigger: state
+  entity_id: light.hue_white_lamp_salle_de_bain
+actions:
+- alias: SYNCHRONISATION DU RELAIS SUR LA LAMPE
+  action: switch.turn_{{ trigger.to_state.state }}
+  target:
+    entity_id: switch.relais_lumiere_sdb_sonoff
+- alias: S'ASSURER QUE LES DEUX SOIENT BIEN ALLUMÉS (SÉCURITÉ ON)
+  choose:
+  - alias: SI LA LAMPE EST ON -> FORCE LE RELAIS ET LA LAMPE
+    conditions:
+    - condition: state
+      entity_id: light.hue_white_lamp_salle_de_bain
+      state: 'on'
+    sequence:
+    - action: light.turn_on
+      target:
+        entity_id: light.hue_white_lamp_salle_de_bain
+    - action: switch.turn_on
+      target:
+        entity_id: switch.relais_lumiere_sdb_sonoff
+mode: restart

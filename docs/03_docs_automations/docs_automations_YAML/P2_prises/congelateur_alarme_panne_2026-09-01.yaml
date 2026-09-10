@@ -1,4 +1,3 @@
-id: '1788279708180'
 alias: "P2 - ALARME Congélateur : Panne probable (pas de courant)"
 description: >
   Température >= -15°C pendant 5 min soutenues ET aucun appel de courant

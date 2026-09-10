@@ -1,4 +1,4 @@
-# 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
+﻿# 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
 *Dernière mise à jour : 2026-09-06 S1 (sync_index : P1_MASTER_GESTION_CLIM.md mis à jour — changelog fix temp_out_of_range ajouté, déploiement confirmé config_hash 83cd286eafa2f8df)*
 *Dernière mise à jour : 2026-09-05 (Repair Spook "TABLETTE" : 4 références fantômes corrigées dans dashboard-tablette (climate.clim_du_bureau, climate.clim_chambre_nodon, sensor.sdb_seche_serviette_status_affichage, sensor.sdb_seche_serviettes_power_status_affichage) repointées vers les entités déjà documentées ici (climate.clim_bureau_rm4_mini, climate.clim_chambre_rm4_mini, sensor.sdb_seche_serviette_power_status_affichage) — vues L1C2 temperatures / L1C3 clim / L2C2 energie-clim. Correctif dashboard live via ha_config_set_dashboard, aucune nouvelle dépendance : la doc était déjà correcte, c'est le dashboard qui avait dérivé.)*
 *Dernière mise à jour : 2026-09-04 (L2C1 page Energie HOME : carte Analyse de Précision mise à jour 5 colonnes Linky|Nodon|Ecart kWh|Ecart% déployée en HA. Page complète archivée : page_L2C1_energie_principale_2026-09-04.yaml 2259 lignes.)*
@@ -2396,7 +2396,7 @@ sensor.prise_seche_serviette_salle_de_bain_nous_power (NAT - NOUS)
 ---
 
 ### ✅ ECO PRISES DYNAMIQUE BY PRÉSENCE/GROUPE
-*Fichier : `P2_prises/eco_prises_dinamique_by_presence_groupe.yaml`*
+*Fichier : `P2_prises/eco_prises_dynamique_by_presence_groupe.yaml`*
 
 **A - Rôle**
 
