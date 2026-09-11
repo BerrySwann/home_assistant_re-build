@@ -267,7 +267,7 @@ climate:
 #                Salon inchangé (1082 Hitachi).
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ FAN — DÉSACTIVÉ (RPi4 → Mini-PC Intel NUC)                              │
+# │ FAN — DÉSACTIVÉ (RPi4 → Mini-PC Intel N150)                              │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 # ⛔ SUPPRIMÉ — rpi_gpio_pwm incompatible Mini-PC Intel NUC (pas de GPIO).   # "[modif] supprimé"
 # ✅ Supervision thermique Mini-PC → MP_01_sonde_température_mini-pc.yaml
