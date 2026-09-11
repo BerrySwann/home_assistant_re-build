@@ -493,8 +493,8 @@ Contenu : mushroom-template-card (flèche H%) + mini-graph-card (300px, 24h, lab
 | Entité | Pièce | Codes IR |
 |--------|-------|----------|
 | `climate.clim_salon_rm4_mini` | Salon | RM4-Mini, code 1082 |
-| `climate.clim_bureau_rm4_mini` | Bureau | RM4-Mini, code 1108 |
-| `climate.clim_chambre_rm4_mini` | Chambre | RM4-Mini, code 1108 |
+| `climate.clim_bureau_rm4_mini` | Bureau | RM4-Mini, code 1117 |
+| `climate.clim_chambre_rm4_mini` | Chambre | RM4-Mini, code 1117 |
 | `climate.radiateur_cuisine` | Cuisine | - |
 | `switch.radiateur_elec_cuisine` | Cuisine | Zigbee - UI |
 

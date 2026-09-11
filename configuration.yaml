@@ -28,7 +28,7 @@
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Ne jamais supprimer default_config (charge les intégrations de base HA).
 # - recorder doit référencer mariadb_url via secrets.yaml (jamais en clair).
-# - SmartIR device_code : 1108 (Bureau + Chambre) / 1082 (Salon) — spécifique
+# - SmartIR device_code : 1117 (Bureau + Chambre) / 1082 (Salon) — spécifique
 #   au modèle de clim. Changer ce code casse le contrôle IR de la clim.
 # - !include_dir_merge_named impose que chaque fichier YAML retourne un dict
 #   (pas une liste) → utility_meter uniquement.
@@ -258,6 +258,13 @@ climate:
 # - [modif] http: trusted_proxies: 192.168.1.0/24 → 10.32.154.0/24 (LAN Vence réel).
 # - [modif] recorder: titre boîte ASCII mis à jour → LXC 201 — 10.32.154.201.
 # - [modif] En-tête : fan SUPPRIMÉ documenté dans DESCRIPTION et PIÈGES.
+# - [2026-08-06] Bloc http: commenté, normal depuis HA 2026.8 : les réglages HTTP vivent
+#                désormais dans l'UI (Paramètres > Système > Réseau), le YAML est ignoré.
+#                Valeurs inchangées, dans .storage/http : ban IP actif, 3 essais, proxies idem.
+# - [2026-08-25] recorder: purge_keep_days 7 → 15 (historique trop court à l'échelle du mois).
+# - [2026-09-11] SmartIR clim Bureau + Chambre : device_code 1108 → 1117 (DTXF35TVMA).
+#                Plage réelle par mode (chauffage 10-32, froid 18-32), 17 °C possible en chauffage.
+#                Salon inchangé (1082 Hitachi).
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ FAN — DÉSACTIVÉ (RPi4 → Mini-PC Intel NUC)                              │

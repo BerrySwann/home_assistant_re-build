@@ -66,7 +66,7 @@ Documentation des 6 fichiers YAML à la racine de `/config/` qui ne sont pas des
 | `climate.clim_chambre_rm4_mini` | `remote.clim_chambre` | `sensor.th_chambre_temperature` | `sensor.th_chambre_humidity` |
 | `climate.clim_salon_rm4_mini` | `remote.clim_salon` | `sensor.th_salon_temperature` | `sensor.th_salon_humidity` |
 
-> `device_code: 1108` (Bureau + Chambre) / `device_code: 1082` (Salon) - codes SmartIR pour le modèle de clim.
+> `device_code: 1117` (Bureau + Chambre) / `device_code: 1082` (Salon) - codes SmartIR pour le modèle de clim.
 
 ### Recorder MariaDB
 
