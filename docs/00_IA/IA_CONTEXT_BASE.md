@@ -1,15 +1,16 @@
-> ⚠️ **SYNC** : Ce fichier est une copie lisible de `CLAUDE.md` (racine ReBuild).  
+> ⚠️ **SYNC** : Ce fichier est une copie lisible de `CLAUDE.md` (racine ReBuild).
 > Mettre à jour en même temps que `CLAUDE.md` à chaque session.
+> Dernière resynchronisation : 2026-09-13 (aligné sur le CLAUDE.md du 2026-08-09 ; il était resté sur la version du 2026-07-18).
 
 ---
 
 > **REGLE ABSOLUE :** Tu devras être honnete, ne pas mentir, ne pas tricher, être très attentif, et être 100% objectif et que tu aies l'interdiction de me flater pour me flater ou de me donner une réponse pour me faire plaisire, ou pour me donner une réponse quoi qu'il arrive. Et que si une de mes répose, une de mes solution ou une idées de "codage" (yaml) ou autres, que je pourrais avoir ne te semble pas bonne, il est impératif que tu me le fasse s'avoir sans aller systématiquement dans mon sens.
-> Si une de mes demandes ou propositions est ambiguë, floue, incompréhensible, contradictoire ou incomplète, tu devras me poser des questions. Et là aussi, interdiction de valider une interprétation au hasard pour me faire plaisir, ou me flater.
+> De plus, si un de mes prompts manque de précision, ne donne pas le contexte complet d'un coup, ou malmène l'hygiène des informations sensibles (mots de passe, identifiants, données perso collés en clair), tu devras me le signaler explicitement sur le moment, avant de traiter la demande - sans corriger silencieusement à ma place ni deviner ce que je voulais dire.
 
 > **REGLE ABSOLUE - STYLE :** Ne jamais utiliser de symboles qui trahissent l'écriture d'un LLM et qui n'existent pas sur un clavier standard. Interdit : `-` (em dash), `…` (ellipse typographique), `«»` (guillemets typographiques), `·` (point médian), et tout autre caractère spécial inaccessible sans Alt+code. Utiliser à la place : `-`, `...`, `"`, `-` etc.
 
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
-*Dernière mise à jour : 2026-07-18*
+*Dernière mise à jour : 2026-08-09*
 
 ---
 
@@ -26,6 +27,7 @@
 | `docs/00_IA/sous_context_ia/IA_INDEX_NAVIGATION.md` | Régénération de `INDEX_NAVIGATION_FULL.md`, ajout vignette/page à l'index, mapping entités → fichiers sources, structure accordéon GitHub |
 | `docs/00_IA/sous_context_ia/IA_INDEX_AUTOMATIONS.md` | Régénération de `INDEX_AUTOMATIONS.md`, ajout/suppression automation, mapping alias → docs/03 → docs, anomalies connues |
 | `docs/00_IA/sous_context_ia/IA_CMD_TERMINAL_HA.md` | Commande tree prod, audit MD5, git backup, chemins `/homeassistant/`, logs HA |
+| `docs/00_IA/sous_context_ia/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` | Audit énergétique/thermique, analyse DUT par pièce, isolation/volets/rideaux, écart théorie YAML vs logs conso, caractéristiques physiques du logement |
 
 ---
 
@@ -60,6 +62,12 @@
 - Log de modif : `# annotations_log:` uniquement. Référence directe par ID matrice (L1C1, P2…).
 - Ne jamais répéter le code YAML déjà validé.
 
+## TODO - REGLE OBLIGATOIRE
+- Fichier de référence : `TODO.txt` (racine ReBuild/)
+- "ajoute à la todo" / "met dans la todo" / "note ca" = ecrire dans `TODO.txt`, jamais dans TaskCreate (outil session uniquement, perdu a la fermeture).
+- En debut de session : lire `TODO.txt` pour connaitre le backlog en cours.
+- Apres chaque item traite : mettre a jour `TODO.txt` ([x] ou suppression).
+
 ## Slash Commands
 - `/fix_file` → analyse erreur HA et retourne bloc YAML corrigé uniquement.
 - `/sync_index` → met à jour `DEPENDANCES_GLOBALES.md` après validation YAML.
@@ -69,6 +77,15 @@
 - `/ha_push_yaml` → pousse un fichier YAML de `docs/01_docs_config_system/config_system_YAML/` vers prod `H:\`.
 - `/ha_push_docs` → synchronise les docs locales `docs/` vers `H:\Docs\`.
 - `/ha_resync_tree` → resynchronise `docs/01_docs_config_system/config_system_YAML/` depuis GitHub (audit MD5).
+
+## PROTOCOLE FIN DE SESSION (OBLIGATOIRE)
+
+Les 2 dernieres actions avant de fermer Cowork, dans cet ordre :
+
+1. `/histo` → journal de bord compact (Eric ne l'oublie pas)
+2. `/sync_index` → mettre a jour DEPENDANCES_GLOBALES.md si un YAML ou une vignette a ete valide pendant la session
+
+> Raison : DEPENDANCES_GLOBALES.md est construit manuellement session par session. Chaque session fermee sans `/sync_index` laisse des ecarts qui s'accumulent et deviennent couteux a corriger (70 chemins obsoletes detectes en session 2026-08-08, accumulation depuis juillet).
 
 ---
 
@@ -99,7 +116,11 @@
 
 Sens : **prod → GitHub → local**. Le local doit converger vers prod. Une fois les corrections terminées dans `docs/01_docs_config_system/config_system_YAML/`, l'état local doit être équivalent à prod (validé par audit MD5).
 
-### 📄 DOCS (.md) - LOCAL = source de vérité
+### 📄 DOCS (.md + .yaml dashboard) - LOCAL = source de vérité
+
+> Deux types de fichiers couverts par cette cascade :
+> - `.md` : `docs/02_docs_dashboard/dashboard_docs_MD/` · `docs/03_docs_automations/docs_automations_MD/` · `docs/04_docs_scripts/docs_scripts_MD/` · etc.
+> - `.yaml` dashboard : `docs/02_docs_dashboard/dashboard_docs_YAML/` (vignettes, pages, cartes, Dashboard_COMPLET)
 
 | Priorité | Source | Rôle |
 |:---------|:-------|:-----|
@@ -109,6 +130,8 @@ Sens : **prod → GitHub → local**. Le local doit converger vers prod. Une foi
 
 Sens : **local → H:\Docs\ → GitHub**. En cas de conflit, local l'emporte toujours.
 `H:\Docs\` ne contient QUE des .md, histo et yaml Dashboard - **jamais de YAML config HA**.
+
+> ⚠️ Audit MD5 docs : couvre les `.md` ET les `.yaml` dashboard (`dashboard_docs_YAML/`). Ne pas oublier les yaml lors d'un audit de cohérence local vs H:\Docs\.
 
 > Ancien repo `home-assistant-config` **supprimé définitivement** (2026-04-27). Seul `home_assistant_re-build` est actif.
 
@@ -120,6 +143,16 @@ Sens : **local → H:\Docs\ → GitHub**. En cas de conflit, local l'emporte tou
 - ⛔ `TREE_CORRIGE/` et `TREE_ORIGINE/` **n'existent plus** - tout est sous `docs/`.
 - Fichiers absents de `docs/01` mais présents GitHub = à supprimer en prod.
 - Automations : jamais modifier `automations.yaml` direct → passer par UI HA + `docs/03_docs_automations/docs_automations_YAML/`.
+
+### Qui fait quoi - extraction / injection (par type de fichier)
+
+| Type | Injection en prod | Extraction / stockage local |
+|:-----|:-------------------|:-----------------------------|
+| **Config YAML** (sensors/templates/UM/command_line) | Accès filesystem direct `/config` sur le serveur HA | **Claude** récupère le fichier modifié et le stocke dans `docs/01_docs_config_system/config_system_YAML/{pole}/`, une fois validé par Eric |
+| **Automations** | Toujours à la main dans l'UI HA (Eric), jamais `automations.yaml` en direct | Une fois validée, **Claude** récupère uniquement le bloc modifié et le stocke individuellement dans `docs/03_docs_automations/docs_automations_YAML/{Pole}/` |
+| **Dashboard** | Toujours à la main dans l'UI HA (Paramètres → Tableau de bord → Modifier en YAML) | Pas d'extraction automatique - **Eric** récupère le code à la main et le colle. **Claude** vérifie, horodate (nom de version), stocke dans `docs/02_docs_dashboard/dashboard_docs_YAML/L{x}C{x}_.../`, supprime la version la plus ancienne des 3 après validation |
+
+> Raison de l'asymétrie Dashboard : limitation technique - pas d'accès filesystem direct au Lovelace YAML comme pour `/config`.
 
 ---
 
@@ -186,8 +219,13 @@ wc -l /tmp/github_aliases.txt /tmp/local_autom_files.txt
 - Ordre obligatoire au sein de chaque bloc de Pole.
 - ⛔ Jamais mélanger deux Poles dans la même pièce.
 
-### 3 - Hors-pièces (préfixes lettrés)
-`M_` Météo · `A_` Air quality · `S_` Stores · `B_` BP virtuel · `MP_` Mini-PC
+### 3 - Répertoires HA & préfixes hors-pôles
+
+**Répertoires (plateforme HA chargée selon le dossier) :**
+`SNS` -> `sensors/` · `UM` -> `utility_meter/` · `TPL` -> `templates/` · `CMD` -> `command_line/` · `GRP_` -> `groups/` (groupes d'entités par constructeur - batteries Hue/IKEA/Sonoff)
+
+**Préfixes hors-pôles (remplacent `P{n}` pour les fichiers sans pôle énergie) :**
+`M_` Météo · `A_` Air quality · `S_` Stores · `MP_` Mini-PC
 
 ### 4 - Bordures ASCII
 - **Titre principal** - coins arrondis `╭─╮/╰─╯` - largeur 78 car. - texte MAJUSCULES.
@@ -245,15 +283,16 @@ Cycles : `quotidien` | `hebdomadaire` | `mensuel` | `annuel`
 | `DUT` | Durée d'utilisation | `{P}_DUT_{description}.yaml` | `P1_DUT_clim_chauffage.yaml` |
 | `DIAG` | Template diagnostic en cours (1 cycle) | `{P}_DIAG_{description}_{cycle}.yaml` | `P0_DIAG_conso_hebdomadaire.yaml` |
 | `POWER` | Puissance instantanée totale | `{P}_POWER_{niveau}.yaml` | `P3_POWER_3_TOTAL_ZONE.yaml` |
-| `BV` | Bouton virtuel / interrupteur | `{P}_BV_{index}_{description}.yaml` | `P3_BV_01_inter_smorig_salon.yaml` |
+| `BV` | Bouton Virtuel - interrupteur logique sans hardware | paire IB + SW obligatoire, sans numéro | voir IB + SW ci-dessous |
+| `IB` | Input Boolean - stockage état on/off du BV | `{P}_BV_IB_{description}.yaml` dans `input_booleans/` | `P3_BV_IB_inter_smorig_salon.yaml` |
+| `SW` | Switch - template switch exposé utilisateur | `{P}_BV_IB_SW_{description}.yaml` dans `templates/Inter_BP_Virtuel/` | `P3_BV_IB_SW_inter_smorig_salon.yaml` |
 | `MINI_MAXI_AVG` | Stats min/max/avg sur période glissante | `{P}_MINI_MAXI_AVG_{description}.yaml` | `P0_MINI_MAXI_AVG_Genelec_appart.yaml` |
-| `ui_dashboard` | Templates affichage uniquement | `{P}_ui_dashboard.yaml` | `P2_ui_dashboard.yaml` |
+| `ui_dashboard` | Templates affichage uniquement | `{P}_ui_dashboard.yaml` | `{P}_ui_dashboard.yaml` |
 
 **Règles :**
 - `_AMHQ` = present si le fichier couvre les 4 cycles (Annuel/Mensuel/Hebdo/Quotidien)
 - `_VARIANTE` = discriminant si plusieurs fichiers du même TYPE dans le même pole : nom fonctionnel minuscules (`prises`, `mini_pc`) ou niveau numéroté (`1_UNITE`, `2_ZONE`, `3_TOTAL`)
 - Hors-poles : `{LETTRE}_{index}_{description}.yaml` - ex: `M_04_tendances_th_ext_card.yaml`
-- Groupes : `GRP_{index}_{description}.yaml`
 - 1 fichier = 1 seul pole - jamais deux poles dans le même fichier
 - ⛔ `ui_dashboard/` : templates d'affichage uniquement (texte, couleurs, icônes) - jamais de calculs kWh/W/DUT
 - Fichiers legacy non conformes : pas de renommage sec en prod - renommer uniquement si le fichier est modifié pour autre chose
@@ -437,6 +476,25 @@ ReBuild/
 
 ⛔ `TREE_CORRIGE/`, `TREE_ORIGINE/`, `Dashboard/`, `docs_dashboard/`, `docs_automations/`, `docs_scripts/` **supprimés le 2026-07-14** - tout est sous `docs/`.
 
+## 📅 RÈGLE DES FICHIERS DATÉS (scripts YAML, automations et docs)
+
+Quand un script YAML de `docs/04_docs_scripts/docs_scripts_YAML/` (ou tout fichier versionnable) est modifié :
+1. L'ancienne version est **renommée avec sa date** dans le nom : `p1_master_gestion_clim.yaml` → `p1_master_gestion_clim_2026-09-06.yaml` (date de la version qu'elle représente, pas la date du renommage).
+2. La nouvelle version est créée avec **la date du jour** : `p1_master_gestion_clim_2026-09-09.yaml`.
+3. Les versions datées **coexistent** dans le dossier (comme les YAML dashboard `page_L4C1_proxmox_2026-06-18.yaml` + `_2026-08-08.yaml`).
+4. Chaque fichier porte un **en-tête commenté** avec l'historique des versions (date + changement).
+5. La fiche MD correspondante pointe vers la version datée la plus récente et son changelog liste **les différences à chaque itération**.
+
+**Automations (`docs/03_docs_automations/docs_automations_YAML/`)** — même règle :
+quand une fiche YAML d'automation est mise à jour (resync depuis `automations.yaml`, ajout d'`id`,
+correction de template...), la **version précédente est conservée à côté, datée de la version
+qu'elle représente** : `congelateur_alarme_porte.yaml` (version active, avec `id`) +
+`congelateur_alarme_porte_2026-09-01.yaml` (version précédente, sans `id`).
+Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2026-09-10
+(ajout des `id` HA depuis le live), l'ancienne version restant datée `_2026-09-01`.
+
+→ Appliquer aussi cette règle au live `H:/scripts.yaml` lors d'un rollback (backup `*.bak_*` avant modif, cf. .gitignore).
+
 → Arborescences complètes prod + local : `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL.md`
 
 ---
@@ -473,29 +531,8 @@ ReBuild/
 ![Confort Cible Calcul Flow](confort_cible_calcul_flow.png)
 *(copie locale du diagramme - [asset GitHub d'origine](https://github.com/user-attachments/assets/f18e24a2-1441-482b-af70-537a7b208e15))*
 
-## 🏠 STRUCTURE DU LOGEMENT
-*(uniquement pour l'analyse des consommations électriques)*
-- **Localisation :** 06140 Vence (Altitude ~360m).
-- **Type :** Immeuble début 1980, 4ème et dernier étage (Sous toiture).
-- **Caractéristiques :** Traversant SUD/NORD, Simple vitrage partout.
-- **VMC :** Présente en SDB (Crée une dépression thermique).
-
-## 📏 DIMENSIONS & PÔLES
-*(uniquement pour l'analyse des consommations électriques)*
-1. **SALON (Sud) :** 6.52m x 3.97m (25.88 m²).
-   - *Équipement :* Split mural, Volet motorisé (Auto: 7h30 -> Coucher soleil / Fermé si Absent / Fermé si >34°C).
-   - *Note :* Apport solaire crucial dès 15h.
-2. **CUISINE (Nord) :** 4.86m x 2.18m (10.59 m²).
-   - *Équipement :* "radiateur_cuisine" (Bain d'huile avec relais connecté).
-   - *Auto :* L-Ma-Me-Je (4h45-7h), Ve-Sa-Di (5h45-8h).
-3. **BUREAU (Nord) :** 3.95m x 2.67m (10.55 m²).
-   - *Équipement :* Split mural, Volet motorisé.
-   - *Auto :* Ouvert uniquement si T° Ext [18°C - 25°C].
-4. **SDB (Interne) :** 1.96m x 1.58m (3.13 m²) Pas de fenêtre.
-   - *Équipement :* Soufflant (2x1000W), Sèche-serviette (150W).
-   - *Auto :* Soufflant OFF si >23°C. Sèche-serviette 1h après douche.
-5. **CHAMBRE (Nord) :** 3.95m x 2.85m (11.26 m²).
-   - *Équipement :* Split mural. Pas de volet motorisé.
-   - *Note :* Forte dissipation thermique (DUT élevé).
+> Caractéristiques détaillées du logement (dimensions, équipements par pièce, orientations) :
+> déplacées dans `docs/00_IA/sous_context_ia/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` (2026-07-19,
+> usage limité à l'analyse des consommations électriques, hors périmètre des directives actives).
 
  
