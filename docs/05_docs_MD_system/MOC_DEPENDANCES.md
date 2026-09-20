@@ -30,7 +30,7 @@ Fichiers YAML :
 Entités clés : `*_kwh_quotidien` · `mini_pc_avg_watts_*`
 Fichiers YAML :
 - `sensors/P2_prise/`
-- `templates/P2_prise/P2_AVG/` · `P2_ui_dashboard/`
+- `templates/P2_prise/P2_AVG/`
 - `utility_meter/P2_prise/`
 
 ### Pôle 3 - Éclairage

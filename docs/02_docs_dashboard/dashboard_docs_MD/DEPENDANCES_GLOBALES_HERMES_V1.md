@@ -5725,7 +5725,7 @@ sensor.hue_white_lamp_cuisine_ (NAT)  ->  01_docs_config_system/config_system_YA
 sensor.hue_white_lamp_entree_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
 sensor.hue_white_lamp_table_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
 sensor.maison_lightning_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml
-sensor.prise_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_ui_dashboard/P2_ui_dashboard.yaml, 01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml, 01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
 sensor.qualite_air_ (NAT)  ->  01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml, 01_docs_config_system/config_system_YAML/templates/Air_quality/A_01_AIR_QUALITY.yaml
 sensor.relais_lumiere_sdb_sonoff_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
 sensor.store_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/Stores/S_01_STORES.yaml

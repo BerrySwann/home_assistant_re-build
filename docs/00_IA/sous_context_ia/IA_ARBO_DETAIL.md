@@ -95,7 +95,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   ├── P0_Energie_total_diag/          (P0_Diag/3 · P0_Genelec_appart/3 · P0_Linky/1 · P0_total_pour_les_7_postes/1)
 │   ├── P1_clim_chauffage/              (P1_01_MASTER/3 · P1_AVG/2 · P1_DUT_TOTAL/1 · P1_TOTAL/1
 │   │                                    · P1_kWh_riemann_cuisine/1 · P1_ui_dashboard/1)
-│   ├── P2_prise/                       (P2_AVG/3 · P2_I_all_standby_power/1 · P2_eCO_prises/1 · P2_ui_dashboard/1)
+│   ├── P2_prise/                       (P2_AVG/3 · P2_I_all_standby_power/1 · P2_eCO_prises/1)
 │   ├── P3_eclairage/                   (P3_AVG/3 · P3_ENERGIE_TPL/3 · P3_POWER_TPL/1 · P3_ui_dashboard/1)
 │   ├── P4_groupe_presence/             (2)
 │   ├── Stores/                         (1 - S_01_STORES)
