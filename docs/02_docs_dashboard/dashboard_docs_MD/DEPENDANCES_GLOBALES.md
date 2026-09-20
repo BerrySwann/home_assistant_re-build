@@ -1,4 +1,10 @@
 # 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
+*Dernière mise à jour : 2026-09-20 S6 (automations clim P1 : `max_exceeded: silent` ajouté à (A-0) JOUR + (B-0) NUIT ; exports YAML des 2 automations mis à jour côté docs/ ; add-on Cloudflared HA = vestige arrêté)*
+*Dernière mise à jour : 2026-09-20 S5 (sync_index : L2C2 Énergie Clim - PAGE_ENERGIE_CLIM.md mise à jour (cartes clim button-card, entités UT `_um`, sources helpers generic_thermostat, P1_AVG_AMHQ_TOTAL), section ENTITES_INDEX L2C2 complétée (+55 entrées), export page_L2C2_energie_clim_2026-09-20.yaml ajouté côté C:. Constats : retour Home vers une vue `/home` inexistante ; 2 références introuvables (`sensor.ete_hiver`, `sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power`) - notés dans la doc page.)*
+*Dernière mise à jour : 2026-09-20 S4 (sync_index : HOME PAGE - carte Congélateur : coquille `ssensor.prise_congelateur_cuisine_nous_power` corrigée en live (champ entity) ; seuil de visibilité `-15` → `-14 °C` ; export card_congelateur_home_2026-09-20.yaml rafraîchi (C: + /mnt/save) ; PAGE_HOME.md mis à jour.)*
+*Dernière mise à jour : 2026-09-20 S3 (sync_index : L1C2 Page Températures - refonte des 5 contrôles clim en custom:button-card, retrait du reliquat bubble "Radiateur de la Cuisine" (page : 41 cartes), bloc CONGÉLATEUR ajouté à PAGE_TEMPERATURES.md, export page_L1C2_temperatures_2026-09-20.yaml rafraîchi. Constat : 3 correctifs du 14/03 absents du YAML actuel (yaxis TH chambre, }}°C + label série dans #hcourbe) - notés dans la doc page.)*
+*Dernière mise à jour : 2026-09-20 S2 (sync_index : HOME PAGE - carte Congélateur ajoutée (custom:button-card "appliance" : prise NOUS + sonde Tongel, visible si tongel_temperature > -15°C). Arbre [7] + entités + PAGE_HOME.md (sections renumérotées 8/9) + ENTITES_INDEX.md + export carte. Aucune autre vignette touchée.)*
+*Dernière mise à jour : 2026-09-20 S1 (sync_index : HOME PAGE - intégration HACS WashData (Lave-Linge + Lave-Vaisselle, 19 entités chacune), cartes [5]/[6] refondues (état, temps restant, progrès, puissance ; seuil 2 W au lieu de 50 W), retrait des 2 mini-cartes (HOME = 13 cartes). PAGE_HOME.md + ENTITES_INDEX.md mis à jour, exports YAML des 2 cartes refondues. Aucune autre vignette touchée.)*
 *Dernière mise à jour : 2026-09-08 S1 (sync_index : session infra + commissioning Matter. Blacklist btusb sur hote Proxmox. Premier device Matter over Thread commissionne : IKEA BILRESA (pairing code 2555-203-2710, dataset TLV Thread saisi manuellement). Aucun YAML HA, aucune entite, aucune vignette touches. CLAUDE.md toujours a corriger : ZBDongle-P CC2652P + Bluetooth Realtek RTL8821C. Detail : historique/histo_2026-09-08_s1.txt)*
 *Dernière mise à jour : 2026-09-07 S2 (sync_index : aucune dépendance dashboard impactée. Session infra Proxmox uniquement — suppression de `usb0: host=1-3` dans /etc/pve/qemu-server/100.conf, la VM HA volait le dongle Zigbee à LXC 200. Aucun YAML HA, aucune entité, aucune vignette touchés. ⚠️ CLAUDE.md à corriger : le coordinateur Zigbee est un ZBDongle-P CC2652P (10c4:ea60), pas un EFR32MG21 ; et un Bluetooth Realtek 0bda:c821 existe sur le NUC. Détail : historique/histo_2026-09-07_s2.txt)*
 *Dernière mise à jour : 2026-09-07 S1 (sync_index : alignement local/prod du renommage audit_md5_md → audit_md5_md_yaml (fichiers locaux + H:\), backup_github.yaml mis à jour, vignette L5C3 MariaDB retouchée. Aucune nouvelle entité : la chaîne audit_md5_md_yaml / backup_github était déjà documentée depuis 2026-08-09, cette session ne fait que rattraper les fichiers. Session par ailleurs consacrée au diagnostic infra Matter/Thread/USB — hors périmètre dashboard, voir historique/histo_2026-09-07_s1.txt)*
@@ -87,19 +93,29 @@ HOME PAGE (type: grid)
   │     ├─→ sensor.blitzortung_lightning_localisation  (SEN - M_meteo_sensors_blitzortung.yaml, REST Nominatim)
   │     ├─→ sensor.maison_lightning_azimuth  (NAT - Blitzortung natif)
   │     └─→ sensor.dernier_impact_temps_reel  (TPL - M_03_meteo_blitzortung.yaml, seul vrai TPL de ce bloc)
-  ├─→ [5] mushroom - Lave-linge  (visible si power > 50W)
+  ├─→ [5] mushroom - Lave-Linge (WashData)  (visible si power > 2W)
+  │     ├─→ sensor.lave_linge_etat  (NAT - WashData, HACS)
+  │     ├─→ sensor.lave_linge_temps_restant  (NAT - WashData, HACS)
+  │     ├─→ sensor.lave_linge_progres  (NAT - WashData, HACS)
   │     └─→ sensor.prise_lave_linge_nous_power  (NAT - NOUS SP via Z2M)
-  ├─→ [6] mushroom - Lave-vaisselle  (visible si power > 50W)
+  ├─→ [6] mushroom - Lave-Vaisselle (WashData)  (visible si power > 2W)
+  │     ├─→ sensor.lave_vaisselle_etat  (NAT - WashData, HACS)
+  │     ├─→ sensor.lave_vaisselle_temps_restant  (NAT - WashData, HACS)
+  │     ├─→ sensor.lave_vaisselle_progres  (NAT - WashData, HACS)
   │     └─→ sensor.prise_lave_vaisselle_nous_power  (NAT - NOUS SP via Z2M)
-  ├─→ [7] bubble-card separator + 2× button - Présence
+  ├─→ [7] button-card - Congélateur  (visible si tongel_temperature > -15°C)
+  │     ├─→ sensor.prise_congelateur_cuisine_nous_power  (NAT - NOUS SP via Z2M)
+  │     ├─→ switch.prise_congelateur_cuisine_nous  (NAT - NOUS SP via Z2M)
+  │     └─→ sensor.tongel_temperature  (NAT - SONOFF Tongel via Z2M)
+  ├─→ [8] bubble-card separator + 2× button - Présence
   │     ├─→ sensor.etat_wifi_maison  (TPL - P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml)
   │     ├─→ device_tracker.poco  (NAT - Mobile App Eric)
   │     ├─→ person.eric  (NAT - HA Personnes)
   │     ├─→ device_tracker.mamour  (NAT - Mobile App Mamour)
   │     └─→ person.mamour  (NAT - HA Personnes)
-  ├─→ [8] mushroom - Détecteur fuite  (visible si on | unavailable | unknown)
+  ├─→ [9] mushroom - Détecteur fuite  (visible si on | unavailable | unknown)
   │     └─→ binary_sensor.detecteur_de_fuite_ikea_water_leak  (NAT - IKEA Vallhorn via Z2M)
-  └─→ [9] type: grid - 18 vignettes  (voir sections L1C1–L6C3)
+  └─→ [10] type: grid - 18 vignettes  (voir sections L1C1–L6C3)
 ```
 
 ### Entités consommées - Cartes permanentes HOME
@@ -128,14 +144,49 @@ HOME PAGE (type: grid)
 | `sensor.blitzortung_lightning_localisation` | SEN | `sensors/meteo/M_meteo_sensors_blitzortung.yaml` (REST Nominatim) | [4] |
 | `sensor.maison_lightning_azimuth` | NAT | Intégration Blitzortung (MQTT native) | [4] |
 | `sensor.dernier_impact_temps_reel` | TPL | `templates/meteo/M_03_meteo_blitzortung.yaml` | [4] |
+| `sensor.lave_linge_etat` | NAT | WashData (HACS) | [5] |
+| `sensor.lave_linge_temps_restant` | NAT | WashData (HACS) | [5] |
+| `sensor.lave_linge_progres` | NAT | WashData (HACS) | [5] |
 | `sensor.prise_lave_linge_nous_power` | NAT | NOUS SP via Z2M (P2 - cuisine) | [5] |
+| `sensor.lave_vaisselle_etat` | NAT | WashData (HACS) | [6] |
+| `sensor.lave_vaisselle_temps_restant` | NAT | WashData (HACS) | [6] |
+| `sensor.lave_vaisselle_progres` | NAT | WashData (HACS) | [6] |
 | `sensor.prise_lave_vaisselle_nous_power` | NAT | NOUS SP via Z2M (P2 - cuisine) | [6] |
-| `sensor.etat_wifi_maison` | TPL | `templates/P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml` | [7] |
-| `device_tracker.poco` | NAT | Mobile App (Companion) - Eric | [7] |
-| `person.eric` | NAT | HA Personnes | [7] |
-| `device_tracker.mamour` | NAT | Mobile App (Companion) - Mamour | [7] |
-| `person.mamour` | NAT | HA Personnes | [7] |
-| `binary_sensor.detecteur_de_fuite_ikea_water_leak` | NAT | IKEA Vallhorn via Z2M | [8] |
+| `sensor.prise_congelateur_cuisine_nous_power` | NAT | NOUS SP via Z2M (P2 - cuisine) | [7] |
+| `switch.prise_congelateur_cuisine_nous` | NAT | NOUS SP via Z2M (P2 - cuisine) | [7] |
+| `sensor.tongel_temperature` | NAT | SONOFF Tongel via Z2M | [7] |
+| `sensor.etat_wifi_maison` | TPL | `templates/P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml` | [8] |
+| `device_tracker.poco` | NAT | Mobile App (Companion) - Eric | [8] |
+| `person.eric` | NAT | HA Personnes | [8] |
+| `device_tracker.mamour` | NAT | Mobile App (Companion) - Mamour | [8] |
+| `person.mamour` | NAT | HA Personnes | [8] |
+| `binary_sensor.detecteur_de_fuite_ikea_water_leak` | NAT | IKEA Vallhorn via Z2M | [9] |
+
+### Intégration WashData (HACS) - Lave-Linge + Lave-Vaisselle
+
+*Ajoutée le 2026-09-19 (`3dg1luk43/ha_washdata` v0.5.6). 2 appareils, 19 entités chacun (38 au total). Les cartes [5]/[6] consomment État, Temps restant, Progrès + la puissance de la prise NOUS.*
+
+| Rôle | Lave-Linge | Lave-Vaisselle |
+|:-----|:-----------|:---------------|
+| État du cycle | `sensor.lave_linge_etat` | `sensor.lave_vaisselle_etat` |
+| Programme | `sensor.lave_linge_programme` | `sensor.lave_vaisselle_programme` |
+| Phase actuelle | `sensor.lave_linge_phase_actuelle` | `sensor.lave_vaisselle_phase_actuelle` |
+| Temps restant | `sensor.lave_linge_temps_restant` | `sensor.lave_vaisselle_temps_restant` |
+| Durée totale | `sensor.lave_linge_duree_totale` | `sensor.lave_vaisselle_duree_totale` |
+| Progrès | `sensor.lave_linge_progres` | `sensor.lave_vaisselle_progres` |
+| Puissance actuelle | `sensor.lave_linge_puissance_actuelle` | `sensor.lave_vaisselle_puissance_actuelle` |
+| Temps écoulé | `sensor.lave_linge_temps_ecoule` | `sensor.lave_vaisselle_temps_ecoule` |
+| Informations de débogage | `sensor.lave_linge_informations_de_debogage` | `sensor.lave_vaisselle_informations_de_debogage` |
+| Paramètres suggérés | `sensor.lave_linge_parametres_suggeres` | `sensor.lave_vaisselle_parametres_suggeres` |
+| Nombre de cycles | `sensor.lave_linge_nombre_de_cycles` | `sensor.lave_vaisselle_nombre_de_cycles` |
+| Énergie totale | `sensor.lave_linge_energie_totale` | `sensor.lave_vaisselle_energie_totale` |
+| En marche | `binary_sensor.lave_linge_en_marche` | `binary_sensor.lave_vaisselle_en_marche` |
+| Programme des cycles | `select.lave_linge_programme_des_cycles` | `select.lave_vaisselle_programme_des_cycles` |
+| Forcer la fin du cycle | `button.lave_linge_forcer_la_fin_du_cycle` | `button.lave_vaisselle_forcer_la_fin_du_cycle` |
+| Cycle de pause | `button.lave_linge_cycle_de_pause` | `button.lave_vaisselle_cycle_de_pause` |
+| Reprendre le cycle | `button.lave_linge_reprendre_le_cycle` | `button.lave_vaisselle_reprendre_le_cycle` |
+| Démarrer l'enregistrement du cycle | `button.lave_linge_demarrer_l_enregistrement_du_cycle` | `button.lave_vaisselle_demarrer_l_enregistrement_du_cycle` |
+| Arrêter l'enregistrement du cycle | `button.lave_linge_arreter_l_enregistrement_du_cycle` | `button.lave_vaisselle_arreter_l_enregistrement_du_cycle` |
 
 ### Fichiers YAML Dashboard
 
@@ -145,8 +196,9 @@ HOME PAGE (type: grid)
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_meteocss_home_2026-06-13.yaml` | ✅ picture-elements 7 layers |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_vscode_home_2026-06-13.yaml` | ✅ VS Code conditional |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_foudre_home_2026-06-13.yaml` | ✅ Foudre button-card |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_lave_linge_home_2026-06-13.yaml` | ✅ Lave-linge mushroom |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_lave_vaisselle_home_2026-06-13.yaml` | ✅ Lave-vaisselle mushroom |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_lave_linge_home_2026-09-19.yaml` | ✅ Lave-linge mushroom WashData (remplace 2026-06-13) |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_lave_vaisselle_home_2026-09-19.yaml` | ✅ Lave-vaisselle mushroom WashData (remplace 2026-06-13) |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_congelateur_home_2026-09-20.yaml` | ✅ Congélateur button-card (appliance) |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_presence_home_2026-06-13.yaml` | ✅ Présence (separator + Eric + Mamour) |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_detecteur_fuite_home_2026-06-13.yaml` | ✅ Détecteur fuite mushroom |
 
@@ -154,7 +206,7 @@ HOME PAGE (type: grid)
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs_dashboard/docs/HOME PAGE/PAGE_HOME.md` | ✅ (MàJ 2026-06-13) |
+| `docs_dashboard/docs/HOME PAGE/PAGE_HOME.md` | ✅ (MàJ 2026-09-20) |
 
 ---
 
@@ -248,7 +300,7 @@ MATÉRIEL / INTÉGRATION
 ---
 
 ## ✅ L1C2 - TEMPÉRATURES (VIGNETTE + PAGE)
-*Validée le 2026-05-13*
+*Validée le 2026-05-13 - refonte cartes clim (button-card) 2026-09-20*
 
 ### Vignette - Chaîne de dépendances
 
@@ -292,14 +344,16 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `sensor.conso_clim_rad_total` | TPL | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` |
 | `sensor.conso_clim_rad_total_quotidien` | TPL | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` |
 | `sensor.conso_clim_rad_total_mensuel` | TPL | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` |
-| `sensor.clim_rad_total_avg_watts_quotidien` | TPL | `P1_AVG/P1_AVG_TOTAL_AMHQ.yaml` |
+| `sensor.clim_rad_total_avg_watts_quotidien` | TPL | `P1_AVG/P1_AVG_AMHQ_TOTAL.yaml` |
 | `climate.clim_salon_rm4_mini` | NAT | SmartIR |
-| `climate.radiateur_cuisine` | NAT | Meross |
+| `climate.radiateur_cuisine` | NAT | Helper UI generic_thermostat (pile : `switch.radiateur_elec_cuisine`) *(corrigé 2026-09-20 - registre HA)* |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
 | `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
+| `climate.soufflant_salle_de_bain` | NAT | Helper UI generic_thermostat (pile : `switch.inter_soufflant_salle_de_bain`) *(vérifié 2026-09-20 - carte clim SdB)* |
 | `sensor.tongel_temperature` | NAT | SONOFF via Z2M *(ajouté 2026-09-02 - bloc Congélateur)* |
 | `sensor.tongel_humidity` | NAT | SONOFF via Z2M *(ajouté 2026-09-02 - bloc Congélateur)* |
 | `sensor.tongel_battery` | NAT | SONOFF via Z2M *(ajouté 2026-09-02 - bloc Congélateur)* |
+| `sensor.clim_salon_nous_power` / `sensor.clim_bureau_nous_power` / `sensor.clim_chambre_nous_power` / `sensor.radiateur_elec_cuisine_power` / `sensor.prise_soufflant_salle_de_bain_nous_power` | NAT | NOUS via Z2M - puissances des cartes button-card *(refonte 2026-09-20)* |
 
 > ⚠️ **Corrigé le 2026-07-19** : `temperature_moyenne_interieure`, `temperature_delta_affichage`,
 > `delta_ademe_recommande` étaient attribués à tort à `P1_ui_dashboard/P1_ui_dashboard.yaml`
@@ -330,7 +384,8 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-05-22.yaml` | ⚠️ obsolète - `climate.clim_chambre_rm4_mini` |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-05-22.yaml.bak` | ❓ origine inconnue - conservé en attendant clarification |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-07-14.yaml` | ✅ `climate.clim_chambre_rm4_mini` + `sensor.temperature_corrige_chambre` |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-02.yaml` | ✅ dernière version - ajoute bloc CONGÉLATEUR (`sensor.tongel_temperature/_humidity/_battery`), même base que 2026-07-14 sinon |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-02.yaml` | ✅ historique - ajoute bloc CONGÉLATEUR (`sensor.tongel_temperature/_humidity/_battery`), même base que 2026-07-14 sinon |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-20.yaml` | ✅ dernière version - 41 cartes : refonte cartes clim button-card, retrait du reliquat bubble "Radiateur de la Cuisine", bloc CONGÉLATEUR |
 | `templates/meteo/M_04_tendances_th_ext_card.yaml` | ✅ *(ajouté 2026-07-19 - manquait)* |
 | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | ✅ *(fichier partagé - AVAL principal L1C3, voir aussi cette section)* |
 
@@ -358,6 +413,8 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 > `climate.soufflant_salle_de_bain` retiré - n'existe pas (le soufflant SDB est piloté
 > via `switch.inter_soufflant_salle_de_bain` + `input_select.etat_resistance_soufflant_sdb`,
 > pas une entité climate - vérifié, aucune occurrence dans tout `config_system_YAML/`).
+>
+> ⚠️ **Mise à jour 2026-09-20** : `climate.soufflant_salle_de_bain` EXISTE désormais en live (état `off` - helper UI generic_thermostat créé le 2026-03-22, pile `switch.inter_soufflant_salle_de_bain`) - utilisée par la carte clim SdB de la page L1C2 (refonte 2026-09-20). La note du 2026-07-19 ci-dessus est obsolète.
 
 ### Entités consommées par la vignette
 
@@ -379,7 +436,7 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 | `sensor.sdb_seche_serviette_power_status` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
 | `sensor.chambre_power_status` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
 | `climate.clim_salon_rm4_mini` | NAT | SmartIR |
-| `climate.radiateur_cuisine` | NAT | Meross |
+| `climate.radiateur_cuisine` | NAT | Helper UI generic_thermostat (pile : `switch.radiateur_elec_cuisine`) *(corrigé 2026-09-20)* |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
 | `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
 | `switch.inter_soufflant_salle_de_bain` | NAT (switch TPL) | `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml` |
@@ -469,8 +526,8 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 
 | Fichier | Alias | Statut | Modifié le |
 |:--------|:------|:------:|:-----------|
-| `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/a_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml` | (A - 0) CLIM JOUR | ✅ | 2026-06-21 |
-| `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml` | (B - 0) CLIM NUIT | ✅ | 2026-06-21 |
+| `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/a_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml` | (A - 0) CLIM JOUR | ✅ | 2026-09-20 |
+| `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml` | (B - 0) CLIM NUIT | ✅ | 2026-09-20 |
 | `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/c_notification_temperature_up_ou_down_7h30_21h00.yaml` | (C) Notification temperature Up ou Down (7h30->21h00) | ✅ | - |
 | `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/d_notification_temperature_up_ou_down_21h00_7h30.yaml` | (D) Notification temperature Up ou Down (21h00->7h30) | ✅ | - |
 | `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/e_clim_notification_de_fermeture_des_fenetres.yaml` | (E) Notification de fermeture des fenetres | ✅ | - |
@@ -605,7 +662,7 @@ SENSORS P0
 ---
 
 ## ✅ L2C2 - ÉNERGIE CLIM / RAD / SOUFFLANT
-*Validée le 2026-05-13*
+*Validée le 2026-05-13 - refonte cartes clim (button-card) 2026-09-20*
 
 ### Chaîne de dépendances
 
@@ -624,7 +681,7 @@ MATÉRIEL (NOUS SP via Z2M)
 | Entité | Type | Fichier source |
 |:-------|:----:|:--------------|
 | `climate.clim_salon_rm4_mini` | NAT | SmartIR |
-| `climate.radiateur_cuisine` | NAT | Meross |
+| `climate.radiateur_cuisine` | NAT | Helper UI generic_thermostat (pile : `switch.radiateur_elec_cuisine`) *(corrigé 2026-09-20)* |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
 | `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
 | `switch.inter_soufflant_salle_de_bain` | NAT (switch TPL) | `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml` |
@@ -671,9 +728,12 @@ MATÉRIEL (NOUS SP via Z2M)
 | `sensor.dut_sdb_total` | TPL | `P1_DUT_TOTAL/P1_DUT_TOTAL_SDB.yaml` |
 | `sensor.dut_clim_chambre` | SEN | `P1_DUT/P1_DUT_clim_chauffage.yaml` |
 | `sensor.mode_ete_hiver_etat` | TPL | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
-| `sensor.conso_clim_rad_total` (puissance W) | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
+| `sensor.conso_clim_rad_total` (puissance W) | TPL | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` |
 | `sensor.th_*_temperature` (×5 pièces) | NAT | SONOFF thermostats |
-| `climate.*` (×5) | NAT | SmartIR / Meross |
+| `sensor.ete_hiver` | TPL | ⚠️ introuvable en live *(2026-09-20)* - l'entité réelle est `sensor.mode_ete_hiver_etat` (`P1_ui_dashboard.yaml`) |
+| `climate.*` (×5) | NAT | SmartIR / helpers generic_thermostat |
+
+> ⚠️ **Constaté le 2026-09-20** : 2 références introuvables dans la page - `sensor.ete_hiver` (icônes saison des chips DUT, jamais « Été ») et `sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power` (onglet instantané sèche-serviette). À repointers (GO attendu).
 
 ### Streamline templates (page)
 
@@ -704,6 +764,7 @@ MATÉRIEL (NOUS SP via Z2M)
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-05-22.yaml` | ✅ |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-06-18.yaml` | ⚠️ obsolète - `climate.clim_chambre_rm4_mini` |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-07-14.yaml` | ✅ `climate.clim_chambre_rm4_mini` (NOUS SP1 conservé) |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-09-20.yaml` | ✅ dernière version - 56 cartes : refonte cartes clim (button-card) ; export live du 2026-09-20 |
 
 ---
 
@@ -1899,6 +1960,7 @@ Pilote les clims en période diurne (07h30-21h00) en déléguant au script `p1_m
 | Condition | `time after 07:30 before 21:00` |
 | Entités lues | `sensor.mamour_network_type`, `sensor.eric_network_type`, `switch.clim_salon_nous`, `switch.clim_bureau_nous`, `switch.clim_chambre_nous`, `binary_sensor.contact_fenetre_*_sonoff_contact` (x4), `sensor.groupe`, `sensor.th_balcon_nord_temperature`, `sensor.temperature_cible`, `sensor.mode_ete_hiver`, `sensor.temperature_confort_jour` |
 | Action | `script.p1_master_gestion_clim` (periode: "jour") - délégation complète |
+| Mode | `queued` (max 5) - `max_exceeded: silent` *(ajouté 2026-09-20)* |
 
 #### C - Chaîne de dépendances
 
@@ -1938,6 +2000,7 @@ Pilote les clims en période nocturne (21h00-07h30) en déléguant au script `p1
 | Condition | `time after 21:00 before 07:30` |
 | Entités lues | `sensor.mamour_network_type`, `sensor.eric_network_type`, `switch.clim_salon_nous`, `switch.clim_bureau_nous`, `switch.clim_chambre_nous`, `binary_sensor.contact_fenetre_*_sonoff_contact` (x4), `sensor.groupe`, `sensor.th_balcon_nord_temperature`, `sensor.temperature_cible`, `sensor.mode_ete_hiver`, `sensor.temperature_confort_nuit` |
 | Action | `script.p1_master_gestion_clim` (periode: "nuit") - délégation complète |
+| Mode | `queued` (max 5) - `max_exceeded: silent` *(ajouté 2026-09-20)* |
 
 #### C - Chaîne de dépendances
 

@@ -1,0 +1,183 @@
+# card_congelateur_home_2026-09-20.yaml
+# Congélateur (button-card "appliance") — HOME page
+# Visible si : sensor.tongel_temperature > -14 °C
+# Contenu : états Cooling / Super Cool / Defrost + badges (temp, puissance) + animations
+# Sources : NOUS SP via Z2M (P2) + sonde Tongel (Z2M)
+# Tap : more-info
+# Coquille corrigée le 2026-09-20 : entity = sensor.prise_congelateur_cuisine_nous_power (double "s" historique)
+
+visibility:
+- condition: numeric_state
+  above: -14
+  entity: sensor.tongel_temperature
+type: custom:button-card
+entity: sensor.prise_congelateur_cuisine_nous_power
+name: Congélateur
+show_state: false
+show_label: true
+variables:
+  ent_switch: switch.prise_congelateur_cuisine_nous
+  ent_power: sensor.prise_congelateur_cuisine_nous_power
+  sensor_door: ''
+  sensor_door2: ''
+  sensor_temp_fridge: ''
+  sensor_temp_freezer: sensor.tongel_temperature
+  thresh_cooling: 1
+  thresh_super: ''
+  thresh_defrost: 130
+  max_power_w: 60
+  max_temp_fridge: ''
+  max_temp_freezer: -14
+  show_bar: 'off'
+  size_icon: 45px
+  size_shape: 65px
+  size_card_height: 95px
+  font_primary: 15px
+  font_secondary: 12px
+  font_badge: 10px
+styles:
+  card:
+  - --config-icon-size: '[[[ return variables.size_icon ]]]'
+  - --config-shape-size: '[[[ return variables.size_shape ]]]'
+  - --config-card-height: '[[[ return variables.size_card_height ]]]'
+  - --config-font-primary: '[[[ return variables.font_primary ]]]'
+  - --config-font-secondary: '[[[ return variables.font_secondary ]]]'
+  - --config-font-badge: '[[[ return variables.font_badge ]]]'
+  - height: var(--config-card-height) !important
+  - padding: 0px !important
+  - overflow: hidden
+  - position: relative
+  - transition: box-shadow 1s ease, background 1s ease
+  grid:
+  - padding: 12px 16px
+  - height: 100%
+  - box-sizing: border-box
+  - grid-template-areas: '"i n" "i l"'
+  - grid-template-columns: var(--config-shape-size) 1fr
+  - grid-template-rows: auto auto
+  - align-content: center
+  - gap: 0px 12px
+  - position: relative
+  - z-index: 2
+  icon:
+  - width: var(--config-icon-size)
+  - height: var(--config-icon-size)
+  - color: rgb(var(--appliance-color))
+  - z-index: 3
+  - animation: var(--appliance-icon-anim) !important
+  - transform-origin: 50% 60%
+  img_cell:
+  - width: var(--config-shape-size)
+  - height: var(--config-shape-size)
+  - border-radius: 50%
+  - border: 1px solid rgba(var(--appliance-color), 0.3) !important
+  - background: rgba(var(--appliance-color), 0.1) !important
+  - position: relative
+  - overflow: visible !important
+  - justify-self: start
+  - z-index: 1
+  name:
+  - justify-self: start
+  - font-size: var(--config-font-primary)
+  - font-weight: 500
+  - align-self: end
+  - margin-bottom: 2px
+  - position: relative
+  - z-index: 2
+  label:
+  - justify-self: start
+  - font-size: var(--config-font-secondary)
+  - opacity: 0.7
+  - align-self: start
+  - margin-top: 2px
+  - position: relative
+  - z-index: 2
+  custom_fields:
+    bg1:
+    - position: absolute
+    - inset: 0
+    - pointer-events: none
+    - z-index: 0
+    - display: var(--appliance-bg-d1)
+    - background-image: var(--appliance-bg-img1)
+    - background-size: var(--appliance-bg-sz1)
+    - background-repeat: var(--appliance-bg-rep1)
+    - animation: var(--appliance-bg-anim1)
+    - opacity: var(--appliance-bg-op1)
+    bg2:
+    - position: absolute
+    - inset: 0
+    - pointer-events: none
+    - z-index: 0
+    - display: var(--appliance-bg-d2)
+    - background-image: var(--appliance-bg-img2)
+    - background-size: var(--appliance-bg-sz2)
+    - background-repeat: repeat
+    - animation: var(--appliance-bg-anim2)
+    - opacity: var(--appliance-bg-op2)
+    badge1:
+    - position: absolute
+    - top: 10px
+    - right: 10px
+    - padding: 3px 8px
+    - font-size: var(--config-font-badge)
+    - font-weight: 600
+    - text-transform: uppercase
+    - letter-spacing: 0.5px
+    - white-space: nowrap
+    - z-index: 5
+    - transition: all 0.5s ease
+    badge2:
+    - position: absolute
+    - top: 38px
+    - right: 10px
+    - padding: 4px 8px
+    - font-size: 10px
+    - letter-spacing: 0.5px
+    - white-space: nowrap
+    - opacity: 0.9
+    - text-transform: uppercase
+    - font-weight: 500
+    - z-index: 5
+    - transition: all 0.5s ease
+    bar:
+    - position: absolute
+    - bottom: 0
+    - left: 0
+    - height: 3.5px
+    - width: var(--appliance-level)
+    - background: rgb(var(--appliance-color))
+    - box-shadow: 0 0 10px rgb(var(--appliance-color))
+    - transition: width 0.5s ease
+    - display: var(--bar-display)
+    - z-index: 5
+    door_dash:
+    - position: absolute
+    - top: 50%
+    - left: 0
+    - transform: translateY(-50%)
+    - opacity: 0.8
+    - width: 4px
+    - height: 26px
+    - border-top-right-radius: 4px
+    - border-bottom-right-radius: 4px
+    - display: var(--door-dash-display)
+    - background: rgb(var(--door-dash-color))
+    - box-shadow: var(--door-dash-glow)
+    - transition: background 0.4s ease, box-shadow 0.4s ease
+    - z-index: 2
+    - pointer-events: none
+tap_action:
+  action: more-info
+label: '[[[ return entity ? entity.state : ''Entity Setup Required''; ]]]
+
+  '
+icon: "[[[ \n  let d1 = states[variables.sensor_door];\n  let d2 = states[variables.sensor_door2];\n  let d1_open = d1 && (d1.state === 'on' || d1.state === 'open');\n  let d2_open = d2 && (d2.state === 'on' || d2.state === 'open');\n  return (d1_open || d2_open) ? 'mdi:fridge-industrial-alert' : 'mdi:fridge-industrial'; \n]]]\n"
+custom_fields:
+  bg1: ' '
+  bg2: ' '
+  badge1: ' '
+  badge2: ' '
+  bar: ' '
+  door_dash: ' '
+extra_styles: "[[[\n  let ent_switch = variables.ent_switch;\n  let ent_power = variables.ent_power;\n  let ent_door1 = variables.sensor_door;\n  let ent_door2 = variables.sensor_door2;\n  let ent_temp_f = variables.sensor_temp_fridge;\n  let ent_temp_z = variables.sensor_temp_freezer;\n  \n  let thresh_cool = variables.thresh_cooling;\n  let thresh_super = variables.thresh_super;\n  let thresh_defrost = variables.thresh_defrost;\n  let max_power = variables.max_power_w;\n  let max_temp_f = variables.max_temp_fridge;\n  let max_temp_z = variables.max_temp_freezer;\n  let show_bar = variables.show_bar;\n\n  let switch_state = states[ent_switch] ? states[ent_switch].state : 'unknown';\n  let power_state = states[ent_power];\n  let is_power_valid = power_state && !['unknown', 'unavailable', 'none'].includes(power_state.state.toLowerCase());\n  let power = is_power_valid ? Math.round(parseFloat(power_state.state)) : 0;\n  let power_text = is_power_valid ? ` • ${power}W` : '';\n\n  let door1_val = (ent_door1 && states[ent_door1]) ? states[ent_door1].state.toLowerCase() : 'unknown';\n  let door2_val = (ent_door2 && states[ent_door2]) ? states[ent_door2].state.toLowerCase() : 'unknown';\n  \n  let bad_states = ['unknown', 'unavailable', ''];\n  let d1_valid = !bad_states.includes(door1_val);\n  let d2_valid = !bad_states.includes(door2_val);\n  \n  let d1_open = d1_valid && (door1_val === 'on' || door1_val === 'open');\n  let d2_open = d2_valid && (door2_val === 'on' || door2_val === 'open');\n  let door_open = d1_open || d2_open;\n\n  let raw_temp_f = states[ent_temp_f] ? states[ent_temp_f].state : '';\n  let raw_temp_z = states[ent_temp_z] ? states[ent_temp_z].state : '';\n  \n  let t_f = !bad_states.includes(raw_temp_f) ? raw_temp_f + '°' : '';\n  let t_z = !bad_states.includes(raw_temp_z) ? raw_temp_z + '°' : '';\n\n  let val_f = parseFloat(raw_temp_f); if (isNaN(val_f)) val_f = -999;\n  let val_z = parseFloat(raw_temp_z); if (isNaN(val_z)) val_z = -999;\n  let alert_f = (val_f > max_temp_f) && (val_f !== -999);\n  let alert_z = (val_z > max_temp_z) && (val_z !== -999);\n\n  let status_text = 'Idle';\n  let color = '158, 158, 158';\n  let card_shadow = 'var(--ha-card-box-shadow, none)';\n  let bg_d1 = 'none'; let bg_img1 = 'none'; let bg_sz1 = 'none'; let bg_anim1 = 'none'; let bg_op1 = '1'; let bg_rep1 = 'repeat';\n  let bg_d2 = 'none'; let bg_img2 = 'none'; let bg_sz2 = 'none'; let bg_anim2 = 'none'; let bg_op2 = '1';\n  let icon_anim = 'none'; let anim_frost = 'none'; let anim_drip = 'none';\n  let frost_shadow = 'none'; let overlay_img = 'none';\n\n  let snow_img_1 = `radial-gradient(circle at 20px 30px, white 2px, transparent 3px), radial-gradient(circle at 50px 160px, white 2px, transparent 3px), radial-gradient(circle at 90px 40px, white 2px, transparent 3px), radial-gradient(circle at 130px 80px, white 2px, transparent 3px), radial-gradient(circle at 160px 120px, white 2px, transparent 3px), radial-gradient(circle at 240px 300px, white 2px, transparent 3px), radial-gradient(circle at 280px 100px, white 2px, transparent 3px)`;\n  let snow_img_2 = `radial-gradient(circle at 10px 10px, rgba(255,255,255,0.7) 1px, transparent 2px), radial-gradient(circle at 30px 90px, rgba(255,255,255,0.7) 1px, transparent 2px), radial-gradient(circle at 80px 50px, rgba(255,255,255,0.7) 1px, transparent 2px), radial-gradient(circle at 110px 190px, rgba(255,255,255,0.7) 1px, transparent 2px), radial-gradient(circle at 150px 100px, rgba(255,255,255,0.7) 1px, transparent 2px), radial-gradient(circle at 220px 250px, rgba(255,255,255,0.7) 1px, transparent 2px)`;\n  let drop_img   = `radial-gradient(ellipse at center, rgba(255,152,0,0.5) 0%, transparent 60%), radial-gradient(ellipse at center, rgba(255,152,0,0.4) 0%, transparent 60%), radial-gradient(ellipse at center, rgba(255,152,0,0.5) 0%, transparent 60%), radial-gradient(ellipse at center, rgba(255,152,0,0.4) 0%, transparent 60%)`;\n\n  if (switch_state === 'off') {\n      status_text = 'Plug Off';\n      color = '244, 67, 54';\n  } else if (['unavailable', 'unknown'].includes(switch_state)) {\n      status_text = 'Offline';\n  } else {\n      if (power > thresh_defrost) {\n          status_text = 'Defrost';\n          color = '255, 152, 0';\n          card_shadow = 'inset 0 0 40px rgba(255, 152, 0, 0.08)';\n          bg_d1 = 'block'; bg_img1 = drop_img; bg_sz1 = '100% 100%'; bg_anim1 = 'accumulate-drip-card 4s ease-in infinite'; bg_op1 = '1'; bg_rep1 = 'no-repeat';\n          anim_drip = 'accumulate-drip-icon 3s ease-in infinite';\n          overlay_img = `radial-gradient(ellipse at center, rgba(255,193,7,0.8) 0%, transparent 60%), radial-gradient(ellipse at center, rgba(255,193,7,0.6) 0%, transparent 60%)`;\n      } else if (power > thresh_super) {\n          status_text = 'Super Cool';\n          color = '0, 188, 212';\n          card_shadow = 'inset 0 0 60px rgba(0, 188, 212, 0.15)';\n          bg_d1 = 'block'; bg_img1 = snow_img_1; bg_sz1 = '300px 400px'; bg_anim1 = 'snow-fall-1 8s linear infinite'; bg_op1 = '0.15'; bg_rep1 = 'repeat';\n          bg_d2 = 'block'; bg_img2 = snow_img_2; bg_sz2 = '300px 300px'; bg_anim2 = 'snow-fall-2 4s linear infinite'; bg_op2 = '0.1';\n          icon_anim = 'compressor-rumble 0.1s linear infinite';\n          anim_frost = 'pulse-frost 1.5s ease-in-out infinite';\n          frost_shadow = 'inset 0 0 25px 5px rgba(0, 188, 212, 0.6)';\n      } else if (power > thresh_cool) {\n          status_text = 'Cooling';\n          color = '129, 212, 250';\n          card_shadow = 'inset 0 0 40px rgba(129, 212, 250, 0.1)';\n          bg_d1 = 'block'; bg_img1 = snow_img_1; bg_sz1 = '300px 400px'; bg_anim1 = 'snow-fall-1 16s linear infinite'; bg_op1 = '0.08'; bg_rep1 = 'repeat';\n          bg_d2 = 'block'; bg_img2 = snow_img_2; bg_sz2 = '300px 300px'; bg_anim2 = 'snow-fall-2 8s linear infinite'; bg_op2 = '0.05';\n          icon_anim = 'compressor-rumble 0.3s linear infinite';\n          anim_frost = 'pulse-frost 3s ease-in-out infinite';\n          frost_shadow = 'inset 0 0 15px 2px rgba(129, 212, 250, 0.5)';\n      }\n  }\n\n  let d1_c = color;\n  let corner_display = 'none';\n  let dash_color = color;\n  let dash_glow = 'none';\n  let dash_display = 'none';\n\n  if (d1_valid && d2_valid) {\n      corner_display = 'block';\n      dash_display = 'block';\n      d1_c = d1_open ? '244, 67, 54' : color;\n      dash_color = d2_open ? '244, 67, 54' : color;\n      dash_glow = d2_open ? '2px 0 6px rgba(244, 67, 54, 0.6)' : 'none';\n  } else if (d1_valid || d2_valid) {\n      corner_display = 'block';\n      let open = d1_valid ? d1_open : d2_open;\n      d1_c = open ? '244, 67, 54' : color;\n  }\n\n  if (door_open) {\n      color = '244, 67, 54';\n      card_shadow = 'inset 0 0 50px rgba(244, 67, 54, 0.15)';\n      icon_anim = 'shake-alert 0.5s ease-in-out infinite';\n      frost_shadow = 'none';\n      anim_frost = 'none';\n      anim_drip = 'none';\n      overlay_img = 'none';\n      bg_d1 = 'none';\n      bg_d2 = 'none';\n  }\n\n  let badge1_text = '';\n  if (d1_open && d2_open) badge1_text = '⚠️ DOORS OPEN';\n  else if (d1_open || d2_open) badge1_text = '⚠️ DOOR OPEN';\n  else badge1_text = `${status_text}${power_text}`;\n\n  let badge1 = badge1_text;\n  let b1_c = door_open ? '244, 67, 54' : color;\n  let b1_bg = `rgba(${b1_c}, 0.15)`;\n  let b1_border = `1px solid rgba(${b1_c}, 0.3)`;\n  let b1_bl = `2px solid rgb(${b1_c})`;\n\n  let badge2 = '';\n  let b2_bg = 'transparent'; let b2_bl = 'none'; let b2_br = 'none'; let b2_border = 'none';\n  \n  let c_cool = '33, 150, 243';\n  let c_alert = '244, 67, 54';\n\n  if (t_f || t_z) {\n      let f_str = alert_f ? `⚠️ ${t_f}` : t_f;\n      let z_str = alert_z ? `⚠️ ${t_z}` : t_z;\n      badge2 = [f_str, z_str].filter(Boolean).join(' | ');\n\n      let c_f = alert_f ? c_alert : c_cool;\n      let c_z = alert_z ? c_alert : c_cool;\n\n      b2_border = `1px solid rgba(128,128,128, 0.2)`;\n      if (t_f && t_z) {\n          b2_bg = `linear-gradient(90deg, rgba(${c_f}, 0.15) 0%, rgba(${c_z}, 0.15) 100%)`;\n          b2_bl = `2px solid rgb(${c_f})`;\n          b2_br = `2px solid rgb(${c_z})`;\n      } else if (t_f) {\n          b2_bg = `rgba(${c_f}, 0.15)`;\n          b2_bl = `2px solid rgb(${c_f})`;\n          b2_br = b2_border;\n      } else if (t_z) {\n          b2_bg = `rgba(${c_z}, 0.15)`;\n          b2_bl = b2_border;\n          b2_br = `2px solid rgb(${c_z})`;\n      }\n  }\n\n  let bar_disp = show_bar === 'on' ? 'block' : 'none';\n  let progress = Math.min(100, Math.max(0, Math.floor((power / max_power) * 100)));\n\n  return `\n    #card {\n      --appliance-color: ${color};\n      --appliance-level: ${progress}%; \n      --appliance-bg-d1: ${bg_d1}; --appliance-bg-img1: ${bg_img1}; --appliance-bg-sz1: ${bg_sz1}; --appliance-bg-anim1: ${bg_anim1}; --appliance-bg-op1: ${bg_op1}; --appliance-bg-rep1: ${bg_rep1};\n      --appliance-bg-d2: ${bg_d2}; --appliance-bg-img2: ${bg_img2}; --appliance-bg-sz2: ${bg_sz2}; --appliance-bg-anim2: ${bg_anim2}; --appliance-bg-op2: ${bg_op2};\n      --appliance-icon-anim: ${icon_anim};\n      --appliance-anim-frost: ${anim_frost};\n      --appliance-anim-drip: ${anim_drip};\n      --appliance-frost-shadow: ${frost_shadow};\n      --appliance-overlay-bg: ${overlay_img};\n      --door-corner-color: rgb(${d1_c});\n      --door-corner-display: ${corner_display};\n      --door-dash-color: ${dash_color};\n      --door-dash-glow: ${dash_glow};\n      --door-dash-display: ${dash_display};\n      --bar-display: ${bar_disp};\n      box-shadow: ${card_shadow} !important;\n    }\n    #card::after {\n      content: '';\n      display: var(--door-corner-display);\n      position: absolute;\n      top: -0.5px;\n      left: -0.5px;\n      opacity: 0.7;\n      width: 15px;\n      height: 15px;\n      border-top: 5px solid var(--door-corner-color);\n      border-left: 5px solid var(--door-corner-color);\n      border-top-left-radius: var(--ha-card-border-radius, 12px);\n      pointer-events: none;\n      transition: border-color 0.5s ease;\n      z-index: 1;\n    }\n    #badge1 {\n      background: ${b1_bg};\n      color: rgb(${b1_c});\n      border-top: ${b1_border};\n      border-bottom: ${b1_border};\n      border-right: ${b1_border};\n      border-left: ${b1_bl};\n      border-radius: 6px !important;\n    }\n    #badge1::before { content: \"${badge1}\"; }\n\n    #badge2 {\n      display: ${badge2 ? 'block' : 'none'};\n      background: ${b2_bg};\n      color: var(--primary-text-color, #fff);\n      border-top: ${b2_border};\n      border-bottom: ${b2_border};\n      border-left: ${b2_bl};\n      border-right: ${b2_br};\n      border-radius: 6px !important;\n    }\n    #badge2::before { content: \"${badge2}\"; }\n\n    #img-cell::before {\n      content: ''; position: absolute; inset: 0; box-shadow: var(--appliance-frost-shadow);\n      animation: var(--appliance-anim-frost) !important; z-index: 1; border-radius: 50%; pointer-events: none;\n    }\n    #img-cell::after {\n      content: ''; position: absolute; inset: 0; background-image: var(--appliance-overlay-bg);\n      background-repeat: no-repeat; animation: var(--appliance-anim-drip) !important; z-index: 1; \n      border-radius: 50%; pointer-events: none;\n    }\n\n    @keyframes snow-fall-1 { from { background-position: 0 0; } to { background-position: 0 400px; } }\n    @keyframes snow-fall-2 { from { background-position: 0 0; } to { background-position: 0 300px; } }\n    @keyframes accumulate-drip-card {\n      0% { background-position: 15% 10%, 45% 20%, 75% 15%, 85% 30%; background-size: 0px 0px, 0px 0px, 0px 0px, 0px 0px; opacity: 0; }\n      40% { background-position: 15% 30%, 45% 40%, 75% 35%, 85% 50%; background-size: 15px 25px, 20px 30px, 12px 20px, 25px 35px; opacity: 0.4; }\n      80% { background-position: 15% 80%, 45% 85%, 75% 75%, 85% 90%; background-size: 15px 35px, 20px 40px, 12px 30px, 25px 45px; opacity: 0.2; }\n      100% { background-position: 15% 100%, 45% 105%, 75% 95%, 85% 110%; background-size: 10px 40px, 15px 45px, 8px 35px, 20px 50px; opacity: 0; }\n    }\n    @keyframes pulse-frost { 0%, 100% { opacity: 0.4; transform: scale(0.95); } 50% { opacity: 0.8; transform: scale(1); } }\n    @keyframes accumulate-drip-icon {\n      0% { background-position: 30% 10%, 70% 20%; background-size: 0px 0px, 0px 0px; opacity: 0; }\n      40% { background-position: 30% 30%, 70% 40%; background-size: 8px 12px, 12px 16px; opacity: 1; }\n      80% { background-position: 30% 80%, 70% 90%; background-size: 8px 18px, 12px 22px; opacity: 0.8; }\n      100% { background-position: 30% 100%, 70% 110%; background-size: 6px 20px, 10px 25px; opacity: 0; }\n    }\n    @keyframes compressor-rumble {\n      0% { transform: translate(0, 0); } 25% { transform: translate(-1px, 0.5px); } 50% { transform: translate(1px, -0.5px); } 75% { transform: translate(-0.5px, 0.5px); } 100% { transform: translate(0, 0); }\n    }\n    @keyframes shake-alert {\n      0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(5deg) translateY(-1px); } 75% { transform: rotate(-5deg) translateY(1px); }\n    }\n  `;\n]]]\n"

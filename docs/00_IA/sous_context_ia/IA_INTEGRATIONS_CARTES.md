@@ -47,7 +47,7 @@
 | Add-on | Slug | Role |
 |:-------|:-----|:-----|
 | Advanced SSH & Web Terminal | `a0d7b954_ssh` | Terminal SSH + Web Terminal |
-| Cloudflared | `9074a9fa_cloudflared` | Tunnel HTTPS acces distant securise |
+| Cloudflared | `9074a9fa_cloudflared` | Tunnel HTTPS acces distant securise — ⚠️ vestige arrêté le 2026-09-20 (le tunnel actif tourne sur le host Proxmox .240) |
 | Linky | `cf6b56a3_linky` | Donnees MyElectricalData (index HP/HC, historique conso) -> P0 |
 | Mosquitto broker | `core_mosquitto` | Broker MQTT - bus de communication Blitzortung + capteurs MQTT |
 | Samba share | `core_samba` | Acces reseau aux fichiers /homeassistant/ (H:\) |

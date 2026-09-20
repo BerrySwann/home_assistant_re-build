@@ -10,7 +10,7 @@
 > **REGLE ABSOLUE - STYLE :** Ne jamais utiliser de symboles qui trahissent l'écriture d'un LLM et qui n'existent pas sur un clavier standard. Interdit : `-` (em dash), `…` (ellipse typographique), `«»` (guillemets typographiques), `·` (point médian), et tout autre caractère spécial inaccessible sans Alt+code. Utiliser à la place : `-`, `...`, `"`, `-` etc.
 
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
-*Dernière mise à jour : 2026-08-09*
+*Dernière mise à jour : 2026-09-20*
 
 ---
 
@@ -340,8 +340,8 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 | **LXC 200** | Zigbee2MQTT + Mosquitto (10.32.154.244) |
 | **LXC 201** | MariaDB (10.32.154.242) |
 | **LXC 202** | MyElectricalData (10.32.154.245) |
-| **Add-ons** | Cloudflared · Tailscale · Studio Code Server |
-| **Accès** | Samba Share · SSH · Cloudflared · Tailscale |
+| **Add-ons** | Cloudflared *(vestige — arrêté le 2026-09-20)* · Tailscale · Studio Code Server |
+| **Accès** | Samba Share · SSH · Tailscale · Cloudflare Tunnel (host Proxmox .240 → erodi-ha.com) |
 
 **Intégrations (compact)** : MyElectricalData · Météo France · Blitzortung · AtmoFrance · Vigieau · Meross LAN · Philips HUE · Z2M · Browser Mod · Streamline Card · HACS
 → Détail complet : `docs/00_IA/sous_context_ia/IA_INTEGRATIONS_CARTES.md`

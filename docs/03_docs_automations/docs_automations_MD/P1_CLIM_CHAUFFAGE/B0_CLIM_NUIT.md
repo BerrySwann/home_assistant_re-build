@@ -1,8 +1,8 @@
 # (B-0) AUTOMATISATION CLIM NUIT (21H00 ↔ 07H30)
 
 > **Fichier TREE_CORRIGE :** `docs_automations/TREE_CORRIGE/P1_clim_chauffage/b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml`
-> **Mode HA :** `queued` - max: 5
-> **Dernière mise à jour :** 2026-06-28 (refactoring LLM local → délégation script)
+> **Mode HA :** `queued` - max: 5 - `max_exceeded: silent`
+> **Dernière mise à jour :** 2026-09-20 (ajout `max_exceeded: silent` - fin des messages « Maximum number of runs exceeded » au démarrage)
 
 ---
 
@@ -79,3 +79,4 @@ Une seule action :
 - **Refactoring 2026-06** : même architecture que A0 - wrapper 30 lignes + délégation script.
 - La nuit, `t_salon_target` = `t_bureau_target` = `t_chambre_target` = `temp_nuit` (sauf groupe_1 → eco).
 - `sensor.groupe` ajouté au trigger `sensor_update` lors du refactoring.
+- **2026-09-20** : ajout de `max_exceeded: silent` (mode `queued`/max 5 conservés), même correctif que (A-0) : silence de l'avertissement lors des rafales de déclenchement au démarrage de HA.

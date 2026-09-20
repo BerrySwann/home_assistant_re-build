@@ -2,7 +2,79 @@
 
 *Généré depuis docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md (2026-07-14)*
 
+*Section HOME PAGE ajoutée manuellement le 2026-09-20 (intégration WashData).*
+
 **Navigation:** Cherche une entité → trouve sa source + son utilisation dans les vignettes/pages
+
+---
+
+## HOME PAGE
+
+### `sensor.lave_linge_etat`
+- **Vignette:** HOME PAGE
+- **Type:** sensor
+- **Source:** WashData (HACS) - appareil Lave-Linge
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/`
+
+### `sensor.lave_linge_temps_restant`
+- **Vignette:** HOME PAGE
+- **Type:** sensor
+- **Source:** WashData (HACS) - appareil Lave-Linge
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/`
+
+### `sensor.lave_linge_progres`
+- **Vignette:** HOME PAGE
+- **Type:** sensor
+- **Source:** WashData (HACS) - appareil Lave-Linge
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/`
+
+### `sensor.prise_lave_linge_nous_power`
+- **Vignette:** HOME PAGE
+- **Type:** sensor
+- **Source:** NOUS SP via Z2M (P2) - prise lave-linge
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/`
+
+### `sensor.lave_vaisselle_etat`
+- **Vignette:** HOME PAGE
+- **Type:** sensor
+- **Source:** WashData (HACS) - appareil Lave-Vaisselle
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/`
+
+### `sensor.lave_vaisselle_temps_restant`
+- **Vignette:** HOME PAGE
+- **Type:** sensor
+- **Source:** WashData (HACS) - appareil Lave-Vaisselle
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/`
+
+### `sensor.lave_vaisselle_progres`
+- **Vignette:** HOME PAGE
+- **Type:** sensor
+- **Source:** WashData (HACS) - appareil Lave-Vaisselle
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/`
+
+### `sensor.prise_lave_vaisselle_nous_power`
+- **Vignette:** HOME PAGE
+- **Type:** sensor
+- **Source:** NOUS SP via Z2M (P2) - prise lave-vaisselle
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/`
+
+### `sensor.prise_congelateur_cuisine_nous_power`
+- **Vignette:** HOME PAGE
+- **Type:** sensor
+- **Source:** NOUS SP via Z2M (P2) - prise congélateur cuisine
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/`
+
+### `switch.prise_congelateur_cuisine_nous`
+- **Vignette:** HOME PAGE
+- **Type:** switch
+- **Source:** NOUS SP via Z2M (P2) - prise congélateur cuisine
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/`
+
+### `sensor.tongel_temperature`
+- **Vignette:** HOME PAGE
+- **Type:** sensor
+- **Source:** SONOFF Tongel via Z2M - sonde congélateur
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/`
 
 ---
 
@@ -87,6 +159,8 @@
 - **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_*/`
 
 ## L1C2
+
+*(Complété le 2026-09-20 : entités cartes clim button-card + bloc Congélateur + tendances balcon)*
 
 ### `sensor.clim_rad_total_avg_watts_quotidien`
 - **Vignette:** L1C2
@@ -209,6 +283,73 @@
 - **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_*/`
 
 ### `sensor.vence_temperature`
+- **Vignette:** L1C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_*/`
+
+
+### `climate.soufflant_salle_de_bain`
+- **Vignette:** L1C2
+- **Type:** climate
+- **Source:** Helper UI generic_thermostat (créé 2026-03-22)
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_*/`
+
+### `sensor.clim_salon_nous_power`
+- **Vignette:** L1C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_*/`
+
+### `sensor.clim_bureau_nous_power`
+- **Vignette:** L1C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_*/`
+
+### `sensor.clim_chambre_nous_power`
+- **Vignette:** L1C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_*/`
+
+### `sensor.radiateur_elec_cuisine_power`
+- **Vignette:** L1C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_*/`
+
+### `sensor.prise_soufflant_salle_de_bain_nous_power`
+- **Vignette:** L1C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_*/`
+
+### `sensor.tongel_battery`
+- **Vignette:** L1C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_*/`
+
+### `sensor.tongel_humidity`
+- **Vignette:** L1C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_*/`
+
+### `sensor.tongel_temperature`
+- **Vignette:** L1C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_*/`
+
+### `sensor.th_balcon_nord_humidity_trend`
+- **Vignette:** L1C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_*/`
+
+### `sensor.th_balcon_nord_temperature_trend`
 - **Vignette:** L1C2
 - **Type:** sensor/switch/binary_sensor/camera
 - **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C2_*/`
@@ -337,6 +478,8 @@
 - **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_*/`
 
 ## L2C2
+
+*(Complété le 2026-09-20 : entités page Energie Clim - refonte cartes clim button-card + compteurs UM + prises)*
 
 ### `sensor.bureau_power_status`
 - **Vignette:** L2C2
@@ -537,6 +680,337 @@
 - **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
 
 ### `sensor.temperature_delta_affichage`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+
+### `climate.clim_bureau_rm4_mini`
+- **Vignette:** L2C2
+- **Type:** climate
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `climate.clim_chambre_rm4_mini`
+- **Vignette:** L2C2
+- **Type:** climate
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `climate.clim_salon_rm4_mini`
+- **Vignette:** L2C2
+- **Type:** climate
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `climate.radiateur_cuisine`
+- **Vignette:** L2C2
+- **Type:** climate
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.bureau_power_status_affichage`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.chambre_power_status_affichage`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.cuisine_power_status_affichage`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.salon_power_status_affichage`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.sdb_power_status_affichage`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.sdb_seche_serviette_power_status_affichage`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_bureau_annuel_um`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_bureau_hebdomadaire_um`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_chambre_annuel_um`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_chambre_hebdomadaire_um`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_salon_annuel_um`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_salon_hebdomadaire_um`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.radiateur_elec_cuisine_annuel_um`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.radiateur_elec_cuisine_hebdomadaire_um`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.soufflant_sdb_annuel_um`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.soufflant_sdb_hebdomadaire_um`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.seche_serviette_sdb_annuel_um`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.seche_serviette_sdb_hebdomadaire_um`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_salon_avg_watts_quotidien`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_salon_avg_watts_mensuel`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_bureau_avg_watts_quotidien`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_bureau_avg_watts_mensuel`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_chambre_avg_watts_quotidien`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_chambre_avg_watts_mensuel`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.radiateur_elec_cuisine_avg_watts_quotidien`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.radiateur_elec_cuisine_avg_watts_mensuel`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.soufflant_sdb_avg_watts_quotidien`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.soufflant_sdb_avg_watts_mensuel`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.seche_serviette_sdb_avg_watts_quotidien`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.seche_serviette_sdb_avg_watts_mensuel`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_salon_nous_current`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_salon_nous_energy`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_salon_nous_voltage`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_bureau_nous_current`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_bureau_nous_energy`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_bureau_nous_voltage`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_chambre_nous_current`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_chambre_nous_energy`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.clim_chambre_nous_voltage`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.radiateur_elec_cuisine_current`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.radiateur_elec_cuisine_energy`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.radiateur_elec_cuisine_voltage`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.prise_soufflant_salle_de_bain_nous_current`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.prise_soufflant_salle_de_bain_nous_energy`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.prise_soufflant_salle_de_bain_nous_voltage`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.prise_seche_serviette_salle_de_bain_nous_power`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.prise_seche_serviette_salle_de_bain_nous_current`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.prise_seche_serviette_salle_de_bain_nous_energy`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.prise_seche_serviette_salle_de_bain_nous_voltage`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power`
+- **Vignette:** L2C2
+- **Type:** sensor/switch/binary_sensor/camera
+- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
+
+### `sensor.ete_hiver`
 - **Vignette:** L2C2
 - **Type:** sensor/switch/binary_sensor/camera
 - **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`

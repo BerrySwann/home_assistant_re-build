@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--06--28-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--09--20-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page-ff9800?style=flat-square)](.)
 
 </div>
@@ -14,7 +14,7 @@
 | 🏗️ **Layout** | `type: grid` - 1 col (cartes permanentes) + grille 3×6 (18 vignettes) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-06-28 |
+| 📅 **Modifié le** | 2026-09-20 |
 | 🏠 **Version HA** | 2026.6.x |
 
 ---
@@ -34,8 +34,9 @@
    - [Foudre Blitzortung](#4--foudre-blitzortung-conditionnel)
    - [Lave-linge](#5--lave-linge-conditionnel)
    - [Lave-vaisselle](#6--lave-vaisselle-conditionnel)
-   - [Présence Personne(s)](#7--présence-personnes)
-   - [Détecteur de fuite](#8--détecteur-de-fuite-conditionnel)
+   - [Congélateur](#7--congélateur-conditionnel)
+   - [Présence Personne(s)](#8--présence-personnes)
+   - [Détecteur de fuite](#9--détecteur-de-fuite-conditionnel)
 4. [Grille 18 vignettes](#grille-18-vignettes)
 5. [Entités utilisées](#entités-utilisées--provenance-complète)
 6. [Dépannage](#dépannage)
@@ -58,6 +59,7 @@ Page d'accueil du dashboard. Structure en deux parties :
 - ✅ `person` (natif HA) - présence globale
 - ✅ `ecojoko` (HACS) - consommation électrique temps réel
 - ✅ `smartir` - entités `climate.*` (clims)
+- ✅ `ha_washdata` (HACS) - suivi des cycles lave-linge / lave-vaisselle
 
 ### Cartes HACS utilisées
 
@@ -83,9 +85,12 @@ Page d'accueil du dashboard. Structure en deux parties :
 │  [CONDITIONNEL] button-card VS Code Server  (CPU > 1%)          │
 ├─────────────────────────────────────────────────────────────────┤
 │  [CONDITIONNEL] button-card Foudre  (lightning_counter > 1)     │
-├────────────────────────────┬────────────────────────────────────┤
-│  [COND.] mushroom Lave-lin │ [COND.] mushroom Lave-vaisselle    │
-│  (prise_lave_linge > 50W)  │ (prise_lave_vaisselle > 50W)       │
+├─────────────────────────────────────────────────────────────────┤
+│  [COND.] mushroom Lave-linge  (prise_lave_linge > 2W)           │
+├─────────────────────────────────────────────────────────────────┤
+│  [COND.] mushroom Lave-vaisselle  (prise_lave_vaisselle > 2W)   │
+├─────────────────────────────────────────────────────────────────┤
+│  [COND.] button-card Congélateur  (tongel_temperature > -14°C)  │
 ├─────────────────────────────────────────────────────────────────┤
 │  bubble-card separator  "Personne(s)"  (sensor.etat_wifi_maison)│
 │  bubble-card button  Eric  /  bubble-card button  Mamour        │
@@ -194,33 +199,54 @@ Tap → `/meteo/#foudre`
 
 ### 5 - Lave-linge *(conditionnel)*
 
-**Type :** `custom:mushroom-entity-card`
-**Visible si :** `sensor.prise_lave_linge_nous_power` > 50 W
-**Animation :** `washer-chaos` (rotation irrégulière 1.1s) si puissance > 1 W
-**grid_options :** columns: 6, rows: 2 (demi-largeur, à gauche)
-**Fichier YAML :** `Dashboard/PAGE_Home/card_lave_linge_home_2026-06-13.yaml`
+**Type :** `custom:mushroom-entity-card` (refonte WashData - 2026-09-19)
+**Visible si :** `sensor.prise_lave_linge_nous_power` > 2 W
+**Contenu :** état du cycle, barre de progression, temps restant et puissance (card_mod)
+**grid_options :** columns: 12, rows: 2 (pleine largeur)
+**Fichier YAML :** `Dashboard/PAGE_Home/card_lave_linge_home_2026-09-19.yaml` (remplace le 2026-06-13)
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.prise_lave_linge_nous_power` | Puissance instantanée (W) - condition + animation | NOUS SP via Z2M (P2) |
+| `sensor.lave_linge_etat` | État du cycle (badge principal) | WashData (HACS) |
+| `sensor.lave_linge_temps_restant` | Temps restant | WashData (HACS) |
+| `sensor.lave_linge_progres` | Progression du cycle | WashData (HACS) |
+| `sensor.prise_lave_linge_nous_power` | Puissance instantanée (W) - condition d'affichage + badge | NOUS SP via Z2M (P2) |
 
 ---
 
 ### 6 - Lave-vaisselle *(conditionnel)*
 
-**Type :** `custom:mushroom-entity-card`
-**Visible si :** `sensor.prise_lave_vaisselle_nous_power` > 50 W
-**Animation :** `dishwasher-swash` (oscillation scale+rotate 1.5s) si puissance > 5 W
-**grid_options :** columns: 6, rows: 2 (demi-largeur, à droite)
-**Fichier YAML :** `Dashboard/PAGE_Home/card_lave_vaisselle_home_2026-06-13.yaml`
+**Type :** `custom:mushroom-entity-card` (refonte WashData - 2026-09-19)
+**Visible si :** `sensor.prise_lave_vaisselle_nous_power` > 2 W
+**Contenu :** état du cycle, barre de progression, temps restant et puissance (card_mod)
+**grid_options :** columns: 12, rows: 2 (pleine largeur)
+**Fichier YAML :** `Dashboard/PAGE_Home/card_lave_vaisselle_home_2026-09-19.yaml` (remplace le 2026-06-13)
 
 | Entité | Rôle | Source |
 |--------|------|--------|
-| `sensor.prise_lave_vaisselle_nous_power` | Puissance instantanée (W) - condition + animation | NOUS SP via Z2M (P2) |
+| `sensor.lave_vaisselle_etat` | État du cycle (badge principal) | WashData (HACS) |
+| `sensor.lave_vaisselle_temps_restant` | Temps restant | WashData (HACS) |
+| `sensor.lave_vaisselle_progres` | Progression du cycle | WashData (HACS) |
+| `sensor.prise_lave_vaisselle_nous_power` | Puissance instantanée (W) - condition d'affichage + badge | NOUS SP via Z2M (P2) |
 
 ---
 
-### 7 - Présence Personne(s)
+### 7 - Congélateur *(conditionnel)*
+
+**Type :** `custom:button-card` (carte "appliance")
+**Visible si :** `sensor.tongel_temperature` > -14 °C (carte d'alerte - masquée en marche normale)
+**Contenu :** états Cooling / Super Cool / Defrost selon la puissance, température congélateur, badge puissance (animations neige / givre / dégivrage)
+**Fichier YAML :** `Dashboard/PAGE_Home/card_congelateur_home_2026-09-20.yaml` (nouveau)
+
+| Entité | Rôle | Source |
+|--------|------|--------|
+| `sensor.prise_congelateur_cuisine_nous_power` | Puissance instantanée (W) - états + badge | NOUS SP via Z2M (P2 cuisine) |
+| `switch.prise_congelateur_cuisine_nous` | État de la prise (marche/arrêt) | NOUS SP via Z2M (P2 cuisine) |
+| `sensor.tongel_temperature` | Température congélateur (°C) - condition d'affichage + badge | SONOFF Tongel via Z2M |
+
+---
+
+### 8 - Présence Personne(s)
 
 Groupe de 3 cartes. Voir doc dédiée : [`VIGNETTE_WIFI_PRESENCE.md`](./VIGNETTE_WIFI_PRESENCE.md)
 **Fichier YAML :** `Dashboard/PAGE_Home/card_presence_home_2026-06-13.yaml`
@@ -251,7 +277,7 @@ Zones supplémentaires reconnues : `LECLERC VENCE` (bleu `rgb(0,102,204)`), `Pri
 
 ---
 
-### 8 - Détecteur de fuite *(conditionnel)*
+### 9 - Détecteur de fuite *(conditionnel)*
 
 **Type :** `custom:mushroom-entity-card`
 **Visible si :** `binary_sensor.detecteur_de_fuite_ikea_water_leak` = `on`, `unavailable` ou `unknown`
@@ -311,6 +337,10 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 | `binary_sensor.detecteur_de_fuite_ikea_water_leak` | Zigbee IKEA Vallhorn | Z2M |
 | `sensor.prise_lave_linge_nous_power` | NOUS SP via Z2M | Z2M (P2 cuisine) |
 | `sensor.prise_lave_vaisselle_nous_power` | NOUS SP via Z2M | Z2M (P2 cuisine) |
+| `sensor.lave_linge_*` (etat, progres, temps_restant) | `ha_washdata` (HACS) | Intégrations → WashData - 19 entités |
+| `sensor.lave_vaisselle_*` (etat, progres, temps_restant) | `ha_washdata` (HACS) | Intégrations → WashData - 19 entités |
+| `sensor.prise_congelateur_cuisine_nous_power` / `switch.prise_congelateur_cuisine_nous` | NOUS SP via Z2M | Z2M (P2 cuisine) |
+| `sensor.tongel_temperature` | SONOFF Tongel via Z2M | Z2M |
 | `sensor.studio_code_server_pourcentage_du_processeur` | Studio Code Server (add-on) | HA Supervisor |
 | `sensor.taille_db_home_assistant` | `sql` | sql.yaml |
 | `sensor.ecojoko_*` | `ecojoko` (HACS) | Intégrations → Ecojoko |
@@ -480,8 +510,9 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 | `Dashboard/PAGE_Home/card_meteocss_home_2026-06-28.yaml` | Météo animée (custom:meteo-card + 4 overlays) |
 | `Dashboard/PAGE_Home/card_vscode_home_2026-06-13.yaml` | VS Code Server (conditional) |
 | `Dashboard/PAGE_Home/card_foudre_home_2026-06-13.yaml` | Foudre Blitzortung (button-card) |
-| `Dashboard/PAGE_Home/card_lave_linge_home_2026-06-13.yaml` | Lave-linge (mushroom animée) |
-| `Dashboard/PAGE_Home/card_lave_vaisselle_home_2026-06-13.yaml` | Lave-vaisselle (mushroom animée) |
+| `Dashboard/PAGE_Home/card_lave_linge_home_2026-09-19.yaml` | Lave-linge (mushroom WashData - remplace 2026-06-13) |
+| `Dashboard/PAGE_Home/card_lave_vaisselle_home_2026-09-19.yaml` | Lave-vaisselle (mushroom WashData - remplace 2026-06-13) |
+| `Dashboard/PAGE_Home/card_congelateur_home_2026-09-20.yaml` | Congélateur (button-card appliance) |
 | `Dashboard/PAGE_Home/card_presence_home_2026-06-13.yaml` | Présence (separator + Eric + Mamour) |
 | `Dashboard/PAGE_Home/card_detecteur_fuite_home_2026-06-13.yaml` | Détecteur de fuite (mushroom) |
 

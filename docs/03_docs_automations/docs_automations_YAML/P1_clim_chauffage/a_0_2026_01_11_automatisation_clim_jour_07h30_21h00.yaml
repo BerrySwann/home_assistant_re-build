@@ -64,3 +64,4 @@ actions:
     trigger_entity_id: "{{ trigger.entity_id if trigger is defined and trigger.entity_id is defined else '' }}"
 mode: queued
 max: 5
+max_exceeded: silent

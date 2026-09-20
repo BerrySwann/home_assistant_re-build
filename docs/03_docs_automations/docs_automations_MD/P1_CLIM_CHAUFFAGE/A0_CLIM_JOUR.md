@@ -1,8 +1,8 @@
 # (A-0) AUTOMATISATION CLIM JOUR (07H30 ↔ 21H00)
 
 > **Fichier TREE_CORRIGE :** `docs_automations/TREE_CORRIGE/P1_clim_chauffage/a_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml`
-> **Mode HA :** `queued` - max: 5
-> **Dernière mise à jour :** 2026-06-28 (refactoring LLM local → délégation script)
+> **Mode HA :** `queued` - max: 5 - `max_exceeded: silent`
+> **Dernière mise à jour :** 2026-09-20 (ajout `max_exceeded: silent` - fin des messages « Maximum number of runs exceeded » au démarrage)
 
 ---
 
@@ -83,3 +83,4 @@ Une seule action :
 - **SALON groupe_3 JOUR** : Eric seul → `temp_conf_e` (comportement identique à l'ancienne version inline).
 - `trigger_id` et `trigger_entity_id` sont passés au script pour que la notification fenêtre reste ciblée.
 - Le `sensor_update` ne redémarre **pas** une clim déjà en `off` (protection maintenue dans le script).
+- **2026-09-20** : ajout de `max_exceeded: silent` (mode `queued`/max 5 conservés). Au démarrage de HA, les déclencheurs d'état se déclenchent en rafale et saturent la file ; l'avertissement « Maximum number of runs exceeded » est désormais silencieux, les runs en trop restent ignorés (sans conséquence : recalcul idempotent via le script master).

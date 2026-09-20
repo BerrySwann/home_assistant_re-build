@@ -1,5 +1,5 @@
 # PAGE - Énergie Clim / Radiateur / Soufflant
-*Dernière mise à jour : 2026-03-24*
+*Dernière mise à jour : 2026-09-20*
 *Path : `/dashboard-tablette/energie-clim`*
 
 ---
@@ -65,7 +65,7 @@
 ├── ── SECTION SALON ──────────────────────────────────────────
 │   ├── [text-divider] SALON
 │   ├── [heading] SALON  (badges: climate consigne + T° sensor)
-│   ├── [bubble-card climate] climate.clim_salon_rm4_mini
+│   ├── [button-card clim] climate.clim_salon_rm4_mini
 │   ├── [streamline] clim_voltage_ring-tile  (sensor.clim_salon_nous_voltage)
 │   ├── [streamline] clim_ampere_ring-tile   (sensor.clim_salon_nous_current)
 │   ├── [tabbed-card] 3 onglets:
@@ -77,7 +77,7 @@
 ├── ── SECTION CUISINE ─────────────────────────────────────────
 │   ├── [text-divider] CUISINE
 │   ├── [heading] CUISINE (RADIATEUR)  (badges: climate consigne + T° sensor)
-│   ├── [bubble-card climate] climate.radiateur_cuisine
+│   ├── [button-card clim] climate.radiateur_cuisine
 │   ├── [streamline] clim_voltage_ring-tile  (sensor.radiateur_elec_cuisine_voltage)
 │   ├── [streamline] clim_ampere_ring-tile   (sensor.radiateur_elec_cuisine_current)
 │   ├── [tabbed-card] 3 onglets
@@ -86,7 +86,7 @@
 ├── ── SECTION BUREAU ──────────────────────────────────────────
 │   ├── [text-divider] BUREAU
 │   ├── [heading] BUREAU  (badges: climate consigne + T° sensor)
-│   ├── [bubble-card climate] climate.clim_bureau_rm4_mini
+│   ├── [button-card clim] climate.clim_bureau_rm4_mini
 │   ├── [streamline] clim_voltage_ring-tile  (sensor.clim_bureau_nous_voltage)
 │   ├── [streamline] clim_ampere_ring-tile   (sensor.clim_bureau_nous_current)
 │   ├── [tabbed-card] 3 onglets
@@ -96,7 +96,7 @@
 │   ├── [text-divider] SALLE DE BAIN
 │   ├── [heading] SALLE DE BAIN  (badges: climate soufflant + T° sdb)
 │   ├── [stack-in-card] text-divider "Soufflant de la Salle de Bain"
-│   ├── [bubble-card climate] climate.soufflant_salle_de_bain
+│   ├── [button-card clim] climate.soufflant_salle_de_bain
 │   ├── [streamline] clim_voltage_ring-tile  (sensor.prise_soufflant_salle_de_bain_nous_voltage)
 │   ├── [streamline] clim_ampere_ring-tile   (sensor.prise_soufflant_salle_de_bain_nous_current)
 │   ├── [tabbed-card] 3 onglets  (DUT: sensor.dut_sdb_total, color: magenta)
@@ -111,7 +111,7 @@
 ├── ── SECTION CHAMBRE ─────────────────────────────────────────
 │   ├── [text-divider] CHAMBRE
 │   ├── [heading] CHAMBRE  (badges: climate consigne + T° sensor)
-│   ├── [bubble-card climate] climate.clim_chambre_rm4_mini
+│   ├── [button-card clim] climate.clim_chambre_rm4_mini
 │   ├── [streamline] clim_voltage_ring-tile  (sensor.clim_chambre_nous_voltage)
 │   ├── [streamline] clim_ampere_ring-tile   (sensor.clim_chambre_nous_current)
 │   ├── [tabbed-card] 3 onglets
@@ -146,6 +146,8 @@ tap_action:
 
 Le badge `sensor.temperature_delta_affichage` (Δ T° intérieur/extérieur) ouvre la pop-up `#tendances` au clic.
 
+> ⚠️ **Constaté le 2026-09-20** : le `tap_action` de l'en-tête pointe vers `/dashboard-tablette/home` - cette vue n'existe pas (la vue Home n'a pas de `path`) ; le retour Home ne peut pas aboutir en l'état (à corriger - GO attendu).
+
 ---
 
 ### 2. Bloc bilan conditionnel
@@ -158,7 +160,7 @@ Affiché **uniquement si au moins une clim/chauffage est active**. Vérifie 6 en
 | `sensor.cuisine_power_status_affichage` | Cuisine |
 | `sensor.bureau_power_status_affichage` | Bureau |
 | `sensor.sdb_power_status_affichage` | SdB Soufflant |
-| `sensor.sdb_seche_serviettes_power_status_affichage` | SdB Sèche-Serv |
+| `sensor.sdb_seche_serviette_power_status_affichage` | SdB Sèche-Serv |
 | `sensor.chambre_power_status_affichage` | Chambre |
 
 Si `state_not: "off"` pour au moins une → affiche `text-divider "Consomation TOTAL Climatisations & Radiateurs"`.
@@ -185,6 +187,8 @@ Salon: {% set t = states(entity) | float(0) %}
 | Chambre | `sensor.dut_clim_chambre` | `mdi:snowflake` / `mdi:fire` |
 
 Icône/couleur conditionnelle sur `sensor.ete_hiver` : Été = `#03a9f4`, Hiver = `#ff9800`.
+
+> ⚠️ **Constaté le 2026-09-20** : `sensor.ete_hiver` est introuvable en live (l'entité réelle est `sensor.mode_ete_hiver_etat`, template `P1_ui_dashboard.yaml`) - les icônes saison des chips ne basculent donc jamais ; à repointers (GO attendu).
 
 > Note : La SdB n'a **pas** de chip DUT dédié ici (le DUT SdB est visible dans la section dédiée).
 
@@ -233,12 +237,12 @@ Visibilité : affiché uniquement si `sensor.conso_clim_rad_total > 0.1`.
 
 | Série | Entité | Couleur |
 |-------|--------|---------|
-| SALON (C) | `sensor.clim_salon_quotidien_kwh_um` | `rgb(174,68,90)` |
-| CUISINE (R) | `sensor.radiateur_elec_cuisine_quotidien_kwh_um` | `rgb(168,136,181)` |
-| BUREAU (C) | `sensor.clim_bureau_quotidien_kwh_um` | `orange` |
-| Souff. SdB (R) | `sensor.soufflant_sdb_quotidien_kwh_um` | `magenta` |
-| Sèche-Serv. SdB (R) | `sensor.seche_serviette_sdb_quotidien_kwh_um` | `purple` |
-| CHAMBRE (C) | `sensor.clim_chambre_quotidien_kwh_um` | `rgb(30,81,40)` |
+| SALON (C) | `sensor.clim_salon_quotidien_um` | `rgb(174,68,90)` |
+| CUISINE (R) | `sensor.radiateur_elec_cuisine_quotidien_um` | `rgb(168,136,181)` |
+| BUREAU (C) | `sensor.clim_bureau_quotidien_um` | `orange` |
+| Souff. SdB (R) | `sensor.soufflant_sdb_quotidien_um` | `magenta` |
+| Sèche-Serv. SdB (R) | `sensor.seche_serviette_sdb_quotidien_um` | `purple` |
+| CHAMBRE (C) | `sensor.clim_chambre_quotidien_um` | `rgb(30,81,40)` |
 
 ---
 
@@ -246,16 +250,16 @@ Visibilité : affiché uniquement si `sensor.conso_clim_rad_total > 0.1`.
 
 `custom:apexcharts-card`, `chart_type: donut`, `span.start: month`
 
-Même 6 séries que le journalier, mais avec les entités `*_mensuel_kwh_um` :
+Même 6 séries que le journalier, mais avec les entités `*_mensuel_um` :
 
 | Série | Entité | Couleur |
 |-------|--------|---------|
-| SALON (C) | `sensor.clim_salon_mensuel_kwh_um` | `rgb(174,68,90)` |
-| CUISINE (R) | `sensor.radiateur_elec_cuisine_mensuel_kwh_um` | `rgb(168,136,181)` |
-| BUREAU (C) | `sensor.clim_bureau_mensuel_kwh_um` | `orange` |
-| Souff. SdB (R) | `sensor.soufflant_sdb_mensuel_kwh_um` | `magenta` |
-| Sèche-Serv. SdB (R) | `sensor.seche_serviette_sdb_mensuel_kwh_um` | `purple` |
-| CHAMBRE (C) | `sensor.clim_chambre_mensuel_kwh_um` | `rgb(30,81,40)` |
+| SALON (C) | `sensor.clim_salon_mensuel_um` | `rgb(174,68,90)` |
+| CUISINE (R) | `sensor.radiateur_elec_cuisine_mensuel_um` | `rgb(168,136,181)` |
+| BUREAU (C) | `sensor.clim_bureau_mensuel_um` | `orange` |
+| Souff. SdB (R) | `sensor.soufflant_sdb_mensuel_um` | `magenta` |
+| Sèche-Serv. SdB (R) | `sensor.seche_serviette_sdb_mensuel_um` | `purple` |
+| CHAMBRE (C) | `sensor.clim_chambre_mensuel_um` | `rgb(30,81,40)` |
 
 ---
 
@@ -319,22 +323,22 @@ Les 2 séries `in_chart: false` servent uniquement à afficher leur valeur dans 
 - `climate.clim_salon_rm4_mini` → state_content: name + temperature (consigne)
 - `sensor.th_salon_temperature` → T° mesurée (couleur green)
 
-**Bubble-card climate** : `climate.clim_salon_rm4_mini`, 2 sub_buttons : HVAC modes + fan modes
+**Carte clim (button-card)** : `climate.clim_salon_rm4_mini` (modèle L1C2 : badge état + T° + humidité + puissance, barre `bar_mode: temp` ; `tap_action: more-info`)
 
 **Ring-tiles streamline** :
 - Voltage : `sensor.clim_salon_nous_voltage`
 - Ampère : `sensor.clim_salon_nous_current`
 
 **Tabbed-card** (couleur accent `rgb(174,68,90)`) :
-- `INSTANTANÉ` → `conso_temps_reel_clim_rad` : energy=`sensor.clim_salon_nous_power` (rgb(174,68,90)), avg=`sensor.clim_salon_avg_watts_quotidien`, kwh=`sensor.clim_salon_quotidien_kwh_um`
-- `MENSUEL` → `conso_mensuelle_clim` : energy=`sensor.clim_salon_nous_energy`, avg_monthly=`sensor.clim_salon_avg_watts_mensuel`, kwh_monthly=`sensor.clim_salon_mensuel_kwh_um`
+- `INSTANTANÉ` → `conso_temps_reel_clim_rad` : energy=`sensor.clim_salon_nous_power` (rgb(174,68,90)), avg=`sensor.clim_salon_avg_watts_quotidien`, kwh=`sensor.clim_salon_quotidien_um`
+- `MENSUEL` → `conso_mensuelle_clim` : energy=`sensor.clim_salon_nous_energy`, avg_monthly=`sensor.clim_salon_avg_watts_mensuel`, kwh_monthly=`sensor.clim_salon_mensuel_um`
 - `PERF / DUT` → apexcharts DUT Salon (`sensor.dut_clim_salon`) + T° ext, color_threshold: 0→vert / 4→jaune / 6→orange / 10→rouge, annotation zone critique [5–50h]
 
 **Heading subtitle kWh** :
-- Q : `sensor.clim_salon_quotidien_kwh_um` (amber)
-- H : `sensor.clim_salon_hebdomadaire_kwh_um` (orange)
-- M : `sensor.clim_salon_mensuel_kwh_um` (deep-orange)
-- A : `sensor.clim_salon_annuel_kwh_um` (red)
+- Q : `sensor.clim_salon_quotidien_um` (amber)
+- H : `sensor.clim_salon_hebdomadaire_um` (orange)
+- M : `sensor.clim_salon_mensuel_um` (deep-orange)
+- A : `sensor.clim_salon_annuel_um` (red)
 
 ---
 
@@ -344,19 +348,19 @@ Les 2 séries `in_chart: false` servent uniquement à afficher leur valeur dans 
 - `climate.radiateur_cuisine` (consigne)
 - `sensor.th_cuisine_temperature`
 
-**Bubble-card climate** : `climate.radiateur_cuisine`, 1 sub_button HVAC modes
+**Carte clim (button-card)** : `climate.radiateur_cuisine` (modèle L1C2 - helper generic_thermostat, `max_power_w: 100`)
 
 **Ring-tiles streamline** :
 - Voltage : `sensor.radiateur_elec_cuisine_voltage`
 - Ampère : `sensor.radiateur_elec_cuisine_current`
 
 **Tabbed-card** :
-- `INSTANTANÉ` → energy=`sensor.radiateur_elec_cuisine_power` (rgb(168,136,181)), avg=`sensor.radiateur_elec_cuisine_avg_watts_quotidien`, kwh=`sensor.radiateur_elec_cuisine_quotidien_kwh_um`
-- `MENSUEL` → energy=`sensor.radiateur_elec_cuisine_energy`, avg_monthly=`sensor.radiateur_elec_cuisine_avg_watts_mensuel`, kwh_monthly=`sensor.radiateur_elec_cuisine_mensuel_kwh_um`
+- `INSTANTANÉ` → energy=`sensor.radiateur_elec_cuisine_power` (rgb(168,136,181)), avg=`sensor.radiateur_elec_cuisine_avg_watts_quotidien`, kwh=`sensor.radiateur_elec_cuisine_quotidien_um`
+- `MENSUEL` → energy=`sensor.radiateur_elec_cuisine_energy`, avg_monthly=`sensor.radiateur_elec_cuisine_avg_watts_mensuel`, kwh_monthly=`sensor.radiateur_elec_cuisine_mensuel_um`
 - `PERF / DUT` → `sensor.dut_radiateur_cuisine` (rgb(168,136,181)), annotation "Performance Faible"
 
 **Heading subtitle kWh** :
-- Q/H/M/A : `sensor.radiateur_elec_cuisine_*_kwh_um`
+- Q/H/M/A : `sensor.radiateur_elec_cuisine_*_um`
 
 ---
 
@@ -366,19 +370,19 @@ Les 2 séries `in_chart: false` servent uniquement à afficher leur valeur dans 
 - `climate.clim_bureau_rm4_mini` (consigne)
 - `sensor.th_bureau_temperature`
 
-**Bubble-card climate** : `climate.clim_bureau_rm4_mini`, 2 sub_buttons : HVAC + fan modes
+**Carte clim (button-card)** : `climate.clim_bureau_rm4_mini` (modèle L1C2)
 
 **Ring-tiles streamline** :
 - Voltage : `sensor.clim_bureau_nous_voltage`
 - Ampère : `sensor.clim_bureau_nous_current`
 
 **Tabbed-card** :
-- `INSTANTANÉ` → energy=`sensor.clim_bureau_nous_power` (orange), avg=`sensor.clim_bureau_avg_watts_quotidien`, kwh=`sensor.clim_bureau_quotidien_kwh_um`
-- `MENSUEL` → energy=`sensor.clim_bureau_nous_energy`, avg_monthly=`sensor.clim_bureau_avg_watts_mensuel`, kwh_monthly=`sensor.clim_bureau_mensuel_kwh_um`
+- `INSTANTANÉ` → energy=`sensor.clim_bureau_nous_power` (orange), avg=`sensor.clim_bureau_avg_watts_quotidien`, kwh=`sensor.clim_bureau_quotidien_um`
+- `MENSUEL` → energy=`sensor.clim_bureau_nous_energy`, avg_monthly=`sensor.clim_bureau_avg_watts_mensuel`, kwh_monthly=`sensor.clim_bureau_mensuel_um`
 - `PERF / DUT` → `sensor.dut_clim_bureau` (orange), annotation "Zone Critique"
 
 **Heading subtitle kWh** :
-- Q/H/M/A : `sensor.clim_bureau_*_kwh_um`
+- Q/H/M/A : `sensor.clim_bureau_*_um`
 
 ---
 
@@ -390,37 +394,39 @@ Les 2 séries `in_chart: false` servent uniquement à afficher leur valeur dans 
 
 **Sub-section Soufflant** (`text-divider "Soufflant de la Salle de Bain"`) :
 
-**Bubble-card climate** : `climate.soufflant_salle_de_bain`, min_temp: 21, max_temp: 23, step: 1
+**Carte clim (button-card)** : `climate.soufflant_salle_de_bain` (modèle L1C2 - helper generic_thermostat, plage 21-27 °C, `max_power_w: 100`)
 
 **Ring-tiles streamline** :
 - Voltage : `sensor.prise_soufflant_salle_de_bain_nous_voltage`
 - Ampère : `sensor.prise_soufflant_salle_de_bain_nous_current`
 
 **Tabbed-card** :
-- `INSTANTANÉ` → energy=`sensor.prise_soufflant_salle_de_bain_nous_power` (magenta), avg=`sensor.soufflant_sdb_avg_watts_quotidien`, kwh=`sensor.soufflant_sdb_quotidien_kwh_um`
+- `INSTANTANÉ` → energy=`sensor.prise_soufflant_salle_de_bain_nous_power` (magenta), avg=`sensor.soufflant_sdb_avg_watts_quotidien`, kwh=`sensor.soufflant_sdb_quotidien_um`
 - `MENSUEL` → energy=`sensor.prise_soufflant_salle_de_bain_nous_energy` (magenta), avg_monthly=`sensor.soufflant_sdb_avg_watts_mensuel`
 - `PERF / DUT` → `sensor.dut_sdb_total` (rgb(218,112,214)), annotation "Pic de conso", dashArray pour distinguer les tracés
 
 **Heading subtitle kWh** :
-- Q/H/M/A : `sensor.soufflant_sdb_*_kwh_um`
+- Q/H/M/A : `sensor.soufflant_sdb_*_um`
 
 ---
 
 ### 15. Section SdB Sèche-Serviettes
 
-**Sub-section** (`text-divider "Sèche-Serviettes Salle de Bain"`) - pas de bubble-card climate, pas de heading dédié.
+**Sub-section** (`text-divider "Sèche-Serviettes Salle de Bain"`) - pas de carte clim (appareil non piloté), pas de heading dédié.
 
 **Ring-tiles streamline** :
 - Voltage : `sensor.prise_seche_serviette_salle_de_bain_nous_voltage`
 - Ampère : `sensor.prise_seche_serviette_salle_de_bain_nous_current`
 
 **Tabbed-card** :
-- `INSTANTANÉ` → energy=`sensor.prise_seche_serviette_salle_de_bain_nous_power` (rgb(218,112,214)), avg=`sensor.seche_serviette_sdb_avg_watts_quotidien`, kwh=`sensor.seche_serviette_sdb_quotidien_kwh_um`, power_entity=`sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power` (rgb(255,215,0) - IKEA Inspelning)
+- `INSTANTANÉ` → energy=`sensor.prise_seche_serviette_salle_de_bain_nous_power` (rgb(218,112,214)), avg=`sensor.seche_serviette_sdb_avg_watts_quotidien`, kwh=`sensor.seche_serviette_sdb_quotidien_um`, power_entity=`sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power` (rgb(255,215,0) - IKEA Inspelning)
+
+> ⚠️ **Constaté le 2026-09-20** : `sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power` est introuvable en live (probablement renommée) - la courbe IKEA de cet onglet ne s'affiche pas ; à repointers (GO attendu).
 - `MENSUEL` → energy=`sensor.prise_seche_serviette_salle_de_bain_nous_energy` (rgb(218,112,214)), avg_monthly=`sensor.seche_serviette_sdb_avg_watts_mensuel`
 - `PERF / DUT` → `sensor.dut_sdb_total` (rgb(218,112,214)), annotation "Pic de conso"
 
 **Heading subtitle kWh** :
-- Q/H/M/A : `sensor.seche_serviette_sdb_*_kwh_um`
+- Q/H/M/A : `sensor.seche_serviette_sdb_*_um`
 
 ---
 
@@ -430,19 +436,19 @@ Les 2 séries `in_chart: false` servent uniquement à afficher leur valeur dans 
 - `climate.clim_chambre_rm4_mini` (consigne)
 - `sensor.th_chambre_temperature`
 
-**Bubble-card climate** : `climate.clim_chambre_rm4_mini`, 2 sub_buttons : HVAC + fan modes
+**Carte clim (button-card)** : `climate.clim_chambre_rm4_mini` (modèle L1C2)
 
 **Ring-tiles streamline** :
 - Voltage : `sensor.clim_chambre_nous_voltage`
 - Ampère : `sensor.clim_chambre_nous_current`
 
 **Tabbed-card** :
-- `INSTANTANÉ` → energy=`sensor.clim_chambre_nous_power` (rgb(30,81,40)), avg=`sensor.clim_chambre_avg_watts_quotidien`, kwh=`sensor.clim_chambre_quotidien_kwh_um`
-- `MENSUEL` → energy=`sensor.clim_chambre_nous_energy`, avg_monthly=`sensor.clim_chambre_avg_watts_mensuel`, kwh_monthly=`sensor.clim_chambre_mensuel_kwh_um`
+- `INSTANTANÉ` → energy=`sensor.clim_chambre_nous_power` (rgb(30,81,40)), avg=`sensor.clim_chambre_avg_watts_quotidien`, kwh=`sensor.clim_chambre_quotidien_um`
+- `MENSUEL` → energy=`sensor.clim_chambre_nous_energy`, avg_monthly=`sensor.clim_chambre_avg_watts_mensuel`, kwh_monthly=`sensor.clim_chambre_mensuel_um`
 - `PERF / DUT` → `sensor.dut_clim_chambre` (rgb(30,81,40)), annotation "Zone de déperdition" (opacity 0.7 - chambre = forte déperdition thermique attendue)
 
 **Heading subtitle kWh** :
-- Q/H/M/A : `sensor.clim_chambre_*_kwh_um`
+- Q/H/M/A : `sensor.clim_chambre_*_um`
 
 ---
 
@@ -471,9 +477,9 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 | Entité | Source |
 |--------|--------|
 | `climate.clim_salon_rm4_mini` | SmartIR |
-| `climate.radiateur_cuisine` | Meross |
+| `climate.radiateur_cuisine` | Helper UI generic_thermostat (pile : `switch.radiateur_elec_cuisine`) *(vérifié 2026-09-20)* |
 | `climate.clim_bureau_rm4_mini` | SmartIR |
-| `climate.soufflant_salle_de_bain` | Meross |
+| `climate.soufflant_salle_de_bain` | Helper UI generic_thermostat (pile : `switch.inter_soufflant_salle_de_bain`) *(vérifié 2026-09-20)* |
 | `climate.clim_chambre_rm4_mini` | SmartIR |
 
 ### Catégorie B - Utility Meters kWh (P1_UM_AMHQ)
@@ -482,28 +488,28 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 
 | Entité | Période |
 |--------|---------|
-| `sensor.clim_salon_quotidien_kwh_um` | Quotidien |
-| `sensor.clim_salon_hebdomadaire_kwh_um` | Hebdomadaire |
-| `sensor.clim_salon_mensuel_kwh_um` | Mensuel |
-| `sensor.clim_salon_annuel_kwh_um` | Annuel |
-| `sensor.radiateur_elec_cuisine_quotidien_kwh_um` | Quotidien |
-| `sensor.radiateur_elec_cuisine_hebdomadaire_kwh_um` | Hebdomadaire |
-| `sensor.radiateur_elec_cuisine_mensuel_kwh_um` | Mensuel |
-| `sensor.radiateur_elec_cuisine_annuel_kwh_um` | Annuel |
-| `sensor.clim_bureau_quotidien_kwh_um` | Quotidien |
-| `sensor.clim_bureau_hebdomadaire_kwh_um` | Hebdomadaire |
-| `sensor.clim_bureau_mensuel_kwh_um` | Mensuel |
-| `sensor.clim_bureau_annuel_kwh_um` | Annuel |
-| `sensor.soufflant_sdb_quotidien_kwh_um` | Quotidien |
-| `sensor.soufflant_sdb_hebdomadaire_kwh_um` | Hebdomadaire |
-| `sensor.soufflant_sdb_mensuel_kwh_um` | Mensuel |
-| `sensor.soufflant_sdb_annuel_kwh_um` | Annuel |
-| `sensor.seche_serviette_sdb_quotidien_kwh_um` | Quotidien |
-| `sensor.seche_serviette_sdb_mensuel_kwh_um` | Mensuel |
-| `sensor.clim_chambre_quotidien_kwh_um` | Quotidien |
-| `sensor.clim_chambre_hebdomadaire_kwh_um` | Hebdomadaire |
-| `sensor.clim_chambre_mensuel_kwh_um` | Mensuel |
-| `sensor.clim_chambre_annuel_kwh_um` | Annuel |
+| `sensor.clim_salon_quotidien_um` | Quotidien |
+| `sensor.clim_salon_hebdomadaire_um` | Hebdomadaire |
+| `sensor.clim_salon_mensuel_um` | Mensuel |
+| `sensor.clim_salon_annuel_um` | Annuel |
+| `sensor.radiateur_elec_cuisine_quotidien_um` | Quotidien |
+| `sensor.radiateur_elec_cuisine_hebdomadaire_um` | Hebdomadaire |
+| `sensor.radiateur_elec_cuisine_mensuel_um` | Mensuel |
+| `sensor.radiateur_elec_cuisine_annuel_um` | Annuel |
+| `sensor.clim_bureau_quotidien_um` | Quotidien |
+| `sensor.clim_bureau_hebdomadaire_um` | Hebdomadaire |
+| `sensor.clim_bureau_mensuel_um` | Mensuel |
+| `sensor.clim_bureau_annuel_um` | Annuel |
+| `sensor.soufflant_sdb_quotidien_um` | Quotidien |
+| `sensor.soufflant_sdb_hebdomadaire_um` | Hebdomadaire |
+| `sensor.soufflant_sdb_mensuel_um` | Mensuel |
+| `sensor.soufflant_sdb_annuel_um` | Annuel |
+| `sensor.seche_serviette_sdb_quotidien_um` | Quotidien |
+| `sensor.seche_serviette_sdb_mensuel_um` | Mensuel |
+| `sensor.clim_chambre_quotidien_um` | Quotidien |
+| `sensor.clim_chambre_hebdomadaire_um` | Hebdomadaire |
+| `sensor.clim_chambre_mensuel_um` | Mensuel |
+| `sensor.clim_chambre_annuel_um` | Annuel |
 
 ### Catégorie C - Templates P1 TOTAL (agrégats)
 
@@ -531,7 +537,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 | `sensor.cuisine_power_status_affichage` | État affichage Cuisine |
 | `sensor.bureau_power_status_affichage` | État affichage Bureau |
 | `sensor.sdb_power_status_affichage` | État affichage SdB Soufflant |
-| `sensor.sdb_seche_serviettes_power_status_affichage` | État affichage SdB SèS |
+| `sensor.sdb_seche_serviette_power_status_affichage` | État affichage SdB SèS |
 | `sensor.chambre_power_status_affichage` | État affichage Chambre |
 | `sensor.clim_salon_etat` | Mode Salon (Cool/Heat/Fan/Off) |
 | `sensor.radiateur_cuisine_etat` | Mode Cuisine (Heat/Off) |
@@ -540,7 +546,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 | `sensor.sdb_seche_serviette_etat` | Mode Sèche-Serv SdB |
 | `sensor.clim_chambre_etat` | Mode Chambre |
 
-### Catégorie E - Sensors natifs puissance (W) - prises NOUS/Meross
+### Catégorie E - Sensors natifs puissance (W) - prises NOUS / IKEA
 
 | Entité | Appareil |
 |--------|----------|
@@ -572,7 +578,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 
 ### Catégorie F - Templates P1 AVG (moyennes)
 
-**Source :** `templates/P1_clim_chauffage/P1_AVG/P1_AVG.yaml`
+**Source :** `templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml`
 
 | Entité | Description |
 |--------|-------------|
@@ -649,7 +655,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 ## Dépannage
 
 **Donuts vides / à 0 :**
-Les UM `*_kwh_um` mettent un peu de temps à s'alimenter au démarrage. Si vide plus longtemps, vérifier que `P1_UM_AMHQ.yaml` référence bien les bons sensors sources (intégration Riemann dans `P1_DUT_clim_chauffage.yaml`).
+Les UM `*_um` mettent un peu de temps à s'alimenter au démarrage. Si vide plus longtemps, vérifier que `P1_UM_AMHQ.yaml` référence bien les bons sensors sources (intégration Riemann dans `P1_DUT_clim_chauffage.yaml`).
 
 **DUT chips bloqués à 0h00 :**
 Les `sensor.dut_*` viennent de `platform: history_stats`. Vérifier que les entités source (`climate.*`, `switch.*`) sont bien suivies dans l'historique MariaDB.
@@ -671,10 +677,11 @@ Le hash `#tendances` doit être déclaré dans la page. Vérifier que la `bubble
 |---------|------|
 | `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml` | Compteurs UM Q/H/M/A (6 appareils) |
 | `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` | Totaux agrégés |
-| `templates/P1_clim_chauffage/P1_AVG/P1_AVG.yaml` | Moyennes W (quotidien/mensuel) |
+| `templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml` | Moyennes W (quotidien/mensuel) |
 | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | power_status + etat + affichage |
 | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Logique T° cible + delta ADEME |
 | `sensors/P1_clim_chauffage/P1_DUT_clim_chauffage.yaml` | DUT history_stats + intégration kWh |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-09-20.yaml` | Export live du 2026-09-20 (56 cartes - refonte cartes clim button-card) |
 
 
 <!-- obsidian-wikilinks -->
