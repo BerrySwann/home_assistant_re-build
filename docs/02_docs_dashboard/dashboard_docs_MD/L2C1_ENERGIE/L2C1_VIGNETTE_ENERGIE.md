@@ -123,7 +123,7 @@ const value = parseFloat(states['sensor.genelec_appart_conso_mini_24h']?.state) 
 return `<span style='color:white; font-weight:bold;'>${value.toFixed(0)} kWh</span>`;
 ```
 
-> `genelec_appart_conso_mini_24h` = `value_min` sur 24h de `sensor.genelec_appart_quotidien_kwh_um`.
+> `genelec_appart_conso_mini_24h` = `value_min` sur 24h de `sensor.genelec_appart_quotidien_um`.
 > **Valeur pratique : toujours 0** - l'UM repart de 0 à minuit. Blanc fixe, pas de seuil couleur.
 > Source : `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml`
 
@@ -154,7 +154,7 @@ else if (value > 8) { color = '#FFA500'; }           // orange >  8 kWh
 return `<span style='color:${color}; font-weight:bold;'>${value.toFixed(0)} kWh</span>`;
 ```
 
-> `genelec_appart_conso_maxi_24h` = `value_max` sur 24h de `sensor.genelec_appart_quotidien_kwh_um`.
+> `genelec_appart_conso_maxi_24h` = `value_max` sur 24h de `sensor.genelec_appart_quotidien_um`.
 > Représente le **total journalier accumulé** (pic = valeur courante de l'UM en fin de journée).
 > Source : `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml`
 
@@ -288,7 +288,7 @@ La carte se met à jour sur changement de l'une des 6 entités ci-dessus (event-
 |---------|------|--------|
 | `custom:button-card` | HACS | ✅ Essentiel |
 | Smart plug NODON (appartement général) | Intégration HA [UI] | ✅ Essentiel - fournit `general_electric_appart_power` |
-| `sensor.genelec_appart_quotidien_kwh_um` | Utility Meter (utility_meter/) | ✅ Requis - source des stats mini/maxi |
+| `sensor.genelec_appart_quotidien_um` | Utility Meter (utility_meter/) | ✅ Requis - source des stats mini/maxi |
 | `P0_MINI_MAXI_AVG_Genelec_appart.yaml` | platform: statistics | ✅ Requis - fournit mini/maxi kWh |
 | `01_genelec_appart_AMHQ_cost.yaml` | Template coûts | ✅ Requis - fournit `cout_total/hp/hc_quotidien` |
 | Automation basculement HP/HC | `automations_corrige/energie/basculement_tarif_hphc.yaml` | ✅ Requis - split HP/HC correct |

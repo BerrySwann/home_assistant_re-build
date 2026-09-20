@@ -50,7 +50,7 @@ Cette page offre une vue **temps réel** de la consommation électrique appareil
 - ✅ **Zigbee2MQTT (Z2M)** - toutes les prises IKEA et NOUS sans pont : `sensor.prise_*_power` / `sensor.prise_*_current`
 - ✅ **Sonoff** - `sensor.relais_*_power` (lumière SDB via relais Z2M)
 - ✅ **Philips Hue** - `sensor.hue_*_power` / `sensor.lampe_*_hue_power`
-- ✅ **Sensors calculés P2** - `sensor.*_quotidien_kwh_um` (Utility Meters quotidiens)
+- ✅ **Sensors calculés P2** - `sensor.*_quotidien_um` (Utility Meters quotidiens)
 - ✅ **Sensors calculés AVG** - `sensor.*_avg_watts_quotidien` (moyennes glissantes quotidiennes)
 - ✅ **custom:streamline-card** (HACS) - template `conso_temps_reel_appareil`
 - ✅ **custom:tabbed-card** (HACS) - navigation par pièce
@@ -210,13 +210,13 @@ Quand la condition est vraie, s'affiche un `heading` avec badge + `auto-entities
       legend_value: false
       extremas: false
   series:
-    - entity: sensor.prise_box_internet_ikea_quotidien_kwh_um
+    - entity: sensor.prise_box_internet_ikea_quotidien_um
       transform: return x * 1000;
       unit: Wh
       name: Box (+)
       color: gainsboro
     # ... 16 autres appareils
-    - entity: sensor.all_standby_quotidien_kwh_um
+    - entity: sensor.all_standby_quotidien_um
       transform: return x * 1000;
       unit: Wh
       name: Veilles
@@ -224,33 +224,33 @@ Quand la condition est vraie, s'affiche un `heading` avec badge + `auto-entities
 ```
 
 ### Principe
-- **Source** : Utility Meters quotidiens (`_quotidien_kwh_um`) - se remettent à 0 à minuit
+- **Source** : Utility Meters quotidiens (`_quotidien_um`) - se remettent à 0 à minuit
 - **Transform** : `× 1000` pour convertir kWh → Wh (meilleure lisibilité pour les petits appareils)
-- **18 séries** : 17 prises individuelles + 1 TV Salon + `sensor.all_standby_quotidien_kwh_um`
+- **18 séries** : 17 prises individuelles + 1 TV Salon + `sensor.all_standby_quotidien_um`
 - Pas de `graph_span` / `span` → lecture directe de l'état actuel des UM
 
 ### Palette de couleurs (18 appareils)
 
 | Appareil | Entité UM | Couleur |
 |----------|-----------|---------|
-| Box Internet | `prise_box_internet_ikea_quotidien_kwh_um` | gainsboro |
-| Horloge Entrée | `prise_horloge_ikea_quotidien_kwh_um` | `rgb(183, 183, 183)` |
-| PCg (Géraldine) | `prise_pc_s_gege_ikea_quotidien_kwh_um` | `rgb(174, 68, 90)` |
-| Chargeurs Salon | `prise_salon_chargeur_nous_quotidien_kwh_um` | `rgb(196, 75, 97)` |
-| TV Salon | `prise_tv_salon_ikea_quotidien_kwh_um` | `rgb(215,95,115)` |
-| Four Micro-Ondes | `prise_four_micro_ondes_nous_quotidien_kwh_um` | `rgb(98,78,136)` |
-| Petit Déjeuner | `prise_petit_dejeune_nous_quotidien_kwh_um` | `rgb(118,93,160)` |
-| Lave-Linge | `prise_lave_linge_nous_quotidien_kwh_um` | `rgb(137,103,179)` |
-| Lave-Vaisselle | `prise_lave_vaisselle_nous_quotidien_kwh_um` | `rgb(129,116,180)` |
-| Airfryer | `prise_airfryer_ninja_nous_quotidien_kwh_um` | `rgb(142,122,181)` |
-| Four & Plaque | `four_et_plaque_de_cuisson_quotidien_kwh_um` | `rgb(162,148,249)` |
-| Frigo | `prise_frigo_cuisine_nous_quotidien_kwh_um` | `cyan` |
-| Congélateur | `prise_congelateur_cuisine_nous_quotidien_kwh_um` | `rgb(0, 255, 255)` ← `cyan` |
-| PCe (Bureau) | `prise_bureau_pc_ikea_quotidien_kwh_um` | `orange` |
-| Fer à Repasser | `prise_bureau_fer_a_repasser_nous_quotidien_kwh_um` | `gold` |
-| Têtes de lit | `prise_tete_de_lit_chambre_quotidien_kwh_um` | `rgb(75, 130, 85)` |
-| TV Chambre | `prise_tv_chambre_nous_quotidien_kwh_um` | `rgb(105, 155, 110)` |
-| Veilles | `all_standby_quotidien_kwh_um` | `rgb(109, 76, 65)` |
+| Box Internet | `prise_box_internet_ikea_quotidien_um` | gainsboro |
+| Horloge Entrée | `prise_horloge_ikea_quotidien_um` | `rgb(183, 183, 183)` |
+| PCg (Géraldine) | `prise_pc_s_gege_ikea_quotidien_um` | `rgb(174, 68, 90)` |
+| Chargeurs Salon | `prise_salon_chargeur_nous_quotidien_um` | `rgb(196, 75, 97)` |
+| TV Salon | `prise_tv_salon_ikea_quotidien_um` | `rgb(215,95,115)` |
+| Four Micro-Ondes | `prise_four_micro_ondes_nous_quotidien_um` | `rgb(98,78,136)` |
+| Petit Déjeuner | `prise_petit_dejeune_nous_quotidien_um` | `rgb(118,93,160)` |
+| Lave-Linge | `prise_lave_linge_nous_quotidien_um` | `rgb(137,103,179)` |
+| Lave-Vaisselle | `prise_lave_vaisselle_nous_quotidien_um` | `rgb(129,116,180)` |
+| Airfryer | `prise_airfryer_ninja_nous_quotidien_um` | `rgb(142,122,181)` |
+| Four & Plaque | `four_et_plaque_de_cuisson_quotidien_um` | `rgb(162,148,249)` |
+| Frigo | `prise_frigo_cuisine_nous_quotidien_um` | `cyan` |
+| Congélateur | `prise_congelateur_cuisine_nous_quotidien_um` | `rgb(0, 255, 255)` ← `cyan` |
+| PCe (Bureau) | `prise_bureau_pc_ikea_quotidien_um` | `orange` |
+| Fer à Repasser | `prise_bureau_fer_a_repasser_nous_quotidien_um` | `gold` |
+| Têtes de lit | `prise_tete_de_lit_chambre_quotidien_um` | `rgb(75, 130, 85)` |
+| TV Chambre | `prise_tv_chambre_nous_quotidien_um` | `rgb(105, 155, 110)` |
+| Veilles | `all_standby_quotidien_um` | `rgb(109, 76, 65)` |
 
 > ⚠️ **[modif 2026-03-20]** : Couleurs mises à jour - PCg `rgb(202,135,135)` → `rgb(174,68,90)`, Chargeurs `rgb(174,68,90)` → `rgb(196,75,97)`, Congél `rgb(19,160,255)` → `rgb(0,255,255)` (cyan), Têtes de Lit `rgb(177,194,158)` → `rgb(75,130,85)`, TV Chambre `rgb(30,81,40)` → `rgb(105,155,110)`, Veilles `grey` → `rgb(109,76,65)`.
 
@@ -352,7 +352,7 @@ Chaque appareil utilise ce template streamline avec 5 variables :
 | `energy_color` | Couleur cohérente avec donut/graphique |
 | `current_entity` | `sensor.*_current` - intensité (A) |
 | `avg_daily_entity` | `sensor.*_avg_watts_quotidien` - moyenne W depuis minuit |
-| `conso_daily_kwh_entity` | `sensor.*_quotidien_kwh_um` - kWh depuis minuit |
+| `conso_daily_kwh_entity` | `sensor.*_quotidien_um` - kWh depuis minuit |
 
 > **Note** : Le template `conso_temps_reel_appareil` est défini dans le fichier de configuration streamline (non inclus dans le re-build à ce stade).
 
@@ -405,24 +405,24 @@ Chaque appareil utilise ce template streamline avec 5 variables :
 
 | Entité | Appareil |
 |--------|----------|
-| `sensor.prise_box_internet_ikea_quotidien_kwh_um` | Box Internet |
-| `sensor.prise_horloge_ikea_quotidien_kwh_um` | Horloge |
-| `sensor.prise_pc_s_gege_ikea_quotidien_kwh_um` | PCg |
-| `sensor.prise_salon_chargeur_nous_quotidien_kwh_um` | Chargeurs |
-| `sensor.prise_tv_salon_ikea_quotidien_kwh_um` | TV Salon |
-| `sensor.prise_four_micro_ondes_nous_quotidien_kwh_um` | Four M-O |
-| `sensor.prise_petit_dejeune_nous_quotidien_kwh_um` | Petit Déj. |
-| `sensor.prise_lave_linge_nous_quotidien_kwh_um` | Lave-Linge |
-| `sensor.prise_lave_vaisselle_nous_quotidien_kwh_um` | Lave-Vaisselle |
-| `sensor.prise_airfryer_ninja_nous_quotidien_kwh_um` | Airfryer |
-| `sensor.four_et_plaque_de_cuisson_quotidien_kwh_um` | Four & Plaque |
-| `sensor.prise_frigo_cuisine_nous_quotidien_kwh_um` | Frigo |
-| `sensor.prise_congelateur_cuisine_nous_quotidien_kwh_um` | Congélateur |
-| `sensor.prise_bureau_pc_ikea_quotidien_kwh_um` | PCe |
-| `sensor.prise_bureau_fer_a_repasser_nous_quotidien_kwh_um` | Fer à Repasser |
-| `sensor.prise_tete_de_lit_chambre_quotidien_kwh_um` | Tête de lit |
-| `sensor.prise_tv_chambre_nous_quotidien_kwh_um` | TV Chambre |
-| `sensor.all_standby_quotidien_kwh_um` | Veilles |
+| `sensor.prise_box_internet_ikea_quotidien_um` | Box Internet |
+| `sensor.prise_horloge_ikea_quotidien_um` | Horloge |
+| `sensor.prise_pc_s_gege_ikea_quotidien_um` | PCg |
+| `sensor.prise_salon_chargeur_nous_quotidien_um` | Chargeurs |
+| `sensor.prise_tv_salon_ikea_quotidien_um` | TV Salon |
+| `sensor.prise_four_micro_ondes_nous_quotidien_um` | Four M-O |
+| `sensor.prise_petit_dejeune_nous_quotidien_um` | Petit Déj. |
+| `sensor.prise_lave_linge_nous_quotidien_um` | Lave-Linge |
+| `sensor.prise_lave_vaisselle_nous_quotidien_um` | Lave-Vaisselle |
+| `sensor.prise_airfryer_ninja_nous_quotidien_um` | Airfryer |
+| `sensor.four_et_plaque_de_cuisson_quotidien_um` | Four & Plaque |
+| `sensor.prise_frigo_cuisine_nous_quotidien_um` | Frigo |
+| `sensor.prise_congelateur_cuisine_nous_quotidien_um` | Congélateur |
+| `sensor.prise_bureau_pc_ikea_quotidien_um` | PCe |
+| `sensor.prise_bureau_fer_a_repasser_nous_quotidien_um` | Fer à Repasser |
+| `sensor.prise_tete_de_lit_chambre_quotidien_um` | Tête de lit |
+| `sensor.prise_tv_chambre_nous_quotidien_um` | TV Chambre |
+| `sensor.all_standby_quotidien_um` | Veilles |
 
 ---
 

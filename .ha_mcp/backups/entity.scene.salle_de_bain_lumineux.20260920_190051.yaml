@@ -1,0 +1,24 @@
+# ha_mcp_backup
+schema_version: 1
+domain: entity
+entity_id: scene.salle_de_bain_lumineux
+captured: '2026-09-20T19:00:51.938635+00:00'
+tool: ha_set_entity
+config:
+  entity_id: scene.salle_de_bain_lumineux
+  state: unknown
+  attributes:
+    group_name: Salle de bain
+    group_type: room
+    name: Lumineux
+    speed: 0.603
+    brightness: 255
+    is_dynamic: false
+    friendly_name: Salle de bain Lumineux
+  last_changed: '2026-09-20T17:38:08.632077+00:00'
+  last_reported: '2026-09-20T17:38:08.632077+00:00'
+  last_updated: '2026-09-20T17:38:08.632077+00:00'
+  context:
+    id: 01M2ZYB4KRJ3SRKG9TJ3NSGJYH
+    parent_id: null
+    user_id: null

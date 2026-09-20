@@ -1,0 +1,24 @@
+# ha_mcp_backup
+schema_version: 1
+domain: entity
+entity_id: scene.lit_default
+captured: '2026-09-20T19:00:51.509925+00:00'
+tool: ha_set_entity
+config:
+  entity_id: scene.lit_default
+  state: unknown
+  attributes:
+    group_name: Lit
+    group_type: room
+    name: default
+    speed: 0.603
+    brightness: 255
+    is_dynamic: false
+    friendly_name: Lit default
+  last_changed: '2026-09-20T17:38:08.617845+00:00'
+  last_reported: '2026-09-20T17:38:08.617845+00:00'
+  last_updated: '2026-09-20T17:38:08.617845+00:00'
+  context:
+    id: 01M2ZYB4K9N77Y8507SA39PR8C
+    parent_id: null
+    user_id: null

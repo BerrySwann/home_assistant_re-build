@@ -61,7 +61,7 @@ Cette page regroupe toutes les informations de consommation électrique du logem
 
 - ✅ **NODON** (smart plug général appartement) - `sensor.general_electric_appart_*`
 - ✅ **Riemann tampon** - `sensor.genelec_appart_totale_kwh` (source des UM)
-- ✅ **UM Genelec Appart** - `sensor.genelec_appart_*_kwh_um` et `sensor.genelec_appart_hphc_*_um_hp/hc`
+- ✅ **UM Genelec Appart** - `sensor.genelec_appart_*_um` et `sensor.genelec_appart_hphc_*_um_hp/hc`
 - ✅ **MyElectricalData / Linky** (`linky_card`) - `sensor.linky_*`
 - ✅ **tarif_edf** (custom component) - `sensor.edf_tempo_price_blue_hp` / `sensor.edf_tempo_price_blue_hc`
 - ✅ Sensors Genelec Appart mini/maxi - `sensor.genelec_appart_conso_mini_24h` / `sensor.genelec_appart_conso_maxi_24h` (via `P0_MINI_MAXI_AVG_Genelec_appart.yaml`)
@@ -202,7 +202,7 @@ Grid 3 colonnes. Chaque ring-tile est un indicateur circulaire avec arc de coule
 | 8–14.99 | Vert | - |
 | ≥ 15 | Orange | Anormal - sensor à vérifier |
 
-> `genelec_appart_conso_mini_24h` = `value_min` sur 24h de `sensor.genelec_appart_quotidien_kwh_um`.
+> `genelec_appart_conso_mini_24h` = `value_min` sur 24h de `sensor.genelec_appart_quotidien_um`.
 > **Valeur toujours 0** - l'UM repart de 0 à minuit et ne peut que croître. Sert de marqueur de reset.
 > Source : `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml`
 
@@ -244,7 +244,7 @@ Grid 3 colonnes. Chaque ring-tile est un indicateur circulaire avec arc de coule
 | 15–17.99 | Orange | Journée élevée |
 | ≥ 18 | Rouge | Journée très élevée |
 
-> `genelec_appart_conso_maxi_24h` = `value_max` sur 24h de `sensor.genelec_appart_quotidien_kwh_um`.
+> `genelec_appart_conso_maxi_24h` = `value_max` sur 24h de `sensor.genelec_appart_quotidien_um`.
 > Représente le **total journalier kWh accumulé** (pic = valeur courante de l'UM).
 > Source : `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml`
 
@@ -339,7 +339,7 @@ Période : jour en cours (remise à zéro à minuit).
 
 | Entité | Type | Rôle |
 |--------|------|------|
-| `sensor.genelec_appart_quotidien_kwh_um` | entity | Total kWh quotidien (UM) |
+| `sensor.genelec_appart_quotidien_um` | entity | Total kWh quotidien (UM) |
 | `sensor.genelec_appart_hphc_quotidien_um_hp` | entity | H.P. kWh quotidien (UM HP) |
 | `sensor.genelec_appart_hphc_quotidien_um_hc` | entity | H.C. kWh quotidien (UM HC) |
 | `sensor.genelec_appart_cout_total_quotidien` | entity | Coût total € quotidien |
@@ -418,7 +418,7 @@ Période : semaine en cours (remise à zéro le lundi à minuit).
 
 | Entité | Rôle |
 |--------|------|
-| `sensor.genelec_appart_hebdomadaire_kwh_um` | Total kWh hebdo (UM) |
+| `sensor.genelec_appart_hebdomadaire_um` | Total kWh hebdo (UM) |
 | `sensor.genelec_appart_hphc_hebdomadaire_um_hp` | H.P. kWh hebdo (UM HP) |
 | `sensor.genelec_appart_hphc_hebdomadaire_um_hc` | H.C. kWh hebdo (UM HC) |
 | `sensor.genelec_appart_cout_total_hebdomadaire` | Coût total € hebdo |
@@ -449,7 +449,7 @@ series:
 
 **4. Historique 7 jours superposé (Overlay - ApexCharts)**
 
-Principe : 8 séries sur `sensor.genelec_appart_quotidien_kwh_um` avec `offset` décalant la fenêtre de lecture. Chaque courbe représente un jour complet de 0 → total kWh, toutes alignées sur le même axe 24h.
+Principe : 8 séries sur `sensor.genelec_appart_quotidien_um` avec `offset` décalant la fenêtre de lecture. Chaque courbe représente un jour complet de 0 → total kWh, toutes alignées sur le même axe 24h.
 
 ```yaml
 graph_span: 24h
@@ -513,7 +513,7 @@ Période : mois en cours (remise à zéro le 1er du mois à minuit).
 
 | Entité | Type | Rôle |
 |--------|------|------|
-| `sensor.genelec_appart_mensuel_kwh_um` | entity | Total kWh mensuel (UM) |
+| `sensor.genelec_appart_mensuel_um` | entity | Total kWh mensuel (UM) |
 | `sensor.genelec_appart_hphc_mensuel_um_hp` | entity | H.P. kWh mensuel (UM HP) |
 | `sensor.genelec_appart_hphc_mensuel_um_hc` | entity | H.C. kWh mensuel (UM HC) |
 | `sensor.genelec_appart_cout_total_mensuel` | entity | Coût total € mensuel |
@@ -615,10 +615,10 @@ Donut : `group_by: func: diff, duration: 24h`.
 
 | Entité | Cycle | Source |
 |--------|-------|--------|
-| `sensor.genelec_appart_quotidien_kwh_um` | daily | `utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ.yaml` |
-| `sensor.genelec_appart_hebdomadaire_kwh_um` | weekly | idem |
-| `sensor.genelec_appart_mensuel_kwh_um` | monthly | idem |
-| `sensor.genelec_appart_annuel_kwh_um` | yearly | idem |
+| `sensor.genelec_appart_quotidien_um` | daily | `utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ.yaml` |
+| `sensor.genelec_appart_hebdomadaire_um` | weekly | idem |
+| `sensor.genelec_appart_mensuel_um` | monthly | idem |
+| `sensor.genelec_appart_annuel_um` | yearly | idem |
 
 ---
 
@@ -718,7 +718,7 @@ Donut : `group_by: func: diff, duration: 24h`.
 
 ### Les ring-tiles Mini/Maxi affichent "unavailable"
 1. Vérifier que `sensor.genelec_appart_conso_mini_24h` et `sensor.genelec_appart_conso_maxi_24h` existent dans Outils de développement > États
-2. Ces sensors sont des `platform: statistics` sur `sensor.genelec_appart_quotidien_kwh_um` - vérifier que l'UM quotidien est actif
+2. Ces sensors sont des `platform: statistics` sur `sensor.genelec_appart_quotidien_um` - vérifier que l'UM quotidien est actif
 3. La moyenne 1h peut être indisponible pendant les 60 premières minutes après redémarrage HA
 4. Source : `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml`
 
@@ -732,7 +732,7 @@ C'est **normal**. `value_min` sur 24h d'un UM qui repart de 0 à minuit sera tou
 4. Source coûts pré-calculés : `templates/P0_Energie_total_diag/Genelec_appart/01_genelec_appart_AMHQ_cost.yaml`
 
 ### Le graphique overlay 7 jours (onglet HEBDOMADAIRE) ne montre pas tous les jours
-1. Le recorder HA doit avoir au moins 7 jours d'historique pour `sensor.genelec_appart_quotidien_kwh_um`
+1. Le recorder HA doit avoir au moins 7 jours d'historique pour `sensor.genelec_appart_quotidien_um`
 2. Vérifier `configuration.yaml` → paramètre `recorder: purge_keep_days:` (doit être ≥ 8)
 3. L'UM a été créé récemment → les données historiques ne remontent qu'à sa date de création
 

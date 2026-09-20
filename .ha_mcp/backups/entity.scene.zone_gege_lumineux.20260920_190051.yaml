@@ -1,0 +1,24 @@
+# ha_mcp_backup
+schema_version: 1
+domain: entity
+entity_id: scene.zone_gege_lumineux
+captured: '2026-09-20T19:00:51.801121+00:00'
+tool: ha_set_entity
+config:
+  entity_id: scene.zone_gege_lumineux
+  state: unknown
+  attributes:
+    group_name: "Zone G\xE9g\xE9"
+    group_type: zone
+    name: Lumineux
+    speed: 0.6031746
+    brightness: 255
+    is_dynamic: false
+    friendly_name: "Zone G\xE9g\xE9 Lumineux"
+  last_changed: '2026-09-20T17:38:08.623847+00:00'
+  last_reported: '2026-09-20T17:38:08.623847+00:00'
+  last_updated: '2026-09-20T17:38:08.623847+00:00'
+  context:
+    id: 01M2ZYB4KFTQ761QQ9JEKW2ZWY
+    parent_id: null
+    user_id: null

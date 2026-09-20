@@ -1,0 +1,24 @@
+# ha_mcp_backup
+schema_version: 1
+domain: entity
+entity_id: scene.zone_eric_attenue
+captured: '2026-09-20T19:00:51.966064+00:00'
+tool: ha_set_entity
+config:
+  entity_id: scene.zone_eric_attenue
+  state: unknown
+  attributes:
+    group_name: Zone Eric
+    group_type: zone
+    name: "Att\xE9nu\xE9"
+    speed: 0.6031746
+    brightness: 77
+    is_dynamic: false
+    friendly_name: "Zone Eric Att\xE9nu\xE9"
+  last_changed: '2026-09-20T17:38:08.632534+00:00'
+  last_reported: '2026-09-20T17:38:08.632534+00:00'
+  last_updated: '2026-09-20T17:38:08.632534+00:00'
+  context:
+    id: 01M2ZYB4KR3FN40DCFR8QEM0X4
+    parent_id: null
+    user_id: null

@@ -1,0 +1,24 @@
+# ha_mcp_backup
+schema_version: 1
+domain: entity
+entity_id: scene.entree_lumineux
+captured: '2026-09-20T19:00:51.744823+00:00'
+tool: ha_set_entity
+config:
+  entity_id: scene.entree_lumineux
+  state: unknown
+  attributes:
+    group_name: "Entr\xE9e"
+    group_type: room
+    name: Lumineux
+    speed: 0.6031746
+    brightness: 255
+    is_dynamic: false
+    friendly_name: "Entr\xE9e Lumineux"
+  last_changed: '2026-09-20T17:38:08.622333+00:00'
+  last_reported: '2026-09-20T17:38:08.622333+00:00'
+  last_updated: '2026-09-20T17:38:08.622333+00:00'
+  context:
+    id: 01M2ZYB4KE3QKK6PT7QMHEX3A7
+    parent_id: null
+    user_id: null

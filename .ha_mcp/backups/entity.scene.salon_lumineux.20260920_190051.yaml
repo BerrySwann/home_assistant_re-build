@@ -1,0 +1,24 @@
+# ha_mcp_backup
+schema_version: 1
+domain: entity
+entity_id: scene.salon_lumineux
+captured: '2026-09-20T19:00:51.719656+00:00'
+tool: ha_set_entity
+config:
+  entity_id: scene.salon_lumineux
+  state: unknown
+  attributes:
+    group_name: Salon
+    group_type: room
+    name: Lumineux
+    speed: 0.6031746
+    brightness: 255
+    is_dynamic: false
+    friendly_name: Salon Lumineux
+  last_changed: '2026-09-20T17:38:08.621871+00:00'
+  last_reported: '2026-09-20T17:38:08.621871+00:00'
+  last_updated: '2026-09-20T17:38:08.621871+00:00'
+  context:
+    id: 01M2ZYB4KD5PPXQMQJ8HW9YSJ5
+    parent_id: null
+    user_id: null

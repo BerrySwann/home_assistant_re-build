@@ -70,19 +70,19 @@ entities:
   - sensor.sdb_soufflant_etat
   - sensor.sdb_seche_serviette_etat
   - sensor.chambre_power_status
-  - sensor.clim_salon_quotidien_kwh_um
-  - sensor.radiateur_elec_cuisine_quotidien_kwh_um
-  - sensor.clim_bureau_quotidien_kwh_um
-  - sensor.soufflant_sdb_quotidien_kwh_um
-  - sensor.seche_serviette_sdb_quotidien_kwh_um
-  - sensor.clim_chambre_quotidien_kwh_um
+  - sensor.clim_salon_quotidien_um
+  - sensor.radiateur_elec_cuisine_quotidien_um
+  - sensor.clim_bureau_quotidien_um
+  - sensor.soufflant_sdb_quotidien_um
+  - sensor.seche_serviette_sdb_quotidien_um
+  - sensor.clim_chambre_quotidien_um
   - sensor.conso_clim_rad_total_quotidien
-  - sensor.clim_salon_mensuel_kwh_um
-  - sensor.radiateur_elec_cuisine_mensuel_kwh_um
-  - sensor.clim_bureau_mensuel_kwh_um
-  - sensor.soufflant_sdb_mensuel_kwh_um
-  - sensor.seche_serviette_sdb_mensuel_kwh_um
-  - sensor.clim_chambre_mensuel_kwh_um
+  - sensor.clim_salon_mensuel_um
+  - sensor.radiateur_elec_cuisine_mensuel_um
+  - sensor.clim_bureau_mensuel_um
+  - sensor.soufflant_sdb_mensuel_um
+  - sensor.seche_serviette_sdb_mensuel_um
+  - sensor.clim_chambre_mensuel_um
   - sensor.conso_clim_rad_total_mensuel
 triggers_update:
   - climate.clim_salon_rm4_mini
@@ -96,19 +96,19 @@ triggers_update:
   - sensor.sdb_soufflant_etat
   - sensor.sdb_seche_serviette_etat
   - sensor.chambre_power_status
-  - sensor.clim_salon_quotidien_kwh_um
-  - sensor.radiateur_elec_cuisine_quotidien_kwh_um
-  - sensor.clim_bureau_quotidien_kwh_um
-  - sensor.soufflant_sdb_quotidien_kwh_um
-  - sensor.seche_serviette_sdb_quotidien_kwh_um
-  - sensor.clim_chambre_quotidien_kwh_um
+  - sensor.clim_salon_quotidien_um
+  - sensor.radiateur_elec_cuisine_quotidien_um
+  - sensor.clim_bureau_quotidien_um
+  - sensor.soufflant_sdb_quotidien_um
+  - sensor.seche_serviette_sdb_quotidien_um
+  - sensor.clim_chambre_quotidien_um
   - sensor.conso_clim_rad_total_quotidien
-  - sensor.clim_salon_mensuel_kwh_um
-  - sensor.radiateur_elec_cuisine_mensuel_kwh_um
-  - sensor.clim_bureau_mensuel_kwh_um
-  - sensor.soufflant_sdb_mensuel_kwh_um
-  - sensor.seche_serviette_sdb_mensuel_kwh_um
-  - sensor.clim_chambre_mensuel_kwh_um
+  - sensor.clim_salon_mensuel_um
+  - sensor.radiateur_elec_cuisine_mensuel_um
+  - sensor.clim_bureau_mensuel_um
+  - sensor.soufflant_sdb_mensuel_um
+  - sensor.seche_serviette_sdb_mensuel_um
+  - sensor.clim_chambre_mensuel_um
   - sensor.conso_clim_rad_total_mensuel
 tap_action:
   action: navigate
@@ -187,12 +187,12 @@ custom_fields:
   quotidien: |
     [[[
       const list = [
-        'sensor.clim_salon_quotidien_kwh_um',
-        'sensor.radiateur_elec_cuisine_quotidien_kwh_um',
-        'sensor.clim_bureau_quotidien_kwh_um',
-        'sensor.soufflant_sdb_quotidien_kwh_um',
-        'sensor.seche_serviette_sdb_quotidien_kwh_um',
-        'sensor.clim_chambre_quotidien_kwh_um',
+        'sensor.clim_salon_quotidien_um',
+        'sensor.radiateur_elec_cuisine_quotidien_um',
+        'sensor.clim_bureau_quotidien_um',
+        'sensor.soufflant_sdb_quotidien_um',
+        'sensor.seche_serviette_sdb_quotidien_um',
+        'sensor.clim_chambre_quotidien_um',
         'sensor.conso_clim_rad_total_quotidien'
       ];
       return list.map((sensor, i) => {
@@ -212,12 +212,12 @@ custom_fields:
   mensuel: |
     [[[
       const list = [
-        'sensor.clim_salon_mensuel_kwh_um',
-        'sensor.radiateur_elec_cuisine_mensuel_kwh_um',
-        'sensor.clim_bureau_mensuel_kwh_um',
-        'sensor.soufflant_sdb_mensuel_kwh_um',
-        'sensor.seche_serviette_sdb_mensuel_kwh_um',
-        'sensor.clim_chambre_mensuel_kwh_um',
+        'sensor.clim_salon_mensuel_um',
+        'sensor.radiateur_elec_cuisine_mensuel_um',
+        'sensor.clim_bureau_mensuel_um',
+        'sensor.soufflant_sdb_mensuel_um',
+        'sensor.seche_serviette_sdb_mensuel_um',
+        'sensor.clim_chambre_mensuel_um',
         'sensor.conso_clim_rad_total_mensuel'
       ];
       return list.map((sensor, i) => {
@@ -255,19 +255,19 @@ custom_fields:
 | 9 | `sensor.sdb_soufflant_etat` | TPL | Mode Soufflant SdB | idem |
 | 10 | `sensor.sdb_seche_serviette_etat` | TPL | Mode Sèche-Serv SdB | idem |
 | 11 | `sensor.chambre_power_status` | TPL | ON/OFF Chambre | idem |
-| 12 | `sensor.clim_salon_quotidien_kwh_um` | UM | kWh jour Salon | `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml` |
-| 13 | `sensor.radiateur_elec_cuisine_quotidien_kwh_um` | UM | kWh jour Cuisine | idem |
-| 14 | `sensor.clim_bureau_quotidien_kwh_um` | UM | kWh jour Bureau | idem |
-| 15 | `sensor.soufflant_sdb_quotidien_kwh_um` | UM | kWh jour SdB Sft | idem |
-| 16 | `sensor.seche_serviette_sdb_quotidien_kwh_um` | UM | kWh jour SdB SèS | idem |
-| 17 | `sensor.clim_chambre_quotidien_kwh_um` | UM | kWh jour Chambre | idem |
+| 12 | `sensor.clim_salon_quotidien_um` | UM | kWh jour Salon | `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml` |
+| 13 | `sensor.radiateur_elec_cuisine_quotidien_um` | UM | kWh jour Cuisine | idem |
+| 14 | `sensor.clim_bureau_quotidien_um` | UM | kWh jour Bureau | idem |
+| 15 | `sensor.soufflant_sdb_quotidien_um` | UM | kWh jour SdB Sft | idem |
+| 16 | `sensor.seche_serviette_sdb_quotidien_um` | UM | kWh jour SdB SèS | idem |
+| 17 | `sensor.clim_chambre_quotidien_um` | UM | kWh jour Chambre | idem |
 | 18 | `sensor.conso_clim_rad_total_quotidien` | TPL | TOTAL kWh jour | `P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` |
-| 19 | `sensor.clim_salon_mensuel_kwh_um` | UM | kWh mois Salon | `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml` |
-| 20 | `sensor.radiateur_elec_cuisine_mensuel_kwh_um` | UM | kWh mois Cuisine | idem |
-| 21 | `sensor.clim_bureau_mensuel_kwh_um` | UM | kWh mois Bureau | idem |
-| 22 | `sensor.soufflant_sdb_mensuel_kwh_um` | UM | kWh mois SdB Sft | idem |
-| 23 | `sensor.seche_serviette_sdb_mensuel_kwh_um` | UM | kWh mois SdB SèS | idem |
-| 24 | `sensor.clim_chambre_mensuel_kwh_um` | UM | kWh mois Chambre | idem |
+| 19 | `sensor.clim_salon_mensuel_um` | UM | kWh mois Salon | `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml` |
+| 20 | `sensor.radiateur_elec_cuisine_mensuel_um` | UM | kWh mois Cuisine | idem |
+| 21 | `sensor.clim_bureau_mensuel_um` | UM | kWh mois Bureau | idem |
+| 22 | `sensor.soufflant_sdb_mensuel_um` | UM | kWh mois SdB Sft | idem |
+| 23 | `sensor.seche_serviette_sdb_mensuel_um` | UM | kWh mois SdB SèS | idem |
+| 24 | `sensor.clim_chambre_mensuel_um` | UM | kWh mois Chambre | idem |
 | 25 | `sensor.conso_clim_rad_total_mensuel` | TPL | TOTAL kWh mois | `P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` |
 
 ### Entités accédées uniquement via JS `states[]` (NON dans `entities:`)

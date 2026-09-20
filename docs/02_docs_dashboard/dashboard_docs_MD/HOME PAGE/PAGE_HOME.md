@@ -402,12 +402,12 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 
 | Entité | Rôle |
 |--------|------|
-| `sensor.clim_salon_quotidien_kwh_um` / `_mensuel_kwh_um` | Conso clim salon |
-| `sensor.radiateur_elec_cuisine_quotidien_kwh_um` / `_mensuel_kwh_um` | Conso radiateur cuisine |
-| `sensor.clim_bureau_quotidien_kwh_um` / `_mensuel_kwh_um` | Conso clim bureau |
-| `sensor.soufflant_sdb_quotidien_kwh_um` / `_mensuel_kwh_um` | Conso soufflant SDB |
-| `sensor.seche_serviette_sdb_quotidien_kwh_um` / `_mensuel_kwh_um` | Conso sèche-serviette |
-| `sensor.clim_chambre_quotidien_kwh_um` / `_mensuel_kwh_um` | Conso clim chambre |
+| `sensor.clim_salon_quotidien_um` / `_mensuel_um` | Conso clim salon |
+| `sensor.radiateur_elec_cuisine_quotidien_um` / `_mensuel_um` | Conso radiateur cuisine |
+| `sensor.clim_bureau_quotidien_um` / `_mensuel_um` | Conso clim bureau |
+| `sensor.soufflant_sdb_quotidien_um` / `_mensuel_um` | Conso soufflant SDB |
+| `sensor.seche_serviette_sdb_quotidien_um` / `_mensuel_um` | Conso sèche-serviette |
+| `sensor.clim_chambre_quotidien_um` / `_mensuel_um` | Conso clim chambre |
 | `sensor.conso_clim_rad_total_quotidien` / `_mensuel` | Totaux Pôle 1 |
 
 ---

@@ -1,0 +1,24 @@
+# ha_mcp_backup
+schema_version: 1
+domain: entity
+entity_id: scene.table_attenue
+captured: '2026-09-20T19:00:51.882996+00:00'
+tool: ha_set_entity
+config:
+  entity_id: scene.table_attenue
+  state: unknown
+  attributes:
+    group_name: Table
+    group_type: room
+    name: "Att\xE9nu\xE9"
+    speed: 0.603
+    brightness: 76
+    is_dynamic: false
+    friendly_name: "Table Att\xE9nu\xE9"
+  last_changed: '2026-09-20T17:38:08.631130+00:00'
+  last_reported: '2026-09-20T17:38:08.631130+00:00'
+  last_updated: '2026-09-20T17:38:08.631130+00:00'
+  context:
+    id: 01M2ZYB4KQTRJDRS60BAAYNMZ1
+    parent_id: null
+    user_id: null

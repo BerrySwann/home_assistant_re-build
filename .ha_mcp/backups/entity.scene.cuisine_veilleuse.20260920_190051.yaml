@@ -1,0 +1,24 @@
+# ha_mcp_backup
+schema_version: 1
+domain: entity
+entity_id: scene.cuisine_veilleuse
+captured: '2026-09-20T19:00:51.535403+00:00'
+tool: ha_set_entity
+config:
+  entity_id: scene.cuisine_veilleuse
+  state: unknown
+  attributes:
+    group_name: Cuisine
+    group_type: room
+    name: Veilleuse
+    speed: 0.603
+    brightness: 0
+    is_dynamic: false
+    friendly_name: Cuisine Veilleuse
+  last_changed: '2026-09-20T17:38:08.618415+00:00'
+  last_reported: '2026-09-20T17:38:08.618415+00:00'
+  last_updated: '2026-09-20T17:38:08.618415+00:00'
+  context:
+    id: 01M2ZYB4KAE1WQEFM2NB21SFSR
+    parent_id: null
+    user_id: null

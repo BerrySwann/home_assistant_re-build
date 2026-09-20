@@ -55,7 +55,7 @@ Le retour vers la page principale se fait via le tap action du heading.
 │  En-tête : ENERGIE MENSUEL (Start Month)               │  ← tap → /energie
 │  (heading, full width)                                  │
 ├────────────────────────────────────────────────────────┤
-│  Donut mensuel (ApexCharts, chart_type: donut)         │  ← 17 séries _mensuel_kwh_um
+│  Donut mensuel (ApexCharts, chart_type: donut)         │  ← 17 séries _mensuel_um
 │  Titre : "Conso. mensuel (kWh)"                        │
 │  Hauteur : 580px                                       │
 ├────────────────────────────────────────────────────────┤
@@ -150,30 +150,30 @@ cards:
 
 ### Données des séries
 
-Chaque série pointe vers un `_mensuel_kwh_um` - compteur `utility_meter` réinitialisé le 1er du mois (`cycle: monthly`). La valeur affichée est donc la consommation **cumulée depuis le début du mois courant**.
+Chaque série pointe vers un `_mensuel_um` - compteur `utility_meter` réinitialisé le 1er du mois (`cycle: monthly`). La valeur affichée est donc la consommation **cumulée depuis le début du mois courant**.
 
 > ⚠️ Pas de `group_by` / `func` ici : ApexCharts lit directement l'état courant du sensor (valeur accumulée par `utility_meter`).
 
 | Nom affiché | Entité sensor | Couleur |
 |:------------|:--------------|:--------|
-| Box (+) | `sensor.prise_box_internet_ikea_mensuel_kwh_um` | `rgb(183, 183, 183)` |
-| Horloge (+) | `sensor.prise_horloge_ikea_mensuel_kwh_um` | `rgb(220, 220, 220)` |
-| PCg | `sensor.prise_pc_s_gege_ikea_mensuel_kwh_um` | `rgb(174, 68, 90)` |
-| Chargeurs (+) | `sensor.prise_salon_chargeur_nous_mensuel_kwh_um` | `rgb(196, 75, 97)` |
-| Four M-O (+) | `sensor.prise_four_micro_ondes_nous_mensuel_kwh_um` | `rgb(98,78,136)` |
-| P'tit Dej. (+) | `sensor.prise_petit_dejeune_nous_mensuel_kwh_um` | `rgb(118,93,160)` |
-| Linge | `sensor.prise_lave_linge_nous_mensuel_kwh_um` | `rgb(137,103,179)` |
-| Vaisselle | `sensor.prise_lave_vaisselle_nous_mensuel_kwh_um` | `rgb(129,116,180)` |
-| Airfryer (+) | `sensor.prise_airfryer_ninja_nous_mensuel_kwh_um` | `rgb(142,122,181)` |
-| Four & Plq Cui. | `sensor.four_et_plaque_de_cuisson_mensuel_kwh_um` | `rgb(162,148,249)` |
-| frigo | `sensor.prise_frigo_cuisine_nous_mensuel_kwh_um` | `rgb(19, 160, 255)` |
-| congél. | `sensor.prise_congelateur_cuisine_nous_mensuel_kwh_um` | `rgb(0, 255, 255)` |
-| PCe | `sensor.prise_bureau_pc_ikea_mensuel_kwh_um` | `rgb(255, 165, 0)` |
-| FàR (+) | `sensor.prise_bureau_fer_a_repasser_nous_mensuel_kwh_um` | `rgb(255, 183, 51)` |
-| Têtes L. (+) | `sensor.prise_tete_de_lit_chambre_mensuel_kwh_um` | `rgb(75, 130, 85)` |
-| TV Salon | `sensor.prise_tv_salon_ikea_mensuel_kwh_um` | `rgb(215, 95, 115)` |
-| TV (+) | `sensor.prise_tv_chambre_nous_mensuel_kwh_um` | `rgb(105, 155, 110)` |
-| Veilles | `sensor.all_standby_mensuel_kwh_um` | `rgb(109, 76, 65)` |
+| Box (+) | `sensor.prise_box_internet_ikea_mensuel_um` | `rgb(183, 183, 183)` |
+| Horloge (+) | `sensor.prise_horloge_ikea_mensuel_um` | `rgb(220, 220, 220)` |
+| PCg | `sensor.prise_pc_s_gege_ikea_mensuel_um` | `rgb(174, 68, 90)` |
+| Chargeurs (+) | `sensor.prise_salon_chargeur_nous_mensuel_um` | `rgb(196, 75, 97)` |
+| Four M-O (+) | `sensor.prise_four_micro_ondes_nous_mensuel_um` | `rgb(98,78,136)` |
+| P'tit Dej. (+) | `sensor.prise_petit_dejeune_nous_mensuel_um` | `rgb(118,93,160)` |
+| Linge | `sensor.prise_lave_linge_nous_mensuel_um` | `rgb(137,103,179)` |
+| Vaisselle | `sensor.prise_lave_vaisselle_nous_mensuel_um` | `rgb(129,116,180)` |
+| Airfryer (+) | `sensor.prise_airfryer_ninja_nous_mensuel_um` | `rgb(142,122,181)` |
+| Four & Plq Cui. | `sensor.four_et_plaque_de_cuisson_mensuel_um` | `rgb(162,148,249)` |
+| frigo | `sensor.prise_frigo_cuisine_nous_mensuel_um` | `rgb(19, 160, 255)` |
+| congél. | `sensor.prise_congelateur_cuisine_nous_mensuel_um` | `rgb(0, 255, 255)` |
+| PCe | `sensor.prise_bureau_pc_ikea_mensuel_um` | `rgb(255, 165, 0)` |
+| FàR (+) | `sensor.prise_bureau_fer_a_repasser_nous_mensuel_um` | `rgb(255, 183, 51)` |
+| Têtes L. (+) | `sensor.prise_tete_de_lit_chambre_mensuel_um` | `rgb(75, 130, 85)` |
+| TV Salon | `sensor.prise_tv_salon_ikea_mensuel_um` | `rgb(215, 95, 115)` |
+| TV (+) | `sensor.prise_tv_chambre_nous_mensuel_um` | `rgb(105, 155, 110)` |
+| Veilles | `sensor.all_standby_mensuel_um` | `rgb(109, 76, 65)` |
 
 > **(+)** : appareils à consommation irrégulière / intermittente.
 
@@ -201,49 +201,49 @@ Chaque appareil est représenté par une `custom:streamline-card` avec le templa
 
 | Title | energy_entity | color | avg_monthly | conso_monthly_kwh |
 |:------|:-------------|:------|:-----------|:-----------------|
-| Box Internet (Hue) | `sensor.prise_box_internet_ikea_energie_totale_kwh` | `rgb(183, 183, 183)` | `sensor.box_internet_avg_watts_mensuel` | `sensor.prise_box_internet_ikea_mensuel_kwh_um` |
-| Horloge Entrée (Chargeur) | `sensor.prise_horloge_ikea_energie_totale_kwh` | `rgb(220, 220, 220)` | `sensor.horloge_avg_watts_mensuel` | `sensor.prise_horloge_ikea_mensuel_kwh_um` |
+| Box Internet (Hue) | `sensor.prise_box_internet_ikea_energie_totale_kwh` | `rgb(183, 183, 183)` | `sensor.box_internet_avg_watts_mensuel` | `sensor.prise_box_internet_ikea_mensuel_um` |
+| Horloge Entrée (Chargeur) | `sensor.prise_horloge_ikea_energie_totale_kwh` | `rgb(220, 220, 220)` | `sensor.horloge_avg_watts_mensuel` | `sensor.prise_horloge_ikea_mensuel_um` |
 
 #### 2. SALON (3 appareils)
 
 | Title | energy_entity | color | avg_monthly | conso_monthly_kwh |
 |:------|:-------------|:------|:-----------|:-----------------|
-| PC's Géraldine | `sensor.prise_pc_s_gege_ikea_energie_totale_kwh` | `rgb(174, 68, 90)` | `sensor.pc_gege_avg_watts_mensuel` | `sensor.prise_pc_s_gege_ikea_mensuel_kwh_um` |
-| Prise Salon (Chargeurs, Vapote, Aspi. & iRobot) | `sensor.prise_salon_chargeur_nous_energie_totale_kwh` | `rgb(196, 75, 97)` | `sensor.chargeurs_salon_avg_watts_mensuel` | `sensor.prise_salon_chargeur_nous_mensuel_kwh_um` |
-| TV Salon (TV, Barre de son, ect...) | `sensor.prise_tv_salon_ikea_energie_totale_kwh` | `rgb(215,95,115)` | `sensor.tv_salon_avg_watts_mensuel` | `sensor.prise_tv_salon_ikea_mensuel_kwh_um` |
+| PC's Géraldine | `sensor.prise_pc_s_gege_ikea_energie_totale_kwh` | `rgb(174, 68, 90)` | `sensor.pc_gege_avg_watts_mensuel` | `sensor.prise_pc_s_gege_ikea_mensuel_um` |
+| Prise Salon (Chargeurs, Vapote, Aspi. & iRobot) | `sensor.prise_salon_chargeur_nous_energie_totale_kwh` | `rgb(196, 75, 97)` | `sensor.chargeurs_salon_avg_watts_mensuel` | `sensor.prise_salon_chargeur_nous_mensuel_um` |
+| TV Salon (TV, Barre de son, ect...) | `sensor.prise_tv_salon_ikea_energie_totale_kwh` | `rgb(215,95,115)` | `sensor.tv_salon_avg_watts_mensuel` | `sensor.prise_tv_salon_ikea_mensuel_um` |
 
 #### 3. CUISINE (8 appareils)
 
 | Title | energy_entity | color | avg_monthly | conso_monthly_kwh |
 |:------|:-------------|:------|:-----------|:-----------------|
-| Four Micro-Ondes (Alexa) | `sensor.prise_four_micro_ondes_nous_energie_totale_kwh` | `rgb(98,78,136)` | `sensor.four_mo_avg_watts_mensuel` | `sensor.prise_four_micro_ondes_nous_mensuel_kwh_um` |
-| P'tit Dej. (grille pain, Théière, machine à café) | `sensor.prise_petit_dejeune_nous_energie_totale_kwh` | `rgb(118,93,160)` | `sensor.petit_dej_avg_watts_mensuel` | `sensor.prise_petit_dejeune_nous_mensuel_kwh_um` |
-| Lave-Linge | `sensor.prise_lave_linge_nous_energie_totale_kwh` | `rgb(137,103,179)` | `sensor.lave_linge_avg_watts_mensuel` | `sensor.prise_lave_linge_nous_mensuel_kwh_um` |
-| Lave-Vaisselle | `sensor.prise_lave_vaisselle_nous_energie_totale_kwh` | `rgb(129,116,180)` | `sensor.lave_vaisselle_avg_watts_mensuel` | `sensor.prise_lave_vaisselle_nous_mensuel_kwh_um` |
-| Airfryer (Cookéo, mixer, ect...) | `sensor.prise_airfryer_ninja_nous_energie_totale_kwh` | `rgb(142,122,181)` | `sensor.airfryer_avg_watts_mensuel` | `sensor.prise_airfryer_ninja_nous_mensuel_kwh_um` |
-| Four et plaque de Cuisson | `sensor.four_et_plaque_de_cuisson_energie_totale_kwh` | `rgb(162,148,249)` | `sensor.plaques_cuisson_avg_watts_mensuel` | `sensor.four_et_plaque_de_cuisson_mensuel_kwh_um` |
-| Frigo | `sensor.prise_frigo_cuisine_nous_energie_totale_kwh` | `rgb(19, 160, 255)` | `sensor.frigo_avg_watts_mensuel` | `sensor.prise_frigo_cuisine_nous_mensuel_kwh_um` |
-| Congélateur | `sensor.prise_congelateur_cuisine_nous_energie_totale_kwh` | `rgb(0, 255, 255)` | `sensor.congelateur_avg_watts_mensuel` | `sensor.prise_congelateur_cuisine_nous_mensuel_kwh_um` |
+| Four Micro-Ondes (Alexa) | `sensor.prise_four_micro_ondes_nous_energie_totale_kwh` | `rgb(98,78,136)` | `sensor.four_mo_avg_watts_mensuel` | `sensor.prise_four_micro_ondes_nous_mensuel_um` |
+| P'tit Dej. (grille pain, Théière, machine à café) | `sensor.prise_petit_dejeune_nous_energie_totale_kwh` | `rgb(118,93,160)` | `sensor.petit_dej_avg_watts_mensuel` | `sensor.prise_petit_dejeune_nous_mensuel_um` |
+| Lave-Linge | `sensor.prise_lave_linge_nous_energie_totale_kwh` | `rgb(137,103,179)` | `sensor.lave_linge_avg_watts_mensuel` | `sensor.prise_lave_linge_nous_mensuel_um` |
+| Lave-Vaisselle | `sensor.prise_lave_vaisselle_nous_energie_totale_kwh` | `rgb(129,116,180)` | `sensor.lave_vaisselle_avg_watts_mensuel` | `sensor.prise_lave_vaisselle_nous_mensuel_um` |
+| Airfryer (Cookéo, mixer, ect...) | `sensor.prise_airfryer_ninja_nous_energie_totale_kwh` | `rgb(142,122,181)` | `sensor.airfryer_avg_watts_mensuel` | `sensor.prise_airfryer_ninja_nous_mensuel_um` |
+| Four et plaque de Cuisson | `sensor.four_et_plaque_de_cuisson_energie_totale_kwh` | `rgb(162,148,249)` | `sensor.plaques_cuisson_avg_watts_mensuel` | `sensor.four_et_plaque_de_cuisson_mensuel_um` |
+| Frigo | `sensor.prise_frigo_cuisine_nous_energie_totale_kwh` | `rgb(19, 160, 255)` | `sensor.frigo_avg_watts_mensuel` | `sensor.prise_frigo_cuisine_nous_mensuel_um` |
+| Congélateur | `sensor.prise_congelateur_cuisine_nous_energie_totale_kwh` | `rgb(0, 255, 255)` | `sensor.congelateur_avg_watts_mensuel` | `sensor.prise_congelateur_cuisine_nous_mensuel_um` |
 
 #### 4. BUREAU (2 appareils)
 
 | Title | energy_entity | color | avg_monthly | conso_monthly_kwh |
 |:------|:-------------|:------|:-----------|:-----------------|
-| PCe Bureau | `sensor.prise_bureau_pc_ikea_energie_totale_kwh` | `rgb(255, 165, 0)` | `sensor.pc_bureau_avg_watts_mensuel` | `sensor.prise_bureau_pc_ikea_mensuel_kwh_um` |
-| Fer à Repasser Bureau (Store) | `sensor.prise_bureau_fer_a_repasser_nous_energie_totale_kwh` | `rgb(255, 183, 51)` | `sensor.fer_repasser_avg_watts_mensuel` | `sensor.prise_bureau_fer_a_repasser_nous_mensuel_kwh_um` |
+| PCe Bureau | `sensor.prise_bureau_pc_ikea_energie_totale_kwh` | `rgb(255, 165, 0)` | `sensor.pc_bureau_avg_watts_mensuel` | `sensor.prise_bureau_pc_ikea_mensuel_um` |
+| Fer à Repasser Bureau (Store) | `sensor.prise_bureau_fer_a_repasser_nous_energie_totale_kwh` | `rgb(255, 183, 51)` | `sensor.fer_repasser_avg_watts_mensuel` | `sensor.prise_bureau_fer_a_repasser_nous_mensuel_um` |
 
 #### 5. CHAMBRE (2 appareils)
 
 | Title | energy_entity | color | avg_monthly | conso_monthly_kwh |
 |:------|:-------------|:------|:-----------|:-----------------|
-| Têtes de Lit chambre | `sensor.prise_tete_de_lit_chambre_energie_totale_kwh` | `rgb(75, 130, 85)` | `sensor.tetes_lit_avg_watts_mensuel` | `sensor.prise_tete_de_lit_chambre_mensuel_kwh_um` |
-| TV Chambre (Casques, FireTV, ect...) | `sensor.prise_tv_chambre_nous_energie_totale_kwh` | `rgb(105, 155, 110)` | `sensor.tv_chambre_avg_watts_mensuel` | `sensor.prise_tv_chambre_nous_mensuel_kwh_um` |
+| Têtes de Lit chambre | `sensor.prise_tete_de_lit_chambre_energie_totale_kwh` | `rgb(75, 130, 85)` | `sensor.tetes_lit_avg_watts_mensuel` | `sensor.prise_tete_de_lit_chambre_mensuel_um` |
+| TV Chambre (Casques, FireTV, ect...) | `sensor.prise_tv_chambre_nous_energie_totale_kwh` | `rgb(105, 155, 110)` | `sensor.tv_chambre_avg_watts_mensuel` | `sensor.prise_tv_chambre_nous_mensuel_um` |
 
 #### 6. ALL STANDBY (1 appareil)
 
 | Title | energy_entity | color | avg_monthly | conso_monthly_kwh |
 |:------|:-------------|:------|:-----------|:-----------------|
-| Veilles | `sensor.all_standby_energie_totale_kwh` | `rgb(109, 76, 65)` | `sensor.all_standby_avg_watts_mensuel` | `sensor.all_standby_mensuel_kwh_um` |
+| Veilles | `sensor.all_standby_energie_totale_kwh` | `rgb(109, 76, 65)` | `sensor.all_standby_avg_watts_mensuel` | `sensor.all_standby_mensuel_um` |
 
 ---
 
@@ -259,7 +259,7 @@ Le template `conso_mensuelle_appareil` est le pendant mensuel de `conso_temps_re
 | `energy_entity` | sensor | Énergie totale cumulée (kWh) - `_energie_totale_kwh` |
 | `color` | color | Couleur identique au segment donut correspondant |
 | `avg_monthly_entity` | sensor | Puissance moyenne mensuelle (W) - `_avg_watts_mensuel` |
-| `conso_monthly_kwh_entity` | sensor | Consommation mensuelle (kWh) - `_mensuel_kwh_um` |
+| `conso_monthly_kwh_entity` | sensor | Consommation mensuelle (kWh) - `_mensuel_um` |
 
 ### Comparaison avec conso_temps_reel_appareil
 
@@ -295,30 +295,30 @@ La palette suit une logique **par fonction** plus que par pièce :
 
 ## 📊 ENTITÉS UTILISÉES
 
-### Utility Meters mensuels (`_mensuel_kwh_um`)
+### Utility Meters mensuels (`_mensuel_um`)
 
 Source : `utility_meter.yaml` - cycle `monthly`, réinitialisé le 1er du mois.
 
 | Entité | Appareil |
 |:-------|:---------|
-| `sensor.prise_box_internet_ikea_mensuel_kwh_um` | Box Internet Entrée |
-| `sensor.prise_horloge_ikea_mensuel_kwh_um` | Horloge Entrée |
-| `sensor.prise_pc_s_gege_ikea_mensuel_kwh_um` | PC's Géraldine (Salon) |
-| `sensor.prise_salon_chargeur_nous_mensuel_kwh_um` | Chargeurs Salon |
-| `sensor.prise_tv_salon_ikea_mensuel_kwh_um` | TV Salon |
-| `sensor.prise_four_micro_ondes_nous_mensuel_kwh_um` | Four Micro-Ondes Cuisine |
-| `sensor.prise_petit_dejeune_nous_mensuel_kwh_um` | P'tit Dej. Cuisine |
-| `sensor.prise_lave_linge_nous_mensuel_kwh_um` | Lave-Linge Cuisine |
-| `sensor.prise_lave_vaisselle_nous_mensuel_kwh_um` | Lave-Vaisselle Cuisine |
-| `sensor.prise_airfryer_ninja_nous_mensuel_kwh_um` | Airfryer Cuisine |
-| `sensor.four_et_plaque_de_cuisson_mensuel_kwh_um` | Four & Plaque Cuisine |
-| `sensor.prise_frigo_cuisine_nous_mensuel_kwh_um` | Frigo Cuisine |
-| `sensor.prise_congelateur_cuisine_nous_mensuel_kwh_um` | Congélateur Cuisine |
-| `sensor.prise_bureau_pc_ikea_mensuel_kwh_um` | PCe Bureau |
-| `sensor.prise_bureau_fer_a_repasser_nous_mensuel_kwh_um` | Fer à Repasser Bureau |
-| `sensor.prise_tete_de_lit_chambre_mensuel_kwh_um` | Têtes de Lit Chambre |
-| `sensor.prise_tv_chambre_nous_mensuel_kwh_um` | TV Chambre |
-| `sensor.all_standby_mensuel_kwh_um` | All Standby (Veilles) |
+| `sensor.prise_box_internet_ikea_mensuel_um` | Box Internet Entrée |
+| `sensor.prise_horloge_ikea_mensuel_um` | Horloge Entrée |
+| `sensor.prise_pc_s_gege_ikea_mensuel_um` | PC's Géraldine (Salon) |
+| `sensor.prise_salon_chargeur_nous_mensuel_um` | Chargeurs Salon |
+| `sensor.prise_tv_salon_ikea_mensuel_um` | TV Salon |
+| `sensor.prise_four_micro_ondes_nous_mensuel_um` | Four Micro-Ondes Cuisine |
+| `sensor.prise_petit_dejeune_nous_mensuel_um` | P'tit Dej. Cuisine |
+| `sensor.prise_lave_linge_nous_mensuel_um` | Lave-Linge Cuisine |
+| `sensor.prise_lave_vaisselle_nous_mensuel_um` | Lave-Vaisselle Cuisine |
+| `sensor.prise_airfryer_ninja_nous_mensuel_um` | Airfryer Cuisine |
+| `sensor.four_et_plaque_de_cuisson_mensuel_um` | Four & Plaque Cuisine |
+| `sensor.prise_frigo_cuisine_nous_mensuel_um` | Frigo Cuisine |
+| `sensor.prise_congelateur_cuisine_nous_mensuel_um` | Congélateur Cuisine |
+| `sensor.prise_bureau_pc_ikea_mensuel_um` | PCe Bureau |
+| `sensor.prise_bureau_fer_a_repasser_nous_mensuel_um` | Fer à Repasser Bureau |
+| `sensor.prise_tete_de_lit_chambre_mensuel_um` | Têtes de Lit Chambre |
+| `sensor.prise_tv_chambre_nous_mensuel_um` | TV Chambre |
+| `sensor.all_standby_mensuel_um` | All Standby (Veilles) |
 
 ### Énergie totale cumulée (`_energie_totale_kwh`)
 
@@ -379,7 +379,7 @@ Source : sensors Pôle 2 - `platform: statistics` sur énergie ou puissance.
 | `custom:apexcharts-card` | HACS | ✅ Essentiel |
 | `custom:streamline-card` | HACS | ✅ Essentiel |
 | Template `conso_mensuelle_appareil` | Streamline template | ✅ Requis |
-| `utility_meter` `_mensuel_kwh_um` × 18 | HA native | ✅ Cycle `monthly` |
+| `utility_meter` `_mensuel_um` × 18 | HA native | ✅ Cycle `monthly` |
 | Sensors `_energie_totale_kwh` × 18 | Sensors Pôle 2 | ✅ `p2_sensors_prises.yaml` |
 | Sensors `_avg_watts_mensuel` × 18 | Sensors Pôle 2 | ✅ `p2_sensors_prises.yaml` |
 

@@ -1,0 +1,24 @@
+# ha_mcp_backup
+schema_version: 1
+domain: entity
+entity_id: scene.table_lumineux
+captured: '2026-09-20T19:00:51.924614+00:00'
+tool: ha_set_entity
+config:
+  entity_id: scene.table_lumineux
+  state: unknown
+  attributes:
+    group_name: Table
+    group_type: room
+    name: Lumineux
+    speed: 0.603
+    brightness: 255
+    is_dynamic: false
+    friendly_name: Table Lumineux
+  last_changed: '2026-09-20T17:38:08.631847+00:00'
+  last_reported: '2026-09-20T17:38:08.631847+00:00'
+  last_updated: '2026-09-20T17:38:08.631847+00:00'
+  context:
+    id: 01M2ZYB4KQR52XG4KS8VMCCPD4
+    parent_id: null
+    user_id: null

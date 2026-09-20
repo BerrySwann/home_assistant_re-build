@@ -1,0 +1,24 @@
+# ha_mcp_backup
+schema_version: 1
+domain: entity
+entity_id: scene.chambre_lumineux
+captured: '2026-09-20T19:00:51.565983+00:00'
+tool: ha_set_entity
+config:
+  entity_id: scene.chambre_lumineux
+  state: unknown
+  attributes:
+    group_name: Chambre
+    group_type: room
+    name: Lumineux
+    speed: 0.603
+    brightness: 255
+    is_dynamic: false
+    friendly_name: Chambre Lumineux
+  last_changed: '2026-09-20T17:38:08.619017+00:00'
+  last_reported: '2026-09-20T17:38:08.619017+00:00'
+  last_updated: '2026-09-20T17:38:08.619017+00:00'
+  context:
+    id: 01M2ZYB4KBPK6EJQFQZEZJ7WTD
+    parent_id: null
+    user_id: null
