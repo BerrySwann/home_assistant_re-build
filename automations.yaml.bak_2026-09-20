@@ -683,7 +683,6 @@
         is defined else '''' }}'
   mode: queued
   max: 5
-  max_exceeded: silent
 - id: '1767373801871'
   alias: (B - 0) 2026-01-11 AUTOMATISATION CLIM NUIT (21H00 <-> 07H30)
   description: Pilotage clims nuit - délègue au script P1_MASTER_gestion_clim
@@ -751,7 +750,6 @@
         is defined else '''' }}'
   mode: queued
   max: 5
-  max_exceeded: silent
 - id: '1775243120444'
   alias: Update previous temperature
   description: Enregistre la température toutes les 30 minutes pour calculer la tendance.
