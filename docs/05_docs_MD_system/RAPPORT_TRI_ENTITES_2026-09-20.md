@@ -1,6 +1,6 @@
 # 🧹 TRI DES ENTITÉS INDISPONIBLES — RAPPORT
 *Audit du 2026-09-20 — photo live : **2 221 entités** · **282 en unavailable/unknown** (110 unavailable · 172 unknown)*
-*MàJ du soir : 34 scènes Hue désactivées le 2026-09-20 → compteur indispo/unknown à **248** ; ménage du pont Hue fait (27 supprimées, 7 conservées — bouton Entrée 2 repointé sur « Lumineux »).*
+*MàJ du soir : 34 scènes Hue désactivées le 2026-09-20 → compteur indispo/unknown à **248** ; ménage du pont Hue fait (27 supprimées, 7 conservées — bouton Entrée 2 repointé sur « Lumineux ») ; orphelins Riemann `energie_totale_*` purgés (47) → compteur à **201** ; 22 scènes fantômes du pont (corbeille 2020/2023) purgées ; orphelins « RASPI4 » (13 capteurs + 1 automation du printemps) archivés (`historique/RASPI4/`) puis purgés → compteur à **187** ; 9 fantômes « orphelins de config » (avril→août) archivés (`historique/FANTOMES_2026-09-20/`) + purgés → compteur à **178**.*
 
 > **Objet :** séparer le **bruit normal** (ne rien faire) de ce qui est **à virer / nettoyer**.
 >
@@ -40,28 +40,15 @@ Les 9 entrées `event.bilresa_scroll_wheel_bouton_*` sont vides **avant le premi
 
 ---
 
-## 🟠 2. À VÉRIFIER (2 points, rien d'urgent)
+## 🟠 2. À VÉRIFIER (1 point restant, rien d'urgent)
 
-### 2.1 Hue — capteurs d'énergie indisponibles (14 entités)
+### 2.1 Hue — capteurs d'énergie indisponibles — ✅ résolu le 2026-09-20
 
-| Entité |
-|:-------|
-| `sensor.hue_white_lamp_table_energie_totale_kwh` |
-| `sensor.hue_ambiance_lamp_salon_1_energie_totale_kwh` |
-| `sensor.hue_ambiance_lamp_salon_2_energie_totale_kwh` |
-| `sensor.hue_ambiance_lamp_salon_3_energie_totale_kwh` |
-| `sensor.hue_color_candle_salon_1_energie_totale_kwh` |
-| `sensor.hue_white_lamp_cuisine_energie_totale_kwh` |
-| `sensor.hue_white_lamp_couloir_energie_totale_kwh` |
-| `sensor.hue_white_lamp_bureau_1_energie_totale_kwh` |
-| `sensor.hue_white_lamp_bureau_2_energie_totale_kwh` |
-| `sensor.hue_white_lamp_chambre_1_energie_totale_kwh` |
-| `sensor.hue_white_lamp_chambre_2_energie_totale_kwh` |
-| `sensor.hue_color_candle_chambre_gege_energie_totale_kwh` |
-| `sensor.hue_color_candle_chambre_eric_energie_totale_kwh` |
-| `sensor.hue_white_lamp_entree_energie_totale_kwh` |
+Ces capteurs (14 Hue + 33 autres) étaient des **orphelins Riemann** de la migration du 25/04 (`platform: integration`, définitions YAML supprimées, entrées de registre coincées en `unavailable`).
 
-Probable : capteurs d'énergie (powercalc) orphelins — ou lampes hors ligne. Une série entière à confirmer un jour de calme.
+**Purge faite : 47 orphelins retirés du registre** → compteur indispo/unknown 248 → **201**.
+Épargnés : `sensor.radiateur_elec_cuisine_energie_totale_kwh` (exception cuisine P1, encore utilisée) et les `_energie_totale` WashData (vivants).
+Trace : `~/Documents/purge_orphelins_riemann_2026-09-20.txt`. La chaîne vivante (`_energy` → `_um` → `_tpl`) est intacte.
 
 ### 2.2 Zigbee2MQTT bridge
 
@@ -85,13 +72,21 @@ Les 34 scènes viennent du **pont Hue** (`platform: hue` — scènes classiques 
   - ✅ **7 scènes conservées** (liées aux boutons Hue « Smart buttons ») : « Lumineux » de Chambre / Bureau / Cuisine / Couloir / Table / Salle de bain / Entrée 1 — appuis des boutons physiques intacts ;
   - 🔁 **Bouton Entrée 2 repointé** de « Lecture » → « Lumineux » (même appui), puis **« Lecture » supprimée** → **27 supprimées au total (34 → 7)** ;
   - Backups : `~/Documents/scenes_hue_supprimees_backup_2026-09-20.json` + `hue_bouton_entree2_backup_2026-09-20.json` ;
-  - Résultat : le pont ne garde que les 7 « Lumineux » (toutes pilotées par bouton) ; 0 scène fantôme côté HA ;
+  - Résultat : le pont ne garde que les 7 « Lumineux » (toutes pilotées par bouton) ; 0 scène fantôme côté HA ; catalogue technique purgé (22 zombies de 2020/2023 éliminés — backup : `~/Documents/scenes_zombies_hue_backup_2026-09-20.json`) ;
 - Liste des 34 : Annexe B (pour réactivation éventuelle — Paramètres → Entités → afficher les désactivées).
 
 ### 3.3 Références fantômes doc L2C2 (déjà notées)
 
 - `sensor.ete_hiver` (chips DUT) et `sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power` (onglet sèche-serviette)
   introuvables en live — à repointer (GO attendu).
+
+### 3.4 Orphelins « RASPI4 » — ✅ archivés + purgés le 2026-09-20
+
+13 capteurs `template` (températures `core_0..3` / `cpu_package` / carte mère — télémétrie d'une machine 4 cœurs, attribués au RPi4) et 1 automation fantôme (`p3_sdb_bouton_hue_toggle_relais_lumiere`, jamais déclenchée) : **archivés** dans `historique/RASPI4/` (README + registre + références) puis **purgés du registre HA**.
+
+### 3.5 Fantômes « orphelins de config » — ✅ archivés + purgés le 2026-09-20
+
+9 entités sans plus aucune définition (vérifiées une à une) : 4 `genelec_appart_*_kwh_um` (renommage d'avril), 3 automations dont les fonctions vivent ailleurs (`sdb_watchdog` → remplacée par la SYNC MIROIR SdB ; `diag_7_postes_dut` → version active `_2` ; `energie_reset` → one-shot obsolète), 1 script + 1 capteur `audit_md5_docs*` (remplacés le 09/08). Archive : `historique/FANTOMES_2026-09-20/`.
 
 ---
 
