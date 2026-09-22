@@ -18019,3 +18019,43 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [WIFI] | 21/09 20:30 | Hyg:0.44 | Cuis:1.23 | Froid:1.08 | Chauff:1.22 | Avg 4:59.5 | Multi:4.21 | Lum:0.64 | Autres:0.33 | Ti:26.2°C | Ext:23.5°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
 [2] en [WIFI] | 21/09 20:45 | Hyg:0.44 | Cuis:1.24 | Froid:1.1 | Chauff:1.22 | Avg 4:58.7 | Multi:4.31 | Lum:0.65 | Autres:0.33 | Ti:26.3°C | Ext:23.5°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
 [2] en [WIFI] | 21/09 21:00 | Hyg:0.44 | Cuis:1.24 | Froid:1.12 | Chauff:1.22 | Avg 4:58.0 | Multi:4.31 | Lum:0.66 | Autres:0.33 | Ti:26.4°C | Ext:23.3°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
+[2] en [WIFI] | 21/09 21:15 | Hyg:0.44 | Cuis:1.24 | Froid:1.13 | Chauff:1.22 | Avg 4:57.3 | Multi:4.31 | Lum:0.67 | Autres:0.33 | Ti:26.5°C | Ext:23.3°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
+[2] en [WIFI] | 21/09 21:30 | Hyg:0.44 | Cuis:1.24 | Froid:1.14 | Chauff:1.23 | Avg 4:57.1 | Multi:4.36 | Lum:0.67 | Autres:0.33 | Ti:26.4°C | Ext:23.1°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
+[2] en [WIFI] | 21/09 21:45 | Hyg:0.44 | Cuis:1.24 | Froid:1.15 | Chauff:1.23 | Avg 4:56.4 | Multi:4.41 | Lum:0.67 | Autres:0.33 | Ti:26.4°C | Ext:23.1°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
+[2] en [WIFI] | 21/09 22:00 | Hyg:0.44 | Cuis:1.24 | Froid:1.16 | Chauff:1.23 | Avg 4:55.8 | Multi:4.46 | Lum:0.68 | Autres:0.34 | Ti:26.4°C | Ext:23.3°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
+[2] en [WIFI] | 21/09 22:15 | Hyg:0.44 | Cuis:1.25 | Froid:1.17 | Chauff:1.23 | Avg 4:55.1 | Multi:4.5 | Lum:0.68 | Autres:0.34 | Ti:26.4°C | Ext:23.3°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
+[2] en [WIFI] | 21/09 22:30 | Hyg:0.44 | Cuis:1.25 | Froid:1.18 | Chauff:1.23 | Avg 4:54.6 | Multi:4.55 | Lum:0.68 | Autres:0.34 | Ti:26.4°C | Ext:23.1°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
+[2] en [WIFI] | 21/09 22:45 | Hyg:0.44 | Cuis:1.25 | Froid:1.19 | Chauff:1.23 | Avg 4:54.0 | Multi:4.6 | Lum:0.68 | Autres:0.34 | Ti:26.3°C | Ext:22.9°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
+[2] en [WIFI] | 21/09 23:00 | Hyg:0.44 | Cuis:1.25 | Froid:1.21 | Chauff:1.23 | Avg 4:53.4 | Multi:4.64 | Lum:0.68 | Autres:0.35 | Ti:26.3°C | Ext:22.7°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
+[2] en [WIFI] | 21/09 23:15 | Hyg:0.44 | Cuis:1.25 | Froid:1.23 | Chauff:1.23 | Avg 4:52.8 | Multi:4.69 | Lum:0.68 | Autres:0.35 | Ti:26.3°C | Ext:22.9°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
+[2] en [WIFI] | 21/09 23:30 | Hyg:0.45 | Cuis:1.26 | Froid:1.25 | Chauff:1.23 | Avg 4:52.3 | Multi:4.7 | Lum:0.69 | Autres:0.35 | Ti:26.3°C | Ext:22.9°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
+[2] en [WIFI] | 21/09 23:45 | Hyg:0.45 | Cuis:1.26 | Froid:1.26 | Chauff:1.24 | Avg 4:52.1 | Multi:4.7 | Lum:0.69 | Autres:0.36 | Ti:26.3°C | Ext:22.7°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
+[2] en [WIFI] | 22/09 00:00 | Hyg:0.0 | Cuis:0.0 | Froid:0.0 | Chauff:0.0 | Avg 4:0.0 | Multi:0.0 | Lum:0.0 | Autres:0.0 | Ti:26.3°C | Ext:22.7°C | DUT S/R/B/C:1.9/0.0/0.3/0.7
+[2] en [WIFI] | 22/09 00:15 | Hyg:0.0 | Cuis:0.0 | Froid:0.0 | Chauff:0.0 | Avg 4:0.0 | Multi:0.01 | Lum:0.0 | Autres:0.0 | Ti:26.2°C | Ext:23.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 00:30 | Hyg:0.0 | Cuis:0.0 | Froid:0.01 | Chauff:0.0 | Avg 4:0.0 | Multi:0.11 | Lum:0.0 | Autres:0.0 | Ti:26.2°C | Ext:23.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 00:45 | Hyg:0.0 | Cuis:0.0 | Froid:0.02 | Chauff:0.0 | Avg 4:0.0 | Multi:0.12 | Lum:0.01 | Autres:0.01 | Ti:26.2°C | Ext:22.9°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 01:00 | Hyg:0.0 | Cuis:0.0 | Froid:0.03 | Chauff:0.0 | Avg 4:0.0 | Multi:0.22 | Lum:0.01 | Autres:0.01 | Ti:26.2°C | Ext:22.7°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 01:15 | Hyg:0.0 | Cuis:0.0 | Froid:0.05 | Chauff:0.0 | Avg 4:0.0 | Multi:0.23 | Lum:0.01 | Autres:0.01 | Ti:26.2°C | Ext:22.9°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 01:30 | Hyg:0.0 | Cuis:0.0 | Froid:0.07 | Chauff:0.0 | Avg 4:0.0 | Multi:0.23 | Lum:0.01 | Autres:0.01 | Ti:26.2°C | Ext:22.9°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 01:45 | Hyg:0.0 | Cuis:0.0 | Froid:0.09 | Chauff:0.01 | Avg 4:5.7 | Multi:0.24 | Lum:0.01 | Autres:0.01 | Ti:26.2°C | Ext:22.5°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 02:00 | Hyg:0.01 | Cuis:0.0 | Froid:0.1 | Chauff:0.01 | Avg 4:5.0 | Multi:0.24 | Lum:0.01 | Autres:0.01 | Ti:26.2°C | Ext:22.5°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 02:15 | Hyg:0.01 | Cuis:0.0 | Froid:0.11 | Chauff:0.01 | Avg 4:4.4 | Multi:0.25 | Lum:0.01 | Autres:0.01 | Ti:26.2°C | Ext:23.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 02:30 | Hyg:0.01 | Cuis:0.0 | Froid:0.12 | Chauff:0.01 | Avg 4:4.0 | Multi:0.25 | Lum:0.01 | Autres:0.01 | Ti:26.2°C | Ext:23.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 02:45 | Hyg:0.01 | Cuis:0.01 | Froid:0.12 | Chauff:0.01 | Avg 4:3.6 | Multi:0.26 | Lum:0.02 | Autres:0.02 | Ti:26.2°C | Ext:22.5°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 03:00 | Hyg:0.02 | Cuis:0.01 | Froid:0.13 | Chauff:0.01 | Avg 4:3.3 | Multi:0.26 | Lum:0.02 | Autres:0.03 | Ti:26.2°C | Ext:22.5°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 03:15 | Hyg:0.02 | Cuis:0.01 | Froid:0.14 | Chauff:0.01 | Avg 4:3.1 | Multi:0.27 | Lum:0.02 | Autres:0.03 | Ti:26.2°C | Ext:22.5°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 03:30 | Hyg:0.02 | Cuis:0.01 | Froid:0.15 | Chauff:0.01 | Avg 4:2.9 | Multi:0.27 | Lum:0.02 | Autres:0.03 | Ti:26.2°C | Ext:22.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 03:45 | Hyg:0.02 | Cuis:0.01 | Froid:0.17 | Chauff:0.01 | Avg 4:2.7 | Multi:0.28 | Lum:0.02 | Autres:0.03 | Ti:26.2°C | Ext:22.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 04:00 | Hyg:0.02 | Cuis:0.01 | Froid:0.19 | Chauff:0.02 | Avg 4:5.0 | Multi:0.28 | Lum:0.03 | Autres:0.04 | Ti:26.2°C | Ext:22.5°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 04:15 | Hyg:0.02 | Cuis:0.01 | Froid:0.2 | Chauff:0.02 | Avg 4:4.7 | Multi:0.29 | Lum:0.03 | Autres:0.04 | Ti:26.1°C | Ext:22.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 04:30 | Hyg:0.02 | Cuis:0.01 | Froid:0.2 | Chauff:0.03 | Avg 4:6.6 | Multi:0.29 | Lum:0.03 | Autres:0.04 | Ti:26.1°C | Ext:22.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 04:45 | Hyg:0.02 | Cuis:0.12 | Froid:0.21 | Chauff:0.03 | Avg 4:6.3 | Multi:0.3 | Lum:0.04 | Autres:0.04 | Ti:26.1°C | Ext:22.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 05:00 | Hyg:0.02 | Cuis:0.18 | Froid:0.22 | Chauff:0.03 | Avg 4:6.0 | Multi:0.31 | Lum:0.05 | Autres:0.04 | Ti:26.1°C | Ext:22.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 05:15 | Hyg:0.02 | Cuis:0.21 | Froid:0.22 | Chauff:0.03 | Avg 4:5.7 | Multi:0.31 | Lum:0.07 | Autres:0.04 | Ti:26.0°C | Ext:22.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 05:30 | Hyg:0.02 | Cuis:0.21 | Froid:0.24 | Chauff:0.03 | Avg 4:5.4 | Multi:0.32 | Lum:0.08 | Autres:0.04 | Ti:26.1°C | Ext:22.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 22/09 05:45 | Hyg:0.02 | Cuis:0.22 | Froid:0.26 | Chauff:0.03 | Avg 4:5.2 | Multi:0.32 | Lum:0.08 | Autres:0.04 | Ti:26.0°C | Ext:21.9°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[Eric: WIFI/CELL] | 22/09 06:00 | Hyg:0.02 | Cuis:0.24 | Froid:0.29 | Chauff:0.03 | Avg 4:5.0 | Multi:0.33 | Lum:0.09 | Autres:0.05 | Ti:25.9°C | Ext:21.9°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[Eric: WIFI/CELL] | 22/09 06:15 | Hyg:0.02 | Cuis:0.24 | Froid:0.29 | Chauff:0.04 | Avg 4:6.4 | Multi:0.53 | Lum:0.09 | Autres:0.05 | Ti:25.9°C | Ext:21.9°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[Eric: WIFI/CELL] | 22/09 06:30 | Hyg:0.02 | Cuis:0.24 | Froid:0.3 | Chauff:0.04 | Avg 4:6.1 | Multi:0.64 | Lum:0.11 | Autres:0.05 | Ti:26.0°C | Ext:21.7°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[Eric: WIFI/CELL] | 22/09 06:45 | Hyg:0.02 | Cuis:0.24 | Froid:0.31 | Chauff:0.04 | Avg 4:5.9 | Multi:0.74 | Lum:0.12 | Autres:0.06 | Ti:26.0°C | Ext:21.7°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[Eric: WIFI/CELL] | 22/09 07:00 | Hyg:0.02 | Cuis:0.24 | Froid:0.32 | Chauff:0.04 | Avg 4:5.7 | Multi:0.85 | Lum:0.13 | Autres:0.06 | Ti:26.1°C | Ext:21.7°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
