@@ -1,6 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-09-23 - section P2 Prises (correctif eco + refonte PC/TV + spies)*
 *Dernière mise à jour : 2026-07-19 - correction section L1C1 Météo (entités reelles verifiees, voir historique)*
 *Dernière mise à jour : 2026-07-16*
 
@@ -3500,7 +3501,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <details>
 <summary>✅ <b>Eco. PRISES DINAMIQUE -> By-Présence/Groupe</b></summary>
 <blockquote>
-<i>Pilotage des 7 prises en fonction du groupe de présence (G1 à G4).</i><br><br>
+<i>Pilotage des 7 prises en fonction du groupe de présence (G1 à G4).</i><br>
+<i>Correctif + spy 2026-09-23 : liste lue via | from_json ; sensor.eco_prises_spy (groupe + états + écarts).</i><br><br>
 📄 <a href="docs/03_docs_automations/docs_automations_MD/P2_PRISES/ECO_PRISES_DYNAMIQUE.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P2_prises/eco_prises_dinamique_by_presence_groupe.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · 📊`numeric_state`<br>
@@ -3529,15 +3531,17 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <details>
 <summary>✅ <b>Gestion PC bureau : Scène de Fin + Notif</b></summary>
 <blockquote>
-<i>Éteint la prise du PC et notifie, mais laisse la prise ON pour le</i><br><br>
+<i>Veille confirmée (< 70W, 12 min + filet 15 min) : coupe l'éclairage éco PC et notifie. Prise ON pour le suivi conso.</i><br><br>
 📄 <a href="docs/03_docs_automations/docs_automations_MD/P2_PRISES/GESTION_PC_BUREAU.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P2_prises/gestion_pc_bureau_scene_de_fin_notif.yaml">YAML source</a><br>
-<br><b>Déclencheurs :</b> 📡`mqtt` · 📊`numeric_state`<br>
+<br><b>Déclencheurs :</b> 📡`mqtt` · 🔄`state` · ⏰`time_pattern`<br>
 <br><details>
-<summary>🔌 Entités (2)</summary>
+<summary>🔌 Entités (4)</summary>
 <blockquote><ul>
 <li><code>sensor.prise_bureau_pc_ikea_power</code></li>
+<li><code>binary_sensor.veille_pc_bureau</code></li>
 <li><code>light.hue_smart_eco_pc_bureau</code></li>
+<li><code>sensor.eco_prises_spy_pc_tv</code> <i>(spy contrôle)</i></li>
 </ul></blockquote>
 </details>
 
@@ -3547,16 +3551,18 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <details>
 <summary>✅ <b>Gestion TV Chambre : Scène de Fin + Notif</b></summary>
 <blockquote>
-<i>Éteint les lumières et notifie, mais laisse la prise ON pour le suivi</i><br><br>
+<i>Veille confirmée (< 40W, 12 min + filet 15 min) : coupe l'éclairage éco TV et notifie. Prise de mesure ON pour le suivi conso.</i><br><br>
 📄 <a href="docs/03_docs_automations/docs_automations_MD/P2_PRISES/GESTION_TV_CHAMBRE.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P2_prises/gestion_tv_chambre_scene_de_fin_notif.yaml">YAML source</a><br>
-<br><b>Déclencheurs :</b> 📡`mqtt` · ⏰`time` · 📊`numeric_state`<br>
+<br><b>Déclencheurs :</b> 📡`mqtt` · 🔄`state` · ⏰`time_pattern`<br>
 <br><details>
-<summary>🔌 Entités (3)</summary>
+<summary>🔌 Entités (5)</summary>
 <blockquote><ul>
 <li><code>sensor.prise_tv_chambre_nous_power</code></li>
+<li><code>binary_sensor.veille_tv_chambre</code></li>
 <li><code>light.hue_smart_eco_tv_chambre</code></li>
 <li><code>switch.prise_tv_chambre_nous</code></li>
+<li><code>sensor.eco_prises_spy_pc_tv</code> <i>(spy contrôle)</i></li>
 </ul></blockquote>
 </details>
 

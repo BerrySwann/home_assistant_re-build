@@ -2489,32 +2489,37 @@ sensor.groupe (TPL - P4)
 
 **D - Vignette : L3C2**
 
+*Correctif 2026-09-23 : liste `prises` convertie `| from_json` (erreur for_each - 5 exécutions aborted) ; spy `sensor.eco_prises_spy`.*
+
 ---
 
 ### ✅ GESTION PC BUREAU : SCENE DE FIN + NOTIF
-*Fichier : `P2_prises/gestion_pc_bureau_scene_de_fin_notif.yaml`*
+*Fichier : `P2_prises/gestion_pc_bureau_scene_de_fin_notif.yaml`* - *MAJ 2026-09-23 (refonte)*
 
 **A - Rôle**
 
-Double pilotage via bouton IKEA TRADFRI (MQTT) et détection veille (puissance prise PC < 40W 2min). Bouton ON : allume Hue Smart Eco PC. Bouton OFF ou veille détectée : éteint la lumière et notifie "PC Bureau [OFF]". La prise reste ON pour le suivi conso.
+Bouton IKEA TRADFRI PC (MQTT, action `on`) pour l'allumage, veille CONFIRMÉE (binaire < 70W sur 12 min) pour l'extinction. La prise reste ON pour le suivi conso. Refonte 2026-09-23 : les pics de veille réels (43-44W) dépassaient l'ancien seuil 40W et annulaient la coupure ; seuil durci, confirmation sur durée réelle, filet de rattrapage.
 
 **B - Triggers / Entités**
 
 | | Détail |
 |:--|:--|
-| Triggers | MQTT `zigbee2mqtt2/Poussoir (IKEA TRADFRI)/action` (on/off) + `sensor.prise_bureau_pc_ikea_power` < 40W pendant 2min |
-| Entités lues | `sensor.prise_bureau_pc_ikea_power`, `light.hue_smart_eco_pc_bureau` |
-| Actions | `light.turn_on/off hue_smart_eco_pc_bureau` + `notify.mobile_app_eric` (titre: Veille détectée) |
+| Triggers | MQTT `zigbee2mqtt2/Poussoir PC (IKEA TRADFRI)/action` (action on) + `binary_sensor.veille_pc_bureau` = on 12 min + `time_pattern /15` (filet de rattrapage) |
+| Entités lues | `binary_sensor.veille_pc_bureau` (template - `sensor.prise_bureau_pc_ikea_power` < 70W), `light.hue_smart_eco_pc_bureau` |
+| Actions | `light.turn_on/off hue_smart_eco_pc_bureau` + `notify.mobile_app_eric` (Allumage PC / Veille détectée) |
 
 **C - Chaîne de dépendances**
 
 ```
-MQTT zigbee2mqtt2/Poussoir (IKEA TRADFRI) (NAT)
-  └─→ [ON] light.hue_smart_eco_pc_bureau → turn_on
+MQTT zigbee2mqtt2/Poussoir PC (IKEA TRADFRI) (NAT)
+  └─→ [on] light.hue_smart_eco_pc_bureau → turn_on + notif (Allumage PC)
 
 sensor.prise_bureau_pc_ikea_power (NAT - IKEA)
-  [< 40W 2min] → light.hue_smart_eco_pc_bureau → turn_off
-              → notify.mobile_app_eric (Veille détectée / PC Bureau [OFF])
+  └─→ binary_sensor.veille_pc_bureau (TPL helper - < 70W)
+        [on 12 min] → light.hue_smart_eco_pc_bureau → turn_off
+                    → notify.mobile_app_eric (Veille détectée / PC Bureau [OFF])
+        [rattrapage /15] → même coupure si veille >= 12 min (durée réelle) + garde anti-fantôme
+              → Spy : sensor.eco_prises_spy_pc_tv
         → Aucune vignette dashboard (notification pure)
 ```
 
@@ -2523,29 +2528,32 @@ sensor.prise_bureau_pc_ikea_power (NAT - IKEA)
 ---
 
 ### ✅ GESTION TV CHAMBRE : SCENE DE FIN + NOTIF
-*Fichier : `P2_prises/gestion_tv_chambre_scene_de_fin_notif.yaml`*
+*Fichier : `P2_prises/gestion_tv_chambre_scene_de_fin_notif.yaml`* - *MAJ 2026-09-23 (refonte)*
 
 **A - Rôle**
 
-Même logique que PC bureau, adaptée à la TV chambre : bouton IKEA TRADFRI TV (MQTT) pour ON/OFF, détection veille TV (puissance < 20W 2min). Allume lumière ambiance et prise TV à l'allumage, éteint la lumière et notifie à la mise en veille.
+Bouton IKEA TRADFRI TV (MQTT, action `on`) pour l'allumage (lumière ambiance + prise de mesure), veille CONFIRMÉE (binaire < 40W sur 12 min) pour l'extinction. La prise de mesure reste ON pour le suivi conso. Refonte 2026-09-23 : l'ancien trigger ne réagissait qu'au FRANCHISSEMENT du seuil (< 25W / 2 min) ; raté une fois, plus rien ne déclenchait (prise restée ~19 h ON). Filet de rattrapage ajouté.
 
 **B - Triggers / Entités**
 
 | | Détail |
 |:--|:--|
-| Triggers | MQTT `zigbee2mqtt2/Poussoir TV (IKEA TRADFRI)/action` (on/off) + `sensor.prise_tv_chambre_nous_power` < 20W 2min |
-| Entités lues | `sensor.prise_tv_chambre_nous_power`, `switch.prise_tv_chambre_nous`, `light.hue_smart_eco_tv_chambre` |
-| Actions | [ON] `light.turn_on + switch.turn_on` / [OFF/veille] `light.turn_off + notify.mobile_app_eric` |
+| Triggers | MQTT `zigbee2mqtt2/Poussoir TV (IKEA TRADFRI)/action` (action on) + `binary_sensor.veille_tv_chambre` = on 12 min + `time_pattern /15` (filet de rattrapage) |
+| Entités lues | `binary_sensor.veille_tv_chambre` (template - `sensor.prise_tv_chambre_nous_power` < 40W), `light.hue_smart_eco_tv_chambre`, `switch.prise_tv_chambre_nous` |
+| Actions | [ON] `light.turn_on + switch.turn_on` / [veille] `light.turn_off` + `notify.mobile_app_eric` (Allumage TV / Veille détectée) |
 
 **C - Chaîne de dépendances**
 
 ```
 MQTT zigbee2mqtt2/Poussoir TV (IKEA TRADFRI) (NAT)
-  └─→ [ON] light.hue_smart_eco_tv_chambre ON + switch.prise_tv_chambre_nous ON
+  └─→ [on] light.hue_smart_eco_tv_chambre ON + switch.prise_tv_chambre_nous ON + notif (Allumage TV)
 
 sensor.prise_tv_chambre_nous_power (NAT - NOUS)
-  [< 20W 2min] → light.hue_smart_eco_tv_chambre → turn_off
-              → notify.mobile_app_eric (Veille détectée / Prise TV [OFF])
+  └─→ binary_sensor.veille_tv_chambre (TPL helper - < 40W)
+        [on 12 min] → light.hue_smart_eco_tv_chambre → turn_off
+                    → notify.mobile_app_eric (Veille détectée / Prise TV [OFF])
+        [rattrapage /15] → même coupure si veille >= 12 min (durée réelle) + garde anti-fantôme
+              → Spy : sensor.eco_prises_spy_pc_tv
         → Aucune vignette dashboard (notification pure)
 ```
 

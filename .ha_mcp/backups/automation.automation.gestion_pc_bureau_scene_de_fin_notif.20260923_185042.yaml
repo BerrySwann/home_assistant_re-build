@@ -1,0 +1,78 @@
+# ha_mcp_backup
+schema_version: 1
+domain: automation
+entity_id: automation.gestion_pc_bureau_scene_de_fin_notif
+captured: '2026-09-23T18:50:42.446788+00:00'
+tool: ha_config_set_automation
+config:
+  id: '1775245732227'
+  alias: "Gestion PC Bureau : Sc\xE8ne de Fin + Notif"
+  description: "\xC9teint la prise \xE9co des p\xE9riph\xE9riques et notifie quand\
+    \ une veille confirm\xE9e est d\xE9tect\xE9e sur le PC. D\xE9tection : capter\
+    \ binaire veille_pc_bureau (puissance < 70 W) pendant 12 min + filet de rattrapage\
+    \ toutes les 15 min si la prise est rest\xE9e allum\xE9e. MAJ 2026-09-23 : seuil\
+    \ 40 -> 70 W (au-dessus des pics de veille ~45 W, sous la conso active ~100 W),\
+    \ suppression de l'attente annulable par micro-pics."
+  triggers:
+  - id: bouton_mqtt
+    topic: zigbee2mqtt2/Poussoir PC (IKEA TRADFRI)/action
+    trigger: mqtt
+  - entity_id: binary_sensor.veille_pc_bureau
+    for:
+      minutes: 12
+    id: veille
+    to: 'on'
+    trigger: state
+  - id: rattrapage
+    minutes: /15
+    trigger: time_pattern
+  conditions: []
+  actions:
+  - choose:
+    - alias: 'ALLUMAGE : Bouton ON'
+      conditions:
+      - condition: trigger
+        id: bouton_mqtt
+      - condition: template
+        value_template: '{{ trigger.payload == ''on'' }}'
+      - condition: state
+        entity_id: light.hue_smart_eco_pc_bureau
+        state: 'off'
+      sequence:
+      - action: light.turn_on
+        target:
+          entity_id: light.hue_smart_eco_pc_bureau
+      - action: notify.mobile_app_eric
+        data:
+          data:
+            icon: mdi:monitor-dashboard
+            tag: notif_pc_bureau
+          message: PC Bureau [ON]
+          title: Allumage PC
+    - alias: "EXTINCTION : veille confirm\xE9e (12 min)"
+      conditions:
+      - condition: trigger
+        id:
+        - veille
+        - rattrapage
+      - condition: state
+        entity_id: light.hue_smart_eco_pc_bureau
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.veille_pc_bureau
+        state: 'on'
+      - condition: template
+        value_template: '{{ (now() - states[''binary_sensor.veille_pc_bureau''].last_changed)
+          >= timedelta(minutes=12) }}'
+      sequence:
+      - action: light.turn_off
+        target:
+          entity_id: light.hue_smart_eco_pc_bureau
+      - action: notify.mobile_app_eric
+        data:
+          data:
+            icon: mdi:monitor-dashboard
+            tag: notif_pc_bureau
+          message: PC Bureau [OFF]
+          title: "Veille d\xE9tect\xE9e"
+  mode: single

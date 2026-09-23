@@ -62,6 +62,7 @@ effectivement allumées).
 | `sensor.groupe` | Groupe de présence courant |
 | `sensor.eco_prises_config` | Attribut `prises` (liste JSON) — cf. `templates/P2_prise/P2_eCO_prises/P2_eco_prises_config.yaml` |
 | `notify.mobile_app_eric` | Notification de résumé |
+| `sensor.eco_prises_spy` | Spy de contrôle : groupe + état des 7 prises + écarts |
 
 ## Fichier source
 
@@ -74,6 +75,10 @@ effectivement allumées).
 - La config externe utilise `tojson` (HA exige une string template pour les attributs).
 - Après modification de la config : Outils dev → YAML → **Recharger templates**.
 - Référence : `sensor.eco_prises_config` (unique_id `eco_prises_config`).
+- **Correctif 2026-09-23** : la liste `prises` est convertie via `| from_json` avant le
+  `repeat.for_each` (il exige une liste native ; l'ancien texte JSON provoquait
+  "Repeat 'for_each' must be a list of items" - 5 exécutions aborted en ~1,5 ms,
+  tête de lit jamais coupée en absence). Spy de contrôle : `sensor.eco_prises_spy`.
 
 ---
 *Doc unique du 2026-09-10 — fusion de ECO_PRISES.md et ECO_PRISES_DYNAMIQUE.md. L'ancienne fiche décrivait un montage disparu (5 prises en dur + créneaux HC + fenêtre de présence) ; le live a été refactorisé en liste externalisée déclenchée par le seul changement de groupe.*

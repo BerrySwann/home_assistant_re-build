@@ -1511,7 +1511,8 @@
   - alias: VARIABLES — Groupe actif + liste des prises (source externe)
     variables:
       g: '{{ states(''sensor.groupe'') }}'
-      prises: '{{ state_attr(''sensor.eco_prises_config'', ''prises'') }}'
+      prises: '{{ state_attr(''sensor.eco_prises_config'', ''prises'') | from_json
+        }}'
   - alias: ACTION — ON/OFF chaque prise selon groupe
     repeat:
       for_each: '{{ prises }}'
@@ -1545,20 +1546,26 @@
   mode: queued
 - id: '1775245732227'
   alias: 'Gestion PC Bureau : Scène de Fin + Notif'
-  description: 'Éteint la lumière et notifie lorsqu''une veille est détectée sur le
-    PC.
-
-    '
+  description: 'Éteint la prise éco des périphériques et notifie quand une veille
+    confirmée est détectée sur le PC. Détection : capter binaire veille_pc_bureau
+    (puissance < 70 W) pendant 12 min + filet de rattrapage toutes les 15 min si la
+    prise est restée allumée. MAJ 2026-09-23 : seuil 40 -> 70 W (au-dessus des pics
+    de veille ~45 W, sous la conso active ~100 W), suppression de l''attente annulable
+    par micro-pics.'
   triggers:
   - id: bouton_mqtt
-    trigger: mqtt
     topic: zigbee2mqtt2/Poussoir PC (IKEA TRADFRI)/action
-  - id: extinction_conso
-    trigger: numeric_state
-    entity_id: sensor.prise_bureau_pc_ikea_power
-    below: 40
+    trigger: mqtt
+  - entity_id: binary_sensor.veille_pc_bureau
     for:
-      minutes: 2
+      minutes: 12
+    id: veille
+    to: 'on'
+    trigger: state
+  - id: rattrapage
+    minutes: /15
+    trigger: time_pattern
+  conditions: []
   actions:
   - choose:
     - alias: 'ALLUMAGE : Bouton ON'
@@ -1573,49 +1580,59 @@
           entity_id: light.hue_smart_eco_pc_bureau
       - action: notify.mobile_app_eric
         data:
-          title: Allumage PC
-          message: PC Bureau [ON]
           data:
             icon: mdi:monitor-dashboard
             tag: notif_pc_bureau
-    - alias: 'EXTINCTION AMBIANCE : Veille (< 40W)'
+          message: PC Bureau [ON]
+          title: Allumage PC
+    - alias: 'EXTINCTION : veille confirmée (12 min)'
       conditions:
       - condition: trigger
-        id: extinction_conso
-      sequence:
-      - wait_template: '{{ states(''sensor.prise_bureau_pc_ikea_power'') | float >
-          40 }}'
-        timeout: 00:10:00
-        continue_on_timeout: true
+        id:
+        - veille
+        - rattrapage
+      - condition: state
+        entity_id: light.hue_smart_eco_pc_bureau
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.veille_pc_bureau
+        state: 'on'
       - condition: template
-        value_template: '{{ not wait.completed }}'
+        value_template: '{{ (now() - states[''binary_sensor.veille_pc_bureau''].last_changed)
+          >= timedelta(minutes=12) }}'
+      sequence:
       - action: light.turn_off
         target:
           entity_id: light.hue_smart_eco_pc_bureau
       - action: notify.mobile_app_eric
         data:
-          title: Veille détectée
-          message: PC Bureau [OFF]
           data:
             icon: mdi:monitor-dashboard
             tag: notif_pc_bureau
+          message: PC Bureau [OFF]
+          title: Veille détectée
   mode: single
 - id: '1775330762844'
   alias: 'Gestion TV Chambre : Scène de Fin + Notif'
-  description: 'Éteint les lumières et notifie, mais laisse la prise ON pour le suivi
-    conso lorsqu''une veille est détectée.
-
-    '
+  description: 'Éteint la prise éco et notifie quand une veille confirmée est détectée
+    sur la TV chambre (laisse la prise de mesure allumée). Détection : capteur binaire
+    veille_tv_chambre (puissance < 40 W) pendant 12 min + filet de rattrapage toutes
+    les 15 min. MAJ 2026-09-23 : seuil 25 -> 40 W (au-dessus de la veille ~20 W, sous
+    l''actif ~70 W+), suppression de l''attente annulable.'
   triggers:
   - id: bouton_mqtt
-    trigger: mqtt
     topic: zigbee2mqtt2/Poussoir TV (IKEA TRADFRI)/action
-  - id: extinction_conso
-    trigger: numeric_state
-    entity_id: sensor.prise_tv_chambre_nous_power
-    below: 25
+    trigger: mqtt
+  - entity_id: binary_sensor.veille_tv_chambre
     for:
-      minutes: 2
+      minutes: 12
+    id: veille
+    to: 'on'
+    trigger: state
+  - id: rattrapage
+    minutes: /15
+    trigger: time_pattern
+  conditions: []
   actions:
   - choose:
     - alias: 'ALLUMAGE : Bouton ON'
@@ -1633,32 +1650,37 @@
           entity_id: switch.prise_tv_chambre_nous
       - action: notify.mobile_app_eric
         data:
-          title: Allumage TV
-          message: Prise TV [ON]
           data:
             icon: mdi:television-off
             tag: notif_tv_chambre
-    - alias: 'EXTINCTION AMBIANCE : Veille (< 25W)'
+          message: Prise TV [ON]
+          title: Allumage TV
+    - alias: 'EXTINCTION : veille confirmée (12 min)'
       conditions:
       - condition: trigger
-        id: extinction_conso
-      sequence:
-      - wait_template: '{{ states(''sensor.prise_tv_chambre_nous_power'') | float
-          > 25 }}'
-        timeout: 00:10:00
-        continue_on_timeout: true
+        id:
+        - veille
+        - rattrapage
+      - condition: state
+        entity_id: light.hue_smart_eco_tv_chambre
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.veille_tv_chambre
+        state: 'on'
       - condition: template
-        value_template: '{{ not wait.completed }}'
+        value_template: '{{ (now() - states[''binary_sensor.veille_tv_chambre''].last_changed)
+          >= timedelta(minutes=12) }}'
+      sequence:
       - action: light.turn_off
         target:
           entity_id: light.hue_smart_eco_tv_chambre
       - action: notify.mobile_app_eric
         data:
-          title: Veille détectée
-          message: Prise TV [OFF]
           data:
             icon: mdi:television
             tag: notif_tv_chambre
+          message: Prise TV [OFF]
+          title: Veille détectée
   mode: single
 - id: '1775331166275'
   alias: 'D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR'
