@@ -179,7 +179,7 @@ input_datetime: !include input_datetime.yaml
 # --- recorder ---
 recorder:
   db_url: !secret mariadb_url
-  purge_keep_days: 15
+  purge_keep_days: 30
   auto_purge: true
   auto_repack: true
   exclude:
