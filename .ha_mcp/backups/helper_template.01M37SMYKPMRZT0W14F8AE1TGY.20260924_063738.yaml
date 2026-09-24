@@ -1,0 +1,17 @@
+# ha_mcp_backup
+schema_version: 1
+domain: helper_template
+entity_id: 01M37SMYKPMRZT0W14F8AE1TGY
+captured: '2026-09-24T06:37:38.399856+00:00'
+tool: ha_config_set_helper
+config:
+  entry_id: 01M37SMYKPMRZT0W14F8AE1TGY
+  options:
+    name: Veille PC Bureau
+    state: '{{ states(''sensor.prise_bureau_pc_ikea_power'') | float(0) < 70 }}'
+    template_type: binary_sensor
+  entities:
+  - entity_id: binary_sensor.veille_pc_bureau
+    unique_id: 01M37SMYKPMRZT0W14F8AE1TGY
+    name: null
+    original_name: Veille PC Bureau

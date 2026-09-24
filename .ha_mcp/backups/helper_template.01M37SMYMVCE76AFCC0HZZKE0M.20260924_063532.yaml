@@ -1,0 +1,17 @@
+# ha_mcp_backup
+schema_version: 1
+domain: helper_template
+entity_id: 01M37SMYMVCE76AFCC0HZZKE0M
+captured: '2026-09-24T06:35:32.164695+00:00'
+tool: ha_config_set_helper
+config:
+  entry_id: 01M37SMYMVCE76AFCC0HZZKE0M
+  options:
+    name: Veille TV Chambre
+    state: '{{ states(''sensor.prise_tv_chambre_nous_power'') | float(0) < 40 }}'
+    template_type: binary_sensor
+  entities:
+  - entity_id: binary_sensor.veille_tv_chambre
+    unique_id: 01M37SMYMVCE76AFCC0HZZKE0M
+    name: null
+    original_name: Veille TV Chambre
