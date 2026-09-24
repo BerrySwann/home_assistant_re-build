@@ -1,4 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
+*Dernière mise à jour : 2026-09-24 S1 (sync_index : HOME PAGE + L1C2 + L5C1 + GRP_03 - carte Congélateur : contact porte en visibilité (bloc or : tongel > -15°C OU porte ouverte, seuil -15 retenu par Eric), seuils 26/48/235, label "Porte fermée / Porte Ouverte" ; carte appliance Congélateur ajoutée en fin de page L1C2 (42 cartes) ; batterie porte_congel intégrée (L5C1 + groupe) ; GRP_03 : 13 membres (resync prod->local) ; exports 24/09 : card_congelateur_home, page_L1C2_temperatures, page_L5C1_batteries_piles, Dashboard_2026_09_24 (39 135 lignes) ; vignette L5C1 inchangée.)*
 *Dernière mise à jour : 2026-09-20 S6 (automations clim P1 : `max_exceeded: silent` ajouté à (A-0) JOUR + (B-0) NUIT ; exports YAML des 2 automations mis à jour côté docs/ ; add-on Cloudflared HA = vestige arrêté)*
 *Dernière mise à jour : 2026-09-20 S5 (sync_index : L2C2 Énergie Clim - PAGE_ENERGIE_CLIM.md mise à jour (cartes clim button-card, entités UT `_um`, sources helpers generic_thermostat, P1_AVG_AMHQ_TOTAL), section ENTITES_INDEX L2C2 complétée (+55 entrées), export page_L2C2_energie_clim_2026-09-20.yaml ajouté côté C:. Constats : retour Home vers une vue `/home` inexistante ; 2 références introuvables (`sensor.ete_hiver`, `sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power`) - notés dans la doc page.)*
 *Dernière mise à jour : 2026-09-20 S4 (sync_index : HOME PAGE - carte Congélateur : coquille `ssensor.prise_congelateur_cuisine_nous_power` corrigée en live (champ entity) ; seuil de visibilité `-15` → `-14 °C` ; export card_congelateur_home_2026-09-20.yaml rafraîchi (C: + /mnt/save) ; PAGE_HOME.md mis à jour.)*
@@ -103,10 +104,11 @@ HOME PAGE (type: grid)
   │     ├─→ sensor.lave_vaisselle_temps_restant  (NAT - WashData, HACS)
   │     ├─→ sensor.lave_vaisselle_progres  (NAT - WashData, HACS)
   │     └─→ sensor.prise_lave_vaisselle_nous_power  (NAT - NOUS SP via Z2M)
-  ├─→ [7] button-card - Congélateur  (visible si tongel_temperature > -15°C)
+  ├─→ [7] button-card - Congélateur  (visible si tongel_temperature > -15°C OU porte ouverte)
   │     ├─→ sensor.prise_congelateur_cuisine_nous_power  (NAT - NOUS SP via Z2M)
   │     ├─→ switch.prise_congelateur_cuisine_nous  (NAT - NOUS SP via Z2M)
-  │     └─→ sensor.tongel_temperature  (NAT - SONOFF Tongel via Z2M)
+  │     ├─→ sensor.tongel_temperature  (NAT - SONOFF Tongel via Z2M)
+  │     └─→ binary_sensor.porte_congel_contact  (NAT - porte Congél. via Z2M)
   ├─→ [8] bubble-card separator + 2× button - Présence
   │     ├─→ sensor.etat_wifi_maison  (TPL - P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml)
   │     ├─→ device_tracker.poco  (NAT - Mobile App Eric)
@@ -155,6 +157,7 @@ HOME PAGE (type: grid)
 | `sensor.prise_congelateur_cuisine_nous_power` | NAT | NOUS SP via Z2M (P2 - cuisine) | [7] |
 | `switch.prise_congelateur_cuisine_nous` | NAT | NOUS SP via Z2M (P2 - cuisine) | [7] |
 | `sensor.tongel_temperature` | NAT | SONOFF Tongel via Z2M | [7] |
+| `binary_sensor.porte_congel_contact` | NAT | porte Congél. via Z2M | [7] |
 | `sensor.etat_wifi_maison` | TPL | `templates/P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml` | [8] |
 | `device_tracker.poco` | NAT | Mobile App (Companion) - Eric | [8] |
 | `person.eric` | NAT | HA Personnes | [8] |
@@ -198,7 +201,7 @@ HOME PAGE (type: grid)
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_foudre_home_2026-06-13.yaml` | ✅ Foudre button-card |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_lave_linge_home_2026-09-19.yaml` | ✅ Lave-linge mushroom WashData (remplace 2026-06-13) |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_lave_vaisselle_home_2026-09-19.yaml` | ✅ Lave-vaisselle mushroom WashData (remplace 2026-06-13) |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_congelateur_home_2026-09-20.yaml` | ✅ Congélateur button-card (appliance) |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_congelateur_home_2026-09-24.yaml` | ✅ Congélateur button-card (appliance - contact porte + seuils 26/48/235, remplace 2026-09-20) |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_presence_home_2026-06-13.yaml` | ✅ Présence (separator + Eric + Mamour) |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_detecteur_fuite_home_2026-06-13.yaml` | ✅ Détecteur fuite mushroom |
 
@@ -353,6 +356,7 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `sensor.tongel_temperature` | NAT | SONOFF via Z2M *(ajouté 2026-09-02 - bloc Congélateur)* |
 | `sensor.tongel_humidity` | NAT | SONOFF via Z2M *(ajouté 2026-09-02 - bloc Congélateur)* |
 | `sensor.tongel_battery` | NAT | SONOFF via Z2M *(ajouté 2026-09-02 - bloc Congélateur)* |
+| `binary_sensor.porte_congel_contact` | NAT | porte Congél. via Z2M *(carte appliance - export 2026-09-24)* |
 | `sensor.clim_salon_nous_power` / `sensor.clim_bureau_nous_power` / `sensor.clim_chambre_nous_power` / `sensor.radiateur_elec_cuisine_power` / `sensor.prise_soufflant_salle_de_bain_nous_power` | NAT | NOUS via Z2M - puissances des cartes button-card *(refonte 2026-09-20)* |
 
 > ⚠️ **Corrigé le 2026-07-19** : `temperature_moyenne_interieure`, `temperature_delta_affichage`,
@@ -385,7 +389,8 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-05-22.yaml.bak` | ❓ origine inconnue - conservé en attendant clarification |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-07-14.yaml` | ✅ `climate.clim_chambre_rm4_mini` + `sensor.temperature_corrige_chambre` |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-02.yaml` | ✅ historique - ajoute bloc CONGÉLATEUR (`sensor.tongel_temperature/_humidity/_battery`), même base que 2026-07-14 sinon |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-20.yaml` | ✅ dernière version - 41 cartes : refonte cartes clim button-card, retrait du reliquat bubble "Radiateur de la Cuisine", bloc CONGÉLATEUR |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-20.yaml` | ✅ historique - 41 cartes : refonte cartes clim button-card, retrait du reliquat bubble "Radiateur de la Cuisine", bloc CONGÉLATEUR |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-24.yaml` | ✅ dernière version - 42 cartes : + carte appliance Congélateur (contact porte, seuils 26/48/235) |
 | `templates/meteo/M_04_tendances_th_ext_card.yaml` | ✅ *(ajouté 2026-07-19 - manquait)* |
 | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | ✅ *(fichier partagé - AVAL principal L1C3, voir aussi cette section)* |
 
@@ -1407,7 +1412,7 @@ HA Core
 groups/ (GRP_01/02/03)
   ├─→ group.hue_devices   → 11 sensors sensor.hue_smart_button_*_batterie
   ├─→ group.ikea_devices  → 8 sensors IKEA (contacts, remotes, détecteurs)
-  └─→ group.sonoff_devices → 7 sensors sensor.th_*_battery
+  └─→ group.sonoff_devices → 7 sensors sensor.th_*_battery + sensor.tongel_battery + sensor.porte_congel_battery
         └─→ VIGNETTE L5C1 (button-card)
               ├─→ grid 6 colonnes : count | marque | 100-75 | 75-50 | 50-25 | 25-0
               ├─→ Alerte rouge ≤10% : icône ⚠️ + nom marque rouge
@@ -1443,7 +1448,8 @@ Philips Hue Bridge / Z2M / SONOFF (ZHA/Z2M)
 | Fichier | Statut |
 |:--------|:------:|
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L5C1_13_Batteries_Piles/vignette_L5C1_batteries_piles_2026-05-14.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-05-14.yaml` | ⚠️ tronqué |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-05-14.yaml` | ⚠️ tronqué - remplacé par la version 2026-09-24 |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-09-24.yaml` | ✅ dernière version - 4 cartes batterie + entêtes ; batterie porte_congel |
 
 ---
 
@@ -3691,7 +3697,7 @@ automation P1-B (CLIM NUIT) --+--> script.p1_master_gestion_clim [periode, trigg
 | `utility_meter/` | Compteurs AMHQ (P0→P3, météo) | ✅ |
 | `command_line/` | Météo France, GitHub maintenance, audit MD5, IP externe | ✅ |
 | `command_line/energie/histo_energie.yaml` | `sensor.histo_energie_linky` + `sensor.histo_energie_nodon` (lecture linky_histo.txt / nodon_histo.txt, attr j0-j6 JSON) | ✅ (2026-09-03) |
-| `groups/` | Groupes batteries HUE/IKEA/SONOFF → L5C1 | ✅ |
+| `groups/` | Groupes batteries HUE/IKEA/SONOFF → L5C1 - GRP_03 : 13 membres (+sonde Tongel, +contact Porte Congél.) *(2026-09-24)* | ✅ |
 | `input_booleans/` | Helpers booléens (verrous clim, présence…) | ✅ |
 | `input_number/` | Helpers numériques | ✅ |
 | `packages/` | Packages CSS météo (cssmeteo.yaml, demometeo.yaml) - Moon API | ✅ |

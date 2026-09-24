@@ -4,6 +4,8 @@
 
 *Section HOME PAGE ajoutée manuellement le 2026-09-20 (intégration WashData).*
 
+*Mise à jour 2026-09-24 : contact porte Congélateur (HOME PAGE + L1C2) + batterie porte_congel (L5C1).*
+
 **Navigation:** Cherche une entité → trouve sa source + son utilisation dans les vignettes/pages
 
 ---
@@ -77,6 +79,12 @@
 - **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/`
 
 ---
+
+### `binary_sensor.porte_congel_contact`
+- **Vignette:** HOME PAGE (carte Congélateur #7)
+- **Type:** binary_sensor (contact porte)
+- **Source:** Z2M - équipement porte_congel
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_congelateur_home_2026-09-24.yaml`
 
 ## L1C1
 
@@ -354,6 +362,12 @@
 - **Type:** sensor/switch/binary_sensor/camera
 - **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C2_*/`
 - **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_*/`
+
+### `binary_sensor.porte_congel_contact`
+- **Vignette:** L1C2 (carte appliance Congélateur, fin de page #42)
+- **Type:** binary_sensor (contact porte)
+- **Source:** Z2M - équipement porte_congel
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-24.yaml`
 
 ## L1C3
 
@@ -1461,6 +1475,14 @@
 - **Type:** sensor/switch/binary_sensor/camera
 - **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L4C3_*/`
 - **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_*/`
+
+## L5C1
+
+### `sensor.porte_congel_battery`
+- **Vignette:** L5C1 (carte Batteries - Thermostats SONOFF) + `group.sonoff_devices`
+- **Type:** sensor (batterie %)
+- **Source:** Z2M - équipement porte_congel
+- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-09-24.yaml`
 
 ## L5C2
 

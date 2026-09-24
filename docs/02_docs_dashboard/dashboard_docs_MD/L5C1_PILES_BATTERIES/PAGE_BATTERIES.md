@@ -9,7 +9,7 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `Dashboard/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-05-14.yaml` |
+| 📁 **Path** | `Dashboard/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-09-24.yaml` (remplace 2026-05-14) |
 | 🔗 **Accès depuis** | Tap vignette L5C1 → `/dashboard-tablette/battery-bp` |
 | 🔗 **Retour vers** | Tap header → `/dashboard-tablette/0` |
 | 🏗️ **Layout** | `type: grid` - 5 sections `battery-state-card` |
@@ -69,7 +69,7 @@ Page complète listant tous les équipements à batterie, découpée en 5 sectio
 │  [4] Contacts fenêtres SONOFF  4 entités            │
 │      collapse · mdi:window-closed-variant           │
 ├─────────────────────────────────────────────────────┤
-│  [5] Thermostats SONOFF        7 entités            │
+│  [5] Thermostats SONOFF        9 entités            │
 │      collapse · mdi:thermometer                     │
 └─────────────────────────────────────────────────────┘
 ```
@@ -203,7 +203,7 @@ card_mod:
 ### Collapse
 `"Thermostats SONOFF (Total : {count} / Mini. : {min} %)"` · `mdi:thermometer`
 
-### Entités (7) · Zigbee2MQTT [Z2M]
+### Entités (9) · Zigbee2MQTT [Z2M]
 
 | Entité | Pièce |
 |--------|-------|
@@ -214,6 +214,10 @@ card_mod:
 | `sensor.th_bureau_battery` | Bureau |
 | `sensor.th_salle_de_bain_battery` | SDB |
 | `sensor.th_chambre_battery` | Chambre |
+| `sensor.tongel_battery` | Congélateur (sonde Tongel) *(ajout 2026-09-24)* |
+| `sensor.porte_congel_battery` | Congélateur (contact porte) *(ajout 2026-09-24)* |
+
+> Renommages en place (2026-09-24) : `Tongel` → `Thermostat Congél.`, `Porte Congel` → `Porte Congél.`
 
 ---
 
@@ -237,7 +241,8 @@ Les `filter/exclude` ne filtrent que les entités exclues - les entités d'une s
 
 ## 🔗 FICHIERS LIÉS
 
-- `Dashboard/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-05-14.yaml`
+- `Dashboard/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-09-24.yaml`
+- `Dashboard/L5C1_13_Batteries_Piles/vignette_L5C1_batteries_piles_2026-05-14.yaml` (vignette - inchangée)
 - `docs/L5C1_PILES_BATTERIES/L5C1_VIGNETTE_BATTERIES.md`
 
 ---

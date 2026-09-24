@@ -1,6 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-09-24 - HOME PAGE + L1C2 + L5C1 : carte Congélateur (contact porte, seuils 26/48/235), batterie porte_congel (groupe SONOFF à 13)*
 *Dernière mise à jour : 2026-09-23 - section P2 Prises (correctif eco + refonte PC/TV + spies)*
 *Dernière mise à jour : 2026-07-19 - correction section L1C1 Météo (entités reelles verifiees, voir historique)*
 *Dernière mise à jour : 2026-07-16*
@@ -365,7 +366,7 @@ DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 <summary>📄 <b>Page</b> - 10 pop-up(s)</summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L1C2_TEMPERATURES/PAGE_TEMPERATURES.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-07-14.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-24.yaml">YAML Page</a>
 
 
 <details>
@@ -2346,7 +2347,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 ---
 
 <details>
-<summary><b>L5C1 - PILES & BATTERIES</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~33 entités</summary>
+<summary><b>L5C1 - PILES & BATTERIES</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~35 entités</summary>
 <blockquote>
 
 <details>
@@ -2380,7 +2381,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <summary>📄 <b>Page</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C1_PILES_BATTERIES/PAGE_BATTERIES.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-05-14.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-09-24.yaml">YAML Page</a>
 
 
 
@@ -2389,7 +2390,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <blockquote>
 
 <details>
-<summary><i>Entités natives HA / intégrations externes (30)</i></summary>
+<summary><i>Entités natives HA / intégrations externes (32)</i></summary>
 <blockquote><ul>
 <li><code>sensor.boutton_salle_de_bain_hue_battery</code></li>
 <li><code>sensor.contact_fenetre_bureau_sonoff_battery</code></li>
@@ -2413,6 +2414,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <li><code>sensor.inter_salon_4_ikea_battery</code></li>
 <li><code>sensor.inter_somrig_battery</code></li>
 <li><code>sensor.inter_tv_chambre_ikea_rodret_battery</code></li>
+<li><code>sensor.porte_congel_battery</code></li>
 <li><code>sensor.poussoir_ikea_tradfri_battery</code></li>
 <li><code>sensor.th_balcon_nord_battery</code></li>
 <li><code>sensor.th_bureau_battery</code></li>
@@ -2421,6 +2423,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <li><code>sensor.th_cuisine_battery</code></li>
 <li><code>sensor.th_salle_de_bain_battery</code></li>
 <li><code>sensor.th_salon_battery</code></li>
+<li><code>sensor.tongel_battery</code></li>
 </ul></blockquote>
 </details>
 

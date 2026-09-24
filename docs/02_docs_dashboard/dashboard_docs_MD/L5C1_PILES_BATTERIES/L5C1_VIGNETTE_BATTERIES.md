@@ -291,7 +291,9 @@ custom_fields:
 |--------|---------|-------|
 | `group.hue_devices` | 11 boutons HUE | 11 |
 | `group.ikea_devices` | 8 boutons/détect. + 4 contacts fenêtres IKEA | 12 |
-| `group.sonoff_devices` | 4 contacts fenêtres + 7 thermostats SONOFF | 11 |
+| `group.sonoff_devices` | 4 contacts fenêtres + 7 thermostats SONOFF + sonde Tongel + contact Porte Congél. | 13 |
+
+> 2026-09-24 : groupe passé à 13 membres (+ `sensor.tongel_battery`, + `sensor.porte_congel_battery`) - vignette elle-même inchangée (YAML 2026-05-14 = état live).
 
 ---
 

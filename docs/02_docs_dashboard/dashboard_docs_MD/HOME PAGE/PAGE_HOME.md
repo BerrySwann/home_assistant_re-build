@@ -90,7 +90,7 @@ Page d'accueil du dashboard. Structure en deux parties :
 ├─────────────────────────────────────────────────────────────────┤
 │  [COND.] mushroom Lave-vaisselle  (prise_lave_vaisselle > 2W)   │
 ├─────────────────────────────────────────────────────────────────┤
-│  [COND.] button-card Congélateur  (tongel_temperature > -14°C)  │
+│  [COND.] button-card Congélateur  (tongel > -15°C OU porte)   │
 ├─────────────────────────────────────────────────────────────────┤
 │  bubble-card separator  "Personne(s)"  (sensor.etat_wifi_maison)│
 │  bubble-card button  Eric  /  bubble-card button  Mamour        │
@@ -234,15 +234,16 @@ Tap → `/meteo/#foudre`
 ### 7 - Congélateur *(conditionnel)*
 
 **Type :** `custom:button-card` (carte "appliance")
-**Visible si :** `sensor.tongel_temperature` > -14 °C (carte d'alerte - masquée en marche normale)
-**Contenu :** états Cooling / Super Cool / Defrost selon la puissance, température congélateur, badge puissance (animations neige / givre / dégivrage)
-**Fichier YAML :** `Dashboard/PAGE_Home/card_congelateur_home_2026-09-20.yaml` (nouveau)
+**Visible si :** `sensor.tongel_temperature` > -15 °C OU `binary_sensor.porte_congel_contact` = on (carte d'alerte - masquée en marche normale)
+**Contenu :** états Cooling / Super Cool / Defrost selon la puissance (seuils 26 / 48 / 235 W), température congélateur, badge puissance, label "Porte fermée / Porte Ouverte" (rouge à l'ouverture) (animations neige / givre / dégivrage)
+**Fichier YAML :** `Dashboard/PAGE_Home/card_congelateur_home_2026-09-24.yaml` (remplace 2026-09-20 - contact porte + seuils 26/48/235)
 
 | Entité | Rôle | Source |
 |--------|------|--------|
 | `sensor.prise_congelateur_cuisine_nous_power` | Puissance instantanée (W) - états + badge | NOUS SP via Z2M (P2 cuisine) |
 | `switch.prise_congelateur_cuisine_nous` | État de la prise (marche/arrêt) | NOUS SP via Z2M (P2 cuisine) |
 | `sensor.tongel_temperature` | Température congélateur (°C) - condition d'affichage + badge | SONOFF Tongel via Z2M |
+| `binary_sensor.porte_congel_contact` | État porte congélateur - visibilité + icône + label "Porte fermée / Porte Ouverte" | Porte Congél. via Z2M |
 
 ---
 
@@ -341,6 +342,7 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 | `sensor.lave_vaisselle_*` (etat, progres, temps_restant) | `ha_washdata` (HACS) | Intégrations → WashData - 19 entités |
 | `sensor.prise_congelateur_cuisine_nous_power` / `switch.prise_congelateur_cuisine_nous` | NOUS SP via Z2M | Z2M (P2 cuisine) |
 | `sensor.tongel_temperature` | SONOFF Tongel via Z2M | Z2M |
+| `binary_sensor.porte_congel_contact` | Porte Congél. via Z2M | Z2M |
 | `sensor.studio_code_server_pourcentage_du_processeur` | Studio Code Server (add-on) | HA Supervisor |
 | `sensor.taille_db_home_assistant` | `sql` | sql.yaml |
 | `sensor.ecojoko_*` | `ecojoko` (HACS) | Intégrations → Ecojoko |
@@ -512,7 +514,7 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 | `Dashboard/PAGE_Home/card_foudre_home_2026-06-13.yaml` | Foudre Blitzortung (button-card) |
 | `Dashboard/PAGE_Home/card_lave_linge_home_2026-09-19.yaml` | Lave-linge (mushroom WashData - remplace 2026-06-13) |
 | `Dashboard/PAGE_Home/card_lave_vaisselle_home_2026-09-19.yaml` | Lave-vaisselle (mushroom WashData - remplace 2026-06-13) |
-| `Dashboard/PAGE_Home/card_congelateur_home_2026-09-20.yaml` | Congélateur (button-card appliance) |
+| `Dashboard/PAGE_Home/card_congelateur_home_2026-09-24.yaml` | Congélateur (button-card appliance - contact porte + seuils 26/48/235) |
 | `Dashboard/PAGE_Home/card_presence_home_2026-06-13.yaml` | Présence (separator + Eric + Mamour) |
 | `Dashboard/PAGE_Home/card_detecteur_fuite_home_2026-06-13.yaml` | Détecteur de fuite (mushroom) |
 

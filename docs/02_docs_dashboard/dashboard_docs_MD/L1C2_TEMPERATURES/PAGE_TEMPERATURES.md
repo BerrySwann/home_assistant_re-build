@@ -381,6 +381,8 @@ variables:
 
 Bloc ajouté le 2026-09-02 (même contenu que la section 7 de la page HOME).
 
+**Carte appliance Congélateur (fin de page, #42)** : button-card "appliance" (prise NOUS + sonde Tongel + contact porte) ajoutée après l'export du 2026-09-20 ; seuils cooling / super / defrost 26 / 48 / 235 W, label "Porte fermée / Porte Ouverte" (rouge). Pas de condition de visibilité sur cette page (toujours visible). *(constaté à l'export du 2026-09-24)*
+
 ### Heading
 
 | Élément | Détail |
@@ -542,6 +544,7 @@ Contenu : mushroom-template-card (flèche H%) + mini-graph-card (300px, 24h, lab
 | `sensor.th_salle_de_bain_temperature` + `_humidity` + `_battery` | Salle de Bain |
 | `sensor.th_chambre_temperature` + `_humidity` + `_battery` | Chambre |
 | `sensor.tongel_temperature` + `_humidity` + `_battery` | Congélateur (SONOFF via Z2M - ajouté 2026-09-02) |
+| `binary_sensor.porte_congel_contact` | Congélateur - carte appliance (#42, export 2026-09-24) |
 
 ### 🔌 Prises NOUS (Z2M) - puissances (cartes clim)
 
@@ -616,6 +619,7 @@ Contenu : mushroom-template-card (flèche H%) + mini-graph-card (300px, 24h, lab
 | 3 | Popup `#hcourbe` - mini-graph-card | Légende "Température" | ⚠️ Présent |
 | 4 | Bureau - sous-bouton fan bubble | `climate.clim_du_bureau` inexistante | ✅ Sans objet depuis la refonte button-card (2026-09-20) |
 | 5 | Bubble "Radiateur de la Cuisine" (doublon) | Carte climate redondante | ✅ Retirée le 2026-09-20 (page à 41 cartes) |
+| 6 | Carte appliance Congélateur (fin de page) | - | ✅ Ajoutée après le 2026-09-20 (page à 42 cartes, export 2026-09-24) |
 
 ---
 
@@ -656,7 +660,7 @@ Vérifier que les entités Pôle 1 sont chargées (`templates/P1_clim_chauffage/
 ### Documentation
 
 - Vignette d'accès : `docs/L1C2_TEMPERATURES/L1C2_VIGNETTE_TEMPERATURES.md`
-- Page (export live) : `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-20.yaml` (41 cartes - refonte button-card + bloc Congélateur)
+- Page (export live) : `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-24.yaml` (42 cartes - + carte appliance Congélateur / contact porte, seuils 26/48/235 ; historique 2026-09-20 : 41 cartes)
 - Pôle 1 complet : *(doc à créer)*
 
 ---
