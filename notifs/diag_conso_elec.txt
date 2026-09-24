@@ -18287,3 +18287,13 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [WIFI] | 24/09 15:30 | Hyg:0.87 | Cuis:0.21 | Froid:0.78 | Chauff:0.09 | Avg 4:5.7 | Multi:2.69 | Lum:0.28 | Autres:0.24 | Ti:26.3°C | Ext:24.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
 [2] en [WIFI] | 24/09 15:45 | Hyg:0.88 | Cuis:0.21 | Froid:0.81 | Chauff:0.09 | Avg 4:5.6 | Multi:2.79 | Lum:0.28 | Autres:0.24 | Ti:26.3°C | Ext:24.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
 [2] en [WIFI] | 24/09 16:00 | Hyg:0.88 | Cuis:0.21 | Froid:0.83 | Chauff:0.09 | Avg 4:5.6 | Multi:2.89 | Lum:0.28 | Autres:0.24 | Ti:26.3°C | Ext:23.7°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 24/09 16:15 | Hyg:0.89 | Cuis:0.21 | Froid:0.87 | Chauff:0.09 | Avg 4:5.5 | Multi:3.09 | Lum:0.3 | Autres:0.24 | Ti:26.3°C | Ext:23.5°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 24/09 16:30 | Hyg:0.89 | Cuis:0.27 | Froid:0.88 | Chauff:0.1 | Avg 4:6.0 | Multi:3.09 | Lum:0.31 | Autres:0.24 | Ti:26.3°C | Ext:23.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 24/09 16:45 | Hyg:0.9 | Cuis:0.27 | Froid:0.89 | Chauff:0.1 | Avg 4:6.0 | Multi:3.29 | Lum:0.33 | Autres:0.24 | Ti:26.3°C | Ext:23.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 24/09 17:00 | Hyg:0.9 | Cuis:0.27 | Froid:0.9 | Chauff:0.1 | Avg 4:5.9 | Multi:3.39 | Lum:0.34 | Autres:0.25 | Ti:26.3°C | Ext:23.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 24/09 17:15 | Hyg:0.91 | Cuis:0.27 | Froid:0.9 | Chauff:0.11 | Avg 4:6.4 | Multi:3.39 | Lum:0.37 | Autres:0.25 | Ti:26.3°C | Ext:23.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[Mamour: WIFI/WIFI_!?] | 24/09 17:30 | Hyg:0.91 | Cuis:0.27 | Froid:0.91 | Chauff:0.11 | Avg 4:6.3 | Multi:3.59 | Lum:0.38 | Autres:0.25 | Ti:26.3°C | Ext:23.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[Mamour: WIFI/WIFI_!?] | 24/09 17:45 | Hyg:0.91 | Cuis:0.3 | Froid:0.92 | Chauff:0.11 | Avg 4:6.2 | Multi:3.59 | Lum:0.4 | Autres:0.25 | Ti:26.3°C | Ext:23.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[CELL / WIFI_!?] | 24/09 18:00 | Hyg:0.92 | Cuis:0.31 | Froid:0.94 | Chauff:0.25 | Avg 4:13.8 | Multi:3.79 | Lum:0.4 | Autres:0.26 | Ti:26.4°C | Ext:22.9°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[CELL / WIFI_!?] | 24/09 18:15 | Hyg:0.92 | Cuis:0.31 | Froid:0.95 | Chauff:0.25 | Avg 4:13.6 | Multi:3.79 | Lum:0.42 | Autres:0.26 | Ti:26.4°C | Ext:23.1°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[CELL / WIFI_!?] | 24/09 18:30 | Hyg:0.93 | Cuis:0.31 | Froid:0.98 | Chauff:0.6 | Avg 4:32.5 | Multi:3.89 | Lum:0.43 | Autres:0.26 | Ti:26.4°C | Ext:22.9°C | DUT S/R/B/C:0.0/0.1/0.0/0.0
