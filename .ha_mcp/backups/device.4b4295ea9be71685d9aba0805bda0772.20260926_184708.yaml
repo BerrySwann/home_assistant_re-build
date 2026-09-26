@@ -1,0 +1,43 @@
+# ha_mcp_backup
+schema_version: 1
+domain: device
+entity_id: 4b4295ea9be71685d9aba0805bda0772
+captured: '2026-09-26T18:47:08.968148+00:00'
+tool: ha_set_device
+config:
+  area_id: salle_de_bain
+  configuration_url: null
+  config_entries:
+  - 01KHEC8RDWCSF78DPV9WN7H1QN
+  config_entries_subentries:
+    01KHEC8RDWCSF78DPV9WN7H1QN:
+    - null
+  config_entry_id: 01KHEC8RDWCSF78DPV9WN7H1QN
+  config_subentry_id: null
+  connections:
+  - - mac
+    - 00:17:88:01:05:2c:b3:bc
+  - - mac
+    - ec:b5:fa:2c:b3:bc
+  created_at: 1771082900.553453
+  disabled_by: null
+  entry_type: null
+  hw_version: null
+  id: 4b4295ea9be71685d9aba0805bda0772
+  identifiers:
+  - - hue
+    - ecb5fafffe2cb3bc
+  - - hue
+    - f84fa134-d591-4c30-bc70-57e7695ca3e5
+  labels: []
+  manufacturer: Signify Netherlands B.V.
+  model: Hue Bridge
+  model_id: BSB002
+  modified_at: 1788783532.751031
+  name_by_user: null
+  name: Hue Bridge
+  parent_device_id: null
+  primary_config_entry: 01KHEC8RDWCSF78DPV9WN7H1QN
+  serial_number: null
+  sw_version: 1.78.1978293000
+  via_device_id: null

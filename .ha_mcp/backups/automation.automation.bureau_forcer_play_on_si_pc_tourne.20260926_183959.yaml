@@ -1,0 +1,27 @@
+# ha_mcp_backup
+schema_version: 1
+domain: automation
+entity_id: automation.bureau_forcer_play_on_si_pc_tourne
+captured: '2026-09-26T18:39:59.295315+00:00'
+tool: ha_config_set_automation
+config:
+  id: '1775331547996'
+  alias: P3_BUREAU - Forcer Play ON si PC tourne
+  description: "Rallume les Hue Play si elles sont \xE9teintes manuellement alors\
+    \ que la synchro PC est active"
+  triggers:
+  - entity_id:
+    - light.hue_play_1_pc_bureau
+    - light.hue_play_2_pc_bureau
+    - light.hue_play_3_pc_bureau
+    to: 'off'
+    trigger: state
+  conditions:
+  - condition: state
+    entity_id: binary_sensor.moniteur_pc
+    state: 'on'
+  actions:
+  - target:
+      entity_id: '{{ trigger.entity_id }}'
+    action: light.turn_on
+  mode: parallel
