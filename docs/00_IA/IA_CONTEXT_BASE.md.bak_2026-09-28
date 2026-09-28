@@ -1,8 +1,6 @@
-> **CONTEXTE PROJET** : ce document est tenu IDENTIQUE en trois emplacements, a modifier
-> ensemble dans la meme session : `ReBuild/CLAUDE.md`, `ReBuild/docs/00_IA/IA_CONTEXT_BASE.md`
-> et `H:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres toute mise a jour, verifier que les
-> trois empreintes md5 sont egales. Il ne depend d'aucun agent en particulier.
-> Derniere mise en conformite : 2026-09-28.
+> ⚠️ **SYNC** : Ce fichier est une copie lisible de `CLAUDE.md` (racine ReBuild).
+> Mettre à jour en même temps que `CLAUDE.md` à chaque session.
+> Dernière resynchronisation : 2026-09-13 (aligné sur le CLAUDE.md du 2026-08-09 ; il était resté sur la version du 2026-07-18).
 
 ---
 
@@ -570,8 +568,8 @@ Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2
 - **Mode Absence Été** : T° Cible = 28°C.
 - **Logique "Cœur du Système" (T° Extérieure → Cible → Confort) :**
 
-![Confort Cible Calcul Flow](https://github.com/user-attachments/assets/f18e24a2-1441-482b-af70-537a7b208e15)
-*(copie locale du fichier : `docs/00_IA/confort_cible_calcul_flow.png` ; asset GitHub d'origine : https://github.com/user-attachments/assets/f18e24a2-1441-482b-af70-537a7b208e15)*
+![Confort Cible Calcul Flow](confort_cible_calcul_flow.png)
+*(copie locale du diagramme - [asset GitHub d'origine](https://github.com/user-attachments/assets/f18e24a2-1441-482b-af70-537a7b208e15))*
 
 > Caractéristiques détaillées du logement (dimensions, équipements par pièce, orientations) :
 > déplacées dans `docs/00_IA/sous_context_ia/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` (2026-07-19,
