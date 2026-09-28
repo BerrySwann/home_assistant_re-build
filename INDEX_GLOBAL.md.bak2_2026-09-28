@@ -1,7 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
-*Dernière mise à jour : 2026-09-28 (soir) - soufflant SDB version finale 2026/2027 : 2 automations (routage + bouton Rodret MQTT), 2 scripts (demarrage 2000 W avec verrou 2 min, arret resistances + ventilateur 1 min 30 + prise), verrou input_boolean, exports YAML et fiche de specification ; correction de 3 liens morts (dossier energie devenu P0_energie, faute « dinamique »), entité du bouton salle de bain renommée, renvoi vers la carte des dépendances à jour*
+*Dernière mise à jour : 2026-09-28 - 3 liens morts corrigés (dossier energie devenu P0_energie, faute « dinamique »), entité du bouton salle de bain renommée, renvoi vers la carte des dépendances à jour*
 *Dernière mise à jour : 2026-09-24 - HOME PAGE + L1C2 + L5C1 : carte Congélateur (contact porte, seuils 26/48/235), batterie porte_congel (groupe SONOFF à 13)*
 *Dernière mise à jour : 2026-09-23 - section P2 Prises (correctif eco + refonte PC/TV + spies)*
 *Dernière mise à jour : 2026-07-19 - correction section L1C1 Météo (entités reelles verifiees, voir historique)*
@@ -2949,7 +2949,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 *Dernière mise à jour : 2026-07-19 (audit entites L1C1-L6C3, voir historique en tete de fichier)*
 ---
 
-## ⚙️ 03 - AUTOMATIONS (50 automations)
+## ⚙️ 03 - AUTOMATIONS (48 automations)
 
 *Chemins relatifs depuis `docs_automations/`*
 
@@ -3430,7 +3430,7 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 ---
 
 <details>
-<summary><b>🚿 P1 - Salle de Bain</b> &nbsp;|&nbsp; 5 automation(s) &nbsp;|&nbsp; <i>Soufflant SDB version finale 2026/2027 (routage + bouton Rodret) + gestion intelligente + watchdog radiateur + minuterie sèche-serviettes</i></summary>
+<summary><b>🚿 P1 - Salle de Bain</b> &nbsp;|&nbsp; 3 automation(s) &nbsp;|&nbsp; <i>Soufflant SDB gestion intelligente + watchdog radiateur + minuterie sèche-serviettes</i></summary>
 <blockquote>
 
 <details>
@@ -3488,43 +3488,6 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <li><code>sensor.prise_seche_serviette_salle_de_bain_nous_power</code></li>
 <li><code>switch.prise_seche_serviette_salle_de_bain_nous</code></li>
 </ul></blockquote>
-</details>
-
-<details>
-<summary>✅ <b>H - 2026/09/28 - SDB SOUFFLANT : ROUTAGE (INTERRUPTEUR VERS SEQUENCES)</b></summary>
-<blockquote>
-<i>Entree unique du soufflant SDB : l'interrupteur virtuel declenche le demarrage ou l'arret. Verrou de 2 min tenu par les scripts.</i><br><br>
-📄 <a href="docs/03_docs_automations/docs_automations_MD/P1_SDB/SDB_SOUFFLANT_SPECIFICATION_2026.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P1_sdb/h_soufflant_sdb_routage.yaml">YAML source</a><br>
-<br><b>Déclencheurs :</b> 🔄`state`<br>
-<br><details>
-<summary>🔌 Entités (3)</summary>
-<blockquote><ul>
-<li><code>switch.inter_soufflant_salle_de_bain</code></li>
-<li><code>script.sdb_soufflant_demarrer</code></li>
-<li><code>script.sdb_soufflant_arreter</code></li>
-</ul></blockquote>
-</details>
-
-</blockquote>
-</details>
-
-<details>
-<summary>✅ <b>I - 2026/09/28 - SDB SOUFFLANT : BOUTON IKEA RODRET (MQTT)</b></summary>
-<blockquote>
-<i>Le bouton IKEA Rodret SDB pilote l'interrupteur virtuel. Topic : zigbee2mqtt2/Inter Soufflant Salle de Bain (IKEA RODRET)/action</i><br><br>
-📄 <a href="docs/03_docs_automations/docs_automations_MD/P1_SDB/SDB_SOUFFLANT_SPECIFICATION_2026.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P1_sdb/i_soufflant_sdb_bouton_rodret.yaml">YAML source</a><br>
-<br><b>Déclencheurs :</b> 📡`mqtt`<br>
-<br><details>
-<summary>🔌 Entités (2)</summary>
-<blockquote><ul>
-<li><code>switch.inter_soufflant_salle_de_bain</code></li>
-<li><code>input_boolean.inter_soufflant_salle_de_bain</code></li>
-</ul></blockquote>
-</details>
-
-</blockquote>
 </details>
 
 </blockquote>
@@ -3993,7 +3956,7 @@ device et fonction confirmés (Raspberry Pi, cf. TODO.txt U-2). Corrige l'ancien
 </details>
 
 <details>
-<summary><b>⚙️ SCRIPTS HA YAML</b> &nbsp;|&nbsp; 3 fichiers sources &nbsp;|&nbsp; Géré via UI HA &nbsp;|&nbsp; Local : <code>docs_scripts_YAML/</code></summary>
+<summary><b>⚙️ SCRIPTS HA YAML</b> &nbsp;|&nbsp; 1 fichier source &nbsp;|&nbsp; Géré via UI HA &nbsp;|&nbsp; Local : <code>docs_scripts_YAML/</code></summary>
 <blockquote>
 
 <details>
@@ -4026,27 +3989,9 @@ Scripts (obsolètes, non présents dans docs_scripts_YAML/) : <code>j_1_1_salon_
 <blockquote>
 📄 <a href="docs/04_docs_scripts/docs_scripts_YAML_MD/SCRIPT_J2_0_SECU_ARRET_CLIM.md">Doc</a><br>
 Script (obsolète, non présent dans docs_scripts_YAML/) : <code>j_2_0_secu_arret_clim_protege</code>
-
-<details>
-<summary><code>sdb_soufflant_demarrer.yaml</code> &nbsp;|&nbsp; Soufflant SDB : demarrage 2000 W + verrou 2 min</summary>
-<blockquote>
-📄 <a href="docs/03_docs_automations/docs_automations_MD/P1_SDB/SDB_SOUFFLANT_SPECIFICATION_2026.md">Doc</a><br>
-⚙️ <a href="docs/04_docs_scripts/docs_scripts_YAML/sdb_soufflant_demarrer.yaml">YAML source</a><br>
-Appelé par l'automation H (section 03). Pose le verrou, alimente la prise, 2 impulsions 1000 W.
 </blockquote>
 </details>
 
-<details>
-<summary><code>sdb_soufflant_arreter.yaml</code> &nbsp;|&nbsp; Soufflant SDB : resistances, ventilateur 1 min 30, prise</summary>
-<blockquote>
-📄 <a href="docs/03_docs_automations/docs_automations_MD/P1_SDB/SDB_SOUFFLANT_SPECIFICATION_2026.md">Doc</a><br>
-⚙️ <a href="docs/04_docs_scripts/docs_scripts_YAML/sdb_soufflant_arreter.yaml">YAML source</a><br>
-Appelé par l'automation H (section 03). Refusé pendant le verrou de demarrage.
-</blockquote>
-</details>
-
-</blockquote>
-</details>
 </blockquote>
 </details>
 
