@@ -47,10 +47,3 @@ inter_soufflant_salle_de_bain:
 inter_radiateur_salle_de_bain:
   name: "Inter Radiateur Salle de Bain"
   icon: mdi:radiator
-
-# --- verrou_soufflant_salle_de_bain (ajoute le 2026-09-28) ---
-# Verrou de deux minutes tenu pendant le demarrage du soufflant.
-# Il bloque un nouvel ordre de marche comme un ordre d'arret (decision Berry 2026-09-28).
-verrou_soufflant_salle_de_bain:
-  name: "SDB Verrou soufflant (2 min)"
-  icon: mdi:lock-clock

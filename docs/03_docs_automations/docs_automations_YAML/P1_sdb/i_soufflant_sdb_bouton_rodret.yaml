@@ -1,0 +1,55 @@
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ SDB - SOUFFLANT - BOUTON IKEA RODRET (MQTT VERS INTERRUPTEUR)
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+#
+# ## DESCRIPTION :
+# Le bouton IKEA Rodret de la salle de bain pilote l'interrupteur virtuel,
+# qui declenche ensuite les sequences de demarrage et d'arret.
+#
+# ## CHAINE DE DEPENDANCES :
+#
+# | MATERIEL      | SOURCE                        | CE FICHIER                     | AVAL                      |
+# |:--------------|:------------------------------|:-------------------------------|:--------------------------|
+# | [virtuel/UI]  | MQTT zigbee2mqtt2/Inter Soufflant Salle de Bain (IKEA RODRET)/action
+#
+# ## ETAT :
+# - Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant.
+# - Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - BOUTON IKEA RODRET)
+#
+# --- version finale 2026/2027 du soufflant salle de bain ---
+
+- alias: 'SDB - SOUFFLANT - BOUTON IKEA RODRET (MQTT vers interrupteur)'
+  description: >-
+    Le bouton IKEA Rodret de la salle de bain pilote l'interrupteur virtuel, qui
+    declenche ensuite les sequences. Topic Zigbee2MQTT : Inter Soufflant Salle de
+    Bain (IKEA RODRET)/action.
+  triggers:
+    - alias: 'Appui bouton I (marche)'
+      trigger: mqtt
+      topic: 'zigbee2mqtt2/Inter Soufflant Salle de Bain (IKEA RODRET)/action'
+      payload: 'on'
+      id: rodret_on
+    - alias: 'Appui bouton O (arret)'
+      trigger: mqtt
+      topic: 'zigbee2mqtt2/Inter Soufflant Salle de Bain (IKEA RODRET)/action'
+      payload: 'off'
+      id: rodret_off
+  conditions: []
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: rodret_on
+          sequence:
+            - action: switch.turn_on
+              target:
+                entity_id: switch.inter_soufflant_salle_de_bain
+        - conditions:
+            - condition: trigger
+              id: rodret_off
+          sequence:
+            - action: switch.turn_off
+              target:
+                entity_id: switch.inter_soufflant_salle_de_bain
+  mode: single
+

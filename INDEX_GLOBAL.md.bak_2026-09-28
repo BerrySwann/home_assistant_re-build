@@ -1,7 +1,6 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
-*Dernière mise à jour : 2026-09-28 - 3 liens morts corrigés (dossier energie devenu P0_energie, faute « dinamique »), entité du bouton salle de bain renommée, renvoi vers la carte des dépendances à jour*
 *Dernière mise à jour : 2026-09-24 - HOME PAGE + L1C2 + L5C1 : carte Congélateur (contact porte, seuils 26/48/235), batterie porte_congel (groupe SONOFF à 13)*
 *Dernière mise à jour : 2026-09-23 - section P2 Prises (correctif eco + refonte PC/TV + spies)*
 *Dernière mise à jour : 2026-07-19 - correction section L1C1 Météo (entités reelles verifiees, voir historique)*
@@ -293,7 +292,7 @@ et <code>carte_meteo_france.yaml</code> étaient absents de "Fichiers sources" -
 <code>M_04_tendances_th_ext_card.yaml</code> était classé à tort ici - son entête déclare
 lui-même <code>AVAL : L1C2 Températures</code>, pas L1C1. Déplacé vers la section L1C2.
 Vérifié directement dans le corps de chaque fichier yaml, en cohérence avec
-DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES.md a été archivé le 2026-09-28).
+DEPENDANCES_GLOBALES.md (section L1C1, corrigée le même jour).
 </blockquote>
 
 </blockquote>
@@ -779,7 +778,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_01_genelec_appart_AMHQ_cost.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml">voir fichier</a></summary>
+<summary><code>01_genelec_appart_AMHQ_cost.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_cout_hc_quotidien</code></li>
 <li><code>sensor.genelec_appart_cout_hp_quotidien</code></li>
@@ -821,7 +820,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_diag_conso_hebdomadaire_en_cours.yaml</code> - 7 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml">voir fichier</a></summary>
+<summary><code>diag_conso_hebdomadaire_en_cours.yaml</code> - 7 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.diag_poste_autre_hebdomadaire</code></li>
 <li><code>sensor.diag_poste_chauffage_hebdomadaire</code></li>
@@ -834,7 +833,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_diag_conso_jour_en_cours.yaml</code> - 7 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_jour_en_cours.yaml">voir fichier</a></summary>
+<summary><code>diag_conso_jour_en_cours.yaml</code> - 7 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_jour_en_cours.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.diag_poste_autre_quotidien</code></li>
 <li><code>sensor.diag_poste_chauffage_quotidien</code></li>
@@ -847,7 +846,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_diag_conso_mois_en_cours.yaml</code> - 7 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_mois_en_cours.yaml">voir fichier</a></summary>
+<summary><code>diag_conso_mois_en_cours.yaml</code> - 7 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_mois_en_cours.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.diag_poste_autre_mensuel</code></li>
 <li><code>sensor.diag_poste_chauffage_mensuel</code></li>
@@ -860,7 +859,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_01_genelec_appart_AMHQ_cost.yaml</code> - 9 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml">voir fichier</a></summary>
+<summary><code>01_genelec_appart_AMHQ_cost.yaml</code> - 9 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_cout_hc_hebdomadaire</code></li>
 <li><code>sensor.genelec_appart_cout_hc_mensuel</code></li>
@@ -875,7 +874,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_02_ratio_hp_hc.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml">voir fichier</a></summary>
+<summary><code>02_ratio_hp_hc.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_ratio_hc_hebdomadaire</code></li>
 <li><code>sensor.genelec_appart_ratio_hc_mensuel</code></li>
@@ -884,7 +883,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_03_AVG_genelec_appart.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_03_AVG_genelec_appart.yaml">voir fichier</a></summary>
+<summary><code>03_AVG_genelec_appart.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_03_AVG_genelec_appart.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_avg_watts_mensuel</code></li>
 <li><code>sensor.genelec_appart_avg_watts_quotidien</code></li>
@@ -892,7 +891,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_MyElectricalData.yaml</code> - 8 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Linky/P0_MyElectricalData.yaml">voir fichier</a></summary>
+<summary><code>MyElectricalData.yaml</code> - 8 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Linky/P0_MyElectricalData.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.linky_jour_0</code></li>
 <li><code>sensor.linky_jour_1</code></li>
@@ -1031,7 +1030,7 @@ déplacées vers natives.
 <blockquote>
 
 <details>
-<summary><code>P0_total_pour_les_7_postes.yaml</code> - 6 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_total_pour_les_7_postes/P0_total_pour_les_7_postes.yaml">voir fichier</a></summary>
+<summary><code>total_pour_les_7_postes.yaml</code> - 6 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_total_pour_les_7_postes/P0_total_pour_les_7_postes.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.total_poste_autre_puissance</code></li>
 <li><code>sensor.total_poste_chauffage_puissance</code></li>
@@ -2411,7 +2410,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <li><code>sensor.hue_smart_button_entee_2_batterie</code></li>
 <li><code>sensor.hue_smart_button_table_batterie</code></li>
 <li><code>sensor.inter_bureau_rodret_battery</code></li>
-<li><code>sensor.inter_soufflant_salle_de_bain_ikea_rodret_battery</code></li>
+<li><code>sensor.inter_radiateur_salle_de_bain_ikea_rodret_battery</code></li>
 <li><code>sensor.inter_salon_4_ikea_battery</code></li>
 <li><code>sensor.inter_somrig_battery</code></li>
 <li><code>sensor.inter_tv_chambre_ikea_rodret_battery</code></li>
@@ -3508,7 +3507,7 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <i>Pilotage des 7 prises en fonction du groupe de présence (G1 à G4).</i><br>
 <i>Correctif + spy 2026-09-23 : liste lue via | from_json ; sensor.eco_prises_spy (groupe + états + écarts).</i><br><br>
 📄 <a href="docs/03_docs_automations/docs_automations_MD/P2_PRISES/ECO_PRISES_DYNAMIQUE.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P2_prises/eco_prises_dynamique_by_presence_groupe.yaml">YAML source</a><br>
+⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P2_prises/eco_prises_dinamique_by_presence_groupe.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (8) <i>- corrigé 2026-07-19, liste réelle depuis P2_eco_prises_config.yaml</i></summary>
@@ -3769,7 +3768,7 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <blockquote>
 <i>Bascule le tarif des 4 UM Genelec Appart HP/HC aux heures de transition</i><br><br>
 📄 <a href="docs/03_docs_automations/docs_automations_MD/ENERGIE/BASCULEMENT_TARIF_HPHC.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P0_energie/auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml">YAML source</a><br>
+⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/energie/auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 
 </blockquote>
@@ -3780,7 +3779,7 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <blockquote>
 <i>Enregistre l'écart à 23:59 pile</i><br><br>
 📄 <a href="docs/03_docs_automations/docs_automations_MD/ENERGIE/LOG_ECART_LINKY_NODON.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P0_energie/log_ecart_linky_vs_nodon.yaml">YAML source</a><br>
+⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/energie/log_ecart_linky_vs_nodon.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>

@@ -1,0 +1,55 @@
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ SDB - SOUFFLANT - ROUTAGE (INTERRUPTEUR VERS SEQUENCES)
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+#
+# ## DESCRIPTION :
+# Entree unique du soufflant de la salle de bain : l'interrupteur virtuel
+# declenche le demarrage ou l'arret. Le verrou de deux minutes est tenu par les scripts.
+#
+# ## CHAINE DE DEPENDANCES :
+#
+# | MATERIEL      | SOURCE                        | CE FICHIER                     | AVAL                      |
+# |:--------------|:------------------------------|:-------------------------------|:--------------------------|
+# | [virtuel/UI]  | switch.inter_soufflant_salle_de_bain | script.sdb_soufflant_demarrer / _arreter
+#
+# ## ETAT :
+# - Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant.
+# - Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - ROUTAGE)
+#
+# --- version finale 2026/2027 du soufflant salle de bain ---
+
+- alias: 'SDB - SOUFFLANT - ROUTAGE (interrupteur vers sequences)'
+  description: >-
+    Entree unique du soufflant de la salle de bain : l'interrupteur virtuel
+    (bouton du tableau de bord) declenche le demarrage ou l'arret. Le verrou de
+    deux minutes est tenu par les scripts. Aucun automatisme de temperature.
+  triggers:
+    - alias: 'Interrupteur SDB sur ON'
+      trigger: state
+      entity_id: switch.inter_soufflant_salle_de_bain
+      to: 'on'
+      id: marche
+    - alias: 'Interrupteur SDB sur OFF'
+      trigger: state
+      entity_id: switch.inter_soufflant_salle_de_bain
+      to: 'off'
+      id: arret
+  conditions: []
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: marche
+          sequence:
+            - action: script.turn_on
+              target:
+                entity_id: script.sdb_soufflant_demarrer
+        - conditions:
+            - condition: trigger
+              id: arret
+          sequence:
+            - action: script.turn_on
+              target:
+                entity_id: script.sdb_soufflant_arreter
+  mode: single
+
