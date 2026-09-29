@@ -343,7 +343,7 @@ const delta  = (temp - target).toFixed(1);
 ```
 
 Sources pour ce bloc :
-- `templates/Inter_BP_Virtuel/BI_02_switch_inter_sdb.yaml` → `switch.inter_soufflant_salle_de_bain`
+- `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml` → `switch.inter_soufflant_salle_de_bain`
 - `[NAT]` input_select.yaml → `input_select.etat_resistance_soufflant_sdb`
 
 ### bar-card puissance (conditionnel > 0.1W)
@@ -446,7 +446,7 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 
 | Entité | Fichier | Rôle |
 |--------|---------|------|
-| `switch.inter_soufflant_salle_de_bain` | `Inter_BP_Virtuel/BI_02_switch_inter_sdb.yaml` | Visibilité button-card soufflant SdB |
+| `switch.inter_soufflant_salle_de_bain` | `Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml` | Visibilité button-card soufflant SdB |
 
 ### Natif HA - climate (SmartIR / Meross)
 
@@ -546,7 +546,7 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 
 ### Le button-card soufflant SdB n'apparaît pas
 - `switch.inter_soufflant_salle_de_bain` doit être `on`
-- Source : `templates/Inter_BP_Virtuel/BI_02_switch_inter_sdb.yaml`
+- Source : `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml`
 - Vérifier que `input_boolean.inter_soufflant_salle_de_bain` est bien créé dans `input_boolean.yaml`
 
 ### Les schedules montrent "unavailable"
@@ -561,7 +561,7 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 - Templates P1 ui : `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml`
 - Templates P1 total : `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml`
 - Templates P1 master : `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml`
-- Templates Inter SdB : `templates/Inter_BP_Virtuel/BI_02_switch_inter_sdb.yaml`
+- Templates Inter SdB : `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml`
 
 
 <!-- obsidian-wikilinks -->

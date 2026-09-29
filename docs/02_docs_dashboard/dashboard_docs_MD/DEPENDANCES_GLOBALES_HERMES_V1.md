@@ -5511,10 +5511,6 @@ sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_conf
 
 ```
 binary_sensor.meteoalarm (NAT)  ->  01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml
-binary_sensor.radiateur_salle_de_bain_actif (NAT)  ->  01_docs_config_system/config_system_YAML/input_booleans/P1/P1_BV_IB_inter_soufflant_sdb.yaml
-input_boolean.inter_rodret_salon (NAT)  ->  01_docs_config_system/config_system_YAML/templates/Inter_BP_Virtuel/P3/P3_BV_IB_SW_inter_rodret_salon.yaml
-input_boolean.inter_somrig_salon (NAT)  ->  01_docs_config_system/config_system_YAML/templates/Inter_BP_Virtuel/P3/P3_BV_IB_SW_inter_smorig_salon.yaml
-input_boolean.inter_soufflant_sdb (NAT)  ->  01_docs_config_system/config_system_YAML/templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml
 input_select.saison (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml
 light.hue_play_1 (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml
 light.hue_smart_eco_tv_salon (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_eCO_prises/P2_eco_prises_config.yaml
@@ -5700,7 +5696,6 @@ sensor.time (NAT)  ->  01_docs_config_system/config_system_YAML/configuration.ya
 shell_command.audit_md5_docs (NAT)  ->  01_docs_config_system/config_system_YAML/command_line/audit/audit_md5_md.yaml
 switch.clim_Bureau (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_02_automation_message_clim_7h30_21h.yaml
 switch.clim_Chambre (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_02_automation_message_clim_7h30_21h.yaml
-switch.inter_rodret_salon (TPL)  ->  01_docs_config_system/config_system_YAML/templates/Inter_BP_Virtuel/P3/P3_BV_IB_SW_inter_rodret_salon.yaml
 utility_meter.select_tariff (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml
 ```
 

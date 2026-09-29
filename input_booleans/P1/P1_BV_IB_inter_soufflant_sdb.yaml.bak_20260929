@@ -5,13 +5,13 @@
 # ## 📝 DESCRIPTION :
 # Interrupteur virtuel (BP) pour le soufflant de la SDB.
 # Ces booleans servent de médiateurs entre le bouton physique IKEA RODRET
-# et les relais connectés. Le switch template (P1_BV_IB_SW_inter_souflant_sdb.yaml)
+# et les relais connectés. Le switch template (BI_02_switch_inter_sdb.yaml)
 # lit leur état pour piloter les appareils réels.
 #
 # ## 🧮 CALCUL & SOURCES :
 # - inter_soufflant_salle_de_bain :
 #   Écrit par : automation P2_bouton_rodret_soufflant_sdb.yaml (MQTT IKEA RODRET)
-#   Lu par    : templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml
+#   Lu par    : templates/Inter_BP_Virtuel/BI_02_switch_inter_sdb.yaml
 #   Effet     : turn_on → active le soufflant / turn_off → coupe le soufflant
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
