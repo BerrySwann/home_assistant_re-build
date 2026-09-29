@@ -2,6 +2,8 @@
 
 *Généré depuis docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md (2026-07-14)*
 
+*Mise à jour 2026-09-29 : deux entités renommées (sensor.mode_ete_hiver, sensor.proxmox_cpu_package), neuf entités disparues retirées (cartes météo/blitzortung, ancienne prise radiateur).*
+
 *Section HOME PAGE ajoutée manuellement le 2026-09-20 (intégration WashData).*
 
 *Mise à jour 2026-09-24 : contact porte Congélateur (HOME PAGE + L1C2) + batterie porte_congel (L5C1).*
@@ -88,48 +90,6 @@
 
 ## L1C1
 
-### `camera.carte_vigilance_meteo_france`
-- **Vignette:** L1C1
-- **Type:** sensor/switch/binary_sensor/camera
-- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C1_*/`
-- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_*/`
-
-### `sensor.blitzortung_card_content`
-- **Vignette:** L1C1
-- **Type:** sensor/switch/binary_sensor/camera
-- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C1_*/`
-- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_*/`
-
-### `sensor.blitzortung_lightning_count`
-- **Vignette:** L1C1
-- **Type:** sensor/switch/binary_sensor/camera
-- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C1_*/`
-- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_*/`
-
-### `sensor.blitzortung_lightning_distance`
-- **Vignette:** L1C1
-- **Type:** sensor/switch/binary_sensor/camera
-- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C1_*/`
-- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_*/`
-
-### `sensor.meteo_france_alerte_card_content`
-- **Vignette:** L1C1
-- **Type:** sensor/switch/binary_sensor/camera
-- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C1_*/`
-- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_*/`
-
-### `sensor.meteo_france_blitzortung_count_quotidien`
-- **Vignette:** L1C1
-- **Type:** sensor/switch/binary_sensor/camera
-- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C1_*/`
-- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_*/`
-
-### `sensor.meteo_france_vent_vence_card_content`
-- **Vignette:** L1C1
-- **Type:** sensor/switch/binary_sensor/camera
-- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C1_*/`
-- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_*/`
-
 ### `sensor.sun_next_rising`
 - **Vignette:** L1C1
 - **Type:** sensor/switch/binary_sensor/camera
@@ -137,12 +97,6 @@
 - **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_*/`
 
 ### `sensor.sun_next_setting`
-- **Vignette:** L1C1
-- **Type:** sensor/switch/binary_sensor/camera
-- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C1_*/`
-- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_*/`
-
-### `sensor.tendances_th_ext_card_content`
 - **Vignette:** L1C1
 - **Type:** sensor/switch/binary_sensor/camera
 - **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L1C1_*/`
@@ -1018,13 +972,7 @@
 - **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
 - **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
 
-### `sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power`
-- **Vignette:** L2C2
-- **Type:** sensor/switch/binary_sensor/camera
-- **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
-- **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_*/`
-
-### `sensor.ete_hiver`
+### `sensor.mode_ete_hiver`
 - **Vignette:** L2C2
 - **Type:** sensor/switch/binary_sensor/camera
 - **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L2C2_*/`
@@ -1430,7 +1378,7 @@
 - **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L4C1_*/`
 - **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L4C1_*/`
 
-### `sensor.temperature_cpu_package`
+### `sensor.proxmox_cpu_package`
 - **Vignette:** L4C1
 - **Type:** sensor/switch/binary_sensor/camera
 - **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L4C1_*/`
@@ -1462,7 +1410,7 @@
 - **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L4C2_*/`
 - **YAML:** `docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_*/`
 
-### `sensor.temperature_cpu_package`
+### `sensor.proxmox_cpu_package`
 - **Vignette:** L4C2
 - **Type:** sensor/switch/binary_sensor/camera
 - **Source:** Voir `docs/02_docs_dashboard/dashboard_docs_MD/L4C2_*/`
