@@ -1,0 +1,25 @@
+id: '1766772026498'
+alias: (F) (CLIM) Notification de fermeture des fenêtres
+description: "Envoie une notification lorsqu'une fenêtre est fermée."
+triggers:
+- trigger: state
+  entity_id:
+  - binary_sensor.contact_fenetre_salon_sonoff_contact
+  - binary_sensor.contact_fenetre_cuisine_sonoff_contact
+  - binary_sensor.contact_fenetre_bureau_sonoff_contact
+  - binary_sensor.contact_fenetre_chambre_sonoff_contact
+  from: 'on'
+  to: 'off'
+actions:
+- delay: 00:00:02
+- action: notify.mobile_app_eric
+  data:
+    title: Fermeture en cours
+    message: "{% if trigger.entity_id == 'binary_sensor.contact_fenetre_salon_sonoff_contact'\
+      \ %}\n  La fenêtre du Salon a été fermée.\n{% elif trigger.entity_id == 'binary_sensor.contact_fenetre_cuisine_sonoff_contact'\
+      \ %}\n  La fenêtre de la Cuisine a été fermée.\n{% elif trigger.entity_id ==\
+      \ 'binary_sensor.contact_fenetre_bureau_sonoff_contact' %}\n  La fenêtre du\
+      \ Bureau a été fermée.\n{% elif trigger.entity_id == 'binary_sensor.contact_fenetre_chambre_sonoff_contact'\
+      \ %}\n  La fenêtre de la Chambre a été fermée.\n{% endif %}  {% if states('sensor.nbre_de_fenetres_fermees')\
+      \ == '4' %}\n  Toutes les fenêtres sont maintenant fermées.\n{% endif %}\n"
+mode: queued

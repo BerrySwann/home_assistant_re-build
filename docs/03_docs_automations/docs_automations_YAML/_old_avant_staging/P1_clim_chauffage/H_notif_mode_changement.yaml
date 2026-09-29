@@ -1,0 +1,15 @@
+id: '1766772286313'
+alias: (H) (CLIM) Notification de changement de mode Été/Fan/Hiver
+description: 'Notification lorsque le mode change entre Été, Ventilateur ou Hiver (cool / fan_only / heat)\n'
+triggers:
+- trigger: state
+  entity_id: sensor.mode_ete_hiver
+conditions: []
+actions:
+- delay: 00:00:03
+- action: notify.mobile_app_eric
+  data:
+    title: CHANGEMENT DE MODE
+    message: 'Le mode a changé pour: {{ states(''sensor.mode_ete_hiver_etat'') | upper
+      }}'
+mode: single

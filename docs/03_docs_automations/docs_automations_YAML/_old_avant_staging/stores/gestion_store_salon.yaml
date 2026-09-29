@@ -1,0 +1,98 @@
+id: '1766777044867'
+alias: Gestion Optimisée du Store Salon (Avec Mode Anti-Reflet PC)
+description: 'Gère Canicule, Froid, et surtout le confort visuel de Mamour (Anti-Glare).'
+triggers:
+- id: re-evaluation
+  trigger: state
+  entity_id:
+  - sensor.th_balcon_nord_temperature
+  - sensor.groupe
+  - sun.sun
+- id: fenetre
+  trigger: state
+  entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+- id: matin_soir
+  trigger: sun
+  event: sunrise
+- id: matin_soir
+  trigger: sun
+  event: sunset
+conditions:
+- alias: 'SÉCURITÉ : La fenêtre doit être FERMÉE'
+  condition: state
+  entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+  state: 'off'
+actions:
+- choose:
+  - alias: 'SCÉNARIO 1 : Canicule (> 34°C)'
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.th_balcon_nord_temperature
+      above: 34
+    sequence:
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: sensor.groupe
+          state:
+          - groupe_2
+          - groupe_4
+        sequence:
+        - action: cover.set_cover_position
+          target:
+            entity_id: cover.store_salon
+          data:
+            position: 50
+      default:
+      - action: cover.close_cover
+        target:
+          entity_id: cover.store_salon
+  - alias: 'SCÉNARIO 2 : Anti-Reflet PC (Soleil dans les yeux)'
+    conditions:
+    - condition: state
+      entity_id: sensor.groupe
+      state:
+      - groupe_2
+      - groupe_4
+    - condition: template
+      value_template: '{% set az = state_attr(''sun.sun'', ''azimuth'') | float(0)
+        %} {% set el = state_attr(''sun.sun'', ''elevation'') | float(0) %} {% set
+        az_ok = states(''input_number.soleil_azimut_debut'')|float <= az <= states(''input_number.soleil_azimut_fin'')|float
+        %} {% set el_ok = states(''input_number.soleil_elevation_min'')|float <= el
+        <= states(''input_number.soleil_elevation_max'')|float %} {{ az_ok and el_ok
+        }}
+
+        '
+    sequence:
+    - action: cover.set_cover_position
+      target:
+        entity_id: cover.store_salon
+      data:
+        position: 30
+  - alias: 'SCÉNARIO 3 : Froid (< 17°) & Pas de Mamour'
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.th_balcon_nord_temperature
+      below: 17
+    - condition: state
+      entity_id: sensor.groupe
+      state:
+      - groupe_1
+      - groupe_3
+    sequence:
+    - action: cover.close_cover
+      target:
+        entity_id: cover.store_salon
+  - alias: 'SCÉNARIO 4 : Nuit'
+    conditions:
+    - condition: sun
+      after: sunset
+    sequence:
+    - action: cover.close_cover
+      target:
+        entity_id: cover.store_salon
+  default:
+  - action: cover.open_cover
+    target:
+      entity_id: cover.store_salon
+mode: single

@@ -1,0 +1,29 @@
+id: '1766779542822'
+alias: Système - Watchdog Piles (HUE/IKEA/SONOFF)
+description: 'Vérification 3x/jour basée sur les groupes de la vue synthétique (seuil 11%)'
+triggers:
+- trigger: time
+  at: 08:00:00
+- trigger: time
+  at: '14:00:00'
+- trigger: time
+  at: '20:00:00'
+actions:
+- variables:
+    low_batt: "{% set sensors = expand('group.hue_devices', 'group.ikea_devices',\
+      \ 'group.sonoff_devices') %} {% set ns = namespace(ids=[]) %} {% for s in sensors\
+      \ %}\n  {% if s.state | is_number and s.state | int <= 11 %}\n    {% set ns.ids\
+      \ = ns.ids + [s.entity_id] %}\n  {% endif %}\n{% endfor %} {{ ns.ids }}\n"
+- if:
+  - condition: template
+    value_template: '{{ low_batt | count > 0 }}'
+  then:
+  - action: notify.mobile_app_eric
+    data:
+      title: 🪫 Alerte Pile Faible (<10%)
+      message: "{% for id in low_batt %}\n  - {{ state_attr(id, 'friendly_name') }}\
+        \ : {{ states(id) }}%\n{% endfor %}\n"
+      data:
+        tag: alert-batterie
+        color: '#f44336'
+mode: single

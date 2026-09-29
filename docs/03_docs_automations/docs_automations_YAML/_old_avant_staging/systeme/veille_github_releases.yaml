@@ -1,0 +1,59 @@
+alias: "VEILLE GITHUB — Nouvelle release détectée"
+description: >
+  Surveille les flux Feedreader GitHub (HA core + HACS + cartes HACS).
+  Envoie une notif Telegram à chaque nouvelle release.
+  Double notif si le titre contient un breaking change / deprecation.
+mode: queued
+max: 10
+
+trigger:
+  - platform: event
+    event_type: feedreader_entry_added
+    alias: DÉCLENCHEUR — Nouvelle entrée Feedreader
+
+condition: []
+
+action:
+  - alias: VARIABLES — Extraire titre + lien + source
+    variables:
+      titre: "{{ trigger.event.data.title | default('Sans titre') }}"
+      lien: "{{ trigger.event.data.link | default('') }}"
+      source: "{{ trigger.event.data.feed_url | default('') }}"
+      est_breaking: >
+        {{ ('breaking' in titre | lower)
+        or ('deprecated' in titre | lower)
+        or ('removed' in titre | lower)
+        or ('breaking' in (trigger.event.data.summary | default('') | lower))
+        or ('deprecated' in (trigger.event.data.summary | default('') | lower)) }}
+
+  - alias: ACTION — Notif standard (toutes releases)
+    service: notify.mobile_app_poco_x7_pro
+    data:
+      title: "RELEASE GITHUB"
+      message: >
+        {{ source.split('github.com/')[1].split('/releases')[0] if 'github.com' in source else source }}
+        >> {{ titre[:80] }}
+        Lien: {{ lien }}
+
+  - alias: CONDITION — Breaking change détecté ?
+    if:
+      - condition: template
+        value_template: "{{ est_breaking }}"
+    then:
+      - alias: ACTION — Notif alerte breaking change
+        service: notify.mobile_app_poco_x7_pro
+        data:
+          title: "! BREAKING CHANGE !"
+          message: >
+            [ATTENTION] {{ source.split('github.com/')[1].split('/releases')[0] if 'github.com' in source else source }}
+            >> {{ titre[:80] }}
+            Verifie avant de mettre a jour !
+            Lien: {{ lien }}
+
+# annotations_log:
+# [trigger]    event feedreader_entry_added — se déclenche sur chaque nouvelle release des flux ajoutés
+# [variables]  extraction titre/lien/source depuis trigger.event.data
+# [est_breaking] filtre sur : breaking / deprecated / removed (titre + summary)
+# [notif 1]    notification standard pour toutes les releases
+# [notif 2]    notification alerte supplémentaire uniquement si breaking/deprecated détecté
+# [mode]       queued max:10 — évite les pertes si plusieurs releases simultanées

@@ -1,0 +1,28 @@
+alias: "Bouton IKEA RODRET - Soufflant SdB Gestion ON/OFF (JSON)"
+description: Pilotage du chauffage SDB via le bouton RODRET (MQTT)
+triggers:
+  - trigger: mqtt
+    options:
+      topic: zigbee2mqtt/Inter Radiateur Salle de Bain (IKEA RODRET)
+conditions: []
+actions:
+  - choose:
+      - alias: "BOUTON ON"
+        conditions:
+          - condition: template
+            value_template: "{{ trigger.payload_json.action == 'on' }}"
+        sequence:
+          - action: input_boolean.turn_on
+            target:
+              entity_id: input_boolean.inter_soufflant_salle_de_bain
+            data: {}
+      - alias: "BOUTON OFF"
+        conditions:
+          - condition: template
+            value_template: "{{ trigger.payload_json.action == 'off' }}"
+        sequence:
+          - action: input_boolean.turn_off
+            target:
+              entity_id: input_boolean.inter_soufflant_salle_de_bain
+            data: {}
+mode: restart
