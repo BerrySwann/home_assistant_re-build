@@ -5340,7 +5340,7 @@ switch.clim_salon_nous
 ```
 
 ### scripts.yaml
-*01_docs_config_system\config_system_YAML\scripts.yaml - 32 entites*
+*scripts.yaml - 32 entites*
 
 ```
 binary_sensor.contact_fenetre_bureau_sonoff_contact
