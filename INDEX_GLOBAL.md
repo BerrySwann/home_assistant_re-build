@@ -4093,9 +4093,3 @@ sur off à la fin, après la coupure de la prise.
 </blockquote>
 </details>
 
-<details>
-<summary><b>WORKFLOW_REBUILD.md</b> &nbsp;|&nbsp; Workflow complet du projet ReBuild (étapes, conventions, Git)</summary>
-<blockquote>
-📄 <a href="docs/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md">Doc</a>
-</blockquote>
-</details>

@@ -23,7 +23,6 @@ Une donnee suit toujours le meme chemin : **capteur natif** (Zigbee2MQTT, Hue, L
 |---|---|
 | [`INDEX_GLOBAL.md`](./INDEX_GLOBAL.md) | Index unique - 6 sections (IA, config, dashboard, automations, scripts, systeme) - accordeon GitHub. *(3900+ lignes, prevoyez du cafe)* |
 | [`docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md`](./docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md) | Carte -> Template -> Sensor -> Utility Meter -> Source native - 18 vignettes |
-| [`docs/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md`](./docs/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md) | Procedure de maintenance + historique des sessions |
 | [`IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE.md) | Regles de codage, nomenclature, arborescences - directives IA completes *(copie GitHub du CLAUDE.md local, prompt de Claude)* |
 
 ---
@@ -222,7 +221,7 @@ docs/
 │   ├── docs_scripts_SH_MD/         <- docs scripts bash
 │   ├── docs_scripts_YAML/          <- scripts HA YAML
 │   └── docs_scripts_YAML_MD/       <- docs scripts HA
-└── 05_docs_MD_system/              <- MOC, templates, workflow, index entites
+└── 05_docs_MD_system/              <- MOC, templates, index entites
 ```
 
 ---
@@ -242,7 +241,6 @@ ReBuild/
 └── secrets.yaml                <- identifiants (NE PAS synchroniser)
 ```
 
-> Procedure de maintenance detaillee : [`docs/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md`](./docs/05_docs_MD_system/workflow/WORKFLOW_REBUILD.md)
 
 ---
 
