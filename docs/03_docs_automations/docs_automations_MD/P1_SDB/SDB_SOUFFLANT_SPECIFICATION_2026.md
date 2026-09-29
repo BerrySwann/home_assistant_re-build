@@ -2,6 +2,7 @@
 
 **Catégorie :** P1_sdb
 **Statut :** spécification validée le 2026-09-28 et déployée en production le même jour (voir section 7)
+**Mise à jour :** 2026-09-29, sécurités ajoutées et cycle réel validé (voir section 8)
 **Ancienne fiche conservée :** `A_SOUFFLANT_SDB_old_2024-2025.md`
 
 ## 1. État des lieux relevé le 2026-09-28
@@ -102,6 +103,66 @@ Exports : `docs_automations_YAML/P1_sdb/h_soufflant_sdb_routage.yaml` et
 Le piège de nommage reste en place : l'automation dont l'identifiant parle de soufflant salle
 de bain (`bouton_ikea_rodret_soufflant_sdb_gestion_on_off_json`) pilote toujours le salon.
 
+## 8. Mise à jour du 2026-09-29
+
+### 8.1 Sécurités ajoutées dans les scripts
+
+| Ajout | Où | Effet |
+|:--|:--|:--|
+| Garde 25 degrés | `sdb_soufflant_demarrer`, première ligne de la séquence | Refus de démarrer si la salle de bain est à 25 degrés ou plus. Placée avant le verrou, la prise et l'infrarouge. |
+| Affichage du climate | `sdb_soufflant_demarrer` après les impulsions, `sdb_soufflant_arreter` en fin de séquence | Le climate passe en heat au démarrage et sur off à l'arrêt, comme le faisait l'automation de février. |
+| Arrêt forcé 60 minutes | `sdb_soufflant_demarrer`, fin de séquence | Si l'interrupteur est encore en marche après une heure, il est éteint et la séquence d'arrêt enchaîne. Le compte démarre à la fin du verrou, l'arrêt tombe donc environ 62 minutes après l'appui. |
+
+La garde des 25 degrés doit rester la première ligne. Placée plus bas, un refus laissait le verrou
+posé et bloquait toute commande d'arrêt, ce qui s'est produit lors des essais du 2026-09-29.
+
+### 8.2 Cycle réel validé
+
+Appui sur le bouton Rodret le 2026-09-29 à 17 h 46 : interrupteur en marche, séquence de démarrage,
+prise alimentée, appareil en chauffe. Appui à 17 h 48 : interrupteur remis sur arrêt, arrêt refusé
+pendant le verrou, puis séquence d'arrêt. Le compteur d'énergie est passé de 187,55 à 187,77 kWh,
+soit environ 2 kW pendant trois minutes. Le cycle décrit en section 3 est donc conforme.
+
+### 8.3 Mesure de puissance de la prise : diagnostic clos
+
+La puissance et le courant de `switch.prise_soufflant_salle_de_bain_nous` restaient à zéro alors que
+le compteur d'énergie montait. Après réapplication de la configuration depuis l'interface Zigbee2MQTT
+le 2026-09-29 à 17 h 29, la prise publie de nouveau ses rapports : 1645 W relevés en pleine chauffe.
+Les capteurs `sensor.sdb_soufflant_etat` et `sensor.sdb_soufflant_power_status` restent néanmoins
+calculés sur cette puissance avec un seuil de 20 W : une prise muette les fige sur éteint, et ils ne
+suivent donc pas le bouton.
+
+### 8.4 Thermostat de la salle de bain
+
+`climate.soufflant_salle_de_bain` est un `generic_thermostat` dont le chauffage est
+`switch.inter_soufflant_salle_de_bain`, c'est-à-dire l'interrupteur du montage lui-même. Consigne
+portée de 21 à 32 degrés le 2026-09-29, bornes réglées entre 21 et 32. Conséquences vérifiées : à
+consigne plus basse que la température de la pièce, le passage en heat coupe l'interrupteur dans la
+seconde et interrompt la séquence ; à consigne plus haute, il laisse chauffer mais rallume
+l'interrupteur tout seul dès qu'il le trouve éteint, et il coupe à la consigne plus la tolérance. Ce
+thermostat commande donc réellement le montage, il n'est pas un simple affichage. Deux voies restent
+ouvertes : le laisser ainsi, ou lui retirer l'interrupteur pour qu'il devienne un voyant.
+
+### 8.5 Watchdog : remis en service mais inopérant
+
+`D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR` a été réactivée le 2026-09-29. Elle est
+correctement câblée, mais elle n'a jamais déclenché : son compteur d'exécutions est à zéro. Sa
+quatrième condition exige une hausse de 0,5 degré entre deux mesures consécutives, alors que le
+capteur de la salle de bain remonte par pas de 0,2 (25,5 puis 25,7 puis 25,9 puis 26,1). La
+condition est donc infaisable en pratique. Depuis que le script refuse de démarrer au-dessus de
+25 degrés, cette condition de dérive est devenue inutile : les trois autres suffisent.
+
+### 8.6 Points ouverts au 2026-09-29
+
+- Quand le script refuse un démarrage, l'interrupteur reste en marche sans effet : rien ne le remet
+  sur arrêt, et le tableau de bord affiche un appareil en marche qui ne chauffe pas.
+- Le compte d'une heure vit dans le script : un redémarrage de Home Assistant pendant la marche
+  l'efface. L'automation de février, elle, se réarmait seule après un redémarrage.
+- Aucune des trois sécurités n'a été observée en fonctionnement réel, la garde des 25 degrés
+  interdisant tout démarrage tant que la pièce reste au-dessus.
+- Les capteurs `sdb_soufflant_etat` et `sdb_soufflant_power_status` restent faux quand la prise ne
+  publie pas sa puissance : mieux vaudrait les calculer sur l'interrupteur.
+
 ---
 
-*Fiche créée le 2026-09-28, déploiement consigné le même jour.*
+*Fiche créée le 2026-09-28, déploiement consigné le même jour. Mise à jour du 2026-09-29.*

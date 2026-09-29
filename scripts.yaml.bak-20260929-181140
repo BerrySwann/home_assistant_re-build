@@ -564,10 +564,6 @@ sdb_soufflant_demarrer:
   description: '[EXECUTANT] Prise ON, mise en route IR, 2 impulsions 1000 W, verrou 2 min.'
   mode: single
   sequence:
-    - alias: "SECURITE : refus de demarrer au-dessus de 25 degres (comme l'automation de fevrier)"
-      condition: numeric_state
-      entity_id: sensor.th_salle_de_bain_temperature
-      below: 25
     - alias: "Attendre la fin d'une sequence d'arret en cours"
       wait_template: "{{ is_state('script.sdb_soufflant_arreter', 'off') }}"
       timeout: "00:02:00"
@@ -603,12 +599,6 @@ sdb_soufflant_demarrer:
         entity_id: input_select.etat_resistance_soufflant_sdb
       data:
         option: 2000W
-    - alias: "Affichage du climate : heat (comme l'automation de fevrier)"
-      action: climate.set_hvac_mode
-      target:
-        entity_id: climate.soufflant_salle_de_bain
-      data:
-        hvac_mode: heat
     - alias: "VERROU : deux minutes de marche protegee"
       delay: "00:02:00"
     - alias: "LEVER LE VERROU"
@@ -625,19 +615,6 @@ sdb_soufflant_demarrer:
             - action: script.turn_on
               target:
                 entity_id: script.sdb_soufflant_arreter
-    - alias: "SECURITE : arret force apres 60 minutes de marche"
-      wait_template: "{{ is_state('switch.inter_soufflant_salle_de_bain', 'off') }}"
-      timeout: "01:00:00"
-      continue_on_timeout: true
-    - alias: "SECURITE : si l'appareil tourne encore, l'eteindre (la sequence d'arret enchaine)"
-      if:
-        - condition: state
-          entity_id: switch.inter_soufflant_salle_de_bain
-          state: "on"
-      then:
-        - action: switch.turn_off
-          target:
-            entity_id: switch.inter_soufflant_salle_de_bain
 
 # ╭──────────────────────────────────────────────────────────────────────────────╮
 # │ SDB - SOUFFLANT : SEQUENCE D'ARRET (2026-09-28)                             │
@@ -677,9 +654,3 @@ sdb_soufflant_arreter:
       action: switch.turn_off
       target:
         entity_id: switch.prise_soufflant_salle_de_bain_nous
-    - alias: "Affichage du climate : off (comme l'automation de fevrier)"
-      action: climate.set_hvac_mode
-      target:
-        entity_id: climate.soufflant_salle_de_bain
-      data:
-        hvac_mode: 'off'

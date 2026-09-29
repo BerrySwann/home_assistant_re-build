@@ -1683,7 +1683,7 @@
           title: Veille détectée
   mode: single
 - id: '1775331166275'
-  alias: 'D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR'
+  alias: 'D - SALLE DE BAIN : WATCHDOG SÉCURITÉ SOUFFLANT'
   description: Reset physique si T > 25°C, uniquement si la prise est alimentée
   triggers:
   - alias: 'TRIGGER : CHANGEMENT TEMPÉRATURE SDB'
@@ -2610,78 +2610,71 @@
 
         '
   mode: single
-
-# ╭──────────────────────────────────────────────────────────────────────────────╮
-# │ SDB - SOUFFLANT : VERSION FINALE 2026/2027 (ajoute le 2026-09-28)           │
-# ╰──────────────────────────────────────────────────────────────────────────────╯
 - id: '1790623332289'
-  alias: 'SDB - SOUFFLANT - ROUTAGE (interrupteur vers sequences)'
-  description: >-
-    Entree unique du soufflant de la salle de bain : l'interrupteur virtuel
-    (bouton du tableau de bord) declenche le demarrage ou l'arret. Le verrou de
-    deux minutes est tenu par les scripts. Aucun automatisme de temperature.
+  alias: SDB - SOUFFLANT - ROUTAGE (interrupteur vers sequences)
+  description: 'Entree unique du soufflant de la salle de bain : l''interrupteur virtuel
+    (bouton du tableau de bord) declenche le demarrage ou l''arret. Le verrou de deux
+    minutes est tenu par les scripts. Aucun automatisme de temperature.'
   triggers:
-    - alias: 'Interrupteur SDB sur ON'
-      trigger: state
-      entity_id: switch.inter_soufflant_salle_de_bain
-      to: 'on'
-      id: marche
-    - alias: 'Interrupteur SDB sur OFF'
-      trigger: state
-      entity_id: switch.inter_soufflant_salle_de_bain
-      to: 'off'
-      id: arret
+  - alias: Interrupteur SDB sur ON
+    trigger: state
+    entity_id: switch.inter_soufflant_salle_de_bain
+    to: 'on'
+    id: marche
+  - alias: Interrupteur SDB sur OFF
+    trigger: state
+    entity_id: switch.inter_soufflant_salle_de_bain
+    to: 'off'
+    id: arret
   conditions: []
   actions:
-    - choose:
-        - conditions:
-            - condition: trigger
-              id: marche
-          sequence:
-            - action: script.turn_on
-              target:
-                entity_id: script.sdb_soufflant_demarrer
-        - conditions:
-            - condition: trigger
-              id: arret
-          sequence:
-            - action: script.turn_on
-              target:
-                entity_id: script.sdb_soufflant_arreter
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: marche
+      sequence:
+      - action: script.turn_on
+        target:
+          entity_id: script.sdb_soufflant_demarrer
+    - conditions:
+      - condition: trigger
+        id: arret
+      sequence:
+      - action: script.turn_on
+        target:
+          entity_id: script.sdb_soufflant_arreter
   mode: single
-
 - id: '1790623332290'
-  alias: 'SDB - SOUFFLANT - BOUTON IKEA RODRET (MQTT vers interrupteur)'
-  description: >-
-    Le bouton IKEA Rodret de la salle de bain pilote l'interrupteur virtuel, qui
-    declenche ensuite les sequences. Topic Zigbee2MQTT : Inter Soufflant Salle de
-    Bain (IKEA RODRET)/action.
+  alias: SDB - SOUFFLANT - BOUTON IKEA RODRET (MQTT vers interrupteur)
+  description: 'Le bouton IKEA Rodret de la salle de bain pilote l''interrupteur virtuel,
+    qui declenche ensuite les sequences. Topic Zigbee2MQTT : Inter Soufflant Salle
+    de Bain (IKEA RODRET)/action.'
   triggers:
-    - alias: 'Appui bouton I (marche)'
-      trigger: mqtt
-      topic: 'zigbee2mqtt2/Inter Soufflant Salle de Bain (IKEA RODRET)/action'
-      payload: 'on'
-      id: rodret_on
-    - alias: 'Appui bouton O (arret)'
-      trigger: mqtt
-      topic: 'zigbee2mqtt2/Inter Soufflant Salle de Bain (IKEA RODRET)/action'
-      payload: 'off'
-      id: rodret_off
+  - alias: Appui bouton I (marche)
+    trigger: mqtt
+    topic: zigbee2mqtt2/Inter Soufflant Salle de Bain (IKEA RODRET)/action
+    payload: 'on'
+    id: rodret_on
+  - alias: Appui bouton O (arret)
+    trigger: mqtt
+    topic: zigbee2mqtt2/Inter Soufflant Salle de Bain (IKEA RODRET)/action
+    payload: 'off'
+    id: rodret_off
   conditions: []
   actions:
-    - choose:
-        - conditions:
-            - condition: trigger
-              id: rodret_on
-          sequence:
-            - action: switch.turn_on
-              target:
-                entity_id: switch.inter_soufflant_salle_de_bain
-        - conditions:
-            - condition: trigger
-              id: rodret_off
-          sequence:
-            - action: switch.turn_off
-              target:
-                entity_id: switch.inter_soufflant_salle_de_bain
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: rodret_on
+      sequence:
+      - action: switch.turn_on
+        target:
+          entity_id: switch.inter_soufflant_salle_de_bain
+    - conditions:
+      - condition: trigger
+        id: rodret_off
+      sequence:
+      - action: switch.turn_off
+        target:
+          entity_id: switch.inter_soufflant_salle_de_bain
   mode: single

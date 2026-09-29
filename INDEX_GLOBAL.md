@@ -1,6 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-09-29 (soir) - soufflant SDB : garde 25 degrés en première ligne du script de démarrage, affichage du climate en heat à l'allumage et off à l'arrêt, arrêt forcé après 60 minutes de marche dans le script ; watchdog radiateur réactivé mais inopérant (condition de dérive infaisable avec un capteur à pas de 0,2, jamais déclenché) ; prise de la salle de bain réarmée, la puissance remonte de nouveau (1645 W relevés) ; thermostat passé de 21 à 32 degrés de consigne ; copies de doc des scripts et copie config_system_YAML resynchronisées avec la production ; fiches P1_SDB complétées*
 *Dernière mise à jour : 2026-09-28 (soir) - soufflant SDB version finale 2026/2027 : 2 automations (routage + bouton Rodret MQTT), 2 scripts (demarrage 2000 W avec verrou 2 min, arret resistances + ventilateur 1 min 30 + prise), verrou input_boolean, exports YAML et fiche de specification ; correction de 3 liens morts (dossier energie devenu P0_energie, faute « dinamique »), entité du bouton salle de bain renommée, renvoi vers la carte des dépendances à jour*
 *Dernière mise à jour : 2026-09-24 - HOME PAGE + L1C2 + L5C1 : carte Congélateur (contact porte, seuils 26/48/235), batterie porte_congel (groupe SONOFF à 13)*
 *Dernière mise à jour : 2026-09-23 - section P2 Prises (correctif eco + refonte PC/TV + spies)*
@@ -4032,7 +4033,9 @@ Script (obsolète, non présent dans docs_scripts_YAML/) : <code>j_2_0_secu_arre
 <blockquote>
 📄 <a href="docs/03_docs_automations/docs_automations_MD/P1_SDB/SDB_SOUFFLANT_SPECIFICATION_2026.md">Doc</a><br>
 ⚙️ <a href="docs/04_docs_scripts/docs_scripts_YAML/sdb_soufflant_demarrer.yaml">YAML source</a><br>
-Appelé par l'automation H (section 03). Pose le verrou, alimente la prise, 2 impulsions 1000 W.
+Appelé par l'automation H (section 03). Refuse de démarrer si la salle de bain est à 25 degrés ou
+plus (première ligne, avant le verrou). Pose le verrou, alimente la prise, 2 impulsions 1000 W,
+passe le climate en heat, et éteint l'interrupteur si l'appareil tourne encore après 60 minutes.
 </blockquote>
 </details>
 
@@ -4041,7 +4044,8 @@ Appelé par l'automation H (section 03). Pose le verrou, alimente la prise, 2 im
 <blockquote>
 📄 <a href="docs/03_docs_automations/docs_automations_MD/P1_SDB/SDB_SOUFFLANT_SPECIFICATION_2026.md">Doc</a><br>
 ⚙️ <a href="docs/04_docs_scripts/docs_scripts_YAML/sdb_soufflant_arreter.yaml">YAML source</a><br>
-Appelé par l'automation H (section 03). Refusé pendant le verrou de demarrage.
+Appelé par l'automation H (section 03). Refusé pendant le verrou de démarrage. Remet le climate
+sur off à la fin, après la coupure de la prise.
 </blockquote>
 </details>
 

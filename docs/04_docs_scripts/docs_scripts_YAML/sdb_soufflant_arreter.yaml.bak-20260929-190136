@@ -6,7 +6,6 @@
 # Coupure des deux resistances, ventilateur une minute trente pour les
 # refroidir, puis coupure de la prise pour ne pas payer les 4 W de veille.
 # Refuse de s'executer pendant le verrou de demarrage.
-# Remet l'affichage du climate sur off quand la coupure est faite.
 #
 # ## CHAINE DE DEPENDANCES :
 #
@@ -14,17 +13,10 @@
 # |:--------------|:----------------------------------|:----------------------|:-------------------------|
 # | [virtuel/UI]  | automation SDB - SOUFFLANT - ROUTAGE
 #
-# ## SECURITES (2026-09-29) :
-# - Affichage du climate : passage sur off a la fin, apres la coupure de la prise.
-#   Place apres le dernier controle, donc un arret refuse (appareil rallume) ne
-#   remet pas le climate sur off.
-#
 # ## ETAT :
 # - Deploye en prod le 2026-09-28 dans scripts.yaml, recharge sans redemarrage.
-# - Complete le 2026-09-29 : climate off en fin de sequence, recharge OK.
 #
 # --- version finale 2026/2027 du soufflant salle de bain ---
-
 
 sdb_soufflant_arreter:
   alias: "SDB - Soufflant : ARRET (resistances, ventilateur 1 min 30, prise)"
@@ -58,9 +50,4 @@ sdb_soufflant_arreter:
       action: switch.turn_off
       target:
         entity_id: switch.prise_soufflant_salle_de_bain_nous
-    - alias: "Affichage du climate : off (comme l'automation de fevrier)"
-      action: climate.set_hvac_mode
-      target:
-        entity_id: climate.soufflant_salle_de_bain
-      data:
-        hvac_mode: 'off'
+
