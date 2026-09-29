@@ -95,7 +95,7 @@
 ---
 
 ## Cohérence Documentaire (anti-oubli)
-- À chaque modif YAML dans `docs/01_docs_config_system/config_system_YAML/` → vérifier impact vignette (`docs/02_docs_dashboard/dashboard_docs_MD/L*`) + chaîne dépendances.
+- À chaque modif YAML dans `docs/` → vérifier impact vignette (`docs/02_docs_dashboard/dashboard_docs_MD/L*`) + chaîne dépendances.
 - Si rupture cohérence → proposer update `docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md` ou `/sync_index`.
 - Tâche non terminée si code OK mais doc dépendances obsolète.
 
@@ -116,9 +116,9 @@
 - `/status` → résumé 3 points avancement du projet.
 - `/histo` → journal de bord compact, sauvegarde dans `historique/`.
 - `/ha_new_yaml` → génère un squelette YAML conforme (bordures ASCII, headers, slug, name/unique_id).
-- `/ha_push_yaml` → pousse un fichier YAML de `docs/01_docs_config_system/config_system_YAML/` vers prod `H:\`.
+- `/ha_push_yaml` → pousse un fichier YAML de `docs/` vers prod `H:\`.
 - `/ha_push_docs` → synchronise les docs locales `docs/` vers `H:\Docs\`.
-- `/ha_resync_tree` → resynchronise `docs/01_docs_config_system/config_system_YAML/` depuis GitHub (audit MD5).
+- `/ha_resync_tree` → resynchronise `docs/` depuis GitHub (audit MD5).
 
 ## PROTOCOLE FIN DE SESSION (OBLIGATOIRE)
 
@@ -156,7 +156,7 @@ Les 2 dernieres actions avant de fermer Cowork, dans cet ordre :
 | **2** | **GitHub `home_assistant_re-build`** | Reflet prod - backup git auto depuis HA |
 | **3** | **Local `ReBuild/`** | Poste de travail - corrections/modifications YAML |
 
-Sens : **prod → GitHub → local**. Le local doit converger vers prod. Une fois les corrections terminées dans `docs/01_docs_config_system/config_system_YAML/`, l'état local doit être équivalent à prod (validé par audit MD5).
+Sens : **prod → GitHub → local**. Le local doit converger vers prod. Une fois les corrections terminées dans `docs/`, l'état local doit être équivalent à prod (validé par audit MD5).
 
 ### 📄 DOCS (.md + .yaml dashboard) - LOCAL = source de vérité
 
@@ -179,7 +179,7 @@ Sens : **local → H:\Docs\ → GitHub**. En cas de conflit, local l'emporte tou
 
 ### Règles fondamentales
 - Répertoires préfixés `P*_` selon le Pôle.
-- `docs/01_docs_config_system/config_system_YAML/` = YAML config HA (état cible → /homeassistant/) - audité 1×/semaine.
+- `docs/` = YAML config HA (état cible → /homeassistant/) - audité 1×/semaine.
 - `docs/03_docs_automations/docs_automations_YAML/` = automations individuelles (référence locale).
 - `docs/02_docs_dashboard/dashboard_docs_YAML/` = vignettes/pages dashboard.
 - ⛔ `TREE_CORRIGE/` et `TREE_ORIGINE/` **n'existent plus** - tout est sous `docs/`.
@@ -190,7 +190,7 @@ Sens : **local → H:\Docs\ → GitHub**. En cas de conflit, local l'emporte tou
 
 | Type | Injection en prod | Extraction / stockage local |
 |:-----|:-------------------|:-----------------------------|
-| **Config YAML** (sensors/templates/UM/command_line) | Accès filesystem direct `/config` sur le serveur HA | **Claude** récupère le fichier modifié et le stocke dans `docs/01_docs_config_system/config_system_YAML/{pole}/`, une fois validé par Eric |
+| **Config YAML** (sensors/templates/UM/command_line) | Accès filesystem direct `/config` sur le serveur HA | **Claude** récupère le fichier modifié et le stocke dans `docs/{pole}/`, une fois validé par Eric |
 | **Automations** | Toujours à la main dans l'UI HA (Eric), jamais `automations.yaml` en direct | Une fois validée, **Claude** récupère uniquement le bloc modifié et le stocke individuellement dans `docs/03_docs_automations/docs_automations_YAML/{Pole}/` |
 | **Dashboard** | Toujours à la main dans l'UI HA (Paramètres → Tableau de bord → Modifier en YAML) | Pas d'extraction automatique - **Eric** récupère le code à la main et le colle. **Claude** vérifie, horodate (nom de version), stocke dans `docs/02_docs_dashboard/dashboard_docs_YAML/L{x}C{x}_.../`, supprime la version la plus ancienne des 3 après validation |
 
@@ -220,7 +220,7 @@ find . -type f -name "*.yaml" -print0 | sort -z | xargs -0 md5sum | sed 's|\./||
 
 | Priorité | Périmètre | Raison |
 |:---------|:----------|:-------|
-| **🔴 CRITIQUE** | `docs/01_docs_config_system/config_system_YAML/` (sensors/, templates/, utility_meter/, command_line/) | Fichiers déployés dans `/homeassistant/` - un écart peut casser HA |
+| **🔴 CRITIQUE** | `docs/` (sensors/, templates/, utility_meter/, command_line/) | Fichiers déployés dans `/homeassistant/` - un écart peut casser HA |
 | **🔴 CRITIQUE** | `automations.yaml` GitHub vs `docs/03_docs_automations/docs_automations_YAML/` | Détecter ajouts/suppressions/renommages depuis HA |
 | **🟡 SECONDAIRE** | `docs/02_docs_dashboard/dashboard_docs_YAML/` vs `H:\Docs\` | UI seulement - ne casse pas HA |
 

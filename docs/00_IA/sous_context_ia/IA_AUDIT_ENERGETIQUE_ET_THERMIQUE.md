@@ -182,7 +182,7 @@ Tu disposes de sources d'information critiques :
 | Source | Description |
 |:-------|:------------|
 | `docs/00_IA/IA_CONTEXT_BASE.md` | Structure physique (Simple vitrage, Dernier étage, Traversant) |
-| `docs/01_docs_config_system/config_system_YAML/notifs/diag_conso_elec.txt` | Logs horaires réels (la vérité du terrain) |
+| `docs/notifs/diag_conso_elec.txt` | Logs horaires réels (la vérité du terrain) |
 | `automations.yaml` (+ `docs/03_docs_automations/docs_automations_YAML/`) | Le code qui pilote le chauffage et les ouvrants |
 | `docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim.yaml` | Logique déléguée jour/nuit clim (script maître, créé 2026-06 - remplace l'ancien découpage j_1_1/j_1_2/j_1_3) |
 | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Calcul saison (`sensor.mode_ete_hiver`), température cible/confort |

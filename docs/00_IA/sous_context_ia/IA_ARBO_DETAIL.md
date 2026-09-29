@@ -1,5 +1,5 @@
 # 🌳 ARBORESCENCES COMPLÈTES & INDEX GITHUB
-*Dernière mise à jour : 2026-09-28 (relevés LOCAL + PROD + GitHub rafraîchis par comptage automatique ; dossiers `_ARCHIVE` et `_old_avant_staging` notés)*
+*Dernière mise à jour : 2026-09-29 (relevés LOCAL + PROD + GitHub rafraîchis par comptage automatique ; dossiers `_ARCHIVE` et `_old_avant_staging` notés)*
 *Lire ce fichier si : audit fichiers, sync GitHub, recherche d'un fichier prod, vérification arbo locale, URLs raw GitHub.*
 
 ---
@@ -12,35 +12,37 @@
 | Prod H:\ (Windows, insensible à la casse) | `docs/` (renommé 2026-07-19, ex `Docs/`) |
 | **GitHub (case-sensitive)** | `docs/` (tout minuscule depuis 2026-07-19) |
 
-> ⚠️ **Changement du 2026-07-19** : le dossier était `Docs/` (D majuscule) jusqu'au 07-18. Renommé en `docs/` (tout minuscule) côté H:\, puis pushé sur GitHub qui ne fait plus du tout la distinction historique - **tous les liens doivent utiliser `docs/` minuscule**. Les 385 liens de `INDEX_GLOBAL.md` ont été réécrits en conséquence le 2026-07-19 (247/249 OK, 2 morts = entrée Gardien Éco connue).
+> ⚠️ **Changement du 2026-07-19** : le dossier était `Docs/` (D majuscule) jusqu'au 07-18. Renommé en `docs/` (tout minuscule) côté H:\, puis pushé sur GitHub - **tous les liens doivent utiliser `docs/` minuscule**. Les 385 liens de `INDEX_GLOBAL.md` ont été réécrits le 2026-07-19 ; l'index a été intégralement réécrit le 2026-09-29 (**255 liens, 0 mort**).
 > GitHub reste **case-sensitive** : ne jamais écrire `Docs/` ni `docs/` dans un lien vers le repo.
 
 ---
 
-## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-09-28)
+## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-09-29)
 
 ```text
-ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\ - relevé 2026-09-28)
-├── CLAUDE.md                           (source de vérité contexte - sync avec IA_CONTEXT_BASE.md)
-│   · CLAUDE_backup_2026-07-31.md · CLAUDE_backup_2026-08-01.md   (backups)
-├── TODO.txt · a mettre en place.txt    (backlog projet)
-├── ha-erodi.html · index.html          (maquettes - l'architecture HA est dans docs/00_IA/ha-erodi-architecture.html)
-├── presentation_HACF_2026.md/.txt · PROMPT_REPRODUCTION_ha-erodi.md · prompt_site_HA.txt · PROMPT_TEMPLATE_SITE_WEB.md · histo_2026-08-07.txt
-├── autounattend_FR.xml · z2m-backup.*.zip   (hors périmètre HA)
-├── Github/                             (INDEX_GLOBAL.md · README.md - miroirs travail du repo)
-├── HTML/                               (41 fichiers - maquettes/captures)
+ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\ - relevé 2026-09-29)
+├── 17 fichiers racine
+│   CLAUDE.md                           (source de vérité contexte - sync avec IA_CONTEXT_BASE.md)
+│   CLAUDE_backup_2026-07-31.md · CLAUDE_backup_2026-08-01.md   (backups)
+│   TODO.txt · a mettre en place.txt    (backlog projet)
+│   ha-erodi.html · index.html          (maquettes - l'architecture HA est dans docs/00_IA/ha-erodi-architecture.html)
+│   presentation_HACF_2026.md/.txt · PROMPT_REPRODUCTION_ha-erodi.md · prompt_site_HA.txt · PROMPT_TEMPLATE_SITE_WEB.md · histo_2026-08-07.txt
+│   hermes_cle_ssh.pub                  (cl publique SSH)
+│   autounattend_FR.xml · z2m-backup.2.10.1.*.zip   (hors périmètre HA)
+├── Github/                             (10 dont 8 sauvegardes - INDEX_GLOBAL.md · README.md, miroirs travail du repo)
+├── HTML/                               (41 - maquettes/captures)
 ├── prompt/ · Claude outputs/ · _old_avant_staging/ · energie/   (travaux et conteneurs)
 ├── Infra_Proxmox/                      (réseau, certs - + save/)
-├── scripts/                            (4 - audit_md5_md.sh · audit_md5_yaml.sh · ha_git_backup.sh · hermes_gen_dependances.py)
-├── historique/                         (97 - JOURNAL_COMPLET_*.md · histo_YYYY-MM-DD_S*.txt · archives MD5 / P2_ui_dashboard.retire)
-└── docs/                               (603 fichiers)
-    ├── 00_IA/                          (20 - IA_CONTEXT_BASE.md · ha-erodi-architecture.html · RAPPORT_AUDIT_ENERGETIQUE_*.md ×2 · Grille_Tarif_Bleu_EDF_2026-08-01.csv · confort_cible_calcul_flow.png)
-    │   └── sous_context_ia/            (11 fichiers - 8 sous-contextes IA_*.md + index arbo + sauvegardes)
-    ├── 01_docs_config_system/          (103 - config_system_MD · config_system_YAML)
-    ├── 02_docs_dashboard/              (229 - dashboard_docs_MD · dashboard_docs_YAML)
-    ├── 03_docs_automations/            (224 - docs_automations_MD · docs_automations_YAML)
-    ├── 04_docs_scripts/                (16 - SH · SH_MD · YAML · YAML_MD)
-    └── 05_docs_MD_system/              (9)
+├── scripts/                            (5 - audit_md5_md.sh · audit_md5_yaml.sh · check_yaml_forme.py · ha_git_backup.sh · hermes_gen_dependances.py)
+├── historique/                         (101 dont 2 sauvegardes - JOURNAL_COMPLET_*.md · histo_YYYY-MM-DD_S*.txt · ARCHIVE_SESSIONS_HA_2026-03-15_2026-05-14.md · archives MD5)
+└── docs/                               (515 fichiers dont 50 sauvegardes)
+    ├── 00_IA/                          (22 dont 8 sauvegardes - IA_CONTEXT_BASE.md · ha-erodi-architecture.html · RAPPORT_AUDIT_ENERGETIQUE_*.md ×2 · Grille_Tarif_Bleu_EDF_2026-08-01.csv/.pdf · confort_cible_calcul_flow.png)
+    │   └── sous_context_ia/            (13 dont 5 sauvegardes - 8 sous-contextes IA_*.md + index arbo)
+    ├── 01_docs_config_system/          (4 dont 2 sauvegardes - config_system_MD/configuration.md · config_system_YAML/configuration.yaml, gardé par sécurité)
+    ├── 02_docs_dashboard/              (230 dont 28 sauvegardes - dashboard_docs_MD · dashboard_docs_YAML)
+    ├── 03_docs_automations/            (228 dont 9 sauvegardes - docs_automations_MD · docs_automations_YAML)
+    ├── 04_docs_scripts/                (21 - SH · SH_MD · YAML · YAML_MD)
+    └── 05_docs_MD_system/              (8 dont 3 sauvegardes)
 ```
 
 **Dossiers d'archive** (contenu sorti du flux, gardé pour l'historique) :
@@ -48,25 +50,29 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 
 > ⛔ `TREE_CORRIGE/`, `TREE_ORIGINE/`, `Dashboard/`, `docs_dashboard/`, `docs_automations/`, `docs_scripts/`, `IA/` racine : **supprimés le 2026-07-14** - toute référence à ces chemins est morte.
 
+> 🗑️ **Purge du 2026-09-29** : `docs/01_docs_config_system/config_system_YAML` vidé de 104 YAML de configuration (les sources sont la prod et le dépôt, la copie locale n'était qu'un risque) - il ne reste que `configuration.yaml`. Le dossier `P3` des boutons virtuels du salon a été supprimé (local + prod + dépôt) et ses 4 entités purgées du registre Home Assistant. Les 2 fichiers `WORKFLOW_REBUILD.md` ont été supprimés, leur contenu unique conservé ailleurs.
+
 ---
 
-## 🌳 ARBORESCENCE - PROD /homeassistant/ (= H:\ - relevé SMB 243 le 2026-09-28)
+## 🌳 ARBORESCENCE - PROD /homeassistant/ (= H:\ - relevé 2026-09-29)
 
 ```text
-/homeassistant/   (relevé SMB 243 le 2026-09-28 ; = H:\)
+/homeassistant/   (relevé 2026-09-29 ; = H:\)
 │
 ├── Fichiers racine :
 │   configuration.yaml · automations.yaml · scripts.yaml · scenes.yaml · secrets.yaml
 │   input_button.yaml · input_datetime.yaml · input_select.yaml · sql.yaml · ip_bans.yaml
 │   INDEX_GLOBAL.md · README.md · Dashboard_2026_09_24.yaml (export le plus récent)
-│   .HA_VERSION · .gitignore · home-assistant_v2.db · home-assistant.log.fault
+│   .HA_VERSION · .gitignore · .ha_run.lock · home-assistant_v2.db · home-assistant.log.fault
+│   sauvegardes : automations.yaml.bak ×2 · INDEX_GLOBAL.md.bak ×2 · scripts.yaml.bak ×3
 │
-├── .scripts/                           (5)
+├── .scripts/                           (6)
 │   ├── audit_md5_yaml.sh               (audit YAML)
 │   ├── audit_md5_md_yaml.sh            (audit MD + YAML - boutons page L5C3)
+│   ├── check_yaml_forme.py             (contrôle de forme des YAML - ajouté 2026-09-29)
 │   ├── ha_git_backup.sh                (backup git → GitHub)
 │   ├── correct_linky.py                (rattrapage Linky/Nodon - 2026-09-01)
-│   └── #MP_01_monitor_temp.sh.#        (⛔ NE PAS TOUCHER - actif Raspberry Pi)
+│   └── #MP_01_monitor_temp.sh.#        (résidu d'éditeur, statut à élucider)
 │
 ├── blueprints/                         (1 - template/homeassistant/inverted_binary_sensor.yaml, natif HA)
 ├── command_line/                       (6)
@@ -76,7 +82,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   ├── meteo/carte_meteo_france.yaml
 │   └── energie/histo_energie.yaml      (histo Linky/Nodon - 2026-09-03)
 ├── groups/                             (3 + 1 sauvegarde - GRP_01_batteries_hue · GRP_02_batteries_ikea · GRP_03_batteries_sonoff)
-├── input_booleans/                     (5 - P1/2 · P3/2 · P4/1)
+├── input_booleans/                     (3 - P1/2 · P4/1)   [P3 supprimé le 2026-09-29]
 ├── input_number/input_number.yaml      (1)
 ├── notifs/                             (5 .txt - diag_conso_elec · ecart_liky_vs_nodon · ecart_histo · linky_histo · nodon_histo)
 ├── shell_command/                      (3 - Ghithub/backup_github · P0/P0_correct_linky · P4/P4_log_eric_zone)
@@ -86,8 +92,8 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   ├── P1_clim_chauffage/ (P1_DUT/P1_DUT_clim_chauffage)
 │   └── meteo/ (M_meteo_sensors_blitzortung)
 │
-├── templates/                          (45)
-│   ├── Air_quality/ (1) · Inter_BP_Virtuel/ (P1/1 · P3/2) · Stores/ (1) · utilitaires/ (3 - jour_nuit · Mise_a_jour_home_assistant · nb_fenetre_ouvert_ferme_autom)
+├── templates/                          (43)   [2 supprimés le 2026-09-29 : P3 du salon]
+│   ├── Air_quality/ (1) · Inter_BP_Virtuel/P1/ (1 - soufflant SdB) · Stores/ (1) · utilitaires/ (3 - jour_nuit · Mise_a_jour_home_assistant · nb_fenetre_ouvert_ferme_autom)
 │   ├── meteo/ (5 - M_01 → M_05)
 │   ├── P0_Energie_total_diag/ (P0_Diag/3 · P0_Genelec_appart/3 · P0_Linky/1 · P0_total_pour_les_7_postes/1)
 │   ├── P1_clim_chauffage/ (P1_01_MASTER/3 · P1_AVG/2 [P1_AVG_AMHQ_TOTAL · P1_AVG_AMHQ_UNITE] · P1_DUT_TOTAL/1 · P1_TOTAL/1 · P1_ui_dashboard/1)
@@ -103,16 +109,16 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   └── meteo/ (M_03_meteo_UM_blitzortung)
 │
 ├── custom_components/ · themes/ · tts/ · www/ · deps/   (divers, hors périmètre docs HA)
-└── docs/                               (492 - miroir pushé depuis local docs/ - JAMAIS de YAML config ici)
-    ├── 00_IA/                          (15 - 6 racine + sous_context_ia/8 + 1 sauvegarde)
-    ├── 01_docs_config_system/          (105 - config_system_MD · config_system_YAML)
-    ├── 02_docs_dashboard/              (187 - dashboard_docs_MD · dashboard_docs_YAML)
-    ├── 03_docs_automations/            (160 - docs_automations_MD · docs_automations_YAML)
-    ├── 04_docs_scripts/                (16 - SH/6 · SH_MD/3 · YAML/4 · YAML_MD/3)
-    └── 05_docs_MD_system/              (6)
+└── docs/                               (474 dont 6 sauvegardes - miroir pushé depuis local docs/)
+    ├── 00_IA/                          (18 dont 3 sauvegardes - 6 racine + sous_context_ia/8 + sauvegardes)
+    ├── 01_docs_config_system/          (2 - config_system_MD/configuration.md + config_system_YAML/configuration.yaml, gardé par sécurité)
+    ├── 02_docs_dashboard/              (204 - dashboard_docs_MD · dashboard_docs_YAML)
+    ├── 03_docs_automations/            (220 - docs_automations_MD · docs_automations_YAML)
+    ├── 04_docs_scripts/                (22 - SH/6 · SH_MD/3 · YAML/9 · YAML_MD/3 + 2 sauvegardes)
+    └── 05_docs_MD_system/              (5 - ENTITES_INDEX.md · MOC_DEPENDANCES.md · RAPPORT_TRI_ENTITES_2026-09-20.md · map_of_content_obsidian/ · matrisse_template_doc/)
 ```
 
-**Supprimés de prod (ne jamais recréer)** : `mqtt/` (capteur NodOn chambre, nettoyé 2026-07-18) · `packages/` (cssmeteo, retiré ~07/2026) · `camera.yaml` · `shell_command.yaml` monolithique · `#sensors.yaml` / `#templates.yaml` / `#utility_meter.yaml` désactivés · `templates/Mini-PC/` (capteurs lus à la source) · `templates/P2_prise/P2_ui_dashboard/` (retiré le 2026-09-20).
+**Supprimés de prod (ne jamais recréer)** : `mqtt/` (capteur NodOn chambre, nettoyé 2026-07-18) · `packages/` (cssmeteo, retiré ~07/2026) · `camera.yaml` · `shell_command.yaml` monolithique · `#sensors.yaml` / `#templates.yaml` / `#utility_meter.yaml` désactivés · `templates/Mini-PC/` (capteurs lus à la source) · `templates/P2_prise/P2_ui_dashboard/` (retiré le 2026-09-20) · `input_booleans/P3/` + `templates/Inter_BP_Virtuel/P3/` (boutons virtuels du salon, retirés le 2026-09-29).
 
 ---
 
@@ -121,7 +127,8 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 - **Repo actif unique** : `BerrySwann/home_assistant_re-build` (ancien `home-assistant-config` supprimé le 2026-04-27)
 - **Contenu** : reflet exact de `/homeassistant/` - pushé par `.scripts/ha_git_backup.sh` (boutons page Système L5C3)
 - **Point d'entrée navigation** : [INDEX_GLOBAL.md](https://github.com/BerrySwann/home_assistant_re-build/blob/main/INDEX_GLOBAL.md)
-- **Dernier relevé arbre (API git trees)** : 2026-09-28 - 666 fichiers et 234 dossiers ; dernier commit `ae710c68` (2026-09-28 06:10 CEST, sauvegarde automatique HAOS)
+- **Dernier relevé arbre (API git trees)** : 2026-09-29 - **643 fichiers et 177 dossiers** ; dernier commit `a3edf590` (2026-09-29 21:05 CEST, sauvegarde manuelle HAOS)
+- Répartition : `docs/` 451 · `templates/` 43 · `utility_meter/` 8 · `input_booleans/` 6 · `sensors/` 4
 
 **Patterns URLs :**
 
@@ -142,10 +149,13 @@ Exemples :
 ## 🔍 AUDIT & SYNC - RAPPELS
 
 - **Audit MD5** : scripts `.scripts/audit_md5_yaml.sh` (YAML) + `.scripts/audit_md5_md_yaml.sh` (MD + YAML) - sans argument - boutons dashboard L5C3 - log `/homeassistant/.logs/`. Commandes détaillées : voir `IA_CMD_TERMINAL_HA.md`.
+- **Triangulation (trigul)** : `docs/04_docs_scripts/docs_scripts_SH/hermes_audit_md5_trigul_3md.sh` - compare chaque `.md` sur les 3 niveaux (local, prod, dépôt). Dernier passage 2026-09-29 : 145 fichiers, 145 synchronisés, 0 écart.
 - **Sens YAML config** : prod → GitHub → local (local converge vers prod).
-- **Sens Docs .md** : local `docs/` → `H:\Docs\` → GitHub (local gagne en conflit).
+- **Sens Docs .md** : local `docs/` → `H:\docs\` → GitHub (local gagne en conflit).
 - **Après tout changement prod** : déclencher le git backup, sinon GitHub reste en retard (liens INDEX cassés, audits faussés).
 
 ## ⚠️ INCOHÉRENCES CONNUES (à régler)
 
 - Sous-contextes `IA_*.md` : dossier renommé `sous_context_ia/` le 2026-07-18 (local + prod alignés). Restent à refondre : IA_INDEX_NAVIGATION, IA_INDEX_AUTOMATIONS, IA_INTEGRATIONS_CARTES, IA_P4_PRESENCE (TODO F-5).
+- `INDEX_GLOBAL.md` : 26 entités citées n'existent plus en base (relevé 2026-09-29), à retirer ou à requalifier.
+- `hermes_gen_dependances.py` : écrit dans `%LOCALAPPDATA%\Temp` et lit `docs/01_docs_config_system/config_system_YAML`, vidé le 2026-09-29 - **à repointer sur la prod ou le dépôt avant toute régénération**.

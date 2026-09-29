@@ -5440,291 +5440,291 @@ switch.clim_salon_nous
 ### 5.1 Intermediaires de calcul (alimentent d'autres capteurs config)
 
 ```
-sensor.all_standby_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_veilles.yaml
-sensor.dut_sdb_seche_serviettes (SEN)  ->  01_docs_config_system/config_system_YAML/sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml, 01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_DUT_TOTAL/P1_DUT_TOTAL_SDB.yaml
-sensor.dut_sdb_soufflant (SEN)  ->  01_docs_config_system/config_system_YAML/sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml, 01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_DUT_TOTAL/P1_DUT_TOTAL_SDB.yaml
-sensor.edf_tempo_price_blue_hc (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, 01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Linky/P0_MyElectricalData.yaml
-sensor.edf_tempo_price_blue_hp (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, 01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Linky/P0_MyElectricalData.yaml
-sensor.four_et_plaque_de_cuisson_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.genelec_appart_hphc_annuel_um_hc (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, 01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml
-sensor.genelec_appart_hphc_annuel_um_hp (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, 01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml
-sensor.genelec_appart_hphc_hebdomadaire_um_hc (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, 01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml, 02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_principale_2026-05-12.yaml
-sensor.genelec_appart_hphc_hebdomadaire_um_hp (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, 01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml, 02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_principale_2026-05-12.yaml
-sensor.hue_ambiance_lamp_salon_1_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_ambiance_lamp_salon_2_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_ambiance_lamp_salon_3_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_color_candle_chambre_eric_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_color_candle_chambre_eric_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_color_candle_chambre_gege_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_color_candle_chambre_gege_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_color_candle_salon_1_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_color_candle_salon_1_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_play_1_pc_bureau_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_play_1_pc_bureau_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_play_2_pc_bureau_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_play_2_pc_bureau_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_play_3_pc_bureau_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_play_3_pc_bureau_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_bureau_1_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_bureau_1_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_bureau_2_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_bureau_2_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_chambre_1_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_chambre_1_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_chambre_2_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_chambre_2_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_couloir_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_couloir_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_cuisine_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_cuisine_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_entree_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_salle_de_bain_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_salle_de_bain_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_table_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_white_lamp_table_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.linky_25481620821301_consumption (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Linky/P0_MyElectricalData.yaml, 01_docs_config_system/config_system_YAML/utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml, 02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_principale_2026-05-12.yaml
-sensor.prise_airfryer_ninja_nous_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_box_internet_ikea_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_bureau_fer_a_repasser_nous_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_bureau_pc_ikea_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_congelateur_cuisine_nous_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_four_micro_ondes_nous_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_frigo_cuisine_nous_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_horloge_ikea_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_lave_linge_nous_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_lave_vaisselle_nous_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_pc_s_gege_ikea_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_petit_dejeune_nous_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_salon_chargeur_nous_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_tete_de_lit_chambre_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_tv_chambre_nous_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_tv_salon_ikea_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, 01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.relais_lumiere_sdb_sonoff_annuel_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.all_standby_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_veilles.yaml
+sensor.dut_sdb_seche_serviettes (SEN)  ->  sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml, templates/P1_clim_chauffage/P1_DUT_TOTAL/P1_DUT_TOTAL_SDB.yaml
+sensor.dut_sdb_soufflant (SEN)  ->  sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml, templates/P1_clim_chauffage/P1_DUT_TOTAL/P1_DUT_TOTAL_SDB.yaml
+sensor.edf_tempo_price_blue_hc (NAT)  ->  templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, templates/P0_Energie_total_diag/P0_Linky/P0_MyElectricalData.yaml
+sensor.edf_tempo_price_blue_hp (NAT)  ->  templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, templates/P0_Energie_total_diag/P0_Linky/P0_MyElectricalData.yaml
+sensor.four_et_plaque_de_cuisson_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.genelec_appart_hphc_annuel_um_hc (NAT)  ->  templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml
+sensor.genelec_appart_hphc_annuel_um_hp (NAT)  ->  templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml
+sensor.genelec_appart_hphc_hebdomadaire_um_hc (NAT)  ->  templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml, 02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_principale_2026-05-12.yaml
+sensor.genelec_appart_hphc_hebdomadaire_um_hp (NAT)  ->  templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml, 02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_principale_2026-05-12.yaml
+sensor.hue_ambiance_lamp_salon_1_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_ambiance_lamp_salon_2_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_ambiance_lamp_salon_3_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_color_candle_chambre_eric_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_color_candle_chambre_eric_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_color_candle_chambre_gege_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_color_candle_chambre_gege_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_color_candle_salon_1_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_color_candle_salon_1_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_play_1_pc_bureau_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_play_1_pc_bureau_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_play_2_pc_bureau_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_play_2_pc_bureau_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_play_3_pc_bureau_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_play_3_pc_bureau_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_bureau_1_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_bureau_1_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_bureau_2_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_bureau_2_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_chambre_1_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_chambre_1_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_chambre_2_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_chambre_2_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_couloir_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_couloir_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_cuisine_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_cuisine_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_entree_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_salle_de_bain_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_salle_de_bain_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_table_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_white_lamp_table_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.linky_25481620821301_consumption (NAT)  ->  templates/P0_Energie_total_diag/P0_Linky/P0_MyElectricalData.yaml, utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml, 02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_principale_2026-05-12.yaml
+sensor.prise_airfryer_ninja_nous_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_box_internet_ikea_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_bureau_fer_a_repasser_nous_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_bureau_pc_ikea_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_congelateur_cuisine_nous_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_four_micro_ondes_nous_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_frigo_cuisine_nous_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_horloge_ikea_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_lave_linge_nous_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_lave_vaisselle_nous_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_pc_s_gege_ikea_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_petit_dejeune_nous_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_salon_chargeur_nous_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_tete_de_lit_chambre_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_tv_chambre_nous_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_tv_salon_ikea_hebdomadaire_um (UM)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml, templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.relais_lumiere_sdb_sonoff_annuel_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um_kwh_tpl (TPL)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
 ```
 
 ### 5.2 Reelles (definies, jamais reutilisees - candidates a suppression/verification)
 
 ```
-binary_sensor.meteoalarm (NAT)  ->  01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml
-input_select.saison (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml
-light.hue_play_1 (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml
-light.hue_smart_eco_tv_salon (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_eCO_prises/P2_eco_prises_config.yaml
-notify.diag_log_file (NAT)  ->  01_docs_config_system/config_system_YAML/configuration.yaml
-sensor.P1 (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_total_pour_les_7_postes/P0_total_pour_les_7_postes.yaml
-sensor.all_standby (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_veilles.yaml
-sensor.all_standby_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_veilles.yaml
-sensor.all_standby_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_veilles.yaml
-sensor.blitzortung_lightning_last_impact_time (NAT)  ->  01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml
-sensor.clim_bureau_avg_watts_annuel (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
-sensor.clim_bureau_avg_watts_hebdomadaire (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
-sensor.clim_bureau_power_status (NAT)  ->  01_docs_config_system/config_system_YAML/sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml
-sensor.clim_chambre_avg_watts_annuel (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
-sensor.clim_chambre_avg_watts_hebdomadaire (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
-sensor.clim_chambre_power_status (NAT)  ->  01_docs_config_system/config_system_YAML/sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml
-sensor.clim_salon_avg_watts_annuel (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
-sensor.clim_salon_avg_watts_hebdomadaire (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
-sensor.clim_salon_power_status (NAT)  ->  01_docs_config_system/config_system_YAML/sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml
-sensor.condition_eric_wifi (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P4_groupe_presence/P4_wifi_detection.yaml
-sensor.condition_mamour_wifi (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P4_groupe_presence/P4_wifi_detection.yaml
-sensor.date (NAT)  ->  01_docs_config_system/config_system_YAML/configuration.yaml
-sensor.detecteur_ikea_vallhorn_battery (NAT)  ->  01_docs_config_system/config_system_YAML/groups/GRP_02_batteries_ikea.yaml
-sensor.eclairage_total_group_puissance (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_total_pour_les_7_postes/P0_total_pour_les_7_postes.yaml
-sensor.eclairage_total_unit_hebdomadaire_kwh_tpl (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml
-sensor.four_et_plaque_de_cuisson_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.four_et_plaque_de_cuisson_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.genelec_appart_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_03_AVG_genelec_appart.yaml
-sensor.genelec_appart_hebdo (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml
-sensor.genelec_appart_mensuel (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_mois_en_cours.yaml
-sensor.genelec_appart_quotidien (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_jour_en_cours.yaml
-sensor.hue_ambiance_lamp_salon_1_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_ambiance_lamp_salon_1_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_ambiance_lamp_salon_1_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_ambiance_lamp_salon_1_power (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml
-sensor.hue_ambiance_lamp_salon_1_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_ambiance_lamp_salon_2_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_ambiance_lamp_salon_2_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_ambiance_lamp_salon_2_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_ambiance_lamp_salon_2_power (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml
-sensor.hue_ambiance_lamp_salon_2_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_ambiance_lamp_salon_3_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_ambiance_lamp_salon_3_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_ambiance_lamp_salon_3_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_ambiance_lamp_salon_3_power (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml
-sensor.hue_ambiance_lamp_salon_3_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_chambre_eric_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_chambre_eric_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_chambre_eric_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_chambre_eric_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_chambre_eric_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_chambre_gege_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_chambre_gege_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_chambre_gege_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_chambre_gege_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_chambre_gege_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_salon_1_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_salon_1_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_salon_1_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_salon_1_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_color_candle_salon_1_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_play_1_pc_bureau_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_play_1_pc_bureau_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_play_1_pc_bureau_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_play_1_pc_bureau_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_play_1_pc_bureau_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_play_2_pc_bureau_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_play_2_pc_bureau_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_play_2_pc_bureau_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_play_2_pc_bureau_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_play_2_pc_bureau_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_play_3_pc_bureau_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_play_3_pc_bureau_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_play_3_pc_bureau_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_play_3_pc_bureau_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_play_3_pc_bureau_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_smart_button_salle_de_bain_batterie (NAT)  ->  01_docs_config_system/config_system_YAML/groups/GRP_01_batteries_hue.yaml
-sensor.hue_white_lamp_bureau_1_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_bureau_1_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_bureau_1_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_bureau_1_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_bureau_1_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_bureau_2_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_bureau_2_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_bureau_2_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_bureau_2_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_bureau_2_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_chambre_1_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_chambre_1_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_chambre_1_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_chambre_1_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_chambre_1_power (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml
-sensor.hue_white_lamp_chambre_1_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_chambre_2_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_chambre_2_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_chambre_2_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_chambre_2_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_chambre_2_power (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml
-sensor.hue_white_lamp_chambre_2_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_couloir_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_couloir_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_couloir_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_couloir_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_couloir_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_cuisine_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_cuisine_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_cuisine_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_cuisine_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_cuisine_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_entree_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_entree_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_entree_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_entree_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_entree_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_salle_de_bain_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_salle_de_bain_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_salle_de_bain_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_salle_de_bain_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_salle_de_bain_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_table_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_table_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_table_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_table_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.hue_white_lamp_table_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.poussoir_pc_ikea_tradfri_battery (NAT)  ->  01_docs_config_system/config_system_YAML/groups/GRP_02_batteries_ikea.yaml
-sensor.poussoir_tv_ikea_tradfri_battery (NAT)  ->  01_docs_config_system/config_system_YAML/groups/GRP_02_batteries_ikea.yaml
-sensor.prise_airfryer_ninja_nous_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_airfryer_ninja_nous_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_box_internet_ikea_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_box_internet_ikea_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_bureau_fer_a_repasser_nous_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_bureau_fer_a_repasser_nous_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_bureau_pc_ikea_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_bureau_pc_ikea_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_congelateur_cuisine_nous_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_congelateur_cuisine_nous_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_four_micro_ondes_nous_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_four_micro_ondes_nous_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_frigo_cuisine_nous_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_frigo_cuisine_nous_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_horloge_ikea_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_horloge_ikea_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_lave_linge_nous_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_lave_linge_nous_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_lave_vaisselle_nous_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_lave_vaisselle_nous_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_mini_pc_ikea_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml
-sensor.prise_mini_pc_ikea_energie_totale_wh (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml
-sensor.prise_mini_pc_ikea_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml
-sensor.prise_pc_s_gege_ikea_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_pc_s_gege_ikea_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_petit_dejeune_nous_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_petit_dejeune_nous_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_salon_chargeur_nous_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_salon_chargeur_nous_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_tete_de_lit_chambre_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_tete_de_lit_chambre_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_tv_chambre_nous_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_tv_chambre_nous_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.prise_tv_salon_ikea_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
-sensor.prise_tv_salon_ikea_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.radiateur_cuisine_power_status (NAT)  ->  01_docs_config_system/config_system_YAML/sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml
-sensor.radiateur_elec_cuisine_avg_watts_annuel (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
-sensor.radiateur_elec_cuisine_avg_watts_hebdomadaire (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
-sensor.relais_lumiere_sdb_sonoff_annuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.relais_lumiere_sdb_sonoff_energy (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
-sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.relais_lumiere_sdb_sonoff_mensuel_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.relais_lumiere_sdb_sonoff_quotidien_um (UM)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
-sensor.seche_serviette_sdb_avg_watts_annuel (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
-sensor.seche_serviette_sdb_avg_watts_hebdomadaire (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
-sensor.seuil_non_chauffage (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml
-sensor.seuil_non_clim (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml
-sensor.soufflant_sdb_avg_watts_annuel (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
-sensor.soufflant_sdb_avg_watts_hebdomadaire (TPL)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
-sensor.tarif_heures_creuses_ttc (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml
-sensor.tarif_heures_pleines_ttc (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml
-sensor.temperature_corrige_Chambre (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_02_automation_message_clim_7h30_21h.yaml
-sensor.th_salon (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml
-sensor.time (NAT)  ->  01_docs_config_system/config_system_YAML/configuration.yaml
-shell_command.audit_md5_docs (NAT)  ->  01_docs_config_system/config_system_YAML/command_line/audit/audit_md5_md.yaml
-switch.clim_Bureau (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_02_automation_message_clim_7h30_21h.yaml
-switch.clim_Chambre (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_02_automation_message_clim_7h30_21h.yaml
-utility_meter.select_tariff (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml
+binary_sensor.meteoalarm (NAT)  ->  templates/meteo/M_01_meteo_alertes_card.yaml
+input_select.saison (NAT)  ->  templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml
+light.hue_play_1 (NAT)  ->  templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml
+light.hue_smart_eco_tv_salon (NAT)  ->  templates/P2_prise/P2_eCO_prises/P2_eco_prises_config.yaml
+notify.diag_log_file (NAT)  ->  configuration.yaml
+sensor.P1 (NAT)  ->  templates/P0_Energie_total_diag/P0_total_pour_les_7_postes/P0_total_pour_les_7_postes.yaml
+sensor.all_standby (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_veilles.yaml
+sensor.all_standby_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_veilles.yaml
+sensor.all_standby_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_veilles.yaml
+sensor.blitzortung_lightning_last_impact_time (NAT)  ->  templates/meteo/M_03_meteo_blitzortung.yaml
+sensor.clim_bureau_avg_watts_annuel (TPL)  ->  templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
+sensor.clim_bureau_avg_watts_hebdomadaire (TPL)  ->  templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
+sensor.clim_bureau_power_status (NAT)  ->  sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml
+sensor.clim_chambre_avg_watts_annuel (TPL)  ->  templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
+sensor.clim_chambre_avg_watts_hebdomadaire (TPL)  ->  templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
+sensor.clim_chambre_power_status (NAT)  ->  sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml
+sensor.clim_salon_avg_watts_annuel (TPL)  ->  templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
+sensor.clim_salon_avg_watts_hebdomadaire (TPL)  ->  templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
+sensor.clim_salon_power_status (NAT)  ->  sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml
+sensor.condition_eric_wifi (TPL)  ->  templates/P4_groupe_presence/P4_wifi_detection.yaml
+sensor.condition_mamour_wifi (TPL)  ->  templates/P4_groupe_presence/P4_wifi_detection.yaml
+sensor.date (NAT)  ->  configuration.yaml
+sensor.detecteur_ikea_vallhorn_battery (NAT)  ->  groups/GRP_02_batteries_ikea.yaml
+sensor.eclairage_total_group_puissance (NAT)  ->  templates/P0_Energie_total_diag/P0_total_pour_les_7_postes/P0_total_pour_les_7_postes.yaml
+sensor.eclairage_total_unit_hebdomadaire_kwh_tpl (TPL)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml
+sensor.four_et_plaque_de_cuisson_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.four_et_plaque_de_cuisson_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.genelec_appart_annuel_um (UM)  ->  templates/P0_Energie_total_diag/P0_Genelec_appart/P0_03_AVG_genelec_appart.yaml
+sensor.genelec_appart_hebdo (NAT)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml
+sensor.genelec_appart_mensuel (NAT)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_mois_en_cours.yaml
+sensor.genelec_appart_quotidien (NAT)  ->  templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_jour_en_cours.yaml
+sensor.hue_ambiance_lamp_salon_1_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_ambiance_lamp_salon_1_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_ambiance_lamp_salon_1_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_ambiance_lamp_salon_1_power (NAT)  ->  templates/P3_eclairage/P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml
+sensor.hue_ambiance_lamp_salon_1_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_ambiance_lamp_salon_2_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_ambiance_lamp_salon_2_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_ambiance_lamp_salon_2_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_ambiance_lamp_salon_2_power (NAT)  ->  templates/P3_eclairage/P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml
+sensor.hue_ambiance_lamp_salon_2_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_ambiance_lamp_salon_3_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_ambiance_lamp_salon_3_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_ambiance_lamp_salon_3_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_ambiance_lamp_salon_3_power (NAT)  ->  templates/P3_eclairage/P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml
+sensor.hue_ambiance_lamp_salon_3_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_chambre_eric_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_chambre_eric_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_chambre_eric_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_chambre_eric_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_chambre_eric_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_chambre_gege_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_chambre_gege_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_chambre_gege_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_chambre_gege_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_chambre_gege_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_salon_1_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_salon_1_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_salon_1_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_salon_1_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_color_candle_salon_1_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_play_1_pc_bureau_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_play_1_pc_bureau_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_play_1_pc_bureau_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_play_1_pc_bureau_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_play_1_pc_bureau_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_play_2_pc_bureau_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_play_2_pc_bureau_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_play_2_pc_bureau_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_play_2_pc_bureau_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_play_2_pc_bureau_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_play_3_pc_bureau_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_play_3_pc_bureau_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_play_3_pc_bureau_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_play_3_pc_bureau_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_play_3_pc_bureau_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_smart_button_salle_de_bain_batterie (NAT)  ->  groups/GRP_01_batteries_hue.yaml
+sensor.hue_white_lamp_bureau_1_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_bureau_1_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_bureau_1_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_bureau_1_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_bureau_1_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_bureau_2_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_bureau_2_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_bureau_2_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_bureau_2_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_bureau_2_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_chambre_1_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_chambre_1_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_chambre_1_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_chambre_1_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_chambre_1_power (NAT)  ->  templates/P3_eclairage/P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml
+sensor.hue_white_lamp_chambre_1_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_chambre_2_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_chambre_2_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_chambre_2_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_chambre_2_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_chambre_2_power (NAT)  ->  templates/P3_eclairage/P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml
+sensor.hue_white_lamp_chambre_2_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_couloir_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_couloir_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_couloir_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_couloir_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_couloir_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_cuisine_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_cuisine_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_cuisine_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_cuisine_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_cuisine_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_entree_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_entree_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_entree_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_entree_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_entree_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_salle_de_bain_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_salle_de_bain_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_salle_de_bain_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_salle_de_bain_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_salle_de_bain_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_table_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_table_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_table_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_table_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.hue_white_lamp_table_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.poussoir_pc_ikea_tradfri_battery (NAT)  ->  groups/GRP_02_batteries_ikea.yaml
+sensor.poussoir_tv_ikea_tradfri_battery (NAT)  ->  groups/GRP_02_batteries_ikea.yaml
+sensor.prise_airfryer_ninja_nous_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_airfryer_ninja_nous_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_box_internet_ikea_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_box_internet_ikea_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_bureau_fer_a_repasser_nous_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_bureau_fer_a_repasser_nous_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_bureau_pc_ikea_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_bureau_pc_ikea_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_congelateur_cuisine_nous_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_congelateur_cuisine_nous_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_four_micro_ondes_nous_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_four_micro_ondes_nous_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_frigo_cuisine_nous_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_frigo_cuisine_nous_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_horloge_ikea_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_horloge_ikea_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_lave_linge_nous_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_lave_linge_nous_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_lave_vaisselle_nous_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_lave_vaisselle_nous_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_mini_pc_ikea_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml
+sensor.prise_mini_pc_ikea_energie_totale_wh (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml
+sensor.prise_mini_pc_ikea_hebdomadaire_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml
+sensor.prise_pc_s_gege_ikea_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_pc_s_gege_ikea_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_petit_dejeune_nous_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_petit_dejeune_nous_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_salon_chargeur_nous_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_salon_chargeur_nous_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_tete_de_lit_chambre_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_tete_de_lit_chambre_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_tv_chambre_nous_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_tv_chambre_nous_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.prise_tv_salon_ikea_annuel_um (UM)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml
+sensor.prise_tv_salon_ikea_energy (NAT)  ->  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.radiateur_cuisine_power_status (NAT)  ->  sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml
+sensor.radiateur_elec_cuisine_avg_watts_annuel (TPL)  ->  templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
+sensor.radiateur_elec_cuisine_avg_watts_hebdomadaire (TPL)  ->  templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
+sensor.relais_lumiere_sdb_sonoff_annuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.relais_lumiere_sdb_sonoff_energy (NAT)  ->  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml
+sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.relais_lumiere_sdb_sonoff_mensuel_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.relais_lumiere_sdb_sonoff_quotidien_um (UM)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml
+sensor.seche_serviette_sdb_avg_watts_annuel (TPL)  ->  templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
+sensor.seche_serviette_sdb_avg_watts_hebdomadaire (TPL)  ->  templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
+sensor.seuil_non_chauffage (TPL)  ->  templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml
+sensor.seuil_non_clim (TPL)  ->  templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml
+sensor.soufflant_sdb_avg_watts_annuel (TPL)  ->  templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
+sensor.soufflant_sdb_avg_watts_hebdomadaire (TPL)  ->  templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml
+sensor.tarif_heures_creuses_ttc (NAT)  ->  templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml
+sensor.tarif_heures_pleines_ttc (NAT)  ->  templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml
+sensor.temperature_corrige_Chambre (NAT)  ->  templates/P1_clim_chauffage/P1_01_MASTER/P1_02_automation_message_clim_7h30_21h.yaml
+sensor.th_salon (NAT)  ->  templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml
+sensor.time (NAT)  ->  configuration.yaml
+shell_command.audit_md5_docs (NAT)  ->  command_line/audit/audit_md5_md.yaml
+switch.clim_Bureau (NAT)  ->  templates/P1_clim_chauffage/P1_01_MASTER/P1_02_automation_message_clim_7h30_21h.yaml
+switch.clim_Chambre (NAT)  ->  templates/P1_clim_chauffage/P1_01_MASTER/P1_02_automation_message_clim_7h30_21h.yaml
+utility_meter.select_tariff (NAT)  ->  utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml
 ```
 
 ### 5.3 Familles (prefixes de templates, non resolues)
 
 ```
-binary_sensor.contact_fenetre_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/utilitaires/nb_fenetre_ouvert_ferme_autom.yaml
-select.genelec_appart_hphc_ (NAT)  ->  01_docs_config_system/config_system_YAML/utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml
-sensor.all_standby_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_veilles.yaml
-sensor.clim_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_02_automation_message_clim_7h30_21h.yaml, 01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_03_automation_message_clim_21h_7h30.yaml
-sensor.contact_fenetre_ (NAT)  ->  01_docs_config_system/config_system_YAML/groups/GRP_03_batteries_sonoff.yaml
-sensor.eclairage_total_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.genelec_appart_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, 01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_03_AVG_genelec_appart.yaml
-sensor.genelec_appart_hphc_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, 01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml, 01_docs_config_system/config_system_YAML/utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml
-sensor.hue_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, 01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
-sensor.hue_play_1_pc_bureau_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
-sensor.hue_smart_button_ (NAT)  ->  01_docs_config_system/config_system_YAML/groups/GRP_01_batteries_hue.yaml
-sensor.hue_white_lamp_chambre_1_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
-sensor.hue_white_lamp_couloir_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
-sensor.hue_white_lamp_cuisine_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
-sensor.hue_white_lamp_entree_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
-sensor.hue_white_lamp_table_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
-sensor.maison_lightning_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml
-sensor.prise_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml, 01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
-sensor.qualite_air_ (NAT)  ->  01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml, 01_docs_config_system/config_system_YAML/templates/Air_quality/A_01_AIR_QUALITY.yaml
-sensor.relais_lumiere_sdb_sonoff_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
-sensor.store_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/Stores/S_01_STORES.yaml
-sensor.tcov_ (NAT)  ->  01_docs_config_system/config_system_YAML/templates/Air_quality/A_01_AIR_QUALITY.yaml
-sensor.th_ (NAT)  ->  01_docs_config_system/config_system_YAML/groups/GRP_03_batteries_sonoff.yaml
+binary_sensor.contact_fenetre_ (NAT)  ->  templates/utilitaires/nb_fenetre_ouvert_ferme_autom.yaml
+select.genelec_appart_hphc_ (NAT)  ->  utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml
+sensor.all_standby_ (NAT)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_veilles.yaml
+sensor.clim_ (NAT)  ->  templates/P1_clim_chauffage/P1_01_MASTER/P1_02_automation_message_clim_7h30_21h.yaml, templates/P1_clim_chauffage/P1_01_MASTER/P1_03_automation_message_clim_21h_7h30.yaml
+sensor.contact_fenetre_ (NAT)  ->  groups/GRP_03_batteries_sonoff.yaml
+sensor.eclairage_total_ (NAT)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.genelec_appart_ (NAT)  ->  templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, templates/P0_Energie_total_diag/P0_Genelec_appart/P0_03_AVG_genelec_appart.yaml
+sensor.genelec_appart_hphc_ (NAT)  ->  templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml, templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml, utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml
+sensor.hue_ (NAT)  ->  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml, templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml
+sensor.hue_play_1_pc_bureau_ (NAT)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
+sensor.hue_smart_button_ (NAT)  ->  groups/GRP_01_batteries_hue.yaml
+sensor.hue_white_lamp_chambre_1_ (NAT)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
+sensor.hue_white_lamp_couloir_ (NAT)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
+sensor.hue_white_lamp_cuisine_ (NAT)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
+sensor.hue_white_lamp_entree_ (NAT)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
+sensor.hue_white_lamp_table_ (NAT)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
+sensor.maison_lightning_ (NAT)  ->  templates/meteo/M_03_meteo_blitzortung.yaml
+sensor.prise_ (NAT)  ->  templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml, utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml
+sensor.qualite_air_ (NAT)  ->  sensors/Air_quality/A_01_AIR_QUALITY.yaml, templates/Air_quality/A_01_AIR_QUALITY.yaml
+sensor.relais_lumiere_sdb_sonoff_ (NAT)  ->  templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml
+sensor.store_ (NAT)  ->  templates/Stores/S_01_STORES.yaml
+sensor.tcov_ (NAT)  ->  templates/Air_quality/A_01_AIR_QUALITY.yaml
+sensor.th_ (NAT)  ->  groups/GRP_03_batteries_sonoff.yaml
 ```
 
 ## STATISTIQUES

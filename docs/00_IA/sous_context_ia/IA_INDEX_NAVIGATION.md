@@ -29,7 +29,7 @@ docs/02_docs_dashboard/
     L1C1_*/  L1C2_*/  ...
 ```
 
-Chemin prod config YAML : `docs/01_docs_config_system/config_system_YAML/` (sensors/, templates/, utility_meter/)
+Chemin prod config YAML : `docs/` (sensors/, templates/, utility_meter/)
 Chemin prod dashboard : `H:\Docs\` (push depuis local)
 
 ---
@@ -61,7 +61,7 @@ Niveau 1 : L*C* - LABEL | X page(s) | ~N entites       <- retracte par defaut
 |:-----|:-------------|
 | YAMLs dashboard | `docs/02_docs_dashboard/dashboard_docs_YAML/L*C*_*/` |
 | Docs vignettes | `docs/02_docs_dashboard/dashboard_docs_MD/L*C*_*/` |
-| Fichiers sources YAML | `docs/01_docs_config_system/config_system_YAML/sensors/\|templates/\|utility_meter/` |
+| Fichiers sources YAML | `docs/sensors/\|templates/\|utility_meter/` |
 
 > ⚠️ Casse minuscule `docs/` depuis 2026-07-19 (renommage H:\Docs -> H:\docs + push GitHub).
 > Tous les liens INDEX_GLOBAL.md utilisent `docs/` minuscule (385 liens corriges).
@@ -92,7 +92,7 @@ Niveau 1 : L*C* - LABEL | X page(s) | ~N entites       <- retracte par defaut
 Apres ajout/modification d'une vignette, page ou fichier source :
 
 1. Lire le YAML reel concerne (`docs/02_docs_dashboard/dashboard_docs_YAML/L*C*/`)
-2. Verifier chaque entite citee contre le YAML prod (`docs/01_docs_config_system/config_system_YAML/`)
+2. Verifier chaque entite citee contre le YAML prod (`docs/`)
 3. Mettre a jour la section 02-DASHBOARD de `INDEX_GLOBAL.md` (local puis H:\Docs\)
 4. Verifier la balance `<details>`/`</details>` et `<blockquote>`/`</blockquote>` avant push
 5. Mettre a jour `DEPENDANCES_GLOBALES.md` si necessaire (/sync_index)
