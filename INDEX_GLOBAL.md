@@ -134,17 +134,17 @@
 <details>
 <summary>💬 Pop-up <code>#foudre</code> - 14 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.blitzortung_lightning_localisation</code> - <a href="docs/01_docs_config_system/config_system_YAML/sensors/meteo/M_03_meteo_sensors_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.dernier_impact_temps_reel</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.eclair_annuel</code> - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.eclair_hebdomadaire</code> - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.eclair_horaire</code> - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.eclair_mensuel</code> - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.eclair_quotidien</code> - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.lightning_bearing</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.lightning_direction_label</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.lightning_distance_km</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.temps_depuis_le_dernier_impact_de_foudre</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.blitzortung_lightning_localisation</code> - <a href="sensors/meteo/M_meteo_sensors_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.dernier_impact_temps_reel</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_annuel</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_hebdomadaire</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_horaire</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_mensuel</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_quotidien</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.lightning_bearing</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.lightning_direction_label</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.lightning_distance_km</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.temps_depuis_le_dernier_impact_de_foudre</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
 <li><code>sensor.maison_lightning_azimuth</code> - <i>Natif HA (Blitzortung)</i></li>
 <li><code>sensor.maison_lightning_counter</code> - <i>Natif HA (Blitzortung)</i></li>
 <li><code>sensor.maison_lightning_distance</code> - <i>Natif HA (Blitzortung)</i></li>
@@ -156,29 +156,29 @@
 <blockquote><ul>
 <li><code>sensor.06_weather_alert</code> - <i>Natif HA</i></li>
 <li><code>binary_sensor.meteoalarm</code> - <i>Natif HA (fallback)</i></li>
-<li><code>sensor.meteo_france_alertes_image_today</code> - <a href="docs/01_docs_config_system/config_system_YAML/command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
-<li><code>sensor.meteo_france_alertes_image_tomorrow</code> - <a href="docs/01_docs_config_system/config_system_YAML/command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_avalanches</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_canicule</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_grand_froid</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_inondation</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_meteo</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_neige_verglas</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_orages</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_pluie_inondation</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_vagues_submersion</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_vent_violent</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.meteo_france_alertes_image_today</code> - <a href="command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
+<li><code>sensor.meteo_france_alertes_image_tomorrow</code> - <a href="command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_avalanches</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_canicule</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_grand_froid</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_inondation</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_meteo</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_neige_verglas</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_orages</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_pluie_inondation</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_vagues_submersion</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_vent_violent</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
 <summary>💬 Pop-up <code>#sun</code> - 6 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.duree_du_jour</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
+<li><code>sensor.duree_du_jour</code> - <a href="templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
 <li><code>sensor.moon_phase</code> - <i>Natif HA</i></li>
 <li><code>sensor.season</code> - <i>Natif HA</i></li>
-<li><code>sensor.tendance_duree_jour</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
-<li><code>sensor.variation_quotidienne</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
+<li><code>sensor.tendance_duree_jour</code> - <a href="templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
+<li><code>sensor.variation_quotidienne</code> - <a href="templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
 <li><code>sun.sun</code> - <i>Natif HA</i></li>
 </ul></blockquote>
 </details>
@@ -189,73 +189,73 @@
 <blockquote>
 
 <details>
-<summary><code>M_01_meteo_alertes_card.yaml</code> - 10 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></summary>
+<summary><code>M_01_meteo_alertes_card.yaml</code> - 10 entité(s) - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.alerte_avalanches</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_canicule</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_grand_froid</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_inondation</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_meteo</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_neige_verglas</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_orages</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_pluie_inondation</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_vagues_submersion</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_vent_violent</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_avalanches</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_canicule</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_grand_froid</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_inondation</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_meteo</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_neige_verglas</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_orages</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_pluie_inondation</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_vagues_submersion</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_vent_violent</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>M_02_meteo_vent_vence_card.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></summary>
+<summary><code>M_02_meteo_vent_vence_card.yaml</code> - 3 entité(s) - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.vence_wind_bearing</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
-<li><code>sensor.vence_wind_direction_label</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
-<li><code>sensor.vence_wind_speed_kmh</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
+<li><code>sensor.vence_wind_bearing</code> - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
+<li><code>sensor.vence_wind_direction_label</code> - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
+<li><code>sensor.vence_wind_speed_kmh</code> - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>M_03_meteo_blitzortung.yaml</code> - 5 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></summary>
+<summary><code>M_03_meteo_blitzortung.yaml</code> - 5 entité(s) - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.dernier_impact_temps_reel</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.lightning_bearing</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.lightning_direction_label</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.lightning_distance_km</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.temps_depuis_le_dernier_impact_de_foudre</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.dernier_impact_temps_reel</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.lightning_bearing</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.lightning_direction_label</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.lightning_distance_km</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.temps_depuis_le_dernier_impact_de_foudre</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>M_03_meteo_sensors_blitzortung.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/sensors/meteo/M_03_meteo_sensors_blitzortung.yaml">voir fichier</a></summary>
+<summary><code>M_03_meteo_sensors_blitzortung.yaml</code> - 1 entité(s) - <a href="sensors/meteo/M_meteo_sensors_blitzortung.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.blitzortung_lightning_localisation</code> - <a href="docs/01_docs_config_system/config_system_YAML/sensors/meteo/M_03_meteo_sensors_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.blitzortung_lightning_localisation</code> - <a href="sensors/meteo/M_meteo_sensors_blitzortung.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>M_03_meteo_UM_blitzortung.yaml</code> - 5 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></summary>
+<summary><code>M_03_meteo_UM_blitzortung.yaml</code> - 5 entité(s) - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.eclair_annuel</code> - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.eclair_hebdomadaire</code> - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.eclair_horaire</code> - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.eclair_mensuel</code> - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.eclair_quotidien</code> - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_annuel</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_hebdomadaire</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_horaire</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_mensuel</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.eclair_quotidien</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>M_05_cycle_solaire.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></summary>
+<summary><code>M_05_cycle_solaire.yaml</code> - 3 entité(s) - <a href="templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.duree_du_jour</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
-<li><code>sensor.tendance_duree_jour</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
-<li><code>sensor.variation_quotidienne</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
+<li><code>sensor.duree_du_jour</code> - <a href="templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
+<li><code>sensor.tendance_duree_jour</code> - <a href="templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
+<li><code>sensor.variation_quotidienne</code> - <a href="templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>carte_meteo_france.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/command_line/meteo/carte_meteo_france.yaml">voir fichier</a></summary>
+<summary><code>carte_meteo_france.yaml</code> - 2 entité(s) - <a href="command_line/meteo/carte_meteo_france.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.meteo_france_alertes_image_today</code> - <a href="docs/01_docs_config_system/config_system_YAML/command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
-<li><code>sensor.meteo_france_alertes_image_tomorrow</code> - <a href="docs/01_docs_config_system/config_system_YAML/command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
+<li><code>sensor.meteo_france_alertes_image_today</code> - <a href="command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
+<li><code>sensor.meteo_france_alertes_image_tomorrow</code> - <a href="command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -333,10 +333,10 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 <blockquote>
 
 <details>
-<summary><code>M_04_tendances_th_ext_card.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></summary>
+<summary><code>M_04_tendances_th_ext_card.yaml</code> - 2 entité(s) - <a href="templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_humidity_trend</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
-<li><code>sensor.th_balcon_nord_temperature_trend</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_humidity_trend</code> - <a href="templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_temperature_trend</code> - <a href="templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -382,8 +382,8 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 <blockquote><ul>
 <li><code>sensor.th_balcon_nord_temperature</code> - <i>Natif HA (SONOFF Z2M)</i></li>
 <li><code>sensor.th_balcon_nord_humidity</code> - <i>Natif HA (SONOFF Z2M)</i></li>
-<li><code>sensor.th_balcon_nord_temperature_trend</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
-<li><code>weather.vence</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_temperature_trend</code> - <a href="templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>weather.vence</code> - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -449,7 +449,7 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 <blockquote>
 
 <details>
-<summary><code>configuration.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/configuration.yaml">voir fichier</a></summary>
+<summary><code>configuration.yaml</code> - 3 entité(s) - <a href="configuration.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>climate.clim_bureau_rm4_mini</code></li>
 <li><code>climate.clim_chambre_rm4_mini</code></li>
@@ -458,7 +458,7 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 </details>
 
 <details>
-<summary><code>P1_01_clim_logique_system_autom.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml">voir fichier</a></summary>
+<summary><code>P1_01_clim_logique_system_autom.yaml</code> - 2 entité(s) - <a href="templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.temperature_delta_affichage</code></li>
 <li><code>sensor.temperature_moyenne_interieure</code></li>
@@ -466,14 +466,14 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 </details>
 
 <details>
-<summary><code>P1_AVG_TOTAL_AMHQ.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG_TOTAL_AMHQ.yaml">voir fichier</a></summary>
+<summary><code>P1_AVG_TOTAL_AMHQ.yaml</code> - 1 entité(s) - <a href="templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.clim_rad_total_avg_watts_quotidien</code></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>P1_TOTAL_AMHQ.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml">voir fichier</a></summary>
+<summary><code>P1_TOTAL_AMHQ.yaml</code> - 3 entité(s) - <a href="templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.conso_clim_rad_total</code></li>
 <li><code>sensor.conso_clim_rad_total_mensuel</code></li>
@@ -482,7 +482,7 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> - 6 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_ui_dashboard.yaml</code> - 6 entité(s) - <a href="templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.chambre_power_status</code></li>
@@ -494,17 +494,17 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 </details>
 
 <details>
-<summary><code>M_02_meteo_vent_vence_card.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></summary>
+<summary><code>M_02_meteo_vent_vence_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>weather.vence</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
+<li><code>weather.vence</code> - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>M_04_tendances_th_ext_card.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></summary>
+<summary><code>M_04_tendances_th_ext_card.yaml</code> - 2 entité(s) - <a href="templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_humidity_trend</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
-<li><code>sensor.th_balcon_nord_temperature_trend</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_humidity_trend</code> - <a href="templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_temperature_trend</code> - <a href="templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -580,7 +580,7 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 <blockquote>
 
 <details>
-<summary><code>configuration.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/configuration.yaml">voir fichier</a></summary>
+<summary><code>configuration.yaml</code> - 3 entité(s) - <a href="configuration.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>climate.clim_bureau_rm4_mini</code></li>
 <li><code>climate.clim_chambre_rm4_mini</code></li>
@@ -589,7 +589,7 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 </details>
 
 <details>
-<summary><code>P1_01_clim_logique_system_autom.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml">voir fichier</a></summary>
+<summary><code>P1_01_clim_logique_system_autom.yaml</code> - 2 entité(s) - <a href="templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.delta_ademe_recommande</code></li>
 <li><code>sensor.temperature_moyenne_interieure</code></li>
@@ -597,7 +597,7 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> - 13 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_ui_dashboard.yaml</code> - 13 entité(s) - <a href="templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.chambre_power_status</code></li>
@@ -647,7 +647,7 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 <blockquote>
 
 <details>
-<summary><code>configuration.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/configuration.yaml">voir fichier</a></summary>
+<summary><code>configuration.yaml</code> - 3 entité(s) - <a href="configuration.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>climate.clim_bureau_rm4_mini</code></li>
 <li><code>climate.clim_chambre_rm4_mini</code></li>
@@ -656,28 +656,28 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 </details>
 
 <details>
-<summary><code>P1_BV_01_SW_inter_souflant_sdb.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/Inter_BP_Virtuel/P1/P1_BV_01_SW_inter_souflant_sdb.yaml">voir fichier</a></summary>
+<summary><code>P1_BV_01_SW_inter_souflant_sdb.yaml</code> - 1 entité(s) - <a href="templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>switch.inter_soufflant_salle_de_bain</code></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>P1_01_clim_logique_system_autom.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml">voir fichier</a></summary>
+<summary><code>P1_01_clim_logique_system_autom.yaml</code> - 1 entité(s) - <a href="templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.temperature_delta_affichage</code></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>P1_TOTAL_AMHQ.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml">voir fichier</a></summary>
+<summary><code>P1_TOTAL_AMHQ.yaml</code> - 1 entité(s) - <a href="templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.conso_clim_rad_total</code></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> - 11 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_ui_dashboard.yaml</code> - 11 entité(s) - <a href="templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.bureau_power_status_affichage</code></li>
@@ -772,7 +772,7 @@ déplacées vers natives.
 <blockquote>
 
 <details>
-<summary><code>P0_MINI_MAXI_AVG_Genelec_appart.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml">voir fichier</a></summary>
+<summary><code>P0_MINI_MAXI_AVG_Genelec_appart.yaml</code> - 2 entité(s) - <a href="sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_conso_maxi_24h</code></li>
 <li><code>sensor.genelec_appart_conso_mini_24h</code></li>
@@ -780,7 +780,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_01_genelec_appart_AMHQ_cost.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml">voir fichier</a></summary>
+<summary><code>P0_01_genelec_appart_AMHQ_cost.yaml</code> - 3 entité(s) - <a href="templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_cout_hc_quotidien</code></li>
 <li><code>sensor.genelec_appart_cout_hp_quotidien</code></li>
@@ -814,7 +814,7 @@ déplacées vers natives.
 <blockquote>
 
 <details>
-<summary><code>P0_MINI_MAXI_AVG_Genelec_appart.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml">voir fichier</a></summary>
+<summary><code>P0_MINI_MAXI_AVG_Genelec_appart.yaml</code> - 2 entité(s) - <a href="sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_conso_maxi_24h</code></li>
 <li><code>sensor.genelec_appart_conso_mini_24h</code></li>
@@ -822,7 +822,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_diag_conso_hebdomadaire_en_cours.yaml</code> - 7 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml">voir fichier</a></summary>
+<summary><code>P0_diag_conso_hebdomadaire_en_cours.yaml</code> - 7 entité(s) - <a href="templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_hebdomadaire_en_cours.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.diag_poste_autre_hebdomadaire</code></li>
 <li><code>sensor.diag_poste_chauffage_hebdomadaire</code></li>
@@ -835,7 +835,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_diag_conso_jour_en_cours.yaml</code> - 7 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_jour_en_cours.yaml">voir fichier</a></summary>
+<summary><code>P0_diag_conso_jour_en_cours.yaml</code> - 7 entité(s) - <a href="templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_jour_en_cours.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.diag_poste_autre_quotidien</code></li>
 <li><code>sensor.diag_poste_chauffage_quotidien</code></li>
@@ -848,7 +848,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_diag_conso_mois_en_cours.yaml</code> - 7 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_mois_en_cours.yaml">voir fichier</a></summary>
+<summary><code>P0_diag_conso_mois_en_cours.yaml</code> - 7 entité(s) - <a href="templates/P0_Energie_total_diag/P0_Diag/P0_diag_conso_mois_en_cours.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.diag_poste_autre_mensuel</code></li>
 <li><code>sensor.diag_poste_chauffage_mensuel</code></li>
@@ -861,7 +861,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_01_genelec_appart_AMHQ_cost.yaml</code> - 9 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml">voir fichier</a></summary>
+<summary><code>P0_01_genelec_appart_AMHQ_cost.yaml</code> - 9 entité(s) - <a href="templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_cout_hc_hebdomadaire</code></li>
 <li><code>sensor.genelec_appart_cout_hc_mensuel</code></li>
@@ -876,7 +876,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_02_ratio_hp_hc.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml">voir fichier</a></summary>
+<summary><code>P0_02_ratio_hp_hc.yaml</code> - 3 entité(s) - <a href="templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_ratio_hc_hebdomadaire</code></li>
 <li><code>sensor.genelec_appart_ratio_hc_mensuel</code></li>
@@ -885,7 +885,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_03_AVG_genelec_appart.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Genelec_appart/P0_03_AVG_genelec_appart.yaml">voir fichier</a></summary>
+<summary><code>P0_03_AVG_genelec_appart.yaml</code> - 2 entité(s) - <a href="templates/P0_Energie_total_diag/P0_Genelec_appart/P0_03_AVG_genelec_appart.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_avg_watts_mensuel</code></li>
 <li><code>sensor.genelec_appart_avg_watts_quotidien</code></li>
@@ -893,7 +893,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P0_MyElectricalData.yaml</code> - 8 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_Linky/P0_MyElectricalData.yaml">voir fichier</a></summary>
+<summary><code>P0_MyElectricalData.yaml</code> - 8 entité(s) - <a href="templates/P0_Energie_total_diag/P0_Linky/P0_MyElectricalData.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.linky_jour_0</code></li>
 <li><code>sensor.linky_jour_1</code></li>
@@ -907,7 +907,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>01_UM_AMHQ.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ.yaml">voir fichier</a></summary>
+<summary><code>01_UM_AMHQ.yaml</code> - 3 entité(s) - <a href="utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_hebdomadaire_um</code></li>
 <li><code>sensor.genelec_appart_mensuel_um</code></li>
@@ -916,7 +916,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>02_UM_genelec_appart_HPHC_AMHQ.yaml</code> - 6 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P0_Energie_total/Genelec_appart/02_UM_genelec_appart_HPHC_AMHQ.yaml">voir fichier</a></summary>
+<summary><code>02_UM_genelec_appart_HPHC_AMHQ.yaml</code> - 6 entité(s) - <a href="utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.genelec_appart_hphc_hebdomadaire_um_hc</code></li>
 <li><code>sensor.genelec_appart_hphc_hebdomadaire_um_hp</code></li>
@@ -955,7 +955,7 @@ déplacées vers natives.
 <blockquote>
 
 <details>
-<summary><code>P2_AVG_AMHQ_prises.yaml</code> - 17 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml">voir fichier</a></summary>
+<summary><code>P2_AVG_AMHQ_prises.yaml</code> - 17 entité(s) - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.airfryer_avg_watts_mensuel</code></li>
 <li><code>sensor.box_internet_avg_watts_mensuel</code></li>
@@ -978,14 +978,14 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P2_AVG_AMHQ_veilles.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_veilles.yaml">voir fichier</a></summary>
+<summary><code>P2_AVG_AMHQ_veilles.yaml</code> - 1 entité(s) - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_veilles.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.all_standby_avg_watts_mensuel</code></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>P2_UM_AMHQ_prises.yaml</code> - 17 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml">voir fichier</a></summary>
+<summary><code>P2_UM_AMHQ_prises.yaml</code> - 17 entité(s) - <a href="utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.four_et_plaque_de_cuisson_mensuel_um</code></li>
 <li><code>sensor.prise_airfryer_ninja_nous_mensuel_um</code></li>
@@ -1008,7 +1008,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P2_UM_AMHQ_veilles.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_veilles.yaml">voir fichier</a></summary>
+<summary><code>P2_UM_AMHQ_veilles.yaml</code> - 1 entité(s) - <a href="utility_meter/P2_prise/P2_UM_AMHQ_veilles.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.all_standby_mensuel_um</code></li>
 </ul></blockquote>
@@ -1032,7 +1032,7 @@ déplacées vers natives.
 <blockquote>
 
 <details>
-<summary><code>P0_total_pour_les_7_postes.yaml</code> - 6 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P0_Energie_total_diag/P0_total_pour_les_7_postes/P0_total_pour_les_7_postes.yaml">voir fichier</a></summary>
+<summary><code>P0_total_pour_les_7_postes.yaml</code> - 6 entité(s) - <a href="templates/P0_Energie_total_diag/P0_total_pour_les_7_postes/P0_total_pour_les_7_postes.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.total_poste_autre_puissance</code></li>
 <li><code>sensor.total_poste_chauffage_puissance</code></li>
@@ -1044,7 +1044,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P2_AVG_AMHQ_prises.yaml</code> - 17 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml">voir fichier</a></summary>
+<summary><code>P2_AVG_AMHQ_prises.yaml</code> - 17 entité(s) - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_prises.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.airfryer_avg_watts_quotidien</code></li>
 <li><code>sensor.box_internet_avg_watts_quotidien</code></li>
@@ -1067,28 +1067,28 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P2_AVG_AMHQ_veilles.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_veilles.yaml">voir fichier</a></summary>
+<summary><code>P2_AVG_AMHQ_veilles.yaml</code> - 1 entité(s) - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_veilles.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.all_standby_avg_watts_quotidien</code></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>P2_current_all_standby.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_I_all_standby_power/P2_current_all_standby.yaml">voir fichier</a></summary>
+<summary><code>P2_current_all_standby.yaml</code> - 1 entité(s) - <a href="templates/P2_prise/P2_I_all_standby_power/P2_current_all_standby.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.all_standby_current</code></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>P3_POWER_3_TOTAL_ZONE.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml">voir fichier</a></summary>
+<summary><code>P3_POWER_3_TOTAL_ZONE.yaml</code> - 1 entité(s) - <a href="templates/P3_eclairage/P3_POWER_TPL/P3_POWER_3_TOTAL_ZONE.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.eclairage_total_group_puissance_tpl</code></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>P2_UM_AMHQ_prises.yaml</code> - 17 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml">voir fichier</a></summary>
+<summary><code>P2_UM_AMHQ_prises.yaml</code> - 17 entité(s) - <a href="utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.four_et_plaque_de_cuisson_quotidien_um</code></li>
 <li><code>sensor.prise_airfryer_ninja_nous_quotidien_um</code></li>
@@ -1111,7 +1111,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P2_UM_AMHQ_veilles.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_veilles.yaml">voir fichier</a></summary>
+<summary><code>P2_UM_AMHQ_veilles.yaml</code> - 1 entité(s) - <a href="utility_meter/P2_prise/P2_UM_AMHQ_veilles.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.all_standby_quotidien_um</code></li>
 </ul></blockquote>
@@ -1218,7 +1218,7 @@ déplacées vers natives.
 <blockquote>
 
 <details>
-<summary><code>configuration.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/configuration.yaml">voir fichier</a></summary>
+<summary><code>configuration.yaml</code> - 3 entité(s) - <a href="configuration.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>climate.clim_bureau_rm4_mini</code></li>
 <li><code>climate.clim_chambre_rm4_mini</code></li>
@@ -1227,7 +1227,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P1_TOTAL_AMHQ.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml">voir fichier</a></summary>
+<summary><code>P1_TOTAL_AMHQ.yaml</code> - 2 entité(s) - <a href="templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.conso_clim_rad_total_mensuel</code></li>
 <li><code>sensor.conso_clim_rad_total_quotidien</code></li>
@@ -1235,7 +1235,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> - 6 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_ui_dashboard.yaml</code> - 6 entité(s) - <a href="templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.chambre_power_status</code></li>
@@ -1247,7 +1247,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P1_UM_AMHQ.yaml</code> - 12 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml">voir fichier</a></summary>
+<summary><code>P1_UM_AMHQ.yaml</code> - 12 entité(s) - <a href="utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.clim_bureau_mensuel_um</code></li>
 <li><code>sensor.clim_bureau_quotidien_um</code></li>
@@ -1296,7 +1296,7 @@ déplacées vers natives.
 <blockquote>
 
 <details>
-<summary><code>configuration.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/configuration.yaml">voir fichier</a></summary>
+<summary><code>configuration.yaml</code> - 3 entité(s) - <a href="configuration.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>climate.clim_bureau_rm4_mini</code></li>
 <li><code>climate.clim_chambre_rm4_mini</code></li>
@@ -1305,7 +1305,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P1_DUT_clim_chauffage.yaml</code> - 4 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml">voir fichier</a></summary>
+<summary><code>P1_DUT_clim_chauffage.yaml</code> - 4 entité(s) - <a href="sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.dut_clim_bureau</code></li>
 <li><code>sensor.dut_clim_chambre</code></li>
@@ -1315,7 +1315,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P1_01_clim_logique_system_autom.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml">voir fichier</a></summary>
+<summary><code>P1_01_clim_logique_system_autom.yaml</code> - 2 entité(s) - <a href="templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.temperature_delta_affichage</code></li>
 <li><code>sensor.temperature_moyenne_interieure</code></li>
@@ -1323,7 +1323,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P1_AVG.yaml</code> - 12 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG.yaml">voir fichier</a></summary>
+<summary><code>P1_AVG.yaml</code> - 12 entité(s) - <a href="templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_UNITE.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.clim_bureau_avg_watts_mensuel</code></li>
 <li><code>sensor.clim_bureau_avg_watts_quotidien</code></li>
@@ -1341,21 +1341,21 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P1_AVG_TOTAL_AMHQ.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_AVG/P1_AVG_TOTAL_AMHQ.yaml">voir fichier</a></summary>
+<summary><code>P1_AVG_TOTAL_AMHQ.yaml</code> - 1 entité(s) - <a href="templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.clim_rad_total_avg_watts_quotidien</code></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>P1_DUT_TOTAL_SDB.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_DUT_TOTAL/P1_DUT_TOTAL_SDB.yaml">voir fichier</a></summary>
+<summary><code>P1_DUT_TOTAL_SDB.yaml</code> - 1 entité(s) - <a href="templates/P1_clim_chauffage/P1_DUT_TOTAL/P1_DUT_TOTAL_SDB.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.dut_sdb_total</code></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>P1_TOTAL_AMHQ.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml">voir fichier</a></summary>
+<summary><code>P1_TOTAL_AMHQ.yaml</code> - 3 entité(s) - <a href="templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.conso_clim_rad_total</code></li>
 <li><code>sensor.conso_clim_rad_total_mensuel</code></li>
@@ -1364,7 +1364,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> - 11 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_ui_dashboard.yaml</code> - 11 entité(s) - <a href="templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.bureau_power_status_affichage</code></li>
@@ -1381,7 +1381,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P1_UM_AMHQ.yaml</code> - 24 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml">voir fichier</a></summary>
+<summary><code>P1_UM_AMHQ.yaml</code> - 24 entité(s) - <a href="utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.clim_bureau_annuel_um</code></li>
 <li><code>sensor.clim_bureau_hebdomadaire_um</code></li>
@@ -1477,7 +1477,7 @@ déplacées vers natives.
 <blockquote>
 
 <details>
-<summary><code>P3_TPL_AMHQ_2_ZONE.yaml</code> - 12 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml">voir fichier</a></summary>
+<summary><code>P3_TPL_AMHQ_2_ZONE.yaml</code> - 12 entité(s) - <a href="templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.eclairage_appart_2_mensuel_um_kwh_tpl</code></li>
 <li><code>sensor.eclairage_appart_2_quotidien_um_kwh_tpl</code></li>
@@ -1495,7 +1495,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P3_TPL_AMHQ_3_TOTAL.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_3_TOTAL.yaml">voir fichier</a></summary>
+<summary><code>P3_TPL_AMHQ_3_TOTAL.yaml</code> - 2 entité(s) - <a href="templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_3_TOTAL.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.eclairage_total_unit_mensuel_kwh_tpl</code></li>
 <li><code>sensor.eclairage_total_unit_quotidien_kwh_tpl</code></li>
@@ -1503,7 +1503,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>etats_status.yaml</code> - 6 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P3_eclairage/ui_dashboard/etats_status.yaml">voir fichier</a></summary>
+<summary><code>etats_status.yaml</code> - 6 entité(s) - <a href="templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.lumiere_appartement_etat</code></li>
 <li><code>sensor.lumiere_bureau_etat</code></li>
@@ -1533,7 +1533,7 @@ déplacées vers natives.
 <blockquote>
 
 <details>
-<summary><code>P3_AVG_AMHQ_2_ZONE.yaml</code> - 5 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml">voir fichier</a></summary>
+<summary><code>P3_AVG_AMHQ_2_ZONE.yaml</code> - 5 entité(s) - <a href="templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.eclairage_appart_3_avg_watts_mensuel</code></li>
 <li><code>sensor.eclairage_bureau_5_avg_watts_mensuel</code></li>
@@ -1544,7 +1544,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P3_TPL_AMHQ_1_UNITE.yaml</code> - 38 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml">voir fichier</a></summary>
+<summary><code>P3_TPL_AMHQ_1_UNITE.yaml</code> - 38 entité(s) - <a href="templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_1_UNITE.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.hue_ambiance_lamp_salon_1_mensuel_um_kwh_tpl</code></li>
 <li><code>sensor.hue_ambiance_lamp_salon_1_quotidien_um_kwh_tpl</code></li>
@@ -1588,7 +1588,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P3_TPL_AMHQ_2_ZONE.yaml</code> - 20 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml">voir fichier</a></summary>
+<summary><code>P3_TPL_AMHQ_2_ZONE.yaml</code> - 20 entité(s) - <a href="templates/P3_eclairage/P3_ENERGIE_TPL/P3_TPL_AMHQ_2_ZONE.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.eclairage_appart_3_annuel_um_kwh_tpl</code></li>
 <li><code>sensor.eclairage_appart_3_hebdomadaire_um_kwh_tpl</code></li>
@@ -1673,7 +1673,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <blockquote>
 
 <details>
-<summary><code>etats_status.yaml</code> - 7 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P3_eclairage/ui_dashboard/etats_status.yaml">voir fichier</a></summary>
+<summary><code>etats_status.yaml</code> - 7 entité(s) - <a href="templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.bureau_etat</code></li>
 <li><code>sensor.chambre_etat</code></li>
@@ -1686,7 +1686,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 </details>
 
 <details>
-<summary><code>P2_UM_AMHQ_prises.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml">voir fichier</a></summary>
+<summary><code>P2_UM_AMHQ_prises.yaml</code> - 1 entité(s) - <a href="utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>switch.prise_tete_de_lit_chambre</code></li>
 </ul></blockquote>
@@ -1733,7 +1733,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <blockquote>
 
 <details>
-<summary><code>etats_status.yaml</code> - 5 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P3_eclairage/ui_dashboard/etats_status.yaml">voir fichier</a></summary>
+<summary><code>etats_status.yaml</code> - 5 entité(s) - <a href="templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.lumiere_couloir_etat</code></li>
 <li><code>sensor.lumiere_cuisine_etat</code></li>
@@ -1744,7 +1744,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 </details>
 
 <details>
-<summary><code>S_01_STORES.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/Stores/S_01_STORES.yaml">voir fichier</a></summary>
+<summary><code>S_01_STORES.yaml</code> - 1 entité(s) - <a href="templates/Stores/S_01_STORES.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>cover.store_salon</code></li>
 </ul></blockquote>
@@ -1802,7 +1802,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <blockquote>
 
 <details>
-<summary><code>etats_status.yaml</code> - 6 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P3_eclairage/ui_dashboard/etats_status.yaml">voir fichier</a></summary>
+<summary><code>etats_status.yaml</code> - 6 entité(s) - <a href="templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.chambre_nb_allumes</code></li>
 <li><code>sensor.lumiere_bureau_etat</code></li>
@@ -1814,14 +1814,14 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 </details>
 
 <details>
-<summary><code>S_01_STORES.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/Stores/S_01_STORES.yaml">voir fichier</a></summary>
+<summary><code>S_01_STORES.yaml</code> - 1 entité(s) - <a href="templates/Stores/S_01_STORES.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>cover.store_bureau</code></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>P2_UM_AMHQ_prises.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml">voir fichier</a></summary>
+<summary><code>P2_UM_AMHQ_prises.yaml</code> - 1 entité(s) - <a href="utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>switch.prise_tete_de_lit_chambre</code></li>
 </ul></blockquote>
@@ -1967,7 +1967,7 @@ produit que des <code>sensor.*_um</code>) déplacés vers natives.
 <blockquote>
 
 <details>
-<summary><code>S_01_STORES.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/Stores/S_01_STORES.yaml">voir fichier</a></summary>
+<summary><code>S_01_STORES.yaml</code> - 2 entité(s) - <a href="templates/Stores/S_01_STORES.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.store_bureau_status</code></li>
 <li><code>sensor.store_salon_status</code></li>
@@ -2003,7 +2003,7 @@ produit que des <code>sensor.*_um</code>) déplacés vers natives.
 <blockquote>
 
 <details>
-<summary><code>S_01_STORES.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/Stores/S_01_STORES.yaml">voir fichier</a></summary>
+<summary><code>S_01_STORES.yaml</code> - 2 entité(s) - <a href="templates/Stores/S_01_STORES.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.store_bureau_status</code></li>
 <li><code>sensor.store_salon_status</code></li>
@@ -2160,13 +2160,13 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <details>
 <summary>💬 Pop-up <code>#conso</code> - 7 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.mini_pc_avg_watts_mensuel</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
-<li><code>sensor.mini_pc_avg_watts_quotidien</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.mini_pc_avg_watts_mensuel</code> - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.mini_pc_avg_watts_quotidien</code> - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
 <li><code>sensor.prise_mini_pc_ikea_current</code> - <i>Natif HA</i></li>
 <li><code>sensor.prise_mini_pc_ikea_energy</code> - <i>Natif HA</i></li>
-<li><code>sensor.prise_mini_pc_ikea_mensuel_um</code> - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.prise_mini_pc_ikea_mensuel_um</code> - <a href="utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></li>
 <li><code>sensor.prise_mini_pc_ikea_power</code> - <i>Natif HA</i></li>
-<li><code>sensor.prise_mini_pc_ikea_quotidien_um</code> - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.prise_mini_pc_ikea_quotidien_um</code> - <a href="utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -2190,18 +2190,18 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <blockquote>
 
 <details>
-<summary><code>P2_AVG_AMHQ_mini_pc.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></summary>
+<summary><code>P2_AVG_AMHQ_mini_pc.yaml</code> - 2 entité(s) - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.mini_pc_avg_watts_mensuel</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
-<li><code>sensor.mini_pc_avg_watts_quotidien</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.mini_pc_avg_watts_mensuel</code> - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.mini_pc_avg_watts_quotidien</code> - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>P2_UM_AMHQ_mini_pc.yaml</code> - 2 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></summary>
+<summary><code>P2_UM_AMHQ_mini_pc.yaml</code> - 2 entité(s) - <a href="utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.prise_mini_pc_ikea_mensuel_um</code> - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></li>
-<li><code>sensor.prise_mini_pc_ikea_quotidien_um</code> - <a href="docs/01_docs_config_system/config_system_YAML/utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.prise_mini_pc_ikea_mensuel_um</code> - <a href="utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.prise_mini_pc_ikea_quotidien_um</code> - <a href="utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -2274,7 +2274,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <blockquote>
 
 <details>
-<summary><code>Mise_a_jour_home_assistant.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/utilitaires/Mise_a_jour_home_assistant.yaml">voir fichier</a></summary>
+<summary><code>Mise_a_jour_home_assistant.yaml</code> - 1 entité(s) - <a href="templates/utilitaires/Mise_a_jour_home_assistant.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.available_updates</code></li>
 </ul></blockquote>
@@ -2605,7 +2605,7 @@ le total ~49.
 <blockquote>
 
 <details>
-<summary><code>sql.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/sql.yaml">voir fichier</a></summary>
+<summary><code>sql.yaml</code> - 1 entité(s) - <a href="sql.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.taille_db_home_assistant</code></li>
 </ul></blockquote>
@@ -2630,7 +2630,7 @@ le total ~49.
 <blockquote>
 
 <details>
-<summary><code>github_maintenance.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/command_line/github_maintenance/github_maintenance.yaml">voir fichier</a></summary>
+<summary><code>github_maintenance.yaml</code> - 3 entité(s) - <a href="command_line/github_maintenance/github_maintenance.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.backup_github_status</code></li>
 <li><code>sensor.git_last_weekly_tag</code></li>
@@ -2639,7 +2639,7 @@ le total ~49.
 </details>
 
 <details>
-<summary><code>sql.yaml</code> - 1 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/sql.yaml">voir fichier</a></summary>
+<summary><code>sql.yaml</code> - 1 entité(s) - <a href="sql.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.taille_db_home_assistant</code></li>
 </ul></blockquote>
@@ -2705,7 +2705,7 @@ le total ~49.
 <details>
 <summary>💬 Pop-up <code>#spm25</code> - 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.pm2_5_salon_moy_24h</code> - <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.pm2_5_salon_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -2713,8 +2713,8 @@ le total ~49.
 <summary>💬 Pop-up <code>#scov</code> - 3 entité(s)</summary>
 <blockquote><ul>
 <li><code>sensor.qualite_air_salon_ikea_voc_index</code> - <i>Natif HA</i></li>
-<li><code>sensor.tcov_salon_ppb</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_salon_moy_24h</code> - <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_salon_ppb</code> - <a href="templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_salon_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 <blockquote>
@@ -2727,7 +2727,7 @@ Bureau et un tCOV Bureau - incohérent avec son propre nom et la logique du dash
 <details>
 <summary>💬 Pop-up <code>#bpm25</code> - 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.pm2_5_bureau_moy_24h</code> - <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.pm2_5_bureau_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -2735,8 +2735,8 @@ Bureau et un tCOV Bureau - incohérent avec son propre nom et la logique du dash
 <summary>💬 Pop-up <code>#bcov</code> - 3 entité(s)</summary>
 <blockquote><ul>
 <li><code>sensor.qualite_air_bureau_ikea_voc_index</code> - <i>Natif HA</i></li>
-<li><code>sensor.tcov_bureau_ppb</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_bureau_moy_24h</code> - <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_bureau_ppb</code> - <a href="templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_bureau_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 <blockquote>
@@ -2748,7 +2748,7 @@ les 3 entités COV/tCOV réelles du Bureau.
 <details>
 <summary>💬 Pop-up <code>#cpm25</code> - 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.pm2_5_chambre_moy_24h</code> - <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.pm2_5_chambre_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -2756,8 +2756,8 @@ les 3 entités COV/tCOV réelles du Bureau.
 <summary>💬 Pop-up <code>#ccov</code> - 3 entité(s)</summary>
 <blockquote><ul>
 <li><code>sensor.qualite_air_chambre_ikea_voc_index</code> - <i>Natif HA</i></li>
-<li><code>sensor.tcov_chambre_ppb</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_chambre_moy_24h</code> - <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_chambre_ppb</code> - <a href="templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_chambre_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 <blockquote>
@@ -2772,22 +2772,22 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <blockquote>
 
 <details>
-<summary><code>A_01_AIR_QUALITY.yaml</code> - 6 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></summary>
+<summary><code>A_01_AIR_QUALITY.yaml</code> - 6 entité(s) - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.pm2_5_bureau_moy_24h</code> - <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.pm2_5_chambre_moy_24h</code> - <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.pm2_5_salon_moy_24h</code> - <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_bureau_moy_24h</code> - <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_chambre_moy_24h</code> - <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_salon_moy_24h</code> - <a href="docs/01_docs_config_system/config_system_YAML/sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.pm2_5_bureau_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.pm2_5_chambre_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.pm2_5_salon_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_bureau_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_chambre_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_salon_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>A_01_AIR_QUALITY.yaml</code> - 3 entité(s) - <a href="docs/01_docs_config_system/config_system_YAML/templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></summary>
+<summary><code>A_01_AIR_QUALITY.yaml</code> - 3 entité(s) - <a href="templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.tcov_bureau_ppb</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_chambre_ppb</code> - <a href="docs/01_docs_config_system/config_system_YAML/templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_bureau_ppb</code> - <a href="templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_chambre_ppb</code> - <a href="templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 <li><code>sensor.tcov_salon_ppb</code></li>
 </ul></blockquote>
 </details>
