@@ -4023,7 +4023,7 @@ MATERIEL (NAT: 37)
 | `sensor.hue_smart_button_entee_2_batterie` | NAT | idem |
 | `sensor.hue_smart_button_table_batterie` | NAT | idem |
 | `sensor.inter_bureau_rodret_battery` | NAT | idem |
-| `sensor.inter_radiateur_salle_de_bain_ikea_rodret_battery` | NAT | idem |
+| `sensor.inter_soufflant_salle_de_bain_ikea_rodret_battery` | NAT | idem |
 | `sensor.inter_salon_4_ikea_battery` | NAT | idem |
 | `sensor.inter_somrig_battery` | NAT | idem |
 | `sensor.inter_tv_chambre_ikea_rodret_battery` | NAT | idem |
@@ -4060,7 +4060,7 @@ MATERIEL (NAT: 37)
 ---
 - [heading] Batteries — boutons & détecteurs IKEA (aucune entite)
 ---
-- [custom:battery-state-card] : sensor.detecteur_de_fuite_ikea_battery (NAT), sensor.detecteur_vallhorn_battery (NAT), sensor.gm1901_battery_level (NAT), sensor.inter_bureau_rodret_battery (NAT), sensor.inter_radiateur_salle_de_bain_ikea_rodret_battery (NAT), sensor.inter_salon_4_ikea_battery (NAT), sensor.inter_somrig_battery (NAT), sensor.inter_tv_chambre_ikea_rodret_battery (NAT), sensor.ne2213_ (NAT), sensor.poussoir_ikea_tradfri_battery (NAT), sensor.sm_a530f_battery_level (NAT), sensor.tablette_battery_level (NAT)
+- [custom:battery-state-card] : sensor.detecteur_de_fuite_ikea_battery (NAT), sensor.detecteur_vallhorn_battery (NAT), sensor.gm1901_battery_level (NAT), sensor.inter_bureau_rodret_battery (NAT), sensor.inter_soufflant_salle_de_bain_ikea_rodret_battery (NAT), sensor.inter_salon_4_ikea_battery (NAT), sensor.inter_somrig_battery (NAT), sensor.inter_tv_chambre_ikea_rodret_battery (NAT), sensor.ne2213_ (NAT), sensor.poussoir_ikea_tradfri_battery (NAT), sensor.sm_a530f_battery_level (NAT), sensor.tablette_battery_level (NAT)
 ---
 - [heading] Batteries — contacts de fenêtres SONOFF (aucune entite)
 ---

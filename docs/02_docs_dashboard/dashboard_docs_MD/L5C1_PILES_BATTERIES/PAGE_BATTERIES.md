@@ -162,7 +162,7 @@ card_mod:
 | `sensor.detecteur_de_fuite_ikea_battery` | Détecteur de fuite |
 | `sensor.detecteur_vallhorn_battery` | Détecteur VALLHORN |
 | `sensor.poussoir_ikea_tradfri_battery` | Poussoir TRADFRI |
-| `sensor.inter_radiateur_salle_de_bain_ikea_rodret_battery` | Inter radiateur SDB |
+| `sensor.inter_soufflant_salle_de_bain_ikea_rodret_battery` | Inter soufflant SDB |
 
 ---
 
