@@ -1,5 +1,5 @@
-# 🌳 ARBORESCENCES COMPLÈTES & INDEX GITHUB
-*Dernière mise à jour : 2026-09-29 (relevés LOCAL + PROD + GitHub rafraîchis par comptage automatique ; dossiers `_ARCHIVE` et `_old_avant_staging` notés)*
+﻿# 🌳 ARBORESCENCES COMPLÈTES & INDEX GITHUB
+*Dernière mise à jour : 2026-10-04 S1 (relevés LOCAL + PROD + GitHub rafraîchis 2026-10-04 ; resync docs LOCAL->H:\docs + ha-resync-tree GitHub->local SYNC=80 ; Dashboard_2026_10-04.yaml rapatrié)*
 *Lire ce fichier si : audit fichiers, sync GitHub, recherche d'un fichier prod, vérification arbo locale, URLs raw GitHub.*
 
 ---
@@ -20,7 +20,7 @@
 ## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-09-29)
 
 ```text
-ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\ - relevé 2026-09-29)
+ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\ - relevé 2026-10-04)
 ├── 17 fichiers racine
 │   CLAUDE.md                           (source de vérité contexte - sync avec IA_CONTEXT_BASE.md)
 │   CLAUDE_backup_2026-07-31.md · CLAUDE_backup_2026-08-01.md   (backups)
@@ -34,12 +34,12 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── prompt/ · Claude outputs/ · _old_avant_staging/ · energie/   (travaux et conteneurs)
 ├── Infra_Proxmox/                      (réseau, certs - + save/)
 ├── scripts/                            (5 - audit_md5_md.sh · audit_md5_yaml.sh · check_yaml_forme.py · ha_git_backup.sh · hermes_gen_dependances.py)
-├── historique/                         (101 dont 2 sauvegardes - JOURNAL_COMPLET_*.md · histo_YYYY-MM-DD_S*.txt · ARCHIVE_SESSIONS_HA_2026-03-15_2026-05-14.md · archives MD5)
-└── docs/                               (515 fichiers dont 50 sauvegardes)
+├── historique/                         (66 - JOURNAL_COMPLET_*.md · histo_YYYY-MM-DD_S*.txt · ARCHIVE_SESSIONS_HA_2026-03-15_2026-05-14.md · archives MD5)
+└── docs/                               (609 fichiers)
     ├── 00_IA/                          (22 dont 8 sauvegardes - IA_CONTEXT_BASE.md · ha-erodi-architecture.html · RAPPORT_AUDIT_ENERGETIQUE_*.md ×2 · Grille_Tarif_Bleu_EDF_2026-08-01.csv/.pdf · confort_cible_calcul_flow.png)
     │   └── sous_context_ia/            (13 dont 5 sauvegardes - 8 sous-contextes IA_*.md + index arbo)
-    ├── 01_docs_config_system/          (4 dont 2 sauvegardes - config_system_MD/configuration.md · config_system_YAML/configuration.yaml, gardé par sécurité)
-    ├── 02_docs_dashboard/              (230 dont 28 sauvegardes - dashboard_docs_MD · dashboard_docs_YAML)
+    ├── 01_docs_config_system/          (87 - config_system_MD/ + config_system_YAML/ 85 fichiers, resynchronisé GitHub->local 2026-10-04, SYNC=80 DIFF=0)
+    ├── 02_docs_dashboard/              (236 - dashboard_docs_MD · dashboard_docs_YAML)
     ├── 03_docs_automations/            (228 dont 9 sauvegardes - docs_automations_MD · docs_automations_YAML)
     ├── 04_docs_scripts/                (21 - SH · SH_MD · YAML · YAML_MD)
     └── 05_docs_MD_system/              (8 dont 3 sauvegardes)
@@ -50,7 +50,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 
 > ⛔ `TREE_CORRIGE/`, `TREE_ORIGINE/`, `Dashboard/`, `docs_dashboard/`, `docs_automations/`, `docs_scripts/`, `IA/` racine : **supprimés le 2026-07-14** - toute référence à ces chemins est morte.
 
-> 🗑️ **Purge du 2026-09-29** : `docs/01_docs_config_system/config_system_YAML` vidé de 104 YAML de configuration (les sources sont la prod et le dépôt, la copie locale n'était qu'un risque) - il ne reste que `configuration.yaml`. Le dossier `P3` des boutons virtuels du salon a été supprimé (local + prod + dépôt) et ses 4 entités purgées du registre Home Assistant. Les 2 fichiers `WORKFLOW_REBUILD.md` ont été supprimés, leur contenu unique conservé ailleurs.
+> 🗑️ **Purge du 2026-09-29** : config_system_YAML vidé de 104 YAML (risque de divergence). Le dossier P3 boutons salon supprimé + 4 entités purgées HA. Les 2 WORKFLOW_REBUILD.md supprimés. **RATTRAPÉ 2026-10-04** : ha-resync-tree GitHub->local, 85 fichiers resynchronisés (SYNC=80 DIFF=0) - copie locale de nouveau conforme à la prod.
 
 ---
 
@@ -62,7 +62,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── Fichiers racine :
 │   configuration.yaml · automations.yaml · scripts.yaml · scenes.yaml · secrets.yaml
 │   input_button.yaml · input_datetime.yaml · input_select.yaml · sql.yaml · ip_bans.yaml
-│   INDEX_GLOBAL.md · README.md · Dashboard_2026_09_24.yaml (export le plus récent)
+│   INDEX_GLOBAL.md · README.md · Dashboard_2026_10-04.yaml (export le plus récent)
 │   .HA_VERSION · .gitignore · .ha_run.lock · home-assistant_v2.db · home-assistant.log.fault
 │   sauvegardes : automations.yaml.bak ×2 · INDEX_GLOBAL.md.bak ×2 · scripts.yaml.bak ×3
 │
@@ -109,7 +109,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   └── meteo/ (M_03_meteo_UM_blitzortung)
 │
 ├── custom_components/ · themes/ · tts/ · www/ · deps/   (divers, hors périmètre docs HA)
-└── docs/                               (474 dont 6 sauvegardes - miroir pushé depuis local docs/)
+└── docs/                               (468 - miroir pushé depuis local docs/)
     ├── 00_IA/                          (18 dont 3 sauvegardes - 6 racine + sous_context_ia/8 + sauvegardes)
     ├── 01_docs_config_system/          (2 - config_system_MD/configuration.md + config_system_YAML/configuration.yaml, gardé par sécurité)
     ├── 02_docs_dashboard/              (204 - dashboard_docs_MD · dashboard_docs_YAML)
@@ -127,8 +127,8 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 - **Repo actif unique** : `BerrySwann/home_assistant_re-build` (ancien `home-assistant-config` supprimé le 2026-04-27)
 - **Contenu** : reflet exact de `/homeassistant/` - pushé par `.scripts/ha_git_backup.sh` (boutons page Système L5C3)
 - **Point d'entrée navigation** : [INDEX_GLOBAL.md](https://github.com/BerrySwann/home_assistant_re-build/blob/main/INDEX_GLOBAL.md)
-- **Dernier relevé arbre (API git trees)** : 2026-09-29 - **643 fichiers et 177 dossiers** ; dernier commit `a3edf590` (2026-09-29 21:05 CEST, sauvegarde manuelle HAOS)
-- Répartition : `docs/` 451 · `templates/` 43 · `utility_meter/` 8 · `input_booleans/` 6 · `sensors/` 4
+- **Dernier relevé arbre (API git trees)** : 2026-10-04 - **822 objets (fichiers + dossiers)** ; dernier commit `dfd745e5` (2026-10-04 10:38 CEST, HAOS MANUEL-backup HA 2026.9.4)
+- Répartition : `docs/` 551 · `templates/` 43 · `utility_meter/` 8 · `input_booleans/` 6 · `sensors/` 4
 
 **Patterns URLs :**
 
