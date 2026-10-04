@@ -1,5 +1,5 @@
-﻿# 🌳 ARBORESCENCES COMPLÈTES & INDEX GITHUB
-*Dernière mise à jour : 2026-10-04 S1 (relevés LOCAL + PROD + GitHub rafraîchis 2026-10-04 ; resync docs LOCAL->H:\docs + ha-resync-tree GitHub->local SYNC=80 ; Dashboard_2026_10-04.yaml rapatrié)*
+# 🌳 ARBORESCENCES COMPLÈTES & INDEX GITHUB
+*Dernière mise à jour : 2026-10-04 S2 (relevés LOCAL + PROD + GitHub rafraîchis 2026-10-04 ; resync docs LOCAL->H:\docs + ha-resync-tree GitHub->local SYNC=80 ; Dashboard_2026_10-04.yaml rapatrié ; S2 : templates/meteo/ M_02 et M_03 refactorisés en fichiers individuels, M_04 splitté en 2)*
 *Lire ce fichier si : audit fichiers, sync GitHub, recherche d'un fichier prod, vérification arbo locale, URLs raw GitHub.*
 
 ---
@@ -92,9 +92,9 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   ├── P1_clim_chauffage/ (P1_DUT/P1_DUT_clim_chauffage)
 │   └── meteo/ (M_meteo_sensors_blitzortung)
 │
-├── templates/                          (43)   [2 supprimés le 2026-09-29 : P3 du salon]
+├── templates/                          (52)   [2 supprimés le 2026-09-29 : P3 du salon ; +9 le 2026-10-04 : meteo/ refactorisé (M_02/M_03/M_04/M_05)]
 │   ├── Air_quality/ (1) · Inter_BP_Virtuel/P1/ (1 - soufflant SdB) · Stores/ (1) · utilitaires/ (3 - jour_nuit · Mise_a_jour_home_assistant · nb_fenetre_ouvert_ferme_autom)
-│   ├── meteo/ (5 - M_01 → M_05)
+│   ├── meteo/ (14 - M_01/1 · M_02_meteo_vent/3 · M_03_Meteo_orage_eclaires/5 · M_04_meteo_tendances/2 · M_05_meteo_cycle_solaire/3 ; refactorisé 2026-10-04 : M_02/M_03/M_05 éclatés en fichiers individuels par entité, M_04 splitté temp/humidité)
 │   ├── P0_Energie_total_diag/ (P0_Diag/3 · P0_Genelec_appart/3 · P0_Linky/1 · P0_total_pour_les_7_postes/1)
 │   ├── P1_clim_chauffage/ (P1_01_MASTER/3 · P1_AVG/2 [P1_AVG_AMHQ_TOTAL · P1_AVG_AMHQ_UNITE] · P1_DUT_TOTAL/1 · P1_TOTAL/1 · P1_ui_dashboard/1)
 │   ├── P2_prise/ (P2_AVG/3 · P2_congelateur/1 [compresseur actif - ajouté 2026-09-02] · P2_eCO_prises/1 · P2_I_all_standby_power/1)

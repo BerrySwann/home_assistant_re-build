@@ -128,23 +128,23 @@
 <summary>📄 <b>Page</b> - 3 pop-up(s)</summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L1C1_METEO/PAGE_METEO.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/page_L1C1_meteo_2026-06-13.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/page_L1C1_meteo_2026-10-04.yaml">YAML Page</a>
 
 
 <details>
 <summary>💬 Pop-up <code>#foudre</code> - 14 entité(s)</summary>
 <blockquote><ul>
 <li><code>sensor.blitzortung_lightning_localisation</code> - <a href="sensors/meteo/M_meteo_sensors_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.dernier_impact_temps_reel</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.timer_foudre</code> - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_timer_foudre_card.yaml">voir fichier</a></li>
 <li><code>sensor.eclair_annuel</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
 <li><code>sensor.eclair_hebdomadaire</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
 <li><code>sensor.eclair_horaire</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
 <li><code>sensor.eclair_mensuel</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
 <li><code>sensor.eclair_quotidien</code> - <a href="utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.lightning_bearing</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.lightning_direction_label</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.lightning_distance_km</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.temps_depuis_le_dernier_impact_de_foudre</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.direction_foudre_deg</code> - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_direction_foudre_deg_card.yaml">voir fichier</a></li>
+<li><code>sensor.direction_foudre_label</code> - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_direction_foudre_label_card.yaml">voir fichier</a></li>
+<li><code>sensor.distance_foudre_km</code> - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_distance_foudre_km_card.yaml">voir fichier</a></li>
+<li><code>sensor.dernier_impact_foudre</code> - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_dernier_impact_foudre_card.yaml">voir fichier</a></li>
 <li><code>sensor.maison_lightning_azimuth</code> - <i>Natif HA (Blitzortung)</i></li>
 <li><code>sensor.maison_lightning_counter</code> - <i>Natif HA (Blitzortung)</i></li>
 <li><code>sensor.maison_lightning_distance</code> - <i>Natif HA (Blitzortung)</i></li>
@@ -174,11 +174,11 @@
 <details>
 <summary>💬 Pop-up <code>#sun</code> - 6 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.duree_du_jour</code> - <a href="templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
+<li><code>sensor.duree_du_jour</code> - <a href="templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_duree_du_jour_card.yaml">voir fichier</a></li>
 <li><code>sensor.moon_phase</code> - <i>Natif HA</i></li>
 <li><code>sensor.season</code> - <i>Natif HA</i></li>
-<li><code>sensor.tendance_duree_jour</code> - <a href="templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
-<li><code>sensor.variation_quotidienne</code> - <a href="templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
+<li><code>sensor.tendance_duree_jour</code> - <a href="templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_tendance_duree_jour_card.yaml">voir fichier</a></li>
+<li><code>sensor.variation_quotidienne</code> - <a href="templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_variation_quotidienne_card.yaml">voir fichier</a></li>
 <li><code>sun.sun</code> - <i>Natif HA</i></li>
 </ul></blockquote>
 </details>
@@ -205,22 +205,58 @@
 </details>
 
 <details>
-<summary><code>M_02_meteo_vent_vence_card.yaml</code> - 3 entité(s) - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></summary>
+<summary><code>M_02_meteo_direction_vent_vence_deg_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_02_meteo_vent/M_02_meteo_direction_vent_vence_deg_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.vence_wind_bearing</code> - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
-<li><code>sensor.vence_wind_direction_label</code> - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
-<li><code>sensor.vence_wind_speed_kmh</code> - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
+<li><code>sensor.direction_vent_vence_deg</code> - <a href="templates/meteo/M_02_meteo_vent/M_02_meteo_direction_vent_vence_deg_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>M_03_meteo_blitzortung.yaml</code> - 5 entité(s) - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></summary>
+<summary><code>M_02_meteo_direction_vent_vence_label_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_02_meteo_vent/M_02_meteo_direction_vent_vence_label_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.dernier_impact_temps_reel</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.lightning_bearing</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.lightning_direction_label</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.lightning_distance_km</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
-<li><code>sensor.temps_depuis_le_dernier_impact_de_foudre</code> - <a href="templates/meteo/M_03_meteo_blitzortung.yaml">voir fichier</a></li>
+<li><code>sensor.direction_vent_vence_label</code> - <a href="templates/meteo/M_02_meteo_vent/M_02_meteo_direction_vent_vence_label_card.yaml">voir fichier</a></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary><code>M_02_meteo_vitesse_vent_vence_kmh_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_02_meteo_vent/M_02_meteo_vitesse_vent_vence_kmh_card.yaml">voir fichier</a></summary>
+<blockquote><ul>
+<li><code>sensor.vitesse_vent_vence_kmh</code> - <a href="templates/meteo/M_02_meteo_vent/M_02_meteo_vitesse_vent_vence_kmh_card.yaml">voir fichier</a></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary><code>M_03_meteo_direction_foudre_label_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_direction_foudre_label_card.yaml">voir fichier</a></summary>
+<blockquote><ul>
+<li><code>sensor.direction_foudre_label</code> - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_direction_foudre_label_card.yaml">voir fichier</a></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary><code>M_03_meteo_distance_foudre_km_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_distance_foudre_km_card.yaml">voir fichier</a></summary>
+<blockquote><ul>
+<li><code>sensor.distance_foudre_km</code> - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_distance_foudre_km_card.yaml">voir fichier</a></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary><code>M_03_meteo_direction_foudre_deg_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_direction_foudre_deg_card.yaml">voir fichier</a></summary>
+<blockquote><ul>
+<li><code>sensor.direction_foudre_deg</code> - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_direction_foudre_deg_card.yaml">voir fichier</a></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary><code>M_03_meteo_timer_foudre_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_timer_foudre_card.yaml">voir fichier</a></summary>
+<blockquote><ul>
+<li><code>sensor.timer_foudre</code> - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_timer_foudre_card.yaml">voir fichier</a></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary><code>M_03_meteo_dernier_impact_foudre_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_dernier_impact_foudre_card.yaml">voir fichier</a></summary>
+<blockquote><ul>
+<li><code>sensor.dernier_impact_foudre</code> - <a href="templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_dernier_impact_foudre_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -243,11 +279,23 @@
 </details>
 
 <details>
-<summary><code>M_05_cycle_solaire.yaml</code> - 3 entité(s) - <a href="templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></summary>
+<summary><code>M_05_meteo_duree_du_jour_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_duree_du_jour_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.duree_du_jour</code> - <a href="templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
-<li><code>sensor.tendance_duree_jour</code> - <a href="templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
-<li><code>sensor.variation_quotidienne</code> - <a href="templates/meteo/M_05_cycle_solaire.yaml">voir fichier</a></li>
+<li><code>sensor.duree_du_jour</code> - <a href="templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_duree_du_jour_card.yaml">voir fichier</a></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary><code>M_05_meteo_tendance_duree_jour_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_tendance_duree_jour_card.yaml">voir fichier</a></summary>
+<blockquote><ul>
+<li><code>sensor.tendance_duree_jour</code> - <a href="templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_tendance_duree_jour_card.yaml">voir fichier</a></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary><code>M_05_meteo_variation_quotidienne_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_variation_quotidienne_card.yaml">voir fichier</a></summary>
+<blockquote><ul>
+<li><code>sensor.variation_quotidienne</code> - <a href="templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_variation_quotidienne_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -333,10 +381,16 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 <blockquote>
 
 <details>
-<summary><code>M_04_tendances_th_ext_card.yaml</code> - 2 entité(s) - <a href="templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></summary>
+<summary><code>M_04_tendances_th_est_humidity_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_04_meteo_tendances/M_04_tendances_th_est_humidity_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_humidity_trend</code> - <a href="templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
-<li><code>sensor.th_balcon_nord_temperature_trend</code> - <a href="templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_humidity_trend</code> - <a href="templates/meteo/M_04_meteo_tendances/M_04_tendances_th_est_humidity_card.yaml">voir fichier</a></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary><code>M_04_tendances_th_ext_temperature_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_04_meteo_tendances/M_04_tendances_th_ext_temperature_card.yaml">voir fichier</a></summary>
+<blockquote><ul>
+<li><code>sensor.th_balcon_nord_temperature_trend</code> - <a href="templates/meteo/M_04_meteo_tendances/M_04_tendances_th_ext_temperature_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -382,8 +436,8 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 <blockquote><ul>
 <li><code>sensor.th_balcon_nord_temperature</code> - <i>Natif HA (SONOFF Z2M)</i></li>
 <li><code>sensor.th_balcon_nord_humidity</code> - <i>Natif HA (SONOFF Z2M)</i></li>
-<li><code>sensor.th_balcon_nord_temperature_trend</code> - <a href="templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
-<li><code>weather.vence</code> - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_temperature_trend</code> - <a href="templates/meteo/M_04_meteo_tendances/M_04_tendances_th_ext_temperature_card.yaml">voir fichier</a></li>
+<li><code>weather.vence</code> - <i>HACS - MeteoFrance weather card (pas Natif HA core)</i></li>
 </ul></blockquote>
 </details>
 
@@ -496,15 +550,21 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 <details>
 <summary><code>M_02_meteo_vent_vence_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>weather.vence</code> - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></li>
+<li><code>weather.vence</code> - <i>HACS - MeteoFrance weather card (pas Natif HA core)</i></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>M_04_tendances_th_ext_card.yaml</code> - 2 entité(s) - <a href="templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></summary>
+<summary><code>M_04_tendances_th_est_humidity_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_04_meteo_tendances/M_04_tendances_th_est_humidity_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.th_balcon_nord_humidity_trend</code> - <a href="templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
-<li><code>sensor.th_balcon_nord_temperature_trend</code> - <a href="templates/meteo/M_04_tendances_th_ext_card.yaml">voir fichier</a></li>
+<li><code>sensor.th_balcon_nord_humidity_trend</code> - <a href="templates/meteo/M_04_meteo_tendances/M_04_tendances_th_est_humidity_card.yaml">voir fichier</a></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary><code>M_04_tendances_th_ext_temperature_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_04_meteo_tendances/M_04_tendances_th_ext_temperature_card.yaml">voir fichier</a></summary>
+<blockquote><ul>
+<li><code>sensor.th_balcon_nord_temperature_trend</code> - <a href="templates/meteo/M_04_meteo_tendances/M_04_tendances_th_ext_temperature_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 

@@ -96,7 +96,7 @@ HOME PAGE (type: grid)
   │     ├─→ sensor.maison_lightning_distance  (NAT - Blitzortung natif)
   │     ├─→ sensor.blitzortung_lightning_localisation  (SEN - M_meteo_sensors_blitzortung.yaml, REST Nominatim)
   │     ├─→ sensor.maison_lightning_azimuth  (NAT - Blitzortung natif)
-  │     └─→ sensor.dernier_impact_temps_reel  (TPL - M_03_meteo_blitzortung.yaml, seul vrai TPL de ce bloc)
+  │     └─→ sensor.timer_foudre  (TPL - M_03_Meteo_orage_eclaires/M_03_meteo_timer_foudre_card.yaml, seul vrai TPL de ce bloc)
   ├─→ [5] mushroom - Lave-Linge (WashData)  (visible si power > 2W)
   │     ├─→ sensor.lave_linge_etat  (NAT - WashData, HACS)
   │     ├─→ sensor.lave_linge_temps_restant  (NAT - WashData, HACS)
@@ -148,7 +148,7 @@ HOME PAGE (type: grid)
 | `sensor.maison_lightning_distance` | NAT | Intégration Blitzortung (MQTT native) | [4] |
 | `sensor.blitzortung_lightning_localisation` | SEN | `sensors/meteo/M_meteo_sensors_blitzortung.yaml` (REST Nominatim) | [4] |
 | `sensor.maison_lightning_azimuth` | NAT | Intégration Blitzortung (MQTT native) | [4] |
-| `sensor.dernier_impact_temps_reel` | TPL | `templates/meteo/M_03_meteo_blitzortung.yaml` | [4] |
+| `sensor.timer_foudre` | TPL | `templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_timer_foudre_card.yaml` | [4] |
 | `sensor.lave_linge_etat` | NAT | WashData (HACS) | [5] |
 | `sensor.lave_linge_temps_restant` | NAT | WashData (HACS) | [5] |
 | `sensor.lave_linge_progres` | NAT | WashData (HACS) | [5] |
@@ -242,16 +242,16 @@ MATÉRIEL / INTÉGRATION
   │     └─→ sensor.maison_lightning_azimuth / _distance / _counter  (NAT)
   │           └─→ UM: M_03_meteo_UM_blitzortung.yaml  (eclair_annuel/mensuel/hebdomadaire/quotidien/horaire)
   │           └─→ SEN: M_meteo_sensors_blitzortung.yaml  (blitzortung_lightning_localisation - API Nominatim)
-  │           └─→ TPL: M_03_meteo_blitzortung.yaml  (lightning_direction_label / _distance_km / _bearing / temps_depuis_le_dernier_impact_de_foudre / dernier_impact_temps_reel)
+  │           └─→ TPL: M_03_Meteo_orage_eclaires/*.yaml  (direction_foudre_label / distance_foudre_km / direction_foudre_deg / timer_foudre / dernier_impact_foudre)
   ├─→ Météo France (alertes) + MeteoAlarm (fallback)
   │     └─→ sensor.06_weather_alert / binary_sensor.meteoalarm  (NAT)
   │           └─→ TPL: M_01_meteo_alertes_card.yaml  (10 sensors : alerte_vent_violent, _inondation, _orages,
   │               _pluie_inondation, _neige_verglas, _grand_froid, _canicule, _avalanches, _vagues_submersion, alerte_meteo)
   ├─→ Météo France (vent)
   │     └─→ weather.vence attributs wind_bearing / wind_speed  (NAT)
-  │           └─→ TPL: M_02_meteo_vent_vence_card.yaml  (vence_wind_direction_label / _bearing / _speed_kmh)
+  │           └─→ TPL: M_02_meteo_vent/*.yaml  (direction_vent_vence_deg / direction_vent_vence_label / vitesse_vent_vence_kmh)
   └─→ zone.home (latitude) + horloge système  (calculé, PAS sun.sun)
-        └─→ TPL: M_05_cycle_solaire.yaml  (duree_du_jour / tendance_duree_jour / variation_quotidienne)
+        └─→ TPL: M_05_meteo_cycle_solaire/*.yaml  (duree_du_jour / tendance_duree_jour / variation_quotidienne)
 ```
 
 > ⚠️ Corrigé le 2026-07-19 : cette section décrivait des noms d'entités obsolètes/inexistants
@@ -271,9 +271,9 @@ MATÉRIEL / INTÉGRATION
 | `sensor.eclair_quotidien` / `_hebdomadaire` / `_mensuel` / `_annuel` / `_horaire` | UM | `utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml` |
 | `sensor.blitzortung_lightning_localisation` | SEN (REST) | `sensors/meteo/M_meteo_sensors_blitzortung.yaml` |
 | `sensor.alerte_vent_violent` / `_inondation` / `_orages` / `_pluie_inondation` / `_neige_verglas` / `_grand_froid` / `_canicule` / `_avalanches` / `_vagues_submersion` / `alerte_meteo` | TPL | `templates/meteo/M_01_meteo_alertes_card.yaml` |
-| `sensor.vence_wind_direction_label` / `_bearing` / `_speed_kmh` | TPL | `templates/meteo/M_02_meteo_vent_vence_card.yaml` |
-| `sensor.lightning_direction_label` / `_distance_km` / `_bearing` / `temps_depuis_le_dernier_impact_de_foudre` / `dernier_impact_temps_reel` | TPL | `templates/meteo/M_03_meteo_blitzortung.yaml` |
-| `sensor.duree_du_jour` / `tendance_duree_jour` / `variation_quotidienne` | TPL | `templates/meteo/M_05_cycle_solaire.yaml` (calcul astronomique zone.home, PAS sun.sun) |
+| `sensor.direction_vent_vence_label` / `direction_vent_vence_deg` / `vitesse_vent_vence_kmh` | TPL | `templates/meteo/M_02_meteo_vent/*.yaml` |
+| `sensor.direction_foudre_label` / `distance_foudre_km` / `direction_foudre_deg` / `dernier_impact_foudre` / `timer_foudre` | TPL | `templates/meteo/M_03_Meteo_orage_eclaires/*.yaml` |
+| `sensor.duree_du_jour` / `tendance_duree_jour` / `variation_quotidienne` | TPL | `templates/meteo/M_05_meteo_cycle_solaire/*.yaml` (calcul astronomique zone.home, PAS sun.sun) |
 
 ### Entités ApexCharts (data_generator JS - durée du jour)
 
@@ -290,15 +290,23 @@ MATÉRIEL / INTÉGRATION
 |:--------|:------:|
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/vignette_L1C1_meteo_2026-05-16.yaml` | ✅ |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/page_L1C1_meteo_2026-05-23.yaml` | ⚠️ obsolete |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/page_L1C1_meteo_2026-06-13.yaml` | ✅ |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/page_L1C1_meteo_2026-10-04.yaml` | ✅ |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/card_duree_du_jour_2026-05-23.yaml` | ✅ |
 | `command_line/meteo/carte_meteo_france.yaml` | ✅ |
 | `utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml` | ✅ |
 | `sensors/meteo/M_meteo_sensors_blitzortung.yaml` | ✅ *(ajouté 2026-07-19 - manquait)* |
 | `templates/meteo/M_01_meteo_alertes_card.yaml` | ✅ |
-| `templates/meteo/M_02_meteo_vent_vence_card.yaml` | ✅ |
-| `templates/meteo/M_03_meteo_blitzortung.yaml` | ✅ |
-| `templates/meteo/M_05_cycle_solaire.yaml` | ✅ *(ajouté 2026-07-19 - manquait, calcule la durée du jour)* |
+| `templates/meteo/M_02_meteo_vent/M_02_meteo_direction_vent_vence_deg_card.yaml` | ✅ |
+| `templates/meteo/M_02_meteo_vent/M_02_meteo_direction_vent_vence_label_card.yaml` | ✅ |
+| `templates/meteo/M_02_meteo_vent/M_02_meteo_vitesse_vent_vence_kmh_card.yaml` | ✅ |
+| `templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_direction_foudre_label_card.yaml` | ✅ |
+| `templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_distance_foudre_km_card.yaml` | ✅ |
+| `templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_direction_foudre_deg_card.yaml` | ✅ |
+| `templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_timer_foudre_card.yaml` | ✅ |
+| `templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_dernier_impact_foudre_card.yaml` | ✅ |
+| `templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_duree_du_jour_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
+| `templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_tendance_duree_jour_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
+| `templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_variation_quotidienne_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
 
 > `templates/meteo/M_04_tendances_th_ext_card.yaml` retiré de cette liste le 2026-07-19 -
 > son entête déclare lui-même `AVAL : L1C2 Températures`, pas L1C1. Voir section L1C2.
@@ -345,7 +353,8 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `sensor.temperature_delta_value` | TPL | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
 | `sensor.temperature_delta_affichage` | TPL | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
 | `sensor.delta_ademe_recommande` | TPL | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
-| `sensor.th_balcon_nord_temperature_trend` / `_humidity_trend` | TPL | `templates/meteo/M_04_tendances_th_ext_card.yaml` |
+| `sensor.th_balcon_nord_temperature_trend` | TPL | `templates/meteo/M_04_meteo_tendances/M_04_tendances_th_ext_temperature_card.yaml` |
+| `sensor.th_balcon_nord_humidity_trend` | TPL | `templates/meteo/M_04_meteo_tendances/M_04_tendances_th_est_humidity_card.yaml` |
 | `sensor.th_balcon_nord_temperature` / `_humidity` | NAT | SONOFF via Z2M |
 | `sensor.conso_clim_rad_total` | TPL | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` |
 | `sensor.conso_clim_rad_total_quotidien` | TPL | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` |
@@ -394,7 +403,8 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-02.yaml` | ✅ historique - ajoute bloc CONGÉLATEUR (`sensor.tongel_temperature/_humidity/_battery`), même base que 2026-07-14 sinon |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-20.yaml` | ✅ historique - 41 cartes : refonte cartes clim button-card, retrait du reliquat bubble "Radiateur de la Cuisine", bloc CONGÉLATEUR |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-24.yaml` | ✅ dernière version - 42 cartes : + carte appliance Congélateur (contact porte, seuils 26/48/235) |
-| `templates/meteo/M_04_tendances_th_ext_card.yaml` | ✅ *(ajouté 2026-07-19 - manquait)* |
+| `templates/meteo/M_04_meteo_tendances/M_04_tendances_th_ext_temperature_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
+| `templates/meteo/M_04_meteo_tendances/M_04_tendances_th_est_humidity_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
 | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | ✅ *(fichier partagé - AVAL principal L1C3, voir aussi cette section)* |
 
 ---
