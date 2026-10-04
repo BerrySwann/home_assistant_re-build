@@ -27,31 +27,31 @@
 
 # --- eclair_annuel ---
 eclair_annuel:
-    name: "Éclairs Annuel"
+    name: "Éclair Annuel"
     source: sensor.maison_lightning_counter
     cycle: yearly
 
 # --- eclair_mensuel ---
 eclair_mensuel:
-    name: "Éclairs Mensuel"
+    name: "Éclair Mensuel"
     source: sensor.maison_lightning_counter
     cycle: monthly
 
 # --- eclair_hebdomadaire ---
 eclair_hebdomadaire:
-    name: "Éclairs Hebdomadaire"
+    name: "Éclair Hebdomadaire"
     source: sensor.maison_lightning_counter
     cycle: weekly
 
 # --- eclair_quotidien ---
 eclair_quotidien:
-    name: "Éclairs Quotidien"
+    name: "Éclair Quotidien"
     source: sensor.maison_lightning_counter
     cycle: daily
 
 # --- eclair_horaire ---
 eclair_horaire:
-    name: "Éclairs Horaire"
+    name: "Éclair Horaire"
     source: sensor.maison_lightning_counter
     cycle: hourly
 
