@@ -25,7 +25,7 @@
 
 - sensor:
     # ┌───────────────────────────────────┐
-    # │ TENDANCE DURÉE JOUR                │
+    # │ TENDANCE DURÉE JOUR               │
     # └───────────────────────────────────┘
     # --- tendance_duree_jour ---
     - name: "Tendance durée jour"

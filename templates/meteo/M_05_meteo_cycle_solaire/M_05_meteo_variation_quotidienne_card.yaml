@@ -29,7 +29,7 @@
 
 - sensor:
     # ┌───────────────────────────────────┐
-    # │ VARIATION QUOTIDIENNE              │
+    # │ VARIATION QUOTIDIENNE             │
     # └───────────────────────────────────┘
     # --- variation_quotidienne ---
     - name: "Variation quotidienne"

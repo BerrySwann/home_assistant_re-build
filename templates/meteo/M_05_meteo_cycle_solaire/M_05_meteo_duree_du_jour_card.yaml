@@ -29,7 +29,7 @@
 
 - sensor:
     # ┌───────────────────────────────────┐
-    # │ DURÉE DU JOUR                      │
+    # │ DURÉE DU JOUR                     │
     # └───────────────────────────────────┘
     # --- duree_du_jour ---
     - name: "Durée du Jour"
