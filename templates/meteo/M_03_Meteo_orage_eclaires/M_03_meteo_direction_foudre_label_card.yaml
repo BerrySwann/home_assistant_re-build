@@ -1,0 +1,51 @@
+﻿# ╭────────────────────────────────────────────────────────────────────────────╮
+# │ METEO. TEMPLATE : FOUDRE - DIRECTION LABEL 16 POINTS CARDINAUX             │
+# ╰────────────────────────────────────────────────────────────────────────────╯
+#
+# DESCRIPTION :
+# 1 sensor : label de direction de la foudre (16 points cardinaux FR).
+# Lit l'azimut Blitzortung et retourne un texte (Nord, Est-Sud-Est, etc.).
+#
+# SOURCE     : sensor.maison_lightning_azimuth (azimut en degres)
+# unique_id  : direction_foudre_label
+# entity_id  : sensor.direction_foudre_label
+#
+# CHAINE :
+# Blitzortung (sensor.maison_lightning_azimuth) -> direction_foudre_label -> L1C1 (label foudre)
+#
+# PIEGES :
+# - 16 tranches de 22.5 deg. Retourne "Non disponible" si azimut inconnu.
+# - Fichiers complementaires : direction_foudre_deg.yaml, distance_foudre_km.yaml.
+#
+# TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C1 Meteo (label direction foudre windrose-card)
+
+- sensor:
+# --- direction_foudre_label ---
+    - name: "Direction Foudre Label"
+      unique_id: direction_foudre_label
+      state: >
+        {% set bearing = states('sensor.maison_lightning_azimuth') %}
+        {% if bearing in ['unknown', 'unavailable'] %}
+          Non disponible
+        {% else %}
+          {% set bearing = bearing | int(default=0) %}
+          {% if bearing >= 348.75 or bearing < 11.25 %} Nord
+          {% elif bearing >= 11.25 and bearing < 33.75 %} Nord-Nord-Est
+          {% elif bearing >= 33.75 and bearing < 56.25 %} Nord-Est
+          {% elif bearing >= 56.25 and bearing < 78.75 %} Est-Nord-Est
+          {% elif bearing >= 78.75 and bearing < 101.25 %} Est
+          {% elif bearing >= 101.25 and bearing < 123.75 %} Est-Sud-Est
+          {% elif bearing >= 123.75 and bearing < 146.25 %} Sud-Est
+          {% elif bearing >= 146.25 and bearing < 168.75 %} Sud-Sud-Est
+          {% elif bearing >= 168.75 and bearing < 191.25 %} Sud
+          {% elif bearing >= 191.25 and bearing < 213.75 %} Sud-Sud-Ouest
+          {% elif bearing >= 213.75 and bearing < 236.25 %} Sud-Ouest
+          {% elif bearing >= 236.25 and bearing < 258.75 %} Ouest-Sud-Ouest
+          {% elif bearing >= 258.75 and bearing < 281.25 %} Ouest
+          {% elif bearing >= 281.25 and bearing < 303.75 %} Ouest-Nord-Ouest
+          {% elif bearing >= 303.75 and bearing < 326.25 %} Nord-Ouest
+          {% elif bearing >= 326.25 and bearing < 348.75 %} Nord-Nord-Ouest
+          {% else %} Non disponible
+          {% endif %}
+        {% endif %}

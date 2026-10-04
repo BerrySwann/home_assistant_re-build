@@ -1,0 +1,35 @@
+﻿# ╭────────────────────────────────────────────────────────────────────────────╮
+# │ METEO. TEMPLATE : FOUDRE - DIRECTION EN DEGRES (WINDROSE)                  │
+# ╰────────────────────────────────────────────────────────────────────────────╯
+#
+# DESCRIPTION :
+# 1 sensor : azimut foudre en degres pour windrose-card.
+# Remplace 0 par 1 (windrose-card interprete 0 comme absence de donnee).
+#
+# SOURCE     : sensor.maison_lightning_azimuth (azimut en degres)
+# unique_id  : direction_foudre_deg
+# entity_id  : sensor.direction_foudre_deg
+#
+# CHAINE :
+# Blitzortung (sensor.maison_lightning_azimuth) -> direction_foudre_deg -> L1C1 (windrose-card foudre)
+#
+# PIEGES :
+# - 0 remplace par 1 : comportement windrose-card.
+# - Fichiers complementaires : direction_foudre_label.yaml, distance_foudre_km.yaml.
+#
+# TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C1 Meteo (bearing foudre windrose-card)
+
+- sensor:
+# --- direction_foudre_deg ---
+    - name: "Direction Foudre deg"
+      unique_id: direction_foudre_deg
+      state: >
+        {% set bearing = states('sensor.maison_lightning_azimuth') %}
+        {% if bearing in ['unknown', 'unavailable'] %} 0
+        {% else %}
+          {% set bearing = bearing | float (0) | round(0) %}
+          {% if bearing == 0 %} 1
+          {% else %} {{ bearing }}
+          {% endif %}
+        {% endif %}

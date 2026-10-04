@@ -1,0 +1,39 @@
+﻿# ╭────────────────────────────────────────────────────────────────────────────╮
+# │ METEO. TEMPLATE : VENT VENCE - VITESSE EN KM/H                             │
+# ╰────────────────────────────────────────────────────────────────────────────╯
+#
+# DESCRIPTION :
+# 1 sensor : vitesse du vent en km/h.
+# Conversion m/s -> km/h (valeur brute Meteo France x 3.6).
+#
+# SOURCE     : weather.vence | attribut wind_speed (m/s)
+# unique_id  : vitesse_vent_vence_kmh
+# entity_id  : sensor.vitesse_vent_vence_kmh
+#
+# CHAINE :
+# weather.vence (wind_speed m/s) -> vitesse_vent_vence_kmh -> windrose-card L1C1
+#
+# PIEGES :
+# - windrose-card attend la vitesse en km/h dans ce sensor.
+# - Si wind_speed None -> retourne 0.
+# - device_class wind_speed requis pour affichage correct dans HA.
+# - Fichier complementaire : M_02_meteo_direction_vent_vence_deg_card.yaml
+#
+# TABLEAU DE BORD : L1C1 Meteo (windrose-card vitesse)
+- sensor:
+# ┌──────────────────────────────────┐
+# │ windrose-card - VITESSE VENT KMH │
+# └──────────────────────────────────┘
+# windrose-card - Vitesse Vent Vence Kmh
+# --- vitesse_vent_vence_kmh ---
+    - name: "Vitesse Vent Vence kmh"
+      unique_id: vitesse_vent_vence_kmh
+      state: >
+        {% set wind = state_attr('weather.vence', 'wind_speed') %}
+        {% if wind is not none %}
+          {{ (wind | float(0) * 3.6) | round(1) }}
+        {% else %}
+          0
+        {% endif %}
+      unit_of_measurement: "km/h"
+      device_class: wind_speed

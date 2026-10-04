@@ -1,0 +1,42 @@
+﻿# ╭────────────────────────────────────────────────────────────────────────────╮
+# │ METEO. TEMPLATE : FOUDRE - TIMER DEPUIS DERNIER IMPACT                     │
+# ╰────────────────────────────────────────────────────────────────────────────╯
+#
+# DESCRIPTION :
+# 1 sensor : temps ecoule depuis le dernier impact de foudre Blitzortung.
+# Affiche "Calme depuis plus de 2h" si compteur = 0 ou impact > 2h.
+#
+# SOURCE     : sensor.maison_lightning_counter + sensor.blitzortung_lightning_last_impact_time
+# unique_id  : timer_foudre
+# entity_id  : sensor.timer_foudre
+#
+# CHAINE :
+# Blitzortung (counter + last_impact_time) -> timer_foudre -> L1C1 (timer dernier impact)
+#
+# PIEGES :
+# - Calme si compteur = 0 OU dernier impact > 7200s (2h).
+# - Fichier complementaire : dernier_impact_foudre.yaml (lit input_datetime).
+#
+# TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C1 Meteo (timer dernier impact foudre)
+
+- sensor:
+# --- timer_foudre ---
+    - name: "Timer Foudre"
+      unique_id: timer_foudre
+      state: >
+        {% set count = states('sensor.maison_lightning_counter') | int(0) %}
+        {% set last_time = states('sensor.blitzortung_lightning_last_impact_time') %}
+        {% set last_ts = as_timestamp(last_time) if last_time not in ['unknown', 'unavailable', 'none'] else 0 %}
+        {% set now_ts = as_timestamp(now()) %}
+        {% set diff = now_ts - last_ts %}
+
+        {# CONDITION : Si le compteur est a 0 OU si le dernier impact date de plus de 2h #}
+        {% if count == 0 or diff > 7200 or last_ts == 0 %}
+          Calme depuis plus de 2h
+        {% else %}
+          {% set s = (diff % 60) | int(0) %}
+          {% set m = ((diff % 3600) // 60) | int(0) %}
+          {% set h = (diff // 3600) | int(0) %}
+          Il y a {% if h > 0 %}{{ h }}h {% endif %}{{ m }}m {{ s }}s
+        {% endif %}

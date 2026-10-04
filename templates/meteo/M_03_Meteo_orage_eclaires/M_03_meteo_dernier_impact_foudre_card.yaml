@@ -1,0 +1,45 @@
+﻿# ╭────────────────────────────────────────────────────────────────────────────╮
+# │ METEO. TEMPLATE : FOUDRE - DERNIER IMPACT TEMPS REEL                       │
+# ╰────────────────────────────────────────────────────────────────────────────╯
+#
+# DESCRIPTION :
+# 1 sensor : temps ecoule depuis le dernier impact enregistre manuellement.
+# Lit input_datetime.dernier_eclair et calcule j/h/min depuis cet horodatage.
+#
+# SOURCE     : input_datetime.dernier_eclair (horodatage manuel dernier eclair)
+# unique_id  : dernier_impact_foudre
+# entity_id  : sensor.dernier_impact_foudre
+#
+# CHAINE :
+# input_datetime.dernier_eclair -> dernier_impact_foudre -> L1C1 (heure dernier impact)
+#
+# PIEGES :
+# - Retourne "Aucun impact enregistre" si input_datetime vide/inconnu.
+# - Fichier complementaire : timer_foudre.yaml (lit compteur Blitzortung live).
+#
+# TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C1 Meteo (dernier impact foudre temps reel)
+
+- sensor:
+# --- dernier_impact_foudre ---
+    - name: "Dernier Impact Foudre"
+      unique_id: dernier_impact_foudre
+      state: >
+        {% set last = states('input_datetime.dernier_eclair') %}
+        {% if last not in ['unknown', 'unavailable', 'none', ''] %}
+          {% set diff = as_timestamp(now()) - as_timestamp(last) %}
+          {% set m = ((diff % 3600) // 60) | int %}
+          {% set h = ((diff // 3600) % 24) | int %}
+          {% set d = (diff // 86400) | int %}
+
+          Dernier impact de foudre il y a
+          {% if d > 0 %}
+            {{ d }} jour{{ 's' if d > 1 }}, {{ h }} heure{{ 's' if h > 1 }} et {{ m }} minute{{ 's' if m > 1 }}
+          {% elif h > 0 %}
+            {{ h }} heure{{ 's' if h > 1 }} et {{ m }} minute{{ 's' if m > 1 }}
+          {% else %}
+            {{ m }} minute{{ 's' if m > 1 }}
+          {% endif %}
+        {% else %}
+          Aucun impact enregistre
+        {% endif %}
