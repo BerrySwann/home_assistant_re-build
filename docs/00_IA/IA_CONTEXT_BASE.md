@@ -2,7 +2,7 @@
 > ensemble dans la meme session : `ReBuild/CLAUDE.md`, `ReBuild/docs/00_IA/IA_CONTEXT_BASE.md`
 > et `H:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres toute mise a jour, verifier que les
 > trois empreintes md5 sont egales. Il ne depend d'aucun agent en particulier.
-> Derniere mise en conformite : 2026-09-28.
+> Derniere mise en conformite : 2026-10-04.
 
 ---
 
@@ -52,7 +52,7 @@
 > ponctuation simple.
 
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
-*Dernière mise à jour : 2026-09-20*
+*Dernière mise à jour : 2026-10-04*
 
 ---
 
@@ -158,6 +158,13 @@ Les 2 dernieres actions avant de fermer Cowork, dans cet ordre :
 
 Sens : **prod → GitHub → local**. Le local doit converger vers prod. Une fois les corrections terminées dans `docs/`, l'état local doit être équivalent à prod (validé par audit MD5).
 
+**Workflow de modification (depuis le 2026-10-04)** : on ne modifie plus un fichier directement
+en prod (H:\). On edite la copie LOCALE (`docs/01_docs_config_system/config_system_YAML/`,
+image miroir 1:1 de H:\ - voir `ha-resync-tree` pour la tenir a jour), on cree une sauvegarde
+locale datee avant modif (`{fichier}_YYYY-MM-DD_HHhmm.yaml`, 3 versions max, jamais de
+suppression automatique), puis on pousse vers H:\ via `ha-push-yaml` (MD5-first, confirmation
+obligatoire, jamais de nom de fichier date en prod). Plus aucun `.bak` cree directement en prod.
+
 ### 📄 DOCS (.md + .yaml dashboard) - LOCAL = source de vérité
 
 > Deux types de fichiers couverts par cette cascade :
@@ -171,7 +178,8 @@ Sens : **prod → GitHub → local**. Le local doit converger vers prod. Une foi
 | **3** | **GitHub `home_assistant_re-build`** | Backup via git auto depuis HA |
 
 Sens : **local → H:\Docs\ → GitHub**. En cas de conflit, local l'emporte toujours.
-`H:\Docs\` ne contient QUE des .md, histo et yaml Dashboard - **jamais de YAML config HA**.
+`H:\Docs\` (racine, hors `01_docs_config_system\config_system_YAML\`) ne contient QUE des .md, histo et yaml Dashboard - **jamais de YAML config HA**.
+`H:\docs\01_docs_config_system\config_system_YAML\` est l'image locale miroir de la config YAML de prod (sensors, templates, utility_meter, command_line, groups, input_booleans, shell_command, themes, blueprints) - alimentee par resync GitHub (`ha-resync-tree`) et par les push normaux (`ha-push-yaml`). Exception documentee a la regle ci-dessus, pas une contradiction.
 
 > ⚠️ Audit MD5 docs : couvre les `.md` ET les `.yaml` dashboard (`dashboard_docs_YAML/`). Ne pas oublier les yaml lors d'un audit de cohérence local vs H:\Docs\.
 
@@ -190,7 +198,7 @@ Sens : **local → H:\Docs\ → GitHub**. En cas de conflit, local l'emporte tou
 
 | Type | Injection en prod | Extraction / stockage local |
 |:-----|:-------------------|:-----------------------------|
-| **Config YAML** (sensors/templates/UM/command_line) | Accès filesystem direct `/config` sur le serveur HA | **Claude** récupère le fichier modifié et le stocke dans `docs/{pole}/`, une fois validé par Eric |
+| **Config YAML** (sensors/templates/UM/command_line) | Edition depuis la copie LOCALE `docs/01_docs_config_system/config_system_YAML/`, sauvegarde locale datee avant modif, puis push vers `H:\` via `ha-push-yaml` (MD5-first, confirmation obligatoire) | Le fichier local (sans suffixe de date) est deja la reference - pas d'extraction a faire apres coup |
 | **Automations** | Toujours à la main dans l'UI HA (Eric), jamais `automations.yaml` en direct | Une fois validée, **Claude** récupère uniquement le bloc modifié et le stocke individuellement dans `docs/03_docs_automations/docs_automations_YAML/{Pole}/` |
 | **Dashboard** | Toujours à la main dans l'UI HA (Paramètres → Tableau de bord → Modifier en YAML) | Pas d'extraction automatique - **Eric** récupère le code à la main et le colle. **Claude** vérifie, horodate (nom de version), stocke dans `docs/02_docs_dashboard/dashboard_docs_YAML/L{x}C{x}_.../`, supprime la version la plus ancienne des 3 après validation |
 
@@ -502,7 +510,7 @@ ReBuild/
 └── docs/
     ├── 00_IA/                      (IA_CONTEXT_BASE.md · sous_context_ia/ → tous les IA_*.md)
     ├── 01_docs_config_system/
-    │   ├── config_system_YAML/     (sensors/ · templates/ · utility_meter/ · command_line/ · groups/ · …) → /homeassistant/
+    │   ├── config_system_YAML/     (sensors/ · templates/ · utility_meter/ · command_line/ · groups/ · …) → H:\ (image locale miroir, voir ha-resync-tree / ha-push-yaml)
     │   └── config_system_MD/       (configuration.md)
     ├── 02_docs_dashboard/
     │   ├── dashboard_docs_MD/      (DEPENDANCES_GLOBALES.md · L*C* docs · PAGE_*.md)  → H:\Docs\
@@ -512,7 +520,7 @@ ReBuild/
     │   └── docs_automations_YAML/  (yaml individuels par automation)                   → UI HA
     ├── 04_docs_scripts/
     │   ├── docs_scripts_MD/        (docs scripts)                                      → H:\Docs\
-    │   └── docs_scripts_YAML/      (yaml scripts)                                      → /homeassistant/
+    │   └── docs_scripts_YAML/      (yaml scripts, miroir local de H:/scripts.yaml)     → UI HA (push manuel par Eric)
     └── 05_docs_MD_system/          (workflow · MOC · templates · github)
 ```
 
@@ -535,7 +543,7 @@ qu'elle représente** : `congelateur_alarme_porte.yaml` (version active, avec `i
 Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2026-09-10
 (ajout des `id` HA depuis le live), l'ancienne version restant datée `_2026-09-01`.
 
-→ Appliquer aussi cette règle au live `H:/scripts.yaml` lors d'un rollback (backup `*.bak_*` avant modif, cf. .gitignore).
+→ `H:/scripts.yaml` (Scripts, section Automations - miroir local `docs/04_docs_scripts/`) suit la meme regle que la config YAML : sauvegarde locale datee (`_YYYY-MM-DD_HHhmm`) dans `docs/04_docs_scripts/` AVANT toute modification, jamais de `.bak` cree directement en prod. Difference : le push vers `H:/scripts.yaml` se fait a la main par Eric via l'UI HA (jamais de copie fichier directe) - coherent avec la regle Automations (jamais d'edition directe du fichier live). Les `.sh` de `.scripts/` restent geres individuellement, hors de cette regle. Audit MD5 automations/scripts : plus complexe que sur la config YAML simple, a traiter au cas par cas.
 
 → Arborescences complètes prod + local : `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL.md`
 
@@ -576,5 +584,3 @@ Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2
 > Caractéristiques détaillées du logement (dimensions, équipements par pièce, orientations) :
 > déplacées dans `docs/00_IA/sous_context_ia/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` (2026-07-19,
 > usage limité à l'analyse des consommations électriques, hors périmètre des directives actives).
-
- 

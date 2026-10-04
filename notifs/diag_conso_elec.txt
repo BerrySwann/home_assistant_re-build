@@ -19254,3 +19254,11 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [WIFI] | 04/10 17:30 | Hyg:0.01 | Cuis:0.44 | Froid:0.84 | Chauff:0.0 | Avg 4:0.0 | Multi:4.03 | Lum:0.37 | Autres:0.26 | Ti:26.4°C | Ext:24.7°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
 [2] en [WIFI] | 04/10 17:45 | Hyg:0.01 | Cuis:0.44 | Froid:0.86 | Chauff:0.0 | Avg 4:0.0 | Multi:4.13 | Lum:0.38 | Autres:0.26 | Ti:26.4°C | Ext:23.9°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
 [Eric: WIFI/CELL] | 04/10 18:00 | Hyg:0.01 | Cuis:0.44 | Froid:0.87 | Chauff:0.0 | Avg 4:0.0 | Multi:4.23 | Lum:0.38 | Autres:0.26 | Ti:26.4°C | Ext:23.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[Eric: WIFI/CELL] | 04/10 18:15 | Hyg:0.02 | Cuis:0.44 | Froid:0.87 | Chauff:0.0 | Avg 4:0.0 | Multi:4.33 | Lum:0.39 | Autres:0.27 | Ti:26.4°C | Ext:22.9°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[Eric: WIFI/CELL] | 04/10 18:30 | Hyg:0.03 | Cuis:0.44 | Froid:0.88 | Chauff:0.0 | Avg 4:0.0 | Multi:4.44 | Lum:0.39 | Autres:0.27 | Ti:26.4°C | Ext:22.7°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[Eric: WIFI/CELL] | 04/10 18:45 | Hyg:0.03 | Cuis:0.44 | Froid:0.89 | Chauff:0.0 | Avg 4:0.0 | Multi:4.54 | Lum:0.4 | Autres:0.27 | Ti:26.4°C | Ext:22.5°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 04/10 19:00 | Hyg:0.03 | Cuis:0.44 | Froid:0.9 | Chauff:0.0 | Avg 4:0.0 | Multi:4.64 | Lum:0.42 | Autres:0.27 | Ti:26.4°C | Ext:22.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 04/10 19:15 | Hyg:0.03 | Cuis:0.82 | Froid:0.92 | Chauff:0.0 | Avg 4:0.0 | Multi:4.64 | Lum:0.43 | Autres:0.27 | Ti:26.4°C | Ext:22.7°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 04/10 19:30 | Hyg:0.03 | Cuis:0.87 | Froid:0.94 | Chauff:0.0 | Avg 4:0.0 | Multi:4.74 | Lum:0.44 | Autres:0.27 | Ti:26.2°C | Ext:21.9°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 04/10 19:45 | Hyg:0.03 | Cuis:0.87 | Froid:0.96 | Chauff:0.0 | Avg 4:0.0 | Multi:4.84 | Lum:0.45 | Autres:0.27 | Ti:25.8°C | Ext:21.3°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 04/10 20:00 | Hyg:0.03 | Cuis:0.9 | Froid:0.97 | Chauff:0.0 | Avg 4:0.0 | Multi:4.84 | Lum:0.47 | Autres:0.28 | Ti:25.7°C | Ext:20.9°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
