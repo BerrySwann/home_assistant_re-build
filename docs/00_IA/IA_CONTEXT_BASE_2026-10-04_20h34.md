@@ -1,11 +1,8 @@
-> **CONTEXTE PROJET** : ce document est tenu IDENTIQUE en quatre emplacements, a modifier
-> ensemble dans la meme session : `ReBuild/CLAUDE.md`, `ReBuild/docs/00_IA/IA_CONTEXT_BASE.md`,
-> `H:\docs\00_IA\IA_CONTEXT_BASE.md` et `D:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres toute
-> mise a jour, verifier que les quatre empreintes md5 sont egales. Il ne depend d'aucun agent en
-> particulier.
-> Derniere mise en conformite : 2026-10-04. La 4e copie (D:\) a ete retrouvee perimee (version du
-> 2026-07-19, encore l'ancienne REGLE ABSOLUE) et realignee ce jour - ancienne version conservee
-> en `D:\docs\00_IA\IA_CONTEXT_BASE_2026-07-19_15h46.md`.
+> **CONTEXTE PROJET** : ce document est tenu IDENTIQUE en trois emplacements, a modifier
+> ensemble dans la meme session : `ReBuild/CLAUDE.md`, `ReBuild/docs/00_IA/IA_CONTEXT_BASE.md`
+> et `H:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres toute mise a jour, verifier que les
+> trois empreintes md5 sont egales. Il ne depend d'aucun agent en particulier.
+> Derniere mise en conformite : 2026-10-04.
 
 ---
 
@@ -53,10 +50,6 @@
 > qui tape vite ne va pas chercher un AltGr en pleine phrase. Autorises : tiret simple, trois
 > points, guillemets droits, apostrophe droite, parentheses, crochets, accents francais,
 > ponctuation simple.
-> Portee de cette regle 5 : vise ce que l'assistant ECRIT (nouveau texte, nouvelles reponses).
-> Elle ne s'applique pas retroactivement aux conventions deja actees de ce document (emojis de
-> section, boites ASCII des titres, fleches dans les tableaux, point median des enumerations) -
-> ne pas les reformater au nom de cette regle.
 
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
 *Dernière mise à jour : 2026-10-04*
@@ -176,12 +169,6 @@ retire avant la copie vers H:\. En cas d'ambiguite sur quel fichier pousser, on 
 recent (le fichier courant sans date s'il existe, sinon la sauvegarde datee la plus recente).
 Plus aucun `.bak` cree directement en prod.
 
-**Sauvegarde datee avant reecriture des fichiers de regles (depuis le 2026-10-04)** : meme principe pour
-`CLAUDE.md` et `docs/00_IA/IA_CONTEXT_BASE.md` (et leurs copies H:\ et D:\) : avant toute reecriture,
-creer une copie locale datee `{fichier}_YYYY-MM-DD_HHhmm.md` (format PowerShell : `Get-Date -Format "yyyy-MM-dd_HH'h'mm"` -
-le `h` doit etre entre apostrophes, sinon il est lu comme un token d'heure 12h). Meme retention (3 max,
-nettoyage en DRY-RUN uniquement). Apres reecriture, resynchroniser les 4 copies et verifier leur MD5.
-
 ### 📄 DOCS (.md + .yaml dashboard) - LOCAL = source de vérité
 
 > Deux types de fichiers couverts par cette cascade :
@@ -227,14 +214,6 @@ Sens : **local → H:\Docs\ → GitHub**. En cas de conflit, local l'emporte tou
 
 > 1×/semaine minimum, avant toute session majeure.
 
-> ⚠️ Mis a jour le 2026-10-04 : ce protocole date d'avant le workflow local-first. Depuis,
-> pour `config_system_YAML/`, le sens d'ecriture est LOCAL -> H:\ (via `ha-push-yaml`) -> GitHub
-> (auto-backup HA). "HA = verite" plus bas ne veut donc plus dire "editer en direct sur H:\",
-> mais "H:\ est l'etat de reference une fois le push fait" - le local reste le point d'edition.
-> Un ecart LOCAL vs GitHub aujourd'hui signifie le plus souvent un push local -> H:\ pas encore
-> fait (ou pas encore remonte par l'auto-backup HA vers GitHub), pas un oubli d'extraction
-> depuis HA.
-
 ```bash
 wget -q "https://github.com/BerrySwann/home_assistant_re-build/archive/refs/heads/main.zip" -O /tmp/repo.zip
 unzip -q /tmp/repo.zip -d /tmp/
@@ -244,16 +223,16 @@ find . -type f -name "*.yaml" -print0 | sort -z | xargs -0 md5sum | sed 's|\./||
 
 | Cas | Action |
 |:----|:-------|
-| LOCAL absent de GitHub | → push local -> H:\ pas encore fait, ou pas encore remonte par l'auto-backup HA |
+| LOCAL absent de GitHub | → push manquant depuis HA |
 | GitHub absent du LOCAL | → ancienne version → supprimer GitHub si plus récente en local |
-| **MD5 différent (même nom)** | → **⚠️ Conflit - verifier quelle version est la plus recente (local = point d'edition, H:\ = etat pousse)** |
+| **MD5 différent (même nom)** | → **⚠️ Conflit - HA = vérité** |
 | MD5 identique | → ✅ Synchronisé |
 
 ### Périmètre de comparaison
 
 | Priorité | Périmètre | Raison |
 |:---------|:----------|:-------|
-| **🔴 CRITIQUE** | `docs/` (sensors/, templates/, utility_meter/, command_line/) | Image locale poussee vers `H:\` via `ha-push-yaml` - un ecart non pousse peut laisser HA en retard sur le local |
+| **🔴 CRITIQUE** | `docs/` (sensors/, templates/, utility_meter/, command_line/) | Fichiers déployés dans `/homeassistant/` - un écart peut casser HA |
 | **🔴 CRITIQUE** | `automations.yaml` GitHub vs `docs/03_docs_automations/docs_automations_YAML/` | Détecter ajouts/suppressions/renommages depuis HA |
 | **🟡 SECONDAIRE** | `docs/02_docs_dashboard/dashboard_docs_YAML/` vs `H:\Docs\` | UI seulement - ne casse pas HA |
 
