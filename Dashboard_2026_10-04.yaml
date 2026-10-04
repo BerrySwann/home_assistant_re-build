@@ -1448,7 +1448,7 @@ views:
                   </div>
                   {% endif %}
                 style:
-                  top: '-5%'
+                  top: -5%
                   left: 50%
                   width: 100%
                   height: 100%
@@ -2305,12 +2305,12 @@ views:
               font_badge: 10px
             styles:
               card:
-                - '--config-icon-size': '[[[ return variables.size_icon ]]]'
-                - '--config-shape-size': '[[[ return variables.size_shape ]]]'
-                - '--config-card-height': '[[[ return variables.size_card_height ]]]'
-                - '--config-font-primary': '[[[ return variables.font_primary ]]]'
-                - '--config-font-secondary': '[[[ return variables.font_secondary ]]]'
-                - '--config-font-badge': '[[[ return variables.font_badge ]]]'
+                - --config-icon-size: '[[[ return variables.size_icon ]]]'
+                - --config-shape-size: '[[[ return variables.size_shape ]]]'
+                - --config-card-height: '[[[ return variables.size_card_height ]]]'
+                - --config-font-primary: '[[[ return variables.font_primary ]]]'
+                - --config-font-secondary: '[[[ return variables.font_secondary ]]]'
+                - --config-font-badge: '[[[ return variables.font_badge ]]]'
                 - height: var(--config-card-height) !important
                 - padding: 0px !important
                 - overflow: hidden
@@ -3156,6 +3156,7 @@ views:
                   - sensor.temperature_moyenne_interieure
                   - sensor.delta_ademe_recommande
                   - sensor.mode_ete_hiver_etat
+                  - sensor.mode_ete_hiver
                   - sensor.clim_salon_etat
                   - sensor.radiateur_cuisine_etat
                   - sensor.clim_bureau_etat
@@ -3872,7 +3873,7 @@ views:
                       - grid-area: etat
                       - justify-self: end
                       - text-align: start
-                      - margin-right: '-11px'
+                      - margin-right: -11px
                     active:
                       - grid-area: active
                       - justify-self: end
@@ -4279,7 +4280,7 @@ views:
                       - align-self: start
                       - margin-top: 18px
                       - margin-right: 10px
-                      - '--text-icon-sensor': |
+                      - --text-icon-sensor: |
                           [[[
                             if (!entity || entity.state === 'unavailable' || entity.state === 'unknown') return '#aaaaaa';
                             const t = parseFloat(entity.state);
@@ -4287,7 +4288,7 @@ views:
                             if (t < 75) return 'orange';
                             return 'rgb(244,67,54)';
                           ]]]
-                      - '--text-color-sensor': |
+                      - --text-color-sensor: |
                           [[[
                             if (!entity || entity.state === 'unavailable' || entity.state === 'unknown') return '#aaaaaa';
                             const t = parseFloat(entity.state);
@@ -4299,7 +4300,7 @@ views:
                       - padding-bottom: 1px
                       - align-self: middle
                       - justify-self: start
-                      - '--text-color-sensor': |
+                      - --text-color-sensor: |
                           [[[
                             const s = states['sensor.pve_utilisation_du_processeur'];
                             if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
@@ -4312,7 +4313,7 @@ views:
                       - padding-bottom: 1px
                       - align-self: middle
                       - justify-self: start
-                      - '--text-color-sensor': |
+                      - --text-color-sensor: |
                           [[[
                             const s = states['sensor.prise_mini_pc_ikea_power'];
                             if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
@@ -4325,7 +4326,7 @@ views:
                       - padding-bottom: 1px
                       - align-self: middle
                       - justify-self: start
-                      - '--text-color-sensor': |
+                      - --text-color-sensor: |
                           [[[
                             const s = states['sensor.pve_memory_usage_percentage'];
                             if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
@@ -4334,7 +4335,7 @@ views:
                             if (v < 90) return 'orange';
                             return 'rgb(244,67,54)';
                           ]]]
-                      - '--icon-color-sensor': |
+                      - --icon-color-sensor: |
                           [[[
                             const s = states['sensor.pve_memory_usage_percentage'];
                             if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
@@ -4347,7 +4348,7 @@ views:
                       - padding-bottom: 0px
                       - align-self: middle
                       - justify-self: start
-                      - '--text-color-sensor': |
+                      - --text-color-sensor: |
                           [[[
                             const s = states['sensor.storage_local_storage_usage_percentage'];
                             if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
@@ -4356,7 +4357,7 @@ views:
                             if (v < 90) return 'orange';
                             return 'rgb(244,67,54)';
                           ]]]
-                      - '--icon-color-sensor': |
+                      - --icon-color-sensor: |
                           [[[
                             const s = states['sensor.storage_local_storage_usage_percentage'];
                             if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
@@ -4463,7 +4464,7 @@ views:
                       - padding-bottom: 1px
                       - align-self: middle
                       - justify-self: start
-                      - '--text-color-sensor': |
+                      - --text-color-sensor: |
                           [[[
                             const s = states["sensor.pve_utilisation_du_processeur"];
                             if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
@@ -4472,7 +4473,7 @@ views:
                             if (v < 90) return "orange";
                             return "rgb(244,67,54)";
                           ]]]
-                      - '--icon-color-sensor': |
+                      - --icon-color-sensor: |
                           [[[
                             const s = states["sensor.pve_utilisation_du_processeur"];
                             if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
@@ -4485,13 +4486,13 @@ views:
                       - padding-bottom: 1px
                       - align-self: middle
                       - justify-self: start
-                      - '--text-color-sensor': |
+                      - --text-color-sensor: |
                           [[[
                             const s = states["binary_sensor.pve_status"];
                             if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
                             return s.state === "on" ? "rgb(70, 175, 75)" : "rgb(244,67,54)";
                           ]]]
-                      - '--icon-color-sensor': |
+                      - --icon-color-sensor: |
                           [[[
                             const s = states["binary_sensor.pve_status"];
                             if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
@@ -4501,7 +4502,7 @@ views:
                       - padding-bottom: 1px
                       - align-self: middle
                       - justify-self: start
-                      - '--text-color-sensor': |
+                      - --text-color-sensor: |
                           [[[
                             const s = states["sensor.pve_memory_usage_percentage"];
                             if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
@@ -4510,7 +4511,7 @@ views:
                             if (v < 90) return "orange";
                             return "rgb(244,67,54)";
                           ]]]
-                      - '--icon-color-sensor': |
+                      - --icon-color-sensor: |
                           [[[
                             const s = states["sensor.pve_memory_usage_percentage"];
                             if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
@@ -4523,7 +4524,7 @@ views:
                       - padding-bottom: 0px
                       - align-self: middle
                       - justify-self: start
-                      - '--text-color-sensor': |
+                      - --text-color-sensor: |
                           [[[
                             const s = states["sensor.storage_local_storage_usage_percentage"];
                             if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
@@ -4532,7 +4533,7 @@ views:
                             if (v < 90) return "orange";
                             return "rgb(244,67,54)";
                           ]]]
-                      - '--icon-color-sensor': |
+                      - --icon-color-sensor: |
                           [[[
                             const s = states["sensor.storage_local_storage_usage_percentage"];
                             if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
@@ -4684,22 +4685,22 @@ views:
                       - text-align: right
                     marque:
                       - grid-area: marque
-                      - margin-right: '-21px'
+                      - margin-right: -21px
                       - text-align: left
                     100_75_battery:
                       - grid-area: 100_75_battery
                       - justify-self: end
-                      - margin-right: '-15px'
+                      - margin-right: -15px
                       - text-align: right
                     75_50_battery:
                       - grid-area: 75_50_battery
                       - justify-self: end
-                      - margin-right: '-9px'
+                      - margin-right: -9px
                       - text-align: right
                     50_25_battery:
                       - grid-area: 50_25_battery
                       - justify-self: end
-                      - margin-right: '-2px'
+                      - margin-right: -2px
                       - text-align: right
                     25_0_battery:
                       - grid-area: 25_0_battery
@@ -5847,17 +5848,17 @@ views:
               buttons:
                 - type: period_selector
                   button_text: 1 day
-                  period_back: '-24h'
+                  period_back: -24h
                   active: true
                 - type: period_selector
                   button_text: 7 days
-                  period_back: '-168h'
+                  period_back: -168h
                 - type: period_selector
                   button_text: 15 days
-                  period_back: '-360h'
+                  period_back: -360h
                 - type: period_selector
                   button_text: 30 days
-                  period_back: '-730h'
+                  period_back: -730h
             current_direction:
               entity: sensor.vence_wind_speed
               show_arrow: true
@@ -6637,17 +6638,17 @@ views:
                   buttons:
                     - type: period_selector
                       button_text: 1 jour
-                      period_back: '-24h'
+                      period_back: -24h
                       active: true
                     - type: period_selector
                       button_text: 7 jours
-                      period_back: '-168h'
+                      period_back: -168h
                     - type: period_selector
                       button_text: 15 jours
-                      period_back: '-360h'
+                      period_back: -360h
                     - type: period_selector
                       button_text: 30 jours
-                      period_back: '-730h'
+                      period_back: -730h
                 current_direction:
                   entity: sensor.lightning_bearing
                   show_arrow: true
@@ -7028,7 +7029,7 @@ views:
                               size: 100%
                               styles:
                                 card:
-                                  - '--mdc-ripple-color': none
+                                  - --mdc-ripple-color: none
                                   - padding: 15%
                               card_mod:
                                 style: |
@@ -7046,7 +7047,7 @@ views:
                               size: 100%
                               styles:
                                 card:
-                                  - '--mdc-ripple-color': none
+                                  - --mdc-ripple-color: none
                                   - padding: 15%
                               card_mod:
                                 style: |
@@ -8117,7 +8118,7 @@ views:
             layout_options:
               grid_columns: full
               grid_rows: 1
-            heading: Consomation
+            heading: Consommation
           - type: custom:mushroom-chips-card
             chips:
               - type: conditional
@@ -8233,7 +8234,7 @@ views:
             cache: true
             span:
               start: day
-              offset: '-0h'
+              offset: -0h
             apex_config:
               chart:
                 height: 400px
@@ -8592,8 +8593,8 @@ views:
                 - box-shadow: none !important
                 - border: none !important
                 - backdrop-filter: none !important
-                - '--ha-card-background': none
-                - '--ha-card-box-shadow': none
+                - --ha-card-background: none
+                - --ha-card-box-shadow: none
               grid:
                 - padding: 12px 16px
                 - height: 100%
@@ -9291,8 +9292,8 @@ views:
                 - box-shadow: none !important
                 - border: none !important
                 - backdrop-filter: none !important
-                - '--ha-card-background': none
-                - '--ha-card-box-shadow': none
+                - --ha-card-background: none
+                - --ha-card-box-shadow: none
               grid:
                 - padding: 12px 16px
                 - height: 100%
@@ -9970,8 +9971,8 @@ views:
                 - box-shadow: none !important
                 - border: none !important
                 - backdrop-filter: none !important
-                - '--ha-card-background': none
-                - '--ha-card-box-shadow': none
+                - --ha-card-background: none
+                - --ha-card-box-shadow: none
               grid:
                 - padding: 12px 16px
                 - height: 100%
@@ -10563,7 +10564,7 @@ views:
               navigation_path: '#salle_de_bain'
           - type: custom:button-card
             entity: climate.soufflant_salle_de_bain
-            name: Clim Salle de Bain
+            name: Soufflant Salle de Bain
             show_state: false
             show_label: true
             variables:
@@ -10637,8 +10638,8 @@ views:
                 - box-shadow: none !important
                 - border: none !important
                 - backdrop-filter: none !important
-                - '--ha-card-background': none
-                - '--ha-card-box-shadow': none
+                - --ha-card-background: none
+                - --ha-card-box-shadow: none
               grid:
                 - padding: 12px 16px
                 - height: 100%
@@ -11316,8 +11317,8 @@ views:
                 - box-shadow: none !important
                 - border: none !important
                 - backdrop-filter: none !important
-                - '--ha-card-background': none
-                - '--ha-card-box-shadow': none
+                - --ha-card-background: none
+                - --ha-card-box-shadow: none
               grid:
                 - padding: 12px 16px
                 - height: 100%
@@ -12537,12 +12538,12 @@ views:
               font_badge: 10px
             styles:
               card:
-                - '--config-icon-size': '[[[ return variables.size_icon ]]]'
-                - '--config-shape-size': '[[[ return variables.size_shape ]]]'
-                - '--config-card-height': '[[[ return variables.size_card_height ]]]'
-                - '--config-font-primary': '[[[ return variables.font_primary ]]]'
-                - '--config-font-secondary': '[[[ return variables.font_secondary ]]]'
-                - '--config-font-badge': '[[[ return variables.font_badge ]]]'
+                - --config-icon-size: '[[[ return variables.size_icon ]]]'
+                - --config-shape-size: '[[[ return variables.size_shape ]]]'
+                - --config-card-height: '[[[ return variables.size_card_height ]]]'
+                - --config-font-primary: '[[[ return variables.font_primary ]]]'
+                - --config-font-secondary: '[[[ return variables.font_secondary ]]]'
+                - --config-font-badge: '[[[ return variables.font_badge ]]]'
                 - height: var(--config-card-height) !important
                 - padding: 0px !important
                 - overflow: hidden
@@ -13012,7 +13013,7 @@ views:
                             }
                       card:
                         type: custom:text-divider-row
-                        text: Consomation TOTAL Climatisations & Radiateurs
+                        text: Consommation TOTAL Climatisations & Radiateurs
               card_mod:
                 style: |
                   ha-card {
@@ -13279,7 +13280,7 @@ views:
                         }
                   card:
                     type: custom:text-divider-row
-                    text: La prise extérieur "CLIM SALON" est coupée
+                    text: La prise extérieure "CLIM SALON" est coupée
           - type: heading
             icon: mdi:sofa
             heading: Clim. Salon
@@ -13659,7 +13660,7 @@ views:
                         }
                   card:
                     type: custom:text-divider-row
-                    text: La prise extérieur "CLIM BUREAU" est coupée
+                    text: La prise extérieure "CLIM BUREAU" est coupée
           - type: heading
             icon: mdi:desktop-tower-monitor
             heading: clim. Bureau
@@ -13840,7 +13841,7 @@ views:
                       text: Chauffage Salle de Bain
           - type: heading
             icon: mdi:bathtub
-            heading: Soullant SdB
+            heading: Soufflant SdB
             heading_style: title
             badges:
               - type: entity
@@ -14136,7 +14137,7 @@ views:
                         }
                   card:
                     type: custom:text-divider-row
-                    text: La prise extérieur "CLIM CHAMBRE" est coupée
+                    text: La prise extérieure "CLIM CHAMBRE" est coupée
           - type: heading
             icon: mdi:bed
             heading: clim. Chambre
@@ -18932,7 +18933,7 @@ views:
                     - background: transparent
                     - border: none
                     - box-shadow: none
-                    - margin-top: '-40px'
+                    - margin-top: -40px
                     - height: 30px
                   state:
                     - font-size: 14px
@@ -19313,7 +19314,7 @@ views:
                     - background: transparent
                     - border: none
                     - box-shadow: none
-                    - margin-top: '-40px'
+                    - margin-top: -40px
                     - height: 30px
                   state:
                     - font-size: 14px
@@ -19982,8 +19983,8 @@ views:
                 }
           - type: custom:tabbed-card
             styles:
-              '--mdc-theme-primary': '#FFB347'
-              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              --mdc-theme-primary: '#FFB347'
+              --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
               max-width: 100%
             attributes:
               animated: true
@@ -20218,7 +20219,7 @@ views:
                           - justify-self: start
                           - font-size: 11px
                           - opacity: 0.6
-                          - margin-top: '-2px'
+                          - margin-top: -2px
                         state:
                           - justify-self: end
                           - align-self: center
@@ -20746,7 +20747,7 @@ views:
                           - justify-self: start
                           - font-size: 11px
                           - opacity: 0.6
-                          - margin-top: '-2px'
+                          - margin-top: -2px
                         state:
                           - justify-self: end
                           - align-self: center
@@ -20906,7 +20907,7 @@ views:
                           show:
                             legend_value: false
                             extremas: max
-                          offset: '-1d'
+                          offset: -1d
                         - entity: sensor.genelec_appart_quotidien_um
                           color: rgb(153, 255, 153)
                           name: ' '
@@ -20917,7 +20918,7 @@ views:
                           show:
                             legend_value: false
                             extremas: max
-                          offset: '-2d'
+                          offset: -2d
                         - entity: sensor.genelec_appart_quotidien_um
                           color: rgb(102, 255, 102)
                           name: ' '
@@ -20928,7 +20929,7 @@ views:
                           show:
                             legend_value: false
                             extremas: max
-                          offset: '-3d'
+                          offset: -3d
                         - entity: sensor.genelec_appart_quotidien_um
                           color: rgb(51, 204, 51)
                           name: ' '
@@ -20939,7 +20940,7 @@ views:
                           show:
                             legend_value: false
                             extremas: max
-                          offset: '-4d'
+                          offset: -4d
                         - entity: sensor.genelec_appart_quotidien_um
                           color: rgb(0, 153, 0)
                           name: ' '
@@ -20950,7 +20951,7 @@ views:
                           show:
                             legend_value: false
                             extremas: max
-                          offset: '-5d'
+                          offset: -5d
                         - entity: sensor.genelec_appart_quotidien_um
                           color: rgb(0, 102, 0)
                           name: ' '
@@ -20961,7 +20962,7 @@ views:
                           show:
                             legend_value: false
                             extremas: max
-                          offset: '-6d'
+                          offset: -6d
                         - entity: sensor.genelec_appart_quotidien_um
                           color: rgb(0, 70, 0)
                           name: ' '
@@ -20972,7 +20973,7 @@ views:
                           show:
                             legend_value: false
                             extremas: max
-                          offset: '-7d'
+                          offset: -7d
                       card_mod:
                         style: |
                           div#state__value {
@@ -21439,7 +21440,7 @@ views:
                           - justify-self: start
                           - font-size: 11px
                           - opacity: 0.6
-                          - margin-top: '-2px'
+                          - margin-top: -2px
                         state:
                           - justify-self: end
                           - align-self: center
@@ -22751,8 +22752,8 @@ views:
                       }
                   - type: custom:tabbed-card
                     styles:
-                      '--mdc-theme-primary': white
-                      '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.25)
+                      --mdc-theme-primary: white
+                      --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.25)
                     options: {}
                     tabs:
                       - attributes:
@@ -23306,7 +23307,7 @@ views:
                             }
                       card:
                         type: custom:text-divider-row
-                        text: Consomation TOTAL Climatisations & Radiateurs
+                        text: Consommation TOTAL Climatisations & Radiateurs
               card_mod:
                 style: |
                   ha-card {
@@ -23601,7 +23602,7 @@ views:
                             }
                       card:
                         type: custom:text-divider-row
-                        text: Consomation Total Journalière
+                        text: Consommation Total Journalière
               card_mod:
                 style: |
                   ha-card {
@@ -23680,7 +23681,7 @@ views:
                             }
                       card:
                         type: custom:text-divider-row
-                        text: Consomation Total Mensuel
+                        text: Consommation Total Mensuel
               card_mod:
                 style: |
                   ha-card {
@@ -23896,7 +23897,7 @@ views:
             cache: true
             span:
               start: day
-              offset: '-0h'
+              offset: -0h
             apex_config:
               chart:
                 height: 400px
@@ -24216,8 +24217,8 @@ views:
                 - box-shadow: none !important
                 - border: none !important
                 - backdrop-filter: none !important
-                - '--ha-card-background': none
-                - '--ha-card-box-shadow': none
+                - --ha-card-background: none
+                - --ha-card-box-shadow: none
               grid:
                 - padding: 12px 16px
                 - height: 100%
@@ -24793,8 +24794,8 @@ views:
               rows: 3
           - type: custom:tabbed-card
             styles:
-              '--mdc-theme-primary': rgb(174,68,90)
-              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              --mdc-theme-primary: rgb(174,68,90)
+              --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
               max-width: 100%
             attributes:
               animated: true
@@ -24814,7 +24815,7 @@ views:
                     current_color: rgb(255, 41, 41)
                     avg_daily_entity: sensor.clim_salon_avg_watts_quotidien
                     conso_daily_kwh_entity: sensor.clim_salon_quotidien_um
-                    span_offset: '-1m'
+                    span_offset: -1m
                     group_duration: 1m
               - attributes:
                   label: MENSUEL
@@ -24970,7 +24971,7 @@ views:
                 }
           - type: custom:button-card
             entity: climate.radiateur_cuisine
-            name: Clim Cuisine
+            name: Radiateur Cuisine
             show_state: false
             show_label: true
             variables:
@@ -25044,8 +25045,8 @@ views:
                 - box-shadow: none !important
                 - border: none !important
                 - backdrop-filter: none !important
-                - '--ha-card-background': none
-                - '--ha-card-box-shadow': none
+                - --ha-card-background: none
+                - --ha-card-box-shadow: none
               grid:
                 - padding: 12px 16px
                 - height: 100%
@@ -25621,8 +25622,8 @@ views:
               rows: 3
           - type: custom:tabbed-card
             styles:
-              '--mdc-theme-primary': rgb(174,68,90)
-              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              --mdc-theme-primary: rgb(174,68,90)
+              --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
               max-width: 100%
             attributes:
               animated: true
@@ -25874,8 +25875,8 @@ views:
                 - box-shadow: none !important
                 - border: none !important
                 - backdrop-filter: none !important
-                - '--ha-card-background': none
-                - '--ha-card-box-shadow': none
+                - --ha-card-background: none
+                - --ha-card-box-shadow: none
               grid:
                 - padding: 12px 16px
                 - height: 100%
@@ -26451,8 +26452,8 @@ views:
               rows: 3
           - type: custom:tabbed-card
             styles:
-              '--mdc-theme-primary': rgb(174,68,90)
-              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              --mdc-theme-primary: rgb(174,68,90)
+              --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
               max-width: 100%
             attributes:
               animated: true
@@ -26657,7 +26658,7 @@ views:
                       text: Soufflant de la Salle de Bain
           - type: custom:button-card
             entity: climate.soufflant_salle_de_bain
-            name: Clim Salle de Bain
+            name: Soufflant Salle de Bain
             show_state: false
             show_label: true
             variables:
@@ -26731,8 +26732,8 @@ views:
                 - box-shadow: none !important
                 - border: none !important
                 - backdrop-filter: none !important
-                - '--ha-card-background': none
-                - '--ha-card-box-shadow': none
+                - --ha-card-background: none
+                - --ha-card-box-shadow: none
               grid:
                 - padding: 12px 16px
                 - height: 100%
@@ -27308,8 +27309,8 @@ views:
               rows: 3
           - type: custom:tabbed-card
             styles:
-              '--mdc-theme-primary': rgb(174,68,90)
-              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              --mdc-theme-primary: rgb(174,68,90)
+              --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
               max-width: 100%
             attributes:
               animated: true
@@ -27468,8 +27469,8 @@ views:
               rows: 3
           - type: custom:tabbed-card
             styles:
-              '--mdc-theme-primary': rgb(174,68,90)
-              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              --mdc-theme-primary: rgb(174,68,90)
+              --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
               max-width: 100%
             attributes:
               animated: true
@@ -27714,8 +27715,8 @@ views:
                 - box-shadow: none !important
                 - border: none !important
                 - backdrop-filter: none !important
-                - '--ha-card-background': none
-                - '--ha-card-box-shadow': none
+                - --ha-card-background: none
+                - --ha-card-box-shadow: none
               grid:
                 - padding: 12px 16px
                 - height: 100%
@@ -28291,8 +28292,8 @@ views:
               rows: 3
           - type: custom:tabbed-card
             styles:
-              '--mdc-theme-primary': rgb(174,68,90)
-              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              --mdc-theme-primary: rgb(174,68,90)
+              --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
               max-width: 100%
             attributes:
               animated: true
@@ -28464,8 +28465,8 @@ views:
             heading: SALON
           - type: custom:tabbed-card
             styles:
-              '--mdc-theme-primary': rgb(215, 95, 115)
-              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              --mdc-theme-primary: rgb(215, 95, 115)
+              --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
               max-width: 100%
             attributes:
               animated: true
@@ -28740,8 +28741,8 @@ views:
             heading: ENTREE - CUISINE - COULOIR
           - type: custom:tabbed-card
             styles:
-              '--mdc-theme-primary': (255, 255, 255)
-              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              --mdc-theme-primary: (255, 255, 255)
+              --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
               max-width: 100%
             attributes:
               animated: true
@@ -28991,8 +28992,8 @@ views:
             heading: BUREAU
           - type: custom:tabbed-card
             styles:
-              '--mdc-theme-primary': rgb(255, 165, 0)
-              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              --mdc-theme-primary: rgb(255, 165, 0)
+              --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
               max-width: 100%
             attributes:
               animated: true
@@ -29259,8 +29260,8 @@ views:
             heading: SALLE DE BAIN
           - type: custom:tabbed-card
             styles:
-              '--mdc-theme-primary': rgb(3, 155, 229)
-              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              --mdc-theme-primary: rgb(3, 155, 229)
+              --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
               max-width: 100%
             attributes:
               animated: true
@@ -29496,8 +29497,8 @@ views:
             heading: CHAMBRE
           - type: custom:tabbed-card
             styles:
-              '--mdc-theme-primary': rgb(88, 130, 70)
-              '--mdc-tab-text-label-color-default': rgba(255, 255, 255, 0.6)
+              --mdc-theme-primary: rgb(88, 130, 70)
+              --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
               max-width: 100%
             attributes:
               animated: true
@@ -32041,7 +32042,7 @@ views:
                   - sensor.detecteur_ikea_vallhorn_battery
                   - sensor.poussoir_pc_ikea_tradfri_battery
                   - sensor.poussoir_tv_ikea_tradfri_battery
-                  - sensor.inter_radiateur_salle_de_bain_ikea_rodret_battery
+                  - sensor.inter_soufflant_salle_de_bain_ikea_rodret_battery
             sort:
               by: state
             bulk_rename:
@@ -36331,7 +36332,7 @@ views:
                                   - justify-self: center
                                   - margin-bottom: 0.7em
                                   - margin-left: 2rem
-                                  - margin-right: '-2rem'
+                                  - margin-right: -2rem
                             custom_fields:
                               cardurl:
                                 card:
@@ -36753,7 +36754,7 @@ views:
                               - justify-self: center
                               - margin-bottom: 0.7em
                               - margin-left: 2rem
-                              - margin-right: '-2rem'
+                              - margin-right: -2rem
                         custom_fields:
                           cardurl:
                             card:
@@ -38934,8 +38935,8 @@ views:
                       styles:
                         card:
                           - font-weight: bold
-                          - '--mdc-ripple-color': rgb(68, 115, 158)
-                          - '--mdc-ripple-press-opacity': 0.5
+                          - --mdc-ripple-color: rgb(68, 115, 158)
+                          - --mdc-ripple-press-opacity: 0.5
                         name:
                           - font-size: 15px
                         state:
@@ -39086,8 +39087,8 @@ views:
                                             ]]]
                             styles:
                               card:
-                                - '--mdc-ripple-color': rgb(68, 115, 158)
-                                - '--mdc-ripple-press-opacity': 0.5
+                                - --mdc-ripple-color: rgb(68, 115, 158)
+                                - --mdc-ripple-press-opacity: 0.5
                                 - border-radius: 8px
                                 - background: transparent
                                 - box-shadow: |

@@ -1,4 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
+*Derniere mise a jour : 2026-10-04 S2 (sync_index : HOME PAGE - refontes completes cartes [5]/[6]/[7] : Lave-Linge + Lave-Vaisselle (mushroom card_mod CSS anime, --wm-*/--dw-* variables, 5/4 etats) + Congelateur (button-card JS extra_styles, snow/drip/door, badge dual temp) ; 3 fichiers 2026-10-04 dans PAGE_Home/ (deplaces manuellement par Eric depuis Dashboard_COMPLET). Aucun YAML config HA ni vignette touchee.)*
 *Derniere mise a jour : 2026-10-04 S1 (sync_index : aucun YAML HA ni vignette. Session docs : correction CLAUDE.md + IA_CONTEXT_BASE.md (ligne Github/ perimee, INDEX_AUTOMATIONS.md + INDEX_NAVIGATION.md -> INDEX_GLOBAL.md) ; IA_CONTEXT_BASE.md pousse vers H:\docs\00_IA\ (3 emplacements conformes) ; ha-push-md skill corrigee (paths relatifs depuis \) ; 0 *.md a pousser (124 locaux tous a jour en prod) ; DEPENDANCES_GLOBALES.md rapatrie H:\ -> local (absent du local depuis ?))*
 *Dernière mise à jour : 2026-09-24 S1 (sync_index : HOME PAGE + L1C2 + L5C1 + GRP_03 - carte Congélateur : contact porte en visibilité (bloc or : tongel > -15°C OU porte ouverte, seuil -15 retenu par Eric), seuils 26/48/235, label "Porte fermée / Porte Ouverte" ; carte appliance Congélateur ajoutée en fin de page L1C2 (42 cartes) ; batterie porte_congel intégrée (L5C1 + groupe) ; GRP_03 : 13 membres (resync prod->local) ; exports 24/09 : card_congelateur_home, page_L1C2_temperatures, page_L5C1_batteries_piles, Dashboard_2026_09_24 (39 135 lignes) ; vignette L5C1 inchangée.)*
 *Dernière mise à jour : 2026-09-20 S6 (automations clim P1 : `max_exceeded: silent` ajouté à (A-0) JOUR + (B-0) NUIT ; exports YAML des 2 automations mis à jour côté docs/ ; add-on Cloudflared HA = vestige arrêté)*
@@ -199,10 +200,10 @@ HOME PAGE (type: grid)
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/page_home_2026-06-13.yaml` | ✅ page complète |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_meteocss_home_2026-06-13.yaml` | ✅ picture-elements 7 layers |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_vscode_home_2026-06-13.yaml` | ✅ VS Code conditional |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_foudre_home_2026-06-13.yaml` | ✅ Foudre button-card |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_lave_linge_home_2026-09-19.yaml` | ✅ Lave-linge mushroom WashData (remplace 2026-06-13) |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_lave_vaisselle_home_2026-09-19.yaml` | ✅ Lave-vaisselle mushroom WashData (remplace 2026-06-13) |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_congelateur_home_2026-09-24.yaml` | ✅ Congélateur button-card (appliance - contact porte + seuils 26/48/235, remplace 2026-09-20) |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_lave_linge_home_2026-10-04.yaml` | ✅ Lave-linge mushroom card_mod refonte animee (remplace 2026-09-19) |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_lave_vaisselle_home_2026-10-04.yaml` | ✅ Lave-vaisselle mushroom card_mod refonte animee (remplace 2026-09-19) |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_congelateur_home_2026-10-04.yaml` | ✅ Congelateur button-card refonte complete snow/drip/door (remplace 2026-09-24) |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/Dashboard_COMPLET/card_congelateur_home_2026-10-04.yaml` | ✅ Congelateur button-card refonte complete snow/drip/door (remplace 2026-09-24) |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_presence_home_2026-06-13.yaml` | ✅ Présence (separator + Eric + Mamour) |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_detecteur_fuite_home_2026-06-13.yaml` | ✅ Détecteur fuite mushroom |
 
