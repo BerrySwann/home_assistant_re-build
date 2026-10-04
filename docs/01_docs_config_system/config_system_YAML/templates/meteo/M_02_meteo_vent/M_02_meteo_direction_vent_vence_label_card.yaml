@@ -1,0 +1,52 @@
+# ╭────────────────────────────────────────────────────────────────────────────╮
+# │ METEO. TEMPLATE : VENT VENCE - DIRECTION LABEL 16 POINTS                   │
+# ╰────────────────────────────────────────────────────────────────────────────╯
+#
+# DESCRIPTION :
+# 1 sensor : direction du vent en texte 16 points cardinaux
+# (Nord, Nord-Nord-Est ... Calme). Affichage dashboard meteo.
+#
+# SOURCE     : weather.vence | attribut wind_bearing (degres)
+# unique_id  : direction_vent_vence_label
+# entity_id  : sensor.direction_vent_vence_label
+#
+# CHAINE :
+# weather.vence (wind_bearing) -> direction_vent_vence_label -> vignette vent dashboard
+#
+# PIEGES :
+# - Si wind_bearing None -> retourne "Calme" (pas d erreur).
+# - Non utilise par windrose-card (attend des degres, pas du texte).
+#
+# TABLEAU DE BORD : L1C1 Meteo (vignette label direction)
+- sensor:
+# ┌───────────────────────────────────────────────────────────┐
+# │ windrose-card - LABEL DIRECTION VENT VENCE                │
+# └───────────────────────────────────────────────────────────┘
+# windrose-card - LABEL Direction Vent Vence
+# --- direction_vent_vence_label ---
+    - name: "Direction Vent Vence Label"
+      unique_id: direction_vent_vence_label
+      state: >
+        {% set bearing = states.weather.vence.attributes.wind_bearing | default(None) %}
+        {% if bearing is not none %}
+          {% set bearing = bearing | int(default=0) %}
+          {% if bearing >= 348.75 or bearing < 11.25 %} Nord
+          {% elif bearing >= 11.25 and bearing < 33.75 %} Nord-Nord-Est
+          {% elif bearing >= 33.75 and bearing < 56.25 %} Nord-Est
+          {% elif bearing >= 56.25 and bearing < 78.75 %} Est-Nord-Est
+          {% elif bearing >= 78.75 and bearing < 101.25 %} Est
+          {% elif bearing >= 101.25 and bearing < 123.75 %} Est-Sud-Est
+          {% elif bearing >= 123.75 and bearing < 146.25 %} Sud-Est
+          {% elif bearing >= 146.25 and bearing < 168.75 %} Sud-Sud-Est
+          {% elif bearing >= 168.75 and bearing < 191.25 %} Sud
+          {% elif bearing >= 191.25 and bearing < 213.75 %} Sud-Sud-Ouest
+          {% elif bearing >= 213.75 and bearing < 236.25 %} Sud-Ouest
+          {% elif bearing >= 236.25 and bearing < 258.75 %} Ouest-Sud-Ouest
+          {% elif bearing >= 258.75 and bearing < 281.25 %} Ouest
+          {% elif bearing >= 281.25 and bearing < 303.75 %} Ouest-Nord-Ouest
+          {% elif bearing >= 303.75 and bearing < 326.25 %} Nord-Ouest
+          {% elif bearing >= 326.25 and bearing < 348.75 %} Nord-Nord-Ouest
+          {% else %} Inconnu
+          {% endif %}
+        {% else %} Calme
+        {% endif %}

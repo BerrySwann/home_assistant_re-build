@@ -1,0 +1,59 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ MÉTÉO. TEMPLATE : TENDANCE DURÉE JOUR (CYCLE SOLAIRE - M_05)             │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# "Jours rallongent" / "Jours raccourcissent" selon le jour de l'année
+# (solstices jours 172 et 355 comme pivots).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - j >= 172 AND j <= 355 -> raccourcissent, sinon -> rallongent.
+# - Dates clés : Solstice été j172 | Solstice hiver j355.
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL                                | CAPTEUR BRUT (source)                           | CE FICHIER (unique_id) | AVAL                           |
+# |:------------------------------------------|:---------------------------------------------------|:--------------------------|:---------------------------------|
+# | [calculé] (horloge système)             | now() - logique binaire jour de l'année          | tendance_duree_jour       | L1C1 Météo (données solaires) |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Logique binaire simple sur le jour de l'année, pas de calcul astronomique ici.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C1 Météo (données solaires complémentaires - tendance).
+
+- sensor:
+    # ┌───────────────────────────────────┐
+    # │ TENDANCE DURÉE JOUR               │
+    # └───────────────────────────────────┘
+    # --- tendance_duree_jour ---
+    - name: "Tendance durée jour"
+      unique_id: tendance_duree_jour
+      state: >
+        {% set day_of_year = now().timetuple().tm_yday %}
+        {% if day_of_year >= 172 and day_of_year <= 355 %}
+          Jours raccourcissent
+        {% else %}
+          Jours rallongent
+        {% endif %}
+      icon: >
+        {% set day_of_year = now().timetuple().tm_yday %}
+        {% if day_of_year >= 172 and day_of_year <= 355 %}
+          mdi:arrow-down-thick
+        {% else %}
+          mdi:arrow-up-thick
+        {% endif %}
+      attributes:
+        jour_annee: "{{ now().timetuple().tm_yday }}"
+        solstice_ete: "172"
+        solstice_hiver: "355"
+        jours_avant_solstice: >
+          {% set day = now().timetuple().tm_yday %}
+          {% if day < 172 %}
+            {{ 172 - day }}
+          {% elif day < 355 %}
+            {{ 355 - day }}
+          {% else %}
+            {{ 172 + (365 - day) }}
+          {% endif %}

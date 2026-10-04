@@ -1,0 +1,54 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ SWITCH : CHAUFFAGE — INTERRUPTEUR / BP SDB                               │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Switch template contrôlant le soufflant SDB via un input_boolean virtuel.
+# Permet un pilotage unifié depuis l'interface (bouton poussoir virtuel).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Source : input_boolean.inter_soufflant_salle_de_bain
+# - turn_on  → input_boolean.turn_on
+# - turn_off → input_boolean.turn_off
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | [calculé]      | input_boolean.inter_soufflant_sdb                  | switch.inter_soufflant_salle_de_bain               | L1C3 Commandes Clim / automations SDB |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Ce switch pilote l'input_boolean, pas directement le relais physique.
+# - Icône dynamique : mdi:radiator (ON) / mdi:radiator-off (OFF).
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C3 Commandes Clim (bouton on/off soufflant SDB)
+
+- switch:
+    # ┌───────────────────────────────────┐
+    # │ 8. SDB                            │
+    # └───────────────────────────────────┘
+    # --- inter_soufflant_salle_de_bain ---
+    - name: "Inter Soufflant Salle de Bain"
+      unique_id: inter_soufflant_salle_de_bain
+      state: "{{ is_state('input_boolean.inter_soufflant_salle_de_bain', 'on') }}"
+      icon: >
+        {% if is_state('input_boolean.inter_soufflant_salle_de_bain', 'on') %}
+          mdi:radiator
+        {% else %}
+          mdi:radiator-off
+        {% endif %}
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.inter_soufflant_salle_de_bain
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.inter_soufflant_salle_de_bain
+
+# annotations_log:
+# - [Standardisation] Alignement complet sur le format ReBuild (Somrig/Rodret).
+# - [Syntaxe] Remplacement de 'service' par 'action' (Norme HA 2026).
+# - [Structure] Maintien du bloc de documentation et des boîtes ASCII.

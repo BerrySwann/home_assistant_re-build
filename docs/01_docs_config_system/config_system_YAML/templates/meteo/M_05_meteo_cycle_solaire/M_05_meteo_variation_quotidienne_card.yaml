@@ -1,0 +1,75 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ MÉTÉO. TEMPLATE : VARIATION QUOTIDIENNE (CYCLE SOLAIRE - M_05)           │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Variation progressive de la durée du jour en min/jour selon la saison.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Printemps (j80->172) : 0->+3 progressif | Été (j172->264) : 0->-3 progressif
+# - Automne (j264->355) : stable -3 | Hiver (j355->80) : stable +2.
+# - Dates clés : Équinoxe printemps j80 | Solstice été j172 | Équinoxe automne j264
+#                Solstice hiver j355.
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL                                | CAPTEUR BRUT (source)                           | CE FICHIER (unique_id) | AVAL                           |
+# |:------------------------------------------|:---------------------------------------------------|:--------------------------|:---------------------------------|
+# | [calculé] (horloge système)             | now() - formule progressive par saison            | variation_quotidienne     | L1C1 Météo (données solaires) |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - La variation est arrondie à 1 décimale (round(1)).
+# - L'attribut variation_type relit son propre état (sensor.variation_quotidienne)
+#   pour en déduire Rallongement/Raccourcissement/Stable - comportement voulu,
+#   ne pas "corriger" cette auto-référence.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C1 Météo (données solaires complémentaires - variation quotidienne).
+
+- sensor:
+    # ┌───────────────────────────────────┐
+    # │ VARIATION QUOTIDIENNE             │
+    # └───────────────────────────────────┘
+    # --- variation_quotidienne ---
+    - name: "Variation quotidienne"
+      unique_id: variation_quotidienne
+      unit_of_measurement: "min"
+      icon: mdi:clock-fast
+      state: >
+        {% set day_of_year = now().timetuple().tm_yday %}
+        {% if day_of_year >= 80 and day_of_year <= 172 %}
+          {# Printemps : variation progressive 0 -> +3 min/jour #}
+          {{ (3 * ((day_of_year - 80) / 92)) | round(1) }}
+        {% elif day_of_year >= 172 and day_of_year <= 264 %}
+          {# Été : variation progressive 0 -> -3 min/jour #}
+          {{ (-3 * ((day_of_year - 172) / 92)) | round(1) }}
+        {% elif day_of_year >= 264 and day_of_year <= 355 %}
+          {# Automne : stable à -3 min/jour #}
+          {{ -3 | round(1) }}
+        {% else %}
+          {# Hiver : stable à +2 min/jour #}
+          {{ 2 | round(1) }}
+        {% endif %}
+      attributes:
+        jour_annee: "{{ now().timetuple().tm_yday }}"
+        periode: >
+          {% set day = now().timetuple().tm_yday %}
+          {% if day >= 80 and day <= 172 %}
+            Printemps (accélération)
+          {% elif day >= 172 and day <= 264 %}
+            Été (décélération)
+          {% elif day >= 264 and day <= 355 %}
+            Automne (raccourcissement max)
+          {% else %}
+            Hiver (rallongement stable)
+          {% endif %}
+        variation_type: >
+          {% set var = states('sensor.variation_quotidienne') | float(0) %}
+          {% if var > 0 %}
+            Rallongement
+          {% elif var < 0 %}
+            Raccourcissement
+          {% else %}
+            Stable
+          {% endif %}

@@ -1,0 +1,30 @@
+# ╭────────────────────────────────────────────────────────────────────────────╮
+# │ METEO. TEMPLATE : FOUDRE - DISTANCE EN KM                                  │
+# ╰────────────────────────────────────────────────────────────────────────────╯
+#
+# DESCRIPTION :
+# 1 sensor : distance du dernier impact de foudre en km.
+#
+# SOURCE     : sensor.maison_lightning_distance (km)
+# unique_id  : distance_foudre_km
+# entity_id  : sensor.distance_foudre_km
+#
+# CHAINE :
+# Blitzortung (sensor.maison_lightning_distance) -> distance_foudre_km -> L1C1 (info foudre)
+#
+# PIEGES :
+# - Retourne 0 si sensor inconnu ou indisponible.
+#
+# TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C1 Meteo (distance dernier impact foudre)
+
+- sensor:
+# --- distance_foudre_km ---
+    - name: "Distance Foudre km"
+      unique_id: distance_foudre_km
+      unit_of_measurement: "km"
+      state: >
+        {% set distance_km = states('sensor.maison_lightning_distance') %}
+        {% if distance_km in ['unknown', 'unavailable'] %} 0
+        {% else %} {{ (distance_km | float (0)) | round(1) }}
+        {% endif %}
