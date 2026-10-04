@@ -497,7 +497,7 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 ReBuild/
 ├── CLAUDE.md · secrets.yaml
 ├── IA/              (vide - déplacé vers docs/00_IA/)
-├── Github/          (INDEX_AUTOMATIONS.md · INDEX_NAVIGATION.md · README.md)
+├── Github/          (INDEX_GLOBAL.md · README.md)
 ├── historique/      (JOURNAL_COMPLET_2026-04-25_2026-07-14.md)
 └── docs/
     ├── 00_IA/                      (IA_CONTEXT_BASE.md · sous_context_ia/ → tous les IA_*.md)
