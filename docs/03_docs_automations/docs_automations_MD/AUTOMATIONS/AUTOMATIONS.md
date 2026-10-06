@@ -301,7 +301,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 ## 🚿 P1 SDB - SOUFFLANT (7 automations)
 
 > **Contexte matériel :**
-> Le soufflant SdB (2×1000W) est piloté via une **télécommande IR** (`remote.soufflant_sdb_rm4_mini`) car il n'a pas de commande directe - la prise `switch.prise_soufflant_salle_de_bain_nous` sert à couper l'alimentation physique.
+> Le soufflant SdB (2×1000W) est piloté via une **télécommande IR** (`remote.soufflant_sdb`) car il n'a pas de commande directe - la prise `switch.prise_soufflant_salle_de_bain_nous` sert à couper l'alimentation physique.
 > L'état logique ON/OFF est géré par `switch.inter_soufflant_salle_de_bain` (helper switch).
 > La puissance active (0W / 1000W / 2000W) est mémorisée dans `input_select.etat_resistance_soufflant_sdb`.
 
