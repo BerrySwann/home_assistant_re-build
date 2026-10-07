@@ -27,6 +27,9 @@
 # - 2026-09-29 : inter_radiateur_salle_de_bain SUPPRIME. Aucun consommateur,
 #   aucun fichier B1_01_inter_sdb.yaml en prod : l'audit du 2026-07-06 est clos.
 #   Le pilotage SDB passe par inter_soufflant_salle_de_bain et son verrou.
+# - 2026-10-07 : voyant_thermostat_soufflant_salle_de_bain AJOUTE. Helper neutre qui sert de
+#   heater a climate.soufflant_salle_de_bain (generic_thermostat). Il ne pilote aucun
+#   materiel : le thermostat ne commande plus l interrupteur du soufflant (decision Eric).
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L1C3 Commandes Clim (état soufflant SDB via input_select.etat_resistance_soufflant_sdb)
@@ -42,3 +45,11 @@ inter_soufflant_salle_de_bain:
 verrou_soufflant_salle_de_bain:
   name: "SDB Verrou soufflant (2 min)"
   icon: mdi:lock-clock
+
+# --- voyant_thermostat_soufflant_salle_de_bain (ajoute le 2026-10-07) ---
+# Helper NEUTRE : heater du generic_thermostat climate.soufflant_salle_de_bain.
+# Le thermostat ne sert plus que d affichage (voyant), il ne commande plus le soufflant.
+# Ne lire ni ecrire cette entite ailleurs.
+voyant_thermostat_soufflant_salle_de_bain:
+  name: "SDB Voyant thermostat soufflant (neutre)"
+  icon: mdi:thermostat

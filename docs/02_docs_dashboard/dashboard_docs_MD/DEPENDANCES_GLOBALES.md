@@ -1,4 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
+*Derniere mise a jour : 2026-10-07 (sync_index : automation D watchdog SdB - seuil de derive +0.5 -> +0.4 degre, modif Eric en direct a 18h10 ; fiche D_WATCHDOG, AUTOMATIONS.md, SPECIFICATION 8.5 et export YAML docs alignes. Aucun YAML config HA ni vignette touche.)*
 *Derniere mise a jour : 2026-10-04 S3 (sync_index : session resync 3 voies LOCAL/H:\\docs/GitHub. Docs : 17 fichiers LOCAL_SEUL pousses vers H:\docs, 16 fichiers PROD_SEUL supprimes (ancienne structure plate). ha-resync-tree x2 : 12 fichiers config ajoutes GitHub->local (shell_command/backup_github, correct_linky, log_eric_zone ; blueprint inverted_binary_sensor ; 4 .bak ; 2 .txt notifs) ; bilan final SYNC=80 DIFF=0. Dashboard_2026_10-04.yaml (refonte complete Eric) rapatrie H:\ root -> docs/02_docs_dashboard/dashboard_docs_YAML/Dashboard_COMPLET/. Aucun YAML HA ni vignette touches.)*
 *Derniere mise a jour : 2026-10-04 S2 (sync_index : HOME PAGE - refontes completes cartes [5]/[6]/[7] : Lave-Linge + Lave-Vaisselle (mushroom card_mod CSS anime, --wm-*/--dw-* variables, 5/4 etats) + Congelateur (button-card JS extra_styles, snow/drip/door, badge dual temp) ; 3 fichiers 2026-10-04 dans PAGE_Home/ (deplaces manuellement par Eric depuis Dashboard_COMPLET). Aucun YAML config HA ni vignette touchee.)*
 *Derniere mise a jour : 2026-10-04 S1 (sync_index : aucun YAML HA ni vignette. Session docs : correction CLAUDE.md + IA_CONTEXT_BASE.md (ligne Github/ perimee, INDEX_AUTOMATIONS.md + INDEX_NAVIGATION.md -> INDEX_GLOBAL.md) ; IA_CONTEXT_BASE.md pousse vers H:\docs\00_IA\ (3 emplacements conformes) ; ha-push-md skill corrigee (paths relatifs depuis \) ; 0 *.md a pousser (124 locaux tous a jour en prod) ; DEPENDANCES_GLOBALES.md rapatrie H:\ -> local (absent du local depuis ?))*
@@ -2414,14 +2415,14 @@ auto-off 60min → switch.inter_soufflant OFF → remote IR on_off → delay 1mi
 
 #### A - Rôle
 
-Watchdog thermique de sécurité : si T° SDB > 25°C avec dérive rapide (>= +0.5°C), coupe le soufflant via reset IR + coupure physique de la prise après délai de refroidissement. Notifie sur mobile. Ne s'active que si la prise est alimentée et l'inter ON.
+Watchdog thermique de sécurité : si T° SDB > 25°C avec dérive rapide (>= +0.4°C), coupe le soufflant via reset IR + coupure physique de la prise après délai de refroidissement. Notifie sur mobile. Ne s'active que si la prise est alimentée et l'inter ON.
 
 #### B - Triggers / Entités
 
 | | Détail |
 |:--|:--|
 | Triggers | Changement `sensor.th_salle_de_bain_temperature` |
-| Conditions | `switch.prise_soufflant_salle_de_bain_nous` = on + `input_boolean.inter_soufflant_salle_de_bain` = on + T° > 25°C + dérive >= +0.5°C |
+| Conditions | `switch.prise_soufflant_salle_de_bain_nous` = on + `input_boolean.inter_soufflant_salle_de_bain` = on + T° > 25°C + dérive >= +0.4°C |
 | Entités lues | `sensor.th_salle_de_bain_temperature`, `switch.prise_soufflant_salle_de_bain_nous`, `input_boolean.inter_soufflant_salle_de_bain` |
 | Actions | delay 1min + `remote.soufflant_sdb` IR on_off (reset) + `input_boolean.inter_soufflant_salle_de_bain` off + delay 1min + `switch.prise_soufflant_salle_de_bain_nous` off + `notify.mobile_app_eric` |
 
@@ -2429,7 +2430,7 @@ Watchdog thermique de sécurité : si T° SDB > 25°C avec dérive rapide (>= +0
 
 ```
 sensor.th_salle_de_bain_temperature (NAT)
-  [> 25°C + dérive +0.5°C + prise ON + inter ON]
+  [> 25°C + dérive +0.4°C + prise ON + inter ON]
   → delay 1min (stabilisation)
   → remote.soufflant_sdb IR on_off (reset physique)
   → input_boolean.inter_soufflant_salle_de_bain → off

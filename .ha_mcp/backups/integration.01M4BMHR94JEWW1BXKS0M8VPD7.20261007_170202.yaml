@@ -1,0 +1,27 @@
+# ha_mcp_backup
+schema_version: 1
+domain: integration
+entity_id: 01M4BMHR94JEWW1BXKS0M8VPD7
+captured: '2026-10-07T17:02:02.506627+00:00'
+tool: ha_set_integration
+config:
+  created_at: 1791392014.62875
+  entry_id: 01M4BMHR94JEWW1BXKS0M8VPD7
+  domain: generic_thermostat
+  modified_at: 1791392374.325874
+  title: Soufflant Salle de Bain
+  source: user
+  state: loaded
+  supports_options: true
+  supports_remove_device: false
+  supports_unload: true
+  supports_reconfigure: false
+  supported_subentry_types: {}
+  pref_disable_new_entities: false
+  pref_disable_polling: false
+  disabled_by: null
+  reason: null
+  error_reason_translation_domain: null
+  error_reason_translation_key: null
+  error_reason_translation_placeholders: null
+  num_subentries: 0

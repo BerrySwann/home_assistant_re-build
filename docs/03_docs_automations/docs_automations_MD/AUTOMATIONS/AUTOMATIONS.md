@@ -417,7 +417,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ### #21 - D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR
 
-**Rôle :** Reset d'urgence physique si T° > 25°C avec dérive rapide (+0.5°C). Prévient la surchauffe.
+**Rôle :** Reset d'urgence physique si T° > 25°C avec dérive rapide (+0.4°C). Prévient la surchauffe.
 
 **Trigger (1) :**
 - Changement de `sensor.th_salle_de_bain_temperature`
@@ -426,7 +426,7 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 - Prise physique `on`
 - `input_boolean.inter_soufflant_salle_de_bain` = `on`
 - T° > 25°C
-- Dérive : T° actuelle ≥ T° précédente + 0.5°C (template)
+- Dérive : T° actuelle ≥ T° précédente + 0.4°C (template)
 
 **Séquence :**
 1. Attente 1 min (stabilisation)

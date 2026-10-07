@@ -19,7 +19,7 @@
 - Deux anciennes automatisations, toutes deux éteintes, conservées comme réservoir d'idées :
   - `A - 2026/02/01 - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT` (éteinte depuis le 2026-05-27),
     régulation par paliers de 1000 et 2000 W ;
-  - `D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR` (éteinte, jamais déclenchée).
+  - `D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR` (réactivée le 2026-09-29, active, jamais déclenchée à ce jour).
 
 ### Piège de nommage
 
@@ -109,11 +109,11 @@ de bain (`bouton_ikea_rodret_soufflant_sdb_gestion_on_off_json`) pilote toujours
 
 | Ajout | Où | Effet |
 |:--|:--|:--|
-| Garde 25 degrés | `sdb_soufflant_demarrer`, première ligne de la séquence | Refus de démarrer si la salle de bain est à 25 degrés ou plus. Placée avant le verrou, la prise et l'infrarouge. |
+| Garde de saison | `sdb_soufflant_demarrer`, première ligne de la séquence | Refus de démarrer si `sensor.mode_ete_hiver` vaut cool (modifié le 2026-10-07). Elle remplace la garde des 25 degrés du 2026-09-29, qui aurait bloqué les démarrages en hiver. Placée avant le verrou, la prise et l'infrarouge. |
 | Affichage du climate | `sdb_soufflant_demarrer` après les impulsions, `sdb_soufflant_arreter` en fin de séquence | Le climate passe en heat au démarrage et sur off à l'arrêt, comme le faisait l'automation de février. |
 | Arrêt forcé 60 minutes | `sdb_soufflant_demarrer`, fin de séquence | Si l'interrupteur est encore en marche après une heure, il est éteint et la séquence d'arrêt enchaîne. Le compte démarre à la fin du verrou, l'arrêt tombe donc environ 62 minutes après l'appui. |
 
-La garde des 25 degrés doit rester la première ligne. Placée plus bas, un refus laissait le verrou
+La garde de saison doit rester la première ligne. Placée plus bas, un refus laissait le verrou
 posé et bloquait toute commande d'arrêt, ce qui s'est produit lors des essais du 2026-09-29.
 
 ### 8.2 Cycle réel validé
@@ -143,6 +143,15 @@ l'interrupteur tout seul dès qu'il le trouve éteint, et il coupe à la consign
 thermostat commande donc réellement le montage, il n'est pas un simple affichage. Deux voies restent
 ouvertes : le laisser ainsi, ou lui retirer l'interrupteur pour qu'il devienne un voyant.
 
+Mise à jour 2026-10-07 : décision d'Eric, le thermostat devient un voyant. Il a été recréé dans
+l'interface (tolérances 0, bornes 19 à 32), puis son chauffage a été remplacé par
+`switch.voyant_thermostat_soufflant_salle_de_bain`, un switch template neutre qui suit
+`input_boolean.voyant_thermostat_soufflant_salle_de_bain` et ne commande aucun matériel. Le thermostat
+ne peut donc plus couper ni rallumer le soufflant. Contrepartie : il n'y a plus de coupure en
+température par le thermostat (elle tombait à la consigne, 32 degrés au plus). Restent l'arrêt forcé
+à 60 minutes et la watchdog D. Les deux nouvelles entités sont déclarées dans `input_booleans/P1/
+P1_BV_IB_inter_soufflant_sdb.yaml` et `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml`.
+
 ### 8.5 Watchdog : remis en service mais inopérant
 
 `D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR` a été réactivée le 2026-09-29. Elle est
@@ -152,14 +161,18 @@ capteur de la salle de bain remonte par pas de 0,2 (25,5 puis 25,7 puis 25,9 pui
 condition est donc infaisable en pratique. Depuis que le script refuse de démarrer au-dessus de
 25 degrés, cette condition de dérive est devenue inutile : les trois autres suffisent.
 
+Mise à jour 2026-10-07 : Eric a passé le seuil de dérive à 0,4 degré (relu en direct). Efficacité
+non démontrée (relevés par pas de 0,2) et risque de double IR `on_off` entre D et le script d'arrêt
+non testé : voir `D_WATCHDOG_RADIATEUR_SDB.md`, section "État au 2026-10-07".
+
 ### 8.6 Points ouverts au 2026-09-29
 
 - Quand le script refuse un démarrage, l'interrupteur reste en marche sans effet : rien ne le remet
   sur arrêt, et le tableau de bord affiche un appareil en marche qui ne chauffe pas.
 - Le compte d'une heure vit dans le script : un redémarrage de Home Assistant pendant la marche
   l'efface. L'automation de février, elle, se réarmait seule après un redémarrage.
-- Aucune des trois sécurités n'a été observée en fonctionnement réel, la garde des 25 degrés
-  interdisant tout démarrage tant que la pièce reste au-dessus.
+- Aucune des trois sécurités n'a été observée en fonctionnement réel.
+- Depuis le 2026-10-07 la garde de saison ne regarde plus la température de la pièce : un démarrage reste possible au-dessus de 25 degrés hors mode cool.
 - Les capteurs `sdb_soufflant_etat` et `sdb_soufflant_power_status` restent faux quand la prise ne
   publie pas sa puissance : mieux vaudrait les calculer sur l'interrupteur.
 
