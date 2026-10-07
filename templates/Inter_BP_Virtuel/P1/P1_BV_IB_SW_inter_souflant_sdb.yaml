@@ -47,6 +47,7 @@
         - action: input_boolean.turn_off
           target:
             entity_id: input_boolean.inter_soufflant_salle_de_bain
+
     # --- voyant_thermostat_soufflant_salle_de_bain (ajoute le 2026-10-07) ---
     # Switch NEUTRE : sert de heater au generic_thermostat climate.soufflant_salle_de_bain.
     # Il ne pilote aucun materiel, il ne fait que suivre input_boolean.voyant_thermostat_soufflant_salle_de_bain.

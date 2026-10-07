@@ -1,4 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
+*Derniere mise a jour : 2026-10-07 19h20 (sync_index : thermostat SdB devenu voyant - heater remplace par switch.voyant_thermostat_soufflant_salle_de_bain ; garde de demarrage 25 degres remplacee par garde de saison (sensor.mode_ete_hiver = cool). Nouvelles entites : input_boolean.voyant_thermostat_soufflant_salle_de_bain, switch.voyant_thermostat_soufflant_salle_de_bain.)*
 *Derniere mise a jour : 2026-10-07 (sync_index : automation D watchdog SdB - seuil de derive +0.5 -> +0.4 degre, modif Eric en direct a 18h10 ; fiche D_WATCHDOG, AUTOMATIONS.md, SPECIFICATION 8.5 et export YAML docs alignes. Aucun YAML config HA ni vignette touche.)*
 *Derniere mise a jour : 2026-10-04 S3 (sync_index : session resync 3 voies LOCAL/H:\\docs/GitHub. Docs : 17 fichiers LOCAL_SEUL pousses vers H:\docs, 16 fichiers PROD_SEUL supprimes (ancienne structure plate). ha-resync-tree x2 : 12 fichiers config ajoutes GitHub->local (shell_command/backup_github, correct_linky, log_eric_zone ; blueprint inverted_binary_sensor ; 4 .bak ; 2 .txt notifs) ; bilan final SYNC=80 DIFF=0. Dashboard_2026_10-04.yaml (refonte complete Eric) rapatrie H:\ root -> docs/02_docs_dashboard/dashboard_docs_YAML/Dashboard_COMPLET/. Aucun YAML HA ni vignette touches.)*
 *Derniere mise a jour : 2026-10-04 S2 (sync_index : HOME PAGE - refontes completes cartes [5]/[6]/[7] : Lave-Linge + Lave-Vaisselle (mushroom card_mod CSS anime, --wm-*/--dw-* variables, 5/4 etats) + Congelateur (button-card JS extra_styles, snow/drip/door, badge dual temp) ; 3 fichiers 2026-10-04 dans PAGE_Home/ (deplaces manuellement par Eric depuis Dashboard_COMPLET). Aucun YAML config HA ni vignette touchee.)*
@@ -365,7 +366,7 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `climate.radiateur_cuisine` | NAT | Helper UI generic_thermostat (pile : `switch.radiateur_elec_cuisine`) *(corrigé 2026-09-20 - registre HA)* |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
 | `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
-| `climate.soufflant_salle_de_bain` | NAT | Helper UI generic_thermostat (pile : `switch.inter_soufflant_salle_de_bain`) *(vérifié 2026-09-20 - carte clim SdB)* |
+| `climate.soufflant_salle_de_bain` | NAT | Helper UI generic_thermostat (pile : `switch.voyant_thermostat_soufflant_salle_de_bain`, switch TPL neutre depuis 2026-10-07, ne commande plus le soufflant) *(vérifié 2026-09-20 - carte clim SdB)* |
 | `sensor.tongel_temperature` | NAT | SONOFF via Z2M *(ajouté 2026-09-02 - bloc Congélateur)* |
 | `sensor.tongel_humidity` | NAT | SONOFF via Z2M *(ajouté 2026-09-02 - bloc Congélateur)* |
 | `sensor.tongel_battery` | NAT | SONOFF via Z2M *(ajouté 2026-09-02 - bloc Congélateur)* |
@@ -433,7 +434,7 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 > via `switch.inter_soufflant_salle_de_bain` + `input_select.etat_resistance_soufflant_sdb`,
 > pas une entité climate - vérifié, aucune occurrence dans tout `config_system_YAML/`).
 >
-> ⚠️ **Mise à jour 2026-09-20** : `climate.soufflant_salle_de_bain` EXISTE désormais en live (état `off` - helper UI generic_thermostat créé le 2026-03-22, pile `switch.inter_soufflant_salle_de_bain`) - utilisée par la carte clim SdB de la page L1C2 (refonte 2026-09-20). La note du 2026-07-19 ci-dessus est obsolète.
+> ⚠️ **Mise à jour 2026-09-20** : `climate.soufflant_salle_de_bain` EXISTE désormais en live (état `off` - helper UI generic_thermostat créé le 2026-03-22, pile `switch.inter_soufflant_salle_de_bain`) - utilisée par la carte clim SdB de la page L1C2 (refonte 2026-09-20). La note du 2026-07-19 ci-dessus est obsolète. Mise à jour 2026-10-07 : le thermostat a été recréé dans l'interface et son chauffage (pile) est désormais `switch.voyant_thermostat_soufflant_salle_de_bain` (switch template neutre, suit `input_boolean.voyant_thermostat_soufflant_salle_de_bain`) : il ne peut plus allumer ni couper `switch.inter_soufflant_salle_de_bain`. Il sert de voyant.
 
 ### Entités consommées par la vignette
 
@@ -459,6 +460,7 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
 | `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
 | `switch.inter_soufflant_salle_de_bain` | NAT (switch TPL) | `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml` |
+| `switch.voyant_thermostat_soufflant_salle_de_bain` | NAT (switch TPL, neutre, heater du thermostat SdB) | `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml` (état : `input_boolean.voyant_thermostat_soufflant_salle_de_bain`, `input_booleans/P1/P1_BV_IB_inter_soufflant_sdb.yaml`) |
 | `input_select.etat_resistance_soufflant_sdb` | NAT | `input_select.yaml` |
 
 ### Entités clés de la page
@@ -704,6 +706,7 @@ MATÉRIEL (NOUS SP via Z2M)
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
 | `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
 | `switch.inter_soufflant_salle_de_bain` | NAT (switch TPL) | `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml` |
+| `switch.voyant_thermostat_soufflant_salle_de_bain` | NAT (switch TPL, neutre, heater du thermostat SdB) | `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml` (état : `input_boolean.voyant_thermostat_soufflant_salle_de_bain`, `input_booleans/P1/P1_BV_IB_inter_soufflant_sdb.yaml`) |
 | `sensor.salon_power_status` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
 | `sensor.cuisine_power_status` | TPL | idem |
 | `sensor.bureau_power_status` | TPL | idem |
