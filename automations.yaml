@@ -1706,7 +1706,7 @@
     condition: template
     value_template: '{{ trigger.from_state is not none and trigger.from_state.state
       is defined and (states(''sensor.th_salle_de_bain_temperature'') | float) >=
-      (trigger.from_state.state | float + 0.5) }}'
+      (trigger.from_state.state | float + 0.4) }}'
   actions:
   - alias: 'ACTION : ATTENTE STABILISATION (1 MIN)'
     delay:
