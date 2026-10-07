@@ -157,8 +157,8 @@ input_number: !include_dir_merge_named input_number/
 #renvoi au fichier input_datetime.yaml
 input_datetime: !include input_datetime.yaml
 
-# --- timer.yaml ---
-#renvoi au fichier timer.yaml
+# --- timer ---
+#renvoi au dossier timers/ (un fichier par timer, fusion par nom)
 timer: !include_dir_merge_named timers/
 
 

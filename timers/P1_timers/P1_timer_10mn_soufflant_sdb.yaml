@@ -1,0 +1,48 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ POLE 1. TIMER : DECOMPTE 10 MIN, RATTRAPAGE APRES REDEMARRAGE DE HA      │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## DESCRIPTION :
+# Decompte de rattrapage du soufflant de la salle de bain : 10 minutes.
+# Sert quand Home Assistant redemarre alors que le soufflant est en marche et que le timer
+# de 60 minutes n'est plus actif (non restaure, ou fini pendant l'arret).
+#
+# ## CALCUL & SOURCES :
+# Duree : 00:10:00. Option restore: true.
+# Prevu (automation a creer) : au demarrage de HA, apres un delai pour laisser les timers
+# se restaurer, si switch.inter_soufflant_salle_de_bain est en marche ET timer.soufflant_sdb_60mn
+# est inactif, lancer ce timer ; a sa fin, couper l'interrupteur.
+#
+# ## CHAINE DE DEPENDANCES :
+#
+# | MATERIEL      | CAPTEUR BRUT (source)                  | CE FICHIER (unique_id) | AVAL                                          |
+# |:--------------|:---------------------------------------|:-----------------------|:----------------------------------------------|
+# | [virtuel/UI]  | timer.soufflant_sdb_60mn + interrupteur| soufflant_sdb_10mn     | automation de demarrage de HA a creer         |
+#
+# ## IMPORTANT (PIEGES) :
+# - Domaine timer NOUVEAU dans cette config (ajoute dans configuration.yaml le 2026-10-07
+#   par Eric : timer: !include_dir_merge_named timers/). Un redemarrage de Home Assistant
+#   est necessaire pour charger le domaine ; un simple rechargement ne suffit pas.
+# - restore: true : un timer actif ou en pause est restaure apres un redemarrage de HA
+#   (doc officielle du helper timer).
+# - Si la fin du timer tombe pendant l'arret de HA, l'evenement timer.finished n'est PAS
+#   emis au demarrage (doc officielle). D'ou le controle au demarrage de HA (voir ci-dessous).
+# - Ce fichier ne contient que le helper. Les automations qui lancent, annulent et lisent
+#   le timer ne sont PAS encore creees (2026-10-07) : sans elles, le timer ne fait rien.
+# - Decision Eric 2026-10-07 : deux helpers (60 mn et 10 mn). Dossier timers/P1_timers/.
+# - Risque de course au demarrage : lire le timer 60 mn avant sa restauration le ferait voir
+#   inactif a tort. Prevoir un delai ou un wait_template, a tester en conditions reelles.
+#
+# ## TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Aucune vignette pour l'instant (helper technique, pas d'affichage prevu).
+
+# ┌─────────────────────────────────┐
+# │ 1. TIMER 10 MINUTES             │
+# └─────────────────────────────────┘
+
+# --- soufflant_sdb_10mn ---
+soufflant_sdb_10mn:
+  name: "SDB Soufflant Rattrapage 10 mn"
+  duration: "00:10:00"
+  restore: true
+  icon: mdi:timer-sand
