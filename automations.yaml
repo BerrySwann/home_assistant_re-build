@@ -398,7 +398,7 @@
         hvac_mode: '{{ mode_saison }}'
   mode: single
 - id: '1774803407558'
-  alias: A - 2026/02/01 - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT
+  alias: Z - 2026/02/01 - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT
   description: 'Cycle complet : Démarrage, Régulation, et Auto-off 60 min avec refroidissement'
   triggers:
   - alias: CHANGEMENT ÉTAT INTERRUPTEUR
@@ -2611,7 +2611,7 @@
         '
   mode: single
 - id: '1790623332289'
-  alias: SDB - SOUFFLANT - ROUTAGE (interrupteur vers sequences)
+  alias: B - SDB - SOUFFLANT - ROUTAGE (interrupteur vers sequences)
   description: 'Entree unique du soufflant de la salle de bain : l''interrupteur virtuel
     (bouton du tableau de bord) declenche le demarrage ou l''arret. Le verrou de deux
     minutes est tenu par les scripts. Aucun automatisme de temperature.'
@@ -2645,7 +2645,7 @@
           entity_id: script.sdb_soufflant_arreter
   mode: single
 - id: '1790623332290'
-  alias: SDB - SOUFFLANT - BOUTON IKEA RODRET (MQTT vers interrupteur)
+  alias: A - SDB - SOUFFLANT - BOUTON IKEA RODRET (MQTT vers interrupteur)
   description: 'Le bouton IKEA Rodret de la salle de bain pilote l''interrupteur virtuel,
     qui declenche ensuite les sequences. Topic Zigbee2MQTT : Inter Soufflant Salle
     de Bain (IKEA RODRET)/action.'
