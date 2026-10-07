@@ -40,10 +40,10 @@ inter_soufflant_salle_de_bain:
   icon: mdi:fan
 
 # --- verrou_soufflant_salle_de_bain (ajoute le 2026-09-28) ---
-# Verrou de deux minutes tenu pendant le demarrage du soufflant.
+# Verrou de trente secondes tenu pendant le demarrage du soufflant (2 min jusqu au 2026-10-07).
 # Il bloque un nouvel ordre de marche comme un ordre d'arret (decision Berry 2026-09-28).
 verrou_soufflant_salle_de_bain:
-  name: "SDB Verrou soufflant (2 min)"
+  name: "SDB Verrou soufflant (30 s)"
   icon: mdi:lock-clock
 
 # --- voyant_thermostat_soufflant_salle_de_bain (ajoute le 2026-10-07) ---

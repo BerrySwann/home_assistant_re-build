@@ -4,7 +4,7 @@
 #
 # ## DESCRIPTION :
 # Entree unique du soufflant de la salle de bain : l'interrupteur virtuel
-# declenche le demarrage ou l'arret. Le verrou de deux minutes est tenu par les scripts.
+# declenche le demarrage ou l'arret. Le verrou de trente secondes est tenu par les scripts.
 #
 # ## CHAINE DE DEPENDANCES :
 #

@@ -4,7 +4,7 @@
 #
 # ## DESCRIPTION :
 # Prise ON, mise en route IR, deux impulsions 1000 W pour atteindre 2000 W,
-# puis verrou de deux minutes qui bloque la marche comme l'arret.
+# puis verrou de trente secondes qui bloque la marche comme l'arret.
 # Affichage du climate en heat, et arret force apres une heure de marche.
 #
 # ## CHAINE DE DEPENDANCES :
@@ -14,35 +14,40 @@
 # | [virtuel/UI]  | automation SDB - SOUFFLANT - ROUTAGE
 #
 # ## SECURITES (2026-09-29) :
-# - Refus de demarrer si la salle de bain est a 25 degres ou plus. La condition est la
+# - Refus de demarrer en mode cool (sensor.mode_ete_hiver = cool), depuis le 2026-10-07.
+#   Remplace la garde 25 degres du 2026-09-29, qui aurait bloque l hiver. La condition est la
 #   PREMIERE ligne de la sequence, avant le verrou, la prise et l'infrarouge : un refus
 #   en fin de sequence laissait le verrou pose et bloquait tout arret.
 # - Affichage du climate : passage en heat apres les impulsions 1000 W.
 # - Arret force apres une heure de marche : si l'interrupteur est encore en marche il est
 #   eteint, et la sequence d'arret enchaine (infrarouge, refroidissement, prise, climate).
 #   Le compte vit dans le script : un redemarrage de Home Assistant l'efface.
-#   Il demarre a la fin du verrou, donc l'arret tombe environ 62 minutes apres l'appui.
+#   Il demarre a la fin du verrou, donc l'arret tombe environ 60 minutes 30 secondes apres l'appui.
 #
 # ## ETAT :
 # - Deploye en prod le 2026-09-28 dans scripts.yaml, recharge sans redemarrage.
 # - Complete le 2026-09-29 : garde 25 degres, climate heat, arret 60 min, recharge OK.
+# - Modifie le 2026-10-07 : garde 25 degres remplacee par la garde de saison (mode cool).
+# - Modifie le 2026-10-07 : verrou ramene de 2 minutes a 30 secondes (decision Eric : eviter un off premature).
 #
 # --- version finale 2026/2027 du soufflant salle de bain ---
 
 
 sdb_soufflant_demarrer:
-  alias: "SDB - Soufflant : DEMARRAGE (2000 W, verrou 2 min)"
-  description: '[EXECUTANT] Prise ON, mise en route IR, 2 impulsions 1000 W, verrou 2 min.'
+  alias: "SDB - Soufflant : DEMARRAGE (2000 W, verrou 30 s)"
+  description: '[EXECUTANT] Prise ON, mise en route IR, 2 impulsions 1000 W, verrou 30 s.'
   mode: single
   sequence:
-    - alias: "SECURITE : refus de demarrer au-dessus de 25 degres (comme l'automation de fevrier)"
-      condition: numeric_state
-      entity_id: sensor.th_salle_de_bain_temperature
-      below: 25
+    - alias: "SECURITE : refus de demarrer en mode cool (ete). Remplace le garde-fou 25 degres, qui bloquait en hiver."
+      condition: not
+      conditions:
+        - condition: state
+          entity_id: sensor.mode_ete_hiver
+          state: cool
     - alias: "Attendre la fin d'une sequence d'arret en cours"
       wait_template: "{{ is_state('script.sdb_soufflant_arreter', 'off') }}"
       timeout: "00:02:00"
-    - alias: "POSER LE VERROU (2 minutes)"
+    - alias: "POSER LE VERROU (30 secondes)"
       action: input_boolean.turn_on
       target:
         entity_id: input_boolean.verrou_soufflant_salle_de_bain
@@ -80,8 +85,8 @@ sdb_soufflant_demarrer:
         entity_id: climate.soufflant_salle_de_bain
       data:
         hvac_mode: heat
-    - alias: "VERROU : deux minutes de marche protegee"
-      delay: "00:02:00"
+    - alias: "VERROU : trente secondes de marche protegee"
+      delay: "00:00:30"
     - alias: "LEVER LE VERROU"
       action: input_boolean.turn_off
       target:

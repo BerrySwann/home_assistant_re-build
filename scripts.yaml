@@ -525,9 +525,9 @@ p1_master_gestion_clim:
           if prise_bureau else ''[OFF]'') + ''\nChambre: '' + (t_chambre_target|string+''°''
           if prise_chambre else ''[OFF]'') }} {%- endif -%}'
 sdb_soufflant_demarrer:
-  alias: 'SDB - Soufflant : DEMARRAGE (2000 W, verrou 2 min)'
+  alias: 'SDB - Soufflant : DEMARRAGE (2000 W, verrou 30 s)'
   description: '[EXECUTANT] Prise ON, mise en route IR, 2 impulsions 1000 W, verrou
-    2 min.'
+    30 s.'
   mode: single
   sequence:
   - alias: 'SECURITE : refus de demarrer en mode cool (ete). Remplace le garde-fou
@@ -541,7 +541,7 @@ sdb_soufflant_demarrer:
     timeout: 00:02:00
     wait_template: '{{ is_state(''script.sdb_soufflant_arreter'', ''off'') }}'
   - action: input_boolean.turn_on
-    alias: POSER LE VERROU (2 minutes)
+    alias: POSER LE VERROU (30 secondes)
     target:
       entity_id: input_boolean.verrou_soufflant_salle_de_bain
   - action: switch.turn_on
@@ -578,8 +578,8 @@ sdb_soufflant_demarrer:
       hvac_mode: heat
     target:
       entity_id: climate.soufflant_salle_de_bain
-  - alias: 'VERROU : deux minutes de marche protegee'
-    delay: 00:02:00
+  - alias: 'VERROU : trente secondes de marche protegee'
+    delay: 00:00:30
   - action: input_boolean.turn_off
     alias: LEVER LE VERROU
     target:

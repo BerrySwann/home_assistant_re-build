@@ -32,7 +32,7 @@ pour gérée, ce qui est faux.
 
 - Base simple pour cette saison, aucune modulation de puissance.
 - Marche à 2000 W.
-- Verrou de deux minutes après le démarrage, bloquant la marche comme l'arrêt.
+- Verrou de trente secondes après le démarrage, bloquant la marche comme l'arrêt.
 - Aucune action automatique sur la température, ni coupure ni modulation.
 - Arrêt automatique au bout d'une heure : présent dans le code, neutralisé au départ.
 - Alerte mobile en cas de dérive thermique : présente, neutralisée au départ.
@@ -45,7 +45,7 @@ pour gérée, ce qui est faux.
 1. La prise s'alimente.
 2. Commande de mise en route de l'appareil.
 3. Deux impulsions pour atteindre 2000 W.
-4. Verrou de deux minutes, marche et arrêt bloqués.
+4. Verrou de trente secondes, marche et arrêt bloqués.
 
 ### Arrêt
 
@@ -82,7 +82,7 @@ tournerait sans fin. Les deux interrupteurs seront en place, il suffira de les b
 
 | Élément | Entité | Rôle |
 |:--|:--|:--|
-| Verrou | `input_boolean.verrou_soufflant_salle_de_bain` | Tient le verrou de deux minutes |
+| Verrou | `input_boolean.verrou_soufflant_salle_de_bain` | Tient le verrou de trente secondes |
 | Script | `script.sdb_soufflant_demarrer` | Prise, mise en route, 2000 W, verrou |
 | Script | `script.sdb_soufflant_arreter` | Résistances, ventilateur 1 min 30, prise |
 | Automation | SDB - SOUFFLANT - ROUTAGE | Interrupteur virtuel vers les séquences |
@@ -111,10 +111,10 @@ de bain (`bouton_ikea_rodret_soufflant_sdb_gestion_on_off_json`) pilote toujours
 |:--|:--|:--|
 | Garde de saison | `sdb_soufflant_demarrer`, première ligne de la séquence | Refus de démarrer si `sensor.mode_ete_hiver` vaut cool (modifié le 2026-10-07). Elle remplace la garde des 25 degrés du 2026-09-29, qui aurait bloqué les démarrages en hiver. Placée avant le verrou, la prise et l'infrarouge. |
 | Affichage du climate | `sdb_soufflant_demarrer` après les impulsions, `sdb_soufflant_arreter` en fin de séquence | Le climate passe en heat au démarrage et sur off à l'arrêt, comme le faisait l'automation de février. |
-| Arrêt forcé 60 minutes | `sdb_soufflant_demarrer`, fin de séquence | Si l'interrupteur est encore en marche après une heure, il est éteint et la séquence d'arrêt enchaîne. Le compte démarre à la fin du verrou, l'arrêt tombe donc environ 62 minutes après l'appui. |
+| Arrêt forcé 60 minutes | `sdb_soufflant_demarrer`, fin de séquence | Si l'interrupteur est encore en marche après une heure, il est éteint et la séquence d'arrêt enchaîne. Le compte démarre à la fin du verrou, l'arrêt tombe donc environ 60 minutes 30 secondes après l'appui. |
 
 La garde de saison doit rester la première ligne. Placée plus bas, un refus laissait le verrou
-posé et bloquait toute commande d'arrêt, ce qui s'est produit lors des essais du 2026-09-29.
+posé et bloquait toute commande d'arrêt, ce qui s'est produit lors des essais du 2026-09-29. Mise à jour 2026-10-07 : décision d'Eric, le verrou passe de 2 minutes à 30 secondes. Son rôle est d'éviter un arrêt prématuré, par exemple un appui sur on suivi d'un appui sur off sans le vouloir. Un off pendant le verrou n'est pas annulé : le script le traite à la fin du verrou, et un nouvel appui sur on dans les 30 secondes le rattrape (déduit de la séquence, pas testé).
 
 ### 8.2 Cycle réel validé
 
