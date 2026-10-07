@@ -1,0 +1,41 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ I - SDB - SECHE-SERVIETTES - RATTRAPAGE AU DEMARRAGE DE HA               │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## DESCRIPTION :
+# Au demarrage de HA (apres 30 s) : lance timer.seche_serviettes_sdb_10mn si la prise est en marche et si aucun des deux timers
+# n'est actif. L'automation H coupe la prise a la fin du timer, ou l'annule et lance le 2 h si la puissance depasse 50 W.
+#
+# ## ETAT :
+# - Cree le 2026-10-07 (soir), export de la version live.
+# - Entite HA : automation.i_sdb_seche_serviettes_rattrapage_au_demarrage_de_ha_timer_10_min
+# - Non teste en conditions reelles. Voir TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md
+#
+
+- id: '1791402001955'
+  alias: I - SDB - SECHE-SERVIETTES - RATTRAPAGE AU DEMARRAGE DE HA (timer 10 min)
+  description: 'Au demarrage de Home Assistant : si la prise du seche-serviettes est en marche et qu''aucun des deux timers n''est actif (2 h non restaure ou fini pendant l''arret), lance timer.seche_serviettes_sdb_10mn. L''automation H coupe la prise a la fin du timer, ou annule ce timer et lance le 2 h si la puissance depasse 50 W. Decision Eric 2026-10-07.'
+  triggers:
+  - alias: Home Assistant demarre
+    event: start
+    trigger: homeassistant
+  conditions: []
+  actions:
+  - alias: Laisser aux timers le temps d'etre restaures
+    delay: 00:00:30
+  - alias: 'Prise en marche sans timer actif : lancer le rattrapage 10 min'
+    if:
+    - condition: state
+      entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+      state: 'on'
+    - condition: state
+      entity_id: timer.seche_serviettes_sdb_2h
+      state: idle
+    - condition: state
+      entity_id: timer.seche_serviettes_sdb_10mn
+      state: idle
+    then:
+    - action: timer.start
+      target:
+        entity_id: timer.seche_serviettes_sdb_10mn
+  mode: single

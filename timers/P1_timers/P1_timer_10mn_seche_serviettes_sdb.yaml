@@ -1,0 +1,46 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ POLE 1. TIMER : DECOMPTE 10 MIN, RATTRAPAGE SECHE-SERVIETTES APRES REDEMARRAGE│
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## DESCRIPTION :
+# Decompte de rattrapage du seche-serviettes : 10 minutes.
+# Sert quand HA redemarre alors que la prise est en marche et qu'aucun timer n'est actif
+# (2 h non restaure, ou fini pendant l'arret) et que le capteur de puissance ne dit rien.
+#
+# ## CALCUL & SOURCES :
+# Duree : 00:10:00. Option restore: true.
+# Automation I (a creer avec ce fichier) : 30 s apres le demarrage de HA, si la prise est en
+# marche et que les deux timers sont inactifs, lance ce timer. Si la puissance depasse 50 W
+# ensuite, l'automation H annule ce timer et lance le 2 h.
+#
+# ## CHAINE DE DEPENDANCES :
+#
+# | MATERIEL      | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)  | AVAL                               |
+# |:--------------|:---------------------------------------------------|:------------------------|:-----------------------------------|
+# | prise NOUS    | switch.prise_seche_serviette_salle_de_bain_nous    | seche_serviettes_sdb_10mn | automation I (demarrage de HA) |
+#
+# ## IMPORTANT (PIEGES) :
+# - Domaine timer charge depuis le 2026-10-07 (configuration.yaml : timer: !include_dir_merge_named
+#   timers/). Un nouveau fichier ici demande un rechargement : service timer.reload.
+# - restore: true : un timer actif ou en pause est restaure apres un redemarrage de HA.
+# - Si la fin du timer tombe pendant l'arret de HA, timer.finished n'est PAS emis au demarrage
+#   (doc officielle). D'ou l'automation de rattrapage au demarrage.
+# - Decision Eric 2026-10-07 : meme montage que le soufflant SDB, pour le seche-serviettes.
+#   L'automation G (delay 2 h dans l'automation, ancienne version) reste active en doublon tant
+#   qu'elle n'est pas desactivee par Eric apres test.
+# - Risque de course au demarrage : lire le timer 2 h avant sa restauration le ferait voir
+#   inactif a tort. Delai de 30 s, a tester en conditions reelles.
+#
+# ## TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Aucune vignette pour l'instant (helper technique, pas d'affichage prevu).
+
+# ┌─────────────────────────────────┐
+# │ 1. TIMER 10 MINUTES             │
+# └─────────────────────────────────┘
+
+# --- seche_serviettes_sdb_10mn ---
+seche_serviettes_sdb_10mn:
+  name: "SDB Seche-serviettes Rattrapage 10 mn"
+  duration: "00:10:00"
+  restore: true
+  icon: mdi:timer-sand

@@ -1,5 +1,5 @@
 id: '1766776781417'
-alias: E - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 2h)
+alias: G - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 2h)
 description: Timer de 2h après détection de chauffe. Sécurité anti-redémarrage incluse.
 triggers:
 - alias: 'START : DÉTECTION PUISSANCE > 50W'

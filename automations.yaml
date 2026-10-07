@@ -585,7 +585,7 @@
   mode: queued
   max: 3
 - id: '1766776781417'
-  alias: E - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 2h)
+  alias: G - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 2h)
   description: Timer de 2h après détection de chauffe. Sécurité anti-redémarrage incluse.
   triggers:
   - alias: 'START : DÉTECTION PUISSANCE > 50W'
@@ -2677,4 +2677,207 @@
       - action: switch.turn_off
         target:
           entity_id: switch.inter_soufflant_salle_de_bain
+  mode: single
+- id: '1791401485072'
+  alias: E - SDB - SOUFFLANT - DECOMPTE 60 MIN (timer)
+  description: 'Securite de duree du soufflant de la salle de bain : timer.soufflant_sdb_60mn
+    est lance quand l''interrupteur passe vraiment de arret a marche, annule quand
+    il passe sur arret, et coupe l''interrupteur a la fin (60 min, ou 10 min de rattrapage).
+    Le timer survit a un redemarrage de Home Assistant (restore). Decision Eric 2026-10-07,
+    remplace a terme le compte d''une heure du script de demarrage (SDB-60MIN-FRAGILE).'
+  triggers:
+  - alias: Mise en marche reelle (arret vers marche)
+    entity_id: switch.inter_soufflant_salle_de_bain
+    from: 'off'
+    id: marche
+    to: 'on'
+    trigger: state
+  - alias: Interrupteur SDB sur arret
+    entity_id: switch.inter_soufflant_salle_de_bain
+    id: arret
+    to: 'off'
+    trigger: state
+  - alias: Fin d'un des deux timers (60 min ou 10 min)
+    id: fin
+    target:
+      entity_id:
+      - timer.soufflant_sdb_60mn
+      - timer.soufflant_sdb_10mn
+    trigger: timer.finished
+  conditions: []
+  actions:
+  - choose:
+    - alias: 'Marche : lancer le timer 60 min'
+      conditions:
+      - condition: trigger
+        id: marche
+      sequence:
+      - action: timer.start
+        target:
+          entity_id: timer.soufflant_sdb_60mn
+    - alias: 'Arret : annuler les deux timers'
+      conditions:
+      - condition: trigger
+        id: arret
+      sequence:
+      - action: timer.cancel
+        target:
+          entity_id:
+          - timer.soufflant_sdb_60mn
+          - timer.soufflant_sdb_10mn
+    - alias: 'Fin de timer : couper l''interrupteur s''il est encore en marche'
+      conditions:
+      - condition: trigger
+        id: fin
+      sequence:
+      - if:
+        - condition: state
+          entity_id: switch.inter_soufflant_salle_de_bain
+          state: 'on'
+        then:
+        - action: switch.turn_off
+          target:
+            entity_id: switch.inter_soufflant_salle_de_bain
+  max: 5
+  mode: queued
+- id: '1791401487876'
+  alias: F - SDB - SOUFFLANT - RATTRAPAGE AU DEMARRAGE DE HA (timer 10 min)
+  description: 'Au demarrage de Home Assistant : leve le verrou (le script qui le
+    tenait est mort), puis, si l''interrupteur du soufflant est en marche et qu''aucun
+    timer n''est actif (60 min non restaure ou fini pendant l''arret), lance timer.soufflant_sdb_10mn.
+    L''automation E coupe l''interrupteur a la fin du timer. Decision Eric 2026-10-07.'
+  triggers:
+  - alias: Home Assistant demarre
+    event: start
+    trigger: homeassistant
+  conditions: []
+  actions:
+  - alias: Laisser aux timers le temps d'etre restaures
+    delay: 00:00:30
+  - action: input_boolean.turn_off
+    alias: Lever le verrou, le script de demarrage qui le tenait ne tourne plus
+    target:
+      entity_id: input_boolean.verrou_soufflant_salle_de_bain
+  - alias: 'Soufflant en marche sans timer actif : lancer le rattrapage 10 min'
+    if:
+    - condition: state
+      entity_id: switch.inter_soufflant_salle_de_bain
+      state: 'on'
+    - condition: state
+      entity_id: timer.soufflant_sdb_60mn
+      state: idle
+    - condition: state
+      entity_id: timer.soufflant_sdb_10mn
+      state: idle
+    then:
+    - action: timer.start
+      target:
+        entity_id: timer.soufflant_sdb_10mn
+  mode: single
+- id: '1791401998919'
+  alias: H - SDB - SECHE-SERVIETTES - DECOMPTE 2 H (timer)
+  description: 'Securite de duree du seche-serviettes de la salle de bain : timer.seche_serviettes_sdb_2h
+    est lance quand la puissance de la prise depasse 50 W (comme l''automation G),
+    annule quand la prise passe sur arret, et a la fin d''un timer (2 h, ou 10 min
+    de rattrapage) coupe la prise, notifie, attend 1 min puis remet la prise en marche
+    (veille). Le timer survit a un redemarrage de HA (restore). Decision Eric 2026-10-07.
+    L''automation G reste active en doublon jusqu''a decision d''Eric.'
+  triggers:
+  - above: 50
+    alias: 'Chauffe detectee : puissance superieure a 50 W'
+    entity_id: sensor.prise_seche_serviette_salle_de_bain_nous_power
+    id: chauffe
+    trigger: numeric_state
+  - alias: Prise sur arret
+    entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+    id: arret
+    to: 'off'
+    trigger: state
+  - alias: Fin d'un des deux timers (2 h ou 10 min)
+    id: fin
+    target:
+      entity_id:
+      - timer.seche_serviettes_sdb_2h
+      - timer.seche_serviettes_sdb_10mn
+    trigger: timer.finished
+  conditions: []
+  actions:
+  - choose:
+    - alias: 'Chauffe : lancer le 2 h s''il n''est pas deja actif, et annuler le rattrapage'
+      conditions:
+      - condition: trigger
+        id: chauffe
+      - condition: state
+        entity_id: timer.seche_serviettes_sdb_2h
+        state: idle
+      sequence:
+      - action: timer.cancel
+        target:
+          entity_id: timer.seche_serviettes_sdb_10mn
+      - action: timer.start
+        target:
+          entity_id: timer.seche_serviettes_sdb_2h
+    - alias: 'Prise sur arret : annuler les deux timers'
+      conditions:
+      - condition: trigger
+        id: arret
+      sequence:
+      - action: timer.cancel
+        target:
+          entity_id:
+          - timer.seche_serviettes_sdb_2h
+          - timer.seche_serviettes_sdb_10mn
+    - alias: 'Fin de timer : coupure de securite, notification, puis rearmement (veille)'
+      conditions:
+      - condition: trigger
+        id: fin
+      - condition: state
+        entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+        state: 'on'
+      sequence:
+      - action: switch.turn_off
+        target:
+          entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+      - action: notify.mobile_app_eric
+        data:
+          message: Duree maximale ecoulee. Arret automatique.
+          title: Seche-Serv. OFF
+      - alias: Attente 1 minute
+        delay: 00:01:00
+      - action: switch.turn_on
+        alias: Rearmement (veille)
+        target:
+          entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+  max: 5
+  mode: queued
+- id: '1791402001955'
+  alias: I - SDB - SECHE-SERVIETTES - RATTRAPAGE AU DEMARRAGE DE HA (timer 10 min)
+  description: 'Au demarrage de Home Assistant : si la prise du seche-serviettes est
+    en marche et qu''aucun des deux timers n''est actif (2 h non restaure ou fini
+    pendant l''arret), lance timer.seche_serviettes_sdb_10mn. L''automation H coupe
+    la prise a la fin du timer, ou annule ce timer et lance le 2 h si la puissance
+    depasse 50 W. Decision Eric 2026-10-07.'
+  triggers:
+  - alias: Home Assistant demarre
+    event: start
+    trigger: homeassistant
+  conditions: []
+  actions:
+  - alias: Laisser aux timers le temps d'etre restaures
+    delay: 00:00:30
+  - alias: 'Prise en marche sans timer actif : lancer le rattrapage 10 min'
+    if:
+    - condition: state
+      entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+      state: 'on'
+    - condition: state
+      entity_id: timer.seche_serviettes_sdb_2h
+      state: idle
+    - condition: state
+      entity_id: timer.seche_serviettes_sdb_10mn
+      state: idle
+    then:
+    - action: timer.start
+      target:
+        entity_id: timer.seche_serviettes_sdb_10mn
   mode: single

@@ -1,4 +1,6 @@
-# (E) MINUTERIE SÈCHE-SERVIETTES SDB - TIMER 2H
+# (G) MINUTERIE SÈCHE-SERVIETTES SDB - TIMER 2H
+
+> **Mise a jour 2026-10-07 :** cette automation s'appelle desormais **G** (elle etait E, renommee par Eric). Doublee le meme jour par H et I (timers, voir `TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md`). G reste active en doublon jusqu'au test de H.
 
 > **Fichier :** `automations_corrige/P1_sdb/E_minuterie_seche_serviettes.yaml`
 > **Mode HA :** `single`

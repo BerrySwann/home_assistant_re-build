@@ -2,12 +2,12 @@
 
 > **Source unique et autoritaire :**
 > `https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/automations.yaml`
-> 52 automations - état au 2026-04-05
+> 56 automations (52 au 2026-04-05 + 4 timers SDB ajoutées le 2026-10-07 : E, F, H, I)
 > ⚠️ Ne jamais documenter depuis le dépôt PROD (`home-assistant-config`).
 
 ---
 
-## 🗂️ TABLE DE SYNTHÈSE GLOBALE (52 automations)
+## 🗂️ TABLE DE SYNTHÈSE GLOBALE (56 automations)
 
 | # | Alias | Section | Mode | Triggers | Notif |
 |--:|:------|:--------|:----:|:--------:|:-----:|
@@ -32,7 +32,7 @@
 | 19 | B - SALLE DE BAIN - GESTION RÉSISTANCES DU SOUFFLANT | P1 / SdB | single | 2 | - |
 | 20 | C - SALLE DE BAIN - GESTION ARRÊT SÉCURISÉ DU SOUFFLANT | P1 / SdB | single | 1 | - |
 | 21 | D - SALLE DE BAIN : WATCHDOG SÉCURITÉ RADIATEUR | P1 / SdB | single | 1 | ✅ |
-| 22 | E - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 1h) | P1 / SdB | single | 1 | ✅ |
+| 22 | G - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 2h) (ex E) | P1 / SdB | single | 1 | ✅ |
 | 23 | Bureau : Allumage Manu PC (MQTT) Poussoir (IKEA TRADFRI) | P2 / Bureau | single | 1 | - |
 | 24 | Automation éCO. Prises | P2 / Multi | queued | 2 | ✅ |
 | 25 | Gestion PC bureau : Scène de Fin + Notif | P2 / Bureau | parallel | 2 | ✅ |
@@ -63,6 +63,10 @@
 | 50 | Z2M last_seen | Système / Zigbee | single | 2 | ✅ |
 | 51 | NOTIF - Gardien Énergétique (Anomalies) | Énergie | single | 3 | ✅ |
 | 52 | ÉNERGIE - SURVEILLANCE GROS ÉLECTRO EN HP | Énergie | single | 2 | ✅ |
+| 53 | E - SDB - SOUFFLANT - DECOMPTE 60 MIN (timer) | P1 / SdB | queued | 3 | - |
+| 54 | F - SDB - SOUFFLANT - RATTRAPAGE AU DEMARRAGE DE HA (timer 10 min) | P1 / SdB | single | 1 | - |
+| 55 | H - SDB - SECHE-SERVIETTES - DECOMPTE 2 H (timer) | P1 / SdB | queued | 3 | ✅ |
+| 56 | I - SDB - SECHE-SERVIETTES - RATTRAPAGE AU DEMARRAGE DE HA (timer 10 min) | P1 / SdB | single | 1 | - |
 
 ---
 
@@ -440,18 +444,18 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 
 ---
 
-### #22 - E - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 1h)
+### #22 - G - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 2h) (ex E, renommée le 2026-10-07)
 
-**Rôle :** Timer de sécurité 1h sur le sèche-serviettes. Après extinction, réarme la prise en veille pour permettre le suivi conso.
+**Rôle :** Timer de sécurité 2h sur le sèche-serviettes. Après extinction, réarme la prise en veille pour permettre le suivi conso.
 
 **Trigger (1) :**
 - `sensor.prise_seche_serviette_salle_de_bain_nous_power` > 50W
 
 **Séquence :**
-1. Délai 1h
+1. Délai 2h
 2. Vérifie si prise encore `on`
 3. `switch.turn_off` prise sèche-serviettes
-4. Notification : `"1h écoulée. Arrêt automatique."`
+4. Notification : `"2h écoulees. Arret automatique."`
 5. Délai 1 min
 6. `switch.turn_on` (réarmement en veille pour suivi conso)
 
@@ -462,6 +466,15 @@ Logique simplifiée nuit : si présent → `temperature_confort_nuit`, sinon cou
 ## 🔌 P2 PRISES (6 automations)
 
 ---
+
+### #53 à #56 - TIMERS SDB (2026-10-07, non testés en conditions réelles)
+
+Détail, helpers `timer.*` et test à faire : `docs_automations_MD/P1_SDB/TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md`.
+
+- **#53 E - DECOMPTE 60 MIN** (queued) : interrupteur soufflant de arrêt à marche (`from: off`) -> `timer.soufflant_sdb_60mn` ; arrêt -> annule les deux timers ; fin de timer -> coupe l'interrupteur s'il est en marche.
+- **#54 F - RATTRAPAGE AU DEMARRAGE DE HA** (single) : 30 s après le démarrage, lève le verrou, lance `timer.soufflant_sdb_10mn` si soufflant en marche et aucun timer actif.
+- **#55 H - DECOMPTE 2 H** (queued) : puissance sèche-serviettes > 50 W -> `timer.seche_serviettes_sdb_2h` ; prise sur arrêt -> annule ; fin de timer -> coupure, notification `Sèche-Serv. OFF`, 1 min, remise en veille. Doublon temporaire avec G.
+- **#56 I - RATTRAPAGE AU DEMARRAGE DE HA** (single) : 30 s après le démarrage, lance `timer.seche_serviettes_sdb_10mn` si prise en marche et aucun timer actif.
 
 ### #23 - Bureau : Allumage Manu PC (MQTT) Poussoir (IKEA TRADFRI)
 

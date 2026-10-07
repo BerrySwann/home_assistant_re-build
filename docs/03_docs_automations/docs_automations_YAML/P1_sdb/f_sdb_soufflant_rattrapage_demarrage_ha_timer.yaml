@@ -1,0 +1,45 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ F - SDB - SOUFFLANT - RATTRAPAGE AU DEMARRAGE DE HA                      │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## DESCRIPTION :
+# Au demarrage de HA (apres 30 s) : leve le verrou du soufflant, puis lance timer.soufflant_sdb_10mn si l'interrupteur est en marche
+# et si aucun des deux timers n'est actif. L'automation E coupe l'interrupteur a la fin du timer.
+#
+# ## ETAT :
+# - Cree le 2026-10-07 (soir), export de la version live.
+# - Entite HA : automation.f_sdb_soufflant_rattrapage_au_demarrage_de_ha_timer_10_min
+# - Non teste en conditions reelles. Voir TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md
+#
+
+- id: '1791401487876'
+  alias: F - SDB - SOUFFLANT - RATTRAPAGE AU DEMARRAGE DE HA (timer 10 min)
+  description: 'Au demarrage de Home Assistant : leve le verrou (le script qui le tenait est mort), puis, si l''interrupteur du soufflant est en marche et qu''aucun timer n''est actif (60 min non restaure ou fini pendant l''arret), lance timer.soufflant_sdb_10mn. L''automation E coupe l''interrupteur a la fin du timer. Decision Eric 2026-10-07.'
+  triggers:
+  - alias: Home Assistant demarre
+    event: start
+    trigger: homeassistant
+  conditions: []
+  actions:
+  - alias: Laisser aux timers le temps d'etre restaures
+    delay: 00:00:30
+  - action: input_boolean.turn_off
+    alias: Lever le verrou, le script de demarrage qui le tenait ne tourne plus
+    target:
+      entity_id: input_boolean.verrou_soufflant_salle_de_bain
+  - alias: 'Soufflant en marche sans timer actif : lancer le rattrapage 10 min'
+    if:
+    - condition: state
+      entity_id: switch.inter_soufflant_salle_de_bain
+      state: 'on'
+    - condition: state
+      entity_id: timer.soufflant_sdb_60mn
+      state: idle
+    - condition: state
+      entity_id: timer.soufflant_sdb_10mn
+      state: idle
+    then:
+    - action: timer.start
+      target:
+        entity_id: timer.soufflant_sdb_10mn
+  mode: single

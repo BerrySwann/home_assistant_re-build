@@ -1,0 +1,86 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ H - SDB - SECHE-SERVIETTES - DECOMPTE 2 H (TIMER)                        │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## DESCRIPTION :
+# Compte de duree du seche-serviettes SDB par timer natif (restore). Lance timer.seche_serviettes_sdb_2h quand la puissance depasse 50 W,
+# annule les timers quand la prise passe sur arret ; a la fin d'un timer : coupure, notification, 1 min, veille.
+# Doublon temporaire avec l'automation G (delay 2 h) jusqu'a decision d'Eric apres test.
+#
+# ## ETAT :
+# - Cree le 2026-10-07 (soir), export de la version live.
+# - Entite HA : automation.h_sdb_seche_serviettes_decompte_2_h_timer
+# - Non teste en conditions reelles. Voir TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md
+#
+
+- id: '1791401998919'
+  alias: H - SDB - SECHE-SERVIETTES - DECOMPTE 2 H (timer)
+  description: 'Securite de duree du seche-serviettes de la salle de bain : timer.seche_serviettes_sdb_2h est lance quand la puissance de la prise depasse 50 W (comme l''automation G), annule quand la prise passe sur arret, et a la fin d''un timer (2 h, ou 10 min de rattrapage) coupe la prise, notifie, attend 1 min puis remet la prise en marche (veille). Le timer survit a un redemarrage de HA (restore). Decision Eric 2026-10-07. L''automation G reste active en doublon jusqu''a decision d''Eric.'
+  triggers:
+  - above: 50
+    alias: 'Chauffe detectee : puissance superieure a 50 W'
+    entity_id: sensor.prise_seche_serviette_salle_de_bain_nous_power
+    id: chauffe
+    trigger: numeric_state
+  - alias: Prise sur arret
+    entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+    id: arret
+    to: 'off'
+    trigger: state
+  - alias: Fin d'un des deux timers (2 h ou 10 min)
+    id: fin
+    target:
+      entity_id:
+      - timer.seche_serviettes_sdb_2h
+      - timer.seche_serviettes_sdb_10mn
+    trigger: timer.finished
+  conditions: []
+  actions:
+  - choose:
+    - alias: 'Chauffe : lancer le 2 h s''il n''est pas deja actif, et annuler le rattrapage'
+      conditions:
+      - condition: trigger
+        id: chauffe
+      - condition: state
+        entity_id: timer.seche_serviettes_sdb_2h
+        state: idle
+      sequence:
+      - action: timer.cancel
+        target:
+          entity_id: timer.seche_serviettes_sdb_10mn
+      - action: timer.start
+        target:
+          entity_id: timer.seche_serviettes_sdb_2h
+    - alias: 'Prise sur arret : annuler les deux timers'
+      conditions:
+      - condition: trigger
+        id: arret
+      sequence:
+      - action: timer.cancel
+        target:
+          entity_id:
+          - timer.seche_serviettes_sdb_2h
+          - timer.seche_serviettes_sdb_10mn
+    - alias: 'Fin de timer : coupure de securite, notification, puis rearmement (veille)'
+      conditions:
+      - condition: trigger
+        id: fin
+      - condition: state
+        entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+        state: 'on'
+      sequence:
+      - action: switch.turn_off
+        target:
+          entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+      - action: notify.mobile_app_eric
+        data:
+          message: Duree maximale ecoulee. Arret automatique.
+          title: Seche-Serv. OFF
+      - alias: Attente 1 minute
+        delay: 00:01:00
+      - action: switch.turn_on
+        alias: Rearmement (veille)
+        target:
+          entity_id: switch.prise_seche_serviette_salle_de_bain_nous
+  max: 5
+  mode: queued

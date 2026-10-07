@@ -179,3 +179,13 @@ non testé : voir `D_WATCHDOG_RADIATEUR_SDB.md`, section "État au 2026-10-07".
 ---
 
 *Fiche créée le 2026-09-28, déploiement consigné le même jour. Mise à jour du 2026-09-29.*
+
+### 8.7 Compte de duree par timers (2026-10-07, soir)
+
+Le compte d'une heure du script de demarrage est efface par un redemarrage de HA (SDB-60MIN-FRAGILE). Mis en place, decision Eric :
+
+- `timer.soufflant_sdb_60mn` (1 h) et `timer.soufflant_sdb_10mn` (rattrapage), `restore: true`, dossier `timers/P1_timers/`.
+- Automation E : lance le 60 mn a la mise en marche reelle, l'annule a l'arret, coupe l'interrupteur a la fin d'un timer.
+- Automation F : 30 s apres le demarrage de HA, leve le verrou et lance le 10 mn si le soufflant est en marche sans timer actif.
+- Les deux dernieres etapes du script de demarrage (arret force a 60 min) sont gardees en doublon.
+- Non teste en conditions reelles. Detail et test a faire : `TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md`. Risque du routage B au redemarrage : TODO SDB-ROUTAGE-REDEMARRAGE.

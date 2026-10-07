@@ -1,0 +1,72 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ E - SDB - SOUFFLANT - DECOMPTE 60 MIN (TIMER)                            │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## DESCRIPTION :
+# Compte de duree du soufflant SDB par timer natif (restore). Lance timer.soufflant_sdb_60mn a la mise en marche reelle
+# (from: off), l'annule a l'arret, coupe l'interrupteur a la fin d'un timer (60 min ou 10 min de rattrapage).
+#
+# ## ETAT :
+# - Cree le 2026-10-07 (soir), export de la version live.
+# - Entite HA : automation.e_sdb_soufflant_decompte_60_min_timer
+# - Non teste en conditions reelles. Voir TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md
+#
+
+- id: '1791401485072'
+  alias: E - SDB - SOUFFLANT - DECOMPTE 60 MIN (timer)
+  description: 'Securite de duree du soufflant de la salle de bain : timer.soufflant_sdb_60mn est lance quand l''interrupteur passe vraiment de arret a marche, annule quand il passe sur arret, et coupe l''interrupteur a la fin (60 min, ou 10 min de rattrapage). Le timer survit a un redemarrage de Home Assistant (restore). Decision Eric 2026-10-07, remplace a terme le compte d''une heure du script de demarrage (SDB-60MIN-FRAGILE).'
+  triggers:
+  - alias: Mise en marche reelle (arret vers marche)
+    entity_id: switch.inter_soufflant_salle_de_bain
+    from: 'off'
+    id: marche
+    to: 'on'
+    trigger: state
+  - alias: Interrupteur SDB sur arret
+    entity_id: switch.inter_soufflant_salle_de_bain
+    id: arret
+    to: 'off'
+    trigger: state
+  - alias: Fin d'un des deux timers (60 min ou 10 min)
+    id: fin
+    target:
+      entity_id:
+      - timer.soufflant_sdb_60mn
+      - timer.soufflant_sdb_10mn
+    trigger: timer.finished
+  conditions: []
+  actions:
+  - choose:
+    - alias: 'Marche : lancer le timer 60 min'
+      conditions:
+      - condition: trigger
+        id: marche
+      sequence:
+      - action: timer.start
+        target:
+          entity_id: timer.soufflant_sdb_60mn
+    - alias: 'Arret : annuler les deux timers'
+      conditions:
+      - condition: trigger
+        id: arret
+      sequence:
+      - action: timer.cancel
+        target:
+          entity_id:
+          - timer.soufflant_sdb_60mn
+          - timer.soufflant_sdb_10mn
+    - alias: 'Fin de timer : couper l''interrupteur s''il est encore en marche'
+      conditions:
+      - condition: trigger
+        id: fin
+      sequence:
+      - if:
+        - condition: state
+          entity_id: switch.inter_soufflant_salle_de_bain
+          state: 'on'
+        then:
+        - action: switch.turn_off
+          target:
+            entity_id: switch.inter_soufflant_salle_de_bain
+  max: 5
+  mode: queued
