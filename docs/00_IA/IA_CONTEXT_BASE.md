@@ -167,20 +167,44 @@ Sens : **prod → GitHub → local**. Le local doit converger vers prod. Une foi
 
 **Workflow de modification (depuis le 2026-10-04)** : on ne modifie plus un fichier directement
 en prod (H:\). On edite la copie LOCALE (`docs/01_docs_config_system/config_system_YAML/`,
-image miroir 1:1 de H:\ - voir `ha-resync-tree` pour la tenir a jour), on cree une sauvegarde
-locale datee avant modif (`{fichier}_YYYY-MM-DD_HHhmm.yaml`, 3 versions max ; au-dela, suppression
-des plus anciennes proposee en DRY-RUN uniquement, jamais automatique), puis on pousse vers H:\
-via `ha-push-yaml` (MD5-first, confirmation obligatoire). La prod ne recoit jamais de nom de
-fichier date - meme en cas de restauration d'une ancienne sauvegarde, le suffixe de date est
-retire avant la copie vers H:\. En cas d'ambiguite sur quel fichier pousser, on prend le plus
-recent (le fichier courant sans date s'il existe, sinon la sauvegarde datee la plus recente).
-Plus aucun `.bak` cree directement en prod.
+image miroir 1:1 de H:\ - voir `ha-resync-tree` pour la tenir a jour), avec une sauvegarde locale
+avant chaque modification (REGLE DE SAUVEGARDE ci-dessous), puis on pousse vers H:\ via
+`ha-push-yaml` (MD5-first, confirmation obligatoire). La prod ne recoit jamais de sauvegarde ni de
+nom de fichier avec suffixe de date - meme en cas de restauration d'une ancienne sauvegarde, le
+suffixe est retire avant la copie vers H:\. En cas d'ambiguite sur quel fichier pousser, on prend
+le plus recent (le fichier courant sans suffixe s'il existe, sinon la sauvegarde la plus recente).
+Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne doit pas se remplir.
 
-**Sauvegarde datee avant reecriture des fichiers de regles (depuis le 2026-10-04)** : meme principe pour
-`CLAUDE.md` et `docs/00_IA/IA_CONTEXT_BASE.md` (et leurs copies H:\ et D:\) : avant toute reecriture,
-creer une copie locale datee `{fichier}_YYYY-MM-DD_HHhmm.md` (format PowerShell : `Get-Date -Format "yyyy-MM-dd_HH'h'mm"` -
-le `h` doit etre entre apostrophes, sinon il est lu comme un token d'heure 12h). Meme retention (3 max,
-nettoyage en DRY-RUN uniquement). Apres reecriture, resynchroniser les 4 copies et verifier leur MD5.
+**REGLE DE SAUVEGARDE (depuis le 2026-10-08, remplace celle du 2026-10-04)**
+
+- Perimetre : les dossiers `docs/00_*` a `docs/05_*` de `ReBuild/` (config YAML, dashboard YAML,
+  automations, scripts, docs .md, contexte IA) et `Claude md save/` (CLAUDE.md). Hors perimetre :
+  `TODO/`, `Github/`, `historique/`, `.claude/`, `Infra_Proxmox/`.
+- Lieu : en local, a cote du fichier modifie. Jamais sur H:\ ni sur D:\.
+- Avant CHAQUE modification d'un fichier, creer `{fichier}.bak_AAAA_MM_JJ_HHhMMmSSs`
+  (ex : `P1_kWh_clim.yaml.bak_2026_10_08_08h54m30s`). Format PowerShell :
+  `Get-Date -Format "yyyy_MM_dd_HH'h'mm'm'ss's'"` (les lettres h, m, s entre apostrophes).
+- Le jour meme : 10 sauvegardes horodatees maximum par fichier. La 11e envoie la plus ancienne
+  a la corbeille Windows.
+- Le lendemain, au passage de `/histo` : par fichier et par jour passe, garder la sauvegarde la
+  plus recente, la renommer `{fichier}.bak_AAAA_MM_JJ`, envoyer les autres a la corbeille Windows.
+  Les sauvegardes du jour ne sont jamais touchees. Le fichier est considere comme fixe le
+  lendemain ; en cas de coquille, la corbeille Windows permet de retrouver une version.
+- Jours precedents : 3 `.bak_AAAA_MM_JJ` maximum par fichier. La 4e envoie la plus ancienne
+  a la corbeille Windows.
+- Anciens formats, traites par `/histo` avec les memes principes : `{fichier}_YYYY-MM-DD_HHhmm.ext`
+  (une seule sauvegarde ce jour-la : renommee sans l'heure `{fichier}_YYYY-MM-DD.ext` ; plusieurs :
+  la plus recente est gardee renommee, les autres vont a la corbeille) ; `.bak_2026-09-28`,
+  `.bak_20260929`, `.bak2_...`, `.bak-...` : renommes en `.bak_AAAA_MM_JJ`. Tout souci (collision,
+  date illisible, fichier hors des cas ci-dessus) : le signaler a Eric, ne rien supprimer.
+- Corbeille Windows : `[Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile($chemin,
+  'OnlyErrorDialogs','SendToRecycleBin')` apres `Add-Type -AssemblyName Microsoft.VisualBasic`
+  (teste le 2026-10-08). Pas de corbeille sur H:\ : ne jamais supprimer un fichier de H:\ sans
+  avoir verifie qu'il existe en local.
+- Restauration : copier la sauvegarde voulue, retirer le suffixe `.bak_...`, jamais de suffixe en prod.
+- CLAUDE.md et `docs/00_IA/IA_CONTEXT_BASE.md` (et leurs copies H:\ et D:\) : meme regle avant toute
+  reecriture (sauvegarde locale uniquement). Apres reecriture, resynchroniser les 4 copies et
+  verifier leur MD5.
 
 ### 📄 DOCS (.md + .yaml dashboard) - LOCAL = source de vérité
 
@@ -215,7 +239,7 @@ Sens : **local → H:\Docs\ → GitHub**. En cas de conflit, local l'emporte tou
 
 | Type | Injection en prod | Extraction / stockage local |
 |:-----|:-------------------|:-----------------------------|
-| **Config YAML** (sensors/templates/UM/command_line) | Edition depuis la copie LOCALE `docs/01_docs_config_system/config_system_YAML/`, sauvegarde locale datee avant modif, puis push vers `H:\` via `ha-push-yaml` (MD5-first, confirmation obligatoire) | Le fichier local (sans suffixe de date) est deja la reference - pas d'extraction a faire apres coup |
+| **Config YAML** (sensors/templates/UM/command_line) | Edition depuis la copie LOCALE `docs/01_docs_config_system/config_system_YAML/`, sauvegarde locale `.bak_AAAA_MM_JJ_HHhMMmSSs` avant modif (REGLE DE SAUVEGARDE), puis push vers `H:\` via `ha-push-yaml` (MD5-first, confirmation obligatoire) | Le fichier local (sans suffixe de date) est deja la reference - pas d'extraction a faire apres coup |
 | **Automations** | Toujours à la main dans l'UI HA (Eric), jamais `automations.yaml` en direct | Une fois validée, **Claude** récupère uniquement le bloc modifié et le stocke individuellement dans `docs/03_docs_automations/docs_automations_YAML/{Pole}/` |
 | **Dashboard** | Toujours à la main dans l'UI HA (Paramètres → Tableau de bord → Modifier en YAML) | Pas d'extraction automatique - **Eric** récupère le code à la main et le colle. **Claude** vérifie, horodate (nom de version), stocke dans `docs/02_docs_dashboard/dashboard_docs_YAML/L{x}C{x}_.../`, supprime la version la plus ancienne des 3 après validation |
 
@@ -568,7 +592,7 @@ qu'elle représente** : `congelateur_alarme_porte.yaml` (version active, avec `i
 Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2026-09-10
 (ajout des `id` HA depuis le live), l'ancienne version restant datée `_2026-09-01`.
 
-→ `H:/scripts.yaml` (Scripts, section Automations - miroir local `docs/04_docs_scripts/`) suit la meme regle que la config YAML : sauvegarde locale datee (`_YYYY-MM-DD_HHhmm`) dans `docs/04_docs_scripts/` AVANT toute modification, jamais de `.bak` cree directement en prod. Difference : le push vers `H:/scripts.yaml` se fait a la main par Eric via l'UI HA (jamais de copie fichier directe) - coherent avec la regle Automations (jamais d'edition directe du fichier live). Les `.sh` de `.scripts/` restent geres individuellement, hors de cette regle. Audit MD5 automations/scripts : plus complexe que sur la config YAML simple, a traiter au cas par cas.
+→ `H:/scripts.yaml` (Scripts, section Automations - miroir local `docs/04_docs_scripts/`) suit la meme regle que la config YAML : sauvegarde locale (`.bak_AAAA_MM_JJ_HHhMMmSSs`, voir REGLE DE SAUVEGARDE) a cote du fichier dans `docs/04_docs_scripts/` AVANT toute modification, jamais de sauvegarde creee en prod. Difference : le push vers `H:/scripts.yaml` se fait a la main par Eric via l'UI HA (jamais de copie fichier directe) - coherent avec la regle Automations (jamais d'edition directe du fichier live). Les `.sh` de `.scripts/` restent geres individuellement, hors de cette regle. Audit MD5 automations/scripts : plus complexe que sur la config YAML simple, a traiter au cas par cas.
 
 → Arborescences complètes prod + local : `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL.md`
 
