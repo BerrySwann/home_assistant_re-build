@@ -32,39 +32,48 @@ Ne jamais demander confirmation entre les etapes. Les faire dans la foulee.
 - Backlog TODO.md si mentionne en session
 - Prochaine action prioritaire
 
-### Format de sortie obligatoire
+### Format de sortie obligatoire (Markdown mis en forme, depuis le 2026-10-08)
+
+Le journal est du vrai Markdown (titres, gras, pastilles de couleur, icones), pas un bloc de code. Gabarit :
 
 ```
-=== JOURNAL HA REBUILD - [DATE] (SESSION S[N]) ===
+# 📓 Journal HA ReBuild - **[DATE]** (Session **S[N]**)
 
-SESSION : [duree estimee ou "N/A"]
-BRANCHE ACTIVE : docs/
+- ⏱️ **Session** : [duree estimee ou "N/A"]
+- 🌿 **Branche active** : `docs/`
 
--- FICHIERS VALIDES --
-[chemin/court/fichier.yaml] - [entite(s) concernee(s)] [v]
-...
+## ✅ Fichiers valides
+- 🟢 `chemin/court/fichier.yaml` - [entite(s) concernee(s)] **[v]**
+- ...
 
--- EN COURS --
-[fichier ou tache] - [etat : draft / a tester / a deployer]
-(aucun si session terminee proprement)
+## 🟠 En cours
+- 🟠 `fichier ou tache` - **[draft]** ou **[a tester]** ou **[a deployer]**
+- (aucun si session terminee proprement)
 
--- ERREURS RESOLUES --
-[fichier] : [type erreur] -> [correction appliquee]
-(aucune si session propre)
+## 🔴 Erreurs resolues
+- 🔴 `fichier` : [type erreur] -> [correction appliquee] **[resolu]**
+- (aucune si session propre)
 
--- TACHES BACKLOG (TODO.md) --
-[items identifies en session, si applicable]
+## 📋 Taches backlog (TODO.md)
+- 📌 [items identifies en session, si applicable]
 
--- PROCHAINE ACTION --
-[action prioritaire identifiee]
+## 🎯 Prochaine action
+- [action prioritaire identifiee]
 
-=== FIN JOURNAL ===
+*Fin du journal*
 ```
+
+Regles de mise en forme :
+- Toute date est en gras (`**2026-10-08**`), dans le titre comme dans le texte.
+- Tout commentaire ou etat entre crochets est en gras : `**[v]**`, `**[a tester]**`, `**[draft]**`, `**[a deployer]**`, `**[resolu]**`, `**[EN COURS]**`.
+- Pastilles de couleur : 🟢 valide ou termine, 🟠 en cours ou a tester, 🔴 erreur, 🔵 information. Une icone par titre de rubrique comme dans le gabarit.
+- Chemins, IDs d'entites et commandes en code inline (accents graves).
+- Cette mise en forme s'applique uniquement aux NOUVEAUX journaux `histo_*.md`. Les anciens journaux, INDEX_GLOBAL.md et les autres fichiers restent inchanges et sans emoji (exception d'emojis accordee par Eric le 2026-10-08, limitee aux nouveaux journaux histo). Les nouveaux blocs de session du journal fusionne ont seulement le gras, sans emoji (etape 3).
 
 ### Sauvegarde obligatoire
 
 - Determiner le numero de session : lister `historique/` (fichiers `.md` ET anciens `.txt`) et choisir le suffixe suivant (ex : si `histo_2026-08-08_s2.txt` ou `histo_2026-08-08_s2.md` existe -> creer `histo_2026-08-08_s3.md`)
-- Sauvegarder dans `C:\Users\Berry Swann\Documents\ReBuild\historique\histo_[YYYY-MM-DD]_s[N].md` : le bloc journal est ecrit tel quel a l'interieur d'un bloc de code ```text ... ``` pour garder la mise en page. Les anciens `histo_*.txt` restent tels quels (pas de conversion).
+- Sauvegarder dans `C:\Users\Berry Swann\Documents\ReBuild\historique\histo_[YYYY-MM-DD]_s[N].md` : le journal est ecrit en Markdown mis en forme, tel que defini ci-dessus, sans le placer dans un bloc de code (sinon gras et icones ne s'affichent pas). Les anciens `histo_*.txt` restent tels quels (pas de conversion).
 - Presenter le fichier avec `mcp__cowork__present_files` (si l'outil n'est pas disponible, le dire dans le rapport final, ne pas bloquer)
 
 ### Regles
@@ -142,19 +151,33 @@ Le journal fusionne est un seul fichier Markdown qui regroupe tous les journaux 
 
 1. Reperer le fusionne le plus recent : `JOURNAL_FUSIONNE_*.md` (sans suffixe `.bak`), trie par date de fin dans le nom. Il sert de base.
 2. Reperer les journaux `histo_*.md` et anciens `histo_*.txt` pas encore integres : comparer les dates et suffixes aux lignes `SESSION 2026-...` du fusionne. Y inclure celui qui vient d'etre ecrit a l'etape 1. Ne pas dependre de la seule date de modification des fichiers.
-3. Lire chaque journal manquant en entier avant de l'integrer. Ne rien ajouter qui ne soit pas dans ces journaux (ni chiffre, ni etat, ni decision deduits).
+3. Lire chaque journal manquant en entier avant de l'integrer. Ne rien ajouter qui ne soit pas dans ces journaux (ni chiffre, ni etat, ni decision deduits). Un journal au format Markdown mis en forme (titres `##`, gras, icones) est integre au fusionne en ASCII : retirer les icones et pastilles, garder le fond (le gras du fusionne vient du format de bloc ci-dessous).
 4. Construire le nouveau fichier a partir de la base, sans toucher au contenu existant :
    - ligne 2 d'en-tete : remplacer la date de fin dans `Periode : 2026-07-15 -> [DATE_FIN]` (la base utilise une fleche, ne changer que la date)
-   - partie `PAR DATE - CE QUI A ETE FAIT` : ajouter un bloc par session, dans l'ordre chronologique, juste avant le bandeau `PAR DATE - CE QUI RESTE A FAIRE`. Format du bloc : une ligne de 78 tirets, `SESSION [date] ([Sn]) - [duree] - [titre court]`, une ligne de 78 tirets, puis les rubriques `[FICHIERS VALIDES]`, `[ERREURS RESOLUES]`, `[DECISIONS]` / `[CONSTATS]` si utiles. Session vide : une seule ligne `SESSION [date] ([Sn], [heure]) : session vide - aucune modification depuis ...`.
+   - partie `PAR DATE - CE QUI A ETE FAIT` : ajouter un bloc par session, dans l'ordre chronologique, juste avant le bandeau `PAR DATE - CE QUI RESTE A FAIRE`. Depuis le 2026-10-08, les NOUVEAUX blocs de session sont en vrai Markdown, hors du bloc de code du fusionne, pour que le gras s'affiche (les blocs anciens restent tels quels dans le bloc de code). Format du bloc (rubriques utiles seulement) :
+
+         ### SESSION **[date]** (**S[n]**) - [duree] - [titre court]
+
+         **[FICHIERS VALIDES]**
+         - ...
+
+         **[ERREURS RESOLUES]**
+         - ...
+
+         **[DECISIONS]** / **[CONSTATS]**
+         - ...
+
+     Titre de session, dates et crochets en gras ; pas d'icone ni d'emoji dans le fusionne ; ASCII sauf les `**` du gras. Session vide : une seule ligne `**SESSION [date] ([Sn], [heure])** : session vide - aucune modification depuis ...`.
+   - cloture du bloc de code : le fusionne est un seul bloc ```text. Regarder la derniere ligne non vide avant le bandeau. Si c'est une ligne ```text (un bloc Markdown precedent a deja rouvert le bloc de code), inserer le nouveau bloc Markdown AVANT cette ligne, sans nouvelle cloture. Sinon, inserer dans l'ordre : une ligne ``` (cloture), une ligne vide, le bloc Markdown, une ligne vide, une ligne ```text (reouverture), puis le bandeau. Le nombre de lignes ``` du fichier doit rester pair.
    - partie `PAR DATE - CE QUI RESTE A FAIRE` : ajouter, juste avant la ligne ``` finale, une entree `-- [date] --` par date avec `[EN COURS]` et `[PROCHAINE ACTION]`, puis un bloc `-- ETAT ACTUEL AU [date] (soir, curated) --` qui resume l'etat courant et ce qui reste ouvert. Quand un item d'une entree plus ancienne a ete ferme depuis, le noter dans la nouvelle entree (par exemple `(ferme le 07/10)`), sans modifier l'ancienne.
-5. Ecrire le nouveau fichier. Les blocs ajoutes sont en ASCII (pas de tiret long, pas de fleche, pas de caracteres speciaux) ; le contenu existant est repris tel quel, y compris ses caracteres speciaux.
+5. Ecrire le nouveau fichier. Les blocs ajoutes sont en ASCII (pas de tiret long, pas de fleche, pas de caracteres speciaux, pas d'emoji ; seul le gras `**` est ajoute dans les nouveaux blocs de session) ; le contenu existant est repris tel quel, y compris ses caracteres speciaux.
 
 ### Regles
 
 - Ne jamais ecraser un fusionne existant : un nouveau nom par nouvelle date de fin. Si le fichier cible existe deja (meme date de fin, nouvelle session du meme jour), le sauvegarder d'abord en `JOURNAL_FUSIONNE_..._[DATE_FIN].md.bak_AAAA_MM_JJ_HHhMMmSSs` puis le mettre a jour.
 - L'ancien fusionne reste en place. Ne pas le supprimer sans demande.
 - Format du fichier : CRLF, UTF-8 sans BOM, comme la base.
-- Verifier apres ecriture : pas de BOM, aucun LF isole, un seul bandeau `RESTE A FAIRE`, le fichier se termine par la ligne ``` suivie d'une fin de ligne, nombre de lignes coherent avec base + ajouts.
+- Verifier apres ecriture : pas de BOM, aucun LF isole, un seul bandeau `RESTE A FAIRE`, le fichier se termine par la ligne ``` suivie d'une fin de ligne, nombre pair de lignes ``` (clotures equilibrees), nombre de lignes coherent avec base + ajouts.
 - Ecrire par script (Python ou PowerShell) en passant les blocs par fichiers temporaires dans `%TEMP%` : une commande trop longue echoue (WinError 206). Ne jamais reconstituer le contenu existant a partir d'un affichage tronque : lire le fichier.
 - Si la base est introuvable ou illisible : le signaler et s'arreter a cette etape, sans recreer tout le fusionne de memoire.
 
