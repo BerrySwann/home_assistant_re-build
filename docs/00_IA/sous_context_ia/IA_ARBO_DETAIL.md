@@ -24,7 +24,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── 17 fichiers racine
 │   CLAUDE.md                           (source de vérité contexte - sync avec IA_CONTEXT_BASE.md)
 │   CLAUDE_backup_2026-07-31.md · CLAUDE_backup_2026-08-01.md   (backups)
-│   TODO.txt · a mettre en place.txt    (backlog projet)
+│   TODO.md · a mettre en place.txt    (backlog projet)
 │   ha-erodi.html · index.html          (maquettes - l'architecture HA est dans docs/00_IA/ha-erodi-architecture.html)
 │   presentation_HACF_2026.md/.txt · PROMPT_REPRODUCTION_ha-erodi.md · prompt_site_HA.txt · PROMPT_TEMPLATE_SITE_WEB.md · histo_2026-08-07.txt
 │   hermes_cle_ssh.pub                  (cl publique SSH)

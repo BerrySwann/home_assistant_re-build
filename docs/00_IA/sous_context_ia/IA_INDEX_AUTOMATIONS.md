@@ -80,7 +80,7 @@ Structure accordeon HTML (`<details>`/`<summary>`) a 2 niveaux, rendu natif sur 
 ## Anomalies connues / ouvertes
 
 - `P1-CUISINE-B` : correctif deploye en local (`b_chauffage_cuisine_vacances.yaml`),
-  **PAS encore applique dans HA** - Eric doit le faire via UI HA (voir TODO.txt P1-CUISINE-B).
+  **PAS encore applique dans HA** - Eric doit le faire via UI HA (voir TODO.md P1-CUISINE-B).
 
 ---
 

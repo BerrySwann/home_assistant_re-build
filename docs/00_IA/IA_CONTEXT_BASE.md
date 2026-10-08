@@ -112,7 +112,7 @@
 - Ne jamais répéter le code YAML déjà validé.
 
 ## TODO - REGLE OBLIGATOIRE
-- Fichier de référence : `TODO.txt` (racine ReBuild/)
+- Fichier de référence : `TODO.md` (dossier TODO/ de ReBuild)
 - "ajoute à la todo" / "met dans la todo" / "note ca" = ecrire dans `TODO.txt`, jamais dans TaskCreate (outil session uniquement, perdu a la fermeture).
 - En debut de session : lire `TODO.txt` pour connaitre le backlog en cours.
 - Apres chaque item traite : mettre a jour `TODO.txt` ([x] ou suppression).
