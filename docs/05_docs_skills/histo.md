@@ -154,9 +154,9 @@ Le journal fusionne est un seul fichier Markdown qui regroupe tous les journaux 
 3. Lire chaque journal manquant en entier avant de l'integrer. Ne rien ajouter qui ne soit pas dans ces journaux (ni chiffre, ni etat, ni decision deduits). Un journal au format Markdown mis en forme (titres `##`, gras, icones) est integre au fusionne en ASCII : retirer les icones et pastilles, garder le fond (le gras du fusionne vient du format de bloc ci-dessous).
 4. Construire le nouveau fichier a partir de la base, sans toucher au contenu existant :
    - ligne 2 d'en-tete : remplacer la date de fin dans `Periode : 2026-07-15 -> [DATE_FIN]` (la base utilise une fleche, ne changer que la date)
-   - partie `PAR DATE - CE QUI A ETE FAIT` : ajouter un bloc par session, dans l'ordre chronologique, juste avant le bandeau `PAR DATE - CE QUI RESTE A FAIRE`. Depuis le 2026-10-08, les NOUVEAUX blocs de session sont en vrai Markdown, hors du bloc de code du fusionne, pour que le gras s'affiche (les blocs anciens restent tels quels dans le bloc de code). Format du bloc (rubriques utiles seulement) :
+   - partie `PAR DATE - CE QUI A ETE FAIT` : ajouter un bloc par session, dans l'ordre chronologique, juste avant la ligne de titre `## **PAR DATE - CE QUI RESTE A FAIRE**` (le bandeau est un titre Markdown, hors bloc de code). Les blocs de session sont en vrai Markdown, hors bloc de code, pour que le gras s'affiche. Format du bloc (rubriques utiles seulement) :
 
-         ### SESSION **[date]** (**S[n]**) - [duree] - [titre court]
+         ### **SESSION [date] ([Sn]) - [duree] - [titre court]**
 
          **[FICHIERS VALIDES]**
          - ...
@@ -167,9 +167,24 @@ Le journal fusionne est un seul fichier Markdown qui regroupe tous les journaux 
          **[DECISIONS]** / **[CONSTATS]**
          - ...
 
-     Titre de session, dates et crochets en gras ; pas d'icone ni d'emoji dans le fusionne ; ASCII sauf les `**` du gras. Session vide : une seule ligne `**SESSION [date] ([Sn], [heure])** : session vide - aucune modification depuis ...`.
-   - cloture du bloc de code : le fusionne est un seul bloc ```text. Regarder la derniere ligne non vide avant le bandeau. Si c'est une ligne ```text (un bloc Markdown precedent a deja rouvert le bloc de code), inserer le nouveau bloc Markdown AVANT cette ligne, sans nouvelle cloture. Sinon, inserer dans l'ordre : une ligne ``` (cloture), une ligne vide, le bloc Markdown, une ligne vide, une ligne ```text (reouverture), puis le bandeau. Le nombre de lignes ``` du fichier doit rester pair.
-   - partie `PAR DATE - CE QUI RESTE A FAIRE` : ajouter, juste avant la ligne ``` finale, une entree `-- [date] --` par date avec `[EN COURS]` et `[PROCHAINE ACTION]`, puis un bloc `-- ETAT ACTUEL AU [date] (soir, curated) --` qui resume l'etat courant et ce qui reste ouvert. Quand un item d'une entree plus ancienne a ete ferme depuis, le noter dans la nouvelle entree (par exemple `(ferme le 07/10)`), sans modifier l'ancienne.
+     Titre de session entier en gras, dates en gras, crochets en gras ; pas d'icone ni d'emoji dans le fusionne ; ASCII sauf les `**` du gras. Chemins en code inline. Session vide : une seule ligne `**SESSION [date] ([Sn], [heure]) : session vide - aucune modification depuis ...**`. Laisser une ligne vide avant et apres chaque bloc. Les anciennes sessions (titres et rubriques en gras, corps dans des blocs de code) ne sont pas modifiees.
+   - partie `PAR DATE - CE QUI RESTE A FAIRE` : le bandeau est le titre `## **PAR DATE - CE QUI RESTE A FAIRE**`. Ajouter a la FIN du fichier, apres la derniere ligne ```, une entree par date en Markdown, le texte de chaque rubrique restant dans un bloc de code :
+
+         ### **[date]**
+
+         **[EN COURS]**
+
+         (bloc de code ```text, contenu indente de 4 espaces, puis ```)
+
+         **[PROCHAINE ACTION]**
+
+         (bloc de code ```text, contenu indente de 4 espaces, puis ```)
+
+         ### **ETAT ACTUEL AU [date] (soir, curated)**
+
+         (bloc de code ```text : resume de l'etat courant et de ce qui reste ouvert, puis ```)
+
+     Quand un item d'une entree plus ancienne a ete ferme depuis, le noter dans la nouvelle entree (par exemple `(ferme le 07/10)`), sans modifier l'ancienne. Le fichier se termine ainsi par une ligne ``` de fin de bloc de code.
 5. Ecrire le nouveau fichier. Les blocs ajoutes sont en ASCII (pas de tiret long, pas de fleche, pas de caracteres speciaux, pas d'emoji ; seul le gras `**` est ajoute dans les nouveaux blocs de session) ; le contenu existant est repris tel quel, y compris ses caracteres speciaux.
 
 ### Regles

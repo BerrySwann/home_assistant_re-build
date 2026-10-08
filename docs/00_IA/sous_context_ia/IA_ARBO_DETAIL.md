@@ -24,26 +24,26 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── 17 fichiers racine
 │   CLAUDE.md                           (source de vérité contexte - sync avec IA_CONTEXT_BASE.md)
 │   CLAUDE_backup_2026-07-31.md · CLAUDE_backup_2026-08-01.md   (backups)
-│   TODO.md · a mettre en place.txt    (backlog projet)
+│   TODO\TODO.md                         (backlog projet ; "a mettre en place.txt" archive dans _old_avant_staging/ le 2026-10-08)
 │   ha-erodi.html · index.html          (maquettes - l'architecture HA est dans docs/00_IA/ha-erodi-architecture.html)
 │   presentation_HACF_2026.md/.txt · PROMPT_REPRODUCTION_ha-erodi.md · prompt_site_HA.txt · PROMPT_TEMPLATE_SITE_WEB.md · histo_2026-08-07.txt
 │   hermes_cle_ssh.pub                  (cl publique SSH)
 │   autounattend_FR.xml · z2m-backup.2.10.1.*.zip   (hors périmètre HA)
-├── Github/                             (10 dont 8 sauvegardes - INDEX_GLOBAL.md · README.md, miroirs travail du repo)
+├── Github/                             (14 dont 12 sauvegardes - INDEX_GLOBAL.md · README.md, miroirs travail du repo)
 ├── HTML/                               (41 - maquettes/captures)
 ├── prompt/ · Claude outputs/ · _old_avant_staging/ · energie/   (travaux et conteneurs)
 ├── Infra_Proxmox/                      (réseau, certs - + save/)
 ├── scripts/                            (5 - audit_md5_md.sh · audit_md5_yaml.sh · check_yaml_forme.py · ha_git_backup.sh · hermes_gen_dependances.py)
-├── historique/                         (61 - JOURNAL_COMPLET_*.md · histo_YYYY-MM-DD_S*.txt · ARCHIVE_SESSIONS_HA_2026-03-15_2026-05-14.md · archives MD5)
-└── docs/                               (659 fichiers)
-    ├── 00_IA/                          (28 dont 13 sauvegardes - IA_CONTEXT_BASE.md · ha-erodi-architecture.html · RAPPORT_AUDIT_ENERGETIQUE_*.md ×2 · Grille_Tarif_Bleu_EDF_2026-08-01.csv/.pdf · confort_cible_calcul_flow.png)
-    │   └── sous_context_ia/            (16 dont 8 sauvegardes - 8 sous-contextes IA_*.md + index arbo)
+├── historique/                         (67 - JOURNAL_COMPLET_*.md · histo_YYYY-MM-DD_S*.txt · ARCHIVE_SESSIONS_HA_2026-03-15_2026-05-14.md · archives MD5)
+└── docs/                               (665 fichiers)
+    ├── 00_IA/                          (31 dont 16 sauvegardes - IA_CONTEXT_BASE.md · ha-erodi-architecture.html · RAPPORT_AUDIT_ENERGETIQUE_*.md ×2 · Grille_Tarif_Bleu_EDF_2026-08-01.csv/.pdf · confort_cible_calcul_flow.png)
+    │   └── sous_context_ia/            (19 dont 11 sauvegardes - 8 sous-contextes IA_*.md + index arbo)
     ├── 01_docs_config_system/          (113 - config_system_MD/ 2 + config_system_YAML/ 111 fichiers dont 7 sauvegardes, resynchronisé GitHub->local 2026-10-04, SYNC=80 DIFF=0)
     ├── 02_docs_dashboard/              (234 - dashboard_docs_MD · dashboard_docs_YAML)
     ├── 03_docs_automations/            (241 dont 9 sauvegardes - docs_automations_MD · docs_automations_YAML)
     ├── 04_docs_scripts/                (24 - SH · SH_MD · YAML · YAML_MD)
     ├── 05_docs_MD_system/              (8 dont 3 sauvegardes)
-    └── 05_docs_skills/                 (10 - SKILL.md du projet, copies .md)
+    └── 05_docs_skills/                 (13 dont 3 sauvegardes - 10 SKILL.md du projet, copies .md)
 ```
 
 **Dossiers d'archive** (contenu sorti du flux, gardé pour l'historique) :
@@ -129,7 +129,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 - **Repo actif unique** : `BerrySwann/home_assistant_re-build` (ancien `home-assistant-config` supprimé le 2026-04-27)
 - **Contenu** : reflet exact de `/homeassistant/` - pushé par `.scripts/ha_git_backup.sh` (boutons page Système L5C3)
 - **Point d'entrée navigation** : [INDEX_GLOBAL.md](https://github.com/BerrySwann/home_assistant_re-build/blob/main/INDEX_GLOBAL.md)
-- **Dernier relevé arbre (API git trees)** : 2026-10-08 - **1020 objets (fichiers + dossiers)** ; dernier commit `2cce0ed6` (2026-10-08 12:37 CEST, HAOS MANUEL-backup HA 2026.9.4)
+- **Dernier relevé arbre (API git trees)** : 2026-10-08 - **1020 objets (fichiers + dossiers)** ; dernier commit `c359533c` (2026-10-08 13:10 CEST, HAOS auto-backup: 2026-10-08 13:10:00 CEST, HA 2026.9.4)
 - Répartition : `docs/` 737 · `templates/` 43 · `utility_meter/` 8 · `input_booleans/` 6 · `sensors/` 4
 
 **Patterns URLs :**
