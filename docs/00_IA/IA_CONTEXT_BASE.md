@@ -417,15 +417,19 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 ## 📋 RÈGLE DASHBOARD YAML - VERSIONING
 
 > Tous les yaml dashboard sont dans `docs/02_docs_dashboard/dashboard_docs_YAML/`
+> Meme regle pour les docs .md dans `docs/02_*` a `docs/05_*`.
 
-| Type | Format |
-|:-----|:-------|
-| Dashboard complet | `Dashboard_COMPLET/Dashboard_YYYY_MM_DD.yaml` (conservation illimitée) |
-| Vignette | `L*C*_*/vignette_[id]_YYYY-MM-DD.yaml` |
-| Page | `L*C*_*/page_[id]_YYYY-MM-DD.yaml` |
-| Carte isolée | `L*C*_*/card_[nom]_YYYY-MM-DD.yaml` |
+| Type | Format intra-jour | Format consolide (/histo) |
+|:-----|:------------------|:--------------------------|
+| Dashboard complet | `Dashboard_COMPLET/Dashboard_YYYY_MM_DD.yaml` | (conservation illimitee) |
+| Vignette | `L*C*_*/vignette_[id]_YYYY-MM-DD_HHhMMmSSs.yaml` | `vignette_[id]_YYYY-MM-DD.yaml` |
+| Page | `L*C*_*/page_[id]_YYYY-MM-DD_HHhMMmSSs.yaml` | `page_[id]_YYYY-MM-DD.yaml` |
+| Carte isolee | `L*C*_*/card_[nom]_YYYY-MM-DD_HHhMMmSSs.yaml` | `card_[nom]_YYYY-MM-DD.yaml` |
 
-- Max **3 versions** par sous-dossier vignette/page. Demander autorisation avant suppression de la plus ancienne.
+- Format HMS : `HHhMMmSSs` (ex : `21h51m50s`) - coherent avec la REGLE DE SAUVEGARDE.
+- Max **10 versions** `YYYY-MM-DD_HHhMMmSSs` par sous-dossier. La 11e envoie la plus ancienne a la poubelle Windows.
+- Max **3 versions** `YYYY-MM-DD` (consolidees) par sous-dossier. La 4e envoie la plus ancienne a la poubelle Windows.
+- `/histo` consolide : garde la plus recente du jour, la renomme sans HMS, envoie les autres a la poubelle.
 
 ---
 
