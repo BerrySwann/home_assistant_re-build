@@ -2541,7 +2541,7 @@ input_datetime: !include input_datetime.yaml</pre>
         <div style="font-family:var(--fm);font-size:.75rem;color:var(--text-2);margin-top:.6rem;line-height:1.9;">
           <div><span style="color:var(--green);">/homeassistant/notifs/diag_conso_elec.txt</span> &larr; DIAG - ENREGISTREMENT JOURNALIER</div>
           <div><span style="color:var(--green);">/homeassistant/notifs/ecart_liky_vs_nodon.txt</span> &larr; Log Écart Linky vs Nodon</div>
-          <div><span style="color:var(--green);">/homeassistant/.logs/zone_userE.txt</span> &larr; [P4] userE - Log Zones</div>
+          <div><span style="color:var(--green);">/homeassistant/.logs/zone_eric.txt</span> &larr; [P4] Eric - Log Zones</div>
         </div>
       </div>
     </div>
@@ -3367,10 +3367,8 @@ input_datetime: !include input_datetime.yaml</pre>
 │   ├── NOTIF_FOUDRE.md
 │   ├── UPDATE_PREV_HUMIDITY.md
 │   └── UPDATE_PREV_TEMPERATURE.md
-├── P1_CLIM_CHAUFFAGE/    <span style="color:#a0a8b6"># 13 fichiers</span>
-│   ├── A0_CLIM_JOUR.bak_2026_09_20.md
+├── P1_CLIM_CHAUFFAGE/    <span style="color:#a0a8b6"># 11 fichiers + 2 sauvegardes</span>
 │   ├── A0_CLIM_JOUR.md
-│   ├── B0_CLIM_NUIT.bak_2026_09_20.md
 │   ├── B0_CLIM_NUIT.md
 │   ├── C_NOTIF_TEMP_JOUR.md
 │   ├── D_NOTIF_TEMP_NUIT.md
@@ -3384,26 +3382,21 @@ input_datetime: !include input_datetime.yaml</pre>
 ├── P1_CUISINE/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── A_CHAUFFAGE_CUISINE.md
 │   └── B_CHAUFFAGE_CUISINE_VACANCES.md
-├── P1_SDB/    <span style="color:#a0a8b6"># 10 fichiers</span>
+├── P1_SDB/    <span style="color:#a0a8b6"># 8 fichiers + 2 sauvegardes</span>
 │   ├── A_SOUFFLANT_SDB_old_2024-2025.md
-│   ├── D_WATCHDOG_RADIATEUR_SDB.bak_2026_09_29.md
 │   ├── D_WATCHDOG_RADIATEUR_SDB.md
 │   ├── D_WATCHDOG_RADIATEUR_SDB_2026-10-07.md
 │   ├── E_MINUTERIE_SECHE_SERVIETTES.md
 │   ├── E_MINUTERIE_SECHE_SERVIETTES_2026-10-07.md
-│   ├── SDB_SOUFFLANT_SPECIFICATION_2026.bak_2026_09_29.md
 │   ├── SDB_SOUFFLANT_SPECIFICATION_2026.md
 │   ├── SDB_SOUFFLANT_SPECIFICATION_2026_2026-10-07.md
 │   └── TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md
-├── P2_PRISES/    <span style="color:#a0a8b6"># 10 fichiers</span>
+├── P2_PRISES/    <span style="color:#a0a8b6"># 7 fichiers + 3 sauvegardes</span>
 │   ├── CONGELATEUR_ALARME_CAPTEUR.md
 │   ├── CONGELATEUR_ALARME_PANNE.md
 │   ├── CONGELATEUR_ALARME_PORTE.md
-│   ├── ECO_PRISES_DYNAMIQUE.bak_2026_09_23.md
 │   ├── ECO_PRISES_DYNAMIQUE.md
-│   ├── GESTION_PC_BUREAU.bak_2026_09_23.md
 │   ├── GESTION_PC_BUREAU.md
-│   ├── GESTION_TV_CHAMBRE.bak_2026_09_23.md
 │   ├── GESTION_TV_CHAMBRE.md
 │   └── RODRET_SOUFFLANT_SDB.md
 ├── P3_ECLAIRAGE/    <span style="color:#a0a8b6"># 8 fichiers</span>
@@ -3415,9 +3408,9 @@ input_datetime: !include input_datetime.yaml</pre>
 │   ├── BUREAU_RODRET_TOGGLE_BLANCHES.md
 │   ├── BUREAU_WATCHDOG_SYNCHRO_LAMPES.md
 │   └── SDB_SYNC_MIROIR_LAMPE_ET_RELAIS_SDB.md
-├── P4_PRESENCE/    <span style="color:#a0a8b6"># 1 fichier</span>
+├── P4_PRESENCE/    <span style="color:#a0a8b6"># 1 fichiers</span>
 │   └── P4_LOG_ZONES_ERIC.md
-├── RASPI/    <span style="color:#a0a8b6"># 1 fichier</span>
+├── RASPI/    <span style="color:#a0a8b6"># 1 fichiers</span>
 │   └── RPi4_FAN_PWM.md
 ├── STORES/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── GESTION_STORE_BUREAU.md
@@ -3644,22 +3637,22 @@ input_datetime: !include input_datetime.yaml</pre>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L1C1</td><td style="padding:.5rem .8rem;color:var(--text);">Météo</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L1C1_meteo.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L1C1_meteo.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">+ card_duree_du_jour</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L1C2</td><td style="padding:.5rem .8rem;color:var(--text);">Températures</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L1C2_temperatures.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L1C2_temperatures.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">⚠️ .bak résiduel présent</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L1C3</td><td style="padding:.5rem .8rem;color:var(--text);">Commandes Clim</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L1C3_clim.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L1C3_clim.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">+ 6 card_prog_* (par appareil)</td></tr>
-            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L2C1</td><td style="padding:.5rem .8rem;color:var(--text);">Énergie Générale</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L2C1_energie.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">energie_principale · energie_mensuel · energie_temps_reel</td><td style="padding:.5rem .8rem;color:var(--text-2);">3 pages</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L2C1</td><td style="padding:.5rem .8rem;color:var(--text);">Énergie Générale</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L2C1_energie.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L2C1_energie_mensuel.yaml, page_L2C1_energie_principale.yaml, page_L2C1_energie_temps_reel.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">3 pages</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L2C2</td><td style="padding:.5rem .8rem;color:var(--text);">Énergie Clim</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L2C2_energie_clim.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L2C2_energie_clim.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">-</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L2C3</td><td style="padding:.5rem .8rem;color:var(--text);">Énergie Éclairage</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L2C3_energie_eclairage.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L2C3_energie_eclairage.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">1 seule version de chaque</td></tr>
-            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L3C1</td><td style="padding:.5rem .8rem;color:var(--text);">Commandes Éclairage</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L3C1_eclairage.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L3C1_eclairage_gauche · _droite</td><td style="padding:.5rem .8rem;color:var(--text-2);">2 pages</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L3C1</td><td style="padding:.5rem .8rem;color:var(--text);">Commandes Éclairage</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L3C1_eclairage.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L3C1_eclairage_droite.yaml, page_L3C1_eclairage_gauche.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">2 pages</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L3C2</td><td style="padding:.5rem .8rem;color:var(--text);">Commandes Prises</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L3C2_prises.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L3C2_prises.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">-</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L3C3</td><td style="padding:.5rem .8rem;color:var(--text);">Stores + Fenêtres</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L3C3_stores.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L3C3_stores.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">-</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L4C1</td><td style="padding:.5rem .8rem;color:var(--text);">Mini PC (NUC)</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L4C1_mini_pc.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L4C1_mini_pc.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">+ card_popup_memory</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L4C2</td><td style="padding:.5rem .8rem;color:var(--text);">Proxmox (PVE)</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L4C2_proxmox.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L4C2_proxmox.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">+ card_services_ha_z2m_mariadb</td></tr>
-            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L4C3</td><td style="padding:.5rem .8rem;color:var(--text);">Mises à jour HA</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L4C3_maj_ha.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">maj_ha · maj_ha_gauche · maj_ha_droite</td><td style="padding:.5rem .8rem;color:var(--text-2);">2 pages legacy (gauche/droite) + 1 fusionnée</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L4C3</td><td style="padding:.5rem .8rem;color:var(--text);">Mises à jour HA</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L4C3_maj_ha.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L4C3_maj_ha.yaml, page_L4C3_maj_ha_droite.yaml, page_L4C3_maj_ha_gauche.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">2 pages legacy (gauche/droite) + 1 fusionnée</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L5C1</td><td style="padding:.5rem .8rem;color:var(--text);">Piles / Batteries</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L5C1_batteries_piles.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L5C1_batteries_piles.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">-</td></tr>
-            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L5C2</td><td style="padding:.5rem .8rem;color:var(--text);">Batteries Portables</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L5C2_batteries_portables.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">batteries_portables_gauche · _droite</td><td style="padding:.5rem .8rem;color:var(--text-2);">2 pages</td></tr>
-            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L5C3</td><td style="padding:.5rem .8rem;color:var(--text);">MariaDB</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L5C3_mariadb.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L5C3_mariadb · page_L5C3_systeme_reserve</td><td style="padding:.5rem .8rem;color:var(--text-2);">+ 4 card_audit_*</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L5C2</td><td style="padding:.5rem .8rem;color:var(--text);">Batteries Portables</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L5C2_batteries_portables.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L5C2_batteries_portables_droite.yaml, page_L5C2_batteries_portables_gauche.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">2 pages</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L5C3</td><td style="padding:.5rem .8rem;color:var(--text);">MariaDB</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L5C3_mariadb.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L5C3_mariadb.yaml, page_L5C3_systeme_reserve.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">+ 4 card_audit_*</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L6C1</td><td style="padding:.5rem .8rem;color:var(--text);">Qualité Air</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L6C1_air_qualite.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L6C1_air_qualite.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">-</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L6C2</td><td style="padding:.5rem .8rem;color:var(--text);">Pollution / Pollen</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L6C2_pollution_pollen.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L6C2_pollution_pollen.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">-</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">L6C3</td><td style="padding:.5rem .8rem;color:var(--text);">Vigilance Eau</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">vignette_L6C3_vigieau.yaml</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_L6C3_vigieau.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">-</td></tr>
-            <tr style="background:rgba(61,136,86,.04);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">—</td><td style="padding:.5rem .8rem;color:var(--text);">PAGE_RASPI</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">-</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">page_raspi.yaml</td><td style="padding:.5rem .8rem;color:var(--text-2);">Hors-matrice — page unique, pas de pattern L{x}C{x}</td></tr>
+            <tr style="background:rgba(61,136,86,.04);"><td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);">—</td><td style="padding:.5rem .8rem;color:var(--text);">PAGE_RASPI</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">-</td><td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">-</td><td style="padding:.5rem .8rem;color:var(--text-2);">Hors-matrice — page unique, pas de pattern L{x}C{x}</td></tr>
           </tbody>
         </table>
       </div>
@@ -3668,7 +3661,7 @@ input_datetime: !include input_datetime.yaml</pre>
     <!-- ARBO MD (contenu deplace dans modal, voir boutons section Inventaire) -->
     <div class="conv-section reveal" style="display:none;">
       <pre id="tree-src-md" style="display:none;">dashboard_docs_MD/
-├── CONFIG_ROOT/    <span style="color:#a0a8b6"># 1 fichier + 1 sauvegardes</span>
+├── CONFIG_ROOT/    <span style="color:#a0a8b6"># 1 fichiers + 1 sauvegardes</span>
 │   └── CONFIG_ROOT.md
 ├── HOME PAGE/    <span style="color:#a0a8b6"># 2 fichiers + 2 sauvegardes</span>
 │   ├── PAGE_HOME.md
@@ -4097,7 +4090,7 @@ MATÉRIEL (Nodon SEM-4-1-00 via Z2M)
   └─→ sensor.general_electric_appart_energy (kWh natif)
   └─→ sensor.general_electric_appart_power  (W natif)
         └─→ UM: P0_UM_AMHQ_HPHC.yaml                      (genelec_appart_*_um : Q/H/M/A)
-        └─→ UM: 02_UM_genelec_appart_HPHC_AMHQ.yaml   (HP/HC x 4 cycles)
+        └─→ UM: P0_UM_AMHQ_HPHC.yaml   (HP/HC x 4 cycles)
               └─→ TPL: P0_01_genelec_appart_AMHQ_cost.yaml  (couts euros)
               └─→ TPL: P0_02_ratio_hp_hc.yaml               (ratio HC)
               └─→ TPL: P0_03_AVG_genelec_appart.yaml        (moyenne W)
