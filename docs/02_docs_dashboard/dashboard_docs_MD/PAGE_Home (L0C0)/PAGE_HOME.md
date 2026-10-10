@@ -249,8 +249,8 @@ Tap → `/meteo/#foudre`
 
 ### 8 - Présence Personne(s)
 
-Groupe de 3 cartes. Voir doc dédiée : [`VIGNETTE_WIFI_PRESENCE.md`](./VIGNETTE_WIFI_PRESENCE.md)
-**Fichier YAML :** `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_home.yaml`
+Groupe de 2 cartes. Voir doc dédiée : [`VIGNETTE_WIFI_PRESENCE.md`](./VIGNETTE_WIFI_PRESENCE.md)
+**Fichier YAML :** `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_separateur.yaml` (séparateur) et `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_eric.yaml` (bouton Eric)
 
 **Séparateur** - couleur selon `sensor.etat_wifi_maison` :
 
@@ -267,14 +267,10 @@ Couleurs de fond selon état :
 
 | État | Couleur |
 |------|---------|
-| `home` | vert |
-| `not_home` | orange `rgb(255,103,0)` |
-| `Boulot` | `rgb(0,87,81)` |
-| autre | gris |
+| `home` | vert `green`, icone `mdi:home` |
+| tout autre etat | aucune couleur forcee (rendu par defaut de la carte) |
 
-**Carte Mamour** - `device_tracker.mamour` + photo `person.mamour`
-
-Zones supplémentaires reconnues : `LECLERC VENCE` (bleu `rgb(0,102,204)`), `Primark` (bleu clair `rgb(4,155,216)`).
+La carte Mamour (3e carte du groupe jusqu'au 2026-10-10) a ete retiree : elle n'avait pas sa place entre le bouton Eric et le reste de la page.
 
 ---
 
@@ -515,7 +511,7 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 | `dashboard_docs_YAML/PAGE_Home (L0C0)/Lave Linge/card_lave_linge_home.yaml` | Lave-linge (mushroom WashData - remplace 2026-06-13) |
 | `dashboard_docs_YAML/PAGE_Home (L0C0)/Lave Vaisselle/card_lave_vaisselle_home.yaml` | Lave-vaisselle (mushroom WashData - remplace 2026-06-13) |
 | `dashboard_docs_YAML/PAGE_Home (L0C0)/Congélateur/card_congelateur_home.yaml` | Congélateur (button-card appliance - contact porte + seuils 26/48/235) |
-| `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_home.yaml` | Présence (separator + Eric + Mamour) |
+| `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_separateur.yaml` (séparateur) et `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_eric.yaml` (bouton Eric) | Présence (separator + Eric + Mamour) |
 | `dashboard_docs_YAML/PAGE_Home (L0C0)/Détecteur de fuite/card_detecteur_fuite_home.yaml` | Détecteur de fuite (mushroom) |
 
 ### Documentation liée

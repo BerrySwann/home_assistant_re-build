@@ -1,0 +1,43 @@
+# card_presence_separateur.yaml
+# Separateur "Personne(s)" du groupe presence (HOME page, L0C0).
+# Couleur du sub-button selon sensor.etat_wifi_maison :
+#   '2' -> darkgreen (Eric + Mamour) | 'Eric' ou 'Mamour' -> darkorange | autre -> grey
+# Entite source : templates/P4_groupe_presence/P4_groupe_presence.yaml
+# Une seule carte dans ce fichier : ce format se colle directement dans l'editeur
+# de carte HA (Configuration de la carte).
+
+type: custom:bubble-card
+card_type: separator
+name: Personne(s)
+icon: mdi:account-group
+card_layout: normal
+rows: 1
+styles: |
+  .bubble-line {
+    background: var(--primary-text-color);
+    opacity: 0.8;
+  }
+  .bubble-sub-button {
+    background-color: ${
+      hass.states['sensor.etat_wifi_maison'].state === '2'
+        ? 'darkgreen'
+        : (hass.states['sensor.etat_wifi_maison'].state === 'Eric' ||
+           hass.states['sensor.etat_wifi_maison'].state === 'Mamour')
+          ? 'darkorange'
+          : 'grey'
+    } !important;
+    color: gainsboro !important;
+  }
+
+  ha-card {
+    margin-top: 20px !important;
+  }
+sub_button:
+- entity: sensor.etat_wifi_maison
+  show_last_changed: false
+  show_state: true
+  show_icon: true
+  icon: mdi:home
+  show_attribute: false
+  show_name: true
+  name: Maison

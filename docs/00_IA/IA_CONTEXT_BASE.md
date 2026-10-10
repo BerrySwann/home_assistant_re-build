@@ -83,6 +83,20 @@
 
 # 🛡️ PROTOCOLES
 
+## ORDRE DE TRAVAIL - LE LOCAL D'ABORD (regle absolue)
+
+Toute modification suit cet ordre, sans exception : **1) le local ReBuild**, 2) la prod (`H:`), 3) GitHub
+(qui se met a jour tout seul depuis HA). Jamais l'inverse : on ne corrige pas la prod puis on recopie en local.
+
+- Le local est le poste de travail : c'est la que le fichier nait, change, et recoit ses sauvegardes `.bak`.
+- La prod ne recoit que la version finale : jamais de `.bak`, jamais de fichier de travail intermediaire.
+- Un fichier corrige seulement en prod est un fichier perdu a la prochaine poussee depuis le local.
+- Avant de pousser : sauvegarde locale (`.bak`), puis comparaison MD5 local/prod apres la copie.
+- Un dashboard ou un fichier vivant dans HA se corrige aussi dans cet ordre : on met a jour la copie locale
+  de reference, puis on applique en prod (API de HA), jamais l'inverse.
+
+---
+
 ## 🔎 PROTOCOLE DÉBUT DE SESSION (OBLIGATOIRE)
 
 **À chaque ouverture de session, poser cette question AVANT tout travail :**

@@ -1,0 +1,44 @@
+# card_presence_eric.yaml
+# Bouton presence d'Eric - device_tracker.poco + photo person.eric (HOME page, L0C0).
+# Couleurs : home -> fond green, icone darkgreen, pictogramme mdi:home
+#            tout autre etat -> aucune couleur forcee (rendu par defaut)
+# La carte Mamour, qui occupait la 3e place du groupe, a ete retiree le 2026-10-10.
+# Une seule carte dans ce fichier : ce format se colle directement dans l'editeur
+# de carte HA (Configuration de la carte).
+
+type: custom:bubble-card
+card_type: button
+button_type: state
+entity: device_tracker.poco
+show_name: true
+show_last_changed: true
+show_attribute: false
+card_layout: normal
+layout_options:
+  grid_columns: 2
+  grid_rows: 1
+show_state: false
+sub_button:
+  main:
+  - entity: person.eric
+    show_state: false
+    show_icon: true
+    show_background: true
+    show_attribute: false
+    attribute: entity_picture
+  bottom: []
+styles: |-
+  ha-card {
+    --bubble-icon-background-color: black !important;
+  }
+  .bubble-sub-button {
+    background-color: black !important;
+  }
+  .bubble-button-background {
+    background-color: ${ state === 'home' ? 'green' : '' } !important;
+  }
+  .bubble-icon,
+  .bubble-sub-button > ha-icon {
+    color: ${ state === 'home' ? 'darkgreen' : '' } !important;
+  }
+  ${subButtonIcon[0].setAttribute("icon", state === 'home' ? 'mdi:home' : '')}

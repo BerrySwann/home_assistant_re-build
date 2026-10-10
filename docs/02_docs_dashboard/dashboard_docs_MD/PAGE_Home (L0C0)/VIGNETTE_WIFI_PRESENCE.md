@@ -1,27 +1,27 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-En%20cours-ff9800?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--01-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.10.0-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--10--10-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Vignette-ff9800?style=flat-square)](.)
 
 </div>
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `Dashboard/PAGE_Home/card_presence_home_2026-06-13.yaml` |
+| 📁 **Path** | `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_separateur.yaml` (séparateur) et `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_eric.yaml` (bouton Eric) |
 | 🔗 **Accès depuis** | Vue principale Home |
-| 🏗️ **Layout** | `bubble-card separator + 2× bubble-card button` |
+| 🏗️ **Layout** | `bubble-card separator + 1 bubble-card button` |
 | 🔴 **Statut** | Affichage présence ✅ - Liaison clim (P4 → P1) 🔧 à faire en dernier |
 | 🚧 **Bloquant** | Automations clim basées sur `sensor.groupe` - à documenter après finalisation Pôle 1 |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-01 |
-| 🏠 **Version HA** | 2025.2.x → v2.0 |
+| 📅 **Modifié le** | 2026-10-10 |
+| 🏠 **Version HA** | 2026.10.0 |
 
 ---
 
-# 📶 L1C2 - Vignette : Détection WiFi & Présence
+# 📶 Vignette : Détection WiFi & Présence (PAGE_Home L0C0)
 
 ---
 
@@ -32,7 +32,6 @@
 3. [Sections](#sections)
    - [Séparateur "Personne(s)"](#séparateur-personnes)
    - [Carte Présence Eric](#carte-présence-eric)
-   - [Carte Présence Mamour](#carte-présence-mamour)
 4. [Entités utilisées](#entités-utilisées--provenance-complète)
 5. [Logique des états](#logique-des-états)
 6. [Dépannage](#dépannage)
@@ -41,10 +40,10 @@
 
 ## 🎯 VUE D'ENSEMBLE
 
-Groupe de 3 cartes bubble-card affiché dans la vue Home. Il permet de visualiser d'un coup d'œil :
+Groupe de 2 cartes bubble-card affiché dans la vue Home. Il permet de visualiser d'un coup d'œil :
 
 - L'état global du domicile (les deux présents / un seul / personne) via le **séparateur coloré**
-- La présence individuelle de **Eric** et de **Mamour** avec leur photo de profil et l'heure du dernier changement d'état
+- La présence d'**Eric** avec sa photo de profil et l'heure du dernier changement d'état
 
 La couleur du séparateur est pilotée par `sensor.etat_wifi_maison` qui agrège la connexion WiFi des deux téléphones sur les réseaux `Module B.E.R.Y.L. [GG-5.0]` ou `Module B.E.R.Y.L. [GG-2.4]`.
 
@@ -70,12 +69,8 @@ La couleur du séparateur est pilotée par `sensor.etat_wifi_maison` qui agrège
 │  └─ Sub-button : sensor.etat_wifi_maison  (Maison)       │
 ├──────────────────────────────────────────────────────────┤
 │  BOUTON ERIC  [bubble-card button]  grid: 2 col / 1 row  │
-│  ├─ Entité principale : device_tracker.eric              │
+│  ├─ Entité principale : device_tracker.poco              │
 │  └─ Sub-button : person.eric  (photo de profil)          │
-├──────────────────────────────────────────────────────────┤
-│  BOUTON MAMOUR  [bubble-card button]  grid: 2 col / 1 row│
-│  ├─ Entité principale : device_tracker.mamour            │
-│  └─ Sub-button : person.mamour  (photo de profil)        │
 └──────────────────────────────────────────────────────────┘
 ```
 
@@ -145,7 +140,7 @@ Séparateur de section avec indicateur coloré global. Le `sub_button` affiche l
 - type: custom:bubble-card
   card_type: button
   button_type: state
-  entity: device_tracker.eric
+  entity: device_tracker.poco
   show_name: true
   show_last_changed: true
   show_attribute: false
@@ -165,40 +160,14 @@ Séparateur de section avec indicateur coloré global. Le `sub_button` affiche l
 
 ### Rôle
 
-Affiche l'état de présence de Eric (`home` / `not_home` / nom de zone) avec l'heure du dernier changement et la photo de profil en sub-button. La grille 2 colonnes permet d'aligner la carte Mamour côte à côte.
+Affiche l'état de présence d'Eric avec l'heure du dernier changement et la photo de profil en sub-button.
 
----
+Couleurs, pilotées par le JavaScript du champ `styles` :
 
-## 📍 SECTION - Carte Présence Mamour
-
-### Code
-
-```yaml
-- type: custom:bubble-card
-  card_type: button
-  button_type: state
-  entity: device_tracker.mamour
-  show_name: true
-  show_last_changed: true
-  show_attribute: false
-  card_layout: normal
-  layout_options:
-    grid_columns: 2
-    grid_rows: 1
-  show_state: false
-  sub_button:
-    - entity: person.mamour
-      show_state: false
-      show_icon: true
-      show_background: true
-      show_attribute: false
-      attribute: entity_picture
-  name: Mamour
-```
-
-### Rôle
-
-Identique à la carte Eric - affiche la présence de Mamour avec sa photo de profil. Le champ `name: Mamour` surcharge le nom de l'entité `device_tracker.mamour` pour un affichage plus lisible.
+| État | Rendu |
+|:-----|:------|
+| `home` | fond `green`, icône `darkgreen`, pictogramme `mdi:home` |
+| tout autre état | aucune couleur forcée : la carte garde son rendu par défaut |
 
 ---
 
@@ -210,14 +179,14 @@ Identique à la carte Eric - affiche la présence de Mamour avec sa photo de pro
 
 | Entité | Intégration | Configuré via |
 |--------|-------------|---------------|
-| `device_tracker.eric` | `mobile_app` | App Companion → Paramètres > Intégrations |
+| `device_tracker.poco` | `mobile_app` | App Companion → Paramètres > Intégrations (téléphone d'Eric) |
 | `device_tracker.mamour` | `mobile_app` | App Companion → Paramètres > Intégrations |
 | `person.eric` | `person` | Paramètres > Personnes |
 | `person.mamour` | `person` | Paramètres > Personnes |
 
 ---
 
-### 📁 `templates/06_1_phones_wifi_cellular_card_autom.yaml`
+### 📁 `templates/P4_groupe_presence/P4_groupe_presence.yaml`
 
 > Capteurs de détection WiFi - vérifient la connexion à `Freebox_GG` pour chaque téléphone et calculent l'état agrégé du domicile.
 
@@ -271,10 +240,6 @@ Renvoie `true` si le `device_tracker` correspondant est en mode `wifi` ET connec
 1. Vérifier que `person.eric` / `person.mamour` ont une photo définie dans Paramètres > Personnes
 2. L'attribut `entity_picture` doit être renseigné sur l'entité `person`
 
-### Les deux cartes Eric/Mamour ne s'affichent pas côte à côte
-
-- Vérifier que le layout parent de la vue utilise `grid_columns: 2` (nécessite HA 2024.x+)
-- `layout_options.grid_columns: 2` est défini sur chaque carte bubble-card
 
 ---
 
@@ -285,7 +250,7 @@ Renvoie `true` si le `device_tracker` correspondant est en mode `wifi` ET connec
 | `mobile_app` (Companion App) | Intégration native | ✅ Essentiel |
 | `person` | Intégration native | ✅ Essentiel |
 | `bubble-card` | HACS | ✅ Essentiel |
-| `templates/06_1_phones_wifi_cellular_card_autom.yaml` | Template sensor | ✅ Essentiel |
+| `templates/P4_groupe_presence/P4_groupe_presence.yaml` | Template sensor (détection WiFi) | ✅ Essentiel |
 
 ---
 
@@ -293,11 +258,12 @@ Renvoie `true` si le `device_tracker` correspondant est en mode `wifi` ET connec
 
 ### Configuration YAML (sources HA v2.0)
 
-- `templates/06_1_phones_wifi_cellular_card_autom.yaml`
+- `templates/P4_groupe_presence/P4_groupe_presence.yaml` (capteurs WiFi)
+- `templates/P4_groupe_presence/P4_wifi_detection.yaml`
 
 ### Dashboard source
 
-- `Dashboard/PAGE_Home/card_presence_home_2026-06-13.yaml`
+- `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_separateur.yaml` (séparateur) et `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_eric.yaml` (bouton Eric)
 
 ---
 
