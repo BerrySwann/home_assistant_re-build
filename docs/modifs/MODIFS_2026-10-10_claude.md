@@ -29,3 +29,4 @@
 2026-10-10 21:01:32 | claude | SUPPRIME | docs\02_docs_dashboard\dashboard_docs_YAML\md5_compare_2026-05-23.txt | avant=B4B877FD apres=-------- | demande Eric: vieux rapport md5_compare, corbeille Windows (local seulement, absent de H:)
 2026-10-10 21:01:32 | claude | SUPPRIME | docs\02_docs_dashboard\dashboard_docs_YAML\md5_compare_2026-05-31.txt | avant=C838E208 apres=-------- | demande Eric: vieux rapport md5_compare, corbeille Windows (local seulement, absent de H:)
 2026-10-10 21:01:33 | claude | SUPPRIME | docs\02_docs_dashboard\dashboard_docs_YAML\md5_compare_TREECORRIGE_2026-05-24.txt | avant=791F717C apres=-------- | demande Eric: vieux rapport md5_compare, corbeille Windows (local seulement, absent de H:)
+2026-10-10 22:07:10 | claude | CREE | historique\plan_categories_automations_2026-10-10.txt | avant=-------- apres=FC7C478D | demande Eric: simulation du rangement par categorie HA (aucun fichier deplace)
