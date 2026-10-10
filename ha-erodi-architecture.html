@@ -1686,7 +1686,7 @@ footer a:hover { color:var(--green); }
                 <li><span class="file">page_L1C1_meteo.yaml</span></li>
                 <li><span class="file">card_duree_du_jour.yaml</span></li>
               </ul>
-              <div class="note">Nom de travail sans date — versions en <code>.bak_AAAA_MM_JJ.yaml</code> (max 3), doc .md séparée dans dashboard_docs_MD/</div>
+              <div class="note">Nom de travail sans date — sauvegardes <code>.bak_AAAA_MM_JJ_HHhMMmSSs</code> (10 max le jour même), consolidées le lendemain en <code>.bak_AAAA_MM_JJ</code> (3 max) par /histo ; doc .md séparée dans dashboard_docs_MD/</div>
             </li>
             <li style="margin-top:8px">
               <span class="dir">PAGE_Home/ · PAGE_RASPI/</span>
@@ -3456,7 +3456,7 @@ input_datetime: !include input_datetime.yaml</pre>
     <!-- RÈGLES -->
     <div class="conv-section reveal">
       <h3 class="conv-section-h">1 — Versioning et nommage</h3>
-      <p class="conv-section-sub">Un sous-dossier par vignette (<code>L{ligne}C{colonne}_{index}_{Nom}/</code>). Le nom de travail ne porte <b>jamais</b> de date : les versions sont des sauvegardes <code>.bak_AAAA_MM_JJ.yaml</code>, 3 au maximum (au-delà, envoi à la corbeille Windows).</p>
+      <p class="conv-section-sub">Un sous-dossier par vignette (<code>L{ligne}C{colonne}_{index}_{Nom}/</code>). Le nom de travail ne porte <b>jamais</b> de date : chaque modification crée une sauvegarde à côté du fichier. Le jour même : <code>.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}</code>, <b>10 au maximum</b> pour un même fichier (la 11e part à la corbeille Windows). Le lendemain, <code>/histo</code> consolide : la plus récente devient <code>.bak_AAAA_MM_JJ.{ext}</code>, les autres partent à la corbeille ; au-delà de <b>3</b> sauvegardes consolidées pour un fichier, la 4e part à la corbeille.</p>
       <div style="overflow-x:auto;margin:1.1rem 0;">
         <table style="width:100%;border-collapse:collapse;font-size:.8rem;">
           <thead>
@@ -3475,17 +3475,17 @@ input_datetime: !include input_datetime.yaml</pre>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:.5rem .8rem;color:var(--text);">Vignette</td>
               <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">L{x}C{x}_.../vignette_L{x}C{x}_{nom}.yaml</td>
-              <td style="padding:.5rem .8rem;color:var(--text-2);">1 fichier de travail + versions <code>.bak</code> (max 3)</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">1 fichier de travail + sauvegardes : 10 max le jour même (<code>.bak_AAAA_MM_JJ_HHhMMmSSs</code>), 3 max après consolidation</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:.5rem .8rem;color:var(--text);">Page</td>
               <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">L{x}C{x}_.../page_L{x}C{x}_{nom}.yaml</td>
-              <td style="padding:.5rem .8rem;color:var(--text-2);">1 fichier de travail + versions <code>.bak</code> (max 3)</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">1 fichier de travail + sauvegardes : 10 max le jour même (<code>.bak_AAAA_MM_JJ_HHhMMmSSs</code>), 3 max après consolidation</td>
             </tr>
             <tr>
               <td style="padding:.5rem .8rem;color:var(--text);">Carte isolée</td>
               <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">L{x}C{x}_.../card_{nom}.yaml</td>
-              <td style="padding:.5rem .8rem;color:var(--text-2);">Sous-composant réutilisé dans une page</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Sous-composant réutilisé dans une page — mêmes règles de sauvegarde</td>
             </tr>
           </tbody>
         </table>
