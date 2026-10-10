@@ -1067,14 +1067,14 @@ footer a:hover { color:var(--green); }
     <div class="vwr-bar">
       <div class="vwr-dots"><span></span><span></span><span></span></div>
       <div class="vwr-tabs">
-        <button class="vwr-tab active" onclick="switchFile(0,event)">P1 · sensor Riemann</button>
+        <button class="vwr-tab active" onclick="switchFile(0,event)">P1 · sensor DUT</button>
         <button class="vwr-tab" onclick="switchFile(1,event)">P0 · Statistiques</button>
         <button class="vwr-tab" onclick="switchFile(2,event)">P1 · Utility Meter</button>
       </div>
       <button class="vwr-close" onclick="closeViewerBtn()">✕ fermer</button>
     </div>
     <div class="vwr-path">
-      <span class="pd" id="vwr-dir">/homeassistant/sensors/P1_clim_chauffage/P1_kWh/</span><span class="pf" id="vwr-file">P1_kWh_clim_chauffage.yaml</span>
+      <span class="pd" id="vwr-dir">/homeassistant/sensors/P1_clim_chauffage/P1_DUT/</span><span class="pf" id="vwr-file">P1_DUT_clim_chauffage.yaml</span>
     </div>
     <div class="vwr-scroll">
       <div id="vwr-content"></div>
@@ -1114,7 +1114,7 @@ footer a:hover { color:var(--green); }
       <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 1rem;border-right:1px solid rgba(29,77,46,0.12)">
         <span class="counter" data-target="18" style="font-size:3rem;font-weight:800;color:var(--green);line-height:1">0</span>
         <span style="font-size:0.8rem;font-weight:700;color:var(--text)">Vignettes</span>
-        <span style="font-size:0.7rem;color:var(--text-2)">13 sous-pages</span>
+        <span style="font-size:0.7rem;color:var(--text-2)">26 sous-pages</span>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 1rem;border-right:1px solid rgba(29,77,46,0.12)">
         <span class="counter" data-target="76" style="font-size:3rem;font-weight:800;color:var(--green);line-height:1">0</span>
@@ -1122,7 +1122,7 @@ footer a:hover { color:var(--green); }
         <span style="font-size:0.7rem;color:var(--text-2)">19 x 4 cycles AMHQ</span>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 1rem;border-right:1px solid rgba(29,77,46,0.12)">
-        <span class="counter" data-target="454" style="font-size:3rem;font-weight:800;color:var(--green);line-height:1">0</span>
+        <span class="counter" data-target="513" style="font-size:3rem;font-weight:800;color:var(--green);line-height:1">0</span>
         <span style="font-size:0.8rem;font-weight:700;color:var(--text)">Fichiers config</span>
         <span style="font-size:0.7rem;color:var(--text-2)">indexes RAG *</span>
       </div>
@@ -1183,7 +1183,7 @@ footer a:hover { color:var(--green); }
           <div class="bloc-title">Documentation config searchable par IA</div>
         </div>
         <div class="bloc-body">
-          <p style="font-size:.75rem;color:var(--text-2);line-height:1.6;margin-bottom:10px">454 fichiers YAML, Markdown et JSON indexes dans AnythingLLM. La config entiere est interrogeable en langage naturel. Backup Git automatique depuis HA vers GitHub.</p>
+          <p style="font-size:.75rem;color:var(--text-2);line-height:1.6;margin-bottom:10px">513 fichiers YAML, Markdown et JSON dans docs/, indexes dans AnythingLLM. La config entiere est interrogeable en langage naturel. Backup Git automatique depuis HA vers GitHub.</p>
           <div style="display:flex;gap:6px;flex-wrap:wrap">
             <span style="font-size:.6rem;background:rgba(255,152,0,.1);color:#b45309;border:1px solid rgba(255,152,0,.2);border-radius:4px;padding:2px 7px;font-weight:600">AnythingLLM</span>
             <span style="font-size:.6rem;background:rgba(255,152,0,.1);color:#b45309;border:1px solid rgba(255,152,0,.2);border-radius:4px;padding:2px 7px;font-weight:600">Git auto-sync</span>
@@ -1413,28 +1413,28 @@ footer a:hover { color:var(--green); }
         <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <div class="row-label">L4 &mdash; Reseau &amp; Systeme</div>
-      <!-- L4C1 Proxmox -->
+      <!-- L4C1 Mini PC -->
       <div class="vg" id="vg-l4c1">
-        <div class="vg-title">Proxmox</div>
-        <div class="vg-center" style="font-size:1.6rem">&#128421;&#65039;</div>
-        <div class="vg-center vg-val" id="l4c1-temp" style="color:rgb(70,175,75);font-weight:700;margin:2px 0">51.0&#176;C</div>
-        <div class="vg-sep"></div>
-        <div class="vg-row"><span class="vg-label">PVE CPU</span><span class="vg-val" id="l4c1-cpu" style="color:#fff">2.3%</span></div>
-        <div class="vg-row"><span class="vg-label">PVE Host</span><span class="vg-val" style="color:rgb(70,175,75)">ONLINE</span></div>
-        <div class="vg-row"><span class="vg-label">PVE RAM</span><span class="vg-val" id="l4c1-ram" style="color:#fff">42.6%</span></div>
-        <div class="vg-row"><span class="vg-label">PVE Storage</span><span class="vg-val" id="l4c1-storage" style="color:#fff">62.9%</span></div>
-        <span class="vg-live-badge">Seuils reels - survol actif</span>
-      </div>
-      <!-- L4C2 Mini PC -->
-      <div class="vg" id="vg-l4c2">
         <div class="vg-title">Mini - P.C.</div>
         <div class="vg-center" style="font-size:1.6rem">&#128187;</div>
+        <div class="vg-center vg-val" id="l4c1-temp" style="color:rgb(70,175,75);font-weight:700;margin:2px 0">51.0&#176;C</div>
+        <div class="vg-sep"></div>
+        <div class="vg-row"><span class="vg-label">CPU</span><span class="vg-val" id="l4c1-cpu" style="color:#fff">2.3%</span></div>
+        <div class="vg-row"><span class="vg-label">Power</span><span class="vg-val" id="l4c1-power" style="color:#fff">8.5 W</span></div>
+        <div class="vg-row"><span class="vg-label">RAM</span><span class="vg-val" id="l4c1-ram" style="color:#fff">42.6%</span></div>
+        <div class="vg-row"><span class="vg-label">SSD</span><span class="vg-val" id="l4c1-storage" style="color:#fff">62.9%</span></div>
+        <span class="vg-live-badge">Seuils reels - survol actif</span>
+      </div>
+      <!-- L4C2 Proxmox -->
+      <div class="vg" id="vg-l4c2">
+        <div class="vg-title">Proxmox</div>
+        <div class="vg-center" style="font-size:1.6rem">&#128421;&#65039;</div>
         <div class="vg-center vg-val" id="l4c2-temp" style="color:rgb(70,175,75);font-weight:700;margin:2px 0">51.0&#176;C</div>
         <div class="vg-sep"></div>
-        <div class="vg-row"><span class="vg-label">CPU</span><span class="vg-val" id="l4c2-cpu" style="color:#fff">2.3%</span></div>
-        <div class="vg-row"><span class="vg-label">Power</span><span class="vg-val" id="l4c2-power" style="color:#fff">8.5 W</span></div>
-        <div class="vg-row"><span class="vg-label">RAM</span><span class="vg-val" id="l4c2-ram" style="color:#fff">42.6%</span></div>
-        <div class="vg-row"><span class="vg-label">SSD</span><span class="vg-val" id="l4c2-storage" style="color:#fff">62.9%</span></div>
+        <div class="vg-row"><span class="vg-label">PVE CPU</span><span class="vg-val" id="l4c2-cpu" style="color:#fff">2.3%</span></div>
+        <div class="vg-row"><span class="vg-label">PVE Host</span><span class="vg-val" style="color:rgb(70,175,75)">ONLINE</span></div>
+        <div class="vg-row"><span class="vg-label">PVE RAM</span><span class="vg-val" id="l4c2-ram" style="color:#fff">42.6%</span></div>
+        <div class="vg-row"><span class="vg-label">PVE Storage</span><span class="vg-val" id="l4c2-storage" style="color:#fff">62.9%</span></div>
         <span class="vg-live-badge">Seuils reels - survol actif</span>
       </div>
       <!-- L4C3 Software -->
@@ -1584,11 +1584,9 @@ footer a:hover { color:var(--green); }
             <li>
               <span class="dir">sensors/</span>
               <ul class="ftree sub">
-                <li><span class="file">P0_Energie_total/ <span class="tag-pole">P0</span></span></li>
+                <li><span class="file">P0_Energie_total_min_maxi_diag/ <span class="tag-pole">P0</span></span></li>
                 <li><span class="file">P1_clim_chauffage/ <span class="tag-pole">P1</span></span></li>
-                <li><span class="file">P2_prise/ <span class="tag-pole">P2</span></span></li>
-                <li><span class="file">P3_eclairage/ <span class="tag-pole">P3</span></span></li>
-                <li><span class="file">Air_quality/ · meteo/ · MP_*</span></li>
+                <li><span class="file">Air_quality/ · meteo/</span></li>
               </ul>
               <div class="note">platform: statistics · integration · ping</div>
             </li>
@@ -1667,25 +1665,25 @@ footer a:hover { color:var(--green); }
             <li>
               <span class="dir">Dashboard_COMPLET/</span>
               <ul class="ftree sub">
-                <li><span class="file">Dashboard_2026_08_01.yaml</span></li>
-                <li><span class="file">Dashboard_2026_07_18.yaml</span></li>
+                <li><span class="file">Dashboard_2026_10-04.yaml</span></li>
+                <li><span class="file">Dashboard_2026_09_24.yaml</span></li>
               </ul>
-              <div class="note">Snapshot export UI HA — conservation illimitée (16 versions à ce jour)</div>
+              <div class="note">Snapshot export UI HA — conservation illimitée (21 versions à ce jour)</div>
             </li>
             <li style="margin-top:8px">
               <span class="dir">L1C1_01_Meteo/ · L1C2_02_Temperatures/ ...</span>
               <ul class="ftree sub">
-                <li><span class="file">vignette_L1C1_meteo_2026-05-16.yaml</span></li>
-                <li><span class="file">page_L1C1_meteo_2026-06-13.yaml</span></li>
-                <li><span class="file">card_duree_du_jour_2026-05-23.yaml</span></li>
+                <li><span class="file">vignette_L1C1_meteo.yaml</span></li>
+                <li><span class="file">page_L1C1_meteo.yaml</span></li>
+                <li><span class="file">card_duree_du_jour.yaml</span></li>
               </ul>
               <div class="note">Max 3 versions par vignette/page — doc .md séparée dans dashboard_docs_MD/</div>
             </li>
             <li style="margin-top:8px">
               <span class="dir">PAGE_Home/ · PAGE_RASPI/</span>
               <ul class="ftree sub">
-                <li><span class="file">card_meteocss_home_2026-06-28.yaml</span></li>
-                <li><span class="file">card_presence_home_2026-06-13.yaml</span></li>
+                <li><span class="file">card_meteocss_home.yaml</span></li>
+                <li><span class="file">card_presence_home.yaml</span></li>
               </ul>
               <div class="note">Pages hors-matrice — cartes individuelles, pas de pattern vignette/page</div>
             </li>
@@ -1786,10 +1784,8 @@ footer a:hover { color:var(--green); }
 &#9500;&#9472;&#9472; <span class="a-sys">automations.yaml</span>              <span class="a-comment">&#8592; toutes les automations (UI editeur)</span>
 &#9474;
 &#9500;&#9472;&#9472; sensors/
-&#9474;   &#9500;&#9472;&#9472; <span class="a-p0">P0_Energie_total_*/</span>           <span class="a-comment">&#8592; kWh cumulatif + mini/maxi + Genelec</span>
+&#9474;   &#9500;&#9472;&#9472; <span class="a-p0">P0_Energie_total_min_maxi_diag/</span> <span class="a-comment">&#8592; kWh cumulatif + mini/maxi + Genelec</span>
 &#9474;   &#9500;&#9472;&#9472; <span class="a-p1">P1_clim_chauffage/</span>            <span class="a-comment">&#8592; DUT history_stats + integration W&#8594;kWh (cuisine)</span>
-&#9474;   &#9500;&#9472;&#9472; <span class="a-p2">P2_prise/</span>                     <span class="a-comment">&#8592; kWh prises, veilles, mini-pc</span>
-&#9474;   &#9500;&#9472;&#9472; <span class="a-p3">P3_eclairage/</span>                 <span class="a-comment">&#8592; kWh ampoules (unite / zone / total)</span>
 &#9474;   &#9492;&#9472;&#9472; <span class="a-sys">Air_quality/ meteo/</span>           <span class="a-comment">&#8592; stats PM2.5, tCOV, Blitzortung</span>
 &#9474;
 &#9500;&#9472;&#9472; templates/
@@ -2117,11 +2113,11 @@ input_datetime: !include input_datetime.yaml</pre>
 
         <!-- SPECIAL RIEMANN -->
         <div class="abrev-card" style="border-left:3px solid var(--amber);">
-          <div style="font-family:var(--fm);font-size:.62rem;color:var(--amber);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.8rem;">Spécial — Énergie Riemann <span style="font-weight:400;opacity:.65;letter-spacing:0;text-transform:none;font-size:.7rem;">— intégration numérique W → kWh, dernier recours quand pas de <code>_energy</code> natif</span></div>
-          <p style="font-size:.82rem;color:var(--text-2);margin:0 0 .7rem;">HA intègre la puissance (W) dans le temps via la méthode des trapèzes pour reconstituer un kWh estimé. Moins précis qu'un compteur natif, mais fonctionnel quand le hardware ne fournit pas d'index cumulatif. Actuellement 2 fichiers en prod :</p>
+          <div style="font-family:var(--fm);font-size:.62rem;color:var(--amber);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.8rem;">Spécial — Énergie Riemann <span style="font-weight:400;opacity:.65;letter-spacing:0;text-transform:none;font-size:.7rem;">— méthode retirée le 2026-09-24 (retour au kWh natif après correctif firmware Shelly)</span></div>
+          <p style="font-size:.82rem;color:var(--text-2);margin:0 0 .7rem;">HA intègre la puissance (W) dans le temps via la méthode des trapèzes pour reconstituer un kWh estimé : moins précis qu'un compteur natif, utilisé quand le hardware ne fournit pas d'index cumulatif. Cette méthode n'est plus employée en production : les deux fichiers Riemann (sensors/ et templates/) ont été supprimés le 2026-09-24, après le correctif firmware du Shelly. Ce qui existe à la place :</p>
           <div style="display:flex;flex-direction:column;gap:.4rem;">
-            <div style="font-size:.8rem;color:var(--text-2);">&#8618; <code style="color:var(--green);">P1_kWh_clim_chauffage.yaml</code> — <code>sensors/</code> — Riemann sur les clims/soufflants (source : prises NOUS P1, <code>_power</code> W)</div>
-            <div style="font-size:.8rem;color:var(--text-2);">&#8618; <code style="color:var(--green);">P1_kWh_riemann_cuisine.yaml</code> — <code>templates/</code> — Riemann sur radiateur cuisine (Shelly 1PM Gen4, bug firmware : kWh natif non fonctionnel)</div>
+            <div style="font-size:.8rem;color:var(--text-2);">&#8618; <code style="color:var(--green);">P1_DUT_clim_chauffage.yaml</code> — <code>sensors/</code> — history_stats : durée d'utilisation par clim (sources : <code>sensor.*_power_status</code>)</div>
+            <div style="font-size:.8rem;color:var(--text-2);">&#8618; <code style="color:var(--green);">P1_UM_AMHQ.yaml</code> — <code>utility_meter/</code> — compteurs kWh alimentés par la source directe (kWh natif Z2M, plus de Riemann)</div>
           </div>
         </div>
 
@@ -2193,7 +2189,7 @@ input_datetime: !include input_datetime.yaml</pre>
             <tr style="border-bottom:1px solid var(--border);background:var(--bg-card);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">TPL</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_TPL_AMHQ_{niveau}.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P3_TPL_AMHQ_1_UNITE.yaml</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">AVG</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_AVG_AMHQ[_{variante}].yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P2_AVG_AMHQ_prises.yaml</td></tr>
             <tr style="border-bottom:1px solid var(--border);background:var(--bg-card);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">TOTAL</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_TOTAL_AMHQ.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P1_TOTAL_AMHQ.yaml</td></tr>
-            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">kWh</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_kWh_{description}.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P1_kWh_clim_chauffage.yaml</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">kWh</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_DUT_{description}.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P1_DUT_clim_chauffage.yaml</td></tr>
             <tr style="border-bottom:1px solid var(--border);background:var(--bg-card);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">DUT</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_DUT_{description}.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P1_DUT_clim_chauffage.yaml</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">DIAG</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_DIAG_{description}_{cycle}.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P0_DIAG_conso_hebdomadaire.yaml</td></tr>
             <tr style="border-bottom:1px solid var(--border);background:var(--bg-card);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">POWER</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_POWER_{niveau}.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P3_POWER_3_TOTAL_ZONE.yaml</td></tr>
@@ -3324,7 +3320,7 @@ input_datetime: !include input_datetime.yaml</pre>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:.5rem .8rem;color:var(--text);">Dashboard complet</td>
               <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">Dashboard_COMPLET/Dashboard_YYYY_MM_DD.yaml</td>
-              <td style="padding:.5rem .8rem;color:var(--text-2);">Illimitée (16 versions à ce jour, 2026-03-16 → 2026-08-01)</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Illimitée (21 versions à ce jour, 2026-03-16 → 2026-10-04)</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:.5rem .8rem;color:var(--text);">Vignette</td>
@@ -3354,7 +3350,7 @@ input_datetime: !include input_datetime.yaml</pre>
     <!-- ARBO YAML (contenu deplace dans modal, voir boutons section Inventaire) -->
     <div class="conv-section reveal" style="display:none;">
       <pre id="tree-src-yaml" style="display:none;">dashboard_docs_YAML/
-├── Dashboard_COMPLET/                          <span style="color:#a0a8b6"># 16 versions, 2026-03-16 → 2026-08-01</span>
+├── Dashboard_COMPLET/                          <span style="color:#a0a8b6"># 21 versions, 2026-03-16 → 2026-10-04</span>
 │   ├── Dashboard_2026_03_16.yaml
 │   ├── Dashboard_2026_03_20.yaml
 │   ├── Dashboard_2026_03_22.yaml
@@ -3370,133 +3366,109 @@ input_datetime: !include input_datetime.yaml</pre>
 │   ├── Dashboard_2026_06_18.yaml
 │   ├── Dashboard_2026_07_14.yaml
 │   ├── Dashboard_2026_07_18.yaml
-│   └── Dashboard_2026_08_01.yaml
-├── L1C1_01_Meteo/
-│   ├── card_duree_du_jour_2026-05-23.yaml
-│   ├── page_L1C1_meteo_2026-05-23.yaml
-│   ├── page_L1C1_meteo_2026-06-13.yaml
-│   └── vignette_L1C1_meteo_2026-05-16.yaml
-├── L1C2_02_Temperatures/                       <span style="color:#bf616a"># .bak residuel</span>
-│   ├── page_L1C2_temperatures_2026-05-22.yaml
-│   ├── page_L1C2_temperatures_2026-05-22.yaml.bak
-│   ├── page_L1C2_temperatures_2026-07-14.yaml
-│   └── vignette_L1C2_temperatures_2026-05-12.yaml
-├── L1C3_03_Commandes_Clim/
-│   ├── card_calcule_temp_cible_2026-06-21.yaml
-│   ├── card_prog_clim_bureau_2026-07-14.yaml
-│   ├── card_prog_clim_chambre_2026-07-14.yaml
-│   ├── card_prog_clim_salon_2026-07-14.yaml
-│   ├── card_prog_radiateur_cuisine_2026-07-14.yaml
-│   ├── card_prog_soufflant_sdb_2026-07-14.yaml
-│   ├── page_L1C3_clim_2026-05-22.yaml
-│   ├── page_L1C3_clim_2026-07-08.yaml
-│   ├── page_L1C3_clim_2026-07-18.yaml
-│   ├── vignette_L1C3_clim_2026-05-13.yaml
-│   ├── vignette_L1C3_clim_2026-07-08.yaml
-│   └── vignette_L1C3_clim_2026-07-18.yaml
-├── L2C1_04_Energie_Generale/
-│   ├── page_L2C1_energie_mensuel_2026-05-12.yaml
-│   ├── page_L2C1_energie_mensuel_2026-06-18.yaml
-│   ├── page_L2C1_energie_principale_2026-05-12.yaml
-│   ├── page_L2C1_energie_principale_2026-06-18.yaml
-│   ├── page_L2C1_energie_temps_reel_2026-05-12.yaml
-│   ├── page_L2C1_energie_temps_reel_2026-06-18.yaml
-│   ├── vignette_L2C1_energie_2026-05-12.yaml
-│   └── vignette_L2C1_energie_2026-06-18.yaml
-├── L2C2_05_Energie_Clim/
-│   ├── page_L2C2_energie_clim_2026-05-13.yaml
-│   ├── page_L2C2_energie_clim_2026-05-22.yaml
-│   ├── page_L2C2_energie_clim_2026-06-18.yaml
-│   ├── page_L2C2_energie_clim_2026-07-14.yaml
-│   └── vignette_L2C2_energie_clim_2026-05-13.yaml
+│   ├── Dashboard_2026_08_01.yaml
+│   ├── Dashboard_2026_08_02.yaml
+│   ├── Dashboard_2026_08_09.yaml
+│   ├── Dashboard_2026_09_20.yaml
+│   ├── Dashboard_2026_09_24.yaml
+│   └── Dashboard_2026_10-04.yaml
+├── L1C1_01_Meteo/   <span style="color:#a0a8b6"># 2 sauvegarde(s)</span>
+│   ├── card_duree_du_jour.yaml
+│   ├── page_L1C1_meteo.yaml
+│   └── vignette_L1C1_meteo.yaml
+├── L1C2_02_Temperatures/   <span style="color:#a0a8b6"># 5 sauvegarde(s)</span>
+│   ├── page_L1C2_temperatures.yaml
+│   └── vignette_L1C2_temperatures.yaml
+│   └── page_L1C2_temperatures_2026-05-22.yaml.bak   <span style="color:#bf616a"># ancien format</span>
+├── L1C3_03_Commandes_Clim/   <span style="color:#a0a8b6"># 4 sauvegarde(s)</span>
+│   ├── card_calcule_temp_cible.yaml
+│   ├── card_prog_clim_bureau.yaml
+│   ├── card_prog_clim_chambre.yaml
+│   ├── card_prog_clim_salon.yaml
+│   ├── card_prog_radiateur_cuisine.yaml
+│   ├── card_prog_soufflant_sdb.yaml
+│   ├── page_L1C3_clim.yaml
+│   └── vignette_L1C3_clim.yaml
+├── L2C1_04_Energie_Generale/   <span style="color:#a0a8b6"># 5 sauvegarde(s)</span>
+│   ├── page_L2C1_energie_mensuel.yaml
+│   ├── page_L2C1_energie_principale.yaml
+│   ├── page_L2C1_energie_temps_reel.yaml
+│   └── vignette_L2C1_energie.yaml
+├── L2C2_05_Energie_Clim/   <span style="color:#a0a8b6"># 3 sauvegarde(s)</span>
+│   ├── page_L2C2_energie_clim.yaml
+│   └── vignette_L2C2_energie_clim.yaml
 ├── L2C3_06_Energie_Eclairage/
-│   ├── page_L2C3_energie_eclairage_2026-05-13.yaml
-│   └── vignette_L2C3_energie_eclairage_2026-05-13.yaml
-├── L3C1_07_Commandes_Eclairage/
-│   ├── page_L3C1_eclairage_droite_2026-05-13.yaml
-│   ├── page_L3C1_eclairage_droite_2026-05-22.yaml
-│   ├── page_L3C1_eclairage_gauche_2026-05-13.yaml
-│   └── vignette_L3C1_eclairage_2026-05-13.yaml
+│   ├── page_L2C3_energie_eclairage.yaml
+│   └── vignette_L2C3_energie_eclairage.yaml
+├── L3C1_07_Commandes_Eclairage/   <span style="color:#a0a8b6"># 1 sauvegarde(s)</span>
+│   ├── page_L3C1_eclairage_droite.yaml
+│   ├── page_L3C1_eclairage_gauche.yaml
+│   └── vignette_L3C1_eclairage.yaml
 ├── L3C2_08_Commandes_Prises/
-│   ├── page_L3C2_prises_2026-05-14.yaml
-│   └── vignette_L3C2_prises_2026-05-14.yaml
-├── L3C3_09_Stores_Fenetres/
-│   ├── page_L3C3_stores_2026-05-14.yaml
-│   ├── page_L3C3_stores_2026-06-02.yaml
-│   └── vignette_L3C3_stores_2026-05-14.yaml
-├── L4C1_10_Proxmox/
-│   ├── card_services_ha_z2m_mariadb_2026-05-19.yaml
-│   ├── page_L4C1_proxmox_2026-06-08.yaml
-│   ├── page_L4C1_proxmox_2026-06-10.yaml
-│   ├── page_L4C1_proxmox_2026-06-18.yaml
-│   ├── vignette_L4C1_proxmox_2026-05-19.yaml
-│   ├── vignette_L4C1_proxmox_2026-06-09.yaml
-│   └── vignette_L4C1_proxmox_2026-06-18.yaml
-├── L4C2_11_Mini_PC/
-│   ├── card_popup_memory_2026-06-09.yaml
-│   ├── page_L4C2_mini_pc_2026-06-09.yaml
-│   ├── page_L4C2_mini_pc_2026-06-10.yaml
-│   ├── page_L4C2_mini_pc_2026-06-18.yaml
-│   ├── vignette_L4C2_mini_pc_2026-06-04.yaml
-│   ├── vignette_L4C2_mini_pc_2026-06-09.yaml
-│   └── vignette_L4C2_mini_pc_2026-06-18.yaml
+│   ├── page_L3C2_prises.yaml
+│   └── vignette_L3C2_prises.yaml
+├── L3C3_09_Stores_Fenetres/   <span style="color:#a0a8b6"># 1 sauvegarde(s)</span>
+│   ├── page_L3C3_stores.yaml
+│   └── vignette_L3C3_stores.yaml
+├── L4C1_10_Mini_PC/   <span style="color:#a0a8b6"># 5 sauvegarde(s)</span>
+│   ├── card_popup_memory.yaml
+│   ├── page_L4C1_mini_pc.yaml
+│   └── vignette_L4C1_mini_pc.yaml
+├── L4C2_11_Proxmox/   <span style="color:#a0a8b6"># 6 sauvegarde(s)</span>
+│   ├── card_services_ha_z2m_mariadb.yaml
+│   ├── page_L4C2_proxmox.yaml
+│   └── vignette_L4C2_proxmox.yaml
 ├── L4C3_12_MAJ_HA/
-│   ├── page_L4C3_maj_ha_2026-06-15.yaml
-│   ├── page_L4C3_maj_ha_droite_2026-05-14.yaml
-│   ├── page_L4C3_maj_ha_gauche_2026-05-14.yaml
-│   └── vignette_L4C3_maj_ha_2026-05-14.yaml
-├── L5C1_13_Batteries_Piles/
-│   ├── page_L5C1_batteries_piles_2026-05-14.yaml
-│   └── vignette_L5C1_batteries_piles_2026-05-14.yaml
+│   ├── page_L4C3_maj_ha.yaml
+│   ├── page_L4C3_maj_ha_droite.yaml
+│   ├── page_L4C3_maj_ha_gauche.yaml
+│   └── vignette_L4C3_maj_ha.yaml
+├── L5C1_13_Batteries_Piles/   <span style="color:#a0a8b6"># 1 sauvegarde(s)</span>
+│   ├── page_L5C1_batteries_piles.yaml
+│   └── vignette_L5C1_batteries_piles.yaml
 ├── L5C2_14_Batteries_Portables/
-│   ├── page_L5C2_batteries_portables_droite_2026-05-12.yaml
-│   ├── page_L5C2_batteries_portables_gauche_2026-05-12.yaml
-│   └── vignette_L5C2_batteries_portables_2026-05-12.yaml
-├── L5C3_15_MariaDB/                             <span style="color:#a0a8b6"># + Script sh/ hors convention yaml</span>
-│   ├── Script sh/
-│   │   └── audit_md5.sh
-│   ├── card_audit_buttons_2026-06-14.yaml
-│   ├── card_audit_journal_2026-06-14.yaml
-│   ├── card_audit_md5_2026-06-15.yaml
-│   ├── card_audit_recap_2026-06-15.yaml
-│   ├── card_mariadb_2026-05-18.yaml
-│   ├── page_L5C3_mariadb_2026-05-10.yaml
-│   ├── page_L5C3_mariadb_2026-06-02.yaml
-│   ├── page_L5C3_mariadb_2026-06-15.yaml
-│   ├── page_L5C3_systeme_reserve_2026-05-18.yaml
-│   └── vignette_L5C3_mariadb_2026-05-10.yaml
-├── L6C1_16_Air_Qualite/
-│   ├── page_L6C1_air_qualite_2026-05-14.yaml
-│   ├── page_L6C1_air_qualite_2026-05-23.yaml
-│   └── vignette_L6C1_air_qualite_2026-05-14.yaml
-├── L6C2_17_Pollution_Pollen/
-│   ├── page_L6C2_pollution_pollen_2026-05-14.yaml
-│   ├── page_L6C2_pollution_pollen_2026-06-13.yaml
-│   └── vignette_L6C2_pollution_pollen_2026-05-14.yaml
+│   ├── page_L5C2_batteries_portables_droite.yaml
+│   ├── page_L5C2_batteries_portables_gauche.yaml
+│   └── vignette_L5C2_batteries_portables.yaml
+├── L5C3_15_MariaDB/   <span style="color:#a0a8b6"># 2 sauvegarde(s)</span>
+│   ├── card_audit_buttons.yaml
+│   ├── card_audit_journal.yaml
+│   ├── card_audit_md5.yaml
+│   ├── card_audit_recap.yaml
+│   ├── card_mariadb.yaml
+│   ├── page_L5C3_mariadb.yaml
+│   ├── page_L5C3_systeme_reserve.yaml
+│   ├── vignette_L5C3_mariadb.yaml
+│   └── Script sh/
+├── L6C1_16_Air_Qualite/   <span style="color:#a0a8b6"># 1 sauvegarde(s)</span>
+│   ├── page_L6C1_air_qualite.yaml
+│   └── vignette_L6C1_air_qualite.yaml
+├── L6C2_17_Pollution_Pollen/   <span style="color:#a0a8b6"># 1 sauvegarde(s)</span>
+│   ├── page_L6C2_pollution_pollen.yaml
+│   └── vignette_L6C2_pollution_pollen.yaml
 ├── L6C3_18_VigiEau/
-│   ├── page_L6C3_vigieau_2026-05-14.yaml
-│   └── vignette_L6C3_vigieau_2026-05-14.yaml
-├── PAGE_Home/                                   <span style="color:#a0a8b6"># + Météo/ (3) et www_meteocons/ (17) — assets meteocss-card</span>
-│   ├── Météo/
-│   ├── www_meteocons/
-│   ├── card_detecteur_fuite_home_2026-06-13.yaml
-│   ├── card_foudre_home_2026-06-13.yaml
-│   ├── card_lave_linge_home_2026-06-13.yaml
-│   ├── card_lave_vaisselle_home_2026-06-13.yaml
-│   ├── card_meteocss_home_2026-06-28.yaml
-│   ├── card_presence_home_2026-06-13.yaml
-│   └── card_vscode_home_2026-06-13.yaml
+│   ├── page_L6C3_vigieau.yaml
+│   └── vignette_L6C3_vigieau.yaml
+├── PAGE_Home (L0C0)/
+│   ├── Carte Météo/
+│   ├── Carte Présence/
+│   ├── Congélateur/
+│   ├── Détecteur de fuite/
+│   ├── Impacte de Foudre/
+│   ├── Lave Linge/
+│   ├── Lave Vaisselle/
+│   └── Studio Code Server/
 ├── PAGE_RASPI/
-│   └── page_raspi_2026-05-03.yaml
+│   └── page_raspi.yaml
 ├── md5_compare_2026-05-23.txt                   <span style="color:#bf616a"># residuel racine</span>
 ├── md5_compare_2026-05-31.txt                   <span style="color:#bf616a"># residuel racine</span>
-└── md5_compare_TREECORRIGE_2026-05-24.txt        <span style="color:#bf616a"># residuel racine</span></pre>
+├── md5_compare_TREECORRIGE_2026-05-24.txt                   <span style="color:#bf616a"># residuel racine</span></pre>
     </div>
 
     <!-- INVENTAIRE -->
     <div class="conv-section reveal">
       <h3 class="conv-section-h">2 — Inventaire réel des 18 vignettes + 2 hors-matrice</h3>
-      <p class="conv-section-sub">Relevé direct du dossier local (2026-08-02). Dernière vignette/page par emplacement.</p>
+      <p class="conv-section-sub">Relevé direct du dossier local (2026-10-10). Dernière vignette/page par emplacement.</p>
       <div style="display:flex;gap:.7rem;margin:1rem 0 1.4rem;flex-wrap:wrap;">
         <button type="button" class="btn-tree" onclick="openTreeModal('yaml')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--green);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;animation-delay:0s;">📁 .yaml — voir l'arborescence <span class="btn-tap-hint" style="animation-delay:0s;">👆</span></button>
         <button type="button" class="btn-tree" onclick="openTreeModal('md')" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1.5px solid var(--border-hi);color:var(--amber);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;transition:all .3s;animation-delay:.66s;">📄 .md — voir l'arborescence <span class="btn-tap-hint" style="animation-delay:.66s;">👆</span></button>
@@ -4054,7 +4026,7 @@ genelec_appart_hphc_annuel_um:
 # - Basculement piloté par : docs_automations_YAML/energie/basculement_tarif_hphc.yaml
 # - [modif] Suppression du wrapper "- sensor:" erroné — incompatible avec
 #   !include_dir_merge_named. Chaque entrée doit être à la racine du dict.</pre>
-      <p id="tree-note-yaml-p0-hphc" style="display:none;">Fichier réel en production — <code>DOCS/01_docs_config_system/config_system_YAML/P0_energie_globale/utility_meter/P0_UM_AMHQ_HPHC.yaml</code>. Les 4 cycles (quotidien / hebdomadaire / mensuel / annuel) génèrent chacun 2 sous-capteurs HP et HC automatiquement via la plateforme <code>utility_meter</code>. Le basculement tarifaire est piloté par une automation dédiée — sans elle les UM restent figés.</p>
+      <p id="tree-note-yaml-p0-hphc" style="display:none;">Fichier réel en production — <code>DOCS/01_docs_config_system/config_system_YAML/utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml</code>. Les 4 cycles (quotidien / hebdomadaire / mensuel / annuel) génèrent chacun 2 sous-capteurs HP et HC automatiquement via la plateforme <code>utility_meter</code>. Le basculement tarifaire est piloté par une automation dédiée — sans elle les UM restent figés.</p>
 
       <p id="tree-note-dependances" style="display:none;">Extrait réel sur <code>1803</code> lignes au total — la légende, la matrice des 18 vignettes, et la chaîne de dépendances des 4 premières vignettes (L1C1 Météo, L1C2 Températures, L1C3 Commandes Clim, L2C1 Énergie Générale) a titre d'exemple. Le même niveau de détail (souvent avec tableaux d'entités complets) existe pour les 14 autres.</p>
     </div>
@@ -4072,55 +4044,137 @@ genelec_appart_hphc_annuel_um:
 
 const FILES = [
   {
-    dir: '/homeassistant/sensors/P1_clim_chauffage/P1_kWh/',
-    file: 'P1_kWh_clim_chauffage.yaml',
+    dir: '/homeassistant/sensors/P1_clim_chauffage/P1_DUT/',
+    file: 'P1_DUT_clim_chauffage.yaml',
     content: `# ╭──────────────────────────────────────────────────────────────────────────╮
-# │ CAPTEUR : INTÉGRATION KWH — RADIATEUR CUISINE (RIEMANN P1)               │
+# │ PÔLE 1. SENSORS — DURÉE D'UTILISATION TOTALE [DUT] CHAUFFAGE & CLIM      │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Intégration Riemann pour le radiateur cuisine (Shelly 1PM Gen 4).
-# Convertit la puissance instantanée (W) en énergie cumulative (kWh).
-# Nécessaire car le firmware Shelly Gen 4 marque currentSummDelivered
-# comme UNREPORTABLE_ATTRIBUTE — le kWh natif Zigbee est inaccessible.
+# Capteurs history_stats mesurant le temps de fonctionnement quotidien (DUT)
+# des 6 équipements P1. Remise à zéro à minuit chaque jour.
+# Unité : heures (type: time).
 #
 # ## 🧮 CALCUL & SOURCES :
-# sensor.radiateur_elec_cuisine_power (W) → intégration Riemann (left) → kWh
-# Méthode left : utilise la valeur de puissance du début de l'intervalle.
+# - Salon / Cuisine / Bureau / Chambre : surveille sensor.*_power_status → state "on"
+#   (source : templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml)
+# - SdB Soufflant   : surveille sensor.sdb_soufflant_etat → state "Heat"
+# - SdB Sèche-Serv. : surveille sensor.sdb_seche_serviette_etat → state "Heat"
+#   (sources : templates/P1_clim_chauffage/ui_dashboard/ui_dashboard.yaml)
+#
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
-# | MATÉRIEL              | CAPTEUR BRUT (source)               | CE FICHIER (unique_id)                    | AVAL                             |
-# |:----------------------|:------------------------------------|:------------------------------------------|:---------------------------------|
-# | Shelly 1PM Gen4 (Z2M) | sensor.radiateur_elec_cuisine_power | radiateur_elec_cuisine_energie_totale_kwh | P1_UM_AMHQ.yaml → P1_AVG → L2C2 |
+# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
+# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
+# | P1_ui_dashboard.yaml | sensor.clim_salon_power_status → state:on          | dut_clim_salon                                     | P1_ui_dashboard.yaml → L2C2        |
+# | P1_ui_dashboard.yaml | sensor.radiateur_cuisine_power_status → state:on   | dut_radiateur_cuisine                              | P1_ui_dashboard.yaml → L2C2        |
+# | P1_ui_dashboard.yaml | sensor.clim_bureau_power_status → state:on         | dut_clim_bureau                                    | P1_ui_dashboard.yaml → L2C2        |
+# | P1_ui_dashboard.yaml | sensor.sdb_soufflant_etat → state:Heat             | dut_sdb_soufflant                                  | P1_ui_dashboard.yaml → L2C2        |
+# | P1_ui_dashboard.yaml | sensor.sdb_seche_serviette_etat → state:Heat       | dut_sdb_seche_serviettes                           | P1_ui_dashboard.yaml → L2C2        |
+# | P1_ui_dashboard.yaml | sensor.clim_chambre_power_status → state:on        | dut_clim_chambre                                   | P1_ui_dashboard.yaml → L2C2        |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - Bug firmware Shelly 1PM Gen 4 (S4SW-001P16EU) : UNREPORTABLE_ATTRIBUTE
-#   sur seMetering/currentSummDelivered → kWh natif Z2M inutilisable.
-# - Fix firmware identifié : 20250819-150402/ga0def2d (shellyRPCBugFixed)
-#   → dès que le fix est disponible via Z2M OTA, supprimer ce fichier
-#   et restaurer source directe dans P1_UM_AMHQ.yaml.
-# - Les autres équipements P1 (NOUS plugs, clims) utilisent leur kWh natif
-#   directement — ce fichier est une exception Shelly uniquement.
+# - Les capteurs *_power_status (Salon/Cuisine/Bureau/Chambre) sont des status
+#   textuels ("on" / "off") — bien utiliser state: "on" (pas "On").
+# - Les capteurs SdB utilisent l'état du mode clim ("Heat") → sensible à la casse.
+# - Ce fichier produit : sensor.dut_clim_salon, sensor.dut_radiateur_cuisine,
+#   sensor.dut_clim_bureau, sensor.dut_sdb_soufflant,
+#   sensor.dut_sdb_seche_serviettes, sensor.dut_clim_chambre
+# - sensor.dut_sdb_total (somme soufflant + sèche-serv.) est un capteur template
+#   → à définir dans templates/P1_clim_chauffage/P1_DUT_TOTAL/P1_DUT_TOTAL_SDB.yaml
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - Via P1_UM_AMHQ.yaml → L2C2 (Conso Énergie Clim / Radiateur / Soufflant)
+# - Sert à la vignette L2C2 (Conso Énergie Clim / Radiateur / Soufflant)
+# - Sert aux graphes apexcharts "D.U.T. & Performance" par pièce (page energie-clim)
+
+# ┌─────────────────────────────────┐
+# │ 4. SALON                         │
+# └─────────────────────────────────┘
+
+# --- dut_clim_salon ---
+- platform: history_stats
+  name: "DUT Clim Salon"
+  unique_id: dut_clim_salon
+  entity_id: sensor.salon_power_status
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
 
 # ┌─────────────────────────────────┐
 # │ 5. CUISINE                       │
 # └─────────────────────────────────┘
 
-# --- radiateur_elec_cuisine_energie_totale_kwh ---
-- platform: integration
-  source: sensor.radiateur_elec_cuisine_power
-  name: "Radiateur Elec Cuisine Energie Totale kWh"
-  unique_id: radiateur_elec_cuisine_energie_totale_kwh
-  method: left
+# --- dut_radiateur_cuisine ---
+- platform: history_stats
+  name: "DUT Radiateur Cuisine"
+  unique_id: dut_radiateur_cuisine
+  entity_id: sensor.cuisine_power_status
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+
+# ┌─────────────────────────────────┐
+# │ 7. BUREAU                        │
+# └─────────────────────────────────┘
+
+# --- dut_clim_bureau ---
+- platform: history_stats
+  name: "DUT Clim Bureau"
+  unique_id: dut_clim_bureau
+  entity_id: sensor.bureau_power_status
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+
+# ┌─────────────────────────────────┐
+# │ 8. SDB                           │
+# └─────────────────────────────────┘
+
+# --- dut_sdb_soufflant ---
+- platform: history_stats
+  name: "DUT SdB Soufflant"
+  unique_id: dut_sdb_soufflant
+  entity_id: sensor.sdb_soufflant_etat
+  state: "Heat"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+
+# --- dut_sdb_seche_serviettes ---
+- platform: history_stats
+  name: "DUT SdB Seche Serviettes"
+  unique_id: dut_sdb_seche_serviettes
+  entity_id: sensor.sdb_seche_serviette_etat
+  state: "Heat"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+
+# ┌─────────────────────────────────┐
+# │ 9. CHAMBRE                       │
+# └─────────────────────────────────┘
+
+# --- dut_clim_chambre ---
+- platform: history_stats
+  name: "DUT Clim Chambre"
+  unique_id: dut_clim_chambre
+  entity_id: sensor.chambre_power_status
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
 
 # annotations_log:
-# - [2026-06-14] Création : Riemann cuisine restauré.
-#   Bug firmware Shelly 1PM Gen4 — UNREPORTABLE_ATTRIBUTE sur kWh natif Z2M.
-#   Source : sensor.radiateur_elec_cuisine_power → kWh calculé par HA.`
+# [L1]   Titre corrigé : "P1. SENSORS" → "PÔLE 1. SENSORS" (standard CLAUDE.md)
+# [L2]   Source : ancien repo sensors/p1_1_sensors - dut.yaml — porté dans ReBuild
+# [L3]   Convention : platform: history_stats — type time — reset minuit
+# [L4]   Salon/Cuisine/Bureau/Chambre : entity_id = *_power_status, state = "on"
+# [L5]   SdB : entity_id = *_etat (clim mode), state = "Heat" (sensible casse)
+# [L6]   dut_sdb_total (somme) → templates/P1_clim_chauffage/P1_DUT_TOTAL/P1_DUT_TOTAL_SDB.yaml`
   },
   {
     dir: '/homeassistant/sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/',
@@ -4188,7 +4242,7 @@ const FILES = [
   {
     dir: '/homeassistant/utility_meter/P1_clim_chauffage/',
     file: 'P1_UM_AMHQ.yaml',
-    content: `# ╭──────────────────────────────────────────────────────────────────────────╮
+    content: `﻿# ╭──────────────────────────────────────────────────────────────────────────╮
 # │ PÔLE 1 — UTILITY METER AMHQ : CHAUFFAGE & CLIMATISATION                  │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
@@ -4199,27 +4253,28 @@ const FILES = [
 #
 # ## 🧮 CALCUL & SOURCES :
 # - Sources : firmware direct NOUS (Z2M) — sensor.*_nous_energy (kWh natif)
-# - Exception cuisine : Riemann — sensor.radiateur_elec_cuisine_energie_totale_kwh
-# - Remise à zéro : Quotidien=minuit / Hebdo=lundi / Mensuel=1er / Annuel=1er jan
+# - Cuisine : source directe — sensor.radiateur_elec_cuisine_energy (Riemann supprime le 2026-09-24)
+# - Remise à zéro : Quotidien = minuit / Hebdo = lundi / Mensuel = 1er / Annuel = 1er jan
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
-# | MATÉRIEL                  | CAPTEUR BRUT (source)                             | CE FICHIER (unique_id)   | AVAL          |
-# |:--------------------------|:--------------------------------------------------|:-------------------------|:--------------|
-# | NOUS plug (Z2M)           | sensor.clim_salon_nous_energy                     | clim_salon_*_um          | P1_AVG → L2C2 |
-# | Shelly 1PM Gen4 [calculé] | sensor.radiateur_elec_cuisine_energie_totale_kwh  | radiateur_elec_cuisine_* | P1_AVG → L2C2 |
-# | NOUS plug (Z2M)           | sensor.clim_bureau_nous_energy                    | clim_bureau_*_um         | P1_AVG → L2C2 |
-# | NOUS plug (Z2M)           | sensor.prise_soufflant_salle_de_bain_nous_energy  | soufflant_sdb_*_um       | P1_AVG → L2C2 |
-# | NOUS plug (Z2M)           | sensor.clim_chambre_nous_energy                   | clim_chambre_*_um        | P1_AVG → L2C2 |
+# | MATÉRIEL             | CAPTEUR BRUT (source)                                    | CE FICHIER (unique_id)              | AVAL                                |
+# |:---------------------|:---------------------------------------------------------|:------------------------------------|:------------------------------------|
+# | NOUS plug (Z2M)      | sensor.clim_salon_nous_energy                            | clim_salon_*_um                     | P1_AVG.yaml / P1_TOTAL_AMHQ → L2C2 |
+# | Shelly 1PM Gen4 (Z2M) | sensor.radiateur_elec_cuisine_energy                     | radiateur_elec_cuisine_*_um         | P1_AVG.yaml / P1_TOTAL_AMHQ → L2C2 |
+# | NOUS plug (Z2M)      | sensor.clim_bureau_nous_energy                           | clim_bureau_*_um                    | P1_AVG.yaml / P1_TOTAL_AMHQ → L2C2 |
+# | NOUS plug (Z2M)      | sensor.prise_soufflant_salle_de_bain_nous_energy         | soufflant_sdb_*_um                  | P1_AVG.yaml / P1_TOTAL_AMHQ → L2C2 |
+# | NOUS plug (Z2M)      | sensor.prise_seche_serviette_salle_de_bain_nous_energy   | seche_serviette_sdb_*_um            | P1_AVG.yaml / P1_TOTAL_AMHQ → L2C2 |
+# | NOUS plug (Z2M)      | sensor.clim_chambre_nous_energy                          | clim_chambre_*_um                   | P1_AVG.yaml / P1_TOTAL_AMHQ → L2C2 |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
-# - !include_dir_merge_named : ce fichier retourne un DICT — jamais une liste.
-# - EXCEPTION cuisine : Shelly 1PM Gen4 bug firmware (UNREPORTABLE_ATTRIBUTE)
-#   → source via Riemann (P1_kWh_clim_chauffage.yaml). Fix OTA à venir.
-# - Suffixe _um unifié depuis refactoring 2026-04-25.
+# - Sources firmware direct (kWh natif NOUS Z2M) pour clims, soufflant, sèche-serviette.
+# - Cuisine : source directe depuis le 2026-09-24 (fix firmware Shelly actif — kWh natif
+#   Z2M de nouveau reporte). Fichiers Riemann supprimes (sensors/ + templates/).
+# - Suffixe _um (sans _kwh_) : convention uniforme depuis refactoring 2026-04-25.
 #
 # ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L2C2 (Conso Énergie Clim / Radiateur / Soufflant)
+# - Alimente la vignette L2C2 (Conso Énergie Clim / Radiateur / Soufflant)
 
 # ┌─────────────────────────────────┐
 # │ 4. SALON                         │
@@ -4258,22 +4313,192 @@ clim_salon_quotidien_um:
 # └─────────────────────────────────┘
 
 # --- radiateur_elec_cuisine_annuel_um ---
+# [AVANT 2026-09-24] Riemann — remplace par la source directe (fix firmware Shelly actif)
+# radiateur_elec_cuisine_annuel_um:
+#   source: sensor.radiateur_elec_cuisine_energie_totale_kwh
+#   name: "Radiateur Elec Cuisine Annuel UM"
+#   unique_id: radiateur_elec_cuisine_annuel_um
+#   cycle: yearly
 radiateur_elec_cuisine_annuel_um:
-  source: sensor.radiateur_elec_cuisine_energie_totale_kwh
+  source: sensor.radiateur_elec_cuisine_energy
   name: "Radiateur Elec Cuisine Annuel UM"
   unique_id: radiateur_elec_cuisine_annuel_um
   cycle: yearly
 
 # --- radiateur_elec_cuisine_mensuel_um ---
+# [AVANT 2026-09-24] Riemann — remplace par la source directe (fix firmware Shelly actif)
+# radiateur_elec_cuisine_mensuel_um:
+#   source: sensor.radiateur_elec_cuisine_energie_totale_kwh
+#   name: "Radiateur Elec Cuisine Mensuel UM"
+#   unique_id: radiateur_elec_cuisine_mensuel_um
+#   cycle: monthly
 radiateur_elec_cuisine_mensuel_um:
-  source: sensor.radiateur_elec_cuisine_energie_totale_kwh
+  source: sensor.radiateur_elec_cuisine_energy
   name: "Radiateur Elec Cuisine Mensuel UM"
   unique_id: radiateur_elec_cuisine_mensuel_um
   cycle: monthly
 
+# --- radiateur_elec_cuisine_hebdomadaire_um ---
+# [AVANT 2026-09-24] Riemann — remplace par la source directe (fix firmware Shelly actif)
+# radiateur_elec_cuisine_hebdomadaire_um:
+#   source: sensor.radiateur_elec_cuisine_energie_totale_kwh
+#   name: "Radiateur Elec Cuisine Hebdomadaire UM"
+#   unique_id: radiateur_elec_cuisine_hebdomadaire_um
+#   cycle: weekly
+radiateur_elec_cuisine_hebdomadaire_um:
+  source: sensor.radiateur_elec_cuisine_energy
+  name: "Radiateur Elec Cuisine Hebdomadaire UM"
+  unique_id: radiateur_elec_cuisine_hebdomadaire_um
+  cycle: weekly
+
+# --- radiateur_elec_cuisine_quotidien_um ---
+# [AVANT 2026-09-24] Riemann — remplace par la source directe (fix firmware Shelly actif)
+# radiateur_elec_cuisine_quotidien_um:
+#   source: sensor.radiateur_elec_cuisine_energie_totale_kwh
+#   name: "Radiateur Elec Cuisine Quotidien UM"
+#   unique_id: radiateur_elec_cuisine_quotidien_um
+#   cycle: daily
+radiateur_elec_cuisine_quotidien_um:
+  source: sensor.radiateur_elec_cuisine_energy
+  name: "Radiateur Elec Cuisine Quotidien UM"
+  unique_id: radiateur_elec_cuisine_quotidien_um
+  cycle: daily
+
+# ┌─────────────────────────────────┐
+# │ 7. BUREAU                        │
+# └─────────────────────────────────┘
+
+# --- clim_bureau_annuel_um ---
+clim_bureau_annuel_um:
+  source: sensor.clim_bureau_nous_energy
+  name: "Clim Bureau Annuel UM"
+  unique_id: clim_bureau_annuel_um
+  cycle: yearly
+
+# --- clim_bureau_mensuel_um ---
+clim_bureau_mensuel_um:
+  source: sensor.clim_bureau_nous_energy
+  name: "Clim Bureau Mensuel UM"
+  unique_id: clim_bureau_mensuel_um
+  cycle: monthly
+
+# --- clim_bureau_hebdomadaire_um ---
+clim_bureau_hebdomadaire_um:
+  source: sensor.clim_bureau_nous_energy
+  name: "Clim Bureau Hebdomadaire UM"
+  unique_id: clim_bureau_hebdomadaire_um
+  cycle: weekly
+
+# --- clim_bureau_quotidien_um ---
+clim_bureau_quotidien_um:
+  source: sensor.clim_bureau_nous_energy
+  name: "Clim Bureau Quotidien UM"
+  unique_id: clim_bureau_quotidien_um
+  cycle: daily
+
+# ┌─────────────────────────────────┐
+# │ 8. SDB                           │
+# └─────────────────────────────────┘
+
+# --- soufflant_sdb_annuel_um ---
+soufflant_sdb_annuel_um:
+  source: sensor.prise_soufflant_salle_de_bain_nous_energy
+  name: "Soufflant SDB Annuel UM"
+  unique_id: soufflant_sdb_annuel_um
+  cycle: yearly
+
+# --- soufflant_sdb_mensuel_um ---
+soufflant_sdb_mensuel_um:
+  source: sensor.prise_soufflant_salle_de_bain_nous_energy
+  name: "Soufflant SDB Mensuel UM"
+  unique_id: soufflant_sdb_mensuel_um
+  cycle: monthly
+
+# --- soufflant_sdb_hebdomadaire_um ---
+soufflant_sdb_hebdomadaire_um:
+  source: sensor.prise_soufflant_salle_de_bain_nous_energy
+  name: "Soufflant SDB Hebdomadaire UM"
+  unique_id: soufflant_sdb_hebdomadaire_um
+  cycle: weekly
+
+# --- soufflant_sdb_quotidien_um ---
+soufflant_sdb_quotidien_um:
+  source: sensor.prise_soufflant_salle_de_bain_nous_energy
+  name: "Soufflant SDB Quotidien UM"
+  unique_id: soufflant_sdb_quotidien_um
+  cycle: daily
+
+# --- seche_serviette_sdb_annuel_um ---
+seche_serviette_sdb_annuel_um:
+  source: sensor.prise_seche_serviette_salle_de_bain_nous_energy
+  name: "Seche Serviette SDB Annuel UM"
+  unique_id: seche_serviette_sdb_annuel_um
+  cycle: yearly
+
+# --- seche_serviette_sdb_mensuel_um ---
+seche_serviette_sdb_mensuel_um:
+  source: sensor.prise_seche_serviette_salle_de_bain_nous_energy
+  name: "Seche Serviette SDB Mensuel UM"
+  unique_id: seche_serviette_sdb_mensuel_um
+  cycle: monthly
+
+# --- seche_serviette_sdb_hebdomadaire_um ---
+seche_serviette_sdb_hebdomadaire_um:
+  source: sensor.prise_seche_serviette_salle_de_bain_nous_energy
+  name: "Seche Serviette SDB Hebdomadaire UM"
+  unique_id: seche_serviette_sdb_hebdomadaire_um
+  cycle: weekly
+
+# --- seche_serviette_sdb_quotidien_um ---
+seche_serviette_sdb_quotidien_um:
+  source: sensor.prise_seche_serviette_salle_de_bain_nous_energy
+  name: "Seche Serviette SDB Quotidien UM"
+  unique_id: seche_serviette_sdb_quotidien_um
+  cycle: daily
+
+# ┌─────────────────────────────────┐
+# │ 9. CHAMBRE                       │
+# └─────────────────────────────────┘
+
+# --- clim_chambre_annuel_um ---
+clim_chambre_annuel_um:
+  source: sensor.clim_chambre_nous_energy
+  name: "Clim Chambre Annuel UM"
+  unique_id: clim_chambre_annuel_um
+  cycle: yearly
+
+# --- clim_chambre_mensuel_um ---
+clim_chambre_mensuel_um:
+  source: sensor.clim_chambre_nous_energy
+  name: "Clim Chambre Mensuel UM"
+  unique_id: clim_chambre_mensuel_um
+  cycle: monthly
+
+# --- clim_chambre_hebdomadaire_um ---
+clim_chambre_hebdomadaire_um:
+  source: sensor.clim_chambre_nous_energy
+  name: "Clim Chambre Hebdomadaire UM"
+  unique_id: clim_chambre_hebdomadaire_um
+  cycle: weekly
+
+# --- clim_chambre_quotidien_um ---
+clim_chambre_quotidien_um:
+  source: sensor.clim_chambre_nous_energy
+  name: "Clim Chambre Quotidien UM"
+  unique_id: clim_chambre_quotidien_um
+  cycle: daily
+
 # annotations_log:
-# - [2026-04-25] Refactoring : suffixe _um unifié sur tous les compteurs.
-# - [2026-06-14] Exception cuisine : source Riemann (bug Shelly 1PM Gen4).`
+# - [2026-04-25] Migration Riemann → direct : toutes sources *_energie_totale_kwh
+#               remplacées par sensor.*_nous_energy (firmware NOUS Z2M, kWh natif).
+# - [2026-04-25] Naming : _um → _um (convention uniforme — 24 entrées).
+# - [2026-04-25] Ajout name: + unique_id: par entrée (manquants).
+# - [2026-04-25] Ajout slug tertiaire individuel par entrée (était groupé par équipement).
+# - [2026-04-25] En-tête : chaîne de dépendances complète + PIÈGES mis à jour.
+# - [2026-06-14] Cuisine : retour Riemann — bug firmware Shelly 1PM Gen4 (UNREPORTABLE_ATTRIBUTE).
+#               source: _energy → sensor.radiateur_elec_cuisine_energie_totale_kwh (×4 cycles).
+# - [2026-09-24] Cuisine : migration Riemann → direct — source = sensor.radiateur_elec_cuisine_energy
+#               (fix firmware Shelly 1PM Gen4 actif). Fichiers Riemann supprimes (sensors/ + templates/).`
   }
 ];
 
@@ -4569,7 +4794,7 @@ function closeScriptModal(e) {
 const TREES = {
   config_yaml:       { title: 'config_system_YAML/ — arborescence réelle (2026-08-02)',      srcId: 'tree-src-config-yaml', noteId: 'tree-note-config-yaml' },
   config_md:         { title: 'config_system_MD/ — arborescence réelle (2026-08-02)',        srcId: 'tree-src-config-md', noteId: 'tree-note-config-md' },
-  yaml:              { title: 'dashboard_docs_YAML/ — arborescence réelle (2026-08-02)',    srcId: 'tree-src-yaml' },
+  yaml:              { title: 'dashboard_docs_YAML/ — arborescence réelle (2026-10-10)',    srcId: 'tree-src-yaml' },
   md:                { title: 'dashboard_docs_MD/ — arborescence réelle (2026-08-02)',       srcId: 'tree-src-md' },
   automations_yaml:  { title: 'docs_automations_YAML/ — arborescence réelle (2026-08-02)',   srcId: 'tree-src-automations-yaml', noteId: 'tree-note-automations-yaml' },
   automations_md:    { title: 'docs_automations_MD/ — arborescence réelle (2026-08-02)',     srcId: 'tree-src-automations-md',   noteId: 'tree-note-automations-md' },
