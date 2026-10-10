@@ -1122,7 +1122,7 @@ footer a:hover { color:var(--green); }
         <span style="font-size:0.7rem;color:var(--text-2)">19 x 4 cycles AMHQ</span>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 1rem;border-right:1px solid rgba(29,77,46,0.12)">
-        <span class="counter" data-target="513" style="font-size:3rem;font-weight:800;color:var(--green);line-height:1">0</span>
+        <span class="counter" data-target="514" style="font-size:3rem;font-weight:800;color:var(--green);line-height:1">0</span>
         <span style="font-size:0.8rem;font-weight:700;color:var(--text)">Fichiers config</span>
         <span style="font-size:0.7rem;color:var(--text-2)">indexes RAG *</span>
       </div>
@@ -3449,7 +3449,16 @@ input_datetime: !include input_datetime.yaml</pre>
     <!-- RÈGLES -->
     <div class="conv-section reveal">
       <h3 class="conv-section-h">1 — Versioning et nommage</h3>
-      <p class="conv-section-sub">Un sous-dossier par vignette (<code>L{ligne}C{colonne}_{index}_{Nom}/</code>). Le nom de travail ne porte <b>jamais</b> de date : chaque modification crée une sauvegarde à côté du fichier. Le jour même : <code>.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}</code>, <b>10 au maximum</b> pour un même fichier (la 11e part à la corbeille Windows). Le lendemain, <code>/histo</code> consolide : la plus récente devient <code>.bak_AAAA_MM_JJ.{ext}</code>, les autres partent à la corbeille ; au-delà de <b>3</b> sauvegardes consolidées pour un fichier, la 4e part à la corbeille.</p>
+      <p class="conv-section-sub">Chaque vignette du tableau de bord a son dossier. Dans ce dossier il n'y a qu'<b>un seul fichier de travail</b> : son nom ne change jamais et ne porte jamais de date. Avant chaque modification, une copie de la version precedente est deposee a cote, avec l'heure dans son nom. On sait donc toujours quel fichier est en vigueur (celui qui n'a pas d'horodatage), et on peut revenir a la version d'avant.</p>
+      <div style="background:var(--bg-card);border-left:3px solid var(--green);padding:.9rem 1.1rem;border-radius:0 6px 6px 0;margin:.9rem 0;">
+        <div style="font-size:.7rem;font-weight:700;color:var(--green);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em;">Un exemple, pour voir</div>
+        <p style="font-size:.82rem;color:var(--text-2);line-height:1.9;margin:0;">Dossier <code>L1C1_01_Meteo/</code>, la page Meteo.<br>
+        <b>Au repos</b> : <code>page_L1C1_meteo.yaml</code>. C'est le fichier de travail, celui que le tableau de bord utilise.<br>
+        <b>Une modification, le 10/10 a 15h04</b> : la version precedente part en <code>page_L1C1_meteo.bak_2026_10_10_15h04m12s.yaml</code>, et le fichier de travail garde son nom.<br>
+        <b>Deux modifications de plus le meme jour</b> : deux sauvegardes de plus. Au-dela de 10 sauvegardes pour un meme fichier dans la journee, la plus ancienne part a la corbeille Windows.<br>
+        <b>Le lendemain, <code>/histo</code> range</b> : la plus recente devient <code>page_L1C1_meteo.bak_2026_10_10.yaml</code>, les autres partent a la corbeille. Jamais plus de 3 journees d'historique pour un meme fichier.</p>
+      </div>
+      <p style="font-size:.82rem;color:var(--text-2);line-height:1.8;margin:.6rem 0 1rem;">Pourquoi ces regles : un nom sans date dit d'un coup d'oeil quel fichier est en service ; l'horodatage permet de revenir en arriere ; le plafond empeche les dossiers de gonfler sans fin.</p>
       <div style="overflow-x:auto;margin:1.1rem 0;">
         <table style="width:100%;border-collapse:collapse;font-size:.8rem;">
           <thead>
@@ -3483,6 +3492,8 @@ input_datetime: !include input_datetime.yaml</pre>
           </tbody>
         </table>
       </div>
+      <p style="font-size:.82rem;color:var(--text-2);line-height:1.8;margin:.9rem 0 0;"><b>Ce qui part en production</b> : le fichier de travail seulement. Les sauvegardes restent en local — mettre plusieurs versions d'un meme objet en production ne sert a rien et remplit le disque pour rien.</p>
+      <p style="font-size:.82rem;color:var(--text-2);line-height:1.8;margin:.6rem 0 0;"><b>L'exception</b> : <code>Dashboard_COMPLET/</code> garde une photographie du tableau de bord entier par jour, sous <code>Dashboard_YYYY_MM_DD.yaml</code>, sans limite de nombre. Ce sont des photos datees, pas des versions de travail : on ne les renomme pas et on ne les efface pas.</p>
       <div style="background:var(--bg-card);border-left:3px solid var(--amber);padding:.8rem 1rem;border-radius:0 6px 6px 0;margin-top:.9rem;">
         <div style="font-size:.7rem;font-weight:700;color:var(--amber);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.06em;">⚠️ Anomalie relevée à l'audit</div>
         <p style="font-size:.8rem;color:var(--text-2);line-height:1.75;">Un fichier <code>.bak</code> oublié dans <code>L1C2_02_Temperatures/</code> : <code>page_L1C2_temperatures_2026-05-22.yaml.bak</code> — résidu d'édition, à supprimer (hors convention de nommage).</p>
@@ -3493,7 +3504,7 @@ input_datetime: !include input_datetime.yaml</pre>
     <!-- ARBO YAML (contenu deplace dans modal, voir boutons section Inventaire) -->
     <div class="conv-section reveal" style="display:none;">
       <pre id="tree-src-yaml" style="display:none;">dashboard_docs_YAML/
-├── Dashboard_COMPLET/                          <span style="color:#a0a8b6"># 21 versions, 2026-03-16 → 2026-10-04</span>
+├── Dashboard_COMPLET/                          <span style="color:#a0a8b6"># 22 versions, 2026-03-16 → 2026-10-04</span>
 │   ├── Dashboard_2026_03_16.yaml
 │   ├── Dashboard_2026_03_20.yaml
 │   ├── Dashboard_2026_03_22.yaml
@@ -3514,12 +3525,13 @@ input_datetime: !include input_datetime.yaml</pre>
 │   ├── Dashboard_2026_08_09.yaml
 │   ├── Dashboard_2026_09_20.yaml
 │   ├── Dashboard_2026_09_24.yaml
-│   └── Dashboard_2026_10-04.yaml
+│   ├── Dashboard_2026_10_04.bak_2026_10_04.yaml
+│   └── Dashboard_2026_10_04.yaml
 ├── L1C1_01_Meteo/   <span style="color:#a0a8b6"># 2 sauvegarde(s)</span>
 │   ├── card_duree_du_jour.yaml
 │   ├── page_L1C1_meteo.yaml
 │   └── vignette_L1C1_meteo.yaml
-├── L1C2_02_Temperatures/   <span style="color:#a0a8b6"># 5 sauvegarde(s)</span>
+├── L1C2_02_Temperatures/   <span style="color:#a0a8b6"># 6 sauvegarde(s)</span>
 │   ├── page_L1C2_temperatures.yaml
 │   └── vignette_L1C2_temperatures.yaml
 │   └── page_L1C2_temperatures_2026-05-22.yaml.bak   <span style="color:#bf616a"># ancien format</span>
@@ -3537,7 +3549,7 @@ input_datetime: !include input_datetime.yaml</pre>
 │   ├── page_L2C1_energie_principale.yaml
 │   ├── page_L2C1_energie_temps_reel.yaml
 │   └── vignette_L2C1_energie.yaml
-├── L2C2_05_Energie_Clim/   <span style="color:#a0a8b6"># 3 sauvegarde(s)</span>
+├── L2C2_05_Energie_Clim/   <span style="color:#a0a8b6"># 4 sauvegarde(s)</span>
 │   ├── page_L2C2_energie_clim.yaml
 │   └── vignette_L2C2_energie_clim.yaml
 ├── L2C3_06_Energie_Eclairage/
@@ -3557,7 +3569,7 @@ input_datetime: !include input_datetime.yaml</pre>
 │   ├── card_popup_memory.yaml
 │   ├── page_L4C1_mini_pc.yaml
 │   └── vignette_L4C1_mini_pc.yaml
-├── L4C2_11_Proxmox/   <span style="color:#a0a8b6"># 6 sauvegarde(s)</span>
+├── L4C2_11_Proxmox/   <span style="color:#a0a8b6"># 8 sauvegarde(s)</span>
 │   ├── card_services_ha_z2m_mariadb.yaml
 │   ├── page_L4C2_proxmox.yaml
 │   └── vignette_L4C2_proxmox.yaml
@@ -3727,7 +3739,8 @@ input_datetime: !include input_datetime.yaml</pre>
 ├── L6C3_VIGIEAU/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── L6C3_VIGNETTE_VIGIEAU.md
 │   └── PAGE_VIGIEAU.md
-├── _ARCHIVE/    <span style="color:#a0a8b6"># 2 fichiers + 2 sauvegardes</span>
+├── _ARCHIVE/    <span style="color:#a0a8b6"># 3 fichiers + 2 sauvegardes</span>
+│   ├── DEPENDANCES_GLOBALES_archive_2026-09-28.md
 │   ├── DEPENDANCES_GLOBALES_archive_2026-10-07_18h13.md
 │   └── DEPENDANCES_GLOBALES_archive_2026-10-07_19h20.md
 ├── DEPENDANCES_GLOBALES.bak_2026_09_20.md
