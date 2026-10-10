@@ -32,18 +32,19 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── Github/                             (14 dont 12 sauvegardes - INDEX_GLOBAL.md · README.md, miroirs travail du repo)
 ├── HTML/                               (41 - maquettes/captures)
 ├── prompt/ · Claude outputs/ · _old_avant_staging/ · energie/   (travaux et conteneurs)
-├── Infra_Proxmox/                      (réseau, certs - + save/)
+├── Infra_Proxmox/                      (docs/proxmox|reseau|sonoff/ · scripts/ .sh+.ps1 · certificats/ .crt · journaux/ .log ; save/ vide)
+├── MOC/                                (un dossier par MOC : MOC_DASHBOARD/ · MOC_DEPENDANCES/ · MOC_PRESENCE/, chacun avec son .md et ses sauvegardes ; hors périmètre /histo)
 ├── scripts/                            (5 - audit_md5_md.sh · audit_md5_yaml.sh · check_yaml_forme.py · ha_git_backup.sh · hermes_gen_dependances.py)
-├── historique/                         (67 - JOURNAL_COMPLET_*.md · histo_YYYY-MM-DD_S*.txt · ARCHIVE_SESSIONS_HA_2026-03-15_2026-05-14.md · archives MD5)
-└── docs/                               (681 fichiers)
-    ├── 00_IA/                          (34 dont 25 sauvegardes - IA_CONTEXT_BASE.md · ha-erodi-architecture.html · RAPPORT_AUDIT_ENERGETIQUE_*.md ×2 · Grille_Tarif_Bleu_EDF_2026-08-01.csv/.pdf · confort_cible_calcul_flow.png)
+├── historique/                         (153 dont 24 sauvegardes - journaux JOURNAL_COMPLET/JOURNAL_FUSIONNE_*.md, histo_YYYY-MM-DD_S*.txt/.md, ARCHIVE_SESSIONS_HA_*.md, archive MD5, histo.md = copie du skill + ses sauvegardes)
+└── docs/                               (679 fichiers)
+    ├── 00_IA/                          (35 dont 26 sauvegardes - IA_CONTEXT_BASE.md · ha-erodi-architecture.html · RAPPORT_AUDIT_ENERGETIQUE_*.md ×2 · Grille_Tarif_Bleu_EDF_2026-08-01.csv/.pdf · confort_cible_calcul_flow.png)
     │   └── sous_context_ia/            (20 dont 12 sauvegardes - 8 sous-contextes IA_*.md + index arbo)
     ├── 01_docs_config_system/          (113 - config_system_MD/ 2 + config_system_YAML/ 111 fichiers dont 7 sauvegardes, resynchronisé GitHub->local 2026-10-04, SYNC=80 DIFF=0)
-    ├── 02_docs_dashboard/              (243 - dashboard_docs_MD 88 · dashboard_docs_YAML 155)
+    ├── 02_docs_dashboard/              (242 - dashboard_docs_MD 87 · dashboard_docs_YAML 155)
     ├── 03_docs_automations/            (241 dont 9 sauvegardes - docs_automations_MD · docs_automations_YAML)
     ├── 04_docs_scripts/                (24 - SH · SH_MD · YAML · YAML_MD)
-    ├── 05_docs_MD_system/              (8 dont 3 sauvegardes)
-    └── 05_docs_skills/                 (17 dont 7 sauvegardes - 10 SKILL.md du projet, copies .md)
+    ├── 05_docs_MD_system/              (6 dont 3 sauvegardes)
+    └── 05_docs_skills/                 (9 - 9 dossiers skill_<nom>/ contenant la copie .md de chaque SKILL.md du projet ; histo.md vit dans historique/)
 ```
 
 **Dossiers d'archive** (contenu sorti du flux, gardé pour l'historique) :
@@ -110,14 +111,14 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   └── meteo/ (M_03_meteo_UM_blitzortung)
 │
 ├── custom_components/ · themes/ · tts/ · www/ · deps/   (divers, hors périmètre docs HA)
-└── docs/                               (572 - miroir pushé depuis local docs/)
+└── docs/                               (569 - miroir pushé depuis local docs/)
     ├── 00_IA/                          (9 - IA_CONTEXT_BASE.md + sous_context_ia/8, aucune sauvegarde .bak sur H:)
     ├── 01_docs_config_system/          (99 - config_system_MD/1 + config_system_YAML/98)
-    ├── 02_docs_dashboard/              (205 - dashboard_docs_MD 88 · dashboard_docs_YAML 117)
+    ├── 02_docs_dashboard/              (204 - dashboard_docs_MD 52 · dashboard_docs_YAML 151)
     ├── 03_docs_automations/            (224 - docs_automations_MD · docs_automations_YAML)
     ├── 04_docs_scripts/                (20 - SH/6 · SH_MD/3 · YAML/8 · YAML_MD/3)
-    ├── 05_docs_MD_system/              (5 - ENTITES_INDEX.md · MOC_DEPENDANCES.md · RAPPORT_TRI_ENTITES_2026-09-20.md · map_of_content_obsidian/ · matrisse_template_doc/)
-    └── 05_docs_skills/                 (10 - copies des SKILL.md, poussées depuis local docs/05_docs_skills/)
+    ├── 05_docs_MD_system/              (4 - ENTITES_INDEX.md · RAPPORT_TRI_ENTITES_2026-09-20.md · map_of_content_obsidian/ vide · matrisse_template_doc/)
+    └── 05_docs_skills/                 (9 - 9 dossiers skill_<nom>/ copies des SKILL.md, poussés depuis local docs/05_docs_skills/)
 ```
 
 **Supprimés de prod (ne jamais recréer)** : `mqtt/` (capteur NodOn chambre, nettoyé 2026-07-18) · `packages/` (cssmeteo, retiré ~07/2026) · `camera.yaml` · `shell_command.yaml` monolithique · `#sensors.yaml` / `#templates.yaml` / `#utility_meter.yaml` désactivés · `templates/Mini-PC/` (capteurs lus à la source) · `templates/P2_prise/P2_ui_dashboard/` (retiré le 2026-09-20) · `input_booleans/P3/` + `templates/Inter_BP_Virtuel/P3/` (boutons virtuels du salon, retirés le 2026-09-29).
