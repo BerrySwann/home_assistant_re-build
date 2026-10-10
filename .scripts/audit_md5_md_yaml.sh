@@ -60,7 +60,7 @@ echo "  → URL encoding via python3 urllib.parse.quote" >> "$LOG"
 echo "" >> "$LOG"
 
 echo "── COMPARAISON PROD vs GITHUB ───────────────────────────────────────────────" >> "$LOG"
-printf "%-100s | %-8s | %-8s | %s\n" "FICHIER" "PROD" "GITHUB" "STATUT" >> "$LOG"
+printf "%-8s | %-8s | %-17s | %s\n" "PROD" "GITHUB" "STATUT" "FICHIER" >> "$LOG"
 printf '%.0s─' {1..137} >> "$LOG"; echo "" >> "$LOG"
 
 OK=0; DIFF_COUNT=0; ABSENT=0
@@ -87,12 +87,13 @@ while IFS='|' read -r rel prod_md5; do
         fi
     fi
 
-    byte_len=$(echo -n "$rel" | wc -c)
-    char_len=${#rel}
-    extra=$((byte_len - char_len))
-    width=$((100 + extra))
-    printf "%-${width}s | %.8s | %.8s | %s\n" \
-        "$rel" "${prod_md5:-??????}" "${github_md5:-??????}" "$statut" >> "$LOG"
+    case "$statut" in
+        *SYNC|*DIFF) statut_w=7 ;;
+        *) statut_w=17 ;;
+    esac
+    pad=$(printf '%*s' $((17 - statut_w)) '')
+    printf "%-8.8s | %-8.8s | %s%s | %s\n" \
+        "${prod_md5:-??????}" "${github_md5:-??????}" "$statut" "$pad" "$rel" >> "$LOG"
 done < "$TMP_PROD"
 
 # ── RÉSUMÉ ────────────────────────────────────────────────────────────────
@@ -114,3 +115,4 @@ echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 docs terminé : $TOTAL fichi
 # [2026-08-08] Création — miroir de audit_md5.sh pour les fichiers .md de /config/docs/
 # [2026-08-08] FIX : réécriture LF pur (fichier initial écrit en CRLF via Windows → bash error \r)
 # [2026-08-09] Extension périmètre : tout docs/ sans exclusion (.md + .yaml + .sh)
+# [2026-10-10] Colonnes du tableau : PROD | GITHUB | STATUT | FICHIER (fichier en dernier, statuts alignes). Lignes RESULTAT et Audit MD5 docs termine inchangees.

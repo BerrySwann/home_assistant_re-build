@@ -62,7 +62,7 @@ echo "  → /tmp usage : 1 fichier yaml à la fois (~KB, réutilisé)" >> "$LOG"
 echo "" >> "$LOG"
 
 echo "── COMPARAISON PROD vs GITHUB ───────────────────────────────────────────────" >> "$LOG"
-printf "%-110s | %-8s | %-8s | %s\n" "FICHIER" "PROD" "GITHUB" "STATUT" >> "$LOG"
+printf "%-8s | %-8s | %-16s | %s\n" "PROD" "GITHUB" "STATUT" "FICHIER" >> "$LOG"
 printf '%.0s─' {1..147} >> "$LOG"; echo "" >> "$LOG"
 
 OK=0; DIFF_COUNT=0; PUSH_MANQUANT=0
@@ -75,7 +75,7 @@ while IFS='|' read -r file prod_md5; do
     HTTP_CODE=$(curl -sf --max-time 15 -o "$TMP_GH" \
         -w '%{http_code}' "${GH_BASE}/${encoded_file}" 2>/dev/null || echo "000")
 
-    if [[ "$HTTP_CODE" != "200" ]]; then
+    if [[ "$HTTP_CODE" != "200" ]] || [[ ! -s "$TMP_GH" ]]; then
         github_md5=""
         statut="⚠️  PUSH MANQUANT"
         PUSH_MANQUANT=$((PUSH_MANQUANT+1))
@@ -90,8 +90,13 @@ while IFS='|' read -r file prod_md5; do
         fi
     fi
 
-    printf "%-110s | %.8s | %.8s | %s\n" \
-        "$file" "${prod_md5:-??????}" "${github_md5:-??????}" "$statut" >> "$LOG"
+    case "$statut" in
+        *SYNC|*DIFF) statut_w=7 ;;
+        *) statut_w=16 ;;
+    esac
+    pad=$(printf '%*s' $((16 - statut_w)) '')
+    printf "%-8.8s | %-8.8s | %s%s | %s\n" \
+        "${prod_md5:-??????}" "${github_md5:-??????}" "$statut" "$pad" "$file" >> "$LOG"
 done < "$TMP_PROD"
 
 # ── RÉSUMÉ ────────────────────────────────────────────────────────────────
@@ -125,3 +130,4 @@ echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 terminé : $TOTAL fichiers �
 #              EXTRA_FILES : suppression shell_command.yaml (remplacé par shell_command/ dir)
 # [2026-06-28] EXCLUDE_YAML : zigbee2mqtt/ (Z2M → LXC 200) + streamline_templates.example.yaml
 #              + Docs/docs_dashboard/TREE_CORRIGE/scenes.yaml (fichier vide, hors scope)
+# [2026-10-10] Colonnes du tableau : PROD | GITHUB | STATUT | FICHIER (fichier en dernier, statuts alignes). Lignes RESULTAT et Audit MD5 termine inchangees (lues par la carte L5C3).
