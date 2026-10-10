@@ -3755,36 +3755,40 @@ input_datetime: !include input_datetime.yaml</pre>
 
     <div class="conv-section reveal">
       <h3 class="conv-section-h">1 — Cascade de verite et audit MD5</h3>
-      <p class="conv-section-sub">Home Assistant (prod live) est la reference absolue. GitHub <code>home_assistant_re-build</code> en est le reflet, pousse automatiquement depuis HA a chaque changement. Le local <code>ReBuild/</code> est le poste de travail : il doit converger vers prod, jamais l'inverse.</p>
+      <p class="conv-section-sub">Trois niveaux, trois outils. Home Assistant (prod live) est ce qui tourne ; GitHub <code>home_assistant_re-build</code> en est le reflet, pousse automatiquement depuis HA. Depuis le workflow local-first du 2026-10-04, le local <code>ReBuild/</code> est le point d'edition : on modifie en local, on pousse vers <code>H:\</code>, et l'auto-backup HA remonte vers GitHub. Source de verite = <b>le local</b> : un ecart local vers prod veut dire que la prod est en retard, un ecart prod vers depot que le depot est en retard.</p>
       <div style="overflow-x:auto;margin:1.1rem 0;">
         <table style="width:100%;border-collapse:collapse;font-size:.8rem;">
           <thead>
             <tr style="border-bottom:2px solid var(--border);">
-              <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Perimetre</th>
+              <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Outil</th>
               <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Comparaison</th>
+              <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Perimetre</th>
               <th style="text-align:left;padding:.5rem .8rem;color:var(--text-2);font-weight:600;">Criticite</th>
             </tr>
           </thead>
           <tbody>
             <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:.5rem .8rem;color:var(--text);">Config YAML <span style="color:var(--text-faint);">(sensors/templates/UM/command_line)</span></td>
-              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">GitHub vs Local</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">audit_md5_yaml.sh<br><span style="color:var(--text-faint);font-size:.68rem;">sur HA</span></td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">PROD vs GITHUB</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Config YAML : <code>sensors</code>, <code>templates</code>, <code>utility_meter</code>, <code>command_line</code>, <code>shell_command</code>, <code>packages</code>, <code>groups</code>, <code>input_booleans</code>, <code>input_number</code> + <code>automations.yaml</code>, <code>scripts.yaml</code>, <code>configuration.yaml</code>, <code>sql.yaml</code>, <code>input_*.yaml</code> et les <code>.sh</code> de <code>.scripts/</code></td>
               <td style="padding:.5rem .8rem;color:var(--amber);font-weight:700;">Critique</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:.5rem .8rem;color:var(--text);">Automations <span style="color:var(--text-faint);">(alias automations.yaml)</span></td>
-              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">GitHub vs Local</td>
-              <td style="padding:.5rem .8rem;color:var(--amber);font-weight:700;">Critique</td>
-            </tr>
-            <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:.5rem .8rem;color:var(--text);">Dashboard YAML</td>
-              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">Local vs H:\Docs\</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">audit_md5_md_yaml.sh<br><span style="color:var(--text-faint);font-size:.68rem;">sur HA</span></td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">PROD vs GITHUB</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Tous les docs de <code>/config/docs/</code> : <code>.md</code> + <code>.yaml</code> + <code>.sh</code></td>
               <td style="padding:.5rem .8rem;color:var(--green);font-weight:700;">Secondaire</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">/trigul<br><span style="color:var(--text-faint);font-size:.68rem;">a la main</span></td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">LOCAL vs PROD vs GITHUB</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);"><code>docs/**/*.md</code> + <code>Github/README.md</code> + <code>Github/INDEX_GLOBAL.md</code> — rapport dans <code>historique\MD5\</code></td>
+              <td style="padding:.5rem .8rem;color:var(--amber);font-weight:700;">Reference</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p style="font-size:.78rem;color:var(--text-faint);margin-top:.6rem;">Audit complet 1x/semaine minimum, et avant toute session de travail majeure. MD5 different sur un meme nom = conflit, HA fait foi.</p>
+      <p style="font-size:.78rem;color:var(--text-faint);margin-top:.6rem;">Audit complet 1x/semaine minimum, et avant toute session de travail majeure. MD5 different sur un meme nom = divergence a trancher : depuis le local-first, un ecart LOCAL vs GitHub veut le plus souvent dire « push local vers H:\ pas encore fait », pas « extraction manquee depuis HA ».</p>
     </div>
 
     <div class="conv-section reveal">
