@@ -249,8 +249,8 @@ Tap → `/meteo/#foudre`
 
 ### 8 - Présence Personne(s)
 
-Groupe de 2 cartes. Voir doc dédiée : [`VIGNETTE_WIFI_PRESENCE.md`](./VIGNETTE_WIFI_PRESENCE.md)
-**Fichier YAML :** `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_separateur.yaml` (séparateur) et `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_eric.yaml` (bouton Eric)
+Groupe de 3 cartes. Voir doc dédiée : [`VIGNETTE_WIFI_PRESENCE.md`](./VIGNETTE_WIFI_PRESENCE.md)
+**Fichiers YAML :** `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_separateur.yaml` (séparateur), `.../card_presence_eric.yaml` (Eric), `.../card_presence_mamour.yaml` (Mamour)
 
 **Séparateur** - couleur selon `sensor.etat_wifi_maison` :
 
@@ -270,7 +270,15 @@ Couleurs de fond selon état :
 | `home` | vert `green`, icone `mdi:home` |
 | tout autre etat | aucune couleur forcee (rendu par defaut de la carte) |
 
-La carte Mamour (3e carte du groupe jusqu'au 2026-10-10) a ete retiree : elle n'avait pas sa place entre le bouton Eric et le reste de la page.
+**Carte Mamour** - `device_tracker.mamour` + photo `person.mamour`
+
+| État | Couleur | Pictogramme |
+|------|---------|-------------|
+| `home` | `darkgreen` | `mdi:home` |
+| `not_home` | `rgb(255,103,0)` | `mdi:home-off` |
+| `LECLERC`, `MONOPRIX`, `AUCHAN` | `rgb(0,102,204)` | `mdi:basket-check` |
+| `ANITA`, `KIPUE` | `rgb(0,102,204)` | `mdi:map-marker` |
+| tout autre | `grey` | `mdi:crosshairs-question` |
 
 ---
 

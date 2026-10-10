@@ -1,0 +1,37 @@
+# card_presence_mamour.yaml
+# Bouton presence de Mamour - device_tracker.mamour + photo person.mamour (HOME page, L0C0).
+# Couleurs : home            -> fond et icone darkgreen, pictogramme mdi:home
+#            not_home        -> fond et icone rgb(255,103,0), pictogramme mdi:home-off
+#            courses         -> LECLERC, MONOPRIX, AUCHAN : bleu rgb(0,102,204), mdi:basket-check
+#            autres lieux    -> ANITA, KIPUE : bleu rgb(0,102,204), mdi:map-marker
+#            tout autre etat -> gris, mdi:crosshairs-question
+# Ce sont les VRAIS noms des zones declarees dans HA. L'ancienne version testait
+# "LECLERC VENCE" (la zone s'appelle "LECLERC") et "Primark" (inexistant) : ces deux
+# branches ne se declenchaient jamais. Corrige le 2026-10-10.
+# Une seule carte dans ce fichier : ce format se colle directement dans l'editeur
+# de carte HA (Configuration de la carte).
+
+type: custom:bubble-card
+card_type: button
+button_type: state
+entity: device_tracker.mamour
+name: Mamour
+show_name: true
+show_last_changed: true
+show_attribute: false
+card_layout: normal
+layout_options:
+  grid_columns: 2
+  grid_rows: 1
+show_state: false
+sub_button:
+  main:
+  - entity: person.mamour
+    show_state: false
+    show_icon: true
+    show_background: true
+    show_attribute: false
+    attribute: entity_picture
+  bottom: []
+styles: "ha-card {\n  --bubble-icon-background-color: black !important;\n}\n.bubble-sub-button {\n  background-color: black !important;\n}\n.bubble-button-background {\n  background-color:\n    ${ state === 'home'\n      ? 'darkgreen'\n      : state === 'not_home'\n        ? 'rgb(255, 103, 0)'\n        : ['LECLERC','MONOPRIX','AUCHAN'].concat(['ANITA','KIPUE']).includes(state)\n          ? 'rgb(0, 102, 204)'\n          : 'grey'\n    } !important;\n}\n.bubble-icon,\n.bubble-sub-button > ha-icon {\n  color:\n    ${ state === 'home'\n      ? 'darkgreen'\n      : state === 'not_home'\n        ? 'rgb(255, 103, 0)'\n        : ['LECLERC','MONOPRIX','AUCHAN'].concat(['ANITA','KIPUE']).includes(state)\n          ? 'rgb(0, 102, 204)'\n          : 'grey'\n    } !important;\n}\n${subButtonIcon[0].setAttribute(\"icon\",\n  state === 'home'\n    ? 'mdi:home'\n    : state === 'not_home'\n      ? 'mdi:home-off'\n      : ['LECLERC','MONOPRIX','AUCHAN'].includes(state)\n        ? 'mdi:basket-check'\n    \
+  \    : ['ANITA','KIPUE'].includes(state)\n          ? 'mdi:map-marker'\n          : 'mdi:crosshairs-question'\n)}"

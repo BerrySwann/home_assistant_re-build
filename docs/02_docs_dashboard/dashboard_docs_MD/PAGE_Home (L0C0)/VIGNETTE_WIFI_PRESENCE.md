@@ -9,9 +9,9 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_separateur.yaml` (séparateur) et `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_eric.yaml` (bouton Eric) |
+| 📁 **Path** | `.../Carte Présence/card_presence_separateur.yaml` (séparateur), `.../card_presence_eric.yaml` (Eric), `.../card_presence_mamour.yaml` (Mamour) |
 | 🔗 **Accès depuis** | Vue principale Home |
-| 🏗️ **Layout** | `bubble-card separator + 1 bubble-card button` |
+| 🏗️ **Layout** | `bubble-card separator + 2 bubble-card button` |
 | 🔴 **Statut** | Affichage présence ✅ - Liaison clim (P4 → P1) 🔧 à faire en dernier |
 | 🚧 **Bloquant** | Automations clim basées sur `sensor.groupe` - à documenter après finalisation Pôle 1 |
 | ✏️ **Prompt** | Eric · BerrySwann |
@@ -32,6 +32,7 @@
 3. [Sections](#sections)
    - [Séparateur "Personne(s)"](#séparateur-personnes)
    - [Carte Présence Eric](#carte-présence-eric)
+   - [Carte Présence Mamour](#carte-présence-mamour)
 4. [Entités utilisées](#entités-utilisées--provenance-complète)
 5. [Logique des états](#logique-des-états)
 6. [Dépannage](#dépannage)
@@ -40,10 +41,10 @@
 
 ## 🎯 VUE D'ENSEMBLE
 
-Groupe de 2 cartes bubble-card affiché dans la vue Home. Il permet de visualiser d'un coup d'œil :
+Groupe de 3 cartes bubble-card affiché dans la vue Home. Il permet de visualiser d'un coup d'œil :
 
 - L'état global du domicile (les deux présents / un seul / personne) via le **séparateur coloré**
-- La présence d'**Eric** avec sa photo de profil et l'heure du dernier changement d'état
+- La présence d'**Eric** et de **Mamour**, chacune avec sa photo de profil et l'heure du dernier changement d'état
 
 La couleur du séparateur est pilotée par `sensor.etat_wifi_maison` qui agrège la connexion WiFi des deux téléphones sur les réseaux `Module B.E.R.Y.L. [GG-5.0]` ou `Module B.E.R.Y.L. [GG-2.4]`.
 
@@ -71,6 +72,10 @@ La couleur du séparateur est pilotée par `sensor.etat_wifi_maison` qui agrège
 │  BOUTON ERIC  [bubble-card button]  grid: 2 col / 1 row  │
 │  ├─ Entité principale : device_tracker.poco              │
 │  └─ Sub-button : person.eric  (photo de profil)          │
+├──────────────────────────────────────────────────────────┤
+│  BOUTON MAMOUR  [bubble-card button]  grid: 2 col / 1 row│
+│  ├─ Entité principale : device_tracker.mamour            │
+│  └─ Sub-button : person.mamour  (photo de profil)        │
 └──────────────────────────────────────────────────────────┘
 ```
 
@@ -171,6 +176,56 @@ Couleurs, pilotées par le JavaScript du champ `styles` :
 
 ---
 
+## 📍 SECTION - Carte Présence Mamour
+
+### Code
+
+```yaml
+- type: custom:bubble-card
+  card_type: button
+  button_type: state
+  entity: device_tracker.mamour
+  name: Mamour
+  show_name: true
+  show_last_changed: true
+  show_attribute: false
+  card_layout: normal
+  layout_options:
+    grid_columns: 2
+    grid_rows: 1
+  show_state: false
+  sub_button:
+    main:
+    - entity: person.mamour
+      show_state: false
+      show_icon: true
+      show_background: true
+      show_attribute: false
+      attribute: entity_picture
+  styles: |
+    .bubble-button-background {
+      background-color:
+        ${ state === 'home' ? 'darkgreen'
+          : state === 'not_home' ? 'rgb(255, 103, 0)'
+          : ['LECLERC','MONOPRIX','AUCHAN'].concat(['ANITA','KIPUE']).includes(state)
+            ? 'rgb(0, 102, 204)'
+            : 'grey' } !important;
+    }
+```
+
+### Rôle
+
+Affiche la présence de Mamour avec sa photo de profil. Le champ `name: Mamour` surcharge
+le nom de l'entité. Couleurs : maison en `darkgreen`, hors maison en orange, lieux
+(courses `LECLERC`/`MONOPRIX`/`AUCHAN` avec `mdi:basket-check`, `ANITA`/`KIPUE` avec
+`mdi:map-marker`) en bleu, tout autre état en gris.
+
+⚠️ Les noms testés sont ceux des **vraies zones** déclarées dans HA. L'ancienne version
+testait `LECLERC VENCE` (la zone s'appelle `LECLERC`) et `Primark` (inexistant) : deux
+branches mortes, corrigées le 2026-10-10.
+
+---
+
 ## 📊 ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE
 
 ---
@@ -263,7 +318,7 @@ Renvoie `true` si le `device_tracker` correspondant est en mode `wifi` ET connec
 
 ### Dashboard source
 
-- `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_separateur.yaml` (séparateur) et `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_eric.yaml` (bouton Eric)
+- `.../Carte Présence/card_presence_separateur.yaml` (séparateur), `.../card_presence_eric.yaml` (Eric), `.../card_presence_mamour.yaml` (Mamour)
 
 ---
 
