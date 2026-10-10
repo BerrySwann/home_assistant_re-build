@@ -216,7 +216,7 @@ HOME PAGE (type: grid)
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs_dashboard/docs/HOME PAGE/PAGE_HOME.md` | ✅ (MàJ 2026-09-20) |
+| `docs/02_docs_dashboard/dashboard_docs_MD/PAGE_Home (L0C0)/PAGE_HOME.md` | ✅ (MàJ 2026-09-20) |
 
 ---
 

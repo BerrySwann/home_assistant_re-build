@@ -1,21 +1,21 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--09--20-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.10.0-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--10--10-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page-ff9800?style=flat-square)](.)
 
 </div>
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `Dashboard 2026-06-13 → Vue: Home (page principale)` |
+| 📁 **Path** | `dashboard_docs_YAML/PAGE_Home (L0C0)/` (8 cartes) sur la vue `Home` du dashboard |
 | 🔗 **Accès depuis** | Vue par défaut au démarrage |
 | 🏗️ **Layout** | `type: grid` - 1 col (cartes permanentes) + grille 3×6 (18 vignettes) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-09-20 |
-| 🏠 **Version HA** | 2026.6.x |
+| 📅 **Modifié le** | 2026-10-10 |
+| 🏠 **Version HA** | 2026.10.0 |
 
 ---
 
@@ -119,13 +119,13 @@ Page d'accueil du dashboard. Structure en deux parties :
 
 **Type :** `type: picture-elements` - `custom:meteo-card` + 4 overlays `html-template-card`
 **Toujours visible**
-**Fichier YAML :** `Dashboard/PAGE_Home/card_meteocss_home_2026-06-28.yaml`
+**Fichier YAML :** `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Météo/card_meteocss_home.yaml`
 
 Carte météo animée utilisant le composant **`custom:meteo-card`** (HACS - lovelace-meteocss-card). Le rendu ciel/soleil/lune/foreground est géré nativement par la carte JS. La lune est positionnée via l'intégration **Luna** (auto-détectée). `house_angle: 180` oriente la vue plein sud : lever ← gauche, midi ↑ haut, coucher → droite.
 
 | # | Élément | Entités / Source |
 |---|---------|-----------------|
-| 1 | `custom:meteo-card` | `weather.vence` · `sun.sun` · Luna (`sensor.luna_lunar_*` auto) |
+| 1 | `custom:meteo-card` | `weather.vence` · `sun.sun` · Luna (calculee par la carte, aucune entite HA) |
 | 2 | Rose des vents SVG | Statique (perspective rotateX 58°, opacity 0.85) |
 | 3 | Alerte météo (conditionnel) | `sensor.alerte_meteo` - Jaune/Orange/Rouge + animation pulse |
 | 4 | Statut + T°ext (bas) | `sensor.vence_original_condition` · `sensor.th_balcon_nord_temperature` |
@@ -163,7 +163,7 @@ Affiche prévisions, alertes vigilance, chances de pluie, UV, couverture nuageus
 **Visible si :** `sensor.studio_code_server_pourcentage_du_processeur` > 1
 
 Affiche la charge CPU du serveur VS Code. Fond rouge + animation clignotante si CPU > 20%. Tap = restart de l'add-on via `hassio.addon_restart`.
-**Fichier YAML :** `Dashboard/PAGE_Home/card_vscode_home_2026-06-13.yaml`
+**Fichier YAML :** `dashboard_docs_YAML/PAGE_Home (L0C0)/Studio Code Server/card_vscode_home.yaml`
 
 | Entité | Rôle |
 |--------|------|
@@ -175,7 +175,7 @@ Affiche la charge CPU du serveur VS Code. Fond rouge + animation clignotante si 
 
 **Type :** `custom:button-card`
 **Visible si :** `sensor.maison_lightning_counter` > 1
-**Fichier YAML :** `Dashboard/PAGE_Home/card_foudre_home_2026-06-13.yaml`
+**Fichier YAML :** `dashboard_docs_YAML/PAGE_Home (L0C0)/Impacte de Foudre/card_foudre_home.yaml`
 
 Affiche la distance, la localisation (géocodage) ou l'azimut du dernier impact, le temps écoulé et le compteur total. Bordure et fond colorés selon la distance :
 
@@ -203,7 +203,7 @@ Tap → `/meteo/#foudre`
 **Visible si :** `sensor.prise_lave_linge_nous_power` > 2 W
 **Contenu :** état du cycle, barre de progression, temps restant et puissance (card_mod)
 **grid_options :** columns: 12, rows: 2 (pleine largeur)
-**Fichier YAML :** `Dashboard/PAGE_Home/card_lave_linge_home_2026-09-19.yaml` (remplace le 2026-06-13)
+**Fichier YAML :** `dashboard_docs_YAML/PAGE_Home (L0C0)/Lave Linge/card_lave_linge_home.yaml` (remplace le 2026-06-13)
 
 | Entité | Rôle | Source |
 |--------|------|--------|
@@ -220,7 +220,7 @@ Tap → `/meteo/#foudre`
 **Visible si :** `sensor.prise_lave_vaisselle_nous_power` > 2 W
 **Contenu :** état du cycle, barre de progression, temps restant et puissance (card_mod)
 **grid_options :** columns: 12, rows: 2 (pleine largeur)
-**Fichier YAML :** `Dashboard/PAGE_Home/card_lave_vaisselle_home_2026-09-19.yaml` (remplace le 2026-06-13)
+**Fichier YAML :** `dashboard_docs_YAML/PAGE_Home (L0C0)/Lave Vaisselle/card_lave_vaisselle_home.yaml` (remplace le 2026-06-13)
 
 | Entité | Rôle | Source |
 |--------|------|--------|
@@ -236,7 +236,7 @@ Tap → `/meteo/#foudre`
 **Type :** `custom:button-card` (carte "appliance")
 **Visible si :** `sensor.tongel_temperature` > -15 °C OU `binary_sensor.porte_congel_contact` = on (carte d'alerte - masquée en marche normale)
 **Contenu :** états Cooling / Super Cool / Defrost selon la puissance (seuils 26 / 48 / 235 W), température congélateur, badge puissance, label "Porte fermée / Porte Ouverte" (rouge à l'ouverture) (animations neige / givre / dégivrage)
-**Fichier YAML :** `Dashboard/PAGE_Home/card_congelateur_home_2026-09-24.yaml` (remplace 2026-09-20 - contact porte + seuils 26/48/235)
+**Fichier YAML :** `dashboard_docs_YAML/PAGE_Home (L0C0)/Congélateur/card_congelateur_home.yaml` (remplace 2026-09-20 - contact porte + seuils 26/48/235)
 
 | Entité | Rôle | Source |
 |--------|------|--------|
@@ -250,7 +250,7 @@ Tap → `/meteo/#foudre`
 ### 8 - Présence Personne(s)
 
 Groupe de 3 cartes. Voir doc dédiée : [`VIGNETTE_WIFI_PRESENCE.md`](./VIGNETTE_WIFI_PRESENCE.md)
-**Fichier YAML :** `Dashboard/PAGE_Home/card_presence_home_2026-06-13.yaml`
+**Fichier YAML :** `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_home.yaml`
 
 **Séparateur** - couleur selon `sensor.etat_wifi_maison` :
 
@@ -282,7 +282,7 @@ Zones supplémentaires reconnues : `LECLERC VENCE` (bleu `rgb(0,102,204)`), `Pri
 
 **Type :** `custom:mushroom-entity-card`
 **Visible si :** `binary_sensor.detecteur_de_fuite_ikea_water_leak` = `on`, `unavailable` ou `unknown`
-**Fichier YAML :** `Dashboard/PAGE_Home/card_detecteur_fuite_home_2026-06-13.yaml`
+**Fichier YAML :** `dashboard_docs_YAML/PAGE_Home (L0C0)/Détecteur de fuite/card_detecteur_fuite_home.yaml`
 
 Alerte visuelle pleine largeur (12 colonnes). Aucune action tap/hold/double_tap.
 
@@ -508,15 +508,15 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 
 | Fichier | Carte |
 |:--------|:------|
-| `Dashboard/PAGE_Home/page_home_2026-06-13.yaml` | Page complète (référence) |
-| `Dashboard/PAGE_Home/card_meteocss_home_2026-06-28.yaml` | Météo animée (custom:meteo-card + 4 overlays) |
-| `Dashboard/PAGE_Home/card_vscode_home_2026-06-13.yaml` | VS Code Server (conditional) |
-| `Dashboard/PAGE_Home/card_foudre_home_2026-06-13.yaml` | Foudre Blitzortung (button-card) |
-| `Dashboard/PAGE_Home/card_lave_linge_home_2026-09-19.yaml` | Lave-linge (mushroom WashData - remplace 2026-06-13) |
-| `Dashboard/PAGE_Home/card_lave_vaisselle_home_2026-09-19.yaml` | Lave-vaisselle (mushroom WashData - remplace 2026-06-13) |
-| `Dashboard/PAGE_Home/card_congelateur_home_2026-09-24.yaml` | Congélateur (button-card appliance - contact porte + seuils 26/48/235) |
-| `Dashboard/PAGE_Home/card_presence_home_2026-06-13.yaml` | Présence (separator + Eric + Mamour) |
-| `Dashboard/PAGE_Home/card_detecteur_fuite_home_2026-06-13.yaml` | Détecteur de fuite (mushroom) |
+| `dashboard_docs_YAML/Dashboard_COMPLET/Dashboard_YYYY_MM_DD.yaml` | Page complète (photo quotidienne du dashboard) |
+| `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Météo/card_meteocss_home.yaml` | Météo animée (custom:meteo-card + 4 overlays) |
+| `dashboard_docs_YAML/PAGE_Home (L0C0)/Studio Code Server/card_vscode_home.yaml` | VS Code Server (conditional) |
+| `dashboard_docs_YAML/PAGE_Home (L0C0)/Impacte de Foudre/card_foudre_home.yaml` | Foudre Blitzortung (button-card) |
+| `dashboard_docs_YAML/PAGE_Home (L0C0)/Lave Linge/card_lave_linge_home.yaml` | Lave-linge (mushroom WashData - remplace 2026-06-13) |
+| `dashboard_docs_YAML/PAGE_Home (L0C0)/Lave Vaisselle/card_lave_vaisselle_home.yaml` | Lave-vaisselle (mushroom WashData - remplace 2026-06-13) |
+| `dashboard_docs_YAML/PAGE_Home (L0C0)/Congélateur/card_congelateur_home.yaml` | Congélateur (button-card appliance - contact porte + seuils 26/48/235) |
+| `dashboard_docs_YAML/PAGE_Home (L0C0)/Carte Présence/card_presence_home.yaml` | Présence (separator + Eric + Mamour) |
+| `dashboard_docs_YAML/PAGE_Home (L0C0)/Détecteur de fuite/card_detecteur_fuite_home.yaml` | Détecteur de fuite (mushroom) |
 
 ### Documentation liée
 
