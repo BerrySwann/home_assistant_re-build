@@ -2107,7 +2107,7 @@ input_datetime: !include input_datetime.yaml</pre>
             <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:8rem;">utilitaires</span><span style="font-size:.82rem;color:var(--text-2);"><code>templates/utilitaires/</code> — sous-répertoire fourre-tout pour templates transversaux sans pôle : données simples (jour/nuit, nb fenêtres ouvertes, MAJ HA). Valeurs binaires ou compteurs basiques.</span></div>
             <div style="height:.4rem;border-top:1px solid var(--border);margin:.3rem 0;"></div>
             <div style="font-family:var(--fm);font-size:.6rem;color:var(--amber);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem;">Préfixes hors-pôles <span style="font-weight:400;opacity:.65;letter-spacing:0;text-transform:none;font-size:.68rem;">— remplacent <code>P{n}</code> pour les fichiers sans pôle énergie</span></div>
-            <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:8rem;">M_</span><span style="font-size:.82rem;color:var(--text-2);">Météo &amp; environnement extérieur — alertes, vent, foudre, tendances T°. Ex : <code>M_04_tendances_th_ext_card.yaml</code>.</span></div>
+            <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:8rem;">M_</span><span style="font-size:.82rem;color:var(--text-2);">Météo &amp; environnement extérieur — alertes, vent, foudre, tendances T°. Ex : <code>M_04_meteo_tendances/</code>.</span></div>
             <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:8rem;">A_</span><span style="font-size:.82rem;color:var(--text-2);">Air quality — qualité de l'air intérieur (PM2.5, tCOV). Ex : <code>A_01_AIR_QUALITY.yaml</code>.</span></div>
             <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:8rem;">S_</span><span style="font-size:.82rem;color:var(--text-2);">Stores — volets motorisés, templates d'état. Ex : <code>S_01_STORES.yaml</code>.</span></div>
             <div style="display:flex;gap:.75rem;align-items:baseline;"><span style="font-family:var(--fm);font-size:.85rem;font-weight:700;color:var(--green);min-width:8rem;">MP_</span><span style="font-size:.82rem;color:var(--text-2);">Mini-PC — répertoire réservé, aucun YAML actif. Seul fichier existant : <code>#MP_01_monitor_temp.sh.#</code> dans <code>.scripts/</code> (script actif sur Raspberry Pi, nommé <code>#...#</code> pour que HA l'ignore). ⛔ Ne pas renommer.</span></div>
@@ -2194,7 +2194,7 @@ input_datetime: !include input_datetime.yaml</pre>
             <tr style="border-bottom:1px solid var(--border);background:var(--bg-card);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">TOTAL</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_TOTAL_AMHQ.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P1_TOTAL_AMHQ.yaml</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">kWh</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_DUT_{description}.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P1_DUT_clim_chauffage.yaml</td></tr>
             <tr style="border-bottom:1px solid var(--border);background:var(--bg-card);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">DUT</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_DUT_{description}.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P1_DUT_clim_chauffage.yaml</td></tr>
-            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">DIAG</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_DIAG_{description}_{cycle}.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P0_DIAG_conso_hebdomadaire.yaml</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">DIAG</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_DIAG_{description}_{cycle}.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P0_diag_conso_hebdomadaire_en_cours.yaml</td></tr>
             <tr style="border-bottom:1px solid var(--border);background:var(--bg-card);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">POWER</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_POWER_{niveau}.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P3_POWER_3_TOTAL_ZONE.yaml</td></tr>
             <tr style="border-bottom:1px solid var(--border);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">BV_IB</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_BV_IB_{description}.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P3_BV_IB_inter_smorig_salon.yaml</td></tr>
             <tr style="border-bottom:1px solid var(--border);background:var(--bg-card);"><td style="padding:.4rem .75rem;font-family:monospace;color:var(--accent);">BV_IB_SW</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">{P}_BV_IB_SW_{description}.yaml</td><td style="padding:.4rem .75rem;font-family:monospace;color:var(--text-2);">P3_BV_IB_SW_inter_smorig_salon.yaml</td></tr>
@@ -2206,7 +2206,7 @@ input_datetime: !include input_datetime.yaml</pre>
         <div style="display:flex;flex-direction:column;gap:.5rem;font-size:.8rem;color:var(--text-2);margin-top:.75rem;">
           <div>- <code>_AMHQ</code> : present si le fichier couvre les 4 cycles (Annuel/Mensuel/Hebdo/Quotidien)</div>
           <div>- <code>_VARIANTE</code> : discriminant si plusieurs fichiers du meme TYPE dans le meme pole — nom fonctionnel minuscules (<code>prises</code>, <code>mini_pc</code>) ou niveau numéroté (<code>1_UNITE</code>, <code>2_ZONE</code>, <code>3_TOTAL</code>)</div>
-          <div>- Hors-poles : <code>{LETTRE}_{index}_{description}.yaml</code> — ex: <code>M_04_tendances_th_ext_card.yaml</code></div>
+          <div>- Hors-poles : <code>{LETTRE}_{index}_{description}.yaml</code> — ex: <code>M_04_meteo_tendances/</code></div>
           <div>- Groupes : <code>GRP_{index}_{description}.yaml</code></div>
           <div>- 1 fichier = 1 seul pole — jamais deux poles dans le meme fichier</div>
           <div>- ⛔ <code>ui_dashboard</code> : templates d'affichage uniquement — jamais de calculs kWh/W/DUT</div>
@@ -2323,7 +2323,7 @@ input_datetime: !include input_datetime.yaml</pre>
 <span class="cc">#</span>
 <span class="tb"># | MATÉRIEL    | CAPTEUR BRUT (source)          | CE FICHIER (unique_id)  | AVAL   |</span>
 <span class="tb"># |:------------|:-------------------------------|:------------------------|:-------|</span>
-<span class="tb"># | Nodon (Z2M) | sensor.general_electric_power  | genelec_conso_mini_24h  | L2C1   |</span>
+<span class="tb"># | Nodon (Z2M) | sensor.general_electric_appart_power  | genelec_conso_mini_24h  | L2C1   |</span>
 <span class="cc">#</span>
 <span class="hh"># ## ⚠️ IMPORTANT (PIÈGES) :</span>
 <span class="cc"># - Point d'attention critique...</span>
@@ -3083,7 +3083,7 @@ input_datetime: !include input_datetime.yaml</pre>
               <td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);" rowspan="9">P1 SDB</td>
               <td style="padding:.5rem .8rem;color:var(--text);">Z - Gestion Intelligente Soufflant</td>
               <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--green);">a_2026_02_01_salle_de_bain_gestion_intelligente_soufflant.yaml</td>
-              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">P1_BV_01_SW_inter_souflant_sdb.yaml · input_select.yaml</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">P1_BV_IB_SW_inter_souflant_sdb.yaml · input_select.yaml</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:.5rem .8rem;color:var(--text);">A - Bouton IKEA Rodret</td>
@@ -4052,11 +4052,11 @@ MATÉRIEL / INTÉGRATION
   ├─→ Blitzortung (intégration MQTT native)
   │     └─→ sensor.maison_lightning_azimuth / _distance / _counter  (NAT)
   │           └─→ UM: M_03_meteo_UM_blitzortung.yaml
-  │           └─→ TPL: M_03_meteo_blitzortung.yaml
+  │           └─→ TPL: M_03_Meteo_orage_eclaires/
   ├─→ Météo France (alertes) + MeteoAlarm (fallback)
   │     └─→ TPL: M_01_meteo_alertes_card.yaml  (10 sensors)
   └─→ zone.home (latitude) + horloge système  (calculé, PAS sun.sun)
-        └─→ TPL: M_05_cycle_solaire.yaml
+        └─→ TPL: M_05_meteo_cycle_solaire/
 
 ---
 
@@ -4096,11 +4096,11 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 MATÉRIEL (Nodon SEM-4-1-00 via Z2M)
   └─→ sensor.general_electric_appart_energy (kWh natif)
   └─→ sensor.general_electric_appart_power  (W natif)
-        └─→ UM: 01_UM_AMHQ.yaml                      (genelec_appart_*_um : Q/H/M/A)
+        └─→ UM: P0_UM_AMHQ_HPHC.yaml                      (genelec_appart_*_um : Q/H/M/A)
         └─→ UM: 02_UM_genelec_appart_HPHC_AMHQ.yaml   (HP/HC x 4 cycles)
-              └─→ TPL: 01_genelec_appart_AMHQ_cost.yaml  (couts euros)
-              └─→ TPL: 02_ratio_hp_hc.yaml               (ratio HC)
-              └─→ TPL: 03_AVG_genelec_appart.yaml        (moyenne W)
+              └─→ TPL: P0_01_genelec_appart_AMHQ_cost.yaml  (couts euros)
+              └─→ TPL: P0_02_ratio_hp_hc.yaml               (ratio HC)
+              └─→ TPL: P0_03_AVG_genelec_appart.yaml        (moyenne W)
                     └─→ VIGNETTE L2C1 ✅
                     └─→ PAGE L2C1 (3 onglets : Journalier/Hebdo/Mensuel) ✅
 
@@ -4236,12 +4236,12 @@ const FILES = [
 #
 # | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | P1_ui_dashboard.yaml | sensor.clim_salon_power_status → state:on          | dut_clim_salon                                     | P1_ui_dashboard.yaml → L2C2        |
-# | P1_ui_dashboard.yaml | sensor.radiateur_cuisine_power_status → state:on   | dut_radiateur_cuisine                              | P1_ui_dashboard.yaml → L2C2        |
-# | P1_ui_dashboard.yaml | sensor.clim_bureau_power_status → state:on         | dut_clim_bureau                                    | P1_ui_dashboard.yaml → L2C2        |
+# | P1_ui_dashboard.yaml | sensor.salon_power_status → state:on          | dut_clim_salon                                     | P1_ui_dashboard.yaml → L2C2        |
+# | P1_ui_dashboard.yaml | sensor.cuisine_power_status → state:on   | dut_radiateur_cuisine                              | P1_ui_dashboard.yaml → L2C2        |
+# | P1_ui_dashboard.yaml | sensor.bureau_power_status → state:on         | dut_clim_bureau                                    | P1_ui_dashboard.yaml → L2C2        |
 # | P1_ui_dashboard.yaml | sensor.sdb_soufflant_etat → state:Heat             | dut_sdb_soufflant                                  | P1_ui_dashboard.yaml → L2C2        |
 # | P1_ui_dashboard.yaml | sensor.sdb_seche_serviette_etat → state:Heat       | dut_sdb_seche_serviettes                           | P1_ui_dashboard.yaml → L2C2        |
-# | P1_ui_dashboard.yaml | sensor.clim_chambre_power_status → state:on        | dut_clim_chambre                                   | P1_ui_dashboard.yaml → L2C2        |
+# | P1_ui_dashboard.yaml | sensor.chambre_power_status → state:on        | dut_clim_chambre                                   | P1_ui_dashboard.yaml → L2C2        |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - Les capteurs *_power_status (Salon/Cuisine/Bureau/Chambre) sont des status
@@ -4484,7 +4484,7 @@ clim_salon_quotidien_um:
 # --- radiateur_elec_cuisine_annuel_um ---
 # [AVANT 2026-09-24] Riemann — remplace par la source directe (fix firmware Shelly actif)
 # radiateur_elec_cuisine_annuel_um:
-#   source: sensor.radiateur_elec_cuisine_energie_totale_kwh
+#   source: sensor.radiateur_elec_cuisine_energy
 #   name: "Radiateur Elec Cuisine Annuel UM"
 #   unique_id: radiateur_elec_cuisine_annuel_um
 #   cycle: yearly
@@ -4497,7 +4497,7 @@ radiateur_elec_cuisine_annuel_um:
 # --- radiateur_elec_cuisine_mensuel_um ---
 # [AVANT 2026-09-24] Riemann — remplace par la source directe (fix firmware Shelly actif)
 # radiateur_elec_cuisine_mensuel_um:
-#   source: sensor.radiateur_elec_cuisine_energie_totale_kwh
+#   source: sensor.radiateur_elec_cuisine_energy
 #   name: "Radiateur Elec Cuisine Mensuel UM"
 #   unique_id: radiateur_elec_cuisine_mensuel_um
 #   cycle: monthly
@@ -4510,7 +4510,7 @@ radiateur_elec_cuisine_mensuel_um:
 # --- radiateur_elec_cuisine_hebdomadaire_um ---
 # [AVANT 2026-09-24] Riemann — remplace par la source directe (fix firmware Shelly actif)
 # radiateur_elec_cuisine_hebdomadaire_um:
-#   source: sensor.radiateur_elec_cuisine_energie_totale_kwh
+#   source: sensor.radiateur_elec_cuisine_energy
 #   name: "Radiateur Elec Cuisine Hebdomadaire UM"
 #   unique_id: radiateur_elec_cuisine_hebdomadaire_um
 #   cycle: weekly
@@ -4523,7 +4523,7 @@ radiateur_elec_cuisine_hebdomadaire_um:
 # --- radiateur_elec_cuisine_quotidien_um ---
 # [AVANT 2026-09-24] Riemann — remplace par la source directe (fix firmware Shelly actif)
 # radiateur_elec_cuisine_quotidien_um:
-#   source: sensor.radiateur_elec_cuisine_energie_totale_kwh
+#   source: sensor.radiateur_elec_cuisine_energy
 #   name: "Radiateur Elec Cuisine Quotidien UM"
 #   unique_id: radiateur_elec_cuisine_quotidien_um
 #   cycle: daily
@@ -4665,7 +4665,7 @@ clim_chambre_quotidien_um:
 # - [2026-04-25] Ajout slug tertiaire individuel par entrée (était groupé par équipement).
 # - [2026-04-25] En-tête : chaîne de dépendances complète + PIÈGES mis à jour.
 # - [2026-06-14] Cuisine : retour Riemann — bug firmware Shelly 1PM Gen4 (UNREPORTABLE_ATTRIBUTE).
-#               source: _energy → sensor.radiateur_elec_cuisine_energie_totale_kwh (×4 cycles).
+#               source: _energy → sensor.radiateur_elec_cuisine_energy (×4 cycles).
 # - [2026-09-24] Cuisine : migration Riemann → direct — source = sensor.radiateur_elec_cuisine_energy
 #               (fix firmware Shelly 1PM Gen4 actif). Fichiers Riemann supprimes (sensors/ + templates/).`
   }
