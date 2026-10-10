@@ -2759,20 +2759,50 @@ input_datetime: !include input_datetime.yaml</pre>
             </tr>
             <!-- P1 SDB -->
             <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);" rowspan="3">P1 SDB</td>
-              <td style="padding:.5rem .8rem;color:var(--text-2);">A - Gestion Intelligente Soufflant</td>
+              <td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);" rowspan="9">P1 SDB</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Z - Gestion Intelligente Soufflant</td>
               <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">-</td>
-              <td style="padding:.5rem .8rem;color:var(--text-2);">Régulation T° + auto-off 60 min</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Régulation T° + auto-off 60 min (automation maitre)</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:.5rem .8rem;color:var(--text);">D - Watchdog Sécurité Radiateur</td>
+              <td style="padding:.5rem .8rem;color:var(--text);">A - Bouton IKEA Rodret (soufflant)</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">Appui bouton</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">MQTT → interrupteur inter_soufflant_sdb</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">B - Routage interrupteur</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">Interrupteur ON/OFF</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Routage vers les séquences du script</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">D - Watchdog Sécurité Soufflant</td>
               <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">⚠️ Watchdog SDB</td>
-              <td style="padding:.5rem .8rem;color:var(--text-2);">Dérive thermique</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Dérive thermique (capteur par pas de 0,2)</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:.5rem .8rem;color:var(--text);">E - Minuterie Sèche-Serv. (2h)</td>
-              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--green);">Sèche-Serv. OFF</td>
-              <td style="padding:.5rem .8rem;color:var(--text-2);">Timer absolu 2h</td>
+              <td style="padding:.5rem .8rem;color:var(--text);">E - Décompte 60 min (timer)</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">Soufflant en marche</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Coupe à la fin du timer 60 mn</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">F - Rattrapage au démarrage HA</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">Démarrage de HA</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Relance le timer 10 mn si encore en marche</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">G - Minuterie Sèche-Serv. (2h)</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">Sèche-Serv. en marche</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Timer absolu 2h (ancienne, doublon actif avec H)</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">H - Décompte 2 h (timer)</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">Puissance > 50 W</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Coupe à la fin du timer 2 h</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">I - Rattrapage au démarrage HA</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.75rem;color:var(--text-2);">Démarrage de HA</td>
+              <td style="padding:.5rem .8rem;color:var(--text-2);">Relance le timer 10 mn si la prise est en marche</td>
             </tr>
             <!-- P2 PRISES -->
             <tr style="border-bottom:1px solid var(--border);background:rgba(61,136,86,.04);">
@@ -3050,20 +3080,50 @@ input_datetime: !include input_datetime.yaml</pre>
             </tr>
             <!-- P1 SDB -->
             <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);" rowspan="3">P1 SDB</td>
-              <td style="padding:.5rem .8rem;color:var(--text);">A - Gestion Intelligente Soufflant</td>
+              <td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);" rowspan="9">P1 SDB</td>
+              <td style="padding:.5rem .8rem;color:var(--text);">Z - Gestion Intelligente Soufflant</td>
               <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--green);">a_2026_02_01_salle_de_bain_gestion_intelligente_soufflant.yaml</td>
-              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--green);">P1_BV_01_SW_inter_souflant_sdb.yaml · input_select.yaml</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">P1_BV_01_SW_inter_souflant_sdb.yaml · input_select.yaml</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:.5rem .8rem;color:var(--text);">D - Watchdog Securite Radiateur</td>
+              <td style="padding:.5rem .8rem;color:var(--text);">A - Bouton IKEA Rodret</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--green);">i_soufflant_sdb_bouton_rodret.yaml</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">inter_soufflant_salle_de_bain (MQTT)</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">B - Routage interrupteur</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--green);">h_soufflant_sdb_routage.yaml</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">script soufflant demarrer / arreter</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">D - Watchdog Sécurité Soufflant</td>
               <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--green);">d_salle_de_bain_watchdog_securite_radiateur.yaml</td>
-              <td style="padding:.5rem .8rem;color:var(--text-2);font-size:.7rem;">-</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">nom de fichier inchange</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);">
-              <td style="padding:.5rem .8rem;color:var(--text);">E - Minuterie Seche Serviettes (2h)</td>
+              <td style="padding:.5rem .8rem;color:var(--text);">E - Décompte 60 min (timer)</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--green);">e_sdb_soufflant_decompte_60min_timer.yaml</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">timer.soufflant_sdb_60mn · _10mn</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">F - Rattrapage au démarrage HA</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--green);">f_sdb_soufflant_rattrapage_demarrage_ha_timer.yaml</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">timer.soufflant_sdb_10mn</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">G - Minuterie Sèche-Serviettes 2h</td>
               <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--green);">e_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.yaml</td>
-              <td style="padding:.5rem .8rem;color:var(--text-2);font-size:.7rem;">-</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">doublon actif avec H</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">H - Décompte 2 h (timer)</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--green);">h_sdb_seche_serviettes_decompte_2h_timer.yaml</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">timer.seche_serviettes_sdb_2h · _10mn</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:.5rem .8rem;color:var(--text);">I - Rattrapage au démarrage HA</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--green);">i_sdb_seche_serviettes_rattrapage_demarrage_ha_timer.yaml</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--text-2);">timer.seche_serviettes_sdb_10mn</td>
             </tr>
             <!-- P2 PRISES -->
             <tr style="border-bottom:1px solid var(--border);background:rgba(61,136,86,.04);">
