@@ -3797,6 +3797,7 @@ input_datetime: !include input_datetime.yaml</pre>
     <div class="conv-section reveal">
       <h3 class="conv-section-h">2 — Les slash commands</h3>
       <p class="conv-section-sub">9 commandes utilitaires, plus une qui merite sa propre place.</p>
+      <p style="font-size:.82rem;color:var(--text-2);line-height:1.75;max-width:760px;margin:.6rem 0 0;">Les commandes de <b>push et de resynchronisation</b> (<code>/ha_push_yaml</code>, <code>/ha_push_docs</code>, <code>/ha_push_md</code>, <code>/ha_resync_docs</code>) sont lancees <b>par l'assistant</b>, tout seul, des qu'une modification les rend necessaires : tu n'as pas a les appeler. Il en va de meme pour <code>/sync_index</code> et <code>/histo</code>, qui ferment le travail (voir plus bas). Les autres se declenchent a ta demande.</p>
 
       <div class="rule-card bloc-clickable reveal" onclick="openTreeModal('dependances')" style="cursor:pointer;border-color:var(--amber);box-shadow:var(--shadow-hi);margin:0 0 1.6rem;animation-delay:0s;">
         <span class="bloc-tap-hint" style="right:18px;bottom:10px;animation-delay:0s;">👆</span>
@@ -3813,9 +3814,9 @@ input_datetime: !include input_datetime.yaml</pre>
         <div class="item-card"><code>/ha_status</code><span style="font-size:.78rem;color:var(--text-2);">Resume l'avancement du projet en 3 points.</span></div>
         <div class="item-card"><code>/histo</code><span style="font-size:.78rem;color:var(--text-2);">Journal de bord compact, sauvegarde dans historique/. (a faire a la fin de chaque session)</span></div>
         <div class="item-card"><code>/ha_new_yaml</code><span style="font-size:.78rem;color:var(--text-2);">Genere un squelette YAML conforme (bordures, headers, slug, unique_id).</span></div>
-        <div class="item-card"><code>/ha_push_yaml</code><span style="font-size:.78rem;color:var(--text-2);">Pousse un fichier YAML valide vers la prod H:\.</span></div>
-        <div class="item-card"><code>/ha_push_docs</code><span style="font-size:.78rem;color:var(--text-2);">Synchronise les docs locales DOCS/ vers H:\Docs\.</span></div>
-        <div class="item-card"><code>/ha_resync_docs</code><span style="font-size:.78rem;color:var(--text-2);">Resynchronise le local depuis GitHub, audit MD5 a l'appui.</span></div>
+        <div class="item-card"><code>/ha_push_yaml</code><span style="font-size:.78rem;color:var(--text-2);"><b style="color:var(--green);">Auto (assistant)</b> — Pousse un fichier YAML valide vers la prod H:\.</span></div>
+        <div class="item-card"><code>/ha_push_docs</code><span style="font-size:.78rem;color:var(--text-2);"><b style="color:var(--green);">Auto (assistant)</b> — Synchronise les docs locales DOCS/ vers H:\Docs\.</span></div>
+        <div class="item-card"><code>/ha_resync_docs</code><span style="font-size:.78rem;color:var(--text-2);"><b style="color:var(--green);">Auto (assistant)</b> — Resynchronise le local depuis GitHub, audit MD5 a l'appui.</span></div>
         <div class="item-card"><code>/ha_push_md</code><span style="font-size:.78rem;color:var(--text-2);">Pousse uniquement les fichiers <code>.md</code> de documentation vers H:\Docs.</span></div>
         <div class="item-card"><code>/trigul</code><span style="font-size:.78rem;color:var(--text-2);">Triangulation MD5 des docs (local vs prod vs GitHub), rapport dans <code>historique\MD5\</code>. Seule commande sans fichier dans <code>.claude/commands/</code> — le skill <code>ha-trigul</code> fait le travail.</span></div>
         
