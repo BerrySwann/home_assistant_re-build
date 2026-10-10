@@ -1633,21 +1633,30 @@ footer a:hover { color:var(--green); }
             <li style="margin-top:8px">
               <span class="dir">docs_automations_YAML/</span>
               <ul class="ftree sub">
-                <li><span class="file">automation_presence_chauffage.yaml</span></li>
-                <li><span class="file">automation_alertes_conso.yaml</span></li>
-                <li><span class="file">... (1 fichier = 1 automation)</span></li>
+                <li><span class="file">P0_energie/ · P1_clim_chauffage/ · P1_cuisine/ · P1_sdb/</span></li>
+                <li><span class="file">P2_prises/ · P3_eclairage/ · P4_presence/ · stores/ · systeme/ · meteo/</span></li>
+                <li><span class="file">auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml</span></li>
+                <li><span class="file">... (1 fichier = 1 automation, rangé par pôle)</span></li>
               </ul>
             </li>
             <li style="margin-top:8px">
               <span class="dir">docs_automations_MD/</span>
               <ul class="ftree sub">
-                <li><span class="file">automation_presence_chauffage.md</span></li>
+                <li><span class="file">ENERGIE/ · P1_CLIM_CHAUFFAGE/ · P1_SDB/ · P2_PRISES/ · P3_ECLAIRAGE/ ...</span></li>
+                <li><span class="file">BASCULEMENT_TARIF_HPHC.md</span></li>
                 <li><span class="file">Description · logique · déclencheurs</span></li>
               </ul>
             </li>
           </ul>
           <p style="font-size:.7rem;color:var(--text-faint);margin-top:14px;line-height:1.6;">
             Chaque automation : un <code>.yaml</code> (code) + un <code>.md</code> (doc).
+          </p>
+          <p style="font-size:.7rem;color:var(--text-2);margin-top:10px;line-height:1.7;border-top:1px solid var(--border);padding-top:10px;">
+            <span class="dir" style="font-size:.8rem;">Scripts — <code>DOCS/04_docs_scripts/</code> → <code>H:\Docs\</code></span><br>
+            <code>docs_scripts_YAML/</code> (p1_master_gestion_clim.yaml · sdb_soufflant_demarrer.yaml · correct_linky.py)
+            · <code>docs_scripts_SH/</code> (audit_md5.sh · ha_git_backup.sh)
+            · fiches <code>.md</code> dans <code>docs_scripts_YAML_MD/</code> et <code>docs_scripts_SH_MD/</code><br>
+            Meme regle que les automations : jamais modifie dans le fichier, on passe par l'UI HA.
           </p>
         </div>
       </div>
@@ -1862,42 +1871,32 @@ input_datetime: !include input_datetime.yaml</pre>
     <!-- ARBO CONFIG YAML (contenu deplace dans modal) -->
     <div style="display:none;">
       <pre id="tree-src-config-yaml" style="display:none;">config_system_YAML/
-├── blueprints/                <span style="color:#a0a8b6"># 4 fichiers</span>
-│   ├── automation/
-│   ├── script/
+├── blueprints/    <span style="color:#a0a8b6"># 1 fichier</span>
 │   └── template/
-├── command_line/              <span style="color:#a0a8b6"># 4 fichiers</span>
+├── command_line/    <span style="color:#a0a8b6"># 7 fichiers</span>
 │   ├── audit/
+│   ├── energie/
 │   ├── github_maintenance/
 │   ├── ip_externe/
-│   ├── meteo/
-│   └── sante_systeme_mini_pc/
-├── groups/                    <span style="color:#a0a8b6"># 3 fichiers — batteries par constructeur</span>
-│   ├── GRP_01_batteries_hue.yaml
-│   ├── GRP_02_batteries_ikea.yaml
-│   └── GRP_03_batteries_sonoff.yaml
-├── input_booleans/            <span style="color:#a0a8b6"># 5 fichiers</span>
+│   └── meteo/
+├── groups/    <span style="color:#a0a8b6"># 4 fichiers</span>
+├── input_booleans/    <span style="color:#a0a8b6"># 7 fichiers</span>
 │   ├── P1/
-│   ├── P3/
 │   └── P4/
-├── input_number/              <span style="color:#a0a8b6"># 1 fichier</span>
-│   └── input_number.yaml
-├── notifs/                    <span style="color:#a0a8b6"># 2 fichiers</span>
-│   ├── diag_conso_elec.txt
-│   └── ecart_liky_vs_nodon.txt
-├── sensors/                   <span style="color:#a0a8b6"># 5 fichiers</span>
+├── input_number/    <span style="color:#a0a8b6"># 1 fichier</span>
+├── notifs/    <span style="color:#a0a8b6"># 2 fichiers</span>
+├── sensors/    <span style="color:#a0a8b6"># 4 fichiers</span>
 │   ├── Air_quality/
 │   ├── P0_Energie_total_min_maxi_diag/
 │   ├── P1_clim_chauffage/
-│   ├── P3_eclairage/
 │   └── meteo/
-├── shell_command/             <span style="color:#a0a8b6"># 2 fichiers</span>
+├── shell_command/    <span style="color:#a0a8b6"># 3 fichiers</span>
 │   ├── Ghithub/
+│   ├── P0/
 │   └── P4/
-├── templates/                 <span style="color:#a0a8b6"># 46 fichiers — le plus gros dossier</span>
+├── templates/    <span style="color:#a0a8b6"># 53 fichiers</span>
 │   ├── Air_quality/
 │   ├── Inter_BP_Virtuel/
-│   ├── Mini-PC/
 │   ├── P0_Energie_total_diag/
 │   ├── P1_clim_chauffage/
 │   ├── P2_prise/
@@ -1906,20 +1905,24 @@ input_datetime: !include input_datetime.yaml</pre>
 │   ├── Stores/
 │   ├── meteo/
 │   └── utilitaires/
-├── utility_meter/             <span style="color:#a0a8b6"># 8 fichiers</span>
+├── themes/    <span style="color:#a0a8b6"># 11 fichiers</span>
+│   ├── Frosted Glass/
+│   ├── ios-dark-mode/
+│   └── visionos/
+├── timers/    <span style="color:#a0a8b6"># 4 fichiers</span>
+│   └── P1_timers/
+├── utility_meter/    <span style="color:#a0a8b6"># 8 fichiers</span>
 │   ├── P0_Energie_total/
 │   ├── P1_clim_chauffage/
 │   ├── P2_prise/
 │   ├── P3_eclairage/
 │   └── meteo/
+├── configuration.bak_2026_09_11.yaml
+├── configuration.bak_2026_10_07.yaml
 ├── configuration.yaml
 ├── input_button.yaml
 ├── input_datetime.yaml
-├── input_select.yaml
-├── ip_bans.yaml
-├── scenes.yaml
-├── scripts.yaml
-└── sql.yaml</pre>
+└── input_select.yaml</pre>
       <p id="tree-note-config-yaml" style="display:none;font-size:.78rem;color:var(--text-2);line-height:1.75;margin-top:.7rem;">Arborescence à 2 niveaux (dossiers de pôle uniquement) — <code>templates/</code> contient à lui seul 46 fichiers répartis par pôle.</p>
     </div>
 
@@ -3143,7 +3146,23 @@ input_datetime: !include input_datetime.yaml</pre>
     <!-- ARBO AUTOMATIONS (contenu deplace dans modal) -->
     <div class="conv-section" style="display:none;">
       <pre id="tree-src-automations-yaml" style="display:none;">docs_automations_YAML/
-├── P1_clim_chauffage/                              <span style="color:#a0a8b6"># (A)-(J), 10 automations</span>
+├── P0_energie/    <span style="color:#a0a8b6"># 15 fichiers</span>
+│   ├── auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml
+│   ├── histo_linky_quotidien.yaml
+│   ├── histo_linky_quotidien_2026-09-01.yaml
+│   ├── histo_linky_quotidien_2026-09-10.yaml
+│   ├── histo_nodon_quotidien.yaml
+│   ├── histo_nodon_quotidien_2026-09-01.yaml
+│   ├── histo_nodon_quotidien_2026-09-10.yaml
+│   ├── log_ecart_linky_vs_nodon.yaml
+│   ├── log_ecart_linky_vs_nodon_2026-05-31.yaml
+│   ├── log_ecart_linky_vs_nodon_2026-09-10.yaml
+│   ├── rattrapage_linky_ecart.yaml
+│   ├── rattrapage_linky_ecart_2026-09-03.yaml
+│   ├── rattrapage_linky_ecart_2026-09-10.yaml
+│   ├── rattrapage_linky_j2_ecart.yaml
+│   └── rattrapage_linky_j2_ecart_2026-09-10.yaml
+├── P1_clim_chauffage/    <span style="color:#a0a8b6"># 12 fichiers + 2 sauvegardes</span>
 │   ├── a_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml
 │   ├── b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml
 │   ├── c_notification_temperature_up_ou_down_7h30_21h00.yaml
@@ -3154,21 +3173,47 @@ input_datetime: !include input_datetime.yaml</pre>
 │   ├── h_clim_debug_force_mode_correct_securite.yaml
 │   ├── i_synchro_notif_clim_si_prise_coupee.yaml
 │   ├── j_debug_notifier_les_changements_de_message_clim_mobile.yaml
-│   └── old/                                        <span style="color:#a0a8b6"># 2 versions archivees</span>
-│       ├── A0_clim_jour_2026-01-01.yaml
-│       └── B0_clim_nuit_2026-01-02.yaml
-├── P1_cuisine/
+│   ├── j_debug_notifier_les_changements_de_message_clim_mobile_2026-06-02.yaml
+│   ├── j_debug_notifier_les_changements_de_message_clim_mobile_2026-09-10.yaml
+│   └── old/
+├── P1_cuisine/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── a_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.yaml
 │   └── b_chauffage_cuisine_vacances.yaml
-├── P1_sdb/
+├── P1_sdb/    <span style="color:#a0a8b6"># 14 fichiers</span>
 │   ├── a_2026_02_01_salle_de_bain_gestion_intelligente_soufflant.yaml
 │   ├── d_salle_de_bain_watchdog_securite_radiateur.yaml
-│   └── e_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.yaml
-├── P2_prises/
-│   ├── eco_prises_dinamique_by_presence_groupe.yaml
+│   ├── d_salle_de_bain_watchdog_securite_radiateur_2026-05-31.yaml
+│   ├── d_salle_de_bain_watchdog_securite_radiateur_2026-09-10.yaml
+│   ├── d_salle_de_bain_watchdog_securite_radiateur_2026-10-07.yaml
+│   ├── e_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.yaml
+│   ├── e_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h_2026-10-07.yaml
+│   ├── e_sdb_soufflant_decompte_60min_timer.yaml
+│   ├── f_sdb_soufflant_rattrapage_demarrage_ha_timer.yaml
+│   ├── h_sdb_seche_serviettes_decompte_2h_timer.yaml
+│   ├── h_soufflant_sdb_routage.yaml
+│   ├── h_soufflant_sdb_routage_2026-10-07.yaml
+│   ├── i_sdb_seche_serviettes_rattrapage_demarrage_ha_timer.yaml
+│   └── i_soufflant_sdb_bouton_rodret.yaml
+├── P2_prises/    <span style="color:#a0a8b6"># 18 fichiers</span>
+│   ├── congelateur_alarme_capteur.yaml
+│   ├── congelateur_alarme_capteur_2026-09-01.yaml
+│   ├── congelateur_alarme_panne.yaml
+│   ├── congelateur_alarme_panne_2026-09-01.yaml
+│   ├── congelateur_alarme_porte.yaml
+│   ├── congelateur_alarme_porte_2026-09-01.yaml
+│   ├── eco_prises_dynamique_by_presence_groupe.yaml
+│   ├── eco_prises_dynamique_by_presence_groupe_2026-07-15.yaml
+│   ├── eco_prises_dynamique_by_presence_groupe_2026-09-10.yaml
+│   ├── eco_prises_dynamique_by_presence_groupe_2026-09-23.yaml
 │   ├── gestion_pc_bureau_scene_de_fin_notif.yaml
-│   └── gestion_tv_chambre_scene_de_fin_notif.yaml
-├── P3_eclairage/
+│   ├── gestion_pc_bureau_scene_de_fin_notif_2026-05-31.yaml
+│   ├── gestion_pc_bureau_scene_de_fin_notif_2026-09-10.yaml
+│   ├── gestion_pc_bureau_scene_de_fin_notif_2026-09-23.yaml
+│   ├── gestion_tv_chambre_scene_de_fin_notif.yaml
+│   ├── gestion_tv_chambre_scene_de_fin_notif_2026-06-01.yaml
+│   ├── gestion_tv_chambre_scene_de_fin_notif_2026-09-10.yaml
+│   └── gestion_tv_chambre_scene_de_fin_notif_2026-09-23.yaml
+├── P3_eclairage/    <span style="color:#a0a8b6"># 10 fichiers</span>
 │   ├── p3_bureau_activation_ecran_synchro.yaml
 │   ├── p3_bureau_bouton_rodret_toggle_blanches.yaml
 │   ├── p3_bureau_forcer_play_on_si_pc_tourne.yaml
@@ -3176,46 +3221,72 @@ input_datetime: !include input_datetime.yaml</pre>
 │   ├── p3_entree_allumage_lumiere.yaml
 │   ├── p3_salon_bouton_ikea_inter_salon.yaml
 │   ├── p3_salon_bouton_ikea_somrig.yaml
-│   └── p3_sdb_sync_miroir_lampe_et_relais_sdb.yaml
-├── P4_presence/
-│   └── P4_log_zones_eric.yaml
-├── energie/
-│   ├── auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml
-│   └── log_ecart_linky_vs_nodon.yaml
-├── github_backup/                                  <span style="color:#a0a8b6"># categorie "Backup" du tableau, 7 fichiers</span>
+│   ├── p3_sdb_sync_miroir_lampe_et_relais_sdb.yaml
+│   ├── p3_sdb_sync_miroir_lampe_et_relais_sdb_2026-05-31.yaml
+│   └── p3_sdb_sync_miroir_lampe_et_relais_sdb_2026-09-10.yaml
+├── P4_presence/    <span style="color:#a0a8b6"># 3 fichiers</span>
+│   ├── P4_log_zones_eric.yaml
+│   ├── P4_log_zones_eric_2026-06-22.yaml
+│   └── P4_log_zones_eric_2026-09-10.yaml
+├── _old_avant_staging/    <span style="color:#bf616a"># archive legacie hors perimetre actif</span>
+│   ├── P2_bouton_rodret_soufflant_sdb.yaml
+│   ├── P3_salon_bouton_inter_ikea_4.yaml
+│   ├── P3_salon_bouton_inter_somrig.yaml
+│   ├── automations.yaml
+│   ├── P1_clim_chauffage/
+│   ├── P1_cuisine/
+│   ├── P1_sdb/
+│   ├── P2_prises/
+│   ├── P3_eclairage/
+│   ├── backup/
+│   ├── energie/
+│   ├── meteo/
+│   ├── raspi/
+│   ├── stores/
+│   └── systeme/
+├── github_backup/    <span style="color:#a0a8b6"># 13 fichiers</span>
 │   ├── 00_backup_alerte_si_ko_15_min.yaml
 │   ├── 01_backup_git_hourly_h_10.yaml
 │   ├── 02_backup_git_daily_03_00.yaml
 │   ├── 03_backup_git_weekly_dim_01_30.yaml
 │   ├── 04_backup_git_push_manuel.yaml
+│   ├── 04_backup_git_push_manuel_2026-05-31.yaml
+│   ├── 04_backup_git_push_manuel_2026-09-10.yaml
 │   ├── 05_backup_git_push_weekly_manuel.yaml
-│   └── git_push_au_demarrage_ha.yaml
-├── meteo/
+│   ├── 05_backup_git_push_weekly_manuel_2026-05-31.yaml
+│   ├── 05_backup_git_push_weekly_manuel_2026-09-10.yaml
+│   ├── git_push_au_demarrage_ha.yaml
+│   ├── git_push_au_demarrage_ha_2026-06-02.yaml
+│   └── git_push_au_demarrage_ha_2026-09-10.yaml
+├── meteo/    <span style="color:#a0a8b6"># 7 fichiers</span>
 │   ├── alerte_meteo_france_actualisation_des_cartes.yaml
 │   ├── mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml
 │   ├── notification_de_la_foudre.yaml
+│   ├── notification_de_la_foudre_2026-05-31.yaml
+│   ├── notification_de_la_foudre_2026-09-10.yaml
 │   ├── update_previous_humidity.yaml
 │   └── update_previous_temperature.yaml
-├── stores/
+├── stores/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── gestion_optimisee_du_store_bureau.yaml
 │   └── gestion_simple_du_store_salon_matin_soir.yaml
-├── systeme/
+├── systeme/    <span style="color:#a0a8b6"># 6 fichiers</span>
 │   ├── db_purge_mariadb_repack.yaml
 │   ├── diag_enregistrement_journalier.yaml
 │   ├── systeme_economie_energie_vs_code.yaml
 │   ├── systeme_watchdog_piles_hue_ikea_sonoff.yaml
 │   ├── veille_github_nouvelle_release_detectee.yaml
-│   └── z2m_last_seen.yaml
-└── _old_avant_staging/                             <span style="color:#bf616a"># archive legacie pre-refonte, hors perimetre actif</span></pre>
+│   └── z2m_last_seen.yaml</pre>
       <p id="tree-note-automations-yaml" style="display:none;font-size:.78rem;color:var(--text-2);line-height:1.75;margin-top:.7rem;">Somme par dossier : 10+2+3+3+8+1+2+7+5+2+6 = 49 fichiers, cohérent avec le total en prod. <code>_old_avant_staging/</code> est une archive de la refonte, hors périmètre actif.</p>
     </div>
 
     <div class="conv-section" style="display:none;">
       <pre id="tree-src-automations-md" style="display:none;">docs_automations_MD/
-├── AUTOMATIONS/
+├── AUTOMATIONS/    <span style="color:#a0a8b6"># 4 fichiers</span>
 │   ├── AUTOMATIONS.md
+│   ├── AUTOMATIONS_2026-10-06.md
+│   ├── AUTOMATIONS_2026-10-07.md
 │   └── PROD_vs_REBUILD_DIFF.md
-├── BACKUP/
+├── BACKUP/    <span style="color:#a0a8b6"># 7 fichiers</span>
 │   ├── GIT_ALERTE_KO.md
 │   ├── GIT_AU_DEMARRAGE.md
 │   ├── GIT_DAILY.md
@@ -3223,56 +3294,75 @@ input_datetime: !include input_datetime.yaml</pre>
 │   ├── GIT_PUSH_MANUEL.md
 │   ├── GIT_PUSH_WEEKLY_MANUEL.md
 │   └── GIT_WEEKLY.md
-├── ENERGIE/
+├── ENERGIE/    <span style="color:#a0a8b6"># 6 fichiers</span>
 │   ├── BASCULEMENT_TARIF_HPHC.md
+│   ├── HISTO_LINKY_QUOTIDIEN.md
+│   ├── HISTO_NODON_QUOTIDIEN.md
 │   ├── LOG_ECART_LINKY_NODON.md
-│   └── SURVEILLANCE_GROS_ELECTRO_HP.md
-├── METEO/
+│   ├── RATTRAPAGE_LINKY_ECART.md
+│   └── RATTRAPAGE_LINKY_J2.md
+├── METEO/    <span style="color:#a0a8b6"># 5 fichiers</span>
 │   ├── ALERTE_METEO_CARTES.md
 │   ├── MAJ_TEMPS_FOUDRE.md
 │   ├── NOTIF_FOUDRE.md
 │   ├── UPDATE_PREV_HUMIDITY.md
 │   └── UPDATE_PREV_TEMPERATURE.md
-├── P1_CLIM_CHAUFFAGE/
+├── P1_CLIM_CHAUFFAGE/    <span style="color:#a0a8b6"># 13 fichiers</span>
+│   ├── A0_CLIM_JOUR.bak_2026_09_20.md
 │   ├── A0_CLIM_JOUR.md
+│   ├── B0_CLIM_NUIT.bak_2026_09_20.md
 │   ├── B0_CLIM_NUIT.md
 │   ├── C_NOTIF_TEMP_JOUR.md
 │   ├── D_NOTIF_TEMP_NUIT.md
 │   ├── E_NOTIF_FERMETURE_FENETRES.md
+│   ├── FICHE_OP_RELAIS_CUISINE_MAJ_SHELLY.md
 │   ├── F_ARRET_CLIM_NOTIF.md
 │   ├── G_NOTIF_MODE_CHANGEMENT.md
 │   ├── H_DEBUG_FORCE_MODE.md
 │   ├── I_SYNCHRO_NOTIF_PRISE_COUPEE.md
 │   └── J_DEBUG_NOTIF_MESSAGE_CLIM.md
-├── P1_CUISINE/
+├── P1_CUISINE/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── A_CHAUFFAGE_CUISINE.md
 │   └── B_CHAUFFAGE_CUISINE_VACANCES.md
-├── P1_SDB/
-│   ├── A_SOUFFLANT_SDB.md
+├── P1_SDB/    <span style="color:#a0a8b6"># 10 fichiers</span>
+│   ├── A_SOUFFLANT_SDB_old_2024-2025.md
+│   ├── D_WATCHDOG_RADIATEUR_SDB.bak_2026_09_29.md
 │   ├── D_WATCHDOG_RADIATEUR_SDB.md
-│   └── E_MINUTERIE_SECHE_SERVIETTES.md
-├── P2_PRISES/
-│   ├── BUREAU_ALLUMAGE_PC.md
-│   ├── ECO_PRISES.md
+│   ├── D_WATCHDOG_RADIATEUR_SDB_2026-10-07.md
+│   ├── E_MINUTERIE_SECHE_SERVIETTES.md
+│   ├── E_MINUTERIE_SECHE_SERVIETTES_2026-10-07.md
+│   ├── SDB_SOUFFLANT_SPECIFICATION_2026.bak_2026_09_29.md
+│   ├── SDB_SOUFFLANT_SPECIFICATION_2026.md
+│   ├── SDB_SOUFFLANT_SPECIFICATION_2026_2026-10-07.md
+│   └── TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md
+├── P2_PRISES/    <span style="color:#a0a8b6"># 10 fichiers</span>
+│   ├── CONGELATEUR_ALARME_CAPTEUR.md
+│   ├── CONGELATEUR_ALARME_PANNE.md
+│   ├── CONGELATEUR_ALARME_PORTE.md
+│   ├── ECO_PRISES_DYNAMIQUE.bak_2026_09_23.md
 │   ├── ECO_PRISES_DYNAMIQUE.md
+│   ├── GESTION_PC_BUREAU.bak_2026_09_23.md
 │   ├── GESTION_PC_BUREAU.md
+│   ├── GESTION_TV_CHAMBRE.bak_2026_09_23.md
 │   ├── GESTION_TV_CHAMBRE.md
-│   ├── RODRET_SOUFFLANT_SDB.md
-│   └── RODRET_TV_CHAMBRE.md
-├── P3_ECLAIRAGE/
+│   └── RODRET_SOUFFLANT_SDB.md
+├── P3_ECLAIRAGE/    <span style="color:#a0a8b6"># 8 fichiers</span>
 │   ├── ALLUMAGE_LUMIERE_ENTREE.md
 │   ├── BOUTON_INTER_IKEA_4.md
 │   ├── BOUTON_INTER_SOMRIG.md
 │   ├── BUREAU_ACTIVATION_ECRAN_SYNCHRO.md
 │   ├── BUREAU_FORCER_PLAY_ON.md
 │   ├── BUREAU_RODRET_TOGGLE_BLANCHES.md
-│   └── BUREAU_WATCHDOG_SYNCHRO_LAMPES.md
-├── RASPI/                                           <span style="color:#bf616a"># doc presente, pas de dossier YAML actif equivalent</span>
+│   ├── BUREAU_WATCHDOG_SYNCHRO_LAMPES.md
+│   └── SDB_SYNC_MIROIR_LAMPE_ET_RELAIS_SDB.md
+├── P4_PRESENCE/    <span style="color:#a0a8b6"># 1 fichiers</span>
+│   └── P4_LOG_ZONES_ERIC.md
+├── RASPI/    <span style="color:#a0a8b6"># 1 fichiers</span>
 │   └── RPi4_FAN_PWM.md
-├── STORES/
+├── STORES/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── GESTION_STORE_BUREAU.md
 │   └── GESTION_STORE_SALON.md
-├── SYSTEME/
+├── SYSTEME/    <span style="color:#a0a8b6"># 6 fichiers</span>
 │   ├── DB_PURGE_MARIADB.md
 │   ├── DIAG_ENREGISTREMENT_JOURNALIER.md
 │   ├── ECONOMIE_ENERGIE_VSCODE.md
@@ -4796,8 +4886,8 @@ const TREES = {
   config_md:         { title: 'config_system_MD/ — arborescence réelle (2026-08-02)',        srcId: 'tree-src-config-md', noteId: 'tree-note-config-md' },
   yaml:              { title: 'dashboard_docs_YAML/ — arborescence réelle (2026-10-10)',    srcId: 'tree-src-yaml' },
   md:                { title: 'dashboard_docs_MD/ — arborescence réelle (2026-08-02)',       srcId: 'tree-src-md' },
-  automations_yaml:  { title: 'docs_automations_YAML/ — arborescence réelle (2026-08-02)',   srcId: 'tree-src-automations-yaml', noteId: 'tree-note-automations-yaml' },
-  automations_md:    { title: 'docs_automations_MD/ — arborescence réelle (2026-08-02)',     srcId: 'tree-src-automations-md',   noteId: 'tree-note-automations-md' },
+  automations_yaml:  { title: 'docs_automations_YAML/ — arborescence réelle (2026-10-10)',   srcId: 'tree-src-automations-yaml', noteId: 'tree-note-automations-yaml' },
+  automations_md:    { title: 'docs_automations_MD/ — arborescence réelle (2026-10-10)',     srcId: 'tree-src-automations-md',   noteId: 'tree-note-automations-md' },
   dependances:       { title: 'DEPENDANCES_GLOBALES.md — extrait réel (2026-08-02)',          srcId: 'tree-src-dependances',      noteId: 'tree-note-dependances' },
   yaml_p0_hphc:     { title: 'P0_UM_AMHQ_HPHC.yaml — fichier complet réel',                  srcId: 'tree-src-yaml-p0-hphc',     noteId: 'tree-note-yaml-p0-hphc' }
 };
