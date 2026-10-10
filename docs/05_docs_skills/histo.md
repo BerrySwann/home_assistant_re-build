@@ -221,7 +221,7 @@ Le journal fusionne est un seul fichier Markdown qui regroupe tous les journaux 
 
 Applique la REGLE DE SAUVEGARDE du 2026-10-08 (definie dans CLAUDE.md). Tout se passe en LOCAL, jamais sur H: ni sur D:.
 
-**Perimetre :** `C:\Users\Berry Swann\Documents\ReBuild\docs\00_*` a `05_*` (recursif) + `C:\Users\Berry Swann\Documents\ReBuild\Claude md save\`.
+**Perimetre :** `C:\Users\Berry Swann\Documents\ReBuild\docs\00_*` a `05_*` (recursif) + `C:\Users\Berry Swann\Documents\ReBuild\Claude md SAVE\`.
 **Hors perimetre (ne pas toucher) :** TODO, Github, historique, .claude, Infra_Proxmox. Ignorer aussi tout dossier `_ARCHIVE` / `ARCHIVE` et tout fichier dont le nom contient `_archive_` : ce sont des archives, pas des sauvegardes (ex : `_ARCHIVE\DEPENDANCES_GLOBALES_archive_2026-10-07_18h13.md`).
 
 **"Poubelle" = corbeille Windows**, jamais de suppression definitive :
@@ -230,14 +230,33 @@ Add-Type -AssemblyName Microsoft.VisualBasic
 [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile($f,'OnlyErrorDialogs','SendToRecycleBin')
 ```
 
+### Principe de conformite (aucune exception)
+
+Tout fichier du perimetre dont le nom porte une date ou un marqueur de sauvegarde, et qui ne suit pas
+la REGLE DE SAUVEGARDE courante, est ramene aux regles. Aucun cas n'est laisse de cote sous pretexte
+qu'il n'entre dans aucune famille : s'il porte une date ou un marqueur de sauvegarde, il est traite.
+
+Deux cibles seulement :
+- une version ou une sauvegarde -> `{nom_de_travail}.bak_AAAA_MM_JJ` (le nom de travail ne contient pas de date) ;
+- la version courante d'un fichier de travail -> le nom sans date (`{nom}.ext`).
+
+Un nom de fichier ne porte JAMAIS de date dans sa partie courante. En cas de doute (nom qui pourrait
+etre un vrai document et non une sauvegarde), on signale et on ne touche pas.
+
 ### Formats reconnus (dans le perimetre uniquement)
 
 | Famille | Exemple | Traitement |
 |:---|:---|:---|
-| A - sauvegarde du jour ou d'un jour passe, avec heure | `fichier.yaml.bak_2026_10_07_21h14m05s` | voir ci-dessous |
+| A - sauvegarde horodatee | `fichier.yaml.bak_2026_10_07_21h14m05s` | voir protocole |
 | B - sauvegarde finale | `fichier.yaml.bak_2026_10_07` | gardee, soumise au plafond de 3 |
 | C - anciens `.bak` | `.bak_2026-09-28`, `.bak_20260929`, `.bak2_...`, `.bak-...` | renommes `fichier.yaml.bak_AAAA_MM_JJ` |
-| D - anciennes sauvegardes datees | `fichier_2026-10-07_22h00.ext` | seule ce jour-la : renommee `fichier_2026-10-07.ext` ; plusieurs : la plus recente gardee et renommee, les autres a la corbeille |
+| D - fichiers de travail dates | `page_L4C2_proxmox_2026-06-18.yaml`, `fichier_2026-10-07_22h00.ext` | la plus recente devient le nom sans date `{nom}.ext` ; les autres deviennent `.bak_AAAA_MM_JJ` (plafond 3) |
+| E - sauvegardes nommees | `CLAUDE_backup_2026-07-31.md`, `CLAUDE_2026-10-04.md`, `fichier_old.md` | renommees `{nom_de_travail}.bak_AAAA_MM_JJ`, ou `{nom_de_travail}` est le nom du fichier de travail courant, extension comprise : `CLAUDE_backup_2026-07-31.md` -> `CLAUDE.md.bak_2026_07_31`, `CLAUDE_2026-10-04.md` -> `CLAUDE.md.bak_2026_10_04`, `fichier_old.md` -> `fichier.md.bak_<date>`. Date lue dans le nom, a defaut date de modification |
+
+> Aucune famille n'est une liste fermee. Tout nom portant une date (`AAAA-MM-JJ`, `AAAA_MM_JJ`,
+> `AAAAMMJJ`) ou un marqueur `backup`, `save`, `old`, `ancien`, `avant`, `orig`, et qui n'est pas le
+> fichier de travail courant, entre dans la conformite (famille E). Restent exclus les dossiers
+> `_ARCHIVE` / `ARCHIVE` et les fichiers `*_archive_*`.
 
 ### Protocole
 
@@ -247,8 +266,9 @@ Add-Type -AssemblyName Microsoft.VisualBasic
    - garder la sauvegarde la plus RECENTE : d'abord par l'horodatage lu dans le nom (jour + heure) ; a egalite (noms sans heure, ex `.bak_2026-09-20`, `.bak_2026-09-20b`, `.bak2_...`), par la date de modification du fichier ; si l'egalite persiste et que les contenus different (MD5), ne rien supprimer et signaler le groupe ; si les contenus sont identiques, garder n'importe lequel ;
    - la renommer en `fichier.yaml.bak_AAAA_MM_JJ` (famille A), les autres de ce jour vont a la corbeille Windows ;
    - famille C : renommer en `.bak_AAAA_MM_JJ` (la date est lue dans le nom) ;
-   - famille D : voir tableau.
-4. Plafond : si un fichier a plus de 3 `.bak_AAAA_MM_JJ` (apres les renommages ci-dessus, famille A, B et C), la plus ancienne va a la corbeille Windows, et ainsi de suite jusqu'a 3. Le plafond de 3 ne s'applique pas aux fichiers de famille D : si un groupe D en compte plus de 3 apres traitement, le signaler seulement.
+   - famille D : la version la plus recente devient le nom sans date `{nom}.ext`, les autres deviennent des `.bak_AAAA_MM_JJ` (plafond 3) ;
+   - famille E : renommer en `{nom_de_travail}.bak_AAAA_MM_JJ`, ou `{nom_de_travail}` est le nom du fichier de travail courant, extension comprise (ex : `CLAUDE_backup_2026-07-31.md` -> `CLAUDE.md.bak_2026_07_31`, `CLAUDE_2026-10-04.md` -> `CLAUDE.md.bak_2026_10_04`) ; date lue dans le nom, a defaut date de modification.
+4. Plafond : si un fichier a plus de 3 `.bak_AAAA_MM_JJ` (apres les renommages ci-dessus, famille A, B et C), la plus ancienne va a la corbeille Windows, et ainsi de suite jusqu'a 3. Le plafond de 3 s'applique a toutes les familles (A, B, C, D, E).
 5. Si la date change pendant l'execution (minuit passe), garder la date relevee au lancement de l'etape.
 
 ### Garde-fous (ne rien supprimer, remonter le souci)
