@@ -660,7 +660,7 @@ Vérifier que les entités Pôle 1 sont chargées (`templates/P1_clim_chauffage/
 ### Documentation
 
 - Vignette d'accès : `docs/L1C2_TEMPERATURES/L1C2_VIGNETTE_TEMPERATURES.md`
-- Page (export live) : `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-24.yaml` (42 cartes - + carte appliance Congélateur / contact porte, seuils 26/48/235 ; historique 2026-09-20 : 41 cartes)
+- Page (export live) : `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures.yaml` (42 cartes - + carte appliance Congélateur / contact porte, seuils 26/48/235 ; historique 2026-09-20 : 41 cartes)
 - Pôle 1 complet : *(doc à créer)*
 
 ---

@@ -681,7 +681,7 @@ Le hash `#tendances` doit être déclaré dans la page. Vérifier que la `bubble
 | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | power_status + etat + affichage |
 | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Logique T° cible + delta ADEME |
 | `sensors/P1_clim_chauffage/P1_DUT_clim_chauffage.yaml` | DUT history_stats + intégration kWh |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-09-20.yaml` | Export live du 2026-09-20 (56 cartes - refonte cartes clim button-card) |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/page_L2C2_energie_clim.yaml` | Export live du 2026-09-20 (56 cartes - refonte cartes clim button-card) |
 
 
 <!-- obsidian-wikilinks -->

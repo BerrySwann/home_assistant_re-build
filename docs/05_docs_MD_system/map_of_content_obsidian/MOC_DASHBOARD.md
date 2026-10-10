@@ -41,8 +41,8 @@
 
 | ID | Vignette | Page |
 |:---|:---------|:-----|
-| L4C1 | [[L4C1_PROXMOX/L4C1_VIGNETTE_PROXMOX\|💾 Proxmox (PVE)]] | [[L4C1_PROXMOX/PAGE_PROXMOX\|Page Proxmox]] |
-| L4C2 | [[L4C2_MINI_PC/L4C2_VIGNETTE_MINI_PC\|🖥️ Mini PC]] | [[L4C2_MINI_PC/PAGE_MINI_PC\|Page Mini PC]] · [[L4C2_MINI_PC/PAGE_RASPI\|Page RPi4 (transitoire)]] |
+| L4C2 | [[L4C2_PROXMOX/L4C2_VIGNETTE_PROXMOX\|💾 Proxmox (PVE)]] | [[L4C2_PROXMOX/PAGE_PROXMOX\|Page Proxmox]] |
+| L4C1 | [[L4C1_MINI_PC/L4C1_VIGNETTE_MINI_PC\|🖥️ Mini PC]] | [[L4C1_MINI_PC/PAGE_MINI_PC\|Page Mini PC]] · [[L4C1_MINI_PC/PAGE_RASPI\|Page RPi4 (transitoire)]] |
 | L4C3 | [[L4C3_MAJ_HA/L4C3_VIGNETTE_MAJ\|🔄 Mises à jour HA]] | [[L4C3_MAJ_HA/PAGE_MAJ\|Page MAJ]] |
 
 ### LIGNE 5 - Maintenance Matérielle

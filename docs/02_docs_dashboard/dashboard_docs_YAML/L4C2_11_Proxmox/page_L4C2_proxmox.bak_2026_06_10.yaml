@@ -1204,4 +1204,4 @@ cards:
 # [2026-06-12] Fix uptime : secondes → heures (sensor retourne des heures flottantes, pas des secondes)
 # [2026-06-12] Fix background : card_mod ajouté sur stack-in-card (fond gris supprimé)
 # [2026-06-12] Fix MyElectricalData running state : cyan → vert (#0f9d58) comme toutes les autres sections
-# [2026-06-12] TODO : créer docs_dashboard/docs/L4C1_PROXMOX/L4C1_VIGNETTE_PROXMOX.md + PAGE_PROXMOX.md
+# [2026-06-12] TODO : créer docs_dashboard/docs/L4C2_PROXMOX/L4C2_VIGNETTE_PROXMOX.md + PAGE_PROXMOX.md

@@ -9,15 +9,15 @@
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Fichier YAML** | `Dashboard/L4C1_10_Proxmox/vignette_L4C1_proxmox_2026-06-18.yaml` |
-| 🔗 **Accès depuis** | L4C1 - Matrice dashboard principal (ligne 4, colonne 1) |
+| 📁 **Fichier YAML** | `docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_11_Proxmox/vignette_L4C2_proxmox.yaml` |
+| 🔗 **Accès depuis** | L4C2 - Matrice dashboard principal (ligne 4, colonne 2) |
 | 🏗️ **Type** | `custom:button-card` - grille custom 4×2 |
 | 📅 **Modifié le** | 2026-06-09 |
 | 🏠 **Version HA** | 2025.2+ |
 
 ---
 
-# 🖥️ L4C1 - VIGNETTE PROXMOX
+# 🖥️ L4C2 - VIGNETTE PROXMOX
 
 ---
 
@@ -86,8 +86,8 @@ Vignette de supervision compacte du nœud Proxmox VE. Affiche la T° CPU package
 
 ## 🔗 FICHIERS LIÉS
 
-- `Dashboard/L4C1_10_Proxmox/vignette_L4C1_proxmox_2026-06-18.yaml`
-- `docs/L4C1_PROXMOX/PAGE_PROXMOX.md`
+- `docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_11_Proxmox/vignette_L4C2_proxmox.yaml`
+- `docs/L4C2_PROXMOX/PAGE_PROXMOX.md`
 - `docs/DEPENDANCES_GLOBALES.md`
 
 ---

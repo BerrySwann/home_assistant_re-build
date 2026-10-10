@@ -278,7 +278,7 @@ Le fichier doit être dans `/config/www/images/`. Sur Mini PC, remplacer par une
 | Fichier | Rôle |
 |---------|------|
 | `configuration.yaml` | Intégration `system_monitor` + `local_ip` |
-| *(futur)* `docs/L4C2_MINI_PC/PAGE_MINI_PC.md` | À créer après migration Mini PC |
+| *(futur)* `docs/L4C1_MINI_PC/PAGE_MINI_PC.md` | À créer après migration Mini PC |
 
 
 <!-- obsidian-wikilinks -->

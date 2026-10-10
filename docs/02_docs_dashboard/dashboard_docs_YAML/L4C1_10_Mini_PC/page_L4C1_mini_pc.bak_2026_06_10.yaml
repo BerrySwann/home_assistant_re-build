@@ -2028,5 +2028,5 @@ cards:
 # [2026-06-10] Disk ring-tile/bar×2 : max:100→94 GiB, target:80→75, couleurs seuils GiB (56/71/80/85/94)
 # [2026-06-10] #disk popup apexcharts : titre % → GiB, color_threshold 75→71, 85→80
 # [2026-06-10] VM RAM 8Go→12Go : max:16384→12288 (×4), targets et seuils severity recalculés en MiB
-# [2026-06-10] TODO : créer docs_dashboard/docs/L4C2_MINI_PC/L4C2_VIGNETTE_MINI_PC.md + PAGE_MINI_PC.md
+# [2026-06-10] TODO : créer docs_dashboard/docs/L4C1_MINI_PC/L4C1_VIGNETTE_MINI_PC.md + PAGE_MINI_PC.md
 # [2026-06-13] BUG FIX uptime : int(0)/86400 → float(0)/24 (sensor.pve_uptime retourne des heures, pas des secondes)
