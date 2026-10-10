@@ -3069,7 +3069,7 @@ input_datetime: !include input_datetime.yaml</pre>
             <tr style="border-bottom:1px solid var(--border);background:rgba(61,136,86,.04);">
               <td style="padding:.5rem .8rem;font-weight:700;color:var(--amber);" rowspan="3">P2 Prises</td>
               <td style="padding:.5rem .8rem;color:var(--text);">ECO Prises Dynamique</td>
-              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--green);">eco_prises_dinamique_by_presence_groupe.yaml</td>
+              <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--green);">eco_prises_dynamique_by_presence_groupe.yaml</td>
               <td style="padding:.5rem .8rem;font-family:var(--fm);font-size:.72rem;color:var(--green);">P2_eco_prises_config.yaml · P4_groupe_presence.yaml</td>
             </tr>
             <tr style="border-bottom:1px solid var(--border);background:rgba(61,136,86,.04);">
@@ -3608,78 +3608,85 @@ input_datetime: !include input_datetime.yaml</pre>
     <!-- ARBO MD (contenu deplace dans modal, voir boutons section Inventaire) -->
     <div class="conv-section reveal" style="display:none;">
       <pre id="tree-src-md" style="display:none;">dashboard_docs_MD/
-├── CONFIG_ROOT/                    <span style="color:#a0a8b6"># 1 fichier</span>
+├── CONFIG_ROOT/    <span style="color:#a0a8b6"># 1 fichiers + 1 sauvegardes</span>
 │   └── CONFIG_ROOT.md
-├── HOME PAGE/                      <span style="color:#a0a8b6"># L0C0</span>
+├── HOME PAGE/    <span style="color:#a0a8b6"># 2 fichiers + 2 sauvegardes</span>
 │   ├── PAGE_HOME.md
 │   └── VIGNETTE_WIFI_PRESENCE.md
-├── L1C1_METEO/
+├── L1C1_METEO/    <span style="color:#a0a8b6"># 3 fichiers</span>
 │   ├── L1C1_VIGNETTE_METEO.md
 │   ├── PAGE_METEO.md
 │   └── TUTO_IMAGES_ALERTES_METEO_FRANCE.md
-├── L1C2_TEMPERATURES/
+├── L1C2_TEMPERATURES/    <span style="color:#a0a8b6"># 2 fichiers + 3 sauvegardes</span>
 │   ├── L1C2_VIGNETTE_TEMPERATURES.md
 │   └── PAGE_TEMPERATURES.md
-├── L1C3_CLIM/
+├── L1C3_CLIM/    <span style="color:#a0a8b6"># 2 fichiers + 1 sauvegardes</span>
 │   ├── L1C3_VIGNETTE_CLIM.md
 │   └── PAGE_CLIM.md
-├── L2C1_ENERGIE/                   <span style="color:#a0a8b6"># 5 fichiers</span>
+├── L2C1_ENERGIE/    <span style="color:#a0a8b6"># 5 fichiers + 5 sauvegardes</span>
 │   ├── COULEURS_PRISES_PAR_PIECE.md
 │   ├── L2C1_VIGNETTE_ENERGIE.md
 │   ├── PAGE_ENERGIE.md
 │   ├── PAGE_ENERGIE_MENSUEL.md
 │   └── PAGE_ENERGIE_TEMPS_REEL.md
-├── L2C2_ENERGIE_CLIM/
+├── L2C2_ENERGIE_CLIM/    <span style="color:#a0a8b6"># 2 fichiers + 2 sauvegardes</span>
 │   ├── L2C2_VIGNETTE_ENERGIE_CLIM.md
 │   └── PAGE_ENERGIE_CLIM.md
-├── L2C3_ENERGIE_ECLAIRAGE/
+├── L2C3_ENERGIE_ECLAIRAGE/    <span style="color:#a0a8b6"># 3 fichiers</span>
 │   ├── COULEURS_ECLAIRAGE_PAR_PIECE.md
 │   ├── L2C3_VIGNETTE_ECLAIRAGE.md
 │   └── PAGE_ENERGIE_ECLAIRAGE.md
-├── L3C1_ECLAIRAGE/
+├── L3C1_ECLAIRAGE/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── L3C1_VIGNETTE_ECLAIRAGE.md
 │   └── PAGE_ECLAIRAGE.md
-├── L3C2_PRISES/
+├── L3C2_PRISES/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── L3C2_VIGNETTE_PRISES.md
 │   └── PAGE_PRISES.md
-├── L3C3_STORES/
+├── L3C3_STORES/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── L3C3_VIGNETTE_STORES.md
 │   └── PAGE_STORES.md
-├── L4C1_PROXMOX/
-│   ├── L4C1_VIGNETTE_PROXMOX.md
-│   └── PAGE_PROXMOX.md
-├── L4C2_MINI_PC/                   <span style="color:#a0a8b6"># + PAGE_RASPI.md (colocalisee ici, pas de dossier dedie)</span>
-│   ├── L4C2_VIGNETTE_MINI_PC.md
+├── L4C1_MINI_PC/    <span style="color:#a0a8b6"># 3 fichiers</span>
+│   ├── L4C1_VIGNETTE_MINI_PC.md
 │   ├── PAGE_MINI_PC.md
 │   └── PAGE_RASPI.md
-├── L4C3_MAJ_HA/
+├── L4C2_PROXMOX/    <span style="color:#a0a8b6"># 2 fichiers</span>
+│   ├── L4C2_VIGNETTE_PROXMOX.md
+│   └── PAGE_PROXMOX.md
+├── L4C3_MAJ_HA/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── L4C3_VIGNETTE_MAJ.md
 │   └── PAGE_MAJ.md
-├── L5C1_PILES_BATTERIES/
+├── L5C1_PILES_BATTERIES/    <span style="color:#a0a8b6"># 2 fichiers + 2 sauvegardes</span>
 │   ├── L5C1_VIGNETTE_BATTERIES.md
 │   └── PAGE_BATTERIES.md
-├── L5C2_BATTERIES_PORTABLES/
+├── L5C2_BATTERIES_PORTABLES/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── L5C2_VIGNETTE_BATTERIES_PORTABLES.md
 │   └── PAGE_BATTERIES_PORTABLES.md
-├── L5C3_MARIADB/                   <span style="color:#a0a8b6"># 3 fichiers, 2 pages distinctes</span>
+├── L5C3_MARIADB/    <span style="color:#a0a8b6"># 3 fichiers</span>
 │   ├── L5C3_VIGNETTE_MARIADB.md
 │   ├── PAGE_L5C3_SYSTEME_RESERVE.md
 │   └── PAGE_SYSTEME.md
-├── L6C1_AIR_QUALITE/
+├── L6C1_AIR_QUALITE/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── L6C1_VIGNETTE_AIR_QUALITE.md
 │   └── PAGE_AIR_QUALITE.md
-├── L6C2_POLLUTION_POLLEN/
+├── L6C2_POLLUTION_POLLEN/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── L6C2_VIGNETTE_POLLUTION_POLLEN.md
 │   └── PAGE_POLLUTION_POLLEN.md
-├── L6C3_VIGIEAU/
+├── L6C3_VIGIEAU/    <span style="color:#a0a8b6"># 2 fichiers</span>
 │   ├── L6C3_VIGNETTE_VIGIEAU.md
 │   └── PAGE_VIGIEAU.md
-├── _TEMPLATE_DOC.md
+├── _ARCHIVE/    <span style="color:#a0a8b6"># 2 fichiers + 2 sauvegardes</span>
+│   ├── DEPENDANCES_GLOBALES_archive_2026-10-07_18h13.md
+│   └── DEPENDANCES_GLOBALES_archive_2026-10-07_19h20.md
+├── DEPENDANCES_GLOBALES.bak_2026_09_20.md
+├── DEPENDANCES_GLOBALES.bak_2026_09_23.md
+├── DEPENDANCES_GLOBALES.bak_2026_09_24.md
 ├── DEPENDANCES_GLOBALES.md
+├── DEPENDANCES_GLOBALES_HERMES_V1.bak_2026_09_24.md
+├── DEPENDANCES_GLOBALES_HERMES_V1.bak_2026_09_29.md
+├── DEPENDANCES_GLOBALES_HERMES_V1.md
 ├── INDEX_PAGES.md
 ├── METEOCSS_CARD_MODIF.md
-├── MOC_DASHBOARD.md
-└── WORKFLOW_REBUILD.md</pre>
+└── _TEMPLATE_DOC.md</pre>
     </div>
 
   </div>
@@ -3909,11 +3916,18 @@ input_datetime: !include input_datetime.yaml</pre>
 
     <!-- EXTRAIT DEPENDANCES_GLOBALES.md (contenu deplace dans modal) -->
     <div style="display:none;">
-      <pre id="tree-src-dependances" style="display:none;"># 🔗 DÉPENDANCES GLOBALES — TABLEAU DE BORD HA
-*Dernière mise à jour : 2026-07-20 (P1_01 confort_nuit : palier nuit été dynamique selon vigilance canicule)*
-*2026-07-19 (Audit complet intégralité du fichier : L1C1 à L6C3 + HOME PAGE + fichiers racine)*
-*2026-07-18 (Nettoyage résidu chambre : capteur MQTT dispo + bloc mqtt: configuration.yaml)*
-*2026-07-17 (Resync local ← GitHub/prod : configuration.yaml + scripts.yaml)*
+      <pre id="tree-src-dependances" style="display:none;"># 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
+*Derniere mise a jour : 2026-10-10 12h (sync_index S2 : alignement des YAML du dashboard sur la regle unique - 109 renommages, le nom de travail ne porte plus de date, versions en .bak_AAAA_MM_JJ.yaml ; 6e section SearXNG documentee sur la page Proxmox ; inversion L4C1/L4C2 repercutee sur les fiches et les dossiers ; 106 references YAML corrigees. Aucun YAML de config HA ni entite touchee.)*
+*Derniere mise a jour : 2026-10-07 22h (sync_index : timers de duree SDB - nouveau domaine timer (configuration.yaml : timer: !include_dir_merge_named timers/), 4 helpers timer.soufflant_sdb_60mn / _10mn et timer.seche_serviettes_sdb_2h / _10mn (timers/P1_timers/), 4 automations E, F (soufflant) et H, I (seche-serviettes), automation G (ex E, minuterie seche-serviettes) renommee. Aucune vignette du tableau de bord ne consomme ces entites : aucune ligne vignette modifiee. Non teste en conditions reelles.)*
+*Derniere mise a jour : 2026-10-07 19h20 (sync_index : thermostat SdB devenu voyant - heater remplace par switch.voyant_thermostat_soufflant_salle_de_bain ; garde de demarrage 25 degres remplacee par garde de saison (sensor.mode_ete_hiver = cool). Nouvelles entites : input_boolean.voyant_thermostat_soufflant_salle_de_bain, switch.voyant_thermostat_soufflant_salle_de_bain.)*
+*Derniere mise a jour : 2026-10-07 (sync_index : automation D watchdog SdB - seuil de derive +0.5 -&gt; +0.4 degre, modif Eric en direct a 18h10 ; fiche D_WATCHDOG, AUTOMATIONS.md, SPECIFICATION 8.5 et export YAML docs alignes. Aucun YAML config HA ni vignette touche.)*
+*Derniere mise a jour : 2026-10-04 S3 (sync_index : session resync 3 voies LOCAL/H:\\docs/GitHub. Docs : 17 fichiers LOCAL_SEUL pousses vers H:\docs, 16 fichiers PROD_SEUL supprimes (ancienne structure plate). ha-resync-tree x2 : 12 fichiers config ajoutes GitHub-&gt;local (shell_command/backup_github, correct_linky, log_eric_zone ; blueprint inverted_binary_sensor ; 4 .bak ; 2 .txt notifs) ; bilan final SYNC=80 DIFF=0. Dashboard_2026_10-04.yaml (refonte complete Eric) rapatrie H:\ root -&gt; docs/02_docs_dashboard/dashboard_docs_YAML/Dashboard_COMPLET/. Aucun YAML HA ni vignette touches.)*
+*Derniere mise a jour : 2026-10-04 S2 (sync_index : HOME PAGE - refontes completes cartes [5]/[6]/[7] : Lave-Linge + Lave-Vaisselle (mushroom card_mod CSS anime, --wm-*/--dw-* variables, 5/4 etats) + Congelateur (button-card JS extra_styles, snow/drip/door, badge dual temp) ; 3 fichiers 2026-10-04 dans PAGE_Home/ (deplaces manuellement par Eric depuis Dashboard_COMPLET). Aucun YAML config HA ni vignette touchee.)*
+*Derniere mise a jour : 2026-10-04 S1 (sync_index : aucun YAML HA ni vignette. Session docs : correction CLAUDE.md + IA_CONTEXT_BASE.md (ligne Github/ perimee, INDEX_AUTOMATIONS.md + INDEX_NAVIGATION.md -&gt; INDEX_GLOBAL.md) ; IA_CONTEXT_BASE.md pousse vers H:\docs\00_IA\ (3 emplacements conformes) ; ha-push-md skill corrigee (paths relatifs depuis \) ; 0 *.md a pousser (124 locaux tous a jour en prod) ; DEPENDANCES_GLOBALES.md rapatrie H:\ -&gt; local (absent du local depuis ?))*
+## LÉGENDE
+## MATRICE DES 18 VIGNETTES - STATUT DÉPENDANCES
+## ✅ HOME PAGE - CARTES PERMANENTES (hors grille 18 vignettes)
+### Chaîne de dépendances globale
 
 ---
 
@@ -4882,13 +4896,13 @@ function closeScriptModal(e) {
 })();
 
 const TREES = {
-  config_yaml:       { title: 'config_system_YAML/ — arborescence réelle (2026-08-02)',      srcId: 'tree-src-config-yaml', noteId: 'tree-note-config-yaml' },
-  config_md:         { title: 'config_system_MD/ — arborescence réelle (2026-08-02)',        srcId: 'tree-src-config-md', noteId: 'tree-note-config-md' },
+  config_yaml:       { title: 'config_system_YAML/ — arborescence réelle (2026-10-10)',      srcId: 'tree-src-config-yaml', noteId: 'tree-note-config-yaml' },
+  config_md:         { title: 'config_system_MD/ — arborescence réelle (2026-10-10)',        srcId: 'tree-src-config-md', noteId: 'tree-note-config-md' },
   yaml:              { title: 'dashboard_docs_YAML/ — arborescence réelle (2026-10-10)',    srcId: 'tree-src-yaml' },
-  md:                { title: 'dashboard_docs_MD/ — arborescence réelle (2026-08-02)',       srcId: 'tree-src-md' },
+  md:                { title: 'dashboard_docs_MD/ — arborescence réelle (2026-10-10)',       srcId: 'tree-src-md' },
   automations_yaml:  { title: 'docs_automations_YAML/ — arborescence réelle (2026-10-10)',   srcId: 'tree-src-automations-yaml', noteId: 'tree-note-automations-yaml' },
   automations_md:    { title: 'docs_automations_MD/ — arborescence réelle (2026-10-10)',     srcId: 'tree-src-automations-md',   noteId: 'tree-note-automations-md' },
-  dependances:       { title: 'DEPENDANCES_GLOBALES.md — extrait réel (2026-08-02)',          srcId: 'tree-src-dependances',      noteId: 'tree-note-dependances' },
+  dependances:       { title: 'DEPENDANCES_GLOBALES.md — extrait réel (2026-10-10)',          srcId: 'tree-src-dependances',      noteId: 'tree-note-dependances' },
   yaml_p0_hphc:     { title: 'P0_UM_AMHQ_HPHC.yaml — fichier complet réel',                  srcId: 'tree-src-yaml-p0-hphc',     noteId: 'tree-note-yaml-p0-hphc' }
 };
 function openTreeModal(key) {
