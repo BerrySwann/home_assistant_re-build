@@ -1,11 +1,12 @@
-> **CONTEXTE PROJET** : ce document est tenu IDENTIQUE en quatre emplacements, a modifier
-> ensemble dans la meme session : `ReBuild/CLAUDE.md`, `ReBuild/docs/00_IA/IA_CONTEXT_BASE.md`,
-> `H:\docs\00_IA\IA_CONTEXT_BASE.md` et `D:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres toute
-> mise a jour, verifier que les quatre empreintes md5 sont egales. Il ne depend d'aucun agent en
-> particulier.
-> Derniere mise en conformite : 2026-10-04. La 4e copie (D:\) a ete retrouvee perimee (version du
-> 2026-07-19, encore l'ancienne REGLE ABSOLUE) et realignee ce jour - ancienne version conservee
-> en `D:\docs\00_IA\IA_CONTEXT_BASE_2026-07-19_15h46.md`.
+> **CONTEXTE PROJET** : ce document est tenu IDENTIQUE en trois emplacements, a modifier
+> ensemble dans la meme session : `ReBuild/Claude md SAVE/CLAUDE.md`,
+> `ReBuild/docs/00_IA/IA_CONTEXT_BASE.md` et `D:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres
+> toute mise a jour, verifier que les trois empreintes md5 sont egales. Il ne depend d'aucun agent
+> en particulier.
+> Derniere mise en conformite : 2026-10-10 (3 copies identiques, voir ci-dessus). Rappel du
+> 2026-10-04 : la copie `D:\` avait ete retrouvee perimee (version du 2026-07-19, encore l'ancienne
+> REGLE ABSOLUE) et realignee ce jour-la - ancienne version conservee en
+> `D:\docs\00_IA\IA_CONTEXT_BASE_2026-07-19_15h46.md`.
 
 ---
 
@@ -59,7 +60,7 @@
 > ne pas les reformater au nom de cette regle.
 
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
-*Dernière mise à jour : 2026-10-04*
+*Dernière mise à jour : 2026-10-10*
 
 ---
 
@@ -90,13 +91,16 @@
 
 | Réponse | Action |
 |:--------|:-------|
-| **Oui** (peu importe quoi) | Lancer `bash /homeassistant/.scripts/audit_md5.sh` → lire `/homeassistant/.logs/md5_audit_latest.txt` |
+| **Oui** (peu importe quoi) | Lancer `bash /homeassistant/.scripts/audit_md5_yaml.sh` (fichiers/config) et `bash /homeassistant/.scripts/audit_md5_md_yaml.sh` (docs) → lire `md5_audit_yaml_latest.txt` et `md5_audit_md_yaml_latest.txt` dans `/homeassistant/.logs/` |
 | **Non** | Continuer directement |
 
-**Script actif** (sur HA : `/homeassistant/.scripts/`) :
-- `audit_md5.sh` - 3 passes (tree local → MD5 prod → MD5 GitHub), sans argument, périmètre YAML complet + .sh + fichiers racine
+**Scripts actifs** (sur HA : `/homeassistant/.scripts/`) :
+- `audit_md5_yaml.sh` - comparaison **fichiers (config YAML) : PROD vs GITHUB** - 3 passes (tree prod → MD5 prod → MD5 GitHub), sans argument, périmètre YAML complet + .sh + fichiers racine
+- `audit_md5_md_yaml.sh` - comparaison **docs (`/config/docs/`) : PROD vs GITHUB** - `.md` + `.yaml` + `.sh`
 
-**Logs** : `/homeassistant/.logs/md5_audit_YYYY-MM-DD.txt` + copie `md5_audit_latest.txt`
+> Troisième niveau : `/trigul` (skill `ha-trigul`) compare **local vs prod vs GitHub** sur les docs `.md` et écrit son rapport dans `historique\MD5\`.
+
+**Logs** : `/homeassistant/.logs/md5_audit_yaml_AAAA-MM-JJ.txt` (+ `md5_audit_yaml_latest.txt`) et `md5_audit_md_yaml_AAAA-MM-JJ.txt` (+ `md5_audit_md_yaml_latest.txt`)
 > ⛔ Anciens boutons/modes FULL · YAML · ATMA, scripts `audit_yaml/atma/full.sh` et logs `audit_*.log` : **supprimés** - ne plus référencer (vérifié prod 2026-07-18).
 
 ---
@@ -120,16 +124,18 @@
 ## Slash Commands
 - `/fix_file` → analyse erreur HA et retourne bloc YAML corrigé uniquement.
 - `/sync_index` → met à jour `DEPENDANCES_GLOBALES.md` après validation YAML.
-- `/status` → résumé 3 points avancement du projet.
+- `/ha_status` → résumé 3 points avancement du projet.
 - `/histo` → journal de bord compact, sauvegarde dans `historique/`.
 - `/ha_new_yaml` → génère un squelette YAML conforme (bordures ASCII, headers, slug, name/unique_id).
 - `/ha_push_yaml` → pousse un fichier YAML de `docs/` vers prod `H:\`.
 - `/ha_push_docs` → synchronise les docs locales `docs/` vers `H:\Docs\`.
-- `/ha_resync_tree` → resynchronise `docs/` depuis GitHub (audit MD5).
+- `/ha_push_md` → pousse uniquement les fichiers `*.md` de `docs/` vers `H:\Docs\`.
+- `/ha_resync_docs` → resynchronise `docs/` depuis GitHub (audit MD5).
+- `/trigul` → triangulation MD5 des docs (local vs prod vs GitHub), rapport dans `historique\MD5\`.
 
 ## PROTOCOLE FIN DE SESSION (OBLIGATOIRE)
 
-Les 2 dernieres actions avant de fermer Cowork, dans cet ordre :
+Les 2 dernieres actions avant de fermer la session, dans cet ordre :
 
 1. `/histo` → journal de bord compact (Eric ne l'oublie pas)
 2. `/sync_index` → mettre a jour DEPENDANCES_GLOBALES.md si un YAML ou une vignette a ete valide pendant la session
@@ -167,7 +173,7 @@ Sens : **prod → GitHub → local**. Le local doit converger vers prod. Une foi
 
 **Workflow de modification (depuis le 2026-10-04)** : on ne modifie plus un fichier directement
 en prod (H:\). On edite la copie LOCALE (`docs/01_docs_config_system/config_system_YAML/`,
-image miroir 1:1 de H:\ - voir `ha-resync-tree` pour la tenir a jour), avec une sauvegarde locale
+image miroir 1:1 de H:\ - voir `ha-resync-docs` pour la tenir a jour), avec une sauvegarde locale
 avant chaque modification (REGLE DE SAUVEGARDE ci-dessous), puis on pousse vers H:\ via
 `ha-push-yaml` (MD5-first, confirmation obligatoire). La prod ne recoit jamais de sauvegarde ni de
 nom de fichier avec suffixe de date - meme en cas de restauration d'une ancienne sauvegarde, le
@@ -187,19 +193,21 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
 **REGLE DE SAUVEGARDE (depuis le 2026-10-08, remplace celle du 2026-10-04)**
 
 - Perimetre : les dossiers `docs/00_*` a `docs/05_*` de `ReBuild/` (config YAML, dashboard YAML,
-  automations, scripts, docs .md, contexte IA) et `Claude md save/` (CLAUDE.md). Hors perimetre :
+  automations, scripts, docs .md, contexte IA) et `Claude md SAVE/` (CLAUDE.md). Hors perimetre :
   `TODO/`, `Github/`, `historique/`, `.claude/`, `Infra_Proxmox/`.
 - Lieu : en local, a cote du fichier modifie. Jamais sur H:\ ni sur D:\.
-- Avant CHAQUE modification d'un fichier, creer `{fichier}.bak_AAAA_MM_JJ_HHhMMmSSs`
-  (ex : `P1_kWh_clim.yaml.bak_2026_10_08_08h54m30s`). Format PowerShell :
+- Avant CHAQUE modification d'un fichier, creer `{nom}.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}`
+  (ex : `P1_kWh_clim.bak_2026_10_08_08h54m30s.yaml`). Format PowerShell :
   `Get-Date -Format "yyyy_MM_dd_HH'h'mm'm'ss's'"` (les lettres h, m, s entre apostrophes).
+- Le nom se termine TOUJOURS par l'extension du fichier (`.md`, `.yaml`, `.txt`...) : la date va
+  AVANT l'extension, jamais apres. Un double-clic ouvre la sauvegarde directement.
 - Le jour meme : 10 sauvegardes horodatees maximum par fichier. La 11e envoie la plus ancienne
   a la corbeille Windows.
 - Le lendemain, au passage de `/histo` : par fichier et par jour passe, garder la sauvegarde la
-  plus recente, la renommer `{fichier}.bak_AAAA_MM_JJ`, envoyer les autres a la corbeille Windows.
+  plus recente, la renommer `{nom}.bak_AAAA_MM_JJ.{ext}`, envoyer les autres a la corbeille Windows.
   Les sauvegardes du jour ne sont jamais touchees. Le fichier est considere comme fixe le
   lendemain ; en cas de coquille, la corbeille Windows permet de retrouver une version.
-- Jours precedents : 3 `.bak_AAAA_MM_JJ` maximum par fichier. La 4e envoie la plus ancienne
+- Jours precedents : 3 `.bak_AAAA_MM_JJ.{ext}` maximum par fichier. La 4e envoie la plus ancienne
   a la corbeille Windows.
 - Regle unique, sans exception : tout fichier de travail porte un nom SANS date, et toutes ses
   versions sont des `.bak_...`. Les dashboards ne sont plus versionnes dans leur nom : le fichier
@@ -207,23 +215,23 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
   `_YYYY-MM-DD_HHhMMmSSs` ni de `_YYYY-MM-DD` dans un nom de fichier).
 - Anciens formats, traites par `/histo` avec les memes principes : `{fichier}_YYYY-MM-DD_HHhmm.ext`
   et `{fichier}_YYYY-MM-DD.ext` (dashboards dates) - la version la plus recente devient le fichier
-  courant renomme sans date `{fichier}.ext`, les autres deviennent des `.bak_AAAA_MM_JJ` (3 max,
+  courant renomme sans date `{fichier}.ext`, les autres deviennent des `.bak_AAAA_MM_JJ.{ext}` (3 max,
   au-dela corbeille Windows) ; `.bak_2026-09-28`, `.bak_20260929`, `.bak2_...`, `.bak-...` :
-  renommes en `.bak_AAAA_MM_JJ`. Tout souci (collision, date illisible, fichier hors des cas
+  renommes en `.bak_AAAA_MM_JJ.{ext}`. Tout souci (collision, date illisible, fichier hors des cas
   ci-dessus) : le signaler a Eric, ne rien supprimer.
 - Corbeille Windows : `[Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile($chemin,
   'OnlyErrorDialogs','SendToRecycleBin')` apres `Add-Type -AssemblyName Microsoft.VisualBasic`
   (teste le 2026-10-08). Pas de corbeille sur H:\ : ne jamais supprimer un fichier de H:\ sans
   avoir verifie qu'il existe en local.
-- Restauration : copier la sauvegarde voulue, retirer le suffixe `.bak_...`, jamais de suffixe en prod.
-- CLAUDE.md et `docs/00_IA/IA_CONTEXT_BASE.md` (et leurs copies H:\ et D:\) : meme regle avant toute
-  reecriture (sauvegarde locale uniquement). Apres reecriture, resynchroniser les 4 copies et
+- Restauration : copier la sauvegarde voulue, retirer le segment `.bak_...`, jamais de suffixe en prod.
+- CLAUDE.md et `docs/00_IA/IA_CONTEXT_BASE.md` (et leur copie `D:\docs\00_IA\`) : meme regle avant toute
+  reecriture (sauvegarde locale uniquement). Apres reecriture, resynchroniser les 3 copies et
   verifier leur MD5.
 
 ### 📄 DOCS (.md + .yaml dashboard) - LOCAL = source de vérité
 
 > Deux types de fichiers couverts par cette cascade :
-> - `.md` : `docs/02_docs_dashboard/dashboard_docs_MD/` · `docs/03_docs_automations/docs_automations_MD/` · `docs/04_docs_scripts/docs_scripts_MD/` · etc.
+> - `.md` : `docs/02_docs_dashboard/dashboard_docs_MD/` · `docs/03_docs_automations/docs_automations_MD/` · `docs/04_docs_scripts/docs_scripts_YAML_MD/` · `docs/04_docs_scripts/docs_scripts_SH_MD/` · etc.
 > - `.yaml` dashboard : `docs/02_docs_dashboard/dashboard_docs_YAML/` (vignettes, pages, cartes, Dashboard_COMPLET)
 
 | Priorité | Source | Rôle |
@@ -234,7 +242,7 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
 
 Sens : **local → H:\Docs\ → GitHub**. En cas de conflit, local l'emporte toujours.
 `H:\Docs\` (racine, hors `01_docs_config_system\config_system_YAML\`) ne contient QUE des .md, histo et yaml Dashboard - **jamais de YAML config HA**.
-`H:\docs\01_docs_config_system\config_system_YAML\` est l'image locale miroir de la config YAML de prod (sensors, templates, utility_meter, command_line, groups, input_booleans, shell_command, themes, blueprints) - alimentee par resync GitHub (`ha-resync-tree`) et par les push normaux (`ha-push-yaml`). Exception documentee a la regle ci-dessus, pas une contradiction.
+`H:\docs\01_docs_config_system\config_system_YAML\` est l'image locale miroir de la config YAML de prod (sensors, templates, utility_meter, command_line, groups, input_booleans, shell_command, themes, blueprints) - alimentee par resync GitHub (`ha-resync-docs`) et par les push normaux (`ha-push-yaml`). Exception documentee a la regle ci-dessus, pas une contradiction.
 
 > ⚠️ Audit MD5 docs : couvre les `.md` ET les `.yaml` dashboard (`dashboard_docs_YAML/`). Ne pas oublier les yaml lors d'un audit de cohérence local vs H:\Docs\.
 
@@ -253,9 +261,9 @@ Sens : **local → H:\Docs\ → GitHub**. En cas de conflit, local l'emporte tou
 
 | Type | Injection en prod | Extraction / stockage local |
 |:-----|:-------------------|:-----------------------------|
-| **Config YAML** (sensors/templates/UM/command_line) | Edition depuis la copie LOCALE `docs/01_docs_config_system/config_system_YAML/`, sauvegarde locale `.bak_AAAA_MM_JJ_HHhMMmSSs` avant modif (REGLE DE SAUVEGARDE), puis push vers `H:\` via `ha-push-yaml` (MD5-first, confirmation obligatoire) | Le fichier local (sans suffixe de date) est deja la reference - pas d'extraction a faire apres coup |
+| **Config YAML** (sensors/templates/UM/command_line) | Edition depuis la copie LOCALE `docs/01_docs_config_system/config_system_YAML/`, sauvegarde locale `.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}` avant modif (REGLE DE SAUVEGARDE), puis push vers `H:\` via `ha-push-yaml` (MD5-first, confirmation obligatoire) | Le fichier local (sans suffixe de date) est deja la reference - pas d'extraction a faire apres coup |
 | **Automations** | Toujours à la main dans l'UI HA (Eric), jamais `automations.yaml` en direct | Une fois validée, **Claude** récupère uniquement le bloc modifié et le stocke individuellement dans `docs/03_docs_automations/docs_automations_YAML/{Pole}/` |
-| **Dashboard** | Toujours à la main dans l'UI HA (Paramètres → Tableau de bord → Modifier en YAML) | Pas d'extraction automatique - **Eric** récupère le code à la main et le colle. **Claude** vérifie, horodate (nom de version), stocke dans `docs/02_docs_dashboard/dashboard_docs_YAML/L{x}C{x}_.../`, supprime la version la plus ancienne des 3 après validation |
+| **Dashboard** | Toujours à la main dans l'UI HA (Paramètres → Tableau de bord → Modifier en YAML) | Pas d'extraction automatique - **Eric** récupère le code à la main et le colle. **Claude** vérifie, stocke dans `docs/02_docs_dashboard/dashboard_docs_YAML/L{x}C{x}_.../` sous le nom de travail **SANS date**, avec une sauvegarde `.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}` avant chaque modification (REGLE DE SAUVEGARDE) |
 
 > Raison de l'asymétrie Dashboard : limitation technique - pas d'accès filesystem direct au Lovelace YAML comme pour `/config`.
 
@@ -430,13 +438,13 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 
 ## 📋 VERSIONING FICHIERS - REGLE UNIQUE
 
-> Tous les fichiers de `docs/00_*` a `docs/05_*` et `Claude md save/` suivent UNE seule regle :
+> Tous les fichiers de `docs/00_*` a `docs/05_*` et `Claude md SAVE/` suivent UNE seule regle :
 > la REGLE DE SAUVEGARDE ci-dessus. Plus aucune distinction dashboard / config / docs.
 
 - Nom de travail : SANS date (ex : `page_L4C2_proxmox.yaml`, `vignette_L4C2_proxmox.yaml`,
   `card_services_ha_z2m_mariadb.yaml`, `P1_kWh_clim.yaml`).
-- Versions : `.bak_AAAA_MM_JJ_HHhMMmSSs` le jour meme (10 max par fichier, la 11e a la corbeille
-  Windows), consolidees le lendemain par `/histo` en `.bak_AAAA_MM_JJ` (3 max, la 4e a la corbeille).
+- Versions : `.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}` le jour meme (10 max par fichier, la 11e a la corbeille
+  Windows), consolidees le lendemain par `/histo` en `.bak_AAAA_MM_JJ.{ext}` (3 max, la 4e a la corbeille).
 - Un nom de fichier ne contient plus jamais de date. Les dashboards ne sont plus versionnes dans
   leur nom de fichier.
 - Seule exception conservee : `docs/02_docs_dashboard/dashboard_docs_YAML/Dashboard_COMPLET/Dashboard_YYYY_MM_DD.yaml`
@@ -546,7 +554,7 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 - PowerCalc : P3 uniquement, Hue sans monitoring natif + exception `relais_lumiere_sdb_sonoff` (10W fixe)
 
 ### P4 - Présence : téléphones mobiles (Poco X7 Pro), capteurs Wi-Fi.
-→ Détail complet sensor.presence : `IA/IA_P4_PRESENCE.md`
+→ Détail complet sensor.presence : `docs/00_IA/sous_context_ia/IA_P4_PRESENCE.md`
 
 ---
 
@@ -557,57 +565,51 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 | **L1** | Météo | Températures | Commandes Clim |
 | **L2** | Conso Générale | Conso Clim | Conso Éclairage |
 | **L3** | Commandes Éclairage | Commandes Éco (Prises) | Fenêtres + Stores |
-| **L4** | Proxmox (PVE) | Mini PC (NUC) | Mises à jour HA |
+| **L4** | Mini PC (NUC) | Proxmox (PVE) | Mises à jour HA |
 | **L5** | Piles / Batteries | Batteries Portables | MariaDB |
 | **L6** | Qualité Air (Appart) | Pollution / Pollen | Vigilance Eau |
 
 ---
 
-## 🌳 ARBORESCENCE LOCALE (RÉSUMÉ)
+## 🌳 ROUTAGE DES FICHIERS (où va quoi)
 
-```
-ReBuild/
-├── CLAUDE.md · secrets.yaml
-├── IA/              (vide - déplacé vers docs/00_IA/)
-├── Github/          (INDEX_GLOBAL.md · README.md)
-├── historique/      (JOURNAL_COMPLET_2026-04-25_2026-07-14.md)
-└── docs/
-    ├── 00_IA/                      (IA_CONTEXT_BASE.md · sous_context_ia/ → tous les IA_*.md)
-    ├── 01_docs_config_system/
-    │   ├── config_system_YAML/     (sensors/ · templates/ · utility_meter/ · command_line/ · groups/ · …) → H:\ (image locale miroir, voir ha-resync-tree / ha-push-yaml)
-    │   └── config_system_MD/       (configuration.md)
-    ├── 02_docs_dashboard/
-    │   ├── dashboard_docs_MD/      (DEPENDANCES_GLOBALES.md · L*C* docs · PAGE_*.md)  → H:\Docs\
-    │   └── dashboard_docs_YAML/    (L1C1→L6C3 · PAGE_* · Dashboard_COMPLET/)          → H:\Docs\
-    ├── 03_docs_automations/
-    │   ├── docs_automations_MD/    (docs par automation)                               → H:\Docs\
-    │   └── docs_automations_YAML/  (yaml individuels par automation)                   → UI HA
-    ├── 04_docs_scripts/
-    │   ├── docs_scripts_MD/        (docs scripts)                                      → H:\Docs\
-    │   └── docs_scripts_YAML/      (yaml scripts, miroir local de H:/scripts.yaml)     → UI HA (push manuel par Eric)
-    └── 05_docs_MD_system/          (workflow · MOC · templates · github)
-```
+| Type de fichier | Emplacement local (source) | Destination |
+|:---|:---|:---|
+| Config YAML (sensors, templates, utility_meter, command_line...) | `docs/01_docs_config_system/config_system_YAML/` | push `H:\` via `ha-push-yaml` |
+| Docs `.md` (dashboard, automations, scripts, system) | `docs/0x_*_MD/` | push `H:\Docs\` via `ha-push-docs` / `ha-push-md` |
+| Dashboards YAML (vignettes, pages, cartes) | `docs/02_docs_dashboard/dashboard_docs_YAML/` | push `H:\Docs\` |
+| Automations YAML | `docs/03_docs_automations/docs_automations_YAML/` | UI HA à la main, jamais en direct |
+| Scripts YAML + `.py` | `docs/04_docs_scripts/docs_scripts_YAML/` | UI HA à la main, jamais en direct |
+| Hors ménage, hors circuit de push | `TODO/` · `Github/` · `historique/` · `.claude/` · `Infra_Proxmox/` | restent locaux |
+
+> Le détail des arborescences (local, prod, GitHub, comptages) vit dans
+> `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL.md`, maintenu par `/histo` (étape 6).
+> **En cas de divergence, c'est ce fichier qui fait foi** : il est recompté à chaque passage,
+> contrairement à cette page. Ne pas recopier d'arborescence ici.
 
 ⛔ `TREE_CORRIGE/`, `TREE_ORIGINE/`, `Dashboard/`, `docs_dashboard/`, `docs_automations/`, `docs_scripts/` **supprimés le 2026-07-14** - tout est sous `docs/`.
 
-## 📅 RÈGLE DES FICHIERS DATÉS (scripts YAML, automations et docs)
+## 📅 RÈGLE DE VERSIONING (scripts YAML, automations et docs)
+
+Un fichier versionnable suit la **règle unique de versioning** (voir REGLE DE SAUVEGARDE) : le nom du
+fichier de travail ne porte **jamais** de date ; chaque version précédente est une sauvegarde
+`.bak_AAAA_MM_JJ.{ext}` (consolidée par `/histo`).
 
 Quand un script YAML de `docs/04_docs_scripts/docs_scripts_YAML/` (ou tout fichier versionnable) est modifié :
-1. L'ancienne version est **renommée avec sa date** dans le nom : `p1_master_gestion_clim.yaml` → `p1_master_gestion_clim_2026-09-06.yaml` (date de la version qu'elle représente, pas la date du renommage).
-2. La nouvelle version est créée avec **la date du jour** : `p1_master_gestion_clim_2026-09-09.yaml`.
-3. Les versions datées **coexistent** dans le dossier (comme les YAML dashboard `page_L4C1_proxmox_2026-06-18.yaml` + `_2026-08-08.yaml`).
-4. Chaque fichier porte un **en-tête commenté** avec l'historique des versions (date + changement).
-5. La fiche MD correspondante pointe vers la version datée la plus récente et son changelog liste **les différences à chaque itération**.
+1. Avant modification, une sauvegarde locale `.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}` est créée à côté du fichier.
+2. Le fichier de travail garde son nom **SANS date** : `p1_master_gestion_clim.yaml`.
+3. Chaque fichier porte un **en-tête commenté** avec l'historique des versions (date + changement).
+4. La fiche MD correspondante pointe vers le fichier de travail et son changelog liste **les différences à chaque itération**.
 
 **Automations (`docs/03_docs_automations/docs_automations_YAML/`)** — même règle :
 quand une fiche YAML d'automation est mise à jour (resync depuis `automations.yaml`, ajout d'`id`,
-correction de template...), la **version précédente est conservée à côté, datée de la version
-qu'elle représente** : `congelateur_alarme_porte.yaml` (version active, avec `id`) +
-`congelateur_alarme_porte_2026-09-01.yaml` (version précédente, sans `id`).
+correction de template...), la **version précédente reste à côté sous forme de sauvegarde**
+`.bak_AAAA_MM_JJ.{ext}` : `congelateur_alarme_porte.yaml` (version active, avec `id`) +
+`congelateur_alarme_porte.bak_2026_09_01.yaml` (version précédente, sans `id`).
 Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2026-09-10
-(ajout des `id` HA depuis le live), l'ancienne version restant datée `_2026-09-01`.
+(ajout des `id` HA depuis le live), l'ancienne version devenant `.bak_2026_09_01`.
 
-→ `H:/scripts.yaml` (Scripts, section Automations - miroir local `docs/04_docs_scripts/`) suit la meme regle que la config YAML : sauvegarde locale (`.bak_AAAA_MM_JJ_HHhMMmSSs`, voir REGLE DE SAUVEGARDE) a cote du fichier dans `docs/04_docs_scripts/` AVANT toute modification, jamais de sauvegarde creee en prod. Difference : le push vers `H:/scripts.yaml` se fait a la main par Eric via l'UI HA (jamais de copie fichier directe) - coherent avec la regle Automations (jamais d'edition directe du fichier live). Les `.sh` de `.scripts/` restent geres individuellement, hors de cette regle. Audit MD5 automations/scripts : plus complexe que sur la config YAML simple, a traiter au cas par cas.
+→ `H:/scripts.yaml` (Scripts, section Automations - miroir local `docs/04_docs_scripts/`) suit la meme regle que la config YAML : sauvegarde locale (`.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}`, voir REGLE DE SAUVEGARDE) a cote du fichier dans `docs/04_docs_scripts/` AVANT toute modification, jamais de sauvegarde creee en prod. Difference : le push vers `H:/scripts.yaml` se fait a la main par Eric via l'UI HA (jamais de copie fichier directe) - coherent avec la regle Automations (jamais d'edition directe du fichier live). Les `.sh` de `.scripts/` restent geres individuellement, hors de cette regle. Audit MD5 automations/scripts : plus complexe que sur la config YAML simple, a traiter au cas par cas.
 
 → Arborescences complètes prod + local : `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL.md`
 

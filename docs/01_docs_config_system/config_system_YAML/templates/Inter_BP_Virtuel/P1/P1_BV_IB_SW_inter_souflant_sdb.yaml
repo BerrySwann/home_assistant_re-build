@@ -48,6 +48,22 @@
           target:
             entity_id: input_boolean.inter_soufflant_salle_de_bain
 
+    # --- voyant_thermostat_soufflant_salle_de_bain (ajoute le 2026-10-07) ---
+    # Switch NEUTRE : sert de heater au generic_thermostat climate.soufflant_salle_de_bain.
+    # Il ne pilote aucun materiel, il ne fait que suivre input_boolean.voyant_thermostat_soufflant_salle_de_bain.
+    - name: "Voyant Thermostat Soufflant Salle de Bain"
+      unique_id: voyant_thermostat_soufflant_salle_de_bain
+      state: "{{ is_state('input_boolean.voyant_thermostat_soufflant_salle_de_bain', 'on') }}"
+      icon: mdi:thermostat
+      turn_on:
+        - action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.voyant_thermostat_soufflant_salle_de_bain
+      turn_off:
+        - action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.voyant_thermostat_soufflant_salle_de_bain
+
 # annotations_log:
 # - [Standardisation] Alignement complet sur le format ReBuild (Somrig/Rodret).
 # - [Syntaxe] Remplacement de 'service' par 'action' (Norme HA 2026).

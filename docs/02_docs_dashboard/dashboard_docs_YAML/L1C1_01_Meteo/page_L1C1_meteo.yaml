@@ -210,7 +210,7 @@ cards:
     windspeed_bar_location: bottom
     refresh_interval: 60
     wind_direction_entity:
-      entity: sensor.direction_du_vent_vence
+      entity: sensor.direction_vent_vence_deg
       use_statistics: false
       direction_compensation: 0
     windspeed_entities:
@@ -325,25 +325,25 @@ cards:
       center_circle_size: 30
       hide_direction_below_speed: 1
     compass_direction:
-      entity: sensor.direction_du_vent_vence
+      entity: sensor.direction_vent_vence_deg
       auto_rotate: false
       as_heading: false
     corner_info:
       top_left:
         label: Vitesse du Vent
         unit: " km/h"
-        entity: sensor.vitesse_du_vent_vence
+        entity: sensor.vitesse_vent_vence_kmh
         label_text_size: 40
       top_right:
         label: Direction du Vent
         color: white
-        entity: sensor.direction_du_vent_vence_label
+        entity: sensor.direction_vent_vence_label
         label_text_size: 50
         value_text_size: 60
       bottom_left:
         label: Boussole
         unit: °
-        entity: sensor.direction_du_vent_vence
+        entity: sensor.direction_vent_vence_deg
         label_text_size: 40
       bottom_right:
         label: Vitesse de la rafale actuelle
@@ -560,7 +560,7 @@ cards:
       - type: custom:button-card
         entity: sensor.maison_lightning_counter
         triggers_update:
-          - sensor.dernier_impact_temps_reel
+          - sensor.timer_foudre
           - sensor.maison_lightning_distance
         name: |
           [[[
@@ -568,7 +568,7 @@ cards:
             const localisation = states['sensor.maison_lightning_localisation'];
             const azimuth = states['sensor.maison_lightning_azimuth'] ? parseFloat(states['sensor.maison_lightning_azimuth'].state) : null;
             const impactCount = parseInt(entity.state) || 0;
-            const timePhrase = states['sensor.dernier_impact_temps_reel'] ? states['sensor.dernier_impact_temps_reel'].state : '';
+            const timePhrase = states['sensor.timer_foudre'] ? states['sensor.timer_foudre'].state : '';
             let message = '';
             if (distRaw > 0) {
               const distance = distRaw.toFixed(1);
@@ -1016,11 +1016,11 @@ cards:
         windspeed_bar_location: bottom
         refresh_interval: 60
         wind_direction_entity:
-          entity: sensor.lightning_bearing
+          entity: sensor.direction_foudre_deg
           use_statistics: false
           direction_compensation: 0
         windspeed_entities:
-          - entity: sensor.lightning_distance_km
+          - entity: sensor.distance_foudre_km
             name: Distance
             windspeed_bar_full: true
             input_speed_unit: kph
@@ -1097,20 +1097,20 @@ cards:
               button_text: 30 jours
               period_back: "-730h"
         current_direction:
-          entity: sensor.lightning_bearing
+          entity: sensor.direction_foudre_deg
           show_arrow: true
           arrow_size: 100
           center_circle_size: 30
           hide_direction_below_speed: 1
         compass_direction:
-          entity: sensor.lightning_bearing
+          entity: sensor.direction_foudre_deg
           auto_rotate: false
           as_heading: false
         corner_info:
           top_left:
             label: Distance de l'éclair
             unit: " km"
-            entity: sensor.lightning_distance_km
+            entity: sensor.distance_foudre_km
             label_text_size: 50
             value_text_size: 60
             input_unit: kph
@@ -1119,13 +1119,13 @@ cards:
           top_right:
             label: Direction de l'éclair
             color: white
-            entity: sensor.lightning_direction_label
+            entity: sensor.direction_foudre_label
             label_text_size: 50
             value_text_size: 60
           bottom_left:
             label: Boussole
             unit: °
-            entity: sensor.lightning_bearing
+            entity: sensor.direction_foudre_deg
             label_text_size: 40
           bottom_right:
             label: Compteur d'éclairs
@@ -1166,7 +1166,7 @@ cards:
               font-size: 18px !important;
             }
             .sensor-0 .value {
-              {% if is_state('sensor.lightning_distance_km', 'unknown') %}
+              {% if is_state('sensor.distance_foudre_km', 'unknown') %}
                 font-size: 0px !important;
               {% else %}
                 font-weight: bold;
