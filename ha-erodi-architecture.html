@@ -3796,7 +3796,7 @@ input_datetime: !include input_datetime.yaml</pre>
 
     <div class="conv-section reveal">
       <h3 class="conv-section-h">2 — Les slash commands</h3>
-      <p class="conv-section-sub">8 commandes utilitaires, plus une qui merite sa propre place.</p>
+      <p class="conv-section-sub">9 commandes utilitaires, plus une qui merite sa propre place.</p>
 
       <div class="rule-card bloc-clickable reveal" onclick="openTreeModal('dependances')" style="cursor:pointer;border-color:var(--amber);box-shadow:var(--shadow-hi);margin:0 0 1.6rem;animation-delay:0s;">
         <span class="bloc-tap-hint" style="right:18px;bottom:10px;animation-delay:0s;">👆</span>
@@ -3817,6 +3817,8 @@ input_datetime: !include input_datetime.yaml</pre>
         <div class="item-card"><code>/ha_push_docs</code><span style="font-size:.78rem;color:var(--text-2);">Synchronise les docs locales DOCS/ vers H:\Docs\.</span></div>
         <div class="item-card"><code>/ha_resync_docs</code><span style="font-size:.78rem;color:var(--text-2);">Resynchronise le local depuis GitHub, audit MD5 a l'appui.</span></div>
         <div class="item-card"><code>/ha_push_md</code><span style="font-size:.78rem;color:var(--text-2);">Pousse uniquement les fichiers <code>.md</code> de documentation vers H:\Docs.</span></div>
+        <div class="item-card"><code>/trigul</code><span style="font-size:.78rem;color:var(--text-2);">Triangulation MD5 des docs (local vs prod vs GitHub), rapport dans <code>historique\MD5\</code>. Seule commande sans fichier dans <code>.claude/commands/</code> — le skill <code>ha-trigul</code> fait le travail.</span></div>
+        
         
       </div>
     </div>
