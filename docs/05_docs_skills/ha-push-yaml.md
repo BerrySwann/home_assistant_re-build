@@ -14,7 +14,7 @@ description: "Skill HA ReBuild - pousse des fichiers YAML config locaux vers la 
 
 `config_system_YAML\` est l'IMAGE LOCALE de la prod (H:\) : chaque fichier y a le meme
 nom et le meme chemin relatif que sur H:\ (jamais de suffixe dans le nom du fichier
-courant), pour rester comparable 1:1 avec la prod a tout moment (voir ha-resync-tree
+courant), pour rester comparable 1:1 avec la prod a tout moment (voir ha-resync-docs
 pour la tenir a jour depuis GitHub).
 
 | Source locale | Prod HA |

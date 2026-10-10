@@ -9,7 +9,7 @@ description: "Skill HA ReBuild - triangulation MD5 des docs .md entre local (ReB
 
 Comparer chaque fichier .md de documentation entre les 3 niveaux et ecrire un rapport dans `historique\MD5\`. Lecture seule : le skill ne modifie, ne pousse et ne corrige aucun fichier de documentation. Il n'ecrit que le rapport.
 
-Perimetre : `docs/**/*.md` + `Github/README.md` + `Github/INDEX_GLOBAL.md` (compares a `README.md` et `INDEX_GLOBAL.md` a la racine de la prod et du depot). Les YAML de config sont hors perimetre (voir ha-resync-tree et ha-push-yaml).
+Perimetre : `docs/**/*.md` + `Github/README.md` + `Github/INDEX_GLOBAL.md` (compares a `README.md` et `INDEX_GLOBAL.md` a la racine de la prod et du depot). Les YAML de config sont hors perimetre (voir ha-resync-docs et ha-push-yaml).
 
 Source de verite = LOCAL (ReBuild). Un ecart local/prod veut dire prod EN RETARD ; un ecart prod/depot veut dire depot EN RETARD.
 

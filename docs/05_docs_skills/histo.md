@@ -115,14 +115,14 @@ Immediatement apres la sauvegarde du journal, executer le sync_index complet.
 4. Pour chaque script valide : verifier/mettre a jour son `.md` dans `docs_scripts_YAML_MD/`
 5. Mettre a jour `INDEX_GLOBAL.md` (voir ci-dessous)
 6. Si un `.md` de doc est absent : le signaler (ne pas bloquer)
-7. Pour chaque skill du projet modifie pendant la session : recopier son `SKILL.md` vers `docs/05_docs_skills/<skill>.md` (sauvegarde locale `.bak_AAAA_MM_JJ_HHhMMmSSs` du fichier existant avant ecrasement), puis pousser vers `H:\docs\05_docs_skills\` apres comparaison MD5. Seul le fichier courant est pousse, jamais un `.bak`.
+7. Pour chaque skill du projet modifie pendant la session : recopier son `SKILL.md` vers `docs/05_docs_skills/<skill>.md` (sauvegarde locale `.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}` du fichier existant avant ecrasement), puis pousser vers `H:\docs\05_docs_skills\` apres comparaison MD5. Seul le fichier courant est pousse, jamais un `.bak`.
 
 ### Mise a jour de INDEX_GLOBAL.md
 
 Fichier : `C:\Users\Berry Swann\Documents\ReBuild\Github\INDEX_GLOBAL.md` (copie locale uniquement, il n'existe pas de circuit de push pour lui ; ne pas le pousser).
 
 1. Si aucun fichier de la session n'est ajoute, renomme, supprime ou deplace, et qu'aucune entite citee n'a change : noter "INDEX_GLOBAL deja a jour" et passer a l'etape suivante.
-2. Sinon, faire d'abord une sauvegarde dans le meme dossier : `INDEX_GLOBAL.md.bak_AAAA_MM_JJ_HHhMMmSSs` (format PowerShell `Get-Date -Format "yyyy_MM_dd_HH'h'mm'm'ss's'"` ; le dossier Github est hors perimetre du menage de l'etape 5).
+2. Sinon, faire d'abord une sauvegarde dans le meme dossier : `INDEX_GLOBAL.bak_AAAA_MM_JJ_HHhMMmSSs.md` (format PowerShell `Get-Date -Format "yyyy_MM_dd_HH'h'mm'm'ss's'"` ; le dossier Github est hors perimetre du menage de l'etape 5).
 3. Ne reecrire que les lignes concernees, jamais le fichier entier :
    - ajouter une entree pour chaque nouveau fichier (automation, script, helper YAML, fiche), dans la section de son type, a cote des entrees voisines, avec le meme format que celles-ci
    - mettre a jour les entrees renommees ou supprimees
@@ -189,7 +189,7 @@ Le journal fusionne est un seul fichier Markdown qui regroupe tous les journaux 
 
 ### Regles
 
-- Ne jamais ecraser un fusionne existant : un nouveau nom par nouvelle date de fin. Si le fichier cible existe deja (meme date de fin, nouvelle session du meme jour), le sauvegarder d'abord en `JOURNAL_FUSIONNE_..._[DATE_FIN].md.bak_AAAA_MM_JJ_HHhMMmSSs` puis le mettre a jour.
+- Ne jamais ecraser un fusionne existant : un nouveau nom par nouvelle date de fin. Si le fichier cible existe deja (meme date de fin, nouvelle session du meme jour), le sauvegarder d'abord en `JOURNAL_FUSIONNE_..._[DATE_FIN].bak_AAAA_MM_JJ_HHhMMmSSs.md` puis le mettre a jour.
 - L'ancien fusionne reste en place. Ne pas le supprimer sans demande.
 - Format du fichier : CRLF, UTF-8 sans BOM, comme la base.
 - Verifier apres ecriture : pas de BOM, aucun LF isole, un seul bandeau `RESTE A FAIRE`, le fichier se termine par la ligne ``` suivie d'une fin de ligne, nombre pair de lignes ``` (clotures equilibrees), nombre de lignes coherent avec base + ajouts.
@@ -210,7 +210,7 @@ Le journal fusionne est un seul fichier Markdown qui regroupe tous les journaux 
 
 ### Regles
 
-- Ne jamais ecraser un fichier existant du dossier Obsidian : s'il existe deja, ne pas le copier et le signaler. Seule exception : un fusionne de meme nom (mise a jour du meme jour), qui est ecrase SANS sauvegarde sur D: (regle : jamais de sauvegarde sur D:). La version precedente reste dans `historique\` (sauvegarde `.bak_AAAA_MM_JJ_HHhMMmSSs` faite a l'etape 3).
+- Ne jamais ecraser un fichier existant du dossier Obsidian : s'il existe deja, ne pas le copier et le signaler. Seule exception : un fusionne de meme nom (mise a jour du meme jour), qui est ecrase SANS sauvegarde sur D: (regle : jamais de sauvegarde sur D:). La version precedente reste dans `historique\` (sauvegarde `.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}` faite a l'etape 3).
 - L'ancien fusionne reste dans le dossier Obsidian.
 - Apres chaque copie, comparer le MD5 source / destination et le noter dans le rapport (`identique` ou `DIFFERENT`).
 - Si `D:\` ou le dossier est inaccessible : le signaler dans le rapport, ne pas bloquer et ne pas creer d'autre dossier a la place.
@@ -221,8 +221,8 @@ Le journal fusionne est un seul fichier Markdown qui regroupe tous les journaux 
 
 Applique la REGLE DE SAUVEGARDE du 2026-10-08 (definie dans CLAUDE.md). Tout se passe en LOCAL, jamais sur H: ni sur D:.
 
-**Perimetre :** `C:\Users\Berry Swann\Documents\ReBuild\docs\00_*` a `05_*` (recursif) + `C:\Users\Berry Swann\Documents\ReBuild\Claude md SAVE\`.
-**Hors perimetre (ne pas toucher) :** TODO, Github, historique, .claude, Infra_Proxmox. Ignorer aussi tout dossier `_ARCHIVE` / `ARCHIVE` et tout fichier dont le nom contient `_archive_` : ce sont des archives, pas des sauvegardes (ex : `_ARCHIVE\DEPENDANCES_GLOBALES_archive_2026-10-07_18h13.md`).
+**Perimetre :** `C:\Users\Berry Swann\Documents\ReBuild\docs\00_*` a `05_*` (recursif) + `C:\Users\Berry Swann\Documents\ReBuild\Claude md SAVE\` + `C:\Users\Berry Swann\Documents\ReBuild\.claude\ARCHIVE\`.
+**Hors perimetre (ne pas toucher) :** TODO, Github, historique, Infra_Proxmox, `_old_avant_staging` (racine et sous-dossiers `docs\`), le reste de `.claude` (skills et commands actifs). Le dossier `.claude\ARCHIVE\` EST traite : c'est le depot des copies d'avant modification, il suit les memes familles (une copie datee devient `{nom_de_travail}.bak_AAAA_MM_JJ.{ext}` ; par jour, la plus recente est gardee, les autres a la corbeille). Ignorer tout autre dossier `_ARCHIVE` / `ARCHIVE` et tout fichier dont le nom contient `_archive_` (ex : `_ARCHIVE\DEPENDANCES_GLOBALES_archive_2026-10-07_18h13.md`).
 
 **"Poubelle" = corbeille Windows**, jamais de suppression definitive :
 ```powershell
@@ -237,7 +237,7 @@ la REGLE DE SAUVEGARDE courante, est ramene aux regles. Aucun cas n'est laisse d
 qu'il n'entre dans aucune famille : s'il porte une date ou un marqueur de sauvegarde, il est traite.
 
 Deux cibles seulement :
-- une version ou une sauvegarde -> `{nom_de_travail}.bak_AAAA_MM_JJ` (le nom de travail ne contient pas de date) ;
+- une version ou une sauvegarde -> `{nom_de_travail}.bak_AAAA_MM_JJ.{ext}` (le nom de travail ne contient pas de date) ;
 - la version courante d'un fichier de travail -> le nom sans date (`{nom}.ext`).
 
 Un nom de fichier ne porte JAMAIS de date dans sa partie courante. En cas de doute (nom qui pourrait
@@ -247,16 +247,16 @@ etre un vrai document et non une sauvegarde), on signale et on ne touche pas.
 
 | Famille | Exemple | Traitement |
 |:---|:---|:---|
-| A - sauvegarde horodatee | `fichier.yaml.bak_2026_10_07_21h14m05s` | voir protocole |
-| B - sauvegarde finale | `fichier.yaml.bak_2026_10_07` | gardee, soumise au plafond de 3 |
-| C - anciens `.bak` | `.bak_2026-09-28`, `.bak_20260929`, `.bak2_...`, `.bak-...` | renommes `fichier.yaml.bak_AAAA_MM_JJ` |
-| D - fichiers de travail dates | `page_L4C2_proxmox_2026-06-18.yaml`, `fichier_2026-10-07_22h00.ext` | la plus recente devient le nom sans date `{nom}.ext` ; les autres deviennent `.bak_AAAA_MM_JJ` (plafond 3) |
-| E - sauvegardes nommees | `CLAUDE_backup_2026-07-31.md`, `CLAUDE_2026-10-04.md`, `fichier_old.md` | renommees `{nom_de_travail}.bak_AAAA_MM_JJ`, ou `{nom_de_travail}` est le nom du fichier de travail courant, extension comprise : `CLAUDE_backup_2026-07-31.md` -> `CLAUDE.md.bak_2026_07_31`, `CLAUDE_2026-10-04.md` -> `CLAUDE.md.bak_2026_10_04`, `fichier_old.md` -> `fichier.md.bak_<date>`. Date lue dans le nom, a defaut date de modification |
+| A - sauvegarde horodatee | `fichier.bak_2026_10_07_21h14m05s.yaml` | voir protocole |
+| B - sauvegarde finale | `fichier.bak_2026_10_07.yaml` | gardee, soumise au plafond de 3 |
+| C - anciens `.bak` | `.bak_2026-09-28`, `.bak_20260929`, `.bak2_...`, `.bak-...` | renommes `fichier.bak_AAAA_MM_JJ.yaml` |
+| D - fichiers de travail dates | `page_L4C2_proxmox_2026-06-18.yaml`, `fichier_2026-10-07_22h00.ext` | la plus recente devient le nom sans date `{nom}.ext` ; les autres deviennent `.bak_AAAA_MM_JJ.{ext}` (plafond 3) |
+| E - sauvegardes nommees | `CLAUDE_backup_2026-07-31.md`, `CLAUDE_2026-10-04.md`, `fichier_old.md` | renommees `{nom_de_travail}.bak_AAAA_MM_JJ.{ext}`, ou `{nom_de_travail}` est le nom du fichier de travail courant, extension comprise : `CLAUDE_backup_2026-07-31.md` -> `CLAUDE.bak_2026_07_31.md`, `CLAUDE_2026-10-04.md` -> `CLAUDE.bak_2026_10_04.md`, `fichier_old.md` -> `fichier.bak_<date>.md`. Date lue dans le nom, a defaut date de modification |
 
 > Aucune famille n'est une liste fermee. Tout nom portant une date (`AAAA-MM-JJ`, `AAAA_MM_JJ`,
 > `AAAAMMJJ`) ou un marqueur `backup`, `save`, `old`, `ancien`, `avant`, `orig`, et qui n'est pas le
 > fichier de travail courant, entre dans la conformite (famille E). Restent exclus les dossiers
-> `_ARCHIVE` / `ARCHIVE` et les fichiers `*_archive_*`.
+> `_ARCHIVE` / `ARCHIVE` et les fichiers `*_archive_*` restent exclus, SAUF `.claude\ARCHIVE\`.
 
 ### Protocole
 
@@ -264,11 +264,11 @@ etre un vrai document et non une sauvegarde), on signale et on ne touche pas.
 2. Regrouper par fichier d'origine (meme dossier, meme nom de base, meme famille) puis, dans chaque groupe, par jour passe.
 3. Pour chaque jour passe d'un groupe :
    - garder la sauvegarde la plus RECENTE : d'abord par l'horodatage lu dans le nom (jour + heure) ; a egalite (noms sans heure, ex `.bak_2026-09-20`, `.bak_2026-09-20b`, `.bak2_...`), par la date de modification du fichier ; si l'egalite persiste et que les contenus different (MD5), ne rien supprimer et signaler le groupe ; si les contenus sont identiques, garder n'importe lequel ;
-   - la renommer en `fichier.yaml.bak_AAAA_MM_JJ` (famille A), les autres de ce jour vont a la corbeille Windows ;
-   - famille C : renommer en `.bak_AAAA_MM_JJ` (la date est lue dans le nom) ;
-   - famille D : la version la plus recente devient le nom sans date `{nom}.ext`, les autres deviennent des `.bak_AAAA_MM_JJ` (plafond 3) ;
-   - famille E : renommer en `{nom_de_travail}.bak_AAAA_MM_JJ`, ou `{nom_de_travail}` est le nom du fichier de travail courant, extension comprise (ex : `CLAUDE_backup_2026-07-31.md` -> `CLAUDE.md.bak_2026_07_31`, `CLAUDE_2026-10-04.md` -> `CLAUDE.md.bak_2026_10_04`) ; date lue dans le nom, a defaut date de modification.
-4. Plafond : si un fichier a plus de 3 `.bak_AAAA_MM_JJ` (apres les renommages ci-dessus, famille A, B et C), la plus ancienne va a la corbeille Windows, et ainsi de suite jusqu'a 3. Le plafond de 3 s'applique a toutes les familles (A, B, C, D, E).
+   - la renommer en `fichier.bak_AAAA_MM_JJ.yaml` (famille A), les autres de ce jour vont a la corbeille Windows ;
+   - famille C : renommer en `.bak_AAAA_MM_JJ.{ext}` (la date est lue dans le nom) ;
+   - famille D : la version la plus recente devient le nom sans date `{nom}.ext`, les autres deviennent des `.bak_AAAA_MM_JJ.{ext}` (plafond 3) ;
+   - famille E : renommer en `{nom_de_travail}.bak_AAAA_MM_JJ.{ext}`, ou `{nom_de_travail}` est le nom du fichier de travail courant, extension comprise (ex : `CLAUDE_backup_2026-07-31.md` -> `CLAUDE.bak_2026_07_31.md`, `CLAUDE_2026-10-04.md` -> `CLAUDE.bak_2026_10_04.md`) ; date lue dans le nom, a defaut date de modification.
+4. Plafond : si un fichier a plus de 3 `.bak_AAAA_MM_JJ.{ext}` (apres les renommages ci-dessus, famille A, B et C), la plus ancienne va a la corbeille Windows, et ainsi de suite jusqu'a 3. Le plafond de 3 s'applique a toutes les familles (A, B, C, D, E).
 5. Si la date change pendant l'execution (minuit passe), garder la date relevee au lancement de l'etape.
 
 ### Garde-fous (ne rien supprimer, remonter le souci)
@@ -293,7 +293,7 @@ Met a jour l'arborescence documentee : `C:\Users\Berry Swann\Documents\ReBuild\d
 
 1. Appliquer le protocole du skill `update-arbo` : comptages reels local et prod `H:\docs`, dernier commit et arbre GitHub, remplacements `.Replace()` stricts sur les seules lignes qui changent. Aucune valeur estimee ou memorisee.
 2. Si les comptages sont identiques a ceux du fichier : ne rien modifier, noter "tree deja a jour".
-3. Avant de modifier `IA_ARBO_DETAIL.md` : sauvegarde locale `IA_ARBO_DETAIL.md.bak_AAAA_MM_JJ_HHhMMmSSs` a cote du fichier (REGLE DE SAUVEGARDE, 10 max le jour meme).
+3. Avant de modifier `IA_ARBO_DETAIL.md` : sauvegarde locale `IA_ARBO_DETAIL.bak_AAAA_MM_JJ_HHhMMmSSs.md` a cote du fichier (REGLE DE SAUVEGARDE, 10 max le jour meme).
 4. Pousser ensuite vers `H:\docs\00_IA\sous_context_ia\IA_ARBO_DETAIL.md` (MD5 local contre prod avant et apres). Jamais de sauvegarde sur H:.
 5. Si l'API GitHub est injoignable : ne pas inventer de valeur, garder les anciennes valeurs GitHub du fichier et le signaler dans le rapport.
 6. Ne pas modifier les sections narratives du fichier.
