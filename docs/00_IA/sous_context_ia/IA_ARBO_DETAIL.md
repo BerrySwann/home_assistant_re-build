@@ -1,5 +1,5 @@
 # 🌳 ARBORESCENCES COMPLÈTES & INDEX GITHUB
-*Dernière mise à jour : 2026-10-11 (matin, /histo S1 : relevés LOCAL + PROD + GitHub rafraîchis ; comptages recalculés, la mention "dont N sauvegardes" compte les fichiers .bak)*
+*Dernière mise à jour : 2026-10-11 (matin, /histo S1 : relevés LOCAL + PROD + GitHub rafraîchis ; comptages recalculés, la mention "dont N sauvegardes" compte les fichiers .bak ; comptages LOCAL refaits aprés le ménage des sauvegardes)*
 *Lire ce fichier si : audit fichiers, sync GitHub, recherche d'un fichier prod, vérification arbo locale, URLs raw GitHub.*
 
 ---
@@ -36,14 +36,14 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── MOC/                                (un dossier par MOC : MOC_DASHBOARD/ · MOC_DEPENDANCES/ · MOC_PRESENCE/, chacun avec son .md et ses sauvegardes ; hors périmètre /histo)
 ├── scripts/                            (7 - audit_md5_md.sh · audit_md5_yaml.sh · check_yaml_forme.py · ha_git_backup.sh · ha_push_site.py · hermes_gen_dependances.py · maj_site_architecture.py)
 ├── historique/                         (173 dont 30 sauvegardes - journaux JOURNAL_COMPLET/JOURNAL_FUSIONNE_*.md, histo_YYYY-MM-DD_S*.txt/.md, ARCHIVE_SESSIONS_HA_*.md, archive MD5, histo.md = copie du skill + ses sauvegardes)
-└── docs/                               (823 fichiers)
-    ├── 00_IA/                          (47 dont 38 sauvegardes - IA_CONTEXT_BASE.md · ha-erodi-architecture.html · RAPPORT_AUDIT_ENERGETIQUE_*.md ×2 · Grille_Tarif_Bleu_EDF_2026-08-01.csv/.pdf · confort_cible_calcul_flow.png)
-    │   └── sous_context_ia/            (27 dont 19 sauvegardes - 8 sous-contextes IA_*.md + index arbo)
-    ├── 01_docs_config_system/          (112 - config_system_MD/ 2 + config_system_YAML/ 110 fichiers dont 6 sauvegardes, resynchronisé GitHub->local 2026-10-04, SYNC=80 DIFF=0)
-    ├── 02_docs_dashboard/              (255 - dashboard_docs_MD 93 · dashboard_docs_YAML 162)
-    ├── 03_docs_automations/            (332 dont 157 sauvegardes - docs_automations_MD · docs_automations_YAML)
+└── docs/                               (761 fichiers)
+    ├── 00_IA/                          (25 dont 16 sauvegardes - IA_CONTEXT_BASE.md · ha-erodi-architecture.html · RAPPORT_AUDIT_ENERGETIQUE_*.md ×2 · Grille_Tarif_Bleu_EDF_2026-08-01.csv/.pdf · confort_cible_calcul_flow.png)
+    │   └── sous_context_ia/            (19 dont 11 sauvegardes - 8 sous-contextes IA_*.md + index arbo)
+    ├── 01_docs_config_system/          (112 - config_system_MD/ 2 + config_system_YAML/ 110 fichiers dont 8 sauvegardes, resynchronisé GitHub->local 2026-10-04, SYNC=80 DIFF=0)
+    ├── 02_docs_dashboard/              (220 - dashboard_docs_MD 79 · dashboard_docs_YAML 141)
+    ├── 03_docs_automations/            (328 dont 197 sauvegardes - docs_automations_MD · docs_automations_YAML)
     ├── 04_docs_scripts/                (33 - SH · SH_MD · YAML · YAML_MD)
-    ├── 05_docs_MD_system/              (26 dont 15 sauvegardes)
+    ├── 05_docs_MD_system/              (25 dont 14 sauvegardes)
     └── 05_docs_skills/                 (18 - 13 dossiers skill_<nom>/ contenant la copie .md de chaque SKILL.md du projet, dont skill_histo/ ajouté le 2026-10-10 ; histo.md existe aussi dans historique/ ; 5 sauvegardes du 2026-10-11 dans skill_ha-trigul/)
 ```
 
