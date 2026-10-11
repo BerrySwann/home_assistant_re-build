@@ -585,7 +585,7 @@
   mode: queued
   max: 3
 - id: '1766776781417'
-  alias: G - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 2h)
+  alias: F - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 2h)
   description: Timer de 2h après détection de chauffe. Sécurité anti-redémarrage incluse.
   triggers:
   - alias: 'START : DÉTECTION PUISSANCE > 50W'
@@ -1683,7 +1683,7 @@
           title: Veille détectée
   mode: single
 - id: '1775331166275'
-  alias: 'D - SALLE DE BAIN : WATCHDOG SÉCURITÉ SOUFFLANT'
+  alias: 'C - SALLE DE BAIN : WATCHDOG SÉCURITÉ SOUFFLANT'
   description: Reset physique si T > 25°C, uniquement si la prise est alimentée
   triggers:
   - alias: 'TRIGGER : CHANGEMENT TEMPÉRATURE SDB'
@@ -2701,7 +2701,7 @@
           entity_id: switch.inter_soufflant_salle_de_bain
   mode: single
 - id: '1791401485072'
-  alias: E - SDB - SOUFFLANT - DECOMPTE 60 MIN (timer)
+  alias: D - SDB - SOUFFLANT - DECOMPTE 60 MIN (timer)
   description: 'Securite de duree du soufflant de la salle de bain : timer.soufflant_sdb_60mn
     est lance quand l''interrupteur passe vraiment de arret a marche, annule quand
     il passe sur arret, et coupe l''interrupteur a la fin (60 min, ou 10 min de rattrapage).
@@ -2763,11 +2763,11 @@
   max: 5
   mode: queued
 - id: '1791401487876'
-  alias: F - SDB - SOUFFLANT - RATTRAPAGE AU DEMARRAGE DE HA (timer 10 min)
+  alias: E - SDB - SOUFFLANT - RATTRAPAGE AU DEMARRAGE DE HA (timer 10 min)
   description: 'Au demarrage de Home Assistant : leve le verrou (le script qui le
     tenait est mort), puis, si l''interrupteur du soufflant est en marche et qu''aucun
     timer n''est actif (60 min non restaure ou fini pendant l''arret), lance timer.soufflant_sdb_10mn.
-    L''automation E coupe l''interrupteur a la fin du timer. Decision Eric 2026-10-07.'
+    L''automation D coupe l''interrupteur a la fin du timer. Decision Eric 2026-10-07.'
   triggers:
   - alias: Home Assistant demarre
     event: start
@@ -2797,9 +2797,9 @@
         entity_id: timer.soufflant_sdb_10mn
   mode: single
 - id: '1791401998919'
-  alias: H - SDB - SECHE-SERVIETTES - DECOMPTE 2 H (timer)
+  alias: G - SDB - SECHE-SERVIETTES - DECOMPTE 2 H (timer)
   description: 'Securite de duree du seche-serviettes de la salle de bain : timer.seche_serviettes_sdb_2h
-    est lance quand la puissance de la prise depasse 50 W (comme l''automation G),
+    est lance quand la puissance de la prise depasse 50 W (comme l''automation F),
     annule quand la prise passe sur arret, et a la fin d''un timer (2 h, ou 10 min
     de rattrapage) coupe la prise, notifie, attend 1 min puis remet la prise en marche
     (veille). Le timer survit a un redemarrage de HA (restore). Decision Eric 2026-10-07.
@@ -2873,10 +2873,10 @@
   max: 5
   mode: queued
 - id: '1791402001955'
-  alias: I - SDB - SECHE-SERVIETTES - RATTRAPAGE AU DEMARRAGE DE HA (timer 10 min)
+  alias: H - SDB - SECHE-SERVIETTES - RATTRAPAGE AU DEMARRAGE DE HA (timer 10 min)
   description: 'Au demarrage de Home Assistant : si la prise du seche-serviettes est
     en marche et qu''aucun des deux timers n''est actif (2 h non restaure ou fini
-    pendant l''arret), lance timer.seche_serviettes_sdb_10mn. L''automation H coupe
+    pendant l''arret), lance timer.seche_serviettes_sdb_10mn. L''automation G coupe
     la prise a la fin du timer, ou annule ce timer et lance le 2 h si la puissance
     depasse 50 W. Decision Eric 2026-10-07.'
   triggers:
