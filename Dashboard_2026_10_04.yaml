@@ -2455,12 +2455,12 @@ views:
                 return (d1_open || d2_open) ? 'mdi:fridge-industrial-alert' : 'mdi:fridge-industrial'; 
               ]]]
             custom_fields:
-              bg1: ' '
-              bg2: ' '
-              badge1: ' '
-              badge2: ' '
-              bar: ' '
-              door_dash: ' '
+              bg1: " "
+              bg2: " "
+              badge1: " "
+              badge2: " "
+              bar: " "
+              door_dash: " "
             extra_styles: |
               [[[
                 let ent_switch = variables.ent_switch;
@@ -2805,49 +2805,32 @@ views:
                   show_attribute: false
                   attribute: entity_picture
               bottom: []
-            styles: |
+            styles: >-
               ha-card {
                 --bubble-icon-background-color: black !important;
               }
+
               .bubble-sub-button {
                 background-color: black !important;
               }
+
               .bubble-button-background {
-                background-color:
-                  ${ state === 'home'
-                    ? 'green'
-                    : state === 'not_home'
-                      ? 'rgb(255, 103, 0)'
-                      : ['SNEF Bureau','Fabron','Trotabas','Liégeard','George V','Menton'].includes(state)
-                        ? 'lightgreen'
-                        : 'grey'
-                  } !important;
+                background-color: ${ state === 'home' ? 'green' : '' } !important;
               }
+
               .bubble-icon,
+
               .bubble-sub-button > ha-icon {
-                color:
-                  ${ state === 'home'
-                    ? 'darkgreen'
-                    : state === 'not_home'
-                      ? 'rgb(255, 103, 0)'
-                      : ['SNEF Bureau','Fabron','Trotabas','Liégeard','George V','Menton'].includes(state)
-                        ? 'lightgreen'
-                        : 'grey'
-                  } !important;
+                color: ${ state === 'home' ? 'darkgreen' : '' } !important;
               }
-              ${subButtonIcon[0].setAttribute("icon",
-                state === 'home'
-                  ? 'mdi:home'
-                  : state === 'not_home'
-                    ? 'mdi:home-off'
-                    : ['SNEF Bureau','Fabron','Trotabas','Liégeard','George V','Menton'].includes(state)
-                      ? 'mdi:hammer-screwdriver'
-                      : 'mdi:crosshairs-question'
-              )}
+
+              ${subButtonIcon[0].setAttribute("icon", state === 'home' ?
+              'mdi:home' : '')}
           - type: custom:bubble-card
             card_type: button
             button_type: state
             entity: device_tracker.mamour
+            name: Mamour
             show_name: true
             show_last_changed: true
             show_attribute: false
@@ -2857,13 +2840,15 @@ views:
               grid_rows: 1
             show_state: false
             sub_button:
-              - entity: person.mamour
-                show_state: false
-                show_icon: true
-                show_background: true
-                show_attribute: false
-                attribute: entity_picture
-            styles: |
+              main:
+                - entity: person.mamour
+                  show_state: false
+                  show_icon: true
+                  show_background: true
+                  show_attribute: false
+                  attribute: entity_picture
+              bottom: []
+            styles: |-
               ha-card {
                 --bubble-icon-background-color: black !important;
               }
@@ -2876,13 +2861,9 @@ views:
                     ? 'darkgreen'
                     : state === 'not_home'
                       ? 'rgb(255, 103, 0)'
-                      : state === 'LECLERC VENCE' || state === 'MONOPRIX' || state === 'AUCHAN'
+                      : ['LECLERC','MONOPRIX','AUCHAN'].concat(['ANITA','KIPUE']).includes(state)
                         ? 'rgb(0, 102, 204)'
-                        : state === 'Primark'
-                          ? 'rgb(4,155,216)'
-                          : state === 'ANITA' || state === 'KIPUE'
-                            ? 'rgb(144, 238, 144)'
-                            : 'lightgreen'
+                        : 'grey'
                   } !important;
               }
               .bubble-icon,
@@ -2892,13 +2873,9 @@ views:
                     ? 'darkgreen'
                     : state === 'not_home'
                       ? 'rgb(255, 103, 0)'
-                      : state === 'LECLERC VENCE' || state === 'MONOPRIX' || state === 'AUCHAN'
+                      : ['LECLERC','MONOPRIX','AUCHAN'].concat(['ANITA','KIPUE']).includes(state)
                         ? 'rgb(0, 102, 204)'
-                        : state === 'Primark'
-                          ? 'rgb(4,155,216)'
-                          : state === 'ANITA' || state === 'KIPUE'
-                            ? 'rgb(144, 238, 144)'
-                            : 'lightgreen'
+                        : 'grey'
                   } !important;
               }
               ${subButtonIcon[0].setAttribute("icon",
@@ -2906,19 +2883,12 @@ views:
                   ? 'mdi:home'
                   : state === 'not_home'
                     ? 'mdi:home-off'
-                    : state === 'LECLERC VENCE'
+                    : ['LECLERC','MONOPRIX','AUCHAN'].includes(state)
                       ? 'mdi:basket-check'
-                      : state === 'MONOPRIX'
-                        ? 'mdi:shopping'
-                        : state === 'AUCHAN'
-                          ? 'mdi:cart-check'
-                          : state === 'Primark'
-                            ? 'mdi:hanger'
-                            : state === 'ANITA' || state === 'KIPUE'
-                              ? 'mdi:home-heart'
-                              : 'mdi:home-heart'
+                      : ['ANITA','KIPUE'].includes(state)
+                        ? 'mdi:map-marker'
+                        : 'mdi:crosshairs-question'
               )}
-            name: Mamour
           - square: false
             type: grid
             cards:
@@ -5651,8 +5621,7 @@ views:
                     navigation: null
                     cards:
                       - type: iframe
-                        url: >-
-                          https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=5&overlay=radar&product=radar&level=surface&lat=43.612&lon=7.207
+                        url: https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=5&overlay=radar&product=radar&level=surface&lat=43.612&lon=7.207
                         aspect_ratio: 99%
                         card_mod:
                           style: |
@@ -5665,8 +5634,7 @@ views:
                               pointer-events: none;
                             }
                       - type: iframe
-                        url: >-
-                          https://embed.windy.com/embed2.html?lat=43&lon=7&detailLat=43&detailLon=7&zoom=5&level=surface&overlay=rain&product=ecmwf&menu=&message=&marker=&calendar=24&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1
+                        url: https://embed.windy.com/embed2.html?lat=43&lon=7&detailLat=43&detailLon=7&zoom=5&level=surface&overlay=rain&product=ecmwf&menu=&message=&marker=&calendar=24&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1
                         aspect_ratio: 99%
                         card_mod:
                           style: |
@@ -5679,8 +5647,7 @@ views:
                               pointer-events: none;
                             }
                       - type: iframe
-                        url: >-
-                          https://embed.windy.com/embed2.html?lat=43&lon=7&detailLat=43&detailLon=7&zoom=5&level=surface&overlay=temp&product=ecmwf&menu=&message=&marker=&calendar=24&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1
+                        url: https://embed.windy.com/embed2.html?lat=43&lon=7&detailLat=43&detailLon=7&zoom=5&level=surface&overlay=temp&product=ecmwf&menu=&message=&marker=&calendar=24&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1
                         aspect_ratio: 99%
                         card_mod:
                           style: |
@@ -5693,8 +5660,7 @@ views:
                               pointer-events: none;
                             }
                       - type: iframe
-                        url: >-
-                          https://embed.windy.com/embed2.html?lat=43&lon=7&detailLat=43&detailLon=7&zoom=5&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=24&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1
+                        url: https://embed.windy.com/embed2.html?lat=43&lon=7&detailLat=43&detailLon=7&zoom=5&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=24&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1
                         aspect_ratio: 99%
                         card_mod:
                           style: |
@@ -6082,9 +6048,6 @@ views:
             hash: '#foudre'
             show_header: true
             force_icon: false
-            show_state: false
-            show_last_changed: false
-            show_attribute: false
             button_type: name
             name: Impacts de foudre (30 Km)
             icon: mdi:weather-lightning
@@ -6248,7 +6211,7 @@ views:
                     cards:
                       - type: custom:bar-card
                         entities:
-                          - entity: sensor.eclairs_horaire
+                          - entity: sensor.eclair_horaire
                             name: Heure
                         icon: mdi:flash-alert
                         direction: up
@@ -6306,7 +6269,7 @@ views:
                             }
                       - type: custom:bar-card
                         entities:
-                          - entity: sensor.eclairs_quotidien
+                          - entity: sensor.eclair_quotidien
                             name: Jour
                         icon: mdi:flash-alert
                         direction: up
@@ -6364,7 +6327,7 @@ views:
                             }
                       - type: custom:bar-card
                         entities:
-                          - entity: sensor.eclairs_hebdomadaire
+                          - entity: sensor.eclair_hebdomadaire
                             name: Semaine
                         icon: mdi:flash-alert
                         direction: up
@@ -6422,7 +6385,7 @@ views:
                             }
                       - type: custom:bar-card
                         entities:
-                          - entity: sensor.eclairs_mensuel
+                          - entity: sensor.eclair_mensuel
                             name: Mois
                         icon: mdi:flash-alert
                         direction: up
@@ -6480,7 +6443,7 @@ views:
                             }
                       - type: custom:bar-card
                         entities:
-                          - entity: sensor.eclairs_annuel
+                          - entity: sensor.eclair_annuel
                             name: Année
                         icon: mdi:flash-alert
                         direction: up
@@ -6934,8 +6897,7 @@ views:
                     navigation: null
                     cards:
                       - type: iframe
-                        url: >-
-                          https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=5&overlay=radar&product=radar&level=surface&lat=43.612&lon=7.207
+                        url: https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=5&overlay=radar&product=radar&level=surface&lat=43.612&lon=7.207
                         aspect_ratio: 99%
                         card_mod:
                           style: |
@@ -7402,7 +7364,7 @@ views:
                           type: custom:text-divider-row
                           text: Suivi du soleil
                       - type: custom:horizon-card
-                        title: ' '
+                        title: " "
                         moon: true
                         refresh_period: 60
                         fields:
@@ -7727,7 +7689,7 @@ views:
                       extremas: true
                       legend_value: false
                   - entity: sun.sun
-                    name: ' '
+                    name: " "
                     yaxis_id: hours
                     type: area
                     curve: smooth
@@ -8244,7 +8206,7 @@ views:
               label: Now
             header:
               show: true
-              title: ' '
+              title: " "
               show_states: true
               colorize_states: true
             yaxis:
@@ -8577,12 +8539,12 @@ views:
                 return 'mdi:thermostat';
               ]]]
             custom_fields:
-              badge1: ' '
-              badge2: ' '
-              t1: ' '
-              t2: ' '
-              bar: ' '
-              presence_dot: ' '
+              badge1: " "
+              badge2: " "
+              t1: " "
+              t2: " "
+              bar: " "
+              presence_dot: " "
             styles:
               card:
                 - height: 95px !important
@@ -9276,12 +9238,12 @@ views:
                 return 'mdi:thermostat';
               ]]]
             custom_fields:
-              badge1: ' '
-              badge2: ' '
-              t1: ' '
-              t2: ' '
-              bar: ' '
-              presence_dot: ' '
+              badge1: " "
+              badge2: " "
+              t1: " "
+              t2: " "
+              bar: " "
+              presence_dot: " "
             styles:
               card:
                 - height: 95px !important
@@ -9955,12 +9917,12 @@ views:
                 return 'mdi:thermostat';
               ]]]
             custom_fields:
-              badge1: ' '
-              badge2: ' '
-              t1: ' '
-              t2: ' '
-              bar: ' '
-              presence_dot: ' '
+              badge1: " "
+              badge2: " "
+              t1: " "
+              t2: " "
+              bar: " "
+              presence_dot: " "
             styles:
               card:
                 - height: 95px !important
@@ -10622,12 +10584,12 @@ views:
                 return 'mdi:thermostat';
               ]]]
             custom_fields:
-              badge1: ' '
-              badge2: ' '
-              t1: ' '
-              t2: ' '
-              bar: ' '
-              presence_dot: ' '
+              badge1: " "
+              badge2: " "
+              t1: " "
+              t2: " "
+              bar: " "
+              presence_dot: " "
             styles:
               card:
                 - height: 95px !important
@@ -11301,12 +11263,12 @@ views:
                 return 'mdi:thermostat';
               ]]]
             custom_fields:
-              badge1: ' '
-              badge2: ' '
-              t1: ' '
-              t2: ' '
-              bar: ' '
-              presence_dot: ' '
+              badge1: " "
+              badge2: " "
+              t1: " "
+              t2: " "
+              bar: " "
+              presence_dot: " "
             styles:
               card:
                 - height: 95px !important
@@ -12688,12 +12650,12 @@ views:
                 return (d1_open || d2_open) ? 'mdi:fridge-industrial-alert' : 'mdi:fridge-industrial'; 
               ]]]
             custom_fields:
-              bg1: ' '
-              bg2: ' '
-              badge1: ' '
-              badge2: ' '
-              bar: ' '
-              door_dash: ' '
+              bg1: " "
+              bg2: " "
+              badge1: " "
+              badge2: " "
+              bar: " "
+              door_dash: " "
             extra_styles: |
               [[[
                 let ent_switch = variables.ent_switch;
@@ -13890,7 +13852,7 @@ views:
                 hvac_modes:
                   - 'off'
                   - heat
-            show_current_as_primary: false
+            show_current_as_primary: true
             card_mod:
               style: |
                 ha-card {
@@ -18904,7 +18866,7 @@ views:
                     title_position: bottom
                     opening_position: bottom
                     inline_header: true
-                    view_image: ' '
+                    view_image: " "
                     buttons_position: left
                     signal_entity: sensor.store_salon_signal_strength
                     shutter_slat_image: esc-shutter-slat.png
@@ -19285,7 +19247,7 @@ views:
                     title_position: bottom
                     opening_position: bottom
                     inline_header: true
-                    view_image: ' '
+                    view_image: " "
                     buttons_position: left
                     signal_entity: sensor.store_bureau_signal_strength
                     shutter_slat_image: esc-shutter-slat.png
@@ -20285,7 +20247,7 @@ views:
                         label: Now
                       header:
                         show: true
-                        title: ' '
+                        title: " "
                         show_states: true
                         colorize_states: true
                       yaxis:
@@ -20899,7 +20861,7 @@ views:
                             extremas: max
                         - entity: sensor.genelec_appart_quotidien_um
                           color: rgb(204, 255, 204)
-                          name: ' '
+                          name: " "
                           unit: kWh
                           fill_raw: last
                           stroke_width: 2
@@ -20910,7 +20872,7 @@ views:
                           offset: -1d
                         - entity: sensor.genelec_appart_quotidien_um
                           color: rgb(153, 255, 153)
-                          name: ' '
+                          name: " "
                           unit: kWh
                           fill_raw: last
                           stroke_width: 2
@@ -20921,7 +20883,7 @@ views:
                           offset: -2d
                         - entity: sensor.genelec_appart_quotidien_um
                           color: rgb(102, 255, 102)
-                          name: ' '
+                          name: " "
                           unit: kWh
                           fill_raw: last
                           stroke_width: 2
@@ -20932,7 +20894,7 @@ views:
                           offset: -3d
                         - entity: sensor.genelec_appart_quotidien_um
                           color: rgb(51, 204, 51)
-                          name: ' '
+                          name: " "
                           unit: kWh
                           fill_raw: last
                           stroke_width: 2
@@ -20943,7 +20905,7 @@ views:
                           offset: -4d
                         - entity: sensor.genelec_appart_quotidien_um
                           color: rgb(0, 153, 0)
-                          name: ' '
+                          name: " "
                           unit: kWh
                           fill_raw: last
                           stroke_width: 2
@@ -20954,7 +20916,7 @@ views:
                           offset: -5d
                         - entity: sensor.genelec_appart_quotidien_um
                           color: rgb(0, 102, 0)
-                          name: ' '
+                          name: " "
                           unit: kWh
                           fill_raw: last
                           stroke_width: 2
@@ -20965,7 +20927,7 @@ views:
                           offset: -6d
                         - entity: sensor.genelec_appart_quotidien_um
                           color: rgb(0, 70, 0)
-                          name: ' '
+                          name: " "
                           unit: kWh
                           fill_raw: last
                           stroke_width: 2
@@ -21531,7 +21493,7 @@ views:
                           show: true
                       header:
                         show: true
-                        title: ' '
+                        title: " "
                         show_states: true
                         colorize_states: true
                       yaxis:
@@ -21806,7 +21768,7 @@ views:
                   action: navigate
                   navigation_path: /dashboard-tablette/energie
               - type: markdown
-                content: ' '
+                content: " "
                 card_mod:
                   style: |
                     ha-card {
@@ -21837,7 +21799,7 @@ views:
                     - type: custom:auto-entities
                       card:
                         type: custom:bar-card
-                        title: ' '
+                        title: " "
                         icon: mdi:hvac
                         title_position: inside
                         height: 38
@@ -21887,8 +21849,7 @@ views:
                           - entity_id: sensor.prise_soufflant_salle_de_bain_nous_power
                             options:
                               icon: mdi:fan
-                          - entity_id: >-
-                              sensor.prise_seche_serviette_salle_de_bain_nous_power
+                          - entity_id: sensor.prise_seche_serviette_salle_de_bain_nous_power
                             options:
                               icon: mdi:radiator-vertical
                           - entity_id: sensor.clim_chambre_nous_power
@@ -21902,7 +21863,7 @@ views:
                         reverse: true
                         numeric: true
                     - type: markdown
-                      content: ' '
+                      content: " "
                       card_mod:
                         style: |
                           ha-card {
@@ -21931,7 +21892,7 @@ views:
                     - type: custom:auto-entities
                       card:
                         type: custom:bar-card
-                        title: ' '
+                        title: " "
                         icon: mdi:monitor
                         title_position: inside
                         height: 38
@@ -21992,7 +21953,7 @@ views:
                         reverse: true
                         numeric: true
                     - type: markdown
-                      content: ' '
+                      content: " "
                       card_mod:
                         style: |
                           ha-card {
@@ -22021,7 +21982,7 @@ views:
                     - type: custom:auto-entities
                       card:
                         type: custom:bar-card
-                        title: ' '
+                        title: " "
                         icon: mdi:stove
                         title_position: inside
                         height: 38
@@ -22079,7 +22040,7 @@ views:
                         reverse: true
                         numeric: true
                     - type: markdown
-                      content: ' '
+                      content: " "
                       card_mod:
                         style: |
                           ha-card {
@@ -22108,7 +22069,7 @@ views:
                     - type: custom:auto-entities
                       card:
                         type: custom:bar-card
-                        title: ' '
+                        title: " "
                         icon: mdi:fridge
                         title_position: inside
                         height: 38
@@ -22160,7 +22121,7 @@ views:
                         reverse: true
                         numeric: true
                     - type: markdown
-                      content: ' '
+                      content: " "
                       card_mod:
                         style: |
                           ha-card {
@@ -22189,7 +22150,7 @@ views:
                     - type: custom:auto-entities
                       card:
                         type: custom:bar-card
-                        title: ' '
+                        title: " "
                         icon: mdi:washing-machine
                         title_position: inside
                         height: 38
@@ -22243,7 +22204,7 @@ views:
                         reverse: true
                         numeric: true
                     - type: markdown
-                      content: ' '
+                      content: " "
                       card_mod:
                         style: |
                           ha-card {
@@ -22272,7 +22233,7 @@ views:
                     - type: custom:auto-entities
                       card:
                         type: custom:bar-card
-                        title: ' '
+                        title: " "
                         icon: mdi:lightbulb
                         title_position: inside
                         height: 38
@@ -22370,7 +22331,7 @@ views:
                         reverse: true
                         numeric: true
                     - type: markdown
-                      content: ' '
+                      content: " "
                       card_mod:
                         style: |
                           ha-card {
@@ -22399,7 +22360,7 @@ views:
                     - type: custom:auto-entities
                       card:
                         type: custom:bar-card
-                        title: ' '
+                        title: " "
                         icon: mdi:plus-circle
                         title_position: inside
                         height: 38
@@ -22803,8 +22764,7 @@ views:
                                 - energy_color: rgb(196, 75, 97)
                                 - current_entity: sensor.prise_salon_chargeur_nous_current
                                 - avg_daily_entity: sensor.chargeurs_salon_avg_watts_quotidien
-                                - conso_daily_kwh_entity: >-
-                                    sensor.prise_salon_chargeur_nous_quotidien_um
+                                - conso_daily_kwh_entity: sensor.prise_salon_chargeur_nous_quotidien_um
                             - type: custom:streamline-card
                               template: conso_temps_reel_appareil
                               variables:
@@ -22828,8 +22788,7 @@ views:
                                 - energy_color: rgb(98, 78, 136)
                                 - current_entity: sensor.prise_four_micro_ondes_nous_current
                                 - avg_daily_entity: sensor.four_mo_avg_watts_quotidien
-                                - conso_daily_kwh_entity: >-
-                                    sensor.prise_four_micro_ondes_nous_quotidien_um
+                                - conso_daily_kwh_entity: sensor.prise_four_micro_ondes_nous_quotidien_um
                             - type: custom:streamline-card
                               template: conso_temps_reel_appareil
                               variables:
@@ -22858,8 +22817,7 @@ views:
                                 - energy_color: rgb(129, 116, 180)
                                 - current_entity: sensor.prise_lave_vaisselle_nous_current
                                 - avg_daily_entity: sensor.lave_vaisselle_avg_watts_quotidien
-                                - conso_daily_kwh_entity: >-
-                                    sensor.prise_lave_vaisselle_nous_quotidien_um
+                                - conso_daily_kwh_entity: sensor.prise_lave_vaisselle_nous_quotidien_um
                             - type: custom:streamline-card
                               template: conso_temps_reel_appareil
                               variables:
@@ -22868,8 +22826,7 @@ views:
                                 - energy_color: rgb(142, 122, 181)
                                 - current_entity: sensor.prise_airfryer_ninja_nous_current
                                 - avg_daily_entity: sensor.airfryer_avg_watts_quotidien
-                                - conso_daily_kwh_entity: >-
-                                    sensor.prise_airfryer_ninja_nous_quotidien_um
+                                - conso_daily_kwh_entity: sensor.prise_airfryer_ninja_nous_quotidien_um
                             - type: custom:streamline-card
                               template: conso_temps_reel_appareil
                               variables:
@@ -22878,8 +22835,7 @@ views:
                                 - energy_color: rgb(162, 148, 249)
                                 - current_entity: sensor.four_et_plaque_de_cuisson_current
                                 - avg_daily_entity: sensor.plaques_cuisson_avg_watts_quotidien
-                                - conso_daily_kwh_entity: >-
-                                    sensor.four_et_plaque_de_cuisson_quotidien_um
+                                - conso_daily_kwh_entity: sensor.four_et_plaque_de_cuisson_quotidien_um
                             - type: custom:streamline-card
                               template: conso_temps_reel_appareil
                               variables:
@@ -22895,11 +22851,9 @@ views:
                                 - card_title: Congélateur
                                 - energy_entity: sensor.prise_congelateur_cuisine_nous_power
                                 - energy_color: rgb(0, 255, 255)
-                                - current_entity: >-
-                                    sensor.prise_congelateur_cuisine_nous_current
+                                - current_entity: sensor.prise_congelateur_cuisine_nous_current
                                 - avg_daily_entity: sensor.congelateur_avg_watts_quotidien
-                                - conso_daily_kwh_entity: >-
-                                    sensor.prise_congelateur_cuisine_nous_quotidien_um
+                                - conso_daily_kwh_entity: sensor.prise_congelateur_cuisine_nous_quotidien_um
                       - attributes:
                           label: 7. Bureau
                           icon: mdi:desktop-tower-monitor
@@ -22919,14 +22873,11 @@ views:
                               template: conso_temps_reel_appareil
                               variables:
                                 - card_title: Fer à Repasser Bureau (Store)
-                                - energy_entity: >-
-                                    sensor.prise_bureau_fer_a_repasser_nous_power
+                                - energy_entity: sensor.prise_bureau_fer_a_repasser_nous_power
                                 - energy_color: rgb(255, 183, 51)
-                                - current_entity: >-
-                                    sensor.prise_bureau_fer_a_repasser_nous_current
+                                - current_entity: sensor.prise_bureau_fer_a_repasser_nous_current
                                 - avg_daily_entity: sensor.fer_repasser_avg_watts_quotidien
-                                - conso_daily_kwh_entity: >-
-                                    sensor.prise_bureau_fer_a_repasser_nous_quotidien_um
+                                - conso_daily_kwh_entity: sensor.prise_bureau_fer_a_repasser_nous_quotidien_um
                       - attributes:
                           label: 9. Chambre
                           icon: mdi:bed
@@ -22943,8 +22894,7 @@ views:
                                 - energy_color: rgb(75, 130, 85)
                                 - current_entity: sensor.prise_tete_de_lit_chambre_current
                                 - avg_daily_entity: sensor.tetes_lit_avg_watts_quotidien
-                                - conso_daily_kwh_entity: >-
-                                    sensor.prise_tete_de_lit_chambre_quotidien_um
+                                - conso_daily_kwh_entity: sensor.prise_tete_de_lit_chambre_quotidien_um
                             - type: custom:streamline-card
                               template: conso_temps_reel_appareil
                               variables:
@@ -23907,7 +23857,7 @@ views:
               label: Now
             header:
               show: true
-              title: ' '
+              title: " "
               show_states: true
               colorize_states: true
             yaxis:
@@ -24201,12 +24151,12 @@ views:
                 return 'mdi:thermostat';
               ]]]
             custom_fields:
-              badge1: ' '
-              badge2: ' '
-              t1: ' '
-              t2: ' '
-              bar: ' '
-              presence_dot: ' '
+              badge1: " "
+              badge2: " "
+              t1: " "
+              t2: " "
+              bar: " "
+              presence_dot: " "
             styles:
               card:
                 - height: 95px !important
@@ -25029,12 +24979,12 @@ views:
                 return 'mdi:thermostat';
               ]]]
             custom_fields:
-              badge1: ' '
-              badge2: ' '
-              t1: ' '
-              t2: ' '
-              bar: ' '
-              presence_dot: ' '
+              badge1: " "
+              badge2: " "
+              t1: " "
+              t2: " "
+              bar: " "
+              presence_dot: " "
             styles:
               card:
                 - height: 95px !important
@@ -25859,12 +25809,12 @@ views:
                 return 'mdi:thermostat';
               ]]]
             custom_fields:
-              badge1: ' '
-              badge2: ' '
-              t1: ' '
-              t2: ' '
-              bar: ' '
-              presence_dot: ' '
+              badge1: " "
+              badge2: " "
+              t1: " "
+              t2: " "
+              bar: " "
+              presence_dot: " "
             styles:
               card:
                 - height: 95px !important
@@ -26716,12 +26666,12 @@ views:
                 return 'mdi:thermostat';
               ]]]
             custom_fields:
-              badge1: ' '
-              badge2: ' '
-              t1: ' '
-              t2: ' '
-              bar: ' '
-              presence_dot: ' '
+              badge1: " "
+              badge2: " "
+              t1: " "
+              t2: " "
+              bar: " "
+              presence_dot: " "
             styles:
               card:
                 - height: 95px !important
@@ -27699,12 +27649,12 @@ views:
                 return 'mdi:thermostat';
               ]]]
             custom_fields:
-              badge1: ' '
-              badge2: ' '
-              t1: ' '
-              t2: ' '
-              bar: ' '
-              presence_dot: ' '
+              badge1: " "
+              badge2: " "
+              t1: " "
+              t2: " "
+              bar: " "
+              presence_dot: " "
             styles:
               card:
                 - height: 95px !important
@@ -29532,14 +29482,12 @@ views:
                     loading: true
                     last_updated: false
                   series:
-                    - entity: >-
-                        sensor.hue_color_candle_chambre_eric_quotidien_um_kwh_tpl
+                    - entity: sensor.hue_color_candle_chambre_eric_quotidien_um_kwh_tpl
                       name: Eric (TL2)
                       color: rgb(75, 130, 85)
                       transform: return x * 1000;
                       unit: W
-                    - entity: >-
-                        sensor.hue_color_candle_chambre_gege_quotidien_um_kwh_tpl
+                    - entity: sensor.hue_color_candle_chambre_gege_quotidien_um_kwh_tpl
                       name: Géraldine (TL1)
                       color: rgb(105, 155, 110)
                       transform: return x * 1000;
@@ -32281,6 +32229,27 @@ views:
                 show_label: true
                 label: |
                   [[[
+                    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' + '<span style="color:#9e9e9e;font-weight:bold;font-size:12px">IP</span>' + '<span style="color:white;font-weight:bold;font-size:12px;font-family:monospace">10.32.154.240:8006</span>' + '</div>';
+                  ]]]
+                styles:
+                  card:
+                    - padding: 2px 12px
+                    - background: none !important
+                  label:
+                    - width: 100%
+                tap_action:
+                  action: none
+                card_mod:
+                  style: >
+                    ha-card { border: none !important; box-shadow: none
+                    !important; background: none !important; }
+              - type: custom:button-card
+                show_name: false
+                show_state: false
+                show_icon: false
+                show_label: true
+                label: |
+                  [[[
                     var cpu = states['sensor.pve_utilisation_du_processeur'];
                     var vcpu = states['sensor.pve_max_cpu'];
                     if (!cpu || cpu.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">CPU: N/A</div>';
@@ -32544,6 +32513,27 @@ views:
                 show_label: true
                 label: |
                   [[[
+                    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' + '<span style="color:#9e9e9e;font-weight:bold;font-size:12px">IP</span>' + '<span style="color:white;font-weight:bold;font-size:12px;font-family:monospace">10.32.154.243:8123</span>' + '</div>';
+                  ]]]
+                styles:
+                  card:
+                    - padding: 2px 12px
+                    - background: none !important
+                  label:
+                    - width: 100%
+                tap_action:
+                  action: none
+                card_mod:
+                  style: >
+                    ha-card { border: none !important; box-shadow: none
+                    !important; background: none !important; }
+              - type: custom:button-card
+                show_name: false
+                show_state: false
+                show_icon: false
+                show_label: true
+                label: |
+                  [[[
                     var cpu = states['sensor.homeassistant_utilisation_du_processeur'];
                     var vcpu = states['sensor.homeassistant_max_cpu'];
                     if (!cpu || cpu.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">CPU: N/A</div>';
@@ -32760,6 +32750,27 @@ views:
                   icon:
                     - width: 22px
                     - color: '#ff9800'
+                tap_action:
+                  action: none
+                card_mod:
+                  style: >
+                    ha-card { border: none !important; box-shadow: none
+                    !important; background: none !important; }
+              - type: custom:button-card
+                show_name: false
+                show_state: false
+                show_icon: false
+                show_label: true
+                label: |
+                  [[[
+                    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' + '<span style="color:#9e9e9e;font-weight:bold;font-size:12px">IP</span>' + '<span style="color:white;font-weight:bold;font-size:12px;font-family:monospace">z2m.erodi-ha.com</span>' + '</div>';
+                  ]]]
+                styles:
+                  card:
+                    - padding: 2px 12px
+                    - background: none !important
+                  label:
+                    - width: 100%
                 tap_action:
                   action: none
                 card_mod:
@@ -33002,6 +33013,27 @@ views:
                 show_label: true
                 label: |
                   [[[
+                    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' + '<span style="color:#9e9e9e;font-weight:bold;font-size:12px">IP</span>' + '<span style="color:white;font-weight:bold;font-size:12px;font-family:monospace">10.32.154.242</span>' + '</div>';
+                  ]]]
+                styles:
+                  card:
+                    - padding: 2px 12px
+                    - background: none !important
+                  label:
+                    - width: 100%
+                tap_action:
+                  action: none
+                card_mod:
+                  style: >
+                    ha-card { border: none !important; box-shadow: none
+                    !important; background: none !important; }
+              - type: custom:button-card
+                show_name: false
+                show_state: false
+                show_icon: false
+                show_label: true
+                label: |
+                  [[[
                     var cpu = states['sensor.mariadb_utilisation_du_processeur'];
                     var vcpu = states['sensor.mariadb_max_cpu'];
                     if (!cpu || cpu.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">CPU: N/A</div>';
@@ -33231,6 +33263,27 @@ views:
                 show_label: true
                 label: |
                   [[[
+                    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' + '<span style="color:#9e9e9e;font-weight:bold;font-size:12px">IP</span>' + '<span style="color:white;font-weight:bold;font-size:12px;font-family:monospace">elec.erodi-ha.com</span>' + '</div>';
+                  ]]]
+                styles:
+                  card:
+                    - padding: 2px 12px
+                    - background: none !important
+                  label:
+                    - width: 100%
+                tap_action:
+                  action: none
+                card_mod:
+                  style: >
+                    ha-card { border: none !important; box-shadow: none
+                    !important; background: none !important; }
+              - type: custom:button-card
+                show_name: false
+                show_state: false
+                show_icon: false
+                show_label: true
+                label: |
+                  [[[
                     var cpu = states['sensor.myelectricaldata_utilisation_du_processeur'];
                     var vcpu = states['sensor.myelectricaldata_max_cpu'];
                     if (!cpu || cpu.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">CPU: N/A</div>';
@@ -33389,6 +33442,223 @@ views:
                   style: >
                     ha-card { background: none !important; box-shadow: none
                     !important; border: none !important; margin: 0 !important; }
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mod-card
+                    card_mod:
+                      style:
+                        .: |
+                          :host {
+                            --text-divider-color: white;
+                            --text-divider-line-size: 5px;
+                          }
+                    card:
+                      type: custom:text-divider-row
+                      text: SearXNG
+              - type: custom:button-card
+                entity: sensor.searxng_statut
+                name: SEARXNG
+                icon: mdi:search-web
+                show_state: true
+                state:
+                  - value: running
+                    styles:
+                      state:
+                        - color: rgb(15,157,88)
+                        - background: rgba(15,157,88,0.15)
+                        - border-radius: 10px
+                        - padding: 2px 10px
+                  - value: stopped
+                    styles:
+                      state:
+                        - color: rgb(244,67,54)
+                        - background: rgba(244,67,54,0.15)
+                        - border-radius: 10px
+                        - padding: 2px 10px
+                styles:
+                  card:
+                    - padding: 8px 12px
+                    - background: >-
+                        linear-gradient(90deg, rgba(156,39,176,0.12) 0%,
+                        rgba(156,39,176,0.02) 100%)
+                    - border-left: '3px solid #9c27b0 !important'
+                    - border-radius: 8px !important
+                    - margin-bottom: 2px
+                  grid:
+                    - grid-template-areas: '"i n s"'
+                    - grid-template-columns: min-content 1fr min-content
+                  name:
+                    - font-size: 13px
+                    - font-weight: bold
+                    - justify-self: start
+                    - padding-left: 8px
+                    - color: '#9c27b0'
+                    - letter-spacing: 0.5px
+                  state:
+                    - font-size: 11px
+                    - font-weight: bold
+                  icon:
+                    - width: 22px
+                    - color: '#9c27b0'
+                tap_action:
+                  action: none
+                card_mod:
+                  style: >
+                    ha-card { border: none !important; box-shadow: none
+                    !important; background: none !important; }
+              - type: custom:button-card
+                show_name: false
+                show_state: false
+                show_icon: false
+                show_label: true
+                label: |
+                  [[[
+                    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' + '<span style="color:#9e9e9e;font-weight:bold;font-size:12px">IP</span>' + '<span style="color:white;font-weight:bold;font-size:12px;font-family:monospace">10.32.154.246:8888</span>' + '</div>';
+                  ]]]
+                styles:
+                  card:
+                    - padding: 2px 12px
+                    - background: none !important
+                  label:
+                    - width: 100%
+                tap_action:
+                  action: none
+                card_mod:
+                  style: >
+                    ha-card { border: none !important; box-shadow: none
+                    !important; background: none !important; }
+              - type: custom:button-card
+                show_name: false
+                show_state: false
+                show_icon: false
+                show_label: true
+                label: |
+                  [[[
+                    var cpu = states['sensor.searxng_utilisation_du_processeur'];
+                    if (!cpu || cpu.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">CPU: N/A</div>';
+                    var pct = parseFloat(cpu.state);
+                    var color = pct < 40 ? '#6ea8d7' : pct < 60 ? '#ff9800' : '#f44336';
+                    return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+                      '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                        '<span style="color:#9e9e9e;font-size:12px">CPU (2 vCPU)</span>' +
+                        '<span style="color:white;font-weight:bold;font-size:12px">' + pct.toFixed(1) + ' %</span>' +
+                      '</div>' +
+                      '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                        '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+                      '</div></div>';
+                  ]]]
+                styles:
+                  card:
+                    - padding: 2px 12px
+                    - background: none !important
+                  label:
+                    - width: 100%
+                tap_action:
+                  action: none
+                card_mod:
+                  style: >
+                    ha-card { border: none !important; box-shadow: none
+                    !important; background: none !important; }
+              - type: custom:button-card
+                show_name: false
+                show_state: false
+                show_icon: false
+                show_label: true
+                label: |
+                  [[[
+                    var pct_s = states['sensor.searxng_pourcentage_d_utilisation_de_la_memoire'];
+                    var max = states['sensor.searxng_utilisation_maximale_de_la_memoire'];
+                    if (!pct_s || pct_s.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">RAM: N/A</div>';
+                    var pct = parseFloat(pct_s.state);
+                    var maxV = (max && max.state !== 'unavailable') ? parseFloat(max.state) : null;
+                    var usedV = maxV !== null ? (pct / 100 * maxV) : null;
+                    var color = pct < 60 ? '#6ea8d7' : pct < 80 ? '#ff9800' : '#f44336';
+                    var valStr = usedV !== null ? pct.toFixed(1) + '%  (' + usedV.toFixed(2) + ' / ' + maxV.toFixed(1) + ' GiB)' : pct.toFixed(1) + '%';
+                    return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
+                      '<div style="display:flex;justify-content:space-between;align-items:center">' +
+                        '<span style="color:#9e9e9e;font-size:12px">RAM</span>' +
+                        '<span style="color:white;font-weight:bold;font-size:12px">' + valStr + '</span>' +
+                      '</div>' +
+                      '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
+                        '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+                      '</div></div>';
+                  ]]]
+                styles:
+                  card:
+                    - padding: 2px 12px
+                    - background: none !important
+                  label:
+                    - width: 100%
+                tap_action:
+                  action: none
+                card_mod:
+                  style: >
+                    ha-card { border: none !important; box-shadow: none
+                    !important; background: none !important; }
+              - type: custom:button-card
+                entity: sensor.searxng_temps_de_fonctionnement
+                show_name: false
+                show_state: false
+                show_icon: false
+                show_label: true
+                label: |
+                  [[[
+                    if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
+                    var start = new Date(entity.state);
+                    var now = new Date();
+                    var diffMs = now - start;
+                    var h_total = diffMs / (1000 * 3600);
+                    var j = Math.floor(h_total / 24);
+                    var h = Math.floor(h_total % 24);
+                    var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+                    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
+                      '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
+                      '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
+                    '</div>';
+                  ]]]
+                styles:
+                  card:
+                    - padding: 2px 12px
+                    - background: none !important
+                  label:
+                    - width: 100%
+                tap_action:
+                  action: none
+                card_mod:
+                  style: >
+                    ha-card { border: none !important; box-shadow: none
+                    !important; background: none !important; }
+              - type: custom:apexcharts-card
+                graph_span: 1h
+                cache: true
+                span:
+                  offset: +1m
+                header:
+                  show: false
+                apex_config:
+                  chart:
+                    height: 70px
+                    toolbar:
+                      show: false
+                    sparkline:
+                      enabled: true
+                  tooltip:
+                    enabled: false
+                  yaxis:
+                    min: 0
+                    max: 100
+                series:
+                  - entity: sensor.searxng_utilisation_du_processeur
+                    type: area
+                    curve: smooth
+                    stroke_width: 1.5
+                    opacity: 0.4
+                    color: '#a0e57c'
+                    fill_raw: last
+                card_mod:
+                  style: >
+                    ha-card { background: none !important; box-shadow: none
+                    !important; border: none !important; margin: 0 !important; }
             grid_options:
               columns: 12
               rows: auto
@@ -33431,7 +33701,7 @@ views:
                     cards:
                       - type: custom:mushroom-template-card
                         primary: 'IP Int. / Ext.:'
-                        secondary: ' '
+                        secondary: " "
                         icon: mdi:ip
                         icon_color: white
                         tap_action:
@@ -33452,7 +33722,7 @@ views:
                               }
                       - type: custom:mushroom-template-card
                         primary: '{{ states(''sensor.local_ip'') }}'
-                        secondary: ' '
+                        secondary: " "
                         icon: mdi:ip-network
                         icon_color: white
                         tap_action:
@@ -33507,7 +33777,7 @@ views:
                     cards:
                       - type: custom:mushroom-template-card
                         primary: 'Uptime:'
-                        secondary: ' '
+                        secondary: " "
                         icon: mdi:clock-outline
                         icon_color: white
                         tap_action:
@@ -33881,8 +34151,7 @@ views:
                     cards:
                       - type: custom:bar-card
                         entities:
-                          - entity: >-
-                              sensor.system_monitor_debit_du_reseau_entrant_via_enp6s18
+                          - entity: sensor.system_monitor_debit_du_reseau_entrant_via_enp6s18
                             name: Download
                             icon: mdi:download
                             color: rgb(81,140,67)
@@ -33917,8 +34186,7 @@ views:
                             }
                       - type: custom:bar-card
                         entities:
-                          - entity: >-
-                              sensor.system_monitor_debit_du_reseau_sortant_via_enp6s18
+                          - entity: sensor.system_monitor_debit_du_reseau_sortant_via_enp6s18
                             name: Upload
                             icon: mdi:upload
                             color: rgb(244,67,54)
@@ -35029,7 +35297,7 @@ views:
                   label: Now
                 header:
                   show: true
-                  title: ' '
+                  title: " "
                   show_states: true
                   colorize_states: true
                 apex_config:
@@ -35140,7 +35408,7 @@ views:
                   label: Now
                 header:
                   show: true
-                  title: ' '
+                  title: " "
                   show_states: true
                   colorize_states: true
                 apex_config:
@@ -35277,7 +35545,7 @@ views:
                   label: Now
                 header:
                   show: true
-                  title: ' '
+                  title: " "
                   show_states: true
                   colorize_states: true
                 apex_config:
@@ -35737,8 +36005,7 @@ views:
                       else 'amber' }}
                     tap_action:
                       action: url
-                      url_path: >-
-                        https://github.com/BerrySwann/home_assistant_re-build/tags
+                      url_path: https://github.com/BerrySwann/home_assistant_re-build/tags
                       new_tab: true
                     hold_action:
                       action: call-service
@@ -35769,8 +36036,7 @@ views:
                         text: Lancer un push Git manuel ?
                     hold_action:
                       action: url
-                      url_path: >-
-                        https://github.com/BerrySwann/home_assistant_re-build/commits/main
+                      url_path: https://github.com/BerrySwann/home_assistant_re-build/commits/main
                       new_tab: true
                 card_mod:
                   style: |
@@ -37065,8 +37331,7 @@ views:
                         content: Release Changelog
                         tap_action:
                           action: url
-                          url_path: >-
-                            https://github.com/home-assistant/supervisor/releases/latest
+                          url_path: https://github.com/home-assistant/supervisor/releases/latest
                       - type: entity
                         entity: sensor.home_assistant_supervisor_cpu_percent
                         icon_color: blue
@@ -38890,42 +39155,42 @@ views:
                         ]]]
                       state:
                         - value: null
-                          operator: '=='
+                          operator: ==
                           color: grey
                           icon: mdi:water-off
                           styles:
                             state:
                               - color: grey
                         - value: vigilance (pas de restriction)
-                          operator: '=='
+                          operator: ==
                           color: rgb(232, 237, 255)
                           icon: mdi:water-check
                           styles:
                             state:
                               - color: rgb(232, 237, 255)
                         - value: vigilance
-                          operator: '=='
+                          operator: ==
                           color: rgb(255, 237, 160)
                           icon: mdi:water-minus
                           styles:
                             state:
                               - color: rgb(255, 237, 160)
                         - value: alerte
-                          operator: '=='
+                          operator: ==
                           color: rgb(254, 178, 76)
                           icon: mdi:water-alert
                           styles:
                             state:
                               - color: rgb(254, 178, 76)
                         - value: alerte_renforcee
-                          operator: '=='
+                          operator: ==
                           color: rgb(252, 78, 42)
                           icon: mdi:water-remove
                           styles:
                             state:
                               - color: rgb(252, 78, 42)
                         - value: crise
-                          operator: '=='
+                          operator: ==
                           color: rgb(177, 0, 38)
                           icon: mdi:water-off
                           styles:
@@ -38945,7 +39210,7 @@ views:
                     - type: custom:bar-card
                       entities:
                         - entity: sensor.alert_level_in_vence_numeric
-                          name: ' '
+                          name: " "
                           icon: |
                             [[[
                               var iconName = entity.attributes.icon || 'mdi:water-outline';
