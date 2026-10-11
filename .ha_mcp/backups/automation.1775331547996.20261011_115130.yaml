@@ -1,0 +1,86 @@
+# ha_mcp_backup
+schema_version: 1
+domain: automation
+entity_id: '1775331547996'
+captured: '2026-10-11T11:51:30.846745+00:00'
+tool: ha_config_set_automation
+config:
+  id: '1775331547996'
+  alias: P3_BUREAU - Forcer Play ON si PC tourne
+  description: "Rallume les Hue Play \xE0 25 % si elles sont \xE9teintes manuellement\
+    \ alors que la synchro PC est active. Rallume aussi la prise \xE9cran (switch.ecran_p_c_3_play_hue)\
+    \ si elle reste coup\xE9e plus de 7 min alors que la synchro PC est active (7\
+    \ min : laisse l'arr\xEAt programm\xE9 du PC se terminer avant de rallumer)."
+  triggers:
+  - entity_id: light.hue_play_1_pc_bureau
+    id: off_hue_play_1_pc_bureau
+    to: 'off'
+    trigger: state
+  - entity_id: light.hue_play_2_pc_bureau
+    id: off_hue_play_2_pc_bureau
+    to: 'off'
+    trigger: state
+  - entity_id: light.hue_play_3_pc_bureau
+    id: off_hue_play_3_pc_bureau
+    to: 'off'
+    trigger: state
+  - entity_id: switch.ecran_p_c_3_play_hue
+    for: 00:07:00
+    id: off_prise_ecran
+    to: 'off'
+    trigger: state
+  conditions:
+  - condition: state
+    entity_id: binary_sensor.moniteur_pc
+    state: 'on'
+  actions:
+  - choose:
+    - alias: "PRISE ECRAN coup\xE9e : rallumer la prise puis les 3 Play"
+      conditions:
+      - condition: trigger
+        id: off_prise_ecran
+      sequence:
+      - action: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.ecran_p_c_3_play_hue
+      - delay: 00:00:05
+      - action: light.turn_on
+        data:
+          brightness_pct: 25
+        target:
+          entity_id:
+          - light.hue_play_1_pc_bureau
+          - light.hue_play_2_pc_bureau
+          - light.hue_play_3_pc_bureau
+    - alias: PLAY 1
+      conditions:
+      - condition: trigger
+        id: off_hue_play_1_pc_bureau
+      sequence:
+      - action: light.turn_on
+        data:
+          brightness_pct: 25
+        target:
+          entity_id: light.hue_play_1_pc_bureau
+    - alias: PLAY 2
+      conditions:
+      - condition: trigger
+        id: off_hue_play_2_pc_bureau
+      sequence:
+      - action: light.turn_on
+        data:
+          brightness_pct: 25
+        target:
+          entity_id: light.hue_play_2_pc_bureau
+    - alias: PLAY 3
+      conditions:
+      - condition: trigger
+        id: off_hue_play_3_pc_bureau
+      sequence:
+      - action: light.turn_on
+        data:
+          brightness_pct: 25
+        target:
+          entity_id: light.hue_play_3_pc_bureau
+  mode: parallel

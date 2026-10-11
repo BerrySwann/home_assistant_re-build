@@ -1,0 +1,35 @@
+# ha_mcp_backup
+schema_version: 1
+domain: automation
+entity_id: '1775331623943'
+captured: '2026-10-11T11:51:36.030289+00:00'
+tool: ha_config_set_automation
+config:
+  id: '1775331623943'
+  alias: P3_BUREAU_ACTIVATION_ECRAN_SYNCHRO
+  description: "Synchronise l'\xE9tat de l'\xE9cran avec l'activit\xE9 du PC bureau."
+  triggers:
+  - alias: "D\xC9CLENCHEMENT : PC BUREAU ALLUM\xC9"
+    trigger: state
+    entity_id: binary_sensor.moniteur_pc
+    to: 'on'
+    id: pc_on
+  - alias: "D\xC9CLENCHEMENT : PC BUREAU \xC9TEINT"
+    trigger: state
+    entity_id: binary_sensor.moniteur_pc
+    to: 'off'
+    for: 00:02:00
+    id: pc_off
+  conditions: []
+  actions:
+  - alias: "ACTION : SYNCHRONISATION ALIMENTATION \xC9CRAN"
+    choose:
+    - alias: "CAS : PC ON -> ALLUMER \xC9CRAN"
+      conditions:
+      - condition: trigger
+        id: pc_on
+      sequence:
+      - action: switch.turn_on
+        target:
+          entity_id: switch.ecran_p_c_3_play_hue
+  mode: restart
