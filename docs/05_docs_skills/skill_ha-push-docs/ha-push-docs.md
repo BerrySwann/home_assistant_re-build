@@ -50,7 +50,7 @@ $localMd5 = @{}
 
 # *.yaml dashboard (plus recent par type uniquement)
 $yamlSrc = "$base\docs\02_docs_dashboard\dashboard_docs_YAML"
-Get-ChildItem $yamlSrc -Directory | ForEach-Object {
+Get-ChildItem $yamlSrc -Directory | Where-Object { $_.Name -ne 'Dashboard_COMPLET' } | ForEach-Object {
   $subDir = $_.Name
   Get-ChildItem $_.FullName -Filter "*.yaml" |
     Group-Object { $_.Name -replace '_\d{4}[-_]\d{2}[-_]\d{2}\.yaml$', '' } |
@@ -111,12 +111,13 @@ $toPush | ForEach-Object {
 }
 ```
 
-### 5 - Nettoyage doublons Dashboard (si demande)
+### 5 - Nettoyage doublons Dashboard (si demande) - JAMAIS dans Dashboard_COMPLET (regle 9)
 Supprimer les anciennes versions de yaml dashboard en prod. **Dry-run + confirmation obligatoire avant suppression.** Attention : la suppression se fait sur H:\Docs, il n'y a pas de corbeille sur H: (suppression definitive). Les sauvegardes locales ne sont pas concernees (voir regle 7 ci-dessous).
 
 ```powershell
 # DRY-RUN
 Get-ChildItem "H:\Docs\Dashboard" -Recurse -Filter "*.yaml" |
+  Where-Object { $_.FullName -notmatch '\\Dashboard_COMPLET\\' } |
   Group-Object { $_.DirectoryName + "\" + ($_.Name -replace '_\d{4}[-_]\d{2}[-_]\d{2}\.yaml$', '') } |
   Where-Object { $_.Count -gt 1 } |
   ForEach-Object {
@@ -146,3 +147,4 @@ $toPush | ForEach-Object {
 6. **DEPENDANCES_GLOBALES.md** toujours inclus s'il figure dans le diff.
 7. **Jamais de sauvegarde creee sur H: ni sur D:** (regle du 2026-10-08). Avant de modifier un fichier de documentation, on le modifie en LOCAL apres en avoir fait une copie a cote de lui, `fichier.ext.bak_AAAA_MM_JJ_HHhMMmSSs` (10 max le jour meme, 3 `.bak_AAAA_MM_JJ` max pour les jours precedents, menage fait par /histo, suppressions vers la corbeille Windows). Voir CLAUDE.md, section REGLE DE SAUVEGARDE.
 8. **Les sauvegardes locales ne sont jamais poussees** : les fichiers `*.bak_...` ne sont pas pris par les filtres `*.md` / `*.yaml`. Si un fichier `.md` au nom date (`_AAAA-MM-JJ_HHhmm.md` ou `_AAAA-MM-JJ.md`) ou un dossier `_ARCHIVE` apparait dans le diff, c'est une sauvegarde ou une archive locale : ne pas le pousser et le signaler.
+9. **Dashboard_COMPLET : ne jamais y toucher** (decide par Eric le 2026-10-11). Ce dossier contient les mises a jour au fil de l'eau du dashboard complet, il ne se vide jamais. Ce skill l'exclut du calcul MD5/push (etape 1) et du nettoyage de doublons (etape 5) : aucune copie, aucune suppression, aucun renommage, en local comme en prod. Meme si la demande dit "vire les vieux yaml" ou "nettoie les anciens yaml Dashboard", ce dossier est ignore et signale. Le seul circuit qui s'en occupe est l'etape 5B de /histo.

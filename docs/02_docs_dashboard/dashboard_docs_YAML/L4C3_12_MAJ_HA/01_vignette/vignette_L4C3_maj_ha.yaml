@@ -1,0 +1,60 @@
+type: custom:button-card
+entity: sensor.available_updates
+icon: mdi:home-assistant
+aspect_ratio: 1/1
+name: Software | modules
+tap_action:
+  action: navigate
+  navigation_path: /dashboard-tablette/maj
+styles:
+  card:
+    - border-radius: 10px
+    - background: transparent
+    - border-width: 3px
+    - border-color: white
+    - border-style: double
+    - color: |
+        [[[
+          if (entity.state == '0') return 'white';
+          else return 'orange';
+        ]]]
+    - font-size: 11px
+    - line-height: 1.2
+    - font-weight: bold
+  grid:
+    - grid-template-areas: "'icon n' 'updates updates'"
+    - grid-template-columns: auto 1fr
+    - grid-template-rows: 1fr min-content
+  name:
+    - font-weight: bold
+    - color: white
+    - align-self: start
+    - justify-self: center
+    - margin-right: 50px
+  custom_fields:
+    icon:
+      - width: 40px
+      - height: 40px
+      - margin-top: 0%
+      - margin-left: 250%
+      - justify-self: center
+      - color: |
+          [[[
+            if (entity.state == '0') return 'lightblue';
+            else return 'orange';
+          ]]]
+    updates:
+      - align-self: start
+      - justify-self: center
+custom_fields:
+  icon: |
+    [[[
+      return '<ha-icon icon="mdi:home-assistant" style="width: 40px; height: 40px; color: ' +
+        (entity.state == '0' ? 'lightblue' : 'orange') + ';"></ha-icon>';
+    ]]]
+  updates: |
+    [[[
+      if (entity.state == '0') return 'Tout est à jour';
+      else if (entity.state == '1') return '1 mise à jour';
+      else return entity.state + ' mises à jour';
+    ]]]

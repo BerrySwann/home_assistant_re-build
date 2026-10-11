@@ -1,0 +1,2823 @@
+# Page L2C2 — Énergie Clim / Radiateur / Soufflant
+# Navigation: /dashboard-tablette/energie-clim
+# Sauvegardé: 2026-09-20 — état live (bubbles clim remplacées par les button-cards)
+
+type: grid
+cards:
+- type: heading
+  icon: mdi:transmission-tower
+  heading: ENERGIE (C)LIM / (R)ADIATEUR
+  heading_style: title
+  badges:
+  - type: entity
+    show_state: true
+    show_icon: false
+    entity: sensor.temperature_delta_affichage
+    tap_action:
+      action: navigate
+      navigation_path: '#tendances'
+  tap_action:
+    action: navigate
+    navigation_path: /dashboard-tablette/home
+  layout_options:
+    grid_columns: full
+    grid_rows: 1
+- type: conditional
+  conditions:
+  - condition: or
+    conditions:
+    - condition: state
+      entity: sensor.salon_power_status_affichage
+      state_not: 'off'
+    - condition: state
+      entity: sensor.cuisine_power_status_affichage
+      state_not: 'off'
+    - condition: state
+      entity: sensor.bureau_power_status_affichage
+      state_not: 'off'
+    - condition: state
+      entity: sensor.sdb_power_status_affichage
+      state_not: 'off'
+    - condition: state
+      entity: sensor.sdb_seche_serviette_power_status_affichage
+      state_not: 'off'
+    - condition: state
+      entity: sensor.chambre_power_status_affichage
+      state_not: 'off'
+  card:
+    type: custom:stack-in-card
+    mode: vertical
+    cards:
+    - type: horizontal-stack
+      cards:
+      - type: custom:mod-card
+        card_mod:
+          style:
+            .: |
+              :host {
+                --text-divider-color: white;
+                --text-divider-line-size: 5px;
+              }
+        card:
+          type: custom:text-divider-row
+          text: Consomation TOTAL Climatisations & Radiateurs
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+- type: horizontal-stack
+  cards:
+  - type: custom:mushroom-chips-card
+    alignment: center
+    chips:
+    - type: template
+      entity: sensor.dut_clim_salon
+      content: |
+        Salon: {% set t = states(entity) | float(0) %}
+        {% set h = t | int %}{% set m = ((t - h) * 60) | int %}
+        {{ h }}h{{ '{:02d}'.format(m) }}
+      icon: |-
+        {% if is_state('sensor.ete_hiver', 'Été') %}
+          mdi:snowflake
+        {% else %}
+          mdi:fire
+        {% endif %}
+      icon_color: '{% if is_state(''sensor.ete_hiver'', ''Été'') %} #03a9f4 {% else %} #ff9800 {% endif %}'
+      card_mod:
+        style: |
+          ha-card {
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent;
+          }
+    - type: template
+      entity: sensor.dut_radiateur_cuisine
+      content: |
+        Cuisine: {% set t = states(entity) | float(0) %}
+        {% set h = t | int %}{% set m = ((t - h) * 60) | int %}
+        {{ h }}h{{ '{:02d}'.format(m) }}
+      icon: mdi:radiator
+      icon_color: '#f44336'
+      card_mod:
+        style: |
+          ha-card {
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent;
+          }
+    - type: template
+      entity: sensor.dut_clim_bureau
+      content: |
+        Bureau: {% set t = states(entity) | float(0) %}
+        {% set h = t | int %}{% set m = ((t - h) * 60) | int %}
+        {{ h }}h{{ '{:02d}'.format(m) }}
+      icon: |-
+        {% if is_state('sensor.ete_hiver', 'Été') %}
+          mdi:snowflake
+        {% else %}
+          mdi:fire
+        {% endif %}
+      icon_color: '{% if is_state(''sensor.ete_hiver'', ''Été'') %} #03a9f4 {% else %} #ff9800 {% endif %}'
+      card_mod:
+        style: |
+          ha-card {
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent;
+          }
+    - type: template
+      entity: sensor.dut_clim_chambre
+      content: |
+        Chambre: {% set t = states(entity) | float(0) %}
+        {% set h = t | int %}{% set m = ((t - h) * 60) | int %}
+        {{ h }}h{{ '{:02d}'.format(m) }}
+      icon: |-
+        {% if is_state('sensor.ete_hiver', 'Été') %}
+          mdi:snowflake
+        {% else %}
+          mdi:fire
+        {% endif %}
+      icon_color: '{% if is_state(''sensor.ete_hiver'', ''Été'') %} #03a9f4 {% else %} #ff9800 {% endif %}'
+      card_mod:
+        style: |
+          ha-card {
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent;
+          }
+- type: custom:mushroom-chips-card
+  chips:
+  - type: conditional
+    conditions:
+    - entity: sensor.salon_power_status
+      state_not: 'off'
+    chip:
+      type: template
+      icon: mdi:air-conditioner
+      icon_color: |-
+        {% if is_state('sensor.clim_salon_etat', 'Cool') %} #87CEEB
+        {% elif is_state('sensor.clim_salon_etat', 'Heat') %} #ff6100
+        {% elif is_state('sensor.clim_salon_etat', 'Fan') %} #40E0D0
+        {% else %} #FF0000 {% endif %}
+      content: 'Salon: {{ states(''sensor.clim_salon_etat'') }}'
+      tap_action:
+        action: none
+  - type: conditional
+    conditions:
+    - entity: sensor.cuisine_power_status
+      state_not: 'off'
+    chip:
+      type: template
+      icon: mdi:heating-coil
+      icon_color: |-
+        {% if is_state('sensor.radiateur_cuisine_etat', 'Heat') %} #ff6100
+        {% else %} #FF0000 {% endif %}
+      content: 'Cuisine: {{ states(''sensor.radiateur_cuisine_etat'') }}'
+      tap_action:
+        action: none
+  - type: conditional
+    conditions:
+    - entity: sensor.bureau_power_status
+      state_not: 'off'
+    chip:
+      type: template
+      icon: mdi:air-conditioner
+      icon_color: |-
+        {% if is_state('sensor.clim_bureau_etat', 'Cool') %} #87CEEB
+        {% elif is_state('sensor.clim_bureau_etat', 'Heat') %} #ff6100
+        {% elif is_state('sensor.clim_bureau_etat', 'Fan') %} #40E0D0
+        {% else %} #FF0000 {% endif %}
+      content: 'Bureau: {{ states(''sensor.clim_bureau_etat'') }}'
+      tap_action:
+        action: none
+  - type: conditional
+    conditions:
+    - entity: sensor.sdb_soufflant_power_status
+      state_not: 'off'
+    chip:
+      type: template
+      icon: mdi:heat-wave
+      icon_color: |-
+        {% if is_state('sensor.sdb_soufflant_etat', 'Heat') %} #ff6100
+        {% else %} #FF0000 {% endif %}
+      content: 'SdB Soufflant: {{ states(''sensor.sdb_soufflant_etat'') }}'
+      tap_action:
+        action: none
+  - type: conditional
+    conditions:
+    - entity: sensor.sdb_seche_serviette_power_status
+      state_not: 'off'
+    chip:
+      type: template
+      icon: mdi:heating-coil
+      icon_color: |-
+        {% if is_state('sensor.sdb_seche_serviette_etat', 'Heat') %} #ff6100
+        {% else %} #FF0000 {% endif %}
+      content: 'SdB Serviette: {{ states(''sensor.sdb_seche_serviette_etat'') }}'
+      tap_action:
+        action: none
+  - type: conditional
+    conditions:
+    - entity: sensor.chambre_power_status
+      state_not: 'off'
+    chip:
+      type: template
+      icon: mdi:air-conditioner
+      icon_color: |-
+        {% if is_state('sensor.clim_chambre_etat', 'Cool') %} #87CEEB
+        {% elif is_state('sensor.clim_chambre_etat', 'Heat') %} #ff6100
+        {% elif is_state('sensor.clim_chambre_etat', 'Fan') %} #40E0D0
+        {% else %} #FF0000 {% endif %}
+      content: 'Chambre: {{ states(''sensor.clim_chambre_etat'') }}'
+      tap_action:
+        action: none
+  alignment: center
+- type: vertical-stack
+  cards:
+  - type: custom:auto-entities
+    card:
+      type: custom:bar-card
+      icon: mdi:lightning-bolt-outline
+      title_position: inside
+      height: 38
+      positions:
+        icon: inside
+        indicator: inside
+        name: inside
+        value: inside
+      show_icon: true
+      align: split
+      columns: '1'
+      unit_of_measurement: W
+      severity:
+      - color: gainsboro
+        from: 0
+        to: 5
+      - color: rgb(102, 255, 102)
+        from: 5
+        to: 49
+      - color: rgb(0, 102, 0)
+        from: 50
+        to: 249
+      - color: orange
+        from: 250
+        to: 499
+      - color: darkorange
+        from: 500
+        to: 749
+      - color: red
+        from: 750
+        to: 999
+      - color: darkred
+        from: 1000
+        to: 6000
+      card_mod:
+        style: |
+          :host {
+            --ha-card-border-color: none !important;
+            --card-background-color: none !important;
+            }
+          ha-card {
+            border: none !important;
+            box-shadow: none !important;
+            background: none !important;
+            font-weight: bold;
+            --mdc-icon-size: 25px;
+            --paper-item-icon-color: white;
+          }
+          bar-card-currentbar, bar-card-backgroundbar {
+            height: 6px !important;
+            margin-top: 35px;
+          }
+    filter:
+      include:
+      - options: {}
+        entity_id: sensor.conso_clim_rad_total
+    sort:
+      numeric: true
+      reverse: true
+      ip: false
+      ignore_case: false
+      method: state
+      show_empty: false
+      entity_row: true
+    visibility:
+    - condition: numeric_state
+      entity: sensor.conso_clim_rad_total
+      above: 0.1
+- type: conditional
+  conditions: []
+  card:
+    type: custom:stack-in-card
+    mode: vertical
+    cards:
+    - type: horizontal-stack
+      cards:
+      - type: custom:mod-card
+        card_mod:
+          style:
+            .: |
+              :host {
+                --text-divider-color: white;
+                --text-divider-line-size: 5px;
+              }
+        card:
+          type: custom:text-divider-row
+          text: Consomation Total Journalière
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+- type: custom:apexcharts-card
+  chart_type: donut
+  cache: true
+  span:
+    start: day
+  apex_config:
+    chart:
+      height: 600px
+  header:
+    show: true
+    title: Conso. journalière (Start Day)
+    show_states: true
+    colorize_states: true
+  all_series_config:
+    show:
+      legend_value: false
+      extremas: false
+  show:
+    loading: true
+    last_updated: false
+  series:
+  - entity: sensor.clim_salon_quotidien_um
+    name: SALON (C)
+    color: rgb(174,68,90)
+    float_precision: 2
+  - entity: sensor.radiateur_elec_cuisine_quotidien_um
+    name: CUISINE (R)
+    color: rgb(168, 136, 181)
+    float_precision: 2
+  - entity: sensor.clim_bureau_quotidien_um
+    name: BUREAU (C)
+    color: orange
+    float_precision: 2
+  - entity: sensor.soufflant_sdb_quotidien_um
+    name: Souff. SdB (R)
+    color: magenta
+    float_precision: 2
+  - entity: sensor.seche_serviette_sdb_quotidien_um
+    name: Sèche-Serv. SdB (R)
+    color: purple
+    float_precision: 2
+  - entity: sensor.clim_chambre_quotidien_um
+    name: CHAMBRE (C)
+    color: rgb(30,81,40)
+    float_precision: 2
+  card_mod:
+    style: |
+      ha-card {
+        background: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        font-size: 11px;
+      }
+- type: conditional
+  conditions: []
+  card:
+    type: custom:stack-in-card
+    mode: vertical
+    cards:
+    - type: horizontal-stack
+      cards:
+      - type: custom:mod-card
+        card_mod:
+          style:
+            .: |
+              :host {
+                --text-divider-color: white;
+                --text-divider-line-size: 5px;
+              }
+        card:
+          type: custom:text-divider-row
+          text: Consomation Total Mensuel
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+- type: custom:apexcharts-card
+  chart_type: donut
+  cache: true
+  span:
+    start: month
+  apex_config:
+    chart:
+      height: 500px
+  header:
+    show: true
+    title: Conso. mensuel (Start Month)
+    show_states: true
+    colorize_states: true
+  all_series_config:
+    show:
+      legend_value: false
+      extremas: false
+  show:
+    loading: true
+    last_updated: false
+  series:
+  - entity: sensor.clim_salon_mensuel_um
+    name: SALON (C)
+    color: rgb(174,68,90)
+    float_precision: 2
+  - entity: sensor.radiateur_elec_cuisine_mensuel_um
+    name: CUISINE (R)
+    color: rgb(168, 136, 181)
+    float_precision: 2
+  - entity: sensor.clim_bureau_mensuel_um
+    name: BUREAU (C)
+    color: orange
+    float_precision: 2
+  - entity: sensor.soufflant_sdb_mensuel_um
+    name: Souff. SdB (R)
+    color: magenta
+    float_precision: 2
+  - entity: sensor.seche_serviette_sdb_mensuel_um
+    name: Sèche-Serv. SdB (R)
+    color: purple
+    float_precision: 2
+  - entity: sensor.clim_chambre_mensuel_um
+    name: CHAMBRE (C)
+    color: rgb(30,81,40)
+    float_precision: 2
+  card_mod:
+    style: |
+      ha-card {
+        background: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        font-size: 11px;
+      }
+- type: conditional
+  conditions: []
+  card:
+    type: custom:stack-in-card
+    mode: vertical
+    cards:
+    - type: horizontal-stack
+      cards:
+      - type: custom:mod-card
+        card_mod:
+          style:
+            .: |
+              :host {
+                --text-divider-color: white;
+                --text-divider-line-size: 5px;
+              }
+        card:
+          type: custom:text-divider-row
+          text: Tendance
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+- type: heading
+  icon: mdi:thermometer-lines
+  heading_style: title
+  badges: []
+  layout_options:
+    grid_columns: full
+    grid_rows: 1
+  heading: Tendances
+  tap_action:
+    action: none
+- type: horizontal-stack
+  cards:
+  - type: custom:vertical-stack-in-card
+    cards:
+    - type: custom:mushroom-template-card
+      entity: sensor.th_balcon_nord_temperature
+      icon: |
+        {% if is_state('sensor.th_balcon_nord_temperature_trend', 'increasing') %}
+          mdi:arrow-top-right-thick
+        {% elif is_state('sensor.th_balcon_nord_temperature_trend', 'decreasing') %}
+          mdi:arrow-bottom-right-thick
+        {% else %}
+          mdi:arrow-right-thick
+        {% endif %}
+      icon_color: |
+        {% if is_state('sensor.th_balcon_nord_temperature_trend', 'increasing') %}
+          red
+        {% elif is_state('sensor.th_balcon_nord_temperature_trend', 'decreasing') %}
+          blue
+        {% else %}
+          #df6366
+        {% endif %}
+      primary: ''
+      secondary: '{{ states(''sensor.th_balcon_nord_temperature'') }}°C'
+      layout: horizontal
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      card_mod:
+        style: |
+          ha-card {
+            background-color: transparent !important;
+            border: none !important;
+          }
+          mushroom-state-info$: |
+            .primary {
+              font-size: 12px !important;
+              color: lightgrey !important;
+              position: relative;
+              bottom: 5px;
+              left: 5px;
+              overflow: visible !important;
+              white-space: normal !important;
+            }
+            .secondary {
+              font-size: 19px !important;
+              position: relative;
+              overflow: visible !important;
+              top: 0px;
+              left: 5px;
+            }
+          mushroom-shape-icon$: |
+            .shape {
+              position: relative;
+              left: 0px;
+              top: 0px;
+            }
+          .: |
+            :host {
+              --mush-icon-size: 50px;
+            }
+    - type: custom:mini-graph-card
+      entities:
+      - entity: sensor.th_balcon_nord_temperature
+        name: Température
+        color: '#df6366'
+      height: 200
+      hours_to_show: 24
+      decimals: 1
+      points_per_hour: 6
+      line_width: 2
+      font_size: 80
+      hour24: true
+      animate: true
+      show:
+        labels: true
+        name: false
+        icon: false
+        state: false
+        legend: false
+        extrema: true
+        fill: fade
+        points: false
+      card_mod:
+        style: |
+          ha-card {
+            background: none !important;
+            box-shadow: none !important;
+            border: none !important;
+          }
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  card_mod:
+    style: |
+      ha-card {
+        background: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        height: 228px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+- type: custom:apexcharts-card
+  graph_span: 24h
+  cache: true
+  span:
+    start: day
+    offset: -0h
+  apex_config:
+    chart:
+      height: 400px
+  now:
+    show: true
+    color: darkred
+    label: Now
+  header:
+    show: true
+    title: ' '
+    show_states: true
+    colorize_states: true
+  yaxis:
+  - id: temperature
+    min: ~5
+    max: ~32
+    decimals: 2
+    apex_config:
+      tickAmount: 10
+  - id: conso_clim
+    min: ~150
+    max: auto
+    opposite: true
+    decimals: 2
+    apex_config:
+      tickAmount: 10
+  all_series_config:
+    group_by:
+      func: last
+      duration: 60m
+    show:
+      legend_value: false
+  series:
+  - entity: sensor.temperature_moyenne_interieure
+    name: T̄ Appart.
+    yaxis_id: temperature
+    stroke_width: 4
+    fill_raw: last
+    color: orange
+    show:
+      extremas: true
+  - entity: sensor.th_balcon_nord_temperature
+    name: T° Bal.Nrd
+    yaxis_id: temperature
+    stroke_width: 4
+    fill_raw: last
+    color: green
+    show:
+      extremas: true
+  - entity: sensor.conso_clim_rad_total
+    name: Conso. Instan.
+    yaxis_id: conso_clim
+    type: column
+    opacity: 0.6
+    fill_raw: last
+    color: rgb(68,115,158)
+    unit: W
+    group_by:
+      func: max
+      duration: 1h
+      start_with_last: true
+  - entity: sensor.conso_clim_rad_total_quotidien
+    name: Conso. Total
+    color: rgb(68,115,158)
+    unit: kWh
+    show:
+      in_brush: false
+      in_chart: false
+  - entity: sensor.clim_rad_total_avg_watts_quotidien
+    name: Moy.depuis Minuit
+    yaxis_id: conso_clim
+    type: line
+    stroke_width: 2
+    color: '#F44336'
+    unit: W
+    show:
+      in_brush: false
+      in_chart: true
+      extremas: true
+  - entity: sensor.conso_clim_rad_total_mensuel
+    name: Mois en cours
+    color: red
+    show:
+      in_brush: false
+      in_chart: false
+  card_mod:
+    style: |
+      ha-card {
+        background: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        font-size: 12px;
+      }
+- type: custom:apexcharts-card
+  experimental:
+    color_threshold: true
+  graph_span: 24h
+  cache: true
+  span:
+    start: day
+    offset: +0m
+  apex_config:
+    chart:
+      height: 340px
+  now:
+    show: true
+    color: '#f44336'
+    label: V
+  header:
+    show: true
+    title: D.U.T. Pièces vs Performance Totale
+    show_states: true
+    colorize_states: true
+  yaxis:
+  - id: temp
+    max: auto
+    decimals: 0
+    opposite: false
+  - id: hours
+    min: 0
+    max: auto
+    decimals: 0
+    opposite: true
+    apex_config:
+      tickAmount: 12
+  all_series_config:
+    curve: smooth
+    show:
+      legend_value: false
+      extremas: true
+  series:
+  - entity: sensor.th_balcon_nord_temperature
+    yaxis_id: temp
+    name: Temp. Ext.
+    extend_to: now
+    fill_raw: last
+    type: area
+    opacity: 0.2
+    color: '#44739e'
+    stroke_width: 1
+  - entity: sensor.dut_clim_salon
+    name: Salon
+    extend_to: now
+    fill_raw: last
+    yaxis_id: hours
+    color: rgb(174,68,90)
+    stroke_width: 3
+  - entity: sensor.dut_radiateur_cuisine
+    name: Cuisine
+    extend_to: now
+    fill_raw: last
+    yaxis_id: hours
+    color: rgb(168, 136, 181)
+    stroke_width: 3
+  - entity: sensor.dut_clim_bureau
+    name: Bureau
+    extend_to: now
+    fill_raw: last
+    yaxis_id: hours
+    color: orange
+    stroke_width: 3
+  - entity: sensor.dut_sdb_total
+    name: SdB
+    yaxis_id: hours
+    color: magenta
+    stroke_width: 3
+  - entity: sensor.dut_clim_chambre
+    name: Chambre
+    extend_to: now
+    fill_raw: last
+    yaxis_id: hours
+    color: rgb(30,81,40)
+    stroke_width: 3
+  card_mod:
+    style: |
+      ha-card {
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+      }
+- type: conditional
+  conditions: []
+  card:
+    type: custom:stack-in-card
+    mode: vertical
+    cards:
+    - type: horizontal-stack
+      cards:
+      - type: custom:mod-card
+        card_mod:
+          style:
+            .: |
+              :host {
+                --text-divider-color: white;
+                --text-divider-line-size: 5px;
+              }
+        card:
+          type: custom:text-divider-row
+          text: SALON
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+- type: heading
+  icon: mdi:sofa
+  heading_style: title
+  badges:
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: climate.clim_salon_rm4_mini
+    color: state
+    tap_action:
+      action: more-info
+    icon: mdi:thermometer
+    state_content:
+    - name
+    - temperature
+    name: Réglé à
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.th_salon_temperature
+    color: green
+    state_content:
+    - name
+    - state
+    name: Salon
+  layout_options:
+    grid_columns: full
+    grid_rows: 1
+  heading: SALON
+  card_mod:
+    style: |
+      ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        margin: -22px 0px 0px 0px;
+      }
+- type: custom:button-card
+  entity: climate.clim_salon_rm4_mini
+  name: Clim Salon
+  show_state: false
+  show_label: true
+  variables:
+    sensor_status: climate.clim_salon_rm4_mini
+    sensor_temp: sensor.th_salon_temperature
+    round_temp: 1
+    sensor_hum: sensor.th_salon_humidity
+    round_hum: 0
+    temp_color_yellow: 24
+    temp_color_orange: 28
+    temp_color_red: 32
+    state_error: unavailable, unknown
+    state_idle: idle, off, standby
+    state_auto: auto
+    state_heat: heat, heating
+    state_cool: cool, cooling
+    state_heat_cool: heat_cool
+    state_dry: dry, drying, dehumidify
+    state_fan: fan, fan_only, ventilation
+    sensor_presence: ''
+    sensor_power: sensor.clim_salon_nous_power
+    sensor_cost: ''
+    show_cost: false
+    bar_mode: temp
+    max_cost: 10
+    max_power_w: 1500
+  tap_action:
+    action: more-info
+  label: |
+    [[[
+      if (!entity || !entity.state) return 'Entity Setup Required';
+      let st = entity.state;
+      let err = (variables.state_error || 'unavailable, unknown').split(',').map(s => s.trim().toLowerCase());
+      if (err.includes(st.toLowerCase())) return 'Check Configuration';
+      return st.replace(/_/g, ' ').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    ]]]
+  icon: "[[[\n  if (!entity || !entity.state) return 'mdi:alert-circle-outline';\n  let st = entity.state.toLowerCase();\n  let err = variables.state_error.split(',').map(s => s.trim().toLowerCase());\n  let cool = variables.state_cool.split(',').map(s => s.trim().toLowerCase());\n  let heat = variables.state_heat.split(',').map(s => s.trim().toLowerCase());\n  let dry = variables.state_dry.split(',').map(s => s.trim().toLowerCase());\n  let fan = variables.state_fan.split(',').map(s => s.trim().toLowerCase());\n  let auto = variables.state_auto.split(',').map(s => s.trim().toLowerCase());\n  let hc = variables.state_heat_cool.split(',').map(s => s.trim().toLowerCase());\n  \n  if (err.includes(st)) return 'mdi:alert-circle-outline';\n  if (cool.includes(st)) return 'mdi:snowflake';\n  if (heat.includes(st)) return 'mdi:fire';\n  if (dry.includes(st)) return 'mdi:water-percent';\n  if (fan.includes(st)) return 'mdi:fan';\n  if (auto.includes(st) || hc.includes(st)) return 'mdi:thermostat-auto';\n  return 'mdi:thermostat';\n]]]\n"
+  custom_fields:
+    badge1: ' '
+    badge2: ' '
+    t1: ' '
+    t2: ' '
+    bar: ' '
+    presence_dot: ' '
+  styles:
+    card:
+    - height: 95px !important
+    - padding: 0px !important
+    - overflow: hidden
+    - position: relative
+    - background: none !important
+    - box-shadow: none !important
+    - border: none !important
+    - backdrop-filter: none !important
+    - --ha-card-background: none
+    - --ha-card-box-shadow: none
+    grid:
+    - padding: 12px 16px
+    - height: 100%
+    - box-sizing: border-box
+    - grid-template-areas: '"i n" "i l"'
+    - grid-template-columns: 65px 1fr
+    - grid-template-rows: auto auto
+    - align-content: center
+    - gap: 0px 12px
+    - position: relative
+    - z-index: 2
+    icon:
+    - width: 45px
+    - height: 45px
+    - color: rgb(var(--appliance-color))
+    - transform-origin: center center
+    - animation: var(--appliance-icon-anim) !important
+    - z-index: 3
+    img_cell:
+    - width: 65px
+    - height: 65px
+    - border-radius: 50%
+    - background: rgba(var(--appliance-color), 0.05) !important
+    - border: 1px solid rgba(var(--appliance-color), 0.15)
+    - position: relative
+    - overflow: visible !important
+    - justify-self: start
+    - z-index: 1
+    name:
+    - justify-self: start
+    - font-size: 15px
+    - font-weight: 500
+    - align-self: end
+    - margin-bottom: 2px
+    - position: relative
+    - z-index: 2
+    label:
+    - justify-self: start
+    - font-size: 12px
+    - opacity: 0.7
+    - align-self: start
+    - margin-top: 2px
+    - position: relative
+    - z-index: 2
+    custom_fields:
+      presence_dot:
+      - position: absolute
+      - top: 12px
+      - left: 12px
+      - width: 6px
+      - height: 6px
+      - border-radius: 50%
+      - z-index: 5
+      - transition: background-color 0.4s ease
+      badge1:
+      - position: absolute
+      - top: 10px
+      - right: 10px
+      - padding: 3px 8px
+      - font-size: 10px
+      - letter-spacing: 0.5px
+      - white-space: nowrap
+      - text-transform: uppercase
+      - font-weight: 700
+      - z-index: 5
+      - transition: all 0.5s ease
+      badge2:
+      - position: absolute
+      - top: 38px
+      - right: 10px
+      - padding: 4px 8px
+      - font-size: 10px
+      - letter-spacing: 0.5px
+      - white-space: nowrap
+      - color: var(--primary-text-color)
+      - opacity: 0.9
+      - text-transform: uppercase
+      - font-weight: 500
+      - z-index: 5
+      - transition: all 0.5s ease
+      t1:
+      - position: absolute
+      - bottom: 14px
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 0.5px
+      - line-height: 1
+      - z-index: 5
+      - transition: all 0.5s ease
+      t2:
+      - position: absolute
+      - bottom: 14px
+      - right: 10px
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 0.5px
+      - line-height: 1
+      - z-index: 5
+      - transition: all 0.5s ease
+      bar:
+      - position: absolute
+      - bottom: 0
+      - left: 0
+      - height: 3px
+      - width: var(--appliance-level)
+      - background: var(--appliance-bar-bg)
+      - box-shadow: var(--appliance-bar-shadow)
+      - transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1)
+      - z-index: 5
+  extra_styles: "[[[\n  let ent_power = variables.sensor_power;\n  let bar_mode = variables.bar_mode;\n  let max_power_w = variables.max_power_w;\n  \n  let raw_status = states[variables.sensor_status] ? states[variables.sensor_status].state : '';\n  let status = raw_status.toLowerCase();\n  \n  let state_err = variables.state_error.split(',').map(s => s.trim().toLowerCase());\n  let state_idle = variables.state_idle.split(',').map(s => s.trim().toLowerCase());\n  let state_cool = variables.state_cool.split(',').map(s => s.trim().toLowerCase());\n  let state_heat = variables.state_heat.split(',').map(s => s.trim().toLowerCase());\n  let state_dry = variables.state_dry.split(',').map(s => s.trim().toLowerCase());\n  let state_fan = variables.state_fan.split(',').map(s => s.trim().toLowerCase());\n  let state_auto = variables.state_auto.split(',').map(s => s.trim().toLowerCase());\n  let state_hc = variables.state_heat_cool.split(',').map(s => s.trim().toLowerCase());\n  \n  let is_error = state_err.includes(status);\n  let is_idle = state_idle.includes(status);\n  let is_cool = state_cool.includes(status);\n  let is_heat = state_heat.includes(status);\n  let is_dry = state_dry.includes(status);\n  let is_fan = state_fan.includes(status);\n  let is_auto = state_auto.includes(status);\n  let is_heat_cool = state_hc.includes(status);\n  \n  let attr = states[variables.sensor_status] ? states[variables.sensor_status].attributes : {};\n  \n  let ext_temp = (variables.sensor_temp && states[variables.sensor_temp]) ? parseFloat(states[variables.sensor_temp].state) : undefined;\n  let ext_hum = (variables.sensor_hum && states[variables.sensor_hum]) ? parseFloat(states[variables.sensor_hum].state) : undefined;\n  \n  let raw_temp_attr = !isNaN(parseFloat(attr.current_temperature)) ? parseFloat(attr.current_temperature) : NaN;\n  let raw_hum_attr = !isNaN(parseFloat(attr.current_humidity)) ? parseFloat(attr.current_humidity) : NaN;\n  \n  let c_t = !isNaN(ext_temp) ? ext_temp : (!isNaN(raw_temp_attr) ? raw_temp_attr : NaN);\n  let c_h = !isNaN(ext_hum) ? ext_hum : (!isNaN(raw_hum_attr) ? raw_hum_attr : NaN);\n  \n  let rt = variables.round_temp !== undefined ? variables.round_temp : 1;\n  let rh = variables.round_hum !== undefined ? variables.round_hum : 0;\n  \n  let temp_str = !isNaN(c_t) ? c_t.toFixed(rt) + '°' : '';\n  let hum_str = !isNaN(c_h) ? c_h.toFixed(rh) + '%' : '';\n\n  let temp_color_rgb = '33, 150, 243'; \n  if (variables.temp_color_red !== undefined && c_t >= variables.temp_color_red) temp_color_rgb = '244, 67, 54';\n  else if (variables.temp_color_orange !== undefined && c_t >= variables.temp_color_orange) temp_color_rgb = '255, 152, 0';\n  else if (variables.temp_color_yellow !== undefined && c_t >= variables.temp_color_yellow) temp_color_rgb = '255, 193, 7';\n  \n  let hum_color_rgb = '33, 150, 243'; \n  \n  let raw_fan = attr.fan_mode ? String(attr.fan_mode) : '';\n  let power_state = states[ent_power];\n  let raw_power = power_state ? parseFloat(power_state.state) : NaN;\n  \n  let t_single = attr.temperature;\n  let t_low = attr.target_temp_low;\n  let t_high = attr.target_temp_high;\n  let action = attr.hvac_action ? String(attr.hvac_action).toLowerCase() : '';\n  \n  let t1_text = ''; let t1_color = 'transparent'; \n  let t2_text = ''; let t2_color = 'transparent';\n  let raw_targ = 0; let t1_right = '10px';\n  \n  if (!isNaN(parseFloat(t_low)) && !isNaN(parseFloat(t_high)) && t_low !== null) {\n      t1_text = '➔ ' + t_low + '°';\n      t1_color = 'orangered';\n      t2_text = '| ' + t_high + '°';\n      t2_color = '#2196F3';\n      raw_targ = (parseFloat(t_low) + parseFloat(t_high)) / 2;\n      t1_right = `calc(5px + ${t2_text.length}ch)`;\n  } else if (!isNaN(parseFloat(t_single)) && t_single !== null) {\n      t1_text = '➔ ' + t_single + '°';\n      let t_t = parseFloat(t_single);\n      if (c_t > 0) {\n          if (t_t > c_t) t1_color = 'orangered';\n          else if (t_t < c_t) t1_color = '#2196F3';\n          else t1_color = 'var(--primary-text-color)';\n      } else {\n          if (is_heat || action === 'heating') t1_color = 'orangered';\n          else if (is_cool || action === 'cooling') t1_color = '#2196F3';\n          else t1_color = 'var(--primary-text-color)';\n      }\n      raw_targ = t_single;\n  } else {\n      raw_targ = c_t;\n  }\n  \n  let fan_text = '';\n  if (!['unknown', 'unavailable', 'none', ''].includes(raw_fan.toLowerCase())) {\n      let f = raw_fan.toLowerCase().replace(/_/g, ' ').replace(/-/g, ' ');\n      let clean_fan = '';\n      if (f === 'on') clean_fan = 'On';\n      else {\n          f = f.replace('on low', 'low').replace('low on', 'low');\n          f = f.replace('on medium', 'medium').replace('medium on', 'medium');\n          f = f.replace('on high', 'high').replace('high on', 'high');\n          f = f.replace('on med', 'med').replace('med on', 'med');\n          clean_fan = f.replace(/\\b\\w/g, c => c.toUpperCase());\n      }\n      fan_text = 'Fan: ' + clean_fan;\n  }\n  \n  let pwr_pct = 0;\n  let power_text = '';\n  \n  if (variables.show_cost && variables.sensor_cost && states[variables.sensor_cost]) {\n      let c_state = states[variables.sensor_cost];\n      let c_val = parseFloat(c_state.state);\n      let uom = c_state.attributes.unit_of_measurement || '';\n      if (!isNaN(c_val)) {\n          power_text = c_val.toFixed(2) + uom;\n          pwr_pct = variables.max_cost > 0 ? (c_val / variables.max_cost) * 100 : 50; \n      }\n  } else if (!isNaN(raw_power)) {\n      let power_w = Math.round(raw_power);\n      power_text = power_w + 'W';\n      pwr_pct = max_power_w > 0 ? (power_w / max_power_w) * 100 : 0;\n  }\n  \n  let f_pct = 50;\n  if (!['unknown', 'unavailable', 'none', ''].includes(raw_fan.toLowerCase())) {\n      let f_val = raw_fan.toLowerCase().replace(/ /g, '_');\n      if (f_val === 'off') f_pct = 0;\n      else if (!isNaN(parseFloat(f_val)) && parseFloat(f_val) > 5) f_pct = parseFloat(f_val);\n      else if (['on_low', 'low', 'quiet', 'min', '1', 'auto_low'].includes(f_val)) f_pct = 33;\n      else if (['on_medium', 'medium', 'med', '2', '3', 'auto_medium'].includes(f_val)) f_pct = 66;\n      else if (['on_high', 'high', 'max', 'turbo', '4', '5', 'auto', 'on', 'auto_high'].includes(f_val)) f_pct = 100;\n  } else {\n      f_pct = -1; \n  }\n  \n  let anim_speed = 2.5;\n  if (f_pct >= 80) anim_speed = 0.8;\n  else if (f_pct >= 50) anim_speed = 1.5;\n  \n  let fan_color = '76, 175, 80';\n  if (f_pct === -1) fan_color = 'transparent';\n  else if (f_pct === 0) fan_color = '158, 158, 158'; \n  else if (f_pct >= 80) fan_color = '244, 67, 54'; \n  else if (f_pct >= 50) fan_color = '33, 150, 243';\n  \n  let pwr_color = '76, 175, 80';\n  if (pwr_pct >= 75) pwr_color = '244, 67, 54'; \n  else if (pwr_pct >= 40) pwr_color = '255, 193, 7'; \n  \n  let progress = 0;\n  if (!is_idle && !is_error) {\n      if (bar_mode === 'power') {\n          progress = Math.max(3, Math.min(pwr_pct, 100));\n      } else if (bar_mode === 'fan' && f_pct >= 0) {\n          progress = f_pct;\n      } else if (bar_mode === 'temp' && c_t > 0) {\n          if (!isNaN(parseFloat(t_low)) && !isNaN(parseFloat(t_high)) && t_low !== null) {\n              let tl = parseFloat(t_low); let th = parseFloat(t_high);\n              if (c_t < tl) {\n                  let p = tl > 0 ? (c_t / tl) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else if (c_t > th) {\n                  let p = c_t > 0 ? (th / c_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else progress = 100;\n          } else if (!isNaN(parseFloat(raw_targ)) && raw_targ !== null) {\n              let t_t = parseFloat(raw_targ);\n              if (is_cool || action === 'cooling') {\n                  let p = c_t > 0 ? (t_t / c_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else if (is_heat || action === 'heating') {\n                  let p = t_t > 0 ? (c_t / t_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else {\n                  let p = c_t > t_t ? (c_t > 0 ? (t_t / c_t)*100 : 100) : (t_t > 0 ? (c_t / t_t)*100 : 100);\n                  progress = Math.max(3, Math.min(p, 100));\n              }\n          }\n      }\n  }\n  \n  let pres_state = (variables.sensor_presence && states[variables.sensor_presence]) ? states[variables.sensor_presence].state.toLowerCase() : 'none';\n  let pres_display = 'none';\n  let pres_bg = 'transparent';\n  let pres_shadow = 'none';\n  \n  if (pres_state !== 'none' && pres_state !== 'unavailable' && pres_state !== 'unknown') {\n      pres_display = 'block';\n      if (pres_state === 'on' || pres_state === 'home' || pres_state === 'active') {\n          pres_bg = '#F44336';\n          pres_shadow = '0 0 4px rgba(244, 67, 54, 0.8)';\n      } else {\n          pres_bg = '#9E9E9E';\n      }\n  }\n  \n  let badge1 = ''; let badge2 = ''; \n  let color = '158, 158, 158'; let icon_anim = 'none';\n  let b1_bg = 'transparent'; let b1_border = 'none'; let b1_bl = 'none'; let b1_br = 'none'; let b1_text = 'inherit';\n  let b1_shadow = 'none';\n  let b2_bg = 'transparent'; let b2_bl = 'none'; let b2_br = 'none';\n  let bar_bg = 'rgb(158, 158, 158)';\n  let bar_shadow = 'none';\n  \n  if (is_error) {\n      badge1 = '⚠️ ERROR';\n      color = '244, 67, 54';\n      b1_bg = `rgba(${color}, 0.15)`; b1_border = `1px solid rgba(${color}, 0.3)`; b1_bl = `2px solid rgb(${color})`; b1_br = b1_border; b1_text = `rgb(${color})`;\n  } else {\n      if (is_cool) { color = '33, 150, 243'; icon_anim = 'none'; }\n      else if (is_heat) { color = '255, 87, 34'; icon_anim = 'gentle-fire 3s ease-in-out infinite alternate'; }\n      else if (is_dry) { color = '255, 213, 79'; icon_anim = 'none'; }\n      else if (is_fan) { color = '0, 150, 136'; icon_anim = 'gentle-spin var(--appliance-speed) linear infinite'; }\n      else if (is_auto || is_heat_cool) { color = '158, 158, 158'; icon_anim = 'none'; }\n      \n      let s_fmt = status.replace(/_/g, ' ').replace(/-/g, ' ').replace(/\\b\\w/g, c => c.toUpperCase());\n      let b1_parts = [s_fmt];\n      if (hum_str) b1_parts.push(hum_str);\n      if (temp_str) b1_parts.push(temp_str);\n      badge1 = b1_parts.join(' • ');\n      \n      b1_text = 'var(--primary-text-color)';\n      b1_border = '1px solid rgba(128,128,128, 0.2)';\n      let has_hum = !!hum_str;\n      let has_temp = !!temp_str;\n      \n      if (has_hum && has_temp) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${hum_color_rgb}, 0.15) 50%, rgba(${temp_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${temp_color_rgb})`;\n      } else if (has_temp) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${temp_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${temp_color_rgb})`;\n      } else if (has_hum) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${hum_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${hum_color_rgb})`;\n      } else {\n          b1_bg = `linear-gradient(0deg, rgba(${color}, 0.15), rgba(${color}, 0.15))`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${color})`;\n      }\n      \n      if (is_heat_cool || is_auto) {\n          b1_bl = '2.5px solid transparent';\n          b1_shadow = 'none';\n          let border_bg = `linear-gradient(to bottom, rgb(255, 87, 34) 50%, rgb(33, 150, 243) 50%) 0 0 / 2.5px 100% no-repeat border-box border-box`;\n          let inner_bg = `${b1_bg} 0 0 / 100% 100% no-repeat padding-box padding-box`;\n          b1_bg = `${border_bg}, ${inner_bg}`;\n      }\n      \n      let b2_parts = [fan_text, power_text].filter(Boolean);\n      badge2 = b2_parts.join(' • ');\n      let has_fan = fan_text !== ''; let has_pwr = power_text !== '';\n      \n      if (has_fan && has_pwr) {\n          b2_bg = `linear-gradient(90deg, rgba(${fan_color}, 0.15) 0%, rgba(${pwr_color}, 0.15) 100%)`;\n          b2_bl = `2.5px solid rgb(${fan_color})`;\n          b2_br = `2.5px solid rgb(${pwr_color})`;\n      } else if (has_fan) {\n          b2_bg = `rgba(${fan_color}, 0.15)`;\n          b2_bl = `2px solid rgb(${fan_color})`;\n          b2_br = `1px solid rgba(128,128,128, 0.2)`;\n      } else if (has_pwr) {\n          b2_bg = `rgba(${pwr_color}, 0.15)`;\n          b2_bl = `1px solid rgba(128,128,128, 0.2)`;\n          b2_br = `2px solid rgb(${pwr_color})`;\n      }\n      \n      if (is_heat_cool || is_auto) {\n          bar_bg = 'linear-gradient(90deg, rgb(33, 150, 243) 0%, rgb(255, 87, 34) 100%)';\n          bar_shadow = '0 -1px 8px rgba(158, 158, 158, 0.4)';\n      } else {\n          bar_bg = `rgb(${color})`;\n          bar_shadow = `0 -1px 8px rgba(${color}, 0.5)`;\n      }\n  }\n  \n  return `\n    #card {\n      --appliance-color: ${color};\n      --appliance-level: ${progress}%;\n      --appliance-speed: ${anim_speed}s;\n      --appliance-bar-bg: ${bar_bg};\n      --appliance-bar-shadow: ${bar_shadow};\n      --appliance-icon-anim: ${icon_anim};\n    }\n    \n    #presence_dot {\n      display: ${pres_display};\n      background: ${pres_bg};\n      box-shadow: ${pres_shadow};\n    }\n    \n    #badge1 {\n      background: ${b1_bg};\n      color: ${b1_text};\n      border-top: ${b1_border};\n      border-bottom: ${b1_border};\n      border-left: ${b1_bl};\n      border-right: ${b1_br};\n      border-radius: 6px !important;\n      box-shadow: ${b1_shadow};\n    }\n    #badge1::before { content: \"${badge1}\"; }\n    \n    #badge2 {\n      display: ${badge2 ? 'block' : 'none'};\n      background: ${b2_bg};\n      border-top: 1px solid rgba(128,128,128, 0.2);\n      border-bottom: 1px solid rgba(128,128,128, 0.2);\n      border-left: ${b2_bl};\n      border-right: ${b2_br};\n      border-radius: 6px !important;\n    }\n    #badge2::before { content: \"${badge2}\"; }\n    \n    #t1 { color: ${t1_color}; right: ${t1_right}; }\n    #t1::before { content: \"${t1_text}\"; }\n    \n    #t2 { color: ${t2_color}; }\n    #t2::before { content: \"${t2_text}\"; }\n    \n    ${is_cool ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -15px; border-radius: 50%;\n        box-shadow: inset 8px 0 15px -5px rgba(var(--appliance-color), 0.7), 0 -8px 15px -5px rgba(var(--appliance-color), 0.5);\n        animation: frost-orbit 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -10px; border-radius: 50%;\n        box-shadow: inset -5px 0 15px -5px rgba(var(--appliance-color), 0.9);\n        animation: frost-orbit 3.5s linear infinite reverse;\n      }\n    ` : ''}\n    ${is_heat ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 150%; height: 150%; bottom: -20%; left: -25%; border-radius: 50%;\n        background: radial-gradient(circle at 50% 100%, rgba(var(--appliance-color), 0.45) 0%, transparent 65%);\n        filter: blur(4px);\n        animation: intense-updraft 3s ease-in-out infinite alternate;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 3px; height: 3px; border-radius: 50%; bottom: -5px; left: 50%;\n        background: rgba(var(--appliance-color), 0.9);\n        box-shadow: \n          15px 10px 0 1px rgba(var(--appliance-color), 0.8),\n          -20px 25px 0 0px rgba(var(--appliance-color), 0.7),\n          5px 35px 0 2px rgba(var(--appliance-color), 0.9),\n          -10px 15px 0 -1px rgba(var(--appliance-color), 0.6);\n        animation: intense-embers 2s ease-in infinite;\n      }\n    ` : ''}\n    ${is_dry ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 3px; height: 3px; border-radius: 50%; bottom: 10px; left: 50%;\n        background: rgba(var(--appliance-color), 0.7);\n        box-shadow: -12px 15px 0 1px rgba(var(--appliance-color), 0.4), 10px 25px 0 0.5px rgba(var(--appliance-color), 0.5);\n        animation: evaporate-up 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;\n      }\n    ` : ''}\n    ${is_fan ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: 0; border-radius: 50%; border: 2px solid rgba(var(--appliance-color), 0.5);\n        animation: air-ripple var(--appliance-speed) cubic-bezier(0.1, 0.5, 0.5, 1) infinite;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: 0; border-radius: 50%; border: 2px solid rgba(var(--appliance-color), 0.3);\n        animation: air-ripple var(--appliance-speed) cubic-bezier(0.1, 0.5, 0.5, 1) infinite;\n        animation-delay: calc(var(--appliance-speed) / 2);\n      }\n    ` : ''}\n    ${(is_heat_cool || is_auto) ? `\n      #img-cell {\n        background: linear-gradient(135deg, rgba(33, 150, 243, 0.15) 0%, rgba(255, 87, 34, 0.15) 100%) !important;\n        border: 1px solid rgba(158, 158, 158, 0.2) !important;\n      }\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -5px; border-radius: 50%;\n        background: \n          radial-gradient(circle at 25% 25%, rgba(33, 150, 243, 0.25) 0%, transparent 60%),\n          radial-gradient(circle at 75% 75%, rgba(255, 87, 34, 0.25) 0%, transparent 60%);\n        animation: auto-breathe 3s ease-in-out infinite alternate;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -15px; border-radius: 50%;\n        border: 2px solid transparent;\n        border-top-color: rgba(33, 150, 243, 0.4);\n        border-left-color: rgba(33, 150, 243, 0.2);\n        border-bottom-color: rgba(255, 87, 34, 0.4);\n        border-right-color: rgba(255, 87, 34, 0.2);\n        animation: auto-ripple 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;\n      }\n    ` : ''}\n    \n    @keyframes gentle-fire {\n      0%   { transform: scaleY(0.95) skewX(-1deg); color: #ff9800; filter: drop-shadow(0 0 2px rgba(255,152,0,0.4)); }\n      100% { transform: scaleY(1.05) skewX(1deg); color: #ff5722; filter: drop-shadow(0 0 5px rgba(255,87,34,0.6)); }\n    }\n    @keyframes gentle-spin {\n      0%   { transform: rotate(0deg); }\n      100% { transform: rotate(360deg); }\n    }\n    @keyframes frost-orbit {\n      0%   { transform: rotate(0deg) scale(1); }\n      50%  { transform: rotate(180deg) scale(1.05); }\n      100% { transform: rotate(360deg) scale(1); }\n    }\n    @keyframes intense-updraft {\n      0%   { transform: translateY(10px) scale(0.9); opacity: 0.5; }\n      100% { transform: translateY(-15px) scale(1.1); opacity: 1; filter: blur(6px); }\n    }\n    @keyframes intense-embers {\n      0%   { transform: translateY(0) scale(1); opacity: 0; }\n      15%  { opacity: 1; }\n      100% { transform: translateY(-55px) scale(0.3); opacity: 0; }\n    }\n    @keyframes air-ripple {\n      0%   { transform: scale(1); opacity: 0.8; }\n      100% { transform: scale(1.5); opacity: 0; }\n    }\n    @keyframes evaporate-up {\n      0%   { transform: translateY(0); opacity: 0; }\n      30%  { opacity: 1; }\n      100% { transform: translateY(-30px); opacity: 0; }\n    }\n    @keyframes auto-breathe {\n      0%   { transform: scale(0.9); opacity: 0.4; }\n      100% { transform: scale(1.1); opacity: 1; }\n    }\n    @keyframes auto-ripple {\n      0%   { transform: scale(0.7); opacity: 0.8; }\n      100% { transform: scale(1.2); opacity: 0; }\n    }\n  `;\n]]]\n"
+  triggers_update:
+  - climate.clim_salon_rm4_mini
+  - sensor.th_salon_temperature
+  - sensor.th_salon_humidity
+  - sensor.clim_salon_nous_power
+- type: custom:streamline-card
+  template: clim_voltage_ring-tile
+  variables:
+    card_name: Clim. Salon (V)
+    entity: sensor.clim_salon_nous_voltage
+  grid_options:
+    columns: 6
+    rows: 3
+- type: custom:streamline-card
+  template: clim_ampere_ring-tile
+  variables:
+    card_name: Clim. Salon (A)
+    entity: sensor.clim_salon_nous_current
+  grid_options:
+    columns: 6
+    rows: 3
+- type: custom:tabbed-card
+  styles:
+    --mdc-theme-primary: rgb(174,68,90)
+    --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
+    max-width: 100%
+  attributes:
+    animated: true
+    swipeable: true
+  tabs:
+  - attributes:
+      label: INSTANTANÉ
+      icon: mdi:flash
+    card:
+      type: custom:streamline-card
+      template: conso_temps_reel_clim_rad
+      variables:
+        card_title: Conso. Temps Réel Clim. Salon
+        energy_entity: sensor.clim_salon_nous_power
+        energy_color: rgb(174,68,90)
+        current_entity: sensor.clim_salon_nous_current
+        current_color: rgb(255, 41, 41)
+        avg_daily_entity: sensor.clim_salon_avg_watts_quotidien
+        conso_daily_kwh_entity: sensor.clim_salon_quotidien_um
+        span_offset: -1m
+        group_duration: 1m
+  - attributes:
+      label: MENSUEL
+      icon: mdi:calendar-month
+    card:
+      type: custom:streamline-card
+      template: conso_mensuelle_clim
+      variables:
+        title: Conso. mensuel Clim Salon
+        energy_entity: sensor.clim_salon_nous_energy
+        energy_name: Conso. jours en cours
+        energy_color: rgb(174,68,90)
+        avg_monthly_entity: sensor.clim_salon_avg_watts_mensuel
+        temp_entity: sensor.th_balcon_nord_temperature
+        temp_color: rgb(126, 24, 145)
+        conso_monthly_kwh_entity: sensor.clim_salon_mensuel_um
+      card_mod:
+        style: |
+          ha-card {
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+          }
+  - attributes:
+      label: DUT
+      icon: mdi:chart-line
+    card:
+      type: custom:streamline-card
+      template: apex_dut_piece
+      variables:
+        title: D.U.T. Salon
+        entity_sensor: sensor.dut_clim_salon
+        color: rgb(174,68,90)
+        annot_text: Zone Critique
+        hours: auto
+        crit_zone: 5
+        thresh_yellow: 4
+        thresh_orange: 6
+        thresh_red: 10
+- type: heading
+  icon: mdi:sofa
+  heading_style: subtitle
+  badges:
+  - type: entity
+    show_state: true
+    show_icon: true
+    color: amber
+    state_content:
+    - name
+    - state
+    entity: sensor.clim_salon_quotidien_um
+    name: Q
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.clim_salon_hebdomadaire_um
+    name: H
+    color: orange
+    state_content:
+    - name
+    - state
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.clim_salon_mensuel_um
+    name: M
+    color: deep-orange
+    state_content:
+    - name
+    - state
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.clim_salon_annuel_um
+    name: A
+    color: red
+    state_content:
+    - name
+    - state
+  layout_options:
+    grid_columns: full
+    grid_rows: 1
+  card_mod:
+    style: |
+      ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        margin: -22px 0px 0px 0px;
+      }
+- type: conditional
+  conditions: []
+  card:
+    type: custom:stack-in-card
+    mode: vertical
+    cards:
+    - type: horizontal-stack
+      cards:
+      - type: custom:mod-card
+        card_mod:
+          style:
+            .: |
+              :host {
+                --text-divider-color: white;
+                --text-divider-line-size: 5px;
+              }
+        card:
+          type: custom:text-divider-row
+          text: CUISINE
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+- type: heading
+  icon: mdi:fridge
+  heading_style: title
+  badges:
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: climate.radiateur_cuisine
+    icon: mdi:power
+    color: state
+    tap_action:
+      action: more-info
+    state_content:
+    - name
+    - temperature
+    name: Réglé à
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.th_cuisine_temperature
+    color: green
+    name: Cuisine
+    state_content:
+    - name
+    - state
+  layout_options:
+    grid_columns: full
+    grid_rows: 1
+  heading: CUISINE  (RADIATEUR)
+  card_mod:
+    style: |
+      ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        margin: -22px 0px 0px 0px;
+      }
+- type: custom:button-card
+  entity: climate.radiateur_cuisine
+  name: Clim Cuisine
+  show_state: false
+  show_label: true
+  variables:
+    sensor_status: climate.radiateur_cuisine
+    sensor_temp: sensor.th_cuisine_temperature
+    round_temp: 1
+    sensor_hum: sensor.th_cuisine_humidity
+    round_hum: 0
+    temp_color_yellow: 24
+    temp_color_orange: 27
+    temp_color_red: 30
+    state_error: unavailable, unknown
+    state_idle: idle, off, standby
+    state_auto: auto
+    state_heat: heat, heating
+    state_cool: cool, cooling
+    state_heat_cool: heat_cool
+    state_dry: dry, drying, dehumidify
+    state_fan: fan, fan_only, ventilation
+    sensor_presence: ''
+    sensor_power: sensor.radiateur_elec_cuisine_power
+    sensor_cost: ''
+    show_cost: false
+    bar_mode: temp
+    max_cost: 10
+    max_power_w: 100
+  tap_action:
+    action: more-info
+  label: |
+    [[[
+      if (!entity || !entity.state) return 'Entity Setup Required';
+      let st = entity.state;
+      let err = (variables.state_error || 'unavailable, unknown').split(',').map(s => s.trim().toLowerCase());
+      if (err.includes(st.toLowerCase())) return 'Check Configuration';
+      return st.replace(/_/g, ' ').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    ]]]
+  icon: "[[[\n  if (!entity || !entity.state) return 'mdi:alert-circle-outline';\n  let st = entity.state.toLowerCase();\n  let err = variables.state_error.split(',').map(s => s.trim().toLowerCase());\n  let cool = variables.state_cool.split(',').map(s => s.trim().toLowerCase());\n  let heat = variables.state_heat.split(',').map(s => s.trim().toLowerCase());\n  let dry = variables.state_dry.split(',').map(s => s.trim().toLowerCase());\n  let fan = variables.state_fan.split(',').map(s => s.trim().toLowerCase());\n  let auto = variables.state_auto.split(',').map(s => s.trim().toLowerCase());\n  let hc = variables.state_heat_cool.split(',').map(s => s.trim().toLowerCase());\n  \n  if (err.includes(st)) return 'mdi:alert-circle-outline';\n  if (cool.includes(st)) return 'mdi:snowflake';\n  if (heat.includes(st)) return 'mdi:fire';\n  if (dry.includes(st)) return 'mdi:water-percent';\n  if (fan.includes(st)) return 'mdi:fan';\n  if (auto.includes(st) || hc.includes(st)) return 'mdi:thermostat-auto';\n  return 'mdi:thermostat';\n]]]\n"
+  custom_fields:
+    badge1: ' '
+    badge2: ' '
+    t1: ' '
+    t2: ' '
+    bar: ' '
+    presence_dot: ' '
+  styles:
+    card:
+    - height: 95px !important
+    - padding: 0px !important
+    - overflow: hidden
+    - position: relative
+    - background: none !important
+    - box-shadow: none !important
+    - border: none !important
+    - backdrop-filter: none !important
+    - --ha-card-background: none
+    - --ha-card-box-shadow: none
+    grid:
+    - padding: 12px 16px
+    - height: 100%
+    - box-sizing: border-box
+    - grid-template-areas: '"i n" "i l"'
+    - grid-template-columns: 65px 1fr
+    - grid-template-rows: auto auto
+    - align-content: center
+    - gap: 0px 12px
+    - position: relative
+    - z-index: 2
+    icon:
+    - width: 45px
+    - height: 45px
+    - color: rgb(var(--appliance-color))
+    - transform-origin: center center
+    - animation: var(--appliance-icon-anim) !important
+    - z-index: 3
+    img_cell:
+    - width: 65px
+    - height: 65px
+    - border-radius: 50%
+    - background: rgba(var(--appliance-color), 0.05) !important
+    - border: 1px solid rgba(var(--appliance-color), 0.15)
+    - position: relative
+    - overflow: visible !important
+    - justify-self: start
+    - z-index: 1
+    name:
+    - justify-self: start
+    - font-size: 15px
+    - font-weight: 500
+    - align-self: end
+    - margin-bottom: 2px
+    - position: relative
+    - z-index: 2
+    label:
+    - justify-self: start
+    - font-size: 12px
+    - opacity: 0.7
+    - align-self: start
+    - margin-top: 2px
+    - position: relative
+    - z-index: 2
+    custom_fields:
+      presence_dot:
+      - position: absolute
+      - top: 12px
+      - left: 12px
+      - width: 6px
+      - height: 6px
+      - border-radius: 50%
+      - z-index: 5
+      - transition: background-color 0.4s ease
+      badge1:
+      - position: absolute
+      - top: 10px
+      - right: 10px
+      - padding: 3px 8px
+      - font-size: 10px
+      - letter-spacing: 0.5px
+      - white-space: nowrap
+      - text-transform: uppercase
+      - font-weight: 700
+      - z-index: 5
+      - transition: all 0.5s ease
+      badge2:
+      - position: absolute
+      - top: 38px
+      - right: 10px
+      - padding: 4px 8px
+      - font-size: 10px
+      - letter-spacing: 0.5px
+      - white-space: nowrap
+      - color: var(--primary-text-color)
+      - opacity: 0.9
+      - text-transform: uppercase
+      - font-weight: 500
+      - z-index: 5
+      - transition: all 0.5s ease
+      t1:
+      - position: absolute
+      - bottom: 14px
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 0.5px
+      - line-height: 1
+      - z-index: 5
+      - transition: all 0.5s ease
+      t2:
+      - position: absolute
+      - bottom: 14px
+      - right: 10px
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 0.5px
+      - line-height: 1
+      - z-index: 5
+      - transition: all 0.5s ease
+      bar:
+      - position: absolute
+      - bottom: 0
+      - left: 0
+      - height: 3px
+      - width: var(--appliance-level)
+      - background: var(--appliance-bar-bg)
+      - box-shadow: var(--appliance-bar-shadow)
+      - transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1)
+      - z-index: 5
+  extra_styles: "[[[\n  let ent_power = variables.sensor_power;\n  let bar_mode = variables.bar_mode;\n  let max_power_w = variables.max_power_w;\n  \n  let raw_status = states[variables.sensor_status] ? states[variables.sensor_status].state : '';\n  let status = raw_status.toLowerCase();\n  \n  let state_err = variables.state_error.split(',').map(s => s.trim().toLowerCase());\n  let state_idle = variables.state_idle.split(',').map(s => s.trim().toLowerCase());\n  let state_cool = variables.state_cool.split(',').map(s => s.trim().toLowerCase());\n  let state_heat = variables.state_heat.split(',').map(s => s.trim().toLowerCase());\n  let state_dry = variables.state_dry.split(',').map(s => s.trim().toLowerCase());\n  let state_fan = variables.state_fan.split(',').map(s => s.trim().toLowerCase());\n  let state_auto = variables.state_auto.split(',').map(s => s.trim().toLowerCase());\n  let state_hc = variables.state_heat_cool.split(',').map(s => s.trim().toLowerCase());\n  \n  let is_error = state_err.includes(status);\n  let is_idle = state_idle.includes(status);\n  let is_cool = state_cool.includes(status);\n  let is_heat = state_heat.includes(status);\n  let is_dry = state_dry.includes(status);\n  let is_fan = state_fan.includes(status);\n  let is_auto = state_auto.includes(status);\n  let is_heat_cool = state_hc.includes(status);\n  \n  let attr = states[variables.sensor_status] ? states[variables.sensor_status].attributes : {};\n  \n  let ext_temp = (variables.sensor_temp && states[variables.sensor_temp]) ? parseFloat(states[variables.sensor_temp].state) : undefined;\n  let ext_hum = (variables.sensor_hum && states[variables.sensor_hum]) ? parseFloat(states[variables.sensor_hum].state) : undefined;\n  \n  let raw_temp_attr = !isNaN(parseFloat(attr.current_temperature)) ? parseFloat(attr.current_temperature) : NaN;\n  let raw_hum_attr = !isNaN(parseFloat(attr.current_humidity)) ? parseFloat(attr.current_humidity) : NaN;\n  \n  let c_t = !isNaN(ext_temp) ? ext_temp : (!isNaN(raw_temp_attr) ? raw_temp_attr : NaN);\n  let c_h = !isNaN(ext_hum) ? ext_hum : (!isNaN(raw_hum_attr) ? raw_hum_attr : NaN);\n  \n  let rt = variables.round_temp !== undefined ? variables.round_temp : 1;\n  let rh = variables.round_hum !== undefined ? variables.round_hum : 0;\n  \n  let temp_str = !isNaN(c_t) ? c_t.toFixed(rt) + '°' : '';\n  let hum_str = !isNaN(c_h) ? c_h.toFixed(rh) + '%' : '';\n\n  let temp_color_rgb = '33, 150, 243'; \n  if (variables.temp_color_red !== undefined && c_t >= variables.temp_color_red) temp_color_rgb = '244, 67, 54';\n  else if (variables.temp_color_orange !== undefined && c_t >= variables.temp_color_orange) temp_color_rgb = '255, 152, 0';\n  else if (variables.temp_color_yellow !== undefined && c_t >= variables.temp_color_yellow) temp_color_rgb = '255, 193, 7';\n  \n  let hum_color_rgb = '33, 150, 243'; \n  \n  let raw_fan = attr.fan_mode ? String(attr.fan_mode) : '';\n  let power_state = states[ent_power];\n  let raw_power = power_state ? parseFloat(power_state.state) : NaN;\n  \n  let t_single = attr.temperature;\n  let t_low = attr.target_temp_low;\n  let t_high = attr.target_temp_high;\n  let action = attr.hvac_action ? String(attr.hvac_action).toLowerCase() : '';\n  \n  let t1_text = ''; let t1_color = 'transparent'; \n  let t2_text = ''; let t2_color = 'transparent';\n  let raw_targ = 0; let t1_right = '10px';\n  \n  if (!isNaN(parseFloat(t_low)) && !isNaN(parseFloat(t_high)) && t_low !== null) {\n      t1_text = '➔ ' + t_low + '°';\n      t1_color = 'orangered';\n      t2_text = '| ' + t_high + '°';\n      t2_color = '#2196F3';\n      raw_targ = (parseFloat(t_low) + parseFloat(t_high)) / 2;\n      t1_right = `calc(5px + ${t2_text.length}ch)`;\n  } else if (!isNaN(parseFloat(t_single)) && t_single !== null) {\n      t1_text = '➔ ' + t_single + '°';\n      let t_t = parseFloat(t_single);\n      if (c_t > 0) {\n          if (t_t > c_t) t1_color = 'orangered';\n          else if (t_t < c_t) t1_color = '#2196F3';\n          else t1_color = 'var(--primary-text-color)';\n      } else {\n          if (is_heat || action === 'heating') t1_color = 'orangered';\n          else if (is_cool || action === 'cooling') t1_color = '#2196F3';\n          else t1_color = 'var(--primary-text-color)';\n      }\n      raw_targ = t_single;\n  } else {\n      raw_targ = c_t;\n  }\n  \n  let fan_text = '';\n  if (!['unknown', 'unavailable', 'none', ''].includes(raw_fan.toLowerCase())) {\n      let f = raw_fan.toLowerCase().replace(/_/g, ' ').replace(/-/g, ' ');\n      let clean_fan = '';\n      if (f === 'on') clean_fan = 'On';\n      else {\n          f = f.replace('on low', 'low').replace('low on', 'low');\n          f = f.replace('on medium', 'medium').replace('medium on', 'medium');\n          f = f.replace('on high', 'high').replace('high on', 'high');\n          f = f.replace('on med', 'med').replace('med on', 'med');\n          clean_fan = f.replace(/\\b\\w/g, c => c.toUpperCase());\n      }\n      fan_text = 'Fan: ' + clean_fan;\n  }\n  \n  let pwr_pct = 0;\n  let power_text = '';\n  \n  if (variables.show_cost && variables.sensor_cost && states[variables.sensor_cost]) {\n      let c_state = states[variables.sensor_cost];\n      let c_val = parseFloat(c_state.state);\n      let uom = c_state.attributes.unit_of_measurement || '';\n      if (!isNaN(c_val)) {\n          power_text = c_val.toFixed(2) + uom;\n          pwr_pct = variables.max_cost > 0 ? (c_val / variables.max_cost) * 100 : 50; \n      }\n  } else if (!isNaN(raw_power)) {\n      let power_w = Math.round(raw_power);\n      power_text = power_w + 'W';\n      pwr_pct = max_power_w > 0 ? (power_w / max_power_w) * 100 : 0;\n  }\n  \n  let f_pct = 50;\n  if (!['unknown', 'unavailable', 'none', ''].includes(raw_fan.toLowerCase())) {\n      let f_val = raw_fan.toLowerCase().replace(/ /g, '_');\n      if (f_val === 'off') f_pct = 0;\n      else if (!isNaN(parseFloat(f_val)) && parseFloat(f_val) > 5) f_pct = parseFloat(f_val);\n      else if (['on_low', 'low', 'quiet', 'min', '1', 'auto_low'].includes(f_val)) f_pct = 33;\n      else if (['on_medium', 'medium', 'med', '2', '3', 'auto_medium'].includes(f_val)) f_pct = 66;\n      else if (['on_high', 'high', 'max', 'turbo', '4', '5', 'auto', 'on', 'auto_high'].includes(f_val)) f_pct = 100;\n  } else {\n      f_pct = -1; \n  }\n  \n  let anim_speed = 2.5;\n  if (f_pct >= 80) anim_speed = 0.8;\n  else if (f_pct >= 50) anim_speed = 1.5;\n  \n  let fan_color = '76, 175, 80';\n  if (f_pct === -1) fan_color = 'transparent';\n  else if (f_pct === 0) fan_color = '158, 158, 158'; \n  else if (f_pct >= 80) fan_color = '244, 67, 54'; \n  else if (f_pct >= 50) fan_color = '33, 150, 243';\n  \n  let pwr_color = '76, 175, 80';\n  if (pwr_pct >= 75) pwr_color = '244, 67, 54'; \n  else if (pwr_pct >= 40) pwr_color = '255, 193, 7'; \n  \n  let progress = 0;\n  if (!is_idle && !is_error) {\n      if (bar_mode === 'power') {\n          progress = Math.max(3, Math.min(pwr_pct, 100));\n      } else if (bar_mode === 'fan' && f_pct >= 0) {\n          progress = f_pct;\n      } else if (bar_mode === 'temp' && c_t > 0) {\n          if (!isNaN(parseFloat(t_low)) && !isNaN(parseFloat(t_high)) && t_low !== null) {\n              let tl = parseFloat(t_low); let th = parseFloat(t_high);\n              if (c_t < tl) {\n                  let p = tl > 0 ? (c_t / tl) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else if (c_t > th) {\n                  let p = c_t > 0 ? (th / c_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else progress = 100;\n          } else if (!isNaN(parseFloat(raw_targ)) && raw_targ !== null) {\n              let t_t = parseFloat(raw_targ);\n              if (is_cool || action === 'cooling') {\n                  let p = c_t > 0 ? (t_t / c_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else if (is_heat || action === 'heating') {\n                  let p = t_t > 0 ? (c_t / t_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else {\n                  let p = c_t > t_t ? (c_t > 0 ? (t_t / c_t)*100 : 100) : (t_t > 0 ? (c_t / t_t)*100 : 100);\n                  progress = Math.max(3, Math.min(p, 100));\n              }\n          }\n      }\n  }\n  \n  let pres_state = (variables.sensor_presence && states[variables.sensor_presence]) ? states[variables.sensor_presence].state.toLowerCase() : 'none';\n  let pres_display = 'none';\n  let pres_bg = 'transparent';\n  let pres_shadow = 'none';\n  \n  if (pres_state !== 'none' && pres_state !== 'unavailable' && pres_state !== 'unknown') {\n      pres_display = 'block';\n      if (pres_state === 'on' || pres_state === 'home' || pres_state === 'active') {\n          pres_bg = '#F44336';\n          pres_shadow = '0 0 4px rgba(244, 67, 54, 0.8)';\n      } else {\n          pres_bg = '#9E9E9E';\n      }\n  }\n  \n  let badge1 = ''; let badge2 = ''; \n  let color = '158, 158, 158'; let icon_anim = 'none';\n  let b1_bg = 'transparent'; let b1_border = 'none'; let b1_bl = 'none'; let b1_br = 'none'; let b1_text = 'inherit';\n  let b1_shadow = 'none';\n  let b2_bg = 'transparent'; let b2_bl = 'none'; let b2_br = 'none';\n  let bar_bg = 'rgb(158, 158, 158)';\n  let bar_shadow = 'none';\n  \n  if (is_error) {\n      badge1 = '⚠️ ERROR';\n      color = '244, 67, 54';\n      b1_bg = `rgba(${color}, 0.15)`; b1_border = `1px solid rgba(${color}, 0.3)`; b1_bl = `2px solid rgb(${color})`; b1_br = b1_border; b1_text = `rgb(${color})`;\n  } else {\n      if (is_cool) { color = '33, 150, 243'; icon_anim = 'none'; }\n      else if (is_heat) { color = '255, 87, 34'; icon_anim = 'gentle-fire 3s ease-in-out infinite alternate'; }\n      else if (is_dry) { color = '255, 213, 79'; icon_anim = 'none'; }\n      else if (is_fan) { color = '0, 150, 136'; icon_anim = 'gentle-spin var(--appliance-speed) linear infinite'; }\n      else if (is_auto || is_heat_cool) { color = '158, 158, 158'; icon_anim = 'none'; }\n      \n      let s_fmt = status.replace(/_/g, ' ').replace(/-/g, ' ').replace(/\\b\\w/g, c => c.toUpperCase());\n      let b1_parts = [s_fmt];\n      if (hum_str) b1_parts.push(hum_str);\n      if (temp_str) b1_parts.push(temp_str);\n      badge1 = b1_parts.join(' • ');\n      \n      b1_text = 'var(--primary-text-color)';\n      b1_border = '1px solid rgba(128,128,128, 0.2)';\n      let has_hum = !!hum_str;\n      let has_temp = !!temp_str;\n      \n      if (has_hum && has_temp) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${hum_color_rgb}, 0.15) 50%, rgba(${temp_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${temp_color_rgb})`;\n      } else if (has_temp) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${temp_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${temp_color_rgb})`;\n      } else if (has_hum) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${hum_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${hum_color_rgb})`;\n      } else {\n          b1_bg = `linear-gradient(0deg, rgba(${color}, 0.15), rgba(${color}, 0.15))`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${color})`;\n      }\n      \n      if (is_heat_cool || is_auto) {\n          b1_bl = '2.5px solid transparent';\n          b1_shadow = 'none';\n          let border_bg = `linear-gradient(to bottom, rgb(255, 87, 34) 50%, rgb(33, 150, 243) 50%) 0 0 / 2.5px 100% no-repeat border-box border-box`;\n          let inner_bg = `${b1_bg} 0 0 / 100% 100% no-repeat padding-box padding-box`;\n          b1_bg = `${border_bg}, ${inner_bg}`;\n      }\n      \n      let b2_parts = [fan_text, power_text].filter(Boolean);\n      badge2 = b2_parts.join(' • ');\n      let has_fan = fan_text !== ''; let has_pwr = power_text !== '';\n      \n      if (has_fan && has_pwr) {\n          b2_bg = `linear-gradient(90deg, rgba(${fan_color}, 0.15) 0%, rgba(${pwr_color}, 0.15) 100%)`;\n          b2_bl = `2.5px solid rgb(${fan_color})`;\n          b2_br = `2.5px solid rgb(${pwr_color})`;\n      } else if (has_fan) {\n          b2_bg = `rgba(${fan_color}, 0.15)`;\n          b2_bl = `2px solid rgb(${fan_color})`;\n          b2_br = `1px solid rgba(128,128,128, 0.2)`;\n      } else if (has_pwr) {\n          b2_bg = `rgba(${pwr_color}, 0.15)`;\n          b2_bl = `1px solid rgba(128,128,128, 0.2)`;\n          b2_br = `2px solid rgb(${pwr_color})`;\n      }\n      \n      if (is_heat_cool || is_auto) {\n          bar_bg = 'linear-gradient(90deg, rgb(33, 150, 243) 0%, rgb(255, 87, 34) 100%)';\n          bar_shadow = '0 -1px 8px rgba(158, 158, 158, 0.4)';\n      } else {\n          bar_bg = `rgb(${color})`;\n          bar_shadow = `0 -1px 8px rgba(${color}, 0.5)`;\n      }\n  }\n  \n  return `\n    #card {\n      --appliance-color: ${color};\n      --appliance-level: ${progress}%;\n      --appliance-speed: ${anim_speed}s;\n      --appliance-bar-bg: ${bar_bg};\n      --appliance-bar-shadow: ${bar_shadow};\n      --appliance-icon-anim: ${icon_anim};\n    }\n    \n    #presence_dot {\n      display: ${pres_display};\n      background: ${pres_bg};\n      box-shadow: ${pres_shadow};\n    }\n    \n    #badge1 {\n      background: ${b1_bg};\n      color: ${b1_text};\n      border-top: ${b1_border};\n      border-bottom: ${b1_border};\n      border-left: ${b1_bl};\n      border-right: ${b1_br};\n      border-radius: 6px !important;\n      box-shadow: ${b1_shadow};\n    }\n    #badge1::before { content: \"${badge1}\"; }\n    \n    #badge2 {\n      display: ${badge2 ? 'block' : 'none'};\n      background: ${b2_bg};\n      border-top: 1px solid rgba(128,128,128, 0.2);\n      border-bottom: 1px solid rgba(128,128,128, 0.2);\n      border-left: ${b2_bl};\n      border-right: ${b2_br};\n      border-radius: 6px !important;\n    }\n    #badge2::before { content: \"${badge2}\"; }\n    \n    #t1 { color: ${t1_color}; right: ${t1_right}; }\n    #t1::before { content: \"${t1_text}\"; }\n    \n    #t2 { color: ${t2_color}; }\n    #t2::before { content: \"${t2_text}\"; }\n    \n    ${is_cool ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -15px; border-radius: 50%;\n        box-shadow: inset 8px 0 15px -5px rgba(var(--appliance-color), 0.7), 0 -8px 15px -5px rgba(var(--appliance-color), 0.5);\n        animation: frost-orbit 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -10px; border-radius: 50%;\n        box-shadow: inset -5px 0 15px -5px rgba(var(--appliance-color), 0.9);\n        animation: frost-orbit 3.5s linear infinite reverse;\n      }\n    ` : ''}\n    ${is_heat ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 150%; height: 150%; bottom: -20%; left: -25%; border-radius: 50%;\n        background: radial-gradient(circle at 50% 100%, rgba(var(--appliance-color), 0.45) 0%, transparent 65%);\n        filter: blur(4px);\n        animation: intense-updraft 3s ease-in-out infinite alternate;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 3px; height: 3px; border-radius: 50%; bottom: -5px; left: 50%;\n        background: rgba(var(--appliance-color), 0.9);\n        box-shadow: \n          15px 10px 0 1px rgba(var(--appliance-color), 0.8),\n          -20px 25px 0 0px rgba(var(--appliance-color), 0.7),\n          5px 35px 0 2px rgba(var(--appliance-color), 0.9),\n          -10px 15px 0 -1px rgba(var(--appliance-color), 0.6);\n        animation: intense-embers 2s ease-in infinite;\n      }\n    ` : ''}\n    ${is_dry ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 3px; height: 3px; border-radius: 50%; bottom: 10px; left: 50%;\n        background: rgba(var(--appliance-color), 0.7);\n        box-shadow: -12px 15px 0 1px rgba(var(--appliance-color), 0.4), 10px 25px 0 0.5px rgba(var(--appliance-color), 0.5);\n        animation: evaporate-up 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;\n      }\n    ` : ''}\n    ${is_fan ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: 0; border-radius: 50%; border: 2px solid rgba(var(--appliance-color), 0.5);\n        animation: air-ripple var(--appliance-speed) cubic-bezier(0.1, 0.5, 0.5, 1) infinite;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: 0; border-radius: 50%; border: 2px solid rgba(var(--appliance-color), 0.3);\n        animation: air-ripple var(--appliance-speed) cubic-bezier(0.1, 0.5, 0.5, 1) infinite;\n        animation-delay: calc(var(--appliance-speed) / 2);\n      }\n    ` : ''}\n    ${(is_heat_cool || is_auto) ? `\n      #img-cell {\n        background: linear-gradient(135deg, rgba(33, 150, 243, 0.15) 0%, rgba(255, 87, 34, 0.15) 100%) !important;\n        border: 1px solid rgba(158, 158, 158, 0.2) !important;\n      }\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -5px; border-radius: 50%;\n        background: \n          radial-gradient(circle at 25% 25%, rgba(33, 150, 243, 0.25) 0%, transparent 60%),\n          radial-gradient(circle at 75% 75%, rgba(255, 87, 34, 0.25) 0%, transparent 60%);\n        animation: auto-breathe 3s ease-in-out infinite alternate;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -15px; border-radius: 50%;\n        border: 2px solid transparent;\n        border-top-color: rgba(33, 150, 243, 0.4);\n        border-left-color: rgba(33, 150, 243, 0.2);\n        border-bottom-color: rgba(255, 87, 34, 0.4);\n        border-right-color: rgba(255, 87, 34, 0.2);\n        animation: auto-ripple 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;\n      }\n    ` : ''}\n    \n    @keyframes gentle-fire {\n      0%   { transform: scaleY(0.95) skewX(-1deg); color: #ff9800; filter: drop-shadow(0 0 2px rgba(255,152,0,0.4)); }\n      100% { transform: scaleY(1.05) skewX(1deg); color: #ff5722; filter: drop-shadow(0 0 5px rgba(255,87,34,0.6)); }\n    }\n    @keyframes gentle-spin {\n      0%   { transform: rotate(0deg); }\n      100% { transform: rotate(360deg); }\n    }\n    @keyframes frost-orbit {\n      0%   { transform: rotate(0deg) scale(1); }\n      50%  { transform: rotate(180deg) scale(1.05); }\n      100% { transform: rotate(360deg) scale(1); }\n    }\n    @keyframes intense-updraft {\n      0%   { transform: translateY(10px) scale(0.9); opacity: 0.5; }\n      100% { transform: translateY(-15px) scale(1.1); opacity: 1; filter: blur(6px); }\n    }\n    @keyframes intense-embers {\n      0%   { transform: translateY(0) scale(1); opacity: 0; }\n      15%  { opacity: 1; }\n      100% { transform: translateY(-55px) scale(0.3); opacity: 0; }\n    }\n    @keyframes air-ripple {\n      0%   { transform: scale(1); opacity: 0.8; }\n      100% { transform: scale(1.5); opacity: 0; }\n    }\n    @keyframes evaporate-up {\n      0%   { transform: translateY(0); opacity: 0; }\n      30%  { opacity: 1; }\n      100% { transform: translateY(-30px); opacity: 0; }\n    }\n    @keyframes auto-breathe {\n      0%   { transform: scale(0.9); opacity: 0.4; }\n      100% { transform: scale(1.1); opacity: 1; }\n    }\n    @keyframes auto-ripple {\n      0%   { transform: scale(0.7); opacity: 0.8; }\n      100% { transform: scale(1.2); opacity: 0; }\n    }\n  `;\n]]]\n"
+  triggers_update:
+  - climate.radiateur_cuisine
+  - sensor.th_cuisine_temperature
+  - sensor.th_cuisine_humidity
+  - sensor.radiateur_elec_cuisine_power
+- type: custom:streamline-card
+  template: clim_voltage_ring-tile
+  variables:
+    card_name: Rad. Cuisine (V)
+    entity: sensor.radiateur_elec_cuisine_voltage
+  grid_options:
+    columns: 6
+    rows: 3
+- type: custom:streamline-card
+  template: clim_ampere_ring-tile
+  variables:
+    card_name: Rad. Cuisine (A)
+    entity: sensor.radiateur_elec_cuisine_current
+  grid_options:
+    columns: 6
+    rows: 3
+- type: custom:tabbed-card
+  styles:
+    --mdc-theme-primary: rgb(174,68,90)
+    --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
+    max-width: 100%
+  attributes:
+    animated: true
+    swipeable: true
+  tabs:
+  - attributes:
+      label: INSTANTANÉ
+      icon: mdi:flash
+    card:
+      type: custom:streamline-card
+      template: conso_temps_reel_clim_rad
+      variables:
+        card_title: Conso. Temps Réel Radiateur Cuisine
+        energy_entity: sensor.radiateur_elec_cuisine_power
+        energy_color: rgb(168, 136, 181)
+        current_entity: sensor.radiateur_elec_cuisine_current
+        current_color: rgb(255, 41, 41)
+        avg_daily_entity: sensor.radiateur_elec_cuisine_avg_watts_quotidien
+        conso_daily_kwh_entity: sensor.radiateur_elec_cuisine_quotidien_um
+        power_entity: sensor.radiateur_elec_cuisine_power
+        power_color: rgb(168, 136, 181)
+        span_offset: +3m
+        group_duration: 1s
+  - attributes:
+      label: MENSUEL
+      icon: mdi:calendar-month
+    card:
+      type: custom:streamline-card
+      template: conso_mensuelle_clim
+      variables:
+        title: Conso. mensuel Radiateur Cuisine
+        energy_entity: sensor.radiateur_elec_cuisine_energy
+        energy_name: Conso. jours en cours
+        energy_color: rgb(168, 136, 181)
+        avg_monthly_entity: sensor.radiateur_elec_cuisine_avg_watts_mensuel
+        temp_entity: sensor.th_balcon_nord_temperature
+        temp_color: rgb(126, 24, 145)
+        conso_monthly_kwh_entity: sensor.radiateur_elec_cuisine_mensuel_um
+      card_mod:
+        style: |
+          ha-card {
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+          }
+  - attributes:
+      label: DUT
+      icon: mdi:chart-line
+    card:
+      type: custom:streamline-card
+      template: apex_dut_piece
+      variables:
+        title: D.U.T. Cuisine
+        entity_sensor: sensor.dut_radiateur_cuisine
+        color: rgb(168, 136, 181)
+        annot_text: Zone Critique
+        hours: auto
+        crit_zone: 5
+        thresh_yellow: 4
+        thresh_orange: 6
+        thresh_red: 10
+- type: heading
+  icon: mdi:fridge
+  heading_style: title
+  badges:
+  - type: entity
+    show_state: true
+    show_icon: true
+    color: amber
+    state_content:
+    - name
+    - state
+    entity: sensor.radiateur_elec_cuisine_quotidien_um
+    name: Q
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.radiateur_elec_cuisine_hebdomadaire_um
+    name: H
+    color: orange
+    state_content:
+    - name
+    - state
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.radiateur_elec_cuisine_mensuel_um
+    name: M
+    color: deep-orange
+    state_content:
+    - name
+    - state
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.radiateur_elec_cuisine_annuel_um
+    name: A
+    color: red
+    state_content:
+    - name
+    - state
+  layout_options:
+    grid_columns: full
+    grid_rows: 1
+  card_mod:
+    style: |
+      ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        margin: -22px 0px 0px 0px;
+      }
+- type: conditional
+  conditions: []
+  card:
+    type: custom:stack-in-card
+    mode: vertical
+    cards:
+    - type: horizontal-stack
+      cards:
+      - type: custom:mod-card
+        card_mod:
+          style:
+            .: |
+              :host {
+                --text-divider-color: white;
+                --text-divider-line-size: 5px;
+              }
+        card:
+          type: custom:text-divider-row
+          text: BUREAU
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+- type: heading
+  icon: mdi:desktop-tower-monitor
+  heading_style: title
+  badges:
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: climate.clim_bureau_rm4_mini
+    color: state
+    tap_action:
+      action: more-info
+    icon: mdi:thermometer
+    state_content:
+    - name
+    - temperature
+    name: Réglé à
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.th_bureau_temperature
+    color: green
+    name: Bureau
+    state_content:
+    - name
+    - state
+  layout_options:
+    grid_columns: full
+    grid_rows: 1
+  heading: BUREAU
+  card_mod:
+    style: |
+      ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        margin: -22px 0px 0px 0px;
+      }
+- type: custom:button-card
+  entity: climate.clim_bureau_rm4_mini
+  name: Clim Bureau
+  show_state: false
+  show_label: true
+  variables:
+    sensor_status: climate.clim_bureau_rm4_mini
+    sensor_temp: sensor.th_bureau_temperature
+    round_temp: 1
+    sensor_hum: sensor.th_bureau_humidity
+    round_hum: 0
+    temp_color_yellow: 24
+    temp_color_orange: 28
+    temp_color_red: 32
+    state_error: unavailable, unknown
+    state_idle: idle, off, standby
+    state_auto: auto
+    state_heat: heat, heating
+    state_cool: cool, cooling
+    state_heat_cool: heat_cool
+    state_dry: dry, drying, dehumidify
+    state_fan: fan, fan_only, ventilation
+    sensor_presence: ''
+    sensor_power: sensor.clim_bureau_nous_power
+    sensor_cost: ''
+    show_cost: false
+    bar_mode: temp
+    max_cost: 10
+    max_power_w: 1500
+  tap_action:
+    action: more-info
+  label: |
+    [[[
+      if (!entity || !entity.state) return 'Entity Setup Required';
+      let st = entity.state;
+      let err = (variables.state_error || 'unavailable, unknown').split(',').map(s => s.trim().toLowerCase());
+      if (err.includes(st.toLowerCase())) return 'Check Configuration';
+      return st.replace(/_/g, ' ').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    ]]]
+  icon: "[[[\n  if (!entity || !entity.state) return 'mdi:alert-circle-outline';\n  let st = entity.state.toLowerCase();\n  let err = variables.state_error.split(',').map(s => s.trim().toLowerCase());\n  let cool = variables.state_cool.split(',').map(s => s.trim().toLowerCase());\n  let heat = variables.state_heat.split(',').map(s => s.trim().toLowerCase());\n  let dry = variables.state_dry.split(',').map(s => s.trim().toLowerCase());\n  let fan = variables.state_fan.split(',').map(s => s.trim().toLowerCase());\n  let auto = variables.state_auto.split(',').map(s => s.trim().toLowerCase());\n  let hc = variables.state_heat_cool.split(',').map(s => s.trim().toLowerCase());\n  \n  if (err.includes(st)) return 'mdi:alert-circle-outline';\n  if (cool.includes(st)) return 'mdi:snowflake';\n  if (heat.includes(st)) return 'mdi:fire';\n  if (dry.includes(st)) return 'mdi:water-percent';\n  if (fan.includes(st)) return 'mdi:fan';\n  if (auto.includes(st) || hc.includes(st)) return 'mdi:thermostat-auto';\n  return 'mdi:thermostat';\n]]]\n"
+  custom_fields:
+    badge1: ' '
+    badge2: ' '
+    t1: ' '
+    t2: ' '
+    bar: ' '
+    presence_dot: ' '
+  styles:
+    card:
+    - height: 95px !important
+    - padding: 0px !important
+    - overflow: hidden
+    - position: relative
+    - background: none !important
+    - box-shadow: none !important
+    - border: none !important
+    - backdrop-filter: none !important
+    - --ha-card-background: none
+    - --ha-card-box-shadow: none
+    grid:
+    - padding: 12px 16px
+    - height: 100%
+    - box-sizing: border-box
+    - grid-template-areas: '"i n" "i l"'
+    - grid-template-columns: 65px 1fr
+    - grid-template-rows: auto auto
+    - align-content: center
+    - gap: 0px 12px
+    - position: relative
+    - z-index: 2
+    icon:
+    - width: 45px
+    - height: 45px
+    - color: rgb(var(--appliance-color))
+    - transform-origin: center center
+    - animation: var(--appliance-icon-anim) !important
+    - z-index: 3
+    img_cell:
+    - width: 65px
+    - height: 65px
+    - border-radius: 50%
+    - background: rgba(var(--appliance-color), 0.05) !important
+    - border: 1px solid rgba(var(--appliance-color), 0.15)
+    - position: relative
+    - overflow: visible !important
+    - justify-self: start
+    - z-index: 1
+    name:
+    - justify-self: start
+    - font-size: 15px
+    - font-weight: 500
+    - align-self: end
+    - margin-bottom: 2px
+    - position: relative
+    - z-index: 2
+    label:
+    - justify-self: start
+    - font-size: 12px
+    - opacity: 0.7
+    - align-self: start
+    - margin-top: 2px
+    - position: relative
+    - z-index: 2
+    custom_fields:
+      presence_dot:
+      - position: absolute
+      - top: 12px
+      - left: 12px
+      - width: 6px
+      - height: 6px
+      - border-radius: 50%
+      - z-index: 5
+      - transition: background-color 0.4s ease
+      badge1:
+      - position: absolute
+      - top: 10px
+      - right: 10px
+      - padding: 3px 8px
+      - font-size: 10px
+      - letter-spacing: 0.5px
+      - white-space: nowrap
+      - text-transform: uppercase
+      - font-weight: 700
+      - z-index: 5
+      - transition: all 0.5s ease
+      badge2:
+      - position: absolute
+      - top: 38px
+      - right: 10px
+      - padding: 4px 8px
+      - font-size: 10px
+      - letter-spacing: 0.5px
+      - white-space: nowrap
+      - color: var(--primary-text-color)
+      - opacity: 0.9
+      - text-transform: uppercase
+      - font-weight: 500
+      - z-index: 5
+      - transition: all 0.5s ease
+      t1:
+      - position: absolute
+      - bottom: 14px
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 0.5px
+      - line-height: 1
+      - z-index: 5
+      - transition: all 0.5s ease
+      t2:
+      - position: absolute
+      - bottom: 14px
+      - right: 10px
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 0.5px
+      - line-height: 1
+      - z-index: 5
+      - transition: all 0.5s ease
+      bar:
+      - position: absolute
+      - bottom: 0
+      - left: 0
+      - height: 3px
+      - width: var(--appliance-level)
+      - background: var(--appliance-bar-bg)
+      - box-shadow: var(--appliance-bar-shadow)
+      - transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1)
+      - z-index: 5
+  extra_styles: "[[[\n  let ent_power = variables.sensor_power;\n  let bar_mode = variables.bar_mode;\n  let max_power_w = variables.max_power_w;\n  \n  let raw_status = states[variables.sensor_status] ? states[variables.sensor_status].state : '';\n  let status = raw_status.toLowerCase();\n  \n  let state_err = variables.state_error.split(',').map(s => s.trim().toLowerCase());\n  let state_idle = variables.state_idle.split(',').map(s => s.trim().toLowerCase());\n  let state_cool = variables.state_cool.split(',').map(s => s.trim().toLowerCase());\n  let state_heat = variables.state_heat.split(',').map(s => s.trim().toLowerCase());\n  let state_dry = variables.state_dry.split(',').map(s => s.trim().toLowerCase());\n  let state_fan = variables.state_fan.split(',').map(s => s.trim().toLowerCase());\n  let state_auto = variables.state_auto.split(',').map(s => s.trim().toLowerCase());\n  let state_hc = variables.state_heat_cool.split(',').map(s => s.trim().toLowerCase());\n  \n  let is_error = state_err.includes(status);\n  let is_idle = state_idle.includes(status);\n  let is_cool = state_cool.includes(status);\n  let is_heat = state_heat.includes(status);\n  let is_dry = state_dry.includes(status);\n  let is_fan = state_fan.includes(status);\n  let is_auto = state_auto.includes(status);\n  let is_heat_cool = state_hc.includes(status);\n  \n  let attr = states[variables.sensor_status] ? states[variables.sensor_status].attributes : {};\n  \n  let ext_temp = (variables.sensor_temp && states[variables.sensor_temp]) ? parseFloat(states[variables.sensor_temp].state) : undefined;\n  let ext_hum = (variables.sensor_hum && states[variables.sensor_hum]) ? parseFloat(states[variables.sensor_hum].state) : undefined;\n  \n  let raw_temp_attr = !isNaN(parseFloat(attr.current_temperature)) ? parseFloat(attr.current_temperature) : NaN;\n  let raw_hum_attr = !isNaN(parseFloat(attr.current_humidity)) ? parseFloat(attr.current_humidity) : NaN;\n  \n  let c_t = !isNaN(ext_temp) ? ext_temp : (!isNaN(raw_temp_attr) ? raw_temp_attr : NaN);\n  let c_h = !isNaN(ext_hum) ? ext_hum : (!isNaN(raw_hum_attr) ? raw_hum_attr : NaN);\n  \n  let rt = variables.round_temp !== undefined ? variables.round_temp : 1;\n  let rh = variables.round_hum !== undefined ? variables.round_hum : 0;\n  \n  let temp_str = !isNaN(c_t) ? c_t.toFixed(rt) + '°' : '';\n  let hum_str = !isNaN(c_h) ? c_h.toFixed(rh) + '%' : '';\n\n  let temp_color_rgb = '33, 150, 243'; \n  if (variables.temp_color_red !== undefined && c_t >= variables.temp_color_red) temp_color_rgb = '244, 67, 54';\n  else if (variables.temp_color_orange !== undefined && c_t >= variables.temp_color_orange) temp_color_rgb = '255, 152, 0';\n  else if (variables.temp_color_yellow !== undefined && c_t >= variables.temp_color_yellow) temp_color_rgb = '255, 193, 7';\n  \n  let hum_color_rgb = '33, 150, 243'; \n  \n  let raw_fan = attr.fan_mode ? String(attr.fan_mode) : '';\n  let power_state = states[ent_power];\n  let raw_power = power_state ? parseFloat(power_state.state) : NaN;\n  \n  let t_single = attr.temperature;\n  let t_low = attr.target_temp_low;\n  let t_high = attr.target_temp_high;\n  let action = attr.hvac_action ? String(attr.hvac_action).toLowerCase() : '';\n  \n  let t1_text = ''; let t1_color = 'transparent'; \n  let t2_text = ''; let t2_color = 'transparent';\n  let raw_targ = 0; let t1_right = '10px';\n  \n  if (!isNaN(parseFloat(t_low)) && !isNaN(parseFloat(t_high)) && t_low !== null) {\n      t1_text = '➔ ' + t_low + '°';\n      t1_color = 'orangered';\n      t2_text = '| ' + t_high + '°';\n      t2_color = '#2196F3';\n      raw_targ = (parseFloat(t_low) + parseFloat(t_high)) / 2;\n      t1_right = `calc(5px + ${t2_text.length}ch)`;\n  } else if (!isNaN(parseFloat(t_single)) && t_single !== null) {\n      t1_text = '➔ ' + t_single + '°';\n      let t_t = parseFloat(t_single);\n      if (c_t > 0) {\n          if (t_t > c_t) t1_color = 'orangered';\n          else if (t_t < c_t) t1_color = '#2196F3';\n          else t1_color = 'var(--primary-text-color)';\n      } else {\n          if (is_heat || action === 'heating') t1_color = 'orangered';\n          else if (is_cool || action === 'cooling') t1_color = '#2196F3';\n          else t1_color = 'var(--primary-text-color)';\n      }\n      raw_targ = t_single;\n  } else {\n      raw_targ = c_t;\n  }\n  \n  let fan_text = '';\n  if (!['unknown', 'unavailable', 'none', ''].includes(raw_fan.toLowerCase())) {\n      let f = raw_fan.toLowerCase().replace(/_/g, ' ').replace(/-/g, ' ');\n      let clean_fan = '';\n      if (f === 'on') clean_fan = 'On';\n      else {\n          f = f.replace('on low', 'low').replace('low on', 'low');\n          f = f.replace('on medium', 'medium').replace('medium on', 'medium');\n          f = f.replace('on high', 'high').replace('high on', 'high');\n          f = f.replace('on med', 'med').replace('med on', 'med');\n          clean_fan = f.replace(/\\b\\w/g, c => c.toUpperCase());\n      }\n      fan_text = 'Fan: ' + clean_fan;\n  }\n  \n  let pwr_pct = 0;\n  let power_text = '';\n  \n  if (variables.show_cost && variables.sensor_cost && states[variables.sensor_cost]) {\n      let c_state = states[variables.sensor_cost];\n      let c_val = parseFloat(c_state.state);\n      let uom = c_state.attributes.unit_of_measurement || '';\n      if (!isNaN(c_val)) {\n          power_text = c_val.toFixed(2) + uom;\n          pwr_pct = variables.max_cost > 0 ? (c_val / variables.max_cost) * 100 : 50; \n      }\n  } else if (!isNaN(raw_power)) {\n      let power_w = Math.round(raw_power);\n      power_text = power_w + 'W';\n      pwr_pct = max_power_w > 0 ? (power_w / max_power_w) * 100 : 0;\n  }\n  \n  let f_pct = 50;\n  if (!['unknown', 'unavailable', 'none', ''].includes(raw_fan.toLowerCase())) {\n      let f_val = raw_fan.toLowerCase().replace(/ /g, '_');\n      if (f_val === 'off') f_pct = 0;\n      else if (!isNaN(parseFloat(f_val)) && parseFloat(f_val) > 5) f_pct = parseFloat(f_val);\n      else if (['on_low', 'low', 'quiet', 'min', '1', 'auto_low'].includes(f_val)) f_pct = 33;\n      else if (['on_medium', 'medium', 'med', '2', '3', 'auto_medium'].includes(f_val)) f_pct = 66;\n      else if (['on_high', 'high', 'max', 'turbo', '4', '5', 'auto', 'on', 'auto_high'].includes(f_val)) f_pct = 100;\n  } else {\n      f_pct = -1; \n  }\n  \n  let anim_speed = 2.5;\n  if (f_pct >= 80) anim_speed = 0.8;\n  else if (f_pct >= 50) anim_speed = 1.5;\n  \n  let fan_color = '76, 175, 80';\n  if (f_pct === -1) fan_color = 'transparent';\n  else if (f_pct === 0) fan_color = '158, 158, 158'; \n  else if (f_pct >= 80) fan_color = '244, 67, 54'; \n  else if (f_pct >= 50) fan_color = '33, 150, 243';\n  \n  let pwr_color = '76, 175, 80';\n  if (pwr_pct >= 75) pwr_color = '244, 67, 54'; \n  else if (pwr_pct >= 40) pwr_color = '255, 193, 7'; \n  \n  let progress = 0;\n  if (!is_idle && !is_error) {\n      if (bar_mode === 'power') {\n          progress = Math.max(3, Math.min(pwr_pct, 100));\n      } else if (bar_mode === 'fan' && f_pct >= 0) {\n          progress = f_pct;\n      } else if (bar_mode === 'temp' && c_t > 0) {\n          if (!isNaN(parseFloat(t_low)) && !isNaN(parseFloat(t_high)) && t_low !== null) {\n              let tl = parseFloat(t_low); let th = parseFloat(t_high);\n              if (c_t < tl) {\n                  let p = tl > 0 ? (c_t / tl) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else if (c_t > th) {\n                  let p = c_t > 0 ? (th / c_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else progress = 100;\n          } else if (!isNaN(parseFloat(raw_targ)) && raw_targ !== null) {\n              let t_t = parseFloat(raw_targ);\n              if (is_cool || action === 'cooling') {\n                  let p = c_t > 0 ? (t_t / c_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else if (is_heat || action === 'heating') {\n                  let p = t_t > 0 ? (c_t / t_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else {\n                  let p = c_t > t_t ? (c_t > 0 ? (t_t / c_t)*100 : 100) : (t_t > 0 ? (c_t / t_t)*100 : 100);\n                  progress = Math.max(3, Math.min(p, 100));\n              }\n          }\n      }\n  }\n  \n  let pres_state = (variables.sensor_presence && states[variables.sensor_presence]) ? states[variables.sensor_presence].state.toLowerCase() : 'none';\n  let pres_display = 'none';\n  let pres_bg = 'transparent';\n  let pres_shadow = 'none';\n  \n  if (pres_state !== 'none' && pres_state !== 'unavailable' && pres_state !== 'unknown') {\n      pres_display = 'block';\n      if (pres_state === 'on' || pres_state === 'home' || pres_state === 'active') {\n          pres_bg = '#F44336';\n          pres_shadow = '0 0 4px rgba(244, 67, 54, 0.8)';\n      } else {\n          pres_bg = '#9E9E9E';\n      }\n  }\n  \n  let badge1 = ''; let badge2 = ''; \n  let color = '158, 158, 158'; let icon_anim = 'none';\n  let b1_bg = 'transparent'; let b1_border = 'none'; let b1_bl = 'none'; let b1_br = 'none'; let b1_text = 'inherit';\n  let b1_shadow = 'none';\n  let b2_bg = 'transparent'; let b2_bl = 'none'; let b2_br = 'none';\n  let bar_bg = 'rgb(158, 158, 158)';\n  let bar_shadow = 'none';\n  \n  if (is_error) {\n      badge1 = '⚠️ ERROR';\n      color = '244, 67, 54';\n      b1_bg = `rgba(${color}, 0.15)`; b1_border = `1px solid rgba(${color}, 0.3)`; b1_bl = `2px solid rgb(${color})`; b1_br = b1_border; b1_text = `rgb(${color})`;\n  } else {\n      if (is_cool) { color = '33, 150, 243'; icon_anim = 'none'; }\n      else if (is_heat) { color = '255, 87, 34'; icon_anim = 'gentle-fire 3s ease-in-out infinite alternate'; }\n      else if (is_dry) { color = '255, 213, 79'; icon_anim = 'none'; }\n      else if (is_fan) { color = '0, 150, 136'; icon_anim = 'gentle-spin var(--appliance-speed) linear infinite'; }\n      else if (is_auto || is_heat_cool) { color = '158, 158, 158'; icon_anim = 'none'; }\n      \n      let s_fmt = status.replace(/_/g, ' ').replace(/-/g, ' ').replace(/\\b\\w/g, c => c.toUpperCase());\n      let b1_parts = [s_fmt];\n      if (hum_str) b1_parts.push(hum_str);\n      if (temp_str) b1_parts.push(temp_str);\n      badge1 = b1_parts.join(' • ');\n      \n      b1_text = 'var(--primary-text-color)';\n      b1_border = '1px solid rgba(128,128,128, 0.2)';\n      let has_hum = !!hum_str;\n      let has_temp = !!temp_str;\n      \n      if (has_hum && has_temp) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${hum_color_rgb}, 0.15) 50%, rgba(${temp_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${temp_color_rgb})`;\n      } else if (has_temp) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${temp_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${temp_color_rgb})`;\n      } else if (has_hum) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${hum_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${hum_color_rgb})`;\n      } else {\n          b1_bg = `linear-gradient(0deg, rgba(${color}, 0.15), rgba(${color}, 0.15))`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${color})`;\n      }\n      \n      if (is_heat_cool || is_auto) {\n          b1_bl = '2.5px solid transparent';\n          b1_shadow = 'none';\n          let border_bg = `linear-gradient(to bottom, rgb(255, 87, 34) 50%, rgb(33, 150, 243) 50%) 0 0 / 2.5px 100% no-repeat border-box border-box`;\n          let inner_bg = `${b1_bg} 0 0 / 100% 100% no-repeat padding-box padding-box`;\n          b1_bg = `${border_bg}, ${inner_bg}`;\n      }\n      \n      let b2_parts = [fan_text, power_text].filter(Boolean);\n      badge2 = b2_parts.join(' • ');\n      let has_fan = fan_text !== ''; let has_pwr = power_text !== '';\n      \n      if (has_fan && has_pwr) {\n          b2_bg = `linear-gradient(90deg, rgba(${fan_color}, 0.15) 0%, rgba(${pwr_color}, 0.15) 100%)`;\n          b2_bl = `2.5px solid rgb(${fan_color})`;\n          b2_br = `2.5px solid rgb(${pwr_color})`;\n      } else if (has_fan) {\n          b2_bg = `rgba(${fan_color}, 0.15)`;\n          b2_bl = `2px solid rgb(${fan_color})`;\n          b2_br = `1px solid rgba(128,128,128, 0.2)`;\n      } else if (has_pwr) {\n          b2_bg = `rgba(${pwr_color}, 0.15)`;\n          b2_bl = `1px solid rgba(128,128,128, 0.2)`;\n          b2_br = `2px solid rgb(${pwr_color})`;\n      }\n      \n      if (is_heat_cool || is_auto) {\n          bar_bg = 'linear-gradient(90deg, rgb(33, 150, 243) 0%, rgb(255, 87, 34) 100%)';\n          bar_shadow = '0 -1px 8px rgba(158, 158, 158, 0.4)';\n      } else {\n          bar_bg = `rgb(${color})`;\n          bar_shadow = `0 -1px 8px rgba(${color}, 0.5)`;\n      }\n  }\n  \n  return `\n    #card {\n      --appliance-color: ${color};\n      --appliance-level: ${progress}%;\n      --appliance-speed: ${anim_speed}s;\n      --appliance-bar-bg: ${bar_bg};\n      --appliance-bar-shadow: ${bar_shadow};\n      --appliance-icon-anim: ${icon_anim};\n    }\n    \n    #presence_dot {\n      display: ${pres_display};\n      background: ${pres_bg};\n      box-shadow: ${pres_shadow};\n    }\n    \n    #badge1 {\n      background: ${b1_bg};\n      color: ${b1_text};\n      border-top: ${b1_border};\n      border-bottom: ${b1_border};\n      border-left: ${b1_bl};\n      border-right: ${b1_br};\n      border-radius: 6px !important;\n      box-shadow: ${b1_shadow};\n    }\n    #badge1::before { content: \"${badge1}\"; }\n    \n    #badge2 {\n      display: ${badge2 ? 'block' : 'none'};\n      background: ${b2_bg};\n      border-top: 1px solid rgba(128,128,128, 0.2);\n      border-bottom: 1px solid rgba(128,128,128, 0.2);\n      border-left: ${b2_bl};\n      border-right: ${b2_br};\n      border-radius: 6px !important;\n    }\n    #badge2::before { content: \"${badge2}\"; }\n    \n    #t1 { color: ${t1_color}; right: ${t1_right}; }\n    #t1::before { content: \"${t1_text}\"; }\n    \n    #t2 { color: ${t2_color}; }\n    #t2::before { content: \"${t2_text}\"; }\n    \n    ${is_cool ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -15px; border-radius: 50%;\n        box-shadow: inset 8px 0 15px -5px rgba(var(--appliance-color), 0.7), 0 -8px 15px -5px rgba(var(--appliance-color), 0.5);\n        animation: frost-orbit 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -10px; border-radius: 50%;\n        box-shadow: inset -5px 0 15px -5px rgba(var(--appliance-color), 0.9);\n        animation: frost-orbit 3.5s linear infinite reverse;\n      }\n    ` : ''}\n    ${is_heat ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 150%; height: 150%; bottom: -20%; left: -25%; border-radius: 50%;\n        background: radial-gradient(circle at 50% 100%, rgba(var(--appliance-color), 0.45) 0%, transparent 65%);\n        filter: blur(4px);\n        animation: intense-updraft 3s ease-in-out infinite alternate;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 3px; height: 3px; border-radius: 50%; bottom: -5px; left: 50%;\n        background: rgba(var(--appliance-color), 0.9);\n        box-shadow: \n          15px 10px 0 1px rgba(var(--appliance-color), 0.8),\n          -20px 25px 0 0px rgba(var(--appliance-color), 0.7),\n          5px 35px 0 2px rgba(var(--appliance-color), 0.9),\n          -10px 15px 0 -1px rgba(var(--appliance-color), 0.6);\n        animation: intense-embers 2s ease-in infinite;\n      }\n    ` : ''}\n    ${is_dry ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 3px; height: 3px; border-radius: 50%; bottom: 10px; left: 50%;\n        background: rgba(var(--appliance-color), 0.7);\n        box-shadow: -12px 15px 0 1px rgba(var(--appliance-color), 0.4), 10px 25px 0 0.5px rgba(var(--appliance-color), 0.5);\n        animation: evaporate-up 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;\n      }\n    ` : ''}\n    ${is_fan ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: 0; border-radius: 50%; border: 2px solid rgba(var(--appliance-color), 0.5);\n        animation: air-ripple var(--appliance-speed) cubic-bezier(0.1, 0.5, 0.5, 1) infinite;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: 0; border-radius: 50%; border: 2px solid rgba(var(--appliance-color), 0.3);\n        animation: air-ripple var(--appliance-speed) cubic-bezier(0.1, 0.5, 0.5, 1) infinite;\n        animation-delay: calc(var(--appliance-speed) / 2);\n      }\n    ` : ''}\n    ${(is_heat_cool || is_auto) ? `\n      #img-cell {\n        background: linear-gradient(135deg, rgba(33, 150, 243, 0.15) 0%, rgba(255, 87, 34, 0.15) 100%) !important;\n        border: 1px solid rgba(158, 158, 158, 0.2) !important;\n      }\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -5px; border-radius: 50%;\n        background: \n          radial-gradient(circle at 25% 25%, rgba(33, 150, 243, 0.25) 0%, transparent 60%),\n          radial-gradient(circle at 75% 75%, rgba(255, 87, 34, 0.25) 0%, transparent 60%);\n        animation: auto-breathe 3s ease-in-out infinite alternate;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -15px; border-radius: 50%;\n        border: 2px solid transparent;\n        border-top-color: rgba(33, 150, 243, 0.4);\n        border-left-color: rgba(33, 150, 243, 0.2);\n        border-bottom-color: rgba(255, 87, 34, 0.4);\n        border-right-color: rgba(255, 87, 34, 0.2);\n        animation: auto-ripple 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;\n      }\n    ` : ''}\n    \n    @keyframes gentle-fire {\n      0%   { transform: scaleY(0.95) skewX(-1deg); color: #ff9800; filter: drop-shadow(0 0 2px rgba(255,152,0,0.4)); }\n      100% { transform: scaleY(1.05) skewX(1deg); color: #ff5722; filter: drop-shadow(0 0 5px rgba(255,87,34,0.6)); }\n    }\n    @keyframes gentle-spin {\n      0%   { transform: rotate(0deg); }\n      100% { transform: rotate(360deg); }\n    }\n    @keyframes frost-orbit {\n      0%   { transform: rotate(0deg) scale(1); }\n      50%  { transform: rotate(180deg) scale(1.05); }\n      100% { transform: rotate(360deg) scale(1); }\n    }\n    @keyframes intense-updraft {\n      0%   { transform: translateY(10px) scale(0.9); opacity: 0.5; }\n      100% { transform: translateY(-15px) scale(1.1); opacity: 1; filter: blur(6px); }\n    }\n    @keyframes intense-embers {\n      0%   { transform: translateY(0) scale(1); opacity: 0; }\n      15%  { opacity: 1; }\n      100% { transform: translateY(-55px) scale(0.3); opacity: 0; }\n    }\n    @keyframes air-ripple {\n      0%   { transform: scale(1); opacity: 0.8; }\n      100% { transform: scale(1.5); opacity: 0; }\n    }\n    @keyframes evaporate-up {\n      0%   { transform: translateY(0); opacity: 0; }\n      30%  { opacity: 1; }\n      100% { transform: translateY(-30px); opacity: 0; }\n    }\n    @keyframes auto-breathe {\n      0%   { transform: scale(0.9); opacity: 0.4; }\n      100% { transform: scale(1.1); opacity: 1; }\n    }\n    @keyframes auto-ripple {\n      0%   { transform: scale(0.7); opacity: 0.8; }\n      100% { transform: scale(1.2); opacity: 0; }\n    }\n  `;\n]]]\n"
+  triggers_update:
+  - climate.clim_bureau_rm4_mini
+  - sensor.th_bureau_temperature
+  - sensor.th_bureau_humidity
+  - sensor.clim_bureau_nous_power
+- type: custom:streamline-card
+  template: clim_voltage_ring-tile
+  variables:
+    card_name: Clim. Bureau (V)
+    entity: sensor.clim_bureau_nous_voltage
+  grid_options:
+    columns: 6
+    rows: 3
+- type: custom:streamline-card
+  template: clim_ampere_ring-tile
+  variables:
+    card_name: Clim. Bureau (A)
+    entity: sensor.clim_bureau_nous_current
+  grid_options:
+    columns: 6
+    rows: 3
+- type: custom:tabbed-card
+  styles:
+    --mdc-theme-primary: rgb(174,68,90)
+    --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
+    max-width: 100%
+  attributes:
+    animated: true
+    swipeable: true
+  tabs:
+  - attributes:
+      label: INSTANTANÉ
+      icon: mdi:flash
+    card:
+      type: custom:streamline-card
+      template: conso_temps_reel_clim_rad
+      variables:
+        card_title: Conso. Temps Réel Clim. Bureau
+        energy_entity: sensor.clim_bureau_nous_power
+        energy_color: orange
+        current_entity: sensor.clim_bureau_nous_current
+        current_color: rgb(255, 41, 41)
+        avg_daily_entity: sensor.clim_bureau_avg_watts_quotidien
+        conso_daily_kwh_entity: sensor.clim_bureau_quotidien_um
+        power_entity: sensor.clim_bureau_nous_power
+        power_color: orange
+        span_offset: +3m
+        group_duration: 1s
+  - attributes:
+      label: MENSUEL
+      icon: mdi:calendar-month
+    card:
+      type: custom:streamline-card
+      template: conso_mensuelle_clim
+      variables:
+        title: Conso. mensuel Clim Bureau
+        energy_entity: sensor.clim_bureau_nous_energy
+        energy_name: Conso. jours en cours
+        energy_color: orange
+        avg_monthly_entity: sensor.clim_bureau_avg_watts_mensuel
+        temp_entity: sensor.th_balcon_nord_temperature
+        temp_color: rgb(126, 24, 145)
+        conso_monthly_kwh_entity: sensor.clim_bureau_mensuel_um
+      card_mod:
+        style: |
+          ha-card {
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+          }
+  - attributes:
+      label: DUT
+      icon: mdi:chart-line
+    card:
+      type: custom:streamline-card
+      template: apex_dut_piece
+      variables:
+        title: D.U.T. Bureau
+        entity_sensor: sensor.dut_clim_bureau
+        color: orange
+        annot_text: Zone Critique
+        hours: auto
+        crit_zone: 5
+        thresh_yellow: 4
+        thresh_orange: 6
+        thresh_red: 10
+- type: heading
+  icon: mdi:desktop-tower-monitor
+  heading_style: title
+  badges:
+  - type: entity
+    show_state: true
+    show_icon: true
+    color: amber
+    state_content:
+    - name
+    - state
+    entity: sensor.clim_bureau_quotidien_um
+    name: Q
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.clim_bureau_hebdomadaire_um
+    name: H
+    color: orange
+    state_content:
+    - name
+    - state
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.clim_bureau_mensuel_um
+    name: M
+    color: deep-orange
+    state_content:
+    - name
+    - state
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.clim_bureau_annuel_um
+    name: A
+    color: red
+    state_content:
+    - name
+    - state
+  layout_options:
+    grid_columns: full
+    grid_rows: 1
+  card_mod:
+    style: |
+      ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        margin: -22px 0px 0px 0px;
+      }
+- type: conditional
+  conditions: []
+  card:
+    type: custom:stack-in-card
+    mode: vertical
+    cards:
+    - type: horizontal-stack
+      cards:
+      - type: custom:mod-card
+        card_mod:
+          style:
+            .: |
+              :host {
+                --text-divider-color: white;
+                --text-divider-line-size: 5px;
+              }
+        card:
+          type: custom:text-divider-row
+          text: SALLE DE BAIN
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+- type: heading
+  icon: hue:room-bathroom
+  heading: SALLE DE BAIN
+  heading_style: title
+  badges:
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: climate.soufflant_salle_de_bain
+    icon: mdi:power
+    color: state
+    tap_action:
+      action: more-info
+    state_content:
+    - name
+    - temperature
+    name: Réglé à
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.th_salle_de_bain_temperature
+    color: green
+    state_content:
+    - name
+    - state
+    name:
+      type: area
+  card_mod:
+    style: |
+      ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        margin: -20px 0px 0px 0px;
+      }
+- card_mod:
+    style: |
+      ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+      }
+  type: custom:stack-in-card
+  mode: vertical
+  keep:
+    box_shadow: false
+    margin: false
+    border_radius: false
+    background: false
+    outer_padding: false
+  cards:
+  - type: horizontal-stack
+    cards:
+    - type: custom:mod-card
+      card_mod:
+        style:
+          .: |
+            :host {
+              --text-divider-color: white;
+              --text-divider-line-size: 5px;
+            }
+      card:
+        type: custom:text-divider-row
+        text: Soufflant de la Salle de Bain
+- type: custom:button-card
+  entity: climate.soufflant_salle_de_bain
+  name: Clim Salle de Bain
+  show_state: false
+  show_label: true
+  variables:
+    sensor_status: climate.soufflant_salle_de_bain
+    sensor_temp: sensor.th_salle_de_bain_temperature
+    round_temp: 1
+    sensor_hum: sensor.th_salle_de_bain_humidity
+    round_hum: 0
+    temp_color_yellow: 24
+    temp_color_orange: 27
+    temp_color_red: 30
+    state_error: unavailable, unknown
+    state_idle: idle, off, standby
+    state_auto: auto
+    state_heat: heat, heating
+    state_cool: cool, cooling
+    state_heat_cool: heat_cool
+    state_dry: dry, drying, dehumidify
+    state_fan: fan, fan_only, ventilation
+    sensor_presence: ''
+    sensor_power: sensor.prise_soufflant_salle_de_bain_nous_power
+    sensor_cost: ''
+    show_cost: false
+    bar_mode: temp
+    max_cost: 10
+    max_power_w: 100
+  tap_action:
+    action: more-info
+  label: |
+    [[[
+      if (!entity || !entity.state) return 'Entity Setup Required';
+      let st = entity.state;
+      let err = (variables.state_error || 'unavailable, unknown').split(',').map(s => s.trim().toLowerCase());
+      if (err.includes(st.toLowerCase())) return 'Check Configuration';
+      return st.replace(/_/g, ' ').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    ]]]
+  icon: "[[[\n  if (!entity || !entity.state) return 'mdi:alert-circle-outline';\n  let st = entity.state.toLowerCase();\n  let err = variables.state_error.split(',').map(s => s.trim().toLowerCase());\n  let cool = variables.state_cool.split(',').map(s => s.trim().toLowerCase());\n  let heat = variables.state_heat.split(',').map(s => s.trim().toLowerCase());\n  let dry = variables.state_dry.split(',').map(s => s.trim().toLowerCase());\n  let fan = variables.state_fan.split(',').map(s => s.trim().toLowerCase());\n  let auto = variables.state_auto.split(',').map(s => s.trim().toLowerCase());\n  let hc = variables.state_heat_cool.split(',').map(s => s.trim().toLowerCase());\n  \n  if (err.includes(st)) return 'mdi:alert-circle-outline';\n  if (cool.includes(st)) return 'mdi:snowflake';\n  if (heat.includes(st)) return 'mdi:fire';\n  if (dry.includes(st)) return 'mdi:water-percent';\n  if (fan.includes(st)) return 'mdi:fan';\n  if (auto.includes(st) || hc.includes(st)) return 'mdi:thermostat-auto';\n  return 'mdi:thermostat';\n]]]\n"
+  custom_fields:
+    badge1: ' '
+    badge2: ' '
+    t1: ' '
+    t2: ' '
+    bar: ' '
+    presence_dot: ' '
+  styles:
+    card:
+    - height: 95px !important
+    - padding: 0px !important
+    - overflow: hidden
+    - position: relative
+    - background: none !important
+    - box-shadow: none !important
+    - border: none !important
+    - backdrop-filter: none !important
+    - --ha-card-background: none
+    - --ha-card-box-shadow: none
+    grid:
+    - padding: 12px 16px
+    - height: 100%
+    - box-sizing: border-box
+    - grid-template-areas: '"i n" "i l"'
+    - grid-template-columns: 65px 1fr
+    - grid-template-rows: auto auto
+    - align-content: center
+    - gap: 0px 12px
+    - position: relative
+    - z-index: 2
+    icon:
+    - width: 45px
+    - height: 45px
+    - color: rgb(var(--appliance-color))
+    - transform-origin: center center
+    - animation: var(--appliance-icon-anim) !important
+    - z-index: 3
+    img_cell:
+    - width: 65px
+    - height: 65px
+    - border-radius: 50%
+    - background: rgba(var(--appliance-color), 0.05) !important
+    - border: 1px solid rgba(var(--appliance-color), 0.15)
+    - position: relative
+    - overflow: visible !important
+    - justify-self: start
+    - z-index: 1
+    name:
+    - justify-self: start
+    - font-size: 15px
+    - font-weight: 500
+    - align-self: end
+    - margin-bottom: 2px
+    - position: relative
+    - z-index: 2
+    label:
+    - justify-self: start
+    - font-size: 12px
+    - opacity: 0.7
+    - align-self: start
+    - margin-top: 2px
+    - position: relative
+    - z-index: 2
+    custom_fields:
+      presence_dot:
+      - position: absolute
+      - top: 12px
+      - left: 12px
+      - width: 6px
+      - height: 6px
+      - border-radius: 50%
+      - z-index: 5
+      - transition: background-color 0.4s ease
+      badge1:
+      - position: absolute
+      - top: 10px
+      - right: 10px
+      - padding: 3px 8px
+      - font-size: 10px
+      - letter-spacing: 0.5px
+      - white-space: nowrap
+      - text-transform: uppercase
+      - font-weight: 700
+      - z-index: 5
+      - transition: all 0.5s ease
+      badge2:
+      - position: absolute
+      - top: 38px
+      - right: 10px
+      - padding: 4px 8px
+      - font-size: 10px
+      - letter-spacing: 0.5px
+      - white-space: nowrap
+      - color: var(--primary-text-color)
+      - opacity: 0.9
+      - text-transform: uppercase
+      - font-weight: 500
+      - z-index: 5
+      - transition: all 0.5s ease
+      t1:
+      - position: absolute
+      - bottom: 14px
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 0.5px
+      - line-height: 1
+      - z-index: 5
+      - transition: all 0.5s ease
+      t2:
+      - position: absolute
+      - bottom: 14px
+      - right: 10px
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 0.5px
+      - line-height: 1
+      - z-index: 5
+      - transition: all 0.5s ease
+      bar:
+      - position: absolute
+      - bottom: 0
+      - left: 0
+      - height: 3px
+      - width: var(--appliance-level)
+      - background: var(--appliance-bar-bg)
+      - box-shadow: var(--appliance-bar-shadow)
+      - transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1)
+      - z-index: 5
+  extra_styles: "[[[\n  let ent_power = variables.sensor_power;\n  let bar_mode = variables.bar_mode;\n  let max_power_w = variables.max_power_w;\n  \n  let raw_status = states[variables.sensor_status] ? states[variables.sensor_status].state : '';\n  let status = raw_status.toLowerCase();\n  \n  let state_err = variables.state_error.split(',').map(s => s.trim().toLowerCase());\n  let state_idle = variables.state_idle.split(',').map(s => s.trim().toLowerCase());\n  let state_cool = variables.state_cool.split(',').map(s => s.trim().toLowerCase());\n  let state_heat = variables.state_heat.split(',').map(s => s.trim().toLowerCase());\n  let state_dry = variables.state_dry.split(',').map(s => s.trim().toLowerCase());\n  let state_fan = variables.state_fan.split(',').map(s => s.trim().toLowerCase());\n  let state_auto = variables.state_auto.split(',').map(s => s.trim().toLowerCase());\n  let state_hc = variables.state_heat_cool.split(',').map(s => s.trim().toLowerCase());\n  \n  let is_error = state_err.includes(status);\n  let is_idle = state_idle.includes(status);\n  let is_cool = state_cool.includes(status);\n  let is_heat = state_heat.includes(status);\n  let is_dry = state_dry.includes(status);\n  let is_fan = state_fan.includes(status);\n  let is_auto = state_auto.includes(status);\n  let is_heat_cool = state_hc.includes(status);\n  \n  let attr = states[variables.sensor_status] ? states[variables.sensor_status].attributes : {};\n  \n  let ext_temp = (variables.sensor_temp && states[variables.sensor_temp]) ? parseFloat(states[variables.sensor_temp].state) : undefined;\n  let ext_hum = (variables.sensor_hum && states[variables.sensor_hum]) ? parseFloat(states[variables.sensor_hum].state) : undefined;\n  \n  let raw_temp_attr = !isNaN(parseFloat(attr.current_temperature)) ? parseFloat(attr.current_temperature) : NaN;\n  let raw_hum_attr = !isNaN(parseFloat(attr.current_humidity)) ? parseFloat(attr.current_humidity) : NaN;\n  \n  let c_t = !isNaN(ext_temp) ? ext_temp : (!isNaN(raw_temp_attr) ? raw_temp_attr : NaN);\n  let c_h = !isNaN(ext_hum) ? ext_hum : (!isNaN(raw_hum_attr) ? raw_hum_attr : NaN);\n  \n  let rt = variables.round_temp !== undefined ? variables.round_temp : 1;\n  let rh = variables.round_hum !== undefined ? variables.round_hum : 0;\n  \n  let temp_str = !isNaN(c_t) ? c_t.toFixed(rt) + '°' : '';\n  let hum_str = !isNaN(c_h) ? c_h.toFixed(rh) + '%' : '';\n\n  let temp_color_rgb = '33, 150, 243'; \n  if (variables.temp_color_red !== undefined && c_t >= variables.temp_color_red) temp_color_rgb = '244, 67, 54';\n  else if (variables.temp_color_orange !== undefined && c_t >= variables.temp_color_orange) temp_color_rgb = '255, 152, 0';\n  else if (variables.temp_color_yellow !== undefined && c_t >= variables.temp_color_yellow) temp_color_rgb = '255, 193, 7';\n  \n  let hum_color_rgb = '33, 150, 243'; \n  \n  let raw_fan = attr.fan_mode ? String(attr.fan_mode) : '';\n  let power_state = states[ent_power];\n  let raw_power = power_state ? parseFloat(power_state.state) : NaN;\n  \n  let t_single = attr.temperature;\n  let t_low = attr.target_temp_low;\n  let t_high = attr.target_temp_high;\n  let action = attr.hvac_action ? String(attr.hvac_action).toLowerCase() : '';\n  \n  let t1_text = ''; let t1_color = 'transparent'; \n  let t2_text = ''; let t2_color = 'transparent';\n  let raw_targ = 0; let t1_right = '10px';\n  \n  if (!isNaN(parseFloat(t_low)) && !isNaN(parseFloat(t_high)) && t_low !== null) {\n      t1_text = '➔ ' + t_low + '°';\n      t1_color = 'orangered';\n      t2_text = '| ' + t_high + '°';\n      t2_color = '#2196F3';\n      raw_targ = (parseFloat(t_low) + parseFloat(t_high)) / 2;\n      t1_right = `calc(5px + ${t2_text.length}ch)`;\n  } else if (!isNaN(parseFloat(t_single)) && t_single !== null) {\n      t1_text = '➔ ' + t_single + '°';\n      let t_t = parseFloat(t_single);\n      if (c_t > 0) {\n          if (t_t > c_t) t1_color = 'orangered';\n          else if (t_t < c_t) t1_color = '#2196F3';\n          else t1_color = 'var(--primary-text-color)';\n      } else {\n          if (is_heat || action === 'heating') t1_color = 'orangered';\n          else if (is_cool || action === 'cooling') t1_color = '#2196F3';\n          else t1_color = 'var(--primary-text-color)';\n      }\n      raw_targ = t_single;\n  } else {\n      raw_targ = c_t;\n  }\n  \n  let fan_text = '';\n  if (!['unknown', 'unavailable', 'none', ''].includes(raw_fan.toLowerCase())) {\n      let f = raw_fan.toLowerCase().replace(/_/g, ' ').replace(/-/g, ' ');\n      let clean_fan = '';\n      if (f === 'on') clean_fan = 'On';\n      else {\n          f = f.replace('on low', 'low').replace('low on', 'low');\n          f = f.replace('on medium', 'medium').replace('medium on', 'medium');\n          f = f.replace('on high', 'high').replace('high on', 'high');\n          f = f.replace('on med', 'med').replace('med on', 'med');\n          clean_fan = f.replace(/\\b\\w/g, c => c.toUpperCase());\n      }\n      fan_text = 'Fan: ' + clean_fan;\n  }\n  \n  let pwr_pct = 0;\n  let power_text = '';\n  \n  if (variables.show_cost && variables.sensor_cost && states[variables.sensor_cost]) {\n      let c_state = states[variables.sensor_cost];\n      let c_val = parseFloat(c_state.state);\n      let uom = c_state.attributes.unit_of_measurement || '';\n      if (!isNaN(c_val)) {\n          power_text = c_val.toFixed(2) + uom;\n          pwr_pct = variables.max_cost > 0 ? (c_val / variables.max_cost) * 100 : 50; \n      }\n  } else if (!isNaN(raw_power)) {\n      let power_w = Math.round(raw_power);\n      power_text = power_w + 'W';\n      pwr_pct = max_power_w > 0 ? (power_w / max_power_w) * 100 : 0;\n  }\n  \n  let f_pct = 50;\n  if (!['unknown', 'unavailable', 'none', ''].includes(raw_fan.toLowerCase())) {\n      let f_val = raw_fan.toLowerCase().replace(/ /g, '_');\n      if (f_val === 'off') f_pct = 0;\n      else if (!isNaN(parseFloat(f_val)) && parseFloat(f_val) > 5) f_pct = parseFloat(f_val);\n      else if (['on_low', 'low', 'quiet', 'min', '1', 'auto_low'].includes(f_val)) f_pct = 33;\n      else if (['on_medium', 'medium', 'med', '2', '3', 'auto_medium'].includes(f_val)) f_pct = 66;\n      else if (['on_high', 'high', 'max', 'turbo', '4', '5', 'auto', 'on', 'auto_high'].includes(f_val)) f_pct = 100;\n  } else {\n      f_pct = -1; \n  }\n  \n  let anim_speed = 2.5;\n  if (f_pct >= 80) anim_speed = 0.8;\n  else if (f_pct >= 50) anim_speed = 1.5;\n  \n  let fan_color = '76, 175, 80';\n  if (f_pct === -1) fan_color = 'transparent';\n  else if (f_pct === 0) fan_color = '158, 158, 158'; \n  else if (f_pct >= 80) fan_color = '244, 67, 54'; \n  else if (f_pct >= 50) fan_color = '33, 150, 243';\n  \n  let pwr_color = '76, 175, 80';\n  if (pwr_pct >= 75) pwr_color = '244, 67, 54'; \n  else if (pwr_pct >= 40) pwr_color = '255, 193, 7'; \n  \n  let progress = 0;\n  if (!is_idle && !is_error) {\n      if (bar_mode === 'power') {\n          progress = Math.max(3, Math.min(pwr_pct, 100));\n      } else if (bar_mode === 'fan' && f_pct >= 0) {\n          progress = f_pct;\n      } else if (bar_mode === 'temp' && c_t > 0) {\n          if (!isNaN(parseFloat(t_low)) && !isNaN(parseFloat(t_high)) && t_low !== null) {\n              let tl = parseFloat(t_low); let th = parseFloat(t_high);\n              if (c_t < tl) {\n                  let p = tl > 0 ? (c_t / tl) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else if (c_t > th) {\n                  let p = c_t > 0 ? (th / c_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else progress = 100;\n          } else if (!isNaN(parseFloat(raw_targ)) && raw_targ !== null) {\n              let t_t = parseFloat(raw_targ);\n              if (is_cool || action === 'cooling') {\n                  let p = c_t > 0 ? (t_t / c_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else if (is_heat || action === 'heating') {\n                  let p = t_t > 0 ? (c_t / t_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else {\n                  let p = c_t > t_t ? (c_t > 0 ? (t_t / c_t)*100 : 100) : (t_t > 0 ? (c_t / t_t)*100 : 100);\n                  progress = Math.max(3, Math.min(p, 100));\n              }\n          }\n      }\n  }\n  \n  let pres_state = (variables.sensor_presence && states[variables.sensor_presence]) ? states[variables.sensor_presence].state.toLowerCase() : 'none';\n  let pres_display = 'none';\n  let pres_bg = 'transparent';\n  let pres_shadow = 'none';\n  \n  if (pres_state !== 'none' && pres_state !== 'unavailable' && pres_state !== 'unknown') {\n      pres_display = 'block';\n      if (pres_state === 'on' || pres_state === 'home' || pres_state === 'active') {\n          pres_bg = '#F44336';\n          pres_shadow = '0 0 4px rgba(244, 67, 54, 0.8)';\n      } else {\n          pres_bg = '#9E9E9E';\n      }\n  }\n  \n  let badge1 = ''; let badge2 = ''; \n  let color = '158, 158, 158'; let icon_anim = 'none';\n  let b1_bg = 'transparent'; let b1_border = 'none'; let b1_bl = 'none'; let b1_br = 'none'; let b1_text = 'inherit';\n  let b1_shadow = 'none';\n  let b2_bg = 'transparent'; let b2_bl = 'none'; let b2_br = 'none';\n  let bar_bg = 'rgb(158, 158, 158)';\n  let bar_shadow = 'none';\n  \n  if (is_error) {\n      badge1 = '⚠️ ERROR';\n      color = '244, 67, 54';\n      b1_bg = `rgba(${color}, 0.15)`; b1_border = `1px solid rgba(${color}, 0.3)`; b1_bl = `2px solid rgb(${color})`; b1_br = b1_border; b1_text = `rgb(${color})`;\n  } else {\n      if (is_cool) { color = '33, 150, 243'; icon_anim = 'none'; }\n      else if (is_heat) { color = '255, 87, 34'; icon_anim = 'gentle-fire 3s ease-in-out infinite alternate'; }\n      else if (is_dry) { color = '255, 213, 79'; icon_anim = 'none'; }\n      else if (is_fan) { color = '0, 150, 136'; icon_anim = 'gentle-spin var(--appliance-speed) linear infinite'; }\n      else if (is_auto || is_heat_cool) { color = '158, 158, 158'; icon_anim = 'none'; }\n      \n      let s_fmt = status.replace(/_/g, ' ').replace(/-/g, ' ').replace(/\\b\\w/g, c => c.toUpperCase());\n      let b1_parts = [s_fmt];\n      if (hum_str) b1_parts.push(hum_str);\n      if (temp_str) b1_parts.push(temp_str);\n      badge1 = b1_parts.join(' • ');\n      \n      b1_text = 'var(--primary-text-color)';\n      b1_border = '1px solid rgba(128,128,128, 0.2)';\n      let has_hum = !!hum_str;\n      let has_temp = !!temp_str;\n      \n      if (has_hum && has_temp) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${hum_color_rgb}, 0.15) 50%, rgba(${temp_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${temp_color_rgb})`;\n      } else if (has_temp) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${temp_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${temp_color_rgb})`;\n      } else if (has_hum) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${hum_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${hum_color_rgb})`;\n      } else {\n          b1_bg = `linear-gradient(0deg, rgba(${color}, 0.15), rgba(${color}, 0.15))`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${color})`;\n      }\n      \n      if (is_heat_cool || is_auto) {\n          b1_bl = '2.5px solid transparent';\n          b1_shadow = 'none';\n          let border_bg = `linear-gradient(to bottom, rgb(255, 87, 34) 50%, rgb(33, 150, 243) 50%) 0 0 / 2.5px 100% no-repeat border-box border-box`;\n          let inner_bg = `${b1_bg} 0 0 / 100% 100% no-repeat padding-box padding-box`;\n          b1_bg = `${border_bg}, ${inner_bg}`;\n      }\n      \n      let b2_parts = [fan_text, power_text].filter(Boolean);\n      badge2 = b2_parts.join(' • ');\n      let has_fan = fan_text !== ''; let has_pwr = power_text !== '';\n      \n      if (has_fan && has_pwr) {\n          b2_bg = `linear-gradient(90deg, rgba(${fan_color}, 0.15) 0%, rgba(${pwr_color}, 0.15) 100%)`;\n          b2_bl = `2.5px solid rgb(${fan_color})`;\n          b2_br = `2.5px solid rgb(${pwr_color})`;\n      } else if (has_fan) {\n          b2_bg = `rgba(${fan_color}, 0.15)`;\n          b2_bl = `2px solid rgb(${fan_color})`;\n          b2_br = `1px solid rgba(128,128,128, 0.2)`;\n      } else if (has_pwr) {\n          b2_bg = `rgba(${pwr_color}, 0.15)`;\n          b2_bl = `1px solid rgba(128,128,128, 0.2)`;\n          b2_br = `2px solid rgb(${pwr_color})`;\n      }\n      \n      if (is_heat_cool || is_auto) {\n          bar_bg = 'linear-gradient(90deg, rgb(33, 150, 243) 0%, rgb(255, 87, 34) 100%)';\n          bar_shadow = '0 -1px 8px rgba(158, 158, 158, 0.4)';\n      } else {\n          bar_bg = `rgb(${color})`;\n          bar_shadow = `0 -1px 8px rgba(${color}, 0.5)`;\n      }\n  }\n  \n  return `\n    #card {\n      --appliance-color: ${color};\n      --appliance-level: ${progress}%;\n      --appliance-speed: ${anim_speed}s;\n      --appliance-bar-bg: ${bar_bg};\n      --appliance-bar-shadow: ${bar_shadow};\n      --appliance-icon-anim: ${icon_anim};\n    }\n    \n    #presence_dot {\n      display: ${pres_display};\n      background: ${pres_bg};\n      box-shadow: ${pres_shadow};\n    }\n    \n    #badge1 {\n      background: ${b1_bg};\n      color: ${b1_text};\n      border-top: ${b1_border};\n      border-bottom: ${b1_border};\n      border-left: ${b1_bl};\n      border-right: ${b1_br};\n      border-radius: 6px !important;\n      box-shadow: ${b1_shadow};\n    }\n    #badge1::before { content: \"${badge1}\"; }\n    \n    #badge2 {\n      display: ${badge2 ? 'block' : 'none'};\n      background: ${b2_bg};\n      border-top: 1px solid rgba(128,128,128, 0.2);\n      border-bottom: 1px solid rgba(128,128,128, 0.2);\n      border-left: ${b2_bl};\n      border-right: ${b2_br};\n      border-radius: 6px !important;\n    }\n    #badge2::before { content: \"${badge2}\"; }\n    \n    #t1 { color: ${t1_color}; right: ${t1_right}; }\n    #t1::before { content: \"${t1_text}\"; }\n    \n    #t2 { color: ${t2_color}; }\n    #t2::before { content: \"${t2_text}\"; }\n    \n    ${is_cool ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -15px; border-radius: 50%;\n        box-shadow: inset 8px 0 15px -5px rgba(var(--appliance-color), 0.7), 0 -8px 15px -5px rgba(var(--appliance-color), 0.5);\n        animation: frost-orbit 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -10px; border-radius: 50%;\n        box-shadow: inset -5px 0 15px -5px rgba(var(--appliance-color), 0.9);\n        animation: frost-orbit 3.5s linear infinite reverse;\n      }\n    ` : ''}\n    ${is_heat ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 150%; height: 150%; bottom: -20%; left: -25%; border-radius: 50%;\n        background: radial-gradient(circle at 50% 100%, rgba(var(--appliance-color), 0.45) 0%, transparent 65%);\n        filter: blur(4px);\n        animation: intense-updraft 3s ease-in-out infinite alternate;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 3px; height: 3px; border-radius: 50%; bottom: -5px; left: 50%;\n        background: rgba(var(--appliance-color), 0.9);\n        box-shadow: \n          15px 10px 0 1px rgba(var(--appliance-color), 0.8),\n          -20px 25px 0 0px rgba(var(--appliance-color), 0.7),\n          5px 35px 0 2px rgba(var(--appliance-color), 0.9),\n          -10px 15px 0 -1px rgba(var(--appliance-color), 0.6);\n        animation: intense-embers 2s ease-in infinite;\n      }\n    ` : ''}\n    ${is_dry ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 3px; height: 3px; border-radius: 50%; bottom: 10px; left: 50%;\n        background: rgba(var(--appliance-color), 0.7);\n        box-shadow: -12px 15px 0 1px rgba(var(--appliance-color), 0.4), 10px 25px 0 0.5px rgba(var(--appliance-color), 0.5);\n        animation: evaporate-up 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;\n      }\n    ` : ''}\n    ${is_fan ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: 0; border-radius: 50%; border: 2px solid rgba(var(--appliance-color), 0.5);\n        animation: air-ripple var(--appliance-speed) cubic-bezier(0.1, 0.5, 0.5, 1) infinite;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: 0; border-radius: 50%; border: 2px solid rgba(var(--appliance-color), 0.3);\n        animation: air-ripple var(--appliance-speed) cubic-bezier(0.1, 0.5, 0.5, 1) infinite;\n        animation-delay: calc(var(--appliance-speed) / 2);\n      }\n    ` : ''}\n    ${(is_heat_cool || is_auto) ? `\n      #img-cell {\n        background: linear-gradient(135deg, rgba(33, 150, 243, 0.15) 0%, rgba(255, 87, 34, 0.15) 100%) !important;\n        border: 1px solid rgba(158, 158, 158, 0.2) !important;\n      }\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -5px; border-radius: 50%;\n        background: \n          radial-gradient(circle at 25% 25%, rgba(33, 150, 243, 0.25) 0%, transparent 60%),\n          radial-gradient(circle at 75% 75%, rgba(255, 87, 34, 0.25) 0%, transparent 60%);\n        animation: auto-breathe 3s ease-in-out infinite alternate;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -15px; border-radius: 50%;\n        border: 2px solid transparent;\n        border-top-color: rgba(33, 150, 243, 0.4);\n        border-left-color: rgba(33, 150, 243, 0.2);\n        border-bottom-color: rgba(255, 87, 34, 0.4);\n        border-right-color: rgba(255, 87, 34, 0.2);\n        animation: auto-ripple 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;\n      }\n    ` : ''}\n    \n    @keyframes gentle-fire {\n      0%   { transform: scaleY(0.95) skewX(-1deg); color: #ff9800; filter: drop-shadow(0 0 2px rgba(255,152,0,0.4)); }\n      100% { transform: scaleY(1.05) skewX(1deg); color: #ff5722; filter: drop-shadow(0 0 5px rgba(255,87,34,0.6)); }\n    }\n    @keyframes gentle-spin {\n      0%   { transform: rotate(0deg); }\n      100% { transform: rotate(360deg); }\n    }\n    @keyframes frost-orbit {\n      0%   { transform: rotate(0deg) scale(1); }\n      50%  { transform: rotate(180deg) scale(1.05); }\n      100% { transform: rotate(360deg) scale(1); }\n    }\n    @keyframes intense-updraft {\n      0%   { transform: translateY(10px) scale(0.9); opacity: 0.5; }\n      100% { transform: translateY(-15px) scale(1.1); opacity: 1; filter: blur(6px); }\n    }\n    @keyframes intense-embers {\n      0%   { transform: translateY(0) scale(1); opacity: 0; }\n      15%  { opacity: 1; }\n      100% { transform: translateY(-55px) scale(0.3); opacity: 0; }\n    }\n    @keyframes air-ripple {\n      0%   { transform: scale(1); opacity: 0.8; }\n      100% { transform: scale(1.5); opacity: 0; }\n    }\n    @keyframes evaporate-up {\n      0%   { transform: translateY(0); opacity: 0; }\n      30%  { opacity: 1; }\n      100% { transform: translateY(-30px); opacity: 0; }\n    }\n    @keyframes auto-breathe {\n      0%   { transform: scale(0.9); opacity: 0.4; }\n      100% { transform: scale(1.1); opacity: 1; }\n    }\n    @keyframes auto-ripple {\n      0%   { transform: scale(0.7); opacity: 0.8; }\n      100% { transform: scale(1.2); opacity: 0; }\n    }\n  `;\n]]]\n"
+  triggers_update:
+  - climate.soufflant_salle_de_bain
+  - sensor.th_salle_de_bain_temperature
+  - sensor.th_salle_de_bain_humidity
+  - sensor.prise_soufflant_salle_de_bain_nous_power
+- type: custom:streamline-card
+  template: clim_voltage_ring-tile
+  variables:
+    card_name: Souffl. SdB (V)
+    entity: sensor.prise_soufflant_salle_de_bain_nous_voltage
+  grid_options:
+    columns: 6
+    rows: 3
+- type: custom:streamline-card
+  template: clim_ampere_ring-tile
+  variables:
+    card_name: Souffl. SdB (A)
+    entity: sensor.prise_soufflant_salle_de_bain_nous_current
+  grid_options:
+    columns: 6
+    rows: 3
+- type: custom:tabbed-card
+  styles:
+    --mdc-theme-primary: rgb(174,68,90)
+    --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
+    max-width: 100%
+  attributes:
+    animated: true
+    swipeable: true
+  tabs:
+  - attributes:
+      label: INSTANTANÉ
+      icon: mdi:flash
+    card:
+      type: custom:streamline-card
+      template: conso_temps_reel_clim_rad
+      variables:
+        card_title: Conso. Temps Réel Soufflant Salle de Bain
+        energy_color: magenta
+        current_entity: sensor.prise_soufflant_salle_de_bain_nous_current
+        current_color: rgb(255, 41, 41)
+        avg_daily_entity: sensor.soufflant_sdb_avg_watts_quotidien
+        conso_daily_kwh_entity: sensor.soufflant_sdb_quotidien_um
+        power_entity: sensor.prise_soufflant_salle_de_bain_nous_power
+        power_color: rgb(126, 24, 145)
+        span_offset: +15m
+        group_duration: 1m
+        energy_entity: sensor.prise_soufflant_salle_de_bain_nous_power
+  - attributes:
+      label: MENSUEL
+      icon: mdi:calendar-month
+    card:
+      type: custom:streamline-card
+      template: conso_mensuelle_clim
+      variables:
+        title: Conso. mensuel Soufflant SdB
+        energy_entity: sensor.prise_soufflant_salle_de_bain_nous_energy
+        energy_name: Conso. jours en cours
+        energy_color: magenta
+        avg_monthly_entity: sensor.soufflant_sdb_avg_watts_mensuel
+        temp_entity: sensor.th_balcon_nord_temperature
+        conso_monthly_kwh_entity: sensor.soufflant_sdb_mensuel_um
+      card_mod:
+        style: |
+          ha-card {
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+          }
+  - attributes:
+      label: DUT
+      icon: mdi:chart-line
+    card:
+      type: custom:streamline-card
+      template: apex_dut_piece
+      variables:
+        title: D.U.T. SdB (Soufflant)
+        entity_sensor: sensor.dut_sdb_total
+        color: rgb(218, 112, 214)
+        annot_text: Oubli / Sauna !
+        hours: auto
+        crit_zone: 0.75
+        thresh_yellow: 0.3
+        thresh_orange: 0.5
+        thresh_red: 0.75
+- type: heading
+  icon: mdi:heat-wave
+  heading_style: title
+  badges:
+  - type: entity
+    show_state: true
+    show_icon: true
+    color: amber
+    state_content:
+    - name
+    - state
+    entity: sensor.soufflant_sdb_quotidien_um
+    name: Q
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.soufflant_sdb_hebdomadaire_um
+    name: H
+    color: orange
+    state_content:
+    - name
+    - state
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.soufflant_sdb_mensuel_um
+    name: M
+    color: deep-orange
+    state_content:
+    - name
+    - state
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.soufflant_sdb_annuel_um
+    name: A
+    color: red
+    state_content:
+    - name
+    - state
+  layout_options:
+    grid_columns: full
+    grid_rows: 1
+  card_mod:
+    style: |
+      ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        margin: -22px 0px 0px 0px;
+      }
+- card_mod:
+    style: |
+      ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+      }
+  type: custom:stack-in-card
+  mode: vertical
+  keep:
+    box_shadow: false
+    margin: false
+    border_radius: false
+    background: false
+    outer_padding: false
+  cards:
+  - type: horizontal-stack
+    cards:
+    - type: custom:mod-card
+      card_mod:
+        style:
+          .: |
+            :host {
+              --text-divider-color: white;
+              --text-divider-line-size: 5px;
+            }
+      card:
+        type: custom:text-divider-row
+        text: Sèche-Serviettes Salle de Bain
+- type: custom:streamline-card
+  template: clim_voltage_ring-tile
+  variables:
+    card_name: Sèche-serv. SdB (V)
+    entity: sensor.prise_seche_serviette_salle_de_bain_nous_voltage
+  grid_options:
+    columns: 6
+    rows: 3
+- type: custom:streamline-card
+  template: clim_ampere_ring-tile
+  variables:
+    card_name: Sèche-Serv. SdB (A)
+    entity: sensor.prise_seche_serviette_salle_de_bain_nous_current
+  grid_options:
+    columns: 6
+    rows: 3
+- type: custom:tabbed-card
+  styles:
+    --mdc-theme-primary: rgb(174,68,90)
+    --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
+    max-width: 100%
+  attributes:
+    animated: true
+    swipeable: true
+  tabs:
+  - attributes:
+      label: INSTANTANÉ
+      icon: mdi:flash
+    card:
+      type: custom:streamline-card
+      template: conso_temps_reel_clim_rad
+      variables:
+        card_title: Conso. Temps Réel Sèche-Serv. Salle de Bain
+        energy_entity: sensor.prise_seche_serviette_salle_de_bain_nous_power
+        energy_color: rgb(218, 112, 214)
+        current_entity: sensor.prise_seche_serviette_salle_de_bain_nous_current
+        current_color: rgb(255, 41, 41)
+        avg_daily_entity: sensor.seche_serviette_sdb_avg_watts_quotidien
+        conso_daily_kwh_entity: sensor.seche_serviette_sdb_quotidien_um
+        power_entity: sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power
+        power_color: rgb(255, 215, 0)
+        span_offset: +15m
+        group_duration: 1m
+  - attributes:
+      label: MENSUEL
+      icon: mdi:calendar-month
+    card:
+      type: custom:streamline-card
+      template: conso_mensuelle_clim
+      variables:
+        title: Conso. mensuel Sèche-serviettes SdB
+        energy_entity: sensor.prise_seche_serviette_salle_de_bain_nous_energy
+        energy_name: Conso. jours en cours
+        energy_color: rgb(218, 112, 214)
+        avg_monthly_entity: sensor.seche_serviette_sdb_avg_watts_mensuel
+        temp_entity: sensor.th_balcon_nord_temperature
+        temp_color: rgb(126, 24, 145)
+        conso_monthly_kwh_entity: sensor.seche_serviette_sdb_mensuel_um
+  - attributes:
+      label: DUT
+      icon: mdi:chart-line
+    card:
+      type: custom:streamline-card
+      template: apex_dut_piece
+      variables:
+        title: D.U.T. SdB (Sèche-Serv.)
+        entity_sensor: sensor.dut_sdb_total
+        color: rgb(218, 112, 214)
+        annot_text: Oubli / Sauna !
+        hours: auto
+        crit_zone: 0.75
+        thresh_yellow: 0.3
+        thresh_orange: 0.5
+        thresh_red: 0.75
+- type: heading
+  icon: mdi:heating-coil
+  heading_style: title
+  badges:
+  - type: entity
+    show_state: true
+    show_icon: true
+    color: amber
+    state_content:
+    - name
+    - state
+    entity: sensor.seche_serviette_sdb_quotidien_um
+    name: Q
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.seche_serviette_sdb_hebdomadaire_um
+    name: H
+    color: orange
+    state_content:
+    - name
+    - state
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.seche_serviette_sdb_mensuel_um
+    name: M
+    color: deep-orange
+    state_content:
+    - name
+    - state
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.seche_serviette_sdb_annuel_um
+    name: A
+    color: red
+    state_content:
+    - name
+    - state
+  layout_options:
+    grid_columns: full
+    grid_rows: 1
+  card_mod:
+    style: |
+      ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        margin: -22px 0px 0px 0px;
+      }
+- type: conditional
+  conditions: []
+  card:
+    type: custom:stack-in-card
+    mode: vertical
+    cards:
+    - type: horizontal-stack
+      cards:
+      - type: custom:mod-card
+        card_mod:
+          style:
+            .: |
+              :host {
+                --text-divider-color: white;
+                --text-divider-line-size: 5px;
+              }
+        card:
+          type: custom:text-divider-row
+          text: CHAMBRE
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: none !important;
+        }
+- type: heading
+  icon: mdi:bed
+  heading_style: title
+  badges:
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: climate.clim_chambre_rm4_mini
+    color: state
+    tap_action:
+      action: more-info
+    icon: mdi:thermometer
+    state_content:
+    - name
+    - temperature
+    name: Réglé à
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.th_chambre_temperature
+    name: Chambre
+    state_content:
+    - name
+    - state
+    color: green
+  layout_options:
+    grid_columns: full
+    grid_rows: 1
+  heading: CHAMBRE
+  card_mod:
+    style: |
+      ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        margin: -22px 0px 0px 0px;
+      }
+- type: custom:button-card
+  entity: climate.clim_chambre_rm4_mini
+  name: Clim Chambre
+  show_state: false
+  show_label: true
+  variables:
+    sensor_status: climate.clim_chambre_rm4_mini
+    sensor_temp: sensor.th_chambre_temperature
+    round_temp: 1
+    sensor_hum: sensor.th_chambre_humidity
+    round_hum: 0
+    temp_color_yellow: 24
+    temp_color_orange: 28
+    temp_color_red: 32
+    state_error: unavailable, unknown
+    state_idle: idle, off, standby
+    state_auto: auto
+    state_heat: heat, heating
+    state_cool: cool, cooling
+    state_heat_cool: heat_cool
+    state_dry: dry, drying, dehumidify
+    state_fan: fan, fan_only, ventilation
+    sensor_presence: ''
+    sensor_power: sensor.clim_chambre_nous_power
+    sensor_cost: ''
+    show_cost: false
+    bar_mode: temp
+    max_cost: 10
+    max_power_w: 1500
+  tap_action:
+    action: more-info
+  label: |
+    [[[
+      if (!entity || !entity.state) return 'Entity Setup Required';
+      let st = entity.state;
+      let err = (variables.state_error || 'unavailable, unknown').split(',').map(s => s.trim().toLowerCase());
+      if (err.includes(st.toLowerCase())) return 'Check Configuration';
+      return st.replace(/_/g, ' ').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    ]]]
+  icon: "[[[\n  if (!entity || !entity.state) return 'mdi:alert-circle-outline';\n  let st = entity.state.toLowerCase();\n  let err = variables.state_error.split(',').map(s => s.trim().toLowerCase());\n  let cool = variables.state_cool.split(',').map(s => s.trim().toLowerCase());\n  let heat = variables.state_heat.split(',').map(s => s.trim().toLowerCase());\n  let dry = variables.state_dry.split(',').map(s => s.trim().toLowerCase());\n  let fan = variables.state_fan.split(',').map(s => s.trim().toLowerCase());\n  let auto = variables.state_auto.split(',').map(s => s.trim().toLowerCase());\n  let hc = variables.state_heat_cool.split(',').map(s => s.trim().toLowerCase());\n  \n  if (err.includes(st)) return 'mdi:alert-circle-outline';\n  if (cool.includes(st)) return 'mdi:snowflake';\n  if (heat.includes(st)) return 'mdi:fire';\n  if (dry.includes(st)) return 'mdi:water-percent';\n  if (fan.includes(st)) return 'mdi:fan';\n  if (auto.includes(st) || hc.includes(st)) return 'mdi:thermostat-auto';\n  return 'mdi:thermostat';\n]]]\n"
+  custom_fields:
+    badge1: ' '
+    badge2: ' '
+    t1: ' '
+    t2: ' '
+    bar: ' '
+    presence_dot: ' '
+  styles:
+    card:
+    - height: 95px !important
+    - padding: 0px !important
+    - overflow: hidden
+    - position: relative
+    - background: none !important
+    - box-shadow: none !important
+    - border: none !important
+    - backdrop-filter: none !important
+    - --ha-card-background: none
+    - --ha-card-box-shadow: none
+    grid:
+    - padding: 12px 16px
+    - height: 100%
+    - box-sizing: border-box
+    - grid-template-areas: '"i n" "i l"'
+    - grid-template-columns: 65px 1fr
+    - grid-template-rows: auto auto
+    - align-content: center
+    - gap: 0px 12px
+    - position: relative
+    - z-index: 2
+    icon:
+    - width: 45px
+    - height: 45px
+    - color: rgb(var(--appliance-color))
+    - transform-origin: center center
+    - animation: var(--appliance-icon-anim) !important
+    - z-index: 3
+    img_cell:
+    - width: 65px
+    - height: 65px
+    - border-radius: 50%
+    - background: rgba(var(--appliance-color), 0.05) !important
+    - border: 1px solid rgba(var(--appliance-color), 0.15)
+    - position: relative
+    - overflow: visible !important
+    - justify-self: start
+    - z-index: 1
+    name:
+    - justify-self: start
+    - font-size: 15px
+    - font-weight: 500
+    - align-self: end
+    - margin-bottom: 2px
+    - position: relative
+    - z-index: 2
+    label:
+    - justify-self: start
+    - font-size: 12px
+    - opacity: 0.7
+    - align-self: start
+    - margin-top: 2px
+    - position: relative
+    - z-index: 2
+    custom_fields:
+      presence_dot:
+      - position: absolute
+      - top: 12px
+      - left: 12px
+      - width: 6px
+      - height: 6px
+      - border-radius: 50%
+      - z-index: 5
+      - transition: background-color 0.4s ease
+      badge1:
+      - position: absolute
+      - top: 10px
+      - right: 10px
+      - padding: 3px 8px
+      - font-size: 10px
+      - letter-spacing: 0.5px
+      - white-space: nowrap
+      - text-transform: uppercase
+      - font-weight: 700
+      - z-index: 5
+      - transition: all 0.5s ease
+      badge2:
+      - position: absolute
+      - top: 38px
+      - right: 10px
+      - padding: 4px 8px
+      - font-size: 10px
+      - letter-spacing: 0.5px
+      - white-space: nowrap
+      - color: var(--primary-text-color)
+      - opacity: 0.9
+      - text-transform: uppercase
+      - font-weight: 500
+      - z-index: 5
+      - transition: all 0.5s ease
+      t1:
+      - position: absolute
+      - bottom: 14px
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 0.5px
+      - line-height: 1
+      - z-index: 5
+      - transition: all 0.5s ease
+      t2:
+      - position: absolute
+      - bottom: 14px
+      - right: 10px
+      - font-size: 11px
+      - font-weight: 700
+      - letter-spacing: 0.5px
+      - line-height: 1
+      - z-index: 5
+      - transition: all 0.5s ease
+      bar:
+      - position: absolute
+      - bottom: 0
+      - left: 0
+      - height: 3px
+      - width: var(--appliance-level)
+      - background: var(--appliance-bar-bg)
+      - box-shadow: var(--appliance-bar-shadow)
+      - transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1)
+      - z-index: 5
+  extra_styles: "[[[\n  let ent_power = variables.sensor_power;\n  let bar_mode = variables.bar_mode;\n  let max_power_w = variables.max_power_w;\n  \n  let raw_status = states[variables.sensor_status] ? states[variables.sensor_status].state : '';\n  let status = raw_status.toLowerCase();\n  \n  let state_err = variables.state_error.split(',').map(s => s.trim().toLowerCase());\n  let state_idle = variables.state_idle.split(',').map(s => s.trim().toLowerCase());\n  let state_cool = variables.state_cool.split(',').map(s => s.trim().toLowerCase());\n  let state_heat = variables.state_heat.split(',').map(s => s.trim().toLowerCase());\n  let state_dry = variables.state_dry.split(',').map(s => s.trim().toLowerCase());\n  let state_fan = variables.state_fan.split(',').map(s => s.trim().toLowerCase());\n  let state_auto = variables.state_auto.split(',').map(s => s.trim().toLowerCase());\n  let state_hc = variables.state_heat_cool.split(',').map(s => s.trim().toLowerCase());\n  \n  let is_error = state_err.includes(status);\n  let is_idle = state_idle.includes(status);\n  let is_cool = state_cool.includes(status);\n  let is_heat = state_heat.includes(status);\n  let is_dry = state_dry.includes(status);\n  let is_fan = state_fan.includes(status);\n  let is_auto = state_auto.includes(status);\n  let is_heat_cool = state_hc.includes(status);\n  \n  let attr = states[variables.sensor_status] ? states[variables.sensor_status].attributes : {};\n  \n  let ext_temp = (variables.sensor_temp && states[variables.sensor_temp]) ? parseFloat(states[variables.sensor_temp].state) : undefined;\n  let ext_hum = (variables.sensor_hum && states[variables.sensor_hum]) ? parseFloat(states[variables.sensor_hum].state) : undefined;\n  \n  let raw_temp_attr = !isNaN(parseFloat(attr.current_temperature)) ? parseFloat(attr.current_temperature) : NaN;\n  let raw_hum_attr = !isNaN(parseFloat(attr.current_humidity)) ? parseFloat(attr.current_humidity) : NaN;\n  \n  let c_t = !isNaN(ext_temp) ? ext_temp : (!isNaN(raw_temp_attr) ? raw_temp_attr : NaN);\n  let c_h = !isNaN(ext_hum) ? ext_hum : (!isNaN(raw_hum_attr) ? raw_hum_attr : NaN);\n  \n  let rt = variables.round_temp !== undefined ? variables.round_temp : 1;\n  let rh = variables.round_hum !== undefined ? variables.round_hum : 0;\n  \n  let temp_str = !isNaN(c_t) ? c_t.toFixed(rt) + '°' : '';\n  let hum_str = !isNaN(c_h) ? c_h.toFixed(rh) + '%' : '';\n\n  let temp_color_rgb = '33, 150, 243'; \n  if (variables.temp_color_red !== undefined && c_t >= variables.temp_color_red) temp_color_rgb = '244, 67, 54';\n  else if (variables.temp_color_orange !== undefined && c_t >= variables.temp_color_orange) temp_color_rgb = '255, 152, 0';\n  else if (variables.temp_color_yellow !== undefined && c_t >= variables.temp_color_yellow) temp_color_rgb = '255, 193, 7';\n  \n  let hum_color_rgb = '33, 150, 243'; \n  \n  let raw_fan = attr.fan_mode ? String(attr.fan_mode) : '';\n  let power_state = states[ent_power];\n  let raw_power = power_state ? parseFloat(power_state.state) : NaN;\n  \n  let t_single = attr.temperature;\n  let t_low = attr.target_temp_low;\n  let t_high = attr.target_temp_high;\n  let action = attr.hvac_action ? String(attr.hvac_action).toLowerCase() : '';\n  \n  let t1_text = ''; let t1_color = 'transparent'; \n  let t2_text = ''; let t2_color = 'transparent';\n  let raw_targ = 0; let t1_right = '10px';\n  \n  if (!isNaN(parseFloat(t_low)) && !isNaN(parseFloat(t_high)) && t_low !== null) {\n      t1_text = '➔ ' + t_low + '°';\n      t1_color = 'orangered';\n      t2_text = '| ' + t_high + '°';\n      t2_color = '#2196F3';\n      raw_targ = (parseFloat(t_low) + parseFloat(t_high)) / 2;\n      t1_right = `calc(5px + ${t2_text.length}ch)`;\n  } else if (!isNaN(parseFloat(t_single)) && t_single !== null) {\n      t1_text = '➔ ' + t_single + '°';\n      let t_t = parseFloat(t_single);\n      if (c_t > 0) {\n          if (t_t > c_t) t1_color = 'orangered';\n          else if (t_t < c_t) t1_color = '#2196F3';\n          else t1_color = 'var(--primary-text-color)';\n      } else {\n          if (is_heat || action === 'heating') t1_color = 'orangered';\n          else if (is_cool || action === 'cooling') t1_color = '#2196F3';\n          else t1_color = 'var(--primary-text-color)';\n      }\n      raw_targ = t_single;\n  } else {\n      raw_targ = c_t;\n  }\n  \n  let fan_text = '';\n  if (!['unknown', 'unavailable', 'none', ''].includes(raw_fan.toLowerCase())) {\n      let f = raw_fan.toLowerCase().replace(/_/g, ' ').replace(/-/g, ' ');\n      let clean_fan = '';\n      if (f === 'on') clean_fan = 'On';\n      else {\n          f = f.replace('on low', 'low').replace('low on', 'low');\n          f = f.replace('on medium', 'medium').replace('medium on', 'medium');\n          f = f.replace('on high', 'high').replace('high on', 'high');\n          f = f.replace('on med', 'med').replace('med on', 'med');\n          clean_fan = f.replace(/\\b\\w/g, c => c.toUpperCase());\n      }\n      fan_text = 'Fan: ' + clean_fan;\n  }\n  \n  let pwr_pct = 0;\n  let power_text = '';\n  \n  if (variables.show_cost && variables.sensor_cost && states[variables.sensor_cost]) {\n      let c_state = states[variables.sensor_cost];\n      let c_val = parseFloat(c_state.state);\n      let uom = c_state.attributes.unit_of_measurement || '';\n      if (!isNaN(c_val)) {\n          power_text = c_val.toFixed(2) + uom;\n          pwr_pct = variables.max_cost > 0 ? (c_val / variables.max_cost) * 100 : 50; \n      }\n  } else if (!isNaN(raw_power)) {\n      let power_w = Math.round(raw_power);\n      power_text = power_w + 'W';\n      pwr_pct = max_power_w > 0 ? (power_w / max_power_w) * 100 : 0;\n  }\n  \n  let f_pct = 50;\n  if (!['unknown', 'unavailable', 'none', ''].includes(raw_fan.toLowerCase())) {\n      let f_val = raw_fan.toLowerCase().replace(/ /g, '_');\n      if (f_val === 'off') f_pct = 0;\n      else if (!isNaN(parseFloat(f_val)) && parseFloat(f_val) > 5) f_pct = parseFloat(f_val);\n      else if (['on_low', 'low', 'quiet', 'min', '1', 'auto_low'].includes(f_val)) f_pct = 33;\n      else if (['on_medium', 'medium', 'med', '2', '3', 'auto_medium'].includes(f_val)) f_pct = 66;\n      else if (['on_high', 'high', 'max', 'turbo', '4', '5', 'auto', 'on', 'auto_high'].includes(f_val)) f_pct = 100;\n  } else {\n      f_pct = -1; \n  }\n  \n  let anim_speed = 2.5;\n  if (f_pct >= 80) anim_speed = 0.8;\n  else if (f_pct >= 50) anim_speed = 1.5;\n  \n  let fan_color = '76, 175, 80';\n  if (f_pct === -1) fan_color = 'transparent';\n  else if (f_pct === 0) fan_color = '158, 158, 158'; \n  else if (f_pct >= 80) fan_color = '244, 67, 54'; \n  else if (f_pct >= 50) fan_color = '33, 150, 243';\n  \n  let pwr_color = '76, 175, 80';\n  if (pwr_pct >= 75) pwr_color = '244, 67, 54'; \n  else if (pwr_pct >= 40) pwr_color = '255, 193, 7'; \n  \n  let progress = 0;\n  if (!is_idle && !is_error) {\n      if (bar_mode === 'power') {\n          progress = Math.max(3, Math.min(pwr_pct, 100));\n      } else if (bar_mode === 'fan' && f_pct >= 0) {\n          progress = f_pct;\n      } else if (bar_mode === 'temp' && c_t > 0) {\n          if (!isNaN(parseFloat(t_low)) && !isNaN(parseFloat(t_high)) && t_low !== null) {\n              let tl = parseFloat(t_low); let th = parseFloat(t_high);\n              if (c_t < tl) {\n                  let p = tl > 0 ? (c_t / tl) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else if (c_t > th) {\n                  let p = c_t > 0 ? (th / c_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else progress = 100;\n          } else if (!isNaN(parseFloat(raw_targ)) && raw_targ !== null) {\n              let t_t = parseFloat(raw_targ);\n              if (is_cool || action === 'cooling') {\n                  let p = c_t > 0 ? (t_t / c_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else if (is_heat || action === 'heating') {\n                  let p = t_t > 0 ? (c_t / t_t) * 100 : 100;\n                  progress = Math.max(3, Math.min(p, 100));\n              } else {\n                  let p = c_t > t_t ? (c_t > 0 ? (t_t / c_t)*100 : 100) : (t_t > 0 ? (c_t / t_t)*100 : 100);\n                  progress = Math.max(3, Math.min(p, 100));\n              }\n          }\n      }\n  }\n  \n  let pres_state = (variables.sensor_presence && states[variables.sensor_presence]) ? states[variables.sensor_presence].state.toLowerCase() : 'none';\n  let pres_display = 'none';\n  let pres_bg = 'transparent';\n  let pres_shadow = 'none';\n  \n  if (pres_state !== 'none' && pres_state !== 'unavailable' && pres_state !== 'unknown') {\n      pres_display = 'block';\n      if (pres_state === 'on' || pres_state === 'home' || pres_state === 'active') {\n          pres_bg = '#F44336';\n          pres_shadow = '0 0 4px rgba(244, 67, 54, 0.8)';\n      } else {\n          pres_bg = '#9E9E9E';\n      }\n  }\n  \n  let badge1 = ''; let badge2 = ''; \n  let color = '158, 158, 158'; let icon_anim = 'none';\n  let b1_bg = 'transparent'; let b1_border = 'none'; let b1_bl = 'none'; let b1_br = 'none'; let b1_text = 'inherit';\n  let b1_shadow = 'none';\n  let b2_bg = 'transparent'; let b2_bl = 'none'; let b2_br = 'none';\n  let bar_bg = 'rgb(158, 158, 158)';\n  let bar_shadow = 'none';\n  \n  if (is_error) {\n      badge1 = '⚠️ ERROR';\n      color = '244, 67, 54';\n      b1_bg = `rgba(${color}, 0.15)`; b1_border = `1px solid rgba(${color}, 0.3)`; b1_bl = `2px solid rgb(${color})`; b1_br = b1_border; b1_text = `rgb(${color})`;\n  } else {\n      if (is_cool) { color = '33, 150, 243'; icon_anim = 'none'; }\n      else if (is_heat) { color = '255, 87, 34'; icon_anim = 'gentle-fire 3s ease-in-out infinite alternate'; }\n      else if (is_dry) { color = '255, 213, 79'; icon_anim = 'none'; }\n      else if (is_fan) { color = '0, 150, 136'; icon_anim = 'gentle-spin var(--appliance-speed) linear infinite'; }\n      else if (is_auto || is_heat_cool) { color = '158, 158, 158'; icon_anim = 'none'; }\n      \n      let s_fmt = status.replace(/_/g, ' ').replace(/-/g, ' ').replace(/\\b\\w/g, c => c.toUpperCase());\n      let b1_parts = [s_fmt];\n      if (hum_str) b1_parts.push(hum_str);\n      if (temp_str) b1_parts.push(temp_str);\n      badge1 = b1_parts.join(' • ');\n      \n      b1_text = 'var(--primary-text-color)';\n      b1_border = '1px solid rgba(128,128,128, 0.2)';\n      let has_hum = !!hum_str;\n      let has_temp = !!temp_str;\n      \n      if (has_hum && has_temp) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${hum_color_rgb}, 0.15) 50%, rgba(${temp_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${temp_color_rgb})`;\n      } else if (has_temp) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${temp_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${temp_color_rgb})`;\n      } else if (has_hum) {\n          b1_bg = `linear-gradient(90deg, rgba(${color}, 0.15) 0%, rgba(${hum_color_rgb}, 0.15) 100%)`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${hum_color_rgb})`;\n      } else {\n          b1_bg = `linear-gradient(0deg, rgba(${color}, 0.15), rgba(${color}, 0.15))`;\n          b1_bl = `2.5px solid rgb(${color})`;\n          b1_br = `2.5px solid rgb(${color})`;\n      }\n      \n      if (is_heat_cool || is_auto) {\n          b1_bl = '2.5px solid transparent';\n          b1_shadow = 'none';\n          let border_bg = `linear-gradient(to bottom, rgb(255, 87, 34) 50%, rgb(33, 150, 243) 50%) 0 0 / 2.5px 100% no-repeat border-box border-box`;\n          let inner_bg = `${b1_bg} 0 0 / 100% 100% no-repeat padding-box padding-box`;\n          b1_bg = `${border_bg}, ${inner_bg}`;\n      }\n      \n      let b2_parts = [fan_text, power_text].filter(Boolean);\n      badge2 = b2_parts.join(' • ');\n      let has_fan = fan_text !== ''; let has_pwr = power_text !== '';\n      \n      if (has_fan && has_pwr) {\n          b2_bg = `linear-gradient(90deg, rgba(${fan_color}, 0.15) 0%, rgba(${pwr_color}, 0.15) 100%)`;\n          b2_bl = `2.5px solid rgb(${fan_color})`;\n          b2_br = `2.5px solid rgb(${pwr_color})`;\n      } else if (has_fan) {\n          b2_bg = `rgba(${fan_color}, 0.15)`;\n          b2_bl = `2px solid rgb(${fan_color})`;\n          b2_br = `1px solid rgba(128,128,128, 0.2)`;\n      } else if (has_pwr) {\n          b2_bg = `rgba(${pwr_color}, 0.15)`;\n          b2_bl = `1px solid rgba(128,128,128, 0.2)`;\n          b2_br = `2px solid rgb(${pwr_color})`;\n      }\n      \n      if (is_heat_cool || is_auto) {\n          bar_bg = 'linear-gradient(90deg, rgb(33, 150, 243) 0%, rgb(255, 87, 34) 100%)';\n          bar_shadow = '0 -1px 8px rgba(158, 158, 158, 0.4)';\n      } else {\n          bar_bg = `rgb(${color})`;\n          bar_shadow = `0 -1px 8px rgba(${color}, 0.5)`;\n      }\n  }\n  \n  return `\n    #card {\n      --appliance-color: ${color};\n      --appliance-level: ${progress}%;\n      --appliance-speed: ${anim_speed}s;\n      --appliance-bar-bg: ${bar_bg};\n      --appliance-bar-shadow: ${bar_shadow};\n      --appliance-icon-anim: ${icon_anim};\n    }\n    \n    #presence_dot {\n      display: ${pres_display};\n      background: ${pres_bg};\n      box-shadow: ${pres_shadow};\n    }\n    \n    #badge1 {\n      background: ${b1_bg};\n      color: ${b1_text};\n      border-top: ${b1_border};\n      border-bottom: ${b1_border};\n      border-left: ${b1_bl};\n      border-right: ${b1_br};\n      border-radius: 6px !important;\n      box-shadow: ${b1_shadow};\n    }\n    #badge1::before { content: \"${badge1}\"; }\n    \n    #badge2 {\n      display: ${badge2 ? 'block' : 'none'};\n      background: ${b2_bg};\n      border-top: 1px solid rgba(128,128,128, 0.2);\n      border-bottom: 1px solid rgba(128,128,128, 0.2);\n      border-left: ${b2_bl};\n      border-right: ${b2_br};\n      border-radius: 6px !important;\n    }\n    #badge2::before { content: \"${badge2}\"; }\n    \n    #t1 { color: ${t1_color}; right: ${t1_right}; }\n    #t1::before { content: \"${t1_text}\"; }\n    \n    #t2 { color: ${t2_color}; }\n    #t2::before { content: \"${t2_text}\"; }\n    \n    ${is_cool ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -15px; border-radius: 50%;\n        box-shadow: inset 8px 0 15px -5px rgba(var(--appliance-color), 0.7), 0 -8px 15px -5px rgba(var(--appliance-color), 0.5);\n        animation: frost-orbit 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -10px; border-radius: 50%;\n        box-shadow: inset -5px 0 15px -5px rgba(var(--appliance-color), 0.9);\n        animation: frost-orbit 3.5s linear infinite reverse;\n      }\n    ` : ''}\n    ${is_heat ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 150%; height: 150%; bottom: -20%; left: -25%; border-radius: 50%;\n        background: radial-gradient(circle at 50% 100%, rgba(var(--appliance-color), 0.45) 0%, transparent 65%);\n        filter: blur(4px);\n        animation: intense-updraft 3s ease-in-out infinite alternate;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 3px; height: 3px; border-radius: 50%; bottom: -5px; left: 50%;\n        background: rgba(var(--appliance-color), 0.9);\n        box-shadow: \n          15px 10px 0 1px rgba(var(--appliance-color), 0.8),\n          -20px 25px 0 0px rgba(var(--appliance-color), 0.7),\n          5px 35px 0 2px rgba(var(--appliance-color), 0.9),\n          -10px 15px 0 -1px rgba(var(--appliance-color), 0.6);\n        animation: intense-embers 2s ease-in infinite;\n      }\n    ` : ''}\n    ${is_dry ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        width: 3px; height: 3px; border-radius: 50%; bottom: 10px; left: 50%;\n        background: rgba(var(--appliance-color), 0.7);\n        box-shadow: -12px 15px 0 1px rgba(var(--appliance-color), 0.4), 10px 25px 0 0.5px rgba(var(--appliance-color), 0.5);\n        animation: evaporate-up 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;\n      }\n    ` : ''}\n    ${is_fan ? `\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: 0; border-radius: 50%; border: 2px solid rgba(var(--appliance-color), 0.5);\n        animation: air-ripple var(--appliance-speed) cubic-bezier(0.1, 0.5, 0.5, 1) infinite;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: 0; border-radius: 50%; border: 2px solid rgba(var(--appliance-color), 0.3);\n        animation: air-ripple var(--appliance-speed) cubic-bezier(0.1, 0.5, 0.5, 1) infinite;\n        animation-delay: calc(var(--appliance-speed) / 2);\n      }\n    ` : ''}\n    ${(is_heat_cool || is_auto) ? `\n      #img-cell {\n        background: linear-gradient(135deg, rgba(33, 150, 243, 0.15) 0%, rgba(255, 87, 34, 0.15) 100%) !important;\n        border: 1px solid rgba(158, 158, 158, 0.2) !important;\n      }\n      #img-cell::before {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -5px; border-radius: 50%;\n        background: \n          radial-gradient(circle at 25% 25%, rgba(33, 150, 243, 0.25) 0%, transparent 60%),\n          radial-gradient(circle at 75% 75%, rgba(255, 87, 34, 0.25) 0%, transparent 60%);\n        animation: auto-breathe 3s ease-in-out infinite alternate;\n      }\n      #img-cell::after {\n        content: ''; position: absolute; pointer-events: none; z-index: 0;\n        inset: -15px; border-radius: 50%;\n        border: 2px solid transparent;\n        border-top-color: rgba(33, 150, 243, 0.4);\n        border-left-color: rgba(33, 150, 243, 0.2);\n        border-bottom-color: rgba(255, 87, 34, 0.4);\n        border-right-color: rgba(255, 87, 34, 0.2);\n        animation: auto-ripple 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;\n      }\n    ` : ''}\n    \n    @keyframes gentle-fire {\n      0%   { transform: scaleY(0.95) skewX(-1deg); color: #ff9800; filter: drop-shadow(0 0 2px rgba(255,152,0,0.4)); }\n      100% { transform: scaleY(1.05) skewX(1deg); color: #ff5722; filter: drop-shadow(0 0 5px rgba(255,87,34,0.6)); }\n    }\n    @keyframes gentle-spin {\n      0%   { transform: rotate(0deg); }\n      100% { transform: rotate(360deg); }\n    }\n    @keyframes frost-orbit {\n      0%   { transform: rotate(0deg) scale(1); }\n      50%  { transform: rotate(180deg) scale(1.05); }\n      100% { transform: rotate(360deg) scale(1); }\n    }\n    @keyframes intense-updraft {\n      0%   { transform: translateY(10px) scale(0.9); opacity: 0.5; }\n      100% { transform: translateY(-15px) scale(1.1); opacity: 1; filter: blur(6px); }\n    }\n    @keyframes intense-embers {\n      0%   { transform: translateY(0) scale(1); opacity: 0; }\n      15%  { opacity: 1; }\n      100% { transform: translateY(-55px) scale(0.3); opacity: 0; }\n    }\n    @keyframes air-ripple {\n      0%   { transform: scale(1); opacity: 0.8; }\n      100% { transform: scale(1.5); opacity: 0; }\n    }\n    @keyframes evaporate-up {\n      0%   { transform: translateY(0); opacity: 0; }\n      30%  { opacity: 1; }\n      100% { transform: translateY(-30px); opacity: 0; }\n    }\n    @keyframes auto-breathe {\n      0%   { transform: scale(0.9); opacity: 0.4; }\n      100% { transform: scale(1.1); opacity: 1; }\n    }\n    @keyframes auto-ripple {\n      0%   { transform: scale(0.7); opacity: 0.8; }\n      100% { transform: scale(1.2); opacity: 0; }\n    }\n  `;\n]]]\n"
+  triggers_update:
+  - climate.clim_chambre_rm4_mini
+  - sensor.th_chambre_temperature
+  - sensor.th_chambre_humidity
+  - sensor.clim_chambre_nous_power
+- type: custom:streamline-card
+  template: clim_voltage_ring-tile
+  variables:
+    card_name: Clim. chambre (V)
+    entity: sensor.clim_chambre_nous_voltage
+  grid_options:
+    columns: 6
+    rows: 3
+- type: custom:streamline-card
+  template: clim_ampere_ring-tile
+  variables:
+    card_name: Clim. chambre (A)
+    entity: sensor.clim_chambre_nous_current
+  grid_options:
+    columns: 6
+    rows: 3
+- type: custom:tabbed-card
+  styles:
+    --mdc-theme-primary: rgb(174,68,90)
+    --mdc-tab-text-label-color-default: rgba(255, 255, 255, 0.6)
+    max-width: 100%
+  attributes:
+    animated: true
+    swipeable: true
+  tabs:
+  - attributes:
+      label: INSTANTANÉ
+      icon: mdi:flash
+    card:
+      type: custom:streamline-card
+      template: conso_temps_reel_clim_rad
+      variables:
+        card_title: Conso. Temps Réel Clim. Chambre
+        energy_entity: sensor.clim_chambre_nous_power
+        energy_color: rgb(30,81,40)
+        current_entity: sensor.clim_chambre_nous_current
+        current_color: rgb(255, 41, 41)
+        avg_daily_entity: sensor.clim_chambre_avg_watts_quotidien
+        conso_daily_kwh_entity: sensor.clim_chambre_quotidien_um
+        power_entity: sensor.clim_chambre_nous_power
+        power_color: rgb(30,81,40)
+        span_offset: +3m
+        group_duration: 1s
+  - attributes:
+      label: MENSUEL
+      icon: mdi:calendar-month
+    card:
+      type: custom:streamline-card
+      template: conso_mensuelle_clim
+      variables:
+        title: Conso. mensuel Clim de la Chambre
+        energy_entity: sensor.clim_chambre_nous_energy
+        energy_name: Conso. jours en cours
+        energy_color: rgb(30,81,40)
+        avg_monthly_entity: sensor.clim_chambre_avg_watts_mensuel
+        temp_entity: sensor.th_balcon_nord_temperature
+        temp_color: rgb(126, 24, 145)
+        conso_monthly_kwh_entity: sensor.clim_chambre_mensuel_um
+  - attributes:
+      label: DUT
+      icon: mdi:chart-line
+    card:
+      type: custom:streamline-card
+      template: apex_dut_piece
+      variables:
+        title: D.U.T. Chambre
+        entity_sensor: sensor.dut_clim_chambre
+        color: rgb(30,81,40)
+        annot_text: Zone de déperdition
+        hours: auto
+        crit_zone: 5
+        thresh_yellow: 4
+        thresh_orange: 6
+        thresh_red: 10
+- type: heading
+  icon: mdi:bed
+  heading_style: title
+  badges:
+  - type: entity
+    show_state: true
+    show_icon: true
+    color: amber
+    state_content:
+    - name
+    - state
+    entity: sensor.clim_chambre_quotidien_um
+    name: Q
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.clim_chambre_hebdomadaire_um
+    name: H
+    color: orange
+    state_content:
+    - name
+    - state
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.clim_chambre_mensuel_um
+    name: M
+    color: deep-orange
+    state_content:
+    - name
+    - state
+  - type: entity
+    show_state: true
+    show_icon: true
+    entity: sensor.clim_chambre_annuel_um
+    name: A
+    color: red
+    state_content:
+    - name
+    - state
+  layout_options:
+    grid_columns: full
+    grid_rows: 1
+  card_mod:
+    style: |
+      ha-card {
+        border: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        margin: -22px 0px 0px 0px;
+      }
+- type: custom:bubble-card
+  card_type: pop-up
+  hash: '#tendances'
+  button_type: name
+  icon: mdi:delta
+  name: CALCUL DU DELTA Intérieur <-> Extérieur
+  cards:
+  - type: custom:streamline-card
+    template: calcule_temp_cible

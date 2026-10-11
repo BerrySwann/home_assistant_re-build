@@ -1,0 +1,118 @@
+type: grid
+cards:
+  - type: heading
+    icon: mdi:cellphone-nfc
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+    heading: Xiaomi POCO X7 Pro Mamour
+  - type: vertical-stack
+    cards:
+      - type: custom:streamline-card
+        template: portable
+        variables:
+          entity: sensor.mamour_battery_level
+  - type: entities
+    entities:
+      - entity: sensor.mamour_battery_level
+      - entity: sensor.mamour_battery_state
+        name: Battery state
+      - entity: sensor.mamour_charger_type
+        name: Charger type
+        secondary_info: none
+      - entity: sensor.mamour_battery_health
+      - entity: sensor.mamour_battery_temperature
+      - entity: sensor.mamour_network_type
+      - entity: sensor.mamour_wi_fi_connection
+    state_color: true
+    show_header_toggle: true
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  - type: heading
+    icon: mdi:cellphone-nfc
+    heading: Oneplus 10Pro NE2213 (M)
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - type: vertical-stack
+    cards:
+      - type: custom:streamline-card
+        template: portable
+        variables:
+          entity: sensor.ne2213_mamour_battery_level
+  - type: entities
+    entities:
+      - entity: sensor.ne2213_mamour_battery_level
+      - entity: sensor.ne2213_mamour_battery_state
+        name: Battery state
+      - entity: sensor.ne2213_mamour_charger_type
+        name: Charger type
+        secondary_info: none
+      - entity: sensor.ne2213_mamour_battery_health
+        name: Battery health
+        secondary_info: none
+      - entity: sensor.ne2213_mamour_battery_temperature
+      - entity: sensor.ne2213_mamour_network_type
+      - entity: sensor.ne2213_mamour_wi_fi_connection
+    state_color: true
+    show_header_toggle: true
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  - type: heading
+    icon: mdi:cellphone-nfc
+    heading: Oneplus 7 GM1901
+    heading_style: title
+    badges: []
+    tap_action:
+      action: navigate
+      navigation_path: /dashboard-tablette/0
+    layout_options:
+      grid_columns: full
+      grid_rows: 1
+  - type: vertical-stack
+    cards:
+      - type: custom:streamline-card
+        template: portable
+        variables:
+          entity: sensor.gm1901_battery_level
+  - type: entities
+    entities:
+      - entity: sensor.gm1901_battery_level
+      - entity: sensor.gm1901_battery_state
+        name: Battery state
+      - entity: sensor.gm1901_charger_type
+        name: Charger type
+        secondary_info: none
+      - entity: sensor.gm1901_battery_health
+      - entity: sensor.gm1901_battery_temperature
+      - entity: sensor.gm1901_network_type
+      - entity: sensor.gm1901_wi_fi_connection
+    state_color: true
+    show_header_toggle: true
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }

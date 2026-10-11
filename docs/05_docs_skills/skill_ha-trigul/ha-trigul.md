@@ -7,7 +7,7 @@ description: "Skill HA ReBuild - triangulation MD5 des docs .md entre local (ReB
 
 ## Objectif
 
-Comparer chaque fichier .md de documentation entre les 3 niveaux et ecrire un rapport dans `historique\MD5\`. Lecture seule : le skill ne modifie, ne pousse et ne corrige aucun fichier de documentation. Il n'ecrit que le rapport.
+Comparer chaque fichier .md de documentation entre les 3 niveaux et ecrire un rapport dans `historique\MD5\`. Lecture seule : le skill ne modifie, ne pousse et ne corrige aucun fichier de documentation. Il n'ecrit que les rapports (et, pour l'etape profonde, les copies datees de la prod dans les dossiers ORIGINAL).
 
 Perimetre : `docs/**/*.md` + `Github/README.md` + `Github/INDEX_GLOBAL.md` (compares a `README.md` et `INDEX_GLOBAL.md` a la racine de la prod et du depot). Les YAML de config sont hors perimetre (voir ha-resync-docs et ha-push-yaml).
 
@@ -15,7 +15,7 @@ Source de verite = LOCAL (ReBuild). Un ecart local/prod veut dire prod EN RETARD
 
 ## Fichiers et chemins
 
-- Script (ne pas le modifier) : `C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md.sh`
+- Script (ne pas le modifier) : `C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_3md.sh`
 - Interpreteur : `C:\Program Files\Git\bin\bash.exe` (git-bash ; la prod H: y apparait en /h)
 - Dossier des rapports : `C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\`
 - Rapport du jour : `hermes_md5_audit_md_[YYYY-MM-DD].txt` ; copie automatique `hermes_md5_audit_md_latest.txt`
@@ -30,7 +30,7 @@ Le script ecrit par defaut dans `historique\` (racine). Pour ranger le rapport d
 
 ```
 if(Get-Process bash -ErrorAction SilentlyContinue){ 'deja en cours, pas de relance' } else {
-$cmd='cmd.exe /c "set LOG_DIR=C:/Users/Berry Swann/Documents/ReBuild/historique/MD5&& "C:\Program Files\Git\bin\bash.exe" "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md.sh" > "%TEMP%\trigul_out.txt" 2> "%TEMP%\trigul_err.txt""'
+$cmd='cmd.exe /c "set LOG_DIR=C:/Users/Berry Swann/Documents/ReBuild/historique/MD5&& "C:\Program Files\Git\bin\bash.exe" "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_3md.sh" > "%TEMP%\trigul_out.txt" 2> "%TEMP%\trigul_err.txt""'
 $r=Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{CommandLine=$cmd}; 'lance, ReturnValue='+$r.ReturnValue+' PID '+$r.ProcessId+' a '+(Get-Date -Format HH:mm:ss) }
 ```
 
@@ -41,6 +41,13 @@ $r=Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{Com
 7. Verifier que `hermes_md5_audit_md_latest.txt` est identique au rapport du jour (MD5).
 8. Supprimer les fichiers temporaires `trigul_out.txt` et `trigul_err.txt` dans `%TEMP%`, et verifier qu'aucun `bash` ne tourne plus.
 
+## Etape profonde (automations et scripts, decidee le 2026-10-11)
+
+Apres le script des docs .md, lancer l'etape profonde : comparaison unite par unite de H:\automations.yaml et H:\scripts.yaml avec les YAML locaux. Elle est integree au /trigul (0.5 s de traitement pour 71 unites). Protocole complet : section PROTOCOLE TRIGUL PROFOND de CLAUDE.md.
+
+1. Lancer : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py"`. Le script copie la prod (`AUTOMATIONS.YALM ORIGINAL\automations.bak_<date_heure>.yaml` et `DOCS_SCRIPT_ORIGINAL\scripts.bak_<date_heure>.yaml`), extrait chaque unite dans `ReBuild\_tmp_trigul_profond\`, compare, ecrit `historique\MD5\trigul_profond_[YYYY-MM-DD].txt` (sauvegarde `.bak_date_heure` si le rapport du jour existe) puis efface le dossier temporaire.
+2. Categories HA : lire `ha_config_get_category` (scopes automation et script), ecrire `historique\MD5\categories_ha_[YYYY-MM-DD].txt` (lignes `scope | category_id | nom | icone`, triees), comparer aux lignes de donnees de la version precedente et signaler ajouts, suppressions, renommages. Releve du 2026-10-11 : 15 categories d'automations, 0 pour les scripts.
+3. Compte rendu : synthese du rapport profond, DIFFERENT et ABSENT_LOCAL (au 2026-10-11 : 62/62 automations identiques ; 3 scripts sur 9 identiques, 6 scripts de la prod sans YAML local), ecarts de categories. Ne rien corriger sans demande.
 ## Lecture du rapport
 
 Colonnes : FICHIER | L<->P | P<->R | L<->R | DETAIL (L = local, P = prod, R = repo GitHub).

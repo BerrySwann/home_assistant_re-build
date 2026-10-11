@@ -1,0 +1,47 @@
+id: '1775331623943'
+alias: P3_BUREAU_ACTIVATION_ECRAN_SYNCHRO
+description: 'Synchronise l''état de l''écran avec l''activité du PC bureau. Rallume
+  aussi la prise si elle reste coupée plus de 7 min alors que la synchro PC est
+  active (7 min : laisse l''arrêt programmé du PC se terminer).'
+triggers:
+- alias: 'DÉCLENCHEMENT : PC BUREAU ALLUMÉ'
+  entity_id: binary_sensor.moniteur_pc
+  id: pc_on
+  to: 'on'
+  trigger: state
+- alias: 'DÉCLENCHEMENT : PC BUREAU ÉTEINT'
+  entity_id: binary_sensor.moniteur_pc
+  for: 00:02:00
+  id: pc_off
+  to: 'off'
+  trigger: state
+- alias: 'DÉCLENCHEMENT : PRISE ÉCRAN COUPÉE 7 MIN'
+  entity_id: switch.ecran_p_c_3_play_hue
+  for: 00:07:00
+  id: prise_off
+  to: 'off'
+  trigger: state
+conditions: []
+actions:
+- alias: 'ACTION : SYNCHRONISATION ALIMENTATION ÉCRAN'
+  choose:
+  - alias: 'CAS : PC ON -> ALLUMER ÉCRAN'
+    conditions:
+    - condition: trigger
+      id: pc_on
+    sequence:
+    - action: switch.turn_on
+      target:
+        entity_id: switch.ecran_p_c_3_play_hue
+  - alias: 'CAS : PRISE COUPÉE ALORS QUE LA SYNCHRO TOURNE -> ALLUMER ÉCRAN'
+    conditions:
+    - condition: trigger
+      id: prise_off
+    - condition: state
+      entity_id: binary_sensor.moniteur_pc
+      state: 'on'
+    sequence:
+    - action: switch.turn_on
+      target:
+        entity_id: switch.ecran_p_c_3_play_hue
+mode: restart

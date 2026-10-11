@@ -117,6 +117,28 @@ Toute modification suit cet ordre, sans exception : **1) le local ReBuild**, 2) 
 **Logs** : `/homeassistant/.logs/md5_audit_yaml_AAAA-MM-JJ.txt` (+ `md5_audit_yaml_latest.txt`) et `md5_audit_md_yaml_AAAA-MM-JJ.txt` (+ `md5_audit_md_yaml_latest.txt`)
 > ⛔ Anciens boutons/modes FULL · YAML · ATMA, scripts `audit_yaml/atma/full.sh` et logs `audit_*.log` : **supprimés** - ne plus référencer (vérifié prod 2026-07-18).
 
+## PROTOCOLE TRIGUL PROFOND (etape du /trigul, decide le 2026-10-11)
+
+Le /trigul normal (docs .md, local / prod / GitHub) est complete par une etape profonde : comparaison des automations et des scripts UNITE PAR UNITE entre la prod (H:\automations.yaml et H:\scripts.yaml) et les YAML locaux de ReBuild.
+
+Decision : l'etape profonde est INTEGREE au /trigul, ce n'est pas une commande a part. Duree mesuree le 2026-10-11 : 0.5 s de traitement pour 71 unites (62 automations + 9 scripts), 0.7 s appel PowerShell compris, contre environ 1 min 30 pour la partie docs .md. Aucun gain a les separer.
+
+Script (ne pas le modifier sans demande) : `docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py`
+Lancement (PowerShell) : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py"`
+
+Le script enchaine, dans cet ordre :
+1. Copie de H:\automations.yaml vers `docs\03_docs_automations\docs_automations_YAML\AUTOMATIONS.YALM ORIGINAL\automations.bak_AAAA_MM_JJ_HHhMMmSSs.yaml` et de H:\scripts.yaml vers `docs\04_docs_scripts\DOCS_SCRIPT_ORIGINAL\scripts.bak_AAAA_MM_JJ_HHhMMmSSs.yaml`, avec controle MD5 de chaque copie.
+2. Extraction d'un fichier par unite dans `ReBuild\_tmp_trigul_profond\` (automations\<id>.yaml, scripts\<nom>.yaml).
+3. Comparaison de chaque unite au YAML local par MD5 logique (YAML parse, cles triees, category et labels ignores, espaces de debut et de fin ignores, commentaires et mise en forme ignores). Automations appariees par id, sinon par alias sans lettre de tete. Scripts apparies par nom.
+4. Rapport `historique\MD5\trigul_profond_AAAA-MM-JJ.txt` (sauvegarde `.bak_date_heure` si le rapport du jour existe deja).
+5. Effacement du dossier `_tmp_trigul_profond` (garde-fou sur le nom et sur le dossier parent).
+
+Puis, par Claude :
+6. Categories HA : lire `ha_config_get_category` pour les scopes automation et script, ecrire `historique\MD5\categories_ha_AAAA-MM-JJ.txt` (lignes `scope | category_id | nom | icone`, triees), comparer a la version precedente du dossier (Compare-Object sur les lignes de donnees) et signaler tout ajout, suppression ou renommage. Limite : cela couvre la liste des categories, pas l'affectation de chaque automation (elle est dans le registre des entites, pas dans automations.yaml).
+7. Compte rendu : donner les lignes de synthese du rapport, lister les DIFFERENT et les ABSENT_LOCAL, les ecarts de categories, et le chemin des rapports. Ne rien corriger sans demande.
+
+Regles : lecture seule sur H: et sur les YAML locaux ; le script n'ecrit que les deux copies datees, le rapport et le dossier temporaire. Les copies datees des dossiers ORIGINAL sont des `.bak` ordinaires, traitees par le menage de /histo (jours passes sans l'heure, plafond de 3). Ordre du trigul : local, prod, GitHub.
+
 ---
 
 ## Cohérence Documentaire (anti-oubli)
@@ -145,7 +167,7 @@ Toute modification suit cet ordre, sans exception : **1) le local ReBuild**, 2) 
 - `/ha_push_docs` → synchronise les docs locales `docs/` vers `H:\Docs\`.
 - `/ha_push_md` → pousse uniquement les fichiers `*.md` de `docs/` vers `H:\Docs\`.
 - `/ha_resync_docs` → resynchronise `docs/` depuis GitHub (audit MD5).
-- `/trigul` → triangulation MD5 des docs (local vs prod vs GitHub), rapport dans `historique\MD5\`.
+- `/trigul` → triangulation MD5 des docs (local vs prod vs GitHub), rapport dans `historique\MD5\`. Inclut l'etape profonde automations/scripts et les categories HA (voir PROTOCOLE TRIGUL PROFOND).
 
 ## PROTOCOLE FIN DE SESSION (OBLIGATOIRE)
 
@@ -462,7 +484,10 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 - Un nom de fichier ne contient plus jamais de date. Les dashboards ne sont plus versionnes dans
   leur nom de fichier.
 - Seule exception conservee : `docs/02_docs_dashboard/dashboard_docs_YAML/Dashboard_COMPLET/Dashboard_YYYY_MM_DD.yaml`
-  (photo complete du dashboard, une par jour, conservation illimitee) - a confirmer par Eric.
+  (photo complete du dashboard, une par jour, conservation illimitee) - confirme par Eric le 2026-10-11.
+- `Dashboard_COMPLET/` ne se vide JAMAIS (decide par Eric le 2026-10-11) : ses exports sont les mises a jour au fil de l'eau du dashboard complet.
+  En local : aucun menage, aucune suppression, aucun `.bak`, aucun renommage. Ne jamais proposer de le purger ni de le consolider.
+  (Cote prod, la regle de `/histo` etape 5B reste inchangee : un seul export, le plus recent.)
 
 ---
 
@@ -582,6 +607,8 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 | **L4** | Mini PC (NUC) | Proxmox (PVE) | Mises à jour HA |
 | **L5** | Piles / Batteries | Batteries Portables | MariaDB |
 | **L6** | Qualité Air (Appart) | Pollution / Pollen | Vigilance Eau |
+
+> Page d'accueil L0C0 : le dossier s'appelle `L0C0_PAGE_Home` (cote MD et cote YAML). Nom decide par Eric le 2026-10-11 : ne pas le renommer, ne pas revenir a `PAGE_Home (L0C0)`.
 
 ---
 

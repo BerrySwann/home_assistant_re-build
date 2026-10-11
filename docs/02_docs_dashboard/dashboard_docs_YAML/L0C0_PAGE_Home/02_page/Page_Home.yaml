@@ -1,0 +1,4108 @@
+type: grid
+cards:
+  - type: picture-elements
+    image: /local/meteo/empty.png
+    elements:
+      - type: custom:meteo-card
+        weather: weather.vence
+        sun_entity: sun.sun
+        house_angle: 180
+        singleton_id: vence_meteo
+        layers:
+          - sky
+          - background
+          - sun
+          - moon
+          - foreground
+        style:
+          top: 50%
+          left: 50%
+          width: 100%
+          height: 100%
+      - type: custom:html-template-card
+        title: ''
+        ignore_line_breaks: true
+        picture_elements_mode: true
+        content: |-
+          <div style="position:absolute;top:52%;left:50%;
+            transform:translate(-50%,-50%) perspective(180px) rotateX(58deg);
+            width:160px;height:160px;opacity:0.85;pointer-events:none;">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <filter id="rose-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="rgba(0,0,0,0.75)"/>
+                </filter>
+              </defs>
+              <g filter="url(#rose-shadow)">
+                <circle cx="100" cy="100" r="78" fill="none" stroke="rgba(150,170,200,0.5)" stroke-width="1.5"/>
+                <polygon points="146,54 108,100 146,146 100,108 54,146 92,100 54,54 100,92"
+                  fill="rgba(120,150,190,0.7)"/>
+                <polygon points="100,38 106,94 162,100 106,106 100,162 94,106 38,100 94,94"
+                  fill="rgba(200,210,225,0.95)"/>
+                <circle cx="100" cy="100" r="9" fill="rgba(10,20,40,0.9)" stroke="rgba(200,210,225,0.8)" stroke-width="2"/>
+                <text x="100" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="rgba(220,230,245,1)" font-family="Arial,sans-serif">S</text>
+                <text x="100" y="174" text-anchor="middle" font-size="20" font-weight="bold" fill="rgba(150,170,200,0.9)" font-family="Arial,sans-serif">N</text>
+                <text x="22" y="106" text-anchor="middle" font-size="20" font-weight="bold" fill="rgba(150,170,200,0.9)" font-family="Arial,sans-serif">E</text>
+                <text x="180" y="106" text-anchor="middle" font-size="20" font-weight="bold" fill="rgba(220,230,245,1)" font-family="Arial,sans-serif">W</text>
+              </g>
+            </svg>
+          </div>
+        style:
+          top: 62%
+          left: 50%
+          width: 100%
+          height: 100%
+      - type: custom:html-template-card
+        title: ''
+        ignore_line_breaks: true
+        picture_elements_mode: true
+        content: |-
+          {% if is_state('sensor.alerte_meteo', 'Jaune') or
+                is_state('sensor.alerte_meteo', 'Orange') or
+                is_state('sensor.alerte_meteo', 'Rouge') %}
+          <style>
+            @keyframes alerte-pulse {
+              0%,100% { opacity:1; }
+              50%      { opacity:0.3; }
+            }
+          </style>
+          <div style="
+            position:absolute;top:70%;left:50%;
+            transform:translateX(-50%);
+            font-size:14px;font-weight:bold;letter-spacing:4px;
+            font-variant:small-caps;
+            color:{% if is_state('sensor.alerte_meteo','Jaune') %}rgba(255,185,0,1)
+                  {% elif is_state('sensor.alerte_meteo','Orange') %}rgb(255,105,49)
+                  {% else %}rgba(150,10,10,1){% endif %};
+            text-shadow:
+              0 0 3px rgba(0,0,0,0.9),
+              0 0 6px rgba(0,0,0,0.9),
+              0 0 10px rgba(0,0,0,0.7);
+            white-space:nowrap;pointer-events:none;
+            {% if is_state('sensor.alerte_meteo','Rouge') %}animation:alerte-pulse 0.9s ease-in-out infinite;{% endif %}
+          ">
+            {% if is_state('sensor.alerte_meteo','Jaune') %}⚠️ Vigilance Jaune ⚠️
+            {% elif is_state('sensor.alerte_meteo','Orange') %}⚠️ Vigilance Orange ⚠️
+            {% else %}⚠️ Vigilance Rouge ⚠️
+            {% endif %}
+          </div>
+          {% endif %}
+        style:
+          top: -5%
+          left: 50%
+          width: 100%
+          height: 100%
+      - type: custom:html-template-card
+        title: ''
+        ignore_line_breaks: true
+        picture_elements_mode: true
+        content: |-
+          <div style="
+            position:absolute;bottom:8px;left:50%;
+            transform:translateX(-50%);
+            font-size:16px;font-weight:bold;letter-spacing:4px;
+            font-variant:small-caps;color:rgba(255,255,255,0.85);
+            text-shadow:0px 1px 6px rgba(0,0,0,0.95);
+            white-space:nowrap;pointer-events:none;">
+            {{ states('sensor.vence_original_condition') }} — {{ states('sensor.th_balcon_nord_temperature') | float(0) | round(1) }}°C
+          </div>
+        style:
+          top: 47%
+          left: 50%
+          width: 100%
+          height: 100%
+      - type: custom:html-template-card
+        title: ''
+        ignore_line_breaks: true
+        picture_elements_mode: true
+        content: |-
+          <div style="
+            position:absolute;top:8px;left:50%;
+            transform:translateX(-50%);
+            font-size:19px;font-weight:bold;letter-spacing:4px;
+            font-variant:small-caps;color:rgba(255,255,255,0.85);
+            text-shadow:0px 1px 6px rgba(0,0,0,0.95);
+            white-space:nowrap;pointer-events:none;">
+            VENCE — {{ now().strftime('%H:%M') }}
+          </div>
+        style:
+          top: 50%
+          left: 50%
+          width: 100%
+          height: 100%
+    card_mod:
+      style: |
+        :host {
+          display: block;
+          height: 270px !important;
+          overflow: hidden;
+          border-radius: var(--ha-card-border-radius, 12px);
+        }
+  - type: custom:meteofrance-weather-card
+    entity: weather.vence
+    animated_icons: true
+    alert_forecast: true
+    details: false
+    current: false
+    one_hour_forecast: true
+    forecast: true
+    rainChanceEntity: sensor.vence_rain_chance
+    uvEntity: sensor.vence_uv
+    cloudCoverEntity: sensor.vence_cloud_cover
+    freezeChanceEntity: sensor.vence_freeze_chance
+    snowChanceEntity: sensor.vence_snow_chance
+    alertEntity: sensor.06_weather_alert
+    name: Vence
+    detailEntity: sensor.temperature_delta_affichage
+    daily_forecast: false
+    wind_forecast_icons: true
+    humidity_forecast: true
+    hourly_forecast: false
+    rainForecastEntity: sensor.vence_next_rain
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  - type: conditional
+    conditions:
+      - condition: numeric_state
+        entity: sensor.studio_code_server_pourcentage_du_processeur
+        above: 1
+    card:
+      type: custom:button-card
+      entity: sensor.studio_code_server_pourcentage_du_processeur
+      name: Visual Server Code
+      icon: mdi:microsoft-visual-studio-code
+      show_state: true
+      show_label: false
+      state_display: |
+        [[[ 
+          return parseFloat(entity.state).toFixed(2) + ' %'; 
+        ]]]
+      layout: icon_name_state
+      tap_action:
+        action: call-service
+        confirmation:
+          text: |-
+            ⚠️ VS Code semble bloqué ?
+
+            Voulez-vous forcer le redémarrage de l'Add-on ?
+        service: hassio.addon_restart
+        service_data:
+          addon: a0d7b954_vscode
+      styles:
+        card:
+          - border-radius: 12px
+          - height: 50px
+          - padding: 0px 15px
+          - border: none
+          - box-shadow: none
+          - background-color: |
+              [[[
+                return (parseFloat(entity.state) > 20) ? '#f44336' : '#03a9f4';
+              ]]]
+          - animation: |
+              [[[
+                return (parseFloat(entity.state) > 20) ? 'blink 1s ease infinite' : 'none';
+              ]]]
+        grid:
+          - grid-template-columns: 35px auto 60px
+        icon:
+          - width: 24px
+          - color: white
+        name:
+          - color: white
+          - font-weight: bold
+          - font-size: 14px
+          - justify-self: start
+        state:
+          - color: white
+          - font-weight: bold
+          - font-size: 14px
+          - justify-self: end
+      extra_styles: |
+        @keyframes blink {
+          50% { opacity: 0.5; }
+        }
+  - type: custom:button-card
+    entity: sensor.maison_lightning_counter
+    triggers_update:
+      - sensor.timer_foudre
+      - sensor.maison_lightning_distance
+    name: |
+      [[[
+        const distRaw = states['sensor.maison_lightning_distance'] ? parseFloat(states['sensor.maison_lightning_distance'].state) : 0;
+        const localisation = states['sensor.maison_lightning_localisation'];
+        const azimuth = states['sensor.maison_lightning_azimuth'] ? parseFloat(states['sensor.maison_lightning_azimuth'].state) : null;
+        const impactCount = parseInt(entity.state) || 0;
+        const timePhrase = states['sensor.timer_foudre'] ? states['sensor.timer_foudre'].state : '';
+
+        let message = '';
+        
+        if (distRaw > 0) {
+          const distance = distRaw.toFixed(1);
+          message = `Impact à <strong>${distance} Km</strong>`;
+          
+          let city = null;
+          if (localisation && localisation.attributes && localisation.attributes.features) {
+            const features = localisation.attributes.features;
+            if (features[0]?.properties?.geocoding?.city) {
+              city = features[0].properties.geocoding.city;
+              message += ` à ${city}`;
+            }
+          }
+
+          if (!city && azimuth !== null) {
+            const directions = [
+              "au nord", "au nord-nord-est", "au nord-est", "à l'est-nord-est", 
+              "à l'est", "à l'est-sud-est", "au sud-est", "au sud-sud-est", 
+              "au sud", "au sud-sud-ouest", "au sud-ouest", "à l'ouest-sud-ouest", 
+              "à l'ouest", "à l'ouest-nord-ouest", "au nord-ouest", "au nord-nord-ouest"
+            ];
+            const index = Math.round(azimuth / 22.5) % 16;
+            message += ` ${directions[index]}`;
+          }
+        } else {
+          message = "Aucun impact récent détecté";
+        }
+
+        const impactLine = impactCount > 0 
+          ? `<br><span style="color: #ffeb3b; font-weight: bold; font-size: 17px;">⚡ ${impactCount} impact(s) détecté(s)</span>` 
+          : '';
+
+        return `
+          <div style="line-height: 1.6;">
+            <span style="font-size: 14px;">${message}</span><br>
+            <span style="font-size: 13px; opacity: 0.9; font-weight: 500;">${timePhrase}</span>
+            ${impactLine}
+          </div>
+        `;
+      ]]]
+    show_state: false
+    styles:
+      card:
+        - border-radius: 12px
+        - padding: 15px
+        - border-style: solid
+        - border-width: 2px
+        - background: |
+            [[[
+              const d = parseFloat(states['sensor.maison_lightning_distance']?.state);
+              if (d > 0 && d <= 5) return 'rgba(255, 0, 0, 0.2)';
+              if (d > 5) return 'rgba(255, 123, 0, 0.1)';
+              return 'rgba(0, 255, 0, 0.05)';
+            ]]]
+        - border-color: |
+            [[[
+              const d = parseFloat(states['sensor.maison_lightning_distance']?.state);
+              if (d > 0 && d <= 5) return 'red';
+              if (d > 5) return 'rgba(255, 123, 0, 0.5)';
+              return 'rgba(0, 255, 0, 0.4)';
+            ]]]
+        - animation: |
+            [[[
+              const d = parseFloat(states['sensor.maison_lightning_distance']?.state);
+              return (d > 0 && d <= 5) ? 'blink-danger 1s ease infinite' : 'none';
+            ]]]
+      name:
+        - justify-self: center
+        - text-align: center
+        - color: white
+      icon:
+        - width: 45px
+        - color: |
+            [[[
+              const d = parseFloat(states['sensor.maison_lightning_distance']?.state);
+              if (d > 0 && d <= 5) return 'red';
+              if (d > 5) return 'rgb(255, 123, 0)';
+              return 'rgb(0, 255, 0)';
+            ]]]
+    extra_styles: |
+      @keyframes blink-danger {
+        50% { background: rgba(255, 0, 0, 0.6); border-color: white; }
+      }
+    tap_action:
+      action: navigate
+      navigation_path: meteo/#foudre
+    grid_options:
+      columns: 12
+      rows: 2.5
+    visibility:
+      - condition: numeric_state
+        entity: sensor.maison_lightning_counter
+        above: 1
+  - type: custom:mushroom-entity-card
+    entity: sensor.prise_lave_linge_nous_power
+    name: Lave Linge
+    icon: mdi:washing-machine
+    primary_info: name
+    secondary_info: state
+    tap_action:
+      action: more-info
+    icon_color: light-grey
+    fill_container: false
+    grid_options:
+      columns: 12
+      rows: 2
+    visibility:
+      - condition: numeric_state
+        above: 2
+        entity: sensor.prise_lave_linge_nous_power
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            /* ======================== */
+            /* USER CONFIGURATION       */
+            /* ======================== */
+            
+            /* 1. ENTITIES */
+            {% set ent_progress  = 'sensor.lave_linge_etat' %}
+            {% set ent_timerem = 'sensor.lave_linge_temps_restant' %}
+            {% set max_time = 120 %}
+            {% set ent_power   = 'sensor.prise_lave_linge_nous_power' %}
+
+            /* OPTIONAL Progress Percentage Sensor (if exists) */
+            {% set ent_percent   = 'sensor.lave_linge_progres' %}
+
+            /* 2. SIZES (Px) */
+            --config-icon-size:       65px;
+            --config-font-primary:    15px;
+            --config-font-secondary:  12px;
+            --config-font-badge:      12px;
+            /* ======================== */
+
+            /* --- SENSORS & TIME --- */
+            {% set status = states(ent_progress) %}
+            {% set status_clean = status | replace('-', ' ') | title %}
+
+            /* --- DETECT TIME REMAINING FORAMT --- */
+            {% set raw_val = states(ent_timerem) | string %}
+
+            /* Check if Timestamp */
+            {% if '-' in raw_val and ':' in raw_val %}
+              {% set end_ts = raw_val | as_datetime %}
+              {% if end_ts %}
+                 {% set time_rem = ((end_ts - now()).total_seconds() / 60) | int %}
+              {% else %}
+                 {% set time_rem = 0 %}
+              {% endif %}
+            
+            /* Check if (00:00 or 0:00:00) */
+            {% elif ':' in raw_val %}
+              {% set parts = raw_val.split(':') %}
+              {% if parts | length == 3 %}
+                 /* Format H:M:S -> Convert to minutes */
+                 {% set time_rem = (parts[0]|int * 60) + (parts[1]|int) + (parts[2]|int / 60) %}
+              {% elif parts | length == 2 %}
+                 /* Format H:M -> Convert to minutes */
+                 {% set time_rem = (parts[0]|int * 60) + (parts[1]|int) %}
+              {% else %}
+                 {% set time_rem = 0 %}
+              {% endif %}
+
+            /* Default to Minutes */
+            {% else %}
+              {% set time_rem = raw_val | float(0) | int %}
+            {% endif %}
+
+            /* Prevent negative numbers */
+            {% set time_rem = time_rem | int %}
+            {% if time_rem < 0 %} 
+              {% set time_rem = 0 %} 
+            {% endif %}
+
+            {% set raw_percent = states(ent_percent) | float(-1) %}
+
+            /* --- POWER CALCULATION --- */
+            {% set raw_power = states(ent_power) %}
+            {% if is_number(raw_power) %}
+                {% set power_w = raw_power | float(0) | round %}
+                {% set power_text = ' • ' ~ power_w ~ 'W' %}
+            {% else %}
+                {% set power_text = '' %}
+            {% endif %}
+            
+            /* Format Time (min -> Xh Ym) */
+            {% set hours = (time_rem / 60) | int %}
+            {% set mins = time_rem % 60 %}
+            {% set time_formatted = '%dh %02dm' | format(hours, mins) %}
+
+            /* --- PROGRESS CALCULATION --- */
+            
+            {% if status | lower in ['idle', 'off', 'standby', 'unknown', 'unavailable'] %}
+               {% set progress = 0 %}
+               {% set badge_text = status_clean ~ power_text %}
+            {% else %}
+               
+               /* LOGIC: Use Sensor if available, otherwise Calculate */
+               {% if raw_percent >= 0 %}
+                  /* Use the sensor provided percentage */
+                  {% set progress = raw_percent | int %}
+               {% else %}
+                  /* Fallback: Calculate based on max_time */
+                  {% set max_cycle_time = max_time %}
+                  {% set calc_prog = ((max_cycle_time - time_rem) / max_cycle_time * 100) | int %}
+                  {% set progress = [5, [calc_prog, 100] | min] | max %}
+               {% endif %}
+
+               {% set badge_text = status_clean ~ ' • ' ~ time_formatted ~ power_text %}
+            {% endif %}
+
+            /* --- STATE DEFINITIONS --- */
+            {% set s_lower = status | lower %}
+            {% set is_running  = s_lower in ['starting', 'running', 'ending', 'rinse', 'clean', 'paused', 'user_paused', 'anti_wrinkle', 'delay_wait'] %}
+            {% set is_spinning = s_lower in ['spin', 'spinning'] %}
+            {% set is_drying   = s_lower in ['dry', 'drying'] %}
+            {% set is_done     = s_lower in ['finished', 'complete', 'end'] %}
+
+            /* --- ASSIGN ANIMATIONS --- */
+            {% if is_drying %}
+              {% set color = '255, 152, 0' %}   /* Orange */
+              {% set anim_type = 'steam-rise 2s ease-in-out infinite' %}
+              {% set icon_shake = 'none' %}
+              {% set wave_anim = 'wave 4s linear infinite' %}
+              {% set overlay_img = 'linear-gradient(0deg, transparent, rgba(255,255,255,0.5), transparent)' %}
+            
+            {% elif is_spinning %}
+              {% set color = '0, 255, 255' %}   /* cyan */
+              {% set anim_type = 'none' %}
+              {% set icon_shake = 'washer-spin-smooth 0.8s linear infinite' %}
+              {% set wave_anim = 'wave 2s linear infinite' %}          /* Fast Wave */
+              {% set overlay_img = 'radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 60%)' %}
+
+            {% elif is_done %}
+              {% set color = '76, 175, 80' %}   /* Green */
+              {% set anim_type = 'sparkle 2s infinite' %}
+              {% set icon_shake = 'none' %}
+              {% set wave_anim = 'wave 4s linear infinite' %}
+              {% set overlay_img = 'radial-gradient(circle, rgba(255,255,255,0.8) 10%, transparent 60%)' %}
+
+            {% elif is_running %}
+              {% set color = '33, 150, 243' %}   /* Blue */
+              {% set anim_type = 'bubbles 1s linear infinite' %}
+              {% set icon_shake = 'shake 1.5s ease-in-out infinite' %} /* Slow Shake */
+              {% set wave_anim = 'wave 4s linear infinite' %}
+              {% set overlay_img = 'radial-gradient(2px 2px at 20% 80%, white, transparent), radial-gradient(2px 2px at 50% 70%, white, transparent)' %}
+            
+            {% else %}
+              {% set color = '158, 158, 158' %}  /* Grey */
+              {% set anim_type = 'none' %}
+              {% set icon_shake = 'none' %}
+              {% set wave_anim = 'none' %}
+              {% set overlay_img = 'none' %}
+            {% endif %}
+
+            /* --- OUTPUT VARIABLES --- */
+            --wm-color: {{ color }};
+            --wm-level: {{ progress }}%;
+            --wm-anim-overlay: {{ anim_type }};
+            --wm-anim-shake: {{ icon_shake }};
+            --wm-anim-wave: {{ wave_anim }};
+            --wm-overlay-bg: {{ overlay_img }};
+            --wm-badge-content: "{{ badge_text }}";
+            
+            transition: all 0.5s ease;
+            overflow: hidden;
+          }
+
+          /* BADGE */
+          ha-card::before {
+            content: var(--wm-badge-content);
+            position: absolute;
+            top: 10px; right: 10px;
+            background: rgba(var(--wm-color), 0.15);
+            color: rgb(var(--wm-color));
+            border: 1px solid rgba(var(--wm-color), 0.3);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: var(--config-font-badge);
+          }
+
+          /* BAR */
+          ha-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 4px;
+            width: var(--wm-level);
+            background: rgb(var(--wm-color));
+            box-shadow: 0 0 10px rgb(var(--wm-color));
+            transition: width 0.5s ease;
+          }
+          ha-card {
+            --ha-card-background: none;
+            --ha-card-box-shadow: none;
+            --ha-card-border-width: 0;
+            background: none !important;
+            box-shadow: none !important;
+            border: none !important;
+            backdrop-filter: none !important;
+            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+          }
+        mushroom-shape-icon$: |
+          .shape {
+            --icon-size: var(--config-icon-size) !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
+            
+            /* Apply the animation determined by the Logic below */
+            animation: var(--wm-anim-shake) !important;
+            transform-origin: center center; 
+          }
+
+          /* Wave Layer */
+          .shape::before {
+            content: '';
+            position: absolute;
+            left: -50%;
+            width: 200%; height: 200%;
+            top: calc(100% - var(--wm-level));
+            background: rgba(var(--wm-color), 0.6);
+            border-radius: 40%;
+            animation: var(--wm-anim-wave);
+          }
+
+          /* Overlay Layer (Bubbles/Steam) */
+          .shape::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: var(--wm-overlay-bg);
+            background-size: 100% 100%;
+            animation: var(--wm-anim-overlay);
+            z-index: 2;
+          }
+
+          /* The Icon Itself */
+          ha-icon {
+            z-index: 3;
+            mix-blend-mode: overlay;
+            color: white !important;
+          }
+
+          /* --- KEYFRAMES --- */
+          @keyframes wave {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+          }
+          @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg) translateY(-1px); }
+            75% { transform: rotate(-5deg) translateY(1px); }
+          }
+          @keyframes bubbles {
+            0% { transform: translateY(10px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-20px); opacity: 0; }
+          }
+          @keyframes steam-rise {
+            0% { opacity: 0; transform: translateY(5px); }
+            50% { opacity: 0.8; }
+            100% { opacity: 0; transform: translateY(-10px); }
+          }
+          @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+          }
+
+          @keyframes washer-spin-smooth {
+            0% {
+              transform: rotate(0deg) translate(0,0);
+              box-shadow: inset 0 0 0 2px rgba(var(--wm-color), 0.7);
+            }
+            25% { transform: rotate(90deg) translate(0.5px, 0.5px); }
+            50% { transform: rotate(180deg) translate(0,0); }
+            75% { transform: rotate(270deg) translate(-0.5px, -0.5px); }
+            100% {
+              transform: rotate(360deg) translate(0,0);
+              box-shadow: inset 0 0 0 2px rgba(var(--wm-color), 0.7);
+            }
+          }
+        mushroom-state-info$: |-
+          .container .primary {
+            font-size: var(--config-font-primary) !important;
+          }
+          .container .secondary {
+            font-size: var(--config-font-secondary) !important;
+          }
+  - type: custom:mushroom-entity-card
+    entity: sensor.prise_lave_vaisselle_nous_power
+    name: Lave Vaisselle
+    icon: mdi:dishwasher
+    primary_info: name
+    secondary_info: state
+    tap_action:
+      action: more-info
+    icon_color: light-grey
+    fill_container: false
+    grid_options:
+      rows: 2
+      columns: 12
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            /* ======================== */
+            /* USER CONFIGURATION       */
+            /* ======================== */
+            
+            /* 1. ENTITIES */
+            {% set ent_progress  = 'sensor.lave_vaisselle_etat' %}
+            {% set ent_timerem   = 'sensor.lave_vaisselle_temps_restant' %}
+            {% set max_time = 120 %}
+            {% set ent_power     = 'sensor.prise_lave_vaisselle_nous_power' %} 
+            
+            /* OPTIONAL Progress Percentage Sensor (if exists) */
+            {% set ent_percent   = 'sensor.lave_vaisselle_progres' %}
+
+            /* 2. SIZES (Px) */
+            --config-icon-size:       65px;
+            --config-font-primary:    15px;
+            --config-font-secondary:  12px;
+            --config-font-badge:      12px;
+            /* ======================== */
+
+            /* --- SENSORS & TIME --- */
+            {% set status = states(ent_progress) %}
+            {% set status_clean = status | replace('-', ' ') | title %}
+
+            /* --- DETECT TIME REMAINING FORAMT --- */
+            {% set raw_val = states(ent_timerem) | string %}
+
+            /* Check if Timestamp */
+            {% if '-' in raw_val and ':' in raw_val %}
+              {% set end_ts = raw_val | as_datetime %}
+              {% if end_ts %}
+                 {% set time_rem = ((end_ts - now()).total_seconds() / 60) | int %}
+              {% else %}
+                 {% set time_rem = 0 %}
+              {% endif %}
+            
+            /* Check if (00:00 or 0:00:00) */
+            {% elif ':' in raw_val %}
+              {% set parts = raw_val.split(':') %}
+              {% if parts | length == 3 %}
+                 /* Format H:M:S -> Convert to minutes */
+                 {% set time_rem = (parts[0]|int * 60) + (parts[1]|int) + (parts[2]|int / 60) %}
+              {% elif parts | length == 2 %}
+                 /* Format H:M -> Convert to minutes */
+                 {% set time_rem = (parts[0]|int * 60) + (parts[1]|int) %}
+              {% else %}
+                 {% set time_rem = 0 %}
+              {% endif %}
+
+            /* Default to Minutes */
+            {% else %}
+              {% set time_rem = raw_val | float(0) | int %}
+            {% endif %}
+
+            /* Prevent negative */
+            {% set time_rem = time_rem | int %}
+            {% if time_rem < 0 %} 
+              {% set time_rem = 0 %} 
+            {% endif %}
+
+            {% set raw_percent = states(ent_percent) | float(-1) %}
+            
+            /* --- POWER CALCULATION --- */
+            {% set raw_power = states(ent_power) %}
+            {% if is_number(raw_power) %}
+                {% set power_w = raw_power | float(0) | round %}
+                {% set power_text = ' • ' ~ power_w ~ 'W' %}
+            {% else %}
+                {% set power_text = '' %}
+            {% endif %}
+
+            /* Format Time (min -> Xh Ym) */
+            {% set hours = (time_rem / 60) | int %}
+            {% set mins = time_rem % 60 %}
+            {% set time_formatted = '%dh %02dm' | format(hours, mins) %}
+
+            /* --- PROGRESS CALCULATION --- */
+            {% if status | lower in ['idle', 'off', 'standby', 'unknown', 'unavailable'] %}
+               {% set progress = 0 %}
+               {% set badge_text = status_clean ~ power_text %}
+            {% else %}
+               
+               /* LOGIC: Use Sensor if available, otherwise Calculate */
+               {% if raw_percent >= 0 %}
+                  /* Use the sensor provided percentage */
+                  {% set progress = raw_percent | int %}
+               {% else %}
+                  /* Fallback: Calculate based on max_time */
+                  {% set max_cycle_time = max_time %}
+                  {% set calc_prog = ((max_cycle_time - time_rem) / max_cycle_time * 100) | int %}
+                  {% set progress = [5, [calc_prog, 100] | min] | max %}
+               {% endif %}
+
+               /* Show Status + Time + Power */
+               {% set badge_text = status_clean ~ ' • ' ~ time_formatted ~ power_text %}
+            {% endif %}
+
+            /* --- STATE DEFINITIONS --- */
+            {% set s_lower = status | lower %}
+            {% set is_running = s_lower in ['starting', 'running', 'ending', 'rinse', 'clean', 'paused', 'user_paused', 'anti_wrinkle', 'delay_wait'] %}
+            {% set is_drying  = s_lower in ['dry', 'drying'] %}
+            {% set is_done    = s_lower in ['finished', 'complete', 'end'] %}
+
+            /* --- ASSIGN ANIMATIONS --- */
+            {% if is_drying %}
+              {% set color = '255, 152, 0' %}  /* Orange */
+              {% set anim_type = 'steam-rise 2s ease-in-out infinite' %}
+              {% set icon_shake = 'none' %}
+              {% set wave_anim = 'wave 4s linear infinite' %}
+              {% set overlay_img = 'linear-gradient(0deg, transparent, rgba(255,255,255,0.5), transparent)' %}
+            {% elif is_done %}
+              {% set color = '76, 175, 80' %}   /* Green */
+              {% set anim_type = 'sparkle 2s infinite' %}
+              {% set icon_shake = 'none' %}
+              {% set wave_anim = 'wave 4s linear infinite' %}
+              {% set overlay_img = 'radial-gradient(circle, rgba(255,255,255,0.8) 10%, transparent 60%)' %}
+            {% elif is_running %}
+              {% set color = '33, 150, 243' %}  /* Blue */
+              {% set anim_type = 'bubbles 1s linear infinite' %}
+              {% set icon_shake = 'shake 0.8s ease-in-out infinite' %}
+              {% set wave_anim = 'wave 4s linear infinite' %}
+              {% set overlay_img = 'radial-gradient(2px 2px at 20% 80%, white, transparent), radial-gradient(2px 2px at 50% 70%, white, transparent)' %}
+            {% else %}
+              {% set color = '158, 158, 158' %}  /* Grey */
+              {% set anim_type = 'none' %}
+              {% set icon_shake = 'none' %}
+              {% set wave_anim = 'none' %}
+              {% set overlay_img = 'none' %}
+            {% endif %}
+
+            /* --- OUTPUT VARIABLES --- */
+            --dw-color: {{ color }};
+            --dw-level: {{ progress }}%;
+            --dw-anim-overlay: {{ anim_type }};
+            --dw-anim-shake: {{ icon_shake }};
+            --dw-anim-wave: {{ wave_anim }};
+            --dw-overlay-bg: {{ overlay_img }};
+            --dw-badge-content: "{{ badge_text }}";
+            
+            transition: all 0.5s ease;
+            overflow: hidden;
+          }
+
+          /* BADGE */
+          ha-card::before {
+            content: var(--dw-badge-content);
+            position: absolute;
+            top: 10px; right: 10px;
+            background: rgba(var(--dw-color), 0.15);
+            color: rgb(var(--dw-color));
+            border: 1px solid rgba(var(--dw-color), 0.3);
+            padding: 2px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: var(--config-font-badge);
+          }
+
+          /* BAR */
+          ha-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 4px;
+            width: var(--dw-level);
+            background: rgb(var(--dw-color));
+            box-shadow: 0 0 10px rgb(var(--dw-color));
+            transition: width 0.5s ease;
+          }
+          ha-card {
+            --ha-card-background: none;
+            --ha-card-box-shadow: none;
+            --ha-card-border-width: 0;
+            background: none !important;
+            box-shadow: none !important;
+            border: none !important;
+            backdrop-filter: none !important;
+            clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+          }
+        mushroom-shape-icon$: |
+          .shape {
+            --icon-size: var(--config-icon-size) !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
+            
+            /* Apply the animation determined by the Logic below */
+            animation: var(--dw-anim-shake) !important;
+            transform-origin: 50% 60%; 
+          }
+
+          /* Wave Layer */
+          .shape::before {
+            content: '';
+            position: absolute;
+            left: -50%;
+            width: 200%; height: 200%;
+            top: calc(100% - var(--dw-level));
+            background: rgba(var(--dw-color), 0.6);
+            border-radius: 40%;
+            animation: var(--dw-anim-wave);
+          }
+
+          /* Overlay Layer (Bubbles/Steam) */
+          .shape::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: var(--dw-overlay-bg);
+            background-size: 100% 100%;
+            animation: var(--dw-anim-overlay);
+            z-index: 2;
+          }
+
+          /* The Icon Itself */
+          ha-icon {
+            z-index: 3;
+            mix-blend-mode: overlay;
+            color: white !important;
+          }
+
+          /* --- KEYFRAMES --- */
+          @keyframes wave {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+          }
+          @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg) translateY(-1px); }
+            75% { transform: rotate(-5deg) translateY(1px); }
+          }
+          @keyframes bubbles {
+            0% { transform: translateY(10px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-20px); opacity: 0; }
+          }
+          @keyframes steam-rise {
+            0% { opacity: 0; transform: translateY(5px); }
+            50% { opacity: 0.8; }
+            100% { opacity: 0; transform: translateY(-10px); }
+          }
+          @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+          }
+        mushroom-state-info$: |-
+          .container .primary {
+            font-size: var(--config-font-primary) !important;
+          }
+          .container .secondary {
+            font-size: var(--config-font-secondary) !important;
+          }
+    visibility:
+      - condition: numeric_state
+        above: 2
+        entity: sensor.prise_lave_vaisselle_nous_power
+  - visibility:
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            above: -15
+            entity: sensor.tongel_temperature
+          - condition: state
+            entity: binary_sensor.porte_congel_contact
+            state: 'on'
+    type: custom:button-card
+    entity: sensor.prise_congelateur_cuisine_nous_power
+    name: Congélateur
+    show_state: false
+    show_label: true
+    variables:
+      ent_switch: switch.prise_congelateur_cuisine_nous
+      ent_power: sensor.prise_congelateur_cuisine_nous_power
+      sensor_door: binary_sensor.porte_congel_contact
+      sensor_door2: ''
+      sensor_temp_fridge: ''
+      sensor_temp_freezer: sensor.tongel_temperature
+      thresh_cooling: 26
+      thresh_super: 48
+      thresh_defrost: 235
+      max_power_w: 60
+      max_temp_fridge: ''
+      max_temp_freezer: -14
+      show_bar: 'off'
+      size_icon: 45px
+      size_shape: 65px
+      size_card_height: 95px
+      font_primary: 15px
+      font_secondary: 12px
+      font_badge: 10px
+    styles:
+      card:
+        - --config-icon-size: '[[[ return variables.size_icon ]]]'
+        - --config-shape-size: '[[[ return variables.size_shape ]]]'
+        - --config-card-height: '[[[ return variables.size_card_height ]]]'
+        - --config-font-primary: '[[[ return variables.font_primary ]]]'
+        - --config-font-secondary: '[[[ return variables.font_secondary ]]]'
+        - --config-font-badge: '[[[ return variables.font_badge ]]]'
+        - height: var(--config-card-height) !important
+        - padding: 0px !important
+        - overflow: hidden
+        - position: relative
+        - transition: box-shadow 1s ease, background 1s ease
+      grid:
+        - padding: 12px 16px
+        - height: 100%
+        - box-sizing: border-box
+        - grid-template-areas: '"i n" "i l"'
+        - grid-template-columns: var(--config-shape-size) 1fr
+        - grid-template-rows: auto auto
+        - align-content: center
+        - gap: 0px 12px
+        - position: relative
+        - z-index: 2
+      icon:
+        - width: var(--config-icon-size)
+        - height: var(--config-icon-size)
+        - color: rgb(var(--appliance-color))
+        - z-index: 3
+        - animation: var(--appliance-icon-anim) !important
+        - transform-origin: 50% 60%
+      img_cell:
+        - width: var(--config-shape-size)
+        - height: var(--config-shape-size)
+        - border-radius: 50%
+        - border: 1px solid rgba(var(--appliance-color), 0.3) !important
+        - background: rgba(var(--appliance-color), 0.1) !important
+        - position: relative
+        - overflow: visible !important
+        - justify-self: start
+        - z-index: 1
+      name:
+        - justify-self: start
+        - font-size: var(--config-font-primary)
+        - font-weight: 500
+        - align-self: end
+        - margin-bottom: 2px
+        - position: relative
+        - z-index: 2
+      label:
+        - justify-self: start
+        - font-size: var(--config-font-secondary)
+        - opacity: 0.7
+        - align-self: start
+        - margin-top: 2px
+        - position: relative
+        - z-index: 2
+      custom_fields:
+        bg1:
+          - position: absolute
+          - inset: 0
+          - pointer-events: none
+          - z-index: 0
+          - display: var(--appliance-bg-d1)
+          - background-image: var(--appliance-bg-img1)
+          - background-size: var(--appliance-bg-sz1)
+          - background-repeat: var(--appliance-bg-rep1)
+          - animation: var(--appliance-bg-anim1)
+          - opacity: var(--appliance-bg-op1)
+        bg2:
+          - position: absolute
+          - inset: 0
+          - pointer-events: none
+          - z-index: 0
+          - display: var(--appliance-bg-d2)
+          - background-image: var(--appliance-bg-img2)
+          - background-size: var(--appliance-bg-sz2)
+          - background-repeat: repeat
+          - animation: var(--appliance-bg-anim2)
+          - opacity: var(--appliance-bg-op2)
+        badge1:
+          - position: absolute
+          - top: 10px
+          - right: 10px
+          - padding: 3px 8px
+          - font-size: var(--config-font-badge)
+          - font-weight: 600
+          - text-transform: uppercase
+          - letter-spacing: 0.5px
+          - white-space: nowrap
+          - z-index: 5
+          - transition: all 0.5s ease
+        badge2:
+          - position: absolute
+          - top: 38px
+          - right: 10px
+          - padding: 4px 8px
+          - font-size: 10px
+          - letter-spacing: 0.5px
+          - white-space: nowrap
+          - opacity: 0.9
+          - text-transform: uppercase
+          - font-weight: 500
+          - z-index: 5
+          - transition: all 0.5s ease
+        bar:
+          - position: absolute
+          - bottom: 0
+          - left: 0
+          - height: 3.5px
+          - width: var(--appliance-level)
+          - background: rgb(var(--appliance-color))
+          - box-shadow: 0 0 10px rgb(var(--appliance-color))
+          - transition: width 0.5s ease
+          - display: var(--bar-display)
+          - z-index: 5
+        door_dash:
+          - position: absolute
+          - top: 50%
+          - left: 0
+          - transform: translateY(-50%)
+          - opacity: 0.8
+          - width: 4px
+          - height: 26px
+          - border-top-right-radius: 4px
+          - border-bottom-right-radius: 4px
+          - display: var(--door-dash-display)
+          - background: rgb(var(--door-dash-color))
+          - box-shadow: var(--door-dash-glow)
+          - transition: background 0.4s ease, box-shadow 0.4s ease
+          - z-index: 2
+          - pointer-events: none
+    tap_action:
+      action: more-info
+    label: >-
+      [[[ let d1 = states[variables.sensor_door]; let d2 =
+      states[variables.sensor_door2]; let o1 = d1 && (d1.state === 'on' ||
+      d1.state === 'open'); let o2 = d2 && (d2.state === 'on' || d2.state ===
+      'open'); let v1 = d1 && !['unknown','unavailable'].includes(d1.state); let
+      v2 = d2 && !['unknown','unavailable'].includes(d2.state); if (o1 || o2)
+      return 'Porte Ouverte'; if (v1 || v2) return 'Porte fermée'; return 'Porte
+      ?'; ]]]
+    icon: |
+      [[[ 
+        let d1 = states[variables.sensor_door];
+        let d2 = states[variables.sensor_door2];
+        let d1_open = d1 && (d1.state === 'on' || d1.state === 'open');
+        let d2_open = d2 && (d2.state === 'on' || d2.state === 'open');
+        return (d1_open || d2_open) ? 'mdi:fridge-industrial-alert' : 'mdi:fridge-industrial'; 
+      ]]]
+    custom_fields:
+      bg1: " "
+      bg2: " "
+      badge1: " "
+      badge2: " "
+      bar: " "
+      door_dash: " "
+    extra_styles: |
+      [[[
+        let ent_switch = variables.ent_switch;
+        let ent_power = variables.ent_power;
+        let ent_door1 = variables.sensor_door;
+        let ent_door2 = variables.sensor_door2;
+        let ent_temp_f = variables.sensor_temp_fridge;
+        let ent_temp_z = variables.sensor_temp_freezer;
+        
+        let thresh_cool = variables.thresh_cooling;
+        let thresh_super = variables.thresh_super;
+        let thresh_defrost = variables.thresh_defrost;
+        let max_power = variables.max_power_w;
+        let max_temp_f = variables.max_temp_fridge;
+        let max_temp_z = variables.max_temp_freezer;
+        let show_bar = variables.show_bar;
+
+        let switch_state = states[ent_switch] ? states[ent_switch].state : 'unknown';
+        let power_state = states[ent_power];
+        let is_power_valid = power_state && !['unknown', 'unavailable', 'none'].includes(power_state.state.toLowerCase());
+        let power = is_power_valid ? Math.round(parseFloat(power_state.state)) : 0;
+        let power_text = is_power_valid ? ` • ${power}W` : '';
+
+        let door1_val = (ent_door1 && states[ent_door1]) ? states[ent_door1].state.toLowerCase() : 'unknown';
+        let door2_val = (ent_door2 && states[ent_door2]) ? states[ent_door2].state.toLowerCase() : 'unknown';
+        
+        let bad_states = ['unknown', 'unavailable', ''];
+        let d1_valid = !bad_states.includes(door1_val);
+        let d2_valid = !bad_states.includes(door2_val);
+        
+        let d1_open = d1_valid && (door1_val === 'on' || door1_val === 'open');
+        let d2_open = d2_valid && (door2_val === 'on' || door2_val === 'open');
+        let door_open = d1_open || d2_open;
+
+        let raw_temp_f = states[ent_temp_f] ? states[ent_temp_f].state : '';
+        let raw_temp_z = states[ent_temp_z] ? states[ent_temp_z].state : '';
+        
+        let t_f = !bad_states.includes(raw_temp_f) ? raw_temp_f + '°' : '';
+        let t_z = !bad_states.includes(raw_temp_z) ? raw_temp_z + '°' : '';
+
+        let val_f = parseFloat(raw_temp_f); if (isNaN(val_f)) val_f = -999;
+        let val_z = parseFloat(raw_temp_z); if (isNaN(val_z)) val_z = -999;
+        let alert_f = (val_f > max_temp_f) && (val_f !== -999);
+        let alert_z = (val_z > max_temp_z) && (val_z !== -999);
+
+        let status_text = 'Idle';
+        let color = '158, 158, 158';
+        let card_shadow = 'var(--ha-card-box-shadow, none)';
+        let bg_d1 = 'none'; let bg_img1 = 'none'; let bg_sz1 = 'none'; let bg_anim1 = 'none'; let bg_op1 = '1'; let bg_rep1 = 'repeat';
+        let bg_d2 = 'none'; let bg_img2 = 'none'; let bg_sz2 = 'none'; let bg_anim2 = 'none'; let bg_op2 = '1';
+        let icon_anim = 'none'; let anim_frost = 'none'; let anim_drip = 'none';
+        let frost_shadow = 'none'; let overlay_img = 'none';
+
+        let snow_img_1 = `radial-gradient(circle at 20px 30px, white 2px, transparent 3px), radial-gradient(circle at 50px 160px, white 2px, transparent 3px), radial-gradient(circle at 90px 40px, white 2px, transparent 3px), radial-gradient(circle at 130px 80px, white 2px, transparent 3px), radial-gradient(circle at 160px 120px, white 2px, transparent 3px), radial-gradient(circle at 240px 300px, white 2px, transparent 3px), radial-gradient(circle at 280px 100px, white 2px, transparent 3px)`;
+        let snow_img_2 = `radial-gradient(circle at 10px 10px, rgba(255,255,255,0.7) 1px, transparent 2px), radial-gradient(circle at 30px 90px, rgba(255,255,255,0.7) 1px, transparent 2px), radial-gradient(circle at 80px 50px, rgba(255,255,255,0.7) 1px, transparent 2px), radial-gradient(circle at 110px 190px, rgba(255,255,255,0.7) 1px, transparent 2px), radial-gradient(circle at 150px 100px, rgba(255,255,255,0.7) 1px, transparent 2px), radial-gradient(circle at 220px 250px, rgba(255,255,255,0.7) 1px, transparent 2px)`;
+        let drop_img   = `radial-gradient(ellipse at center, rgba(255,152,0,0.5) 0%, transparent 60%), radial-gradient(ellipse at center, rgba(255,152,0,0.4) 0%, transparent 60%), radial-gradient(ellipse at center, rgba(255,152,0,0.5) 0%, transparent 60%), radial-gradient(ellipse at center, rgba(255,152,0,0.4) 0%, transparent 60%)`;
+
+        if (switch_state === 'off') {
+            status_text = 'Plug Off';
+            color = '244, 67, 54';
+        } else if (['unavailable', 'unknown'].includes(switch_state)) {
+            status_text = 'Offline';
+        } else {
+            if (power > thresh_defrost) {
+                status_text = 'Defrost';
+                color = '255, 152, 0';
+                card_shadow = 'inset 0 0 40px rgba(255, 152, 0, 0.08)';
+                bg_d1 = 'block'; bg_img1 = drop_img; bg_sz1 = '100% 100%'; bg_anim1 = 'accumulate-drip-card 4s ease-in infinite'; bg_op1 = '1'; bg_rep1 = 'no-repeat';
+                anim_drip = 'accumulate-drip-icon 3s ease-in infinite';
+                overlay_img = `radial-gradient(ellipse at center, rgba(255,193,7,0.8) 0%, transparent 60%), radial-gradient(ellipse at center, rgba(255,193,7,0.6) 0%, transparent 60%)`;
+            } else if (power > thresh_super) {
+                status_text = 'Super Cool';
+                color = '0, 188, 212';
+                card_shadow = 'inset 0 0 60px rgba(0, 188, 212, 0.15)';
+                bg_d1 = 'block'; bg_img1 = snow_img_1; bg_sz1 = '300px 400px'; bg_anim1 = 'snow-fall-1 8s linear infinite'; bg_op1 = '0.15'; bg_rep1 = 'repeat';
+                bg_d2 = 'block'; bg_img2 = snow_img_2; bg_sz2 = '300px 300px'; bg_anim2 = 'snow-fall-2 4s linear infinite'; bg_op2 = '0.1';
+                icon_anim = 'compressor-rumble 0.1s linear infinite';
+                anim_frost = 'pulse-frost 1.5s ease-in-out infinite';
+                frost_shadow = 'inset 0 0 25px 5px rgba(0, 188, 212, 0.6)';
+            } else if (power > thresh_cool) {
+                status_text = 'Cooling';
+                color = '129, 212, 250';
+                card_shadow = 'inset 0 0 40px rgba(129, 212, 250, 0.1)';
+                bg_d1 = 'block'; bg_img1 = snow_img_1; bg_sz1 = '300px 400px'; bg_anim1 = 'snow-fall-1 16s linear infinite'; bg_op1 = '0.08'; bg_rep1 = 'repeat';
+                bg_d2 = 'block'; bg_img2 = snow_img_2; bg_sz2 = '300px 300px'; bg_anim2 = 'snow-fall-2 8s linear infinite'; bg_op2 = '0.05';
+                icon_anim = 'compressor-rumble 0.3s linear infinite';
+                anim_frost = 'pulse-frost 3s ease-in-out infinite';
+                frost_shadow = 'inset 0 0 15px 2px rgba(129, 212, 250, 0.5)';
+            }
+        }
+
+        let d1_c = color;
+        let corner_display = 'none';
+        let dash_color = color;
+        let dash_glow = 'none';
+        let dash_display = 'none';
+
+        if (d1_valid && d2_valid) {
+            corner_display = 'block';
+            dash_display = 'block';
+            d1_c = d1_open ? '244, 67, 54' : color;
+            dash_color = d2_open ? '244, 67, 54' : color;
+            dash_glow = d2_open ? '2px 0 6px rgba(244, 67, 54, 0.6)' : 'none';
+        } else if (d1_valid || d2_valid) {
+            corner_display = 'block';
+            let open = d1_valid ? d1_open : d2_open;
+            d1_c = open ? '244, 67, 54' : color;
+        }
+
+        if (door_open) {
+            color = '244, 67, 54';
+            card_shadow = 'inset 0 0 50px rgba(244, 67, 54, 0.15)';
+            icon_anim = 'shake-alert 0.5s ease-in-out infinite';
+            frost_shadow = 'none';
+            anim_frost = 'none';
+            anim_drip = 'none';
+            overlay_img = 'none';
+            bg_d1 = 'none';
+            bg_d2 = 'none';
+        }
+
+        let badge1_text = '';
+        if (d1_open && d2_open) badge1_text = '⚠️ DOORS OPEN';
+        else if (d1_open || d2_open) badge1_text = '⚠️ DOOR OPEN';
+        else badge1_text = `${status_text}${power_text}`;
+
+        let badge1 = badge1_text;
+        let b1_c = door_open ? '244, 67, 54' : color;
+        let b1_bg = `rgba(${b1_c}, 0.15)`;
+        let b1_border = `1px solid rgba(${b1_c}, 0.3)`;
+        let b1_bl = `2px solid rgb(${b1_c})`;
+
+        let badge2 = '';
+        let b2_bg = 'transparent'; let b2_bl = 'none'; let b2_br = 'none'; let b2_border = 'none';
+        
+        let c_cool = '33, 150, 243';
+        let c_alert = '244, 67, 54';
+
+        if (t_f || t_z) {
+            let f_str = alert_f ? `⚠️ ${t_f}` : t_f;
+            let z_str = alert_z ? `⚠️ ${t_z}` : t_z;
+            badge2 = [f_str, z_str].filter(Boolean).join(' | ');
+
+            let c_f = alert_f ? c_alert : c_cool;
+            let c_z = alert_z ? c_alert : c_cool;
+
+            b2_border = `1px solid rgba(128,128,128, 0.2)`;
+            if (t_f && t_z) {
+                b2_bg = `linear-gradient(90deg, rgba(${c_f}, 0.15) 0%, rgba(${c_z}, 0.15) 100%)`;
+                b2_bl = `2px solid rgb(${c_f})`;
+                b2_br = `2px solid rgb(${c_z})`;
+            } else if (t_f) {
+                b2_bg = `rgba(${c_f}, 0.15)`;
+                b2_bl = `2px solid rgb(${c_f})`;
+                b2_br = b2_border;
+            } else if (t_z) {
+                b2_bg = `rgba(${c_z}, 0.15)`;
+                b2_bl = b2_border;
+                b2_br = `2px solid rgb(${c_z})`;
+            }
+        }
+
+        let bar_disp = show_bar === 'on' ? 'block' : 'none';
+        let progress = Math.min(100, Math.max(0, Math.floor((power / max_power) * 100)));
+
+        return `
+          #card {
+            --appliance-color: ${color};
+            --appliance-level: ${progress}%; 
+            --appliance-bg-d1: ${bg_d1}; --appliance-bg-img1: ${bg_img1}; --appliance-bg-sz1: ${bg_sz1}; --appliance-bg-anim1: ${bg_anim1}; --appliance-bg-op1: ${bg_op1}; --appliance-bg-rep1: ${bg_rep1};
+            --appliance-bg-d2: ${bg_d2}; --appliance-bg-img2: ${bg_img2}; --appliance-bg-sz2: ${bg_sz2}; --appliance-bg-anim2: ${bg_anim2}; --appliance-bg-op2: ${bg_op2};
+            --appliance-icon-anim: ${icon_anim};
+            --appliance-anim-frost: ${anim_frost};
+            --appliance-anim-drip: ${anim_drip};
+            --appliance-frost-shadow: ${frost_shadow};
+            --appliance-overlay-bg: ${overlay_img};
+            --door-corner-color: rgb(${d1_c});
+            --door-corner-display: ${corner_display};
+            --door-dash-color: ${dash_color};
+            --door-dash-glow: ${dash_glow};
+            --door-dash-display: ${dash_display};
+            --bar-display: ${bar_disp}; --door-label-color: ${door_open ? 'rgb(244, 67, 54)' : 'var(--primary-text-color, #fff)'};
+            box-shadow: ${card_shadow} !important;
+          }
+          #card::after {
+            content: '';
+            display: var(--door-corner-display);
+            position: absolute;
+            top: -0.5px;
+            left: -0.5px;
+            opacity: 0.7;
+            width: 15px;
+            height: 15px;
+            border-top: 5px solid var(--door-corner-color);
+            border-left: 5px solid var(--door-corner-color);
+            border-top-left-radius: var(--ha-card-border-radius, 12px);
+            pointer-events: none;
+            transition: border-color 0.5s ease;
+            z-index: 1;
+          }
+          #label { color: var(--door-label-color); } #badge1 {
+            background: ${b1_bg};
+            color: rgb(${b1_c});
+            border-top: ${b1_border};
+            border-bottom: ${b1_border};
+            border-right: ${b1_border};
+            border-left: ${b1_bl};
+            border-radius: 6px !important;
+          }
+          #badge1::before { content: "${badge1}"; }
+
+          #badge2 {
+            display: ${badge2 ? 'block' : 'none'};
+            background: ${b2_bg};
+            color: var(--primary-text-color, #fff);
+            border-top: ${b2_border};
+            border-bottom: ${b2_border};
+            border-left: ${b2_bl};
+            border-right: ${b2_br};
+            border-radius: 6px !important;
+          }
+          #badge2::before { content: "${badge2}"; }
+
+          #img-cell::before {
+            content: ''; position: absolute; inset: 0; box-shadow: var(--appliance-frost-shadow);
+            animation: var(--appliance-anim-frost) !important; z-index: 1; border-radius: 50%; pointer-events: none;
+          }
+          #img-cell::after {
+            content: ''; position: absolute; inset: 0; background-image: var(--appliance-overlay-bg);
+            background-repeat: no-repeat; animation: var(--appliance-anim-drip) !important; z-index: 1; 
+            border-radius: 50%; pointer-events: none;
+          }
+
+          @keyframes snow-fall-1 { from { background-position: 0 0; } to { background-position: 0 400px; } }
+          @keyframes snow-fall-2 { from { background-position: 0 0; } to { background-position: 0 300px; } }
+          @keyframes accumulate-drip-card {
+            0% { background-position: 15% 10%, 45% 20%, 75% 15%, 85% 30%; background-size: 0px 0px, 0px 0px, 0px 0px, 0px 0px; opacity: 0; }
+            40% { background-position: 15% 30%, 45% 40%, 75% 35%, 85% 50%; background-size: 15px 25px, 20px 30px, 12px 20px, 25px 35px; opacity: 0.4; }
+            80% { background-position: 15% 80%, 45% 85%, 75% 75%, 85% 90%; background-size: 15px 35px, 20px 40px, 12px 30px, 25px 45px; opacity: 0.2; }
+            100% { background-position: 15% 100%, 45% 105%, 75% 95%, 85% 110%; background-size: 10px 40px, 15px 45px, 8px 35px, 20px 50px; opacity: 0; }
+          }
+          @keyframes pulse-frost { 0%, 100% { opacity: 0.4; transform: scale(0.95); } 50% { opacity: 0.8; transform: scale(1); } }
+          @keyframes accumulate-drip-icon {
+            0% { background-position: 30% 10%, 70% 20%; background-size: 0px 0px, 0px 0px; opacity: 0; }
+            40% { background-position: 30% 30%, 70% 40%; background-size: 8px 12px, 12px 16px; opacity: 1; }
+            80% { background-position: 30% 80%, 70% 90%; background-size: 8px 18px, 12px 22px; opacity: 0.8; }
+            100% { background-position: 30% 100%, 70% 110%; background-size: 6px 20px, 10px 25px; opacity: 0; }
+          }
+          @keyframes compressor-rumble {
+            0% { transform: translate(0, 0); } 25% { transform: translate(-1px, 0.5px); } 50% { transform: translate(1px, -0.5px); } 75% { transform: translate(-0.5px, 0.5px); } 100% { transform: translate(0, 0); }
+          }
+          @keyframes shake-alert {
+            0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(5deg) translateY(-1px); } 75% { transform: rotate(-5deg) translateY(1px); }
+          }
+        `;
+      ]]]
+  - type: custom:mushroom-entity-card
+    entity: binary_sensor.detecteur_de_fuite_ikea_water_leak
+    name: Détecteur de fuite sous évier cuisine
+    fill_container: true
+    primary_info: name
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    tap_action:
+      action: none
+    grid_options:
+      columns: 12
+      rows: 2
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: binary_sensor.detecteur_de_fuite_ikea_water_leak
+            state: 'on'
+          - condition: state
+            entity: binary_sensor.detecteur_de_fuite_ikea_water_leak
+            state: unavailable
+          - condition: state
+            entity: binary_sensor.detecteur_de_fuite_ikea_water_leak
+            state: unknown
+    layout: vertical
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+  - type: vertical-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: separator
+        name: Personne(s)
+        icon: mdi:account-group
+        card_layout: normal
+        rows: 0.8
+        styles: |
+          .bubble-line {
+            background: var(--primary-text-color);
+            opacity: 0.8;
+          }
+          .bubble-sub-button {
+            background-color: ${
+              hass.states['sensor.etat_wifi_maison'].state === '2'
+                ? 'darkgreen'
+                : (hass.states['sensor.etat_wifi_maison'].state === 'Eric' ||
+                   hass.states['sensor.etat_wifi_maison'].state === 'Mamour')
+                  ? 'darkorange'
+                  : 'grey'
+            } !important;
+            color: gainsboro !important;
+          }
+          ha-card {
+            margin-top: 20px !important;
+          }
+        sub_button:
+          main:
+            - entity: sensor.etat_wifi_maison
+              show_icon: true
+              icon: mdi:home
+              show_name: true
+              name: Maison
+              state_content: state
+          bottom: []
+      - type: horizontal-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: button
+            button_type: state
+            entity: device_tracker.poco
+            show_name: true
+            card_layout: normal
+            layout_options:
+              grid_columns: 2
+              grid_rows: 1
+            sub_button:
+              main:
+                - entity: person.eric
+                  show_icon: true
+                  show_background: true
+              bottom: []
+            styles: |-
+              ha-card {
+                --bubble-icon-background-color: black !important;
+              }
+              .bubble-sub-button {
+                background-color: black !important;
+              }
+              .bubble-button-background {
+                background-color: ${state === 'home' ? 'darkgreen' : 'grey'} !important;
+              }
+              .bubble-icon,
+              .bubble-sub-button > ha-icon {
+                color: ${state === 'home' ? 'darkgreen' : 'grey'} !important;
+              }
+            state_content: last_changed
+          - type: custom:bubble-card
+            card_type: button
+            button_type: state
+            entity: device_tracker.mamour
+            name: Mamour
+            show_name: true
+            card_layout: normal
+            layout_options:
+              grid_columns: 2
+              grid_rows: 1
+            sub_button:
+              main:
+                - entity: person.mamour
+                  show_icon: true
+                  show_background: true
+              bottom: []
+            styles: |-
+              ha-card {
+                --bubble-icon-background-color: black !important;
+              }
+              .bubble-sub-button {
+                background-color: black !important;
+              }
+              .bubble-button-background {
+                background-color: ${
+                  state === 'home'
+                    ? 'darkgreen'
+                    : state === 'not_home'
+                      ? 'rgb(255, 103, 0)'
+                      : ['LECLERC', 'MONOPRIX', 'AUCHAN', 'ANITA', 'KIPUE'].includes(state)
+                        ? 'rgb(0, 102, 204)'
+                        : 'grey'
+                } !important;
+              }
+              .bubble-icon,
+              .bubble-sub-button > ha-icon {
+                color: ${
+                  state === 'home'
+                    ? 'darkgreen'
+                    : state === 'not_home'
+                      ? 'rgb(255, 103, 0)'
+                      : ['LECLERC', 'MONOPRIX', 'AUCHAN', 'ANITA', 'KIPUE'].includes(state)
+                        ? 'rgb(0, 102, 204)'
+                        : 'grey'
+                } !important;
+              }
+            state_content: last_changed
+  - square: false
+    type: grid
+    cards:
+      - type: custom:button-card
+        show_icon: false
+        show_entity_picture: true
+        entity_picture: >-
+          [[[ return '/local/images/meteocons/' + states['weather.vence'].state
+          + '.svg'; ]]]
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/meteo
+        name: Météo
+        custom_fields:
+          info: >-
+            [[[ return states['sensor.vence_original_condition'].state + ' — ' +
+            parseFloat(states['sensor.th_balcon_nord_temperature'].state).toFixed(1)
+            + '°C' ]]]
+        styles:
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 15px
+          entity_picture:
+            - width: 55%
+            - height: auto
+            - position: absolute
+            - left: 24%
+            - top: 19%
+          name:
+            - color: white
+            - top: 12%
+            - left: 10%
+            - font-size: 80%
+            - font-weight: bold
+            - position: absolute
+          custom_fields:
+            info:
+              - position: absolute
+              - bottom: 10%
+              - width: 100%
+              - text-align: center
+              - color: white
+              - font-size: 80%
+              - font-weight: bold
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/temperatures
+        entities:
+          - sensor.th_balcon_nord_temperature
+          - sensor.th_balcon_nord_humidity
+          - sensor.th_salon_temperature
+          - sensor.th_salon_humidity
+          - sensor.th_cellier_temperature
+          - sensor.th_cellier_humidity
+          - sensor.th_cuisine_temperature
+          - sensor.th_cuisine_humidity
+          - sensor.th_bureau_temperature
+          - sensor.th_bureau_humidity
+          - sensor.th_salle_de_bain_temperature
+          - sensor.th_salle_de_bain_humidity
+          - sensor.th_chambre_temperature
+          - sensor.th_chambre_humidity
+          - sensor.tongel_temperature
+          - sensor.tongel_humidity
+        triggers_update:
+          - sensor.th_balcon_nord_temperature
+          - sensor.th_balcon_nord_humidity
+          - sensor.th_salon_temperature
+          - sensor.th_salon_humidity
+          - sensor.th_cellier_temperature
+          - sensor.th_cellier_humidity
+          - sensor.th_cuisine_temperature
+          - sensor.th_cuisine_humidity
+          - sensor.th_bureau_temperature
+          - sensor.th_bureau_humidity
+          - sensor.th_salle_de_bain_temperature
+          - sensor.th_salle_de_bain_humidity
+          - sensor.th_chambre_temperature
+          - sensor.th_chambre_humidity
+          - sensor.tongel_temperature
+          - sensor.tongel_humidity
+        styles:
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 11px
+            - line-height: 1.2
+          grid:
+            - grid-template-areas: |
+                "titre titre titre titre"
+                "piece temp espace humidite"
+            - grid-template-columns: 1fr 1fr 0.5fr 1fr
+            - grid-template-rows: auto
+            - margin-top: 4.5px
+          custom_fields:
+            titre:
+              - grid-area: titre
+              - justify-self: center
+              - text-align: center
+              - font-weight: bold
+            piece:
+              - justify-self: start
+              - margin-left: 8px
+              - text-align: left
+            temp:
+              - justify-self: center
+              - margin-left: 35px
+              - text-align: center
+            espace:
+              - justify-self: center
+              - margin-left: 0px
+              - text-align: center
+            humidite:
+              - justify-self: end
+              - margin-right: 6px
+              - text-align: right
+        custom_fields:
+          titre: |
+            [[[ return 'Courbes Température' ]]]
+          piece: |
+            [[[
+              return '<span style="display: block; text-align: left; line-height: 1.2;">Balcon N.</span>' +
+                     '<span style="display: block; text-align: left; line-height: 1.2;">Salon</span>' +
+                     '<span style="display: block; text-align: left; line-height: 1.2;">Cellier</span>' +
+                     '<span style="display: block; text-align: left; line-height: 1.2;">Cuisine</span>' +
+                     '<span style="display: block; text-align: left; line-height: 1.2;">Bureau</span>' +
+                     '<span style="display: block; text-align: left; line-height: 1.2;">SdB</span>' +
+                     '<span style="display: block; text-align: left; line-height: 1.2;">Chambre</span>' +
+                     '<span style="display: block; text-align: left; line-height: 1.2;">Congél.</span>';
+            ]]]
+          temp: |
+            [[[
+              function getTemperatureColor(temp) {
+                if (temp === 'NaN') return '#aaaaaa';
+                var t = parseFloat(temp);
+                if (t < 5) return '#3674B5';
+                if (t < 13) return '#578FCA';
+                if (t < 19) return '#A1E3F9';
+                if (t < 25) return 'lightgreen';
+                if (t < 32) return '#FFD700';
+                if (t < 36) return '#FFA500';
+                if (t < 40) return '#F44336';
+                return 'lightgreen';
+              }
+
+              function getFreezerTemperatureColor(temp) {
+                if (temp === 'NaN') return '#aaaaaa';
+                var t = parseFloat(temp);
+                if (t >= -15) return '#F44336';
+                return '#3674B5';
+              }
+
+              function formatTemp(entityId, colorFn) {
+                var s = states[entityId]?.state;
+                var val = (s && s !== 'unknown' && s !== 'unavailable') ? parseFloat(s).toFixed(1) : 'NaN';
+                var color = (colorFn || getTemperatureColor)(val);
+                var text = val === 'NaN' ? 'N/A' : val + '°C';
+                return `<span style="display: block; text-align: center; line-height: 1.2; color: ${color};">${text}</span>`;
+              }
+              return formatTemp('sensor.th_balcon_nord_temperature') +
+                     formatTemp('sensor.th_salon_temperature') +
+                     formatTemp('sensor.th_cellier_temperature') +
+                     formatTemp('sensor.th_cuisine_temperature') +
+                     formatTemp('sensor.th_bureau_temperature') +
+                     formatTemp('sensor.th_salle_de_bain_temperature') +
+                     formatTemp('sensor.th_chambre_temperature') +
+                     formatTemp('sensor.tongel_temperature', getFreezerTemperatureColor);
+            ]]]
+          espace: |
+            [[[
+              return Array(8).fill('<span style="display: block; text-align: center; line-height: 1.2;">&nbsp;&nbsp;</span>').join('');
+            ]]]
+          humidite: |
+            [[[
+              function getHumidityColor(h) {
+                if (h === 'NaN') return '#aaaaaa';
+                var val = parseFloat(h);
+                if (val > 75) return '#F44336';
+                if (val > 55) return '#FFA500';
+                return 'white';
+              }
+
+              function formatHum(entityId) {
+                var s = states[entityId]?.state;
+                var val = (s && s !== 'unknown' && s !== 'unavailable') ? parseFloat(s).toFixed(1) : 'NaN';
+                var color = getHumidityColor(val);
+                var text = val === 'NaN' ? 'N/A' : val + '%';
+                return `<span style="display: block; text-align: right; line-height: 1.2; color: ${color};">${text}</span>`;
+              }
+              return formatHum('sensor.th_balcon_nord_humidity') +
+                     formatHum('sensor.th_salon_humidity') +
+                     formatHum('sensor.th_cellier_humidity') +
+                     formatHum('sensor.th_cuisine_humidity') +
+                     formatHum('sensor.th_bureau_humidity') +
+                     formatHum('sensor.th_salle_de_bain_humidity') +
+                     formatHum('sensor.th_chambre_humidity') +
+                     formatHum('sensor.tongel_humidity');
+            ]]]
+      - type: custom:button-card
+        entities:
+          - sensor.temperature_moyenne_interieure
+          - sensor.delta_ademe_recommande
+          - sensor.mode_ete_hiver_etat
+          - sensor.clim_salon_etat
+          - sensor.radiateur_cuisine_etat
+          - sensor.clim_bureau_etat
+          - sensor.sdb_soufflant_etat
+          - sensor.sdb_seche_serviette_etat
+          - sensor.clim_chambre_etat
+          - sensor.salon_power_status
+          - sensor.cuisine_power_status
+          - sensor.bureau_power_status
+          - sensor.sdb_soufflant_power_status
+          - sensor.sdb_seche_serviette_power_status
+          - sensor.chambre_power_status
+          - climate.clim_salon_rm4_mini
+          - climate.radiateur_cuisine
+          - climate.clim_bureau_rm4_mini
+          - climate.soufflant_salle_de_bain
+          - climate.clim_chambre_rm4_mini
+        triggers_update:
+          - sensor.temperature_moyenne_interieure
+          - sensor.delta_ademe_recommande
+          - sensor.mode_ete_hiver_etat
+          - sensor.mode_ete_hiver
+          - sensor.clim_salon_etat
+          - sensor.radiateur_cuisine_etat
+          - sensor.clim_bureau_etat
+          - sensor.sdb_soufflant_etat
+          - sensor.sdb_seche_serviette_etat
+          - sensor.clim_chambre_etat
+          - sensor.salon_power_status
+          - sensor.cuisine_power_status
+          - sensor.bureau_power_status
+          - sensor.sdb_soufflant_power_status
+          - sensor.sdb_seche_serviette_power_status
+          - sensor.chambre_power_status
+          - climate.clim_salon_rm4_mini
+          - climate.radiateur_cuisine
+          - climate.clim_bureau_rm4_mini
+          - climate.soufflant_salle_de_bain
+          - climate.clim_chambre_rm4_mini
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/clim
+        styles:
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 11px
+            - line-height: 1.2
+          grid:
+            - grid-template-areas: |
+                "titre titre titre"
+                "piece mode consigne"
+            - grid-template-columns: 1fr 1fr 1fr
+            - grid-template-rows: auto auto auto
+            - margin-top: 3px
+          custom_fields:
+            titre:
+              - grid-area: titre
+              - justify-self: center
+              - text-align: center
+              - font-weight: bold
+            piece:
+              - justify-self: start
+              - margin-left: 8px
+              - text-align: left
+            mode:
+              - justify-self: start
+              - margin-left: 15px
+              - text-align: left
+            consigne:
+              - justify-self: end
+              - margin-right: 6px
+              - text-align: right
+        custom_fields:
+          titre: Commande Clim.
+          piece: |
+            [[[
+              const colorMap = {
+                'Fan': '#00FF00',
+                'on': 'lightgreen',
+                'off': 'white',
+                'default': '#aaaaaa'
+              };
+              function safeState(entityId, defaultValue = 'on') {
+                return states[entityId]?.state || defaultValue;
+              }
+              function getColorForPowerStatus(powerStatus, mode) {
+                if (mode === 'Fan') return colorMap['Fan'];
+                if (powerStatus === 'on') return colorMap['on'];
+                if (powerStatus === 'off') return colorMap['off'];
+                return colorMap['default'];
+              }
+              const pieces = [
+                { name: 'T̄ Appart. --------------', color: 'white' },
+                { name: 'Δ Ademe --------------', color: 'white' },
+                { name: 'Mode ->', color: 'white' },
+                { name: 'Salon', power: safeState('sensor.salon_power_status'), mode: safeState('sensor.clim_salon_etat') },
+                { name: 'Cuisine', power: safeState('sensor.cuisine_power_status'), mode: safeState('sensor.radiateur_cuisine_etat') },
+                { name: 'Bureau', power: safeState('sensor.bureau_power_status'), mode: safeState('sensor.clim_bureau_etat') },
+                { name: 'SdB', power: safeState('sensor.sdb_soufflant_power_status'), mode: safeState('sensor.sdb_soufflant_etat') },
+                { name: 'Chambre', power: safeState('sensor.chambre_power_status'), mode: safeState('sensor.clim_chambre_etat') }
+              ];
+              return pieces.map(piece =>
+                `<span style="display: block; text-align: left; line-height: 1.2; color: ${piece.color || getColorForPowerStatus(piece.power, piece.mode)};">${piece.name}</span>`
+              ).join('');
+            ]]]
+          mode: |
+            [[[
+              const colorMap = {
+                'cool': 'skyblue',
+                'heat': '#FFA500',
+                'fan': 'turquoise',
+                'off': '#F44336',
+                'N/A': '#aaaaaa',
+                'default': '#aaaaaa'
+              };
+              function safeState(entityId, defaultValue = 'off') {
+                const state = states[entityId]?.state?.trim()?.toLowerCase() || defaultValue;
+                if (state === 'unknown' || state === 'unavailable') return 'N/A';
+                return state === 'fan_only' ? 'fan' : state;
+              }
+              function getColorForMode(mode) {
+                return colorMap[mode] || colorMap['default'];
+              }
+              function formatMode(mode) {
+                const color = getColorForMode(mode);
+                const formattedMode = mode.charAt(0).toUpperCase() + mode.slice(1);
+                return `<span style="display: block; text-align: left; line-height: 1.2; color: ${color};">${formattedMode}</span>`;
+              }
+              const modes = [
+                { entity: 'sensor.mode_ete_hiver_etat', label: '.' },
+                { entity: 'sensor.clim_salon_etat', label: 'Salon' },
+                { entity: 'sensor.radiateur_cuisine_etat', label: 'Cuisine' },
+                { entity: 'sensor.clim_bureau_etat', label: 'Bureau' },
+                { entity: 'sensor.sdb_soufflant_etat', label: 'SdB' },
+                { entity: 'sensor.clim_chambre_etat', label: 'Chambre' }
+              ];
+              return [
+                '<span style="display: block; text-align: left; line-height: 1.2; color: transparent;">.</span>',
+                '<span style="display: block; text-align: left; line-height: 1.2; color: transparent;">.</span>',
+                ...modes.map(mode => formatMode(safeState(mode.entity)))
+              ].join('');
+            ]]]
+          consigne: |
+            [[[
+              function safeState(entityId, attribute = 'temperature') {
+                const entity = states[entityId];
+                if (!entity) return 'N/A';
+                if (entity.state && !isNaN(parseFloat(entity.state))) {
+                  return parseFloat(entity.state).toFixed(1);
+                }
+                if (entity.attributes && entity.attributes[attribute] !== undefined) {
+                  return parseFloat(entity.attributes[attribute]).toFixed(1);
+                }
+                return 'N/A';
+              }
+              // Fonction pour gérer la couleur (Gris si N/A) et le formatage
+              function formatDisplay(value) {
+                const color = value === 'N/A' ? '#aaaaaa' : 'inherit';
+                const text = value === 'N/A' ? 'N/A' : value + '°C';
+                return `<span style="display: block; text-align: right; line-height: 1.2; color: ${color};">${text}</span>`;
+              }
+              // --- LOGIQUE DELTA ADEME RÉUTILISÉE ET FORMATÉE ---
+              const deltaADEME = parseFloat(states['sensor.delta_ademe_recommande']?.state);
+              const isCooling = states['sensor.mode_ete_hiver']?.state === 'cool';
+              const deltaColor =
+                !isNaN(deltaADEME) && isCooling && deltaADEME >= -8 && deltaADEME <= -4
+                  ? 'lightgreen' // Optimal
+                  : !isNaN(deltaADEME) && isCooling
+                    ? '#FF0000' // Avertissement
+                    : 'white'; // Neutre
+
+              const ademeDisplayValue = !isNaN(deltaADEME)
+                ? `${deltaADEME.toFixed(1)}°C`
+                : 'N/A';
+              // -----------------------------------------------------------
+              const tempMoyenne = safeState('sensor.temperature_moyenne_interieure');
+              const consigneSalon = safeState('climate.clim_salon_rm4_mini');
+              const consigneCuisine = safeState('climate.radiateur_cuisine');
+              const consigneBureau = safeState('climate.clim_bureau_rm4_mini');
+              const consigneSdB = safeState('climate.soufflant_salle_de_bain');
+              const consigneChambre = safeState('climate.clim_chambre_rm4_mini');
+              return [
+                `<span style="display: block; text-align: right; line-height: 1.2; color: lightgreen;">${tempMoyenne}°C</span>`,
+                `<span style="display: block; text-align: right; line-height: 1.2; color: ${deltaColor};">${ademeDisplayValue}</span>`,
+                '<span style="display: block; text-align: right; line-height: 1.2;">.</span>',
+                formatDisplay(consigneSalon),
+                formatDisplay(consigneCuisine),
+                formatDisplay(consigneBureau),
+                formatDisplay(consigneSdB),
+                formatDisplay(consigneChambre)
+              ].join('');
+            ]]]
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/energie
+        entities:
+          - sensor.genelec_appart_conso_maxi_24h
+          - sensor.general_electric_appart_power
+          - sensor.genelec_appart_conso_mini_24h
+          - sensor.genelec_appart_cout_total_quotidien
+          - sensor.genelec_appart_cout_hp_quotidien
+          - sensor.genelec_appart_cout_hc_quotidien
+        triggers_update:
+          - sensor.genelec_appart_conso_maxi_24h
+          - sensor.general_electric_appart_power
+          - sensor.genelec_appart_conso_mini_24h
+          - sensor.genelec_appart_cout_total_quotidien
+          - sensor.genelec_appart_cout_hp_quotidien
+          - sensor.genelec_appart_cout_hc_quotidien
+        styles:
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 11px
+            - line-height: 1.2
+          grid:
+            - grid-template-areas: |
+                "titre_1 titre_1 titre_1"
+                "mini realtime maxi"
+                "titre_2 titre_2 titre_2"
+                "toto hp hc"
+            - grid-template-columns: 1fr 1fr 1fr
+            - grid-template-rows: auto auto auto auto
+            - margin-top: 4.5px
+          custom_fields:
+            titre_1:
+              - grid-area: titre_1
+              - justify-self: center
+              - text-align: center
+              - font-weight: bold
+            mini:
+              - grid-area: mini
+              - text-align: center
+            realtime:
+              - grid-area: realtime
+              - text-align: center
+            maxi:
+              - grid-area: maxi
+              - text-align: center
+            titre_2:
+              - grid-area: titre_2
+              - justify-self: center
+              - text-align: center
+              - font-weight: bold
+            toto:
+              - grid-area: toto
+              - margin-right: 7px
+              - font-weight: bold
+            hc:
+              - grid-area: hc
+              - margin-right: 7px
+              - font-weight: bold
+            hp:
+              - grid-area: hp
+              - margin-right: 7px
+              - font-weight: bold
+        custom_fields:
+          titre_1: |
+            [[[ 
+               return `
+                 <div style="text-align: center; width: 100%;">
+                   Conso. Appart.<br><br>
+                   <span style="color: lightgreen;">Mini</span> 
+                   <span style="color: white;">-- Réel (W) --</span> 
+                   <span style="color: rgb(244,67,54);">Maxi</span>
+                 </div>
+               `; 
+             ]]]
+          mini: |
+            [[[
+              const value = parseFloat(states['sensor.genelec_appart_conso_mini_24h']?.state) || 0;
+              let color = 'lightgreen'; // 0 - 2000W
+              if (value >= 4000)      { color = 'rgb(244,67,54)'; }
+              else if (value >= 2000) { color = '#FFA500'; }
+              return `<span style='color:${color}; font-weight:bold;'>${value.toFixed(0)} W</span>`;
+            ]]]
+          realtime: |
+            [[[
+              const value = parseFloat(states['sensor.general_electric_appart_power']?.state) || 0;
+              let color = 'white'; // 0 - 2000W
+              if (value >= 4000)      { color = 'rgb(244,67,54)'; }
+              else if (value >= 2000) { color = '#FFA500'; }
+              return `<span style='color:${color}; font-weight:bold;'>${value.toFixed(0)} W</span>`;
+            ]]]
+          maxi: |
+            [[[
+              const value = parseFloat(states['sensor.genelec_appart_conso_maxi_24h']?.state) || 0;
+              let color = 'lightgreen'; // 0 - 2000W
+              if (value >= 4000)      { color = 'rgb(244,67,54)'; }
+              else if (value >= 2000) { color = '#FFA500'; }
+              return `<span style='color:${color}; font-weight:bold;'>${value.toFixed(0)} W</span>`;
+            ]]]
+          titre_2: >
+            [[[ return '__________________________<br><br>Coûts Total = H.P. +
+            H.C.'; ]]]
+          toto: |
+            [[[
+              const total = parseFloat(states['sensor.genelec_appart_cout_total_quotidien']?.state) || 0;
+              return `<span style="display:block; text-align:right; line-height:1.2; color:lightgreen;">
+                ${total.toFixed(2)}<span style="font-size:9px;"> €</span>
+              </span>`;
+            ]]]
+          hp: |
+            [[[
+              const hp_total = parseFloat(states['sensor.genelec_appart_cout_hp_quotidien']?.state) || 0;
+              return `<span style="display:block; text-align:right; line-height:1.2;">
+                ${hp_total.toFixed(2)}<span style="font-size:9px;"> €</span>
+              </span>`;
+            ]]]
+          hc: |
+            [[[
+              const hc_total = parseFloat(states['sensor.genelec_appart_cout_hc_quotidien']?.state) || 0;
+              return `<span style="display:block; text-align:right; line-height:1.2;">
+                ${hc_total.toFixed(2)}<span style="font-size:9px;"> €</span>
+              </span>`;
+            ]]]
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: none !important;
+              background: transparent;
+            }
+      - type: custom:button-card
+        entities:
+          - climate.clim_salon_rm4_mini
+          - climate.radiateur_cuisine
+          - climate.clim_bureau_rm4_mini
+          - climate.soufflant_salle_de_bain
+          - climate.clim_chambre_rm4_mini
+          - sensor.salon_power_status
+          - sensor.cuisine_power_status
+          - sensor.bureau_power_status
+          - sensor.sdb_soufflant_etat
+          - sensor.sdb_seche_serviette_etat
+          - sensor.chambre_power_status
+          - sensor.clim_salon_quotidien_um
+          - sensor.radiateur_elec_cuisine_quotidien_um
+          - sensor.clim_bureau_quotidien_um
+          - sensor.soufflant_sdb_quotidien_um
+          - sensor.seche_serviette_sdb_quotidien_um
+          - sensor.clim_chambre_quotidien_um
+          - sensor.conso_clim_rad_total_quotidien
+          - sensor.clim_salon_mensuel_um
+          - sensor.radiateur_elec_cuisine_mensuel_um
+          - sensor.clim_bureau_mensuel_um
+          - sensor.soufflant_sdb_mensuel_um
+          - sensor.seche_serviette_sdb_mensuel_um
+          - sensor.clim_chambre_mensuel_um
+          - sensor.conso_clim_rad_total_mensuel
+        triggers_update:
+          - climate.clim_salon_rm4_mini
+          - climate.radiateur_cuisine
+          - climate.clim_bureau_rm4_mini
+          - climate.soufflant_salle_de_bain
+          - climate.clim_chambre_rm4_mini
+          - sensor.salon_power_status
+          - sensor.cuisine_power_status
+          - sensor.bureau_power_status
+          - sensor.sdb_soufflant_etat
+          - sensor.sdb_seche_serviette_etat
+          - sensor.chambre_power_status
+          - sensor.clim_salon_quotidien_um
+          - sensor.radiateur_elec_cuisine_quotidien_um
+          - sensor.clim_bureau_quotidien_um
+          - sensor.soufflant_sdb_quotidien_um
+          - sensor.seche_serviette_sdb_quotidien_um
+          - sensor.clim_chambre_quotidien_um
+          - sensor.conso_clim_rad_total_quotidien
+          - sensor.clim_salon_mensuel_um
+          - sensor.radiateur_elec_cuisine_mensuel_um
+          - sensor.clim_bureau_mensuel_um
+          - sensor.soufflant_sdb_mensuel_um
+          - sensor.seche_serviette_sdb_mensuel_um
+          - sensor.clim_chambre_mensuel_um
+          - sensor.conso_clim_rad_total_mensuel
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/energie-clim
+        styles:
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 11px
+            - line-height: 1.2
+          grid:
+            - grid-template-areas: |
+                "titre titre titre"
+                "piece quotidien mensuel"
+            - grid-template-columns: 1fr 1fr 1fr
+            - grid-template-rows: auto
+            - margin-top: 4.5px
+          custom_fields:
+            titre:
+              - grid-area: titre
+              - justify-self: center
+              - text-align: center
+              - font-weight: bold
+            piece:
+              - justify-self: start
+              - margin-left: 8px
+              - text-align: left
+            quotidien:
+              - justify-self: start
+              - margin-left: 8px
+              - text-align: left
+            mensuel:
+              - justify-self: end
+              - margin-right: 5px
+              - text-align: right
+        custom_fields:
+          titre: Consommation CLIM
+          piece: |
+            [[[
+              const colorMap = {
+                'off_off': 'rgb(244,67,54)',
+                'on_cool': 'skyblue',
+                'on_heat': '#FFA500',
+                'on_fan': 'turquoise',
+                'off': 'white',
+                'on_off': '#aaaaaa'
+              };
+              function getColorForStatus(powerStatus, mode) {
+                if (powerStatus === 'off') {
+                  return mode === 'off' ? colorMap['off_off'] : colorMap['off'];
+                } else {
+                  return colorMap[`on_${mode}`] || colorMap['off'];
+                }
+              }
+              function safeState(entityId) {
+                return states[entityId]?.state?.toLowerCase() || 'off';
+              }
+              const pieces = [
+                { name: 'Salon',   power: safeState('sensor.salon_power_status'),   mode: safeState('sensor.clim_salon_etat') },
+                { name: 'Cuisine', power: safeState('sensor.cuisine_power_status'), mode: safeState('sensor.radiateur_cuisine_etat') },
+                { name: 'Bureau',  power: safeState('sensor.bureau_power_status'),  mode: safeState('sensor.clim_bureau_etat') },
+                { name: 'SdB Sft', power: safeState('sensor.sdb_soufflant_power_status'),       mode: safeState('sensor.sdb_soufflant_etat') },
+                { name: 'SdB SèS', power: safeState('sensor.sdb_seche_serviette_power_status'), mode: safeState('sensor.sdb_seche_serviette_etat') },
+                { name: 'Chambre', power: safeState('sensor.chambre_power_status'), mode: safeState('sensor.clim_chambre_etat') },
+                { name: 'TOTAL', color: 'lightgreen', bold: true }
+              ];
+              return pieces.map(piece =>
+                `<span style="display: block; text-align: left; line-height: 1.2; color: ${piece.color || getColorForStatus(piece.power, piece.mode)}; ${piece.bold ? 'font-weight: bold;' : ''}">${piece.name}</span>`
+              ).join('');
+            ]]]
+          quotidien: |
+            [[[
+              const list = [
+                'sensor.clim_salon_quotidien_um',             // [Lq1] _um → _um
+                'sensor.radiateur_elec_cuisine_quotidien_um', // [Lq2] _um → _um
+                'sensor.clim_bureau_quotidien_um',            // [Lq3] _um → _um
+                'sensor.soufflant_sdb_quotidien_um',          // [Lq4] _um → _um
+                'sensor.seche_serviette_sdb_quotidien_um',    // [Lq5] _um → _um
+                'sensor.clim_chambre_quotidien_um',           // [Lq6] _um → _um
+                'sensor.conso_clim_rad_total_quotidien'
+              ];
+              return list.map((sensor, i) => {
+                const s = states[sensor]?.state;
+                const val = parseFloat(s);
+                const isTotal = i === list.length - 1;
+                if (s === 'unavailable' || s === 'unknown' || isNaN(val)) {
+                  let style = isTotal ? 'color: #aaaaaa; font-weight: bold;' : 'color: #aaaaaa;';
+                  return `<span style="display: block; text-align: right; line-height: 1.2; ${style}">N/A</span>`;
+                }
+                let unit = val < 1 ? 'Wh' : 'kWh';
+                let displayVal = val < 1 ? (val * 1000).toFixed(0) : val.toFixed(2);
+                let style = isTotal ? 'color: lightgreen; font-weight: bold;' : '';
+                return `<span style="display: block; text-align: right; line-height: 1.2; ${style}">${displayVal} <span style="font-size: 5px;">${unit}</span></span>`;
+              }).join('');
+            ]]]
+          mensuel: |
+            [[[
+              const list = [
+                'sensor.clim_salon_mensuel_um',               // [Lm1] _um → _um
+                'sensor.radiateur_elec_cuisine_mensuel_um',   // [Lm2] _um → _um
+                'sensor.clim_bureau_mensuel_um',              // [Lm3] _um → _um
+                'sensor.soufflant_sdb_mensuel_um',            // [Lm4] _um → _um
+                'sensor.seche_serviette_sdb_mensuel_um',      // [Lm5] _um → _um
+                'sensor.clim_chambre_mensuel_um',             // [Lm6] _um → _um
+                'sensor.conso_clim_rad_total_mensuel'
+              ];
+              return list.map((sensor, i) => {
+                const s = states[sensor]?.state;
+                const val = parseFloat(s);
+                const isTotal = i === list.length - 1;
+                if (s === 'unavailable' || s === 'unknown' || isNaN(val)) {
+                  let style = isTotal ? 'color: #aaaaaa; font-weight: bold;' : 'color: #aaaaaa;';
+                  return `<span style="display: block; text-align: right; line-height: 1.2; ${style}">N/A</span>`;
+                }
+                let unit = val < 1 ? 'Wh' : 'kWh';
+                let displayVal = val < 1 ? (val * 1000).toFixed(0) : val.toFixed(2);
+                let style = isTotal ? 'color: lightgreen; font-weight: bold;' : '';
+                return `<span style="display: block; text-align: right; line-height: 1.2; ${style}">${displayVal} <span style="font-size: 5px;">${unit}</span></span>`;
+              }).join('');
+            ]]]
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/energie-lampes
+        entities:
+          - sensor.lumiere_appartement_etat
+          - sensor.lumiere_salon_etat
+          - sensor.lumiere_cuisine_etat
+          - sensor.lumiere_bureau_etat
+          - sensor.lumiere_salle_de_bain_etat
+          - sensor.lumiere_chambre_etat
+          - sensor.eclairage_appart_2_quotidien_um_kwh_tpl
+          - sensor.eclairage_salon_5_quotidien_um_kwh_tpl
+          - sensor.eclairage_cuisine_1_quotidien_um_kwh_tpl
+          - sensor.eclairage_bureau_5_quotidien_um_kwh_tpl
+          - sensor.eclairage_sdb_2_quotidien_um_kwh_tpl
+          - sensor.eclairage_chambre_4_quotidien_um_kwh_tpl
+          - sensor.eclairage_total_unit_quotidien_kwh_tpl
+          - sensor.eclairage_appart_2_mensuel_um_kwh_tpl
+          - sensor.eclairage_salon_5_mensuel_um_kwh_tpl
+          - sensor.eclairage_cuisine_1_mensuel_um_kwh_tpl
+          - sensor.eclairage_bureau_5_mensuel_um_kwh_tpl
+          - sensor.eclairage_sdb_2_mensuel_um_kwh_tpl
+          - sensor.eclairage_chambre_4_mensuel_um_kwh_tpl
+          - sensor.eclairage_total_unit_mensuel_kwh_tpl
+        triggers_update:
+          - sensor.lumiere_appartement_etat
+          - sensor.lumiere_salon_etat
+          - sensor.lumiere_cuisine_etat
+          - sensor.lumiere_bureau_etat
+          - sensor.lumiere_salle_de_bain_etat
+          - sensor.lumiere_chambre_etat
+          - sensor.eclairage_appart_2_quotidien_um_kwh_tpl
+          - sensor.eclairage_salon_5_quotidien_um_kwh_tpl
+          - sensor.eclairage_cuisine_1_quotidien_um_kwh_tpl
+          - sensor.eclairage_bureau_5_quotidien_um_kwh_tpl
+          - sensor.eclairage_sdb_2_quotidien_um_kwh_tpl
+          - sensor.eclairage_chambre_4_quotidien_um_kwh_tpl
+          - sensor.eclairage_total_unit_quotidien_kwh_tpl
+          - sensor.eclairage_appart_2_mensuel_um_kwh_tpl
+          - sensor.eclairage_salon_5_mensuel_um_kwh_tpl
+          - sensor.eclairage_cuisine_1_mensuel_um_kwh_tpl
+          - sensor.eclairage_bureau_5_mensuel_um_kwh_tpl
+          - sensor.eclairage_sdb_2_mensuel_um_kwh_tpl
+          - sensor.eclairage_chambre_4_mensuel_um_kwh_tpl
+          - sensor.eclairage_total_unit_mensuel_kwh_tpl
+        styles:
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 11px
+            - line-height: 1.2
+          grid:
+            - grid-template-areas: |
+                "titre titre titre"
+                "piece quotidien mensuel"
+            - grid-template-columns: 1fr 1fr 1fr
+            - grid-template-rows: auto
+            - margin-top: 4.5px
+          custom_fields:
+            titre:
+              - grid-area: titre
+              - justify-self: center
+              - text-align: center
+              - font-weight: bold
+            piece:
+              - justify-self: start
+              - margin-left: 8px
+              - text-align: left
+            quotidien:
+              - justify-self: start
+              - margin-left: 15px
+              - text-align: left
+            mensuel:
+              - justify-self: end
+              - margin-right: 6px
+              - text-align: right
+        custom_fields:
+          titre: |
+            [[[ return 'Consommation LAMPES' ]]]
+          piece: |
+            [[[
+              function getCol(entityId, isEcoSensitive = false) {
+                const s = states[entityId]?.state;
+                if (!s || s === 'Éteint') return 'white';
+                if (isEcoSensitive && s === 'Éco.') return 'white';
+                return 'lightgreen';
+              }
+              const pieces = [
+                { name: 'Appart.', color: getCol('sensor.lumiere_appartement_etat') },
+                { name: 'Salon',   color: getCol('sensor.lumiere_salon_etat') },
+                { name: 'Cuisine', color: getCol('sensor.lumiere_cuisine_etat') },
+                { name: 'Bureau',  color: getCol('sensor.lumiere_bureau_etat', true) },
+                { name: 'SdB',     color: getCol('sensor.lumiere_salle_de_bain_etat') },
+                { name: 'Chambre', color: getCol('sensor.lumiere_chambre_etat', true) },
+                { name: 'TOTAL',   color: 'lightgreen', bold: true }
+              ];
+              return pieces.map(p =>
+                `<span style="display: block; text-align: left; line-height: 1.2; color: ${p.color}; ${p.bold ? 'font-weight: bold;' : ''}">${p.name}</span>`
+              ).join('');
+            ]]]
+          quotidien: |
+            [[[
+              function safeState(entityId) {
+                const entity = states[entityId];
+                if (!entity || ['unavailable', 'unknown'].includes(entity.state)) return '<span style="color: #aaaaaa;">N/A</span>';
+                var val = parseFloat(entity.state);
+                if (isNaN(val)) return '<span style="color: #aaaaaa;">N/A</span>';
+                if (val < 1) return (val * 1000).toFixed(0) + ' <span style="font-size: 5px;">Wh</span>';
+                return val.toFixed(2) + ' <span style="font-size: 5px;">kWh</span>';
+              }
+              const sensors = [
+                'sensor.eclairage_appart_2_quotidien_um_kwh_tpl',
+                'sensor.eclairage_salon_5_quotidien_um_kwh_tpl',
+                'sensor.eclairage_cuisine_1_quotidien_um_kwh_tpl',
+                'sensor.eclairage_bureau_5_quotidien_um_kwh_tpl',
+                'sensor.eclairage_sdb_2_quotidien_um_kwh_tpl',
+                'sensor.eclairage_chambre_4_quotidien_um_kwh_tpl',
+                'sensor.eclairage_total_unit_quotidien_kwh_tpl'
+              ];
+              return sensors.map((s, i) => {
+                const isLast = i === sensors.length - 1;
+                return `<span style="display: block; text-align: right; line-height: 1.2; ${isLast ? 'color: lightgreen; font-weight: bold;' : ''}">${safeState(s)}</span>`;
+              }).join('');
+            ]]]
+          mensuel: |
+            [[[
+              function safeState(entityId) {
+                const entity = states[entityId];
+                if (!entity || ['unavailable', 'unknown'].includes(entity.state)) return '<span style="color: #aaaaaa;">N/A</span>';
+                var val = parseFloat(entity.state);
+                if (isNaN(val)) return '<span style="color: #aaaaaa;">N/A</span>';
+                if (val < 1) return (val * 1000).toFixed(0) + ' <span style="font-size: 5px;">Wh</span>';
+                return val.toFixed(2) + ' <span style="font-size: 5px;">kWh</span>';
+              }
+              const sensors = [
+                'sensor.eclairage_appart_2_mensuel_um_kwh_tpl',
+                'sensor.eclairage_salon_5_mensuel_um_kwh_tpl',
+                'sensor.eclairage_cuisine_1_mensuel_um_kwh_tpl',
+                'sensor.eclairage_bureau_5_mensuel_um_kwh_tpl',
+                'sensor.eclairage_sdb_2_mensuel_um_kwh_tpl',
+                'sensor.eclairage_chambre_4_mensuel_um_kwh_tpl',
+                'sensor.eclairage_total_unit_mensuel_kwh_tpl'
+              ];
+              return sensors.map((s, i) => {
+                const isLast = i === sensors.length - 1;
+                return `<span style="display: block; text-align: right; line-height: 1.2; ${isLast ? 'color: lightgreen; font-weight: bold;' : ''}">${safeState(s)}</span>`;
+              }).join('');
+            ]]]
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/lumieres
+        entities:
+          - sensor.lumiere_appartement_etat
+          - sensor.lumiere_salon_etat
+          - sensor.lumiere_cuisine_etat
+          - sensor.bureau_etat
+          - sensor.lumiere_salle_de_bain_etat
+          - sensor.chambre_etat
+          - sensor.lumiere_ecran_etat
+          - light.entree
+          - light.couloir
+          - light.salon
+          - light.table
+          - light.cuisine
+          - light.hue_white_lamp_salle_de_bain
+          - light.chambre
+          - light.hue_color_candle_chambre_gege
+          - light.hue_color_candle_chambre_eric
+          - switch.prise_tete_de_lit_chambre
+        triggers_update:
+          - sensor.lumiere_appartement_etat
+          - sensor.lumiere_salon_etat
+          - sensor.lumiere_cuisine_etat
+          - sensor.bureau_etat
+          - sensor.lumiere_salle_de_bain_etat
+          - sensor.chambre_etat
+          - sensor.lumiere_ecran_etat
+          - light.entree
+          - light.couloir
+          - light.salon
+          - light.table
+          - light.cuisine
+          - light.hue_white_lamp_salle_de_bain
+          - light.chambre
+          - light.hue_color_candle_chambre_gege
+          - light.hue_color_candle_chambre_eric
+          - switch.prise_tete_de_lit_chambre
+        styles:
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 11px
+            - line-height: 1.2
+          grid:
+            - grid-template-areas: |
+                "titre titre titre"
+                "piece etat active"
+            - grid-template-columns: 1fr 1fr 1fr
+            - grid-template-rows: auto
+            - margin-top: 4.5px
+          custom_fields:
+            titre:
+              - grid-area: titre
+              - justify-self: center
+              - text-align: center
+              - font-weight: bold
+            piece:
+              - grid-area: piece
+              - justify-self: start
+              - margin-left: 8px
+              - text-align: left
+            etat:
+              - grid-area: etat
+              - justify-self: end
+              - text-align: start
+              - margin-right: -11px
+            active:
+              - grid-area: active
+              - justify-self: end
+              - margin-right: 8px
+              - text-align: right
+        custom_fields:
+          titre: |
+            [[[ return 'Commande LAMPES' ]]]
+          piece: >
+            [[[ return
+            `<div><div>Appart.</div><div>Salon</div><div>Cuisine</div><div>Bureau</div><div>SdB</div><div>Chambre</div></div>`;
+            ]]]
+          etat: |
+            [[[
+              function getColorForStatus(status) {
+                if (status === 'N/A' || status === 'erreur') return '#aaaaaa';
+                if (status === 'Allumé') return 'lightgreen';
+                if (status === 'Éteint') return 'rgb(244,67,54)';
+                if (status === 'AlluSync' || status === 'Synchro' || status === 'Éco.') return '#FFA500';
+                const greenStates = [
+                  'Entrée', 'Couloir', 'Salon', 'Table', 'Bureau', 
+                  'Écran', 'Chambre', 'Zone G.', 'Zone É.', 
+                  'Tête Lit', 'Ch.+zG', 'Ch.+zÉ'
+                ];
+                if (greenStates.includes(status)) return 'lightgreen';
+                return 'white';
+              }
+              function safeState(entityId) {
+                const state = states[entityId]?.state;
+                return (!state || state === 'unavailable' || state === 'unknown') ? 'N/A' : state;
+              }
+              var appStat = safeState('sensor.lumiere_appartement_etat');
+              var salStat = safeState('sensor.lumiere_salon_etat');
+              var cuiStat = safeState('sensor.lumiere_cuisine_etat');
+              var burStat = safeState('sensor.bureau_etat');
+              var sdbStat = safeState('sensor.lumiere_salle_de_bain_etat');
+              var chaStat = safeState('sensor.chambre_etat');
+              return `<div>
+                <div style="color: ${getColorForStatus(appStat)};">${appStat}</div>
+                <div style="color: ${getColorForStatus(salStat)};">${salStat}</div>
+                <div style="color: ${getColorForStatus(cuiStat)};">${cuiStat}</div>
+                <div style="color: ${getColorForStatus(burStat)};">${burStat}</div>
+                <div style="color: ${getColorForStatus(sdbStat)};">${sdbStat}</div>
+                <div style="color: ${getColorForStatus(chaStat)};">${chaStat}</div>
+              </div>`;
+            ]]]
+          active: |
+            [[[
+              function countActiveEntities(entities) {
+                return entities.filter(entity => states[entity]?.state === 'on').length;
+              }
+              function getColorForCount(activeCount, totalCount) {
+                if (activeCount === totalCount && totalCount > 0) return 'lightgreen';
+                if (activeCount === 0) return 'rgb(244,67,54)';
+                return '#FFA500';
+              }
+              var appartement = { activeCount: countActiveEntities(['light.entree', 'light.couloir']), totalCount: 2 };
+              var salon = { activeCount: countActiveEntities(['light.salon', 'light.table']), totalCount: 2 };
+              var cuisine = { activeCount: countActiveEntities(['light.cuisine']), totalCount: 1 };
+              
+              var statusB = states['sensor.bureau_etat']?.state;
+              var ecranS = states['sensor.lumiere_ecran_etat']?.state;
+              var bTxt = "0/2";
+              var bCol = "rgb(244,67,54)";
+              if (statusB === 'AlluSync') { bTxt = "2/2"; bCol = "#FFA500"; }
+              else if (statusB === 'Synchro') { bTxt = "1/2"; bCol = "#FFA500"; }
+              else if (statusB === 'Allumé') { bTxt = "2/2"; bCol = "lightgreen"; }
+              else if (statusB === 'Bureau') { 
+                if (ecranS === 'Éco.') { bTxt = "1/1"; bCol = "lightgreen"; }
+                else { bTxt = "1/2"; bCol = "#FFA500"; }
+              }
+              else if (statusB === 'Écran') { bTxt = "1/2"; bCol = "#FFA500"; }
+              else if (statusB === 'Éco.') { bTxt = "0/1"; bCol = "#FFA500"; }
+              else { bTxt = "0/2"; bCol = "rgb(244,67,54)"; }
+              var sdbActive = states['light.hue_white_lamp_salle_de_bain']?.state === 'on' ? 1 : 0;
+              
+              // ═══════════════════════════════════════════════════════════════════════════
+              // CHAMBRE : Gestion du cas "Éco." avec 0/1 en orange
+              // ═══════════════════════════════════════════════════════════════════════════
+              var statusCh = states['sensor.chambre_etat']?.state;
+              var chEnt = ['light.chambre'];
+              
+              // Si la prise tête de lit est allumée, ajouter les 2 bougies
+              if (states['switch.prise_tete_de_lit_chambre']?.state === 'on') { 
+                chEnt.push('light.hue_color_candle_chambre_gege', 'light.hue_color_candle_chambre_eric'); 
+              }
+              
+              var chActive = countActiveEntities(chEnt);
+              var chTxt = `${chActive}/${chEnt.length}`;
+              var chCol = getColorForCount(chActive, chEnt.length);
+              
+              // CAS SPÉCIAL : Si l'état de la chambre est "Éco." et 0/1, forcer la couleur orange
+              if (statusCh === 'Éco.' && chActive === 0 && chEnt.length === 1) {
+                chCol = '#FFA500';
+              }
+              return `<div>
+                <div style="color: ${getColorForCount(appartement.activeCount, 2)};">${appartement.activeCount}/2</div>
+                <div style="color: ${getColorForCount(salon.activeCount, 2)};">${salon.activeCount}/2</div>
+                <div style="color: ${getColorForCount(cuisine.activeCount, 1)};">${cuisine.activeCount}/1</div>
+                <div style="color: ${bCol};">${bTxt}</div>
+                <div style="color: ${getColorForCount(sdbActive, 1)};">${sdbActive}/1</div>
+                <div style="color: ${chCol};">${chTxt}</div>
+              </div>`;
+            ]]]
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/prises
+        entities:
+          - switch.prise_tv_salon_ikea
+          - light.hue_smart_eco_tv_salon
+          - light.hue_smart_eco_salon
+          - switch.prise_horloge_ikea
+          - switch.ecran_p_c_3_play_hue
+          - light.hue_smart_eco_pc_bureau
+          - switch.prise_tete_de_lit_chambre
+          - light.hue_smart_eco_tv_chambre
+        triggers_update:
+          - switch.prise_tv_salon_ikea
+          - light.hue_smart_eco_tv_salon
+          - light.hue_smart_eco_salon
+          - switch.prise_horloge_ikea
+          - switch.ecran_p_c_3_play_hue
+          - light.hue_smart_eco_pc_bureau
+          - switch.prise_tete_de_lit_chambre
+          - light.hue_smart_eco_tv_chambre
+        styles:
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 11px
+            - line-height: 1.2
+          grid:
+            - grid-template-areas: |
+                "titre titre"
+                "piece etat"
+            - grid-template-columns: 1fr 1fr
+            - grid-template-rows: auto
+            - margin-top: 4.5px
+          custom_fields:
+            titre:
+              - grid-area: titre
+              - justify-self: center
+              - text-align: center
+              - font-weight: bold
+            piece:
+              - grid-area: piece
+              - justify-self: start
+              - margin-left: 8px
+              - text-align: left
+            etat:
+              - grid-area: etat
+              - justify-self: start
+              - margin-left: 8px
+              - text-align: left
+        custom_fields:
+          titre: |
+            [[[ return 'Commande éCO.' ]]]
+          piece: |
+            [[[
+              return `
+              <div>
+                <div>Horloge</div>
+                <div>Salon</div>
+                <div>TV Salon</div>
+                <div>PC Bureau</div>
+                <div>Play Bureau</div>
+                <div>TV Chambre</div>
+                <div>Tête de Lit</div>
+              </div>
+              `;
+            ]]]
+          etat: |
+            [[[
+              function safeState(entityId) {
+                const entity = states[entityId];
+                if (!entity || entity.state === 'unavailable' || entity.state === 'unknown') {
+                  return 'N/A';
+                }
+                return entity.state;
+              }
+
+              function getColorForStatus(status) {
+                if (status === 'N/A') return '#aaaaaa';
+                return status === 'on' ? 'lightgreen' : 'rgb(244,67,54)';
+              }
+
+              function getStatusText(status) {
+                if (status === 'N/A') return 'N/A';
+                return status === 'on' ? 'Allumé' : 'Éteint';
+              }
+
+              const hStat = safeState('switch.prise_horloge_ikea');
+              const sStat = safeState('light.hue_smart_eco_salon');
+              const tsStat = safeState('light.hue_smart_eco_tv_salon');
+              const pStat = safeState('light.hue_smart_eco_pc_bureau');
+              const pbStat = safeState('switch.ecran_p_c_3_play_hue');
+              const tcStat = safeState('light.hue_smart_eco_tv_chambre');
+              const tlStat = safeState('switch.prise_tete_de_lit_chambre');
+              return `
+              <div>
+                <div style="color: ${getColorForStatus(hStat)};">${getStatusText(hStat)}</div>
+                <div style="color: ${getColorForStatus(sStat)};">${getStatusText(sStat)}</div>
+                <div style="color: ${getColorForStatus(tsStat)};">${getStatusText(tsStat)}</div>
+                <div style="color: ${getColorForStatus(pStat)};">${getStatusText(pStat)}</div>
+                <div style="color: ${getColorForStatus(pbStat)};">${getStatusText(pbStat)}</div>
+                <div style="color: ${getColorForStatus(tcStat)};">${getStatusText(tcStat)}</div>
+                <div style="color: ${getColorForStatus(tlStat)};">${getStatusText(tlStat)}</div>
+              </div>
+              `;
+            ]]]
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/stores
+        entities:
+          - binary_sensor.contact_fenetre_salon_sonoff_contact
+          - binary_sensor.contact_fenetre_cuisine_sonoff_contact
+          - binary_sensor.contact_fenetre_bureau_sonoff_contact
+          - binary_sensor.contact_fenetre_chambre_sonoff_contact
+          - sensor.store_salon_status
+          - sensor.store_bureau_status
+        triggers_update:
+          - binary_sensor.contact_fenetre_salon_sonoff_contact
+          - binary_sensor.contact_fenetre_cuisine_sonoff_contact
+          - binary_sensor.contact_fenetre_bureau_sonoff_contact
+          - binary_sensor.contact_fenetre_chambre_sonoff_contact
+          - sensor.store_salon_status
+          - sensor.store_bureau_status
+        styles:
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 11px
+            - line-height: 1.2
+          grid:
+            - grid-template-areas: |
+                "titre titre titre"
+                "espace espace espace"
+                "piece fenetres stores"
+            - grid-template-columns: 1fr 1fr 1fr
+            - grid-template-rows: auto 14px auto
+            - margin-top: 4.5px
+          custom_fields:
+            titre:
+              - grid-area: titre
+              - justify-self: center
+              - text-align: center
+              - font-weight: bold
+            espace:
+              - grid-area: espace
+              - height: 10px
+            piece:
+              - grid-area: piece
+              - justify-self: start
+              - margin-left: 8px
+              - text-align: left
+            fenetres:
+              - grid-area: fenetres
+              - justify-self: end
+              - text-align: center
+            stores:
+              - grid-area: stores
+              - justify-self: end
+              - margin-right: 7px
+              - text-align: right
+        custom_fields:
+          titre: |
+            [[[
+              return 'Commande Stores<BR>Pièces / Fenêtres / Stores';
+            ]]]
+          espace: |
+            [[[ return ' '; ]]]
+          piece: |
+            [[[
+              return `
+              <div>
+                <div>Salon</div>
+                <div>Cuisine</div>
+                <div>Bureau</div>
+                <div>Chambre</div>
+              </div>
+              `;
+            ]]]
+          fenetres: |
+            [[[
+              function getColorForFenetreStatus(entityId) {
+                const state = states[entityId]?.state;
+                if (state === 'on') return '<span style="color: rgb(244,67,54);">Ouvert</span>';
+                if (state === 'off') return '<span style="color: lightgreen;">Fermé</span>';
+                return '<span style="color: #aaaaaa;">N/A</span>';
+              }
+
+              var salon = getColorForFenetreStatus('binary_sensor.contact_fenetre_salon_sonoff_contact');
+              var cuisine = getColorForFenetreStatus('binary_sensor.contact_fenetre_cuisine_sonoff_contact');
+              var bureau = getColorForFenetreStatus('binary_sensor.contact_fenetre_bureau_sonoff_contact');
+              var chambre = getColorForFenetreStatus('binary_sensor.contact_fenetre_chambre_sonoff_contact');
+
+              return `
+              <div>
+                <div>${salon}</div>
+                <div>${cuisine}</div>
+                <div>${bureau}</div>
+                <div>${chambre}</div>
+              </div>
+              `;
+            ]]]
+          stores: |
+            [[[
+              function getStoreStatus(entityId) {
+                const entity = states[entityId];
+                if (!entity) return '-';
+                const state = entity.state;
+                if (state === 'unavailable' || state === 'unknown' || state === 'N/A') {
+                  return '<span style="color: #aaaaaa;">N/A</span>';
+                }
+                // Harmonisation : si le store est "Ouvert", on peut aussi le mettre en rouge si tu veux, 
+                // mais ici on garde le texte brut du sensor de statut.
+                return state;
+              }
+
+              var salonStoreStatus = getStoreStatus('sensor.store_salon_status');
+              var cuisineStoreStatus = getStoreStatus('sensor.store_cuisine_status');
+              var bureauStoreStatus = getStoreStatus('sensor.store_bureau_status');
+              var chambreStoreStatus = getStoreStatus('sensor.store_chambre_status'); 
+
+              return `
+              <div>
+                <div>${salonStoreStatus}</div>
+                <div>${cuisineStoreStatus}</div>
+                <div>${bureauStoreStatus}</div>
+                <div>${chambreStoreStatus}</div>
+              </div>
+              `;
+            ]]]
+      - type: custom:button-card
+        entity: sensor.proxmox_cpu_package
+        icon: phu:intel-nuc
+        aspect_ratio: 1/1
+        name: _____ Mini - P.C. _____
+        entities:
+          - sensor.proxmox_cpu_package
+          - sensor.pve_utilisation_du_processeur
+          - sensor.pve_memory_usage_percentage
+          - sensor.storage_local_storage_usage_percentage
+          - sensor.prise_mini_pc_ikea_power
+        triggers_update:
+          - sensor.proxmox_cpu_package
+          - sensor.pve_utilisation_du_processeur
+          - sensor.pve_memory_usage_percentage
+          - sensor.storage_local_storage_usage_percentage
+          - sensor.prise_mini_pc_ikea_power
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/systeme-mini-pc
+        styles:
+          card:
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 11px
+            - line-height: 1.2
+            - padding: 3%
+          grid:
+            - grid-template-areas: |
+                "i temp"
+                "n n"
+                "cpu cpu"
+                "conso conso"
+                "ram ram"
+                "sd sd"
+          name:
+            - font-weight: bold
+            - font-size: 13px
+            - color: white
+            - align-self: middle
+            - justify-self: center
+            - padding-bottom: 7px
+          icon:
+            - color: |
+                [[[
+                  if (!entity || entity.state === 'unavailable' || entity.state === 'unknown') return '#aaaaaa';
+                  const t = parseFloat(entity.state);
+                  if (t < 65) return 'rgb(70, 175, 75)';
+                  if (t < 75) return 'orange';
+                  return 'rgb(244,67,54)';
+                ]]]
+            - width: 100%
+          custom_fields:
+            temp:
+              - align-self: start
+              - margin-top: 18px
+              - margin-right: 10px
+              - --text-icon-sensor: |
+                  [[[
+                    if (!entity || entity.state === 'unavailable' || entity.state === 'unknown') return '#aaaaaa';
+                    const t = parseFloat(entity.state);
+                    if (t < 65) return 'rgb(70, 175, 75)';
+                    if (t < 75) return 'orange';
+                    return 'rgb(244,67,54)';
+                  ]]]
+              - --text-color-sensor: |
+                  [[[
+                    if (!entity || entity.state === 'unavailable' || entity.state === 'unknown') return '#aaaaaa';
+                    const t = parseFloat(entity.state);
+                    if (t < 65) return 'rgb(255,255,255)';
+                    if (t < 75) return 'orange';
+                    return 'rgb(244,67,54)';
+                  ]]]
+            cpu:
+              - padding-bottom: 1px
+              - align-self: middle
+              - justify-self: start
+              - --text-color-sensor: |
+                  [[[
+                    const s = states['sensor.pve_utilisation_du_processeur'];
+                    if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
+                    const v = parseFloat(s.state);
+                    if (v < 75) return 'white';
+                    if (v < 90) return 'orange';
+                    return 'rgb(244,67,54)';
+                  ]]]
+            conso:
+              - padding-bottom: 1px
+              - align-self: middle
+              - justify-self: start
+              - --text-color-sensor: |
+                  [[[
+                    const s = states['sensor.prise_mini_pc_ikea_power'];
+                    if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
+                    const v = parseFloat(s.state);
+                    if (v < 15) return 'white';
+                    if (v < 19) return 'orange';
+                    return 'rgb(244,67,54)';
+                  ]]]
+            ram:
+              - padding-bottom: 1px
+              - align-self: middle
+              - justify-self: start
+              - --text-color-sensor: |
+                  [[[
+                    const s = states['sensor.pve_memory_usage_percentage'];
+                    if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
+                    const v = parseFloat(s.state);
+                    if (v < 75) return 'white';
+                    if (v < 90) return 'orange';
+                    return 'rgb(244,67,54)';
+                  ]]]
+              - --icon-color-sensor: |
+                  [[[
+                    const s = states['sensor.pve_memory_usage_percentage'];
+                    if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
+                    const v = parseFloat(s.state);
+                    if (v < 75) return 'rgb(70, 175, 75)';
+                    if (v < 90) return 'orange';
+                    return 'rgb(244,67,54)';
+                  ]]]
+            sd:
+              - padding-bottom: 0px
+              - align-self: middle
+              - justify-self: start
+              - --text-color-sensor: |
+                  [[[
+                    const s = states['sensor.storage_local_storage_usage_percentage'];
+                    if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
+                    const v = parseFloat(s.state);
+                    if (v < 75) return 'white';
+                    if (v < 90) return 'orange';
+                    return 'rgb(244,67,54)';
+                  ]]]
+              - --icon-color-sensor: |
+                  [[[
+                    const s = states['sensor.storage_local_storage_usage_percentage'];
+                    if (!s || s.state === 'unavailable' || s.state === 'unknown') return '#aaaaaa';
+                    const v = parseFloat(s.state);
+                    if (v < 75) return 'rgb(70, 175, 75)';
+                    if (v < 90) return 'orange';
+                    return 'rgb(244,67,54)';
+                  ]]]
+        custom_fields:
+          temp: |
+            [[[
+              if (!entity || entity.state === 'unavailable' || entity.state === 'unknown')
+                return `<ha-icon icon="mdi:thermometer" style="width:15px;height:15px;color:#aaaaaa;"></ha-icon> <span style="color:#aaaaaa;">N/A</span>`;
+              const t = parseFloat(entity.state);
+              const color = t < 65 ? 'rgb(70,175,75)' : t < 75 ? 'orange' : 'rgb(244,67,54)';
+              return `<ha-icon icon="mdi:thermometer" style="width:15px;height:15px;color:${color};"></ha-icon> <span style="color:${color};">${entity.state}°C</span>`;
+            ]]]
+          cpu: |
+            [[[
+              const s = states['sensor.pve_utilisation_du_processeur'];
+              const val = (s && s.state !== 'unavailable' && s.state !== 'unknown') ? parseFloat(s.state).toFixed(1) + '%' : 'N/A';
+              return `<ha-icon icon="mdi:server" style="width:15px;height:15px;color:rgb(70,175,75);"></ha-icon><span>CPU: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
+            ]]]
+          conso: |
+            [[[
+              const s = states['sensor.prise_mini_pc_ikea_power'];
+              const val = (s && s.state !== 'unavailable' && s.state !== 'unknown') ? parseFloat(s.state).toFixed(1) + 'W' : 'N/A';
+              return `<ha-icon icon="mdi:lightning-bolt-outline" style="width:15px;height:15px;color:rgb(70,175,75);"></ha-icon><span>Power: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
+            ]]]
+          ram: |
+            [[[
+              const s = states['sensor.pve_memory_usage_percentage'];
+              const val = (s && s.state !== 'unavailable' && s.state !== 'unknown') ? parseFloat(s.state).toFixed(1) + '%' : 'N/A';
+              return `<ha-icon icon="mdi:memory" style="width:15px;height:15px;color:var(--icon-color-sensor);"></ha-icon><span>RAM: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
+            ]]]
+          sd: |
+            [[[
+              const s = states['sensor.storage_local_storage_usage_percentage'];
+              const val = (s && s.state !== 'unavailable' && s.state !== 'unknown') ? parseFloat(s.state).toFixed(1) + '%' : 'N/A';
+              return `<ha-icon icon="mdi:harddisk" style="width:15px;height:15px;color:var(--icon-color-sensor);"></ha-icon><span>SSD: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
+            ]]]
+      - type: custom:button-card
+        entity: sensor.proxmox_cpu_package
+        icon: phu:proxmox
+        aspect_ratio: 1/1
+        name: _____ Proxmox _____
+        entities:
+          - sensor.proxmox_cpu_package
+          - sensor.pve_utilisation_du_processeur
+          - sensor.pve_memory_usage_percentage
+          - sensor.storage_local_storage_usage_percentage
+          - binary_sensor.pve_status
+        triggers_update:
+          - sensor.proxmox_cpu_package
+          - sensor.pve_utilisation_du_processeur
+          - sensor.pve_memory_usage_percentage
+          - sensor.storage_local_storage_usage_percentage
+          - binary_sensor.pve_status
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/systeme-proxmox
+        styles:
+          card:
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 11px
+            - line-height: 1.2
+            - padding: 3%
+          grid:
+            - grid-template-areas: |
+                "i temp"
+                "n n"
+                "cpu cpu"
+                "status status"
+                "ram ram"
+                "sd sd"
+          name:
+            - font-weight: bold
+            - font-size: 13px
+            - color: white
+            - align-self: middle
+            - justify-self: center
+            - padding-bottom: 7px
+          icon:
+            - color: |
+                [[[
+                  if (!entity || entity.state === 'unavailable' || entity.state === 'unknown') return '#aaaaaa';
+                  const t = parseFloat(entity.state);
+                  if (t < 65) return 'rgb(70, 175, 75)';
+                  if (t < 75) return 'orange';
+                  return 'rgb(244,67,54)';
+                ]]]
+            - width: 40%
+          custom_fields:
+            temp:
+              - align-self: start
+              - margin-top: 18px
+              - margin-right: 10px
+            cpu:
+              - padding-bottom: 1px
+              - align-self: middle
+              - justify-self: start
+              - --text-color-sensor: |
+                  [[[
+                    const s = states["sensor.pve_utilisation_du_processeur"];
+                    if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+                    const v = parseFloat(s.state);
+                    if (v < 75) return "white";
+                    if (v < 90) return "orange";
+                    return "rgb(244,67,54)";
+                  ]]]
+              - --icon-color-sensor: |
+                  [[[
+                    const s = states["sensor.pve_utilisation_du_processeur"];
+                    if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+                    const v = parseFloat(s.state);
+                    if (v < 75) return "rgb(70, 175, 75)";
+                    if (v < 90) return "orange";
+                    return "rgb(244,67,54)";
+                  ]]]
+            status:
+              - padding-bottom: 1px
+              - align-self: middle
+              - justify-self: start
+              - --text-color-sensor: |
+                  [[[
+                    const s = states["binary_sensor.pve_status"];
+                    if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+                    return s.state === "on" ? "rgb(70, 175, 75)" : "rgb(244,67,54)";
+                  ]]]
+              - --icon-color-sensor: |
+                  [[[
+                    const s = states["binary_sensor.pve_status"];
+                    if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+                    return s.state === "on" ? "rgb(70, 175, 75)" : "rgb(244,67,54)";
+                  ]]]
+            ram:
+              - padding-bottom: 1px
+              - align-self: middle
+              - justify-self: start
+              - --text-color-sensor: |
+                  [[[
+                    const s = states["sensor.pve_memory_usage_percentage"];
+                    if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+                    const v = parseFloat(s.state);
+                    if (v < 75) return "white";
+                    if (v < 90) return "orange";
+                    return "rgb(244,67,54)";
+                  ]]]
+              - --icon-color-sensor: |
+                  [[[
+                    const s = states["sensor.pve_memory_usage_percentage"];
+                    if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+                    const v = parseFloat(s.state);
+                    if (v < 75) return "rgb(70, 175, 75)";
+                    if (v < 90) return "orange";
+                    return "rgb(244,67,54)";
+                  ]]]
+            sd:
+              - padding-bottom: 0px
+              - align-self: middle
+              - justify-self: start
+              - --text-color-sensor: |
+                  [[[
+                    const s = states["sensor.storage_local_storage_usage_percentage"];
+                    if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+                    const v = parseFloat(s.state);
+                    if (v < 75) return "white";
+                    if (v < 90) return "orange";
+                    return "rgb(244,67,54)";
+                  ]]]
+              - --icon-color-sensor: |
+                  [[[
+                    const s = states["sensor.storage_local_storage_usage_percentage"];
+                    if (!s || s.state === "unavailable" || s.state === "unknown") return "#aaaaaa";
+                    const v = parseFloat(s.state);
+                    if (v < 75) return "rgb(70, 175, 75)";
+                    if (v < 90) return "orange";
+                    return "rgb(244,67,54)";
+                  ]]]
+        custom_fields:
+          temp: |
+            [[[
+              const s = states["sensor.proxmox_cpu_package"];
+              if (!s || s.state === "unavailable" || s.state === "unknown")
+                return `<ha-icon icon="mdi:thermometer" style="width:15px;height:15px;color:#aaaaaa;"></ha-icon> <span style="color:#aaaaaa;">N/A</span>`;
+              const t = parseFloat(s.state);
+              const color = t < 65 ? "rgb(70,175,75)" : t < 75 ? "orange" : "rgb(244,67,54)";
+              return `<ha-icon icon="mdi:thermometer" style="width:15px;height:15px;color:${color};"></ha-icon> <span style="color:${color};">${s.state}°C</span>`;
+            ]]]
+          cpu: |
+            [[[
+              const s = states["sensor.pve_utilisation_du_processeur"];
+              const val = (s && s.state !== "unavailable" && s.state !== "unknown") ? parseFloat(s.state).toFixed(1) + "%" : "N/A";
+              return `<ha-icon icon="mdi:server" style="width:15px;height:15px;color:var(--icon-color-sensor);"></ha-icon><span>PVE CPU: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
+            ]]]
+          status: |
+            [[[
+              const s = states["binary_sensor.pve_status"];
+              const val = (s && s.state !== "unavailable" && s.state !== "unknown") ? (s.state === "on" ? "ONLINE" : "OFFLINE") : "N/A";
+              return `<ha-icon icon="mdi:power-settings" style="width:15px;height:15px;color:var(--icon-color-sensor);"></ha-icon><span>PVE Host: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
+            ]]]
+          ram: |
+            [[[
+              const s = states["sensor.pve_memory_usage_percentage"];
+              const val = (s && s.state !== "unavailable" && s.state !== "unknown") ? parseFloat(s.state).toFixed(1) + "%" : "N/A";
+              return `<ha-icon icon="mdi:memory" style="width:15px;height:15px;color:var(--icon-color-sensor);"></ha-icon><span>PVE RAM: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
+            ]]]
+          sd: |
+            [[[
+              const s = states["sensor.storage_local_storage_usage_percentage"];
+              const val = (s && s.state !== "unavailable" && s.state !== "unknown") ? parseFloat(s.state).toFixed(1) + "%" : "N/A";
+              return `<ha-icon icon="mdi:harddisk" style="width:15px;height:15px;color:var(--icon-color-sensor);"></ha-icon><span>PVE Storage: <span style="color:var(--text-color-sensor);">${val}</span></span>`;
+            ]]]
+      - type: custom:button-card
+        entity: sensor.available_updates
+        icon: mdi:home-assistant
+        aspect_ratio: 1/1
+        name: Software | modules
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/maj
+        styles:
+          card:
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: |
+                [[[
+                  if (entity.state == '0') return 'white';
+                  else return 'orange';
+                ]]]
+            - font-size: 11px
+            - line-height: 1.2
+            - font-weight: bold
+          grid:
+            - grid-template-areas: '''icon n'' ''updates updates'''
+            - grid-template-columns: auto 1fr
+            - grid-template-rows: 1fr min-content
+          name:
+            - font-weight: bold
+            - color: white
+            - align-self: start
+            - justify-self: center
+            - margin-right: 50px
+          custom_fields:
+            icon:
+              - width: 40px
+              - height: 40px
+              - margin-top: 0%
+              - margin-left: 250%
+              - justify-self: center
+              - color: |
+                  [[[
+                    if (entity.state == '0') return 'lightblue';
+                    else return 'orange';
+                  ]]]
+            updates:
+              - align-self: start
+              - justify-self: center
+        custom_fields:
+          icon: |
+            [[[
+              return '<ha-icon icon="mdi:home-assistant" style="width: 40px; height: 40px; color: ' +
+                (entity.state == '0' ? 'lightblue' : 'orange') + ';"></ha-icon>';
+            ]]]
+          updates: |
+            [[[
+              if (entity.state == '0') return 'Tout est à jour';
+              else if (entity.state == '1') return '1 mise à jour';
+              else return entity.state + ' mises à jour';
+            ]]]
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/battery-bp
+        entities:
+          - group.hue_devices
+          - group.ikea_devices
+          - group.sonoff_devices
+        triggers_update:
+          - group.hue_devices
+          - group.ikea_devices
+          - group.sonoff_devices
+        styles:
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 11px
+            - line-height: 1.2
+          grid:
+            - grid-template-areas: >
+                "title title title title title title" "espace_debut espace_debut
+                espace_debut espace_debut espace_debut espace_debut" "count
+                marque 100_75_battery 75_50_battery 50_25_battery 25_0_battery"
+                "espace_fin espace_fin espace_fin espace_fin espace_fin
+                espace_fin"
+            - grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
+            - grid-template-rows: auto 10px auto 18px
+            - margin-top: 4.5px
+          custom_fields:
+            title:
+              - grid-area: title
+              - justify-self: center
+              - text-align: center
+              - font-weight: bold
+            espace_debut:
+              - grid-area: espace_debut
+              - height: 10px
+            count:
+              - grid-area: count
+              - justify-self: start
+              - margin-left: 5px
+              - text-align: right
+            marque:
+              - grid-area: marque
+              - margin-right: -21px
+              - text-align: left
+            100_75_battery:
+              - grid-area: 100_75_battery
+              - justify-self: end
+              - margin-right: -15px
+              - text-align: right
+            75_50_battery:
+              - grid-area: 75_50_battery
+              - justify-self: end
+              - margin-right: -9px
+              - text-align: right
+            50_25_battery:
+              - grid-area: 50_25_battery
+              - justify-self: end
+              - margin-right: -2px
+              - text-align: right
+            25_0_battery:
+              - grid-area: 25_0_battery
+              - justify-self: end
+              - margin-right: 5px
+              - text-align: right
+            espace_fin:
+              - grid-area: espace_fin
+              - height: 10px
+        custom_fields:
+          title: |
+            [[[
+              return 'Etat des Piles & Batteries<br><br> 100%> 75%> 50%> 25%>';
+            ]]]
+          espace_debut: |
+            [[[
+              return ' ';
+            ]]]
+          count: |
+            [[[
+              function hasBatteryBelowThreshold(groupName, threshold) {
+                var group = states[groupName];
+                if (!group) return false;
+                return group.attributes.entity_id.some(entityId => {
+                  var entity = states[entityId];
+                  return entity && entity.state && parseInt(entity.state) <= threshold;
+                });
+              }
+              function getStyledCount(groupName) {
+                if (hasBatteryBelowThreshold(groupName, 10)) {
+                  return '<span style="color: rgb(244,67,54); font-weight: bold;">⚠️</span>';
+                }
+                var group = states[groupName];
+                return group ? group.attributes.entity_id.length : 0;
+              }
+              var hueCount = getStyledCount('group.hue_devices');
+              var ikeaCount = getStyledCount('group.ikea_devices');
+              var sonoffCount = getStyledCount('group.sonoff_devices');
+              return `<div><div>${hueCount}</div><div>${ikeaCount}</div><div>${sonoffCount}</div></div>`;
+            ]]]
+          marque: |
+            [[[
+              function hasBatteryBelowThreshold(groupName, threshold) {
+                var group = states[groupName];
+                if (!group) return false;
+                return group.attributes.entity_id.some(entityId => {
+                  var entity = states[entityId];
+                  return entity && entity.state && parseInt(entity.state) <= threshold;
+                });
+              }
+              function getStyledMarque(name, groupName) {
+                if (hasBatteryBelowThreshold(groupName, 10)) {
+                  return `<span style="color: rgb(244,67,54); font-weight: bold;">${name}</span>`;
+                }
+                return name;
+              }
+              return `<div><div>${getStyledMarque('HUE', 'group.hue_devices')}</div><div>${getStyledMarque('IKEA', 'group.ikea_devices')}</div><div>${getStyledMarque('SONOFF', 'group.sonoff_devices')}</div></div>`;
+            ]]]
+          100_75_battery: |
+            [[[
+              function countBatteriesInRange(groupName, lowerBound, upperBound) {
+                var group = states[groupName];
+                if (!group) return 0;
+                return group.attributes.entity_id.filter(entityId => {
+                  var entity = states[entityId];
+                  return entity && entity.state && parseInt(entity.state) <= upperBound && parseInt(entity.state) > lowerBound;
+                }).length;
+              }
+              function getStyledCount(count) {
+                if (count > 0) {
+                  return `<span style="color: #FFA500;">${count}</span>`;
+                }
+                return count;
+              }
+              var hue100_75   = getStyledCount(countBatteriesInRange('group.hue_devices',   74, 100)); // "[L101] modif: lo 76→74, up 99→100"
+              var ikea100_75  = getStyledCount(countBatteriesInRange('group.ikea_devices',  74, 100)); // "[L102] modif: lo 76→74, up 99→100"
+              var sonoff100_75 = getStyledCount(countBatteriesInRange('group.sonoff_devices',74, 100)); // "[L103] modif: lo 76→74, up 99→100"
+              return `
+              <div>
+                <div>${hue100_75}</div>
+                <div>${ikea100_75}</div>
+                <div>${sonoff100_75}</div>
+              </div>
+              `;
+            ]]]
+          75_50_battery: |
+            [[[
+              function countBatteriesInRange(groupName, lowerBound, upperBound) {
+                var group = states[groupName];
+                if (!group) return 0;
+                return group.attributes.entity_id.filter(entityId => {
+                  var entity = states[entityId];
+                  return entity && entity.state && parseInt(entity.state) <= upperBound && parseInt(entity.state) > lowerBound;
+                }).length;
+              }
+              function getStyledCount(count) {
+                if (count > 0) {
+                  return `<span style="color: #FFA500;">${count}</span>`;
+                }
+                return count;
+              }
+              var hue75_50   = getStyledCount(countBatteriesInRange('group.hue_devices',   49, 74)); // "[L121] modif: lo 51→49, up 75→74"
+              var ikea75_50  = getStyledCount(countBatteriesInRange('group.ikea_devices',  49, 74)); // "[L122] modif: lo 51→49, up 75→74"
+              var sonoff75_50 = getStyledCount(countBatteriesInRange('group.sonoff_devices',49, 74)); // "[L123] modif: lo 51→49, up 75→74"
+              return `
+              <div>
+                <div>${hue75_50}</div>
+                <div>${ikea75_50}</div>
+                <div>${sonoff75_50}</div>
+              </div>
+              `;
+            ]]]
+          50_25_battery: |
+            [[[
+              function countBatteriesInRange(groupName, lowerBound, upperBound) {
+                var group = states[groupName];
+                if (!group) return 0;
+                return group.attributes.entity_id.filter(entityId => {
+                  var entity = states[entityId];
+                  return entity && entity.state && parseInt(entity.state) <= upperBound && parseInt(entity.state) > lowerBound;
+                }).length;
+              }
+              function getStyledCount(count) {
+                if (count > 0) {
+                  return `<span style="color: #FFA500;">${count}</span>`;
+                }
+                return count;
+              }
+              var hue50_25   = getStyledCount(countBatteriesInRange('group.hue_devices',   24, 49)); // "[L141] modif: lo 26→24, up 50→49"
+              var ikea50_25  = getStyledCount(countBatteriesInRange('group.ikea_devices',  24, 49)); // "[L142] modif: lo 26→24, up 50→49"
+              var sonoff50_25 = getStyledCount(countBatteriesInRange('group.sonoff_devices',24, 49)); // "[L143] modif: lo 26→24, up 50→49"
+              return `
+              <div>
+                <div>${hue50_25}</div>
+                <div>${ikea50_25}</div>
+                <div>${sonoff50_25}</div>
+              </div>
+              `;
+            ]]]
+          25_0_battery: |
+            [[[
+              function countBatteriesInRange(groupName, lowerBound, upperBound) {
+                var group = states[groupName];
+                if (!group) return 0;
+                return group.attributes.entity_id.filter(entityId => {
+                  var entity = states[entityId];
+                  return entity && entity.state && parseInt(entity.state) <= upperBound && parseInt(entity.state) > lowerBound;
+                }).length;
+              }
+              function getStyledCount(count) {
+                if (count > 0) {
+                  return `<span style="color: #FFA500;">${count}</span>`;
+                }
+                return count;
+              }
+              var hue25_0   = getStyledCount(countBatteriesInRange('group.hue_devices',   -1, 24)); // "[L161] modif: lo 0→-1, up 25→24"
+              var ikea25_0  = getStyledCount(countBatteriesInRange('group.ikea_devices',  -1, 24)); // "[L162] modif: lo 0→-1, up 25→24"
+              var sonoff25_0 = getStyledCount(countBatteriesInRange('group.sonoff_devices',-1, 24)); // "[L163] modif: lo 0→-1, up 25→24"
+              return `
+              <div>
+                <div>${hue25_0}</div>
+                <div>${ikea25_0}</div>
+                <div>${sonoff25_0}</div>
+              </div>
+              `;
+            ]]]
+          espace_fin: |
+            [[[
+              return '----------------------------------------';
+            ]]]
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/phone
+        styles:
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 11px
+            - line-height: 1.2
+          grid:
+            - grid-template-areas: |
+                "titre titre titre"
+                "nom batterie reserve"
+            - grid-template-columns: 1fr 1fr 1fr
+            - grid-template-rows: auto auto
+            - margin-top: 4.5px
+          custom_fields:
+            titre:
+              - grid-area: titre
+              - justify-self: center
+              - text-align: center
+              - font-weight: bold
+              - margin-top: 3px
+            nom:
+              - grid-area: nom
+              - justify-self: start
+              - margin-left: 4px
+              - text-align: left
+            batterie:
+              - grid-area: batterie
+              - justify-self: center
+              - text-align: right
+            reserve:
+              - grid-area: reserve
+              - justify-self: end
+              - margin-right: 8px
+              - text-align: right
+              - margin-top: 0px
+        custom_fields:
+          titre: |
+            [[[
+              return 'État Batterie Portables';
+            ]]]
+          nom: |
+            [[[
+              return `
+              <div>
+                <div>POCO_E</div>
+                <div>POCO_G</div>
+                <div>1+10P_E</div>
+                <div>1+10P_G</div>
+                <div>GM1901</div>
+                <div>SM-A53</div>
+                <div>Tablette</div>
+              </div>
+              `;
+            ]]]
+          batterie: |
+            [[[
+              function getColorForBatteryLevel(batteryLevel) {
+                const lvl = Number(batteryLevel);
+                if (Number.isNaN(lvl)) return 'gray';
+                if (lvl >= 80) return 'lightgreen';
+                if (lvl >= 50) return 'orange';
+                if (lvl >= 20) return 'rgb(255,152,0)';
+                return 'rgb(244,67,54)'; 
+              }
+
+              function getDeviceStatus(entityId) {
+                const st = states[entityId];
+                if (!st || st.state === 'unavailable' || st.state === 'unknown') {
+                  return '<span style="color: gray;">Éteint</span>';
+                }
+                const lvl = Number(st.state);
+                const color = getColorForBatteryLevel(lvl);
+                const safe = Number.isNaN(lvl) ? '—' : `${lvl}%`;
+                return `<span style="color: ${color};">${safe}</span>`;
+                }
+              
+
+              const pocox7_e_Status   = getDeviceStatus('sensor.eric_battery_level');
+              const pocox7_g_Status   = getDeviceStatus('sensor.mamour_battery_level');
+              const ne2213_e_Status   = getDeviceStatus('sensor.ne2213_eric_battery_level');
+              const ne2213_g_Status   = getDeviceStatus('sensor.ne2213_mamour_battery_level');
+              const gm1901Status      = getDeviceStatus('sensor.gm1901_battery_level');
+              const smA530FStatus     = getDeviceStatus('sensor.sm_a530f_battery_level');
+              const tabletteStatus    = getDeviceStatus('sensor.tablette_battery_level');
+
+              return `
+              <div>
+                <div>${pocox7_e_Status}</div>
+                <div>${pocox7_g_Status}</div>
+                <div>${ne2213_e_Status}</div>
+                <div>${ne2213_g_Status}</div>
+                <div>${gm1901Status}</div>
+                <div>${smA530FStatus}</div>
+                <div>${tabletteStatus}</div>
+              </div>
+              `;
+            ]]]
+          reserve: |
+            [[[
+              function getBatteryStateIcon(entityId) {
+                const state = states[entityId]?.state;
+                if (!state || state === 'unknown' || state === 'unavailable') return '⚫';
+                if (state === 'discharging')        return '🟢';
+                if (state === 'charging_wireless')  return '🟡';
+                if (state === 'wireless')           return '🟡';
+                if (state === 'charging')           return '🟠';
+                if (state === 'full')               return 'Full';
+                return state;
+              }
+              const pocox7_e_BatteryState    = getBatteryStateIcon('sensor.eric_battery_state');
+              const pocox7_g_BatteryState    = getBatteryStateIcon('sensor.mamour_battery_state');
+              const ne2213_e_BatteryState    = getBatteryStateIcon('sensor.ne2213_eric_battery_state');
+              const ne2213_g_BatteryState    = getBatteryStateIcon('sensor.ne2213_mamour_battery_state');
+              const gm1901BatteryState       = getBatteryStateIcon('sensor.gm1901_battery_state');
+              const smA530FBatteryState      = getBatteryStateIcon('sensor.sm_a530f_battery_state');
+              const tabletteBatteryState     = getBatteryStateIcon('sensor.tablette_battery_state');
+
+              return `
+              <div>
+                <div>${pocox7_e_BatteryState}</div>
+                <div>${pocox7_g_BatteryState}</div>
+                <div>${ne2213_e_BatteryState}</div>
+                <div>${ne2213_g_BatteryState}</div>
+                <div>${gm1901BatteryState}</div>
+                <div>${smA530FBatteryState}</div>
+                <div>${tabletteBatteryState}</div>
+              </div>
+              `;
+            ]]]
+      - type: custom:button-card
+        show_icon: false
+        show_name: false
+        styles:
+          grid:
+            - grid-template-areas: '"graph"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 11px
+            - line-height: 1.2
+          custom_fields:
+            graph:
+              - width: 105%
+              - height: 105%
+              - margin-top: 20px
+              - margin-left: 10px
+              - margin-right: 10px
+              - margin-bottom: 0px
+              - align-self: center
+              - justify-self: center
+        custom_fields:
+          graph:
+            card:
+              type: custom:flex-horseshoe-card
+              entities:
+                - entity: sensor.taille_db_home_assistant
+                  tap_action:
+                    action: navigate
+                    navigation_path: /dashboard-tablette/reserve
+                  decimals: 1
+                  name: MARIADB
+                  icon: mdi:database
+              show:
+                horseshoe_style: colorstopgradient
+              layout:
+                icons:
+                  - id: 0
+                    entity_index: 0
+                    xpos: 50
+                    ypos: 29
+                    size: 4
+                    styles:
+                      - color: white;
+                      - opacity: 0.95;
+                states:
+                  - id: 0
+                    entity_index: 0
+                    xpos: 50
+                    ypos: 60
+                    styles:
+                      - font-weight: bold;
+                      - font-size: 30px;
+                      - opacity: 0.95;
+                names:
+                  - id: 0
+                    entity_index: 0
+                    xpos: 50
+                    ypos: 77
+                    styles:
+                      - font-weight: 700;
+                      - font-size: 15px;
+                      - opacity: 0.9;
+                hlines:
+                  - id: 0
+                    xpos: 50
+                    ypos: 37
+                    length: 50
+                    styles:
+                      - stroke: var(--primary-text-color);
+                      - stroke-width: 2;
+                      - stroke-linecap: round;
+                      - opacity: 1;
+              horseshoe_scale:
+                min: 0
+                max: 4000
+                width: 3
+              color_stops:
+                '0': green
+                '1800': gold
+                '2500': rgb(231,180,57)
+                '3000': rgb(225,156,24)
+                '3500': darkorange
+                '4000': red
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+      - type: custom:button-card
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/air-quality
+        styles:
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 11px
+            - line-height: 1.2
+          grid:
+            - grid-template-areas: |
+                "titre titre titre"
+                "espace_debut espace_debut espace_debut"
+                "piece_pm25_salon type_pm25_salon value_pm25_salon"
+                "piece_pm25_bureau type_pm25_bureau value_pm25_bureau"
+                "piece_pm25_chambre type_pm25_chambre value_pm25_chambre"
+                "piece_tcov_salon type_tcov_salon value_tcov_salon"
+                "piece_tcov_bureau type_tcov_bureau value_tcov_bureau"
+                "piece_tcov_chambre type_tcov_chambre value_tcov_chambre"
+                "espace_fin espace_fin espace_fin"
+            - grid-template-columns: 1fr 1fr 1fr
+            - grid-template-rows: auto
+            - margin-top: 4.5px
+          custom_fields:
+            titre:
+              - grid-area: title
+              - justify-self: center
+              - text-align: center
+              - font-weight: bold
+            espace_debut:
+              - grid-area: espace_debut
+              - height: 10px
+            piece_pm25_salon:
+              - text-align: center
+              - justify-self: start
+              - margin-left: 4px
+            piece_pm25_bureau:
+              - justify-self: start
+              - margin-left: 4px
+            piece_pm25_chambre:
+              - text-align: center
+              - justify-self: start
+              - margin-left: 4px
+            piece_tcov_salon:
+              - text-align: center
+              - justify-self: start
+              - margin-left: 4px
+            piece_tcov_bureau:
+              - text-align: center
+              - justify-self: start
+              - margin-left: 4px
+            piece_tcov_chambre:
+              - text-align: center
+              - justify-self: start
+              - margin-left: 4px
+            type_pm25_salon:
+              - text-align: center
+              - justify-self: start
+              - margin-left: 6px
+            type_pm25_bureau:
+              - text-align: center
+              - justify-self: start
+              - margin-left: 6px
+            type_pm25_chambre:
+              - text-align: center
+              - justify-self: start
+              - margin-left: 6px
+            type_tcov_salon:
+              - text-align: center
+              - justify-self: start
+              - margin-left: 7px
+            type_tcov_bureau:
+              - text-align: center
+              - justify-self: start
+              - margin-left: 7px
+            type_tcov_chambre:
+              - text-align: center
+              - justify-self: start
+              - margin-left: 7px
+            value_pm25_salon:
+              - text-align: center
+              - justify-self: end
+              - margin-right: 8px
+            value_pm25_bureau:
+              - text-align: center
+              - justify-self: end
+              - margin-right: 8px
+            value_pm25_chambre:
+              - text-align: center
+              - justify-self: end
+              - margin-right: 8px
+            value_tcov_salon:
+              - text-align: center
+              - justify-self: end
+              - margin-right: 14px
+            value_tcov_bureau:
+              - text-align: center
+              - justify-self: end
+              - margin-right: 15px
+            value_tcov_chambre:
+              - text-align: center
+              - justify-self: end
+              - margin-right: 14px
+            espace_fin:
+              - grid-area: espace_fin
+              - height: 10px
+        custom_fields:
+          titre: |
+            [[[
+              return 'Qualité de l\'Air ambiant';
+            ]]]
+          espace_debut: |
+            [[[
+              return ' ';
+            ]]]
+          piece_pm25_salon: |
+            [[[
+              var state = states['sensor.qualite_air_salon_ikea_pm25'];
+              var pm25Value = state ? state.state : 'unavailable';
+              var color = (pm25Value == 'unknown' || pm25Value == 'unavailable' || pm25Value === '') ? '#808080' : 
+                          (parseFloat(pm25Value) > 35 ? 'rgb(244,67,54)' : 
+                           parseFloat(pm25Value) > 11 ? 'orange' : 'white');
+              return '<span style="color: ' + color + ';">Salon</span>';
+            ]]]
+          piece_pm25_bureau: |
+            [[[
+              var state = states['sensor.qualite_air_bureau_ikea_pm25'];
+              var pm25Value = state ? state.state : 'unavailable';
+              var color = (pm25Value == 'unknown' || pm25Value == 'unavailable' || pm25Value === '') ? '#808080' : 
+                          (parseFloat(pm25Value) > 35 ? 'rgb(244,67,54)' : 
+                           parseFloat(pm25Value) > 11 ? 'orange' : 'white');
+              return '<span style="color: ' + color + ';">Bureau</span>';
+            ]]]
+          piece_pm25_chambre: |
+            [[[
+              var state = states['sensor.qualite_air_chambre_ikea_pm25'];
+              var pm25Value = state ? state.state : 'unavailable';
+              var color = (pm25Value == 'unknown' || pm25Value == 'unavailable' || pm25Value === '') ? '#808080' : 
+                          (parseFloat(pm25Value) > 35 ? 'rgb(244,67,54)' : 
+                           parseFloat(pm25Value) > 11 ? 'orange' : 'white');
+              return '<span style="color: ' + color + ';">Chambre</span>';
+            ]]]
+          piece_tcov_salon: |
+            [[[
+              var state = states['sensor.qualite_air_salon_ikea_voc_index'];
+              var tcovValue = state ? state.state : 'unavailable';
+              var color = (tcovValue == 'unknown' || tcovValue == 'unavailable' || tcovValue === '') ? '#808080' : 
+                          (parseFloat(tcovValue) > 1000 ? 'rgb(244,67,54)' : 
+                           parseFloat(tcovValue) > 250 ? 'orange' : 'white');
+              return '<span style="color: ' + color + ';">Salon</span>';
+            ]]]
+          piece_tcov_bureau: |
+            [[[
+              var state = states['sensor.qualite_air_bureau_ikea_voc_index'];
+              var tcovValue = state ? state.state : 'unavailable';
+              var color = (tcovValue == 'unknown' || tcovValue == 'unavailable' || tcovValue === '') ? '#808080' : 
+                          (parseFloat(tcovValue) > 1000 ? 'rgb(244,67,54)' : 
+                           parseFloat(tcovValue) > 250 ? 'orange' : 'white');
+              return '<span style="color: ' + color + ';">Bureau</span>';
+            ]]]
+          piece_tcov_chambre: |
+            [[[
+              var state = states['sensor.qualite_air_chambre_ikea_voc_index'];
+              var tcovValue = state ? state.state : 'unavailable';
+              var color = (tcovValue == 'unknown' || tcovValue == 'unavailable' || tcovValue === '') ? '#808080' : 
+                          (parseFloat(tcovValue) > 1000 ? 'rgb(244,67,54)' : 
+                           parseFloat(tcovValue) > 250 ? 'orange' : 'white');
+              return '<span style="color: ' + color + ';">Chambre</span>';
+            ]]]
+          type_pm25_salon: |
+            [[[
+              var state = states['sensor.qualite_air_salon_ikea_pm25'];
+              var pm25Value = state ? state.state : 'unavailable';
+              var color = (pm25Value == 'unknown' || pm25Value == 'unavailable' || pm25Value === '') ? '#808080' : 
+                          (parseFloat(pm25Value) > 35 ? 'rgb(244,67,54)' : 
+                           parseFloat(pm25Value) > 11 ? 'orange' : 'white');
+              return '<span style="color: ' + color + ';">PM2.5</span>';
+            ]]]
+          type_pm25_bureau: |
+            [[[
+              var state = states['sensor.qualite_air_bureau_ikea_pm25'];
+              var pm25Value = state ? state.state : 'unavailable';
+              var color = (pm25Value == 'unknown' || pm25Value == 'unavailable' || pm25Value === '') ? '#808080' : 
+                          (parseFloat(pm25Value) > 35 ? 'rgb(244,67,54)' : 
+                           parseFloat(pm25Value) > 11 ? 'orange' : 'white');
+              return '<span style="color: ' + color + ';">PM2.5</span>';
+            ]]]
+          type_pm25_chambre: |
+            [[[
+              var state = states['sensor.qualite_air_chambre_ikea_pm25'];
+              var pm25Value = state ? state.state : 'unavailable';
+              var color = (pm25Value == 'unknown' || pm25Value == 'unavailable' || pm25Value === '') ? '#808080' : 
+                          (parseFloat(pm25Value) > 35 ? 'rgb(244,67,54)' : 
+                           parseFloat(pm25Value) > 11 ? 'orange' : 'white');
+              return '<span style="color: ' + color + ';">PM2.5</span>';
+            ]]]
+          type_tcov_salon: |
+            [[[
+              var state = states['sensor.qualite_air_salon_ikea_voc_index'];
+              var tcovValue = state ? state.state : 'unavailable';
+              var color = (tcovValue == 'unknown' || tcovValue == 'unavailable' || tcovValue === '') ? '#808080' : 
+                          (parseFloat(tcovValue) > 1000 ? 'rgb(244,67,54)' : 
+                           parseFloat(tcovValue) > 250 ? 'orange' : 'white');
+              return '<span style="color: ' + color + ';">tCOV</span>';
+            ]]]
+          type_tcov_bureau: |
+            [[[
+              var state = states['sensor.qualite_air_bureau_ikea_voc_index'];
+              var tcovValue = state ? state.state : 'unavailable';
+              var color = (tcovValue == 'unknown' || tcovValue == 'unavailable' || tcovValue === '') ? '#808080' : 
+                          (parseFloat(tcovValue) > 1000 ? 'rgb(244,67,54)' : 
+                           parseFloat(tcovValue) > 250 ? 'orange' : 'white');
+              return '<span style="color: ' + color + ';">tCOV</span>';
+            ]]]
+          type_tcov_chambre: |
+            [[[
+              var state = states['sensor.qualite_air_chambre_ikea_voc_index'];
+              var tcovValue = state ? state.state : 'unavailable';
+              var color = (tcovValue == 'unknown' || tcovValue == 'unavailable' || tcovValue === '') ? '#808080' : 
+                          (parseFloat(tcovValue) > 1000 ? 'rgb(244,67,54)' : 
+                           parseFloat(tcovValue) > 250 ? 'orange' : 'white');
+              return '<span style="color: ' + color + ';">tCOV</span>';
+            ]]]
+          value_pm25_salon: |
+            [[[
+              var state = states['sensor.qualite_air_salon_ikea_pm25'];
+              var pm25Value = state ? state.state : 'unavailable';
+              var isMissing = pm25Value == 'unknown' || pm25Value == 'unavailable' || pm25Value === '';
+              var color = isMissing ? '#808080' : 
+                          (parseFloat(pm25Value) > 35 ? 'rgb(244,67,54)' : 
+                           parseFloat(pm25Value) > 11 ? 'orange' : 'white');
+              var displayValue = isMissing ? 'N/A' : pm25Value + ' µg/m³';
+              return '<span style="color: ' + color + ';">' + displayValue + '</span>';
+            ]]]
+          value_pm25_bureau: |
+            [[[
+              var state = states['sensor.qualite_air_bureau_ikea_pm25'];
+              var pm25Value = state ? state.state : 'unavailable';
+              var isMissing = pm25Value == 'unknown' || pm25Value == 'unavailable' || pm25Value === '';
+              var color = isMissing ? '#808080' : 
+                          (parseFloat(pm25Value) > 35 ? 'rgb(244,67,54)' : 
+                           parseFloat(pm25Value) > 11 ? 'orange' : 'white');
+              var displayValue = isMissing ? 'N/A' : pm25Value + ' µg/m³';
+              return '<span style="color: ' + color + ';">' + displayValue + '</span>';
+            ]]]
+          value_pm25_chambre: |
+            [[[
+              var state = states['sensor.qualite_air_chambre_ikea_pm25'];
+              var pm25Value = state ? state.state : 'unavailable';
+              var isMissing = pm25Value == 'unknown' || pm25Value == 'unavailable' || pm25Value === '';
+              var color = isMissing ? '#808080' : 
+                          (parseFloat(pm25Value) > 35 ? 'rgb(244,67,54)' : 
+                           parseFloat(pm25Value) > 11 ? 'orange' : 'white');
+              var displayValue = isMissing ? 'N/A' : pm25Value + ' µg/m³';
+              return '<span style="color: ' + color + ';">' + displayValue + '</span>';
+            ]]]
+          value_tcov_salon: |
+            [[[
+              var state = states['sensor.qualite_air_salon_ikea_voc_index'];
+              var tcovValue = state ? state.state : 'unavailable';
+              var isMissing = tcovValue == 'unknown' || tcovValue == 'unavailable' || tcovValue === '';
+              var color = isMissing ? '#808080' : 
+                          (parseFloat(tcovValue) > 1000 ? 'rgb(244,67,54)' : 
+                           parseFloat(tcovValue) > 250 ? 'orange' : 'white');
+              var displayValue = isMissing ? 'N/A' : tcovValue + ' ppb';
+              return '<span style="color: ' + color + ';">' + displayValue + '</span>';
+            ]]]
+          value_tcov_bureau: |
+            [[[
+              var state = states['sensor.qualite_air_bureau_ikea_voc_index'];
+              var tcovValue = state ? state.state : 'unavailable';
+              var isMissing = tcovValue == 'unknown' || tcovValue == 'unavailable' || tcovValue === '';
+              var color = isMissing ? '#808080' : 
+                          (parseFloat(tcovValue) > 1000 ? 'rgb(244,67,54)' : 
+                           parseFloat(tcovValue) > 250 ? 'orange' : 'white');
+              var displayValue = isMissing ? 'N/A' : tcovValue + ' ppb';
+              return '<span style="color: ' + color + ';">' + displayValue + '</span>';
+            ]]]
+          value_tcov_chambre: |
+            [[[
+              var state = states['sensor.qualite_air_chambre_ikea_voc_index'];
+              var tcovValue = state ? state.state : 'unavailable';
+              var isMissing = tcovValue == 'unknown' || tcovValue == 'unavailable' || tcovValue === '';
+              var color = isMissing ? '#808080' : 
+                          (parseFloat(tcovValue) > 1000 ? 'rgb(244,67,54)' : 
+                           parseFloat(tcovValue) > 250 ? 'orange' : 'white');
+              var displayValue = isMissing ? 'N/A' : tcovValue + ' ppb';
+              return '<span style="color: ' + color + ';">' + displayValue + '</span>';
+            ]]]
+          espace_fin: |
+            [[[
+              return ' ';
+            ]]]
+      - type: custom:button-card
+        show_icon: false
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/pollen-pollution
+        name: |-
+          [[[
+            var airQuality = states['sensor.qualite_globale_vence'].state;
+            var pollenAlert = states['sensor.qualite_globale_pollen_vence'].state;
+            function getColor(value) {
+              var severity = [
+                { color: 'grey', from: 0, to: 0 },
+                { color: 'green', from: 1, to: 1 },
+                { color: 'lightgreen', from: 2, to: 2 },
+                { color: 'gold', from: 3, to: 3 },
+                { color: 'orange', from: 4, to: 4 },
+                { color: 'red', from: 5, to: 5 },
+                { color: 'darkred', from: 6, to: 6 },
+                { color: 'purple', from: 7, to: 7 }
+              ];
+              var color = severity.find(function(range) {
+                return value >= range.from && value <= range.to;
+              });
+              return color ? color.color : 'black';
+            }
+            var airColor = getColor(airQuality);
+            var pollenColor = getColor(pollenAlert);
+            return `<div style="text-align: left; color: white; font-size: 13px;margin-bottom: 4px;">Pollulèn ©</div>
+                          <div><span style="color: ${airColor}; font-weight: bold;">Air ${airQuality}</span> /
+                          <span style="color: ${pollenColor}; font-weight: bold;">Pollen ${pollenAlert}</span></div>`;
+          ]]]
+        custom_fields:
+          emoji: 😷
+        styles:
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+          name:
+            - color: white
+            - top: 10px
+            - left: 10px
+            - font-size: 80%
+            - font-weight: bold
+            - position: absolute
+          custom_fields:
+            emoji:
+              - position: absolute
+              - left: 21%
+              - top: 46%
+              - font-size: 350%
+              - transform: rotate(340deg)
+              - line-height: '1'
+      - type: custom:button-card
+        icon: |
+          [[[
+            // Récupère l'entité
+            var sensor = states['sensor.alert_level_in_vence'];
+            // Récupère le nom de l'icône ou une icône par défaut
+            var iconName = sensor && sensor.attributes && sensor.attributes.icon ? sensor.attributes.icon : 'mdi:water-outline';
+            return iconName;
+          ]]]
+        tap_action:
+          action: navigate
+          navigation_path: /dashboard-tablette/vigieau
+        name: |
+          [[[
+            var sensor = states['sensor.alert_level_in_vence'];
+            var alertLevel = sensor.state;
+            var alertColor = (sensor.attributes && sensor.attributes.Couleur) ? sensor.attributes.Couleur : 'grey';
+            switch(alertLevel) {
+              case 'vigilance (pas de restriction)':
+                alertLevel = 'Aucune restriction';
+              case 'alerte_renforcee':
+                alertLevel = 'Alerte renforcée';
+                break;
+            }
+
+            return `<div style="text-align: left; color: white; font-size: 13px; margin-bottom: 4px;">Vigieau / Vigi-Eau</div>
+                    <div><span style="color: ${alertColor}; font-weight: bold;">${alertLevel}</span></div>`;
+          ]]]
+        size: 60%
+        styles:
+          card:
+            - aspect-ratio: 1/1
+            - border-radius: 10px
+            - background: transparent
+            - border-width: 3px
+            - border-color: white
+            - border-style: double
+            - color: white
+            - font-size: 15px
+            - line-height: 1.2
+          icon:
+            - transform: rotate(350deg)
+            - left: 15%
+            - top: 15%
+            - color: |
+                [[[
+                    var sensor = states['sensor.alert_level_in_vence'];
+                    return (sensor && sensor.attributes && sensor.attributes.Couleur) ? sensor.attributes.Couleur : 'white';
+                ]]]
+          name:
+            - color: white
+            - top: 10px
+            - left: 10px
+            - font-size: 80%
+            - font-weight: bold
+            - position: absolute
+    columns: 3
+  - type: custom:streamline-card
+    template: nav_bar

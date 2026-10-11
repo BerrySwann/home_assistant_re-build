@@ -4,19 +4,19 @@
 #
 # ## DESCRIPTION :
 # Decompte de securite du seche-serviettes de la salle de bain : 2 heures de chauffe maximum.
-# Remplace a terme le delay de 2 h de l'automation G (efface par un redemarrage de HA).
+# Remplace a terme le delay de 2 h de l'automation F (efface par un redemarrage de HA).
 #
 # ## CALCUL & SOURCES :
 # Duree : 02:00:00. Option restore: true.
-# Automation H (a creer avec ce fichier) : lance le timer quand la puissance de la prise depasse
-# 50 W (comme G), l'annule quand la prise passe sur arret, et a la fin coupe la prise, notifie,
+# Automation G (a creer avec ce fichier) : lance le timer quand la puissance de la prise depasse
+# 50 W (comme F), l'annule quand la prise passe sur arret, et a la fin coupe la prise, notifie,
 # attend 1 min puis remet la prise en marche (veille).
 #
 # ## CHAINE DE DEPENDANCES :
 #
 # | MATERIEL      | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)  | AVAL                               |
 # |:--------------|:---------------------------------------------------|:------------------------|:-----------------------------------|
-# | prise NOUS    | sensor.prise_seche_serviette_salle_de_bain_nous_power | seche_serviettes_sdb_2h | automation H (lancement, fin) |
+# | prise NOUS    | sensor.prise_seche_serviette_salle_de_bain_nous_power | seche_serviettes_sdb_2h | automation G (lancement, fin) |
 #
 # ## IMPORTANT (PIEGES) :
 # - Domaine timer charge depuis le 2026-10-07 (configuration.yaml : timer: !include_dir_merge_named
@@ -25,7 +25,7 @@
 # - Si la fin du timer tombe pendant l'arret de HA, timer.finished n'est PAS emis au demarrage
 #   (doc officielle). D'ou l'automation de rattrapage au demarrage.
 # - Decision Eric 2026-10-07 : meme montage que le soufflant SDB, pour le seche-serviettes.
-#   L'automation G (delay 2 h dans l'automation, ancienne version) reste active en doublon tant
+#   L'automation F (delay 2 h dans l'automation, ancienne version) reste active en doublon tant
 #   qu'elle n'est pas desactivee par Eric apres test.
 #
 # ## TABLEAU DE BORD (VIGNETTES PRINCIPALES) :

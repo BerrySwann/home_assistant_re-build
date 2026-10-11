@@ -1,0 +1,54 @@
+id: '1775331547996'
+alias: P3_BUREAU - Forcer Play ON si PC tourne
+description: Rallume les Hue Play à 25 % si elles sont éteintes manuellement alors
+  que la synchro PC est active
+triggers:
+- entity_id: light.hue_play_1_pc_bureau
+  id: off_hue_play_1_pc_bureau
+  to: 'off'
+  trigger: state
+- entity_id: light.hue_play_2_pc_bureau
+  id: off_hue_play_2_pc_bureau
+  to: 'off'
+  trigger: state
+- entity_id: light.hue_play_3_pc_bureau
+  id: off_hue_play_3_pc_bureau
+  to: 'off'
+  trigger: state
+conditions:
+- condition: state
+  entity_id: binary_sensor.moniteur_pc
+  state: 'on'
+actions:
+- choose:
+  - alias: PLAY 1
+    conditions:
+    - condition: trigger
+      id: off_hue_play_1_pc_bureau
+    sequence:
+    - action: light.turn_on
+      data:
+        brightness_pct: 25
+      target:
+        entity_id: light.hue_play_1_pc_bureau
+  - alias: PLAY 2
+    conditions:
+    - condition: trigger
+      id: off_hue_play_2_pc_bureau
+    sequence:
+    - action: light.turn_on
+      data:
+        brightness_pct: 25
+      target:
+        entity_id: light.hue_play_2_pc_bureau
+  - alias: PLAY 3
+    conditions:
+    - condition: trigger
+      id: off_hue_play_3_pc_bureau
+    sequence:
+    - action: light.turn_on
+      data:
+        brightness_pct: 25
+      target:
+        entity_id: light.hue_play_3_pc_bureau
+mode: parallel

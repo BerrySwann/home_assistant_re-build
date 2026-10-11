@@ -134,8 +134,8 @@ T°Ext Up/Down/stable -> X°  ← tendance T° ext.
 
 | Automation | Titre | Message |
 |:-----------|:------|:--------|
-| E - Minuterie Sèche-Serviettes (Timer Absolu 2h) | `Sèche-Serv. OFF` | `2h écoulees. Arret automatique.` |
-| D - WATCHDOG SÉCURITÉ RADIATEUR *(nouveau)* | `⚠️ Watchdog SDB` | `Dérive thermique détectée à {{ th_salle_de_bain_temperature }}...` |
+| F - Minuterie Sèche-Serviettes (Timer Absolu 2h) | `Sèche-Serv. OFF` | `2h écoulees. Arret automatique.` |
+| C - WATCHDOG SÉCURITÉ SOUFFLANT *(nouveau)* | `⚠️ Watchdog SDB` | `Dérive thermique détectée à {{ th_salle_de_bain_temperature }}...` |
 | A - Gestion intelligente soufflant | *(pas de notify)* | |
 
 ### 🔌 P2 - PRISES

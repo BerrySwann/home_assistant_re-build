@@ -1,0 +1,14 @@
+id: '1772274384811'
+alias: '[02-Backup] Git daily (03:00)'
+description: Backup natif HA + push Git quotidien à 03h00
+triggers:
+- trigger: time
+  at: 03:00:00
+conditions: []
+actions:
+- action: shell_command.git_backup_push
+- action: system_log.write
+  data:
+    level: info
+    message: '[Backup] Daily 03:00 exécuté'
+mode: single

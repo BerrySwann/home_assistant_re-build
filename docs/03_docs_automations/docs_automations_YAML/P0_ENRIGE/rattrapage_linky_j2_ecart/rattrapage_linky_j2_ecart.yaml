@@ -1,0 +1,34 @@
+id: '1788118327851'
+alias: '[P0] Rattrapage Linky J-2 + Ecart'
+description: 'A 23h59:30 (apres les 2 autos histo), si day_2 > 0 : appelle le script
+  Python correct_linky.py avec la date J-2 et la valeur day_2. Le script corrige
+  la ligne "(MANQUANT)" dans linky_histo.txt si elle existe, lit le Nodon correspondant
+  dans nodon_histo.txt, calcule l''ecart et l''ajoute dans ecart_histo.txt avec
+  la mention "(RATTRAPÉ)". Si la ligne J-2 n''est pas MANQUANT (cas normal), le
+  script ne fait rien. Prerequis : shell_command.correct_linky_log configure dans
+  HA (P0_correct_linky.yaml) et script /config/.scripts/correct_linky.py present
+  sur le serveur HA.
+
+  '
+triggers:
+- alias: 'HORAIRE : EXECUTION 23H59'
+  trigger: time
+  at: '23:59:00'
+conditions:
+- condition: template
+  value_template: '{{ state_attr(''sensor.linky_25481620821301_consumption'', ''day_2'')
+    | float(0) > 0 }}
+
+    '
+actions:
+- variables:
+    date_j2: '{{ (now() - timedelta(days=2)).strftime(''%d/%m'') }}'
+    value_j2: '{{ state_attr(''sensor.linky_25481620821301_consumption'', ''day_2'')
+      | float(0) | round(2) }}
+
+      '
+- action: shell_command.correct_linky_log
+  data:
+    date_j2: '{{ date_j2 }}'
+    value_j2: '{{ value_j2 }}'
+mode: single

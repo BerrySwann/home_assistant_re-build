@@ -1,0 +1,136 @@
+type: custom:button-card
+tap_action:
+  action: navigate
+  navigation_path: /dashboard-tablette/energie
+entities:
+  - sensor.genelec_appart_conso_maxi_24h
+  - sensor.general_electric_appart_power
+  - sensor.genelec_appart_conso_mini_24h
+  - sensor.genelec_appart_cout_total_quotidien
+  - sensor.genelec_appart_cout_hp_quotidien
+  - sensor.genelec_appart_cout_hc_quotidien
+triggers_update:
+  - sensor.genelec_appart_conso_maxi_24h
+  - sensor.general_electric_appart_power
+  - sensor.genelec_appart_conso_mini_24h
+  - sensor.genelec_appart_cout_total_quotidien
+  - sensor.genelec_appart_cout_hp_quotidien
+  - sensor.genelec_appart_cout_hc_quotidien
+styles:
+  card:
+    - aspect-ratio: 1/1
+    - border-radius: 10px
+    - background: transparent
+    - border-width: 3px
+    - border-color: white
+    - border-style: double
+    - color: white
+    - font-size: 11px
+    - line-height: 1.2
+  grid:
+    - grid-template-areas: |
+        "titre_1 titre_1 titre_1"
+        "mini realtime maxi"
+        "titre_2 titre_2 titre_2"
+        "toto hp hc"
+    - grid-template-columns: 1fr 1fr 1fr
+    - grid-template-rows: auto auto auto auto
+    - margin-top: 4.5px
+  custom_fields:
+    titre_1:
+      - grid-area: titre_1
+      - justify-self: center
+      - text-align: center
+      - font-weight: bold
+    mini:
+      - grid-area: mini
+      - text-align: center
+    realtime:
+      - grid-area: realtime
+      - text-align: center
+    maxi:
+      - grid-area: maxi
+      - text-align: center
+    titre_2:
+      - grid-area: titre_2
+      - justify-self: center
+      - text-align: center
+      - font-weight: bold
+    toto:
+      - grid-area: toto
+      - margin-right: 7px
+      - font-weight: bold
+    hc:
+      - grid-area: hc
+      - margin-right: 7px
+      - font-weight: bold
+    hp:
+      - grid-area: hp
+      - margin-right: 7px
+      - font-weight: bold
+custom_fields:
+  titre_1: |
+    [[[
+       return `
+         <div style="text-align: center; width: 100%;">
+           Conso. Appart.<br><br>
+           <span style="color: lightgreen;">Mini</span>
+           <span style="color: white;">-- Réel (W) --</span>
+           <span style="color: rgb(244,67,54);">Maxi</span>
+         </div>
+       `;
+     ]]]
+  mini: |
+    [[[
+      const value = parseFloat(states['sensor.genelec_appart_conso_mini_24h']?.state) || 0;
+      let color = 'lightgreen'; // 0 - 2000W
+      if (value >= 4000)      { color = 'rgb(244,67,54)'; }
+      else if (value >= 2000) { color = '#FFA500'; }
+      return `<span style='color:${color}; font-weight:bold;'>${value.toFixed(0)} W</span>`;
+    ]]]
+  realtime: |
+    [[[
+      const value = parseFloat(states['sensor.general_electric_appart_power']?.state) || 0;
+      let color = 'white'; // 0 - 2000W
+      if (value >= 4000)      { color = 'rgb(244,67,54)'; }
+      else if (value >= 2000) { color = '#FFA500'; }
+      return `<span style='color:${color}; font-weight:bold;'>${value.toFixed(0)} W</span>`;
+    ]]]
+  maxi: |
+    [[[
+      const value = parseFloat(states['sensor.genelec_appart_conso_maxi_24h']?.state) || 0;
+      let color = 'lightgreen'; // 0 - 2000W
+      if (value >= 4000)      { color = 'rgb(244,67,54)'; }
+      else if (value >= 2000) { color = '#FFA500'; }
+      return `<span style='color:${color}; font-weight:bold;'>${value.toFixed(0)} W</span>`;
+    ]]]
+  titre_2: >
+    [[[ return '__________________________<br><br>Coûts Total = H.P. + H.C.';
+    ]]]
+  toto: |
+    [[[
+      const total = parseFloat(states['sensor.genelec_appart_cout_total_quotidien']?.state) || 0;
+      return `<span style="display:block; text-align:right; line-height:1.2; color:lightgreen;">
+        ${total.toFixed(2)}<span style="font-size:9px;"> €</span>
+      </span>`;
+    ]]]
+  hp: |
+    [[[
+      const hp_total = parseFloat(states['sensor.genelec_appart_cout_hp_quotidien']?.state) || 0;
+      return `<span style="display:block; text-align:right; line-height:1.2;">
+        ${hp_total.toFixed(2)}<span style="font-size:9px;"> €</span>
+      </span>`;
+    ]]]
+  hc: |
+    [[[
+      const hc_total = parseFloat(states['sensor.genelec_appart_cout_hc_quotidien']?.state) || 0;
+      return `<span style="display:block; text-align:right; line-height:1.2;">
+        ${hc_total.toFixed(2)}<span style="font-size:9px;"> €</span>
+      </span>`;
+    ]]]
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: none !important;
+      background: transparent;
+    }

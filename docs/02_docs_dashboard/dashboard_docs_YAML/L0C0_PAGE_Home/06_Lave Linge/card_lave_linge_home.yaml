@@ -1,0 +1,250 @@
+type: custom:mushroom-entity-card
+entity: sensor.prise_lave_linge_nous_power
+name: Lave Linge
+icon: mdi:washing-machine
+primary_info: name
+secondary_info: state
+tap_action:
+  action: more-info
+icon_color: light-grey
+fill_container: false
+grid_options:
+  columns: 12
+  rows: 2
+visibility:
+  - condition: numeric_state
+    above: 2
+    entity: sensor.prise_lave_linge_nous_power
+card_mod:
+  style:
+    .: |
+      ha-card {
+        /* ======================== */
+        /* USER CONFIGURATION       */
+        /* ======================== */
+        
+        /* 1. ENTITIES */
+        {% set ent_progress  = 'sensor.lave_linge_etat' %}
+        {% set ent_timerem = 'sensor.lave_linge_temps_restant' %}
+        {% set max_time = 120 %}
+        {% set ent_power   = 'sensor.prise_lave_linge_nous_power' %}
+
+        /* OPTIONAL Progress Percentage Sensor (if exists) */
+        {% set ent_percent   = 'sensor.lave_linge_progres' %}
+
+        /* 2. SIZES (Px) */
+        --config-icon-size:       65px;
+        --config-font-primary:    15px;
+        --config-font-secondary:  12px;
+        --config-font-badge:      12px;
+        /* ======================== */
+
+        /* --- SENSORS & TIME --- */
+        {% set status = states(ent_progress) %}
+        {% set status_clean = status | replace('-', ' ') | title %}
+
+        /* --- DETECT TIME REMAINING FORAMT --- */
+        {% set raw_val = states(ent_timerem) | string %}
+
+        /* Check if Timestamp */
+        {% if '-' in raw_val and ':' in raw_val %}
+          {% set end_ts = raw_val | as_datetime %}
+          {% if end_ts %}
+             {% set time_rem = ((end_ts - now()).total_seconds() / 60) | int %}
+          {% else %}
+             {% set time_rem = 0 %}
+          {% endif %}
+        
+        /* Check if (00:00 or 0:00:00) */
+        {% elif ':' in raw_val %}
+          {% set parts = raw_val.split(':') %}
+          {% if parts | length == 3 %}
+             /* Format H:M:S -> Convert to minutes */
+             {% set time_rem = (parts[0]|int * 60) + (parts[1]|int) + (parts[2]|int / 60) %}
+          {% elif parts | length == 2 %}
+             /* Format H:M -> Convert to minutes */
+             {% set time_rem = (parts[0]|int * 60) + (parts[1]|int) %}
+          {% else %}
+             {% set time_rem = 0 %}
+          {% endif %}
+
+        /* Default to Minutes */
+        {% else %}
+          {% set time_rem = raw_val | float(0) | int %}
+        {% endif %}
+
+        /* Prevent negative numbers */
+        {% set time_rem = time_rem | int %}
+        {% if time_rem < 0 %} 
+          {% set time_rem = 0 %} 
+        {% endif %}
+
+        {% set raw_percent = states(ent_percent) | float(-1) %}
+
+        /* --- POWER CALCULATION --- */
+        {% set raw_power = states(ent_power) %}
+        {% if is_number(raw_power) %}
+            {% set power_w = raw_power | float(0) | round %}
+            {% set power_text = ' • ' ~ power_w ~ 'W' %}
+        {% else %}
+            {% set power_text = '' %}
+        {% endif %}
+        
+        /* Format Time (min -> Xh Ym) */
+        {% set hours = (time_rem / 60) | int %}
+        {% set mins = time_rem % 60 %}
+        {% set time_formatted = '%dh %02dm' | format(hours, mins) %}
+
+        /* --- PROGRESS CALCULATION --- */
+        
+        {% if status | lower in ['idle', 'off', 'standby', 'unknown', 'unavailable'] %}
+           {% set progress = 0 %}
+           {% set badge_text = status_clean ~ power_text %}
+        {% else %}
+           
+           /* LOGIC: Use Sensor if available, otherwise Calculate */
+           {% if raw_percent >= 0 %}
+              /* Use the sensor provided percentage */
+              {% set progress = raw_percent | int %}
+           {% else %}
+              /* Fallback: Calculate based on max_time */
+              {% set max_cycle_time = max_time %}
+              {% set calc_prog = ((max_cycle_time - time_rem) / max_cycle_time * 100) | int %}
+              {% set progress = [5, [calc_prog, 100] | min] | max %}
+           {% endif %}
+
+           {% set badge_text = status_clean ~ ' • ' ~ time_formatted ~ power_text %}
+        {% endif %}
+
+        /* --- STATE DEFINITIONS --- */
+        {% set s_lower = status | lower %}
+        {% set is_running  = s_lower in ['starting', 'running', 'ending', 'rinse', 'clean', 'paused', 'user_paused', 'anti_wrinkle', 'delay_wait'] %}
+        {% set is_spinning = s_lower in ['spin', 'spinning'] %}
+        {% set is_drying   = s_lower in ['dry', 'drying'] %}
+        {% set is_done     = s_lower in ['finished', 'complete', 'end'] %}
+
+        /* --- ASSIGN ANIMATIONS --- */
+        {% if is_drying %}
+          {% set color = '255, 152, 0' %}
+          {% set anim_type = 'steam-rise 2s ease-in-out infinite' %}
+          {% set icon_shake = 'none' %}
+          {% set wave_anim = 'wave 4s linear infinite' %}
+          {% set overlay_img = 'linear-gradient(0deg, transparent, rgba(255,255,255,0.5), transparent)' %}
+        
+        {% elif is_spinning %}
+          {% set color = '0, 255, 255' %}
+          {% set anim_type = 'none' %}
+          {% set icon_shake = 'washer-spin-smooth 0.8s linear infinite' %}
+          {% set wave_anim = 'wave 2s linear infinite' %}
+          {% set overlay_img = 'radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 60%)' %}
+
+        {% elif is_done %}
+          {% set color = '76, 175, 80' %}
+          {% set anim_type = 'sparkle 2s infinite' %}
+          {% set icon_shake = 'none' %}
+          {% set wave_anim = 'wave 4s linear infinite' %}
+          {% set overlay_img = 'radial-gradient(circle, rgba(255,255,255,0.8) 10%, transparent 60%)' %}
+
+        {% elif is_running %}
+          {% set color = '33, 150, 243' %}
+          {% set anim_type = 'bubbles 1s linear infinite' %}
+          {% set icon_shake = 'shake 1.5s ease-in-out infinite' %}
+          {% set wave_anim = 'wave 4s linear infinite' %}
+          {% set overlay_img = 'radial-gradient(2px 2px at 20% 80%, white, transparent), radial-gradient(2px 2px at 50% 70%, white, transparent)' %}
+        
+        {% else %}
+          {% set color = '158, 158, 158' %}
+          {% set anim_type = 'none' %}
+          {% set icon_shake = 'none' %}
+          {% set wave_anim = 'none' %}
+          {% set overlay_img = 'none' %}
+        {% endif %}
+
+        --wm-color: {{ color }};
+        --wm-level: {{ progress }}%;
+        --wm-anim-overlay: {{ anim_type }};
+        --wm-anim-shake: {{ icon_shake }};
+        --wm-anim-wave: {{ wave_anim }};
+        --wm-overlay-bg: {{ overlay_img }};
+        --wm-badge-content: "{{ badge_text }}";
+        
+        transition: all 0.5s ease;
+        overflow: hidden;
+      }
+      ha-card::before {
+        content: var(--wm-badge-content);
+        position: absolute;
+        top: 10px; right: 10px;
+        background: rgba(var(--wm-color), 0.15);
+        color: rgb(var(--wm-color));
+        border: 1px solid rgba(var(--wm-color), 0.3);
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: var(--config-font-badge);
+      }
+      ha-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0;
+        height: 4px;
+        width: var(--wm-level);
+        background: rgb(var(--wm-color));
+        box-shadow: 0 0 10px rgb(var(--wm-color));
+        transition: width 0.5s ease;
+      }
+      ha-card {
+        --ha-card-background: none;
+        --ha-card-box-shadow: none;
+        --ha-card-border-width: 0;
+        background: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        backdrop-filter: none !important;
+        clip-path: inset(0 0 0 0 round var(--ha-card-border-radius, 12px));
+      }
+    mushroom-shape-icon$: |
+      .shape {
+        --icon-size: var(--config-icon-size) !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(255,255,255,0.1);
+        animation: var(--wm-anim-shake) !important;
+        transform-origin: center center; 
+      }
+      .shape::before {
+        content: '';
+        position: absolute;
+        left: -50%;
+        width: 200%; height: 200%;
+        top: calc(100% - var(--wm-level));
+        background: rgba(var(--wm-color), 0.6);
+        border-radius: 40%;
+        animation: var(--wm-anim-wave);
+      }
+      .shape::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: var(--wm-overlay-bg);
+        background-size: 100% 100%;
+        animation: var(--wm-anim-overlay);
+        z-index: 2;
+      }
+      ha-icon {
+        z-index: 3;
+        mix-blend-mode: overlay;
+        color: white !important;
+      }
+      @keyframes wave { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      @keyframes shake { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(5deg) translateY(-1px); } 75% { transform: rotate(-5deg) translateY(1px); } }
+      @keyframes bubbles { 0% { transform: translateY(10px); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-20px); opacity: 0; } }
+      @keyframes steam-rise { 0% { opacity: 0; transform: translateY(5px); } 50% { opacity: 0.8; } 100% { opacity: 0; transform: translateY(-10px); } }
+      @keyframes sparkle { 0%, 100% { opacity: 0.3; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } }
+      @keyframes washer-spin-smooth { 0% { transform: rotate(0deg) translate(0,0); box-shadow: inset 0 0 0 2px rgba(var(--wm-color), 0.7); } 25% { transform: rotate(90deg) translate(0.5px, 0.5px); } 50% { transform: rotate(180deg) translate(0,0); } 75% { transform: rotate(270deg) translate(-0.5px, -0.5px); } 100% { transform: rotate(360deg) translate(0,0); box-shadow: inset 0 0 0 2px rgba(var(--wm-color), 0.7); } }
+    mushroom-state-info$: |-
+      .container .primary { font-size: var(--config-font-primary) !important; }
+      .container .secondary { font-size: var(--config-font-secondary) !important; }

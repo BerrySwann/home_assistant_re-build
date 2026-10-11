@@ -7,15 +7,16 @@ description: "Skill HA ReBuild - genere un journal de bord ultra-compact et le s
 
 ## Objectif
 
-Six actions enchainees sans interruption :
+Six actions, plus l'etape 5B, enchainees sans interruption :
 1. Generer et sauvegarder le journal de bord de session
 2. Executer le sync_index (DEPENDANCES_GLOBALES.md, docs impactees, INDEX_GLOBAL.md)
 3. Mettre a jour le JOURNAL FUSIONNE (historique/) avec la session qui vient d'etre ecrite
 4. Copier le journal de session et le journal fusionne dans le coffre Obsidian
 5. Faire le menage des sauvegardes (.bak) du perimetre docs, selon la REGLE DE SAUVEGARDE (etape 5)
+5B. Verifier l'export Dashboard depose a la racine de la prod et ne garder qu'un export en prod (etape 5B)
 6. Mettre a jour les tree : IA_ARBO_DETAIL.md (comptages local, prod, GitHub), avec le skill update-arbo (etape 6)
 
-Ne jamais demander confirmation entre les etapes. Les faire dans la foulee.
+Ne jamais demander confirmation entre les etapes. Les faire dans la foulee. Seule exception : le DRY-RUN du menage (etape 5), qui s'arrete pour presenter la liste et attendre le go de l'utilisateur (voir les garde-fous de l'etape 5).
 
 ---
 
@@ -97,7 +98,7 @@ Immediatement apres la sauvegarde du journal, executer le sync_index complet.
 | Script | `docs/04_docs_scripts/docs_scripts_YAML_MD/{nom}.md` + `INDEX_GLOBAL.md` |
 | Tout type impactant une vignette | `DEPENDANCES_GLOBALES.md` |
 | Fichier ajoute, renomme ou supprime (helper, export, fiche) | `INDEX_GLOBAL.md` |
-| Skill du projet modifie (`.claude/skills/<skill>/SKILL.md`) | copie `docs/05_docs_skills/<skill>.md` |
+| Skill du projet modifie (`.claude/skills/<skill>/SKILL.md`) | copie `docs/05_docs_skills/skill_<nom>/<nom>.md` |
 
 **Chemins Windows :**
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\02_docs_dashboard\dashboard_docs_MD\DEPENDANCES_GLOBALES.md`
@@ -115,7 +116,7 @@ Immediatement apres la sauvegarde du journal, executer le sync_index complet.
 4. Pour chaque script valide : verifier/mettre a jour son `.md` dans `docs_scripts_YAML_MD/`
 5. Mettre a jour `INDEX_GLOBAL.md` (voir ci-dessous)
 6. Si un `.md` de doc est absent : le signaler (ne pas bloquer)
-7. Pour chaque skill du projet modifie pendant la session : recopier son `SKILL.md` vers `docs/05_docs_skills/<skill>.md` (sauvegarde locale `.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}` du fichier existant avant ecrasement), puis pousser vers `H:\docs\05_docs_skills\` apres comparaison MD5. Seul le fichier courant est pousse, jamais un `.bak`.
+7. Pour chaque skill du projet modifie pendant la session : copier d'abord le fichier existant `docs/05_docs_skills/skill_<nom>/<nom>.md` en `docs/05_docs_skills/skill_<nom>/<nom>.bak_AAAA_MM_JJ_HHhMMmSSs.md` (sauvegarde avant ecrasement, jusqu'a 10 par jour ; le menage de l'etape 5 range les jours passes en `<nom>.bak_AAAA_MM_JJ.md`, 3 au plus), puis recopier le `SKILL.md` modifie vers `docs/05_docs_skills/skill_<nom>/<nom>.md`. Pas de copie dans `.claude/ARCHIVE`. Pas de push des skills vers `H:` tant qu'Eric ne le demande pas (decision du 2026-10-11).
 
 ### Mise a jour de INDEX_GLOBAL.md
 
@@ -128,7 +129,7 @@ Fichier : `C:\Users\Berry Swann\Documents\ReBuild\Github\INDEX_GLOBAL.md` (copie
    - mettre a jour les entrees renommees ou supprimees
    - mettre a jour les compteurs de section concernes (par exemple le nombre d'automations ou de fichiers de scripts) en les recomptant, sans les deduire de l'ancien nombre
    - mettre a jour la ligne d'en-tete de date
-4. Garder le format du fichier : CRLF, UTF-8 sans BOM.
+4. Garder le format existant du fichier : UTF-8 sans BOM, fins de ligne LF (verifie le 2026-10-11 : le fichier est en LF, ne pas le convertir en CRLF). Controler le format avant d'ecrire.
 5. Controles apres ecriture : le fichier se relit en UTF-8, les compteurs modifies correspondent au nombre d'entrees, les liens ajoutes pointent vers des fichiers qui existent. Les entites ajoutees doivent avoir ete verifiees en live ou lues dans un fichier de la session, jamais recopiees de memoire.
 6. Les ecarts deja presents avant la session (entites citees qui ne repondent plus, desequilibres de compteurs) ne sont pas corriges ici : les mentionner dans le rapport s'ils concernent la session.
 7. Note pour ha-trigul : `INDEX_GLOBAL.md` apparait en DIFF local contre prod et repo, c'est attendu tant qu'il reste local seulement.
@@ -221,8 +222,8 @@ Le journal fusionne est un seul fichier Markdown qui regroupe tous les journaux 
 
 Applique la REGLE DE SAUVEGARDE du 2026-10-08 (definie dans CLAUDE.md). Tout se passe en LOCAL, jamais sur H: ni sur D:.
 
-**Perimetre :** `C:\Users\Berry Swann\Documents\ReBuild\docs\00_*` a `05_*` (recursif) + `C:\Users\Berry Swann\Documents\ReBuild\Claude md SAVE\` + `C:\Users\Berry Swann\Documents\ReBuild\.claude\ARCHIVE\`.
-**Hors perimetre (ne pas toucher) :** TODO, Github, historique, Infra_Proxmox, `_old_avant_staging` (racine et sous-dossiers `docs\`), le reste de `.claude` (skills et commands actifs). Le dossier `.claude\ARCHIVE\` EST traite : c'est le depot des copies d'avant modification, il suit les memes familles (une copie datee devient `{nom_de_travail}.bak_AAAA_MM_JJ.{ext}` ; par jour, la plus recente est gardee, les autres a la corbeille). Ignorer tout autre dossier `_ARCHIVE` / `ARCHIVE` et tout fichier dont le nom contient `_archive_` (ex : `_ARCHIVE\DEPENDANCES_GLOBALES_archive_2026-10-07_18h13.md`).
+**Perimetre :** `C:\Users\Berry Swann\Documents\ReBuild\docs\00_*` a `05_*` (recursif) + `C:\Users\Berry Swann\Documents\ReBuild\Claude md SAVE\`.
+**Hors perimetre (ne pas toucher) :** TODO, Github, historique, Infra_Proxmox, `_old_avant_staging` (racine et sous-dossiers `docs\`), le reste de `.claude` (skills et commands actifs). Le dossier `.claude\ARCHIVE\` est HORS perimetre (decision d'Eric le 2026-10-11 : conserve pour un eventuel retour en arriere, a supprimer quand il ne servira plus ; il ne vit plus avec histo). Les sauvegardes d'un skill vivent dans `docs\05_docs_skills\skill_<nom>\` et suivent la meme regle que le reste (jusqu'a 10 `.bak_AAAA_MM_JJ_HHhMMmSSs` pour le jour, 3 `.bak_AAAA_MM_JJ` pour les jours passes). Les exports `docs\02_docs_dashboard\dashboard_docs_YAML\Dashboard_COMPLET\` sont conserves tels quels : jamais renommes en `.bak`, jamais mis a la corbeille par ce menage (voir etape 5B). Ignorer tout dossier `_ARCHIVE` / `ARCHIVE` et tout fichier dont le nom contient `_archive_` (ex : `_ARCHIVE\DEPENDANCES_GLOBALES_archive_2026-10-07_18h13.md`).
 
 **"Poubelle" = corbeille Windows**, jamais de suppression definitive :
 ```powershell
@@ -250,13 +251,13 @@ etre un vrai document et non une sauvegarde), on signale et on ne touche pas.
 | A - sauvegarde horodatee | `fichier.bak_2026_10_07_21h14m05s.yaml` | voir protocole |
 | B - sauvegarde finale | `fichier.bak_2026_10_07.yaml` | gardee, soumise au plafond de 3 |
 | C - anciens `.bak` | `.bak_2026-09-28`, `.bak_20260929`, `.bak2_...`, `.bak-...` | renommes `fichier.bak_AAAA_MM_JJ.yaml` |
-| D - fichiers de travail dates | `page_L4C2_proxmox_2026-06-18.yaml`, `fichier_2026-10-07_22h00.ext` | la plus recente devient le nom sans date `{nom}.ext` ; les autres deviennent `.bak_AAAA_MM_JJ.{ext}` (plafond 3) |
-| E - sauvegardes nommees | `CLAUDE_backup_2026-07-31.md`, `CLAUDE_2026-10-04.md`, `fichier_old.md` | renommees `{nom_de_travail}.bak_AAAA_MM_JJ.{ext}`, ou `{nom_de_travail}` est le nom du fichier de travail courant, extension comprise : `CLAUDE_backup_2026-07-31.md` -> `CLAUDE.bak_2026_07_31.md`, `CLAUDE_2026-10-04.md` -> `CLAUDE.bak_2026_10_04.md`, `fichier_old.md` -> `fichier.bak_<date>.md`. Date lue dans le nom, a defaut date de modification |
+| D - versions datees d'un fichier de travail | `page_L4C2_proxmox_2026-06-18.yaml`, `fichier_2026-10-07_22h00.ext` | seulement si le fichier de travail non date `{nom}.ext` existe dans le meme dossier : chaque version datee devient `{nom}.bak_AAAA_MM_JJ.{ext}` (plafond 3). Sans fichier de travail non date : nom douteux, signaler, ne pas toucher |
+| E - sauvegardes nommees | `CLAUDE_backup_2026-07-31.md`, `CLAUDE_2026-10-04.md`, `fichier_old.md` | renommees `{nom_de_travail}.bak_AAAA_MM_JJ.{ext}`, ou `{nom_de_travail}` est le nom du fichier de travail courant, extension comprise : `CLAUDE_backup_2026-07-31.md` -> `CLAUDE.bak_2026_07_31.md`, `CLAUDE_2026-10-04.md` -> `CLAUDE.bak_2026_10_04.md`, `fichier_old.md` -> `fichier.bak_<date>.md`. Le nom de travail est le nom complet du fichier non date voisin, jamais tronque (`04_backup_git_push_manuel_2026-05-31.yaml` -> `04_backup_git_push_manuel.bak_2026_05_31.yaml`, pas `04.bak_...`). Date lue dans le nom, a defaut date de modification. Un fichier non date, sans version de travail correspondante, dont le nom contient `backup`, `save` ou `old` (ex : `ha_git_backup.sh`, `HA_GIT_BACKUP.md`) est un vrai fichier : ne pas le traiter |
 
 > Aucune famille n'est une liste fermee. Tout nom portant une date (`AAAA-MM-JJ`, `AAAA_MM_JJ`,
 > `AAAAMMJJ`) ou un marqueur `backup`, `save`, `old`, `ancien`, `avant`, `orig`, et qui n'est pas le
 > fichier de travail courant, entre dans la conformite (famille E). Restent exclus les dossiers
-> `_ARCHIVE` / `ARCHIVE` et les fichiers `*_archive_*` restent exclus, SAUF `.claude\ARCHIVE\`.
+> `_ARCHIVE` / `ARCHIVE` (dont `.claude\ARCHIVE\`), les fichiers `*_archive_*` et `Dashboard_COMPLET\` restent exclus. Un marqueur seul ne suffit pas : sans date et sans version de travail voisine, le fichier est un vrai fichier.
 
 ### Protocole
 
@@ -266,7 +267,7 @@ etre un vrai document et non une sauvegarde), on signale et on ne touche pas.
    - garder la sauvegarde la plus RECENTE : d'abord par l'horodatage lu dans le nom (jour + heure) ; a egalite (noms sans heure, ex `.bak_2026-09-20`, `.bak_2026-09-20b`, `.bak2_...`), par la date de modification du fichier ; si l'egalite persiste et que les contenus different (MD5), ne rien supprimer et signaler le groupe ; si les contenus sont identiques, garder n'importe lequel ;
    - la renommer en `fichier.bak_AAAA_MM_JJ.yaml` (famille A), les autres de ce jour vont a la corbeille Windows ;
    - famille C : renommer en `.bak_AAAA_MM_JJ.{ext}` (la date est lue dans le nom) ;
-   - famille D : la version la plus recente devient le nom sans date `{nom}.ext`, les autres deviennent des `.bak_AAAA_MM_JJ.{ext}` (plafond 3) ;
+   - famille D : seulement si le fichier de travail non date `{nom}.ext` existe dans le dossier ; chaque version datee devient `{nom}.bak_AAAA_MM_JJ.{ext}` (nom de travail complet, jamais tronque ; plusieurs versions du meme jour : la plus recente est gardee, les autres vont a la corbeille ; plafond 3) ; sans fichier de travail non date, signaler et ne pas toucher ;
    - famille E : renommer en `{nom_de_travail}.bak_AAAA_MM_JJ.{ext}`, ou `{nom_de_travail}` est le nom du fichier de travail courant, extension comprise (ex : `CLAUDE_backup_2026-07-31.md` -> `CLAUDE.bak_2026_07_31.md`, `CLAUDE_2026-10-04.md` -> `CLAUDE.bak_2026_10_04.md`) ; date lue dans le nom, a defaut date de modification.
 4. Plafond : si un fichier a plus de 3 `.bak_AAAA_MM_JJ.{ext}` (apres les renommages ci-dessus, famille A, B et C), la plus ancienne va a la corbeille Windows, et ainsi de suite jusqu'a 3. Le plafond de 3 s'applique a toutes les familles (A, B, C, D, E).
 5. Si la date change pendant l'execution (minuit passe), garder la date relevee au lancement de l'etape.
@@ -276,14 +277,30 @@ etre un vrai document et non une sauvegarde), on signale et on ne touche pas.
 - Collision : le nom cible existe deja (ex : un `.bak_2026_10_07` est deja present pour ce fichier) -> ne pas renommer, ne pas supprimer, signaler le groupe.
 - Date illisible ou impossible (mois 13, jour 32) -> ne pas traiter, signaler.
 - Nom douteux (pourrait etre un vrai fichier et non une sauvegarde) -> ne pas traiter, signaler.
+- Famille D sans fichier de travail non date dans le dossier -> ne pas traiter, signaler.
+- Fichier non date contenant `backup`, `save` ou `old`, sans version de travail voisine (ex : `ha_git_backup.sh`) -> vrai fichier, ne pas traiter.
+- Exports `Dashboard_COMPLET` -> jamais traites.
 - Erreur de la corbeille (fichier verrouille, acces refuse) -> ne pas retenter par une autre methode, signaler.
-- Avant de lancer l'etape pour la premiere fois sur un dossier, ou si plus de 30 fichiers sont concernes : produire d'abord la liste (DRY-RUN : renommages et envois en corbeille prevus) et la presenter, sans rien modifier.
+- Avant de lancer l'etape pour la premiere fois sur un dossier, ou si plus de 30 fichiers sont concernes : produire d'abord la liste (DRY-RUN : renommages et envois en corbeille prevus) et la presenter, sans rien modifier, puis attendre le go de l'utilisateur (seul arret autorise de /histo). Relire le plan avant de le presenter : aucune cible ne doit etre tronquee, aucun export Dashboard ni vrai fichier ne doit y figurer, et le plafond de 3 doit etre calcule apres les renommages de la famille D. Executer ensuite sans re-demander ; le tree (etape 6) est fait apres l'execution du menage, ou le rapport precise que ses comptages sont d'avant menage.
 
 ### Rapport (a mettre dans le rapport final)
 
 - nombre de fichiers renommes, envoyes a la corbeille, ignores (archives / jour courant)
 - liste des soucis signales (collision, date illisible, nom douteux, erreur) avec le chemin complet
 - pour chaque envoi en corbeille : le chemin d'origine (restaurable depuis la corbeille Windows)
+
+---
+
+## ETAPE 5B - EXPORT DASHBOARD (enchaine automatiquement, apres le menage, sans demander)
+
+Eric depose de temps en temps un export du dashboard a la racine de la prod (`H:\Dashboard_*.yaml`). Cette etape le recupere en local, puis ne garde qu'un seul export en prod. Elle compare par MD5, jamais par le nom (le 2026-10-11, `H:\Dashboard_2026_10_04.yaml` avait le contenu de l'export du 11/10).
+
+Dossiers : local `C:\Users\Berry Swann\Documents\ReBuild\docs\02_docs_dashboard\dashboard_docs_YAML\Dashboard_COMPLET\` ; prod `H:\docs\02_docs_dashboard\dashboard_docs_YAML\Dashboard_COMPLET\`.
+
+1. Pour chaque `H:\Dashboard_*.yaml` a la racine : calculer le MD5 et le comparer a celui de chaque export du dossier local. Si un export local a le meme MD5 : rien a copier. Sinon l'export est nouveau : le copier dans le dossier local en gardant le meme nom. Si ce nom existe deja en local avec un autre contenu (erreur de nommage), le copier sous `Dashboard_AAAA_MM_JJ.yaml`, date = date de derniere modification du fichier de la racine ; si ce nom existe aussi avec un autre contenu : ne rien copier, signaler. Le fichier de la racine n'est jamais modifie ni supprime.
+2. Les exports locaux sont tous conserves tels quels, sans `.bak` (le menage de l'etape 5 ne les traite pas).
+3. Prod : prendre l'export local le plus recent (date dans le nom `Dashboard_AAAA_MM_JJ`, a defaut date de modification). Si le dossier prod ne contient pas un fichier de meme MD5 : le copier dans le dossier prod, verifier le MD5 apres copie, puis supprimer les autres exports du dossier prod (suppression definitive : pas de corbeille sur H:). Il ne doit rester qu'un seul export en prod, le plus recent. Jamais de sauvegarde sur H:.
+4. Si le dossier prod contient deja le plus recent et lui seul : noter "Dashboard deja a jour".
 
 ---
 
@@ -309,10 +326,11 @@ Met a jour l'arborescence documentee : `C:\Users\Berry Swann\Documents\ReBuild\d
 6. Mettre a jour le journal fusionne (etape 3)
 7. Copier dans Obsidian (etape 4)
 8. Menage des sauvegardes (etape 5)
-9. Mettre a jour le tree (etape 6)
-10. Afficher le rapport final
+9. Export Dashboard (etape 5B)
+10. Mettre a jour le tree (etape 6)
+11. Afficher le rapport final
 
-### Format de rapport final (apres les six etapes)
+### Format de rapport final (apres toutes les etapes)
 
 ```
 SYNC_INDEX - [date]
@@ -331,6 +349,10 @@ OBSIDIAN :
 MENAGE .bak :
 - renommes : [n] | corbeille Windows : [n] | ignores : [n]
 - soucis a traiter : [liste avec chemin complet] | aucun
+
+DASHBOARD :
+- racine H: : [fichier] : nouveau, copie en local | deja present (MD5) | aucun export
+- prod Dashboard_COMPLET : [export unique] ; supprimes : [liste] | deja a jour
 
 TREE :
 - IA_ARBO_DETAIL.md : [comptages modifies] | deja a jour (sauvegarde : [nom du .bak]) ; MD5 local = prod : OK | ECART
