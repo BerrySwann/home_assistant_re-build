@@ -1,5 +1,5 @@
 # 🌳 ARBORESCENCES COMPLÈTES & INDEX GITHUB
-*Dernière mise à jour : 2026-10-10 (nuit, /histo S4 : relevés LOCAL + PROD + GitHub rafraîchis après rangement de docs_automations_YAML, `_old_avant_staging` supprimé en local ; comptages recalculés, la mention "dont N sauvegardes" compte les fichiers .bak)*
+*Dernière mise à jour : 2026-10-11 (matin, /histo S1 : relevés LOCAL + PROD + GitHub rafraîchis ; comptages recalculés, la mention "dont N sauvegardes" compte les fichiers .bak)*
 *Lire ce fichier si : audit fichiers, sync GitHub, recherche d'un fichier prod, vérification arbo locale, URLs raw GitHub.*
 
 ---
@@ -17,10 +17,10 @@
 
 ---
 
-## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-10-10)
+## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-10-11)
 
 ```text
-ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\ - relevé 2026-10-10)
+ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\ - relevé 2026-10-11)
 ├── 10 fichiers racine
 │   ha-erodi.html · index.html          (maquettes - l'architecture HA est dans docs/00_IA/ha-erodi-architecture.html)
 │   presentation_HACF_2026.md · presentation_HACF_2026.txt
@@ -36,15 +36,15 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── MOC/                                (un dossier par MOC : MOC_DASHBOARD/ · MOC_DEPENDANCES/ · MOC_PRESENCE/, chacun avec son .md et ses sauvegardes ; hors périmètre /histo)
 ├── scripts/                            (7 - audit_md5_md.sh · audit_md5_yaml.sh · check_yaml_forme.py · ha_git_backup.sh · ha_push_site.py · hermes_gen_dependances.py · maj_site_architecture.py)
 ├── historique/                         (173 dont 30 sauvegardes - journaux JOURNAL_COMPLET/JOURNAL_FUSIONNE_*.md, histo_YYYY-MM-DD_S*.txt/.md, ARCHIVE_SESSIONS_HA_*.md, archive MD5, histo.md = copie du skill + ses sauvegardes)
-└── docs/                               (686 fichiers)
-    ├── 00_IA/                          (41 dont 32 sauvegardes - IA_CONTEXT_BASE.md · ha-erodi-architecture.html · RAPPORT_AUDIT_ENERGETIQUE_*.md ×2 · Grille_Tarif_Bleu_EDF_2026-08-01.csv/.pdf · confort_cible_calcul_flow.png)
-    │   └── sous_context_ia/            (25 dont 17 sauvegardes - 8 sous-contextes IA_*.md + index arbo)
+└── docs/                               (823 fichiers)
+    ├── 00_IA/                          (47 dont 38 sauvegardes - IA_CONTEXT_BASE.md · ha-erodi-architecture.html · RAPPORT_AUDIT_ENERGETIQUE_*.md ×2 · Grille_Tarif_Bleu_EDF_2026-08-01.csv/.pdf · confort_cible_calcul_flow.png)
+    │   └── sous_context_ia/            (27 dont 19 sauvegardes - 8 sous-contextes IA_*.md + index arbo)
     ├── 01_docs_config_system/          (112 - config_system_MD/ 2 + config_system_YAML/ 110 fichiers dont 6 sauvegardes, resynchronisé GitHub->local 2026-10-04, SYNC=80 DIFF=0)
-    ├── 02_docs_dashboard/              (246 - dashboard_docs_MD 89 · dashboard_docs_YAML 157)
-    ├── 03_docs_automations/            (236 dont 55 sauvegardes - docs_automations_MD · docs_automations_YAML)
-    ├── 04_docs_scripts/                (24 - SH · SH_MD · YAML · YAML_MD)
-    ├── 05_docs_MD_system/              (16 dont 10 sauvegardes)
-    └── 05_docs_skills/                 (11 - 11 dossiers skill_<nom>/ contenant la copie .md de chaque SKILL.md du projet, dont skill_histo/ ajouté le 2026-10-10 ; histo.md existe aussi dans historique/)
+    ├── 02_docs_dashboard/              (255 - dashboard_docs_MD 93 · dashboard_docs_YAML 162)
+    ├── 03_docs_automations/            (332 dont 157 sauvegardes - docs_automations_MD · docs_automations_YAML)
+    ├── 04_docs_scripts/                (33 - SH · SH_MD · YAML · YAML_MD)
+    ├── 05_docs_MD_system/              (26 dont 15 sauvegardes)
+    └── 05_docs_skills/                 (18 - 13 dossiers skill_<nom>/ contenant la copie .md de chaque SKILL.md du projet, dont skill_histo/ ajouté le 2026-10-10 ; histo.md existe aussi dans historique/ ; 5 sauvegardes du 2026-10-11 dans skill_ha-trigul/)
 ```
 
 **Dossiers d'archive** (contenu sorti du flux, gardé pour l'historique) :
@@ -56,15 +56,15 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 
 ---
 
-## 🌳 ARBORESCENCE - PROD /homeassistant/ (= H:\ - relevé 2026-10-10)
+## 🌳 ARBORESCENCE - PROD /homeassistant/ (= H:\ - relevé 2026-10-11)
 
 ```text
-/homeassistant/   (relevé 2026-10-10 ; = H:\)
+/homeassistant/   (relevé 2026-10-11 ; = H:\)
 │
 ├── Fichiers racine :
 │   configuration.yaml · automations.yaml · scripts.yaml · scenes.yaml · secrets.yaml
 │   input_button.yaml · input_datetime.yaml · input_select.yaml · sql.yaml · ip_bans.yaml
-│   INDEX_GLOBAL.md · README.md · Dashboard_2026_10-04.yaml (export le plus récent)
+│   INDEX_GLOBAL.md · README.md · Dashboard_2026_10_04.yaml (export le plus récent)
 │   .HA_VERSION · .gitignore · .ha_run.lock · home-assistant_v2.db · home-assistant.log.fault
 │   sauvegardes : automations.yaml.bak ×2 · INDEX_GLOBAL.md.bak ×2 · scripts.yaml.bak ×3
 │
@@ -111,10 +111,10 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   └── meteo/ (M_03_meteo_UM_blitzortung)
 │
 ├── custom_components/ · themes/ · tts/ · www/ · deps/   (divers, hors périmètre docs HA)
-└── docs/                               (476 - miroir pushé depuis local docs/)
+└── docs/                               (461 - miroir pushé depuis local docs/ ; dont modifs/ 6 journaux)
     ├── 00_IA/                          (9 - IA_CONTEXT_BASE.md + sous_context_ia/8, aucune sauvegarde .bak sur H:)
     ├── 01_docs_config_system/          (103 - config_system_MD/1 + config_system_YAML/102)
-    ├── 02_docs_dashboard/              (156 - dashboard_docs_MD 47 · dashboard_docs_YAML 109)
+    ├── 02_docs_dashboard/              (136 - dashboard_docs_MD 47 · dashboard_docs_YAML 89 dont Dashboard_COMPLET/ 1 seul export)
     ├── 03_docs_automations/            (177 - docs_automations_MD · docs_automations_YAML)
     ├── 04_docs_scripts/                (17 - SH/6 · SH_MD/3 · YAML/5 · YAML_MD/3)
     ├── 05_docs_MD_system/              (2 - ENTITES_INDEX.md · matrisse_template_doc/_TEMPLATE_DOC.md · map_of_content_obsidian/ vide)
@@ -130,8 +130,8 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 - **Repo actif unique** : `BerrySwann/home_assistant_re-build` (ancien `home-assistant-config` supprimé le 2026-04-27)
 - **Contenu** : reflet exact de `/homeassistant/` - pushé par `.scripts/ha_git_backup.sh` (boutons page Système L5C3)
 - **Point d'entrée navigation** : [INDEX_GLOBAL.md](https://github.com/BerrySwann/home_assistant_re-build/blob/main/INDEX_GLOBAL.md)
-- **Dernier relevé arbre (API git trees)** : 2026-10-10 - **938 objets (fichiers + dossiers)** ; dernier commit `377647e9` (2026-10-10 23:10 CEST, HAOS auto-backup: 2026-10-10 23:10:00 CEST, HA 2026.10.0)
-- Répartition : `docs/` 649 · `templates/` 86 · `utility_meter/` 15 · `input_booleans/` 6 · `sensors/` 11
+- **Dernier relevé arbre (API git trees)** : 2026-10-11 - **925 objets (fichiers + dossiers)** ; dernier commit `21f4653f` (2026-10-11 09:10 CEST, HAOS auto-backup: 2026-10-11 09:10:00 CEST, HA 2026.10.0)
+- Répartition : `docs/` 634 · `templates/` 86 · `utility_meter/` 15 · `input_booleans/` 6 · `sensors/` 11
 
 **Patterns URLs :**
 
@@ -152,7 +152,7 @@ Exemples :
 ## 🔍 AUDIT & SYNC - RAPPELS
 
 - **Audit MD5** : scripts `.scripts/audit_md5_yaml.sh` (YAML) + `.scripts/audit_md5_md_yaml.sh` (MD + YAML) - sans argument - boutons dashboard L5C3 - log `/homeassistant/.logs/`. Commandes détaillées : voir `IA_CMD_TERMINAL_HA.md`.
-- **Triangulation (trigul)** : `docs/04_docs_scripts/docs_scripts_SH/hermes_audit_md5_trigul_3md.sh` - compare chaque `.md` sur les 3 niveaux (local, prod, dépôt). Dernier passage 2026-09-29 : 145 fichiers, 145 synchronisés, 0 écart.
+- **Triangulation (trigul)** : `docs/04_docs_scripts/docs_scripts_SH/hermes_audit_md5_trigul_3md/hermes_audit_md5_trigul_3md.sh` - compare chaque `.md` sur les 3 niveaux (local, prod, dépôt). Dernier passage 2026-09-29 : 145 fichiers, 145 synchronisés, 0 écart.
 - **Sens YAML config** : prod → GitHub → local (local converge vers prod).
 - **Sens Docs .md** : local `docs/` → `H:\docs\` → GitHub (local gagne en conflit).
 - **Après tout changement prod** : déclencher le git backup, sinon GitHub reste en retard (liens INDEX cassés, audits faussés).
