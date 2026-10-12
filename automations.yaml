@@ -2803,7 +2803,7 @@
     annule quand la prise passe sur arret, et a la fin d''un timer (2 h, ou 10 min
     de rattrapage) coupe la prise, notifie, attend 1 min puis remet la prise en marche
     (veille). Le timer survit a un redemarrage de HA (restore). Decision Eric 2026-10-07.
-    L''automation G reste active en doublon jusqu''a decision d''Eric.'
+    L''automation F reste active en doublon jusqu''a decision d''Eric.'
   triggers:
   - above: 50
     alias: 'Chauffe detectee : puissance superieure a 50 W'
