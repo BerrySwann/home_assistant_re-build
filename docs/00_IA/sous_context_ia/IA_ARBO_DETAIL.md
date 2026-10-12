@@ -1,5 +1,5 @@
 # 🌳 ARBORESCENCES COMPLÈTES & INDEX GITHUB
-*Dernière mise à jour : 2026-10-11 (soir, /histo S3 : relevés LOCAL + PROD + GitHub rafraîchis ; comptages LOCAL recalculés après le rangement des docs dashboard, la création de 06_docs_technique et la suppression de scripts/ ; docs poussées vers H: à 19h54 ; dernier commit GitHub da8a7c8b)*
+*Dernière mise à jour : 2026-10-12 (soir, /histo S1 : relevés LOCAL + PROD + GitHub rafraîchis ; comptages LOCAL recalculés après le ménage des sauvegardes (108 renommées, 125 à la corbeille Windows) et la copie de 8 scripts de la prod en local ; dernier commit GitHub e8af1e4c)*
 *Lire ce fichier si : audit fichiers, sync GitHub, recherche d'un fichier prod, vérification arbo locale, URLs raw GitHub.*
 
 ---
@@ -17,10 +17,10 @@
 
 ---
 
-## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-10-11)
+## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-10-12)
 
 ```text
-ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\ - relevé 2026-10-11)
+ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\ - relevé 2026-10-12)
 ├── 10 fichiers racine
 │   ha-erodi.html · index.html          (maquettes - l'architecture HA est dans docs/00_IA/ha-erodi-architecture.html)
 │   presentation_HACF_2026.md · presentation_HACF_2026.txt
@@ -34,16 +34,16 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── prompt/ · Claude outputs/ · _old_avant_staging/ · energie/   (travaux et conteneurs)
 ├── Infra_Proxmox/                      (docs/proxmox|reseau|sonoff/ · scripts/ .sh+.ps1 · certificats/ .crt · journaux/ .log ; save/ vide)
 ├── MOC/                                (un dossier par MOC : MOC_DASHBOARD/ · MOC_DEPENDANCES/ · MOC_PRESENCE/, chacun avec son .md et ses sauvegardes ; hors périmètre /histo)
-├── historique/                         (115 dont 25 sauvegardes - journaux JOURNAL_COMPLET/JOURNAL_FUSIONNE_*.md, histo_YYYY-MM-DD_S*.txt/.md, ARCHIVE_SESSIONS_HA_*.md, archive MD5, histo.md = copie du skill + ses sauvegardes)
-└── docs/                               (877 fichiers)
-    ├── 00_IA/                          (34 dont 24 sauvegardes - IA_CONTEXT_BASE.md · ha-erodi-architecture.html · RAPPORT_AUDIT_ENERGETIQUE_*.md ×2 · Grille_Tarif_Bleu_EDF_2026-08-01.csv/.pdf · confort_cible_calcul_flow.png)
-    │   └── sous_context_ia/            (27 dont 18 sauvegardes - 8 sous-contextes IA_*.md + index arbo)
-    ├── 01_docs_config_system/          (116 - config_system_MD/ 2 + config_system_YAML/ 114 fichiers dont 12 sauvegardes, resynchronisé GitHub->local 2026-10-04, SYNC=80 DIFF=0)
-    ├── 02_docs_dashboard/              (269 - dashboard_docs_MD 114 · dashboard_docs_YAML 155)
-    ├── 03_docs_automations/            (353 dont 222 sauvegardes - docs_automations_MD · docs_automations_YAML)
-    ├── 04_docs_scripts/                (34 - SH · SH_MD · YAML · YAML_MD)
-    ├── 05_docs_MD_system/              (41 dont 26 sauvegardes)
-    ├── 05_docs_skills/                 (28 - 14 dossiers skill_<nom>/ contenant la copie .md de chaque SKILL.md du projet, dont skill_histo/ ajouté le 2026-10-10 et skill_histo-final/ le 2026-10-11 ; histo.md existe aussi dans historique/ ; 10 sauvegardes (5 du 2026-10-11 dans skill_ha-trigul/, 5 dans skill_histo/ et skill_histo-final/))
+├── historique/                         (117 dont 25 sauvegardes - journaux JOURNAL_COMPLET/JOURNAL_FUSIONNE_*.md, histo_YYYY-MM-DD_S*.txt/.md, ARCHIVE_SESSIONS_HA_*.md, archive MD5, histo.md = copie du skill + ses sauvegardes)
+└── docs/                               (773 fichiers dont 310 sauvegardes)
+    ├── 00_IA/                          (25 dont 15 sauvegardes - IA_CONTEXT_BASE.md · ha-erodi-architecture.html · RAPPORT_AUDIT_ENERGETIQUE_*.md ×2 · Grille_Tarif_Bleu_EDF_2026-08-01.csv/.pdf · confort_cible_calcul_flow.png)
+    │   └── sous_context_ia/            (22 dont 13 sauvegardes - 8 sous-contextes IA_*.md + index arbo)
+    ├── 01_docs_config_system/          (114 - config_system_MD/ 2 + config_system_YAML/ 112 fichiers dont 10 sauvegardes, resynchronisé GitHub->local 2026-10-04, SYNC=80 DIFF=0)
+    ├── 02_docs_dashboard/              (250 - dashboard_docs_MD 96 · dashboard_docs_YAML 154)
+    ├── 03_docs_automations/            (293 dont 162 sauvegardes - docs_automations_MD · docs_automations_YAML)
+    ├── 04_docs_scripts/                (43 dont 17 sauvegardes - SH · SH_MD · YAML · YAML_MD)
+    ├── 05_docs_MD_system/              (28 dont 13 sauvegardes)
+    ├── 05_docs_skills/                 (18 - 14 dossiers skill_<nom>/ contenant la copie .md de chaque SKILL.md du projet, dont skill_histo/ ajouté le 2026-10-10 et skill_histo-final/ le 2026-10-11 ; histo.md existe aussi dans historique/ ; 4 sauvegardes)
     └── 06_docs_technique/              (2 dont 1 sauvegarde - 01_pont_hue_hacking/ : procédure de coupure du flux Hue Sync par l'API du pont, sans clé dans le fichier)
 ```
 
@@ -56,10 +56,10 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 
 ---
 
-## 🌳 ARBORESCENCE - PROD /homeassistant/ (= H:\ - relevé 2026-10-11)
+## 🌳 ARBORESCENCE - PROD /homeassistant/ (= H:\ - relevé 2026-10-12)
 
 ```text
-/homeassistant/   (relevé 2026-10-11 ; = H:\)
+/homeassistant/   (relevé 2026-10-12 ; = H:\)
 │
 ├── Fichiers racine :
 │   configuration.yaml · automations.yaml · scripts.yaml · scenes.yaml · secrets.yaml
@@ -111,7 +111,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   └── meteo/ (M_03_meteo_UM_blitzortung)
 │
 ├── custom_components/ · themes/ · tts/ · www/ · deps/   (divers, hors périmètre docs HA)
-└── docs/                               (744 - miroir pushé depuis local docs/ ; dont modifs/ 6 journaux)
+└── docs/                               (745 - miroir pushé depuis local docs/ ; dont modifs/ 7 journaux)
     ├── 00_IA/                          (9 - IA_CONTEXT_BASE.md + sous_context_ia/8, aucune sauvegarde .bak sur H:)
     ├── 01_docs_config_system/          (103 - config_system_MD/1 + config_system_YAML/102)
     ├── 02_docs_dashboard/              (259 - dashboard_docs_MD 101 · dashboard_docs_YAML 158 dont Dashboard_COMPLET/ 1 seul export)
@@ -131,8 +131,8 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 - **Repo actif unique** : `BerrySwann/home_assistant_re-build` (ancien `home-assistant-config` supprimé le 2026-04-27)
 - **Contenu** : reflet exact de `/homeassistant/` - pushé par `.scripts/ha_git_backup.sh` (boutons page Système L5C3)
 - **Point d'entrée navigation** : [INDEX_GLOBAL.md](https://github.com/BerrySwann/home_assistant_re-build/blob/main/INDEX_GLOBAL.md)
-- **Dernier relevé arbre (API git trees)** : 2026-10-11 - **1487 objets (fichiers + dossiers)** ; dernier commit `da8a7c8b` (2026-10-11 22:10 CEST, HAOS auto-backup: 2026-10-11 22:10:00 CEST, HA 2026.10.1)
-- Répartition : `docs/` 1193 · `templates/` 85 · `utility_meter/` 14 · `input_booleans/` 5 · `sensors/` 10
+- **Dernier relevé arbre (API git trees)** : 2026-10-12 - **1489 objets (fichiers + dossiers)** ; dernier commit `e8af1e4c` (2026-10-12 21:10 CEST, HAOS auto-backup: 2026-10-12 21:10:00 CEST, HA 2026.10.1)
+- Répartition : `docs/` 1194 · `templates/` 85 · `utility_meter/` 14 · `input_booleans/` 5 · `sensors/` 10
 
 **Patterns URLs :**
 
