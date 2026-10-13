@@ -1,4 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
+*Derniere mise a jour : 2026-10-12 20h (sync_index /histo S1 : description de l'automation G corrigee en prod ; 6 scripts HA et 2 scripts shell copies de la prod en local ; docs_scripts_YAML regroupe en sous-dossiers Climatisation et Soufflant SDB ; aucune entite ni vignette modifiee)*
 *Derniere mise a jour : 2026-10-11 22h (sync_index /histo S3 : lettres des automations SDB alignees en prod, dossier L0C0_PAGE_Home, aucune entite ni vignette modifiee)*
 *Derniere mise a jour : 2026-10-11 15h30 (dashboard_docs_MD et dashboard_docs_YAML : un sous-dossier 01_vignette et 02_page (02_page_nom si plusieurs pages) par dossier LxCy, PAGE_Home et PAGE_RASPI ; 148 fichiers deplaces, 74 chemins corriges)*
 *Derniere mise a jour : 2026-10-11 - lettres des automations SDB decalees (D->C, E->D, F->E, G->F, H->G, I->H), fiches et YAML renommes en local (prod pas encore modifiee)*
