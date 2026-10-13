@@ -3,7 +3,8 @@ IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md# 🔥⚡ IA_AUDIT_ENERGETIQUE_ET_THERMIQUE 
 sur l'efficacité isolation/volets/rideaux, écart théorie (YAML) vs logs réels de conso,
 caractéristiques physiques du logement (dimensions, orientations, équipements par pièce).*
 
-**Version :** v6.5 (2026-08-10 - tarifs à jour grille EDF 01/08/2026 + fenêtres HC, voir CHANGELOG).
+**Version :** v6.6 (2026-10-13 - chemins sources corrigés, voir CHANGELOG).
+v6.5 (2026-08-10 - tarifs à jour grille EDF 01/08/2026 + fenêtres HC, voir CHANGELOG).
 v6.4 (2026-08-10 - correction majeure du parseur de logs, voir CHANGELOG ;
 totaux Avr->Août corrigés, note en section 2).
 v6.3 (2026-02-22 -> convertie en sous_context_ia, renommée, et revue en
@@ -181,12 +182,12 @@ Tu disposes de sources d'information critiques :
 
 | Source | Description |
 |:-------|:------------|
-| `docs/00_IA/IA_CONTEXT_BASE.md` | Structure physique (Simple vitrage, Dernier étage, Traversant) |
-| `docs/notifs/diag_conso_elec.txt` | Logs horaires réels (la vérité du terrain) |
+| `docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md` | Structure physique (Simple vitrage, Dernier étage, Traversant) |
+| `notifs/diag_conso_elec.txt` (prod : `/homeassistant/notifs/`) | Logs horaires réels (la vérité du terrain) |
 | `automations.yaml` (+ `docs/03_docs_automations/docs_automations_YAML/`) | Le code qui pilote le chauffage et les ouvrants |
-| `docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim/p1_master_gestion_clim.yaml` | Logique déléguée jour/nuit clim (script maître, créé 2026-06 - remplace l'ancien découpage j_1_1/j_1_2/j_1_3) |
+| `docs/04_docs_scripts/docs_scripts_YAML/Climatisation/p1_master_gestion_clim/p1_master_gestion_clim.yaml` | Logique déléguée jour/nuit clim (script maître, créé 2026-06 - remplace l'ancien découpage j_1_1/j_1_2/j_1_3) |
 | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Calcul saison (`sensor.mode_ete_hiver`), température cible/confort |
-| `templates/P4_groupe_presence/02_logique_wifi_cellular.yaml` | Logique présence (`sensor.groupe` - voir IA_P4_PRESENCE.md) |
+| `templates/P4_groupe_presence/P4_groupe_presence.yaml` | Logique présence (`sensor.groupe` - voir IA_P4_PRESENCE.md) |
 | `sensor.tarif_heures_pleines_ttc` / `sensor.tarif_heures_creuses_ttc` | Coût kWh HP/HC (0,2142€ / 0,1589€ TTC, grille EDF vérifiée le 2026-08-10, applicable au 01/08/2026 - les TRV sont revus chaque 1er février et 1er août, à re-vérifier à chaque bilan) - pour calculs ROI des recommandations (voir section 6, catégorie "Travaux physiques" uniquement) |
 
 > **Fenêtres HC du contrat (confirmées Eric le 2026-08-10) :** nuit 01h30 -> 07h30 + jour
@@ -326,9 +327,8 @@ et Chambre est donc exclusivement d'origine thermique, pas de consigne.
     si le seuil 20.5C n'était franchi qu'après 8h30 (bug confirmé par Eric, corrigé)
 
 ⚠️ **Statut déploiement (2026-07-19)** : correction appliquée dans
-`docs/03_docs_automations/docs_automations_YAML/P1_cuisine/b_chauffage_cuisine_vacances.yaml`
-(état CIBLE). PAS ENCORE déployée en prod HA - à appliquer manuellement via l'UI
-(Paramètres > Automatisations > "B - Chauffage Cuisine Vacances" > éditer en YAML).
+`docs/03_docs_automations/docs_automations_YAML/P1_02_Cuisine/b_chauffage_cuisine_vacances/b_chauffage_cuisine_vacances.yaml`
+(état CIBLE). Mise à jour 2026-10-13 : déployée en prod HA (TODO P1-CUISINE-B clos ; le message "Fin Vacances 8h30" est présent dans l'automation prod).
 Tant que ce n'est pas fait, le comportement réel en prod reste l'ANCIENNE version
 (Eric ET Mamour, pas d'arrêt forcé).
 
@@ -640,6 +640,7 @@ Ratio = 0.101 / 0.028 = 3.6x
 
 | Version | Date | Modifications |
 |:--------|:-----|:--------------|
+| **v6.6** | **2026-10-13** | **Chemins sources corrigés** (script maître `Climatisation/`, template `P4_groupe_presence.yaml`, YAML cuisine vacances `P1_02_Cuisine/`, `notifs/diag_conso_elec.txt`, `IA_CONTEXT_BASE/`). Statut de déploiement de la correction cuisine B mis à jour (déployée en prod). Contenu physique et méthodes inchangés. |
 | **v6.5** | **2026-08-10** | **Tarifs à jour :** grille EDF officielle 01/08/2026 (HP 0,2142 / HC 0,1589 € TTC, +3,7 %/+0,7 % vs début 2026 - TRV revus chaque 1er février et 1er août). **Fenêtres HC ajoutées** (nuit 01h30-07h30 + jour 13h-14h30, confirmées Eric). Référence RAPPORT_AUDIT_ENERGETIQUE_2026-08-10.md ajoutée en en-tête. |
 | **v6.4** | **2026-08-10** | **Correction majeure parseur diag_conso_elec.txt :** 6e variante de format (préfixe `[2] en [WIFI]`, 6 888 lignes, depuis le 29/04) ignorée par la regex ciblée (Mamour\|Eric) -> ~49 % de lignes perdues Avr->Août, totaux sous-évalués (Juin 327,6 vs 235,5 ; Juil 443,8 vs 280,0 ; Août 182,7 vs 138,6 kWh). Ajout note "Données de référence corrigées" (section 2) + avertissement parseur (section 8.2). Découverte : **l'été dépasse l'hiver** (Juil 443,8 > Janv 397,2 kWh) ; clim ~= chauffage en kWh/j (14,1 kWh/j à 33 °C ext). |
 | **v6.3** | **2026-07-19** | Ajout Daikin FTX35KNV1B Bureau+Chambre / Hitachi Salon. Table températures cibles par pièce/groupe extraite du YAML. Note audit Bureau=Chambre (matériel identique -> diff DUT = purement thermique). Correction x2 : "les 2 présents" -> "Eric OU Mamour" (cuisine ligne dimensions) ; section 3B Cuisine "Compensation en cours" -> "Aucune compensation". |

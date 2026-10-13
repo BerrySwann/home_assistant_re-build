@@ -1,6 +1,6 @@
 > **CONTEXTE PROJET** : ce document est tenu IDENTIQUE en trois emplacements, a modifier
 > ensemble dans la meme session : `ReBuild/Claude md SAVE/CLAUDE.md`,
-> `ReBuild/docs/00_IA/IA_CONTEXT_BASE.md` et `D:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres
+> `ReBuild/docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md` et `D:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres
 > toute mise a jour, verifier que les trois empreintes md5 sont egales. Il ne depend d'aucun agent
 > en particulier.
 > Derniere mise en conformite : 2026-10-10 (3 copies identiques, voir ci-dessus). Rappel du
@@ -70,14 +70,14 @@
 
 | Fichier | Lire si… |
 |:--------|:---------|
-| `docs/00_IA/sous_context_ia/IA_INTEGRATIONS_CARTES.md` | YAML dashboard à valider, `type: custom:*` inconnu, intégration manquante, palette couleurs |
-| `docs/00_IA/sous_context_ia/IA_AUTOMATIONS_NOTIFS.md` | Création/modif automation, écriture message `notify`, script HA |
-| `docs/00_IA/sous_context_ia/IA_P4_PRESENCE.md` | `sensor.presence`, format notif avec présence, logique groupe WiFi |
-| `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL.md` | Audit fichiers, sync GitHub, arborescence prod complète, URLs raw GitHub |
-| `docs/00_IA/sous_context_ia/IA_INDEX_NAVIGATION.md` | Régénération de `INDEX_NAVIGATION_FULL.md`, ajout vignette/page à l'index, mapping entités → fichiers sources, structure accordéon GitHub |
-| `docs/00_IA/sous_context_ia/IA_INDEX_AUTOMATIONS.md` | Régénération de `INDEX_AUTOMATIONS.md`, ajout/suppression automation, mapping alias → docs/03 → docs, anomalies connues |
-| `docs/00_IA/sous_context_ia/IA_CMD_TERMINAL_HA.md` | Commande tree prod, audit MD5, git backup, chemins `/homeassistant/`, logs HA |
-| `docs/00_IA/sous_context_ia/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` | Audit énergétique/thermique, analyse DUT par pièce, isolation/volets/rideaux, écart théorie YAML vs logs conso, caractéristiques physiques du logement |
+| `docs/00_IA/sous_context_ia/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md` | YAML dashboard à valider, `type: custom:*` inconnu, intégration manquante, palette couleurs |
+| `docs/00_IA/sous_context_ia/IA_AUTOMATIONS_NOTIFS/IA_AUTOMATIONS_NOTIFS.md` | Création/modif automation, écriture message `notify`, script HA |
+| `docs/00_IA/sous_context_ia/IA_P4_PRESENCE/IA_P4_PRESENCE.md` | `sensor.presence`, format notif avec présence, logique groupe WiFi |
+| `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md` | Audit fichiers, sync GitHub, arborescence prod complète, URLs raw GitHub |
+| `docs/00_IA/sous_context_ia/IA_INDEX_NAVIGATION/IA_INDEX_NAVIGATION.md` | Régénération de `INDEX_NAVIGATION_FULL.md`, ajout vignette/page à l'index, mapping entités → fichiers sources, structure accordéon GitHub |
+| `docs/00_IA/sous_context_ia/IA_INDEX_AUTOMATIONS/IA_INDEX_AUTOMATIONS.md` | Régénération de `INDEX_AUTOMATIONS.md`, ajout/suppression automation, mapping alias → docs/03 → docs, anomalies connues |
+| `docs/00_IA/sous_context_ia/IA_CMD_TERMINAL_HA/IA_CMD_TERMINAL_HA.md` | Commande tree prod, audit MD5, git backup, chemins `/homeassistant/`, logs HA |
+| `docs/00_IA/sous_context_ia/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` | Audit énergétique/thermique, analyse DUT par pièce, isolation/volets/rideaux, écart théorie YAML vs logs conso, caractéristiques physiques du logement |
 
 ---
 
@@ -260,7 +260,7 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
   (teste le 2026-10-08). Pas de corbeille sur H:\ : ne jamais supprimer un fichier de H:\ sans
   avoir verifie qu'il existe en local.
 - Restauration : copier la sauvegarde voulue, retirer le segment `.bak_...`, jamais de suffixe en prod.
-- CLAUDE.md et `docs/00_IA/IA_CONTEXT_BASE.md` (et leur copie `D:\docs\00_IA\`) : meme regle avant toute
+- CLAUDE.md et `docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md` (et leur copie `D:\docs\00_IA\`) : meme regle avant toute
   reecriture (sauvegarde locale uniquement). Apres reecriture, resynchroniser les 3 copies et
   verifier leur MD5.
 
@@ -505,7 +505,7 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 | **Accès** | Samba Share · SSH · Tailscale · Cloudflare Tunnel (host Proxmox .240 → erodi-ha.com) |
 
 **Intégrations (compact)** : MyElectricalData · Météo France · Blitzortung · AtmoFrance · Vigieau · Meross LAN · Philips HUE · Z2M · Browser Mod · Streamline Card · HACS
-→ Détail complet : `docs/00_IA/sous_context_ia/IA_INTEGRATIONS_CARTES.md`
+→ Détail complet : `docs/00_IA/sous_context_ia/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md`
 
 ---
 
@@ -593,7 +593,7 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 - PowerCalc : P3 uniquement, Hue sans monitoring natif + exception `relais_lumiere_sdb_sonoff` (10W fixe)
 
 ### P4 - Présence : téléphones mobiles (Poco X7 Pro), capteurs Wi-Fi.
-→ Détail complet sensor.presence : `docs/00_IA/sous_context_ia/IA_P4_PRESENCE.md`
+→ Détail complet sensor.presence : `docs/00_IA/sous_context_ia/IA_P4_PRESENCE/IA_P4_PRESENCE.md`
 
 ---
 
@@ -624,7 +624,7 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 | Hors ménage, hors circuit de push | `TODO/` · `Github/` · `historique/` · `.claude/` · `Infra_Proxmox/` | restent locaux |
 
 > Le détail des arborescences (local, prod, GitHub, comptages) vit dans
-> `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL.md`, maintenu par `/histo` (étape 6).
+> `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md`, maintenu par `/histo` (étape 6).
 > **En cas de divergence, c'est ce fichier qui fait foi** : il est recompté à chaque passage,
 > contrairement à cette page. Ne pas recopier d'arborescence ici.
 
@@ -652,7 +652,7 @@ Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2
 
 → `H:/scripts.yaml` (Scripts, section Automations - miroir local `docs/04_docs_scripts/`) suit la meme regle que la config YAML : sauvegarde locale (`.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}`, voir REGLE DE SAUVEGARDE) a cote du fichier dans `docs/04_docs_scripts/` AVANT toute modification, jamais de sauvegarde creee en prod. Difference : le push vers `H:/scripts.yaml` se fait a la main par Eric via l'UI HA (jamais de copie fichier directe) - coherent avec la regle Automations (jamais d'edition directe du fichier live). Les `.sh` de `.scripts/` restent geres individuellement, hors de cette regle. Audit MD5 automations/scripts : plus complexe que sur la config YAML simple, a traiter au cas par cas.
 
-→ Arborescences complètes prod + local : `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL.md`
+→ Arborescences complètes prod + local : `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md`
 
 ---
 
@@ -665,7 +665,7 @@ Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2
 | `groupe_3` | Eric seul |
 | `groupe_4` | Tous les deux |
 
-→ sensor.presence + codes réseau complets : `docs/00_IA/sous_context_ia/IA_P4_PRESENCE.md`
+→ sensor.presence + codes réseau complets : `docs/00_IA/sous_context_ia/IA_P4_PRESENCE/IA_P4_PRESENCE.md`
 
 ---
 
@@ -689,5 +689,5 @@ Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2
 *(copie locale du fichier : `docs/00_IA/confort_cible_calcul_flow.png` ; asset GitHub d'origine : https://github.com/user-attachments/assets/f18e24a2-1441-482b-af70-537a7b208e15)*
 
 > Caractéristiques détaillées du logement (dimensions, équipements par pièce, orientations) :
-> déplacées dans `docs/00_IA/sous_context_ia/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` (2026-07-19,
+> déplacées dans `docs/00_IA/sous_context_ia/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` (2026-07-19,
 > usage limité à l'analyse des consommations électriques, hors périmètre des directives actives).

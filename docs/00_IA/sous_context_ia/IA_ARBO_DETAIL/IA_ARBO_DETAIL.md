@@ -22,7 +22,7 @@
 ```text
 ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\ - relevé 2026-10-12)
 ├── 10 fichiers racine
-│   ha-erodi.html · index.html          (maquettes - l'architecture HA est dans docs/00_IA/ha-erodi-architecture.html)
+│   ha-erodi.html · index.html          (maquettes - l'architecture HA est dans HTML/ha-erodi-architecture.html)
 │   presentation_HACF_2026.md · presentation_HACF_2026.txt
 │   PROMPT_REPRODUCTION_ha-erodi.md · prompt_site_HA.txt · PROMPT_TEMPLATE_SITE_WEB.md
 │   hermes_cle_ssh.pub                  (cl publique SSH)
@@ -35,20 +35,20 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── Infra_Proxmox/                      (docs/proxmox|reseau|sonoff/ · scripts/ .sh+.ps1 · certificats/ .crt · journaux/ .log ; save/ vide)
 ├── MOC/                                (un dossier par MOC : MOC_DASHBOARD/ · MOC_DEPENDANCES/ · MOC_PRESENCE/, chacun avec son .md et ses sauvegardes ; hors périmètre /histo)
 ├── historique/                         (117 dont 25 sauvegardes - journaux JOURNAL_COMPLET/JOURNAL_FUSIONNE_*.md, histo_YYYY-MM-DD_S*.txt/.md, ARCHIVE_SESSIONS_HA_*.md, archive MD5, histo.md = copie du skill + ses sauvegardes)
-└── docs/                               (773 fichiers dont 310 sauvegardes)
-    ├── 00_IA/                          (25 dont 15 sauvegardes - IA_CONTEXT_BASE.md · ha-erodi-architecture.html · RAPPORT_AUDIT_ENERGETIQUE_*.md ×2 · Grille_Tarif_Bleu_EDF_2026-08-01.csv/.pdf · confort_cible_calcul_flow.png)
-    │   └── sous_context_ia/            (22 dont 13 sauvegardes - 8 sous-contextes IA_*.md + index arbo)
+└── docs/                               (837 fichiers dont 371 sauvegardes)
+    ├── 00_IA/                          (5 dont 4 sauvegardes hors sous_context_ia/ - dossier IA_CONTEXT_BASE/ avec IA_CONTEXT_BASE.md et ses sauvegardes (regle du 2026-10-13) ; les fichiers html, rapports d'audit, grille tarifaire et png cites avant ne sont plus ici)
+    │   └── sous_context_ia/            (46 dont 37 sauvegardes - 9 dossiers, un par fichier IA_*.md (IA_ARBO_DETAIL = index arbo), chacun avec son .md et ses sauvegardes dedans ; regle du 2026-10-13)
     ├── 01_docs_config_system/          (114 - config_system_MD/ 2 + config_system_YAML/ 112 fichiers dont 10 sauvegardes, resynchronisé GitHub->local 2026-10-04, SYNC=80 DIFF=0)
     ├── 02_docs_dashboard/              (250 - dashboard_docs_MD 96 · dashboard_docs_YAML 154)
     ├── 03_docs_automations/            (293 dont 162 sauvegardes - docs_automations_MD · docs_automations_YAML)
     ├── 04_docs_scripts/                (43 dont 17 sauvegardes - SH · SH_MD · YAML · YAML_MD)
-    ├── 05_docs_MD_system/              (30 dont 15 sauvegardes - dont GLOBAL_INDEX_REPO/ 4 dont 3 sauvegardes, deplace de Github/ le 2026-10-13, menage fait)
+    ├── 05_docs_MD_system/              (23 dont 14 sauvegardes - dont GLOBAL_INDEX_REPO/ 4 dont 3 sauvegardes, deplace de Github/ le 2026-10-13, menage fait)
     ├── 05_docs_skills/                 (18 - 14 dossiers skill_<nom>/ contenant la copie .md de chaque SKILL.md du projet, dont skill_histo/ ajouté le 2026-10-10 et skill_histo-final/ le 2026-10-11 ; histo.md existe aussi dans historique/ ; 4 sauvegardes)
     └── 06_docs_technique/              (2 dont 1 sauvegarde - 01_pont_hue_hacking/ : procédure de coupure du flux Hue Sync par l'API du pont, sans clé dans le fichier)
 ```
 
 **Dossiers d'archive** (contenu sorti du flux, gardé pour l'historique) :
-`docs/02_docs_dashboard/dashboard_docs_MD/_ARCHIVE/` (créé le 2026-09-28 : `DEPENDANCES_GLOBALES_archive_2026-09-28.md`, l'ancien fichier manuel) · `docs/03_docs_automations/docs_automations_YAML/_old_avant_staging/` (supprimé en local le 2026-10-10, envoyé à la corbeille Windows après tri ; encore présent en prod et sur GitHub) · `_old_avant_staging/` à la racine du projet.
+`docs/02_docs_dashboard/dashboard_docs_MD/_ARCHIVE/` (n'existe plus en local, encore présent en prod ; les archives `DEPENDANCES_GLOBALES_archive_*.md` sont dans `docs/05_docs_MD_system/DEPENDANCES_GLOBALES/`) · `docs/03_docs_automations/docs_automations_YAML/_old_avant_staging/` (supprimé en local le 2026-10-10, envoyé à la corbeille Windows après tri ; encore présent en prod et sur GitHub) · `_old_avant_staging/` à la racine du projet.
 
 > ⛔ `TREE_CORRIGE/`, `TREE_ORIGINE/`, `Dashboard/`, `docs_dashboard/`, `docs_automations/`, `docs_scripts/`, `IA/` racine : **supprimés le 2026-07-14** - toute référence à ces chemins est morte.
 
@@ -112,12 +112,12 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │
 ├── custom_components/ · themes/ · tts/ · www/ · deps/   (divers, hors périmètre docs HA)
 └── docs/                               (745 - miroir pushé depuis local docs/ ; dont modifs/ 7 journaux)
-    ├── 00_IA/                          (9 - IA_CONTEXT_BASE.md + sous_context_ia/8, aucune sauvegarde .bak sur H:)
+    ├── 00_IA/                          (9 fichiers - IA_CONTEXT_BASE/IA_CONTEXT_BASE.md + sous_context_ia/ 8 dossiers d'un fichier chacun, sans IA_SKILLS_INVENTAIRE, aucune sauvegarde .bak sur H:)
     ├── 01_docs_config_system/          (103 - config_system_MD/1 + config_system_YAML/102)
     ├── 02_docs_dashboard/              (259 - dashboard_docs_MD 101 · dashboard_docs_YAML 158 dont Dashboard_COMPLET/ 1 seul export)
     ├── 03_docs_automations/            (307 - docs_automations_MD · docs_automations_YAML)
     ├── 04_docs_scripts/                (35 - SH/13 · SH_MD/6 · YAML/10 · YAML_MD/6)
-    ├── 05_docs_MD_system/              (10 - AUTOMATIONS_IDS_REF.md · AUTOMATIONS_MIGRATION_REPORT.md · ENTITES_INDEX.md · INDEX_PAGES.md · PROD_vs_REBUILD_DIFF.md · CONFIG_ROOT/ · DEPENDANCES_GLOBALES/ · DEPENDANCES_GLOBALES_HERMES/ · ENTITES_INDEX/ · matrisse_template_doc/)
+    ├── 05_docs_MD_system/              (9 - AUTOMATIONS_IDS_REF.md · AUTOMATIONS_MIGRATION_REPORT.md · INDEX_PAGES.md · PROD_vs_REBUILD_DIFF.md · CONFIG_ROOT/ · DEPENDANCES_GLOBALES/ · DEPENDANCES_GLOBALES_HERMES/ · ENTITES_GLOBAL_INDEX/ · matrisse_template_doc/)
     ├── 05_docs_skills/                 (14 - 14 dossiers skill_<nom>/ copies des SKILL.md, poussés depuis local docs/05_docs_skills/)
     └── 06_docs_technique/              (1 - 01_pont_hue_hacking/, poussé le 2026-10-11)
 ```

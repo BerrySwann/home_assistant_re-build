@@ -5,7 +5,7 @@
 
 ## sensor.groupe - Logique d'automatisation
 
-> Source : `templates/P4_groupe_presence/02_logique_wifi_cellular.yaml`
+> Source : `templates/P4_groupe_presence/P4_groupe_presence.yaml`
 > Réseau cible : `'Module B.E.R.Y.L. [GG-5.0]'` ou `'Module B.E.R.Y.L. [GG-2.4]'`
 
 Utilisé par les automations (clim, volets, mode éco).

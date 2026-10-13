@@ -1,5 +1,6 @@
 # 🔌 RÉFÉRENTIEL INTÉGRATIONS & CARTES HA
 *Lire ce fichier si : YAML dashboard à valider, `type: custom:*` inconnu, intégration manquante, nouvelle carte à ajouter.*
+*Dernière mise à jour : 2026-10-13 (composants personnalisés, intégrations et cartes revérifiés contre `custom_components`, `www/community` et `core.config_entries`).*
 
 ---
 
@@ -14,11 +15,14 @@
 | `browser_mod` | Browser Mod | Contrôle navigateur depuis HA |
 | `smartir` | SmartIR | Télécommandes IR (clim salon, bureau, chambre) |
 | `scheduler` | Scheduler | Planificateur avancé (custom:scheduler-card) |
-| `meross_lan` | Meross LAN | Prises Meross en local sans cloud |
+| `meross_lan` | Meross LAN | Appareils Meross en local sans cloud (entrées : Store SALON, Store BUREAU) |
 | `blitzortung` | Blitzortung | Détection foudre temps réel |
 | `atmofrance` | Atmo France | Qualité air extérieur (IQA) |
 | `vigieau` | VigiEau | Restrictions d'eau en vigueur (L6C3) |
 | `tarif_edf` | Tarifs EDF | Index HP/HC, couts Tempo/Base (P0) |
+| `hacs` | HACS | Gestionnaire de composants et de cartes personnalisés (v2.0.5) |
+| `ha_mcp_tools` | HA-MCP Custom Component | Outils MCP côté HA : serveur + outils fichiers/YAML (2 entrées, v2.2.1) |
+| `ha_washdata` | WashData | Suivi des cycles Lave-Linge et Lave-Vaisselle (2 entrées, v0.5.8) |
 
 ### Officielles HA Core
 
@@ -35,12 +39,26 @@
 | `systemmonitor` | Supervision systeme Mini PC - CPU, RAM, disque (L4C2) - inclut "Vitesse CPU" |
 | `mobile_app` | 7 appareils : 2 Poco (accroche WiFi présence P4) + autres (L5C2 batteries portables) |
 | `local_file` | 2 entités météo : `MF_alerte_today` + `MF_alerte_tomorrow` (images vigilance Météo France) |
-| `file` | 2 entités notify : `diag_conso_elec.txt` + `ecart_liky_vs_nodon.txt` (logs /homeassistant/notifs/) |
+| `file` | 6 entités notify (logs texte) : `diag_conso_elec.txt` · `ecart_liky_vs_nodon.txt` · `zone_eric.txt` · `linky_histo.txt` · `nodon_histo.txt` · `ecart_histo.txt` (dans `/homeassistant/notifs/` et `/homeassistant/.logs/`) |
 | `restful` | 1 entité : `sensor.blitzortung_lightning_localisation` |
 | `backup` | Sauvegardes HA (core) |
 | `local_ip` | 1 entite IP du Mini PC |
 
-### Add-ons Supervisor (7 add-ons actifs)
+### Autres intégrations présentes (relevé `core.config_entries` du 2026-10-13)
+
+| Intégration | Entrées |
+|:------------|:--------|
+| `generic_thermostat` | Radiateur Cuisine · Soufflant Salle de Bain |
+| `template` (UI) | Eco Prises Spy · Veille PC Bureau · Veille TV Chambre · Eco Prises Spy PC TV |
+| `zha` | 2 entrées (dongles SONOFF Zigbee 3.0 USB Dongle Plus V2) - Z2M reste le bus Zigbee principal (LXC) |
+| `homeassistant_sky_connect` · `otbr` · `thread` · `matter` | Home Assistant Connect ZBT-1 (OpenThread Border Router, Thread, Matter) |
+| `homekit_controller` | MRS100-6401 (Window Covering) |
+| `philips_js` · `dlna_dmr` | TV 70PUS7855/12 |
+| `dlna_dms` | Freebox Server |
+| `ipp` | Canon TS3300 series |
+| `cpuspeed` · `sun` · `ibeacon` · `go2rtc` · `cloud` | CPU Speed · Sun · iBeacon · go2rtc · Home Assistant Cloud |
+
+### Add-ons Supervisor (7 add-ons actifs - liste d'origine, non revérifiée le 2026-10-13 : Supervisor n'est pas lisible depuis les fichiers)
 
 > ⚠️ Zigbee2MQTT et MariaDB tournent sur LXC Proxmox (LXC 200 / LXC 201) - pas des add-ons HA.
 

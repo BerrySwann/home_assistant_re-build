@@ -17,13 +17,13 @@ Chaque vignette du dashboard possede sa propre documentation dans `docs/02_docs_
 
 ### Comment ca s'articule (en 3 phrases)
 
-Une donnee suit toujours le meme chemin : **capteur natif** (Zigbee2MQTT, Hue, Linky...) -> **sensor/template** (calcul, kWh, moyenne) -> **utility_meter** (cumul Annuel/Mensuel/Hebdo/Quotidien si besoin) -> **vignette dashboard**. Cote fiabilite, la prod Home Assistant fait toujours foi ; GitHub est une sauvegarde automatique de la prod ; ce depot local (`ReBuild/`) n'est qu'un poste de travail de correction, jamais une verite en soi. Si un jour vous cherchez pourquoi un fichier `.yaml` a un nom bizarre ou une bordure ASCII, c'est dans `CLAUDE.md` (local) - copie GitHub : [`docs/00_IA/IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE.md).
+Une donnee suit toujours le meme chemin : **capteur natif** (Zigbee2MQTT, Hue, Linky...) -> **sensor/template** (calcul, kWh, moyenne) -> **utility_meter** (cumul Annuel/Mensuel/Hebdo/Quotidien si besoin) -> **vignette dashboard**. Cote fiabilite, la prod Home Assistant fait toujours foi ; GitHub est une sauvegarde automatique de la prod ; ce depot local (`ReBuild/`) n'est qu'un poste de travail de correction, jamais une verite en soi. Si un jour vous cherchez pourquoi un fichier `.yaml` a un nom bizarre ou une bordure ASCII, c'est dans `CLAUDE.md` (local) - copie GitHub : [`docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md).
 
 | Document cle | Role |
 |---|---|
 | [`GLOBAL_INDEX_REPO.md`](./GLOBAL_INDEX_REPO.md) | Index unique - 6 sections (IA, config, dashboard, automations, scripts, systeme) - accordeon GitHub. *(4400+ lignes, prevoyez du cafe)* |
 | [`docs/05_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md`](./docs/05_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md) | Carte -> Template -> Sensor -> Utility Meter -> Source native - 18 vignettes |
-| [`IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE.md) | Regles de codage, nomenclature, arborescences - directives IA completes *(copie GitHub du CLAUDE.md local, prompt de Claude)* |
+| [`IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md) | Regles de codage, nomenclature, arborescences - directives IA completes *(copie GitHub du CLAUDE.md local, prompt de Claude)* |
 
 ---
 
@@ -31,7 +31,7 @@ Une donnee suit toujours le meme chemin : **capteur natif** (Zigbee2MQTT, Hue, L
 
 La configuration est regie par le fichier maitre :
 
-- 👉 **[`IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE.md)** - directives IA actives (nomenclature, hierarchie visuelle, regles de codage, arborescences) *(CLAUDE.md = version locale, prompt de Claude)*
+- 👉 **[`IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md)** - directives IA actives (nomenclature, hierarchie visuelle, regles de codage, arborescences) *(CLAUDE.md = version locale, prompt de Claude)*
 
 Developpee en collaboration avec **Claude (Anthropic)** pour garantir :
 
