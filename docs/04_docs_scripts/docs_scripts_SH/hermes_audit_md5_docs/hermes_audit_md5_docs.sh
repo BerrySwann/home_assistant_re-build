@@ -2,7 +2,7 @@
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ HERMES AUDIT MD5 DOCS — 3 NIVEAUX : PROD H: / LOCAL / GITHUB             │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-# Compare chaque fichier .md (docs/ + README + INDEX_GLOBAL) entre :
+# Compare chaque fichier .md (docs/ + README + GLOBAL_INDEX_REPO) entre :
 #   PROD (H:) · LOCAL (ReBuild) · GITHUB (curl raw URL)
 # Statuts : ✅ SYNC · ⚠️ CRLF (même contenu, fins de ligne) · ❌ DIFF · 🚫 ABSENT
 # Rapport : <ReBuild>/historique/hermes_md5_audit_docs_YYYY-MM-DD.txt
@@ -16,11 +16,11 @@
 # entrer en collision avec le rapport de Claude (md5_audit_docs_*.txt).
 #
 # ## 🧮 CALCUL & SOURCES :
-# - LOCAL  : $LOCAL_ROOT/docs/**/*.md + Github/README.md + Github/INDEX_GLOBAL.md
-# - PROD   : $PROD_ROOT/docs/**/*.md + README.md + INDEX_GLOBAL.md
+# - LOCAL  : $LOCAL_ROOT/docs/**/*.md + Github/README.md + docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md
+# - PROD   : $PROD_ROOT/docs/**/*.md + README.md + GLOBAL_INDEX_REPO.md
 # - GITHUB : curl raw https://raw.githubusercontent.com/.../main/<relpath>
 # - MD5 brut (octets exacts) + MD5 normalisé (CRLF->LF) pour la classification
-# - README/INDEX_GLOBAL : mapping local Github/ -> racine prod & GitHub
+# - README/GLOBAL_INDEX_REPO : mapping local Github/ -> racine prod & GitHub
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
 # - curl Windows n'écrit PAS dans /tmp (chemin MSYS) → utiliser un chemin
@@ -64,10 +64,10 @@ echo ""
 echo "── PASS 1 : TREE (local ReBuild) ─────────────────────────────────────────────"
 } > "$LOG"
 
-find "$LOCAL_ROOT/docs" -name "*.md" 2>/dev/null | sed "s|^$LOCAL_ROOT/||" | sort > "$TMP_TREE" || true
+find "$LOCAL_ROOT/docs" -name "*.md" -not -path "*/05_docs_MD_system/GLOBAL_INDEX_REPO/*" 2>/dev/null | sed "s|^$LOCAL_ROOT/||" | sort > "$TMP_TREE" || true
 # Fichiers racine : mapping local Github/ -> chemin repo
 [ -f "$LOCAL_ROOT/Github/README.md" ]      && echo "README.md" >> "$TMP_TREE"
-[ -f "$LOCAL_ROOT/Github/INDEX_GLOBAL.md" ] && echo "INDEX_GLOBAL.md" >> "$TMP_TREE"
+[ -f "$LOCAL_ROOT/docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md" ] && echo "GLOBAL_INDEX_REPO.md" >> "$TMP_TREE"
 
 TOTAL=$(wc -l < "$TMP_TREE")
 while IFS= read -r f; do echo "  $f"; done < "$TMP_TREE" >> "$LOG"
@@ -88,8 +88,12 @@ md5_both() {  # $1=fichier -> "brut normalise"
 while IFS= read -r rel; do
     # Mapping racine : Github/README.md (local) -> README.md (prod)
     case "$rel" in
-        README.md|INDEX_GLOBAL.md)
+        README.md)
             lf="$LOCAL_ROOT/Github/$rel"
+            pf="$PROD_ROOT/$rel"
+            ;;
+        GLOBAL_INDEX_REPO.md)
+            lf="$LOCAL_ROOT/docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md"
             pf="$PROD_ROOT/$rel"
             ;;
         *)

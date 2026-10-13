@@ -7,11 +7,11 @@
 ## Ce que c'est
 
 La navigation dashboard est indexee dans la section `02-DASHBOARD` de :
-- **Index principal** : `H:\Docs\INDEX_GLOBAL.md` (source de verite, rendu GitHub)
-- **Copie locale** : `ReBuild/Github/INDEX_GLOBAL.md`
+- **Index principal** : `H:\GLOBAL_INDEX_REPO.md` (source de verite, rendu GitHub)
+- **Copie locale** : `ReBuild/docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md`
 
 Il n'y a plus de fichier `INDEX_NAVIGATION_FULL.md` ni `INDEX_NAVIGATION.md` distinct -
-fusionnes dans INDEX_GLOBAL.md (2026-07-16).
+fusionnes dans GLOBAL_INDEX_REPO.md (2026-07-16).
 
 ---
 
@@ -34,7 +34,7 @@ Chemin prod dashboard : `H:\Docs\` (push depuis local)
 
 ---
 
-## Structure de l'index (section 02-DASHBOARD dans INDEX_GLOBAL.md)
+## Structure de l'index (section 02-DASHBOARD dans GLOBAL_INDEX_REPO.md)
 
 ```
 Niveau 1 : L*C* - LABEL | X page(s) | ~N entites       <- retracte par defaut
@@ -64,7 +64,7 @@ Niveau 1 : L*C* - LABEL | X page(s) | ~N entites       <- retracte par defaut
 | Fichiers sources YAML | `docs/sensors/\|templates/\|utility_meter/` |
 
 > ⚠️ Casse minuscule `docs/` depuis 2026-07-19 (renommage H:\Docs -> H:\docs + push GitHub).
-> Tous les liens INDEX_GLOBAL.md utilisent `docs/` minuscule (385 liens corriges).
+> Tous les liens GLOBAL_INDEX_REPO.md utilisent `docs/` minuscule (385 liens corriges).
 
 ---
 
@@ -93,6 +93,6 @@ Apres ajout/modification d'une vignette, page ou fichier source :
 
 1. Lire le YAML reel concerne (`docs/02_docs_dashboard/dashboard_docs_YAML/L*C*/`)
 2. Verifier chaque entite citee contre le YAML prod (`docs/`)
-3. Mettre a jour la section 02-DASHBOARD de `INDEX_GLOBAL.md` (local puis H:\Docs\)
+3. Mettre a jour la section 02-DASHBOARD de `GLOBAL_INDEX_REPO.md` (local puis racine de H:)
 4. Verifier la balance `<details>`/`</details>` et `<blockquote>`/`</blockquote>` avant push
 5. Mettre a jour `DEPENDANCES_GLOBALES.md` si necessaire (/sync_index)

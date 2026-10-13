@@ -1,5 +1,5 @@
 # 🌳 ARBORESCENCES COMPLÈTES & INDEX GITHUB
-*Dernière mise à jour : 2026-10-12 (soir, /histo S1 : relevés LOCAL + PROD + GitHub rafraîchis ; comptages LOCAL recalculés après le ménage des sauvegardes (108 renommées, 125 à la corbeille Windows) et la copie de 8 scripts de la prod en local ; dernier commit GitHub e8af1e4c)*
+*Derniere mise a jour : 2026-10-13 (corrections manuelles apres deplacement de INDEX_GLOBAL : lignes Github, 05_docs_MD_system et liens ; autres comptages du 2026-10-12) | precedent : 2026-10-12 (soir, /histo S1 : relevés LOCAL + PROD + GitHub rafraîchis ; comptages LOCAL recalculés après le ménage des sauvegardes (108 renommées, 125 à la corbeille Windows) et la copie de 8 scripts de la prod en local ; dernier commit GitHub e8af1e4c)*
 *Lire ce fichier si : audit fichiers, sync GitHub, recherche d'un fichier prod, vérification arbo locale, URLs raw GitHub.*
 
 ---
@@ -8,7 +8,7 @@
 
 | Contexte | Nom du dossier docs |
 |:---------|:--------------------|
-| Local ReBuild (Windows, insensible à la casse) | `docs/` ou `docs/` - indifférent |
+| Local ReBuild (Windows, insensible à la casse) | `Docs/` ou `docs/` - indifférent |
 | Prod H:\ (Windows, insensible à la casse) | `docs/` (renommé 2026-07-19, ex `Docs/`) |
 | **GitHub (case-sensitive)** | `docs/` (tout minuscule depuis 2026-07-19) |
 
@@ -29,7 +29,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 │   autounattend_FR.xml · z2m-backup.2.10.1.*.zip   (hors périmètre HA)
 ├── Claude md SAVE/                     (CLAUDE.md + ses sauvegardes/archives ; aucun CLAUDE.md a la racine)
 ├── TODO/                               (TODO.md - backlog projet)
-├── Github/                             (32 dont 30 sauvegardes - INDEX_GLOBAL.md · README.md, miroirs travail du repo)
+├── Github/                             (2 dont 1 sauvegarde - README.md ; INDEX_GLOBAL.md renomme GLOBAL_INDEX_REPO.md et deplace le 2026-10-13 vers docs/05_docs_MD_system/GLOBAL_INDEX_REPO/ = copie de travail ; meme fichier recopie a la racine de H: sous le meme nom, liens relatifs a la racine)
 ├── HTML/                               (65 - maquettes/captures)
 ├── prompt/ · Claude outputs/ · _old_avant_staging/ · energie/   (travaux et conteneurs)
 ├── Infra_Proxmox/                      (docs/proxmox|reseau|sonoff/ · scripts/ .sh+.ps1 · certificats/ .crt · journaux/ .log ; save/ vide)
@@ -42,7 +42,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
     ├── 02_docs_dashboard/              (250 - dashboard_docs_MD 96 · dashboard_docs_YAML 154)
     ├── 03_docs_automations/            (293 dont 162 sauvegardes - docs_automations_MD · docs_automations_YAML)
     ├── 04_docs_scripts/                (43 dont 17 sauvegardes - SH · SH_MD · YAML · YAML_MD)
-    ├── 05_docs_MD_system/              (28 dont 13 sauvegardes)
+    ├── 05_docs_MD_system/              (30 dont 15 sauvegardes - dont GLOBAL_INDEX_REPO/ 4 dont 3 sauvegardes, deplace de Github/ le 2026-10-13, menage fait)
     ├── 05_docs_skills/                 (18 - 14 dossiers skill_<nom>/ contenant la copie .md de chaque SKILL.md du projet, dont skill_histo/ ajouté le 2026-10-10 et skill_histo-final/ le 2026-10-11 ; histo.md existe aussi dans historique/ ; 4 sauvegardes)
     └── 06_docs_technique/              (2 dont 1 sauvegarde - 01_pont_hue_hacking/ : procédure de coupure du flux Hue Sync par l'API du pont, sans clé dans le fichier)
 ```
@@ -64,9 +64,9 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 ├── Fichiers racine :
 │   configuration.yaml · automations.yaml · scripts.yaml · scenes.yaml · secrets.yaml
 │   input_button.yaml · input_datetime.yaml · input_select.yaml · sql.yaml · ip_bans.yaml
-│   INDEX_GLOBAL.md · README.md · Dashboard_2026_10_04.yaml (export le plus récent)
+│   GLOBAL_INDEX_REPO.md (copie de navigation, 2026-10-13 ; remplace l'ancien INDEX_GLOBAL.md de la racine, retire le 2026-10-13) · README.md · Dashboard_2026_10_04.yaml (export le plus récent)
 │   .HA_VERSION · .gitignore · .ha_run.lock · home-assistant_v2.db · home-assistant.log.fault
-│   sauvegardes : automations.yaml.bak ×2 · INDEX_GLOBAL.md.bak ×2 · scripts.yaml.bak ×3
+│   sauvegardes : automations.yaml.bak ×2 · scripts.yaml.bak ×3
 │
 ├── .scripts/                           (6)
 │   ├── audit_md5_yaml.sh               (audit YAML)
@@ -130,7 +130,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 
 - **Repo actif unique** : `BerrySwann/home_assistant_re-build` (ancien `home-assistant-config` supprimé le 2026-04-27)
 - **Contenu** : reflet exact de `/homeassistant/` - pushé par `.scripts/ha_git_backup.sh` (boutons page Système L5C3)
-- **Point d'entrée navigation** : [INDEX_GLOBAL.md](https://github.com/BerrySwann/home_assistant_re-build/blob/main/INDEX_GLOBAL.md)
+- **Point d'entrée navigation** : [GLOBAL_INDEX_REPO.md](https://github.com/BerrySwann/home_assistant_re-build/blob/main/GLOBAL_INDEX_REPO.md) (copie de navigation a la racine, nom change le 2026-10-13 ; visible sur GitHub apres le prochain backup HA)
 - **Dernier relevé arbre (API git trees)** : 2026-10-12 - **1489 objets (fichiers + dossiers)** ; dernier commit `e8af1e4c` (2026-10-12 21:10 CEST, HAOS auto-backup: 2026-10-12 21:10:00 CEST, HA 2026.10.1)
 - Répartition : `docs/` 1194 · `templates/` 85 · `utility_meter/` 14 · `input_booleans/` 5 · `sensors/` 10
 
@@ -146,7 +146,7 @@ ReBuild/                                (C:\Users\Berry Swann\Documents\ReBuild\
 Exemples :
 - `https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/configuration.yaml`
 - `https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/templates/meteo/M_01_meteo_alertes_card.yaml`
-- `https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES_HERMES_V1.md`
+- `https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/docs/05_docs_MD_system/DEPENDANCES_GLOBALES_HERMES/DEPENDANCES_GLOBALES_HERMES_V1.md`
 
 ---
 

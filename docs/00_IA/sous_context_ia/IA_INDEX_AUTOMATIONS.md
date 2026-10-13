@@ -7,10 +7,10 @@
 ## Ce que c'est
 
 Les automations sont indexees dans la section `03-AUTOMATIONS` de :
-- **Index principal** : `H:\Docs\INDEX_GLOBAL.md` (source de verite, rendu GitHub)
-- **Copie locale** : `ReBuild/Github/INDEX_GLOBAL.md`
+- **Index principal** : `H:\GLOBAL_INDEX_REPO.md` (source de verite, rendu GitHub)
+- **Copie locale** : `ReBuild/docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md`
 
-Il n'y a plus de fichier `INDEX_AUTOMATIONS.md` distinct - fusionne dans INDEX_GLOBAL.md (2026-07-16).
+Il n'y a plus de fichier `INDEX_AUTOMATIONS.md` distinct - fusionne dans GLOBAL_INDEX_REPO.md (2026-07-16).
 
 ---
 
@@ -57,11 +57,11 @@ docs/03_docs_automations/
 | Raspberry Pi4 (archive) | 1 |
 
 > Comptages verifies programmatiquement (audit 2026-07-19).
-> "P1 Clim & Chauffage (11)" et "P3 Eclairage (8)" etaient faux dans INDEX_GLOBAL.md - corriges.
+> "P1 Clim & Chauffage (11)" et "P3 Eclairage (8)" etaient faux dans GLOBAL_INDEX_REPO.md - corriges.
 
 ---
 
-## Structure de l'index (section 03-AUTOMATIONS dans INDEX_GLOBAL.md)
+## Structure de l'index (section 03-AUTOMATIONS dans GLOBAL_INDEX_REPO.md)
 
 ```
 Niveau 1 : Categorie (nb automations | description)
@@ -90,7 +90,7 @@ Apres ajout/suppression/renommage d'une automation dans HA :
 
 1. Fetcher `automations.yaml` depuis GitHub (raw) ou lire `H:\automations.yaml`
 2. Identifier l'alias concerne
-3. Mettre a jour la section 03-AUTOMATIONS de `INDEX_GLOBAL.md`
+3. Mettre a jour la section 03-AUTOMATIONS de `GLOBAL_INDEX_REPO.md`
 4. Mettre a jour le compteur de la categorie dans le TOC
 5. Creer/archiver le fichier YAML correspondant dans `docs_automations_YAML/`
-6. Push `H:\Docs\INDEX_GLOBAL.md`
+6. Push `H:\GLOBAL_INDEX_REPO.md`

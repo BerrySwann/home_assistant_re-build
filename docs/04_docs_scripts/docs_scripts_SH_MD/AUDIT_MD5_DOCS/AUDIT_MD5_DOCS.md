@@ -10,7 +10,7 @@
 
 ## 📝 Description
 
-Compare chaque fichier `.md` (docs/ + README.md + INDEX_GLOBAL.md) entre trois niveaux :
+Compare chaque fichier `.md` (docs/ + README.md + GLOBAL_INDEX_REPO.md) entre trois niveaux :
 - **LOCAL** (`C:\Users\Berry Swann\Documents\ReBuild\docs\`)
 - **PROD** (`H:\docs\` - montage Samba HA)
 - **GITHUB** (`raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/`)
@@ -29,7 +29,7 @@ La comparaison neutralise l'écart CRLF/LF (local Windows = CRLF, prod H: et Git
 
 ### PASS 1 - TREE LOCAL
 Construit la liste des fichiers à auditer via `find` sur `$LOCAL_ROOT/docs/`.
-Ajoute les fichiers racine : `Github/README.md` → `README.md`, `Github/INDEX_GLOBAL.md` → `INDEX_GLOBAL.md`.
+Ajoute les fichiers racine : `Github/README.md` → `README.md`, `docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md` → `GLOBAL_INDEX_REPO.md`.
 
 ### PASS 2 - MD5 LOCAL + PROD
 Calcule pour chaque fichier le MD5 brut et le MD5 normalisé (CRLF→LF via `tr -d '\r'`).
@@ -50,7 +50,7 @@ Fichier tmp sur chemin Windows explicite (`cygpath -m "$LOCALAPPDATA/Temp"`) - l
 | **Docs automations** | `docs/03_docs_automations/**/*.md` |
 | **Docs scripts** | `docs/04_docs_scripts/**/*.md` |
 | **Docs système** | `docs/05_docs_MD_system/**/*.md` |
-| **Fichiers racine** | `Github/README.md` + `Github/INDEX_GLOBAL.md` (mappés vers racine prod/repo) |
+| **Fichiers racine** | `Github/README.md` + `docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md` (mappés vers racine prod/repo) |
 
 ---
 

@@ -189,5 +189,5 @@ echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 docs terminé : $TOTAL fichi
 #              S'exécute sur Windows (git-bash), pas sur HA.
 #              Garde le nom + le log md5_audit_md_yaml_* (compatibilité carte L5C3).
 # [2026-08-09] Extension périmètre : tout docs/ sans exclusion (.md + .yaml + .sh)
-#              PASS 1 : find unique sur docs/ avec 3 extensions. Suppression case README/INDEX_GLOBAL.
+#              PASS 1 : find unique sur docs/ avec 3 extensions. Suppression case README/GLOBAL_INDEX_REPO.
 #              Résumé distingue les 3 types (TOTAL_MD / TOTAL_YAML / TOTAL_SH).

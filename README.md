@@ -21,8 +21,8 @@ Une donnee suit toujours le meme chemin : **capteur natif** (Zigbee2MQTT, Hue, L
 
 | Document cle | Role |
 |---|---|
-| [`INDEX_GLOBAL.md`](./INDEX_GLOBAL.md) | Index unique - 6 sections (IA, config, dashboard, automations, scripts, systeme) - accordeon GitHub. *(3900+ lignes, prevoyez du cafe)* |
-| [`docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md`](./docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md) | Carte -> Template -> Sensor -> Utility Meter -> Source native - 18 vignettes |
+| [`GLOBAL_INDEX_REPO.md`](./GLOBAL_INDEX_REPO.md) | Index unique - 6 sections (IA, config, dashboard, automations, scripts, systeme) - accordeon GitHub. *(4400+ lignes, prevoyez du cafe)* |
+| [`docs/05_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md`](./docs/05_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md) | Carte -> Template -> Sensor -> Utility Meter -> Source native - 18 vignettes |
 | [`IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE.md) | Regles de codage, nomenclature, arborescences - directives IA completes *(copie GitHub du CLAUDE.md local, prompt de Claude)* |
 
 ---
@@ -211,7 +211,7 @@ docs/
 │   ├── config_system_YAML/         <- YAML config HA (source -> /homeassistant/)
 │   └── config_system_MD/           <- documentation configuration.yaml
 ├── 02_docs_dashboard/
-│   ├── dashboard_docs_MD/          <- docs 18 vignettes + DEPENDANCES_GLOBALES
+│   ├── dashboard_docs_MD/          <- docs 18 vignettes
 │   └── dashboard_docs_YAML/        <- YAML vignettes/pages + Dashboard_COMPLET/
 ├── 03_docs_automations/
 │   ├── docs_automations_MD/        <- docs par automation
@@ -221,7 +221,9 @@ docs/
 │   ├── docs_scripts_SH_MD/         <- docs scripts bash
 │   ├── docs_scripts_YAML/          <- scripts HA YAML
 │   └── docs_scripts_YAML_MD/       <- docs scripts HA
-└── 05_docs_MD_system/              <- MOC, templates, index entites
+├── 05_docs_MD_system/              <- DEPENDANCES_GLOBALES, GLOBAL_INDEX_REPO, index entites, templates
+├── 05_docs_skills/                 <- copies des SKILL.md du projet (un dossier skill_<nom>/ par skill)
+└── 06_docs_technique/              <- procedures techniques (ex : pont Hue)
 ```
 
 ---
@@ -234,7 +236,6 @@ Le depot est maintenu depuis un **dossier de travail local** (`C:\Users\Berry Sw
 ReBuild/
 ├── CLAUDE.md                   <- directives IA (source de verite)
 ├── Github/
-│   ├── INDEX_GLOBAL.md         <- index unique 6 sections (accordeon GitHub)
 │   └── README.md
 ├── docs/                       <- toute la documentation + YAML de travail
 ├── historique/                 <- journaux de session

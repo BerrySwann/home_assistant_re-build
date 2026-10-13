@@ -12,11 +12,11 @@
 # depuis le PC (quand il est allumé).
 #
 # ## 🧮 CALCUL & SOURCES :
-# - LOCAL  : $LOCAL_ROOT/docs/**/*.md + Github/README.md + Github/INDEX_GLOBAL.md
-# - PROD   : $PROD_ROOT/docs/**/*.md + README.md + INDEX_GLOBAL.md
+# - LOCAL  : $LOCAL_ROOT/docs/**/*.md + Github/README.md + docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md
+# - PROD   : $PROD_ROOT/docs/**/*.md + README.md + GLOBAL_INDEX_REPO.md
 # - GITHUB : curl raw https://raw.githubusercontent.com/.../main/docs/<relpath>
 # - MD5 brut (octets exacts) + MD5 normalisé (CRLF->LF)
-# - README/INDEX_GLOBAL : mapping local Github/ -> racine prod & repo
+# - README/GLOBAL_INDEX_REPO : mapping local Github/ -> racine prod & repo
 #
 # ## 📊 FORMAT LISIBLE (1er coup d'œil) :
 #   FICHIER | L↔P | P↔R | L↔R | DÉTAIL
@@ -68,10 +68,10 @@ echo ""
 echo "── PASS 1 : TREE (local ReBuild = SOURCE DE VÉRITÉ) ──────────────────────────"
 } > "$LOG"
 
-find "$LOCAL_ROOT/docs" -name "*.md" 2>/dev/null | sed "s|^$LOCAL_ROOT/||" | sort > "$TMP_TREE" || true
+find "$LOCAL_ROOT/docs" -name "*.md" -not -path "*/05_docs_MD_system/GLOBAL_INDEX_REPO/*" 2>/dev/null | sed "s|^$LOCAL_ROOT/||" | sort > "$TMP_TREE" || true
 # Fichiers racine : mapping local Github/ -> chemin repo
 [ -f "$LOCAL_ROOT/Github/README.md" ]      && echo "README.md" >> "$TMP_TREE"
-[ -f "$LOCAL_ROOT/Github/INDEX_GLOBAL.md" ] && echo "INDEX_GLOBAL.md" >> "$TMP_TREE"
+[ -f "$LOCAL_ROOT/docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md" ] && echo "GLOBAL_INDEX_REPO.md" >> "$TMP_TREE"
 
 TOTAL=$(wc -l < "$TMP_TREE")
 while IFS= read -r f; do echo "  $f"; done < "$TMP_TREE" >> "$LOG"
@@ -91,8 +91,12 @@ md5_both() {  # $1=fichier -> "brut normalise"
 
 while IFS= read -r rel; do
     case "$rel" in
-        README.md|INDEX_GLOBAL.md)
+        README.md)
             lf="$LOCAL_ROOT/Github/$rel"
+            pf="$PROD_ROOT/$rel"
+            ;;
+        GLOBAL_INDEX_REPO.md)
+            lf="$LOCAL_ROOT/docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md"
             pf="$PROD_ROOT/$rel"
             ;;
         *)
