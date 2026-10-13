@@ -3,7 +3,7 @@
 > `ReBuild/docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md` et `D:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres
 > toute mise a jour, verifier que les trois empreintes md5 sont egales. Il ne depend d'aucun agent
 > en particulier.
-> Derniere mise en conformite : 2026-10-10 (3 copies identiques, voir ci-dessus). Rappel du
+> Derniere mise en conformite : 2026-10-13 (3 copies identiques, voir ci-dessus). Rappel du
 > 2026-10-04 : la copie `D:\` avait ete retrouvee perimee (version du 2026-07-19, encore l'ancienne
 > REGLE ABSOLUE) et realignee ce jour-la - ancienne version conservee en
 > `D:\docs\00_IA\IA_CONTEXT_BASE_2026-07-19_15h46.md`.
@@ -168,6 +168,7 @@ Regles : lecture seule sur H: et sur les YAML locaux ; le script n'ecrit que les
 - `/ha_push_md` → pousse uniquement les fichiers `*.md` de `docs/` vers `H:\Docs\`.
 - `/ha_resync_docs` → resynchronise `docs/` depuis GitHub (audit MD5).
 - `/trigul` → triangulation MD5 des docs (local vs prod vs GitHub), rapport dans `historique\MD5\`. Inclut l'etape profonde automations/scripts et les categories HA (voir PROTOCOLE TRIGUL PROFOND).
+> Chaque `push_*` met aussi a jour le `.md` du fichier pousse (voir SOURCE DE VERITE).
 
 ## PROTOCOLE FIN DE SESSION (OBLIGATOIRE)
 
@@ -193,19 +194,13 @@ Les 2 dernieres actions avant de fermer la session, dans cet ordre :
 
 ---
 
-## ⚠️ SOURCES DE VÉRITÉ
+## ⚠️ SOURCE DE VÉRITÉ
 
-> ⚠️ Deux cascades distinctes selon le type de fichier.
+> Regle du 2026-10-13, unique et sans exception (remplace toutes les anciennes cascades de sources de verite) :
 
-### 🔧 YAML (config HA) - cascade PROD → LOCAL
-
-| Priorité | Source | Rôle |
-|:---------|:-------|:-----|
-| **1** | **Home Assistant (live)** | Prod = référence absolue |
-| **2** | **GitHub `home_assistant_re-build`** | Reflet prod - backup git auto depuis HA |
-| **3** | **Local `ReBuild/`** | Poste de travail - corrections/modifications YAML |
-
-Sens : **prod → GitHub → local**. Le local doit converger vers prod. Une fois les corrections terminées dans `docs/`, l'état local doit être équivalent à prod (validé par audit MD5).
+1. A partir du 2026-10-13, chaque fichier est modifie depuis le LOCAL (`ReBuild/`) : le local est la source de verite unique.
+2. Aucun fichier n'est modifie en prod (`H:\`, `D:\`) sans que le local ait d'abord ete modifie.
+3. Chaque `push_*` (`/ha_push_yaml`, `/ha_push_docs`, `/ha_push_md`) met systematiquement a jour le `.md` (la fiche) du fichier pousse : `docs_automations_MD`, `docs_scripts_YAML_MD`, `docs_scripts_SH_MD`, `dashboard_docs_MD`.
 
 **Workflow de modification (depuis le 2026-10-04)** : on ne modifie plus un fichier directement
 en prod (H:\). On edite la copie LOCALE (`docs/01_docs_config_system/config_system_YAML/`,
@@ -264,19 +259,14 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
   reecriture (sauvegarde locale uniquement). Apres reecriture, resynchroniser les 3 copies et
   verifier leur MD5.
 
-### 📄 DOCS (.md + .yaml dashboard) - LOCAL = source de vérité
+### 📄 DOCS (.md + .yaml dashboard) - emplacements
 
-> Deux types de fichiers couverts par cette cascade :
+> Deux types de fichiers :
 > - `.md` : `docs/02_docs_dashboard/dashboard_docs_MD/` · `docs/03_docs_automations/docs_automations_MD/` · `docs/04_docs_scripts/docs_scripts_YAML_MD/` · `docs/04_docs_scripts/docs_scripts_SH_MD/` · etc.
 > - `.yaml` dashboard : `docs/02_docs_dashboard/dashboard_docs_YAML/` (vignettes, pages, cartes, Dashboard_COMPLET)
 
-| Priorité | Source | Rôle |
-|:---------|:-------|:-----|
-| **1** | **Local `ReBuild/docs/`** | Source de vérité absolue - authoring et modifications ici |
-| **2** | **`H:\Docs\`** | Copie pushée depuis local - ne jamais modifier directement |
-| **3** | **GitHub `home_assistant_re-build`** | Backup via git auto depuis HA |
+Copie de prod : `H:\Docs\` (poussee depuis le local, ne jamais la modifier directement). GitHub `home_assistant_re-build` : backup via git auto depuis HA, reflet de la prod.
 
-Sens : **local → H:\Docs\ → GitHub**. En cas de conflit, local l'emporte toujours.
 `H:\Docs\` (racine, hors `01_docs_config_system\config_system_YAML\`) ne contient QUE des .md, histo et yaml Dashboard - **jamais de YAML config HA**.
 `H:\docs\01_docs_config_system\config_system_YAML\` est l'image locale miroir de la config YAML de prod (sensors, templates, utility_meter, command_line, groups, input_booleans, shell_command, themes, blueprints) - alimentee par resync GitHub (`ha-resync-docs`) et par les push normaux (`ha-push-yaml`). Exception documentee a la regle ci-dessus, pas une contradiction.
 
@@ -311,8 +301,8 @@ Sens : **local → H:\Docs\ → GitHub**. En cas de conflit, local l'emporte tou
 
 > ⚠️ Mis a jour le 2026-10-04 : ce protocole date d'avant le workflow local-first. Depuis,
 > pour `config_system_YAML/`, le sens d'ecriture est LOCAL -> H:\ (via `ha-push-yaml`) -> GitHub
-> (auto-backup HA). "HA = verite" plus bas ne veut donc plus dire "editer en direct sur H:\",
-> mais "H:\ est l'etat de reference une fois le push fait" - le local reste le point d'edition.
+> (auto-backup HA). Le local est la source de verite (voir SOURCE DE VERITE) ;
+> H:\ est l'etat pousse.
 > Un ecart LOCAL vs GitHub aujourd'hui signifie le plus souvent un push local -> H:\ pas encore
 > fait (ou pas encore remonte par l'auto-backup HA vers GitHub), pas un oubli d'extraction
 > depuis HA.
