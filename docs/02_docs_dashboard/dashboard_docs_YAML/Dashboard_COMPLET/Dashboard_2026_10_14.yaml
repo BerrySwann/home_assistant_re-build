@@ -2732,15 +2732,17 @@ views:
               columns: 12
               rows: 2
             visibility:
-              - condition: state
-                entity: binary_sensor.detecteur_de_fuite_ikea_water_leak
-                state: 'on'
-              - condition: state
-                entity: binary_sensor.detecteur_de_fuite_ikea_water_leak
-                state: unavailable
-              - condition: state
-                entity: binary_sensor.detecteur_de_fuite_ikea_water_leak
-                state: unknown
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity: binary_sensor.detecteur_de_fuite_ikea_water_leak
+                    state: 'on'
+                  - condition: state
+                    entity: binary_sensor.detecteur_de_fuite_ikea_water_leak
+                    state: unavailable
+                  - condition: state
+                    entity: binary_sensor.detecteur_de_fuite_ikea_water_leak
+                    state: unknown
             layout: vertical
             card_mod:
               style: |
@@ -2749,146 +2751,121 @@ views:
                   box-shadow: none !important;
                   border: none !important;
                 }
-          - type: custom:bubble-card
-            card_type: separator
-            name: Personne(s)
-            icon: mdi:account-group
-            card_layout: normal
-            rows: 1
-            styles: |
-              .bubble-line {
-                background: var(--primary-text-color);
-                opacity: 0.8;
-              }
-              .bubble-sub-button {
-                background-color: ${
-                  hass.states['sensor.etat_wifi_maison'].state === '2'
-                    ? 'darkgreen'
-                    : (hass.states['sensor.etat_wifi_maison'].state === 'Eric' ||
-                       hass.states['sensor.etat_wifi_maison'].state === 'Mamour')
-                      ? 'darkorange'
-                      : 'grey'
-                } !important;
-                color: gainsboro !important;
-              }
-
-              ha-card {
-                margin-top: 20px !important;
-              }
-            sub_button:
-              - entity: sensor.etat_wifi_maison
-                show_last_changed: false
-                show_state: true
-                show_icon: true
-                icon: mdi:home
-                show_attribute: false
-                show_name: true
-                name: Maison
-          - type: custom:bubble-card
-            card_type: button
-            button_type: state
-            entity: device_tracker.poco
-            show_name: true
-            show_last_changed: true
-            show_attribute: false
-            card_layout: normal
-            layout_options:
-              grid_columns: 2
-              grid_rows: 1
-            show_state: false
-            sub_button:
-              main:
-                - entity: person.eric
-                  show_state: false
-                  show_icon: true
-                  show_background: true
-                  show_attribute: false
-                  attribute: entity_picture
-              bottom: []
-            styles: >-
-              ha-card {
-                --bubble-icon-background-color: black !important;
-              }
-
-              .bubble-sub-button {
-                background-color: black !important;
-              }
-
-              .bubble-button-background {
-                background-color: ${ state === 'home' ? 'green' : '' } !important;
-              }
-
-              .bubble-icon,
-
-              .bubble-sub-button > ha-icon {
-                color: ${ state === 'home' ? 'darkgreen' : '' } !important;
-              }
-
-              ${subButtonIcon[0].setAttribute("icon", state === 'home' ?
-              'mdi:home' : '')}
-          - type: custom:bubble-card
-            card_type: button
-            button_type: state
-            entity: device_tracker.mamour
-            name: Mamour
-            show_name: true
-            show_last_changed: true
-            show_attribute: false
-            card_layout: normal
-            layout_options:
-              grid_columns: 2
-              grid_rows: 1
-            show_state: false
-            sub_button:
-              main:
-                - entity: person.mamour
-                  show_state: false
-                  show_icon: true
-                  show_background: true
-                  show_attribute: false
-                  attribute: entity_picture
-              bottom: []
-            styles: |-
-              ha-card {
-                --bubble-icon-background-color: black !important;
-              }
-              .bubble-sub-button {
-                background-color: black !important;
-              }
-              .bubble-button-background {
-                background-color:
-                  ${ state === 'home'
-                    ? 'darkgreen'
-                    : state === 'not_home'
-                      ? 'rgb(255, 103, 0)'
-                      : ['LECLERC','MONOPRIX','AUCHAN'].concat(['ANITA','KIPUE']).includes(state)
-                        ? 'rgb(0, 102, 204)'
-                        : 'grey'
-                  } !important;
-              }
-              .bubble-icon,
-              .bubble-sub-button > ha-icon {
-                color:
-                  ${ state === 'home'
-                    ? 'darkgreen'
-                    : state === 'not_home'
-                      ? 'rgb(255, 103, 0)'
-                      : ['LECLERC','MONOPRIX','AUCHAN'].concat(['ANITA','KIPUE']).includes(state)
-                        ? 'rgb(0, 102, 204)'
-                        : 'grey'
-                  } !important;
-              }
-              ${subButtonIcon[0].setAttribute("icon",
-                state === 'home'
-                  ? 'mdi:home'
-                  : state === 'not_home'
-                    ? 'mdi:home-off'
-                    : ['LECLERC','MONOPRIX','AUCHAN'].includes(state)
-                      ? 'mdi:basket-check'
-                      : ['ANITA','KIPUE'].includes(state)
-                        ? 'mdi:map-marker'
-                        : 'mdi:crosshairs-question'
-              )}
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: separator
+                name: Personne(s)
+                icon: mdi:account-group
+                card_layout: normal
+                rows: 0.8
+                styles: |
+                  .bubble-line {
+                    background: var(--primary-text-color);
+                    opacity: 0.8;
+                  }
+                  .bubble-sub-button {
+                    background-color: ${
+                      hass.states['sensor.etat_wifi_maison'].state === '2'
+                        ? 'darkgreen'
+                        : (hass.states['sensor.etat_wifi_maison'].state === 'Eric' ||
+                           hass.states['sensor.etat_wifi_maison'].state === 'Mamour')
+                          ? 'darkorange'
+                          : 'grey'
+                    } !important;
+                    color: gainsboro !important;
+                  }
+                  ha-card {
+                    margin-top: 20px !important;
+                  }
+                sub_button:
+                  main:
+                    - entity: sensor.etat_wifi_maison
+                      show_icon: true
+                      icon: mdi:home
+                      show_name: true
+                      name: Maison
+                      state_content: state
+                  bottom: []
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: device_tracker.poco
+                    show_name: true
+                    card_layout: normal
+                    layout_options:
+                      grid_columns: 2
+                      grid_rows: 1
+                    sub_button:
+                      main:
+                        - entity: person.eric
+                          show_icon: true
+                          show_background: true
+                      bottom: []
+                    styles: |-
+                      ha-card {
+                        --bubble-icon-background-color: black !important;
+                      }
+                      .bubble-sub-button {
+                        background-color: black !important;
+                      }
+                      .bubble-button-background {
+                        background-color: ${state === 'home' ? 'darkgreen' : 'grey'} !important;
+                      }
+                      .bubble-icon,
+                      .bubble-sub-button > ha-icon {
+                        color: ${state === 'home' ? 'darkgreen' : 'grey'} !important;
+                      }
+                    state_content: last_changed
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: device_tracker.mamour
+                    name: Mamour
+                    show_name: true
+                    card_layout: normal
+                    layout_options:
+                      grid_columns: 2
+                      grid_rows: 1
+                    sub_button:
+                      main:
+                        - entity: person.mamour
+                          show_icon: true
+                          show_background: true
+                      bottom: []
+                    styles: |-
+                      ha-card {
+                        --bubble-icon-background-color: black !important;
+                      }
+                      .bubble-sub-button {
+                        background-color: black !important;
+                      }
+                      .bubble-button-background {
+                        background-color: ${
+                          state === 'home'
+                            ? 'darkgreen'
+                            : state === 'not_home'
+                              ? 'rgb(255, 103, 0)'
+                              : ['LECLERC', 'MONOPRIX', 'AUCHAN', 'ANITA', 'KIPUE'].includes(state)
+                                ? 'rgb(0, 102, 204)'
+                                : 'grey'
+                        } !important;
+                      }
+                      .bubble-icon,
+                      .bubble-sub-button > ha-icon {
+                        color: ${
+                          state === 'home'
+                            ? 'darkgreen'
+                            : state === 'not_home'
+                              ? 'rgb(255, 103, 0)'
+                              : ['LECLERC', 'MONOPRIX', 'AUCHAN', 'ANITA', 'KIPUE'].includes(state)
+                                ? 'rgb(0, 102, 204)'
+                                : 'grey'
+                        } !important;
+                      }
+                    state_content: last_changed
           - square: false
             type: grid
             cards:
