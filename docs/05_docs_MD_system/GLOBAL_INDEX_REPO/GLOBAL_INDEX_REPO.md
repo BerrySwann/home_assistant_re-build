@@ -586,11 +586,26 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 </details>
 
 <details>
-<summary><code>M_02_meteo_vent_vence_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_02_meteo_vent_vence_card.yaml">voir fichier</a></summary>
+<summary><code>M_02_meteo_direction_vent_vence_deg_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_02_meteo_vent/M_02_meteo_direction_vent_vence_deg_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>weather.vence</code> - <i>HACS - MeteoFrance weather card (pas Natif HA core)</i></li>
 </ul></blockquote>
 </details>
+
+<details>
+<summary><code>M_02_meteo_direction_vent_vence_label_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_02_meteo_vent/M_02_meteo_direction_vent_vence_label_card.yaml">voir fichier</a></summary>
+<blockquote><ul>
+<li><code>weather.vence</code> - <i>HACS - MeteoFrance weather card (pas Natif HA core)</i></li>
+</ul></blockquote>
+</details>
+
+<details>
+<summary><code>M_02_meteo_vitesse_vent_vence_kmh_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_02_meteo_vent/M_02_meteo_vitesse_vent_vence_kmh_card.yaml">voir fichier</a></summary>
+<blockquote><ul>
+<li><code>weather.vence</code> - <i>HACS - MeteoFrance weather card (pas Natif HA core)</i></li>
+</ul></blockquote>
+</details>
+
 
 <details>
 <summary><code>M_04_tendances_th_est_humidity_card.yaml</code> - 1 entité(s) - <a href="templates/meteo/M_04_meteo_tendances/M_04_tendances_th_est_humidity_card.yaml">voir fichier</a></summary>
@@ -1823,7 +1838,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <details>
 <summary>📄 <b>Page Gauche</b></summary>
 <blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C1_ECLAIRAGE/02_page/PAGE_ECLAIRAGE.md">Doc Page</a><br>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C1_ECLAIRAGE/02_page_gauche/PAGE_ECLAIRAGE_GAUCHE.md">Doc Page</a><br>
 ⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/02_page_gauche/page_L3C1_eclairage_gauche.yaml">YAML Page</a>
 
 
@@ -1871,7 +1886,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <details>
 <summary>📄 <b>Page Droite</b> - 3 pop-up(s)</summary>
 <blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C1_ECLAIRAGE/02_page/PAGE_ECLAIRAGE.md">Doc Page</a><br>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C1_ECLAIRAGE/03_page_droite/PAGE_ECLAIRAGE_DROITE.md">Doc Page</a><br>
 ⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/03_page_droite/page_L3C1_eclairage_droite.yaml">YAML Page</a>
 
 
@@ -2389,7 +2404,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <details>
 <summary>📄 <b>Page Gauche</b></summary>
 <blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C3_MAJ_HA/02_page/PAGE_MAJ.md">Doc Page</a><br>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C3_MAJ_HA/02_page_gauche/PAGE_MAJ_GAUCHE.md">Doc Page</a><br>
 ⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/02_page_gauche/page_L4C3_maj_ha_gauche.yaml">YAML Page</a>
 
 
@@ -2416,7 +2431,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <details>
 <summary>📄 <b>Page Droite</b></summary>
 <blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C3_MAJ_HA/02_page/PAGE_MAJ.md">Doc Page</a><br>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C3_MAJ_HA/03_page_droite/PAGE_MAJ_DROITE.md">Doc Page</a><br>
 ⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/03_page_droite/page_L4C3_maj_ha_droite.yaml">YAML Page</a>
 
 
@@ -2494,13 +2509,12 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <details>
 <summary><i>Entités natives HA / intégrations externes (32)</i></summary>
 <blockquote><ul>
-<li><code>sensor.boutton_salle_de_bain_hue_battery</code></li>
 <li><code>sensor.contact_fenetre_bureau_sonoff_battery</code></li>
 <li><code>sensor.contact_fenetre_chambre_sonoff_battery</code></li>
 <li><code>sensor.contact_fenetre_cuisine_sonoff_battery</code></li>
 <li><code>sensor.contact_fenetre_salon_sonoff_battery</code></li>
 <li><code>sensor.detecteur_de_fuite_ikea_battery</code></li>
-<li><code>sensor.detecteur_vallhorn_battery</code></li>
+<li><code>sensor.detecteur_ikea_vallhorn_battery</code></li>
 <li><code>sensor.hue_smart_button_bureau_batterie</code></li>
 <li><code>sensor.hue_smart_button_chambre_batterie</code></li>
 <li><code>sensor.hue_smart_button_chambre_eric_batterie</code></li>
@@ -2510,14 +2524,15 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <li><code>sensor.hue_smart_button_eco_batterie</code></li>
 <li><code>sensor.hue_smart_button_entee_1_batterie</code></li>
 <li><code>sensor.hue_smart_button_entee_2_batterie</code></li>
+<li><code>sensor.hue_smart_button_salle_de_bain_batterie</code></li>
 <li><code>sensor.hue_smart_button_table_batterie</code></li>
 <li><code>sensor.inter_bureau_rodret_battery</code></li>
 <li><code>sensor.inter_soufflant_salle_de_bain_ikea_rodret_battery</code></li>
 <li><code>sensor.inter_salon_4_ikea_battery</code></li>
 <li><code>sensor.inter_somrig_battery</code></li>
-<li><code>sensor.inter_tv_chambre_ikea_rodret_battery</code></li>
 <li><code>sensor.porte_congel_battery</code></li>
-<li><code>sensor.poussoir_ikea_tradfri_battery</code></li>
+<li><code>sensor.poussoir_pc_ikea_tradfri_battery</code></li>
+<li><code>sensor.poussoir_tv_ikea_tradfri_battery</code></li>
 <li><code>sensor.th_balcon_nord_battery</code></li>
 <li><code>sensor.th_bureau_battery</code></li>
 <li><code>sensor.th_cellier_battery</code></li>
@@ -2591,7 +2606,7 @@ le total ~49.
 <details>
 <summary>📄 <b>Page Gauche</b></summary>
 <blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/02_page/PAGE_BATTERIES_PORTABLES.md">Doc Page</a><br>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/02_page_gauche/PAGE_BATTERIES_PORTABLES_GAUCHE.md">Doc Page</a><br>
 ⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/02_page_gauche/page_L5C2_batteries_portables_gauche.yaml">YAML Page</a>
 
 
@@ -2642,7 +2657,7 @@ le total ~49.
 <details>
 <summary>📄 <b>Page Droite</b></summary>
 <blockquote>
-📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/02_page/PAGE_BATTERIES_PORTABLES.md">Doc Page</a><br>
+📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/03_page_droite/PAGE_BATTERIES_PORTABLES_DROITE.md">Doc Page</a><br>
 ⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/03_page_droite/page_L5C2_batteries_portables_droite.yaml">YAML Page</a>
 
 

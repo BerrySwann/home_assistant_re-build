@@ -139,7 +139,7 @@ card_mod:
 | `sensor.hue_smart_button_cuisine_batterie` | Cuisine |
 | `sensor.hue_smart_button_couloir_batterie` | Couloir |
 | `sensor.hue_smart_button_bureau_batterie` | Bureau |
-| `sensor.boutton_salle_de_bain_hue_battery` | SDB |
+| `sensor.hue_smart_button_salle_de_bain_batterie` | SDB |
 | `sensor.hue_smart_button_chambre_batterie` | Chambre |
 | `sensor.hue_smart_button_chambre_gege_batterie` | Chambre Gege |
 | `sensor.hue_smart_button_chambre_eric_batterie` | Chambre Eric |
@@ -155,13 +155,13 @@ card_mod:
 
 | Entité | Type |
 |--------|------|
-| `sensor.inter_tv_chambre_ikea_rodret_battery` | Inter RODRET chambre TV |
+| `sensor.poussoir_tv_ikea_tradfri_battery` | Poussoir TV chambre |
 | `sensor.inter_bureau_rodret_battery` | Inter RODRET bureau |
 | `sensor.inter_somrig_battery` | Inter SOMRIG |
 | `sensor.inter_salon_4_ikea_battery` | Inter salon |
 | `sensor.detecteur_de_fuite_ikea_battery` | Détecteur de fuite |
-| `sensor.detecteur_vallhorn_battery` | Détecteur VALLHORN |
-| `sensor.poussoir_ikea_tradfri_battery` | Poussoir TRADFRI |
+| `sensor.detecteur_ikea_vallhorn_battery` | Détecteur VALLHORN |
+| `sensor.poussoir_pc_ikea_tradfri_battery` | Poussoir PC bureau |
 | `sensor.inter_soufflant_salle_de_bain_ikea_rodret_battery` | Inter soufflant SDB |
 
 ---
