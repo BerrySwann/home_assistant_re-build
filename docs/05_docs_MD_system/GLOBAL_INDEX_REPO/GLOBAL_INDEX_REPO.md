@@ -1,6 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-10-13 (soir, /histo S1) - entrées ajoutées pour les index générés GLOBAL_INDEX_IA, GLOBAL_INDEX_VIGNETTES_PAGES, GLOBAL_INDEX_AUTOMATIONS, GLOBAL_INDEX_SCRIPTS_SH et GLOBAL_INDEX_SCRIPTS_YAML et pour 6 scripts python d'index (docs_scripts_SH), tous locaux et non poussés en prod ; compteurs existants non modifiés*
 *Dernière mise à jour : 2026-10-12 (soir, /histo S1) - 6 scripts HA (audit_md5, audit_md5_md_yaml, j_1_1, j_1_2, j_1_3, j_2_0) et 2 scripts shell (audit_md5_yaml.sh, mf_vigilance_images.sh) copiés de la prod en local, sans fiche Doc ; liens des scripts YAML corriges apres le regroupement en sous-dossiers Climatisation et Soufflant SDB (20h12) ; compteurs scripts recomptés (SH 5, YAML 9) ; description de l'automation G corrigée en prod*
 *Dernière mise à jour : 2026-10-11 (soir, /histo S3) - lettres des automations SDB alignees en prod (H:\automations.yaml, A B C D E F G H Z, entity_id inchanges), dossier L0C0_PAGE_Home (PAGE_Home (L0C0) renomme), skills histo-final et ha-push-docs modifies ; les fiches CARD_*_HOME de la page Home ne sont pas indexees ici (la section 02 ne liste que les 18 vignettes)*
 *Dernière mise à jour : 2026-10-11 (après-midi) - dashboard_docs_MD et dashboard_docs_YAML : un sous-dossier 01_vignette et 02_page (02_page_nom si plusieurs pages) par dossier LxCy, PAGE_Home et PAGE_RASPI ; 148 fichiers deplaces, 42 liens corriges*
@@ -29,6 +30,14 @@
 <summary><b>IA_CONTEXT_BASE.md</b> &nbsp;|&nbsp; Base de contexte expert HA (résumé principal)</summary>
 <blockquote>
 📄 <a href="docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>GLOBAL_INDEX_IA.md</b> &nbsp;|&nbsp; Index généré des fichiers de docs/00_IA (qui s'en sert, but, quand les lire, MD5 prod) - local, non poussé en prod</summary>
+<blockquote>
+📄 <a href="docs/00_IA/GLOBAL_INDEX_IA.md">Doc</a><br>
+⚙️ <a href="docs/04_docs_scripts/docs_scripts_SH/gen_global_index_ia/gen_global_index_ia.py">Générateur</a> (régénéré à chaque /histo, ne pas modifier à la main)
 </blockquote>
 </details>
 
@@ -117,6 +126,14 @@
 ---
 
 <details>
+<summary><b>GLOBAL_INDEX_VIGNETTES_PAGES.md</b> &nbsp;|&nbsp; Index généré des vignettes et des pages du dashboard - local, non poussé en prod</summary>
+<blockquote>
+📄 <a href="docs/02_docs_dashboard/GLOBAL_INDEX_VIGNETTES_PAGES.md">Doc</a><br>
+⚙️ <a href="docs/04_docs_scripts/docs_scripts_SH/gen_global_index_vignettes_pages/gen_global_index_vignettes_pages.py">Générateur</a> (régénéré à chaque /histo, ne pas modifier à la main)
+</blockquote>
+</details>
+
+<details>
 <summary><b>L1C1 - MÉTÉO</b> &nbsp;|&nbsp; 1 page(s) &nbsp;|&nbsp; ~31 entités produites (+17 natives, corrigé 2026-07-19)</summary>
 <blockquote>
 
@@ -124,7 +141,7 @@
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L1C1_METEO/01_vignette/L1C1_VIGNETTE_METEO.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/vignette_L1C1_meteo_2026-05-16.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/01_vignette/vignette_L1C1_meteo.yaml">YAML Vignette</a>
 
 <details>
 <summary><b>📂 Fichiers sources</b> <i>- ajouté 2026-07-19, icône/texte dynamiques</i></summary>
@@ -149,7 +166,7 @@
 <summary>📄 <b>Page</b> - 3 pop-up(s)</summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L1C1_METEO/02_page/PAGE_METEO.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/page_L1C1_meteo_2026-10-04.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/02_page/page_L1C1_meteo.yaml">YAML Page</a>
 
 
 <details>
@@ -179,16 +196,16 @@
 <li><code>binary_sensor.meteoalarm</code> - <i>Natif HA (fallback)</i></li>
 <li><code>sensor.meteo_france_alertes_image_today</code> - <a href="command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
 <li><code>sensor.meteo_france_alertes_image_tomorrow</code> - <a href="command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_avalanches</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_canicule</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_grand_froid</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_inondation</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_meteo</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_neige_verglas</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_orages</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_pluie_inondation</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_vagues_submersion</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_vent_violent</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_avalanches</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_canicule</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_grand_froid</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_inondation</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_meteo</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_neige_verglas</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_orages</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_pluie_inondation</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_vagues_submersion</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_vent_violent</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -210,18 +227,18 @@
 <blockquote>
 
 <details>
-<summary><code>M_01_meteo_alertes_card.yaml</code> - 10 entité(s) - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></summary>
+<summary><code>M_01_meteo_alertes_card.yaml</code> - 10 entité(s) - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.alerte_avalanches</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_canicule</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_grand_froid</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_inondation</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_meteo</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_neige_verglas</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_orages</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_pluie_inondation</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_vagues_submersion</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
-<li><code>sensor.alerte_vent_violent</code> - <a href="templates/meteo/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_avalanches</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_canicule</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_grand_froid</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_inondation</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_meteo</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_neige_verglas</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_orages</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_pluie_inondation</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_vagues_submersion</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
+<li><code>sensor.alerte_vent_violent</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -393,7 +410,7 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L1C2_TEMPERATURES/01_vignette/L1C2_VIGNETTE_TEMPERATURES.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/vignette_L1C2_temperatures_2026-05-12.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/01_vignette/vignette_L1C2_temperatures.yaml">YAML Vignette</a>
 
 
 
@@ -443,7 +460,7 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 <summary>📄 <b>Page</b> - 10 pop-up(s)</summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L1C2_TEMPERATURES/02_page/PAGE_TEMPERATURES.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/page_L1C2_temperatures_2026-09-24.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/02_page/page_L1C2_temperatures.yaml">YAML Page</a>
 
 
 <details>
@@ -652,7 +669,7 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L1C3_CLIM/01_vignette/L1C3_VIGNETTE_CLIM.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/vignette_L1C3_clim_2026-07-18.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/01_vignette/vignette_L1C3_clim.yaml">YAML Vignette</a>
 
 
 
@@ -713,7 +730,7 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 <summary>📄 <b>Page</b> - 1 pop-up(s)</summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L1C3_CLIM/02_page/PAGE_CLIM.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-07-18.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/02_page/page_L1C3_clim.yaml">YAML Page</a>
 
 
 <details>
@@ -846,7 +863,7 @@ déplacées vers natives.
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L2C1_ENERGIE/01_vignette/L2C1_VIGNETTE_ENERGIE.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/vignette_L2C1_energie_2026-06-18.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/01_vignette/vignette_L2C1_energie.yaml">YAML Vignette</a>
 
 
 
@@ -888,7 +905,7 @@ déplacées vers natives.
 <summary>📄 <b>Page Principale</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L2C1_ENERGIE/03_page_principale/PAGE_ENERGIE.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_principale_2026-06-18.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/03_page_principale/page_L2C1_energie_principale.yaml">YAML Page</a>
 
 
 
@@ -1029,7 +1046,7 @@ déplacées vers natives.
 <summary>📄 <b>Page Mensuel</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L2C1_ENERGIE/04_page_mensuel/PAGE_ENERGIE_MENSUEL.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_mensuel_2026-06-18.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/04_page_mensuel/page_L2C1_energie_mensuel.yaml">YAML Page</a>
 
 
 
@@ -1106,7 +1123,7 @@ déplacées vers natives.
 <summary>📄 <b>Page Temps Réel</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L2C1_ENERGIE/02_page_temps_reel/PAGE_ENERGIE_TEMPS_REEL.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_temps_reel_2026-06-18.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/02_page_temps_reel/page_L2C1_energie_temps_reel.yaml">YAML Page</a>
 
 
 
@@ -1292,7 +1309,7 @@ déplacées vers natives.
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L2C2_ENERGIE_CLIM/01_vignette/L2C2_VIGNETTE_ENERGIE_CLIM.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/vignette_L2C2_energie_clim_2026-05-13.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/01_vignette/vignette_L2C2_energie_clim.yaml">YAML Vignette</a>
 
 
 
@@ -1364,7 +1381,7 @@ déplacées vers natives.
 <summary>📄 <b>Page</b> - 1 pop-up(s)</summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L2C2_ENERGIE_CLIM/02_page/PAGE_ENERGIE_CLIM.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-07-14.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/02_page/page_L2C2_energie_clim.yaml">YAML Page</a>
 
 
 <details>
@@ -1551,7 +1568,7 @@ déplacées vers natives.
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L2C3_ENERGIE_ECLAIRAGE/01_vignette/L2C3_VIGNETTE_ECLAIRAGE.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C3_06_Energie_Eclairage/vignette_L2C3_energie_eclairage_2026-05-13.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C3_06_Energie_Eclairage/01_vignette/vignette_L2C3_energie_eclairage.yaml">YAML Vignette</a>
 
 
 
@@ -1607,7 +1624,7 @@ déplacées vers natives.
 <summary>📄 <b>Page</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L2C3_ENERGIE_ECLAIRAGE/02_page/PAGE_ENERGIE_ECLAIRAGE.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C3_06_Energie_Eclairage/page_L2C3_energie_eclairage_2026-05-13.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L2C3_06_Energie_Eclairage/02_page/page_L2C3_energie_eclairage.yaml">YAML Page</a>
 
 
 
@@ -1747,7 +1764,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C1_ECLAIRAGE/01_vignette/L3C1_VIGNETTE_ECLAIRAGE.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/vignette_L3C1_eclairage_2026-05-13.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/01_vignette/vignette_L3C1_eclairage.yaml">YAML Vignette</a>
 
 
 
@@ -1807,7 +1824,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <summary>📄 <b>Page Gauche</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C1_ECLAIRAGE/02_page/PAGE_ECLAIRAGE.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/page_L3C1_eclairage_gauche_2026-05-13.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/02_page_gauche/page_L3C1_eclairage_gauche.yaml">YAML Page</a>
 
 
 
@@ -1855,7 +1872,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <summary>📄 <b>Page Droite</b> - 3 pop-up(s)</summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C1_ECLAIRAGE/02_page/PAGE_ECLAIRAGE.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/page_L3C1_eclairage_droite_2026-05-22.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/03_page_droite/page_L3C1_eclairage_droite.yaml">YAML Page</a>
 
 
 <details>
@@ -1960,7 +1977,7 @@ produit que des <code>sensor.*_um</code>) déplacés vers natives.
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C2_PRISES/01_vignette/L3C2_VIGNETTE_PRISES.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C2_08_Commandes_Prises/vignette_L3C2_prises_2026-05-14.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C2_08_Commandes_Prises/01_vignette/vignette_L3C2_prises.yaml">YAML Vignette</a>
 
 
 
@@ -1996,7 +2013,7 @@ produit que des <code>sensor.*_um</code>) déplacés vers natives.
 <summary>📄 <b>Page</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C2_PRISES/02_page/PAGE_PRISES.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C2_08_Commandes_Prises/page_L3C2_prises_2026-05-14.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C2_08_Commandes_Prises/02_page/page_L3C2_prises.yaml">YAML Page</a>
 
 
 
@@ -2041,7 +2058,7 @@ produit que des <code>sensor.*_um</code>) déplacés vers natives.
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C3_STORES/01_vignette/L3C3_VIGNETTE_STORES.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C3_09_Stores_Fenetres/vignette_L3C3_stores_2026-05-14.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C3_09_Stores_Fenetres/01_vignette/vignette_L3C3_stores.yaml">YAML Vignette</a>
 
 
 
@@ -2077,7 +2094,7 @@ produit que des <code>sensor.*_um</code>) déplacés vers natives.
 <summary>📄 <b>Page</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L3C3_STORES/02_page/PAGE_STORES.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C3_09_Stores_Fenetres/page_L3C3_stores_2026-06-02.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L3C3_09_Stores_Fenetres/02_page/page_L3C3_stores.yaml">YAML Page</a>
 
 
 
@@ -2138,7 +2155,7 @@ la valeur brute est native. Tout déplacé vers natives.
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C2_PROXMOX/01_vignette/L4C2_VIGNETTE_PROXMOX.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_11_Proxmox/vignette_L4C2_proxmox_2026-06-18.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_11_Proxmox/01_vignette/vignette_L4C2_proxmox.yaml">YAML Vignette</a>
 
 
 
@@ -2175,7 +2192,7 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <summary>📄 <b>Page Proxmox</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C2_PROXMOX/02_page/PAGE_PROXMOX.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_11_Proxmox/page_L4C2_proxmox_2026-06-18.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_11_Proxmox/02_page/page_L4C2_proxmox.yaml">YAML Page</a>
 
 
 </blockquote>
@@ -2194,7 +2211,7 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C1_MINI_PC/01_vignette/L4C1_VIGNETTE_MINI_PC.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C1_10_Mini_PC/vignette_L4C1_mini_pc_2026-06-18.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C1_10_Mini_PC/01_vignette/vignette_L4C1_mini_pc.yaml">YAML Vignette</a>
 
 
 
@@ -2223,7 +2240,7 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <summary>📄 <b>Page</b> - 5 pop-up(s)</summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C1_MINI_PC/02_page_mini_pc/PAGE_MINI_PC.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C1_10_Mini_PC/page_L4C1_mini_pc_2026-06-18.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C1_10_Mini_PC/02_page/page_L4C1_mini_pc.yaml">YAML Page</a>
 
 
 <details>
@@ -2348,7 +2365,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C3_MAJ_HA/01_vignette/L4C3_VIGNETTE_MAJ.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/vignette_L4C3_maj_ha_2026-05-14.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/01_vignette/vignette_L4C3_maj_ha.yaml">YAML Vignette</a>
 
 
 
@@ -2373,7 +2390,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <summary>📄 <b>Page Gauche</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C3_MAJ_HA/02_page/PAGE_MAJ.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/page_L4C3_maj_ha_gauche_2026-05-14.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/02_page_gauche/page_L4C3_maj_ha_gauche.yaml">YAML Page</a>
 
 
 
@@ -2400,7 +2417,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <summary>📄 <b>Page Droite</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L4C3_MAJ_HA/02_page/PAGE_MAJ.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/page_L4C3_maj_ha_droite_2026-05-14.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/03_page_droite/page_L4C3_maj_ha_droite.yaml">YAML Page</a>
 
 
 
@@ -2439,7 +2456,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C1_PILES_BATTERIES/01_vignette/L5C1_VIGNETTE_BATTERIES.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C1_13_Batteries_Piles/vignette_L5C1_batteries_piles_2026-05-14.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C1_13_Batteries_Piles/01_vignette/vignette_L5C1_batteries_piles.yaml">YAML Vignette</a>
 
 
 
@@ -2466,7 +2483,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <summary>📄 <b>Page</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C1_PILES_BATTERIES/02_page/PAGE_BATTERIES.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-09-24.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C1_13_Batteries_Piles/02_page/page_L5C1_batteries_piles.yaml">YAML Page</a>
 
 
 
@@ -2532,7 +2549,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - pu
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/01_vignette/L5C2_VIGNETTE_BATTERIES_PORTABLES.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/vignette_L5C2_batteries_portables_2026-05-12.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/01_vignette/vignette_L5C2_batteries_portables.yaml">YAML Vignette</a>
 
 <details>
 <summary><b>📂 Fichiers sources</b> <i>- ajouté 2026-07-19, remontée résumé batterie/état</i></summary>
@@ -2575,7 +2592,7 @@ le total ~49.
 <summary>📄 <b>Page Gauche</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/02_page/PAGE_BATTERIES_PORTABLES.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/page_L5C2_batteries_portables_gauche_2026-05-12.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/02_page_gauche/page_L5C2_batteries_portables_gauche.yaml">YAML Page</a>
 
 
 
@@ -2626,7 +2643,7 @@ le total ~49.
 <summary>📄 <b>Page Droite</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/02_page/PAGE_BATTERIES_PORTABLES.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/page_L5C2_batteries_portables_droite_2026-05-12.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/03_page_droite/page_L5C2_batteries_portables_droite.yaml">YAML Page</a>
 
 
 
@@ -2679,7 +2696,7 @@ le total ~49.
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C3_MARIADB/01_vignette/L5C3_VIGNETTE_MARIADB.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/vignette_L5C3_mariadb_2026-05-10.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/01_vignette/vignette_L5C3_mariadb.yaml">YAML Vignette</a>
 
 
 
@@ -2704,7 +2721,7 @@ le total ~49.
 <summary>📄 <b>Page</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L5C3_MARIADB/02_page_principale/PAGE_SYSTEME.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/page_L5C3_mariadb_2026-06-15.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/02_page_mariadb/page_L5C3_mariadb.yaml">YAML Page</a>
 
 
 
@@ -2754,7 +2771,7 @@ le total ~49.
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L6C1_AIR_QUALITE/01_vignette/L6C1_VIGNETTE_AIR_QUALITE.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C1_16_Air_Qualite/vignette_L6C1_air_qualite_2026-05-14.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C1_16_Air_Qualite/01_vignette/vignette_L6C1_air_qualite.yaml">YAML Vignette</a>
 
 <details>
 <summary><b>📂 Fichiers sources</b> <i>- ajouté 2026-07-19, grille PM2.5+tCOV par pièce</i></summary>
@@ -2782,7 +2799,7 @@ le total ~49.
 <summary>📄 <b>Page</b> - 6 pop-up(s)</summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L6C1_AIR_QUALITE/02_page/PAGE_AIR_QUALITE.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C1_16_Air_Qualite/page_L6C1_air_qualite_2026-05-23.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C1_16_Air_Qualite/02_page/page_L6C1_air_qualite.yaml">YAML Page</a>
 
 
 <details>
@@ -2903,7 +2920,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L6C2_POLLUTION_POLLEN/01_vignette/L6C2_VIGNETTE_POLLUTION_POLLEN.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C2_17_Pollution_Pollen/vignette_L6C2_pollution_pollen_2026-05-14.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C2_17_Pollution_Pollen/01_vignette/vignette_L6C2_pollution_pollen.yaml">YAML Vignette</a>
 
 <details>
 <summary><b>📂 Fichiers sources</b> <i>- ajouté 2026-07-19, résumé Air/Pollen coloré</i></summary>
@@ -2927,7 +2944,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>📄 <b>Page</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L6C2_POLLUTION_POLLEN/02_page/PAGE_POLLUTION_POLLEN.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C2_17_Pollution_Pollen/page_L6C2_pollution_pollen_2026-06-13.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C2_17_Pollution_Pollen/02_page/page_L6C2_pollution_pollen.yaml">YAML Page</a>
 
 
 
@@ -2979,7 +2996,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L6C3_VIGIEAU/01_vignette/L6C3_VIGNETTE_VIGIEAU.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C3_18_VigiEau/vignette_L6C3_vigieau_2026-05-14.yaml">YAML Vignette</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C3_18_VigiEau/01_vignette/vignette_L6C3_vigieau.yaml">YAML Vignette</a>
 
 <details>
 <summary><b>📂 Fichiers sources</b> <i>- ajouté 2026-07-19, icône/texte niveau alerte</i></summary>
@@ -3002,7 +3019,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>📄 <b>Page</b></summary>
 <blockquote>
 📄 <a href="docs/02_docs_dashboard/dashboard_docs_MD/L6C3_VIGIEAU/02_page/PAGE_VIGIEAU.md">Doc Page</a><br>
-⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C3_18_VigiEau/page_L6C3_vigieau_2026-05-14.yaml">YAML Page</a>
+⚙️ <a href="docs/02_docs_dashboard/dashboard_docs_YAML/L6C3_18_VigiEau/02_page/page_L6C3_vigieau.yaml">YAML Page</a>
 
 
 
@@ -3036,6 +3053,14 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 ## ⚙️ 03 - AUTOMATIONS (54 automations)
 
 *Chemins relatifs depuis `docs_automations/`*
+
+<details>
+<summary><b>GLOBAL_INDEX_AUTOMATIONS.md</b> &nbsp;|&nbsp; Index généré des automations (alias, id prod, id local, entity HA, fiche, YAML) - local, non poussé en prod</summary>
+<blockquote>
+📄 <a href="docs/03_docs_automations/GLOBAL_INDEX_AUTOMATIONS.md">Doc</a><br>
+⚙️ <a href="docs/04_docs_scripts/docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py">Générateur</a> (régénéré à chaque /histo, ne pas modifier à la main)
+</blockquote>
+</details>
 
 **11 catégories · 52 automations · 53 entrées dans l'index**
 
@@ -4164,6 +4189,67 @@ Pas de doc associée.<br><br>
 ✅ <b>Confirmé par Eric (2026-07-19)</b> : "ça remonte la T° du CPU et d'autres choses" -
 device et fonction confirmés (Raspberry Pi, cf. TODO.md U-2). Corrige l'ancienne mention
 "désactivé/archivé" de cette entrée, qui contredisait TODO.md ("actif - NE PAS TOUCHER").
+</blockquote>
+</details>
+
+</blockquote>
+</details>
+
+<details>
+<summary><b>🐍 SCRIPTS PYTHON D'INDEX</b> &nbsp;|&nbsp; 6 scripts (ajoutés le 2026-10-13, lecture seule de la prod) &nbsp;|&nbsp; Local : <code>docs_scripts_SH/</code> &nbsp;|&nbsp; Non poussés en prod</summary>
+<blockquote>
+
+<details>
+<summary><code>gen_global_index_automations.py</code> &nbsp;|&nbsp; Génère GLOBAL_INDEX_AUTOMATIONS.md (automations de H:\automations.yaml + registre HA)</summary>
+<blockquote>
+⚙️ <a href="docs/04_docs_scripts/docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py">Script source</a><br>
+Sortie : <a href="docs/03_docs_automations/GLOBAL_INDEX_AUTOMATIONS.md">GLOBAL_INDEX_AUTOMATIONS.md</a> (régénéré à chaque /histo)<br>
+Pas de doc associée.
+</blockquote>
+</details>
+
+<details>
+<summary><code>gen_global_index_vignettes_pages.py</code> &nbsp;|&nbsp; Génère GLOBAL_INDEX_VIGNETTES_PAGES.md (vignettes et pages, arbre local docs/02_docs_dashboard)</summary>
+<blockquote>
+⚙️ <a href="docs/04_docs_scripts/docs_scripts_SH/gen_global_index_vignettes_pages/gen_global_index_vignettes_pages.py">Script source</a><br>
+Sortie : <a href="docs/02_docs_dashboard/GLOBAL_INDEX_VIGNETTES_PAGES.md">GLOBAL_INDEX_VIGNETTES_PAGES.md</a> (régénéré à chaque /histo)<br>
+Pas de doc associée.
+</blockquote>
+</details>
+
+<details>
+<summary><code>gen_global_index_scripts.py</code> &nbsp;|&nbsp; Génère GLOBAL_INDEX_SCRIPTS_SH.md et GLOBAL_INDEX_SCRIPTS_YAML.md</summary>
+<blockquote>
+⚙️ <a href="docs/04_docs_scripts/docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py">Script source</a><br>
+Sorties : <a href="docs/04_docs_scripts/GLOBAL_INDEX_SCRIPTS_SH.md">GLOBAL_INDEX_SCRIPTS_SH.md</a> · <a href="docs/04_docs_scripts/GLOBAL_INDEX_SCRIPTS_YAML.md">GLOBAL_INDEX_SCRIPTS_YAML.md</a> (régénérés à chaque /histo)<br>
+Pas de doc associée.
+</blockquote>
+</details>
+
+<details>
+<summary><code>gen_global_index_ia.py</code> &nbsp;|&nbsp; Génère GLOBAL_INDEX_IA.md (fichiers de docs/00_IA)</summary>
+<blockquote>
+⚙️ <a href="docs/04_docs_scripts/docs_scripts_SH/gen_global_index_ia/gen_global_index_ia.py">Script source</a><br>
+Sortie : <a href="docs/00_IA/GLOBAL_INDEX_IA.md">GLOBAL_INDEX_IA.md</a> (régénéré à chaque /histo)<br>
+Pas de doc associée.
+</blockquote>
+</details>
+
+<details>
+<summary><code>check_sous_context_ia.py</code> &nbsp;|&nbsp; Contrôle en lecture seule des 9 fichiers de docs/00_IA/sous_context_ia</summary>
+<blockquote>
+⚙️ <a href="docs/04_docs_scripts/docs_scripts_SH/check_sous_context_ia/check_sous_context_ia.py">Script source</a><br>
+Lancé par /histo (étape 6, point 7) ; ne corrige rien.<br>
+Pas de doc associée.
+</blockquote>
+</details>
+
+<details>
+<summary><code>check_global_index.py</code> &nbsp;|&nbsp; Contrôle en lecture seule des 7 index globaux</summary>
+<blockquote>
+⚙️ <a href="docs/04_docs_scripts/docs_scripts_SH/check_global_index/check_global_index.py">Script source</a><br>
+Lancé par /histo (étape 6, point 8) ; ne corrige rien.<br>
+Pas de doc associée.
 </blockquote>
 </details>
 
