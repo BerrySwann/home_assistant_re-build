@@ -1,4 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
+*Derniere mise a jour : 2026-10-14 21h (sync_index /histo-final S1 : sensor.timer_foudre lit maintenant input_datetime.dernier_eclair (template M_03 corrige) ; aucune autre entite ni vignette modifiee)*
 *Derniere mise a jour : 2026-10-13 22h (sync_index /histo S1 : index globaux GLOBAL_INDEX_REPO, ENTITES_GLOBAL_INDEX, GLOBAL_INDEX_IA, GLOBAL_INDEX_AUTOMATIONS, GLOBAL_INDEX_VIGNETTES_PAGES, GLOBAL_INDEX_SCRIPTS_SH et _YAML, sous_context_ia en dossiers, generateurs et controleurs python ; aucun YAML de config HA, aucune entite ni vignette modifiee d apres le journal des modifs du jour)*
 *Derniere mise a jour : 2026-10-12 20h (sync_index /histo S1 : description de l'automation G corrigee en prod ; 6 scripts HA et 2 scripts shell copies de la prod en local ; docs_scripts_YAML regroupe en sous-dossiers Climatisation et Soufflant SDB ; aucune entite ni vignette modifiee)*
 *Derniere mise a jour : 2026-10-11 22h (sync_index /histo S3 : lettres des automations SDB alignees en prod, dossier L0C0_PAGE_Home, aucune entite ni vignette modifiee)*
@@ -106,7 +107,7 @@ HOME PAGE (type: grid)
   │     ├─→ sensor.maison_lightning_distance  (NAT - Blitzortung natif)
   │     ├─→ sensor.blitzortung_lightning_localisation  (SEN - M_meteo_sensors_blitzortung.yaml, REST Nominatim)
   │     ├─→ sensor.maison_lightning_azimuth  (NAT - Blitzortung natif)
-  │     └─→ sensor.timer_foudre  (TPL - M_03_Meteo_orage_eclaires/M_03_meteo_timer_foudre_card.yaml, seul vrai TPL de ce bloc)
+  │     └─→ sensor.timer_foudre  (TPL - M_03_Meteo_orage_eclaires/M_03_meteo_timer_foudre_card.yaml, seul vrai TPL de ce bloc ; lit input_datetime.dernier_eclair depuis le 2026-10-14, avant : entite inexistante)
   ├─→ [5] mushroom - Lave-Linge (WashData)  (visible si power > 2W)
   │     ├─→ sensor.lave_linge_etat  (NAT - WashData, HACS)
   │     ├─→ sensor.lave_linge_temps_restant  (NAT - WashData, HACS)
