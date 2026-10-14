@@ -6,16 +6,17 @@
 # 1 sensor : temps ecoule depuis le dernier impact de foudre Blitzortung.
 # Affiche "Calme depuis plus de 2h" si compteur = 0 ou impact > 2h.
 #
-# SOURCE     : sensor.maison_lightning_counter + sensor.blitzortung_lightning_last_impact_time
+# SOURCE     : sensor.maison_lightning_counter + input_datetime.dernier_eclair
 # unique_id  : timer_foudre
 # entity_id  : sensor.timer_foudre
 #
 # CHAINE :
-# Blitzortung (counter + last_impact_time) -> timer_foudre -> L1C1 (timer dernier impact)
+# Blitzortung (counter) + input_datetime.dernier_eclair (maj par l'automation "Mettre a jour le temps du dernier impact de foudre") -> timer_foudre -> L1C1 (timer dernier impact)
 #
 # PIEGES :
 # - Calme si compteur = 0 OU dernier impact > 7200s (2h).
 # - Fichier complementaire : dernier_impact_foudre.yaml (lit input_datetime).
+# - 2026-10-14 : source corrigee. sensor.blitzortung_lightning_last_impact_time n'existe pas dans l'integration Blitzortung 1.7.3 (seulement azimuth, counter, distance) : le timer affichait toujours "Calme". Remplacee par input_datetime.dernier_eclair.
 #
 # TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L1C1 Meteo (timer dernier impact foudre)
@@ -26,7 +27,7 @@
       unique_id: timer_foudre
       state: >
         {% set count = states('sensor.maison_lightning_counter') | int(0) %}
-        {% set last_time = states('sensor.blitzortung_lightning_last_impact_time') %}
+        {% set last_time = states('input_datetime.dernier_eclair') %}
         {% set last_ts = as_timestamp(last_time) if last_time not in ['unknown', 'unavailable', 'none'] else 0 %}
         {% set now_ts = as_timestamp(now()) %}
         {% set diff = now_ts - last_ts %}

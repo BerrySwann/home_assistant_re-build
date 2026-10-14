@@ -191,7 +191,7 @@
         {% else %} Off {% endif %}
 
     # 8.2 --- Sèche-Serviettes ---
-    # --- sdb_seche_serviettes_power_status ---
+    # --- sdb_seche_serviette_power_status ---
     - name: "SdB Sèche-Serviette Power Status"
       unique_id: sdb_seche_serviette_power_status
       state: >
@@ -201,7 +201,7 @@
           off
         {% endif %}
 
-    # --- sdb_seche_serviettes_power_status_affichage ---
+    # --- sdb_seche_serviette_power_status_affichage ---
     - name: "SdB Sèche-Serviette Power Status Affichage"
       unique_id: sdb_seche_serviette_power_status_affichage
       state: >
@@ -211,7 +211,7 @@
           off
         {% endif %}
 
-    # --- sdb_seche_serviettes_etat ---
+    # --- sdb_seche_serviette_etat ---
     - name: "SdB Sèche Serviette État"
       unique_id: sdb_seche_serviette_etat
       state: >

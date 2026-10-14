@@ -35,7 +35,7 @@ cards:
             entity: sensor.sdb_power_status_affichage
             state_not: "off"
           - condition: state
-            entity: sensor.sdb_seche_serviette_status_affichage
+            entity: sensor.sdb_seche_serviette_power_status_affichage
             state_not: "off"
           - condition: state
             entity: sensor.chambre_power_status_affichage

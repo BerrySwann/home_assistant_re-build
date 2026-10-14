@@ -1,6 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-10-14 (soir, /histo S1) - 2 entrées périmées de la vignette sdb remplacées par le nom réel, liens cassés corrigés (69 -> 0 au contrôle), noms de batteries et blocs météo M_02 alignés sur les fichiers réels, entité fantôme du dernier impact de foudre (Blitzortung) retirée, bloc Raspberry Pi4 (archivé) déplacé en fin d'index (section 06 SAUVEGARDE RASPI)*
 *Dernière mise à jour : 2026-10-13 (soir, /histo S1) - entrées ajoutées pour les index générés GLOBAL_INDEX_IA, GLOBAL_INDEX_VIGNETTES_PAGES, GLOBAL_INDEX_AUTOMATIONS, GLOBAL_INDEX_SCRIPTS_SH et GLOBAL_INDEX_SCRIPTS_YAML et pour 6 scripts python d'index (docs_scripts_SH), tous locaux et non poussés en prod ; compteurs existants non modifiés*
 *Dernière mise à jour : 2026-10-12 (soir, /histo S1) - 6 scripts HA (audit_md5, audit_md5_md_yaml, j_1_1, j_1_2, j_1_3, j_2_0) et 2 scripts shell (audit_md5_yaml.sh, mf_vigilance_images.sh) copiés de la prod en local, sans fiche Doc ; liens des scripts YAML corriges apres le regroupement en sous-dossiers Climatisation et Soufflant SDB (20h12) ; compteurs scripts recomptés (SH 5, YAML 9) ; description de l'automation G corrigée en prod*
 *Dernière mise à jour : 2026-10-11 (soir, /histo S3) - lettres des automations SDB alignees en prod (H:\automations.yaml, A B C D E F G H Z, entity_id inchanges), dossier L0C0_PAGE_Home (PAGE_Home (L0C0) renomme), skills histo-final et ha-push-docs modifies ; les fiches CARD_*_HOME de la page Home ne sont pas indexees ici (la section 02 ne liste que les 18 vignettes)*
@@ -346,14 +347,13 @@
 </details>
 
 <details>
-<summary><i>Entités natives HA / intégrations externes (17)</i></summary>
+<summary><i>Entités natives HA / intégrations externes (16)</i></summary>
 <blockquote><ul>
 <li><code>binary_sensor.meteoalarm</code></li>
 <li><code>input_datetime.dernier_eclair</code></li>
 <li><code>input_number.th_balcon_nord_humidity_previous</code></li>
 <li><code>input_number.th_balcon_nord_temperature_previous</code></li>
 <li><code>sensor.06_weather_alert</code></li>
-<li><code>sensor.blitzortung_lightning_last_impact_time</code></li>
 <li><code>sensor.maison_lightning_azimuth</code></li>
 <li><code>sensor.maison_lightning_counter</code></li>
 <li><code>sensor.maison_lightning_distance</code></li>
@@ -828,7 +828,7 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 <li><code>sensor.prise_soufflant_salle_de_bain_nous_power</code></li>
 <li><code>sensor.radiateur_elec_cuisine_power</code></li>
 <li><code>sensor.salon_power_lock</code></li>
-<li><code>sensor.sdb_seche_serviette_status_affichage</code></li>
+<li><code>sensor.sdb_seche_serviette_power_status_affichage</code></li>
 <li><code>sensor.th_salle_de_bain_temperature</code></li>
 <li><code>switch.clim_bureau_nous</code></li>
 <li><code>switch.clim_chambre_nous</code></li>
@@ -1526,7 +1526,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><i>Entités natives HA / intégrations externes (33)</i></summary>
+<summary><i>Entités natives HA / intégrations externes (32)</i></summary>
 <blockquote><ul>
 <li><code>climate.radiateur_cuisine</code></li>
 <li><code>sensor.th_balcon_nord_temperature</code></li>
@@ -1555,7 +1555,6 @@ déplacées vers natives.
 <li><code>sensor.radiateur_elec_cuisine_energy</code></li>
 <li><code>sensor.radiateur_elec_cuisine_power</code></li>
 <li><code>sensor.radiateur_elec_cuisine_voltage</code></li>
-<li><code>sensor.sdb_seche_serviettes_power_status_affichage</code></li>
 <li><code>sensor.th_bureau_temperature</code></li>
 <li><code>sensor.th_chambre_temperature</code></li>
 <li><code>sensor.th_cuisine_temperature</code></li>
@@ -4116,33 +4115,6 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 
 ---
 
-<details>
-<summary><b>🍓 Raspberry Pi4 (archivé)</b> &nbsp;|&nbsp; 1 automation(s) &nbsp;|&nbsp; <i>Gestion ventilateur CPU - archivé depuis migration NUC</i></summary>
-<blockquote>
-
-<details>
-<summary>✅ <b>Raspberry CPU Fan PWM 6 States</b></summary>
-<blockquote>
-<i>Règle la vitesse du ventilateur du Raspberry en fonction de la température</i><br><br>
-📄 <a href="docs/03_docs_automations/docs_automations_MD/RASPI/RPi4_FAN_PWM/RPi4_FAN_PWM.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/RASPI/A_rpi_fan_pwm_6_states/A_rpi_fan_pwm_6_states.yaml">YAML source</a><br>
-<br><b>Déclencheurs :</b> 🏠`homeassistant` · 📊`numeric_state`<br>
-<br><details>
-<summary>🔌 Entités (2)</summary>
-<blockquote><ul>
-<li><code>sensor.system_monitor_temperature_du_processeur</code></li>
-<li><code>fan.rpi_cooling_fan</code></li>
-</ul></blockquote>
-</details>
-
-</blockquote>
-</details>
-
-</blockquote>
-</details>
-
----
-
 ## ⚠️ Anomalies détectées
 
 
@@ -4500,5 +4472,36 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 <summary><b>update-arbo.md</b> &nbsp;|&nbsp; met à jour IA_ARBO_DETAIL.md (comptages local, prod, GitHub)</summary>
 <blockquote>
 <a href="docs/05_docs_skills/skill_update-arbo/update-arbo.md">Doc</a>
+</blockquote>
+</details>
+
+---
+
+## 🍓 06 - SAUVEGARDE RASPI (archive, hors HA actuel)
+
+*Restes de l'ancien Raspberry Pi4, conservés pour mémoire. Les entités citées ici (fan.rpi_cooling_fan, sensor.system_monitor_temperature_du_processeur) n'existent plus dans HA.*
+
+<details>
+<summary><b>🍓 Raspberry Pi4 (archivé)</b> &nbsp;|&nbsp; 1 automation(s) &nbsp;|&nbsp; <i>Gestion ventilateur CPU - archivé depuis migration NUC</i></summary>
+<blockquote>
+
+<details>
+<summary>✅ <b>Raspberry CPU Fan PWM 6 States</b></summary>
+<blockquote>
+<i>Règle la vitesse du ventilateur du Raspberry en fonction de la température</i><br><br>
+📄 <a href="docs/03_docs_automations/docs_automations_MD/RASPI/RPi4_FAN_PWM/RPi4_FAN_PWM.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/RASPI/A_rpi_fan_pwm_6_states/A_rpi_fan_pwm_6_states.yaml">YAML source</a><br>
+<br><b>Déclencheurs :</b> 🏠`homeassistant` · 📊`numeric_state`<br>
+<br><details>
+<summary>🔌 Entités (2)</summary>
+<blockquote><ul>
+<li><code>sensor.system_monitor_temperature_du_processeur</code></li>
+<li><code>fan.rpi_cooling_fan</code></li>
+</ul></blockquote>
+</details>
+
+</blockquote>
+</details>
+
 </blockquote>
 </details>
