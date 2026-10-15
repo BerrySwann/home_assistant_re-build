@@ -1,4 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
+*Derniere mise a jour : 2026-10-15 22h (sync_index /histo-final S1 : repli binary_sensor.meteoalarm retire du template M_01 (sensor.06_weather_alert seul ; attribut saisonnier absent = Vert) et de l arbre meteo ci-dessous ; carte Meteoalarm ajoutee en carte 9 de la page Home (L0C0) ; liens Home du dashboard tablette repointes vers /dashboard-tablette/0 ; aucune autre entite modifiee)*
 *Derniere mise a jour : 2026-10-14 21h (sync_index /histo-final S1 : sensor.timer_foudre lit maintenant input_datetime.dernier_eclair (template M_03 corrige) ; aucune autre entite ni vignette modifiee)*
 *Derniere mise a jour : 2026-10-13 22h (sync_index /histo S1 : index globaux GLOBAL_INDEX_REPO, ENTITES_GLOBAL_INDEX, GLOBAL_INDEX_IA, GLOBAL_INDEX_AUTOMATIONS, GLOBAL_INDEX_VIGNETTES_PAGES, GLOBAL_INDEX_SCRIPTS_SH et _YAML, sous_context_ia en dossiers, generateurs et controleurs python ; aucun YAML de config HA, aucune entite ni vignette modifiee d apres le journal des modifs du jour)*
 *Derniere mise a jour : 2026-10-12 20h (sync_index /histo S1 : description de l'automation G corrigee en prod ; 6 scripts HA et 2 scripts shell copies de la prod en local ; docs_scripts_YAML regroupe en sous-dossiers Climatisation et Soufflant SDB ; aucune entite ni vignette modifiee)*
@@ -254,8 +255,8 @@ MATÉRIEL / INTÉGRATION
   │           └─→ UM: M_03_meteo_UM_blitzortung.yaml  (eclair_annuel/mensuel/hebdomadaire/quotidien/horaire)
   │           └─→ SEN: M_meteo_sensors_blitzortung.yaml  (blitzortung_lightning_localisation - API Nominatim)
   │           └─→ TPL: M_03_Meteo_orage_eclaires/*.yaml  (direction_foudre_label / distance_foudre_km / direction_foudre_deg / timer_foudre / dernier_impact_foudre)
-  ├─→ Météo France (alertes) + MeteoAlarm (fallback)
-  │     └─→ sensor.06_weather_alert / binary_sensor.meteoalarm  (NAT)
+  ├─→ Météo France (alertes)
+  │     └─→ sensor.06_weather_alert  (NAT)
   │           └─→ TPL: M_01_meteo_alertes_card.yaml  (10 sensors : alerte_vent_violent, _inondation, _orages,
   │               _pluie_inondation, _neige_verglas, _grand_froid, _canicule, _avalanches, _vagues_submersion, alerte_meteo)
   ├─→ Météo France (vent)

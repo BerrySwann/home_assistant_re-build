@@ -1,6 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-10-15 (soir, /histo-final S1) - repli binary_sensor.meteoalarm retiré du template M_01 : entrée retirée du pop-up #alert (14 -> 13) et des entités natives HA (16 -> 15) ; aucun fichier ajouté, renommé ou supprimé à indexer ici (les fiches CARD_*_HOME ne sont pas indexées)*
 *Dernière mise à jour : 2026-10-14 (soir, /histo S1) - 2 entrées périmées de la vignette sdb remplacées par le nom réel, liens cassés corrigés (69 -> 0 au contrôle), noms de batteries et blocs météo M_02 alignés sur les fichiers réels, entité fantôme du dernier impact de foudre (Blitzortung) retirée, bloc Raspberry Pi4 (archivé) déplacé en fin d'index (section 06 SAUVEGARDE RASPI)*
 *Dernière mise à jour : 2026-10-13 (soir, /histo S1) - entrées ajoutées pour les index générés GLOBAL_INDEX_IA, GLOBAL_INDEX_VIGNETTES_PAGES, GLOBAL_INDEX_AUTOMATIONS, GLOBAL_INDEX_SCRIPTS_SH et GLOBAL_INDEX_SCRIPTS_YAML et pour 6 scripts python d'index (docs_scripts_SH), tous locaux et non poussés en prod ; compteurs existants non modifiés*
 *Dernière mise à jour : 2026-10-12 (soir, /histo S1) - 6 scripts HA (audit_md5, audit_md5_md_yaml, j_1_1, j_1_2, j_1_3, j_2_0) et 2 scripts shell (audit_md5_yaml.sh, mf_vigilance_images.sh) copiés de la prod en local, sans fiche Doc ; liens des scripts YAML corriges apres le regroupement en sous-dossiers Climatisation et Soufflant SDB (20h12) ; compteurs scripts recomptés (SH 5, YAML 9) ; description de l'automation G corrigée en prod*
@@ -191,10 +192,9 @@
 </details>
 
 <details>
-<summary>💬 Pop-up <code>#alert</code> - 14 entité(s)</summary>
+<summary>💬 Pop-up <code>#alert</code> - 13 entité(s)</summary>
 <blockquote><ul>
 <li><code>sensor.06_weather_alert</code> - <i>Natif HA</i></li>
-<li><code>binary_sensor.meteoalarm</code> - <i>Natif HA (fallback)</i></li>
 <li><code>sensor.meteo_france_alertes_image_today</code> - <a href="command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
 <li><code>sensor.meteo_france_alertes_image_tomorrow</code> - <a href="command_line/meteo/carte_meteo_france.yaml">voir fichier</a></li>
 <li><code>sensor.alerte_avalanches</code> - <a href="templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml">voir fichier</a></li>
@@ -349,7 +349,6 @@
 <details>
 <summary><i>Entités natives HA / intégrations externes (16)</i></summary>
 <blockquote><ul>
-<li><code>binary_sensor.meteoalarm</code></li>
 <li><code>input_datetime.dernier_eclair</code></li>
 <li><code>input_number.th_balcon_nord_humidity_previous</code></li>
 <li><code>input_number.th_balcon_nord_temperature_previous</code></li>
