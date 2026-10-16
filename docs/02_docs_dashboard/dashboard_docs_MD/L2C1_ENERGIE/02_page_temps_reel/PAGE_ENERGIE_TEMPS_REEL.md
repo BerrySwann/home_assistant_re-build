@@ -2,7 +2,7 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--20-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--10--15-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Dashboard%20Doc-ff9800?style=flat-square)](.)
 
 </div>
@@ -15,7 +15,7 @@
 | 🏗️ **Layout** | `type: grid` - 4 colonnes `column_span: 1` |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-20 |
+| 📅 **Modifié le** | 2026-10-15 |
 | 🏠 **Version HA** | 2026.3.x |
 
 ---
@@ -177,7 +177,7 @@ Quand la condition est vraie, s'affiche un `heading` avec badge + `auto-entities
 #### Section 5 : Hygiène
 
 | Sensor déclencheur | `sensor.total_poste_hygiene_puissance` |
-| Badge icône | `mdi:bubbles` - couleur teal |
+| Badge icône | `mdi:washing-machine` - couleur teal |
 | Appareils | prise_lave_linge_nous_power, prise_lave_vaisselle_nous_power |
 
 #### Section 6 : Lumière

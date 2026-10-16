@@ -1,4 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
+*Derniere mise a jour : 2026-10-16 18h (carte Meteoalarm, carte 9 de la page Home, ajoutee a la section HOME PAGE : arbre, entites, fichiers ; numerotation alignee sur PAGE_HOME.md : fuite [8], Meteoalarm [9], Presence [10] ; aucune entite ajoutee)*
 *Derniere mise a jour : 2026-10-15 22h (sync_index /histo-final S1 : repli Meteoalarm retire du template M_01 (sensor.06_weather_alert seul ; attribut saisonnier absent = Vert) et de l arbre meteo ci-dessous ; carte Meteoalarm ajoutee en carte 9 de la page Home (L0C0) ; liens Home du dashboard tablette repointes vers /dashboard-tablette/0 ; aucune autre entite modifiee)*
 *Derniere mise a jour : 2026-10-14 21h (sync_index /histo-final S1 : sensor.timer_foudre lit maintenant input_datetime.dernier_eclair (template M_03 corrige) ; aucune autre entite ni vignette modifiee)*
 *Derniere mise a jour : 2026-10-13 22h (sync_index /histo S1 : index globaux GLOBAL_INDEX_REPO, ENTITES_GLOBAL_INDEX, GLOBAL_INDEX_IA, GLOBAL_INDEX_AUTOMATIONS, GLOBAL_INDEX_VIGNETTES_PAGES, GLOBAL_INDEX_SCRIPTS_SH et _YAML, sous_context_ia en dossiers, generateurs et controleurs python ; aucun YAML de config HA, aucune entite ni vignette modifiee d apres le journal des modifs du jour)*
@@ -124,15 +125,17 @@ HOME PAGE (type: grid)
   │     ├─→ switch.prise_congelateur_cuisine_nous  (NAT - NOUS SP via Z2M)
   │     ├─→ sensor.tongel_temperature  (NAT - SONOFF Tongel via Z2M)
   │     └─→ binary_sensor.porte_congel_contact  (NAT - porte Congél. via Z2M)
-  ├─→ [8] bubble-card separator + 2× button - Présence
+  ├─→ [8] mushroom - Détecteur fuite  (visible si on | unavailable | unknown)
+  │     └─→ binary_sensor.detecteur_de_fuite_ikea_water_leak  (NAT - IKEA Vallhorn via Z2M)
+  ├─→ [9] meteoalarm-card - Alertes de vigilance Météo-France  (masquee si aucune alerte)
+  │     └─→ sensor.06_weather_alert  (NAT - Météo France, integration meteofrance ; aussi dans le pop-up #alert de L1C1)
+  ├─→ [10] bubble-card separator + 2× button - Présence
   │     ├─→ sensor.etat_wifi_maison  (TPL - P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml)
   │     ├─→ device_tracker.poco  (NAT - Mobile App Eric)
   │     ├─→ person.eric  (NAT - HA Personnes)
   │     ├─→ device_tracker.mamour  (NAT - Mobile App Mamour)
   │     └─→ person.mamour  (NAT - HA Personnes)
-  ├─→ [9] mushroom - Détecteur fuite  (visible si on | unavailable | unknown)
-  │     └─→ binary_sensor.detecteur_de_fuite_ikea_water_leak  (NAT - IKEA Vallhorn via Z2M)
-  └─→ [10] type: grid - 18 vignettes  (voir sections L1C1–L6C3)
+  └─→ [grille] type: grid - 18 vignettes  (voir sections L1C1–L6C3)
 ```
 
 ### Entités consommées - Cartes permanentes HOME
@@ -153,7 +156,7 @@ HOME PAGE (type: grid)
 | `weather.vence` | NAT | Météo France | [2] |
 | `sensor.vence_rain_chance` / `vence_uv` / `vence_cloud_cover` | NAT | Météo France | [2] |
 | `sensor.vence_freeze_chance` / `vence_snow_chance` / `vence_next_rain` | NAT | Météo France | [2] |
-| `sensor.06_weather_alert` | NAT | Météo France | [2] |
+| `sensor.06_weather_alert` | NAT | Météo France | [2], [9] |
 | `sensor.temperature_delta_affichage` | TPL | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | [2] |
 | `sensor.studio_code_server_pourcentage_du_processeur` | NAT | Studio Code Server add-on | [3] |
 | `sensor.maison_lightning_counter` | NAT | Intégration Blitzortung (MQTT native) | [4] |
@@ -173,12 +176,12 @@ HOME PAGE (type: grid)
 | `switch.prise_congelateur_cuisine_nous` | NAT | NOUS SP via Z2M (P2 - cuisine) | [7] |
 | `sensor.tongel_temperature` | NAT | SONOFF Tongel via Z2M | [7] |
 | `binary_sensor.porte_congel_contact` | NAT | porte Congél. via Z2M | [7] |
-| `sensor.etat_wifi_maison` | TPL | `templates/P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml` | [8] |
-| `device_tracker.poco` | NAT | Mobile App (Companion) - Eric | [8] |
-| `person.eric` | NAT | HA Personnes | [8] |
-| `device_tracker.mamour` | NAT | Mobile App (Companion) - Mamour | [8] |
-| `person.mamour` | NAT | HA Personnes | [8] |
-| `binary_sensor.detecteur_de_fuite_ikea_water_leak` | NAT | IKEA Vallhorn via Z2M | [9] |
+| `binary_sensor.detecteur_de_fuite_ikea_water_leak` | NAT | IKEA Vallhorn via Z2M | [8] |
+| `sensor.etat_wifi_maison` | TPL | `templates/P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml` | [10] |
+| `device_tracker.poco` | NAT | Mobile App (Companion) - Eric | [10] |
+| `person.eric` | NAT | HA Personnes | [10] |
+| `device_tracker.mamour` | NAT | Mobile App (Companion) - Mamour | [10] |
+| `person.mamour` | NAT | HA Personnes | [10] |
 
 ### Intégration WashData (HACS) - Lave-Linge + Lave-Vaisselle
 
@@ -219,12 +222,14 @@ HOME PAGE (type: grid)
 | `docs/02_docs_dashboard/dashboard_docs_YAML/Dashboard_COMPLET/card_congelateur_home_2026-10-04.yaml` | ✅ Congelateur button-card refonte complete snow/drip/door (remplace 2026-09-24) |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_presence_home.yaml` | ✅ Présence (separator + Eric + Mamour) |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_detecteur_fuite_home.yaml` | ✅ Détecteur fuite mushroom |
+| `docs/02_docs_dashboard/dashboard_docs_YAML/L0C0_PAGE_Home/10_Carte Meteoalarm/card_meteoalarm_home.yaml` | ✅ Alertes Meteoalarm (carte 9, ajoutee le 2026-10-15) |
 
 ### Documentation
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_MD/L0C0_PAGE_Home/02_page/PAGE_HOME.md` | ✅ (MàJ 2026-09-20) |
+| `docs/02_docs_dashboard/dashboard_docs_MD/L0C0_PAGE_Home/02_page/PAGE_HOME.md` | ✅ (MàJ 2026-10-15) |
+| `docs/02_docs_dashboard/dashboard_docs_MD/L0C0_PAGE_Home/10_Carte Meteoalarm/CARD_METEOALARM_HOME.md` | ✅ (cree 2026-10-15) |
 
 ---
 

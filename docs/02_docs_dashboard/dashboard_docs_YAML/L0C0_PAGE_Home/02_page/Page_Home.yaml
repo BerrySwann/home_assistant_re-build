@@ -1390,6 +1390,11 @@ cards:
           box-shadow: none !important;
           border: none !important;
         }
+  - type: custom:meteoalarm-card
+    entities:
+      - entity: sensor.06_weather_alert
+    integration: meteofrance
+    hide_when_no_warning: true
   - type: vertical-stack
     cards:
       - type: custom:bubble-card

@@ -1,0 +1,12 @@
+# card_meteoalarm_home.yaml
+# Alertes Météo-France - HOME page (custom:meteoalarm-card, HACS "Meteoalarm Card")
+# Position : carte 9 de la page, entre Détecteur de fuite (carte 8) et Présence (carte 10)
+# Masquée tant qu'aucune alerte n'est active (hide_when_no_warning: true)
+# Entité : sensor.06_weather_alert (intégration native Météo-France)
+# La même carte sert aussi dans le pop-up #alert de la page Météo (L1C1)
+
+type: custom:meteoalarm-card
+entities:
+  - entity: sensor.06_weather_alert
+integration: meteofrance
+hide_when_no_warning: true

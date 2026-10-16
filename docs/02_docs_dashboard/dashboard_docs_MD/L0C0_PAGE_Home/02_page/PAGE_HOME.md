@@ -1,21 +1,21 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.0-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--10--11-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.10.1-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--10--15-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page-ff9800?style=flat-square)](.)
 
 </div>
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `dashboard_docs_YAML/L0C0_PAGE_Home/` (13 cartes : 11 permanentes, la grille de 18 vignettes et la barre de navigation) sur la vue `Home` du dashboard ; page complete : `dashboard_docs_YAML/L0C0_PAGE_Home/02_page/Page_Home.yaml` |
+| 📁 **Path** | `dashboard_docs_YAML/L0C0_PAGE_Home/` (12 cartes : 10 permanentes, la grille de 18 vignettes et la barre de navigation) sur la vue `Home` du dashboard ; page complete : `dashboard_docs_YAML/L0C0_PAGE_Home/02_page/Page_Home.yaml` |
 | 🔗 **Accès depuis** | Vue par défaut au démarrage |
 | 🏗️ **Layout** | `type: grid` - 1 col (cartes permanentes) + grille 3×6 (18 vignettes) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-10-11 |
-| 🏠 **Version HA** | 2026.10.0 |
+| 📅 **Modifié le** | 2026-10-15 |
+| 🏠 **Version HA** | 2026.10.1 |
 
 ---
 
@@ -35,9 +35,10 @@
    - [Lave-linge](#5--lave-linge-conditionnel)
    - [Lave-vaisselle](#6--lave-vaisselle-conditionnel)
    - [Congélateur](#7--congélateur-conditionnel)
-    - [Détecteur de fuite](#8--détecteur-de-fuite-conditionnel)
-   - [Présence Personne(s)](#9--présence-personnes)
-   - [Barre de navigation (nav_bar)](#10--barre-de-navigation-nav_bar)
+   - [Détecteur de fuite](#8--détecteur-de-fuite-conditionnel)
+   - [Alertes Meteoalarm](#9--alertes-meteoalarm-conditionnel)
+   - [Présence Personne(s)](#10--présence-personnes)
+   - [Barre de navigation (nav_bar)](#11--barre-de-navigation-nav_bar)
 4. [Grille 18 vignettes](#grille-18-vignettes)
 5. [Entités utilisées](#entités-utilisées--provenance-complète)
 6. [Dépannage](#dépannage)
@@ -48,7 +49,7 @@
 
 Page d'accueil du dashboard. Structure en deux parties :
 
-- **Cartes permanentes** (haut) : météo, présence, alertes conditionnelles
+- **Cartes permanentes** (haut) : météo, alertes Meteoalarm, présence, alertes conditionnelles
 - **Grille 3×6** (bas) : 18 vignettes de navigation vers les sous-pages, chacune affichant un résumé des données en temps réel
 
 ### Intégrations requises
@@ -67,6 +68,7 @@ Page d'accueil du dashboard. Structure en deux parties :
 |-------|-------|
 | `custom:html-template-card` | Météo animée - 7 layers picture-elements (meteocss) |
 | `meteofrance-weather-card` | Détails météo (prévisions, alertes, UV, pluie…) |
+| `custom:meteoalarm-card` | Alertes de vigilance Météo-France (masquée sans alerte) |
 | `custom:button-card` | Toutes les 18 vignettes + foudre + VS Code |
 | `custom:bubble-card` | Séparateur présence + boutons Eric/Mamour |
 | `custom:mushroom-entity-card` | Lave-linge · Lave-vaisselle · Détecteur fuite |
@@ -93,6 +95,8 @@ Page d'accueil du dashboard. Structure en deux parties :
 │  [COND.] button-card Congélateur  (tongel > -15°C OU porte)   │
 ├─────────────────────────────────────────────────────────────────┤
 │  [CONDITIONNEL] mushroom-entity-card  Détecteur fuite           │
+├─────────────────────────────────────────────────────────────────┤
+│  [CONDITIONNEL] meteoalarm-card  Alertes Météo-France           │
 ├─────────────────────────────────────────────────────────────────┤
 │  bubble-card separator  "Personne(s)"  (sensor.etat_wifi_maison)│
 │  bubble-card button  Eric  /  bubble-card button  Mamour        │
@@ -258,10 +262,20 @@ Alerte visuelle pleine largeur (12 colonnes). Aucune action tap/hold/double_tap.
 
 ---
 
-### 9 - Présence Personne(s)
+### 9 - Alertes Meteoalarm *(conditionnel)*
 
-Groupe réuni en une seule carte `vertical-stack` : un séparateur, puis un `horizontal-stack` avec le bouton d'Eric et celui de Mamour. Fiche dédiée : [`CARD_PRESENCE_HOME.md`](../10_Carte%20Pr%C3%A9sence/CARD_PRESENCE_HOME.md) ; détection WiFi : [`CARD_PRESENCE_HOME.md`](../10_Carte%20Pr%C3%A9sence/CARD_PRESENCE_HOME.md)
-**Fichier YAML :** `dashboard_docs_YAML/L0C0_PAGE_Home/10_Carte Présence/card_presence_home.yaml` (3 cartes : séparateur, Eric, Mamour)
+**Type :** `custom:meteoalarm-card` (HACS - Meteoalarm Card)
+**Visible si :** au moins une alerte de vigilance est active (`hide_when_no_warning: true`, comportement déduit du nom de l'option, non vérifié à l'écran)
+**Fichier YAML :** `dashboard_docs_YAML/L0C0_PAGE_Home/10_Carte Meteoalarm/card_meteoalarm_home.yaml`
+
+Carte d'alertes Météo-France alimentée par `sensor.06_weather_alert` (`integration: meteofrance`). Fiche dédiée : [`CARD_METEOALARM_HOME.md`](../10_Carte%20Meteoalarm/CARD_METEOALARM_HOME.md). La même carte est utilisée dans le pop-up `#alert` de la page Météo (L1C1).
+
+---
+
+### 10 - Présence Personne(s)
+
+Groupe réuni en une seule carte `vertical-stack` : un séparateur, puis un `horizontal-stack` avec le bouton d'Eric et celui de Mamour. Fiche dédiée : [`CARD_PRESENCE_HOME.md`](../11_Carte%20Pr%C3%A9sence/CARD_PRESENCE_HOME.md) ; détection WiFi : [`CARD_PRESENCE_HOME.md`](../11_Carte%20Pr%C3%A9sence/CARD_PRESENCE_HOME.md)
+**Fichier YAML :** `dashboard_docs_YAML/L0C0_PAGE_Home/11_Carte Présence/card_presence_home.yaml` (3 cartes : séparateur, Eric, Mamour)
 
 **Séparateur** - couleur selon `sensor.etat_wifi_maison` :
 
@@ -291,7 +305,7 @@ Groupe réuni en une seule carte `vertical-stack` : un séparateur, puis un `hor
 Les pictogrammes par état (`mdi:home`, `mdi:home-off`, `mdi:basket-check`, `mdi:map-marker`, `mdi:crosshairs-question`) ne sont plus dans le YAML depuis la version du 2026-10-11.
 ---
 
-### 10 - Barre de navigation (nav_bar)
+### 11 - Barre de navigation (nav_bar)
 
 **Type :** `custom:streamline-card` - `template: nav_bar`
 **Toujours visible** (dernière carte de la page, après la grille)
@@ -471,7 +485,7 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 
 ### Le séparateur Présence reste gris
 
-→ Voir [`CARD_PRESENCE_HOME.md`](../10_Carte%20Pr%C3%A9sence/CARD_PRESENCE_HOME.md) section Dépannage
+→ Voir [`CARD_PRESENCE_HOME.md`](../11_Carte%20Pr%C3%A9sence/CARD_PRESENCE_HOME.md) section Dépannage
 
 ### L4C3 affiche 0 alors que des MAJ existent
 
@@ -528,12 +542,14 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 | `dashboard_docs_YAML/L0C0_PAGE_Home/06_Lave Linge/card_lave_linge_home.yaml` | Lave-linge (mushroom WashData - remplace 2026-06-13) |
 | `dashboard_docs_YAML/L0C0_PAGE_Home/07_Lave Vaisselle/card_lave_vaisselle_home.yaml` | Lave-vaisselle (mushroom WashData - remplace 2026-06-13) |
 | `dashboard_docs_YAML/L0C0_PAGE_Home/08_Congélateur/card_congelateur_home.yaml` | Congélateur (button-card appliance - contact porte + seuils 26/48/235) |
-| `dashboard_docs_YAML/L0C0_PAGE_Home/10_Carte Présence/card_presence_home.yaml` (3 cartes) | Présence (separator + Eric + Mamour) |
 | `dashboard_docs_YAML/L0C0_PAGE_Home/09_Détecteur de fuite/card_detecteur_fuite_home.yaml` | Détecteur de fuite (mushroom) |
+| `dashboard_docs_YAML/L0C0_PAGE_Home/10_Carte Meteoalarm/card_meteoalarm_home.yaml` | Alertes Météo-France (custom:meteoalarm-card) |
+| `dashboard_docs_YAML/L0C0_PAGE_Home/11_Carte Présence/card_presence_home.yaml` (3 cartes) | Présence (separator + Eric + Mamour) |
 
 ### Documentation liée
 
-- [`CARD_PRESENCE_HOME.md`](../10_Carte%20Pr%C3%A9sence/CARD_PRESENCE_HOME.md) - détail cartes présence
+- [`CARD_METEOALARM_HOME.md`](../10_Carte%20Meteoalarm/CARD_METEOALARM_HOME.md) - détail carte alertes Meteoalarm
+- [`CARD_PRESENCE_HOME.md`](../11_Carte%20Pr%C3%A9sence/CARD_PRESENCE_HOME.md) - détail cartes présence
 
 ---
 
@@ -542,4 +558,4 @@ Toutes les vignettes sont des `custom:button-card` (aspect-ratio 1/1, fond trans
 
 <!-- obsidian-wikilinks -->
 ---
-*Liens : [[DEPENDANCES_GLOBALES]]  [[CARD_PRESENCE_HOME]]*
+*Liens : [[DEPENDANCES_GLOBALES]]  [[CARD_METEOALARM_HOME]]  [[CARD_PRESENCE_HOME]]*

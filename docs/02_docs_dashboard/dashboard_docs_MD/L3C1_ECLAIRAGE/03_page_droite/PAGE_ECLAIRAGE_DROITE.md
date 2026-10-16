@@ -2297,7 +2297,7 @@ cards:
 - [`PAGE_ECLAIRAGE_GAUCHE.md`](../02_page_gauche/PAGE_ECLAIRAGE_GAUCHE.md) - page gauche (Entrée, Salon, Cuisine, Couloir)
 - [`L3C1_VIGNETTE_ECLAIRAGE.md`](../01_vignette/L3C1_VIGNETTE_ECLAIRAGE.md) - vignette d'accès à cette page
 - [`PAGE_PRISES.md`](../../L3C2_PRISES/02_page/PAGE_PRISES.md) - page prises (même structure)
-- [`CARD_PRESENCE_HOME.md`](../../L0C0_PAGE_Home/10_Carte%20Pr%C3%A9sence/CARD_PRESENCE_HOME.md) - détection de présence (carte de la page d'accueil)
+- [`CARD_PRESENCE_HOME.md`](../../L0C0_PAGE_Home/11_Carte%20Pr%C3%A9sence/CARD_PRESENCE_HOME.md) - détection de présence (carte de la page d'accueil)
 
 ---
 

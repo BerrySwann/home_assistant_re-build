@@ -1,0 +1,132 @@
+# card_presence_home.yaml
+# Groupe presence - HOME page : UNE seule carte (vertical-stack) qui contient
+#   1. Separateur "Personne(s)" - couleur selon sensor.etat_wifi_maison
+#      '2' -> darkgreen | 'Eric'/'Mamour' -> darkorange | autre -> grey
+#   2. horizontal-stack : bouton Eric (device_tracker.poco + person.eric)
+#      et bouton Mamour (device_tracker.mamour + person.mamour)
+#      Eric : home -> darkgreen | autre -> grey
+#      Mamour : home -> darkgreen | not_home -> orange | LECLERC/MONOPRIX/AUCHAN/ANITA/KIPUE -> bleu | autre -> grey
+# Carte unique : se colle directement dans l'editeur de carte de Home Assistant
+# (la version "liste de 3 cartes" etait refusee : Aucun type fourni).
+# Entites :
+#   sensor.etat_wifi_maison -> templates/P4_groupe_presence/P4_groupe_presence.yaml
+#   (detection WiFi par le SSID du routeur Beryl, Module B.E.R.Y.L. [GG-5.0] / [GG-2.4])
+#   device_tracker.poco / device_tracker.mamour -> Mobile App (Companion)
+#   person.eric / person.mamour -> HA Personnes
+# Version fournie par Eric le 2026-10-11.
+
+type: vertical-stack
+cards:
+  - type: custom:bubble-card
+    card_type: separator
+    name: Personne(s)
+    icon: mdi:account-group
+    card_layout: normal
+    rows: 0.8
+    styles: |
+      .bubble-line {
+        background: var(--primary-text-color);
+        opacity: 0.8;
+      }
+      .bubble-sub-button {
+        background-color: ${
+          hass.states['sensor.etat_wifi_maison'].state === '2'
+            ? 'darkgreen'
+            : (hass.states['sensor.etat_wifi_maison'].state === 'Eric' ||
+               hass.states['sensor.etat_wifi_maison'].state === 'Mamour')
+              ? 'darkorange'
+              : 'grey'
+        } !important;
+        color: gainsboro !important;
+      }
+      ha-card {
+        margin-top: 20px !important;
+      }
+    sub_button:
+      main:
+        - entity: sensor.etat_wifi_maison
+          show_icon: true
+          icon: mdi:home
+          show_name: true
+          name: Maison
+          state_content: state
+      bottom: []
+  - type: horizontal-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: button
+        button_type: state
+        entity: device_tracker.poco
+        show_name: true
+        card_layout: normal
+        layout_options:
+          grid_columns: 2
+          grid_rows: 1
+        sub_button:
+          main:
+            - entity: person.eric
+              show_icon: true
+              show_background: true
+          bottom: []
+        styles: |-
+          ha-card {
+            --bubble-icon-background-color: black !important;
+          }
+          .bubble-sub-button {
+            background-color: black !important;
+          }
+          .bubble-button-background {
+            background-color: ${state === 'home' ? 'darkgreen' : 'grey'} !important;
+          }
+          .bubble-icon,
+          .bubble-sub-button > ha-icon {
+            color: ${state === 'home' ? 'darkgreen' : 'grey'} !important;
+          }
+        state_content: last_changed
+      - type: custom:bubble-card
+        card_type: button
+        button_type: state
+        entity: device_tracker.mamour
+        name: Mamour
+        show_name: true
+        card_layout: normal
+        layout_options:
+          grid_columns: 2
+          grid_rows: 1
+        sub_button:
+          main:
+            - entity: person.mamour
+              show_icon: true
+              show_background: true
+          bottom: []
+        styles: |-
+          ha-card {
+            --bubble-icon-background-color: black !important;
+          }
+          .bubble-sub-button {
+            background-color: black !important;
+          }
+          .bubble-button-background {
+            background-color: ${
+              state === 'home'
+                ? 'darkgreen'
+                : state === 'not_home'
+                  ? 'rgb(255, 103, 0)'
+                  : ['LECLERC', 'MONOPRIX', 'AUCHAN', 'ANITA', 'KIPUE'].includes(state)
+                    ? 'rgb(0, 102, 204)'
+                    : 'grey'
+            } !important;
+          }
+          .bubble-icon,
+          .bubble-sub-button > ha-icon {
+            color: ${
+              state === 'home'
+                ? 'darkgreen'
+                : state === 'not_home'
+                  ? 'rgb(255, 103, 0)'
+                  : ['LECLERC', 'MONOPRIX', 'AUCHAN', 'ANITA', 'KIPUE'].includes(state)
+                    ? 'rgb(0, 102, 204)'
+                    : 'grey'
+            } !important;
+          }
+        state_content: last_changed

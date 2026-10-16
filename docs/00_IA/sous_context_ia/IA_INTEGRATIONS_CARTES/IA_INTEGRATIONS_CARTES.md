@@ -1,6 +1,6 @@
 # 🔌 RÉFÉRENTIEL INTÉGRATIONS & CARTES HA
 *Lire ce fichier si : YAML dashboard à valider, `type: custom:*` inconnu, intégration manquante, nouvelle carte à ajouter.*
-*Dernière mise à jour : 2026-10-13 (composants personnalisés, intégrations et cartes revérifiés contre `custom_components`, `www/community` et `core.config_entries`).*
+*Dernière mise à jour : 2026-10-16 (meteoalarm-card aussi utilisee sur la page Home depuis le 2026-10-15 ; precedent : 2026-10-13, composants personnalisés, intégrations et cartes revérifiés contre `custom_components`, `www/community` et `core.config_entries`).*
 
 ---
 
@@ -114,7 +114,7 @@
 | | `rain-gauge-card` | Visualisation de la pluviométrie |
 | | `uv-index-card` | Affichage de l'indice UV (L1C1) |
 | | `windrose-card` | Rose des vents (L1C1 Météo) |
-| | `meteoalarm-card` | Alertes Météo-Alarm européen (L1C1) |
+| | `meteoalarm-card` | Alertes Météo-Alarm européen (L1C1 et L0C0 Home) |
 | | `meteofranceweathercard` | Carte dédiée intégration Météo-France (L1C1) |
 | | `uptime-card` | Disponibilité / uptime services |
 | | `ha-tbaro-card` | Baromètre (pression atmosphérique) |

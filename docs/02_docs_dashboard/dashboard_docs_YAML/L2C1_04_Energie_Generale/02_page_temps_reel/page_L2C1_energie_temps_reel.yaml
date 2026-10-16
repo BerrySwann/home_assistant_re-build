@@ -257,7 +257,7 @@ cards:
           type: vertical-stack
           cards:
             - type: heading
-              icon: mdi:bubbles
+              icon: mdi:washing-machine
               heading: Hygiène
               heading_style: title
               badges:
