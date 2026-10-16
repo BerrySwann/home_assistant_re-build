@@ -1,0 +1,8 @@
+# MODIFS 2026-10-16 - claude
+2026-10-16 18:03:20 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\TODO\TODO.md | avant=f1ceec09 apres=15f222f4 | R46 et R47 coches FAIT, R45 reduit au reste, R35 passe de 5 a 3 docs ; bak : TODO.bak_2026_10_16_18h03m20s.md
+2026-10-16 18:03:27 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\TODO\TODO.md | avant=15f222f4 apres=c0658840 | heure de l en-tete corrigee (18h05 -> 18h03)
+2026-10-16 18:09:54 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md | avant=9502c6f2 apres=e612f455 | binary_sensor.meteoalarm retire de la ligne de date a la demande d Eric ; bak : DEPENDANCES_GLOBALES.bak_2026_10_16_18h09m54s.md
+2026-10-16 18:09:54 | claude | POUSSE | H:\docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md | avant=9502c6f2 apres=e612f455 | depuis la copie locale, retrait de binary_sensor.meteoalarm
+2026-10-16 18:09:54 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md | avant=b1ba4362 apres=4fc3d07b | binary_sensor.meteoalarm retire de la ligne de date a la demande d Eric ; bak : GLOBAL_INDEX_REPO.bak_2026_10_16_18h09m54s.md
+2026-10-16 18:09:54 | claude | POUSSE | H:\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md | avant=b1ba4362 apres=4fc3d07b | depuis la copie locale, retrait de binary_sensor.meteoalarm
+2026-10-16 18:09:54 | claude | POUSSE | H:\GLOBAL_INDEX_REPO.md | avant=b1ba4362 apres=4fc3d07b | depuis la copie locale, retrait de binary_sensor.meteoalarm
