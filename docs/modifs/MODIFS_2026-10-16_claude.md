@@ -22,3 +22,11 @@
 2026-10-16 18:33:04 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\DOCS_SCRIPT_ORIGINAL\scripts.bak_2026_10_16_18h32m39s.yaml | avant=- apres=8ba8c525 | copie datee de H:\scripts.yaml par le trigul profond
 2026-10-16 19:04:31 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\historique\renommage_docs_dryrun_2026-10-16.csv | avant=- apres=3caf9d75 | dry-run renommage docs (lecture seule, aucun renommage fait)
 2026-10-16 19:04:31 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\historique\renommage_docs_dryrun_2026-10-16.txt | avant=- apres=a8229d35 | dry-run renommage docs (lecture seule, aucun renommage fait)
+2026-10-16 19:23:18 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\historique\renommage_docs_arbo_2026-10-16.txt | avant=- apres=5569e514 | arborescence docs noms actuels/prevus (lecture seule)
+2026-10-16 19:23:32 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\historique\renommage_docs_arbo_2026-10-16.txt | avant=5569e514 apres=9fcc6821 | correction: 01_docs_config_system inchange aussi
+2026-10-16 19:30:59 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\historique\renommage_docs_arbo_2026-10-16.txt | avant=9fcc6821 apres=9e110649 | DEPENDANCES_GLOBALES et 05_docs_MD_system inchanges
+2026-10-16 19:45:08 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\historique\renommage_docs_tree_2026-10-16.md | avant=- apres=7da36cc2 | tree md des renommages prevus dans docs (dry-run, rien renomme)
+2026-10-16 19:59:47 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\historique\renommage_docs_tree_DEFINITIF_2026-10-16.md | avant=- apres=6a2cbf17 | tree definitif des renommages docs (IA_INDEX_ exempte, rien renomme)
+2026-10-16 20:03:07 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\historique\renommage_docs_tree_DEFINITIF_2026-10-16.md | avant=6a2cbf17 apres=b095a68b | IA_* tous exemptes (rien renomme)
+2026-10-16 20:05:16 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\historique\renommage_docs_tree_DEFINITIF_2026-10-16.md | avant=b095a68b apres=ae7a7698 | COULEURS_PRISES_PAR_PIECE exempte (rien renomme)
+2026-10-16 20:08:57 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\historique\renommage_docs_tree_DEFINITIF_2026-10-16.md | avant=ae7a7698 apres=ae7a7698 | COULEURS_PRISES_PAR_PIECE exempte (rien renomme)
