@@ -153,7 +153,7 @@ La configuration est **100% eclatee** - zero fichier monolithique. Chaque fichie
 │   ├── P1_clim_chauffage/      <- kWh + DUT chauffage/clim
 │   ├── P2_prise/               <- kWh prises, veilles, mini-pc
 │   ├── P3_eclairage/           <- kWh ampoules (unite / zone / total)
-│   ├── Air_quality/            <- stats PM2.5 + tCOV (mean 24h)
+│   ├── Air_Quality/            <- stats PM2.5 + tCOV (mean 24h)
 │   └── meteo/                  <- Blitzortung
 │
 ├── templates/
@@ -162,7 +162,7 @@ La configuration est **100% eclatee** - zero fichier monolithique. Chaque fichie
 │   ├── P2_prise/               <- AVG prises/veilles/mini-pc, all_standby
 │   ├── P3_eclairage/           <- puissance (POWER), AVG, ui_dashboard
 │   ├── P4_groupe_presence/     <- detection Wi-Fi/reseau, affichage telephones
-│   ├── Air_quality/            <- tCOV en ppb (template)
+│   ├── Air_Quality/            <- tCOV en ppb (template)
 │   ├── Stores/                 <- etats volets motorises (HTML couleur)
 │   ├── Inter_BP_Virtuel/       <- interrupteur soufflant SdB (binary_sensor + switch)
 │   └── meteo/                  <- alertes, vent, Blitzortung, tendances
