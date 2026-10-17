@@ -241,3 +241,4 @@
 2026-10-17 17:35:00 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\categories_ha_2026-10-17.txt | avant=- apres=0624cf6b | /trigul, categories HA (15 automation, 0 script), identiques a la veille
 2026-10-17 17:35:00 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\docs\03_Docs_automations\Docs_automations_yaml\Automations.yalm original\automations.bak_2026_10_17_17h34m30s.yaml | avant=- apres=f6cd6a1d | /trigul profond, copie datee de H:\automations.yaml (identique)
 2026-10-17 17:35:00 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_script_original\scripts.bak_2026_10_17_17h34m30s.yaml | avant=- apres=8ba8c525 | /trigul profond, copie datee de H:\scripts.yaml (identique)
+2026-10-17 17:47:46 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\CR_trigul_2026-10-17.txt | avant=- apres=9f5d4d32 | compte rendu lisible du /trigul (style audit HA), demande d Eric
