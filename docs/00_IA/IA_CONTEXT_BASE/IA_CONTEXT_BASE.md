@@ -3,7 +3,7 @@
 > `ReBuild/docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md` et `D:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres
 > toute mise a jour, verifier que les trois empreintes md5 sont egales. Il ne depend d'aucun agent
 > en particulier.
-> Derniere mise en conformite : 2026-10-13 (3 copies identiques, voir ci-dessus). Rappel du
+> Derniere mise en conformite : 2026-10-17 (3 copies identiques, voir ci-dessus). Rappel du
 > 2026-10-04 : la copie `D:\` avait ete retrouvee perimee (version du 2026-07-19, encore l'ancienne
 > REGLE ABSOLUE) et realignee ce jour-la - ancienne version conservee en
 > `D:\docs\00_IA\IA_CONTEXT_BASE_2026-07-19_15h46.md`.
@@ -70,14 +70,14 @@
 
 | Fichier | Lire si… |
 |:--------|:---------|
-| `docs/00_IA/sous_context_ia/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md` | YAML dashboard à valider, `type: custom:*` inconnu, intégration manquante, palette couleurs |
-| `docs/00_IA/sous_context_ia/IA_AUTOMATIONS_NOTIFS/IA_AUTOMATIONS_NOTIFS.md` | Création/modif automation, écriture message `notify`, script HA |
-| `docs/00_IA/sous_context_ia/IA_P4_PRESENCE/IA_P4_PRESENCE.md` | `sensor.presence`, format notif avec présence, logique groupe WiFi |
-| `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md` | Audit fichiers, sync GitHub, arborescence prod complète, URLs raw GitHub |
-| `docs/00_IA/sous_context_ia/IA_INDEX_NAVIGATION/IA_INDEX_NAVIGATION.md` | Régénération de `INDEX_NAVIGATION_FULL.md`, ajout vignette/page à l'index, mapping entités → fichiers sources, structure accordéon GitHub |
-| `docs/00_IA/sous_context_ia/IA_INDEX_AUTOMATIONS/IA_INDEX_AUTOMATIONS.md` | Régénération de `INDEX_AUTOMATIONS.md`, ajout/suppression automation, mapping alias → docs/03 → docs, anomalies connues |
-| `docs/00_IA/sous_context_ia/IA_CMD_TERMINAL_HA/IA_CMD_TERMINAL_HA.md` | Commande tree prod, audit MD5, git backup, chemins `/homeassistant/`, logs HA |
-| `docs/00_IA/sous_context_ia/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` | Audit énergétique/thermique, analyse DUT par pièce, isolation/volets/rideaux, écart théorie YAML vs logs conso, caractéristiques physiques du logement |
+| `docs/00_IA/SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md` | YAML dashboard à valider, `type: custom:*` inconnu, intégration manquante, palette couleurs |
+| `docs/00_IA/SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/IA_AUTOMATIONS_NOTIFS.md` | Création/modif automation, écriture message `notify`, script HA |
+| `docs/00_IA/SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md` | `sensor.presence`, format notif avec présence, logique groupe WiFi |
+| `docs/00_IA/SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md` | Audit fichiers, sync GitHub, arborescence prod complète, URLs raw GitHub |
+| `docs/00_IA/SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/IA_INDEX_NAVIGATION.md` | Régénération de `INDEX_NAVIGATION_FULL.md`, ajout vignette/page à l'index, mapping entités → fichiers sources, structure accordéon GitHub |
+| `docs/00_IA/SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/IA_INDEX_AUTOMATIONS.md` | Régénération de `INDEX_AUTOMATIONS.md`, ajout/suppression automation, mapping alias → docs/03 → docs, anomalies connues |
+| `docs/00_IA/SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA/IA_CMD_TERMINAL_HA.md` | Commande tree prod, audit MD5, git backup, chemins `/homeassistant/`, logs HA |
+| `docs/00_IA/SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` | Audit énergétique/thermique, analyse DUT par pièce, isolation/volets/rideaux, écart théorie YAML vs logs conso, caractéristiques physiques du logement |
 
 ---
 
@@ -372,7 +372,7 @@ wc -l /tmp/github_aliases.txt /tmp/local_autom_files.txt
 `SNS` -> `sensors/` · `UM` -> `utility_meter/` · `TPL` -> `templates/` · `CMD` -> `command_line/` · `GRP_` -> `groups/` (groupes d'entités par constructeur - batteries Hue/IKEA/Sonoff)
 
 **Préfixes hors-pôles (remplacent `P{n}` pour les fichiers sans pôle énergie) :**
-`M_` Météo · `A_` Air quality · `S_` Stores · `MP_` Mini-PC
+`M_` Météo · `AQ_` Air Quality · `S_` Stores · `MPC_` Mini-PC
 
 ### 4 - Bordures ASCII
 - **Titre principal** - coins arrondis `╭─╮/╰─╯` - largeur 78 car. - texte MAJUSCULES.
@@ -434,14 +434,29 @@ Cycles : `quotidien` | `hebdomadaire` | `mensuel` | `annuel`
 | `IB` | Input Boolean - stockage état on/off du BV | `{P}_BV_IB_{description}.yaml` dans `input_booleans/` | `P3_BV_IB_inter_smorig_salon.yaml` |
 | `SW` | Switch - template switch exposé utilisateur | `{P}_BV_IB_SW_{description}.yaml` dans `templates/Inter_BP_Virtuel/` | `P3_BV_IB_SW_inter_smorig_salon.yaml` |
 | `MINI_MAXI_AVG` | Stats min/max/avg sur période glissante | `{P}_MINI_MAXI_AVG_{description}.yaml` | `P0_MINI_MAXI_AVG_Genelec_appart.yaml` |
-| `ui_dashboard` | Templates affichage uniquement | `{P}_ui_dashboard.yaml` | `{P}_ui_dashboard.yaml` |
+| `UI_DASHBOARD` | Spécification de fichiers propre à un pôle : change un état en signal ou autre chose (templates d'affichage) | `{P}_UI_DASHBOARD.yaml` | `P1_UI_DASHBOARD.yaml` |
 
 **Règles :**
 - `_AMHQ` = present si le fichier couvre les 4 cycles (Annuel/Mensuel/Hebdo/Quotidien)
 - `_VARIANTE` = discriminant si plusieurs fichiers du même TYPE dans le même pole : nom fonctionnel minuscules (`prises`, `mini_pc`) ou niveau numéroté (`1_UNITE`, `2_ZONE`, `3_TOTAL`)
-- Hors-poles : `{LETTRE}_{index}_{description}.yaml` - ex: `M_04_tendances_th_ext_card.yaml`
+- Niveaux P3 (suffixe de `_VARIANTE`, motif `_{n}_UNITE`, `_{n}_ZONE`, `_{n}_TOTAL`, toujours en majuscules, extension `.yaml` inchangée) : `_1_UNITE` = une lampe individuelle ; `_2_ZONE` = agrégat par pièce (somme des lampes d'une zone) ; `_3_TOTAL` = appartement entier. Le détail des `unique_id` par niveau est dans la section P3 (convention nommage TPL)
+- Un nom qui se termine par `_UNITE`, `_ZONE` ou `_TOTAL`, avec ou sans numéro, n'est pas renommé à cause de ce suffixe
+- Cas à part : `P1_AVG_AMHQ_UNITE.yaml` porte `_UNITE` sans numéro de niveau ; `P3_POWER_3_TOTAL_ZONE.yaml` est de niveau 3 (TOTAL) avec un suffixe ZONE en plus. Noms d'origine conservés
+- Hors-poles : `{PREFIXE}_{index}_{description}.yaml` - ex: `M_04_tendances_th_ext_card.yaml`
 - 1 fichier = 1 seul pole - jamais deux poles dans le même fichier
-- ⛔ `ui_dashboard/` : templates d'affichage uniquement (texte, couleurs, icônes) - jamais de calculs kWh/W/DUT
+- ⛔ `P*_UI_DASHBOARD` (ancien nom `ui_dashboard`) : templates d'affichage uniquement (texte, couleurs, icônes) - jamais de calculs kWh/W/DUT
+- `MINI_` ou `MAXI_` peuvent s'utiliser seuls ; `MINI_MAXI_AVG` est l'agglomération de `MINI_`, `MAXI_` et `AVG` (Eric, 2026-10-17)
+- `SDB` = salle de bain : toute variante d'écriture de l'abréviation (`sdb`, `Sdb`...) s'écrit `SDB` dans un nom de dossier ou de fichier de `docs` ; un nom écrit en toutes lettres (`salle_de_bain`) n'est pas touché
+- `eCO` s'écrit toujours `eCO` (exemple `P2_eCO_prises`)
+- Un nom de module HACS ou d'application s'écrit comme lui, majuscules comprises (exemple `P0_MyElectricalData`)
+- `Z2M` = Zigbee2MQTT : toute variante d'écriture de l'abréviation (`z2m`, `Z2m`, `z2M`) s'écrit `Z2M` dans un nom de dossier ou de fichier de `docs` (exemple `card_services_ha_Z2M_mariadb.yaml`) ; le nom écrit en toutes lettres (`zigbee2mqtt`) et les identifiants d'entités Home Assistant (minuscules obligatoires) ne sont pas touchés
+- `RASPI` = Raspberry Pi : l'abréviation, écrite `raspi` (`Raspi`, `RasPi`) ou `rpi` (`Rpi`, `RPI`), s'écrit `RASPI` dans un nom de dossier ou de fichier de `docs` (exemple `A_rpi_fan_pwm_6_states` devient `A_RASPI_fan_pwm_6_states`) ; `rpi` n'est écrit `RASPI` que comme mot isolé entre séparateurs (pas dans `scorpion`) ; le nom écrit en toutes lettres (`raspberry`) et les identifiants d'entités Home Assistant (minuscules obligatoires) ne sont pas touchés ; `Rpi4` s'écrit aussi `RASPI` (le numéro de modèle disparaît, décidé le 2026-10-17)
+- `AQ_` remplace `A_` pour Air Quality : `A_01_air_quality.yaml` s'écrit `AQ_01_air_quality.yaml`, et le dossier `Air_quality/` s'écrit `Air_Quality/` (exception limitée à ce nom, chaque mot garde sa majuscule) ; ne pas confondre avec les lettres d'ordre `A_`, `B_`, `C_`, `D_` des automations
+- `GitHub` s'écrit toujours `GitHub` (G et H majuscules) : toute autre écriture (`github`, `Github`, `GITHUB`) devient `GitHub` dans un nom de dossier ou de fichier de `docs` ; cette règle l'emporte sur la règle de la première lettre (exemple : `Github_maintenance` devient `GitHub_maintenance`, `GITHUB` devient `GitHub`)
+- `GLOBAL_INDEX` s'écrit toujours en majuscules dans un nom de dossier ou de fichier de `docs`, sauvegardes `.bak` comprises (exemple : `Gen_global_index_ia.py` devient `Gen_GLOBAL_INDEX_ia.py`)
+- Les dossiers de type de fichiers (md, yaml, sh...) enfants d'un dossier racine `0x_` de `docs` reprennent son numéro : `03_Docs_automations_md` (et non `Docs_automations_md`) ; détail dans le fichier des règles de nommage (2026-10-17)
+- Aucun accent dans les noms de dossiers et de fichiers de `docs`
+- Détail et écarts de toutes les règles de nommage de `docs` : `docs/00_IA/SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md` (brouillon à valider ; aucun renommage sans go séparé d'Eric)
 - Fichiers legacy non conformes : pas de renommage sec en prod - renommer uniquement si le fichier est modifié pour autre chose
 - ⚠️ Exception legacy TOTAL : `P0_total_pour_les_7_postes.yaml` agrège 7 postes (chauffage/hygiène/multimédia...) sur 4 cycles - devrait s'appeler `P0_TOTAL_AMHQ.yaml` mais nom d'origine conservé
 - 🧊 Cas particulier en attente : `P2_current_all_standby.yaml` - puissance totale veilles, TYPE non encore formalisé
@@ -495,7 +510,7 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 | **Accès** | Samba Share · SSH · Tailscale · Cloudflare Tunnel (host Proxmox .240 → erodi-ha.com) |
 
 **Intégrations (compact)** : MyElectricalData · Météo France · Blitzortung · AtmoFrance · Vigieau · Meross LAN · Philips HUE · Z2M · Browser Mod · Streamline Card · HACS
-→ Détail complet : `docs/00_IA/sous_context_ia/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md`
+→ Détail complet : `docs/00_IA/SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md`
 
 ---
 
@@ -583,7 +598,7 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 - PowerCalc : P3 uniquement, Hue sans monitoring natif + exception `relais_lumiere_sdb_sonoff` (10W fixe)
 
 ### P4 - Présence : téléphones mobiles (Poco X7 Pro), capteurs Wi-Fi.
-→ Détail complet sensor.presence : `docs/00_IA/sous_context_ia/IA_P4_PRESENCE/IA_P4_PRESENCE.md`
+→ Détail complet sensor.presence : `docs/00_IA/SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md`
 
 ---
 
@@ -614,7 +629,7 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 | Hors ménage, hors circuit de push | `TODO/` · `Github/` · `historique/` · `.claude/` · `Infra_Proxmox/` | restent locaux |
 
 > Le détail des arborescences (local, prod, GitHub, comptages) vit dans
-> `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md`, maintenu par `/histo` (étape 6).
+> `docs/00_IA/SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md`, maintenu par `/histo` (étape 6).
 > **En cas de divergence, c'est ce fichier qui fait foi** : il est recompté à chaque passage,
 > contrairement à cette page. Ne pas recopier d'arborescence ici.
 
@@ -642,7 +657,7 @@ Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2
 
 → `H:/scripts.yaml` (Scripts, section Automations - miroir local `docs/04_docs_scripts/`) suit la meme regle que la config YAML : sauvegarde locale (`.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}`, voir REGLE DE SAUVEGARDE) a cote du fichier dans `docs/04_docs_scripts/` AVANT toute modification, jamais de sauvegarde creee en prod. Difference : le push vers `H:/scripts.yaml` se fait a la main par Eric via l'UI HA (jamais de copie fichier directe) - coherent avec la regle Automations (jamais d'edition directe du fichier live). Les `.sh` de `.scripts/` restent geres individuellement, hors de cette regle. Audit MD5 automations/scripts : plus complexe que sur la config YAML simple, a traiter au cas par cas.
 
-→ Arborescences complètes prod + local : `docs/00_IA/sous_context_ia/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md`
+→ Arborescences complètes prod + local : `docs/00_IA/SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md`
 
 ---
 
@@ -655,7 +670,7 @@ Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2
 | `groupe_3` | Eric seul |
 | `groupe_4` | Tous les deux |
 
-→ sensor.presence + codes réseau complets : `docs/00_IA/sous_context_ia/IA_P4_PRESENCE/IA_P4_PRESENCE.md`
+→ sensor.presence + codes réseau complets : `docs/00_IA/SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md`
 
 ---
 
@@ -679,5 +694,5 @@ Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2
 *(copie locale du fichier : `docs/00_IA/confort_cible_calcul_flow.png` ; asset GitHub d'origine : https://github.com/user-attachments/assets/f18e24a2-1441-482b-af70-537a7b208e15)*
 
 > Caractéristiques détaillées du logement (dimensions, équipements par pièce, orientations) :
-> déplacées dans `docs/00_IA/sous_context_ia/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` (2026-07-19,
+> déplacées dans `docs/00_IA/SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` (2026-07-19,
 > usage limité à l'analyse des consommations électriques, hors périmètre des directives actives).

@@ -156,7 +156,7 @@ streamline_templates:
       cards:
         - type: custom:navbar-card
           routes:
-            - url: /dashboard-tablette/home
+            - url: /dashboard-tablette/0
               icon: mdi:home
               label: Home
             - url: /dashboard-tablette/lumieres
@@ -2751,6 +2751,11 @@ views:
                   box-shadow: none !important;
                   border: none !important;
                 }
+          - type: custom:meteoalarm-card
+            entities:
+              - entity: sensor.06_weather_alert
+            integration: meteofrance
+            hide_when_no_warning: true
           - type: vertical-stack
             cards:
               - type: custom:bubble-card
@@ -5499,7 +5504,7 @@ views:
                 color: green
             tap_action:
               action: navigate
-              navigation_path: /dashboard-tablette/home
+              navigation_path: /dashboard-tablette/0
             layout_options:
               grid_columns: full
               grid_rows: 1
@@ -22116,7 +22121,7 @@ views:
                   type: vertical-stack
                   cards:
                     - type: heading
-                      icon: mdi:bubbles
+                      icon: mdi:washing-machine
                       heading: Hygiène
                       heading_style: title
                       badges:
@@ -23192,7 +23197,7 @@ views:
                   navigation_path: '#tendances'
             tap_action:
               action: navigate
-              navigation_path: /dashboard-tablette/home
+              navigation_path: /dashboard-tablette/0
             layout_options:
               grid_columns: full
               grid_rows: 1
@@ -28351,7 +28356,7 @@ views:
             badges: []
             tap_action:
               action: navigate
-              navigation_path: /dashboard-tablette/home
+              navigation_path: /dashboard-tablette/0
             layout_options:
               grid_columns: full
               grid_rows: 1
@@ -38542,7 +38547,7 @@ views:
             badges: []
             tap_action:
               action: navigate
-              navigation_path: /dashboard-tablette/home
+              navigation_path: /dashboard-tablette/0
             layout_options:
               grid_columns: full
               grid_rows: 1
@@ -39072,7 +39077,7 @@ views:
             badges: []
             tap_action:
               action: navigate
-              navigation_path: /dashboard-tablette/home
+              navigation_path: /dashboard-tablette/0
             layout_options:
               grid_columns: full
               grid_rows: 1
