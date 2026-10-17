@@ -1,22 +1,25 @@
 ---
 name: histo
-description: "Skill HA ReBuild - genere un journal de bord ultra-compact et le sauvegarde, puis enchaine automatiquement le sync_index (DEPENDANCES_GLOBALES.md, docs impactees, INDEX_GLOBAL.md), le journal fusionne et la copie Obsidian et le menage des sauvegardes .bak puis la mise a jour du tree (IA_ARBO_DETAIL.md). Declencher OBLIGATOIREMENT quand l'utilisateur tape /histo, demande un journal de bord, genere l'histo, fais un resume a sauvegarder, cree un log de session, exporte l'historique. Usage typique : fin de session, avant de fermer Cowork."
+description: "Skill HA ReBuild - genere un journal de bord ultra-compact et le sauvegarde, puis enchaine automatiquement le sync_index (DEPENDANCES_GLOBALES.md, docs impactees, GLOBAL_INDEX_REPO.md), le journal fusionne et la copie Obsidian et le menage des sauvegardes .bak puis la mise a jour du tree (IA_ARBO_DETAIL.md). Declencher OBLIGATOIREMENT quand l'utilisateur tape /histo, demande un journal de bord, genere l'histo, fais un resume a sauvegarder, cree un log de session, exporte l'historique. Usage typique : fin de session, avant de fermer Cowork."
 ---
 
-# Skill : /histo - Journal de bord + sync_index (dont INDEX_GLOBAL) + journal fusionne + copie Obsidian + menage .bak + tree
+# Skill : /histo - Journal de bord + sync_index (dont GLOBAL_INDEX_REPO) + journal fusionne + copie Obsidian + menage .bak + tree
 
 ## Objectif
 
 Six actions, plus l'etape 5B, enchainees sans interruption :
 1. Generer et sauvegarder le journal de bord de session
-2. Executer le sync_index (DEPENDANCES_GLOBALES.md, docs impactees, INDEX_GLOBAL.md)
+2. Executer le sync_index (DEPENDANCES_GLOBALES.md, docs impactees, GLOBAL_INDEX_REPO.md, GLOBAL_INDEX_AUTOMATIONS.md, GLOBAL_INDEX_VIGNETTES_PAGES.md, GLOBAL_INDEX_SCRIPTS_SH.md, GLOBAL_INDEX_SCRIPTS_YAML.md, GLOBAL_INDEX_IA.md)
+
 3. Mettre a jour le JOURNAL FUSIONNE (historique/) avec la session qui vient d'etre ecrite
 4. Copier le journal de session et le journal fusionne dans le coffre Obsidian
 5. Faire le menage des sauvegardes (.bak) du perimetre docs, selon la REGLE DE SAUVEGARDE (etape 5)
 5B. Verifier l'export Dashboard depose a la racine de la prod et ne garder qu'un export en prod (etape 5B)
 6. Mettre a jour les tree : IA_ARBO_DETAIL.md (comptages local, prod, GitHub), avec le skill update-arbo (etape 6)
+6B. Controler les 9 fichiers de SOUS_CONTEXT_IA (lecture seule, rapport d'ecarts, etape 6 point 7)
+6C. Controler tous les index globaux (lecture seule, rapport d'ecarts, etape 6 point 8)
 
-Ne jamais demander confirmation entre les etapes. Les faire dans la foulee. Seule exception : le DRY-RUN du menage (etape 5), qui s'arrete pour presenter la liste et attendre le go de l'utilisateur (voir les garde-fous de l'etape 5).
+Ne jamais demander confirmation entre les etapes. Les faire dans la foulee. Seule exception : le DRY-RUN du menage (etape 5) a la premiere execution sur un dossier, qui s'arrete pour presenter la liste et attendre le go de l'utilisateur (voir les garde-fous de l'etape 5).
 
 ---
 
@@ -69,7 +72,7 @@ Regles de mise en forme :
 - Tout commentaire ou etat entre crochets est en gras : `**[v]**`, `**[a tester]**`, `**[draft]**`, `**[a deployer]**`, `**[resolu]**`, `**[EN COURS]**`.
 - Pastilles de couleur : 🟢 valide ou termine, 🟠 en cours ou a tester, 🔴 erreur, 🔵 information. Une icone par titre de rubrique comme dans le gabarit.
 - Chemins, IDs d'entites et commandes en code inline (accents graves).
-- Cette mise en forme s'applique uniquement aux NOUVEAUX journaux `histo_*.md`. Les anciens journaux, INDEX_GLOBAL.md et les autres fichiers restent inchanges et sans emoji (exception d'emojis accordee par Eric le 2026-10-08, limitee aux nouveaux journaux histo). Les nouveaux blocs de session du journal fusionne ont seulement le gras, sans emoji (etape 3).
+- Cette mise en forme s'applique uniquement aux NOUVEAUX journaux `histo_*.md`. Les anciens journaux, GLOBAL_INDEX_REPO.md et les autres fichiers restent inchanges et sans emoji (exception d'emojis accordee par Eric le 2026-10-08, limitee aux nouveaux journaux histo). Les nouveaux blocs de session du journal fusionne ont seulement le gras, sans emoji (etape 3).
 
 ### Sauvegarde obligatoire
 
@@ -93,37 +96,41 @@ Immediatement apres la sauvegarde du journal, executer le sync_index complet.
 
 | Type de fichier modifie | Index a mettre a jour |
 |:---|:---|
-| Config YAML (sensors, templates, utility_meter...) | `DEPENDANCES_GLOBALES.md` + `INDEX_GLOBAL.md` |
-| Automation | `docs/03_docs_automations/docs_automations_MD/{nom}.md` + `INDEX_GLOBAL.md` |
-| Script | `docs/04_docs_scripts/docs_scripts_YAML_MD/{nom}.md` + `INDEX_GLOBAL.md` |
+| Config YAML (sensors, templates, utility_meter...) | `DEPENDANCES_GLOBALES.md` + `GLOBAL_INDEX_REPO.md` |
+| Automation | `docs/03_docs_automations/docs_automations_MD/{nom}.md` + `GLOBAL_INDEX_REPO.md` |
+| Script | `docs/04_docs_scripts/docs_scripts_YAML_MD/{nom}.md` + `GLOBAL_INDEX_REPO.md` |
 | Tout type impactant une vignette | `DEPENDANCES_GLOBALES.md` |
-| Fichier ajoute, renomme ou supprime (helper, export, fiche) | `INDEX_GLOBAL.md` |
+| Fichier ajoute, renomme ou supprime (helper, export, fiche) | `GLOBAL_INDEX_REPO.md` |
 | Skill du projet modifie (`.claude/skills/<skill>/SKILL.md`) | copie `docs/05_docs_skills/skill_<nom>/<nom>.md` |
 
 **Chemins Windows :**
-- `C:\Users\Berry Swann\Documents\ReBuild\docs\02_docs_dashboard\dashboard_docs_MD\DEPENDANCES_GLOBALES.md`
+- `C:\Users\Berry Swann\Documents\ReBuild\docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\03_docs_automations\docs_automations_MD\`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_YAML_MD\`
-- `C:\Users\Berry Swann\Documents\ReBuild\Github\INDEX_GLOBAL.md`
+- `C:\Users\Berry Swann\Documents\ReBuild\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md`
 
 **Chemin bash sandbox :** detecter via `ls /sessions/` si necessaire (prefixe de session variable).
 
 ### Protocole
 
 1. Identifier les fichiers modifies pendant la session (depuis le journal de bord qui vient d'etre genere)
-2. Pour chaque fichier impactant DEPENDANCES_GLOBALES.md : mettre a jour la date en tete de fichier
+2. Pour chaque fichier impactant DEPENDANCES_GLOBALES.md : mettre a jour la date en tete de fichier, puis pousser le fichier en prod (decide par Eric le 2026-10-14) : comparer le MD5 de la copie locale a `H:\docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`, copier seulement si different (sans sauvegarde sur H: : le `.bak` reste local), verifier le MD5 apres, y compris quand la ligne de date est la seule modification. Si la prod differe de la version locale d'avant la modification (quelqu'un d'autre a ecrit en prod) : ne pas pousser et le signaler. Si H: est inaccessible : le noter sans bloquer.
 3. Pour chaque automation validee : verifier/mettre a jour son `.md` dans `docs_automations_MD/`
 4. Pour chaque script valide : verifier/mettre a jour son `.md` dans `docs_scripts_YAML_MD/`
-5. Mettre a jour `INDEX_GLOBAL.md` (voir ci-dessous)
+5. Mettre a jour `GLOBAL_INDEX_REPO.md` (voir ci-dessous)
 6. Si un `.md` de doc est absent : le signaler (ne pas bloquer)
 7. Pour chaque skill du projet modifie pendant la session : copier d'abord le fichier existant `docs/05_docs_skills/skill_<nom>/<nom>.md` en `docs/05_docs_skills/skill_<nom>/<nom>.bak_AAAA_MM_JJ_HHhMMmSSs.md` (sauvegarde avant ecrasement, jusqu'a 10 par jour ; le menage de l'etape 5 range les jours passes en `<nom>.bak_AAAA_MM_JJ.md`, 3 au plus), puis recopier le `SKILL.md` modifie vers `docs/05_docs_skills/skill_<nom>/<nom>.md`. Pas de copie dans `.claude/ARCHIVE`. Pas de push des skills vers `H:` tant qu'Eric ne le demande pas (decision du 2026-10-11).
+8. Regenerer GLOBAL_INDEX_AUTOMATIONS.md (decide le 2026-10-13) : lancer `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\gen_global_index_automations\gen_global_index_automations.py"`. Le script lit H:\automations.yaml et le registre HA (lecture seule), croise avec docs_automations_YAML et docs_automations_MD, et ecrit `docs\03_docs_automations\GLOBAL_INDEX_AUTOMATIONS.md` (sauvegarde `.bak_AAAA_MM_JJ_HHhMMmSSs.md` automatique si le contenu change ; rien d'ecrit si identique). Ne jamais modifier ce fichier a la main. VERIFIER la sortie du script : la ligne liens=N casses=M doit avoir casses=0 (sinon signaler chaque LIEN_CASSE en tete du rapport final) ; mettre dans le rapport final les lignes de resume du script et chaque ecart cite (sans_yaml, sans_fiche, sans_entity, id_different, erreurs_yaml). Un ecart nouveau par rapport a la session precedente doit etre signale a Eric, pas corrige sans demande. Si H: est inaccessible (code retour 2) : le noter sans bloquer. Pas de push automatique (poussable avec /ha-push-docs sur demande).
+9. Regenerer GLOBAL_INDEX_VIGNETTES_PAGES.md (decide le 2026-10-13), meme principe que le point 8 : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\gen_global_index_vignettes_pages\gen_global_index_vignettes_pages.py"`. Le script lit l'arbre local docs\02_docs_dashboard (dashboard_docs_MD et dashboard_docs_YAML, sauvegardes exclues, Dashboard_COMPLET jamais lu) et ecrit `docs\02_docs_dashboard\GLOBAL_INDEX_VIGNETTES_PAGES.md` (sauvegarde `.bak_...md` automatique si le contenu change). Ne jamais modifier ce fichier a la main. VERIFIER la sortie du script : la ligne liens=N casses=M doit avoir casses=0 (sinon signaler chaque LIEN_CASSE en tete du rapport final) ; mettre dans le rapport final les lignes de resume du script (vignettes sans fiche ou sans YAML, dossiers d un seul cote, sans_dependances). Pas de push automatique.
+10. Regenerer GLOBAL_INDEX_SCRIPTS_SH.md et GLOBAL_INDEX_SCRIPTS_YAML.md (decide le 2026-10-13), meme principe : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\gen_global_index_scripts\gen_global_index_scripts.py"`. Le script lit l'arbre local docs\04_docs_scripts et la prod en lecture seule (H:\scripts.yaml, H:\automations.yaml, H:\shell_command, H:\.scripts, registre HA) et ecrit les deux fichiers a la racine de docs\04_docs_scripts (sauvegarde `.bak_...md` automatique si le contenu change). Chaque fichier explique la difference entre scripts SH (programmes bash/python) et scripts YAML (scripts Home Assistant). VERIFIER la sortie : les deux lignes `liens=N casses=M` doivent avoir casses=0 ; signaler dans le rapport final les lignes de resume SH et YAML et chaque ecart (script sans fiche, copie de H:\.scripts DIFFERENT du local, script YAML different de la prod ou sans YAML local, fichiers .py ranges dans docs_scripts_YAML). Si H: est inaccessible (code retour 2) : le noter sans bloquer. Ne jamais pousser un script de H:\.scripts sans ordre d'Eric. Ne jamais modifier ces fichiers a la main.
+11. Regenerer GLOBAL_INDEX_IA.md (decide le 2026-10-13) : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\gen_global_index_ia\gen_global_index_ia.py"`. Le script liste tous les fichiers de docs\00_IA (IA_CONTEXT_BASE et SOUS_CONTEXT_IA) avec qui s'en sert, leur but, quand les lire, leur MD5 prod et un lien, et resume les `.bak` par dossier. Il ecrit docs\00_IA\GLOBAL_INDEX_IA.md (sauvegarde `.bak_...md` automatique si le contenu change). VERIFIER la sortie : la ligne `liens=N casses=M sans_description=K` doit avoir casses=0 et sans_description=0. Si un fichier est nouveau dans docs\00_IA (sans_description > 0) : le lire, ajouter son entree (qui, but, quand) dans le dictionnaire DESC du script apres sauvegarde du script, puis relancer ; ne jamais inventer une description sans avoir lu le fichier. Ne jamais modifier GLOBAL_INDEX_IA.md a la main.
 
-### Mise a jour de INDEX_GLOBAL.md
+### Mise a jour de GLOBAL_INDEX_REPO.md
 
-Fichier : `C:\Users\Berry Swann\Documents\ReBuild\Github\INDEX_GLOBAL.md` (copie locale uniquement, il n'existe pas de circuit de push pour lui ; ne pas le pousser).
+Fichier : `C:\Users\Berry Swann\Documents\ReBuild\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md` (copie de travail locale, ses liens sont relatifs a la racine du depot : elle ne se clique pas ici ; poussee en prod a chaque /histo aux deux endroits (miroir H:\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\ et racine H:\GLOBAL_INDEX_REPO.md, lue sur GitHub), voir le point 8 ci-dessous ; GitHub est alimente par le backup HA depuis H:, jamais en push direct).
 
-1. Si aucun fichier de la session n'est ajoute, renomme, supprime ou deplace, et qu'aucune entite citee n'a change : noter "INDEX_GLOBAL deja a jour" et passer a l'etape suivante.
-2. Sinon, faire d'abord une sauvegarde dans le meme dossier : `INDEX_GLOBAL.bak_AAAA_MM_JJ_HHhMMmSSs.md` (format PowerShell `Get-Date -Format "yyyy_MM_dd_HH'h'mm'm'ss's'"` ; le dossier Github est hors perimetre du menage de l'etape 5).
+1. Si aucun fichier de la session n'est ajoute, renomme, supprime ou deplace, et qu'aucune entite citee n'a change : noter "GLOBAL_INDEX_REPO deja a jour" et passer au point 8 (le push compare quand meme les MD5).
+2. Sinon, faire d'abord une sauvegarde dans le meme dossier : `GLOBAL_INDEX_REPO.bak_AAAA_MM_JJ_HHhMMmSSs.md` (format PowerShell `Get-Date -Format "yyyy_MM_dd_HH'h'mm'm'ss's'"` ; le dossier INDEX_GLOBAL est dans le perimetre du menage de l'etape 5).
 3. Ne reecrire que les lignes concernees, jamais le fichier entier :
    - ajouter une entree pour chaque nouveau fichier (automation, script, helper YAML, fiche), dans la section de son type, a cote des entrees voisines, avec le meme format que celles-ci
    - mettre a jour les entrees renommees ou supprimees
@@ -132,7 +139,8 @@ Fichier : `C:\Users\Berry Swann\Documents\ReBuild\Github\INDEX_GLOBAL.md` (copie
 4. Garder le format existant du fichier : UTF-8 sans BOM, fins de ligne LF (verifie le 2026-10-11 : le fichier est en LF, ne pas le convertir en CRLF). Controler le format avant d'ecrire.
 5. Controles apres ecriture : le fichier se relit en UTF-8, les compteurs modifies correspondent au nombre d'entrees, les liens ajoutes pointent vers des fichiers qui existent. Les entites ajoutees doivent avoir ete verifiees en live ou lues dans un fichier de la session, jamais recopiees de memoire.
 6. Les ecarts deja presents avant la session (entites citees qui ne repondent plus, desequilibres de compteurs) ne sont pas corriges ici : les mentionner dans le rapport s'ils concernent la session.
-7. Note pour ha-trigul : `INDEX_GLOBAL.md` apparait en DIFF local contre prod et repo, c'est attendu tant qu'il reste local seulement.
+7. Note pour ha-trigul : depuis le push de /histo (decide par Eric le 2026-10-14), `GLOBAL_INDEX_REPO.md` est present en prod sous docs/05_docs_MD_system/GLOBAL_INDEX_REPO/ (miroir) ; il reste ABSENT sur le depot tant que le backup HA ne l'a pas repris ; son exemplaire a la racine de H: (GLOBAL_INDEX_REPO.md) n'est pas compare par le script.
+8. Push en prod (decide par Eric le 2026-10-14, il remplace l'ancienne regle "pas de push automatique" : Eric avait pris ce fichier pour un autre) : apres les controles du point 5, que le fichier ait ete modifie ou non, comparer le MD5 de la copie de travail a chacune des DEUX destinations, comme l'etape 5B de ha-push-docs : `H:\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md` (miroir) et `H:\GLOBAL_INDEX_REPO.md` (racine). Copier seulement celles qui different, sans sauvegarde sur H: (les `.bak` restent locaux), puis verifier le MD5 : source = miroir = racine. Jamais un seul des deux. Ne pas pousser si les controles du point 5 ont echoue. Si H: est inaccessible : le noter sans bloquer. GitHub : jamais de push direct (le depot est alimente par le backup HA depuis H:).
 
 ### Regles sync_index
 
@@ -281,7 +289,7 @@ etre un vrai document et non une sauvegarde), on signale et on ne touche pas.
 - Fichier non date contenant `backup`, `save` ou `old`, sans version de travail voisine (ex : `ha_git_backup.sh`) -> vrai fichier, ne pas traiter.
 - Exports `Dashboard_COMPLET` -> jamais traites.
 - Erreur de la corbeille (fichier verrouille, acces refuse) -> ne pas retenter par une autre methode, signaler.
-- Avant de lancer l'etape pour la premiere fois sur un dossier, ou si plus de 30 fichiers sont concernes : produire d'abord la liste (DRY-RUN : renommages et envois en corbeille prevus) et la presenter, sans rien modifier, puis attendre le go de l'utilisateur (seul arret autorise de /histo). Relire le plan avant de le presenter : aucune cible ne doit etre tronquee, aucun export Dashboard ni vrai fichier ne doit y figurer, et le plafond de 3 doit etre calcule apres les renommages de la famille D. Executer ensuite sans re-demander ; le tree (etape 6) est fait apres l'execution du menage, ou le rapport precise que ses comptages sont d'avant menage.
+- Avant de lancer l'etape pour la premiere fois sur un dossier : produire d'abord la liste (DRY-RUN : renommages et envois en corbeille prevus) et la presenter, sans rien modifier, puis attendre le go de l'utilisateur (seul arret autorise de /histo). Dans tous les autres cas, quel que soit le nombre de fichiers (decision d'Eric le 2026-10-15) : aucun go a attendre ; ecrire la liste dans historique\menage_dry_run_AAAA-MM-JJ.txt, la citer dans le rapport final, puis executer. Relire le plan avant de le presenter ou de l'executer : aucune cible ne doit etre tronquee, aucun export Dashboard ni vrai fichier ne doit y figurer, et le plafond de 3 doit etre calcule apres les renommages de la famille D. Executer ensuite sans re-demander ; le tree (etape 6) est fait apres l'execution du menage, ou le rapport precise que ses comptages sont d'avant menage.
 
 ### Rapport (a mettre dans le rapport final)
 
@@ -306,14 +314,16 @@ Dossiers : local `C:\Users\Berry Swann\Documents\ReBuild\docs\02_docs_dashboard\
 
 ## ETAPE 6 - TREE (enchaine automatiquement, apres le menage)
 
-Met a jour l'arborescence documentee : `C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\sous_context_ia\IA_ARBO_DETAIL.md` (comptages LOCAL, PROD et GitHub). Cette etape vient en dernier pour que les comptages refletent l'etat final apres le menage de l'etape 5.
+Met a jour l'arborescence documentee : `C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md` (comptages LOCAL, PROD et GitHub). Cette etape vient en dernier pour que les comptages refletent l'etat final apres le menage de l'etape 5.
 
 1. Appliquer le protocole du skill `update-arbo` : comptages reels local et prod `H:\docs`, dernier commit et arbre GitHub, remplacements `.Replace()` stricts sur les seules lignes qui changent. Aucune valeur estimee ou memorisee.
 2. Si les comptages sont identiques a ceux du fichier : ne rien modifier, noter "tree deja a jour".
 3. Avant de modifier `IA_ARBO_DETAIL.md` : sauvegarde locale `IA_ARBO_DETAIL.bak_AAAA_MM_JJ_HHhMMmSSs.md` a cote du fichier (REGLE DE SAUVEGARDE, 10 max le jour meme).
-4. Pousser ensuite vers `H:\docs\00_IA\sous_context_ia\IA_ARBO_DETAIL.md` (MD5 local contre prod avant et apres). Jamais de sauvegarde sur H:.
+4. Pousser ensuite vers `H:\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md` (MD5 local contre prod avant et apres). Jamais de sauvegarde sur H:.
 5. Si l'API GitHub est injoignable : ne pas inventer de valeur, garder les anciennes valeurs GitHub du fichier et le signaler dans le rapport.
 6. Ne pas modifier les sections narratives du fichier.
+7. Controle des 9 fichiers de `docs\00_IA\SOUS_CONTEXT_IA\` (decide le 2026-10-13, apres le push de IA_ARBO_DETAIL pour que le MD5 prod soit definitif) : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\check_sous_context_ia\check_sous_context_ia.py"`. Script en LECTURE SEULE : il ne corrige rien. Il verifie par fichier la structure (un dossier par fichier, baks bien nommes, plafonds 10 le jour meme / 3 par jour passe), le MD5 prod (IA_SKILLS_INVENTAIRE absent de la prod = attendu), la date declaree en en-tete (ecart au-dela de 60 jours), les chemins `docs/NN_...` cites qui n'existent plus, les nombres "N automations" / "N vignettes" contre la prod et les dossiers, et les entites citees absentes du registre HA et des etats. Mettre dans le rapport final la derniere ligne `controle sous_context_ia: dossiers=N baks=N ecarts=N casses=N` et chaque ecart cite. Le script controle aussi (depuis le 2026-10-17) que chaque chemin `docs/00_IA/...md` cite dans `Claude md SAVE\CLAUDE.md` existe en local avec la casse exacte : mettre dans le rapport la ligne `CLAUDE.md : chemins docs/00_IA cites=N morts=N` ; un chemin mort est un ecart signale a Eric, a corriger dans CLAUDE.md et ses 3 fichiers apparentes seulement sur sa demande. Un ecart nouveau par rapport a la session precedente est signale a Eric, jamais corrige sans demande. Si H: est inaccessible : le noter sans bloquer. Fichiers figes : ceux listes dans la constante FIGES du script (nom -> date du gel) ne subissent plus de controle de contenu, seulement structure, baks et MD5 prod, plus un ecart "fige mais modifie depuis" ; seul Eric decide de figer un fichier, ne jamais en figer de soi-meme.
+8. Controle de tous les index globaux (decide le 2026-10-13, apres les regenerations de l'etape 2 et les pushs) : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\check_global_index\check_global_index.py"`. Script en LECTURE SEULE. Il verifie, pour GLOBAL_INDEX_REPO, GLOBAL_INDEX_AUTOMATIONS, GLOBAL_INDEX_VIGNETTES_PAGES, GLOBAL_INDEX_SCRIPTS_SH, GLOBAL_INDEX_SCRIPTS_YAML, ENTITES_GLOBAL_INDEX et GLOBAL_INDEX_IA : l'existence, les liens casses (ceux de GLOBAL_INDEX_REPO sont relatifs a la racine du depot : resolus dans ReBuild puis en prod), l'equilibre des balises details et blockquote du REPO, la presence et le MD5 en prod (GLOBAL_INDEX_REPO aux 2 emplacements), les entites citees absentes du registre HA et des etats (REPO et ENTITES). Mettre dans le rapport final la derniere ligne `controle global_index: index=N liens=N casses=N ecarts=N` et chaque ecart cite. Ne rien corriger sans demande : les liens casses deja connus de la section 03 de GLOBAL_INDEX_REPO sont signales a Eric, jamais reecrits en masse. Pour un index genere, un lien casse ou un ecart de contenu = relancer d'abord le generateur (etape 2) puis ce script ; si l'ecart reste, le signaler. Si H: est inaccessible : le noter sans bloquer.
 
 ---
 ## ORDRE D'EXECUTION STRICT
@@ -322,7 +332,7 @@ Met a jour l'arborescence documentee : `C:\Users\Berry Swann\Documents\ReBuild\d
 2. Generer le bloc journal
 3. Ecrire `historique/histo_[date]_s[N].md`
 4. Presenter le fichier
-5. Enchainer sync_index (dont INDEX_GLOBAL.md) sans pause ni question
+5. Enchainer sync_index (dont GLOBAL_INDEX_REPO.md) sans pause ni question
 6. Mettre a jour le journal fusionne (etape 3)
 7. Copier dans Obsidian (etape 4)
 8. Menage des sauvegardes (etape 5)
@@ -336,8 +346,12 @@ Met a jour l'arborescence documentee : `C:\Users\Berry Swann\Documents\ReBuild\d
 SYNC_INDEX - [date]
 
 Fichiers mis a jour :
-- DEPENDANCES_GLOBALES.md : date en tete -> [date session]
-- INDEX_GLOBAL.md : [entrees ajoutees / compteurs modifies] | deja a jour (sauvegarde : [nom du .bak])
+- DEPENDANCES_GLOBALES.md : date en tete -> [date session] | push prod : [MD5 identique | non pousse (raison)]
+- GLOBAL_INDEX_REPO.md : [entrees ajoutees / compteurs modifies] | deja a jour (sauvegarde : [nom du .bak]) | push prod : [miroir docs et racine H: MD5 identiques | non pousse (raison)]
+- GLOBAL_INDEX_AUTOMATIONS.md : [regenere | inchange] | resume du script : [prod / local_yaml / fiches / sans_yaml / sans_fiche / sans_entity / id_different]
+- GLOBAL_INDEX_VIGNETTES_PAGES.md : [regenere | inchange] | resume du script : [vignettes / dossiers / manques / seul_md / seul_yaml / sans_dependances]
+- GLOBAL_INDEX_SCRIPTS_SH.md et GLOBAL_INDEX_SCRIPTS_YAML.md : [regenere | inchange] | resume du script : [SH scripts / sans_fiche / prod_different ; YAML scripts / sans_yaml / different / sans_fiche / py_dans_yaml]
+- GLOBAL_INDEX_IA.md : [regenere | inchange] | resume du script : [liens / casses / sans_description]
 - [autres fichiers si applicable]
 
 JOURNAL FUSIONNE :
@@ -357,5 +371,28 @@ DASHBOARD :
 TREE :
 - IA_ARBO_DETAIL.md : [comptages modifies] | deja a jour (sauvegarde : [nom du .bak]) ; MD5 local = prod : OK | ECART
 
+SOUS_CONTEXT_IA :
+- controle sous_context_ia: dossiers=[n] baks=[n] ecarts=[n] casses=[n] ; ecarts : [liste fichier : ecart] | aucun
+- CLAUDE.md : chemins docs/00_IA cites=[n] morts=[n]
+- entites introuvables a verifier : [liste] | aucune
+
+INDEX GLOBAUX :
+- controle global_index: index=[n] liens=[n] casses=[n] ecarts=[n] ; detail : [liste index : ecart] | aucun
+
 >> [fichier introuvable ou incomplet si applicable]
+```
+
+---
+## NOTE HISTORIQUE - limite de 30 fichiers du menage, supprimee le 2026-10-15
+
+Trace gardee a la demande d'Eric (2026-10-15 20h11), pour retrouver ce qui a change si un menage touche un fichier par erreur. Cette note ne s'applique pas : c'est un historique.
+
+- Avant le 2026-10-15, l'etape 5 s'arretait apres le dry-run et attendait le go d'Eric si c'etait la premiere execution sur un dossier OU si plus de 30 fichiers etaient concernes. /histo-final (ligne 15) reprenait cette regle : pas d'extinction tant que le menage attendait le go.
+- Le 2026-10-15 (ordres d'Eric a 19h27, 19h35 et 20h08), le go au-dela de 30 fichiers a ete supprime. Le plan est ecrit dans historique\menage_dry_run_AAAA-MM-JJ.txt, cite dans le rapport final, puis execute sans attente. Seule pause restante : la premiere execution du menage sur un dossier.
+- Contexte de la decision : le 2026-10-14, un /histo-final est reste 2h20 en attente du go (77 actions) et n'a pas pu eteindre les lumieres ni le PC. Ce soir-la, mon premier calcul du dry-run annoncait 362 envois en corbeille a cause d'un bug de ma part (plage PowerShell 1..0 sur un groupe d'un seul fichier) ; il avait ete rattrape avant execution justement grace a la relecture du plan. Sans la pause, ce plan faux aurait ete execute.
+- Si un fichier a ete envoye a tort a la corbeille : il est dans la corbeille Windows (jamais de suppression definitive) tant qu'elle n'est pas videe. Plans et rapports : historique\menage_dry_run_*.txt et historique\menage_execute_*.txt (chemins d'origine). Journal des modifs : historique\modifs\MODIFS_AAAA-MM-JJ_claude.md.
+- Texte exact de l'ancienne ligne (supprimee de l'etape 5) :
+
+```text
+- Avant de lancer l'etape pour la premiere fois sur un dossier, ou si plus de 30 fichiers sont concernes : produire d'abord la liste (DRY-RUN : renommages et envois en corbeille prevus) et la presenter, sans rien modifier, puis attendre le go de l'utilisateur (seul arret autorise de /histo). Relire le plan avant de le presenter : aucune cible ne doit etre tronquee, aucun export Dashboard ni vrai fichier ne doit y figurer, et le plafond de 3 doit etre calcule apres les renommages de la famille D. Executer ensuite sans re-demander ; le tree (etape 6) est fait apres l'execution du menage, ou le rapport precise que ses comptages sont d'avant menage.
 ```

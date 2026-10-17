@@ -9,7 +9,7 @@ description: "Skill HA ReBuild - triangulation MD5 des docs .md entre local (ReB
 
 Comparer chaque fichier .md de documentation entre les 3 niveaux et ecrire un rapport dans `historique\MD5\`. Lecture seule : le skill ne modifie, ne pousse et ne corrige aucun fichier de documentation. Il n'ecrit que les rapports (et, pour l'etape profonde, les copies datees de la prod dans les dossiers ORIGINAL).
 
-Perimetre : `docs/**/*.md` + `Github/README.md` + `Github/INDEX_GLOBAL.md` (compares a `README.md` et `INDEX_GLOBAL.md` a la racine de la prod et du depot). Les YAML de config sont hors perimetre (voir ha-resync-docs et ha-push-yaml).
+Perimetre : `docs/**/*.md` + `Github/README.md` (compare a `README.md` a la racine de la prod et du depot ; GLOBAL_INDEX_REPO.md est une copie de travail dans docs/05_docs_MD_system/GLOBAL_INDEX_REPO/ depuis le 2026-10-13 ; son exemplaire de meme nom a la racine de H: et du depot n'est pas dans le perimetre du script). Les YAML de config sont hors perimetre (voir ha-resync-docs et ha-push-yaml).
 
 Source de verite = LOCAL (ReBuild). Un ecart local/prod veut dire prod EN RETARD ; un ecart prod/depot veut dire depot EN RETARD.
 
@@ -57,7 +57,7 @@ Si presque tout est ABSENT cote prod, la prod H: n'etait pas visible depuis le p
 
 Faux positifs connus, constates le 2026-10-08 (162 fichiers, 147 SYNC, 1 DIFF, 14 ABSENT, resultat identique sur deux passages) :
 - Les sauvegardes et archives locales (anciens noms `_YYYY-MM-DD_HHhMM.md` ou `_YYYY-MM-DD.md`, par exemple `AUTOMATIONS_2026-10-07_22h00.md`, ou fichiers sous `_ARCHIVE/`) sont ABSENT en prod et sur GitHub : c'est normal, elles restent locales (regle du 2026-10-08 : jamais de sauvegarde en prod). Les sauvegardes au nouveau format `.md.bak_AAAA_MM_JJ...` ne sont pas vues par le script (il ne lit que les `*.md`).
-- `INDEX_GLOBAL.md` en DIFF local contre prod = repo : attendu tant qu'il n'existe pas de circuit de push pour ce fichier.
+- Depuis le 2026-10-13, `GLOBAL_INDEX_REPO.md` (docs/05_docs_MD_system/GLOBAL_INDEX_REPO/) est une copie de travail : ABSENT en prod et sur le depot est attendu. Son exemplaire de meme nom a la racine de H: et du depot n'est pas compare par le script (a faire a la main : MD5 de H:\GLOBAL_INDEX_REPO.md contre le fichier de travail).
 - Juste apres un push GitHub, un "1 DIFF" peut venir du cache CDN de raw.githubusercontent.com (environ 5 min) : attendre ou verifier par l'API contents avant de conclure.
 
 Tout autre ecart est un vrai ecart a traiter.

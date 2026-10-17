@@ -29,13 +29,13 @@ documentation de dependances pour maintenir la coherence du projet.
 
 | Type valide | Fichier index a mettre a jour |
 |:---|:---|
-| Config YAML | `docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md` |
+| Config YAML | `docs/05_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md` |
 | Automation | `docs/03_docs_automations/docs_automations_MD/{nom_automation}.md` + index automations si existant |
 | Script | `docs/04_docs_scripts/docs_scripts_YAML_MD/{nom_script}.md` |
 | Tout type impactant une vignette | `DEPENDANCES_GLOBALES.md` |
 
 **Chemins Windows :**
-- `C:\Users\Berry Swann\Documents\ReBuild\docs\02_docs_dashboard\dashboard_docs_MD\DEPENDANCES_GLOBALES.md`
+- `C:\Users\Berry Swann\Documents\ReBuild\docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\03_docs_automations\docs_automations_MD\`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_YAML_MD\`
 

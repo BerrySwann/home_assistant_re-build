@@ -102,3 +102,4 @@ $toPush | ForEach-Object {
 4. **secrets.yaml -> interdit absolu.**
 5. **Local = verite absolue** : en cas de conflit, le local l'emporte.
 6. **DEPENDANCES_GLOBALES.md** toujours inclus s'il figure dans le diff.
+7. **Regle CLAUDE.md du 2026-10-13** : un push met a jour le `.md` du fichier pousse. Ici les fichiers pousses SONT des `.md` : verifier qu'ils ont ete mis a jour en local avant le push (c'est le travail de `ha-push-yaml` et `ha-push-docs` en amont). Ne jamais modifier un `.md` directement sur H:\ : local d'abord, avec sauvegarde.

@@ -14,8 +14,8 @@ apres chaque session qui modifie le nombre de fichiers.
 
 | Fichier | Chemin |
 |:--------|:-------|
-| Local   | `C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\sous_context_ia\IA_ARBO_DETAIL.md` |
-| Prod    | `H:\docs\00_IA\sous_context_ia\IA_ARBO_DETAIL.md` |
+| Local   | `C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md` |
+| Prod    | `H:\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md` |
 
 ## Protocole d'execution
 
@@ -106,8 +106,8 @@ $c = $c.Replace("ancien texte", "nouveau texte")
 ### Etape 5 - Pousser vers H:\docs
 
 ```powershell
-$src  = "C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\sous_context_ia\IA_ARBO_DETAIL.md"
-$dest = "H:\docs\00_IA\sous_context_ia\IA_ARBO_DETAIL.md"
+$src  = "C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md"
+$dest = "H:\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md"
 Copy-Item $src $dest -Force
 $h1 = (Get-FileHash $src  -Algorithm MD5).Hash
 $h2 = (Get-FileHash $dest -Algorithm MD5).Hash

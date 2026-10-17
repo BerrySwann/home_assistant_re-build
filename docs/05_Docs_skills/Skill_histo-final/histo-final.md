@@ -12,7 +12,7 @@ Fin de journee : tout ce que fait /histo, puis extinction des lumieres et arret 
 ## Regles
 
 - La sequence est irreversible pour la session : l'arret du PC coupe la liaison avec Claude. Tout doit etre ecrit, copie et verifie AVANT. Aucun appel d'outil ne suit la commande d'arret.
-- Aucune confirmation : Eric n'est plus devant l'ecran (decision du 2026-10-11). Le delai de 5 minutes avant l'arret du PC est la seule marge d'annulation. L'arret de /histo reste valable : si le menage attend le go de l'utilisateur (dry-run de plus de 30 fichiers), /histo-final s'arrete la, n'eteint rien et le dit dans le rapport ; l'extinction n'a lieu qu'apres le menage execute.
+- Aucune confirmation : Eric n'est plus devant l'ecran (decision du 2026-10-11). Le delai de 7 minutes (420 s) avant l'arret du PC est la seule marge d'annulation. L'arret de /histo reste valable : si le menage attend le go de l'utilisateur (premiere execution du menage sur un dossier, seule pause qui reste ; plus aucun seuil de nombre de fichiers depuis le 2026-10-15), /histo-final s'arrete la, n'eteint rien et le dit dans le rapport ; l'extinction n'a lieu qu'apres le menage execute.
 - Pas d'extinction (ni lumieres ni PC) si une etape de /histo a echoue ou reste incomplete : le dire dans le rapport et laisser le PC allume.
 - Les lumieres eteintes sont les 3 Hue Play du bureau : `light.hue_play_1_pc_bureau`, `light.hue_play_2_pc_bureau`, `light.hue_play_3_pc_bureau` (decision d'Eric le 2026-10-11, apres test : l'extinction par la prise `switch.ecran_p_c_3_play_hue` est abandonnee). Ne jamais couper cette prise : elle reste `on`. Ne jamais remplacer ces entites par d'autres de memoire.
 
@@ -25,7 +25,8 @@ Invoquer le skill `histo` (outil Skill) et suivre toutes ses etapes, dans l'ordr
 1. Le journal des modifs du jour (`historique\modifs\MODIFS_AAAA-MM-JJ_claude.md`) et sa copie `H:\docs\modifs\` ont le meme MD5.
 2. Aucun script lance par Claude ne tourne encore (`Get-Process bash,python,powershell` : ne pas compter la session en cours). Sinon attendre sa fin.
 3. La liste des taches est terminee ou ce qui reste est signale.
-4. Envoyer le rapport final de /histo a l'utilisateur AVANT l'extinction, avec la prochaine action pour la reprise.
+4. `GLOBAL_INDEX_REPO.md` : MD5 de la copie de travail = miroir `H:\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\` = racine `H:\GLOBAL_INDEX_REPO.md` ; `DEPENDANCES_GLOBALES.md` : MD5 local = `H:\docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md` (pushs faits par /histo, etape 2 de son skill, decides le 2026-10-14). Un ecart apres le push = etape incomplete : pas d'extinction. H: inaccessible : le noter sans bloquer, comme dans /histo.
+5. Envoyer le rapport final de /histo a l'utilisateur AVANT l'extinction, avec la prochaine action pour la reprise.
 
 ## Etape 3 - Pas de confirmation
 
@@ -33,7 +34,7 @@ Aucune question : enchainer directement sur l'etape 4 si les conditions de l'eta
 
 ## Etape 4 - Notification telephone, puis Hue Sync et lumieres
 
-Avant toute extinction : envoyer une notification sur le telephone d'Eric avec le service Home Assistant `notify.mobile_app_eric` (outil `ha_call_service`, domain `notify`, service `mobile_app_eric`, wait false ; data : title `Fin de journee`, message `Ecran eteint dans 10 s, PC eteint a [HH:MM] (annulation : shutdown /a)`), ou HH:MM = heure actuelle + 5 min 10 s. Verifie le 2026-10-11 : ce service existe, c'est celui des automations d'Eric, et la notification est bien arrivee sur son telephone. Attendre 10 secondes, puis enchainer. L'outil `PushNotification` de Claude ne sert qu'en secours (il ne pousse sur le telephone que si Remote Control est connecte ; test du 2026-10-11 : rien recu). Si HA est injoignable, essayer `PushNotification`, sinon le noter dans le rapport et continuer sans bloquer.
+Avant toute extinction : envoyer une notification sur le telephone d'Eric avec le service Home Assistant `notify.mobile_app_eric` (outil `ha_call_service`, domain `notify`, service `mobile_app_eric`, wait false ; data : title `Fin de journee`, message `Ecran eteint dans 10 s, PC eteint a [HH:MM] (annulation : shutdown /a)`), ou HH:MM = heure actuelle + 7 min 10 s (delai de 420 s de la commande d'arret plus les 10 s d'attente). Releve du 2026-10-13 : notification 22:45:02, commande d'arret 22:46:02, soit environ 1 min entre les deux, donc l'arret effectif tombe environ 1 min apres l'heure annoncee. Delai passe de 300 s a 420 s sur demande d'Eric le 2026-10-14. Verifie le 2026-10-11 : ce service existe, c'est celui des automations d'Eric, et la notification est bien arrivee sur son telephone. Attendre 10 secondes, puis enchainer. L'outil `PushNotification` de Claude ne sert qu'en secours (il ne pousse sur le telephone que si Remote Control est connecte ; test du 2026-10-11 : rien recu). Si HA est injoignable, essayer `PushNotification`, sinon le noter dans le rapport et continuer sans bloquer.
 
 Lumieres (3 Hue Play du bureau). Raison de l'ordre (test d'Eric et de Claude du 2026-10-11) : tant que Hue Sync diffuse (`mode: streaming` sur les Play), le pont Hue ignore `light.turn_off` envoye par HA (HA affiche `off`, les lampes restent allumees). Il faut donc d'abord arreter Hue Sync. Methode retenue (decision d'Eric le 2026-10-11, testee a 19:30) : couper le flux Entertainment par l'API du pont Hue, sans tuer le processus. Resultat du test : `stream.active` passe a `false` en moins de 2 s, les 3 Play repassent en `mode: normal`, `binary_sensor.moniteur_pc` passe `off`, et l'application HueSync, restee ouverte, n'a pas relance le flux pendant les 27 s d'observation. Procedure complete : `docs/06_docs_technique/01_pont_hue_hacking/01_pont_hue_hacking.md`. La cle API du pont n'est ecrite dans aucun fichier : elle est dans la variable d'environnement utilisateur Windows `HUE_BRIDGE_KEY`. Ne jamais l'afficher, ne jamais l'ecrire dans un journal, un rapport ou un fichier.
 
@@ -47,8 +48,8 @@ Ne pas toucher a `switch.ecran_p_c_3_play_hue` (la prise reste `on`).
 ## Etape 5 - Arret du PC
 
 1. Ajouter au journal des modifs du jour la ligne `ACTION | PC | arret programme (histo-final)`, copier le journal sur `H:\docs\modifs\` et verifier le MD5. C'est la derniere ecriture.
-2. Envoyer le message final a l'utilisateur : lumieres eteintes (ou non), arret du PC dans 5 minutes, annulation possible avec `shutdown /a`.
-3. Dernier appel d'outil, PowerShell sur le PC : `shutdown.exe /s /t 300 /c "Fin de journee HA ReBuild (histo-final)"`. Ne rien lancer apres. Le delai de 300 secondes (5 minutes) est voulu par Eric (2026-10-11), a raccourcir si besoin.
+2. Envoyer le message final a l'utilisateur : lumieres eteintes (ou non), arret du PC dans 7 minutes, annulation possible avec `shutdown /a`.
+3. Dernier appel d'outil, PowerShell sur le PC : `shutdown.exe /s /t 420 /c "Fin de journee HA ReBuild (histo-final)"`. Ne rien lancer apres. Le delai de 420 secondes (7 minutes) est voulu par Eric (passe de 300 s a 420 s le 2026-10-14 ; 300 s etait voulu le 2026-10-11), a raccourcir si besoin.
 
 ## Rapport final
 

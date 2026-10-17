@@ -128,6 +128,7 @@ Fichier    : {sous-chemin}/{fichier}.yaml
 Sauvegarde : {fichier}.yaml.bak_AAAA_MM_JJ_HHhMMmSSs (creee avant modif, locale uniquement)
 Local      : {hash_local}
 Prod       : {hash_prod} (DIFF / NOUVEAU)
+Fiche .md   : {DEPENDANCES_GLOBALES.md / GLOBAL_INDEX_REPO.md} a mettre a jour apres le push (etape 9)
 --------------------------------------------------
 Confirmes-tu le push ? (oui / non)
 ```
@@ -169,6 +170,15 @@ if ($h1 -eq $h2) { "OK MD5 identiques" } else { "DIFF - verifier !" }
 - Si OK -> **Recharger** le domaine concerne (sensors, templates, utility_meter...)
 - Verifier logs HA (Settings > System > Logs)
 
+### 9 - MISE A JOUR DU .MD DU FICHIER POUSSE (obligatoire, regle CLAUDE.md du 2026-10-13)
+
+Un push de YAML n'est termine que lorsque le `.md` du fichier est a jour. Le local est modifie d'abord, la prod ensuite.
+
+1. Quel `.md` : config YAML (sensors, templates, utility_meter, command_line, input_booleans, groups, shell_command, themes, blueprints) -> `docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md` (date en tete, plus les lignes du fichier si des entites ou dependances sont ajoutees, supprimees ou renommees). Si le fichier a une fiche dediee dans `docs\01_docs_config_system\config_system_MD\`, la mettre a jour aussi.
+2. Fichier ajoute, renomme ou supprime, ou entite citee modifiee -> mettre a jour aussi `GLOBAL_INDEX_REPO.md` (voir histo, etape 2, et la regle des 2 emplacements de ha-push-docs).
+3. Avant de modifier un `.md` : sauvegarde locale `nom.bak_AAAA_MM_JJ_HHhMMmSSs.md` a cote du fichier (REGLE DE SAUVEGARDE, 10 max le jour meme). Ne reecrire que les lignes concernees (remplacements stricts), jamais le fichier entier.
+4. Pousser ensuite les `.md` modifies vers le chemin miroir sous `H:\docs\` (meme chemin relatif que le local), MD5 avant et apres, jamais de sauvegarde en prod. Les dossiers couverts par `ha-push-md` / `ha-push-docs` passent par eux.
+5. Rapport de fin de push : lister chaque `.md` mis a jour. Si aucun `.md` n'a besoin de changer, le dire avec la raison (jamais silencieux). Fiche introuvable : le signaler, ne pas en inventer.
 ## REGLES
 
 1. **MD5 d'abord** - si identique en prod, ne pas pousser.
@@ -188,3 +198,4 @@ if ($h1 -eq $h2) { "OK MD5 identiques" } else { "DIFF - verifier !" }
    courant sans suffixe s'il existe, sinon la sauvegarde la plus recente).
 10. **Un souci (collision de nom, date illisible, sauvegarde douteuse) : le signaler a
     l'utilisateur et ne rien supprimer.**
+11. **Chaque push met a jour le `.md` du fichier pousse** (regle CLAUDE.md du 2026-10-13) : etape 9. Pas de push YAML termine sans cette mise a jour. Le local est modifie en premier, jamais la prod.
