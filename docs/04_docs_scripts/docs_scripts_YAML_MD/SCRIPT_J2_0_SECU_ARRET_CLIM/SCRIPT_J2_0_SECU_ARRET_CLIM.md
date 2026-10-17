@@ -151,7 +151,7 @@ j_2_0_secu_arret_clim_protege:
 | `switch.clim_<piece>_nous` | Switch NOUS | Coupure alimentation physique |
 | `sensor.<piece>_power_lock` | Template | Détecteur seuil 9W (on = > 9W) |
 
-> `sensor.<piece>_power_lock` est défini dans `P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml`
+> `sensor.<piece>_power_lock` est défini dans `P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml`
 
 ---
 

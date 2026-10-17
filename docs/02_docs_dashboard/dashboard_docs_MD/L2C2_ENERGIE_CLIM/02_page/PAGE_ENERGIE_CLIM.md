@@ -165,7 +165,7 @@ Affiché **uniquement si au moins une clim/chauffage est active**. Vérifie 6 en
 
 Si `state_not: "off"` pour au moins une → affiche `text-divider "Consomation TOTAL Climatisations & Radiateurs"`.
 
-**Source :** `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml`
+**Source :** `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml`
 
 ---
 
@@ -188,7 +188,7 @@ Salon: {% set t = states(entity) | float(0) %}
 
 Icône/couleur conditionnelle sur `sensor.ete_hiver` : Été = `#03a9f4`, Hiver = `#ff9800`.
 
-> ⚠️ **Constaté le 2026-09-20** : `sensor.ete_hiver` est introuvable en live (l'entité réelle est `sensor.mode_ete_hiver_etat`, template `P1_ui_dashboard.yaml`) - les icônes saison des chips ne basculent donc jamais ; à repointers (GO attendu).
+> ⚠️ **Constaté le 2026-09-20** : `sensor.ete_hiver` est introuvable en live (l'entité réelle est `sensor.mode_ete_hiver_etat`, template `P1_UI_DASHBOARD.yaml`) - les icônes saison des chips ne basculent donc jamais ; à repointers (GO attendu).
 
 > Note : La SdB n'a **pas** de chip DUT dédié ici (le DUT SdB est visible dans la section dédiée).
 
@@ -523,7 +523,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 
 ### Catégorie D - Templates P1 ui_dashboard
 
-**Source :** `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml`
+**Source :** `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml`
 
 | Entité | Description |
 |--------|-------------|
@@ -678,7 +678,7 @@ Le hash `#tendances` doit être déclaré dans la page. Vérifier que la `bubble
 | `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml` | Compteurs UM Q/H/M/A (6 appareils) |
 | `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` | Totaux agrégés |
 | `templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml` | Moyennes W (quotidien/mensuel) |
-| `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | power_status + etat + affichage |
+| `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | power_status + etat + affichage |
 | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Logique T° cible + delta ADEME |
 | `sensors/P1_clim_chauffage/P1_DUT_clim_chauffage.yaml` | DUT history_stats + intégration kWh |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/02_page/page_L2C2_energie_clim.yaml` | Export live du 2026-09-20 (56 cartes - refonte cartes clim button-card) |

@@ -33,7 +33,7 @@
 *2026-09-01 (3 automations ENERGIE P0 ajoutées : HISTO_NODON, HISTO_LINKY, RATTRAPAGE_LINKY + script correct_linky.py. Intégrations File log_nodon/linky/ecart_histo. Section COMPLÉMENT fichiers notifs mise à jour.)*
 *2026-08-09 S1 (L5C3 : rename audit_md5_docs → audit_md5_md_yaml + sensor. Page 2026-08-09 ajoutée, 2026-06-02 supprimée. Dashboard_2026_08_09.yaml en local.)*
 *2026-08-08 S3 (Section SCRIPTS créée : script.p1_master_gestion_clim documenté A/B/C/D. MATRICE DES SCRIPTS ajoutée. HOME PAGE déplacée avant L1C1. COMPLÉMENT déplacé en dernière position. Réorganisation finale : HOME PAGE > L1C1-L6C3 > AUTOMATIONS > SCRIPTS > COMPLÉMENT.)*
-*2026-08-08 S1-S2 (Resync GitHub->local : 6 fichiers mis a jour. Renommage ui_dashboard -> P3_ui_dashboard en prod + local. Confirmation section tronquee. Recheck L5C3/L6C1/L6C2/L6C3 : pages manquantes ajoutées, entités audit_md5_docs ajoutées L5C3, page 05-10 supprimée. L5C2 : 2 entités fantômes NE2213 Mamour confirmées. Section AUTOMATIONS créée + enrichissement complet A/B/C/D : 49 automations, 11 groupes, hiérarchie ## groupe / ### automation / #### A/B/C/D appliquée A-Z. MATRICE DES AUTOMATIONS 49 lignes. Emoji 🗂️ sur tous les groupes.)*
+*2026-08-08 S1-S2 (Resync GitHub->local : 6 fichiers mis a jour. Renommage ui_dashboard -> P3_UI_DASHBOARD en prod + local. Confirmation section tronquee. Recheck L5C3/L6C1/L6C2/L6C3 : pages manquantes ajoutées, entités audit_md5_docs ajoutées L5C3, page 05-10 supprimée. L5C2 : 2 entités fantômes NE2213 Mamour confirmées. Section AUTOMATIONS créée + enrichissement complet A/B/C/D : 49 automations, 11 groupes, hiérarchie ## groupe / ### automation / #### A/B/C/D appliquée A-Z. MATRICE DES AUTOMATIONS 49 lignes. Emoji 🗂️ sur tous les groupes.)*
 *2026-07-20 (P1_01 confort_nuit : palier nuit été dynamique selon vigilance canicule - nouvelle dépendance M_01_meteo_alertes_card → P1_01_MASTER → L1C3)*
 *2026-07-19 (Audit complet intégralité du fichier : L1C1 à L6C3 + HOME PAGE + Complément fichiers racine, sur la réalité des yaml prod. Corrections : entités obsolètes/fictives, mauvaise attribution de fichiers, section tronquée complétée par hypothèse. Voir détail dans les sections concernées.)*
 *2026-07-18 (Nettoyage résidu chambre : capteur MQTT dispo + bloc mqtt: de configuration.yaml + dossier mqtt/, local + prod H:\ - Versions L1C3 2026-07-18 ajoutées : consigne chambre via climate direct + badge remote rétabli)*
@@ -389,7 +389,7 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `sensor.clim_salon_nous_power` / `sensor.clim_bureau_nous_power` / `sensor.clim_chambre_nous_power` / `sensor.radiateur_elec_cuisine_power` / `sensor.prise_soufflant_salle_de_bain_nous_power` | NAT | NOUS via Z2M - puissances des cartes button-card *(refonte 2026-09-20)* |
 
 > ⚠️ **Corrigé le 2026-07-19** : `temperature_moyenne_interieure`, `temperature_delta_affichage`,
-> `delta_ademe_recommande` étaient attribués à tort à `P1_ui_dashboard/P1_ui_dashboard.yaml`
+> `delta_ademe_recommande` étaient attribués à tort à `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml`
 > (ce fichier ne produit que des entités power_status/clim_*_etat - vérifié dans son propre
 > corps, AVAL déclaré L1C3/L2C2, pas L1C2). Vrai fichier source : `P1_01_clim_logique_system_autom.yaml`
 > (son AVAL déclare lui-même "L1C2 Températures" pour ces 4 sensors). Les entrées fictives
@@ -434,7 +434,7 @@ MATÉRIEL (SONOFF TH via Z2M)
 ```
 MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
   └─→ sensor.*_power / climate.*   (NAT)
-        └─→ TPL: P1_ui_dashboard.yaml  (*_power_status / *_etat)
+        └─→ TPL: P1_UI_DASHBOARD.yaml  (*_power_status / *_etat)
               └─→ sensor.temperature_moyenne_interieure  (TPL P1_clim_logique)
               └─→ sensor.delta_ademe_recommande          (TPL P1_clim_logique)
               └─→ sensor.mode_ete_hiver_etat             (TPL P1_clim_logique)
@@ -443,7 +443,7 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 ```
 
 > ⚠️ Corrigé le 2026-07-19 : `temperature_moyenne_interieure` attribué à tort à
-> `P1_ui_dashboard.yaml` (ce fichier ne contient que des sensors power_status/*_etat,
+> `P1_UI_DASHBOARD.yaml` (ce fichier ne contient que des sensors power_status/*_etat,
 > vérifié dans son corps) - vrai fichier source : `P1_01_clim_logique_system_autom.yaml`.
 > `climate.soufflant_salle_de_bain` retiré - n'existe pas (le soufflant SDB est piloté
 > via `switch.inter_soufflant_salle_de_bain` + `input_select.etat_resistance_soufflant_sdb`,
@@ -458,24 +458,24 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 | `sensor.temperature_moyenne_interieure` | TPL | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
 | `sensor.delta_ademe_recommande` | TPL | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
 | `sensor.mode_ete_hiver_etat` | TPL | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
-| `sensor.clim_salon_etat` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.radiateur_cuisine_etat` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.clim_bureau_etat` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.sdb_soufflant_etat` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.sdb_seche_serviette_etat` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.clim_chambre_etat` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.salon_power_status` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.cuisine_power_status` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.bureau_power_status` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.sdb_soufflant_power_status` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.sdb_seche_serviette_power_status` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
-| `sensor.chambre_power_status` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
+| `sensor.clim_salon_etat` | TPL | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` |
+| `sensor.radiateur_cuisine_etat` | TPL | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` |
+| `sensor.clim_bureau_etat` | TPL | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` |
+| `sensor.sdb_soufflant_etat` | TPL | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` |
+| `sensor.sdb_seche_serviette_etat` | TPL | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` |
+| `sensor.clim_chambre_etat` | TPL | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` |
+| `sensor.salon_power_status` | TPL | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` |
+| `sensor.cuisine_power_status` | TPL | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` |
+| `sensor.bureau_power_status` | TPL | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` |
+| `sensor.sdb_soufflant_power_status` | TPL | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` |
+| `sensor.sdb_seche_serviette_power_status` | TPL | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` |
+| `sensor.chambre_power_status` | TPL | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` |
 | `climate.clim_salon_rm4_mini` | NAT | SmartIR |
 | `climate.radiateur_cuisine` | NAT | Helper UI generic_thermostat (pile : `switch.radiateur_elec_cuisine`) *(corrigé 2026-09-20)* |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
 | `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
-| `switch.inter_soufflant_salle_de_bain` | NAT (switch TPL) | `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml` |
-| `switch.voyant_thermostat_soufflant_salle_de_bain` | NAT (switch TPL, neutre, heater du thermostat SdB) | `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml` (état : `input_boolean.voyant_thermostat_soufflant_salle_de_bain`, `input_booleans/P1/P1_BV_IB_inter_soufflant_sdb.yaml`) |
+| `switch.inter_soufflant_salle_de_bain` | NAT (switch TPL) | `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_SDB.yaml` |
+| `switch.voyant_thermostat_soufflant_salle_de_bain` | NAT (switch TPL, neutre, heater du thermostat SdB) | `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_SDB.yaml` (état : `input_boolean.voyant_thermostat_soufflant_salle_de_bain`, `input_booleans/P1/P1_BV_IB_inter_soufflant_SDB.yaml`) |
 | `input_select.etat_resistance_soufflant_sdb` | NAT | `input_select.yaml` |
 
 ### Entités clés de la page
@@ -707,7 +707,7 @@ MATÉRIEL (NOUS SP via Z2M)
   └─→ sensor.*_power / climate.*   (HA natif)
         └─→ UM: P1_UM_AMHQ.yaml          (6 appareils × 4 cycles AMHQ → *_um)
               └─→ TPL: P1_TOTAL_AMHQ.yaml (conso_clim_rad_total_Q/M)
-              └─→ TPL: P1_ui_dashboard.yaml (*_power_status / *_etat)
+              └─→ TPL: P1_UI_DASHBOARD.yaml (*_power_status / *_etat)
                     └─→ VIGNETTE L2C2 (button-card 3 colonnes)
                     └─→ PAGE L2C2 (apexcharts + tabbed-card + streamline)
 ```
@@ -720,9 +720,9 @@ MATÉRIEL (NOUS SP via Z2M)
 | `climate.radiateur_cuisine` | NAT | Helper UI generic_thermostat (pile : `switch.radiateur_elec_cuisine`) *(corrigé 2026-09-20)* |
 | `climate.clim_bureau_rm4_mini` | NAT | SmartIR |
 | `climate.clim_chambre_rm4_mini` | NAT | SmartIR |
-| `switch.inter_soufflant_salle_de_bain` | NAT (switch TPL) | `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml` |
-| `switch.voyant_thermostat_soufflant_salle_de_bain` | NAT (switch TPL, neutre, heater du thermostat SdB) | `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml` (état : `input_boolean.voyant_thermostat_soufflant_salle_de_bain`, `input_booleans/P1/P1_BV_IB_inter_soufflant_sdb.yaml`) |
-| `sensor.salon_power_status` | TPL | `P1_ui_dashboard/P1_ui_dashboard.yaml` |
+| `switch.inter_soufflant_salle_de_bain` | NAT (switch TPL) | `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_SDB.yaml` |
+| `switch.voyant_thermostat_soufflant_salle_de_bain` | NAT (switch TPL, neutre, heater du thermostat SdB) | `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_SDB.yaml` (état : `input_boolean.voyant_thermostat_soufflant_salle_de_bain`, `input_booleans/P1/P1_BV_IB_inter_soufflant_SDB.yaml`) |
+| `sensor.salon_power_status` | TPL | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` |
 | `sensor.cuisine_power_status` | TPL | idem |
 | `sensor.bureau_power_status` | TPL | idem |
 | `sensor.sdb_soufflant_etat` | TPL | idem |
@@ -747,7 +747,7 @@ MATÉRIEL (NOUS SP via Z2M)
 
 | Entité | Source |
 |:-------|:-------|
-| `sensor.clim_salon_etat` | `P1_ui_dashboard.yaml` |
+| `sensor.clim_salon_etat` | `P1_UI_DASHBOARD.yaml` |
 | `sensor.radiateur_cuisine_etat` | idem |
 | `sensor.clim_bureau_etat` | idem |
 | `sensor.sdb_soufflant_power_status` | idem |
@@ -767,7 +767,7 @@ MATÉRIEL (NOUS SP via Z2M)
 | `sensor.mode_ete_hiver_etat` | TPL | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
 | `sensor.conso_clim_rad_total` (puissance W) | TPL | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` |
 | `sensor.th_*_temperature` (×5 pièces) | NAT | SONOFF thermostats |
-| `sensor.ete_hiver` | TPL | ⚠️ introuvable en live *(2026-09-20)* - l'entité réelle est `sensor.mode_ete_hiver_etat` (`P1_ui_dashboard.yaml`) |
+| `sensor.ete_hiver` | TPL | ⚠️ introuvable en live *(2026-09-20)* - l'entité réelle est `sensor.mode_ete_hiver_etat` (`P1_UI_DASHBOARD.yaml`) |
 | `climate.*` (×5) | NAT | SmartIR / helpers generic_thermostat |
 
 > ⚠️ **Constaté le 2026-09-20** : 2 références introuvables dans la page - `sensor.ete_hiver` (icônes saison des chips DUT, jamais « Été ») et `sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power` (onglet instantané sèche-serviette). À repointers (GO attendu).
@@ -789,7 +789,7 @@ MATÉRIEL (NOUS SP via Z2M)
 |:--------|:------:|
 | `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml` | ✅ |
 | `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` | ✅ |
-| `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | ✅ |
+| `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | ✅ |
 | `templates/P1_clim_chauffage/P1_DUT_TOTAL/P1_DUT_TOTAL_SDB.yaml` | ✅ |
 | `sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml` | ✅ |
 
@@ -820,7 +820,7 @@ MATÉRIEL (Hue Bridge / Sonoff via Z2M)
                     └─→ TPL: P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml (AVG W/ampoule, src _um_kwh_tpl)
                     └─→ TPL: P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml  (AVG W/zone, src _um_kwh_tpl)
                     └─→ TPL: P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml (AVG W total, src _um_kwh_tpl)
-                    └─→ TPL: P3_ui_dashboard/P3_etats_status.yaml   (lumiere_*_etat)
+                    └─→ TPL: P3_UI_DASHBOARD/P3_etats_status.yaml   (lumiere_*_etat)
                           └─→ VIGNETTE L2C3 (button-card 3 colonnes)
                           └─→ PAGE energie-lampes (tabbed-card 5 pièces)
 ```
@@ -829,7 +829,7 @@ MATÉRIEL (Hue Bridge / Sonoff via Z2M)
 
 | Entité | Type | Fichier source |
 |:-------|:----:|:--------------|
-| `sensor.lumiere_appartement_etat` | TPL | `P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml` |
+| `sensor.lumiere_appartement_etat` | TPL | `P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml` |
 | `sensor.lumiere_salon_etat` | TPL | idem |
 | `sensor.lumiere_cuisine_etat` | TPL | idem |
 | `sensor.lumiere_bureau_etat` | TPL | idem |
@@ -892,7 +892,7 @@ MATÉRIEL (Hue Bridge / Sonoff via Z2M)
 | `templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml` | ✅ |
 | `templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml` | ✅ |
 | `templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml` | ✅ |
-| `templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml` | ✅ |
+| `templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml` | ✅ |
 
 ### Entités supplémentaires (page uniquement)
 
@@ -925,7 +925,7 @@ MATÉRIEL (Hue Bridge / Sonoff via Z2M)
 ```
 MATÉRIEL (Hue Bridge / Sonoff)
   └─→ light.* / switch.*  (HA natif - state on/off)
-        └─→ TPL: P3_ui_dashboard/P3_etats_status.yaml  (lumiere_*_etat / bureau_etat / chambre_etat)
+        └─→ TPL: P3_UI_DASHBOARD/P3_etats_status.yaml  (lumiere_*_etat / bureau_etat / chambre_etat)
               └─→ VIGNETTE L3C1 (button-card 3 colonnes : pièce / état / compteur X/N)
 ```
 
@@ -933,7 +933,7 @@ MATÉRIEL (Hue Bridge / Sonoff)
 
 | Entité | Type | Fichier source |
 |:-------|:----:|:--------------|
-| `sensor.lumiere_appartement_etat` | TPL | `P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml` |
+| `sensor.lumiere_appartement_etat` | TPL | `P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml` |
 | `sensor.lumiere_salon_etat` | TPL | idem |
 | `sensor.lumiere_cuisine_etat` | TPL | idem |
 | `sensor.bureau_etat` | TPL | idem |
@@ -991,7 +991,7 @@ MATÉRIEL (Hue Bridge / Sonoff)
 
 | Fichier | Statut |
 |:--------|:------:|
-| `templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml` | ✅ |
+| `templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml` | ✅ |
 
 ### Fichiers YAML Dashboard
 
@@ -1048,7 +1048,7 @@ MATÉRIEL / INTÉGRATION
 
 | Fichier | Rôle | Statut |
 |:--------|:-----|:------:|
-| `templates/P2_prise/P2_eCO_prises/P2_eco_prises_config.yaml` | Config liste prises Éco Dynamique (indirect - pilote automation eco_prises_dynamique) | ✅ |
+| `templates/P2_prise/P2_eCO_prises/P2_eCO_prises_config.yaml` | Config liste prises Éco Dynamique (indirect - pilote automation eco_prises_dynamique) | ✅ |
 
 ### Fichiers YAML Dashboard
 
@@ -1607,10 +1607,10 @@ MariaDB
 | `sensor.audit_md5_journal` | NAT | `command_line/audit/audit_logs.yaml` |
 | `script.audit_md5_md_yaml` | NAT | `scripts.yaml` (renommé 2026-08-09) |
 | `sensor.audit_md5_md_yaml_journal` | NAT | `command_line/audit/audit_md5_md_yaml.yaml` (renommé 2026-08-09) |
-| `sensor.backup_github_status` | NAT | `command_line/github_maintenance/github_maintenance.yaml` |
-| `sensor.backup_github_journal` | NAT | `command_line/github_maintenance/github_maintenance.yaml` |
-| `sensor.git_last_weekly_tag` | NAT | `command_line/github_maintenance/github_maintenance.yaml` |
-| `sensor.github_default_branch` | NAT | `command_line/github_maintenance/github_maintenance.yaml` |
+| `sensor.backup_github_status` | NAT | `command_line/GitHub_maintenance/GitHub_maintenance.yaml` |
+| `sensor.backup_github_journal` | NAT | `command_line/GitHub_maintenance/GitHub_maintenance.yaml` |
+| `sensor.git_last_weekly_tag` | NAT | `command_line/GitHub_maintenance/GitHub_maintenance.yaml` |
+| `sensor.github_default_branch` | NAT | `command_line/GitHub_maintenance/GitHub_maintenance.yaml` |
 | `sensor.taille_db_home_assistant` | NAT | `sql.yaml` |
 | `automation.db_purge_mariadb_repack` | NAT | `automations/systeme/` |
 | `shell_command.git_backup_push_weekly` | NAT | `shell_command/Ghithub/backup_github.yaml` |
@@ -1717,7 +1717,7 @@ IKEA VINDSTYRKA (Zigbee via Z2M)
   ├─→ sensor.qualite_air_bureau_ikea_voc_index  (NAT) → streamline-card cov_ring-tile + pop-up cov
   └─→ sensor.qualite_air_chambre_ikea_voc_index (NAT) → streamline-card cov_ring-tile + pop-up cov
 
-sensors/Air_quality/A_01_AIR_QUALITY.yaml (SEN - stats mean 24h)
+sensors/Air_Quality/A_01_AIR_QUALITY.yaml (SEN - stats mean 24h)
   ├─→ sensor.pm2_5_salon_moy_24h   (SEN) → marker2 ring-tile Salon PM2.5
   ├─→ sensor.pm2_5_bureau_moy_24h  (SEN) → marker2 ring-tile Bureau PM2.5
   ├─→ sensor.pm2_5_chambre_moy_24h (SEN) → marker2 ring-tile Chambre PM2.5
@@ -1725,7 +1725,7 @@ sensors/Air_quality/A_01_AIR_QUALITY.yaml (SEN - stats mean 24h)
   ├─→ sensor.tcov_bureau_moy_24h   (SEN) → marker2 ring-tile Bureau tCOV
   └─→ sensor.tcov_chambre_moy_24h  (SEN) → marker2 ring-tile Chambre tCOV
 
-templates/Air_quality/A_01_AIR_QUALITY.yaml (TPL - conversion ppb)
+templates/Air_Quality/A_01_AIR_QUALITY.yaml (TPL - conversion ppb)
   ├─→ sensor.tcov_salon_ppb    (TPL) → entity bouton tCOV Salon + streamline-card cov
   ├─→ sensor.tcov_bureau_ppb   (TPL) → entity bouton tCOV Bureau + streamline-card cov
   └─→ sensor.tcov_chambre_ppb  (TPL) → entity bouton tCOV Chambre + streamline-card cov
@@ -1746,15 +1746,15 @@ templates/Air_quality/A_01_AIR_QUALITY.yaml (TPL - conversion ppb)
 | `sensor.qualite_air_salon_ikea_voc_index` | NAT | IKEA VINDSTYRKA Salon (Z2M) |
 | `sensor.qualite_air_bureau_ikea_voc_index` | NAT | IKEA VINDSTYRKA Bureau (Z2M) |
 | `sensor.qualite_air_chambre_ikea_voc_index` | NAT | IKEA VINDSTYRKA Chambre (Z2M) |
-| `sensor.pm2_5_salon_moy_24h` | SEN | `sensors/Air_quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.pm2_5_bureau_moy_24h` | SEN | `sensors/Air_quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.pm2_5_chambre_moy_24h` | SEN | `sensors/Air_quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.tcov_salon_moy_24h` | SEN | `sensors/Air_quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.tcov_bureau_moy_24h` | SEN | `sensors/Air_quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.tcov_chambre_moy_24h` | SEN | `sensors/Air_quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.tcov_salon_ppb` | TPL | `templates/Air_quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.tcov_bureau_ppb` | TPL | `templates/Air_quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.tcov_chambre_ppb` | TPL | `templates/Air_quality/A_01_AIR_QUALITY.yaml` |
+| `sensor.pm2_5_salon_moy_24h` | SEN | `sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
+| `sensor.pm2_5_bureau_moy_24h` | SEN | `sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
+| `sensor.pm2_5_chambre_moy_24h` | SEN | `sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
+| `sensor.tcov_salon_moy_24h` | SEN | `sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
+| `sensor.tcov_bureau_moy_24h` | SEN | `sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
+| `sensor.tcov_chambre_moy_24h` | SEN | `sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
+| `sensor.tcov_salon_ppb` | TPL | `templates/Air_Quality/A_01_AIR_QUALITY.yaml` |
+| `sensor.tcov_bureau_ppb` | TPL | `templates/Air_Quality/A_01_AIR_QUALITY.yaml` |
+| `sensor.tcov_chambre_ppb` | TPL | `templates/Air_Quality/A_01_AIR_QUALITY.yaml` |
 
 ### Fichiers YAML Dashboard
 

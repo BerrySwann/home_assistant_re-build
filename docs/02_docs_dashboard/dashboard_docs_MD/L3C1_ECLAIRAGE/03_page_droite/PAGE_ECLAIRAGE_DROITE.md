@@ -197,7 +197,7 @@ Toutes les entités ci-dessous existent dans HA (vérification en direct le 2026
 | `cover.store_bureau` | intégration native | Badge store bureau |
 | `sensor.th_bureau_temperature`, `sensor.th_salle_de_bain_temperature`, `sensor.th_chambre_temperature` | capteurs de température | Badges des headings |
 
-### Templates `templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml`
+### Templates `templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml`
 
 | Entité | Rôle |
 |--------|------|

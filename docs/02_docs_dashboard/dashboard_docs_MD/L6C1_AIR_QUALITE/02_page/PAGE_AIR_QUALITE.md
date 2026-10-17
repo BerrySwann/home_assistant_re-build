@@ -262,7 +262,7 @@ Cette page nécessite **4 templates Streamline** à déclarer dans la configurat
 
 ### Sensors statistics 24h
 
-Source : `TREE_CORRIGE/sensors/Air_quality/A_01_AIR_QUALITY.yaml` - `platform: statistics`, `state_characteristic: mean`, `max_age: 24h`
+Source : `TREE_CORRIGE/sensors/Air_Quality/A_01_AIR_QUALITY.yaml` - `platform: statistics`, `state_characteristic: mean`, `max_age: 24h`
 
 | Entité | unique_id | Source → |
 |:-------|:----------|:---------|
@@ -275,7 +275,7 @@ Source : `TREE_CORRIGE/sensors/Air_quality/A_01_AIR_QUALITY.yaml` - `platform: s
 
 ### Templates ppb
 
-Source : `TREE_CORRIGE/templates/Air_quality/A_01_AIR_QUALITY.yaml` - `device_class: volatile_organic_compounds_parts`, `unit: ppb`
+Source : `TREE_CORRIGE/templates/Air_Quality/A_01_AIR_QUALITY.yaml` - `device_class: volatile_organic_compounds_parts`, `unit: ppb`
 
 | Entité | unique_id | Source → |
 |:-------|:----------|:---------|
@@ -288,7 +288,7 @@ Source : `TREE_CORRIGE/templates/Air_quality/A_01_AIR_QUALITY.yaml` - `device_cl
 ## 🐛 DÉPANNAGE
 
 ### Les ring-tiles affichent "unavailable"
-→ Vérifier que les capteurs IKEA sont disponibles. Si `sensor.tcov_*_ppb` = unavailable, vérifier que le template `TREE_CORRIGE/templates/Air_quality/A_01_AIR_QUALITY.yaml` est chargé.
+→ Vérifier que les capteurs IKEA sont disponibles. Si `sensor.tcov_*_ppb` = unavailable, vérifier que le template `TREE_CORRIGE/templates/Air_Quality/A_01_AIR_QUALITY.yaml` est chargé.
 
 ### Le marqueur moy 24h n'apparaît pas sur le ring-tile
 → Les sensors `platform: statistics` ont besoin de 24h de données pour calculer la moyenne. Attendre si les capteurs viennent d'être ajoutés.
@@ -321,8 +321,8 @@ Source : `TREE_CORRIGE/templates/Air_quality/A_01_AIR_QUALITY.yaml` - `device_cl
 |------|--------|
 | Vignette L6C1 | `docs/L6C1_AIR_QUALITE/L6C1_VIGNETTE_AIR_QUALITE.md` |
 | Page YAML | `Dashboard/L6C1_16_Air_Qualite/page_L6C1_air_qualite_2026-05-23.yaml` |
-| Sensors statistics | `TREE_CORRIGE/sensors/Air_quality/A_01_AIR_QUALITY.yaml` |
-| Templates ppb | `TREE_CORRIGE/templates/Air_quality/A_01_AIR_QUALITY.yaml` |
+| Sensors statistics | `TREE_CORRIGE/sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
+| Templates ppb | `TREE_CORRIGE/templates/Air_Quality/A_01_AIR_QUALITY.yaml` |
 
 ---
 

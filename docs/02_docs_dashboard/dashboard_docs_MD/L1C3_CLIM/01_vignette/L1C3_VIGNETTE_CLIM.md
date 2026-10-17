@@ -288,17 +288,17 @@ custom_fields:
 |--------|--------|------|
 | `sensor.temperature_moyenne_interieure` | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | T° moyenne appartement |
 | `sensor.delta_ademe_recommande` | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Delta T° int/ext (recommandation ADEME) |
-| `sensor.mode_ete_hiver_etat` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | Mode saison global (Cool/Heat/Fan/Off) |
-| `sensor.clim_salon_etat` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | État clim salon |
-| `sensor.radiateur_cuisine_etat` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | État radiateur cuisine |
-| `sensor.clim_bureau_etat` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | État clim bureau |
-| `sensor.sdb_soufflant_etat` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | État sèche-serviette SdB |
-| `sensor.clim_chambre_etat` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | État clim chambre |
-| `sensor.salon_power_status` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | Puissance salon > 50W → on |
-| `sensor.cuisine_power_status` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | Puissance cuisine > 50W → on |
-| `sensor.bureau_power_status` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | Puissance bureau > 50W → on |
-| `sensor.sdb_soufflant_power_status` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | Puissance soufflant > 20W → on |
-| `sensor.chambre_power_status` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | Puissance chambre > 50W → on |
+| `sensor.mode_ete_hiver_etat` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Mode saison global (Cool/Heat/Fan/Off) |
+| `sensor.clim_salon_etat` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | État clim salon |
+| `sensor.radiateur_cuisine_etat` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | État radiateur cuisine |
+| `sensor.clim_bureau_etat` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | État clim bureau |
+| `sensor.sdb_soufflant_etat` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | État sèche-serviette SdB |
+| `sensor.clim_chambre_etat` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | État clim chambre |
+| `sensor.salon_power_status` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Puissance salon > 50W → on |
+| `sensor.cuisine_power_status` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Puissance cuisine > 50W → on |
+| `sensor.bureau_power_status` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Puissance bureau > 50W → on |
+| `sensor.sdb_soufflant_power_status` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Puissance soufflant > 20W → on |
+| `sensor.chambre_power_status` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Puissance chambre > 50W → on |
 | `climate.clim_salon_rm4_mini` | `[NAT]` SmartIR | Consigne T° salon (attr: temperature) |
 | `climate.radiateur_cuisine` | `[NAT]` Meross | Consigne T° cuisine (attr: temperature) |
 | `climate.clim_bureau_rm4_mini` | `[NAT]` SmartIR | Consigne T° bureau (attr: temperature) |
@@ -440,7 +440,7 @@ return 'N/A'
 ## 📚 FICHIERS LIÉS
 
 - Page destination : `docs/L1C3_CLIM/PAGE_CLIM.md`
-- Templates P1 : `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml`
+- Templates P1 : `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml`
 - Templates P1 Master : `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml`
 
 

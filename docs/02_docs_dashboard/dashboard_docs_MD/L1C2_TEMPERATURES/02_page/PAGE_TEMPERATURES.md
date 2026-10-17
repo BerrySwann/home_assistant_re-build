@@ -260,18 +260,18 @@ Marqueur `Now` en darkred. `cache: true`, `span: start day`.
 
 | Entité | Fichier source | Rôle |
 |--------|---------------|------|
-| `sensor.salon_power_status` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | Puissance salon ≠ off |
-| `sensor.cuisine_power_status` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | Puissance cuisine ≠ off |
-| `sensor.bureau_power_status` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | Puissance bureau ≠ off |
-| `sensor.sdb_soufflant_power_status` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | Puissance soufflant SdB |
-| `sensor.sdb_seche_serviette_power_status` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | Puissance sèche-serviette |
-| `sensor.chambre_power_status` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | Puissance chambre ≠ off |
-| `sensor.clim_salon_etat` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | État clim salon |
-| `sensor.radiateur_cuisine_etat` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | État radiateur cuisine |
-| `sensor.clim_bureau_etat` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | État clim bureau |
-| `sensor.sdb_soufflant_etat` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | État soufflant SdB |
-| `sensor.sdb_seche_serviette_etat` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | État sèche-serviette |
-| `sensor.clim_chambre_etat` | `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | État clim chambre |
+| `sensor.salon_power_status` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Puissance salon ≠ off |
+| `sensor.cuisine_power_status` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Puissance cuisine ≠ off |
+| `sensor.bureau_power_status` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Puissance bureau ≠ off |
+| `sensor.sdb_soufflant_power_status` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Puissance soufflant SdB |
+| `sensor.sdb_seche_serviette_power_status` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Puissance sèche-serviette |
+| `sensor.chambre_power_status` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Puissance chambre ≠ off |
+| `sensor.clim_salon_etat` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | État clim salon |
+| `sensor.radiateur_cuisine_etat` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | État radiateur cuisine |
+| `sensor.clim_bureau_etat` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | État clim bureau |
+| `sensor.sdb_soufflant_etat` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | État soufflant SdB |
+| `sensor.sdb_seche_serviette_etat` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | État sèche-serviette |
+| `sensor.clim_chambre_etat` | `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | État clim chambre |
 | `sensor.temperature_moyenne_interieure` | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Moyenne T° appart |
 | `sensor.conso_clim_rad_total` | `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` | Puissance totale clim+rad (W) |
 | `sensor.conso_clim_rad_total_quotidien` | `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` | Conso journalière (kWh) |
@@ -601,7 +601,7 @@ Contenu : mushroom-template-card (flèche H%) + mini-graph-card (300px, 24h, lab
 
 | Fichier | Entités fournies |
 |---------|-----------------|
-| `P1_ui_dashboard/P1_ui_dashboard.yaml` | `sensor.*_power_status`, `sensor.*_etat` (statuts et états clim/rad par pièce) |
+| `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | `sensor.*_power_status`, `sensor.*_etat` (statuts et états clim/rad par pièce) |
 | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` | `sensor.conso_clim_rad_total` (W), `sensor.conso_clim_rad_total_quotidien/mensuel` (kWh) |
 | `P1_AVG/P1_AVG_AMHQ_TOTAL.yaml` | `sensor.clim_rad_total_avg_watts_quotidien` (W - moy. depuis minuit) |
 | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | `sensor.temperature_moyenne_interieure`, `sensor.temperature_delta_affichage`, `sensor.groupe`, `sensor.mode_ete_hiver`, `sensor.temperature_cible/confort/confort_nuit/eco_hiver_corrige` |
@@ -636,7 +636,7 @@ Contenu : mushroom-template-card (flèche H%) + mini-graph-card (300px, 24h, lab
 2. Les templates Streamline se configurent dans `configuration.yaml` sous `custom_templates:`
 
 ### Les chips de consommation ne s'affichent pas
-Normal - ils sont `conditional` : ils n'apparaissent que si `sensor.{piece}_power_status ≠ "off"`. Si la clim ne consomme pas (seuil P1 actuel : 2 W), le chip est masqué. Source : `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml`.
+Normal - ils sont `conditional` : ils n'apparaissent que si `sensor.{piece}_power_status ≠ "off"`. Si la clim ne consomme pas (seuil P1 actuel : 2 W), le chip est masqué. Source : `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml`.
 
 ### Le graphique de consommation est vide
 Vérifier que les entités Pôle 1 sont chargées (`templates/P1_clim_chauffage/`). Si `sensor.conso_clim_rad_total` est `unknown`, recharger la config HA (`Configuration → Vérifier la config` puis `Redémarrer`).
@@ -650,7 +650,7 @@ Vérifier que les entités Pôle 1 sont chargées (`templates/P1_clim_chauffage/
 - `templates/meteo/M_04_tendances_th_ext_card.yaml` (tendances T° et humidité)
 - `templates/utilitaires/jour_nuit.yaml` (binary_sensor jour/nuit - popup `#tendances`)
 - `configuration.yaml` (SmartIR : clim salon, bureau, chambre)
-- `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` (statuts et états clim/rad)
+- `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` (statuts et états clim/rad)
 - `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` (totaux kWh + puissance W)
 - `templates/P1_clim_chauffage/P1_AVG/P1_AVG_AMHQ_TOTAL.yaml` (moyennes watts AMHQ)
 - `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` (logique groupe, T° cible, delta)

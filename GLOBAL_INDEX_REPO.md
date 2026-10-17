@@ -110,10 +110,10 @@
 <details>
 <summary><b>timers/P1_timers/</b> &nbsp;|&nbsp; Helpers timer SDB (soufflant 60 mn / 10 mn, sèche-serviettes 2 h / 10 mn)</summary>
 <blockquote>
-⚙️ <a href="docs/01_docs_config_system/config_system_YAML/timers/P1_timers/P1_timer_60mn_soufflant_sdb.yaml">P1_timer_60mn_soufflant_sdb.yaml</a><br>
-⚙️ <a href="docs/01_docs_config_system/config_system_YAML/timers/P1_timers/P1_timer_10mn_soufflant_sdb.yaml">P1_timer_10mn_soufflant_sdb.yaml</a><br>
-⚙️ <a href="docs/01_docs_config_system/config_system_YAML/timers/P1_timers/P1_timer_2h_seche_serviettes_sdb.yaml">P1_timer_2h_seche_serviettes_sdb.yaml</a><br>
-⚙️ <a href="docs/01_docs_config_system/config_system_YAML/timers/P1_timers/P1_timer_10mn_seche_serviettes_sdb.yaml">P1_timer_10mn_seche_serviettes_sdb.yaml</a><br>
+⚙️ <a href="docs/01_docs_config_system/config_system_YAML/timers/P1_timers/P1_timer_60mn_soufflant_SDB.yaml">P1_timer_60mn_soufflant_SDB.yaml</a><br>
+⚙️ <a href="docs/01_docs_config_system/config_system_YAML/timers/P1_timers/P1_timer_10mn_soufflant_SDB.yaml">P1_timer_10mn_soufflant_SDB.yaml</a><br>
+⚙️ <a href="docs/01_docs_config_system/config_system_YAML/timers/P1_timers/P1_timer_2h_seche_serviettes_SDB.yaml">P1_timer_2h_seche_serviettes_SDB.yaml</a><br>
+⚙️ <a href="docs/01_docs_config_system/config_system_YAML/timers/P1_timers/P1_timer_10mn_seche_serviettes_SDB.yaml">P1_timer_10mn_seche_serviettes_SDB.yaml</a><br>
 📄 <a href="docs/03_docs_automations/docs_automations_MD/P1_03_Chauffage%20Salle%20de%20Bain/TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES/TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md">Documentation timers SDB</a>
 </blockquote>
 </details>
@@ -573,7 +573,7 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> - 6 entité(s) - <a href="templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_UI_DASHBOARD.yaml</code> - 6 entité(s) - <a href="templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.chambre_power_status</code></li>
@@ -655,7 +655,7 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 comme ses propres entités produites - en réalité ce fichier ne produit que les 2 sensors
 <code>*_trend</code>, vérifié dans son corps. Les pop-up <code>#tcourbe</code>/<code>#hcourbe</code>
 (historique/graphe) reclassés en Natif HA (un graphe historique n'a pas besoin d'un TPL).
-<code>P1_ui_dashboard.yaml</code> listait à tort <code>climate.radiateur_cuisine</code> comme
+<code>P1_UI_DASHBOARD.yaml</code> listait à tort <code>climate.radiateur_cuisine</code> comme
 produit par ce fichier - c'est une entité native Meross consommée en source, pas produite
 (déplacée vers natives). Bloc <code>P1_UM_AMHQ.yaml - switch.radiateur_elec_cuisine</code>
 retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.*_um</code>
@@ -709,7 +709,7 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> - 13 entité(s) - <a href="templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_UI_DASHBOARD.yaml</code> - 13 entité(s) - <a href="templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.chambre_power_status</code></li>
@@ -768,7 +768,7 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 </details>
 
 <details>
-<summary><code>P1_BV_01_SW_inter_souflant_sdb.yaml</code> - 2 entité(s) - <a href="templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml">voir fichier</a></summary>
+<summary><code>P1_BV_01_SW_inter_souflant_sdb.yaml</code> - 2 entité(s) - <a href="templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_SDB.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>switch.inter_soufflant_salle_de_bain</code></li>
 <li><code>switch.voyant_thermostat_soufflant_salle_de_bain</code></li>
@@ -790,7 +790,7 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> - 11 entité(s) - <a href="templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_UI_DASHBOARD.yaml</code> - 11 entité(s) - <a href="templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.bureau_power_status_affichage</code></li>
@@ -850,7 +850,7 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 ⚠️ <b>Corrigé le 2026-07-19</b> : <code>climate.soufflant_salle_de_bain</code> retiré partout -
 entité inexistante (le soufflant SDB n'a pas d'entité climate, vérifié : aucune occurrence
 dans tout <code>config_system_YAML/</code>). <code>climate.radiateur_cuisine</code> déplacé de
-"produit par P1_ui_dashboard.yaml" vers natif (c'est une entité Meross consommée, pas produite).
+"produit par P1_UI_DASHBOARD.yaml" vers natif (c'est une entité Meross consommée, pas produite).
 Mise à jour 2026-10-07 : <code>climate.soufflant_salle_de_bain</code> existe en live (helper UI generic_thermostat, devenu voyant, heater = <code>switch.voyant_thermostat_soufflant_salle_de_bain</code>) ; la correction du 2026-07-19 ci-dessus est obsolète.
 Bloc <code>P1_UM_AMHQ.yaml - remote.clim_*/switch.radiateur_elec_cuisine</code> retiré
 entièrement - un fichier utility_meter ne produit que des <code>sensor.*_um</code> (vérifié :
@@ -1349,7 +1349,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> - 6 entité(s) - <a href="templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_UI_DASHBOARD.yaml</code> - 6 entité(s) - <a href="templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.chambre_power_status</code></li>
@@ -1478,7 +1478,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>P1_ui_dashboard.yaml</code> - 11 entité(s) - <a href="templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml">voir fichier</a></summary>
+<summary><code>P1_UI_DASHBOARD.yaml</code> - 11 entité(s) - <a href="templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.bureau_power_status</code></li>
 <li><code>sensor.bureau_power_status_affichage</code></li>
@@ -1616,7 +1616,7 @@ déplacées vers natives.
 </details>
 
 <details>
-<summary><code>etats_status.yaml</code> - 6 entité(s) - <a href="templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml">voir fichier</a></summary>
+<summary><code>etats_status.yaml</code> - 6 entité(s) - <a href="templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.lumiere_appartement_etat</code></li>
 <li><code>sensor.lumiere_bureau_etat</code></li>
@@ -1744,7 +1744,7 @@ déplacées vers natives.
 
 <blockquote>
 ⚠️ <b>Corrigé le 2026-07-19</b> : <code>light.bureau/chambre/cuisine/salon</code> étaient
-attribués à tort à <code>P1_ui_dashboard.yaml</code> (fichier Pôle 1 clim - vérifié dans
+attribués à tort à <code>P1_UI_DASHBOARD.yaml</code> (fichier Pôle 1 clim - vérifié dans
 son corps, aucune entité <code>light.*</code> nulle part dedans). <code>light.hue_white_lamp_salle_de_bain</code>
 et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <code>P3_UM_AMHQ_1_UNITE.yaml</code> (fichier utility_meter - vérifié, ne produit que des
@@ -1786,7 +1786,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <blockquote>
 
 <details>
-<summary><code>etats_status.yaml</code> - 7 entité(s) - <a href="templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml">voir fichier</a></summary>
+<summary><code>etats_status.yaml</code> - 7 entité(s) - <a href="templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.bureau_etat</code></li>
 <li><code>sensor.chambre_etat</code></li>
@@ -1822,7 +1822,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 
 <blockquote>
 ⚠️ <b>Corrigé le 2026-07-19</b> : tous les <code>light.*</code> ci-dessus étaient attribués
-à tort à <code>P1_ui_dashboard.yaml</code> (fichier Pôle 1 clim) ou <code>P3_UM_AMHQ_1_UNITE.yaml</code>
+à tort à <code>P1_UI_DASHBOARD.yaml</code> (fichier Pôle 1 clim) ou <code>P3_UM_AMHQ_1_UNITE.yaml</code>
 (fichier utility_meter) - vérifié dans les deux corps, aucun des deux ne produit d'entité
 <code>light.*</code>. Ce sont toutes des entités natives Hue Bridge, regroupées en natives.
 </blockquote>
@@ -1846,7 +1846,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <blockquote>
 
 <details>
-<summary><code>etats_status.yaml</code> - 5 entité(s) - <a href="templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml">voir fichier</a></summary>
+<summary><code>etats_status.yaml</code> - 5 entité(s) - <a href="templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.lumiere_couloir_etat</code></li>
 <li><code>sensor.lumiere_cuisine_etat</code></li>
@@ -1915,7 +1915,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <blockquote>
 
 <details>
-<summary><code>etats_status.yaml</code> - 6 entité(s) - <a href="templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml">voir fichier</a></summary>
+<summary><code>etats_status.yaml</code> - 6 entité(s) - <a href="templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.chambre_nb_allumes</code></li>
 <li><code>sensor.lumiere_bureau_etat</code></li>
@@ -1967,7 +1967,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 
 <blockquote>
 ⚠️ <b>Corrigé le 2026-07-19</b> : <code>light.bureau/chambre</code> (attribués à tort à
-<code>P1_ui_dashboard.yaml</code>) et les 9 <code>light.*</code>/<code>switch.*</code>
+<code>P1_UI_DASHBOARD.yaml</code>) et les 9 <code>light.*</code>/<code>switch.*</code>
 (attribués à tort à <code>P3_UM_AMHQ_1_UNITE.yaml</code>, fichier utility_meter qui ne
 produit que des <code>sensor.*_um</code>) déplacés vers natives.
 </blockquote>
@@ -2743,7 +2743,7 @@ le total ~49.
 <blockquote>
 
 <details>
-<summary><code>github_maintenance.yaml</code> - 3 entité(s) - <a href="command_line/github_maintenance/github_maintenance.yaml">voir fichier</a></summary>
+<summary><code>GitHub_maintenance.yaml</code> - 3 entité(s) - <a href="command_line/GitHub_maintenance/GitHub_maintenance.yaml">voir fichier</a></summary>
 <blockquote><ul>
 <li><code>sensor.backup_github_status</code></li>
 <li><code>sensor.git_last_weekly_tag</code></li>
@@ -2818,7 +2818,7 @@ le total ~49.
 <details>
 <summary>💬 Pop-up <code>#spm25</code> - 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.pm2_5_salon_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.pm2_5_salon_moy_24h</code> - <a href="sensors/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -2826,8 +2826,8 @@ le total ~49.
 <summary>💬 Pop-up <code>#scov</code> - 3 entité(s)</summary>
 <blockquote><ul>
 <li><code>sensor.qualite_air_salon_ikea_voc_index</code> - <i>Natif HA</i></li>
-<li><code>sensor.tcov_salon_ppb</code> - <a href="templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_salon_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_salon_ppb</code> - <a href="templates/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_salon_moy_24h</code> - <a href="sensors/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 <blockquote>
@@ -2840,7 +2840,7 @@ Bureau et un tCOV Bureau - incohérent avec son propre nom et la logique du dash
 <details>
 <summary>💬 Pop-up <code>#bpm25</code> - 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.pm2_5_bureau_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.pm2_5_bureau_moy_24h</code> - <a href="sensors/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -2848,8 +2848,8 @@ Bureau et un tCOV Bureau - incohérent avec son propre nom et la logique du dash
 <summary>💬 Pop-up <code>#bcov</code> - 3 entité(s)</summary>
 <blockquote><ul>
 <li><code>sensor.qualite_air_bureau_ikea_voc_index</code> - <i>Natif HA</i></li>
-<li><code>sensor.tcov_bureau_ppb</code> - <a href="templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_bureau_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_bureau_ppb</code> - <a href="templates/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_bureau_moy_24h</code> - <a href="sensors/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 <blockquote>
@@ -2861,7 +2861,7 @@ les 3 entités COV/tCOV réelles du Bureau.
 <details>
 <summary>💬 Pop-up <code>#cpm25</code> - 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.pm2_5_chambre_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.pm2_5_chambre_moy_24h</code> - <a href="sensors/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -2869,8 +2869,8 @@ les 3 entités COV/tCOV réelles du Bureau.
 <summary>💬 Pop-up <code>#ccov</code> - 3 entité(s)</summary>
 <blockquote><ul>
 <li><code>sensor.qualite_air_chambre_ikea_voc_index</code> - <i>Natif HA</i></li>
-<li><code>sensor.tcov_chambre_ppb</code> - <a href="templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_chambre_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_chambre_ppb</code> - <a href="templates/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_chambre_moy_24h</code> - <a href="sensors/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 <blockquote>
@@ -2885,22 +2885,22 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <blockquote>
 
 <details>
-<summary><code>A_01_AIR_QUALITY.yaml</code> - 6 entité(s) - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></summary>
+<summary><code>A_01_AIR_QUALITY.yaml</code> - 6 entité(s) - <a href="sensors/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.pm2_5_bureau_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.pm2_5_chambre_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.pm2_5_salon_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_bureau_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_chambre_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_salon_moy_24h</code> - <a href="sensors/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.pm2_5_bureau_moy_24h</code> - <a href="sensors/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.pm2_5_chambre_moy_24h</code> - <a href="sensors/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.pm2_5_salon_moy_24h</code> - <a href="sensors/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_bureau_moy_24h</code> - <a href="sensors/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_chambre_moy_24h</code> - <a href="sensors/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_salon_moy_24h</code> - <a href="sensors/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>A_01_AIR_QUALITY.yaml</code> - 3 entité(s) - <a href="templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></summary>
+<summary><code>A_01_AIR_QUALITY.yaml</code> - 3 entité(s) - <a href="templates/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.tcov_bureau_ppb</code> - <a href="templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
-<li><code>sensor.tcov_chambre_ppb</code> - <a href="templates/Air_quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_bureau_ppb</code> - <a href="templates/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
+<li><code>sensor.tcov_chambre_ppb</code> - <a href="templates/Air_Quality/A_01_AIR_QUALITY.yaml">voir fichier</a></li>
 <li><code>sensor.tcov_salon_ppb</code></li>
 </ul></blockquote>
 </details>
@@ -3204,8 +3204,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>Alerte Météo France actualisation des "CARTES</b></summary>
 <blockquote>
 <i>Force la mise à jour des images d''alerte Météo France au démarrage,  aux</i><br><br>
-📄 <a href="docs/03_docs_automations/docs_automations_MD/Météo/ALERTE_METEO_CARTES/ALERTE_METEO_CARTES.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/Météo/alerte_meteo_france_actualisation_des_cartes/alerte_meteo_france_actualisation_des_cartes.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/docs_automations_MD/Meteo/ALERTE_METEO_CARTES/ALERTE_METEO_CARTES.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/Meteo/alerte_meteo_france_actualisation_des_cartes/alerte_meteo_france_actualisation_des_cartes.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · ⏰`time` · ⏰`time_pattern`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -3222,8 +3222,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>Update previous temperature</b></summary>
 <blockquote>
 <i>Enregistre la température toutes les 30 minutes pour calculer la tendance.</i><br><br>
-📄 <a href="docs/03_docs_automations/docs_automations_MD/Météo/UPDATE_PREV_TEMPERATURE/UPDATE_PREV_TEMPERATURE.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/Météo/update_previous_temperature/update_previous_temperature.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/docs_automations_MD/Meteo/UPDATE_PREV_TEMPERATURE/UPDATE_PREV_TEMPERATURE.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/Meteo/update_previous_temperature/update_previous_temperature.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time_pattern`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3239,8 +3239,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>Update previous humidity</b></summary>
 <blockquote>
 <i>Enregistre l'humidité toutes les 30 minutes pour calculer la tendance.</i><br><br>
-📄 <a href="docs/03_docs_automations/docs_automations_MD/Météo/UPDATE_PREV_HUMIDITY/UPDATE_PREV_HUMIDITY.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/Météo/update_previous_humidity/update_previous_humidity.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/docs_automations_MD/Meteo/UPDATE_PREV_HUMIDITY/UPDATE_PREV_HUMIDITY.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/Meteo/update_previous_humidity/update_previous_humidity.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time_pattern`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3256,8 +3256,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>Notification de la foudre</b></summary>
 <blockquote>
 <i>Alerte sur Poco X7 Pro avec distance, ville ou direction et décompte</i><br><br>
-📄 <a href="docs/03_docs_automations/docs_automations_MD/Météo/NOTIF_FOUDRE/NOTIF_FOUDRE.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/Météo/notification_de_la_foudre/notification_de_la_foudre.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/docs_automations_MD/Meteo/NOTIF_FOUDRE/NOTIF_FOUDRE.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/Meteo/notification_de_la_foudre/notification_de_la_foudre.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -3274,8 +3274,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>Mettre à jour le temps du dernier impact de foudre</b></summary>
 <blockquote>
 <i>Met à jour le temps du dernier impact de foudre lorsque le capteur</i><br><br>
-📄 <a href="docs/03_docs_automations/docs_automations_MD/Météo/MAJ_TEMPS_FOUDRE/MAJ_TEMPS_FOUDRE.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/Météo/mettre_a_jour_le_temps_du_dernier_impact_de_foudre/mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/docs_automations_MD/Meteo/MAJ_TEMPS_FOUDRE/MAJ_TEMPS_FOUDRE.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/Meteo/mettre_a_jour_le_temps_du_dernier_impact_de_foudre/mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -3748,7 +3748,7 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 ⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/P2_éCO.%20Prises/eco_prises_dynamique_by_presence_groupe/eco_prises_dynamique_by_presence_groupe.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · 📊`numeric_state`<br>
 <br><details>
-<summary>🔌 Entités (8) <i>- corrigé 2026-07-19, liste réelle depuis P2_eco_prises_config.yaml</i></summary>
+<summary>🔌 Entités (8) <i>- corrigé 2026-07-19, liste réelle depuis P2_eCO_prises_config.yaml</i></summary>
 <blockquote><ul>
 <li><code>sensor.groupe</code></li>
 <li><code>switch.prise_horloge_ikea</code></li>
@@ -4489,7 +4489,7 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 <blockquote>
 <i>Règle la vitesse du ventilateur du Raspberry en fonction de la température</i><br><br>
 📄 <a href="docs/03_docs_automations/docs_automations_MD/RASPI/RPi4_FAN_PWM/RPi4_FAN_PWM.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/RASPI/A_rpi_fan_pwm_6_states/A_rpi_fan_pwm_6_states.yaml">YAML source</a><br>
+⚙️ <a href="docs/03_docs_automations/docs_automations_YAML/RASPI/A_RASPI_fan_pwm_6_states/A_RASPI_fan_pwm_6_states.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>

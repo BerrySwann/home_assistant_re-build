@@ -10,10 +10,10 @@ Le compte de duree du soufflant (script `sdb_soufflant_demarrer`, 60 min) et cel
 
 | Entite | Duree | Fichier |
 |:--|:--|:--|
-| `timer.soufflant_sdb_60mn` | 01:00:00 | `P1_timer_60mn_soufflant_sdb.yaml` |
-| `timer.soufflant_sdb_10mn` (rattrapage) | 00:10:00 | `P1_timer_10mn_soufflant_sdb.yaml` |
-| `timer.seche_serviettes_sdb_2h` | 02:00:00 | `P1_timer_2h_seche_serviettes_sdb.yaml` |
-| `timer.seche_serviettes_sdb_10mn` (rattrapage) | 00:10:00 | `P1_timer_10mn_seche_serviettes_sdb.yaml` |
+| `timer.soufflant_sdb_60mn` | 01:00:00 | `P1_timer_60mn_soufflant_SDB.yaml` |
+| `timer.soufflant_sdb_10mn` (rattrapage) | 00:10:00 | `P1_timer_10mn_soufflant_SDB.yaml` |
+| `timer.seche_serviettes_sdb_2h` | 02:00:00 | `P1_timer_2h_seche_serviettes_SDB.yaml` |
+| `timer.seche_serviettes_sdb_10mn` (rattrapage) | 00:10:00 | `P1_timer_10mn_seche_serviettes_SDB.yaml` |
 
 Un nouveau fichier timer se charge avec le service `timer.reload`. Le domaine `timer` a demande un redemarrage de HA la premiere fois (2026-10-07, 21h30).
 

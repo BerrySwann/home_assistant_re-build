@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
@@ -274,7 +274,7 @@ Déclenche l'automation `automation.db_purge_mariadb_repack`.
 |--------|-----------|------|
 | `sensor.audit_md5_journal` | `audit_md5_journal` | Lit les 25 dernières lignes de `/config/.logs/md5_audit_latest.txt` → attr `text` |
 
-### 📁 `command_line/github_maintenance/github_maintenance.yaml`
+### 📁 `command_line/GitHub_maintenance/GitHub_maintenance.yaml`
 > Sensors lisant le log Git et interrogeant le dépôt local.
 
 | Entité | unique_id | Rôle |
@@ -316,7 +316,7 @@ Auth HTTPS via token dans l'URL remote Git (`.git/config`).
         ├── Auth HTTPS : token dans URL remote .git/config (NON dans secrets.yaml)
         │
         ├── → /config/.logs/ha_git_backup.log  (append - toutes actions)
-        │     └─→ command_line/github_maintenance/github_maintenance.yaml (4 sensors)
+        │     └─→ command_line/GitHub_maintenance/GitHub_maintenance.yaml (4 sensors)
         │           ├── sensor.backup_github_status   scan 10s  grep "OK:" → JSON {ok, ts}
         │           ├── sensor.backup_github_journal  scan 10s  python3 → 10 dernières lignes OK → JSON {text}
         │           ├── sensor.git_last_weekly_tag    scan 3600s  git tag | grep weekly-
@@ -403,7 +403,7 @@ Chip [Tag weekly]  (hold)
 ### Configuration YAML
 - `scripts.yaml` (`script.audit_md5`)
 - `command_line/audit/audit_logs.yaml` (`sensor.audit_md5_journal`)
-- `command_line/github_maintenance/github_maintenance.yaml`
+- `command_line/GitHub_maintenance/GitHub_maintenance.yaml`
 - `shell_command.yaml`
 - `sql.yaml`
 - `.scripts/audit_md5.sh`

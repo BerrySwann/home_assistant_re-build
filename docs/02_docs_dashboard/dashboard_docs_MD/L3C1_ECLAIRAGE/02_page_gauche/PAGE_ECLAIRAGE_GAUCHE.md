@@ -92,7 +92,7 @@ Toutes les entités ci-dessous existent dans HA (vérification en direct le 2026
 | Entité | Source | Rôle |
 |:--|:--|:--|
 | `light.entree`, `light.couloir`, `light.cuisine`, `light.salon`, `light.table` | Philips Hue (intégration native) | lumières commandées |
-| `sensor.lumiere_entree_etat`, `sensor.lumiere_salon_etat`, `sensor.lumiere_table_etat`, `sensor.lumiere_cuisine_etat`, `sensor.lumiere_couloir_etat` | template `templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml` | état texte affiché sur les cartes |
+| `sensor.lumiere_entree_etat`, `sensor.lumiere_salon_etat`, `sensor.lumiere_table_etat`, `sensor.lumiere_cuisine_etat`, `sensor.lumiere_couloir_etat` | template `templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml` | état texte affiché sur les cartes |
 | `sensor.th_salon_temperature`, `sensor.th_cuisine_temperature` | capteurs de température (SONOFF TH selon l'ancien MD, non revérifié) | badges des titres |
 | `cover.store_salon` | intégration native | badge état du store salon (valeur `open` le 2026-10-11) |
 | `sensor.plug_power` | non vérifié | variable `number_entity` des blocs USER CONFIG (valeur `unknown` le 2026-10-11) ; non utilisée en mode état (`use_number: false`) |
@@ -1008,7 +1008,7 @@ cards:
 ## Points à vérifier
 
 - L'ancien MD (`PAGE_ECLAIRAGE.md`, 2026-03-21) ne décrivait pas Entrée, Salon, Cuisine ni Couloir en détail : cette page n'était documentée que par son schéma d'architecture. Le contenu de ce MD vient du YAML.
-- Dans l'ancien MD, le fichier de templates était cité `templates/P3_eclairage/ui_dashboard/etats_status.yaml`. Le chemin actuel est `templates/P3_eclairage/P3_ui_dashboard/P3_etats_status.yaml`.
+- Dans l'ancien MD, le fichier de templates était cité `templates/P3_eclairage/ui_dashboard/etats_status.yaml`. Le chemin actuel est `templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml`.
 - L'animation flame (CSS dans `card_mod`) n'a pas été vérifiée visuellement.
 
 ---

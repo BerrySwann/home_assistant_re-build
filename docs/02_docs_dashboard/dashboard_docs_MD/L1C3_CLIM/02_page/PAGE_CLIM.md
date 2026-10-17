@@ -343,7 +343,7 @@ const delta  = (temp - target).toFixed(1);
 ```
 
 Sources pour ce bloc :
-- `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml` → `switch.inter_soufflant_salle_de_bain`
+- `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_SDB.yaml` → `switch.inter_soufflant_salle_de_bain`
 - `[NAT]` input_select.yaml → `input_select.etat_resistance_soufflant_sdb`
 
 ### bar-card puissance (conditionnel > 0.1W)
@@ -419,34 +419,34 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 | Entité | Fichier | Rôle sur la page |
 |--------|---------|-----------------|
 | `sensor.temperature_delta_affichage` | `P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Badge heading principal |
-| `sensor.salon_power_status_affichage` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Condition bloc bilan |
-| `sensor.cuisine_power_status_affichage` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Condition bloc bilan |
-| `sensor.bureau_power_status_affichage` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Condition bloc bilan |
-| `sensor.sdb_power_status_affichage` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Condition bloc bilan |
-| `sensor.sdb_seche_serviette_power_status_affichage` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Condition bloc bilan |
-| `sensor.chambre_power_status_affichage` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Condition bloc bilan |
-| `sensor.salon_power_status` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Chips mushroom |
-| `sensor.cuisine_power_status` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Chips mushroom |
-| `sensor.bureau_power_status` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Chips mushroom |
-| `sensor.sdb_soufflant_power_status` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Chips mushroom |
-| `sensor.sdb_seche_serviette_power_status` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Chips mushroom |
-| `sensor.chambre_power_status` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Chips mushroom |
-| `sensor.clim_salon_etat` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Chip Salon (contenu) |
-| `sensor.radiateur_cuisine_etat` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Chip Cuisine (contenu) |
-| `sensor.clim_bureau_etat` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Chip Bureau (contenu) |
-| `sensor.sdb_soufflant_power_etat` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Chip SdB Soufflant |
-| `sensor.sdb_seche_serviette_etat` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Chip SdB Serviette |
-| `sensor.clim_chambre_etat` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Chip Chambre |
-| `sensor.salon_power_lock` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Warning arrêt sécurisé salon |
-| `sensor.bureau_power_lock` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Warning arrêt sécurisé bureau |
-| `sensor.chambre_power_lock` | `P1_ui_dashboard/P1_ui_dashboard.yaml` | Warning arrêt sécurisé chambre |
+| `sensor.salon_power_status_affichage` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Condition bloc bilan |
+| `sensor.cuisine_power_status_affichage` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Condition bloc bilan |
+| `sensor.bureau_power_status_affichage` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Condition bloc bilan |
+| `sensor.sdb_power_status_affichage` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Condition bloc bilan |
+| `sensor.sdb_seche_serviette_power_status_affichage` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Condition bloc bilan |
+| `sensor.chambre_power_status_affichage` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Condition bloc bilan |
+| `sensor.salon_power_status` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Chips mushroom |
+| `sensor.cuisine_power_status` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Chips mushroom |
+| `sensor.bureau_power_status` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Chips mushroom |
+| `sensor.sdb_soufflant_power_status` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Chips mushroom |
+| `sensor.sdb_seche_serviette_power_status` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Chips mushroom |
+| `sensor.chambre_power_status` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Chips mushroom |
+| `sensor.clim_salon_etat` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Chip Salon (contenu) |
+| `sensor.radiateur_cuisine_etat` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Chip Cuisine (contenu) |
+| `sensor.clim_bureau_etat` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Chip Bureau (contenu) |
+| `sensor.sdb_soufflant_power_etat` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Chip SdB Soufflant |
+| `sensor.sdb_seche_serviette_etat` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Chip SdB Serviette |
+| `sensor.clim_chambre_etat` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Chip Chambre |
+| `sensor.salon_power_lock` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Warning arrêt sécurisé salon |
+| `sensor.bureau_power_lock` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Warning arrêt sécurisé bureau |
+| `sensor.chambre_power_lock` | `P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Warning arrêt sécurisé chambre |
 | `sensor.conso_clim_rad_total` | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` | bar-card total W |
 
 ### Templates Inter_BP_Virtuel
 
 | Entité | Fichier | Rôle |
 |--------|---------|------|
-| `switch.inter_soufflant_salle_de_bain` | `Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml` | Visibilité button-card soufflant SdB |
+| `switch.inter_soufflant_salle_de_bain` | `Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_SDB.yaml` | Visibilité button-card soufflant SdB |
 
 ### Natif HA - climate (SmartIR / Meross)
 
@@ -546,7 +546,7 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 
 ### Le button-card soufflant SdB n'apparaît pas
 - `switch.inter_soufflant_salle_de_bain` doit être `on`
-- Source : `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml`
+- Source : `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_SDB.yaml`
 - Vérifier que `input_boolean.inter_soufflant_salle_de_bain` est bien créé dans `input_boolean.yaml`
 
 ### Les schedules montrent "unavailable"
@@ -558,10 +558,10 @@ Ce template affiche le détail du calcul du delta T° utilisé pour la recommand
 ## 📚 FICHIERS LIÉS
 
 - Vignette : `docs/L1C3_CLIM/L1C3_VIGNETTE_CLIM.md`
-- Templates P1 ui : `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml`
+- Templates P1 ui : `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml`
 - Templates P1 total : `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml`
 - Templates P1 master : `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml`
-- Templates Inter SdB : `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml`
+- Templates Inter SdB : `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_SDB.yaml`
 
 
 <!-- obsidian-wikilinks -->

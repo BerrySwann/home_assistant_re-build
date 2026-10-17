@@ -150,7 +150,7 @@ l'interface (tolérances 0, bornes 19 à 32), puis son chauffage a été remplac
 ne peut donc plus couper ni rallumer le soufflant. Contrepartie : il n'y a plus de coupure en
 température par le thermostat (elle tombait à la consigne, 32 degrés au plus). Restent l'arrêt forcé
 à 60 minutes et la watchdog C. Les deux nouvelles entités sont déclarées dans `input_booleans/P1/
-P1_BV_IB_inter_soufflant_sdb.yaml` et `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml`.
+P1_BV_IB_inter_soufflant_SDB.yaml` et `templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_SDB.yaml`.
 
 ### 8.5 Watchdog : remis en service mais inopérant
 

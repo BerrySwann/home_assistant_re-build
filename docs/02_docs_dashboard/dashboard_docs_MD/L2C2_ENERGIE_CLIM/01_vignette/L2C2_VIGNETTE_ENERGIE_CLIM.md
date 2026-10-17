@@ -249,7 +249,7 @@ custom_fields:
 | 3 | `climate.clim_bureau_rm4_mini` | NAT | Thermostat Bureau | SmartIR |
 | 4 | `climate.soufflant_salle_de_bain` | NAT | Thermostat SdB Soufflant | Meross |
 | 5 | `climate.clim_chambre_rm4_mini` | NAT | Thermostat Chambre | SmartIR |
-| 6 | `sensor.salon_power_status` | TPL | ON/OFF Salon | `P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` |
+| 6 | `sensor.salon_power_status` | TPL | ON/OFF Salon | `P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` |
 | 7 | `sensor.cuisine_power_status` | TPL | ON/OFF Cuisine | idem |
 | 8 | `sensor.bureau_power_status` | TPL | ON/OFF Bureau | idem |
 | 9 | `sensor.sdb_soufflant_etat` | TPL | Mode Soufflant SdB | idem |
@@ -283,7 +283,7 @@ custom_fields:
 | `sensor.sdb_seche_serviette_power_status` | ON/OFF SdB Sèche-Serv |
 | `sensor.clim_chambre_etat` | Mode Chambre (cool/heat/fan/off) |
 
-**Source :** `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml`
+**Source :** `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml`
 
 ---
 
@@ -352,7 +352,7 @@ Vérifier `sensor.conso_clim_rad_total_quotidien` et `sensor.conso_clim_rad_tota
 | Fichier | Rôle |
 |---------|------|
 | `utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml` | Compteurs UM Q/H/M/A (source kWh) |
-| `templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml` | Templates power_status + etat |
+| `templates/P1_clim_chauffage/P1_UI_DASHBOARD/P1_UI_DASHBOARD.yaml` | Templates power_status + etat |
 | `templates/P1_clim_chauffage/P1_TOTAL/P1_TOTAL_AMHQ.yaml` | TOTAL quotidien + mensuel kWh |
 | `sensors/P1_clim_chauffage/P1_DUT_clim_chauffage.yaml` | Intégration Riemann (kWh source UM) |
 
