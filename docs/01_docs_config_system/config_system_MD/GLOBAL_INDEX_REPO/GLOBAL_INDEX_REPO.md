@@ -1,6 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-10-18 (18h50, /histo S1) - entrées ajoutées : IA_CARTE_EMPLACEMENTS.md (00 - IA) et Verif_emplacements.py (scripts python, 6 -> 7) ; audit_md5_yaml.sh : lien vers sa fiche config_system_MD/.scripts*
 *Dernière mise à jour : 2026-10-18 (17h30) - resync des liens : 315 liens remis à la casse et aux noms réels (renommages du 17/10, AQ_01_air_quality, S_01_store, P2_eCO. prises, Controle entity Z2M, RASPI_fan_pwm, configuration/configuration.md) ; fichier déplacé par Eric dans config_system_MD/GLOBAL_INDEX_REPO/*
 *Dernière mise à jour : 2026-10-18 - dossier de config : config_system_YAML remplacé par config_system_SH_PY_YAML (copie fidèle de /config) ; liens des 4 timers remis sur les sous-dossiers P1_Timer_10mn, P1_Timer_2h et P1_Timer_60mn ; 3 notes citant config_system_YAML mises à jour*
 *Dernière mise à jour : 2026-10-15 (soir, /histo-final S1) - repli Meteoalarm retiré du template M_01 : entrée retirée du pop-up #alert (14 -> 13) et des entités natives HA (16 -> 15) ; aucun fichier ajouté, renommé ou supprimé à indexer ici (les fiches CARD_*_HOME ne sont pas indexées)*
@@ -56,6 +57,13 @@
 <summary><b>IA_AUTOMATIONS_NOTIFS.md</b> &nbsp;|&nbsp; Création/modif automations, messages notify, scripts HA</summary>
 <blockquote>
 📄 <a href="docs/00_IA/SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/IA_AUTOMATIONS_NOTIFS.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>IA_CARTE_EMPLACEMENTS.md</b> &nbsp;|&nbsp; Carte des 5 emplacements d'un fichier (local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et sens d'écriture</summary>
+<blockquote>
+📄 <a href="docs/00_IA/SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md">Doc</a>
 </blockquote>
 </details>
 
@@ -4156,7 +4164,7 @@ Sortie : repo GitHub <code>home_assistant_re-build</code>
 <summary><code>audit_md5_yaml.sh</code> &nbsp;|&nbsp; Audit MD5 YAML GitHub ↔ prod (ajouté le 2026-10-12, activité non vérifiée)</summary>
 <blockquote>
 Script source : <a href="docs/04_Docs_scripts/Docs_scripts_sh/Audit_md5_yaml/Audit_md5_yaml.sh">audit_md5_yaml.sh</a> (copie de <code>/homeassistant/.scripts/</code>)<br>
-Pas de doc associée.
+📄 <a href="docs/01_docs_config_system/config_system_MD/.scripts/01_scripts.sh_md/Audit_md5_yaml.md">Doc</a>
 </blockquote>
 </details>
 
@@ -4184,7 +4192,7 @@ device et fonction confirmés (Raspberry Pi, cf. TODO.md U-2). Corrige l'ancienn
 </details>
 
 <details>
-<summary><b>🐍 SCRIPTS PYTHON D'INDEX</b> &nbsp;|&nbsp; 6 scripts (ajoutés le 2026-10-13, lecture seule de la prod) &nbsp;|&nbsp; Local : <code>docs_scripts_SH/</code> &nbsp;|&nbsp; Non poussés en prod</summary>
+<summary><b>🐍 SCRIPTS PYTHON D'INDEX</b> &nbsp;|&nbsp; 7 scripts (ajoutés le 2026-10-13 et le 2026-10-18, lecture seule de la prod) &nbsp;|&nbsp; Local : <code>docs_scripts_SH/</code> &nbsp;|&nbsp; Non poussés en prod</summary>
 <blockquote>
 
 <details>
@@ -4237,6 +4245,15 @@ Pas de doc associée.
 <blockquote>
 ⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Check_GLOBAL_INDEX/Check_GLOBAL_INDEX.py">Script source</a><br>
 Lancé par /histo (étape 6, point 8) ; ne corrige rien.<br>
+Pas de doc associée.
+</blockquote>
+</details>
+
+<details>
+<summary><code>Verif_emplacements.py</code> &nbsp;|&nbsp; Contrôle en lecture seule des fichiers à plusieurs emplacements (local, prod racine, prod miroir, GitHub racine et docs/)</summary>
+<blockquote>
+⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Verif_emplacements/Verif_emplacements.py">Script source</a><br>
+Lancé par /histo (étape 6, point 9) ; ne corrige rien. Carte : <a href="docs/00_IA/SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md">IA_CARTE_EMPLACEMENTS.md</a><br>
 Pas de doc associée.
 </blockquote>
 </details>
