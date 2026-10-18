@@ -62,3 +62,7 @@
 2026-10-18 11:56:37 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md | avant=d163398f apres=d4ebf65c | copie de CLAUDE.md; bak : IA_CONTEXT_BASE.bak_2026_10_18_11h56m37s.md
 2026-10-18 11:56:37 | claude | COPIE | D:\docs\00_IA\IA_CONTEXT_BASE.md | avant=d163398f apres=d4ebf65c | copie de CLAUDE.md (pas de bak sur D:)
 2026-10-18 11:56:37 | claude | COPIE | H:\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md | avant=d163398f apres=d4ebf65c | copie de CLAUDE.md (pas de bak sur H:)
+2026-10-18 12:10:25 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\Claude md SAVE\CLAUDE.md | avant=d4ebf65c apres=a9ff8cc0 | regles de travail 6 a 12 ajoutees (DONE, corrections au fil de l'eau, GO groupe, nouvel objet HA, doc fait foi, controle typographique, vocabulaire), date de conformite; bak : CLAUDE.bak_2026_10_18_12h10m09s.md
+2026-10-18 12:10:25 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md | avant=d4ebf65c apres=a9ff8cc0 | copie de CLAUDE.md; bak : IA_CONTEXT_BASE.bak_2026_10_18_12h10m25s.md
+2026-10-18 12:10:25 | claude | COPIE | D:\docs\00_IA\IA_CONTEXT_BASE.md | avant=d4ebf65c apres=a9ff8cc0 | copie de CLAUDE.md (pas de bak sur D:)
+2026-10-18 12:10:25 | claude | COPIE | H:\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md | avant=d4ebf65c apres=a9ff8cc0 | copie de CLAUDE.md (pas de bak sur H:)

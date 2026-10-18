@@ -3,14 +3,14 @@
 > `ReBuild/docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md` et `D:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres
 > toute mise a jour, verifier que les trois empreintes md5 sont egales. Il ne depend d'aucun agent
 > en particulier.
-> Derniere mise en conformite : 2026-10-17 (3 copies identiques, voir ci-dessus). Rappel du
+> Derniere mise en conformite : 2026-10-18 (3 copies identiques, voir ci-dessus). Rappel du
 > 2026-10-04 : la copie `D:\` avait ete retrouvee perimee (version du 2026-07-19, encore l'ancienne
 > REGLE ABSOLUE) et realignee ce jour-la - ancienne version conservee en
 > `D:\docs\00_IA\IA_CONTEXT_BASE_2026-07-19_15h46.md`.
 
 ---
 
-> **REGLES DE TRAVAIL - version du 2026-09-27.** Elles valent pour toutes tes reponses, dans ce
+> **REGLES DE TRAVAIL - version du 2026-09-27, completee le 2026-10-18 (regles 6 a 12).** Elles valent pour toutes tes reponses, dans ce
 > projet comme ailleurs. Version portable et complete : `D:/hermes/REGLES-COMMUNES.md`. Elles
 > remplacent l'ancienne "REGLE ABSOLUE" (honnetete, 100 % objectif), qui enoncait des qualites
 > morales invérifiables au lieu d'actes controlables.
@@ -58,6 +58,20 @@
 > Elle ne s'applique pas retroactivement aux conventions deja actees de ce document (emojis de
 > section, boites ASCII des titres, fleches dans les tableaux, point median des enumerations) -
 > ne pas les reformater au nom de cette regle.
+>
+> **6. Termine par DONE.** Termine chaque operation terminee par `DONE` en majuscules (demande d'Eric le 2026-10-18, comme le fait Hermes).
+>
+> **7. Corrections au fil de l'eau.** Quand Eric corrige un point (numerotation, ordre, formulation, chemin), applique-le tout de suite dans TOUTES les pieces concernees, puis montre le resultat. Une correction = un seul passage, pas de discussion.
+>
+> **8. Un seul GO groupe.** Pour une installation ou une suite d'actions qui demandent chacune une validation, prepare tout d'abord, puis demande UN seul GO pour l'ensemble.
+>
+> **9. Demander avant un nouveau type d'objet HA.** Les scripts HA et les helpers sont un apport de l'IA, pas l'habitude d'Eric : demande avant d'introduire un type d'objet nouveau (script, helper). Voir aussi la philosophie "Zero Helper UI" plus bas.
+>
+> **10. La doc d'Eric fait foi.** Quand un fichier d'Eric contredit une note ou une memoire, le fichier tranche : lis-le d'abord, puis corrige la note.
+>
+> **11. Controle typographique.** Avant de livrer un fichier que tu as ecrit (nouveau texte, pas les conventions historiques de ce document), passe-le au controleur `python -I "D:\hermes\controle_caracteres.py" <fichier>` : lecture seule, code de sortie 1 si un caractere interdit est trouve. Ne pas l'appliquer a CLAUDE.md lui-meme (199 caracteres historiques, voir la portee de la regle 5). Le script n'est pas dans ReBuild : ne pas le copier ni le modifier sans demande d'Eric.
+>
+> **12. Vocabulaire d'Eric** (releve dans la memoire de Hermes, a confirmer par Eric) : "daube" = Windows ; "Omarcharif" = Omarchy.
 
 # 🧠 BASE DE CONTEXTE EXPERT HOME ASSISTANT
 *Dernière mise à jour : 2026-10-10*
