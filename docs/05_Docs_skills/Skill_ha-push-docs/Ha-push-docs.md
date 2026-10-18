@@ -121,7 +121,7 @@ $toPush | ForEach-Object {
 ```
 
 ### 5 - Nettoyage doublons Dashboard (si demande) - JAMAIS dans Dashboard_COMPLET (regle 9)
-Supprimer les anciennes versions de yaml dashboard en prod. **Dry-run + confirmation obligatoire avant suppression.** Attention : la suppression se fait sur H:\Docs, il n'y a pas de corbeille sur H: (suppression definitive). Les sauvegardes locales ne sont pas concernees (voir regle 7 ci-dessous).
+Supprimer les anciennes versions de yaml dashboard en prod. **Dry-run + confirmation obligatoire avant suppression.** Attention : la suppression se fait sur H:\Docs, il n'y a pas de corbeille sur H:, donc jamais de suppression directe : chaque fichier a supprimer est d'abord copie dans `TEMPO\<operation>_AAAA-MM-JJ\` (meme arborescence), MD5 de la copie verifie, puis supprime sur H: ; rapport dans le journal des modifs (regle TEMPO de CLAUDE.md du 2026-10-18). Les sauvegardes locales ne sont pas concernees (voir regle 7 ci-dessous).
 
 ```powershell
 # DRY-RUN

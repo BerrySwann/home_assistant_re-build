@@ -41,7 +41,7 @@
 
 - sensor:
 # ┌─────────────────────────────────┐
-# │ 0. APPARTEMENT (GLOBAL)          │
+# │ 0. APPARTEMENT (GLOBAL)         │
 # └─────────────────────────────────┘
 
 # --- lumiere_appartement_etat ---
@@ -68,7 +68,7 @@
         {% endif %}
 
 # ┌─────────────────────────────────┐
-# │ 1. ENTRÉE                        │
+# │ 1. ENTRÉE                       │
 # └─────────────────────────────────┘
 # --- lumiere_entree_etat ---
     - name: "Lumière Entrée État"
@@ -77,7 +77,7 @@
       icon: "{{ 'mdi:ceiling-light' if is_state('light.entree', 'on') else 'mdi:ceiling-light-outline' }}"
 
 # ┌─────────────────────────────────┐
-# │ 4. SALON                         │
+# │ 4. SALON                        │
 # └─────────────────────────────────┘
 
 # --- lumiere_salon_etat ---
@@ -104,7 +104,7 @@
       icon: "{{ 'mdi:table-chair' if is_state('light.table', 'on') else 'mdi:table-chair ' }}"
 
 # ┌─────────────────────────────────┐
-# │ 5. CUISINE                       │
+# │ 5. CUISINE                      │
 # └─────────────────────────────────┘
 
 # --- lumiere_cuisine_etat ---
@@ -114,7 +114,7 @@
       icon: "{{ 'mdi:ceiling-light' if is_state('light.cuisine', 'on') else 'mdi:ceiling-light-outline' }}"
 
 # ┌─────────────────────────────────┐
-# │ 6. COULOIR                       │
+# │ 6. COULOIR                      │
 # └─────────────────────────────────┘
 
 # --- lumiere_couloir_etat ---
@@ -124,7 +124,7 @@
       icon: "{{ 'mdi:ceiling-light' if is_state('light.couloir', 'on') else 'mdi:ceiling-light-outline' }}"
 
 # ┌─────────────────────────────────┐
-# │ 7. BUREAU --- Bureau ---         │
+# │ 7. BUREAU --- Bureau ---        │
 # └─────────────────────────────────┘
 
 # --- lumiere_bureau_etat ---
@@ -165,7 +165,7 @@
         {% endif %}
 
 # ┌─────────────────────────────────┐
-# │ 7. BUREAU --- Écran ---          │
+# │ 7. BUREAU --- Écran ---         │
 # └─────────────────────────────────┘
 
 # --- lumiere_ecran_etat ---
@@ -200,7 +200,7 @@
         {% endif %}
 
 # ┌──────────────────────────────────┐
-# │ 7. BUREAU --- Bureau-Général ---  │
+# │ 7. BUREAU --- Bureau-Général --- │
 # └──────────────────────────────────┘
 
 # --- bureau_etat ---
@@ -231,7 +231,7 @@
         {% endif %}
 
 # ┌─────────────────────────────────┐
-# │ 8. SALLE DE BAIN                 │
+# │ 8. SALLE DE BAIN                │
 # └─────────────────────────────────┘
 
 # --- lumiere_salle_de_bain_etat ---
@@ -241,7 +241,7 @@
       icon: "{{ 'mdi:ceiling-light' if is_state('light.hue_white_lamp_salle_de_bain', 'on') else 'mdi:ceiling-light-outline' }}"
 
 # ┌─────────────────────────────────┐
-# │ 9. CHAMBRE                       │
+# │ 9. CHAMBRE                      │
 # └─────────────────────────────────┘
 
 # --- chambre_etat ---

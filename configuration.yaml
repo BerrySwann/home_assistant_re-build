@@ -178,7 +178,7 @@ timer: !include_dir_merge_named timers/
 #    filename: diag_conso_elec.txt                                               # "[L132] modif"
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
-# │ BASE DE DONNEE MARIADB (LXC 201 — 10.32.154.201)                        │
+# │ BASE DE DONNEE MARIADB (LXC 201 — 10.32.154.201)                         │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 
 # --- recorder ---

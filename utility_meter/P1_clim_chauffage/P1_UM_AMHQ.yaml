@@ -33,7 +33,7 @@
 # - Alimente la vignette L2C2 (Conso Énergie Clim / Radiateur / Soufflant)
 
 # ┌─────────────────────────────────┐
-# │ 4. SALON                         │
+# │ 4. SALON                        │
 # └─────────────────────────────────┘
 
 # --- clim_salon_annuel_um ---
@@ -65,7 +65,7 @@ clim_salon_quotidien_um:
   cycle: daily
 
 # ┌─────────────────────────────────┐
-# │ 5. CUISINE                       │
+# │ 5. CUISINE                      │
 # └─────────────────────────────────┘
 
 # --- radiateur_elec_cuisine_annuel_um ---
@@ -121,7 +121,7 @@ radiateur_elec_cuisine_quotidien_um:
   cycle: daily
 
 # ┌─────────────────────────────────┐
-# │ 7. BUREAU                        │
+# │ 7. BUREAU                       │
 # └─────────────────────────────────┘
 
 # --- clim_bureau_annuel_um ---
@@ -153,7 +153,7 @@ clim_bureau_quotidien_um:
   cycle: daily
 
 # ┌─────────────────────────────────┐
-# │ 8. SDB                           │
+# │ 8. SDB                          │
 # └─────────────────────────────────┘
 
 # --- soufflant_sdb_annuel_um ---
@@ -213,7 +213,7 @@ seche_serviette_sdb_quotidien_um:
   cycle: daily
 
 # ┌─────────────────────────────────┐
-# │ 9. CHAMBRE                       │
+# │ 9. CHAMBRE                      │
 # └─────────────────────────────────┘
 
 # --- clim_chambre_annuel_um ---

@@ -1,6 +1,6 @@
-# ╭──────────────────────────────────────────────────────────────────────────╮
+# ╭────────────────────────────────────────────────────────────────────────────╮
 # │ PÔLE 4. TEMPLATE : PRÉSENCE — LOGIQUE WIFI / CELLULAIRE (GROUPE & STATUTS) │
-# ╰──────────────────────────────────────────────────────────────────────────╯
+# ╰────────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
 # Sensors template calculant l'état de présence global via deux sensors :
@@ -37,7 +37,7 @@
 
 - sensor:
 # ┌────────────────────────────────────────────────────┐
-# │ P4 : DÉTERMINATION DU GROUPE (PRESENCE AUTOMATION)  │
+# │ P4 : DÉTERMINATION DU GROUPE (PRESENCE AUTOMATION) │
 # └────────────────────────────────────────────────────┘
 
 # Calcul du groupe (1=Personne, 2=Mamour, 3=Eric, 4=Tous)
@@ -68,7 +68,7 @@
         {% endif %}
 
 # ┌─────────────────────────────────────────────────────────┐
-# │ P4 : CALCUL ET AFFICHAGE DES STATUTS RÉSEAU (INTERFACE)  │
+# │ P4 : CALCUL ET AFFICHAGE DES STATUTS RÉSEAU (INTERFACE) │
 # └─────────────────────────────────────────────────────────┘
 
 # Affichage textuel complexe (WIFI / CELL / WIFI_!?)

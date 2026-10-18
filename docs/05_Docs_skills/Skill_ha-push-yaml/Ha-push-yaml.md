@@ -42,7 +42,7 @@ Scripts `.sh` / `.py` : push vers `H:\.scripts\` ou `H:\scripts\` uniquement sur
 - Jour meme : 10 sauvegardes max par fichier. La 11e envoie la plus ancienne a la CORBEILLE WINDOWS.
 - Le lendemain, `/histo` fait le menage : par fichier et par jour passe, il garde la sauvegarde la plus RECENTE, la renomme `fichier.yaml.bak_AAAA_MM_JJ` et envoie les autres a la corbeille Windows. Il ne touche jamais aux sauvegardes du jour.
 - Jours precedents : 3 `.bak_AAAA_MM_JJ` max par fichier. La 4e (la plus ancienne) va a la corbeille Windows.
-- "Poubelle" = corbeille Windows (jamais de suppression definitive). Pas de corbeille sur H:.
+- "Poubelle" = corbeille Windows (jamais de suppression definitive). Pas de corbeille sur H: : toute suppression en prod passe d'abord par une copie dans `TEMPO\<operation>_AAAA-MM-JJ\` (meme arborescence, MD5 de la copie verifie), puis suppression sur H: et rapport dans le journal des modifs (regle TEMPO de CLAUDE.md du 2026-10-18).
 - Restauration : retirer le suffixe `.bak_...` du nom. La prod ne recoit JAMAIS de nom avec suffixe `.bak_...`.
 
 ## WORKFLOW

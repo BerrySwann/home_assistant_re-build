@@ -40,7 +40,7 @@
 
 - sensor:
 # ┌────────────────────────────────────────────────────────────┐
-# │ 10. AUTRE : GÉNÉRATEUR DE MESSAGE NUIT (LOGIQUE SCÉNARIOS)  │
+# │ 10. AUTRE : GÉNÉRATEUR DE MESSAGE NUIT (LOGIQUE SCÉNARIOS) │
 # └────────────────────────────────────────────────────────────┘
 
 # --- message_clim_personnalise_21h00_7h30 ---
