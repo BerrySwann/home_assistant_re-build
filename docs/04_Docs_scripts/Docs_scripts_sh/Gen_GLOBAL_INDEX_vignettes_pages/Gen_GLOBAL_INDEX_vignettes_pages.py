@@ -55,7 +55,8 @@ def collect(root, kind, groups):
                 rel = os.path.relpath(os.path.join(dp, f), DOCS)
                 parts = rel.split(os.sep)
                 sub = parts[2] if len(parts) > 3 else ""
-                slot = "v" if sub.startswith("01_vignette") else ("p" if sub.startswith("02_page") else "o")
+                sl = sub.lower()  # insensible a la casse (01_Vignette, 01_L1C1_Vignette ; corrige le 2026-10-18)
+                slot = "v" if re.match(r"^01_(l\d+c\d+_)?vignette", sl) else ("p" if re.match(r"^02_(l\d+c\d+_)?page", sl) else "o")
                 g[kind][slot].append(rel)
 
 

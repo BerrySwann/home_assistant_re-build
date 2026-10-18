@@ -1,6 +1,6 @@
 # GLOBAL_INDEX_SCRIPTS_YAML.md - index des scripts Home Assistant
 
-Fichier GENERE le 2026-10-17 13:47 par docs/04_docs_scripts/docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-10-18 18:58 par docs/04_docs_scripts/docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 ## Difference entre l'index SH et l'index YAML
 
@@ -12,29 +12,29 @@ Fichier GENERE le 2026-10-17 13:47 par docs/04_docs_scripts/docs_scripts_SH/gen_
 ## Controle
 
 - Scripts dans H:\scripts.yaml (prod) : 9
-- Scripts de la prod sans YAML local : 9 (j_2_0_secu_arret_clim_protege, j_1_1_salon_clim_on_off_intelligent, j_1_2_bureau_clim_on_off_intelligent, j_1_3_chambre_clim_on_off_intelligent, audit_md5, audit_md5_md_yaml, p1_master_gestion_clim, sdb_soufflant_demarrer, sdb_soufflant_arreter)
+- Scripts de la prod sans YAML local : 0
 - Scripts dont le contenu local differe de la prod : 0
 - Scripts sans fiche dans docs_scripts_YAML_MD : 4 (audit_md5, audit_md5_md_yaml, sdb_soufflant_demarrer, sdb_soufflant_arreter)
-- YAML locaux absents de scripts.yaml : 9 (Audit_md5, Audit_md5_md_yaml, J_1_1_salon_clim_on_off_intelligent, J_1_2_bureau_clim_on_off_intelligent, J_1_3_chambre_clim_on_off_intelligent, J_2_0_secu_arret_clim_protege, P1_Master_gestion_clim, SDB_soufflant_arreter, SDB_soufflant_demarrer)
+- YAML locaux absents de scripts.yaml : 0
 - Fichiers .py rangés dans docs_scripts_YAML (ce sont des scripts de type SH) : 2
 
 ## Scripts YAML
 
 | Cle | Alias | Entite HA | Mode | YAML local | Local = prod | Appelle (shell_command -> script SH) | Fiche |
 |:----|:------|:----------|:-----|:-----------|:-------------|:-------------------------------------|:------|
-| j_2_0_secu_arret_clim_protege | J 2-0 SECU - ARRÊT CLIM PROTÉGÉ | `script.j_2_0_secu_arret_clim_protege` | parallel | aucun | aucun YAML local | - | [Script_j2_0_secu_arret_clim.md](docs_scripts_YAML_MD/Script_j2_0_secu_arret_clim/Script_j2_0_secu_arret_clim.md) |
-| j_1_1_salon_clim_on_off_intelligent | J 1-1 SALON - CLIM ON/OFF INTELLIGENT | `script.j_1_1_salon_clim_on_off_intelligent` | single | aucun | aucun YAML local | - | [Scripts_clim_on_off.md](docs_scripts_YAML_MD/Scripts_clim_on_off/Scripts_clim_on_off.md) |
-| j_1_2_bureau_clim_on_off_intelligent | J 1-2 BUREAU - CLIM ON/OFF INTELLIGENT | `script.j_1_2_bureau_clim_on_off_intelligent` | single | aucun | aucun YAML local | - | [Scripts_clim_on_off.md](docs_scripts_YAML_MD/Scripts_clim_on_off/Scripts_clim_on_off.md) |
-| j_1_3_chambre_clim_on_off_intelligent | J 1-3 CHAMBRE - CLIM ON/OFF INTELLIGENT | `script.j_1_3_chambre_clim_on_off_intelligent` | single | aucun | aucun YAML local | - | [Scripts_clim_on_off.md](docs_scripts_YAML_MD/Scripts_clim_on_off/Scripts_clim_on_off.md) |
-| audit_md5 | Audit MD5 GitHub | `script.audit_md5` | single | aucun | aucun YAML local | shell_command.audit_md5 -> audit_md5_yaml.sh | aucune |
-| audit_md5_md_yaml | Audit MD5 MD YAML | `script.audit_md5_md_yaml` | single | aucun | aucun YAML local | shell_command.audit_md5_md_yaml -> audit_md5_md_yaml.sh | aucune |
-| p1_master_gestion_clim | P1 - MASTER : Gestion centralisée climatisation | `script.p1_master_gestion_clim` | queued | aucun | aucun YAML local | - | [P1_Master_gestion_clim.md](docs_scripts_YAML_MD/P1_Master_gestion_clim/P1_Master_gestion_clim.md) |
-| sdb_soufflant_demarrer | SDB - Soufflant : DEMARRAGE (2000 W, verrou 30 s) | `script.sdb_soufflant_demarrer` | single | aucun | aucun YAML local | - | aucune |
-| sdb_soufflant_arreter | SDB - Soufflant : ARRET (resistances, ventilateur 1 min 30, prise) | `script.sdb_soufflant_arreter` | single | aucun | aucun YAML local | - | aucune |
+| j_2_0_secu_arret_clim_protege | J 2-0 SECU - ARRÊT CLIM PROTÉGÉ | `script.j_2_0_secu_arret_clim_protege` | parallel | [J_2_0_secu_arret_clim_protege.yaml](docs_scripts_YAML/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.yaml) | identique | - | [Script_j2_0_secu_arret_clim.md](docs_scripts_YAML_MD/Script_j2_0_secu_arret_clim/Script_j2_0_secu_arret_clim.md) |
+| j_1_1_salon_clim_on_off_intelligent | J 1-1 SALON - CLIM ON/OFF INTELLIGENT | `script.j_1_1_salon_clim_on_off_intelligent` | single | [J_1_1_salon_clim_on_off_intelligent.yaml](docs_scripts_YAML/Climatisation/J_1_1_salon_clim_on_off_intelligent/J_1_1_salon_clim_on_off_intelligent.yaml) | identique | - | [Scripts_clim_on_off.md](docs_scripts_YAML_MD/Scripts_clim_on_off/Scripts_clim_on_off.md) |
+| j_1_2_bureau_clim_on_off_intelligent | J 1-2 BUREAU - CLIM ON/OFF INTELLIGENT | `script.j_1_2_bureau_clim_on_off_intelligent` | single | [J_1_2_bureau_clim_on_off_intelligent.yaml](docs_scripts_YAML/Climatisation/J_1_2_bureau_clim_on_off_intelligent/J_1_2_bureau_clim_on_off_intelligent.yaml) | identique | - | [Scripts_clim_on_off.md](docs_scripts_YAML_MD/Scripts_clim_on_off/Scripts_clim_on_off.md) |
+| j_1_3_chambre_clim_on_off_intelligent | J 1-3 CHAMBRE - CLIM ON/OFF INTELLIGENT | `script.j_1_3_chambre_clim_on_off_intelligent` | single | [J_1_3_chambre_clim_on_off_intelligent.yaml](docs_scripts_YAML/Climatisation/J_1_3_chambre_clim_on_off_intelligent/J_1_3_chambre_clim_on_off_intelligent.yaml) | identique | - | [Scripts_clim_on_off.md](docs_scripts_YAML_MD/Scripts_clim_on_off/Scripts_clim_on_off.md) |
+| audit_md5 | Audit MD5 GitHub | `script.audit_md5` | single | [Audit_md5.yaml](docs_scripts_YAML/Audit_md5/Audit_md5.yaml) | identique | shell_command.audit_md5 -> audit_md5_yaml.sh | aucune |
+| audit_md5_md_yaml | Audit MD5 MD YAML | `script.audit_md5_md_yaml` | single | [Audit_md5_md_yaml.yaml](docs_scripts_YAML/Audit_md5_md_yaml/Audit_md5_md_yaml.yaml) | identique | shell_command.audit_md5_md_yaml -> audit_md5_md_yaml.sh | aucune |
+| p1_master_gestion_clim | P1 - MASTER : Gestion centralisée climatisation | `script.p1_master_gestion_clim` | queued | [P1_Master_gestion_clim.yaml](docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml) | identique | - | [P1_Master_gestion_clim.md](docs_scripts_YAML_MD/P1_Master_gestion_clim/P1_Master_gestion_clim.md) |
+| sdb_soufflant_demarrer | SDB - Soufflant : DEMARRAGE (2000 W, verrou 30 s) | `script.sdb_soufflant_demarrer` | single | [SDB_soufflant_demarrer.yaml](docs_scripts_YAML/Soufflant%20SDB/SDB_soufflant_demarrer/SDB_soufflant_demarrer.yaml) | identique | - | aucune |
+| sdb_soufflant_arreter | SDB - Soufflant : ARRET (resistances, ventilateur 1 min 30, prise) | `script.sdb_soufflant_arreter` | single | [SDB_soufflant_arreter.yaml](docs_scripts_YAML/Soufflant%20SDB/SDB_soufflant_arreter/SDB_soufflant_arreter.yaml) | identique | - | aucune |
 
 ## Fichiers .py rangés dans docs_scripts_YAML
 
 Ces fichiers sont des scripts python lances par shell_command : ils releveraient plutot de l'index SH. Ils sont listes ici parce qu'ils sont rangés dans ce dossier.
 
-- [Check_yaml_forme.py](docs_scripts_YAML/Check_yaml_forme/Check_yaml_forme.py) : copie dans H:\.scripts : identique
+- [Check_yaml_forme.py](docs_scripts_YAML/Check_yaml_forme/Check_yaml_forme.py) : copie dans H:\.scripts : DIFFERENT
 - [Correct_linky.py](docs_scripts_YAML/Correct_linky/Correct_linky.py) : copie dans H:\.scripts : identique

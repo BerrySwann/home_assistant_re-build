@@ -217,11 +217,11 @@ def build_yaml(now, scripts, autos, cmds, reg):
     local = {}
     for p in files_of(YA):
         if p.endswith(".yaml"):
-            local[os.path.splitext(os.path.basename(p))[0]] = p
+            local[os.path.splitext(os.path.basename(p))[0].lower()] = p  # cle insensible a la casse (corrige le 2026-10-18)
     sh_files = {os.path.basename(p): p for p in files_of(SH)}
     for key, v in scripts.items():
         v = v or {}
-        lp = local.get(key)
+        lp = local.get(key.lower())
         if lp:
             try:
                 ld = yaml.safe_load(read(lp)) or {}

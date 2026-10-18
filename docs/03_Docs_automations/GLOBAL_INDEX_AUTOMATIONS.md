@@ -1,20 +1,23 @@
 # GLOBAL_INDEX_AUTOMATIONS.md - index des automatisations
 
-Fichier GENERE le 2026-10-17 13:49 par docs/04_docs_scripts/docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-10-18 18:46 par docs/04_docs_scripts/docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et categorie), YAML locaux docs_automations_YAML (id local et commentaires), fiches docs_automations_MD. Les liens sont relatifs a ce fichier.
 
 ## Controle
 
 - Automatisations en prod (automations.yaml) : 62
-- YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS.YALM ORIGINAL) : 64
-- Fiches .md retenues : 67 dont 55 rattachees a un YAML
+- YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS.YALM ORIGINAL) : 66
+- Fiches .md retenues : 74 dont 55 rattachees a un YAML
 - Automatisations de la prod sans YAML local : 0
 - Automatisations de la prod sans fiche rattachee : 7 ([00-Backup] Alerte si KO 15 min ; (A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00) ; Mettre à jour le temps du dernier impact de foudre ; (C) Notification température Up ou Down de (7h30 -> 21h00) ; (D) Notification température Up ou Down de (21h00 -> 7h30) ; C - SALLE DE BAIN : WATCHDOG SÉCURITÉ SOUFFLANT ; AUTO. ENERGIE. Basculement Tarif HC/HP — Genelec Appart)
 - Automatisations sans entity_id dans le registre HA : 0
-- YAML locaux absents de la prod ou sans id : 1 (voir section Hors prod)
+- YAML locaux absents de la prod ou sans id : 3 (voir section Hors prod)
 - Erreurs de lecture YAML : 0
-- Fiches non rattachees a un YAML (fiches d'operation, specifications, etc.) : 12
+- Fiches non rattachees a un YAML (fiches d'operation, specifications, etc.) : 19
+  - [docs_automations_MD/AUTOMATIONS/PROD_vs_REBUILD_DIFF.md](docs_automations_MD/AUTOMATIONS/PROD_vs_REBUILD_DIFF.md)
+  - [docs_automations_MD/AUTOMATIONS_IDS_REF.md](docs_automations_MD/AUTOMATIONS_IDS_REF.md)
+  - [docs_automations_MD/AUTOMATIONS_MIGRATION_REPORT.md](docs_automations_MD/AUTOMATIONS_MIGRATION_REPORT.md)
   - [docs_automations_MD/Backup ha - GitHub/Git_alerte_ko/Git_alerte_ko.md](docs_automations_MD/Backup%20ha%20-%20GitHub/Git_alerte_ko/Git_alerte_ko.md)
   - [docs_automations_MD/Gestion des stores/Gestion_store_bureau/Gestion_store_bureau.md](docs_automations_MD/Gestion%20des%20stores/Gestion_store_bureau/Gestion_store_bureau.md)
   - [docs_automations_MD/Meteo/Alerte_meteo_cartes/Alerte_meteo_cartes.md](docs_automations_MD/Meteo/Alerte_meteo_cartes/Alerte_meteo_cartes.md)
@@ -26,6 +29,10 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
   - [docs_automations_MD/P1_03_Chauffage salle de bain/C_watchdog_soufflant_SDB/C_watchdog_soufflant_SDB.md](docs_automations_MD/P1_03_Chauffage%20salle%20de%20bain/C_watchdog_soufflant_SDB/C_watchdog_soufflant_SDB.md)
   - [docs_automations_MD/P1_03_Chauffage salle de bain/SDB_soufflant_specification_2026/SDB_soufflant_specification_2026.md](docs_automations_MD/P1_03_Chauffage%20salle%20de%20bain/SDB_soufflant_specification_2026/SDB_soufflant_specification_2026.md)
   - [docs_automations_MD/P1_03_Chauffage salle de bain/Timers_SDB_soufflant_et_seche_serviettes/Timers_SDB_soufflant_et_seche_serviettes.md](docs_automations_MD/P1_03_Chauffage%20salle%20de%20bain/Timers_SDB_soufflant_et_seche_serviettes/Timers_SDB_soufflant_et_seche_serviettes.md)
+  - [docs_automations_MD/P1_SDB/A_SOUFFLANT_SDB_old_2024-2025.md](docs_automations_MD/P1_SDB/A_SOUFFLANT_SDB_old_2024-2025.md)
+  - [docs_automations_MD/P1_SDB/D_WATCHDOG_RADIATEUR_SDB.md](docs_automations_MD/P1_SDB/D_WATCHDOG_RADIATEUR_SDB.md)
+  - [docs_automations_MD/P1_SDB/E_MINUTERIE_SECHE_SERVIETTES.md](docs_automations_MD/P1_SDB/E_MINUTERIE_SECHE_SERVIETTES.md)
+  - [docs_automations_MD/P2_Prises/RODRET_SOUFFLANT_SDB.md](docs_automations_MD/P2_Prises/RODRET_SOUFFLANT_SDB.md)
   - [docs_automations_MD/Tarif hc-hp/Basculement_tarif_hphc/Basculement_tarif_hphc.md](docs_automations_MD/Tarif%20hc-hp/Basculement_tarif_hphc/Basculement_tarif_hphc.md)
 
 ## _SANS_CATEGORIE (2)
@@ -170,10 +177,12 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 |:--|:------|:--------|:-------------------|:----------|:-------------------|:------------|:------------|
 | 62 | Système - Watchdog Piles (HUE/IKEA/SONOFF) | 1775386133385 | 1775386133385 | `automation.systeme_watchdog_piles_hue_ikea_sonoff` | [Watchdog_piles.md](docs_automations_MD/Watchdog%20piles%20%28hue-ikea-sonoff%29/Watchdog_piles/Watchdog_piles.md) | [Systeme_watchdog_piles_hue_ikea_sonoff.yaml](docs_automations_YAML/Watchdog%20piles%20%28hue-ikea-sonoff%29/Systeme_watchdog_piles_hue_ikea_sonoff/Systeme_watchdog_piles_hue_ikea_sonoff.yaml) |  |
 
-## Hors prod ou sans id (YAML locaux uniquement) (1)
+## Hors prod ou sans id (YAML locaux uniquement) (3)
 
 Ces YAML ne correspondent a aucune entree de H:\automations.yaml (id absent ou inconnu de la prod). Exemple : l'automatisation du ventilateur du Raspberry Pi 4, dont le YAML local n'a pas d'id.
 
 | N | Alias | id prod | id local (ReBuild) | Entity HA | Documentation (md) | YAML source | Commentaire |
 |:--|:------|:--------|:-------------------|:----------|:-------------------|:------------|:------------|
 | 1 | Raspberry CPU Fan PWM 6 States | hors automations.yaml de la prod | aucun | - | [RASPI_fan_pwm.md](docs_automations_MD/RASPI/RASPI_fan_pwm/RASPI_fan_pwm.md) | [A_RASPI_fan_pwm_6_states.yaml](docs_automations_YAML/RASPI/A_RASPI_fan_pwm_6_states/A_RASPI_fan_pwm_6_states.yaml) |  |
+| 2 | SDB - SOUFFLANT - BOUTON IKEA RODRET (MQTT vers interrupteur) | hors automations.yaml de la prod | aucun | - | aucune | [i_soufflant_SDB_bouton_rodret.yaml](docs_automations_YAML/P1_SDB/i_soufflant_SDB_bouton_rodret.yaml) | Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant. ; Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - BOUTON IKEA RODRET) |
+| 3 | SDB - SOUFFLANT - ROUTAGE (interrupteur vers sequences) | hors automations.yaml de la prod | aucun | - | aucune | [h_soufflant_SDB_routage.yaml](docs_automations_YAML/P1_SDB/h_soufflant_SDB_routage.yaml) | Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant. ; Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - ROUTAGE) |

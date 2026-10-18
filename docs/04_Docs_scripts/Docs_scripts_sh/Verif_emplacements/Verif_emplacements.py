@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
+r"""
 Verif_emplacements.py - controle EN LECTURE SEULE des fichiers presents a plusieurs emplacements.
 Carte des emplacements : docs/00_IA/SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md
 Cree le 2026-10-18 a la demande d'Eric.
