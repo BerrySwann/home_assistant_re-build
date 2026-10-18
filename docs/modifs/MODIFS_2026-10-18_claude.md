@@ -66,3 +66,14 @@
 2026-10-18 12:10:25 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md | avant=d4ebf65c apres=a9ff8cc0 | copie de CLAUDE.md; bak : IA_CONTEXT_BASE.bak_2026_10_18_12h10m25s.md
 2026-10-18 12:10:25 | claude | COPIE | D:\docs\00_IA\IA_CONTEXT_BASE.md | avant=d4ebf65c apres=a9ff8cc0 | copie de CLAUDE.md (pas de bak sur D:)
 2026-10-18 12:10:25 | claude | COPIE | H:\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md | avant=d4ebf65c apres=a9ff8cc0 | copie de CLAUDE.md (pas de bak sur H:)
+2026-10-18 13:18:41 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\Claude md SAVE\CLAUDE.md | avant=a9ff8cc0 apres=5758ad08 | regle 6 : suppression du mot terminee en trop (constate par l'alignement de Hermes) ; bak : CLAUDE.bak_2026_10_18_13h18m40s.md
+2026-10-18 13:18:41 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md | avant=a9ff8cc0 apres=5758ad08 | meme correction, copie de CLAUDE.md ; bak : IA_CONTEXT_BASE.bak_2026_10_18_13h18m40s.md
+2026-10-18 13:18:41 | claude | COPIE | D:\docs\00_IA\IA_CONTEXT_BASE.md | avant=a9ff8cc0 apres=5758ad08 | depuis CLAUDE.md corrige
+2026-10-18 13:18:41 | claude | COPIE | H:\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md | avant=a9ff8cc0 apres=5758ad08 | depuis CLAUDE.md corrige
+2026-10-18 13:24:50 | claude | CREE | D:\Discussion_Claude_Hermes\LISEZMOI.md | avant=- apres=e2a48666 | protocole de la boite aux lettres Claude-Hermes (demande d'Eric)
+2026-10-18 13:24:50 | claude | CREE | D:\Discussion_Claude_Hermes\echanges_2026-10-18_claude.md | avant=- apres=207be857 | premier message a Hermes (3 lignes)
+2026-10-18 13:24:50 | claude | CREE | D:\Discussion_Claude_Hermes\_modeles\skill_hermes_echange_SKILL.md | avant=- apres=e03ebedf | modele de skill echange-claude pour Hermes, a creer par lui sur GO d'Eric
+2026-10-18 13:24:50 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\Claude md SAVE\CLAUDE.md | avant=5758ad08 apres=abd7f904 | ajout regle 13 Echanges avec Hermes ; bak : CLAUDE.bak_2026_10_18_13h24m49s.md
+2026-10-18 13:24:50 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md | avant=5758ad08 apres=abd7f904 | meme ajout, copie de CLAUDE.md ; bak : IA_CONTEXT_BASE.bak_2026_10_18_13h24m49s.md
+2026-10-18 13:24:50 | claude | COPIE | D:\docs\00_IA\IA_CONTEXT_BASE.md | avant=5758ad08 apres=abd7f904 | depuis CLAUDE.md
+2026-10-18 13:24:50 | claude | COPIE | H:\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md | avant=5758ad08 apres=abd7f904 | depuis CLAUDE.md
