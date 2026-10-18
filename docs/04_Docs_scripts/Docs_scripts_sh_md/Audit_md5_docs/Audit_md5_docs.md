@@ -29,11 +29,11 @@ La comparaison neutralise l'écart CRLF/LF (local Windows = CRLF, prod H: et Git
 
 ### PASS 1 - TREE LOCAL
 Construit la liste des fichiers à auditer via `find` sur `$LOCAL_ROOT/docs/`.
-Ajoute les fichiers racine : `Github/README.md` → `README.md`, `docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md` → `GLOBAL_INDEX_REPO.md`.
+Ajoute les fichiers racine : `docs/01_docs_config_system/config_system_MD/README/README.md` → `README.md`, `docs/01_docs_config_system/config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md` → `GLOBAL_INDEX_REPO.md`.
 
 ### PASS 2 - MD5 LOCAL + PROD
 Calcule pour chaque fichier le MD5 brut et le MD5 normalisé (CRLF→LF via `tr -d '\r'`).
-Mapping racine : `Github/README.md` (local) → `README.md` (prod H:).
+Mapping racine : `docs/01_docs_config_system/config_system_MD/README/README.md` (local) → `README.md` (prod H:).
 
 ### PASS 3 - MD5 GITHUB (curl ciblé)
 Pour chaque fichier, `curl` la raw URL GitHub avec encodage URL Python (`urllib.parse.quote`) pour gérer les espaces et accents.
@@ -50,7 +50,7 @@ Fichier tmp sur chemin Windows explicite (`cygpath -m "$LOCALAPPDATA/Temp"`) - l
 | **Docs automations** | `docs/03_docs_automations/**/*.md` |
 | **Docs scripts** | `docs/04_docs_scripts/**/*.md` |
 | **Docs système** | `docs/05_docs_MD_system/**/*.md` |
-| **Fichiers racine** | `Github/README.md` + `docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md` (mappés vers racine prod/repo) |
+| **Fichiers racine** | `docs/01_docs_config_system/config_system_MD/README/README.md` + `docs/01_docs_config_system/config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md` (mappés vers racine prod/repo) |
 
 ---
 

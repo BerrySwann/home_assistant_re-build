@@ -66,7 +66,7 @@ effectivement allumées).
 
 ## Fichier source
 
-`docs/03_docs_automations/docs_automations_YAML/P2_éCO. Prises/eco_prises_dynamique_by_presence_groupe/eco_prises_dynamique_by_presence_groupe.yaml` (la liste des prises est dans `docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_eCO_prises/P2_eCO_prises_config.yaml`)
+`docs/03_Docs_automations/Docs_automations_yaml/P2_eCO. prises/eCO_prises_dynamique_by_presence_groupe/eCO_prises_dynamique_by_presence_groupe.yaml` (la liste des prises est dans `docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_eCO_prises/P2_eCO_prises_config.yaml`)
 
 ## ⚠️ Notes techniques
 

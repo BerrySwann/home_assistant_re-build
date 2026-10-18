@@ -5,6 +5,8 @@ description: "Skill HA ReBuild - met a jour IA_ARBO_DETAIL.md (comptages LOCAL +
 
 # Skill : /update-arbo - Mise a jour IA_ARBO_DETAIL.md
 
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
+
 ## Objectif
 
 Rafraichir les comptages et les informations de version dans `IA_ARBO_DETAIL.md`
@@ -27,7 +29,8 @@ $base = "C:\Users\Berry Swann\Documents\ReBuild"
 $docs_total  = (Get-ChildItem "$base\docs" -Recurse -File).Count
 $histo_total = (Get-ChildItem "$base\historique" -File).Count
 $docs_01     = (Get-ChildItem "$base\docs\01_docs_config_system" -Recurse -File).Count
-$cfg_yaml    = (Get-ChildItem "$base\docs\01_docs_config_system\config_system_YAML" -Recurse -File).Count
+$cfg_yaml    = (Get-ChildItem "$base\docs\01_docs_config_system\config_system_SH_PY_YAML" -Recurse -File).Count
+$cfg_md      = (Get-ChildItem "$base\docs\01_docs_config_system\config_system_MD" -Recurse -File).Count
 $docs_02     = (Get-ChildItem "$base\docs\02_docs_dashboard" -Recurse -File).Count
 $docs_03     = (Get-ChildItem "$base\docs\03_docs_automations" -Recurse -File).Count
 $docs_04     = (Get-ChildItem "$base\docs\04_docs_scripts" -Recurse -File).Count
@@ -36,7 +39,7 @@ $dash_complet= (Get-ChildItem "$base\docs\02_docs_dashboard\dashboard_docs_YAML\
 
 Write-Host "LOCAL docs/ total   : $docs_total"
 Write-Host "  historique/       : $histo_total"
-Write-Host "  01_docs_config/   : $docs_01 (config_system_YAML : $cfg_yaml)"
+Write-Host "  01_docs_config/   : $docs_01 (config_system_SH_PY_YAML : $cfg_yaml ; config_system_MD : $cfg_md)"
 Write-Host "  02_docs_dashboard : $docs_02 (Dashboard_COMPLET : $dash_complet yaml)"
 Write-Host "  03_docs_automations: $docs_03"
 Write-Host "  04_docs_scripts   : $docs_04"
@@ -88,6 +91,8 @@ $c = $c.Replace("ancien texte", "nouveau texte")
 [System.IO.File]::WriteAllText($path, $c, [System.Text.Encoding]::UTF8)
 ```
 
+Les arbres sont une grille a deux colonnes de largeur fixe : un remplacement qui change la longueur d'une ligne doit retirer ou ajouter autant d'espaces avant la bordure de fin, pour garder toutes les lignes du tableau a la meme largeur (a verifier apres ecriture).
+
 **Sections a mettre a jour systematiquement :**
 
 1. Ligne d'entete `*Derniere mise a jour :` -> date + resume de la session
@@ -95,7 +100,7 @@ $c = $c.Replace("ancien texte", "nouveau texte")
 3. `releve YYYY-MM-DD ; = H:\` dans le bloc arbo PROD -> date du jour
 4. `docs/ (NNN fichiers` -> nouveau comptage LOCAL
 5. `historique/ (NN` -> nouveau comptage
-6. `01_docs_config_system/ (NN` dans LOCAL -> nouveau comptage + note
+6. `01_docs_config_system/ (NN` dans LOCAL -> nouveau comptage + note (sous-dossiers config_system_MD et config_system_SH_PY_YAML)
 7. `02_docs_dashboard/ (NN` dans LOCAL -> nouveau comptage
 8. `Dashboard_YYYY_MM-DD.yaml (export le plus recent)` -> nom du dernier dashboard
 9. `docs/ (NNN` dans PROD -> nouveau comptage
@@ -131,4 +136,5 @@ Fichier LOCAL = PROD : OK
 3. **Utiliser .Replace() strict** - pas de regex (problemes avec les caracteres speciaux).
 4. **Pousser vers H:\docs apres chaque modification** - les deux fichiers doivent etre identiques.
 5. **secrets.yaml -> interdit absolu**.
-6. **Ne pas modifier les sections narratives** (REGLES DE CASSE, AUDIT, GITHUB patterns URLs) sauf si explicitement demande.
+6. **Ne pas modifier les sections narratives** (REGLES DE CASSE, AUDIT, GITHUB patterns URLs) sauf si explicitement demande.
+7. **"resync tree" dit par Eric = mise a jour de IA_ARBO_DETAIL.md par ce skill** (constate le 2026-10-18), pas une copie GitHub -> local.

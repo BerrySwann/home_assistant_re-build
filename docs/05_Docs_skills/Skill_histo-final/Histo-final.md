@@ -1,9 +1,11 @@
 ---
-name: histo-final
+name: "histo-final"
 description: "Skill HA ReBuild - histo de fin de journee : lance le skill histo complet, puis, apres le rapport et sans confirmation, eteint les lumieres (3 Hue Play du bureau, apres avoir arrete Hue Sync) et arrete le PC. Declencher sur /histo-final, histo final, fin de journee, j'eteins tout, extinction des lumieres et du PC. En cours de journee, utiliser histo (courant)."
 ---
 
 # Skill : /histo-final - histo complet, puis extinction des lumieres et arret du PC
+
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 ## Objectif
 
@@ -13,20 +15,22 @@ Fin de journee : tout ce que fait /histo, puis extinction des lumieres et arret 
 
 - La sequence est irreversible pour la session : l'arret du PC coupe la liaison avec Claude. Tout doit etre ecrit, copie et verifie AVANT. Aucun appel d'outil ne suit la commande d'arret.
 - Aucune confirmation : Eric n'est plus devant l'ecran (decision du 2026-10-11). Le delai de 7 minutes (420 s) avant l'arret du PC est la seule marge d'annulation. L'arret de /histo reste valable : si le menage attend le go de l'utilisateur (premiere execution du menage sur un dossier, seule pause qui reste ; plus aucun seuil de nombre de fichiers depuis le 2026-10-15), /histo-final s'arrete la, n'eteint rien et le dit dans le rapport ; l'extinction n'a lieu qu'apres le menage execute.
+- Le menage de /histo (etape 5) couvre aussi `historique\MD5\` et ses sous-repertoires numerotes (`00_Verif_Final_trigul_arbres`, `01_trigul_profond`, `02_categories_ha`, `03_verif_emplacements`, puis `04_...`), selon le chapitre "Cas particulier : historique\MD5\" du skill histo (decide par Eric le 2026-10-18). Pas de pause supplementaire pour ces sous-repertoires : le menage se fait avant l'extinction, comme le reste.
 - Pas d'extinction (ni lumieres ni PC) si une etape de /histo a echoue ou reste incomplete : le dire dans le rapport et laisser le PC allume.
 - Les lumieres eteintes sont les 3 Hue Play du bureau : `light.hue_play_1_pc_bureau`, `light.hue_play_2_pc_bureau`, `light.hue_play_3_pc_bureau` (decision d'Eric le 2026-10-11, apres test : l'extinction par la prise `switch.ecran_p_c_3_play_hue` est abandonnee). Ne jamais couper cette prise : elle reste `on`. Ne jamais remplacer ces entites par d'autres de memoire.
 
 ## Etape 1 - Lancer /histo
 
-Invoquer le skill `histo` (outil Skill) et suivre toutes ses etapes, dans l'ordre : journal, sync_index, journal fusionne, Obsidian, menage, export Dashboard, tree, rapport. Ne pas dupliquer son contenu ici.
+Invoquer le skill `histo` (outil Skill) et suivre toutes ses etapes, dans l'ordre : journal, sync_index, journal fusionne, Obsidian, menage (y compris `historique\MD5\` et ses sous-repertoires numerotes), export Dashboard, tree, controles (dont Verif_emplacements.py), rapport. Ne pas dupliquer son contenu ici.
 
 ## Etape 2 - Verifier que tout est ecrit
 
 1. Le journal des modifs du jour (`historique\modifs\MODIFS_AAAA-MM-JJ_claude.md`) et sa copie `H:\docs\modifs\` ont le meme MD5.
 2. Aucun script lance par Claude ne tourne encore (`Get-Process bash,python,powershell` : ne pas compter la session en cours). Sinon attendre sa fin.
 3. La liste des taches est terminee ou ce qui reste est signale.
-4. `GLOBAL_INDEX_REPO.md` : MD5 de la copie de travail = miroir `H:\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\` = racine `H:\GLOBAL_INDEX_REPO.md` ; `DEPENDANCES_GLOBALES.md` : MD5 local = `H:\docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md` (pushs faits par /histo, etape 2 de son skill, decides le 2026-10-14). Un ecart apres le push = etape incomplete : pas d'extinction. H: inaccessible : le noter sans bloquer, comme dans /histo.
-5. Envoyer le rapport final de /histo a l'utilisateur AVANT l'extinction, avec la prochaine action pour la reprise.
+4. `GLOBAL_INDEX_REPO.md` : MD5 de la copie de travail `docs\01_docs_config_system\config_system_MD\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md` = miroir `H:\docs\01_docs_config_system\config_system_MD\GLOBAL_INDEX_REPO\` = racine `H:\GLOBAL_INDEX_REPO.md` ; `DEPENDANCES_GLOBALES.md` : MD5 local = `H:\docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md` (pushs faits par /histo, etape 2 de son skill, decides le 2026-10-14). Un ecart apres le push = etape incomplete : pas d'extinction. H: inaccessible : le noter sans bloquer, comme dans /histo.
+5. Le rapport de `Verif_emplacements.py` (point 9 de l'etape 6 de /histo) ne doit contenir aucun `PROD DIFFERENTE DU LOCAL` cree pendant la session ; sinon le signaler dans le rapport (pas de blocage pour un ecart deja connu et signale a Eric).
+6. Envoyer le rapport final de /histo a l'utilisateur AVANT l'extinction, avec la prochaine action pour la reprise.
 
 ## Etape 3 - Pas de confirmation
 

@@ -239,7 +239,7 @@ Vérifier dans Outils développeur > États : filtrer `update.` et regarder si `
 
 ### Configuration YAML (sources HA - ReBuild)
 
-- `docs/01_docs_config_system/config_system_YAML/templates/utilitaires/Mise_a_jour_home_assistant.yaml`
+- `docs/01_docs_config_system/config_system_SH_PY_YAML/templates/utilitaires/Mise_a_jour_home_assistant.yaml`
 
 ### Documentation
 

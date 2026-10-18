@@ -1,4 +1,5 @@
 # 🔗 DÉPENDANCES GLOBALES - TABLEAU DE BORD HA
+*Derniere mise a jour : 2026-10-18 17h30 (resync des chemins : 160 chemins remis a la casse et aux noms reels apres les renommages du 17/10 et du 18/10 ; 5 chemins complets sans fichier et les chemins courts relatifs restent a traiter, liste dans TEMPO\resync_index_dependances_2026-10-18.txt ; aucune entite ni vignette modifiee)*
 *Derniere mise a jour : 2026-10-16 18h (carte Meteoalarm, carte 9 de la page Home, ajoutee a la section HOME PAGE : arbre, entites, fichiers ; numerotation alignee sur PAGE_HOME.md : fuite [8], Meteoalarm [9], Presence [10] ; aucune entite ajoutee)*
 *Derniere mise a jour : 2026-10-15 22h (sync_index /histo-final S1 : repli Meteoalarm retire du template M_01 (sensor.06_weather_alert seul ; attribut saisonnier absent = Vert) et de l arbre meteo ci-dessous ; carte Meteoalarm ajoutee en carte 9 de la page Home (L0C0) ; liens Home du dashboard tablette repointes vers /dashboard-tablette/0 ; aucune autre entite modifiee)*
 *Derniere mise a jour : 2026-10-14 21h (sync_index /histo-final S1 : sensor.timer_foudre lit maintenant input_datetime.dernier_eclair (template M_03 corrige) ; aucune autre entite ni vignette modifiee)*
@@ -150,7 +151,7 @@ HOME PAGE (type: grid)
 | `sensor.moon_opacity` | TPL | idem | [1] |
 | `sensor.moon_phase` | TPL | idem | [1] |
 | `sensor.moon_api` (attr: `moon_parallactic_angle`) | NAT | Intégration Moon (HACS) | [1] |
-| `sensor.vence_original_condition` | NAT | `command_line/meteo/carte_meteo_france.yaml` | [1] |
+| `sensor.vence_original_condition` | NAT | `command_line/Meteo/carte_meteo_france.yaml` | [1] |
 | `sensor.th_balcon_nord_temperature` | NAT | SONOFF via Z2M | [1] |
 | `sensor.alerte_meteo` | TPL | `templates/meteo/M_01_meteo_alertes_card.yaml` | [1] |
 | `weather.vence` | NAT | Météo France | [2] |
@@ -161,9 +162,9 @@ HOME PAGE (type: grid)
 | `sensor.studio_code_server_pourcentage_du_processeur` | NAT | Studio Code Server add-on | [3] |
 | `sensor.maison_lightning_counter` | NAT | Intégration Blitzortung (MQTT native) | [4] |
 | `sensor.maison_lightning_distance` | NAT | Intégration Blitzortung (MQTT native) | [4] |
-| `sensor.blitzortung_lightning_localisation` | SEN | `sensors/meteo/M_meteo_sensors_blitzortung.yaml` (REST Nominatim) | [4] |
+| `sensor.blitzortung_lightning_localisation` | SEN | `sensors/Meteo/M_meteo_sensors_blitzortung.yaml` (REST Nominatim) | [4] |
 | `sensor.maison_lightning_azimuth` | NAT | Intégration Blitzortung (MQTT native) | [4] |
-| `sensor.timer_foudre` | TPL | `templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_timer_foudre_card.yaml` | [4] |
+| `sensor.timer_foudre` | TPL | `templates/Meteo/M_03_meteo_orage_eclaires/M_03_meteo_timer_foudre_card.yaml` | [4] |
 | `sensor.lave_linge_etat` | NAT | WashData (HACS) | [5] |
 | `sensor.lave_linge_temps_restant` | NAT | WashData (HACS) | [5] |
 | `sensor.lave_linge_progres` | NAT | WashData (HACS) | [5] |
@@ -213,22 +214,22 @@ HOME PAGE (type: grid)
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/page_home.yaml` | ✅ page complète |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_meteocss_home.yaml` | ✅ picture-elements 7 layers |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_vscode_home.yaml` | ✅ VS Code conditional |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_lave_linge_home.yaml` | ✅ Lave-linge mushroom card_mod refonte animee (remplace 2026-09-19) |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_lave_vaisselle_home.yaml` | ✅ Lave-vaisselle mushroom card_mod refonte animee (remplace 2026-09-19) |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_congelateur_home.yaml` | ✅ Congelateur button-card refonte complete snow/drip/door (remplace 2026-09-24) |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L0C0_PAGE_Home/02_Page/Page_Home.yaml` | ✅ page complète |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L0C0_PAGE_Home/03_Carte météo/Card_meteocss_home.yaml` | ✅ picture-elements 7 layers |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L0C0_PAGE_Home/04_Studio code server/Card_vscode_home.yaml` | ✅ VS Code conditional |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L0C0_PAGE_Home/06_Lave linge/Card_lave_linge_home.yaml` | ✅ Lave-linge mushroom card_mod refonte animee (remplace 2026-09-19) |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L0C0_PAGE_Home/07_Lave vaisselle/Card_lave_vaisselle_home.yaml` | ✅ Lave-vaisselle mushroom card_mod refonte animee (remplace 2026-09-19) |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L0C0_PAGE_Home/08_Congélateur/Card_congelateur_home.yaml` | ✅ Congelateur button-card refonte complete snow/drip/door (remplace 2026-09-24) |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/Dashboard_COMPLET/card_congelateur_home_2026-10-04.yaml` | ✅ Congelateur button-card refonte complete snow/drip/door (remplace 2026-09-24) |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_presence_home.yaml` | ✅ Présence (separator + Eric + Mamour) |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_detecteur_fuite_home.yaml` | ✅ Détecteur fuite mushroom |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L0C0_PAGE_Home/11_Carte présence/Card_presence_home.yaml` | ✅ Présence (separator + Eric + Mamour) |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L0C0_PAGE_Home/09_Détecteur de fuite/Card_detecteur_fuite_home.yaml` | ✅ Détecteur fuite mushroom |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L0C0_PAGE_Home/10_Carte Meteoalarm/card_meteoalarm_home.yaml` | ✅ Alertes Meteoalarm (carte 9, ajoutee le 2026-10-15) |
 
 ### Documentation
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_MD/L0C0_PAGE_Home/02_page/PAGE_HOME.md` | ✅ (MàJ 2026-10-15) |
+| `docs/02_Docs_dashboard/Dashboard_docs_md/L0C0_PAGE_Home/02_Page/Page_Home.md` | ✅ (MàJ 2026-10-15) |
 | `docs/02_docs_dashboard/dashboard_docs_MD/L0C0_PAGE_Home/10_Carte Meteoalarm/CARD_METEOALARM_HOME.md` | ✅ (cree 2026-10-15) |
 
 ---
@@ -281,12 +282,12 @@ MATÉRIEL / INTÉGRATION
 
 | Entité | Type | Fichier source |
 |:-------|:----:|:--------------|
-| `sensor.meteo_france_alertes_image_today` / `_tomorrow` | NAT (command_line) | `command_line/meteo/carte_meteo_france.yaml` |
+| `sensor.meteo_france_alertes_image_today` / `_tomorrow` | NAT (command_line) | `command_line/Meteo/carte_meteo_france.yaml` |
 | `sensor.06_weather_alert` | NAT | Intégration Météo France |
 | `weather.vence` (+ `sensor.vence_*`) | NAT | Intégration Météo France |
 | `sensor.maison_lightning_azimuth` / `_distance` / `_counter` | NAT | Intégration Blitzortung (MQTT native) |
-| `sensor.eclair_quotidien` / `_hebdomadaire` / `_mensuel` / `_annuel` / `_horaire` | UM | `utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml` |
-| `sensor.blitzortung_lightning_localisation` | SEN (REST) | `sensors/meteo/M_meteo_sensors_blitzortung.yaml` |
+| `sensor.eclair_quotidien` / `_hebdomadaire` / `_mensuel` / `_annuel` / `_horaire` | UM | `utility_meter/Meteo/M_03_meteo_UM_blitzortung.yaml` |
+| `sensor.blitzortung_lightning_localisation` | SEN (REST) | `sensors/Meteo/M_meteo_sensors_blitzortung.yaml` |
 | `sensor.alerte_vent_violent` / `_inondation` / `_orages` / `_pluie_inondation` / `_neige_verglas` / `_grand_froid` / `_canicule` / `_avalanches` / `_vagues_submersion` / `alerte_meteo` | TPL | `templates/meteo/M_01_meteo_alertes_card.yaml` |
 | `sensor.direction_vent_vence_label` / `direction_vent_vence_deg` / `vitesse_vent_vence_kmh` | TPL | `templates/meteo/M_02_meteo_vent/*.yaml` |
 | `sensor.direction_foudre_label` / `distance_foudre_km` / `direction_foudre_deg` / `dernier_impact_foudre` / `timer_foudre` | TPL | `templates/meteo/M_03_Meteo_orage_eclaires/*.yaml` |
@@ -305,25 +306,25 @@ MATÉRIEL / INTÉGRATION
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/01_vignette/vignette_L1C1_meteo.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/02_page/page_L1C1_meteo.yaml` | ⚠️ obsolete |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/02_page/page_L1C1_meteo.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C1_01_Meteo/card_duree_du_jour.yaml` | ✅ |
-| `command_line/meteo/carte_meteo_france.yaml` | ✅ |
-| `utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml` | ✅ |
-| `sensors/meteo/M_meteo_sensors_blitzortung.yaml` | ✅ *(ajouté 2026-07-19 - manquait)* |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C1_01_Meteo/01_L1C1_Vignette/Vignette_L1C1_meteo.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C1_01_Meteo/02_L1C1_Page/Page_L1C1_meteo.yaml` | ⚠️ obsolete |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C1_01_Meteo/02_L1C1_Page/Page_L1C1_meteo.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C1_01_Meteo/Card_duree_du_jour.yaml` | ✅ |
+| `command_line/Meteo/carte_meteo_france.yaml` | ✅ |
+| `utility_meter/Meteo/M_03_meteo_UM_blitzortung.yaml` | ✅ |
+| `sensors/Meteo/M_meteo_sensors_blitzortung.yaml` | ✅ *(ajouté 2026-07-19 - manquait)* |
 | `templates/meteo/M_01_meteo_alertes_card.yaml` | ✅ |
-| `templates/meteo/M_02_meteo_vent/M_02_meteo_direction_vent_vence_deg_card.yaml` | ✅ |
-| `templates/meteo/M_02_meteo_vent/M_02_meteo_direction_vent_vence_label_card.yaml` | ✅ |
-| `templates/meteo/M_02_meteo_vent/M_02_meteo_vitesse_vent_vence_kmh_card.yaml` | ✅ |
-| `templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_direction_foudre_label_card.yaml` | ✅ |
-| `templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_distance_foudre_km_card.yaml` | ✅ |
-| `templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_direction_foudre_deg_card.yaml` | ✅ |
-| `templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_timer_foudre_card.yaml` | ✅ |
-| `templates/meteo/M_03_Meteo_orage_eclaires/M_03_meteo_dernier_impact_foudre_card.yaml` | ✅ |
-| `templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_duree_du_jour_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
-| `templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_tendance_duree_jour_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
-| `templates/meteo/M_05_meteo_cycle_solaire/M_05_meteo_variation_quotidienne_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
+| `templates/Meteo/M_02_meteo_vent/M_02_meteo_direction_vent_vence_deg_card.yaml` | ✅ |
+| `templates/Meteo/M_02_meteo_vent/M_02_meteo_direction_vent_vence_label_card.yaml` | ✅ |
+| `templates/Meteo/M_02_meteo_vent/M_02_meteo_vitesse_vent_vence_kmh_card.yaml` | ✅ |
+| `templates/Meteo/M_03_meteo_orage_eclaires/M_03_meteo_direction_foudre_label_card.yaml` | ✅ |
+| `templates/Meteo/M_03_meteo_orage_eclaires/M_03_meteo_distance_foudre_km_card.yaml` | ✅ |
+| `templates/Meteo/M_03_meteo_orage_eclaires/M_03_meteo_direction_foudre_deg_card.yaml` | ✅ |
+| `templates/Meteo/M_03_meteo_orage_eclaires/M_03_meteo_timer_foudre_card.yaml` | ✅ |
+| `templates/Meteo/M_03_meteo_orage_eclaires/M_03_meteo_dernier_impact_foudre_card.yaml` | ✅ |
+| `templates/Meteo/M_05_meteo_cycle_solaire/M_05_meteo_duree_du_jour_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
+| `templates/Meteo/M_05_meteo_cycle_solaire/M_05_meteo_tendance_duree_jour_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
+| `templates/Meteo/M_05_meteo_cycle_solaire/M_05_meteo_variation_quotidienne_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
 
 > `templates/meteo/M_04_tendances_th_ext_card.yaml` retiré de cette liste le 2026-07-19 -
 > son entête déclare lui-même `AVAL : L1C2 Températures`, pas L1C1. Voir section L1C2.
@@ -370,8 +371,8 @@ MATÉRIEL (SONOFF TH via Z2M)
 | `sensor.temperature_delta_value` | TPL | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
 | `sensor.temperature_delta_affichage` | TPL | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
 | `sensor.delta_ademe_recommande` | TPL | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` |
-| `sensor.th_balcon_nord_temperature_trend` | TPL | `templates/meteo/M_04_meteo_tendances/M_04_tendances_th_ext_temperature_card.yaml` |
-| `sensor.th_balcon_nord_humidity_trend` | TPL | `templates/meteo/M_04_meteo_tendances/M_04_tendances_th_est_humidity_card.yaml` |
+| `sensor.th_balcon_nord_temperature_trend` | TPL | `templates/Meteo/M_04_meteo_tendances/M_04_tendances_th_ext_temperature_card.yaml` |
+| `sensor.th_balcon_nord_humidity_trend` | TPL | `templates/Meteo/M_04_meteo_tendances/M_04_tendances_th_est_humidity_card.yaml` |
 | `sensor.th_balcon_nord_temperature` / `_humidity` | NAT | SONOFF via Z2M |
 | `sensor.conso_clim_rad_total` | TPL | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` |
 | `sensor.conso_clim_rad_total_quotidien` | TPL | `P1_TOTAL/P1_TOTAL_AMHQ.yaml` |
@@ -404,7 +405,7 @@ MATÉRIEL (SONOFF TH via Z2M)
 | Template | Rôle |
 |:---------|:-----|
 | `temperature_humidite` | Affichage T°+Humidité par pièce |
-| `calcule_temp_cible` | Pop-up #tendances - calcul T° cible *(corrigé 2026-06-21 : entités + logique cool)* - fichier source : `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/card_calcule_temp_cible.yaml` |
+| `calcule_temp_cible` | Pop-up #tendances - calcul T° cible *(corrigé 2026-06-21 : entités + logique cool)* - fichier source : `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_03_Commandes_Clim/Card_calcule_temp_cible.yaml` |
 | `carte_des_temperatures` | Pop-ups #salon/#bureau/etc - historique T° |
 
 > ⚠️ **Flag** : `custom:temperature-heatmap-card` utilisé dans le pop-up `#exterieur` - **absent du référentiel HACS officiel**. À vérifier / ajouter si installé.
@@ -413,15 +414,15 @@ MATÉRIEL (SONOFF TH via Z2M)
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/01_vignette/vignette_L1C2_temperatures.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/02_page/page_L1C2_temperatures.yaml` | ⚠️ obsolète - `climate.clim_chambre_rm4_mini` |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C2_02_Temperatures/01_Vignette/Vignette_L1C2_temperatures.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C2_02_Temperatures/02_Page/Page_L1C2_temperatures.yaml` | ⚠️ obsolète - `climate.clim_chambre_rm4_mini` |
 | `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/02_page/page_L1C2_temperatures.yaml.bak` | ❓ origine inconnue - conservé en attendant clarification |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/02_page/page_L1C2_temperatures.yaml` | ✅ `climate.clim_chambre_rm4_mini` + `sensor.temperature_corrige_chambre` |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/02_page/page_L1C2_temperatures.yaml` | ✅ historique - ajoute bloc CONGÉLATEUR (`sensor.tongel_temperature/_humidity/_battery`), même base que 2026-07-14 sinon |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/02_page/page_L1C2_temperatures.yaml` | ✅ historique - 41 cartes : refonte cartes clim button-card, retrait du reliquat bubble "Radiateur de la Cuisine", bloc CONGÉLATEUR |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C2_02_Temperatures/02_page/page_L1C2_temperatures.yaml` | ✅ dernière version - 42 cartes : + carte appliance Congélateur (contact porte, seuils 26/48/235) |
-| `templates/meteo/M_04_meteo_tendances/M_04_tendances_th_ext_temperature_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
-| `templates/meteo/M_04_meteo_tendances/M_04_tendances_th_est_humidity_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C2_02_Temperatures/02_Page/Page_L1C2_temperatures.yaml` | ✅ `climate.clim_chambre_rm4_mini` + `sensor.temperature_corrige_chambre` |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C2_02_Temperatures/02_Page/Page_L1C2_temperatures.yaml` | ✅ historique - ajoute bloc CONGÉLATEUR (`sensor.tongel_temperature/_humidity/_battery`), même base que 2026-07-14 sinon |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C2_02_Temperatures/02_Page/Page_L1C2_temperatures.yaml` | ✅ historique - 41 cartes : refonte cartes clim button-card, retrait du reliquat bubble "Radiateur de la Cuisine", bloc CONGÉLATEUR |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C2_02_Temperatures/02_Page/Page_L1C2_temperatures.yaml` | ✅ dernière version - 42 cartes : + carte appliance Congélateur (contact porte, seuils 26/48/235) |
+| `templates/Meteo/M_04_meteo_tendances/M_04_tendances_th_ext_temperature_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
+| `templates/Meteo/M_04_meteo_tendances/M_04_tendances_th_est_humidity_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
 | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | ✅ *(fichier partagé - AVAL principal L1C3, voir aussi cette section)* |
 
 ---
@@ -447,7 +448,7 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 > vérifié dans son corps) - vrai fichier source : `P1_01_clim_logique_system_autom.yaml`.
 > `climate.soufflant_salle_de_bain` retiré - n'existe pas (le soufflant SDB est piloté
 > via `switch.inter_soufflant_salle_de_bain` + `input_select.etat_resistance_soufflant_sdb`,
-> pas une entité climate - vérifié, aucune occurrence dans tout `config_system_YAML/`).
+> pas une entité climate - vérifié, aucune occurrence dans tout `config_system_SH_PY_YAML/`).
 >
 > ⚠️ **Mise à jour 2026-09-20** : `climate.soufflant_salle_de_bain` EXISTE désormais en live (état `off` - helper UI generic_thermostat créé le 2026-03-22, pile `switch.inter_soufflant_salle_de_bain`) - utilisée par la carte clim SdB de la page L1C2 (refonte 2026-09-20). La note du 2026-07-19 ci-dessus est obsolète. Mise à jour 2026-10-07 : le thermostat a été recréé dans l'interface et son chauffage (pile) est désormais `switch.voyant_thermostat_soufflant_salle_de_bain` (switch template neutre, suit `input_boolean.voyant_thermostat_soufflant_salle_de_bain`) : il ne peut plus allumer ni couper `switch.inter_soufflant_salle_de_bain`. Il sert de voyant.
 
@@ -516,18 +517,18 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/01_vignette/vignette_L1C3_clim.yaml` | ⚠️ obsolète (rm4_mini) |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/02_page/page_L1C3_clim.yaml` | ⚠️ obsolète (rm4_mini) |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/01_vignette/vignette_L1C3_clim.yaml` | ⚠️ obsolète - consigne chambre via `sensor.temperature_corrige_chambre` |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/02_page/page_L1C3_clim.yaml` | ⚠️ obsolète - badge `remote.clim_chambre` absent |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/01_vignette/vignette_L1C3_clim.yaml` | ✅ consigne chambre lue sur `climate.clim_chambre_rm4_mini` |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/02_page/page_L1C3_clim.yaml` | ✅ badge `remote.clim_chambre` rétabli |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/card_calcule_temp_cible.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/card_prog_clim_salon.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/card_prog_radiateur_cuisine.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/card_prog_clim_bureau.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/card_prog_soufflant_sdb.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/card_prog_clim_chambre.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_03_Commandes_Clim/01_Vignette/Vignette_L1C3_clim.yaml` | ⚠️ obsolète (rm4_mini) |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_03_Commandes_Clim/02_Page/Page_L1C3_clim.yaml` | ⚠️ obsolète (rm4_mini) |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_03_Commandes_Clim/01_Vignette/Vignette_L1C3_clim.yaml` | ⚠️ obsolète - consigne chambre via `sensor.temperature_corrige_chambre` |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_03_Commandes_Clim/02_Page/Page_L1C3_clim.yaml` | ⚠️ obsolète - badge `remote.clim_chambre` absent |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_03_Commandes_Clim/01_Vignette/Vignette_L1C3_clim.yaml` | ✅ consigne chambre lue sur `climate.clim_chambre_rm4_mini` |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_03_Commandes_Clim/02_Page/Page_L1C3_clim.yaml` | ✅ badge `remote.clim_chambre` rétabli |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_03_Commandes_Clim/Card_calcule_temp_cible.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_03_Commandes_Clim/Card_prog_clim_salon.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_03_Commandes_Clim/Card_prog_radiateur_cuisine.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_03_Commandes_Clim/Card_prog_clim_bureau.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_03_Commandes_Clim/Card_prog_soufflant_SDB.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_03_Commandes_Clim/Card_prog_clim_chambre.yaml` | ✅ |
 
 ### Entités Chambre (RM4 Mini)
 
@@ -554,7 +555,7 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 
 | Fichier | Alias | Statut |
 |:--------|:------|:------:|
-| `docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim/p1_master_gestion_clim.yaml` | P1 - MASTER : Gestion centralisée climatisation | ✅ |
+| `docs/04_Docs_scripts/Docs_scripts_yaml/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml` | P1 - MASTER : Gestion centralisée climatisation | ✅ |
 
 > Appelé par A et B. Pilote les 3 clims (salon/bureau/chambre) jour/nuit selon parametre `periode`.
 
@@ -562,23 +563,23 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 
 | Fichier | Alias | Statut | Modifié le |
 |:--------|:------|:------:|:-----------|
-| `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/a_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml` | (A - 0) CLIM JOUR | ✅ | 2026-09-20 |
-| `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml` | (B - 0) CLIM NUIT | ✅ | 2026-09-20 |
-| `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/c_notification_temperature_up_ou_down_7h30_21h00.yaml` | (C) Notification temperature Up ou Down (7h30->21h00) | ✅ | - |
-| `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/d_notification_temperature_up_ou_down_21h00_7h30.yaml` | (D) Notification temperature Up ou Down (21h00->7h30) | ✅ | - |
-| `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/e_clim_notification_de_fermeture_des_fenetres.yaml` | (E) Notification de fermeture des fenetres | ✅ | - |
-| `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/f_clim_automatisation_arret_clim_notification.yaml` | (F) Automatisation Arret Clim Notification | ✅ | - |
-| `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/g_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml` | (G) Notification de changement de mode Ete/Fan/Hiver | ✅ | - |
-| `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/h_clim_debug_force_mode_correct_securite.yaml` | (H) Force Mode Correct & Securite | ✅ | - |
-| `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/i_synchro_notif_clim_si_prise_coupee.yaml` | (I) Synchro & Notif Clim si Prise Coupee | ✅ | - |
-| `docs/03_docs_automations/docs_automations_YAML/P1_clim_chauffage/j_debug_notifier_les_changements_de_message_clim_mobile.yaml` | (J) Notifier les changements de message clim Mobile | ✅ | - |
+| `docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml` | (A - 0) CLIM JOUR | ✅ | 2026-09-20 |
+| `docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml` | (B - 0) CLIM NUIT | ✅ | 2026-09-20 |
+| `docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/C_notification_temperature_up_ou_down_7h30_21h00/C_notification_temperature_up_ou_down_7h30_21h00.yaml` | (C) Notification temperature Up ou Down (7h30->21h00) | ✅ | - |
+| `docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/D_notification_temperature_up_ou_down_21h00_7h30/D_notification_temperature_up_ou_down_21h00_7h30.yaml` | (D) Notification temperature Up ou Down (21h00->7h30) | ✅ | - |
+| `docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/E_clim_notification_de_fermeture_des_fenetres/E_clim_notification_de_fermeture_des_fenetres.yaml` | (E) Notification de fermeture des fenetres | ✅ | - |
+| `docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/F_clim_automatisation_arret_clim_notification/F_clim_automatisation_arret_clim_notification.yaml` | (F) Automatisation Arret Clim Notification | ✅ | - |
+| `docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/G_clim_notification_de_changement_de_mode_ete_fan_hiver/G_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml` | (G) Notification de changement de mode Ete/Fan/Hiver | ✅ | - |
+| `docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/H_clim_debug_force_mode_correct_securite/H_clim_debug_force_mode_correct_securite.yaml` | (H) Force Mode Correct & Securite | ✅ | - |
+| `docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/I_synchro_notif_clim_si_prise_coupee/I_synchro_notif_clim_si_prise_coupee.yaml` | (I) Synchro & Notif Clim si Prise Coupee | ✅ | - |
+| `docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.yaml` | (J) Notifier les changements de message clim Mobile | ✅ | - |
 
 ### Automations liées (P1 cuisine)
 
 | Fichier | Alias | Statut |
 |:--------|:------|:------:|
-| `docs/03_docs_automations/docs_automations_YAML/P1_cuisine/a_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.yaml` | A - Chauffage Cuisine (4h45-7h LMMJ / 5h45-8h VSD, T° 19.9°) | ✅ |
-| `docs/03_docs_automations/docs_automations_YAML/P1_cuisine/b_chauffage_cuisine_vacances.yaml` | B - Chauffage Cuisine Vacances | ✅ |
+| `docs/03_Docs_automations/Docs_automations_yaml/P1_02_Cuisine/A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9/A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.yaml` | A - Chauffage Cuisine (4h45-7h LMMJ / 5h45-8h VSD, T° 19.9°) | ✅ |
+| `docs/03_Docs_automations/Docs_automations_yaml/P1_02_Cuisine/B_chauffage_cuisine_vacances/B_chauffage_cuisine_vacances.yaml` | B - Chauffage Cuisine Vacances | ✅ |
 
 ### Nouveaux sensors P1_MASTER - session 2026-06-21
 
@@ -668,31 +669,31 @@ SENSORS P0
 
 | Entité | Fichier source | Role |
 |:-------|:---------------|:-----|
-| `sensor.genelec_appart_conso_mini_24h` | `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml` | Min W 24h |
+| `sensor.genelec_appart_conso_mini_24h` | `sensors/P0_energie_total_min_maxi_diag/P0_genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_genelec_appart.yaml` | Min W 24h |
 | `sensor.general_electric_appart_power` | Nodon SEM-4-1-00 (natif Z2M) | W temps réel |
-| `sensor.genelec_appart_conso_maxi_24h` | `sensors/P0_Energie_total_min_maxi_diag/P0_Genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_Genelec_appart.yaml` | Max W 24h |
-| `sensor.genelec_appart_cout_total_quotidien` | `templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml` | Coût € total J |
-| `sensor.genelec_appart_cout_hp_quotidien` | `templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml` | Coût € HP J |
-| `sensor.genelec_appart_cout_hc_quotidien` | `templates/P0_Energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml` | Coût € HC J |
+| `sensor.genelec_appart_conso_maxi_24h` | `sensors/P0_energie_total_min_maxi_diag/P0_genelec_appart_mini_maxi/P0_MINI_MAXI_AVG_genelec_appart.yaml` | Max W 24h |
+| `sensor.genelec_appart_cout_total_quotidien` | `templates/P0_energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml` | Coût € total J |
+| `sensor.genelec_appart_cout_hp_quotidien` | `templates/P0_energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml` | Coût € HP J |
+| `sensor.genelec_appart_cout_hc_quotidien` | `templates/P0_energie_total_diag/P0_Genelec_appart/P0_01_genelec_appart_AMHQ_cost.yaml` | Coût € HC J |
 
 ### Fichiers YAML déployables (Dashboard versionnés)
 
 | Fichier | Taille | Navigation | Statut |
 |:--------|:-------|:-----------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/01_vignette/vignette_L2C1_energie.yaml` | 4,4 Ko | (vignette) | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/03_page_principale/page_L2C1_energie_principale.yaml` | 19,4 Ko | `/energie` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/02_page_temps_reel/page_L2C1_energie_temps_reel.yaml` | 38,7 Ko | `/energie-temps-reel` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/04_page_mensuel/page_L2C1_energie_mensuel.yaml` | 12,5 Ko | `/energie-mensuel` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C1_04_Energie_Generale/01_Vignette/Vignette_L2C1_energie.yaml` | 4,4 Ko | (vignette) | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C1_04_Energie_Generale/03_Page_principale/Page_L2C1_energie_principale.yaml` | 19,4 Ko | `/energie` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C1_04_Energie_Generale/02_Page_temps_reel/Page_L2C1_energie_temps_reel.yaml` | 38,7 Ko | `/energie-temps-reel` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C1_04_Energie_Generale/04_Page_mensuel/Page_L2C1_energie_mensuel.yaml` | 12,5 Ko | `/energie-mensuel` | ✅ |
 
 ### Fichiers YAML impactés par changement P0 (Ecojoko → Nodon)
 
 | Fichier | Entité modifiée | Statut |
 |:--------|:----------------|:------:|
-| `utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ.yaml` | source → `general_electric_appart_energy` | ✅ |
-| `utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml` | source → `general_electric_appart_energy` | ✅ |
-| `templates/P0_Energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml` | source → Nodon | ✅ |
-| `templates/P0_Energie_total_diag/P0_Genelec_appart/P0_03_AVG_genelec_appart.yaml` | source → Nodon | ✅ |
-| `templates/P0_Energie_total_diag/P0_Linky/P0_MyElectricalData.yaml` | Linky J-1 conservé | ✅ |
+| `utility_meter/P0_energie_total/Genelec_appart/P0_UM_AMHQ.yaml` | source → `general_electric_appart_energy` | ✅ |
+| `utility_meter/P0_energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml` | source → `general_electric_appart_energy` | ✅ |
+| `templates/P0_energie_total_diag/P0_Genelec_appart/P0_02_ratio_hp_hc.yaml` | source → Nodon | ✅ |
+| `templates/P0_energie_total_diag/P0_Genelec_appart/P0_03_AVG_genelec_appart.yaml` | source → Nodon | ✅ |
+| `templates/P0_energie_total_diag/P0_Linky/P0_MyElectricalData.yaml` | Linky J-1 conservé | ✅ |
 | Docs vignettes L2C1, L2C2 | Impact Ecojoko → Nodon vérifié : L2C1 ✅, L2C2 ✅ (zero référence Ecojoko en L2C2 - entités P1 pures) | ✅ |
 
 ---
@@ -781,7 +782,7 @@ MATÉRIEL (NOUS SP via Z2M)
 | `apex_dut_piece` | Onglet DUT - apexcharts durée utilisation par pièce |
 | `clim_voltage_ring-tile` | ring-tile-card tension (V) par appareil |
 | `clim_ampere_ring-tile` | ring-tile-card ampérage (A) par appareil |
-| `calcule_temp_cible` | Pop-up #tendances - logique calcul T° cible *(corrigé 2026-06-21)* - fichier : `docs/02_docs_dashboard/dashboard_docs_YAML/L1C3_03_Commandes_Clim/card_calcule_temp_cible.yaml` |
+| `calcule_temp_cible` | Pop-up #tendances - logique calcul T° cible *(corrigé 2026-06-21)* - fichier : `docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_03_Commandes_Clim/Card_calcule_temp_cible.yaml` |
 
 ### Fichiers YAML déployables
 
@@ -797,11 +798,11 @@ MATÉRIEL (NOUS SP via Z2M)
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/01_vignette/vignette_L2C2_energie_clim.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/02_page/page_L2C2_energie_clim.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/02_page/page_L2C2_energie_clim.yaml` | ⚠️ obsolète - `climate.clim_chambre_rm4_mini` |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/02_page/page_L2C2_energie_clim.yaml` | ✅ `climate.clim_chambre_rm4_mini` (NOUS SP1 conservé) |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C2_05_Energie_Clim/02_page/page_L2C2_energie_clim.yaml` | ✅ dernière version - 56 cartes : refonte cartes clim (button-card) ; export live du 2026-09-20 |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C2_05_Energie_Clim/01_Vignette/Vignette_L2C2_energie_clim.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C2_05_Energie_Clim/02_Page/Page_L2C2_energie_clim.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C2_05_Energie_Clim/02_Page/Page_L2C2_energie_clim.yaml` | ⚠️ obsolète - `climate.clim_chambre_rm4_mini` |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C2_05_Energie_Clim/02_Page/Page_L2C2_energie_clim.yaml` | ✅ `climate.clim_chambre_rm4_mini` (NOUS SP1 conservé) |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C2_05_Energie_Clim/02_Page/Page_L2C2_energie_clim.yaml` | ✅ dernière version - 56 cartes : refonte cartes clim (button-card) ; export live du 2026-09-20 |
 
 ---
 
@@ -912,8 +913,8 @@ MATÉRIEL (Hue Bridge / Sonoff via Z2M)
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C3_06_Energie_Eclairage/01_vignette/vignette_L2C3_energie_eclairage.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L2C3_06_Energie_Eclairage/02_page/page_L2C3_energie_eclairage.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C3_06_Energie_Eclairage/01_Vignette/Vignette_L2C3_energie_eclairage.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C3_06_Energie_Eclairage/02_Page/Page_L2C3_energie_eclairage.yaml` | ✅ |
 
 ---
 
@@ -997,10 +998,10 @@ MATÉRIEL (Hue Bridge / Sonoff)
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/01_vignette/vignette_L3C1_eclairage.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/02_page_gauche/page_L3C1_eclairage_gauche.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/02_page_droite/page_L3C1_eclairage_droite.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L3C1_07_Commandes_Eclairage/02_page_droite/page_L3C1_eclairage_droite.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C1_07_Commandes_Eclairage/01_Vignette/Vignette_L3C1_eclairage.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C1_07_Commandes_Eclairage/02_Page_gauche/Page_L3C1_eclairage_gauche.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C1_07_Commandes_Eclairage/03_Page_droite/Page_L3C1_eclairage_droite.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C1_07_Commandes_Eclairage/03_Page_droite/Page_L3C1_eclairage_droite.yaml` | ✅ |
 
 ---
 
@@ -1054,8 +1055,8 @@ MATÉRIEL / INTÉGRATION
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L3C2_08_Commandes_Prises/01_vignette/vignette_L3C2_prises.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L3C2_08_Commandes_Prises/02_page/page_L3C2_prises.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C2_08_Commandes_Prises/01_Vignette/Vignette_L3C2_prises.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C2_08_Commandes_Prises/02_Page/Page_L3C2_prises.yaml` | ✅ |
 
 ---
 
@@ -1088,8 +1089,8 @@ MATÉRIEL / INTÉGRATION
 | `binary_sensor.contact_fenetre_cuisine_sonoff_contact` | NAT | Z2M (SONOFF SNZB-04) | Fenêtre Cuisine - Ouvert/Fermé |
 | `binary_sensor.contact_fenetre_bureau_sonoff_contact` | NAT | Z2M (SONOFF SNZB-04) | Fenêtre Bureau - Ouvert/Fermé |
 | `binary_sensor.contact_fenetre_chambre_sonoff_contact` | NAT | Z2M (SONOFF SNZB-04) | Fenêtre Chambre - Ouvert/Fermé |
-| `sensor.store_salon_status` | TPL | `templates/Stores/S_01_STORES.yaml` | Store Salon - texte état |
-| `sensor.store_bureau_status` | TPL | `templates/Stores/S_01_STORES.yaml` | Store Bureau - texte état |
+| `sensor.store_salon_status` | TPL | `templates/Stores/S_01_store.yaml` | Store Salon - texte état |
+| `sensor.store_bureau_status` | TPL | `templates/Stores/S_01_store.yaml` | Store Bureau - texte état |
 
 ### Page - Chaîne de dépendances
 
@@ -1132,15 +1133,15 @@ MATÉRIEL / INTÉGRATION
 
 | Fichier | Rôle | Statut |
 |:--------|:-----|:------:|
-| `templates/Stores/S_01_STORES.yaml` | Sensors texte état stores (store_salon_status, store_bureau_status) | ✅ |
+| `templates/Stores/S_01_store.yaml` | Sensors texte état stores (store_salon_status, store_bureau_status) | ✅ |
 
 ### Fichiers YAML Dashboard
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L3C3_09_Stores_Fenetres/01_vignette/vignette_L3C3_stores.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L3C3_09_Stores_Fenetres/02_page/page_L3C3_stores.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L3C3_09_Stores_Fenetres/02_page/page_L3C3_stores.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C3_09_Stores_Fenetres/01_Vignette/Vignette_L3C3_stores.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C3_09_Stores_Fenetres/02_Page/Page_L3C3_stores.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C3_09_Stores_Fenetres/02_Page/Page_L3C3_stores.yaml` | ✅ |
 
 ---
 
@@ -1265,15 +1266,15 @@ MATÉRIEL / INTÉGRATION
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_MD/L4C2_PROXMOX/01_vignette/L4C2_VIGNETTE_PROXMOX.md` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_11_Proxmox/01_vignette/vignette_L4C2_proxmox.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_11_Proxmox/01_vignette/vignette_L4C2_proxmox.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_11_Proxmox/01_vignette/vignette_L4C2_proxmox.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_MD/L4C2_PROXMOX/02_page/PAGE_PROXMOX.md` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_11_Proxmox/02_page/page_L4C2_proxmox.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_11_Proxmox/02_page/page_L4C2_proxmox.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_11_Proxmox/02_page/page_L4C2_proxmox.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_11_Proxmox/card_services_ha_z2m_mariadb.yaml` | ⚠️ obsolète - contenu intégré dans page_08-08 |
+| `docs/02_Docs_dashboard/Dashboard_docs_md/L4C2_PROXMOX/01_Vignette/L4C2_VIGNETTE_PROXMOX.md` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C2_11_Proxmox/01_Vignette/Vignette_L4C2_proxmox.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C2_11_Proxmox/01_Vignette/Vignette_L4C2_proxmox.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C2_11_Proxmox/01_Vignette/Vignette_L4C2_proxmox.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_md/L4C2_PROXMOX/02_Page/Page_proxmox.md` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C2_11_Proxmox/02_Page/Page_L4C2_proxmox.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C2_11_Proxmox/02_Page/Page_L4C2_proxmox.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C2_11_Proxmox/02_Page/Page_L4C2_proxmox.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C2_11_Proxmox/Card_services_ha_Z2M_mariadb.yaml` | ⚠️ obsolète - contenu intégré dans page_08-08 |
 
 ---
 
@@ -1351,13 +1352,13 @@ MATÉRIEL / INTÉGRATION
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C1_10_Mini_PC/01_vignette/vignette_L4C1_mini_pc.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C1_10_Mini_PC/01_vignette/vignette_L4C1_mini_pc.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C1_10_Mini_PC/01_vignette/vignette_L4C1_mini_pc.yaml` | ✅ refonte - proxmox_cpu_package direct (sans template) |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C1_10_Mini_PC/02_page/page_L4C1_mini_pc.yaml` | ✅ icônes `mdi:cpu-64-bit` + `mdi:harddisk` ajoutées aux mini-graph-cards |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C1_10_Mini_PC/02_page/page_L4C1_mini_pc.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C1_10_Mini_PC/02_page/page_L4C1_mini_pc.yaml` | ✅ fix sensor.ip_externe → sensor.ip_externe_wan |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C1_10_Mini_PC/card_popup_memory.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C1_10_Mini_PC/01_Vignette/Vignette_L4C1_mini_pc.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C1_10_Mini_PC/01_Vignette/Vignette_L4C1_mini_pc.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C1_10_Mini_PC/01_Vignette/Vignette_L4C1_mini_pc.yaml` | ✅ refonte - proxmox_cpu_package direct (sans template) |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C1_10_Mini_PC/02_Page/Page_L4C1_mini_pc.yaml` | ✅ icônes `mdi:cpu-64-bit` + `mdi:harddisk` ajoutées aux mini-graph-cards |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C1_10_Mini_PC/02_Page/Page_L4C1_mini_pc.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C1_10_Mini_PC/02_Page/Page_L4C1_mini_pc.yaml` | ✅ fix sensor.ip_externe → sensor.ip_externe_wan |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C1_10_Mini_PC/Card_popup_memory.yaml` | ✅ |
 | `utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml` | ✅ |
 | `templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml` | ✅ |
 
@@ -1428,9 +1429,9 @@ HA Core
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/01_vignette/vignette_L4C3_maj_ha.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/02_page_gauche/page_L4C3_maj_ha_gauche.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L4C3_12_MAJ_HA/03_page_droite/page_L4C3_maj_ha_droite.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C3_12_MAJ_HA/01_Vignette/Vignette_L4C3_maj_ha.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C3_12_MAJ_HA/02_Page_gauche/Page_L4C3_maj_ha_gauche.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C3_12_MAJ_HA/03_Page_droite/Page_L4C3_maj_ha_droite.yaml` | ✅ |
 
 ---
 
@@ -1478,9 +1479,9 @@ Philips Hue Bridge / Z2M / SONOFF (ZHA/Z2M)
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C1_13_Batteries_Piles/01_vignette/vignette_L5C1_batteries_piles.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C1_13_Batteries_Piles/02_page/page_L5C1_batteries_piles.yaml` | ⚠️ tronqué - remplacé par la version 2026-09-24 |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C1_13_Batteries_Piles/02_page/page_L5C1_batteries_piles.yaml` | ✅ dernière version - 4 cartes batterie + entêtes ; batterie porte_congel |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C1_13_Batteries_Piles/01_Vignette/Vignette_L5C1_batteries_piles.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C1_13_Batteries_Piles/02_Page/Page_L5C1_batteries_piles.yaml` | ⚠️ tronqué - remplacé par la version 2026-09-24 |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C1_13_Batteries_Piles/02_Page/Page_L5C1_batteries_piles.yaml` | ✅ dernière version - 4 cartes batterie + entêtes ; batterie porte_congel |
 
 ---
 
@@ -1554,9 +1555,9 @@ HA Companion App
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/01_vignette/vignette_L5C2_batteries_portables.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/02_page_gauche/page_L5C2_batteries_portables_gauche.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C2_14_Batteries_Portables/02_page_droite/page_L5C2_batteries_portables_droite.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C2_14_Batteries_Portables/01_Vignette/Vignette_L5C2_batteries_portables.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C2_14_Batteries_Portables/02_Page_gauche/Page_L5C2_batteries_portables_gauche.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C2_14_Batteries_Portables/03_Page_droite/Page_L5C2_batteries_portables_droite.yaml` | ✅ |
 
 ---
 
@@ -1606,15 +1607,15 @@ MariaDB
 | `script.audit_md5` | NAT | `scripts.yaml` |
 | `sensor.audit_md5_journal` | NAT | `command_line/audit/audit_logs.yaml` |
 | `script.audit_md5_md_yaml` | NAT | `scripts.yaml` (renommé 2026-08-09) |
-| `sensor.audit_md5_md_yaml_journal` | NAT | `command_line/audit/audit_md5_md_yaml.yaml` (renommé 2026-08-09) |
+| `sensor.audit_md5_md_yaml_journal` | NAT | `command_line/Audit/audit_md5_md_yaml.yaml` (renommé 2026-08-09) |
 | `sensor.backup_github_status` | NAT | `command_line/GitHub_maintenance/GitHub_maintenance.yaml` |
 | `sensor.backup_github_journal` | NAT | `command_line/GitHub_maintenance/GitHub_maintenance.yaml` |
 | `sensor.git_last_weekly_tag` | NAT | `command_line/GitHub_maintenance/GitHub_maintenance.yaml` |
 | `sensor.github_default_branch` | NAT | `command_line/GitHub_maintenance/GitHub_maintenance.yaml` |
 | `sensor.taille_db_home_assistant` | NAT | `sql.yaml` |
 | `automation.db_purge_mariadb_repack` | NAT | `automations/systeme/` |
-| `shell_command.git_backup_push_weekly` | NAT | `shell_command/Ghithub/backup_github.yaml` |
-| `shell_command.git_backup_push_manual` | NAT | `shell_command/Ghithub/backup_github.yaml` |
+| `shell_command.git_backup_push_weekly` | NAT | `shell_command/GitHub/GitHub_backup_GitHub.yaml` |
+| `shell_command.git_backup_push_manual` | NAT | `shell_command/GitHub/GitHub_backup_GitHub.yaml` |
 
 ### Page - Chaîne de dépendances (NOUVEAU 2026-05-18)
 
@@ -1661,16 +1662,16 @@ Proxmox VE (intégration superviseur)
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/01_vignette/vignette_L5C3_mariadb.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/card_mariadb.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/03_page_systeme_reserve/page_L5C3_systeme_reserve.yaml` (HA + Z2M + MariaDB) | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/card_audit_buttons.yaml` (boutons déclencheurs audit) | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/card_audit_journal.yaml` (journal résultat audit) | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/card_audit_md5.yaml` (carte audit MD5) | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/card_audit_recap.yaml` (recap audit MD5) | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/02_page_mariadb/page_L5C3_mariadb.yaml` (Audit MD5 + GitHub + MariaDB) | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/02_page_mariadb/page_L5C3_mariadb.yaml` (+ Audit MD5 Docs 2026-08-08) | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L5C3_15_MariaDB/02_page_mariadb/page_L5C3_mariadb.yaml` (rename audit_md5_md_yaml + centrage + retour ligne 2026-08-09) | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C3_15_MariaDB/01_Vignette/Vignette_L5C3_mariadb.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C3_15_MariaDB/Card_mariadb.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C3_15_MariaDB/03_Page_systeme_reserve/Page_L5C3_systeme_reserve.yaml` (HA + Z2M + MariaDB) | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C3_15_MariaDB/Card_audit_buttons.yaml` (boutons déclencheurs audit) | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C3_15_MariaDB/Card_audit_journal.yaml` (journal résultat audit) | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C3_15_MariaDB/Card_audit_md5.yaml` (carte audit MD5) | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C3_15_MariaDB/Card_audit_recap.yaml` (recap audit MD5) | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C3_15_MariaDB/02_Page_mariadb/Page_L5C3_mariadb.yaml` (Audit MD5 + GitHub + MariaDB) | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C3_15_MariaDB/02_Page_mariadb/Page_L5C3_mariadb.yaml` (+ Audit MD5 Docs 2026-08-08) | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C3_15_MariaDB/02_Page_mariadb/Page_L5C3_mariadb.yaml` (rename audit_md5_md_yaml + centrage + retour ligne 2026-08-09) | ✅ |
 
 ---
 
@@ -1746,23 +1747,23 @@ templates/Air_Quality/A_01_AIR_QUALITY.yaml (TPL - conversion ppb)
 | `sensor.qualite_air_salon_ikea_voc_index` | NAT | IKEA VINDSTYRKA Salon (Z2M) |
 | `sensor.qualite_air_bureau_ikea_voc_index` | NAT | IKEA VINDSTYRKA Bureau (Z2M) |
 | `sensor.qualite_air_chambre_ikea_voc_index` | NAT | IKEA VINDSTYRKA Chambre (Z2M) |
-| `sensor.pm2_5_salon_moy_24h` | SEN | `sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.pm2_5_bureau_moy_24h` | SEN | `sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.pm2_5_chambre_moy_24h` | SEN | `sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.tcov_salon_moy_24h` | SEN | `sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.tcov_bureau_moy_24h` | SEN | `sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.tcov_chambre_moy_24h` | SEN | `sensors/Air_Quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.tcov_salon_ppb` | TPL | `templates/Air_Quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.tcov_bureau_ppb` | TPL | `templates/Air_Quality/A_01_AIR_QUALITY.yaml` |
-| `sensor.tcov_chambre_ppb` | TPL | `templates/Air_Quality/A_01_AIR_QUALITY.yaml` |
+| `sensor.pm2_5_salon_moy_24h` | SEN | `sensors/Air_Quality/AQ_01_air_quality.yaml` |
+| `sensor.pm2_5_bureau_moy_24h` | SEN | `sensors/Air_Quality/AQ_01_air_quality.yaml` |
+| `sensor.pm2_5_chambre_moy_24h` | SEN | `sensors/Air_Quality/AQ_01_air_quality.yaml` |
+| `sensor.tcov_salon_moy_24h` | SEN | `sensors/Air_Quality/AQ_01_air_quality.yaml` |
+| `sensor.tcov_bureau_moy_24h` | SEN | `sensors/Air_Quality/AQ_01_air_quality.yaml` |
+| `sensor.tcov_chambre_moy_24h` | SEN | `sensors/Air_Quality/AQ_01_air_quality.yaml` |
+| `sensor.tcov_salon_ppb` | TPL | `templates/Air_Quality/AQ_01_air_quality.yaml` |
+| `sensor.tcov_bureau_ppb` | TPL | `templates/Air_Quality/AQ_01_air_quality.yaml` |
+| `sensor.tcov_chambre_ppb` | TPL | `templates/Air_Quality/AQ_01_air_quality.yaml` |
 
 ### Fichiers YAML Dashboard
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L6C1_16_Air_Qualite/01_vignette/vignette_L6C1_air_qualite.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L6C1_16_Air_Qualite/02_page/page_L6C1_air_qualite.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L6C1_16_Air_Qualite/02_page/page_L6C1_air_qualite.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L6C1_16_Air_Qualite/01_Vignette/Vignette_L6C1_air_qualite.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L6C1_16_Air_Qualite/02_Page/Page_L6C1_air_qualite.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L6C1_16_Air_Qualite/02_Page/Page_L6C1_air_qualite.yaml` | ✅ |
 
 ---
 
@@ -1852,9 +1853,9 @@ Atmo France (intégration HACS) - Section QUALITE DE L'AIR
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L6C2_17_Pollution_Pollen/01_vignette/vignette_L6C2_pollution_pollen.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L6C2_17_Pollution_Pollen/02_page/page_L6C2_pollution_pollen.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L6C2_17_Pollution_Pollen/02_page/page_L6C2_pollution_pollen.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L6C2_17_Pollution_Pollen/01_Vignette/Vignette_L6C2_pollution_pollen.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L6C2_17_Pollution_Pollen/02_Page/Page_L6C2_pollution_pollen.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L6C2_17_Pollution_Pollen/02_Page/Page_L6C2_pollution_pollen.yaml` | ✅ |
 
 ---
 
@@ -1906,8 +1907,8 @@ VigiEau (intégration HACS) - Section SÉCHERESSE
 
 | Fichier | Statut |
 |:--------|:------:|
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L6C3_18_VigiEau/01_vignette/vignette_L6C3_vigieau.yaml` | ✅ |
-| `docs/02_docs_dashboard/dashboard_docs_YAML/L6C3_18_VigiEau/02_page/page_L6C3_vigieau.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L6C3_18_VigiEau/01_Vignette/Vignette_L6C3_vigieau.yaml` | ✅ |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L6C3_18_VigiEau/02_Page/Page_L6C3_vigieau.yaml` | ✅ |
 
 ---
 
@@ -3652,7 +3653,7 @@ Horloge HA (06:00 + toutes les 15min)
 ---
 
 ### ✅ P1 MASTER GESTION CLIM
-*Fichier : `docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim/p1_master_gestion_clim.yaml`*
+*Fichier : `docs/04_Docs_scripts/Docs_scripts_yaml/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml`*
 *Service HA : `script.p1_master_gestion_clim`*
 
 #### A - Rôle
@@ -3727,7 +3728,7 @@ automation P1-B (CLIM NUIT) --+--> script.p1_master_gestion_clim [periode, trigg
 | `templates/` | Calculs, AVG, UI, météo, présence, stores | ✅ |
 | `utility_meter/` | Compteurs AMHQ (P0→P3, météo) | ✅ |
 | `command_line/` | Météo France, GitHub maintenance, audit MD5, IP externe | ✅ |
-| `command_line/energie/histo_energie.yaml` | `sensor.histo_energie_linky` + `sensor.histo_energie_nodon` (lecture linky_histo.txt / nodon_histo.txt, attr j0-j6 JSON) | ✅ (2026-09-03) |
+| `command_line/Energie/histo_energie.yaml` | `sensor.histo_energie_linky` + `sensor.histo_energie_nodon` (lecture linky_histo.txt / nodon_histo.txt, attr j0-j6 JSON) | ✅ (2026-09-03) |
 | `groups/` | Groupes batteries HUE/IKEA/SONOFF → L5C1 - GRP_03 : 13 membres (+sonde Tongel, +contact Porte Congél.) *(2026-09-24)* | ✅ |
 | `input_booleans/` | Helpers booléens (verrous clim, présence…) | ✅ |
 | `input_number/` | Helpers numériques | ✅ |

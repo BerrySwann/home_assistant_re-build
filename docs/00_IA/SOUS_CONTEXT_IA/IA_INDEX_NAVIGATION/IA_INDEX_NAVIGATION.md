@@ -8,7 +8,7 @@
 
 La navigation dashboard est indexee a deux endroits :
 - **Index genere** : `docs/02_docs_dashboard/GLOBAL_INDEX_VIGNETTES_PAGES.md` (vignettes et pages : fiche, YAML, dependances). Regenere a chaque `/histo` par `docs/04_docs_scripts/docs_scripts_SH/gen_global_index_vignettes_pages/gen_global_index_vignettes_pages.py`. Ne jamais le modifier a la main.
-- **Index detaille en accordeon** : section `02 - DASHBOARD (18 vignettes)` de `GLOBAL_INDEX_REPO.md` (racine de `H:\` + copie locale `docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md`). Maintenue a la main.
+- **Index detaille en accordeon** : section `02 - DASHBOARD (18 vignettes)` de `GLOBAL_INDEX_REPO.md` (racine de `H:\` + copie locale `docs/01_docs_config_system/config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md`). Maintenue a la main.
 
 Il n'y a plus de fichier `INDEX_NAVIGATION_FULL.md` ni `INDEX_NAVIGATION.md` distinct (fusionnes dans GLOBAL_INDEX_REPO.md le 2026-07-16). `INDEX_PAGES.md` a ete retire du local le 2026-10-13 : remplace par l'index genere.
 
@@ -45,7 +45,7 @@ Niveau 1 : L*C* - LABEL | X page(s) | ~N entites       <- retracte par defaut
     - Doc page + YAML page
     - Fichiers sources (sensors/ templates/ utility_meter/)
     - Pop-up #hash - N entites
-        chaque entite : "voir fichier" (lien config_system_YAML/) ou "Natif HA"
+        chaque entite : "voir fichier" (lien config_system_SH_PY_YAML/) ou "Natif HA"
   Niveau 2c : Fichiers complementaires (si presents)
 ```
 
@@ -60,7 +60,7 @@ Niveau 1 : L*C* - LABEL | X page(s) | ~N entites       <- retracte par defaut
 |:-----|:-------------|
 | YAMLs dashboard | `docs/02_docs_dashboard/dashboard_docs_YAML/L*C*_*/` |
 | Docs vignettes | `docs/02_docs_dashboard/dashboard_docs_MD/L*C*_*/01_vignette/` |
-| Fichiers sources YAML | `docs/01_docs_config_system/config_system_YAML/` |
+| Fichiers sources YAML | `docs/01_docs_config_system/config_system_SH_PY_YAML/` |
 
 > ⚠️ Casse minuscule `docs/` depuis 2026-07-19 (renommage H:\Docs -> H:\docs + push GitHub).
 

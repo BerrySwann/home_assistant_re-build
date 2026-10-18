@@ -17,8 +17,8 @@ D = os.path.join(BASE, "docs")
 PH = "H:\\"
 # cle : (chemin local, [chemins prod], mode de resolution des liens, controle entites)
 INDEX = {
- "GLOBAL_INDEX_REPO": (os.path.join(D, "05_docs_MD_system", "GLOBAL_INDEX_REPO", "GLOBAL_INDEX_REPO.md"),
-                       [r"H:\GLOBAL_INDEX_REPO.md", r"H:\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md"], "racine", True),
+ "GLOBAL_INDEX_REPO": (os.path.join(D, "01_docs_config_system", "config_system_MD", "GLOBAL_INDEX_REPO", "GLOBAL_INDEX_REPO.md"),
+                       [r"H:\GLOBAL_INDEX_REPO.md", r"H:\docs\01_docs_config_system\config_system_MD\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md"], "racine", True),
  "GLOBAL_INDEX_AUTOMATIONS": (os.path.join(D, "03_docs_automations", "GLOBAL_INDEX_AUTOMATIONS.md"),
                        [r"H:\docs\03_docs_automations\GLOBAL_INDEX_AUTOMATIONS.md"], "dossier", False),
  "GLOBAL_INDEX_VIGNETTES_PAGES": (os.path.join(D, "02_docs_dashboard", "GLOBAL_INDEX_VIGNETTES_PAGES.md"),

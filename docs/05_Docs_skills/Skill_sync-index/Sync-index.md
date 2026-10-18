@@ -1,16 +1,11 @@
 ---
-name: sync-index
-description: >
-  Skill HA ReBuild - met a jour DEPENDANCES_GLOBALES.md et l'index du projet apres validation
-  d'un fichier YAML. Declencher OBLIGATOIREMENT quand l'utilisateur tape /sync_index, dit
-  "met a jour l'index", "synchronise les dependances", "update DEPENDANCES_GLOBALES",
-  apres avoir valide ou corrige un fichier YAML config, automation ou script, ou quand une
-  entite modifiee impacte une vignette du dashboard. S'active aussi sur : "le fichier est
-  valide", "c'est bon pour ce fichier", ou toute confirmation qu'un YAML vient d'etre
-  corrige/approuve.
+name: "sync-index"
+description: "Skill HA ReBuild - met a jour DEPENDANCES_GLOBALES.md et l'index du projet apres validation d'un fichier YAML. Declencher OBLIGATOIREMENT quand l'utilisateur tape /sync_index, dit \"met a jour l'index\", \"synchronise les dependances\", \"update DEPENDANCES_GLOBALES\", apres avoir valide ou corrige un fichier YAML config, automation ou script, ou quand une entite modifiee impacte une vignette du dashboard."
 ---
 
 # Skill : /sync_index - Mise a jour de l'index et des dependances
+
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 ## Objectif
 
@@ -21,7 +16,7 @@ documentation de dependances pour maintenir la coherence du projet.
 
 | Type de fichier valide | Dossier source |
 |:---|:---|
-| Config HA (sensors, templates, utility_meter...) | `docs/` |
+| Config HA (sensors, templates, utility_meter...) | `docs/01_docs_config_system/config_system_SH_PY_YAML/` |
 | Automation | `docs/03_docs_automations/docs_automations_YAML/` |
 | Script | `docs/04_docs_scripts/docs_scripts_YAML/` |
 
@@ -38,6 +33,9 @@ documentation de dependances pour maintenir la coherence du projet.
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\03_docs_automations\docs_automations_MD\`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_YAML_MD\`
+
+**Chemin bash sandbox :** `/sessions/bold-determined-wright/mnt/Documents--ReBuild/docs/`
+> Note : le prefixe de session bash peut changer. Verifier avec `ls /sessions/` si besoin.
 
 ## Protocole d'execution
 
@@ -92,3 +90,4 @@ Proposer de creer/completer la section manquante.
 
 - **Ne reecrire que les lignes concernees** - pas le fichier complet (economie tokens).
 - Si aucune dependance n'est impactee : repondre "Index deja a jour - aucune action" (1 ligne).
+- Les chemins de fichiers cites dans DEPENDANCES_GLOBALES.md doivent avoir la casse exacte du disque (GitHub distingue la casse ; resync du 2026-10-18).

@@ -16,7 +16,7 @@
 # entrer en collision avec le rapport de Claude (md5_audit_docs_*.txt).
 #
 # ## 🧮 CALCUL & SOURCES :
-# - LOCAL  : $LOCAL_ROOT/docs/**/*.md + Github/README.md + docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md
+# - LOCAL  : $LOCAL_ROOT/docs/**/*.md + docs/01_docs_config_system/config_system_MD/README/README.md + docs/01_docs_config_system/config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md
 # - PROD   : $PROD_ROOT/docs/**/*.md + README.md + GLOBAL_INDEX_REPO.md
 # - GITHUB : curl raw https://raw.githubusercontent.com/.../main/<relpath>
 # - MD5 brut (octets exacts) + MD5 normalisé (CRLF->LF) pour la classification
@@ -64,10 +64,10 @@ echo ""
 echo "── PASS 1 : TREE (local ReBuild) ─────────────────────────────────────────────"
 } > "$LOG"
 
-find "$LOCAL_ROOT/docs" -name "*.md" -not -path "*/05_docs_MD_system/GLOBAL_INDEX_REPO/*" 2>/dev/null | sed "s|^$LOCAL_ROOT/||" | sort > "$TMP_TREE" || true
+find "$LOCAL_ROOT/docs" -name "*.md" -not -path "*/config_system_MD/GLOBAL_INDEX_REPO/*" 2>/dev/null | sed "s|^$LOCAL_ROOT/||" | sort > "$TMP_TREE" || true
 # Fichiers racine : mapping local Github/ -> chemin repo
-[ -f "$LOCAL_ROOT/Github/README.md" ]      && echo "README.md" >> "$TMP_TREE"
-[ -f "$LOCAL_ROOT/docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md" ] && echo "GLOBAL_INDEX_REPO.md" >> "$TMP_TREE"
+[ -f "$LOCAL_ROOT/docs/01_docs_config_system/config_system_MD/README/README.md" ]      && echo "README.md" >> "$TMP_TREE"
+[ -f "$LOCAL_ROOT/docs/01_docs_config_system/config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md" ] && echo "GLOBAL_INDEX_REPO.md" >> "$TMP_TREE"
 
 TOTAL=$(wc -l < "$TMP_TREE")
 while IFS= read -r f; do echo "  $f"; done < "$TMP_TREE" >> "$LOG"
@@ -86,14 +86,14 @@ md5_both() {  # $1=fichier -> "brut normalise"
 }
 
 while IFS= read -r rel; do
-    # Mapping racine : Github/README.md (local) -> README.md (prod)
+    # Mapping racine : docs/01_docs_config_system/config_system_MD/README/README.md (local) -> README.md (prod)
     case "$rel" in
         README.md)
             lf="$LOCAL_ROOT/Github/$rel"
             pf="$PROD_ROOT/$rel"
             ;;
         GLOBAL_INDEX_REPO.md)
-            lf="$LOCAL_ROOT/docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md"
+            lf="$LOCAL_ROOT/docs/01_docs_config_system/config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md"
             pf="$PROD_ROOT/$rel"
             ;;
         *)

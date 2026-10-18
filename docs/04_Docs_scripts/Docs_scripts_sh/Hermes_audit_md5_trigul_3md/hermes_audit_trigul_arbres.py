@@ -20,7 +20,7 @@ import html as _html
 
 LOCAL = r'C:\Users\Berry Swann\Documents\ReBuild\docs'
 PROD = r'H:\docs'
-LOCAL_README = r'C:\Users\Berry Swann\Documents\ReBuild\Github\README.md'
+LOCAL_README = r'C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_MD\README\README.md'
 PROD_README = r'H:\README.md'
 REPO = 'BerrySwann/home_assistant_re-build'
 OUT_DIR = r'C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres'

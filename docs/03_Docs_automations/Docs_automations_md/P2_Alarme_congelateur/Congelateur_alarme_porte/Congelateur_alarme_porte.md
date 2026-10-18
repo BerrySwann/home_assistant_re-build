@@ -42,7 +42,7 @@ l'historique réel de `sensor.prise_congelateur_cuisine_nous_current`
 | Entité | Rôle |
 |:---|:---|
 | `sensor.tongel_temperature` | Capteur Zigbee2MQTT (Tongel), température congélateur, installé 2026-09-01 |
-| `binary_sensor.congelateur_compresseur_actif` | Template, cf. `docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_congelateur/P2_congelateur_compresseur_actif.yaml` |
+| `binary_sensor.congelateur_compresseur_actif` | Template, cf. `docs/01_docs_config_system/config_system_SH_PY_YAML/templates/P2_prise/P2_congelateur/P2_congelateur_compresseur_actif.yaml` |
 
 ### Notifications
 

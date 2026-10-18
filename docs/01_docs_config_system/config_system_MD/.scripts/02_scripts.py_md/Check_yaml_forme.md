@@ -16,7 +16,7 @@ Contrôle la forme des `*.yaml` d'un dossier, d'après les règles YAML de `CLAU
 
 `python check_yaml_forme.py [dossier]`
 
-- Sans argument : `docs/01_docs_config_system/config_system_YAML` (chemin relatif au dossier ReBuild, valeur `DEFAUT_LOCAL` du script).
+- Sans argument : `docs/01_docs_config_system/config_system_SH_PY_YAML` (chemin relatif au dossier ReBuild, valeur `DEFAUT_LOCAL` du script).
 - Sur la machine HA : passer `/config` en argument.
 - Code de retour : 0 sans anomalie, 1 avec anomalies, 2 si le dossier est introuvable.
 

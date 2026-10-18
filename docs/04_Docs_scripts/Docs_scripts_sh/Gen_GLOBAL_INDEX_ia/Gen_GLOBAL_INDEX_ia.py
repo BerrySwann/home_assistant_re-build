@@ -33,6 +33,10 @@ DESC = {
   "Claude, via /update-arbo et /histo (etape 6)",
   "Arborescences completes local, prod et GitHub avec les comptages de fichiers, URLs raw GitHub.",
   "Audit de fichiers, synchro GitHub, recherche d'un fichier en prod, verification de l'arborescence locale."),
+ "SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md": (
+  "Claude et les skills qui copient ou comparent des fichiers (histo, ha-push-yaml, ha-push-docs, ha-trigul...)",
+  "Carte unique des fichiers presents a plusieurs emplacements (local, prod racine, prod miroir docs, GitHub racine et docs/) et regles de correspondance ; script de controle Verif_emplacements.py.",
+  "Avant un push de config, de GLOBAL_INDEX_REPO ou de README, ou un controle local / prod / GitHub."),
  "SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md": (
   "Claude, en mode expert audit energetique",
   "Prompt expert : caracteristiques du logement, equipements, methodes d'analyse, missions et format du rapport d'audit conso et thermique.",
@@ -69,7 +73,7 @@ DESC = {
 
 # autres index globaux du projet : (libelle, chemin relatif a docs/00_IA, qui le tient, controle)
 AUTRES = [
- ("GLOBAL_INDEX_REPO.md", "../05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md", "Index du depot GitHub, liens depuis la racine du depot. Tenu a la main par /histo (sync_index) ; a pousser aux 2 endroits de la prod (racine et miroir docs).", "check_global_index.py"),
+ ("GLOBAL_INDEX_REPO.md", "../01_docs_config_system/config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md", "Index du depot GitHub, liens depuis la racine du depot. Tenu a la main par /histo (sync_index) ; a pousser aux 2 endroits de la prod (racine et miroir docs).", "check_global_index.py"),
  ("GLOBAL_INDEX_AUTOMATIONS.md", "../03_docs_automations/GLOBAL_INDEX_AUTOMATIONS.md", "Genere par gen_global_index_automations.py.", "etape 8 de /histo + check_global_index.py"),
  ("GLOBAL_INDEX_VIGNETTES_PAGES.md", "../02_docs_dashboard/GLOBAL_INDEX_VIGNETTES_PAGES.md", "Genere par gen_global_index_vignettes_pages.py.", "etape 9 de /histo + check_global_index.py"),
  ("GLOBAL_INDEX_SCRIPTS_SH.md", "../04_docs_scripts/GLOBAL_INDEX_SCRIPTS_SH.md", "Genere par gen_global_index_scripts.py (scripts bash et python).", "etape 10 de /histo + check_global_index.py"),

@@ -217,7 +217,7 @@ Les 2 dernieres actions avant de fermer la session, dans cet ordre :
 3. Chaque `push_*` (`/ha_push_yaml`, `/ha_push_docs`, `/ha_push_md`) met systematiquement a jour le `.md` (la fiche) du fichier pousse : `docs_automations_MD`, `docs_scripts_YAML_MD`, `docs_scripts_SH_MD`, `dashboard_docs_MD`.
 
 **Workflow de modification (depuis le 2026-10-04)** : on ne modifie plus un fichier directement
-en prod (H:\). On edite la copie LOCALE (`docs/01_docs_config_system/config_system_YAML/`,
+en prod (H:\). On edite la copie LOCALE (`docs/01_docs_config_system/config_system_SH_PY_YAML/`,
 image miroir 1:1 de H:\ - voir `ha-resync-docs` pour la tenir a jour), avec une sauvegarde locale
 avant chaque modification (REGLE DE SAUVEGARDE ci-dessous), puis on pousse vers H:\ via
 `ha-push-yaml` (MD5-first, confirmation obligatoire). La prod ne recoit jamais de sauvegarde ni de
@@ -299,8 +299,8 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
 
 Copie de prod : `H:\Docs\` (poussee depuis le local, ne jamais la modifier directement). GitHub `home_assistant_re-build` : backup via git auto depuis HA, reflet de la prod.
 
-`H:\Docs\` (racine, hors `01_docs_config_system\config_system_YAML\`) ne contient QUE des .md, histo et yaml Dashboard - **jamais de YAML config HA**.
-`H:\docs\01_docs_config_system\config_system_YAML\` est l'image locale miroir de la config YAML de prod (sensors, templates, utility_meter, command_line, groups, input_booleans, shell_command, themes, blueprints) - alimentee par resync GitHub (`ha-resync-docs`) et par les push normaux (`ha-push-yaml`). Exception documentee a la regle ci-dessus, pas une contradiction.
+`H:\Docs\` (racine, hors `01_docs_config_system\config_system_SH_PY_YAML\`) ne contient QUE des .md, histo et yaml Dashboard - **jamais de YAML config HA**.
+`H:\docs\01_docs_config_system\config_system_SH_PY_YAML\` est l'image locale miroir de la config YAML de prod (sensors, templates, utility_meter, command_line, groups, input_booleans, shell_command, themes, blueprints) - alimentee par resync GitHub (`ha-resync-docs`) et par les push normaux (`ha-push-yaml`). Exception documentee a la regle ci-dessus, pas une contradiction.
 
 > ⚠️ Audit MD5 docs : couvre les `.md` ET les `.yaml` dashboard (`dashboard_docs_YAML/`). Ne pas oublier les yaml lors d'un audit de cohérence local vs H:\Docs\.
 
@@ -319,7 +319,7 @@ Copie de prod : `H:\Docs\` (poussee depuis le local, ne jamais la modifier direc
 
 | Type | Injection en prod | Extraction / stockage local |
 |:-----|:-------------------|:-----------------------------|
-| **Config YAML** (sensors/templates/UM/command_line) | Edition depuis la copie LOCALE `docs/01_docs_config_system/config_system_YAML/`, sauvegarde locale `.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}` avant modif (REGLE DE SAUVEGARDE), puis push vers `H:\` via `ha-push-yaml` (MD5-first, confirmation obligatoire) | Le fichier local (sans suffixe de date) est deja la reference - pas d'extraction a faire apres coup |
+| **Config YAML** (sensors/templates/UM/command_line) | Edition depuis la copie LOCALE `docs/01_docs_config_system/config_system_SH_PY_YAML/`, sauvegarde locale `.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}` avant modif (REGLE DE SAUVEGARDE), puis push vers `H:\` via `ha-push-yaml` (MD5-first, confirmation obligatoire) | Le fichier local (sans suffixe de date) est deja la reference - pas d'extraction a faire apres coup |
 | **Automations** | Toujours à la main dans l'UI HA (Eric), jamais `automations.yaml` en direct | Une fois validée, **Claude** récupère uniquement le bloc modifié et le stocke individuellement dans `docs/03_docs_automations/docs_automations_YAML/{Pole}/` |
 | **Dashboard** | Toujours à la main dans l'UI HA (Paramètres → Tableau de bord → Modifier en YAML) | Pas d'extraction automatique - **Eric** récupère le code à la main et le colle. **Claude** vérifie, stocke dans `docs/02_docs_dashboard/dashboard_docs_YAML/L{x}C{x}_.../` sous le nom de travail **SANS date**, avec une sauvegarde `.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}` avant chaque modification (REGLE DE SAUVEGARDE) |
 
@@ -332,7 +332,7 @@ Copie de prod : `H:\Docs\` (poussee depuis le local, ne jamais la modifier direc
 > 1×/semaine minimum, avant toute session majeure.
 
 > ⚠️ Mis a jour le 2026-10-04 : ce protocole date d'avant le workflow local-first. Depuis,
-> pour `config_system_YAML/`, le sens d'ecriture est LOCAL -> H:\ (via `ha-push-yaml`) -> GitHub
+> pour `config_system_SH_PY_YAML/`, le sens d'ecriture est LOCAL -> H:\ (via `ha-push-yaml`) -> GitHub
 > (auto-backup HA). Le local est la source de verite (voir SOURCE DE VERITE) ;
 > H:\ est l'etat pousse.
 > Un ecart LOCAL vs GitHub aujourd'hui signifie le plus souvent un push local -> H:\ pas encore
@@ -653,7 +653,7 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 
 | Type de fichier | Emplacement local (source) | Destination |
 |:---|:---|:---|
-| Config YAML (sensors, templates, utility_meter, command_line...) | `docs/01_docs_config_system/config_system_YAML/` | push `H:\` via `ha-push-yaml` |
+| Config YAML (sensors, templates, utility_meter, command_line...) | `docs/01_docs_config_system/config_system_SH_PY_YAML/` | push `H:\` via `ha-push-yaml` |
 | Docs `.md` (dashboard, automations, scripts, system) | `docs/0x_*_MD/` | push `H:\Docs\` via `ha-push-docs` / `ha-push-md` |
 | Dashboards YAML (vignettes, pages, cartes) | `docs/02_docs_dashboard/dashboard_docs_YAML/` | push `H:\Docs\` |
 | Automations YAML | `docs/03_docs_automations/docs_automations_YAML/` | UI HA à la main, jamais en direct |

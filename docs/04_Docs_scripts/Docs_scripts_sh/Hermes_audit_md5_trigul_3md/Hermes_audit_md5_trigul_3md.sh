@@ -12,7 +12,7 @@
 # depuis le PC (quand il est allumé).
 #
 # ## 🧮 CALCUL & SOURCES :
-# - LOCAL  : $LOCAL_ROOT/docs/**/*.md + Github/README.md + docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md
+# - LOCAL  : $LOCAL_ROOT/docs/**/*.md + docs/01_docs_config_system/config_system_MD/README/README.md + docs/01_docs_config_system/config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md
 # - PROD   : $PROD_ROOT/docs/**/*.md + README.md + GLOBAL_INDEX_REPO.md
 # - GITHUB : curl raw https://raw.githubusercontent.com/.../main/docs/<relpath>
 # - MD5 brut (octets exacts) + MD5 normalisé (CRLF->LF)
@@ -68,10 +68,10 @@ echo ""
 echo "── PASS 1 : TREE (local ReBuild = SOURCE DE VÉRITÉ) ──────────────────────────"
 } > "$LOG"
 
-find "$LOCAL_ROOT/docs" -name "*.md" -not -name "*.bak*" -not -iname "*_archive_*" -not -ipath "*/_archive/*" -not -path "*/05_docs_MD_system/GLOBAL_INDEX_REPO/*" 2>/dev/null | sed "s|^$LOCAL_ROOT/||" | sort > "$TMP_TREE" || true
+find "$LOCAL_ROOT/docs" -name "*.md" -not -name "*.bak*" -not -iname "*_archive_*" -not -ipath "*/_archive/*" -not -path "*/config_system_MD/GLOBAL_INDEX_REPO/*" 2>/dev/null | sed "s|^$LOCAL_ROOT/||" | sort > "$TMP_TREE" || true
 # Fichiers racine : mapping local Github/ -> chemin repo
-[ -f "$LOCAL_ROOT/Github/README.md" ]      && echo "README.md" >> "$TMP_TREE"
-[ -f "$LOCAL_ROOT/docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md" ] && echo "GLOBAL_INDEX_REPO.md" >> "$TMP_TREE"
+[ -f "$LOCAL_ROOT/docs/01_docs_config_system/config_system_MD/README/README.md" ]      && echo "README.md" >> "$TMP_TREE"
+[ -f "$LOCAL_ROOT/docs/01_docs_config_system/config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md" ] && echo "GLOBAL_INDEX_REPO.md" >> "$TMP_TREE"
 
 TOTAL=$(wc -l < "$TMP_TREE")
 while IFS= read -r f; do echo "  $f"; done < "$TMP_TREE" >> "$LOG"
@@ -96,7 +96,7 @@ while IFS= read -r rel; do
             pf="$PROD_ROOT/$rel"
             ;;
         GLOBAL_INDEX_REPO.md)
-            lf="$LOCAL_ROOT/docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md"
+            lf="$LOCAL_ROOT/docs/01_docs_config_system/config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md"
             pf="$PROD_ROOT/$rel"
             ;;
         *)

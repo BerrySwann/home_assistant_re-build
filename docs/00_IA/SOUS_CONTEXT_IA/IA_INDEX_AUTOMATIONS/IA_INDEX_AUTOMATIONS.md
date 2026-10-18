@@ -8,7 +8,7 @@
 
 Les automations sont indexees a deux endroits :
 - **Index detaille genere** : `docs/03_docs_automations/GLOBAL_INDEX_AUTOMATIONS.md` (une ligne par automation : alias, id prod, id local, entity HA, fiche .md, YAML source, commentaire). Regenere a chaque `/histo` par `docs/04_docs_scripts/docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py`. Ne jamais le modifier a la main.
-- **Resume** : section `03-AUTOMATIONS` de `GLOBAL_INDEX_REPO.md` (racine de `H:\` + copie locale `docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md`). Maintenue a la main, non regeneree.
+- **Resume** : section `03-AUTOMATIONS` de `GLOBAL_INDEX_REPO.md` (racine de `H:\` + copie locale `docs/01_docs_config_system/config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md`). Maintenue a la main, non regeneree.
 
 Il n'y a plus de fichier `INDEX_AUTOMATIONS.md` distinct - fusionne dans GLOBAL_INDEX_REPO.md (2026-07-16).
 

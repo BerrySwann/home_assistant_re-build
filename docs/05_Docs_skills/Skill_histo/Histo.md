@@ -1,9 +1,11 @@
 ---
-name: histo
+name: "histo"
 description: "Skill HA ReBuild - genere un journal de bord ultra-compact et le sauvegarde, puis enchaine automatiquement le sync_index (DEPENDANCES_GLOBALES.md, docs impactees, GLOBAL_INDEX_REPO.md), le journal fusionne et la copie Obsidian et le menage des sauvegardes .bak puis la mise a jour du tree (IA_ARBO_DETAIL.md). Declencher OBLIGATOIREMENT quand l'utilisateur tape /histo, demande un journal de bord, genere l'histo, fais un resume a sauvegarder, cree un log de session, exporte l'historique. Usage typique : fin de session, avant de fermer Cowork."
 ---
 
 # Skill : /histo - Journal de bord + sync_index (dont GLOBAL_INDEX_REPO) + journal fusionne + copie Obsidian + menage .bak + tree
+
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18, point 9 de l'etape 6).
 
 ## Objectif
 
@@ -13,11 +15,12 @@ Six actions, plus l'etape 5B, enchainees sans interruption :
 
 3. Mettre a jour le JOURNAL FUSIONNE (historique/) avec la session qui vient d'etre ecrite
 4. Copier le journal de session et le journal fusionne dans le coffre Obsidian
-5. Faire le menage des sauvegardes (.bak) du perimetre docs, selon la REGLE DE SAUVEGARDE (etape 5)
+5. Faire le menage des sauvegardes (.bak) du perimetre docs ET du dossier historique\MD5\ (rapports trigul, audits, Hermes compris), selon la REGLE DE SAUVEGARDE (etape 5)
 5B. Verifier l'export Dashboard depose a la racine de la prod et ne garder qu'un export en prod (etape 5B)
 6. Mettre a jour les tree : IA_ARBO_DETAIL.md (comptages local, prod, GitHub), avec le skill update-arbo (etape 6)
 6B. Controler les 9 fichiers de SOUS_CONTEXT_IA (lecture seule, rapport d'ecarts, etape 6 point 7)
 6C. Controler tous les index globaux (lecture seule, rapport d'ecarts, etape 6 point 8)
+6D. Controler les fichiers a plusieurs emplacements (lecture seule, rapport d'ecarts, etape 6 point 9)
 
 Ne jamais demander confirmation entre les etapes. Les faire dans la foulee. Seule exception : le DRY-RUN du menage (etape 5) a la premiere execution sur un dossier, qui s'arrete pour presenter la liste et attendre le go de l'utilisateur (voir les garde-fous de l'etape 5).
 
@@ -82,7 +85,7 @@ Regles de mise en forme :
 
 ### Regles
 
-- Chemins courts (ex : `docs/01_docs_config_system/config_system_YAML/sensors/P1_kWh_clim.yaml`)
+- Chemins courts (ex : `docs/01_docs_config_system/config_system_SH_PY_YAML/sensors/P1_kWh_clim.yaml`)
 - IDs matrice pour les vignettes (L2C1, L1C3, etc.)
 - Si session vide : indiquer `SESSION VIDE - aucune modification`
 - Bloc autonome : lisible sans contexte par quelqu'un qui reprend le projet plus tard
@@ -107,7 +110,7 @@ Immediatement apres la sauvegarde du journal, executer le sync_index complet.
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\03_docs_automations\docs_automations_MD\`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_YAML_MD\`
-- `C:\Users\Berry Swann\Documents\ReBuild\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md`
+- `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_MD\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md`
 
 **Chemin bash sandbox :** detecter via `ls /sessions/` si necessaire (prefixe de session variable).
 
@@ -127,7 +130,7 @@ Immediatement apres la sauvegarde du journal, executer le sync_index complet.
 
 ### Mise a jour de GLOBAL_INDEX_REPO.md
 
-Fichier : `C:\Users\Berry Swann\Documents\ReBuild\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md` (copie de travail locale, ses liens sont relatifs a la racine du depot : elle ne se clique pas ici ; poussee en prod a chaque /histo aux deux endroits (miroir H:\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\ et racine H:\GLOBAL_INDEX_REPO.md, lue sur GitHub), voir le point 8 ci-dessous ; GitHub est alimente par le backup HA depuis H:, jamais en push direct).
+Fichier : `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_MD\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md` (copie de travail locale, deplacee par Eric le 2026-10-18 depuis `docs\05_docs_MD_system\GLOBAL_INDEX_REPO\` ; ses liens sont relatifs a la racine du depot : elle ne se clique pas ici ; poussee en prod a chaque /histo aux deux endroits (miroir H:\docs\01_docs_config_system\config_system_MD\GLOBAL_INDEX_REPO\ et racine H:\GLOBAL_INDEX_REPO.md, lue sur GitHub), voir le point 8 ci-dessous ; GitHub est alimente par le backup HA depuis H:, jamais en push direct).
 
 1. Si aucun fichier de la session n'est ajoute, renomme, supprime ou deplace, et qu'aucune entite citee n'a change : noter "GLOBAL_INDEX_REPO deja a jour" et passer au point 8 (le push compare quand meme les MD5).
 2. Sinon, faire d'abord une sauvegarde dans le meme dossier : `GLOBAL_INDEX_REPO.bak_AAAA_MM_JJ_HHhMMmSSs.md` (format PowerShell `Get-Date -Format "yyyy_MM_dd_HH'h'mm'm'ss's'"` ; le dossier INDEX_GLOBAL est dans le perimetre du menage de l'etape 5).
@@ -137,10 +140,10 @@ Fichier : `C:\Users\Berry Swann\Documents\ReBuild\docs\05_docs_MD_system\GLOBAL_
    - mettre a jour les compteurs de section concernes (par exemple le nombre d'automations ou de fichiers de scripts) en les recomptant, sans les deduire de l'ancien nombre
    - mettre a jour la ligne d'en-tete de date
 4. Garder le format existant du fichier : UTF-8 sans BOM, fins de ligne LF (verifie le 2026-10-11 : le fichier est en LF, ne pas le convertir en CRLF). Controler le format avant d'ecrire.
-5. Controles apres ecriture : le fichier se relit en UTF-8, les compteurs modifies correspondent au nombre d'entrees, les liens ajoutes pointent vers des fichiers qui existent. Les entites ajoutees doivent avoir ete verifiees en live ou lues dans un fichier de la session, jamais recopiees de memoire.
+5. Controles apres ecriture : le fichier se relit en UTF-8, les compteurs modifies correspondent au nombre d'entrees, les liens ajoutes pointent vers des fichiers qui existent avec la casse exacte (GitHub distingue la casse ; resync des 315 liens le 2026-10-18). Les entites ajoutees doivent avoir ete verifiees en live ou lues dans un fichier de la session, jamais recopiees de memoire.
 6. Les ecarts deja presents avant la session (entites citees qui ne repondent plus, desequilibres de compteurs) ne sont pas corriges ici : les mentionner dans le rapport s'ils concernent la session.
-7. Note pour ha-trigul : depuis le push de /histo (decide par Eric le 2026-10-14), `GLOBAL_INDEX_REPO.md` est present en prod sous docs/05_docs_MD_system/GLOBAL_INDEX_REPO/ (miroir) ; il reste ABSENT sur le depot tant que le backup HA ne l'a pas repris ; son exemplaire a la racine de H: (GLOBAL_INDEX_REPO.md) n'est pas compare par le script.
-8. Push en prod (decide par Eric le 2026-10-14, il remplace l'ancienne regle "pas de push automatique" : Eric avait pris ce fichier pour un autre) : apres les controles du point 5, que le fichier ait ete modifie ou non, comparer le MD5 de la copie de travail a chacune des DEUX destinations, comme l'etape 5B de ha-push-docs : `H:\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md` (miroir) et `H:\GLOBAL_INDEX_REPO.md` (racine). Copier seulement celles qui different, sans sauvegarde sur H: (les `.bak` restent locaux), puis verifier le MD5 : source = miroir = racine. Jamais un seul des deux. Ne pas pousser si les controles du point 5 ont echoue. Si H: est inaccessible : le noter sans bloquer. GitHub : jamais de push direct (le depot est alimente par le backup HA depuis H:).
+7. Note pour ha-trigul : depuis le push de /histo (decide par Eric le 2026-10-14), `GLOBAL_INDEX_REPO.md` est present en prod sous docs/01_docs_config_system/config_system_MD/GLOBAL_INDEX_REPO/ (miroir) ; il reste ABSENT sur le depot tant que le backup HA ne l'a pas repris ; son exemplaire a la racine de H: (GLOBAL_INDEX_REPO.md) n'est pas compare par le script du trigul ; il l'est par Verif_emplacements.py (point 9 de l'etape 6).
+8. Push en prod (decide par Eric le 2026-10-14, il remplace l'ancienne regle "pas de push automatique" : Eric avait pris ce fichier pour un autre) : apres les controles du point 5, que le fichier ait ete modifie ou non, comparer le MD5 de la copie de travail a chacune des DEUX destinations, comme l'etape 5B de ha-push-docs : `H:\docs\01_docs_config_system\config_system_MD\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md` (miroir) et `H:\GLOBAL_INDEX_REPO.md` (racine). Copier seulement celles qui different, sans sauvegarde sur H: (les `.bak` restent locaux), puis verifier le MD5 : source = miroir = racine. Jamais un seul des deux. Ne pas pousser si les controles du point 5 ont echoue. Si H: est inaccessible : le noter sans bloquer. GitHub : jamais de push direct (le depot est alimente par le backup HA depuis H:).
 
 ### Regles sync_index
 
@@ -230,8 +233,8 @@ Le journal fusionne est un seul fichier Markdown qui regroupe tous les journaux 
 
 Applique la REGLE DE SAUVEGARDE du 2026-10-08 (definie dans CLAUDE.md). Tout se passe en LOCAL, jamais sur H: ni sur D:.
 
-**Perimetre :** `C:\Users\Berry Swann\Documents\ReBuild\docs\00_*` a `05_*` (recursif) + `C:\Users\Berry Swann\Documents\ReBuild\Claude md SAVE\`.
-**Hors perimetre (ne pas toucher) :** TODO, Github, historique, Infra_Proxmox, `_old_avant_staging` (racine et sous-dossiers `docs\`), le reste de `.claude` (skills et commands actifs). Le dossier `.claude\ARCHIVE\` est HORS perimetre (decision d'Eric le 2026-10-11 : conserve pour un eventuel retour en arriere, a supprimer quand il ne servira plus ; il ne vit plus avec histo). Les sauvegardes d'un skill vivent dans `docs\05_docs_skills\skill_<nom>\` et suivent la meme regle que le reste (jusqu'a 10 `.bak_AAAA_MM_JJ_HHhMMmSSs` pour le jour, 3 `.bak_AAAA_MM_JJ` pour les jours passes). Les exports `docs\02_docs_dashboard\dashboard_docs_YAML\Dashboard_COMPLET\` sont conserves tels quels : jamais renommes en `.bak`, jamais mis a la corbeille par ce menage (voir etape 5B). Ignorer tout dossier `_ARCHIVE` / `ARCHIVE` et tout fichier dont le nom contient `_archive_` (ex : `_ARCHIVE\DEPENDANCES_GLOBALES_archive_2026-10-07_18h13.md`).
+**Perimetre :** `C:\Users\Berry Swann\Documents\ReBuild\docs\00_*` a `05_*` (recursif) + `C:\Users\Berry Swann\Documents\ReBuild\Claude md SAVE\` + `C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\` (ajoute par Eric le 2026-10-18 : regles propres a ce dossier dans le chapitre "Cas particulier : historique\MD5\" plus bas).
+**Hors perimetre (ne pas toucher) :** TODO, Github, historique (a l'unique exception du sous-dossier `historique\MD5\` ci-dessus : le reste de historique, c'est-a-dire les journaux `histo_*`, `JOURNAL_FUSIONNE_*`, `modifs\`, les plans et rapports de menage, reste intouche), Infra_Proxmox, `_old_avant_staging` (racine et sous-dossiers `docs\`), le reste de `.claude` (skills et commands actifs). Le dossier `.claude\ARCHIVE\` est HORS perimetre (decision d'Eric le 2026-10-11 : conserve pour un eventuel retour en arriere, a supprimer quand il ne servira plus ; il ne vit plus avec histo). Les sauvegardes d'un skill vivent dans `docs\05_docs_skills\skill_<nom>\` et suivent la meme regle que le reste (jusqu'a 10 `.bak_AAAA_MM_JJ_HHhMMmSSs` pour le jour, 3 `.bak_AAAA_MM_JJ` pour les jours passes). Les exports `docs\02_docs_dashboard\dashboard_docs_YAML\Dashboard_COMPLET\` sont conserves tels quels : jamais renommes en `.bak`, jamais mis a la corbeille par ce menage (voir etape 5B). Ignorer tout dossier `_ARCHIVE` / `ARCHIVE` et tout fichier dont le nom contient `_archive_` (ex : `_ARCHIVE\DEPENDANCES_GLOBALES_archive_2026-10-07_18h13.md`).
 
 **"Poubelle" = corbeille Windows**, jamais de suppression definitive :
 ```powershell
@@ -252,6 +255,8 @@ Deux cibles seulement :
 Un nom de fichier ne porte JAMAIS de date dans sa partie courante. En cas de doute (nom qui pourrait
 etre un vrai document et non une sauvegarde), on signale et on ne touche pas.
 
+(Exception : dans `historique\MD5\`, les rapports quotidiens portent leur date dans leur nom par construction, par exemple `trigul_arbres_2026-10-18.txt`. Ce sont de vrais fichiers, jamais des sauvegardes : voir le chapitre dedie.)
+
 ### Formats reconnus (dans le perimetre uniquement)
 
 | Famille | Exemple | Traitement |
@@ -269,7 +274,7 @@ etre un vrai document et non une sauvegarde), on signale et on ne touche pas.
 
 ### Protocole
 
-1. Date du jour = `Get-Date -Format "yyyy_MM_dd"`. **Les sauvegardes du jour ne sont jamais touchees** (famille A du jour, et famille D du jour).
+1. Date du jour = `Get-Date -Format "yyyy_MM_dd"`. **Les sauvegardes du jour ne sont jamais touchees** (famille A du jour, et famille D du jour). (Seul `historique\MD5\` applique aussi le plafond de 10 au jour meme, voir le chapitre dedie.)
 2. Regrouper par fichier d'origine (meme dossier, meme nom de base, meme famille) puis, dans chaque groupe, par jour passe.
 3. Pour chaque jour passe d'un groupe :
    - garder la sauvegarde la plus RECENTE : d'abord par l'horodatage lu dans le nom (jour + heure) ; a egalite (noms sans heure, ex `.bak_2026-09-20`, `.bak_2026-09-20b`, `.bak2_...`), par la date de modification du fichier ; si l'egalite persiste et que les contenus different (MD5), ne rien supprimer et signaler le groupe ; si les contenus sont identiques, garder n'importe lequel ;
@@ -279,6 +284,19 @@ etre un vrai document et non une sauvegarde), on signale et on ne touche pas.
    - famille E : renommer en `{nom_de_travail}.bak_AAAA_MM_JJ.{ext}`, ou `{nom_de_travail}` est le nom du fichier de travail courant, extension comprise (ex : `CLAUDE_backup_2026-07-31.md` -> `CLAUDE.bak_2026_07_31.md`, `CLAUDE_2026-10-04.md` -> `CLAUDE.bak_2026_10_04.md`) ; date lue dans le nom, a defaut date de modification.
 4. Plafond : si un fichier a plus de 3 `.bak_AAAA_MM_JJ.{ext}` (apres les renommages ci-dessus, famille A, B et C), la plus ancienne va a la corbeille Windows, et ainsi de suite jusqu'a 3. Le plafond de 3 s'applique a toutes les familles (A, B, C, D, E).
 5. Si la date change pendant l'execution (minuit passe), garder la date relevee au lancement de l'etape.
+
+### Cas particulier : historique\MD5\ (decide par Eric le 2026-10-18, "Hermes compris")
+
+Dossier : `C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\` (rapports de trigul, audits, rapports et sauvegardes produits par Hermes dans ce dossier ; sous-repertoires numerotes `00_Verif_Final_trigul_arbres`, `01_trigul_profond`, `02_categories_ha`, `03_verif_emplacements`). Les histos suivent la meme regle de menage que les docs, avec ces precisions :
+
+- **Groupe = un rapport**, identifie par son nom complet, date comprise (ex : `trigul_arbres_2026-10-18.txt`). La date du nom d'un rapport fait partie de son nom de travail : les familles D et E ne s'appliquent PAS a un rapport (un rapport date n'est jamais traite comme une version datee d'un autre fichier). Les rapports eux-memes et les copies `_latest` ne sont jamais renommes, jamais mis a la corbeille, jamais modifies par le menage.
+- **Sauvegardes du jour** (date lue dans le nom de la sauvegarde) : 10 au plus par rapport, au format `rapport.bak_AAAA_MM_JJ_HHhMMmSSs.ext`. Au-dela de 10, les plus anciennes vont a la corbeille Windows.
+- **Jours passes** : par rapport et par jour, garder la sauvegarde la plus recente (horodatage du nom, sinon date de modification), renommee `rapport.bak_AAAA_MM_JJ.ext` ; les autres de ce jour vont a la corbeille Windows. Plafond de 3 jours par rapport : les 3 plus recents sont gardes, les plus anciens vont a la corbeille.
+- **Sauvegarde sans extension** (ex : `rapport.bak_2026_10_17`) : elle prend l'extension du rapport (`.txt`, `.html`...). Collision avec un nom existant : ne rien renommer, signaler.
+- **Ancien nom `bak_HHhMM_libelle`** (sans date de sauvegarde dans le nom) : la date prise est celle du nom du rapport ; le cas est signale dans le rapport de menage comme "date deduite du nom du rapport".
+- Garde-fous du chapitre commun (collision, date illisible, nom douteux, erreur de la corbeille) : ne rien supprimer, signaler.
+- Premiere execution faite le 2026-10-18 : plan `historique\menage_MD5_dryrun_2026-10-18.txt`, execution `historique\menage_MD5_2026-10-18.txt` (go d'Eric obtenu apres dry-run). Les executions suivantes n'attendent plus de go : ecrire le plan dans `historique\menage_MD5_dryrun_AAAA-MM-JJ.txt`, le citer dans le rapport final, executer, ecrire le compte rendu dans `historique\menage_MD5_AAAA-MM-JJ.txt` (chemin d'origine de chaque envoi en corbeille, restaurable depuis la corbeille Windows).
+- Le menage de ce dossier se fait avant le tree (etape 6), comme le reste de l'etape 5. Journal des modifs : une ligne LOT avec le chemin du rapport (skill journal-modifs).
 
 ### Garde-fous (ne rien supprimer, remonter le souci)
 
@@ -296,6 +314,7 @@ etre un vrai document et non une sauvegarde), on signale et on ne touche pas.
 - nombre de fichiers renommes, envoyes a la corbeille, ignores (archives / jour courant)
 - liste des soucis signales (collision, date illisible, nom douteux, erreur) avec le chemin complet
 - pour chaque envoi en corbeille : le chemin d'origine (restaurable depuis la corbeille Windows)
+- pour `historique\MD5\` : les memes comptes, separes de ceux de docs, avec le chemin du plan et du compte rendu (`historique\menage_MD5_*.txt`) et la liste des cas "date deduite du nom du rapport"
 
 ---
 
@@ -322,8 +341,9 @@ Met a jour l'arborescence documentee : `C:\Users\Berry Swann\Documents\ReBuild\d
 4. Pousser ensuite vers `H:\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md` (MD5 local contre prod avant et apres). Jamais de sauvegarde sur H:.
 5. Si l'API GitHub est injoignable : ne pas inventer de valeur, garder les anciennes valeurs GitHub du fichier et le signaler dans le rapport.
 6. Ne pas modifier les sections narratives du fichier.
-7. Controle des 9 fichiers de `docs\00_IA\SOUS_CONTEXT_IA\` (decide le 2026-10-13, apres le push de IA_ARBO_DETAIL pour que le MD5 prod soit definitif) : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\check_sous_context_ia\check_sous_context_ia.py"`. Script en LECTURE SEULE : il ne corrige rien. Il verifie par fichier la structure (un dossier par fichier, baks bien nommes, plafonds 10 le jour meme / 3 par jour passe), le MD5 prod (IA_SKILLS_INVENTAIRE absent de la prod = attendu), la date declaree en en-tete (ecart au-dela de 60 jours), les chemins `docs/NN_...` cites qui n'existent plus, les nombres "N automations" / "N vignettes" contre la prod et les dossiers, et les entites citees absentes du registre HA et des etats. Mettre dans le rapport final la derniere ligne `controle sous_context_ia: dossiers=N baks=N ecarts=N casses=N` et chaque ecart cite. Le script controle aussi (depuis le 2026-10-17) que chaque chemin `docs/00_IA/...md` cite dans `Claude md SAVE\CLAUDE.md` existe en local avec la casse exacte : mettre dans le rapport la ligne `CLAUDE.md : chemins docs/00_IA cites=N morts=N` ; un chemin mort est un ecart signale a Eric, a corriger dans CLAUDE.md et ses 3 fichiers apparentes seulement sur sa demande. Un ecart nouveau par rapport a la session precedente est signale a Eric, jamais corrige sans demande. Si H: est inaccessible : le noter sans bloquer. Fichiers figes : ceux listes dans la constante FIGES du script (nom -> date du gel) ne subissent plus de controle de contenu, seulement structure, baks et MD5 prod, plus un ecart "fige mais modifie depuis" ; seul Eric decide de figer un fichier, ne jamais en figer de soi-meme.
+7. Controle des 9 fichiers de `docs\00_IA\SOUS_CONTEXT_IA\` (decide le 2026-10-13, apres le push de IA_ARBO_DETAIL pour que le MD5 prod soit definitif) : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\check_sous_context_ia\check_sous_context_ia.py"`. Script en LECTURE SEULE : il ne corrige rien. Il verifie par fichier la structure (un dossier par fichier, baks bien nommes, plafonds 10 le jour meme / 3 par jour passe), le MD5 prod (IA_SKILLS_INVENTAIRE absent de la prod = attendu), la date declaree en en-tete (ecart au-dela de 60 jours), les chemins `docs/NN_...` cites qui n'existent plus, les nombres "N automations" / "N vignettes" contre la prod et les dossiers, et les entites citees absentes du registre HA et des etats. Mettre dans le rapport final la derniere ligne `controle sous_context_ia: dossiers=N baks=N ecarts=N casses=N` et chaque ecart cite. Le script controle aussi (depuis le 2026-10-17) que chaque chemin `docs/00_IA/...md` cite dans `Claude md SAVE\CLAUDE.md` existe en local avec la casse exacte : mettre dans le rapport la ligne `CLAUDE.md : chemins docs/00_IA cites=N morts=N` ; un chemin mort est un ecart signale a Eric, a corriger dans CLAUDE.md et ses 3 fichiers apparentes seulement sur sa demande. Un ecart nouveau par rapport a la session precedente est signale a Eric, jamais corrige sans demande. Si H: est inaccessible : le noter sans bloquer. Fichiers figes : ceux listes dans la constante FIGES du script (nom -> date du gel) ne subissent plus de controle de contenu, seulement structure, baks et MD5 prod, plus un ecart "fige mais modifie depuis" ; seul Eric decide de figer un fichier, ne jamais en figer de soi-meme. (Depuis le 2026-10-18, SOUS_CONTEXT_IA compte aussi IA_CARTE_EMPLACEMENTS : si le script annonce un nombre de dossiers different de 9, c'est attendu, le signaler sans corriger.)
 8. Controle de tous les index globaux (decide le 2026-10-13, apres les regenerations de l'etape 2 et les pushs) : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\check_global_index\check_global_index.py"`. Script en LECTURE SEULE. Il verifie, pour GLOBAL_INDEX_REPO, GLOBAL_INDEX_AUTOMATIONS, GLOBAL_INDEX_VIGNETTES_PAGES, GLOBAL_INDEX_SCRIPTS_SH, GLOBAL_INDEX_SCRIPTS_YAML, ENTITES_GLOBAL_INDEX et GLOBAL_INDEX_IA : l'existence, les liens casses (ceux de GLOBAL_INDEX_REPO sont relatifs a la racine du depot : resolus dans ReBuild puis en prod), l'equilibre des balises details et blockquote du REPO, la presence et le MD5 en prod (GLOBAL_INDEX_REPO aux 2 emplacements), les entites citees absentes du registre HA et des etats (REPO et ENTITES). Mettre dans le rapport final la derniere ligne `controle global_index: index=N liens=N casses=N ecarts=N` et chaque ecart cite. Ne rien corriger sans demande : les liens casses deja connus de la section 03 de GLOBAL_INDEX_REPO sont signales a Eric, jamais reecrits en masse. Pour un index genere, un lien casse ou un ecart de contenu = relancer d'abord le generateur (etape 2) puis ce script ; si l'ecart reste, le signaler. Si H: est inaccessible : le noter sans bloquer.
+9. Controle des fichiers a plusieurs emplacements (decide par Eric le 2026-10-18, apres les pushs) : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py"`. Script en LECTURE SEULE (carte : `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md`). Il compare chaque fichier de config, GLOBAL_INDEX_REPO et README aux 5 emplacements (local, prod racine, prod miroir docs, GitHub racine, GitHub docs/). Mettre dans le rapport final les lignes `ANOMALIES` et `RESULTAT` du script et chaque fichier PROD DIFFERENTE DU LOCAL ou present ailleurs qu'en local. GITHUB EN ATTENTE DU BACKUP juste apres un push est normal. Ne rien corriger sans demande. Si H: est inaccessible (code retour 2) : le noter sans bloquer.
 
 ---
 ## ORDRE D'EXECUTION STRICT
@@ -335,9 +355,9 @@ Met a jour l'arborescence documentee : `C:\Users\Berry Swann\Documents\ReBuild\d
 5. Enchainer sync_index (dont GLOBAL_INDEX_REPO.md) sans pause ni question
 6. Mettre a jour le journal fusionne (etape 3)
 7. Copier dans Obsidian (etape 4)
-8. Menage des sauvegardes (etape 5)
+8. Menage des sauvegardes (etape 5, docs puis historique\MD5\)
 9. Export Dashboard (etape 5B)
-10. Mettre a jour le tree (etape 6)
+10. Mettre a jour le tree et lancer les controles (etape 6, points 1 a 9)
 11. Afficher le rapport final
 
 ### Format de rapport final (apres toutes les etapes)
@@ -361,7 +381,8 @@ OBSIDIAN :
 - [fichier] : copie, MD5 identique | non copie (deja present) | DIFFERENT
 
 MENAGE .bak :
-- renommes : [n] | corbeille Windows : [n] | ignores : [n]
+- docs : renommes : [n] | corbeille Windows : [n] | ignores : [n]
+- historique\MD5\ : renommes : [n] | corbeille Windows : [n] | signales : [n] (date deduite du nom du rapport : [n]) | plan et compte rendu : [historique\menage_MD5_dryrun_AAAA-MM-JJ.txt, historique\menage_MD5_AAAA-MM-JJ.txt]
 - soucis a traiter : [liste avec chemin complet] | aucun
 
 DASHBOARD :
@@ -378,6 +399,9 @@ SOUS_CONTEXT_IA :
 
 INDEX GLOBAUX :
 - controle global_index: index=[n] liens=[n] casses=[n] ecarts=[n] ; detail : [liste index : ecart] | aucun
+
+EMPLACEMENTS :
+- [ligne ANOMALIES] ; [ligne RESULTAT] ; ecarts : [liste fichier : verdict] | aucun
 
 >> [fichier introuvable ou incomplet si applicable]
 ```

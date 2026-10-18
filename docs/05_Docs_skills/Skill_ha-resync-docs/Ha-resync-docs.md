@@ -1,94 +1,55 @@
 ---
-name: ha-resync-docs
-description: >
-  Skill HA ReBuild - compare et resynchronise les fichiers YAML config locaux depuis GitHub
-  (source de verite n 2). Declencher sur : "resync depuis GitHub", "compare local vs GitHub",
-  "audit MD5 YAML", "est-ce que le local est a jour", "debut de session", "on commence par un audit".
+name: "ha-resync-docs"
+description: "Skill HA ReBuild - compare les fichiers YAML config locaux a la prod et a GitHub (lecture seule par defaut ; le local fait foi). Declencher sur : \"resync depuis GitHub\", \"compare local vs GitHub\", \"audit MD5 YAML\", \"est-ce que le local est a jour\", \"debut de session\", \"on commence par un audit\"."
 ---
 
-# HA Resync Docs - Local <- GitHub
+# HA Resync Docs - comparaison config locale / prod / GitHub
 
-Resynchronise les fichiers YAML de config locaux avec le repo GitHub (`home_assistant_re-build`),
-reflet de la prod HA (source de verite n 2).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
+
+> ATTENTION (2026-10-18) : le LOCAL fait foi, la prod ne doit jamais etre en avance sur le local et GitHub n'est qu'un reflet de la prod via le backup HA. Ne jamais copier GitHub vers le local sans ordre explicite d'Eric, fichier par fichier. Les dossiers `themes/`, `blueprints/` et `notifs/` restent en prod seule.
+
+Compare les fichiers YAML de config locaux avec la prod (`H:\`, racine et miroir docs) et le repo GitHub (`home_assistant_re-build`), reflet de la prod HA.
 
 ## CHEMINS DE REFERENCE
 
-- **Local (Windows)** : `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_YAML\`
-- **Automations local** : `docs\03_docs_automations\docs_automations_YAML\`
-
-> Les commandes bash ci-dessous tournent dans un environnement avec shell (sandbox Cowork ou
-> autre). Le point de montage du dossier local n'est PAS fixe d'une session a l'autre : avant
-> toute execution, verifier le chemin reel (`ls /sessions/` en sandbox Cowork, ou tout autre
-> moyen selon l'environnement) et resoudre `{LOCAL_MNT}` ci-dessous avant de lancer le bloc.
-> Ne jamais reutiliser un prefixe de session note dans une execution precedente sans le
-> reverifier : il change a chaque nouvelle session.
-
-**Regle** : GitHub -> local uniquement (jamais l'inverse sans validation).
+- **Local (Windows)** : `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\`
+- **Automations local** : `docs\03_docs_automations\docs_automations_YAML\` (comparaison unite par unite : etape profonde de /ha-trigul)
 
 ## WORKFLOW
 
-### 1 - Telecharger le repo GitHub
-```bash
-rm -rf /tmp/ha_repo && mkdir -p /tmp/ha_repo
-wget -q --timeout=30 "https://github.com/BerrySwann/home_assistant_re-build/archive/refs/heads/main.zip" -O /tmp/ha_repo.zip
-unzip -q -o /tmp/ha_repo.zip -d /tmp/ha_repo/
+### 1 - Comparer (lecture seule, sur le PC)
+
+```powershell
+$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py"
 ```
 
-### 2 - MD5 GitHub vs local (perimetre config uniquement)
+Le script compare chaque fichier de `config_system_SH_PY_YAML` aux 5 emplacements (local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et ecrit `historique\MD5\03_verif_emplacements\verif_emplacements_[date].txt`. Il lit GitHub par l'API (une requete), il doit tourner sur le PC.
 
-Exclure du repo GitHub : `docs/` (302 fichiers documentation), `automations.yaml`, fichiers racine.
+Statuts : SYNC / PROD DIFFERENTE DU LOCAL / GITHUB EN ATTENTE DU BACKUP / ABSENT (emplacements manquants) ; section 2 : fichiers presents en prod ou sur GitHub mais pas en local.
 
-```bash
-REPO="/tmp/ha_repo/home_assistant_re-build-main"
-LOCAL="{LOCAL_MNT}/docs/01_docs_config_system/config_system_YAML"   # resoudre {LOCAL_MNT} avant execution (voir note ci-dessus)
+### 2 - Analyser les ecarts
 
-find "$REPO" -type f -name "*.yaml" \
-  -not -path "*/docs/*" -not -name "automations.yaml" \
-  -not -name "Dashboard_*.yaml" -not -name "ip_bans.yaml" \
-  -not -name "scenes.yaml" -not -name "scripts.yaml*" \
-  -not -name "sql.yaml" -not -name "configuration.yaml" \
-  | sort | xargs md5sum | sed "s|$REPO/||" | sort > /tmp/github_yaml_md5.txt
+| Cas | Action |
+|:----|:-------|
+| PROD DIFFERENTE DU LOCAL | Le local fait foi : proposer `/ha-push-yaml`. Si la prod a ete modifiee a la main (ecart non explique), le signaler a Eric avant tout push. |
+| GITHUB EN ATTENTE DU BACKUP | Normal apres un push : le backup HA lance par Eric mettra GitHub a jour. |
+| Present en prod ou sur GitHub, absent du local | Le signaler a Eric (fichier cree en prod a la main ?). Copie vers le local uniquement sur son ordre. |
+| Absent de la prod | Proposer `/ha-push-yaml`. |
 
-find "$LOCAL" -type f -name "*.yaml" \
-  | sort | xargs md5sum | sed "s|$LOCAL/||" | sort > /tmp/local_yaml_md5.txt
+### 3 - Copie vers le local (uniquement sur ordre explicite d'Eric)
 
-echo "GitHub config : $(wc -l < /tmp/github_yaml_md5.txt) fichiers"
-echo "Local config  : $(wc -l < /tmp/local_yaml_md5.txt) fichiers"
-```
+Fichier par fichier, depuis la prod `H:\` (pas depuis GitHub, qui peut etre en retard), apres sauvegarde `.bak_AAAA_MM_JJ_HHhMMmSSs` du fichier local s'il existe. Signaler chaque copie et l'ecrire au journal des modifs.
 
-Comparer avec join :
-```bash
-# MD5 differents (meme fichier)
-join -1 2 -2 2 <(sort -k2 /tmp/github_yaml_md5.txt) <(sort -k2 /tmp/local_yaml_md5.txt) | awk '$2 != $3 {print "DIFF " $1}'
-# Absent local
-comm -23 <(awk '{print $2}' /tmp/github_yaml_md5.txt | sort) <(awk '{print $2}' /tmp/local_yaml_md5.txt | sort) | sed 's/^/ABSENT_LOCAL /'
-# Absent GitHub
-comm -13 <(awk '{print $2}' /tmp/github_yaml_md5.txt | sort) <(awk '{print $2}' /tmp/local_yaml_md5.txt | sort) | sed 's/^/ABSENT_GITHUB /'
-```
-
-Statuts : OK / DIFF (conflit - demander) / ABSENT_LOCAL (copier) / ABSENT_GITHUB (investiguer)
-
-### 3 - Copier les fichiers manquants (GitHub -> local)
-```bash
-cp "$REPO/{chemin/fichier.yaml}" "$LOCAL/{chemin/}"
-```
-Signaler chaque copie. Ne jamais ecraser sans signaler.
-
-### 4 - Audit automations (si demande)
-```bash
-grep "^  alias:" "$REPO/automations.yaml" | wc -l
-find "$LOCAL_ATMA" -name "*.yaml" -not -path "*/old/*" | wc -l
-```
-
-### 5 - Resume
-- Fichiers compares, copies, en conflit, absents GitHub
-- Etat global : OK / N fichiers en ecart
-- Proposer /sync_index si entites cles ont change
+### 4 - Resume
+- Lignes `ANOMALIES` et `RESULTAT` du script
+- Fichiers en ecart et action proposee
+- Proposer /sync_index si des entites cles ont change
 
 ## REGLES
 
-1. Ne jamais ecraser un fichier local sans le signaler.
-2. Conflit MD5 -> demander a l'utilisateur quelle version garder.
+1. Lecture seule par defaut : aucun fichier local ni prod modifie sans ordre d'Eric.
+2. Ne jamais ecraser un fichier local sans le signaler.
 3. secrets.yaml -> NE JAMAIS COPIER dans aucun sens.
-4. docs/ du repo GitHub = documentation - ne pas inclure dans le perimetre config.
-5. ***.md -> NE JAMAIS SYNCHRONISER** dans aucun sens. Les .md sont la source de verite locale, geres exclusivement par /ha_push_docs.
+4. docs/ du repo GitHub = documentation : comparee par /ha-trigul, pas ici (sauf le miroir de config controle par le script).
+5. ***.md -> NE JAMAIS SYNCHRONISER** dans aucun sens par ce skill. Les .md sont la source de verite locale, geres par /ha-push-docs.

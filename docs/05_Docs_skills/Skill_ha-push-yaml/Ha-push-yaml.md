@@ -1,34 +1,39 @@
 ---
 name: "ha-push-yaml"
-description: "Skill HA ReBuild - pousse des fichiers YAML config locaux vers la prod HA (H:\\), avec sauvegarde locale .bak_AAAA_MM_JJ_HHhMMmSSs avant toute modification (jamais de sauvegarde en prod). MD5-first : pousse uniquement si le fichier est different de la prod. Declencher sur : \"pousse le yaml en prod\", \"deploie le fichier YAML\", \"copie vers H:\\\", \"met a jour la prod avec ce YAML\", \"valide et pousse\", \"on met ca en prod\". OPERATION CRITIQUE."
+description: "Skill HA ReBuild - pousse des YAML config locaux vers la prod HA (racine H:\\ ET miroir docs), sauvegarde locale .bak avant modification, MD5-first. Declencher sur : pousse le yaml en prod, deploie le fichier YAML, on met ca en prod."
 ---
 
-# HA Push YAML - Local config_system_YAML -> Prod H:\
+# HA Push YAML - Local config_system_SH_PY_YAML -> Prod H:\
 
 > OPERATION CRITIQUE : un YAML mal forme ou pousse au mauvais endroit peut casser HA.
 > Logique MD5-first : si le fichier est identique en prod, le push est annule.
 
 ## CHEMINS DE REFERENCE
 
-- **Source (Windows)** : `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_YAML\`
+- **Source (Windows)** : `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\`
 
-`config_system_YAML\` est l'IMAGE LOCALE de la prod (H:\) : chaque fichier y a le meme
+`config_system_SH_PY_YAML\` est l'IMAGE LOCALE de la prod (H:\) : chaque fichier y a le meme
 nom et le meme chemin relatif que sur H:\ (jamais de suffixe dans le nom du fichier
-courant), pour rester comparable 1:1 avec la prod a tout moment (voir ha-resync-docs
-pour la tenir a jour depuis GitHub).
+courant), pour rester comparable 1:1 avec la prod a tout moment. Le LOCAL fait foi :
+la prod ne doit jamais etre en avance sur le local (regle d'Eric du 2026-10-18).
 
-| Source locale | Prod HA |
-|:---|:---|
-| sensors/ | H:\sensors\ |
-| templates/ | H:\templates\ |
-| utility_meter/ | H:\utility_meter\ |
-| command_line/ | H:\command_line\ |
-| input_booleans/ | H:\input_booleans\ |
-| groups/ | H:\groups\ |
-| shell_command/ | H:\shell_command\ |
-| themes/ | H:\themes\ |
-| blueprints/ | H:\blueprints\ |
-| Automations | INTERDIT - UI HA uniquement |
+**Carte des emplacements (source unique, a lire en cas de doute)** :
+`docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md`.
+Chaque fichier de config existe a 5 emplacements : local (L), prod racine `/config` (PR = H:\),
+prod miroir docs (PM = `H:\docs\01_docs_config_system\config_system_SH_PY_YAML\`),
+GitHub racine (GR) et GitHub `docs/` (GD). Ce skill pousse vers PR ET PM (jamais un seul
+des deux). GitHub suit au backup HA lance par Eric (jamais de push direct).
+
+| Source locale (sous config_system_SH_PY_YAML\) | Prod racine (PR) | Prod miroir (PM) |
+|:---|:---|:---|
+| sensors/, templates/, utility_meter/, command_line/, groups/, input_booleans/, input_number/, shell_command/, timers/ | H:\<meme chemin> | H:\docs\01_docs_config_system\config_system_SH_PY_YAML\<meme chemin> |
+| configuration.yaml, sql.yaml, input_button.yaml, input_datetime.yaml, input_select.yaml | H:\<fichier> | idem miroir |
+| .scripts\01_scripts.sh\*.sh et .scripts\02_scripts.py\*.py | H:\.scripts\<fichier> (A PLAT) | idem miroir (avec sous-dossier) |
+| scripts\*.sh | H:\scripts\<fichier> | idem miroir |
+| themes/, blueprints/, notifs/, scenes.yaml, ip_bans.yaml | PROD SEULE - ne jamais pousser | - |
+| Automations | INTERDIT - UI HA uniquement | - |
+
+Scripts `.sh` / `.py` : push vers `H:\.scripts\` ou `H:\scripts\` uniquement sur ordre explicite d'Eric.
 
 ## REGLE DE SAUVEGARDE (depuis le 2026-10-08, remplace celle du 2026-10-04)
 
@@ -45,7 +50,7 @@ pour la tenir a jour depuis GitHub).
 ### 0 - AVANT TOUTE MODIFICATION D'UN FICHIER EXISTANT : sauvegarde locale
 
 ```powershell
-$src = "C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_YAML\{sous-chemin}\{fichier}.yaml"
+$src = "C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\{sous-chemin}\{fichier}.yaml"
 
 if (Test-Path $src) {
   $suffixe = Get-Date -Format "yyyy_MM_dd_HH'h'mm'm'ss's'"   # ex 2026_10_08_12h07m20s
@@ -81,33 +86,36 @@ compare puis pousse vers la prod aux etapes suivantes.
 
 ### 1 - MD5 local du fichier cible
 ```powershell
-$src = "C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_YAML\{sous-chemin}\{fichier}.yaml"
+$src = "C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\{sous-chemin}\{fichier}.yaml"
 $localHash = (Get-FileHash $src -Algorithm MD5).Hash
 Write-Host "Local : $localHash"
 ```
 
-### 2 - MD5 prod (H:\)
+### 2 - MD5 prod aux DEUX emplacements (racine PR et miroir PM)
 ```powershell
-$dest = "H:\{sous-chemin}\{fichier}.yaml"
-if (Test-Path $dest) {
-  $prodHash = (Get-FileHash $dest -Algorithm MD5).Hash
-  Write-Host "Prod  : $prodHash"
-} else {
-  $prodHash = $null
-  Write-Host "Prod  : ABSENT (nouveau fichier)"
-}
+$dest   = "H:\{sous-chemin racine}\{fichier}.yaml"   # PR (scripts : a plat dans H:\.scripts\)
+$destPM = "H:\docs\01_docs_config_system\config_system_SH_PY_YAML\{sous-chemin}\{fichier}.yaml"   # PM
+$prodHash = if (Test-Path $dest)   { (Get-FileHash $dest   -Algorithm MD5).Hash } else { $null }
+$pmHash   = if (Test-Path $destPM) { (Get-FileHash $destPM -Algorithm MD5).Hash } else { $null }
+Write-Host "Prod racine : $(if($prodHash){$prodHash}else{'ABSENT'})"
+Write-Host "Prod miroir : $(if($pmHash){$pmHash}else{'ABSENT'})"
 ```
 
 ### 3 - Comparer
 ```powershell
-if ($localHash -eq $prodHash) {
-  Write-Host "MD5 identiques - fichier deja a jour en prod. Rien a pousser."
+if ($localHash -eq $prodHash -and $localHash -eq $pmHash) {
+  Write-Host "MD5 identiques aux deux emplacements - rien a pousser."
   exit
 }
-Write-Host "DIFF detecte - le fichier local est different de la prod."
+Write-Host "DIFF detecte (racine et/ou miroir)."
 ```
 
-Si MD5 identiques -> **arreter immediatement**.
+Si MD5 identiques aux deux emplacements -> **arreter immediatement**. Si un seul des deux
+differe, ne pousser que celui-la.
+
+Si la prod (racine ou miroir) differe du local ET differe aussi de la version locale d'avant
+la modification (sauvegarde `.bak` du jour), quelqu'un a ecrit en prod : ne pas pousser, le
+signaler a Eric (la prod ne doit pas etre en avance, mais on ne l'ecrase pas sans le dire).
 
 ### 4 - Checks pre-push (si DIFF)
 
@@ -115,7 +123,7 @@ Si MD5 identiques -> **arreter immediatement**.
 - YAML valide : pas de tabulations, au moins 1 `unique_id:`
 
 ```powershell
-$f = "C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_YAML\{sous-chemin}\{fichier}.yaml"
+$f = "C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\{sous-chemin}\{fichier}.yaml"
 if (Select-String -Path $f -Pattern "`t" -Quiet) { "TABULATIONS DETECTEES" } else { "OK pas de tabulation" }
 (Select-String -Path $f -Pattern "unique_id:").Count
 ```
@@ -127,8 +135,8 @@ RESUME PRE-PUSH
 Fichier    : {sous-chemin}/{fichier}.yaml
 Sauvegarde : {fichier}.yaml.bak_AAAA_MM_JJ_HHhMMmSSs (creee avant modif, locale uniquement)
 Local      : {hash_local}
-Prod       : {hash_prod} (DIFF / NOUVEAU)
-Fiche .md   : {DEPENDANCES_GLOBALES.md / GLOBAL_INDEX_REPO.md} a mettre a jour apres le push (etape 9)
+Prod racine: {hash_prod} (DIFF / NOUVEAU / identique)
+Prod miroir: {hash_pm} (DIFF / NOUVEAU / identique)
 --------------------------------------------------
 Confirmes-tu le push ? (oui / non)
 ```
@@ -147,12 +155,15 @@ sauvegarde la plus recente) :
 # Si $src porte un suffixe .bak_... (restauration d'une sauvegarde), on le retire
 # pour construire le nom de destination - la prod ne doit jamais voir de suffixe.
 $nomSansBak = (Split-Path $src -Leaf) -replace '\.bak_\d{4}_\d{2}_\d{2}(_\d{2}h\d{2}m\d{2}s)?$', ''
-$dest = Join-Path "H:\{sous-chemin}" $nomSansBak
+$dest = Join-Path "H:\{sous-chemin racine}" $nomSansBak
 
-$destDir = Split-Path $dest
-New-Item -ItemType Directory -Path $destDir -Force | Out-Null
-Copy-Item $src $dest -Force
-Write-Host "Pousse : $nomSansBak (source : $(Split-Path $src -Leaf))"
+$destPM = Join-Path "H:\docs\01_docs_config_system\config_system_SH_PY_YAML\{sous-chemin}" $nomSansBak
+
+foreach ($d in $dest, $destPM) {
+  New-Item -ItemType Directory -Path (Split-Path $d) -Force | Out-Null
+  Copy-Item $src $d -Force
+  Write-Host "Pousse : $d (source : $(Split-Path $src -Leaf))"
+}
 ```
 
 La prod (H:\) ne recoit QUE le fichier courant, nom sans suffixe - jamais de `.bak_...`.
@@ -161,24 +172,22 @@ L'historique des versions reste uniquement en local.
 ### 7 - Verification MD5 finale
 ```powershell
 $h1 = (Get-FileHash $src -Algorithm MD5).Hash
-$h2 = (Get-FileHash $dest -Algorithm MD5).Hash
-if ($h1 -eq $h2) { "OK MD5 identiques" } else { "DIFF - verifier !" }
+foreach ($d in $dest, $destPM) {
+  $h2 = (Get-FileHash $d -Algorithm MD5).Hash
+  if ($h1 -eq $h2) { "OK MD5 identiques : $d" } else { "DIFF - verifier ! $d" }
+}
 ```
+
+Controle global facultatif (lecture seule, 5 emplacements) :
+`$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py"`
+(rapport dans `historique\MD5\03_verif_emplacements\`). Apres le push, le fichier doit
+sortir SYNC ou GITHUB EN ATTENTE DU BACKUP.
 
 ### 8 - Rechargement HA
 - Outils dev > YAML > **Verifier la configuration**
 - Si OK -> **Recharger** le domaine concerne (sensors, templates, utility_meter...)
 - Verifier logs HA (Settings > System > Logs)
 
-### 9 - MISE A JOUR DU .MD DU FICHIER POUSSE (obligatoire, regle CLAUDE.md du 2026-10-13)
-
-Un push de YAML n'est termine que lorsque le `.md` du fichier est a jour. Le local est modifie d'abord, la prod ensuite.
-
-1. Quel `.md` : config YAML (sensors, templates, utility_meter, command_line, input_booleans, groups, shell_command, themes, blueprints) -> `docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md` (date en tete, plus les lignes du fichier si des entites ou dependances sont ajoutees, supprimees ou renommees). Si le fichier a une fiche dediee dans `docs\01_docs_config_system\config_system_MD\`, la mettre a jour aussi.
-2. Fichier ajoute, renomme ou supprime, ou entite citee modifiee -> mettre a jour aussi `GLOBAL_INDEX_REPO.md` (voir histo, etape 2, et la regle des 2 emplacements de ha-push-docs).
-3. Avant de modifier un `.md` : sauvegarde locale `nom.bak_AAAA_MM_JJ_HHhMMmSSs.md` a cote du fichier (REGLE DE SAUVEGARDE, 10 max le jour meme). Ne reecrire que les lignes concernees (remplacements stricts), jamais le fichier entier.
-4. Pousser ensuite les `.md` modifies vers le chemin miroir sous `H:\docs\` (meme chemin relatif que le local), MD5 avant et apres, jamais de sauvegarde en prod. Les dossiers couverts par `ha-push-md` / `ha-push-docs` passent par eux.
-5. Rapport de fin de push : lister chaque `.md` mis a jour. Si aucun `.md` n'a besoin de changer, le dire avec la raison (jamais silencieux). Fiche introuvable : le signaler, ne pas en inventer.
 ## REGLES
 
 1. **MD5 d'abord** - si identique en prod, ne pas pousser.
@@ -198,4 +207,10 @@ Un push de YAML n'est termine que lorsque le `.md` du fichier est a jour. Le loc
    courant sans suffixe s'il existe, sinon la sauvegarde la plus recente).
 10. **Un souci (collision de nom, date illisible, sauvegarde douteuse) : le signaler a
     l'utilisateur et ne rien supprimer.**
-11. **Chaque push met a jour le `.md` du fichier pousse** (regle CLAUDE.md du 2026-10-13) : etape 9. Pas de push YAML termine sans cette mise a jour. Le local est modifie en premier, jamais la prod.
+11. **Deux destinations en prod** (decide par Eric le 2026-10-18) : racine `H:\` (PR) ET
+    miroir `H:\docs\01_docs_config_system\config_system_SH_PY_YAML\` (PM), MD5 verifie sur
+    chacune. Jamais un seul des deux. Voir `IA_CARTE_EMPLACEMENTS.md`.
+12. **Prod seule** : themes/, blueprints/, notifs/, scenes.yaml, ip_bans.yaml, secrets.yaml ne
+    sont jamais pousses (decisions d'Eric du 2026-10-18).
+13. **Scripts .sh / .py** : a plat dans `H:\.scripts\` en prod (sous-dossiers 01_scripts.sh et
+    02_scripts.py en local seulement) ; push uniquement sur ordre explicite d'Eric.

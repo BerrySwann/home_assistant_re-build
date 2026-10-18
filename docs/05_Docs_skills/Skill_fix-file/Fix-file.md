@@ -1,14 +1,11 @@
 ---
-name: fix-file
-description: >
-  Skill HA ReBuild - analyse une erreur Home Assistant et retourne UNIQUEMENT le bloc YAML corrige.
-  Declencher OBLIGATOIREMENT quand l'utilisateur tape /fix_file, colle un log HA, une trace d'erreur,
-  un message "invalid config", "error loading", "unknown platform", ou demande de corriger/reparer
-  un fichier YAML Home Assistant. S'active aussi sur : "ca plante", "erreur HA", "fix this YAML",
-  "corrige le fichier", ou tout message contenant une trace d'erreur HA a resoudre.
+name: "fix-file"
+description: "Skill HA ReBuild - analyse une erreur Home Assistant et retourne UNIQUEMENT le bloc YAML corrige. Declencher OBLIGATOIREMENT quand l'utilisateur tape /fix_file, colle un log HA, une trace d'erreur, un message \"invalid config\", \"error loading\", \"unknown platform\", ou demande de corriger/reparer un fichier YAML Home Assistant. S'active aussi sur : \"ca plante\", \"erreur HA\", \"fix this YAML\", \"corrige le fichier\", ou tout message contenant une trace d'erreur HA a resoudre."
 ---
 
 # Skill : /fix_file - Correcteur YAML Home Assistant
+
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 ## Objectif
 
@@ -24,9 +21,9 @@ Reperer :
 - Le **type d'erreur** (YAML syntax, entite inconnue, plateforme deprecee, unique_id manquant, etc.)
 - Le **bloc precis** a corriger
 
-Si le fichier existe dans `config_system_YAML/` (local), le lire avant de corriger.
+Si le fichier existe dans `config_system_SH_PY_YAML/` (local), le lire avant de corriger.
 
-**Chemin local :** `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_YAML\`
+**Chemin local :** `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\`
 
 ### 2. Appliquer les regles du projet
 
@@ -52,10 +49,11 @@ Si le fichier existe dans `config_system_YAML/` (local), le lire avant de corrig
 - Ne jamais renvoyer le fichier complet sauf demande explicite
 - Annoter chaque ligne modifiee avec `# "[L...] modif"`
 - Bloc `# annotations_log:` obligatoire en fin de reponse
+- La correction se fait en local ; la mise en prod passe par `/ha-push-yaml` (racine `H:\` ET miroir docs).
 
 ### 4. Verification dependances (rapide)
 
 Si l'entite modifiee peut impacter une vignette ou `DEPENDANCES_GLOBALES.md`, signaler :
 `>> Impact potentiel : [vignette L*C*] - /sync_index recommande`
 
-**Chemin DEPENDANCES_GLOBALES :** `docs\02_docs_dashboard\dashboard_docs_MD\DEPENDANCES_GLOBALES.md`
+**Chemin DEPENDANCES_GLOBALES :** `docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`
