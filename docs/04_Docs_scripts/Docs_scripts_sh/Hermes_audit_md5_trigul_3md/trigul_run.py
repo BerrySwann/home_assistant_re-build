@@ -49,7 +49,7 @@ STEPS = [
     dict(name='B1_profond',
          script=os.path.join(SH, 'hermes_audit_md5_trigul_3md', 'hermes_audit_md5_trigul_unitaire.py'),
          reports=[os.path.join(MD5, '01_trigul_profond', 'trigul_profond_%s.txt' % TODAY)],
-         must=[], mustnot=[], needs_h=True, tmpdir=TMP_PROFOND),
+         must=['ETAPES : 1 -', 'AUTOMATIONS :', 'SCRIPTS :'], mustnot=[], needs_h=True, tmpdir=TMP_PROFOND, warn_out=['ATTENTION']),
     dict(name='C_emplacements',
          script=os.path.join(SH3, 'Verif_emplacements', 'Verif_emplacements.py'),
          reports=[os.path.join(MD5, '03_verif_emplacements', 'verif_emplacements_%s.txt' % TODAY)],

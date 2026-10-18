@@ -38,6 +38,11 @@ def ignore(name):
     return '.bak' in n or n in EXCLUS_NOMS
 
 
+def verrou(name):
+    # fichier verrou d'editeur (ex. #MP_01_monitor_temp.sh.#) : en prod seule, jamais sur GitHub (.gitignore)
+    return len(name) > 2 and name.startswith('#') and name.endswith('#')
+
+
 def blob_file(path):
     with open(path, 'rb') as f:
         d = f.read()
@@ -157,6 +162,7 @@ def main():
 
     # 2. fichiers presents ailleurs mais pas en local (dans le perimetre suivi)
     seuls = []
+    attendus = []
     tops = sorted({x[0].split('/')[0] for x in items if not x[0].startswith('docs/')})
     for top in tops:
         base = os.path.join(PROD, top)
@@ -165,7 +171,10 @@ def main():
         for rel in lister(base):
             rr = top + '/' + rel
             if not ignore(os.path.basename(rr)) and rr not in suivis_racine:
-                seuls.append(('PROD RACINE SEULE', rr))
+                if verrou(os.path.basename(rr)):
+                    attendus.append(('VERROU EDITEUR PROD RACINE (attendu)', rr))
+                else:
+                    seuls.append(('PROD RACINE SEULE', rr))
     mir = os.path.join(PROD, CFG.replace('/', os.sep))
     if os.path.isdir(mir):
         for rel in lister(mir):
@@ -173,7 +182,10 @@ def main():
             if rel.split('/')[0] in PROD_SEULE_DOSSIERS or ignore(os.path.basename(rel)):
                 continue
             if rr not in suivis_miroir:
-                seuls.append(('PROD MIROIR SEUL', rr))
+                if verrou(os.path.basename(rel)):
+                    attendus.append(('VERROU EDITEUR PROD MIROIR (attendu)', rr))
+                else:
+                    seuls.append(('PROD MIROIR SEUL', rr))
     if gh is not None:
         for path in gh:
             top = path.split('/')[0]
@@ -199,6 +211,9 @@ def main():
     txt += ['', '== 2. PRESENTS AILLEURS QU EN LOCAL (%d) ==' % len(seuls)]
     for k, p in sorted(seuls):
         txt.append('%-20s | %s' % (k, p))
+    txt += ['', '== 3. ECARTS ATTENDUS (%d) : fichiers verrou d editeur #...# en prod seule, ignores par le .gitignore, pas une anomalie ==' % len(attendus)]
+    for k, p in sorted(attendus):
+        txt.append('%-40s | %s' % (k, p))
     res = 'RESULTAT : %d fichiers suivis - %s - presents ailleurs qu en local %d' % (
         len(lignes), ' - '.join('%s %d' % (k, n) for k, n in sorted(comptes.items())), len(seuls))
     txt += ['', 'ANOMALIES : ' + ('aucune' if nb_anom == 0 else 'x %d' % nb_anom), res]

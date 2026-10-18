@@ -3,15 +3,18 @@
 hermes_audit_md5_trigul_unitaire.py - extraction et comparaison A L'UNITE de H:\\automations.yaml et H:\\scripts.yaml
 contre les YAML locaux de ReBuild. Etape "profonde" du /trigul (voir CLAUDE.md).
 
-Ce que fait le script (dans cet ordre) :
- 1. copie H:\\automations.yaml dans docs\\03_docs_automations\\docs_automations_YAML\\AUTOMATIONS.YALM ORIGINAL\\automations.bak_AAAA_MM_JJ_HHhMMmSSs.yaml
-    et H:\\scripts.yaml dans docs\\04_docs_scripts\\DOCS_SCRIPT_ORIGINAL\\scripts.bak_AAAA_MM_JJ_HHhMMmSSs.yaml (MD5 verifie)
- 2. extrait chaque automation et chaque script dans ReBuild\\_tmp_trigul_profond\\ (un fichier par unite)
- 3. compare chaque unite au YAML local (MD5 logique : YAML parse, cles triees, category/labels ignores,
-    espaces de debut/fin ignores, commentaires et mise en forme ignores)
- 4. ecrit le rapport historique\\MD5\\01_trigul_profond\\trigul_profond_AAAA-MM-JJ.txt (sauvegarde .bak_date_heure si le rapport du jour existe)
- 5. efface le dossier temporaire _tmp_trigul_profond
-
+Ce que fait le script (etapes numerotees, affichees ETAPE n et reprises dans le rapport) :
+ 1. points bak : reserve les noms datees automations.bak_AAAA_MM_JJ_HHhMMmSSs.yaml (dossier AUTOMATIONS.YALM ORIGINAL)
+    et scripts.bak_... (dossier DOCS_SCRIPT_ORIGINAL), cree les dossiers, s'arrete (code 3) si un point existe deja
+ 2. copie H:/automations.yaml et H:/scripts.yaml vers ces points bak
+ 3. MD5 de chaque fichier de la prod contre son bak ; si l'un differe : ATTENTION, mais l'analyse continue (elle dit quelles unites ont change)
+ 4. l'analyse lit les COPIES bak, plus H:
+ 5. extrait chaque automation et chaque script dans ReBuild/_tmp_trigul_profond/ (un fichier par unite)
+ 6. controle final : MD5 de la prod relu apres l'analyse ; ATTENTION dans le rapport si la prod a bouge
+ 7. compare chaque unite au YAML local (MD5 logique : YAML parse, cles triees, category/labels ignores,
+    espaces de debut/fin ignores, commentaires et mise en forme ignores) et ecrit le rapport
+    historique/MD5/01_trigul_profond/trigul_profond_AAAA-MM-JJ.txt (sauvegarde .bak_date_heure si le rapport du jour existe)
+ 8. efface le dossier temporaire _tmp_trigul_profond
 Lecture seule sur H: et sur les YAML locaux. Ordre du trigul : local, prod, GitHub (GitHub : on n'aura qu'a push).
 Lancer : python -I hermes_audit_md5_trigul_unitaire.py   (PYTHONIOENCODING=utf-8)
 """
@@ -103,17 +106,47 @@ def main():
             print('H: introuvable ou fichier absent :', p)
             sys.exit(2)
 
-    # 1. copies datees
-    ca, sa = snapshot(PROD_AUTO, ORIG_AUTO, 'automations')
-    cs, ss = snapshot(PROD_SCR, ORIG_SCR, 'scripts')
+    etapes = []
 
-    # 2. extraction dans le temporaire
+    def etape(n, txt):
+        etapes.append('%d - %s' % (n, txt))
+        print('ETAPE ' + etapes[-1])
+
+    # ETAPE 1 : points bak (noms datees reserves, dossiers prets, aucune collision)
+    ca = os.path.join(ORIG_AUTO, 'automations.bak_%s.yaml' % STAMP)
+    cs = os.path.join(ORIG_SCR, 'scripts.bak_%s.yaml' % STAMP)
+    os.makedirs(ORIG_AUTO, exist_ok=True)
+    os.makedirs(ORIG_SCR, exist_ok=True)
+    if os.path.exists(ca) or os.path.exists(cs):
+        etape(1, 'ECHEC point bak deja existant : %s | %s' % (ca, cs))
+        sys.exit(3)
+    etape(1, 'points bak prevus : %s | %s' % (os.path.relpath(ca, ROOT), os.path.relpath(cs, ROOT)))
+
+    # ETAPE 2 : copie de H:\automations.yaml et H:\scripts.yaml vers les points bak
+    shutil.copy2(PROD_AUTO, ca)
+    shutil.copy2(PROD_SCR, cs)
+    etape(2, 'copies faites (automations.yaml, scripts.yaml)')
+
+    # ETAPE 3 : MD5 de chaque fichier de la prod contre son bak
+    hp_a, hp_s = hf(PROD_AUTO), hf(PROD_SCR)
+    hb_a, hb_s = hf(ca), hf(cs)
+    sa = 'identique' if hp_a == hb_a else 'DIFFERENT'
+    ss = 'identique' if hp_s == hb_s else 'DIFFERENT'
+    etape(3, 'MD5 automations prod %s / bak %s : %s ; scripts prod %s / bak %s : %s' % (hp_a, hb_a, sa, hp_s, hb_s, ss))
+    copie_ko = sa != 'identique' or ss != 'identique'
+    if copie_ko:
+        # decide par Eric le 2026-10-18 : on ne s'arrete PAS, l'analyse unite par unite dit qui est le coupable
+        etape(3, 'ATTENTION MD5 prod different de la copie : analyse lancee quand meme pour trouver les unites modifiees')
+
+    # ETAPE 4 : l'analyse lit les COPIES (bak), plus H:
+    etape(4, 'analyse faite sur les copies bak, pas sur H:')
+    # 5. extraction dans le temporaire
     if os.path.isdir(TMP):
         shutil.rmtree(TMP)
     os.makedirs(os.path.join(TMP, 'automations'))
     os.makedirs(os.path.join(TMP, 'scripts'))
-    prod_a = load(PROD_AUTO)
-    prod_s = load(PROD_SCR)
+    prod_a = load(ca)
+    prod_s = load(cs)
     for a in prod_a:
         with open(os.path.join(TMP, 'automations', safe(a.get('id')) + '.yaml'), 'w', encoding='utf-8') as f:
             yaml.safe_dump(a, f, allow_unicode=True, sort_keys=False)
@@ -121,6 +154,8 @@ def main():
         with open(os.path.join(TMP, 'scripts', safe(k) + '.yaml'), 'w', encoding='utf-8') as f:
             yaml.safe_dump({k: v}, f, allow_unicode=True, sort_keys=False)
     n_ext = len(os.listdir(os.path.join(TMP, 'automations'))) + len(os.listdir(os.path.join(TMP, 'scripts')))
+
+    etape(5, '%d unites extraites dans le temporaire' % n_ext)
 
     # 3a. automations : par id, sinon par alias sans lettre de tete
     loc = []
@@ -186,16 +221,24 @@ def main():
         res_s.append(('IDENTIQUE' if same else 'DIFFERENT', k, os.path.relpath(m[0], Y_SCR), hl(v), hl(m[1])))
     extra_s = [os.path.relpath(m[0], Y_SCR) for k, m in locs.items() if k not in used_s]
 
-    # 4. rapport
+    # ETAPE 6 : controle final, la prod n'a pas bouge pendant l'analyse
+    hq_a, hq_s = hf(PROD_AUTO), hf(PROD_SCR)
+    bouge = (hq_a != hb_a) or (hq_s != hb_s)
+    etape(6, 'MD5 prod relu apres analyse : automations %s, scripts %s : %s' % (hq_a, hq_s, 'ATTENTION la prod a ete modifiee pendant l analyse' if bouge else 'inchange'))
+
+    # 7. rapport
     dur = (datetime.datetime.now() - t0).total_seconds()
     head = [
         'TRIGUL PROFOND - %s' % NOW.strftime('%Y-%m-%d %H:%M:%S'),
+        'ETAPES : ' + ' ; '.join(etapes),
         'Copie automations.yaml : %s (%s)' % (os.path.relpath(ca, ROOT), sa),
         'Copie scripts.yaml : %s (%s)' % (os.path.relpath(cs, ROOT), ss),
-        'Prod : automations.yaml MD5 fichier %s, %d automations ; scripts.yaml MD5 fichier %s, %d scripts ; %d unites extraites' % (hf(PROD_AUTO), len(prod_a), hf(PROD_SCR), len(prod_s), n_ext),
+        'Prod (copies analysees) : automations.yaml MD5 fichier %s, %d automations ; scripts.yaml MD5 fichier %s, %d scripts ; %d unites extraites' % (hb_a, len(prod_a), hb_s, len(prod_s), n_ext),
         'MD5 logique = empreinte du YAML parse (cles triees, category/labels ignores, espaces de debut/fin ignores, commentaires et mise en forme ignores).',
         'AUTOMATIONS : %d identiques sur %d. Exports locaux sans automation prod : %s' % (ok_a, len(prod_a), ', '.join(extra_a) or 'aucun'),
         'SCRIPTS : %d identiques sur %d. YAML locaux sans script prod : %s' % (ok_s, len(prod_s), ', '.join(extra_s) or 'aucun'),
+        ('ATTENTION : la prod a change pendant l analyse (MD5 apres : automations %s, scripts %s) : relancer' % (hq_a, hq_s)) if bouge else 'Prod inchangee pendant l analyse (controle de l etape 6)',
+        ('ATTENTION : MD5 prod different de la copie bak a l etape 3 (automations %s/%s, scripts %s/%s) : voir les unites DIFFERENT ci-dessous' % (hp_a, hb_a, hp_s, hb_s)) if copie_ko else 'Etape 3 : MD5 prod = MD5 copie pour les deux fichiers',
         'Duree du traitement : %.1f s' % dur,
         ''
     ]
@@ -213,9 +256,12 @@ def main():
     with open(out, 'w', encoding='utf-8', newline='\r\n') as f:
         f.write('\n'.join(head + body) + '\n')
 
-    # 5. effacer le temporaire (garde-fou : uniquement le dossier attendu)
+    etape(7, 'rapport ecrit : %s' % out)
+
+    # 8. effacer le temporaire (garde-fou : uniquement le dossier attendu)
     if os.path.basename(TMP) == '_tmp_trigul_profond' and os.path.dirname(TMP) == ROOT:
         shutil.rmtree(TMP)
+    etape(8, 'dossier temporaire efface')
 
     print('\n'.join(head))
     for l in body:

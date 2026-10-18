@@ -31,6 +31,7 @@ GITIGNORE_EXT = {'.txt', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.ico', '.pyc
 EXCEPTIONS_TXT = [
 
     "fichiers .txt .png .jpg .jpeg .gif .webp .ico .pyc presents en local + prod mais absents de GitHub : ignores par le .gitignore du depot (sauf les .txt de notifs/, versionnes depuis le 2026-10-18)",
+    "fichiers verrou d editeur #...# presents en prod seule : ignores par le .gitignore, jamais sur GitHub (decide par Eric le 2026-10-18)",
     "dossier modifs/ (journaux des agents) : ignore aux 3 niveaux, comme l audit MD5 docs cote HA",
 ]
 
@@ -104,6 +105,8 @@ def attendu(rel, origin):
         return None
     if origin == 'LP' and os.path.splitext(name)[1] in GITIGNORE_EXT:
         return 'type ignore par le .gitignore du depot'
+    if origin == 'P' and len(name) > 2 and name.startswith('#') and name.endswith('#'):
+        return 'fichier verrou d editeur (prod seule, ignore par le .gitignore)'
     if origin == 'PR' and low.startswith('modifs/'):
         return 'journal des agents (copie H: seulement)'
     return None
