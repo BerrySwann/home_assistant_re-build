@@ -1,7 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
-*Dernière mise à jour : 2026-10-18 (18h50, /histo S1) - entrées ajoutées : IA_CARTE_EMPLACEMENTS.md (00 - IA) et Verif_emplacements.py (scripts python, 6 -> 7) ; audit_md5_yaml.sh : lien vers sa fiche config_system_MD/.scripts*
+*Dernière mise à jour : 2026-10-18 (21h55, /histo S2) - entrées ajoutées : hermes_audit_trigul_arbres.py, Hermes_audit_md5_trigul_unitaire.py et trigul_run.py (scripts python, 7 -> 10) ; fiche de Verif_emplacements.py liée*
 *Dernière mise à jour : 2026-10-18 (17h30) - resync des liens : 315 liens remis à la casse et aux noms réels (renommages du 17/10, AQ_01_air_quality, S_01_store, P2_eCO. prises, Controle entity Z2M, RASPI_fan_pwm, configuration/configuration.md) ; fichier déplacé par Eric dans config_system_MD/GLOBAL_INDEX_REPO/*
 *Dernière mise à jour : 2026-10-18 - dossier de config : config_system_YAML remplacé par config_system_SH_PY_YAML (copie fidèle de /config) ; liens des 4 timers remis sur les sous-dossiers P1_Timer_10mn, P1_Timer_2h et P1_Timer_60mn ; 3 notes citant config_system_YAML mises à jour*
 *Dernière mise à jour : 2026-10-15 (soir, /histo-final S1) - repli Meteoalarm retiré du template M_01 : entrée retirée du pop-up #alert (14 -> 13) et des entités natives HA (16 -> 15) ; aucun fichier ajouté, renommé ou supprimé à indexer ici (les fiches CARD_*_HOME ne sont pas indexées)*
@@ -4192,7 +4192,7 @@ device et fonction confirmés (Raspberry Pi, cf. TODO.md U-2). Corrige l'ancienn
 </details>
 
 <details>
-<summary><b>🐍 SCRIPTS PYTHON D'INDEX</b> &nbsp;|&nbsp; 7 scripts (ajoutés le 2026-10-13 et le 2026-10-18, lecture seule de la prod) &nbsp;|&nbsp; Local : <code>docs_scripts_SH/</code> &nbsp;|&nbsp; Non poussés en prod</summary>
+<summary><b>🐍 SCRIPTS PYTHON D'INDEX</b> &nbsp;|&nbsp; 10 scripts (ajoutés le 2026-10-13 et le 2026-10-18, lecture seule de la prod) &nbsp;|&nbsp; Local : <code>docs_scripts_SH/</code> &nbsp;|&nbsp; Non poussés en prod</summary>
 <blockquote>
 
 <details>
@@ -4254,7 +4254,34 @@ Pas de doc associée.
 <blockquote>
 ⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Verif_emplacements/Verif_emplacements.py">Script source</a><br>
 Lancé par /histo (étape 6, point 9) ; ne corrige rien. Carte : <a href="docs/00_IA/SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md">IA_CARTE_EMPLACEMENTS.md</a><br>
-Pas de doc associée.
+📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Verif_emplacements/Verif_emplacements.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><code>hermes_audit_trigul_arbres.py</code> &nbsp;|&nbsp; Superposition en lecture seule des 3 arbres (GitHub, local, prod) pour le trigul</summary>
+<blockquote>
+⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Hermes_audit_md5_trigul_3md/hermes_audit_trigul_arbres.py">Script source</a><br>
+Lancé par trigul_run.py (étape A) ; écrit les rapports de historique/MD5/00_Verif_Final_trigul_arbres.<br>
+📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Hermes_audit_trigul_arbres/Hermes_audit_trigul_arbres.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><code>Hermes_audit_md5_trigul_unitaire.py</code> &nbsp;|&nbsp; Étape profonde du trigul : automations et scripts YAML unité par unité</summary>
+<blockquote>
+⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Hermes_audit_md5_trigul_3md/Hermes_audit_md5_trigul_unitaire.py">Script source</a><br>
+Lancé par trigul_run.py (étape B1) ; écrit historique/MD5/01_trigul_profond.<br>
+📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Hermes_audit_md5_trigul_unitaire/Hermes_audit_md5_trigul_unitaire.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><code>trigul_run.py</code> &nbsp;|&nbsp; Lanceur du trigul avec journal de trace</summary>
+<blockquote>
+⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Hermes_audit_md5_trigul_3md/trigul_run.py">Script source</a><br>
+Enchaîne les étapes A, B1 et C et écrit historique/MD5/04_journal_trigul.<br>
+📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Trigul_run/Trigul_run.md">Doc</a>
 </blockquote>
 </details>
 

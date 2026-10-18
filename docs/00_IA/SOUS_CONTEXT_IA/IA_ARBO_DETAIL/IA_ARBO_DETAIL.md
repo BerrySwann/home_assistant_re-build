@@ -1,5 +1,5 @@
 # 🌳 ARBORESCENCES COMPLÈTES & INDEX GITHUB
-*Derniere mise a jour : 2026-10-18 (resync tree demande par Eric : comptages LOCAL, PROD et GitHub recalcules (dernier commit 5bc5095b ; releve refait par /histo S1 a 18h50 apres le menage .bak) ; config_system_YAML remplace par config_system_SH_PY_YAML ; config_system_MD remanie par Eric (un dossier par fichier, GLOBAL_INDEX_REPO et README deplaces) ; les autres noms de dossiers restent ceux du releve 2026-10-15) | precedent : 2026-10-17 (soir, /histo S1 : section GitHub rafraichie (dernier commit de75fed2) ; menage des sauvegardes (15 a la corbeille Windows, 18 renommees) ; export Dashboard 2026_10_16 ; arbres LOCAL et PROD non rafraichis, releve 2026-10-15) | precedent : 2026-10-17 (arbres LOCAL et PROD developpes en grille a deux colonnes, une ligne par dossier ou fichier ; comptages et noms restent ceux du releve 2026-10-15, donc d avant les renommages) | precedent : 2026-10-15 (soir, /histo-final S1 : releves LOCAL + PROD + GitHub rafraichis ; menage des sauvegardes (19 a la corbeille Windows, 12 renommees) ; export Dashboard deja a jour ; dernier commit GitHub aed7ae96) | precedent : 2026-10-14 (soir, /histo-final S1 : releves LOCAL + PROD + GitHub rafraichis ; menage des sauvegardes (45 a la corbeille Windows, 32 renommees) ; export Dashboard 2026_10_14 ; dernier commit GitHub 058aba96) | precedent : 2026-10-13 (soir, /histo-final : releves LOCAL + PROD + GitHub rafraichis ; menage des sauvegardes (9 a la corbeille Windows, 4 renommees) ; dernier commit GitHub f9407863) | precedent : 2026-10-13 (corrections manuelles apres deplacement de INDEX_GLOBAL : lignes Github, 05_docs_MD_system et liens ; autres comptages du 2026-10-12) | precedent : 2026-10-12 (soir, /histo S1 : relevés LOCAL + PROD + GitHub rafraîchis ; comptages LOCAL recalculés après le ménage des sauvegardes (108 renommées, 125 à la corbeille Windows) et la copie de 8 scripts de la prod en local ; dernier commit GitHub e8af1e4c)*
+*Derniere mise a jour : 2026-10-18 (soir, /histo S2 : comptages LOCAL (apres menage .bak), PROD (fichiers caches compris : 492 dont 10 caches) et GitHub (commit ee1eda47) recalcules ; lignes de la grille mises a jour une par une, texte narratif inchange) | precedent : 2026-10-18 (resync tree demande par Eric : comptages LOCAL, PROD et GitHub recalcules (dernier commit 5bc5095b ; releve refait par /histo S1 a 18h50 apres le menage .bak) ; config_system_YAML remplace par config_system_SH_PY_YAML ; config_system_MD remanie par Eric (un dossier par fichier, GLOBAL_INDEX_REPO et README deplaces) ; les autres noms de dossiers restent ceux du releve 2026-10-15) | precedent : 2026-10-17 (soir, /histo S1 : section GitHub rafraichie (dernier commit de75fed2) ; menage des sauvegardes (15 a la corbeille Windows, 18 renommees) ; export Dashboard 2026_10_16 ; arbres LOCAL et PROD non rafraichis, releve 2026-10-15) | precedent : 2026-10-17 (arbres LOCAL et PROD developpes en grille a deux colonnes, une ligne par dossier ou fichier ; comptages et noms restent ceux du releve 2026-10-15, donc d avant les renommages) | precedent : 2026-10-15 (soir, /histo-final S1 : releves LOCAL + PROD + GitHub rafraichis ; menage des sauvegardes (19 a la corbeille Windows, 12 renommees) ; export Dashboard deja a jour ; dernier commit GitHub aed7ae96) | precedent : 2026-10-14 (soir, /histo-final S1 : releves LOCAL + PROD + GitHub rafraichis ; menage des sauvegardes (45 a la corbeille Windows, 32 renommees) ; export Dashboard 2026_10_14 ; dernier commit GitHub 058aba96) | precedent : 2026-10-13 (soir, /histo-final : releves LOCAL + PROD + GitHub rafraichis ; menage des sauvegardes (9 a la corbeille Windows, 4 renommees) ; dernier commit GitHub f9407863) | precedent : 2026-10-13 (corrections manuelles apres deplacement de INDEX_GLOBAL : lignes Github, 05_docs_MD_system et liens ; autres comptages du 2026-10-12) | precedent : 2026-10-12 (soir, /histo S1 : relevés LOCAL + PROD + GitHub rafraîchis ; comptages LOCAL recalculés après le ménage des sauvegardes (108 renommées, 125 à la corbeille Windows) et la copie de 8 scripts de la prod en local ; dernier commit GitHub e8af1e4c)*
 *Lire ce fichier si : audit fichiers, sync GitHub, recherche d'un fichier prod, vérification arbo locale, URLs raw GitHub.*
 
 ---
@@ -92,7 +92,7 @@
 │ │   │                                         │                                                                                      │
 │ │   └── MOC_PRESENCE/                         │ (son .md et ses sauvegardes)                                                         │
 │ │                                             │                                                                                      │
-│ ├── historique/                               │ (199 dont 56 sauvegardes)                                                            │
+│ ├── historique/                               │ (211 dont 55 sauvegardes)                                                            │
 │ │   │                                         │                                                                                      │
 │ │   ├── JOURNAL_COMPLET/JOURNAL_FUSIONNE_*.md │ (journaux)                                                                           │
 │ │   │                                         │                                                                                      │
@@ -104,27 +104,27 @@
 │ │   │                                         │                                                                                      │
 │ │   └── histo.md                              │ (= copie du skill + ses sauvegardes)                                                 │
 │ │                                             │                                                                                      │
-│ └── docs/                                     │ (973 fichiers dont 472 sauvegardes)                                                  │
+│ └── docs/                                     │ (1022 fichiers dont 517 sauvegardes)                                                 │
 │     │                                         │                                                                                      │
-│     ├── 00_IA/                                │ (42 dont 40 sauvegardes hors SOUS_CONTEXT_IA/ ; les fichiers html, rapports d'audit, │
+│     ├── 00_IA/                                │ (22 dont 20 sauvegardes hors SOUS_CONTEXT_IA/ ; les fichiers html, rapports d'audit, │
 │     │   │                                     │ grille tarifaire et png cites avant ne sont plus ici)                                │
 │     │   │                                     │                                                                                      │
 │     │   ├── IA_CONTEXT_BASE/                  │ (dossier avec IA_CONTEXT_BASE.md et ses sauvegardes (regle du 2026-10-13))           │
 │     │   │                                     │                                                                                      │
 │     │   ├── GLOBAL_INDEX_IA.md                │ (index genere, ajoute le 2026-10-13, et ses sauvegardes)                             │
 │     │   │                                     │                                                                                      │
-│     │   └── SOUS_CONTEXT_IA/                  │ (62 dont 52 sauvegardes - 9 dossiers, un par fichier IA_*.md (IA_ARBO_DETAIL = index │
+│     │   └── SOUS_CONTEXT_IA/                  │ (39 dont 28 sauvegardes - 9 dossiers, un par fichier IA_*.md (IA_ARBO_DETAIL = index │
 │     │                                         │ arbo), chacun avec son .md et ses sauvegardes dedans ; regle du 2026-10-13)          │
 │     │                                         │                                                                                      │
-│     ├── 01_docs_config_system/                │ (132 dont 25 sauvegardes)                                                            │
+│     ├── 01_docs_config_system/                │ (158 dont 53 sauvegardes)                                                            │
 │     │   │                                     │                                                                                      │
-│     │   ├── config_system_MD/                 │ (20 dont 10 sauvegardes - un dossier par fichier)                                    │
+│     │   ├── config_system_MD/                 │ (22 dont 12 sauvegardes - un dossier par fichier)                                    │
 │     │   │                                     │                                                                                      │
-│     │   │   ├── .scripts/                     │ (8 dont 3 sauvegardes)                                                               │
+│     │   │   ├── .scripts/                     │ (9 dont 4 sauvegardes)                                                               │
 │     │   │                                     │                                                                                      │
 │     │   │   ├── configuration/                │ (2 dont 1 sauvegardes)                                                               │
 │     │   │                                     │                                                                                      │
-│     │   │   ├── GLOBAL_INDEX_REPO/            │ (7 dont 6 sauvegardes)                                                               │
+│     │   │   ├── GLOBAL_INDEX_REPO/            │ (8 dont 7 sauvegardes)                                                               │
 │     │   │                                     │                                                                                      │
 │     │   │   ├── README/                       │ (1 dont 0 sauvegardes)                                                               │
 │     │   │                                     │                                                                                      │
@@ -132,9 +132,9 @@
 │     │   │                                     │                                                                                      │
 │     │   │   ├── sql/                          │ (1 dont 0 sauvegardes)                                                               │
 │     │   │                                     │                                                                                      │
-│     │   └── config_system_SH_PY_YAML/         │ (113 fichiers dont 16 sauvegardes - copie de /config)                                │
+│     │   └── config_system_SH_PY_YAML/         │ (136 fichiers dont 41 sauvegardes - copie de /config)                                │
 │     │                                         │                                                                                      │
-│     ├── 02_docs_dashboard/                    │ (277 dont 105 sauvegardes)                                                           │
+│     ├── 02_docs_dashboard/                    │ (278 dont 106 sauvegardes)                                                           │
 │     │   │                                     │                                                                                      │
 │     │   ├── dashboard_docs_MD                 │ (112)                                                                                │
 │     │   │                                     │                                                                                      │
@@ -146,7 +146,7 @@
 │     │   │                                     │                                                                                      │
 │     │   └── docs_automations_YAML             │                                                                                      │
 │     │                                         │                                                                                      │
-│     ├── 04_docs_scripts/                      │ (107 dont 68 sauvegardes)                                                            │
+│     ├── 04_docs_scripts/                      │ (122 dont 76 sauvegardes)                                                            │
 │     │   │                                     │                                                                                      │
 │     │   ├── SH                                │                                                                                      │
 │     │   │                                     │                                                                                      │
@@ -156,11 +156,11 @@
 │     │   │                                     │                                                                                      │
 │     │   └── YAML_MD                           │                                                                                      │
 │     │                                         │                                                                                      │
-│     ├── 05_docs_MD_system/                    │ (24 dont 12 sauvegardes)                                                             │
+│     ├── 05_docs_MD_system/                    │ (25 dont 13 sauvegardes)                                                             │
 │     │                                         │                                                                                      │
-│     ├── 05_docs_skills/                       │ (31 - 17 sauvegardes ; histo.md existe aussi dans historique/)                       │
+│     ├── 05_docs_skills/                       │ (49 - 34 sauvegardes ; histo.md existe aussi dans historique/)                       │
 │     │   │                                     │                                                                                      │
-│     │   ├── skill_<nom>/                      │ (14 dossiers contenant la copie .md de chaque SKILL.md du projet)                    │
+│     │   ├── skill_<nom>/                      │ (16 dossiers contenant la copie .md de chaque SKILL.md du projet)                    │
 │     │   │                                     │                                                                                      │
 │     │   ├── skill_histo/                      │ (ajouté le 2026-10-10)                                                               │
 │     │   │                                     │                                                                                      │
@@ -466,7 +466,7 @@
 │ │                                               │                                                                                    │
 │ ├── deps/                                       │ (divers, hors périmètre docs HA)                                                   │
 │ │                                               │                                                                                    │
-│ └── docs/                                       │ (595 - miroir pushé depuis local docs/ ; dont modifs/ 16 journaux)                 │
+│ └── docs/                                       │ (492 - miroir pushé depuis local docs/ ; dont modifs/ 16 journaux)                 │
 │     │                                           │                                                                                    │
 │     ├── 00_IA/                                  │ (13 fichiers - aucune sauvegarde .bak sur H:)                                      │
 │     │   │                                       │                                                                                    │
@@ -476,21 +476,21 @@
 │     │   │                                       │                                                                                    │
 │     │   └── SOUS_CONTEXT_IA/                    │ (8 dossiers d'un fichier chacun, sans IA_SKILLS_INVENTAIRE)                        │
 │     │                                           │                                                                                    │
-│     ├── 01_docs_config_system/                  │ (205)                                                                              │
+│     ├── 01_docs_config_system/                  │ (106)                                                                              │
 │     │   │                                       │                                                                                    │
-│     │   ├── config_system_MD/                   │ (8)                                                                                │
+│     │   ├── config_system_MD/                   │ (10)                                                                               │
 │     │   │                                       │                                                                                    │
 │     │   ├── config_system_SH_PY_YAML/           │ (95 - copie de /config, poussee le 2026-10-18)                                     │
 │     │   │                                       │                                                                                    │
-│     │   └── config_system_YAML/                 │ (102 - a supprimer apres accord d'Eric)                                            │
+│     │   └── config_system_YAML/                 │ (1 - a supprimer apres accord d'Eric)                                              │
 │     │                                           │                                                                                    │
-│     ├── 02_docs_dashboard/                      │ (172)                                                                              │
+│     ├── 02_docs_dashboard/                      │ (149)                                                                              │
 │     │   │                                       │                                                                                    │
 │     │   ├── dashboard_docs_MD                   │ (61)                                                                               │
 │     │   │                                       │                                                                                    │
-│     │   └── dashboard_docs_YAML                 │ (110)                                                                              │
+│     │   └── dashboard_docs_YAML                 │ (87)                                                                               │
 │     │       │                                   │                                                                                    │
-│     │       └── Dashboard_COMPLET/              │ (24 exports en prod)                                                               │
+│     │       └── Dashboard_COMPLET/              │ (1 export en prod)                                                                 │
 │     │                                           │                                                                                    │
 │     ├── 03_docs_automations/                    │ (141)                                                                              │
 │     │   │                                       │                                                                                    │
@@ -498,9 +498,9 @@
 │     │   │                                       │                                                                                    │
 │     │   └── docs_automations_YAML               │                                                                                    │
 │     │                                           │                                                                                    │
-│     ├── 04_docs_scripts/                        │ (37)                                                                               │
+│     ├── 04_docs_scripts/                        │ (39)                                                                               │
 │     │   │                                       │                                                                                    │
-│     │   ├── SH/                                 │ (18)                                                                               │
+│     │   ├── SH/                                 │ (20)                                                                               │
 │     │   │                                       │                                                                                    │
 │     │   ├── SH_MD/                              │ (3)                                                                                │
 │     │   │                                       │                                                                                    │
@@ -508,7 +508,7 @@
 │     │   │                                       │                                                                                    │
 │     │   └── YAML_MD/                            │ (3)                                                                                │
 │     │                                           │                                                                                    │
-│     ├── 05_docs_MD_system/                      │ (13)                                                                               │
+│     ├── 05_docs_MD_system/                      │ (12)                                                                               │
 │     │   │                                       │                                                                                    │
 │     │   ├── AUTOMATIONS_IDS_REF.md              │                                                                                    │
 │     │   │                                       │                                                                                    │
@@ -532,9 +532,9 @@
 │     │   │                                       │                                                                                    │
 │     │   └── matrisse_template_doc/              │                                                                                    │
 │     │                                           │                                                                                    │
-│     ├── 05_docs_skills/                         │ (14)                                                                               │
+│     ├── 05_docs_skills/                         │ (15)                                                                               │
 │     │   │                                       │                                                                                    │
-│     │   └── skill_<nom>/                        │ (14 dossiers, copies des SKILL.md, poussés depuis local docs/05_docs_skills/)      │
+│     │   └── skill_<nom>/                        │ (15 dossiers, copies des SKILL.md, poussés depuis local docs/05_docs_skills/)      │
 │     │                                           │                                                                                    │
 │     └── 06_docs_technique/                      │ (1)                                                                                │
 │         │                                       │                                                                                    │
@@ -551,8 +551,8 @@
 - **Repo actif unique** : `BerrySwann/home_assistant_re-build` (ancien `home-assistant-config` supprimé le 2026-04-27)
 - **Contenu** : reflet exact de `/homeassistant/` - pushé par `.scripts/ha_git_backup.sh` (boutons page Système L5C3)
 - **Point d'entrée navigation** : [GLOBAL_INDEX_REPO.md](https://github.com/BerrySwann/home_assistant_re-build/blob/main/GLOBAL_INDEX_REPO.md) (copie de navigation a la racine, nom change le 2026-10-13 ; visible sur GitHub apres le prochain backup HA)
-- **Dernier relevé arbre (API git trees)** : 2026-10-18 - **1455 objets (fichiers + dossiers)** ; dernier commit `5bc5095b` (2026-10-18 18:30 CEST, HAOS auto-backup: 2026-10-18 18:30:34 CEST, HA 2026.10.1)
-- Répartition : `docs/` 1159 · `templates/` 85 · `utility_meter/` 14 · `input_booleans/` 5 · `sensors/` 10
+- **Dernier relevé arbre (API git trees)** : 2026-10-18 - **1275 objets (fichiers + dossiers)** ; dernier commit `ee1eda47` (2026-10-18 21:25 CEST, HAOS MANUEL-backup: 2026-10-18 21:25:11 CEST, HA 2026.10.1)
+- Répartition : `docs/` 979 · `templates/` 85 · `utility_meter/` 14 · `input_booleans/` 5 · `sensors/` 10
 
 **Patterns URLs :**
 

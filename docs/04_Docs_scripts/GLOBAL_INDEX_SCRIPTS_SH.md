@@ -1,6 +1,6 @@
 # GLOBAL_INDEX_SCRIPTS_SH.md - index des scripts shell et python
 
-Fichier GENERE le 2026-10-18 18:46 par docs/04_docs_scripts/docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-10-18 21:58 par docs/04_docs_scripts/docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 ## Difference entre l'index SH et l'index YAML
 
@@ -11,8 +11,8 @@ Fichier GENERE le 2026-10-18 18:46 par docs/04_docs_scripts/docs_scripts_SH/gen_
 
 ## Controle
 
-- Scripts SH indexes : 20
-- Scripts sans fiche dans docs_scripts_SH_MD : 13 (Check_GLOBAL_INDEX.py, Check_sous_context_ia.py, Check_sous_context_ia.cpython-314.pyc, Gen_GLOBAL_INDEX_automations.py, Gen_GLOBAL_INDEX_ia.py, Gen_GLOBAL_INDEX_ia.cpython-314.pyc, Gen_GLOBAL_INDEX_scripts.py, Gen_GLOBAL_INDEX_vignettes_pages.py, hermes_audit_trigul_arbres.py, #MPC_01_monitor_temp.sh.#, #MP_01_monitor_temp.sh.#, Mf_vigilance_images.sh, Verif_emplacements.py)
+- Scripts SH indexes : 17
+- Scripts sans fiche dans docs_scripts_SH_MD : 7 (Check_GLOBAL_INDEX.py, Check_sous_context_ia.py, Gen_GLOBAL_INDEX_automations.py, Gen_GLOBAL_INDEX_ia.py, Gen_GLOBAL_INDEX_scripts.py, Gen_GLOBAL_INDEX_vignettes_pages.py, Mf_vigilance_images.sh)
 - Scripts presents dans H:\.scripts avec un contenu different du local : 1 (Audit_md5_md_yaml.sh)
 - Les scripts 'absent de H:\.scripts' tournent sur le PC ou ne sont pas deployes : a lire avec la colonne Skill.
 
@@ -25,18 +25,15 @@ Fichier GENERE le 2026-10-18 18:46 par docs/04_docs_scripts/docs_scripts_SH/gen_
 | [Audit_md5_yaml.sh](docs_scripts_SH/Audit_md5_yaml/Audit_md5_yaml.sh) | bash | identique | - | - | - | [Audit_md5.md](docs_scripts_SH_MD/Audit_md5/Audit_md5.md) | Audit_md5_yaml |
 | [Check_GLOBAL_INDEX.py](docs_scripts_SH/Check_GLOBAL_INDEX/Check_GLOBAL_INDEX.py) | python | absent de H:\.scripts | - | - | - | aucune | Check_GLOBAL_INDEX |
 | [Check_sous_context_ia.py](docs_scripts_SH/Check_sous_context_ia/Check_sous_context_ia.py) | python | absent de H:\.scripts | - | - | - | aucune | Check_sous_context_ia |
-| [Check_sous_context_ia.cpython-314.pyc](docs_scripts_SH/Check_sous_context_ia/__Pycache__/Check_sous_context_ia.cpython-314.pyc) | autre | absent de H:\.scripts | - | - | - | aucune | Check_sous_context_ia |
 | [Gen_GLOBAL_INDEX_automations.py](docs_scripts_SH/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.py) | python | absent de H:\.scripts | - | - | - | aucune | Gen_GLOBAL_INDEX_automations |
 | [Gen_GLOBAL_INDEX_ia.py](docs_scripts_SH/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.py) | python | absent de H:\.scripts | - | - | - | aucune | Gen_GLOBAL_INDEX_ia |
-| [Gen_GLOBAL_INDEX_ia.cpython-314.pyc](docs_scripts_SH/Gen_GLOBAL_INDEX_ia/__pycache__/Gen_GLOBAL_INDEX_ia.cpython-314.pyc) | autre | absent de H:\.scripts | - | - | - | aucune | Gen_GLOBAL_INDEX_ia |
 | [Gen_GLOBAL_INDEX_scripts.py](docs_scripts_SH/Gen_GLOBAL_INDEX_scripts/Gen_GLOBAL_INDEX_scripts.py) | python | absent de H:\.scripts | - | - | - | aucune | Gen_GLOBAL_INDEX_scripts |
 | [Gen_GLOBAL_INDEX_vignettes_pages.py](docs_scripts_SH/Gen_GLOBAL_INDEX_vignettes_pages/Gen_GLOBAL_INDEX_vignettes_pages.py) | python | absent de H:\.scripts | - | - | - | aucune | Gen_GLOBAL_INDEX_vignettes_pages |
 | [Ha_git_backup.sh](docs_scripts_SH/Ha_git_backup/Ha_git_backup.sh) | bash | identique | - | - | ha-trigul | [Ha_git_backup.md](docs_scripts_SH_MD/Ha_git_backup/Ha_git_backup.md) | Ha_git_backup |
 | [Hermes_audit_md5_docs.sh](docs_scripts_SH/Hermes_audit_md5_docs/Hermes_audit_md5_docs.sh) | bash | absent de H:\.scripts | - | - | - | [Audit_md5_docs.md](docs_scripts_SH_MD/Audit_md5_docs/Audit_md5_docs.md) | Hermes_audit_md5_docs |
-| [Hermes_audit_md5_trigul_3md.sh](docs_scripts_SH/Hermes_audit_md5_trigul_3md/Hermes_audit_md5_trigul_3md.sh) | bash | absent de H:\.scripts | - | - | - | [Audit_md5.md](docs_scripts_SH_MD/Audit_md5/Audit_md5.md) | Hermes_audit_md5_trigul_3md |
-| [Hermes_audit_md5_trigul_unitaire.py](docs_scripts_SH/Hermes_audit_md5_trigul_3md/Hermes_audit_md5_trigul_unitaire.py) | python | absent de H:\.scripts | - | - | - | [Audit_md5.md](docs_scripts_SH_MD/Audit_md5/Audit_md5.md) | Hermes_audit_md5_trigul_3md |
-| [hermes_audit_trigul_arbres.py](docs_scripts_SH/Hermes_audit_md5_trigul_3md/hermes_audit_trigul_arbres.py) | python | absent de H:\.scripts | - | - | ha-trigul | aucune | Hermes_audit_md5_trigul_3md |
-| [#MPC_01_monitor_temp.sh.#](docs_scripts_SH/MPC_01_monitor_temp.sh%20-%20save%20pour%20RASPI/%23MPC_01_monitor_temp.sh.%23) | autre | absent de H:\.scripts | - | - | - | aucune | MPC_01_monitor_temp.sh - save pour RASPI |
-| [#MP_01_monitor_temp.sh.#](docs_scripts_SH/MP_01_monitor_temp.sh%20-%20save%20pour%20RASPI/%23MP_01_monitor_temp.sh.%23) | autre | identique | - | - | - | aucune | MP_01_monitor_temp.sh - save pour RASPI |
+| [Hermes_audit_md5_trigul_3md.sh](docs_scripts_SH/Hermes_audit_md5_trigul_3md/Hermes_audit_md5_trigul_3md.sh) | bash | absent de H:\.scripts | - | - | - | [Hermes_audit_md5_trigul_unitaire.md](docs_scripts_SH_MD/Hermes_audit_md5_trigul_unitaire/Hermes_audit_md5_trigul_unitaire.md) | Hermes_audit_md5_trigul_3md |
+| [Hermes_audit_md5_trigul_unitaire.py](docs_scripts_SH/Hermes_audit_md5_trigul_3md/Hermes_audit_md5_trigul_unitaire.py) | python | absent de H:\.scripts | - | - | - | [Hermes_audit_md5_trigul_unitaire.md](docs_scripts_SH_MD/Hermes_audit_md5_trigul_unitaire/Hermes_audit_md5_trigul_unitaire.md) | Hermes_audit_md5_trigul_3md |
+| [hermes_audit_trigul_arbres.py](docs_scripts_SH/Hermes_audit_md5_trigul_3md/hermes_audit_trigul_arbres.py) | python | absent de H:\.scripts | - | - | ha-trigul | [Hermes_audit_trigul_arbres.md](docs_scripts_SH_MD/Hermes_audit_trigul_arbres/Hermes_audit_trigul_arbres.md) | Hermes_audit_md5_trigul_3md |
+| [trigul_run.py](docs_scripts_SH/Hermes_audit_md5_trigul_3md/trigul_run.py) | python | absent de H:\.scripts | - | - | ha-trigul | [Trigul_run.md](docs_scripts_SH_MD/Trigul_run/Trigul_run.md) | Hermes_audit_md5_trigul_3md |
 | [Mf_vigilance_images.sh](docs_scripts_SH/Mf_vigilance_images/Mf_vigilance_images.sh) | bash | absent de H:\.scripts | - | - | - | aucune | Mf_vigilance_images |
-| [Verif_emplacements.py](docs_scripts_SH/Verif_emplacements/Verif_emplacements.py) | python | absent de H:\.scripts | - | - | fix-file, ha-new-yaml, ha-push-docs, ha-push-yaml, ha-resync-docs, ha-resync-tree, ha-trigul, ha-update-check-cli, histo, histo-final, sync-index, update-arbo | aucune | Verif_emplacements |
+| [Verif_emplacements.py](docs_scripts_SH/Verif_emplacements/Verif_emplacements.py) | python | absent de H:\.scripts | - | - | fix-file, ha-new-yaml, ha-push-docs, ha-push-yaml, ha-resync-docs, ha-resync-tree, ha-trigul, ha-update-check-cli, histo, histo-final, sync-index, update-arbo | [Verif_emplacements.md](docs_scripts_SH_MD/Verif_emplacements/Verif_emplacements.md) | Verif_emplacements |

@@ -170,6 +170,8 @@ def build_sh(now, scripts, autos, cmds):
             continue
         for p in files_of(fd):
             name = os.path.basename(p)
+            if name.lower().endswith(".pyc") or (len(name) > 2 and name.startswith("#") and name.endswith("#")):
+                continue  # bytecode et verrous d editeur : pas des scripts (decide par Eric le 2026-10-18)
             ext = os.path.splitext(name)[1].lower()
             typ = {".sh": "bash", ".py": "python"}.get(ext, "autre")
             pp = os.path.join(P_SC, name)
