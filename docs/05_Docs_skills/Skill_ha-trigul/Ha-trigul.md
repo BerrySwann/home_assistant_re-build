@@ -15,6 +15,8 @@ Trois controles enchaines, rapports ranges dans `historique\MD5\`, un sous-reper
 2. Etape profonde : automations et scripts YAML unite par unite, puis categories HA.
 3. Fichiers a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : 5 emplacements compares (etape C).
 
+Le trigul se lance par un lanceur qui ecrit un journal de trace (voir "Lancement et journal de trace") : il montre ou le trigul s'arrete le jour ou il plante, et detecte les echecs silencieux (ancien rapport pris pour un nouveau, script mort sans bruit).
+
 Perimetre de la superposition : `docs/` complet + le README racine (`docs/01_docs_config_system/config_system_MD/README/README.md` en local, original depuis le 2026-10-18 ; `README.md` a la racine de H: et du depot, compare sous le nom `(racine)/README.md`), hors `.bak` (ignores completement, ni comptes ni cites) et hors le dossier `modifs/` (journaux des agents, ignore aux 3 niveaux depuis le 2026-10-18, comme l'audit HA). Les YAML de config de la racine de H: ne sont pas dans la superposition : ils sont controles par l'etape C.
 
 Source de verite = LOCAL (ReBuild). Un ecart local/prod veut dire prod EN RETARD ; un ecart prod/depot veut dire depot EN RETARD. GitHub = dernier commit du depot, alimente par le backup HA (jamais de push direct) : un retard apres un push en prod est normal jusqu'au backup suivant.
@@ -26,14 +28,16 @@ Pre-requis : la session doit etre liee au PC (desktop Claude). Sans liaison, ni 
 - Script 1 (superposition des arbres) : `C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py`
 - Script 2 (profond) : `...\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py` (meme dossier)
 - Script 3 (emplacements) : `C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py`
+- Lanceur avec journal de trace (decide par Eric le 2026-10-18) : `C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\trigul_run.py` (meme dossier que les scripts 1 et 2). Il lance les scripts 1, 2 et 3 sans les modifier.
 - Ancien trigul .md en bash : `...\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_3md.sh` (meme dossier que le script 1). Ne plus le lancer : il est redondant avec le script 1. Le fichier reste en place (ne pas le supprimer sans demande d'Eric).
-- Interpreteur : `python -I` (scripts 1, 2 et 3).
+- Interpreteur : `python -I` (scripts 1, 2 et 3 et lanceur).
 - Dossier des rapports : `C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\`, avec un sous-repertoire numerote par type de rapport (decide par Eric le 2026-10-18) :
   - `00_Verif_Final_trigul_arbres` : `trigul_arbres_[YYYY-MM-DD].txt` et `.html`, ecrits par le script 1 (teste le 2026-10-18 : les 2 rapports du jour y sont) ;
   - `01_trigul_profond` : `trigul_profond_[YYYY-MM-DD].txt`, ecrit par le script 2 (verifie le 2026-10-18 : le rapport arrive bien dans ce repertoire) ;
   - `02_categories_ha` : `categories_ha_[YYYY-MM-DD].txt`, ecrit par Claude a l'etape B2, pas par un script ;
   - `03_verif_emplacements` : `verif_emplacements_[YYYY-MM-DD].txt`, ecrit par le script 3 (cree le 2026-10-18).
-  - Un nouveau type de rapport = le repertoire suivant (`04_...`, puis `05_...`) : le creer avec son numero, puis l'ajouter ici et dans CLAUDE.md.
+  - `04_journal_trigul` : `trigul_journal_[YYYY-MM-DD].log`, journal de trace ecrit par le lanceur (une ligne par evenement, un fichier par jour, ajout) ;
+  - Un nouveau type de rapport = le repertoire suivant (`05_...`, puis `06_...`) : le creer avec son numero, puis l'ajouter ici et dans CLAUDE.md.
   - Le menage des `.bak` de ces repertoires est fait par /histo (etape 5, chapitre "Cas particulier : historique\MD5\") : 10 sauvegardes horodatees au maximum le jour meme, 3 sauvegardes datees pour les jours passes ; les rapports eux-memes (un par jour) ne sont pas limites.
 - L'ancien `hermes_md5_audit_md_*.txt` n'est plus produit.
 - Rapport de l'audit HA (prod contre GitHub, pour recoupement) : `H:\.logs\md5_audit_md_yaml_[YYYY-MM-DD].txt`.
@@ -41,6 +45,18 @@ Pre-requis : la session doit etre liee au PC (desktop Claude). Sans liaison, ni 
 Les scripts peuvent etre modifies sur demande d'Eric (decision du 2026-10-17) : sauvegarde `nom.bak_AAAA_MM_JJ_HHhMMmSSs.ext` dans le meme dossier avant toute modification, controle de syntaxe (`python -I -W error -c "import ast..."` ou `bash -n`), ligne dans le journal des modifs. Ne jamais pousser un script en prod (docs ou H:\.scripts) sans ordre d'Eric. Le script 1 n'a pas encore de fiche dans docs_scripts_sh_md.
 
 ## Protocole
+
+### Lancement et journal de trace (decide par Eric le 2026-10-18)
+
+Lancer le trigul avec le lanceur : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\trigul_run.py"` (environ 10 s). Il enchaine A (script 1), B1 (script 2) et C (script 3), sans modifier les scripts, et ecrit `historique\MD5\04_journal_trigul\trigul_journal_[YYYY-MM-DD].log` ligne par ligne (heure | niveau | etape | message ; niveaux INFO, SORTIE, STDERR, NOTE, OK, ATTENTION, ECHEC), chaque ligne forcee sur le disque. Apres chaque script il controle : code de retour, Traceback, depassement de temps (300 s), rapport absent, vide ou pas mis a jour pendant ce lancement (un ancien rapport serait pris pour le nouveau), marqueurs de fin du rapport (RESULTAT, controle du script : OK, ANOMALIES), dossier temporaire du profond laisse derriere, mention "injoignable" dans la sortie du script 3. Verdict par etape : OK, ATTENTION ou ECHEC. Code de retour du lanceur : 0 sans ECHEC, 1 sinon.
+
+Apres le lancement :
+1. Lire les lignes ECHEC et ATTENTION du journal du jour et les mettre EN TETE du compte rendu.
+2. Si la derniere ligne du journal n'est pas `FIN DU LANCEUR`, le lanceur a ete interrompu (PC eteint, session fermee) : le dire et citer la derniere ligne.
+3. L'etape B2 (categories HA) est faite par Claude : ajouter sa ligne au journal avec `python -I trigul_run.py --note B2_categories_ha "texte"`.
+4. Un ECHEC ne se corrige pas sans demande : citer l'etape, la ligne du journal et le fichier concerne.
+
+Les sections A, B et C ci-dessous decrivent ce que fait chaque script et comment lire son rapport. Lancer un script seul n'est a faire que pour un essai, hors journal.
 
 ### A. Superposition des 3 arbres (script 1)
 
@@ -96,10 +112,11 @@ Second releve du 2026-10-18 (relance du script 1 a 10h26, GitHub au commit c7230
 
 ## Compte rendu a l'utilisateur
 
+- Mettre en tete les lignes ECHEC et ATTENTION du journal de trace du jour, s'il y en a.
 - Donner les lignes `ANOMALIES`, `RESULTAT AUDIT` et `RESULTAT` du script 1, la synthese de l'etape profonde et les lignes `ANOMALIES` et `RESULTAT` du script 3, telles quelles.
 - Lister les ecarts hors ecarts attendus : fichier, origine ou niveau en retard. Pour la section 1, donner le nombre par origine puis les exemples utiles ; le detail complet est dans le rapport. S'il n'y a pas d'anomalie, le dire (`ANOMALIES : aucune`).
 - Une fois les resultats donnes, Eric cherche les fichiers manquants ou differents : proposer d'enqueter en lecture seule sur les groupes (empreinte identique sous un autre nom, anciens noms, orphelins) avant toute action.
-- Donner les chemins des rapports, dans leurs repertoires numerotes de `historique\MD5\` (`00_Verif_Final_trigul_arbres`, `01_trigul_profond`, `02_categories_ha`, `03_verif_emplacements`).
+- Donner les chemins des rapports, dans leurs repertoires numerotes de `historique\MD5\` (`00_Verif_Final_trigul_arbres`, `01_trigul_profond`, `02_categories_ha`, `03_verif_emplacements`, `04_journal_trigul`).
 - Ne rien pousser, renommer ni supprimer sans demande, cas par cas. Pour une prod en retard, proposer ha-push-md, ha-push-docs ou ha-push-yaml. Pour GitHub : jamais de push direct, le depot est alimente par le backup HA lance par Eric.
 - Ajouter une ligne au journal des modifs du jour pour les rapports ecrits (skill journal-modifs ; une ligne LOT suffit).
 - Repondre en francais, concis, sans emojis ni tableaux.
