@@ -20613,3 +20613,11 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [WIFI] | 18/10 22:30 | Hyg:0.03 | Cuis:0.5 | Froid:0.9 | Chauff:0.0 | Avg 4:0.0 | Multi:6.58 | Lum:0.84 | Autres:0.36 | Ti:24.3°C | Ext:17.8°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
 [2] en [WIFI] | 18/10 22:45 | Hyg:0.03 | Cuis:0.5 | Froid:0.91 | Chauff:0.0 | Avg 4:0.0 | Multi:6.68 | Lum:0.86 | Autres:0.36 | Ti:24.3°C | Ext:17.8°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
 [2] en [WIFI] | 18/10 23:00 | Hyg:0.03 | Cuis:0.5 | Froid:0.91 | Chauff:0.0 | Avg 4:0.0 | Multi:6.68 | Lum:0.87 | Autres:0.36 | Ti:24.3°C | Ext:17.8°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 18/10 23:15 | Hyg:0.03 | Cuis:0.5 | Froid:0.93 | Chauff:0.0 | Avg 4:0.0 | Multi:6.82 | Lum:0.88 | Autres:0.36 | Ti:24.3°C | Ext:17.8°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 18/10 23:30 | Hyg:0.03 | Cuis:0.5 | Froid:0.95 | Chauff:0.0 | Avg 4:0.0 | Multi:6.86 | Lum:0.88 | Autres:0.37 | Ti:24.3°C | Ext:17.8°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 18/10 23:45 | Hyg:0.03 | Cuis:0.5 | Froid:0.97 | Chauff:0.0 | Avg 4:0.0 | Multi:7.01 | Lum:0.88 | Autres:0.37 | Ti:24.3°C | Ext:17.8°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 19/10 00:00 | Hyg:0.0 | Cuis:0.0 | Froid:0.0 | Chauff:0.0 | Avg 4:0.0 | Multi:0.0 | Lum:0.0 | Autres:0.0 | Ti:24.3°C | Ext:17.8°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 19/10 00:15 | Hyg:0.0 | Cuis:0.0 | Froid:0.01 | Chauff:0.0 | Avg 4:0.0 | Multi:0.14 | Lum:0.0 | Autres:0.0 | Ti:24.3°C | Ext:17.8°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 19/10 00:30 | Hyg:0.0 | Cuis:0.0 | Froid:0.02 | Chauff:0.0 | Avg 4:0.0 | Multi:0.19 | Lum:0.01 | Autres:0.0 | Ti:24.3°C | Ext:17.8°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 19/10 00:45 | Hyg:0.0 | Cuis:0.0 | Froid:0.02 | Chauff:0.0 | Avg 4:0.0 | Multi:0.34 | Lum:0.01 | Autres:0.01 | Ti:24.2°C | Ext:17.8°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
+[2] en [WIFI] | 19/10 01:00 | Hyg:0.0 | Cuis:0.0 | Froid:0.03 | Chauff:0.0 | Avg 4:0.0 | Multi:0.35 | Lum:0.01 | Autres:0.01 | Ti:24.2°C | Ext:17.8°C | DUT S/R/B/C:0.0/0.0/0.0/0.0
