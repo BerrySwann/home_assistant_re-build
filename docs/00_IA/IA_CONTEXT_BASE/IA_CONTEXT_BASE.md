@@ -225,7 +225,7 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
 
 - Perimetre : les dossiers `docs/00_*` a `docs/05_*` de `ReBuild/` (config YAML, dashboard YAML,
   automations, scripts, docs .md, contexte IA) et `Claude md SAVE/` (CLAUDE.md). Hors perimetre :
-  `TODO/`, `Github/`, `historique/`, `.claude/`, `Infra_Proxmox/`.
+  `TODO/`, `Github/`, `historique/` (sauf `historique/MD5/`, voir plus bas), `.claude/`, `Infra_Proxmox/`.
 - Lieu : en local, a cote du fichier modifie. Jamais sur H:\ ni sur D:\.
 - Avant CHAQUE modification d'un fichier, creer `{nom}.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}`
   (ex : `P1_kWh_clim.bak_2026_10_08_08h54m30s.yaml`). Format PowerShell :
@@ -254,6 +254,22 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
   'OnlyErrorDialogs','SendToRecycleBin')` apres `Add-Type -AssemblyName Microsoft.VisualBasic`
   (teste le 2026-10-08). Pas de corbeille sur H:\ : ne jamais supprimer un fichier de H:\ sans
   avoir verifie qu'il existe en local.
+- Repertoire temporaire : `ReBuild\TEMPO\` (decide par Eric le 2026-10-18). C'est le seul dossier pour tout ce qui est temporaire :
+  copies de securite avant une suppression en prod (H: n'a pas de corbeille : copier le fichier dans `TEMPO\<operation>_AAAA-MM-JJ\`
+  en gardant l'arborescence, verifier le MD5 de la copie, puis supprimer sur H:, et noter le rapport dans le journal des modifs),
+  et tout autre besoin de fichiers temporaires (extractions, essais, copies de travail). Ne pas creer d'autre dossier temporaire
+  dans ReBuild, sauf un dossier ephemere efface par son propre script (ex : `_tmp_trigul_profond`).
+- Dossier `historique/MD5/` (ajoute au perimetre par Eric le 2026-10-18, menage des .bak hermes compris) : un sous-repertoire par type de rapport,
+  numerotes `00_` a `XX_` : `00_Verif_Final_trigul_arbres` (`trigul_arbres_AAAA-MM-JJ.txt` et `.html`), `01_trigul_profond`,
+  `02_categories_ha`. Un nouveau type de rapport = le repertoire suivant (`03_...`, puis `04_...`). Dans chaque repertoire, meme regle
+  que le reste, par fichier de rapport : sauvegardes `rapport.bak_AAAA_MM_JJ_HHhMMmSSs.ext`, 10 au maximum le jour meme ; les jours passes,
+  la plus recente de chaque jour devient `rapport.bak_AAAA_MM_JJ.ext` (3 jours au plus), les autres vont a la corbeille Windows. Une sauvegarde
+  sans extension prend celle du rapport ; une ancienne `bak_HHhMM_libelle` (sans date) prend la date lue dans le nom du rapport (deduite : a signaler).
+  Les rapports eux-memes (un par jour) et les copies `_latest` ne sont pas touches (Eric n'a pas encore dit s'il faut aussi limiter les rapports
+  des jours passes a 3 jours). Premier menage execute le 2026-10-18 (dry-run `historique\menage_MD5_dryrun_2026-10-18.txt`, rapport
+  `historique\menage_MD5_2026-10-18.txt`), puis tout le dossier a la corbeille sauf les 2 rapports du jour (`historique\menage_MD5_poubelle_2026-10-18.txt`).
+  /histo applique cette regle a son etape 5 (skills histo et histo-final mis a jour le 2026-10-18). Tant que les scripts du trigul n'ecrivent pas
+  dans leur repertoire numerote, les rapports restent a la racine de `historique\MD5\` (a faire).
 - Restauration : copier la sauvegarde voulue, retirer le segment `.bak_...`, jamais de suffixe en prod.
 - CLAUDE.md et `docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md` (et leur copie `D:\docs\00_IA\`) : meme regle avant toute
   reecriture (sauvegarde locale uniquement). Apres reecriture, resynchroniser les 3 copies et
