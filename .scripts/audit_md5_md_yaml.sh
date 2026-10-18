@@ -29,7 +29,7 @@ echo ""
 echo "── PASS 1 : TREE LOCAL (/config/docs/) ─────────────────────────────────────"
 } > "$LOG"
 
-find "$DOCS_ROOT" -type f \( -name "*.md" -o -name "*.yaml" -o -name "*.sh" \) 2>/dev/null | sort > "$TMP_TREE" || true
+find "$DOCS_ROOT" -type f \( -name "*.md" -o -name "*.yaml" -o -name "*.sh" \) ! -path "$DOCS_ROOT/modifs/*" 2>/dev/null | sort > "$TMP_TREE" || true
 
 TOTAL=$(wc -l < "$TMP_TREE")
 TOTAL_MD=$(grep -c '\.md$' "$TMP_TREE" 2>/dev/null || echo 0)
@@ -116,3 +116,4 @@ echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 docs terminé : $TOTAL fichi
 # [2026-08-08] FIX : réécriture LF pur (fichier initial écrit en CRLF via Windows → bash error \r)
 # [2026-08-09] Extension périmètre : tout docs/ sans exclusion (.md + .yaml + .sh)
 # [2026-10-10] Colonnes du tableau : PROD | GITHUB | STATUT | FICHIER (fichier en dernier, statuts alignes). Lignes RESULTAT et Audit MD5 docs termine inchangees.
+# [2026-10-18] Exclusion du dossier modifs/ (journaux des agents, ecrits en prod avant le backup GitHub, ABSENT GITHUB sans interet). Demande d Eric.

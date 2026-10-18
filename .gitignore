@@ -69,6 +69,8 @@ migration-*-to-*.log
 !notifs/ecart_liky_vs_nodon.txt
 !rebuild_tree.txt
 !zone_eric.txt
+# "Icones meteo des docs (svg) versionnees : 3 niveaux local, prod, GitHub (2026-10-18, demande d Eric)"
+!docs/**/*.svg
 # "[L65] Force l inclusion du diagnostic conso malgré l interdiction .txt"
 
 
