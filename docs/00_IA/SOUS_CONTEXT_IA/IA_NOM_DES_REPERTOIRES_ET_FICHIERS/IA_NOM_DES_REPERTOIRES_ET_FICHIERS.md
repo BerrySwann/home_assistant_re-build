@@ -87,7 +87,7 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - TOTAL : niveau 3, appartement entier (voir plus haut). Exemple `P3_POWER_3_TOTAL_ZONE.yaml`.
 - UNITE et ZONE s'écrivent en majuscules et sans accent (CLAUDE.md écrit UNITÉ dans un titre ; les noms de fichiers n'ont pas d'accent).
 - Règle : tout nom qui se termine par `_UNITE`, `_ZONE` ou `_TOTAL`, avec ou sans numéro de niveau devant (`_1_UNITE`, `_2_ZONE`, `_3_TOTAL`), garde ces suffixes en majuscules et n'est pas renommé à cause d'eux.
-- Exemples présents aujourd'hui, état du jour (7 fichiers de `01_docs_config_system\config_system_YAML`, zone dont la casse reste inchangée) :
+- Exemples présents aujourd'hui, état du jour (7 fichiers de `01_docs_config_system\config_system_SH_PY_YAML`, zone dont la casse reste inchangée) :
 - `templates\P1_clim_chauffage\P1_AVG\P1_AVG_AMHQ_UNITE.yaml`
 - `templates\P3_eclairage\P3_AVG\P3_AVG_AMHQ_1_UNITE.yaml`
 - `templates\P3_eclairage\P3_AVG\P3_AVG_AMHQ_2_ZONE.yaml`
@@ -157,20 +157,20 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 ### 6.5 Cas particuliers décidés le 2026-10-16
 - `PAGE_HOME` devient `Page_Home` (dossier et fichier `.md`).
 - Un nom qui commence par `vignette_`, `page_` ou `PAGE_` prend `Vignette_` ou `Page_` (première lettre seulement). Ce cas est repris par les règles du paragraphe 6.2.
-- Dans `01_docs_config_system\config_system_YAML\command_line`, les sous-dossiers prennent une majuscule en première lettre : `Audit`, `Energie`, `Github_maintenance`, `Ip_externe`, `Meteo`. Exception décidé le 2026-10-17 : `Github_maintenance` s'écrit `GitHub_maintenance` (règle GitHub, paragraphe 6.13).
+- Dans `01_docs_config_system\config_system_SH_PY_YAML\command_line`, les sous-dossiers prennent une majuscule en première lettre : `Audit`, `Energie`, `Github_maintenance`, `Ip_externe`, `Meteo`. Exception décidé le 2026-10-17 : `Github_maintenance` s'écrit `GitHub_maintenance` (règle GitHub, paragraphe 6.13).
 - Sous `00_IA`, plus aucun renommage automatique.
 
 ### 6.6 Air_Quality, préfixes AQ_ et MPC_ (décidé le 2026-10-17)
 - Le préfixe des fichiers Air Quality devient `AQ_` (au lieu de `A_`) : `A_01_air_quality.yaml` devient `AQ_01_air_quality.yaml`.
 - Le dossier `Air_quality/` s'écrit `Air_Quality/` : exception à la règle du premier mot (paragraphe 1), chaque mot garde sa majuscule, comme les lettres de `AQ`. Je l'applique à ce seul nom ; elle ne devient pas une règle générale (déduit de la demande, à confirmer).
-- Concerne, dans `01_docs_config_system\config_system_YAML` (image de `H:\`) : `sensors\Air_quality` et `templates\Air_quality`, avec leur fichier `A_01_air_quality.yaml` dans chacun. Écarts relevés : 4 entrées.
+- Concerne, dans `01_docs_config_system\config_system_SH_PY_YAML` (image de `H:\`) : `sensors\Air_quality` et `templates\Air_quality`, avec leur fichier `A_01_air_quality.yaml` dans chacun. Écarts relevés : 4 entrées.
 - Le préfixe Mini-PC devient `MPC_` (au lieu de `MP_`) : `MP_01_monitor_temp.sh` devient `MPC_01_monitor_temp.sh`.
 - Écarts relevés pour `MPC_` : 2 entrées dans `04_Docs_scripts\Docs_scripts_sh`, le dossier `Mp_01_monitor_temp.sh - save pour raspi` (attendu : `MPC_01_monitor_temp.sh - save pour raspi`) et son fichier `#Mp_01_monitor_temp.sh.#` (attendu : `#MPC_01_monitor_temp.sh.#`). Établi : les noms actuels commencent par `Mp_`. Déduit : l'original était `MP_` (le fichier de la prod s'appelle `#MP_01_monitor_temp.sh.#`, vu dans l'arbre de `H:\.scripts`), passé en `Mp_` par la règle du premier mot.
 - Renommage : sur go séparé (local, puis prod, puis repo). Avant la prod, vérifier que ni `configuration.yaml` (includes) ni une carte ne dépendent de ces chemins : non vérifié à ce jour.
 - CLAUDE.md (section 3 et exemple de la convention YAML) et ses deux copies identiques, `IA_CONTEXT_BASE.md` en local et `D:\docs\00_IA\IA_CONTEXT_BASE.md`, ont été mis à jour le 2026-10-17 : `AQ_` et `MPC_`, et `{PREFIXE}` à la place de `{LETTRE}`. La copie de la prod (`H:\docs\00_IA`) n'est pas poussée : go séparé. La section 9 de CLAUDE.md a été complétée le même jour (UI_DASHBOARD, MINI_/MAXI_, SDB, eCO, noms de modules, accents).
 
 ### 6.7 Noms de modules HACS et d'applications (décidé le 2026-10-17)
-- Quand un nom contient le nom d'un module HACS ou d'une application, il s'écrit comme ce module ou cette application, majuscules comprises. Cette règle passe avant la règle du premier mot (paragraphe 1). Exemple d'Eric : `P0_MyElectricalData`, fichier `01_docs_config_system\config_system_YAML\templates\P0_energie_total_diag\P0_Linky\P0_MyElectricalData.yaml`, déjà conforme.
+- Quand un nom contient le nom d'un module HACS ou d'une application, il s'écrit comme ce module ou cette application, majuscules comprises. Cette règle passe avant la règle du premier mot (paragraphe 1). Exemple d'Eric : `P0_MyElectricalData`, fichier `01_docs_config_system\config_system_SH_PY_YAML\templates\P0_energie_total_diag\P0_Linky\P0_MyElectricalData.yaml`, déjà conforme.
 - Orthographe exacte : seule celle de `MyElectricalData` est donnée. Pour les autres modules, l'orthographe est à fournir par Eric ; aucune n'est déduite.
 - `MyElectricalData` est une application (pas un module HACS), déportée dans une VM (précisé par Eric le 2026-10-17). Constat du même jour : elle ne figure pas dans la liste HACS lue dans Home Assistant (56 modules installés).
 - Noms de `docs` qui contiennent un module HACS installé, orthographe à confirmer : Blitzortung (`M_meteo_sensors_blitzortung.yaml` et `M_03_meteo_UM_blitzortung.yaml`, écrits en minuscules ; module "Blitzortung.org Lightning Detector"), Vigieau (dossier `L6C3_VIGIEAU` côté md, `L6C3_18_VigiEau` côté yaml, fichiers en `vigieau`), MeteoCSS (`Meteocss_card_modif.md`, dans `L0C0_PAGE_Home` : reste en place).
@@ -180,12 +180,12 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - SDB est l'abréviation de Salle De Bain. Elle s'écrit SDB, en majuscules, dans les noms de dossiers et de fichiers.
 - Lecture retenue (précisée par Eric le 2026-10-17) : toute variante d'écriture de l'abréviation (`sdb`, `Sdb`, `sdB`, `sDb`...) devient `SDB`. Les noms écrits en toutes lettres (`salle_de_bain`, `salle de bain`) ne sont pas touchés. Exemple : `A_soufflant_sdb_bouton_rodret` devient `A_soufflant_SDB_bouton_rodret` ; `P1_03_Chauffage salle de bain` reste tel quel.
 - Écarts relevés (51 entrées, noms actuels ; le renommage attend un go séparé) :
-- `01_docs_config_system\config_system_YAML\input_booleans\P1\P1_BV_IB_inter_soufflant_sdb.yaml` (attendu : `P1_BV_IB_inter_soufflant_SDB.yaml`)
-- `01_docs_config_system\config_system_YAML\templates\Inter_BP_Virtuel\P1\P1_BV_IB_SW_inter_souflant_sdb.yaml` (attendu : `P1_BV_IB_SW_inter_souflant_SDB.yaml`)
-- `01_docs_config_system\config_system_YAML\timers\P1_timers\P1_Timer_10mn\P1_timer_10mn_seche_serviettes_sdb.yaml` (attendu : `P1_timer_10mn_seche_serviettes_SDB.yaml`)
-- `01_docs_config_system\config_system_YAML\timers\P1_timers\P1_Timer_10mn\P1_timer_10mn_soufflant_sdb.yaml` (attendu : `P1_timer_10mn_soufflant_SDB.yaml`)
-- `01_docs_config_system\config_system_YAML\timers\P1_timers\P1_Timer_2h\P1_timer_2h_seche_serviettes_sdb.yaml` (attendu : `P1_timer_2h_seche_serviettes_SDB.yaml`)
-- `01_docs_config_system\config_system_YAML\timers\P1_timers\P1_Timer_60mn\P1_timer_60mn_soufflant_sdb.yaml` (attendu : `P1_timer_60mn_soufflant_SDB.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\input_booleans\P1\P1_BV_IB_inter_soufflant_sdb.yaml` (attendu : `P1_BV_IB_inter_soufflant_SDB.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\templates\Inter_BP_Virtuel\P1\P1_BV_IB_SW_inter_souflant_sdb.yaml` (attendu : `P1_BV_IB_SW_inter_souflant_SDB.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\timers\P1_timers\P1_Timer_10mn\P1_timer_10mn_seche_serviettes_sdb.yaml` (attendu : `P1_timer_10mn_seche_serviettes_SDB.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\timers\P1_timers\P1_Timer_10mn\P1_timer_10mn_soufflant_sdb.yaml` (attendu : `P1_timer_10mn_soufflant_SDB.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\timers\P1_timers\P1_Timer_2h\P1_timer_2h_seche_serviettes_sdb.yaml` (attendu : `P1_timer_2h_seche_serviettes_SDB.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\timers\P1_timers\P1_Timer_60mn\P1_timer_60mn_soufflant_sdb.yaml` (attendu : `P1_timer_60mn_soufflant_SDB.yaml`)
 - `02_Docs_dashboard\Dashboard_docs_yaml\L1C3_03_Commandes_Clim\Card_prog_soufflant_sdb.yaml` (attendu : `Card_prog_soufflant_SDB.yaml`)
 - `03_Docs_automations\Docs_automations_md\P1_03_Chauffage salle de bain\A_soufflant_sdb_bouton_rodret` (attendu : `A_soufflant_SDB_bouton_rodret`)
 - `03_Docs_automations\Docs_automations_md\P1_03_Chauffage salle de bain\A_soufflant_sdb_bouton_rodret\A_soufflant_sdb_bouton_rodret.md` (attendu : `A_soufflant_SDB_bouton_rodret.md`)
@@ -238,9 +238,9 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - Elle passe en majuscules comme un sigle (paragraphe 5) : `P1_ui_dashboard` devient `P1_UI_DASHBOARD`.
 - Orthographe : Eric a écrit `Px_UI_DASBOARD` ; je lis `DASHBOARD`, comme dans le nom actuel `ui_dashboard`. À confirmer.
 - Écarts relevés (3 entrées, noms actuels ; le renommage attend un go séparé) :
-- `01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage\P1_ui_dashboard` (attendu : `P1_UI_DASHBOARD`)
-- `01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage\P1_ui_dashboard\P1_ui_dashboard.yaml` (attendu : `P1_UI_DASHBOARD.yaml`)
-- `01_docs_config_system\config_system_YAML\templates\P3_eclairage\P3_ui_dashboard` (attendu : `P3_UI_DASHBOARD`)
+- `01_docs_config_system\config_system_SH_PY_YAML\templates\P1_clim_chauffage\P1_ui_dashboard` (attendu : `P1_UI_DASHBOARD`)
+- `01_docs_config_system\config_system_SH_PY_YAML\templates\P1_clim_chauffage\P1_ui_dashboard\P1_ui_dashboard.yaml` (attendu : `P1_UI_DASHBOARD.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\templates\P3_eclairage\P3_ui_dashboard` (attendu : `P3_UI_DASHBOARD`)
 - Le fichier `P3_etats_status.yaml` du dossier `P3_ui_dashboard` n'est pas concerné (son nom ne contient pas `ui_dashboard`).
 - Avant tout renommage, non vérifié à ce jour : ces fichiers sont dans l'image de `H:\` et peuvent être cités par un `include`. CLAUDE.md et ses copies ont été alignés le 2026-10-17 (section 9, nommage des fichiers YAML).
 
@@ -249,7 +249,7 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - Lecture retenue, déduite de l'exemple et à confirmer : toute variante du mot isolé (`eco`, `Eco`, `ECO`, `éco`, `Éco`) devient `eCO`. Les mots qui contiennent seulement ces lettres (`economie`, `ecoute`) ne sont pas touchés.
 - Conflit avec la règle de base : un nom sans pôle qui commence par `eCO` commence par une minuscule (exemple : `eCO_prises_dynamique`), alors que le paragraphe 1 demande une majuscule en première lettre. Je propose que `eCO` l'emporte (déduit, à confirmer).
 - Écarts relevés (7 entrées, noms actuels ; le renommage attend un go séparé) :
-- `01_docs_config_system\config_system_YAML\templates\P2_prise\P2_eCO_prises\P2_eco_prises_config.yaml` (attendu : `P2_eCO_prises_config.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\templates\P2_prise\P2_eCO_prises\P2_eco_prises_config.yaml` (attendu : `P2_eCO_prises_config.yaml`)
 - `03_Docs_automations\Docs_automations_md\P2_Éco. prises` (attendu : `P2_eCO. prises`)
 - `03_Docs_automations\Docs_automations_md\P2_Éco. prises\Eco_prises_dynamique` (attendu : `eCO_prises_dynamique`)
 - `03_Docs_automations\Docs_automations_md\P2_Éco. prises\Eco_prises_dynamique\Eco_prises_dynamique.md` (attendu : `eCO_prises_dynamique.md`)
@@ -290,10 +290,10 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - `GitHub` s'écrit toujours `GitHub` (G et H majuscules) dans les noms de dossiers et de fichiers de `docs`.
 - Lecture retenue, à confirmer : toute autre écriture du mot isolé (`github`, `Github`, `GITHUB`) devient `GitHub`. Eric a tranché le 2026-10-17 que cette règle l'emporte sur la règle de la première lettre en majuscule du paragraphe 6.5 : `Github_maintenance` devient `GitHub_maintenance`. Le dossier `Github` à la racine du projet (hors `docs`) n'est pas concerné.
 - Écarts relevés (10 entrées, noms actuels ; le renommage attend un go séparé) :
-- `01_docs_config_system\config_system_YAML\command_line\Github_maintenance` (attendu : `GitHub_maintenance`)
-- `01_docs_config_system\config_system_YAML\command_line\Github_maintenance\github_maintenance.yaml` (attendu : `GitHub_maintenance.yaml`)
-- `01_docs_config_system\config_system_YAML\shell_command\GITHUB` (attendu : `GitHub`)
-- `01_docs_config_system\config_system_YAML\shell_command\GITHUB\GITHUB_backup_github.yaml` (attendu : `GitHub_backup_GitHub.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\command_line\Github_maintenance` (attendu : `GitHub_maintenance`)
+- `01_docs_config_system\config_system_SH_PY_YAML\command_line\Github_maintenance\github_maintenance.yaml` (attendu : `GitHub_maintenance.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\shell_command\GITHUB` (attendu : `GitHub`)
+- `01_docs_config_system\config_system_SH_PY_YAML\shell_command\GITHUB\GITHUB_backup_github.yaml` (attendu : `GitHub_backup_GitHub.yaml`)
 - `03_Docs_automations\Docs_automations_md\Backup ha - github` (attendu : `Backup ha - GitHub`)
 - `03_Docs_automations\Docs_automations_md\_Sans_categorie\Veille_github_releases` (attendu : `Veille_GitHub_releases`)
 - `03_Docs_automations\Docs_automations_md\_Sans_categorie\Veille_github_releases\Veille_github_releases.md` (attendu : `Veille_GitHub_releases.md`)
@@ -321,10 +321,9 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - Un dossier de type de fichiers (md, yaml, sh...), enfant direct d'un dossier racine `0x_` de `docs`, reprend le numéro de ce dossier racine devant son nom : `03_Docs_automations_md` plutôt que `Docs_automations_md`, `03_Docs_automations_yaml` plutôt que `Docs_automations_yaml` (exemples d'Eric).
 - Logique déjà utilisée pour les dossiers LxCx : le code du dossier au-dessus descend dans le nom de l'enfant (`02_L1C1_Page` et `Page_L1C1_meteo`).
 - Lecture retenue, à confirmer : "tous les pôles" = les dossiers de type de fichiers de `01_` à `04_`. Non concernés : `00_IA` (6.1), les dossiers nommés d'après un document (`05_docs_MD_system\DEPENDANCES_GLOBALES`...) ou un skill (`05_Docs_skills\Skill_histo`...), et `06_Docs_technique\01_Pont_hue_hacking` (déjà numéroté).
-- Le reste du nom ne change pas, hors majuscule au premier mot (règle de base, paragraphe 1) : `config_system_YAML` devient `01_Config_system_YAML`. Les enfants de ces dossiers ne changent pas.
-- Écarts relevés en local (11 dossiers, aucun renommé) :
-- `01_docs_config_system\config_system_MD` (attendu : `01_docs_config_system\01_Config_system_MD`)
-- `01_docs_config_system\config_system_YAML` (attendu : `01_docs_config_system\01_Config_system_YAML`)
+- Le reste du nom ne change pas, hors majuscule au premier mot (règle de base, paragraphe 1) : `Docs_scripts_sh` devient `04_Docs_scripts_sh`. Les enfants de ces dossiers ne changent pas.
+- Exception d'Eric (2026-10-18) : dans `01_docs_config_system`, `config_system_MD` et `config_system_SH_PY_YAML` gardent le nom qu'il a créé, sans numéro. Ils sortent de la liste ci-dessous. `config_system_SH_PY_YAML` remplace `config_system_SH_PY_YAML` (nouvelle organisation : `.scripts\01_scripts.sh`, `.scripts\02_scripts.py`, `sql.yaml`, `notifs`, sans `blueprints`). Les arbres plus bas dans ce document (tableau des chemins) ne sont pas régénérés : ils décrivent encore l'ancienne organisation.
+- Écarts relevés en local (9 dossiers, aucun renommé) :
 - `02_Docs_dashboard\Dashboard_docs_md` (attendu : `02_Docs_dashboard\02_Dashboard_docs_md`)
 - `02_Docs_dashboard\Dashboard_docs_yaml` (attendu : `02_Docs_dashboard\02_Dashboard_docs_yaml`)
 - `03_Docs_automations\Docs_automations_md` (attendu : `03_Docs_automations\03_Docs_automations_md`)
@@ -336,6 +335,11 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - `04_Docs_scripts\Docs_scripts_yaml_md` (attendu : `04_Docs_scripts\04_Docs_scripts_yaml_md`)
 - La prod (`H:\docs`) porte les mémes noms (mémes écarts). Tous les chemins cités vers ces dossiers (fiches, index, skills, générateurs, `CLAUDE.md`, `IA_CONTEXT_BASE.md`) sont à corriger dans la méme opération ; aucun renommage sans go séparé d'Eric.
 
+### 6.16 Dossiers à la racine de la prod : pas de convention de nommage (décidé le 2026-10-18)
+- Les dossiers placés à la racine de la prod, juste après `/config/` (racine de `H:`), gardent le nom qu'ils ont en prod et ne suivent pas la convention de nommage : `command_line`, `sensors`, `templates`, `utility_meter`, `shell_command`, `groups`, `input_booleans`, `input_number`, `timers`, `notifs`, `themes`, `.scripts`. Les dossiers de `docs` qui sont à cet endroit (`01_docs_config_system\config_system_SH_PY_YAML`) suivent la prod.
+- La convention commence au niveau d'en dessous : `command_line\Audit`, `command_line\Energie`, `command_line\IP_externe`, `command_line\Meteo`, `sensors\Meteo`, `templates\Meteo`, `utility_meter\Meteo`, `utility_meter\P0_energie_total`.
+- Contexte (option B choisie par Eric le 2026-10-18) : le local garde la convention, la prod est renommée pour la suivre. 15 renommages de casse faits en prod le 2026-10-18 (2 fichiers, 13 dossiers). Liste dans `TEMPO\renommages_casse_config_system_2026-10-18.txt` (colonne de gauche = nom de la convention).
+- Point non tranché : la ligne du paragraphe 1 sur `command_line` écrit `Ip_externe`, l'arborescence écrit `IP_externe`. Le nom appliqué en prod est `IP_externe`.
 ## 7. Écarts relevés
 Liste de tous les dossiers (482) et fichiers (474) de `docs`, hors fichiers `.bak_...` (366, qui suivent le nom de leur fichier). Nombre d'entrées en écart par règle (une entrée peut cumuler plusieurs écarts) :
 - 00_IA (noms pas tout en majuscules) : 1
@@ -424,7 +428,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   └── configuration.md                                                                │ système                                                                                     │
 │ │   │                                                                                       │                                                                                             │
-│ │   └── config_system_YAML/                                                                 │ système                                                                                     │
+│ │   └── config_system_SH_PY_YAML/                                                                 │ système                                                                                     │
 │ │       │                                                                                   │                                                                                             │
 │ │       ├── blueprints/                                                                     │ système                                                                                     │
 │ │       │   │                                                                               │                                                                                             │
@@ -2290,7 +2294,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 - `02_Docs_dashboard\Dashboard_docs_yaml\Page_RASPI`
 - 50 noms contiennent des espaces (exemple `04_Studio code server`) : aucune règle n'existe.
 - `00_IA\SOUS_CONTEXT_IA` : orthographe tranché par Eric le 2026-10-17 (SOUS_CONTEXT_IA, avec X). L'ancien nom local `SOUS_CONTEST_IA` (saisi à la main) et l'ancien nom prod `sous_context_ia` sont renommés en `SOUS_CONTEXT_IA`. Chemins de `CLAUDE.md` et de ses cousins corrigés ; scripts, skills et fiches : en cours.
-- `01_docs_config_system\config_system_YAML\sensors\Meteo` et `shell_command\GITHUB` : majuscules mises à la main par Eric. Elles contredisent la règle "système en minuscules" : à trancher. Pour `shell_command\GITHUB`, tranché le 2026-10-17 : `GitHub` (paragraphe 6.13).
+- `01_docs_config_system\config_system_SH_PY_YAML\sensors\Meteo` et `shell_command\GITHUB` : majuscules mises à la main par Eric. Elles contredisent la règle "système en minuscules" : à trancher. Pour `shell_command\GITHUB`, tranché le 2026-10-17 : `GitHub` (paragraphe 6.13).
 - `Gen_global_index_*` (4 dossiers) : renommés d'après le tree validé, sans réponse explicite d'Eric.
 - `Docs_scripts_sh\Check_sous_context_ia\__Pycache__` : mon renommage a changé la casse d'un dossier de cache généré, à remettre en `__pycache__`. Demande sans réponse.
 - `05_docs_YAML_system` n'existe pas, identité à préciser.
