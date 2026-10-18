@@ -30,7 +30,6 @@ ROOT = '(racine)/README.md'
 GITIGNORE_EXT = {'.txt', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.ico', '.pyc'}
 EXCEPTIONS_TXT = [
 
-    "archives locales (nom contenant _archive_) presentes en local seulement : restent en local",
     "fichiers .txt .png .jpg .jpeg .gif .webp .ico .pyc presents en local + prod mais absents de GitHub : ignores par le .gitignore du depot (sauf les .txt de notifs/, versionnes depuis le 2026-10-18)",
     "dossier modifs/ (journaux des agents) : ignore aux 3 niveaux, comme l audit MD5 docs cote HA",
 ]
@@ -318,9 +317,9 @@ def main():
             R[e['path'][5:]] = e['sha']
         elif e['path'] == 'README.md':
             R[ROOT] = e['sha']
-    L = {k: v for k, v in L.items() if not k.lower().startswith('modifs/')}
-    P = {k: v for k, v in P.items() if not k.lower().startswith('modifs/')}
-    R = {k: v for k, v in R.items() if not k.lower().startswith('modifs/')}
+    L = {k: v for k, v in L.items() if not k.lower().startswith('modifs/') and '_archive_' not in k.lower().rsplit('/', 1)[-1]}
+    P = {k: v for k, v in P.items() if not k.lower().startswith('modifs/') and '_archive_' not in k.lower().rsplit('/', 1)[-1]}
+    R = {k: v for k, v in R.items() if not k.lower().startswith('modifs/') and '_archive_' not in k.lower().rsplit('/', 1)[-1]}
     cands = sorted(k.lower().rsplit('/', 1)[-1] for k in L
                    if '/dashboard_complet/' in '/' + k.lower()
                    and k.lower().rsplit('/', 1)[-1].startswith('dashboard_')
@@ -461,7 +460,7 @@ def main():
     A('== AUDIT (perimetre de l audit MD5 docs cote HA : .md .yaml .sh, plus .py et .svg ajoutes le 2026-10-18 a la demande d Eric ; sur les 3 niveaux, hors modifs/) ==')
     A(ltxt)
     A('')
-    A('== COMPTES PAR NIVEAU (perimetre docs/ + README racine, hors .bak et modifs/) ==')
+    A('== COMPTES PAR NIVEAU (perimetre docs/ + README racine, hors .bak, archives et modifs/) ==')
     A(ligne_res('GitHub', list(R.keys())))
     A(ligne_res('local', list(L.keys())))
     A(ligne_res('prod', list(P.keys())))
