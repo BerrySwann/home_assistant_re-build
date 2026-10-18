@@ -170,7 +170,12 @@ Regles : lecture seule sur H: et sur les YAML locaux ; le script n'ecrit que les
 - Fichier de référence : `TODO.md` (dossier TODO/ de ReBuild)
 - "ajoute à la todo" / "met dans la todo" / "note ca" = ecrire dans `TODO.md`, jamais dans TaskCreate (outil session uniquement, perdu a la fermeture).
 - En debut de session : lire `TODO.md` pour connaitre le backlog en cours.
-- Apres chaque item traite : mettre a jour `TODO.md` ([x] ou suppression).
+- Un point = une ligne `Rxx.n` (un seul point par ligne, suffixe .n sous le numero du Rxx d'origine), suivie de `    Dates : ouvert AAAA-MM-JJ ; ferme AAAA-MM-JJ` ("ferme -" tant qu'il est ouvert, "?" si la date est inconnue).
+- Apres chaque item traite : cocher [x], renseigner la date de fermeture et le deplacer en PARTIE 2. Ne jamais supprimer un point.
+- Ordre du fichier : PARTIE 1 A FAIRE, 1b A TRIER, 2 FAIT / RESOLU, 3 notes, 4 texte d'origine des Rxx eclates, puis les blocs CLOTURE en bas.
+- Cloture (fin de session de tri ou /histo) : ajouter en bas un bloc CLOTURE avec A FAIRE, A TRIER, FAIT, ouverts et fermes par jour, et le solde (ajouts - fermes). Ne pas modifier les clotures precedentes.
+- Gel : si les points ouverts atteignent 50, ou si 3 clotures de suite ont un solde positif, proposer a Eric de geler les nouveaux ajouts de HA pour traiter les ouverts avant de continuer (seuils proposes par Claude le 2026-10-18, a confirmer par Eric).
+- Vue HTML : l'artifact "TODO HA ReBuild" lit TODO.md ; le republier apres chaque cloture.
 
 ## Slash Commands
 - `/fix_file` → analyse erreur HA et retourne bloc YAML corrigé uniquement.
