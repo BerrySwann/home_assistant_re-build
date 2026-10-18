@@ -77,3 +77,8 @@
 2026-10-18 13:24:50 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md | avant=5758ad08 apres=abd7f904 | meme ajout, copie de CLAUDE.md ; bak : IA_CONTEXT_BASE.bak_2026_10_18_13h24m49s.md
 2026-10-18 13:24:50 | claude | COPIE | D:\docs\00_IA\IA_CONTEXT_BASE.md | avant=5758ad08 apres=abd7f904 | depuis CLAUDE.md
 2026-10-18 13:24:50 | claude | COPIE | H:\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md | avant=5758ad08 apres=abd7f904 | depuis CLAUDE.md
+2026-10-18 14:24:56 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\Claude md SAVE\CLAUDE.md | avant=abd7f904 apres=ad30c0eb | regle 12 supprimee sur ordre d'Eric ; bak : CLAUDE.bak_2026_10_18_14h24m56s.md
+2026-10-18 14:24:56 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md | avant=abd7f904 apres=ad30c0eb | copie de CLAUDE.md ; bak : IA_CONTEXT_BASE.bak_2026_10_18_14h24m56s.md
+2026-10-18 14:24:56 | claude | COPIE | D:\docs\00_IA\IA_CONTEXT_BASE.md | avant=abd7f904 apres=ad30c0eb | depuis CLAUDE.md (regle 12 supprimee)
+2026-10-18 14:24:56 | claude | COPIE | H:\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md | avant=abd7f904 apres=ad30c0eb | depuis CLAUDE.md (regle 12 supprimee)
+2026-10-18 14:49:36 | claude | LOT | historique\MD5\00_Verif_Final_trigul_arbres (rapports trigul arbres .txt et .html) | n=2 | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt

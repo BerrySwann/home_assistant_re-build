@@ -12,3 +12,6 @@
 2026-10-18 14:02:01 | hermes | DEPLACE | D:\hermes\memories\USER.md.bak_2026-09-27 -> C:\Users\Berry Swann\AppData\Local\hermes\backups\USER.md.bak_2026-09-27 | avant=d517ab42 apres=d517ab42 | .bak retire de D: (regle: jamais de .bak sur D:)
 2026-10-18 14:08:50 | hermes | CREE | D:\hermes\scripts\boite_claude_watch.py | avant=- apres=bbf95e9c | reecriture en Python (hashlib), le .sh ne voyait pas les fichiers (bash WSL stub)
 2026-10-18 14:08:50 | hermes | MODIFIE | job cron surveillance boite Claude (ae37fadd0271) | avant=boite_claude_watch.sh apres=boite_claude_watch.py | job cron passage au script Python
+2026-10-18 14:16:14 | hermes | MODIFIE | D:\hermes\cron\jobs.json | avant=all apres=telegram:6357712528 | deliver job ae37fadd0271 corrige, MD5 c4ef50e2
+2026-10-18 14:26:53 | hermes | MODIFIE | D:\hermes\memories\MEMORY.md | avant=d1cd0777 apres=a5c551e5 | c20261018-06 guillemets droits ; bak : MEMORY.md.bak_2026_10_18_14h24m54s
+2026-10-18 14:33:38 | hermes | MODIFIE | D:\hermes\memories\USER.md | avant=e98ce0a8 apres=f05727c3 | c20261018-08 preference cloud ; bak : USER.md.bak_2026_10_18_14h33m15s
