@@ -67,6 +67,9 @@ migration-*-to-*.log
 # --- EXCEPTIONS FINALES (LES PLUS FORTES) ---
 !notifs/diag_conso_elec.txt
 !notifs/ecart_liky_vs_nodon.txt
+# "Enregistrements notifs copies sous docs/ : versionnes aussi (2026-10-18, demande d Eric)"
+!docs/**/notifs/diag_conso_elec.txt
+!docs/**/notifs/ecart_liky_vs_nodon.txt
 !rebuild_tree.txt
 !zone_eric.txt
 # "Icones meteo des docs (svg) versionnees : 3 niveaux local, prod, GitHub (2026-10-18, demande d Eric)"
