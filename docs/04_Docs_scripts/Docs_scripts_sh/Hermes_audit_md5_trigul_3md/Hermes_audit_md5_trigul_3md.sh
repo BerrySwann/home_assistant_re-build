@@ -19,7 +19,7 @@
 # - README/GLOBAL_INDEX_REPO : mapping local Github/ -> racine prod & repo
 #
 # ## 📊 FORMAT LISIBLE (1er coup d'œil) :
-#   FICHIER | L↔P | P↔R | L↔R | DÉTAIL
+#   L↔P | P↔R | L↔R | DÉTAIL | FICHIER
 #   ✅/❌ par paire : L↔P ❌ = prod EN RETARD (source de vérité = local)
 #                     P↔R ❌ = repo EN RETARD
 #                     L↔R ❌ = local et repo divergent
@@ -68,7 +68,7 @@ echo ""
 echo "── PASS 1 : TREE (local ReBuild = SOURCE DE VÉRITÉ) ──────────────────────────"
 } > "$LOG"
 
-find "$LOCAL_ROOT/docs" -name "*.md" -not -path "*/05_docs_MD_system/GLOBAL_INDEX_REPO/*" 2>/dev/null | sed "s|^$LOCAL_ROOT/||" | sort > "$TMP_TREE" || true
+find "$LOCAL_ROOT/docs" -name "*.md" -not -name "*.bak*" -not -iname "*_archive_*" -not -ipath "*/_archive/*" -not -path "*/05_docs_MD_system/GLOBAL_INDEX_REPO/*" 2>/dev/null | sed "s|^$LOCAL_ROOT/||" | sort > "$TMP_TREE" || true
 # Fichiers racine : mapping local Github/ -> chemin repo
 [ -f "$LOCAL_ROOT/Github/README.md" ]      && echo "README.md" >> "$TMP_TREE"
 [ -f "$LOCAL_ROOT/docs/05_docs_MD_system/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md" ] && echo "GLOBAL_INDEX_REPO.md" >> "$TMP_TREE"
@@ -129,7 +129,7 @@ urlencode() {  # encodage URL (espaces, accents) via python
 
 # ── COMPARAISON PAR PAIRES (L↔P / P↔R / L↔R) ──────────────────────────────
 echo "── COMPARAISON PAR PAIRES (1er coup d'œil) ──────────────────────────────────" >> "$LOG"
-printf "%-70s | %-4s | %-4s | %-4s | %s\n" "FICHIER" "L↔P" "P↔R" "L↔R" "DÉTAIL" >> "$LOG"
+printf "%-4s | %-4s | %-4s | %-32s | %s\n" "L↔P" "P↔R" "L↔R" "DÉTAIL" "FICHIER" >> "$LOG"
 printf '%.0s─' {1..115} >> "$LOG"; echo "" >> "$LOG"
 
 declare -A PROD_MD5 LOCAL_MD5
@@ -194,7 +194,7 @@ while IFS= read -r rel; do
         [ "$d3" = "-" ] && d3="absent"
         detail="L=$d1 P=$d2 R=$d3"
     fi
-    printf "%-70s | %-4s | %-4s | %-4s | %s\n" "$rel" "$lp" "$prs" "$lrs" "$detail" >> "$LOG"
+    printf "%-4s | %-4s | %-4s | %-32s | %s\n" "$lp" "$prs" "$lrs" "$detail" "$rel" >> "$LOG"
 done < "$TMP_TREE"
 
 # ── RÉSUMÉ ────────────────────────────────────────────────────────────────

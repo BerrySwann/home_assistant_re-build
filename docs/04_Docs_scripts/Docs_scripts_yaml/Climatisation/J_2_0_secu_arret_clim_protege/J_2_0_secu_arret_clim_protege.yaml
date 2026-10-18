@@ -1,0 +1,102 @@
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ J 2-0 SECU - ARRÊT CLIM PROTÉGÉ
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+#
+# ## DESCRIPTION :
+# [EXÉCUTANT] Protection thermique et coupure sous 9W.
+#
+# ## ETAT :
+# - Extrait le 2026-10-12 de la prod (scripts.yaml, fichier du 2026-10-07 20:20:29).
+# - Aucune copie locale n'existait (verifie : local, archives, GitHub). Contenu repris tel quel, non modifie.
+
+
+j_2_0_secu_arret_clim_protege:
+  alias: J 2-0 SECU - ARRÊT CLIM PROTÉGÉ
+  description: '[EXÉCUTANT] Protection thermique et coupure sous 9W.'
+  mode: parallel
+  max: 3
+  fields:
+    piece:
+      description: 'Pièce (ex: salon, bureau, chambre)'
+      example: salon
+      required: true
+  variables:
+    p: '{{ piece | lower }}'
+    lock_entity: input_boolean.clim_{{ p }}_arret_securise_en_cours
+    clim_entity: '{% if p == ''chambre'' %}climate.clim_chambre_rm4_mini{% else %}climate.clim_{{
+      p }}_rm4_mini{% endif %}'
+    switch_entity: switch.clim_{{ p }}_nous
+    power_status_sensor: sensor.{{ p }}_power_status
+    power_lock_sensor: sensor.{{ p }}_power_lock
+    piece_nom: '{% if p == ''salon'' %} du Salon {% elif p == ''bureau'' %} du Bureau
+      {% elif p == ''chambre'' %} de la Chambre {% else %} Inconnue {% endif %}'
+  sequence:
+  - alias: 1. ACTIVATION VERROU
+    target:
+      entity_id: '{{ lock_entity }}'
+    action: input_boolean.turn_on
+  - alias: 2. THERMOSTAT SUR OFF
+    target:
+      entity_id: '{{ clim_entity }}'
+    action: climate.set_hvac_mode
+    data:
+      hvac_mode: 'off'
+  - alias: 3. ANALYSE ET ATTENTE CONSOMMATION
+    choose:
+    - alias: 'CAS : DÉJÀ À L''ARRÊT COMPLET'
+      conditions:
+      - condition: template
+        value_template: '{{ is_state(power_lock_sensor, "off") }}'
+      sequence:
+      - alias: 'ACTION : COUPURE PRISE IMMÉDIATE'
+        target:
+          entity_id: '{{ switch_entity }}'
+        action: switch.turn_off
+      - alias: 'NOTIFICATION : REPOS COMPLET'
+        action: notify.mobile_app_eric
+        data:
+          title: Prise clim {{ p | upper }}
+          message: La Clim {{ piece_nom }} est coupée (Repos complet).
+    - alias: 'CAS : CLIM EN CYCLE D''ARRÊT (ATTENTE)'
+      conditions:
+      - condition: template
+        value_template: '{{ is_state(power_lock_sensor, "on") }}'
+      sequence:
+      - alias: 'NOTIFICATION : ATTENTE DESCENTE WATTS'
+        action: notify.mobile_app_eric
+        data:
+          title: ARRÊT CLIM EN COURS
+          message: La Clim {{ piece_nom }} est active. Attente de descente sous 9W
+            (max 10 min).
+      - alias: 'WAIT : DÉTECTION SOUS 9W'
+        wait_for_trigger:
+        - trigger: template
+          value_template: '{{ is_state(power_lock_sensor, "off") }}'
+        timeout: 00:10:00
+        continue_on_timeout: true
+      - alias: 'CHECK FINAL : COUPURE OU ERREUR'
+        if:
+        - condition: template
+          value_template: '{{ is_state(power_lock_sensor, "off") }}'
+        then:
+        - alias: 'ACTION : COUPURE PRISE PROPRE'
+          target:
+            entity_id: '{{ switch_entity }}'
+          action: switch.turn_off
+        - alias: 'NOTIFICATION : ARRÊT RÉUSSI'
+          action: notify.mobile_app_eric
+          data:
+            title: CLIM À L'ARRÊT
+            message: La prise de la Clim {{ piece_nom }} a été coupée proprement (<
+              9W).
+        else:
+        - alias: 'NOTIFICATION : ÉCHEC SÉCURITÉ'
+          action: notify.mobile_app_eric
+          data:
+            title: ERREUR ARRÊT CLIM
+            message: 'ÉCHEC : La Clim {{ piece_nom }} consomme toujours > 9W après
+              10 min. Prise maintenue.'
+  - alias: 4. DÉSACTIVATION VERROU
+    target:
+      entity_id: '{{ lock_entity }}'
+    action: input_boolean.turn_off

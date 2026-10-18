@@ -1,0 +1,19 @@
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ Audit MD5 GitHub
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+#
+# ## DESCRIPTION :
+# (pas de description dans la prod)
+#
+# ## ETAT :
+# - Extrait le 2026-10-12 de la prod (scripts.yaml, fichier du 2026-10-07 20:20:29).
+# - Aucune copie locale n'existait (verifie : local, archives, GitHub). Contenu repris tel quel, non modifie.
+
+
+audit_md5:
+  alias: Audit MD5 GitHub
+  icon: mdi:shield-search
+  mode: single
+  sequence:
+  - alias: RUN AUDIT MD5
+    action: shell_command.audit_md5

@@ -1,0 +1,46 @@
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ J 1-2 BUREAU - CLIM ON/OFF INTELLIGENT
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+#
+# ## DESCRIPTION :
+# [ROUTEUR BUREAU] Anti-tremblote et routage ON/OFF — Bureau uniquement.
+#
+# ## ETAT :
+# - Extrait le 2026-10-12 de la prod (scripts.yaml, fichier du 2026-10-07 20:20:29).
+# - Aucune copie locale n'existait (verifie : local, archives, GitHub). Contenu repris tel quel, non modifie.
+
+
+j_1_2_bureau_clim_on_off_intelligent:
+  alias: J 1-2 BUREAU - CLIM ON/OFF INTELLIGENT
+  description: '[ROUTEUR BUREAU] Anti-tremblote et routage ON/OFF — Bureau uniquement.'
+  mode: single
+  variables:
+    p: bureau
+    switch_entity: switch.clim_bureau_nous
+    lock_entity: input_boolean.clim_bureau_arret_securise_en_cours
+  sequence:
+  - alias: 1. SÉCURITÉ ANTI-TREMBLOTE
+    if:
+    - condition: template
+      value_template: '{{ is_state(lock_entity, ''on'') }}'
+    then:
+    - alias: 'NOTIFICATION : VERROU ACTIF'
+      action: notify.mobile_app_eric
+      data:
+        title: OULA DOUCEMENT !
+        message: Une procédure d'arrêt est déjà en cours sur BUREAU.
+    - stop: Arrêt sécurisé déjà en cours - Double clic ignoré
+  - alias: 2. DÉCISION ON/OFF
+    if:
+    - condition: template
+      value_template: '{{ is_state(switch_entity, ''off'') }}'
+    then:
+    - alias: 'ACTION : ALLUMER LA PRISE'
+      action: switch.turn_on
+      target:
+        entity_id: '{{ switch_entity }}'
+    else:
+    - alias: 'ACTION : APPELER J-2 (SÉCURITÉ)'
+      action: script.j_2_0_secu_arret_clim_protege
+      data:
+        piece: '{{ p }}'

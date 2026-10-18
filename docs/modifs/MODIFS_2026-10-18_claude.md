@@ -28,3 +28,5 @@
 2026-10-18 08:50:53 | claude | SUPPRIME | H:\docs\05_docs_MD_system\map_of_content_obsidian (dossier vide) | avant=-------- apres=-------- | ordre Eric continue le menage ; sans equivalent local ; reste des renommages
 2026-10-18 08:52:40 | claude | MODIFIE | H:\.gitignore | avant=bf36f70d apres=aa9bfad3 | ajout !docs/**/#*# (verrous d editeur sous docs versionnes, demande Eric) ; teste avec git add -n ; bak : gitignore_prod.bak_2026_10_18_08h52m40s
 2026-10-18 08:55:00 | claude | LOT | push local -> H:\docs de 10 fichiers aux nouveaux noms + 1 verrou MPC (ordre Eric) | n=11 | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\push_docs_R55_2026-10-18.txt
+2026-10-18 09:02:58 | claude | LOT | docs : 25 fichiers recuperes de H:\docs vers le local (absents du local) | n=25 | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\anomalies_R55_2026-10-18.txt
+2026-10-18 09:02:58 | claude | LOT | docs : 18 fichiers pousses du local vers H:\docs (2 ecrases, anciennes versions en TEMPO\retards_prod_2026-10-18) | n=18 | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\anomalies_R55_2026-10-18.txt
