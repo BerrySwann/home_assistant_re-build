@@ -1,4 +1,4 @@
-> **CONTEXTE PROJET** : ce document est tenu IDENTIQUE en trois emplacements, a modifier
+﻿> **CONTEXTE PROJET** : ce document est tenu IDENTIQUE en trois emplacements, a modifier
 > ensemble dans la meme session : `ReBuild/Claude md SAVE/CLAUDE.md`,
 > `ReBuild/docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md` et `D:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres
 > toute mise a jour, verifier que les trois empreintes md5 sont egales. Il ne depend d'aucun agent
@@ -150,6 +150,7 @@ Le script enchaine, dans cet ordre :
 Puis, par Claude :
 6. Categories HA : lire `ha_config_get_category` pour les scopes automation et script, ecrire `historique\MD5\02_categories_ha\categories_ha_AAAA-MM-JJ.txt` (lignes `scope | category_id | nom | icone`, triees), comparer a la version precedente du dossier (Compare-Object sur les lignes de donnees) et signaler tout ajout, suppression ou renommage. Limite : cela couvre la liste des categories, pas l'affectation de chaque automation (elle est dans le registre des entites, pas dans automations.yaml).
 7. Compte rendu : donner les lignes de synthese du rapport, lister les DIFFERENT et les ABSENT_LOCAL, les ecarts de categories, et le chemin des rapports. Ne rien corriger sans demande.
+8. Journal de trace (2026-10-18, a la demande d'Eric) : le trigul se lance par `docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\trigul_run.py`, qui ecrit `historique\MD5\04_journal_trigul\trigul_journal_AAAA-MM-JJ.log` (une ligne par evenement, verdict OK, ATTENTION ou ECHEC par etape, controle des echecs silencieux). Si le journal ne finit pas par `FIN DU LANCEUR`, le lanceur a ete interrompu. L'etape 6 (categories HA) y est ajoutee par Claude avec `--note`.
 
 Regles : lecture seule sur H: et sur les YAML locaux ; le script n'ecrit que les deux copies datees, le rapport et le dossier temporaire. Les copies datees des dossiers ORIGINAL sont des `.bak` ordinaires, traitees par le menage de /histo (jours passes sans l'heure, plafond de 3). Ordre du trigul : local, prod, GitHub.
 
@@ -275,7 +276,7 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
   dans ReBuild, sauf un dossier ephemere efface par son propre script (ex : `_tmp_trigul_profond`).
 - Dossier `historique/MD5/` (ajoute au perimetre par Eric le 2026-10-18, menage des .bak hermes compris) : un sous-repertoire par type de rapport,
   numerotes `00_` a `XX_` : `00_Verif_Final_trigul_arbres` (`trigul_arbres_AAAA-MM-JJ.txt` et `.html`), `01_trigul_profond`,
-  `02_categories_ha`. Un nouveau type de rapport = le repertoire suivant (`03_...`, puis `04_...`). Dans chaque repertoire, meme regle
+  `02_categories_ha`, `03_verif_emplacements` (script des emplacements), `04_journal_trigul` (`trigul_journal_AAAA-MM-JJ.log`, ecrit par le lanceur `trigul_run.py`, un fichier par jour). Un nouveau type de rapport = le repertoire suivant (`05_...`, puis `06_...`). Dans chaque repertoire, meme regle
   que le reste, par fichier de rapport : sauvegardes `rapport.bak_AAAA_MM_JJ_HHhMMmSSs.ext`, 10 au maximum le jour meme ; les jours passes,
   la plus recente de chaque jour devient `rapport.bak_AAAA_MM_JJ.ext` (3 jours au plus), les autres vont a la corbeille Windows. Une sauvegarde
   sans extension prend celle du rapport ; une ancienne `bak_HHhMM_libelle` (sans date) prend la date lue dans le nom du rapport (deduite : a signaler).
@@ -301,6 +302,7 @@ Copie de prod : `H:\Docs\` (poussee depuis le local, ne jamais la modifier direc
 
 `H:\Docs\` (racine, hors `01_docs_config_system\config_system_SH_PY_YAML\`) ne contient QUE des .md, histo et yaml Dashboard - **jamais de YAML config HA**.
 `H:\docs\01_docs_config_system\config_system_SH_PY_YAML\` est l'image locale miroir de la config YAML de prod (sensors, templates, utility_meter, command_line, groups, input_booleans, shell_command, themes, blueprints) - alimentee par resync GitHub (`ha-resync-docs`) et par les push normaux (`ha-push-yaml`). Exception documentee a la regle ci-dessus, pas une contradiction.
+`/config/notifs/` (`H:\notifs`) : TOUS les fichiers sont vivants (journaux regeneres par HA en continu). Ils ne vont jamais dans `docs/` (ni local, ni miroir `H:\docs`, ni `docs/` de GitHub) : pas de copie, pas de push, pas de bak de la part de Claude ; lecture seule sur `H:\notifs`. Ils sont sauvegardes au fil de l'eau sur GitHub, a la racine du depot (`notifs/`), par le backup HA : c'est voulu, pour retrouver les donnees anterieures si quelque chose casse (regle d'Eric du 2026-10-18).
 
 > ⚠️ Audit MD5 docs : couvre les `.md` ET les `.yaml` dashboard (`dashboard_docs_YAML/`). Ne pas oublier les yaml lors d'un audit de cohérence local vs H:\Docs\.
 
@@ -410,6 +412,7 @@ wc -l /tmp/github_aliases.txt /tmp/local_autom_files.txt
 - **Titre principal** - coins arrondis `╭─╮/╰─╯` - largeur 78 car. - texte MAJUSCULES.
   - Si >74 car. : élargir la boîte. ⛔ Ne jamais supprimer les références techniques du titre.
 - **Titre secondaire** - coins carrés `┌─┐/└─┘` - largeur 37 car. - texte MAJUSCULES, numérotation 1-9.
+- **Largeur** - 78 et 37 sont le cadre standard, pas une limite : une boite peut etre plus large si le titre ne tient pas, mais le haut, le titre et le bas gardent la meme largeur (controle : `check_yaml_forme.py`). Un `#` suivi d'une lettre (code commente) n'est pas un en-tete colle.
 
 ### 5 - Headers en-tête obligatoires (juste sous la boite ASCII)
 ```yaml

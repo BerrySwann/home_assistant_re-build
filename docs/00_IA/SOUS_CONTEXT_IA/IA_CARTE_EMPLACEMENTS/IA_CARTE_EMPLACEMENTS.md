@@ -44,7 +44,7 @@ Trois emplacements seulement : L, PM, GD. Controles par `/ha-trigul` (superposit
 
 ## 3. En prod seule (jamais un ecart)
 
-- Dossiers : `notifs/` (journaux ecrits en continu), `themes/`, `blueprints/`.
+- Dossiers : `notifs/` (TOUS les fichiers de /config/notifs sont vivants, regeneres par HA : jamais copies dans docs ; sauvegardes au fil de l'eau sur GitHub a la racine `notifs/` par le backup HA, voulu par Eric le 2026-10-18), `themes/`, `blueprints/`.
 - Fichiers : `scenes.yaml`, `ip_bans.yaml`, `secrets.yaml` (jamais lu, jamais copie).
 - Copie de secours : GitHub.
 
