@@ -1,0 +1,3 @@
+# MODIFS 2026-10-18 - hermes
+2026-10-18 11h27m00s | hermes | CREE | D:\hermes\skills\autonomous-ai-agents\hermes-aligne\SKILL.md | avant=- apres=9e7cf570 | creation skill hermes-aligne (alignement lecture seule sur Claude) depuis SKILL.md fourni par Eric; description 52 car <=60, declencheurs en metadata.hermes.tags, corps 71 lignes identique a l'original
+2026-10-18 11h42m27s | hermes | MODIFIE | D:\hermes\skills\autonomous-ai-agents\hermes-aligne\SKILL.md | avant=9e7cf570 apres=b3b229b7 | ajout section "## When to Use" apres la ligne Declencheurs + ajout "Outils natifs autorises : read_file, search_files..." sous la liste des commandes autorisees; .bak horodate sur ReBuild\docs\05_docs_skills\skill_hermes-aligne\hermes-aligne.bak_2026_10_18_11h40m49s.md

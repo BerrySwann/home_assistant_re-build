@@ -130,11 +130,11 @@ Le script enchaine, dans cet ordre :
 1. Copie de H:\automations.yaml vers `docs\03_docs_automations\docs_automations_YAML\AUTOMATIONS.YALM ORIGINAL\automations.bak_AAAA_MM_JJ_HHhMMmSSs.yaml` et de H:\scripts.yaml vers `docs\04_docs_scripts\DOCS_SCRIPT_ORIGINAL\scripts.bak_AAAA_MM_JJ_HHhMMmSSs.yaml`, avec controle MD5 de chaque copie.
 2. Extraction d'un fichier par unite dans `ReBuild\_tmp_trigul_profond\` (automations\<id>.yaml, scripts\<nom>.yaml).
 3. Comparaison de chaque unite au YAML local par MD5 logique (YAML parse, cles triees, category et labels ignores, espaces de debut et de fin ignores, commentaires et mise en forme ignores). Automations appariees par id, sinon par alias sans lettre de tete. Scripts apparies par nom.
-4. Rapport `historique\MD5\trigul_profond_AAAA-MM-JJ.txt` (sauvegarde `.bak_date_heure` si le rapport du jour existe deja).
+4. Rapport `historique\MD5\01_trigul_profond\trigul_profond_AAAA-MM-JJ.txt` (sauvegarde `.bak_date_heure` si le rapport du jour existe deja).
 5. Effacement du dossier `_tmp_trigul_profond` (garde-fou sur le nom et sur le dossier parent).
 
 Puis, par Claude :
-6. Categories HA : lire `ha_config_get_category` pour les scopes automation et script, ecrire `historique\MD5\categories_ha_AAAA-MM-JJ.txt` (lignes `scope | category_id | nom | icone`, triees), comparer a la version precedente du dossier (Compare-Object sur les lignes de donnees) et signaler tout ajout, suppression ou renommage. Limite : cela couvre la liste des categories, pas l'affectation de chaque automation (elle est dans le registre des entites, pas dans automations.yaml).
+6. Categories HA : lire `ha_config_get_category` pour les scopes automation et script, ecrire `historique\MD5\02_categories_ha\categories_ha_AAAA-MM-JJ.txt` (lignes `scope | category_id | nom | icone`, triees), comparer a la version precedente du dossier (Compare-Object sur les lignes de donnees) et signaler tout ajout, suppression ou renommage. Limite : cela couvre la liste des categories, pas l'affectation de chaque automation (elle est dans le registre des entites, pas dans automations.yaml).
 7. Compte rendu : donner les lignes de synthese du rapport, lister les DIFFERENT et les ABSENT_LOCAL, les ecarts de categories, et le chemin des rapports. Ne rien corriger sans demande.
 
 Regles : lecture seule sur H: et sur les YAML locaux ; le script n'ecrit que les deux copies datees, le rapport et le dossier temporaire. Les copies datees des dossiers ORIGINAL sont des `.bak` ordinaires, traitees par le menage de /histo (jours passes sans l'heure, plafond de 3). Ordre du trigul : local, prod, GitHub.
@@ -268,8 +268,10 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
   Les rapports eux-memes (un par jour) et les copies `_latest` ne sont pas touches (Eric n'a pas encore dit s'il faut aussi limiter les rapports
   des jours passes a 3 jours). Premier menage execute le 2026-10-18 (dry-run `historique\menage_MD5_dryrun_2026-10-18.txt`, rapport
   `historique\menage_MD5_2026-10-18.txt`), puis tout le dossier a la corbeille sauf les 2 rapports du jour (`historique\menage_MD5_poubelle_2026-10-18.txt`).
-  /histo applique cette regle a son etape 5 (skills histo et histo-final mis a jour le 2026-10-18). Tant que les scripts du trigul n'ecrivent pas
-  dans leur repertoire numerote, les rapports restent a la racine de `historique\MD5\` (a faire).
+  /histo applique cette regle a son etape 5 (skill histo mis a jour le 2026-10-18 ; histo-final et ha-trigul : modification proposee, a enregistrer par Eric).
+  Etat au 2026-10-18 : le script des arbres (`hermes_audit_trigul_arbres.py`) ecrit dans `00_Verif_Final_trigul_arbres` (teste ; les 2 rapports du jour y sont) ;
+  le script unitaire ecrit dans `01_trigul_profond` (modifie, pas encore lance) ; `02_categories_ha` est ecrit par Claude (etape 6 du protocole trigul profond), pas par un script.
+  Les repertoires 01 et 02 restent vides tant que ces rapports ne sont pas regeneres.
 - Restauration : copier la sauvegarde voulue, retirer le segment `.bak_...`, jamais de suffixe en prod.
 - CLAUDE.md et `docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md` (et leur copie `D:\docs\00_IA\`) : meme regle avant toute
   reecriture (sauvegarde locale uniquement). Apres reecriture, resynchroniser les 3 copies et
