@@ -1,0 +1,59 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ MÉTÉO. TEMPLATE : DURÉE DU JOUR (CYCLE SOLAIRE - M_05)                   │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Durée du jour calculée astronomiquement (latitude/déclinaison/angle horaire).
+#
+# ## 🧮 CALCUL & SOURCES :
+# - lat = zone.home.latitude -> déclinaison = 23.45 * sin(2π(j-80)/365)
+#   -> cos_h = -(tan(lat_rad) * tan(decl_rad)) -> acos(cos_h) -> heures.
+# - Dates clés : Équinoxe printemps j80 | Solstice été j172 | Équinoxe automne j264
+#                Solstice hiver j355.
+#
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL                                | CAPTEUR BRUT (source)                                                       | CE FICHIER (unique_id) | AVAL                           |
+# |:------------------------------------------|:-------------------------------------------------------------------------------|:--------------------------|:---------------------------------|
+# | [calculé] (zone.home + horloge système) | zone.home.latitude + now() - calcul astronomique, PAS sun.sun (voir PIÈGES) | duree_du_jour            | L1C1 Météo (données solaires) |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - La durée du jour est calculée astronomiquement - PAS via sun.sun (next_rising/setting).
+#   Elle est donc disponible même si l'intégration Sun est absente ou en erreur.
+# - Utilise zone.home.latitude -> vérifier que la zone Home est bien configurée.
+# - Les fonctions sin/cos/acos/pi/tan sont disponibles nativement dans Jinja2 HA.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C1 Météo (données solaires complémentaires - durée du jour).
+
+- sensor:
+    # ┌───────────────────────────────────┐
+    # │ DURÉE DU JOUR                     │
+    # └───────────────────────────────────┘
+    # --- duree_du_jour ---
+    - name: "Durée du Jour"
+      unique_id: duree_du_jour
+      unit_of_measurement: "h"
+      icon: mdi:weather-sunny
+      state: >
+        {# Récupération sécurisée de la latitude #}
+        {% set lat = state_attr('zone.home', 'latitude') | float(default=43.72) %}
+        {% set lat_rad = lat * pi / 180 %}
+
+        {# Jour de l'année (1-365) #}
+        {% set day = now().timetuple().tm_yday %}
+
+        {# Calcul de la déclinaison #}
+        {% set decl = 23.45 * sin((2 * pi * (day - 80)) / 365) %}
+        {% set decl_rad = decl * pi / 180 %}
+
+        {# Calcul de l'angle horaire #}
+        {% set cos_h = -(tan(lat_rad) * tan(decl_rad)) %}
+
+        {# Sécurité pour les limites polaires #}
+        {% set cos_h = [ [-1, cos_h] | max, 1 ] | min %}
+        {% set hour_angle = acos(cos_h) %}
+
+        {# Résultat en heures #}
+        {{ (2 * hour_angle * 180 / pi / 15) | round(2) }}

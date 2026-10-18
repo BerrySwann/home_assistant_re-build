@@ -1,6 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-10-18 - dossier de config : config_system_YAML remplacé par config_system_SH_PY_YAML (copie fidèle de /config) ; liens des 4 timers remis sur les sous-dossiers P1_Timer_10mn, P1_Timer_2h et P1_Timer_60mn ; 3 notes citant config_system_YAML mises à jour*
 *Dernière mise à jour : 2026-10-15 (soir, /histo-final S1) - repli Meteoalarm retiré du template M_01 : entrée retirée du pop-up #alert (14 -> 13) et des entités natives HA (16 -> 15) ; aucun fichier ajouté, renommé ou supprimé à indexer ici (les fiches CARD_*_HOME ne sont pas indexées)*
 *Dernière mise à jour : 2026-10-14 (soir, /histo S1) - 2 entrées périmées de la vignette sdb remplacées par le nom réel, liens cassés corrigés (69 -> 0 au contrôle), noms de batteries et blocs météo M_02 alignés sur les fichiers réels, entité fantôme du dernier impact de foudre (Blitzortung) retirée, bloc Raspberry Pi4 (archivé) déplacé en fin d'index (section 06 SAUVEGARDE RASPI)*
 *Dernière mise à jour : 2026-10-13 (soir, /histo S1) - entrées ajoutées pour les index générés GLOBAL_INDEX_IA, GLOBAL_INDEX_VIGNETTES_PAGES, GLOBAL_INDEX_AUTOMATIONS, GLOBAL_INDEX_SCRIPTS_SH et GLOBAL_INDEX_SCRIPTS_YAML et pour 6 scripts python d'index (docs_scripts_SH), tous locaux et non poussés en prod ; compteurs existants non modifiés*
@@ -110,10 +111,10 @@
 <details>
 <summary><b>timers/P1_timers/</b> &nbsp;|&nbsp; Helpers timer SDB (soufflant 60 mn / 10 mn, sèche-serviettes 2 h / 10 mn)</summary>
 <blockquote>
-⚙️ <a href="docs/01_docs_config_system/config_system_YAML/timers/P1_timers/P1_timer_60mn_soufflant_SDB.yaml">P1_timer_60mn_soufflant_SDB.yaml</a><br>
-⚙️ <a href="docs/01_docs_config_system/config_system_YAML/timers/P1_timers/P1_timer_10mn_soufflant_SDB.yaml">P1_timer_10mn_soufflant_SDB.yaml</a><br>
-⚙️ <a href="docs/01_docs_config_system/config_system_YAML/timers/P1_timers/P1_timer_2h_seche_serviettes_SDB.yaml">P1_timer_2h_seche_serviettes_SDB.yaml</a><br>
-⚙️ <a href="docs/01_docs_config_system/config_system_YAML/timers/P1_timers/P1_timer_10mn_seche_serviettes_SDB.yaml">P1_timer_10mn_seche_serviettes_SDB.yaml</a><br>
+⚙️ <a href="docs/01_docs_config_system/config_system_SH_PY_YAML/timers/P1_timers/P1_Timer_60mn/P1_timer_60mn_soufflant_SDB.yaml">P1_timer_60mn_soufflant_SDB.yaml</a><br>
+⚙️ <a href="docs/01_docs_config_system/config_system_SH_PY_YAML/timers/P1_timers/P1_Timer_10mn/P1_timer_10mn_soufflant_SDB.yaml">P1_timer_10mn_soufflant_SDB.yaml</a><br>
+⚙️ <a href="docs/01_docs_config_system/config_system_SH_PY_YAML/timers/P1_timers/P1_Timer_2h/P1_timer_2h_seche_serviettes_SDB.yaml">P1_timer_2h_seche_serviettes_SDB.yaml</a><br>
+⚙️ <a href="docs/01_docs_config_system/config_system_SH_PY_YAML/timers/P1_timers/P1_Timer_10mn/P1_timer_10mn_seche_serviettes_SDB.yaml">P1_timer_10mn_seche_serviettes_SDB.yaml</a><br>
 📄 <a href="docs/03_docs_automations/docs_automations_MD/P1_03_Chauffage%20Salle%20de%20Bain/TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES/TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md">Documentation timers SDB</a>
 </blockquote>
 </details>
@@ -849,7 +850,7 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 <blockquote>
 ⚠️ <b>Corrigé le 2026-07-19</b> : <code>climate.soufflant_salle_de_bain</code> retiré partout -
 entité inexistante (le soufflant SDB n'a pas d'entité climate, vérifié : aucune occurrence
-dans tout <code>config_system_YAML/</code>). <code>climate.radiateur_cuisine</code> déplacé de
+dans tout <code>config_system_SH_PY_YAML/</code>). <code>climate.radiateur_cuisine</code> déplacé de
 "produit par P1_UI_DASHBOARD.yaml" vers natif (c'est une entité Meross consommée, pas produite).
 Mise à jour 2026-10-07 : <code>climate.soufflant_salle_de_bain</code> existe en live (helper UI generic_thermostat, devenu voyant, heater = <code>switch.voyant_thermostat_soufflant_salle_de_bain</code>) ; la correction du 2026-07-19 ci-dessus est obsolète.
 Bloc <code>P1_UM_AMHQ.yaml - remote.clim_*/switch.radiateur_elec_cuisine</code> retiré
@@ -2189,7 +2190,7 @@ la valeur brute est native. Tout déplacé vers natives.
 
 <blockquote>
 ⚠️ <b>Corrigé le 2026-07-19</b> : <code>sensor.proxmox_cpu_package</code> n'existe dans
-aucun fichier <code>config_system_YAML/</code> (vérifié) - publié par le script externe
+aucun fichier <code>config_system_SH_PY_YAML/</code> (vérifié) - publié par le script externe
 <code>MP_01_monitor_temp.sh</code> tournant sur le <b>Raspberry Pi</b> (confirmé par Eric
 2026-07-19 : "ça remonte la T° du CPU et d'autres choses"), remonté dans HA
 via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
@@ -2347,7 +2348,7 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 
 <blockquote>
 ⚠️ <b>Corrigé le 2026-07-19</b> : les 6 <code>sensor.proxmox_*</code> (carte_mere, core_0-3,
-cpu_package) n'existent dans aucun fichier <code>config_system_YAML/</code> - publiés par
+cpu_package) n'existent dans aucun fichier <code>config_system_SH_PY_YAML/</code> - publiés par
 <code>MP_01_monitor_temp.sh</code> tournant sur le <b>Raspberry Pi</b> (confirmé par Eric
 2026-07-19) via MQTT Discovery. Reclassés natifs.
 </blockquote>

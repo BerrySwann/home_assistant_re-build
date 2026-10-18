@@ -1,0 +1,540 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ PÔLE 3. TEMPLATES AVG : PUISSANCE MOYENNE (W) — ÉCLAIRAGE PAR ZONE       │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Capteurs templates calculant la puissance moyenne (W) pour chaque zone
+# d'éclairage (pièce ou groupe transversal) sur 4 périodes AMHQ.
+# Sources : sensor.[ampoule]_[cycle]_um_kwh_tpl (P3_TPL_AMHQ_1_UNITE) — zones reconstituées par somme.
+# P3_UM_AMHQ_2_ZONE supprimé — zones reconstituées directement depuis les TPL unité.
+#
+# ## 🧮 CALCUL & SOURCES :
+# - Formule : (sum_kWh_UM × 1000) / heures_écoulées = Watts moyens
+# - Sources : sensor.[ampoule]_[cycle]_um_kwh_tpl (P3_TPL_AMHQ_1_UNITE — 1 seul UM actif)
+# - Quotidien    : h  = now().hour + (now().minute / 60)
+# - Hebdomadaire : hh = (now().weekday() * 24) + h
+# - Mensuel      : hm = ((now().day - 1) * 24) + h
+# - Annuel       : ha = ((now().timetuple().tm_yday - 1) * 24) + h
+# - Garde division zéro : if h > 0.1 else 0
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL      | CAPTEUR BRUT (source)                           | CE FICHIER (unique_id)                   | AVAL  |
+# |:--------------|:------------------------------------------------|:-----------------------------------------|:------|
+# | [calculé]     | sensor.hue_*_[cycle]_um_kwh_tpl (P3_TPL_AMHQ_1_UNITE)   | eclairage_*_avg_watts_{periode}          | L2C3  |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - P3_UM_AMHQ_2_ZONE supprimé : zones reconstituées par somme des UM unité.
+# - eclairage_appart_2/3 = zones transversales — ne pas inclure dans un total global.
+# - En début de journée (h < 0.1 = < 6 min), retourne 0 — comportement normal.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L2C3 Conso Énergie Éclairage (puissance moyenne par zone/pièce)
+
+- sensor:
+    # ┌───────────────────────────────────┐
+    # │ ZONE 1. (1x) ENTRÉE               │
+    # └───────────────────────────────────┘
+    # --- eclairage_entree_1_avg_watts_quotidien ---
+    - name: "Eclairage Entree 1 Avg Watts Quotidien"
+      unique_id: eclairage_entree_1_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set conso = states('sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_entree_1_avg_watts_hebdomadaire ---
+    - name: "Eclairage Entree 1 Avg Watts Hebdomadaire"
+      unique_id: eclairage_entree_1_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hh = (now().weekday() * 24) + h %}
+        {% set conso = states('sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_entree_1_avg_watts_mensuel ---
+    - name: "Eclairage Entree 1 Avg Watts Mensuel"
+      unique_id: eclairage_entree_1_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hm = ((now().day - 1) * 24) + h %}
+        {% set conso = states('sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_entree_1_avg_watts_annuel ---
+    - name: "Eclairage Entree 1 Avg Watts Annuel"
+      unique_id: eclairage_entree_1_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + h %}
+        {% set conso = states('sensor.hue_white_lamp_entree_annuel_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ ZONE 4. (5x) SALON                │
+    # └───────────────────────────────────┘
+    # --- eclairage_salon_5_avg_watts_quotidien ---
+    - name: "Eclairage Salon 5 Avg Watts Quotidien"
+      unique_id: eclairage_salon_5_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set conso =
+          states('sensor.hue_white_lamp_table_quotidien_um_kwh_tpl')       | float(0) +
+          states('sensor.hue_ambiance_lamp_salon_1_quotidien_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_ambiance_lamp_salon_2_quotidien_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_ambiance_lamp_salon_3_quotidien_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_color_candle_salon_1_quotidien_um_kwh_tpl')   | float(0) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_salon_5_avg_watts_hebdomadaire ---
+    - name: "Eclairage Salon 5 Avg Watts Hebdomadaire"
+      unique_id: eclairage_salon_5_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hh = (now().weekday() * 24) + h %}
+        {% set conso =
+          states('sensor.hue_white_lamp_table_hebdomadaire_um_kwh_tpl')      | float(0) +
+          states('sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um_kwh_tpl') | float(0) +
+          states('sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um_kwh_tpl') | float(0) +
+          states('sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um_kwh_tpl') | float(0) +
+          states('sensor.hue_color_candle_salon_1_hebdomadaire_um_kwh_tpl')  | float(0) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_salon_5_avg_watts_mensuel ---
+    - name: "Eclairage Salon 5 Avg Watts Mensuel"
+      unique_id: eclairage_salon_5_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hm = ((now().day - 1) * 24) + h %}
+        {% set conso =
+          states('sensor.hue_white_lamp_table_mensuel_um_kwh_tpl')       | float(0) +
+          states('sensor.hue_ambiance_lamp_salon_1_mensuel_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_ambiance_lamp_salon_2_mensuel_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_ambiance_lamp_salon_3_mensuel_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_color_candle_salon_1_mensuel_um_kwh_tpl')   | float(0) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_salon_5_avg_watts_annuel ---
+    - name: "Eclairage Salon 5 Avg Watts Annuel"
+      unique_id: eclairage_salon_5_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + h %}
+        {% set conso =
+          states('sensor.hue_white_lamp_table_annuel_um_kwh_tpl')       | float(0) +
+          states('sensor.hue_ambiance_lamp_salon_1_annuel_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_ambiance_lamp_salon_2_annuel_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_ambiance_lamp_salon_3_annuel_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_color_candle_salon_1_annuel_um_kwh_tpl')   | float(0) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ ZONE 5. (1x) CUISINE              │
+    # └───────────────────────────────────┘
+    # --- eclairage_cuisine_1_avg_watts_quotidien ---
+    - name: "Eclairage Cuisine 1 Avg Watts Quotidien"
+      unique_id: eclairage_cuisine_1_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set conso = states('sensor.hue_white_lamp_cuisine_quotidien_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_cuisine_1_avg_watts_hebdomadaire ---
+    - name: "Eclairage Cuisine 1 Avg Watts Hebdomadaire"
+      unique_id: eclairage_cuisine_1_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hh = (now().weekday() * 24) + h %}
+        {% set conso = states('sensor.hue_white_lamp_cuisine_hebdomadaire_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_cuisine_1_avg_watts_mensuel ---
+    - name: "Eclairage Cuisine 1 Avg Watts Mensuel"
+      unique_id: eclairage_cuisine_1_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hm = ((now().day - 1) * 24) + h %}
+        {% set conso = states('sensor.hue_white_lamp_cuisine_mensuel_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_cuisine_1_avg_watts_annuel ---
+    - name: "Eclairage Cuisine 1 Avg Watts Annuel"
+      unique_id: eclairage_cuisine_1_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + h %}
+        {% set conso = states('sensor.hue_white_lamp_cuisine_annuel_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ ZONE 6. (1x) COULOIR              │
+    # └───────────────────────────────────┘
+    # --- eclairage_couloir_1_avg_watts_quotidien ---
+    - name: "Eclairage Couloir 1 Avg Watts Quotidien"
+      unique_id: eclairage_couloir_1_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set conso = states('sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_couloir_1_avg_watts_hebdomadaire ---
+    - name: "Eclairage Couloir 1 Avg Watts Hebdomadaire"
+      unique_id: eclairage_couloir_1_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hh = (now().weekday() * 24) + h %}
+        {% set conso = states('sensor.hue_white_lamp_couloir_hebdomadaire_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_couloir_1_avg_watts_mensuel ---
+    - name: "Eclairage Couloir 1 Avg Watts Mensuel"
+      unique_id: eclairage_couloir_1_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hm = ((now().day - 1) * 24) + h %}
+        {% set conso = states('sensor.hue_white_lamp_couloir_mensuel_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_couloir_1_avg_watts_annuel ---
+    - name: "Eclairage Couloir 1 Avg Watts Annuel"
+      unique_id: eclairage_couloir_1_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + h %}
+        {% set conso = states('sensor.hue_white_lamp_couloir_annuel_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ ZONE 7. (5x) BUREAU               │
+    # └───────────────────────────────────┘
+    # --- eclairage_bureau_5_avg_watts_quotidien ---
+    - name: "Eclairage Bureau 5 Avg Watts Quotidien"
+      unique_id: eclairage_bureau_5_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set conso =
+          states('sensor.hue_play_1_pc_bureau_quotidien_um_kwh_tpl')    | float(0) +
+          states('sensor.hue_play_2_pc_bureau_quotidien_um_kwh_tpl')    | float(0) +
+          states('sensor.hue_play_3_pc_bureau_quotidien_um_kwh_tpl')    | float(0) +
+          states('sensor.hue_white_lamp_bureau_1_quotidien_um_kwh_tpl') | float(0) +
+          states('sensor.hue_white_lamp_bureau_2_quotidien_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_bureau_5_avg_watts_hebdomadaire ---
+    - name: "Eclairage Bureau 5 Avg Watts Hebdomadaire"
+      unique_id: eclairage_bureau_5_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hh = (now().weekday() * 24) + h %}
+        {% set conso =
+          states('sensor.hue_play_1_pc_bureau_hebdomadaire_um_kwh_tpl')    | float(0) +
+          states('sensor.hue_play_2_pc_bureau_hebdomadaire_um_kwh_tpl')    | float(0) +
+          states('sensor.hue_play_3_pc_bureau_hebdomadaire_um_kwh_tpl')    | float(0) +
+          states('sensor.hue_white_lamp_bureau_1_hebdomadaire_um_kwh_tpl') | float(0) +
+          states('sensor.hue_white_lamp_bureau_2_hebdomadaire_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_bureau_5_avg_watts_mensuel ---
+    - name: "Eclairage Bureau 5 Avg Watts Mensuel"
+      unique_id: eclairage_bureau_5_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hm = ((now().day - 1) * 24) + h %}
+        {% set conso =
+          states('sensor.hue_play_1_pc_bureau_mensuel_um_kwh_tpl')    | float(0) +
+          states('sensor.hue_play_2_pc_bureau_mensuel_um_kwh_tpl')    | float(0) +
+          states('sensor.hue_play_3_pc_bureau_mensuel_um_kwh_tpl')    | float(0) +
+          states('sensor.hue_white_lamp_bureau_1_mensuel_um_kwh_tpl') | float(0) +
+          states('sensor.hue_white_lamp_bureau_2_mensuel_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_bureau_5_avg_watts_annuel ---
+    - name: "Eclairage Bureau 5 Avg Watts Annuel"
+      unique_id: eclairage_bureau_5_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + h %}
+        {% set conso =
+          states('sensor.hue_play_1_pc_bureau_annuel_um_kwh_tpl')    | float(0) +
+          states('sensor.hue_play_2_pc_bureau_annuel_um_kwh_tpl')    | float(0) +
+          states('sensor.hue_play_3_pc_bureau_annuel_um_kwh_tpl')    | float(0) +
+          states('sensor.hue_white_lamp_bureau_1_annuel_um_kwh_tpl') | float(0) +
+          states('sensor.hue_white_lamp_bureau_2_annuel_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ ZONE 8. (2x) SDB                  │
+    # └───────────────────────────────────┘
+    # --- eclairage_sdb_2_avg_watts_quotidien ---
+    - name: "Eclairage Sdb 2 Avg Watts Quotidien"
+      unique_id: eclairage_sdb_2_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set conso =
+          states('sensor.relais_lumiere_sdb_sonoff_quotidien_um_kwh_tpl') | float(0) +
+          states('sensor.hue_white_lamp_salle_de_bain_quotidien_um_kwh_tpl')   | float(0) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_sdb_2_avg_watts_hebdomadaire ---
+    - name: "Eclairage Sdb 2 Avg Watts Hebdomadaire"
+      unique_id: eclairage_sdb_2_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hh = (now().weekday() * 24) + h %}
+        {% set conso =
+          states('sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um_kwh_tpl') | float(0) +
+          states('sensor.hue_white_lamp_salle_de_bain_hebdomadaire_um_kwh_tpl')   | float(0) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_sdb_2_avg_watts_mensuel ---
+    - name: "Eclairage Sdb 2 Avg Watts Mensuel"
+      unique_id: eclairage_sdb_2_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hm = ((now().day - 1) * 24) + h %}
+        {% set conso =
+          states('sensor.relais_lumiere_sdb_sonoff_mensuel_um_kwh_tpl') | float(0) +
+          states('sensor.hue_white_lamp_salle_de_bain_mensuel_um_kwh_tpl')   | float(0) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_sdb_2_avg_watts_annuel ---
+    - name: "Eclairage Sdb 2 Avg Watts Annuel"
+      unique_id: eclairage_sdb_2_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + h %}
+        {% set conso =
+          states('sensor.relais_lumiere_sdb_sonoff_annuel_um_kwh_tpl') | float(0) +
+          states('sensor.hue_white_lamp_salle_de_bain_annuel_um_kwh_tpl')   | float(0) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ┌───────────────────────────────────┐
+    # │ ZONE 9. (4x) CHAMBRE              │
+    # └───────────────────────────────────┘
+    # --- eclairage_chambre_4_avg_watts_quotidien ---
+    - name: "Eclairage Chambre 4 Avg Watts Quotidien"
+      unique_id: eclairage_chambre_4_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set conso =
+          states('sensor.hue_white_lamp_chambre_1_quotidien_um_kwh_tpl')      | float(0) +
+          states('sensor.hue_white_lamp_chambre_2_quotidien_um_kwh_tpl')      | float(0) +
+          states('sensor.hue_color_candle_chambre_gege_quotidien_um_kwh_tpl') | float(0) +
+          states('sensor.hue_color_candle_chambre_eric_quotidien_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_chambre_4_avg_watts_hebdomadaire ---
+    - name: "Eclairage Chambre 4 Avg Watts Hebdomadaire"
+      unique_id: eclairage_chambre_4_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hh = (now().weekday() * 24) + h %}
+        {% set conso =
+          states('sensor.hue_white_lamp_chambre_1_hebdomadaire_um_kwh_tpl')      | float(0) +
+          states('sensor.hue_white_lamp_chambre_2_hebdomadaire_um_kwh_tpl')      | float(0) +
+          states('sensor.hue_color_candle_chambre_gege_hebdomadaire_um_kwh_tpl') | float(0) +
+          states('sensor.hue_color_candle_chambre_eric_hebdomadaire_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_chambre_4_avg_watts_mensuel ---
+    - name: "Eclairage Chambre 4 Avg Watts Mensuel"
+      unique_id: eclairage_chambre_4_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hm = ((now().day - 1) * 24) + h %}
+        {% set conso =
+          states('sensor.hue_white_lamp_chambre_1_mensuel_um_kwh_tpl')      | float(0) +
+          states('sensor.hue_white_lamp_chambre_2_mensuel_um_kwh_tpl')      | float(0) +
+          states('sensor.hue_color_candle_chambre_gege_mensuel_um_kwh_tpl') | float(0) +
+          states('sensor.hue_color_candle_chambre_eric_mensuel_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_chambre_4_avg_watts_annuel ---
+    - name: "Eclairage Chambre 4 Avg Watts Annuel"
+      unique_id: eclairage_chambre_4_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + h %}
+        {% set conso =
+          states('sensor.hue_white_lamp_chambre_1_annuel_um_kwh_tpl')      | float(0) +
+          states('sensor.hue_white_lamp_chambre_2_annuel_um_kwh_tpl')      | float(0) +
+          states('sensor.hue_color_candle_chambre_gege_annuel_um_kwh_tpl') | float(0) +
+          states('sensor.hue_color_candle_chambre_eric_annuel_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ╭──────────────────────────────────────────────────────────────────────────╮
+    # │    ZONE APPART (3x) ENTRÉE + CUISINE + COULOIR                           │
+    # ╰──────────────────────────────────────────────────────────────────────────╯
+    # --- eclairage_appart_3_avg_watts_quotidien ---
+    - name: "Eclairage Appart 3 Avg Watts Quotidien"
+      unique_id: eclairage_appart_3_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set conso =
+          states('sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_white_lamp_cuisine_quotidien_um_kwh_tpl') | float(0) +
+          states('sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_appart_3_avg_watts_hebdomadaire ---
+    - name: "Eclairage Appart 3 Avg Watts Hebdomadaire"
+      unique_id: eclairage_appart_3_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hh = (now().weekday() * 24) + h %}
+        {% set conso =
+          states('sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_white_lamp_cuisine_hebdomadaire_um_kwh_tpl') | float(0) +
+          states('sensor.hue_white_lamp_couloir_hebdomadaire_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_appart_3_avg_watts_mensuel ---
+    - name: "Eclairage Appart 3 Avg Watts Mensuel"
+      unique_id: eclairage_appart_3_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hm = ((now().day - 1) * 24) + h %}
+        {% set conso =
+          states('sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_white_lamp_cuisine_mensuel_um_kwh_tpl') | float(0) +
+          states('sensor.hue_white_lamp_couloir_mensuel_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_appart_3_avg_watts_annuel ---
+    - name: "Eclairage Appart 3 Avg Watts Annuel"
+      unique_id: eclairage_appart_3_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + h %}
+        {% set conso =
+          states('sensor.hue_white_lamp_entree_annuel_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_white_lamp_cuisine_annuel_um_kwh_tpl') | float(0) +
+          states('sensor.hue_white_lamp_couloir_annuel_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+    # ╭──────────────────────────────────────────────────────────────────────────╮
+    # │    ZONE APPART (2x) ENTRÉE + COULOIR                                     │
+    # ╰──────────────────────────────────────────────────────────────────────────╯
+    # --- eclairage_appart_2_avg_watts_quotidien ---
+    - name: "Eclairage Appart 2 Avg Watts Quotidien"
+      unique_id: eclairage_appart_2_avg_watts_quotidien
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set conso =
+          states('sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_appart_2_avg_watts_hebdomadaire ---
+    - name: "Eclairage Appart 2 Avg Watts Hebdomadaire"
+      unique_id: eclairage_appart_2_avg_watts_hebdomadaire
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hh = (now().weekday() * 24) + h %}
+        {% set conso =
+          states('sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_white_lamp_couloir_hebdomadaire_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_appart_2_avg_watts_mensuel ---
+    - name: "Eclairage Appart 2 Avg Watts Mensuel"
+      unique_id: eclairage_appart_2_avg_watts_mensuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set hm = ((now().day - 1) * 24) + h %}
+        {% set conso =
+          states('sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_white_lamp_couloir_mensuel_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
+
+    # --- eclairage_appart_2_avg_watts_annuel ---
+    - name: "Eclairage Appart 2 Avg Watts Annuel"
+      unique_id: eclairage_appart_2_avg_watts_annuel
+      unit_of_measurement: "W"
+      device_class: power
+      state: >
+        {% set h = now().hour + (now().minute / 60) %}
+        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + h %}
+        {% set conso =
+          states('sensor.hue_white_lamp_entree_annuel_um_kwh_tpl')  | float(0) +
+          states('sensor.hue_white_lamp_couloir_annuel_um_kwh_tpl') | float(0) %}
+        {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
+
+# annotations_log:
+# - [Refonte] Source : P3_UM_AMHQ_2_ZONE (supprimé) → somme UM unité (P3_UM_AMHQ_1_UNITE).
+# - [Zones 1x] ENTRÉE, CUISINE, COULOIR : 1 UM → calcul direct, inchangé logiquement.
+# - [Zones 5x] SALON, BUREAU : somme de 5 UM unité.
+# - [Zone 2x] SDB : somme de 2 UM unité.
+# - [Zone 4x] CHAMBRE : somme de 4 UM unité.
+# - [Transversales] APPART_3 (E+Cu+Co), APPART_2 (E+Co) : somme des UM unité correspondants.
+# - [unique_id] Inchangés — aucune rupture dashboard.

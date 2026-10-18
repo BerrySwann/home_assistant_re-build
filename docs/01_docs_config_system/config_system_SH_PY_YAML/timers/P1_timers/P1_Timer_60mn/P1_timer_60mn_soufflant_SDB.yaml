@@ -1,0 +1,46 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ POLE 1. TIMER : DECOMPTE 60 MIN, ARRET FORCE DU SOUFFLANT SDB            │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## DESCRIPTION :
+# Decompte de securite du soufflant de la salle de bain : 60 minutes de marche au maximum.
+# Remplace a terme le compte d'une heure qui vit dans le script sdb_soufflant_demarrer
+# (SDB-60MIN-FRAGILE : ce compte est efface par un redemarrage de Home Assistant).
+#
+# ## CALCUL & SOURCES :
+# Duree : 01:00:00. Option restore: true.
+# Prevu (automations a creer) : demarre quand switch.inter_soufflant_salle_de_bain passe en
+# marche ; annule quand il passe en arret ; a la fin (timer.finished), coupe l'interrupteur,
+# ce qui lance le script d'arret par le routage.
+#
+# ## CHAINE DE DEPENDANCES :
+#
+# | MATERIEL      | CAPTEUR BRUT (source)                  | CE FICHIER (unique_id) | AVAL                                          |
+# |:--------------|:---------------------------------------|:-----------------------|:----------------------------------------------|
+# | [virtuel/UI]  | switch.inter_soufflant_salle_de_bain   | soufflant_sdb_60mn     | automations a creer (lancement et fin)        |
+#
+# ## IMPORTANT (PIEGES) :
+# - Domaine timer NOUVEAU dans cette config (ajoute dans configuration.yaml le 2026-10-07
+#   par Eric : timer: !include_dir_merge_named timers/). Un redemarrage de Home Assistant
+#   est necessaire pour charger le domaine ; un simple rechargement ne suffit pas.
+# - restore: true : un timer actif ou en pause est restaure apres un redemarrage de HA
+#   (doc officielle du helper timer).
+# - Si la fin du timer tombe pendant l'arret de HA, l'evenement timer.finished n'est PAS
+#   emis au demarrage (doc officielle). D'ou le controle au demarrage de HA (voir ci-dessous).
+# - Ce fichier ne contient que le helper. Les automations qui lancent, annulent et lisent
+#   le timer ne sont PAS encore creees (2026-10-07) : sans elles, le timer ne fait rien.
+# - Decision Eric 2026-10-07 : deux helpers (60 mn et 10 mn). Dossier timers/P1_timers/.
+#
+# ## TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Aucune vignette pour l'instant (helper technique, pas d'affichage prevu).
+
+# ┌─────────────────────────────────┐
+# │ 1. TIMER 60 MINUTES             │
+# └─────────────────────────────────┘
+
+# --- soufflant_sdb_60mn ---
+soufflant_sdb_60mn:
+  name: "SDB Soufflant Decompte 60 mn"
+  duration: "01:00:00"
+  restore: true
+  icon: mdi:timer-outline

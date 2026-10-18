@@ -1,4 +1,4 @@
-﻿﻿﻿﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ AUDIT MD5 — 3 PASSES : TREE → MD5 PROD → MD5 GITHUB → RAPPORT          │
 # ╰──────────────────────────────────────────────────────────────────────────╯
@@ -21,7 +21,7 @@ GH_BASE="https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/ma
 
 cd /config
 
-DIRS="sensors templates utility_meter command_line shell_command packages groups input_booleans input_number"
+DIRS="sensors templates utility_meter command_line shell_command packages groups input_booleans input_number timers"
 EXTRA_FILES="automations.yaml scripts.yaml configuration.yaml sql.yaml input_select.yaml input_datetime.yaml input_button.yaml"
 
 # ── PASS 1 : TREE ─────────────────────────────────────────────────────────
@@ -37,6 +37,7 @@ find $DIRS -name "*.yaml" 2>/dev/null | sort > "$TMP_TREE" || true
 sed -i '/streamline_templates\.example\.yaml/d' "$TMP_TREE" || true
 sed -i '/scenes\.yaml$/d' "$TMP_TREE" || true
 find .scripts -name "*.sh" 2>/dev/null | sort >> "$TMP_TREE" || true
+find scripts -name "*.sh" 2>/dev/null | sort >> "$TMP_TREE" || true
 for f in $EXTRA_FILES; do [ -f "$f" ] && echo "$f" >> "$TMP_TREE"; done
 
 TOTAL=$(wc -l < "$TMP_TREE")
@@ -131,3 +132,4 @@ echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 terminé : $TOTAL fichiers �
 # [2026-06-28] EXCLUDE_YAML : zigbee2mqtt/ (Z2M → LXC 200) + streamline_templates.example.yaml
 #              + Docs/docs_dashboard/TREE_CORRIGE/scenes.yaml (fichier vide, hors scope)
 # [2026-10-10] Colonnes du tableau : PROD | GITHUB | STATUT | FICHIER (fichier en dernier, statuts alignes). Lignes RESULTAT et Audit MD5 termine inchangees (lues par la carte L5C3).
+# [2026-10-18] Perimetre etendu (demande d Eric) : DIRS + timers ; themes non ajoute (decision d Eric) ; find scripts -name "*.sh" (mf_vigilance_images.sh). notifs non ajoute : le dossier ne contient que des .txt (journaux ecrits en continu) et le find ne prend que *.yaml. Suppression des 4 marques BOM en tete du fichier (EF BB BF).

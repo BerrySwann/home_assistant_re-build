@@ -208,8 +208,8 @@ Dashboard optimise tablette + mobile. Structure en 6 lignes x 3 colonnes.
 docs/
 ├── 00_IA/                          <- contextes IA (IA_CONTEXT_BASE + sous_md/)
 ├── 01_docs_config_system/
-│   ├── config_system_YAML/         <- YAML config HA (source -> /homeassistant/)
-│   └── config_system_MD/           <- documentation configuration.yaml
+│   ├── config_system_SH_PY_YAML/   <- copie de /config : YAML de config HA + scripts .sh et .py
+│   └── config_system_MD/           <- fiches de la config (configuration, sql) et des scripts
 ├── 02_docs_dashboard/
 │   ├── dashboard_docs_MD/          <- docs 18 vignettes
 │   └── dashboard_docs_YAML/        <- YAML vignettes/pages + Dashboard_COMPLET/

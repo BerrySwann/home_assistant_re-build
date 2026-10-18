@@ -1,0 +1,101 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ COMMAND_LINE : MÉTÉO FRANCE — TÉLÉCHARGEMENT IMAGES VIGILANCE (J0 / J1)  │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# DESCRIPTION :
+# Télécharge les images de vigilance Météo France (aujourd'hui J0 et demain J1)
+# et les sauvegarde en PNG dans /config/www/weather/.
+# Inclus via : command_line: !include_dir_merge_list command_line/ (configuration.yaml)
+# Mise à jour du 2026-10-01 : la source n'est plus l'API officielle (voir PIÈGES).
+#
+# CALCUL & SOURCES :
+# - 2 sensors command_line : today (J0) + tomorrow (J1)
+# - scan_interval: 14400 (toutes les 4h)
+# - Commande : sh /config/scripts/mf_vigilance_images.sh /config/www/weather J0 (ou J1)
+#   Le 2e argument est optionnel ; sans lui, le script télécharge les deux cartes.
+# - Source réelle : API interne du site vigilance.meteofrance.fr
+#     https://rwg.meteofrance.com/wsft/v3/warning/thumbnail
+#       ?domain=FRA&resolution=large&warning_type=vigilance&echeance=J0|J1
+#   resolution : small 80x80, medium 250x250, large 500x500.
+# - Authentification : le token attendu est le cookie `mfsession` posé par le site,
+#   passé au ROT13, envoyé en en-tête "Authorization: Bearer". Ce cookie ne vit
+#   qu'UNE HEURE : le script le rederive à chaque exécution. Ne JAMAIS figer un
+#   token dans ce YAML, il serait mort une heure plus tard.
+# - Le script termine par une ligne horodatée ("2026-10-01T20:13:27 maj ok") qui
+#   sert de valeur au capteur. C'est volontaire, voir le 2e piège ci-dessous.
+# - value_template: "{{ value }}" -> la valeur du capteur est cette ligne horodatée.
+#
+# CHAÎNE DE DÉPENDANCES :
+#
+# | MATÉRIEL | CAPTEUR BRUT (source) | CE FICHIER (unique_id) | AVAL |
+# |:---------|:----------------------|:-----------------------|:-----|
+# | Météo France (API interne du site) | mf_vigilance_images.sh J0 -> PNG /www/weather/meteo_france_alerte_today.png | meteo_france_alertes_image_today | camera.mf_alerte_today (local_file, via l'interface) -> pop-up #alert, 1re bulle de la page meteo |
+# | Météo France (API interne du site) | mf_vigilance_images.sh J1 -> PNG /www/weather/meteo_france_alerte_tomorrow.png | meteo_france_alertes_image_tomorrow | camera.mf_alerte_tomorrow (local_file, via l'interface) -> pop-up #alert, 1re bulle de la page meteo |
+#
+# IMPORTANT (PIÈGES) :
+# - (01/10/2026) L'API officielle DPVigilance (public-api.meteofrance.fr) répond
+#   HTTP 403 avec le corps {"code":"900908","message":"Resource forbidden"} avec la
+#   clé de secrets.yaml, alors que cette clé est valide jusqu'en 2027 : c'est
+#   l'accès à la ressource qui est refusé côté Météo France, pas une expiration de
+#   token. C'est la raison de l'abandon de cette source. La clé mf_apikey de
+#   secrets.yaml n'est plus utilisée par ce fichier (elle est laissée en place).
+# - (01/10/2026) Un capteur command_line qui n'écrit AUCUNE valeur sur sa sortie
+#   reste « unavailable » à vie, même quand le téléchargement réussit. L'automation
+#   qui surveille cet état se relance alors toutes les 5 minutes pour rien (symptôme
+#   constaté). Le script doit donc toujours terminer par un echo, et le capteur doit
+#   rendre sa sortie. Ne pas corriger en désactivant l'automation.
+# - (01/10/2026) Symptôme trompeur mesuré : les trois PNG (nodata, today, tomorrow)
+#   portaient la MÊME empreinte md5 (3b59e3e668f4446a267881292c31b0c4) pendant des
+#   semaines, l'API échouant et le fallback recopiant le nodata. Une carte fausse ne
+#   se voit pas dans Home Assistant. Vérifier l'empreinte et la taille, pas la
+#   présence du fichier. Tailles saines mesurées : environ 55 ko (55453 / 55321).
+# - Le fichier nodata.png n'est plus recopié par ces capteurs (le cp -f a disparu).
+# - L'automation ID 1771872569647 force une MAJ au démarrage de HA, à 6:32 et à
+#   16:32, et toutes les 5 min SI un capteur est indisponible.
+# - (01/10/2026, corrigé) Les deux ENTITÉS CAMERA existent bel et bien :
+#   camera.mf_alerte_today et camera.mf_alerte_tomorrow, intégration local_file créée
+#   par l'interface (config entry, indépendante de ce YAML), avec
+#   file_path = /config/www/weather/meteo_france_alerte_today.png (et _tomorrow.png).
+#   Vérifié : /api/camera_proxy/camera.mf_alerte_today rend le MÊME md5 que le fichier
+#   sur disque. Ces caméras sont ce qui rend les cartes visibles.
+#   Elles sont affichées dans le pop-up "Carte d'alerte(s) Météo France" du dashboard
+#   tablette, première des trois bulles en bas de la page météo (ancre #alert), via
+#   custom:button-card + show_entity_picture. C'est le seul endroit où ces PNG servent.
+#   ATTENTION à une erreur qui a circulé : une entête précédente affirmait que
+#   l'intégration camera était désactivée et que ces entités n'existaient pas. C'est
+#   FAUX. Le `camera:` commenté de configuration.yaml ne dit rien de la config entry
+#   créée dans l'interface. Ne pas conclure depuis ce commentaire.
+#
+# TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Sert à la remontée d'info pour la vignette : [L1C1 Météo — Pop-up #ALERT]
+
+# --- meteo_france_alertes_image_today ---
+- sensor:
+    name: "Météo France alertes image today"
+    unique_id: meteo_france_alertes_image_today
+    scan_interval: 14400
+    command_timeout: 15
+    command: |-
+      sh /config/scripts/mf_vigilance_images.sh /config/www/weather J0 2>&1 | tail -1
+    value_template: "{{ value }}"
+
+# --- meteo_france_alertes_image_tomorrow ---
+- sensor:
+    name: "Météo France alertes image tomorrow"
+    unique_id: meteo_france_alertes_image_tomorrow
+    scan_interval: 14400
+    command_timeout: 15
+    command: |-
+      sh /config/scripts/mf_vigilance_images.sh /config/www/weather J1 2>&1 | tail -1
+    value_template: "{{ value }}"
+
+# annotations_log:
+# - [01/10/2026] Abandon de l'API officielle DPVigilance (403 Resource forbidden,
+#   code 900908) au profit du script /config/scripts/mf_vigilance_images.sh, fourni
+#   par la session .135 et déposé ici par .110, seul à avoir l'accès aux fichiers de
+#   HA. Les deux commandes appellent le script et rendent sa dernière ligne.
+#   Sauvegardes conservées : carte_meteo_france.yaml.bak_20261001_201209 et
+#   carte_meteo_france.yaml.bak2_20261001_201602
+# - [L50 & L76] suppression de la clé de météo france mise dans le fichier secret
+# - [L44] [L71] Suppression du `then` orphelin (ligne seule après `]; then`) — fix bug sh "unexpected then".
+#   Avant : `if [ ... ]; then\n        then`  →  Après : `if [ ... ]; then`

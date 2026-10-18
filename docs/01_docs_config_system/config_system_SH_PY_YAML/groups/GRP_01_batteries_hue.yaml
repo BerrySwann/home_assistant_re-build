@@ -1,0 +1,40 @@
+# ╭──────────────────────────────────────────────────────────────────────────────╮
+# │ GRP 01 — BATTERIES : HUE DEVICES                                            │
+# ╰──────────────────────────────────────────────────────────────────────────────╯
+#
+# ## 📝 DESCRIPTION :
+# Groupe des capteurs de batteries des équipements Philips Hue.
+# Hue Smart Button par pièce (11 unités).
+# Utilisé par auto-entities (L5C1) pour la surveillance centralisée des piles.
+#
+# ## 🧮 CALCUL & SOURCES :
+# Source : intégration Philips Hue Bridge (natif HA)
+# Entités : sensor.*_batterie (Hue Smart Button par pièce)
+#
+# ## 🔗 CHAÎNE DE DÉPENDANCES :
+# | MATÉRIEL      | CAPTEUR BRUT (source)                      | CE FICHIER         | AVAL          |
+# |:--------------|:-------------------------------------------|:-------------------|:--------------|
+# | Hue Bridge    | sensor.hue_smart_button_*_batterie         | group.hue_devices  | auto-entities → L5C1 |
+#
+# ## ⚠️ IMPORTANT (PIÈGES) :
+# - Chaque entité doit exister dans HA avant d'être ajoutée ici.
+# - Après ajout d'un bouton Hue, recharger via Outils dev → YAML → Recharger groupes.
+#
+# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# L5C1 — Surveillance Batteries / Piles
+
+# --- hue_devices ---
+hue_devices:
+  name: "HUE Devices"
+  entities:
+    - sensor.hue_smart_button_entee_1_batterie
+    - sensor.hue_smart_button_entee_2_batterie
+    - sensor.hue_smart_button_eco_batterie
+    - sensor.hue_smart_button_table_batterie
+    - sensor.hue_smart_button_cuisine_batterie
+    - sensor.hue_smart_button_couloir_batterie
+    - sensor.hue_smart_button_bureau_batterie
+    - sensor.hue_smart_button_salle_de_bain_batterie
+    - sensor.hue_smart_button_chambre_batterie
+    - sensor.hue_smart_button_chambre_gege_batterie
+    - sensor.hue_smart_button_chambre_eric_batterie
