@@ -18,3 +18,12 @@
 2026-10-19 21:27:39 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\TODO\TODO.md | avant=f5b6f4e1 apres=ddb489aa | R37.1 ferme sur ordre d Eric (repair mdi:bubbles absent) ; bak : TODO.bak_2026_10_19_21h27m39s.md
 2026-10-19 21:28:10 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\02_Docs_dashboard\Dashboard_docs_md\L2C1_ENERGIE\02_Page_temps_reel\Page_energie_temps_reel.md | avant=a3406ec6 apres=193ccc34 | R37.2 : Version HA 2026.3 -> 2026.10 (badge ligne 4 et tableau ligne 19), contenu de la page non reverifie ; bak : Page_energie_temps_reel.bak_2026_10_19_21h28m10s.md
 2026-10-19 21:28:23 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\TODO\TODO.md | avant=ddb489aa apres=63d7efe7 | R37.2 et R38.1 fermes sur ordre d Eric ; bak : TODO.bak_2026_10_19_21h28m23s.md
+2026-10-19 22:09:16 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\TODO\TODO.md | avant=63d7efe7 apres=80c789ae | ajout R79.1 a R79.8 (restes du 2026-10-19) sur ordre d Eric ; bak : TODO.bak_2026_10_19_22h09m16s.md
+2026-10-19 22:10:00 | claude | ACTION | HA app Mosquitto (core_mosquitto) | avant=- apres=- | logins mqtt_z2m : password_pre_hashed true -> false, app redemarree (mot de passe expose en session, voir R79.2)
+2026-10-19 22:10:00 | claude | ACTION | HA integration MQTT | avant=- apres=- | integration recreee (entree 01M5APARFDYY9JGGXNFY86R0JS) apres suppression par Eric
+2026-10-19 22:10:00 | claude | ACTION | HA Powercalc | avant=- apres=- | mise a jour vers 1.26.1 apres backup e1597f44
+2026-10-19 22:13:00 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md | avant=4b9fe5d2 apres=7820C2FC | tree : historique 221, docs 948, 02 278, 00_IA 10, commit GitHub 8cb8f425 ; bak : IA_ARBO_DETAIL.bak_2026_10_19_*
+2026-10-19 22:13:00 | claude | POUSSE | H:\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md | avant=4B9FE5D2 apres=7820C2FC | depuis local ; MD5 verifie
+2026-10-19 22:13:00 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\historique\histo_2026-10-19_s2.md | avant=- apres=ff1eec68 | journal de bord S2 (copie Obsidian MD5 egal)
+2026-10-19 22:13:00 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\historique\JOURNAL_FUSIONNE_2026-07-15_2026-10-19.md | avant=- apres=1514df6b | bloc S2 ajoute (copie Obsidian MD5 egal)
+2026-10-19 22:12:59 | claude | ACTION | PC | arret programme (histo-final)
