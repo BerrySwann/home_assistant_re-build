@@ -15,3 +15,4 @@
 2026-10-19 18:19:19 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md | avant=a4a7ba24 apres=4b9fe5d2 | tree : 23 lignes (comptages, GitHub 0f8fd878, SOUS_CONTEXT 11 dossiers) ; bak : IA_ARBO_DETAIL.bak_2026_10_19_18h18m20s.md
 2026-10-19 18:19:19 | claude | POUSSE | H:\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md | avant=a4a7ba24? apres=4b9fe5d2 | depuis local ; MD5 verifie
 2026-10-19 18:19:19 | claude | LOT | menage .bak (docs + historique\MD5) | n=225 (78 renommes, 147 corbeille) | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\menage_execute_2026-10-19_s1.txt
+2026-10-19 21:27:39 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\TODO\TODO.md | avant=f5b6f4e1 apres=ddb489aa | R37.1 ferme sur ordre d Eric (repair mdi:bubbles absent) ; bak : TODO.bak_2026_10_19_21h27m39s.md
