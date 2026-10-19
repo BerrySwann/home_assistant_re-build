@@ -1,6 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-10-19 (18h12, /histo S1) - entrée ajoutée : histo_trace.py (scripts python, 10 -> 11)*
 *Dernière mise à jour : 2026-10-18 (21h55, /histo S2) - entrées ajoutées : hermes_audit_trigul_arbres.py, Hermes_audit_md5_trigul_unitaire.py et trigul_run.py (scripts python, 7 -> 10) ; fiche de Verif_emplacements.py liée*
 *Dernière mise à jour : 2026-10-18 (17h30) - resync des liens : 315 liens remis à la casse et aux noms réels (renommages du 17/10, AQ_01_air_quality, S_01_store, P2_eCO. prises, Controle entity Z2M, RASPI_fan_pwm, configuration/configuration.md) ; fichier déplacé par Eric dans config_system_MD/GLOBAL_INDEX_REPO/*
 *Dernière mise à jour : 2026-10-18 - dossier de config : config_system_YAML remplacé par config_system_SH_PY_YAML (copie fidèle de /config) ; liens des 4 timers remis sur les sous-dossiers P1_Timer_10mn, P1_Timer_2h et P1_Timer_60mn ; 3 notes citant config_system_YAML mises à jour*
@@ -4192,7 +4193,7 @@ device et fonction confirmés (Raspberry Pi, cf. TODO.md U-2). Corrige l'ancienn
 </details>
 
 <details>
-<summary><b>🐍 SCRIPTS PYTHON D'INDEX</b> &nbsp;|&nbsp; 10 scripts (ajoutés le 2026-10-13 et le 2026-10-18, lecture seule de la prod) &nbsp;|&nbsp; Local : <code>docs_scripts_SH/</code> &nbsp;|&nbsp; Non poussés en prod</summary>
+<summary><b>🐍 SCRIPTS PYTHON D'INDEX</b> &nbsp;|&nbsp; 11 scripts (ajoutés le 2026-10-13, le 2026-10-18 et le 2026-10-19, lecture seule de la prod) &nbsp;|&nbsp; Local : <code>docs_scripts_SH/</code> &nbsp;|&nbsp; Non poussés en prod</summary>
 <blockquote>
 
 <details>
@@ -4282,6 +4283,14 @@ Lancé par trigul_run.py (étape B1) ; écrit historique/MD5/01_trigul_profond.<
 ⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Hermes_audit_md5_trigul_3md/trigul_run.py">Script source</a><br>
 Enchaîne les étapes A, B1 et C et écrit historique/MD5/04_journal_trigul.<br>
 📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Trigul_run/Trigul_run.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><code>histo_trace.py</code> &nbsp;|&nbsp; Journal de trace commun à /histo et /histo-final</summary>
+<blockquote>
+⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/histo_trace/histo_trace.py">Script source</a><br>
+Écrit historique/journal_trace (une ligne par étape, détecte les étapes sans fin et les séquences interrompues) ; pas encore de fiche ; local seulement.
 </blockquote>
 </details>
 
