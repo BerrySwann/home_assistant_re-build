@@ -36,12 +36,12 @@
 # - WIFI_PRESENCE (Page Home — logique déclenchement mode Absent/Présent)
 
 - sensor:
-# ┌────────────────────────────────────────────────────┐
-# │ P4 : DÉTERMINATION DU GROUPE (PRESENCE AUTOMATION) │
-# └────────────────────────────────────────────────────┘
+    # ┌───────────────────────────────────────────────────────┐
+    # │ 1. P4 : DÉTERMINATION DU GROUPE (PRESENCE AUTOMATION) │
+    # └───────────────────────────────────────────────────────┘
 
-# Calcul du groupe (1=Personne, 2=Mamour, 3=Eric, 4=Tous)
-# --- groupe ---
+    # Calcul du groupe (1=Personne, 2=Mamour, 3=Eric, 4=Tous)
+    # --- groupe ---
     - name: "Groupe"
       unique_id: groupe
       icon: mdi:account-group
@@ -67,12 +67,12 @@
           groupe_1
         {% endif %}
 
-# ┌─────────────────────────────────────────────────────────┐
-# │ P4 : CALCUL ET AFFICHAGE DES STATUTS RÉSEAU (INTERFACE) │
-# └─────────────────────────────────────────────────────────┘
+    # ┌────────────────────────────────────────────────────────────┐
+    # │ 2. P4 : CALCUL ET AFFICHAGE DES STATUTS RÉSEAU (INTERFACE) │
+    # └────────────────────────────────────────────────────────────┘
 
-# Affichage textuel complexe (WIFI / CELL / WIFI_!?)
-# --- presence ---
+    # Affichage textuel complexe (WIFI / CELL / WIFI_!?)
+    # --- presence ---
     - name: "Presence"
       unique_id: presence
       icon: mdi:cellphone-information
@@ -126,3 +126,8 @@
             [{{ m_stat }} / {{ e_stat }}]
           {%- endif -%}
         {%- endif -%}
+
+# annotations_log:
+# - [2026-10-20] [L39-41, L70-72] Titres secondaires (boites carrees) indentes de 4 espaces (col 0 -> 4), contenu inchange.
+# - [2026-10-20] [L39-41, L70-72] Titres secondaires numerotes (1. et 2.), largeur de boite elargie de 3 car., haut/titre/bas alignes.
+# - [2026-10-20] [L43-44, L74-75] Commentaire et slug tertiaire alignes sur le bloc d'entite (4 espaces).

@@ -3,7 +3,7 @@
 > `ReBuild/docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md` et `D:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres
 > toute mise a jour, verifier que les trois empreintes md5 sont egales. Il ne depend d'aucun agent
 > en particulier.
-> Derniere mise en conformite : 2026-10-18 (3 copies identiques, voir ci-dessus). Rappel du
+> Derniere mise en conformite : 2026-10-20 (3 copies identiques, voir ci-dessus). Rappel du
 > 2026-10-04 : la copie `D:\` avait ete retrouvee perimee (version du 2026-07-19, encore l'ancienne
 > REGLE ABSOLUE) et realignee ce jour-la - ancienne version conservee en
 > `D:\docs\00_IA\IA_CONTEXT_BASE_2026-07-19_15h46.md`.
@@ -186,7 +186,7 @@ Regles : lecture seule sur H: et sur les YAML locaux ; le script n'ecrit que les
 - `/ha_push_yaml` → pousse un fichier YAML de `docs/` vers prod `H:\`.
 - `/ha_push_docs` → synchronise les docs locales `docs/` vers `H:\Docs\`.
 - `/ha_push_md` → pousse uniquement les fichiers `*.md` de `docs/` vers `H:\Docs\`.
-- `/ha_resync_docs` → resynchronise `docs/` depuis GitHub (audit MD5).
+- `/ha_verif_headers` -> verifie en lecture seule les en-tetes des YAML de config (boites ASCII a largeur variable, 5 headers, slug, name, unique_id) avec `docs/04_Docs_scripts/Docs_scripts_sh/Verif_headers_yaml/Verif_headers_yaml.py`.
 - `/trigul` → triangulation MD5 des docs (local vs prod vs GitHub), rapport dans `historique\MD5\`. Inclut l'etape profonde automations/scripts et les categories HA (voir PROTOCOLE TRIGUL PROFOND).
 > Chaque `push_*` met aussi a jour le `.md` du fichier pousse (voir SOURCE DE VERITE).
 
@@ -224,7 +224,7 @@ Les 2 dernieres actions avant de fermer la session, dans cet ordre :
 
 **Workflow de modification (depuis le 2026-10-04)** : on ne modifie plus un fichier directement
 en prod (H:\). On edite la copie LOCALE (`docs/01_docs_config_system/config_system_SH_PY_YAML/`,
-image miroir 1:1 de H:\ - voir `ha-resync-docs` pour la tenir a jour), avec une sauvegarde locale
+image miroir 1:1 de H:\ - voir l'etape C de `ha-trigul` pour la tenir a jour), avec une sauvegarde locale
 avant chaque modification (REGLE DE SAUVEGARDE ci-dessous), puis on pousse vers H:\ via
 `ha-push-yaml` (MD5-first, confirmation obligatoire). La prod ne recoit jamais de sauvegarde ni de
 nom de fichier avec suffixe de date - meme en cas de restauration d'une ancienne sauvegarde, le
@@ -306,7 +306,7 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
 Copie de prod : `H:\Docs\` (poussee depuis le local, ne jamais la modifier directement). GitHub `home_assistant_re-build` : backup via git auto depuis HA, reflet de la prod.
 
 `H:\Docs\` (racine, hors `01_docs_config_system\config_system_SH_PY_YAML\`) ne contient QUE des .md, histo et yaml Dashboard - **jamais de YAML config HA**.
-`H:\docs\01_docs_config_system\config_system_SH_PY_YAML\` est l'image locale miroir de la config YAML de prod (sensors, templates, utility_meter, command_line, groups, input_booleans, shell_command, themes, blueprints) - alimentee par resync GitHub (`ha-resync-docs`) et par les push normaux (`ha-push-yaml`). Exception documentee a la regle ci-dessus, pas une contradiction.
+`H:\docs\01_docs_config_system\config_system_SH_PY_YAML\` est l'image locale miroir de la config YAML de prod (sensors, templates, utility_meter, command_line, groups, input_booleans, shell_command, themes, blueprints) - alimentee par la comparaison de `ha-trigul` (etape C, reprise de l'ancien skill `ha-resync-docs`, supprime le 2026-10-20) et par les push normaux (`ha-push-yaml`). Exception documentee a la regle ci-dessus, pas une contradiction.
 `/config/notifs/` (`H:\notifs`) : TOUS les fichiers sont vivants (journaux regeneres par HA en continu). Ils ne vont jamais dans `docs/` (ni local, ni miroir `H:\docs`, ni `docs/` de GitHub) : pas de copie, pas de push, pas de bak de la part de Claude ; lecture seule sur `H:\notifs`. Ils sont sauvegardes au fil de l'eau sur GitHub, a la racine du depot (`notifs/`), par le backup HA : c'est voulu, pour retrouver les donnees anterieures si quelque chose casse (regle d'Eric du 2026-10-18).
 
 > ⚠️ Audit MD5 docs : couvre les `.md` ET les `.yaml` dashboard (`dashboard_docs_YAML/`). Ne pas oublier les yaml lors d'un audit de cohérence local vs H:\Docs\.
@@ -417,7 +417,7 @@ wc -l /tmp/github_aliases.txt /tmp/local_autom_files.txt
 - **Titre principal** - coins arrondis `╭─╮/╰─╯` - largeur 78 car. - texte MAJUSCULES.
   - Si >74 car. : élargir la boîte. ⛔ Ne jamais supprimer les références techniques du titre.
 - **Titre secondaire** - coins carrés `┌─┐/└─┘` - largeur 37 car. - texte MAJUSCULES, numérotation 1-9.
-- **Largeur** - 78 et 37 sont le cadre standard, pas une limite : une boite peut etre plus large si le titre ne tient pas, mais le haut, le titre et le bas gardent la meme largeur (controle : `check_yaml_forme.py`). Un `#` suivi d'une lettre (code commente) n'est pas un en-tete colle.
+- **Largeur** - 78 et 37 sont le cadre standard, pas une limite : une boite peut etre plus large si le titre ne tient pas, mais le haut, le titre et le bas gardent la meme largeur (controle : `check_yaml_forme.py` et le skill `ha-verif-headers`). Un `#` suivi d'une lettre (code commente) n'est pas un en-tete colle.
 
 ### 5 - Headers en-tête obligatoires (juste sous la boite ASCII)
 ```yaml

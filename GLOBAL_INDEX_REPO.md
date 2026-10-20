@@ -1,6 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-10-20 (soir) - section 05 SKILLS : ha-resync-docs retiré (doublon de ha-trigul), ha-verif-headers ajouté (14 skills) ; section 04 : Verif_headers_yaml.py ajouté*
 *Dernière mise à jour : 2026-10-19 (18h12, /histo S1) - entrée ajoutée : histo_trace.py (scripts python, 10 -> 11)*
 *Dernière mise à jour : 2026-10-18 (21h55, /histo S2) - entrées ajoutées : hermes_audit_trigul_arbres.py, Hermes_audit_md5_trigul_unitaire.py et trigul_run.py (scripts python, 7 -> 10) ; fiche de Verif_emplacements.py liée*
 *Dernière mise à jour : 2026-10-18 (17h30) - resync des liens : 315 liens remis à la casse et aux noms réels (renommages du 17/10, AQ_01_air_quality, S_01_store, P2_eCO. prises, Controle entity Z2M, RASPI_fan_pwm, configuration/configuration.md) ; fichier déplacé par Eric dans config_system_MD/GLOBAL_INDEX_REPO/*
@@ -4260,6 +4261,15 @@ Lancé par /histo (étape 6, point 9) ; ne corrige rien. Carte : <a href="docs/0
 </details>
 
 <details>
+<summary><code>Verif_headers_yaml.py</code> &nbsp;|&nbsp; Controle en lecture seule des en-tetes des YAML de config (boites ASCII a largeur variable, 5 headers, slug, name, unique_id)</summary>
+<blockquote>
+⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Verif_headers_yaml/Verif_headers_yaml.py">Script source</a><br>
+Lance par le skill ha-verif-headers ; ne corrige rien. Complete check_yaml_forme.py.<br>
+📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Verif_headers_yaml/Verif_headers_yaml.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
 <summary><code>hermes_audit_trigul_arbres.py</code> &nbsp;|&nbsp; Superposition en lecture seule des 3 arbres (GitHub, local, prod) pour le trigul</summary>
 <blockquote>
 ⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Hermes_audit_md5_trigul_3md/hermes_audit_trigul_arbres.py">Script source</a><br>
@@ -4467,13 +4477,6 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 </details>
 
 <details>
-<summary><b>ha-resync-docs.md</b> &nbsp;|&nbsp; compare et resynchronise les YAML locaux depuis GitHub</summary>
-<blockquote>
-<a href="docs/05_Docs_skills/Skill_ha-resync-docs/Ha-resync-docs.md">Doc</a>
-</blockquote>
-</details>
-
-<details>
 <summary><b>ha-resync-tree.md</b> &nbsp;|&nbsp; resynchronise les YAML locaux depuis le repo GitHub (source de vérité n°2)</summary>
 <blockquote>
 <a href="docs/05_Docs_skills/Skill_ha-resync-tree/Ha-resync-tree.md">Doc</a>
@@ -4491,6 +4494,13 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 <summary><b>ha-trigul.md</b> &nbsp;|&nbsp; triangulation MD5 des docs local / prod / GitHub, rapports dans historique/MD5</summary>
 <blockquote>
 <a href="docs/05_Docs_skills/Skill_ha-trigul/Ha-trigul.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>ha-verif-headers.md</b> &nbsp;|&nbsp; verifie en lecture seule les en-tetes des YAML de config (boites ASCII, 5 headers, slug, name, unique_id)</summary>
+<blockquote>
+<a href="docs/05_Docs_skills/Skill_ha-verif-headers/Ha-verif-headers.md">Doc</a>
 </blockquote>
 </details>
 

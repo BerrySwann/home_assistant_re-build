@@ -73,4 +73,4 @@ Premier passage (2026-10-18 17:41, commit GitHub f45a765c) : 97 fichiers suivis,
 
 ## 7. Skills et scripts concernes
 
-`histo`, `histo-final`, `ha-push-yaml`, `ha-push-docs`, `ha-trigul`, `sync-index`, `update-arbo`, `ha-resync-docs`, `ha-resync-tree`, `ha-new-yaml`, `fix-file`. A mettre a jour pour citer cette carte et appeler le script (en cours le 2026-10-18).
+`histo`, `histo-final`, `ha-push-yaml`, `ha-push-docs`, `ha-trigul`, `sync-index`, `update-arbo`, `ha-resync-tree`, `ha-new-yaml`, `fix-file`. A mettre a jour pour citer cette carte et appeler le script (en cours le 2026-10-18).

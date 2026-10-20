@@ -2240,10 +2240,6 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   └── Ha-push-yaml.md                                                                 │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── Skill_ha-resync-docs/                                                               │                                                                                             │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── Ha-resync-docs.md                                                               │                                                                                             │
-│ │   │                                                                                       │                                                                                             │
 │ │   ├── Skill_ha-resync-tree/                                                               │                                                                                             │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   └── Ha-resync-tree.md                                                               │                                                                                             │
@@ -2255,6 +2251,10 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   ├── Skill_ha-trigul/                                                                    │                                                                                             │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   └── Ha-trigul.md                                                                    │                                                                                             │
+│ │   │                                                                                       │                                                                                             │
+│ │   ├── Skill_ha-verif-headers/                                                                    │                                                                                      │
+│ │   │   │                                                                                   │                                                                                             │
+│ │   │   └── Ha-verif-headers.md                                                                    │                                                                                      │
 │ │   │                                                                                       │                                                                                             │
 │ │   ├── Skill_histo/                                                                        │                                                                                             │
 │ │   │   │                                                                                   │                                                                                             │

@@ -1,5 +1,5 @@
 # 🌳 ARBORESCENCES COMPLÈTES & INDEX GITHUB
-*Derniere mise a jour : 2026-10-19 (nuit, /histo-final S2 : historique 221, docs 948 (442 sauvegardes), 02_docs_dashboard 278, 00_IA 10 ; PROD inchangee (497) ; GitHub commit 8cb8f425, 988 dans docs/ | precedent : 2026-10-19 (soir, /histo S1 : comptages LOCAL (apres menage .bak : 78 renommees, 147 a la corbeille Windows), PROD (fichiers caches compris) et GitHub (commit 0f8fd878) recalcules ; lignes de la grille mises a jour une par une, texte narratif inchange) | precedent : 2026-10-18 (soir, /histo-final S3 : comptages LOCAL (apres menage .bak), PROD (fichiers caches compris : 496 dont 10 caches) et GitHub (commit 33e085df) recalcules ; lignes de la grille mises a jour une par une, texte narratif inchange) | precedent : 2026-10-18 (resync tree demande par Eric : comptages LOCAL, PROD et GitHub recalcules (dernier commit 5bc5095b ; releve refait par /histo S1 a 18h50 apres le menage .bak) ; config_system_YAML remplace par config_system_SH_PY_YAML ; config_system_MD remanie par Eric (un dossier par fichier, GLOBAL_INDEX_REPO et README deplaces) ; les autres noms de dossiers restent ceux du releve 2026-10-15) | precedent : 2026-10-17 (soir, /histo S1 : section GitHub rafraichie (dernier commit de75fed2) ; menage des sauvegardes (15 a la corbeille Windows, 18 renommees) ; export Dashboard 2026_10_16 ; arbres LOCAL et PROD non rafraichis, releve 2026-10-15) | precedent : 2026-10-17 (arbres LOCAL et PROD developpes en grille a deux colonnes, une ligne par dossier ou fichier ; comptages et noms restent ceux du releve 2026-10-15, donc d avant les renommages) | precedent : 2026-10-15 (soir, /histo-final S1 : releves LOCAL + PROD + GitHub rafraichis ; menage des sauvegardes (19 a la corbeille Windows, 12 renommees) ; export Dashboard deja a jour ; dernier commit GitHub aed7ae96) | precedent : 2026-10-14 (soir, /histo-final S1 : releves LOCAL + PROD + GitHub rafraichis ; menage des sauvegardes (45 a la corbeille Windows, 32 renommees) ; export Dashboard 2026_10_14 ; dernier commit GitHub 058aba96) | precedent : 2026-10-13 (soir, /histo-final : releves LOCAL + PROD + GitHub rafraichis ; menage des sauvegardes (9 a la corbeille Windows, 4 renommees) ; dernier commit GitHub f9407863) | precedent : 2026-10-13 (corrections manuelles apres deplacement de INDEX_GLOBAL : lignes Github, 05_docs_MD_system et liens ; autres comptages du 2026-10-12) | precedent : 2026-10-12 (soir, /histo S1 : relevés LOCAL + PROD + GitHub rafraîchis ; comptages LOCAL recalculés après le ménage des sauvegardes (108 renommées, 125 à la corbeille Windows) et la copie de 8 scripts de la prod en local ; dernier commit GitHub e8af1e4c)*
+*Derniere mise a jour : 2026-10-20 (soir, /histo S1 : historique 226, docs 945 (439 sauvegardes), 02_docs_dashboard 278, 00_IA 9 hors SOUS_CONTEXT_IA ; PROD 499 (fichiers caches compris), modifs 19 journaux ; GitHub commit 2a4ead32, 990 dans docs/ ; apres menage .bak : 8 renommees, 8 a la corbeille Windows ; lignes de la grille mises a jour une par une, texte narratif inchange) | precedent : 2026-10-19 (nuit, /histo-final S2 : historique 221, docs 948 (442 sauvegardes), 02_docs_dashboard 278, 00_IA 10 ; PROD inchangee (497) ; GitHub commit 8cb8f425, 988 dans docs/ | precedent : 2026-10-19 (soir, /histo S1 : comptages LOCAL (apres menage .bak : 78 renommees, 147 a la corbeille Windows), PROD (fichiers caches compris) et GitHub (commit 0f8fd878) recalcules ; lignes de la grille mises a jour une par une, texte narratif inchange) | precedent : 2026-10-18 (soir, /histo-final S3 : comptages LOCAL (apres menage .bak), PROD (fichiers caches compris : 496 dont 10 caches) et GitHub (commit 33e085df) recalcules ; lignes de la grille mises a jour une par une, texte narratif inchange) | precedent : 2026-10-18 (resync tree demande par Eric : comptages LOCAL, PROD et GitHub recalcules (dernier commit 5bc5095b ; releve refait par /histo S1 a 18h50 apres le menage .bak) ; config_system_YAML remplace par config_system_SH_PY_YAML ; config_system_MD remanie par Eric (un dossier par fichier, GLOBAL_INDEX_REPO et README deplaces) ; les autres noms de dossiers restent ceux du releve 2026-10-15) | precedent : 2026-10-17 (soir, /histo S1 : section GitHub rafraichie (dernier commit de75fed2) ; menage des sauvegardes (15 a la corbeille Windows, 18 renommees) ; export Dashboard 2026_10_16 ; arbres LOCAL et PROD non rafraichis, releve 2026-10-15) | precedent : 2026-10-17 (arbres LOCAL et PROD developpes en grille a deux colonnes, une ligne par dossier ou fichier ; comptages et noms restent ceux du releve 2026-10-15, donc d avant les renommages) | precedent : 2026-10-15 (soir, /histo-final S1 : releves LOCAL + PROD + GitHub rafraichis ; menage des sauvegardes (19 a la corbeille Windows, 12 renommees) ; export Dashboard deja a jour ; dernier commit GitHub aed7ae96) | precedent : 2026-10-14 (soir, /histo-final S1 : releves LOCAL + PROD + GitHub rafraichis ; menage des sauvegardes (45 a la corbeille Windows, 32 renommees) ; export Dashboard 2026_10_14 ; dernier commit GitHub 058aba96) | precedent : 2026-10-13 (soir, /histo-final : releves LOCAL + PROD + GitHub rafraichis ; menage des sauvegardes (9 a la corbeille Windows, 4 renommees) ; dernier commit GitHub f9407863) | precedent : 2026-10-13 (corrections manuelles apres deplacement de INDEX_GLOBAL : lignes Github, 05_docs_MD_system et liens ; autres comptages du 2026-10-12) | precedent : 2026-10-12 (soir, /histo S1 : relevés LOCAL + PROD + GitHub rafraîchis ; comptages LOCAL recalculés après le ménage des sauvegardes (108 renommées, 125 à la corbeille Windows) et la copie de 8 scripts de la prod en local ; dernier commit GitHub e8af1e4c)*
 *Lire ce fichier si : audit fichiers, sync GitHub, recherche d'un fichier prod, vérification arbo locale, URLs raw GitHub.*
 
 ---
@@ -17,13 +17,13 @@
 
 ---
 
-## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-10-19)
+## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-10-20)
 
 ```text
 ┌───────────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────────────────────┐
 │ ARBORESCENCE                                  │ DÉTAIL                                                                               │
 ├───────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────┤
-│ ReBuild/                                      │ (C:\Users\Berry Swann\Documents\ReBuild\ - relevé 2026-10-19)                        │
+│ ReBuild/                                      │ (C:\Users\Berry Swann\Documents\ReBuild\ - relevé 2026-10-20)                        │
 │ │                                             │                                                                                      │
 │ ├── 12 fichiers racine                        │ (dont 2 sauvegardes de presentation_HACF_2026.txt)                                   │
 │ │   │                                         │                                                                                      │
@@ -92,7 +92,7 @@
 │ │   │                                         │                                                                                      │
 │ │   └── MOC_PRESENCE/                         │ (son .md et ses sauvegardes)                                                         │
 │ │                                             │                                                                                      │
-│ ├── historique/                               │ (221 dont 56 sauvegardes)                                                            │
+│ ├── historique/                               │ (226 dont 57 sauvegardes)                                                            │
 │ │   │                                         │                                                                                      │
 │ │   ├── JOURNAL_COMPLET/JOURNAL_FUSIONNE_*.md │ (journaux)                                                                           │
 │ │   │                                         │                                                                                      │
@@ -104,21 +104,21 @@
 │ │   │                                         │                                                                                      │
 │ │   └── histo.md                              │ (= copie du skill + ses sauvegardes)                                                 │
 │ │                                             │                                                                                      │
-│ └── docs/                                     │ (948 fichiers dont 442 sauvegardes)                                                  │
+│ └── docs/                                     │ (945 fichiers dont 439 sauvegardes)                                                  │
 │     │                                         │                                                                                      │
-│     ├── 00_IA/                                │ (10 dont 8 sauvegardes hors SOUS_CONTEXT_IA/ ; les fichiers html, rapports d'audit,  │
+│     ├── 00_IA/                                │ (9 dont 7 sauvegardes hors SOUS_CONTEXT_IA/ ; les fichiers html, rapports d'audit,   │
 │     │   │                                     │ grille tarifaire et png cites avant ne sont plus ici)                                │
 │     │   │                                     │                                                                                      │
 │     │   ├── IA_CONTEXT_BASE/                  │ (dossier avec IA_CONTEXT_BASE.md et ses sauvegardes (regle du 2026-10-13))           │
 │     │   │                                     │                                                                                      │
 │     │   ├── GLOBAL_INDEX_IA.md                │ (index genere, ajoute le 2026-10-13, et ses sauvegardes)                             │
 │     │   │                                     │                                                                                      │
-│     │   └── SOUS_CONTEXT_IA/                  │ (36 dont 25 sauvegardes - 9 dossiers, un par fichier IA_*.md (IA_ARBO_DETAIL = index │
+│     │   └── SOUS_CONTEXT_IA/                  │ (35 dont 24 sauvegardes - 9 dossiers, un par fichier IA_*.md (IA_ARBO_DETAIL = index │
 │     │                                         │ arbo), chacun avec son .md et ses sauvegardes dedans ; regle du 2026-10-13)          │
 │     │                                         │                                                                                      │
-│     ├── 01_docs_config_system/                │ (148 dont 43 sauvegardes)                                                            │
+│     ├── 01_docs_config_system/                │ (150 dont 45 sauvegardes)                                                            │
 │     │   │                                     │                                                                                      │
-│     │   ├── config_system_MD/                 │ (18 dont 8 sauvegardes - un dossier par fichier)                                     │
+│     │   ├── config_system_MD/                 │ (17 dont 7 sauvegardes - un dossier par fichier)                                     │
 │     │   │                                     │                                                                                      │
 │     │   │   ├── .scripts/                     │ (8 dont 3 sauvegardes)                                                               │
 │     │   │                                     │                                                                                      │
@@ -132,11 +132,11 @@
 │     │   │                                     │                                                                                      │
 │     │   │   ├── sql/                          │ (1 dont 0 sauvegardes)                                                               │
 │     │   │                                     │                                                                                      │
-│     │   └── config_system_SH_PY_YAML/         │ (130 fichiers dont 35 sauvegardes - copie de /config)                                │
+│     │   └── config_system_SH_PY_YAML/         │ (133 fichiers dont 38 sauvegardes - copie de /config)                                │
 │     │                                         │                                                                                      │
 │     ├── 02_docs_dashboard/                    │ (278 dont 106 sauvegardes)                                                           │
 │     │   │                                     │                                                                                      │
-│     │   ├── dashboard_docs_MD                 │ (112)                                                                                │
+│     │   ├── dashboard_docs_MD                 │ (113)                                                                                │
 │     │   │                                     │                                                                                      │
 │     │   └── dashboard_docs_YAML               │ (161)                                                                                │
 │     │                                         │                                                                                      │
@@ -146,7 +146,7 @@
 │     │   │                                     │                                                                                      │
 │     │   └── docs_automations_YAML             │                                                                                      │
 │     │                                         │                                                                                      │
-│     ├── 04_docs_scripts/                      │ (94 dont 47 sauvegardes)                                                             │
+│     ├── 04_docs_scripts/                      │ (93 dont 46 sauvegardes)                                                             │
 │     │   │                                     │                                                                                      │
 │     │   ├── SH                                │                                                                                      │
 │     │   │                                     │                                                                                      │
@@ -158,7 +158,7 @@
 │     │                                         │                                                                                      │
 │     ├── 05_docs_MD_system/                    │ (23 dont 11 sauvegardes)                                                             │
 │     │                                         │                                                                                      │
-│     ├── 05_docs_skills/                       │ (42 - 27 sauvegardes ; histo.md existe aussi dans historique/)                       │
+│     ├── 05_docs_skills/                       │ (40 - 25 sauvegardes ; histo.md existe aussi dans historique/)                       │
 │     │   │                                     │                                                                                      │
 │     │   ├── skill_<nom>/                      │ (16 dossiers contenant la copie .md de chaque SKILL.md du projet)                    │
 │     │   │                                     │                                                                                      │
@@ -181,13 +181,13 @@
 
 ---
 
-## 🌳 ARBORESCENCE - PROD /homeassistant/ (= H:\ - relevé 2026-10-19)
+## 🌳 ARBORESCENCE - PROD /homeassistant/ (= H:\ - relevé 2026-10-20)
 
 ```text
 ┌─────────────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────────┐
 │ ARBORESCENCE                                    │ DÉTAIL                                                                             │
 ├─────────────────────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────┤
-│ /homeassistant/                                 │ (relevé 2026-10-19 ; = H:\)                                                        │
+│ /homeassistant/                                 │ (relevé 2026-10-20 ; = H:\)                                                        │
 │ │                                               │                                                                                    │
 │ ├── Fichiers racine                             │                                                                                    │
 │ │   │                                           │                                                                                    │
@@ -466,7 +466,7 @@
 │ │                                               │                                                                                    │
 │ ├── deps/                                       │ (divers, hors périmètre docs HA)                                                   │
 │ │                                               │                                                                                    │
-│ └── docs/                                       │ (497 - miroir pushé depuis local docs/ ; dont modifs/ 17 journaux)                 │
+│ └── docs/                                       │ (499 - miroir pushé depuis local docs/ ; dont modifs/ 19 journaux)                 │
 │     │                                           │                                                                                    │
 │     ├── 00_IA/                                  │ (13 fichiers - aucune sauvegarde .bak sur H:)                                      │
 │     │   │                                       │                                                                                    │
@@ -551,8 +551,8 @@
 - **Repo actif unique** : `BerrySwann/home_assistant_re-build` (ancien `home-assistant-config` supprimé le 2026-04-27)
 - **Contenu** : reflet exact de `/homeassistant/` - pushé par `.scripts/ha_git_backup.sh` (boutons page Système L5C3)
 - **Point d'entrée navigation** : [GLOBAL_INDEX_REPO.md](https://github.com/BerrySwann/home_assistant_re-build/blob/main/GLOBAL_INDEX_REPO.md) (copie de navigation a la racine, nom change le 2026-10-13 ; visible sur GitHub apres le prochain backup HA)
-- **Dernier relevé arbre (API git trees)** : 2026-10-19 - **1284 objets (fichiers + dossiers)** ; dernier commit `8cb8f425` (2026-10-19 21:45 CEST, HAOS auto-backup: 2026-10-19 21:45:17 CEST (HA 2026.10.2))
-- Répartition : `docs/` 988 · `templates/` 85 · `utility_meter/` 14 · `input_booleans/` 5 · `sensors/` 10
+- **Dernier relevé arbre (API git trees)** : 2026-10-20 - **1286 objets (fichiers + dossiers)** ; dernier commit `2a4ead32` (2026-10-20 19:10 CEST, HAOS auto-backup: 2026-10-20 19:10:00 CEST (HA 2026.10.2))
+- Répartition : `docs/` 990 · `templates/` 85 · `utility_meter/` 14 · `input_booleans/` 5 · `sensors/` 10
 
 **Patterns URLs :**
 

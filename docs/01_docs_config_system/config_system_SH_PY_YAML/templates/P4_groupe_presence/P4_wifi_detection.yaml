@@ -35,7 +35,7 @@
 
 - sensor:
     # ┌───────────────────────────────────┐
-    # │ WiFi                              │
+    # │ 1. WIFI                           │
     # └───────────────────────────────────┘
     # --- condition_mamour_wifi ---
     - name: "Condition Mamour Wifi"
@@ -99,3 +99,4 @@
 # - [L6-8] Ajout du titre secondaire (Boîte ASCII carrée 37 car).
 # - [L9,23,37] Ajout des titres tertiaires (slugs).
 # - [Global] Fusion des blocs sensor et standardisation de l'indentation.
+# - [2026-10-20] [L38] Titre secondaire passe en MAJUSCULES et numerote (1. WIFI), largeur 37 inchangee.
