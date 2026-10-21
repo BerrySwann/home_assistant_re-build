@@ -4300,7 +4300,7 @@ Enchaîne les étapes A, B1 et C et écrit historique/MD5/04_journal_trigul.<br>
 <summary><code>histo_trace.py</code> &nbsp;|&nbsp; Journal de trace commun à /histo et /histo-final</summary>
 <blockquote>
 ⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/histo_trace/histo_trace.py">Script source</a><br>
-Écrit historique/journal_trace (une ligne par étape, détecte les étapes sans fin et les séquences interrompues) ; pas encore de fiche ; local seulement.
+Écrit historique/01_journal_trace/logs (une ligne par étape, détecte les étapes sans fin et les séquences interrompues) et, avec la commande html, les pages HTML du jour directement dans historique/01_journal_trace ; pas encore de fiche ; local seulement.
 </blockquote>
 </details>
 
