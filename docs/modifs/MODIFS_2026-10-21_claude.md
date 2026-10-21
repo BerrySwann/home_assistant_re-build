@@ -9,3 +9,13 @@
 2026-10-21 19:00:07 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\TODO\TODO.bak_2026_10_21_*.html (2eme sauvegarde du jour) | avant=- apres=- | avant completion R103.9 et R103.10
 2026-10-21 19:00:07 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\TODO\TODO.md | avant=74057efd apres=- | R103.9 et R103.10 completes (recap fait, histo .claude aussi decale) ; TODO.html mis a jour
 2026-10-21 19:06:31 | claude | MODIFIE | docs\04_Docs_scripts\Docs_scripts_sh\histo_trace\histo_trace.py | avant=- apres=b175697a | format recap demande par Eric ( tache N-1 -> duree ) - debut ; bak : histo_trace.bak_2026_10_21_19h06m22s.py
+2026-10-21 19:19:27 | claude | ACTION | HA automation.bureau_forcer_play_on_si_pc_tourne | avant=on apres=off | histo-final tache 1 : coupure (turn_off), remise on prevue avant arret PC
+2026-10-21 19:19:27 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\historique\histo_2026-10-21_s1.md | avant=- apres=9f90d1aa | journal de session histo-final
+2026-10-21 19:19:27 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\historique\JOURNAL_FUSIONNE_2026-07-15_2026-10-21.md | avant=- apres=f5f580d7 | fusionne ; base 2026-10-20 conservee
+2026-10-21 19:19:27 | claude | COPIE | D:\Cerveau-Obsidian\14 Boulot\Journal\ (histo_2026-10-21_s1.md et JOURNAL_FUSIONNE_..._2026-10-21.md) | avant=- apres=- | MD5 identiques
+2026-10-21 19:19:27 | claude | LOT | menage .bak docs et historique\MD5 | avant=n=27 apres=rapport : historique\menage_execute_2026-10-21.txt | 15 renommes, 12 corbeille Windows, plan historique\menage_dry_run_2026-10-21.txt
+2026-10-21 19:19:27 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\GLOBAL_INDEX_IA.md | avant=- apres=9061c16a | regenere par gen_global_index_ia.py (non pousse)
+2026-10-21 19:19:27 | claude | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md | avant=22cb1d2c apres=206c0844 | tree ; pousse sur H: MD5 identique ; bak : IA_ARBO_DETAIL.bak_2026_10_21_19h18m58s.md
+2026-10-21 19:19:27 | claude | CREE | C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-21.txt | avant=- apres=- | rapport Verif_emplacements.py
+2026-10-21 19:20:33 | claude | ACTION | HA automation.bureau_forcer_play_on_si_pc_tourne | avant=off apres=on | histo-final : remise on avant arret PC, Play off confirme
+2026-10-21 19:20:33 | claude | ACTION | PC | arret programme (histo-final) | avant=- apres=- | shutdown /t 420
