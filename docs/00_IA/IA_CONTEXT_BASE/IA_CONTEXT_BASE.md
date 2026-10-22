@@ -275,8 +275,8 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
   (teste le 2026-10-08). Pas de corbeille sur H:\ : ne jamais supprimer un fichier de H:\ sans
   avoir verifie qu'il existe en local.
 - Repertoire temporaire : `ReBuild\TEMPO\` (decide par Eric le 2026-10-18). C'est le seul dossier pour tout ce qui est temporaire :
-  copies de securite avant une suppression en prod (H: n'a pas de corbeille : copier le fichier dans `TEMPO\<operation>_AAAA-MM-JJ\`
-  en gardant l'arborescence, verifier le MD5 de la copie, puis supprimer sur H:, et noter le rapport dans le journal des modifs),
+  copies de securite avant une suppression en prod (H: n'a pas de corbeille, donc jamais de suppression definitive directe sur H: ; regle precisee par Eric le 2026-10-22 : 1. copier le fichier de H: dans `TEMPO\<operation>_AAAA-MM-JJ\`
+  en gardant l'arborescence ; 2. verifier le MD5 de chaque copie contre le fichier de H: ; 3. seulement si tous les MD5 correspondent : mettre les copies de TEMPO a la corbeille Windows (SendToRecycleBin, jamais de suppression definitive), puis supprimer les fichiers sur H: ; si un MD5 differe : ne rien supprimer sur H: et le signaler ; 4. noter le rapport dans le journal des modifs),
   et tout autre besoin de fichiers temporaires (extractions, essais, copies de travail). Ne pas creer d'autre dossier temporaire
   dans ReBuild, sauf un dossier ephemere efface par son propre script (ex : `_tmp_trigul_profond`).
 - Dossier `historique/MD5/` (ajoute au perimetre par Eric le 2026-10-18, menage des .bak hermes compris) : un sous-repertoire par type de rapport,
