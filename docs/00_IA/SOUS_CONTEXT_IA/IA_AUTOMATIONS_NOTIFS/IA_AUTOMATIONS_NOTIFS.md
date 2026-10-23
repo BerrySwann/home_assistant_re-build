@@ -42,8 +42,8 @@
 - `/config/notifs/diag_conso_elec.txt` (`notify.file_diag_log_file`) ← DIAG - ENREGISTREMENT JOURNALIER (7 POSTES + DUT)
 - `/config/notifs/ecart_liky_vs_nodon.txt` (`notify.log_ecart_energie`) ← Log Écart Linky vs Nodon
 - `/config/.logs/zone_eric.txt` (`notify.zone_eric`) ← [P4] Eric - Log Zones
-- `/config/notifs/linky_histo.txt` (`notify.log_linky_histo`) et `/config/notifs/ecart_histo.txt` (`notify.log_ecart_histo`) ← [P0] Histo Linky quotidien + Ecart J-1
-- `/config/notifs/nodon_histo.txt` (`notify.log_nodon_histo`) ← [P0] Histo Nodon quotidien
+- `/config/notifs/linky_histo.txt` (`notify.log_linky_histo`) et `/config/notifs/ecart_histo.txt` (`notify.log_ecart_histo`) ← A - [P0] Histo Linky quotidien + Ecart J-1
+- `/config/notifs/nodon_histo.txt` (`notify.log_nodon_histo`) ← B - [P0] Histo Nodon quotidien
 
 ---
 

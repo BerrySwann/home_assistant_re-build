@@ -1,7 +1,7 @@
 # Histo Nodon Quotidien
 
 **Catégorie :** energie
-**Alias HA :** `[P0] Histo Nodon quotidien`
+**Alias HA :** `B - [P0] Histo Nodon quotidien`
 
 ## Description
 
@@ -29,3 +29,4 @@ Intégration File créée dans l'UI HA : Paramètres > Appareils > Ajouter inté
 
 ---
 *Doc créée le 2026-09-01*
+*Corrections 2026-10-23 : alias HA renomme avec une lettre d ordre d execution (A a D), aligne sur la prod.*

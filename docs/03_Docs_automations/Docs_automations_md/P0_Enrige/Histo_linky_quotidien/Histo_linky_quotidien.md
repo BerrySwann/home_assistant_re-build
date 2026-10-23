@@ -1,7 +1,7 @@
 # Histo Linky Quotidien + Ecart J-1
 
 **Catégorie :** energie
-**Alias HA :** `[P0] Histo Linky quotidien + Ecart J-1`
+**Alias HA :** `A - [P0] Histo Linky quotidien + Ecart J-1`
 
 ## Description
 
@@ -37,3 +37,4 @@ Intégrations File créées dans l'UI HA : Paramètres > Appareils > Ajouter int
 
 ---
 *Doc créée le 2026-09-01*
+*Corrections 2026-10-23 : alias HA renomme avec une lettre d ordre d execution (A a D), aligne sur la prod.*

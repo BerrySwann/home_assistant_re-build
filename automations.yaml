@@ -2350,7 +2350,7 @@
   mode: queued
   max: 10
 - id: '1788118118362'
-  alias: '[P0] Histo Linky quotidien + Ecart J-1'
+  alias: A - [P0] Histo Linky quotidien + Ecart J-1
   description: 'A 23h59, logue la conso Linky J-1 (day_1) dans linky_histo.txt. Si
     day_1 = 0 (Enedis pas encore publie) : ecrit "(MANQUANT)" pour rattrapage par
     auto 3. Si day_1 > 0 : calcule et logue aussi l''ecart Linky/Nodon dans ecart_histo.txt.
@@ -2410,7 +2410,7 @@
           '
   mode: single
 - id: '1788118227600'
-  alias: A - [P0] Histo Nodon quotidien
+  alias: B - [P0] Histo Nodon quotidien
   description: 'Enregistre la conso Nodon J-1 (last_period UM quotidien) dans nodon_histo.txt
     a 23h59. Prerequis : integration File "log_nodon_histo" creee dans l''UI HA (Parametres
     > Appareils > Ajouter integration > File > /config/notifs/nodon_histo.txt).
@@ -2437,7 +2437,7 @@
         '
   mode: single
 - id: '1788118327851'
-  alias: '[P0] Rattrapage Linky J-2 + Ecart'
+  alias: C - [P0] Rattrapage Linky J-2 + Ecart
   description: 'A 23h59:30 (apres les 2 autos histo), si day_2 > 0 : appelle le script
     Python correct_linky.py avec la date J-2 et la valeur day_2. Le script corrige
     la ligne "(MANQUANT)" dans linky_histo.txt si elle existe, lit le Nodon correspondant
@@ -2471,7 +2471,7 @@
       value_j2: '{{ value_j2 }}'
   mode: single
 - id: '1788237916871'
-  alias: '[P0] Rattrapage Linky MANQUANT + Ecart'
+  alias: D - [P0] Rattrapage Linky MANQUANT + Ecart
   description: 'A 01h00, construit un JSON avec day_1 a day_7 (valeur > 0 uniquement,
     avec date JJ/MM) et appelle le script Python correct_linky.py. Le script corrige
     TOUTES les lignes "(MANQUANT)" de linky_histo.txt correspondantes, lit nodon_histo.txt

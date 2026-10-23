@@ -1,7 +1,7 @@
 # Rattrapage Linky J-2 + Ecart
 
 **Catégorie :** energie
-**Alias HA :** `[P0] Rattrapage Linky J-2 + Ecart`
+**Alias HA :** `C - [P0] Rattrapage Linky J-2 + Ecart`
 **ID HA :** `1788118327851`
 **Mode HA :** `single`
 
@@ -46,3 +46,4 @@ Variables passées au script : `date_j2` (`now() - 2 jours` au format `JJ/MM`), 
 
 ---
 *Doc créée le 2026-09-10 (audit huissier : automation active dans HA sans fiche) — Discordance relevée : la description HA annonce "23h59:30" alors que le trigger est `23:59:00`.*
+*Corrections 2026-10-23 : alias HA renomme avec une lettre d ordre d execution (A a D), aligne sur la prod.*

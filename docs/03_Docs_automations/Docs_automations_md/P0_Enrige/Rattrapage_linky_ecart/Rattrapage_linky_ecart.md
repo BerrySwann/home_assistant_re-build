@@ -1,7 +1,7 @@
 # Rattrapage Linky MANQUANT + Ecart
 
 **Catégorie :** energie
-**Alias HA :** `[P0] Rattrapage Linky MANQUANT + Ecart`
+**Alias HA :** `D - [P0] Rattrapage Linky MANQUANT + Ecart`
 
 ## Description
 
@@ -38,3 +38,4 @@ Couvre jusqu'à 7 jours de retard Enedis en une seule exécution.
 
 ---
 *Doc créée le 2026-09-01 — Corrections 2026-09-03 : trigger 23:59:30 -> 01:00:00, template data.append() -> ns.namespace (SecurityError fix), energie/ synchro avec P0_energie/*
+*Corrections 2026-10-23 : alias HA renomme avec une lettre d ordre d execution (A a D), aligne sur la prod.*
