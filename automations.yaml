@@ -2410,7 +2410,7 @@
           '
   mode: single
 - id: '1788118227600'
-  alias: '[P0] Histo Nodon quotidien'
+  alias: A - [P0] Histo Nodon quotidien
   description: 'Enregistre la conso Nodon J-1 (last_period UM quotidien) dans nodon_histo.txt
     a 23h59. Prerequis : integration File "log_nodon_histo" creee dans l''UI HA (Parametres
     > Appareils > Ajouter integration > File > /config/notifs/nodon_histo.txt).
