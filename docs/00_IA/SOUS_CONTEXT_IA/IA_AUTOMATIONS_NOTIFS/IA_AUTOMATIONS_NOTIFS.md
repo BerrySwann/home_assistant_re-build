@@ -34,16 +34,17 @@
 |:------|:--------|:------|
 | Mobile Eric | `notify.mobile_app_eric` | 26 automations + 5 scripts |
 | Mobile Mamour | `notify.mobile_app_mamour` | 3 automations (alarmes congélateur, en double de Eric) |
-| Fichiers log (File UI) | `notify.send_message` → entité File | 5 automations (6 fichiers .txt) |
+| Fichiers log (File UI) | `notify.send_message` → entité File | 6 automations (7 fichiers .txt) |
 
 > ⛔ Plateforme `notify.file` **interdite en YAML** (breaking change 2026). Les cibles fichier passent par l'intégration **File** créée dans l'UI, appelée via `notify.send_message`.
 
-**Cibles File actives (6, créées dans l'UI, chemins vus depuis `/config/` = `/homeassistant/`) :**
+**Cibles File actives (7, créées dans l'UI, chemins vus depuis `/config/` = `/homeassistant/`) :**
 - `/config/notifs/diag_conso_elec.txt` (`notify.file_diag_log_file`) ← DIAG - ENREGISTREMENT JOURNALIER (7 POSTES + DUT)
 - `/config/notifs/ecart_liky_vs_nodon.txt` (`notify.log_ecart_energie`) ← Log Écart Linky vs Nodon
 - `/config/.logs/zone_eric.txt` (`notify.zone_eric`) ← [P4] Eric - Log Zones
 - `/config/notifs/linky_histo.txt` (`notify.log_linky_histo`) et `/config/notifs/ecart_histo.txt` (`notify.log_ecart_histo`) ← A - [P0] Histo Linky quotidien + Ecart J-1
 - `/config/notifs/nodon_histo.txt` (`notify.log_nodon_histo`) ← B - [P0] Histo Nodon quotidien
+- `/config/notifs/nodon_complet_histo.txt` (`notify.nodon_complet_histo`) ← E - [P0] Histo Nodon complet quotidien (Total HP HC Cout)
 
 ---
 

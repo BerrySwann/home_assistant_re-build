@@ -13,6 +13,9 @@
 # - J1-J7            : attributs dailyweek / dailyweek_cost de l'intégration MEData.
 # - Noms des jours   : attribut dailyweek → dictionnaire de traduction français.
 # - Coûts            : attribut dailyweek_cost (index correspondant à J1..J7).
+# - Repli J1-J7       : si le releve Linky vaut 0 (Enedis n a pas publie), valeur Nodon de la meme date, et le nom du jour est suivi d une * (ex : Vendredi*).
+#                      Ordre : 1) sensor.histo_energie_nodon_complet (fichier nodon_complet_histo.txt : total/HP/HC/cout) ;
+#                      2) pour hier, last_period des compteurs UM quotidiens (tarifs HPHC TTC) ; 3) total de sensor.histo_energie_nodon (HP/HC/cout a 0).
 #
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
@@ -51,9 +54,9 @@
         cout: >-
           {% set hp = states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) %}
           {% set hc = states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) %}
-          {% set hp_trf = states('sensor.edf_tempo_price_blue_hp') | float(0) %}
-          {% set hc_trf = states('sensor.edf_tempo_price_blue_hc') | float(0) %}
-          {{ ((hp * hp_trf) + (hc * hc_trf)) | round(2) }}                           {# "[modif] : HP×0.1494 + HC×0.1232 (EDF Tempo Bleu)" #}
+          {% set hp_trf = states('sensor.tarif_heures_pleines_ttc') | float(0) %}
+          {% set hc_trf = states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+          {{ ((hp * hp_trf) + (hc * hc_trf)) | round(2) }}                           {# "[modif 2026-10-23] : HP x tarif_heures_pleines_ttc + HC x tarif_heures_creuses_ttc (EDF HPHC 6kVA TTC, lus en direct)" #}
 
     # ┌───────────────────────────────────┐
     # │ 2. HISTORIQUE (LINKY)             │
@@ -62,14 +65,68 @@
     - name: "Linky Jour 1"
       unique_id: linky_jour_1
       state: >-
-        {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_1_HP') | float(0) / 1000) +
-            (state_attr('sensor.linky_25481620821301_consumption', 'day_1_HC') | float(0) / 1000)) | round(1) }}
+        {% set mc = 'sensor.linky_25481620821301_consumption' %}
+        {% set lhp = state_attr(mc, 'day_1_HP') | float(0) / 1000 %}
+        {% set lhc = state_attr(mc, 'day_1_HC') | float(0) / 1000 %}
+        {% set dw = state_attr(mc, 'dailyweek') %}
+        {% set ds = dw[0] | string if (dw and dw | length > 0) else '' %}
+        {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+        {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+        {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+        {% if (lhp + lhc) <= 0 and key != '' %}
+          {% if key in hist %}
+            {% set ns.t = hist[key].total | float(0) %}
+            {% set ns.hp = hist[key].hp | float(0) %}
+            {% set ns.hc = hist[key].hc | float(0) %}
+            {% set ns.c = hist[key].cout | float(0) %}
+          {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+            {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+            {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+            {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+            {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+          {% else %}
+            {% for i in range(7) %}
+              {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+        {% set rep = ns.t > 0 %}
+        {{ ns.t | round(1) if rep else ((lhp + lhc) | round(1)) }}
       unit_of_measurement: kWh
       icon: mdi:flash-outline
       attributes:
         jour: >-
           {% set jours = {'Monday':'Lundi','Tuesday':'Mardi','Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'} %}
-          {% set dw = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_1_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_1_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[0] | string if (dw and dw | length > 0) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
           {% if dw and dw | length > 0 %}
             {% set date_str = dw[0] %}
             {% if '-' in date_str %}
@@ -80,37 +137,203 @@
             {% else %}
               {% set eng = "Inconnu" %}
             {% endif %}
-            {{ jours[eng] if eng in jours else eng }}
+            {{ (jours[eng] if eng in jours else eng) ~ ('*' if rep else '') }}
           {% else %}
             Inconnu
           {% endif %}
         hp: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_1_HP') | float(0) / 1000) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_1_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_1_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[0] | string if (dw and dw | length > 0) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ (ns.hp if rep else lhp) | round(1) }}
         hc: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_1_HC') | float(0) / 1000) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_1_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_1_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[0] | string if (dw and dw | length > 0) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ (ns.hc if rep else lhc) | round(1) }}
         total: >-
-          {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_1_HP') | float(0) / 1000) +
-              (state_attr('sensor.linky_25481620821301_consumption', 'day_1_HC') | float(0) / 1000)) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_1_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_1_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[0] | string if (dw and dw | length > 0) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ ns.t | round(1) if rep else ((lhp + lhc) | round(1)) }}
         cout: >-
-          {% set dwc = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost') %}
-          {% if dwc and dwc | length > 0 %}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_1_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_1_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[0] | string if (dw and dw | length > 0) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {% set dwc = state_attr(mc, 'dailyweek_cost') %}
+          {% if rep %}
+            {{ ns.c | round(2) }}
+          {% elif dwc and dwc | length > 0 %}
             {{ (dwc[0] | float(0)) | round(1) }}
           {% else %}
             0.0
           {% endif %}
-
     # --- linky_jour_2 ---
     - name: "Linky Jour 2"
       unique_id: linky_jour_2
       state: >-
-        {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_2_HP') | float(0) / 1000) +
-            (state_attr('sensor.linky_25481620821301_consumption', 'day_2_HC') | float(0) / 1000)) | round(1) }}
+        {% set mc = 'sensor.linky_25481620821301_consumption' %}
+        {% set lhp = state_attr(mc, 'day_2_HP') | float(0) / 1000 %}
+        {% set lhc = state_attr(mc, 'day_2_HC') | float(0) / 1000 %}
+        {% set dw = state_attr(mc, 'dailyweek') %}
+        {% set ds = dw[1] | string if (dw and dw | length > 1) else '' %}
+        {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+        {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+        {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+        {% if (lhp + lhc) <= 0 and key != '' %}
+          {% if key in hist %}
+            {% set ns.t = hist[key].total | float(0) %}
+            {% set ns.hp = hist[key].hp | float(0) %}
+            {% set ns.hc = hist[key].hc | float(0) %}
+            {% set ns.c = hist[key].cout | float(0) %}
+          {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+            {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+            {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+            {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+            {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+          {% else %}
+            {% for i in range(7) %}
+              {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+        {% set rep = ns.t > 0 %}
+        {{ ns.t | round(1) if rep else ((lhp + lhc) | round(1)) }}
       unit_of_measurement: kWh
       icon: mdi:flash-outline
       attributes:
         jour: >-
           {% set jours = {'Monday':'Lundi','Tuesday':'Mardi','Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'} %}
-          {% set dw = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_2_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_2_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[1] | string if (dw and dw | length > 1) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
           {% if dw and dw | length > 1 %}
             {% set date_str = dw[1] %}
             {% if '-' in date_str %}
@@ -121,37 +344,203 @@
             {% else %}
               {% set eng = "Inconnu" %}
             {% endif %}
-            {{ jours[eng] if eng in jours else eng }}
+            {{ (jours[eng] if eng in jours else eng) ~ ('*' if rep else '') }}
           {% else %}
             Inconnu
           {% endif %}
         hp: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_2_HP') | float(0) / 1000) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_2_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_2_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[1] | string if (dw and dw | length > 1) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ (ns.hp if rep else lhp) | round(1) }}
         hc: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_2_HC') | float(0) / 1000) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_2_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_2_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[1] | string if (dw and dw | length > 1) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ (ns.hc if rep else lhc) | round(1) }}
         total: >-
-          {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_2_HP') | float(0) / 1000) +
-              (state_attr('sensor.linky_25481620821301_consumption', 'day_2_HC') | float(0) / 1000)) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_2_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_2_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[1] | string if (dw and dw | length > 1) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ ns.t | round(1) if rep else ((lhp + lhc) | round(1)) }}
         cout: >-
-          {% set dwc = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost') %}
-          {% if dwc and dwc | length > 1 %}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_2_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_2_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[1] | string if (dw and dw | length > 1) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {% set dwc = state_attr(mc, 'dailyweek_cost') %}
+          {% if rep %}
+            {{ ns.c | round(2) }}
+          {% elif dwc and dwc | length > 1 %}
             {{ (dwc[1] | float(0)) | round(1) }}
           {% else %}
             0.0
           {% endif %}
-
     # --- linky_jour_3 ---
     - name: "Linky Jour 3"
       unique_id: linky_jour_3
       state: >-
-        {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_3_HP') | float(0) / 1000) +
-            (state_attr('sensor.linky_25481620821301_consumption', 'day_3_HC') | float(0) / 1000)) | round(1) }}
+        {% set mc = 'sensor.linky_25481620821301_consumption' %}
+        {% set lhp = state_attr(mc, 'day_3_HP') | float(0) / 1000 %}
+        {% set lhc = state_attr(mc, 'day_3_HC') | float(0) / 1000 %}
+        {% set dw = state_attr(mc, 'dailyweek') %}
+        {% set ds = dw[2] | string if (dw and dw | length > 2) else '' %}
+        {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+        {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+        {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+        {% if (lhp + lhc) <= 0 and key != '' %}
+          {% if key in hist %}
+            {% set ns.t = hist[key].total | float(0) %}
+            {% set ns.hp = hist[key].hp | float(0) %}
+            {% set ns.hc = hist[key].hc | float(0) %}
+            {% set ns.c = hist[key].cout | float(0) %}
+          {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+            {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+            {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+            {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+            {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+          {% else %}
+            {% for i in range(7) %}
+              {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+        {% set rep = ns.t > 0 %}
+        {{ ns.t | round(1) if rep else ((lhp + lhc) | round(1)) }}
       unit_of_measurement: kWh
       icon: mdi:flash-outline
       attributes:
         jour: >-
           {% set jours = {'Monday':'Lundi','Tuesday':'Mardi','Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'} %}
-          {% set dw = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_3_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_3_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[2] | string if (dw and dw | length > 2) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
           {% if dw and dw | length > 2 %}
             {% set date_str = dw[2] %}
             {% if '-' in date_str %}
@@ -162,37 +551,203 @@
             {% else %}
               {% set eng = "Inconnu" %}
             {% endif %}
-            {{ jours[eng] if eng in jours else eng }}
+            {{ (jours[eng] if eng in jours else eng) ~ ('*' if rep else '') }}
           {% else %}
             Inconnu
           {% endif %}
         hp: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_3_HP') | float(0) / 1000) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_3_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_3_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[2] | string if (dw and dw | length > 2) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ (ns.hp if rep else lhp) | round(1) }}
         hc: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_3_HC') | float(0) / 1000) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_3_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_3_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[2] | string if (dw and dw | length > 2) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ (ns.hc if rep else lhc) | round(1) }}
         total: >-
-          {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_3_HP') | float(0) / 1000) +
-              (state_attr('sensor.linky_25481620821301_consumption', 'day_3_HC') | float(0) / 1000)) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_3_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_3_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[2] | string if (dw and dw | length > 2) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ ns.t | round(1) if rep else ((lhp + lhc) | round(1)) }}
         cout: >-
-          {% set dwc = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost') %}
-          {% if dwc and dwc | length > 2 %}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_3_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_3_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[2] | string if (dw and dw | length > 2) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {% set dwc = state_attr(mc, 'dailyweek_cost') %}
+          {% if rep %}
+            {{ ns.c | round(2) }}
+          {% elif dwc and dwc | length > 2 %}
             {{ (dwc[2] | float(0)) | round(1) }}
           {% else %}
             0.0
           {% endif %}
-
     # --- linky_jour_4 ---
     - name: "Linky Jour 4"
       unique_id: linky_jour_4
       state: >-
-        {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_4_HP') | float(0) / 1000) +
-            (state_attr('sensor.linky_25481620821301_consumption', 'day_4_HC') | float(0) / 1000)) | round(1) }}
+        {% set mc = 'sensor.linky_25481620821301_consumption' %}
+        {% set lhp = state_attr(mc, 'day_4_HP') | float(0) / 1000 %}
+        {% set lhc = state_attr(mc, 'day_4_HC') | float(0) / 1000 %}
+        {% set dw = state_attr(mc, 'dailyweek') %}
+        {% set ds = dw[3] | string if (dw and dw | length > 3) else '' %}
+        {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+        {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+        {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+        {% if (lhp + lhc) <= 0 and key != '' %}
+          {% if key in hist %}
+            {% set ns.t = hist[key].total | float(0) %}
+            {% set ns.hp = hist[key].hp | float(0) %}
+            {% set ns.hc = hist[key].hc | float(0) %}
+            {% set ns.c = hist[key].cout | float(0) %}
+          {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+            {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+            {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+            {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+            {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+          {% else %}
+            {% for i in range(7) %}
+              {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+        {% set rep = ns.t > 0 %}
+        {{ ns.t | round(1) if rep else ((lhp + lhc) | round(1)) }}
       unit_of_measurement: kWh
       icon: mdi:flash-outline
       attributes:
         jour: >-
           {% set jours = {'Monday':'Lundi','Tuesday':'Mardi','Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'} %}
-          {% set dw = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_4_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_4_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[3] | string if (dw and dw | length > 3) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
           {% if dw and dw | length > 3 %}
             {% set date_str = dw[3] %}
             {% if '-' in date_str %}
@@ -203,37 +758,203 @@
             {% else %}
               {% set eng = "Inconnu" %}
             {% endif %}
-            {{ jours[eng] if eng in jours else eng }}
+            {{ (jours[eng] if eng in jours else eng) ~ ('*' if rep else '') }}
           {% else %}
             Inconnu
           {% endif %}
         hp: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_4_HP') | float(0) / 1000) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_4_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_4_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[3] | string if (dw and dw | length > 3) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ (ns.hp if rep else lhp) | round(1) }}
         hc: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_4_HC') | float(0) / 1000) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_4_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_4_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[3] | string if (dw and dw | length > 3) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ (ns.hc if rep else lhc) | round(1) }}
         total: >-
-          {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_4_HP') | float(0) / 1000) +
-              (state_attr('sensor.linky_25481620821301_consumption', 'day_4_HC') | float(0) / 1000)) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_4_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_4_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[3] | string if (dw and dw | length > 3) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ ns.t | round(1) if rep else ((lhp + lhc) | round(1)) }}
         cout: >-
-          {% set dwc = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost') %}
-          {% if dwc and dwc | length > 3 %}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_4_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_4_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[3] | string if (dw and dw | length > 3) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {% set dwc = state_attr(mc, 'dailyweek_cost') %}
+          {% if rep %}
+            {{ ns.c | round(2) }}
+          {% elif dwc and dwc | length > 3 %}
             {{ (dwc[3] | float(0)) | round(1) }}
           {% else %}
             0.0
           {% endif %}
-
     # --- linky_jour_5 ---
     - name: "Linky Jour 5"
       unique_id: linky_jour_5
       state: >-
-        {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_5_HP') | float(0) / 1000) +
-            (state_attr('sensor.linky_25481620821301_consumption', 'day_5_HC') | float(0) / 1000)) | round(1) }}
+        {% set mc = 'sensor.linky_25481620821301_consumption' %}
+        {% set lhp = state_attr(mc, 'day_5_HP') | float(0) / 1000 %}
+        {% set lhc = state_attr(mc, 'day_5_HC') | float(0) / 1000 %}
+        {% set dw = state_attr(mc, 'dailyweek') %}
+        {% set ds = dw[4] | string if (dw and dw | length > 4) else '' %}
+        {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+        {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+        {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+        {% if (lhp + lhc) <= 0 and key != '' %}
+          {% if key in hist %}
+            {% set ns.t = hist[key].total | float(0) %}
+            {% set ns.hp = hist[key].hp | float(0) %}
+            {% set ns.hc = hist[key].hc | float(0) %}
+            {% set ns.c = hist[key].cout | float(0) %}
+          {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+            {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+            {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+            {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+            {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+          {% else %}
+            {% for i in range(7) %}
+              {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+        {% set rep = ns.t > 0 %}
+        {{ ns.t | round(1) if rep else ((lhp + lhc) | round(1)) }}
       unit_of_measurement: kWh
       icon: mdi:flash-outline
       attributes:
         jour: >-
           {% set jours = {'Monday':'Lundi','Tuesday':'Mardi','Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'} %}
-          {% set dw = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_5_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_5_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[4] | string if (dw and dw | length > 4) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
           {% if dw and dw | length > 4 %}
             {% set date_str = dw[4] %}
             {% if '-' in date_str %}
@@ -244,38 +965,204 @@
             {% else %}
               {% set eng = "Inconnu" %}
             {% endif %}
-            {{ jours[eng] if eng in jours else eng }}
+            {{ (jours[eng] if eng in jours else eng) ~ ('*' if rep else '') }}
           {% else %}
             Inconnu
           {% endif %}
         hp: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_5_HP') | float(0) / 1000) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_5_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_5_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[4] | string if (dw and dw | length > 4) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ (ns.hp if rep else lhp) | round(1) }}
         hc: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_5_HC') | float(0) / 1000) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_5_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_5_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[4] | string if (dw and dw | length > 4) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ (ns.hc if rep else lhc) | round(1) }}
         total: >-
-          {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_5_HP') | float(0) / 1000) +
-              (state_attr('sensor.linky_25481620821301_consumption', 'day_5_HC') | float(0) / 1000)) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_5_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_5_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[4] | string if (dw and dw | length > 4) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ ns.t | round(1) if rep else ((lhp + lhc) | round(1)) }}
         cout: >-
-          {% set dwc = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost') %}
-          {% if dwc and dwc | length > 4 %}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_5_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_5_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[4] | string if (dw and dw | length > 4) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {% set dwc = state_attr(mc, 'dailyweek_cost') %}
+          {% if rep %}
+            {{ ns.c | round(2) }}
+          {% elif dwc and dwc | length > 4 %}
             {{ (dwc[4] | float(0)) | round(1) }}
           {% else %}
             0.0
           {% endif %}
-
     # --- linky_jour_6 ---
     - name: "Linky Jour 6"
       unique_id: linky_jour_6
       state: >-
-        {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_6_HP') | float(0) / 1000) +
-            (state_attr('sensor.linky_25481620821301_consumption', 'day_6_HC') | float(0) / 1000)) | round(1) }}
+        {% set mc = 'sensor.linky_25481620821301_consumption' %}
+        {% set lhp = state_attr(mc, 'day_6_HP') | float(0) / 1000 %}
+        {% set lhc = state_attr(mc, 'day_6_HC') | float(0) / 1000 %}
+        {% set dw = state_attr(mc, 'dailyweek') %}
+        {% set ds = dw[5] | string if (dw and dw | length > 5) else '' %}
+        {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+        {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+        {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+        {% if (lhp + lhc) <= 0 and key != '' %}
+          {% if key in hist %}
+            {% set ns.t = hist[key].total | float(0) %}
+            {% set ns.hp = hist[key].hp | float(0) %}
+            {% set ns.hc = hist[key].hc | float(0) %}
+            {% set ns.c = hist[key].cout | float(0) %}
+          {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+            {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+            {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+            {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+            {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+          {% else %}
+            {% for i in range(7) %}
+              {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+        {% set rep = ns.t > 0 %}
+        {{ ns.t | round(1) if rep else ((lhp + lhc) | round(1)) }}
       unit_of_measurement: kWh
       icon: mdi:flash-outline
       attributes:
         jour: >-
           {# Correction forcée : Index 5 = Jour J-6 #}
           {% set jours = {'Monday':'Lundi','Tuesday':'Mardi','Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'} %}
-          {% set dw = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_6_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_6_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[5] | string if (dw and dw | length > 5) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
           {% if dw and dw | length > 5 %}
             {% set date_str = dw[5] %}
             {% if '-' in date_str %}
@@ -286,38 +1173,204 @@
             {% else %}
               {% set eng = "Inconnu" %}
             {% endif %}
-            {{ jours[eng] if eng in jours else eng }}
+            {{ (jours[eng] if eng in jours else eng) ~ ('*' if rep else '') }}
           {% else %}
             Inconnu
           {% endif %}
         hp: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_6_HP') | float(0) / 1000) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_6_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_6_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[5] | string if (dw and dw | length > 5) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ (ns.hp if rep else lhp) | round(1) }}
         hc: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_6_HC') | float(0) / 1000) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_6_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_6_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[5] | string if (dw and dw | length > 5) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ (ns.hc if rep else lhc) | round(1) }}
         total: >-
-          {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_6_HP') | float(0) / 1000) +
-              (state_attr('sensor.linky_25481620821301_consumption', 'day_6_HC') | float(0) / 1000)) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_6_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_6_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[5] | string if (dw and dw | length > 5) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ ns.t | round(1) if rep else ((lhp + lhc) | round(1)) }}
         cout: >-
-          {% set dwc = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost') %}
-          {% if dwc and dwc | length > 5 %}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_6_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_6_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[5] | string if (dw and dw | length > 5) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {% set dwc = state_attr(mc, 'dailyweek_cost') %}
+          {% if rep %}
+            {{ ns.c | round(2) }}
+          {% elif dwc and dwc | length > 5 %}
             {{ (dwc[5] | float(0)) | round(1) }}
           {% else %}
             0.0
           {% endif %}
-
     # --- linky_jour_7 ---
     - name: "Linky Jour 7"
       unique_id: linky_jour_7
       state: >-
-        {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_7_HP') | float(0) / 1000) +
-            (state_attr('sensor.linky_25481620821301_consumption', 'day_7_HC') | float(0) / 1000)) | round(1) }}
+        {% set mc = 'sensor.linky_25481620821301_consumption' %}
+        {% set lhp = state_attr(mc, 'day_7_HP') | float(0) / 1000 %}
+        {% set lhc = state_attr(mc, 'day_7_HC') | float(0) / 1000 %}
+        {% set dw = state_attr(mc, 'dailyweek') %}
+        {% set ds = dw[6] | string if (dw and dw | length > 6) else '' %}
+        {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+        {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+        {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+        {% if (lhp + lhc) <= 0 and key != '' %}
+          {% if key in hist %}
+            {% set ns.t = hist[key].total | float(0) %}
+            {% set ns.hp = hist[key].hp | float(0) %}
+            {% set ns.hc = hist[key].hc | float(0) %}
+            {% set ns.c = hist[key].cout | float(0) %}
+          {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+            {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+            {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+            {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+            {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+          {% else %}
+            {% for i in range(7) %}
+              {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+        {% set rep = ns.t > 0 %}
+        {{ ns.t | round(1) if rep else ((lhp + lhc) | round(1)) }}
       unit_of_measurement: kWh
       icon: mdi:flash-outline
       attributes:
         jour: >-
           {# Correction forcée : Index 6 = Jour J-7 #}
           {% set jours = {'Monday':'Lundi','Tuesday':'Mardi','Wednesday':'Mercredi','Thursday':'Jeudi','Friday':'Vendredi','Saturday':'Samedi','Sunday':'Dimanche'} %}
-          {% set dw = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek') %}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_7_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_7_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[6] | string if (dw and dw | length > 6) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
           {% if dw and dw | length > 6 %}
             {% set date_str = dw[6] %}
             {% if '-' in date_str %}
@@ -328,25 +1381,137 @@
             {% else %}
               {% set eng = "Inconnu" %}
             {% endif %}
-            {{ jours[eng] if eng in jours else eng }}
+            {{ (jours[eng] if eng in jours else eng) ~ ('*' if rep else '') }}
           {% else %}
             Inconnu
           {% endif %}
         hp: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_7_HP') | float(0) / 1000) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_7_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_7_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[6] | string if (dw and dw | length > 6) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ (ns.hp if rep else lhp) | round(1) }}
         hc: >-
-          {{ (state_attr('sensor.linky_25481620821301_consumption', 'day_7_HC') | float(0) / 1000) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_7_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_7_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[6] | string if (dw and dw | length > 6) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ (ns.hc if rep else lhc) | round(1) }}
         total: >-
-          {{ ((state_attr('sensor.linky_25481620821301_consumption', 'day_7_HP') | float(0) / 1000) +
-              (state_attr('sensor.linky_25481620821301_consumption', 'day_7_HC') | float(0) / 1000)) | round(1) }}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_7_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_7_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[6] | string if (dw and dw | length > 6) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {{ ns.t | round(1) if rep else ((lhp + lhc) | round(1)) }}
         cout: >-
-          {% set dwc = state_attr('sensor.linky_25481620821301_consumption', 'dailyweek_cost') %}
-          {% if dwc and dwc | length > 6 %}
+          {% set mc = 'sensor.linky_25481620821301_consumption' %}
+          {% set lhp = state_attr(mc, 'day_7_HP') | float(0) / 1000 %}
+          {% set lhc = state_attr(mc, 'day_7_HC') | float(0) / 1000 %}
+          {% set dw = state_attr(mc, 'dailyweek') %}
+          {% set ds = dw[6] | string if (dw and dw | length > 6) else '' %}
+          {% set key = (ds.split('-')[2] ~ '/' ~ ds.split('-')[1]) if '-' in ds else ((ds.split('/')[0] ~ '/' ~ ds.split('/')[1]) if '/' in ds else '') %}
+          {% set hist = state_attr('sensor.histo_energie_nodon_complet', 'data') or {} %}
+          {% set ns = namespace(t=0, hp=0, hc=0, c=0) %}
+          {% if (lhp + lhc) <= 0 and key != '' %}
+            {% if key in hist %}
+              {% set ns.t = hist[key].total | float(0) %}
+              {% set ns.hp = hist[key].hp | float(0) %}
+              {% set ns.hc = hist[key].hc | float(0) %}
+              {% set ns.c = hist[key].cout | float(0) %}
+            {% elif key == (now() - timedelta(days=1)).strftime('%d/%m') %}
+              {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
+              {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
+              {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% else %}
+              {% for i in range(7) %}
+                {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
+                  {% set ns.t = state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_val') | float(0) %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% set rep = ns.t > 0 %}
+          {% set dwc = state_attr(mc, 'dailyweek_cost') %}
+          {% if rep %}
+            {{ ns.c | round(2) }}
+          {% elif dwc and dwc | length > 6 %}
             {{ (dwc[6] | float(0)) | round(1) }}
           {% else %}
             0.0
           {% endif %}
-
 # annotations_log:
 # - [L12]  modif : source J0 → sensor.genelec_appart_quotidien_um (UM daily total)
 # - [L33] modif : state J0 Nodon SEM-4-1-00 → genelec_appart_quotidien_um
@@ -355,3 +1520,4 @@
 # - [L41]  modif : total → genelec_appart_quotidien_um
 # - [L43]  modif : cout J0 → UM quotidien × tarif HP (approché, surestimé ~10-15%)
 # - [J1-J7] inchangés (source MEData / Linky — HP/HC toujours disponibles via Enedis)
+# - [2026-10-23] modif : J1-J7 repli Nodon si Linky = 0, * sur le jour ; J0 cout via sensor.tarif_heures_pleines_ttc / creuses_ttc
