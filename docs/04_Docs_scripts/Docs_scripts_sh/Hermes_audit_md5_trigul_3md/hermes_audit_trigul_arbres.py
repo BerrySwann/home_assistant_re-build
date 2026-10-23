@@ -13,7 +13,7 @@ Principe (demande d'Eric, 2026-10-17) :
   VERDICT : nomme le niveau en retard ou different (le local est la source de verite : "different"
             ne veut pas dire "faux").
 Option --tout : liste aussi les fichiers SYNC (par defaut seulement leur total).
-Le script ne modifie, ne pousse et ne supprime rien. Il n'ecrit que son rapport dans historique/MD5/00_Verif_Final_trigul_arbres (repertoire numerote, decide par Eric le 2026-10-18).
+Le script ne modifie, ne pousse et ne supprime rien. Il n'ecrit que son rapport dans historique/03_RAPPORTS/06_MD5/00_VERIF_FINAL_TRIGUL_ARBRES (repertoire numerote, decide par Eric le 2026-10-18).
 """
 import os, sys, json, hashlib, collections, datetime, shutil, time, urllib.request
 import html as _html
@@ -23,7 +23,7 @@ PROD = r'H:\docs'
 LOCAL_README = r'C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_MD\README\README.md'
 PROD_README = r'H:\README.md'
 REPO = 'BerrySwann/home_assistant_re-build'
-OUT_DIR = r'C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres'
+OUT_DIR = r'C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\00_VERIF_FINAL_TRIGUL_ARBRES'
 ROOT = '(racine)/README.md'
 
 # Ecarts ATTENDUS (a part, avec la raison). Tout le reste est signale comme anomalie.

@@ -13,7 +13,7 @@ verifie apres chaque script les plantages silencieux :
   - dossier temporaire du profond laisse derriere (signe d'un arret au milieu) ;
   - GitHub injoignable (le script 3 continue avec des colonnes '?').
 
-Journal : historique/MD5/04_journal_trigul/trigul_journal_AAAA-MM-JJ.log (un par jour, ajout).
+Journal : historique/03_RAPPORTS/06_MD5/04_JOURNAL_TRIGUL/trigul_journal_AAAA-MM-JJ.log (un par jour, ajout).
 Format : HH:MM:SS.mmm | NIVEAU | ETAPE | message. Niveaux : INFO, SORTIE, STDERR, NOTE,
 OK, ATTENTION, ECHEC. Le journal doit finir par la ligne "FIN DU LANCEUR" : si elle manque,
 le lanceur lui-meme a ete tue (PC eteint, session fermee) et la derniere ligne dit ou.
@@ -34,8 +34,8 @@ import traceback
 ROOT = r'C:\Users\Berry Swann\Documents\ReBuild'
 SH = os.path.join(ROOT, 'docs', '04_docs_scripts', 'docs_scripts_SH')
 SH3 = os.path.join(ROOT, 'docs', '04_Docs_scripts', 'Docs_scripts_sh')
-MD5 = os.path.join(ROOT, 'historique', 'MD5')
-LOGDIR = os.path.join(MD5, '04_journal_trigul')
+MD5 = os.path.join(ROOT, 'historique', '03_RAPPORTS', '06_MD5')
+LOGDIR = os.path.join(MD5, '04_JOURNAL_TRIGUL')
 TODAY = datetime.date.today().strftime('%Y-%m-%d')
 LOG = os.path.join(LOGDIR, 'trigul_journal_%s.log' % TODAY)
 TMP_PROFOND = os.path.join(ROOT, '_tmp_trigul_profond')
@@ -43,16 +43,16 @@ TMP_PROFOND = os.path.join(ROOT, '_tmp_trigul_profond')
 STEPS = [
     dict(name='A_arbres',
          script=os.path.join(SH, 'hermes_audit_md5_trigul_3md', 'hermes_audit_trigul_arbres.py'),
-         reports=[os.path.join(MD5, '00_Verif_Final_trigul_arbres', 'trigul_arbres_%s.txt' % TODAY),
-                  os.path.join(MD5, '00_Verif_Final_trigul_arbres', 'trigul_arbres_%s.html' % TODAY)],
+         reports=[os.path.join(MD5, '00_VERIF_FINAL_TRIGUL_ARBRES', 'trigul_arbres_%s.txt' % TODAY),
+                  os.path.join(MD5, '00_VERIF_FINAL_TRIGUL_ARBRES', 'trigul_arbres_%s.html' % TODAY)],
          must=['RESULTAT :', 'controle du script : OK'], mustnot=['ERREURS DU SCRIPT'], needs_h=True),
     dict(name='B1_profond',
          script=os.path.join(SH, 'hermes_audit_md5_trigul_3md', 'hermes_audit_md5_trigul_unitaire.py'),
-         reports=[os.path.join(MD5, '01_trigul_profond', 'trigul_profond_%s.txt' % TODAY)],
+         reports=[os.path.join(MD5, '01_TRIGUL_PROFOND', 'trigul_profond_%s.txt' % TODAY)],
          must=['ETAPES : 1 -', 'AUTOMATIONS :', 'SCRIPTS :'], mustnot=[], needs_h=True, tmpdir=TMP_PROFOND, warn_out=['ATTENTION']),
     dict(name='C_emplacements',
          script=os.path.join(SH3, 'Verif_emplacements', 'Verif_emplacements.py'),
-         reports=[os.path.join(MD5, '03_verif_emplacements', 'verif_emplacements_%s.txt' % TODAY)],
+         reports=[os.path.join(MD5, '03_VERIF_EMPLACEMENTS', 'verif_emplacements_%s.txt' % TODAY)],
          must=['ANOMALIES', 'RESULTAT'], mustnot=[], needs_h=True, warn_out=['injoignable']),
 ]
 

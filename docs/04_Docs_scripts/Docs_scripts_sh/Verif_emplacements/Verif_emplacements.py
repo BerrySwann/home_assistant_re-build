@@ -10,7 +10,7 @@ Pour chaque fichier de la carte, empreinte git blob SHA-1 (8 caracteres) a 5 emp
   PM = prod miroir docs (H:\docs\...)
   GR = GitHub racine du depot
   GD = GitHub sous docs/
-Ecrit : historique/MD5/03_verif_emplacements/verif_emplacements_AAAA-MM-JJ.txt
+Ecrit : historique/03_RAPPORTS/06_MD5/03_VERIF_EMPLACEMENTS/verif_emplacements_AAAA-MM-JJ.txt
 (le rapport du jour existant est d'abord renomme en .bak_AAAA_MM_JJ_HHhMMmSSs.txt)
 Codes retour : 0 rapport ecrit ; 2 prod H: inaccessible (rien ecrit).
 GitHub injoignable : rapport ecrit avec GR/GD = '?' (aucun verdict GitHub).
@@ -22,7 +22,7 @@ PROD = 'H:\\'
 REPO = 'BerrySwann/home_assistant_re-build'
 CFG = 'docs/01_docs_config_system/config_system_SH_PY_YAML'
 MD = 'docs/01_docs_config_system/config_system_MD'
-RAPPORT_DIR = os.path.join(REBUILD, 'historique', 'MD5', '03_verif_emplacements')
+RAPPORT_DIR = os.path.join(REBUILD, 'historique', '03_RAPPORTS', '06_MD5', '03_VERIF_EMPLACEMENTS')
 
 # fichiers de config_system_MD qui ont aussi une copie a la racine de la prod (local -> racine)
 RACINE_MD = {MD + '/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md': 'GLOBAL_INDEX_REPO.md',

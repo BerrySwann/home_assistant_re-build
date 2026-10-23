@@ -36,7 +36,7 @@ Colonne DIFF : nombre de niveaux ou le fichier manque, plus 1 si le contenu diff
 
 ## Sorties
 
-- `historique/MD5/00_Verif_Final_trigul_arbres/trigul_arbres_AAAA-MM-JJ.txt` et `.html`. Le rapport du jour deja present est d'abord sauvegarde en `.bak_AAAA_MM_JJ_HHhMMmSSs`.
+- `historique/03_RAPPORTS/06_MD5/00_VERIF_FINAL_TRIGUL_ARBRES/trigul_arbres_AAAA-MM-JJ.txt` et `.html`. Le rapport du jour deja present est d'abord sauvegarde en `.bak_AAAA_MM_JJ_HHhMMmSSs`.
 - Dernieres lignes : `ANOMALIES`, `RESULTAT AUDIT`, `RESULTAT`. La section `== CONTROLE ==` verifie que la somme des chemins (SYNC + a traiter + attendus) egale l'union : ligne `controle du script : OK` sinon `ERREURS DU SCRIPT`.
 
 ## Points d'attention
@@ -54,6 +54,6 @@ Colonne DIFF : nombre de niveaux ou le fichier manque, plus 1 si le contenu diff
 ## Historique des modifications
 
 - 2026-10-17 : creation (superposition R / L / P, colonne DIFF).
-- 2026-10-18 : rapports ranges dans le repertoire numerote `00_Verif_Final_trigul_arbres`.
+- 2026-10-18 : rapports ranges dans le repertoire numerote `00_VERIF_FINAL_TRIGUL_ARBRES`.
 - 2026-10-18 : .svg du dossier docs plus consideres comme ecart attendu (`.gitignore` de H: modifie par Eric).
 - 2026-10-18 : fichiers verrou d'editeur `#...#` en prod seule = ecart attendu.

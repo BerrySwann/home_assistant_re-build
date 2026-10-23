@@ -36,7 +36,7 @@ Chaque etape s'affiche en `ETAPE n` et est reprise dans la ligne `ETAPES :` du r
 
 ## Sorties
 
-- `historique/MD5/01_trigul_profond/trigul_profond_AAAA-MM-JJ.txt` (sauvegarde `.bak_date_heure` si le rapport du jour existe). En-tete : ligne `ETAPES :`, copies faites, MD5 des fichiers, nombre d'unites, AUTOMATIONS et SCRIPTS, duree.
+- `historique/03_RAPPORTS/06_MD5/01_TRIGUL_PROFOND/trigul_profond_AAAA-MM-JJ.txt` (sauvegarde `.bak_date_heure` si le rapport du jour existe). En-tete : ligne `ETAPES :`, copies faites, MD5 des fichiers, nombre d'unites, AUTOMATIONS et SCRIPTS, duree.
 - Les copies datees dans les deux dossiers ORIGINAL sont des `.bak` ordinaires, rangees par le menage de /histo.
 - Code de retour : 0 normal ; 2 si `H:` est introuvable ; 3 si un point bak existe deja.
 
@@ -54,5 +54,5 @@ Chaque etape s'affiche en `ETAPE n` et est reprise dans la ligne `ETAPES :` du r
 ## Historique des modifications
 
 - 2026-10-11 : etape profonde decidee (62 automations et 9 scripts, moins d'une seconde).
-- 2026-10-18 : rapport range dans le repertoire numerote `01_trigul_profond`.
+- 2026-10-18 : rapport range dans le repertoire numerote `01_TRIGUL_PROFOND`.
 - 2026-10-18 : 8 etapes numerotees ; l'analyse lit les copies bak ; MD5 prod relu en fin d'analyse ; un MD5 different n'arrete plus le script (ATTENTION).

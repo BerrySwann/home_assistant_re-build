@@ -13,7 +13,7 @@ Ce que fait le script (etapes numerotees, affichees ETAPE n et reprises dans le 
  6. controle final : MD5 de la prod relu apres l'analyse ; ATTENTION dans le rapport si la prod a bouge
  7. compare chaque unite au YAML local (MD5 logique : YAML parse, cles triees, category/labels ignores,
     espaces de debut/fin ignores, commentaires et mise en forme ignores) et ecrit le rapport
-    historique/MD5/01_trigul_profond/trigul_profond_AAAA-MM-JJ.txt (sauvegarde .bak_date_heure si le rapport du jour existe)
+    historique/03_RAPPORTS/06_MD5/01_TRIGUL_PROFOND/trigul_profond_AAAA-MM-JJ.txt (sauvegarde .bak_date_heure si le rapport du jour existe)
  8. efface le dossier temporaire _tmp_trigul_profond
 Lecture seule sur H: et sur les YAML locaux. Ordre du trigul : local, prod, GitHub (GitHub : on n'aura qu'a push).
 Lancer : python -I hermes_audit_md5_trigul_unitaire.py   (PYTHONIOENCODING=utf-8)
@@ -34,7 +34,7 @@ Y_SCR = os.path.join(ROOT, 'docs', '04_docs_scripts', 'docs_scripts_YAML')
 ORIG_AUTO = os.path.join(Y_AUTO, 'AUTOMATIONS.YALM ORIGINAL')
 ORIG_SCR = os.path.join(ROOT, 'docs', '04_docs_scripts', 'DOCS_SCRIPT_ORIGINAL')
 TMP = os.path.join(ROOT, '_tmp_trigul_profond')
-OUTDIR = os.path.join(ROOT, 'historique', 'MD5', '01_trigul_profond')
+OUTDIR = os.path.join(ROOT, 'historique', '03_RAPPORTS', '06_MD5', '01_TRIGUL_PROFOND')
 
 NOW = datetime.datetime.now()
 STAMP = NOW.strftime('%Y_%m_%d_%Hh%Mm%Ss')

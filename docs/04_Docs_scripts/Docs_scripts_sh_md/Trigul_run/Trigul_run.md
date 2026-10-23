@@ -32,7 +32,7 @@ Verdict par etape : OK, ATTENTION ou ECHEC.
 
 ## Journal
 
-`historique/MD5/04_journal_trigul/trigul_journal_AAAA-MM-JJ.log`, un fichier par jour, en ajout. Format : `HH:MM:SS.mmm | NIVEAU | ETAPE | message`. Niveaux : INFO, SORTIE, STDERR, NOTE, OK, ATTENTION, ECHEC. Le journal doit se terminer par `FIN DU LANCEUR` : si cette ligne manque, le lanceur lui-meme a ete interrompu (PC eteint, session fermee) et la derniere ligne dit ou.
+`historique/03_RAPPORTS/06_MD5/04_JOURNAL_TRIGUL/trigul_journal_AAAA-MM-JJ.log`, un fichier par jour, en ajout. Format : `HH:MM:SS.mmm | NIVEAU | ETAPE | message`. Niveaux : INFO, SORTIE, STDERR, NOTE, OK, ATTENTION, ECHEC. Le journal doit se terminer par `FIN DU LANCEUR` : si cette ligne manque, le lanceur lui-meme a ete interrompu (PC eteint, session fermee) et la derniere ligne dit ou.
 
 ## Points d'attention
 

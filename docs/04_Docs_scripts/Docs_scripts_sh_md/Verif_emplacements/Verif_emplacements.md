@@ -35,7 +35,7 @@ Carte : `docs/00_IA/SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.
 
 ## Sorties
 
-- `historique/MD5/03_verif_emplacements/verif_emplacements_AAAA-MM-JJ.txt` (le rapport du jour deja present est d'abord renomme en `.bak_AAAA_MM_JJ_HHhMMmSSs.txt`). Dernieres lignes : `ANOMALIES` et `RESULTAT`.
+- `historique/03_RAPPORTS/06_MD5/03_VERIF_EMPLACEMENTS/verif_emplacements_AAAA-MM-JJ.txt` (le rapport du jour deja present est d'abord renomme en `.bak_AAAA_MM_JJ_HHhMMmSSs.txt`). Dernieres lignes : `ANOMALIES` et `RESULTAT`.
 - Codes retour : 0 rapport ecrit ; 2 prod H: inaccessible (rien n'est ecrit).
 - GitHub injoignable : rapport ecrit avec GR et GD a `?` (aucun verdict GitHub) ; le lanceur le signale en ATTENTION.
 

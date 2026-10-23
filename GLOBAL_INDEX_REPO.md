@@ -1,6 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-10-23 (22h55, /histo S1) - entrée ajoutée : Verif_integrations_file.py (scripts python, recompté : 13)*
 *Dernière mise à jour : 2026-10-20 (soir) - section 05 SKILLS : ha-resync-docs retiré (doublon de ha-trigul), ha-verif-headers ajouté (14 skills) ; section 04 : Verif_headers_yaml.py ajouté*
 *Dernière mise à jour : 2026-10-19 (18h12, /histo S1) - entrée ajoutée : histo_trace.py (scripts python, 10 -> 11)*
 *Dernière mise à jour : 2026-10-18 (21h55, /histo S2) - entrées ajoutées : hermes_audit_trigul_arbres.py, Hermes_audit_md5_trigul_unitaire.py et trigul_run.py (scripts python, 7 -> 10) ; fiche de Verif_emplacements.py liée*
@@ -4194,7 +4195,7 @@ device et fonction confirmés (Raspberry Pi, cf. TODO.md U-2). Corrige l'ancienn
 </details>
 
 <details>
-<summary><b>🐍 SCRIPTS PYTHON D'INDEX</b> &nbsp;|&nbsp; 11 scripts (ajoutés le 2026-10-13, le 2026-10-18 et le 2026-10-19, lecture seule de la prod) &nbsp;|&nbsp; Local : <code>docs_scripts_SH/</code> &nbsp;|&nbsp; Non poussés en prod</summary>
+<summary><b>🐍 SCRIPTS PYTHON D'INDEX</b> &nbsp;|&nbsp; 13 scripts (ajoutés le 2026-10-13, le 2026-10-18, le 2026-10-19, le 2026-10-20 et le 2026-10-23, lecture seule de la prod) &nbsp;|&nbsp; Local : <code>docs_scripts_SH/</code> &nbsp;|&nbsp; Non poussés en prod</summary>
 <blockquote>
 
 <details>
@@ -4257,6 +4258,15 @@ Pas de doc associée.
 ⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Verif_emplacements/Verif_emplacements.py">Script source</a><br>
 Lancé par /histo (étape 6, point 9) ; ne corrige rien. Carte : <a href="docs/00_IA/SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md">IA_CARTE_EMPLACEMENTS.md</a><br>
 📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Verif_emplacements/Verif_emplacements.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><code>Verif_integrations_file.py</code> &nbsp;|&nbsp; Contrôle en lecture seule des intégrations File (notify) de HA contre leur fiche</summary>
+<blockquote>
+⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Verif_integrations_file/Verif_integrations_file.py">Script source</a><br>
+Lancé par /histo (6E, point 10) ; ne corrige rien. Fiche de référence : <a href="docs/01_docs_config_system/config_system_MD/integrations_file/integrations_file.md">integrations_file.md</a><br>
+📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Verif_integrations_file/Verif_integrations_file.md">Doc</a>
 </blockquote>
 </details>
 
