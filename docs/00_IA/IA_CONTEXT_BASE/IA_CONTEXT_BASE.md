@@ -163,7 +163,7 @@ Regles : lecture seule sur H: et sur les YAML locaux ; le script n'ecrit que les
 
 ## Économie de Tokens
 - Pas de longs discours d'intro/conclusion. Blocs ciblés uniquement.
-- Log de modif : `# annotations_log:` uniquement. Référence directe par ID matrice (L1C1, P2…).
+- Log de modif OBLIGATOIRE, partout (décision d'Eric 2026-10-24, pour éviter les oublis) : toute modification d'un fichier ajoute une ligne datée `# [AAAA-MM-JJ] description` sous un bloc `# annotations_log:` en bas du fichier (YAML, .sh, .py : commentaire # ; .md, .html : commentaire `<!-- -->`), avec référence directe par ID matrice (L1C1, P2...), EN PLUS du .bak et de la ligne du journal MODIFS. Exceptions techniques : formats sans commentaire (JSON), fichiers .bak, journaux MODIFS et fichiers d'échanges (déjà des logs). Si la règle coince sur un fichier précis, Eric la rectifie en ajoutant l'exception ici.
 - Ne jamais répéter le code YAML déjà validé.
 
 ## TODO - REGLE OBLIGATOIRE
@@ -739,3 +739,6 @@ Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2
 > Caractéristiques détaillées du logement (dimensions, équipements par pièce, orientations) :
 > déplacées dans `docs/00_IA/SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` (2026-07-19,
 > usage limité à l'analyse des consommations électriques, hors périmètre des directives actives).
+
+<!-- annotations_log:
+[2026-10-24] Règle Log de modif étendue à tous les fichiers (ligne Économie de Tokens), à la demande d'Eric -->
