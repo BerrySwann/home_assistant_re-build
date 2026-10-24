@@ -1,6 +1,6 @@
 # Page L5C1 - Piles & Batteries
 # Navigation: /dashboard-tablette/battery-bp
-# Sauvegardé: 2026-09-24 - état live (4 cartes batterie + entêtes de section ; batterie porte_congel intégrée)
+# Sauvegardé: 2026-10-24 - état live prod (4 cartes batterie + entêtes de section ; style .groupItems R80 sur les 4 cartes)
 
 type: grid
 columns: 1
@@ -79,6 +79,7 @@ cards:
         box-shadow: none !important;
         border: none !important;
       }
+  style: '.groupItems { max-height: 2000px !important; }'
 - type: heading
   icon: mdi:battery-high
   heading_style: title
@@ -119,7 +120,7 @@ cards:
     - sensor.detecteur_ikea_vallhorn_battery
     - sensor.poussoir_pc_ikea_tradfri_battery
     - sensor.poussoir_tv_ikea_tradfri_battery
-    - sensor.inter_radiateur_salle_de_bain_ikea_rodret_battery
+    - sensor.inter_soufflant_salle_de_bain_ikea_rodret_battery
   sort:
     by: state
   bulk_rename:
@@ -139,6 +140,7 @@ cards:
         box-shadow: none !important;
         border: none !important;
       }
+  style: '.groupItems { max-height: 2000px !important; }'
 - type: heading
   icon: mdi:battery-high
   heading_style: title
@@ -194,6 +196,7 @@ cards:
         box-shadow: none !important;
         border: none !important;
       }
+  style: '.groupItems { max-height: 2000px !important; }'
 - type: heading
   icon: mdi:battery-high
   heading_style: title
@@ -258,3 +261,10 @@ cards:
         box-shadow: none !important;
         border: none !important;
       }
+  style: '.groupItems { max-height: 2000px !important; }'
+
+# annotations_log:
+# [2026-10-24] R80 : ajout de style: ".groupItems { max-height: 2000px !important; }" sur les 4 cartes battery-state-card (HUE, IKEA, SONOFF fenetres, SONOFF thermostats) - corrige la troncature du groupe deplie
+# NOTE : cause = battery-state-card 4.2.0 pose sur .groupItems un max-height inline de (nombre de batteries) x 50 px ; les lignes avec secondary_info font environ 52 px, la derniere est coupee
+# NOTE : etat replie intact (regle .toggler:not(.expanded) + div plus specifique). Etat prod : config_hash dashboard-tablette b7f83c05. Retour arriere : supprimer la cle style des 4 cartes (hash d'origine 52b872df)
+# [2026-10-24] Synchro prod -> local de la section BATTERY (BP) : ce fichier reprend l'etat reel de la prod (entites et titres de la prod, ex. IKEA : sensor.inter_soufflant_salle_de_bain_ikea_rodret_battery). Etat precedent : sauvegarde du 2026-09-24 (bak 2026_10_24_14h31m05s puis bak ci-dessous)

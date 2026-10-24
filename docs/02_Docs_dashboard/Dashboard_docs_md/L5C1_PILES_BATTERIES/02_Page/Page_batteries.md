@@ -2,20 +2,20 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--03--07-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--10--24-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page-ff9800?style=flat-square)](.)
 
 </div>
 
 | Champ | Valeur |
 |:------|:-------|
-| 📁 **Path** | `Dashboard/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-09-24.yaml` (remplace 2026-05-14) |
+| 📁 **Path** | `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C1_13_Batteries_Piles/02_Page/Page_L5C1_batteries_piles.yaml` |
 | 🔗 **Accès depuis** | Tap vignette L5C1 → `/dashboard-tablette/battery-bp` |
 | 🔗 **Retour vers** | Tap header → `/dashboard-tablette/0` |
-| 🏗️ **Layout** | `type: grid` - 5 sections `battery-state-card` |
+| 🏗️ **Layout** | `type: grid` - 4 cartes `battery-state-card` (une par type, chacune precedee d'un en-tete) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |
-| 📅 **Modifié le** | 2026-03-07 |
+| 📅 **Modifié le** | 2026-10-24 |
 | 🏠 **Version HA** | 2025.2.x → v2.0 |
 
 ---
@@ -31,22 +31,21 @@
 3. [Structure commune](#structure-commune)
 4. [Section 1 - Boutons HUE](#section-1--boutons-hue)
 5. [Section 2 - Boutons & détecteurs IKEA](#section-2--boutons--détecteurs-ikea)
-6. [Section 3 - Contacts fenêtres IKEA](#section-3--contacts-fenêtres-ikea)
-7. [Section 4 - Contacts fenêtres SONOFF](#section-4--contacts-fenêtres-sonoff)
-8. [Section 5 - Thermostats SONOFF](#section-5--thermostats-sonoff)
-9. [Dépannage](#dépannage)
+6. [Section 3 - Contacts fenêtres SONOFF](#section-3--contacts-fenêtres-sonoff)
+7. [Section 4 - Thermostats SONOFF](#section-4--thermostats-sonoff)
+8. [Dépannage](#dépannage)
 
 ---
 
 ## 🎯 VUE D'ENSEMBLE
 
-Page complète listant tous les équipements à batterie, découpée en 5 sections par type/marque. Chaque section affiche un collapse avec le niveau minimum et la plage, triée par niveau croissant. Dégradé rouge → jaune → vert.
+Page complète listant tous les équipements à batterie, découpée en 4 sections par type/marque. Chaque section affiche un collapse avec le niveau minimum et la plage, triée par niveau croissant. Dégradé rouge → jaune → vert.
 
 ### Cartes HACS
 
 | Carte | Usage |
 |-------|-------|
-| `custom:battery-state-card` | 5 sections indépendantes |
+| `custom:battery-state-card` | 4 sections indépendantes |
 
 ---
 
@@ -60,16 +59,13 @@ Page complète listant tous les équipements à batterie, découpée en 5 sectio
 │  [1] Boutons HUE              11 entités            │
 │      collapse · mdi:light-switch                    │
 ├─────────────────────────────────────────────────────┤
-│  [2] Boutons & détect. IKEA    8 entités            │
+│  [2] Boutons & détect. IKEA    9 entités            │
 │      collapse · mdi:hammer-screwdriver              │
 ├─────────────────────────────────────────────────────┤
-│  [3] Contacts fenêtres IKEA    4 entités            │
+│  [3] Contacts fenêtres SONOFF  4 entités            │
 │      collapse · mdi:window-closed-variant           │
 ├─────────────────────────────────────────────────────┤
-│  [4] Contacts fenêtres SONOFF  4 entités            │
-│      collapse · mdi:window-closed-variant           │
-├─────────────────────────────────────────────────────┤
-│  [5] Thermostats SONOFF        9 entités            │
+│  [4] Thermostats SONOFF        9 entités            │
 │      collapse · mdi:thermometer                     │
 └─────────────────────────────────────────────────────┘
 ```
@@ -80,7 +76,7 @@ Page complète listant tous les équipements à batterie, découpée en 5 sectio
 
 Chaque section suit le même schéma - seuls le `heading`, l'icône du collapse et la liste d'entités varient.
 
-### Blocs identiques dans les 5 sections
+### Blocs identiques dans les 4 sections
 
 ```yaml
 secondary_info: "{last_changed}"
@@ -119,7 +115,10 @@ card_mod:
       box-shadow: none !important;
       border: none !important;
     }
+style: '.groupItems { max-height: 2000px !important; }'
 ```
+
+> Cle `style` ajoutee le 2026-10-24 (R80) sur les 4 cartes : contournement du bug de battery-state-card 4.2.0 qui tronque la derniere ligne du groupe deplie (hauteur max = nombre de batteries x 50 px). A retirer quand une release corrige le bug (R107). Voir Depannage.
 
 ---
 
@@ -151,7 +150,7 @@ card_mod:
 ### Collapse
 `"Capteurs IKEA (Total : {count} / Mini. : {min} %)"` · `mdi:hammer-screwdriver`
 
-### Entités (8) · Zigbee2MQTT [Z2M]
+### Entités (9) · Zigbee2MQTT [Z2M]
 
 | Entité | Type |
 |--------|------|
@@ -163,26 +162,11 @@ card_mod:
 | `sensor.detecteur_ikea_vallhorn_battery` | Détecteur VALLHORN |
 | `sensor.poussoir_pc_ikea_tradfri_battery` | Poussoir PC bureau |
 | `sensor.inter_soufflant_salle_de_bain_ikea_rodret_battery` | Inter soufflant SDB |
+| `sensor.inter_reserve_ikea_rodret_battery` | Inter RODRET reserve (deduit du nom de l'entite) |
 
 ---
 
-## 📍 SECTION 3 - Contacts fenêtres IKEA
-
-### Collapse
-`"Contacts de fenêtres IKEA (Total : {count} / Mini. : {min} %)"` · `mdi:window-closed-variant`
-
-### Entités (4) · Zigbee2MQTT [Z2M]
-
-| Entité | Pièce |
-|--------|-------|
-| `sensor.contact_fenetre_salon_ikea_battery` | Salon |
-| `sensor.contact_fenetre_cuisine_ikea_battery` | Cuisine |
-| `sensor.contact_fenetre_bureau_ikea_battery` | Bureau |
-| `sensor.contact_fenetre_chambre_ikea_battery` | Chambre |
-
----
-
-## 📍 SECTION 4 - Contacts fenêtres SONOFF
+## 📍 SECTION 3 - Contacts fenêtres SONOFF
 
 ### Collapse
 `"Contacts de fenêtres SONOFF (Total : {count} / Mini. : {min} %)"` · `mdi:window-closed-variant`
@@ -198,7 +182,7 @@ card_mod:
 
 ---
 
-## 📍 SECTION 5 - Thermostats SONOFF
+## 📍 SECTION 4 - Thermostats SONOFF
 
 ### Collapse
 `"Thermostats SONOFF (Total : {count} / Mini. : {min} %)"` · `mdi:thermometer`
@@ -229,6 +213,9 @@ Nom HACS exact : `battery-state-card` (pas `batterie-state-card`). Vider le cach
 ### Une section affiche des appareils d'une autre section
 Les `filter/exclude` ne filtrent que les entités exclues - les entités d'une section peuvent apparaître dans une autre si elles ne sont pas dans le collapse. Vérifier que chaque entité est bien listée dans **une seule** section.
 
+### Le groupe deplie est tronque (derniere ligne coupee)
+Bug de battery-state-card 4.2.0 : la hauteur du groupe deplie est figee a (nombre de batteries x 50 px), alors qu'une ligne avec `secondary_info` fait environ 52 px. Contournement en place (R80) : cle `style: '.groupItems { max-height: 2000px !important; }'` sur chaque carte. Le correctif amont (PR #934 de battery-state-card) est fusionne sur master depuis le 2026-10-12 mais pas encore publie. Quand une release le contient : mettre la carte a jour puis retirer la cle (R107). Si un groupe parait bizarre apres la mise a jour, c'est ce contournement qui n'est plus utile, pas un nouveau bug.
+
 ---
 
 ## 📝 DÉPENDANCES
@@ -241,9 +228,9 @@ Les `filter/exclude` ne filtrent que les entités exclues - les entités d'une s
 
 ## 🔗 FICHIERS LIÉS
 
-- `Dashboard/L5C1_13_Batteries_Piles/page_L5C1_batteries_piles_2026-09-24.yaml`
-- `Dashboard/L5C1_13_Batteries_Piles/vignette_L5C1_batteries_piles_2026-05-14.yaml` (vignette - inchangée)
-- `docs/L5C1_PILES_BATTERIES/L5C1_VIGNETTE_BATTERIES.md`
+- `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C1_13_Batteries_Piles/02_Page/Page_L5C1_batteries_piles.yaml`
+- `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C1_13_Batteries_Piles/01_Vignette/Vignette_L5C1_batteries_piles.yaml` (vignette - inchangée)
+- `docs/02_Docs_dashboard/Dashboard_docs_md/L5C1_PILES_BATTERIES/01_Vignette/L5C1_VIGNETTE_BATTERIES.md`
 
 ---
 
@@ -253,3 +240,7 @@ Les `filter/exclude` ne filtrent que les entités exclues - les entités d'une s
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[L5C1_VIGNETTE_BATTERIES]]*
+
+<!-- annotations_log:
+[2026-10-24] Alignement sur le yaml prod synchronise (Page_L5C1_batteries_piles.yaml, md5 ac255846) : 5 sections -> 4 cartes ; section 3 Contacts fenetres IKEA retiree (absente du yaml prod) et sections suivantes renumerotees ; section 2 IKEA 8 -> 9 entites (ajout sensor.inter_reserve_ikea_rodret_battery) ; cle style R80 documentee (bloc commun + depannage, voir R107) ; dates mises a jour, demande d'Eric 15:19. Non corrige : ligne Path du tableau d'en-tete (ancien nom de fichier 2026-09-24).
+[2026-10-24] Chemins corriges (ligne Path du tableau d'en-tete + 3 lignes de FICHIERS LIES : anciens noms de fichiers remplaces par les chemins reels sous docs/02_Docs_dashboard), accord d'Eric 15:24 -->

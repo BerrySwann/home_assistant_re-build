@@ -160,6 +160,7 @@ Regles : lecture seule sur H: et sur les YAML locaux ; le script n'ecrit que les
 - À chaque modif YAML dans `docs/` → vérifier impact vignette (`docs/02_docs_dashboard/dashboard_docs_MD/L*`) + chaîne dépendances.
 - Si rupture cohérence → proposer update `docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md` ou `/sync_index`.
 - Tâche non terminée si code OK mais doc dépendances obsolète.
+- Règle d'Eric 2026-10-24 : quand un YAML est modifié (par Eric ou par Claude), Claude corrige dans la foulée, si nécessaire, le .md associé (fiche vignette ou page) en LOCAL, avec .bak, annotations_log et ligne du journal MODIFS, sans attendre qu'Eric le demande. Si le .md n'a pas à changer, le dire dans le rapport avec la raison. Le push vers H:\ reste sur ordre d'Eric.
 
 ## Économie de Tokens
 - Pas de longs discours d'intro/conclusion. Blocs ciblés uniquement.
@@ -243,6 +244,7 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
   voulue (`.bak_...`), on retire le suffixe, on la remet en local, puis on la pousse vers H:\. C'est
   le retour arriere de reference - identique pour tous les fichiers (config YAML, dashboard YAML,
   docs .md, scripts, CLAUDE.md).
+- Règle d'Eric 2026-10-24 : à chaque modification, si la stratégie choisie ne fonctionne pas ou n'est pas la bonne, Claude revient à l'état d'origine (retour arrière de référence ci-dessus) avant d'essayer autre chose, et le dit à Eric.
 
 **REGLE DE SAUVEGARDE (depuis le 2026-10-08, remplace celle du 2026-10-04)**
 
@@ -741,4 +743,5 @@ Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2
 > usage limité à l'analyse des consommations électriques, hors périmètre des directives actives).
 
 <!-- annotations_log:
-[2026-10-24] Règle Log de modif étendue à tous les fichiers (ligne Économie de Tokens), à la demande d'Eric -->
+[2026-10-24] Règle Log de modif étendue à tous les fichiers (ligne Économie de Tokens), à la demande d'Eric
+[2026-10-24] Deux règles ajoutées à la demande d'Eric (15:26) : corriger le .md associé dans la foulée d'une modif YAML (après la ligne dépendances) ; revenir à l'état d'origine si la stratégie échoue (section Règle de modification et retour arrière) -->
