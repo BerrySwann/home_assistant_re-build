@@ -3,7 +3,7 @@
 > `ReBuild/docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md` et `D:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres
 > toute mise a jour, verifier que les trois empreintes md5 sont egales. Il ne depend d'aucun agent
 > en particulier.
-> Derniere mise en conformite : 2026-10-20 (3 copies identiques, voir ci-dessus). Rappel du
+> Derniere mise en conformite : 2026-10-24 (copies identiques, TODO.html source de la todo). Rappel du
 > 2026-10-04 : la copie `D:\` avait ete retrouvee perimee (version du 2026-07-19, encore l'ancienne
 > REGLE ABSOLUE) et realignee ce jour-la - ancienne version conservee en
 > `D:\docs\00_IA\IA_CONTEXT_BASE_2026-07-19_15h46.md`.
@@ -167,15 +167,18 @@ Regles : lecture seule sur H: et sur les YAML locaux ; le script n'ecrit que les
 - Ne jamais répéter le code YAML déjà validé.
 
 ## TODO - REGLE OBLIGATOIRE
-- Fichier de référence : `TODO.md` (dossier TODO/ de ReBuild)
-- "ajoute à la todo" / "met dans la todo" / "note ca" = ecrire dans `TODO.md`, jamais dans TaskCreate (outil session uniquement, perdu a la fermeture).
-- En debut de session : lire `TODO.md` pour connaitre le backlog en cours.
-- Un point = une ligne `Rxx.n` (un seul point par ligne, suffixe .n sous le numero du Rxx d'origine), suivie de `    Dates : ouvert AAAA-MM-JJ ; ferme AAAA-MM-JJ` ("ferme -" tant qu'il est ouvert, "?" si la date est inconnue).
-- Apres chaque item traite : cocher [x], renseigner la date de fermeture et le deplacer en PARTIE 2. Ne jamais supprimer un point.
-- Ordre du fichier : PARTIE 1 A FAIRE, 1b A TRIER, 2 FAIT / RESOLU, 3 notes, 4 texte d'origine des Rxx eclates, puis les blocs CLOTURE en bas.
-- Cloture (fin de session de tri ou /histo) : ajouter en bas un bloc CLOTURE avec A FAIRE, A TRIER, FAIT, ouverts et fermes par jour, et le solde (ajouts - fermes). Ne pas modifier les clotures precedentes.
+- Fichier de reference : `TODO.html` (dossier TODO/ de ReBuild). Depuis le 2026-10-24 (decision d'Eric : plus lisible pour lui), `TODO.html` est la SOURCE de la todo et sa vue. `TODO.md` est gele (archive de l'etat du 2026-10-24 08h11) : ne plus l'ecrire ni le mettre a jour.
+- "ajoute a la todo" / "met dans la todo" / "note ca" = ecrire dans `TODO.html` (tableau `D`), jamais dans TaskCreate (outil session uniquement, perdu a la fermeture).
+- En debut de session : lire `TODO.html` (la partie donnees : tableau `D`, pas le CSS ni le script) pour connaitre le backlog en cours.
+- Un point = un objet du tableau `D`, un objet par ligne : `s` (A FAIRE, A TRIER ou FAIT), `id` (`Rxx.n`, ou `-` si sans numero), `x` (true si coche), `t` (titre), `tx` (texte), `m` (suite eventuelle, lignes separees par `\n`), `o` (date d'ouverture), `f` (date de fermeture : `-` tant qu'il est ouvert, `?` si inconnue). Un seul point par objet, suffixe .n sous le numero du Rxx d'origine.
+- Ajout : inscrire l'objet a la fin du bloc A FAIRE (avant le premier A TRIER). Apres chaque item traite : `x` a true, `s` a "FAIT", renseigner `f` et deplacer l'objet dans le bloc FAIT. Ne jamais supprimer un point.
+- Ordre du fichier : tableau `D` (A FAIRE, A TRIER, FAIT), puis `PARTIES` (notes et textes d'origine repris de TODO.md), puis `CL` (clotures).
+- Cloture (fin de session de tri ou /histo) : ajouter une chaine a la fin du tableau `CL` avec A FAIRE, A TRIER, FAIT, ouverts et fermes par jour, et le solde (ajouts - fermes). Ne pas modifier les clotures precedentes.
+- A chaque modification de `TODO.html` : sauvegarde locale `TODO.bak_AAAA_MM_JJ_HHhMMmSSs.html` avant, mise a jour de `META.maj`, ligne dans le journal MODIFS (skill journal-modifs), puis verification que le script de la page s'execute sans erreur.
+- Mise en page FIGEE (decision d'Eric le 2026-10-24) : `TODO.html` reste toujours une page HTML unique, avec les compteurs, le tableau par jour, le filtre texte et les 3 onglets `A faire` / `A trier` / `Fermes` (nombre de points dans chaque onglet, `A faire` ouvert par defaut, `Fermes` du plus recent au plus ancien), exactement comme la version du 2026-10-24 12h03 (md5 a557344b avant ajout des regles dans la page). On ne modifie que les donnees (`D`, `PARTIES`, `CL`, `META`) ; le CSS, le HTML et le script ne changent que sur demande d'Eric. Jamais de retour a un `TODO.md`, ni a des listes sans onglets, ni a une autre mise en page.
+- Menage des sauvegardes de `TODO\` : fait par `/histo` (etape 5, chapitre "Cas particulier : TODO\") et envoye a la corbeille Windows, jamais supprime : sauvegardes du jour gardees (10 au plus par extension) ; jours passes = la plus recente de chaque jour renommee `TODO.bak_AAAA_MM_JJ.{ext}`, les autres a la corbeille, sans plafond de jours. `TODO.html` et `TODO.md` ne sont jamais touches par le menage.
 - Gel : si les points ouverts atteignent 50, ou si 3 clotures de suite ont un solde positif, proposer a Eric de geler les nouveaux ajouts de HA pour traiter les ouverts avant de continuer (seuils proposes par Claude le 2026-10-18, a confirmer par Eric).
-- Vue HTML : l'artifact "TODO HA ReBuild" lit TODO.md ; le republier apres chaque cloture.
+- Vue HTML : `TODO.html` est lui-meme la vue (compteurs, tableau par jour, filtre). L'artifact "TODO HA ReBuild" (publie le 2026-10-18) lisait TODO.md : il n'est plus alimente, ne pas le republier sans demande d'Eric.
 
 ## Slash Commands
 - `/fix_file` → analyse erreur HA et retourne bloc YAML corrigé uniquement.
