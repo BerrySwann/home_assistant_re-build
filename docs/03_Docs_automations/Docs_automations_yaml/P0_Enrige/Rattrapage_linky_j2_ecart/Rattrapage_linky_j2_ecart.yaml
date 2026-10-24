@@ -1,5 +1,5 @@
 id: '1788118327851'
-alias: '[P0] Rattrapage Linky J-2 + Ecart'
+alias: 'C - [P0] Rattrapage Linky J-2 + Ecart'
 description: 'A 23h59:30 (apres les 2 autos histo), si day_2 > 0 : appelle le script
   Python correct_linky.py avec la date J-2 et la valeur day_2. Le script corrige
   la ligne "(MANQUANT)" dans linky_histo.txt si elle existe, lit le Nodon correspondant

@@ -1,0 +1,50 @@
+id: '1792780906393'
+alias: E - [P0] Histo Nodon complet quotidien (Total HP HC Cout)
+description: 'A 23h59m10s, logue la conso Nodon complete de la veille (last_period
+  du compteur UM quotidien : Total, HP, HC) et le cout (tarifs EDF HPHC 6kVA TTC
+  lus en direct sur sensor.tarif_heures_pleines_ttc et sensor.tarif_heures_creuses_ttc)
+  dans nodon_complet_histo.txt. Sert de source de remplacement des 0 Linky dans
+  le tableau hebdomadaire L2C1 (templates linky_jour_1 a 7). Si le total vaut 0
+  : ecrit "(MANQUANT)". Prerequis : integration File "nodon_complet_histo" (notify.nodon_complet_histo)
+  -> /config/notifs/nodon_complet_histo.txt
+
+  '
+triggers:
+- alias: 'HORAIRE : EXECUTION 23H59M10S'
+  at: '23:59:10'
+  trigger: time
+conditions: []
+actions:
+- variables:
+    date_j1: '{{ (now() - timedelta(days=1)).strftime(''%d/%m'') }}'
+    hc: '{{ state_attr(''sensor.genelec_appart_hphc_quotidien_um_hc'', ''last_period'')
+      | float(0) | round(1) }}'
+    hp: '{{ state_attr(''sensor.genelec_appart_hphc_quotidien_um_hp'', ''last_period'')
+      | float(0) | round(1) }}'
+    total: '{{ state_attr(''sensor.genelec_appart_quotidien_um'', ''last_period'')
+      | float(0) | round(1) }}'
+- variables:
+    cout: '{{ ((hp | float(0) * states(''sensor.tarif_heures_pleines_ttc'') | float(0))
+      + (hc | float(0) * states(''sensor.tarif_heures_creuses_ttc'') | float(0)))
+      | round(2) }}'
+- else:
+  - action: notify.send_message
+    data:
+      message: '{{ date_j1 }} | Total: 0.0 kWh | HP: 0.0 | HC: 0.0 | Cout: 0.0 (MANQUANT)
+
+        '
+    target:
+      entity_id: notify.nodon_complet_histo
+  if:
+  - condition: template
+    value_template: '{{ total | float(0) > 0 }}'
+  then:
+  - action: notify.send_message
+    data:
+      message: '{{ date_j1 }} | Total: {{ total }} kWh | HP: {{ hp }} | HC: {{ hc
+        }} | Cout: {{ cout }}
+
+        '
+    target:
+      entity_id: notify.nodon_complet_histo
+mode: single

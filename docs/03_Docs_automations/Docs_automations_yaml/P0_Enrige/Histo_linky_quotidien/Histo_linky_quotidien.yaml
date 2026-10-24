@@ -1,5 +1,5 @@
 id: '1788118118362'
-alias: '[P0] Histo Linky quotidien + Ecart J-1'
+alias: 'A - [P0] Histo Linky quotidien + Ecart J-1'
 description: 'A 23h59, logue la conso Linky J-1 (day_1) dans linky_histo.txt. Si
   day_1 = 0 (Enedis pas encore publie) : ecrit "(MANQUANT)" pour rattrapage par
   auto 3. Si day_1 > 0 : calcule et logue aussi l''ecart Linky/Nodon dans ecart_histo.txt.

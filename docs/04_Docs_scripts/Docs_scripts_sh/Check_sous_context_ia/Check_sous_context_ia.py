@@ -23,8 +23,8 @@ NON_POUSSES = {"IA_SKILLS_INVENTAIRE"}  # decision : pas en prod tant qu'Eric ne
 TODAY = datetime.date.today()
 # Fichiers FIGES (decision d'Eric) : plus de controle de contenu (date, chemins, nombres, entites).
 # Restent controles : structure, baks, MD5 prod, et "fige mais modifie depuis" (mtime apres la date de gel).
-# Format : "IA_NOM": "AAAA-MM-JJ" (date du gel). Gel decide le 2026-10-13 apres relecture des 9 fichiers (seul IA_P4_PRESENCE : logique verifiee contre le template prod).
-FIGES = {"IA_P4_PRESENCE": "2026-10-13"}
+# Format : "IA_NOM": "AAAA-MM-JJ" (date du gel). Gel decide le 2026-10-13 apres relecture des 9 fichiers (seul IA_P4_PRESENCE : logique verifiee contre le template prod) ; re-gel decide par Eric le 2026-10-18 apres la modification du 2026-10-17.
+FIGES = {"IA_P4_PRESENCE": "2026-10-18"}
 
 def md5(p):
     h = hashlib.md5()

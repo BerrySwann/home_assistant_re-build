@@ -1,5 +1,5 @@
 id: '1788237916871'
-alias: '[P0] Rattrapage Linky MANQUANT + Ecart'
+alias: 'D - [P0] Rattrapage Linky MANQUANT + Ecart'
 description: 'A 01h00, construit un JSON avec day_1 a day_7 (valeur > 0 uniquement,
   avec date JJ/MM) et appelle le script Python correct_linky.py. Le script corrige
   TOUTES les lignes "(MANQUANT)" de linky_histo.txt correspondantes, lit nodon_histo.txt
