@@ -27,6 +27,13 @@
 # - 2026-09-29 : inter_radiateur_salle_de_bain SUPPRIME. Aucun consommateur,
 #   aucun fichier B1_01_inter_sdb.yaml en prod : l'audit du 2026-07-06 est clos.
 #   Le pilotage SDB passe par inter_soufflant_salle_de_bain et son verrou.
+# - 2026-10-24 : inter_rodret_salon et inter_somrig_salon n existent plus (HA : 404, aucune ligne
+#   dans les yaml, trace seulement dans deleted_entities du registre). Les boutons IKEA
+#   correspondants (RODRET Bureau, Inter Salon (4), SOMRIG salon, RODRET Reserve) sont
+#   vivants et passent maintenant par MQTT (topics zigbee2mqtt2/.../action), plus par des
+#   helpers. Date et auteur de leur suppression : INCONNUS (dernier fichier connu :
+#   input_booleans/P3/P3_BV_02_IB_inter_rodret_salon.yaml, vu au journal du 2026-07-16).
+#   Ne pas les recreer : le dernier helper de bouton encore actif est inter_soufflant_salle_de_bain.
 # - 2026-10-07 : voyant_thermostat_soufflant_salle_de_bain AJOUTE. Helper neutre qui sert de
 #   heater a climate.soufflant_salle_de_bain (generic_thermostat). Il ne pilote aucun
 #   materiel : le thermostat ne commande plus l interrupteur du soufflant (decision Eric).
