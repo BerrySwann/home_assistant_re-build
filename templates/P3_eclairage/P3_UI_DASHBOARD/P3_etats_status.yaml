@@ -62,7 +62,7 @@
       icon: >
         {% set s = is_state('input_select.saison', 'Hiver') %}
         {% if states('sensor.lumiere_appartement_etat') != 'Éteint' %}
-          {{ 'mdi:home-floor-g' if s else 'mdi:home-check' }}
+          {{ 'mdi:home-floor-g' if s else 'mdi:home_check' }}
         {% else %}
           {{ 'mdi:home-outline' if s else 'mdi:home-variant-outline' }}
         {% endif %}
