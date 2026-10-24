@@ -953,7 +953,7 @@ MATÉRIEL (Hue Bridge / Sonoff)
 | `light.hue_color_candle_chambre_eric` | NAT | Hue Bridge |
 | `light.lit` | NAT | Hue Bridge | Groupe tête de lit - cible du tap_action toggle (fix B4) |
 | `switch.prise_tete_de_lit_chambre` | NAT | Intégration native |
-| `input_select.saison` | NAT | `input_select.yaml` (icône appartement Été/Hiver - ajouté 2026-07-19, manquait) |
+| `input_select.saison` | NAT | `input_select.yaml` (helper manuel Été/Hiver, ajouté 2026-07-19). Plus aucun usage depuis 2026-10-24 : son seul lecteur, le bloc `icon:` du sensor `lumiere_appartement_etat` dans `P3_etats_status.yaml`, a été supprimé sur ordre d'Eric (code conservé tel quel dans les annotations en bas de ce fichier). Supprimé du template : `{% set s = is_state('input_select.saison', 'Hiver') %}` ; icônes `mdi:home-floor-g` / `mdi:home-check` (si allumé, Hiver / Été) et `mdi:home-outline` / `mdi:home-variant-outline` (si éteint, Hiver / Été). Helper conservé, à supprimer ou non : décision d'Eric en attente. |
 
 ### Entités disponibles (etats_status) non encore intégrées
 

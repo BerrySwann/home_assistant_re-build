@@ -59,13 +59,6 @@
         {% else %}
           erreur
         {% endif %}
-      icon: >
-        {% set s = is_state('input_select.saison', 'Hiver') %}
-        {% if states('sensor.lumiere_appartement_etat') != 'Éteint' %}
-          {{ 'mdi:home-floor-g' if s else 'mdi:home_check' }}
-        {% else %}
-          {{ 'mdi:home-outline' if s else 'mdi:home-variant-outline' }}
-        {% endif %}
 
 # ┌─────────────────────────────────┐
 # │ 1. ENTRÉE                       │
@@ -73,8 +66,8 @@
 # --- lumiere_entree_etat ---
     - name: "Lumière Entrée État"
       unique_id: lumiere_entree_etat
-      state: "{{ 'Allumée' if is_state('light.entree', 'on') else 'Éteint' }}"
-      icon: "{{ 'mdi:ceiling-light' if is_state('light.entree', 'on') else 'mdi:ceiling-light-outline' }}"
+      state: "{{'Allumée' if is_state('light.entree', 'on') else 'Éteint' }}"
+      icon: "{{'mdi:ceiling-light' if is_state('light.entree', 'on') else 'mdi:ceiling-light-outline' }}"
 
 # ┌─────────────────────────────────┐
 # │ 4. SALON                        │
@@ -95,13 +88,13 @@
         {% else %}
           erreur
         {% endif %}
-      icon: "{{ 'mdi:sofa' if is_state('light.salon', 'on') else ' mdi:sofa-outline' }}"
+      icon: "{{'mdi:sofa'if is_state('light.salon', 'on') else 'mdi:sofa-outline' }}"
 
 # --- lumiere_table_etat ---
     - name: "Lumière Table État"
       unique_id: lumiere_table_etat
-      state: "{{ 'Allumé' if is_state('light.table', 'on') else 'Éteint' }}"
-      icon: "{{ 'mdi:table-chair' if is_state('light.table', 'on') else 'mdi:table-chair ' }}"
+      state: "{{'Allumé'if is_state('light.table', 'on') else 'Éteint' }}"
+      icon: "{{'mdi:table-chair'if is_state('light.table', 'on') else 'mdi:table-chair' }}"
 
 # ┌─────────────────────────────────┐
 # │ 5. CUISINE                      │
@@ -110,8 +103,8 @@
 # --- lumiere_cuisine_etat ---
     - name: "Lumière Cuisine État"
       unique_id: lumiere_cuisine_etat
-      state: "{{ 'Allumé' if is_state('light.cuisine', 'on') else 'Éteint' }}"
-      icon: "{{ 'mdi:ceiling-light' if is_state('light.cuisine', 'on') else 'mdi:ceiling-light-outline' }}"
+      state: "{{'Allumé' if is_state('light.cuisine', 'on') else 'Éteint' }}"
+      icon: "{{'mdi:ceiling-light' if is_state('light.cuisine', 'on') else 'mdi:ceiling-light-outline' }}"
 
 # ┌─────────────────────────────────┐
 # │ 6. COULOIR                      │
@@ -120,8 +113,8 @@
 # --- lumiere_couloir_etat ---
     - name: "Lumière Couloir État"
       unique_id: lumiere_couloir_etat
-      state: "{{ 'Allumée' if is_state('light.couloir', 'on') else 'Éteint' }}"
-      icon: "{{ 'mdi:ceiling-light' if is_state('light.couloir', 'on') else 'mdi:ceiling-light-outline' }}"
+      state: "{{'Allumée' if is_state('light.couloir', 'on') else 'Éteint' }}"
+      icon: "{{'mdi:ceiling-light' if is_state('light.couloir', 'on') else 'mdi:ceiling-light-outline' }}"
 
 # ┌─────────────────────────────────┐
 # │ 7. BUREAU --- Bureau ---        │
@@ -237,8 +230,8 @@
 # --- lumiere_salle_de_bain_etat ---
     - name: "Lumière Salle de Bain État"
       unique_id: lumiere_salle_de_bain_etat
-      state: "{{ 'Allumé' if is_state('light.hue_white_lamp_salle_de_bain', 'on') else 'Éteint' }}"
-      icon: "{{ 'mdi:ceiling-light' if is_state('light.hue_white_lamp_salle_de_bain', 'on') else 'mdi:ceiling-light-outline' }}"
+      state: "{{'Allumé' if is_state('light.hue_white_lamp_salle_de_bain', 'on') else 'Éteint' }}"
+      icon: "{{'mdi:ceiling-light' if is_state('light.hue_white_lamp_salle_de_bain', 'on') else 'mdi:ceiling-light-outline' }}"
 
 # ┌─────────────────────────────────┐
 # │ 9. CHAMBRE                      │
@@ -326,3 +319,12 @@
 
 # annotations_log:
 # - [slug] MOD L157: # --- lumiere_Écran_etat --- → # --- lumiere_ecran_etat ---
+# [2026-10-24] SUPPR (demande d'Eric 20:24) : bloc icon: du sensor lumiere_appartement_etat (ex-l.62-68). Inutile : aucune vignette du dashboard ne lit l'icone de ce capteur (tour du dashboard par Eric 18:38). Code supprime, tel quel :
+#       icon: >
+#         {% set s = is_state('input_select.saison', 'Hiver') %}
+#         {% if states('sensor.lumiere_appartement_etat') != 'Éteint' %}
+#           {{ 'mdi:home-floor-g' if s else 'mdi:home-check' }}
+#         {% else %}
+#           {{ 'mdi:home-outline' if s else 'mdi:home-variant-outline' }}
+#         {% endif %}
+# [2026-10-24] NOTE R91 : les annotations de l'edition Claude 16:19 (espace apres {{ retire sur 8 lignes) et de l'edition d'Eric 16:41 ne figuraient pas dans ce fichier. Etat constate avant cette suppression = sauvegarde 16:14 + 6 lignes modifiees (l.113 114 123 124 240 241 : espace apres {{ retire). Les l.295 296 (chambre) gardent leur espace.
