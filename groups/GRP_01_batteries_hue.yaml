@@ -27,8 +27,8 @@
 hue_devices:
   name: "HUE Devices"
   entities:
-    - sensor.hue_smart_button_entee_1_batterie
-    - sensor.hue_smart_button_entee_2_batterie
+    - sensor.hue_smart_button_entree_1_batterie
+    - sensor.hue_smart_button_entree_2_batterie
     - sensor.hue_smart_button_eco_batterie
     - sensor.hue_smart_button_table_batterie
     - sensor.hue_smart_button_cuisine_batterie
@@ -38,3 +38,6 @@ hue_devices:
     - sensor.hue_smart_button_chambre_batterie
     - sensor.hue_smart_button_chambre_gege_batterie
     - sensor.hue_smart_button_chambre_eric_batterie
+
+# annotations_log:
+# [2026-10-24] R83 / L5C1 : entity_id Hue d'entree renommes entee -> entree (Hue Smart button Entree 1 et 2), apres renommage dans HA, accord d'Eric 15:42

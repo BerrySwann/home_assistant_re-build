@@ -1,0 +1,26 @@
+# ha_mcp_backup
+schema_version: 1
+domain: entity
+entity_id: event.hue_smart_button_entee_2_bouton
+captured: '2026-10-24T13:43:44.826362+00:00'
+tool: ha_set_entity
+config:
+  entity_id: event.hue_smart_button_entee_2_bouton
+  state: '2026-10-24T13:41:17.512+00:00'
+  attributes:
+    event_types:
+    - initial_press
+    - repeat
+    - short_release
+    - long_press
+    - long_release
+    event_type: short_release
+    device_class: button
+    friendly_name: "Hue Smart button Entr\xE9e 2 Bouton 1"
+  last_changed: '2026-10-24T13:41:17.511737+00:00'
+  last_reported: '2026-10-24T13:41:17.511737+00:00'
+  last_updated: '2026-10-24T13:41:17.511737+00:00'
+  context:
+    id: 01M5Q29WJ73PQ2VPXADKXRV24F
+    parent_id: null
+    user_id: null

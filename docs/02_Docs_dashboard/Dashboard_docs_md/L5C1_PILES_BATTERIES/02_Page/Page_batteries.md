@@ -131,8 +131,8 @@ style: '.groupItems { max-height: 2000px !important; }'
 
 | Entité | Pièce |
 |--------|-------|
-| `sensor.hue_smart_button_entee_1_batterie` | Entrée 1 |
-| `sensor.hue_smart_button_entee_2_batterie` | Entrée 2 |
+| `sensor.hue_smart_button_entree_1_batterie` | Entrée 1 |
+| `sensor.hue_smart_button_entree_2_batterie` | Entrée 2 |
 | `sensor.hue_smart_button_eco_batterie` | Eco |
 | `sensor.hue_smart_button_table_batterie` | Table salon |
 | `sensor.hue_smart_button_cuisine_batterie` | Cuisine |
@@ -243,4 +243,5 @@ Bug de battery-state-card 4.2.0 : la hauteur du groupe deplie est figee a (nombr
 
 <!-- annotations_log:
 [2026-10-24] Alignement sur le yaml prod synchronise (Page_L5C1_batteries_piles.yaml, md5 ac255846) : 5 sections -> 4 cartes ; section 3 Contacts fenetres IKEA retiree (absente du yaml prod) et sections suivantes renumerotees ; section 2 IKEA 8 -> 9 entites (ajout sensor.inter_reserve_ikea_rodret_battery) ; cle style R80 documentee (bloc commun + depannage, voir R107) ; dates mises a jour, demande d'Eric 15:19. Non corrige : ligne Path du tableau d'en-tete (ancien nom de fichier 2026-09-24).
-[2026-10-24] Chemins corriges (ligne Path du tableau d'en-tete + 3 lignes de FICHIERS LIES : anciens noms de fichiers remplaces par les chemins reels sous docs/02_Docs_dashboard), accord d'Eric 15:24 -->
+[2026-10-24] Chemins corriges (ligne Path du tableau d'en-tete + 3 lignes de FICHIERS LIES : anciens noms de fichiers remplaces par les chemins reels sous docs/02_Docs_dashboard), accord d'Eric 15:24 
+[2026-10-24] R83 / L5C1 : entity_id Hue d'entree renommes entee -> entree (Hue Smart button Entree 1 et 2), apres renommage dans HA, accord d'Eric 15:42 -->

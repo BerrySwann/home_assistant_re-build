@@ -49,8 +49,8 @@ cards:
     icon: mdi:light-switch
     icon_color: first
     entities:
-    - sensor.hue_smart_button_entee_1_batterie
-    - sensor.hue_smart_button_entee_2_batterie
+    - sensor.hue_smart_button_entree_1_batterie
+    - sensor.hue_smart_button_entree_2_batterie
     - sensor.hue_smart_button_eco_batterie
     - sensor.hue_smart_button_table_batterie
     - sensor.hue_smart_button_cuisine_batterie
@@ -268,3 +268,4 @@ cards:
 # NOTE : cause = battery-state-card 4.2.0 pose sur .groupItems un max-height inline de (nombre de batteries) x 50 px ; les lignes avec secondary_info font environ 52 px, la derniere est coupee
 # NOTE : etat replie intact (regle .toggler:not(.expanded) + div plus specifique). Etat prod : config_hash dashboard-tablette b7f83c05. Retour arriere : supprimer la cle style des 4 cartes (hash d'origine 52b872df)
 # [2026-10-24] Synchro prod -> local de la section BATTERY (BP) : ce fichier reprend l'etat reel de la prod (entites et titres de la prod, ex. IKEA : sensor.inter_soufflant_salle_de_bain_ikea_rodret_battery). Etat precedent : sauvegarde du 2026-09-24 (bak 2026_10_24_14h31m05s puis bak ci-dessous)
+# [2026-10-24] R83 / L5C1 : entity_id Hue d'entree renommes entee -> entree (Hue Smart button Entree 1 et 2), apres renommage dans HA, accord d'Eric 15:42 ; nouvel etat prod : config_hash dashboard-tablette 30c333f5 (ancien b7f83c05)

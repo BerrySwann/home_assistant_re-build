@@ -1437,15 +1437,15 @@ HA Core
 ---
 
 ## ✅ L5C1 - BATTERIES / PILES (VIGNETTE + PAGE)
-*Validée le 2026-05-14 - ⚠️ page partiellement tronquée (3 sections HUE/IKEA/SONOFF à compléter)*
+*Validée le 2026-05-14 ; page alignée sur la prod le 2026-10-24 (4 cartes batterie : Boutons HUE, Capteurs IKEA, Contacts SONOFF, Thermostats SONOFF)*
 
 ### Vignette - Chaîne de dépendances
 
 ```
 groups/ (GRP_01/02/03)
-  ├─→ group.hue_devices   → 11 sensors sensor.hue_smart_button_*_batterie
-  ├─→ group.ikea_devices  → 8 sensors IKEA (contacts, remotes, détecteurs)
-  └─→ group.sonoff_devices → 7 sensors sensor.th_*_battery + sensor.tongel_battery + sensor.porte_congel_battery
+  ├─→ group.hue_devices   → 11 sensors sensor.hue_smart_button_*_batterie (boutons d'entrée renommés entee -> entree le 2026-10-24, R83)
+  ├─→ group.ikea_devices  → 8 sensors IKEA (contacts, remotes, détecteurs) ; la page en affiche 9 : sensor.inter_reserve_ikea_rodret_battery n'est pas dans le groupe
+  └─→ group.sonoff_devices → 13 sensors : 7 sensor.th_*_battery + 4 sensor.contact_fenetre_*_sonoff_battery + sensor.tongel_battery + sensor.porte_congel_battery
         └─→ VIGNETTE L5C1 (button-card)
               ├─→ grid 6 colonnes : count | marque | 100-75 | 75-50 | 50-25 | 25-0
               ├─→ Alerte rouge ≤10% : icône ⚠️ + nom marque rouge
@@ -1466,13 +1466,11 @@ groups/ (GRP_01/02/03)
 Philips Hue Bridge / Z2M / SONOFF (ZHA/Z2M)
   ├─→ [HUE] 11× sensor.hue_smart_button_*_batterie
   │     └─→ battery-state-card collapse "Boutons HUE"
-  ├─→ [IKEA] 8× sensor.*_ikea_battery (remotes, détecteurs fuite, Vallhorn, poussoir)
+  ├─→ [IKEA] 9× sensor.*_ikea_battery (remotes, détecteurs fuite, Vallhorn, poussoir, inter_reserve_ikea_rodret)
   │     └─→ battery-state-card collapse "Capteurs IKEA"
-  ├─→ [IKEA] 4× sensor.contact_fenetre_*_ikea_battery
-  │     └─→ battery-state-card collapse "Contacts IKEA"
   ├─→ [SONOFF] 4× sensor.contact_fenetre_*_sonoff_battery
   │     └─→ battery-state-card collapse "Contacts SONOFF"
-  └─→ [SONOFF] 7× sensor.th_*_battery
+  └─→ [SONOFF] 9× (7 sensor.th_*_battery + sensor.tongel_battery + sensor.porte_congel_battery)
         └─→ battery-state-card collapse "Thermostats SONOFF"
 ```
 
@@ -1481,8 +1479,7 @@ Philips Hue Bridge / Z2M / SONOFF (ZHA/Z2M)
 | Fichier | Statut |
 |:--------|:------:|
 | `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C1_13_Batteries_Piles/01_Vignette/Vignette_L5C1_batteries_piles.yaml` | ✅ |
-| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C1_13_Batteries_Piles/02_Page/Page_L5C1_batteries_piles.yaml` | ⚠️ tronqué - remplacé par la version 2026-09-24 |
-| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C1_13_Batteries_Piles/02_Page/Page_L5C1_batteries_piles.yaml` | ✅ dernière version - 4 cartes batterie + entêtes ; batterie porte_congel |
+| `docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C1_13_Batteries_Piles/02_Page/Page_L5C1_batteries_piles.yaml` | ✅ aligné sur la prod le 2026-10-24 : 4 cartes batterie + entêtes ; clé style R80 (à retirer, R107) ; Hue entrée en entree (R83) |
 
 ---
 
@@ -3764,3 +3761,6 @@ automation P1-B (CLIM NUIT) --+--> script.p1_master_gestion_clim [periode, trigg
 
 ---
 
+
+<!-- annotations_log:
+[2026-10-24] Section L5C1 mise à jour d'après HA et le yaml prod synchronisé : page = 4 cartes (section Contacts IKEA retirée), IKEA 9 entités dont sensor.inter_reserve_ikea_rodret_battery (absente de group.ikea_devices, 8), thermostats SONOFF 9, group.sonoff_devices 13 (comptage corrigé), ligne yaml dupliquée supprimée, Hue entrée renommés entree (R83) ; demande d'Eric 15:42 -->

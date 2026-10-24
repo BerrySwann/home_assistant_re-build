@@ -1,0 +1,22 @@
+# ha_mcp_backup
+schema_version: 1
+domain: entity
+entity_id: sensor.hue_smart_button_entee_2_batterie
+captured: '2026-10-24T13:43:43.984857+00:00'
+tool: ha_set_entity
+config:
+  entity_id: sensor.hue_smart_button_entee_2_batterie
+  state: '100'
+  attributes:
+    state_class: measurement
+    battery_state: normal
+    unit_of_measurement: '%'
+    device_class: battery
+    friendly_name: "Hue Smart button Entr\xE9e 2 Batterie"
+  last_changed: '2026-10-24T13:34:08.400912+00:00'
+  last_reported: '2026-10-24T13:34:08.400912+00:00'
+  last_updated: '2026-10-24T13:34:08.400912+00:00'
+  context:
+    id: 01M5Q1WSGGSG1FN6J178QWEBFG
+    parent_id: null
+    user_id: null

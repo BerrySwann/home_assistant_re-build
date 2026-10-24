@@ -2533,8 +2533,8 @@ cpu_package) n'existent dans aucun fichier <code>config_system_SH_PY_YAML/</code
 <li><code>sensor.hue_smart_button_couloir_batterie</code></li>
 <li><code>sensor.hue_smart_button_cuisine_batterie</code></li>
 <li><code>sensor.hue_smart_button_eco_batterie</code></li>
-<li><code>sensor.hue_smart_button_entee_1_batterie</code></li>
-<li><code>sensor.hue_smart_button_entee_2_batterie</code></li>
+<li><code>sensor.hue_smart_button_entree_1_batterie</code></li>
+<li><code>sensor.hue_smart_button_entree_2_batterie</code></li>
 <li><code>sensor.hue_smart_button_salle_de_bain_batterie</code></li>
 <li><code>sensor.hue_smart_button_table_batterie</code></li>
 <li><code>sensor.inter_bureau_rodret_battery</code></li>
@@ -4579,3 +4579,6 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 
 </blockquote>
 </details>
+
+<!-- annotations_log:
+[2026-10-24] R83 / L5C1 : entity_id Hue d'entree renommes entee -> entree (Hue Smart button Entree 1 et 2), apres renommage dans HA, accord d'Eric 15:42 -->
