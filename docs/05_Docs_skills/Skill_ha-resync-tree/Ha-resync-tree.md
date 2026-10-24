@@ -17,7 +17,7 @@ Cela veut dire : mettre a jour `IA_ARBO_DETAIL.md` (comptages local, prod, GitHu
 
 L'ancien workflow (telecharger le zip GitHub et recopier GitHub vers `config_system_YAML`) est retire : il contredisait la regle "le local fait foi" et le dossier `config_system_YAML` n'existe plus en local (remplace par `config_system_SH_PY_YAML` le 2026-10-18).
 
-Ce skill suit maintenant la procedure de `ha-resync-docs` :
+Ce skill suit maintenant la procedure de l'etape C de `/ha-trigul` (reprise de l'ancien skill `ha-resync-docs`, supprime le 2026-10-20 car doublon du trigul) :
 
 1. Comparer en lecture seule, sur le PC :
    `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py"`

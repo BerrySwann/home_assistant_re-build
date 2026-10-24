@@ -49,7 +49,7 @@
 │ │                                             │                                                                                      │
 │ ├── Claude md SAVE/                           │ (CLAUDE.md + ses sauvegardes/archives ; aucun CLAUDE.md a la racine)                 │
 │ │                                             │                                                                                      │
-│ ├── TODO/                                     │ (TODO.md - backlog projet)                                                           │
+│ ├── TODO/                                     │ (TODO.html - backlog projet ; plus de md dans ce dossier)                            │
 │ │                                             │                                                                                      │
 │ ├── Github/                                   │ (10 dont 9 sauvegardes - README.md ; INDEX_GLOBAL.md renomme GLOBAL_INDEX_REPO.md et │
 │ │                                             │ deplace le 2026-10-18 vers config_system_MD/GLOBAL_INDEX_REPO/ = copie de            │

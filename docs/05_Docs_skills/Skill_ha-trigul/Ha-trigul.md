@@ -9,7 +9,7 @@ description: "Skill HA ReBuild - triangulation des docs entre local (ReBuild), p
 
 ## Objectif
 
-Trois controles enchaines, rapports ranges dans `historique\MD5\`, un sous-repertoire numerote par type de rapport (voir "Fichiers et chemins"). Lecture seule : le skill ne modifie, ne pousse et ne corrige aucun fichier de documentation. Il n'ecrit que les rapports (et, pour l'etape profonde, les copies datees de la prod dans les dossiers ORIGINAL).
+Trois controles enchaines, rapports ranges dans `historique\03_RAPPORTS\06_MD5\`, un sous-repertoire numerote par type de rapport (voir "Fichiers et chemins"). Lecture seule : le skill ne modifie, ne pousse et ne corrige aucun fichier de documentation. Il n'ecrit que les rapports (et, pour l'etape profonde, les copies datees de la prod dans les dossiers ORIGINAL).
 
 1. Superposition des 3 arbres (script python) : fait ce que fait l'audit MD5 docs cote HA (H:\.scripts\audit_md5_md_yaml.sh, qui compare la prod a GitHub), mais sur les 3 niveaux GitHub, local, prod. Il fait l'union des chemins, tous types de fichiers, met de cote ce qui est en trop ou manquant (avec son origine) et les differences de casse, puis compare le contenu de ce qui est commun. Il remplace le trigul .md en bash depuis le 2026-10-18 (decision d'Eric : le trigul .md ne voyait que les .md et partait de la liste locale, donc ne voyait ni les fichiers de la prod ou de GitHub absents du local, ni les .yaml, ni les .sh).
 2. Etape profonde : automations et scripts YAML unite par unite, puis categories HA.
@@ -31,14 +31,14 @@ Pre-requis : la session doit etre liee au PC (desktop Claude). Sans liaison, ni 
 - Lanceur avec journal de trace (decide par Eric le 2026-10-18) : `C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\trigul_run.py` (meme dossier que les scripts 1 et 2). Il lance les scripts 1, 2 et 3 sans les modifier.
 - Ancien trigul .md en bash : `...\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_3md.sh` (meme dossier que le script 1). Ne plus le lancer : il est redondant avec le script 1. Le fichier reste en place (ne pas le supprimer sans demande d'Eric).
 - Interpreteur : `python -I` (scripts 1, 2 et 3 et lanceur).
-- Dossier des rapports : `C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\`, avec un sous-repertoire numerote par type de rapport (decide par Eric le 2026-10-18) :
-  - `00_Verif_Final_trigul_arbres` : `trigul_arbres_[YYYY-MM-DD].txt` et `.html`, ecrits par le script 1 (teste le 2026-10-18 : les 2 rapports du jour y sont) ;
-  - `01_trigul_profond` : `trigul_profond_[YYYY-MM-DD].txt`, ecrit par le script 2 (verifie le 2026-10-18 : le rapport arrive bien dans ce repertoire) ;
-  - `02_categories_ha` : `categories_ha_[YYYY-MM-DD].txt`, ecrit par Claude a l'etape B2, pas par un script ;
-  - `03_verif_emplacements` : `verif_emplacements_[YYYY-MM-DD].txt`, ecrit par le script 3 (cree le 2026-10-18).
-  - `04_journal_trigul` : `trigul_journal_[YYYY-MM-DD].log`, journal de trace ecrit par le lanceur (une ligne par evenement, un fichier par jour, ajout) ;
+- Dossier des rapports : `C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\`, avec un sous-repertoire numerote par type de rapport (decide par Eric le 2026-10-18) :
+  - `00_VERIF_FINAL_TRIGUL_ARBRES` : `trigul_arbres_[YYYY-MM-DD].txt` et `.html`, ecrits par le script 1 (teste le 2026-10-18 : les 2 rapports du jour y sont) ;
+  - `01_TRIGUL_PROFOND` : `trigul_profond_[YYYY-MM-DD].txt`, ecrit par le script 2 (verifie le 2026-10-18 : le rapport arrive bien dans ce repertoire) ;
+  - `02_CATEGORIES_HA` : `categories_ha_[YYYY-MM-DD].txt`, ecrit par Claude a l'etape B2, pas par un script ;
+  - `03_VERIF_EMPLACEMENTS` : `verif_emplacements_[YYYY-MM-DD].txt`, ecrit par le script 3 (cree le 2026-10-18).
+  - `04_JOURNAL_TRIGUL` : `trigul_journal_[YYYY-MM-DD].log`, journal de trace ecrit par le lanceur (une ligne par evenement, un fichier par jour, ajout) ;
   - Un nouveau type de rapport = le repertoire suivant (`05_...`, puis `06_...`) : le creer avec son numero, puis l'ajouter ici et dans CLAUDE.md.
-  - Le menage des `.bak` de ces repertoires est fait par /histo (etape 5, chapitre "Cas particulier : historique\MD5\") : 10 sauvegardes horodatees au maximum le jour meme, 3 sauvegardes datees pour les jours passes ; les rapports eux-memes (un par jour) ne sont pas limites.
+  - Le menage des `.bak` de ces repertoires est fait par /histo (etape 5, chapitre "Cas particulier : historique\03_RAPPORTS\06_MD5\") : 10 sauvegardes horodatees au maximum le jour meme, 3 sauvegardes datees pour les jours passes ; les rapports eux-memes (un par jour) ne sont pas limites.
 - L'ancien `hermes_md5_audit_md_*.txt` n'est plus produit.
 - Rapport de l'audit HA (prod contre GitHub, pour recoupement) : `H:\.logs\md5_audit_md_yaml_[YYYY-MM-DD].txt`.
 
@@ -48,7 +48,7 @@ Les scripts peuvent etre modifies sur demande d'Eric (decision du 2026-10-17) : 
 
 ### Lancement et journal de trace (decide par Eric le 2026-10-18)
 
-Lancer le trigul avec le lanceur : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\trigul_run.py"` (environ 10 s). Il enchaine A (script 1), B1 (script 2) et C (script 3), sans modifier les scripts, et ecrit `historique\MD5\04_journal_trigul\trigul_journal_[YYYY-MM-DD].log` ligne par ligne (heure | niveau | etape | message ; niveaux INFO, SORTIE, STDERR, NOTE, OK, ATTENTION, ECHEC), chaque ligne forcee sur le disque. Apres chaque script il controle : code de retour, Traceback, depassement de temps (300 s), rapport absent, vide ou pas mis a jour pendant ce lancement (un ancien rapport serait pris pour le nouveau), marqueurs de fin du rapport (RESULTAT, controle du script : OK, ANOMALIES), dossier temporaire du profond laisse derriere, mention "injoignable" dans la sortie du script 3. Verdict par etape : OK, ATTENTION ou ECHEC. Code de retour du lanceur : 0 sans ECHEC, 1 sinon.
+Lancer le trigul avec le lanceur : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\trigul_run.py"` (environ 10 s). Il enchaine A (script 1), B1 (script 2) et C (script 3), sans modifier les scripts, et ecrit `historique\03_RAPPORTS\06_MD5\04_JOURNAL_TRIGUL\trigul_journal_[YYYY-MM-DD].log` ligne par ligne (heure | niveau | etape | message ; niveaux INFO, SORTIE, STDERR, NOTE, OK, ATTENTION, ECHEC), chaque ligne forcee sur le disque. Apres chaque script il controle : code de retour, Traceback, depassement de temps (300 s), rapport absent, vide ou pas mis a jour pendant ce lancement (un ancien rapport serait pris pour le nouveau), marqueurs de fin du rapport (RESULTAT, controle du script : OK, ANOMALIES), dossier temporaire du profond laisse derriere, mention "injoignable" dans la sortie du script 3. Verdict par etape : OK, ATTENTION ou ECHEC. Code de retour du lanceur : 0 sans ECHEC, 1 sinon.
 
 Apres le lancement :
 1. Lire les lignes ECHEC et ATTENTION du journal du jour et les mettre EN TETE du compte rendu.
@@ -60,7 +60,7 @@ Les sections A, B et C ci-dessous decrivent ce que fait chaque script et comment
 
 ### A. Superposition des 3 arbres (script 1)
 
-Lancer : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py"`. Duree : environ 5 s, un seul appel. Le script ecrit le rapport `.txt` et sa version `.html` dans `historique\MD5\00_Verif_Final_trigul_arbres\` et sauvegarde lui-meme les rapports du jour en `.bak_...` s'ils existent. Il lit la liste complete du dernier commit GitHub par l'API (api.github.com, une requete, sans telechargement) : il doit tourner sur le PC. Si la liste est tronquee ou si l'API ne repond pas, il s'arrete avec une erreur : le dire, ne pas conclure. Option `--tout` : liste aussi les fichiers SYNC dans le rapport.
+Lancer : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py"`. Duree : environ 5 s, un seul appel. Le script ecrit le rapport `.txt` et sa version `.html` dans `historique\03_RAPPORTS\06_MD5\00_VERIF_FINAL_TRIGUL_ARBRES\` et sauvegarde lui-meme les rapports du jour en `.bak_...` s'ils existent. Il lit la liste complete du dernier commit GitHub par l'API (api.github.com, une requete, sans telechargement) : il doit tourner sur le PC. Si la liste est tronquee ou si l'API ne repond pas, il s'arrete avec une erreur : le dire, ne pas conclure. Option `--tout` : liste aussi les fichiers SYNC dans le rapport.
 
 Methode :
 - Chaque niveau est scanne en entier (local et prod : disque ; GitHub : liste de l'API avec le git blob SHA-1 de chaque fichier). Les chemins sont groupes sans tenir compte de la casse, puis la casse est comparee exactement.
@@ -90,8 +90,8 @@ Autres pieges : le `.gitignore` de H: est un fichier cache (l'ecrire avec `[IO.F
 
 Comparaison unite par unite de H:\automations.yaml et H:\scripts.yaml avec les YAML locaux (prod contre local ; GitHub n'est pas compare a cette etape). Elle est integree au /trigul (moins d'une seconde pour 71 unites). Protocole complet : section PROTOCOLE TRIGUL PROFOND de CLAUDE.md.
 
-1. Lancer : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py"`. Le script suit 8 etapes numerotees (affichees `ETAPE n` et reprises dans le rapport, ligne `ETAPES :`) : (1) points bak : reserve les noms `AUTOMATIONS.YALM ORIGINAL\automations.bak_<date_heure>.yaml` et `DOCS_SCRIPT_ORIGINAL\scripts.bak_<date_heure>.yaml`, cree les dossiers, s'arrete (code 3) si un point existe deja ; (2) copie de `H:\automations.yaml` et `H:\scripts.yaml` vers ces points ; (3) MD5 de chaque fichier de la prod contre son bak : si l'un differe, ATTENTION mais l'analyse continue (decide par Eric le 2026-10-18 : c'est elle qui dit quelles automations ou quels scripts ont change) ; (4) l'analyse lit les COPIES bak, plus H: ; (5) extraction de chaque unite dans `ReBuild\_tmp_trigul_profond\` ; (6) controle final : MD5 de la prod relu apres l'analyse, ATTENTION dans le rapport si la prod a bouge pendant l'analyse ; (7) comparaison au YAML local et ecriture de `historique\MD5\01_trigul_profond\trigul_profond_[YYYY-MM-DD].txt` (sauvegarde `.bak_date_heure` si le rapport du jour existe) ; (8) effacement du dossier temporaire. Le lanceur controle que le rapport contient la ligne `ETAPES :` et les lignes AUTOMATIONS et SCRIPTS, et signale tout ATTENTION. Prod toujours plus importante que le local : une prod en avance sur le local (unites DIFFERENT) est a signaler en premier.
-2. Categories HA : lire `ha_config_get_category` (scopes automation et script), ecrire `historique\MD5\02_categories_ha\categories_ha_[YYYY-MM-DD].txt` (lignes `scope | category_id | nom | icone`, triees, en-tete `CATEGORIES HA - date heure (lues via ha_config_get_category)`), comparer aux lignes de donnees de la version precedente du meme repertoire et signaler ajouts, suppressions, renommages. Releve du 2026-10-18 : 15 categories d'automations, 0 pour les scripts, inchangees.
+1. Lancer : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py"`. Le script suit 8 etapes numerotees (affichees `ETAPE n` et reprises dans le rapport, ligne `ETAPES :`) : (1) points bak : reserve les noms `AUTOMATIONS.YALM ORIGINAL\automations.bak_<date_heure>.yaml` et `DOCS_SCRIPT_ORIGINAL\scripts.bak_<date_heure>.yaml`, cree les dossiers, s'arrete (code 3) si un point existe deja ; (2) copie de `H:\automations.yaml` et `H:\scripts.yaml` vers ces points ; (3) MD5 de chaque fichier de la prod contre son bak : si l'un differe, ATTENTION mais l'analyse continue (decide par Eric le 2026-10-18 : c'est elle qui dit quelles automations ou quels scripts ont change) ; (4) l'analyse lit les COPIES bak, plus H: ; (5) extraction de chaque unite dans `ReBuild\_tmp_trigul_profond\` ; (6) controle final : MD5 de la prod relu apres l'analyse, ATTENTION dans le rapport si la prod a bouge pendant l'analyse ; (7) comparaison au YAML local et ecriture de `historique\03_RAPPORTS\06_MD5\01_TRIGUL_PROFOND\trigul_profond_[YYYY-MM-DD].txt` (sauvegarde `.bak_date_heure` si le rapport du jour existe) ; (8) effacement du dossier temporaire. Le lanceur controle que le rapport contient la ligne `ETAPES :` et les lignes AUTOMATIONS et SCRIPTS, et signale tout ATTENTION. Prod toujours plus importante que le local : une prod en avance sur le local (unites DIFFERENT) est a signaler en premier.
+2. Categories HA : lire `ha_config_get_category` (scopes automation et script), ecrire `historique\03_RAPPORTS\06_MD5\02_CATEGORIES_HA\categories_ha_[YYYY-MM-DD].txt` (lignes `scope | category_id | nom | icone`, triees, en-tete `CATEGORIES HA - date heure (lues via ha_config_get_category)`), comparer aux lignes de donnees de la version precedente du meme repertoire et signaler ajouts, suppressions, renommages. Releve du 2026-10-18 : 15 categories d'automations, 0 pour les scripts, inchangees.
 3. Compte rendu : synthese du rapport profond, DIFFERENT et ABSENT_LOCAL (au 2026-10-18 : 62/62 automations identiques, 9/9 scripts identiques, trois exports locaux sans automation en prod : `Automations.yalm original\Automations.yaml`, `P1_SDB\h_soufflant_SDB_routage.yaml`, `P1_SDB\i_soufflant_SDB_bouton_rodret.yaml`), ecarts de categories. Ne rien corriger sans demande.
 
 ### C. Fichiers a plusieurs emplacements (script 3, decide le 2026-10-18)
@@ -101,8 +101,23 @@ Lancer : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documen
 - Fichiers suivis : tout `docs\01_docs_config_system\config_system_SH_PY_YAML\` (hors `.bak`, hors `notifs`, `themes`, `blueprints`, hors `secrets.yaml`, `scenes.yaml`, `ip_bans.yaml`) et, dans `config_system_MD`, `GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md` et `README\README.md`.
 - 5 colonnes : L (local), PR (prod racine /config), PM (prod miroir docs), GR (GitHub racine), GD (GitHub docs/). Scripts : sous-dossiers `01_scripts.sh` / `02_scripts.py` en local, a plat dans `/config/.scripts/`.
 - Verdicts : SYNC, PROD DIFFERENTE DU LOCAL, GITHUB EN ATTENTE DU BACKUP (normal juste apres un push), ABSENT (emplacements manquants) ; section 2 : PROD RACINE SEULE, PROD MIROIR SEUL, GITHUB RACINE SEUL, GITHUB DOCS SEUL ; section 3 ECARTS ATTENDUS : fichiers verrou d'editeur `#...#` en prod seule (non comptes dans les anomalies).
-- Rapport : `historique\MD5\03_verif_emplacements\verif_emplacements_[YYYY-MM-DD].txt`, dernieres lignes `ANOMALIES` et `RESULTAT`.
+- Rapport : `historique\03_RAPPORTS\06_MD5\03_VERIF_EMPLACEMENTS\verif_emplacements_[YYYY-MM-DD].txt`, dernieres lignes `ANOMALIES` et `RESULTAT`.
 - Releve du 2026-10-18 17:41 (commit f45a765c) : 97 fichiers suivis, 94 SYNC, 2 en attente du backup GitHub, 1 prod differente (`check_yaml_forme.py`), 1 verrou d'editeur en prod (depuis, ecart attendu, section 3 du rapport). Repere seulement : relire le rapport du jour.
+
+### C2. Analyser les ecarts de l'etape C (repris de l'ancien skill ha-resync-docs, supprime le 2026-10-20 car doublon du trigul)
+
+Le LOCAL fait foi, la prod ne doit jamais etre en avance sur le local, GitHub n'est qu'un reflet de la prod via le backup HA. Ne jamais copier GitHub vers le local sans ordre explicite d'Eric, fichier par fichier. Les dossiers `themes/`, `blueprints/` et `notifs/` restent en prod seule.
+
+| Cas | Action |
+|:----|:-------|
+| PROD DIFFERENTE DU LOCAL | Le local fait foi : proposer `/ha-push-yaml`. Si la prod a ete modifiee a la main (ecart non explique), le signaler a Eric avant tout push. |
+| GITHUB EN ATTENTE DU BACKUP | Normal apres un push : le backup HA lance par Eric mettra GitHub a jour. |
+| Present en prod ou sur GitHub, absent du local | Le signaler a Eric (fichier cree en prod a la main ?). Copie vers le local uniquement sur son ordre. |
+| Absent de la prod | Proposer `/ha-push-yaml`. |
+
+Copie vers le local (uniquement sur ordre explicite d'Eric) : fichier par fichier, depuis la prod `H:\` (pas depuis GitHub, qui peut etre en retard), apres sauvegarde `.bak_AAAA_MM_JJ_HHhMMmSSs` du fichier local s'il existe. Signaler chaque copie et l'ecrire au journal des modifs. Proposer /sync_index si des entites cles ont change.
+
+Regles : `secrets.yaml` ne se copie JAMAIS, dans aucun sens. Les `.md` ne se synchronisent JAMAIS par ce skill (source de verite locale, geres par /ha-push-docs).
 
 ## Etat de reference du 2026-10-18 (08h02, GitHub au commit b6eddd9 du backup de 01h30)
 
@@ -116,7 +131,7 @@ Second releve du 2026-10-18 (relance du script 1 a 10h26, GitHub au commit c7230
 - Donner les lignes `ANOMALIES`, `RESULTAT AUDIT` et `RESULTAT` du script 1, la synthese de l'etape profonde et les lignes `ANOMALIES` et `RESULTAT` du script 3, telles quelles.
 - Lister les ecarts hors ecarts attendus : fichier, origine ou niveau en retard. Pour la section 1, donner le nombre par origine puis les exemples utiles ; le detail complet est dans le rapport. S'il n'y a pas d'anomalie, le dire (`ANOMALIES : aucune`).
 - Une fois les resultats donnes, Eric cherche les fichiers manquants ou differents : proposer d'enqueter en lecture seule sur les groupes (empreinte identique sous un autre nom, anciens noms, orphelins) avant toute action.
-- Donner les chemins des rapports, dans leurs repertoires numerotes de `historique\MD5\` (`00_Verif_Final_trigul_arbres`, `01_trigul_profond`, `02_categories_ha`, `03_verif_emplacements`, `04_journal_trigul`).
+- Donner les chemins des rapports, dans leurs repertoires numerotes de `historique\03_RAPPORTS\06_MD5\` (`00_VERIF_FINAL_TRIGUL_ARBRES`, `01_TRIGUL_PROFOND`, `02_CATEGORIES_HA`, `03_VERIF_EMPLACEMENTS`, `04_JOURNAL_TRIGUL`).
 - Ne rien pousser, renommer ni supprimer sans demande, cas par cas. Pour une prod en retard, proposer ha-push-md, ha-push-docs ou ha-push-yaml. Pour GitHub : jamais de push direct, le depot est alimente par le backup HA lance par Eric.
 - Ajouter une ligne au journal des modifs du jour pour les rapports ecrits (skill journal-modifs ; une ligne LOT suffit).
 - Repondre en francais, concis, sans emojis ni tableaux.

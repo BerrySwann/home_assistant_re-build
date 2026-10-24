@@ -69,4 +69,4 @@ Utiliser les vrais caracteres Unicode : coins carres (U+250C/2510/2514/2518), ba
 
 Nommage : `P{N}_TYPE_NOM_AMHQ.yaml` si multi-cycles, sinon `P{N}_TYPE_NOM.yaml` (suivre aussi le document de nommage `IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md`).
 
-Apres generation, proposer `/sync_index`. La mise en prod se fait avec `/ha-push-yaml`, qui pousse vers la racine `H:\` ET le miroir `H:\docs\01_docs_config_system\config_system_SH_PY_YAML\`.
+Apres generation, lancer `/ha-verif-headers` sur le fichier (controle en lecture seule des boites ASCII, des 5 headers, du slug, du name et du unique_id), puis proposer `/sync_index`. La mise en prod se fait avec `/ha-push-yaml`, qui pousse vers la racine `H:\` ET le miroir `H:\docs\01_docs_config_system\config_system_SH_PY_YAML\`.

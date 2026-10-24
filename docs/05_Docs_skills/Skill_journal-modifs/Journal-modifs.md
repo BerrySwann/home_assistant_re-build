@@ -11,7 +11,8 @@ Eviter les modifications sans trace ni auteur (constate le 2026-10-10 : CLAUDE.m
 
 ## Emplacements
 
-- Maitre (local) : `C:\Users\Berry Swann\Documents\ReBuild\historique\modifs\MODIFS_AAAA-MM-JJ_<auteur>.md`
+- Maitre (local) : `C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\01_MODIFS_IA\MODIFS_AAAA-MM-JJ_<auteur>.md`
+- Ancien chemin historique\modifs\ : dossier deplace en entier le 2026-10-21 (ordre d'Eric), ne plus le recreer. La copie prod H:\docs\modifs\ ne change pas.
 - Copie prod : `H:\docs\modifs\MODIFS_AAAA-MM-JJ_<auteur>.md`
 - `<auteur>` : `claude` ou `hermes` (minuscules). Un autre agent prend son propre nom.
 - Chaque agent n'ecrit QUE dans son fichier, jamais dans celui de l'autre (evite les ecritures simultanees).
@@ -54,7 +55,7 @@ Au-dela de 10 fichiers dans une meme operation (menage .bak, push d'un dossier, 
 $a='claude'   # ou 'hermes'
 $d=Get-Date -Format 'yyyy-MM-dd'
 $enc=New-Object Text.UTF8Encoding($false)
-$f="C:\Users\Berry Swann\Documents\ReBuild\historique\modifs\MODIFS_${d}_$a.md"
+$f="C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\01_MODIFS_IA\MODIFS_${d}_$a.md"
 New-Item -ItemType Directory -Force (Split-Path $f) | Out-Null
 if(-not (Test-Path $f)){ [IO.File]::WriteAllText($f,"# MODIFS $d - $a`r`n",$enc) }
 $ligne='{0} | {1} | MODIFIE | {2} | avant={3} apres={4} | {5}' -f (Get-Date -Format 'yyyy-MM-dd HH:mm:ss'),$a,$chemin,$avant,$apres,$raison
