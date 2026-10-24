@@ -1,15 +1,17 @@
 # Skills Hermes - inventaire vertical
 
-Date : 2026-10-17 (v3) | 186 skills actives (hors `.archive` : 46 archivees)
+Date : 2026-10-17 (v3) | 185 skills actives (hors `.archive` : 46 archivees)
 
 Changements depuis la v2 (2026-10-11) : 4 skills supprimees le 16/10 (clim-smartir-daikin, ha-kiosk-visio, html-scroll-animations, suno-web-app-workflow), ha-maj renommee (source Claude : ha-update-check-cli).
 
-Les 15 skills communes avec Claude sont en face a face (corps identique, alignement du 2026-10-17 16h05).
+Mise a jour 2026-10-24 : ha-resync-docs retire (supprime cote projet le 2026-10-20, dossier Hermes envoye a la corbeille le 2026-10-24) : communes 15 -> 14, total 186 -> 185. Les autres comptages datent du 2026-10-17 et ne sont pas recalcules (le doublon skill-library-mirroring a aussi ete supprime cote Hermes le 2026-10-24).
+
+Les 14 skills communes avec Claude sont en face a face (corps identique, alignement du 2026-10-17 16h05).
 Les skills propres a Hermes sont regroupees par sujet : les skills d'un meme theme sont les unes sous les autres.
 
 ---
 
-## 1. Skills communes Claude = Hermes (15)
+## 1. Skills communes Claude = Hermes (14)
 
 | # | Skill | Claude (`.claude/skills/`) | Hermes (`D:/hermes/skills/`) |
 |---:|---|---|---|
@@ -18,16 +20,15 @@ Les skills propres a Hermes sont regroupees par sujet : les skills d'un meme the
 | 3 | `ha-push-docs` | `.claude/skills/ha-push-docs/SKILL.md` | `smart-home/ha-push-docs/SKILL.md` |
 | 4 | `ha-push-md` | `.claude/skills/ha-push-md/SKILL.md` | `smart-home/ha-push-md/SKILL.md` |
 | 5 | `ha-push-yaml` | `.claude/skills/ha-push-yaml/SKILL.md` | `smart-home/ha-push-yaml/SKILL.md` |
-| 6 | `ha-resync-docs` | `.claude/skills/ha-resync-docs/SKILL.md` | `smart-home/ha-resync-docs/SKILL.md` |
-| 7 | `ha-resync-tree` | `.claude/skills/ha-resync-tree/SKILL.md` | `smart-home/ha-resync-tree/SKILL.md` |
-| 8 | `ha-status` | `.claude/skills/ha-status/SKILL.md` | `smart-home/ha-status/SKILL.md` |
-| 9 | `ha-trigul` | `.claude/skills/ha-trigul/SKILL.md` | `smart-home/ha-trigul/SKILL.md` |
-| 10 | `histo` | `.claude/skills/histo/SKILL.md` | `note-taking/histo/SKILL.md` |
-| 11 | `histo-final` | `.claude/skills/histo-final/SKILL.md` | `note-taking/histo-final/SKILL.md` |
-| 12 | `journal-modifs` | `.claude/skills/journal-modifs/SKILL.md` | `journal-modifs/SKILL.md` |
-| 13 | `sync-index` | `.claude/skills/sync-index/SKILL.md` | `smart-home/sync-index/SKILL.md` |
-| 14 | `update-arbo` | `.claude/skills/update-arbo/SKILL.md` | `smart-home/update-arbo/SKILL.md` |
-| 15 | `ha-maj (source: ha-update-check-cli)` | `.claude/skills/ha-maj/SKILL.md` | `smart-home/ha-maj/SKILL.md` |
+| 6 | `ha-resync-tree` | `.claude/skills/ha-resync-tree/SKILL.md` | `smart-home/ha-resync-tree/SKILL.md` |
+| 7 | `ha-status` | `.claude/skills/ha-status/SKILL.md` | `smart-home/ha-status/SKILL.md` |
+| 8 | `ha-trigul` | `.claude/skills/ha-trigul/SKILL.md` | `smart-home/ha-trigul/SKILL.md` |
+| 9 | `histo` | `.claude/skills/histo/SKILL.md` | `note-taking/histo/SKILL.md` |
+| 10 | `histo-final` | `.claude/skills/histo-final/SKILL.md` | `note-taking/histo-final/SKILL.md` |
+| 11 | `journal-modifs` | `.claude/skills/journal-modifs/SKILL.md` | `journal-modifs/SKILL.md` |
+| 12 | `sync-index` | `.claude/skills/sync-index/SKILL.md` | `smart-home/sync-index/SKILL.md` |
+| 13 | `update-arbo` | `.claude/skills/update-arbo/SKILL.md` | `smart-home/update-arbo/SKILL.md` |
+| 14 | `ha-maj (source: ha-update-check-cli)` | `.claude/skills/ha-maj/SKILL.md` | `smart-home/ha-maj/SKILL.md` |
 
 ---
 
@@ -288,7 +289,7 @@ Les skills propres a Hermes sont regroupees par sujet : les skills d'un meme the
 
 | Sujet | Nombre |
 |---|---:|
-| Communes Claude = Hermes | 15 |
+| Communes Claude = Hermes | 14 |
 | Home Assistant - prod & exploitation | 8 |
 | Home Assistant - dashboards & pages | 3 |
 | Home Assistant - clim & chauffage | 1 |
@@ -315,5 +316,5 @@ Les skills propres a Hermes sont regroupees par sujet : les skills d'un meme the
 | Systeme - materiel, RGB & audio | 6 |
 | Apple (macOS) | 4 |
 | Gaming & divers | 5 |
-| **Total actives** | **186** |
+| **Total actives** | **185** |
 | Archivees (`.archive`) | 46 |

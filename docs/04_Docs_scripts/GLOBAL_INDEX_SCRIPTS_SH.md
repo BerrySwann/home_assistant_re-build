@@ -1,6 +1,6 @@
 # GLOBAL_INDEX_SCRIPTS_SH.md - index des scripts shell et python
 
-Fichier GENERE le 2026-10-18 21:58 par docs/04_docs_scripts/docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-10-23 22:51 par docs/04_docs_scripts/docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 ## Difference entre l'index SH et l'index YAML
 
@@ -11,8 +11,8 @@ Fichier GENERE le 2026-10-18 21:58 par docs/04_docs_scripts/docs_scripts_SH/gen_
 
 ## Controle
 
-- Scripts SH indexes : 17
-- Scripts sans fiche dans docs_scripts_SH_MD : 7 (Check_GLOBAL_INDEX.py, Check_sous_context_ia.py, Gen_GLOBAL_INDEX_automations.py, Gen_GLOBAL_INDEX_ia.py, Gen_GLOBAL_INDEX_scripts.py, Gen_GLOBAL_INDEX_vignettes_pages.py, Mf_vigilance_images.sh)
+- Scripts SH indexes : 21
+- Scripts sans fiche dans docs_scripts_SH_MD : 9 (Check_GLOBAL_INDEX.py, Check_sous_context_ia.py, Gen_GLOBAL_INDEX_automations.py, Gen_GLOBAL_INDEX_ia.py, Gen_GLOBAL_INDEX_scripts.py, Gen_GLOBAL_INDEX_vignettes_pages.py, Mf_vigilance_images.sh, histo_html.py, histo_trace.py)
 - Scripts presents dans H:\.scripts avec un contenu different du local : 1 (Audit_md5_md_yaml.sh)
 - Les scripts 'absent de H:\.scripts' tournent sur le PC ou ne sont pas deployes : a lire avec la colonne Skill.
 
@@ -36,4 +36,8 @@ Fichier GENERE le 2026-10-18 21:58 par docs/04_docs_scripts/docs_scripts_SH/gen_
 | [hermes_audit_trigul_arbres.py](docs_scripts_SH/Hermes_audit_md5_trigul_3md/hermes_audit_trigul_arbres.py) | python | absent de H:\.scripts | - | - | ha-trigul | [Hermes_audit_trigul_arbres.md](docs_scripts_SH_MD/Hermes_audit_trigul_arbres/Hermes_audit_trigul_arbres.md) | Hermes_audit_md5_trigul_3md |
 | [trigul_run.py](docs_scripts_SH/Hermes_audit_md5_trigul_3md/trigul_run.py) | python | absent de H:\.scripts | - | - | ha-trigul | [Trigul_run.md](docs_scripts_SH_MD/Trigul_run/Trigul_run.md) | Hermes_audit_md5_trigul_3md |
 | [Mf_vigilance_images.sh](docs_scripts_SH/Mf_vigilance_images/Mf_vigilance_images.sh) | bash | absent de H:\.scripts | - | - | - | aucune | Mf_vigilance_images |
-| [Verif_emplacements.py](docs_scripts_SH/Verif_emplacements/Verif_emplacements.py) | python | absent de H:\.scripts | - | - | fix-file, ha-new-yaml, ha-push-docs, ha-push-yaml, ha-resync-docs, ha-resync-tree, ha-trigul, ha-update-check-cli, histo, histo-final, sync-index, update-arbo | [Verif_emplacements.md](docs_scripts_SH_MD/Verif_emplacements/Verif_emplacements.md) | Verif_emplacements |
+| [Verif_emplacements.py](docs_scripts_SH/Verif_emplacements/Verif_emplacements.py) | python | absent de H:\.scripts | - | - | fix-file, ha-new-yaml, ha-push-docs, ha-push-yaml, ha-resync-tree, ha-trigul, ha-update-check-cli, ha-verif-headers, histo, histo-final, sync-index, update-arbo | [Verif_emplacements.md](docs_scripts_SH_MD/Verif_emplacements/Verif_emplacements.md) | Verif_emplacements |
+| [Verif_headers_yaml.py](docs_scripts_SH/Verif_headers_yaml/Verif_headers_yaml.py) | python | absent de H:\.scripts | - | - | ha-verif-headers | [Verif_headers_yaml.md](docs_scripts_SH_MD/Verif_headers_yaml/Verif_headers_yaml.md) | Verif_headers_yaml |
+| [Verif_integrations_file.py](docs_scripts_SH/Verif_integrations_file/Verif_integrations_file.py) | python | absent de H:\.scripts | - | - | histo | [Verif_integrations_file.md](docs_scripts_SH_MD/Verif_integrations_file/Verif_integrations_file.md) | Verif_integrations_file |
+| [histo_html.py](docs_scripts_SH/histo_html/histo_html.py) | python | absent de H:\.scripts | - | - | histo, histo-final | aucune | histo_html |
+| [histo_trace.py](docs_scripts_SH/histo_trace/histo_trace.py) | python | absent de H:\.scripts | - | - | histo, histo-final | aucune | histo_trace |
