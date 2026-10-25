@@ -200,13 +200,12 @@ cards:
         colorize_icon: true
         indicator: dot
         min: 0
-        max: 6000
+        max: 150
         max_decimals: 0
         colour:
           '0': green
-          '2000': orange
-          '3000': orange
-          '4000': red
+          '70': orange
+          '100': red
         card_mod:
           style: |
             ha-card {
@@ -261,14 +260,13 @@ cards:
         bottom_element: name
         colorize_icon: true
         indicator: dot
-        min: 0
+        min: 3000
         max: 6000
         max_decimals: 0
         colour:
-          '0': green
-          '2000': orange
-          '3000': orange
-          '4000': red
+          '3000': green
+          '4000': orange
+          '5000': red
         card_mod:
           style: |
             ha-card {
