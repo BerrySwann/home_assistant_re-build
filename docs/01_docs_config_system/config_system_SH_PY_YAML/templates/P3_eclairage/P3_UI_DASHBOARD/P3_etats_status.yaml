@@ -285,8 +285,8 @@
 # --- lumiere_chambre_etat ---
     - name: "Lumière Chambre État"
       unique_id: lumiere_chambre_etat
-      state: "{{ 'Allumé' if is_state('light.chambre', 'on') else 'Éteint' }}"
-      icon: "{{ 'hue:flourish-alt' if is_state('light.chambre', 'on') else 'hue:flourish' }}"
+      state: "{{'Allumé' if is_state('light.chambre', 'on') else 'Éteint' }}"
+      icon: "{{'hue:flourish-alt' if is_state('light.chambre', 'on') else 'hue:flourish' }}"
 
 # --- lumiere_tete_de_lit_etat ---
     - name: "Lumière Tête de Lit État"
@@ -328,3 +328,4 @@
 #           {{ 'mdi:home-outline' if s else 'mdi:home-variant-outline' }}
 #         {% endif %}
 # [2026-10-24] NOTE R91 : les annotations de l'edition Claude 16:19 (espace apres {{ retire sur 8 lignes) et de l'edition d'Eric 16:41 ne figuraient pas dans ce fichier. Etat constate avant cette suppression = sauvegarde 16:14 + 6 lignes modifiees (l.113 114 123 124 240 241 : espace apres {{ retire). Les l.295 296 (chambre) gardent leur espace.
+# [2026-10-25] MOD (ordre d'Eric 09:02, R91 / R108.3) : espace apres {{ retire sur l.288 et l.289 (chambre, ex-l.295 296), sans effet fonctionnel ; avant : state: "{{ 'Allume' ... et icon: "{{ 'hue:flourish-alt' ... ; sauvegarde P3_etats_status.bak_2026_10_25_09h03m14s.yaml.
