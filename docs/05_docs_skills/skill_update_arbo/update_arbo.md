@@ -5,7 +5,7 @@ description: "Skill HA ReBuild - met a jour IA_ARBO_DETAIL.md (comptages LOCAL +
 
 # Skill : /update-arbo - Mise a jour IA_ARBO_DETAIL.md
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 ## Objectif
 
@@ -16,8 +16,8 @@ apres chaque session qui modifie le nombre de fichiers.
 
 | Fichier | Chemin |
 |:--------|:-------|
-| Local   | `C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md` |
-| Prod    | `H:\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md` |
+| Local   | `C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\00_SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md` |
+| Prod    | `H:\docs\00_IA\00_SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md` |
 
 ## Protocole d'execution
 
@@ -29,17 +29,17 @@ $base = "C:\Users\Berry Swann\Documents\ReBuild"
 $docs_total  = (Get-ChildItem "$base\docs" -Recurse -File).Count
 $histo_total = (Get-ChildItem "$base\historique" -File).Count
 $docs_01     = (Get-ChildItem "$base\docs\01_docs_config_system" -Recurse -File).Count
-$cfg_yaml    = (Get-ChildItem "$base\docs\01_docs_config_system\config_system_SH_PY_YAML" -Recurse -File).Count
-$cfg_md      = (Get-ChildItem "$base\docs\01_docs_config_system\config_system_MD" -Recurse -File).Count
+$cfg_yaml    = (Get-ChildItem "$base\docs\01_docs_config_system\01_config_system_SH_PY_YAML" -Recurse -File).Count
+$cfg_md      = (Get-ChildItem "$base\docs\01_docs_config_system\01_config_system_MD" -Recurse -File).Count
 $docs_02     = (Get-ChildItem "$base\docs\02_docs_dashboard" -Recurse -File).Count
 $docs_03     = (Get-ChildItem "$base\docs\03_docs_automations" -Recurse -File).Count
 $docs_04     = (Get-ChildItem "$base\docs\04_docs_scripts" -Recurse -File).Count
 $docs_05     = (Get-ChildItem "$base\docs\XX_docs_MD_system" -Recurse -File).Count
-$dash_complet= (Get-ChildItem "$base\docs\02_docs_dashboard\02_dashboard_docs_yaml\Dashboard_COMPLET" -Filter "*.yaml").Count
+$dash_complet= (Get-ChildItem "$base\docs\02_docs_dashboard\02_dashboard_docs_YAML\Dashboard_COMPLET" -Filter "*.yaml").Count
 
 Write-Host "LOCAL docs/ total   : $docs_total"
 Write-Host "  historique/       : $histo_total"
-Write-Host "  01_docs_config/   : $docs_01 (config_system_SH_PY_YAML : $cfg_yaml ; config_system_MD : $cfg_md)"
+Write-Host "  01_docs_config/   : $docs_01 (01_config_system_SH_PY_YAML : $cfg_yaml ; 01_config_system_MD : $cfg_md)"
 Write-Host "  02_docs_dashboard : $docs_02 (Dashboard_COMPLET : $dash_complet yaml)"
 Write-Host "  03_docs_automations: $docs_03"
 Write-Host "  04_docs_scripts   : $docs_04"
@@ -100,7 +100,7 @@ Les arbres sont une grille a deux colonnes de largeur fixe : un remplacement qui
 3. `releve YYYY-MM-DD ; = H:\` dans le bloc arbo PROD -> date du jour
 4. `docs/ (NNN fichiers` -> nouveau comptage LOCAL
 5. `historique/ (NN` -> nouveau comptage
-6. `01_docs_config_system/ (NN` dans LOCAL -> nouveau comptage + note (sous-dossiers config_system_MD et config_system_SH_PY_YAML)
+6. `01_docs_config_system/ (NN` dans LOCAL -> nouveau comptage + note (sous-dossiers 01_config_system_MD et 01_config_system_SH_PY_YAML)
 7. `02_docs_dashboard/ (NN` dans LOCAL -> nouveau comptage
 8. `Dashboard_YYYY_MM-DD.yaml (export le plus recent)` -> nom du dernier dashboard
 9. `docs/ (NNN` dans PROD -> nouveau comptage
@@ -111,8 +111,8 @@ Les arbres sont une grille a deux colonnes de largeur fixe : un remplacement qui
 ### Etape 5 - Pousser vers H:\docs
 
 ```powershell
-$src  = "C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md"
-$dest = "H:\docs\00_IA\SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md"
+$src  = "C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\00_SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md"
+$dest = "H:\docs\00_IA\00_SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md"
 Copy-Item $src $dest -Force
 $h1 = (Get-FileHash $src  -Algorithm MD5).Hash
 $h2 = (Get-FileHash $dest -Algorithm MD5).Hash

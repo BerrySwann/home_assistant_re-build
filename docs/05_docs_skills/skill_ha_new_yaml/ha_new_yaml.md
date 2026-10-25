@@ -5,7 +5,7 @@ description: "Skill HA ReBuild - genere un squelette YAML conforme aux conventio
 
 # HA New YAML - Generation de Squelette Conforme
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 Genere un fichier YAML vide mais entierement conforme aux conventions du projet HA ReBuild :
 bordures ASCII, headers obligatoires, slug tertiaire, name/unique_id coherents.
@@ -62,11 +62,11 @@ Utiliser les vrais caracteres Unicode : coins carres (U+250C/2510/2514/2518), ba
 
 | Type | Chemin Windows |
 |:-----|:---------------|
-| sensor | `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\sensors\P{N}_{domaine}\` |
-| template | `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\templates\P{N}_{domaine}\` |
-| utility_meter | `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\utility_meter\P{N}_{domaine}\` |
-| command_line | `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\command_line\` |
+| sensor | `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\01_config_system_SH_PY_YAML\sensors\P{N}_{domaine}\` |
+| template | `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\01_config_system_SH_PY_YAML\templates\P{N}_{domaine}\` |
+| utility_meter | `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\01_config_system_SH_PY_YAML\utility_meter\P{N}_{domaine}\` |
+| command_line | `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\01_config_system_SH_PY_YAML\command_line\` |
 
 Nommage : `P{N}_TYPE_NOM_AMHQ.yaml` si multi-cycles, sinon `P{N}_TYPE_NOM.yaml` (suivre aussi le document de nommage `IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md`).
 
-Apres generation, lancer `/ha-verif-headers` sur le fichier (controle en lecture seule des boites ASCII, des 5 headers, du slug, du name et du unique_id), puis proposer `/sync_index`. La mise en prod se fait avec `/ha-push-yaml`, qui pousse vers la racine `H:\` ET le miroir `H:\docs\01_docs_config_system\config_system_SH_PY_YAML\`.
+Apres generation, lancer `/ha-verif-headers` sur le fichier (controle en lecture seule des boites ASCII, des 5 headers, du slug, du name et du unique_id), puis proposer `/sync_index`. La mise en prod se fait avec `/ha-push-yaml`, qui pousse vers la racine `H:\` ET le miroir `H:\docs\01_docs_config_system\01_config_system_SH_PY_YAML\`.

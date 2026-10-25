@@ -3,30 +3,30 @@ name: "ha-push-yaml"
 description: "Skill HA ReBuild - pousse des YAML config locaux vers la prod HA (racine H:\\ ET miroir docs), sauvegarde locale .bak avant modification, MD5-first. Declencher sur : pousse le yaml en prod, deploie le fichier YAML, on met ca en prod."
 ---
 
-# HA Push YAML - Local config_system_SH_PY_YAML -> Prod H:\
+# HA Push YAML - Local 01_config_system_SH_PY_YAML -> Prod H:\
 
 > OPERATION CRITIQUE : un YAML mal forme ou pousse au mauvais endroit peut casser HA.
 > Logique MD5-first : si le fichier est identique en prod, le push est annule.
 
 ## CHEMINS DE REFERENCE
 
-- **Source (Windows)** : `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\`
+- **Source (Windows)** : `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\01_config_system_SH_PY_YAML\`
 
-`config_system_SH_PY_YAML\` est l'IMAGE LOCALE de la prod (H:\) : chaque fichier y a le meme
+`01_config_system_SH_PY_YAML\` est l'IMAGE LOCALE de la prod (H:\) : chaque fichier y a le meme
 nom et le meme chemin relatif que sur H:\ (jamais de suffixe dans le nom du fichier
 courant), pour rester comparable 1:1 avec la prod a tout moment. Le LOCAL fait foi :
 la prod ne doit jamais etre en avance sur le local (regle d'Eric du 2026-10-18).
 
 **Carte des emplacements (source unique, a lire en cas de doute)** :
-`docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md`.
+`docs\00_IA\00_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md`.
 Chaque fichier de config existe a 5 emplacements : local (L), prod racine `/config` (PR = H:\),
-prod miroir docs (PM = `H:\docs\01_docs_config_system\config_system_SH_PY_YAML\`),
+prod miroir docs (PM = `H:\docs\01_docs_config_system\01_config_system_SH_PY_YAML\`),
 GitHub racine (GR) et GitHub `docs/` (GD). Ce skill pousse vers PR ET PM (jamais un seul
 des deux). GitHub suit au backup HA lance par Eric (jamais de push direct).
 
-| Source locale (sous config_system_SH_PY_YAML\) | Prod racine (PR) | Prod miroir (PM) |
+| Source locale (sous 01_config_system_SH_PY_YAML\) | Prod racine (PR) | Prod miroir (PM) |
 |:---|:---|:---|
-| sensors/, templates/, utility_meter/, command_line/, groups/, input_booleans/, input_number/, shell_command/, timers/ | H:\<meme chemin> | H:\docs\01_docs_config_system\config_system_SH_PY_YAML\<meme chemin> |
+| sensors/, templates/, utility_meter/, command_line/, groups/, input_booleans/, input_number/, shell_command/, timers/ | H:\<meme chemin> | H:\docs\01_docs_config_system\01_config_system_SH_PY_YAML\<meme chemin> |
 | configuration.yaml, sql.yaml, input_button.yaml, input_datetime.yaml, input_select.yaml | H:\<fichier> | idem miroir |
 | .scripts\01_scripts.sh\*.sh et .scripts\02_scripts.py\*.py | H:\.scripts\<fichier> (A PLAT) | idem miroir (avec sous-dossier) |
 | scripts\*.sh | H:\scripts\<fichier> | idem miroir |
@@ -50,7 +50,7 @@ Scripts `.sh` / `.py` : push vers `H:\.scripts\` ou `H:\scripts\` uniquement sur
 ### 0 - AVANT TOUTE MODIFICATION D'UN FICHIER EXISTANT : sauvegarde locale
 
 ```powershell
-$src = "C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\{sous-chemin}\{fichier}.yaml"
+$src = "C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\01_config_system_SH_PY_YAML\{sous-chemin}\{fichier}.yaml"
 
 if (Test-Path $src) {
   $suffixe = Get-Date -Format "yyyy_MM_dd_HH'h'mm'm'ss's'"   # ex 2026_10_08_12h07m20s
@@ -86,7 +86,7 @@ compare puis pousse vers la prod aux etapes suivantes.
 
 ### 1 - MD5 local du fichier cible
 ```powershell
-$src = "C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\{sous-chemin}\{fichier}.yaml"
+$src = "C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\01_config_system_SH_PY_YAML\{sous-chemin}\{fichier}.yaml"
 $localHash = (Get-FileHash $src -Algorithm MD5).Hash
 Write-Host "Local : $localHash"
 ```
@@ -94,7 +94,7 @@ Write-Host "Local : $localHash"
 ### 2 - MD5 prod aux DEUX emplacements (racine PR et miroir PM)
 ```powershell
 $dest   = "H:\{sous-chemin racine}\{fichier}.yaml"   # PR (scripts : a plat dans H:\.scripts\)
-$destPM = "H:\docs\01_docs_config_system\config_system_SH_PY_YAML\{sous-chemin}\{fichier}.yaml"   # PM
+$destPM = "H:\docs\01_docs_config_system\01_config_system_SH_PY_YAML\{sous-chemin}\{fichier}.yaml"   # PM
 $prodHash = if (Test-Path $dest)   { (Get-FileHash $dest   -Algorithm MD5).Hash } else { $null }
 $pmHash   = if (Test-Path $destPM) { (Get-FileHash $destPM -Algorithm MD5).Hash } else { $null }
 Write-Host "Prod racine : $(if($prodHash){$prodHash}else{'ABSENT'})"
@@ -123,7 +123,7 @@ signaler a Eric (la prod ne doit pas etre en avance, mais on ne l'ecrase pas san
 - YAML valide : pas de tabulations, au moins 1 `unique_id:`
 
 ```powershell
-$f = "C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\{sous-chemin}\{fichier}.yaml"
+$f = "C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\01_config_system_SH_PY_YAML\{sous-chemin}\{fichier}.yaml"
 if (Select-String -Path $f -Pattern "`t" -Quiet) { "TABULATIONS DETECTEES" } else { "OK pas de tabulation" }
 (Select-String -Path $f -Pattern "unique_id:").Count
 ```
@@ -157,7 +157,7 @@ sauvegarde la plus recente) :
 $nomSansBak = (Split-Path $src -Leaf) -replace '\.bak_\d{4}_\d{2}_\d{2}(_\d{2}h\d{2}m\d{2}s)?$', ''
 $dest = Join-Path "H:\{sous-chemin racine}" $nomSansBak
 
-$destPM = Join-Path "H:\docs\01_docs_config_system\config_system_SH_PY_YAML\{sous-chemin}" $nomSansBak
+$destPM = Join-Path "H:\docs\01_docs_config_system\01_config_system_SH_PY_YAML\{sous-chemin}" $nomSansBak
 
 foreach ($d in $dest, $destPM) {
   New-Item -ItemType Directory -Path (Split-Path $d) -Force | Out-Null
@@ -179,7 +179,7 @@ foreach ($d in $dest, $destPM) {
 ```
 
 Controle global facultatif (lecture seule, 5 emplacements) :
-`$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_sh\Verif_emplacements\Verif_emplacements.py"`
+`$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py"`
 (rapport dans `historique\MD5\03_verif_emplacements\`). Apres le push, le fichier doit
 sortir SYNC ou GITHUB EN ATTENTE DU BACKUP.
 
@@ -208,7 +208,7 @@ sortir SYNC ou GITHUB EN ATTENTE DU BACKUP.
 10. **Un souci (collision de nom, date illisible, sauvegarde douteuse) : le signaler a
     l'utilisateur et ne rien supprimer.**
 11. **Deux destinations en prod** (decide par Eric le 2026-10-18) : racine `H:\` (PR) ET
-    miroir `H:\docs\01_docs_config_system\config_system_SH_PY_YAML\` (PM), MD5 verifie sur
+    miroir `H:\docs\01_docs_config_system\01_config_system_SH_PY_YAML\` (PM), MD5 verifie sur
     chacune. Jamais un seul des deux. Voir `IA_CARTE_EMPLACEMENTS.md`.
 12. **Prod seule** : themes/, blueprints/, notifs/, scenes.yaml, ip_bans.yaml, secrets.yaml ne
     sont jamais pousses (decisions d'Eric du 2026-10-18).

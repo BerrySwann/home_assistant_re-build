@@ -5,7 +5,7 @@ description: "Skill HA ReBuild - analyse une erreur Home Assistant et retourne U
 
 # Skill : /fix_file - Correcteur YAML Home Assistant
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 ## Objectif
 
@@ -21,9 +21,9 @@ Reperer :
 - Le **type d'erreur** (YAML syntax, entite inconnue, plateforme deprecee, unique_id manquant, etc.)
 - Le **bloc precis** a corriger
 
-Si le fichier existe dans `config_system_SH_PY_YAML/` (local), le lire avant de corriger.
+Si le fichier existe dans `01_config_system_SH_PY_YAML/` (local), le lire avant de corriger.
 
-**Chemin local :** `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\`
+**Chemin local :** `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\01_config_system_SH_PY_YAML\`
 
 ### 2. Appliquer les regles du projet
 

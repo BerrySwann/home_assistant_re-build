@@ -22,7 +22,7 @@ Zero discours, zero repetition de code deja valide.
 Dans l'ordre de priorite :
 1. L'historique de la conversation en cours (fichiers mentionnes, validations, erreurs)
 2. `docs\XX_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md` (etat des chaines)
-3. Fichiers recents dans `docs\01_docs_config_system\config_system_SH_PY_YAML\` (dates de modification)
+3. Fichiers recents dans `docs\01_docs_config_system\01_config_system_SH_PY_YAML\` (dates de modification)
 
 ### 2. Format de reponse obligatoire
 

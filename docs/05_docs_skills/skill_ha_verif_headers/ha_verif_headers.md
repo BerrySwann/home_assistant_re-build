@@ -5,9 +5,9 @@ description: "Skill HA ReBuild - verifie en lecture seule les en-tetes des YAML 
 
 # HA Verif Headers - controle des en-tetes des YAML de config
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` et le controle `Verif_emplacements.py` (decide par Eric le 2026-10-18).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` et le controle `Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
-Cree le 2026-10-20 sur demande d'Eric. Verifie qu'un YAML de `docs\01_docs_config_system\config_system_SH_PY_YAML\` respecte les normes du `Claude md SAVE\CLAUDE.md` : sections 4 (bordures ASCII), 5 (5 headers obligatoires), 7 (slug tertiaire), 8 (name et unique_id). LECTURE SEULE : le skill ne corrige rien sans ordre d'Eric.
+Cree le 2026-10-20 sur demande d'Eric. Verifie qu'un YAML de `docs\01_docs_config_system\01_config_system_SH_PY_YAML\` respecte les normes du `Claude md SAVE\CLAUDE.md` : sections 4 (bordures ASCII), 5 (5 headers obligatoires), 7 (slug tertiaire), 8 (name et unique_id). LECTURE SEULE : le skill ne corrige rien sans ordre d'Eric.
 
 Complement de `ha-new-yaml` (qui genere un squelette conforme) et de `check_yaml_forme.py` (alignement des boites seul).
 
@@ -16,10 +16,10 @@ Complement de `ha-new-yaml` (qui genere un squelette conforme) et de `check_yaml
 ### 1 - Lancer le controle (sur le PC)
 
 ```powershell
-$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_sh\Verif_headers_yaml\Verif_headers_yaml.py" [fichier ou dossier] [--erreurs] [--prefixe]
+$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Verif_headers_yaml\Verif_headers_yaml.py" [fichier ou dossier] [--erreurs] [--prefixe]
 ```
 
-- Sans argument : tous les YAML de `config_system_SH_PY_YAML` (environ 90 fichiers).
+- Sans argument : tous les YAML de `01_config_system_SH_PY_YAML` (environ 90 fichiers).
 - Avec un chemin : un fichier ou un sous-dossier. Apres avoir cree ou modifie un YAML, le lancer sur ce fichier.
 - `--erreurs` : seulement les ERREUR. `--prefixe` : controle aussi le prefixe de pole dans `name` (tres peu suivi aujourd'hui, donc desactive par defaut).
 - Derniere ligne : `controle verif_headers: fichiers=N erreurs=N avis=N`. Code de retour 0 sans ERREUR, 1 avec ERREUR.
@@ -45,5 +45,5 @@ Un AVIS n'est pas forcement une faute : `NOM_ID_DIFFERENT` vient d'une heuristiq
 1. Lecture seule par defaut : aucun fichier modifie sans ordre d'Eric.
 2. Normes = `Claude md SAVE\CLAUDE.md` ; en cas de doute sur une norme, lire le CLAUDE.md, ne pas deviner.
 3. Les sauvegardes (`.bak_`), les noms dates et les dossiers `.scripts`, `scripts`, `notifs`, `themes`, `blueprints`, `ARCHIVE` sont ignores par le script.
-4. Ne touche ni aux automations ni aux dashboards (hors perimetre `config_system_SH_PY_YAML`).
-5. Fiche du script : `docs\04_docs_scripts\04_docs_scripts_sh_md\Verif_headers_yaml\Verif_headers_yaml.md`.
+4. Ne touche ni aux automations ni aux dashboards (hors perimetre `01_config_system_SH_PY_YAML`).
+5. Fiche du script : `docs\04_docs_scripts\04_docs_scripts_SH_MD\Verif_headers_yaml\Verif_headers_yaml.md`.

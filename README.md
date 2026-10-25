@@ -17,13 +17,13 @@ Chaque vignette du dashboard possede sa propre documentation dans `docs/02_docs_
 
 ### Comment ca s'articule (en 3 phrases)
 
-Une donnee suit toujours le meme chemin : **capteur natif** (Zigbee2MQTT, Hue, Linky...) -> **sensor/template** (calcul, kWh, moyenne) -> **utility_meter** (cumul Annuel/Mensuel/Hebdo/Quotidien si besoin) -> **vignette dashboard**. Cote fiabilite, la prod Home Assistant fait toujours foi ; GitHub est une sauvegarde automatique de la prod ; ce depot local (`ReBuild/`) n'est qu'un poste de travail de correction, jamais une verite en soi. Si un jour vous cherchez pourquoi un fichier `.yaml` a un nom bizarre ou une bordure ASCII, c'est dans `CLAUDE.md` (local) - copie GitHub : [`docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md).
+Une donnee suit toujours le meme chemin : **capteur natif** (Zigbee2MQTT, Hue, Linky...) -> **sensor/template** (calcul, kWh, moyenne) -> **utility_meter** (cumul Annuel/Mensuel/Hebdo/Quotidien si besoin) -> **vignette dashboard**. Cote fiabilite, la prod Home Assistant fait toujours foi ; GitHub est une sauvegarde automatique de la prod ; ce depot local (`ReBuild/`) n'est qu'un poste de travail de correction, jamais une verite en soi. Si un jour vous cherchez pourquoi un fichier `.yaml` a un nom bizarre ou une bordure ASCII, c'est dans `CLAUDE.md` (local) - copie GitHub : [`docs/00_IA/00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md`](./docs/00_IA/00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md).
 
 | Document cle | Role |
 |---|---|
 | [`GLOBAL_INDEX_REPO.md`](./GLOBAL_INDEX_REPO.md) | Index unique - 6 sections (IA, config, dashboard, automations, scripts, systeme) - accordeon GitHub. *(4400+ lignes, prevoyez du cafe)* |
 | [`docs/XX_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md`](./docs/XX_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md) | Carte -> Template -> Sensor -> Utility Meter -> Source native - 18 vignettes |
-| [`IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md) | Regles de codage, nomenclature, arborescences - directives IA completes *(copie GitHub du CLAUDE.md local, prompt de Claude)* |
+| [`IA_CONTEXT_BASE.md`](./docs/00_IA/00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md) | Regles de codage, nomenclature, arborescences - directives IA completes *(copie GitHub du CLAUDE.md local, prompt de Claude)* |
 
 ---
 
@@ -31,7 +31,7 @@ Une donnee suit toujours le meme chemin : **capteur natif** (Zigbee2MQTT, Hue, L
 
 La configuration est regie par le fichier maitre :
 
-- 👉 **[`IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md)** - directives IA actives (nomenclature, hierarchie visuelle, regles de codage, arborescences) *(CLAUDE.md = version locale, prompt de Claude)*
+- 👉 **[`IA_CONTEXT_BASE.md`](./docs/00_IA/00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md)** - directives IA actives (nomenclature, hierarchie visuelle, regles de codage, arborescences) *(CLAUDE.md = version locale, prompt de Claude)*
 
 Developpee en collaboration avec **Claude (Anthropic)** pour garantir :
 
@@ -206,21 +206,21 @@ Dashboard optimise tablette + mobile. Structure en 6 lignes x 3 colonnes.
 
 ```
 docs/
-├── 00_IA/                          <- contextes IA (IA_CONTEXT_BASE + sous_md/)
+├── 00_IA/                          <- contextes IA (00_IA_CONTEXT_BASE + sous_md/)
 ├── 01_docs_config_system/
-│   ├── config_system_SH_PY_YAML/   <- copie de /config : YAML de config HA + scripts .sh et .py
-│   └── config_system_MD/           <- fiches de la config (configuration, sql) et des scripts
+│   ├── 01_config_system_SH_PY_YAML/   <- copie de /config : YAML de config HA + scripts .sh et .py
+│   └── 01_config_system_MD/           <- fiches de la config (configuration, sql) et des scripts
 ├── 02_docs_dashboard/
-│   ├── 02_dashboard_docs_md/          <- docs 18 vignettes
-│   └── 02_dashboard_docs_yaml/        <- YAML vignettes/pages + Dashboard_COMPLET/
+│   ├── 02_dashboard_docs_MD/          <- docs 18 vignettes
+│   └── 02_dashboard_docs_YAML/        <- YAML vignettes/pages + Dashboard_COMPLET/
 ├── 03_docs_automations/
-│   ├── 03_docs_automations_md/        <- docs par automation
-│   └── 03_docs_automations_yaml/      <- YAML individuels par automation
+│   ├── 03_docs_automations_MD/        <- docs par automation
+│   └── 03_docs_automations_YAML/      <- YAML individuels par automation
 ├── 04_docs_scripts/
-│   ├── 04_docs_scripts_sh/            <- scripts bash (.sh)
-│   ├── 04_docs_scripts_sh_md/         <- docs scripts bash
-│   ├── 04_docs_scripts_yaml/          <- scripts HA YAML
-│   └── 04_docs_scripts_yaml_md/       <- docs scripts HA
+│   ├── 04_docs_scripts_SH/            <- scripts bash (.sh)
+│   ├── 04_docs_scripts_SH_MD/         <- docs scripts bash
+│   ├── 04_docs_scripts_YAML/          <- scripts HA YAML
+│   └── 04_docs_scripts_YAML_MD/       <- docs scripts HA
 ├── XX_docs_MD_system/              <- DEPENDANCES_GLOBALES, GLOBAL_INDEX_REPO, index entites, templates
 ├── 05_docs_skills/                 <- copies des SKILL.md du projet (un dossier skill_<nom>/ par skill)
 └── 06_docs_technique/              <- procedures techniques (ex : pont Hue)

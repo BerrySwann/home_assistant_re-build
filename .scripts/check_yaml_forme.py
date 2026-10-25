@@ -9,7 +9,7 @@ sur un chemin bidon "/path/to/TREE_CORRIGE" qui n'existait plus).
 Usage :
     python check_yaml_forme.py [dossier]
 
-Defaut : docs/01_docs_config_system/config_system_SH_PY_YAML du dossier ReBuild,
+Defaut : docs/01_docs_config_system/01_config_system_SH_PY_YAML du dossier ReBuild,
 ou le dossier /config si on l'execute sur la machine HA.
 
 Trois controles, issus des regles YAML du CLAUDE.md :
@@ -33,7 +33,7 @@ try:
 except Exception:
     pass
 
-DEFAUT_LOCAL = os.path.join("docs", "01_docs_config_system", "config_system_SH_PY_YAML")
+DEFAUT_LOCAL = os.path.join("docs", "01_docs_config_system", "01_config_system_SH_PY_YAML")
 OBSOLETE = "P3_01_somme_par_piece"
 DATE_NOM = re.compile(r"\d{4}[-_]\d{2}[-_]\d{2}")  # sauvegardes et copies datees : ignorees
 

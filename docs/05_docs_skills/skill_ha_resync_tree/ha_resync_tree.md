@@ -5,7 +5,7 @@ description: "Skill HA ReBuild - comparaison config locale / prod / GitHub en le
 
 # HA Resync Tree - comparaison en lecture seule (ancien Local <- GitHub)
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 > ATTENTION (2026-10-18) : le LOCAL fait foi, la prod ne doit jamais etre en avance sur le local et GitHub n'est qu'un reflet de la prod via le backup HA. Ne jamais copier GitHub vers le local sans ordre explicite d'Eric, fichier par fichier. Les dossiers `themes/`, `blueprints/` et `notifs/` restent en prod seule.
 
@@ -15,12 +15,12 @@ Cela veut dire : mettre a jour `IA_ARBO_DETAIL.md` (comptages local, prod, GitHu
 
 ## Ce que fait ce skill
 
-L'ancien workflow (telecharger le zip GitHub et recopier GitHub vers `config_system_YAML`) est retire : il contredisait la regle "le local fait foi" et le dossier `config_system_YAML` n'existe plus en local (remplace par `config_system_SH_PY_YAML` le 2026-10-18).
+L'ancien workflow (telecharger le zip GitHub et recopier GitHub vers `config_system_YAML`) est retire : il contredisait la regle "le local fait foi" et le dossier `config_system_YAML` n'existe plus en local (remplace par `01_config_system_SH_PY_YAML` le 2026-10-18).
 
 Ce skill suit maintenant la procedure de l'etape C de `/ha-trigul` (reprise de l'ancien skill `ha-resync-docs`, supprime le 2026-10-20 car doublon du trigul) :
 
 1. Comparer en lecture seule, sur le PC :
-   `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_sh\Verif_emplacements\Verif_emplacements.py"`
+   `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py"`
    Rapport : `historique\MD5\03_verif_emplacements\verif_emplacements_[date].txt`.
 2. Analyser : PROD DIFFERENTE DU LOCAL -> proposer `/ha-push-yaml` (le local fait foi) ; GITHUB EN ATTENTE DU BACKUP -> normal apres un push ; present en prod ou sur GitHub mais pas en local -> le signaler a Eric.
 3. Copie vers le local : uniquement sur ordre explicite d'Eric, fichier par fichier, depuis la prod `H:\` (pas depuis GitHub), apres sauvegarde `.bak_AAAA_MM_JJ_HHhMMmSSs` du fichier local s'il existe, avec une ligne au journal des modifs.
