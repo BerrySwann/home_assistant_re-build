@@ -1,6 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-10-25 20h28 - sous-dossiers de 00_ à 04_ numérotés et suffixes MD, SH, YAML en majuscules (02_dashboard_docs_MD, 03_docs_automations_YAML, 04_docs_scripts_SH, 00_SOUS_CONTEXT_IA, 01_config_system_MD...) : tous les liens corrigés, 832 liens, 0 cassé*
 *Dernière mise à jour : 2026-10-25 (19h40) - règle de nommage des caractères (espace, tiret, &, parenthèses, point -> _) appliquée en local et en prod ; dossiers renommés (docs minuscule, skills, MINI_PC, Tarif_hc_hp, Automations_yaml_original, Backup_ha_GitHub, Mariadb_et_vscode_optimisation, Watchdog_piles_hue_ikea_sonoff) ; pages réserve L5C3 retirées ; liens corrigés (6 -> 0 au contrôle)*
 *Dernière mise à jour : 2026-10-23 (22h55, /histo S1) - entrée ajoutée : Verif_integrations_file.py (scripts python, recompté : 13)*
 *Dernière mise à jour : 2026-10-20 (soir) - section 05 SKILLS : ha-resync-docs retiré (doublon de ha-trigul), ha-verif-headers ajouté (14 skills) ; section 04 : Verif_headers_yaml.py ajouté*
