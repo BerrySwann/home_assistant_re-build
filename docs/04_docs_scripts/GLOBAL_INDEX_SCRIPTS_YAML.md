@@ -29,8 +29,8 @@ Fichier GENERE le 2026-10-18 18:58 par docs/04_docs_scripts/docs_scripts_SH/gen_
 | audit_md5 | Audit MD5 GitHub | `script.audit_md5` | single | [Audit_md5.yaml](docs_scripts_YAML/Audit_md5/Audit_md5.yaml) | identique | shell_command.audit_md5 -> audit_md5_yaml.sh | aucune |
 | audit_md5_md_yaml | Audit MD5 MD YAML | `script.audit_md5_md_yaml` | single | [Audit_md5_md_yaml.yaml](docs_scripts_YAML/Audit_md5_md_yaml/Audit_md5_md_yaml.yaml) | identique | shell_command.audit_md5_md_yaml -> audit_md5_md_yaml.sh | aucune |
 | p1_master_gestion_clim | P1 - MASTER : Gestion centralisée climatisation | `script.p1_master_gestion_clim` | queued | [P1_Master_gestion_clim.yaml](docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml) | identique | - | [P1_Master_gestion_clim.md](docs_scripts_YAML_MD/P1_Master_gestion_clim/P1_Master_gestion_clim.md) |
-| sdb_soufflant_demarrer | SDB - Soufflant : DEMARRAGE (2000 W, verrou 30 s) | `script.sdb_soufflant_demarrer` | single | [SDB_soufflant_demarrer.yaml](docs_scripts_YAML/Soufflant%20SDB/SDB_soufflant_demarrer/SDB_soufflant_demarrer.yaml) | identique | - | aucune |
-| sdb_soufflant_arreter | SDB - Soufflant : ARRET (resistances, ventilateur 1 min 30, prise) | `script.sdb_soufflant_arreter` | single | [SDB_soufflant_arreter.yaml](docs_scripts_YAML/Soufflant%20SDB/SDB_soufflant_arreter/SDB_soufflant_arreter.yaml) | identique | - | aucune |
+| sdb_soufflant_demarrer | SDB - Soufflant : DEMARRAGE (2000 W, verrou 30 s) | `script.sdb_soufflant_demarrer` | single | [SDB_soufflant_demarrer.yaml](docs_scripts_YAML/Soufflant_SDB/SDB_soufflant_demarrer/SDB_soufflant_demarrer.yaml) | identique | - | aucune |
+| sdb_soufflant_arreter | SDB - Soufflant : ARRET (resistances, ventilateur 1 min 30, prise) | `script.sdb_soufflant_arreter` | single | [SDB_soufflant_arreter.yaml](docs_scripts_YAML/Soufflant_SDB/SDB_soufflant_arreter/SDB_soufflant_arreter.yaml) | identique | - | aucune |
 
 ## Fichiers .py rangés dans docs_scripts_YAML
 

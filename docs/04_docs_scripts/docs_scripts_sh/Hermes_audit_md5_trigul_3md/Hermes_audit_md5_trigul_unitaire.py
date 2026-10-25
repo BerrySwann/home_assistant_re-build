@@ -4,7 +4,7 @@ hermes_audit_md5_trigul_unitaire.py - extraction et comparaison A L'UNITE de H:\
 contre les YAML locaux de ReBuild. Etape "profonde" du /trigul (voir CLAUDE.md).
 
 Ce que fait le script (etapes numerotees, affichees ETAPE n et reprises dans le rapport) :
- 1. points bak : reserve les noms datees automations.bak_AAAA_MM_JJ_HHhMMmSSs.yaml (dossier AUTOMATIONS.YALM ORIGINAL)
+ 1. points bak : reserve les noms datees automations.bak_AAAA_MM_JJ_HHhMMmSSs.yaml (dossier AUTOMATIONS.YAML_ORIGINAL)
     et scripts.bak_... (dossier DOCS_SCRIPT_ORIGINAL), cree les dossiers, s'arrete (code 3) si un point existe deja
  2. copie H:/automations.yaml et H:/scripts.yaml vers ces points bak
  3. MD5 de chaque fichier de la prod contre son bak ; si l'un differe : ATTENTION, mais l'analyse continue (elle dit quelles unites ont change)
@@ -31,7 +31,7 @@ PROD_AUTO = r'H:\automations.yaml'
 PROD_SCR = r'H:\scripts.yaml'
 Y_AUTO = os.path.join(ROOT, 'docs', '03_docs_automations', 'docs_automations_YAML')
 Y_SCR = os.path.join(ROOT, 'docs', '04_docs_scripts', 'docs_scripts_YAML')
-ORIG_AUTO = os.path.join(Y_AUTO, 'AUTOMATIONS.YALM ORIGINAL')
+ORIG_AUTO = os.path.join(Y_AUTO, 'AUTOMATIONS.YAML_ORIGINAL')
 ORIG_SCR = os.path.join(ROOT, 'docs', '04_docs_scripts', 'DOCS_SCRIPT_ORIGINAL')
 TMP = os.path.join(ROOT, '_tmp_trigul_profond')
 OUTDIR = os.path.join(ROOT, 'historique', '03_RAPPORTS', '06_MD5', '01_TRIGUL_PROFOND')
@@ -159,7 +159,7 @@ def main():
 
     # 3a. automations : par id, sinon par alias sans lettre de tete
     loc = []
-    for p in local_files(Y_AUTO, {'AUTOMATIONS.YALM ORIGINAL', 'RASPI'}):
+    for p in local_files(Y_AUTO, {'AUTOMATIONS.YAML_ORIGINAL', 'RASPI'}):
         d = load(p)
         d = d[0] if isinstance(d, list) and d else d
         if isinstance(d, dict) and 'alias' in d:

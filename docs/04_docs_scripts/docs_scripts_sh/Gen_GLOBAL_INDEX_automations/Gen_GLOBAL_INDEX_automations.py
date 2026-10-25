@@ -23,7 +23,7 @@ OUT = os.path.join(DOCS, "GLOBAL_INDEX_AUTOMATIONS.md")
 P_AUTO = r"H:\automations.yaml"
 P_ENT = r"H:\.storage\core.entity_registry"
 P_CAT = r"H:\.storage\core.category_registry"
-SKIP_DIRS = {"AUTOMATIONS.YALM ORIGINAL"}
+SKIP_DIRS = {"AUTOMATIONS.YAML_ORIGINAL"}
 DRY = "--dry" in sys.argv
 
 
@@ -233,7 +233,7 @@ def main():
     L.append("## Controle")
     L.append("")
     L.append("- Automatisations en prod (automations.yaml) : %d" % len(prod))
-    L.append("- YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS.YALM ORIGINAL) : %d" % len(local))
+    L.append("- YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS.YAML_ORIGINAL) : %d" % len(local))
     L.append("- Fiches .md retenues : %d dont %d rattachees a un YAML" % (len(fiches), sum(1 for m in fiches if m["used"])))
     L.append("- Automatisations de la prod sans YAML local : %d%s" % (len(sans_yaml), (" (" + " ; ".join(sans_yaml) + ")") if sans_yaml else ""))
     L.append("- Automatisations de la prod sans fiche rattachee : %d%s" % (len(sans_fiche), (" (" + " ; ".join(sans_fiche) + ")") if sans_fiche else ""))

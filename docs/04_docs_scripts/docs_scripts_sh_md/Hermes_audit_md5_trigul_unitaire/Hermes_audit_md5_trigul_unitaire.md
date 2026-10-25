@@ -2,7 +2,7 @@
 
 > **Script :** `hermes_audit_md5_trigul_unitaire.py` (Python, lance avec `python -I`)
 > **Emplacement local :** `docs/04_docs_scripts/docs_scripts_SH/hermes_audit_md5_trigul_3md/hermes_audit_md5_trigul_unitaire.py`
-> **Copie prod (miroir docs) :** `H:\docs\04_Docs_scripts\Docs_scripts_sh\Hermes_audit_md5_trigul_3md\`
+> **Copie prod (miroir docs) :** `H:\docs\04_docs_scripts\docs_scripts_sh\Hermes_audit_md5_trigul_3md\`
 > **Execute depuis :** le PC (local ReBuild), il lit `H:\automations.yaml` et `H:\scripts.yaml`
 > **Etape du trigul :** B1, etape profonde (decidee le 2026-10-11), appelee par `trigul_run.py`
 > **Derniere modification :** 2026-10-18 (8 etapes numerotees, analyse sur les copies bak)
@@ -19,7 +19,7 @@ La prod est plus importante que le local : une prod en avance sur le local (unit
 
 Chaque etape s'affiche en `ETAPE n` et est reprise dans la ligne `ETAPES :` du rapport.
 
-- 1. Points bak : reserve les noms `automations.bak_<date_heure>.yaml` (dossier `AUTOMATIONS.YALM ORIGINAL`) et `scripts.bak_<date_heure>.yaml` (dossier `DOCS_SCRIPT_ORIGINAL`), cree les dossiers, s'arrete (code 3) si un point existe deja.
+- 1. Points bak : reserve les noms `automations.bak_<date_heure>.yaml` (dossier `AUTOMATIONS.YAML_ORIGINAL`) et `scripts.bak_<date_heure>.yaml` (dossier `DOCS_SCRIPT_ORIGINAL`), cree les dossiers, s'arrete (code 3) si un point existe deja.
 - 2. Copie de `H:\automations.yaml` et `H:\scripts.yaml` vers ces points.
 - 3. MD5 de chaque fichier de la prod contre son bak. Si l'un differe : ATTENTION, mais l'analyse continue (decide par Eric le 2026-10-18 : c'est elle qui dit quelles unites ont change).
 - 4. L'analyse lit les COPIES bak, plus H:.
@@ -32,7 +32,7 @@ Chaque etape s'affiche en `ETAPE n` et est reprise dans la ligne `ETAPES :` du r
 
 - Automations : IDENTIQUE, IDENTIQUE_HORS_ID_ALIAS (rapprochee par l'alias quand l'export local n'a pas d'id), DIFFERENT, ABSENT_LOCAL.
 - Scripts : IDENTIQUE, DIFFERENT, ABSENT_LOCAL.
-- Les exports locaux sans automation en prod sont listes a part. Au 2026-10-18 : `Automations.yalm original\Automations.yaml`, `P1_SDB\h_soufflant_SDB_routage.yaml`, `P1_SDB\i_soufflant_SDB_bouton_rodret.yaml`.
+- Les exports locaux sans automation en prod sont listes a part. Au 2026-10-18 : `Automations.yaml_original\Automations.yaml`, `P1_SDB\h_soufflant_SDB_routage.yaml`, `P1_SDB\i_soufflant_SDB_bouton_rodret.yaml`.
 
 ## Sorties
 

@@ -7,7 +7,7 @@
 ## Ce que c'est
 
 Les automations sont indexees a deux endroits :
-- **Index detaille genere** : `docs/03_Docs_automations/GLOBAL_INDEX_AUTOMATIONS.md` (une ligne par automation : alias, id prod, id local, entity HA, fiche .md, YAML source, commentaire). Regenere a chaque `/histo` par `docs/04_Docs_scripts/Docs_scripts_sh/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.py`. Ne jamais le modifier a la main.
+- **Index detaille genere** : `docs/03_docs_automations/GLOBAL_INDEX_AUTOMATIONS.md` (une ligne par automation : alias, id prod, id local, entity HA, fiche .md, YAML source, commentaire). Regenere a chaque `/histo` par `docs/04_docs_scripts/docs_scripts_sh/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.py`. Ne jamais le modifier a la main.
 - **Resume** : section `03-AUTOMATIONS` de `GLOBAL_INDEX_REPO.md` (racine de `H:\` + copie locale `docs/01_docs_config_system/config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md`). Maintenue a la main, non regeneree.
 
 Il n'y a plus de fichier `INDEX_AUTOMATIONS.md` distinct - fusionne dans GLOBAL_INDEX_REPO.md (2026-07-16).
@@ -17,19 +17,19 @@ Il n'y a plus de fichier `INDEX_AUTOMATIONS.md` distinct - fusionne dans GLOBAL_
 ## Arborescence locale des automations
 
 ```
-docs/03_Docs_automations/
+docs/03_docs_automations/
 - GLOBAL_INDEX_AUTOMATIONS.md  <- index genere (ne pas modifier)
-- Docs_automations_yaml/       <- YAML individuels par automation (reference locale), un dossier par categorie HA :
-    _SANS_CATEGORIE/  Backup HA - GitHub/  Bouton Virtuel/  Contrôle Entity z2m/
-    Gestion des Stores/  MariaDB & VSCode Optimisation/  Météo/  P0_ENRIGE/
-    P1_01_CLIM_CHAUFFAGE/  P1_02_Cuisine/  P1_03_Chauffage Salle de Bain/
-    P2_Alarme_Congélateur/  P2_éCO. Prises/  P3_Eclairage/  RASPI/  Tarif HC-HP/
-    Watchdog Piles (HUE-IKEA-SONOFF)/  AUTOMATIONS.YALM ORIGINAL/ (export d'origine, ignore par l'index)
-- Docs_automations_md/         <- Fiches texte par automation
+- docs_automations_yaml/       <- YAML individuels par automation (reference locale), un dossier par categorie HA :
+    _SANS_CATEGORIE/  Backup_ha_GitHub/  Bouton_Virtuel/  Contrôle Entity z2m/
+    Gestion_des_Stores/  Mariadb_et_vscode_optimisation/  Météo/  P0_ENRIGE/
+    P1_01_CLIM_CHAUFFAGE/  P1_02_Cuisine/  P1_03_Chauffage_Salle_de_Bain/
+    P2_Alarme_Congélateur/  P2_éCO. Prises/  P3_Eclairage/  RASPI/  Tarif_HC-HP/
+    Watchdog_Piles_HUE_IKEA_SONOFF/  AUTOMATIONS.YAML_ORIGINAL/ (export d'origine, ignore par l'index)
+- docs_automations_md/         <- Fiches texte par automation
 ```
 
 > ⚠️ Ne jamais modifier `automations.yaml` directement.
-> Tout changement passe par l'UI HA, en s'appuyant sur les fichiers `Docs_automations_yaml/`.
+> Tout changement passe par l'UI HA, en s'appuyant sur les fichiers `docs_automations_yaml/`.
 
 ---
 
@@ -77,7 +77,7 @@ Une section par categorie HA, avec le nombre d'automations entre parentheses. Co
 
 Apres ajout/suppression/renommage d'une automation dans HA :
 
-1. Creer/archiver le fichier YAML correspondant dans `Docs_automations_yaml/` et la fiche dans `Docs_automations_md/`.
-2. Lancer `/histo` (regenere `GLOBAL_INDEX_AUTOMATIONS.md`) ou, a la main : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Gen_GLOBAL_INDEX_automations\Gen_GLOBAL_INDEX_automations.py"`.
+1. Creer/archiver le fichier YAML correspondant dans `docs_automations_yaml/` et la fiche dans `docs_automations_md/`.
+2. Lancer `/histo` (regenere `GLOBAL_INDEX_AUTOMATIONS.md`) ou, a la main : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_sh\Gen_GLOBAL_INDEX_automations\Gen_GLOBAL_INDEX_automations.py"`.
 3. Verifier la ligne `liens=N casses=M` : `casses` doit etre 0.
 4. Mettre a jour a la main le resume `03-AUTOMATIONS` de `GLOBAL_INDEX_REPO.md` si besoin (compteur de la categorie), puis pousser `H:\GLOBAL_INDEX_REPO.md` aux 2 endroits (racine et miroir docs) avec `/ha-push-docs`.
