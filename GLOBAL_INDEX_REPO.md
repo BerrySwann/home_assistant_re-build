@@ -4450,98 +4450,98 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 <details>
 <summary><b>fix-file.md</b> &nbsp;|&nbsp; analyse une erreur Home Assistant et retourne le bloc YAML corrigé</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/Skill_fix-file/Fix-file.md">Doc</a>
+<a href="docs/05_Docs_skills/skill_fix_file/fix_file.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-new-yaml.md</b> &nbsp;|&nbsp; génère un squelette YAML conforme aux conventions du projet</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/Skill_ha-new-yaml/Ha-new-yaml.md">Doc</a>
+<a href="docs/05_Docs_skills/skill_ha_new_yaml/ha_new_yaml.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-push-docs.md</b> &nbsp;|&nbsp; synchronise les docs locales (*.md + yaml dashboard) vers H:\Docs</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/Skill_ha-push-docs/Ha-push-docs.md">Doc</a>
+<a href="docs/05_Docs_skills/skill_ha_push_docs/ha_push_docs.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-push-md.md</b> &nbsp;|&nbsp; pousse uniquement les *.md de documentation vers H:\Docs</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/Skill_ha-push-md/Ha-push-md.md">Doc</a>
+<a href="docs/05_Docs_skills/skill_ha_push_md/ha_push_md.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-push-yaml.md</b> &nbsp;|&nbsp; pousse un YAML config vers la prod, sauvegarde locale avant modification</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/Skill_ha-push-yaml/Ha-push-yaml.md">Doc</a>
+<a href="docs/05_Docs_skills/skill_ha_push_yaml/ha_push_yaml.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-resync-tree.md</b> &nbsp;|&nbsp; resynchronise les YAML locaux depuis le repo GitHub (source de vérité n°2)</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/Skill_ha-resync-tree/Ha-resync-tree.md">Doc</a>
+<a href="docs/05_Docs_skills/skill_ha_resync_tree/ha_resync_tree.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-status.md</b> &nbsp;|&nbsp; résumé ultra-compact de l'avancement du projet en 3 points</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/Skill_ha-status/Ha-status.md">Doc</a>
+<a href="docs/05_Docs_skills/skill_ha_status/ha_status.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-trigul.md</b> &nbsp;|&nbsp; triangulation MD5 des docs local / prod / GitHub, rapports dans historique/MD5</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/Skill_ha-trigul/Ha-trigul.md">Doc</a>
+<a href="docs/05_Docs_skills/skill_ha_trigul/ha_trigul.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-verif-headers.md</b> &nbsp;|&nbsp; verifie en lecture seule les en-tetes des YAML de config (boites ASCII, 5 headers, slug, name, unique_id)</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/Skill_ha-verif-headers/Ha-verif-headers.md">Doc</a>
+<a href="docs/05_Docs_skills/skill_ha_verif_headers/ha_verif_headers.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>histo.md</b> &nbsp;|&nbsp; journal de bord, sync_index, journal fusionné, Obsidian, ménage des .bak, tree</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/Skill_histo/Histo.md">Doc</a>
+<a href="docs/05_Docs_skills/skill_histo/histo.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>histo-final.md</b> &nbsp;|&nbsp; histo complet, puis extinction de l'écran (switch.ecran_p_c_3_play_hue) et arrêt du PC après 5 minutes</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/Skill_histo-final/Histo-final.md">Doc</a>
+<a href="docs/05_Docs_skills/skill_histo_final/histo_final.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>journal-modifs.md</b> &nbsp;|&nbsp; note au fil de l'eau chaque modification de fichier dans un journal par auteur (claude, eric, hermes)</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/Skill_journal-modifs/Journal-modifs.md">Doc</a>
+<a href="docs/05_Docs_skills/skill_journal_modifs/journal_modifs.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>sync-index.md</b> &nbsp;|&nbsp; met à jour DEPENDANCES_GLOBALES.md et l'index après validation d'un YAML</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/Skill_sync-index/Sync-index.md">Doc</a>
+<a href="docs/05_Docs_skills/skill_sync_index/sync_index.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>update-arbo.md</b> &nbsp;|&nbsp; met à jour IA_ARBO_DETAIL.md (comptages local, prod, GitHub)</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/Skill_update-arbo/Update-arbo.md">Doc</a>
+<a href="docs/05_Docs_skills/skill_update_arbo/update_arbo.md">Doc</a>
 </blockquote>
 </details>
 
@@ -4560,7 +4560,7 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 <blockquote>
 <i>Règle la vitesse du ventilateur du Raspberry en fonction de la température</i><br><br>
 📄 <a href="docs/03_Docs_automations/Docs_automations_md/RASPI/RASPI_fan_pwm/RASPI_fan_pwm.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/RASPI/A_RASPI_fan_pwm_6_states/A_RASPI_fan_pwm_6_states.yaml">YAML source</a><br>
+⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/XX_RASPI/A_RASPI_fan_pwm_6_states/A_RASPI_fan_pwm_6_states.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
