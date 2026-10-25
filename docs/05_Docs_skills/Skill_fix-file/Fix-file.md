@@ -56,4 +56,4 @@ Si le fichier existe dans `config_system_SH_PY_YAML/` (local), le lire avant de 
 Si l'entite modifiee peut impacter une vignette ou `DEPENDANCES_GLOBALES.md`, signaler :
 `>> Impact potentiel : [vignette L*C*] - /sync_index recommande`
 
-**Chemin DEPENDANCES_GLOBALES :** `docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`
+**Chemin DEPENDANCES_GLOBALES :** `docs\XX_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`

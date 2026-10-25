@@ -1212,14 +1212,14 @@ cards:
 
 ## 🔗 FICHIERS LIÉS
 
-- [`L4C3_VIGNETTE_MAJ.md`](./L4C3_VIGNETTE_MAJ.md) - vignette button-card + bug `margin-left`
+- [`L4C3_Vignette_MAJ_HA.md`](./L4C3_Vignette_MAJ_HA.md) - vignette button-card + bug `margin-left`
 - [`docs/DEPENDANCES_GLOBALES.md`](DEPENDANCES_GLOBALES.md) - chaîne complète L4C3
 
 ---
 
-← Retour : [`L4C3_VIGNETTE_MAJ.md`](./L4C3_VIGNETTE_MAJ.md)
+← Retour : [`L4C3_Vignette_MAJ_HA.md`](./L4C3_Vignette_MAJ_HA.md)
 
 
 <!-- obsidian-wikilinks -->
 ---
-*Liens : [[DEPENDANCES_GLOBALES]]  [[L4C3_VIGNETTE_MAJ]]*
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L4C3_Vignette_MAJ_HA]]*

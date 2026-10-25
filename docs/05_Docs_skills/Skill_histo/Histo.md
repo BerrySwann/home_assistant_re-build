@@ -121,7 +121,7 @@ Immediatement apres la sauvegarde du journal, executer le sync_index complet.
 | Skill du projet modifie (`.claude/skills/<skill>/SKILL.md`) | copie `docs/05_docs_skills/skill_<nom>/<nom>.md` |
 
 **Chemins Windows :**
-- `C:\Users\Berry Swann\Documents\ReBuild\docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`
+- `C:\Users\Berry Swann\Documents\ReBuild\docs\XX_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\03_docs_automations\docs_automations_MD\`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_YAML_MD\`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_MD\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md`
@@ -131,7 +131,7 @@ Immediatement apres la sauvegarde du journal, executer le sync_index complet.
 ### Protocole
 
 1. Identifier les fichiers modifies pendant la session (depuis le journal de bord qui vient d'etre genere)
-2. Pour chaque fichier impactant DEPENDANCES_GLOBALES.md : mettre a jour la date en tete de fichier, puis pousser le fichier en prod (decide par Eric le 2026-10-14) : comparer le MD5 de la copie locale a `H:\docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`, copier seulement si different (sans sauvegarde sur H: : le `.bak` reste local), verifier le MD5 apres, y compris quand la ligne de date est la seule modification. Si la prod differe de la version locale d'avant la modification (quelqu'un d'autre a ecrit en prod) : ne pas pousser et le signaler. Si H: est inaccessible : le noter sans bloquer.
+2. Pour chaque fichier impactant DEPENDANCES_GLOBALES.md : mettre a jour la date en tete de fichier, puis pousser le fichier en prod (decide par Eric le 2026-10-14) : comparer le MD5 de la copie locale a `H:\docs\XX_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`, copier seulement si different (sans sauvegarde sur H: : le `.bak` reste local), verifier le MD5 apres, y compris quand la ligne de date est la seule modification. Si la prod differe de la version locale d'avant la modification (quelqu'un d'autre a ecrit en prod) : ne pas pousser et le signaler. Si H: est inaccessible : le noter sans bloquer.
 3. Pour chaque automation validee : verifier/mettre a jour son `.md` dans `docs_automations_MD/`
 4. Pour chaque script valide : verifier/mettre a jour son `.md` dans `docs_scripts_YAML_MD/`
 5. Mettre a jour `GLOBAL_INDEX_REPO.md` (voir ci-dessous)
@@ -144,7 +144,7 @@ Immediatement apres la sauvegarde du journal, executer le sync_index complet.
 
 ### Mise a jour de GLOBAL_INDEX_REPO.md
 
-Fichier : `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_MD\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md` (copie de travail locale, deplacee par Eric le 2026-10-18 depuis `docs\05_docs_MD_system\GLOBAL_INDEX_REPO\` ; ses liens sont relatifs a la racine du depot : elle ne se clique pas ici ; poussee en prod a chaque /histo aux deux endroits (miroir H:\docs\01_docs_config_system\config_system_MD\GLOBAL_INDEX_REPO\ et racine H:\GLOBAL_INDEX_REPO.md, lue sur GitHub), voir le point 8 ci-dessous ; GitHub est alimente par le backup HA depuis H:, jamais en push direct).
+Fichier : `C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_MD\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md` (copie de travail locale, deplacee par Eric le 2026-10-18 depuis `docs\XX_docs_MD_system\GLOBAL_INDEX_REPO\` ; ses liens sont relatifs a la racine du depot : elle ne se clique pas ici ; poussee en prod a chaque /histo aux deux endroits (miroir H:\docs\01_docs_config_system\config_system_MD\GLOBAL_INDEX_REPO\ et racine H:\GLOBAL_INDEX_REPO.md, lue sur GitHub), voir le point 8 ci-dessous ; GitHub est alimente par le backup HA depuis H:, jamais en push direct).
 
 1. Si aucun fichier de la session n'est ajoute, renomme, supprime ou deplace, et qu'aucune entite citee n'a change : noter "GLOBAL_INDEX_REPO deja a jour" et passer au point 8 (le push compare quand meme les MD5).
 2. Sinon, faire d'abord une sauvegarde dans le meme dossier : `GLOBAL_INDEX_REPO.bak_AAAA_MM_JJ_HHhMMmSSs.md` (format PowerShell `Get-Date -Format "yyyy_MM_dd_HH'h'mm'm'ss's'"` ; le dossier INDEX_GLOBAL est dans le perimetre du menage de l'etape 5).

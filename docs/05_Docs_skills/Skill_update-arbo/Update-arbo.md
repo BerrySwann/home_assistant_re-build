@@ -34,7 +34,7 @@ $cfg_md      = (Get-ChildItem "$base\docs\01_docs_config_system\config_system_MD
 $docs_02     = (Get-ChildItem "$base\docs\02_docs_dashboard" -Recurse -File).Count
 $docs_03     = (Get-ChildItem "$base\docs\03_docs_automations" -Recurse -File).Count
 $docs_04     = (Get-ChildItem "$base\docs\04_docs_scripts" -Recurse -File).Count
-$docs_05     = (Get-ChildItem "$base\docs\05_docs_MD_system" -Recurse -File).Count
+$docs_05     = (Get-ChildItem "$base\docs\XX_docs_MD_system" -Recurse -File).Count
 $dash_complet= (Get-ChildItem "$base\docs\02_docs_dashboard\dashboard_docs_YAML\Dashboard_COMPLET" -Filter "*.yaml").Count
 
 Write-Host "LOCAL docs/ total   : $docs_total"
@@ -43,7 +43,7 @@ Write-Host "  01_docs_config/   : $docs_01 (config_system_SH_PY_YAML : $cfg_yaml
 Write-Host "  02_docs_dashboard : $docs_02 (Dashboard_COMPLET : $dash_complet yaml)"
 Write-Host "  03_docs_automations: $docs_03"
 Write-Host "  04_docs_scripts   : $docs_04"
-Write-Host "  05_docs_MD_system : $docs_05"
+Write-Host "  XX_docs_MD_system : $docs_05"
 ```
 
 ### Etape 2 - Comptages reels PROD H:\docs (PowerShell)
@@ -54,7 +54,7 @@ $prod_01   = (Get-ChildItem "H:\docs\01_docs_config_system" -Recurse -File -Erro
 $prod_02   = (Get-ChildItem "H:\docs\02_docs_dashboard" -Recurse -File).Count
 $prod_03   = (Get-ChildItem "H:\docs\03_docs_automations" -Recurse -File).Count
 $prod_04   = (Get-ChildItem "H:\docs\04_docs_scripts" -Recurse -File).Count
-$prod_05   = (Get-ChildItem "H:\docs\05_docs_MD_system" -Recurse -File).Count
+$prod_05   = (Get-ChildItem "H:\docs\XX_docs_MD_system" -Recurse -File).Count
 
 # Dashboard racine H:\
 $dash_racine = Get-ChildItem "H:\" -Filter "Dashboard_*.yaml" | Sort-Object Name | Select-Object -Last 1 -ExpandProperty Name
@@ -64,7 +64,7 @@ Write-Host "  01_docs_config/   : $prod_01"
 Write-Host "  02_docs_dashboard : $prod_02"
 Write-Host "  03_docs_automations: $prod_03"
 Write-Host "  04_docs_scripts   : $prod_04"
-Write-Host "  05_docs_MD_system : $prod_05"
+Write-Host "  XX_docs_MD_system : $prod_05"
 Write-Host "Dashboard racine H:\ : $dash_racine"
 ```
 

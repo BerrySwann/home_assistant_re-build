@@ -348,15 +348,15 @@ Certaines cartes de cette page disparaissent automatiquement en mode absence. Ce
 ## 🔗 FICHIERS LIÉS
 
 ### Documentation
-- [`L3C1_VIGNETTE_ECLAIRAGE.md`](./L3C1_VIGNETTE_ECLAIRAGE.md) - vignette d'accès à cette page
+- [`L3C1_Vignette_ECLAIRAGE.md`](./L3C1_Vignette_ECLAIRAGE.md) - vignette d'accès à cette page
 - [`L3C2_PRISES/PAGE_PRISES.md`](../L3C2_PRISES/PAGE_PRISES.md) - page prises (même structure)
 - [`../WIFI_PRESENCE (Home Page)/PAGE_HOME.md`](../WIFI_PRESENCE%20(Home%20Page)/PAGE_HOME.md) - logique présence amont (P4)
 
 ---
 
-← Retour : [`L3C1_VIGNETTE_ECLAIRAGE.md`](./L3C1_VIGNETTE_ECLAIRAGE.md) | → Suite : [`L3C2_PRISES/`](../L3C2_PRISES/)
+← Retour : [`L3C1_Vignette_ECLAIRAGE.md`](./L3C1_Vignette_ECLAIRAGE.md) | → Suite : [`L3C2_PRISES/`](../L3C2_PRISES/)
 
 
 <!-- obsidian-wikilinks -->
 ---
-*Liens : [[DEPENDANCES_GLOBALES]]  [[L3C1_VIGNETTE_ECLAIRAGE]]*
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L3C1_Vignette_ECLAIRAGE]]*

@@ -3,4 +3,4 @@ Tout est appliqué. Récap final de la palette officielle à 10 entrées :
 
 <!-- obsidian-wikilinks -->
 ---
-*Liens : [[L2C3_VIGNETTE_ECLAIRAGE]]  [[L3C1_VIGNETTE_ECLAIRAGE]]*
+*Liens : [[L2C3_Vignette_ENERGIE_ECLAIRAGE]]  [[L3C1_Vignette_ECLAIRAGE]]*

@@ -226,7 +226,7 @@ cards:
 ## 🔗 FICHIERS LIÉS
 
 ### Documentation
-- [`L5C2_VIGNETTE_BATTERIES_PORTABLES.md`](./L5C2_VIGNETTE_BATTERIES_PORTABLES.md) - vignette résumé
+- [`L5C2_Vignette_BATTERIES_PORTABLES.md`](./L5C2_Vignette_BATTERIES_PORTABLES.md) - vignette résumé
 
 ---
 
@@ -235,4 +235,4 @@ cards:
 
 <!-- obsidian-wikilinks -->
 ---
-*Liens : [[DEPENDANCES_GLOBALES]]  [[L5C2_VIGNETTE_BATTERIES_PORTABLES]]*
+*Liens : [[DEPENDANCES_GLOBALES]]  [[L5C2_Vignette_BATTERIES_PORTABLES]]*

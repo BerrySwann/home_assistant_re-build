@@ -22,7 +22,7 @@ Une donnee suit toujours le meme chemin : **capteur natif** (Zigbee2MQTT, Hue, L
 | Document cle | Role |
 |---|---|
 | [`GLOBAL_INDEX_REPO.md`](./GLOBAL_INDEX_REPO.md) | Index unique - 6 sections (IA, config, dashboard, automations, scripts, systeme) - accordeon GitHub. *(4400+ lignes, prevoyez du cafe)* |
-| [`docs/05_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md`](./docs/05_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md) | Carte -> Template -> Sensor -> Utility Meter -> Source native - 18 vignettes |
+| [`docs/XX_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md`](./docs/XX_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md) | Carte -> Template -> Sensor -> Utility Meter -> Source native - 18 vignettes |
 | [`IA_CONTEXT_BASE.md`](./docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md) | Regles de codage, nomenclature, arborescences - directives IA completes *(copie GitHub du CLAUDE.md local, prompt de Claude)* |
 
 ---
@@ -221,7 +221,7 @@ docs/
 │   ├── docs_scripts_SH_MD/         <- docs scripts bash
 │   ├── docs_scripts_YAML/          <- scripts HA YAML
 │   └── docs_scripts_YAML_MD/       <- docs scripts HA
-├── 05_docs_MD_system/              <- DEPENDANCES_GLOBALES, GLOBAL_INDEX_REPO, index entites, templates
+├── XX_docs_MD_system/              <- DEPENDANCES_GLOBALES, GLOBAL_INDEX_REPO, index entites, templates
 ├── 05_docs_skills/                 <- copies des SKILL.md du projet (un dossier skill_<nom>/ par skill)
 └── 06_docs_technique/              <- procedures techniques (ex : pont Hue)
 ```

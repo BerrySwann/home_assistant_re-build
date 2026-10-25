@@ -20,7 +20,7 @@ Il n'y a plus de fichier `INDEX_NAVIGATION_FULL.md` ni `INDEX_NAVIGATION.md` dis
 docs/02_Docs_dashboard/
 - GLOBAL_INDEX_VIGNETTES_PAGES.md   <- index genere (ne pas modifier)
 - Dashboard_docs_yaml/              <- YAMLs dashboard (vignettes, pages, cartes isolees)
-    L0C0_PAGE_Home/  L1C1_01_Meteo/  L1C2_02_Temperatures/  ...  L6C3_18_VigiEau/  (18 vignettes)
+    L0C0_PAGE_Home/  L1C1_METEO/  L1C2_TEMPERATURES/  ...  L6C3_VIGIEAU/  (18 vignettes)
     PAGE_RASPI/
     Dashboard_COMPLET/              <- Exports complets dashboard (Dashboard_YYYY_MM_DD.yaml)
 - Dashboard_docs_md/                <- Fiches texte par vignette/page
@@ -28,7 +28,7 @@ docs/02_Docs_dashboard/
     (chaque dossier L*C* : 01_Vignette/ et 02_Page/, 02_page_nom si plusieurs pages)
 ```
 
-La chaine de dependances (`DEPENDANCES_GLOBALES.md`) est dans `docs/05_docs_MD_system/DEPENDANCES_GLOBALES/`, plus dans `Dashboard_docs_md`.
+La chaine de dependances (`DEPENDANCES_GLOBALES.md`) est dans `docs/XX_docs_MD_system/DEPENDANCES_GLOBALES/`, plus dans `Dashboard_docs_md`.
 Prod : `H:\docs\` = miroir de `docs\` local ; un seul export `H:\Dashboard_AAAA_MM_JJ.yaml` a la racine de `H:\` (verifie par `/histo`, etape 5B). Config YAML prod : `sensors/`, `templates/`, `utility_meter/` a la racine de `H:\`.
 
 ---

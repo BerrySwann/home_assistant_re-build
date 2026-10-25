@@ -1,7 +1,7 @@
 # GLOBAL INDEX IA
 
-> Fichier GENERE le 2026-10-23 22:51 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
-> 12 fichiers de contenu, 39 sauvegardes (.bak), 0 sans description.
+> Fichier GENERE le 2026-10-24 23:05 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
+> 12 fichiers de contenu, 48 sauvegardes (.bak), 0 sans description.
 
 ## A quoi sert ce fichier
 
@@ -38,8 +38,8 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 | Dossier | Nombre de sauvegardes |
 |---|---|
 | [00_IA (racine)](./) | 4 |
-| [IA_CONTEXT_BASE](IA_CONTEXT_BASE/) | 4 |
-| [SOUS_CONTEXT_IA/IA_ARBO_DETAIL](SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 5 |
+| [IA_CONTEXT_BASE](IA_CONTEXT_BASE/) | 10 |
+| [SOUS_CONTEXT_IA/IA_ARBO_DETAIL](SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 7 |
 | [SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE](SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/) | 3 |
 | [SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS](SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/) | 5 |
 | [SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS](SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/) | 2 |
@@ -49,7 +49,7 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 | [SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES](SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/) | 3 |
 | [SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS](SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/) | 3 |
 | [SOUS_CONTEXT_IA/IA_P4_PRESENCE](SOUS_CONTEXT_IA/IA_P4_PRESENCE/) | 1 |
-| [SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE](SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE/) | 2 |
+| [SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE](SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE/) | 3 |
 
 ## Les autres index globaux du projet
 
@@ -62,6 +62,6 @@ Tous sont verifies par /histo (liens casses, existence, prod).
 | [GLOBAL_INDEX_VIGNETTES_PAGES.md](../02_docs_dashboard/GLOBAL_INDEX_VIGNETTES_PAGES.md) | Genere par gen_global_index_vignettes_pages.py. | etape 9 de /histo + check_global_index.py |
 | [GLOBAL_INDEX_SCRIPTS_SH.md](../04_docs_scripts/GLOBAL_INDEX_SCRIPTS_SH.md) | Genere par gen_global_index_scripts.py (scripts bash et python). | etape 10 de /histo + check_global_index.py |
 | [GLOBAL_INDEX_SCRIPTS_YAML.md](../04_docs_scripts/GLOBAL_INDEX_SCRIPTS_YAML.md) | Genere par gen_global_index_scripts.py (scripts Home Assistant). | etape 10 de /histo + check_global_index.py |
-| [ENTITES_GLOBAL_INDEX.md](../05_docs_MD_system/ENTITES_GLOBAL_INDEX/ENTITES_GLOBAL_INDEX.md) | Index des entites, sans generateur : tenu a la main. | check_global_index.py |
+| [ENTITES_GLOBAL_INDEX.md](../XX_docs_MD_system/ENTITES_GLOBAL_INDEX/ENTITES_GLOBAL_INDEX.md) | Index des entites, sans generateur : tenu a la main. | check_global_index.py |
 | [GLOBAL_INDEX_IA.md](GLOBAL_INDEX_IA.md) | Ce fichier, genere par gen_global_index_ia.py. | etape 11 de /histo + check_global_index.py |
 

@@ -78,7 +78,7 @@ AUTRES = [
  ("GLOBAL_INDEX_VIGNETTES_PAGES.md", "../02_docs_dashboard/GLOBAL_INDEX_VIGNETTES_PAGES.md", "Genere par gen_global_index_vignettes_pages.py.", "etape 9 de /histo + check_global_index.py"),
  ("GLOBAL_INDEX_SCRIPTS_SH.md", "../04_docs_scripts/GLOBAL_INDEX_SCRIPTS_SH.md", "Genere par gen_global_index_scripts.py (scripts bash et python).", "etape 10 de /histo + check_global_index.py"),
  ("GLOBAL_INDEX_SCRIPTS_YAML.md", "../04_docs_scripts/GLOBAL_INDEX_SCRIPTS_YAML.md", "Genere par gen_global_index_scripts.py (scripts Home Assistant).", "etape 10 de /histo + check_global_index.py"),
- ("ENTITES_GLOBAL_INDEX.md", "../05_docs_MD_system/ENTITES_GLOBAL_INDEX/ENTITES_GLOBAL_INDEX.md", "Index des entites, sans generateur : tenu a la main.", "check_global_index.py"),
+ ("ENTITES_GLOBAL_INDEX.md", "../XX_docs_MD_system/ENTITES_GLOBAL_INDEX/ENTITES_GLOBAL_INDEX.md", "Index des entites, sans generateur : tenu a la main.", "check_global_index.py"),
  ("GLOBAL_INDEX_IA.md", "GLOBAL_INDEX_IA.md", "Ce fichier, genere par gen_global_index_ia.py.", "etape 11 de /histo + check_global_index.py"),
 ]
 RX_BAK = re.compile(r"\.bak_\d{4}_\d{2}_\d{2}")
