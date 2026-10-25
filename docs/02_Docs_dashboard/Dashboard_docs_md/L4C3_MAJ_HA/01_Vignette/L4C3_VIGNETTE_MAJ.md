@@ -62,7 +62,7 @@ La vignette L4C3 affiche le **nombre total de mises à jour disponibles** dans H
 |-------|-------|
 | `custom:button-card` | Vignette L4C3 - affichage compteur + icône HA |
 | `custom:mushroom-update-card` | Page MAJ - carte individuelle par composant |
-| `custom:mushroom-template-card` | Page MAJ - chips CPU/RAM, versions texte |
+| `custom:mushroom-template-card` | Page MAJ - versions texte |
 | `custom:auto-entities` | Page MAJ - liste dynamique des mises à jour disponibles |
 | `custom:mushroom-title-card` | Page MAJ - titres de sections |
 
@@ -230,7 +230,7 @@ Vérifier dans Outils développeur > États : filtrer `update.` et regarder si `
 | `custom:button-card` | HACS | ✅ Essentiel |
 | `custom:mushroom-update-card` | HACS | ✅ Essentiel (page MAJ) |
 | `custom:auto-entities` | HACS | ✅ Essentiel (page MAJ) |
-| `custom:mushroom-template-card` | HACS | ⚠️ Optionnel (chips CPU/RAM) |
+| `custom:mushroom-template-card` | HACS | ⚠️ Optionnel (versions texte) |
 | HACS | HACS | ⚠️ Optionnel (MAJ HACS uniquement) |
 
 ---

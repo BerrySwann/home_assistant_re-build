@@ -2452,12 +2452,8 @@ cpu_package) n'existent dans aucun fichier <code>config_system_SH_PY_YAML/</code
 <blockquote>
 
 <details>
-<summary><i>Entités natives HA / intégrations externes (7)</i></summary>
+<summary><i>Entités natives HA / intégrations externes (3)</i></summary>
 <blockquote><ul>
-<li><code>sensor.home_assistant_core_cpu_percent</code></li>
-<li><code>sensor.home_assistant_core_memory_percent</code></li>
-<li><code>sensor.home_assistant_supervisor_cpu_percent</code></li>
-<li><code>sensor.home_assistant_supervisor_memory_percent</code></li>
 <li><code>update.hacs_update</code></li>
 <li><code>update.home_assistant_core_update</code></li>
 <li><code>update.home_assistant_supervisor_update</code></li>

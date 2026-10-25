@@ -621,12 +621,6 @@ cards:
                 tap_action:
                   action: url
                   url_path: https://www.home-assistant.io/latest-release-notes/
-              - type: entity
-                entity: sensor.home_assistant_core_cpu_percent
-                icon_color: blue
-              - type: entity
-                entity: sensor.home_assistant_core_memory_percent
-                icon_color: orange
       - type: vertical-stack
         cards:
           - type: custom:mushroom-update-card
@@ -656,12 +650,6 @@ cards:
                 tap_action:
                   action: url
                   url_path: https://github.com/home-assistant/supervisor/releases/latest
-              - type: entity
-                entity: sensor.home_assistant_supervisor_cpu_percent
-                icon_color: blue
-              - type: entity
-                entity: sensor.home_assistant_supervisor_memory_percent
-                icon_color: orange
 
 # annotations_log:
 # [2026-06-15] Sauvegarde page L4C3 MàJ HA complète (Addons + HACS + Z2M + Core + Supervisor)

@@ -61,8 +61,8 @@ La page MAJ est composée de **deux grilles côte à côte** (`type: grid`). Ell
 │   + template info        │   auto-entities mqtt                 │
 │                          │                                      │
 │ ■ HACS (titre + chips)   │ ■ H.A. ADD-ON                        │
-│   auto-entities hacs     │   Core update-card + chips CPU/RAM   │
-│   update.hacs_update     │   Supervisor card + chips CPU/RAM    │
+│   auto-entities hacs     │   Core update-card + chip Changelog  │
+│   update.hacs_update     │   Supervisor card + chip Changelog   │
 └──────────────────────────┴──────────────────────────────────────┘
 ```
 
@@ -1177,12 +1177,6 @@ cards:
                 tap_action:
                   action: url
                   url_path: https://www.home-assistant.io/latest-release-notes/
-              - type: entity
-                entity: sensor.home_assistant_core_cpu_percent
-                icon_color: blue
-              - type: entity
-                entity: sensor.home_assistant_core_memory_percent
-                icon_color: orange
       - type: vertical-stack
         cards:
           - type: custom:mushroom-update-card
@@ -1212,12 +1206,6 @@ cards:
                 tap_action:
                   action: url
                   url_path: https://github.com/home-assistant/supervisor/releases/latest
-              - type: entity
-                entity: sensor.home_assistant_supervisor_cpu_percent
-                icon_color: blue
-              - type: entity
-                entity: sensor.home_assistant_supervisor_memory_percent
-                icon_color: orange
 ```
 
 ---

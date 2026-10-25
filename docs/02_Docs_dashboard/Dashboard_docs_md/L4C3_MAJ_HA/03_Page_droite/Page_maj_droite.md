@@ -35,7 +35,7 @@
 
 ## 🎯 VUE D'ENSEMBLE
 
-Colonne de droite de la page `/dashboard-tablette/maj`. Elle liste les mises à jour **en attente** par catégorie (add-ons, HACS, Zigbee2MQTT), signale les intégrations qui demandent un redémarrage, puis affiche les cartes de mise à jour de Core et Supervisor avec leur charge CPU et mémoire. Deux titres : `H.A. UPDATE` et `H.A. ADD-ON` (heading, icône `mdi:home-assistant`, tap = retour `/dashboard-tablette/0`).
+Colonne de droite de la page `/dashboard-tablette/maj`. Elle liste les mises à jour **en attente** par catégorie (add-ons, HACS, Zigbee2MQTT), signale les intégrations qui demandent un redémarrage, puis affiche les cartes de mise à jour de Core et Supervisor avec leur lien de notes de version. Deux titres : `H.A. UPDATE` et `H.A. ADD-ON` (heading, icône `mdi:home-assistant`, tap = retour `/dashboard-tablette/0`).
 
 La colonne de gauche (versions Core, OS, Supervisor et HACS) est documentée dans [`PAGE_MAJ_GAUCHE.md`](../02_page_gauche/PAGE_MAJ_GAUCHE.md).
 
@@ -52,8 +52,8 @@ La colonne de gauche (versions Core, OS, Supervisor et HACS) est documentée dan
 │                    auto-entities : intégration mqtt, état on │
 │                                                              │
 │ H.A. ADD-ON                                                  │
-│ ■ Home Assistant Core        update-card + chips CPU / RAM   │
-│ ■ Home Assistant Supervisor  update-card + chips CPU / RAM   │
+│ ■ Home Assistant Core        update-card + chip Changelog    │
+│ ■ Home Assistant Supervisor  update-card + chip Changelog    │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -67,7 +67,7 @@ La colonne de gauche (versions Core, OS, Supervisor et HACS) est documentée dan
 | HACS updates | idem | Compteur et liste des `update.*` de l'intégration `hacs` à `on` |
 | Redémarrage requis | `markdown` | Liste les entités `update` dont l'attribut `release_summary` est exactement `<ha-alert alert-type='error'>Restart of Home Assistant required</ha-alert>` ; n'affiche rien s'il n'y en a aucune |
 | ZigBee2MQTT | idem | Compteur et liste des `update.*` de l'intégration `mqtt` à `on` |
-| H.A. ADD-ON | `mushroom-update-card` x2 + `mushroom-chips-card` x2 | Core et Supervisor : carte de mise à jour sans boutons de contrôle (`show_buttons_control: false`), lien "Release Changelog" (Core : notes de version du site Home Assistant ; Supervisor : releases GitHub du Supervisor), chips CPU (bleu) et mémoire (orange) |
+| H.A. ADD-ON | `mushroom-update-card` x2 + `mushroom-chips-card` x2 | Core et Supervisor : carte de mise à jour sans boutons de contrôle (`show_buttons_control: false`), lien "Release Changelog" (Core : notes de version du site Home Assistant ; Supervisor : releases GitHub du Supervisor) ; les puces CPU et mémoire ont été retirées le 2026-10-25 (capteurs hassio désactivés par défaut, non utilisés sur le mini PC) |
 
 Chaque ligne de liste (auto-entities) est un `custom:button-card` : nom, versions installée et dernière, lien vers les notes de version, icône `mdi:upload-circle` (devient `mdi:rotate-right` animée pendant l'installation) et tap = `update.install`.
 
@@ -82,12 +82,8 @@ Chaque ligne de liste (auto-entities) est un `custom:button-card` : nom, version
 | `update.home_assistant_core_update` | HA natif | carte Core (H.A. ADD-ON) |
 | `update.home_assistant_supervisor_update` | HA natif | carte Supervisor (H.A. ADD-ON) |
 | `update.home_assistant_operating_system_update` | HA natif | exclue du compteur Add-ons |
-| `sensor.home_assistant_core_cpu_percent` | source non vérifiée | chip CPU Core |
-| `sensor.home_assistant_core_memory_percent` | idem | chip RAM Core |
-| `sensor.home_assistant_supervisor_cpu_percent` | idem | chip CPU Supervisor |
-| `sensor.home_assistant_supervisor_memory_percent` | idem | chip RAM Supervisor |
 
-L'intégration qui fournit les 4 capteurs CPU/RAM n'est pas vérifiée ici. Le domaine `update` compte 126 entités dans HA le 2026-10-11, aucune n'est à `on`.
+Les 4 capteurs CPU/RAM de Core et Supervisor (plateforme hassio, désactivés par défaut) ne sont plus utilisés par la page depuis le 2026-10-25. Le domaine `update` compte 126 entités dans HA le 2026-10-11, aucune n'est à `on`.
 
 ---
 
@@ -728,12 +724,6 @@ cards:
                 tap_action:
                   action: url
                   url_path: https://www.home-assistant.io/latest-release-notes/
-              - type: entity
-                entity: sensor.home_assistant_core_cpu_percent
-                icon_color: blue
-              - type: entity
-                entity: sensor.home_assistant_core_memory_percent
-                icon_color: orange
       - type: vertical-stack
         cards:
           - type: custom:mushroom-update-card
@@ -763,12 +753,6 @@ cards:
                 tap_action:
                   action: url
                   url_path: https://github.com/home-assistant/supervisor/releases/latest
-              - type: entity
-                entity: sensor.home_assistant_supervisor_cpu_percent
-                icon_color: blue
-              - type: entity
-                entity: sensor.home_assistant_supervisor_memory_percent
-                icon_color: orange
 ```
 
 ---
