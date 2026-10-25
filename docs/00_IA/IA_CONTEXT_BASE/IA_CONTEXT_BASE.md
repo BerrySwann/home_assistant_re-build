@@ -137,11 +137,11 @@ Le /trigul normal (docs .md, local / prod / GitHub) est complete par une etape p
 
 Decision : l'etape profonde est INTEGREE au /trigul, ce n'est pas une commande a part. Duree mesuree le 2026-10-11 : 0.5 s de traitement pour 71 unites (62 automations + 9 scripts), 0.7 s appel PowerShell compris, contre environ 1 min 30 pour la partie docs .md. Aucun gain a les separer.
 
-Script (ne pas le modifier sans demande) : `docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py`
-Lancement (PowerShell) : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py"`
+Script (ne pas le modifier sans demande) : `docs\04_docs_scripts\04_docs_scripts_sh\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py`
+Lancement (PowerShell) : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_sh\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py"`
 
 Le script enchaine, dans cet ordre :
-1. Copie de H:\automations.yaml vers `docs\03_docs_automations\docs_automations_YAML\AUTOMATIONS.YAML_ORIGINAL\automations.bak_AAAA_MM_JJ_HHhMMmSSs.yaml` et de H:\scripts.yaml vers `docs\04_docs_scripts\DOCS_SCRIPT_ORIGINAL\scripts.bak_AAAA_MM_JJ_HHhMMmSSs.yaml`, avec controle MD5 de chaque copie.
+1. Copie de H:\automations.yaml vers `docs\03_docs_automations\03_docs_automations_yaml\AUTOMATIONS_YAML_ORIGINAL\automations.bak_AAAA_MM_JJ_HHhMMmSSs.yaml` et de H:\scripts.yaml vers `docs\04_docs_scripts\04_docs_script_original\scripts.bak_AAAA_MM_JJ_HHhMMmSSs.yaml`, avec controle MD5 de chaque copie.
 2. Extraction d'un fichier par unite dans `ReBuild\_tmp_trigul_profond\` (automations\<id>.yaml, scripts\<nom>.yaml).
 3. Comparaison de chaque unite au YAML local par MD5 logique (YAML parse, cles triees, category et labels ignores, espaces de debut et de fin ignores, commentaires et mise en forme ignores). Automations appariees par id, sinon par alias sans lettre de tete. Scripts apparies par nom.
 4. Rapport `historique\MD5\01_trigul_profond\trigul_profond_AAAA-MM-JJ.txt` (sauvegarde `.bak_date_heure` si le rapport du jour existe deja).
@@ -150,15 +150,15 @@ Le script enchaine, dans cet ordre :
 Puis, par Claude :
 6. Categories HA : lire `ha_config_get_category` pour les scopes automation et script, ecrire `historique\MD5\02_categories_ha\categories_ha_AAAA-MM-JJ.txt` (lignes `scope | category_id | nom | icone`, triees), comparer a la version precedente du dossier (Compare-Object sur les lignes de donnees) et signaler tout ajout, suppression ou renommage. Limite : cela couvre la liste des categories, pas l'affectation de chaque automation (elle est dans le registre des entites, pas dans automations.yaml).
 7. Compte rendu : donner les lignes de synthese du rapport, lister les DIFFERENT et les ABSENT_LOCAL, les ecarts de categories, et le chemin des rapports. Ne rien corriger sans demande.
-8. Journal de trace (2026-10-18, a la demande d'Eric) : le trigul se lance par `docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\trigul_run.py`, qui ecrit `historique\MD5\04_journal_trigul\trigul_journal_AAAA-MM-JJ.log` (une ligne par evenement, verdict OK, ATTENTION ou ECHEC par etape, controle des echecs silencieux). Si le journal ne finit pas par `FIN DU LANCEUR`, le lanceur a ete interrompu. L'etape 6 (categories HA) y est ajoutee par Claude avec `--note`.
+8. Journal de trace (2026-10-18, a la demande d'Eric) : le trigul se lance par `docs\04_docs_scripts\04_docs_scripts_sh\hermes_audit_md5_trigul_3md\trigul_run.py`, qui ecrit `historique\MD5\04_journal_trigul\trigul_journal_AAAA-MM-JJ.log` (une ligne par evenement, verdict OK, ATTENTION ou ECHEC par etape, controle des echecs silencieux). Si le journal ne finit pas par `FIN DU LANCEUR`, le lanceur a ete interrompu. L'etape 6 (categories HA) y est ajoutee par Claude avec `--note`.
 
 Regles : lecture seule sur H: et sur les YAML locaux ; le script n'ecrit que les deux copies datees, le rapport et le dossier temporaire. Les copies datees des dossiers ORIGINAL sont des `.bak` ordinaires, traitees par le menage de /histo (jours passes sans l'heure, plafond de 3). Ordre du trigul : local, prod, GitHub.
 
 ---
 
 ## Cohérence Documentaire (anti-oubli)
-- À chaque modif YAML dans `docs/` → vérifier impact vignette (`docs/02_docs_dashboard/dashboard_docs_MD/L*`) + chaîne dépendances.
-- Si rupture cohérence → proposer update `docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md` ou `/sync_index`.
+- À chaque modif YAML dans `docs/` → vérifier impact vignette (`docs/02_docs_dashboard/02_dashboard_docs_md/L*`) + chaîne dépendances.
+- Si rupture cohérence → proposer update `docs/02_docs_dashboard/02_dashboard_docs_md/DEPENDANCES_GLOBALES.md` ou `/sync_index`.
 - Tâche non terminée si code OK mais doc dépendances obsolète.
 - Règle d'Eric 2026-10-24 : quand un YAML est modifié (par Eric ou par Claude), Claude corrige dans la foulée, si nécessaire, le .md associé (fiche vignette ou page) en LOCAL, avec .bak, annotations_log et ligne du journal MODIFS, sans attendre qu'Eric le demande. Si le .md n'a pas à changer, le dire dans le rapport avec la raison. Le push vers H:\ reste sur ordre d'Eric.
 
@@ -190,7 +190,7 @@ Regles : lecture seule sur H: et sur les YAML locaux ; le script n'ecrit que les
 - `/ha_push_yaml` → pousse un fichier YAML de `docs/` vers prod `H:\`.
 - `/ha_push_docs` → synchronise les docs locales `docs/` vers `H:\Docs\`.
 - `/ha_push_md` → pousse uniquement les fichiers `*.md` de `docs/` vers `H:\Docs\`.
-- `/ha_verif_headers` -> verifie en lecture seule les en-tetes des YAML de config (boites ASCII a largeur variable, 5 headers, slug, name, unique_id) avec `docs/04_docs_scripts/docs_scripts_sh/Verif_headers_yaml/Verif_headers_yaml.py`.
+- `/ha_verif_headers` -> verifie en lecture seule les en-tetes des YAML de config (boites ASCII a largeur variable, 5 headers, slug, name, unique_id) avec `docs/04_docs_scripts/04_docs_scripts_sh/Verif_headers_yaml/Verif_headers_yaml.py`.
 - `/trigul` → triangulation MD5 des docs (local vs prod vs GitHub), rapport dans `historique\MD5\`. Inclut l'etape profonde automations/scripts et les categories HA (voir PROTOCOLE TRIGUL PROFOND).
 > Chaque `push_*` met aussi a jour le `.md` du fichier pousse (voir SOURCE DE VERITE).
 
@@ -224,7 +224,7 @@ Les 2 dernieres actions avant de fermer la session, dans cet ordre :
 
 1. A partir du 2026-10-13, chaque fichier est modifie depuis le LOCAL (`ReBuild/`) : le local est la source de verite unique.
 2. Aucun fichier n'est modifie en prod (`H:\`, `D:\`) sans que le local ait d'abord ete modifie.
-3. Chaque `push_*` (`/ha_push_yaml`, `/ha_push_docs`, `/ha_push_md`) met systematiquement a jour le `.md` (la fiche) du fichier pousse : `docs_automations_MD`, `docs_scripts_YAML_MD`, `docs_scripts_SH_MD`, `dashboard_docs_MD`.
+3. Chaque `push_*` (`/ha_push_yaml`, `/ha_push_docs`, `/ha_push_md`) met systematiquement a jour le `.md` (la fiche) du fichier pousse : `03_docs_automations_md`, `04_docs_scripts_yaml_md`, `04_docs_scripts_sh_md`, `02_dashboard_docs_md`.
 
 **Workflow de modification (depuis le 2026-10-04)** : on ne modifie plus un fichier directement
 en prod (H:\). On edite la copie LOCALE (`docs/01_docs_config_system/config_system_SH_PY_YAML/`,
@@ -306,36 +306,36 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
 ### 📄 DOCS (.md + .yaml dashboard) - emplacements
 
 > Deux types de fichiers :
-> - `.md` : `docs/02_docs_dashboard/dashboard_docs_MD/` · `docs/03_docs_automations/docs_automations_MD/` · `docs/04_docs_scripts/docs_scripts_YAML_MD/` · `docs/04_docs_scripts/docs_scripts_SH_MD/` · etc.
-> - `.yaml` dashboard : `docs/02_docs_dashboard/dashboard_docs_YAML/` (vignettes, pages, cartes, Dashboard_COMPLET)
+> - `.md` : `docs/02_docs_dashboard/02_dashboard_docs_md/` · `docs/03_docs_automations/03_docs_automations_md/` · `docs/04_docs_scripts/04_docs_scripts_yaml_md/` · `docs/04_docs_scripts/04_docs_scripts_sh_md/` · etc.
+> - `.yaml` dashboard : `docs/02_docs_dashboard/02_dashboard_docs_yaml/` (vignettes, pages, cartes, Dashboard_COMPLET)
 
 Copie de prod : `H:\Docs\` (poussee depuis le local, ne jamais la modifier directement). GitHub `home_assistant_re-build` : backup via git auto depuis HA, reflet de la prod.
 
 `H:\Docs\` (racine, hors `01_docs_config_system\config_system_SH_PY_YAML\`) ne contient QUE des .md, histo et yaml Dashboard - **jamais de YAML config HA**.
 `H:\docs\01_docs_config_system\config_system_SH_PY_YAML\` est l'image locale miroir de la config YAML de prod (sensors, templates, utility_meter, command_line, groups, input_booleans, shell_command, themes, blueprints) - alimentee par la comparaison de `ha-trigul` (etape C, reprise de l'ancien skill `ha-resync-docs`, supprime le 2026-10-20) et par les push normaux (`ha-push-yaml`). Exception documentee a la regle ci-dessus, pas une contradiction.
 `/config/notifs/` (`H:\notifs`) : TOUS les fichiers sont vivants (journaux regeneres par HA en continu). Ils ne vont jamais dans `docs/` (ni local, ni miroir `H:\docs`, ni `docs/` de GitHub) : pas de copie, pas de push, pas de bak de la part de Claude ; lecture seule sur `H:\notifs`. Ils sont sauvegardes au fil de l'eau sur GitHub, a la racine du depot (`notifs/`), par le backup HA : c'est voulu, pour retrouver les donnees anterieures si quelque chose casse (regle d'Eric du 2026-10-18).
-- REGLE XX_ (decidee par Eric le 2026-10-25) : tout dossier dont le nom commence par `XX_` est LOCAL SEUL. Il n'est jamais pousse en prod (`H:`), jamais sur GitHub, et il est exclu des comparaisons de push et des audits prod/GitHub (trigul). Existants : `docs\XX_docs_MD_system`, `docs\03_docs_automations\docs_automations_yaml\XX_RASPI`, `docs\02_docs_dashboard\Dashboard_docs_yaml\XX_RASPI`. Si un dossier `XX_` apparait en prod, ne pas le copier ailleurs : le signaler a Eric, qui decide (retrait avec la regle de suppression TEMPO). Restent aussi locaux, hors de `docs`, jamais en prod (confirme par Eric le 2026-10-25) : `TEMPO`, `Claude md SAVE\ARCHIVE`, `HTML`, `MOC`, `historique`. A cela s'ajoutent les interdits de push deja ecrits plus haut (`.bak`, fichiers de travail, `secrets.yaml`, `Dashboard_COMPLET`, `.md` dates et `_ARCHIVE`).
+- REGLE XX_ (decidee par Eric le 2026-10-25) : tout dossier dont le nom commence par `XX_` est LOCAL SEUL. Il n'est jamais pousse en prod (`H:`), jamais sur GitHub, et il est exclu des comparaisons de push et des audits prod/GitHub (trigul). Existants : `docs\XX_docs_MD_system`, `docs\03_docs_automations\03_docs_automations_yaml\XX_RASPI`, `docs\02_docs_dashboard\02_dashboard_docs_yaml\XX_RASPI`. Si un dossier `XX_` apparait en prod, ne pas le copier ailleurs : le signaler a Eric, qui decide (retrait avec la regle de suppression TEMPO). Restent aussi locaux, hors de `docs`, jamais en prod (confirme par Eric le 2026-10-25) : `TEMPO`, `Claude md SAVE\ARCHIVE`, `HTML`, `MOC`, `historique`. A cela s'ajoutent les interdits de push deja ecrits plus haut (`.bak`, fichiers de travail, `secrets.yaml`, `Dashboard_COMPLET`, `.md` dates et `_ARCHIVE`).
 
-> ⚠️ Audit MD5 docs : couvre les `.md` ET les `.yaml` dashboard (`dashboard_docs_YAML/`). Ne pas oublier les yaml lors d'un audit de cohérence local vs H:\Docs\.
+> ⚠️ Audit MD5 docs : couvre les `.md` ET les `.yaml` dashboard (`02_dashboard_docs_yaml/`). Ne pas oublier les yaml lors d'un audit de cohérence local vs H:\Docs\.
 
 > Ancien repo `home-assistant-config` **supprimé définitivement** (2026-04-27). Seul `home_assistant_re-build` est actif.
 
 ### Règles fondamentales
 - Répertoires préfixés `P*_` selon le Pôle.
 - `docs/` = YAML config HA (état cible → /homeassistant/) - audité 1×/semaine.
-- `docs/03_docs_automations/docs_automations_YAML/` = automations individuelles (référence locale).
-- `docs/02_docs_dashboard/dashboard_docs_YAML/` = vignettes/pages dashboard.
+- `docs/03_docs_automations/03_docs_automations_yaml/` = automations individuelles (référence locale).
+- `docs/02_docs_dashboard/02_dashboard_docs_yaml/` = vignettes/pages dashboard.
 - ⛔ `TREE_CORRIGE/` et `TREE_ORIGINE/` **n'existent plus** - tout est sous `docs/`.
 - Fichiers absents de `docs/01` mais présents GitHub = à supprimer en prod.
-- Automations : jamais modifier `automations.yaml` direct → passer par UI HA + `docs/03_docs_automations/docs_automations_YAML/`.
+- Automations : jamais modifier `automations.yaml` direct → passer par UI HA + `docs/03_docs_automations/03_docs_automations_yaml/`.
 
 ### Qui fait quoi - extraction / injection (par type de fichier)
 
 | Type | Injection en prod | Extraction / stockage local |
 |:-----|:-------------------|:-----------------------------|
 | **Config YAML** (sensors/templates/UM/command_line) | Edition depuis la copie LOCALE `docs/01_docs_config_system/config_system_SH_PY_YAML/`, sauvegarde locale `.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}` avant modif (REGLE DE SAUVEGARDE), puis push vers `H:\` via `ha-push-yaml` (MD5-first, confirmation obligatoire) | Le fichier local (sans suffixe de date) est deja la reference - pas d'extraction a faire apres coup |
-| **Automations** | Toujours à la main dans l'UI HA (Eric), jamais `automations.yaml` en direct | Une fois validée, **Claude** récupère uniquement le bloc modifié et le stocke individuellement dans `docs/03_docs_automations/docs_automations_YAML/{Pole}/` |
-| **Dashboard** | Toujours à la main dans l'UI HA (Paramètres → Tableau de bord → Modifier en YAML) | Pas d'extraction automatique - **Eric** récupère le code à la main et le colle. **Claude** vérifie, stocke dans `docs/02_docs_dashboard/dashboard_docs_YAML/L{x}C{x}_.../` sous le nom de travail **SANS date**, avec une sauvegarde `.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}` avant chaque modification (REGLE DE SAUVEGARDE) |
+| **Automations** | Toujours à la main dans l'UI HA (Eric), jamais `automations.yaml` en direct | Une fois validée, **Claude** récupère uniquement le bloc modifié et le stocke individuellement dans `docs/03_docs_automations/03_docs_automations_yaml/{Pole}/` |
+| **Dashboard** | Toujours à la main dans l'UI HA (Paramètres → Tableau de bord → Modifier en YAML) | Pas d'extraction automatique - **Eric** récupère le code à la main et le colle. **Claude** vérifie, stocke dans `docs/02_docs_dashboard/02_dashboard_docs_yaml/L{x}C{x}_.../` sous le nom de travail **SANS date**, avec une sauvegarde `.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}` avant chaque modification (REGLE DE SAUVEGARDE) |
 
 > Raison de l'asymétrie Dashboard : limitation technique - pas d'accès filesystem direct au Lovelace YAML comme pour `/config`.
 
@@ -372,8 +372,8 @@ find . -type f -name "*.yaml" -print0 | sort -z | xargs -0 md5sum | sed 's|\./||
 | Priorité | Périmètre | Raison |
 |:---------|:----------|:-------|
 | **🔴 CRITIQUE** | `docs/` (sensors/, templates/, utility_meter/, command_line/) | Image locale poussee vers `H:\` via `ha-push-yaml` - un ecart non pousse peut laisser HA en retard sur le local |
-| **🔴 CRITIQUE** | `automations.yaml` GitHub vs `docs/03_docs_automations/docs_automations_YAML/` | Détecter ajouts/suppressions/renommages depuis HA |
-| **🟡 SECONDAIRE** | `docs/02_docs_dashboard/dashboard_docs_YAML/` vs `H:\Docs\` | UI seulement - ne casse pas HA |
+| **🔴 CRITIQUE** | `automations.yaml` GitHub vs `docs/03_docs_automations/03_docs_automations_yaml/` | Détecter ajouts/suppressions/renommages depuis HA |
+| **🟡 SECONDAIRE** | `docs/02_docs_dashboard/02_dashboard_docs_yaml/` vs `H:\Docs\` | UI seulement - ne casse pas HA |
 
 ### Audit automations (MD5 + diff alias)
 ```bash
@@ -381,13 +381,13 @@ find . -type f -name "*.yaml" -print0 | sort -z | xargs -0 md5sum | sed 's|\./||
 grep "^  alias:" /tmp/home_assistant_re-build-main/automations.yaml | sed 's/  alias: //' | sort > /tmp/github_aliases.txt
 
 # Compter les fichiers automations locaux (hors old/)
-find docs/03_docs_automations/docs_automations_YAML -name "*.yaml" -not -path "*/old/*" -not -path "*/_old*" | sort > /tmp/local_autom_files.txt
+find docs/03_docs_automations/03_docs_automations_yaml -name "*.yaml" -not -path "*/old/*" -not -path "*/_old*" | sort > /tmp/local_autom_files.txt
 
 # Comparer les alias avec les noms de fichiers → détecter les manquants
 wc -l /tmp/github_aliases.txt /tmp/local_autom_files.txt
 ```
 
-**Dashboard complet** : vérifier age avant comparaison (`docs/02_docs_dashboard/dashboard_docs_YAML/Dashboard_COMPLET/Dashboard_YYYY_MM_DD.yaml` ≤ 2 jours).
+**Dashboard complet** : vérifier age avant comparaison (`docs/02_docs_dashboard/02_dashboard_docs_yaml/Dashboard_COMPLET/Dashboard_YYYY_MM_DD.yaml` ≤ 2 jours).
 
 ---
 
@@ -501,10 +501,19 @@ Cycles : `quotidien` | `hebdomadaire` | `mensuel` | `annuel`
 - `AQ_` remplace `A_` pour Air Quality : `A_01_air_quality.yaml` s'écrit `AQ_01_air_quality.yaml`, et le dossier `Air_quality/` s'écrit `Air_Quality/` (exception limitée à ce nom, chaque mot garde sa majuscule) ; ne pas confondre avec les lettres d'ordre `A_`, `B_`, `C_`, `D_` des automations
 - `GitHub` s'écrit toujours `GitHub` (G et H majuscules) : toute autre écriture (`github`, `Github`, `GITHUB`) devient `GitHub` dans un nom de dossier ou de fichier de `docs` ; cette règle l'emporte sur la règle de la première lettre (exemple : `Github_maintenance` devient `GitHub_maintenance`, `GITHUB` devient `GitHub`)
 - `GLOBAL_INDEX` s'écrit toujours en majuscules dans un nom de dossier ou de fichier de `docs`, sauvegardes `.bak` comprises (exemple : `Gen_global_index_ia.py` devient `Gen_GLOBAL_INDEX_ia.py`)
-- Les dossiers de type de fichiers (md, yaml, sh...) enfants d'un dossier racine `0x_` de `docs` reprennent son numéro : `03_docs_automations_md` (et non `docs_automations_md`) ; détail dans le fichier des règles de nommage (2026-10-17)
+- Les dossiers de type de fichiers (md, yaml, sh...) enfants d'un dossier racine `0x_` de `docs` reprennent son numéro : `03_docs_automations_md` (et non `03_docs_automations_md`) ; détail dans le fichier des règles de nommage (2026-10-17)
 - Aucun accent dans les noms de dossiers et de fichiers de `docs`
-- Aucun espace entre deux mots dans les noms de dossiers et de fichiers de `docs` : chaque espace est remplace par `_` (decide par Eric le 2026-10-25). Cas particuliers : un tiret entoure d'espaces (` - `) est remplace par un seul `_` ; `&` devient `et` entre deux `_`. Un tiret colle aux mots (`hc-hp`, `2024-2025`) reste tel quel. Les parentheses sont supprimees et les tirets qu'elles contiennent deviennent `_` (`Watchdog piles (hue-ikea-sonoff)` devient `Watchdog_piles_hue_ikea_sonoff`). Exemples : `Bouton virtuel` devient `Bouton_virtuel`, `Backup ha - GitHub` devient `Backup_ha_GitHub`, `Mariadb & vscode optimisation` devient `Mariadb_et_vscode_optimisation`. Seul `L0C0_PAGE_Home` reste intact (contenu compris).
-- Dossiers LxCx de `docs/02_docs_dashboard` (décidé par Eric le 2026-10-25, définitif ; seul `L0C0_PAGE_Home` reste tel quel) : dans `Dashboard_docs_md` comme dans `Dashboard_docs_yaml`, un dossier `LxCx_{NOM}` en majuscules et sans numéro (`L3C3_STORES`) contient `LxCx_{NOM}_01_Vignette` et `LxCx_{NOM}_02_Page` (`LxCx_{NOM}_03_Page`... si plusieurs pages), et les fichiers s'appellent `LxCx_Vignette_{NOM}.md` ou `.yaml` et `LxCx_Page_{NOM}.md` ou `.yaml` (`L3C3_STORES_01_Vignette\L3C3_Vignette_STORES.md`, `L3C3_STORES_02_Page\L3C3_Page_STORES.yaml`). Tout nom commence par `LxCx` pour repérer où on se trouve. Un suffixe éventuel (page gauche, page droite...) s'écrit en minuscules après le {NOM} dans le nom du fichier et dans le nom du dossier de page (`L3C1_ECLAIRAGE_02_Page_gauche`, `L3C1_Page_ECLAIRAGE_gauche.md`, validé par Eric le 2026-10-25).
+- Caracteres dans les noms de dossiers et de fichiers de `docs` (decide par Eric le 2026-10-25, 8 regles) :
+  1. Base : un espace devient `_` ; `-` devient `_` ; `&` devient `_et_` (toujours en minuscules) ; `(` et `)` sont supprimes.
+  2. Autres caracteres : tout caractere qui n'est ni lettre, ni chiffre, ni `_`, ni `.` devient `_` (`,` `;` `'` `+` `=` `%` `[ ]` `{ }` `!` `@` `$` `~`). Les accents ont leur propre regle.
+  3. Reduction : plusieurs espaces de suite, et les `_` produits par ces regles, donnent un seul `_` (`Backup ha - GitHub` donne `Backup_ha_GitHub`). Les `__` voulus (`__pycache__`) ne sont pas touches.
+  4. Debut et fin : un espace en tete ou en fin de nom, un `_` en fin de nom et l'espace juste avant l'extension sont supprimes ; un `_` en tete reste (`_Sans_categorie`, `_Template_doc.md`) (`fichier .md` donne `fichier.md`).
+  5. Point : un `.` a l'interieur du nom, hors extension finale, devient `_` (`monitor_temp.sh_save` donne `monitor_temp_sh_save`). Les noms caches qui commencent par `.` restent intacts (`.scripts`).
+  6. Exceptions a toutes ces regles : `L0C0_PAGE_Home` (contenu compris) ; `.scripts` et ses sous-dossiers (`01_scripts.sh`, `02_scripts.py`, `01_scripts.sh_md`, `02_scripts.py_md`) ; les noms de modules HACS et d'applications (voir plus haut) ; les fichiers generes (`__pycache__`, `*.pyc`, `#...#`, `.bak_...`) ; `.claude\skills`, hors de `docs` ; les dates AAAA-MM-JJ (avec ou sans heure `_HHhMM`), qui gardent leurs `-` (`MODIFS_2026-10-10_claude.md`, `DEPENDANCES_GLOBALES_archive_2026-09-28.md`).
+  7. Perimetre : uniquement les noms de dossiers et de fichiers de `docs`, pas les titres dans les fichiers, ni les `name:` et alias HA, ni les ancres de liens markdown, ni les YAML de la racine de `H:`. Les dossiers d'automations (`03_docs_automations_md` et `03_docs_automations_yaml`) sont soumis aux memes regles (decide par Eric le 2026-10-25) : `Tarif hc-hp` donne `Tarif_hc_hp`, `Automations.yaml original` donne `Automations_yaml_original`.
+  8. Collisions : si deux noms donnent le meme nom apres remplacement, on s'arrete et on demande a Eric.
+  9. Alias des automations et des scripts : INTERDICTION de toucher aux alias (titres) des automations de `automations.yaml` et des scripts de `scripts.yaml`, ni aux cles des scripts (decide par Eric le 2026-10-25), sauf si un jour ils posent probleme. Les renommer ne sert a rien : ils sont lus sans erreur par les scripts et ce sont des titres affiches dans HA.
+- Dossiers LxCx de `docs/02_docs_dashboard` (décidé par Eric le 2026-10-25, définitif ; seul `L0C0_PAGE_Home` reste tel quel) : dans `02_dashboard_docs_md` comme dans `02_dashboard_docs_yaml`, un dossier `LxCx_{NOM}` en majuscules et sans numéro (`L3C3_STORES`) contient `LxCx_{NOM}_01_Vignette` et `LxCx_{NOM}_02_Page` (`LxCx_{NOM}_03_Page`... si plusieurs pages), et les fichiers s'appellent `LxCx_Vignette_{NOM}.md` ou `.yaml` et `LxCx_Page_{NOM}.md` ou `.yaml` (`L3C3_STORES_01_Vignette\L3C3_Vignette_STORES.md`, `L3C3_STORES_02_Page\L3C3_Page_STORES.yaml`). Tout nom commence par `LxCx` pour repérer où on se trouve. Un suffixe éventuel (page gauche, page droite...) s'écrit en minuscules après le {NOM} dans le nom du fichier et dans le nom du dossier de page (`L3C1_ECLAIRAGE_02_Page_gauche`, `L3C1_Page_ECLAIRAGE_gauche.md`, validé par Eric le 2026-10-25).
 - Détail et écarts de toutes les règles de nommage de `docs` : `docs/00_IA/SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md` (brouillon à valider ; aucun renommage sans go séparé d'Eric)
 - Fichiers legacy non conformes : pas de renommage sec en prod - renommer uniquement si le fichier est modifié pour autre chose
 - ⚠️ Exception legacy TOTAL : `P0_total_pour_les_7_postes.yaml` agrège 7 postes (chauffage/hygiène/multimédia...) sur 4 cycles - devrait s'appeler `P0_TOTAL_AMHQ.yaml` mais nom d'origine conservé
@@ -519,9 +528,9 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 
 ## 🛠️ RÈGLE DOCS VIGNETTES - DÉPENDANCES OBLIGATOIRES
 
-À chaque création/modif d'une doc vignette (`docs/02_docs_dashboard/dashboard_docs_MD/L*`) :
+À chaque création/modif d'une doc vignette (`docs/02_docs_dashboard/02_dashboard_docs_md/L*`) :
 1. Remplir **ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE** dans la doc.
-2. Mettre à jour `docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md` (🔲 → ✅).
+2. Mettre à jour `docs/02_docs_dashboard/02_dashboard_docs_md/DEPENDANCES_GLOBALES.md` (🔲 → ✅).
 3. Mettre à jour la date en haut de `DEPENDANCES_GLOBALES.md`.
 
 ---
@@ -537,7 +546,7 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
   Windows), consolidees le lendemain par `/histo` en `.bak_AAAA_MM_JJ.{ext}` (3 max, la 4e a la corbeille).
 - Un nom de fichier ne contient plus jamais de date. Les dashboards ne sont plus versionnes dans
   leur nom de fichier.
-- Seule exception conservee : `docs/02_docs_dashboard/dashboard_docs_YAML/Dashboard_COMPLET/Dashboard_YYYY_MM_DD.yaml`
+- Seule exception conservee : `docs/02_docs_dashboard/02_dashboard_docs_yaml/Dashboard_COMPLET/Dashboard_YYYY_MM_DD.yaml`
   (photo complete du dashboard, une par jour, conservation illimitee) - confirme par Eric le 2026-10-11.
 - `Dashboard_COMPLET/` ne se vide JAMAIS (decide par Eric le 2026-10-11) : ses exports sont les mises a jour au fil de l'eau du dashboard complet.
   En local : aucun menage, aucune suppression, aucun `.bak`, aucun renommage. Ne jamais proposer de le purger ni de le consolider.
@@ -672,9 +681,9 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 |:---|:---|:---|
 | Config YAML (sensors, templates, utility_meter, command_line...) | `docs/01_docs_config_system/config_system_SH_PY_YAML/` | push `H:\` via `ha-push-yaml` |
 | Docs `.md` (dashboard, automations, scripts, system) | `docs/0x_*_MD/` | push `H:\Docs\` via `ha-push-docs` / `ha-push-md` |
-| Dashboards YAML (vignettes, pages, cartes) | `docs/02_docs_dashboard/dashboard_docs_YAML/` | push `H:\Docs\` |
-| Automations YAML | `docs/03_docs_automations/docs_automations_YAML/` | UI HA à la main, jamais en direct |
-| Scripts YAML + `.py` | `docs/04_docs_scripts/docs_scripts_YAML/` | UI HA à la main, jamais en direct |
+| Dashboards YAML (vignettes, pages, cartes) | `docs/02_docs_dashboard/02_dashboard_docs_yaml/` | push `H:\Docs\` |
+| Automations YAML | `docs/03_docs_automations/03_docs_automations_yaml/` | UI HA à la main, jamais en direct |
+| Scripts YAML + `.py` | `docs/04_docs_scripts/04_docs_scripts_yaml/` | UI HA à la main, jamais en direct |
 | Hors ménage, hors circuit de push | `TODO/` · `Github/` · `historique/` · `.claude/` · `Infra_Proxmox/` | restent locaux |
 
 > Le détail des arborescences (local, prod, GitHub, comptages) vit dans
@@ -690,13 +699,13 @@ Un fichier versionnable suit la **règle unique de versioning** (voir REGLE DE S
 fichier de travail ne porte **jamais** de date ; chaque version précédente est une sauvegarde
 `.bak_AAAA_MM_JJ.{ext}` (consolidée par `/histo`).
 
-Quand un script YAML de `docs/04_docs_scripts/docs_scripts_YAML/` (ou tout fichier versionnable) est modifié :
+Quand un script YAML de `docs/04_docs_scripts/04_docs_scripts_yaml/` (ou tout fichier versionnable) est modifié :
 1. Avant modification, une sauvegarde locale `.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}` est créée à côté du fichier.
 2. Le fichier de travail garde son nom **SANS date** : `p1_master_gestion_clim.yaml`.
 3. Chaque fichier porte un **en-tête commenté** avec l'historique des versions (date + changement).
 4. La fiche MD correspondante pointe vers le fichier de travail et son changelog liste **les différences à chaque itération**.
 
-**Automations (`docs/03_docs_automations/docs_automations_YAML/`)** — même règle :
+**Automations (`docs/03_docs_automations/03_docs_automations_yaml/`)** — même règle :
 quand une fiche YAML d'automation est mise à jour (resync depuis `automations.yaml`, ajout d'`id`,
 correction de template...), la **version précédente reste à côté sous forme de sauvegarde**
 `.bak_AAAA_MM_JJ.{ext}` : `congelateur_alarme_porte.yaml` (version active, avec `id`) +

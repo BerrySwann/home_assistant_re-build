@@ -16,7 +16,7 @@ Complement de `ha-new-yaml` (qui genere un squelette conforme) et de `check_yaml
 ### 1 - Lancer le controle (sur le PC)
 
 ```powershell
-$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_headers_yaml\Verif_headers_yaml.py" [fichier ou dossier] [--erreurs] [--prefixe]
+$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_sh\Verif_headers_yaml\Verif_headers_yaml.py" [fichier ou dossier] [--erreurs] [--prefixe]
 ```
 
 - Sans argument : tous les YAML de `config_system_SH_PY_YAML` (environ 90 fichiers).
@@ -46,4 +46,4 @@ Un AVIS n'est pas forcement une faute : `NOM_ID_DIFFERENT` vient d'une heuristiq
 2. Normes = `Claude md SAVE\CLAUDE.md` ; en cas de doute sur une norme, lire le CLAUDE.md, ne pas deviner.
 3. Les sauvegardes (`.bak_`), les noms dates et les dossiers `.scripts`, `scripts`, `notifs`, `themes`, `blueprints`, `ARCHIVE` sont ignores par le script.
 4. Ne touche ni aux automations ni aux dashboards (hors perimetre `config_system_SH_PY_YAML`).
-5. Fiche du script : `docs\04_Docs_scripts\Docs_scripts_sh_md\Verif_headers_yaml\Verif_headers_yaml.md`.
+5. Fiche du script : `docs\04_docs_scripts\04_docs_scripts_sh_md\Verif_headers_yaml\Verif_headers_yaml.md`.

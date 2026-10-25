@@ -5,7 +5,7 @@ description: "Skill HA ReBuild - analyse les mises a jour HA en attente SANS out
 
 # ha-update-check-cli - Analyse pre-mise a jour HA (sans MCP)
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 Objectif: lire les changements des mises a jour HA en attente, les croiser avec la config reelle d'Eric (grep), et sortir un top court: ce qu'il doit faire avant, ce qui va casser, ce qui est a faire apres. Cette version N'INSTALLE RIEN: l'installation, la sauvegarde et le restart se font depuis l'UI HA, par Eric.
 
@@ -40,7 +40,7 @@ Pour chaque mise a jour:
 Ne declarer impacte que ce qui est verifie. Sinon: "non verifie".
 
 Perimetre (lecture seule):
-- Local: C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\ et docs\03_docs_automations\docs_automations_YAML\
+- Local: C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\config_system_SH_PY_YAML\ et docs\03_docs_automations\03_docs_automations_yaml\
 - Prod: H:\ (config YAML ; themes/, blueprints/ et notifs/ n'existent qu'en prod)
 
 Pour chaque option, entite, service ou carte (custom:xxx) citee par les notes: grep -rIn sur le perimetre, noter fichier et ligne. Zero resultat = "non utilise (verifie dans <perimetre>)". Les dashboards stockes hors YAML et le contenu imbriques ne sont pas couverts par ce grep: le signaler.

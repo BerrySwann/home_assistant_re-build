@@ -5,7 +5,7 @@ description: "Skill HA ReBuild - met a jour DEPENDANCES_GLOBALES.md et l'index d
 
 # Skill : /sync_index - Mise a jour de l'index et des dependances
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 ## Objectif
 
@@ -17,22 +17,22 @@ documentation de dependances pour maintenir la coherence du projet.
 | Type de fichier valide | Dossier source |
 |:---|:---|
 | Config HA (sensors, templates, utility_meter...) | `docs/01_docs_config_system/config_system_SH_PY_YAML/` |
-| Automation | `docs/03_docs_automations/docs_automations_YAML/` |
-| Script | `docs/04_docs_scripts/docs_scripts_YAML/` |
+| Automation | `docs/03_docs_automations/03_docs_automations_yaml/` |
+| Script | `docs/04_docs_scripts/04_docs_scripts_yaml/` |
 
 ## Fichiers a mettre a jour selon le type
 
 | Type valide | Fichier index a mettre a jour |
 |:---|:---|
 | Config YAML | `docs/XX_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md` |
-| Automation | `docs/03_docs_automations/docs_automations_MD/{nom_automation}.md` + index automations si existant |
-| Script | `docs/04_docs_scripts/docs_scripts_YAML_MD/{nom_script}.md` |
+| Automation | `docs/03_docs_automations/03_docs_automations_md/{nom_automation}.md` + index automations si existant |
+| Script | `docs/04_docs_scripts/04_docs_scripts_yaml_md/{nom_script}.md` |
 | Tout type impactant une vignette | `DEPENDANCES_GLOBALES.md` |
 
 **Chemins Windows :**
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\XX_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`
-- `C:\Users\Berry Swann\Documents\ReBuild\docs\03_docs_automations\docs_automations_MD\`
-- `C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_YAML_MD\`
+- `C:\Users\Berry Swann\Documents\ReBuild\docs\03_docs_automations\03_docs_automations_md\`
+- `C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_yaml_md\`
 
 **Chemin bash sandbox :** `/sessions/bold-determined-wright/mnt/Documents--ReBuild/docs/`
 > Note : le prefixe de session bash peut changer. Verifier avec `ls /sessions/` si besoin.
@@ -55,13 +55,13 @@ Mettre a jour la date en haut du fichier.
 
 ### 3. Mettre a jour la doc automation (si automation validee)
 
-Verifier si un fichier `.md` existe dans `docs/03_docs_automations/docs_automations_MD/` pour cette automation.
+Verifier si un fichier `.md` existe dans `docs/03_docs_automations/03_docs_automations_md/` pour cette automation.
 - Si oui : mettre a jour la section "Etat" ou "Derniere validation".
 - Si non : signaler qu'il manque une doc et proposer de la creer.
 
 ### 4. Mettre a jour la doc script (si script valide)
 
-Verifier si un fichier `.md` existe dans `docs/04_docs_scripts/docs_scripts_YAML_MD/` pour ce script.
+Verifier si un fichier `.md` existe dans `docs/04_docs_scripts/04_docs_scripts_yaml_md/` pour ce script.
 - Si oui : mettre a jour la section "Etat".
 - Si non : signaler qu'il manque une doc et proposer de la creer.
 
@@ -77,8 +77,8 @@ Vignette    : [L*C* ou N/A]
 
 Mises a jour :
 - DEPENDANCES_GLOBALES.md : [ligne] -> OK  (si applicable)
-- docs_automations_MD/{nom}.md : [section mise a jour]  (si automation)
-- docs_scripts_YAML_MD/{nom}.md : [section mise a jour]  (si script)
+- 03_docs_automations_md/{nom}.md : [section mise a jour]  (si automation)
+- 04_docs_scripts_yaml_md/{nom}.md : [section mise a jour]  (si script)
 ```
 
 ### 6. Si un fichier index est absent ou incomplet

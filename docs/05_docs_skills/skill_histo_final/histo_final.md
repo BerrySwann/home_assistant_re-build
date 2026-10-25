@@ -5,7 +5,7 @@ description: "Skill HA ReBuild - histo de fin de journee : lance le skill histo 
 
 # Skill : /histo-final - histo complet, puis extinction des lumieres et arret du PC
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 ## Objectif
 
@@ -23,7 +23,7 @@ Fin de journee : tout ce que fait /histo, puis extinction des lumieres et arret 
 
 ## Journal de trace (demande par Eric le 2026-10-19)
 
-Pour voir ou la sequence plante ou se bloque en silence, et garder la trace des validations demandees a Eric, Claude ecrit une ligne avant et apres chaque etape avec `histo_trace.py` (commun a /histo et /histo-final) : `python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\histo_trace\histo_trace.py" <commande>`. Journal brut : `historique\01_JOURNAL_TRACE\LOGS\histo_trace_AAAA-MM-JJ.log` (un par jour, chaque ligne forcee sur le disque ; dossier renomme `01_JOURNAL_TRACE` par Eric le 2026-10-21). Les pages HTML du jour sont ecrites directement dans `historique\01_JOURNAL_TRACE\` par `histo_trace.py html` (etape 5, point 2).
+Pour voir ou la sequence plante ou se bloque en silence, et garder la trace des validations demandees a Eric, Claude ecrit une ligne avant et apres chaque etape avec `histo_trace.py` (commun a /histo et /histo-final) : `python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_sh\histo_trace\histo_trace.py" <commande>`. Journal brut : `historique\01_JOURNAL_TRACE\LOGS\histo_trace_AAAA-MM-JJ.log` (un par jour, chaque ligne forcee sur le disque ; dossier renomme `01_JOURNAL_TRACE` par Eric le 2026-10-21). Les pages HTML du jour sont ecrites directement dans `historique\01_JOURNAL_TRACE\` par `histo_trace.py html` (etape 5, point 2).
 
 - Commandes : `seq-debut histo-final`, `debut ETAPE [texte]`, `fin ETAPE OK|ATTENTION|ECHEC [texte]`, `validation ETAPE texte`, `note ETAPE texte`, `seq-fin`, `verifier`, `recap`, `html`.
 - Une ligne `debut` sans `fin` revele un blocage silencieux (appel qui n'a jamais rendu la main, par exemple une validation restee sans reponse). Une sequence sans `seq-fin` revele une interruption (PC eteint, session fermee, plantage).

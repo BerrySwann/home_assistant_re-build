@@ -24,7 +24,7 @@ Règles de nommage des répertoires et des fichiers du dossier `docs`.
 
 ## 2. Exemples
 - `p3_salon_bouton_ikea_inter_salon` devient `P3_Salon_bouton_ikea_inter_salon`.
-- `dashboard_docs_MD` devient `Dashboard_docs_md`.
+- `02_dashboard_docs_md` devient `02_dashboard_docs_md`.
 - `PAGE_HOME.md` devient `Page_Home.md`.
 - `vignette_L1C1_meteo.yaml` devient `Vignette_L1C1_meteo.yaml`.
 - Dossier yaml `L1C1_01_Meteo` devient `L1C1_01_METEO` (LxCx_{NOM} en majuscules).
@@ -116,38 +116,38 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - Tous les dossiers et fichiers de `00_IA` sont en majuscules, extension en minuscules (exemple `GLOBAL_INDEX_IA.md`).
 - Documentation seulement : `00_IA` reste intact, il n'y a pas de dossier yaml dans `00_IA`.
 - Écart relevé :
-- `00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE_2026-07-19_15h46.md` (attendu : `IA_CONTEXT_BASE_2026-07-19_15H46.md`)
+- `00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE_2026-07-19_15h46.md` (nouveau nom : `IA_CONTEXT_BASE_2026-07-19_15H46.md`)
 
 ### 6.2 Dossiers LxCx de 02_docs_dashboard (décidé le 2026-10-17)
-- Les sous-dossiers directs de `Dashboard_docs_md` et de `Dashboard_docs_yaml` s'écrivent `LxCx_{NOM}` en majuscules. Les sous-sous-dossiers ne sont pas concernés. Le numéro fait partie du {NOM} (déduit, non confirmé) : `L2C1_04_Energie_Generale` devient `L2C1_04_ENERGIE_GENERALE`.
+- Les sous-dossiers directs de `02_dashboard_docs_md` et de `02_dashboard_docs_yaml` s'écrivent `LxCx_{NOM}` en majuscules. Les sous-sous-dossiers ne sont pas concernés. Le numéro fait partie du {NOM} (déduit, non confirmé) : `L2C1_04_Energie_Generale` devient `L2C1_04_ENERGIE_GENERALE`.
 - Chaque dossier LxCx contient un dossier vignette `01_LxCx_Vignette[_suffixe]` et un ou plusieurs dossiers page `0N_LxCx_Page[_suffixe]` (`02_`, `03_`, `04_`...), avec LxCx remplacé par l'identifiant réel. Exemples : `01_L2C1_Vignette`, `02_L2C1_Page_temps_reel`.
-- Les fichiers du dossier vignette s'appellent `Vignette_LxCx[_suffixe]` et ceux du dossier page `Page_LxCx[_suffixe]`, en `.yaml` côté yaml et en `.md` côté md. Exemple d'Eric : `Dashboard_docs_yaml\L1C1_01_Meteo\02_L1C1_Page` avec `Page_L1C1_meteo.yaml`, et la même chose côté md.
+- Les fichiers du dossier vignette s'appellent `Vignette_LxCx[_suffixe]` et ceux du dossier page `Page_LxCx[_suffixe]`, en `.yaml` côté yaml et en `.md` côté md. Exemple d'Eric : `02_dashboard_docs_yaml\L1C1_01_Meteo\02_L1C1_Page` avec `Page_L1C1_meteo.yaml`, et la même chose côté md.
 - Fichiers à part posés à la racine d'un dossier LxCx : première lettre en majuscule (`Card_*.yaml`). Fichiers dont le nom contient "couleur" : tout en majuscules. Tutos : `TUTO_LxCx[_suffixe].md` (TUTO et LxCx en majuscules, suffixe en minuscules), pour les tutos existants comme pour les futurs.
 - `L0C0_PAGE_Home` : tout ce qu'il contient reste où il est (spécifique à cette page), noms compris. Son propre nom reste à trancher (paragraphe 9).
 
 ### 6.3 Aucun accent dans les noms (décidé le 2026-10-17)
 - Aucun accent dans les noms de dossiers et de fichiers. Un accent est remplacé par la lettre sans accent (é devient e, É devient E) ; la lettre n'est pas supprimée. La règle vise les noms, pas le contenu des fichiers.
 - Écarts relevés (le renommage attend un go séparé) :
-- `02_docs_dashboard\Dashboard_docs_md\L0C0_PAGE_Home\03_Carte météo` (attendu : `03_Carte meteo`)
-- `02_docs_dashboard\Dashboard_docs_md\L0C0_PAGE_Home\03_Carte météo\Carte météo vence.md` (attendu : `Carte meteo vence.md`)
-- `02_docs_dashboard\Dashboard_docs_md\L0C0_PAGE_Home\08_Congélateur` (attendu : `08_Congelateur`)
-- `02_docs_dashboard\Dashboard_docs_md\L0C0_PAGE_Home\09_Détecteur de fuite` (attendu : `09_Detecteur de fuite`)
-- `02_docs_dashboard\Dashboard_docs_md\L0C0_PAGE_Home\11_Carte présence` (attendu : `11_Carte presence`)
-- `02_docs_dashboard\Dashboard_docs_yaml\L0C0_PAGE_Home\03_Carte météo` (attendu : `03_Carte meteo`)
-- `02_docs_dashboard\Dashboard_docs_yaml\L0C0_PAGE_Home\08_Congélateur` (attendu : `08_Congelateur`)
-- `02_docs_dashboard\Dashboard_docs_yaml\L0C0_PAGE_Home\09_Détecteur de fuite` (attendu : `09_Detecteur de fuite`)
-- `02_docs_dashboard\Dashboard_docs_yaml\L0C0_PAGE_Home\11_Carte présence` (attendu : `11_Carte presence`)
-- `03_docs_automations\docs_automations_md\Contrôle entity z2m` (attendu : `Controle entity z2m`)
-- `03_docs_automations\docs_automations_md\Météo` (attendu : `Meteo`)
-- `03_docs_automations\docs_automations_md\P2_Alarme_congélateur` (attendu : `P2_Alarme_congelateur`)
-- `03_docs_automations\docs_automations_md\P2_Éco. prises` (attendu : `P2_eCO_prises`, avec la règle eCO du paragraphe 6.10)
-- `03_docs_automations\docs_automations_yaml\Contrôle entity z2m` (attendu : `Controle entity z2m`)
-- `03_docs_automations\docs_automations_yaml\Météo` (attendu : `Meteo`)
-- `03_docs_automations\docs_automations_yaml\P2_Alarme_congélateur` (attendu : `P2_Alarme_congelateur`)
-- `03_docs_automations\docs_automations_yaml\P2_Éco. prises` (attendu : `P2_eCO_prises`, avec la règle eCO du paragraphe 6.10)
+- `02_docs_dashboard\02_dashboard_docs_md\L0C0_PAGE_Home\03_Carte météo` (nouveau nom : `03_Carte meteo`)
+- `02_docs_dashboard\02_dashboard_docs_md\L0C0_PAGE_Home\03_Carte météo\Carte météo vence.md` (nouveau nom : `Carte meteo vence.md`)
+- `02_docs_dashboard\02_dashboard_docs_md\L0C0_PAGE_Home\08_Congélateur` (nouveau nom : `08_Congelateur`)
+- `02_docs_dashboard\02_dashboard_docs_md\L0C0_PAGE_Home\09_Détecteur de fuite` (nouveau nom : `09_Detecteur de fuite`)
+- `02_docs_dashboard\02_dashboard_docs_md\L0C0_PAGE_Home\11_Carte présence` (nouveau nom : `11_Carte presence`)
+- `02_docs_dashboard\02_dashboard_docs_yaml\L0C0_PAGE_Home\03_Carte météo` (nouveau nom : `03_Carte meteo`)
+- `02_docs_dashboard\02_dashboard_docs_yaml\L0C0_PAGE_Home\08_Congélateur` (nouveau nom : `08_Congelateur`)
+- `02_docs_dashboard\02_dashboard_docs_yaml\L0C0_PAGE_Home\09_Détecteur de fuite` (nouveau nom : `09_Detecteur de fuite`)
+- `02_docs_dashboard\02_dashboard_docs_yaml\L0C0_PAGE_Home\11_Carte présence` (nouveau nom : `11_Carte presence`)
+- `03_docs_automations\03_docs_automations_md\Contrôle entity z2m` (nouveau nom : `Controle entity z2m`)
+- `03_docs_automations\03_docs_automations_md\Météo` (nouveau nom : `Meteo`)
+- `03_docs_automations\03_docs_automations_md\P2_Alarme_congélateur` (nouveau nom : `P2_Alarme_congelateur`)
+- `03_docs_automations\03_docs_automations_md\P2_Éco. prises` (nouveau nom : `P2_eCO_prises`, avec la règle eCO du paragraphe 6.10)
+- `03_docs_automations\03_docs_automations_yaml\Contrôle entity z2m` (nouveau nom : `Controle entity z2m`)
+- `03_docs_automations\03_docs_automations_yaml\Météo` (nouveau nom : `Meteo`)
+- `03_docs_automations\03_docs_automations_yaml\P2_Alarme_congélateur` (nouveau nom : `P2_Alarme_congelateur`)
+- `03_docs_automations\03_docs_automations_yaml\P2_Éco. prises` (nouveau nom : `P2_eCO_prises`, avec la règle eCO du paragraphe 6.10)
 
 ### 6.4 Dashboard_docs_specifique (décidé le 2026-10-17, pas encore créé)
-- Un dossier `Dashboard_docs_specifique` dans `Dashboard_docs_md` et un dans `Dashboard_docs_yaml`.
+- Un dossier `Dashboard_docs_specifique` dans `02_dashboard_docs_md` et un dans `02_dashboard_docs_yaml`.
 - Il reçoit les fichiers spécifiques posés aujourd'hui à la racine d'un dossier LxCx : les tutos et les fichiers couleur.
 - Mêmes fichiers des deux côtés. Toute modification d'un côté est reproduite de l'autre.
 - Fichiers concernés aujourd'hui : `Tuto_images_alertes_meteo_france.md` (L1C1), `COULEURS_PRISES_PAR_PIECE.md` et sa sauvegarde `.bak_2026_09_20.md` (L2C1), `Couleurs_eclairage_par_piece.md` (L2C3).
@@ -165,7 +165,7 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - Le dossier `Air_quality/` s'écrit `Air_Quality/` : exception à la règle du premier mot (paragraphe 1), chaque mot garde sa majuscule, comme les lettres de `AQ`. Je l'applique à ce seul nom ; elle ne devient pas une règle générale (déduit de la demande, à confirmer).
 - Concerne, dans `01_docs_config_system\config_system_SH_PY_YAML` (image de `H:\`) : `sensors\Air_quality` et `templates\Air_quality`, avec leur fichier `A_01_air_quality.yaml` dans chacun. Écarts relevés : 4 entrées.
 - Le préfixe Mini-PC devient `MPC_` (au lieu de `MP_`) : `MP_01_monitor_temp.sh` devient `MPC_01_monitor_temp.sh`.
-- Écarts relevés pour `MPC_` : 2 entrées dans `04_docs_scripts\docs_scripts_sh`, le dossier `Mp_01_monitor_temp.sh - save pour raspi` (attendu : `MPC_01_monitor_temp.sh - save pour raspi`) et son fichier `#Mp_01_monitor_temp.sh.#` (attendu : `#MPC_01_monitor_temp.sh.#`). Établi : les noms actuels commencent par `Mp_`. Déduit : l'original était `MP_` (le fichier de la prod s'appelle `#MP_01_monitor_temp.sh.#`, vu dans l'arbre de `H:\.scripts`), passé en `Mp_` par la règle du premier mot.
+- Écarts relevés pour `MPC_` : 2 entrées dans `04_docs_scripts\04_docs_scripts_sh`, le dossier `Mp_01_monitor_temp.sh - save pour raspi` (nouveau nom : `MPC_01_monitor_temp.sh - save pour raspi`) et son fichier `#Mp_01_monitor_temp.sh.#` (nouveau nom : `#MPC_01_monitor_temp.sh.#`). Établi : les noms actuels commencent par `Mp_`. Déduit : l'original était `MP_` (le fichier de la prod s'appelle `#MP_01_monitor_temp.sh.#`, vu dans l'arbre de `H:\.scripts`), passé en `Mp_` par la règle du premier mot.
 - Renommage : sur go séparé (local, puis prod, puis repo). Avant la prod, vérifier que ni `configuration.yaml` (includes) ni une carte ne dépendent de ces chemins : non vérifié à ce jour.
 - CLAUDE.md (section 3 et exemple de la convention YAML) et ses deux copies identiques, `IA_CONTEXT_BASE.md` en local et `D:\docs\00_IA\IA_CONTEXT_BASE.md`, ont été mis à jour le 2026-10-17 : `AQ_` et `MPC_`, et `{PREFIXE}` à la place de `{LETTRE}`. La copie de la prod (`H:\docs\00_IA`) n'est pas poussée : go séparé. La section 9 de CLAUDE.md a été complétée le même jour (UI_DASHBOARD, MINI_/MAXI_, SDB, eCO, noms de modules, accents).
 
@@ -180,57 +180,57 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - SDB est l'abréviation de Salle De Bain. Elle s'écrit SDB, en majuscules, dans les noms de dossiers et de fichiers.
 - Lecture retenue (précisée par Eric le 2026-10-17) : toute variante d'écriture de l'abréviation (`sdb`, `Sdb`, `sdB`, `sDb`...) devient `SDB`. Les noms écrits en toutes lettres (`salle_de_bain`, `salle de bain`) ne sont pas touchés. Exemple : `A_soufflant_sdb_bouton_rodret` devient `A_soufflant_SDB_bouton_rodret` ; `P1_03_Chauffage salle de bain` reste tel quel.
 - Écarts relevés (51 entrées, noms actuels ; le renommage attend un go séparé) :
-- `01_docs_config_system\config_system_SH_PY_YAML\input_booleans\P1\P1_BV_IB_inter_soufflant_sdb.yaml` (attendu : `P1_BV_IB_inter_soufflant_SDB.yaml`)
-- `01_docs_config_system\config_system_SH_PY_YAML\templates\Inter_BP_Virtuel\P1\P1_BV_IB_SW_inter_souflant_sdb.yaml` (attendu : `P1_BV_IB_SW_inter_souflant_SDB.yaml`)
-- `01_docs_config_system\config_system_SH_PY_YAML\timers\P1_timers\P1_Timer_10mn\P1_timer_10mn_seche_serviettes_sdb.yaml` (attendu : `P1_timer_10mn_seche_serviettes_SDB.yaml`)
-- `01_docs_config_system\config_system_SH_PY_YAML\timers\P1_timers\P1_Timer_10mn\P1_timer_10mn_soufflant_sdb.yaml` (attendu : `P1_timer_10mn_soufflant_SDB.yaml`)
-- `01_docs_config_system\config_system_SH_PY_YAML\timers\P1_timers\P1_Timer_2h\P1_timer_2h_seche_serviettes_sdb.yaml` (attendu : `P1_timer_2h_seche_serviettes_SDB.yaml`)
-- `01_docs_config_system\config_system_SH_PY_YAML\timers\P1_timers\P1_Timer_60mn\P1_timer_60mn_soufflant_sdb.yaml` (attendu : `P1_timer_60mn_soufflant_SDB.yaml`)
-- `02_docs_dashboard\Dashboard_docs_yaml\L1C3_03_Commandes_Clim\Card_prog_soufflant_sdb.yaml` (attendu : `Card_prog_soufflant_SDB.yaml`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\A_soufflant_sdb_bouton_rodret` (attendu : `A_soufflant_SDB_bouton_rodret`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\A_soufflant_sdb_bouton_rodret\A_soufflant_sdb_bouton_rodret.md` (attendu : `A_soufflant_SDB_bouton_rodret.md`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\B_soufflant_sdb_routage` (attendu : `B_soufflant_SDB_routage`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\B_soufflant_sdb_routage\B_soufflant_sdb_routage.md` (attendu : `B_soufflant_SDB_routage.md`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\C_watchdog_soufflant_sdb` (attendu : `C_watchdog_soufflant_SDB`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\C_watchdog_soufflant_sdb\C_watchdog_soufflant_sdb.md` (attendu : `C_watchdog_soufflant_SDB.md`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\D_sdb_soufflant_decompte_60min` (attendu : `D_SDB_soufflant_decompte_60min`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\D_sdb_soufflant_decompte_60min\D_sdb_soufflant_decompte_60min.md` (attendu : `D_SDB_soufflant_decompte_60min.md`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\E_sdb_soufflant_rattrapage_demarrage_ha` (attendu : `E_SDB_soufflant_rattrapage_demarrage_ha`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\E_sdb_soufflant_rattrapage_demarrage_ha\E_sdb_soufflant_rattrapage_demarrage_ha.md` (attendu : `E_SDB_soufflant_rattrapage_demarrage_ha.md`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\G_sdb_seche_serviettes_decompte_2h` (attendu : `G_SDB_seche_serviettes_decompte_2h`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\G_sdb_seche_serviettes_decompte_2h\G_sdb_seche_serviettes_decompte_2h.md` (attendu : `G_SDB_seche_serviettes_decompte_2h.md`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\H_sdb_seche_serviettes_rattrapage_demarrage_ha` (attendu : `H_SDB_seche_serviettes_rattrapage_demarrage_ha`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\H_sdb_seche_serviettes_rattrapage_demarrage_ha\H_sdb_seche_serviettes_rattrapage_demarrage_ha.md` (attendu : `H_SDB_seche_serviettes_rattrapage_demarrage_ha.md`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\Rodret_soufflant_sdb` (attendu : `Rodret_soufflant_SDB`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\Sdb_soufflant_specification_2026` (attendu : `SDB_soufflant_specification_2026`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\Sdb_soufflant_specification_2026\Sdb_soufflant_specification_2026.md` (attendu : `SDB_soufflant_specification_2026.md`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\Timers_sdb_soufflant_et_seche_serviettes` (attendu : `Timers_SDB_soufflant_et_seche_serviettes`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\Timers_sdb_soufflant_et_seche_serviettes\Timers_sdb_soufflant_et_seche_serviettes.md` (attendu : `Timers_SDB_soufflant_et_seche_serviettes.md`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\Z_soufflant_sdb_gestion_intelligente` (attendu : `Z_soufflant_SDB_gestion_intelligente`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\Z_soufflant_sdb_gestion_intelligente\Z_soufflant_sdb_gestion_intelligente.md` (attendu : `Z_soufflant_SDB_gestion_intelligente.md`)
-- `03_docs_automations\docs_automations_md\P1_03_Chauffage_salle_de_bain\Z_soufflant_sdb_old_2024-2025` (attendu : `Z_soufflant_SDB_old_2024-2025`)
-- `03_docs_automations\docs_automations_md\P3_Eclairage\Sdb_sync_miroir_lampe_et_relais_sdb` (attendu : `SDB_sync_miroir_lampe_et_relais_SDB`)
-- `03_docs_automations\docs_automations_md\P3_Eclairage\Sdb_sync_miroir_lampe_et_relais_sdb\Sdb_sync_miroir_lampe_et_relais_sdb.md` (attendu : `SDB_sync_miroir_lampe_et_relais_SDB.md`)
-- `03_docs_automations\docs_automations_yaml\P1_03_Chauffage_salle_de_bain\A_soufflant_sdb_bouton_rodret` (attendu : `A_soufflant_SDB_bouton_rodret`)
-- `03_docs_automations\docs_automations_yaml\P1_03_Chauffage_salle_de_bain\A_soufflant_sdb_bouton_rodret\A_soufflant_sdb_bouton_rodret.yaml` (attendu : `A_soufflant_SDB_bouton_rodret.yaml`)
-- `03_docs_automations\docs_automations_yaml\P1_03_Chauffage_salle_de_bain\B_soufflant_sdb_routage` (attendu : `B_soufflant_SDB_routage`)
-- `03_docs_automations\docs_automations_yaml\P1_03_Chauffage_salle_de_bain\B_soufflant_sdb_routage\B_soufflant_sdb_routage.yaml` (attendu : `B_soufflant_SDB_routage.yaml`)
-- `03_docs_automations\docs_automations_yaml\P1_03_Chauffage_salle_de_bain\D_sdb_soufflant_decompte_60min_timer` (attendu : `D_SDB_soufflant_decompte_60min_timer`)
-- `03_docs_automations\docs_automations_yaml\P1_03_Chauffage_salle_de_bain\D_sdb_soufflant_decompte_60min_timer\D_sdb_soufflant_decompte_60min_timer.yaml` (attendu : `D_SDB_soufflant_decompte_60min_timer.yaml`)
-- `03_docs_automations\docs_automations_yaml\P1_03_Chauffage_salle_de_bain\E_sdb_soufflant_rattrapage_demarrage_ha_timer` (attendu : `E_SDB_soufflant_rattrapage_demarrage_ha_timer`)
-- `03_docs_automations\docs_automations_yaml\P1_03_Chauffage_salle_de_bain\E_sdb_soufflant_rattrapage_demarrage_ha_timer\E_sdb_soufflant_rattrapage_demarrage_ha_timer.yaml` (attendu : `E_SDB_soufflant_rattrapage_demarrage_ha_timer.yaml`)
-- `03_docs_automations\docs_automations_yaml\P1_03_Chauffage_salle_de_bain\G_sdb_seche_serviettes_decompte_2h_timer` (attendu : `G_SDB_seche_serviettes_decompte_2h_timer`)
-- `03_docs_automations\docs_automations_yaml\P1_03_Chauffage_salle_de_bain\G_sdb_seche_serviettes_decompte_2h_timer\G_sdb_seche_serviettes_decompte_2h_timer.yaml` (attendu : `G_SDB_seche_serviettes_decompte_2h_timer.yaml`)
-- `03_docs_automations\docs_automations_yaml\P1_03_Chauffage_salle_de_bain\H_sdb_seche_serviettes_rattrapage_demarrage_ha_timer` (attendu : `H_SDB_seche_serviettes_rattrapage_demarrage_ha_timer`)
-- `03_docs_automations\docs_automations_yaml\P1_03_Chauffage_salle_de_bain\H_sdb_seche_serviettes_rattrapage_demarrage_ha_timer\H_sdb_seche_serviettes_rattrapage_demarrage_ha_timer.yaml` (attendu : `H_SDB_seche_serviettes_rattrapage_demarrage_ha_timer.yaml`)
-- `03_docs_automations\docs_automations_yaml\P1_03_Chauffage_salle_de_bain\Rodret_soufflant_sdb` (attendu : `Rodret_soufflant_SDB`)
-- `03_docs_automations\docs_automations_yaml\P3_Eclairage\P3_Sdb_sync_miroir_lampe_et_relais_sdb` (attendu : `P3_SDB_sync_miroir_lampe_et_relais_SDB`)
-- `03_docs_automations\docs_automations_yaml\P3_Eclairage\P3_Sdb_sync_miroir_lampe_et_relais_sdb\P3_Sdb_sync_miroir_lampe_et_relais_sdb.yaml` (attendu : `P3_SDB_sync_miroir_lampe_et_relais_SDB.yaml`)
-- `04_docs_scripts\docs_scripts_yaml\Soufflant_sdb` (attendu : `Soufflant SDB`)
-- `04_docs_scripts\docs_scripts_yaml\Soufflant_sdb\Sdb_soufflant_arreter` (attendu : `SDB_soufflant_arreter`)
-- `04_docs_scripts\docs_scripts_yaml\Soufflant_sdb\Sdb_soufflant_arreter\Sdb_soufflant_arreter.yaml` (attendu : `SDB_soufflant_arreter.yaml`)
-- `04_docs_scripts\docs_scripts_yaml\Soufflant_sdb\Sdb_soufflant_demarrer` (attendu : `SDB_soufflant_demarrer`)
-- `04_docs_scripts\docs_scripts_yaml\Soufflant_sdb\Sdb_soufflant_demarrer\Sdb_soufflant_demarrer.yaml` (attendu : `SDB_soufflant_demarrer.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\input_booleans\P1\P1_BV_IB_inter_soufflant_sdb.yaml` (nouveau nom : `P1_BV_IB_inter_soufflant_SDB.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\templates\Inter_BP_Virtuel\P1\P1_BV_IB_SW_inter_souflant_sdb.yaml` (nouveau nom : `P1_BV_IB_SW_inter_souflant_SDB.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\timers\P1_timers\P1_Timer_10mn\P1_timer_10mn_seche_serviettes_sdb.yaml` (nouveau nom : `P1_timer_10mn_seche_serviettes_SDB.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\timers\P1_timers\P1_Timer_10mn\P1_timer_10mn_soufflant_sdb.yaml` (nouveau nom : `P1_timer_10mn_soufflant_SDB.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\timers\P1_timers\P1_Timer_2h\P1_timer_2h_seche_serviettes_sdb.yaml` (nouveau nom : `P1_timer_2h_seche_serviettes_SDB.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\timers\P1_timers\P1_Timer_60mn\P1_timer_60mn_soufflant_sdb.yaml` (nouveau nom : `P1_timer_60mn_soufflant_SDB.yaml`)
+- `02_docs_dashboard\02_dashboard_docs_yaml\L1C3_03_Commandes_Clim\Card_prog_soufflant_sdb.yaml` (nouveau nom : `Card_prog_soufflant_SDB.yaml`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\A_soufflant_sdb_bouton_rodret` (nouveau nom : `A_soufflant_SDB_bouton_rodret`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\A_soufflant_sdb_bouton_rodret\A_soufflant_sdb_bouton_rodret.md` (nouveau nom : `A_soufflant_SDB_bouton_rodret.md`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\B_soufflant_sdb_routage` (nouveau nom : `B_soufflant_SDB_routage`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\B_soufflant_sdb_routage\B_soufflant_sdb_routage.md` (nouveau nom : `B_soufflant_SDB_routage.md`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\C_watchdog_soufflant_sdb` (nouveau nom : `C_watchdog_soufflant_SDB`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\C_watchdog_soufflant_sdb\C_watchdog_soufflant_sdb.md` (nouveau nom : `C_watchdog_soufflant_SDB.md`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\D_sdb_soufflant_decompte_60min` (nouveau nom : `D_SDB_soufflant_decompte_60min`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\D_sdb_soufflant_decompte_60min\D_sdb_soufflant_decompte_60min.md` (nouveau nom : `D_SDB_soufflant_decompte_60min.md`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\E_sdb_soufflant_rattrapage_demarrage_ha` (nouveau nom : `E_SDB_soufflant_rattrapage_demarrage_ha`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\E_sdb_soufflant_rattrapage_demarrage_ha\E_sdb_soufflant_rattrapage_demarrage_ha.md` (nouveau nom : `E_SDB_soufflant_rattrapage_demarrage_ha.md`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\G_sdb_seche_serviettes_decompte_2h` (nouveau nom : `G_SDB_seche_serviettes_decompte_2h`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\G_sdb_seche_serviettes_decompte_2h\G_sdb_seche_serviettes_decompte_2h.md` (nouveau nom : `G_SDB_seche_serviettes_decompte_2h.md`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\H_sdb_seche_serviettes_rattrapage_demarrage_ha` (nouveau nom : `H_SDB_seche_serviettes_rattrapage_demarrage_ha`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\H_sdb_seche_serviettes_rattrapage_demarrage_ha\H_sdb_seche_serviettes_rattrapage_demarrage_ha.md` (nouveau nom : `H_SDB_seche_serviettes_rattrapage_demarrage_ha.md`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\Rodret_soufflant_sdb` (nouveau nom : `Rodret_soufflant_SDB`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\Sdb_soufflant_specification_2026` (nouveau nom : `SDB_soufflant_specification_2026`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\Sdb_soufflant_specification_2026\Sdb_soufflant_specification_2026.md` (nouveau nom : `SDB_soufflant_specification_2026.md`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\Timers_sdb_soufflant_et_seche_serviettes` (nouveau nom : `Timers_SDB_soufflant_et_seche_serviettes`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\Timers_sdb_soufflant_et_seche_serviettes\Timers_sdb_soufflant_et_seche_serviettes.md` (nouveau nom : `Timers_SDB_soufflant_et_seche_serviettes.md`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\Z_soufflant_sdb_gestion_intelligente` (nouveau nom : `Z_soufflant_SDB_gestion_intelligente`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\Z_soufflant_sdb_gestion_intelligente\Z_soufflant_sdb_gestion_intelligente.md` (nouveau nom : `Z_soufflant_SDB_gestion_intelligente.md`)
+- `03_docs_automations\03_docs_automations_md\P1_03_Chauffage_salle_de_bain\Z_soufflant_SDB_old_2024_2025` (nouveau nom : `Z_soufflant_SDB_old_2024_2025`)
+- `03_docs_automations\03_docs_automations_md\P3_Eclairage\Sdb_sync_miroir_lampe_et_relais_sdb` (nouveau nom : `SDB_sync_miroir_lampe_et_relais_SDB`)
+- `03_docs_automations\03_docs_automations_md\P3_Eclairage\Sdb_sync_miroir_lampe_et_relais_sdb\Sdb_sync_miroir_lampe_et_relais_sdb.md` (nouveau nom : `SDB_sync_miroir_lampe_et_relais_SDB.md`)
+- `03_docs_automations\03_docs_automations_yaml\P1_03_Chauffage_salle_de_bain\A_soufflant_sdb_bouton_rodret` (nouveau nom : `A_soufflant_SDB_bouton_rodret`)
+- `03_docs_automations\03_docs_automations_yaml\P1_03_Chauffage_salle_de_bain\A_soufflant_sdb_bouton_rodret\A_soufflant_sdb_bouton_rodret.yaml` (nouveau nom : `A_soufflant_SDB_bouton_rodret.yaml`)
+- `03_docs_automations\03_docs_automations_yaml\P1_03_Chauffage_salle_de_bain\B_soufflant_sdb_routage` (nouveau nom : `B_soufflant_SDB_routage`)
+- `03_docs_automations\03_docs_automations_yaml\P1_03_Chauffage_salle_de_bain\B_soufflant_sdb_routage\B_soufflant_sdb_routage.yaml` (nouveau nom : `B_soufflant_SDB_routage.yaml`)
+- `03_docs_automations\03_docs_automations_yaml\P1_03_Chauffage_salle_de_bain\D_sdb_soufflant_decompte_60min_timer` (nouveau nom : `D_SDB_soufflant_decompte_60min_timer`)
+- `03_docs_automations\03_docs_automations_yaml\P1_03_Chauffage_salle_de_bain\D_sdb_soufflant_decompte_60min_timer\D_sdb_soufflant_decompte_60min_timer.yaml` (nouveau nom : `D_SDB_soufflant_decompte_60min_timer.yaml`)
+- `03_docs_automations\03_docs_automations_yaml\P1_03_Chauffage_salle_de_bain\E_sdb_soufflant_rattrapage_demarrage_ha_timer` (nouveau nom : `E_SDB_soufflant_rattrapage_demarrage_ha_timer`)
+- `03_docs_automations\03_docs_automations_yaml\P1_03_Chauffage_salle_de_bain\E_sdb_soufflant_rattrapage_demarrage_ha_timer\E_sdb_soufflant_rattrapage_demarrage_ha_timer.yaml` (nouveau nom : `E_SDB_soufflant_rattrapage_demarrage_ha_timer.yaml`)
+- `03_docs_automations\03_docs_automations_yaml\P1_03_Chauffage_salle_de_bain\G_sdb_seche_serviettes_decompte_2h_timer` (nouveau nom : `G_SDB_seche_serviettes_decompte_2h_timer`)
+- `03_docs_automations\03_docs_automations_yaml\P1_03_Chauffage_salle_de_bain\G_sdb_seche_serviettes_decompte_2h_timer\G_sdb_seche_serviettes_decompte_2h_timer.yaml` (nouveau nom : `G_SDB_seche_serviettes_decompte_2h_timer.yaml`)
+- `03_docs_automations\03_docs_automations_yaml\P1_03_Chauffage_salle_de_bain\H_sdb_seche_serviettes_rattrapage_demarrage_ha_timer` (nouveau nom : `H_SDB_seche_serviettes_rattrapage_demarrage_ha_timer`)
+- `03_docs_automations\03_docs_automations_yaml\P1_03_Chauffage_salle_de_bain\H_sdb_seche_serviettes_rattrapage_demarrage_ha_timer\H_sdb_seche_serviettes_rattrapage_demarrage_ha_timer.yaml` (nouveau nom : `H_SDB_seche_serviettes_rattrapage_demarrage_ha_timer.yaml`)
+- `03_docs_automations\03_docs_automations_yaml\P1_03_Chauffage_salle_de_bain\Rodret_soufflant_sdb` (nouveau nom : `Rodret_soufflant_SDB`)
+- `03_docs_automations\03_docs_automations_yaml\P3_Eclairage\P3_Sdb_sync_miroir_lampe_et_relais_sdb` (nouveau nom : `P3_SDB_sync_miroir_lampe_et_relais_SDB`)
+- `03_docs_automations\03_docs_automations_yaml\P3_Eclairage\P3_Sdb_sync_miroir_lampe_et_relais_sdb\P3_Sdb_sync_miroir_lampe_et_relais_sdb.yaml` (nouveau nom : `P3_SDB_sync_miroir_lampe_et_relais_SDB.yaml`)
+- `04_docs_scripts\04_docs_scripts_yaml\Soufflant_sdb` (nouveau nom : `Soufflant SDB`)
+- `04_docs_scripts\04_docs_scripts_yaml\Soufflant_sdb\Sdb_soufflant_arreter` (nouveau nom : `SDB_soufflant_arreter`)
+- `04_docs_scripts\04_docs_scripts_yaml\Soufflant_sdb\Sdb_soufflant_arreter\Sdb_soufflant_arreter.yaml` (nouveau nom : `SDB_soufflant_arreter.yaml`)
+- `04_docs_scripts\04_docs_scripts_yaml\Soufflant_sdb\Sdb_soufflant_demarrer` (nouveau nom : `SDB_soufflant_demarrer`)
+- `04_docs_scripts\04_docs_scripts_yaml\Soufflant_sdb\Sdb_soufflant_demarrer\Sdb_soufflant_demarrer.yaml` (nouveau nom : `SDB_soufflant_demarrer.yaml`)
 - Avant tout renommage, non vérifié à ce jour : les fichiers de `01_docs_config_system` sont l'image de `H:\` et peuvent être cités par un `include` ; les dossiers d'automations sont croisés avec `H:\automations.yaml` par le générateur de `GLOBAL_INDEX_AUTOMATIONS` ; les chemins sont cités dans des index, des fiches et des skills.
 
 ### 6.9 UI_DASHBOARD (décidé le 2026-10-17)
@@ -238,9 +238,9 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - Elle passe en majuscules comme un sigle (paragraphe 5) : `P1_ui_dashboard` devient `P1_UI_DASHBOARD`.
 - Orthographe : Eric a écrit `Px_UI_DASBOARD` ; je lis `DASHBOARD`, comme dans le nom actuel `ui_dashboard`. À confirmer.
 - Écarts relevés (3 entrées, noms actuels ; le renommage attend un go séparé) :
-- `01_docs_config_system\config_system_SH_PY_YAML\templates\P1_clim_chauffage\P1_ui_dashboard` (attendu : `P1_UI_DASHBOARD`)
-- `01_docs_config_system\config_system_SH_PY_YAML\templates\P1_clim_chauffage\P1_ui_dashboard\P1_ui_dashboard.yaml` (attendu : `P1_UI_DASHBOARD.yaml`)
-- `01_docs_config_system\config_system_SH_PY_YAML\templates\P3_eclairage\P3_ui_dashboard` (attendu : `P3_UI_DASHBOARD`)
+- `01_docs_config_system\config_system_SH_PY_YAML\templates\P1_clim_chauffage\P1_ui_dashboard` (nouveau nom : `P1_UI_DASHBOARD`)
+- `01_docs_config_system\config_system_SH_PY_YAML\templates\P1_clim_chauffage\P1_ui_dashboard\P1_ui_dashboard.yaml` (nouveau nom : `P1_UI_DASHBOARD.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\templates\P3_eclairage\P3_ui_dashboard` (nouveau nom : `P3_UI_DASHBOARD`)
 - Le fichier `P3_etats_status.yaml` du dossier `P3_ui_dashboard` n'est pas concerné (son nom ne contient pas `ui_dashboard`).
 - Avant tout renommage, non vérifié à ce jour : ces fichiers sont dans l'image de `H:\` et peuvent être cités par un `include`. CLAUDE.md et ses copies ont été alignés le 2026-10-17 (section 9, nommage des fichiers YAML).
 
@@ -249,73 +249,73 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - Lecture retenue, déduite de l'exemple et à confirmer : toute variante du mot isolé (`eco`, `Eco`, `ECO`, `éco`, `Éco`) devient `eCO`. Les mots qui contiennent seulement ces lettres (`economie`, `ecoute`) ne sont pas touchés.
 - Conflit avec la règle de base : un nom sans pôle qui commence par `eCO` commence par une minuscule (exemple : `eCO_prises_dynamique`), alors que le paragraphe 1 demande une majuscule en première lettre. Je propose que `eCO` l'emporte (déduit, à confirmer).
 - Écarts relevés (7 entrées, noms actuels ; le renommage attend un go séparé) :
-- `01_docs_config_system\config_system_SH_PY_YAML\templates\P2_prise\P2_eCO_prises\P2_eco_prises_config.yaml` (attendu : `P2_eCO_prises_config.yaml`)
-- `03_docs_automations\docs_automations_md\P2_Éco. prises` (attendu : `P2_eCO_prises`)
-- `03_docs_automations\docs_automations_md\P2_Éco. prises\Eco_prises_dynamique` (attendu : `eCO_prises_dynamique`)
-- `03_docs_automations\docs_automations_md\P2_Éco. prises\Eco_prises_dynamique\Eco_prises_dynamique.md` (attendu : `eCO_prises_dynamique.md`)
-- `03_docs_automations\docs_automations_yaml\P2_Éco. prises` (attendu : `P2_eCO_prises`)
-- `03_docs_automations\docs_automations_yaml\P2_Éco. prises\Eco_prises_dynamique_by_presence_groupe` (attendu : `eCO_prises_dynamique_by_presence_groupe`)
-- `03_docs_automations\docs_automations_yaml\P2_Éco. prises\Eco_prises_dynamique_by_presence_groupe\Eco_prises_dynamique_by_presence_groupe.yaml` (attendu : `eCO_prises_dynamique_by_presence_groupe.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\templates\P2_prise\P2_eCO_prises\P2_eco_prises_config.yaml` (nouveau nom : `P2_eCO_prises_config.yaml`)
+- `03_docs_automations\03_docs_automations_md\P2_Éco. prises` (nouveau nom : `P2_eCO_prises`)
+- `03_docs_automations\03_docs_automations_md\P2_Éco. prises\Eco_prises_dynamique` (nouveau nom : `eCO_prises_dynamique`)
+- `03_docs_automations\03_docs_automations_md\P2_Éco. prises\Eco_prises_dynamique\Eco_prises_dynamique.md` (nouveau nom : `eCO_prises_dynamique.md`)
+- `03_docs_automations\03_docs_automations_yaml\P2_Éco. prises` (nouveau nom : `P2_eCO_prises`)
+- `03_docs_automations\03_docs_automations_yaml\P2_Éco. prises\Eco_prises_dynamique_by_presence_groupe` (nouveau nom : `eCO_prises_dynamique_by_presence_groupe`)
+- `03_docs_automations\03_docs_automations_yaml\P2_Éco. prises\Eco_prises_dynamique_by_presence_groupe\Eco_prises_dynamique_by_presence_groupe.yaml` (nouveau nom : `eCO_prises_dynamique_by_presence_groupe.yaml`)
 - Avant tout renommage, non vérifié à ce jour : les dossiers d'automations sont croisés avec `H:\automations.yaml` par le générateur de `GLOBAL_INDEX_AUTOMATIONS` ; le fichier de `01_docs_config_system` est dans l'image de `H:\` et peut être cité par un `include` ; les chemins sont cités dans des index, des fiches et des skills.
 
 ### 6.11 Z2M, abréviation de Zigbee2MQTT (décidé le 2026-10-17)
 - `Z2M` est l'abréviation de Zigbee2MQTT. Elle s'écrit `Z2M`, en majuscules, dans les noms de dossiers et de fichiers de `docs`.
 - Lecture retenue, à confirmer : Eric a écrit "de partout" ; je limite la règle aux noms de dossiers et de fichiers de `docs`, comme pour SDB et eCO. Toute variante d'écriture de l'abréviation (`z2m`, `Z2m`, `z2M`) devient `Z2M`. Le nom écrit en toutes lettres (`zigbee2mqtt`) n'est pas touché. Les identifiants d'entités Home Assistant restent en minuscules (obligation de Home Assistant, non vérifiée ici).
 - Écarts relevés (7 entrées, noms actuels ; le renommage attend un go séparé ; les 2 sauvegardes `.bak_...` suivent leur fichier ; l'accent de `Contrôle` reléve du paragraphe 6.3) :
-- `02_docs_dashboard\Dashboard_docs_yaml\L4C2_11_Proxmox\Card_services_ha_z2m_mariadb.yaml` (attendu : `Card_services_ha_Z2M_mariadb.yaml`)
-- `03_docs_automations\docs_automations_md\Contrôle entity z2m` (attendu : `Contrôle entity Z2M`)
-- `03_docs_automations\docs_automations_md\Contrôle entity z2m\Z2m_last_seen` (attendu : `Z2M_last_seen`)
-- `03_docs_automations\docs_automations_md\Contrôle entity z2m\Z2m_last_seen\Z2m_last_seen.md` (attendu : `Z2M_last_seen.md`)
-- `03_docs_automations\docs_automations_yaml\Contrôle entity z2m` (attendu : `Contrôle entity Z2M`)
-- `03_docs_automations\docs_automations_yaml\Contrôle entity z2m\Z2m_last_seen` (attendu : `Z2M_last_seen`)
-- `03_docs_automations\docs_automations_yaml\Contrôle entity z2m\Z2m_last_seen\Z2m_last_seen.yaml` (attendu : `Z2M_last_seen.yaml`)
+- `02_docs_dashboard\02_dashboard_docs_yaml\L4C2_11_Proxmox\Card_services_ha_z2m_mariadb.yaml` (nouveau nom : `Card_services_ha_Z2M_mariadb.yaml`)
+- `03_docs_automations\03_docs_automations_md\Contrôle entity z2m` (nouveau nom : `Contrôle entity Z2M`)
+- `03_docs_automations\03_docs_automations_md\Contrôle entity z2m\Z2m_last_seen` (nouveau nom : `Z2M_last_seen`)
+- `03_docs_automations\03_docs_automations_md\Contrôle entity z2m\Z2m_last_seen\Z2m_last_seen.md` (nouveau nom : `Z2M_last_seen.md`)
+- `03_docs_automations\03_docs_automations_yaml\Contrôle entity z2m` (nouveau nom : `Contrôle entity Z2M`)
+- `03_docs_automations\03_docs_automations_yaml\Contrôle entity z2m\Z2m_last_seen` (nouveau nom : `Z2M_last_seen`)
+- `03_docs_automations\03_docs_automations_yaml\Contrôle entity z2m\Z2m_last_seen\Z2m_last_seen.yaml` (nouveau nom : `Z2M_last_seen.yaml`)
 - Avant tout renommage, non vérifié à ce jour : les dossiers d'automations sont croisés avec `H:\automations.yaml` par le générateur de `GLOBAL_INDEX_AUTOMATIONS`, et `Card_services_ha_z2m_mariadb.yaml` est cité dans CLAUDE.md.
 
 ### 6.12 RASPI, abréviation de Raspberry Pi (décidé le 2026-10-17)
 - `RASPI` est l'abréviation de Raspberry Pi. Elle s'écrit `RASPI`, en majuscules, dans les noms de dossiers et de fichiers de `docs`. Eric a demandé `RASPI` à la place de `rpi` : les deux écritures deviennent `RASPI`.
 - Lecture retenue, à confirmer : toute variante de `raspi` (`Raspi`, `RasPi`) et de `rpi` (`Rpi`, `RPI`), prise comme mot isolé entre séparateurs, devient `RASPI`. Le nom écrit en toutes lettres (`raspberry`) et les mots qui contiennent seulement ces lettres (`scorpion`) ne sont pas touchés. Déjà conformes : `03_Page_RASPI` et `Page_RASPI`. Eric a précisé le 2026-10-17 que `Rpi4` devient aussi `RASPI` : le numéro de modèle disparaît.
 - Écarts relevés (9 entrées, noms actuels ; le renommage attend un go séparé ; la sauvegarde `Page_raspi.bak_...` suit son fichier) :
-- `02_docs_dashboard\Dashboard_docs_md\L4C1_MINI_PC\03_Page_RASPI\Page_raspi.md` (attendu : `Page_RASPI.md`)
-- `02_docs_dashboard\Dashboard_docs_yaml\Page_RASPI\02_Page\Page_raspi.yaml` (attendu : `Page_RASPI.yaml`)
-- `03_docs_automations\docs_automations_md\Raspi` (attendu : `RASPI`)
-- `03_docs_automations\docs_automations_yaml\Raspi` (attendu : `RASPI`)
-- `03_docs_automations\docs_automations_yaml\Raspi\A_rpi_fan_pwm_6_states` (attendu : `A_RASPI_fan_pwm_6_states`)
-- `03_docs_automations\docs_automations_yaml\Raspi\A_rpi_fan_pwm_6_states\A_rpi_fan_pwm_6_states.yaml` (attendu : `A_RASPI_fan_pwm_6_states.yaml`)
-- `04_docs_scripts\docs_scripts_sh\Mp_01_monitor_temp.sh - save pour raspi` (attendu : `Mp_01_monitor_temp.sh - save pour RASPI` ; le préfixe `Mp_` reléve du paragraphe 6.6)
-- `03_docs_automations\docs_automations_md\Raspi\Rpi4_fan_pwm` (attendu : `RASPI_fan_pwm`, le 4 disparaît)
-- `03_docs_automations\docs_automations_md\Raspi\Rpi4_fan_pwm\Rpi4_fan_pwm.md` (attendu : `RASPI_fan_pwm.md`)
+- `02_docs_dashboard\02_dashboard_docs_md\L4C1_MINI_PC\03_Page_RASPI\Page_raspi.md` (nouveau nom : `Page_RASPI.md`)
+- `02_docs_dashboard\02_dashboard_docs_yaml\Page_RASPI\02_Page\Page_raspi.yaml` (nouveau nom : `Page_RASPI.yaml`)
+- `03_docs_automations\03_docs_automations_md\Raspi` (nouveau nom : `RASPI`)
+- `03_docs_automations\03_docs_automations_yaml\Raspi` (nouveau nom : `RASPI`)
+- `03_docs_automations\03_docs_automations_yaml\Raspi\A_rpi_fan_pwm_6_states` (nouveau nom : `A_RASPI_fan_pwm_6_states`)
+- `03_docs_automations\03_docs_automations_yaml\Raspi\A_rpi_fan_pwm_6_states\A_rpi_fan_pwm_6_states.yaml` (nouveau nom : `A_RASPI_fan_pwm_6_states.yaml`)
+- `04_docs_scripts\04_docs_scripts_sh\Mp_01_monitor_temp.sh - save pour raspi` (nouveau nom : `Mp_01_monitor_temp.sh - save pour RASPI` ; le préfixe `Mp_` reléve du paragraphe 6.6)
+- `03_docs_automations\03_docs_automations_md\Raspi\Rpi4_fan_pwm` (nouveau nom : `RASPI_fan_pwm`, le 4 disparaît)
+- `03_docs_automations\03_docs_automations_md\Raspi\Rpi4_fan_pwm\Rpi4_fan_pwm.md` (nouveau nom : `RASPI_fan_pwm.md`)
 - Avant tout renommage, non vérifié à ce jour : le dossier `A_rpi_fan_pwm_6_states` est croisé avec `H:\automations.yaml` par le générateur de `GLOBAL_INDEX_AUTOMATIONS`.
 
 ### 6.13 GitHub, graphie fixe (décidé le 2026-10-17)
 - `GitHub` s'écrit toujours `GitHub` (G et H majuscules) dans les noms de dossiers et de fichiers de `docs`.
 - Lecture retenue, à confirmer : toute autre écriture du mot isolé (`github`, `Github`, `GITHUB`) devient `GitHub`. Eric a tranché le 2026-10-17 que cette règle l'emporte sur la règle de la première lettre en majuscule du paragraphe 6.5 : `Github_maintenance` devient `GitHub_maintenance`. Le dossier `Github` à la racine du projet (hors `docs`) n'est pas concerné.
 - Écarts relevés (10 entrées, noms actuels ; le renommage attend un go séparé) :
-- `01_docs_config_system\config_system_SH_PY_YAML\command_line\Github_maintenance` (attendu : `GitHub_maintenance`)
-- `01_docs_config_system\config_system_SH_PY_YAML\command_line\Github_maintenance\github_maintenance.yaml` (attendu : `GitHub_maintenance.yaml`)
-- `01_docs_config_system\config_system_SH_PY_YAML\shell_command\GITHUB` (attendu : `GitHub`)
-- `01_docs_config_system\config_system_SH_PY_YAML\shell_command\GITHUB\GITHUB_backup_github.yaml` (attendu : `GitHub_backup_GitHub.yaml`)
-- `03_docs_automations\docs_automations_md\Backup_ha_GitHub` (attendu : `Backup ha - GitHub`)
-- `03_docs_automations\docs_automations_md\_Sans_categorie\Veille_github_releases` (attendu : `Veille_GitHub_releases`)
-- `03_docs_automations\docs_automations_md\_Sans_categorie\Veille_github_releases\Veille_github_releases.md` (attendu : `Veille_GitHub_releases.md`)
-- `03_docs_automations\docs_automations_yaml\Backup_ha_GitHub` (attendu : `Backup ha - GitHub`)
-- `03_docs_automations\docs_automations_yaml\_Sans_categorie\Veille_github_nouvelle_release_detectee` (attendu : `Veille_GitHub_nouvelle_release_detectee`)
-- `03_docs_automations\docs_automations_yaml\_Sans_categorie\Veille_github_nouvelle_release_detectee\Veille_github_nouvelle_release_detectee.yaml` (attendu : `Veille_GitHub_nouvelle_release_detectee.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\command_line\Github_maintenance` (nouveau nom : `GitHub_maintenance`)
+- `01_docs_config_system\config_system_SH_PY_YAML\command_line\Github_maintenance\github_maintenance.yaml` (nouveau nom : `GitHub_maintenance.yaml`)
+- `01_docs_config_system\config_system_SH_PY_YAML\shell_command\GITHUB` (nouveau nom : `GitHub`)
+- `01_docs_config_system\config_system_SH_PY_YAML\shell_command\GITHUB\GITHUB_backup_github.yaml` (nouveau nom : `GitHub_backup_GitHub.yaml`)
+- `03_docs_automations\03_docs_automations_md\Backup_ha_GitHub` (nouveau nom : `Backup ha - GitHub`)
+- `03_docs_automations\03_docs_automations_md\_Sans_categorie\Veille_github_releases` (nouveau nom : `Veille_GitHub_releases`)
+- `03_docs_automations\03_docs_automations_md\_Sans_categorie\Veille_github_releases\Veille_github_releases.md` (nouveau nom : `Veille_GitHub_releases.md`)
+- `03_docs_automations\03_docs_automations_yaml\Backup_ha_GitHub` (nouveau nom : `Backup ha - GitHub`)
+- `03_docs_automations\03_docs_automations_yaml\_Sans_categorie\Veille_github_nouvelle_release_detectee` (nouveau nom : `Veille_GitHub_nouvelle_release_detectee`)
+- `03_docs_automations\03_docs_automations_yaml\_Sans_categorie\Veille_github_nouvelle_release_detectee\Veille_github_nouvelle_release_detectee.yaml` (nouveau nom : `Veille_GitHub_nouvelle_release_detectee.yaml`)
 - Avant tout renommage, non vérifié à ce jour : les 4 noms de `01_docs_config_system` sont dans l'image de `H:\` et peuvent être cités par un `include` ou un `shell_command` ; les dossiers d'automations sont croisés avec `H:\automations.yaml`.
 
 ### 6.14 GLOBAL_INDEX, graphie fixe (décidé le 2026-10-17)
 - `GLOBAL_INDEX` s'écrit toujours en majuscules dans les noms de dossiers et de fichiers de `docs`, y compris dans leurs sauvegardes `.bak_...`.
 - Lecture retenue, à confirmer : seul le mot `GLOBAL_INDEX` est mis en majuscules (`Gen_global_index_ia.py` devient `Gen_GLOBAL_INDEX_ia.py`). Le reste du nom ne change pas, extension et suffixe `.bak` compris. Les noms qui l'ont déjà en majuscules (`GLOBAL_INDEX_REPO.md`, `ENTITES_GLOBAL_INDEX.md`) ne bougent pas.
 - Appliqué en local le 2026-10-17 (10 entrées, noms avant ; la sauvegarde `Check_global_index.py.bak_2026_10_14` a suivi son fichier) :
-- `04_docs_scripts\docs_scripts_sh\Check_global_index` (attendu : `Check_GLOBAL_INDEX`)
-- `04_docs_scripts\docs_scripts_sh\Check_global_index\Check_global_index.py` (attendu : `Check_GLOBAL_INDEX.py`)
-- `04_docs_scripts\docs_scripts_sh\Gen_global_index_automations` (attendu : `Gen_GLOBAL_INDEX_automations`)
-- `04_docs_scripts\docs_scripts_sh\Gen_global_index_automations\Gen_global_index_automations.py` (attendu : `Gen_GLOBAL_INDEX_automations.py`)
-- `04_docs_scripts\docs_scripts_sh\Gen_global_index_ia` (attendu : `Gen_GLOBAL_INDEX_ia`)
-- `04_docs_scripts\docs_scripts_sh\Gen_global_index_ia\Gen_global_index_ia.py` (attendu : `Gen_GLOBAL_INDEX_ia.py`)
-- `04_docs_scripts\docs_scripts_sh\Gen_global_index_scripts` (attendu : `Gen_GLOBAL_INDEX_scripts`)
-- `04_docs_scripts\docs_scripts_sh\Gen_global_index_scripts\Gen_global_index_scripts.py` (attendu : `Gen_GLOBAL_INDEX_scripts.py`)
-- `04_docs_scripts\docs_scripts_sh\Gen_global_index_vignettes_pages` (attendu : `Gen_GLOBAL_INDEX_vignettes_pages`)
-- `04_docs_scripts\docs_scripts_sh\Gen_global_index_vignettes_pages\Gen_global_index_vignettes_pages.py` (attendu : `Gen_GLOBAL_INDEX_vignettes_pages.py`)
+- `04_docs_scripts\04_docs_scripts_sh\Check_global_index` (nouveau nom : `Check_GLOBAL_INDEX`)
+- `04_docs_scripts\04_docs_scripts_sh\Check_global_index\Check_global_index.py` (nouveau nom : `Check_GLOBAL_INDEX.py`)
+- `04_docs_scripts\04_docs_scripts_sh\Gen_global_index_automations` (nouveau nom : `Gen_GLOBAL_INDEX_automations`)
+- `04_docs_scripts\04_docs_scripts_sh\Gen_global_index_automations\Gen_global_index_automations.py` (nouveau nom : `Gen_GLOBAL_INDEX_automations.py`)
+- `04_docs_scripts\04_docs_scripts_sh\Gen_global_index_ia` (nouveau nom : `Gen_GLOBAL_INDEX_ia`)
+- `04_docs_scripts\04_docs_scripts_sh\Gen_global_index_ia\Gen_global_index_ia.py` (nouveau nom : `Gen_GLOBAL_INDEX_ia.py`)
+- `04_docs_scripts\04_docs_scripts_sh\Gen_global_index_scripts` (nouveau nom : `Gen_GLOBAL_INDEX_scripts`)
+- `04_docs_scripts\04_docs_scripts_sh\Gen_global_index_scripts\Gen_global_index_scripts.py` (nouveau nom : `Gen_GLOBAL_INDEX_scripts.py`)
+- `04_docs_scripts\04_docs_scripts_sh\Gen_global_index_vignettes_pages` (nouveau nom : `Gen_GLOBAL_INDEX_vignettes_pages`)
+- `04_docs_scripts\04_docs_scripts_sh\Gen_global_index_vignettes_pages\Gen_global_index_vignettes_pages.py` (nouveau nom : `Gen_GLOBAL_INDEX_vignettes_pages.py`)
 - Sous Windows la casse est ignorée : les skills qui citent `gen_global_index_*` en minuscules trouvent encore les scripts. Sur `H:` et GitHub la casse compte : à refaire en prod puis dans le repo. Le script `Check_GLOBAL_INDEX.py` n'a pas été relancé après le renommage.
 ### 6.15 Dossiers de type de fichiers : le numéro du dossier racine descend (décidé le 2026-10-17)
 - Un dossier de type de fichiers (md, yaml, sh...), enfant direct d'un dossier racine `0x_` de `docs`, reprend le numéro de ce dossier racine devant son nom : `03_docs_automations_md` plutôt que `docs_automations_md`, `03_docs_automations_yaml` plutôt que `docs_automations_yaml` (exemples d'Eric).
@@ -323,23 +323,35 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - Lecture retenue, à confirmer : "tous les pôles" = les dossiers de type de fichiers de `01_` à `04_`. Non concernés : `00_IA` (6.1), les dossiers nommés d'après un document (`XX_docs_MD_system\DEPENDANCES_GLOBALES`...) ou un skill (`05_docs_skills\skill_histo`...), et `06_docs_technique\01_Pont_hue_hacking` (déjà numéroté).
 - Le reste du nom ne change pas, hors majuscule au premier mot (règle de base, paragraphe 1) : `docs_scripts_sh` devient `04_docs_scripts_sh`. Les enfants de ces dossiers ne changent pas.
 - Exception d'Eric (2026-10-18) : dans `01_docs_config_system`, `config_system_MD` et `config_system_SH_PY_YAML` gardent le nom qu'il a créé, sans numéro. Ils sortent de la liste ci-dessous. `config_system_SH_PY_YAML` remplace `config_system_SH_PY_YAML` (nouvelle organisation : `.scripts\01_scripts.sh`, `.scripts\02_scripts.py`, `sql.yaml`, `notifs`, sans `blueprints`). Les arbres plus bas dans ce document (tableau des chemins) ne sont pas régénérés : ils décrivent encore l'ancienne organisation.
-- Écarts relevés en local (9 dossiers, aucun renommé) :
-- `02_docs_dashboard\Dashboard_docs_md` (attendu : `02_docs_dashboard\02_Dashboard_docs_md`)
-- `02_docs_dashboard\Dashboard_docs_yaml` (attendu : `02_docs_dashboard\02_Dashboard_docs_yaml`)
-- `03_docs_automations\docs_automations_md` (attendu : `03_docs_automations\03_docs_automations_md`)
-- `03_docs_automations\docs_automations_yaml` (attendu : `03_docs_automations\03_docs_automations_yaml`)
-- `04_docs_scripts\docs_script_original` (attendu : `04_docs_scripts\04_docs_script_original`)
-- `04_docs_scripts\docs_scripts_sh` (attendu : `04_docs_scripts\04_docs_scripts_sh`)
-- `04_docs_scripts\docs_scripts_sh_md` (attendu : `04_docs_scripts\04_docs_scripts_sh_md`)
-- `04_docs_scripts\docs_scripts_yaml` (attendu : `04_docs_scripts\04_docs_scripts_yaml`)
-- `04_docs_scripts\docs_scripts_yaml_md` (attendu : `04_docs_scripts\04_docs_scripts_yaml_md`)
-- La prod (`H:\docs`) porte les mémes noms (mémes écarts). Tous les chemins cités vers ces dossiers (fiches, index, skills, générateurs, `CLAUDE.md`, `IA_CONTEXT_BASE.md`) sont à corriger dans la méme opération ; aucun renommage sans go séparé d'Eric.
+- Lot B renommé le 2026-10-25 en local et en prod, sur ordre d'Eric (9 dossiers ; ancien nom, puis nouveau nom) :
+- `02_docs_dashboard\Dashboard_docs_md` (nouveau nom : `02_docs_dashboard\02_dashboard_docs_md`)
+- `02_docs_dashboard\Dashboard_docs_yaml` (nouveau nom : `02_docs_dashboard\02_dashboard_docs_yaml`)
+- `03_docs_automations\docs_automations_md` (nouveau nom : `03_docs_automations\03_docs_automations_md`)
+- `03_docs_automations\docs_automations_yaml` (nouveau nom : `03_docs_automations\03_docs_automations_yaml`)
+- `04_docs_scripts\docs_script_original` (nouveau nom : `04_docs_scripts\04_docs_script_original`)
+- `04_docs_scripts\docs_scripts_sh` (nouveau nom : `04_docs_scripts\04_docs_scripts_sh`)
+- `04_docs_scripts\docs_scripts_sh_md` (nouveau nom : `04_docs_scripts\04_docs_scripts_sh_md`)
+- `04_docs_scripts\docs_scripts_yaml` (nouveau nom : `04_docs_scripts\04_docs_scripts_yaml`)
+- `04_docs_scripts\docs_scripts_yaml_md` (nouveau nom : `04_docs_scripts\04_docs_scripts_yaml_md`)
+- Décision d'Eric (2026-10-25 19:55) : le D de `Dashboard` passe en minuscule, `02_dashboard_docs_md` et `02_dashboard_docs_yaml` (règle de base : dossiers de `docs` en minuscule). Renommage fait le 2026-10-25.
+- La prod (`H:\docs`) a été renommée de la même façon. Tous les chemins cités vers ces dossiers (fiches, index, skills, générateurs, `CLAUDE.md`, `IA_CONTEXT_BASE.md`) ont été corrigés dans la même opération. Les skills de Hermes (`D:\hermes\skills`) citent encore les anciens noms : à voir avec Hermes.
 
 ### 6.16 Dossiers à la racine de la prod : pas de convention de nommage (décidé le 2026-10-18)
 - Les dossiers placés à la racine de la prod, juste après `/config/` (racine de `H:`), gardent le nom qu'ils ont en prod et ne suivent pas la convention de nommage : `command_line`, `sensors`, `templates`, `utility_meter`, `shell_command`, `groups`, `input_booleans`, `input_number`, `timers`, `notifs`, `themes`, `.scripts`. Les dossiers de `docs` qui sont à cet endroit (`01_docs_config_system\config_system_SH_PY_YAML`) suivent la prod.
 - La convention commence au niveau d'en dessous : `command_line\Audit`, `command_line\Energie`, `command_line\IP_externe`, `command_line\Meteo`, `sensors\Meteo`, `templates\Meteo`, `utility_meter\Meteo`, `utility_meter\P0_energie_total`.
 - Contexte (option B choisie par Eric le 2026-10-18) : le local garde la convention, la prod est renommée pour la suivre. 15 renommages de casse faits en prod le 2026-10-18 (2 fichiers, 13 dossiers). Liste dans `TEMPO\renommages_casse_config_system_2026-10-18.txt` (colonne de gauche = nom de la convention).
 - Point non tranché : la ligne du paragraphe 1 sur `command_line` écrit `Ip_externe`, l'arborescence écrit `IP_externe`. Le nom appliqué en prod est `IP_externe`.
+### 6.17. Caractères interdits dans les noms (règle du 2026-10-25)
+- Un espace devient `_` ; `-` devient `_` ; `&` devient `_et_` (toujours en minuscules) ; `(` et `)` sont supprimés.
+- Tout autre caractère qui n'est ni lettre, ni chiffre, ni `_`, ni `.` devient `_`. Les accents ont leur propre règle (6.3).
+- Plusieurs espaces de suite, et les `_` produits par ces règles, donnent un seul `_` (`Backup ha - GitHub` donne `Backup_ha_GitHub`). Les `__` voulus (`__pycache__`) ne sont pas touchés.
+- Un espace en tête ou en fin de nom, un `_` en fin de nom et l'espace juste avant l'extension sont supprimés ; un `_` en tête reste (`_Sans_categorie`, `_Template_doc.md`).
+- Un `.` à l'intérieur du nom, hors extension finale, devient `_`. Les noms cachés qui commencent par `.` restent intacts.
+- Exceptions : `L0C0_PAGE_Home` (contenu compris) ; `.scripts` et ses sous-dossiers ; les noms de modules HACS et d'applications ; les fichiers générés (`__pycache__`, `*.pyc`, `#...#`, `.bak_...`) ; `.claude\skills` ; les dates AAAA-MM-JJ (avec ou sans heure `_HHhMM`), qui gardent leurs `-`.
+- Périmètre : uniquement les noms de dossiers et de fichiers de `docs` (pas les titres, `name:` et alias HA, ancres markdown, YAML de la racine de `H:`). Les dossiers d'automations (`03_docs_automations_md` et `03_docs_automations_yaml`) sont soumis aux mêmes règles (décidé par Eric le 2026-10-25) : `Tarif hc-hp` donne `Tarif_hc_hp`, `Automations.yaml original` donne `Automations_yaml_original`.
+- Collision après remplacement : on s'arrête et on demande à Eric.
+- Alias des automations et des scripts : interdiction de toucher aux alias (titres) de `automations.yaml` et de `scripts.yaml`, ni aux clés des scripts (décidé par Eric le 2026-10-25), sauf si un jour ils posent problème.
+
 ## 7. Écarts relevés
 Liste de tous les dossiers (482) et fichiers (474) de `docs`, hors fichiers `.bak_...` (366, qui suivent le nom de leur fichier). Nombre d'entrées en écart par règle (une entrée peut cumuler plusieurs écarts) :
 - 00_IA (noms pas tout en majuscules) : 1
@@ -788,7 +800,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │                                                                                           │                                                                                             │
 │ ├── 02_docs_dashboard/                                                                      │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── Dashboard_docs_md/                                                                  │                                                                                             │
+│ │   ├── 02_dashboard_docs_md/                                                                  │                                                                                             │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   ├── L0C0_PAGE_Home/                                                                 │ L0C0 intact (décision Eric 2026-10-17) : nom du dossier à trancher                          │
 │ │   │   │   │                                                                               │                                                                                             │
@@ -1052,7 +1064,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │           │                                                                           │                                                                                             │
 │ │   │           └── Page_vigieau.md                                                         │ écart fichier page (attendu : Page_L6C3_vigieau.md)                                         │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── Dashboard_docs_yaml/                                                                │                                                                                             │
+│ │   ├── 02_dashboard_docs_yaml/                                                                │                                                                                             │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   ├── Dashboard_COMPLET/                                                              │ intact : Dashboard_COMPLET                                                                  │
 │ │   │   │   │                                                                               │                                                                                             │
@@ -1426,7 +1438,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │                                                                                           │                                                                                             │
 │ ├── 03_docs_automations/                                                                    │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── docs_automations_md/                                                                │                                                                                             │
+│ │   ├── 03_docs_automations_md/                                                                │                                                                                             │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   ├── _Sans_categorie/                                                                │                                                                                             │
 │ │   │   │   │                                                                               │                                                                                             │
@@ -1438,7 +1450,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │   │       │                                                                           │                                                                                             │
 │ │   │   │       └── Veille_github_releases.md                                               │ écart GitHub (paragraphe 6.13)                                                              │
 │ │   │   │                                                                                   │                                                                                             │
-│ │   │   ├── Automations.yaml_original/                                                      │                                                                                             │
+│ │   │   ├── Automations_yaml_original/                                                      │                                                                                             │
 │ │   │   │   │                                                                               │                                                                                             │
 │ │   │   │   └── Automations.md                                                              │                                                                                             │
 │ │   │   │                                                                                   │                                                                                             │
@@ -1660,7 +1672,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │   │   │   │                                                                           │                                                                                             │
 │ │   │   │   │   └── Z_soufflant_sdb_gestion_intelligente.md                                 │ écart SDB (paragraphe 6.8)                                                                  │
 │ │   │   │   │                                                                               │                                                                                             │
-│ │   │   │   └── Z_soufflant_sdb_old_2024-2025/                                              │ écart SDB (paragraphe 6.8)                                                                  │
+│ │   │   │   └── Z_soufflant_SDB_old_2024_2025/                                              │ écart SDB (paragraphe 6.8)                                                                  │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   ├── P2_Alarme_congélateur/                                                          │ écart accent (attendu : P2_Alarme_congelateur)                                              │
 │ │   │   │   │                                                                               │                                                                                             │
@@ -1724,7 +1736,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │   │       │                                                                           │                                                                                             │
 │ │   │   │       └── Rpi4_fan_pwm.md                                                         │ écart RASPI (paragraphe 6.12)                                                               │
 │ │   │   │                                                                                   │                                                                                             │
-│ │   │   ├── Tarif_hc-hp/                                                                    │                                                                                             │
+│ │   │   ├── Tarif_hc_hp/                                                                    │                                                                                             │
 │ │   │   │   │                                                                               │                                                                                             │
 │ │   │   │   └── Basculement_tarif_hphc/                                                     │                                                                                             │
 │ │   │   │       │                                                                           │                                                                                             │
@@ -1736,7 +1748,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │           │                                                                           │                                                                                             │
 │ │   │           └── Watchdog_piles.md                                                       │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── docs_automations_yaml/                                                              │                                                                                             │
+│ │   ├── 03_docs_automations_yaml/                                                              │                                                                                             │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   ├── _Sans_categorie/                                                                │                                                                                             │
 │ │   │   │   │                                                                               │                                                                                             │
@@ -1748,7 +1760,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │   │       │                                                                           │                                                                                             │
 │ │   │   │       └── Veille_github_nouvelle_release_detectee.yaml                            │ écart GitHub (paragraphe 6.13)                                                              │
 │ │   │   │                                                                                   │                                                                                             │
-│ │   │   ├── Automations.yaml_original/                                                      │                                                                                             │
+│ │   │   ├── Automations_yaml_original/                                                      │                                                                                             │
 │ │   │   │   │                                                                               │                                                                                             │
 │ │   │   │   └── Automations.yaml                                                            │                                                                                             │
 │ │   │   │                                                                                   │                                                                                             │
@@ -2022,7 +2034,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │   │       │                                                                           │                                                                                             │
 │ │   │   │       └── A_rpi_fan_pwm_6_states.yaml                                             │ écart RASPI (paragraphe 6.12)                                                               │
 │ │   │   │                                                                                   │                                                                                             │
-│ │   │   ├── Tarif_hc-hp/                                                                    │                                                                                             │
+│ │   │   ├── Tarif_hc_hp/                                                                    │                                                                                             │
 │ │   │   │   │                                                                               │                                                                                             │
 │ │   │   │   └── Auto_energie_basculement_tarif_hc_hp_genelec_appart/                        │                                                                                             │
 │ │   │   │       │                                                                           │                                                                                             │
@@ -2038,9 +2050,9 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │                                                                                           │                                                                                             │
 │ ├── 04_docs_scripts/                                                                        │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── docs_script_original/                                                               │                                                                                             │
+│ │   ├── 04_docs_script_original/                                                               │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── docs_scripts_sh/                                                                    │                                                                                             │
+│ │   ├── 04_docs_scripts_sh/                                                                    │                                                                                             │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   ├── Audit_md5/                                                                      │                                                                                             │
 │ │   │   │   │                                                                               │                                                                                             │
@@ -2104,7 +2116,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │       │                                                                               │                                                                                             │
 │ │   │       └── #Mp_01_monitor_temp.sh.#                                                    │ écart préfixe (attendu : #MPC_01_monitor_temp.sh.# ; paragraphe 6.6)                        │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── docs_scripts_sh_md/                                                                 │                                                                                             │
+│ │   ├── 04_docs_scripts_sh_md/                                                                 │                                                                                             │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   ├── Audit_md5/                                                                      │                                                                                             │
 │ │   │   │   │                                                                               │                                                                                             │
@@ -2118,7 +2130,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │       │                                                                               │                                                                                             │
 │ │   │       └── Ha_git_backup.md                                                            │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── docs_scripts_yaml/                                                                  │                                                                                             │
+│ │   ├── 04_docs_scripts_yaml/                                                                  │                                                                                             │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   ├── Audit_md5/                                                                      │                                                                                             │
 │ │   │   │   │                                                                               │                                                                                             │
@@ -2168,7 +2180,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │           │                                                                           │                                                                                             │
 │ │   │           └── Sdb_soufflant_demarrer.yaml                                             │ écart SDB (paragraphe 6.8)                                                                  │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── docs_scripts_yaml_md/                                                               │                                                                                             │
+│ │   ├── 04_docs_scripts_yaml_md/                                                               │                                                                                             │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   ├── P1_Master_gestion_clim/                                                         │                                                                                             │
 │ │   │   │   │                                                                               │                                                                                             │
@@ -2196,11 +2208,11 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   ├── DEPENDANCES_GLOBALES.md                                                         │ intact : DEPENDANCES_GLOBALES                                                               │
 │ │   │   │                                                                                   │                                                                                             │
-│ │   │   ├── DEPENDANCES_GLOBALES_archive_2026-09-28.md                                      │ intact : DEPENDANCES_GLOBALES                                                               │
+│ │   │   ├── DEPENDANCES_GLOBALES_archive_2026_09_28.md                                      │ intact : DEPENDANCES_GLOBALES                                                               │
 │ │   │   │                                                                                   │                                                                                             │
-│ │   │   ├── DEPENDANCES_GLOBALES_archive_2026-10-07_18h13.md                                │ intact : DEPENDANCES_GLOBALES                                                               │
+│ │   │   ├── DEPENDANCES_GLOBALES_archive_2026_10_07_18h13.md                                │ intact : DEPENDANCES_GLOBALES                                                               │
 │ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── DEPENDANCES_GLOBALES_archive_2026-10-07_19h20.md                                │ intact : DEPENDANCES_GLOBALES                                                               │
+│ │   │   └── DEPENDANCES_GLOBALES_archive_2026_10_07_19h20.md                                │ intact : DEPENDANCES_GLOBALES                                                               │
 │ │   │                                                                                       │                                                                                             │
 │ │   ├── DEPENDANCES_GLOBALES_HERMES/                                                        │ intact : DEPENDANCES_GLOBALES                                                               │
 │ │   │   │                                                                                   │                                                                                             │
@@ -2290,13 +2302,13 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 - `Dashboard_docs_specifique` : organisation à plat non confirmée. Les 14 `Card_*.yaml` hors `L0C0_PAGE_Home` (L1C1 : 1, L1C3 : 6, L4C1 : 1, L4C2 : 1, L5C3 : 5) restent en place selon ma proposition, non confirmée. Des noms de `Card_*` sont cités dans `GLOBAL_INDEX_VIGNETTES_PAGES.md`, `DEPENDANCES_GLOBALES.md`, `GLOBAL_INDEX_REPO.md` et `IA_CONTEXT_BASE.md`. Qu'aucune page ni aucun index ne cite les fichiers couleur est le constat d'Eric, je ne l'ai pas vérifié.
 - `L0C0_PAGE_Home` : le nom du dossier reste-t-il `L0C0_PAGE_Home` (exception) ou devient-il `L0C0_PAGE_HOME` ? Neuf noms avec accent y figurent, signalés mais intacts.
 - Dossiers hors schéma LxCx, à classer. Page_RASPI : RASPI mis en majuscules à la main depuis le relevé de 21:30, non journalisé. Script sh : dossier avec espace dans L5C3_15_MariaDB, déjà présent au relevé de 21:30 :
-- `02_docs_dashboard\Dashboard_docs_yaml\L5C3_15_MariaDB\Script_sh`
-- `02_docs_dashboard\Dashboard_docs_yaml\Page_RASPI`
+- `02_docs_dashboard\02_dashboard_docs_yaml\L5C3_15_MariaDB\Script_sh`
+- `02_docs_dashboard\02_dashboard_docs_yaml\Page_RASPI`
 - 50 noms contiennent des espaces (exemple `04_Studio code server`) : aucune règle n'existe.
 - `00_IA\SOUS_CONTEXT_IA` : orthographe tranché par Eric le 2026-10-17 (SOUS_CONTEXT_IA, avec X). L'ancien nom local `SOUS_CONTEST_IA` (saisi à la main) et l'ancien nom prod `sous_context_ia` sont renommés en `SOUS_CONTEXT_IA`. Chemins de `CLAUDE.md` et de ses cousins corrigés ; scripts, skills et fiches : en cours.
 - `01_docs_config_system\config_system_SH_PY_YAML\sensors\Meteo` et `shell_command\GITHUB` : majuscules mises à la main par Eric. Elles contredisent la règle "système en minuscules" : à trancher. Pour `shell_command\GITHUB`, tranché le 2026-10-17 : `GitHub` (paragraphe 6.13).
 - `Gen_global_index_*` (4 dossiers) : renommés d'après le tree validé, sans réponse explicite d'Eric.
-- `docs_scripts_sh\Check_sous_context_ia\__Pycache__` : mon renommage a changé la casse d'un dossier de cache généré, à remettre en `__pycache__`. Demande sans réponse.
+- `04_docs_scripts_sh\Check_sous_context_ia\__Pycache__` : mon renommage a changé la casse d'un dossier de cache généré, à remettre en `__pycache__`. Demande sans réponse.
 - `05_docs_YAML_system` n'existe pas, identité à préciser.
 - Où inscrire ces règles dans `CLAUDE.md` et ses fichiers apparentés : non décidé (`CLAUDE.md` et `IA_CONTEXT_BASE.md` sont à ne pas toucher).
 - Des modifications faites à la main par Eric ne sont pas journalisées (liste dans le journal du jour).

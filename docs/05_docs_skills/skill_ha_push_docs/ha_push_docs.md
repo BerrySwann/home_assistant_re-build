@@ -5,7 +5,7 @@ description: "Skill HA ReBuild - synchronise les fichiers de documentation locau
 
 # HA Push Docs - Local -> H:\Docs (*.md + *.yaml dashboard)
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 Synchronise la documentation locale vers `H:\Docs\` : fichiers `*.md` ET `*.yaml` dashboard.
 Pousse uniquement les fichiers dont le MD5 differe de la prod.
@@ -18,11 +18,11 @@ Pousse uniquement les fichiers dont le MD5 differe de la prod.
 
 | Source locale | Destination prod | Type |
 |:---|:---|:---|
-| `docs\02_docs_dashboard\dashboard_docs_MD\` | `H:\Docs\` | *.md |
-| `docs\03_docs_automations\docs_automations_MD\` | `H:\Docs\` | *.md |
-| `docs\04_docs_scripts\docs_scripts_YAML_MD\` | `H:\Docs\` | *.md |
-| `docs\04_docs_scripts\docs_scripts_SH_MD\` | `H:\Docs\` | *.md |
-| `docs\02_docs_dashboard\dashboard_docs_YAML\` | `H:\Docs\Dashboard\` | *.yaml dashboard |
+| `docs\02_docs_dashboard\02_dashboard_docs_md\` | `H:\Docs\` | *.md |
+| `docs\03_docs_automations\03_docs_automations_md\` | `H:\Docs\` | *.md |
+| `docs\04_docs_scripts\04_docs_scripts_yaml_md\` | `H:\Docs\` | *.md |
+| `docs\04_docs_scripts\04_docs_scripts_sh_md\` | `H:\Docs\` | *.md |
+| `docs\02_docs_dashboard\02_dashboard_docs_yaml\` | `H:\Docs\Dashboard\` | *.yaml dashboard |
 
 > Utiliser `mcp__Windows-MCP__PowerShell` pour H:\ (Samba). secrets.yaml interdit absolu.
 
@@ -34,10 +34,10 @@ $base = "C:\Users\Berry Swann\Documents\ReBuild"
 $localMd5 = @{}
 
 # *.md
-@("$base\docs\02_docs_dashboard\dashboard_docs_MD",
-  "$base\docs\03_docs_automations\docs_automations_MD",
-  "$base\docs\04_docs_scripts\docs_scripts_YAML_MD",
-  "$base\docs\04_docs_scripts\docs_scripts_SH_MD") | ForEach-Object {
+@("$base\docs\02_docs_dashboard\02_dashboard_docs_md",
+  "$base\docs\03_docs_automations\03_docs_automations_md",
+  "$base\docs\04_docs_scripts\04_docs_scripts_yaml_md",
+  "$base\docs\04_docs_scripts\04_docs_scripts_sh_md") | ForEach-Object {
   $srcRoot = $_
   if (Test-Path $srcRoot) {
     Get-ChildItem $srcRoot -Recurse -Filter "*.md" | ForEach-Object {
@@ -48,7 +48,7 @@ $localMd5 = @{}
 }
 
 # *.yaml dashboard (plus recent par type uniquement)
-$yamlSrc = "$base\docs\02_docs_dashboard\dashboard_docs_YAML"
+$yamlSrc = "$base\docs\02_docs_dashboard\02_dashboard_docs_yaml"
 Get-ChildItem $yamlSrc -Directory | Where-Object { $_.Name -ne 'Dashboard_COMPLET' } | ForEach-Object {
   $subDir = $_.Name
   Get-ChildItem $_.FullName -Filter "*.yaml" |

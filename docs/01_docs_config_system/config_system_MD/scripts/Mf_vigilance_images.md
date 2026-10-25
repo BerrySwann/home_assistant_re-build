@@ -2,7 +2,7 @@
 
 > **Script :** `mf_vigilance_images.sh` (bash)
 > **Emplacement prod :** `/config/scripts/mf_vigilance_images.sh` (dossier `scripts`, sans point : différent de `.scripts`)
-> **Emplacement local :** `docs/01_docs_config_system/config_system_SH_PY_YAML/scripts/mf_vigilance_images.sh` (copie identique dans `docs/04_Docs_scripts/Docs_scripts_sh/Mf_vigilance_images/Mf_vigilance_images.sh`)
+> **Emplacement local :** `docs/01_docs_config_system/config_system_SH_PY_YAML/scripts/mf_vigilance_images.sh` (copie identique dans `docs/04_docs_scripts/04_docs_scripts_sh/Mf_vigilance_images/Mf_vigilance_images.sh`)
 > **Empreinte relevée le 2026-10-18 :** MD5 `3e20109d`, 1831 octets, copies identiques à la prod
 > **Appelé par :** les deux capteurs `command_line` de `command_line/Meteo/carte_meteo_france.yaml`
 > **Dernière modification :** 2026-10-01 (date du fichier)

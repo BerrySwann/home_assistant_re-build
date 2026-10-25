@@ -184,8 +184,8 @@ Tu disposes de sources d'information critiques :
 |:-------|:------------|
 | `docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md` | Structure physique (Simple vitrage, Dernier étage, Traversant) |
 | `notifs/diag_conso_elec.txt` (prod : `/homeassistant/notifs/`) | Logs horaires réels (la vérité du terrain) |
-| `automations.yaml` (+ `docs/03_docs_automations/docs_automations_YAML/`) | Le code qui pilote le chauffage et les ouvrants |
-| `docs/04_docs_scripts/docs_scripts_YAML/Climatisation/p1_master_gestion_clim/p1_master_gestion_clim.yaml` | Logique déléguée jour/nuit clim (script maître, créé 2026-06 - remplace l'ancien découpage j_1_1/j_1_2/j_1_3) |
+| `automations.yaml` (+ `docs/03_docs_automations/03_docs_automations_yaml/`) | Le code qui pilote le chauffage et les ouvrants |
+| `docs/04_docs_scripts/04_docs_scripts_yaml/Climatisation/p1_master_gestion_clim/p1_master_gestion_clim.yaml` | Logique déléguée jour/nuit clim (script maître, créé 2026-06 - remplace l'ancien découpage j_1_1/j_1_2/j_1_3) |
 | `templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml` | Calcul saison (`sensor.mode_ete_hiver`), température cible/confort |
 | `templates/P4_groupe_presence/P4_groupe_presence.yaml` | Logique présence (`sensor.groupe` - voir IA_P4_PRESENCE.md) |
 | `sensor.tarif_heures_pleines_ttc` / `sensor.tarif_heures_creuses_ttc` | Coût kWh HP/HC (0,2142€ / 0,1589€ TTC, grille EDF vérifiée le 2026-08-10, applicable au 01/08/2026 - les TRV sont revus chaque 1er février et 1er août, à re-vérifier à chaque bilan) - pour calculs ROI des recommandations (voir section 6, catégorie "Travaux physiques" uniquement) |
@@ -327,7 +327,7 @@ et Chambre est donc exclusivement d'origine thermique, pas de consigne.
     si le seuil 20.5C n'était franchi qu'après 8h30 (bug confirmé par Eric, corrigé)
 
 ⚠️ **Statut déploiement (2026-07-19)** : correction appliquée dans
-`docs/03_docs_automations/docs_automations_YAML/P1_02_Cuisine/b_chauffage_cuisine_vacances/b_chauffage_cuisine_vacances.yaml`
+`docs/03_docs_automations/03_docs_automations_yaml/P1_02_Cuisine/b_chauffage_cuisine_vacances/b_chauffage_cuisine_vacances.yaml`
 (état CIBLE). Mise à jour 2026-10-13 : déployée en prod HA (TODO P1-CUISINE-B clos ; le message "Fin Vacances 8h30" est présent dans l'automation prod).
 Tant que ce n'est pas fait, le comportement réel en prod reste l'ANCIENNE version
 (Eric ET Mamour, pas d'arrêt forcé).

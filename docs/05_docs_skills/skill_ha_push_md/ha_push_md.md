@@ -18,10 +18,10 @@ Pousse uniquement les fichiers `*.md` de documentation vers le partage Samba `H:
 
 | Source locale | Destination prod |
 |:---|:---|
-| `docs\02_docs_dashboard\dashboard_docs_MD\` | `H:\Docs\` |
-| `docs\03_docs_automations\docs_automations_MD\` | `H:\Docs\` |
-| `docs\04_docs_scripts\docs_scripts_YAML_MD\` | `H:\Docs\` |
-| `docs\04_docs_scripts\docs_scripts_SH_MD\` | `H:\Docs\` |
+| `docs\02_docs_dashboard\02_dashboard_docs_md\` | `H:\Docs\` |
+| `docs\03_docs_automations\03_docs_automations_md\` | `H:\Docs\` |
+| `docs\04_docs_scripts\04_docs_scripts_yaml_md\` | `H:\Docs\` |
+| `docs\04_docs_scripts\04_docs_scripts_sh_md\` | `H:\Docs\` |
 
 > Utiliser `mcp__Windows-MCP__PowerShell` pour H:\ (Samba). secrets.yaml interdit absolu.
 
@@ -31,10 +31,10 @@ Pousse uniquement les fichiers `*.md` de documentation vers le partage Samba `H:
 ```powershell
 $base = "C:\Users\Berry Swann\Documents\ReBuild"
 $sources = @(
-  "$base\docs\02_docs_dashboard\dashboard_docs_MD",
-  "$base\docs\03_docs_automations\docs_automations_MD",
-  "$base\docs\04_docs_scripts\docs_scripts_YAML_MD",
-  "$base\docs\04_docs_scripts\docs_scripts_SH_MD"
+  "$base\docs\02_docs_dashboard\02_dashboard_docs_md",
+  "$base\docs\03_docs_automations\03_docs_automations_md",
+  "$base\docs\04_docs_scripts\04_docs_scripts_yaml_md",
+  "$base\docs\04_docs_scripts\04_docs_scripts_sh_md"
 )
 $localMd5 = @{}
 $sources | ForEach-Object {

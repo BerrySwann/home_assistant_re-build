@@ -2,7 +2,7 @@
 
 > **Script shell :** `ha_git_backup.sh`
 > **Emplacement prod :** `/config/.scripts/ha_git_backup.sh`
-> **Emplacement local :** `docs/01_docs_config_system/config_system_SH_PY_YAML/.scripts/01_scripts.sh/ha_git_backup.sh` (copie identique dans `docs/04_Docs_scripts/Docs_scripts_sh/Ha_git_backup/Ha_git_backup.sh`)
+> **Emplacement local :** `docs/01_docs_config_system/config_system_SH_PY_YAML/.scripts/01_scripts.sh/ha_git_backup.sh` (copie identique dans `docs/04_docs_scripts/04_docs_scripts_sh/Ha_git_backup/Ha_git_backup.sh`)
 > **Appelé par :** `shell_command.git_backup_push`, `git_backup_push_manual` et `git_backup_push_weekly` (fichier `shell_command/GitHub/GitHub_backup_GitHub.yaml`), lancés par 6 actions de `automations.yaml` (lignes 96, 115, 129, 170, 181 et 2315, relevé du 2026-10-18)
 > **Dernière modif :** 2026-08-08 (date du fichier ; dernière entrée du journal du script : 2026-08-01). Fiche relue contre le script le 2026-10-18.
 > **Empreinte relevée le 2026-10-18 :** MD5 `57ae9a6e`, 15054 octets, copies identiques à la prod

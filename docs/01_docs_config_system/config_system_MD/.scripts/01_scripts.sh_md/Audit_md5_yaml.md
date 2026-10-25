@@ -2,7 +2,7 @@
 
 > **Script :** `audit_md5_yaml.sh` (bash)
 > **Emplacement prod :** `/config/.scripts/audit_md5_yaml.sh`
-> **Emplacement local :** `docs/01_docs_config_system/config_system_SH_PY_YAML/.scripts/01_scripts.sh/audit_md5_yaml.sh` (copie identique dans `docs/04_Docs_scripts/Docs_scripts_sh/Audit_md5_yaml/Audit_md5_yaml.sh`)
+> **Emplacement local :** `docs/01_docs_config_system/config_system_SH_PY_YAML/.scripts/01_scripts.sh/audit_md5_yaml.sh` (copie identique dans `docs/04_docs_scripts/04_docs_scripts_sh/Audit_md5_yaml/Audit_md5_yaml.sh`)
 > **Empreinte relevée le 2026-10-18 :** MD5 ` (version locale corrigée, copies locales identiques entre elles, PAS ENCORE POUSSÉE en prod : la prod a toujours l'ancienne version `4b9b7f24`, 7672 octets)
 > **Appelé par :** `shell_command.audit_md5` (fichier `shell_command/GitHub/GitHub_backup_GitHub.yaml`, commande `bash /config/.scripts/audit_md5_yaml.sh >> /config/.logs/md5_audit_yaml_AAAA-MM-JJ.txt 2>&1`)
 > **Dernière entrée du journal du script :** 2026-10-18

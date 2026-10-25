@@ -2,7 +2,7 @@
 
 > **Script :** `check_yaml_forme.py` (Python 3)
 > **Emplacement prod :** `/config/.scripts/check_yaml_forme.py`
-> **Emplacement local :** `docs/01_docs_config_system/config_system_SH_PY_YAML/.scripts/02_scripts.py/check_yaml_forme.py` (copie identique dans `docs/04_Docs_scripts/Docs_scripts_yaml/Check_yaml_forme/Check_yaml_forme.py`)
+> **Emplacement local :** `docs/01_docs_config_system/config_system_SH_PY_YAML/.scripts/02_scripts.py/check_yaml_forme.py` (copie identique dans `docs/04_docs_scripts/04_docs_scripts_yaml/Check_yaml_forme/Check_yaml_forme.py`)
 > **Empreinte relevée le 2026-10-18 :** MD5 `842d0472`, 3335 octets, copies identiques à la prod
 > **Dernière modification :** 2026-09-29 (date du fichier)
 

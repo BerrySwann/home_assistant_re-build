@@ -63,9 +63,9 @@ Trois emplacements seulement : L, PM, GD. Controles par `/ha-trigul` (superposit
 
 ## 6. Controle
 
-Script en lecture seule : `docs/04_Docs_scripts/Docs_scripts_sh/Verif_emplacements/Verif_emplacements.py`.
+Script en lecture seule : `docs/04_docs_scripts/04_docs_scripts_sh/Verif_emplacements/Verif_emplacements.py`.
 
-Lancement : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py"`
+Lancement : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_sh\Verif_emplacements\Verif_emplacements.py"`
 
 Rapport : `historique\MD5\03_verif_emplacements\verif_emplacements_AAAA-MM-JJ.txt`. Verdicts : SYNC, PROD DIFFERENTE DU LOCAL, GITHUB EN ATTENTE DU BACKUP, ABSENT (avec les emplacements manquants), et en section 2 les fichiers presents ailleurs qu'en local (PROD RACINE SEULE, PROD MIROIR SEUL, GITHUB RACINE SEUL, GITHUB DOCS SEUL). Dernieres lignes : `ANOMALIES` et `RESULTAT`.
 

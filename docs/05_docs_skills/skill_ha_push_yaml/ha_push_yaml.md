@@ -179,7 +179,7 @@ foreach ($d in $dest, $destPM) {
 ```
 
 Controle global facultatif (lecture seule, 5 emplacements) :
-`$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py"`
+`$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_sh\Verif_emplacements\Verif_emplacements.py"`
 (rapport dans `historique\MD5\03_verif_emplacements\`). Apres le push, le fichier doit
 sortir SYNC ou GITHUB EN ATTENTE DU BACKUP.
 

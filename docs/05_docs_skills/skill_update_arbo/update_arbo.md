@@ -5,7 +5,7 @@ description: "Skill HA ReBuild - met a jour IA_ARBO_DETAIL.md (comptages LOCAL +
 
 # Skill : /update-arbo - Mise a jour IA_ARBO_DETAIL.md
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_sh\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 ## Objectif
 
@@ -35,7 +35,7 @@ $docs_02     = (Get-ChildItem "$base\docs\02_docs_dashboard" -Recurse -File).Cou
 $docs_03     = (Get-ChildItem "$base\docs\03_docs_automations" -Recurse -File).Count
 $docs_04     = (Get-ChildItem "$base\docs\04_docs_scripts" -Recurse -File).Count
 $docs_05     = (Get-ChildItem "$base\docs\XX_docs_MD_system" -Recurse -File).Count
-$dash_complet= (Get-ChildItem "$base\docs\02_docs_dashboard\dashboard_docs_YAML\Dashboard_COMPLET" -Filter "*.yaml").Count
+$dash_complet= (Get-ChildItem "$base\docs\02_docs_dashboard\02_dashboard_docs_yaml\Dashboard_COMPLET" -Filter "*.yaml").Count
 
 Write-Host "LOCAL docs/ total   : $docs_total"
 Write-Host "  historique/       : $histo_total"

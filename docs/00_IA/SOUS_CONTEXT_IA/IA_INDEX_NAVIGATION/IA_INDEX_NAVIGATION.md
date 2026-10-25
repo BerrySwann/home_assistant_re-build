@@ -7,7 +7,7 @@
 ## Ce que c'est
 
 La navigation dashboard est indexee a deux endroits :
-- **Index genere** : `docs/02_Docs_dashboard/GLOBAL_INDEX_VIGNETTES_PAGES.md` (vignettes et pages : fiche, YAML, dependances). Regenere a chaque `/histo` par `docs/04_Docs_scripts/Docs_scripts_sh/Gen_GLOBAL_INDEX_vignettes_pages/Gen_GLOBAL_INDEX_vignettes_pages.py`. Ne jamais le modifier a la main.
+- **Index genere** : `docs/02_docs_dashboard/GLOBAL_INDEX_VIGNETTES_PAGES.md` (vignettes et pages : fiche, YAML, dependances). Regenere a chaque `/histo` par `docs/04_docs_scripts/04_docs_scripts_sh/Gen_GLOBAL_INDEX_vignettes_pages/Gen_GLOBAL_INDEX_vignettes_pages.py`. Ne jamais le modifier a la main.
 - **Index detaille en accordeon** : section `02 - DASHBOARD (18 vignettes)` de `GLOBAL_INDEX_REPO.md` (racine de `H:\` + copie locale `docs/01_docs_config_system/config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md`). Maintenue a la main.
 
 Il n'y a plus de fichier `INDEX_NAVIGATION_FULL.md` ni `INDEX_NAVIGATION.md` distinct (fusionnes dans GLOBAL_INDEX_REPO.md le 2026-07-16). `INDEX_PAGES.md` a ete retire du local le 2026-10-13 : remplace par l'index genere.
@@ -17,18 +17,18 @@ Il n'y a plus de fichier `INDEX_NAVIGATION_FULL.md` ni `INDEX_NAVIGATION.md` dis
 ## Arborescence locale dashboard (verifiee 2026-10-13)
 
 ```
-docs/02_Docs_dashboard/
+docs/02_docs_dashboard/
 - GLOBAL_INDEX_VIGNETTES_PAGES.md   <- index genere (ne pas modifier)
-- Dashboard_docs_yaml/              <- YAMLs dashboard (vignettes, pages, cartes isolees)
+- 02_dashboard_docs_yaml/              <- YAMLs dashboard (vignettes, pages, cartes isolees)
     L0C0_PAGE_Home/  L1C1_METEO/  L1C2_TEMPERATURES/  ...  L6C3_VIGIEAU/  (18 vignettes)
     PAGE_RASPI/
     Dashboard_COMPLET/              <- Exports complets dashboard (Dashboard_YYYY_MM_DD.yaml)
-- Dashboard_docs_md/                <- Fiches texte par vignette/page
+- 02_dashboard_docs_md/                <- Fiches texte par vignette/page
     L0C0_PAGE_Home/  L1C1_METEO/  L1C2_TEMPERATURES/  ...  L6C3_VIGIEAU/
     (chaque dossier L*C* : 01_Vignette/ et 02_Page/, 02_page_nom si plusieurs pages)
 ```
 
-La chaine de dependances (`DEPENDANCES_GLOBALES.md`) est dans `docs/XX_docs_MD_system/DEPENDANCES_GLOBALES/`, plus dans `Dashboard_docs_md`.
+La chaine de dependances (`DEPENDANCES_GLOBALES.md`) est dans `docs/XX_docs_MD_system/DEPENDANCES_GLOBALES/`, plus dans `02_dashboard_docs_md`.
 Prod : `H:\docs\` = miroir de `docs\` local ; un seul export `H:\Dashboard_AAAA_MM_JJ.yaml` a la racine de `H:\` (verifie par `/histo`, etape 5B). Config YAML prod : `sensors/`, `templates/`, `utility_meter/` a la racine de `H:\`.
 
 ---
@@ -38,8 +38,8 @@ Prod : `H:\docs\` = miroir de `docs\` local ; un seul export `H:\Dashboard_AAAA_
 ```
 Niveau 1 : L*C* - LABEL | X page(s) | ~N entites       <- retracte par defaut
   Niveau 2a : Vignette
-    - Doc vignette (lien docs/02_Docs_dashboard/Dashboard_docs_md/L*C*_*/01_Vignette/...)
-    - YAML vignette (lien docs/02_Docs_dashboard/Dashboard_docs_yaml/L*C*_*/...)
+    - Doc vignette (lien docs/02_docs_dashboard/02_dashboard_docs_md/L*C*_*/01_Vignette/...)
+    - YAML vignette (lien docs/02_docs_dashboard/02_dashboard_docs_yaml/L*C*_*/...)
     - Fichiers sources (par fichier, entites listees)
   Niveau 2b : Page(s)
     - Doc page + YAML page
@@ -58,8 +58,8 @@ Niveau 1 : L*C* - LABEL | X page(s) | ~N entites       <- retracte par defaut
 
 | Type | Chemin GitHub |
 |:-----|:-------------|
-| YAMLs dashboard | `docs/02_Docs_dashboard/Dashboard_docs_yaml/L*C*_*/` |
-| Docs vignettes | `docs/02_Docs_dashboard/Dashboard_docs_md/L*C*_*/01_Vignette/` |
+| YAMLs dashboard | `docs/02_docs_dashboard/02_dashboard_docs_yaml/L*C*_*/` |
+| Docs vignettes | `docs/02_docs_dashboard/02_dashboard_docs_md/L*C*_*/01_Vignette/` |
 | Fichiers sources YAML | `docs/01_docs_config_system/config_system_SH_PY_YAML/` |
 
 > ⚠️ Casse minuscule `docs/` depuis 2026-07-19 (renommage H:\Docs -> H:\docs + push GitHub).
@@ -86,8 +86,8 @@ Niveau 1 : L*C* - LABEL | X page(s) | ~N entites       <- retracte par defaut
 
 Apres ajout/modification d'une vignette, page ou fichier source :
 
-1. Lire le YAML reel concerne (`docs/02_Docs_dashboard/Dashboard_docs_yaml/L*C*/`).
+1. Lire le YAML reel concerne (`docs/02_docs_dashboard/02_dashboard_docs_yaml/L*C*/`).
 2. Verifier chaque entite citee contre le YAML prod.
-3. Lancer `/histo` (regenere `GLOBAL_INDEX_VIGNETTES_PAGES.md`) ou a la main : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Gen_GLOBAL_INDEX_vignettes_pages\Gen_GLOBAL_INDEX_vignettes_pages.py"` ; verifier `liens=N casses=M` avec casses=0.
+3. Lancer `/histo` (regenere `GLOBAL_INDEX_VIGNETTES_PAGES.md`) ou a la main : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_sh\Gen_GLOBAL_INDEX_vignettes_pages\Gen_GLOBAL_INDEX_vignettes_pages.py"` ; verifier `liens=N casses=M` avec casses=0.
 4. Mettre a jour a la main la section 02-DASHBOARD de `GLOBAL_INDEX_REPO.md` si besoin (local puis racine de H:), verifier la balance `<details>`/`</details>` et `<blockquote>`/`</blockquote>` avant push.
 5. Mettre a jour `DEPENDANCES_GLOBALES.md` si necessaire (/sync-index).

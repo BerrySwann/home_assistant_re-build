@@ -211,16 +211,16 @@ docs/
 │   ├── config_system_SH_PY_YAML/   <- copie de /config : YAML de config HA + scripts .sh et .py
 │   └── config_system_MD/           <- fiches de la config (configuration, sql) et des scripts
 ├── 02_docs_dashboard/
-│   ├── dashboard_docs_MD/          <- docs 18 vignettes
-│   └── dashboard_docs_YAML/        <- YAML vignettes/pages + Dashboard_COMPLET/
+│   ├── 02_dashboard_docs_md/          <- docs 18 vignettes
+│   └── 02_dashboard_docs_yaml/        <- YAML vignettes/pages + Dashboard_COMPLET/
 ├── 03_docs_automations/
-│   ├── docs_automations_MD/        <- docs par automation
-│   └── docs_automations_YAML/      <- YAML individuels par automation
+│   ├── 03_docs_automations_md/        <- docs par automation
+│   └── 03_docs_automations_yaml/      <- YAML individuels par automation
 ├── 04_docs_scripts/
-│   ├── docs_scripts_SH/            <- scripts bash (.sh)
-│   ├── docs_scripts_SH_MD/         <- docs scripts bash
-│   ├── docs_scripts_YAML/          <- scripts HA YAML
-│   └── docs_scripts_YAML_MD/       <- docs scripts HA
+│   ├── 04_docs_scripts_sh/            <- scripts bash (.sh)
+│   ├── 04_docs_scripts_sh_md/         <- docs scripts bash
+│   ├── 04_docs_scripts_yaml/          <- scripts HA YAML
+│   └── 04_docs_scripts_yaml_md/       <- docs scripts HA
 ├── XX_docs_MD_system/              <- DEPENDANCES_GLOBALES, GLOBAL_INDEX_REPO, index entites, templates
 ├── 05_docs_skills/                 <- copies des SKILL.md du projet (un dossier skill_<nom>/ par skill)
 └── 06_docs_technique/              <- procedures techniques (ex : pont Hue)

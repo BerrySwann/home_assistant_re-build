@@ -1,18 +1,19 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-10-25 (19h40) - règle de nommage des caractères (espace, tiret, &, parenthèses, point -> _) appliquée en local et en prod ; dossiers renommés (docs minuscule, skills, MINI_PC, Tarif_hc_hp, Automations_yaml_original, Backup_ha_GitHub, Mariadb_et_vscode_optimisation, Watchdog_piles_hue_ikea_sonoff) ; pages réserve L5C3 retirées ; liens corrigés (6 -> 0 au contrôle)*
 *Dernière mise à jour : 2026-10-23 (22h55, /histo S1) - entrée ajoutée : Verif_integrations_file.py (scripts python, recompté : 13)*
 *Dernière mise à jour : 2026-10-20 (soir) - section 05 SKILLS : ha-resync-docs retiré (doublon de ha-trigul), ha-verif-headers ajouté (14 skills) ; section 04 : Verif_headers_yaml.py ajouté*
 *Dernière mise à jour : 2026-10-19 (18h12, /histo S1) - entrée ajoutée : histo_trace.py (scripts python, 10 -> 11)*
 *Dernière mise à jour : 2026-10-18 (21h55, /histo S2) - entrées ajoutées : hermes_audit_trigul_arbres.py, Hermes_audit_md5_trigul_unitaire.py et trigul_run.py (scripts python, 7 -> 10) ; fiche de Verif_emplacements.py liée*
-*Dernière mise à jour : 2026-10-18 (17h30) - resync des liens : 315 liens remis à la casse et aux noms réels (renommages du 17/10, AQ_01_air_quality, S_01_store, P2_eCO. prises, Controle entity Z2M, RASPI_fan_pwm, configuration/configuration.md) ; fichier déplacé par Eric dans config_system_MD/GLOBAL_INDEX_REPO/*
+*Dernière mise à jour : 2026-10-18 (17h30) - resync des liens : 315 liens remis à la casse et aux noms réels (renommages du 17/10, AQ_01_air_quality, S_01_store, P2_eCO_prises, Controle entity Z2M, RASPI_fan_pwm, configuration/configuration.md) ; fichier déplacé par Eric dans config_system_MD/GLOBAL_INDEX_REPO/*
 *Dernière mise à jour : 2026-10-18 - dossier de config : config_system_YAML remplacé par config_system_SH_PY_YAML (copie fidèle de /config) ; liens des 4 timers remis sur les sous-dossiers P1_Timer_10mn, P1_Timer_2h et P1_Timer_60mn ; 3 notes citant config_system_YAML mises à jour*
 *Dernière mise à jour : 2026-10-15 (soir, /histo-final S1) - repli Meteoalarm retiré du template M_01 : entrée retirée du pop-up #alert (14 -> 13) et des entités natives HA (16 -> 15) ; aucun fichier ajouté, renommé ou supprimé à indexer ici (les fiches CARD_*_HOME ne sont pas indexées)*
 *Dernière mise à jour : 2026-10-14 (soir, /histo S1) - 2 entrées périmées de la vignette sdb remplacées par le nom réel, liens cassés corrigés (69 -> 0 au contrôle), noms de batteries et blocs météo M_02 alignés sur les fichiers réels, entité fantôme du dernier impact de foudre (Blitzortung) retirée, bloc Raspberry Pi4 (archivé) déplacé en fin d'index (section 06 SAUVEGARDE RASPI)*
-*Dernière mise à jour : 2026-10-13 (soir, /histo S1) - entrées ajoutées pour les index générés GLOBAL_INDEX_IA, GLOBAL_INDEX_VIGNETTES_PAGES, GLOBAL_INDEX_AUTOMATIONS, GLOBAL_INDEX_SCRIPTS_SH et GLOBAL_INDEX_SCRIPTS_YAML et pour 6 scripts python d'index (docs_scripts_SH), tous locaux et non poussés en prod ; compteurs existants non modifiés*
+*Dernière mise à jour : 2026-10-13 (soir, /histo S1) - entrées ajoutées pour les index générés GLOBAL_INDEX_IA, GLOBAL_INDEX_VIGNETTES_PAGES, GLOBAL_INDEX_AUTOMATIONS, GLOBAL_INDEX_SCRIPTS_SH et GLOBAL_INDEX_SCRIPTS_YAML et pour 6 scripts python d'index (04_docs_scripts_sh), tous locaux et non poussés en prod ; compteurs existants non modifiés*
 *Dernière mise à jour : 2026-10-12 (soir, /histo S1) - 6 scripts HA (audit_md5, audit_md5_md_yaml, j_1_1, j_1_2, j_1_3, j_2_0) et 2 scripts shell (audit_md5_yaml.sh, mf_vigilance_images.sh) copiés de la prod en local, sans fiche Doc ; liens des scripts YAML corriges apres le regroupement en sous-dossiers Climatisation et Soufflant SDB (20h12) ; compteurs scripts recomptés (SH 5, YAML 9) ; description de l'automation G corrigée en prod*
 *Dernière mise à jour : 2026-10-11 (soir, /histo S3) - lettres des automations SDB alignees en prod (H:\automations.yaml, A B C D E F G H Z, entity_id inchanges), dossier L0C0_PAGE_Home (PAGE_Home (L0C0) renomme), skills histo-final et ha-push-docs modifies ; les fiches CARD_*_HOME de la page Home ne sont pas indexees ici (la section 02 ne liste que les 18 vignettes)*
-*Dernière mise à jour : 2026-10-11 (après-midi) - dashboard_docs_MD et dashboard_docs_YAML : un sous-dossier 01_vignette et 02_page (02_page_nom si plusieurs pages) par dossier LxCy, PAGE_Home et PAGE_RASPI ; 148 fichiers deplaces, 42 liens corriges*
+*Dernière mise à jour : 2026-10-11 (après-midi) - 02_dashboard_docs_md et 02_dashboard_docs_yaml : un sous-dossier 01_vignette et 02_page (02_page_nom si plusieurs pages) par dossier LxCy, PAGE_Home et PAGE_RASPI ; 148 fichiers deplaces, 42 liens corriges*
 *Dernière mise à jour : 2026-10-11 - lettres des automations SDB decalees (D->C, E->D, F->E, G->F, H->G, I->H), fiches et YAML renommes en local (prod pas encore modifiee)*
 *Dernière mise à jour : 2026-10-11 (matin) - section 05 SKILLS : entrées ajoutées pour ha-resync-tree, journal-modifs et update-arbo (13 skills du projet) ; chemins docs_scripts et un dossier par automation corrigés à 06h42 et 07h13*
 *Dernière mise à jour : 2026-10-10 (nuit) - automations : fichiers rangés par catégorie HA (YAML et MD), dossier _old_avant_staging supprimé, 6 fiches créées pour P1_03 (A, B, E, F, H, I), YAML a_, b_, g_ renommés selon l'alias HA ; 88+ liens de la section 03 remis sur les emplacements actuels*
@@ -45,7 +46,7 @@
 <summary><b>GLOBAL_INDEX_IA.md</b> &nbsp;|&nbsp; Index généré des fichiers de docs/00_IA (qui s'en sert, but, quand les lire, MD5 prod) - local, non poussé en prod</summary>
 <blockquote>
 📄 <a href="docs/00_IA/GLOBAL_INDEX_IA.md">Doc</a><br>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.py">Générateur</a> (régénéré à chaque /histo, ne pas modifier à la main)
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.py">Générateur</a> (régénéré à chaque /histo, ne pas modifier à la main)
 </blockquote>
 </details>
 
@@ -127,7 +128,7 @@
 ⚙️ <a href="docs/01_docs_config_system/config_system_SH_PY_YAML/timers/P1_timers/P1_Timer_10mn/P1_timer_10mn_soufflant_SDB.yaml">P1_timer_10mn_soufflant_SDB.yaml</a><br>
 ⚙️ <a href="docs/01_docs_config_system/config_system_SH_PY_YAML/timers/P1_timers/P1_Timer_2h/P1_timer_2h_seche_serviettes_SDB.yaml">P1_timer_2h_seche_serviettes_SDB.yaml</a><br>
 ⚙️ <a href="docs/01_docs_config_system/config_system_SH_PY_YAML/timers/P1_timers/P1_Timer_10mn/P1_timer_10mn_seche_serviettes_SDB.yaml">P1_timer_10mn_seche_serviettes_SDB.yaml</a><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_03_Chauffage%20salle%20de%20bain/Timers_SDB_soufflant_et_seche_serviettes/Timers_SDB_soufflant_et_seche_serviettes.md">Documentation timers SDB</a>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_03_Chauffage_salle_de_bain/Timers_SDB_soufflant_et_seche_serviettes/Timers_SDB_soufflant_et_seche_serviettes.md">Documentation timers SDB</a>
 </blockquote>
 </details>
 
@@ -143,8 +144,8 @@
 <details>
 <summary><b>GLOBAL_INDEX_VIGNETTES_PAGES.md</b> &nbsp;|&nbsp; Index généré des vignettes et des pages du dashboard - local, non poussé en prod</summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/GLOBAL_INDEX_VIGNETTES_PAGES.md">Doc</a><br>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Gen_GLOBAL_INDEX_vignettes_pages/Gen_GLOBAL_INDEX_vignettes_pages.py">Générateur</a> (régénéré à chaque /histo, ne pas modifier à la main)
+📄 <a href="docs/02_docs_dashboard/GLOBAL_INDEX_VIGNETTES_PAGES.md">Doc</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Gen_GLOBAL_INDEX_vignettes_pages/Gen_GLOBAL_INDEX_vignettes_pages.py">Générateur</a> (régénéré à chaque /histo, ne pas modifier à la main)
 </blockquote>
 </details>
 
@@ -155,8 +156,8 @@
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L1C1_METEO/L1C1_METEO_01_Vignette/L1C1_Vignette_METEO.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C1_METEO/L1C1_METEO_01_Vignette/L1C1_Vignette_METEO.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L1C1_METEO/L1C1_METEO_01_Vignette/L1C1_Vignette_METEO.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L1C1_METEO/L1C1_METEO_01_Vignette/L1C1_Vignette_METEO.yaml">YAML Vignette</a>
 
 <details>
 <summary><b>📂 Fichiers sources</b> <i>- ajouté 2026-07-19, icône/texte dynamiques</i></summary>
@@ -180,8 +181,8 @@
 <details>
 <summary>📄 <b>Page</b> - 3 pop-up(s)</summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L1C1_METEO/L1C1_METEO_02_Page/L1C1_Page_METEO.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C1_METEO/L1C1_METEO_02_Page/L1C1_Page_METEO.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L1C1_METEO/L1C1_METEO_02_Page/L1C1_Page_METEO.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L1C1_METEO/L1C1_METEO_02_Page/L1C1_Page_METEO.yaml">YAML Page</a>
 
 
 <details>
@@ -404,8 +405,8 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 <details>
 <summary>📎 Fichiers complémentaires</summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L1C1_METEO/TUTO_L1C1_images_alertes_meteo_france.md">Tuto Images Alertes Météo France</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C1_METEO/Card_duree_du_jour.yaml">Card Durée du Jour</a><br>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L1C1_METEO/TUTO_L1C1_images_alertes_meteo_france.md">Tuto Images Alertes Météo France</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L1C1_METEO/Card_duree_du_jour.yaml">Card Durée du Jour</a><br>
 </blockquote>
 </details>
 
@@ -421,8 +422,8 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L1C2_TEMPERATURES/L1C2_TEMPERATURES_01_Vignette/L1C2_Vignette_TEMPERATURES.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C2_TEMPERATURES/L1C2_TEMPERATURES_01_Vignette/L1C2_Vignette_TEMPERATURES.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L1C2_TEMPERATURES/L1C2_TEMPERATURES_01_Vignette/L1C2_Vignette_TEMPERATURES.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L1C2_TEMPERATURES/L1C2_TEMPERATURES_01_Vignette/L1C2_Vignette_TEMPERATURES.yaml">YAML Vignette</a>
 
 
 
@@ -471,8 +472,8 @@ DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES
 <details>
 <summary>📄 <b>Page</b> - 10 pop-up(s)</summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L1C2_TEMPERATURES/L1C2_TEMPERATURES_02_Page/L1C2_Page_TEMPERATURES.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C2_TEMPERATURES/L1C2_TEMPERATURES_02_Page/L1C2_Page_TEMPERATURES.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L1C2_TEMPERATURES/L1C2_TEMPERATURES_02_Page/L1C2_Page_TEMPERATURES.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L1C2_TEMPERATURES/L1C2_TEMPERATURES_02_Page/L1C2_Page_TEMPERATURES.yaml">YAML Page</a>
 
 
 <details>
@@ -695,8 +696,8 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L1C3_CLIM/L1C3_CLIM_01_Vignette/L1C3_Vignette_CLIM.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_CLIM/L1C3_CLIM_01_Vignette/L1C3_Vignette_CLIM.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L1C3_CLIM/L1C3_CLIM_01_Vignette/L1C3_Vignette_CLIM.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L1C3_CLIM/L1C3_CLIM_01_Vignette/L1C3_Vignette_CLIM.yaml">YAML Vignette</a>
 
 
 
@@ -756,8 +757,8 @@ retiré entièrement - ce fichier utility_meter ne produit que des <code>sensor.
 <details>
 <summary>📄 <b>Page</b> - 1 pop-up(s)</summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L1C3_CLIM/L1C3_CLIM_02_Page/L1C3_Page_CLIM.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L1C3_CLIM/L1C3_CLIM_02_Page/L1C3_Page_CLIM.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L1C3_CLIM/L1C3_CLIM_02_Page/L1C3_Page_CLIM.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L1C3_CLIM/L1C3_CLIM_02_Page/L1C3_Page_CLIM.yaml">YAML Page</a>
 
 
 <details>
@@ -889,8 +890,8 @@ déplacées vers natives.
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_01_Vignette/L2C1_Vignette_ENERGIE_GENERALE.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_01_Vignette/L2C1_Vignette_ENERGIE_GENERALE.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_01_Vignette/L2C1_Vignette_ENERGIE_GENERALE.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_01_Vignette/L2C1_Vignette_ENERGIE_GENERALE.yaml">YAML Vignette</a>
 
 
 
@@ -931,8 +932,8 @@ déplacées vers natives.
 <details>
 <summary>📄 <b>Page Principale</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_03_Page_principale/L2C1_Page_ENERGIE_GENERALE_principale.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_03_Page_principale/L2C1_Page_ENERGIE_GENERALE_principale.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_03_Page_principale/L2C1_Page_ENERGIE_GENERALE_principale.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_03_Page_principale/L2C1_Page_ENERGIE_GENERALE_principale.yaml">YAML Page</a>
 
 
 
@@ -1072,8 +1073,8 @@ déplacées vers natives.
 <details>
 <summary>📄 <b>Page Mensuel</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_04_Page_mensuel/L2C1_Page_ENERGIE_GENERALE_mensuel.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_04_Page_mensuel/L2C1_Page_ENERGIE_GENERALE_mensuel.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_04_Page_mensuel/L2C1_Page_ENERGIE_GENERALE_mensuel.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_04_Page_mensuel/L2C1_Page_ENERGIE_GENERALE_mensuel.yaml">YAML Page</a>
 
 
 
@@ -1149,8 +1150,8 @@ déplacées vers natives.
 <details>
 <summary>📄 <b>Page Temps Réel</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_02_Page_temps_reel/L2C1_Page_ENERGIE_GENERALE_temps_reel.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_02_Page_temps_reel/L2C1_Page_ENERGIE_GENERALE_temps_reel.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_02_Page_temps_reel/L2C1_Page_ENERGIE_GENERALE_temps_reel.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_02_Page_temps_reel/L2C1_Page_ENERGIE_GENERALE_temps_reel.yaml">YAML Page</a>
 
 
 
@@ -1319,7 +1320,7 @@ déplacées vers natives.
 <details>
 <summary>📎 Fichiers complémentaires</summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L2C1_ENERGIE_GENERALE/COULEURS_PRISES_PAR_PIECE.md">Couleurs Prises par Pièce</a><br>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L2C1_ENERGIE_GENERALE/COULEURS_PRISES_PAR_PIECE.md">Couleurs Prises par Pièce</a><br>
 </blockquote>
 </details>
 
@@ -1335,8 +1336,8 @@ déplacées vers natives.
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L2C2_ENERGIE_CLIM/L2C2_ENERGIE_CLIM_01_Vignette/L2C2_Vignette_ENERGIE_CLIM.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C2_ENERGIE_CLIM/L2C2_ENERGIE_CLIM_01_Vignette/L2C2_Vignette_ENERGIE_CLIM.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L2C2_ENERGIE_CLIM/L2C2_ENERGIE_CLIM_01_Vignette/L2C2_Vignette_ENERGIE_CLIM.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L2C2_ENERGIE_CLIM/L2C2_ENERGIE_CLIM_01_Vignette/L2C2_Vignette_ENERGIE_CLIM.yaml">YAML Vignette</a>
 
 
 
@@ -1407,8 +1408,8 @@ déplacées vers natives.
 <details>
 <summary>📄 <b>Page</b> - 1 pop-up(s)</summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L2C2_ENERGIE_CLIM/L2C2_ENERGIE_CLIM_02_Page/L2C2_Page_ENERGIE_CLIM.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C2_ENERGIE_CLIM/L2C2_ENERGIE_CLIM_02_Page/L2C2_Page_ENERGIE_CLIM.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L2C2_ENERGIE_CLIM/L2C2_ENERGIE_CLIM_02_Page/L2C2_Page_ENERGIE_CLIM.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L2C2_ENERGIE_CLIM/L2C2_ENERGIE_CLIM_02_Page/L2C2_Page_ENERGIE_CLIM.yaml">YAML Page</a>
 
 
 <details>
@@ -1593,8 +1594,8 @@ déplacées vers natives.
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L2C3_ENERGIE_ECLAIRAGE/L2C3_ENERGIE_ECLAIRAGE_01_Vignette/L2C3_Vignette_ENERGIE_ECLAIRAGE.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C3_ENERGIE_ECLAIRAGE/L2C3_ENERGIE_ECLAIRAGE_01_Vignette/L2C3_Vignette_ENERGIE_ECLAIRAGE.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L2C3_ENERGIE_ECLAIRAGE/L2C3_ENERGIE_ECLAIRAGE_01_Vignette/L2C3_Vignette_ENERGIE_ECLAIRAGE.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L2C3_ENERGIE_ECLAIRAGE/L2C3_ENERGIE_ECLAIRAGE_01_Vignette/L2C3_Vignette_ENERGIE_ECLAIRAGE.yaml">YAML Vignette</a>
 
 
 
@@ -1649,8 +1650,8 @@ déplacées vers natives.
 <details>
 <summary>📄 <b>Page</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L2C3_ENERGIE_ECLAIRAGE/L2C3_ENERGIE_ECLAIRAGE_02_Page/L2C3_Page_ENERGIE_ECLAIRAGE.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L2C3_ENERGIE_ECLAIRAGE/L2C3_ENERGIE_ECLAIRAGE_02_Page/L2C3_Page_ENERGIE_ECLAIRAGE.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L2C3_ENERGIE_ECLAIRAGE/L2C3_ENERGIE_ECLAIRAGE_02_Page/L2C3_Page_ENERGIE_ECLAIRAGE.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L2C3_ENERGIE_ECLAIRAGE/L2C3_ENERGIE_ECLAIRAGE_02_Page/L2C3_Page_ENERGIE_ECLAIRAGE.yaml">YAML Page</a>
 
 
 
@@ -1773,7 +1774,7 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <details>
 <summary>📎 Fichiers complémentaires</summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L2C3_ENERGIE_ECLAIRAGE/Couleurs_eclairage_par_piece.md">Couleurs Éclairage par Pièce</a><br>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L2C3_ENERGIE_ECLAIRAGE/Couleurs_eclairage_par_piece.md">Couleurs Éclairage par Pièce</a><br>
 </blockquote>
 </details>
 
@@ -1789,8 +1790,8 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_01_Vignette/L3C1_Vignette_ECLAIRAGE.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_01_Vignette/L3C1_Vignette_ECLAIRAGE.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_01_Vignette/L3C1_Vignette_ECLAIRAGE.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_01_Vignette/L3C1_Vignette_ECLAIRAGE.yaml">YAML Vignette</a>
 
 
 
@@ -1849,8 +1850,8 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <details>
 <summary>📄 <b>Page Gauche</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_02_Page_gauche/L3C1_Page_ECLAIRAGE_gauche.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_02_Page_gauche/L3C1_Page_ECLAIRAGE_gauche.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_02_Page_gauche/L3C1_Page_ECLAIRAGE_gauche.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_02_Page_gauche/L3C1_Page_ECLAIRAGE_gauche.yaml">YAML Page</a>
 
 
 
@@ -1897,8 +1898,8 @@ et <code>switch.relais_lumiere_sdb_sonoff</code> étaient attribués à tort à
 <details>
 <summary>📄 <b>Page Droite</b> - 3 pop-up(s)</summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_03_Page_droite/L3C1_Page_ECLAIRAGE_droite.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_03_Page_droite/L3C1_Page_ECLAIRAGE_droite.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_03_Page_droite/L3C1_Page_ECLAIRAGE_droite.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_03_Page_droite/L3C1_Page_ECLAIRAGE_droite.yaml">YAML Page</a>
 
 
 <details>
@@ -2002,8 +2003,8 @@ produit que des <code>sensor.*_um</code>) déplacés vers natives.
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L3C2_PRISES/L3C2_PRISES_01_Vignette/L3C2_Vignette_PRISES.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C2_PRISES/L3C2_PRISES_01_Vignette/L3C2_Vignette_PRISES.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L3C2_PRISES/L3C2_PRISES_01_Vignette/L3C2_Vignette_PRISES.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L3C2_PRISES/L3C2_PRISES_01_Vignette/L3C2_Vignette_PRISES.yaml">YAML Vignette</a>
 
 
 
@@ -2038,8 +2039,8 @@ produit que des <code>sensor.*_um</code>) déplacés vers natives.
 <details>
 <summary>📄 <b>Page</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L3C2_PRISES/L3C2_PRISES_02_Page/L3C2_Page_PRISES.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C2_PRISES/L3C2_PRISES_02_Page/L3C2_Page_PRISES.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L3C2_PRISES/L3C2_PRISES_02_Page/L3C2_Page_PRISES.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L3C2_PRISES/L3C2_PRISES_02_Page/L3C2_Page_PRISES.yaml">YAML Page</a>
 
 
 
@@ -2083,8 +2084,8 @@ produit que des <code>sensor.*_um</code>) déplacés vers natives.
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L3C3_STORES/L3C3_STORES_01_Vignette/L3C3_Vignette_STORES.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C3_STORES/L3C3_STORES_01_Vignette/L3C3_Vignette_STORES.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L3C3_STORES/L3C3_STORES_01_Vignette/L3C3_Vignette_STORES.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L3C3_STORES/L3C3_STORES_01_Vignette/L3C3_Vignette_STORES.yaml">YAML Vignette</a>
 
 
 
@@ -2119,8 +2120,8 @@ produit que des <code>sensor.*_um</code>) déplacés vers natives.
 <details>
 <summary>📄 <b>Page</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L3C3_STORES/L3C3_STORES_02_Page/L3C3_Page_STORES.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L3C3_STORES/L3C3_STORES_02_Page/L3C3_Page_STORES.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L3C3_STORES/L3C3_STORES_02_Page/L3C3_Page_STORES.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L3C3_STORES/L3C3_STORES_02_Page/L3C3_Page_STORES.yaml">YAML Page</a>
 
 
 
@@ -2180,8 +2181,8 @@ la valeur brute est native. Tout déplacé vers natives.
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L4C2_PROXMOX/L4C2_PROXMOX_01_Vignette/L4C2_Vignette_PROXMOX.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C2_PROXMOX/L4C2_PROXMOX_01_Vignette/L4C2_Vignette_PROXMOX.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L4C2_PROXMOX/L4C2_PROXMOX_01_Vignette/L4C2_Vignette_PROXMOX.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L4C2_PROXMOX/L4C2_PROXMOX_01_Vignette/L4C2_Vignette_PROXMOX.yaml">YAML Vignette</a>
 
 
 
@@ -2217,8 +2218,8 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <details>
 <summary>📄 <b>Page Proxmox</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L4C2_PROXMOX/L4C2_PROXMOX_02_Page/L4C2_Page_PROXMOX.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C2_PROXMOX/L4C2_PROXMOX_02_Page/L4C2_Page_PROXMOX.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L4C2_PROXMOX/L4C2_PROXMOX_02_Page/L4C2_Page_PROXMOX.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L4C2_PROXMOX/L4C2_PROXMOX_02_Page/L4C2_Page_PROXMOX.yaml">YAML Page</a>
 
 
 </blockquote>
@@ -2236,8 +2237,8 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L4C1_MINI_PC/L4C1_MINI_PC_01_Vignette/L4C1_Vignette_MINI_PC.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C1_MINI_PC/L4C1_MINI_PC_01_Vignette/L4C1_Vignette_MINI_PC.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L4C1_MINI_PC/L4C1_MINI_PC_01_Vignette/L4C1_Vignette_MINI_PC.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L4C1_MINI_PC/L4C1_MINI_PC_01_Vignette/L4C1_Vignette_MINI_PC.yaml">YAML Vignette</a>
 
 
 
@@ -2265,8 +2266,8 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <details>
 <summary>📄 <b>Page</b> - 5 pop-up(s)</summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L4C1_MINI_PC/L4C1_MINI_PC_02_Page_MINI_PC/L4C1_Page_MINI_PC.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C1_MINI_PC/L4C1_MINI_PC_02_Page/L4C1_Page_MINI_PC.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L4C1_MINI_PC/L4C1_MINI_PC_02_Page_MINI_PC/L4C1_Page_MINI_PC.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L4C1_MINI_PC/L4C1_MINI_PC_02_Page/L4C1_Page_MINI_PC.yaml">YAML Page</a>
 
 
 <details>
@@ -2286,13 +2287,13 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <details>
 <summary>💬 Pop-up <code>#conso</code> - 7 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.mini_pc_avg_watts_mensuel</code> - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
-<li><code>sensor.mini_pc_avg_watts_quotidien</code> - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.mini_pc_avg_watts_mensuel</code> - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_MINI_PC.yaml">voir fichier</a></li>
+<li><code>sensor.mini_pc_avg_watts_quotidien</code> - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_MINI_PC.yaml">voir fichier</a></li>
 <li><code>sensor.prise_mini_pc_ikea_current</code> - <i>Natif HA</i></li>
 <li><code>sensor.prise_mini_pc_ikea_energy</code> - <i>Natif HA</i></li>
-<li><code>sensor.prise_mini_pc_ikea_mensuel_um</code> - <a href="utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.prise_mini_pc_ikea_mensuel_um</code> - <a href="utility_meter/P2_prise/P2_UM_AMHQ_MINI_PC.yaml">voir fichier</a></li>
 <li><code>sensor.prise_mini_pc_ikea_power</code> - <i>Natif HA</i></li>
-<li><code>sensor.prise_mini_pc_ikea_quotidien_um</code> - <a href="utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.prise_mini_pc_ikea_quotidien_um</code> - <a href="utility_meter/P2_prise/P2_UM_AMHQ_MINI_PC.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -2316,18 +2317,18 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <blockquote>
 
 <details>
-<summary><code>P2_AVG_AMHQ_mini_pc.yaml</code> - 2 entité(s) - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></summary>
+<summary><code>P2_AVG_AMHQ_MINI_PC.yaml</code> - 2 entité(s) - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_MINI_PC.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.mini_pc_avg_watts_mensuel</code> - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
-<li><code>sensor.mini_pc_avg_watts_quotidien</code> - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.mini_pc_avg_watts_mensuel</code> - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_MINI_PC.yaml">voir fichier</a></li>
+<li><code>sensor.mini_pc_avg_watts_quotidien</code> - <a href="templates/P2_prise/P2_AVG/P2_AVG_AMHQ_MINI_PC.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
 <details>
-<summary><code>P2_UM_AMHQ_mini_pc.yaml</code> - 2 entité(s) - <a href="utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></summary>
+<summary><code>P2_UM_AMHQ_MINI_PC.yaml</code> - 2 entité(s) - <a href="utility_meter/P2_prise/P2_UM_AMHQ_MINI_PC.yaml">voir fichier</a></summary>
 <blockquote><ul>
-<li><code>sensor.prise_mini_pc_ikea_mensuel_um</code> - <a href="utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></li>
-<li><code>sensor.prise_mini_pc_ikea_quotidien_um</code> - <a href="utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml">voir fichier</a></li>
+<li><code>sensor.prise_mini_pc_ikea_mensuel_um</code> - <a href="utility_meter/P2_prise/P2_UM_AMHQ_MINI_PC.yaml">voir fichier</a></li>
+<li><code>sensor.prise_mini_pc_ikea_quotidien_um</code> - <a href="utility_meter/P2_prise/P2_UM_AMHQ_MINI_PC.yaml">voir fichier</a></li>
 </ul></blockquote>
 </details>
 
@@ -2374,7 +2375,7 @@ cpu_package) n'existent dans aucun fichier <code>config_system_SH_PY_YAML/</code
 <details>
 <summary>📎 Fichiers complémentaires</summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L4C1_MINI_PC/L4C1_MINI_PC_03_Page_RASPI/L4C1_Page_MINI_PC_RASPI.md">Page RPi (transitoire)</a><br>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L4C1_MINI_PC/XX_L4C1_MINI_PC_03_Page_RASPI/L4C1_Page_MINI_PC_RASPI.md">Page RPi (transitoire)</a><br>
 </blockquote>
 </details>
 
@@ -2390,8 +2391,8 @@ cpu_package) n'existent dans aucun fichier <code>config_system_SH_PY_YAML/</code
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L4C3_MAJ_HA/L4C3_MAJ_HA_01_Vignette/L4C3_Vignette_MAJ_HA.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C3_MAJ_HA/L4C3_MAJ_HA_01_Vignette/L4C3_Vignette_MAJ_HA.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L4C3_MAJ_HA/L4C3_MAJ_HA_01_Vignette/L4C3_Vignette_MAJ_HA.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L4C3_MAJ_HA/L4C3_MAJ_HA_01_Vignette/L4C3_Vignette_MAJ_HA.yaml">YAML Vignette</a>
 
 
 
@@ -2415,8 +2416,8 @@ cpu_package) n'existent dans aucun fichier <code>config_system_SH_PY_YAML/</code
 <details>
 <summary>📄 <b>Page Gauche</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L4C3_MAJ_HA/L4C3_MAJ_HA_02_Page_gauche/L4C3_Page_MAJ_HA_gauche.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C3_MAJ_HA/L4C3_MAJ_HA_02_Page_gauche/L4C3_Page_MAJ_HA_gauche.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L4C3_MAJ_HA/L4C3_MAJ_HA_02_Page_gauche/L4C3_Page_MAJ_HA_gauche.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L4C3_MAJ_HA/L4C3_MAJ_HA_02_Page_gauche/L4C3_Page_MAJ_HA_gauche.yaml">YAML Page</a>
 
 
 
@@ -2442,8 +2443,8 @@ cpu_package) n'existent dans aucun fichier <code>config_system_SH_PY_YAML/</code
 <details>
 <summary>📄 <b>Page Droite</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L4C3_MAJ_HA/L4C3_MAJ_HA_03_Page_droite/L4C3_Page_MAJ_HA_droite.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L4C3_MAJ_HA/L4C3_MAJ_HA_03_Page_droite/L4C3_Page_MAJ_HA_droite.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L4C3_MAJ_HA/L4C3_MAJ_HA_03_Page_droite/L4C3_Page_MAJ_HA_droite.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L4C3_MAJ_HA/L4C3_MAJ_HA_03_Page_droite/L4C3_Page_MAJ_HA_droite.yaml">YAML Page</a>
 
 
 
@@ -2477,8 +2478,8 @@ cpu_package) n'existent dans aucun fichier <code>config_system_SH_PY_YAML/</code
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L5C1_PILES_BATTERIES/L5C1_PILES_BATTERIES_01_Vignette/L5C1_Vignette_PILES_BATTERIES.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C1_PILES_BATTERIES/L5C1_PILES_BATTERIES_01_Vignette/L5C1_Vignette_PILES_BATTERIES.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L5C1_PILES_BATTERIES/L5C1_PILES_BATTERIES_01_Vignette/L5C1_Vignette_PILES_BATTERIES.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L5C1_PILES_BATTERIES/L5C1_PILES_BATTERIES_01_Vignette/L5C1_Vignette_PILES_BATTERIES.yaml">YAML Vignette</a>
 
 
 
@@ -2504,8 +2505,8 @@ cpu_package) n'existent dans aucun fichier <code>config_system_SH_PY_YAML/</code
 <details>
 <summary>📄 <b>Page</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L5C1_PILES_BATTERIES/L5C1_PILES_BATTERIES_02_Page/L5C1_Page_PILES_BATTERIES.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C1_PILES_BATTERIES/L5C1_PILES_BATTERIES_02_Page/L5C1_Page_PILES_BATTERIES.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L5C1_PILES_BATTERIES/L5C1_PILES_BATTERIES_02_Page/L5C1_Page_PILES_BATTERIES.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L5C1_PILES_BATTERIES/L5C1_PILES_BATTERIES_02_Page/L5C1_Page_PILES_BATTERIES.yaml">YAML Page</a>
 
 
 
@@ -2570,8 +2571,8 @@ cpu_package) n'existent dans aucun fichier <code>config_system_SH_PY_YAML/</code
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_01_Vignette/L5C2_Vignette_BATTERIES_PORTABLES.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_01_Vignette/L5C2_Vignette_BATTERIES_PORTABLES.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_01_Vignette/L5C2_Vignette_BATTERIES_PORTABLES.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_01_Vignette/L5C2_Vignette_BATTERIES_PORTABLES.yaml">YAML Vignette</a>
 
 <details>
 <summary><b>📂 Fichiers sources</b> <i>- ajouté 2026-07-19, remontée résumé batterie/état</i></summary>
@@ -2613,8 +2614,8 @@ le total ~49.
 <details>
 <summary>📄 <b>Page Gauche</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_02_Page_gauche/L5C2_Page_BATTERIES_PORTABLES_gauche.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_02_Page_gauche/L5C2_Page_BATTERIES_PORTABLES_gauche.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_02_Page_gauche/L5C2_Page_BATTERIES_PORTABLES_gauche.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_02_Page_gauche/L5C2_Page_BATTERIES_PORTABLES_gauche.yaml">YAML Page</a>
 
 
 
@@ -2664,8 +2665,8 @@ le total ~49.
 <details>
 <summary>📄 <b>Page Droite</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_03_Page_droite/L5C2_Page_BATTERIES_PORTABLES_droite.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_03_Page_droite/L5C2_Page_BATTERIES_PORTABLES_droite.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_03_Page_droite/L5C2_Page_BATTERIES_PORTABLES_droite.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_03_Page_droite/L5C2_Page_BATTERIES_PORTABLES_droite.yaml">YAML Page</a>
 
 
 
@@ -2717,8 +2718,8 @@ le total ~49.
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L5C3_MARIADB/L5C3_MARIADB_01_Vignette/L5C3_Vignette_MARIADB.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C3_MARIADB/L5C3_MARIADB_01_Vignette/L5C3_Vignette_MARIADB.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L5C3_MARIADB/L5C3_MARIADB_01_Vignette/L5C3_Vignette_MARIADB.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L5C3_MARIADB/L5C3_MARIADB_01_Vignette/L5C3_Vignette_MARIADB.yaml">YAML Vignette</a>
 
 
 
@@ -2742,8 +2743,8 @@ le total ~49.
 <details>
 <summary>📄 <b>Page</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L5C3_MARIADB/L5C3_MARIADB_02_Page_principale/L5C3_Page_MARIADB_principale.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C3_MARIADB/L5C3_MARIADB_02_Page_mariadb/L5C3_Page_MARIADB_mariadb.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L5C3_MARIADB/L5C3_MARIADB_02_Page_principale/L5C3_Page_MARIADB_principale.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L5C3_MARIADB/L5C3_MARIADB_02_Page_mariadb/L5C3_Page_MARIADB_mariadb.yaml">YAML Page</a>
 
 
 
@@ -2792,8 +2793,8 @@ le total ~49.
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_01_Vignette/L6C1_Vignette_AIR_QUALITE.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_01_Vignette/L6C1_Vignette_AIR_QUALITE.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_01_Vignette/L6C1_Vignette_AIR_QUALITE.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_01_Vignette/L6C1_Vignette_AIR_QUALITE.yaml">YAML Vignette</a>
 
 <details>
 <summary><b>📂 Fichiers sources</b> <i>- ajouté 2026-07-19, grille PM2.5+tCOV par pièce</i></summary>
@@ -2820,8 +2821,8 @@ le total ~49.
 <details>
 <summary>📄 <b>Page</b> - 6 pop-up(s)</summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_02_Page/L6C1_Page_AIR_QUALITE.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_02_Page/L6C1_Page_AIR_QUALITE.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_02_Page/L6C1_Page_AIR_QUALITE.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_02_Page/L6C1_Page_AIR_QUALITE.yaml">YAML Page</a>
 
 
 <details>
@@ -2941,8 +2942,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L6C2_POLLUTION_POLLEN/L6C2_POLLUTION_POLLEN_01_Vignette/L6C2_Vignette_POLLUTION_POLLEN.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L6C2_POLLUTION_POLLEN/L6C2_POLLUTION_POLLEN_01_Vignette/L6C2_Vignette_POLLUTION_POLLEN.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L6C2_POLLUTION_POLLEN/L6C2_POLLUTION_POLLEN_01_Vignette/L6C2_Vignette_POLLUTION_POLLEN.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L6C2_POLLUTION_POLLEN/L6C2_POLLUTION_POLLEN_01_Vignette/L6C2_Vignette_POLLUTION_POLLEN.yaml">YAML Vignette</a>
 
 <details>
 <summary><b>📂 Fichiers sources</b> <i>- ajouté 2026-07-19, résumé Air/Pollen coloré</i></summary>
@@ -2965,8 +2966,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <details>
 <summary>📄 <b>Page</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L6C2_POLLUTION_POLLEN/L6C2_POLLUTION_POLLEN_02_Page/L6C2_Page_POLLUTION_POLLEN.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L6C2_POLLUTION_POLLEN/L6C2_POLLUTION_POLLEN_02_Page/L6C2_Page_POLLUTION_POLLEN.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L6C2_POLLUTION_POLLEN/L6C2_POLLUTION_POLLEN_02_Page/L6C2_Page_POLLUTION_POLLEN.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L6C2_POLLUTION_POLLEN/L6C2_POLLUTION_POLLEN_02_Page/L6C2_Page_POLLUTION_POLLEN.yaml">YAML Page</a>
 
 
 
@@ -3017,8 +3018,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <details>
 <summary>🖼️ <b>Vignette</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L6C3_VIGIEAU/L6C3_VIGIEAU_01_Vignette/L6C3_Vignette_VIGIEAU.md">Doc Vignette</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L6C3_VIGIEAU/L6C3_VIGIEAU_01_Vignette/L6C3_Vignette_VIGIEAU.yaml">YAML Vignette</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L6C3_VIGIEAU/L6C3_VIGIEAU_01_Vignette/L6C3_Vignette_VIGIEAU.md">Doc Vignette</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L6C3_VIGIEAU/L6C3_VIGIEAU_01_Vignette/L6C3_Vignette_VIGIEAU.yaml">YAML Vignette</a>
 
 <details>
 <summary><b>📂 Fichiers sources</b> <i>- ajouté 2026-07-19, icône/texte niveau alerte</i></summary>
@@ -3040,8 +3041,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <details>
 <summary>📄 <b>Page</b></summary>
 <blockquote>
-📄 <a href="docs/02_Docs_dashboard/Dashboard_docs_md/L6C3_VIGIEAU/L6C3_VIGIEAU_02_Page/L6C3_Page_VIGIEAU.md">Doc Page</a><br>
-⚙️ <a href="docs/02_Docs_dashboard/Dashboard_docs_yaml/L6C3_VIGIEAU/L6C3_VIGIEAU_02_Page/L6C3_Page_VIGIEAU.yaml">YAML Page</a>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_md/L6C3_VIGIEAU/L6C3_VIGIEAU_02_Page/L6C3_Page_VIGIEAU.md">Doc Page</a><br>
+⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_yaml/L6C3_VIGIEAU/L6C3_VIGIEAU_02_Page/L6C3_Page_VIGIEAU.yaml">YAML Page</a>
 
 
 
@@ -3079,8 +3080,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <details>
 <summary><b>GLOBAL_INDEX_AUTOMATIONS.md</b> &nbsp;|&nbsp; Index généré des automations (alias, id prod, id local, entity HA, fiche, YAML) - local, non poussé en prod</summary>
 <blockquote>
-📄 <a href="docs/03_Docs_automations/GLOBAL_INDEX_AUTOMATIONS.md">Doc</a><br>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.py">Générateur</a> (régénéré à chaque /histo, ne pas modifier à la main)
+📄 <a href="docs/03_docs_automations/GLOBAL_INDEX_AUTOMATIONS.md">Doc</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.py">Générateur</a> (régénéré à chaque /histo, ne pas modifier à la main)
 </blockquote>
 </details>
 
@@ -3113,8 +3114,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>[00-Backup] Alerte si KO 15 min</b></summary>
 <blockquote>
 <i>Notification si le backup reste en KO pendant 15 minutes</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Backup%20ha%20-%20GitHub/Git_alerte_ko/Git_alerte_ko.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Backup%20ha%20-%20GitHub/00_Backup_alerte_si_ko_15_min/00_Backup_alerte_si_ko_15_min.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Backup_ha_GitHub/Git_alerte_ko/Git_alerte_ko.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Backup_ha_GitHub/00_Backup_alerte_si_ko_15_min/00_Backup_alerte_si_ko_15_min.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3130,8 +3131,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>[01-Backup] Git hourly H+10</b></summary>
 <blockquote>
 <i>Push Git + backup natif HA toutes les heures à H+10</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Backup%20ha%20-%20GitHub/Git_hourly/Git_hourly.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Backup%20ha%20-%20GitHub/01_Backup_git_hourly_h_10/01_Backup_git_hourly_h_10.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Backup_ha_GitHub/Git_hourly/Git_hourly.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Backup_ha_GitHub/01_Backup_git_hourly_h_10/01_Backup_git_hourly_h_10.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time_pattern`<br>
 
 </blockquote>
@@ -3141,8 +3142,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>[02-Backup] Git daily (03:00)</b></summary>
 <blockquote>
 <i>Backup natif HA + push Git quotidien à 03h00</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Backup%20ha%20-%20GitHub/Git_daily/Git_daily.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Backup%20ha%20-%20GitHub/02_Backup_git_daily_03_00/02_Backup_git_daily_03_00.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Backup_ha_GitHub/Git_daily/Git_daily.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Backup_ha_GitHub/02_Backup_git_daily_03_00/02_Backup_git_daily_03_00.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 
 </blockquote>
@@ -3152,8 +3153,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>[03-Backup] Git weekly (dim 01:30)</b></summary>
 <blockquote>
 <i>Backup natif HA + push + tag weekly chaque dimanche à 01:30</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Backup%20ha%20-%20GitHub/Git_weekly/Git_weekly.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Backup%20ha%20-%20GitHub/03_Backup_git_weekly_dim_01_30/03_Backup_git_weekly_dim_01_30.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Backup_ha_GitHub/Git_weekly/Git_weekly.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Backup_ha_GitHub/03_Backup_git_weekly_dim_01_30/03_Backup_git_weekly_dim_01_30.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 
 </blockquote>
@@ -3162,8 +3163,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <details>
 <summary>✅ <b>[04-Backup] Git push manuel</b></summary>
 <blockquote>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Backup%20ha%20-%20GitHub/Git_push_manuel/Git_push_manuel.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Backup%20ha%20-%20GitHub/04_Backup_git_push_manuel/04_Backup_git_push_manuel.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Backup_ha_GitHub/Git_push_manuel/Git_push_manuel.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Backup_ha_GitHub/04_Backup_git_push_manuel/04_Backup_git_push_manuel.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3178,8 +3179,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <details>
 <summary>✅ <b>[05-Backup] Git push weekly manuel</b></summary>
 <blockquote>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Backup%20ha%20-%20GitHub/Git_push_weekly_manuel/Git_push_weekly_manuel.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Backup%20ha%20-%20GitHub/05_Backup_git_push_weekly_manuel/05_Backup_git_push_weekly_manuel.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Backup_ha_GitHub/Git_push_weekly_manuel/Git_push_weekly_manuel.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Backup_ha_GitHub/05_Backup_git_push_weekly_manuel/05_Backup_git_push_weekly_manuel.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3194,8 +3195,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <details>
 <summary>✅ <b>Git au démarrage</b></summary>
 <blockquote>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Backup%20ha%20-%20GitHub/Git_au_demarrage/Git_au_demarrage.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Backup%20ha%20-%20GitHub/Git_push_au_demarrage_ha/Git_push_au_demarrage_ha.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Backup_ha_GitHub/Git_au_demarrage/Git_au_demarrage.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Backup_ha_GitHub/Git_push_au_demarrage_ha/Git_push_au_demarrage_ha.yaml">YAML source</a><br>
 
 </blockquote>
 </details>
@@ -3213,8 +3214,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>Alerte Météo France actualisation des "CARTES</b></summary>
 <blockquote>
 <i>Force la mise à jour des images d''alerte Météo France au démarrage,  aux</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Meteo/Alerte_meteo_cartes/Alerte_meteo_cartes.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Meteo/Alerte_meteo_france_actualisation_des_cartes/Alerte_meteo_france_actualisation_des_cartes.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Meteo/Alerte_meteo_cartes/Alerte_meteo_cartes.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Meteo/Alerte_meteo_france_actualisation_des_cartes/Alerte_meteo_france_actualisation_des_cartes.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · ⏰`time` · ⏰`time_pattern`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -3231,8 +3232,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>Update previous temperature</b></summary>
 <blockquote>
 <i>Enregistre la température toutes les 30 minutes pour calculer la tendance.</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Meteo/Update_prev_temperature/Update_prev_temperature.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Meteo/Update_previous_temperature/Update_previous_temperature.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Meteo/Update_prev_temperature/Update_prev_temperature.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Meteo/Update_previous_temperature/Update_previous_temperature.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time_pattern`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3248,8 +3249,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>Update previous humidity</b></summary>
 <blockquote>
 <i>Enregistre l'humidité toutes les 30 minutes pour calculer la tendance.</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Meteo/Update_prev_humidity/Update_prev_humidity.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Meteo/Update_previous_humidity/Update_previous_humidity.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Meteo/Update_prev_humidity/Update_prev_humidity.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Meteo/Update_previous_humidity/Update_previous_humidity.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time_pattern`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3265,8 +3266,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>Notification de la foudre</b></summary>
 <blockquote>
 <i>Alerte sur Poco X7 Pro avec distance, ville ou direction et décompte</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Meteo/Notif_foudre/Notif_foudre.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Meteo/Notification_de_la_foudre/Notification_de_la_foudre.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Meteo/Notif_foudre/Notif_foudre.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Meteo/Notification_de_la_foudre/Notification_de_la_foudre.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -3283,8 +3284,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>Mettre à jour le temps du dernier impact de foudre</b></summary>
 <blockquote>
 <i>Met à jour le temps du dernier impact de foudre lorsque le capteur</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Meteo/Maj_temps_foudre/Maj_temps_foudre.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Meteo/Mettre_a_jour_le_temps_du_dernier_impact_de_foudre/Mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Meteo/Maj_temps_foudre/Maj_temps_foudre.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Meteo/Mettre_a_jour_le_temps_du_dernier_impact_de_foudre/Mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -3310,8 +3311,8 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>(A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00)</b></summary>
 <blockquote>
 <i>Pilotage clims jour avec boucle de relance et notification ciblée fenêtres</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_01_Clim_chauffage/A0_clim_jour/A0_clim_jour.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_01_Clim_chauffage/A0_clim_jour/A0_clim_jour.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_01_Clim_chauffage/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · ⏰`time` · 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (14) <i>- corrigé 2026-07-19, triggers réels du fichier</i></summary>
@@ -3333,7 +3334,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 </ul></blockquote>
 <blockquote>
 ⚙️ Logique clim (climate.*, input_boolean.*_arret_securise_en_cours) déléguée au
-<a href="docs/04_Docs_scripts/Docs_scripts_yaml/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml">script p1_master_gestion_clim.yaml</a> -
+<a href="docs/04_docs_scripts/04_docs_scripts_yaml/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml">script p1_master_gestion_clim.yaml</a> -
 ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-dessus.
 </blockquote>
 </details>
@@ -3345,8 +3346,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(B - 0) 2026-01-11 AUTOMATISATION CLIM NUIT (21H00 <-> 07H30)</b></summary>
 <blockquote>
 <i>Pilotage clims nuit avec boucle de relance et notification ciblée fenêtres</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_01_Clim_chauffage/B0_clim_nuit/B0_clim_nuit.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_01_Clim_chauffage/B0_clim_nuit/B0_clim_nuit.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_01_Clim_chauffage/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · ⏰`time` · 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (14) <i>- corrigé 2026-07-19, triggers réels du fichier</i></summary>
@@ -3368,7 +3369,7 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 </ul></blockquote>
 <blockquote>
 ⚙️ Logique clim (climate.*, input_boolean.*_arret_securise_en_cours) déléguée au
-<a href="docs/04_Docs_scripts/Docs_scripts_yaml/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml">script p1_master_gestion_clim.yaml</a> -
+<a href="docs/04_docs_scripts/04_docs_scripts_yaml/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml">script p1_master_gestion_clim.yaml</a> -
 ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-dessus.
 </blockquote>
 </details>
@@ -3380,8 +3381,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(D) Notification température Up ou Down de (7h30 -> 21h00)</b></summary>
 <blockquote>
 <i>Envoie le message personnalisé de clim si le texte change, OU au réveil</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_01_Clim_chauffage/C_notif_temp_jour/C_notif_temp_jour.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/C_notification_temperature_up_ou_down_7h30_21h00/C_notification_temperature_up_ou_down_7h30_21h00.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_01_Clim_chauffage/C_notif_temp_jour/C_notif_temp_jour.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_01_Clim_chauffage/C_notification_temperature_up_ou_down_7h30_21h00/C_notification_temperature_up_ou_down_7h30_21h00.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · ⏰`time`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3397,8 +3398,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(E) Notification température Up ou Down de (21h00 -> 7h30)</b></summary>
 <blockquote>
 <i>Envoie le message personnalisé de clim si le texte change, OU au début</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_01_Clim_chauffage/D_notif_temp_nuit/D_notif_temp_nuit.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/D_notification_temperature_up_ou_down_21h00_7h30/D_notification_temperature_up_ou_down_21h00_7h30.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_01_Clim_chauffage/D_notif_temp_nuit/D_notif_temp_nuit.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_01_Clim_chauffage/D_notification_temperature_up_ou_down_21h00_7h30/D_notification_temperature_up_ou_down_21h00_7h30.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · ⏰`time`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3414,8 +3415,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(F) (CLIM) Notification de fermeture des fenêtres</b></summary>
 <blockquote>
 <i>Envoie une notification lorsqu'une fenêtre est fermée.</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_01_Clim_chauffage/E_notif_fermeture_fenetres/E_notif_fermeture_fenetres.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/E_clim_notification_de_fermeture_des_fenetres/E_clim_notification_de_fermeture_des_fenetres.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_01_Clim_chauffage/E_notif_fermeture_fenetres/E_notif_fermeture_fenetres.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_01_Clim_chauffage/E_clim_notification_de_fermeture_des_fenetres/E_clim_notification_de_fermeture_des_fenetres.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 
 </blockquote>
@@ -3425,8 +3426,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(G) (CLIM) Automatisation Arrêt Clim Notification</b></summary>
 <blockquote>
 <i>Notification quand une clim est coupée manuellement, seulement si</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_01_Clim_chauffage/F_arret_clim_notif/F_arret_clim_notif.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/F_clim_automatisation_arret_clim_notification/F_clim_automatisation_arret_clim_notification.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_01_Clim_chauffage/F_arret_clim_notif/F_arret_clim_notif.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_01_Clim_chauffage/F_clim_automatisation_arret_clim_notification/F_clim_automatisation_arret_clim_notification.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (7)</summary>
@@ -3448,8 +3449,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(H) (CLIM) Notification de changement de mode Été/Fan/Hiver</b></summary>
 <blockquote>
 <i>Notification lorsque le mode change entre Été, Ventilateur ou Hiver</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_01_Clim_chauffage/G_notif_mode_changement/G_notif_mode_changement.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/G_clim_notification_de_changement_de_mode_ete_fan_hiver/G_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_01_Clim_chauffage/G_notif_mode_changement/G_notif_mode_changement.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_01_Clim_chauffage/G_clim_notification_de_changement_de_mode_ete_fan_hiver/G_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3465,8 +3466,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(I) (CLIM DEBUG) Force Mode Correct & Sécurité</b></summary>
 <blockquote>
 <i>WATCHDOG :   1. FORCE OFF si tentative d''allumage alors que Prise</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_01_Clim_chauffage/H_debug_force_mode/H_debug_force_mode.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/H_clim_debug_force_mode_correct_securite/H_clim_debug_force_mode_correct_securite.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_01_Clim_chauffage/H_debug_force_mode/H_debug_force_mode.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_01_Clim_chauffage/H_clim_debug_force_mode_correct_securite/H_clim_debug_force_mode_correct_securite.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3482,8 +3483,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(J) Synchro & Notif Clim si Prise Coupée</b></summary>
 <blockquote>
 <i>Met à jour l''état du thermostat et notifie proprement si la prise</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_01_Clim_chauffage/I_synchro_notif_prise_coupee/I_synchro_notif_prise_coupee.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/I_synchro_notif_clim_si_prise_coupee/I_synchro_notif_clim_si_prise_coupee.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_01_Clim_chauffage/I_synchro_notif_prise_coupee/I_synchro_notif_prise_coupee.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_01_Clim_chauffage/I_synchro_notif_clim_si_prise_coupee/I_synchro_notif_clim_si_prise_coupee.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 
 </blockquote>
@@ -3493,8 +3494,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(K) (DEBUG) Notifier les changements de message clim (Mobile)</b></summary>
 <blockquote>
 <i>Surveille et notifie les changements d'état du message personnalisé.</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_01_Clim_chauffage/J_debug_notif_message_clim/J_debug_notif_message_clim.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_01_Clim_chauffage/J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_01_Clim_chauffage/J_debug_notif_message_clim/J_debug_notif_message_clim.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_01_Clim_chauffage/J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3519,8 +3520,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>A - Chauffage Cuisine (entre 4h45 & 7h LMMJ ou 5:45h & 8h VSD avec T° 19,9°</b></summary>
 <blockquote>
 <i>Allume ou éteint le chauffage selon la température (19,9° <-> 20.5°)  aux</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_02_Cuisine/A_chauffage_cuisine/A_chauffage_cuisine.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_02_Cuisine/A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9/A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_02_Cuisine/A_chauffage_cuisine/A_chauffage_cuisine.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_02_Cuisine/A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9/A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (4)</summary>
@@ -3539,8 +3540,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>B - Chauffage Cuisine Vacances</b></summary>
 <blockquote>
 <i>Allume ou éteint le chauffage selon la température entre 6h00 et 8h30  pendant</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_02_Cuisine/B_chauffage_cuisine_vacances/B_chauffage_cuisine_vacances.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_02_Cuisine/B_chauffage_cuisine_vacances/B_chauffage_cuisine_vacances.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_02_Cuisine/B_chauffage_cuisine_vacances/B_chauffage_cuisine_vacances.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_02_Cuisine/B_chauffage_cuisine_vacances/B_chauffage_cuisine_vacances.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (4)</summary>
@@ -3568,8 +3569,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>A - 2026/02/01 - SALLE DE BAIN - GESTION INTELLIGENTE SOUFFLANT</b></summary>
 <blockquote>
 <i>Cycle complet : Démarrage, Régulation, et Auto-off 60 min avec refroidissement</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_03_Chauffage%20salle%20de%20bain/Z_soufflant_SDB_gestion_intelligente/Z_soufflant_SDB_gestion_intelligente.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_03_Chauffage%20salle%20de%20bain/Z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant/Z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_03_Chauffage_salle_de_bain/Z_soufflant_SDB_gestion_intelligente/Z_soufflant_SDB_gestion_intelligente.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_03_Chauffage_salle_de_bain/Z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant/Z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (6)</summary>
@@ -3590,8 +3591,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>C - SALLE DE BAIN : WATCHDOG SÉCURITÉ SOUFFLANT</b></summary>
 <blockquote>
 <i>Reset physique si T > 25°C, uniquement si la prise est alimentée</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_03_Chauffage%20salle%20de%20bain/C_watchdog_soufflant_SDB/C_watchdog_soufflant_SDB.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_03_Chauffage%20salle%20de%20bain/C_salle_de_bain_watchdog_securite_soufflant/C_salle_de_bain_watchdog_securite_soufflant.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_03_Chauffage_salle_de_bain/C_watchdog_soufflant_SDB/C_watchdog_soufflant_SDB.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_03_Chauffage_salle_de_bain/C_salle_de_bain_watchdog_securite_soufflant/C_salle_de_bain_watchdog_securite_soufflant.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (4)</summary>
@@ -3610,8 +3611,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>F - Minuterie Sèche Serviettes Salle de Bain (Timer Absolu 2h)</b> (ex E puis G)</summary>
 <blockquote>
 <i>Timer de 2h après détection de chauffe. Sécurité anti-redémarrage incluse.</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_03_Chauffage%20salle%20de%20bain/F_minuterie_seche_serviettes/F_minuterie_seche_serviettes.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_03_Chauffage%20salle%20de%20bain/F_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h/F_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_03_Chauffage_salle_de_bain/F_minuterie_seche_serviettes/F_minuterie_seche_serviettes.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_03_Chauffage_salle_de_bain/F_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h/F_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -3625,8 +3626,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>B - 2026/09/28 - SDB SOUFFLANT : ROUTAGE (INTERRUPTEUR VERS SEQUENCES)</b></summary>
 <blockquote>
 <i>Entree unique du soufflant SDB : l'interrupteur virtuel declenche le demarrage ou l'arret. Verrou de 30 s tenu par les scripts.</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_03_Chauffage%20salle%20de%20bain/B_soufflant_SDB_routage/B_soufflant_SDB_routage.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_03_Chauffage%20salle%20de%20bain/B_soufflant_SDB_routage/B_soufflant_SDB_routage.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_03_Chauffage_salle_de_bain/B_soufflant_SDB_routage/B_soufflant_SDB_routage.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_03_Chauffage_salle_de_bain/B_soufflant_SDB_routage/B_soufflant_SDB_routage.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (3)</summary>
@@ -3641,8 +3642,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>D - SDB - SOUFFLANT - DECOMPTE 60 MIN (timer)</b></summary>
 <blockquote>
 <i>Lance le timer 60 mn à la mise en marche réelle, l'annule à l'arrêt, coupe l'interrupteur à la fin d'un timer (non testé).</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_03_Chauffage%20salle%20de%20bain/D_SDB_soufflant_decompte_60min/D_SDB_soufflant_decompte_60min.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_03_Chauffage%20salle%20de%20bain/D_SDB_soufflant_decompte_60min_timer/D_SDB_soufflant_decompte_60min_timer.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_03_Chauffage_salle_de_bain/D_SDB_soufflant_decompte_60min/D_SDB_soufflant_decompte_60min.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_03_Chauffage_salle_de_bain/D_SDB_soufflant_decompte_60min_timer/D_SDB_soufflant_decompte_60min_timer.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`, ⏱`timer.finished`<br>
 <br><details>
 <summary>🔌 Entités (3)</summary>
@@ -3660,8 +3661,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>E - SDB - SOUFFLANT - RATTRAPAGE AU DEMARRAGE DE HA (timer 10 min)</b></summary>
 <blockquote>
 <i>30 s après le démarrage de HA : lève le verrou, lance le 10 mn si soufflant en marche sans timer actif (non testé).</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_03_Chauffage%20salle%20de%20bain/E_SDB_soufflant_rattrapage_demarrage_ha/E_SDB_soufflant_rattrapage_demarrage_ha.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_03_Chauffage%20salle%20de%20bain/E_SDB_soufflant_rattrapage_demarrage_ha_timer/E_SDB_soufflant_rattrapage_demarrage_ha_timer.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_03_Chauffage_salle_de_bain/E_SDB_soufflant_rattrapage_demarrage_ha/E_SDB_soufflant_rattrapage_demarrage_ha.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_03_Chauffage_salle_de_bain/E_SDB_soufflant_rattrapage_demarrage_ha_timer/E_SDB_soufflant_rattrapage_demarrage_ha_timer.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant`<br>
 <br><details>
 <summary>🔌 Entités (4)</summary>
@@ -3680,8 +3681,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>G - SDB - SECHE-SERVIETTES - DECOMPTE 2 H (timer)</b></summary>
 <blockquote>
 <i>Puissance > 50 W lance le timer 2 h ; fin de timer : coupure, notification, veille. Doublon temporaire avec G (non testé).</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_03_Chauffage%20salle%20de%20bain/G_SDB_seche_serviettes_decompte_2h/G_SDB_seche_serviettes_decompte_2h.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_03_Chauffage%20salle%20de%20bain/G_SDB_seche_serviettes_decompte_2h_timer/G_SDB_seche_serviettes_decompte_2h_timer.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_03_Chauffage_salle_de_bain/G_SDB_seche_serviettes_decompte_2h/G_SDB_seche_serviettes_decompte_2h.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_03_Chauffage_salle_de_bain/G_SDB_seche_serviettes_decompte_2h_timer/G_SDB_seche_serviettes_decompte_2h_timer.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📊`numeric_state`, 🔄`state`, ⏱`timer.finished`<br>
 <br><details>
 <summary>🔌 Entités (4)</summary>
@@ -3700,8 +3701,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>H - SDB - SECHE-SERVIETTES - RATTRAPAGE AU DEMARRAGE DE HA (timer 10 min)</b></summary>
 <blockquote>
 <i>30 s après le démarrage de HA : lance le 10 mn si la prise est en marche sans timer actif (non testé).</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_03_Chauffage%20salle%20de%20bain/H_SDB_seche_serviettes_rattrapage_demarrage_ha/H_SDB_seche_serviettes_rattrapage_demarrage_ha.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_03_Chauffage%20salle%20de%20bain/H_SDB_seche_serviettes_rattrapage_demarrage_ha_timer/H_SDB_seche_serviettes_rattrapage_demarrage_ha_timer.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_03_Chauffage_salle_de_bain/H_SDB_seche_serviettes_rattrapage_demarrage_ha/H_SDB_seche_serviettes_rattrapage_demarrage_ha.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_03_Chauffage_salle_de_bain/H_SDB_seche_serviettes_rattrapage_demarrage_ha_timer/H_SDB_seche_serviettes_rattrapage_demarrage_ha_timer.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant`<br>
 <br><details>
 <summary>🔌 Entités (3)</summary>
@@ -3722,8 +3723,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>A - 2026/09/28 - SDB SOUFFLANT : BOUTON IKEA RODRET (MQTT)</b></summary>
 <blockquote>
 <i>Le bouton IKEA Rodret SDB pilote l'interrupteur virtuel. Topic : zigbee2mqtt2/Inter Soufflant Salle de Bain (IKEA RODRET)/action</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_03_Chauffage%20salle%20de%20bain/A_soufflant_SDB_bouton_rodret/A_soufflant_SDB_bouton_rodret.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P1_03_Chauffage%20salle%20de%20bain/A_soufflant_SDB_bouton_rodret/A_soufflant_SDB_bouton_rodret.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_03_Chauffage_salle_de_bain/A_soufflant_SDB_bouton_rodret/A_soufflant_SDB_bouton_rodret.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P1_03_Chauffage_salle_de_bain/A_soufflant_SDB_bouton_rodret/A_soufflant_SDB_bouton_rodret.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📡`mqtt`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -3753,8 +3754,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <blockquote>
 <i>Pilotage des 7 prises en fonction du groupe de présence (G1 à G4).</i><br>
 <i>Correctif + spy 2026-09-23 : liste lue via | from_json ; sensor.eco_prises_spy (groupe + états + écarts).</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P2_eCO.%20prises/eCO_prises_dynamique/eCO_prises_dynamique.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P2_eCO.%20prises/eCO_prises_dynamique_by_presence_groupe/eCO_prises_dynamique_by_presence_groupe.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P2_eCO_prises/eCO_prises_dynamique/eCO_prises_dynamique.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P2_eCO_prises/eCO_prises_dynamique_by_presence_groupe/eCO_prises_dynamique_by_presence_groupe.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (8) <i>- corrigé 2026-07-19, liste réelle depuis P2_eCO_prises_config.yaml</i></summary>
@@ -3782,8 +3783,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>Gestion PC bureau : Scène de Fin + Notif</b></summary>
 <blockquote>
 <i>Veille confirmée (< 70W, 12 min + filet 15 min) : coupe l'éclairage éco PC et notifie. Prise ON pour le suivi conso.</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P2_eCO.%20prises/Gestion_pc_bureau/Gestion_pc_bureau.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P2_eCO.%20prises/Gestion_pc_bureau_scene_de_fin_notif/Gestion_pc_bureau_scene_de_fin_notif.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P2_eCO_prises/Gestion_pc_bureau/Gestion_pc_bureau.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P2_eCO_prises/Gestion_pc_bureau_scene_de_fin_notif/Gestion_pc_bureau_scene_de_fin_notif.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📡`mqtt` · 🔄`state` · ⏰`time_pattern`<br>
 <br><details>
 <summary>🔌 Entités (4)</summary>
@@ -3802,8 +3803,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>Gestion TV Chambre : Scène de Fin + Notif</b></summary>
 <blockquote>
 <i>Veille confirmée (< 40W, 12 min + filet 15 min) : coupe l'éclairage éco TV et notifie. Prise de mesure ON pour le suivi conso.</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P2_eCO.%20prises/Gestion_tv_chambre/Gestion_tv_chambre.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P2_eCO.%20prises/Gestion_tv_chambre_scene_de_fin_notif/Gestion_tv_chambre_scene_de_fin_notif.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P2_eCO_prises/Gestion_tv_chambre/Gestion_tv_chambre.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P2_eCO_prises/Gestion_tv_chambre_scene_de_fin_notif/Gestion_tv_chambre_scene_de_fin_notif.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📡`mqtt` · 🔄`state` · ⏰`time_pattern`<br>
 <br><details>
 <summary>🔌 Entités (5)</summary>
@@ -3832,8 +3833,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>P3_Allumage Lumière Entrée</b></summary>
 <blockquote>
 <i>Gestion de l''éclairage de l''entrée basée sur les transitions des</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P3_Eclairage/Allumage_lumiere_entree/Allumage_lumiere_entree.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P3_Eclairage/P3_Entree_allumage_lumiere/P3_Entree_allumage_lumiere.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P3_Eclairage/Allumage_lumiere_entree/Allumage_lumiere_entree.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P3_Eclairage/P3_Entree_allumage_lumiere/P3_Entree_allumage_lumiere.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (3)</summary>
@@ -3851,8 +3852,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>[P3-SALON] BOUTON IKEA INTER SALON (4) - ON/OFF LIGHT.SALON</b></summary>
 <blockquote>
 <i>Pilotage de light.salon via le bouton IKEA 4 touches Salon. Topic</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Bouton%20virtuel/Bouton_inter_ikea_4/Bouton_inter_ikea_4.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Bouton%20virtuel/P3_Salon_bouton_ikea_inter_salon/P3_Salon_bouton_ikea_inter_salon.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Bouton_virtuel/Bouton_inter_ikea_4/Bouton_inter_ikea_4.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Bouton_virtuel/P3_Salon_bouton_ikea_inter_salon/P3_Salon_bouton_ikea_inter_salon.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📡`mqtt`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3868,8 +3869,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>[P3-SALON] BOUTON IKEA SOMRIG - TOUT MESSAGE = ON/OFF</b></summary>
 <blockquote>
 <i>Pilotage simplifié : n''importe quel appui sur le bouton 1 (simple,</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Bouton%20virtuel/Bouton_inter_somrig/Bouton_inter_somrig.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Bouton%20virtuel/P3_Salon_bouton_ikea_somrig/P3_Salon_bouton_ikea_somrig.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Bouton_virtuel/Bouton_inter_somrig/Bouton_inter_somrig.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Bouton_virtuel/P3_Salon_bouton_ikea_somrig/P3_Salon_bouton_ikea_somrig.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📡`mqtt`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3885,8 +3886,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>P3_BUREAU - BOUTON RODRET TOGGLE BLANCHES</b></summary>
 <blockquote>
 <i>Alterne l'allumage des 2 lampes blanches via MQTT (Mode Fainéant)</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P3_Eclairage/Bureau_rodret_toggle_blanches/Bureau_rodret_toggle_blanches.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P3_Eclairage/P3_Bureau_bouton_rodret_toggle_blanches/P3_Bureau_bouton_rodret_toggle_blanches.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P3_Eclairage/Bureau_rodret_toggle_blanches/Bureau_rodret_toggle_blanches.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P3_Eclairage/P3_Bureau_bouton_rodret_toggle_blanches/P3_Bureau_bouton_rodret_toggle_blanches.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📡`mqtt`<br>
 <br><details>
 <summary>🔌 Entités (3)</summary>
@@ -3904,8 +3905,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES</b></summary>
 <blockquote>
 <i>Assure que les deux lampes de bureau (1 et 2) sont synchronisées si</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P3_Eclairage/Bureau_watchdog_synchro_lampes/Bureau_watchdog_synchro_lampes.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P3_Eclairage/P3_Bureau_watchdog_synchronisation_lampes_blanches/P3_Bureau_watchdog_synchronisation_lampes_blanches.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P3_Eclairage/Bureau_watchdog_synchro_lampes/Bureau_watchdog_synchro_lampes.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P3_Eclairage/P3_Bureau_watchdog_synchronisation_lampes_blanches/P3_Bureau_watchdog_synchronisation_lampes_blanches.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (3)</summary>
@@ -3923,8 +3924,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>Bureau - Forcer Play ON si PC tourne</b></summary>
 <blockquote>
 <i>Rallume les Hue Play si elles sont éteintes manuellement alors que</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P3_Eclairage/Bureau_forcer_play_on/Bureau_forcer_play_on.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P3_Eclairage/P3_Bureau_forcer_play_on_si_pc_tourne/P3_Bureau_forcer_play_on_si_pc_tourne.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P3_Eclairage/Bureau_forcer_play_on/Bureau_forcer_play_on.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P3_Eclairage/P3_Bureau_forcer_play_on_si_pc_tourne/P3_Bureau_forcer_play_on_si_pc_tourne.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -3940,8 +3941,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>BUREAU_ACTIVATION_ECRAN_SYNCHRO</b></summary>
 <blockquote>
 <i>Synchronise l'état de l'écran avec l'activité du PC bureau.</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P3_Eclairage/Bureau_activation_ecran_synchro/Bureau_activation_ecran_synchro.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P3_Eclairage/P3_Bureau_activation_ecran_synchro/P3_Bureau_activation_ecran_synchro.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P3_Eclairage/Bureau_activation_ecran_synchro/Bureau_activation_ecran_synchro.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P3_Eclairage/P3_Bureau_activation_ecran_synchro/P3_Bureau_activation_ecran_synchro.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -3967,8 +3968,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>Gestion Simple du Store Salon (Matin/Soir)</b></summary>
 <blockquote>
 <i>Ouvre le store au lever du soleil (pas avant 6h30) et le ferme au coucher.</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Gestion%20des%20stores/Gestion_store_salon/Gestion_store_salon.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Gestion%20des%20stores/Gestion_simple_du_store_salon_matin_soir/Gestion_simple_du_store_salon_matin_soir.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Gestion_des_stores/Gestion_store_salon/Gestion_store_salon.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Gestion_des_stores/Gestion_simple_du_store_salon_matin_soir/Gestion_simple_du_store_salon_matin_soir.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time` · ☀️`sun`<br>
 <br><details>
 <summary>🔌 Entités (3)</summary>
@@ -3986,8 +3987,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>Gestion Optimisée du Store Bureau</b></summary>
 <blockquote>
 <i>Priorité Sommeil et Anti-Reflet. Sécurité : Bloque tout mouvement</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Gestion%20des%20stores/Gestion_store_bureau/Gestion_store_bureau.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Gestion%20des%20stores/Gestion_optimisee_du_store_bureau/Gestion_optimisee_du_store_bureau.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Gestion_des_stores/Gestion_store_bureau/Gestion_store_bureau.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Gestion_des_stores/Gestion_optimisee_du_store_bureau/Gestion_optimisee_du_store_bureau.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time` · 🔄`state` · ☀️`sun`<br>
 <br><details>
 <summary>🔌 Entités (3)</summary>
@@ -4014,8 +4015,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>AUTO. ENERGIE. Basculement Tarif HC/HP - Genelec Appart</b></summary>
 <blockquote>
 <i>Bascule le tarif des 4 UM Genelec Appart HP/HC aux heures de transition</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Tarif%20hc-hp/Basculement_tarif_hphc/Basculement_tarif_hphc.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Tarif%20hc-hp/Auto_energie_basculement_tarif_hc_hp_genelec_appart/Auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Tarif_hc_hp/Basculement_tarif_hphc/Basculement_tarif_hphc.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Tarif_hc_hp/Auto_energie_basculement_tarif_hc_hp_genelec_appart/Auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 
 </blockquote>
@@ -4025,8 +4026,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>Log Écart Linky vs Nodon</b></summary>
 <blockquote>
 <i>Enregistre l'écart à 23:59 pile</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P0_Enrige/Log_ecart_linky_nodon/Log_ecart_linky_nodon.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P0_Enrige/Log_ecart_linky_vs_nodon/Log_ecart_linky_vs_nodon.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P0_Energie/Log_ecart_linky_nodon/Log_ecart_linky_nodon.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P0_Energie/Log_ecart_linky_vs_nodon/Log_ecart_linky_vs_nodon.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>
@@ -4051,8 +4052,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>DB Purge MariaDB + Repack</b></summary>
 <blockquote>
 <i>Ménage nocturne pour réduire la taille de la base de données (7 jours</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Mariadb%20%26%20vscode%20optimisation/Db_purge_mariadb/Db_purge_mariadb.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Mariadb%20%26%20vscode%20optimisation/Db_purge_mariadb_repack/Db_purge_mariadb_repack.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Mariadb_et_vscode_optimisation/Db_purge_mariadb/Db_purge_mariadb.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Mariadb_et_vscode_optimisation/Db_purge_mariadb_repack/Db_purge_mariadb_repack.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 
 </blockquote>
@@ -4062,8 +4063,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>Système - Économie Énergie VS Code</b></summary>
 <blockquote>
 <i>Coupe VS Code si son CPU dépasse 10% ou s'il est inactif, avec confirmation</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Mariadb%20%26%20vscode%20optimisation/Economie_energie_vscode/Economie_energie_vscode.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Mariadb%20%26%20vscode%20optimisation/Systeme_economie_energie_vs_code/Systeme_economie_energie_vs_code.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Mariadb_et_vscode_optimisation/Economie_energie_vscode/Economie_energie_vscode.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Mariadb_et_vscode_optimisation/Systeme_economie_energie_vs_code/Systeme_economie_energie_vs_code.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📊`numeric_state` · ⚡`event`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
@@ -4080,8 +4081,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>VEILLE GITHUB - Nouvelle release détectée</b></summary>
 <blockquote>
 <i>Surveille les flux Feedreader GitHub (HA core + HACS + cartes HACS).</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/_Sans_categorie/Veille_GitHub_releases/Veille_GitHub_releases.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/_Sans_categorie/Veille_GitHub_nouvelle_release_detectee/Veille_GitHub_nouvelle_release_detectee.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/_Sans_categorie/Veille_GitHub_releases/Veille_GitHub_releases.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/_Sans_categorie/Veille_GitHub_nouvelle_release_detectee/Veille_GitHub_nouvelle_release_detectee.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⚡`event`<br>
 
 </blockquote>
@@ -4091,8 +4092,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>Système - Watchdog Piles (HUE/IKEA/SONOFF)</b></summary>
 <blockquote>
 <i>Vérification 3x/jour basée sur les groupes de la vue synthétique (seuil</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Watchdog%20piles%20(hue-ikea-sonoff)/Watchdog_piles/Watchdog_piles.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Watchdog%20piles%20(hue-ikea-sonoff)/Systeme_watchdog_piles_hue_ikea_sonoff/Systeme_watchdog_piles_hue_ikea_sonoff.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Watchdog_piles_hue_ikea_sonoff/Watchdog_piles/Watchdog_piles.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Watchdog_piles_hue_ikea_sonoff/Systeme_watchdog_piles_hue_ikea_sonoff/Systeme_watchdog_piles_hue_ikea_sonoff.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 
 </blockquote>
@@ -4102,8 +4103,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>Z2M last_seen</b></summary>
 <blockquote>
 <i>Surveillance des capteurs Zigbee injoignables (plus de 8h ou indisponibles)</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/Controle%20entity%20Z2M/Z2M_last_seen/Z2M_last_seen.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/Controle%20entity%20Z2M/Z2M_last_seen/Z2M_last_seen.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/Controle_entity_Z2M/Z2M_last_seen/Z2M_last_seen.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/Controle_entity_Z2M/Z2M_last_seen/Z2M_last_seen.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time` · ⏰`time_pattern`<br>
 
 </blockquote>
@@ -4112,8 +4113,8 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <details>
 <summary>✅ <b>DIAG - ENREGISTREMENT JOURNALIER (7 POSTES + DUT)</b></summary>
 <blockquote>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P0_Enrige/Diag_enregistrement_journalier/Diag_enregistrement_journalier.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/P0_Enrige/Diag_enregistrement_journalier/Diag_enregistrement_journalier.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P0_Energie/Diag_enregistrement_journalier/Diag_enregistrement_journalier.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/P0_Energie/Diag_enregistrement_journalier/Diag_enregistrement_journalier.yaml">YAML source</a><br>
 
 </blockquote>
 </details>
@@ -4138,14 +4139,14 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 ---
 
 <details>
-<summary><b>🐚 SCRIPTS BASH</b> &nbsp;|&nbsp; 5 scripts (3 actifs ; 2 ajoutés le 2026-10-12, activité non vérifiée) &nbsp;|&nbsp; Prod : <code>/homeassistant/.scripts/</code> &nbsp;|&nbsp; Local : <code>docs_scripts_SH/</code></summary>
+<summary><b>🐚 SCRIPTS BASH</b> &nbsp;|&nbsp; 5 scripts (3 actifs ; 2 ajoutés le 2026-10-12, activité non vérifiée) &nbsp;|&nbsp; Prod : <code>/homeassistant/.scripts/</code> &nbsp;|&nbsp; Local : <code>04_docs_scripts_sh/</code></summary>
 <blockquote>
 
 <details>
 <summary><code>audit_md5.sh</code> &nbsp;|&nbsp; Audit MD5 GitHub ↔ prod (YAML config HA)</summary>
 <blockquote>
-📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Audit_md5/Audit_md5.md">Doc</a><br>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Audit_md5/Audit_md5.sh">Script source</a><br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_sh_md/Audit_md5/Audit_md5.md">Doc</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Audit_md5/Audit_md5.sh">Script source</a><br>
 Sortie : <code>/homeassistant/.logs/audit_md5.log</code>
 </blockquote>
 </details>
@@ -4153,8 +4154,8 @@ Sortie : <code>/homeassistant/.logs/audit_md5.log</code>
 <details>
 <summary><code>ha_git_backup.sh</code> &nbsp;|&nbsp; Backup git automatique HA → GitHub</summary>
 <blockquote>
-📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Ha_git_backup/Ha_git_backup.md">Doc</a><br>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Ha_git_backup/Ha_git_backup.sh">Script source</a><br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_sh_md/Ha_git_backup/Ha_git_backup.md">Doc</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Ha_git_backup/Ha_git_backup.sh">Script source</a><br>
 Sortie : repo GitHub <code>home_assistant_re-build</code>
 </blockquote>
 </details>
@@ -4162,7 +4163,7 @@ Sortie : repo GitHub <code>home_assistant_re-build</code>
 <details>
 <summary><code>audit_md5_yaml.sh</code> &nbsp;|&nbsp; Audit MD5 YAML GitHub ↔ prod (ajouté le 2026-10-12, activité non vérifiée)</summary>
 <blockquote>
-Script source : <a href="docs/04_Docs_scripts/Docs_scripts_sh/Audit_md5_yaml/Audit_md5_yaml.sh">audit_md5_yaml.sh</a> (copie de <code>/homeassistant/.scripts/</code>)<br>
+Script source : <a href="docs/04_docs_scripts/04_docs_scripts_sh/Audit_md5_yaml/Audit_md5_yaml.sh">audit_md5_yaml.sh</a> (copie de <code>/homeassistant/.scripts/</code>)<br>
 📄 <a href="docs/01_docs_config_system/config_system_MD/.scripts/01_scripts.sh_md/Audit_md5_yaml.md">Doc</a>
 </blockquote>
 </details>
@@ -4170,7 +4171,7 @@ Script source : <a href="docs/04_Docs_scripts/Docs_scripts_sh/Audit_md5_yaml/Aud
 <details>
 <summary><code>mf_vigilance_images.sh</code> &nbsp;|&nbsp; Cartes de vigilance Météo-France J0/J1 (ajouté le 2026-10-12, activité non vérifiée)</summary>
 <blockquote>
-Script source : <a href="docs/04_Docs_scripts/Docs_scripts_sh/Mf_vigilance_images/Mf_vigilance_images.sh">mf_vigilance_images.sh</a> (copie de <code>/homeassistant/scripts/</code>)<br>
+Script source : <a href="docs/04_docs_scripts/04_docs_scripts_sh/Mf_vigilance_images/Mf_vigilance_images.sh">mf_vigilance_images.sh</a> (copie de <code>/homeassistant/scripts/</code>)<br>
 Pas de doc associée.
 </blockquote>
 </details>
@@ -4191,14 +4192,14 @@ device et fonction confirmés (Raspberry Pi, cf. TODO.md U-2). Corrige l'ancienn
 </details>
 
 <details>
-<summary><b>🐍 SCRIPTS PYTHON D'INDEX</b> &nbsp;|&nbsp; 13 scripts (ajoutés le 2026-10-13, le 2026-10-18, le 2026-10-19, le 2026-10-20 et le 2026-10-23, lecture seule de la prod) &nbsp;|&nbsp; Local : <code>docs_scripts_SH/</code> &nbsp;|&nbsp; Non poussés en prod</summary>
+<summary><b>🐍 SCRIPTS PYTHON D'INDEX</b> &nbsp;|&nbsp; 13 scripts (ajoutés le 2026-10-13, le 2026-10-18, le 2026-10-19, le 2026-10-20 et le 2026-10-23, lecture seule de la prod) &nbsp;|&nbsp; Local : <code>04_docs_scripts_sh/</code> &nbsp;|&nbsp; Non poussés en prod</summary>
 <blockquote>
 
 <details>
 <summary><code>gen_global_index_automations.py</code> &nbsp;|&nbsp; Génère GLOBAL_INDEX_AUTOMATIONS.md (automations de H:\automations.yaml + registre HA)</summary>
 <blockquote>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.py">Script source</a><br>
-Sortie : <a href="docs/03_Docs_automations/GLOBAL_INDEX_AUTOMATIONS.md">GLOBAL_INDEX_AUTOMATIONS.md</a> (régénéré à chaque /histo)<br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.py">Script source</a><br>
+Sortie : <a href="docs/03_docs_automations/GLOBAL_INDEX_AUTOMATIONS.md">GLOBAL_INDEX_AUTOMATIONS.md</a> (régénéré à chaque /histo)<br>
 Pas de doc associée.
 </blockquote>
 </details>
@@ -4206,8 +4207,8 @@ Pas de doc associée.
 <details>
 <summary><code>gen_global_index_vignettes_pages.py</code> &nbsp;|&nbsp; Génère GLOBAL_INDEX_VIGNETTES_PAGES.md (vignettes et pages, arbre local docs/02_docs_dashboard)</summary>
 <blockquote>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Gen_GLOBAL_INDEX_vignettes_pages/Gen_GLOBAL_INDEX_vignettes_pages.py">Script source</a><br>
-Sortie : <a href="docs/02_Docs_dashboard/GLOBAL_INDEX_VIGNETTES_PAGES.md">GLOBAL_INDEX_VIGNETTES_PAGES.md</a> (régénéré à chaque /histo)<br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Gen_GLOBAL_INDEX_vignettes_pages/Gen_GLOBAL_INDEX_vignettes_pages.py">Script source</a><br>
+Sortie : <a href="docs/02_docs_dashboard/GLOBAL_INDEX_VIGNETTES_PAGES.md">GLOBAL_INDEX_VIGNETTES_PAGES.md</a> (régénéré à chaque /histo)<br>
 Pas de doc associée.
 </blockquote>
 </details>
@@ -4215,8 +4216,8 @@ Pas de doc associée.
 <details>
 <summary><code>gen_global_index_scripts.py</code> &nbsp;|&nbsp; Génère GLOBAL_INDEX_SCRIPTS_SH.md et GLOBAL_INDEX_SCRIPTS_YAML.md</summary>
 <blockquote>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Gen_GLOBAL_INDEX_scripts/Gen_GLOBAL_INDEX_scripts.py">Script source</a><br>
-Sorties : <a href="docs/04_Docs_scripts/GLOBAL_INDEX_SCRIPTS_SH.md">GLOBAL_INDEX_SCRIPTS_SH.md</a> · <a href="docs/04_Docs_scripts/GLOBAL_INDEX_SCRIPTS_YAML.md">GLOBAL_INDEX_SCRIPTS_YAML.md</a> (régénérés à chaque /histo)<br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Gen_GLOBAL_INDEX_scripts/Gen_GLOBAL_INDEX_scripts.py">Script source</a><br>
+Sorties : <a href="docs/04_docs_scripts/GLOBAL_INDEX_SCRIPTS_SH.md">GLOBAL_INDEX_SCRIPTS_SH.md</a> · <a href="docs/04_docs_scripts/GLOBAL_INDEX_SCRIPTS_YAML.md">GLOBAL_INDEX_SCRIPTS_YAML.md</a> (régénérés à chaque /histo)<br>
 Pas de doc associée.
 </blockquote>
 </details>
@@ -4224,7 +4225,7 @@ Pas de doc associée.
 <details>
 <summary><code>gen_global_index_ia.py</code> &nbsp;|&nbsp; Génère GLOBAL_INDEX_IA.md (fichiers de docs/00_IA)</summary>
 <blockquote>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.py">Script source</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.py">Script source</a><br>
 Sortie : <a href="docs/00_IA/GLOBAL_INDEX_IA.md">GLOBAL_INDEX_IA.md</a> (régénéré à chaque /histo)<br>
 Pas de doc associée.
 </blockquote>
@@ -4233,7 +4234,7 @@ Pas de doc associée.
 <details>
 <summary><code>check_sous_context_ia.py</code> &nbsp;|&nbsp; Contrôle en lecture seule des 9 fichiers de docs/00_IA/SOUS_CONTEXT_IA</summary>
 <blockquote>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Check_sous_context_ia/Check_sous_context_ia.py">Script source</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Check_sous_context_ia/Check_sous_context_ia.py">Script source</a><br>
 Lancé par /histo (étape 6, point 7) ; ne corrige rien.<br>
 Pas de doc associée.
 </blockquote>
@@ -4242,7 +4243,7 @@ Pas de doc associée.
 <details>
 <summary><code>check_global_index.py</code> &nbsp;|&nbsp; Contrôle en lecture seule des 7 index globaux</summary>
 <blockquote>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Check_GLOBAL_INDEX/Check_GLOBAL_INDEX.py">Script source</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Check_GLOBAL_INDEX/Check_GLOBAL_INDEX.py">Script source</a><br>
 Lancé par /histo (étape 6, point 8) ; ne corrige rien.<br>
 Pas de doc associée.
 </blockquote>
@@ -4251,61 +4252,61 @@ Pas de doc associée.
 <details>
 <summary><code>Verif_emplacements.py</code> &nbsp;|&nbsp; Contrôle en lecture seule des fichiers à plusieurs emplacements (local, prod racine, prod miroir, GitHub racine et docs/)</summary>
 <blockquote>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Verif_emplacements/Verif_emplacements.py">Script source</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Verif_emplacements/Verif_emplacements.py">Script source</a><br>
 Lancé par /histo (étape 6, point 9) ; ne corrige rien. Carte : <a href="docs/00_IA/SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md">IA_CARTE_EMPLACEMENTS.md</a><br>
-📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Verif_emplacements/Verif_emplacements.md">Doc</a>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_sh_md/Verif_emplacements/Verif_emplacements.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><code>Verif_integrations_file.py</code> &nbsp;|&nbsp; Contrôle en lecture seule des intégrations File (notify) de HA contre leur fiche</summary>
 <blockquote>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Verif_integrations_file/Verif_integrations_file.py">Script source</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Verif_integrations_file/Verif_integrations_file.py">Script source</a><br>
 Lancé par /histo (6E, point 10) ; ne corrige rien. Fiche de référence : <a href="docs/01_docs_config_system/config_system_MD/integrations_file/integrations_file.md">integrations_file.md</a><br>
-📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Verif_integrations_file/Verif_integrations_file.md">Doc</a>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_sh_md/Verif_integrations_file/Verif_integrations_file.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><code>Verif_headers_yaml.py</code> &nbsp;|&nbsp; Controle en lecture seule des en-tetes des YAML de config (boites ASCII a largeur variable, 5 headers, slug, name, unique_id)</summary>
 <blockquote>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Verif_headers_yaml/Verif_headers_yaml.py">Script source</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Verif_headers_yaml/Verif_headers_yaml.py">Script source</a><br>
 Lance par le skill ha-verif-headers ; ne corrige rien. Complete check_yaml_forme.py.<br>
-📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Verif_headers_yaml/Verif_headers_yaml.md">Doc</a>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_sh_md/Verif_headers_yaml/Verif_headers_yaml.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><code>hermes_audit_trigul_arbres.py</code> &nbsp;|&nbsp; Superposition en lecture seule des 3 arbres (GitHub, local, prod) pour le trigul</summary>
 <blockquote>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Hermes_audit_md5_trigul_3md/hermes_audit_trigul_arbres.py">Script source</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Hermes_audit_md5_trigul_3md/hermes_audit_trigul_arbres.py">Script source</a><br>
 Lancé par trigul_run.py (étape A) ; écrit les rapports de historique/MD5/00_Verif_Final_trigul_arbres.<br>
-📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Hermes_audit_trigul_arbres/Hermes_audit_trigul_arbres.md">Doc</a>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_sh_md/Hermes_audit_trigul_arbres/Hermes_audit_trigul_arbres.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><code>Hermes_audit_md5_trigul_unitaire.py</code> &nbsp;|&nbsp; Étape profonde du trigul : automations et scripts YAML unité par unité</summary>
 <blockquote>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Hermes_audit_md5_trigul_3md/Hermes_audit_md5_trigul_unitaire.py">Script source</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Hermes_audit_md5_trigul_3md/Hermes_audit_md5_trigul_unitaire.py">Script source</a><br>
 Lancé par trigul_run.py (étape B1) ; écrit historique/MD5/01_trigul_profond.<br>
-📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Hermes_audit_md5_trigul_unitaire/Hermes_audit_md5_trigul_unitaire.md">Doc</a>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_sh_md/Hermes_audit_md5_trigul_unitaire/Hermes_audit_md5_trigul_unitaire.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><code>trigul_run.py</code> &nbsp;|&nbsp; Lanceur du trigul avec journal de trace</summary>
 <blockquote>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/Hermes_audit_md5_trigul_3md/trigul_run.py">Script source</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/Hermes_audit_md5_trigul_3md/trigul_run.py">Script source</a><br>
 Enchaîne les étapes A, B1 et C et écrit historique/MD5/04_journal_trigul.<br>
-📄 <a href="docs/04_Docs_scripts/Docs_scripts_sh_md/Trigul_run/Trigul_run.md">Doc</a>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_sh_md/Trigul_run/Trigul_run.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><code>histo_trace.py</code> &nbsp;|&nbsp; Journal de trace commun à /histo et /histo-final</summary>
 <blockquote>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_sh/histo_trace/histo_trace.py">Script source</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_sh/histo_trace/histo_trace.py">Script source</a><br>
 Écrit historique/01_journal_trace/logs (une ligne par étape, détecte les étapes sans fin et les séquences interrompues) et, avec la commande html, les pages HTML du jour directement dans historique/01_journal_trace ; pas encore de fiche ; local seulement.
 </blockquote>
 </details>
@@ -4314,14 +4315,14 @@ Enchaîne les étapes A, B1 et C et écrit historique/MD5/04_journal_trigul.<br>
 </details>
 
 <details>
-<summary><b>⚙️ SCRIPTS HA YAML</b> &nbsp;|&nbsp; 3 fichiers sources &nbsp;|&nbsp; Géré via UI HA &nbsp;|&nbsp; Local : <code>docs_scripts_YAML/</code></summary>
+<summary><b>⚙️ SCRIPTS HA YAML</b> &nbsp;|&nbsp; 3 fichiers sources &nbsp;|&nbsp; Géré via UI HA &nbsp;|&nbsp; Local : <code>04_docs_scripts_yaml/</code></summary>
 <blockquote>
 
 <details>
 <summary><code>p1_master_gestion_clim.yaml</code> &nbsp;|&nbsp; Script unique - pilotage clim jour/nuit (param <code>periode</code>)</summary>
 <blockquote>
-📄 <a href="docs/04_Docs_scripts/Docs_scripts_yaml_md/P1_Master_gestion_clim/P1_Master_gestion_clim.md">Doc master</a><br>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_yaml/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml">YAML source</a><br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_yaml_md/P1_Master_gestion_clim/P1_Master_gestion_clim.md">Doc master</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_yaml/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml">YAML source</a><br>
 Appelé par les automations (A-0) et (B-0) - voir section 03.
 
 <blockquote>
@@ -4331,31 +4332,31 @@ script unique (pas 4 sous-scripts). Le doc master lui-même
 et qu'il "remplace le code inline dupliqué dans A0/B0". Les 2 sous-entrées ci-dessous
 (J 1-1/1-2/1-3 et J 2-0) décrivent une architecture pré-refactor (scripts
 <code>j_1_1_salon_clim_on_off_intelligent</code> etc.) dont le yaml n'existe plus dans
-<code>docs_scripts_YAML/</code> - conservées ici à titre historique uniquement.
+<code>04_docs_scripts_yaml/</code> - conservées ici à titre historique uniquement.
 Mise à jour 2026-10-12 : ces 4 scripts existent toujours dans la prod (scripts.yaml, aucune automation ne les appelle) et leurs YAML ont été extraits en local le 2026-10-12. Leur statut obsolète n'est pas confirmé (usage éventuel dans le dashboard non vérifié).
 </blockquote>
 
 <details>
 <summary>🗄️ ARCHIVÉ (pré-refactor 2026-06) - J 1-1 / J 1-2 / J 1-3 &nbsp;|&nbsp; Routeurs CLIM ON/OFF INTELLIGENT (Salon / Bureau / Chambre)</summary>
 <blockquote>
-📄 <a href="docs/04_Docs_scripts/Docs_scripts_yaml_md/Scripts_clim_on_off/Scripts_clim_on_off.md">Doc</a><br>
-Scripts (obsolètes, non présents dans docs_scripts_YAML/) : <code>j_1_1_salon_clim_on_off_intelligent</code> · <code>j_1_2_bureau_clim_on_off_intelligent</code> · <code>j_1_3_chambre_clim_on_off_intelligent</code>
-YAML sources (extraits de la prod le 2026-10-12) : <a href="docs/04_Docs_scripts/Docs_scripts_yaml/Climatisation/J_1_1_salon_clim_on_off_intelligent/J_1_1_salon_clim_on_off_intelligent.yaml">j_1_1</a> · <a href="docs/04_Docs_scripts/Docs_scripts_yaml/Climatisation/J_1_2_bureau_clim_on_off_intelligent/J_1_2_bureau_clim_on_off_intelligent.yaml">j_1_2</a> · <a href="docs/04_Docs_scripts/Docs_scripts_yaml/Climatisation/J_1_3_chambre_clim_on_off_intelligent/J_1_3_chambre_clim_on_off_intelligent.yaml">j_1_3</a>. Les 3 scripts existent toujours dans la prod ; aucune automation ne les appelle.<br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_yaml_md/Scripts_clim_on_off/Scripts_clim_on_off.md">Doc</a><br>
+Scripts (obsolètes, non présents dans 04_docs_scripts_yaml/) : <code>j_1_1_salon_clim_on_off_intelligent</code> · <code>j_1_2_bureau_clim_on_off_intelligent</code> · <code>j_1_3_chambre_clim_on_off_intelligent</code>
+YAML sources (extraits de la prod le 2026-10-12) : <a href="docs/04_docs_scripts/04_docs_scripts_yaml/Climatisation/J_1_1_salon_clim_on_off_intelligent/J_1_1_salon_clim_on_off_intelligent.yaml">j_1_1</a> · <a href="docs/04_docs_scripts/04_docs_scripts_yaml/Climatisation/J_1_2_bureau_clim_on_off_intelligent/J_1_2_bureau_clim_on_off_intelligent.yaml">j_1_2</a> · <a href="docs/04_docs_scripts/04_docs_scripts_yaml/Climatisation/J_1_3_chambre_clim_on_off_intelligent/J_1_3_chambre_clim_on_off_intelligent.yaml">j_1_3</a>. Les 3 scripts existent toujours dans la prod ; aucune automation ne les appelle.<br>
 </blockquote>
 </details>
 
 <details>
 <summary>🗄️ ARCHIVÉ (pré-refactor 2026-06) - J 2-0 &nbsp;|&nbsp; SECU - ARRÊT CLIM PROTÉGÉ</summary>
 <blockquote>
-📄 <a href="docs/04_Docs_scripts/Docs_scripts_yaml_md/Script_j2_0_secu_arret_clim/Script_j2_0_secu_arret_clim.md">Doc</a><br>
-Script (obsolète, non présent dans docs_scripts_YAML/) : <code>j_2_0_secu_arret_clim_protege</code>
-YAML source (extrait de la prod le 2026-10-12) : <a href="docs/04_Docs_scripts/Docs_scripts_yaml/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.yaml">j_2_0_secu_arret_clim_protege.yaml</a>. Le script existe toujours dans la prod ; aucune automation ne l'appelle.<br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_yaml_md/Script_j2_0_secu_arret_clim/Script_j2_0_secu_arret_clim.md">Doc</a><br>
+Script (obsolète, non présent dans 04_docs_scripts_yaml/) : <code>j_2_0_secu_arret_clim_protege</code>
+YAML source (extrait de la prod le 2026-10-12) : <a href="docs/04_docs_scripts/04_docs_scripts_yaml/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.yaml">j_2_0_secu_arret_clim_protege.yaml</a>. Le script existe toujours dans la prod ; aucune automation ne l'appelle.<br>
 
 <details>
 <summary><code>sdb_soufflant_demarrer.yaml</code> &nbsp;|&nbsp; Soufflant SDB : demarrage 2000 W + verrou 30 s</summary>
 <blockquote>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_03_Chauffage%20salle%20de%20bain/SDB_soufflant_specification_2026/SDB_soufflant_specification_2026.md">Doc</a><br>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_yaml/Soufflant%20SDB/SDB_soufflant_demarrer/SDB_soufflant_demarrer.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_03_Chauffage_salle_de_bain/SDB_soufflant_specification_2026/SDB_soufflant_specification_2026.md">Doc</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_yaml/Soufflant_SDB/SDB_soufflant_demarrer/SDB_soufflant_demarrer.yaml">YAML source</a><br>
 Appelé par l'automation H (section 03). Refuse de démarrer en mode cool (sensor.mode_ete_hiver, depuis le 2026-10-07 ; remplace la garde 25 degrés) (première ligne, avant le verrou). Pose le verrou, alimente la prise, 2 impulsions 1000 W,
 passe le climate en heat, et éteint l'interrupteur si l'appareil tourne encore après 60 minutes.
 </blockquote>
@@ -4364,8 +4365,8 @@ passe le climate en heat, et éteint l'interrupteur si l'appareil tourne encore 
 <details>
 <summary><code>sdb_soufflant_arreter.yaml</code> &nbsp;|&nbsp; Soufflant SDB : resistances, ventilateur 1 min 30, prise</summary>
 <blockquote>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/P1_03_Chauffage%20salle%20de%20bain/SDB_soufflant_specification_2026/SDB_soufflant_specification_2026.md">Doc</a><br>
-⚙️ <a href="docs/04_Docs_scripts/Docs_scripts_yaml/Soufflant%20SDB/SDB_soufflant_arreter/SDB_soufflant_arreter.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_md/P1_03_Chauffage_salle_de_bain/SDB_soufflant_specification_2026/SDB_soufflant_specification_2026.md">Doc</a><br>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_yaml/Soufflant_SDB/SDB_soufflant_arreter/SDB_soufflant_arreter.yaml">YAML source</a><br>
 Appelé par l'automation H (section 03). Refusé pendant le verrou de démarrage. Remet le climate
 sur off à la fin, après la coupure de la prise.
 </blockquote>
@@ -4374,7 +4375,7 @@ sur off à la fin, après la coupure de la prise.
 <details>
 <summary><code>audit_md5.yaml</code> &nbsp;|&nbsp; Script HA : lance <code>shell_command.audit_md5</code> (audit MD5 GitHub)</summary>
 <blockquote>
-<a href="docs/04_Docs_scripts/Docs_scripts_yaml/Audit_md5/Audit_md5.yaml">YAML source</a> (extrait de la prod le 2026-10-12)<br>
+<a href="docs/04_docs_scripts/04_docs_scripts_yaml/Audit_md5/Audit_md5.yaml">YAML source</a> (extrait de la prod le 2026-10-12)<br>
 Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 2026-10-12).
 </blockquote>
 </details>
@@ -4382,7 +4383,7 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 <details>
 <summary><code>audit_md5_md_yaml.yaml</code> &nbsp;|&nbsp; Script HA : lance <code>shell_command.audit_md5_md_yaml</code> (audit MD5 docs)</summary>
 <blockquote>
-<a href="docs/04_Docs_scripts/Docs_scripts_yaml/Audit_md5_md_yaml/Audit_md5_md_yaml.yaml">YAML source</a> (extrait de la prod le 2026-10-12)<br>
+<a href="docs/04_docs_scripts/04_docs_scripts_yaml/Audit_md5_md_yaml/Audit_md5_md_yaml.yaml">YAML source</a> (extrait de la prod le 2026-10-12)<br>
 Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 2026-10-12).
 </blockquote>
 </details>
@@ -4450,98 +4451,98 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 <details>
 <summary><b>fix-file.md</b> &nbsp;|&nbsp; analyse une erreur Home Assistant et retourne le bloc YAML corrigé</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/skill_fix_file/fix_file.md">Doc</a>
+<a href="docs/05_docs_skills/skill_fix_file/fix_file.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-new-yaml.md</b> &nbsp;|&nbsp; génère un squelette YAML conforme aux conventions du projet</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/skill_ha_new_yaml/ha_new_yaml.md">Doc</a>
+<a href="docs/05_docs_skills/skill_ha_new_yaml/ha_new_yaml.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-push-docs.md</b> &nbsp;|&nbsp; synchronise les docs locales (*.md + yaml dashboard) vers H:\Docs</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/skill_ha_push_docs/ha_push_docs.md">Doc</a>
+<a href="docs/05_docs_skills/skill_ha_push_docs/ha_push_docs.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-push-md.md</b> &nbsp;|&nbsp; pousse uniquement les *.md de documentation vers H:\Docs</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/skill_ha_push_md/ha_push_md.md">Doc</a>
+<a href="docs/05_docs_skills/skill_ha_push_md/ha_push_md.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-push-yaml.md</b> &nbsp;|&nbsp; pousse un YAML config vers la prod, sauvegarde locale avant modification</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/skill_ha_push_yaml/ha_push_yaml.md">Doc</a>
+<a href="docs/05_docs_skills/skill_ha_push_yaml/ha_push_yaml.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-resync-tree.md</b> &nbsp;|&nbsp; resynchronise les YAML locaux depuis le repo GitHub (source de vérité n°2)</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/skill_ha_resync_tree/ha_resync_tree.md">Doc</a>
+<a href="docs/05_docs_skills/skill_ha_resync_tree/ha_resync_tree.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-status.md</b> &nbsp;|&nbsp; résumé ultra-compact de l'avancement du projet en 3 points</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/skill_ha_status/ha_status.md">Doc</a>
+<a href="docs/05_docs_skills/skill_ha_status/ha_status.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-trigul.md</b> &nbsp;|&nbsp; triangulation MD5 des docs local / prod / GitHub, rapports dans historique/MD5</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/skill_ha_trigul/ha_trigul.md">Doc</a>
+<a href="docs/05_docs_skills/skill_ha_trigul/ha_trigul.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>ha-verif-headers.md</b> &nbsp;|&nbsp; verifie en lecture seule les en-tetes des YAML de config (boites ASCII, 5 headers, slug, name, unique_id)</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/skill_ha_verif_headers/ha_verif_headers.md">Doc</a>
+<a href="docs/05_docs_skills/skill_ha_verif_headers/ha_verif_headers.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>histo.md</b> &nbsp;|&nbsp; journal de bord, sync_index, journal fusionné, Obsidian, ménage des .bak, tree</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/skill_histo/histo.md">Doc</a>
+<a href="docs/05_docs_skills/skill_histo/histo.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>histo-final.md</b> &nbsp;|&nbsp; histo complet, puis extinction de l'écran (switch.ecran_p_c_3_play_hue) et arrêt du PC après 5 minutes</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/skill_histo_final/histo_final.md">Doc</a>
+<a href="docs/05_docs_skills/skill_histo_final/histo_final.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>journal-modifs.md</b> &nbsp;|&nbsp; note au fil de l'eau chaque modification de fichier dans un journal par auteur (claude, eric, hermes)</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/skill_journal_modifs/journal_modifs.md">Doc</a>
+<a href="docs/05_docs_skills/skill_journal_modifs/journal_modifs.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>sync-index.md</b> &nbsp;|&nbsp; met à jour DEPENDANCES_GLOBALES.md et l'index après validation d'un YAML</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/skill_sync_index/sync_index.md">Doc</a>
+<a href="docs/05_docs_skills/skill_sync_index/sync_index.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>update-arbo.md</b> &nbsp;|&nbsp; met à jour IA_ARBO_DETAIL.md (comptages local, prod, GitHub)</summary>
 <blockquote>
-<a href="docs/05_Docs_skills/skill_update_arbo/update_arbo.md">Doc</a>
+<a href="docs/05_docs_skills/skill_update_arbo/update_arbo.md">Doc</a>
 </blockquote>
 </details>
 
@@ -4559,8 +4560,8 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 <summary>✅ <b>Raspberry CPU Fan PWM 6 States</b></summary>
 <blockquote>
 <i>Règle la vitesse du ventilateur du Raspberry en fonction de la température</i><br><br>
-📄 <a href="docs/03_Docs_automations/Docs_automations_md/RASPI/RASPI_fan_pwm/RASPI_fan_pwm.md">Documentation</a><br>
-⚙️ <a href="docs/03_Docs_automations/Docs_automations_yaml/XX_RASPI/A_RASPI_fan_pwm_6_states/A_RASPI_fan_pwm_6_states.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_yaml/XX_RASPI/A_RASPI_fan_pwm_6_states_MD/A_RASPI_fan_pwm_6_states.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_yaml/XX_RASPI/A_RASPI_fan_pwm_6_states_YAML/A_RASPI_fan_pwm_6_states.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>

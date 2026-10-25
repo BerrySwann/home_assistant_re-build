@@ -46,7 +46,7 @@ L'association entité / fichier se déduit du nom donné à la création et de l
 
 ## Contrôle automatique
 
-- Script en lecture seule `Verif_integrations_file.py` (fiche : `docs/04_Docs_scripts/Docs_scripts_sh_md/Verif_integrations_file/Verif_integrations_file.md`), lancé par /histo (point 10 de l'étape 6).
+- Script en lecture seule `Verif_integrations_file.py` (fiche : `docs/04_docs_scripts/04_docs_scripts_sh_md/Verif_integrations_file/Verif_integrations_file.md`), lancé par /histo (point 10 de l'étape 6).
 - Il compare le tableau ci-dessus aux entrées File de HA (`core.config_entries` et `core.entity_registry`, domaine et plateforme `file`) : chemin, entité notify, horodatage, entrée désactivée.
 - Rapport : `historique/03_RAPPORTS/06_MD5/05_VERIF_INTEGRATIONS_FILE/verif_integrations_file_AAAA-MM-JJ.txt` (dernières lignes ANOMALIES et RESULTAT).
 - Après un ajout, un retrait ou une modification d'intégration : mettre à jour le tableau de cette fiche, puis relancer le script.
