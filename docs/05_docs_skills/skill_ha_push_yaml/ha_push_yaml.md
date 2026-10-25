@@ -47,6 +47,12 @@ Scripts `.sh` / `.py` : push vers `H:\.scripts\` ou `H:\scripts\` uniquement sur
 
 ## WORKFLOW
 
+### AVANT TOUT PUSH - Controle des dossiers XX_ (decide par Eric le 2026-10-25 21:19, obligatoire)
+
+Les dossiers `XX_` n'existent qu'en local et ne doivent jamais se perdre. Avant le premier calcul de ce skill, ET une seconde fois juste apres le push (controle avant/apres), lancer :
+`python -I -X utf8 "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Check_XX_presents\Check_XX_presents.py"`
+Il refuse aussi tout dossier XX_ present en prod (ALERTE). Il compare les dossiers XX_ et leurs fichiers au manifeste `XX_manifest.json` (meme dossier). `RESULTAT : OK` = on continue. Une ALERTE (dossier ou fichier manquant) = ne RIEN pousser, prevenir Eric, restaurer depuis `TEMPO\XX_sauvegarde_2026-10-25` seulement sur son ordre. Les XX_ ne se poussent jamais en prod. Le manifeste ne se met a jour (`--maj`) que sur ordre d'Eric.
+
 ### 0 - AVANT TOUTE MODIFICATION D'UN FICHIER EXISTANT : sauvegarde locale
 
 ```powershell

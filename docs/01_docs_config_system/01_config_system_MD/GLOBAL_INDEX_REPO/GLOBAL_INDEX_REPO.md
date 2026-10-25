@@ -1,6 +1,7 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-10-25 (21h21) - entrée ajoutée : Check_XX_presents.py (scripts python, recompté : 14) ; contrôle de présence des dossiers XX_ avant chaque push*
 *Dernière mise à jour : 2026-10-25 20h28 - sous-dossiers de 00_ à 04_ numérotés et suffixes MD, SH, YAML en majuscules (02_dashboard_docs_MD, 03_docs_automations_YAML, 04_docs_scripts_SH, 00_SOUS_CONTEXT_IA, 01_config_system_MD...) : tous les liens corrigés, 832 liens, 0 cassé*
 *Dernière mise à jour : 2026-10-25 (19h40) - règle de nommage des caractères (espace, tiret, &, parenthèses, point -> _) appliquée en local et en prod ; dossiers renommés (docs minuscule, skills, MINI_PC, Tarif_hc_hp, Automations_yaml_original, Backup_ha_GitHub, Mariadb_et_vscode_optimisation, Watchdog_piles_hue_ikea_sonoff) ; pages réserve L5C3 retirées ; liens corrigés (6 -> 0 au contrôle)*
 *Dernière mise à jour : 2026-10-23 (22h55, /histo S1) - entrée ajoutée : Verif_integrations_file.py (scripts python, recompté : 13)*
@@ -4193,7 +4194,7 @@ device et fonction confirmés (Raspberry Pi, cf. TODO.md U-2). Corrige l'ancienn
 </details>
 
 <details>
-<summary><b>🐍 SCRIPTS PYTHON D'INDEX</b> &nbsp;|&nbsp; 13 scripts (ajoutés le 2026-10-13, le 2026-10-18, le 2026-10-19, le 2026-10-20 et le 2026-10-23, lecture seule de la prod) &nbsp;|&nbsp; Local : <code>04_docs_scripts_SH/</code> &nbsp;|&nbsp; Non poussés en prod</summary>
+<summary><b>🐍 SCRIPTS PYTHON D'INDEX</b> &nbsp;|&nbsp; 14 scripts (ajoutés le 2026-10-13, le 2026-10-18, le 2026-10-19, le 2026-10-20, le 2026-10-23 et le 2026-10-25, lecture seule de la prod) &nbsp;|&nbsp; Local : <code>04_docs_scripts_SH/</code> &nbsp;|&nbsp; Non poussés en prod</summary>
 <blockquote>
 
 <details>
@@ -4265,6 +4266,15 @@ Lancé par /histo (étape 6, point 9) ; ne corrige rien. Carte : <a href="docs/0
 ⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_SH/Verif_integrations_file/Verif_integrations_file.py">Script source</a><br>
 Lancé par /histo (6E, point 10) ; ne corrige rien. Fiche de référence : <a href="docs/01_docs_config_system/01_config_system_MD/integrations_file/integrations_file.md">integrations_file.md</a><br>
 📄 <a href="docs/04_docs_scripts/04_docs_scripts_SH_MD/Verif_integrations_file/Verif_integrations_file.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><code>Check_XX_presents.py</code> &nbsp;|&nbsp; Contrôle en lecture seule de la présence des dossiers XX_ (local seul) contre un manifeste</summary>
+<blockquote>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_SH/Check_XX_presents/Check_XX_presents.py">Script source</a><br>
+Lancé avant chaque push par ha-push-docs, ha-push-md et ha-push-yaml (décidé par Eric le 2026-10-25) ; alerte si un dossier ou un fichier XX_ manque. Manifeste : <a href="docs/04_docs_scripts/04_docs_scripts_SH/Check_XX_presents/XX_manifest.json">XX_manifest.json</a><br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_SH_MD/Check_XX_presents/Check_XX_presents.md">Doc</a>
 </blockquote>
 </details>
 

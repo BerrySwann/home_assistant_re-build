@@ -131,7 +131,7 @@ Immediatement apres la sauvegarde du journal, executer le sync_index complet.
 ### Protocole
 
 1. Identifier les fichiers modifies pendant la session (depuis le journal de bord qui vient d'etre genere)
-2. Pour chaque fichier impactant DEPENDANCES_GLOBALES.md : mettre a jour la date en tete de fichier, puis pousser le fichier en prod (decide par Eric le 2026-10-14) : comparer le MD5 de la copie locale a `H:\docs\XX_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`, copier seulement si different (sans sauvegarde sur H: : le `.bak` reste local), verifier le MD5 apres, y compris quand la ligne de date est la seule modification. Si la prod differe de la version locale d'avant la modification (quelqu'un d'autre a ecrit en prod) : ne pas pousser et le signaler. Si H: est inaccessible : le noter sans bloquer.
+2. Pour chaque fichier impactant DEPENDANCES_GLOBALES.md : mettre a jour la date en tete de fichier, ne PAS le pousser en prod : XX_docs_MD_system est LOCAL SEUL (decide par Eric le 2026-10-25 21:25, retire de la prod le 2026-10-25), son .bak reste local. Si le dossier reapparait en prod, le signaler a Eric.
 3. Pour chaque automation validee : verifier/mettre a jour son `.md` dans `03_docs_automations_MD/`
 4. Pour chaque script valide : verifier/mettre a jour son `.md` dans `04_docs_scripts_YAML_MD/`
 5. Mettre a jour `GLOBAL_INDEX_REPO.md` (voir ci-dessous)
@@ -449,7 +449,7 @@ Met a jour l'arborescence documentee : `C:\Users\Berry Swann\Documents\ReBuild\d
 SYNC_INDEX - [date]
 
 Fichiers mis a jour :
-- DEPENDANCES_GLOBALES.md : date en tete -> [date session] | push prod : [MD5 identique | non pousse (raison)]
+- DEPENDANCES_GLOBALES.md : date en tete -> [date session] | push prod : aucun (local seul)
 - GLOBAL_INDEX_REPO.md : [entrees ajoutees / compteurs modifies] | deja a jour (sauvegarde : [nom du .bak]) | push prod : [miroir docs et racine H: MD5 identiques | non pousse (raison)]
 - GLOBAL_INDEX_AUTOMATIONS.md : [regenere | inchange] | resume du script : [prod / local_yaml / fiches / sans_yaml / sans_fiche / sans_entity / id_different]
 - GLOBAL_INDEX_VIGNETTES_PAGES.md : [regenere | inchange] | resume du script : [vignettes / dossiers / manques / seul_md / seul_yaml / sans_dependances]

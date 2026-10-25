@@ -1,7 +1,7 @@
 # GLOBAL INDEX IA
 
-> Fichier GENERE le 2026-10-25 20:24 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
-> 12 fichiers de contenu, 135 sauvegardes (.bak), 0 sans description.
+> Fichier GENERE le 2026-10-25 21:20 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
+> 12 fichiers de contenu, 139 sauvegardes (.bak), 0 sans description.
 
 ## A quoi sert ce fichier
 
@@ -11,7 +11,7 @@ Liste de tous les fichiers de docs/00_IA (le dossier des directives pour les IA)
 
 | Fichier | Qui s'en sert | Son but | Quand le lire | Cite dans CLAUDE.md | Prod |
 |---|---|---|---|---|---|
-| [IA_CONTEXT_BASE.md](00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md) | Claude (c'est son CLAUDE.md local), Hermes et toute IA du projet ; Eric pour relire les regles. Tenu identique en 3 emplacements (voir son en-tete) | Directives IA completes : regles de codage YAML, nomenclature, hierarchie visuelle, arborescences, protocoles, regle de sauvegarde. Meme contenu que le CLAUDE.md local. | Quand une IA doit travailler dans le projet : c'est le contexte de base, les sous-contextes ci-dessous le completent. | oui | DIFFERENT de la prod |
+| [IA_CONTEXT_BASE.md](00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md) | Claude (c'est son CLAUDE.md local), Hermes et toute IA du projet ; Eric pour relire les regles. Tenu identique en 3 emplacements (voir son en-tete) | Directives IA completes : regles de codage YAML, nomenclature, hierarchie visuelle, arborescences, protocoles, regle de sauvegarde. Meme contenu que le CLAUDE.md local. | Quand une IA doit travailler dans le projet : c'est le contexte de base, les sous-contextes ci-dessous le completent. | oui | OK (MD5 identique) |
 
 ## Sous-contextes (00_SOUS_CONTEXT_IA)
 
@@ -19,15 +19,15 @@ Un dossier par fichier. Chargés a la demande : Claude ne les lit que si la tach
 
 | Fichier | Qui s'en sert | Son but | Quand le lire | Cite dans CLAUDE.md | Prod |
 |---|---|---|---|---|---|
-| [IA_ARBO_DETAIL.md](00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md) | Claude, via /update-arbo et /histo (etape 6) | Arborescences completes local, prod et GitHub avec les comptages de fichiers, URLs raw GitHub. | Audit de fichiers, synchro GitHub, recherche d'un fichier en prod, verification de l'arborescence locale. | oui | DIFFERENT de la prod |
-| [IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md](00_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md) | Claude, en mode expert audit energetique | Prompt expert : caracteristiques du logement, equipements, methodes d'analyse, missions et format du rapport d'audit conso et thermique. | Audit de consommation, analyse DUT par piece, efficacite isolation/volets/rideaux, ecart entre la theorie des YAML et les logs reels. | oui | DIFFERENT de la prod |
-| [IA_AUTOMATIONS_NOTIFS.md](00_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/IA_AUTOMATIONS_NOTIFS.md) | Claude, pour ecrire ou modifier des automations et des notifications | Regles de codage des automations et referentiel des notifications de la prod (canaux, titres, messages, fichiers log). | Creation ou modification d'une automation, ecriture d'un message notify, script HA. | oui | DIFFERENT de la prod |
-| [IA_CARTE_EMPLACEMENTS.md](00_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md) | Claude et les skills qui copient ou comparent des fichiers (histo, ha-push-yaml, ha-push-docs, ha-trigul...) | Carte unique des fichiers presents a plusieurs emplacements (local, prod racine, prod miroir docs, GitHub racine et docs/) et regles de correspondance ; script de controle Verif_emplacements.py. | Avant un push de config, de GLOBAL_INDEX_REPO ou de README, ou un controle local / prod / GitHub. | non | DIFFERENT de la prod |
+| [IA_ARBO_DETAIL.md](00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md) | Claude, via /update-arbo et /histo (etape 6) | Arborescences completes local, prod et GitHub avec les comptages de fichiers, URLs raw GitHub. | Audit de fichiers, synchro GitHub, recherche d'un fichier en prod, verification de l'arborescence locale. | oui | OK (MD5 identique) |
+| [IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md](00_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md) | Claude, en mode expert audit energetique | Prompt expert : caracteristiques du logement, equipements, methodes d'analyse, missions et format du rapport d'audit conso et thermique. | Audit de consommation, analyse DUT par piece, efficacite isolation/volets/rideaux, ecart entre la theorie des YAML et les logs reels. | oui | OK (MD5 identique) |
+| [IA_AUTOMATIONS_NOTIFS.md](00_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/IA_AUTOMATIONS_NOTIFS.md) | Claude, pour ecrire ou modifier des automations et des notifications | Regles de codage des automations et referentiel des notifications de la prod (canaux, titres, messages, fichiers log). | Creation ou modification d'une automation, ecriture d'un message notify, script HA. | oui | OK (MD5 identique) |
+| [IA_CARTE_EMPLACEMENTS.md](00_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md) | Claude et les skills qui copient ou comparent des fichiers (histo, ha-push-yaml, ha-push-docs, ha-trigul...) | Carte unique des fichiers presents a plusieurs emplacements (local, prod racine, prod miroir docs, GitHub racine et docs/) et regles de correspondance ; script de controle Verif_emplacements.py. | Avant un push de config, de GLOBAL_INDEX_REPO ou de README, ou un controle local / prod / GitHub. | non | OK (MD5 identique) |
 | [IA_CMD_TERMINAL_HA.md](00_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA/IA_CMD_TERMINAL_HA.md) | Claude et Eric, pour les commandes a lancer sur HA | Commandes terminal HA : commande tree prod, audits MD5, sauvegarde git vers GitHub, logs, chemins /homeassistant/. | Lancer un audit ou un backup, lire un log, retrouver un chemin /homeassistant/. | oui | OK (MD5 identique) |
-| [IA_INDEX_AUTOMATIONS.md](00_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/IA_INDEX_AUTOMATIONS.md) | Claude, pour tenir l'index des automations | Comment les automations sont indexees (index genere et resume de GLOBAL_INDEX_REPO), arborescence locale, comptage par categorie, procedure de mise a jour. | Ajout, suppression ou renommage d'une automation, regeneration de l'index. | oui | DIFFERENT de la prod |
-| [IA_INDEX_NAVIGATION.md](00_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/IA_INDEX_NAVIGATION.md) | Claude, pour tenir l'index du dashboard | Comment la navigation du dashboard est indexee (index genere et section 02 de GLOBAL_INDEX_REPO), arborescence, chemins GitHub, limites connues. | Ajout d'une vignette ou d'une page, mapping des entites vers leurs fichiers sources. | oui | DIFFERENT de la prod |
+| [IA_INDEX_AUTOMATIONS.md](00_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/IA_INDEX_AUTOMATIONS.md) | Claude, pour tenir l'index des automations | Comment les automations sont indexees (index genere et resume de GLOBAL_INDEX_REPO), arborescence locale, comptage par categorie, procedure de mise a jour. | Ajout, suppression ou renommage d'une automation, regeneration de l'index. | oui | OK (MD5 identique) |
+| [IA_INDEX_NAVIGATION.md](00_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/IA_INDEX_NAVIGATION.md) | Claude, pour tenir l'index du dashboard | Comment la navigation du dashboard est indexee (index genere et section 02 de GLOBAL_INDEX_REPO), arborescence, chemins GitHub, limites connues. | Ajout d'une vignette ou d'une page, mapping des entites vers leurs fichiers sources. | oui | OK (MD5 identique) |
 | [IA_INTEGRATIONS_CARTES.md](00_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md) | Claude, pour valider un YAML de dashboard | Referentiel des integrations HA (HACS, core, add-ons), des cartes du dashboard et de la palette de couleurs. | YAML dashboard a valider, type custom:* inconnu, integration manquante, nouvelle carte a ajouter. | oui | OK (MD5 identique) |
-| [IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md](00_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md) | Claude et Hermes (qui s'aligne dessus) pour nommer les dossiers et fichiers de docs ; Eric pour valider les regles | Regles de nommage des repertoires et des fichiers du dossier docs (poles, abreviations, accents, niveaux, releve des ecarts a renommer). Copie du maitre historique/IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md ; statut brouillon a valider par Eric. | Avant de creer, renommer ou deplacer un fichier ou un dossier de docs ; pour savoir quels noms sont encore en ecart. | oui | DIFFERENT de la prod |
+| [IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md](00_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md) | Claude et Hermes (qui s'aligne dessus) pour nommer les dossiers et fichiers de docs ; Eric pour valider les regles | Regles de nommage des repertoires et des fichiers du dossier docs (poles, abreviations, accents, niveaux, releve des ecarts a renommer). Copie du maitre historique/IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md ; statut brouillon a valider par Eric. | Avant de creer, renommer ou deplacer un fichier ou un dossier de docs ; pour savoir quels noms sont encore en ecart. | oui | OK (MD5 identique) |
 | [IA_P4_PRESENCE.md](00_SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md) | Claude, pour les automations et messages qui dependent de la presence | Referentiel de la presence : logique de sensor.groupe (automatisation, reseau cible) et de sensor.presence (format dans les notifications). | Automation clim, message notify avec presence, logique groupe WiFi. | oui | OK (MD5 identique) |
 | [IA_SKILLS_INVENTAIRE.md](00_SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE/IA_SKILLS_INVENTAIRE.md) | Eric, et Claude ou Hermes pour aligner les skills | Inventaire des skills Hermes regroupees par sujet, avec les skills communes a Claude en face a face. | Savoir quelle skill existe, aligner les skills de Claude et d'Hermes. Pas dans la table de lecture de CLAUDE.md, pas pousse en prod. | non | non pousse (voulu) |
 
@@ -37,9 +37,9 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 
 | Dossier | Nombre de sauvegardes |
 |---|---|
-| [00_IA (racine)](./) | 9 |
-| [00_IA_CONTEXT_BASE](00_IA_CONTEXT_BASE/) | 36 |
-| [00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 15 |
+| [00_IA (racine)](./) | 10 |
+| [00_IA_CONTEXT_BASE](00_IA_CONTEXT_BASE/) | 37 |
+| [00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 17 |
 | [00_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE](00_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/) | 7 |
 | [00_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS](00_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/) | 5 |
 | [00_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS](00_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/) | 6 |

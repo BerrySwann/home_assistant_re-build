@@ -32,6 +32,7 @@ EXCEPTIONS_TXT = [
 
     "fichiers .txt .png .jpg .jpeg .gif .webp .ico .pyc presents en local + prod mais absents de GitHub : ignores par le .gitignore du depot (sauf les .txt de notifs/, versionnes depuis le 2026-10-18)",
     "fichiers verrou d editeur #...# presents en prod seule : ignores par le .gitignore, jamais sur GitHub (decide par Eric le 2026-10-18)",
+    "dossiers XX_ (local seul voulu par Eric, decide le 2026-10-25) : jamais en prod, jamais sur GitHub ; comptes a part dans la ligne LOCAL SEUL VOULU, jamais en anomalie",
     "dossier modifs/ (journaux des agents) : ignore aux 3 niveaux, comme l audit MD5 docs cote HA",
 ]
 
@@ -96,6 +97,8 @@ def attendu(rel, origin):
     name = low.rsplit('/', 1)[-1]
     if origin == 'L' and '.bak' in name:
         return 'sauvegarde locale'
+    if origin == 'L' and any(c.startswith('xx_') for c in low.split('/')):
+        return 'LOCAL SEUL VOULU (dossier XX_)'
     if origin == 'L' and '_archive_' in name:
         return 'archive locale'
     if (origin == 'L' and '/dashboard_complet/' in '/' + low and name.startswith('dashboard_')
@@ -477,6 +480,8 @@ def main():
         if cnt.get(v):
             A('   %-48s : %d' % (v, cnt[v]))
     A('ecarts attendus (a part)        : %d' % n_att)
+    n_xx = sum(1 for a_ in attendus if a_[1].startswith('LOCAL SEUL VOULU'))
+    A('LOCAL SEUL VOULU (XX_)           : %d fichiers (dossiers XX_, jamais en prod ni sur GitHub, inclus dans les ecarts attendus)' % n_xx)
     A('')
     A('== 1. A TRAITER ==')
     A('%-10s | %-10s | %-10s | %-5s | %-10s | %s' % ('R (GitHub)', 'L (local)', 'P (prod)', 'R L P', 'DIFF', 'FICHIER'))

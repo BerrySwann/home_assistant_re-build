@@ -27,6 +27,12 @@ Pousse uniquement les fichiers `*.md` de documentation vers le partage Samba `H:
 
 ## WORKFLOW
 
+### AVANT TOUT PUSH - Controle des dossiers XX_ (decide par Eric le 2026-10-25 21:19, obligatoire)
+
+Les dossiers `XX_` n'existent qu'en local et ne doivent jamais se perdre. Avant le premier calcul de ce skill, ET une seconde fois juste apres le push (controle avant/apres), lancer :
+`python -I -X utf8 "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Check_XX_presents\Check_XX_presents.py"`
+Il refuse aussi tout dossier XX_ present en prod (ALERTE). Il compare les dossiers XX_ et leurs fichiers au manifeste `XX_manifest.json` (meme dossier). `RESULTAT : OK` = on continue. Une ALERTE (dossier ou fichier manquant) = ne RIEN pousser, prevenir Eric, restaurer depuis `TEMPO\XX_sauvegarde_2026-10-25` seulement sur son ordre. Les XX_ ne se poussent jamais en prod. Le manifeste ne se met a jour (`--maj`) que sur ordre d'Eric.
+
 ### 1 - MD5 local de tous les *.md
 ```powershell
 $base = "C:\Users\Berry Swann\Documents\ReBuild"
@@ -101,5 +107,5 @@ $toPush | ForEach-Object {
 3. ***.yaml -> jamais dans ce workflow.**
 4. **secrets.yaml -> interdit absolu.**
 5. **Local = verite absolue** : en cas de conflit, le local l'emporte.
-6. **DEPENDANCES_GLOBALES.md** toujours inclus s'il figure dans le diff.
+6. **DEPENDANCES_GLOBALES.md** : LOCAL SEUL (dossier XX_docs_MD_system, decide par Eric le 2026-10-25 21:25). Jamais pousse en prod ; s'il apparait dans un diff, l'ignorer et le signaler.
 7. **Regle CLAUDE.md du 2026-10-13** : un push met a jour le `.md` du fichier pousse. Ici les fichiers pousses SONT des `.md` : verifier qu'ils ont ete mis a jour en local avant le push (c'est le travail de `ha-push-yaml` et `ha-push-docs` en amont). Ne jamais modifier un `.md` directement sur H:\ : local d'abord, avec sauvegarde.

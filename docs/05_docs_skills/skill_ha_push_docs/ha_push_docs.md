@@ -28,6 +28,12 @@ Pousse uniquement les fichiers dont le MD5 differe de la prod.
 
 ## WORKFLOW
 
+### AVANT TOUT PUSH - Controle des dossiers XX_ (decide par Eric le 2026-10-25 21:19, obligatoire)
+
+Les dossiers `XX_` n'existent qu'en local et ne doivent jamais se perdre. Avant le premier calcul de ce skill, ET une seconde fois juste apres le push (controle avant/apres), lancer :
+`python -I -X utf8 "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Check_XX_presents\Check_XX_presents.py"`
+Il refuse aussi tout dossier XX_ present en prod (ALERTE). Il compare les dossiers XX_ et leurs fichiers au manifeste `XX_manifest.json` (meme dossier). `RESULTAT : OK` = on continue. Une ALERTE (dossier ou fichier manquant) = ne RIEN pousser, prevenir Eric, restaurer depuis `TEMPO\XX_sauvegarde_2026-10-25` seulement sur son ordre. Les XX_ ne se poussent jamais en prod. Le manifeste ne se met a jour (`--maj`) que sur ordre d'Eric.
+
 ### 1 - MD5 local de tous les fichiers (*.md + *.yaml dashboard)
 ```powershell
 $base = "C:\Users\Berry Swann\Documents\ReBuild"
@@ -170,7 +176,7 @@ Un seul fichier source, DEUX destinations en prod :
 3. **secrets.yaml -> interdit absolu.**
 4. **Local = verite absolue** : en cas de conflit, le local l'emporte.
 5. **Dry-run obligatoire** avant toute suppression de doublons Dashboard.
-6. **DEPENDANCES_GLOBALES.md** toujours inclus s'il figure dans le diff.
+6. **DEPENDANCES_GLOBALES.md** : LOCAL SEUL (dossier XX_docs_MD_system, decide par Eric le 2026-10-25 21:25). Jamais pousse en prod ; s'il apparait dans un diff, l'ignorer et le signaler.
 7. **Jamais de sauvegarde creee sur H: ni sur D:** (regle du 2026-10-08). Avant de modifier un fichier de documentation, on le modifie en LOCAL apres en avoir fait une copie a cote de lui, `fichier.ext.bak_AAAA_MM_JJ_HHhMMmSSs` (10 max le jour meme, 3 `.bak_AAAA_MM_JJ` max pour les jours precedents, menage fait par /histo, suppressions vers la corbeille Windows). Voir CLAUDE.md, section REGLE DE SAUVEGARDE.
 8. **Les sauvegardes locales ne sont jamais poussees** : les fichiers `*.bak_...` ne sont pas pris par les filtres `*.md` / `*.yaml`. Si un fichier `.md` au nom date (`_AAAA-MM-JJ_HHhmm.md` ou `_AAAA-MM-JJ.md`) ou un dossier `_ARCHIVE` apparait dans le diff, c'est une sauvegarde ou une archive locale : ne pas le pousser et le signaler.
 9. **Dashboard_COMPLET : ne jamais y toucher** (decide par Eric le 2026-10-11). Ce dossier contient les mises a jour au fil de l'eau du dashboard complet, il ne se vide jamais. Ce skill l'exclut du calcul MD5/push (etape 1) et du nettoyage de doublons (etape 5) : aucune copie, aucune suppression, aucun renommage, en local comme en prod. Meme si la demande dit "vire les vieux yaml" ou "nettoie les anciens yaml Dashboard", ce dossier est ignore et signale. Le seul circuit qui s'en occupe est l'etape 5B de /histo.
