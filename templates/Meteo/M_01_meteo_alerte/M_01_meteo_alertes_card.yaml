@@ -177,6 +177,7 @@
       icon: mdi:alert-outline
 
 # annotations_log:
-# - 2026-10-15 : repli binary_sensor.meteoalarm supprimé (at, ev, awareness_level, urgency/Date)
-# - [L39,60,81,102,123,174,195,216] unique_id: préfixe 'sensor.' supprimé (8x)
+# - 2026-10-15 21h26 : repli binary_sensor.meteoalarm supprimé (at, ev, awareness_level, urgency/Date) ; 267 -> 182 lignes, MD5 d847fad5 -> 458d7e03 ; poussé dans H:\templates (identique), templates rechargés par Eric
+# - 2026-10-25 : annotations complétées (heure, lignes et MD5 du retrait du repli) ; aucun changement de code, MD5 du fichier modifié par ce seul ajout de commentaires
+# - [L39,60,81,102,123,174,195,216] unique_id: préfixe 'sensor.' supprimé (8x) ; date inconnue, antérieure au retrait du repli du 2026-10-15 (numéros de ligne d'avant ce retrait)
 #   Règle CLAUDE.md : unique_id ne doit PAS contenir 'sensor.' (slug seul).
