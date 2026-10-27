@@ -123,7 +123,7 @@ if git commit -m "$MSG" >/dev/null 2>&1; then
   NB_FILES="$(git show --pretty="" --name-only HEAD | grep -c . || true)"
   LISTE_FILES="$(git show --pretty="" --name-only HEAD | tr '
 ' ' ' || true)"
-  echo "📝 Commit créé: $MSG — $NB_FILES fichier(s): $LISTE_FILES" >> "$LOG"
+  echo "📝 Commit créé: $NB_FILES fichier(s) — $MSG — $LISTE_FILES" >> "$LOG"
 elif [[ "${1:-}" != "weekly" ]]; then
   AHEAD="$(git rev-list @{u}..HEAD --count 2>/dev/null || echo 0)"
   if [[ "$AHEAD" -gt 0 ]]; then
@@ -193,7 +193,7 @@ fi
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ LOG SUCCÈS & NOTIFICATION HA                                             │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-echo "✅ Backup GitHub OK: $MSG${NB_FILES:+ — $NB_FILES fichier(s)}" >> "$LOG"
+echo "✅ Backup GitHub OK: ${NB_FILES:+$NB_FILES fichier(s) — }$MSG" >> "$LOG"
 
 TOKEN_FILE="/config/.secrets/ha_token"
 if [[ -f "$TOKEN_FILE" ]]; then
