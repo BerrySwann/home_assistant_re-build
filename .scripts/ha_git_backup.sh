@@ -120,7 +120,10 @@ MSG="${MSG}${HA_VER:+ (HA ${HA_VER})}"
 # │ COMMIT                                                                   │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 if git commit -m "$MSG" >/dev/null 2>&1; then
-  echo "📝 Commit créé: $MSG" >> "$LOG"
+  NB_FILES="$(git show --pretty="" --name-only HEAD | grep -c . || true)"
+  LISTE_FILES="$(git show --pretty="" --name-only HEAD | tr '
+' ' ' || true)"
+  echo "📝 Commit créé: $MSG — $NB_FILES fichier(s): $LISTE_FILES" >> "$LOG"
 elif [[ "${1:-}" != "weekly" ]]; then
   AHEAD="$(git rev-list @{u}..HEAD --count 2>/dev/null || echo 0)"
   if [[ "$AHEAD" -gt 0 ]]; then
