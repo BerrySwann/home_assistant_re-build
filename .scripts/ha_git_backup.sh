@@ -193,7 +193,7 @@ fi
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ LOG SUCCÈS & NOTIFICATION HA                                             │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-echo "✅ Backup GitHub OK: $MSG" >> "$LOG"
+echo "✅ Backup GitHub OK: $MSG${NB_FILES:+ — $NB_FILES fichier(s)}" >> "$LOG"
 
 TOKEN_FILE="/config/.secrets/ha_token"
 if [[ -f "$TOKEN_FILE" ]]; then
