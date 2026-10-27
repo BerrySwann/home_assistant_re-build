@@ -1,7 +1,7 @@
 # GLOBAL INDEX IA
 
-> Fichier GENERE le 2026-10-25 21:20 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
-> 12 fichiers de contenu, 139 sauvegardes (.bak), 0 sans description.
+> Fichier GENERE le 2026-10-26 20:04 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
+> 12 fichiers de contenu, 104 sauvegardes (.bak), 0 sans description.
 
 ## A quoi sert ce fichier
 
@@ -37,9 +37,9 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 
 | Dossier | Nombre de sauvegardes |
 |---|---|
-| [00_IA (racine)](./) | 10 |
-| [00_IA_CONTEXT_BASE](00_IA_CONTEXT_BASE/) | 37 |
-| [00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 17 |
+| [00_IA (racine)](./) | 11 |
+| [00_IA_CONTEXT_BASE](00_IA_CONTEXT_BASE/) | 14 |
+| [00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 13 |
 | [00_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE](00_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/) | 7 |
 | [00_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS](00_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/) | 5 |
 | [00_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS](00_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/) | 6 |
@@ -47,7 +47,7 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 | [00_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS](00_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/) | 15 |
 | [00_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION](00_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/) | 12 |
 | [00_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES](00_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/) | 3 |
-| [00_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS](00_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/) | 22 |
+| [00_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS](00_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/) | 13 |
 | [00_SOUS_CONTEXT_IA/IA_P4_PRESENCE](00_SOUS_CONTEXT_IA/IA_P4_PRESENCE/) | 1 |
 | [00_SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE](00_SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE/) | 3 |
 
