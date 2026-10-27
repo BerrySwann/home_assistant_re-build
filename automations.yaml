@@ -2953,3 +2953,24 @@
       target:
         entity_id: notify.nodon_complet_histo
   mode: single
+- id: '1793131130516'
+  alias: P3 BUREAU - Force Espace de loisirs Moniteur PC (3 x PLAY HUE)
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.moniteur_pc
+  conditions:
+  - condition: state
+    entity_id: switch.ecran_p_c_3_play_hue
+    state:
+    - 'on'
+  actions:
+  - action: light.toggle
+    metadata: {}
+    target:
+      entity_id:
+      - light.hue_play_1_pc_bureau
+      - light.hue_play_2_pc_bureau
+      - light.hue_play_3_pc_bureau
+    data: {}
+  mode: single
