@@ -1873,60 +1873,6 @@
     target:
       entity_id: sensor.bureau_etat
   mode: restart
-- id: '1775331547996'
-  alias: P3_BUREAU - Forcer Play ON si PC tourne
-  description: Rallume les Hue Play à 25 % si elles sont éteintes manuellement alors
-    que la synchro PC est active
-  triggers:
-  - entity_id: light.hue_play_1_pc_bureau
-    id: off_hue_play_1_pc_bureau
-    to: 'off'
-    trigger: state
-  - entity_id: light.hue_play_2_pc_bureau
-    id: off_hue_play_2_pc_bureau
-    to: 'off'
-    trigger: state
-  - entity_id: light.hue_play_3_pc_bureau
-    id: off_hue_play_3_pc_bureau
-    to: 'off'
-    trigger: state
-  conditions:
-  - condition: state
-    entity_id: binary_sensor.moniteur_pc
-    state: 'on'
-  actions:
-  - choose:
-    - alias: PLAY 1
-      conditions:
-      - condition: trigger
-        id: off_hue_play_1_pc_bureau
-      sequence:
-      - action: light.turn_on
-        data:
-          brightness_pct: 25
-        target:
-          entity_id: light.hue_play_1_pc_bureau
-    - alias: PLAY 2
-      conditions:
-      - condition: trigger
-        id: off_hue_play_2_pc_bureau
-      sequence:
-      - action: light.turn_on
-        data:
-          brightness_pct: 25
-        target:
-          entity_id: light.hue_play_2_pc_bureau
-    - alias: PLAY 3
-      conditions:
-      - condition: trigger
-        id: off_hue_play_3_pc_bureau
-      sequence:
-      - action: light.turn_on
-        data:
-          brightness_pct: 25
-        target:
-          entity_id: light.hue_play_3_pc_bureau
-  mode: parallel
 - id: '1775331623943'
   alias: P3_BUREAU_ACTIVATION_ECRAN_SYNCHRO
   description: 'Synchronise l''état de l''écran avec l''activité du PC bureau. Rallume
@@ -2954,23 +2900,35 @@
         entity_id: notify.nodon_complet_histo
   mode: single
 - id: '1793131130516'
-  alias: P3 BUREAU - Force Espace de loisirs Moniteur PC (3 x PLAY HUE)
-  description: ''
+  alias: P3 BUREAU - Espace de loisirs actif, garder les indicateurs allumes
+  description: Hue Sync demarre seul au boot du PC. Tant que l'espace de loisirs tourne, les lampes eclairent et HA doit les voir allumees.
   triggers:
   - trigger: state
+    entity_id:
+    - light.hue_play_1_pc_bureau
+    - light.hue_play_2_pc_bureau
+    - light.hue_play_3_pc_bureau
+    to: 'off'
+  - trigger: state
+    entity_id:
+    - light.hue_play_1_pc_bureau
+    - light.hue_play_2_pc_bureau
+    - light.hue_play_3_pc_bureau
+    attribute: mode
+    to: streaming
+  - trigger: state
     entity_id: binary_sensor.moniteur_pc
+    to: 'on'
+  - trigger: homeassistant
+    event: start
   conditions:
-  - condition: state
-    entity_id: switch.ecran_p_c_3_play_hue
-    state:
-    - 'on'
+  - condition: template
+    value_template: "{{ state_attr('light.hue_play_1_pc_bureau','mode') == 'streaming' or state_attr('light.hue_play_2_pc_bureau','mode') == 'streaming' or state_attr('light.hue_play_3_pc_bureau','mode') == 'streaming' }}"
   actions:
-  - action: light.toggle
-    metadata: {}
+  - action: light.turn_on
     target:
       entity_id:
       - light.hue_play_1_pc_bureau
       - light.hue_play_2_pc_bureau
       - light.hue_play_3_pc_bureau
-    data: {}
-  mode: single
+  mode: restart
