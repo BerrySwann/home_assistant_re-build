@@ -130,7 +130,7 @@
 ⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_timers/P1_Timer_10mn/P1_timer_10mn_soufflant_SDB.yaml">P1_timer_10mn_soufflant_SDB.yaml</a><br>
 ⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_timers/P1_Timer_2h/P1_timer_2h_seche_serviettes_SDB.yaml">P1_timer_2h_seche_serviettes_SDB.yaml</a><br>
 ⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_timers/P1_Timer_10mn/P1_timer_10mn_seche_serviettes_SDB.yaml">P1_timer_10mn_seche_serviettes_SDB.yaml</a><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/Timers_SDB_soufflant_et_seche_serviettes/Timers_SDB_soufflant_et_seche_serviettes.md">Documentation timers SDB</a>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_Timers_SDB_soufflant_et_seche_serviettes/P1_XX_Timers_SDB_soufflant_et_seche_serviettes.md">Documentation timers SDB</a>
 </blockquote>
 </details>
 
@@ -2745,7 +2745,7 @@ le total ~49.
 <details>
 <summary>📄 <b>Page</b></summary>
 <blockquote>
-📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L5C3_MARIADB/L5C3_MARIADB_02_Page_principale/L5C3_Page_MARIADB_principale.md">Doc Page</a><br>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L5C3_MARIADB/L5C3_MARIADB_02_Page_mariadb/L5C3_Page_MARIADB_mariadb.md">Doc Page</a><br>
 ⚙️ <a href="docs/02_docs_dashboard/02_dashboard_docs_YAML/L5C3_MARIADB/L5C3_MARIADB_02_Page_mariadb/L5C3_Page_MARIADB_mariadb.yaml">YAML Page</a>
 
 
@@ -3144,7 +3144,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>[02-Backup] Git daily (03:00)</b></summary>
 <blockquote>
 <i>Backup natif HA + push Git quotidien à 03h00</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/Backup_ha_GitHub/Git_daily/Git_daily.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/Backup_ha_GitHub/02_Backup_git_daily_03_00/02_Backup_git_daily_03_00.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/Backup_ha_GitHub/02_Backup_git_daily_03_00/02_Backup_git_daily_03_00.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 
@@ -3165,7 +3165,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <details>
 <summary>✅ <b>[04-Backup] Git push manuel</b></summary>
 <blockquote>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/Backup_ha_GitHub/Git_push_manuel/Git_push_manuel.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/Backup_ha_GitHub/04_Backup_git_push_manuel/04_Backup_git_push_manuel.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/Backup_ha_GitHub/04_Backup_git_push_manuel/04_Backup_git_push_manuel.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
@@ -3181,7 +3181,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <details>
 <summary>✅ <b>[05-Backup] Git push weekly manuel</b></summary>
 <blockquote>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/Backup_ha_GitHub/Git_push_weekly_manuel/Git_push_weekly_manuel.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/Backup_ha_GitHub/05_Backup_git_push_weekly_manuel/05_Backup_git_push_weekly_manuel.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/Backup_ha_GitHub/05_Backup_git_push_weekly_manuel/05_Backup_git_push_weekly_manuel.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
@@ -3888,7 +3888,7 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>P3_BUREAU - BOUTON RODRET TOGGLE BLANCHES</b></summary>
 <blockquote>
 <i>Alterne l'allumage des 2 lampes blanches via MQTT (Mode Fainéant)</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P3_Eclairage/Bureau_rodret_toggle_blanches/Bureau_rodret_toggle_blanches.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P3_Eclairage/P3_Bureau_bouton_rodret_toggle_blanches/P3_Bureau_bouton_rodret_toggle_blanches.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P3_Eclairage/P3_Bureau_bouton_rodret_toggle_blanches/P3_Bureau_bouton_rodret_toggle_blanches.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 📡`mqtt`<br>
 <br><details>
@@ -3907,7 +3907,7 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES</b></summary>
 <blockquote>
 <i>Assure que les deux lampes de bureau (1 et 2) sont synchronisées si</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P3_Eclairage/Bureau_watchdog_synchro_lampes/Bureau_watchdog_synchro_lampes.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P3_Eclairage/P3_Bureau_watchdog_synchronisation_lampes_blanches/P3_Bureau_watchdog_synchronisation_lampes_blanches.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P3_Eclairage/P3_Bureau_watchdog_synchronisation_lampes_blanches/P3_Bureau_watchdog_synchronisation_lampes_blanches.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
@@ -4017,7 +4017,7 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>AUTO. ENERGIE. Basculement Tarif HC/HP - Genelec Appart</b></summary>
 <blockquote>
 <i>Bascule le tarif des 4 UM Genelec Appart HP/HC aux heures de transition</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/Tarif_hc_hp/Basculement_tarif_hphc/Basculement_tarif_hphc.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/Tarif_hc_hp/Auto_energie_basculement_tarif_hc_hp_genelec_appart/Auto_energie_basculement_tarif_hc_hp_genelec_appart.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/Tarif_hc_hp/Auto_energie_basculement_tarif_hc_hp_genelec_appart/Auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 
@@ -4028,7 +4028,7 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>Log Écart Linky vs Nodon</b></summary>
 <blockquote>
 <i>Enregistre l'écart à 23:59 pile</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P0_Energie/Log_ecart_linky_nodon/Log_ecart_linky_nodon.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P0_Energie/Log_ecart_linky_vs_nodon/Log_ecart_linky_vs_nodon.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P0_Energie/Log_ecart_linky_vs_nodon/Log_ecart_linky_vs_nodon.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⏰`time`<br>
 <br><details>
@@ -4083,7 +4083,7 @@ Ajouté : <code>light.hue_smart_eco_tv_chambre</code> (absent de la liste préc�
 <summary>✅ <b>VEILLE GITHUB - Nouvelle release détectée</b></summary>
 <blockquote>
 <i>Surveille les flux Feedreader GitHub (HA core + HACS + cartes HACS).</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/_Sans_categorie/Veille_GitHub_releases/Veille_GitHub_releases.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/_Sans_categorie/Veille_GitHub_nouvelle_release_detectee/Veille_GitHub_nouvelle_release_detectee.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/_Sans_categorie/Veille_GitHub_nouvelle_release_detectee/Veille_GitHub_nouvelle_release_detectee.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> ⚡`event`<br>
 
@@ -4350,7 +4350,7 @@ Mise à jour 2026-10-12 : ces 4 scripts existent toujours dans la prod (scripts.
 <details>
 <summary>🗄️ ARCHIVÉ (pré-refactor 2026-06) - J 1-1 / J 1-2 / J 1-3 &nbsp;|&nbsp; Routeurs CLIM ON/OFF INTELLIGENT (Salon / Bureau / Chambre)</summary>
 <blockquote>
-📄 <a href="docs/04_docs_scripts/04_docs_scripts_YAML_MD/Scripts_clim_on_off/Scripts_clim_on_off.md">Doc</a><br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_YAML_MD/Climatisation/Scripts_clim_on_off/Scripts_clim_on_off.md">Doc</a><br>
 Scripts (obsolètes, non présents dans 04_docs_scripts_YAML/) : <code>j_1_1_salon_clim_on_off_intelligent</code> · <code>j_1_2_bureau_clim_on_off_intelligent</code> · <code>j_1_3_chambre_clim_on_off_intelligent</code>
 YAML sources (extraits de la prod le 2026-10-12) : <a href="docs/04_docs_scripts/04_docs_scripts_YAML/Climatisation/J_1_1_salon_clim_on_off_intelligent/J_1_1_salon_clim_on_off_intelligent.yaml">j_1_1</a> · <a href="docs/04_docs_scripts/04_docs_scripts_YAML/Climatisation/J_1_2_bureau_clim_on_off_intelligent/J_1_2_bureau_clim_on_off_intelligent.yaml">j_1_2</a> · <a href="docs/04_docs_scripts/04_docs_scripts_YAML/Climatisation/J_1_3_chambre_clim_on_off_intelligent/J_1_3_chambre_clim_on_off_intelligent.yaml">j_1_3</a>. Les 3 scripts existent toujours dans la prod ; aucune automation ne les appelle.<br>
 </blockquote>
@@ -4359,14 +4359,14 @@ YAML sources (extraits de la prod le 2026-10-12) : <a href="docs/04_docs_scripts
 <details>
 <summary>🗄️ ARCHIVÉ (pré-refactor 2026-06) - J 2-0 &nbsp;|&nbsp; SECU - ARRÊT CLIM PROTÉGÉ</summary>
 <blockquote>
-📄 <a href="docs/04_docs_scripts/04_docs_scripts_YAML_MD/Script_j2_0_secu_arret_clim/Script_j2_0_secu_arret_clim.md">Doc</a><br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_YAML_MD/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.md">Doc</a><br>
 Script (obsolète, non présent dans 04_docs_scripts_YAML/) : <code>j_2_0_secu_arret_clim_protege</code>
 YAML source (extrait de la prod le 2026-10-12) : <a href="docs/04_docs_scripts/04_docs_scripts_YAML/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.yaml">j_2_0_secu_arret_clim_protege.yaml</a>. Le script existe toujours dans la prod ; aucune automation ne l'appelle.<br>
 
 <details>
 <summary><code>sdb_soufflant_demarrer.yaml</code> &nbsp;|&nbsp; Soufflant SDB : demarrage 2000 W + verrou 30 s</summary>
 <blockquote>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/SDB_soufflant_specification_2026/SDB_soufflant_specification_2026.md">Doc</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_SDB_soufflant_specification_2026/P1_XX_SDB_soufflant_specification_2026.md">Doc</a><br>
 ⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_YAML/Soufflant_SDB/SDB_soufflant_demarrer/SDB_soufflant_demarrer.yaml">YAML source</a><br>
 Appelé par l'automation H (section 03). Refuse de démarrer en mode cool (sensor.mode_ete_hiver, depuis le 2026-10-07 ; remplace la garde 25 degrés) (première ligne, avant le verrou). Pose le verrou, alimente la prise, 2 impulsions 1000 W,
 passe le climate en heat, et éteint l'interrupteur si l'appareil tourne encore après 60 minutes.
@@ -4376,7 +4376,7 @@ passe le climate en heat, et éteint l'interrupteur si l'appareil tourne encore 
 <details>
 <summary><code>sdb_soufflant_arreter.yaml</code> &nbsp;|&nbsp; Soufflant SDB : resistances, ventilateur 1 min 30, prise</summary>
 <blockquote>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/SDB_soufflant_specification_2026/SDB_soufflant_specification_2026.md">Doc</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_SDB_soufflant_specification_2026/P1_XX_SDB_soufflant_specification_2026.md">Doc</a><br>
 ⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_YAML/Soufflant_SDB/SDB_soufflant_arreter/SDB_soufflant_arreter.yaml">YAML source</a><br>
 Appelé par l'automation H (section 03). Refusé pendant le verrou de démarrage. Remet le climate
 sur off à la fin, après la coupure de la prise.
