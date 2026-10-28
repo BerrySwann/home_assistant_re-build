@@ -700,7 +700,7 @@ cards:
             cards:
               - type: custom:bar-card
                 entities:
-                  - entity: sensor.eclairs_horaire
+                  - entity: sensor.eclair_horaire
                     name: Heure
                 icon: mdi:flash-alert
                 direction: up
@@ -757,7 +757,7 @@ cards:
                     }
               - type: custom:bar-card
                 entities:
-                  - entity: sensor.eclairs_quotidien
+                  - entity: sensor.eclair_quotidien
                     name: Jour
                 icon: mdi:flash-alert
                 direction: up
@@ -814,7 +814,7 @@ cards:
                     }
               - type: custom:bar-card
                 entities:
-                  - entity: sensor.eclairs_hebdomadaire
+                  - entity: sensor.eclair_hebdomadaire
                     name: Semaine
                 icon: mdi:flash-alert
                 direction: up
@@ -871,7 +871,7 @@ cards:
                     }
               - type: custom:bar-card
                 entities:
-                  - entity: sensor.eclairs_mensuel
+                  - entity: sensor.eclair_mensuel
                     name: Mois
                 icon: mdi:flash-alert
                 direction: up
@@ -928,7 +928,7 @@ cards:
                     }
               - type: custom:bar-card
                 entities:
-                  - entity: sensor.eclairs_annuel
+                  - entity: sensor.eclair_annuel
                     name: Année
                 icon: mdi:flash-alert
                 direction: up
@@ -1130,7 +1130,7 @@ cards:
           bottom_right:
             label: Compteur d'éclairs
             unit: " ↯"
-            entity: sensor.eclairs_quotidien
+            entity: sensor.eclair_quotidien
             label_text_size: 40
         actions:
           top_left:
@@ -1234,7 +1234,7 @@ cards:
             legend_value: true
             extremas: true
         series:
-          - entity: sensor.eclairs_quotidien
+          - entity: sensor.eclair_quotidien
             yaxis_id: Eclaires
             name: Nb éclairs ce jour
             color: gainsboro
@@ -1293,7 +1293,7 @@ cards:
             legend_value: true
             extremas: true
         series:
-          - entity: sensor.eclairs_mensuel
+          - entity: sensor.eclair_mensuel
             yaxis_id: Eclaires
             name: Nb éclairs ce mois
             color: gainsboro

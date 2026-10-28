@@ -87,7 +87,7 @@ fi
 # tournait entre la creation du nouveau fichier et la suppression de l'ancien (fantomes GitHub)
 git add -A >/dev/null 2>&1
 
-CHANGED="$(git diff --cached --name-only | grep -E '\.(ya?ml|md|sh)$' | sort -u || true)"
+CHANGED="$(git diff --cached --name-only | grep -E '\.(ya?ml|md|sh|txt)$' | sort -u || true)"
 AHEAD="$(git rev-list @{u}..HEAD --count 2>/dev/null || echo 0)"
 
 if [[ -z "$CHANGED" && "$AHEAD" -eq 0 ]]; then
@@ -120,7 +120,10 @@ MSG="${MSG}${HA_VER:+ (HA ${HA_VER})}"
 # │ COMMIT                                                                   │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 if git commit -m "$MSG" >/dev/null 2>&1; then
-  echo "📝 Commit créé: $MSG" >> "$LOG"
+  NB_FILES="$(git show --pretty="" --name-only HEAD | grep -c . || true)"
+  LISTE_FILES="$(git show --pretty="" --name-only HEAD | tr '
+' ' ' || true)"
+  echo "📝 Commit créé: $NB_FILES fichier(s) — $MSG — $LISTE_FILES" >> "$LOG"
 elif [[ "${1:-}" != "weekly" ]]; then
   AHEAD="$(git rev-list @{u}..HEAD --count 2>/dev/null || echo 0)"
   if [[ "$AHEAD" -gt 0 ]]; then
@@ -190,7 +193,7 @@ fi
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ LOG SUCCÈS & NOTIFICATION HA                                             │
 # ╰──────────────────────────────────────────────────────────────────────────╯
-echo "✅ Backup GitHub OK: $MSG" >> "$LOG"
+echo "✅ Backup GitHub OK: ${NB_FILES:+$NB_FILES fichier(s) — }$MSG" >> "$LOG"
 
 TOKEN_FILE="/config/.secrets/ha_token"
 if [[ -f "$TOKEN_FILE" ]]; then

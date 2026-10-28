@@ -1,6 +1,6 @@
 # GLOBAL_INDEX_AUTOMATIONS.md - index des automatisations
 
-Fichier GENERE le 2026-10-25 19:36 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-10-27 21:56 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et categorie), YAML locaux 03_docs_automations_YAML (id local et commentaires), fiches 03_docs_automations_MD. Les liens sont relatifs a ce fichier.
 
@@ -9,10 +9,10 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 - Automatisations en prod (automations.yaml) : 63
 - YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS_YAML_ORIGINAL) : 67
 - Fiches .md retenues : 74 dont 55 rattachees a un YAML
-- Automatisations de la prod sans YAML local : 0
-- Automatisations de la prod sans fiche rattachee : 7 ([00-Backup] Alerte si KO 15 min ; (A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00) ; Mettre à jour le temps du dernier impact de foudre ; (C) Notification température Up ou Down de (7h30 -> 21h00) ; (D) Notification température Up ou Down de (21h00 -> 7h30) ; C - SALLE DE BAIN : WATCHDOG SÉCURITÉ SOUFFLANT ; AUTO. ENERGIE. Basculement Tarif HC/HP — Genelec Appart)
+- Automatisations de la prod sans YAML local : 1 (P3 BUREAU - Espace de loisirs actif, garder les indicateurs allumes)
+- Automatisations de la prod sans fiche rattachee : 8 ([00-Backup] Alerte si KO 15 min ; (A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00) ; Mettre à jour le temps du dernier impact de foudre ; (C) Notification température Up ou Down de (7h30 -> 21h00) ; (D) Notification température Up ou Down de (21h00 -> 7h30) ; C - SALLE DE BAIN : WATCHDOG SÉCURITÉ SOUFFLANT ; AUTO. ENERGIE. Basculement Tarif HC/HP — Genelec Appart ; P3 BUREAU - Espace de loisirs actif, garder les indicateurs allumes)
 - Automatisations sans entity_id dans le registre HA : 0
-- YAML locaux absents de la prod ou sans id : 3 (voir section Hors prod)
+- YAML locaux absents de la prod ou sans id : 4 (voir section Hors prod)
 - Erreurs de lecture YAML : 0
 - Fiches non rattachees a un YAML (fiches d'operation, specifications, etc.) : 19
   - [03_docs_automations_MD/AUTOMATIONS/PROD_vs_REBUILD_DIFF.md](03_docs_automations_MD/AUTOMATIONS/PROD_vs_REBUILD_DIFF.md)
@@ -159,8 +159,8 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 
 | N | Alias | id prod | id local (ReBuild) | Entity HA | Documentation (md) | YAML source | Commentaire |
 |:--|:------|:--------|:-------------------|:----------|:-------------------|:------------|:------------|
-| 56 | P3_BUREAU - BOUTON RODRET TOGGLE BLANCHES | 1775331454560 | 1775331454560 | `automation.bureau_bouton_rodret_toggle_blanches` | [Bureau_rodret_toggle_blanches.md](03_docs_automations_MD/P3_Eclairage/Bureau_rodret_toggle_blanches/Bureau_rodret_toggle_blanches.md) | [P3_Bureau_bouton_rodret_toggle_blanches.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_bouton_rodret_toggle_blanches/P3_Bureau_bouton_rodret_toggle_blanches.yaml) |  |
-| 57 | P3_BUREAU - Forcer Play ON si PC tourne | 1775331547996 | 1775331547996 | `automation.bureau_forcer_play_on_si_pc_tourne` | [Bureau_forcer_play_on.md](03_docs_automations_MD/P3_Eclairage/Bureau_forcer_play_on/Bureau_forcer_play_on.md) | [P3_Bureau_forcer_play_on_si_pc_tourne.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_forcer_play_on_si_pc_tourne/P3_Bureau_forcer_play_on_si_pc_tourne.yaml) |  |
+| 56 | P3 BUREAU - Espace de loisirs actif, garder les indicateurs allumes | 1793131130516 | aucun YAML local | `automation.nouvelle_automatisation` | aucune | aucun |  |
+| 57 | P3_BUREAU - BOUTON RODRET TOGGLE BLANCHES | 1775331454560 | 1775331454560 | `automation.bureau_bouton_rodret_toggle_blanches` | [Bureau_rodret_toggle_blanches.md](03_docs_automations_MD/P3_Eclairage/Bureau_rodret_toggle_blanches/Bureau_rodret_toggle_blanches.md) | [P3_Bureau_bouton_rodret_toggle_blanches.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_bouton_rodret_toggle_blanches/P3_Bureau_bouton_rodret_toggle_blanches.yaml) |  |
 | 58 | P3_BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES | 1775331482668 | 1775331482668 | `automation.bureau_watchdog_synchronisation_lampes_blanches` | [Bureau_watchdog_synchro_lampes.md](03_docs_automations_MD/P3_Eclairage/Bureau_watchdog_synchro_lampes/Bureau_watchdog_synchro_lampes.md) | [P3_Bureau_watchdog_synchronisation_lampes_blanches.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_watchdog_synchronisation_lampes_blanches/P3_Bureau_watchdog_synchronisation_lampes_blanches.yaml) |  |
 | 59 | P3_BUREAU_ACTIVATION_ECRAN_SYNCHRO | 1775331623943 | 1775331623943 | `automation.bureau_activation_ecran_synchro` | [Bureau_activation_ecran_synchro.md](03_docs_automations_MD/P3_Eclairage/Bureau_activation_ecran_synchro/Bureau_activation_ecran_synchro.md) | [P3_Bureau_activation_ecran_synchro.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_activation_ecran_synchro/P3_Bureau_activation_ecran_synchro.yaml) |  |
 | 60 | P3_ENTREE_ALLUMAGE_LUMIERE | 1775331417577 | 1775331417577 | `automation.allumage_lumiere_entree` | [Allumage_lumiere_entree.md](03_docs_automations_MD/P3_Eclairage/Allumage_lumiere_entree/Allumage_lumiere_entree.md) | [P3_Entree_allumage_lumiere.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Entree_allumage_lumiere/P3_Entree_allumage_lumiere.yaml) |  |
@@ -178,12 +178,13 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 |:--|:------|:--------|:-------------------|:----------|:-------------------|:------------|:------------|
 | 63 | Système - Watchdog Piles (HUE/IKEA/SONOFF) | 1775386133385 | 1775386133385 | `automation.systeme_watchdog_piles_hue_ikea_sonoff` | [Watchdog_piles.md](03_docs_automations_MD/Watchdog_piles_hue_ikea_sonoff/Watchdog_piles/Watchdog_piles.md) | [Systeme_watchdog_piles_hue_ikea_sonoff.yaml](03_docs_automations_YAML/Watchdog_piles_hue_ikea_sonoff/Systeme_watchdog_piles_hue_ikea_sonoff/Systeme_watchdog_piles_hue_ikea_sonoff.yaml) |  |
 
-## Hors prod ou sans id (YAML locaux uniquement) (3)
+## Hors prod ou sans id (YAML locaux uniquement) (4)
 
 Ces YAML ne correspondent a aucune entree de H:\automations.yaml (id absent ou inconnu de la prod). Exemple : l'automatisation du ventilateur du Raspberry Pi 4, dont le YAML local n'a pas d'id.
 
 | N | Alias | id prod | id local (ReBuild) | Entity HA | Documentation (md) | YAML source | Commentaire |
 |:--|:------|:--------|:-------------------|:----------|:-------------------|:------------|:------------|
-| 1 | Raspberry CPU Fan PWM 6 States | hors automations.yaml de la prod | aucun | - | aucune | [A_RASPI_fan_pwm_6_states.yaml](03_docs_automations_YAML/XX_RASPI/A_RASPI_fan_pwm_6_states_YAML/A_RASPI_fan_pwm_6_states.yaml) |  |
-| 2 | SDB - SOUFFLANT - BOUTON IKEA RODRET (MQTT vers interrupteur) | hors automations.yaml de la prod | aucun | - | aucune | [i_soufflant_SDB_bouton_rodret.yaml](03_docs_automations_YAML/P1_SDB/i_soufflant_SDB_bouton_rodret.yaml) | Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant. ; Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - BOUTON IKEA RODRET) |
-| 3 | SDB - SOUFFLANT - ROUTAGE (interrupteur vers sequences) | hors automations.yaml de la prod | aucun | - | aucune | [h_soufflant_SDB_routage.yaml](03_docs_automations_YAML/P1_SDB/h_soufflant_SDB_routage.yaml) | Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant. ; Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - ROUTAGE) |
+| 1 | P3_BUREAU - Forcer Play ON si PC tourne | hors automations.yaml de la prod | 1775331547996 | - | [Bureau_forcer_play_on.md](03_docs_automations_MD/P3_Eclairage/Bureau_forcer_play_on/Bureau_forcer_play_on.md) | [P3_Bureau_forcer_play_on_si_pc_tourne.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_forcer_play_on_si_pc_tourne/P3_Bureau_forcer_play_on_si_pc_tourne.yaml) |  |
+| 2 | Raspberry CPU Fan PWM 6 States | hors automations.yaml de la prod | aucun | - | aucune | [A_RASPI_fan_pwm_6_states.yaml](03_docs_automations_YAML/XX_RASPI/A_RASPI_fan_pwm_6_states_YAML/A_RASPI_fan_pwm_6_states.yaml) |  |
+| 3 | SDB - SOUFFLANT - BOUTON IKEA RODRET (MQTT vers interrupteur) | hors automations.yaml de la prod | aucun | - | aucune | [i_soufflant_SDB_bouton_rodret.yaml](03_docs_automations_YAML/P1_SDB/i_soufflant_SDB_bouton_rodret.yaml) | Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant. ; Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - BOUTON IKEA RODRET) |
+| 4 | SDB - SOUFFLANT - ROUTAGE (interrupteur vers sequences) | hors automations.yaml de la prod | aucun | - | aucune | [h_soufflant_SDB_routage.yaml](03_docs_automations_YAML/P1_SDB/h_soufflant_SDB_routage.yaml) | Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant. ; Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - ROUTAGE) |

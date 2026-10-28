@@ -1,6 +1,6 @@
 # GLOBAL_INDEX_SCRIPTS_SH.md - index des scripts shell et python
 
-Fichier GENERE le 2026-10-25 21:20 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-10-28 17:33 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 ## Difference entre l'index SH et l'index YAML
 
