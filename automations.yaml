@@ -1450,42 +1450,43 @@
   mode: single
 - id: '1775244989013'
   alias: Gestion Simple du Store Salon (Matin/Soir)
-  description: Ouvre le store au lever du soleil (pas avant 6h30) et le ferme au coucher.
+  description: 'Ouvre le store à partir de 6h30 et le ferme au coucher du soleil.
+    Sécurité : bloque tout mouvement si la fenêtre est ouverte.'
   triggers:
-  - id: ouverture
+  - id: reveil
     trigger: time
     at: 06:30:00
-  - id: ouverture
-    trigger: sun
-    event: sunrise
-    offset: 00:01:00
-  - id: fermeture
-    trigger: sun
+  - trigger: sun
     event: sunset
+  - id: fenetre
+    trigger: state
+    entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+    to: 'off'
   conditions:
-  - alias: 'SÉCURITÉ : La fenêtre doit être FERMÉE'
+  - alias: 'SÉCURITÉ : La fenêtre doit être FERMÉE pour bouger le store'
     condition: state
     entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
     state: 'off'
   actions:
   - choose:
-    - alias: 'Matin : Ouverture si > 6h30 ET Soleil levé'
+    - alias: 'MATIN : Ouverture'
       conditions:
-      - condition: trigger
-        id: ouverture
       - condition: time
-        after: 06:29:00
-      - condition: state
-        entity_id: sun.sun
-        state: above_horizon
+        after: 06:30:00
+      - condition: sun
+        before: sunset
+      - condition: numeric_state
+        entity_id: cover.store_salon
+        attribute: current_position
+        below: 1
       sequence:
       - action: cover.open_cover
         target:
           entity_id: cover.store_salon
-    - alias: 'Soir : Fermeture au coucher du soleil'
+    - alias: 'SOIR : Fermeture'
       conditions:
-      - condition: trigger
-        id: fermeture
+      - condition: sun
+        after: sunset
       sequence:
       - action: cover.close_cover
         target:

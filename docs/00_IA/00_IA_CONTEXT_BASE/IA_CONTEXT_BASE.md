@@ -1,4 +1,4 @@
-﻿> **CONTEXTE PROJET** : ce document est tenu IDENTIQUE en trois emplacements, a modifier
+> **CONTEXTE PROJET** : ce document est tenu IDENTIQUE en trois emplacements, a modifier
 > ensemble dans la meme session : `ReBuild/Claude md SAVE/CLAUDE.md`,
 > `ReBuild/docs/00_IA/00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md` et `D:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres
 > toute mise a jour, verifier que les trois empreintes md5 sont egales. Il ne depend d'aucun agent
@@ -551,6 +551,14 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 - `Dashboard_COMPLET/` ne se vide JAMAIS (decide par Eric le 2026-10-11) : ses exports sont les mises a jour au fil de l'eau du dashboard complet.
   En local : aucun menage, aucune suppression, aucun `.bak`, aucun renommage. Ne jamais proposer de le purger ni de le consolider.
   (Cote prod, la regle de `/histo` etape 5B reste inchangee : un seul export, le plus recent.)
+
+## BADGES DES FICHES .md - REGLE UNIQUE (decidee par Eric le 2026-10-28)
+
+- Chaque fiche .md de `docs/` commence par une banniere de 8 badges shields.io, dans cet ordre : Statut, MàJ, HA, IA Partner, Source, Modifs, Expert, Type. Forme d'un badge : `[![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;`, le tout dans un `<div align="center">`. Modele : `docs/02_docs_dashboard/02_dashboard_docs_MD/L0C0_PAGE_Home/02_Page/Page_Home.md`. Inventaire des badges existants : `docs/XX_docs_MD_system/BADGES_FICHES/BADGES_FICHES.md` (local seul).
+- Valeurs : Statut = Actif, En cours, A terminer ou VERROUILLE. MàJ = date du jour de la creation ou de la derniere modification (dans l'URL, tirets doubles : `2026--10--28`). HA = version de Home Assistant au moment de la creation ou de la mise a jour de la fiche, lue en live (jamais de memoire). IA Partner = `Claude_Sonnet_5.5` (modele configure au moment de l'ecriture, pas une preuve du modele qui a repondu ; si Hermes ecrit la fiche : son nom). Source = `Interne`, sinon le nom de la source avec son lien. Modifs = `Autorisees`, ou `INTERDITES` pour un fichier verrouille. Expert = `HAOS_Proxmox`. Type = Vignette, Page, Carte, Page droite, Page gauche, Dashboard Doc, Vignette Doc, Page Doc, Config Racine, Index_Pages, Scripts ou Script_Executant (liste a normaliser, une valeur nouvelle se decide avec Eric).
+- HA et MàJ ne sont mis a jour qu'a la creation ou a la modification de la fiche. Aucune mise a jour retroactive, aucun controle de peremption. Une fiche existante garde sa version HA actuelle (information d'origine inconnue) ; une fiche sans badge HA recoit la version actuelle de Home Assistant, lue en live au moment ou on la met en conformite (decide par Eric le 2026-10-28 ; cette version n'est donc pas celle d'origine de la fiche).
+- Exemptes : les `.bak`, les dossiers `XX_*`, `*_ORIGINAL`, `*_archive*`, les `MOC_*` et `GLOBAL_INDEX_*` (generes par script), les copies de skills et les fichiers de `docs/00_IA`.
+- Controle (a faire, lecture seule) : fiche sans banniere, badge manquant, valeur hors liste, gabarit non rempli (`{TYPE_DOC}`), lien de badge casse ; a brancher sur /histo. Etat au 2026-10-28 : regle ecrite, fiches existantes pas encore mises aux normes.
 
 ---
 

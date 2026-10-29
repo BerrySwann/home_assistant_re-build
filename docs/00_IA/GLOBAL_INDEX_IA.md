@@ -1,7 +1,7 @@
 # GLOBAL INDEX IA
 
-> Fichier GENERE le 2026-10-28 17:33 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
-> 12 fichiers de contenu, 41 sauvegardes (.bak), 0 sans description.
+> Fichier GENERE le 2026-10-28 21:11 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
+> 12 fichiers de contenu, 44 sauvegardes (.bak), 0 sans description.
 
 ## A quoi sert ce fichier
 
@@ -11,7 +11,7 @@ Liste de tous les fichiers de docs/00_IA (le dossier des directives pour les IA)
 
 | Fichier | Qui s'en sert | Son but | Quand le lire | Cite dans CLAUDE.md | Prod |
 |---|---|---|---|---|---|
-| [IA_CONTEXT_BASE.md](00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md) | Claude (c'est son CLAUDE.md local), Hermes et toute IA du projet ; Eric pour relire les regles. Tenu identique en 3 emplacements (voir son en-tete) | Directives IA completes : regles de codage YAML, nomenclature, hierarchie visuelle, arborescences, protocoles, regle de sauvegarde. Meme contenu que le CLAUDE.md local. | Quand une IA doit travailler dans le projet : c'est le contexte de base, les sous-contextes ci-dessous le completent. | oui | OK (MD5 identique) |
+| [IA_CONTEXT_BASE.md](00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md) | Claude (c'est son CLAUDE.md local), Hermes et toute IA du projet ; Eric pour relire les regles. Tenu identique en 3 emplacements (voir son en-tete) | Directives IA completes : regles de codage YAML, nomenclature, hierarchie visuelle, arborescences, protocoles, regle de sauvegarde. Meme contenu que le CLAUDE.md local. | Quand une IA doit travailler dans le projet : c'est le contexte de base, les sous-contextes ci-dessous le completent. | oui | DIFFERENT de la prod |
 
 ## Sous-contextes (00_SOUS_CONTEXT_IA)
 
@@ -37,8 +37,8 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 
 | Dossier | Nombre de sauvegardes |
 |---|---|
-| [00_IA (racine)](./) | 4 |
-| [00_IA_CONTEXT_BASE](00_IA_CONTEXT_BASE/) | 4 |
+| [00_IA (racine)](./) | 5 |
+| [00_IA_CONTEXT_BASE](00_IA_CONTEXT_BASE/) | 6 |
 | [00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 5 |
 | [00_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE](00_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/) | 3 |
 | [00_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS](00_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/) | 3 |

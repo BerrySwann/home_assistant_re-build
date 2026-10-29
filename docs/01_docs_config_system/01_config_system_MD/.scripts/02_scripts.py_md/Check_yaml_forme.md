@@ -1,5 +1,16 @@
 # CHECK_YAML_FORME - Contrôle de forme des YAML de configuration
 
+<div align="center">
+
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
+[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
+[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)
+
+</div>
+
 > **Script :** `check_yaml_forme.py` (Python 3)
 > **Emplacement prod :** `/config/.scripts/check_yaml_forme.py`
 > **Emplacement local :** `docs/01_docs_config_system/01_config_system_SH_PY_YAML/.scripts/02_scripts.py/check_yaml_forme.py` (copie identique dans `docs/04_docs_scripts/04_docs_scripts_YAML/Check_yaml_forme/Check_yaml_forme.py`)

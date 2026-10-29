@@ -1,7 +1,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--10--11-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--10--28-44739e?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page%20droite-ff9800?style=flat-square)](.)
 
 </div>
@@ -13,7 +13,7 @@
 | 🏗️ **Layout** | `type: grid` - 14 cartes de niveau 1 (titre, Bureau, Écran, Salle de Bain, Chambre, Têtes de Lit, 3 popups bubble-card, barre de navigation) |
 | 📄 **Fichier YAML** | `L3C1_ECLAIRAGE/03_page_droite/page_L3C1_eclairage_droite.yaml` |
 | ✏️ **Prompt** | Eric · BerrySwann |
-| 📅 **Modifié le** | 2026-10-11 (MD réécrit à partir du YAML et de l'ancien MD du 2026-03-21) |
+| 📅 **Modifié le** | 2026-10-28 (bloc Code YAML resynchronisé avec le YAML du 2026-10-26 ; MD réécrit le 2026-10-11 à partir du YAML et de l'ancien MD du 2026-03-21) |
 
 ---
 
@@ -91,9 +91,9 @@ type: grid
 │   ├── mushroom-entity-card sensor.lumiere_tete_de_lit_etat → toggle light.lit (groupe)
 │   └── mushroom-chips-card  pastille → popup #tete_de_lit
 │
-├── [bubble-card] Popup #tete_de_lit : mushroom-light-card candle gégé + candle eric, 4 presets chacune
-├── [bubble-card] Popup #bureau      : mushroom-light-card light.bureau, 4 presets
-├── [bubble-card] Popup #ecranpc     : mushroom-light-card light.moniteur_pc, 4 presets
+├── [bubble-card] Popup #tete_de_lit : 2 vertical-stack (candle gégé, candle eric), chacun = mushroom-light-card + 4 presets
+├── [bubble-card] Popup #bureau      : vertical-stack = mushroom-light-card light.bureau + 4 presets
+├── [bubble-card] Popup #ecranpc     : vertical-stack = mushroom-light-card light.moniteur_pc + 4 presets
 │
 └── [streamline-card] template nav_bar
 ```
@@ -148,6 +148,8 @@ Le heading entier (et ses badges `zone_eric` / `zone_gege`) est masqué si `swit
 ### Presets de luminosité (popups)
 
 Même motif pour les 3 popups : 4 `custom:button-card` en grille 4 colonnes, chacun appelle `light.turn_on` avec `brightness_pct` 25, 50, 75, 100. Surbrillance ambre quand la luminosité courante est à ±1 de la cible.
+
+Dans les 3 popups, chaque carte de luminosité et sa grille de presets sont groupées dans un `vertical-stack` (4 au total : candle gégé, candle eric, bureau, écran PC). Depuis le 2026-10-26, la bougie Eric est groupée comme les trois autres (avant, elle ne l'était pas).
 
 | % | Plage brightness HA (0-255) | Cible |
 |---|-----------------------------|-------|
@@ -1532,239 +1534,241 @@ cards:
                 else
                   return "grey";
               ]]]
-  - type: custom:mushroom-light-card
-    entity: light.hue_color_candle_chambre_eric
-    name: Tête de Lit Eric
-    icon: mdi:floor-lamp
-    icon_color:
-    layout: normal
-    use_light_color: false
-    show_brightness_control: true
-    show_color_temp_control: false
-    show_color_control: false
-    collapsible_controls: false
-    card_mod:
-      style: |
-        ha-card {
-          border: 2px solid {% if is_state('light.hue_color_candle_chambre_eric', 'on') %} #FFA000A9 {% else %} grey {% endif %};
-          background-color: {% if is_state('light.hue_color_candle_chambre_eric', 'on') %} rgba(255, 160, 0, 0.1) {% else %} transparent {% endif %};
-        }
-  - type: custom:layout-card
-    layout_type: custom:grid-layout
-    layout:
-      grid-template-columns: 25% 25% 25% 25%
-      grid-template-rows: 100%
-      grid-template-areas: |
-        "zone1 zone2 zone3 zone4"
+  - type: vertical-stack
     cards:
-    - type: custom:button-card
-      view_layout:
-        grid-area: zone1
-      label: 25%
-      show_label: true
-      tap_action:
-        action: call-service
-        service: light.turn_on
-        service_data:
-          entity_id: light.hue_color_candle_chambre_eric
-          brightness_pct: 25
-      styles:
-        grid:
-        - grid-template-areas: "\"i\" \"n\" \"l\""
-        - grid-template-rows: min-content min-content 1fr
-        card:
-        - aspect-ratio: 1/1
-        - background-color: |
-            [[[
-              var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 63 && brightness <= 65)
-                return "rgba(255, 160, 0, 0.1)";
-              else
-                return "transparent";
-            ]]]
-        - border-width: 1px
-        - border-color: |
-            [[[
-              var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 63 && brightness <= 65)
-                return "#FFA000A9";
-              else
-                return "grey";
-            ]]]
-        icon:
-        - color: |
-            [[[
-              var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 63 && brightness <= 65)
-                return "#FFA000A9";
-              else
-                return "grey";
-            ]]]
-        label:
-        - font-weight: bold
-        - color: |
-            [[[
-              var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 63 && brightness <= 65)
-                return "#FFA000A9";
-              else
-                return "grey";
-            ]]]
-    - type: custom:button-card
-      view_layout:
-        grid-area: zone2
-      label: 50%
-      show_label: true
-      tap_action:
-        action: call-service
-        service: light.turn_on
-        service_data:
-          entity_id: light.hue_color_candle_chambre_eric
-          brightness_pct: 50
-      styles:
-        grid:
-        - grid-template-areas: "\"i\" \"n\" \"l\""
-        - grid-template-rows: min-content min-content 1fr
-        card:
-        - aspect-ratio: 1/1
-        - background-color: |
-            [[[
-              var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 127 && brightness <= 129)
-                return "rgba(255, 160, 0, 0.1)";
-              else
-                return "transparent";
-            ]]]
-        - border-width: 1px
-        - border-color: |
-            [[[
-              var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 127 && brightness <= 129)
-                return "#FFA000A9";
-              else
-                return "grey";
-            ]]]
-        icon:
-        - color: |
-            [[[
-              var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 127 && brightness <= 129)
-                return "#FFA000A9";
-              else
-                return "grey";
-            ]]]
-        label:
-        - font-weight: bold
-        - color: |
-            [[[
-              var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 127 && brightness <= 129)
-                return "#FFA000A9";
-              else
-                return "grey";
-            ]]]
-    - type: custom:button-card
-      view_layout:
-        grid-area: zone3
-      label: 75%
-      show_label: true
-      tap_action:
-        action: call-service
-        service: light.turn_on
-        service_data:
-          entity_id: light.hue_color_candle_chambre_eric
-          brightness_pct: 75
-      styles:
-        grid:
-        - grid-template-areas: "\"i\" \"n\" \"l\""
-        - grid-template-rows: min-content min-content 1fr
-        card:
-        - aspect-ratio: 1/1
-        - background-color: |
-            [[[
-              var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 190 && brightness <= 192)
-                return "rgba(255, 160, 0, 0.1)";
-              else
-                return "transparent";
-            ]]]
-        - border-width: 1px
-        - border-color: |
-            [[[
-              var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 190 && brightness <= 192)
-                return "#FFA000A9";
-              else
-                return "grey";
-            ]]]
-        icon:
-        - color: |
-            [[[
-              var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 190 && brightness <= 192)
-                return "#FFA000A9";
-              else
-                return "grey";
-            ]]]
-        label:
-        - font-weight: bold
-        - color: |
-            [[[
-              var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 190 && brightness <= 192)
-                return "#FFA000A9";
-              else
-                return "grey";
-            ]]]
-    - type: custom:button-card
-      view_layout:
-        grid-area: zone4
-      label: 100%
-      show_label: true
-      tap_action:
-        action: call-service
-        service: light.turn_on
-        service_data:
-          entity_id: light.hue_color_candle_chambre_eric
-          brightness_pct: 100
-      styles:
-        grid:
-        - grid-template-areas: "\"i\" \"n\" \"l\""
-        - grid-template-rows: min-content min-content 1fr
-        card:
-        - aspect-ratio: 1/1
-        - background-color: |
-            [[[
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && states['light.hue_color_candle_chambre_eric'].attributes.brightness == 255)
-                return "rgba(255, 160, 0, 0.1)";
-              else
-                return "transparent";
-            ]]]
-        - border-width: 1px
-        - border-color: |
-            [[[
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && states['light.hue_color_candle_chambre_eric'].attributes.brightness == 255)
-                return "#FFA000A9";
-              else
-                return "grey";
-            ]]]
-        icon:
-        - color: |
-            [[[
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && states['light.hue_color_candle_chambre_eric'].attributes.brightness == 255)
-                return "#FFA000A9";
-              else
-                return "grey";
-            ]]]
-        label:
-        - font-weight: bold
-        - color: |
-            [[[
-              if (states['light.hue_color_candle_chambre_eric'].state == "on" && states['light.hue_color_candle_chambre_eric'].attributes.brightness == 255)
-                return "#FFA000A9";
-              else
-                return "grey";
-            ]]]
+    - type: custom:mushroom-light-card
+      entity: light.hue_color_candle_chambre_eric
+      name: Tête de Lit Eric
+      icon: mdi:floor-lamp
+      icon_color:
+      layout: normal
+      use_light_color: false
+      show_brightness_control: true
+      show_color_temp_control: false
+      show_color_control: false
+      collapsible_controls: false
+      card_mod:
+        style: |
+          ha-card {
+            border: 2px solid {% if is_state('light.hue_color_candle_chambre_eric', 'on') %} #FFA000A9 {% else %} grey {% endif %};
+            background-color: {% if is_state('light.hue_color_candle_chambre_eric', 'on') %} rgba(255, 160, 0, 0.1) {% else %} transparent {% endif %};
+          }
+    - type: custom:layout-card
+      layout_type: custom:grid-layout
+      layout:
+        grid-template-columns: 25% 25% 25% 25%
+        grid-template-rows: 100%
+        grid-template-areas: |
+          "zone1 zone2 zone3 zone4"
+      cards:
+      - type: custom:button-card
+        view_layout:
+          grid-area: zone1
+        label: 25%
+        show_label: true
+        tap_action:
+          action: call-service
+          service: light.turn_on
+          service_data:
+            entity_id: light.hue_color_candle_chambre_eric
+            brightness_pct: 25
+        styles:
+          grid:
+          - grid-template-areas: "\"i\" \"n\" \"l\""
+          - grid-template-rows: min-content min-content 1fr
+          card:
+          - aspect-ratio: 1/1
+          - background-color: |
+              [[[
+                var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 63 && brightness <= 65)
+                  return "rgba(255, 160, 0, 0.1)";
+                else
+                  return "transparent";
+              ]]]
+          - border-width: 1px
+          - border-color: |
+              [[[
+                var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 63 && brightness <= 65)
+                  return "#FFA000A9";
+                else
+                  return "grey";
+              ]]]
+          icon:
+          - color: |
+              [[[
+                var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 63 && brightness <= 65)
+                  return "#FFA000A9";
+                else
+                  return "grey";
+              ]]]
+          label:
+          - font-weight: bold
+          - color: |
+              [[[
+                var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 63 && brightness <= 65)
+                  return "#FFA000A9";
+                else
+                  return "grey";
+              ]]]
+      - type: custom:button-card
+        view_layout:
+          grid-area: zone2
+        label: 50%
+        show_label: true
+        tap_action:
+          action: call-service
+          service: light.turn_on
+          service_data:
+            entity_id: light.hue_color_candle_chambre_eric
+            brightness_pct: 50
+        styles:
+          grid:
+          - grid-template-areas: "\"i\" \"n\" \"l\""
+          - grid-template-rows: min-content min-content 1fr
+          card:
+          - aspect-ratio: 1/1
+          - background-color: |
+              [[[
+                var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 127 && brightness <= 129)
+                  return "rgba(255, 160, 0, 0.1)";
+                else
+                  return "transparent";
+              ]]]
+          - border-width: 1px
+          - border-color: |
+              [[[
+                var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 127 && brightness <= 129)
+                  return "#FFA000A9";
+                else
+                  return "grey";
+              ]]]
+          icon:
+          - color: |
+              [[[
+                var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 127 && brightness <= 129)
+                  return "#FFA000A9";
+                else
+                  return "grey";
+              ]]]
+          label:
+          - font-weight: bold
+          - color: |
+              [[[
+                var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 127 && brightness <= 129)
+                  return "#FFA000A9";
+                else
+                  return "grey";
+              ]]]
+      - type: custom:button-card
+        view_layout:
+          grid-area: zone3
+        label: 75%
+        show_label: true
+        tap_action:
+          action: call-service
+          service: light.turn_on
+          service_data:
+            entity_id: light.hue_color_candle_chambre_eric
+            brightness_pct: 75
+        styles:
+          grid:
+          - grid-template-areas: "\"i\" \"n\" \"l\""
+          - grid-template-rows: min-content min-content 1fr
+          card:
+          - aspect-ratio: 1/1
+          - background-color: |
+              [[[
+                var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 190 && brightness <= 192)
+                  return "rgba(255, 160, 0, 0.1)";
+                else
+                  return "transparent";
+              ]]]
+          - border-width: 1px
+          - border-color: |
+              [[[
+                var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 190 && brightness <= 192)
+                  return "#FFA000A9";
+                else
+                  return "grey";
+              ]]]
+          icon:
+          - color: |
+              [[[
+                var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 190 && brightness <= 192)
+                  return "#FFA000A9";
+                else
+                  return "grey";
+              ]]]
+          label:
+          - font-weight: bold
+          - color: |
+              [[[
+                var brightness = states['light.hue_color_candle_chambre_eric'].attributes.brightness;
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && brightness >= 190 && brightness <= 192)
+                  return "#FFA000A9";
+                else
+                  return "grey";
+              ]]]
+      - type: custom:button-card
+        view_layout:
+          grid-area: zone4
+        label: 100%
+        show_label: true
+        tap_action:
+          action: call-service
+          service: light.turn_on
+          service_data:
+            entity_id: light.hue_color_candle_chambre_eric
+            brightness_pct: 100
+        styles:
+          grid:
+          - grid-template-areas: "\"i\" \"n\" \"l\""
+          - grid-template-rows: min-content min-content 1fr
+          card:
+          - aspect-ratio: 1/1
+          - background-color: |
+              [[[
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && states['light.hue_color_candle_chambre_eric'].attributes.brightness == 255)
+                  return "rgba(255, 160, 0, 0.1)";
+                else
+                  return "transparent";
+              ]]]
+          - border-width: 1px
+          - border-color: |
+              [[[
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && states['light.hue_color_candle_chambre_eric'].attributes.brightness == 255)
+                  return "#FFA000A9";
+                else
+                  return "grey";
+              ]]]
+          icon:
+          - color: |
+              [[[
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && states['light.hue_color_candle_chambre_eric'].attributes.brightness == 255)
+                  return "#FFA000A9";
+                else
+                  return "grey";
+              ]]]
+          label:
+          - font-weight: bold
+          - color: |
+              [[[
+                if (states['light.hue_color_candle_chambre_eric'].state == "on" && states['light.hue_color_candle_chambre_eric'].attributes.brightness == 255)
+                  return "#FFA000A9";
+                else
+                  return "grey";
+              ]]]
 - type: custom:bubble-card
   card_type: pop-up
   hash: "#bureau"

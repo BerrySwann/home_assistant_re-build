@@ -1,42 +1,46 @@
 id: '1775244989013'
 alias: Gestion Simple du Store Salon (Matin/Soir)
-description: Ouvre le store au lever du soleil (pas avant 6h30) et le ferme au coucher.
+description: 'Ouvre le store à partir de 6h30 et le ferme au coucher du soleil. Sécurité : bloque tout mouvement si la fenêtre est ouverte.'
 triggers:
-- id: ouverture
+- id: reveil
   trigger: time
-  at: 06:30:00
-- id: ouverture
-  trigger: sun
-  event: sunrise
-- id: fermeture
-  trigger: sun
+  at: '06:30:00'
+- trigger: sun
   event: sunset
+- id: fenetre
+  trigger: state
+  entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+  to: 'off'
 conditions:
-- alias: 'SÉCURITÉ : La fenêtre doit être FERMÉE'
+- alias: 'SÉCURITÉ : La fenêtre doit être FERMÉE pour bouger le store'
   condition: state
   entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
   state: 'off'
 actions:
 - choose:
-  - alias: 'Matin : Ouverture si > 6h30 ET Soleil levé'
+  - alias: 'MATIN : Ouverture'
     conditions:
-    - condition: trigger
-      id: ouverture
     - condition: time
-      after: 06:29:00
-    - condition: state
-      entity_id: sun.sun
-      state: above_horizon
+      after: '06:30:00'
+    - condition: sun
+      before: sunset
+    - condition: numeric_state
+      entity_id: cover.store_salon
+      attribute: current_position
+      below: 1
     sequence:
     - action: cover.open_cover
       target:
         entity_id: cover.store_salon
-  - alias: 'Soir : Fermeture au coucher du soleil'
+  - alias: 'SOIR : Fermeture'
     conditions:
-    - condition: trigger
-      id: fermeture
+    - condition: sun
+      after: sunset
     sequence:
     - action: cover.close_cover
       target:
         entity_id: cover.store_salon
 mode: single
+# annotations_log:
+# [2026-10-29] L3C3 - at: et after: entre guillemets (HA lisait 06:29:00 en base 60, erreur 23340) ; condition sun.sun du matin remplacee par un template (declencheur sun OU sun.sun above_horizon) ; bak : Gestion_simple_du_store_salon_matin_soir.bak_2026_10_29_07h28m54s.yaml
+# [2026-10-29] L3C3 - refonte sur le modele du store bureau sans temperatures, 06:30 au lieu de 07:00 : plus de condition trigger id (un lancement manuel evalue les memes conditions), declencheur fenetre ajoute ; bak : Gestion_simple_du_store_salon_matin_soir.bak_2026_10_29_07h32m27s.yaml

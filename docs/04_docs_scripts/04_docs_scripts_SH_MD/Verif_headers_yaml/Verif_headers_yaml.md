@@ -1,5 +1,17 @@
 # VERIF_HEADERS_YAML - Controle des en-tetes des YAML de configuration
 
+<div align="center">
+
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--28-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
+[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
+[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
+[![Type](https://img.shields.io/badge/Type-Scripts-ff9800?style=flat-square)](.)
+
+</div>
+
 > **Script :** `Verif_headers_yaml.py` (Python, lance avec `python -I`)
 > **Emplacement local :** `docs/04_docs_scripts/04_docs_scripts_SH/Verif_headers_yaml/Verif_headers_yaml.py`
 > **Copie prod :** aucune (script local, non pousse en prod)

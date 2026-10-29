@@ -1,23 +1,20 @@
 # GLOBAL_INDEX_AUTOMATIONS.md - index des automatisations
 
-Fichier GENERE le 2026-10-27 21:56 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-10-28 19:54 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et categorie), YAML locaux 03_docs_automations_YAML (id local et commentaires), fiches 03_docs_automations_MD. Les liens sont relatifs a ce fichier.
 
 ## Controle
 
 - Automatisations en prod (automations.yaml) : 63
-- YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS_YAML_ORIGINAL) : 67
-- Fiches .md retenues : 74 dont 55 rattachees a un YAML
-- Automatisations de la prod sans YAML local : 1 (P3 BUREAU - Espace de loisirs actif, garder les indicateurs allumes)
-- Automatisations de la prod sans fiche rattachee : 8 ([00-Backup] Alerte si KO 15 min ; (A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00) ; Mettre à jour le temps du dernier impact de foudre ; (C) Notification température Up ou Down de (7h30 -> 21h00) ; (D) Notification température Up ou Down de (21h00 -> 7h30) ; C - SALLE DE BAIN : WATCHDOG SÉCURITÉ SOUFFLANT ; AUTO. ENERGIE. Basculement Tarif HC/HP — Genelec Appart ; P3 BUREAU - Espace de loisirs actif, garder les indicateurs allumes)
+- YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS_YAML_ORIGINAL) : 68
+- Fiches .md retenues : 70 dont 58 rattachees a un YAML
+- Automatisations de la prod sans YAML local : 0
+- Automatisations de la prod sans fiche rattachee : 6 ([00-Backup] Alerte si KO 15 min ; (A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00) ; Mettre à jour le temps du dernier impact de foudre ; (C) Notification température Up ou Down de (7h30 -> 21h00) ; (D) Notification température Up ou Down de (21h00 -> 7h30) ; C - SALLE DE BAIN : WATCHDOG SÉCURITÉ SOUFFLANT)
 - Automatisations sans entity_id dans le registre HA : 0
 - YAML locaux absents de la prod ou sans id : 4 (voir section Hors prod)
 - Erreurs de lecture YAML : 0
-- Fiches non rattachees a un YAML (fiches d'operation, specifications, etc.) : 19
-  - [03_docs_automations_MD/AUTOMATIONS/PROD_vs_REBUILD_DIFF.md](03_docs_automations_MD/AUTOMATIONS/PROD_vs_REBUILD_DIFF.md)
-  - [03_docs_automations_MD/AUTOMATIONS_IDS_REF.md](03_docs_automations_MD/AUTOMATIONS_IDS_REF.md)
-  - [03_docs_automations_MD/AUTOMATIONS_MIGRATION_REPORT.md](03_docs_automations_MD/AUTOMATIONS_MIGRATION_REPORT.md)
+- Fiches non rattachees a un YAML (fiches d'operation, specifications, etc.) : 12
   - [03_docs_automations_MD/Backup_ha_GitHub/Git_alerte_ko/Git_alerte_ko.md](03_docs_automations_MD/Backup_ha_GitHub/Git_alerte_ko/Git_alerte_ko.md)
   - [03_docs_automations_MD/Gestion_des_stores/Gestion_store_bureau/Gestion_store_bureau.md](03_docs_automations_MD/Gestion_des_stores/Gestion_store_bureau/Gestion_store_bureau.md)
   - [03_docs_automations_MD/Meteo/Alerte_meteo_cartes/Alerte_meteo_cartes.md](03_docs_automations_MD/Meteo/Alerte_meteo_cartes/Alerte_meteo_cartes.md)
@@ -25,22 +22,18 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
   - [03_docs_automations_MD/P1_01_Clim_chauffage/A0_clim_jour/A0_clim_jour.md](03_docs_automations_MD/P1_01_Clim_chauffage/A0_clim_jour/A0_clim_jour.md)
   - [03_docs_automations_MD/P1_01_Clim_chauffage/C_notif_temp_jour/C_notif_temp_jour.md](03_docs_automations_MD/P1_01_Clim_chauffage/C_notif_temp_jour/C_notif_temp_jour.md)
   - [03_docs_automations_MD/P1_01_Clim_chauffage/D_notif_temp_nuit/D_notif_temp_nuit.md](03_docs_automations_MD/P1_01_Clim_chauffage/D_notif_temp_nuit/D_notif_temp_nuit.md)
-  - [03_docs_automations_MD/P1_02_Cuisine/Fiche_op_relais_cuisine_maj_shelly/Fiche_op_relais_cuisine_maj_shelly.md](03_docs_automations_MD/P1_02_Cuisine/Fiche_op_relais_cuisine_maj_shelly/Fiche_op_relais_cuisine_maj_shelly.md)
   - [03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/C_watchdog_soufflant_SDB/C_watchdog_soufflant_SDB.md](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/C_watchdog_soufflant_SDB/C_watchdog_soufflant_SDB.md)
-  - [03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/SDB_soufflant_specification_2026/SDB_soufflant_specification_2026.md](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/SDB_soufflant_specification_2026/SDB_soufflant_specification_2026.md)
-  - [03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/Timers_SDB_soufflant_et_seche_serviettes/Timers_SDB_soufflant_et_seche_serviettes.md](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/Timers_SDB_soufflant_et_seche_serviettes/Timers_SDB_soufflant_et_seche_serviettes.md)
-  - [03_docs_automations_MD/P1_SDB/A_SOUFFLANT_SDB_old_2024_2025.md](03_docs_automations_MD/P1_SDB/A_SOUFFLANT_SDB_old_2024_2025.md)
-  - [03_docs_automations_MD/P1_SDB/D_WATCHDOG_RADIATEUR_SDB.md](03_docs_automations_MD/P1_SDB/D_WATCHDOG_RADIATEUR_SDB.md)
-  - [03_docs_automations_MD/P1_SDB/E_MINUTERIE_SECHE_SERVIETTES.md](03_docs_automations_MD/P1_SDB/E_MINUTERIE_SECHE_SERVIETTES.md)
-  - [03_docs_automations_MD/P2_Prises/RODRET_SOUFFLANT_SDB.md](03_docs_automations_MD/P2_Prises/RODRET_SOUFFLANT_SDB.md)
-  - [03_docs_automations_MD/Tarif_hc_hp/Basculement_tarif_hphc/Basculement_tarif_hphc.md](03_docs_automations_MD/Tarif_hc_hp/Basculement_tarif_hphc/Basculement_tarif_hphc.md)
+  - [03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_D_WATCHDOG_RADIATEUR_SDB/P1_XX_D_WATCHDOG_RADIATEUR_SDB.md](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_D_WATCHDOG_RADIATEUR_SDB/P1_XX_D_WATCHDOG_RADIATEUR_SDB.md)
+  - [03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_SDB_soufflant_specification_2026/P1_XX_SDB_soufflant_specification_2026.md](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_SDB_soufflant_specification_2026/P1_XX_SDB_soufflant_specification_2026.md)
+  - [03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_Timers_SDB_soufflant_et_seche_serviettes/P1_XX_Timers_SDB_soufflant_et_seche_serviettes.md](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_Timers_SDB_soufflant_et_seche_serviettes/P1_XX_Timers_SDB_soufflant_et_seche_serviettes.md)
+  - [03_docs_automations_MD/P3_Eclairage/Bureau_forcer_play_on/Bureau_forcer_play_on.md](03_docs_automations_MD/P3_Eclairage/Bureau_forcer_play_on/Bureau_forcer_play_on.md)
 
 ## _SANS_CATEGORIE (2)
 
 | N | Alias | id prod | id local (ReBuild) | Entity HA | Documentation (md) | YAML source | Commentaire |
 |:--|:------|:--------|:-------------------|:----------|:-------------------|:------------|:------------|
 | 1 | [P4] Eric — Log Zones | 1781715097077 | 1781715097077 | `automation.p4_eric_log_zones` | [P4_Log_zones_eric.md](03_docs_automations_MD/_Sans_categorie/P4_Log_zones_eric/P4_Log_zones_eric.md) | [P4_Log_zones_eric.yaml](03_docs_automations_YAML/_Sans_categorie/P4_Log_zones_eric/P4_Log_zones_eric.yaml) |  |
-| 2 | VEILLE GITHUB — Nouvelle release détectée | 1776624322644 | 1776624322644 | `automation.veille_github_nouvelle_release_detectee` | [Veille_GitHub_releases.md](03_docs_automations_MD/_Sans_categorie/Veille_GitHub_releases/Veille_GitHub_releases.md) | [Veille_GitHub_nouvelle_release_detectee.yaml](03_docs_automations_YAML/_Sans_categorie/Veille_GitHub_nouvelle_release_detectee/Veille_GitHub_nouvelle_release_detectee.yaml) |  |
+| 2 | VEILLE GITHUB — Nouvelle release détectée | 1776624322644 | 1776624322644 | `automation.veille_github_nouvelle_release_detectee` | [Veille_GitHub_nouvelle_release_detectee.md](03_docs_automations_MD/_Sans_categorie/Veille_GitHub_nouvelle_release_detectee/Veille_GitHub_nouvelle_release_detectee.md) | [Veille_GitHub_nouvelle_release_detectee.yaml](03_docs_automations_YAML/_Sans_categorie/Veille_GitHub_nouvelle_release_detectee/Veille_GitHub_nouvelle_release_detectee.yaml) |  |
 
 ## Backup HA <-> GitHub (7)
 
@@ -48,10 +41,10 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 |:--|:------|:--------|:-------------------|:----------|:-------------------|:------------|:------------|
 | 3 | [00-Backup] Alerte si KO 15 min | 1772275440416 | 1772275440416 | `automation.backup_alerte_si_ko_15_min` | aucune | [00_Backup_alerte_si_ko_15_min.yaml](03_docs_automations_YAML/Backup_ha_GitHub/00_Backup_alerte_si_ko_15_min/00_Backup_alerte_si_ko_15_min.yaml) |  |
 | 4 | [01-Backup] Git hourly H+10 | 1772274342928 | 1772274342928 | `automation.backup_auto_journalier_git_push` | [Git_hourly.md](03_docs_automations_MD/Backup_ha_GitHub/Git_hourly/Git_hourly.md) | [01_Backup_git_hourly_h_10.yaml](03_docs_automations_YAML/Backup_ha_GitHub/01_Backup_git_hourly_h_10/01_Backup_git_hourly_h_10.yaml) |  |
-| 5 | [02-Backup] Git daily (03:00) | 1772274384811 | 1772274384811 | `automation.backup_auto_hebdomadaire_git_push` | [Git_daily.md](03_docs_automations_MD/Backup_ha_GitHub/Git_daily/Git_daily.md) | [02_Backup_git_daily_03_00.yaml](03_docs_automations_YAML/Backup_ha_GitHub/02_Backup_git_daily_03_00/02_Backup_git_daily_03_00.yaml) |  |
+| 5 | [02-Backup] Git daily (03:00) | 1772274384811 | 1772274384811 | `automation.backup_auto_hebdomadaire_git_push` | [02_Backup_git_daily_03_00.md](03_docs_automations_MD/Backup_ha_GitHub/02_Backup_git_daily_03_00/02_Backup_git_daily_03_00.md) | [02_Backup_git_daily_03_00.yaml](03_docs_automations_YAML/Backup_ha_GitHub/02_Backup_git_daily_03_00/02_Backup_git_daily_03_00.yaml) |  |
 | 6 | [03-Backup] Git weekly (dim 01:30) | 1772274292302 | 1772274292302 | `automation.backup_auto_horaire_ha` | [Git_weekly.md](03_docs_automations_MD/Backup_ha_GitHub/Git_weekly/Git_weekly.md) | [03_Backup_git_weekly_dim_01_30.yaml](03_docs_automations_YAML/Backup_ha_GitHub/03_Backup_git_weekly_dim_01_30/03_Backup_git_weekly_dim_01_30.yaml) |  |
-| 7 | [04-Backup] Git push manuel | 1772276622703 | 1772276622703 | `automation.04_backup_git_push_manuel` | [Git_push_manuel.md](03_docs_automations_MD/Backup_ha_GitHub/Git_push_manuel/Git_push_manuel.md) | [04_Backup_git_push_manuel.yaml](03_docs_automations_YAML/Backup_ha_GitHub/04_Backup_git_push_manuel/04_Backup_git_push_manuel.yaml) |  |
-| 8 | [05-Backup] Git push weekly manuel | 1772289095104 | 1772289095104 | `automation.05_backup_git_push_weekly_manuel` | [Git_push_weekly_manuel.md](03_docs_automations_MD/Backup_ha_GitHub/Git_push_weekly_manuel/Git_push_weekly_manuel.md) | [05_Backup_git_push_weekly_manuel.yaml](03_docs_automations_YAML/Backup_ha_GitHub/05_Backup_git_push_weekly_manuel/05_Backup_git_push_weekly_manuel.yaml) |  |
+| 7 | [04-Backup] Git push manuel | 1772276622703 | 1772276622703 | `automation.04_backup_git_push_manuel` | [04_Backup_git_push_manuel.md](03_docs_automations_MD/Backup_ha_GitHub/04_Backup_git_push_manuel/04_Backup_git_push_manuel.md) | [04_Backup_git_push_manuel.yaml](03_docs_automations_YAML/Backup_ha_GitHub/04_Backup_git_push_manuel/04_Backup_git_push_manuel.yaml) |  |
+| 8 | [05-Backup] Git push weekly manuel | 1772289095104 | 1772289095104 | `automation.05_backup_git_push_weekly_manuel` | [05_Backup_git_push_weekly_manuel.md](03_docs_automations_MD/Backup_ha_GitHub/05_Backup_git_push_weekly_manuel/05_Backup_git_push_weekly_manuel.md) | [05_Backup_git_push_weekly_manuel.yaml](03_docs_automations_YAML/Backup_ha_GitHub/05_Backup_git_push_weekly_manuel/05_Backup_git_push_weekly_manuel.yaml) |  |
 | 9 | [06-Backup] Git au démarrage HA | 1780424358356 | 1780424358356 | `automation.06_backup_git_au_demarrage_ha` | [Git_au_demarrage.md](03_docs_automations_MD/Backup_ha_GitHub/Git_au_demarrage/Git_au_demarrage.md) | [Git_push_au_demarrage_ha.yaml](03_docs_automations_YAML/Backup_ha_GitHub/Git_push_au_demarrage_ha/Git_push_au_demarrage_ha.yaml) |  |
 
 ## Bouton Virtuel (2)
@@ -101,7 +94,7 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 | 25 | D - [P0] Rattrapage Linky MANQUANT + Ecart | 1788237916871 | 1788237916871 | `automation.p0_rattrapage_linky_manquant_ecart` | [Rattrapage_linky_ecart.md](03_docs_automations_MD/P0_Energie/Rattrapage_linky_ecart/Rattrapage_linky_ecart.md) | [Rattrapage_linky_ecart.yaml](03_docs_automations_YAML/P0_Energie/Rattrapage_linky_ecart/Rattrapage_linky_ecart.yaml) |  |
 | 26 | DIAG - ENREGISTREMENT JOURNALIER (7 POSTES + DUT) | 1780243175281 | 1780243175281 | `automation.diag_enregistrement_journalier_7_postes_dut_2` | [Diag_enregistrement_journalier.md](03_docs_automations_MD/P0_Energie/Diag_enregistrement_journalier/Diag_enregistrement_journalier.md) | [Diag_enregistrement_journalier.yaml](03_docs_automations_YAML/P0_Energie/Diag_enregistrement_journalier/Diag_enregistrement_journalier.yaml) |  |
 | 27 | E - [P0] Histo Nodon complet quotidien (Total HP HC Cout) | 1792780906393 | 1792780906393 | `automation.e_p0_histo_nodon_complet_quotidien_total_hp_hc_cout` | [Histo_nodon_complet_quotidien.md](03_docs_automations_MD/P0_Energie/Histo_nodon_complet_quotidien/Histo_nodon_complet_quotidien.md) | [Histo_nodon_complet_quotidien.yaml](03_docs_automations_YAML/P0_Energie/Histo_nodon_complet_quotidien/Histo_nodon_complet_quotidien.yaml) |  |
-| 28 | Log Écart Linky vs Nodon | 1776969396633 | 1776969396633 | `automation.log_ecart_linky_vs_nodon` | [Log_ecart_linky_nodon.md](03_docs_automations_MD/P0_Energie/Log_ecart_linky_nodon/Log_ecart_linky_nodon.md) | [Log_ecart_linky_vs_nodon.yaml](03_docs_automations_YAML/P0_Energie/Log_ecart_linky_vs_nodon/Log_ecart_linky_vs_nodon.yaml) |  |
+| 28 | Log Écart Linky vs Nodon | 1776969396633 | 1776969396633 | `automation.log_ecart_linky_vs_nodon` | [Log_ecart_linky_vs_nodon.md](03_docs_automations_MD/P0_Energie/Log_ecart_linky_vs_nodon/Log_ecart_linky_vs_nodon.md) | [Log_ecart_linky_vs_nodon.yaml](03_docs_automations_YAML/P0_Energie/Log_ecart_linky_vs_nodon/Log_ecart_linky_vs_nodon.yaml) |  |
 
 ## P1_01_CLIM_CHAUFFAGE (10)
 
@@ -159,9 +152,9 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 
 | N | Alias | id prod | id local (ReBuild) | Entity HA | Documentation (md) | YAML source | Commentaire |
 |:--|:------|:--------|:-------------------|:----------|:-------------------|:------------|:------------|
-| 56 | P3 BUREAU - Espace de loisirs actif, garder les indicateurs allumes | 1793131130516 | aucun YAML local | `automation.nouvelle_automatisation` | aucune | aucun |  |
-| 57 | P3_BUREAU - BOUTON RODRET TOGGLE BLANCHES | 1775331454560 | 1775331454560 | `automation.bureau_bouton_rodret_toggle_blanches` | [Bureau_rodret_toggle_blanches.md](03_docs_automations_MD/P3_Eclairage/Bureau_rodret_toggle_blanches/Bureau_rodret_toggle_blanches.md) | [P3_Bureau_bouton_rodret_toggle_blanches.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_bouton_rodret_toggle_blanches/P3_Bureau_bouton_rodret_toggle_blanches.yaml) |  |
-| 58 | P3_BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES | 1775331482668 | 1775331482668 | `automation.bureau_watchdog_synchronisation_lampes_blanches` | [Bureau_watchdog_synchro_lampes.md](03_docs_automations_MD/P3_Eclairage/Bureau_watchdog_synchro_lampes/Bureau_watchdog_synchro_lampes.md) | [P3_Bureau_watchdog_synchronisation_lampes_blanches.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_watchdog_synchronisation_lampes_blanches/P3_Bureau_watchdog_synchronisation_lampes_blanches.yaml) |  |
+| 56 | P3 BUREAU - Espace de loisirs actif, garder les indicateurs allumes | 1793131130516 | 1793131130516 | `automation.nouvelle_automatisation` | [Bureau_espace_de_loisirs_actif.md](03_docs_automations_MD/P3_Eclairage/Bureau_espace_de_loisirs_actif/Bureau_espace_de_loisirs_actif.md) | [P3_Bureau_espace_de_loisirs_actif.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_espace_de_loisirs_actif/P3_Bureau_espace_de_loisirs_actif.yaml) |  |
+| 57 | P3_BUREAU - BOUTON RODRET TOGGLE BLANCHES | 1775331454560 | 1775331454560 | `automation.bureau_bouton_rodret_toggle_blanches` | [P3_Bureau_bouton_rodret_toggle_blanches.md](03_docs_automations_MD/P3_Eclairage/P3_Bureau_bouton_rodret_toggle_blanches/P3_Bureau_bouton_rodret_toggle_blanches.md) | [P3_Bureau_bouton_rodret_toggle_blanches.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_bouton_rodret_toggle_blanches/P3_Bureau_bouton_rodret_toggle_blanches.yaml) |  |
+| 58 | P3_BUREAU - WATCHDOG SYNCHRONISATION LAMPES BLANCHES | 1775331482668 | 1775331482668 | `automation.bureau_watchdog_synchronisation_lampes_blanches` | [P3_Bureau_watchdog_synchronisation_lampes_blanches.md](03_docs_automations_MD/P3_Eclairage/P3_Bureau_watchdog_synchronisation_lampes_blanches/P3_Bureau_watchdog_synchronisation_lampes_blanches.md) | [P3_Bureau_watchdog_synchronisation_lampes_blanches.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_watchdog_synchronisation_lampes_blanches/P3_Bureau_watchdog_synchronisation_lampes_blanches.yaml) |  |
 | 59 | P3_BUREAU_ACTIVATION_ECRAN_SYNCHRO | 1775331623943 | 1775331623943 | `automation.bureau_activation_ecran_synchro` | [Bureau_activation_ecran_synchro.md](03_docs_automations_MD/P3_Eclairage/Bureau_activation_ecran_synchro/Bureau_activation_ecran_synchro.md) | [P3_Bureau_activation_ecran_synchro.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_activation_ecran_synchro/P3_Bureau_activation_ecran_synchro.yaml) |  |
 | 60 | P3_ENTREE_ALLUMAGE_LUMIERE | 1775331417577 | 1775331417577 | `automation.allumage_lumiere_entree` | [Allumage_lumiere_entree.md](03_docs_automations_MD/P3_Eclairage/Allumage_lumiere_entree/Allumage_lumiere_entree.md) | [P3_Entree_allumage_lumiere.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Entree_allumage_lumiere/P3_Entree_allumage_lumiere.yaml) |  |
 | 61 | P3_SDB - SYNC MIROIR LAMPE ET RELAIS SDB | 1780200461358 | 1780200461358 | `automation.p3_sdb_bouton_rodret_toggle_sdb` | [SDB_sync_miroir_lampe_et_relais_SDB.md](03_docs_automations_MD/P3_Eclairage/SDB_sync_miroir_lampe_et_relais_SDB/SDB_sync_miroir_lampe_et_relais_SDB.md) | [P3_SDB_sync_miroir_lampe_et_relais_SDB.yaml](03_docs_automations_YAML/P3_Eclairage/P3_SDB_sync_miroir_lampe_et_relais_SDB/P3_SDB_sync_miroir_lampe_et_relais_SDB.yaml) |  |
@@ -170,7 +163,7 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 
 | N | Alias | id prod | id local (ReBuild) | Entity HA | Documentation (md) | YAML source | Commentaire |
 |:--|:------|:--------|:-------------------|:----------|:-------------------|:------------|:------------|
-| 62 | AUTO. ENERGIE. Basculement Tarif HC/HP — Genelec Appart | 1775997999740 | 1775997999740 | `automation.auto_energie_basculement_tarif_hc_hp_genelec_appart` | aucune | [Auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml](03_docs_automations_YAML/Tarif_hc_hp/Auto_energie_basculement_tarif_hc_hp_genelec_appart/Auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml) |  |
+| 62 | AUTO. ENERGIE. Basculement Tarif HC/HP — Genelec Appart | 1775997999740 | 1775997999740 | `automation.auto_energie_basculement_tarif_hc_hp_genelec_appart` | [Auto_energie_basculement_tarif_hc_hp_genelec_appart.md](03_docs_automations_MD/Tarif_hc_hp/Auto_energie_basculement_tarif_hc_hp_genelec_appart/Auto_energie_basculement_tarif_hc_hp_genelec_appart.md) | [Auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml](03_docs_automations_YAML/Tarif_hc_hp/Auto_energie_basculement_tarif_hc_hp_genelec_appart/Auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml) |  |
 
 ## Watchdog Piles (HUE/IKEA/SONOFF) (1)
 
@@ -184,7 +177,7 @@ Ces YAML ne correspondent a aucune entree de H:\automations.yaml (id absent ou i
 
 | N | Alias | id prod | id local (ReBuild) | Entity HA | Documentation (md) | YAML source | Commentaire |
 |:--|:------|:--------|:-------------------|:----------|:-------------------|:------------|:------------|
-| 1 | P3_BUREAU - Forcer Play ON si PC tourne | hors automations.yaml de la prod | 1775331547996 | - | [Bureau_forcer_play_on.md](03_docs_automations_MD/P3_Eclairage/Bureau_forcer_play_on/Bureau_forcer_play_on.md) | [P3_Bureau_forcer_play_on_si_pc_tourne.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_forcer_play_on_si_pc_tourne/P3_Bureau_forcer_play_on_si_pc_tourne.yaml) |  |
+| 1 | P3_BUREAU - Forcer Play ON si PC tourne | hors automations.yaml de la prod | 1775331547996 | - | [Bureau_espace_de_loisirs_actif.md](03_docs_automations_MD/P3_Eclairage/Bureau_espace_de_loisirs_actif/Bureau_espace_de_loisirs_actif.md) | [P3_Bureau_forcer_play_on_si_pc_tourne.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_forcer_play_on_si_pc_tourne/P3_Bureau_forcer_play_on_si_pc_tourne.yaml) |  |
 | 2 | Raspberry CPU Fan PWM 6 States | hors automations.yaml de la prod | aucun | - | aucune | [A_RASPI_fan_pwm_6_states.yaml](03_docs_automations_YAML/XX_RASPI/A_RASPI_fan_pwm_6_states_YAML/A_RASPI_fan_pwm_6_states.yaml) |  |
-| 3 | SDB - SOUFFLANT - BOUTON IKEA RODRET (MQTT vers interrupteur) | hors automations.yaml de la prod | aucun | - | aucune | [i_soufflant_SDB_bouton_rodret.yaml](03_docs_automations_YAML/P1_SDB/i_soufflant_SDB_bouton_rodret.yaml) | Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant. ; Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - BOUTON IKEA RODRET) |
-| 4 | SDB - SOUFFLANT - ROUTAGE (interrupteur vers sequences) | hors automations.yaml de la prod | aucun | - | aucune | [h_soufflant_SDB_routage.yaml](03_docs_automations_YAML/P1_SDB/h_soufflant_SDB_routage.yaml) | Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant. ; Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - ROUTAGE) |
+| 3 | SDB - SOUFFLANT - BOUTON IKEA RODRET (MQTT vers interrupteur) | hors automations.yaml de la prod | aucun | - | [i_soufflant_SDB_bouton_rodret.md](03_docs_automations_MD/P1_SDB/i_soufflant_SDB_bouton_rodret.md) | [i_soufflant_SDB_bouton_rodret.yaml](03_docs_automations_YAML/P1_SDB/i_soufflant_SDB_bouton_rodret.yaml) | Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant. ; Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - BOUTON IKEA RODRET) |
+| 4 | SDB - SOUFFLANT - ROUTAGE (interrupteur vers sequences) | hors automations.yaml de la prod | aucun | - | [h_soufflant_SDB_routage.md](03_docs_automations_MD/P1_SDB/h_soufflant_SDB_routage.md) | [h_soufflant_SDB_routage.yaml](03_docs_automations_YAML/P1_SDB/h_soufflant_SDB_routage.yaml) | Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant. ; Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - ROUTAGE) |

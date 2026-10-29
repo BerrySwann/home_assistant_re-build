@@ -1,15 +1,15 @@
 # MOC_DASHBOARD.md - 1 YAML = 1 fiche .md (dashboard)
 
-Genere le 2026-10-28 18:55. Genere par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_dashboard/gen_moc_dashboard.py. Ne pas modifier a la main : le script ecrase les modifications.
+Genere le 2026-10-28 19:07. Genere par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_dashboard/gen_moc_dashboard.py. Ne pas modifier a la main : le script ecrase les modifications.
 
 Regle d'Eric (2026-10-28) : chaque YAML de docs/02_docs_dashboard (hors Dashboard_COMPLET) a sa fiche .md. Le rapprochement se fait par le nom du fichier, sinon par une fiche de la meme cellule qui cite le fichier YAML, sinon par un rattachement manuel (table FORCE du script). Sous la ligne de chaque page ou vignette figurent toutes les cartes (autres YAML) de la meme cellule avec leur fiche (Page.md). Sont ignores : sauvegardes .bak, dossiers XX_, Dashboard_COMPLET, *_ORIGINAL, *_archive*, et les fichiers qui ne sont pas des YAML (.js, .svg, .sh). Les liens sont relatifs a ce fichier.
 
 ## Controle
 
 - YAML suivis : 66
-- YAML avec fiche : 65
-- YAML sans fiche (MANQUANT) : 1
-- Fiches .md sans YAML correspondant (tutos, fiches renommees, etc.) : 4
+- YAML avec fiche : 66
+- YAML sans fiche (MANQUANT) : 0
+- Fiches .md sans YAML correspondant (tutos, fiches renommees, etc.) : 0
 
 ## Vignettes et pages
 
@@ -74,7 +74,7 @@ Regle d'Eric (2026-10-28) : chaque YAML de docs/02_docs_dashboard (hors Dashboar
 | L5C2 | L5C2_BATTERIES_PORTABLES | [L5C2_Vignette_BATTERIES_PORTABLES.yaml](02_dashboard_docs_YAML/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_01_Vignette/L5C2_Vignette_BATTERIES_PORTABLES.yaml) | Vignette.md OK [fiche](02_dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_01_Vignette/L5C2_Vignette_BATTERIES_PORTABLES.md) | [L5C2_Page_BATTERIES_PORTABLES_gauche.yaml](02_dashboard_docs_YAML/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_02_Page_gauche/L5C2_Page_BATTERIES_PORTABLES_gauche.yaml) | Page.md OK [fiche](02_dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_02_Page_gauche/L5C2_Page_BATTERIES_PORTABLES_gauche.md) |
 |  |  | - | - | [L5C2_Page_BATTERIES_PORTABLES_droite.yaml](02_dashboard_docs_YAML/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_03_Page_droite/L5C2_Page_BATTERIES_PORTABLES_droite.yaml) | Page.md OK [fiche](02_dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/L5C2_BATTERIES_PORTABLES_03_Page_droite/L5C2_Page_BATTERIES_PORTABLES_droite.md) |
 | <br> |  |  |  |  |  |
-| L5C3 | L5C3_MARIADB | [L5C3_Vignette_MARIADB.yaml](02_dashboard_docs_YAML/L5C3_MARIADB/L5C3_MARIADB_01_Vignette/L5C3_Vignette_MARIADB.yaml) | Vignette.md OK [fiche](02_dashboard_docs_MD/L5C3_MARIADB/L5C3_MARIADB_01_Vignette/L5C3_Vignette_MARIADB.md) | [L5C3_Page_MARIADB_mariadb.yaml](02_dashboard_docs_YAML/L5C3_MARIADB/L5C3_MARIADB_02_Page_mariadb/L5C3_Page_MARIADB_mariadb.yaml) | Page.md MANQUANT |
+| L5C3 | L5C3_MARIADB | [L5C3_Vignette_MARIADB.yaml](02_dashboard_docs_YAML/L5C3_MARIADB/L5C3_MARIADB_01_Vignette/L5C3_Vignette_MARIADB.yaml) | Vignette.md OK [fiche](02_dashboard_docs_MD/L5C3_MARIADB/L5C3_MARIADB_01_Vignette/L5C3_Vignette_MARIADB.md) | [L5C3_Page_MARIADB_mariadb.yaml](02_dashboard_docs_YAML/L5C3_MARIADB/L5C3_MARIADB_02_Page_mariadb/L5C3_Page_MARIADB_mariadb.yaml) | Page.md OK [fiche](02_dashboard_docs_MD/L5C3_MARIADB/L5C3_MARIADB_02_Page_mariadb/L5C3_Page_MARIADB_mariadb.md) |
 |  |  | - | - | [Card_audit_buttons.yaml](02_dashboard_docs_YAML/L5C3_MARIADB/Card_audit_buttons.yaml) | Page.md OK [fiche](02_dashboard_docs_MD/L5C3_MARIADB/Card_audit_buttons.md) |
 |  |  | - | - | [Card_audit_journal.yaml](02_dashboard_docs_YAML/L5C3_MARIADB/Card_audit_journal.yaml) | Page.md OK [fiche](02_dashboard_docs_MD/L5C3_MARIADB/Card_audit_journal.md) |
 |  |  | - | - | [Card_audit_md5.yaml](02_dashboard_docs_YAML/L5C3_MARIADB/Card_audit_md5.yaml) | Page.md OK [fiche](02_dashboard_docs_MD/L5C3_MARIADB/Card_audit_md5.md) |
@@ -89,7 +89,4 @@ Regle d'Eric (2026-10-28) : chaque YAML de docs/02_docs_dashboard (hors Dashboar
 
 ## Fiches sans YAML correspondant
 
-- [L3C1_ECLAIRAGE/PAGE_ECLAIRAGE.md](02_dashboard_docs_MD/L3C1_ECLAIRAGE/PAGE_ECLAIRAGE.md)
-- [L4C3_MAJ_HA/PAGE_MAJ.md](02_dashboard_docs_MD/L4C3_MAJ_HA/PAGE_MAJ.md)
-- [L5C2_BATTERIES_PORTABLES/PAGE_BATTERIES_PORTABLES.md](02_dashboard_docs_MD/L5C2_BATTERIES_PORTABLES/PAGE_BATTERIES_PORTABLES.md)
-- [L5C3_MARIADB/L5C3_MARIADB_02_Page_principale/L5C3_Page_MARIADB_principale.md](02_dashboard_docs_MD/L5C3_MARIADB/L5C3_MARIADB_02_Page_principale/L5C3_Page_MARIADB_principale.md)
+- aucune

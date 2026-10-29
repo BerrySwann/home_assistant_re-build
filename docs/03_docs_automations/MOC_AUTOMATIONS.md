@@ -1,0 +1,112 @@
+# MOC_AUTOMATIONS.md - 1 YAML = 1 fiche .md (automations)
+
+Genere le 2026-10-28 20:03 par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py (MOC_AUTOMATIONS). Ne pas modifier a la main : le script ecrase les modifications.
+
+Regle d'Eric (2026-10-28) : chaque YAML de docs/03_docs_automations a sa fiche .md. Le rapprochement se fait par le nom du fichier, sinon par une fiche qui cite le nom du YAML. Une fiche proche par le nom mais non rattachee est seulement proposee comme candidate (a valider par Eric, jamais comptee OK). Sont ignores : .bak, XX_*, *_ORIGINAL, *_archive*. Voir aussi GLOBAL_INDEX_AUTOMATIONS.md (lien avec les automations de la prod). Les liens sont relatifs a ce fichier.
+
+## Controle
+
+- YAML suivis : 66
+- YAML avec fiche : 66
+- YAML sans fiche (MANQUANT) : 0 dont 0 avec une fiche candidate a valider
+- Fiches .md sans YAML correspondant : 0
+- Documents annexes (prefixe P1_XX_, fiche sans YAML voulue) : 3
+
+## Automations par categorie
+
+| Categorie | Source | Fiche |
+|:-----|:-------|:------|
+| _Sans_categorie | [P4_Log_zones_eric.yaml](03_docs_automations_YAML/_Sans_categorie/P4_Log_zones_eric/P4_Log_zones_eric.yaml) | Fiche OK [fiche](03_docs_automations_MD/_Sans_categorie/P4_Log_zones_eric/P4_Log_zones_eric.md) |
+|  | [Veille_GitHub_nouvelle_release_detectee.yaml](03_docs_automations_YAML/_Sans_categorie/Veille_GitHub_nouvelle_release_detectee/Veille_GitHub_nouvelle_release_detectee.yaml) | Fiche OK [fiche](03_docs_automations_MD/_Sans_categorie/Veille_GitHub_nouvelle_release_detectee/Veille_GitHub_nouvelle_release_detectee.md) |
+| <br> |  |  |
+| Backup_ha_GitHub | [00_Backup_alerte_si_ko_15_min.yaml](03_docs_automations_YAML/Backup_ha_GitHub/00_Backup_alerte_si_ko_15_min/00_Backup_alerte_si_ko_15_min.yaml) | Fiche OK [fiche](03_docs_automations_MD/Backup_ha_GitHub/Git_alerte_ko/Git_alerte_ko.md) (par chemin cite) |
+|  | [01_Backup_git_hourly_h_10.yaml](03_docs_automations_YAML/Backup_ha_GitHub/01_Backup_git_hourly_h_10/01_Backup_git_hourly_h_10.yaml) | Fiche OK [fiche](03_docs_automations_MD/Backup_ha_GitHub/Git_hourly/Git_hourly.md) (par chemin cite) |
+|  | [02_Backup_git_daily_03_00.yaml](03_docs_automations_YAML/Backup_ha_GitHub/02_Backup_git_daily_03_00/02_Backup_git_daily_03_00.yaml) | Fiche OK [fiche](03_docs_automations_MD/Backup_ha_GitHub/02_Backup_git_daily_03_00/02_Backup_git_daily_03_00.md) |
+|  | [03_Backup_git_weekly_dim_01_30.yaml](03_docs_automations_YAML/Backup_ha_GitHub/03_Backup_git_weekly_dim_01_30/03_Backup_git_weekly_dim_01_30.yaml) | Fiche OK [fiche](03_docs_automations_MD/Backup_ha_GitHub/Git_weekly/Git_weekly.md) (par chemin cite) |
+|  | [04_Backup_git_push_manuel.yaml](03_docs_automations_YAML/Backup_ha_GitHub/04_Backup_git_push_manuel/04_Backup_git_push_manuel.yaml) | Fiche OK [fiche](03_docs_automations_MD/Backup_ha_GitHub/04_Backup_git_push_manuel/04_Backup_git_push_manuel.md) |
+|  | [05_Backup_git_push_weekly_manuel.yaml](03_docs_automations_YAML/Backup_ha_GitHub/05_Backup_git_push_weekly_manuel/05_Backup_git_push_weekly_manuel.yaml) | Fiche OK [fiche](03_docs_automations_MD/Backup_ha_GitHub/05_Backup_git_push_weekly_manuel/05_Backup_git_push_weekly_manuel.md) |
+|  | [Git_push_au_demarrage_ha.yaml](03_docs_automations_YAML/Backup_ha_GitHub/Git_push_au_demarrage_ha/Git_push_au_demarrage_ha.yaml) | Fiche OK [fiche](03_docs_automations_MD/Backup_ha_GitHub/Git_au_demarrage/Git_au_demarrage.md) (par chemin cite) |
+| <br> |  |  |
+| Bouton_virtuel | [P3_Salon_bouton_ikea_inter_salon.yaml](03_docs_automations_YAML/Bouton_virtuel/P3_Salon_bouton_ikea_inter_salon/P3_Salon_bouton_ikea_inter_salon.yaml) | Fiche OK [fiche](03_docs_automations_MD/Bouton_virtuel/Bouton_inter_ikea_4/Bouton_inter_ikea_4.md) (par chemin cite) |
+|  | [P3_Salon_bouton_ikea_somrig.yaml](03_docs_automations_YAML/Bouton_virtuel/P3_Salon_bouton_ikea_somrig/P3_Salon_bouton_ikea_somrig.yaml) | Fiche OK [fiche](03_docs_automations_MD/Bouton_virtuel/Bouton_inter_somrig/Bouton_inter_somrig.md) (par chemin cite) |
+| <br> |  |  |
+| Controle_entity_Z2M | [Z2M_last_seen.yaml](03_docs_automations_YAML/Controle_entity_Z2M/Z2M_last_seen/Z2M_last_seen.yaml) | Fiche OK [fiche](03_docs_automations_MD/Controle_entity_Z2M/Z2M_last_seen/Z2M_last_seen.md) |
+| <br> |  |  |
+| Gestion_des_stores | [Gestion_optimisee_du_store_bureau.yaml](03_docs_automations_YAML/Gestion_des_stores/Gestion_optimisee_du_store_bureau/Gestion_optimisee_du_store_bureau.yaml) | Fiche OK [fiche](03_docs_automations_MD/Gestion_des_stores/Gestion_store_bureau/Gestion_store_bureau.md) (par chemin cite) |
+|  | [Gestion_simple_du_store_salon_matin_soir.yaml](03_docs_automations_YAML/Gestion_des_stores/Gestion_simple_du_store_salon_matin_soir/Gestion_simple_du_store_salon_matin_soir.yaml) | Fiche OK [fiche](03_docs_automations_MD/Gestion_des_stores/Gestion_store_salon/Gestion_store_salon.md) (par chemin cite) |
+| <br> |  |  |
+| Mariadb_et_vscode_optimisation | [Db_purge_mariadb_repack.yaml](03_docs_automations_YAML/Mariadb_et_vscode_optimisation/Db_purge_mariadb_repack/Db_purge_mariadb_repack.yaml) | Fiche OK [fiche](03_docs_automations_MD/Mariadb_et_vscode_optimisation/Db_purge_mariadb/Db_purge_mariadb.md) (par chemin cite) |
+|  | [Systeme_economie_energie_vs_code.yaml](03_docs_automations_YAML/Mariadb_et_vscode_optimisation/Systeme_economie_energie_vs_code/Systeme_economie_energie_vs_code.yaml) | Fiche OK [fiche](03_docs_automations_MD/Mariadb_et_vscode_optimisation/Economie_energie_vscode/Economie_energie_vscode.md) (par chemin cite) |
+| <br> |  |  |
+| Meteo | [Alerte_meteo_france_actualisation_des_cartes.yaml](03_docs_automations_YAML/Meteo/Alerte_meteo_france_actualisation_des_cartes/Alerte_meteo_france_actualisation_des_cartes.yaml) | Fiche OK [fiche](03_docs_automations_MD/Meteo/Alerte_meteo_cartes/Alerte_meteo_cartes.md) (par chemin cite) |
+|  | [Mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml](03_docs_automations_YAML/Meteo/Mettre_a_jour_le_temps_du_dernier_impact_de_foudre/Mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml) | Fiche OK [fiche](03_docs_automations_MD/Meteo/Maj_temps_foudre/Maj_temps_foudre.md) (par chemin cite) |
+|  | [Notification_de_la_foudre.yaml](03_docs_automations_YAML/Meteo/Notification_de_la_foudre/Notification_de_la_foudre.yaml) | Fiche OK [fiche](03_docs_automations_MD/Meteo/Notif_foudre/Notif_foudre.md) (par chemin cite) |
+|  | [Update_previous_humidity.yaml](03_docs_automations_YAML/Meteo/Update_previous_humidity/Update_previous_humidity.yaml) | Fiche OK [fiche](03_docs_automations_MD/Meteo/Update_prev_humidity/Update_prev_humidity.md) (par chemin cite) |
+|  | [Update_previous_temperature.yaml](03_docs_automations_YAML/Meteo/Update_previous_temperature/Update_previous_temperature.yaml) | Fiche OK [fiche](03_docs_automations_MD/Meteo/Update_prev_temperature/Update_prev_temperature.md) (par chemin cite) |
+| <br> |  |  |
+| P0_Energie | [Diag_enregistrement_journalier.yaml](03_docs_automations_YAML/P0_Energie/Diag_enregistrement_journalier/Diag_enregistrement_journalier.yaml) | Fiche OK [fiche](03_docs_automations_MD/P0_Energie/Diag_enregistrement_journalier/Diag_enregistrement_journalier.md) |
+|  | [Histo_linky_quotidien.yaml](03_docs_automations_YAML/P0_Energie/Histo_linky_quotidien/Histo_linky_quotidien.yaml) | Fiche OK [fiche](03_docs_automations_MD/P0_Energie/Histo_linky_quotidien/Histo_linky_quotidien.md) |
+|  | [Histo_nodon_complet_quotidien.yaml](03_docs_automations_YAML/P0_Energie/Histo_nodon_complet_quotidien/Histo_nodon_complet_quotidien.yaml) | Fiche OK [fiche](03_docs_automations_MD/P0_Energie/Histo_nodon_complet_quotidien/Histo_nodon_complet_quotidien.md) |
+|  | [Histo_nodon_quotidien.yaml](03_docs_automations_YAML/P0_Energie/Histo_nodon_quotidien/Histo_nodon_quotidien.yaml) | Fiche OK [fiche](03_docs_automations_MD/P0_Energie/Histo_nodon_quotidien/Histo_nodon_quotidien.md) |
+|  | [Log_ecart_linky_vs_nodon.yaml](03_docs_automations_YAML/P0_Energie/Log_ecart_linky_vs_nodon/Log_ecart_linky_vs_nodon.yaml) | Fiche OK [fiche](03_docs_automations_MD/P0_Energie/Log_ecart_linky_vs_nodon/Log_ecart_linky_vs_nodon.md) |
+|  | [Rattrapage_linky_ecart.yaml](03_docs_automations_YAML/P0_Energie/Rattrapage_linky_ecart/Rattrapage_linky_ecart.yaml) | Fiche OK [fiche](03_docs_automations_MD/P0_Energie/Rattrapage_linky_ecart/Rattrapage_linky_ecart.md) |
+|  | [Rattrapage_linky_j2_ecart.yaml](03_docs_automations_YAML/P0_Energie/Rattrapage_linky_j2_ecart/Rattrapage_linky_j2_ecart.yaml) | Fiche OK [fiche](03_docs_automations_MD/P0_Energie/Rattrapage_linky_j2/Rattrapage_linky_j2.md) (par chemin cite) |
+| <br> |  |  |
+| P1_01_Clim_chauffage | [A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/A0_clim_jour/A0_clim_jour.md) (par chemin cite) |
+|  | [B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/B0_clim_nuit/B0_clim_nuit.md) (par chemin cite) |
+|  | [C_notification_temperature_up_ou_down_7h30_21h00.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/C_notification_temperature_up_ou_down_7h30_21h00/C_notification_temperature_up_ou_down_7h30_21h00.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/C_notif_temp_jour/C_notif_temp_jour.md) (par chemin cite) |
+|  | [D_notification_temperature_up_ou_down_21h00_7h30.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/D_notification_temperature_up_ou_down_21h00_7h30/D_notification_temperature_up_ou_down_21h00_7h30.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/D_notif_temp_nuit/D_notif_temp_nuit.md) (par chemin cite) |
+|  | [E_clim_notification_de_fermeture_des_fenetres.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/E_clim_notification_de_fermeture_des_fenetres/E_clim_notification_de_fermeture_des_fenetres.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/E_notif_fermeture_fenetres/E_notif_fermeture_fenetres.md) (par chemin cite) |
+|  | [F_clim_automatisation_arret_clim_notification.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/F_clim_automatisation_arret_clim_notification/F_clim_automatisation_arret_clim_notification.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/F_arret_clim_notif/F_arret_clim_notif.md) (par chemin cite) |
+|  | [G_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/G_clim_notification_de_changement_de_mode_ete_fan_hiver/G_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/G_notif_mode_changement/G_notif_mode_changement.md) (par chemin cite) |
+|  | [H_clim_debug_force_mode_correct_securite.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/H_clim_debug_force_mode_correct_securite/H_clim_debug_force_mode_correct_securite.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/H_debug_force_mode/H_debug_force_mode.md) (par chemin cite) |
+|  | [I_synchro_notif_clim_si_prise_coupee.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/I_synchro_notif_clim_si_prise_coupee/I_synchro_notif_clim_si_prise_coupee.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/I_synchro_notif_prise_coupee/I_synchro_notif_prise_coupee.md) (par chemin cite) |
+|  | [J_debug_notifier_les_changements_de_message_clim_mobile.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/J_debug_notif_message_clim/J_debug_notif_message_clim.md) (par chemin cite) |
+| <br> |  |  |
+| P1_02_Cuisine | [A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.yaml](03_docs_automations_YAML/P1_02_Cuisine/A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9/A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_02_Cuisine/A_chauffage_cuisine/A_chauffage_cuisine.md) (par chemin cite) |
+|  | [B_chauffage_cuisine_vacances.yaml](03_docs_automations_YAML/P1_02_Cuisine/B_chauffage_cuisine_vacances/B_chauffage_cuisine_vacances.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_02_Cuisine/B_chauffage_cuisine_vacances/B_chauffage_cuisine_vacances.md) |
+| <br> |  |  |
+| P1_03_Chauffage_salle_de_bain | [A_soufflant_SDB_bouton_rodret.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/A_soufflant_SDB_bouton_rodret/A_soufflant_SDB_bouton_rodret.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/A_soufflant_SDB_bouton_rodret/A_soufflant_SDB_bouton_rodret.md) |
+|  | [B_soufflant_SDB_routage.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/B_soufflant_SDB_routage/B_soufflant_SDB_routage.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/B_soufflant_SDB_routage/B_soufflant_SDB_routage.md) |
+|  | [C_salle_de_bain_watchdog_securite_soufflant.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/C_salle_de_bain_watchdog_securite_soufflant/C_salle_de_bain_watchdog_securite_soufflant.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/C_watchdog_soufflant_SDB/C_watchdog_soufflant_SDB.md) (par chemin cite) |
+|  | [D_SDB_soufflant_decompte_60min_timer.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/D_SDB_soufflant_decompte_60min_timer/D_SDB_soufflant_decompte_60min_timer.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/D_SDB_soufflant_decompte_60min/D_SDB_soufflant_decompte_60min.md) (par chemin cite) |
+|  | [E_SDB_soufflant_rattrapage_demarrage_ha_timer.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/E_SDB_soufflant_rattrapage_demarrage_ha_timer/E_SDB_soufflant_rattrapage_demarrage_ha_timer.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/E_SDB_soufflant_rattrapage_demarrage_ha/E_SDB_soufflant_rattrapage_demarrage_ha.md) (par chemin cite) |
+|  | [F_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/F_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h/F_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/F_minuterie_seche_serviettes/F_minuterie_seche_serviettes.md) (par chemin cite) |
+|  | [G_SDB_seche_serviettes_decompte_2h_timer.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/G_SDB_seche_serviettes_decompte_2h_timer/G_SDB_seche_serviettes_decompte_2h_timer.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/G_SDB_seche_serviettes_decompte_2h/G_SDB_seche_serviettes_decompte_2h.md) (par chemin cite) |
+|  | [H_SDB_seche_serviettes_rattrapage_demarrage_ha_timer.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/H_SDB_seche_serviettes_rattrapage_demarrage_ha_timer/H_SDB_seche_serviettes_rattrapage_demarrage_ha_timer.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/H_SDB_seche_serviettes_rattrapage_demarrage_ha/H_SDB_seche_serviettes_rattrapage_demarrage_ha.md) (par chemin cite) |
+|  | [Z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/Z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant/Z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/Z_soufflant_SDB_gestion_intelligente/Z_soufflant_SDB_gestion_intelligente.md) (par chemin cite) |
+| <br> |  |  |
+| P1_SDB | [h_soufflant_SDB_routage.yaml](03_docs_automations_YAML/P1_SDB/h_soufflant_SDB_routage.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_SDB/h_soufflant_SDB_routage.md) |
+|  | [i_soufflant_SDB_bouton_rodret.yaml](03_docs_automations_YAML/P1_SDB/i_soufflant_SDB_bouton_rodret.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_SDB/i_soufflant_SDB_bouton_rodret.md) |
+| <br> |  |  |
+| P2_Alarme_congelateur | [Congelateur_alarme_capteur.yaml](03_docs_automations_YAML/P2_Alarme_congelateur/Congelateur_alarme_capteur/Congelateur_alarme_capteur.yaml) | Fiche OK [fiche](03_docs_automations_MD/P2_Alarme_congelateur/Congelateur_alarme_capteur/Congelateur_alarme_capteur.md) |
+|  | [Congelateur_alarme_panne.yaml](03_docs_automations_YAML/P2_Alarme_congelateur/Congelateur_alarme_panne/Congelateur_alarme_panne.yaml) | Fiche OK [fiche](03_docs_automations_MD/P2_Alarme_congelateur/Congelateur_alarme_panne/Congelateur_alarme_panne.md) |
+|  | [Congelateur_alarme_porte.yaml](03_docs_automations_YAML/P2_Alarme_congelateur/Congelateur_alarme_porte/Congelateur_alarme_porte.yaml) | Fiche OK [fiche](03_docs_automations_MD/P2_Alarme_congelateur/Congelateur_alarme_porte/Congelateur_alarme_porte.md) |
+| <br> |  |  |
+| P2_eCO_prises | [eCO_prises_dynamique_by_presence_groupe.yaml](03_docs_automations_YAML/P2_eCO_prises/eCO_prises_dynamique_by_presence_groupe/eCO_prises_dynamique_by_presence_groupe.yaml) | Fiche OK [fiche](03_docs_automations_MD/P2_eCO_prises/eCO_prises_dynamique/eCO_prises_dynamique.md) (par chemin cite) |
+|  | [Gestion_pc_bureau_scene_de_fin_notif.yaml](03_docs_automations_YAML/P2_eCO_prises/Gestion_pc_bureau_scene_de_fin_notif/Gestion_pc_bureau_scene_de_fin_notif.yaml) | Fiche OK [fiche](03_docs_automations_MD/P2_eCO_prises/Gestion_pc_bureau/Gestion_pc_bureau.md) (par chemin cite) |
+|  | [Gestion_tv_chambre_scene_de_fin_notif.yaml](03_docs_automations_YAML/P2_eCO_prises/Gestion_tv_chambre_scene_de_fin_notif/Gestion_tv_chambre_scene_de_fin_notif.yaml) | Fiche OK [fiche](03_docs_automations_MD/P2_eCO_prises/Gestion_tv_chambre/Gestion_tv_chambre.md) (par chemin cite) |
+| <br> |  |  |
+| P3_Eclairage | [P3_Bureau_activation_ecran_synchro.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_activation_ecran_synchro/P3_Bureau_activation_ecran_synchro.yaml) | Fiche OK [fiche](03_docs_automations_MD/P3_Eclairage/Bureau_activation_ecran_synchro/Bureau_activation_ecran_synchro.md) (par chemin cite) |
+|  | [P3_Bureau_bouton_rodret_toggle_blanches.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_bouton_rodret_toggle_blanches/P3_Bureau_bouton_rodret_toggle_blanches.yaml) | Fiche OK [fiche](03_docs_automations_MD/P3_Eclairage/P3_Bureau_bouton_rodret_toggle_blanches/P3_Bureau_bouton_rodret_toggle_blanches.md) |
+|  | [P3_Bureau_espace_de_loisirs_actif.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_espace_de_loisirs_actif/P3_Bureau_espace_de_loisirs_actif.yaml) | Fiche OK [fiche](03_docs_automations_MD/P3_Eclairage/Bureau_espace_de_loisirs_actif/Bureau_espace_de_loisirs_actif.md) (par chemin cite) |
+|  | [P3_Bureau_forcer_play_on_si_pc_tourne.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_forcer_play_on_si_pc_tourne/P3_Bureau_forcer_play_on_si_pc_tourne.yaml) | Fiche OK [fiche](03_docs_automations_MD/P3_Eclairage/Bureau_forcer_play_on/Bureau_forcer_play_on.md) (par chemin cite) |
+|  | [P3_Bureau_watchdog_synchronisation_lampes_blanches.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_watchdog_synchronisation_lampes_blanches/P3_Bureau_watchdog_synchronisation_lampes_blanches.yaml) | Fiche OK [fiche](03_docs_automations_MD/P3_Eclairage/P3_Bureau_watchdog_synchronisation_lampes_blanches/P3_Bureau_watchdog_synchronisation_lampes_blanches.md) |
+|  | [P3_Entree_allumage_lumiere.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Entree_allumage_lumiere/P3_Entree_allumage_lumiere.yaml) | Fiche OK [fiche](03_docs_automations_MD/P3_Eclairage/Allumage_lumiere_entree/Allumage_lumiere_entree.md) (par chemin cite) |
+|  | [P3_SDB_sync_miroir_lampe_et_relais_SDB.yaml](03_docs_automations_YAML/P3_Eclairage/P3_SDB_sync_miroir_lampe_et_relais_SDB/P3_SDB_sync_miroir_lampe_et_relais_SDB.yaml) | Fiche OK [fiche](03_docs_automations_MD/P3_Eclairage/SDB_sync_miroir_lampe_et_relais_SDB/SDB_sync_miroir_lampe_et_relais_SDB.md) (par chemin cite) |
+| <br> |  |  |
+| Tarif_hc_hp | [Auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml](03_docs_automations_YAML/Tarif_hc_hp/Auto_energie_basculement_tarif_hc_hp_genelec_appart/Auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml) | Fiche OK [fiche](03_docs_automations_MD/Tarif_hc_hp/Auto_energie_basculement_tarif_hc_hp_genelec_appart/Auto_energie_basculement_tarif_hc_hp_genelec_appart.md) |
+| <br> |  |  |
+| Watchdog_piles_hue_ikea_sonoff | [Systeme_watchdog_piles_hue_ikea_sonoff.yaml](03_docs_automations_YAML/Watchdog_piles_hue_ikea_sonoff/Systeme_watchdog_piles_hue_ikea_sonoff/Systeme_watchdog_piles_hue_ikea_sonoff.yaml) | Fiche OK [fiche](03_docs_automations_MD/Watchdog_piles_hue_ikea_sonoff/Watchdog_piles/Watchdog_piles.md) (par chemin cite) |
+
+## Documents annexes (fiches sans YAML, voulues)
+
+Fiches de reference rangees avec leur famille d'automations mais qui ne decrivent aucun YAML : le prefixe P1_XX_ le dit. Elles ne sont pas des anomalies.
+
+- [P1_03_Chauffage_salle_de_bain/P1_XX_D_WATCHDOG_RADIATEUR_SDB/P1_XX_D_WATCHDOG_RADIATEUR_SDB.md](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_D_WATCHDOG_RADIATEUR_SDB/P1_XX_D_WATCHDOG_RADIATEUR_SDB.md) : ancienne version du watchdog (alias D ... RADIATEUR), doublon probable de la fiche C_watchdog_soufflant_SDB, a decider (TODO R86.3)
+- [P1_03_Chauffage_salle_de_bain/P1_XX_SDB_soufflant_specification_2026/P1_XX_SDB_soufflant_specification_2026.md](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_SDB_soufflant_specification_2026/P1_XX_SDB_soufflant_specification_2026.md) : specification de reference du soufflant de la salle de bain (2026-09-28, mise a jour 2026-09-29)
+- [P1_03_Chauffage_salle_de_bain/P1_XX_Timers_SDB_soufflant_et_seche_serviettes/P1_XX_Timers_SDB_soufflant_et_seche_serviettes.md](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_Timers_SDB_soufflant_et_seche_serviettes/P1_XX_Timers_SDB_soufflant_et_seche_serviettes.md) : timers du soufflant (60 min) et du seche-serviettes (2 h) avec rattrapage au demarrage de HA, du 2026-10-07, non testes en conditions reelles
+
+## Fiches sans YAML correspondant
+
+- aucune

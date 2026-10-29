@@ -1,5 +1,7 @@
 # Bureau - Forcer Play ON si PC tourne
 
+> **Automation retirée de HA le 2026-10-27**, remplacée par `P3 BUREAU - Espace de loisirs actif, garder les indicateurs allumes` (fiche `Bureau_espace_de_loisirs_actif`). Cette fiche est conservée pour l'historique.
+
 **Catégorie :** P3_eclairage
 **Alias HA :** `P3_BUREAU - Forcer Play ON si PC tourne`
 **Entité :** `automation.bureau_forcer_play_on_si_pc_tourne` (id `1775331547996`), mode `parallel`
@@ -40,4 +42,4 @@ Un cas par lampe : `light.turn_on` sur la lampe déclenchante, `brightness_pct: 
 `docs/03_docs_automations/03_docs_automations_YAML/P3_Eclairage/p3_bureau_forcer_play_on_si_pc_tourne/p3_bureau_forcer_play_on_si_pc_tourne.yaml`
 
 ---
-*Doc mise à jour le 2026-10-11*
+*Doc mise à jour le 2026-10-11 ; note de remplacement ajoutée le 2026-10-28*
