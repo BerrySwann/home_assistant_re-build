@@ -1,8 +1,9 @@
 # 🗂️ INDEX GLOBAL - HA ReBuild
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-10-29 (22h) - lien de la fiche Audit_md5_yaml.md remis sur son dossier (01_scripts.sh_md/Audit_md5_yaml/) après le rangement des fiches de .scripts un dossier par fichier ; aucun fichier ajouté ni supprimé*
 *Dernière mise à jour : 2026-10-25 (21h21) - entrée ajoutée : Check_XX_presents.py (scripts python, recompté : 14) ; contrôle de présence des dossiers XX_ avant chaque push*
-*Dernière mise à jour : 2026-10-25 20h28 - sous-dossiers de 00_ à 04_ numérotés et suffixes MD, SH, YAML en majuscules (02_dashboard_docs_MD, 03_docs_automations_YAML, 04_docs_scripts_SH, 00_SOUS_CONTEXT_IA, 01_config_system_MD...) : tous les liens corrigés, 832 liens, 0 cassé*
+*Dernière mise à jour : 2026-10-25 20h28 - sous-dossiers de 00_ à 04_ numérotés et suffixes MD, SH, YAML en majuscules (02_dashboard_docs_MD, 03_docs_automations_YAML, 04_docs_scripts_SH, 00_IA_SOUS_CONTEXT_IA, 01_config_system_MD...) : tous les liens corrigés, 832 liens, 0 cassé*
 *Dernière mise à jour : 2026-10-25 (19h40) - règle de nommage des caractères (espace, tiret, &, parenthèses, point -> _) appliquée en local et en prod ; dossiers renommés (docs minuscule, skills, MINI_PC, Tarif_hc_hp, Automations_yaml_original, Backup_ha_GitHub, Mariadb_et_vscode_optimisation, Watchdog_piles_hue_ikea_sonoff) ; pages réserve L5C3 retirées ; liens corrigés (6 -> 0 au contrôle)*
 *Dernière mise à jour : 2026-10-23 (22h55, /histo S1) - entrée ajoutée : Verif_integrations_file.py (scripts python, recompté : 13)*
 *Dernière mise à jour : 2026-10-20 (soir) - section 05 SKILLS : ha-resync-docs retiré (doublon de ha-trigul), ha-verif-headers ajouté (14 skills) ; section 04 : Verif_headers_yaml.py ajouté*
@@ -12,7 +13,7 @@
 *Dernière mise à jour : 2026-10-18 - dossier de config : config_system_YAML remplacé par 01_config_system_SH_PY_YAML (copie fidèle de /config) ; liens des 4 timers remis sur les sous-dossiers P1_Timer_10mn, P1_Timer_2h et P1_Timer_60mn ; 3 notes citant config_system_YAML mises à jour*
 *Dernière mise à jour : 2026-10-15 (soir, /histo-final S1) - repli Meteoalarm retiré du template M_01 : entrée retirée du pop-up #alert (14 -> 13) et des entités natives HA (16 -> 15) ; aucun fichier ajouté, renommé ou supprimé à indexer ici (les fiches CARD_*_HOME ne sont pas indexées)*
 *Dernière mise à jour : 2026-10-14 (soir, /histo S1) - 2 entrées périmées de la vignette sdb remplacées par le nom réel, liens cassés corrigés (69 -> 0 au contrôle), noms de batteries et blocs météo M_02 alignés sur les fichiers réels, entité fantôme du dernier impact de foudre (Blitzortung) retirée, bloc Raspberry Pi4 (archivé) déplacé en fin d'index (section 06 SAUVEGARDE RASPI)*
-*Dernière mise à jour : 2026-10-13 (soir, /histo S1) - entrées ajoutées pour les index générés GLOBAL_INDEX_IA, GLOBAL_INDEX_VIGNETTES_PAGES, GLOBAL_INDEX_AUTOMATIONS, GLOBAL_INDEX_SCRIPTS_SH et GLOBAL_INDEX_SCRIPTS_YAML et pour 6 scripts python d'index (04_docs_scripts_SH), tous locaux et non poussés en prod ; compteurs existants non modifiés*
+*Dernière mise à jour : 2026-10-13 (soir, /histo S1) - entrées ajoutées pour les index générés IA_GLOBAL_INDEX, GLOBAL_INDEX_VIGNETTES_PAGES, GLOBAL_INDEX_AUTOMATIONS, GLOBAL_INDEX_SCRIPTS_SH et GLOBAL_INDEX_SCRIPTS_YAML et pour 6 scripts python d'index (04_docs_scripts_SH), tous locaux et non poussés en prod ; compteurs existants non modifiés*
 *Dernière mise à jour : 2026-10-12 (soir, /histo S1) - 6 scripts HA (audit_md5, audit_md5_md_yaml, j_1_1, j_1_2, j_1_3, j_2_0) et 2 scripts shell (audit_md5_yaml.sh, mf_vigilance_images.sh) copiés de la prod en local, sans fiche Doc ; liens des scripts YAML corriges apres le regroupement en sous-dossiers Climatisation et Soufflant SDB (20h12) ; compteurs scripts recomptés (SH 5, YAML 9) ; description de l'automation G corrigée en prod*
 *Dernière mise à jour : 2026-10-11 (soir, /histo S3) - lettres des automations SDB alignees en prod (H:\automations.yaml, A B C D E F G H Z, entity_id inchanges), dossier L0C0_PAGE_Home (PAGE_Home (L0C0) renomme), skills histo-final et ha-push-docs modifies ; les fiches CARD_*_HOME de la page Home ne sont pas indexees ici (la section 02 ne liste que les 18 vignettes)*
 *Dernière mise à jour : 2026-10-11 (après-midi) - 02_dashboard_docs_MD et 02_dashboard_docs_YAML : un sous-dossier 01_vignette et 02_page (02_page_nom si plusieurs pages) par dossier LxCy, PAGE_Home et PAGE_RASPI ; 148 fichiers deplaces, 42 liens corriges*
@@ -45,9 +46,9 @@
 </details>
 
 <details>
-<summary><b>GLOBAL_INDEX_IA.md</b> &nbsp;|&nbsp; Index généré des fichiers de docs/00_IA (qui s'en sert, but, quand les lire, MD5 prod) - local, non poussé en prod</summary>
+<summary><b>IA_GLOBAL_INDEX_memoire.md</b> &nbsp;|&nbsp; Index généré des fichiers de docs/00_IA (qui s'en sert, but, quand les lire, MD5 prod) - local, non poussé en prod</summary>
 <blockquote>
-📄 <a href="docs/00_IA/GLOBAL_INDEX_IA.md">Doc</a><br>
+📄 <a href="docs/00_IA/">Doc</a><br>
 ⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_SH/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.py">Générateur</a> (régénéré à chaque /histo, ne pas modifier à la main)
 </blockquote>
 </details>
@@ -55,56 +56,56 @@
 <details>
 <summary><b>IA_ARBO_DETAIL.md</b> &nbsp;|&nbsp; Arborescence complète prod + local, URLs GitHub raw</summary>
 <blockquote>
-📄 <a href="docs/00_IA/00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md">Doc</a>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>IA_AUTOMATIONS_NOTIFS.md</b> &nbsp;|&nbsp; Création/modif automations, messages notify, scripts HA</summary>
 <blockquote>
-📄 <a href="docs/00_IA/00_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/IA_AUTOMATIONS_NOTIFS.md">Doc</a>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/IA_AUTOMATIONS_NOTIFS.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>IA_CARTE_EMPLACEMENTS.md</b> &nbsp;|&nbsp; Carte des 5 emplacements d'un fichier (local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et sens d'écriture</summary>
 <blockquote>
-📄 <a href="docs/00_IA/00_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md">Doc</a>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>IA_CMD_TERMINAL_HA.md</b> &nbsp;|&nbsp; Commandes tree prod, audit MD5, git backup, chemins /homeassistant/, logs HA</summary>
 <blockquote>
-📄 <a href="docs/00_IA/00_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA/IA_CMD_TERMINAL_HA.md">Doc</a>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA/IA_CMD_TERMINAL_HA.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>IA_INDEX_AUTOMATIONS.md</b> &nbsp;|&nbsp; Régénération INDEX_AUTOMATIONS, mapping alias → docs/03, anomalies</summary>
 <blockquote>
-📄 <a href="docs/00_IA/00_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/IA_INDEX_AUTOMATIONS.md">Doc</a>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/IA_INDEX_AUTOMATIONS.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>IA_INDEX_NAVIGATION.md</b> &nbsp;|&nbsp; Régénération INDEX_GLOBAL, ajout vignette/page, mapping entités → fichiers sources</summary>
 <blockquote>
-📄 <a href="docs/00_IA/00_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/IA_INDEX_NAVIGATION.md">Doc</a>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/IA_INDEX_NAVIGATION.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>IA_INTEGRATIONS_CARTES.md</b> &nbsp;|&nbsp; YAML dashboard, custom:*, intégrations manquantes, palette couleurs</summary>
 <blockquote>
-📄 <a href="docs/00_IA/00_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md">Doc</a>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md">Doc</a>
 </blockquote>
 </details>
 
 <details>
 <summary><b>IA_P4_PRESENCE.md</b> &nbsp;|&nbsp; sensor.presence, format notif avec présence, logique groupe Wi-Fi</summary>
 <blockquote>
-📄 <a href="docs/00_IA/00_SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md">Doc</a>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md">Doc</a>
 </blockquote>
 </details>
 
@@ -395,7 +396,7 @@ et <code>carte_meteo_france.yaml</code> étaient absents de "Fichiers sources" -
 <code>M_04_tendances_th_ext_card.yaml</code> était classé à tort ici - son entête déclare
 lui-même <code>AVAL : L1C2 Températures</code>, pas L1C1. Déplacé vers la section L1C2.
 Vérifié directement dans le corps de chaque fichier yaml, en cohérence avec
-DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES.md a été archivé le 2026-09-28).
+DEPENDANCES_GLOBALES_HERMES_V1.md (carte vivante ; l'ancien DEPENDANCES_GLOBALES_CLAUDE_memoire.md a été archivé le 2026-09-28).
 </blockquote>
 
 </blockquote>
@@ -4166,7 +4167,7 @@ Sortie : repo GitHub <code>home_assistant_re-build</code>
 <summary><code>audit_md5_yaml.sh</code> &nbsp;|&nbsp; Audit MD5 YAML GitHub ↔ prod (ajouté le 2026-10-12, activité non vérifiée)</summary>
 <blockquote>
 Script source : <a href="docs/04_docs_scripts/04_docs_scripts_SH/Audit_md5_yaml/Audit_md5_yaml.sh">audit_md5_yaml.sh</a> (copie de <code>/homeassistant/.scripts/</code>)<br>
-📄 <a href="docs/01_docs_config_system/01_config_system_MD/.scripts/01_scripts.sh_md/Audit_md5_yaml.md">Doc</a>
+📄 <a href="docs/01_docs_config_system/01_config_system_MD/.scripts/01_scripts.sh_md/Audit_md5_yaml/Audit_md5_yaml.md">Doc</a>
 </blockquote>
 </details>
 
@@ -4225,16 +4226,16 @@ Pas de doc associée.
 </details>
 
 <details>
-<summary><code>gen_global_index_ia.py</code> &nbsp;|&nbsp; Génère GLOBAL_INDEX_IA.md (fichiers de docs/00_IA)</summary>
+<summary><code>gen_global_index_ia.py</code> &nbsp;|&nbsp; Génère IA_GLOBAL_INDEX_memoire.md (fichiers de docs/00_IA)</summary>
 <blockquote>
 ⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_SH/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.py">Script source</a><br>
-Sortie : <a href="docs/00_IA/GLOBAL_INDEX_IA.md">GLOBAL_INDEX_IA.md</a> (régénéré à chaque /histo)<br>
+Sortie : <a href="docs/00_IA/">IA_GLOBAL_INDEX_memoire.md</a> (régénéré à chaque /histo)<br>
 Pas de doc associée.
 </blockquote>
 </details>
 
 <details>
-<summary><code>check_sous_context_ia.py</code> &nbsp;|&nbsp; Contrôle en lecture seule des 9 fichiers de docs/00_IA/00_SOUS_CONTEXT_IA</summary>
+<summary><code>check_sous_context_ia.py</code> &nbsp;|&nbsp; Contrôle en lecture seule des 9 fichiers de docs/00_IA/00_IA_SOUS_CONTEXT_IA</summary>
 <blockquote>
 ⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_SH/Check_sous_context_ia/Check_sous_context_ia.py">Script source</a><br>
 Lancé par /histo (étape 6, point 7) ; ne corrige rien.<br>
@@ -4255,7 +4256,7 @@ Pas de doc associée.
 <summary><code>Verif_emplacements.py</code> &nbsp;|&nbsp; Contrôle en lecture seule des fichiers à plusieurs emplacements (local, prod racine, prod miroir, GitHub racine et docs/)</summary>
 <blockquote>
 ⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_SH/Verif_emplacements/Verif_emplacements.py">Script source</a><br>
-Lancé par /histo (étape 6, point 9) ; ne corrige rien. Carte : <a href="docs/00_IA/00_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md">IA_CARTE_EMPLACEMENTS.md</a><br>
+Lancé par /histo (étape 6, point 9) ; ne corrige rien. Carte : <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md">IA_CARTE_EMPLACEMENTS.md</a><br>
 📄 <a href="docs/04_docs_scripts/04_docs_scripts_SH_MD/Verif_emplacements/Verif_emplacements.md">Doc</a>
 </blockquote>
 </details>
@@ -4544,7 +4545,7 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 </details>
 
 <details>
-<summary><b>sync-index.md</b> &nbsp;|&nbsp; met à jour DEPENDANCES_GLOBALES.md et l'index après validation d'un YAML</summary>
+<summary><b>sync-index.md</b> &nbsp;|&nbsp; met à jour DEPENDANCES_GLOBALES_CLAUDE_memoire.md et l'index après validation d'un YAML</summary>
 <blockquote>
 <a href="docs/05_docs_skills/skill_sync_index/sync_index.md">Doc</a>
 </blockquote>
