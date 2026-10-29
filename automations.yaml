@@ -1458,6 +1458,7 @@
   - id: ouverture
     trigger: sun
     event: sunrise
+    offset: 00:01:00
   - id: fermeture
     trigger: sun
     event: sunset
@@ -2901,7 +2902,8 @@
   mode: single
 - id: '1793131130516'
   alias: P3 BUREAU - Espace de loisirs actif, garder les indicateurs allumes
-  description: Hue Sync demarre seul au boot du PC. Tant que l'espace de loisirs tourne, les lampes eclairent et HA doit les voir allumees.
+  description: Hue Sync demarre seul au boot du PC. Tant que l'espace de loisirs tourne,
+    les lampes eclairent et HA doit les voir allumees.
   triggers:
   - trigger: state
     entity_id:
@@ -2923,7 +2925,9 @@
     event: start
   conditions:
   - condition: template
-    value_template: "{{ state_attr('light.hue_play_1_pc_bureau','mode') == 'streaming' or state_attr('light.hue_play_2_pc_bureau','mode') == 'streaming' or state_attr('light.hue_play_3_pc_bureau','mode') == 'streaming' }}"
+    value_template: '{{ state_attr(''light.hue_play_1_pc_bureau'',''mode'') == ''streaming''
+      or state_attr(''light.hue_play_2_pc_bureau'',''mode'') == ''streaming'' or state_attr(''light.hue_play_3_pc_bureau'',''mode'')
+      == ''streaming'' }}'
   actions:
   - action: light.turn_on
     target:
