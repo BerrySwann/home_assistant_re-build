@@ -35,7 +35,7 @@ Compare, côté HA, les fichiers `.md`, `.yaml` et `.sh` de `/config/docs/` avec
 ## Sorties
 
 - Rapport : `/config/.logs/md5_audit_md_yaml_AAAA-MM-JJ.txt`. À chaque lancement, les anciens rapports de ce nom sont supprimés.
-- Copies du dernier rapport : `/config/.logs/md5_audit_md_yaml_latest.txt` et `/config/www/logs/md5_audit_md_yaml_latest.txt`.
+- Copie du dernier rapport : `/config/.logs/md5_audit_md_yaml_latest.txt` (la copie dans `/config/www/logs/` a ete supprimee le 2026-10-29, demande d'Eric).
 - Le script s'arrête à la première erreur non gérée (`set -euo pipefail`).
 
 ## Points d'attention
@@ -48,7 +48,7 @@ Compare, côté HA, les fichiers `.md`, `.yaml` et `.sh` de `/config/docs/` avec
 
 - `python3`, `curl` et `md5sum` dans l'environnement du shell_command.
 - Accès réseau à `raw.githubusercontent.com`.
-- Dossiers `/config/.logs` et `/config/www/logs`.
+- Dossier `/config/.logs`.
 
 ## Historique (journal du script)
 

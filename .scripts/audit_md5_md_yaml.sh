@@ -107,7 +107,6 @@ printf '%.0s─' {1..137}; echo ""
 rm -f "$TMP_TREE" "$TMP_PROD" "$TMP_GH"
 
 cp "$LOG" /config/.logs/md5_audit_md_yaml_latest.txt 2>/dev/null || true
-cp "$LOG" /config/www/logs/md5_audit_md_yaml_latest.txt 2>/dev/null || true
 
 echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 docs terminé : $TOTAL fichiers ($TOTAL_MD .md · $TOTAL_YAML .yaml · $TOTAL_SH .sh) · $OK SYNC · $DIFF_COUNT DIFF · $ABSENT ABSENT GITHUB → $LOG"
 
@@ -117,3 +116,4 @@ echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 docs terminé : $TOTAL fichi
 # [2026-08-09] Extension périmètre : tout docs/ sans exclusion (.md + .yaml + .sh)
 # [2026-10-10] Colonnes du tableau : PROD | GITHUB | STATUT | FICHIER (fichier en dernier, statuts alignes). Lignes RESULTAT et Audit MD5 docs termine inchangees.
 # [2026-10-18] Exclusion du dossier modifs/ (journaux des agents, ecrits en prod avant le backup GitHub, ABSENT GITHUB sans interet). Demande d Eric.
+# [2026-10-29] Suppression de la copie du rapport dans /config/www/logs (inutile, www est servi sans connexion). Demande d Eric.

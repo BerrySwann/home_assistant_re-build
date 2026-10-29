@@ -17,7 +17,7 @@ bash /homeassistant/.scripts/audit_md5_md_yaml.sh   # docs (/config/docs : .md +
 - `audit_md5_yaml.sh` - périmètre codé en dur : sensors templates utility_meter command_line shell_command packages groups input_booleans input_number + `.scripts/*.sh` + racine (automations, scripts, configuration, sql, input_select, input_datetime, input_button). Statuts : ✅ SYNC · ❌ DIFF · ⚠️ PUSH MANQUANT
 - `audit_md5_md_yaml.sh` - tout `/config/docs/`. Statuts : ✅ SYNC · ❌ DIFF · ⚠️ ABSENT GITHUB
 - Depuis HA : `script.audit_md5` (shell_command `audit_md5`) et `script.audit_md5_md_yaml` (shell_command `audit_md5_md_yaml`)
-- **Logs** : `/homeassistant/.logs/md5_audit_yaml_YYYY-MM-DD.txt` + copie `md5_audit_latest.txt` ; `md5_audit_md_yaml_YYYY-MM-DD.txt` + copie `md5_audit_md_yaml_latest.txt` (aussi dans `/config/www/logs/`). Les anciens logs du même type sont supprimés à chaque lancement.
+- **Logs** : `/homeassistant/.logs/md5_audit_yaml_YYYY-MM-DD.txt` + copie `md5_audit_latest.txt` ; `md5_audit_md_yaml_YYYY-MM-DD.txt` + copie `md5_audit_md_yaml_latest.txt`. Les anciens logs du même type sont supprimés à chaque lancement.
 
 ```bash
 cat /homeassistant/.logs/md5_audit_latest.txt
