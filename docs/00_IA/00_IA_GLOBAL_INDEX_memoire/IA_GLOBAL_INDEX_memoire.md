@@ -13,8 +13,8 @@
 
 </div>
 
-> Fichier GENERE le 2026-10-29 21:50 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
-> 13 fichiers de contenu, 81 sauvegardes (.bak), 0 sans description.
+> Fichier GENERE le 2026-10-29 22:13 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
+> 13 fichiers de contenu, 84 sauvegardes (.bak), 0 sans description.
 
 > 🚨🚨🚨 **GYROPHARE ROUGE - DANS HOME ASSISTANT TOUT EST A PLAT** 🚨🚨🚨
 >
@@ -63,8 +63,8 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 | Dossier | Nombre de sauvegardes |
 |---|---|
 | [00_IA_CONTEXT_BASE](../00_IA_CONTEXT_BASE/) | 6 |
-| [00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/) | 15 |
-| [00_IA_GLOBAL_INDEX_memoire](./) | 20 |
+| [00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/) | 16 |
+| [00_IA_GLOBAL_INDEX_memoire](./) | 22 |
 | [00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 8 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE](../00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS](../00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/) | 3 |
