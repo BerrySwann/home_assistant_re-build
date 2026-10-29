@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifie](https://img.shields.io/badge/MàJ-2026--10--28-44739e?style=flat-square)](.)&nbsp;
+[![Modifie](https://img.shields.io/badge/MàJ-2026--10--29-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -24,7 +24,7 @@
 
 Un seul pas, "RUN AUDIT MD5" : appelle `shell_command.audit_md5`. Cette commande est definie dans `shell_command/GitHub/GitHub_backup_GitHub.yaml` et lance `bash /config/.scripts/audit_md5_yaml.sh`, avec ajout de la sortie dans `/config/.logs/md5_audit_yaml_AAAA-MM-JJ.txt`.
 
-Le script bash compare les YAML de la prod a GitHub (voir la fiche de `Audit_md5_yaml.sh` dans `01_docs_config_system/01_config_system_MD/.scripts/01_scripts.sh_md/`).
+Le script bash compare les YAML de la prod a GitHub (voir la fiche de `Audit_md5_yaml.sh` dans `01_docs_config_system/01_config_system_MD/.scripts/01_scripts.sh_md/Audit_md5_yaml/`).
 
 ## Etat
 

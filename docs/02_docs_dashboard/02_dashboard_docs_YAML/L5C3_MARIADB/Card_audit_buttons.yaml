@@ -2,7 +2,7 @@
 # │ CARTE : BOUTON AUDIT MD5 (PAGE SYSTÈME / L5C3)                          │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 # 1 bouton : AUDIT MD5 (3 passes : tree → MD5 prod → MD5 GitHub)
-# Appel via shell_command.audit_md5 → .scripts/audit_md5.sh → md5_audit_YYYY-MM-DD.txt
+# Appel via script.audit_md5 -> shell_command.audit_md5 → .scripts/audit_md5_yaml.sh → md5_audit_yaml_YYYY-MM-DD.txt
 # Journal affiché par sensor.audit_md5_journal (card_audit_journal)
 
 type: vertical-stack
@@ -47,3 +47,4 @@ cards:
 
 # annotations_log:
 # [2026-06-14] Remplacement 3 boutons (audit_full/yaml/atma supprimés) → 1 bouton audit_md5
+# [2026-10-29] En-tete corrige : script audit_md5_yaml.sh, log md5_audit_yaml_ (aucun changement de la carte)

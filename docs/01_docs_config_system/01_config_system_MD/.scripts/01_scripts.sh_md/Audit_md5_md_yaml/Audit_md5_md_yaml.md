@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--28-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--29-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,9 +13,9 @@
 
 > **Script :** `audit_md5_md_yaml.sh` (bash)
 > **Emplacement prod :** `/config/.scripts/audit_md5_md_yaml.sh`
-> **Emplacement local :** `docs/01_docs_config_system/01_config_system_SH_PY_YAML/.scripts/01_scripts.sh/audit_md5_md_yaml.sh`
+> **Emplacement local :** `docs/01_docs_config_system/01_config_system_SH_PY_YAML/`.scripts/01_scripts.sh/audit_md5_md_yaml_sh/audit_md5_md_yaml.sh`
 > **Empreinte relevée le 2026-10-18 :** MD5 `d50741b7`, 6686 octets, copie locale identique à la prod
-> **Appelé par :** `shell_command.audit_md5_md_yaml` (fichier `shell_command/GitHub/GitHub_backup_GitHub.yaml`, commande `bash /config/.scripts/audit_md5_md_yaml.sh 2>&1`)
+> **Appelé par :** bouton de la carte L5C3 -> `script.audit_md5_md_yaml` -> `shell_command.audit_md5_md_yaml` (fichier `shell_command/GitHub/GitHub_backup_GitHub.yaml`, commande `bash /config/.scripts/audit_md5_md_yaml.sh 2>&1`)
 > **Dernière entrée du journal du script :** 2026-10-18
 
 ---
@@ -42,7 +42,7 @@ Compare, côté HA, les fichiers `.md`, `.yaml` et `.sh` de `/config/docs/` avec
 
 - Ne couvre ni les `.py` ni les `.svg` de `docs/` (le trigul local les compte depuis le 2026-10-18).
 - GitHub distingue la casse (déduit : l'adresse raw est un chemin de fichier). Un fichier renommé en prod avec une autre casse sort donc ABSENT GITHUB tant que la sauvegarde GitHub n'est pas passée.
-- Aucune automation de `automations.yaml` ne l'appelle (relevé du 2026-10-18). L'appel vient d'ailleurs (bouton du dashboard probable, non vérifié).
+- Aucune automation de `automations.yaml` ne l'appelle (relevé du 2026-10-18). Il est lancé par le bouton de la carte L5C3 via `script.audit_md5_md_yaml` (cascade relevée le 2026-10-29).
 
 ## Dépendances
 
@@ -56,3 +56,4 @@ Compare, côté HA, les fichiers `.md`, `.yaml` et `.sh` de `/config/docs/` avec
 - 2026-08-09 : périmètre étendu à tout `docs/` (`.md`, `.yaml`, `.sh`).
 - 2026-10-10 : colonnes du tableau PROD, GITHUB, STATUT, FICHIER.
 - 2026-10-18 : exclusion du dossier `modifs/` (journaux des agents, écrits en prod avant la sauvegarde GitHub). Demande d'Eric.
+- 2026-10-29 : fiche mise à jour (chemin local par dossier, cascade du bouton L5C3, copie `/config/www/logs/` supprimée). Aucune modification du script.

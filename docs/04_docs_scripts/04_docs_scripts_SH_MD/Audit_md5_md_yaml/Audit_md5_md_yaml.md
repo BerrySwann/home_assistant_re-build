@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifie](https://img.shields.io/badge/MàJ-2026--10--28-44739e?style=flat-square)](.)&nbsp;
+[![Modifie](https://img.shields.io/badge/MàJ-2026--10--29-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -28,7 +28,7 @@ Variables surchargeables : `LOCAL_ROOT`, `PROD_ROOT` (par defaut `/h`), `GH_BASE
 
 ## A savoir
 
-- Cette version s'execute localement. La version qui tourne dans Home Assistant (`/config/.scripts/audit_md5_md_yaml.sh`, appelee par `shell_command.audit_md5_md_yaml`) est une autre version : compare faite le 2026-10-28, MD5 differents (local 10084 octets, prod 6686 octets) et fiche existante de la prod dans `01_docs_config_system/01_config_system_MD/.scripts/01_scripts.sh_md/Audit_md5_md_yaml.md`.
+- Cette version s'execute localement. La version qui tourne dans Home Assistant (`/config/.scripts/audit_md5_md_yaml.sh`, appelee par `shell_command.audit_md5_md_yaml`) est une autre version : compare faite le 2026-10-28, MD5 differents (local 10084 octets, prod 6686 octets) et fiche existante de la prod dans `01_docs_config_system/01_config_system_MD/.scripts/01_scripts.sh_md/Audit_md5_md_yaml/Audit_md5_md_yaml.md`.
 - La carte L5C3 Systeme du dashboard lit le meme log.
 - Pieges documentes dans l'en-tete : curl Windows n'ecrit pas dans `/tmp`, fichiers locaux en CRLF, chemins a espaces et accents.
 - Selon le skill ha-trigul, le trigul actuel est fait par `hermes_audit_trigul_arbres.py` ; cet audit reste un outil separe.

@@ -12,6 +12,7 @@
 
 </div>
 
+*Derniere mise a jour : 2026-10-29 22h10 (R125.1 a R125.3 : fiches de .scripts rangees un dossier par fichier, commentaires obsoletes des audits corriges, fiche Audit_md5_yaml corrigee)*
 *Derniere mise a jour : 2026-10-29 21h32 (regle de structure scripts et command_line : local range par dossier, HA toujours a plat, avertissement gyrophare, cascades bouton -> script -> fonction des audits MD5 et de la sauvegarde GitHub ; chemin du capteur audit_md5_journal corrige ; demande d'Eric)*
 *Derniere mise a jour : 2026-10-29 20h10 (11 automations ajoutees, section store salon reecrite, cascades P0 Linky/Nodon documentees, vignettes alarmes congelateur ; controle Check_DEPENDANCES.py cree et branche dans /histo ; aucune vignette modifiee)*
 *Derniere mise a jour : 2026-10-29 19h30 (audit des entites en live demande par Eric : sensor.temperature_delta_valeur, button.pve_arreter, update.*_mise_a_jour corriges ; sun/moon/moon_api annotes introuvables ; chemin carte congelateur corrige ; aucune vignette modifiee)*
@@ -4008,8 +4009,8 @@ E - `check_yaml_forme.py` : aucun appel trouve dans les `shell_command` ; usage 
 - "yaml" dans `audit_md5_yaml` = ce que le script audite (les YAML de la config), pas le type du fichier. `audit_md5_md_yaml` audite les docs. Les deux scripts sont differents et tous deux appeles : ne jamais en archiver un.
 - HA ne renvoie pas le succes ou l'echec d'un `shell_command` : lire le log.
 - `ha_git_backup.sh` doit etre executable (`chmod +x`) et il est lance directement ; une copie depuis Windows peut perdre ce droit (non teste).
-- Commentaires obsoletes releves, non corriges : `Card_audit_buttons.yaml` cite `.scripts/audit_md5.sh` (reel : audit_md5_yaml.sh) ; le command_line `audit_md5_yaml.yaml` aussi ; `audit_md5_md_yaml.yaml` cite `md5_audit_md_yaml_yaml_*.txt` (reel : md5_audit_md_yaml_*.txt) et un "prefixe hermes_".
-- Fiche `Audit_md5_yaml.md` : ligne d'empreinte cassee et mention "pas encore poussee en prod" perimee (local et prod identiques le 2026-10-29).
+- Commentaires obsoletes corriges le 2026-10-29 (texte seul, sans changement de code) : `Card_audit_buttons.yaml` (en-tete), command_line `audit_md5_yaml.yaml` et `audit_md5_md_yaml.yaml` (nom du log, prefixe hermes_ retire). Reste : le texte affiche ligne 41 de la carte cite encore `md5_audit_YYYY-MM-DD.txt` (a corriger avec un deploiement du dashboard).
+- Fiche `Audit_md5_yaml.md` corrigee le 2026-10-29 (empreinte 0534BD4E, version en prod). Les fiches des scripts de `.scripts` sont rangees un dossier par fichier : `01_config_system_MD/.scripts/01_scripts.sh_md/<nom>/<nom>.md` et `02_scripts.py_md/<nom>/<nom>.md`.
 
 ---
 

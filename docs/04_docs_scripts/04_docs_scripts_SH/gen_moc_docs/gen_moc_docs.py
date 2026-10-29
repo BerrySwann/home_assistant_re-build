@@ -13,8 +13,8 @@ _CLIM = r"C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_sc
 for _n in ("j_1_1_salon_clim_on_off_intelligent.yaml", "j_1_2_bureau_clim_on_off_intelligent.yaml", "j_1_3_chambre_clim_on_off_intelligent.yaml"):
     FORCE[_n] = _CLIM  # 1 fiche pour les 3 routeurs clim (rattachement manuel, ordre d'Eric 2026-10-28)
 _CFG = r"C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\01_config_system_MD"
-FORCE["audit_md5_yaml.sh"] = _CFG + r"\.scripts\01_scripts.sh_md\Audit_md5_yaml.md"  # copie identique a la prod, fiche existante (ordre d'Eric 2026-10-28, a valider)
-FORCE["correct_linky.py"] = _CFG + r"\.scripts\02_scripts.py_md\Correct_linky.md"  # idem
+FORCE["audit_md5_yaml.sh"] = _CFG + r"\.scripts\01_scripts.sh_md\Audit_md5_yaml\Audit_md5_yaml.md"  # copie identique a la prod, fiche existante (ordre d'Eric 2026-10-28, a valider)
+FORCE["correct_linky.py"] = _CFG + r"\.scripts\02_scripts.py_md\Correct_linky\Correct_linky.md"  # idem
 FORCE["mf_vigilance_images.sh"] = _CFG + r"\scripts\Mf_vigilance_images.md"  # idem
 
 def norm(s):
