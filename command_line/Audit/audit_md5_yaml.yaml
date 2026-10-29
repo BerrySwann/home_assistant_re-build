@@ -8,7 +8,7 @@
 #
 # ## 🧮 CALCUL & SOURCES :
 # Source : /config/.logs/md5_audit_yaml_YYYY-MM-DD.txt
-# Généré par : shell_command.audit_md5 → .scripts/audit_md5.sh
+# Généré par : shell_command.audit_md5 → .scripts/audit_md5_yaml.sh
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
@@ -40,3 +40,4 @@
 # [2026-06-14] Remplacement audit_yaml/atma/full_journal → audit_md5_journal
 # [2026-06-14] FIX : python3 -c SUR UNE SEULE LIGNE (multiligne → erreur YAML col 0)
 # [2026-08-07] Extrait de audit_logs.yaml → fichier dédié audit_md5_yaml.yaml
+# [2026-10-29] Commentaire corrige : le script est audit_md5_yaml.sh (aucun changement de code)

@@ -113,7 +113,7 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 ## 6. Règles par zone
 
 ### 6.1 Dossier 00_IA (décidé le 2026-10-17)
-- Tous les dossiers et fichiers de `00_IA` sont en majuscules, extension en minuscules (exemple `GLOBAL_INDEX_IA.md`).
+- Tous les dossiers et fichiers de `00_IA` sont en majuscules, extension en minuscules (exemple `IA_GLOBAL_INDEX_memoire.md`).
 - Documentation seulement : `00_IA` reste intact, il n'y a pas de dossier yaml dans `00_IA`.
 - Écart relevé :
 - `00_IA\00_IA_CONTEXT_BASE\IA_CONTEXT_BASE_2026-07-19_15h46.md` (nouveau nom : `IA_CONTEXT_BASE_2026-07-19_15H46.md`)
@@ -333,7 +333,7 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - `04_docs_scripts\docs_scripts_sh_md` (nouveau nom : `04_docs_scripts\04_docs_scripts_SH_MD`)
 - `04_docs_scripts\docs_scripts_yaml` (nouveau nom : `04_docs_scripts\04_docs_scripts_YAML`)
 - `04_docs_scripts\docs_scripts_yaml_md` (nouveau nom : `04_docs_scripts\04_docs_scripts_YAML_MD`)
-- Décision d'Eric (2026-10-25 20:20) : les suffixes MD, SH, PY et YAML en fin de nom de dossier sont en MAJUSCULES : `02_dashboard_docs_MD`, `02_dashboard_docs_YAML`, `03_docs_automations_MD`, `03_docs_automations_YAML`, `04_docs_scripts_SH`, `04_docs_scripts_SH_MD`, `04_docs_scripts_YAML`, `04_docs_scripts_YAML_MD`, `04_docs_script_ORIGINAL`. Les sous-dossiers de `00_` et `01_` portent aussi le numéro de leur parent (`00_IA_CONTEXT_BASE`, `00_SOUS_CONTEXT_IA`, `01_config_system_MD`, `01_config_system_SH_PY_YAML`). Tout est renommé le 2026-10-25, en local et en prod. Les sous-sous-dossiers et les fichiers (`Audit_md5_yaml`...) ne changent pas.
+- Décision d'Eric (2026-10-25 20:20) : les suffixes MD, SH, PY et YAML en fin de nom de dossier sont en MAJUSCULES : `02_dashboard_docs_MD`, `02_dashboard_docs_YAML`, `03_docs_automations_MD`, `03_docs_automations_YAML`, `04_docs_scripts_SH`, `04_docs_scripts_SH_MD`, `04_docs_scripts_YAML`, `04_docs_scripts_YAML_MD`, `04_docs_script_ORIGINAL`. Les sous-dossiers de `00_` et `01_` portent aussi le numéro de leur parent (`00_IA_CONTEXT_BASE`, `00_IA_SOUS_CONTEXT_IA`, `01_config_system_MD`, `01_config_system_SH_PY_YAML`). Tout est renommé le 2026-10-25, en local et en prod. Les sous-sous-dossiers et les fichiers (`Audit_md5_yaml`...) ne changent pas.
 - La prod (`H:\docs`) a été renommée de la même façon. Tous les chemins cités vers ces dossiers (fiches, index, skills, générateurs, `CLAUDE.md`, `IA_CONTEXT_BASE.md`) ont été corrigés dans la même opération. Les skills de Hermes (`D:\hermes\skills`) citent encore les anciens noms : à voir avec Hermes.
 
 ### 6.16 Dossiers à la racine de la prod : pas de convention de nommage (décidé le 2026-10-18)
@@ -390,7 +390,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   └── IA_CONTEXT_BASE_2026-07-19_15h46.md                                             │ écart 00_IA (attendu : IA_CONTEXT_BASE_2026-07-19_15H46.md ; 00_IA reste intact)            │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── 00_SOUS_CONTEXT_IA/                                                                    │ 00_IA : majuscules, conforme (00_IA intact)                                                 │
+│ │   ├── 00_IA_SOUS_CONTEXT_IA/                                                                    │ 00_IA : majuscules, conforme (00_IA intact)                                                 │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   ├── IA_ARBO_DETAIL/                                                                 │ 00_IA : majuscules, conforme (00_IA intact)                                                 │
 │ │   │   │   │                                                                               │                                                                                             │
@@ -432,7 +432,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │       │                                                                               │                                                                                             │
 │ │   │       └── IA_SKILLS_INVENTAIRE.md                                                     │ 00_IA : majuscules, conforme (00_IA intact)                                                 │
 │ │   │                                                                                       │                                                                                             │
-│ │   └── GLOBAL_INDEX_IA.md                                                                  │ 00_IA : majuscules, conforme (00_IA intact)                                                 │
+│ │   └── IA_GLOBAL_INDEX_memoire.md                                                                  │ 00_IA : majuscules, conforme (00_IA intact)                                                 │
 │ │                                                                                           │                                                                                             │
 │ ├── 01_docs_config_system/                                                                  │ système : casse inchangée, image de H:\                                                     │
 │ │   │                                                                                       │                                                                                             │
@@ -2206,7 +2206,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │                                                                                       │                                                                                             │
 │ │   ├── DEPENDANCES_GLOBALES/                                                               │ intact : DEPENDANCES_GLOBALES                                                               │
 │ │   │   │                                                                                   │                                                                                             │
-│ │   │   ├── DEPENDANCES_GLOBALES.md                                                         │ intact : DEPENDANCES_GLOBALES                                                               │
+│ │   │   ├── DEPENDANCES_GLOBALES_CLAUDE_memoire.md                                                         │ intact : DEPENDANCES_GLOBALES                                                               │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   ├── DEPENDANCES_GLOBALES_archive_2026_09_28.md                                      │ intact : DEPENDANCES_GLOBALES                                                               │
 │ │   │   │                                                                                   │                                                                                             │
@@ -2299,13 +2299,13 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 ## 9. Points ouverts
 - Suffixe `[_suffixe]` : les exemples d'Eric sont en minuscules (`Page_L1C1_meteo`) mais la casse du suffixe n'est pas écrite. Le relevé attend du minuscule quand le suffixe actuel est entièrement en majuscules.
 - `UI_DASHBOARD` (6.9) : orthographe `DASHBOARD` (Eric a écrit `DASBOARD`).
-- `Dashboard_docs_specifique` : organisation à plat non confirmée. Les 14 `Card_*.yaml` hors `L0C0_PAGE_Home` (L1C1 : 1, L1C3 : 6, L4C1 : 1, L4C2 : 1, L5C3 : 5) restent en place selon ma proposition, non confirmée. Des noms de `Card_*` sont cités dans `GLOBAL_INDEX_VIGNETTES_PAGES.md`, `DEPENDANCES_GLOBALES.md`, `GLOBAL_INDEX_REPO.md` et `IA_CONTEXT_BASE.md`. Qu'aucune page ni aucun index ne cite les fichiers couleur est le constat d'Eric, je ne l'ai pas vérifié.
+- `Dashboard_docs_specifique` : organisation à plat non confirmée. Les 14 `Card_*.yaml` hors `L0C0_PAGE_Home` (L1C1 : 1, L1C3 : 6, L4C1 : 1, L4C2 : 1, L5C3 : 5) restent en place selon ma proposition, non confirmée. Des noms de `Card_*` sont cités dans `GLOBAL_INDEX_VIGNETTES_PAGES.md`, `DEPENDANCES_GLOBALES_CLAUDE_memoire.md`, `GLOBAL_INDEX_REPO.md` et `IA_CONTEXT_BASE.md`. Qu'aucune page ni aucun index ne cite les fichiers couleur est le constat d'Eric, je ne l'ai pas vérifié.
 - `L0C0_PAGE_Home` : le nom du dossier reste-t-il `L0C0_PAGE_Home` (exception) ou devient-il `L0C0_PAGE_HOME` ? Neuf noms avec accent y figurent, signalés mais intacts.
 - Dossiers hors schéma LxCx, à classer. Page_RASPI : RASPI mis en majuscules à la main depuis le relevé de 21:30, non journalisé. Script sh : dossier avec espace dans L5C3_15_MariaDB, déjà présent au relevé de 21:30 :
 - `02_docs_dashboard\02_dashboard_docs_YAML\L5C3_15_MariaDB\Script_sh`
 - `02_docs_dashboard\02_dashboard_docs_YAML\Page_RASPI`
 - 50 noms contiennent des espaces (exemple `04_Studio code server`) : aucune règle n'existe.
-- `00_IA\00_SOUS_CONTEXT_IA` : orthographe tranché par Eric le 2026-10-17 (00_SOUS_CONTEXT_IA, avec X). L'ancien nom local `SOUS_CONTEST_IA` (saisi à la main) et l'ancien nom prod `sous_context_ia` sont renommés en `00_SOUS_CONTEXT_IA`. Chemins de `CLAUDE.md` et de ses cousins corrigés ; scripts, skills et fiches : en cours.
+- `00_IA\00_IA_SOUS_CONTEXT_IA` : orthographe tranché par Eric le 2026-10-17 (00_IA_SOUS_CONTEXT_IA, avec X). L'ancien nom local `SOUS_CONTEST_IA` (saisi à la main) et l'ancien nom prod `sous_context_ia` sont renommés en `00_IA_SOUS_CONTEXT_IA`. Chemins de `CLAUDE.md` et de ses cousins corrigés ; scripts, skills et fiches : en cours.
 - `01_docs_config_system\01_config_system_SH_PY_YAML\sensors\Meteo` et `shell_command\GITHUB` : majuscules mises à la main par Eric. Elles contredisent la règle "système en minuscules" : à trancher. Pour `shell_command\GITHUB`, tranché le 2026-10-17 : `GitHub` (paragraphe 6.13).
 - `Gen_global_index_*` (4 dossiers) : renommés d'après le tree validé, sans réponse explicite d'Eric.
 - `04_docs_scripts_SH\Check_sous_context_ia\__Pycache__` : mon renommage a changé la casse d'un dossier de cache généré, à remettre en `__pycache__`. Demande sans réponse.

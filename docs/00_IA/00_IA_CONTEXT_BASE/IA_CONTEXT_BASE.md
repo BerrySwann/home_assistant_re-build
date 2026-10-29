@@ -84,14 +84,16 @@
 
 | Fichier | Lire si… |
 |:--------|:---------|
-| `docs/00_IA/00_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md` | YAML dashboard à valider, `type: custom:*` inconnu, intégration manquante, palette couleurs |
-| `docs/00_IA/00_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/IA_AUTOMATIONS_NOTIFS.md` | Création/modif automation, écriture message `notify`, script HA |
-| `docs/00_IA/00_SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md` | `sensor.presence`, format notif avec présence, logique groupe WiFi |
-| `docs/00_IA/00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md` | Audit fichiers, sync GitHub, arborescence prod complète, URLs raw GitHub |
-| `docs/00_IA/00_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/IA_INDEX_NAVIGATION.md` | Régénération de `INDEX_NAVIGATION_FULL.md`, ajout vignette/page à l'index, mapping entités → fichiers sources, structure accordéon GitHub |
-| `docs/00_IA/00_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/IA_INDEX_AUTOMATIONS.md` | Régénération de `INDEX_AUTOMATIONS.md`, ajout/suppression automation, mapping alias → docs/03 → docs, anomalies connues |
-| `docs/00_IA/00_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA/IA_CMD_TERMINAL_HA.md` | Commande tree prod, audit MD5, git backup, chemins `/homeassistant/`, logs HA |
-| `docs/00_IA/00_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` | Audit énergétique/thermique, analyse DUT par pièce, isolation/volets/rideaux, écart théorie YAML vs logs conso, caractéristiques physiques du logement |
+| `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md` | YAML dashboard à valider, `type: custom:*` inconnu, intégration manquante, palette couleurs |
+| `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/IA_AUTOMATIONS_NOTIFS.md` | Création/modif automation, écriture message `notify`, script HA |
+| `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md` | `sensor.presence`, format notif avec présence, logique groupe WiFi |
+| `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md` | Audit fichiers, sync GitHub, arborescence prod complète, URLs raw GitHub |
+| `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/IA_INDEX_NAVIGATION.md` | Régénération de `INDEX_NAVIGATION_FULL.md`, ajout vignette/page à l'index, mapping entités → fichiers sources, structure accordéon GitHub |
+| `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/IA_INDEX_AUTOMATIONS.md` | Régénération de `INDEX_AUTOMATIONS.md`, ajout/suppression automation, mapping alias → docs/03 → docs, anomalies connues |
+| `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA/IA_CMD_TERMINAL_HA.md` | Commande tree prod, audit MD5, git backup, chemins `/homeassistant/`, logs HA |
+| `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` | Audit énergétique/thermique, analyse DUT par pièce, isolation/volets/rideaux, écart théorie YAML vs logs conso, caractéristiques physiques du logement |
+| `docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md` | Dépendances d'une vignette, d'une automation ou d'un script (entités → fichiers), mise à jour après validation d'un YAML (`/sync_index`) |
+| `docs/00_IA/00_IA_GLOBAL_INDEX_memoire/IA_GLOBAL_INDEX_memoire.md` | Savoir quel fichier de `docs/00_IA` charger (qui s'en sert, son but, quand le lire) ; fichier généré par `Gen_GLOBAL_INDEX_ia.py`, ne pas l'éditer à la main |
 
 ---
 
@@ -158,7 +160,7 @@ Regles : lecture seule sur H: et sur les YAML locaux ; le script n'ecrit que les
 
 ## Cohérence Documentaire (anti-oubli)
 - À chaque modif YAML dans `docs/` → vérifier impact vignette (`docs/02_docs_dashboard/02_dashboard_docs_MD/L*`) + chaîne dépendances.
-- Si rupture cohérence → proposer update `docs/02_docs_dashboard/02_dashboard_docs_MD/DEPENDANCES_GLOBALES.md` ou `/sync_index`.
+- Si rupture cohérence → proposer update `docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md` ou `/sync_index`.
 - Tâche non terminée si code OK mais doc dépendances obsolète.
 - Règle d'Eric 2026-10-24 : quand un YAML est modifié (par Eric ou par Claude), Claude corrige dans la foulée, si nécessaire, le .md associé (fiche vignette ou page) en LOCAL, avec .bak, annotations_log et ligne du journal MODIFS, sans attendre qu'Eric le demande. Si le .md n'a pas à changer, le dire dans le rapport avec la raison. Le push vers H:\ reste sur ordre d'Eric.
 
@@ -183,7 +185,7 @@ Regles : lecture seule sur H: et sur les YAML locaux ; le script n'ecrit que les
 
 ## Slash Commands
 - `/fix_file` → analyse erreur HA et retourne bloc YAML corrigé uniquement.
-- `/sync_index` → met à jour `DEPENDANCES_GLOBALES.md` après validation YAML.
+- `/sync_index` → met à jour `DEPENDANCES_GLOBALES_CLAUDE_memoire.md` après validation YAML.
 - `/ha_status` → résumé 3 points avancement du projet.
 - `/histo` → journal de bord compact, sauvegarde dans `historique/`.
 - `/ha_new_yaml` → génère un squelette YAML conforme (bordures ASCII, headers, slug, name/unique_id).
@@ -199,9 +201,9 @@ Regles : lecture seule sur H: et sur les YAML locaux ; le script n'ecrit que les
 Les 2 dernieres actions avant de fermer la session, dans cet ordre :
 
 1. `/histo` → journal de bord compact (Eric ne l'oublie pas)
-2. `/sync_index` → mettre a jour DEPENDANCES_GLOBALES.md si un YAML ou une vignette a ete valide pendant la session
+2. `/sync_index` → mettre a jour DEPENDANCES_GLOBALES_CLAUDE_memoire.md si un YAML ou une vignette a ete valide pendant la session
 
-> Raison : DEPENDANCES_GLOBALES.md est construit manuellement session par session. Chaque session fermee sans `/sync_index` laisse des ecarts qui s'accumulent et deviennent couteux a corriger (70 chemins obsoletes detectes en session 2026-08-08, accumulation depuis juillet).
+> Raison : DEPENDANCES_GLOBALES_CLAUDE_memoire.md est construit manuellement session par session. Chaque session fermee sans `/sync_index` laisse des ecarts qui s'accumulent et deviennent couteux a corriger (70 chemins obsoletes detectes en session 2026-08-08, accumulation depuis juillet).
 
 ---
 
@@ -514,7 +516,7 @@ Cycles : `quotidien` | `hebdomadaire` | `mensuel` | `annuel`
   8. Collisions : si deux noms donnent le meme nom apres remplacement, on s'arrete et on demande a Eric.
   9. Alias des automations et des scripts : INTERDICTION de toucher aux alias (titres) des automations de `automations.yaml` et des scripts de `scripts.yaml`, ni aux cles des scripts (decide par Eric le 2026-10-25), sauf si un jour ils posent probleme. Les renommer ne sert a rien : ils sont lus sans erreur par les scripts et ce sont des titres affiches dans HA.
 - Dossiers LxCx de `docs/02_docs_dashboard` (décidé par Eric le 2026-10-25, définitif ; seul `L0C0_PAGE_Home` reste tel quel) : dans `02_dashboard_docs_MD` comme dans `02_dashboard_docs_YAML`, un dossier `LxCx_{NOM}` en majuscules et sans numéro (`L3C3_STORES`) contient `LxCx_{NOM}_01_Vignette` et `LxCx_{NOM}_02_Page` (`LxCx_{NOM}_03_Page`... si plusieurs pages), et les fichiers s'appellent `LxCx_Vignette_{NOM}.md` ou `.yaml` et `LxCx_Page_{NOM}.md` ou `.yaml` (`L3C3_STORES_01_Vignette\L3C3_Vignette_STORES.md`, `L3C3_STORES_02_Page\L3C3_Page_STORES.yaml`). Tout nom commence par `LxCx` pour repérer où on se trouve. Un suffixe éventuel (page gauche, page droite...) s'écrit en minuscules après le {NOM} dans le nom du fichier et dans le nom du dossier de page (`L3C1_ECLAIRAGE_02_Page_gauche`, `L3C1_Page_ECLAIRAGE_gauche.md`, validé par Eric le 2026-10-25).
-- Détail et écarts de toutes les règles de nommage de `docs` : `docs/00_IA/00_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md` (brouillon à valider ; aucun renommage sans go séparé d'Eric)
+- Détail et écarts de toutes les règles de nommage de `docs` : `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md` (brouillon à valider ; aucun renommage sans go séparé d'Eric)
 - Fichiers legacy non conformes : pas de renommage sec en prod - renommer uniquement si le fichier est modifié pour autre chose
 - ⚠️ Exception legacy TOTAL : `P0_total_pour_les_7_postes.yaml` agrège 7 postes (chauffage/hygiène/multimédia...) sur 4 cycles - devrait s'appeler `P0_TOTAL_AMHQ.yaml` mais nom d'origine conservé
 - 🧊 Cas particulier en attente : `P2_current_all_standby.yaml` - puissance totale veilles, TYPE non encore formalisé
@@ -530,8 +532,8 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 
 À chaque création/modif d'une doc vignette (`docs/02_docs_dashboard/02_dashboard_docs_MD/L*`) :
 1. Remplir **ENTITÉS UTILISÉES - PROVENANCE COMPLÈTE** dans la doc.
-2. Mettre à jour `docs/02_docs_dashboard/02_dashboard_docs_MD/DEPENDANCES_GLOBALES.md` (🔲 → ✅).
-3. Mettre à jour la date en haut de `DEPENDANCES_GLOBALES.md`.
+2. Mettre à jour `docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md` (🔲 → ✅).
+3. Mettre à jour la date en haut de `DEPENDANCES_GLOBALES_CLAUDE_memoire.md`.
 
 ---
 
@@ -576,7 +578,7 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 | **Accès** | Samba Share · SSH · Tailscale · Cloudflare Tunnel (host Proxmox .240 → erodi-ha.com) |
 
 **Intégrations (compact)** : MyElectricalData · Météo France · Blitzortung · AtmoFrance · Vigieau · Meross LAN · Philips HUE · Z2M · Browser Mod · Streamline Card · HACS
-→ Détail complet : `docs/00_IA/00_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md`
+→ Détail complet : `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md`
 
 ---
 
@@ -664,7 +666,7 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 - PowerCalc : P3 uniquement, Hue sans monitoring natif + exception `relais_lumiere_sdb_sonoff` (10W fixe)
 
 ### P4 - Présence : téléphones mobiles (Poco X7 Pro), capteurs Wi-Fi.
-→ Détail complet sensor.presence : `docs/00_IA/00_SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md`
+→ Détail complet sensor.presence : `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md`
 
 ---
 
@@ -695,7 +697,7 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 | Hors ménage, hors circuit de push | `TODO/` · `Github/` · `historique/` · `.claude/` · `Infra_Proxmox/` | restent locaux |
 
 > Le détail des arborescences (local, prod, GitHub, comptages) vit dans
-> `docs/00_IA/00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md`, maintenu par `/histo` (étape 6).
+> `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md`, maintenu par `/histo` (étape 6).
 > **En cas de divergence, c'est ce fichier qui fait foi** : il est recompté à chaque passage,
 > contrairement à cette page. Ne pas recopier d'arborescence ici.
 
@@ -723,7 +725,7 @@ Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2
 
 → `H:/scripts.yaml` (Scripts, section Automations - miroir local `docs/04_docs_scripts/`) suit la meme regle que la config YAML : sauvegarde locale (`.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}`, voir REGLE DE SAUVEGARDE) a cote du fichier dans `docs/04_docs_scripts/` AVANT toute modification, jamais de sauvegarde creee en prod. Difference : le push vers `H:/scripts.yaml` se fait a la main par Eric via l'UI HA (jamais de copie fichier directe) - coherent avec la regle Automations (jamais d'edition directe du fichier live). Les `.sh` de `.scripts/` restent geres individuellement, hors de cette regle. Audit MD5 automations/scripts : plus complexe que sur la config YAML simple, a traiter au cas par cas.
 
-→ Arborescences complètes prod + local : `docs/00_IA/00_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md`
+→ Arborescences complètes prod + local : `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md`
 
 ---
 
@@ -736,7 +738,7 @@ Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2
 | `groupe_3` | Eric seul |
 | `groupe_4` | Tous les deux |
 
-→ sensor.presence + codes réseau complets : `docs/00_IA/00_SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md`
+→ sensor.presence + codes réseau complets : `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md`
 
 ---
 
@@ -760,7 +762,7 @@ Exemple : les 3 alertes Congélateur — fiches du 2026-09-01 mises à jour le 2
 *(copie locale du fichier : `docs/00_IA/confort_cible_calcul_flow.png` ; asset GitHub d'origine : https://github.com/user-attachments/assets/f18e24a2-1441-482b-af70-537a7b208e15)*
 
 > Caractéristiques détaillées du logement (dimensions, équipements par pièce, orientations) :
-> déplacées dans `docs/00_IA/00_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` (2026-07-19,
+> déplacées dans `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md` (2026-07-19,
 > usage limité à l'analyse des consommations électriques, hors périmètre des directives actives).
 
 <!-- annotations_log:

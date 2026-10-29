@@ -28,7 +28,7 @@ docs/02_docs_dashboard/
     (chaque dossier L*C* : 01_Vignette/ et 02_Page/, 02_page_nom si plusieurs pages)
 ```
 
-La chaine de dependances (`DEPENDANCES_GLOBALES.md`) est dans `docs/XX_docs_MD_system/DEPENDANCES_GLOBALES/`, plus dans `02_dashboard_docs_MD`.
+La chaine de dependances (`DEPENDANCES_GLOBALES_CLAUDE_memoire.md`) est dans `docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/`, plus dans `02_dashboard_docs_MD`.
 Prod : `H:\docs\` = miroir de `docs\` local ; un seul export `H:\Dashboard_AAAA_MM_JJ.yaml` a la racine de `H:\` (verifie par `/histo`, etape 5B). Config YAML prod : `sensors/`, `templates/`, `utility_meter/` a la racine de `H:\`.
 
 ---
@@ -90,4 +90,4 @@ Apres ajout/modification d'une vignette, page ou fichier source :
 2. Verifier chaque entite citee contre le YAML prod.
 3. Lancer `/histo` (regenere `GLOBAL_INDEX_VIGNETTES_PAGES.md`) ou a la main : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Gen_GLOBAL_INDEX_vignettes_pages\Gen_GLOBAL_INDEX_vignettes_pages.py"` ; verifier `liens=N casses=M` avec casses=0.
 4. Mettre a jour a la main la section 02-DASHBOARD de `GLOBAL_INDEX_REPO.md` si besoin (local puis racine de H:), verifier la balance `<details>`/`</details>` et `<blockquote>`/`</blockquote>` avant push.
-5. Mettre a jour `DEPENDANCES_GLOBALES.md` si necessaire (/sync-index).
+5. Mettre a jour `DEPENDANCES_GLOBALES_CLAUDE_memoire.md` si necessaire (/sync-index).
