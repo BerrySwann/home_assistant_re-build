@@ -184,7 +184,7 @@ timer: !include_dir_merge_named timers/
 # --- recorder ---
 recorder:
   db_url: !secret mariadb_url
-  purge_keep_days: 30
+  purge_keep_days: 35
   auto_purge: true
   auto_repack: true
   exclude:
