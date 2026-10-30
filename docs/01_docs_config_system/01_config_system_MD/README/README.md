@@ -22,7 +22,7 @@ Une donnee suit toujours le meme chemin : **capteur natif** (Zigbee2MQTT, Hue, L
 | Document cle | Role |
 |---|---|
 | [`GLOBAL_INDEX_REPO.md`](./GLOBAL_INDEX_REPO.md) | Index unique - 6 sections (IA, config, dashboard, automations, scripts, systeme) - accordeon GitHub. *(4400+ lignes, prevoyez du cafe)* |
-| [`docs/XX_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md`](./docs/XX_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md) | Carte -> Template -> Sensor -> Utility Meter -> Source native - 18 vignettes |
+| [`docs/00_IA/`](./docs/00_IA/) | Carte -> Template -> Sensor -> Utility Meter -> Source native - 18 vignettes |
 | [`IA_CONTEXT_BASE.md`](./docs/00_IA/00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md) | Regles de codage, nomenclature, arborescences - directives IA completes *(copie GitHub du CLAUDE.md local, prompt de Claude)* |
 
 ---

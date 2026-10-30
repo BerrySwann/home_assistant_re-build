@@ -1,11 +1,11 @@
 ---
 name: "sync-index"
-description: "Skill HA ReBuild - met a jour DEPENDANCES_GLOBALES.md et l'index du projet apres validation d'un fichier YAML. Declencher OBLIGATOIREMENT quand l'utilisateur tape /sync_index, dit \"met a jour l'index\", \"synchronise les dependances\", \"update DEPENDANCES_GLOBALES\", apres avoir valide ou corrige un fichier YAML config, automation ou script, ou quand une entite modifiee impacte une vignette du dashboard."
+description: "Skill HA ReBuild - met a jour DEPENDANCES_GLOBALES_CLAUDE_memoire.md et l'index du projet apres validation d'un fichier YAML. Declencher OBLIGATOIREMENT quand l'utilisateur tape /sync_index, dit \"met a jour l'index\", \"synchronise les dependances\", \"update DEPENDANCES_GLOBALES\", apres avoir valide ou corrige un fichier YAML config, automation ou script, ou quand une entite modifiee impacte une vignette du dashboard."
 ---
 
 # Skill : /sync_index - Mise a jour de l'index et des dependances
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_IA_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 ## Objectif
 
@@ -24,13 +24,13 @@ documentation de dependances pour maintenir la coherence du projet.
 
 | Type valide | Fichier index a mettre a jour |
 |:---|:---|
-| Config YAML | `docs/XX_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md` |
+| Config YAML | `docs/00_IA/` |
 | Automation | `docs/03_docs_automations/03_docs_automations_MD/{nom_automation}.md` + index automations si existant |
 | Script | `docs/04_docs_scripts/04_docs_scripts_YAML_MD/{nom_script}.md` |
-| Tout type impactant une vignette | `DEPENDANCES_GLOBALES.md` |
+| Tout type impactant une vignette | `DEPENDANCES_GLOBALES_CLAUDE_memoire.md` |
 
 **Chemins Windows :**
-- `C:\Users\Berry Swann\Documents\ReBuild\docs\XX_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`
+- `C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\03_docs_automations\03_docs_automations_MD\`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_YAML_MD\`
 
@@ -47,7 +47,7 @@ Determiner :
 - **Fichier source** (chemin dans le bon dossier)
 - **Vignette(s) concernee(s)** (L1C1 a L6C3) si applicable
 
-### 2. Mettre a jour DEPENDANCES_GLOBALES.md (si config ou vignette impactee)
+### 2. Mettre a jour DEPENDANCES_GLOBALES_CLAUDE_memoire.md (si config ou vignette impactee)
 
 Lire le fichier, reperer les lignes concernees, passer les statuts non-valide -> OK.
 Completer les colonnes "Fichier source" et "Entite" si vides.
@@ -76,7 +76,7 @@ Entite/alias: [unique_id ou alias]
 Vignette    : [L*C* ou N/A]
 
 Mises a jour :
-- DEPENDANCES_GLOBALES.md : [ligne] -> OK  (si applicable)
+- DEPENDANCES_GLOBALES_CLAUDE_memoire.md : [ligne] -> OK  (si applicable)
 - 03_docs_automations_MD/{nom}.md : [section mise a jour]  (si automation)
 - 04_docs_scripts_YAML_MD/{nom}.md : [section mise a jour]  (si script)
 ```
@@ -90,4 +90,4 @@ Proposer de creer/completer la section manquante.
 
 - **Ne reecrire que les lignes concernees** - pas le fichier complet (economie tokens).
 - Si aucune dependance n'est impactee : repondre "Index deja a jour - aucune action" (1 ligne).
-- Les chemins de fichiers cites dans DEPENDANCES_GLOBALES.md doivent avoir la casse exacte du disque (GitHub distingue la casse ; resync du 2026-10-18).
+- Les chemins de fichiers cites dans DEPENDANCES_GLOBALES_CLAUDE_memoire.md doivent avoir la casse exacte du disque (GitHub distingue la casse ; resync du 2026-10-18).

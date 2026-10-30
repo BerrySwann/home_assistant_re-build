@@ -16,7 +16,7 @@ ROOT = r"C:\Users\Berry Swann\Documents\ReBuild"
 DOCS = os.path.join(ROOT, "docs", "02_docs_dashboard")
 MDIR = os.path.join(DOCS, "02_dashboard_docs_MD")
 YDIR = os.path.join(DOCS, "02_dashboard_docs_YAML")
-DEP = os.path.join(ROOT, "docs", "XX_docs_MD_system", "DEPENDANCES_GLOBALES", "DEPENDANCES_GLOBALES.md")
+DEP = os.path.join(ROOT, "docs", "00_IA", "00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire", "DEPENDANCES_GLOBALES_CLAUDE_memoire.md")
 OUT = os.path.join(DOCS, "GLOBAL_INDEX_VIGNETTES_PAGES.md")
 SKIP = {"Dashboard_COMPLET"}
 DRY = "--dry" in sys.argv
@@ -101,7 +101,7 @@ def main():
     L = ["# GLOBAL_INDEX_VIGNETTES_PAGES.md - index des vignettes et des pages du dashboard", ""]
     L.append("Fichier GENERE le %s par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_vignettes_pages/gen_global_index_vignettes_pages.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications." % now)
     L.append("")
-    L.append("Source : arbre local docs/02_docs_dashboard (02_dashboard_docs_MD et 02_dashboard_docs_YAML), sauvegardes .bak_ exclues, Dashboard_COMPLET non detaille. Les liens sont relatifs a ce fichier. La colonne Dependances indique si le code de la vignette est cite dans DEPENDANCES_GLOBALES.md.")
+    L.append("Source : arbre local docs/02_docs_dashboard (02_dashboard_docs_MD et 02_dashboard_docs_YAML), sauvegardes .bak_ exclues, Dashboard_COMPLET non detaille. Les liens sont relatifs a ce fichier. La colonne Dependances indique si le code de la vignette est cite dans DEPENDANCES_GLOBALES_CLAUDE_memoire.md.")
     L.append("")
     L.append("## Controle")
     L.append("")
@@ -110,7 +110,7 @@ def main():
         L.append("- Vignettes sans %s : %d%s" % (lab, len(lst), (" (" + ", ".join(lst) + ")") if lst else ""))
     L.append("- Dossiers presents seulement cote MD : %d%s" % (len(seul_md), (" (" + ", ".join(seul_md) + ")") if seul_md else ""))
     L.append("- Dossiers presents seulement cote YAML : %d%s" % (len(seul_yaml), (" (" + ", ".join(seul_yaml) + ")") if seul_yaml else ""))
-    L.append("- Vignettes dont le code n'apparait pas dans DEPENDANCES_GLOBALES.md : %d%s" % (len(sans_dep), (" (" + ", ".join(sans_dep) + ")") if sans_dep else ""))
+    L.append("- Vignettes dont le code n'apparait pas dans DEPENDANCES_GLOBALES_CLAUDE_memoire.md : %d%s" % (len(sans_dep), (" (" + ", ".join(sans_dep) + ")") if sans_dep else ""))
     L.append("")
     L.append("## Vignettes et pages")
     L.append("")

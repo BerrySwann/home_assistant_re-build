@@ -5,7 +5,7 @@ description: "Skill HA ReBuild - triangulation des docs entre local (ReBuild), p
 
 # Skill : /ha-trigul - triangulation des docs (local / prod / GitHub)
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18, etape C ci-dessous).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_IA_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18, etape C ci-dessous).
 
 ## Objectif
 
@@ -96,7 +96,7 @@ Comparaison unite par unite de H:\automations.yaml et H:\scripts.yaml avec les Y
 
 ### C. Fichiers a plusieurs emplacements (script 3, decide le 2026-10-18)
 
-Lancer : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py"`. Lecture seule. Carte : `docs\00_IA\00_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md`.
+Lancer : `$env:PYTHONIOENCODING='utf-8'; python -I "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py"`. Lecture seule. Carte : `docs\00_IA\00_IA_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md`.
 
 - Fichiers suivis : tout `docs\01_docs_config_system\01_config_system_SH_PY_YAML\` (hors `.bak`, hors `notifs`, `themes`, `blueprints`, hors `secrets.yaml`, `scenes.yaml`, `ip_bans.yaml`) et, dans `01_config_system_MD`, `GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md` et `README\README.md`.
 - 5 colonnes : L (local), PR (prod racine /config), PM (prod miroir docs), GR (GitHub racine), GD (GitHub docs/). Scripts : sous-dossiers `01_scripts.sh` / `02_scripts.py` en local, a plat dans `/config/.scripts/`.

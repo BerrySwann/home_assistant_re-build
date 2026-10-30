@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-r"""check_sous_context_ia.py - controle LECTURE SEULE des 9 fichiers IA_* de docs\00_IA\00_SOUS_CONTEXT_IA.
+r"""check_sous_context_ia.py - controle LECTURE SEULE des 9 fichiers IA_* de docs\00_IA\00_IA_SOUS_CONTEXT_IA.
 Lance par /histo (etape 2, point 11). N'ecrit rien, ne corrige rien : rapporte les ecarts.
 Usage : $env:PYTHONIOENCODING='utf-8'; python -I check_sous_context_ia.py
 Controles par fichier :
   1 structure : dossier = nom du fichier, fichier present, baks bien nommes, plafonds (10 le jour meme, 3 par jour passe)
-  2 prod : H:\docs\00_IA\00_SOUS_CONTEXT_IA\<nom>\<nom>.md present et MD5 identique
+  2 prod : H:\docs\00_IA\00_IA_SOUS_CONTEXT_IA\<nom>\<nom>.md present et MD5 identique
   3 date declaree dans l'en-tete contre la date de modification du fichier
   4 chemins docs/... cites : existent en local
   5 nombres de type "N automations" / "N vignettes" contre la prod / les dossiers
@@ -14,8 +14,8 @@ import os, re, sys, json, hashlib, datetime
 import yaml
 
 BASE = r"C:\Users\Berry Swann\Documents\ReBuild"
-DIR = os.path.join(BASE, "docs", "00_IA", "00_SOUS_CONTEXT_IA")
-PROD = r"H:\docs\00_IA\00_SOUS_CONTEXT_IA"
+DIR = os.path.join(BASE, "docs", "00_IA", "00_IA_SOUS_CONTEXT_IA")
+PROD = r"H:\docs\00_IA\00_IA_SOUS_CONTEXT_IA"
 if not os.path.isdir(PROD) and os.path.isdir(r"H:\docs\00_IA\sous_context_ia"):
     PROD = r"H:\docs\00_IA\sous_context_ia"  # ancien nom, tant que la prod n'a pas ete renommee
 SEUIL_JOURS = 60

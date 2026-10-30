@@ -5,7 +5,7 @@ description: "Skill HA ReBuild - verifie en lecture seule les en-tetes des YAML 
 
 # HA Verif Headers - controle des en-tetes des YAML de config
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` et le controle `Verif_emplacements.py` (decide par Eric le 2026-10-18).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_IA_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` et le controle `Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 Cree le 2026-10-20 sur demande d'Eric. Verifie qu'un YAML de `docs\01_docs_config_system\01_config_system_SH_PY_YAML\` respecte les normes du `Claude md SAVE\CLAUDE.md` : sections 4 (bordures ASCII), 5 (5 headers obligatoires), 7 (slug tertiaire), 8 (name et unique_id). LECTURE SEULE : le skill ne corrige rien sans ordre d'Eric.
 

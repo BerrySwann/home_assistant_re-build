@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 r"""
 Verif_emplacements.py - controle EN LECTURE SEULE des fichiers presents a plusieurs emplacements.
-Carte des emplacements : docs/00_IA/00_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md
+Carte des emplacements : docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md
 Cree le 2026-10-18 a la demande d'Eric.
 
 Pour chaque fichier de la carte, empreinte git blob SHA-1 (8 caracteres) a 5 emplacements :
@@ -63,12 +63,36 @@ def exact(root, rel):
     return cur if os.path.isfile(cur) else None
 
 
+def dossier_du_fichier(nom):
+    """dossier propre a un fichier en local : <nom sans extension>_<extension> (ex. ha_git_backup_sh)"""
+    stem, ext = os.path.splitext(nom)
+    return stem + '_' + ext.lstrip('.')
+
+
+def aplatir(rel_cfg):
+    """(chemin a plat comme en prod, remarque) ; remarque = None si la structure suit la regle.
+    Regle (Eric, 2026-10-29) : en local, chaque script de .scripts et chaque YAML de command_line a son
+    dossier <nom>_<ext> ; en prod (HA) tout est a plat : /config/.scripts/<fichier> et
+    /config/command_line/<categorie>/<fichier>. Un dossier qui ne suit pas la regle n'est pas devine."""
+    p = rel_cfg.split('/')
+    if p[0] == '.scripts':
+        if len(p) >= 3 and p[1] in SOUS_DOSSIERS_SCRIPTS:
+            p = [p[0]] + p[2:]
+        cible = 2
+    elif p[0] == 'command_line':
+        cible = 3
+    else:
+        return rel_cfg, None
+    if len(p) == cible:
+        return '/'.join(p), None
+    if len(p) == cible + 1 and p[-2] == dossier_du_fichier(p[-1]):
+        return '/'.join(p[:-2] + p[-1:]), None
+    return rel_cfg, 'dossier ne suivant pas la regle <nom>_<ext> (en prod tout est a plat)'
+
+
 def racine_de(rel_cfg):
     """chemin a la racine de la prod d'un fichier de 01_config_system_SH_PY_YAML"""
-    p = rel_cfg.split('/')
-    if p[0] == '.scripts' and len(p) == 3 and p[1] in SOUS_DOSSIERS_SCRIPTS:
-        return '.scripts/' + p[2]
-    return rel_cfg
+    return aplatir(rel_cfg)[0]
 
 
 def lister(root):
@@ -108,12 +132,15 @@ def main():
 
     # 1. liste des fichiers suivis : (libelle, L, PR, PM, GR, GD)
     items = []
+    nonconf = []
     cfg_root = os.path.join(REBUILD, CFG.replace('/', os.sep))
     for rel in sorted(lister(cfg_root)):
         top = rel.split('/')[0]
         if top in PROD_SEULE_DOSSIERS or ignore(os.path.basename(rel)) or '#' in rel:
             continue
-        r = racine_de(rel)
+        r, remarque = aplatir(rel)
+        if remarque:
+            nonconf.append((rel, remarque))
         items.append((rel, CFG + '/' + rel, r, CFG + '/' + rel, r, CFG + '/' + rel))
     for lrel, r in RACINE_MD.items():
         items.append((lrel, lrel, r, lrel, r, lrel))
@@ -200,9 +227,9 @@ def main():
     out = os.path.join(RAPPORT_DIR, 'verif_emplacements_%s.txt' % now.strftime('%Y-%m-%d'))
     if os.path.exists(out):
         os.rename(out, out[:-4] + '.bak_%s.txt' % now.strftime('%Y_%m_%d_%Hh%Mm%Ss'))
-    nb_anom = sum(n for k, n in comptes.items() if k != 'SYNC') + len(seuls)
+    nb_anom = sum(n for k, n in comptes.items() if k != 'SYNC') + len(seuls) + len(nonconf)
     txt = ['VERIF EMPLACEMENTS - %s (lecture seule)' % now.strftime('%Y-%m-%d %H:%M:%S'),
-           'Carte : docs/00_IA/00_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md',
+           'Carte : docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md',
            'GitHub : ' + gtxt,
            'Colonnes : L local | PR prod racine /config | PM prod miroir docs | GR GitHub racine | GD GitHub docs/ (empreinte git blob, - = absent)',
            '', '== 1. FICHIERS SUIVIS (%d) ==' % len(lignes)]
@@ -214,8 +241,11 @@ def main():
     txt += ['', '== 3. ECARTS ATTENDUS (%d) : fichiers verrou d editeur #...# en prod seule, ignores par le .gitignore, pas une anomalie ==' % len(attendus)]
     for k, p in sorted(attendus):
         txt.append('%-40s | %s' % (k, p))
-    res = 'RESULTAT : %d fichiers suivis - %s - presents ailleurs qu en local %d' % (
-        len(lignes), ' - '.join('%s %d' % (k, n) for k, n in sorted(comptes.items())), len(seuls))
+    txt += ['', '== 4. STRUCTURE NON CONFORME (%d) : le dossier d un fichier de .scripts ou command_line ne suit pas la regle <nom>_<ext>, chemin a plat non devine ==' % len(nonconf)]
+    for rel, rq in sorted(nonconf):
+        txt.append('%s | %s' % (rel, rq))
+    res = 'RESULTAT : %d fichiers suivis - %s - presents ailleurs qu en local %d - structure non conforme %d' % (
+        len(lignes), ' - '.join('%s %d' % (k, n) for k, n in sorted(comptes.items())), len(seuls), len(nonconf))
     txt += ['', 'ANOMALIES : ' + ('aucune' if nb_anom == 0 else 'x %d' % nb_anom), res]
     with open(out, 'w', encoding='utf-8', newline='\n') as f:
         f.write('\n'.join(txt) + '\n')

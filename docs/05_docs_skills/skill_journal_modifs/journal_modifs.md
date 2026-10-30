@@ -7,7 +7,7 @@ description: Skill HA ReBuild - note au fil de l'eau chaque modification de fich
 
 ## Objectif
 
-Eviter les modifications sans trace ni auteur (constate le 2026-10-10 : CLAUDE.md, DEPENDANCES_GLOBALES.md, cartes de presence modifies sans journal). Chaque agent (Claude, Hermes) note une ligne par fichier modifie, au moment de la modification, dans son propre fichier du jour. L'autre agent le lit au debut de sa session.
+Eviter les modifications sans trace ni auteur (constate le 2026-10-10 : CLAUDE.md, DEPENDANCES_GLOBALES_CLAUDE_memoire.md, cartes de presence modifies sans journal). Chaque agent (Claude, Hermes) note une ligne par fichier modifie, au moment de la modification, dans son propre fichier du jour. L'autre agent le lit au debut de sa session.
 
 ## Emplacements
 

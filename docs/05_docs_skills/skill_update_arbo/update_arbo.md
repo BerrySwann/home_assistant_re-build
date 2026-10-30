@@ -5,7 +5,7 @@ description: "Skill HA ReBuild - met a jour IA_ARBO_DETAIL.md (comptages LOCAL +
 
 # Skill : /update-arbo - Mise a jour IA_ARBO_DETAIL.md
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_IA_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 ## Objectif
 
@@ -16,8 +16,8 @@ apres chaque session qui modifie le nombre de fichiers.
 
 | Fichier | Chemin |
 |:--------|:-------|
-| Local   | `C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\00_SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md` |
-| Prod    | `H:\docs\00_IA\00_SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md` |
+| Local   | `C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\00_IA_SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md` |
+| Prod    | `H:\docs\00_IA\00_IA_SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md` |
 
 ## Protocole d'execution
 
@@ -110,8 +110,8 @@ Les arbres sont une grille a deux colonnes de largeur fixe : un remplacement qui
 ### Etape 5 - Pousser vers H:\docs
 
 ```powershell
-$src  = "C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\00_SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md"
-$dest = "H:\docs\00_IA\00_SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md"
+$src  = "C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\00_IA_SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md"
+$dest = "H:\docs\00_IA\00_IA_SOUS_CONTEXT_IA\IA_ARBO_DETAIL\IA_ARBO_DETAIL.md"
 Copy-Item $src $dest -Force
 $h1 = (Get-FileHash $src  -Algorithm MD5).Hash
 $h2 = (Get-FileHash $dest -Algorithm MD5).Hash

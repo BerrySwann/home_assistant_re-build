@@ -5,7 +5,7 @@ description: "Skill HA ReBuild - analyse une erreur Home Assistant et retourne U
 
 # Skill : /fix_file - Correcteur YAML Home Assistant
 
-> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
+> Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_IA_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
 ## Objectif
 
@@ -53,7 +53,7 @@ Si le fichier existe dans `01_config_system_SH_PY_YAML/` (local), le lire avant 
 
 ### 4. Verification dependances (rapide)
 
-Si l'entite modifiee peut impacter une vignette ou `DEPENDANCES_GLOBALES.md`, signaler :
+Si l'entite modifiee peut impacter une vignette ou `DEPENDANCES_GLOBALES_CLAUDE_memoire.md`, signaler :
 `>> Impact potentiel : [vignette L*C*] - /sync_index recommande`
 
-**Chemin DEPENDANCES_GLOBALES :** `docs\XX_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md`
+**Chemin DEPENDANCES_GLOBALES :** `docs\00_IA\`
