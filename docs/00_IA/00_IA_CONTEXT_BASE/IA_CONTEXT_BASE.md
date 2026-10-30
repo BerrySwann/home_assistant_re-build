@@ -3,7 +3,7 @@
 > `ReBuild/docs/00_IA/00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md` et `D:\docs\00_IA\IA_CONTEXT_BASE.md`. Avant et apres
 > toute mise a jour, verifier que les trois empreintes md5 sont egales. Il ne depend d'aucun agent
 > en particulier.
-> Derniere mise en conformite : 2026-10-24 (copies identiques, TODO.html source de la todo). Rappel du
+> Derniere mise en conformite : 2026-10-30 (copies identiques, TODO.html source de la todo). Rappel du
 > 2026-10-04 : la copie `D:\` avait ete retrouvee perimee (version du 2026-07-19, encore l'ancienne
 > REGLE ABSOLUE) et realignee ce jour-la - ancienne version conservee en
 > `D:\docs\00_IA\IA_CONTEXT_BASE_2026-07-19_15h46.md`.
@@ -354,6 +354,10 @@ Copie de prod : `H:\Docs\` (poussee depuis le local, ne jamais la modifier direc
 > Un ecart LOCAL vs GitHub aujourd'hui signifie le plus souvent un push local -> H:\ pas encore
 > fait (ou pas encore remonte par l'auto-backup HA vers GitHub), pas un oubli d'extraction
 > depuis HA.
+>
+> Depuis le 2026-10-18, la superposition GitHub / local / prod se fait avec `/ha-trigul`
+> (script, 3 niveaux, 6 extensions, rapports dans `historique\03_RAPPORTS\06_MD5\`). Les commandes
+> ci-dessous sont le controle manuel de secours, limite aux .yaml de GitHub.
 
 ```bash
 wget -q "https://github.com/BerrySwann/home_assistant_re-build/archive/refs/heads/main.zip" -O /tmp/repo.zip
@@ -365,7 +369,7 @@ find . -type f -name "*.yaml" -print0 | sort -z | xargs -0 md5sum | sed 's|\./||
 | Cas | Action |
 |:----|:-------|
 | LOCAL absent de GitHub | → push local -> H:\ pas encore fait, ou pas encore remonte par l'auto-backup HA |
-| GitHub absent du LOCAL | → ancienne version → supprimer GitHub si plus récente en local |
+| GitHub absent du LOCAL | → GitHub n'est qu'un reflet de la prod (auto-backup HA) : le signaler a Eric, copie vers le local uniquement sur son ordre ; ne jamais supprimer ni pousser directement sur GitHub |
 | **MD5 différent (même nom)** | → **⚠️ Conflit - verifier quelle version est la plus recente (local = point d'edition, H:\ = etat pousse)** |
 | MD5 identique | → ✅ Synchronisé |
 
@@ -373,9 +377,9 @@ find . -type f -name "*.yaml" -print0 | sort -z | xargs -0 md5sum | sed 's|\./||
 
 | Priorité | Périmètre | Raison |
 |:---------|:----------|:-------|
-| **🔴 CRITIQUE** | `docs/` (sensors/, templates/, utility_meter/, command_line/) | Image locale poussee vers `H:\` via `ha-push-yaml` - un ecart non pousse peut laisser HA en retard sur le local |
+| **🔴 CRITIQUE** | `docs/01_docs_config_system/01_config_system_SH_PY_YAML/` (sensors/, templates/, utility_meter/, command_line/) | Image locale poussee vers `H:\` via `ha-push-yaml` - un ecart non pousse peut laisser HA en retard sur le local |
 | **🔴 CRITIQUE** | `automations.yaml` GitHub vs `docs/03_docs_automations/03_docs_automations_YAML/` | Détecter ajouts/suppressions/renommages depuis HA |
-| **🟡 SECONDAIRE** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/` vs `H:\Docs\` | UI seulement - ne casse pas HA |
+| **🟡 SECONDAIRE** | `docs/02_docs_dashboard/02_dashboard_docs_YAML/` vs `H:\docs\` | UI seulement - ne casse pas HA |
 
 ### Audit automations (MD5 + diff alias)
 ```bash
