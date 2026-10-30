@@ -4,7 +4,7 @@ r"""Check_badges_fiches.py - controle des 8 badges de chaque fiche .md de docs/ 
 Par defaut LECTURE SEULE : liste les fiches sans banniere, les badges manquants, les valeurs hors liste, les gabarits non remplis.
 Avec --fix : cree les badges manquants (jamais de modification d'un badge existant), apres un .bak_AAAA_MM_JJ_HHhMMmSSs.md a cote.
   Valeurs automatiques : Statut = Actif (defaut du 2026-10-30), HA = H:\.HA_VERSION lu en live, MaJ = date du jour, IA Partner = Claude_Sonnet_5.5, Source = Interne,
-  Modifs = Autorisees, Expert = HAOS_Proxmox, Type = Scripts pour les fiches de 04_docs_scripts. Statut et Type ailleurs : jamais devines,
+  Modifs = Autorisees, Expert = HAOS_Proxmox, Type par dossier (01 System, 02 Dashboard, 03 Automation, 04 Scripts). Type ailleurs : jamais devine,
   listes comme A DECIDER.
 Options : --fix ; --limite N (corrige au plus N fiches) ; --chemin SOUS_DOSSIER (restreint a un sous-dossier de docs).
 Exemptes : .bak, XX_*, *_ORIGINAL, *_archive*, MOC_*, GLOBAL_INDEX_*, docs/00_IA, copies de skills (docs/05_docs_skills).
@@ -16,7 +16,7 @@ from urllib.parse import unquote
 ROOT = r"C:\Users\Berry Swann\Documents\ReBuild\docs"
 ORDRE = ["Statut", "MaJ", "HA", "IA_Partner", "Source", "Modifs", "Expert", "Type"]
 STATUTS = {"Actif", "En cours", "A terminer", "VERROUILLE", "bak", "Trash", "Archive", "Original"}  # bak/Trash/Archive ajoutes le 2026-10-30 (ordre d'Eric)
-TYPES = {"Vignette", "Page", "Carte", "Page droite", "Page gauche", "Dashboard Doc", "Vignette Doc", "Page Doc", "Config Racine", "Index_Pages", "Scripts", "Script_Executant"}
+TYPES = {"Vignette", "Page", "Carte", "Page droite", "Page gauche", "Dashboard Doc", "Vignette Doc", "Page Doc", "Config Racine", "Index_Pages", "Scripts", "Script", "Script_Executant", "System", "Dashboard", "Automation", "README", "TUTO", "Hacking"}  # System/Dashboard/Automation ajoutes le 2026-10-30 (ordre d Eric)
 SKIP = re.compile(r"(^|[\\/])(XX_[^\\/]*|[^\\/]*_ORIGINAL|[^\\/]*_archive[^\\/]*|00_IA|05_docs_skills|__pycache__)([\\/]|$)", re.I)
 BADGE = re.compile(r"\[!\[[^\]]*\]\(https://img\.shields\.io/badge/([^)\s]+)\)\]\([^)]*\)")
 FIX = "--fix" in sys.argv
@@ -91,8 +91,10 @@ def auto(k, chemin, ha):
         if "archive" in low:
             return "Archive"  # sauf Modifs=INTERDITES (cas particulier)
         return "Actif"  # defaut decide par Eric le 2026-10-30
-    if k == "Type" and "04_docs_scripts" in chemin:
-        return "Scripts"
+    if k == "Type":  # Type par categorie de dossier (ordre d Eric le 2026-10-30)
+        for dossier, t in (("01_docs_config_system", "System"), ("02_docs_dashboard", "Dashboard"), ("03_docs_automations", "Automation"), ("04_docs_scripts", "Scripts")):
+            if chemin.replace("/", "\\").startswith(dossier + "\\"):
+                return t
     return None
 
 def analyser(texte):

@@ -7,7 +7,7 @@
 [![Source](https://img.shields.io/badge/Source-HACF-2196f3?style=flat-square)](https://forum.hacf.fr/t/alerte-meteo/23930)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
 [![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
-[![Type](https://img.shields.io/badge/Type-Tutoriel-ff9800?style=flat-square)](.)
+[![Type](https://img.shields.io/badge/Type-TUTO-ff9800?style=flat-square)](.)
 
 </div>
 
