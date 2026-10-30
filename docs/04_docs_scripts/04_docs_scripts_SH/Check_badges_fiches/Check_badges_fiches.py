@@ -3,7 +3,7 @@ r"""Check_badges_fiches.py - controle des 8 badges de chaque fiche .md de docs/ 
 
 Par defaut LECTURE SEULE : liste les fiches sans banniere, les badges manquants, les valeurs hors liste, les gabarits non remplis.
 Avec --fix : cree les badges manquants (jamais de modification d'un badge existant), apres un .bak_AAAA_MM_JJ_HHhMMmSSs.md a cote.
-  Valeurs automatiques : HA = H:\.HA_VERSION lu en live, MaJ = date du jour, IA Partner = Claude_Sonnet_5.5, Source = Interne,
+  Valeurs automatiques : Statut = Actif (defaut du 2026-10-30), HA = H:\.HA_VERSION lu en live, MaJ = date du jour, IA Partner = Claude_Sonnet_5.5, Source = Interne,
   Modifs = Autorisees, Expert = HAOS_Proxmox, Type = Scripts pour les fiches de 04_docs_scripts. Statut et Type ailleurs : jamais devines,
   listes comme A DECIDER.
 Options : --fix ; --limite N (corrige au plus N fiches) ; --chemin SOUS_DOSSIER (restreint a un sous-dossier de docs).
@@ -15,7 +15,7 @@ from urllib.parse import unquote
 
 ROOT = r"C:\Users\Berry Swann\Documents\ReBuild\docs"
 ORDRE = ["Statut", "MaJ", "HA", "IA_Partner", "Source", "Modifs", "Expert", "Type"]
-STATUTS = {"Actif", "En cours", "A terminer", "VERROUILLE"}
+STATUTS = {"Actif", "En cours", "A terminer", "VERROUILLE", "bak", "Trash", "Archive", "Original"}  # bak/Trash/Archive ajoutes le 2026-10-30 (ordre d'Eric)
 TYPES = {"Vignette", "Page", "Carte", "Page droite", "Page gauche", "Dashboard Doc", "Vignette Doc", "Page Doc", "Config Racine", "Index_Pages", "Scripts", "Script_Executant"}
 SKIP = re.compile(r"(^|[\\/])(XX_[^\\/]*|[^\\/]*_ORIGINAL|[^\\/]*_archive[^\\/]*|00_IA|05_docs_skills|__pycache__)([\\/]|$)", re.I)
 BADGE = re.compile(r"\[!\[[^\]]*\]\(https://img\.shields\.io/badge/([^)\s]+)\)\]\([^)]*\)")
@@ -84,6 +84,13 @@ def auto(k, chemin, ha):
         return "Autorisees"
     if k == "Expert":
         return "HAOS_Proxmox"
+    if k == "Statut":
+        low = chemin.lower()
+        if "_original" in low or "yaml_original" in low:
+            return "Original"  # fichier original (ordre d'Eric 2026-10-30)
+        if "archive" in low:
+            return "Archive"  # sauf Modifs=INTERDITES (cas particulier)
+        return "Actif"  # defaut decide par Eric le 2026-10-30
     if k == "Type" and "04_docs_scripts" in chemin:
         return "Scripts"
     return None
