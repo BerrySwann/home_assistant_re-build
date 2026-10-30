@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--29-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?logo=home-assistant&logoColor=white&style=flat-square)](.)&nbsp;
 [![IA_Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,8 +13,8 @@
 
 </div>
 
-> Fichier GENERE le 2026-10-29 22:13 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
-> 13 fichiers de contenu, 84 sauvegardes (.bak), 0 sans description.
+> Fichier GENERE le 2026-10-30 20:39 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
+> 13 fichiers de contenu, 44 sauvegardes (.bak), 0 sans description.
 
 > 🚨🚨🚨 **GYROPHARE ROUGE - DANS HOME ASSISTANT TOUT EST A PLAT** 🚨🚨🚨
 >
@@ -62,18 +62,18 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 
 | Dossier | Nombre de sauvegardes |
 |---|---|
-| [00_IA_CONTEXT_BASE](../00_IA_CONTEXT_BASE/) | 6 |
-| [00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/) | 16 |
-| [00_IA_GLOBAL_INDEX_memoire](./) | 22 |
-| [00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 8 |
+| [00_IA_CONTEXT_BASE](../00_IA_CONTEXT_BASE/) | 4 |
+| [00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/) | 3 |
+| [00_IA_GLOBAL_INDEX_memoire](./) | 4 |
+| [00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 5 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE](../00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/) | 3 |
-| [00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS](../00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/) | 3 |
+| [00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS](../00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/) | 4 |
 | [00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS](../00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA](../00_IA_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA/) | 2 |
 | [00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/) | 3 |
-| [00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/) | 6 |
+| [00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES](../00_IA_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/) | 3 |
-| [00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS](../00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/) | 5 |
+| [00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS](../00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE](../00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE/) | 1 |
 | [00_IA_SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE](../00_IA_SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE/) | 3 |
 

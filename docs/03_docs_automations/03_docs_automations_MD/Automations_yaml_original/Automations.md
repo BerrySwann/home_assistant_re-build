@@ -1,5 +1,12 @@
 # 📋 AUTOMATIONS - INVENTAIRE COMPLET (ReBuild)
 
+<div align="center">
+
+[![Statut](https://img.shields.io/badge/Statut-Original-9e9e9e?style=flat-square)](.)
+
+</div>
+
+
 > **Source unique et autoritaire :**
 > `https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/automations.yaml`
 > 56 automations (52 au 2026-04-05 + 4 timers SDB ajoutées le 2026-10-07 : E, F, H, I)
