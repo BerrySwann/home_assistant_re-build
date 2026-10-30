@@ -1,8 +1,12 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![Modifié](https://img.shields.io/badge/MàJ-2026--04--29-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
+[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
+[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page-ff9800?style=flat-square)](.)
 
 </div>
@@ -1502,7 +1506,7 @@ column_span: 3
 
 - [`L2C3_Vignette_ENERGIE_ECLAIRAGE.md`](./L2C3_Vignette_ENERGIE_ECLAIRAGE.md) - Vignette button-card → accès à cette page
 - [`docs/WIFI_PRESENCE (Home Page)/PAGE_HOME.md`](../WIFI_PRESENCE%20(Home%20Page)/PAGE_HOME.md) - vue d'ensemble des 18 vignettes
-- [`docs/DEPENDANCES_GLOBALES.md`](DEPENDANCES_GLOBALES.md) - chaîne de dépendances L2C3
+- [`docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md`](../../../../00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md) - chaîne de dépendances L2C3
 
 ---
 

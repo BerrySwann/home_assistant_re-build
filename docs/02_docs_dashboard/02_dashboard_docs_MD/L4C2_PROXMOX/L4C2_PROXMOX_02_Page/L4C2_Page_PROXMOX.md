@@ -1,8 +1,12 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![Modifié](https://img.shields.io/badge/MàJ-2026--06--13-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2025.2-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
+[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
+[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page-ff9800?style=flat-square)](.)
 
 </div>
@@ -219,7 +223,7 @@ Page de supervision de l'infrastructure Proxmox VE. 6 sections indépendantes : 
 
 - `docs/02_docs_dashboard/02_dashboard_docs_YAML/L4C2_PROXMOX/02_page/page_L4C2_proxmox.yaml`
 - `docs/L4C2_PROXMOX/L4C2_Vignette_PROXMOX.md`
-- `docs/DEPENDANCES_GLOBALES.md`
+- `docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md`
 
 ---
 

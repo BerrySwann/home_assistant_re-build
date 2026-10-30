@@ -1,4 +1,4 @@
-# Check_sous_context_ia.py - controle des fichiers IA_* de 00_SOUS_CONTEXT_IA (lecture seule)
+# Check_sous_context_ia.py - controle des fichiers IA_* de 00_IA_SOUS_CONTEXT_IA (lecture seule)
 
 <div align="center">
 
@@ -22,10 +22,10 @@
 
 ## Role
 
-Controle les fichiers `IA_*` de `docs/00_IA/00_SOUS_CONTEXT_IA` (le script parle de 9 fichiers). Controles par fichier :
+Controle les fichiers `IA_*` de `docs/00_IA/00_IA_SOUS_CONTEXT_IA` (le script parle de 9 fichiers). Controles par fichier :
 
 1. structure : dossier = nom du fichier, fichier present, `.bak` bien nommes, plafonds (10 le jour meme, 3 par jour passe) ;
-2. prod : `H:\docs\00_IA\00_SOUS_CONTEXT_IA\<nom>\<nom>.md` present et MD5 identique ;
+2. prod : `H:\docs\00_IA\00_IA_SOUS_CONTEXT_IA\<nom>\<nom>.md` present et MD5 identique ;
 3. date declaree dans l'en-tete contre la date de modification du fichier ;
 4. chemins `docs/...` cites : existent en local ;
 5. nombres du type "N automations" ou "N vignettes" contre la prod et les dossiers ;

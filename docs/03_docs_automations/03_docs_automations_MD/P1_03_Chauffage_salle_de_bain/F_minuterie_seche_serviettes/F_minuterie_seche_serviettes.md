@@ -1,5 +1,16 @@
 # (F) MINUTERIE SÈCHE-SERVIETTES SDB - TIMER 2H
 
+<div align="center">
+
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
+[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
+[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)
+
+</div>
+
 > **Mise a jour 2026-10-11 :** fiche renommée F_MINUTERIE_SECHE_SERVIETTES.md (ancien nom E_), chemin du YAML et ID HA ajoutés, contenu relu contre le YAML, conforme.
 >
 > **Mise a jour 2026-10-07 :** cette automation s'appelle desormais **F** (elle etait E puis G, renommee par Eric ; lettres decalees le 2026-10-11). Doublee le meme jour par G et H (timers, voir `TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md`). F reste active en doublon jusqu'au test de G.

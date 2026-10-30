@@ -1,8 +1,8 @@
 # GLOBAL_INDEX_VIGNETTES_PAGES.md - index des vignettes et des pages du dashboard
 
-Fichier GENERE le 2026-10-28 19:07 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_vignettes_pages/gen_global_index_vignettes_pages.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-10-29 18:55 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_vignettes_pages/gen_global_index_vignettes_pages.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
-Source : arbre local docs/02_docs_dashboard (02_dashboard_docs_MD et 02_dashboard_docs_YAML), sauvegardes .bak_ exclues, Dashboard_COMPLET non detaille. Les liens sont relatifs a ce fichier. La colonne Dependances indique si le code de la vignette est cite dans DEPENDANCES_GLOBALES.md.
+Source : arbre local docs/02_docs_dashboard (02_dashboard_docs_MD et 02_dashboard_docs_YAML), sauvegardes .bak_ exclues, Dashboard_COMPLET non detaille. Les liens sont relatifs a ce fichier. La colonne Dependances indique si le code de la vignette est cite dans DEPENDANCES_GLOBALES_CLAUDE_memoire.md.
 
 ## Controle
 
@@ -13,7 +13,7 @@ Source : arbre local docs/02_docs_dashboard (02_dashboard_docs_MD et 02_dashboar
 - Vignettes sans YAML page : 0
 - Dossiers presents seulement cote MD : 0
 - Dossiers presents seulement cote YAML : 1 (XX_RASPI)
-- Vignettes dont le code n'apparait pas dans DEPENDANCES_GLOBALES.md : 0
+- Vignettes dont le code n'apparait pas dans DEPENDANCES_GLOBALES_CLAUDE_memoire.md : 0
 
 ## Vignettes et pages
 

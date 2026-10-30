@@ -1,5 +1,16 @@
 # PALETTE COULEURS - PRISES CONNECTÉES PAR PIÈCE (Pôle 2)
 
+<div align="center">
+
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--29-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
+[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
+[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)
+
+</div>
+
 > **Source de vérité** : `IA_CONTEXT_BASE.md` § Palette Officielle (Pôles 3 & 2)
 > **Référence dashboard** : `apexcharts-card` (donuts + barres) et `--mdc-theme-primary` des `tabbed-card`.
 > **Entités sources** : `Dashboard/L2C1_ENERGIE_GENERALE/page_L2C1_energie_mensuel_2026-06-18.yaml` / `Dashboard/L2C1_ENERGIE_GENERALE/page_L2C1_energie_temps_reel_2026-06-18.yaml`

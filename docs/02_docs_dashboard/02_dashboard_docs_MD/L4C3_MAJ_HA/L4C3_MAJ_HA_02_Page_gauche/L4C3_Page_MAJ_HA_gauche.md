@@ -2,6 +2,11 @@
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
 [![Modifié](https://img.shields.io/badge/MàJ-2026--10--11-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
+[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
+[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Page%20gauche-ff9800?style=flat-square)](.)
 
 </div>
@@ -592,7 +597,7 @@ Constatés dans le YAML tel qu'exporté le 2026-10-11, **non corrigés** (le fic
 
 - [`PAGE_MAJ_DROITE.md`](../03_page_droite/PAGE_MAJ_DROITE.md) - page droite (H.A. UPDATE)
 - [`L4C3_Vignette_MAJ_HA.md`](../01_vignette/L4C3_Vignette_MAJ_HA.md) - vignette
-- [`DEPENDANCES_GLOBALES.md`](../../../../XX_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md) - chaîne complète L4C3
+- [`DEPENDANCES_GLOBALES_CLAUDE_memoire.md`](../../../../00_IA/) - chaîne complète L4C3
 
 ---
 

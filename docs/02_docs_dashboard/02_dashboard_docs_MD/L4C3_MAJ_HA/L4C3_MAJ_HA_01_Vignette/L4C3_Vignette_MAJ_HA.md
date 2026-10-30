@@ -1,10 +1,12 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-VERROUILLÉ-44739e?style=flat-square)](.)&nbsp;
-[![Modifs](https://img.shields.io/badge/Modifs-INTERDITES-f44336?style=flat-square)](.)&nbsp;
-
-[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![Modifié](https://img.shields.io/badge/MàJ-2026--10--11-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
+[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-INTERDITES-f44336?style=flat-square)](.)&nbsp;
+[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-Vignette-ff9800?style=flat-square)](.)
 
 </div>
@@ -246,7 +248,7 @@ Vérifier dans Outils développeur > États : filtrer `update.` et regarder si `
 - [`PAGE_MAJ_GAUCHE.md`](../02_page_gauche/PAGE_MAJ_GAUCHE.md) - page `/dashboard-tablette/maj`, grille H.A. SERVER
 - [`PAGE_MAJ_DROITE.md`](../03_page_droite/PAGE_MAJ_DROITE.md) - page `/dashboard-tablette/maj`, grille H.A. UPDATE
 - [`PAGE_HOME.md`](../../L0C0_PAGE_Home/02_page/PAGE_HOME.md) - page d'accueil
-- [`DEPENDANCES_GLOBALES.md`](../../../../XX_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md) - chaîne de dépendances L4C3
+- [`DEPENDANCES_GLOBALES_CLAUDE_memoire.md`](../../../../00_IA/) - chaîne de dépendances L4C3
 
 ---
 

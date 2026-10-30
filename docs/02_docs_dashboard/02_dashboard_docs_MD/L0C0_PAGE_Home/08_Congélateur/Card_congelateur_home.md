@@ -44,7 +44,7 @@ Carte HACS utilisée : `custom:button-card` (carte "appliance").
 - Tap : `more-info`.
 - Tailles (variables) : icône 45 px, forme 65 px, hauteur 95 px.
 
-Point à vérifier : DEPENDANCES_GLOBALES.md (entrée du 2026-09-20 S4) parle d'un seuil de visibilité passé à -14 °C ; le YAML local contient -15 pour la visibilité et -14 pour la variable `max_temp_freezer`. Comparer avec le live avant de corriger l'un ou l'autre.
+Point à vérifier : DEPENDANCES_GLOBALES_CLAUDE_memoire.md (entrée du 2026-09-20 S4) parle d'un seuil de visibilité passé à -14 °C ; le YAML local contient -15 pour la visibilité et -14 pour la variable `max_temp_freezer`. Comparer avec le live avant de corriger l'un ou l'autre.
 
 ---
 

@@ -1,6 +1,6 @@
 # IA_INDEX_AUTOMATIONS.md - Contexte & Competence INDEX AUTOMATIONS
 
-*Mis a jour le : 2026-10-13 (comptages, arborescence et procedure remis a jour ; version precedente du 2026-07-21)*
+*Mis a jour le : 2026-10-30 (comptage 63 automations et categories remis a jour ; version precedente du 2026-10-13)*
 
 ---
 
@@ -33,9 +33,9 @@ docs/03_docs_automations/
 
 ---
 
-## Comptage (verifie 2026-10-13)
+## Comptage (verifie 2026-10-30)
 
-**62 automations** dans `automations.yaml` prod (controle du script : 62 en prod, 63 YAML locaux retenus, 66 fiches dont 62 rattachees).
+**63 automations** dans `automations.yaml` prod (controle du script : 63 en prod, 68 YAML locaux retenus, 70 fiches dont 58 rattachees).
 
 | Categories HA | Nb reel |
 |:--------------|:--------|
@@ -46,7 +46,7 @@ docs/03_docs_automations/
 | Gestion des Stores | 2 |
 | MariaDB & VSCode Optimisation | 2 |
 | Meteo | 5 |
-| P0_ENRIGE | 6 |
+| P0_ENRIGE | 7 |
 | P1_01_CLIM_CHAUFFAGE | 10 |
 | P1_02_Cuisine | 2 |
 | P1_03_Chauffage Salle de Bain | 9 |
@@ -56,7 +56,7 @@ docs/03_docs_automations/
 | Tarif HC/HP | 1 |
 | Watchdog Piles (HUE/IKEA/SONOFF) | 1 |
 
-> Source : sections du `GLOBAL_INDEX_AUTOMATIONS.md` genere le 2026-10-13 (somme = 62). Hors prod : 1 YAML local (RASPI : ventilateur Raspberry Pi 4, sans id), liste dans la section "Hors prod ou sans id" de l'index.
+> Source : sections du `GLOBAL_INDEX_AUTOMATIONS.md` genere le 2026-10-28 (somme = 63). Hors prod : 4 YAML locaux (dont RASPI : ventilateur Raspberry Pi 4, sans id), liste dans la section "Hors prod ou sans id" de l'index.
 
 ---
 
@@ -68,7 +68,7 @@ Une section par categorie HA, avec le nombre d'automations entre parentheses. Co
 
 ## Anomalies connues / ouvertes
 
-- Le bloc "Controle" de l'index (2026-10-13) signale 1 automation sans fiche rattachee : `AUTO. ENERGIE. Basculement Tarif HC/HP - Genelec Appart` (fiche `BASCULEMENT_TARIF_HPHC.md` non rattachee a un YAML).
+- Le bloc "Controle" de l'index (2026-10-28) signale 6 automations sans fiche rattachee (liste dans le bloc Controle de `GLOBAL_INDEX_AUTOMATIONS.md`).
 - Le resume `03-AUTOMATIONS` de GLOBAL_INDEX_REPO.md n'est pas regenere : il peut etre en retard sur l'index genere.
 
 ---

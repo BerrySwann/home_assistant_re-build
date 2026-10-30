@@ -22,7 +22,7 @@
 
 ## Role
 
-Index des vignettes (LxCy) et des pages du dashboard, construit depuis l'arbre local `docs/02_docs_dashboard` (`02_dashboard_docs_MD` et `02_dashboard_docs_YAML`) et `DEPENDANCES_GLOBALES.md`. Lecture seule sur tout sauf la sortie. `Dashboard_COMPLET` n'est jamais lu ni modifie.
+Index des vignettes (LxCy) et des pages du dashboard, construit depuis l'arbre local `docs/02_docs_dashboard` (`02_dashboard_docs_MD` et `02_dashboard_docs_YAML`) et `DEPENDANCES_GLOBALES_CLAUDE_memoire.md`. Lecture seule sur tout sauf la sortie. `Dashboard_COMPLET` n'est jamais lu ni modifie.
 
 ## Utilisation
 

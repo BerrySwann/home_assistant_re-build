@@ -1,6 +1,6 @@
 # GLOBAL_INDEX_SCRIPTS_SH.md - index des scripts shell et python
 
-Fichier GENERE le 2026-10-28 21:11 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-10-29 20:09 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 ## Difference entre l'index SH et l'index YAML
 
@@ -11,7 +11,7 @@ Fichier GENERE le 2026-10-28 21:11 par docs/04_docs_scripts/04_docs_scripts_SH/g
 
 ## Controle
 
-- Scripts SH indexes : 26
+- Scripts SH indexes : 27
 - Scripts sans fiche dans 04_docs_scripts_SH_MD : 1 (Mf_vigilance_images.sh)
 - Scripts presents dans H:\.scripts avec un contenu different du local : 1 (Audit_md5_md_yaml.sh)
 - Les scripts 'absent de H:\.scripts' tournent sur le PC ou ne sont pas deployes : a lire avec la colonne Skill.
@@ -23,13 +23,14 @@ Fichier GENERE le 2026-10-28 21:11 par docs/04_docs_scripts/04_docs_scripts_SH/g
 | [Audit_md5.sh](04_docs_scripts_SH/Audit_md5/Audit_md5.sh) | bash | absent de H:\.scripts | - | - | - | [Audit_md5.md](04_docs_scripts_SH_MD/Audit_md5/Audit_md5.md) | Audit_md5 |
 | [Audit_md5_md_yaml.sh](04_docs_scripts_SH/Audit_md5_md_yaml/Audit_md5_md_yaml.sh) | bash | DIFFERENT | - | - | - | [Audit_md5_md_yaml.md](04_docs_scripts_SH_MD/Audit_md5_md_yaml/Audit_md5_md_yaml.md) | Audit_md5_md_yaml |
 | [Audit_md5_yaml.sh](04_docs_scripts_SH/Audit_md5_yaml/Audit_md5_yaml.sh) | bash | identique | - | - | - | [Audit_md5.md](04_docs_scripts_SH_MD/Audit_md5/Audit_md5.md) | Audit_md5_yaml |
+| [Check_DEPENDANCES.py](04_docs_scripts_SH/Check_DEPENDANCES/Check_DEPENDANCES.py) | python | absent de H:\.scripts | - | - | histo, histo-final | [Check_DEPENDANCES.md](04_docs_scripts_SH_MD/Check_DEPENDANCES/Check_DEPENDANCES.md) | Check_DEPENDANCES |
 | [Check_GLOBAL_INDEX.py](04_docs_scripts_SH/Check_GLOBAL_INDEX/Check_GLOBAL_INDEX.py) | python | absent de H:\.scripts | - | - | - | [Check_GLOBAL_INDEX.md](04_docs_scripts_SH_MD/Check_GLOBAL_INDEX/Check_GLOBAL_INDEX.md) | Check_GLOBAL_INDEX |
 | [Check_XX_presents.py](04_docs_scripts_SH/Check_XX_presents/Check_XX_presents.py) | python | absent de H:\.scripts | - | - | ha-push-docs, ha-push-md, ha-push-yaml | [Check_XX_presents.md](04_docs_scripts_SH_MD/Check_XX_presents/Check_XX_presents.md) | Check_XX_presents |
 | [XX_manifest.json](04_docs_scripts_SH/Check_XX_presents/XX_manifest.json) | autre | absent de H:\.scripts | - | - | ha-push-docs, ha-push-md, ha-push-yaml | [Check_XX_presents.md](04_docs_scripts_SH_MD/Check_XX_presents/Check_XX_presents.md) | Check_XX_presents |
 | [Check_badges_fiches.py](04_docs_scripts_SH/Check_badges_fiches/Check_badges_fiches.py) | python | absent de H:\.scripts | - | - | - | [Check_badges_fiches.md](04_docs_scripts_SH_MD/Check_badges_fiches/Check_badges_fiches.md) | Check_badges_fiches |
 | [Check_sous_context_ia.py](04_docs_scripts_SH/Check_sous_context_ia/Check_sous_context_ia.py) | python | absent de H:\.scripts | - | - | - | [Check_sous_context_ia.md](04_docs_scripts_SH_MD/Check_sous_context_ia/Check_sous_context_ia.md) | Check_sous_context_ia |
 | [Gen_GLOBAL_INDEX_automations.py](04_docs_scripts_SH/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.py) | python | absent de H:\.scripts | - | - | - | [Gen_GLOBAL_INDEX_automations.md](04_docs_scripts_SH_MD/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.md) | Gen_GLOBAL_INDEX_automations |
-| [Gen_GLOBAL_INDEX_ia.py](04_docs_scripts_SH/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.py) | python | absent de H:\.scripts | - | - | - | [Gen_GLOBAL_INDEX_ia.md](04_docs_scripts_SH_MD/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.md) | Gen_GLOBAL_INDEX_ia |
+| [Gen_GLOBAL_INDEX_ia.py](04_docs_scripts_SH/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.py) | python | absent de H:\.scripts | - | - | histo | [Gen_GLOBAL_INDEX_ia.md](04_docs_scripts_SH_MD/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.md) | Gen_GLOBAL_INDEX_ia |
 | [Gen_GLOBAL_INDEX_scripts.py](04_docs_scripts_SH/Gen_GLOBAL_INDEX_scripts/Gen_GLOBAL_INDEX_scripts.py) | python | absent de H:\.scripts | - | - | - | [Gen_GLOBAL_INDEX_scripts.md](04_docs_scripts_SH_MD/Gen_GLOBAL_INDEX_scripts/Gen_GLOBAL_INDEX_scripts.md) | Gen_GLOBAL_INDEX_scripts |
 | [Gen_GLOBAL_INDEX_vignettes_pages.py](04_docs_scripts_SH/Gen_GLOBAL_INDEX_vignettes_pages/Gen_GLOBAL_INDEX_vignettes_pages.py) | python | absent de H:\.scripts | - | - | - | [Gen_GLOBAL_INDEX_vignettes_pages.md](04_docs_scripts_SH_MD/Gen_GLOBAL_INDEX_vignettes_pages/Gen_GLOBAL_INDEX_vignettes_pages.md) | Gen_GLOBAL_INDEX_vignettes_pages |
 | [Ha_git_backup.sh](04_docs_scripts_SH/Ha_git_backup/Ha_git_backup.sh) | bash | identique | - | - | ha-trigul | [Ha_git_backup.md](04_docs_scripts_SH_MD/Ha_git_backup/Ha_git_backup.md) | Ha_git_backup |

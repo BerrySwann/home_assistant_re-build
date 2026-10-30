@@ -1,5 +1,16 @@
 # Bureau - Forcer Play ON si PC tourne
 
+<div align="center">
+
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
+[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
+[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)
+
+</div>
+
 > **Automation retirée de HA le 2026-10-27**, remplacée par `P3 BUREAU - Espace de loisirs actif, garder les indicateurs allumes` (fiche `Bureau_espace_de_loisirs_actif`). Cette fiche est conservée pour l'historique.
 
 **Catégorie :** P3_eclairage
