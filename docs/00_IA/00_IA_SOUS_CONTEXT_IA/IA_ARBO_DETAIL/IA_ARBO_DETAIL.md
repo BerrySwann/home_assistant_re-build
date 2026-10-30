@@ -588,4 +588,4 @@ Exemples :
 
 - Sous-contextes `IA_*.md` : dossier renommé `sous_context_ia/` le 2026-07-18 (local + prod alignés). Restent à refondre : IA_INDEX_NAVIGATION, IA_INDEX_AUTOMATIONS, IA_INTEGRATIONS_CARTES, IA_P4_PRESENCE (TODO F-5).
 - `INDEX_GLOBAL.md` : 26 entités citées n'existent plus en base (relevé 2026-09-29), à retirer ou à requalifier.
-- `hermes_gen_dependances.py` : écrit dans `%LOCALAPPDATA%\Temp` et lit `docs/01_docs_config_system/config_system_YAML`, vidé le 2026-09-29 - **à repointer sur la prod ou le dépôt avant toute régénération**.
+- `hermes_gen_dependances.py` : écrit dans `%LOCALAPPDATA%\Temp` et lit `docs/01_docs_config_system/01_config_system_SH_PY_YAML` (script repointe le 2026-10-25, ligne 18 du script).
