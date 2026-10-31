@@ -10,6 +10,7 @@ def skip(rel):
     if rel=="99_docs_MD_system\\ENTITES_GLOBAL_INDEX\\ENTITES_GLOBAL_INDEX.md": return False  # exception Eric 2026-10-31 17h33
     if any(p.startswith("XX_") or p=="99_docs_MD_system" for p in parts[:-1]): return True
     n=parts[-1]
+    if rel.startswith("98_sauvegarde_hors_docs\\Infra_Proxmox\\") and ".bak" in n: return False  # .bak d Infra_Proxmox gardes (Eric 2026-10-31)
     if ".bak" in n or n=="secrets.yaml" or n.endswith(".pyc") or (n.startswith("#") and n.endswith("#")): return True
     if "__pycache__" in parts or "Dashboard_COMPLET" in parts: return True
     if any(("ARCHIVE" in p.upper() and p.upper().startswith(("_ARCHIVE","ARCHIVE"))) or "_archive_" in p.lower() for p in parts): return True

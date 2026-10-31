@@ -26,9 +26,11 @@ Copie `Infra_Proxmox`, `TODO` et `historique` (qui sont a la racine de ReBuild, 
 `python -I -X utf8 "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Sync_98_sauvegarde\Sync_98_sauvegarde.py" plan` (lecture seule) puis `exec`.
 
 ## Ce qui n'est pas copie
-- `.bak`, `.avant_*`, `.racine_avant_*`, `__pycache__`, `#...#`, `secrets.yaml`.
-- `Infra_Proxmox\docs\sonoff\SONOFF_STATUS_2026-05-23.md` : contient un mot de passe en clair (decision de Claude le 2026-10-31, a valider par Eric).
-- Dans la copie, les jetons GitHub `ghp_...` (debuts de jetons cites dans les journaux) sont remplaces par `ghp_***`. Les originaux ne sont pas modifies.
+- `.bak` (sauf ceux d'`Infra_Proxmox`, gardes et nommes `nom.bak_AAAA_MM_JJ.ext`), `.avant_*`, `.racine_avant_*`, `__pycache__`, `#...#`, `secrets.yaml`.
+
+## Ce qui est caviarde dans la copie
+- Dans `Infra_Proxmox` : lignes `user`, `password`, `network_key`, `pan_id`, `ext_pan_id`, `auth_token` et la mention `auth ... / ...` (fichier Sonoff 2026-05-23) remplacees par `***`.
+- Jetons GitHub `ghp_...` remplaces par `ghp_***`. Les originaux ne sont pas modifies.
 
 ## Regles liees
 - Le dossier 98_ est ignore par `Check_badges_fiches`, `gen_moc_docs` et `gen_moc_dashboard` (copies de sauvegarde, pas des fiches).

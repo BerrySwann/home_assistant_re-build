@@ -98,3 +98,5 @@
 2026-10-31 17:55 | claude | CREE | docs\04_docs_scripts\04_docs_scripts_SH\Sync_98_sauvegarde\ + fiche SH_MD | script de copie vers 98_
 2026-10-31 17:55 | claude | MODIF | Check_badges_fiches.py, gen_moc_docs.py, gen_moc_dashboard.py | SKIP 98_sauvegarde_hors_docs (bak faits)
 2026-10-31 17:55 | claude | MODIF | CLAUDE.md + IA_CONTEXT_BASE (local, D:, prod) | regle 98_sauvegarde_hors_docs (bak faits sauf D:); 5C exec MD5 OK
+2026-10-31 18:07 | claude | CREE | Infra_Proxmox\docs\sonoff\SONOFF_STATUS_2026-10-31.md | fiche Z2M mise a jour (releve live HA + sauvegarde Z2M 2026-06-14), secrets caviardes; copiee en 98_ et poussee en prod; 05-23 reste local seul
+2026-10-31 18:12 | claude | MODIF | Infra_Proxmox + 98_ | 3 .bak renommes en nom.bak_AAAA_MM_JJ.ext, .bak d'Infra_Proxmox gardes en 98_, SONOFF 05-23 copie caviarde (user/password/network_key); Sync_98, Push_5C, CLAUDE.md+copies, fiche mis a jour (bak faits); 5C MD5 OK
