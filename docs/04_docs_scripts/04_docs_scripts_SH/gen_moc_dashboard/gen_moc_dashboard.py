@@ -15,7 +15,7 @@ DOCS = os.path.join(ROOT, "docs", "02_docs_dashboard")
 YD = os.path.join(DOCS, "02_dashboard_docs_YAML")
 MD = os.path.join(DOCS, "02_dashboard_docs_MD")
 OUT = os.path.join(DOCS, "MOC_DASHBOARD.md")
-SKIP = re.compile(r"(^|[\\/])(XX_[^\\/]*|Dashboard_COMPLET|[^\\/]*_ORIGINAL|[^\\/]*_archive[^\\/]*)([\\/]|$)", re.I)
+SKIP = re.compile(r"(^|[\\/])(XX_[^\\/]*|99_docs_MD_system|Dashboard_COMPLET|[^\\/]*_ORIGINAL|[^\\/]*_archive[^\\/]*)([\\/]|$)", re.I)
 
 def norm(s):
     return re.sub(r"[^a-z0-9]", "", s.lower())

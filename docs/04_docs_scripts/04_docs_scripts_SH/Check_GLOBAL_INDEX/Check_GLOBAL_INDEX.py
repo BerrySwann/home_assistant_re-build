@@ -27,8 +27,8 @@ INDEX = {
                        [r"H:\docs\04_docs_scripts\GLOBAL_INDEX_SCRIPTS_SH.md"], "dossier", False),
  "GLOBAL_INDEX_SCRIPTS_YAML": (os.path.join(D, "04_docs_scripts", "GLOBAL_INDEX_SCRIPTS_YAML.md"),
                        [r"H:\docs\04_docs_scripts\GLOBAL_INDEX_SCRIPTS_YAML.md"], "dossier", False),
- "ENTITES_GLOBAL_INDEX": (os.path.join(D, "XX_docs_MD_system", "ENTITES_GLOBAL_INDEX", "ENTITES_GLOBAL_INDEX.md"),
-                       [r"H:\docs\XX_docs_MD_system\ENTITES_GLOBAL_INDEX\ENTITES_GLOBAL_INDEX.md"], "dossier", True),
+ "ENTITES_GLOBAL_INDEX": (os.path.join(D, "99_docs_MD_system", "ENTITES_GLOBAL_INDEX", "ENTITES_GLOBAL_INDEX.md"),
+                       [r"H:\docs\99_docs_MD_system\ENTITES_GLOBAL_INDEX\ENTITES_GLOBAL_INDEX.md"], "dossier", True),
  "IA_GLOBAL_INDEX": (os.path.join(D, "00_IA", "00_IA_GLOBAL_INDEX_memoire", "IA_GLOBAL_INDEX_memoire.md"),
                        [r"H:\docs\00_IA\00_IA_GLOBAL_INDEX_memoire\IA_GLOBAL_INDEX_memoire.md"], "dossier", False),
 }

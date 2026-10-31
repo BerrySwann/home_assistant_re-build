@@ -62,7 +62,7 @@ Fichier tmp sur chemin Windows explicite (`cygpath -m "$LOCALAPPDATA/Temp"`) - l
 | **Docs dashboard** | `docs/02_docs_dashboard/**/*.md` |
 | **Docs automations** | `docs/03_docs_automations/**/*.md` |
 | **Docs scripts** | `docs/04_docs_scripts/**/*.md` |
-| **Docs système** | `docs/XX_docs_MD_system/**/*.md` |
+| **Docs système** | `docs/99_docs_MD_system/**/*.md` |
 | **Fichiers racine** | `docs/01_docs_config_system/01_config_system_MD/README/README.md` + `docs/01_docs_config_system/01_config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md` (mappés vers racine prod/repo) |
 
 ---

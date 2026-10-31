@@ -80,9 +80,13 @@ DESC = {
    "Archive de la chaine de dependances, etat du 2026-10-07 19h20 (derniere mise a jour citee en tete : 2026-10-07, automation D watchdog SdB).",
    "Seulement pour retrouver un ancien constat ou le journal d une date. Pas une reference technique."),
   "00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md": (
-   "Claude (il la tient a jour via /sync_index et /histo) ; Hermes a sa propre version dans docs/XX_docs_MD_system/DEPENDANCES_GLOBALES_HERMES",
+   "Claude (il la tient a jour via /sync_index et /histo) ; Hermes a sa propre version dans docs/99_docs_MD_system/DEPENDANCES_GLOBALES_HERMES",
    "Chaine de dependances du dashboard : matrice des 18 vignettes, entites, fichiers et automations par domaine, scripts, fichiers config racine. Citee par IA_CONTEXT_BASE, IA_ARBO_DETAIL, IA_INDEX_NAVIGATION et IA_NOM_DES_REPERTOIRES_ET_FICHIERS.",
    "Apres validation d un YAML, d une automation ou d une vignette ; pour savoir quelles entites et quels fichiers dependent d une vignette."),
+ "00_IA_SOUS_CONTEXT_IA/IA_BADGES_FICHES/IA_BADGES_FICHES.md": (
+  "Claude, pour creer ou corriger la banniere de badges d une fiche",
+  "Inventaire des badges des fiches .md : valeurs et couleurs de chaque badge, et les cas deja rencontres.",
+  "Creer une fiche .md, choisir ou corriger un badge, modifier Check_badges_fiches."),
  "00_IA_SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE/IA_SKILLS_INVENTAIRE.md": (
   "Eric, et Claude ou Hermes pour aligner les skills",
   "Inventaire des skills Hermes regroupees par sujet, avec les skills communes a Claude en face a face.",
@@ -96,7 +100,7 @@ AUTRES = [
  ("GLOBAL_INDEX_VIGNETTES_PAGES.md", "../02_docs_dashboard/GLOBAL_INDEX_VIGNETTES_PAGES.md", "Genere par gen_global_index_vignettes_pages.py.", "etape 9 de /histo + check_global_index.py"),
  ("GLOBAL_INDEX_SCRIPTS_SH.md", "../04_docs_scripts/GLOBAL_INDEX_SCRIPTS_SH.md", "Genere par gen_global_index_scripts.py (scripts bash et python).", "etape 10 de /histo + check_global_index.py"),
  ("GLOBAL_INDEX_SCRIPTS_YAML.md", "../04_docs_scripts/GLOBAL_INDEX_SCRIPTS_YAML.md", "Genere par gen_global_index_scripts.py (scripts Home Assistant).", "etape 10 de /histo + check_global_index.py"),
- ("ENTITES_GLOBAL_INDEX.md", "../XX_docs_MD_system/ENTITES_GLOBAL_INDEX/ENTITES_GLOBAL_INDEX.md", "Index des entites, sans generateur : tenu a la main.", "check_global_index.py"),
+ ("ENTITES_GLOBAL_INDEX.md", "../99_docs_MD_system/ENTITES_GLOBAL_INDEX/ENTITES_GLOBAL_INDEX.md", "Index des entites, sans generateur : tenu a la main.", "check_global_index.py"),
  ("IA_GLOBAL_INDEX_memoire.md", "00_IA_GLOBAL_INDEX_memoire/IA_GLOBAL_INDEX_memoire.md", "Ce fichier, genere par gen_global_index_ia.py.", "etape 11 de /histo + check_global_index.py"),
 ]
 RX_BAK = re.compile(r"\.bak_\d{4}_\d{2}_\d{2}")

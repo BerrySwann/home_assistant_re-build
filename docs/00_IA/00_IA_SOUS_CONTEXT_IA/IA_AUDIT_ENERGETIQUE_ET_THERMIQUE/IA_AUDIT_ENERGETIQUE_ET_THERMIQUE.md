@@ -7,7 +7,7 @@
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
 [![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
-[![Type](https://img.shields.io/badge/Type-IA_System-ff9800?style=flat-square)](.)
+[![Type](https://img.shields.io/badge/Type-IA_System-ffeb3b?style=flat-square)](.)
 
 </div>
 

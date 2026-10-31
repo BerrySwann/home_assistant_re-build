@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -234,8 +234,8 @@ docs/
 │   ├── 04_docs_scripts_SH_MD/         <- docs scripts bash
 │   ├── 04_docs_scripts_YAML/          <- scripts HA YAML
 │   └── 04_docs_scripts_YAML_MD/       <- docs scripts HA
-├── XX_docs_MD_system/              <- DEPENDANCES_GLOBALES, GLOBAL_INDEX_REPO, index entites, templates
-├── 05_docs_skills/                 <- copies des SKILL.md du projet (un dossier skill_<nom>/ par skill)
+├── 99_docs_MD_system/              <- DEPENDANCES_GLOBALES, GLOBAL_INDEX_REPO, index entites, templates
+├── 05_docs_skills/                 <- skills du projet : 05_docs_skills_PURE/ (copies utilisables, anglais) et 05_docs_skills_MD/ (fiches en francais) ; un dossier skill_<nom>/ par skill
 └── 06_docs_technique/              <- procedures techniques (ex : pont Hue)
 ```
 

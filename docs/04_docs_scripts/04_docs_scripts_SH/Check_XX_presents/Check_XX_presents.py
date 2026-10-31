@@ -23,6 +23,7 @@ PROD = "H:" + chr(92) + "docs"
 MANIFEST = os.path.join(DOCS, "04_docs_scripts", "04_docs_scripts_SH", "Check_XX_presents",
                         "XX_manifest.json")
 SKIP = {"TEMPO", "__pycache__"}
+PREF = ("XX_", "99_docs_MD_system")  # 99_ ajoute le 2026-10-31 (ordre d Eric) : local seul, comme XX_
 
 
 def rel(p):
@@ -41,12 +42,12 @@ def releve(docs):
     for dp, dn, fn in os.walk(docs):
         dn[:] = [x for x in dn if x not in SKIP]
         for d in sorted(dn):
-            if not d.startswith("XX_"):
+            if not d.startswith(PREF):
                 continue
             top = os.path.join(dp, d)
             fichiers = []
             for p2, d2, f2 in os.walk(top):
-                d2[:] = [x for x in d2 if x not in SKIP and not x.startswith("XX_")]
+                d2[:] = [x for x in d2 if x not in SKIP and not x.startswith(PREF)]
                 for f in f2:
                     if est_bak(f):
                         continue
@@ -63,7 +64,7 @@ def en_prod(docs_prod):
     for dp, dn, _fn in os.walk(docs_prod):
         dn[:] = [x for x in dn if x not in SKIP]
         for d in dn:
-            if d.startswith("XX_"):
+            if d.startswith(PREF):
                 trouves.append(os.path.relpath(os.path.join(dp, d), docs_prod))
     return sorted(trouves)
 

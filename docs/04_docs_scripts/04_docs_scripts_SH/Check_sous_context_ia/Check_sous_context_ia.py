@@ -105,7 +105,7 @@ def date_declaree(t):
 
 RX_CHEMIN = re.compile(r"docs[/\\]\d{2}_[A-Za-z0-9_.\-/\\]*[A-Za-z0-9_.\-/\\]")
 RX_ENT = re.compile(r"\b(?:sensor|binary_sensor|automation|script|switch|light|climate|input_[a-z]+|utility_meter|cover|select|number|device_tracker|person|group|scene|timer|counter|weather|media_player|button|fan|lock|event|update|image|text|sun)\.[a-z0-9_]+\b")
-SANS_ENTITES = {"IA_ARBO_DETAIL", "IA_SKILLS_INVENTAIRE"}
+SANS_ENTITES = {"IA_ARBO_DETAIL", "IA_SKILLS_INVENTAIRE", "IA_BADGES_FICHES"}
 
 def check_chemins(t):
     morts, vus = [], 0

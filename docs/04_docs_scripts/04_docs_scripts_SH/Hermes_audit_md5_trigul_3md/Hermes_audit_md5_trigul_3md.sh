@@ -68,7 +68,7 @@ echo ""
 echo "── PASS 1 : TREE (local ReBuild = SOURCE DE VÉRITÉ) ──────────────────────────"
 } > "$LOG"
 
-find "$LOCAL_ROOT/docs" -name "*.md" -not -name "*.bak*" -not -iname "*_archive_*" -not -ipath "*/_archive/*" -not -ipath "*/XX_*" -not -path "*/01_config_system_MD/GLOBAL_INDEX_REPO/*" 2>/dev/null | sed "s|^$LOCAL_ROOT/||" | sort > "$TMP_TREE" || true
+find "$LOCAL_ROOT/docs" -name "*.md" -not -name "*.bak*" -not -iname "*_archive_*" -not -ipath "*/_archive/*" -not -ipath "*/XX_*" -not -ipath "*/99_docs_MD_system/*" -not -path "*/01_config_system_MD/GLOBAL_INDEX_REPO/*" 2>/dev/null | sed "s|^$LOCAL_ROOT/||" | sort > "$TMP_TREE" || true
 # Fichiers racine : mapping local Github/ -> chemin repo
 [ -f "$LOCAL_ROOT/docs/01_docs_config_system/01_config_system_MD/README/README.md" ]      && echo "README.md" >> "$TMP_TREE"
 [ -f "$LOCAL_ROOT/docs/01_docs_config_system/01_config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md" ] && echo "GLOBAL_INDEX_REPO.md" >> "$TMP_TREE"

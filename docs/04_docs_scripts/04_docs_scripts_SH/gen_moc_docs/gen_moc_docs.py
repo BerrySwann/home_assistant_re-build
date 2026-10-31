@@ -7,7 +7,7 @@ Ignores : .bak, XX_*, *_ORIGINAL, *_archive*, __pycache__, .pyc. Option --dry : 
 import os, re, sys, datetime, difflib, urllib.parse, html
 
 D = r"C:\Users\Berry Swann\Documents\ReBuild\docs"
-SKIP = re.compile(r"(^|[\\/])(XX_[^\\/]*|[^\\/]*_ORIGINAL|[^\\/]*_archive[^\\/]*|__pycache__)([\\/]|$)", re.I)
+SKIP = re.compile(r"(^|[\\/])(XX_[^\\/]*|99_docs_MD_system|[^\\/]*_ORIGINAL|[^\\/]*_archive[^\\/]*|__pycache__)([\\/]|$)", re.I)
 FORCE = {}  # nom de fichier source en minuscules -> chemin complet de la fiche (rattachements valides par Eric)
 _CLIM = r"C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_YAML_MD\Climatisation\Scripts_clim_on_off\Scripts_clim_on_off.md"
 for _n in ("j_1_1_salon_clim_on_off_intelligent.yaml", "j_1_2_bureau_clim_on_off_intelligent.yaml", "j_1_3_chambre_clim_on_off_intelligent.yaml"):
@@ -309,29 +309,39 @@ def front(path):
 
 def moc_skills(dry):
     root = os.path.join(D, "05_docs_skills")
-    L = header("MOC_SKILLS.md - skills du projet et leur explication", "MOC_SKILLS", "Regle d'Eric (2026-10-28) : la liste des skills avec leur explication (champ description du SKILL.md, repris de la copie en docs/05_docs_skills). Une copie par skill : dossier skill_<nom>/<nom>.md. Les liens sont relatifs a ce fichier.")
-    dirs = sorted([d for d in os.listdir(root) if os.path.isdir(os.path.join(root, d)) and d.startswith("skill_")], key=str.lower)
+    rootp = os.path.join(root, "05_docs_skills_PURE")  # skills en anglais (2026-10-31)
+    rootm = os.path.join(root, "05_docs_skills_MD")  # fiches FR, un dossier skill_<nom> par skill
+    if not os.path.isdir(rootp): rootp = root
+    L = header("MOC_SKILLS.md - skills du projet et leur explication", "MOC_SKILLS", "Regle d'Eric (2026-10-28) : la liste des skills avec leur explication (champ description du SKILL.md, repris de la copie en docs/05_docs_skills). Une copie par skill : dossier `skill_NOM/NOM.md` (anglais, dans 05_docs_skills_PURE) et fiche francaise dans 05_docs_skills_MD. Les liens sont relatifs a ce fichier.")
+    dirs = sorted([d for d in os.listdir(rootp) if os.path.isdir(os.path.join(rootp, d)) and d.startswith("skill_")], key=str.lower)
     rows, vides = [], []
     for d in dirs:
-        fs = [f for f in os.listdir(os.path.join(root, d)) if f.lower().endswith(".md") and ".bak" not in f.lower()]
+        fs = [f for f in os.listdir(os.path.join(rootp, d)) if f.lower().endswith(".md") and ".bak" not in f.lower()]
+        fs = [f for f in fs if f.lower() == d[6:].lower() + ".md"] or fs  # le fichier du skill porte le nom du dossier (histo_ref_*.md = fichiers de reference, 2026-10-31)
         if not fs:
             vides.append(d)
             continue
-        full = os.path.join(root, d, fs[0])
+        full = os.path.join(rootp, d, fs[0])
         name, desc = front(full)
         desc = re.sub(r"\s+", " ", desc).replace("|", "/")
         desc = re.split(r"\s*(?:Declencher|Usage typique)", desc)[0].strip(" .-") + "."
-        if len(desc) > 420:
-            desc = desc[:417].rstrip() + "..."
+        if len(desc) > 110:
+            desc = desc[:107].rstrip() + "..."
         mt = datetime.datetime.fromtimestamp(os.path.getmtime(full)).strftime("%Y-%m-%d")
         rows.append((name or d[6:], d, full, desc, mt))
     pdir = r"C:\Users\Berry Swann\Documents\ReBuild\.claude\skills"
     proj = sorted(os.listdir(pdir), key=str.lower) if os.path.isdir(pdir) else []
     have = set(norm(r[0]) for r in rows)
     manque = [p for p in proj if norm(p) not in have]
-    L += ["## Controle", "", "- Skills avec copie en docs : %d" % len(rows), "- Skills du projet (.claude/skills) : %d" % len(proj), "- Skills du projet sans copie en docs : %s" % (", ".join(manque) if manque else "aucun"), "- Dossiers skill_ sans copie (seulement des .bak) : %s" % (", ".join(vides) if vides else "aucun"), "", "## Skills", "", "| Skill | Copie | Explication | Copie datee du |", "|:------|:------|:------------|:---------------|"]
+    L += ["## Controle", "", "- Skills avec copie en docs : %d" % len(rows), "- Skills du projet (.claude/skills) : %d" % len(proj), "- Skills du projet sans copie en docs : %s" % (", ".join(manque) if manque else "aucun"), "- Dossiers skill_ sans copie (seulement des .bak) : %s" % (", ".join(vides) if vides else "aucun"), "", "## Skills", "", "| Skill | Anglais | FR | Explication | Date |", "|:------|:------|:------|:------------|:---------------|"]
     for name, d, full, desc, mt in rows:
-        L.append("| %s | %s | %s | %s |" % (name, link(root, os.path.basename(full), full), desc or "(pas de description dans la copie)", mt))
+        fr = os.path.join(rootm, d, os.path.basename(full))
+        frl = link(root, os.path.basename(fr), fr) if os.path.isfile(fr) else "a creer"
+        if os.path.isfile(fr):  # explication en francais prise dans la fiche FR (section "A quoi ca sert"), 2026-10-31
+            m = re.search(r"## A quoi ca sert\s*\n+(.+?)\n\s*\n", open(fr, encoding="utf-8").read() + "\n\n", re.S)
+            if m: desc = re.sub(r"\s+", " ", m.group(1)).replace("|", "/").strip()
+            if len(desc) > 110: desc = desc[:107].rstrip() + "..."
+        L.append("| %s | %s | %s | %s | %s |" % (name, link(root, os.path.basename(full), full), frl, desc or "(pas de description dans la copie)", mt))
     L.append("")
     write(os.path.join(root, "MOC_SKILLS.md"), "\n".join(L), dry)
     print("05 : skills=%d projet=%d sans_copie=%d dossiers_vides=%d" % (len(rows), len(proj), len(manque), len(vides)))

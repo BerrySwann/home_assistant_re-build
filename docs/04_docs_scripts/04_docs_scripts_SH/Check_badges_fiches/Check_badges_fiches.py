@@ -18,10 +18,11 @@ from urllib.parse import unquote
 
 ROOT = r"C:\Users\Berry Swann\Documents\ReBuild\docs"
 ORDRE = ["Statut", "MaJ", "HA", "IA_Partner", "Source", "Modifs", "Expert", "Type"]
-STATUTS = {"Actif", "En cours", "A terminer", "VERROUILLE", "bak", "Trash", "Archive", "Original"}  # bak/Trash/Archive ajoutes le 2026-10-30 (ordre d'Eric)
-TYPES = {"Vignette", "Page", "Carte", "Page droite", "Page gauche", "Dashboard Doc", "Vignette Doc", "Page Doc", "Config Racine", "Index_Pages", "Scripts", "Script", "Script_Executant", "System", "Dashboard", "Automation", "README", "TUTO", "Hacking", "Inconnu"}  # System/Dashboard/Automation ajoutes le 2026-10-30 (ordre d Eric)
-SKIP = re.compile(r"(^|[\\/])(05_docs_skills|__pycache__)([\\/]|$)", re.I)
-COUL_STATUT = {"Actif": "0f9d58", "bak": "ff9800", "Trash": "f44336", "Archive": "9e9e9e", "Original": "ffeb3b"}  # couleur par valeur (ordre d'Eric le 2026-10-31)
+STATUTS = {"Actif", "En cours", "A terminer", "VERROUILLE", "bak", "bak_h", "bak_d", "Trash", "Archive", "Original"}  # bak_h/bak_d ajoutes le 2026-10-31 13h30 (idee d Eric) ; bak/Trash/Archive ajoutes le 2026-10-30 (ordre d'Eric)
+TYPES = {"Vignette", "Page", "Carte", "Page droite", "Page gauche", "Dashboard Doc", "Vignette Doc", "Page Doc", "Config Racine", "Index_Pages", "Scripts", "Script", "Script_Executant", "System", "Dashboard", "Automation", "README", "TUTO", "Hacking", "Inconnu", "IA_System", "Skill"}  # System/Dashboard/Automation ajoutes le 2026-10-30 (ordre d Eric)
+SKIP = re.compile(r"(^|[\\/])(05_docs_skills_PURE|__pycache__)([\\/]|$)", re.I)  # PURE = skills en anglais, exemptes ; 05_docs_skills_MD = fiches FR, badgees (Eric 2026-10-31)
+COUL_TYPE = {"Skill": "ffeb3b", "System": "ffeb3b", "IA_System": "ffeb3b"}  # couleur par valeur du Type, defaut ff9800 (Skill, System et IA_System jaunes, ordre d Eric le 2026-10-31 17h08)
+COUL_STATUT = {"Actif": "0f9d58", "bak": "ff9800", "bak_h": "ff9800", "bak_d": "ff9800", "Trash": "f44336", "Archive": "9e9e9e", "Original": "ffeb3b"}  # couleur par valeur (ordre d'Eric le 2026-10-31)
 BADGE = re.compile(r"\[!\[[^\]]*\]\(https://img\.shields\.io/badge/([^)\s]+)\)\]\([^)]*\)")
 FIX = "--fix" in sys.argv
 OVR = {}  # valeurs imposees par le mode --bak
@@ -70,7 +71,7 @@ def ligne_badge(k, v, ha):
         return m % ("HA", "HA-%s-03a9f4" % v, "&logo=home-assistant&logoColor=white")
     if k == "IA_Partner":
         return "[![IA Partner](https://img.shields.io/badge/IA_Partner-%s-blueviolet?style=flat-square)](.)" % v
-    coul = {"Statut": COUL_STATUT.get(v, "0f9d58"), "MaJ": "44739e", "Source": "2196f3", "Modifs": "0f9d58", "Type": "ff9800"}
+    coul = {"Statut": COUL_STATUT.get(v, "0f9d58"), "MaJ": "44739e", "Source": "2196f3", "Modifs": "0f9d58", "Type": COUL_TYPE.get(v, "ff9800")}
     if k == "Expert":
         return "[![Expert](https://img.shields.io/badge/Expert-%s-success?style=flat-square)](.)" % v
     nom = {"MaJ": "M\u00e0J"}.get(k, k)
@@ -101,7 +102,7 @@ def auto(k, chemin, ha):
             return "Archive"  # sauf Modifs=INTERDITES (cas particulier)
         return "Actif"  # defaut decide par Eric le 2026-10-30
     if k == "Type":  # Type par categorie de dossier (ordre d Eric le 2026-10-30)
-        for dossier, t in (("01_docs_config_system", "System"), ("02_docs_dashboard", "Dashboard"), ("03_docs_automations", "Automation"), ("04_docs_scripts", "Scripts"), ("XX_docs_MD_system", "System"), ("00_IA", "System")):  # 00_IA = System (Eric, 2026-10-31)
+        for dossier, t in (("01_docs_config_system", "System"), ("02_docs_dashboard", "Dashboard"), ("03_docs_automations", "Automation"), ("04_docs_scripts", "Scripts"), ("99_docs_MD_system", "System"), ("00_IA", "IA_System"), ("05_docs_skills", "Skill")):  # 00_IA = IA_System (Eric, 2026-10-31 12:54)
             if chemin.replace("/", "\\").startswith(dossier + "\\"):
                 return t
     return None
@@ -224,7 +225,7 @@ def classer_bak():
             gardes.add(sorted(par_jour[j])[-1])
         for f in fs:
             d = date_bak(f)
-            v = "bak" if d >= auj else "Trash"  # regle d Eric 2026-10-31 : seuls les .bak du jour existent, les autres vont a la corbeille
+            v = "bak_h" if re.search(r"\.bak_\d{4}_\d{2}_\d{2}_\d{2}h", f) else "bak_d"  # bak_h = horodate du jour, bak_d = date (3 jours) ; regle d Eric 2026-10-31 13h06 : .bak conserves (3 jours) = bak ; Trash pose seulement juste avant la corbeille (menage du soir)
             res[os.path.join(dp, f)] = (v, d)
     return res
 

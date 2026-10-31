@@ -9,6 +9,11 @@
   "02_docs_dashboard/02_dashboard_docs_YAML/XX_RASPI/L4C1_MINI_PC_02_MD_RASPI/L4C1_Page_MINI_PC_RASPI.md",
   "02_docs_dashboard/02_dashboard_docs_YAML/XX_RASPI/L4C1_MINI_PC_02_YAML_RASPI/L4C1_Page_MINI_PC_RASPI.yaml"
  ],
+ "02_docs_dashboard/XX_archive_fiches_2026-10-28": [
+  "02_docs_dashboard/XX_archive_fiches_2026-10-28/L3C1_ECLAIRAGE/PAGE_ECLAIRAGE.md",
+  "02_docs_dashboard/XX_archive_fiches_2026-10-28/L4C3_MAJ_HA/PAGE_MAJ.md",
+  "02_docs_dashboard/XX_archive_fiches_2026-10-28/L5C2_BATTERIES_PORTABLES/PAGE_BATTERIES_PORTABLES.md"
+ ],
  "03_docs_automations/03_docs_automations_YAML/XX_RASPI": [
   "03_docs_automations/03_docs_automations_YAML/XX_RASPI/A_RASPI_fan_pwm_6_states_MD/A_RASPI_fan_pwm_6_states.md",
   "03_docs_automations/03_docs_automations_YAML/XX_RASPI/A_RASPI_fan_pwm_6_states_YAML/A_RASPI_fan_pwm_6_states.yaml"
@@ -19,18 +24,8 @@
  "04_docs_scripts/04_docs_scripts_SH/XX_MP_01_monitor_temp_sh_save_pour_RASPI": [
   "04_docs_scripts/04_docs_scripts_SH/XX_MP_01_monitor_temp_sh_save_pour_RASPI/#MP_01_monitor_temp.sh.#"
  ],
- "XX_docs_MD_system": [
-  "XX_docs_MD_system/AUTOMATIONS_IDS_REF.md",
-  "XX_docs_MD_system/AUTOMATIONS_MIGRATION_REPORT.md",
-  "XX_docs_MD_system/Config_root/Config_root.md",
-  "XX_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md",
-  "XX_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES_archive_2026-09-28.md",
-  "XX_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES_archive_2026-10-07_18h13.md",
-  "XX_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES_archive_2026-10-07_19h20.md",
-  "XX_docs_MD_system/DEPENDANCES_GLOBALES_HERMES/DEPENDANCES_GLOBALES_HERMES_V1.md",
-  "XX_docs_MD_system/ENTITES_GLOBAL_INDEX/ENTITES_GLOBAL_INDEX.md",
-  "XX_docs_MD_system/INDEX_PAGES.md",
-  "XX_docs_MD_system/Matrisse_template_doc/_Template_doc.md",
-  "XX_docs_MD_system/PROD_vs_REBUILD_DIFF.md"
+ "99_docs_MD_system": [
+  "99_docs_MD_system/DEPENDANCES_GLOBALES_HERMES/DEPENDANCES_GLOBALES_HERMES_V1.md",
+  "99_docs_MD_system/ENTITES_GLOBAL_INDEX/ENTITES_GLOBAL_INDEX.md"
  ]
 }

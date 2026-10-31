@@ -97,7 +97,7 @@ def attendu(rel, origin):
     name = low.rsplit('/', 1)[-1]
     if origin == 'L' and '.bak' in name:
         return 'sauvegarde locale'
-    if origin == 'L' and any(c.startswith('xx_') for c in low.split('/')):
+    if origin == 'L' and any(c.startswith('xx_') or c == '99_docs_md_system' for c in low.split('/')):
         return 'LOCAL SEUL VOULU (dossier XX_)'
     if origin == 'L' and '_archive_' in name:
         return 'archive locale'

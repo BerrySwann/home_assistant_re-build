@@ -15,7 +15,7 @@
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
 [![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
-[![Type](https://img.shields.io/badge/Type-System-ff9800?style=flat-square)](.)
+[![Type](https://img.shields.io/badge/Type-IA_System-ffeb3b?style=flat-square)](.)
 
 </div>
 
@@ -114,7 +114,7 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 - `GLOBAL_INDEX_*` et `DEPENDANCES_GLOBALES` : toujours en majuscules.
 - `IA_*` : toujours en majuscules. Les fichiers dont le nom contient "couleur" : tout en majuscules (exemple `COULEURS_PRISES_PAR_PIECE.md`).
 - `00_IA` : ne pas renommer (consigne du 2026-10-16). La règle de majuscules de 00_IA est documentée en 6.1.
-- `XX_docs_MD_system` : reste tel quel.
+- `99_docs_MD_system` : reste tel quel.
 - `Dashboard_COMPLET` : reste tel quel, contenu compris.
 - `L0C0_PAGE_Home` : tout son contenu reste où il est (décision du 2026-10-17).
 - Les motifs `GRP_0X` et `LXCX` (exemple `L1C1`) dans un nom.
@@ -333,7 +333,7 @@ Niveaux (repris de CLAUDE.md, section P3, ajoutés le 2026-10-17). Ce sont des s
 ### 6.15 Dossiers de type de fichiers : le numéro du dossier racine descend (décidé le 2026-10-17)
 - Un dossier de type de fichiers (md, yaml, sh...), enfant direct d'un dossier racine `0x_` de `docs`, reprend le numéro de ce dossier racine devant son nom : `03_docs_automations_MD` plutôt que `docs_automations_md`, `03_docs_automations_YAML` plutôt que `docs_automations_yaml` (exemples d'Eric).
 - Logique déjà utilisée pour les dossiers LxCx : le code du dossier au-dessus descend dans le nom de l'enfant (`02_L1C1_Page` et `Page_L1C1_meteo`).
-- Lecture retenue, à confirmer : "tous les pôles" = les dossiers de type de fichiers de `01_` à `04_`. Non concernés : `00_IA` (6.1), les dossiers nommés d'après un document (`XX_docs_MD_system\DEPENDANCES_GLOBALES`...) ou un skill (`05_docs_skills\skill_histo`...), et `06_docs_technique\01_Pont_hue_hacking` (déjà numéroté).
+- Lecture retenue, à confirmer : "tous les pôles" = les dossiers de type de fichiers de `01_` à `04_`. Non concernés : `00_IA` (6.1), les dossiers nommés d'après un document (`99_docs_MD_system\DEPENDANCES_GLOBALES`...) ou un skill (`05_docs_skills\skill_histo`...), et `06_docs_technique\01_Pont_hue_hacking` (déjà numéroté).
 - Le reste du nom ne change pas, hors majuscule au premier mot (règle de base, paragraphe 1) : `docs_scripts_sh` devient `04_docs_scripts_SH`. Les enfants de ces dossiers ne changent pas.
 - Exception d'Eric (2026-10-18), levée le 2026-10-25 : dans `01_docs_config_system`, `config_system_MD` et `config_system_SH_PY_YAML` ont gardé leur nom sans numéro, puis ont reçu le préfixe `01_` (`01_config_system_MD`, `01_config_system_SH_PY_YAML`, majuscules conservées). `config_system_SH_PY_YAML` remplace `config_system_SH_PY_YAML` (ancien nom d'avant l'exception) (nouvelle organisation : `.scripts\01_scripts.sh`, `.scripts\02_scripts.py`, `sql.yaml`, `notifs`, sans `blueprints`). Les arbres plus bas dans ce document (tableau des chemins) ne sont pas régénérés : ils décrivent encore l'ancienne organisation.
 - Lot B renommé le 2026-10-25 en local et en prod, sur ordre d'Eric (9 dossiers ; ancien nom, puis nouveau nom) :
@@ -416,6 +416,10 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │   ├── IA_AUTOMATIONS_NOTIFS/                                                          │ 00_IA : majuscules, conforme (00_IA intact)                                                 │
 │ │   │   │   │                                                                               │                                                                                             │
 │ │   │   │   └── IA_AUTOMATIONS_NOTIFS.md                                                    │ 00_IA : majuscules, conforme (00_IA intact)                                                 │
+│ │   │   │                                                                                   │                                                                                             │
+│ │   │   ├── IA_BADGES_FICHES/                                                               │ 00_IA : majuscules, conforme (00_IA intact)                                                 │
+│ │   │   │   │                                                                               │                                                                                             │
+│ │   │   │   └── IA_BADGES_FICHES.md                                                         │ 00_IA : majuscules, conforme (00_IA intact)                                                 │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   ├── IA_CMD_TERMINAL_HA/                                                             │ 00_IA : majuscules, conforme (00_IA intact)                                                 │
 │ │   │   │   │                                                                               │                                                                                             │
@@ -2211,95 +2215,83 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │                                                                                       │                                                                                             │
 │ │   └── GLOBAL_INDEX_SCRIPTS_YAML.md                                                        │ intact : GLOBAL_INDEX                                                                       │
 │ │                                                                                           │                                                                                             │
-│ ├── XX_docs_MD_system/                                                                      │ intact : XX_docs_MD_system                                                                  │
-│ │   │                                                                                       │                                                                                             │
-│ │   ├── Config_root/                                                                        │                                                                                             │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── Config_root.md                                                                  │                                                                                             │
-│ │   │                                                                                       │                                                                                             │
-│ │   ├── DEPENDANCES_GLOBALES/                                                               │ intact : DEPENDANCES_GLOBALES                                                               │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   ├── DEPENDANCES_GLOBALES_CLAUDE_memoire.md                                                         │ intact : DEPENDANCES_GLOBALES                                                               │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   ├── DEPENDANCES_GLOBALES_archive_2026_09_28.md                                      │ intact : DEPENDANCES_GLOBALES                                                               │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   ├── DEPENDANCES_GLOBALES_archive_2026_10_07_18h13.md                                │ intact : DEPENDANCES_GLOBALES                                                               │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── DEPENDANCES_GLOBALES_archive_2026_10_07_19h20.md                                │ intact : DEPENDANCES_GLOBALES                                                               │
+│ ├── 99_docs_MD_system/                                                                      │ intact : 99_docs_MD_system                                                                  │
 │ │   │                                                                                       │                                                                                             │
 │ │   ├── DEPENDANCES_GLOBALES_HERMES/                                                        │ intact : DEPENDANCES_GLOBALES                                                               │
 │ │   │   │                                                                                   │                                                                                             │
 │ │   │   └── DEPENDANCES_GLOBALES_HERMES_V1.md                                               │ intact : DEPENDANCES_GLOBALES                                                               │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── ENTITES_GLOBAL_INDEX/                                                               │ intact : GLOBAL_INDEX                                                                       │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── ENTITES_GLOBAL_INDEX.md                                                         │ intact : GLOBAL_INDEX                                                                       │
-│ │   │                                                                                       │                                                                                             │
-│ │   ├── GLOBAL_INDEX_REPO/                                                                  │ intact : GLOBAL_INDEX                                                                       │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── GLOBAL_INDEX_REPO.md                                                            │ intact : GLOBAL_INDEX                                                                       │
-│ │   │                                                                                       │                                                                                             │
-│ │   └── Matrisse_template_doc/                                                              │                                                                                             │
+│ │   └── ENTITES_GLOBAL_INDEX/                                                               │                                                                                             │
 │ │       │                                                                                   │                                                                                             │
-│ │       └── _Template_doc.md                                                                │                                                                                             │
+│ │       └── ENTITES_GLOBAL_INDEX.md                                                         │                                                                                             │
 │ │                                                                                           │                                                                                             │
 │ ├── 05_docs_skills/                                                                         │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── skill_fix_file/                                                                     │                                                                                             │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── fix_file.md                                                                     │                                                                                             │
+│ │   ├── 05_docs_skills_PURE/  (copies utilisables en anglais, sans badges)                  │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── skill_ha_new_yaml/                                                                  │                                                                                             │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── ha_new_yaml.md                                                                  │                                                                                             │
+│ │   │   ├── skill_fix_file/                                                                 │                                                                                             │
+│ │   │   │   └── fix_file.md                                                                 │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── skill_ha_push_docs/                                                                 │                                                                                             │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── ha_push_docs.md                                                                 │                                                                                             │
+│ │   │   ├── skill_ha_new_yaml/                                                              │                                                                                             │
+│ │   │   │   └── ha_new_yaml.md                                                              │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── skill_ha_push_md/                                                                   │                                                                                             │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── ha_push_md.md                                                                   │                                                                                             │
+│ │   │   ├── skill_ha_push_docs/                                                             │                                                                                             │
+│ │   │   │   └── ha_push_docs.md                                                             │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── skill_ha_push_yaml/                                                                 │                                                                                             │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── ha_push_yaml.md                                                                 │                                                                                             │
+│ │   │   ├── skill_ha_push_md/                                                               │                                                                                             │
+│ │   │   │   └── ha_push_md.md                                                               │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── skill_ha_resync_tree/                                                               │                                                                                             │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── ha_resync_tree.md                                                               │                                                                                             │
+│ │   │   ├── skill_ha_push_yaml/                                                             │                                                                                             │
+│ │   │   │   └── ha_push_yaml.md                                                             │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── skill_ha_status/                                                                    │                                                                                             │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── ha_status.md                                                                    │                                                                                             │
+│ │   │   ├── skill_ha_resync_tree/                                                           │                                                                                             │
+│ │   │   │   └── ha_resync_tree.md                                                           │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── skill_ha_trigul/                                                                    │                                                                                             │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── ha_trigul.md                                                                    │                                                                                             │
+│ │   │   ├── skill_ha_status/                                                                │                                                                                             │
+│ │   │   │   └── ha_status.md                                                                │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── skill_ha_verif_headers/                                                                    │                                                                                      │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── ha_verif_headers.md                                                                    │                                                                                      │
+│ │   │   ├── skill_ha_trigul/                                                                │                                                                                             │
+│ │   │   │   └── ha_trigul.md                                                                │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── skill_histo/                                                                        │                                                                                             │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── histo.md                                                                        │                                                                                             │
+│ │   │   ├── skill_ha_update_check_cli/                                                      │                                                                                             │
+│ │   │   │   └── ha_update_check_cli.md                                                      │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── skill_histo_final/                                                                  │                                                                                             │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── histo_final.md                                                                  │                                                                                             │
+│ │   │   ├── skill_ha_verif_headers/                                                         │                                                                                             │
+│ │   │   │   └── ha_verif_headers.md                                                         │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── skill_journal_modifs/                                                               │                                                                                             │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── journal_modifs.md                                                               │                                                                                             │
+│ │   │   ├── skill_hermes_aligne/                                                            │                                                                                             │
+│ │   │   │   └── (vide)                                                                      │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   ├── skill_sync_index/                                                                   │                                                                                             │
-│ │   │   │                                                                                   │                                                                                             │
-│ │   │   └── sync_index.md                                                                   │                                                                                             │
+│ │   │   ├── skill_hermes_journal_modifs/                                                    │                                                                                             │
+│ │   │   │   └── (vide)                                                                      │                                                                                             │
 │ │   │                                                                                       │                                                                                             │
-│ │   └── skill_update_arbo/                                                                  │                                                                                             │
-│ │       │                                                                                   │                                                                                             │
-│ │       └── update_arbo.md                                                                  │                                                                                             │
+│ │   │   ├── skill_histo/                                                                    │                                                                                             │
+│ │   │   │   ├── histo_ref_controles.md                                                      │                                                                                             │
+│ │   │   │   ├── histo_ref_menage.md                                                         │                                                                                             │
+│ │   │   │   ├── histo_ref_sync_index.md                                                     │                                                                                             │
+│ │   │   │   └── histo.md                                                                    │                                                                                             │
+│ │   │                                                                                       │                                                                                             │
+│ │   │   ├── skill_histo_final/                                                              │                                                                                             │
+│ │   │   │   └── histo_final.md                                                              │                                                                                             │
+│ │   │                                                                                       │                                                                                             │
+│ │   │   ├── skill_journal_modifs/                                                           │                                                                                             │
+│ │   │   │   └── journal_modifs.md                                                           │                                                                                             │
+│ │   │                                                                                       │                                                                                             │
+│ │   │   ├── skill_sync_index/                                                               │                                                                                             │
+│ │   │   │   └── sync_index.md                                                               │                                                                                             │
+│ │   │                                                                                       │                                                                                             │
+│ │   │   └── skill_update_arbo/                                                              │                                                                                             │
+│ │   │       └── update_arbo.md                                                              │                                                                                             │
+│ │   │                                                                                       │                                                                                             │
+│ │   ├── 05_docs_skills_MD/  (fiches explicatives en francais, 8 badges, Type Skill)         │                                                                                             │
+│ │   │                                                                                       │                                                                                             │
+│ │   │   ├── skill_histo/                                                                    │                                                                                             │
+│ │   │   │   └── histo.md                                                                    │                                                                                             │
+│ │   │                                                                                       │                                                                                             │
+│ │   │   └── skill_histo_final/                                                              │                                                                                             │
+│ │   │       └── histo_final.md                                                              │                                                                                             │
+│ │   │                                                                                       │                                                                                             │
+│ │   └── MOC_SKILLS.md                                                                       │                                                                                             │
 │ │                                                                                           │                                                                                             │
 │ └── 06_docs_technique/                                                                      │                                                                                             │
 │     │                                                                                       │                                                                                             │
@@ -2333,7 +2325,7 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 - RASPI (6.12) : `rpi` devient `RASPI`, y compris dans `A_rpi_fan_pwm_6_states` : impact sur le nom d'automation dans `H:\automations.yaml` (non vérifié).
 - GitHub (6.13) : `command_line\Github_maintenance` et `shell_command\GITHUB` (mis à la main) passent à `GitHub` ; impact sur les `include` et les `shell_command` non vérifié.
 - Dossiers de type de fichiers (6.15) : portée "tous les pôles" lue comme les dossiers md, yaml et sh de `01_` à `04_` ; dossiers nommés d'après un document ou un skill non concernés : à confirmer.
-- Racines `01_docs_config_system` et `XX_docs_MD_system` : `docs` en minuscules au début, alors que `02_docs_dashboard`, `03_docs_automations`, `04_docs_scripts`, `05_docs_skills` et `06_docs_technique` ont une majuscule : à trancher (règle du premier mot, paragraphe 1).
+- Racines `01_docs_config_system` et `99_docs_MD_system` : `docs` en minuscules au début, alors que `02_docs_dashboard`, `03_docs_automations`, `04_docs_scripts`, `05_docs_skills` et `06_docs_technique` ont une majuscule : à trancher (règle du premier mot, paragraphe 1).
 
 ## 10. Mise en oeuvre et précautions
 - Les changements du 2026-10-16 sont des changements de casse seule. Sous Windows, le renommage se fait en deux temps (nom temporaire, puis nom final).
