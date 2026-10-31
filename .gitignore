@@ -34,7 +34,7 @@ www/community/
 custom_components/
 
 # --- Images volatiles / météo ---
-www/weather/
+www/weather/*
 www/*.png
 www/*.jpg
 
@@ -72,6 +72,12 @@ migration-*-to-*.log
 !docs/**/notifs/ecart_liky_vs_nodon.txt
 !rebuild_tree.txt
 !zone_eric.txt
+# "Historiques notifs et images du dashboard versionnes : controle prod contre GitHub, pas de copie locale (2026-10-31, demande d Eric)"
+!notifs/*.txt
+!www/images/meteocons/*.svg
+!www/images/mini pc.png
+!www/images/RPi4B3.png
+!www/weather/meteo_france_alerte_nodata.png
 # "Icones meteo des docs (svg) versionnees : 3 niveaux local, prod, GitHub (2026-10-18, demande d Eric)"
 !docs/**/*.svg
 # "[L65] Force l inclusion du diagnostic conso malgré l interdiction .txt"

@@ -1,0 +1,63 @@
+Home Assistant notifications (Log started: 2026-08-31T18:24:31.482888+00:00)
+--------------------------------------------------------------------------------
+30/08 | Linky : 13.79 kWh (RATTRAPÉ)
+31/08 | Linky : 9.52 kWh (RATTRAPÉ)
+01/09 | Linky : 9.22 kWh (RATTRAPÉ)
+02/09 | Linky : 7.10 kWh (RATTRAPÉ)
+03/09 | Linky : 11.00 kWh (RATTRAPÉ)
+04/09 | Linky : 10.69 kWh
+05/09 | Linky : 13.82 kWh (RATTRAPÉ)
+06/09 | Linky : 18.85 kWh
+07/09 | Linky : 15.08 kWh (RATTRAPÉ)
+08/09 | Linky : 12.48 kWh (RATTRAPÉ)
+09/09 | Linky : 13.93 kWh (RATTRAPÉ)
+10/09 | Linky : 7.30 kWh (RATTRAPÉ)
+11/09 | Linky : 7.35 kWh (RATTRAPÉ)
+12/09 | Linky : 7.81 kWh
+13/09 | Linky : 9.14 kWh (RATTRAPÉ)
+14/09 | Linky : 9.71 kWh (RATTRAPÉ)
+15/09 | Linky : 10.70 kWh (RATTRAPÉ)
+16/09 | Linky : 7.17 kWh (RATTRAPÉ)
+17/09 | Linky : 8.22 kWh (RATTRAPÉ)
+18/09 | Linky : 6.81 kWh (RATTRAPÉ)
+19/09 | Linky : 9.50 kWh (RATTRAPÉ)
+20/09 | Linky : 11.44 kWh (RATTRAPÉ)
+21/09 | Linky : 10.34 kWh (RATTRAPÉ)
+22/09 | Linky : 7.68 kWh (RATTRAPÉ)
+23/09 | Linky : 5.29 kWh (RATTRAPÉ)
+24/09 | Linky : 10.70 kWh (RATTRAPÉ)
+25/09 | Linky : 9.58 kWh (RATTRAPÉ)
+26/09 | Linky : 10.53 kWh (RATTRAPÉ)
+27/09 | Linky : 9.23 kWh (RATTRAPÉ)
+28/09 | Linky : 8.94 kWh (RATTRAPÉ)
+29/09 | Linky : 7.01 kWh (RATTRAPÉ)
+30/09 | Linky : 5.26 kWh (RATTRAPÉ)
+01/10 | Linky : 7.21 kWh (RATTRAPÉ)
+02/10 | Linky : 9.31 kWh
+03/10 | Linky : 9.43 kWh (RATTRAPÉ)
+04/10 | Linky : 8.77 kWh
+05/10 | Linky : 6.68 kWh
+06/10 | Linky : 7.22 kWh
+07/10 | Linky : 6.05 kWh
+08/10 | Linky : 4.72 kWh
+09/10 | Linky : 6.7 kWh
+10/10 | Linky : 11.59 kWh
+11/10 | Linky : 9.81 kWh
+12/10 | Linky : 9.19 kWh
+13/10 | Linky : 5.9 kWh
+14/10 | Linky : 6.15 kWh
+15/10 | Linky : 7.31 kWh
+16/10 | Linky : 6.47 kWh
+17/10 | Linky : 7.95 kWh (RATTRAPÉ)
+18/10 | Linky : 9.52 kWh (RATTRAPÉ)
+19/10 | Linky : 8.22 kWh (RATTRAPÉ)
+20/10 | Linky : 5.65 kWh (RATTRAPÉ)
+21/10 | Linky : 5.38 kWh (RATTRAPÉ)
+22/10 | Linky : 5.08 kWh (RATTRAPÉ)
+23/10 | Linky : 7.38 kWh
+24/10 | Linky : 8.99 kWh
+25/10 | Linky : 9.20 kWh (RATTRAPÉ)
+26/10 | Linky : 8.42 kWh (RATTRAPÉ)
+27/10 | Linky : 5.92 kWh (RATTRAPÉ)
+28/10 | Linky : 6.06 kWh
+29/10 | Linky : 6.93 kWh
