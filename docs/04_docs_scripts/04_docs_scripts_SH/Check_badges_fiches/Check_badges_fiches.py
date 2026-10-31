@@ -19,7 +19,7 @@ from urllib.parse import unquote
 ROOT = r"C:\Users\Berry Swann\Documents\ReBuild\docs"
 ORDRE = ["Statut", "MaJ", "HA", "IA_Partner", "Source", "Modifs", "Expert", "Type"]
 STATUTS = {"Actif", "En cours", "A terminer", "VERROUILLE", "bak", "Trash", "Archive", "Original"}  # bak/Trash/Archive ajoutes le 2026-10-30 (ordre d'Eric)
-TYPES = {"Vignette", "Page", "Carte", "Page droite", "Page gauche", "Dashboard Doc", "Vignette Doc", "Page Doc", "Config Racine", "Index_Pages", "Scripts", "Script", "Script_Executant", "System", "Dashboard", "Automation", "README", "TUTO", "Hacking"}  # System/Dashboard/Automation ajoutes le 2026-10-30 (ordre d Eric)
+TYPES = {"Vignette", "Page", "Carte", "Page droite", "Page gauche", "Dashboard Doc", "Vignette Doc", "Page Doc", "Config Racine", "Index_Pages", "Scripts", "Script", "Script_Executant", "System", "Dashboard", "Automation", "README", "TUTO", "Hacking", "Inconnu"}  # System/Dashboard/Automation ajoutes le 2026-10-30 (ordre d Eric)
 SKIP = re.compile(r"(^|[\\/])(05_docs_skills|__pycache__)([\\/]|$)", re.I)
 COUL_STATUT = {"Actif": "0f9d58", "bak": "ff9800", "Trash": "f44336", "Archive": "9e9e9e", "Original": "ffeb3b"}  # couleur par valeur (ordre d'Eric le 2026-10-31)
 BADGE = re.compile(r"\[!\[[^\]]*\]\(https://img\.shields\.io/badge/([^)\s]+)\)\]\([^)]*\)")
@@ -101,7 +101,7 @@ def auto(k, chemin, ha):
             return "Archive"  # sauf Modifs=INTERDITES (cas particulier)
         return "Actif"  # defaut decide par Eric le 2026-10-30
     if k == "Type":  # Type par categorie de dossier (ordre d Eric le 2026-10-30)
-        for dossier, t in (("01_docs_config_system", "System"), ("02_docs_dashboard", "Dashboard"), ("03_docs_automations", "Automation"), ("04_docs_scripts", "Scripts"), ("XX_docs_MD_system", "System")):
+        for dossier, t in (("01_docs_config_system", "System"), ("02_docs_dashboard", "Dashboard"), ("03_docs_automations", "Automation"), ("04_docs_scripts", "Scripts"), ("XX_docs_MD_system", "System"), ("00_IA", "System")):  # 00_IA = System (Eric, 2026-10-31)
             if chemin.replace("/", "\\").startswith(dossier + "\\"):
                 return t
     return None
@@ -178,7 +178,7 @@ def main():
         tr, bloc = analyser(texte)
         manq = [k for k in ORDRE if k not in tr]
         pb = valeurs_hors_liste(tr)
-        gab = "{TYPE_DOC}" in texte or bool(re.search(r"\{[A-Z_]{3,}\}", bloc))
+        gab = any(re.search(r"\{[A-Z_]{3,}\}", l) for l in bloc.splitlines() if "shields.io" in l)  # placeholder dans une ligne de badge seulement
         if not manq and not pb and not gab:
             ok += 1; continue
         corr += 1
@@ -205,7 +205,7 @@ def date_bak(nom):
     return "%s-%s-%s" % m.groups() if m else None
 
 def classer_bak():
-    """Statut voulu par .bak (ordre d'Eric le 2026-10-31) : date >= 2026-10-30 -> bak ; plus ancien et destine a la corbeille par le menage (hors 3 derniers jours passes, un seul fichier par jour passe) -> Trash ; plus ancien conserve -> aucun badge."""
+    """Statut voulu par .bak (ordre d'Eric le 2026-10-31) : .bak du jour -> bak (orange) ; .bak d un jour passe -> Trash (rouge, ils partent a la corbeille par le menage)."""
     auj = datetime.date.today().strftime("%Y-%m-%d")
     groupes = {}
     for dp, dn, fn in os.walk(ROOT):
@@ -224,7 +224,7 @@ def classer_bak():
             gardes.add(sorted(par_jour[j])[-1])
         for f in fs:
             d = date_bak(f)
-            v = "bak" if d >= "2026-10-30" else (None if f in gardes else "Trash")
+            v = "bak" if d >= auj else "Trash"  # regle d Eric 2026-10-31 : seuls les .bak du jour existent, les autres vont a la corbeille
             res[os.path.join(dp, f)] = (v, d)
     return res
 
@@ -246,6 +246,8 @@ def main_bak():
         if not FIX or faits >= lim:
             continue
         OVR.clear(); OVR["Statut"] = v; OVR["MaJ"] = d
+        if "Type" in manq and auto("Type", rel, ha) is None:
+            OVR["Type"] = "Inconnu"
         mq = manq + ([] if "Statut" in manq else ["Statut"])
         nt = reconstruire(texte, tr, mq, rel, ha)
         if nt is None:

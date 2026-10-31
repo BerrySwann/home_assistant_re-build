@@ -6,6 +6,19 @@
 
 # IA_NOM_DES_REPERTOIRES_ET_FICHIERS
 
+<div align="center">
+
+[![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
+[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
+[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
+[![Type](https://img.shields.io/badge/Type-System-ff9800?style=flat-square)](.)
+
+</div>
+
 Règles de nommage des répertoires et des fichiers du dossier `docs`.
 - Statut : brouillon à valider par Eric. Mise à jour du 2026-10-17. Le renommage local du 2026-10-16 est fait. Le 2026-10-17, les règles de mots (accents, SDB, eCO, Z2M, RASPI, GitHub, GLOBAL_INDEX, AQ_, MPC_, UI_DASHBOARD) ont été appliquées en local : 156 renommages, rapport `historique\RENOMMAGE_2026-10-17_rapport.tsv`. Les listes d'écarts des paragraphes 6.3 et 6.6 à 6.14, les comptes de la section 7 et la grille de la section 8 donnent les noms AVANT ce renommage. Restent à faire : la restructuration LxCx, les points ouverts, la prod et le repo.
 - Périmètre : `docs` uniquement. Le dossier `docs` lui-même reste en minuscules.
