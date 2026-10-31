@@ -9,7 +9,7 @@
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
 [![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
 [![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
-[![Type](https://img.shields.io/badge/Type-README-ff9800?style=flat-square)](.)
+[![Type](https://img.shields.io/badge/Type-README-ffeb3b?style=flat-square)](.)
 
 </div>
 
@@ -59,7 +59,7 @@ Developpee en collaboration avec **Claude (Anthropic)** pour garantir :
 
 | Composant | Detail |
 |-----------|--------|
-| **OS** | Home Assistant OS (HAOS) - VM Proxmox VE 7.0.0-3 |
+| **OS** | Home Assistant OS (HAOS) - VM Proxmox VE 9.2.24 (verifie en direct le 2026-10-31) |
 | **Materiel** | Mini-PC Intel NUC - SSD 512 Go / RAM 16 Go |
 | **Hyperviseur** | Proxmox VE - VM HAOS + LXC services |
 | **Zigbee** | Sonoff EFR32MG21 V2 (recue 22/05/2026) - LXC 200 |

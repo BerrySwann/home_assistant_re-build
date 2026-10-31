@@ -1,5 +1,5 @@
 # PROXMOX — ETAT INFRASTRUCTURE
-*Dernière mise à jour : 2026-10-09*
+*Dernière mise à jour : 2026-10-31*
 
 ---
 
@@ -8,7 +8,7 @@
 | VMID | Nom | Type | IP | Status | Notes |
 |:-----|:----|:-----|:---|:-------|:------|
 | VM 100 | HomeAssistant | VM (KVM) | `10.32.154.243` | running | HAOS - VM principale |
-| CT 200 | Z2M | CT (LXC) | `10.32.154.244` | running | Zigbee2MQTT + Mosquitto, nesting=1 |
+| CT 200 | Z2M | CT (LXC) | `10.32.154.244` | running | Zigbee2MQTT (ancien Mosquitto : usage inconnu depuis 2026-10-31, HA utilise son application Mosquitto), nesting=1 |
 | CT 201 | mariadb | CT (LXC) | `10.32.154.242` | running | MariaDB, nesting=1 |
 | CT 202 | myelectricaldata | CT (LXC) | `10.32.154.245` | running | MyElectricalData, nesting=1 |
 | CT 501 | searxng | CT (LXC) | `10.32.154.246` | running | SearXNG, Debian 12, nesting=1 (requis systemd 252) |
@@ -19,8 +19,8 @@
 
 | Volume | Type | Utilise | Total | % |
 |:-------|:-----|:--------|:------|:--|
-| `local` | dir | 63.9 GB | 94.0 GB | 68% |
-| `local-lvm` | lvmthin | 57.3 GB | 349.0 GB | 16% |
+| `local` | dir | 57.0 GB | 94.0 GB | 60.7% |
+| `local-lvm` | lvmthin | 57.7 GB | 349.0 GB | 16.5% |
 
 > `local` : backups, ISO, templates (format dir).
 > `local-lvm` : disques VMs/CTs (format LVM thin - ne peut PAS stocker des backups).
@@ -61,6 +61,7 @@
 | 2026-10-09 | local : 55→63.9 GB (59%→68%) — local-lvm : 71→57.3 GB (21%→16%, -13.7 GB constaté) |
 | 2026-10-09 | Mise à jour 132 paquets (44 Proxmox + 88 Debian) — PVE reste 9.2.10, pas de reboot, tous VMs/CTs running |
 | 2026-10-09 | Redémarrage VM 100 (HA) : RAM saturée 93% (8.1/8GB) → retombée à 33% (2.6/8GB) après reboot |
+| 2026-10-31 | Mise à jour Proxmox par Eric puis redémarrage du host : PVE 9.2.24 (noyau 7.0.14-26-pve), VM 100 + CT 200/201/202/501 running après redémarrage. Sauvegarde HA `Avant_maj_Proxmox_2026-10-31` faite avant. Relevé fait avec `pveversion`, `qm list`, `pct list`, `pvesm status` ; jobs de sauvegarde et IP des CT non relus ce jour-là |
 
 ---
 

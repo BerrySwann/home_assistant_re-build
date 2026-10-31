@@ -32,6 +32,9 @@ Dossiers `XX_`, `99_docs_MD_system` (sauf `ENTITES_GLOBAL_INDEX\ENTITES_GLOBAL_I
 - Un fichier different en prod n'est ecrase que si la prod (badges retires) est identique a un ancien `.bak` local connu. Sinon : PROD DIFFERENTE INCONNUE, non pousse, signale.
 - Fichiers seuls en prod (SEUL_EN_PROD) : le mode `exec` s'arrete (code 3), aucune suppression sans ordre d'Eric. Pour les supprimer : copie dans `TEMPO\miroir_5C_AAAA-MM-JJ` + MD5, puis suppression, a faire a part.
 
+## Copie 98 automatique
+En mode `exec`, le script lance d'abord `Sync_98_sauvegarde.py exec` : la copie de `Infra_Proxmox`, `TODO` et `historique` dans `docs\98_sauvegarde_hors_docs` est donc toujours a jour avant le push (ajoute le 2026-10-31).
+
 ## Qui l'utilise
 L'etape 5C du skill `histo` (decide par Eric le 2026-10-30).
 

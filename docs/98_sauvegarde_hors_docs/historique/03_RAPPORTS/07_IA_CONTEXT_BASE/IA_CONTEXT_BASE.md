@@ -500,7 +500,7 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 
 | Composant | Détail |
 |:----------|:-------|
-| **OS** | HAOS - VM Proxmox VE 7.0.0-3 |
+| **OS** | HAOS - VM Proxmox VE 9.2.24 (verifie en direct le 2026-10-31) |
 | **Matériel** | Mini-PC Intel NUC - SSD 512 Go / RAM 16 Go |
 | **Zigbee** | Sonoff EFR32MG21 V2 (reçue 22/05/2026) |
 | **LXC 200** | Zigbee2MQTT + Mosquitto (10.32.154.244) |

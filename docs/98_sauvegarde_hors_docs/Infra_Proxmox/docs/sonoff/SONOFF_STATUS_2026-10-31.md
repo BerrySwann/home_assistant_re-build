@@ -1,7 +1,7 @@
 # SONOFF / Z2M - Etat et configuration (mise a jour 2026-10-31)
 
 **Date de mise a jour :** 2026-10-31
-**Remplace pour la lecture :** `SONOFF_STATUS_2026-05-23.md` (garde en local seul : il contenait identifiant, mot de passe MQTT et cle reseau Zigbee en clair).
+**Remplace pour la lecture :** `SONOFF_STATUS_2026-05-23.md` (mise a la corbeille le 2026-10-31 : trop ancienne, elle contenait identifiant, mot de passe MQTT et cle reseau Zigbee en clair).
 **Secrets :** identifiant MQTT, mot de passe, `network_key`, `pan_id`, `ext_pan_id` et `auth_token` sont caviardes (`***`) dans ce fichier. Les valeurs reelles sont dans la configuration de Z2M, jamais ici.
 
 ---

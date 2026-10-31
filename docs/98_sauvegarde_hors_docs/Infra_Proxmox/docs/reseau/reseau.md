@@ -73,7 +73,7 @@
 | `10.32.154.241` | -    | Raspberry Pi (rebuild — éteint) | Physique | off |
 | `10.32.154.242` | CT 201 | mariadb | CT (LXC) | running |
 | `10.32.154.243` | VM 100 | homeassistant | VM (KVM) | running |
-| `10.32.154.244` | CT 200 | z2m (Zigbee2MQTT + Mosquitto) | CT (LXC) | running |
+| `10.32.154.244` | CT 200 | z2m (Zigbee2MQTT ; HA utilise son application Mosquitto, ancien Mosquitto du CT a verifier) | CT (LXC) | running |
 | `10.32.154.245` | CT 202 | myelectricaldata | CT (LXC) | running |
 | `10.32.154.246` | CT 501 | searxng | CT (LXC) | running |
 

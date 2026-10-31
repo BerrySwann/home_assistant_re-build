@@ -15,6 +15,8 @@
 
 *Index unique de navigation - YAML, docs, entités, scripts*
 *Dernière mise à jour : 2026-10-29 (22h) - lien de la fiche Audit_md5_yaml.md remis sur son dossier (01_scripts.sh_md/Audit_md5_yaml/) après le rangement des fiches de .scripts un dossier par fichier ; aucun fichier ajouté ni supprimé*
+*Dernière mise à jour : 2026-10-31 (18h44) - entrées ajoutées : Push_5C.py et Sync_98_sauvegarde.py (scripts python, recompté : 16)*
+
 *Dernière mise à jour : 2026-10-25 (21h21) - entrée ajoutée : Check_XX_presents.py (scripts python, recompté : 14) ; contrôle de présence des dossiers XX_ avant chaque push*
 *Dernière mise à jour : 2026-10-25 20h28 - sous-dossiers de 00_ à 04_ numérotés et suffixes MD, SH, YAML en majuscules (02_dashboard_docs_MD, 03_docs_automations_YAML, 04_docs_scripts_SH, 00_IA_SOUS_CONTEXT_IA, 01_config_system_MD...) : tous les liens corrigés, 832 liens, 0 cassé*
 *Dernière mise à jour : 2026-10-25 (19h40) - règle de nommage des caractères (espace, tiret, &, parenthèses, point -> _) appliquée en local et en prod ; dossiers renommés (docs minuscule, skills, MINI_PC, Tarif_hc_hp, Automations_yaml_original, Backup_ha_GitHub, Mariadb_et_vscode_optimisation, Watchdog_piles_hue_ikea_sonoff) ; pages réserve L5C3 retirées ; liens corrigés (6 -> 0 au contrôle)*
@@ -4289,6 +4291,24 @@ Lancé par /histo (6E, point 10) ; ne corrige rien. Fiche de référence : <a hr
 ⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_SH/Check_XX_presents/Check_XX_presents.py">Script source</a><br>
 Lancé avant chaque push par ha-push-docs, ha-push-md et ha-push-yaml (décidé par Eric le 2026-10-25) ; alerte si un dossier ou un fichier XX_ manque. Manifeste : <a href="docs/04_docs_scripts/04_docs_scripts_SH/Check_XX_presents/XX_manifest.json">XX_manifest.json</a><br>
 📄 <a href="docs/04_docs_scripts/04_docs_scripts_SH_MD/Check_XX_presents/Check_XX_presents.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><code>Push_5C.py</code> &nbsp;|&nbsp; Push général de l'étape 5C de /histo (docs vers H:\docs), avec MD5 avant et après</summary>
+<blockquote>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_SH/Push_5C/Push_5C.py">Script source</a><br>
+Plan en lecture seule ou exécution ; ne pousse jamais XX_, 99_ (sauf ENTITES_GLOBAL_INDEX.md), .bak, secrets (décidé par Eric le 2026-10-30 et 2026-10-31). Lance d'abord Sync_98_sauvegarde en mode exec.<br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_SH_MD/Push_5C/Push_5C.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><code>Sync_98_sauvegarde.py</code> &nbsp;|&nbsp; Copie de Infra_Proxmox, TODO et historique vers docs/98_sauvegarde_hors_docs, secrets caviardés</summary>
+<blockquote>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_SH/Sync_98_sauvegarde/Sync_98_sauvegarde.py">Script source</a><br>
+Rend ces dossiers (hors docs) poussables en prod puis sur GitHub par le 5C (décidé par Eric le 2026-10-31). Exclut les .bak sauf ceux d'Infra_Proxmox ; masque identifiants, mots de passe, clé réseau Zigbee et jetons ghp_.<br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_SH_MD/Sync_98_sauvegarde/Sync_98_sauvegarde.md">Doc</a>
 </blockquote>
 </details>
 

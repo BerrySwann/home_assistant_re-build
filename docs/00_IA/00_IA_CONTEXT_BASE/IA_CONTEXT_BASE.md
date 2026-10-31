@@ -265,7 +265,7 @@ Plus aucune sauvegarde (`.bak` ou autre) creee en prod : le SSD du mini PC ne do
 
 - Perimetre : les dossiers `docs/00_*` a `docs/05_*` de `ReBuild/` (config YAML, dashboard YAML,
   automations, scripts, docs .md, contexte IA) et `Claude md SAVE/` (CLAUDE.md). Hors perimetre :
-  `TODO/`, `Github/`, `historique/` (sauf `historique/MD5/`, voir plus bas), `.claude/`, `Infra_Proxmox/`.
+  `TODO/`, `Github/`, `historique/` (sauf `historique/MD5/`, voir plus bas), `.claude/`, `Infra_Proxmox/`. Les copies de `TODO/`, `historique/` et `Infra_Proxmox/` rangees dans `docs/98_sauvegarde_hors_docs` sont, elles, dans `docs`.
 - Lieu : en local, a cote du fichier modifie. Jamais sur H:\ ni sur D:\.
 - Avant CHAQUE modification d'un fichier, creer `{nom}.bak_AAAA_MM_JJ_HHhMMmSSs.{ext}`
   (ex : `P1_kWh_clim.bak_2026_10_08_08h54m30s.yaml`). Format PowerShell :
@@ -602,10 +602,10 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
 
 | Composant | Détail |
 |:----------|:-------|
-| **OS** | HAOS - VM Proxmox VE 7.0.0-3 |
+| **OS** | HAOS - VM Proxmox VE 9.2.24 (verifie en direct le 2026-10-31) |
 | **Matériel** | Mini-PC Intel NUC - SSD 512 Go / RAM 16 Go |
 | **Zigbee** | Sonoff EFR32MG21 V2 (reçue 22/05/2026) |
-| **LXC 200** | Zigbee2MQTT + Mosquitto (10.32.154.244) |
+| **LXC 200** | Zigbee2MQTT (10.32.154.244) ; broker MQTT de HA = application Mosquitto (10.32.154.243) ; Mosquitto du CT 200 : port encore ouvert, usage inconnu (releve 2026-10-31) |
 | **LXC 201** | MariaDB (10.32.154.242) |
 | **LXC 202** | MyElectricalData (10.32.154.245) |
 | **Add-ons** | Cloudflared *(vestige — arrêté le 2026-09-20)* · Tailscale · Studio Code Server |
@@ -728,7 +728,8 @@ Agrégats multi-zones dans le même fichier : `appart_2`, `appart_3`
 | Dashboards YAML (vignettes, pages, cartes) | `docs/02_docs_dashboard/02_dashboard_docs_YAML/` | push `H:\Docs\` |
 | Automations YAML | `docs/03_docs_automations/03_docs_automations_YAML/` | UI HA à la main, jamais en direct |
 | Scripts YAML + `.py` | `docs/04_docs_scripts/04_docs_scripts_YAML/` | UI HA à la main, jamais en direct |
-| Hors ménage, hors circuit de push | `TODO/` · `Github/` · `historique/` · `.claude/` · `Infra_Proxmox/` | restent locaux |
+| Hors ménage, hors circuit de push | `Github/` · `.claude/` | restent locaux |
+| Originaux locaux, copie dans `docs/98_sauvegarde_hors_docs` (en prod par le 5C, copie faite par `Sync_98_sauvegarde.py`) | `TODO/` · `historique/` · `Infra_Proxmox/` | copie en prod, original local |
 
 > Le détail des arborescences (local, prod, GitHub, comptages) vit dans
 > `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md`, maintenu par `/histo` (étape 6).

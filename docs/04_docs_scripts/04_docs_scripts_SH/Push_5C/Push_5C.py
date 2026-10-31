@@ -30,6 +30,10 @@ def strip(p):
     t=open(p,"rb").read().decode("utf-8","replace").replace("\r\n","\n")
     t=re.sub(r'<div align="center">.*?</div>\n*','',t,count=1,flags=re.S)
     return hashlib.md5(t.encode()).hexdigest()
+if MODE=="exec":
+    import subprocess
+    _s=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"Sync_98_sauvegarde","Sync_98_sauvegarde.py")
+    print("sync 98 :",subprocess.run([sys.executable,"-I","-X","utf8",_s,"exec"],capture_output=True,text=True).stdout.strip().splitlines()[0])
 loc={r:p for r,p in walk(L).items() if not skip(r)}
 prod={r:p for r,p in walk(P).items() if not skip(r)}
 new=[];diff=[];same=0
