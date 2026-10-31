@@ -1,0 +1,24 @@
+# fichier modifie <TAB> remplacements (sauvegarde .bak_2026_10_17_13h47m24s a cote)
+docs\02_Docs_dashboard\Dashboard_docs_md\L1C2_TEMPERATURES\02_Page\Page_temperatures.md	30
+docs\02_Docs_dashboard\Dashboard_docs_md\L1C3_CLIM\01_Vignette\L1C3_VIGNETTE_CLIM.md	24
+docs\02_Docs_dashboard\Dashboard_docs_md\L1C3_CLIM\02_Page\Page_clim.md	48
+docs\02_Docs_dashboard\Dashboard_docs_md\L2C2_ENERGIE_CLIM\01_Vignette\L2C2_VIGNETTE_ENERGIE_CLIM.md	6
+docs\02_Docs_dashboard\Dashboard_docs_md\L2C2_ENERGIE_CLIM\02_Page\Page_energie_clim.md	7
+docs\02_Docs_dashboard\Dashboard_docs_md\L3C1_ECLAIRAGE\02_Page_gauche\Page_eclairage_gauche.md	2
+docs\02_Docs_dashboard\Dashboard_docs_md\L3C1_ECLAIRAGE\03_Page_droite\Page_eclairage_droite.md	1
+docs\02_Docs_dashboard\Dashboard_docs_md\L5C3_MARIADB\02_Page_principale\Page_systeme.md	6
+docs\02_Docs_dashboard\Dashboard_docs_md\L6C1_AIR_QUALITE\02_Page\Page_air_qualite.md	5
+docs\03_Docs_automations\Docs_automations_md\Meteo\Alerte_meteo_cartes\Alerte_meteo_cartes.md	1
+docs\03_Docs_automations\Docs_automations_md\Meteo\Maj_temps_foudre\Maj_temps_foudre.md	1
+docs\03_Docs_automations\Docs_automations_md\Meteo\Notif_foudre\Notif_foudre.md	1
+docs\03_Docs_automations\Docs_automations_md\Meteo\Update_prev_humidity\Update_prev_humidity.md	1
+docs\03_Docs_automations\Docs_automations_md\Meteo\Update_prev_temperature\Update_prev_temperature.md	1
+docs\03_Docs_automations\Docs_automations_md\P1_03_Chauffage salle de bain\SDB_soufflant_specification_2026\SDB_soufflant_specification_2026.md	2
+docs\03_Docs_automations\Docs_automations_md\P1_03_Chauffage salle de bain\Timers_SDB_soufflant_et_seche_serviettes\Timers_SDB_soufflant_et_seche_serviettes.md	4
+docs\03_Docs_automations\Docs_automations_md\P2_eCO. prises\eCO_prises_dynamique\eCO_prises_dynamique.md	2
+docs\03_Docs_automations\Docs_automations_md\RASPI\Rpi4_fan_pwm\Rpi4_fan_pwm.md	2
+docs\04_Docs_scripts\Docs_scripts_yaml_md\Script_j2_0_secu_arret_clim\Script_j2_0_secu_arret_clim.md	2
+docs\05_docs_MD_system\DEPENDANCES_GLOBALES\DEPENDANCES_GLOBALES.md	68
+docs\05_docs_MD_system\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md	68
+Github\README.md	2
+MOC\MOC_DEPENDANCES\MOC_DEPENDANCES.md	5

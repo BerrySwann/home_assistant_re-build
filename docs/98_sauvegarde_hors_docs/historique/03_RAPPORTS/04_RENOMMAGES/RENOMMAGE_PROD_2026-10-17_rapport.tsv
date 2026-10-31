@@ -1,0 +1,107 @@
+# zone <TAB> ancien chemin complet <TAB> nouveau nom <TAB> statut
+docs	H:\docs\01_docs_config_system\config_system_YAML\templates\P2_prise\P2_eCO_prises\P2_eco_prises_config.yaml	P2_eCO_prises_config.yaml	OK
+docs	H:\docs\01_docs_config_system\config_system_YAML\templates\Inter_BP_Virtuel\P1\P1_BV_IB_SW_inter_souflant_sdb.yaml	P1_BV_IB_SW_inter_souflant_SDB.yaml	OK
+docs	H:\docs\01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage\P1_ui_dashboard\P1_ui_dashboard.yaml	P1_UI_DASHBOARD.yaml	OK
+docs	H:\docs\02_docs_dashboard\dashboard_docs_YAML\PAGE_Home (L0C0)\Carte Météo\Carte Météo Vence.md	Carte Meteo Vence.md	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\_old_avant_staging\P1_sdb\D_sdb_watchdog_radiateur.yaml	D_SDB_watchdog_radiateur.yaml	OK
+docs	H:\docs\02_docs_dashboard\dashboard_docs_YAML\PAGE_RASPI\02_page\page_raspi.yaml	page_RASPI.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\_old_avant_staging\P1_sdb\A_soufflant_sdb_gestion_intelligente.yaml	A_soufflant_SDB_gestion_intelligente.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\g_sdb_seche_serviettes_decompte_2h_timer\g_sdb_seche_serviettes_decompte_2h_timer.yaml	g_SDB_seche_serviettes_decompte_2h_timer.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_MD\P2_éCO. Prises\ECO_PRISES_DYNAMIQUE\ECO_PRISES_DYNAMIQUE.md	eCO_PRISES_DYNAMIQUE.md	OK
+docs	H:\docs\03_docs_automations\docs_automations_MD\_SANS_CATEGORIE\VEILLE_GITHUB_RELEASES\VEILLE_GITHUB_RELEASES.md	VEILLE_GitHub_RELEASES.md	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\e_sdb_soufflant_rattrapage_demarrage_ha_timer\e_sdb_soufflant_rattrapage_demarrage_ha_timer.yaml	e_SDB_soufflant_rattrapage_demarrage_ha_timer.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\_old_avant_staging\P2_prises\eco_prises.yaml	eCO_prises.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P3_eclairage\p3_sdb_sync_miroir_lampe_et_relais_sdb\p3_sdb_sync_miroir_lampe_et_relais_sdb.yaml	p3_SDB_sync_miroir_lampe_et_relais_SDB.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P2_éCO. Prises\eco_prises_dynamique_by_presence_groupe\eco_prises_dynamique_by_presence_groupe.yaml	eCO_prises_dynamique_by_presence_groupe.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\Contrôle Entity z2m\z2m_last_seen\z2m_last_seen.yaml	Z2M_last_seen.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\a_soufflant_sdb_bouton_rodret\a_soufflant_sdb_bouton_rodret.yaml	a_soufflant_SDB_bouton_rodret.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\b_soufflant_sdb_routage\b_soufflant_sdb_routage.yaml	b_soufflant_SDB_routage.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\d_sdb_soufflant_decompte_60min_timer\d_sdb_soufflant_decompte_60min_timer.yaml	d_SDB_soufflant_decompte_60min_timer.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\RASPI\A_rpi_fan_pwm_6_states\A_rpi_fan_pwm_6_states.yaml	A_RASPI_fan_pwm_6_states.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\_old_avant_staging\P2_prises\P2_eco_prises_dynamique.yaml	P2_eCO_prises_dynamique.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\_old_avant_staging\P1_clim_chauffage\C_gardien_eco.yaml	C_gardien_eCO.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\_old_avant_staging\raspi\A_rpi_fan_pwm_6_states.yaml	A_RASPI_fan_pwm_6_states.yaml	OK
+docs	H:\docs\01_docs_config_system\config_system_YAML\command_line\github_maintenance\github_maintenance.yaml	GitHub_maintenance.yaml	OK
+docs	H:\docs\01_docs_config_system\config_system_YAML\input_booleans\P1\P1_BV_IB_inter_soufflant_sdb.yaml	P1_BV_IB_inter_soufflant_SDB.yaml	OK
+docs	H:\docs\01_docs_config_system\config_system_YAML\shell_command\Ghithub\backup_github.yaml	backup_GitHub.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\_old_avant_staging\P2_prises\rodret_soufflant_sdb.yaml	rodret_soufflant_SDB.yaml	OK
+docs	H:\docs\01_docs_config_system\config_system_YAML\templates\P3_eclairage\P3_ui_dashboard	P3_UI_DASHBOARD	OK
+docs	H:\docs\01_docs_config_system\config_system_YAML\timers\P1_timers\P1_timer_10mn_seche_serviettes_sdb.yaml	P1_timer_10mn_seche_serviettes_SDB.yaml	OK
+docs	H:\docs\01_docs_config_system\config_system_YAML\timers\P1_timers\P1_timer_10mn_soufflant_sdb.yaml	P1_timer_10mn_soufflant_SDB.yaml	OK
+docs	H:\docs\01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage\P1_ui_dashboard	P1_UI_DASHBOARD	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\h_sdb_seche_serviettes_rattrapage_demarrage_ha_timer\h_sdb_seche_serviettes_rattrapage_demarrage_ha_timer.yaml	h_SDB_seche_serviettes_rattrapage_demarrage_ha_timer.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\_old_avant_staging\systeme\veille_github_releases.yaml	veille_GitHub_releases.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\_old_avant_staging\systeme\z2m_last_seen.yaml	Z2M_last_seen.yaml	OK
+docs	H:\docs\01_docs_config_system\config_system_YAML\timers\P1_timers\P1_timer_2h_seche_serviettes_sdb.yaml	P1_timer_2h_seche_serviettes_SDB.yaml	OK
+docs	H:\docs\01_docs_config_system\config_system_YAML\timers\P1_timers\P1_timer_60mn_soufflant_sdb.yaml	P1_timer_60mn_soufflant_SDB.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\_SANS_CATEGORIE\veille_github_nouvelle_release_detectee\veille_github_nouvelle_release_detectee.yaml	veille_GitHub_nouvelle_release_detectee.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_sdb\e_sdb_soufflant_decompte_60min_timer.yaml	e_SDB_soufflant_decompte_60min_timer.yaml	OK
+docs	H:\docs\04_docs_scripts\docs_scripts_YAML\sdb_soufflant_demarrer\sdb_soufflant_demarrer.yaml	SDB_soufflant_demarrer.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_sdb\f_sdb_soufflant_rattrapage_demarrage_ha_timer.yaml	f_SDB_soufflant_rattrapage_demarrage_ha_timer.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_sdb\h_sdb_seche_serviettes_decompte_2h_timer.yaml	h_SDB_seche_serviettes_decompte_2h_timer.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_sdb\h_soufflant_sdb_routage.yaml	h_soufflant_SDB_routage.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_sdb\i_sdb_seche_serviettes_rattrapage_demarrage_ha_timer.yaml	i_SDB_seche_serviettes_rattrapage_demarrage_ha_timer.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_sdb\i_soufflant_sdb_bouton_rodret.yaml	i_soufflant_SDB_bouton_rodret.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\_SANS_CATEGORIE\veille_github_nouvelle_release_detectee	veille_GitHub_nouvelle_release_detectee	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\_old_avant_staging\raspi	RASPI	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P2_éCO. Prises\eco_prises_dynamique_by_presence_groupe	eCO_prises_dynamique_by_presence_groupe	OK
+docs	H:\docs\04_docs_scripts\docs_scripts_YAML\sdb_soufflant_arreter\sdb_soufflant_arreter.yaml	SDB_soufflant_arreter.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P3_eclairage\p3_sdb_sync_miroir_lampe_et_relais_sdb	p3_SDB_sync_miroir_lampe_et_relais_SDB	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P3_eclairage\p3_sdb_sync_miroir_lampe_et_relais_sdb.yaml	p3_SDB_sync_miroir_lampe_et_relais_SDB.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\RASPI\A_rpi_fan_pwm_6_states	A_RASPI_fan_pwm_6_states	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\systeme\veille_github_nouvelle_release_detectee.yaml	veille_GitHub_nouvelle_release_detectee.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\systeme\z2m_last_seen.yaml	Z2M_last_seen.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\_old_avant_staging\P2_bouton_rodret_soufflant_sdb.yaml	P2_bouton_rodret_soufflant_SDB.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P2_prises\eco_prises_dynamique_by_presence_groupe.yaml	eCO_prises_dynamique_by_presence_groupe.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\_old_avant_staging\P1_sdb	P1_SDB	OK
+docs	H:\docs\01_docs_config_system\config_system_YAML\command_line\github_maintenance	GitHub_maintenance	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\h_sdb_seche_serviettes_rattrapage_demarrage_ha_timer	h_SDB_seche_serviettes_rattrapage_demarrage_ha_timer	OK
+docs	H:\docs\01_docs_config_system\config_system_YAML\sensors\Air_quality	Air_Quality	OK
+docs	H:\docs\01_docs_config_system\config_system_YAML\templates\Air_quality	Air_Quality	OK
+docs	H:\docs\02_docs_dashboard\dashboard_docs_MD\L4C1_MINI_PC\03_page_raspi	03_page_RASPI	OK
+docs	H:\docs\02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim\card_prog_soufflant_sdb.yaml	card_prog_soufflant_SDB.yaml	OK
+docs	H:\docs\02_docs_dashboard\dashboard_docs_YAML\L4C2_11_Proxmox\card_services_ha_z2m_mariadb.yaml	card_services_ha_Z2M_mariadb.yaml	OK
+docs	H:\docs\02_docs_dashboard\dashboard_docs_YAML\PAGE_Home (L0C0)\Carte Météo	Carte Meteo	OK
+docs	H:\docs\02_docs_dashboard\dashboard_docs_YAML\PAGE_Home (L0C0)\Congélateur	Congelateur	OK
+docs	H:\docs\02_docs_dashboard\dashboard_docs_YAML\PAGE_Home (L0C0)\Détecteur de fuite	Detecteur de fuite	OK
+docs	H:\docs\02_docs_dashboard\dashboard_docs_YAML\PAGE_Home (L0C0)\Météo	Meteo	OK
+docs	H:\docs\02_docs_dashboard\dashboard_docs_YAML\PAGE_RASPI\page_raspi.yaml	page_RASPI.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_MD\P2_PRISES\ECO_PRISES_DYNAMIQUE.md	eCO_PRISES_DYNAMIQUE.md	OK
+docs	H:\docs\03_docs_automations\docs_automations_MD\P2_éCO. Prises\ECO_PRISES_DYNAMIQUE	eCO_PRISES_DYNAMIQUE	OK
+docs	H:\docs\03_docs_automations\docs_automations_MD\SYSTEME\VEILLE_GITHUB_RELEASES.md	VEILLE_GitHub_RELEASES.md	OK
+docs	H:\docs\02_docs_dashboard\dashboard_docs_YAML\PAGE_Home (L0C0)\Carte Présence	Carte Presence	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\g_sdb_seche_serviettes_decompte_2h_timer	g_SDB_seche_serviettes_decompte_2h_timer	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\e_sdb_soufflant_rattrapage_demarrage_ha_timer	e_SDB_soufflant_rattrapage_demarrage_ha_timer	OK
+docs	H:\docs\03_docs_automations\docs_automations_MD\_SANS_CATEGORIE\VEILLE_GITHUB_RELEASES	VEILLE_GitHub_RELEASES	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\Contrôle Entity z2m\z2m_last_seen	Z2M_last_seen	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\a_soufflant_sdb_bouton_rodret	a_soufflant_SDB_bouton_rodret	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\b_soufflant_sdb_routage	b_soufflant_SDB_routage	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\d_sdb_soufflant_decompte_60min_timer	d_SDB_soufflant_decompte_60min_timer	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\Contrôle Entity z2m	Controle Entity Z2M	OK
+config	H:\templates\P2_prise\P2_eCO_prises\P2_eco_prises_config.yaml	P2_eCO_prises_config.yaml	OK
+config	H:\templates\P1_clim_chauffage\P1_ui_dashboard\P1_ui_dashboard.yaml	P1_UI_DASHBOARD.yaml	OK
+config	H:\templates\Inter_BP_Virtuel\P1\P1_BV_IB_SW_inter_souflant_sdb.yaml	P1_BV_IB_SW_inter_souflant_SDB.yaml	OK
+docs	H:\docs\04_docs_scripts\docs_scripts_YAML\sdb_soufflant_arreter.yaml	SDB_soufflant_arreter.yaml	OK
+docs	H:\docs\04_docs_scripts\docs_scripts_YAML\sdb_soufflant_demarrer	SDB_soufflant_demarrer	OK
+docs	H:\docs\04_docs_scripts\docs_scripts_YAML\sdb_soufflant_arreter	SDB_soufflant_arreter	OK
+docs	H:\docs\04_docs_scripts\docs_scripts_YAML\sdb_soufflant_demarrer.yaml	SDB_soufflant_demarrer.yaml	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P2_éCO. Prises	P2_eCO. Prises	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P2_Alarme_Congélateur	P2_Alarme_Congelateur	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\P1_sdb	P1_SDB	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\Météo	Meteo	OK
+docs	H:\docs\03_docs_automations\docs_automations_MD\Contrôle Entity z2m	Controle Entity Z2M	OK
+docs	H:\docs\03_docs_automations\docs_automations_YAML\github_backup	GitHub_backup	OK
+docs	H:\docs\03_docs_automations\docs_automations_MD\P2_éCO. Prises	P2_eCO. Prises	OK
+docs	H:\docs\03_docs_automations\docs_automations_MD\P2_Alarme_Congélateur	P2_Alarme_Congelateur	OK
+config	H:\timers\P1_timers\P1_timer_10mn_soufflant_sdb.yaml	P1_timer_10mn_soufflant_SDB.yaml	OK
+config	H:\timers\P1_timers\P1_timer_10mn_seche_serviettes_sdb.yaml	P1_timer_10mn_seche_serviettes_SDB.yaml	OK
+config	H:\templates\P3_eclairage\P3_ui_dashboard	P3_UI_DASHBOARD	OK
+config	H:\templates\P1_clim_chauffage\P1_ui_dashboard	P1_UI_DASHBOARD	OK
+config	H:\shell_command\Ghithub\backup_github.yaml	backup_GitHub.yaml	OK
+config	H:\timers\P1_timers\P1_timer_2h_seche_serviettes_sdb.yaml	P1_timer_2h_seche_serviettes_SDB.yaml	OK
+config	H:\input_booleans\P1\P1_BV_IB_inter_soufflant_sdb.yaml	P1_BV_IB_inter_soufflant_SDB.yaml	OK
+config	H:\command_line\github_maintenance\github_maintenance.yaml	GitHub_maintenance.yaml	OK
+config	H:\timers\P1_timers\P1_timer_60mn_soufflant_sdb.yaml	P1_timer_60mn_soufflant_SDB.yaml	OK
+config	H:\sensors\Air_quality	Air_Quality	OK
+config	H:\command_line\github_maintenance	GitHub_maintenance	OK
+config	H:\templates\Air_quality	Air_Quality	OK

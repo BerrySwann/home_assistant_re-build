@@ -1,0 +1,41 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-09-06</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-09-06</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-09-06_s1.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-09-06 (SESSION S1)</h3>
+<pre>
+SESSION : ~2h (reprise après compaction de contexte mid-session)
+BRANCHE ACTIVE : docs/
+</pre>
+<h4>FICHIERS VALIDÉS</h4>
+<pre>docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim.yaml — script.p1_master_gestion_clim [✓]
+  (279 → 291 lignes, bloc INIT : CIBLES DE TEMPÉRATURE PAR PIÈCE reécrit avec clamp Jinja2)
+docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md — entrée S2 mise à jour [✓]
+  (statut NON ENCORE DÉPLOYÉ → DÉPLOYÉ, config_hash: 83cd286eafa2f8df)
+TODO.txt — item CLIM-FIX-DEPLOY marqué [x] FAIT 2026-09-06 [✓]
+</pre>
+<h4>EN COURS</h4>
+<pre>(aucun — session terminée proprement sur CLIM-FIX-DEPLOY)
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>ha_config_set_script : BPS_ACKNOWLEDGMENT_REQUIRED -&gt; ajout BestPracticeKey I-HAVE-READ-THE-BEST-PRACTICES-GUIDE-cbe0fc63
+ha_config_set_script python_transform : NameError next() non dispo dans sandbox -&gt; remplacé par for/break
+device_bash open() FUSE : PermissionError sur fichier monté -&gt; écriture via /tmp/ puis cat &gt; ~/mnt/target
+</pre>
+<h4>TACHES BACKLOG (TODO.txt)</h4>
+<pre>[ ] SPOOK-ORPHANED-STATS : notice Spook sensor.clim_chambre_nodon_humidity + _local_temperature, stats purgées DB — décision en attente
+[ ] CLIM-LOOP-HARDENING : filtrage valeurs numériques aberrantes dans boucle wait sensors (pas seulement unknown/unavailable/'0')
+[ ] P1_MASTER_GESTION_CLIM.md : sync doc post-déploiement fix clamp (à faire en sync_index)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>sync_index : mettre à jour P1_MASTER_GESTION_CLIM.md avec note déploiement fix temp_out_of_range (2026-09-06, config_hash 83cd286eafa2f8df)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

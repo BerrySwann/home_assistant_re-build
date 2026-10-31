@@ -1,0 +1,33 @@
+22:06:19.712 | SEQ_DEBUT  | SEQUENCE           | histo-final
+22:06:19.778 | DEBUT      | automation_off     | 
+22:06:26.836 | FIN        | automation_off     | OK automation off confirmee
+22:07:47.378 | DEBUT      | journal            | 
+22:08:05.596 | FIN        | journal            | OK histo_2026-10-25_s1.md ecrit
+22:08:10.045 | DEBUT      | sync_index         | 
+22:08:22.544 | FIN        | sync_index         | ATTENTION indexes regeneres sans casses; DEPENDANCES_GLOBALES non pousse (local seul, decision 21:25); Audit_md5_md_yaml.sh prod different (connu)
+22:08:22.605 | DEBUT      | fusionne           | 
+22:08:58.995 | FIN        | fusionne           | OK JOURNAL_FUSIONNE_..._2026-10-25.md ecrit, 4097 CRLF
+22:08:59.053 | DEBUT      | obsidian           | 
+22:09:03.671 | FIN        | obsidian           | OK 2 fichiers copies, MD5 identiques
+22:09:03.730 | DEBUT      | pages_html         | 
+22:09:10.905 | FIN        | pages_html         | OK 2 originaux a la corbeille
+22:09:10.964 | DEBUT      | menage             | 
+22:09:16.697 | NOTE       | pages_html         | correction: 1er passage a laisse histo_2026-10-25_s1.md (page nommee sans _s1), corbeille faite au 2e passage: 2 originaux au total
+22:10:29.370 | FIN        | menage             | ATTENTION 133 corbeille + 10 txt jumeaux, 20 renommes, 0 erreur; 4 cas signales (3 formats non reconnus, 1 _sN seul)
+22:10:29.431 | DEBUT      | export_5B          | 
+22:10:43.515 | FIN        | export_5B          | OK Dashboard deja a jour: Dashboard_2026_10_16.yaml (MD5 94885729) racine=local=prod
+22:10:43.576 | DEBUT      | tree               | 
+22:12:31.949 | FIN        | tree               | OK IA_ARBO_DETAIL mis a jour (376/1640/496, GitHub 988e9bcb), bak local, MD5 local=prod
+22:12:32.007 | DEBUT      | controles_6B       | 
+22:12:40.863 | FIN        | controles_6B       | ATTENTION dossiers=11 baks=76 ecarts=8 casses=1 (chemin mort config_system_YAML dans IA_ARBO_DETAIL, 62 vs 63 automations, noms hors format IA_INDEX_*.bak, 4 entites input_*.yaml)
+22:12:40.922 | DEBUT      | controles_6C       | 
+22:12:48.017 | FIN        | controles_6C       | ATTENTION index=7 liens=839 casses=0 ecarts=3 (3 entites absentes REPO deja connues; ENTITES_GLOBAL_INDEX absent de la prod = attendu XX_; GLOBAL_INDEX_IA prod different, non pousse)
+22:12:48.076 | DEBUT      | controles_6D       | 
+22:12:53.608 | FIN        | controles_6D       | OK ANOMALIES aucune; 98 fichiers suivis SYNC 98
+22:12:53.668 | DEBUT      | controles_6E       | 
+22:13:08.122 | FIN        | controles_6E       | OK ANOMALIES 0 RESULTAT OK
+22:13:13.638 | DEBUT      | rapport            | 
+22:13:27.886 | FIN        | rapport            | OK rapport envoye a l'utilisateur
+22:13:27.946 | DEBUT      | notification       | 
+22:13:40.141 | FIN        | notification       | OK HA notify.mobile_app_eric envoyee
+22:13:40.200 | DEBUT      | lumieres           | 

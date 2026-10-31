@@ -1,0 +1,55 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-07-31</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-07-31</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s0">Journal</a></nav>
+<section id="s0"><h2>Journal</h2><p class="src">Source : histo_2026-07-31.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-07-31</h3>
+<pre>
+SESSION : ~3h — HTML architecture + docs IA
+BRANCHE ACTIVE : ReBuild/ (local)
+</pre>
+<h4>FICHIERS MODIFIÉS</h4>
+<pre>
+ha-erodi-architecture.html — refonte structurelle majeure [✓]
+  · Section 6 : déplacement "Convention de nommage" au-dessus de "7 — Slug tertiaire"
+  · Renumerotation conventions 1-8 (5-&gt;4 / 6-&gt;5 / 4-&gt;6)
+  · Ajout slugs manquants dans callout P3 (UM + TPL, 4 entités)
+  · Section 6 : ajout étape agrégat total + 3e carte "P3 exception AVG"
+  · Section 8 : Zero Helper UI déplacé sous callout "Exemple concret — P3 eclairage"
+    Label "03c — Philosophie" supprimé -&gt; titre "NOTA: PHILOSOPHIE — Zero Helper UI"
+  · 03b YAML Intelligents déplacé sous nouvelle section AUTOMATION (bas de page)
+  · Section AUTOMATION : 3 blocs créés (règles strictes / notifs / vue d'ensemble 49 automations)
+  · Backups : v3 + v4 créés
+
+CLAUDE.md — refonte partie conventions [✓]
+  · Backup : CLAUDE_backup_2026-07-31.md
+  · Fusion RÈGLES FICHIERS YAML + STRUCTURATION GÉNÉRALE -&gt; bloc unifié numéroté 1-8
+  · Section 6 : ajout ligne "Relais kWh agrégat" manquante
+  · P3 CONVENTION NOMMAGE TPL : réécriture complète en 3 niveaux
+    (UNITÉ / ZONE / TOTAL) avec vrais patterns extraits des fichiers prod
+    + 4 règles anti-hallucination (distinctions _um_kwh_tpl vs _kwh_tpl, AVG P3)
+  · NOTA Zero Helper UI intégré en fin de conventions
+
+DOCS/00_IA/IA_CONTEXT_BASE.md — mises à jour identiques CLAUDE.md [✓]
+  · Même refonte conventions + ajout agrégat + P3 3 niveaux
+</pre>
+<h4>EN COURS</h4>
+<pre>Section AUTOMATION HTML — premier jet livré / a enrichir (scripts YAML)
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>Section 6 HTML : étape agrégat manquante -&gt; ajoutée dans diagramme + 3e carte
+P3 docs : pattern AVG documenté en _um_avg_tpl (faux) -&gt; corrigé en _avg_watts_{cycle}
+P3 docs : chaîne 4 lignes incomplète -&gt; remplacée par 3 niveaux précis (source : fichiers prod)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Enrichir section AUTOMATION HTML avec bloc scripts
+(p1_master_gestion_clim / j_2_0_secu_arret_clim_protege / j_1_1/2/3)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

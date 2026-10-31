@@ -1,0 +1,198 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-09-07</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-09-07</h1><p class="mut">2 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a><a href="#s2">Session S2</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-09-07_s1.txt</p>
+<h3>JOURNAL HA REBUILD - 2026-09-07 (SESSION S1)</h3>
+<pre>
+SESSION : longue (2 phases : maintenance docs + diagnostic Matter/Thread/USB)
+BRANCHE ACTIVE : docs/
+</pre>
+<h4>FICHIERS VALIDES</h4>
+<pre>audit_md5_md -&gt; audit_md5_md_yaml                 - renommage local [OK]
+backup_github.yaml                                - mise a jour locale [OK]
+H:\ (prod)                                        - renommage + mise a jour fichiers correspondants [OK]
+docs/02_docs_dashboard/.../page_L5C3_mariadb      - vignette L5C3 mise a jour [OK]
+</pre>
+<h4>EN COURS</h4>
+<pre>Appairage bouton IKEA BILRESA (Matter over Thread) - BLOQUE, non resolu
+Diagnostic USB Proxmox / conflit passthrough VM 100 vs LXC 200 - EN COURS
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>(aucune correction YAML cette session - phase de diagnostic infra)
+</pre>
+<h4>DIAGNOSTIC MATTER / THREAD / USB (synthese)</h4>
+<pre>
+Contexte : bouton IKEA BILRESA (Matter over Thread uniquement, pas de WiFi)
+refuse de s'appairer. Thread + Matter installes la veille.
+
+Etapes parcourues :
+1. Matter Server : ble_proxy active (ble_proxy: true dans les options addon)
+   -&gt; bluetooth_enabled: true, ble_proxy_enabled: true
+   -&gt; le tel se connecte (handshake ble0/ble1/ble2 OK) mais le commissioning
+      ne demarre jamais
+2. thread_credentials_set reste a false malgre reloads
+3. Store Thread nettoye : dataset 0f18 (01M1W9CW3H5KKCZD3WZF222KQ3) supprime,
+   dataset e38f (01M1YG9XACCDF6R7C2DB8JBPXH, ext PAN 21a9258db12d0170) passe
+   en preferred pour correspondre a l'OTBR actif
+4. PUT /node/dataset/active sur l'API REST OTBR (8081) -&gt; 409, impossible de
+   changer le dataset radio active
+5. Logs OTBR : crashs repetes "RCP device disconnected (EOF)" +
+   "write: Input/output error", nouvelle partition ID a chaque redemarrage
+   -&gt; reseau Thread jamais stable, commissioning impossible
+
+CAUSE RACINE IDENTIFIEE (cote Proxmox) :
+- lsusb -t montre ports 003 (Sonoff Zigbee), 004 (ZBT-1) ET 005 (BT Realtek)
+  tous en Driver=usbfs -&gt; les TROIS captures par QEMU / VM 100
+- Le Sonoff appartient a LXC 200 (Z2M) : conflit, un dongle ne peut pas etre
+  partage entre VM et LXC
+- Les "deconnexions USB" sont correlees aux evenements tap100i0
+  (start/stop VM 100), pas a une panne materielle
+- La numerotation ttyUSB s'inverse entre 1-3 et 1-4 selon l'ordre
+  d'enumeration (Sonoff et ZBT-1 alternent ttyUSB0/ttyUSB1)
+- /dev/serial/by-id/ absent sur l'hote (les devices sont sous usbfs)
+  -&gt; le bind mount LXC 200 est en "optional" : echec SILENCIEUX au prochain
+     restart du conteneur = perte du Zigbee sans message d'erreur
+
+CORRECTIONS DOCUMENTAIRES A FAIRE :
+- CLAUDE.md indique "Sonoff EFR32MG21 V2" -&gt; FAUX.
+  lsusb : 10c4:ea60 CP2102N, "Sonoff Zigbee 3.0 USB Dongle Plus V2" (Itead)
+  = ZBDongle-P (CC2652P). Le EFR32MG21 serait 1a86:55d4 (CH9102), absent.
+- VM 100 : entree usb0 host=1a86:55d4 = residu mort (device inexistant)
+- CLAUDE.md indiquait "pas de Bluetooth sur le NUC" -&gt; FAUX.
+  Realtek 0bda:c821 present sur port 1-5.
+
+PISTE ALTERNATIVE NON EXPLOREE :
+Le BILRESA possede un mode Zigbee cache. Le coordinateur Sonoff + Z2M
+existant permettrait de contourner completement Thread/OTBR.
+Ref : https://smarthome-aber-sicher.de/en/blog/2026/05/20/ikea-bilresa-zigbee/
+</pre>
+<h4>TACHES BACKLOG (TODO.txt)</h4>
+<pre>Non traite cette session. Backlog inchange :
+PROXMOX-NOM, GENELEC-HEBDO, L2C1-COULEURS, SDB-1/2/3/4, W-1, L5C2-FANTOMES,
+BAK-L1C2, BV-PUSH, P3-ETATS-STATUS, P4-SECONDAIRE, CLAUDE-MD-ARBO, L3C1-HTML,
+L5C1-TYPO, F-1, F-2b, P4-ABSENCE-FORCE, ECLAIR-SOURCE, STORES-NB-FENETRE,
+P1-CUISINE-B
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>1. Recuperer cat /etc/pve/qemu-server/100.conf (fait bloquant, jamais obtenu)
+2. Retirer le Sonoff (port 1-3) du passthrough VM 100 - il doit rester a LXC 200
+3. Supprimer l'entree morte usb0 host=1a86:55d4
+4. Blacklister btusb sur l'hote Proxmox (course firmware Realtek vs QEMU)
+5. Verifier que Z2M repond encore (non confirme en fin de session)
+6. Une fois OTBR stable, retenter le commissioning du BILRESA
+7. Corriger CLAUDE.md : modele dongle Zigbee + presence du Bluetooth
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-09-07_s2.txt</p>
+<h3>JOURNAL HA REBUILD - 2026-09-07 (SESSION S2)</h3>
+<pre>
+SESSION : suite directe de S1 - resolution du conflit USB Proxmox
+BRANCHE ACTIVE : docs/ (aucun YAML HA touche)
+</pre>
+<h4>FICHIERS VALIDES</h4>
+<pre>/etc/pve/qemu-server/100.conf  - suppression de usb0: host=1-3  [OK]
+(fichier Proxmox, hors arborescence ReBuild - non versionne dans docs/)
+</pre>
+<h4>EN COURS</h4>
+<pre>Appairage bouton IKEA BILRESA - toujours BLOQUE, non repris
+</pre>
+<h4>ZIGBEE : RETOUR CONFIRME (verifie en fin de session)</h4>
+<pre>  pct exec 200 -- ls -l /dev/ttyUSB0
+    crw-rw-rw- 1 nobody nogroup 188, 1 Sep  7 18:40 /dev/ttyUSB0
+    (permissions passees de 000 a 666, minor 1 = le Sonoff via by-id)
+  pct exec 200 -- systemctl status zigbee2mqtt
+    active (running) since 2026-09-07 18:36:54 UTC
+    MQTT publish en continu -&gt; les appareils Zigbee remontent
+  Le "nobody:nogroup" est normal pour un conteneur non privilegie, sans impact.
+  =&gt; Z2M pleinement operationnel. Aucune modification du configuration.yaml
+     de Z2M n'a ete necessaire, comme prevu.
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>
+PROBLEME : Zigbee tombe, OTBR instable, bouton Matter impossible a appairer.
+
+CAUSE RACINE : la VM 100 (Home Assistant) capturait TROIS peripheriques USB
+en passthrough par port physique :
+
+  usb0: host=1-3    -&gt; Sonoff Zigbee   &lt;-- ERREUR, appartient a LXC 200
+  usb1: host=1-4    -&gt; ZBT-1 (Thread)  &lt;-- correct
+  usb2: host=1-5    -&gt; BT Realtek      &lt;-- ajoute par Eric en S1
+
+Le dongle Zigbee etait vole a LXC 200 (Z2M). Un peripherique USB ne peut pas
+etre partage entre une VM et un conteneur. HA n'a aucun besoin du dongle
+Zigbee en direct : Z2M tourne dans LXC 200 et parle a HA via MQTT.
+
+Consequences en cascade observees :
+- /dev/serial/by-id/ absent de l'hote (les devices etaient sous usbfs)
+- bind mount LXC 200 en "optional" -&gt; echec silencieux, aucun message d'erreur
+- dans le conteneur : /dev/ttyUSB0 = noeud mort
+  "c--------- 0 nobody nogroup 188, 0" (permissions 000, inouvrable)
+- numerotation ttyUSB qui s'inverse entre 1-3 et 1-4 selon l'ordre
+  d'enumeration -&gt; risque de piloter le mauvais dongle
+- deconnexions USB correlees aux evenements tap100i0 (start/stop VM 100),
+  et NON a une panne materielle comme suppose initialement
+
+CORRECTION APPLIQUEE :
+  qm stop 100
+  qm set 100 --delete usb0
+  qm start 100
+
+RESULTAT VERIFIE :
+  Port 003: Driver=cp210x    &lt;- hote a recupere le Sonoff
+  Port 004: Driver=usbfs     &lt;- ZBT-1 toujours a la VM
+  Port 005: Driver=usbfs     &lt;- BT toujours a la VM
+  /dev/serial/by-id/usb-Itead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_V2_940fc42b
+    f9c2ef11be72e6b08048b910-if00-port0 -&gt; ../../ttyUSB1   [RECREE]
+
+Note : le lien by-id pointe vers ttyUSB1 et non ttyUSB0 - confirmation que la
+numerotation brute est instable et que le bind mount DOIT rester sur by-id.
+</pre>
+<h4>ERREURS DE MA PART (Claude), corrigees en session</h4>
+<pre>1. Annonce d'un "residu mort usb0: host=1a86:55d4" dans 100.conf : FAUX.
+   Le fichier ne contient que des passthrough par port. Conclusion tiree
+   d'une lecture d'ecran au lieu d'attendre le fichier.
+2. Suggestion de passer en passthrough par vendor:product : IMPOSSIBLE ici,
+   Sonoff et ZBT-1 ont le meme ID 10c4:ea60. Le passthrough par port est
+   le bon choix.
+3. Commande "pct restart 200" : n'existe pas, c'est "pct reboot 200".
+4. Lecture initiale des crashs OTBR comme panne materielle USB : incorrect,
+   c'etait le conflit de passthrough.
+</pre>
+<h4>CORRECTIONS DOCUMENTAIRES A FAIRE (non appliquees)</h4>
+<pre>CLAUDE.md, section SYSTEME &amp; MATERIEL :
+- "Zigbee : Sonoff EFR32MG21 V2" -&gt; FAUX.
+  Reel : 10c4:ea60 CP2102N, "Sonoff Zigbee 3.0 USB Dongle Plus V2" (Itead),
+  soit un ZBDongle-P (CC2652P). Serie 940fc42bf9c2ef11be72e6b08048b910.
+- Absence de Bluetooth supposee -&gt; FAUX.
+  Realtek 0bda:c821 present sur port 1-5, desormais passe a la VM 100.
+</pre>
+<h4>TACHES BACKLOG (TODO.txt)</h4>
+<pre>Inchange, non traite. PROXMOX-NOM, GENELEC-HEBDO, L2C1-COULEURS, SDB-1/2/3/4,
+W-1, L5C2-FANTOMES, BAK-L1C2, BV-PUSH, P3-ETATS-STATUS, P4-SECONDAIRE,
+CLAUDE-MD-ARBO, L3C1-HTML, L5C1-TYPO, F-1, F-2b, P4-ABSENCE-FORCE,
+ECLAIR-SOURCE, STORES-NB-FENETRE, P1-CUISINE-B
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>1. [FAIT] Zigbee confirme remonte - voir section dediee ci-dessus.
+2. Blacklister btusb sur l'hote (course firmware Realtek vs QEMU) :
+     echo "blacklist btusb" &gt; /etc/modprobe.d/blacklist-btusb.conf
+     update-initramfs -u
+3. Verifier la stabilite d'OTBR une fois le conflit USB leve (les crashs
+   "RCP device disconnected (EOF)" doivent disparaitre).
+4. Seulement ensuite : retenter le commissioning du BILRESA.
+   Avec le BT natif dans HA, le proxy BLE via telephone devient inutile.
+5. Piste de secours si Thread reste instable : le BILRESA a un mode Zigbee
+   cache, utilisable avec le coordinateur Sonoff existant.
+   https://smarthome-aber-sicher.de/en/blog/2026/05/20/ikea-bilresa-zigbee/
+6. Corriger CLAUDE.md (modele dongle Zigbee + presence Bluetooth).
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

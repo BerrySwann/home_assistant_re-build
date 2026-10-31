@@ -1,0 +1,49 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-08-06</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-08-06</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s0">Journal</a></nav>
+<section id="s0"><h2>Journal</h2><p class="src">Source : histo_2026-08-06.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-08-06</h3>
+<pre>
+SESSION : ~2h
+BRANCHE ACTIVE : main (H: = \\10.32.154.243\config)
+</pre>
+<h4>FICHIERS VALIDÉS</h4>
+<pre>.scripts/ha_git_backup.sh — CRLF-&gt;LF corrigé, backup GitHub opérationnel [OK]
+</pre>
+<h4>ACTIONS EFFECTUÉES</h4>
+<pre>DIAGNOSTIC GitHub : commits stoppés depuis 2026-08-01 08:24
+CAUSE : ha_git_backup.sh corrompu en CRLF (probablement OpenCode/éditeur Windows)
+  -&gt; erreur : env: can't execute 'bash\r\n': No such file or directory
+  -&gt; 5 jours de silence dans le repo (aucun auto-backup depuis le 1er août)
+FIX : PowerShell WriteAllBytes -&gt; conversion LF pure (0 CR restants, 228 lignes)
+RÉSULTAT : backup manuel déclenché -&gt; Push OK (force-with-lease, divergence 5j rattrapée)
+
+CHECK PROD H: complet :
+  Supprimés   : ha-erodi.html (41KB) + scripts.yaml.bak_2026-07-21
+  Archivé     : Dashboard_2026_08_01.yaml (1.27MB) -&gt; H:\docs\ + local outputs
+  Thèmes OK   : themes/visionos/*.yaml commités ce soir
+  .gitignore  : correct (secrets.yaml, .logs/, custom_components/ ignorés)
+  OpenCode    : pas de fichiers parasites visibles sur H: (.243)
+</pre>
+<h4>EN COURS</h4>
+<pre>Partage photos famille via bot Telegram -&gt; reporté à demain
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>ha_git_backup.sh : shebang CRLF -&gt; bash introuvable -&gt; correction LF WriteAllBytes
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Implémenter bot Telegram photo famille :
+  1. BotFather -&gt; token
+  2. Intégration Telegram dans HA (configuration.yaml)
+  3. Automation : réception photo -&gt; save www/photos_famille/photo_actuelle.jpg
+  4. Optionnel : rotation multi-photos sur kiosk
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

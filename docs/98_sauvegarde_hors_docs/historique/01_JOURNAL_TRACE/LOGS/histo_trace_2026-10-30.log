@@ -1,0 +1,134 @@
+18:18:22.650 | DEBUT      | controles_6F       | lancement manuel demande par Eric
+18:18:40.284 | FIN        | controles_6F       | OK 20 fiches corrigees, controle badges: fiches=184 conformes=53 a_corriger=131 a_decider=112 corrigees=0
+18:24:03.562 | DEBUT      | controles_6F       | lot unique sur ordre d'Eric (limite levee)
+18:24:04.862 | FIN        | controles_6F       | OK 101 fiches corrigees
+20:33:34.032 | SEQ_DEBUT  | SEQUENCE           | histo
+20:33:34.089 | DEBUT      | journal            | 
+20:33:50.755 | FIN        | journal            | OK histo_2026-10-30_s1.md
+20:33:50.811 | DEBUT      | sync_index         | 
+20:34:20.158 | FIN        | sync_index         | OK index inchanges sauf IA_GLOBAL_INDEX regenere ; GLOBAL_INDEX_REPO MD5 identique aux 3 emplacements ; Check_DEPENDANCES ecarts=0
+20:34:20.214 | DEBUT      | fusionne           | 
+20:35:05.674 | FIN        | fusionne           | OK JOURNAL_FUSIONNE_2026-07-15_2026-10-30.md +44 lignes, session 2026-10-30 S1
+20:35:05.731 | DEBUT      | obsidian           | 
+20:35:05.876 | FIN        | obsidian           | OK 2 fichiers copies
+20:35:05.933 | DEBUT      | pages_html         | 
+20:35:14.021 | FIN        | pages_html         | OK pages jour et fusionne creees, 2 originaux a la corbeille
+20:35:14.077 | DEBUT      | menage             | 
+20:36:44.564 | FIN        | menage             | OK 202 actions (82 renommes, 120 corbeille) + 5 txt avec html ; 0 erreur
+20:36:44.621 | DEBUT      | export_5B          | 
+20:36:56.788 | FIN        | export_5B          | OK Dashboard deja a jour (2026_10_26 racine = local = prod)
+20:36:56.844 | DEBUT      | tree               | 
+20:38:24.187 | FIN        | tree               | OK IA_ARBO_DETAIL mis a jour (bak 20h38m09s), push 00_IA fait
+20:38:24.242 | DEBUT      | controles_6B       | 
+20:38:34.388 | FIN        | controles_6B       | OK voir rapport
+20:38:34.443 | DEBUT      | controles_6C       | 
+20:38:34.787 | FIN        | controles_6C       | OK voir rapport
+20:38:34.841 | DEBUT      | controles_6D       | 
+20:38:37.068 | FIN        | controles_6D       | OK voir rapport
+20:38:37.125 | DEBUT      | controles_6E       | 
+20:38:37.267 | FIN        | controles_6E       | OK voir rapport
+20:38:37.327 | DEBUT      | controles_6G       | 
+20:38:37.503 | FIN        | controles_6G       | OK voir rapport
+20:38:59.940 | DEBUT      | controles_6F       | 
+20:39:00.180 | FIN        | controles_6F       | OK Check_badges_fiches --fix --limite 20
+20:39:00.237 | NOTE       | controles_6G       | ecart IA_GLOBAL_INDEX plus ancien qu IA_ARBO_DETAIL : regeneration puis nouveau controle
+20:39:14.993 | DEBUT      | rapport            | 
+20:39:15.049 | FIN        | rapport            | OK rapport final
+20:39:15.167 | SEQ_FIN    | SEQUENCE           | fin de sequence
+22:17:59.828 | SEQ_DEBUT  | SEQUENCE           | histo-final
+22:17:59.886 | NOTE       | tokens             | debut : inconnu (compteur non visible)
+22:17:59.945 | DEBUT      | automation_off     | 
+22:18:03.259 | FIN        | automation_off     | OK automation.nouvelle_automatisation off a 22:18
+22:19:11.034 | DEBUT      | journal            | 
+22:20:03.390 | FIN        | journal            | OK histo_2026-10-30_s2.md ecrit
+22:20:03.448 | DEBUT      | sync_index         | 
+22:20:29.530 | FIN        | sync_index         | OK index generes inchanges sauf IA_GLOBAL_INDEX ; notifs deja a jour (63 auto/32 notify, 9 scripts/5 notify) ; GLOBAL_INDEX_REPO a verifier
+22:20:29.587 | DEBUT      | fusionne           | 
+22:21:13.726 | FIN        | fusionne           | OK JOURNAL_FUSIONNE_2026-07-15_2026-10-30.md 4415 lignes, S2 ajoutee, bak fait
+22:21:13.784 | DEBUT      | obsidian           | 
+22:21:14.015 | FIN        | obsidian           | OK fusionne et s2 copies, MD5 identiques
+22:21:14.072 | DEBUT      | pages_html         | 
+22:21:21.834 | FIN        | pages_html         | OK page du jour mise a jour (2 sessions), fusionne mis a jour, s2.md a la corbeille
+22:22:09.454 | NOTE       | pages_html         | CORRECTION de la ligne fin 22:21:21 : s2.md n'etait pas a la corbeille a ce moment ; la page ne contenait que S2 (S1 perdue car son md etait deja a la corbeille). S1 restauree de la corbeille, page regeneree avec 2 sections, puis s1.md et s2.md envoyes a la corbeille a 22:22.
+22:22:09.513 | DEBUT      | menage             | 
+22:24:39.711 | FIN        | menage             | OK docs: 0 renomme 0 corbeille (deja fait a 20h36) ; historique: 2 renommes, 1 corbeille, 5 signales ; plan menage_dry_run_2026-10-30_s2.txt
+22:24:44.588 | DEBUT      | export_5B          | 
+22:25:00.600 | FIN        | export_5B          | OK Dashboard_2026_10_26.yaml : racine = local = prod, deja a jour
+22:25:00.658 | DEBUT      | push_docs          | 
+22:25:15.475 | FIN        | push_docs          | OK compares=507 copies=2 identiques=505 flags=0 seuls_prod=0 ; rapport push_docs_2026-10-30_lot5.txt
+22:25:15.533 | DEBUT      | tree               | 
+22:26:17.830 | FIN        | tree               | OK IA_ARBO_DETAIL: comptages local/prod/GitHub (commit 9a83e697) mis a jour, pousse, MD5 local=prod 51CB2D44
+22:26:17.901 | DEBUT      | controles_6B       | 
+22:26:18.411 | FIN        | controles_6B       | OK voir rapport
+22:26:18.468 | DEBUT      | controles_6C       | 
+22:26:18.823 | FIN        | controles_6C       | OK voir rapport
+22:26:24.772 | DEBUT      | controles_6D       | 
+22:26:26.932 | FIN        | controles_6D       | OK voir rapport
+22:26:26.988 | DEBUT      | controles_6E       | 
+22:26:27.134 | FIN        | controles_6E       | OK voir rapport
+22:26:27.191 | DEBUT      | controles_6F       | 
+22:26:32.711 | FIN        | controles_6F       | OK fiches=184 conformes=184 a_corriger=0 ; sources sans fiche 0
+22:26:32.769 | DEBUT      | controles_6G       | 
+22:26:43.321 | FIN        | controles_6G       | OK DEPENDANCES ecarts=0 ; IA_GLOBAL_INDEX regenere apres modif IA_ARBO_DETAIL et pousse
+22:26:43.378 | DEBUT      | push_docs          | rattrapage
+22:26:43.434 | FIN        | push_docs          | OK rattrapage : IA_GLOBAL_INDEX_memoire.md copie (MD5 identique), IA_ARBO_DETAIL deja pousse, fiches non modifiees
+22:26:49.775 | NOTE       | tokens             | fin : inconnu (compteur non visible)
+22:26:57.251 | DEBUT      | rapport            | rapport final histo S2 envoye avant extinction
+22:27:15.495 | FIN        | rapport            | OK rapport final envoye
+22:27:15.554 | DEBUT      | notification       | 
+22:27:23.043 | FIN        | notification       | OK notify.mobile_app_eric envoyee 22:27
+22:27:33.137 | DEBUT      | lumieres           | 
+22:27:47.025 | FIN        | lumieres           | OK Hue Sync coupe (API pont), 3 Hue Play off confirme
+22:27:47.082 | DEBUT      | automation_on      | 
+22:27:47.139 | FIN        | automation_on      | OK automation.nouvelle_automatisation on
+22:27:47.230 | DEBUT      | arret_pc           | 
+22:27:47.290 | FIN        | arret_pc           | OK arret programme dans 300 s
+22:27:47.347 | SEQ_FIN    | SEQUENCE           | fin de sequence
+22:42:43.363 | SEQ_DEBUT  | SEQUENCE           | histo-final
+22:42:43.419 | NOTE       | tokens             | debut : inconnu (compteur non visible)
+22:42:43.476 | DEBUT      | automation_off     | 
+22:42:54.592 | FIN        | automation_off     | OK automation off a 22:42
+22:42:54.650 | DEBUT      | journal            | 
+22:42:55.029 | FIN        | journal            | OK histo_2026-10-30_s3.md (session vide)
+22:43:10.974 | DEBUT      | sync_index         | 
+22:43:12.465 | FIN        | sync_index         | OK index inchanges ; GLOBAL_INDEX_REPO identique aux 3 emplacements ; notifs deja a jour (releve S2)
+22:43:12.521 | DEBUT      | fusionne           | 
+22:43:12.636 | FIN        | fusionne           | OK S3 ajoutee (session vide), bak fait
+22:43:20.341 | DEBUT      | obsidian           | 
+22:43:20.458 | FIN        | obsidian           | OK fusionne et s3 copies, MD5 identiques
+22:43:20.514 | DEBUT      | pages_html         | 
+22:43:32.213 | FIN        | pages_html         | OK page 3 sections, s1 s2 s3 .md a la corbeille (verifie avant)
+22:43:32.269 | DEBUT      | menage             | 
+22:43:43.675 | FIN        | menage             | OK rien a renommer ni supprimer ; fusion _s2 -> menage_2026-10-30.txt et menage_dry_run_2026-10-30.txt ; signales: noms non standard (3) et _sN anciens (2)
+22:43:43.733 | DEBUT      | export_5B          | 
+22:43:43.962 | FIN        | export_5B          | OK deja a jour
+22:43:54.234 | DEBUT      | push_docs          | 
+22:43:57.552 | FIN        | push_docs          | OK compares=507 copies=1 identiques=506 flags=0
+22:43:57.609 | DEBUT      | tree               | 
+22:44:16.554 | FIN        | tree               | OK IA_ARBO_DETAIL: historique 465/78, docs 1666/1109, 00_IA 23/20 ; pousse, MD5 identique
+22:44:26.436 | DEBUT      | controles_6B       | 
+22:44:26.882 | FIN        | controles_6B       | OK
+22:44:26.937 | DEBUT      | controles_6C       | 
+22:44:27.291 | FIN        | controles_6C       | OK
+22:44:27.347 | DEBUT      | controles_6D       | 
+22:44:29.644 | FIN        | controles_6D       | OK
+22:44:29.701 | DEBUT      | controles_6E       | 
+22:44:29.849 | FIN        | controles_6E       | OK
+22:44:29.908 | DEBUT      | controles_6F       | 
+22:44:30.327 | FIN        | controles_6F       | OK
+22:44:30.386 | DEBUT      | controles_6G       | 
+22:44:30.564 | FIN        | controles_6G       | OK
+22:44:30.622 | DEBUT      | push_docs          | rattrapage
+22:44:30.682 | FIN        | push_docs          | OK rattrapage : IA_GLOBAL_INDEX_memoire.md et IA_ARBO_DETAIL.md pousses, MD5 identiques
+22:44:34.778 | NOTE       | tokens             | fin : inconnu (compteur non visible)
+22:44:34.895 | DEBUT      | rapport            | 
+22:44:49.031 | FIN        | rapport            | OK rapport envoye
+22:44:49.089 | DEBUT      | notification       | 
+22:44:49.145 | FIN        | notification       | OK notify.mobile_app_eric envoyee
+22:44:59.243 | DEBUT      | lumieres           | 
+22:45:10.882 | FIN        | lumieres           | OK Hue Sync coupe (API pont), 3 Hue Play off confirme
+22:45:10.938 | DEBUT      | automation_on      | 
+22:45:10.998 | FIN        | automation_on      | OK automation on
+22:45:11.086 | DEBUT      | arret_pc           | 
+22:45:11.144 | FIN        | arret_pc           | OK arret programme
+22:45:11.200 | SEQ_FIN    | SEQUENCE           | fin de sequence

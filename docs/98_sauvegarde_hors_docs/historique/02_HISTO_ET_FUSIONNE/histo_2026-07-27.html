@@ -1,0 +1,54 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-07-27</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-07-27</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s0">Journal</a></nav>
+<section id="s0"><h2>Journal</h2><p class="src">Source : histo_2026-07-27.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-07-27</h3>
+<pre>
+SESSION : ~2h (reprise depuis session précédente)
+BRANCHE ACTIVE : ReBuild/ (fichier web, hors YAML config)
+</pre>
+<h4>FICHIERS MODIFIÉS</h4>
+<pre>ha-erodi-architecture.html — page documentation architecture HA [en cours]
+</pre>
+<h4>TRAVAUX EFFECTUÉS</h4>
+<pre>1. Corrections alignement boites ASCII dans le viewer et les demos :
+   - Titre principal : retrait 3 espaces trailing (decalage right box-drawing vs ASCII)
+   - Titre secondaire : retrait 2 espaces trailing (decalage idem)
+   - Boites skeleton : idem (primaire -8, secondaire remplacement E accent + -3)
+
+2. Ajout section "02 - Conventions" - 8 sous-sections :
+   1. Poles P0-P4 + regle 1 fonction = 1 fichier
+   2. Pieces 1-9 (grille 3x3)
+   3. Abreviations (SNS, UM, TPL, AVG, kWh, CMD, AMHQ, HP/HC, LxCx, DUT)
+   4. Chaine suffixes (_um -&gt; _um_kwh_tpl / _um_avg_tpl)
+   5. Bordures ASCII (78 car. arrondi / 37 car. carre)
+   6. Slug tertiaire
+   7. name &amp; unique_id
+   8. Les 5 headers obligatoires
+
+3. Reorganisation ordre sections :
+   Avant : 1=Pieces / 2=Abrev / 3=Chaine / 4=ASCII...
+   Apres  : 1=Poles+regle / 2=Pieces / 3=Abrev / 4=Chaine / 5-8=tech
+</pre>
+<h4>EN COURS</h4>
+<pre>ha-erodi-architecture.html — conventions completes, alignement ASCII a reverifier
+                             (boites rendues dans le navigateur a valider)
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>Viewer YAML : innerHTML sans &lt;pre&gt; -&gt; tout sur une ligne -&gt; fixe avec white-space:pre
+ASCII demo   : box-drawing chars plus etroits que ASCII -&gt; retrait trailing spaces empirique
+Doublons     : LxCx/DUT inseres en double lors refacto -&gt; nettoyes
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Verifier rendu final dans navigateur (boites ASCII alignees, sections dans le bon ordre)
+Puis : lier ha-erodi-architecture.html depuis ha.erodi-ha.com
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

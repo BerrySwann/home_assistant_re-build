@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-09-30</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-09-30</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-09-30_s1.txt</p>
+<h3>JOURNAL JEMAYA - ASSISTANT DOMOTIQUE - 2026-09-30</h3>
+<pre>
+SESSION : soiree du 30/09 (continuation de la session Jemaya du 30/09 apres-midi)
+CONTEXTE : rendre Jemaya operationnel : surveillance de l'appartement,
+           alertes Telegram, puis voix (oreille + bouche sur le vieux PC)
+</pre>
+<h4>ETAPES VALIDEES</h4>
+<pre>[1] Telegram verifie DANS LES DEUX SENS (journal gateway : message entrant
+    d'Eric a 21:02:29, reponse envoyee 134 caracteres a 21:02:33) ✓
+[2] Watchdog : plage horaire 07:30-21:00 pour les alertes ordinaires, urgences
+    24h/24 (fuite cuisine, congelateur, surveillance aveugle) ✓
+[3] Filtrage teste dans 3 cas : heure reelle (nuit) = congélateur seul ;
+    simulation 14:00 = tout ; simulation 03:00 = congélateur seul ✓
+[4] Preuve qu'aucune alerte ne se perd : apres un tick de nuit, les 4 alertes
+    de piles ressortent en simulation de jour ✓
+[5] Job cron cree : id c4c1275d1511, toutes les 10 min, sans agent,
+    script jemaya_watchdog.py ✓
+[6] Livraison Telegram rendue FIABLE : le script envoie lui-meme par l'API
+    HTTP, sans aucune bibliotheque -&gt; test reel, API a accepte (message 65) ✓
+[7] Chaine vocale validee sur .110 : synthese (edge-tts) puis transcription
+    (faster-whisper small, fr) -&gt; phrase transcrite mot pour mot, accents
+    compris ; modele charge en 7,2 s, transcription en 1,5 s ✓
+[8] Service vocal ecrit et teste de bout en bout : question WAV -&gt; transcription
+    -&gt; reponse sur les donnees REELLES du congelateur -&gt; WAV renvoye en 4 s ✓
+[9] Micro de .135 trouve et rendu fonctionnel : le gain etait quasi nul,
+    monte (Capture 100 pourcent, Front Mic en capture) -&gt; niveau moyen
+    6,3 -&gt; 43,8 sur 3 s de bruit de fond ✓
+[10] Tour complet du satellite teste depuis .135 : micro -&gt; .110 -&gt; audio joue
+     sur .135. La chaine entiere fonctionne ✓
+[11] Garde-fou ajoute : le bruit seul recoit "Je n'ai rien entendu" au lieu
+     d'une phrase inventee (seuil 150, bruit de fond mesure 44) ✓
+[12] Consignes deposes dans la boite du jumeau .135 par le canal relais
+     (accuse "Message enregistre.", 2955 octets a 21:47) ✓
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>livraison cron "deliver=all" sans cible -&gt; .env protege en ecriture pour
+  l'agent -&gt; cible explicite telegram:6357712528
+"python-telegram-bot not installed" cote cron -&gt; le worker tourne en mode
+  isole (-I) et ne voyait pas httpx, installe dans un AUTRE environnement
+  (installs/.../venv) -&gt; httpx installe dans l'environnement principal
+livraison Hermes toujours en echec dans le contexte du cron -&gt; contournement
+  definitif : envoi direct par le script via l'API HTTP (plus de dependance)
+modele de transcription qui INVENTAIT sur du silence ("Sous-titres realises
+  par la communaute d'Amara.org") -&gt; seuil de niveau sonore avant transcription
+plantage UnboundLocalError dans le cas "rien entendu" -&gt; variable initialisee
+reponse vocale annoncant -16 degres au lieu de -15,6 -&gt; format a une decimale
+arecord par SSH : "Host is down" (PulseAudio inaccessible a distance) -&gt;
+  acces direct au materiel plughw:0,0
+SSH vers .135 refuse -&gt; la cle est valide, mais le compte est "berry",
+  pas "root"
+</pre>
+<h4>FICHIERS MODIFIES</h4>
+<pre>D:\hermes\scripts\jemaya_watchdog.py
+  -&gt; plage horaire, alertes urgentes 24h/24, seuil bas du congelateur,
+     envoi Telegram direct par API HTTP
+D:\hermes\scripts\jemaya_watchdog.json
+  -&gt; bloc plage_horaire (07:30-21:00), temperature_min -26, rearm -24
+D:\hermes\scripts\jemaya_voix.py
+  -&gt; NOUVEAU : service vocal de .110 (transcription + reponses + voix)
+D:\hermes\scripts\jemaya_satellite.sh
+  -&gt; NOUVEAU : client du satellite pour .135 (micro -&gt; envoi -&gt; lecture)
+C:\Users\Berry Swann\AppData\Local\hermes\config.yaml
+  -&gt; plateforme Telegram activee
+cron\jobs.json
+  -&gt; job "Jemaya - surveillance appartement" cree (c4c1275d1511)
+.135 : /home/berry/jemaya_satellite.sh copie ; gain du micro regle
+  (reglage NON persistant)
+</pre>
+<h4>EN COURS</h4>
+<pre>Test avec la VRAIE voix de Berry : le seuil de 150 est a calibrer sur sa voix
+Persistance du gain du micro : exige sudo, mot de passe de Berry
+Lancement automatique du satellite : fichier .desktop dans autostart
+Route SSH de .135 rangee dans un dossier purgeable (deja signale, deja paye)
+Service vocal de .110 qui ecoute sur le LAN sans mot de passe (a proteger)
+Enceinte de .135 : le son sort, mais pas verifie a l'oreille par Berry
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Berry parle devant le micro de .135 et lance : bash ~/jemaya_satellite.sh
+Si Jemaya repond "je n'ai rien entendu", baisser SEUIL_SON dans
+jemaya_voix.py (150 par defaut) ; le service journalise le niveau mesure.
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

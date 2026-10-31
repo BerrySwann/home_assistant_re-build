@@ -1,0 +1,88 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-09-01</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-09-01</h1><p class="mut">3 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a><a href="#s2">Session S2</a><a href="#s3">Session S3</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-09-01_s1.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-09-01 (SESSION S1)</h3>
+<pre>
+SESSION : N/A (session Cowork, durée non chronométrée)
+BRANCHE ACTIVE : docs/
+</pre>
+<h4>FICHIERS VALIDÉS</h4>
+<pre>docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_congelateur_alarme/P2_congelateur_compresseur_actif.yaml — binary_sensor.congelateur_compresseur_actif [✓ local, PAS ENCORE en prod H:\]
+</pre>
+<h4>EN COURS</h4>
+<pre>docs/03_docs_automations/docs_automations_YAML/P2_prises/congelateur_alarme_porte.yaml — à créer dans l'UI HA (draft, non collée)
+docs/03_docs_automations/docs_automations_YAML/P2_prises/congelateur_alarme_panne.yaml — à créer dans l'UI HA (draft, non collée)
+docs/03_docs_automations/docs_automations_YAML/P2_prises/congelateur_alarme_capteur.yaml — à créer dans l'UI HA (draft, non collée)
+Push prod H:\ du binary_sensor — bloqué : dossier H:\ non accessible à cette session (le picker de dossier a refusé la racine H:\), en attente qu'Eric le connecte ou pousse lui-même
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>Automations congélateur : action: notify.eric / notify.mamour -&gt; corrigé en notify.mobile_app_eric / notify.mobile_app_mamour (notify.eric et notify.mamour sont des entités du registre mais pas des services appelables dans cette instance HA — vérifié via ha_list_services)
+</pre>
+<h4>TACHES BACKLOG (TODO.txt)</h4>
+<pre>Confirmer que binary_sensor.congelateur_compresseur_actif bascule on/off correctement en prod avant de créer les 3 automations
+Tester en conditions réelles (porte ouverte volontairement, prise débranchée) avant de faire confiance aux seuils (0.15A / -15°C 5min / 1h / 2h) — seuils dérivés de 3 jours d'historique + décisions Eric, pas d'un vrai cycle de panne observé
+Décider si les 2 téléphones NE2213 (Eric et Mamour) doivent aussi être notifiés en plus des Xiaomi (décision actuelle : Xiaomi uniquement)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Pousser P2_congelateur_compresseur_actif.yaml en prod H:\ (MD5-first, cf. /ha_push_yaml) puis recharger les templates HA, puis créer les 3 automations via l'UI HA à partir des fichiers docs_automations_YAML/P2_prises/congelateur_alarme_*.yaml
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-09-01_s2.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-09-01 (SESSION S2)</h3>
+<pre>
+SESSION VIDE — aucune modification
+
+Rien n'a changé depuis histo_2026-09-01_s1.txt : pas de nouveau fichier créé
+ou modifié, pas de nouvelle décision technique depuis le dernier journal.
+Rappel de l'état laissé en S1 (voir ce fichier pour le détail) :
+- P2_congelateur_compresseur_actif.yaml : validé en local, PAS encore en prod H:\
+- 3 automations congélateur (porte/panne/capteur) : draft, pas encore créées dans l'UI HA
+- Prochaine action toujours en attente : push prod H:\ (bloqué, accès H:\ non accordé
+  à cette session) puis création des 3 automations dans HA
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+<section id="s3"><h2>Session S3</h2><p class="src">Source : histo_2026-09-01_s3.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-09-01 (SESSION S3)</h3>
+<pre>
+SESSION : N/A (session Cowork, durée non chronométrée)
+BRANCHE ACTIVE : docs/
+</pre>
+<h4>FICHIERS VALIDÉS</h4>
+<pre>(aucun nouveau fichier créé/modifié cette session — session d'audit/investigation uniquement)
+</pre>
+<h4>EN COURS</h4>
+<pre>docs/01_docs_config_system/config_system_YAML/templates/P2_prise/P2_congelateur_alarme/P2_congelateur_compresseur_actif.yaml — TOUJOURS bloqué en local, PAS en prod H:\
+docs/03_docs_automations/docs_automations_YAML/P2_prises/congelateur_alarme_{porte,panne,capteur}.yaml — toujours à créer dans l'UI HA (draft, non collée)
+</pre>
+<h4>EVENEMENTS SESSION</h4>
+<pre>Eric a connecté le dossier H:\Docs à la session (miroir de documentation prod, Samba) — accessible via device_bash sous $HOME/mnt/docs
+Audit de synchro local vs H:\Docs effectué : désynchro réelle confirmée au-delà du congélateur — renommages divergents (ex: P1_BV_IB_inter_soufflant_sdb.yaml en local vs P1_BV_BI_02_inter_soufflant_sdb.yaml en prod), dossier dupliqué P0_energie/ (local) vs energie/ (prod), plusieurs pages dashboard prod plus anciennes que leur équivalent local
+Eric a précisé une règle importante : pour les YAML système (config_system_YAML), la PROD (H:\) est la source de vérité — pas le local. Tout resync futur sur ces divergences doit aller prod -&gt; local, jamais l'inverse
+Tentative de push de P2_congelateur_compresseur_actif.yaml via ha-push-yaml : bloquée — seul H:\Docs (archive documentation) est connecté, pas H:\ racine (chemin réel requis : H:\templates\P2_prise\P2_congelateur_alarme\...). H:\ racine refusé par device_request_folder_access.
+Connecteur MCP Home Assistant (mcp__remote-devices__Home_Assistant__*) repéré et testé à la demande d'Eric : injoignable (Server Home Assistant unavailable, testé 3x). Même joignable, ce connecteur n'expose dans cette session que des outils de lecture (ha_get_state, ha_search, ha_eval_template, ha_get_history...) + quelques write ciblés (apps, backup, énergie, thèmes, updates, radios) — pas de ha_call_service ni ha_config_set_yaml ni ha_set_entity disponibles : ne résoudrait probablement pas le blocage du push même une fois en ligne.
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>Script bash perso (comparaison local/prod) : awk avait fusionné 2 fichiers différents (PAGE_HOME.md et VIGNETTE_WIFI_PRESENCE.md) en une fausse divergence "HOME" avec tailles inversées -&gt; vérifié manuellement, aucune vraie divergence, corrigé dans le rapport donné à Eric
+automations.yaml (_old_avant_staging) signalé à 0 octet en prod lors du premier scan -&gt; en réalité 95166 octets (identique au local), probablement un comportement de chargement paresseux du partage Samba (taille réelle affichée seulement après accès direct au fichier) -&gt; pas une vraie corruption, signalé comme tel
+</pre>
+<h4>TACHES BACKLOG (TODO.txt)</h4>
+<pre>Décider quoi faire de la désynchro structurelle plus large (renommages, dossier energie/ dupliqué) — investigation faite, action de résolution pas encore décidée par Eric
+Confirmer que binary_sensor.congelateur_compresseur_actif bascule on/off correctement en prod avant de créer les 3 automations (toujours en attente du push)
+Tester en conditions réelles (porte ouverte, prise débranchée) avant de faire confiance aux seuils (0.15A / -15°C 5min / 1h / 2h)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Eric doit connecter H:\ racine (pas seulement H:\Docs) via le picker de dossier de l'app desktop pour permettre le push réel de P2_congelateur_compresseur_actif.yaml vers H:\templates\P2_prise\P2_congelateur_alarme\
+Une fois poussé : recharger les templates HA, vérifier le binary_sensor en prod, puis créer les 3 automations via l'UI HA
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

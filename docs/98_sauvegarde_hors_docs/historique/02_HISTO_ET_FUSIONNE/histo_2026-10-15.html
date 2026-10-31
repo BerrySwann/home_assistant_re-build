@@ -1,0 +1,53 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-15</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-15</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-15_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-15</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 2 h 45 (de <strong>19h23</strong> a <strong>22h10</strong>, deduit des heures du journal des modifs)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+<li>🔵 <strong>Source</strong> : <code>historique/modifs/MODIFS_2026-10-15_claude.md</code> (aucun /histo n'avait ete lance aujourd'hui avant celui-ci ; lance par /histo-final avec chronometrage)</li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>docs/01_docs_config_system/config_system_YAML/templates/meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml</code> - repli <code>binary_sensor.meteoalarm</code> retire (267 -&gt; 182 lignes, MD5 <code>d847fad5</code> -&gt; <code>458d7e03</code>), attribut saisonnier absent = <code>Vert</code> (Canicule l'hiver, Grand-froid et Avalanches l'ete) ; pousse dans <code>H:\templates</code>, templates recharges par Eric, repairs Spook <strong>15 -&gt; 5</strong>, les 10 capteurs restent a <code>Vert</code> <strong>[v]</strong></li>
+<li>🟢 <code>docs/02_docs_dashboard/dashboard_docs_YAML/L0C0_PAGE_Home/</code> - carte <code>custom:meteoalarm-card</code> (<code>sensor.06_weather_alert</code>, <code>hide_when_no_warning</code>) ajoutee en carte 9 de <code>Page_Home.yaml</code>, dossier <code>10_Carte Meteoalarm</code> cree (YAML + fiche MD), carte Presence passee de 10 a 11 (YAML et MD), <code>PAGE_HOME.md</code> renumerote par position sur la page, <code>PAGE_ECLAIRAGE_DROITE.md</code> et <code>MOC_DASHBOARD</code> (2 fichiers) corriges, <code>GLOBAL_INDEX_VIGNETTES_PAGES.md</code> regenere (liens 143, casses 0) - local seulement <strong>[v]</strong></li>
+<li>🟢 Icone du titre Hygiene : <code>mdi:bubbles</code> (inconnue de Spook) -&gt; <code>mdi:washing-machine</code> dans <code>page_L2C1_energie_temps_reel.yaml</code> et <code>PAGE_ENERGIE_TEMPS_REEL.md</code> (local), puis dans le dashboard <code>dashboard-tablette</code> en prod (go d'Eric, hash <code>27086dbc</code> -&gt; <code>b15faa66</code>, relu dans <code>H:\.storage</code>) <strong>[v]</strong></li>
+<li>🟢 Dashboard <code>dashboard-tablette</code> (prod) : 6 liens <code>/dashboard-tablette/home</code> repointes vers <code>/dashboard-tablette/0</code> (route Home du template <code>nav_bar</code> + cartes 0 des vues 1, 14, 15, 24, 25), hash <code>b15faa66</code> -&gt; <code>52b872df</code>, 0 lien <code>/home</code> restant, repair Spook disparue (constat d'Eric 22h01) <strong>[v]</strong></li>
+<li>🟢 Skills <code>histo</code> et <code>histo-final</code> (copies <code>docs/05_docs_skills/</code>) - limite de 30 fichiers du menage retiree (le go reste exige a la premiere execution du menage sur un dossier), note historique en fin de <code>histo</code> ; <code>historique/menage_dry_run_2026-10-15.txt</code> (dry run de 19h23, 31 fichiers, rien execute) <strong>[v]</strong> (local ; cartes de compte non mises a jour)</li>
+<li>🟢 <code>DEPENDANCES_GLOBALES.md</code> et <code>GLOBAL_INDEX_REPO.md</code> - <code>binary_sensor.meteoalarm</code> retire (arbre meteo ; pop-up #alert 14 -&gt; 13, entites natives 16 -&gt; 15), lignes de date ajoutees, pousses en prod <strong>[v]</strong></li>
+<li>🟢 <code>TODO/TODO.md</code> - sections A FAIRE 2026-10-15 (R35 a R49, cases <code>[ ]</code>) et FAIT 2026-10-15 (4 items <code>[x]</code>) <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 <strong>R35</strong> : <code>IA_INTEGRATIONS_CARTES</code>, <code>PAGE_METEO</code> et l'export du dashboard citent encore le repli supprime (mise a jour proposee a Eric, sans reponse) <strong>[EN COURS]</strong></li>
+<li>🟠 <strong>R36</strong> : docs de Home (L0C0) et de l'energie temps reel modifiees en local, non poussees sur <code>H:\docs</code> <strong>[a deployer]</strong></li>
+<li>🟠 <strong>R42</strong> : regle d'Eric (dry run de plus de 20 suppressions : 19 ou 20 a la fois, sans go) pas encore ecrite dans <code>histo</code> ni <code>histo-final</code> ; cartes de compte <code>histo</code> et <code>histo-final</code> a proposer (<code>propose_skills</code>) <strong>[EN COURS]</strong></li>
+<li>🟠 <strong>R48</strong> : 5 YAML de pages et 3 MD citent encore <code>/dashboard-tablette/home</code> (decision d'Eric, il pense que ce n'est pas necessaire) <strong>[a decider]</strong></li>
+<li>🔵 Constats non analyses : notes de version Meteoalarm Card 2.9.0, mise a jour MeteoFrance weather card (2025.05.01 / 2.0.2), erreur HACS 404 sur <code>BerrySwann/hass-tarif-edf</code>, erreur de template sur <code>sensor.maison_lightning_counter</code> (R40)</li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 Script de renumerotation L0C0 : ancre trouvee 2 fois (lignes 69 et 493) -&gt; rien ecrit, ancre precisee, relance <strong>[resolu]</strong></li>
+<li>🔴 Suggestion <code>mdi:shower</code> faite en supposant des appareils de salle de bain -&gt; YAML lu (lave-linge, lave-vaisselle, fer a repasser) -&gt; <code>mdi:washing-machine</code> <strong>[resolu]</strong></li>
+<li>🔴 Liens Home : option <code>path: home</code> sur la vue 0 proposee d'abord ; 23 liens <code>/dashboard-tablette/0</code> existaient deja -&gt; repointage des 6 liens <code>/home</code> vers <code>/0</code> <strong>[resolu]</strong></li>
+<li>🔴 <code>TODO.md</code> : heure <code>21h55</code> ecrite par erreur dans le bloc R35-R44 -&gt; corrigee en <code>21h46</code> <strong>[resolu]</strong></li>
+<li>🔴 <code>ha_config_get_dashboard</code> avec <code>mode="search"</code> : parametre refuse (constate le 15/10) -&gt; <code>query</code> / <code>entity_id</code> avec <code>url_path</code> <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.md)</h4>
+<ul>
+<li>📌 R35 a R49 (14 ouverts ce soir, plus 32 anciens R1 a R34 au maximum, non reverifies depuis le 11/10 ; R49 = tri en lecture seule des R1 a R34, demande par Eric pour demain)</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Demain : tri en lecture seule des R1 a R34 (R49), puis decisions d'Eric sur R35 (docs a mettre a jour), R36 (push des docs) et R48 (liens Home dans les docs)</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

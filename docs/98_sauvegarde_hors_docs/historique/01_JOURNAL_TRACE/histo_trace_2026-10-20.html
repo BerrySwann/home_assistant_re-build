@@ -1,0 +1,35 @@
+<!doctype html><html lang=fr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Journal de trace 2026-10-20</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.5}
+h2{margin:0 0 4px}h3{margin:28px 0 4px}p{color:#93a3ab;margin:4px 0}a{color:#4fb8c9}table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}
+th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left;vertical-align:top}th{color:#93a3ab;font-weight:500;font-size:.8rem}
+.b{background:#4fb8c9;height:6px;border-radius:3px;min-width:1px;margin-top:3px}.t{margin-top:10px;font-size:17px;font-weight:bold;color:#e4eaed}
+.st{font-weight:600;font-size:.8rem}.ok{color:#5fc07f}.warn{color:#e0a23a}.crit{color:#ef6f5b}.nt{color:#93a3ab;font-size:.85rem}.de{color:#93a3ab;font-size:.85rem}
+td:nth-child(3),td:nth-child(4){white-space:nowrap}</style></head><body><h2>Journal de trace du 2026-10-20</h2><p><a href=index.html>Retour a la liste</a></p><h3>Sequence 1 - histo</h3><p>Debut 19:23:06 - fin 19:29:38</p><table><tr><th>Tache</th><th>Nom</th><th>Debut</th><th>Duree de la tache</th><th>Resultat</th></tr>
+<tr><td>1</td><td>journal</td><td>19:23:06</td><td>59 s<div class=b style='width:44%'></div></td><td><span class='st ok'>OK</span> histo_2026-10-20_s1.md ecrit, present_files indisponible</td></tr>
+<tr><td>2</td><td>sync_index</td><td>19:24:05</td><td>12 s<div class=b style='width:9%'></div></td><td><span class='st ok'>OK</span> DEPENDANCES et GLOBAL_INDEX_REPO identiques en prod, 4 generateurs casses=0, GLOBAL_INDEX_IA regenere</td></tr>
+<tr><td>3</td><td>fusionne</td><td>19:24:17</td><td>2 min 14 s<div class=b style='width:100%'></div></td><td><span class='st ok'>OK</span> JOURNAL_FUSIONNE_2026-07-15_2026-10-20.md 3774 lignes, sessions 19/10 S2 et 20/10 S1 ajoutees</td></tr>
+<tr><td>4</td><td>obsidian</td><td>19:26:31</td><td>9 s<div class=b style='width:7%'></div></td><td><span class='st warn'>ATTENTION</span> 2 copies identiques ; histo_2026-10-17_s1.md deja present dans Obsidian mais DIFFERENT (non ecrase)</td></tr>
+<tr><td>5</td><td>menage</td><td>19:26:41</td><td>44 s<div class=b style='width:32%'></div></td><td><span class='st ok'>OK</span> renommes=8 corbeille=8 erreurs=0 ; 10 noms douteux non touches</td></tr>
+<tr><td>6</td><td>export_5B</td><td>19:27:25</td><td>23 s<div class=b style='width:17%'></div></td><td><span class='st ok'>OK</span> deja a jour : racine H: Dashboard_2026_10_16 = local = prod, un seul export en prod</td></tr>
+<tr><td>7</td><td>tree</td><td>19:27:48</td><td>1 min 25 s<div class=b style='width:63%'></div></td><td><span class='st ok'>OK</span> IA_ARBO_DETAIL maj (docs 945, prod 499, GitHub 2a4ead32 990 dans docs/), local = prod C4632BB1</td></tr>
+<tr><td>8</td><td>controles_6B</td><td>19:29:12</td><td>15 s<div class=b style='width:10%'></div></td><td><span class='st warn'>ATTENTION</span> dossiers=11 baks=25 ecarts=1 casses=1 (chemin mort config_system_YAML cite dans IA_ARBO_DETAIL, texte narratif de purge)</td></tr>
+<tr><td>9</td><td>controles_6C</td><td>19:29:27</td><td>4 s<div class=b style='width:2%'></div></td><td><span class='st warn'>ATTENTION</span> index=7 liens=821 casses=0 ecarts=3 (REPO 3 entites absentes ; SCRIPTS_SH et IA prod DIFFERENT, pas de push sans ordre)</td></tr>
+<tr><td>10</td><td>controles_6D</td><td>19:29:31</td><td>7 s<div class=b style='width:4%'></div></td><td><span class='st warn'>ATTENTION</span> 97 suivis, 95 SYNC, 2 en attente du backup GitHub, 0 prod differente</td></tr>
+<tr><td>11</td><td>rapport</td><td>19:29:37</td><td>0 s<div class=b style='width:0%'></div></td><td><span class='st ok'>OK</span> rapport final envoye</td></tr>
+</table><p class=t>Duree totale : 6 min 32 s</p>
+<h3>Sequence 2 - histo-final</h3><p>Debut 21:28:17 - fin 21:35:11</p><table><tr><th>Tache</th><th>Nom</th><th>Debut</th><th>Duree de la tache</th><th>Resultat</th></tr>
+<tr><td>1</td><td>journal</td><td>21:28:17</td><td>46 s<div class=b style='width:32%'></div></td><td><span class='st ok'>OK</span> histo_2026-10-20_s2.md</td></tr>
+<tr><td>2</td><td>sync_index</td><td>21:29:02</td><td>12 s<div class=b style='width:8%'></div></td><td><span class='st ok'>OK</span> index regeneres: automations/vignettes/scripts inchanges, IA ecrit, casses=0</td></tr>
+<tr><td>3</td><td>fusionne</td><td>21:29:14</td><td>52 s<div class=b style='width:37%'></div></td><td><span class='st ok'>OK</span> S2 ajoutee, 3820 lignes, bak 21h29m37s</td></tr>
+<tr><td>4</td><td>obsidian</td><td>21:30:07</td><td>0 s<div class=b style='width:0%'></div></td><td><span class='st ok'>OK</span> </td></tr>
+<tr><td>5</td><td>menage</td><td>21:30:07</td><td>1 min 04 s<div class=b style='width:46%'></div></td><td><span class='st ok'>OK</span> 0 renommage, 0 corbeille, 1 signalement (bak2 du jour)</td></tr>
+<tr><td>6</td><td>export_5B</td><td>21:31:11</td><td>7 s<div class=b style='width:5%'></div></td><td><span class='st ok'>OK</span> Dashboard deja a jour (2026_10_16, MD5 identiques)</td></tr>
+<tr><td>7</td><td>tree</td><td>21:31:18</td><td>2 min 19 s<div class=b style='width:100%'></div></td><td><span class='st ok'>OK</span> IA_ARBO_DETAIL a jour, local=prod, commit a782d073</td></tr>
+<tr><td>8</td><td>controles_6B</td><td>21:33:37</td><td>5 s<div class=b style='width:3%'></div></td><td><span class='st ok'>OK</span> </td></tr>
+<tr><td>9</td><td>controles_6C</td><td>21:33:43</td><td>0 s<div class=b style='width:0%'></div></td><td><span class='st ok'>OK</span> </td></tr>
+<tr><td>10</td><td>controles_6D</td><td>21:33:43</td><td>16 s<div class=b style='width:11%'></div></td><td><span class='st ok'>OK</span> </td></tr>
+<tr><td>11</td><td>rapport</td><td>21:34:00</td><td>17 s<div class=b style='width:11%'></div></td><td><span class='st ok'>OK</span> rapport envoye avant extinction</td></tr>
+<tr><td>12</td><td>notification</td><td>21:34:16</td><td>23 s<div class=b style='width:16%'></div></td><td><span class='st ok'>OK</span> HA notify.mobile_app_eric envoyee</td></tr>
+<tr><td>13</td><td>lumieres</td><td>21:34:40</td><td>31 s<div class=b style='width:22%'></div></td><td><span class='st ok'>OK</span> Hue Sync coupe par API pont, 3 Hue Play off confirme</td></tr>
+<tr><td>14</td><td>arret_pc</td><td>-</td><td>-</td><td><span class='st ok'>OK</span> arret programme</td></tr>
+</table><p class=t>Duree totale : 6 min 55 s</p>
+<p style='font-size:12px'>Duree d'une tache = debut de la tache suivante moins son debut (pour la derniere, fin de sequence). Resultat = ligne FIN du journal. Source : histo_trace_2026-10-20.log</p></body></html>

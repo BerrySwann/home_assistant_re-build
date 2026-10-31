@@ -1,0 +1,47 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-09</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-09</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-09_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-09</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 1 h (22h00 -&gt; 23h03)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>Claude md save/CLAUDE.md</code> + <code>docs/00_IA/IA_CONTEXT_BASE.md</code> + <code>H:\docs\00_IA\</code> + <code>D:\docs\00_IA\</code> - regle de sauvegarde refondue : UNE seule regle pour tous les fichiers (nom de travail sans date, versions <code>.bak_AAAA_MM_JJ_HHhMMmSSs</code> 10 max puis consolidation <code>.bak_AAAA_MM_JJ</code> 3 max). Ancien tableau <code>RÈGLE DASHBOARD YAML - VERSIONING</code> supprime, remplace par <code>VERSIONING FICHIERS - REGLE UNIQUE</code>. Bloc <code>REGLE DE MODIFICATION ET RETOUR ARRIERE</code> ajoute (modif en local, push apres validation, repush de la version precedente en cas de coquille). Bloc TODO corrige (<code>TODO.txt</code> -&gt; <code>TODO.md</code> sur les 3 dernieres lignes). 4 copies identiques, MD5 <code>9ae86e83b2d6f8a76b39724a14708476</code> <strong>[v]</strong></li>
+<li>🟢 Skills Hermes <code>D:\hermes\skills</code> - les 10 skills du projet importees depuis <code>Documents\ReBuild\.claude\skills\</code> : 8 creees (<code>fix-file</code>, <code>ha-new-yaml</code>, <code>ha-push-docs</code>, <code>ha-push-md</code>, <code>ha-resync-docs</code>, <code>ha-status</code>, <code>ha-trigul</code>, <code>sync-index</code>) et 2 alignees (<code>ha-push-yaml</code>, <code>histo</code>), corps identique aux originaux Claude, <code>.bak</code> des anciennes versions Hermes conservees <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 <code>Claude md save/CLAUDE.md</code> - audit de coquilles fait (13 points), AUCUNE correction appliquee. Contradictions internes a trancher : section <code>RÈGLE DES FICHIERS DATÉS</code> (lignes 593-600) et tableau dashboard (ligne 258) qui datent les noms de fichiers alors que la regle unique l'interdit <strong>[a decider]</strong></li>
+<li>🟠 skill <code>histo</code> (Claude + Hermes) - etape 5 encore sur les 4 familles (dont la famille D des dashboards dates), a aligner sur la regle unique <strong>[a decider]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 <code>CLAUDE.md</code> : bloc TODO incoherent (titre <code>TODO.md</code>, 3 lignes encore <code>TODO.txt</code>) -&gt; les 3 lignes passees a <code>TODO.md</code> <strong>[resolu]</strong></li>
+<li>🔴 <code>CLAUDE.md</code> : double antislash introduit par un patch (<code>H:\\</code> au lieu de <code>H:\</code>) -&gt; corrige et verifie par relecture <strong>[resolu]</strong></li>
+</ul>
+<h4>🔵 Constats</h4>
+<ul>
+<li>🔵 Une session Claude anterieure (21h05 -&gt; 21h58) n'a pas ete journalisee : aucun <code>histo_2026-10-09_*</code> n'existait avant celle-ci. Fichiers touches d'apres les horodatages : <code>Infra_Proxmox/proxmox_infra.md</code> (19h17), <code>docs/02_docs_dashboard/dashboard_docs_YAML/L4C2_11_Proxmox/</code> (21h05), <code>docs/02_docs_dashboard/dashboard_docs_MD/</code> (21h08), <code>Github/INDEX_GLOBAL.md</code> (21h09), <code>page_L4C2_proxmox_2026-10-09_21h51m50s.yaml</code> (21h41), <code>CLAUDE.md</code> + <code>IA_CONTEXT_BASE.md</code> (21h54). Contenu non journalise.</li>
+<li>🔵 <code>Claude md save/CLAUDE.md</code> et <code>docs/00_IA/IA_CONTEXT_BASE.md</code> sont identiques au caractere pres (meme MD5), et la localisation annoncee en tete du document (<code>ReBuild/CLAUDE.md</code>) n'existe pas : le fichier est dans <code>Claude md save/</code>.</li>
+<li>🔵 Historique trompeur des sauvegardes : <code>CLAUDE.md.bak_2026_10_08_12h07m34s</code> contient en realite l'etat du <strong>2026-10-04</strong>, alors que <code>CLAUDE.md.bak_2026_10_08_12h27m14s</code> contient celui du <strong>2026-10-08 12h07</strong>.</li>
+</ul>
+<h4>📋 Taches backlog (TODO.md)</h4>
+<ul>
+<li>📌 <code>TODO/TODO.md</code> non modifie pendant la session. Les 13 points d'audit de <code>CLAUDE.md</code> restent a traiter (dont 6 references mortes : <code>ReBuild/CLAUDE.md</code>, dossier <code>IA/</code>, <code>docs_scripts_MD</code>, script <code>audit_md5.sh</code>, skill <code>ha-resync-tree</code>, <code>secrets.yaml</code> a la racine).</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Trancher les corrections de l'audit <code>CLAUDE.md</code> (garder ou supprimer la section <code>RÈGLE DES FICHIERS DATÉS</code> lignes 593-600, corriger le tableau ligne 258, les 6 references mortes), puis aligner l'etape 5 du skill <code>histo</code> sur la regle unique. Rien n'est corrige tant qu'Eric n'a pas choisi.</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

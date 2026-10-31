@@ -1,0 +1,63 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-07-14</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-07-14</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s6">Session S6</a></nav>
+<section id="s6"><h2>Session S6</h2><p class="src">Source : histo_2026-07-14_S6.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-07-14 (S6)</h3>
+<pre>
+SESSION : ~2h | Travail local uniquement — aucune modification YAML prod
+BRANCHE ACTIVE : LOCAL ReBuild/ (organisation + documentation)
+</pre>
+<h4>FICHIERS VALIDÉS</h4>
+<pre>(aucun fichier YAML TREE_CORRIGE modifié cette session)
+</pre>
+<h4>TRAVAUX RÉALISÉS</h4>
+<pre>
+[1] ENTITES_INDEX.md — déplacé vers DOCS/05_docs_MD_system/ + chemins mis à jour
+    · docs/L*C*_*/ → DOCS/02_docs_dashboard/dashboard_docs_MD/L*C*_*/
+    · Dashboard/L*C*_*/ → DOCS/02_docs_dashboard/dashboard_docs_YAML/L*C*_*/
+    · Date header : 2026-05-29 → 2026-07-14
+
+[2] Doublons supprimés (fait par l'utilisateur) :
+    · DOCS/00_IA/sous_md/IA_CONTEXT_BASE.md ✓
+    · DOCS/02_docs_dashboard/dashboard_docs_MD/IA/IA_CONTEXT_BASE.md ✓
+
+[3] Orphelin/ — audit + mise à jour complète orphelin.md :
+    · Section A : switch.schedule_* → ✅ RÉSOLU via scheduler-component HACS
+    · Section D/E : Freebox + SpeedTest → ⛔ supprimés de HA définitivement
+    · Section G : ne2213_mamour → 🟡 PARTIEL (5/7 actifs, battery_health + battery_temp non dispo Mobile App)
+    · Section H NOUVEAU : SDB &amp; ECO non prio (remote.soufflant_sdb_rm4_mini, B1_01 absent, eco_prises_config)
+    → Orphelin/ supprimé par l'utilisateur — tous items actifs migrés dans TODO.txt
+
+[4] Dossiers racine fusionnés :
+    · Infra/ + Promox/ → Infra_Proxmox/ (9 fichiers) — anciens dossiers supprimés
+
+[5] TODO.txt mis à jour :
+    · P1-SCHED → [X] résolu (scheduler-component HACS)
+    · W-2 → [-] fermé (ne2213_mamour battery_health/temp non dispo — accepté)
+    · Ajout SDB-1 / SDB-2 / ECO-1 (non prio)
+    · Ajout F-2 (HTML save ha.erodi-ha.com)
+    · Ajout F-3 (trier Github/)
+    · Ajout F-4 (trier Analyse énergétique/)
+</pre>
+<h4>EN COURS</h4>
+<pre>ReBuild/Github/ — à trier (F-3) → demain
+ReBuild/Analyse énergétique/ — à trier (F-4) → demain
+ReBuild/HTML/ — à sauvegarder + vérifier GitHub (F-2) → demain
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>(aucune — session propre)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>1. Trier Github/ (F-3) : INDEX_AUTOMATIONS.md + INDEX_NAVIGATION.md + README.md
+2. Trier Analyse énergétique/ (F-4)
+3. Sauvegarder ha_dashboard_vence_v2.html (F-2)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

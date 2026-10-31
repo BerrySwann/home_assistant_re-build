@@ -1,0 +1,66 @@
+# card_vscode_home_2026-06-13.yaml
+# Carte Studio Code Server — HOME page (conditional)
+# Visible si : sensor.studio_code_server_pourcentage_du_processeur > 1
+# Tap : hassio.addon_restart (a0d7b954_vscode) avec confirmation
+# Couleur fond : rouge si CPU > 20%, bleu sinon. Animation blink si > 20%.
+
+type: conditional
+conditions:
+  - condition: numeric_state
+    entity: sensor.studio_code_server_pourcentage_du_processeur
+    above: 1
+card:
+  type: custom:button-card
+  entity: sensor.studio_code_server_pourcentage_du_processeur
+  name: Visual Server Code
+  icon: mdi:microsoft-visual-studio-code
+  show_state: true
+  show_label: false
+  state_display: |
+    [[[
+      return parseFloat(entity.state).toFixed(2) + ' %';
+    ]]]
+  layout: icon_name_state
+  tap_action:
+    action: call-service
+    confirmation:
+      text: |-
+        ⚠️ VS Code semble bloqué ?
+        Voulez-vous forcer le redémarrage de l'Add-on ?
+    service: hassio.addon_restart
+    service_data:
+      addon: a0d7b954_vscode
+  styles:
+    card:
+      - border-radius: 12px
+      - height: 50px
+      - padding: 0px 15px
+      - border: none
+      - box-shadow: none
+      - background-color: |
+          [[[
+            return (parseFloat(entity.state) > 20) ? '#f44336' : '#03a9f4';
+          ]]]
+      - animation: |
+          [[[
+            return (parseFloat(entity.state) > 20) ? 'blink 1s ease infinite' : 'none';
+          ]]]
+    grid:
+      - grid-template-columns: 35px auto 60px
+    icon:
+      - width: 24px
+      - color: white
+    name:
+      - color: white
+      - font-weight: bold
+      - font-size: 14px
+      - justify-self: start
+    state:
+      - color: white
+      - font-weight: bold
+      - font-size: 14px
+      - justify-self: end
+  extra_styles: |
+    @keyframes blink {
+      50% { opacity: 0.5; }
+    }

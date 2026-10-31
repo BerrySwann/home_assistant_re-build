@@ -1,0 +1,28 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de trace 2026-10-24</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.5}
+h2{margin:0 0 4px}h3{margin:28px 0 4px}p{color:#93a3ab;margin:4px 0}a{color:#4fb8c9}table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}
+th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left;vertical-align:top}th{color:#93a3ab;font-weight:500;font-size:.8rem}
+.b{background:#4fb8c9;height:6px;border-radius:3px;min-width:1px;margin-top:3px}.t{margin-top:10px;font-size:17px;font-weight:bold;color:#e4eaed}
+.st{font-weight:600;font-size:.8rem}.ok{color:#5fc07f}.warn{color:#e0a23a}.crit{color:#ef6f5b}.nt{color:#93a3ab;font-size:.85rem}.de{color:#93a3ab;font-size:.85rem}
+td:nth-child(3),td:nth-child(4){white-space:nowrap}</style></head><body>
+<h2>Journal de trace du 2026-10-24</h2><p><a href="index.html">Retour a la liste</a></p>
+<h3>Sequence 1 - histo-final</h3><p>Debut 23:05:04 - fin 23:11:57</p><table><tr><th>Tache</th><th>Nom</th><th>Debut</th><th>Duree de la tache</th><th>Resultat</th></tr>
+<tr><td>1</td><td>automation_off</td><td>23:05:04</td><td>9 s<div class="b" style="width:9%"></div></td><td><span class="st ok">OK</span> automation off confirmee</td></tr>
+<tr><td>2</td><td>journal</td><td>23:05:12</td><td>31 s<div class="b" style="width:33%"></div></td><td><span class="st ok">OK</span> histo_2026-10-24_s1.md</td></tr>
+<tr><td>3</td><td>sync_index</td><td>23:05:43</td><td>10 s<div class="b" style="width:10%"></div></td><td><span class="st warn">ATTENTION</span> GLOBAL_INDEX_IA.md regenere (local seul, non pousse) ; 7 automations sans fiche, 9 scripts SH sans fiche : ecarts deja connus</td></tr>
+<tr><td>4</td><td>fusionne</td><td>23:05:53</td><td>30 s<div class="b" style="width:33%"></div></td><td><span class="st ok">OK</span> JOURNAL_FUSIONNE_2026-07-15_2026-10-24.md 4053 lignes</td></tr>
+<tr><td>5</td><td>obsidian</td><td>23:06:23</td><td>1 s<div class="b" style="width:0%"></div></td><td><span class="st ok">OK</span> </td></tr>
+<tr><td>6</td><td>pages_html</td><td>23:06:24</td><td>54 s<div class="b" style="width:59%"></div></td><td><span class="st ok">OK</span> page jour 1 section, fusionne cree, 2 originaux a la corbeille</td></tr>
+<tr><td>7</td><td>menage</td><td>23:07:18</td><td>1 min 11 s<div class="b" style="width:78%"></div></td><td><span class="st ok">OK</span> renommes=31 corbeille=23 erreurs=0 ; 3 signales</td></tr>
+<tr><td>8</td><td>export_5B</td><td>23:08:29</td><td>9 s<div class="b" style="width:9%"></div></td><td><span class="st ok">OK</span> Dashboard deja a jour (H: racine Dashboard_2026_10_16 = local = prod, 94885729)</td></tr>
+<tr><td>9</td><td>tree</td><td>23:08:38</td><td>1 min 31 s<div class="b" style="width:100%"></div></td><td><span class="st ok">OK</span> IA_ARBO_DETAIL mis a jour (22 lignes), bak 23h10m02s</td></tr>
+<tr><td>10</td><td>controles_6B</td><td>23:10:09</td><td>7 s<div class="b" style="width:7%"></div></td><td><span class="st warn">ATTENTION</span> ecarts=3 casses=1 (chemin config_system_YAML cite dans IA_ARBO_DETAIL, 62 vs 63 automations x2) ; deja connus ou notes</td></tr>
+<tr><td>11</td><td>controles_6C</td><td>23:10:16</td><td>0 s<div class="b" style="width:0%"></div></td><td><span class="st ok">OK</span> </td></tr>
+<tr><td>12</td><td>controles_6D</td><td>23:10:16</td><td>2 s<div class="b" style="width:2%"></div></td><td><span class="st ok">OK</span> </td></tr>
+<tr><td>13</td><td>controles_6E</td><td>23:10:18</td><td>25 s<div class="b" style="width:27%"></div></td><td><span class="st ok">OK</span> </td></tr>
+<tr><td>14</td><td>verifications</td><td>23:10:43</td><td>43 s<div class="b" style="width:46%"></div></td><td><span class="st ok">OK</span> </td></tr>
+<tr><td>15</td><td>notification<div class="de">notify.mobile_app_eric envoyee, heure annoncee 23:19</div></td><td>23:11:26</td><td>10 s<div class="b" style="width:11%"></div></td><td><span class="st ok">OK</span> HA notify.mobile_app_eric envoyee 23:11:26</td></tr>
+<tr><td>16</td><td>lumieres</td><td>23:11:36</td><td>21 s<div class="b" style="width:22%"></div></td><td><span class="st ok">OK</span> Hue Sync coupe par API pont (stream active false), 3 Hue Play off confirme, prise switch.ecran_p_c_3_play_hue restee on</td></tr>
+<tr><td>17</td><td>automation_on</td><td>23:11:57</td><td>0 s<div class="b" style="width:0%"></div></td><td><span class="st ok">OK</span> automation.bureau_forcer_play_on_si_pc_tourne remise on, etat relu on</td></tr>
+<tr><td>18</td><td>arret_pc</td><td>23:11:57</td><td>0 s<div class="b" style="width:0%"></div></td><td><span class="st ok">OK</span> arret programme dans 300 s</td></tr>
+</table><p class="t">Duree totale : 6 min 53 s</p>
+<p style="font-size:12px">Duree d'une tache = debut de la tache suivante moins son debut (pour la derniere, fin de sequence). Resultat = ligne FIN du journal. Source : histo_trace_2026-10-24.log</p></body></html>

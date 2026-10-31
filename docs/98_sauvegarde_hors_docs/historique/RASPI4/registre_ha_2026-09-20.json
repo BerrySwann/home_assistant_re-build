@@ -1,0 +1,651 @@
+[
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": {
+   "state_class": "measurement"
+  },
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-05-02T15:59:15.313009+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.temperature_carte_mere",
+  "hidden_by": null,
+  "icon": null,
+  "id": "7d8db31a2f19124aefde43341512996d",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-05T18:25:21.464111+00:00",
+  "name": null,
+  "object_id_base": "Température Carte Mère (sys)",
+  "options": {
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "sensor": {
+    "suggested_display_precision": 1
+   },
+   "conversation": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": "temperature",
+  "original_icon": "mdi:chip",
+  "original_name": "Température Carte Mère (sys)",
+  "platform": "template",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "temperature_carte_mere_sys",
+  "previous_unique_id": null,
+  "unit_of_measurement": "°C"
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {
+   "automation": "01KND0AZ5915MZEMXRHTQG1X1Q"
+  },
+  "capabilities": {
+   "id": "1779618286845"
+  },
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-05-24T10:25:13.941937+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "automation.p3_sdb_bouton_hue_toggle_relais_lumiere",
+  "hidden_by": null,
+  "icon": null,
+  "id": "ee873903276ef9b5a5b068fa297b0d54",
+  "has_entity_name": false,
+  "labels": [
+   "eclairage_s"
+  ],
+  "modified_at": "2026-05-24T11:41:56.161614+00:00",
+  "name": null,
+  "object_id_base": "P3_Salle De Bain - Synchro Hue Lamp ↔ Relais Sonoff",
+  "options": {
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": null,
+  "original_icon": null,
+  "original_name": "P3_Salle De Bain - Synchro Hue Lamp ↔ Relais Sonoff",
+  "platform": "automation",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "1779618286845",
+  "previous_unique_id": null,
+  "unit_of_measurement": null
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": null,
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-03-28T07:12:17.927558+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.temperature_carte_mere_2",
+  "hidden_by": null,
+  "icon": null,
+  "id": "087251f5cb148e98a7cf14e2183f46d1",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-30T15:16:32.906130+00:00",
+  "name": null,
+  "object_id_base": "Température Carte Mère",
+  "options": {
+   "sensor": {
+    "suggested_display_precision": 1
+   },
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "cloud.google_assistant": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": "temperature",
+  "original_icon": null,
+  "original_name": "Température Carte Mère",
+  "platform": "template",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "temperature_carte_mere",
+  "previous_unique_id": null,
+  "unit_of_measurement": "°C"
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": null,
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-02-23T17:43:40.326371+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.temperature_carte_mere_sys",
+  "hidden_by": null,
+  "icon": null,
+  "id": "7881a9c0bef2dd896f37ee9c53dfadd6",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-30T15:16:35.000130+00:00",
+  "name": null,
+  "object_id_base": "Température Carte Mère (sys)",
+  "options": {
+   "conversation": {
+    "should_expose": false
+   },
+   "cloud.alexa": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": null,
+  "original_icon": null,
+  "original_name": "Température Carte Mère (sys)",
+  "platform": "command_line",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "temperature_carte_mere_sys",
+  "previous_unique_id": null,
+  "unit_of_measurement": "°C"
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": null,
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-02-23T17:43:40.333599+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.temperature_cpu_package_sys",
+  "hidden_by": null,
+  "icon": null,
+  "id": "588c56f0951275100afbf2bb2a9c28a4",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-30T15:16:35.005521+00:00",
+  "name": null,
+  "object_id_base": "Température CPU Package (sys)",
+  "options": {
+   "conversation": {
+    "should_expose": false
+   },
+   "cloud.alexa": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": null,
+  "original_icon": "mdi:thermometer",
+  "original_name": "Température CPU Package (sys)",
+  "platform": "command_line",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "temperature_cpu_package_sys",
+  "previous_unique_id": null,
+  "unit_of_measurement": "°C"
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": null,
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-02-23T17:43:40.337262+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.temperature_core_0_sys",
+  "hidden_by": null,
+  "icon": null,
+  "id": "0bca0cb4376e8e1dab70f848af736779",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-30T15:16:35.010233+00:00",
+  "name": null,
+  "object_id_base": "Température Core 0 (sys)",
+  "options": {
+   "conversation": {
+    "should_expose": false
+   },
+   "cloud.alexa": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": null,
+  "original_icon": null,
+  "original_name": "Température Core 0 (sys)",
+  "platform": "command_line",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "temperature_core_0_sys",
+  "previous_unique_id": null,
+  "unit_of_measurement": "°C"
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": null,
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-02-23T17:43:40.341895+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.temperature_core_1_sys",
+  "hidden_by": null,
+  "icon": null,
+  "id": "bc4a8feee81b2529e9cb2b96df1d9aa2",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-30T15:16:35.017713+00:00",
+  "name": null,
+  "object_id_base": "Température Core 1 (sys)",
+  "options": {
+   "conversation": {
+    "should_expose": false
+   },
+   "cloud.alexa": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": null,
+  "original_icon": null,
+  "original_name": "Température Core 1 (sys)",
+  "platform": "command_line",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "temperature_core_1_sys",
+  "previous_unique_id": null,
+  "unit_of_measurement": "°C"
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": null,
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-02-23T17:43:40.348458+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.temperature_core_2_sys",
+  "hidden_by": null,
+  "icon": null,
+  "id": "25cc9f5faa9f194cc0f3c28eee308c1b",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-30T15:16:35.026724+00:00",
+  "name": null,
+  "object_id_base": "Température Core 2 (sys)",
+  "options": {
+   "conversation": {
+    "should_expose": false
+   },
+   "cloud.alexa": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": null,
+  "original_icon": null,
+  "original_name": "Température Core 2 (sys)",
+  "platform": "command_line",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "temperature_core_2_sys",
+  "previous_unique_id": null,
+  "unit_of_measurement": "°C"
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": null,
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-02-23T17:43:40.361129+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.temperature_core_3_sys",
+  "hidden_by": null,
+  "icon": null,
+  "id": "cce00423dc4b1af9a28690aa90f0c70e",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-30T15:16:35.043396+00:00",
+  "name": null,
+  "object_id_base": "Température Core 3 (sys)",
+  "options": {
+   "conversation": {
+    "should_expose": false
+   },
+   "cloud.alexa": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": null,
+  "original_icon": null,
+  "original_name": "Température Core 3 (sys)",
+  "platform": "command_line",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "temperature_core_3_sys",
+  "previous_unique_id": null,
+  "unit_of_measurement": "°C"
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": null,
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-03-28T07:12:17.932137+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.temperature_cpu_package",
+  "hidden_by": null,
+  "icon": null,
+  "id": "699fdfaa2e1be13bcfd3fd6d6c31b266",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-30T19:35:06.801702+00:00",
+  "name": null,
+  "object_id_base": "Température CPU (Package)",
+  "options": {
+   "sensor": {
+    "suggested_display_precision": 1
+   },
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "cloud.google_assistant": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": "temperature",
+  "original_icon": null,
+  "original_name": "Température CPU (Package)",
+  "platform": "template",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "temperature_cpu_package",
+  "previous_unique_id": null,
+  "unit_of_measurement": "°C"
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": null,
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-03-28T07:12:17.933746+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.temperature_core_0",
+  "hidden_by": null,
+  "icon": null,
+  "id": "9a19e4c57a97b2cfbe4ba3275e7fe17d",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-30T19:39:52.163134+00:00",
+  "name": null,
+  "object_id_base": "Température Core 0",
+  "options": {
+   "sensor": {
+    "suggested_display_precision": 1
+   },
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "cloud.google_assistant": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": "temperature",
+  "original_icon": null,
+  "original_name": "Température Core 0",
+  "platform": "template",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "temperature_core_0",
+  "previous_unique_id": null,
+  "unit_of_measurement": "°C"
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": null,
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-03-28T07:12:17.935518+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.temperature_core_1",
+  "hidden_by": null,
+  "icon": null,
+  "id": "a37138a9937404e5e281d55c27c3dda6",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-30T19:40:07.141377+00:00",
+  "name": null,
+  "object_id_base": "Température Core 1",
+  "options": {
+   "sensor": {
+    "suggested_display_precision": 1
+   },
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "cloud.google_assistant": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": "temperature",
+  "original_icon": null,
+  "original_name": "Température Core 1",
+  "platform": "template",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "temperature_core_1",
+  "previous_unique_id": null,
+  "unit_of_measurement": "°C"
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": null,
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-03-28T07:12:17.936949+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.temperature_core_2",
+  "hidden_by": null,
+  "icon": null,
+  "id": "c1dc3db9ceea22bb0b4a1c4fded25717",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-30T19:40:22.794321+00:00",
+  "name": null,
+  "object_id_base": "Température Core 2",
+  "options": {
+   "sensor": {
+    "suggested_display_precision": 1
+   },
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "cloud.google_assistant": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": "temperature",
+  "original_icon": null,
+  "original_name": "Température Core 2",
+  "platform": "template",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "temperature_core_2",
+  "previous_unique_id": null,
+  "unit_of_measurement": "°C"
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": null,
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-03-28T07:12:17.938160+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.temperature_core_3",
+  "hidden_by": null,
+  "icon": null,
+  "id": "ce688766db2768a7120d900024333a24",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-30T19:40:38.459421+00:00",
+  "name": null,
+  "object_id_base": "Température Core 3",
+  "options": {
+   "sensor": {
+    "suggested_display_precision": 1
+   },
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "cloud.google_assistant": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": "temperature",
+  "original_icon": null,
+  "original_name": "Température Core 3",
+  "platform": "template",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "temperature_core_3",
+  "previous_unique_id": null,
+  "unit_of_measurement": "°C"
+ }
+]

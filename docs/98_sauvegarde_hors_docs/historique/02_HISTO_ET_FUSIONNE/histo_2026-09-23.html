@@ -1,0 +1,128 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-09-23</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-09-23</h1><p class="mut">2 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a><a href="#s2">Session S2</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-09-23_s1.txt</p>
+<h3>JOURNAL HA REBUILD - 2026-09-23 (SESSION S1 - soiree eco prises + PC/TV)</h3>
+<pre>
+SESSION : soiree sur le poste Linux (Hermes) - HA live + docs ReBuild
+CONTEXTE : prise tete de lit jamais coupee en absence (eco prises) + coupures aleatoires des prises PC/TV
+BRANCHE ACTIVE : HA ReBuild (automations prod via MCP + docs) - aucun changement de structure
+</pre>
+<h4>ETAPES FRANCHIES CETTE SESSION</h4>
+<pre>1. ECO PRISES : diagnostic par traces -&gt; erreur "Repeat 'for_each' must be a list of items"
+   (5 dernieres executions aborted en ~1,5 ms ; liste `prises` stockee en texte JSON).
+   Correctif : conversion `| from_json` (1 ligne) ; verifie en sandbox puis en live ✓
+2. Spy eco prises cree : sensor.eco_prises_spy = groupe + presents + etat des 7 prises +
+   comptage + ecarts ("KO: x=off (attendu on)"). Historise et visible ✓
+3. PC/TV : causes identifiees (historique 7 j + stats horaires) :
+   - PC : pics de veille 43-44W au-dessus du seuil 40W -&gt; coupure annulee + notifs fantomes
+   - TV : trigger a FRANCHISSEMENT uniquement, jamais rearme -&gt; prise restee ~19 h ON
+     (nuit 20-&gt;21/09), coupee par accident le lendemain (micro-coupure Zigbee)
+4. Refonte des 2 automations : binaires crees (binary_sensor.veille_pc_bureau &lt; 70 W,
+   binary_sensor.veille_tv_chambre &lt; 40 W) + confirmation 12 min sur duree REELLE +
+   filet de rattrapage time_pattern /15 + garde anti-fantome (n'agit que si prise ON).
+   PC : seuil 40-&gt;70 W ; TV : seuil 25-&gt;40 W et switch.prise_tv_chambre_nous ON a l'allumage.
+   Notifs : "Allumage PC/TV" + "Veille detectee", tags notif_pc_bureau / notif_tv_chambre.
+   Correction d'asymetrie (condition en trop) sur la branche Allumage PC ✓
+5. Spy PC/TV cree : sensor.eco_prises_spy_pc_tv = par coin (PC, TV) : etat prise, actif/veille
+   + duree, watts, et "KO" si prise ON alors que veille &gt;= 13 min (coupure ratee) ✓
+6. Docs : fiches ECO_PRISES_DYNAMIQUE / GESTION_PC_BUREAU / GESTION_TV_CHAMBRE mises a jour ;
+   exports YAML dates 2026-09-23 (x3) + les 3 fichiers courants ; DEPENDANCES_GLOBALES,
+   INDEX_GLOBAL, TODO mis a jour ; synchro 243 faite ; fusionne enrichi (+ copie vault)
+7. Contexte energie (meme journee) : conso 2026 +10,1 % vs 2025 a date (entierement l'ete/clim,
+   ~+307 kWh sur juil-sept) ; myElectricalData : dates de debut etendues a 2023-09-23 (3 ans
+   recuperes, quota 102/500) ; talon nuit +14 W (Beryl + mini PC vs RPi, ~25 EUR/an)
+</pre>
+<h4>EN COURS</h4>
+<pre>- Surveiller les 2 spies eco dans quelques jours (coupures PC/TV effectives, pas de "KO")
+- Push docs 243 -&gt; repo : par Berry (ou auto H+10 cote 243)
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>- "Repeat 'for_each' must be a list of items" (eco prises) -&gt; | from_json sur la liste prises
+- Coupures PC annulees par micro-pics -&gt; seuil 70 W (au-dessus des pics) + duree reelle
+- TV non recoupee apres veille (franchissement unique) -&gt; filet de rattrapage 15 min
+</pre>
+<h4>FICHIERS MODIFIES</h4>
+<pre>docs/03_docs_automations/docs_automations_MD/P2_PRISES/ECO_PRISES_DYNAMIQUE.md
+docs/03_docs_automations/docs_automations_MD/P2_PRISES/GESTION_PC_BUREAU.md
+docs/03_docs_automations/docs_automations_MD/P2_PRISES/GESTION_TV_CHAMBRE.md
+docs/03_docs_automations/docs_automations_YAML/P2_prises/gestion_pc_bureau_scene_de_fin_notif_2026-09-23.yaml
+docs/03_docs_automations/docs_automations_YAML/P2_prises/gestion_tv_chambre_scene_de_fin_notif_2026-09-23.yaml
+docs/03_docs_automations/docs_automations_YAML/P2_prises/eco_prises_dynamique_by_presence_groupe_2026-09-23.yaml
+docs/03_docs_automations/docs_automations_YAML/P2_prises/ (les 3 fichiers courants, idem)
+docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md
+Github/INDEX_GLOBAL.md (+ copie 243 racine)
+TODO.txt (+ backup TODO.txt.bak_2026-09-23)
+historique/JOURNAL_FUSIONNE_2026-07-15_2026-09-20.md (+ copie vault)
+historique/histo_2026-09-23_s1.txt (ce fichier)
+HA prod : automations.yaml (3 automations via MCP) + 4 helpers (2 binaires + 2 spies template)</pre>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-09-23_s2.txt</p>
+<h3>JOURNAL HA REBUILD - 2026-09-23 (SESSION S2 - suite : audit md5, token GitHub, ban IP, TriguL)</h3>
+<pre>
+SESSION : suite de la soiree (post-synchro docs) - poste Linux (Hermes)
+CONTEXTE : verifications repo/audit md5 + token GitHub + incident ban IP de la machine locale
+BRANCHE ACTIVE : HA ReBuild (docs/repo, lecture) + HA prod (incident) - seul changement prod
+  de S2 : retrait du ban par Berry (ip_bans.yaml + restart HA)
+</pre>
+<h4>ETAPES FRANCHIES CETTE SESSION</h4>
+<pre>1. Push MANUEL de 21h03 (commit 7892c616 "HAOS MANUEL-backup") : origine NON elucidee
+   (Berry declare ne pas l'avoir declenche ; canal = carte/bouton dashboard) - contenu verifie :
+   les 11 fichiers du soir bien dans le commit (11/11) + "deja a jour" 30 s plus tard ✓
+2. Audit md5 docs (21h06) : 473 SYNC / 1 DIFF (ECO_PRISES_DYNAMIQUE.md) -&gt; le DIFF = artefact
+   de cache CDN raw : la valeur GitHub de l'audit = exactement la version d'avant-push ;
+   a froid, les 3 voies sont identiques. Audit YAML de 21h04 : 87/87 SYNC ✓
+3. Token GitHub : le GITHUB_TOKEN du .env Hermes est REFUSE (401 Bad credentials) ; la cle
+   vive = .secrets/ha_token sur la 243 (compte BerrySwann, droits admin/push, sans expiration ;
+   identique a .secrets/git_credentials = le token du push 243-&gt;repo) ✓
+4. Controle de fuite : secrets.yaml / .secrets / git_credentials / ha_token = 0 commit dans
+   l'historique GitHub (jamais publies) ✓
+5. TriguL n1 (3 voies local/243/GitHub, empreintes git-blob) : 472 SYNC / 504 chemins ;
+   0 divergence de contenu ; lots preexistants : 18 local seul / 8 local+243 hors repo /
+   6 243+repo absents du local ✓
+6. INCIDENT BAN : la machine locale (10.32.154.110 omarchy) bannie par HA a 21h16:38 (trop de
+   tentatives de login). Cause : 3 requetes /api/logbook (boutons git_push) en auth invalide,
+   UA navigateur Chrome/Mac = contexte webview local sans session valide ; ni le code Hermes
+   (python, requetes valides) ni le Brave principal. Diagnostic par le journal HA via MCP
+   (canal non banni) ✓
+7. Berry : retrait du ban (ip_bans.yaml) + redemarrage HA -&gt; verifications post : manifest 200,
+   API 200, 3 automations on, 2 binaires + 2 spies en place, rien perdu au restart ✓
+8. TriguL n2 (final) : identique au n1, 0 changement local/GitHub depuis ; INDEX_GLOBAL.md =
+   meme empreinte sur les 3 voies ; ip_bans.yaml = 243=GitHub (le menage du ban l'a remis
+   d'aplomb) ✓
+</pre>
+<h4>EN COURS</h4>
+<pre>- Rien en cours : ban leve, repo synchrone, HA reparti.
+- Vigilance : si une webview/vieille page HA sans session retente -&gt; re-ban possible
+  (journal : "invalid authentication from omarchy.lan").
+- Optionnel : rapatrier les 6 fichiers absents du local ; surveiller les 2 spies eco.
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>- Audit md5 "1 DIFF" (ECO_PRISES_DYNAMIQUE.md) -&gt; cache CDN raw ~5 min post-push ; froid = SYNC
+- GITHUB_TOKEN .env refuse (401) -&gt; la cle vive est dans .secrets/ha_token (243)
+- Ban IP 10.32.154.110 (3 tentatives invalides d'une webview) -&gt; retrait ip_bans + restart HA
+</pre>
+<h4>FICHIERS MODIFIES</h4>
+<pre>historique/histo_2026-09-23_s2.txt (ce fichier)
+historique/JOURNAL_FUSIONNE_2026-07-15_2026-09-20.md
+  -&gt; session S2 ajoutee + file 23/09 mise a jour + etat actuel 23/09 complete
+Cerveau-Obsidian/14 Boulot/Journal/
+  -&gt; copies vault : fusionne + histo S1 + histo S2
+/tmp/trigul_2026-09-23.txt + /tmp/trigul_2026-09-23_final.txt
+  -&gt; rapports trigul (locaux, non versionnes)
+HA prod (243) : ip_bans.yaml
+  -&gt; retrait du ban 10.32.154.110 (fait par Berry, HA redemarre)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>1. Dans quelques jours : lire les 2 spies eco (coupures PC/TV effectives, pas de "KO")
+2. Optionnel quand il veut : rapatrier les 6 fichiers absents du local (PDF grille EDF + 5 YAML)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

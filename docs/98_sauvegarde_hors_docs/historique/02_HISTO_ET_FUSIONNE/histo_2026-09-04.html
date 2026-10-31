@@ -1,0 +1,54 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-09-04</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-09-04</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-09-04_s1.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-09-04 (SESSION S1)</h3>
+<pre>
+SESSION : ~90 min (session précédente compactée + continuation)
+BRANCHE ACTIVE : docs/
+</pre>
+<h4>FICHIERS VALIDÉS</h4>
+<pre>docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_principale_2026-09-04.yaml
+  — Page Energie HOME complète (dashboard-tablette/energie, views[11], sections[0])
+  — 2259 lignes — toutes sections présentes : Analyse de Précision, heading ENERGIE HOME,
+    Appartement divider, 3 ring-tiles, energy-overview, 3x content-card-linky,
+    tabbed-card JOURNALIER/HEBDOMADAIRE/MENSUEL [✓]
+</pre>
+<h4>DÉPLOYÉ EN HA (dashboard-tablette, views[11].sections[0].cards[0].cards[0])</h4>
+<pre>Carte markdown "Analyse de Précision" — mise à jour 5 colonnes :
+  Jour | Linky | Nodon | Ecart kWh | Ecart %
+  Ecart kWh = (lf - nf)|round(2) ~ ' kWh'
+  Ligne totaux : ns.n j : Linky X kWh | Nodon Y kWh | Ecart Z kWh (P%)
+  Déployé via ha_config_set_dashboard (python_transform) [✓]
+</pre>
+<h4>EN COURS</h4>
+<pre>docs/02_docs_dashboard/dashboard_docs_YAML/L2C1_04_Energie_Generale/page_L2C1_energie_principale_2026-09-04.yaml
+  — Header commentaire (lignes 1-15) encore l'ancien texte (mentionne uniquement
+    "sections[0].cards[0] Card Analyse de Precision") — à corriger pour refléter
+    la page complète
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>page_L2C1_energie_principale_2026-09-04.yaml : fichier initialement créé avec contenu
+  partiel (seule la carte Analyse de Précision) -&gt; résolu par Eric qui a fourni et
+  sauvegardé lui-même le YAML complet (2259 lignes, toutes sections vérifiées)
+</pre>
+<h4>TACHES BACKLOG (TODO.txt)</h4>
+<pre>- DOUBLON-ENERGIE-DOSSIER : décision en attente — supprimer
+    docs/03_docs_automations/docs_automations_YAML/energie/ ?
+- BV-PUSH : 6 fichiers BV renommés à pousser vers H:\ (en attente depuis 2026-08-01)
+- TODO.txt : marquer HISTO-ENERGIE-PUSH comme terminé (sensors histo déployés)
+- Rendu carte 5 colonnes HA : non confirmé visuellement par Eric (à vérifier)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Corriger le header de page_L2C1_energie_principale_2026-09-04.yaml pour refléter
+la page complète (pas uniquement la carte Analyse de Précision)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

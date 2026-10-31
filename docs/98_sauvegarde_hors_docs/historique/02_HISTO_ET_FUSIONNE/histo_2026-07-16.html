@@ -1,0 +1,124 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-07-16</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-07-16</h1><p class="mut">2 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s8">Session S8</a><a href="#s9">Session S9</a></nav>
+<section id="s8"><h2>Session S8</h2><p class="src">Source : histo_2026-07-16_S8.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-07-16</h3>
+<pre>
+SESSION : S8 — durée estimée ~3h
+BRANCHE ACTIVE : DOCS/01_docs_config_system/config_system_YAML/
+</pre>
+<h4>FICHIERS VALIDÉS (YAML — corrections ASCII borders)</h4>
+<pre>input_booleans/P3/P3_BV_01_IB_inter_smorig_salon.yaml   — bordure secondaire 39→37 [✓]
+input_booleans/P3/P3_BV_02_IB_inter_rodret_salon.yaml   — bordure secondaire 39→37 [✓]
+input_number/input_number.yaml                           — bordure principale 70→78 [✓]
+sensors/P1_clim_chauffage/P1_DUT/P1_DUT_clim_chauffage.yaml    — secondaire 39→37 [✓]
+sensors/P1_clim_chauffage/P1_kWh/P1_kWh_clim_chauffage.yaml    — secondaire 39→37 [✓]
+templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml — mixte 71+39 [✓]
+templates/P1_clim_chauffage/P1_01_MASTER/P1_02_automation_message_clim_7h30_21h.yaml — 71→adapté [✓]
+templates/P1_clim_chauffage/P1_01_MASTER/P1_03_automation_message_clim_21h_7h30.yaml — 71→adapté [✓]
+templates/P3_eclairage/ui_dashboard/etats_status.yaml   — secondaire 71→37/adapté [✓]
+templates/P4_groupe_presence/02_logique_wifi_cellular.yaml — secondaire 71→adapté [✓]
+templates/meteo/M_01_meteo_alertes_card.yaml            — secondaire 71→adapté [✓]
+templates/meteo/M_02_meteo_vent_vence_card.yaml         — secondaire 71→adapté [✓]
+templates/meteo/M_03_meteo_blitzortung.yaml             — secondaire 71→adapté [✓]
+utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml         — secondaire 39→37 [✓]
+utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml          — secondaire 39→37 [✓]
+utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml           — secondaire 39→37 [✓]
+utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml      — secondaire 39→37 [✓]
+→ 17 fichiers pushés en prod H:\ — MD5 validés ✓
+→ Règle : standard=37 / élargissement si titre &gt; 31 chars
+</pre>
+<h4>FICHIERS CRÉÉS (docs scripts)</h4>
+<pre>DOCS/04_docs_scripts/docs_scripts_SH_MD/AUDIT_MD5.md    — doc audit_md5.sh [✓] → H:\Docs\ ✓
+DOCS/04_docs_scripts/docs_scripts_SH_MD/HA_GIT_BACKUP.md — doc ha_git_backup.sh [✓] → H:\Docs\ ✓
+</pre>
+<h4>RESTRUCTURATION 04_docs_scripts/</h4>
+<pre>Ancien : docs_scripts_MD/ + docs_scripts_YAML/ (avec .scripts/ imbriqué)
+Nouveau :
+  docs_scripts_SH_MD/   ← docs des scripts shell (.sh)
+  docs_scripts_YAML_MD/ ← docs des scripts HA (.yaml)
+  docs_scripts_SH/      ← scripts .sh (audit_md5, ha_git_backup, #MP_01)
+  docs_scripts_YAML/    ← scripts HA YAML (p1_master_gestion_clim.yaml)
+→ prod_tree.sh supprimé (ANNULÉ depuis TODO)
+→ Aligné sur H:\Docs\04_docs_scripts\ ✓
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>(aucune — session 100% propre)
+</pre>
+<h4>EN COURS</h4>
+<pre>Aucun fichier en cours — session terminée proprement
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>F-2b : Vérifier rendu ha.erodi-ha.com sur mobile
+F-3   : Trier ReBuild/Github/ → INDEX_AUTOMATIONS + INDEX_NAVIGATION + README
+F-4   : Trier ReBuild/Analyse énergétique/ → archiver ou supprimer
+SDB-1 : Migration remote.soufflant_sdb_rm4_mini (avant 2026-10-01)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+<section id="s9"><h2>Session S9</h2><p class="src">Source : histo_2026-07-16_S9.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-07-16 (Session S9)</h3>
+<pre>
+SESSION : ~2h (continuation S8 — compaction de contexte en cours de session)
+BRANCHE ACTIVE : ReBuild/Github/
+</pre>
+<h4>FICHIERS VALIDÉS</h4>
+<pre>Github/INDEX_GLOBAL.md — F-3 COMPLET : mise a jour de tous les chemins rompus [OK]
+H:\INDEX_GLOBAL.md     — Push prod effectue (65 750 bytes) [OK]
+</pre>
+<h4>DETAIL DES MODIFICATIONS (INDEX_GLOBAL.md)</h4>
+<pre>46/46 renames YAML automations appliques :
+  -&gt; github_backup/ (6 fichiers renommes)
+  -&gt; meteo/         (5 fichiers renommes)
+  -&gt; P1_clim_chauffage/ (11 fichiers : A-&gt;a_, B-&gt;b_, D-&gt;c_, E-&gt;d_, etc.)
+  -&gt; P1_cuisine/ P1_sdb/ P2_prises/ P3_eclairage/ stores/ energie/ systeme/ raspi/
+49 liens MD docs automations corriges (prefixe -&gt; DOCS/03_docs_automations/docs_automations_MD/)
+41 liens dashboard_docs_YAML + 43 liens dashboard_docs_MD corriges
+Warning banner supprime
+Gardien ECO marque [warning] "DOC + YAML non migres (automation supprimee ?)"
+P3 salon bouton IKEA4 + SOMRIG : deplace dans P3_eclairage/ (etaient a la racine)
+Zero TREE_CORRIGE restant — zero ancienne path restante
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>Script Python phase 1 : les renames specifiques n'ont pas matche (session precedente
+  avait deja fait le remplacement de prefix mais pas le rename des fichiers).
+  -&gt; Correction : second script phase 2 avec les chemins post-prefixe comme cles. OK.
+</pre>
+<h4>EN COURS / A FAIRE</h4>
+<pre>INDEX_GLOBAL.md section 03 : Gardien ECO — verifier si l'automation est reellement
+  supprimee dans HA ou juste non migree dans les docs. Le lien pointe vers un fichier
+  fantome (#_gardien_eco_SUPPRIME).
+</pre>
+<h4>TODO : CHOSES A VERIFIER / CONTROLER</h4>
+<pre>[1] Gardien ECO : confirmer statut dans HA (supprimee ou active ?)
+    -&gt; Si active : creer doc + YAML dans DOCS/03 et mettre le lien a jour
+    -&gt; Si supprimee : laisser [warning] en l'etat
+[2] Liens INDEX_GLOBAL.md section 01 : verifier que la simplification
+    (seul configuration.md reste, sans liens YAML individuels) est bien voulue
+    et que l'INDEX_AUTOMATIONS.md + INDEX_NAVIGATION.md sont couverts
+[3] F-2b : Verifier rendu ha.erodi-ha.com sur mobile (reste de S8)
+[4] F-4   : Trier ReBuild/Analyse energetique/ — archiver ou supprimer
+[5] SDB-1 : Migration remote.soufflant_sdb_rm4_mini (deadline 2026-10-01)
+[6] SDB-2 : Decision sur inter_radiateur_salle_de_bain
+[7] W-1   : battery-state-card truncation — attendre reponse GitHub issue #908
+[8] INDEX_GLOBAL.md doublon P3-SALON IKEA4 : deux blocs &lt;details&gt; pour la meme
+    automation (titres casse differente) — a deduplicer dans une prochaine session
+[9] Controle / verif Proxmox : etat general de la VM HA, LXC 200/201/202,
+    sauvegardes Proxmox a jour, ressources CPU/RAM/disque OK
+    -&gt; INDEX_GLOBAL.md : bloc L4C1 corrige (warning supprime, liens vignette + page)
+    -&gt; MAIS les chemins DOCS/ dans INDEX_GLOBAL.md sont encore casses sur GitHub
+       car le dossier DOCS/ n'a pas encore ete pousse sur le repo GitHub
+       -&gt; ACTION : pousser DOCS/ vers GitHub pour que tous les liens INDEX resolvent
+</pre>
+<h4>PROCHAINE ACTION PRIORITAIRE</h4>
+<pre>Confirmer statut Gardien ECO dans HA, puis push INDEX_GLOBAL.md vers GitHub
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

@@ -1,0 +1,50 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-12</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-12</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-12_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-12</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 1 h 35 (<strong>18h44</strong> a <strong>20h20</strong>)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>docs/05_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md</code> - ligne de date S3 poussee en prod sur le go de <strong>19h48</strong> (MD5 local = prod <code>CF806818</code>) ; ligne de date S1 ajoutee ensuite en local seulement <strong>[v]</strong></li>
+<li>🟢 HA <code>automation.h_sdb_seche_serviettes_decompte_2_h_timer</code> (id <code>1791401998919</code>, automation G) - description corrigee en prod ("L'automation F reste active en doublon"), via <code>ha_config_set_automation</code> ; controle profond 62/62 identiques <strong>[v]</strong></li>
+<li>🟢 <code>docs/04_docs_scripts/docs_scripts_YAML/</code> - 6 scripts HA extraits de <code>H:\scripts.yaml</code> (<code>audit_md5</code>, <code>audit_md5_md_yaml</code>, <code>j_1_1_salon_clim_on_off_intelligent</code>, <code>j_1_2_bureau_clim_on_off_intelligent</code>, <code>j_1_3_chambre_clim_on_off_intelligent</code>, <code>j_2_0_secu_arret_clim_protege</code>) ; scripts 9/9 identiques <strong>[v]</strong></li>
+<li>🟢 <code>docs/04_docs_scripts/docs_scripts_SH/audit_md5_yaml/audit_md5_yaml.sh</code> et <code>mf_vigilance_images/mf_vigilance_images.sh</code> - copies octet pour octet de <code>H:\.scripts\</code> et <code>H:\scripts\</code> (MD5 identiques) <strong>[v]</strong></li>
+<li>🟢 <code>historique/MD5/</code> - rapport trigul docs du jour (= latest), <code>trigul_profond_2026-10-12.txt</code>, <code>categories_ha_2026-10-12.txt</code> (15 categories automation, 0 script, identiques a la veille) <strong>[v]</strong></li>
+<li>🟢 <code>Github/INDEX_GLOBAL.md</code> (local seulement) - 8 scripts ajoutes, compteurs SH 5 et YAML 9, liens des scripts YAML corriges apres le regroupement en sous-dossiers <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 <code>H:\.scripts\audit_md5_md_yaml.sh</code> (prod : 118 lignes, 6506 octets, du <strong>2026-10-10</strong>) different du local (193 lignes, 10079 octets, contenu du <strong>2026-08-09</strong>) - non touche, decision d'Eric <strong>[EN COURS]</strong></li>
+<li>🟠 <code>H:\docs\04_docs_scripts\docs_scripts_SH\ha_git_backup\ha_git_backup.sh</code> - copie de doc en retard sur le local (<code>DB3FC467</code> contre <code>57AE9A6E</code>), non poussee <strong>[a deployer]</strong></li>
+<li>🟠 Fiches Doc absentes pour les 8 scripts ajoutes aujourd'hui <strong>[draft]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 <code>ha_config_set_automation</code> : refus <code>BPS_ACKNOWLEDGMENT_REQUIRED</code> -&gt; lecture du guide de bonnes pratiques du serveur, cle de lecture transmise, ecriture acceptee <strong>[resolu]</strong></li>
+<li>🔴 Lancement du trigul bloque par la garde <code>bash</code> (audit_huissier de Hermes en cours) -&gt; attente de la fin, lancement a <strong>19h27</strong> <strong>[resolu]</strong></li>
+<li>🔴 Mon analyse du skill <code>ha-audit-huissier</code> : phrase sur les <code>.bak</code> des passes 6 et 7 partiellement fausse -&gt; corrigee apres la revue croisee <strong>[resolu]</strong></li>
+<li>🔴 Mon message sur <code>ha_git_backup</code> ("2 scripts") : un seul script plus sa sauvegarde <code>.bak</code>, corrige a la demande d'Eric <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.md)</h4>
+<ul>
+<li>📌 TODO.md non modifie aujourd'hui. R27 : l'exemplaire joint de <code>ha-audit-huissier</code> ne contient aucune reference a l'ancien <code>ReBuild\scripts</code> (a confirmer sur le dossier complet cote Hermes)</li>
+<li>📌 Chemins anciens <code>docs_scripts_YAML/&lt;script&gt;/</code> encore cites dans 5 docs hors archives (<code>IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md</code>, <code>SDB_SOUFFLANT_SPECIFICATION_2026.md</code>, <code>P1_MASTER_GESTION_CLIM.md</code>, <code>DEPENDANCES_GLOBALES.md</code> ligne 548, <code>DEPENDANCES_GLOBALES_HERMES_V1.md</code>) apres le regroupement de <strong>20h12</strong> (auteur non etabli)</li>
+<li>📌 11 soucis du trigul listes a Eric (bruit des <code>.bak_</code>, collision avec Hermes, deux outils pour les memes docs, BOM repetes dans <code>audit_md5_yaml.sh</code> de la prod, ...)</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Decider du sort de <code>audit_md5_md_yaml.sh</code> (remplacer le local par la prod apres sauvegarde, ou l'inverse) puis pousser la doc <code>ha_git_backup</code> si Eric le veut</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

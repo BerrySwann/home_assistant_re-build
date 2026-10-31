@@ -1,0 +1,183 @@
+# card_presence_home_2026-06-13.yaml
+# Groupe présence — HOME page (3 cartes bubble-card groupées)
+# Cartes :
+#   1. Séparateur "Personne(s)" — couleur selon sensor.etat_wifi_maison
+#      2='2' → darkgreen | 'Eric'/'Mamour' → darkorange | autre → grey
+#   2. Bouton Eric — device_tracker.poco + person.eric (photo)
+#      home=green | not_home=orange | Boulot=rgb(0,87,81) | autre=grey
+#   3. Bouton Mamour — device_tracker.mamour + person.mamour (photo)
+#      home=darkgreen | not_home=orange | LECLERC VENCE=rgb(0,102,204)
+#      Primark=rgb(4,155,216) | autre=grey
+# Entités :
+#   sensor.etat_wifi_maison → templates/P4_groupe_presence/02_logique_wifi_cellular.yaml
+#   device_tracker.poco → Mobile App (Companion) Eric
+#   person.eric → HA Personnes
+#   device_tracker.mamour → Mobile App (Companion) Mamour
+#   person.mamour → HA Personnes
+
+# --- SÉPARATEUR ---
+type: custom:bubble-card
+card_type: separator
+name: Personne(s)
+icon: mdi:account-group
+card_layout: normal
+rows: 1
+styles: |
+  .bubble-line {
+    background: var(--primary-text-color);
+    opacity: 0.8;
+  }
+  .bubble-sub-button {
+    background-color: ${
+      hass.states['sensor.etat_wifi_maison'].state === '2'
+        ? 'darkgreen'
+        : (hass.states['sensor.etat_wifi_maison'].state === 'Eric' ||
+           hass.states['sensor.etat_wifi_maison'].state === 'Mamour')
+          ? 'darkorange'
+          : 'grey'
+    } !important;
+    color: gainsboro !important;
+  }
+  ha-card {
+    margin-top: 20px !important;
+  }
+sub_button:
+  - entity: sensor.etat_wifi_maison
+    show_last_changed: false
+    show_state: true
+    show_icon: true
+    icon: mdi:home
+    show_attribute: false
+    show_name: true
+    name: Maison
+
+---
+# --- BOUTON ERIC ---
+type: custom:bubble-card
+card_type: button
+button_type: state
+entity: device_tracker.poco
+show_name: true
+show_last_changed: true
+show_attribute: false
+card_layout: normal
+layout_options:
+  grid_columns: 2
+  grid_rows: 1
+show_state: false
+sub_button:
+  main:
+    - entity: person.eric
+      show_state: false
+      show_icon: true
+      show_background: true
+      show_attribute: false
+      attribute: entity_picture
+  bottom: []
+styles: |
+  ha-card {
+    --bubble-icon-background-color: black !important;
+  }
+  .bubble-sub-button {
+    background-color: black !important;
+  }
+  .bubble-button-background {
+    background-color:
+      ${ state === 'home'
+        ? 'green'
+        : state === 'not_home'
+          ? 'rgb(255, 103, 0)'
+          : state === 'Boulot'
+          ? 'rgb(0,87,81)'
+          : 'grey'
+      } !important;
+  }
+  .bubble-icon,
+  .bubble-sub-button > ha-icon {
+    color:
+      ${ state === 'home'
+        ? 'darkgreen'
+        : state === 'not_home'
+          ? 'rgb(255, 103, 0)'
+          : state === 'Boulot'
+            ? 'rgb(0,87,81)'
+            : 'grey'
+      } !important;
+  }
+  ${subButtonIcon[0].setAttribute("icon",
+    state === 'home'
+      ? 'mdi:home'
+      : state === 'not_home'
+        ? 'mdi:home-off'
+        : state === 'Boulot'
+          ? 'mdi:hammer-screwdriver'
+          : 'mdi:crosshairs-question'
+  )}
+
+---
+# --- BOUTON MAMOUR ---
+type: custom:bubble-card
+card_type: button
+button_type: state
+entity: device_tracker.mamour
+show_name: true
+show_last_changed: true
+show_attribute: false
+card_layout: normal
+layout_options:
+  grid_columns: 2
+  grid_rows: 1
+show_state: false
+sub_button:
+  - entity: person.mamour
+    show_state: false
+    show_icon: true
+    show_background: true
+    show_attribute: false
+    attribute: entity_picture
+styles: |
+  ha-card {
+    --bubble-icon-background-color: black !important;
+  }
+  .bubble-sub-button {
+    background-color: black !important;
+  }
+  .bubble-button-background {
+    background-color:
+      ${ state === 'home'
+        ? 'darkgreen'
+        : state === 'not_home'
+          ? 'rgb(255, 103, 0)'
+          : state === 'LECLERC VENCE'
+            ? 'rgb(0, 102, 204)'
+            : state === 'Primark'
+            ? 'rgb(4,155,216)'
+            : 'grey'
+      } !important;
+  }
+  .bubble-icon,
+  .bubble-sub-button > ha-icon {
+    color:
+      ${ state === 'home'
+        ? 'darkgreen'
+        : state === 'not_home'
+          ? 'rgb(255, 103, 0)'
+          : state === 'LECLERC VENCE'
+            ? 'rgb(0, 102, 204)'
+            : state === 'Primark'
+            ? 'rgb(4,155,216)'
+            : 'grey'
+      } !important;
+  }
+  ${subButtonIcon[0].setAttribute("icon",
+    state === 'home'
+      ? 'mdi:home'
+      : state === 'not_home'
+        ? 'mdi:home-off'
+        : state === 'LECLERC VENCE'
+          ? 'mdi:basket-check'
+          : state === 'Primark'
+            ? 'mdi:hanger'
+            : 'mdi:crosshairs-question'
+  )}
+name: Mamour

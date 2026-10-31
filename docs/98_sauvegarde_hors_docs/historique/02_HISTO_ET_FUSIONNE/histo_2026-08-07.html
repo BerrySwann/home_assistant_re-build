@@ -1,0 +1,51 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-08-07</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-08-07</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s0">Journal</a></nav>
+<section id="s0"><h2>Journal</h2><p class="src">Source : histo_2026-08-07.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-08-07</h3>
+<pre>
+SESSION : ~2h estimées
+BRANCHE ACTIVE : TREE_CORRIGE / prod H:
+</pre>
+<h4>FICHIERS VALIDÉS</h4>
+<pre>
+[SCRIPT] .scripts/audit_md5_docs.sh — audit MD5 docs HA vs GitHub (3 passes : TREE -&gt; MD5 PROD -&gt; GITHUB) [✓]
+  → miroir exact de audit_md5.sh, scope : /config/docs/ *.md
+  → URL encoding via python3 urllib.parse.quote (accents/espaces)
+  → log : /config/.logs/hermes_md5_audit_docs_YYYY-MM-DD.txt + latest
+
+[SHELL_CMD] shell_command/Ghithub/backup_github.yaml — ajout clé audit_md5_docs [✓]
+  → bash -lc 'bash /config/.scripts/audit_md5_docs.sh 2&gt;&amp;1'
+
+[SCRIPT HA] scripts.yaml — ajout script audit_md5_docs [✓]
+  → alias "Audit MD5 Docs", mode single, action shell_command.audit_md5_docs
+
+[SENSOR] command_line/audit/audit_logs.yaml — ajout sensor audit_md5_docs_journal [✓]
+  → lit hermes_md5_audit_docs_*.txt (glob tri alpha = tri date)
+  → scan_interval: 30, json_attributes: text
+</pre>
+<h4>EN COURS</h4>
+<pre>[DASHBOARD] L5C3 PAGE_SYSTEME — carte audit_md5_docs — YAML fourni, à coller dans le dashboard
+  → bubble-card separator + button-card (script.audit_md5_docs) + markdown (sensor.audit_md5_docs_journal)
+  → état : YAML prêt, à coller manuellement dans l'éditeur HA
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>backup_github.yaml Edit 1 : remplacement \n → CRLF (Select-String faux négatif) → vérifié via IndexOf
+scripts.yaml Edit 2 : pattern -replace raté (CRLF) → corrigé via IndexOf + Substring insertion
+button-card JS template : entity undefined → guard `entity &amp;&amp;` ajouté partout
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>1. Reload YAML HA (Outils développeur → Vérifier &amp; recharger) ou redémarrage complet
+2. Coller le YAML de la carte audit_md5_docs dans le dashboard L5C3 (éditeur HA)
+3. Tester le bouton → vérifier /config/.logs/hermes_md5_audit_docs_latest.txt généré
+4. Push local docs → prod H: (AUDIT_MD5_DOCS.md + PAGE_SYSTEME.md mis à jour session précédente)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

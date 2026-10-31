@@ -1,0 +1,925 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal fusionne JOURNAL_COMPLET_2026-04-25_2026-07-14</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>JOURNAL_COMPLET_2026-04-25_2026-07-14</h1><p class="src">Source : JOURNAL_COMPLET_2026-04-25_2026-07-14.md</p>
+<nav><a href="index.html">Liste</a></nav>
+<h2>Sommaire</h2><ul><li><a href="#h0">📓 JOURNAL DE BORD — HA REBUILD</a></li></ul>
+<h3 id="h0">📓 JOURNAL DE BORD — HA REBUILD</h3>
+<p><em>Historique complet : 2026-04-25 → 2026-07-14</em></p>
+<hr>
+<pre>╔══════════════════════════════════════════════════════════════════════════════╗
+║         HISTORIQUE COMPLET HA REBUILD — 2026-04-25 → 2026-06-28           ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+  31 sessions · ~103h cumulées · Projet : home_assistant_re-build (GitHub)
+  Fichier généré : 2026-06-28 | Source : ReBuild/historique/ + histo racine
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-04-25 · ~2h · Pôle 3 Éclairage — validation UM / AVG
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml — 76 UM (19 ampoules × AMHQ) ✓
+  utility_meter/P3_eclairage/P3_UM_AMHQ_2_ZONE.yaml  — 36 UM (9 zones × AMHQ) ✓
+  utility_meter/P3_eclairage/P3_UM_AMHQ_3_TOTAL.yaml — 8 UM (2 totaux × AMHQ) ✓
+  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_1_UNITE.yaml — 76 sources vérifiées ✓
+  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_2_ZONE.yaml  — 36 sources vérifiées ✓
+  templates/P3_eclairage/P3_AVG/P3_AVG_AMHQ_3_TOTAL.yaml — 8 sources vérifiées ✓
+  Dashboard/L2C2_Energie_Clim/ + L2C3_Energie_Eclairage/ — vignettes + pages ✓
+  docs_dashboard/docs/DEPENDANCES_GLOBALES.md — CRÉÉ (L2C2 + L2C3 ✅) ✓
+  docs/L2C3_ENERGIE_ECLAIRAGE/L2C3_VIGNETTE_ECLAIRAGE.md — 60× _kwh_um → _um ✓
+  CLAUDE.md — règle absolue ajoutée en tête ✓
+
+RÉSOLU :
+  Migration Riemann → firmware direct P3 COMPLÈTE
+  Chaîne : _energy (Hue/Sonoff) → P3_POWER → P3_kWh → P3_UM_AMHQ → P3_AVG (0 rupture)
+  TREE_CORRIGE/Docs/ supprimé (doublon stale 3.4MB)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-05-01 · ~30 min · Infrastructure — migration Z2M Proxmox
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ACTIONS :
+  LXC 200 : Z2M 2.9.2 opérationnel — Ember/EZSP 7.5.1.0 via /dev/ttyUSB0
+  HA VM 100 : broker MQTT reconfiguré → 10.32.154.106 (broker prod)
+  64 appareils · 633 entités redécouverts ✓
+
+RÉSOLU :
+  MQTT 10.32.154.106 "Échec de connexion" → IP saisie manuellement dans HA UI
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-05-06 · ~2h · Docs L3C1 / Bug MyElectricalData
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  docs/L3C1_VIGNETTE_ECLAIRAGE.md — badge date + HA version + entités etats_status.yaml ✓
+  docs/DEPENDANCES_GLOBALES.md — L3C1 ✅ (18/18 vignettes documentées) ✓
+
+BUG IDENTIFIÉ :
+  MyElectricalData v0.13.1 — ZeroDivisionError export_mqtt.py:414
+  Fix : consumption_max_power: false dans config.yaml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-05-10 · ~2h · P2 eco_prises — refactoring automation
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  docs_automations/TREE_CORRIGE/P2_prises/P2_eco_prises_dynamique.yaml ✓
+  templates/P2_prise/P2_éCO_prises/P2_eco_prises_config.yaml — NOUVEAU ✓
+
+RÉSOLU :
+  P2_eco_prises_config.yaml : attribut 'prises' non lisible → tojson/from_json
+
+EN COURS :
+  eco_prises.yaml (ancien) → à supprimer ou archiver
+  Pas encore déployé en prod
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-05-16 · ~1h30 · CLAUDE.md HACS / L5C1 battery-state-card
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  CLAUDE.md — +10 cartes HACS manquantes ajoutées ✓
+  memory/todo_ha_rebuild.md — màj ✓
+
+EN COURS :
+  L5C1 battery-state-card troncature groupe collapse → issue #908 soumise (en attente)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-05-17 · ~2h · L1C1 Météo / L3C1 chambre badge / etats_status
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  templates/P3_eclairage/ui_dashboard/etats_status.yaml — sensor.chambre_nb_allumes ✓
+  Dashboard/L1C1_01_Meteo/vignette_L1C1_meteo_2026-05-16.yaml — SVG meteocons ✓
+  Dashboard/L3C1/page_L3C1_eclairage_droite_2026-05-13.yaml — badge chambre ✓
+  docs L3C1 VIGNETTE + PAGE + DEPENDANCES_GLOBALES ✓
+
+RÉSOLU :
+  L3C1 tap_action chambre : light.toggle → target light.lit
+  L1C1 SVGs : cdn.meteocons.com 404 → npm tarball
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-05-17 S2 · ~1h · CLAUDE.md HACS triage / PAGE_METEO tsmoon
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  CLAUDE.md — triage HACS complet (méteo → Core, plotly/history-explorer supprimés) ✓
+  docs L1C1 PAGE_METEO.md — tsmoon-card card_mod ✓
+  Dashboard/L4C1_10_Proxmox/vignette_L4C1_proxmox_2026-05-17.yaml ✓
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-05-25 · ~5h · Architecture Z2M — inventaire complet + PowerCalc
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ACTIONS :
+  Z2M add-on HA supprimé → LXC 200 (.244:8099) UNIQUE instance
+  Préfixe MQTT : zigbee2mqtt2/
+  37 devices inventoriés (prises, contacts, qualité air, thermostats, éclairage)
+
+VALIDÉS :
+  CLAUDE.md — +petit_dejeuner_cuisine + convention PowerCalc P3 uniquement ✓
+  configuration.yaml — recorder exclude sensor.*device_energy/*device_power ✓
+  PowerCalc P2 : supprimé HA + recorder exclu ✓
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-05-30 · ~8h · Index navigation/automations / Arbo / Scripts
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  INDEX_NAVIGATION.md — 18 vignettes, accordéon HTML ✓
+  INDEX_AUTOMATIONS.md — 48 automations, 10 catégories ✓
+  IA/IA_INDEX_NAVIGATION.md + IA_INDEX_AUTOMATIONS.md + IA_ARBO_DETAIL.md ✓
+  CLAUDE.md — audit MD5 périmètre automations ✓
+  README.md — L4C1→Proxmox, structure corrigée ✓
+  14 docs automations créées ✓
+  .scripts/ha_git_backup.sh — fix push rejeté (pull --rebase auto) ✓
+
+ANOMALIES IDENTIFIÉES :
+  sensors/P2+P3+P1_kWh → désactivés en prod (#.#)
+  utility_meter/P2 → désactivé, P3 → seulement 1_UNITE actif
+  templates/P3 → P3_ENERGIE_TLP (vs P3_ENERGIE_TPL attendu)
+  Dashboard L4C1 → 2 dossiers coexistent
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-01 · ~4h · Découpage automations.yaml / gestion TV+PC
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  docs_automations/TREE_CORRIGE/ — 47→48 fichiers découpés ✓
+  diag_enregistrement_journalier.yaml — re-intégré ✓
+  gestion_tv_chambre + gestion_pc_bureau — refactorisées ✓
+  md5_pseudo_automations.md — généré 48/48 OK ✓
+
+RÉSOLU :
+  Push foireux 23/05 : 3 fichiers écrasés → identifiés et corrigés
+  gestion_tv_chambre : mode:parallel + payload_json → mode:single + trigger.payload
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-02 · ~8h · Backup git / L5C3 MariaDB / Nettoyage global
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  github_maintenance.yaml — BUG FIX v3 sensor backup_github_status ✓
+  Dashboard/L5C3_15_MariaDB/page_L5C3_mariadb_2026-06-02.yaml ✓
+  docs_automations/TREE_CORRIGE/backup/git_push_au_demarrage_ha.yaml — NOUVEAU ✓
+  P1_clim_chauffage/ — suppression C_gardien_eco, renommage D→J ✓
+  templates/P3_eclairage/ — P3_ENERGIE_TLP → P3_ENERGIE_TPL ✓
+  utility_meter/P0/Genelec_appart/ — renommage 02→01, 03→02 ✓
+  TREE_CORRIGE aligné rebuild_tree.txt : 58/58 ✅
+
+RÉSOLU :
+  sensor.backup_github_status : logique inversée grep → v3
+  Weekly tag : faux amber (ISO week) → check semaine courante + précédente
+  P3_ENERGIE_TLP → P3_ENERGIE_TPL (typo)
+  sensor.genelec_appart_totale_kwh Riemann → remplacé Nodon natif
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-02 S2 · ~3h · Stores / Nodon / P0 nettoyage
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  page_L2C1_energie_principale — sensor.genelec_appart_totale_kwh corrigé ✓
+  sensors/P0_kWh_genelec_appart.yaml — SUPPRIMÉ local + GitHub ✓
+  templates/Stores/S_01_STORES.yaml — suppression {{ pos }}% → "Ouvert" ✓
+  Dashboard/L3C3_09_Stores_Fenetres/page_L3C3_stores_2026-06-02.yaml — NOUVEAU ✓
+  utility_meter/P0/Genelec_appart/ — renommage final 02→01, 03→02 ✓
+
+RÉSOLU :
+  PC Bureau + TV Chambre : mode:single bloquait → mode:queued
+  Architecture P0 : Ecojoko mort → Nodon natif confirmé définitivement
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-04 · ~45 min · Vignette L4C2 Mini-PC NUC
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  Dashboard/L4C2_11_Mini_PC/vignette_L4C2_mini_pc_2026-06-04.yaml — draft ✓
+
+RÉSOLU :
+  RAM max 16384→8192 MiB, Disk max 524→32 GiB, entité % → GiB, seuils corrigés
+
+EN COURS :
+  vignette L4C2 : à déployer dans HA UI
+  6 entity_id Proxmox VM [PVE] à vérifier avant déploiement
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-08 · ~3h · Vignette L4C1 Proxmox / MED / IPs
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  CLAUDE.md — IP MariaDB .201 → .242 ✓
+  Dashboard/L4C1_Proxmox/vignette_L4C1_proxmox_2026-06-08.yaml ✓
+  → Section MED (LXC 202) cyan + section HA system_monitor_* ✓
+
+RÉSOLU :
+  MED quota Enedis 684/500 → reset 23:59:59
+  IP fantôme .196 → .243 clarifiée
+  Architecture MQTT : MED → Mosquitto add-on (.243:1883)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-10 · ~3h · Page L4C2 Mini-PC / données PVE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EN COURS :
+  page_L4C2_mini_pc_2026-06-10.yaml — correctifs partiels :
+    ✓ decimal:2, RAM 12Go (max:12288), disk bar40 (max:94 GiB)
+    ✗ disk ring-tile (max:94, colour thresholds) — NON FAIT
+    ✗ disk bar 20px (max:94, target:75, severity GiB) — NON FAIT
+    ✗ apexcharts #disk (color_threshold GiB) — NON FAIT
+    ✗ annotations_log disk — NON FAIT
+  page_L4C1_proxmox_2026-06-10.yaml — À CRÉER (redesign 5 sections)
+
+DONNÉES CONFIRMÉES (PVE) :
+  PVE node : CPU×4, RAM 15.40 GiB, Disk 93.93 GiB
+  HA VM    : CPU×2, RAM 12.0 GiB,  Disk 32.0 GiB
+  Z2M LXC  : CPU×1, RAM 1.00 GiB,  Disk 19.52 GiB
+  MariaDB  : CPU×1, RAM 2.00 GiB,  Disk 7.78 GiB
+  MED      : CPU×1, RAM 1.00 GiB,  Disk 3.86 GiB
+
+RÉSOLU :
+  Disk max 477→94 GiB (pvesm retournait TOUS pools, pool local = 93.93 GiB)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-13 · ~3h · IA_CONTEXT_BASE / ip_externe / ha_git_backup fix
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  IA/IA_CONTEXT_BASE.md — cleanup complet (MP supprimé, Riemann, URLs, P3_ENERGIE_TPL) ✓
+  IA/IA_INDEX_NAVIGATION.md — ref MP_02 mise à jour ✓
+  CLAUDE.md — P3_ENERGIE_TLP → P3_ENERGIE_TPL ✓
+  .scripts/ha_git_backup.sh — fix detached HEAD (git checkout main) ✓
+  command_line/ip_externe/ip_externe.yaml — CRÉÉ (curl ipify.org + fallback) ✓
+  configuration.yaml — 2 excludes recorder obsolètes supprimés ✓
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-14 · ~9h · Backup GitHub cassé / Audit MD5 v1 / Shell commands
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  .scripts/ha_git_backup.sh — réparation complète (rebase-merge orphelin, force-with-lease) ✓
+  github_maintenance.yaml — filtre backup_github_journal élargi ✓
+  shell_command.yaml — audit_yaml/atma/full → audit_md5 ✓
+  command_line/audit/audit_logs.yaml — 3 sensors → 1 sensor audit_md5_journal ✓
+  Dashboard/L5C3/card_audit_buttons + card_audit_journal — NOUVEAU ✓
+
+RÉSOLU :
+  ha_git_backup.sh : .git/rebase-merge orphelin → suppression au démarrage
+  audit_md5.sh : git show stale (12 DIFF faux) → git fetch origin
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-14 S2 · ~3h · Audit MD5 v2 / python3 fix / audit_logs
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  .scripts/audit_md5.sh — v2 (git fetch → curl raw URL, zéro /tmp wget) ✓
+  command_line/audit/audit_logs.yaml — FIX python3 col 0 → 1 ligne ✓
+
+RÉSOLU :
+  audit_logs.yaml : "while scanning simple key line 27 col 0" → python3 1 ligne
+  Samba : bit +x non préservé → bash explicite dans shell_command
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-15 · ~3h · Audit MD5 v3 / card L5C3 audit / page L4C3
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  .scripts/audit_md5.sh — v3 finale (curl -o TMP_GH, URL encoding, latest.txt) ✓
+  Dashboard/L5C3/card_audit_recap_2026-06-15.yaml — v5 finale ✓
+  Dashboard/L4C3_MAJ_HA/page_L4C3_maj_ha_2026-06-15.yaml — sauvegarde ✓
+
+RÉSOLU :
+  audit_md5.sh : $() strip trailing \n → curl -o TMP_GH + md5sum
+  audit_md5.sh : espace dans nom fichier → encoded_file="${file// /%20}"
+  RÉSULTAT : 63 SYNC · 0 DIFF · 0 PUSH MANQUANT ✓
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-15 S2 · ~2h · scripts.yaml audit_md5 / Y:\.scripts étendu
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  scripts.yaml prod — ajout script.audit_md5 ✓
+  shell_command.yaml — dead code audit_yaml/atma/full supprimé ✓
+  Y:\.scripts/audit_md5.sh — DIRS+EXTRA_FILES étendus (63 → 79 fichiers) ✓
+  docs/DEPENDANCES_GLOBALES.md — section fichiers audités complétée ✓
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-16 · ~1h30 · PAGE L5C3 MariaDB / docs DEPENDANCES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  Dashboard/L5C3_15_MariaDB/page_L5C3_mariadb_2026-06-15.yaml ✓
+  docs_scripts/TREE_CORRIGE/.scripts/audit_md5.sh — copie versionnée ✓
+  docs/L5C3_MARIADB/PAGE_SYSTEME.md — section AUDIT MD5 ajoutée ✓
+  docs/DEPENDANCES_GLOBALES.md — L5C3 chaîne complète ✓
+
+AUDIT MD5 : 79 fichiers — ✅ 79 SYNC · ❌ 0 DIFF · ⚠️ 0 PUSH MANQUANT
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-17 · ~15 min · Bubble-card Eric (P4 présence)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRAVAUX :
+  Dashboard bubble-card Eric (device_tracker.poco) — styles: mis à jour [snippet fourni]
+  · Remplacement zone "Boulot" → "SNEF Bureau"
+  · Ajout zone "IUT Menton" (même couleur/icône que SNEF Bureau)
+  · rgb(0,87,81) + mdi:hammer-screwdriver pour les 2 zones
+  · home → darkgreen (correction vs green)
+  → À déployer dans HA — vérifier noms de zones exacts
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-18 · ~3h · Audit docs global — corrections paths obsolètes
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  docs_dashboard/docs/ — audit complet 16 patterns / 0 issue active ✓
+  · dashbord/ (typo) → Dashboard/L*/filename_YYYY-MM-DD.yaml (13 docs)
+  · P1_avg.yaml → P1_AVG.yaml (3 docs)
+  · ui_dashboard/ui_dashboard.yaml → P1_ui_dashboard/P1_ui_dashboard.yaml (~60 occurrences, 6 docs)
+  · sensors/P0_Energie_total_diag/ → P0_Energie_total_min_maxi_diag/ (3 docs)
+  · sensor.ecojoko_conso_* → sensor.genelec_appart_conso_* (PAGE_HOME.md)
+  · UM P0 filenames 01_cost/03_HPHC → 01_UM_AMHQ/02_UM_HPHC (L2C1 x2)
+  · L4C1 nav table : FreeBox → Proxmox (PAGE_HOME.md)
+  docs/L4C1_FREEBOX/ — SUPPRIMÉ (Freebox retirée du setup) ✓
+
+RÉSOLU :
+  L5C3 + L6C1 docs : sed échouait sur backtick+asterisk → Python str.replace
+  P1_03 prod : nom fichier espace → underscore (renommé)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-19 · ~2h · Synchro scripts / IA_ARBO / DEPENDANCES / Fix HA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  docs_scripts/TREE_CORRIGE/.scripts/audit_md5.sh — synchro GitHub (MD5 f0651635) ✓
+  ReBuild/.scripts/ha_git_backup.sh — synchro GitHub (MD5 84991011) ✓
+  docs_dashboard/TREE_CORRIGE/audit_md5.sh (racine) — SUPPRIMÉ (mauvais endroit) ✓
+  IA/IA_ARBO_DETAIL.md — mise à jour complète (date 06-19) ✓
+    · command_line/ : audit/ + ip_externe/ ajoutés
+    · packages/ : cssmeteo.yaml + demometeo.yaml
+    · shell_command/ découpé (Ghithub/ + P4/)
+    · sensors/P1_kWh/ : corrigé (Riemann cuisine Shelly — existe)
+    · SpeedTest + Mini-PC : marqués supprimés prod
+    · Intégration FILE (3 entrées UI) documentée
+  docs/DEPENDANCES_GLOBALES.md ✓
+    · command_line/ : speedtest → "audit MD5, IP externe"
+    · Nouvelle section "INTÉGRATION FILE (UI)" : 3 services notify.file_*
+
+RÉSOLU :
+  shell_command.git_backup_push "action inconnue"
+    → Cause : HA non redémarré depuis restructuration shell_command/ (06-17)
+    → Fix : restart complet HA → résolu ✓
+
+BACKLOG DÉCOUVERT :
+  P1-SCHED : 8 switch.schedule_* à créer via intégration Scheduler (UI HA)
+  (clim_bureau/chambre, radiateur_cuisine, soufflant_sdb × week + week_end)
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                       BACKLOG — TÂCHES NON FINIES                          ║
+║                    (consolidé toutes sessions · 2026-06-19)                ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+[P1 — SCHEDULER]
+  🟠 P1-SCHED  Créer 8 switch.schedule_* via intégration Scheduler (UI HA) :
+               · switch.schedule_clim_du_bureau_week + _week_end
+               · switch.schedule_clim_de_la_chambre_week + _week_end
+               · switch.schedule_radiateur_cuisine_week + _week_end
+               · switch.schedule_soufflant_salle_de_bain_week + _week_end
+
+[SURVEILLANCE / EN ATTENTE EXTERNE]
+  ⏳ W-1  L5C1 battery-state-card — troncature groupe collapse
+          EN ATTENTE réponse issue GitHub maxwroc/battery-state-card #908
+  ⏳ W-2  L5C2 sensor.ne2213_mamour_battery_health + _temperature
+          À vérifier dans HA live
+
+[MATÉRIEL / FUTUR]
+  📅 F-1  Automne : remplacer radiateur_cuisine Tuya TS0001
+          → NodOn SEM-4-1-00 (Zigbee, relais + monitoring natif)
+
+[ITEMS SOLDÉS CETTE SESSION (06-19)]
+  ✅ D-1/D-2  page_L4C1_proxmox + page_L4C2_mini_pc — créés (06-18)
+  ✅ D-3/D-4  docs L4C1_PROXMOX/ + L4C2_MINI_PC/ — créés
+  ✅ N-1  #*.yaml TREE_CORRIGE — 0 fichier
+  ✅ N-2  P2_prises obsolètes — archivés dans _old_avant_staging/
+  ✅ N-3  Dashboard/ L4C1 — pas de doublon
+  ✅ Y-1  platform:integration — volontaire (Riemann Shelly bug firmware)
+  ✅ Y-2  Mini-PC templates — supprimé prod (capteurs à la source)
+  ✅ Y-3  P2_eco_prises_config.yaml — présent TREE_CORRIGE
+  ✅ IA-1 IA_ARBO_DETAIL.md — mis à jour (06-19)
+  ✅ U-1  Restart HA — effectué (entités orphelines purgées)
+  ✅ .scripts/ synchro — audit_md5.sh + ha_git_backup.sh alignés GitHub
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PRIORITÉS SUGGÉRÉES (prochaine session)
+  1. P1-SCHED — créer 8 switch.schedule_* dans HA UI Scheduler
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  5. Y-1 — fix P1_kWh platform:integration
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-22 · ~2h · P4 Log Zones / ha_git_backup uniformisation
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  docs_automations/TREE_CORRIGE/P4_presence/P4_log_zones_eric.yaml ✓
+  .scripts/ha_git_backup.sh — uniformisation format logs ✓
+
+RÉSOLU :
+  P4_log_zones_eric.yaml : UndefinedError 'from_state' → guard + states() pour log_to
+  P4_log_zones_eric.yaml : notify.zone_eric legacy → notify.send_message + target.entity_id
+  ha_git_backup.sh : logs hétérogènes → date en fin de ligne, 1 espace emoji, colon avant date
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-22 S2 · ~2h · Dashboard L1C1 Météo — arc SVG + alerte
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EN COURS :
+  Dashboard/L1C1_Meteo — arc trajectoire solaire SVG en cours d'ajustement
+  · arc été validé : M -29,85 A 45,30 0 0,1 129,85
+  · alerte météo : 4 niveaux (vert/jaune/orange/rouge) + animation pulse rouge ✓
+  · lune : non corrigée (moon_top → moon_top_inverse à faire)
+
+RÉSOLU :
+  SVG arc : rx ignoré si &lt;distance/2 → déborder hors 0-100 pour le bon rayon visuel
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-23 · ~4h · Dashboard L1C1 — corrections visuelles prod
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  Dashboard/L1C1_01_Meteo/ — structure picture-elements corrigée ✓
+  · Root indent, élément 5 aligné, éléments 6-7 désimbriqués
+
+RÉSOLU :
+  Élément 5 (alerte) : invisible → height: 100% manquant
+  Élément 3 (soleil) : trop haut → sun_top → sun_top_inverse
+  Gradient ciel : sky() parsé via split('background:')
+  Soleil compression 0.6 appliquée sur left ET top_inverse
+
+EN COURS :
+  Lune : moon_top → moon_top_inverse + compression 0.6 → NON FAIT
+  Arc solaire lever : sun_top_inverse ~80% bas gauche → à vérifier
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-24 · ~3h · L1C1 meteocss-card — couleurs sunset/sunrise JS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MODIFIÉS :
+  Dashboard/L1C1_01_Meteo/card_meteocss_2026-06-24_v2.yaml ✓
+  H:\www\community\meteocss-card\meteocss-card.js — modif manuelle JS ✓
+    · sunset/sunrise : rouge sang → pêche/mauve/violet (#FF9272/#D06880/#5A2878)
+    · .gz supprimé, backup .ORIGINAL conservé
+  docs_dashboard/docs/METEOCSS_CARD_MODIF.md — CRÉÉ ✓
+
+RÉSOLU :
+  card YAML : "Aucun type fourni" → double bloc style: supprimé
+  meteo_settings.jinja : aucun effet sur custom:meteo-card → JS directement
+
+EN COURS :
+  Tester couleurs (Ctrl+Shift+R) → NON CONFIRMÉ
+  Décision lune (layer moon) → PENDING
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SESSION 2026-06-28 · ~3h · P1 MASTER CLIM — refactoring + fix notif
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VALIDÉS :
+  docs_automations/TREE_CORRIGE/P1_clim_chauffage/a_0_...clim_jour.yaml ✓
+    → Wrapper 30L délégant à script.p1_master_gestion_clim (periode:jour)
+    → sensor.groupe ajouté trigger sensor_update · queued max:5
+  docs_automations/TREE_CORRIGE/P1_clim_chauffage/b_0_...clim_nuit.yaml ✓
+    → Idem periode:nuit
+  docs_scripts/TREE_CORRIGE/p1_master_gestion_clim.yaml [NOUVEAU] ✓
+  docs_automations/docs/P1_CLIM_CHAUFFAGE/A0_CLIM_JOUR.md [MIS À JOUR] ✓
+  docs_automations/docs/P1_CLIM_CHAUFFAGE/B0_CLIM_NUIT.md [MIS À JOUR] ✓
+  docs_scripts/docs/P1_MASTER_GESTION_CLIM.md [NOUVEAU] ✓
+  CLAUDE.md — audit_atma/yaml/full → audit_md5.sh (unique) ✓
+
+PROD MODIFIÉE :
+  H:\scripts.yaml — script.p1_master_gestion_clim :
+    · t_salon_target groupe_3 JOUR : temp_conf_e restauré (LLM avait mis eco) ✓
+    · Notif message : &gt; → &gt;- + \n Jinja — TESTÉ OK ✓
+
+NETTOYAGE :
+  Supprimés orphelins TREE_CORRIGE : automations.yaml, cssmeteo.yaml, demometeo.yaml ✓
+  Supprimés anciens scripts locaux : audit_atma/yaml/full.sh + dossier scripts/ ✓
+  Dashboard_COMPLET : 12 anciens exports supprimés (conservé 2026-06-28) ✓
+
+
+
+==============================================================================
+RESTES À TRAITER — EXTRACTION DU 2026-07-08 (balayage des 31 sessions)
+==============================================================================
+
+[P2]   eco_prises.yaml (ancien) → à supprimer ou archiver (jamais déployé)
+[L5C1] battery-state-card : troncature groupe collapse → issue GitHub #908 en attente (upstream)
+[L4C2] vignette Mini PC : à déployer dans HA UI + 6 entity_id Proxmox [PVE] à vérifier
+[L4C2] page mini_pc 2026-06-10 : correctifs partiels restants
+[L1C1] Météo : lune moon_top → moon_top_inverse + compression 0.6 → NON FAIT
+[L1C1] Météo : arc solaire lever (sun_top_inverse ~80% bas gauche) → à vérifier
+[L1C1] Météo : test couleurs (Ctrl+Shift+R) → NON CONFIRMÉ · décision layer moon → PENDING
+
+(Voir aussi histo_2026-07-08.txt : todo SDB, orphelins P1/P4, fan_modes L1C3,
+ badges "Réglé à" chambre, export Dashboard_COMPLET, push git)
+
+==============================================================================</pre>
+<hr>
+<pre>=== JOURNAL HA REBUILD — 2026-07-05 ===
+
+SESSION : ~2h (multi-session avec reprise sur résumé)
+BRANCHE ACTIVE : TREE_CORRIGE / outputs (fichier HTML showcase)
+
+-- FICHIERS VALIDÉS --
+outputs/rebuild_showcase.html — Modal system complet [✓]
+  · 13 vignettes cliquables avec onclick="openModal('LXCX')"
+  · Modal overlay + CSS HA dark-theme
+  · MODAL_DATA JS : 13 sous-pages reproduites (L1C1, L1C3, L3C1, L3C2, L3C3,
+    L4C1, L4C2, L5C1, L5C2, L5C3, L6C1, L6C2, L6C3)
+  · Lien "Ouvrir dans HA ↗" par modal → http://10.32.154.243:8123/dashboard-tablette/{slug}
+  · Fermeture : clic overlay, bouton ✕, touche Escape
+  · 5 vignettes non-cliquables conservées : L1C2, L2C1, L2C2, L2C3, L4C3
+
+-- TRAVAIL AMONT (session précédente) --
+Navigation HA prod — capture screenshots 13 sous-pages [✓]
+  · URL map complète 18 vignettes établie (13 navigate + 4 display-only + 1 popup)
+  · Slugs confirmés : /meteo /clim /lumieres /temperatures /stores
+    /systeme-proxmox /systeme-mini-pc /battery-bp /phone /reserve
+    /air-quality /pollen-pollution /vigieau
+
+-- ERREURS RÉSOLUES --
+(aucune — session propre)
+
+-- EN COURS --
+rebuild_showcase.html — À TESTER dans navigateur : vérifier ouverture modals,
+  liens HA, affichage responsive mobile, fermeture Escape/overlay
+
+-- PROCHAINE ACTION --
+1. Ouvrir rebuild_showcase.html et tester chacune des 13 vignettes cliquables
+2. (Optionnel) sync_state.json initial depuis GitHub [tâche ancienne en attente]
+
+=== FIN JOURNAL ===</pre>
+<hr>
+<pre>=== JOURNAL HA REBUILD — 2026-07-08 ===
+
+SESSION : 2 jours (06/07 soir + 08/07) — migration clim chambre RM4→NodOn
+BRANCHE ACTIVE : prod .243 + TREE_CORRIGE (miroirs à jour)
+
+-- FICHIERS VALIDÉS --
+mqtt/binary_sensor/P1_clim_chauffage/P1_MQTT_BS_01_dispo_clim_chambre_nodon.yaml — clim_chambre_nodon_en_ligne [OK] (+ miroir TREE_CORRIGE)
+configuration.yaml — clé mqtt: + include_dir_merge_list mqtt/binary_sensor/ [OK]
+scripts.yaml — p1_master_gestion_clim : bloc CHAMBRE scindé set_hvac_mode + set_temperature target_temp_low/high [OK] (+ miroir docs_scripts/TREE_CORRIGE)
+Docs/Dashboard/L1C2/page_..._2026-07-08.yaml — thermostat chambre → nodon [OK]
+Docs/Dashboard/L1C3/vignette+page_..._2026-07-08.yaml — nodon + badge dispo + consigne via sensor.temperature_corrige_chambre [OK]
+Docs/Dashboard/L2C2/vignette+page_..._2026-07-08.yaml — nodon + bubble large-2-rows [OK]
+Archives datées 05-13/05-22/06-18 restaurées à l'état d'origine (backup 06/07)
+docs/DEPENDANCES_GLOBALES.md — 3×chambre→nodon + entrée dispo L1C3 + date [OK]
+
+-- RÉGLAGES SYSTÈME --
+Z2M : availability enabled (10min/25h) + last_seen ISO_8601_local [OK]
+Z2M : override discovery NodOn homeassistant.climate.temp_step=1 (bridge/request/device/options) [OK]
+
+-- ERREURS RÉSOLUES --
+Fenêtre fermée → clim chambre ne redémarrait pas : NodOn = plage low/high uniquement
+  (supported_features 394, pas d'attribut temperature) → set_temperature refusé → script scindé
+binary_sensor dispo unknown : base topic = zigbee2mqtt2 (pas zigbee2mqtt) → topic corrigé
+  + value_template tolérant JSON/texte brut
+
+-- EN COURS / À FAIRE --
+Todo #1 : chauffages SDB (power_status absents vignette L2C2, inter_radiateur orphelin, B1_01 absent prod)
+Todo #8/#9 : orphelins inter_radiateur_salle_de_bain + mode_absence_force (Eric : pas orphelins — à prouver)
+Page L1C3 : fan_modes chambre encore RM4 (breeze/powerful/levelX) → auto/low/medium/high
+Badges "Réglé à" chambre (L1C3+L2C2) : attribut temperature inexistant sur NodOn → adapter
+Export Dashboard_COMPLET frais (dernier : 06/27) + push git (mqtt/, scripts, config, docs)
+
+-- PROCHAINE ACTION --
+Push git depuis HA → MD5 → traiter todo SDB
+
+=== FIN JOURNAL ===</pre>
+<hr>
+<pre>=== JOURNAL HA REBUILD — 2026-07-13 ===
+
+SESSION : ~2h (analyse énergie + automations + vérification entités)
+BRANCHE ACTIVE : hors TREE_CORRIGE (travail UI HA + draft automations)
+
+-- FICHIERS VALIDÉS --
+(aucun fichier YAML TREE_CORRIGE modifié cette session)
+
+-- DRAFTS CRÉÉS (à saisir dans UI HA) --
+automation : "Absence Spéciale — Clims Démarrage 01h30"
+  · trigger: time 01:30 | condition: groupe_1
+  · action: climate.set_hvac_mode(cool) + set_temperature(28°C)
+  · entities: climate.clim_salon_rm4_mini / clim_bureau_rm4_mini / clim_chambre_rm4_mini
+
+automation : "Absence Spéciale — Clims Stop + Prises Off 07h30"
+  · trigger: time 07:30 | condition: groupe_1
+  · action: climate.turn_off ×3 + switch.turn_off (prises non-critiques)
+  · EXCLU : frigo, congel, box internet
+
+script : "Chambre — Toggle Clim Saison"
+  · toggle climate.clim_chambre_rm4_mini selon sensor.mode_ete_hiver
+  · cool → temperature_corrige_chambre (27°C) | heat → (18°C)
+  · vérifie switch.clim_chambre_nous avant déclenchement
+
+-- ANALYSE ÉNERGÉTIQUE --
+Période : Ven 10/07 05h00 → Lun 13/07 13h00 (absence complète)
+Fichier source : diag_conso_elec.txt (1.9 Mo)
+Résultats :
+  Clim (Chauff)  : 6.76 kWh
+  Froid          : 4.47 kWh
+  Multi          : 2.94 kWh
+  Autres/Cuis/Lum: 1.39 kWh
+  TOTAL          : 15.56 kWh
+Points clés :
+  · Ti max : 29.2°C (12/07 soir + nuit du 13) — seuil 28°C dépassé en continu
+  · Clims éteintes la nuit alors que Ext descendait à 24-25°C → opportunité manquée
+  · 3.34 kWh le 13/07 matin pour baisser Ti de seulement 1.3°C (inertie thermique)
+  · Automations "absence spéciale" 01h30-07h30 auraient évité ce scénario
+
+-- DÉCOUVERTES ENTITÉS (source : TREE_CORRIGE + automations) --
+Clim entities (RM4 Mini Broadlink) :
+  climate.clim_salon_rm4_mini
+  climate.clim_bureau_rm4_mini
+  climate.clim_chambre_rm4_mini
+Alimentations physiques (NOUS) :
+  switch.clim_salon_nous
+  switch.clim_bureau_nous
+  switch.clim_chambre_nous
+Logique saison : sensor.mode_ete_hiver (cool / heat / off)
+Température chambre auto : sensor.temperature_corrige_chambre
+
+-- ERREURS RÉSOLUES --
+entity_id incorrects dans draft automation absence :
+  climate.clim_salon_entree → climate.clim_salon_rm4_mini [corrigé]
+  climate.clim_bureau       → climate.clim_bureau_rm4_mini [corrigé]
+  climate.clim_chambre      → climate.clim_chambre_rm4_mini [corrigé]
+
+-- EN COURS --
+Automations absence spéciale — à saisir via UI HA (drafts prêts)
+Script toggle chambre saison — à saisir via UI HA / scripts.yaml
+
+-- PROCHAINE ACTION --
+1. Saisir les 2 automations dans UI HA + vérifier état switches NOUS (alimentations)
+2. Créer le script "Toggle Chambre Saison" dans UI HA
+3. Tester l'automation absence sur le prochain départ (vérifier groupe_1 détecté)
+
+=== FIN JOURNAL ===</pre>
+<hr>
+<pre>=== JOURNAL HA REBUILD — 2026-07-14 (SESSION 3) ===
+
+SESSION : ~4h (suite session 1+2 sur resync NodOn + push prod)
+BRANCHE ACTIVE : TREE_CORRIGE
+
+-- FICHIERS YAML VALIDÉS (TREE_CORRIGE) --
+19 fichiers TREE_CORRIGE resynchronisés depuis GitHub ← prod :
+  input_booleans/P1/P1_ACS_IB_01_arret_clim_securises.yaml [✓]
+  input_booleans/P1/P1_BV_BI_02_inter_soufflant_sdb.yaml [✓]
+  input_booleans/P4/P4_presence_wifi.yaml [✓]
+  input_button.yaml / input_datetime.yaml / input_select.yaml / sql.yaml [✓]
+  templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml [✓]
+  templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml [✓]
+  templates/P2_prise/P2_eCO_prises/P2_eco_prises_config.yaml [✓]
+  templates/meteo/M_01_meteo_alertes_card.yaml [✓]
+  utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ.yaml [✓]
+  utility_meter/P0_Energie_total/Genelec_appart/02_UM_genelec_appart_HPHC_AMHQ.yaml [✓]
+  utility_meter/P1_clim_chauffage/P1_UM_AMHQ.yaml [✓]
+  utility_meter/P2_prise/P2_UM_AMHQ_mini_pc.yaml [✓]
+  utility_meter/P2_prise/P2_UM_AMHQ_prises.yaml [✓]
+  utility_meter/P2_prise/P2_UM_AMHQ_veilles.yaml [✓]
+  utility_meter/P3_eclairage/P3_UM_AMHQ_1_UNITE.yaml [✓]
+  utility_meter/meteo/M_03_meteo_UM_blitzortung.yaml [✓]
+
+Migration NodOn chambre (rm4_mini → nodon) :
+  docs_scripts/TREE_CORRIGE/p1_master_gestion_clim.yaml [✓]
+    → climate.clim_chambre_nodon (lignes 168, 249, 251, 255)
+  docs_automations/TREE_CORRIGE/P1_clim_chauffage/f_clim_automatisation_arret_clim_notification.yaml [✓]
+  docs_automations/TREE_CORRIGE/P1_clim_chauffage/h_clim_debug_force_mode_correct_securite.yaml [✓]
+  docs_automations/TREE_CORRIGE/P1_clim_chauffage/i_synchro_notif_clim_si_prise_coupee.yaml [✓]
+
+Structure P0_Energie_total_diag :
+  Anciens dossiers (Diag/, Genelec_appart/, Linky/, total_pour_les_7_postes/) → SUPPRIMÉS
+  Nouveaux (P0_Diag/, P0_Genelec_appart/, P0_Linky/, P0_total_pour_les_7_postes/) → 8 fichiers copiés [✓]
+
+-- DOCS .MD CORRIGÉES ET POUSSÉES EN PROD --
+  docs_automations/docs/P1_CLIM_CHAUFFAGE/F_ARRET_CLIM_NOTIF.md [✓]
+  docs_automations/docs/P1_CLIM_CHAUFFAGE/H_DEBUG_FORCE_MODE.md [✓]
+  docs_automations/docs/P1_CLIM_CHAUFFAGE/I_SYNCHRO_NOTIF_PRISE_COUPEE.md [✓]
+  docs_automations/docs/AUTOMATIONS/AUTOMATIONS.md [✓]
+  docs_scripts/docs/P1_MASTER_GESTION_CLIM.md [✓]
+  docs_scripts/docs/SCRIPT_J2_0_SECU_ARRET_CLIM.md [✓]
+  docs_dashboard/docs/DEPENDANCES_GLOBALES.md [✓] (paths P0_ corrigés, note resync session 3)
+  → 7 fichiers pushés H:\Docs — MD5 vérifié ✅
+
+-- DASHBOARD YAML — PROD H:\Docs\Dashboard --
+  11 fichiers yaml poussés (Dashboard_COMPLET + L1C2 + L1C3 ×6 + L2C2 + DEPENDANCES_GLOBALES)
+  29 anciens yaml supprimés (garder 1 seul par type dans chaque sous-dossier)
+  → Prod Dashboard nettoyée pour AnythingLLM ✅
+
+-- SKILLS CRÉÉS (installés) --
+  ha-push-docs.skill    — sync docs local → H:\Docs [✓]
+  ha-resync-tree.skill  — resync TREE_CORRIGE ← GitHub [✓]
+  ha-push-yaml.skill    — push YAML TREE_CORRIGE → H:\ (avec verrou 5 checks) [✓]
+  ha-new-yaml.skill     — génération squelette YAML conforme conventions [✓]
+
+-- POINT D'ATTENTION --
+  remote.soufflant_sdb_rm4_mini : encore en prod (SDB soufflant) — migration prévue avant 2026-10-01
+  Ne pas modifier AUTOMATIONS.md L304 avant cette migration.
+
+-- EN COURS --
+  Aucun fichier en draft — session propre.
+
+-- ERREURS RÉSOLUES --
+  rm bash sur Samba H:\ → résolu via PowerShell Remove-Item
+  Edit tool "File has not been read yet" → résolu via Read limit=5 avant Edit
+
+-- PROCHAINE ACTION --
+  Reprendre audit MD5 hebdomadaire (planifié 1×/semaine)
+  Migration remote.soufflant_sdb_rm4_mini avant 2026-10-01
+
+=== FIN JOURNAL ===
+
+
+============================================================
+
+=== JOURNAL HA REBUILD — 2026-07-14 (session 2) ===
+
+SESSION : ~2h estimée
+BRANCHE ACTIVE : Dashboard (local) + PROD directe (H:)
+
+-- FICHIERS CRÉÉS (LOCAL) --
+Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-07-14.yaml     [✓]
+  → climate.clim_chambre_rm4_mini → climate.clim_chambre_nodon
+  → badge "Réglé à" → sensor.temperature_corrige_chambre
+  → NOUS SP1 conservé (prise toujours présente)
+Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-07-14.yaml     [✓]
+  → même migration NodOn chambre
+
+-- FICHIERS MAJ (LOCAL) --
+docs_dashboard/docs/DEPENDANCES_GLOBALES.md                                 [✓]
+  → page_L2C2 06-18 + page_L1C2 05-22 → ⚠️ obsolète
+  → nouvelles versions 07-14 ajoutées avec note NOUS SP1
+  → date mise à jour : 2026-07-14
+
+-- CORRECTIONS PROD DIRECTES (H: / \\10.32.154.243\config) --
+H:\scripts.yaml — j_2_0_secu_arret_clim_protege ligne 14               [✓]
+  AVANT : clim_entity: climate.clim_{{ p }}_rm4_mini
+  APRÈS : clim_entity: "{% if p == 'chambre' %}climate.clim_chambre_nodon{% else %}climate.clim_{{ p }}_rm4_mini{% endif %}"
+  → BUG : off-prise chambre ne mettait pas off le NodOn
+
+H:\templates\P1_clim_chauffage\P1_ui_dashboard\P1_ui_dashboard.yaml    [✓]
+  → salon_power_locks : seuil 5W → 9W (aligné bureau + chambre)
+
+-- AUDIT PROD P1 — ÉTAT CONSTATÉ --
+✅ automations.yaml (f/h/i)     → clim_chambre_nodon (à jour)
+✅ p1_master_gestion_clim       → clim_chambre_nodon (à jour)
+✅ configuration.yaml           → clim_chambre_rm4_mini commenté depuis 07-06
+✅ P1_ui_dashboard.yaml         → clim_chambre_nodon (à jour en prod)
+❌ TREE_CORRIGE local           → en retard sur prod (p1_master, ui_dashboard, automations)
+
+-- ERREURS RÉSOLUES --
+j_2_0 prod : template clim_{{ p }}_rm4_mini → chambre ne recevait pas le off
+  → correction inline Jinja avec cas chambre/nodon
+L2C2/L1C2 local : clim_chambre_rm4_mini encore présent → pages 07-14 créées
+
+-- EN COURS --
+TREE_CORRIGE local P1 → EN RETARD sur prod — resync à faire (p1_master, ui_dashboard, automations f/h/i)
+docs_scripts/TREE_CORRIGE/p1_master_gestion_clim.yaml → version locale = rm4_mini (prod = nodon)
+
+-- PROCHAINE ACTION --
+Resynchroniser TREE_CORRIGE local P1 depuis la prod (H:) — audit MD5 recommandé
+
+=== FIN JOURNAL ===
+
+
+============================================================
+
+=== JOURNAL HA REBUILD — 2026-07-14 (SESSION 4) ===
+
+SESSION : ~3h | Contexte repris depuis compaction
+BRANCHE ACTIVE : TREE_CORRIGE
+
+-- CONTEXTE --
+Session dédiée au revert NodOn IRB-4-1-00 → RM4 Mini pour la chambre.
+Cause : NodOn expose en permanence target_temp_low + target_temp_high (Zigbee spec).
+La thermostat card HA defaulte toujours sur target_temp_low (chauffe) quelle que soit
+la hvac_mode active. Pas de fix possible côté hardware. Décision : retour RM4 Mini.
+
+-- PROD H:\ — MODIFIÉS DIRECTEMENT --
+automations.yaml          — 8 remplacements clim_chambre_nodon→rm4_mini [✓]
+scripts.yaml              — 5 remplacements clim_chambre_nodon→rm4_mini [✓]
+
+-- TREE_CORRIGE LOCAL — YAML --
+docs_dashboard/TREE_CORRIGE/templates/P1_clim_chauffage/P1_ui_dashboard/P1_ui_dashboard.yaml
+  → 5 remplacements clim_chambre_nodon→rm4_mini [✓] + push H:\templates\... [✓]
+
+-- TREE_CORRIGE LOCAL — AUTOMATIONS (ref, pas poussées) --
+docs_automations/TREE_CORRIGE/P1_clim_chauffage/f_clim_automatisation_arret_clim_notification.yaml  [✓]
+docs_automations/TREE_CORRIGE/P1_clim_chauffage/h_clim_debug_force_mode_correct_securite.yaml       [✓]
+docs_automations/TREE_CORRIGE/P1_clim_chauffage/i_synchro_notif_clim_si_prise_coupee.yaml           [✓]
+
+-- TREE_CORRIGE LOCAL — SCRIPT (ref) --
+docs_scripts/TREE_CORRIGE/p1_master_gestion_clim.yaml  [✓]
+
+-- DASHBOARD — CORRIGÉS LOCAL + PUSHÉS H:\Docs --
+Dashboard/L1C3_03_Commandes_Clim/page_L1C3_clim_2026-07-08.yaml        → rm4_mini + badge nodon_en_ligne supprimé [✓]
+Dashboard/L1C3_03_Commandes_Clim/vignette_L1C3_clim_2026-07-08.yaml    → rm4_mini [✓]
+Dashboard/L1C3_03_Commandes_Clim/card_prog_clim_chambre_2026-07-14.yaml → rm4_mini [✓]
+Dashboard/L1C2_02_Temperatures/page_L1C2_temperatures_2026-07-14.yaml   → rm4_mini [✓]
+Dashboard/L2C2_05_Energie_Clim/page_L2C2_energie_clim_2026-07-14.yaml   → rm4_mini [✓]
+
+-- DASHBOARD HA — APPLIQUÉ MANUELLEMENT --
+L1C3 page + vignette + card_prog [✓]
+L1C2 page [✓]
+L2C2 page [✓]
+
+-- DOCS PUSHÉES H:\Docs --
+docs_automations/docs/P1_CLIM_CHAUFFAGE/F_ARRET_CLIM_NOTIF.md           [✓]
+docs_automations/docs/P1_CLIM_CHAUFFAGE/H_DEBUG_FORCE_MODE.md            [✓]
+docs_automations/docs/P1_CLIM_CHAUFFAGE/I_SYNCHRO_NOTIF_PRISE_COUPEE.md [✓]
+docs_automations/docs/AUTOMATIONS/AUTOMATIONS.md                         [✓]
+docs_scripts/docs/P1_MASTER_GESTION_CLIM.md                              [✓]
+docs_scripts/docs/SCRIPT_J2_0_SECU_ARRET_CLIM.md                        [✓]
+docs_dashboard/docs/DEPENDANCES_GLOBALES.md  → revert documenté          [✓]
+
+-- ERREURS RÉSOLUES --
+P1_ui_dashboard.yaml : oublié dans premier scan → détecté par scan global post-push
+DEPENDANCES_GLOBALES.md : section NodOn → reécrite (entités, note dual-setpoint)
+Dashboard_COMPLET/*.yaml : {% set nodon = %} = variable Jinja2 P0 (SEM-4-1-00) → NE PAS TOUCHER
+
+-- EN COURS --
+Reboot système HA en cours (redem sys post-session)
+
+-- PROCHAINE ACTION --
+Vérifier HA après reboot : climate.clim_chambre_rm4_mini disponible + automations actives
+Lancer audit_md5 (bouton YAML) pour synchroniser GitHub post-revert
+
+=== FIN JOURNAL ===
+
+
+============================================================
+
+=== JOURNAL HA REBUILD — 2026-07-14 (S5) ===
+
+SESSION : ~2h (session de travail local — restructuration dossiers)
+BRANCHE ACTIVE : LOCAL ReBuild/ — aucune modification YAML prod
+
+-- FICHIERS VALIDÉS --
+(aucun fichier YAML TREE_CORRIGE modifié cette session)
+
+-- TRAVAUX RÉALISÉS --
+[1] Création structure DOCS/ (renommé depuis DOCS_PROD/)
+    -&gt; 00_IA/ | 01_docs_config_system/ | 02_docs_dashboard/
+    -&gt; 03_docs_automations/ | 04_docs_scripts/ | 05_docs_MD_system/
+
+[2] Migration complète vers DOCS/ — vérification 7/7 OK :
+    docs_dashboard/TREE_CORRIGE  -&gt; DOCS/01_docs_config_system/config_system_YAML  (81 fichiers)
+    docs_dashboard/docs          -&gt; DOCS/02_docs_dashboard/dashboard_docs_MD       (53 fichiers)
+    Dashboard/                   -&gt; DOCS/02_docs_dashboard/dashboard_docs_YAML     (130 fichiers)
+    docs_automations/TREE_CORRIGE-&gt; DOCS/03_docs_automations/docs_automations_YAML (107 fichiers)
+    docs_automations/docs        -&gt; DOCS/03_docs_automations/docs_automations_MD   (59 fichiers)
+    docs_scripts/TREE_CORRIGE    -&gt; DOCS/04_docs_scripts/docs_scripts_YAML         (4 fichiers)
+    docs_scripts/docs            -&gt; DOCS/04_docs_scripts/docs_scripts_MD           (4 fichiers)
+
+[3] Tri vrac/ -&gt; destinations :
+    DEPENDANCES_GLOBALES.md + INDEX_PAGES.md -&gt; 02_docs_dashboard/dashboard_docs_MD/
+    METEOCSS_CARD_MODIF.md -&gt; dashboard_docs_MD/ (racine, idem source)
+    MOC_DASHBOARD.md -&gt; 05_docs_MD_system/map_of_content_obsidian/
+    WORKFLOW_REBUILD.md -&gt; 05_docs_MD_system/workflow/
+    _TEMPLATE_DOC.md -&gt; 05_docs_MD_system/matrisse_template_doc/
+    AUTOMATIONS_IDS_REF.md + AUTOMATIONS_MIGRATION_REPORT.md -&gt; 03_docs_automations/docs_automations_MD/
+
+[4] Correction typo : docs_scritps_MD/YAML -&gt; docs_scripts_MD/YAML
+
+-- EN COURS --
+Nettoyage vrac/ restant (PROD_LISTING_2026-04-05.md, TRIAGE_2026-04-05.md,
+md5_compare_*.txt, versions_historique/) — a decider : supprimer ou archiver
+
+-- ERREURS RESOLUES --
+Samba mount cache : cp/mv bash echouaient silencieusement sur DOCS/ (cree via Windows)
+-&gt; Contourne via mcp__Windows-MCP__PowerShell (Copy-Item direct cote Windows)
+
+Doublon METEOCSS_CARD_MODIF.md dans L1C1_METEO/ (ajoute par erreur)
+-&gt; Supprime, conserve uniquement a la racine de dashboard_docs_MD/
+
+PAGE_RASPI L4C2_10/ en doublon dans dashboard_docs_YAML
+-&gt; Supprime, conserve PAGE_RASPI/ (conforme a la source Dashboard/)
+
+backup/ en doublon dans docs_automations_YAML (backup/ + github_backup/)
+-&gt; Supprime backup/, conserve github_backup/ (nommage choisi par utilisateur)
+
+-- PROCHAINE ACTION --
+1. Mettre a la poubelle : docs_dashboard/ + docs_automations/ + docs_scripts/ + Dashboard/
+2. Decider du sort de vrac/ (md5, PROD_LISTING, versions_historique)
+3. Mettre a jour CLAUDE.md : referencer DOCS/ comme nouveau repertoire de travail
+
+=== FIN JOURNAL ===
+
+
+============================================================</pre>
+<hr>
+</body></html>

@@ -1,0 +1,84 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-09-28</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-09-28</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-09-28_s1.txt</p>
+<h3>JOURNAL HA REBUILD - 2026-09-28</h3>
+<pre>
+SESSION : session unique ouverte le 27/09 au soir, reprise et poursuivie le 28/09
+CONTEXTE : dashboard tablette, salle de bain (soufflant), cuisine, puis contexte et
+           documentation du projet ReBuild
+</pre>
+<h4>ETAPES VALIDEES</h4>
+<pre>[1] Dashboard tablette : 9 typos corrigees (5 Consomation, 1 Soullant, 3 prise exterieur)
+    -&gt; ecriture par API HA, verifie sur /h/.storage/lovelace.dashboard_tablette, 0 restante
+[2] Carte Commande Clim : ajout du trigger manquant sensor.mode_ete_hiver -&gt; 20 a 21 entrees
+[3] Bouton renomme Inter Soufflant Salle de Bain (IKEA RODRET) : groupe GRP_02 corrige (l.38)
+    + reload -&gt; 8 membres verifies
+[4] Cuisine : entites fantomes Riemann disparues apres le mode Leon (2136 -&gt; 2134) ;
+    compteurs intacts, annuel 0,704 kWh
+[5] Salle de bain inventoriee : 2 boutons, 5 automations (2 eteintes), 9/9 entites appelees
+    existent ; piege identifie : l'automation au nom soufflant SDB pilote le salon
+[6] DEPENDANCES_GLOBALES.md (manuel) archive dans _ARCHIVE/ avec note en tete
+[7] Contexte projet aligne : CLAUDE.md + copie locale + copie prod, une seule empreinte
+[8] Arborescence IA_ARBO_DETAIL.md refaite par comptage reel (local + prod)
+[9] INDEX_GLOBAL.md : 3 liens morts corriges, 8 mentions re-prefixees, entite du bouton SdB
+    corrigee (verifiee en live), renvoi vers la carte vivante -&gt; 250 liens, 0 mort
+[10] SOUFFLANT SDB - VERSION FINALE DEPLOYEE : 1 verrou, 2 scripts, 2 automatisations,
+    recharge sans redemarrage ; docs (4 exports YAML + fiche) en local et en prod ;
+    push GitHub commit 78b633e4 puis 3cc41010
+[11] INDEX_GLOBAL complete : automations H et I (poste Salle de Bain), 2 scripts (section 04),
+    compteurs 48 -&gt; 50 et 1 -&gt; 3, journal de mise a jour -&gt; 255 liens, 0 mort
+[12] Skills mis a jour : ha-projet-documentation (role des fichiers de contexte) et histo
+    (etape d'alignement des trois copies)
+[13] TODO.txt : section A VERIFIER DEMAIN (2026-09-29), SDB-4 coche, date d'en-tete
+</pre>
+<h4>EN COURS</h4>
+<pre>- Copie prod de DEPENDANCES_GLOBALES.md toujours presente sur H: (annule l'archivage)
+- 26 entites citees dans INDEX_GLOBAL.md ne repondent plus en live (697 citees)
+- 2 fiches (IA_INDEX_NAVIGATION, IA_INDEX_AUTOMATIONS) avec renvois perimes
+- Regles projet non respectees pour le deploiement : automations.yaml modifie en direct
+  (la regle dit : passer par l'UI) et ajout d'un input_boolean (la regle dit : zero helper UI)
+- Horloge Windows : derive ~2 h a resynchroniser (reste du 26/09)
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>- Faux garde-fou du script dashboard (comparait sans deballer la cle config) -&gt; data["config"]
+- Mon remplacement dans INDEX_GLOBAL a double le prefixe sur 8 liens (P0_P0_) -&gt; 9 occurrences
+  reparees, controle repasse a 0 lien mort
+- Mon insertion du bloc scripts dans l'index l'a ecrit deux fois -&gt; doublon de 946 caracteres
+  retire, balises HTML verifiees equilibrees
+- Heredoc vide dans une commande -&gt; blocage de 300 s, remplace par des scripts en fichier
+- Survol : la note du TODO du 20/09 disait la conso cuisine non comptee -&gt; faux, les
+  compteurs pointent la source directe (annuel 0,704 kWh)
+- Mon jugement trop large ("tout est fait") -&gt; corrige : seuls le dashboard et la vignette
+  etaient faits, SDB-4 etait non coche
+</pre>
+<h4>FICHIERS MODIFIES</h4>
+<pre>/h/.storage/lovelace.dashboard_tablette (9 typos + trigger clim)
+/h/groups/GRP_02_batteries_ikea.yaml (l.38) + sauvegarde
+/h/automations.yaml (2 automatisations : routage + bouton Rodret) + sauvegarde
+/h/scripts.yaml (sdb_soufflant_demarrer + sdb_soufflant_arreter) + sauvegarde
+/h/input_booleans/P1/P1_BV_IB_inter_soufflant_sdb.yaml (verrou) + sauvegarde
+C:/Users/Berry Swann/Documents/ReBuild/CLAUDE.md + docs/00_IA/IA_CONTEXT_BASE.md
+H:/docs/00_IA/IA_CONTEXT_BASE.md (les trois alignes, empreinte 6858f8ef)
+docs/00_IA/sous_context_ia/IA_ARBO_DETAIL.md (+ prod) : compteurs du 28/09
+Github/INDEX_GLOBAL.md (+ H:/INDEX_GLOBAL.md) : liens, entites, automations H/I, scripts
+docs/03_docs_automations/docs_automations_YAML/P1_sdb/h_ et i_soufflant_sdb_*.yaml (+ prod)
+docs/04_docs_scripts/docs_scripts_YAML/sdb_soufflant_demarrer/arreter.yaml (+ prod)
+docs/03_docs_automations/docs_automations_MD/P1_SDB/SDB_SOUFFLANT_SPECIFICATION_2026.md
+docs/02_docs_dashboard/dashboard_docs_MD/_ARCHIVE/ (fichier de dependances archive)
+TODO.txt (section du 29/09, SDB-4 coche, date) + sauvegarde
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Tester le soufflant en reel avec le bouton Rodret : verifier 0, environ 40 W, puis 2000 W,
+et l'arret en deux temps. Relever la temperature de coupure reelle du soufflant.
+(voir TODO.txt, section A VERIFIER DEMAIN)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

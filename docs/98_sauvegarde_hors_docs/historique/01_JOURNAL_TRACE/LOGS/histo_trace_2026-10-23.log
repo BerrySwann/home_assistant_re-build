@@ -1,0 +1,42 @@
+22:51:06.087 | SEQ_DEBUT  | SEQUENCE           | histo
+22:51:06.145 | DEBUT      | journal            | 
+22:51:32.761 | FIN        | journal            | OK histo_2026-10-23_s1.md ecrit
+22:51:38.110 | DEBUT      | sync_index         | 
+22:52:58.181 | FIN        | sync_index         | OK index generes casses=0, REPO+DEP pousses
+22:52:58.240 | DEBUT      | fusionne           | 
+22:53:45.486 | FIN        | fusionne           | OK JOURNAL_FUSIONNE_2026-07-15_2026-10-23.md
+22:53:56.832 | DEBUT      | obsidian           | 
+22:53:58.322 | FIN        | obsidian           | OK
+22:53:58.379 | DEBUT      | pages_html         | 
+22:54:07.681 | FIN        | pages_html         | OK 2 pages creees, 1 originaux a la corbeille
+22:54:12.830 | NOTE       | pages_html         | histo_2026-10-23_s1.md a la corbeille (page histo_2026-10-23.html, 1 section)
+22:54:12.887 | DEBUT      | menage             | 
+22:55:50.889 | FIN        | menage             | OK 7 renommes, 5 corbeille, 1 fusion, 2 signales
+22:55:50.947 | DEBUT      | export_5B          | 
+22:56:03.689 | FIN        | export_5B          | OK Dashboard deja a jour (94885729)
+22:56:03.747 | DEBUT      | tree               | 
+22:58:08.859 | FIN        | tree               | OK IA_ARBO_DETAIL pousse md5 6a2c4c06
+22:58:13.915 | DEBUT      | controles_6B       | 
+22:58:14.453 | FIN        | controles_6B       | OK
+22:58:14.509 | DEBUT      | controles_6C       | 
+22:58:14.882 | FIN        | controles_6C       | OK
+22:58:14.939 | DEBUT      | controles_6D       | 
+22:58:17.500 | FIN        | controles_6D       | OK
+22:58:17.558 | DEBUT      | controles_6E       | 
+22:58:17.705 | FIN        | controles_6E       | OK
+22:58:45.102 | DEBUT      | rapport            | 
+22:58:45.163 | FIN        | rapport            | OK rapport final
+22:58:45.220 | SEQ_FIN    | SEQUENCE           | fin de sequence
+23:06:50.905 | SEQ_DEBUT  | SEQUENCE           | histo-final
+23:06:50.961 | DEBUT      | automation_off     | 
+23:06:51.017 | NOTE       | journal            | histo complet execute a 22:51-22:58 (S1) juste avant, non relance
+23:07:05.998 | FIN        | automation_off     | OK automation off confirmee
+23:07:13.030 | DEBUT      | notification       | 
+23:07:32.482 | FIN        | notification       | OK notify.mobile_app_eric envoyee, arret annonce 23:12
+23:07:32.537 | DEBUT      | lumieres           | 
+23:07:49.562 | FIN        | lumieres           | OK Hue Sync coupe par API pont, 3 Play off
+23:07:49.620 | DEBUT      | automation_on      | 
+23:07:56.516 | FIN        | automation_on      | OK automation on confirmee
+23:07:56.616 | DEBUT      | arret_pc           | 
+23:07:56.672 | FIN        | arret_pc           | OK arret programme
+23:07:56.728 | SEQ_FIN    | SEQUENCE           | fin de sequence

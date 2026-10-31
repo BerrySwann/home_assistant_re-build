@@ -1,0 +1,48 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-29</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-29</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-29_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-29</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : N/A (journee, derniere phase de 21h30 a 22h20)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_MD/.scripts/</code> - 5 fiches rangees un dossier par fiche (Audit_md5_yaml, Audit_md5_md_yaml, Ha_git_backup, Check_yaml_forme, Correct_linky), fiches Audit_md5_yaml et Audit_md5_md_yaml mises a jour (empreinte <code>0534BD4E</code>) <strong>[v]</strong></li>
+<li>🟢 <code>command_line/Audit/audit_md5_yaml.yaml</code>, <code>audit_md5_md_yaml.yaml</code> et <code>Card_audit_buttons.yaml</code> - commentaires obsoletes corriges, deux command_line poussees en prod racine (<code>DD5FD37C</code>, <code>30EB5CA2</code>) <strong>[v]</strong></li>
+<li>🟢 <code>.claude/skills/ha-push-yaml/SKILL.md</code> et <code>docs/05_docs_skills/skill_ha_push_yaml/ha_push_yaml.md</code> - regle d'aplatissement (<code>Get-RelProd</code>), HA reste a plat <strong>[v]</strong></li>
+<li>🟢 <code>H:\docs</code> (miroir) - 22 fichiers de la nouvelle structure scripts et command_line pousses, 14 anciens fichiers a plat supprimes via <code>TEMPO\nettoyage_miroir_docs_2026-10-29</code> (MD5 verifie) <strong>[v]</strong></li>
+<li>🟢 <code>docs/00_IA</code> - sous-contextes IA, <code>IA_CONTEXT_BASE</code>, index IA pousses en prod (index converge <code>E4B40813</code>), 12 anciens doublons de prod copies en TEMPO puis supprimes <strong>[v]</strong></li>
+<li>🟢 <code>TODO/TODO.html</code> - 16 points R125.1 a R125.16 ajoutes, R125.1 a R125.5 passes en FAIT <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 <code>configuration.yaml</code> - prod <code>854e0bba</code> differe du local <code>45bc0745</code> : modification faite par Eric en prod (confirme le <strong>2026-10-29</strong>), a decider (copie prod vers local sur ordre d'Eric) <strong>[EN COURS]</strong></li>
+<li>🟠 <code>README.md</code> - local <code>9c1dc029</code> different de la prod <code>c841de3e</code>, non pousse <strong>[a decider]</strong></li>
+<li>🟠 carte <code>propose_skills</code> pour <code>/ha-push-yaml</code> cote claude.ai et autres skills claude.ai a anciens chemins - a enregistrer par Eric <strong>[a deployer]</strong></li>
+<li>🟠 R125.10 a R125.13 - decisions d'Eric seul <strong>[EN COURS]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 push du miroir : <code>$h</code> et <code>$H</code> sont la meme variable PowerShell, les 22 premieres copies ont vise un chemin invalide -&gt; aucun fichier cree, lignes de journal retirees, push refait avec des noms distincts <strong>[resolu]</strong></li>
+<li>🔴 <code>Get-RelProd</code> : premier calcul declarait 3 command_line plats non conformes -&gt; profondeur cible corrigee, 0 non conforme <strong>[resolu]</strong></li>
+<li>🔴 scan "anciens chemins" : faux positifs par casse -&gt; refait sensible a la casse, 0 reference restante <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.html)</h4>
+<ul>
+<li>📋 R125.1 a R125.5 FAIT ; R125.6 a R125.16 ouverts (dont R125.6 configuration.yaml)</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Decider du sort de <code>configuration.yaml</code> (copie prod vers local ?) et de <code>README.md</code>, puis R125.10 a R125.13</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

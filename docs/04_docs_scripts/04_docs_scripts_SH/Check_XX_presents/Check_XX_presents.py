@@ -23,7 +23,8 @@ PROD = "H:" + chr(92) + "docs"
 MANIFEST = os.path.join(DOCS, "04_docs_scripts", "04_docs_scripts_SH", "Check_XX_presents",
                         "XX_manifest.json")
 SKIP = {"TEMPO", "__pycache__"}
-PREF = ("XX_", "99_docs_MD_system")  # 99_ ajoute le 2026-10-31 (ordre d Eric) : local seul, comme XX_
+PREF = ("XX_", "99_docs_MD_system")
+PROD_AUTORISE = {"99_docs_MD_system/ENTITES_GLOBAL_INDEX/ENTITES_GLOBAL_INDEX.md"}  # seul fichier de 99_ autorise en prod (Eric, 2026-10-31 17h33)  # 99_ ajoute le 2026-10-31 (ordre d Eric) : local seul, comme XX_
 
 
 def rel(p):
@@ -64,7 +65,14 @@ def en_prod(docs_prod):
     for dp, dn, _fn in os.walk(docs_prod):
         dn[:] = [x for x in dn if x not in SKIP]
         for d in dn:
-            if d.startswith(PREF):
+            if d == "99_docs_MD_system":
+                # exception d Eric (2026-10-31 17h33) : seul ENTITES_GLOBAL_INDEX.md de 99_ va en prod (sauvegarde GitHub), jamais les .bak
+                for p3, _d3, f3 in os.walk(os.path.join(dp, d)):
+                    for f in f3:
+                        r3 = os.path.relpath(os.path.join(p3, f), docs_prod).replace(chr(92), "/")
+                        if r3 not in PROD_AUTORISE:
+                            trouves.append(r3)
+            elif d.startswith(PREF):
                 trouves.append(os.path.relpath(os.path.join(dp, d), docs_prod))
     return sorted(trouves)
 

@@ -1,0 +1,139 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-07-19</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-07-19</h1><p class="mut">2 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s0">Journal</a><a href="#s10">Session S10</a></nav>
+<section id="s0"><h2>Journal</h2><p class="src">Source : histo_2026-07-19.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-07-19</h3>
+<pre>
+SESSION : ~3h (continuation session précédente compactée)
+BRANCHE ACTIVE : DOCS/ (audit energetique — hors YAML config)
+</pre>
+<h4>FICHIERS VALIDÉS</h4>
+<pre>DOCS/00_IA/sous_context_ia/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md — v6.2 -&gt; v6.3 [✓]
+  Ajouts : Hitachi RAS-35FH6 (~2008, R410A, COP 2.8-3.2)
+           Daikin FTX35KNV1B 2018 (COP 4.2-4.5, EER 4.1)
+           Carreau de platre par piece (Bureau=2 murs, Chambre=1, Salon=isolation structurelle)
+           PC thermique (Eric ~190W bureau, Mamour ~175W salon, impact hivers/ete)
+           Salon : 2 couches protection (store toile exterieur + store dur pres vitre)
+           Cuisine : store manuel constamment ferme = protection passive
+           Talon nocturne : baseline 40W (NUC ~20W + Box+Beryl ~20W), spikes documentes
+  Push H:\Docs\00_IA\sous_context_ia\ — MD5 OK [✓]
+
+DOCS/00_IA/RAPPORT_AUDIT_ENERGETIQUE_2026-07-19.md — Cree de zero [✓]
+  Mission 1 : conformite automations (bug B confirme 09/01, DUT R=2.9h vs 2.25h max)
+  Mission 2 : DUT (Chambre 11.72h/j, Bureau 9.98h/j, ratio C/B=1.17 — 3 facteurs)
+  Mission 3 : ranking energetique (Jan Chauff 57%, Multi 24% ; Avr Multi dominant)
+  TOP 3 reco : (1) deploy fix auto B URGENT (2) store chambre/notif (3) Hitachi sur panne
+  Push H:\Docs\00_IA\ — MD5 OK [✓]
+</pre>
+<h4>EN COURS</h4>
+<pre>RAPPORT section "Talon nocturne" — conclusion spikes Multi a ecrire
+  Conclusion : artefacts de mesure HA (purge recorder DB minuit + lag Z2M)
+               pas de consommation inconnue reelle — investigation close
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>diag_conso_elec.txt : moyenne janvier N=116 au lieu de 29 -&gt; grep uniquement 23:45
+diag_conso_elec.txt : mois mars/mai/juin/juillet manquants -&gt; pattern grep elargi (prefixe "[2] en [WIFI]")
+RAPPORT C/B ratio : explication simplifiee (store seul) -&gt; corrigee (3 facteurs : carreau platre + store + PC)
+Hypothese chauffe-eau : invalidee par Eric -&gt; remplacee par artefact mesure HA
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>1. Mettre a jour section "Talon nocturne" du RAPPORT (conclusion artefacts HA)
+2. /ha_push_docs pour synchroniser les 2 fichiers mis a jour
+3. URGENT (hors session) : deployer fix automation B dans prod HA
+</pre>
+<h3>FIN JOURNAL</h3>
+<pre>
+</pre>
+<h3>JOURNAL HA REBUILD - 2026-07-19 SOIR (~20 min, nouvelle session)</h3>
+<pre>
+SESSION : diagnostic + fix palier nuit clim ete
+BRANCHE ACTIVE : DOCS/01_docs_config_system/config_system_YAML/
+</pre>
+<h4>FICHIERS VALIDES</h4>
+<pre>templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml
+  - temperature_confort_nuit : palier ete +d2 releve de &gt;29 a &gt;30 [OK]
+  - Pushe en prod H:\ (5 checks pre-push OK, MD5 local==prod 7BD3...9B2C)
+</pre>
+<h4>CONTEXTE</h4>
+<pre>Constat 21h12 : 3 clims a 27 au lieu de 26 attendus. Cause : T ext 29.5
+&gt; palier 29 de temperature_confort_nuit (conf_j 25 + d2 = 27). Comportement
+normal du YAML, pas un bug. Fix demande (confort epouse) : palier monte a 30
+=&gt; sous 30 ext la nuit = 26.
+</pre>
+<h4>EN COURS</h4>
+<pre>Rechargement entites template dans HA (cote Eric) - a confirmer.
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>(aucune - session propre)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Tache #2 (demain, cette session) : palier nuit dynamique selon vigilance
+canicule Meteo France : jaune=29 / orange=30 / rouge=31, sous palier = 26.
+A trancher : (1) cas SANS vigilance (29 ou 30 ?) (2) entite vigilance
+canicule exposee par l'integration Meteo France.
+</pre>
+<h4>NOTE</h4>
+<pre>Drift doc repere : header P1_01 documente seuil_non_clim 27/28 vs reel 26
+(ligne 75). A corriger a l'occasion.
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+<section id="s10"><h2>Session S10</h2><p class="src">Source : histo_2026-07-19_S10.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-07-19</h3>
+<pre>
+SESSION : ~3h50 (longue session - git + doc + automation)
+BRANCHE ACTIVE : DOCS/ (local) + H:\ (prod Samba)
+</pre>
+<h4>FICHIERS VALIDÉS / CRÉÉS</h4>
+<pre>
+DOCS/00_IA/sous_context_ia/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md [OK]
+  - Créé depuis Analyse énergétique/analyse_energetique_appart.md (v6.2)
+  - Section 0 ajoutée : caractéristiques logement (déplacées depuis CLAUDE.md)
+  - 8 corrections issues de la revue détaillée (stores, autom B cuisine,
+    isolation, tarifs EDF, ROI, format logs, présence logs)
+  - Original supprimé (choix Eric). Push H:\docs\00_IA\sous_context_ia\ OK, MD5 vérifié.
+
+DOCS/00_IA/sous_context_ia/IA_ARBO_DETAIL.md [OK]
+  - Corrigé : Analyse énergétique/ retiré (supprimé), compteur 7-&gt;8 sous_context_ia
+  - Push H:\docs\00_IA\sous_context_ia\ OK, MD5 vérifié.
+
+DOCS/03_docs_automations/docs_automations_YAML/P1_cuisine/b_chauffage_cuisine_vacances.yaml [OK]
+  - Corrigé : présence AND -&gt; OR (aligner sur autom A)
+  - Ajouté : trigger arret_force 08:30 + branche ARRÊT FORCÉ
+  - Push H:\docs\03_docs_automations\ OK, MD5 vérifié.
+  - !! REFERENCE SEULEMENT - A DÉPLOYER MANUELLEMENT dans l'UI HA :
+    Paramètres &gt; Automatisations &gt; "B - Chauffage Cuisine Vacances" &gt; Modifier en YAML
+
+Github/README.md [OK]
+  - Ajout section "Comment ca s'articule" + avertissement INDEX_GLOBAL.md
+  - Pushé directement sur GitHub (commit f3cae9f5) via clone temp.
+
+CLAUDE.md [OK]
+  - Sections STRUCTURE DU LOGEMENT + DIMENSIONS supprimées
+  - Remplacées par renvoi vers IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md
+  - Table sous_context_ia mise à jour avec le nouveau nom de fichier.
+</pre>
+<h4>EN COURS</h4>
+<pre>IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md — non terminé selon Eric, suite prévue
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>Git backup HA (H:\) : token périmé (ghp_***...) -&gt; remplacé (ghp_***...)
+  dans H:\.git\config via git remote set-url.
+Git rebase bloqué (rebase --abort + merge à la place) : fichier IA_AUDIT absent
+  du commit 326ed071 au moment du rejoue -&gt; erreur "unable to unlink".
+Git fileMode (PowerShell) : core.fileMode=true -&gt; false (455 fichiers faussement "modified").
+Git CRLF (SSH Linux) : core.autocrlf false + git reset --hard HEAD -&gt; working tree propre.
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Déployer b_chauffage_cuisine_vacances.yaml dans l'UI HA (manuel, autom B cuisine).
+Reprendre la revue de IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md (suite des questions).
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

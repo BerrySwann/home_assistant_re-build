@@ -1,0 +1,90 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-09-05</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-09-05</h1><p class="mut">2 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a><a href="#s2">Session S2</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-09-05_s1.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-09-05 (SESSION S1)</h3>
+<pre>
+SESSION : ~40 min
+BRANCHE ACTIVE : HA live (dashboard-tablette) — pas de fichier docs/ modifié cette session
+</pre>
+<h4>DÉPLOYÉ EN HA (dashboard-tablette, pas de fichier docs/ — correctif direct via API)</h4>
+<pre>Repair Spook "Entités inconnues utilisées dans : TABLETTE" — 4 fantômes localisés et corrigés :
+  - climate.clim_du_bureau -&gt; climate.clim_bureau_rm4_mini (vue temperatures, bubble-card BUREAU, sub_button fan_modes)
+  - climate.clim_chambre_nodon -&gt; climate.clim_chambre_rm4_mini (vues temperatures + energie-clim, bubble-card CHAMBRE, sub_button fan_modes ; entité supprimée le 2026-07-14, ancienne intégration mqtt/Nodon)
+  - sensor.sdb_seche_serviette_status_affichage -&gt; sensor.sdb_seche_serviette_power_status_affichage (vue clim, conditional OR "Consommation TOTAL")
+  - sensor.sdb_seche_serviettes_power_status_affichage -&gt; sensor.sdb_seche_serviette_power_status_affichage (vue energie-clim, même conditional)
+  Déployé via ha_config_set_dashboard (python_transform, remplacement ciblé par valeur exacte sur tout le dashboard)
+  write_committed=true, post_write_verified=true — re-vérifié par relecture de la vue clim + recherche exacte des 4 entity_id fantômes (0 match restant) [✓]
+</pre>
+<h4>EN COURS</h4>
+<pre>(aucune — point traité proprement)
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>ha_config_get_dashboard(entity_id=...) : ne traverse pas les conditional.conditions[] imbriquées ni les picture-elements.elements
+  -&gt; contourné par lecture manuelle vue par vue (view_path : temperatures, clim, energie-clim, prog-clim-bureau, prog-clim-chambre, prog-soufflant-sdb)
+ha_config_get_dashboard() (config complet, sans view_path) : timeout SSE à répétition (dashboard 818 Ko, 26 vues)
+  -&gt; contourné en scopant systématiquement par view_path ou card_type
+</pre>
+<h4>TACHES BACKLOG (TODO.txt)</h4>
+<pre>(aucune nouvelle)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Vérifier dans HA (Réglages &gt; Système &gt; Réparations) que le repair Spook "TABLETTE" a bien disparu au prochain scan
+(non vérifiable depuis Claude — Spook tourne en tâche de fond côté HA)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-09-05_s2.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-09-05 (SESSION S2)</h3>
+<pre>
+SESSION : ~45 min (analyse log + diagnostic + fix proposé)
+BRANCHE ACTIVE : docs/
+</pre>
+<h4>FICHIERS VALIDÉS</h4>
+<pre>(aucun fichier définitivement validé et déployé cette session)
+</pre>
+<h4>EN COURS</h4>
+<pre>docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim.yaml
+  état : fix PROPOSÉ, NON DÉPLOYÉ
+  — Bloc ciblé : INIT : CIBLES DE TEMPÉRATURE PAR PIÈCE
+  — Variables concernées : t_salon_target, t_bureau_target, t_chambre_target
+  — Fix : encapsulation {% set _v %}...{% endset %} + clamp [[_v, min_temp]|max, max_temp]|min
+    sur state_attr live de chaque climate.clim_*_rm4_mini
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>script.p1_master_gestion_clim : temp_out_of_range (SmartIR/Broadlink RM4 Mini)
+  Cause racine :
+    - Restart HA à 20:44:41 (Europe/Paris) le 2026-09-05
+    - sensor.mode_ete_hiver = 'off' → mode_saison = 'off'
+    - sensor.groupe = 'groupe_4'
+    - sensor.temperature_corrige_eric = 17.0°C → temp_conf_e = 17.0
+    - Branche groupe_4 + periode='jour' → t_bureau_target = temp_conf_e = 17.0°C
+    - climate.clim_bureau_rm4_mini (Daikin FTXG) : min_temp = 18°C
+    - 17.0 &lt; 18 → exception temp_out_of_range levée par SmartIR
+  Correction proposée (non encore déployée) :
+    - Jinja2 clamp sur les 3 pièces lisant state_attr min_temp/max_temp en live
+    - Bureau : clamp [18–32], Salon : clamp [16–32], Chambre : clamp [18–32]
+</pre>
+<h4>TACHES BACKLOG</h4>
+<pre>1. Déployer le fix temp_out_of_range dans HA via ha_config_set_script
+   (config_hash live au moment du diagnostic : "0eb85f3bd9521a55" — à re-vérifier avant deploy)
+2. Mettre à jour le fichier YAML local : docs/04_docs_scripts/docs_scripts_YAML/p1_master_gestion_clim.yaml
+3. Décider : dismiss notice Spook "orphaned_statistics" (issue_id: orphaned_statistics_orphaned_statistics)
+   entités : sensor.clim_chambre_nodon_humidity + sensor.clim_chambre_nodon_local_temperature
+   (statistiques déjà purgées de la DB, notice devenue orpheline)
+4. [Optionnel] Durcir boucle SÉCURITÉ d'attente capteurs pour filtrer valeurs numériques
+   aberrantes (ex: -2.0°C) — pas uniquement unknown/unavailable/'0'
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Reprendre session → confirmer deploy fix p1_master_gestion_clim vers HA live
+puis mettre à jour le YAML local + DEPENDANCES_GLOBALES.md
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

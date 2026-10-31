@@ -1,0 +1,66 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-09-08</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-09-08</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-09-08_s1.txt</p>
+<h3>JOURNAL HA REBUILD - 2026-09-08 (SESSION S1)</h3>
+<pre>
+SESSION : moyenne - infrastructure + commissioning Matter
+BRANCHE ACTIVE : infra Proxmox / Matter (aucun YAML HA touche)
+</pre>
+<h4>FICHIERS VALIDES</h4>
+<pre>/etc/modprobe.d/blacklist-btusb.conf  - blacklist driver btusb sur hote Proxmox [OK]
+(fichier Proxmox, hors arborescence ReBuild)
+</pre>
+<h4>EN COURS</h4>
+<pre>BILRESA : appairie avec succes - en cours de stabilisation (firmware/synchro Thread)
+Correction CLAUDE.md (modele dongle Zigbee + presence Bluetooth) - non faite
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>
+PROBLEME : Matter commissioning echoue "No commissionable device was discovered"
+CAUSE : le BILRESA etait en mode pairing mais Matter Server n'avait pas le Thread
+dataset correctement charge dans l'interface de commissioning.
+CORRECTION : recuperation du TLV hex via ws thread/get_dataset_tlv (dataset
+01M1YG9XACCDF6R7C2DB8JBPXH, extended_pan_id 21a9258db12d0170) et saisie manuelle
+dans le champ "Thread dataset" de l'UI OHF Matter Server.
+</pre>
+<h4>ETAPES FRANCHIES CETTE SESSION</h4>
+<pre>1. Check sante Matter/OTBR/Thread post-fix USB (session precedente) -&gt; tout vert
+   - OTBR : 1 border router actif, channel 15, plus aucun crash RCP
+   - Matter Server : loaded, BLE proxy actif (ble0 handshake OK), 0 nodes
+2. Blacklist btusb sur hote Proxmox :
+     echo "blacklist btusb" &gt; /etc/modprobe.d/blacklist-btusb.conf
+     update-initramfs -u
+   -&gt; race condition firmware Realtek RTL8821C vs QEMU eliminee
+3. BLE natif (hci0, MAC 8C:EA:12:97:D5:67) confirme actif dans HA
+   -&gt; scan BLE operationnel, BILRESA detecte sous le nom "MATTER-3009"
+4. Commissioning BILRESA (Matter over Thread) reussi :
+   - Pairing code : 2555-203-2710
+   - Dataset TLV saisi manuellement dans OHF Matter Server
+   - Device apparu et appaire avec succes
+</pre>
+<h4>TECHNO EN TEST</h4>
+<pre>Matter over Thread : premier device commissionne (IKEA BILRESA bouton)
+Thread network : ha-thread-e38f, channel 15, PAN e38f, OTBR stable sur ZBT-1
+</pre>
+<h4>TACHES BACKLOG (TODO.txt)</h4>
+<pre>Inchange. PROXMOX-NOM, GENELEC-HEBDO, L2C1-COULEURS, SDB-1/2/3/4, W-1,
+L5C2-FANTOMES, BAK-L1C2, BV-PUSH, P3-ETATS-STATUS, P4-SECONDAIRE,
+CLAUDE-MD-ARBO, L3C1-HTML, L5C1-TYPO, F-1, F-2b, P4-ABSENCE-FORCE,
+ECLAIR-SOURCE, STORES-NB-FENETRE, P1-CUISINE-B
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>1. Verifier que le BILRESA remonte bien ses etats dans HA (bouton fonctionnel)
+2. Corriger CLAUDE.md : modele dongle Zigbee (ZBDongle-P CC2652P) + Bluetooth
+   (Realtek RTL8821C 0bda:c821, port 1-5, passe a VM 100)
+3. Si BILRESA stable : documenter la chaine Matter/Thread dans les docs projet
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

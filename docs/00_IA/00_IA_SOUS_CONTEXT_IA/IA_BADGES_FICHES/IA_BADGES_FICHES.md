@@ -210,7 +210,7 @@ Fiches (1) :
 
 ### Vignette : 14
 
-Rendu : [![Type](https://img.shields.io/badge/Type-Vignette-ff9800?style=flat-square)](.)
+Rendu : [![Type](https://img.shields.io/badge/Type-Vignette-4fc3f7?style=flat-square)](.)
 
 Fiches (14, 6 premieres) :
 - 02_docs_dashboard/02_dashboard_docs_MD/L2C1_ENERGIE_GENERALE/L2C1_ENERGIE_GENERALE_01_Vignette/L2C1_Vignette_ENERGIE_GENERALE.md
@@ -222,7 +222,7 @@ Fiches (14, 6 premieres) :
 
 ### Page : 11
 
-Rendu : [![Type](https://img.shields.io/badge/Type-Page-ff9800?style=flat-square)](.)
+Rendu : [![Type](https://img.shields.io/badge/Type-Page-4fc3f7?style=flat-square)](.)
 
 Fiches (11, 6 premieres) :
 - 02_docs_dashboard/02_dashboard_docs_MD/L0C0_PAGE_Home/02_Page/Page_Home.md
@@ -234,7 +234,7 @@ Fiches (11, 6 premieres) :
 
 ### Carte : 8
 
-Rendu : [![Type](https://img.shields.io/badge/Type-Carte-ff9800?style=flat-square)](.)
+Rendu : [![Type](https://img.shields.io/badge/Type-Carte-4fc3f7?style=flat-square)](.)
 
 Fiches (8, 6 premieres) :
 - 02_docs_dashboard/02_dashboard_docs_MD/L0C0_PAGE_Home/04_Studio code server/Card_vscode_home.md
@@ -246,7 +246,7 @@ Fiches (8, 6 premieres) :
 
 ### Dashboard Doc : 4
 
-Rendu : [![Type](https://img.shields.io/badge/Type-Dashboard%20Doc-ff9800?style=flat-square)](.)
+Rendu : [![Type](https://img.shields.io/badge/Type-Dashboard%20Doc-4fc3f7?style=flat-square)](.)
 
 Fiches (4) :
 - 02_docs_dashboard/02_dashboard_docs_MD/L1C1_METEO/L1C1_METEO_02_Page/L1C1_Page_METEO.md
@@ -256,7 +256,7 @@ Fiches (4) :
 
 ### Vignette Doc : 3
 
-Rendu : [![Type](https://img.shields.io/badge/Type-Vignette%20Doc-ff9800?style=flat-square)](.)
+Rendu : [![Type](https://img.shields.io/badge/Type-Vignette%20Doc-4fc3f7?style=flat-square)](.)
 
 Fiches (3) :
 - 02_docs_dashboard/02_dashboard_docs_MD/L1C1_METEO/L1C1_METEO_01_Vignette/L1C1_Vignette_METEO.md
@@ -265,7 +265,7 @@ Fiches (3) :
 
 ### Page gauche : 3
 
-Rendu : [![Type](https://img.shields.io/badge/Type-Page%20gauche-ff9800?style=flat-square)](.)
+Rendu : [![Type](https://img.shields.io/badge/Type-Page%20gauche-4fc3f7?style=flat-square)](.)
 
 Fiches (3) :
 - 02_docs_dashboard/02_dashboard_docs_MD/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_02_Page_gauche/L3C1_Page_ECLAIRAGE_gauche.md
@@ -274,7 +274,7 @@ Fiches (3) :
 
 ### Page droite : 3
 
-Rendu : [![Type](https://img.shields.io/badge/Type-Page%20droite-ff9800?style=flat-square)](.)
+Rendu : [![Type](https://img.shields.io/badge/Type-Page%20droite-4fc3f7?style=flat-square)](.)
 
 Fiches (3) :
 - 02_docs_dashboard/02_dashboard_docs_MD/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_03_Page_droite/L3C1_Page_ECLAIRAGE_droite.md
@@ -283,7 +283,7 @@ Fiches (3) :
 
 ### Page Doc : 2
 
-Rendu : [![Type](https://img.shields.io/badge/Type-Page%20Doc-ff9800?style=flat-square)](.)
+Rendu : [![Type](https://img.shields.io/badge/Type-Page%20Doc-4fc3f7?style=flat-square)](.)
 
 Fiches (2) :
 - 02_docs_dashboard/02_dashboard_docs_MD/L1C2_TEMPERATURES/L1C2_TEMPERATURES_02_Page/L1C2_Page_TEMPERATURES.md
@@ -291,7 +291,7 @@ Fiches (2) :
 
 ### Config Racine : 1
 
-Rendu : [![Type](https://img.shields.io/badge/Type-Config%20Racine-ff9800?style=flat-square)](.)
+Rendu : [![Type](https://img.shields.io/badge/Type-Config%20Racine-4fc3f7?style=flat-square)](.)
 
 Fiches (1) :
 - 01_docs_config_system/01_config_system_MD/configuration/configuration.md
@@ -305,14 +305,14 @@ Fiches (1) :
 
 ### Scripts : 1
 
-Rendu : [![Type](https://img.shields.io/badge/Type-Scripts-ff9800?style=flat-square)](.)
+Rendu : [![Type](https://img.shields.io/badge/Type-Scripts-4fc3f7?style=flat-square)](.)
 
 Fiches (1) :
 - 04_docs_scripts/04_docs_scripts_YAML_MD/Scripts_clim_on_off/Scripts_clim_on_off.md
 
 ### Script_Exécutant : 1
 
-Rendu : [![Type](https://img.shields.io/badge/Type-Script_Exécutant-ff9800?style=flat-square)](.)
+Rendu : [![Type](https://img.shields.io/badge/Type-Script_Exécutant-4fc3f7?style=flat-square)](.)
 
 Fiches (1) :
 - 04_docs_scripts/04_docs_scripts_YAML_MD/Script_j2_0_secu_arret_clim/Script_j2_0_secu_arret_clim.md

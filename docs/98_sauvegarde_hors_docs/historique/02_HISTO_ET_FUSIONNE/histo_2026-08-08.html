@@ -1,0 +1,128 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-08-08</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-08-08</h1><p class="mut">3 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s0">Journal</a><a href="#s2">Session S2</a><a href="#s3">Session S3</a></nav>
+<section id="s0"><h2>Journal</h2><p class="src">Source : histo_2026-08-08.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-08-08</h3>
+<pre>
+SESSION : ~3h (continuation session recheck L1-L6)
+BRANCHE ACTIVE : docs/ local
+</pre>
+<h4>RECHECK DEPENDANCES_GLOBALES.md TERMINE</h4>
+<pre>L5C3 recheck 2026-08-08
+  - page_L5C3_mariadb_2026-08-08.yaml sauvegardé (Audit MD5 GitHub + Docs + GitHub + MariaDB)
+  - 2 entités ajoutées : script.audit_md5_docs + sensor.audit_md5_docs_journal
+  - page_L5C3_mariadb_2026-05-10.yaml supprimé (règle 3 versions)
+  - 4 cards audit (06-14/06-15) ajoutées dans liste fichiers
+L6C1 recheck 2026-08-08
+  - page_L6C1_air_qualite_2026-05-23.yaml ajoutée
+L6C2 recheck 2026-08-08
+  - page_L6C2_pollution_pollen_2026-06-13.yaml ajoutée
+L6C3 recheck 2026-08-08
+  - RAS, dossier propre
+</pre>
+<h4>CORRECTIONS HORS RECHECK</h4>
+<pre>L5C2 : confirmé entités fantômes
+  sensor.ne2213_mamour_battery_health + sensor.ne2213_mamour_battery_temperature
+  -&gt; notées dans DEPENDANCES + TODO (L5C2-FANTOMES)
+DEPENDANCES_GLOBALES.md :
+  -&gt; section AUTOMATIONS créée (48 automations, 9 domaines, index tableau)
+  -&gt; section METEO enrichie format A/B/C/D pour "Alerte Météo France cartes"
+  -&gt; format retenu : ## [GROUPE] - [Alias] / ### A B C D pour chaque automation
+TODO.txt :
+  -&gt; L5C2-FANTOMES ajouté
+  -&gt; CLAUDE-MD-SOURCE-VERITE ajouté (YAML dashboard oubliés dans cascade source de vérité)
+</pre>
+<h4>EN COURS</h4>
+<pre>Enrichissement section AUTOMATIONS DEPENDANCES_GLOBALES.md
+  -&gt; format ## [GROUPE] - [Alias] validé, testé sur METEO/Alerte Météo France
+  -&gt; reste : 47 automations a enrichir (a faire session par session par domaine)
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>(aucune erreur YAML cette session)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>1. /sync_index (DEPENDANCES_GLOBALES.md modifié massivement)
+2. Enrichir automations DEPENDANCES par domaine (commencer par METEO/STORES/SYSTEME)
+3. DASH-COMPLET : refaire Dashboard_COMPLET depuis HA (L4C1 + L5C3 mis à jour)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-08-08_s2.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-08-08 (session 2 - continuation)</h3>
+<pre>
+SESSION : ~3h (suite directe session 1 - contexte compacté)
+BRANCHE ACTIVE : docs/ local
+</pre>
+<h4>FICHIER PRINCIPAL MODIFIÉ</h4>
+<pre>docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md
+  -&gt; Section AUTOMATIONS : restructuration complète hiérarchie (A→Z)
+     ## [GROUPE] - AUTOMATIONS / ### ✅ [automation] / **A/B/C/D** bold inline
+  -&gt; 49 automations enrichies format A/B/C/D (Rôle / Triggers+Entités / Chaîne / Vignette)
+     Domaines : P1 CLIM×10, P1 CUISINE×2, P1 SDB×3, P2 PRISES×3, P3 ECLAIRAGE×8,
+                P4 PRESENCE×1, ENERGIE×2, GITHUB BACKUP×7, METEO×5, STORES×2, SYSTEME×6
+  -&gt; Renommage groupes : ## AUTOMATIONS - X → ## X - AUTOMATIONS (partout)
+  -&gt; Emoji 🗂️ ajouté devant chaque header de groupe
+  -&gt; P1 CLIM précisé : "P1 CLIM / CHAUFFAGE - Salon / Bureau / Chambre - AUTOMATIONS"
+  -&gt; #### A/B/C/D → **A/B/C/D** bold (meilleur rendu VSCodium)
+  -&gt; Suppression préfixes redondants dans ### ✅ (ex: "P2 PRISES - " supprimé)
+  -&gt; MATRICE DES AUTOMATIONS ajoutée dans INDEX PAR DOMAINE
+     49 lignes | Groupe / Automation / Vignette / Statut ✅ enrichi 2026-08-08
+</pre>
+<h4>EN COURS</h4>
+<pre>Session non terminée ("j'en ai pas fini avec toi")
+Prochaine action : à déterminer par Eric
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>(aucune)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>1. /sync_index — DEPENDANCES_GLOBALES.md massivement modifié
+2. Suite à déterminer par Eric
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+<section id="s3"><h2>Session S3</h2><p class="src">Source : histo_2026-08-08_s3.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-08-08 (SESSION S3)</h3>
+<pre>
+SESSION : continuation de S2 (compaction de contexte en cours de session)
+BRANCHE ACTIVE : docs/02_docs_dashboard/dashboard_docs_MD/
+</pre>
+<h4>FICHIERS MODIFIÉS</h4>
+<pre>docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md — restructuration majeure [✓]
+  - Section AUTOMATIONS : 49 automations enrichies format A/B/C/D (#### A/B/C/D)
+  - Hierarchie finale : ## groupe / ### ✅ automation / #### A/B/C/D
+  - Emoji 🗂️ ajouté sur les 11 groupes AUTOMATIONS
+  - Groupe P1 renommé : "P1 CLIM / CHAUFFAGE - Salon / Bureau / Chambre - AUTOMATIONS"
+  - Préfixes de groupe retirés des titres ### ✅ (ex: "P2 PRISES - ECO PRISES" → "ECO PRISES")
+  - MATRICE DES AUTOMATIONS ajoutée (table 49 lignes : Groupe / Automation / Vignette / Statut)
+  - Section SCRIPTS créée : script.p1_master_gestion_clim (A/B/C/D complet)
+  - MATRICE DES SCRIPTS ajoutée (1 ligne)
+  - HOME PAGE déplacée avant L1C1 (ligne 49)
+  - COMPLÉMENT déplacé en toute dernière position (après SCRIPTS)
+  Total : 3534 lignes
+</pre>
+<h4>EN COURS</h4>
+<pre>aucun fichier en cours - session terminée proprement
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>(session propre - pas d'erreur YAML)
+</pre>
+<h4>TACHES BACKLOG (TODO.txt)</h4>
+<pre>- DASH-COMPLET : refaire Dashboard_COMPLET depuis HA (L4C1 + L5C3 mis à jour 2026-08-08)
+- L5C2-FANTOMES : décider sensor.ne2213_mamour_battery_health + _battery_temperature (entités inconnues)
+- CLAUDE-MD-SOURCE-VERITE : ajouter YAML dashboard dans cascade LOCAL de CLAUDE.md
+- BV-PUSH : pousser 6 fichiers BV renommés vers prod H:\
+- P1-CUISINE-B : déployer automation via UI HA
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>/sync_index — DEPENDANCES_GLOBALES.md massivement modifié ce soir, sync obligatoire
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

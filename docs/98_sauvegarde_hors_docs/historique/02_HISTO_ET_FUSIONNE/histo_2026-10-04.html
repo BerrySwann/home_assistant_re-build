@@ -1,0 +1,118 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-04</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-04</h1><p class="mut">2 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a><a href="#s2">Session S2</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-04_s1.txt</p>
+<h3>JOURNAL HA REBUILD - 2026-10-04 S1</h3>
+<pre>
+SESSION : ~2h estimée (resync 3 voies + protocole fin de session)
+</pre>
+<h4>FICHIERS VALIDES / COPIES</h4>
+<pre>
+docs/02_docs_dashboard/dashboard_docs_YAML/Dashboard_COMPLET/Dashboard_2026_10-04.yaml
+  - Refonte complete dashboard par Eric (P=GH_L_ABSENT -&gt; rapatrié H:\ root -&gt; local docs)
+
+docs/01_docs_config_system/config_system_YAML/shell_command/backup_github.yaml [GH -&gt; local]
+docs/01_docs_config_system/config_system_YAML/shell_command/P0_correct_linky.yaml [GH -&gt; local]
+docs/01_docs_config_system/config_system_YAML/shell_command/P4_log_eric_zone.yaml [GH -&gt; local]
+docs/01_docs_config_system/config_system_YAML/blueprints/automation/inverted_binary_sensor.yaml [GH -&gt; local]
+  + 4 fichiers .bak + 2 fichiers .txt notifs [GH -&gt; local] (12 fichiers total ha-resync-tree)
+</pre>
+<h4>OPERATIONS MAJEURES</h4>
+<pre>
+1. COMPARAISON 3 VOIES (LOCAL / H:\docs / GitHub)
+   - 414 fichiers docs scannés, 72 fichiers config scannés
+   - git-blob SHA pour GitHub, MD5 pour LOCAL/H:\
+   - Statuts : SYNC / LOCAL_SEUL / PROD_SEUL / GH_SEUL / DIVERGENT etc.
+
+2. SYNC DOCS LOCAL -&gt; H:\docs (identique)
+   - 17 fichiers LOCAL_SEUL poussés vers H:\docs (subdirs PAGE_Home/Carte Météo, etc.)
+   - 16 fichiers PROD_SEUL supprimés de H:\docs (ancienne structure plate)
+   - Résultat : H:\docs = LOCAL à l'identique
+
+3. HA-RESYNC-TREE x2
+   - Run 1 : 12 fichiers GitHub -&gt; local (manquants)
+   - Run 2 (vérification) : SYNC=80 DIFF=0 ABSENT_LOCAL=0 ABSENT_GITHUB=0 ✓
+
+4. DEPENDANCES_GLOBALES.md mis à jour (S3) + poussé vers H:\docs
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>
+H:\Docs vs H:\docs casing bug : Replace("H:\Docs\","") échouait (chemin réel = lowercase).
+  -&gt; Fix : lowercase "H:\docs" systématique.
+
+8.3 short name path ($env:TEMP -&gt; BERRYS~1) : 2e ha-resync-tree montrait SYNC=0 ABSENT_GITHUB=85.
+  -&gt; Fix : $repo = (Get-Item $repoRaw).FullName pour résoudre le vrai chemin long.
+
+device_request_delete_permission refusé sur H:\docs (réseau Samba, pas device_bash).
+  -&gt; Fix : Windows-MCP PowerShell Remove-Item natif sur H:\.
+</pre>
+<h4>EN COURS</h4>
+<pre>(aucun YAML HA en cours de développement)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Backlog TODO.txt : SDB-WATCHDOG, SDB-THERMOSTAT, SDB-INTER-SANS-EFFET, SDB-60MIN-FRAGILE,
+  CHAUFFAGE-AUDIT, RADIATEUR-CUISINE-CAPTEUR, RELAIS-CUISINE-MAJ, P3-ETATS-STATUS
+DOC-RESTE : push vers GitHub non déclenché depuis 2026-09-29
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-10-04_s2.txt</p>
+<h3>JOURNAL HA REBUILD - 2026-10-04 (SESSION S2)</h3>
+<pre>
+SESSION : N/A (soiree, refonte des regles de modification + skills + alignement des copies de CLAUDE.md)
+BRANCHE ACTIVE : docs/
+Note de numerotation : seul histo_2026-10-04_s1.txt existait dans historique/ ; DEPENDANCES_GLOBALES.md cite
+d'autres sessions du jour (S2, S3) sans fichier histo associe. Cette session prend donc le suffixe s2 (regle du skill).
+</pre>
+<h4>FICHIERS VALIDES / MODIFIES</h4>
+<pre>CLAUDE.md [x] - regles : workflow local-first, clause de portee regle 5, 4 emplacements, PROTOCOLE AUDIT MD5 realigne,
+  regle de sauvegarde datee avant reecriture des .md. MD5 final A8EA63EE9AD275D81FEBBE2C2D59B8FC (37 739 octets)
+docs/00_IA/IA_CONTEXT_BASE.md [x] - copie byte-identique de CLAUDE.md (local)
+H:\docs\00_IA\IA_CONTEXT_BASE.md [x] - copie byte-identique (prod)
+D:\docs\00_IA\IA_CONTEXT_BASE.md [x] - 4e copie, perimee (version 2026-07-19), realignee ; ancienne conservee en
+  IA_CONTEXT_BASE_2026-07-19_15h46.md
+TODO.txt [x] - entree REGLES-WORKFLOW-2026-10-04 ajoutee (section Resolus)
+.claude/skills/ha-push-yaml/SKILL.md [x] - reecrit : sauvegarde locale datee, retention 3 + DRY-RUN, plus de .bak en prod,
+  prod sans nom date, ambiguite -&gt; plus recent, checks pre-push en PowerShell, format de date HH'h'mm, frontmatter valide
+.claude/skills/fix-file/SKILL.md [x] - chemin bash /sessions/... retire
+.claude/skills/ha-new-yaml/SKILL.md [x] - chemin bash /sessions/... retire
+.claude/skills/sync-index/SKILL.md [x] - chemin bash /sessions/... retire
+.claude/skills/ha-resync-docs/SKILL.md [x] - chemins /sessions/... remplaces par placeholder {LOCAL_MNT} + note de verification
+
+Sauvegardes datees creees : CLAUDE_2026-10-04_20h34.md, CLAUDE_2026-10-04_20h38.md, TODO_2026-10-04_20h39.txt,
+IA_CONTEXT_BASE_2026-10-04_20h34.md (local docs/00_IA + H:\docs\00_IA), SKILL_2026-09-29_21h14.md (ha-push-yaml, renomme).
+</pre>
+<h4>DECISIONS DE REGLES (rappel)</h4>
+<pre>- Edition YAML config depuis la copie locale config_system_YAML (image miroir de H:\), sauvegarde datee, push via ha-push-yaml.
+- H:/scripts.yaml rattache a Scripts/Automations : meme regle, push manuel par Eric via l'UI HA, .sh exclus.
+- Plus aucun .bak cree en prod.
+</pre>
+<h4>EN COURS</h4>
+<pre>(aucun YAML HA en cours)
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>ha-push-yaml : frontmatter YAML invalide (guillemets doubles imbriques) -&gt; guillemets simples, valide par yaml.safe_load
+ha-push-yaml : format de date PowerShell yyyy-MM-dd_HHhmm donnait "20833" (h = token 12h) -&gt; HH'h'mm
+Backup SKILL_2026-09-29_2114.md hors convention -&gt; renomme _21h14
+propose_skills : met a jour le cache Cowork, pas le fichier sur disque -&gt; skill reecrit directement sur disque et relu
+TODO.txt : modifie par un tiers entre lecture et ecriture (265 -&gt; 299 lignes) -&gt; insertion re-ancree sur le titre de section
+</pre>
+<h4>TACHES BACKLOG (TODO.txt)</h4>
+<pre>Ouverts : SDB-WATCHDOG, SDB-THERMOSTAT (et items SDB/chauffage deja listes)
+Nouveau point ouvert : divergence de nom ha-resync-tree (Cowork) / ha-resync-docs (dossier local)
+Non traites : 8 ecarts absent PROD/LOCAL du triangulateur Hermes ; commit git de config_system_YAML ;
+  ancien fichier workflow supprime par Eric (nom inconnu) ; Hermes gere-t-il la copie D:\ ?
+Retention : anciens CLAUDE_backup_2026-07-31.md / 2026-08-01.md (autre convention) non touches
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Choisir le nom unique du skill de resync (ha-resync-tree ou ha-resync-docs), puis traiter les ecarts du triangulateur Hermes.
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

@@ -1,0 +1,107 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-30</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-30</h1><p class="mut">3 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a><a href="#s2">Session S2</a><a href="#s3">Session S3</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-30_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-30</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 2 h 40 (de 17h57 a 20h33)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>Claude md SAVE/CLAUDE.md</code>, <code>docs/00_IA/00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md</code> (+ miroir <code>H:\docs</code>, copie <code>D:\docs</code>) - section "PROTOCOLE AUDIT MD5 - GITHUB vs LOCAL" alignee local-first, MD5 4E275E4A partout <strong>[v]</strong></li>
+<li>🟢 <code>TODO/TODO.html</code> - entree CONTEXTE-AUDIT-MD5 passee en FAIT, META.maj "2026-10-30 18h45" <strong>[v]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_SH_PY_YAML/configuration.yaml</code> - copie de la prod (MD5 3D388227), miroir <code>H:\docs</code> mis a jour <strong>[v]</strong></li>
+<li>🟢 <code>docs/00_IA</code> - 14 fichiers hors .bak identiques local / prod <strong>[v]</strong></li>
+<li>🟢 <code>docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md</code> - ligne 591 corrigee (chemin mort <code>config_system_YAML</code> remplace), MD5 local = prod = 27CE02AA <strong>[v]</strong></li>
+<li>🟢 skills <code>histo</code> et <code>histo-final</code> - cartes validees par Eric : point 12 de l'etape 2 (IA_AUTOMATIONS_NOTIFS et IA_INDEX_AUTOMATIONS), point 4B de l'etape 6 (push de tout <code>docs\00_IA</code>), chemins <code>DEPENDANCES_GLOBALES_CLAUDE_memoire</code> <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 <code>H-BASES-DEPENDANCES</code> (TODO) - audit propose, non lance : 7 doublons dans <code>DEPENDANCES_GLOBALES_CLAUDE_memoire.md</code>, collision du congelateur dans PAGE_Home <strong>[a decider]</strong></li>
+<li>🟠 plafond de <code>.bak</code> (3 pour tous ou IA_ARBO_DETAIL seul) <strong>[a decider]</strong></li>
+<li>🟠 111 fiches sans Statut, 6 valeurs de badges hors liste <strong>[a decider]</strong></li>
+<li>🟠 README R125.17 pousse sans relecture <strong>[a tester]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 PowerShell : alias <code>Md</code> (mkdir) masquait la fonction de MD5 -&gt; renommee <code>Get-M5</code>, rien n'avait ete modifie <strong>[resolu]</strong></li>
+<li>🔴 <code>TODO.html</code> : META.maj au mauvais format -&gt; "2026-10-30 18h45" <strong>[resolu]</strong></li>
+<li>🔴 Affirmations de Claude erronees (pas de miroir prod pour DEPENDANCES_GLOBALES_CLAUDE_memoire, regles 00_IA non actives) -&gt; verifiees puis corrigees <strong>[resolu]</strong></li>
+<li>🔴 <code>IA_ARBO_DETAIL</code> : remplacement des 3 occurrences de <code>config_system_YAML</code> ecarte (L186/L491 sont des archives), seule L591 corrigee <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.html)</h4>
+<ul>
+<li>📌 CONTEXTE-AUDIT-MD5 : ferme le <strong>2026-10-30</strong></li>
+<li>📌 H-BASES-DEPENDANCES : reste a faire</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Decisions d'Eric : plafond de .bak, Statut/Type des fiches, valeurs de badges ; puis audit H-BASES-DEPENDANCES et backup HA pour aligner GitHub</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-10-30_s2.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-30</strong> (Session <strong>S2</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : de 20h38 a 22h20 environ</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md</code> - comptages local, prod, GitHub (commit 3cff3a9d), pousse en prod <strong>[v]</strong></li>
+<li>🟢 <code>docs/00_IA/00_IA_GLOBAL_INDEX_memoire/IA_GLOBAL_INDEX_memoire.md</code> - regenere et pousse <strong>[v]</strong></li>
+<li>🟢 <code>docs/04_docs_scripts/04_docs_scripts_SH/Check_badges_fiches/Check_badges_fiches.py</code> - Statuts bak, Trash, Archive, Original ; Type par dossier ; Types README, TUTO, Hacking, Script <strong>[v]</strong></li>
+<li>🟢 111 fiches <code>.md</code> de docs : badges crees (Statut Actif par defaut), puis Type cree sur 100 fiches (liste <code>historique/03_RAPPORTS/02_MENAGE_BAK/badges_fix_2026-10-30_lot3.txt</code>) <strong>[v]</strong></li>
+<li>🟢 Statut Archive (gris 9e9e9e) sur 11 fiches des dossiers <code>XX_</code>, Original sur <code>Automations.md</code>, <code>PAGE_MAJ.md</code> en Archive (Modifs INTERDITES conserve) <strong>[v]</strong></li>
+<li>🟢 <code>L4C3_Vignette_MAJ_HA.md</code> - Statut Actif, Modifs Autorisees (TODO R31.3), pousse en prod <strong>[v]</strong></li>
+<li>🟢 <code>Claude md SAVE/CLAUDE.md</code> + <code>IA_CONTEXT_BASE.md</code> (local, D:, H:) - section BADGES completee : couleurs bak orange / Trash rouge, Type par dossier, archive ne change que le Statut, Script au singulier <strong>[v]</strong></li>
+<li>🟢 4 README : banniere de 8 badges identique a l'original ; README docs pousse (racine et miroir, MD5 F53C7A6F) <strong>[v]</strong></li>
+<li>🟢 <code>L5C3_Vignette_MARIADB.md</code> - MaJ <code>2026--03--10</code> (un seul tiret cassait le badge), pousse <strong>[v]</strong></li>
+<li>🟢 112 puis 103 fiches <code>.md</code> poussees vers <code>H:\docs</code> (MD5 verifie) <strong>[v]</strong></li>
+<li>🟢 <code>docs/05_docs_skills/skill_histo/histo.md</code> - remplace par le skill histo enregistre (83266 o), pousse en prod <strong>[v]</strong></li>
+<li>🟢 <code>TODO/TODO.html</code> - R126.1 a R126.11 ajoutes <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 <code>.claude/skills/histo/SKILL.md</code> encore l'ancienne version (70701 o) - remplacement a decider <strong>[a decider]</strong></li>
+<li>🟠 30 fiches Type Scripts a revoir en Script <strong>[a decider]</strong></li>
+<li>🟠 <code>Check_badges_fiches.py</code> : couleur du Statut fixe verte, exemptions XX_ / _ORIGINAL / archive encore dans SKIP <strong>[a corriger]</strong></li>
+<li>🟠 Regle push general (tout docs hors XX_ et .bak) et plafond de 3 .bak pas encore dans CLAUDE.md <strong>[a ecrire]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 <code>CLAUDE.md</code> modifie seul : identite MD5 des 3 emplacements cassee -&gt; propagation a IA_CONTEXT_BASE local, D: et prod <strong>[resolu]</strong></li>
+<li>🔴 <code>device_commit_files</code> refuse (dossier non connecte) -&gt; acces dossier demande <strong>[resolu]</strong></li>
+<li>🔴 <code>L5C3_Vignette_MARIADB.md</code> : prod differente d'une version connue -&gt; diff ligne a ligne (seule la MaJ), puis push <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.html)</h4>
+<ul>
+<li>📌 R126.1 a R126.11 : skill histo copie ancienne, Type Script, Check_badges couleur et exemptions, Original en prod, regle push et plafond, histo-final a aligner, IA_ARBO_DETAIL L186/L491, GLOBAL_INDEX_REPO (3 entites, 6 automations sans fiche), 27 fichiers locaux seuls, menage restes, backup HA a relancer</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Eric relance le backup HA pour aligner GitHub ; decisions sur le skill <code>.claude</code>, les 30 fiches Script et les exemptions de Check_badges_fiches</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+<section id="s3"><h2>Session S3</h2><p class="src">Source : histo_2026-10-30_s3.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-30</strong> (Session <strong>S3</strong>)</h3>
+<p>SESSION VIDE - aucune modification de fichier de docs depuis la session <strong>S2</strong> (22h28).</p>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 histo-final S2 : la commande d'arret du PC n'a pas ete lancee (message final envoye sans appel shutdown) -&gt; sequence relancee en S3 <strong>[resolu]</strong></li>
+</ul>
+<h4>Prochaine action</h4>
+<ul>
+<li>Relancer le backup HA ; decisions sur le skill .claude, les 30 fiches Script et les exemptions de Check_badges_fiches.py</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

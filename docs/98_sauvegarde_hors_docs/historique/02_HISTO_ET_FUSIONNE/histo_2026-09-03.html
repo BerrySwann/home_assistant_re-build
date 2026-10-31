@@ -1,0 +1,59 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-09-03</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-09-03</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-09-03_s1.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-09-03 (SESSION S1)</h3>
+<pre>
+SESSION : ~2h (session reconstituee apres compaction contexte)
+BRANCHE ACTIVE : docs/
+</pre>
+<h4>FICHIERS VALIDES</h4>
+<pre>docs/01_docs_config_system/config_system_YAML/command_line/energie/histo_energie.yaml
+  — sensor.histo_energie_linky + sensor.histo_energie_nodon [cree, pas encore pousse vers HA]
+  — Lecture /config/notifs/linky_histo.txt + nodon_histo.txt
+  — Attributs JSON plats : j0_date/j0_val ... j6_date/j6_val (j0 = J-1 = plus recent)
+  — scan_interval 3600, command_timeout 10, value_template "OK"
+  — MANQUANT gere : j*_val = 'MANQUANT' si "(MANQUANT)" dans ligne Linky
+  — Inclus via configuration.yaml !include_dir_merge_list command_line/
+
+docs/03_docs_automations/docs_automations_YAML/energie/rattrapage_linky_ecart.yaml
+  — Synchro avec version canonique P0_energie/ [x]
+  — Corrections appliquees : trigger 23:59:30 -&gt; 01:00:00
+                             data.append() SecurityError -&gt; ns.namespace pattern
+                             id field en tete supprime
+  — diff avec P0_energie/rattrapage_linky_ecart.yaml : exit 0 (fichiers identiques)
+</pre>
+<h4>EN COURS</h4>
+<pre>Dashboard "Analyse de Precision" (L2C1 vue Energie) — deploye live en HA via ha_config_set_dashboard
+  — Remplacement carte entities -&gt; markdown card avec Jinja2 server-side
+  — Bloc J-1 : Linky / Nodon / Ecart J-1 (MANQUANT gere, division par zero protegee)
+  — Bloc 7j glissants : somme des jours valides (MANQUANT/ERR exclus), ns.namespace
+  — Affiche "Sensors histo non disponibles" tant que les sensors ne sont pas deployes dans HA
+  — En attente : push histo_energie.yaml + reload command_line dans HA (par Eric)
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>energie/rattrapage_linky_ecart.yaml : data.append() provoque SecurityError dans sandbox Jinja2 HA
+  -&gt; Correction : {% set ns = namespace(data=[]) %} + {% set ns.data = ns.data + [{...}] %}
+energie/rattrapage_linky_ecart.yaml : trigger a 23:59:30 (avant arrivee donnees Enedis)
+  -&gt; Correction : at: '01:00:00'
+</pre>
+<h4>TACHES BACKLOG (TODO.txt mis a jour)</h4>
+<pre>[AJOUTE] HISTO-ENERGIE-PUSH : pousser histo_energie.yaml via /ha_push_yaml + reload command_line HA
+[AJOUTE] DOUBLON-ENERGIE-DOSSIER : decision Eric — supprimer energie/ (1 seul fichier, identique P0_energie/) ?
+[MAJ] Date TODO.txt : 2026-08-10 -&gt; 2026-09-03
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Eric : /ha_push_yaml pour command_line/energie/histo_energie.yaml
+       puis HA Developer Tools &gt; YAML &gt; Command Line Entities (reload)
+       puis verifier sensor.histo_energie_linky + sensor.histo_energie_nodon dans States
+       puis confirmer : la carte Analyse de Precision affichera les donnees reelles
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

@@ -1,0 +1,115 @@
+# card_foudre_home_2026-06-13.yaml
+# Carte alerte foudre Blitzortung — HOME page (button-card conditionnel)
+# Visible si : sensor.maison_lightning_counter > 1
+# Couleur bordure/fond : rouge (≤5km, blink), orange (>5km), vert (aucun impact)
+# Tap : navigate → /meteo/#foudre
+# Entités :
+#   sensor.maison_lightning_counter        — compteur + condition de visibilité
+#   sensor.maison_lightning_distance       — distance dernier impact (km)
+#   sensor.maison_lightning_localisation   — géocodage ville (attr.features[0].properties.geocoding.city)
+#   sensor.maison_lightning_azimuth        — azimut degrés (si pas de ville)
+#   sensor.dernier_impact_temps_reel       — temps écoulé depuis dernier impact
+
+type: custom:button-card
+entity: sensor.maison_lightning_counter
+triggers_update:
+  - sensor.dernier_impact_temps_reel
+  - sensor.maison_lightning_distance
+name: |
+  [[[
+    const distRaw = states['sensor.maison_lightning_distance'] ? parseFloat(states['sensor.maison_lightning_distance'].state) : 0;
+    const localisation = states['sensor.maison_lightning_localisation'];
+    const azimuth = states['sensor.maison_lightning_azimuth'] ? parseFloat(states['sensor.maison_lightning_azimuth'].state) : null;
+    const impactCount = parseInt(entity.state) || 0;
+    const timePhrase = states['sensor.dernier_impact_temps_reel'] ? states['sensor.dernier_impact_temps_reel'].state : '';
+    let message = '';
+
+    if (distRaw > 0) {
+      const distance = distRaw.toFixed(1);
+      message = `Impact à <strong>${distance} Km</strong>`;
+
+      let city = null;
+      if (localisation && localisation.attributes && localisation.attributes.features) {
+        const features = localisation.attributes.features;
+        if (features[0]?.properties?.geocoding?.city) {
+          city = features[0].properties.geocoding.city;
+          message += ` à ${city}`;
+        }
+      }
+      if (!city && azimuth !== null) {
+        const directions = [
+          "au nord", "au nord-nord-est", "au nord-est", "à l'est-nord-est",
+          "à l'est", "à l'est-sud-est", "au sud-est", "au sud-sud-est",
+          "au sud", "au sud-sud-ouest", "au sud-ouest", "à l'ouest-sud-ouest",
+          "à l'ouest", "à l'ouest-nord-ouest", "au nord-ouest", "au nord-nord-ouest"
+        ];
+        const index = Math.round(azimuth / 22.5) % 16;
+        message += ` ${directions[index]}`;
+      }
+    } else {
+      message = "Aucun impact récent détecté";
+    }
+    const impactLine = impactCount > 0
+      ? `<br><span style="color: #ffeb3b; font-weight: bold; font-size: 17px;">⚡ ${impactCount} impact(s) détecté(s)</span>`
+      : '';
+    return `
+      <div style="line-height: 1.6;">
+        <span style="font-size: 14px;">${message}</span><br>
+        <span style="font-size: 13px; opacity: 0.9; font-weight: 500;">${timePhrase}</span>
+        ${impactLine}
+      </div>
+    `;
+  ]]]
+show_state: false
+styles:
+  card:
+    - border-radius: 12px
+    - padding: 15px
+    - border-style: solid
+    - border-width: 2px
+    - background: |
+        [[[
+          const d = parseFloat(states['sensor.maison_lightning_distance']?.state);
+          if (d > 0 && d <= 5) return 'rgba(255, 0, 0, 0.2)';
+          if (d > 5) return 'rgba(255, 123, 0, 0.1)';
+          return 'rgba(0, 255, 0, 0.05)';
+        ]]]
+    - border-color: |
+        [[[
+          const d = parseFloat(states['sensor.maison_lightning_distance']?.state);
+          if (d > 0 && d <= 5) return 'red';
+          if (d > 5) return 'rgba(255, 123, 0, 0.5)';
+          return 'rgba(0, 255, 0, 0.4)';
+        ]]]
+    - animation: |
+        [[[
+          const d = parseFloat(states['sensor.maison_lightning_distance']?.state);
+          return (d > 0 && d <= 5) ? 'blink-danger 1s ease infinite' : 'none';
+        ]]]
+  name:
+    - justify-self: center
+    - text-align: center
+    - color: white
+  icon:
+    - width: 45px
+    - color: |
+        [[[
+          const d = parseFloat(states['sensor.maison_lightning_distance']?.state);
+          if (d > 0 && d <= 5) return 'red';
+          if (d > 5) return 'rgb(255, 123, 0)';
+          return 'rgb(0, 255, 0)';
+        ]]]
+extra_styles: |
+  @keyframes blink-danger {
+    50% { background: rgba(255, 0, 0, 0.6); border-color: white; }
+  }
+tap_action:
+  action: navigate
+  navigation_path: meteo/#foudre
+grid_options:
+  columns: 12
+  rows: 2.5
+visibility:
+  - condition: numeric_state
+    entity: sensor.maison_lightning_counter
+    above: 1

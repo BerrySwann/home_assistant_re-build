@@ -1,0 +1,117 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-09-20</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-09-20</h1><p class="mut">2 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a><a href="#s2">Session S2</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-09-20_s1.txt</p>
+<h3>JOURNAL HA REBUILD - 2026-09-20 (SESSION S1)</h3>
+<pre>
+SESSION : longue (journee + soiree) - assainissement complet de l'instance
+BRANCHE ACTIVE : HA ReBuild (docs + entites) - YAML prod : automations clim (max_exceeded) uniquement
+</pre>
+<h4>ETAPES FRANCHIES CETTE SESSION</h4>
+<pre>1. Tri complet des 282 entites indispo/unknown -&gt; classification par cause (aucune panne reelle)
+   - reserve (2 prises stockees), boutons jamais presses (~65), WashData hors cycle,
+     vieux telephones companion, veille normale...
+2. Scenes Hue : 34 -&gt; 7 actives
+   - 34 desactivees cote HA (registre) ; 27 supprimees du pont (26 libres + Lecture)
+   - Bouton Entree 2 repointe : Lecture -&gt; Lumineux (PUT API pont)
+   - 22 scenes-zombies (corbeille 2020/2023) purgees du catalogue v1 du pont
+3. Orphelins Riemann energie_totale_* : 47 purges (248 -&gt; 201)
+   - conserves : radiateur_elec_cuisine (exception P1) + les 2 WashData
+4. Orphelins "RASPI4" : 13 capteurs template + 1 automation (24/05) archives + purges (187)
+5. Fantomes avril-aout : 9 purges (4 genelec _kwh_um, 3 automations remplacees, script+sensor audit_md5) -&gt; 178
+6. Verifications : bilan Energie HA = Linky seul (intact) ; error_log vide ; reparations du jour = routine
+7. RAPPORT_TRI_ENTITES_2026-09-20.md cree (05_docs_MD_system) - bilan complet sections 1 a 3.5
+</pre>
+<h4>EN COURS</h4>
+<pre>Renommage automation diag_enregistrement_journalier_7_postes_dut_2 -&gt; ..._dut (GO en attente)
+Reparations : 93 actives (hacs 32 restart requis, sensor 31 units_changed, spook 24 perimes,
+  homeassistant 5 dont MQTT re-auth)
+Investigations : MQTT re-auth ; radiateur cuisine (0.0 vs 5.110) ; bridge Z2M version/log_level ;
+  2 fantomes doc L2C2
+Push docs 243 -&gt; repo : par Berry
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>PROBLEME : "Login attempt failed" dans les logs HA (IP externe Berry, curl /api/)
+CAUSE : tests HTTP de l'assistant via /api/ (faux positif).
+CORRECTION : tester via /manifest.json desormais.
+
+PROBLEME : "Maximum number of runs exceeded" sur l'automation clim (A-0)
+CAUSE : churn du trigger environnement au redemarrage HA (file queued/max 5).
+CORRECTION : max_exceeded: silent pose sur (A-0) JOUR et (B-0) NUIT
+  (id 1767373340706 / 1767373801871).
+</pre>
+<h4>ARCHIVES CREEES</h4>
+<pre>historique/RASPI4/                        - 13 capteurs + 1 automation (README + registre + references)
+historique/FANTOMES_2026-09-20/           - 9 orphelins avril-aout (README + registre)
+docs/05_docs_MD_system/RAPPORT_TRI_ENTITES_2026-09-20.md - bilan du tri (source de verite du menage)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>1. Restart HA puis purger le dossier Reparations (voir ce qui se balaye tout seul)
+2. GO renommage automation ..._dut_2 -&gt; ..._dut
+(optionnel : les 4 investigations ; rattraper les histos du 09 au 19)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-09-20_s2.txt</p>
+<h3>JOURNAL HA REBUILD - 2026-09-20 (SESSION S2 - suite de soiree)</h3>
+<pre>
+SESSION : continuation de la soiree (apres l'histo S1, ~1h)
+CONTEXTE : dossiers TODO + chauffage/hiver + acces SSH Z2M
+BRANCHE ACTIVE : HA ReBuild (docs, TODO) + infra Z2M/Proxmox - aucun changement YAML HA prod
+</pre>
+<h4>ETAPES FRANCHIES CETTE SESSION</h4>
+<pre>1. Audit complet du TODO.txt (21 items ouverts) verifie en live (HA + prod) :
+   6 deja resolus (P1-CUISINE-B, SDB-3, ENERGIE-TARIF-SENSORS, ECLAIR-SOURCE,
+   STORES-NB-FENETRE, BAK-L1C2) -&gt; TODO.txt REECRIT (rapides / decisions / externe)
+   + backup TODO.txt.bak_2026-09-20 ✓
+2. Section "PREPA HIVER" creee au TODO (le froid arrive) : CHAUFFAGE-AUDIT +
+   RADIATEUR-CUISINE-CAPTEUR + RELAIS-CUISINE-MAJ. Etat du parc chauffage releve
+   le 20/09 : tout OFF (normal hors saison) ✓
+3. Fiche operationnelle relais cuisine : bascule WiFi -&gt; MAJ firmware (app SHELLY du
+   portable) -&gt; rebascule Z2M -&gt; coupe WiFi. Correction : c'est un Shelly 1PM Gen4
+   (pas le vieux Tuya, retire) ✓
+4. L5C2-FANTOMES requalifie PRIO BASSE (le NE2213 de Mamour est a l'arret dans un
+   coin ; seuls battery_health/temperature manquent sur ce tel) ✓
+5. Diagnostic erreur Z2M "wifi_config write failed" : delivery failed +
+   SOURCE_ROUTE_FAILURE = route Zigbee cassee vers le Shelly, pas un refus du device
+   (il parle : voltage 230 V releve a 22h18). Conseil : retenter + appui court bouton ✓
+6. Acces SSH Hermes -&gt; Z2M (CT 200) : cle ed25519 generee (hermes@omarchy), pose
+   tentee par Berry MAIS authentification REFUSEE cote serveur -&gt; reprise demain ✓
+</pre>
+<h4>EN COURS</h4>
+<pre>- ACCES-Z2M-SSH : verifier `pct exec 200 -- cat /root/.ssh/authorized_keys` +
+  `grep -ri permitrootlogin /etc/ssh/sshd_config*` ; sinon reinstaller via la
+  version 'pct push' (3 commandes)
+- Une fois l'acces pret : definir ce qu'on modifie dans le config Z2M (auth_token ? autre ?)
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>Fiche "module Tuya" -&gt; relais reel = Shelly 1PM Gen4 (la config P1 faisait foi) ;
+   fiche renommee MAJ_SHELLY + notes corrigees (app Shelly du portable).
+Ecriture refusee dans "Documents" racine du disque C: -&gt; copies deposes dans ReBuild/.
+</pre>
+<h4>FICHIERS MODIFIES</h4>
+<pre>TODO.txt (racine ReBuild)
+  -&gt; 6 items clos, regroupement rapides/decisions/externe, + PREPA HIVER + ACCES-Z2M-SSH
+  -&gt; backup : TODO.txt.bak_2026-09-20
+docs/03_docs_automations/docs_automations_MD/P1_CLIM_CHAUFFAGE/FICHE_OP_RELAIS_CUISINE_MAJ_SHELLY.md
+  -&gt; creee (copie 243) ; l'ancienne version "TUYA" supprimee (local + 243)
+historique/JOURNAL_FUSIONNE_2026-07-15_2026-09-20.md
+  -&gt; session 20/09 enrichie + ETAT ACTUEL maj (+ copie vault)
+historique/histo_2026-09-20_s2.txt (ce fichier)
+~/.ssh/id_ed25519 (+ .pub) : nouvelle cle Hermes + copies hermes_cle_ssh.pub
+  (dans ~/Documents et ReBuild/)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>1. Reprendre l'acces SSH Z2M (verif authorized_keys + permitrootlogin, sinon pct push)
+2. Dire ce qu'on veut changer dans le config Z2M une fois l'acces pret
+(optionnel : soir des rapides TODO ; SDB-1 avant le 01/10 ; MAJ Shelly relais cuisine)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

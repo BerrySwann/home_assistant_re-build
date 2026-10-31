@@ -1,0 +1,428 @@
+[
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": {
+   "state_class": "total_increasing"
+  },
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-04-18T06:59:54.155775+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.genelec_appart_quotidien_kwh_um",
+  "hidden_by": null,
+  "icon": null,
+  "id": "0c72c79b1f75b570d0479fd945e26212",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-31T18:30:54.913614+00:00",
+  "name": null,
+  "object_id_base": "Genelec Appart Quotidien kWh UM",
+  "options": {
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   },
+   "sensor": {
+    "suggested_display_precision": 2
+   }
+  },
+  "original_device_class": "energy",
+  "original_icon": null,
+  "original_name": "Genelec Appart Quotidien kWh UM",
+  "platform": "utility_meter",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": "utility_meter",
+  "unique_id": "genelec_appart_quotidien_kwh_um_single_tariff",
+  "previous_unique_id": null,
+  "unit_of_measurement": null
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": {
+   "state_class": "total_increasing"
+  },
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-04-18T06:59:54.173497+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.genelec_appart_annuel_kwh_um",
+  "hidden_by": null,
+  "icon": null,
+  "id": "5fce6dbd7a76141279ab9c9be961810a",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-31T18:30:54.920669+00:00",
+  "name": null,
+  "object_id_base": "Genelec Appart Annuel kWh UM",
+  "options": {
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   },
+   "sensor": {
+    "suggested_display_precision": 2
+   }
+  },
+  "original_device_class": "energy",
+  "original_icon": null,
+  "original_name": "Genelec Appart Annuel kWh UM",
+  "platform": "utility_meter",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": "utility_meter",
+  "unique_id": "genelec_appart_annuel_kwh_um_single_tariff",
+  "previous_unique_id": null,
+  "unit_of_measurement": null
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": {
+   "state_class": "total_increasing"
+  },
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-04-18T06:59:54.164120+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.genelec_appart_hebdomadaire_kwh_um",
+  "hidden_by": null,
+  "icon": null,
+  "id": "6226b43e827ece425f7083f9c6c89402",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-31T18:30:54.915845+00:00",
+  "name": null,
+  "object_id_base": "Genelec Appart Hebdomadaire kWh UM",
+  "options": {
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   },
+   "sensor": {
+    "suggested_display_precision": 2
+   }
+  },
+  "original_device_class": "energy",
+  "original_icon": null,
+  "original_name": "Genelec Appart Hebdomadaire kWh UM",
+  "platform": "utility_meter",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": "utility_meter",
+  "unique_id": "genelec_appart_hebdomadaire_kwh_um_single_tariff",
+  "previous_unique_id": null,
+  "unit_of_measurement": null
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": {
+   "state_class": "total_increasing"
+  },
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-04-18T06:59:54.167742+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.genelec_appart_mensuel_kwh_um",
+  "hidden_by": null,
+  "icon": null,
+  "id": "cd2e9b848cc11455f9a7965b1664937a",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-05-31T18:30:54.917495+00:00",
+  "name": null,
+  "object_id_base": "Genelec Appart Mensuel kWh UM",
+  "options": {
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   },
+   "sensor": {
+    "suggested_display_precision": 2
+   }
+  },
+  "original_device_class": "energy",
+  "original_icon": null,
+  "original_name": "Genelec Appart Mensuel kWh UM",
+  "platform": "utility_meter",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": "utility_meter",
+  "unique_id": "genelec_appart_mensuel_kwh_um_single_tariff",
+  "previous_unique_id": null,
+  "unit_of_measurement": null
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {
+   "automation": "01KQD3TV6PK01GXWQHT6Q9H447"
+  },
+  "capabilities": {
+   "id": "1777395823092"
+  },
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-04-28T17:05:07.560347+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "automation.energie_reset_complet_des_utility_meters",
+  "hidden_by": null,
+  "icon": null,
+  "id": "d8137213b94779b6c2809adf7a7b0954",
+  "has_entity_name": false,
+  "labels": [
+   "reset"
+  ],
+  "modified_at": "2026-04-29T17:23:37.699237+00:00",
+  "name": null,
+  "object_id_base": "[Énergie] Reset Complet des Utility Meters",
+  "options": {
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": null,
+  "original_icon": null,
+  "original_name": "[Énergie] Reset Complet des Utility Meters",
+  "platform": "automation",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "1777395823092",
+  "previous_unique_id": null,
+  "unit_of_measurement": null
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {
+   "automation": "01KQD3TV6PK01GXWQHT6Q9H447"
+  },
+  "capabilities": {
+   "id": "1777482314506"
+  },
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-04-29T17:06:44.177462+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "automation.diag_enregistrement_journalier_7_postes_dut",
+  "hidden_by": null,
+  "icon": null,
+  "id": "6d3fd49d3d1cfd2df6ece979b175bec0",
+  "has_entity_name": false,
+  "labels": [
+   "energie"
+  ],
+  "modified_at": "2026-04-29T17:20:49.167167+00:00",
+  "name": null,
+  "object_id_base": "DIAG - ENREGISTREMENT JOURNALIER (7 POSTES + DUT)",
+  "options": {
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": null,
+  "original_icon": null,
+  "original_name": "DIAG - ENREGISTREMENT JOURNALIER (7 POSTES + DUT)",
+  "platform": "automation",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "1777482314506",
+  "previous_unique_id": null,
+  "unit_of_measurement": null
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {
+   "automation": "01KND0AZ5915MZEMXRHTQG1X1Q"
+  },
+  "capabilities": {
+   "id": "1779622729847"
+  },
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-05-24T11:39:26.619949+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "automation.sdb_watchdog_synchronisation_lumieres",
+  "hidden_by": null,
+  "icon": null,
+  "id": "8766532b7e855d77a04b467d0f054e58",
+  "has_entity_name": false,
+  "labels": [
+   "watchdog",
+   "eclairage_s"
+  ],
+  "modified_at": "2026-05-24T11:40:44.318660+00:00",
+  "name": null,
+  "object_id_base": "P3_Salle De Bain - WATCHDOG SYNCHRONISATION LUMIÈRES",
+  "options": {
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": null,
+  "original_icon": null,
+  "original_name": "P3_Salle De Bain - WATCHDOG SYNCHRONISATION LUMIÈRES",
+  "platform": "automation",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "1779622729847",
+  "previous_unique_id": null,
+  "unit_of_measurement": null
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": null,
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-08-07T19:58:56.018479+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "sensor.audit_md5_docs_journal",
+  "hidden_by": null,
+  "icon": null,
+  "id": "d30fe214601f29daaaf86ecd472ef185",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-08-07T19:58:57.317536+00:00",
+  "name": null,
+  "object_id_base": "Audit MD5 Docs Journal",
+  "options": {
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": null,
+  "original_icon": null,
+  "original_name": "Audit MD5 Docs Journal",
+  "platform": "command_line",
+  "suggested_object_id": null,
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "audit_md5_docs_journal",
+  "previous_unique_id": null,
+  "unit_of_measurement": null
+ },
+ {
+  "aliases": [],
+  "aliases_v2": [
+   null
+  ],
+  "area_id": null,
+  "categories": {},
+  "capabilities": null,
+  "config_entry_id": null,
+  "config_subentry_id": null,
+  "created_at": "2026-08-07T19:58:56.424104+00:00",
+  "device_class": null,
+  "device_id": null,
+  "disabled_by": null,
+  "entity_category": null,
+  "entity_id": "script.audit_md5_docs",
+  "hidden_by": null,
+  "icon": null,
+  "id": "aacd56fdab9d9dfd20dbab2d28c4b12a",
+  "has_entity_name": false,
+  "labels": [],
+  "modified_at": "2026-08-07T19:58:56.427401+00:00",
+  "name": null,
+  "object_id_base": null,
+  "options": {
+   "cloud.alexa": {
+    "should_expose": false
+   },
+   "conversation": {
+    "should_expose": false
+   }
+  },
+  "original_device_class": null,
+  "original_icon": "mdi:file-document-check-outline",
+  "original_name": "Audit MD5 Docs",
+  "platform": "script",
+  "suggested_object_id": "audit_md5_docs",
+  "supported_features": 0,
+  "translation_key": null,
+  "unique_id": "audit_md5_docs",
+  "previous_unique_id": null,
+  "unit_of_measurement": null
+ }
+]

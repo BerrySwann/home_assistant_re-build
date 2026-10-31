@@ -7,7 +7,7 @@ Ignores : .bak, XX_*, *_ORIGINAL, *_archive*, __pycache__, .pyc. Option --dry : 
 import os, re, sys, datetime, difflib, urllib.parse, html
 
 D = r"C:\Users\Berry Swann\Documents\ReBuild\docs"
-SKIP = re.compile(r"(^|[\\/])(XX_[^\\/]*|99_docs_MD_system|[^\\/]*_ORIGINAL|[^\\/]*_archive[^\\/]*|__pycache__)([\\/]|$)", re.I)
+SKIP = re.compile(r"(^|[\\/])(XX_[^\\/]*|99_docs_MD_system|98_sauvegarde_hors_docs|[^\\/]*_ORIGINAL|[^\\/]*_archive[^\\/]*|__pycache__)([\\/]|$)", re.I)
 FORCE = {}  # nom de fichier source en minuscules -> chemin complet de la fiche (rattachements valides par Eric)
 _CLIM = r"C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_YAML_MD\Climatisation\Scripts_clim_on_off\Scripts_clim_on_off.md"
 for _n in ("j_1_1_salon_clim_on_off_intelligent.yaml", "j_1_2_bureau_clim_on_off_intelligent.yaml", "j_1_3_chambre_clim_on_off_intelligent.yaml"):

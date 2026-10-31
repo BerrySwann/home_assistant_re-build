@@ -1,0 +1,35 @@
+22:46:16.368 | SEQ_DEBUT  | SEQUENCE           | histo-final
+22:46:16.428 | DEBUT      | automation_off     | 
+22:46:22.258 | FIN        | automation_off     | OK automation off confirme
+22:46:22.316 | DEBUT      | journal            | 
+22:47:26.614 | FIN        | journal            | OK histo_2026-10-21_s2.md ecrit
+22:47:26.675 | DEBUT      | sync_index         | 
+22:47:35.225 | FIN        | sync_index         | OK REPO pousse aux 2 endroits (MD5 identiques) ; DEPENDANCES inchange ; 4 index regeneres, casses=0
+22:47:35.285 | DEBUT      | fusionne           | 
+22:48:02.287 | FIN        | fusionne           | OK bloc S2 ajoute, 3921 lignes, bak 22h47m53s
+22:48:02.347 | DEBUT      | obsidian           | 
+22:48:02.581 | FIN        | obsidian           | OK copies MD5 identiques
+22:48:02.638 | DEBUT      | pages_html         | 
+22:48:31.662 | FIN        | pages_html         | ATTENTION page du jour : S1 reinjectee a la main (histo_html.py ne relit que les .md) ; s2.md a la corbeille
+22:48:31.721 | DEBUT      | menage             | 
+22:49:22.632 | FIN        | menage             | ATTENTION 2 renommes, 0 corbeille, 3 collisions et 1 suffixe _sN signales
+22:49:22.690 | DEBUT      | export_5B          | 
+22:49:43.632 | FIN        | export_5B          | OK Dashboard deja a jour (MD5 identiques racine, local, prod)
+22:49:43.691 | DEBUT      | tree               | 
+22:50:53.288 | FIN        | tree               | OK IA_ARBO_DETAIL mis a jour et pousse (MD5 identiques)
+22:50:53.345 | DEBUT      | controles_6B       | 
+22:50:53.856 | FIN        | controles_6B       | OK
+22:50:53.912 | DEBUT      | controles_6C       | 
+22:50:54.303 | FIN        | controles_6C       | OK
+22:50:54.361 | DEBUT      | controles_6D       | 
+22:51:15.098 | FIN        | controles_6D       | ATTENTION 1 anomalie connue : voir rapport (GITHUB en attente du backup)
+22:51:15.156 | DEBUT      | rapport            | 
+22:51:21.959 | FIN        | rapport            | OK
+22:51:34.602 | DEBUT      | notification       | 
+22:51:47.041 | FIN        | notification       | OK notify.mobile_app_eric envoyee a 22:51:46
+22:51:57.108 | DEBUT      | lumieres           | 
+22:52:14.129 | FIN        | lumieres           | OK Hue Sync coupe (API pont), 3 Hue Play off confirme
+22:52:14.189 | DEBUT      | automation_on      | 
+22:52:20.895 | FIN        | automation_on      | OK automation on confirme
+22:52:21.078 | FIN        | arret_pc           | OK arret programme
+22:52:21.136 | SEQ_FIN    | SEQUENCE           | fin de sequence

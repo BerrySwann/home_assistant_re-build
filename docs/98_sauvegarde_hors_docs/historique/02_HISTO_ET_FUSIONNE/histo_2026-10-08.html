@@ -1,0 +1,95 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-08</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-08</h1><p class="mut">2 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a><a href="#s2">Session S2</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-08_s1.md</p>
+<h3>JOURNAL HA REBUILD - 2026-10-08 (SESSION S1)</h3>
+<pre>
+SESSION : N/A (matin du 2026-10-08, jusqu'a 12h45 environ)
+BRANCHE ACTIVE : docs/
+</pre>
+<h4>FICHIERS VALIDES</h4>
+<pre>historique/JOURNAL_FUSIONNE_2026-07-15_2026-10-07.md - journal fusionne cree (base + sessions 10-04 S1/S2, 10-06, 10-07 S1/S2) ; copie Obsidian faite [v]
+.claude/skills/ha-trigul/SKILL.md - nouveau skill de triangulation MD5 local / prod / GitHub, rapports dans historique/MD5 ; run valide (162 fichiers : 147 SYNC, 1 DIFF, 14 ABSENT) ; lancement detache (Invoke-CimMethod) + garde Get-Process bash [v]
+.claude/skills/histo/SKILL.md - etapes ajoutees : INDEX_GLOBAL.md, journal fusionne, copie Obsidian, menage des .bak (etape 5), tree (etape 6) ; journaux histo et TODO en .md [v]
+.claude/skills/ha-push-yaml/SKILL.md - reecrit avec la nouvelle REGLE DE SAUVEGARDE [v]
+.claude/skills/ha-push-docs/SKILL.md - regles 7 et 8 (pas de sauvegarde sur H:/D:, sauvegardes locales jamais poussees) [v]
+.claude/skills/ha-trigul/SKILL.md - format des .bak et faux positifs alignes sur la nouvelle regle [v]
+.claude/ARCHIVE/ - menage des skills : 13 fichiers deplaces (anciens .skill, .bak_20260929, doublons de commandes) puis anciennes versions des skills modifies aujourd'hui [v]
+Claude md save/CLAUDE.md + docs/00_IA/IA_CONTEXT_BASE.md + H:\docs\00_IA\IA_CONTEXT_BASE.md + D:\docs\00_IA\IA_CONTEXT_BASE.md - bloc REGLE DE SAUVEGARDE (remplace celle du 2026-10-04), TODO.txt -&gt; TODO.md ; 4 copies identiques, MD5 6E422FD0 [v]
+docs/05_docs_skills/ - dossier cree : 10 SKILL.md du projet copies sous &lt;skill&gt;.md ; poussees vers H:\docs\05_docs_skills (MD5 identique, aucun .bak en prod) [v]
+TODO/TODO.md - TODO.txt renomme TODO.md ; section "OUVERT 2026-10-08" ajoutee (6 points MENAGE-*) ; sauvegarde TODO.txt.bak_2026_10_08_12h19m40s [v]
+docs/00_IA/sous_context_ia/IA_ARBO_DETAIL.md et IA_INDEX_AUTOMATIONS.md - reference TODO.txt -&gt; TODO.md ; poussees vers H: (MD5 identique) ; envoyees ensuite sur GitHub par Eric [v]
+historique/menage_dry_run_2026-10-08.txt - simulation du menage : 94 candidats, 72 renommages, 24 envois a la corbeille, 0 collision [v]
+historique/MD5/hermes_md5_audit_md_2026-10-08.txt - dernier run 12h40 : 172 fichiers, 154 SYNC, 4 DIFF, 14 ABSENT [v]
+H:\docs - 16 sauvegardes nettoyees ; plus aucun .bak sur H: [v]
+</pre>
+<h4>EN COURS</h4>
+<pre>Menage des .bak (etape 5 de cet histo) - groupes laisses de cote, a trancher par Eric : (1) input_booleans/P1/P1_BV_IB_inter_soufflant_sdb.yaml : .bak_20260929 et .bak-20260929 de meme date de modification, contenus differents ; (2) page_L1C2_temperatures_2026-05-22.yaml.bak sans date ; (3) Claude md save/CLAUDE_backup_2026-07-31.md et CLAUDE_backup_2026-08-01.md, ancien format non couvert
+H:\docs\00_IA\IA_CONTEXT_BASE_2026-10-04_20h34.md - reste de l'ancien format sur H:, identique (MD5) a la copie locale ; suppression sur H: definitive, en attente d'accord
+Cartes de skills pour le compte (histo, ha-push-yaml, ha-push-docs, ha-trigul) - a enregistrer par Eric ; etat d'enregistrement non confirme
+/trigul : docs/00_IA/IA_CONTEXT_BASE.md, IA_ARBO_DETAIL.md, IA_INDEX_AUTOMATIONS.md en DIFF cote GitHub sur le run de 12h40 alors que l'API GitHub donne le bon contenu (cache CDN probable) ; a relancer
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>.claude/skills/ha-trigul : double lancement du script (appel renvoye par la liaison apres 60 s, rapport entremele) -&gt; rapport supprime, lancement detache via Invoke-CimMethod avec garde Get-Process bash
+propose_skills ha-push-yaml : carte sans mots declencheurs dans la description -&gt; carte renvoyee avec la description complete
+Simulation du menage : egalites de date non departagees (noms sans heure) -&gt; regle de departage ajoutee au skill histo (heure du nom, puis date de modification, puis MD5)
+</pre>
+<h4>TACHES BACKLOG (TODO.md)</h4>
+<pre>Section "OUVERT 2026-10-08" : MENAGE-EGALITE-P1-BV-IB, MENAGE-BAK-SANS-DATE, MENAGE-CLAUDE-BACKUP-ANCIEN-FORMAT, MENAGE-DATES-NOMS, MENAGE-FAUX-POSITIFS, MENAGE-RESTE-H
+Points deja ouverts et non touches : tests reels E/F/H/I (soufflant / seche-serviettes), desactivation de G
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Trancher les 3 groupes de sauvegardes et le reste sur H:, puis relancer /trigul pour confirmer GitHub = local
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-10-08_s2.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-08</strong> (Session <strong>S2</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : N/A (de 12h45 a 13h25 environ, apres le journal S1)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>historique/JOURNAL_FUSIONNE_2026-07-15_2026-10-08.md</code> - cree avec la session S1, puis titres de session, rubriques, bandeaux et entrees RESTE A FAIRE passes en gras (42 titres, 111 rubriques, 46 entrees de date, 93 etiquettes) ; controle de non-perte de contenu OK ; copie Obsidian identique <strong>[v]</strong></li>
+<li>🟢 <code>historique/menage_execution_2026-10-08.txt</code> - menage reel des .bak : 67 renommes, 23 envoyes a la corbeille Windows, 6 sauvegardes du jour ignorees, 4 archives ignorees, 0 erreur ; nouvelle simulation : 0 action <strong>[v]</strong></li>
+<li>🟢 <code>docs/00_IA/sous_context_ia/IA_ARBO_DETAIL.md</code> - tree recompte : local 665 fichiers, prod 577, GitHub 1020 objets dont 737 sous docs/, commit <code>c359533c</code> ; ligne <code>05_docs_skills</code> ajoutee ; ligne 27 : <code>a mettre en place.txt</code> archive ; MD5 local = prod D4FDD3A5 <strong>[v]</strong></li>
+<li>🟢 <code>.claude/skills/histo/SKILL.md</code> + <code>docs/05_docs_skills/histo.md</code> + <code>H:\docs\05_docs_skills\histo.md</code> - nouveau format : journaux <code>histo_*.md</code> en Markdown mis en forme (gras, pastilles de couleur, icones) et fusionne en gras ; MD5 identique AD4C7607 sur les 3 copies ; aucun .bak sur H: <strong>[v]</strong></li>
+<li>🟢 <code>_old_avant_staging/a mettre en place.txt</code> - archive depuis la racine du projet (contenu obsolete : <code>sync_docs.py</code>, <code>Z:\docs</code>, <code>IA_CONTEXT_BASE_AI.md</code>, OpenCode, absents du projet et du fusionne) <strong>[v]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 scripts de modification du skill histo : priorite de la virgule dans un tableau de paires PowerShell, puis backticks dans une chaine entre guillemets -&gt; corriges avant toute ecriture (rien n'a ete ecrit par les essais en echec) <strong>[resolu]</strong></li>
+<li>🔴 conversion du fusionne : nombre impair de lignes ``<code> (ouverture dupliquee) -&gt; corrige, 226 puis 422 lignes </code>`` (nombre pair) avant ecriture <strong>[resolu]</strong></li>
+</ul>
+<h4>🔵 Constats</h4>
+<ul>
+<li>🔵 <code>a mettre en place.txt</code> ne correspondait a aucun element du projet (pas de <code>sync_docs.py</code>, prod = <code>H:\docs</code>) ; inconnu : si le lecteur <code>Z:</code> existe encore</li>
+<li>🔵 IA_ARBO_DETAIL.md : la liste "17 fichiers racine" est perimee (CLAUDE.md, CLAUDE_backup_*, TODO.md, histo_2026-08-07.txt n'y sont plus), non corrigee ; "dont N sauvegardes" compte desormais seulement les fichiers .bak ; ligne de repartition GitHub (templates, utility_meter, input_booleans, sensors) non mise a jour, convention de comptage inconnue</li>
+<li>🔵 la carte du skill histo du compte reste l'ancienne version tant que la derniere carte n'est pas enregistree ; ce journal suit le skill local</li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 menage .bak, 3 groupes a trancher par Eric : (1) <code>input_booleans/P1/P1_BV_IB_inter_soufflant_sdb.yaml</code> <code>.bak_20260929</code> et <code>.bak-20260929</code> (contenus differents) ; (2) <code>page_L1C2_temperatures_2026-05-22.yaml.bak</code> sans date ; (3) <code>Claude md save/CLAUDE_backup_2026-07-31.md</code> et <code>CLAUDE_backup_2026-08-01.md</code> - <strong>[a decider]</strong></li>
+<li>🟠 <code>H:\docs\00_IA\IA_CONTEXT_BASE_2026-10-04_20h34.md</code> - identique a la copie locale, suppression definitive sur H: en attente d'accord - <strong>[a decider]</strong></li>
+<li>🟠 cartes de skills du compte (histo derniere carte, ha-push-yaml 2e serie, ha-push-docs 1re serie, ha-trigul 2e serie) - <strong>[a enregistrer]</strong>, enregistrement non confirme</li>
+<li>🟠 <code>/trigul</code> a relancer : 3 docs 00_IA en DIFF cote GitHub au run de 12h40 (cache CDN probable) ; IA_ARBO_DETAIL.md modifie apres le dernier envoi sur GitHub, a pousser par Eric - <strong>[a tester]</strong></li>
+<li>🟠 tests reels E/F/H/I (soufflant et seche-serviettes) et desactivation de G, ouverts depuis le <strong>2026-10-07</strong>, non touches</li>
+</ul>
+<h4>📋 Taches backlog (TODO.md)</h4>
+<ul>
+<li>📌 <code>TODO/TODO.md</code> non modifie pendant S2 ; la section "OUVERT <strong>2026-10-08</strong>" (6 points MENAGE-*) reste valable</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Tester le soufflant : l'allumer, verifier que <code>timer.soufflant_sdb_60mn</code> est actif, l'eteindre, puis redemarrer HA soufflant en marche ; ensuite enregistrer les cartes de skills et trancher les 3 groupes de sauvegardes</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

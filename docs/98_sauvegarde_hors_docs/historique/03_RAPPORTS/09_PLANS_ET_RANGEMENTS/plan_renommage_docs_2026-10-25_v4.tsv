@@ -1,0 +1,260 @@
+type	chemin_actuel_(depuis_docs)	nom_actuel	nom_nouveau	regle	statut
+D	02_Docs_dashboard	02_Docs_dashboard	02_docs_dashboard	A. docs en minuscules partout (Eric 14:35)	ferme
+D	03_Docs_automations	03_Docs_automations	03_docs_automations	A. docs en minuscules partout (Eric 14:35)	ferme
+D	04_Docs_scripts	04_Docs_scripts	04_docs_scripts	A. docs en minuscules partout (Eric 14:35)	ferme
+D	05_Docs_skills	05_Docs_skills	05_docs_skills	A. docs en minuscules partout (Eric 14:35)	ferme
+D	06_Docs_technique	06_Docs_technique	06_docs_technique	A. docs en minuscules partout (Eric 14:35)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md	Dashboard_docs_md	02_Dashboard_docs_md	B. regle 6.15 (numero du dossier racine, docs en minuscules)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml	Dashboard_docs_yaml	02_Dashboard_docs_yaml	B. regle 6.15 (numero du dossier racine, docs en minuscules)	ferme
+D	03_Docs_automations\Docs_automations_md	Docs_automations_md	03_docs_automations_md	B. regle 6.15 (numero du dossier racine, docs en minuscules)	ferme
+D	03_Docs_automations\Docs_automations_yaml	Docs_automations_yaml	03_docs_automations_yaml	B. regle 6.15 (numero du dossier racine, docs en minuscules)	ferme
+D	04_Docs_scripts\Docs_script_original	Docs_script_original	04_docs_script_original	B. regle 6.15 (numero du dossier racine, docs en minuscules)	ferme
+D	04_Docs_scripts\Docs_scripts_sh	Docs_scripts_sh	04_docs_scripts_sh	B. regle 6.15 (numero du dossier racine, docs en minuscules)	ferme
+D	04_Docs_scripts\Docs_scripts_sh_md	Docs_scripts_sh_md	04_docs_scripts_sh_md	B. regle 6.15 (numero du dossier racine, docs en minuscules)	ferme
+D	04_Docs_scripts\Docs_scripts_yaml	Docs_scripts_yaml	04_docs_scripts_yaml	B. regle 6.15 (numero du dossier racine, docs en minuscules)	ferme
+D	04_Docs_scripts\Docs_scripts_yaml_md	Docs_scripts_yaml_md	04_docs_scripts_yaml_md	B. regle 6.15 (numero du dossier racine, docs en minuscules)	ferme
+D	05_Docs_skills\Skill_fix-file	Skill_fix-file	skill_fix_file	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_fix-file\Fix-file.md	Fix-file.md	fix_file.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\Skill_ha-new-yaml	Skill_ha-new-yaml	skill_ha_new_yaml	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_ha-new-yaml\Ha-new-yaml.md	Ha-new-yaml.md	ha_new_yaml.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\Skill_ha-push-docs	Skill_ha-push-docs	skill_ha_push_docs	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_ha-push-docs\Ha-push-docs.md	Ha-push-docs.md	ha_push_docs.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\Skill_ha-push-md	Skill_ha-push-md	skill_ha_push_md	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_ha-push-md\Ha-push-md.md	Ha-push-md.md	ha_push_md.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\Skill_ha-push-yaml	Skill_ha-push-yaml	skill_ha_push_yaml	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_ha-push-yaml\Ha-push-yaml.md	Ha-push-yaml.md	ha_push_yaml.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\Skill_ha-resync-tree	Skill_ha-resync-tree	skill_ha_resync_tree	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_ha-resync-tree\Ha-resync-tree.md	Ha-resync-tree.md	ha_resync_tree.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\Skill_ha-status	Skill_ha-status	skill_ha_status	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_ha-status\Ha-status.md	Ha-status.md	ha_status.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\Skill_ha-trigul	Skill_ha-trigul	skill_ha_trigul	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_ha-trigul\Ha-trigul.md	Ha-trigul.md	ha_trigul.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\Skill_ha-update-check-cli	Skill_ha-update-check-cli	skill_ha_update_check_cli	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_ha-update-check-cli\Ha-update-check-cli.md	Ha-update-check-cli.md	ha_update_check_cli.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\Skill_ha-verif-headers	Skill_ha-verif-headers	skill_ha_verif_headers	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_ha-verif-headers\Ha-verif-headers.md	Ha-verif-headers.md	ha_verif_headers.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\Skill_histo	Skill_histo	skill_histo	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_histo\Histo.md	Histo.md	histo.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\Skill_histo-final	Skill_histo-final	skill_histo_final	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_histo-final\Histo-final.md	Histo-final.md	histo_final.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\Skill_journal-modifs	Skill_journal-modifs	skill_journal_modifs	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_journal-modifs\Journal-modifs.md	Journal-modifs.md	journal_modifs.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\Skill_sync-index	Skill_sync-index	skill_sync_index	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_sync-index\Sync-index.md	Sync-index.md	sync_index.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\Skill_update-arbo	Skill_update-arbo	skill_update_arbo	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+F	05_Docs_skills\Skill_update-arbo\Update-arbo.md	Update-arbo.md	update_arbo.md	C. fichier du skill : meme fin que le dossier (defaut a confirmer)	ferme
+D	05_Docs_skills\skill_hermes-aligne	skill_hermes-aligne	skill_hermes_aligne	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+D	05_Docs_skills\skill_hermes-journal-modifs	skill_hermes-journal-modifs	skill_hermes_journal_modifs	C. skills : skill_ minuscules, - devient _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_md\Automations.yalm original	Automations.yalm original	Automations.yalm_original	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_md\Backup ha - GitHub	Backup ha - GitHub	Backup_ha_GitHub	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_md\Bouton virtuel	Bouton virtuel	Bouton_virtuel	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_md\Controle entity Z2M	Controle entity Z2M	Controle_entity_Z2M	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_md\Gestion des stores	Gestion des stores	Gestion_des_stores	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_md\Mariadb & vscode optimisation	Mariadb & vscode optimisation	Mariadb_&_vscode_optimisation	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_md\P1_03_Chauffage salle de bain	P1_03_Chauffage salle de bain	P1_03_Chauffage_salle_de_bain	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_md\P2_eCO. prises	P2_eCO. prises	P2_eCO._prises	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_md\Tarif hc-hp	Tarif hc-hp	Tarif_hc-hp	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_md\Watchdog piles (hue-ikea-sonoff)	Watchdog piles (hue-ikea-sonoff)	Watchdog_piles_(hue-ikea-sonoff)	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_yaml\Automations.yalm original	Automations.yalm original	Automations.yalm_original	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_yaml\Backup ha - GitHub	Backup ha - GitHub	Backup_ha_GitHub	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_yaml\Bouton virtuel	Bouton virtuel	Bouton_virtuel	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_yaml\Controle entity Z2M	Controle entity Z2M	Controle_entity_Z2M	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_yaml\Gestion des stores	Gestion des stores	Gestion_des_stores	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_yaml\Mariadb & vscode optimisation	Mariadb & vscode optimisation	Mariadb_&_vscode_optimisation	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_yaml\P1_03_Chauffage salle de bain	P1_03_Chauffage salle de bain	P1_03_Chauffage_salle_de_bain	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_yaml\P2_eCO. prises	P2_eCO. prises	P2_eCO._prises	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_yaml\Tarif hc-hp	Tarif hc-hp	Tarif_hc-hp	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	03_Docs_automations\Docs_automations_yaml\Watchdog piles (hue-ikea-sonoff)	Watchdog piles (hue-ikea-sonoff)	Watchdog_piles_(hue-ikea-sonoff)	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	04_Docs_scripts\Docs_scripts_sh\MPC_01_monitor_temp.sh - save pour RASPI	MPC_01_monitor_temp.sh - save pour RASPI	MPC_01_monitor_temp.sh_save_pour_RASPI	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	04_Docs_scripts\Docs_scripts_sh\MP_01_monitor_temp.sh - save pour RASPI	MP_01_monitor_temp.sh - save pour RASPI	MP_01_monitor_temp.sh_save_pour_RASPI	E. espaces remplaces par _ (Eric 14:35)	ferme
+D	04_Docs_scripts\Docs_scripts_yaml\Soufflant SDB	Soufflant SDB	Soufflant_SDB	E. espaces remplaces par _ (Eric 14:35)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L1C1_METEO\01_Vignette\L1C1_VIGNETTE_METEO.md	L1C1_VIGNETTE_METEO.md	L1C1_Vignette_METEO.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L1C1_METEO\01_Vignette	01_Vignette	L1C1_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L1C1_METEO\02_Page\Page_meteo.md	Page_meteo.md	L1C1_Page_METEO.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L1C1_METEO\02_Page	02_Page	L1C1_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L1C1_METEO\Tuto_images_alertes_meteo_france.md	Tuto_images_alertes_meteo_france.md	TUTO_L1C1_images_alertes_meteo_france.md	F. fiche 6.2 : TUTO_LxCx[_suffixe]	a confirmer
+F	02_Docs_dashboard\Dashboard_docs_md\L1C2_TEMPERATURES\01_Vignette\L1C2_VIGNETTE_TEMPERATURES.md	L1C2_VIGNETTE_TEMPERATURES.md	L1C2_Vignette_TEMPERATURES.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L1C2_TEMPERATURES\01_Vignette	01_Vignette	L1C2_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L1C2_TEMPERATURES\02_Page\Page_temperatures.md	Page_temperatures.md	L1C2_Page_TEMPERATURES.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L1C2_TEMPERATURES\02_Page	02_Page	L1C2_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L1C3_CLIM\01_Vignette\L1C3_VIGNETTE_CLIM.md	L1C3_VIGNETTE_CLIM.md	L1C3_Vignette_CLIM.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L1C3_CLIM\01_Vignette	01_Vignette	L1C3_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L1C3_CLIM\02_Page\Page_clim.md	Page_clim.md	L1C3_Page_CLIM.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L1C3_CLIM\02_Page	02_Page	L1C3_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L2C1_ENERGIE\01_Vignette\L2C1_VIGNETTE_ENERGIE.md	L2C1_VIGNETTE_ENERGIE.md	L2C1_Vignette_ENERGIE.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L2C1_ENERGIE\01_Vignette	01_Vignette	L2C1_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L2C1_ENERGIE\02_Page_temps_reel\Page_energie_temps_reel.md	Page_energie_temps_reel.md	L2C1_Page_ENERGIE_temps_reel.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L2C1_ENERGIE\02_Page_temps_reel	02_Page_temps_reel	L2C1_02_Page_temps_reel	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L2C1_ENERGIE\03_Page_principale\Page_energie.md	Page_energie.md	L2C1_Page_ENERGIE_principale.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L2C1_ENERGIE\03_Page_principale	03_Page_principale	L2C1_03_Page_principale	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L2C1_ENERGIE\04_Page_mensuel\Page_energie_mensuel.md	Page_energie_mensuel.md	L2C1_Page_ENERGIE_mensuel.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L2C1_ENERGIE\04_Page_mensuel	04_Page_mensuel	L2C1_04_Page_mensuel	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L2C2_ENERGIE_CLIM\01_Vignette\L2C2_VIGNETTE_ENERGIE_CLIM.md	L2C2_VIGNETTE_ENERGIE_CLIM.md	L2C2_Vignette_ENERGIE_CLIM.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L2C2_ENERGIE_CLIM\01_Vignette	01_Vignette	L2C2_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L2C2_ENERGIE_CLIM\02_Page\Page_energie_clim.md	Page_energie_clim.md	L2C2_Page_ENERGIE_CLIM.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L2C2_ENERGIE_CLIM\02_Page	02_Page	L2C2_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L2C3_ENERGIE_ECLAIRAGE\01_Vignette\L2C3_VIGNETTE_ECLAIRAGE.md	L2C3_VIGNETTE_ECLAIRAGE.md	L2C3_Vignette_ENERGIE_ECLAIRAGE.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L2C3_ENERGIE_ECLAIRAGE\01_Vignette	01_Vignette	L2C3_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L2C3_ENERGIE_ECLAIRAGE\02_Page\Page_energie_eclairage.md	Page_energie_eclairage.md	L2C3_Page_ENERGIE_ECLAIRAGE.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L2C3_ENERGIE_ECLAIRAGE\02_Page	02_Page	L2C3_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L3C1_ECLAIRAGE\01_Vignette\L3C1_VIGNETTE_ECLAIRAGE.md	L3C1_VIGNETTE_ECLAIRAGE.md	L3C1_Vignette_ECLAIRAGE.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L3C1_ECLAIRAGE\01_Vignette	01_Vignette	L3C1_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L3C1_ECLAIRAGE\02_Page_gauche\Page_eclairage_gauche.md	Page_eclairage_gauche.md	L3C1_Page_ECLAIRAGE_gauche.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L3C1_ECLAIRAGE\02_Page_gauche	02_Page_gauche	L3C1_02_Page_gauche	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L3C1_ECLAIRAGE\03_Page_droite\Page_eclairage_droite.md	Page_eclairage_droite.md	L3C1_Page_ECLAIRAGE_droite.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L3C1_ECLAIRAGE\03_Page_droite	03_Page_droite	L3C1_03_Page_droite	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L3C2_PRISES\01_Vignette\L3C2_VIGNETTE_PRISES.md	L3C2_VIGNETTE_PRISES.md	L3C2_Vignette_PRISES.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L3C2_PRISES\01_Vignette	01_Vignette	L3C2_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L3C2_PRISES\02_Page\Page_prises.md	Page_prises.md	L3C2_Page_PRISES.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L3C2_PRISES\02_Page	02_Page	L3C2_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L3C3_STORES\01_Vignette\L3C3_VIGNETTE_STORES.md	L3C3_VIGNETTE_STORES.md	L3C3_Vignette_STORES.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L3C3_STORES\01_Vignette	01_Vignette	L3C3_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L3C3_STORES\02_Page\Page_stores.md	Page_stores.md	L3C3_Page_STORES.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L3C3_STORES\02_Page	02_Page	L3C3_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L4C1_MINI_PC\01_Vignette\L4C1_VIGNETTE_MINI_PC.md	L4C1_VIGNETTE_MINI_PC.md	L4C1_Vignette_MINI_PC.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L4C1_MINI_PC\01_Vignette	01_Vignette	L4C1_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L4C1_MINI_PC\02_Page_MINI_PC\Page_MINI_PC.md	Page_MINI_PC.md	L4C1_Page_MINI_PC_MINI_PC.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L4C1_MINI_PC\02_Page_MINI_PC	02_Page_MINI_PC	L4C1_02_Page_MINI_PC	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L4C1_MINI_PC\03_Page_RASPI\Page_RASPI.md	Page_RASPI.md	L4C1_Page_MINI_PC_RASPI.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L4C1_MINI_PC\03_Page_RASPI	03_Page_RASPI	L4C1_03_Page_RASPI	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L4C2_PROXMOX\01_Vignette\L4C2_VIGNETTE_PROXMOX.md	L4C2_VIGNETTE_PROXMOX.md	L4C2_Vignette_PROXMOX.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L4C2_PROXMOX\01_Vignette	01_Vignette	L4C2_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L4C2_PROXMOX\02_Page\Page_proxmox.md	Page_proxmox.md	L4C2_Page_PROXMOX.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L4C2_PROXMOX\02_Page	02_Page	L4C2_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L4C3_MAJ_HA\01_Vignette\L4C3_VIGNETTE_MAJ.md	L4C3_VIGNETTE_MAJ.md	L4C3_Vignette_MAJ_HA.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L4C3_MAJ_HA\01_Vignette	01_Vignette	L4C3_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L4C3_MAJ_HA\02_Page_gauche\Page_maj_gauche.md	Page_maj_gauche.md	L4C3_Page_MAJ_HA_gauche.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L4C3_MAJ_HA\02_Page_gauche	02_Page_gauche	L4C3_02_Page_gauche	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L4C3_MAJ_HA\03_Page_droite\Page_maj_droite.md	Page_maj_droite.md	L4C3_Page_MAJ_HA_droite.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L4C3_MAJ_HA\03_Page_droite	03_Page_droite	L4C3_03_Page_droite	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L5C1_PILES_BATTERIES\01_Vignette\L5C1_VIGNETTE_BATTERIES.md	L5C1_VIGNETTE_BATTERIES.md	L5C1_Vignette_PILES_BATTERIES.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L5C1_PILES_BATTERIES\01_Vignette	01_Vignette	L5C1_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L5C1_PILES_BATTERIES\02_Page\Page_batteries.md	Page_batteries.md	L5C1_Page_PILES_BATTERIES.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L5C1_PILES_BATTERIES\02_Page	02_Page	L5C1_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L5C2_BATTERIES_PORTABLES\01_Vignette\L5C2_VIGNETTE_BATTERIES_PORTABLES.md	L5C2_VIGNETTE_BATTERIES_PORTABLES.md	L5C2_Vignette_BATTERIES_PORTABLES.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L5C2_BATTERIES_PORTABLES\01_Vignette	01_Vignette	L5C2_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L5C2_BATTERIES_PORTABLES\02_Page_gauche\Page_batteries_portables_gauche.md	Page_batteries_portables_gauche.md	L5C2_Page_BATTERIES_PORTABLES_gauche.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L5C2_BATTERIES_PORTABLES\02_Page_gauche	02_Page_gauche	L5C2_02_Page_gauche	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L5C2_BATTERIES_PORTABLES\03_Page_droite\Page_batteries_portables_droite.md	Page_batteries_portables_droite.md	L5C2_Page_BATTERIES_PORTABLES_droite.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L5C2_BATTERIES_PORTABLES\03_Page_droite	03_Page_droite	L5C2_03_Page_droite	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L5C3_MARIADB\01_Vignette\L5C3_VIGNETTE_MARIADB.md	L5C3_VIGNETTE_MARIADB.md	L5C3_Vignette_MARIADB.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L5C3_MARIADB\01_Vignette	01_Vignette	L5C3_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L5C3_MARIADB\02_Page_principale\Page_systeme.md	Page_systeme.md	L5C3_Page_MARIADB_principale.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L5C3_MARIADB\02_Page_principale	02_Page_principale	L5C3_02_Page_principale	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L5C3_MARIADB\03_Page_reserve\Page_L5C3_SYSTEME_RESERVE.md	Page_L5C3_SYSTEME_RESERVE.md	L5C3_Page_MARIADB_reserve.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L5C3_MARIADB\03_Page_reserve	03_Page_reserve	L5C3_03_Page_reserve	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L6C1_AIR_QUALITE\01_Vignette\L6C1_VIGNETTE_AIR_QUALITE.md	L6C1_VIGNETTE_AIR_QUALITE.md	L6C1_Vignette_AIR_QUALITE.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L6C1_AIR_QUALITE\01_Vignette	01_Vignette	L6C1_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L6C1_AIR_QUALITE\02_Page\Page_air_qualite.md	Page_air_qualite.md	L6C1_Page_AIR_QUALITE.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L6C1_AIR_QUALITE\02_Page	02_Page	L6C1_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L6C2_POLLUTION_POLLEN\01_Vignette\L6C2_VIGNETTE_POLLUTION_POLLEN.md	L6C2_VIGNETTE_POLLUTION_POLLEN.md	L6C2_Vignette_POLLUTION_POLLEN.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L6C2_POLLUTION_POLLEN\01_Vignette	01_Vignette	L6C2_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L6C2_POLLUTION_POLLEN\02_Page\Page_pollution_pollen.md	Page_pollution_pollen.md	L6C2_Page_POLLUTION_POLLEN.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L6C2_POLLUTION_POLLEN\02_Page	02_Page	L6C2_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L6C3_VIGIEAU\01_Vignette\L6C3_VIGNETTE_VIGIEAU.md	L6C3_VIGNETTE_VIGIEAU.md	L6C3_Vignette_VIGIEAU.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L6C3_VIGIEAU\01_Vignette	01_Vignette	L6C3_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_md\L6C3_VIGIEAU\02_Page\Page_vigieau.md	Page_vigieau.md	L6C3_Page_VIGIEAU.md	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_md\L6C3_VIGIEAU\02_Page	02_Page	L6C3_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L1C1_01_Meteo\01_L1C1_Vignette\Vignette_L1C1_meteo.yaml	Vignette_L1C1_meteo.yaml	L1C1_Vignette_METEO.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L1C1_01_Meteo\01_L1C1_Vignette	01_L1C1_Vignette	L1C1_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L1C1_01_Meteo\02_L1C1_Page\Page_L1C1_meteo.yaml	Page_L1C1_meteo.yaml	L1C1_Page_METEO.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L1C1_01_Meteo\02_L1C1_Page	02_L1C1_Page	L1C1_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L1C1_01_Meteo	L1C1_01_Meteo	L1C1_METEO	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L1C2_02_Temperatures\01_Vignette\Vignette_L1C2_temperatures.yaml	Vignette_L1C2_temperatures.yaml	L1C2_Vignette_TEMPERATURES.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L1C2_02_Temperatures\01_Vignette	01_Vignette	L1C2_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L1C2_02_Temperatures\02_Page\Page_L1C2_temperatures.yaml	Page_L1C2_temperatures.yaml	L1C2_Page_TEMPERATURES.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L1C2_02_Temperatures\02_Page	02_Page	L1C2_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L1C2_02_Temperatures	L1C2_02_Temperatures	L1C2_TEMPERATURES	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L1C3_03_Commandes_Clim\01_Vignette\Vignette_L1C3_clim.yaml	Vignette_L1C3_clim.yaml	L1C3_Vignette_CLIM.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L1C3_03_Commandes_Clim\01_Vignette	01_Vignette	L1C3_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L1C3_03_Commandes_Clim\02_Page\Page_L1C3_clim.yaml	Page_L1C3_clim.yaml	L1C3_Page_CLIM.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L1C3_03_Commandes_Clim\02_Page	02_Page	L1C3_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L1C3_03_Commandes_Clim	L1C3_03_Commandes_Clim	L1C3_CLIM	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	a confirmer (nom md/yaml different)
+F	02_Docs_dashboard\Dashboard_docs_yaml\L2C1_04_Energie_Generale\01_Vignette\Vignette_L2C1_energie.yaml	Vignette_L2C1_energie.yaml	L2C1_Vignette_ENERGIE.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L2C1_04_Energie_Generale\01_Vignette	01_Vignette	L2C1_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L2C1_04_Energie_Generale\02_Page_temps_reel\Page_L2C1_energie_temps_reel.yaml	Page_L2C1_energie_temps_reel.yaml	L2C1_Page_ENERGIE_temps_reel.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L2C1_04_Energie_Generale\02_Page_temps_reel	02_Page_temps_reel	L2C1_02_Page_temps_reel	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L2C1_04_Energie_Generale\03_Page_principale\Page_L2C1_energie_principale.yaml	Page_L2C1_energie_principale.yaml	L2C1_Page_ENERGIE_principale.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L2C1_04_Energie_Generale\03_Page_principale	03_Page_principale	L2C1_03_Page_principale	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L2C1_04_Energie_Generale\04_Page_mensuel\Page_L2C1_energie_mensuel.yaml	Page_L2C1_energie_mensuel.yaml	L2C1_Page_ENERGIE_mensuel.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L2C1_04_Energie_Generale\04_Page_mensuel	04_Page_mensuel	L2C1_04_Page_mensuel	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L2C1_04_Energie_Generale	L2C1_04_Energie_Generale	L2C1_ENERGIE	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	a confirmer (nom md/yaml different)
+F	02_Docs_dashboard\Dashboard_docs_yaml\L2C2_05_Energie_Clim\01_Vignette\Vignette_L2C2_energie_clim.yaml	Vignette_L2C2_energie_clim.yaml	L2C2_Vignette_ENERGIE_CLIM.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L2C2_05_Energie_Clim\01_Vignette	01_Vignette	L2C2_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L2C2_05_Energie_Clim\02_Page\Page_L2C2_energie_clim.yaml	Page_L2C2_energie_clim.yaml	L2C2_Page_ENERGIE_CLIM.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L2C2_05_Energie_Clim\02_Page	02_Page	L2C2_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L2C2_05_Energie_Clim	L2C2_05_Energie_Clim	L2C2_ENERGIE_CLIM	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L2C3_06_Energie_Eclairage\01_Vignette\Vignette_L2C3_energie_eclairage.yaml	Vignette_L2C3_energie_eclairage.yaml	L2C3_Vignette_ENERGIE_ECLAIRAGE.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L2C3_06_Energie_Eclairage\01_Vignette	01_Vignette	L2C3_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L2C3_06_Energie_Eclairage\02_Page\Page_L2C3_energie_eclairage.yaml	Page_L2C3_energie_eclairage.yaml	L2C3_Page_ENERGIE_ECLAIRAGE.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L2C3_06_Energie_Eclairage\02_Page	02_Page	L2C3_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L2C3_06_Energie_Eclairage	L2C3_06_Energie_Eclairage	L2C3_ENERGIE_ECLAIRAGE	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L3C1_07_Commandes_Eclairage\01_Vignette\Vignette_L3C1_eclairage.yaml	Vignette_L3C1_eclairage.yaml	L3C1_Vignette_ECLAIRAGE.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L3C1_07_Commandes_Eclairage\01_Vignette	01_Vignette	L3C1_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L3C1_07_Commandes_Eclairage\02_Page_gauche\Page_L3C1_eclairage_gauche.yaml	Page_L3C1_eclairage_gauche.yaml	L3C1_Page_ECLAIRAGE_gauche.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L3C1_07_Commandes_Eclairage\02_Page_gauche	02_Page_gauche	L3C1_02_Page_gauche	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L3C1_07_Commandes_Eclairage\03_Page_droite\Page_L3C1_eclairage_droite.yaml	Page_L3C1_eclairage_droite.yaml	L3C1_Page_ECLAIRAGE_droite.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L3C1_07_Commandes_Eclairage\03_Page_droite	03_Page_droite	L3C1_03_Page_droite	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L3C1_07_Commandes_Eclairage	L3C1_07_Commandes_Eclairage	L3C1_ECLAIRAGE	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	a confirmer (nom md/yaml different)
+F	02_Docs_dashboard\Dashboard_docs_yaml\L3C2_08_Commandes_Prises\01_Vignette\Vignette_L3C2_prises.yaml	Vignette_L3C2_prises.yaml	L3C2_Vignette_PRISES.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L3C2_08_Commandes_Prises\01_Vignette	01_Vignette	L3C2_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L3C2_08_Commandes_Prises\02_Page\Page_L3C2_prises.yaml	Page_L3C2_prises.yaml	L3C2_Page_PRISES.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L3C2_08_Commandes_Prises\02_Page	02_Page	L3C2_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L3C2_08_Commandes_Prises	L3C2_08_Commandes_Prises	L3C2_PRISES	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	a confirmer (nom md/yaml different)
+F	02_Docs_dashboard\Dashboard_docs_yaml\L3C3_09_Stores_Fenetres\01_Vignette\Vignette_L3C3_stores.yaml	Vignette_L3C3_stores.yaml	L3C3_Vignette_STORES.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L3C3_09_Stores_Fenetres\01_Vignette	01_Vignette	L3C3_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L3C3_09_Stores_Fenetres\02_Page\Page_L3C3_stores.yaml	Page_L3C3_stores.yaml	L3C3_Page_STORES.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L3C3_09_Stores_Fenetres\02_Page	02_Page	L3C3_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L3C3_09_Stores_Fenetres	L3C3_09_Stores_Fenetres	L3C3_STORES	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	a confirmer (nom md/yaml different)
+F	02_Docs_dashboard\Dashboard_docs_yaml\L4C1_10_Mini_PC\01_Vignette\Vignette_L4C1_mini_pc.yaml	Vignette_L4C1_mini_pc.yaml	L4C1_Vignette_MINI_PC.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L4C1_10_Mini_PC\01_Vignette	01_Vignette	L4C1_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L4C1_10_Mini_PC\02_Page\Page_L4C1_mini_pc.yaml	Page_L4C1_mini_pc.yaml	L4C1_Page_MINI_PC.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L4C1_10_Mini_PC\02_Page	02_Page	L4C1_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L4C1_10_Mini_PC	L4C1_10_Mini_PC	L4C1_MINI_PC	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L4C2_11_Proxmox\01_Vignette\Vignette_L4C2_proxmox.yaml	Vignette_L4C2_proxmox.yaml	L4C2_Vignette_PROXMOX.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L4C2_11_Proxmox\01_Vignette	01_Vignette	L4C2_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L4C2_11_Proxmox\02_Page\Page_L4C2_proxmox.yaml	Page_L4C2_proxmox.yaml	L4C2_Page_PROXMOX.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L4C2_11_Proxmox\02_Page	02_Page	L4C2_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L4C2_11_Proxmox	L4C2_11_Proxmox	L4C2_PROXMOX	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L4C3_12_MAJ_HA\01_Vignette\Vignette_L4C3_maj_ha.yaml	Vignette_L4C3_maj_ha.yaml	L4C3_Vignette_MAJ_HA.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L4C3_12_MAJ_HA\01_Vignette	01_Vignette	L4C3_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L4C3_12_MAJ_HA\02_Page_gauche\Page_L4C3_maj_ha_gauche.yaml	Page_L4C3_maj_ha_gauche.yaml	L4C3_Page_MAJ_HA_gauche.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L4C3_12_MAJ_HA\02_Page_gauche	02_Page_gauche	L4C3_02_Page_gauche	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L4C3_12_MAJ_HA\03_Page_droite\Page_L4C3_maj_ha_droite.yaml	Page_L4C3_maj_ha_droite.yaml	L4C3_Page_MAJ_HA_droite.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L4C3_12_MAJ_HA\03_Page_droite	03_Page_droite	L4C3_03_Page_droite	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L4C3_12_MAJ_HA	L4C3_12_MAJ_HA	L4C3_MAJ_HA	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L5C1_13_Batteries_Piles\01_Vignette\Vignette_L5C1_batteries_piles.yaml	Vignette_L5C1_batteries_piles.yaml	L5C1_Vignette_PILES_BATTERIES.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L5C1_13_Batteries_Piles\01_Vignette	01_Vignette	L5C1_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L5C1_13_Batteries_Piles\02_Page\Page_L5C1_batteries_piles.yaml	Page_L5C1_batteries_piles.yaml	L5C1_Page_PILES_BATTERIES.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L5C1_13_Batteries_Piles\02_Page	02_Page	L5C1_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L5C1_13_Batteries_Piles	L5C1_13_Batteries_Piles	L5C1_PILES_BATTERIES	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	a confirmer (nom md/yaml different)
+F	02_Docs_dashboard\Dashboard_docs_yaml\L5C2_14_Batteries_Portables\01_Vignette\Vignette_L5C2_batteries_portables.yaml	Vignette_L5C2_batteries_portables.yaml	L5C2_Vignette_BATTERIES_PORTABLES.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L5C2_14_Batteries_Portables\01_Vignette	01_Vignette	L5C2_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L5C2_14_Batteries_Portables\02_Page_gauche\Page_L5C2_batteries_portables_gauche.yaml	Page_L5C2_batteries_portables_gauche.yaml	L5C2_Page_BATTERIES_PORTABLES_gauche.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L5C2_14_Batteries_Portables\02_Page_gauche	02_Page_gauche	L5C2_02_Page_gauche	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L5C2_14_Batteries_Portables\03_Page_droite\Page_L5C2_batteries_portables_droite.yaml	Page_L5C2_batteries_portables_droite.yaml	L5C2_Page_BATTERIES_PORTABLES_droite.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L5C2_14_Batteries_Portables\03_Page_droite	03_Page_droite	L5C2_03_Page_droite	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L5C2_14_Batteries_Portables	L5C2_14_Batteries_Portables	L5C2_BATTERIES_PORTABLES	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L5C3_15_MariaDB\01_Vignette\Vignette_L5C3_mariadb.yaml	Vignette_L5C3_mariadb.yaml	L5C3_Vignette_MARIADB.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L5C3_15_MariaDB\01_Vignette	01_Vignette	L5C3_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L5C3_15_MariaDB\02_Page_mariadb\Page_L5C3_mariadb.yaml	Page_L5C3_mariadb.yaml	L5C3_Page_MARIADB_mariadb.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L5C3_15_MariaDB\02_Page_mariadb	02_Page_mariadb	L5C3_02_Page_mariadb	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L5C3_15_MariaDB\03_Page_systeme_reserve\Page_L5C3_systeme_reserve.yaml	Page_L5C3_systeme_reserve.yaml	L5C3_Page_MARIADB_systeme_reserve.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L5C3_15_MariaDB\03_Page_systeme_reserve	03_Page_systeme_reserve	L5C3_03_Page_systeme_reserve	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L5C3_15_MariaDB	L5C3_15_MariaDB	L5C3_MARIADB	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L6C1_16_Air_Qualite\01_Vignette\Vignette_L6C1_air_qualite.yaml	Vignette_L6C1_air_qualite.yaml	L6C1_Vignette_AIR_QUALITE.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L6C1_16_Air_Qualite\01_Vignette	01_Vignette	L6C1_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L6C1_16_Air_Qualite\02_Page\Page_L6C1_air_qualite.yaml	Page_L6C1_air_qualite.yaml	L6C1_Page_AIR_QUALITE.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L6C1_16_Air_Qualite\02_Page	02_Page	L6C1_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L6C1_16_Air_Qualite	L6C1_16_Air_Qualite	L6C1_AIR_QUALITE	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L6C2_17_Pollution_Pollen\01_Vignette\Vignette_L6C2_pollution_pollen.yaml	Vignette_L6C2_pollution_pollen.yaml	L6C2_Vignette_POLLUTION_POLLEN.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L6C2_17_Pollution_Pollen\01_Vignette	01_Vignette	L6C2_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L6C2_17_Pollution_Pollen\02_Page\Page_L6C2_pollution_pollen.yaml	Page_L6C2_pollution_pollen.yaml	L6C2_Page_POLLUTION_POLLEN.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L6C2_17_Pollution_Pollen\02_Page	02_Page	L6C2_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L6C2_17_Pollution_Pollen	L6C2_17_Pollution_Pollen	L6C2_POLLUTION_POLLEN	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L6C3_18_VigiEau\01_Vignette\Vignette_L6C3_vigieau.yaml	Vignette_L6C3_vigieau.yaml	L6C3_Vignette_VIGIEAU.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L6C3_18_VigiEau\01_Vignette	01_Vignette	L6C3_01_Vignette	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+F	02_Docs_dashboard\Dashboard_docs_yaml\L6C3_18_VigiEau\02_Page\Page_L6C3_vigieau.yaml	Page_L6C3_vigieau.yaml	L6C3_Page_VIGIEAU.yaml	F. LxCx : fichier LxCx_Type_NOM[_suffixe] (Eric 16:20-16:31)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L6C3_18_VigiEau\02_Page	02_Page	L6C3_02_Page	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L6C3_18_VigiEau\03_Correctif_upstream	03_Correctif_upstream	L6C3_03_Correctif_upstream	F. LxCx : sous-dossier LxCx_NN_Type[_suffixe] (Eric 16:20-16:30)	ferme
+D	02_Docs_dashboard\Dashboard_docs_yaml\L6C3_18_VigiEau	L6C3_18_VigiEau	L6C3_VIGIEAU	F. LxCx : dossier LxCx_NOM majuscules sans numero (Eric 16:20)	ferme

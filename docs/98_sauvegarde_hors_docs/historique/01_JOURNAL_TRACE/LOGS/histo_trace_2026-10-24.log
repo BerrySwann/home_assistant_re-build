@@ -1,0 +1,38 @@
+23:05:04.034 | SEQ_DEBUT  | SEQUENCE           | histo-final
+23:05:04.096 | DEBUT      | automation_off     | 
+23:05:12.764 | FIN        | automation_off     | OK automation off confirmee
+23:05:12.823 | DEBUT      | journal            | 
+23:05:36.999 | FIN        | journal            | OK histo_2026-10-24_s1.md
+23:05:43.699 | DEBUT      | sync_index         | 
+23:05:53.447 | FIN        | sync_index         | ATTENTION GLOBAL_INDEX_IA.md regenere (local seul, non pousse) ; 7 automations sans fiche, 9 scripts SH sans fiche : ecarts deja connus
+23:05:53.503 | DEBUT      | fusionne           | 
+23:06:23.525 | FIN        | fusionne           | OK JOURNAL_FUSIONNE_2026-07-15_2026-10-24.md 4053 lignes
+23:06:23.581 | DEBUT      | obsidian           | 
+23:06:24.396 | FIN        | obsidian           | OK
+23:06:24.453 | DEBUT      | pages_html         | 
+23:06:34.523 | FIN        | pages_html         | OK page jour 1 section, fusionne cree, 2 originaux a la corbeille
+23:07:18.657 | DEBUT      | menage             | 
+23:08:29.768 | FIN        | menage             | OK renommes=31 corbeille=23 erreurs=0 ; 3 signales
+23:08:29.825 | DEBUT      | export_5B          | 
+23:08:38.621 | FIN        | export_5B          | OK Dashboard deja a jour (H: racine Dashboard_2026_10_16 = local = prod, 94885729)
+23:08:38.677 | DEBUT      | tree               | 
+23:10:09.515 | FIN        | tree               | OK IA_ARBO_DETAIL mis a jour (22 lignes), bak 23h10m02s
+23:10:09.571 | DEBUT      | controles_6B       | 
+23:10:16.082 | FIN        | controles_6B       | ATTENTION ecarts=3 casses=1 (chemin config_system_YAML cite dans IA_ARBO_DETAIL, 62 vs 63 automations x2) ; deja connus ou notes
+23:10:16.138 | DEBUT      | controles_6C       | 
+23:10:16.521 | FIN        | controles_6C       | OK
+23:10:16.577 | DEBUT      | controles_6D       | 
+23:10:18.707 | FIN        | controles_6D       | OK
+23:10:18.764 | DEBUT      | controles_6E       | 
+23:10:18.910 | FIN        | controles_6E       | OK
+23:10:43.640 | DEBUT      | verifications      | 
+23:10:43.756 | FIN        | verifications      | OK
+23:11:26.334 | DEBUT      | notification       | notify.mobile_app_eric envoyee, heure annoncee 23:19
+23:11:26.415 | FIN        | notification       | OK HA notify.mobile_app_eric envoyee 23:11:26
+23:11:36.481 | DEBUT      | lumieres           | 
+23:11:57.064 | FIN        | lumieres           | OK Hue Sync coupe par API pont (stream active false), 3 Hue Play off confirme, prise switch.ecran_p_c_3_play_hue restee on
+23:11:57.120 | DEBUT      | automation_on      | 
+23:11:57.175 | FIN        | automation_on      | OK automation.bureau_forcer_play_on_si_pc_tourne remise on, etat relu on
+23:11:57.264 | DEBUT      | arret_pc           | 
+23:11:57.320 | FIN        | arret_pc           | OK arret programme dans 300 s
+23:11:57.376 | SEQ_FIN    | SEQUENCE           | fin de sequence

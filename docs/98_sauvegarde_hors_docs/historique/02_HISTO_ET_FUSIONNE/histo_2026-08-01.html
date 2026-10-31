@@ -1,0 +1,91 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-08-01</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-08-01</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s0">Journal</a></nav>
+<section id="s0"><h2>Journal</h2><p class="src">Source : histo_2026-08-01.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-08-01</h3>
+<pre>
+SESSION : ~4h (suite session précédente — nouveau contexte)
+BRANCHE ACTIVE : DOCS/01_docs_config_system/config_system_YAML/
+</pre>
+<h4>FICHIERS VALIDÉS</h4>
+<pre>utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ.yaml        — renommage (ex 01_UM_AMHQ) + fix dep chain (sensor source corrigé) [✓]
+utility_meter/P0_Energie_total/Genelec_appart/P0_UM_AMHQ_HPHC.yaml   — renommage (ex 02_UM_genelec_appart_HPHC_AMHQ) + phantom row supprimé [✓]
+templates/P4_groupe_presence/P4_wifi_detection.yaml                   — renommage (ex 01_phones_wifi_cellular_card_autom) [✓]
+templates/P4_groupe_presence/P4_groupe_presence.yaml                  — renommage (ex 02_logique_wifi_cellular) [✓]
+templates/P3_eclairage/ui_dashboard/P3_etats_status.yaml              — renommage (ex etats_status) [✓]
+sensors/meteo/M_meteo_sensors_blitzortung.yaml                        — renommage (ex M_03_) — fait par user [✓]
+DOCS/02_docs_dashboard/dashboard_docs_YAML/PAGE_Home/card_meteocss_home_2026-06-28.yaml — fix float(0) avant round(1) ligne 105 [✓]
+DOCS/02_docs_dashboard/dashboard_docs_YAML/Dashboard_COMPLET/Dashboard_2026_08_01.yaml  — archivé + même fix float(0) [✓]
+.scripts/ha_git_backup.sh                                             — BUG FIX : git add -A déplacé avant detection (fix fantômes GitHub) [✓]
+DOCS/00_IA/sous_context_ia/IA_ARBO_DETAIL.md                         — P0 UM noms, audit_md5.sh desc, LOCAL tree (HTML vide, prompt/ ajouté) [✓]
+</pre>
+<h4>CONVENTIONS CRÉÉES (session précédente, rappel)</h4>
+<pre>Convention 9 — nommage fichiers YAML : pattern {POLE}_{TYPE}[_AMHQ][_{VARIANTE}].yaml
+  → Ajoutée dans : CLAUDE.md · DOCS/00_IA/IA_CONTEXT_BASE.md · ha-erodi-architecture.html
+AVG source règle clarifiée : P0 + P1 + P2 lisent depuis _um directement (pas de _um_kwh_tpl)
+</pre>
+<h4>EN COURS</h4>
+<pre>GitHub ghost files — 6 anciens noms encore sur GitHub (H:\ est propre) — git rm en attente
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>card_meteocss_home / Dashboard_2026_08_01 : sensor.th_balcon_nord_temperature | round(1) sans float(0)
+  → crash sur 'unknown' au boot → fix : | float(0) | round(1)
+P0_UM_AMHQ : dependency chain pointait sur sensor.genelec_appart_kwh_cumulative (inexistant)
+  → fix : sensor.general_electric_appart_energy
+P0_UM_AMHQ_HPHC : phantom row sensor.genelec_appart_kwh_hc_cumulative (inexistant)
+  → fix : ligne supprimée
+ha_git_backup.sh : fantômes GitHub après renommage (ancienne detection unstaged ratait les suppressions)
+  → fix : git add -A avant detection + git diff --cached --name-only
+</pre>
+<h4>PROCHAINE ACTION (priorité)</h4>
+<pre>1. Terminal HA → git rm des 6 ghost files :
+   git rm templates/P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml
+   git rm templates/P4_groupe_presence/02_logique_wifi_cellular.yaml
+   git rm templates/P3_eclairage/ui_dashboard/etats_status.yaml
+   git rm sensors/meteo/M_03_meteo_sensors_blitzortung.yaml
+   git rm utility_meter/P0_Energie_total/Genelec_appart/01_UM_AMHQ.yaml
+   git rm utility_meter/P0_Energie_total/Genelec_appart/02_UM_genelec_appart_HPHC_AMHQ.yaml
+   git commit -m "chore: suppression anciens noms (renommages conventions)"
+   git push
+2. P4_groupe_presence.yaml / P4_wifi_detection.yaml : titres secondaires mal indentés + &gt;37 chars + annotations_log manquant
+3. P3_etats_status.yaml : input_select.saison (Zero Helper UI violation) + espaces parasites icônes
+</pre>
+<h3>FIN JOURNAL</h3>
+<pre>
+</pre>
+<h3>JOURNAL HA REBUILD — 2026-08-01 (session 2 — index.html)</h3>
+<pre>
+SESSION : longue (multi-heures)
+BRANCHE ACTIVE : gh-pages (site ha.erodi-ha.com) — PAS de travail TREE_CORRIGE cette session
+</pre>
+<h4>FICHIERS VALIDÉS</h4>
+<pre>ReBuild/index.html — cadrillage planche architecte confirmé OK (cache CDN, pas un bug) [✓]
+ReBuild/index.html — 3 HTML retirés de main (ha-erodi-architecture.html, ha-erodi.html, index.html) — commit e277ce8 [✓]
+ReBuild/index.html — retiré puis redéployé proprement sur gh-pages (commits db2876c9 → 01a770c6) [✓]
+ReBuild/index.html — #constellation : suppression mix-blend-mode:multiply (coupait la maison au changement de fond de section) [✓]
+</pre>
+<h4>EN COURS</h4>
+<pre>ReBuild/index.html — repositionnement boîte "Suite - Documentation technique" :
+  → déplacée dans &lt;section id="emotion"&gt; (fond crème), taille réduite (620px)
+  → cartouche compact (padding cellules réduit : 6px→3px, 7px→4px)
+  → body padding-bottom : 7rem → 11rem → 9rem → 7.5rem → 5rem → 8rem → 7.625rem → 1rem (dernier commit 3b3cb62f)
+  → état : DÉPLOYÉ mais NON VALIDÉ — utilisateur signale qu'avant il y avait "un espace blanc où le cartouche rentrait nickel", ambigu si régression à corriger ou simple observation — QUESTION EN ATTENTE DE RÉPONSE
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>index.html : CTA box chevauchait le cartouche → mesure JS précise (getBoundingClientRect) → overlap 41.8px à 5rem → calcul exact 7.625rem pour contact net
+index.html : maison wireframe coupée en 2 → cause = mix-blend-mode:multiply + fond de section différent (#emotion bg-card vs body bg) → suppression du blend-mode
+Live JS style testing (document.body.style.xxx) bloqué silencieusement sur le domaine (Cloudflare/CSP) → abandonné, retour au workflow fichier + push + attente cache CDN (~10-60s)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Clarifier avec Eric : veut-il un espace blanc/gap distinct avant le cartouche, ou la boîte fondue dans le crème (état actuel) est-elle acceptée ?
+Tâche en attente séparée (TaskCreate #1, à reporter en TODO.txt si toujours valide) : brancher input_boolean.mode_absence_force sur sensor.groupe (P4_groupe_presence.yaml)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

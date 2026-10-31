@@ -1,0 +1,49 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-06</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-06</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-06_s1.txt</p>
+<h3>JOURNAL HA REBUILD - 2026-10-06 (SESSION S1)</h3>
+<pre>
+SESSION : ~50 min (06h27 - 07h18), audit des items SDB de TODO.txt + clotures
+BRANCHE ACTIVE : docs/
+</pre>
+<h4>FICHIERS VALIDES</h4>
+<pre>docs/03_docs_automations/docs_automations_MD/AUTOMATIONS/AUTOMATIONS.md - L304 : remote.soufflant_sdb_rm4_mini -&gt; remote.soufflant_sdb ; sauvegarde locale AUTOMATIONS_2026-10-06_07h02.md (jamais poussee) ; pousse vers H:\docs, md5 117D61A008D57FA671F849C6CB38CB62 identique local/prod [x]
+TODO.txt - SDB-1 ferme (+ ligne push H:), SDB-MESURE : reste puissance 20 W clos ; sauvegardes TODO.txt.bak_2026-10-06 et TODO.txt.bak_2026-10-06_07h07 [x]
+</pre>
+<h4>DECISIONS ERIC</h4>
+<pre>- SDB-MESURE : on garde sdb_soufflant_etat / sdb_soufflant_power_status bases sur la puissance (seuil 20 W). Risque accepte : prise muette -&gt; etat affiche off pendant la chauffe.
+- Automation A (GESTION INTELLIGENTE SOUFFLANT, fevrier) : obsolete, conservee OFF comme reference de la rotation des resistances (cycle IR 0W -&gt; 1000W -&gt; 2000W -&gt; 0W, suivi par input_select.etat_resistance_soufflant_sdb). Ne pas la rallumer.
+- Automation D (watchdog) : toujours active.
+- Mise a jour de la todo limitee a la SdB (items cuisine non touches).
+</pre>
+<h4>CONSTATS (verifies en live ou dans les fichiers)</h4>
+<pre>- remote.soufflant_sdb_rm4_mini n'existe plus ; remote.soufflant_sdb (plateforme broadlink, nom affiche "Soufflant SdB RM4-Mini") existe ; automations.yaml (8 usages) et scripts.yaml (3) l'utilisent deja. Date du renommage inconnue.
+- Ancien id present uniquement dans 3 exports dashboard dates (Dashboard_2026_03_16, 03_20, 04_01) : archives, non reecrites.
+- D : active mais condition de derive +0,5 degre toujours en place, jamais declenchee (last_triggered vide) -&gt; SDB-WATCHDOG reste ouvert.
+- A et le routage (SDB - SOUFFLANT - ROUTAGE) se declenchent sur le meme switch.inter_soufflant_salle_de_bain : rallumer A donnerait une double sequence et des IR on_off qui s'annulent (deduit, non teste).
+- Cuisine : firmware Shelly a jour (33554943), sensor.radiateur_elec_cuisine_energy = 0,32 kWh (plus unknown), Riemann cuisine supprime le 2026-09-24 (commentaires P1_UM_AMHQ.yaml). Les SDB ne sont pas concernees (Shelly = cuisine, relais SdB = Zigbee).
+- Item HISTO-S2 de TODO.txt : histo_2026-10-04_s2.txt existe (3496 octets, 04/10 20:40), l'item est probablement perime. Contenu non verifie.
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>(aucune)
+</pre>
+<h4>TACHES BACKLOG (TODO.txt)</h4>
+<pre>SDB ouverts (8) : SDB-WATCHDOG ; SDB-THERMOSTAT (decision) ; SDB-INTER-SANS-EFFET (decision) ; SDB-60MIN-FRAGILE ; SDB-TEMP-COUPURE (bloque par la garde 25 degres) ; automations.yaml modifie en direct pour le soufflant (a regulariser via l'UI HA) ; entites SdB en 404 dans INDEX_GLOBAL.md (dont sensor.boutton_salle_de_bain_hue_battery, probablement sensor.hue_smart_button_salle_de_bain_batterie en live) ; CHAUFFAGE-AUDIT (volet SdB).
+Cuisine, a mettre a jour (demande d'Eric : plus tard) : RELAIS-CUISINE-MAJ (a cocher), F-1 (sans objet), RADIATEUR-CUISINE-CAPTEUR (probablement obsolete, historiques non verifies).
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Ce soir (a la demande d'Eric) :
+1. Reformuler CHAUFFAGE-AUDIT : A conservee off (reference, ne pas rallumer), D active mais inoperante (SDB-WATCHDOG), regulation temperature a trancher.
+2. Lire script.sdb_soufflant_arreter et le lien input_boolean / switch.inter_soufflant_salle_de_bain : risque de double IR on_off avec D.
+3. Decisions SDB-THERMOSTAT et SDB-INTER-SANS-EFFET.
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

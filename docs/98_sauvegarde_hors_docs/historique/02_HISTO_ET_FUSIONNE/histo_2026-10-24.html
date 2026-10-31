@@ -1,0 +1,56 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-24</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-24</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-24_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-24</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 6h30 (de 16h39 a 23h05, reprise apres compactage)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>TODO/TODO.html</code> - devient la source de la todo (TODO.md a la corbeille), 4 onglets (A faire, A trier, A verifier, Fermes), tri du plus ancien au plus recent, R80/R83/R38.2 fermes, R81/R86 passes en A VERIFIER, R107 ajoute, puis R108.1 a R108.22 ajoutes a 23h01 (375 points : 153 A FAIRE, 73 A TRIER, 32 A VERIFIER, 117 FAIT) <strong>[v]</strong></li>
+<li>🟢 <code>docs/02_Docs_dashboard/Dashboard_docs_yaml/L5C1_13_Batteries_Piles/02_Page/Page_L5C1_batteries_piles.yaml</code> et sa fiche <code>Page_batteries.md</code> - section BATTERY alignee sur la prod, entee -&gt; entree (R83), poussees en prod <strong>[v]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/config_system_SH_PY_YAML/groups/GRP_01_batteries_hue.yaml</code> - entee -&gt; entree, pousse (racine et miroir), <code>group.reload</code> fait <strong>[v]</strong></li>
+<li>🟢 <code>.../templates/P3_eclairage/P3_UI_DASHBOARD/P3_etats_status.yaml</code> (MD5 8c7f008d) - R91, bloc <code>icon:</code> de la saison supprime, pousse racine et miroir <strong>[v]</strong></li>
+<li>🟢 <code>.../input_booleans/P1/P1_BV_IB_inter_soufflant_SDB.yaml</code> (68020e23) - note d'en-tete, pousse <strong>[v]</strong></li>
+<li>🟢 <code>.../input_select.yaml</code> (f057dfe3) - helper <code>input_select.saison</code> supprime, pousse <strong>[v]</strong></li>
+<li>🟢 <code>DEPENDANCES_GLOBALES.md</code> (50806ad2) et <code>DEPENDANCES_GLOBALES_HERMES_V1.md</code> (ae48ec36) - mis a jour, prod ecrasee pour la V1 Hermes (ancienne prod gardee en TEMPO) <strong>[v]</strong></li>
+<li>🟢 <code>GLOBAL_INDEX_REPO.md</code> (db29d95c) pousse aux 2 destinations <strong>[v]</strong></li>
+<li>🟢 <code>CLAUDE.md</code> (6864b845) et ses copies <code>IA_CONTEXT_BASE.md</code> (local, H:, D:) - regles TODO.html, Log de modif, etc. <strong>[v]</strong></li>
+<li>🟢 Skills <code>histo</code>, <code>journal-modifs</code>, <code>ha-trigul</code> alignes ; <code>Skill_ha-resync-docs</code> retire de H: <strong>[v]</strong></li>
+<li>🟢 Pousse en prod apres trigul (ordre d'Eric 21h56) : 4 automations Histo/Rattrapage Linky/Nodon, <code>GLOBAL_INDEX_AUTOMATIONS.md</code>, <code>Check_sous_context_ia.py</code>, <code>histo_html.py</code>, <code>histo_trace.py</code>, <code>Verif_headers_yaml.py</code> et sa fiche <strong>[v]</strong></li>
+<li>🟢 <code>H:\docs\01_docs_config_system\config_system_YAML\configuration.yaml</code> (orphelin, 1307715f) supprime de la prod, copie en TEMPO <strong>[v]</strong></li>
+<li>🟢 Dialogue Claude/Hermes : messages c20261024-01 a c20261024-13, <code>LISEZMOI.md</code> mis a jour (regles 1, 2, 7, 9, 4) <strong>[v]</strong></li>
+<li>🟢 3 scripts de Hermes repointes de <code>config_system_YAML</code> vers <code>config_system_SH_PY_YAML</code> (audit_huissier.py 65f27715, generate_dependances_globales_v3.py db250c57, generate_dependances_globales.py ea564211), diff relu par Claude <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 Surveillance de la boite de Hermes a la minute (tache planifiee, ordre d'Eric) - interrompue par l'arret du PC de fin de journee <strong>[EN COURS]</strong></li>
+<li>🟠 R108.1 a R108.22 : points non faits de la session a trancher par Eric <strong>[a decider]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 <code>TODO.html</code> : virgule manquante apres fermeture de 5 points (page cassee) -&gt; corrigee a 13h47 <strong>[resolu]</strong></li>
+<li>🔴 Jugement de 4 fichiers de Hermes avant lecture -&gt; regle d'Eric : lire le fichier et dire son perimetre avant de conclure <strong>[resolu]</strong></li>
+<li>🔴 Deux taches planifiees en double (22h39, 22h41) -&gt; anciennes supprimees, une seule par tick <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.html)</h4>
+<ul>
+<li>📌 R108.1 <code>mode_absence_force</code>, R108.3 espaces apres <code>{{</code> (lignes 287, 289, 295, 296), R108.4 lancer <code>audit_huissier.py</code>, R108.7 ameliorations de skills, R108.9 dossiers TEMPO du jour</li>
+<li>📌 Points a preciser par Eric : R108.11 (passages 607 a 611), R108.12 (licence TMOG), R108.13 (7 fichiers citant <code>ha-resync-docs</code>), R108.17 (DEMANDE_GO)</li>
+<li>📌 Fichiers de Hermes modifies le soir sans ligne de journal ni <code>.bak</code> (R108.5), deux copies de <code>boite_claude_watch.py</code> a comparer (R108.6)</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Reprendre la surveillance de Hermes (relancer la tache planifiee), puis traiter les decisions ouvertes d'Eric (R108.x)</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

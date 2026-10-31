@@ -1,0 +1,101 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-21</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-21</h1><p class="mut">2 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a> <a href="#s2">Session S2</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-21_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-21</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 2 h (18:50 a 19:15, repris apres compaction)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>TODO/TODO.md</code> et <code>TODO/TODO.html</code> - points R103.1 a R103.10 ajoutes, deux blocs Ouverts/Fermes sur une page, sauvegardes TODO toutes en HTML <strong>[v]</strong></li>
+<li>🟢 <code>docs/04_Docs_scripts/Docs_scripts_sh/histo_trace/histo_trace.py</code> - commande <code>recap</code> (format <code>( tache N-1 -&gt; duree ) - debut HH:MM:SS</code>) <strong>[v]</strong></li>
+<li>🟢 <code>docs/05_Docs_skills/Skill_histo-final/Histo-final.md</code> - delais lumieres 10 s et 2 s, HORODATAGE, automation <code>automation.bureau_forcer_play_on_si_pc_tourne</code> coupee en tache 1 et remise on avant l'arret du PC <strong>[a tester]</strong></li>
+<li>🟢 <code>docs/05_Docs_skills/Skill_histo/Histo.md</code> - commande <code>recap</code> et ligne HORODATAGE <strong>[v]</strong></li>
+<li>🟢 <code>.claude/skills/histo-final/SKILL.md</code> - 3 delais raccourcis seulement <strong>[v]</strong></li>
+<li>🟢 <code>historique/modifs/MODIFS_2026-10-20_claude.md</code> et <code>MODIFS_2026-10-21_claude.md</code> <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 test reel de <code>/histo-final</code> avec automation OFF/ON et recap <strong>[EN COURS]</strong></li>
+<li>🟠 cartes de skills histo et histo-final a enregistrer par Eric (compte) <strong>[a deployer]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 sauvegardes TODO creees en <code>.md</code> contre la consigne "tout en HTML" : converties en <code>.html</code>, <code>.md</code> a la corbeille <strong>[resolu]</strong></li>
+<li>🔴 mise en page TODO.html changee plusieurs fois (onglets) : retour a deux blocs sur une page, validee par Eric <strong>[resolu]</strong></li>
+<li>🔴 generateur TODO.html perdu avec le bac a sable : page mise a jour depuis le JSON embarque, suivi R103.4 <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.md)</h4>
+<ul>
+<li>📌 R103.1 a R103.10 ouverts (menage TODO, 14 vs 10 pages horodatees, generateur HTML, jours sans sauvegarde, numerotation, copies de skills decalees)</li>
+<li>📌 R1.5 : AUTOMATIONS_IDS_REF.md remplace par GLOBAL_INDEX_AUTOMATIONS.md, retrait sur ordre d'Eric</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Verifier le recap et la remise en on de l'automation apres ce test, puis trancher R103.2 (14 ou 10 pages horodatees)</li>
+</ul>
+<h4>⏱️ Horodatage des taches (histo_trace.py recap)</h4>
+<ul>
+<li>tache 1 (automation_off) : debut 19:15:31</li>
+<li>tache 2 (journal) : ( tache 1 -&gt; 12 s ) - debut 19:15:44</li>
+<li>tache 3 (sync_index) : ( tache 2 -&gt; 18 s ) - debut 19:16:01</li>
+<li>tache 4 (fusionne) : ( tache 3 -&gt; 22 s ) - debut 19:16:23</li>
+<li>tache 5 (obsidian) : ( tache 4 -&gt; 22 s ) - debut 19:16:45</li>
+<li>tache 6 (menage) : ( tache 5 -&gt; 1 s ) - debut 19:16:46</li>
+<li>tache 7 (export_5B) : ( tache 6 -&gt; 1 min 03 s ) - debut 19:17:49</li>
+<li>tache 8 (tree) : ( tache 7 -&gt; 7 s ) - debut 19:17:56</li>
+<li>tache 9 (controles_6B) : ( tache 8 -&gt; 1 min 12 s ) - debut 19:19:08</li>
+<li>tache 10 (controles_6C) : ( tache 9 -&gt; 1 s ) - debut 19:19:09</li>
+<li>tache 11 (controles_6D) : ( tache 10 -&gt; 0 s ) - debut 19:19:09</li>
+<li>tache 12 (rapport) : ( tache 11 -&gt; 18 s ) - debut 19:19:27</li>
+<li>tache 13 (notification) : ( tache 12 -&gt; 19 s ) - debut 19:19:46</li>
+<li>tache 14 (lumieres) : ( tache 13 -&gt; 20 s ) - debut 19:20:06</li>
+<li>tache 15 (automation_on) : ( tache 14 -&gt; 18 s ) - debut 19:20:24</li>
+<li>tache 16 (arret_pc) : ( tache 15 -&gt; 9 s ) - debut 19:20:33</li>
+<li>fin de sequence : ( tache 16 -&gt; 0 s ) - 19:20:33 ; duree totale 5 min 02 s</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-10-21_s2.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-21</strong> (Session <strong>S2</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 3 h 25 (19h21 a 22h46), histo-final suivi</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>historique/</code> : toute l'arborescence rangee (racine vers <code>03_RAPPORTS</code>, 10 sous-dossiers numerotes par importance : <code>01_MODIFS_IA</code>, <code>02_MENAGE_BAK</code>, <code>03_PUSH_ET_SUPPRESSIONS_PROD</code>, <code>04_RENOMMAGES</code>, <code>05_TREE</code>, <code>06_MD5</code>, <code>07_IA_CONTEXT_BASE</code>, <code>08_IA_SOUS_CONTEXT</code>, <code>09_PLANS_ET_RANGEMENTS</code>, <code>10_DIVERS</code>), dossiers en majuscules, <code>01_JOURNAL_TRACE</code> et <code>02_HISTO_ET_FUSIONNE</code> <strong>[v]</strong></li>
+<li>🟢 <code>histo_html.py</code> (pages HTML sombres des journaux et fusionnes) et <code>histo_trace.py</code> (commandes <code>recap</code>, <code>html</code>) <strong>[v]</strong></li>
+<li>🟢 Menage de <code>historique/</code> : un <code>.bak_DATE</code> par fichier et par jour, sans limite de jours ; fusion des <code>_sN</code> du meme jour ; <code>.txt</code> avec jumeau <code>.html</code> a la corbeille <strong>[v]</strong></li>
+<li>🟢 Copies docs des skills <code>Histo.md</code>, <code>Histo-final.md</code>, <code>Journal-modifs.md</code> (chemins renumerotes, regle <code>historique</code> sans plafond de jours) <strong>[v]</strong></li>
+<li>🟢 <code>TODO/TODO.md</code> : points R104.1 a R104.10 (restes de la session) ; <code>TODO.html</code> non regenere <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 Cartes de skills proposees (histo, histo-final, journal-modifs, ha-trigul, hermes-aligne) : a enregistrer par Eric <strong>[a deployer]</strong></li>
+<li>🟠 Chemins <code>historique\MD5\</code> encore cites par environ 25 fichiers (scripts, skills, CLAUDE.md, index) <strong>[EN COURS]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 Recyclage en masse des <code>.bak</code> horodates qui supprimait aussi le plus recent du jour : 15 fichiers restaures de la corbeille et renommes en <code>.bak_DATE</code> <strong>[resolu]</strong></li>
+<li>🔴 Premiere restauration introuvable (detail du dossier de la corbeille) : correspondance par nom exact et dossier d'origine nettoye <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.md)</h4>
+<ul>
+<li>📌 R104.1 a R104.10 (cartes de skills, chemins <code>MD5</code>, copies <code>.claude</code>, decision <code>trigul_profond</code> 18/10, maitre IA_NOM, <code>H:\docs\modifs</code> 20 contre 18, restes de menage, majuscules, ordre de <code>03_RAPPORTS</code>, rejouer /histo)</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Enregistrer les 5 cartes de skills, puis decider de la correction des chemins <code>historique\MD5\</code></li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

@@ -1,0 +1,125 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-02</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-02</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-02_s1.txt</p>
+<h3>JOURNAL JEMAYA - SURVEILLANCE TEMPS REEL ET RAPPORTS - 2026-10-02</h3>
+<pre>
+SESSION : nuit du 01/10 au 02/10 (continuation de la session Jemaya ouverte le 01/10)
+CONTEXTE : rendre Jemaya capable de CAPTURER la vie de la maison en direct (cascades),
+           puis de LIVRER deux rapports par jour (nuit et journee) sur Telegram,
+           avec la consommation reelle et la prise du PC .135 retiree du total.
+</pre>
+<h4>ETAPES VALIDEES</h4>
+<pre>[1] Ecouteur temps reel ecrit (jemaya_ecouteur.py) : abonnement websocket au bus
+    d'evenements de HA, filtre anti-bruit, detection de CASCADES avec les delais
+    reels, echantillonnage des mesures. Lecture seule, aucun appel de service ✓
+[2] Filtre calibre sur le trafic reel : 40 entites distinctes en 30 s, dont les
+    capteurs nommes en francais (_puissance) que mon premier filtre ratait ✓
+[3] Bug de logique corrige avant deploiement : chaque nouvel evenement fermait la
+    cascade en cours, ce qui produisait des cascades vides. Une cascade ouverte
+    absorbe desormais tout ce qui suit pendant 120 s ✓
+[4] Ecouteur DEPLOYE et LANCE sur .135 (jeton telegram et API HA lus dans son
+    propre .env), avec un garde-fou : relance toutes les 5 min si mort, et au
+    demarrage de la machine ✓
+[5] Le garde-fou a fait son travail pour de vrai : .135 a redemarre a 05h46, le
+    cron @reboot a relance l'ecouteur tout seul, sans intervention ✓
+[6] Bot Telegram de .135 teste DANS LES DEUX SENS : sortie acceptee par l'API
+    (message 81 chez Eric), et entree confirmee par son journal de passerelle
+    (message d'Eric a 06h51m26, reponse de .135 a 06h52m35, 2315 caracteres) ✓
+[7] rapport_matin.py ecrit et teste sur .135 : activite de la nuit, cascades
+    qualifiees, consommation corrigee, piles faibles, sante de l'ecouteur ✓
+[8] Consommation de la nuit etablie sur les STATISTIQUES DU RECORDER de HA
+    (websocket recorder/statistics_during_period) au lieu de l'API history :
+    9 nuits analysees, 127 a 311 W selon la nuit, 215 W de moyenne ✓
+[9] Prise du PC .135 identifiee par la mesure et non par son nom : la prise A7Z
+    tombe a 0 W la nuit et remonte a ~100 W a 05h45, ce qui colle exactement au
+    demarrage de .135. Sa consommation est retiree du total ✓
+[10] Creneau de la nuit recadre : 00h-07h attrapait l'heure du reveil, ce n'est
+     plus de la nuit. Desormais 23h00-06h00, et l'heure de 23h est rattachee a la
+     nuit du lendemain (pas au jour precedent) ✓
+[11] BATTEMENT ajoute a l'ecouteur : un signe de vie toutes les 2 minutes. Le
+     rapport du matin affiche maintenant une section SURVEILLANCE avec les trous
+     en minutes, et refuse de conclure quand il n'a pas vu ✓
+[12] rapport_jour.py ecrit et teste : journee depuis 06h00, prise .135 retiree,
+     classement des appareils par kWh, comparaison a la meme tranche horaire des
+     7 jours precedents, heures les plus lourdes, trous de surveillance ✓
+[13] Programmation chez .135 (crontab) : rapport de nuit a 07h30, rapport de
+     journee a 21h30, plus un RATTRAPAGE jusqu'a 09h30 et 23h30 (le rapport part
+     au premier passage apres rallumage, et ne part jamais deux fois) ✓
+[14] Rapport de nuit et rapport de journee envoyes pour de vrai sur Telegram ✓
+</pre>
+<h4>EN COURS</h4>
+<pre>- Le battement est neuf : le rapport du 02/10 voit un trou de 23h00 a 07h03 alors
+  que l'ecouteur a tourne de 23h24 a 23h30 et depuis 05h46. Les prochaines nuits
+  seront justes.
+- Test avec la vraie voix de Berry : jamais fait (reste du 30/09)
+- Persistance du gain du micro de .135 : exige sudo (reste du 30/09)
+- Climatiseurs : deux entites de clim se disent indisponibles a l'heure ou
+  j'ecris. A confirmer, non instruit.
+- Les creneaux de consommation attendent les etiquettes de Berry : c'est lui qui
+  sait ce qui tourne, aucun modele ne peut le deviner.
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>Mon affirmation "la maison est muette, elle dort vraiment" -&gt; FAUX : .135 etait
+  eteint, donc l'ecouteur aussi, de 23h30 a 05h46. J'ai pris une panne de
+  surveillance pour du silence -&gt; battement ajoute, le rapport ne peut plus
+  confondre les deux.
+Mon chiffre "298 W la nuit, 168 EUR/an" -&gt; FAUX de 43 pourcent. Les statistiques
+  du recorder, meme creneau, 10 nuits : 209 W de moyenne, 103 EUR/an. La nuit
+  corrigee du 02/10 est a 149 W. Mon chiffre venait de ma propre collecte par
+  l'API history, celle qui avait deja produit des resultats fausses.
+Mon constat "9 prises aveugles, frein principal des economies" -&gt; FAUX : sur les
+  23 prises suivies, AUCUNE n'est muette. Le lave-linge (371 W), le four et le
+  frigo mesurent parfaitement des qu'ils tournent. Elles etaient a l'arret.
+Timestamps de l'API history non encodes -&gt; donnees tronquees, corrige par
+  urllib.parse.quote (deja paye le 01/10, plus jamais)
+Fuseaux melanges dans le rapport : le journal de HA est en UTC, les cascades en
+  heure locale -&gt; 2 h d'ecart entre deux sections du meme rapport -&gt; conversion
+  explicite partout.
+Heure du journal mal lue apres l'ajout de la date -&gt; parsing corrige.
+Rapport qui se contredisait : 740 evenements affiches ET "aucune surveillance"
+  sur la meme periode -&gt; croisement des deux sources, la contradiction est
+  desormais expliquee dans le texte.
+pkill -f "jemaya_ecouteur" a tue mon propre shell (la commande contenait le nom
+  cherche) -&gt; ruse des crochets, motif jemaya_ecoute[u]r.
+Mon patch a deplace une ligne d'initialisation dans une autre methode -&gt; repere
+  a la relecture et corrige avant deploiement.
+Conclusion tiree sur une seule heure pleine (ecart +284 pourcent) -&gt; le rapport
+  attend au moins 3 heures avant de conclure.
+</pre>
+<h4>FICHIERS MODIFIES</h4>
+<pre>D:/hermes/scripts/jemaya_ecouteur.py
+  -&gt; NOUVEAU : ecouteur temps reel du bus HA (filtre, cascades, battement)
+.135 : /home/berry/jemaya/scripts/jemaya_ecouteur.py
+  -&gt; deploiement + .env vers /home/berry/.hermes/.env
+.135 : /home/berry/jemaya/scripts/rapport_matin.py
+  -&gt; NOUVEAU : rapport de nuit, 23h-06h, prise .135 retiree, trous de surveillance
+.135 : /home/berry/jemaya/scripts/rapport_jour.py
+  -&gt; NOUVEAU : rapport de journee, depuis 06h00, classement des appareils
+.135 : /home/berry/jemaya/rapport_si_besoin.sh
+  -&gt; NOUVEAU : rattrapage, ne renvoie jamais deux fois le meme rapport
+.135 : /home/berry/jemaya/lance_ecouteur.sh
+  -&gt; NOUVEAU : garde-fou de l'ecouteur (toutes les 5 min + au demarrage)
+.135 : crontab
+  -&gt; 6 lignes : @reboot + */5 ecouteur, 07h30 + rattrapage 08h-09h30 matin,
+     21h30 + rattrapage 22h-23h30 journee
+.135 : /home/berry/jemaya/rapports/rapport-2026-10-02.txt
+  -&gt; premier rapport de nuit livre
+.135 : /home/berry/jemaya/rapports/journee-2026-10-02.txt
+  -&gt; premier rapport de journee livre
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Demain matin, lire le rapport de nuit envoye par .135 et verifier qu'il ne
+declare plus de trou artificiel (le battement aura une nuit complete derriere
+lui). Puis nommer avec Berry les creneaux de consommation, pour que la sentinelle
+ait enfin son referentiel et puisse signaler un ecart toute seule.
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

@@ -1,0 +1,106 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-08-10</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-08-10</h1><p class="mut">2 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s0">Journal</a><a href="#s2">Session S2</a></nav>
+<section id="s0"><h2>Journal</h2><p class="src">Source : histo_2026-08-10.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-08-10</h3>
+<pre>
+SESSION : Hermes — analyse energetique/thermique complete (conso, DUT, tarifs, murs)
+CONTEXTE : Audit conso/thermique HA a partir de diag_conso_elec.txt (13 958 lignes)
+</pre>
+<h4>ETAPES VALIDEES</h4>
+<pre>[1] Parseur corrige : 6e variante de format ([2] en [WIFI], 6 888 lignes ignorees depuis le 29/04) -&gt; 13 956/13 958 lignes parsees (49 % de pertes eliminees) ✓
+[2] Suffixe DUT variable gere (h / %} / absent - l'artefact %} est SYSTEMATIQUE sur le format 2, 19/01-15/04) ✓
+[3] Analyse corrigee : Juin 327,6 (30 j), Juil 443,8 (31 j) - L'ETE DEPASSE L'HIVER (Juil &gt; Janv 397,2) ✓
+[4] RAPPORT_AUDIT_ENERGETIQUE_2026-08-10.md cree (12 sections + synthese, style ASCII) ✓
+[5] Tarifs verifies sur grille EDF officielle 01/08/2026 : HP 0,2142 / HC 0,1589 EUR (+3,7 %/+0,7 %) ✓
+[6] Fenetres HC confirmees par Eric : nuit 01h30-07h30 + jour 13h-14h30 -&gt; mix reel mesure ~75/25, cout pondere ~0,20 EUR/kWh ✓
+[7] Efficacite ete ~4x l'hiver par degre d'ecart (3,8 vs 0,8 kWh/C) ✓
+[8] Projection annuelle ~2 700-2 830 kWh (~730-755 EUR/an TTC) ✓
+[9] IA_AUDIT mis a jour v6.4 -&gt; v6.8 (parseur, tarifs, fenetres HC, carte murale definitive, physique carreau de platre) ✓
+[10] TODO.txt : item ENERGIE-TARIF-SENSORS ajoute ✓
+[11] Token GitHub cree par Eric (scope repo) + push docs local -&gt; H: -&gt; GitHub (commit 50498058, verifie via ls-remote) ✓
+[12] Skill ha-energy-thermal-analysis corrige (parseur, references, tarifs, murs, physique) ✓
+</pre>
+<h4>EN COURS</h4>
+<pre>- Bloc murs d'Eric (10:00) : ambiguites a trancher (salon sans mur mitoyen bureau, cuisine porte vers salon, baie cuisine 60/40 vs 3B fenetre standard, ligne 1 artefact, items pieces anciens, markdown casse)
+- Verifier sensor.tarif_heures_pleines_ttc / _creuses_ttc dans HA (grille 01/08)
+- A1 : deploiement auto B radiateur cuisine a verifier avant l'hiver (TODO P1-CUISINE-B)
+- A2 : statut option A store chambre (rappel 21h30) inconnu
+- Renouvellement token GitHub (30-90 j) a planifier
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>Parseur ignorait 49 % des lignes (variante [2] en [WIFI]) -&gt; regex prefixe generique
+DUT a 0 pour 80 % des jours (suffixe h exige) -&gt; suffixe optionnel
+Talon juin 211 W gonfle -&gt; reset manque a minuit le 15/06 (compteur reparti de 7,92 kWh), pas une conso
+"43 jours" canicule -&gt; 42 (recompte)
+SDB "source passive pour le Bureau" -&gt; Chambre (murs 08/08)
+Tarif base 0,2516 utilise a tort -&gt; HPHC grille 01/08
+"Faible inertie" carreau de platre -&gt; inertie MODEREE (5-10x &gt; BA13, 2x &lt; beton), absorbe/restitue
+</pre>
+<h4>FICHIERS MODIFIES</h4>
+<pre>ReBuild/docs/00_IA/RAPPORT_AUDIT_ENERGETIQUE_2026-08-10.md
+  -&gt; cree + 12 sections (corrections, conso, DUT, talon, canicule, couts, anomalies, ranking, presence, efficacite ete, profil horaire, projection)
+ReBuild/docs/00_IA/sous_context_ia/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md
+  -&gt; v6.4 a v6.8 (parseur, tarifs verifies, fenetres HC, carte murale definitive, physique carreau) puis version Eric (bloc murs + cuisine) - non re-pushee
+ReBuild/TODO.txt
+  -&gt; item ENERGIE-TARIF-SENSORS + date maj
+H:\docs\00_IA\... (IA_AUDIT + RAPPORT 10/08)
+  -&gt; copie + commit 50498058 + push GitHub main (verifie ls-remote)
+Skill ha-energy-thermal-analysis (local Hermes)
+  -&gt; parseur 6 variantes + suffixe DUT + tarifs + fenetres HC + murs + physique carreau
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Trancher les ambiguites du bloc murs d'Eric (salon/bureau, cuisine, baie 60/40) puis re-pousser
+IA_AUDIT vers H: -&gt; GitHub (l'actuel pousse est la version pre-Eric)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-08-10_S2.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-08-10 (S2)</h3>
+<pre>
+SESSION : Hermes — integration tarif_edf (EDF) : correctif override, PR upstream, fork, debug HACS
+CONTEXTE : Tarifs EDF perimes (data.gouv en retard) ; correctif de l'integration + contribution upstream
+</pre>
+<h4>ETAPES VALIDEES</h4>
+<pre>[1] CSV grille officielle EDF 01/08/2026 cree (transcription PDF, 3 options : base 9 lignes / hphc 9 / tempo 8, TTC) -&gt; repo docs/00_IA/Grille_Tarif_Bleu_EDF_2026-08-01.csv ✓
+[2] PR #62 upstream delphiki : override manuel tarif_hp/hc/base (config_flow + coordinator + strings + translations fr/en + .gitignore) -&gt; verifiee 22/22 ad hoc, poussee ✓
+[3] Commentaire issue #61 : diagnostic data.gouv en retard (preuve 01/02/2026 vs grille 01/08/2026) ✓
+[4] Fork BerrySwann/hass-tarif-edf + release 2.1.2 + asset tarif_edf.zip (conforme workflow upstream, manifest 2.1.2) ✓
+[5] Diagnostic HACS : "Could not download" = hacs.json zip_release:true -&gt; HACS exige l'asset tarif_edf.zip sur la release (404 sans) ✓
+[6] Notification de fork postee sur PR #62 (transparence + licence + offre de suppression) ✓
+[7] Integration tarif_edf v2.1.1 (prod) backupee dans home_assistant_re-build (b8218f93) ✓
+</pre>
+<h4>EN COURS</h4>
+<pre>- Suppression du fork : bloquee (approbation non validee) - attente decision (API ou UI GitHub)
+- Installation manuelle 2.1.2 dans H:\custom_components\tarif_edf : proposee, pas faite
+- Overrides HA (0,2142 HP / 0,1589 HC) : a saisir apres installation + redemarrage
+- Ambiguites carte murale IA_AUDIT (salon sans mur mitoyen bureau, cuisine porte vers salon, baie 60/40) + re-push version Eric (le commit 50498058 = version pre-Eric)
+- Repo public : le token reste dans ce choix sans expiration (decision Eric, assume)
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>HACS 404 asset : release creee sans asset -&gt; zip construit (contenu tarif_edf/ a la racine) + upload API
+pycache dans la PR : git rm --cached + .gitignore (__pycache__/, *.pyc) -&gt; commit amend + force push
+Quoting bash (apostrophes FR) sur appels API GitHub : passage par fichiers JSON temporaires
+Fork impossible en prive : restriction GitHub "Public forks can't be made private" -&gt; suppression + recreation privee seulement
+Tests de verification : 3 bugs de harnais (slice d'index, indentation, mocks) corriges, 24/24 puis 22/22 puis 9/9 PASS
+</pre>
+<h4>FICHIERS MODIFIES</h4>
+<pre>ReBuild/docs/00_IA/Grille_Tarif_Bleu_EDF_2026-08-01.csv
+  -&gt; cree (valeurs PDF officiel) + pousse (commit 9e293545)
+home_assistant_re-build (GitHub)
+  -&gt; 50498058 docs IA audit | f729a1d2 PDF grille | b8218f93 tarif_edf v2.1.1 | 9e293545 CSV grille
+Fork (supprime prochainement) : config_flow.py, coordinator.py, strings.json, translations/fr/en.json, .gitignore, manifest 2.1.2
+C:/Temp : clone hass-tarif-edf-fork (code 2.1.2 conserve localement)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Supprimer le fork (decision) PUIS installer manuellement la 2.1.2 dans H:\custom_components\tarif_edf (avec backup v2.1.1) + redemarrer HA + saisir overrides 0,2142/0,1589
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

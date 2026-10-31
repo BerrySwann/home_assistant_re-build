@@ -1,0 +1,53 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-22</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-22</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-22_s1.md</p>
+<h3>Journal HA ReBuild - <strong>2026-10-22</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li><strong>Session</strong> : environ 19h45 -&gt; 21h45</li>
+<li><strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>Fichiers valides</h4>
+<ul>
+<li><code>Claude md SAVE/CLAUDE.md</code> - regle "pas de suppression definitive sur H:" (copie dans <code>TEMPO\&lt;operation&gt;_AAAA-MM-JJ\</code>, MD5, corbeille Windows des copies, puis suppression sur H:) <strong>[v]</strong> MD5 45a20d6d -&gt; 5c9b2178, copies IA_CONTEXT_BASE (local, <code>H:</code>, <code>D:</code>) identiques</li>
+<li><code>TODO/TODO.md</code> - ajout R104.11 (histo_html.py), R104.12 (update-arbo comptage recursif), R104.13 (journaux MODIFS en local seulement), R104.14 (suppression future de <code>H:\docs\modifs\</code>), R104.15 (skills a aligner sur la regle de suppression sur H:) <strong>[v]</strong></li>
+<li><code>historique/03_RAPPORTS/01_MODIFS_IA/</code> - journaux Hermes du 18, 20 et 22/10 copies depuis <code>H:\docs\modifs\</code> (MD5 verifies) <strong>[v]</strong></li>
+<li><code>D:\hermes\skills\autonomous-ai-agents\hermes-aligne\SKILL.md</code> - remplacee sur GO d'Eric (3d9283eb -&gt; 0b7b3e9d) <strong>[v]</strong></li>
+<li><code>D:\hermes\skills\journal-modifs\SKILL.md</code> - nouveau chemin local, plus de copie vers <code>H:</code> (36d0d62c -&gt; fae73fc9) <strong>[v]</strong></li>
+<li>Skills du compte : update-arbo et hermes-aligne enregistrees par Eric ; cartes journal-modifs, histo-final et hermes-aligne v2 proposees <strong>[a enregistrer par Eric]</strong></li>
+</ul>
+<h4>En cours</h4>
+<ul>
+<li><code>histo</code> : correction manuelle par Eric de 2 passages (ordre des etapes ligne 3, phrase "Journal des modifs" de l'etape 5) <strong>[a faire]</strong></li>
+<li><code>ha-trigul</code> : carte a re-proposer <strong>[a faire]</strong></li>
+<li><code>D:\hermes\skills\note-taking\histo-final\SKILL.md</code> ligne 34 cite encore l'ancien chemin et <code>H:</code> <strong>[attente GO d'Eric]</strong></li>
+</ul>
+<h4>Erreurs resolues</h4>
+<ul>
+<li><code>propose_skills</code> refuse (SKILL.md du compte non lu en entier) -&gt; lecture puis renvoi <strong>[resolu]</strong></li>
+<li>Ecriture directe sur <code>D:</code> refusee (dossier non connecte) -&gt; relais par <code>ReBuild\TEMPO</code> <strong>[resolu]</strong></li>
+<li>Defaut <code>historique\modifs\</code> dans histo : lignes 419 et 501, la seconde d'abord oubliee -&gt; ajoutee a la liste de corrections manuelles <strong>[resolu]</strong></li>
+</ul>
+<h4>Decisions</h4>
+<ul>
+<li>Journaux MODIFS uniquement dans <code>historique\03_RAPPORTS\01_MODIFS_IA\</code> (Claude et Hermes), plus d'ecriture sur <code>H:\docs\modifs\</code>, anciens fichiers laisses en l'etat.</li>
+<li>Pas de suppression definitive sur <code>H:</code> : passage par TEMPO, MD5, corbeille, puis suppression ; MD5 different = rien supprime et alerte.</li>
+<li>Claude est l'orchestrateur : il propose, Eric decide, Hermes execute sur le GO d'Eric (messages c20261022-01 a -05 dans <code>D:\Discussion_Claude_Hermes</code>).</li>
+</ul>
+<h4>Taches backlog (TODO.md)</h4>
+<ul>
+<li>R104.11 a R104.15 (voir plus haut) ; R104.2 chemin <code>historique\MD5\</code> a corriger.</li>
+</ul>
+<h4>Prochaine action</h4>
+<ul>
+<li>Eric enregistre les cartes de skills ; GO pour nettoyer <code>histo-final</code> chez Hermes ; aligner ha-push-yaml, ha-push-docs et histo (5B) sur la regle de suppression sur H:.</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

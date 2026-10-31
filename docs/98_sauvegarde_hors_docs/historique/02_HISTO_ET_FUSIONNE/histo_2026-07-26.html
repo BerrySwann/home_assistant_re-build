@@ -1,0 +1,44 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-07-26</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-07-26</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s0">Journal</a></nav>
+<section id="s0"><h2>Journal</h2><p class="src">Source : histo_2026-07-26.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-07-26</h3>
+<pre>
+SESSION : ~3-4h (hors HA ReBuild YAML — session dediee site web)
+BRANCHE ACTIVE : gh-pages (repo home_assistant_re-build)
+</pre>
+<h4>FICHIERS MODIFIES / VALIDES</h4>
+<pre>ReBuild/ha-erodi.html                         — site portfolio "Du Bidouilleur a l'Ingenierie" [✓]
+ReBuild/prompt/PROMPT_REPRODUCTION_ha-erodi.html — prompt de reproduction mis a jour [✓]
+</pre>
+<h4>FONCTIONNALITES IMPLEMENTEES</h4>
+<pre>[canvas] alpha maison : Math.min(1, p * 6) * 1.0 — opacite max rapide
+[scroll hint] rectangle + glow dual-element (overflow:hidden clip + sibling glow)
+[house label] "Le Bidouilleur" cuivre bold 0.85rem / "L'Ingenieur" cuivre
+[flying clone] mot "Bidouilleur" detache du H1 hero, vol scroll-driven vers maison
+  - ScrollTrigger scrub true sur #hero (top top -&gt; bottom top)
+  - flyDone dynamique (reset a false sur scroll inverse)
+  - fade-in p=0.08-&gt;0.20, tient jusqu'a p=0.48, disparait p=0.48-&gt;0.75
+  - L'Ingenieur apparait p=0.38-&gt;0.52
+[deploy] commits gh-pages : ca7efcc (dernier valide)
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>.house-label-after sans fermeture } : cassait tout le CSS (.house-label-before visible en vert)
+flyDone jamais remis a false : clone restait visible au scroll retour
+offsetWidth=0 au moment du calcul : remplace par decalage direct du targetX
+</pre>
+<h4>EN COURS</h4>
+<pre>Rien — session terminee, site valide et deploye sur ha.erodi-ha.com
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Reprendre le projet HA ReBuild (YAML / dashboard) ou nouvelles features site
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

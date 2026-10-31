@@ -1,0 +1,53 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-13</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-13</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-13_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-13</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 2 h 17 (<strong>20h15</strong> a <strong>22h32</strong>, deduit des heures du journal des modifs ; cette conversation ne contient que /histo-final)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+<li>🔵 <strong>Source</strong> : <code>historique/modifs/MODIFS_2026-10-13_claude.md</code> (aucun /histo n'avait ete lance aujourd'hui)</li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>GLOBAL_INDEX_REPO</code> (ex <code>INDEX_GLOBAL</code>) - deplace de <code>Github/</code> vers <code>docs/05_docs_MD_system/GLOBAL_INDEX_REPO/</code> (dossier + 33 fichiers, MD5 verifies, 0 KO), copie de navigation <code>H:\GLOBAL_INDEX_REPO.md</code> et miroir <code>H:\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\</code> (MD5 <code>E41787527D61B4FAF869667A697EC1A6</code>), ancien <code>H:\INDEX_GLOBAL.md</code> supprime sur demande ; references corrigees dans README, IA_ARBO_DETAIL, IA_INDEX_*, AUDIT_MD5_DOCS, 3 scripts sh et skills <strong>[v]</strong></li>
+<li>🟢 <code>DEPENDANCES_GLOBALES.md</code> - copie local -&gt; prod (MD5 <code>1F715509</code>, ancienne prod <code>CF806818</code>) <strong>[v]</strong></li>
+<li>🟢 <code>docs/05_docs_MD_system</code> - menage : 29 fichiers a la corbeille Windows, 3 sauvegardes GLOBAL_INDEX_REPO gardees ; <code>AUTOMATIONS_MIGRATION_REPORT.md</code> et <code>AUTOMATIONS_IDS_REF.md</code> a la corbeille sur demande ; <code>ENTITES_INDEX.md</code> -&gt; <code>ENTITES_GLOBAL_INDEX.md</code> (MD5 <code>D7F6631C</code> inchange, prod alignee) <strong>[v]</strong></li>
+<li>🟢 <code>docs/00_IA/sous_context_ia/</code> - un dossier par fichier (9 dossiers), <code>docs/00_IA/IA_CONTEXT_BASE/</code> cree par Eric, references corrigees, prod remise en dossiers, MD5 identiques <strong>[v]</strong></li>
+<li>🟢 7 fichiers <code>IA_*</code> corriges apres releve contre la prod (62 automations, scripts, integrations, chemins) ; <code>IA_P4_PRESENCE</code> fige au <strong>2026-10-13</strong> ; controle <code>check_sous_context_ia</code> : ecarts=0 casses=0 <strong>[v]</strong></li>
+<li>🟢 Nouveaux generateurs d'index (local, non pousses) : <code>gen_global_index_automations</code> (62 automations), <code>gen_global_index_vignettes_pages</code> (18 vignettes), <code>gen_global_index_scripts</code> (SH et YAML), <code>gen_global_index_ia</code> ; controleurs lecture seule <code>check_sous_context_ia</code> et <code>check_global_index</code> <strong>[v]</strong></li>
+<li>🟢 <code>Claude md SAVE/CLAUDE.md</code> + <code>IA_CONTEXT_BASE.md</code> - source de verite unique = le local (3 regles), 3 copies identiques (local, H:, D:) <strong>[v]</strong></li>
+<li>🟢 Skills mis a jour (copies <code>docs/05_docs_skills/</code>, non pousses vers H:) : <code>histo</code> (points 8 a 11, etape 6 points 7 et 8), <code>sync-index</code>, <code>ha-trigul</code>, <code>update-arbo</code>, <code>ha-push-docs</code>, <code>ha-push-md</code>, <code>ha-push-yaml</code> <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 <code>check_global_index</code> premier passage : liens=761 casses=69 ecarts=7 (69 liens casses dans GLOBAL_INDEX_REPO, 19 entites absentes dans GLOBAL_INDEX_REPO et 1 dans ENTITES_GLOBAL_INDEX, 5 index generes absents de la prod) - rien corrige, rien pousse <strong>[EN COURS]</strong></li>
+<li>🟠 <code>DEPENDANCES_GLOBALES.bak</code> du 10/10 : 2 fichiers laisses, choix a Eric <strong>[EN COURS]</strong></li>
+<li>🟠 Copies prod laissees en attente de decision : <code>AUTOMATIONS_MIGRATION_REPORT.md</code>, <code>AUTOMATIONS_IDS_REF.md</code>, RAPPORT_TRI_ENTITES, TRIAGE_PROD, PROD_LISTING, PROD_vs_REBUILD_DIFF, INDEX_PAGES <strong>[EN COURS]</strong></li>
+<li>🟠 <code>IA_SKILLS_INVENTAIRE</code> (ha-maj ajoute) et les skills modifies : non pousses en prod <strong>[a deployer]</strong></li>
+<li>🟠 <code>ha-push-md</code> et <code>ha-push-docs</code> : chemins <code>H:\Docs</code> plats non traites <strong>[draft]</strong></li>
+<li>🔵 Points ouverts du <strong>2026-10-12</strong> (<code>audit_md5_md_yaml.sh</code> prod/local, doc <code>ha_git_backup</code>) : aucune trace de decision dans le journal des modifs du jour</li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 nom du dossier/fichier : <code>INDEX_GLOBAL_REPO</code> (erreur de nom) -&gt; remis a <code>GLOBAL_INDEX_REPO</code> partout, 0 residu <strong>[resolu]</strong></li>
+<li>🔴 <code>check_sous_context_ia</code> premier passage ecarts=11 casses=5 -&gt; contenus corriges et controleur affine : ecarts=0 casses=0 <strong>[resolu]</strong></li>
+<li>🔴 2 sauvegardes <code>IA_ARBO_DETAIL</code> au format de nom incorrect -&gt; renommees selon leur date de modification <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.md)</h4>
+<ul>
+<li>📌 R20 : note de decision ajoutee ; R29 clos</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Revoir avec Eric le premier resultat de <code>check_global_index</code> (69 liens casses, entites absentes, index generes absents de la prod) et decider des pushs</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

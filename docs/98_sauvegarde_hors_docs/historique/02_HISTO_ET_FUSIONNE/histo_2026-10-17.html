@@ -1,0 +1,57 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-17</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-17</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-17_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-17</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : N/A (de <strong>09h12</strong> a <strong>16h45</strong> environ, deduit des heures du journal des modifs ; avec pauses)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+<li>🔵 <strong>Source</strong> : <code>historique/modifs/MODIFS_2026-10-17_claude.md</code> (213 lignes) et <code>MODIFS_2026-10-17_hermes.md</code> ; aucun histo n'existe pour le 2026-10-16 (dernier <code>histo_2026-10-15_s1.md</code>), donc la journee du <strong>2026-10-16</strong> n'est pas dans le journal fusionne ; histo lance ici en test a la demande d'Eric (16h45), sans /histo-final</li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>historique/IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md</code> (maitre des regles) et sa copie <code>docs/00_IA/SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/</code> - regles ajoutees : prefixes <code>AQ_</code> et <code>MPC_</code>, 6.6 Air_Quality, 6.7 modules HACS, 6.8 SDB, 6.9 UI_DASHBOARD, 6.10 eCO, 6.11 Z2M, 6.12 RASPI (Rpi4 inclus), 6.13 GitHub, 6.14 GLOBAL_INDEX, 6.15 numero du dossier racine qui descend dans les dossiers de type de fichiers (application differee), niveaux UNITE / ZONE / TOTAL ; MD5 final <code>718b64ec</code> <strong>[v]</strong></li>
+<li>🟢 <code>Claude md SAVE/CLAUDE.md</code>, <code>docs/00_IA/IA_CONTEXT_BASE/IA_CONTEXT_BASE.md</code> et copie <code>D:\docs\00_IA\IA_CONTEXT_BASE.md</code> - section 9 de nommage alignee sur le maitre, puis orthographe <code>SOUS_CONTEST_IA</code> -&gt; <code>SOUS_CONTEXT_IA</code> (15 chemins) ; MD5 commun <code>938a6c2a</code> <strong>[v]</strong> (local et D: ; la prod n'est pas poussee, voir En cours)</li>
+<li>🟢 Renommage des regles de mots : local (lot de 13h44, chemins cites corriges a 13h47), sauvegarde HA <code>Avant_renommage_docs_2026_10_17</code> creee avant le renommage de <code>H:\docs</code> (lot de 14h29), pushs des fiches md et index vers <code>H:\docs</code> (14h35), doublons de la prod supprimes avec copie en corbeille locale (lots de 14h42, 14h51 et 15h02), 3 yaml de <code>docs_scripts_YAML</code> recopies dans leurs dossiers et 6 anciennes copies mal placees supprimees (15h11) ; rapports dans <code>historique/</code> (<code>RENOMMAGE_*</code>, <code>PUSH_PROD_*</code>, <code>DOUBLONS_*</code>, <code>PAGE_HOME_*</code>) <strong>[v]</strong></li>
+<li>🟢 Dossier <code>SOUS_CONTEXT_IA</code> : renomme depuis <code>SOUS_CONTEST_IA</code> en local et depuis <code>sous_context_ia</code> en prod (15h43, decision d'Eric) <strong>[v]</strong></li>
+<li>🟢 <code>docs/04_Docs_scripts/Docs_scripts_sh/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.py</code> (<code>031b9a08</code>) et <code>Check_sous_context_ia/Check_sous_context_ia.py</code> (<code>96c9bd45</code>) - chemin <code>SOUS_CONTEXT_IA</code>, prod tolerante, controle des chemins <code>docs/00_IA</code> cites dans CLAUDE.md ; <code>GLOBAL_INDEX_IA.md</code> regenere (liens 31, casses 0) <strong>[v]</strong></li>
+<li>🟢 Skills <code>histo</code> et <code>update-arbo</code> (<code>.claude/skills/</code> + copies <code>docs/05_Docs_skills/Skill_histo/Histo.md</code> et <code>Skill_update-arbo/Update-arbo.md</code>) - chemins <code>SOUS_CONTEXT_IA</code>, controle CLAUDE.md dans l'etape 6B ; cartes du compte non enregistrees <strong>[v]</strong> (local)</li>
+<li>🟢 <code>GLOBAL_INDEX_REPO.md</code> - 8 liens <code>00_IA/SOUS_CONTEXT_IA</code> corriges <strong>[v]</strong> (local)</li>
+<li>🟢 <code>docs/00_IA/SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md</code> - 3 lignes d'arbre corrigees, version du jour restauree depuis <code>%TEMP%</code> apres la suppression par Hermes, section GitHub mise a jour (1247 objets, docs/ 950, commit <code>de75fed2</code>, rafraichie par /histo) ; Hermes avait remis a 16h40 la version 4c96bc0c (retour en arriere de la mise a jour de 16h11) ; MD5 <code>40fb7b8b</code>, identique en prod <strong>[v]</strong></li>
+<li>🟢 <code>TODO/TODO.md</code> - entree R54 (deux tree local et prod superposes, ecarts a remonter) <strong>[v]</strong></li>
+<li>🟢 /histo S1 (test demande par Eric) : <code>GLOBAL_INDEX_REPO.md</code> pousse aux 3 emplacements (a51d752a), index IA, scripts et automations regeneres ou verifies, menage des sauvegardes (15 a la corbeille Windows, 18 renommees ; plan <code>historique/menage_dry_run_2026-10-17.txt</code>), export Dashboard <code>Dashboard_2026_10_16.yaml</code> copie en local et en prod (10_14 supprime en prod, copie locale conservee), <code>IA_ARBO_DETAIL.md</code> mis a jour (40fb7b8b) <strong>[v]</strong></li>
+<li>🟢 Copies locales demandees par Eric : <code>IA_CONTEXT_BASE.bak_2026_10_17_16h32m18s.md</code> ; repertoire entier dans <code>historique/IA_CONTEXT_BASE_copie_2026_10_17_16h33m08s</code> (26 fichiers, MD5 identiques) ; version precedente Windows de <code>00_IA</code> (2026-10-16 19h26m24s, 37 fichiers) dans <code>TEMPO/00_IA_copie_2026_10_16_19h26m24s</code> <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 <code>H:\docs\00_IA\IA_CONTEXT_BASE\IA_CONTEXT_BASE.md</code> - toujours l'ancien nom <code>SOUS_CONTEST_IA</code> (MD5 <code>8915c67f</code>), push en attente du go d'Eric <strong>[a deployer]</strong></li>
+<li>🟠 23 <code>.bak</code> du fichier des regles dans <code>H:\docs\00_IA\SOUS_CONTEXT_IA\IA_NOM_DES_REPERTOIRES_ET_FICHIERS</code> (copies par Hermes, interdits en prod, plafond 10) - suppression en attente du go d'Eric <strong>[EN COURS]</strong></li>
+<li>🟠 20 <code>.bak</code> retrouves dans <code>TEMPO</code> a remettre dans <code>docs/00_IA/SOUS_CONTEXT_IA</code> apres la fin des reparations de Hermes (go d'Eric) <strong>[EN COURS]</strong></li>
+<li>🟠 Tableau de CLAUDE.md a 8 lignes pour 10 fiches, mention "9 fichiers" dans les skills, 2 cartes de skills du compte a enregistrer par Eric <strong>[a tester]</strong></li>
+<li>🟠 Arbres LOCAL et PROD de <code>IA_ARBO_DETAIL.md</code> toujours du releve 2026-10-15 <strong>[draft]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 <code>docs/00_IA/SOUS_CONTEXT_IA</code> (local et prod) : dossiers supprimes par un <code>rm -rf</code> de Hermes (aveu dans son journal), environ 22 sauvegardes <code>.bak</code> perdues avec lui -&gt; restauration par Hermes depuis GitHub (etat <code>1292a0d9</code>), <code>IA_ARBO_DETAIL.md</code> reconstruit par Claude depuis <code>%TEMP%</code>, 20 <code>.bak</code> retrouves dans la version precedente Windows du 2026-10-16 19h26 (non remis dans <code>docs</code>) <strong>[partiellement resolu]</strong></li>
+<li>🔴 <code>IA_ARBO_DETAIL.md</code> : comparaison PowerShell <code>-ne</code> insensible a la casse, "0 lignes" au lieu de 3 -&gt; fichier relu ligne a ligne, rectification au journal <strong>[resolu]</strong></li>
+<li>🔴 <code>IA_ARBO_DETAIL.md</code> : Hermes a ecrase a 16h40 la version 95d2e313 par 4c96bc0c (prise pour la version perdue) -&gt; section GitHub, ligne Dashboard et en-tete refaits par /histo (40fb7b8b), 95d2e313 gardee en .bak <strong>[resolu]</strong></li>
+<li>🔴 Push prod des fiches sans MD5 prealable : n'a pas vu que Hermes avait recree le dossier de la prod -&gt; constate, aucun ecrasement de contenu different mis en evidence <strong>[constat]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.md)</h4>
+<ul>
+<li>📌 R54 TREE-LOCAL-PROD-SUPERPOSES : les arbres local et prod doivent se confondre, sinon remonter les coquilles</li>
+<li>📌 Regle 6.15 a appliquer aux 11 dossiers (go separe) ; casse des fichiers de la prod ; dossiers prod bloques <code>02_docs_dashboard</code> et <code>dashboard_docs_MD</code> ; incoherence <code>01_docs_config_system</code> / <code>05_docs_MD_system</code></li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Repondre aux deux go en attente (push de <code>IA_CONTEXT_BASE.md</code> en prod, suppression des 23 <code>.bak</code> de la prod), puis comparer le rapport de Hermes a l'etat reel (MD5 local et prod, journal des modifs)</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

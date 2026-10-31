@@ -1,0 +1,97 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-20</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-20</h1><p class="mut">2 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a><a href="#s2">Session S2</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-20_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-20</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : fin d'après-midi et soirée, environ 1 h 40 (17 h 45 à 19 h 25)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>TODO/TODO.md</code> - F-1 fermé (relais cuisine remplacé, dit par Eric) ; W-1 devient R80, CLIM-LOOP-HARDENING R81, L3C1-HTML R82 (à vérifier), L5C1-TYPO R83 (décision : corriger), CHAUFFAGE-AUDIT R86, SURVEILLER-ECO-SPIES R87 (ouverts) ; RADIATEUR-CUISINE-CAPTEUR R84, RELAIS-CUISINE-MAJ R85 et P4-SECONDAIRE R88 fermés <strong>[v]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/config_system_SH_PY_YAML/templates/P4_groupe_presence/P4_groupe_presence.yaml</code> - titres secondaires indentés (4 espaces) et numérotés, slugs alignés, annotations_log <strong>[v]</strong> (poussé en prod, racine H: et miroir docs, MD5 <code>038d37f6</code>)</li>
+<li>🟢 <code>docs/01_docs_config_system/config_system_SH_PY_YAML/templates/P4_groupe_presence/P4_wifi_detection.yaml</code> - titre secondaire en majuscules et numéroté (1. WIFI) <strong>[v]</strong> (poussé en prod aux deux endroits, MD5 <code>c2ca0ff6</code>)</li>
+<li>🟢 Mosquitto (app <code>core_mosquitto</code>) - <code>password_pre_hashed</code> remis à <code>false</code>, app redémarrée, Z2M reconnecté <strong>[v]</strong></li>
+<li>🟢 pve (10.32.154.240) <code>publish_temp.sh</code> et <code>publish_temp.service</code> - mot de passe réécrit entre apostrophes, découverte MQTT une fois par 10 min, intervalle 10 s -&gt; 5 s (faits par Eric sur mes commandes, sauvegardes <code>.bak_2026_10_20</code> et <code>.bak2_2026_10_20</code> sur pve) <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 Capteurs Proxmox : fonctionnent avec le compte <code>mqtt_z2m</code> ; compte dédié pour pve et changement du mot de passe de <code>mqtt_z2m</code> (apparu en clair dans la session) pas faits - <strong>[EN COURS]</strong> (R79.1, R79.2)</li>
+<li>🟠 Push GitHub des 2 fichiers P4 : en attente du backup HA (normal) - <strong>[a tester]</strong></li>
+<li>🟠 R80 à R83, R86, R87 ouverts (voir backlog)</li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 Z2M de nouveau déconnecté : <code>password_pre_hashed</code> était revenu à <code>true</code> sur <code>core_mosquitto</code> (qui l'a remis reste inconnu) -&gt; remis à <code>false</code>, app redémarrée <strong>[resolu]</strong> ; entités <code>unknown</code> 589 -&gt; 154, <code>unavailable</code> 123 -&gt; 19 (mesure de 17 h 55)</li>
+<li>🔴 Capteurs Proxmox sans valeur : mot de passe erroné dans <code>publish_temp.sh</code> (faute de frappe à la saisie masquée) -&gt; réécrit, 6 capteurs <code>sensor.proxmox_*</code> remontent (température 58,0 °C vue sur la capture d'Eric) <strong>[resolu]</strong></li>
+<li>🔴 Carte météo <code>custom:meteo-card</code> figée sur le PC, animée sur le téléphone : réglage Windows "Effets d'animation" désactivé, la carte met ses animations en pause (règle <code>prefers-reduced-motion</code> de meteocss-card) -&gt; réactivé par Eric <strong>[resolu]</strong></li>
+<li>🔵 Hook de fin de session demandant de réécrire l'auteur du commit <code>319279d</code> (sauvegarde automatique de HA du 17/10) : refusé, rien modifié ni poussé</li>
+<li>🔵 Laissé volontairement en suspens (Eric : "on touche plus") : MyElectricalData (10.32.154.245) qui se connecte avec l'ancien compte <code>mqtt</code> (déduit), doublons <code>_2</code> du pont Z2M, entités <code>unknown</code> restantes</li>
+</ul>
+<h4>📋 Taches backlog (TODO.md)</h4>
+<ul>
+<li>📌 R80 L5C1 battery-state-card (troncature groupe collapse, issue GitHub #908, piste d'Eric : cartes qui se chevauchent) ; R81 CLIM-LOOP-HARDENING (toujours à faire, boucle live et YAML local ne filtrent pas les valeurs aberrantes) ; R82 L3C1-HTML (Page Gauche / Page Droite dans GLOBAL_INDEX_REPO, à vérifier) ; R83 L5C1-TYPO (renommer les boutons Hue "Entée", puis 4 fichiers) ; R86 CHAUFFAGE-AUDIT (le chauffage va bientôt servir) ; R87 SURVEILLER-ECO-SPIES (temps d'extinction PC/TV sous le seuil)</li>
+<li>📌 R79.1 à R79.8 toujours ouverts ; R79.8 (journal des modifs HA du 19/10 et push de <code>Page_energie_temps_reel.md</code>) pas traité</li>
+<li>📌 Non corrigés, à décider (P4) : <code>name</code> sans préfixe P4 (comme les 732 autres), noms de fichiers P4 hors du pattern <code>{POLE}_{TYPE}</code></li>
+<li>📌 Couleurs sunset/sunrise de meteocss-card écrasées par HACS le 17/08 : à ré-appliquer seulement si Eric le demande</li>
+<li>📌 Message de Hermes du 20/10 06 h 20 (skill Proxmox, <code>D:\Discussion_Claude_Hermes</code>) : vu dans le journal des modifs, non lu pendant cette session</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Créer un compte MQTT dédié pour pve et changer le mot de passe de <code>mqtt_z2m</code> (Mosquitto et Z2M) sans le coller dans le chat (R79.1, R79.2) ; vérifier plus tard que <code>password_pre_hashed</code> reste à <code>false</code></li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-10-20_s2.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-20</strong> (Session <strong>S2</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : soirée, environ 3 h (de 18 h 10 à 21 h 30, heure de Paris)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>.claude/skills/ha-verif-headers/SKILL.md</code> et <code>docs/05_Docs_skills/Skill_ha-verif-headers/Ha-verif-headers.md</code> - nouveau skill de contrôle des en-têtes YAML <strong>[v]</strong></li>
+<li>🟢 <code>docs/04_Docs_scripts/Docs_scripts_sh/Verif_headers_yaml/Verif_headers_yaml.py</code> + fiche <code>Docs_scripts_sh_md/Verif_headers_yaml/Verif_headers_yaml.md</code> - script de vérification des headers (premier relevé : 64 erreurs, 286 avis) <strong>[v]</strong></li>
+<li>🟢 <code>.claude/skills/ha-trigul/SKILL.md</code> et copie docs - section C2 ajoutée (reprise de ha-resync-docs) <strong>[v]</strong></li>
+<li>🟢 skills <code>ha-new-yaml</code>, <code>ha-push-yaml</code>, <code>ha-resync-tree</code> - lien vers ha-verif-headers / redirection vers ha-trigul <strong>[v]</strong></li>
+<li>🟢 <code>ha-resync-docs</code> (projet et docs) - supprimé, doublon du trigul, corbeille Windows <strong>[v]</strong></li>
+<li>🟢 <code>CLAUDE.md</code>, <code>IA_CONTEXT_BASE.md</code> (local, D:, H:), <code>GLOBAL_INDEX_REPO.md</code> (miroir et racine H:), <code>IA_CARTE_EMPLACEMENTS.md</code>, <code>IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md</code> - références aux skills mises à jour, poussés en prod <strong>[v]</strong></li>
+<li>🟢 <code>GLOBAL_INDEX_SCRIPTS_SH.md</code> et <code>GLOBAL_INDEX_IA.md</code> - régénérés en local (casses=0), non poussés <strong>[a deployer]</strong></li>
+<li>🟢 <code>TODO/TODO.md</code> - R89.1 à R89.6 ; R90 et R91 (P4-ABSENCE-FORCE, P3-ETATS-STATUS) ; R92 à R101 (10 points sans numéro, R32.3 fusionné dans R92) ; DOC-RESTE éclaté en R102.1 à R102.24 ; R103.1 à R103.8 (non traités de la session) ; R1.5 complété <strong>[v]</strong></li>
+<li>🟢 <code>TODO/</code> - ménage : un fichier par jour passé en <code>TODO.bak_AAAA_MM_JJ.html</code> (17 jours), 14 pages horodatées du 20/10, 86 fichiers à la corbeille ; pages au format 2 parties <strong>Ouverts</strong> puis <strong>Fermes</strong> sur 17 pages, valide par Eric <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 <code>TODO\</code> hors du ménage de /histo : intégration proposée, pas faite (R103.1) - <strong>[EN COURS]</strong></li>
+<li>🟠 14 pages horodatées du 20/10 au lieu de 10 : décision d'Eric attendue (R103.2) - <strong>[EN COURS]</strong></li>
+<li>🟠 Skills du compte Claude à enregistrer par Eric (R89.1) - <strong>[a deployer]</strong></li>
+<li>🟠 Raccourcir l'extinction des lumières de l'écran : consigne imprécise, ajoutée en R103.8, rien modifié - <strong>[EN COURS]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 Sauvegardes horodatées nommées en heure UTC au lieu de l'heure de Paris -&gt; renommées, heure de Paris (zoneinfo) ensuite <strong>[resolu]</strong></li>
+<li>🔴 TODO du 04/10 : mauvais fichier gardé (plus ancien) -&gt; corrigé, page refaite <strong>[resolu]</strong></li>
+<li>🔴 Sauvegardes du jour créées en <code>.md</code> malgré la consigne "tout en HTML" -&gt; 4 converties en <code>.html</code>, <code>.md</code> à la corbeille <strong>[resolu]</strong></li>
+<li>🔴 Affichage des pages TODO changé en 2 parties puis remis en onglets par erreur de lecture d'une consigne ambiguë -&gt; remis en 2 parties (Ouverts puis Fermes), validé par Eric <strong>[resolu]</strong></li>
+<li>🔵 Constat : les journaux des modifs du 20/10 comptent quelques lignes à l'heure UTC (ex. 18:18:01) au lieu de l'heure de Paris</li>
+</ul>
+<h4>📋 Taches backlog (TODO.md)</h4>
+<ul>
+<li>📌 R103.1 à R103.8 ouverts le 2026-10-20 (ménage TODO dans /histo, horodatées du jour, artifact et note de pied de page, générateur HTML à ranger, 13 jours sans sauvegarde, R102 à vérifier en direct, numéros R manquants, raccourcir l'extinction)</li>
+<li>📌 R89.1 à R89.6 (skills du compte, doublon ha-resync-tree, erreurs de headers, inventaire Hermes, index à pousser, baks à ranger)</li>
+<li>📌 R1.5 : <code>AUTOMATIONS_IDS_REF.md</code> (2 copies) remplacé par <code>GLOBAL_INDEX_AUTOMATIONS.md</code>, retrait sur ordre d'Eric</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Répondre aux décisions ouvertes (R103.2 : 14 ou 10 pages horodatées ; R103.8 : quoi raccourcir), puis intégrer <code>TODO\</code> au ménage de /histo (R103.1)</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

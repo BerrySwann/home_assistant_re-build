@@ -1,0 +1,51 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-23</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-23</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-23_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-23</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : N/A (journee, 19h44 a 22h50 d'apres le journal des modifs)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>docs/03_Docs_automations/Docs_automations_yaml/P0_Enrige/</code> (Histo_linky_quotidien, Histo_nodon_quotidien, Rattrapage_linky_j2_ecart, Rattrapage_linky_ecart) + 4 fiches <code>.md</code> + <code>IA_AUTOMATIONS_NOTIFS.md</code> - alias HA des 4 automations energie aligne sur la prod (lettres A a D), push des fiches en prod <strong>[v]</strong></li>
+<li>🟢 <code>H:\automations.yaml</code> - automation E (id <code>1792780906393</code>) creee via API HA : Histo Nodon complet 23:59:10 vers <code>notify.nodon_complet_histo</code>, cout via <code>sensor.tarif_heures_pleines_ttc</code> et <code>sensor.tarif_heures_creuses_ttc</code> ; fiche et YAML locaux <code>Histo_nodon_complet_quotidien</code> crees et poussees <strong>[v]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/config_system_SH_PY_YAML/templates/P0_energie_total_diag/P0_Linky/P0_MyElectricalData.yaml</code> - <code>linky_jour_0</code> cout via tarifs HPHC TTC, <code>linky_jour_1</code> a <code>7</code> repli Nodon si Linky = 0 ; pousse local, racine H: et miroir docs ; fiche <code>P0_MyElectricalData.md</code> creee <strong>[v]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/config_system_SH_PY_YAML/command_line/Energie/histo_nodon_complet.yaml</code> - capteur <code>sensor.histo_energie_nodon_complet</code> ; fiche <code>histo_nodon_complet.md</code> ; poussee <strong>[a tester le 2026-10-24]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/config_system_MD/integrations_file/integrations_file.md</code> - fiche des 7 integrations File (notify) ; script <code>Verif_integrations_file.py</code> (lecture seule) + fiche ; test 7 OK, 0 anomalie ; rapport range dans <code>historique/03_RAPPORTS/06_MD5/05_VERIF_INTEGRATIONS_FILE/</code> <strong>[v]</strong></li>
+<li>🟢 <code>docs/00_IA/SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md</code> - update-arbo 14 lignes (releve 2026-10-23, automation E), pousse <strong>[v]</strong></li>
+<li>🟢 Skills <code>histo</code> et <code>histo-final</code> : controle integrations File ajoute (6E) ; <code>histo</code> passe a la version docs du 21/10 puis chemins <code>historique\03_RAPPORTS\06_MD5\</code> (md5 <code>b41c2fa3</code>) ; copies <code>.claude</code> et <code>docs/05_Docs_skills</code> alignees ; carte compte a enregistrer par Eric <strong>[a deployer]</strong></li>
+<li>🟢 R104.2 : chemin <code>historique\MD5\</code> corrige vers <code>historique\03_RAPPORTS\06_MD5\</code> dans 4 scripts (<code>Verif_emplacements.py</code>, <code>trigul_run.py</code>, <code>hermes_audit_trigul_arbres.py</code>, <code>Hermes_audit_md5_trigul_unitaire.py</code>) et 4 fiches ; pousses en prod <code>H:\docs</code> (md5 verifies) <strong>[v]</strong></li>
+<li>🟢 Rapports <code>verif_emplacements</code> des 21 et 22/10 deplaces vers <code>06_MD5/03_VERIF_EMPLACEMENTS</code> (version 22h50 renommee <code>_s2</code>, version 20h12 gardee comme rapport du jour) ; anciens dossiers <code>historique\MD5</code> vides envoyes a la corbeille <strong>[v]</strong></li>
+<li>🟢 <code>TODO/TODO.md</code> - R105.1 a R105.7 ajoutes, etat de R104.1, R104.2, R104.3, R105.1, R104.19 mis a jour <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 Cartes <code>histo</code> (<code>b41c2fa3</code>) et <code>ha-trigul</code> (<code>ad1a8997</code>) a enregistrer par Eric puis verification md5 du compte <strong>[EN COURS]</strong></li>
+<li>🟠 Scripts du trigul corriges mais jamais relances depuis le changement de chemin (R105.4) <strong>[a tester]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 PowerShell : fonction <code>h</code> en collision avec l'alias <code>h</code> (Get-History), md5 vides et faux "deja identique" -&gt; relance avec <code>Get-Md5Short</code>, rien n'avait ete copie <strong>[resolu]</strong></li>
+<li>🔴 <code>py_compile</code> avec <code>cfile=os.devnull</code> : FileExistsError sous Windows -&gt; <code>compile()</code> sur les octets <strong>[resolu]</strong></li>
+<li>🔴 Rapport de test des integrations File ecrit dans l'ancien <code>historique\MD5</code> -&gt; chemin du script corrige, rapport recree dans <code>06_MD5\05_VERIF_INTEGRATIONS_FILE</code>, ancien a la corbeille <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.md)</h4>
+<ul>
+<li>📌 R105.3 histo carte, R105.4 trigul nouveaux chemins a tester, R105.5 fusion <code>_s2</code> au prochain menage, R105.6 verif Nodon du 2026-10-24, R105.7 jeton GitHub d'Hermes a revoquer par Eric</li>
+<li>📌 R104.2 : restent des anciens chemins <code>historique\MD5</code> dans d'autres skills, <code>CLAUDE.md</code>, <code>IA_CONTEXT_BASE.md</code>, <code>IA_CARTE_EMPLACEMENTS.md</code> (sur ordre d'Eric seulement) ; R104.3 resync <code>journal-modifs</code> ; R104.19 recompter le compteur et regenerer <code>TODO.html</code></li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Eric enregistre les cartes <code>histo</code> et <code>ha-trigul</code>, puis verifier les md5 du compte ; le 2026-10-24 controler la ligne <code>nodon_complet_histo.txt</code> et l'automation D de 01:00</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

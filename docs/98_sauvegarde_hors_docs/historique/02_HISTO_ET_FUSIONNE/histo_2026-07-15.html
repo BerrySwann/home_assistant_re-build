@@ -1,0 +1,56 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-07-15</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-07-15</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s7">Session S7</a></nav>
+<section id="s7"><h2>Session S7</h2><p class="src">Source : histo_2026-07-15_S7.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-07-15</h3>
+<pre>
+SESSION : ~3h — S7
+BRANCHE ACTIVE : DOCS/01_docs_config_system/config_system_YAML/
+</pre>
+<h4>FICHIERS VALIDÉS</h4>
+<pre>templates/P2_prise/P2_eCO_prises/P2_eco_prises_config.yaml
+  → 7 prises (était 5) : ajout light.hue_smart_eco_pc_bureau + light.hue_smart_eco_tv_chambre
+  → absent_only: true sur TV Salon / PC Bureau / TV Chambre
+  → Pushé en prod H:\ + templates rechargés ✓
+
+docs_automations_YAML/P2_prises/eco_prises_dinamique_by_presence_groupe.yaml
+  → from_json supprimé (HA stocke déjà une liste native)
+  → delay 5s ajouté avant notification (fix comptage X/7)
+  → Filtre boot HA : ignore transitions unavailable → groupe_X
+  → Logique absent_only : coupe uniquement si groupe_1, ne touche pas si groupe_2/3/4
+  → Déployé via UI HA ✓
+
+HTML/ha_erodi_ha_com_2026-07-15.html
+  → Save locale de ha.erodi-ha.com (branche gh-pages)
+  → Fix : TREE_CORRIGE/ → DOCS/01_docs_config_system/config_system_YAML/
+  → Pushé sur gh-pages (commit f082329) ✓
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>eco_prises_dynamique : ValueError from_json → suppression du filtre (HA stocke liste Python native)
+eco_prises_dynamique : notification X/7 erronée → delay 5s avant lecture des états
+eco_prises_dynamique : coupure prise PC au changement de groupe → logique absent_only
+</pre>
+<h4>TODO MIS À JOUR</h4>
+<pre>[X] U-1  Git backup HA → GitHub (était bloqué depuis 06-28)
+[X] ECO-1 sensor.eco_prises_config déployé en prod (confirmé)
+[X] ECO-2 Bug comptage + coupure intempestive → résolu
+[X] F-2  ha.erodi-ha.com sauvegardé + corrigé + pushé
+[ ] F-2b Vérifier rendu mobile ha.erodi-ha.com (soucis signalés)
+</pre>
+<h4>EN COURS</h4>
+<pre>F-3 Trier ReBuild/Github/ — non traité
+F-4 Trier ReBuild/Analyse énergétique/ — non traité
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>F-2b : ouvrir ha.erodi-ha.com sur mobile et identifier les soucis d'affichage
+F-3 : trier Github/ → INDEX_AUTOMATIONS.md + INDEX_NAVIGATION.md + README.md
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

@@ -1,0 +1,473 @@
+20:15:30.846 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+20:15:30.850 | INFO      | LANCEUR        | H: accessible : True
+20:15:30.852 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+20:15:34.915 | INFO      | A_arbres       | FIN code de retour 0 en 4.1 s, 3 lignes de sortie
+20:15:34.917 | SORTIE    | A_arbres       | RESULTAT : 477 chemins ; SYNC 463 ; a traiter 14 ; ecarts attendus 0 ; erreurs du script 0
+20:15:34.919 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+20:15:34.920 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+20:15:34.921 | INFO      | A_arbres       | rapport ecrit 5064 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+20:15:34.929 | INFO      | A_arbres       | rapport ecrit 124536 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+20:15:34.931 | OK        | A_arbres       | verdict de l etape
+20:15:34.932 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+20:15:35.696 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 13 lignes de sortie
+20:15:35.697 | SORTIE    | B1_profond     | 
+20:15:35.698 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+20:15:35.700 | SORTIE    | B1_profond     | 
+20:15:35.701 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+20:15:35.702 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt 2DDAA6E7
+20:15:35.703 | INFO      | B1_profond     | rapport ecrit 16093 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+20:15:35.705 | OK        | B1_profond     | verdict de l etape
+20:15:35.706 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+20:15:37.001 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+20:15:37.003 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+20:15:37.004 | SORTIE    | C_emplacements | GitHub : commit 857063fc du 2026-10-18T18:10:00Z (HAOS auto-backup: 2026-10-18 20:10:00 CEST (HA 2026.10.1))
+20:15:37.005 | SORTIE    | C_emplacements | ANOMALIES : x 2
+20:15:37.007 | SORTIE    | C_emplacements | RESULTAT : 98 fichiers suivis - ABSENT 1 - SYNC 97 - presents ailleurs qu en local 1
+20:15:37.008 | INFO      | C_emplacements | rapport ecrit 15577 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+20:15:37.015 | OK        | C_emplacements | verdict de l etape
+20:15:37.016 | OK        | SYNTHESE       | A_arbres
+20:15:37.017 | OK        | SYNTHESE       | B1_profond
+20:15:37.019 | OK        | SYNTHESE       | C_emplacements
+20:15:37.020 | INFO      | LANCEUR        | FIN DU LANCEUR - code 0
+20:16:07.333 | NOTE      | B2_categories_ha | Claude : ha_config_get_category automation=15 categories, script=0, identiques a categories_ha_2026-10-18.txt (14:54) ; rapport non reecrit
+20:16:07.403 | NOTE      | LANCEUR        | Eric a demande le journal de trace le 2026-10-18 20h13 ; 3 etapes OK, aucun plantage silencieux detecte sur ce lancement
+20:25:41.061 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+20:25:41.064 | INFO      | LANCEUR        | H: accessible : True
+20:25:41.065 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+20:25:45.301 | INFO      | A_arbres       | FIN code de retour 0 en 4.2 s, 3 lignes de sortie
+20:25:45.302 | SORTIE    | A_arbres       | RESULTAT : 476 chemins ; SYNC 463 ; a traiter 13 ; ecarts attendus 0 ; erreurs du script 0
+20:25:45.304 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+20:25:45.305 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+20:25:45.306 | INFO      | A_arbres       | rapport ecrit 5165 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+20:25:45.314 | INFO      | A_arbres       | rapport ecrit 124032 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+20:25:45.315 | OK        | A_arbres       | verdict de l etape
+20:25:45.316 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+20:25:46.085 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 13 lignes de sortie
+20:25:46.086 | SORTIE    | B1_profond     | 
+20:25:46.088 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+20:25:46.089 | SORTIE    | B1_profond     | 
+20:25:46.090 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+20:25:46.092 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt 63B23E35
+20:25:46.093 | INFO      | B1_profond     | rapport ecrit 16093 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+20:25:46.094 | OK        | B1_profond     | verdict de l etape
+20:25:46.095 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+20:25:47.363 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+20:25:47.365 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+20:25:47.366 | SORTIE    | C_emplacements | GitHub : commit 857063fc du 2026-10-18T18:10:00Z (HAOS auto-backup: 2026-10-18 20:10:00 CEST (HA 2026.10.1))
+20:25:47.368 | SORTIE    | C_emplacements | ANOMALIES : x 2
+20:25:47.369 | SORTIE    | C_emplacements | RESULTAT : 98 fichiers suivis - ABSENT 1 - SYNC 97 - presents ailleurs qu en local 1
+20:25:47.370 | INFO      | C_emplacements | rapport ecrit 15577 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+20:25:47.377 | OK        | C_emplacements | verdict de l etape
+20:25:47.379 | OK        | SYNTHESE       | A_arbres
+20:25:47.380 | OK        | SYNTHESE       | B1_profond
+20:25:47.381 | OK        | SYNTHESE       | C_emplacements
+20:25:47.382 | INFO      | LANCEUR        | FIN DU LANCEUR - code 0
+20:26:27.345 | NOTE      | LANCEUR        | 20h26 : 8 fichiers + trigul_run.py pousses (MD5 ok), sql.md deplace en local, configuration.yaml ancien nom : reapparait en 6 s (R57), notifs : decision d Eric (R70)
+20:29:19.095 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+20:29:19.098 | INFO      | LANCEUR        | H: accessible : True
+20:29:19.099 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+20:29:23.155 | INFO      | A_arbres       | FIN code de retour 0 en 4.1 s, 3 lignes de sortie
+20:29:23.156 | SORTIE    | A_arbres       | RESULTAT : 476 chemins ; SYNC 472 ; a traiter 4 ; ecarts attendus 0 ; erreurs du script 0
+20:29:23.157 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+20:29:23.159 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+20:29:23.160 | INFO      | A_arbres       | rapport ecrit 3838 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+20:29:23.167 | INFO      | A_arbres       | rapport ecrit 121235 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+20:29:23.168 | OK        | A_arbres       | verdict de l etape
+20:29:23.170 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+20:29:23.933 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 13 lignes de sortie
+20:29:23.935 | SORTIE    | B1_profond     | 
+20:29:23.936 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+20:29:23.938 | SORTIE    | B1_profond     | 
+20:29:23.941 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+20:29:23.943 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt 91315574
+20:29:23.944 | INFO      | B1_profond     | rapport ecrit 16093 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+20:29:23.946 | OK        | B1_profond     | verdict de l etape
+20:29:23.948 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+20:29:25.261 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+20:29:25.263 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+20:29:25.264 | SORTIE    | C_emplacements | GitHub : commit 7dd30fda du 2026-10-18T18:28:55Z (HAOS MANUEL-backup: 2026-10-18 20:28:55 CEST (HA 2026.10.1))
+20:29:25.266 | SORTIE    | C_emplacements | ANOMALIES : x 2
+20:29:25.267 | SORTIE    | C_emplacements | RESULTAT : 98 fichiers suivis - ABSENT 1 - SYNC 97 - presents ailleurs qu en local 1
+20:29:25.268 | INFO      | C_emplacements | rapport ecrit 15579 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+20:29:25.275 | OK        | C_emplacements | verdict de l etape
+20:29:25.276 | OK        | SYNTHESE       | A_arbres
+20:29:25.277 | OK        | SYNTHESE       | B1_profond
+20:29:25.279 | OK        | SYNTHESE       | C_emplacements
+20:29:25.280 | INFO      | LANCEUR        | FIN DU LANCEUR - code 0
+20:36:39.712 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+20:36:39.714 | INFO      | LANCEUR        | H: accessible : True
+20:36:39.715 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+20:36:43.858 | INFO      | A_arbres       | FIN code de retour 0 en 4.1 s, 3 lignes de sortie
+20:36:43.860 | SORTIE    | A_arbres       | RESULTAT : 474 chemins ; SYNC 473 ; a traiter 1 ; ecarts attendus 0 ; erreurs du script 0
+20:36:43.861 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+20:36:43.862 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+20:36:43.863 | INFO      | A_arbres       | rapport ecrit 3245 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+20:36:43.871 | INFO      | A_arbres       | rapport ecrit 119707 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+20:36:43.872 | OK        | A_arbres       | verdict de l etape
+20:36:43.873 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+20:36:44.637 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 13 lignes de sortie
+20:36:44.638 | SORTIE    | B1_profond     | 
+20:36:44.640 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+20:36:44.641 | SORTIE    | B1_profond     | 
+20:36:44.642 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+20:36:44.643 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt C73764E9
+20:36:44.645 | INFO      | B1_profond     | rapport ecrit 16093 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+20:36:44.646 | OK        | B1_profond     | verdict de l etape
+20:36:44.647 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+20:36:45.926 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+20:36:45.927 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+20:36:45.929 | SORTIE    | C_emplacements | GitHub : commit b40129ac du 2026-10-18T18:34:00Z (HAOS MANUEL-backup: 2026-10-18 20:34:00 CEST (HA 2026.10.1))
+20:36:45.930 | SORTIE    | C_emplacements | ANOMALIES : x 2
+20:36:45.931 | SORTIE    | C_emplacements | RESULTAT : 98 fichiers suivis - ABSENT 1 - SYNC 97 - presents ailleurs qu en local 1
+20:36:45.933 | INFO      | C_emplacements | rapport ecrit 15579 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+20:36:45.940 | OK        | C_emplacements | verdict de l etape
+20:36:45.942 | OK        | SYNTHESE       | A_arbres
+20:36:45.943 | OK        | SYNTHESE       | B1_profond
+20:36:45.944 | OK        | SYNTHESE       | C_emplacements
+20:36:45.945 | INFO      | LANCEUR        | FIN DU LANCEUR - code 0
+20:45:51.771 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+20:45:51.774 | INFO      | LANCEUR        | H: accessible : True
+20:45:51.775 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+20:45:56.000 | INFO      | A_arbres       | FIN code de retour 0 en 4.2 s, 3 lignes de sortie
+20:45:56.002 | SORTIE    | A_arbres       | RESULTAT : 474 chemins ; SYNC 471 ; a traiter 3 ; ecarts attendus 0 ; erreurs du script 0
+20:45:56.003 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+20:45:56.004 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+20:45:56.005 | INFO      | A_arbres       | rapport ecrit 3584 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+20:45:56.012 | INFO      | A_arbres       | rapport ecrit 120358 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+20:45:56.014 | OK        | A_arbres       | verdict de l etape
+20:45:56.015 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+20:45:56.781 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 13 lignes de sortie
+20:45:56.782 | SORTIE    | B1_profond     | 
+20:45:56.784 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+20:45:56.785 | SORTIE    | B1_profond     | 
+20:45:56.786 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+20:45:56.788 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt 632A44C1
+20:45:56.789 | INFO      | B1_profond     | rapport ecrit 16093 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+20:45:56.791 | OK        | B1_profond     | verdict de l etape
+20:45:56.792 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+20:45:58.119 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+20:45:58.121 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+20:45:58.122 | SORTIE    | C_emplacements | GitHub : commit b40129ac du 2026-10-18T18:34:00Z (HAOS MANUEL-backup: 2026-10-18 20:34:00 CEST (HA 2026.10.1))
+20:45:58.124 | SORTIE    | C_emplacements | ANOMALIES : x 2
+20:45:58.125 | SORTIE    | C_emplacements | RESULTAT : 98 fichiers suivis - ABSENT 1 - SYNC 97 - presents ailleurs qu en local 1
+20:45:58.126 | INFO      | C_emplacements | rapport ecrit 15579 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+20:45:58.133 | OK        | C_emplacements | verdict de l etape
+20:45:58.135 | OK        | SYNTHESE       | A_arbres
+20:45:58.136 | OK        | SYNTHESE       | B1_profond
+20:45:58.137 | OK        | SYNTHESE       | C_emplacements
+20:45:58.139 | INFO      | LANCEUR        | FIN DU LANCEUR - code 0
+20:46:03.787 | NOTE      | B2_categories_ha | Claude 20h46 : ha_config_get_category automation=15, script=0, memes 15 id et noms que categories_ha_2026-10-18.txt (14:54) ; rapport non reecrit
+20:52:36.623 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+20:52:36.626 | INFO      | LANCEUR        | H: accessible : True
+20:52:36.628 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+20:52:40.732 | INFO      | A_arbres       | FIN code de retour 0 en 4.1 s, 3 lignes de sortie
+20:52:40.733 | SORTIE    | A_arbres       | RESULTAT : 474 chemins ; SYNC 469 ; a traiter 5 ; ecarts attendus 0 ; erreurs du script 0
+20:52:40.735 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+20:52:40.736 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+20:52:40.737 | INFO      | A_arbres       | rapport ecrit 4119 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+20:52:40.745 | INFO      | A_arbres       | rapport ecrit 121126 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+20:52:40.746 | OK        | A_arbres       | verdict de l etape
+20:52:40.747 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+20:52:41.515 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 13 lignes de sortie
+20:52:41.517 | SORTIE    | B1_profond     | 
+20:52:41.518 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+20:52:41.519 | SORTIE    | B1_profond     | 
+20:52:41.521 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+20:52:41.522 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt 75366C49
+20:52:41.524 | INFO      | B1_profond     | rapport ecrit 16093 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+20:52:41.525 | OK        | B1_profond     | verdict de l etape
+20:52:41.526 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+20:52:42.823 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+20:52:42.825 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+20:52:42.826 | SORTIE    | C_emplacements | GitHub : commit b40129ac du 2026-10-18T18:34:00Z (HAOS MANUEL-backup: 2026-10-18 20:34:00 CEST (HA 2026.10.1))
+20:52:42.828 | SORTIE    | C_emplacements | ANOMALIES : x 1
+20:52:42.829 | SORTIE    | C_emplacements | RESULTAT : 98 fichiers suivis - ABSENT 1 - SYNC 97 - presents ailleurs qu en local 0
+20:52:42.830 | INFO      | C_emplacements | rapport ecrit 15722 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+20:52:42.837 | OK        | C_emplacements | verdict de l etape
+20:52:42.839 | OK        | SYNTHESE       | A_arbres
+20:52:42.840 | OK        | SYNTHESE       | B1_profond
+20:52:42.841 | OK        | SYNTHESE       | C_emplacements
+20:52:42.842 | INFO      | LANCEUR        | FIN DU LANCEUR - code 0
+21:09:06.594 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+21:09:06.597 | INFO      | LANCEUR        | H: accessible : True
+21:09:06.598 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+21:09:10.664 | INFO      | A_arbres       | FIN code de retour 0 en 4.1 s, 3 lignes de sortie
+21:09:10.665 | SORTIE    | A_arbres       | RESULTAT : 474 chemins ; SYNC 467 ; a traiter 7 ; ecarts attendus 0 ; erreurs du script 0
+21:09:10.667 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+21:09:10.668 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+21:09:10.669 | INFO      | A_arbres       | rapport ecrit 4411 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+21:09:10.677 | INFO      | A_arbres       | rapport ecrit 121812 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+21:09:10.678 | OK        | A_arbres       | verdict de l etape
+21:09:10.680 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+21:09:11.438 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 23 lignes de sortie
+21:09:11.439 | SORTIE    | B1_profond     | 
+21:09:11.441 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+21:09:11.442 | SORTIE    | B1_profond     | 
+21:09:11.443 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+21:09:11.445 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt FFD8C86C
+21:09:11.446 | INFO      | B1_profond     | rapport ecrit 16750 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+21:09:11.447 | ECHEC     | B1_profond     | marqueur de fin absent du rapport : ETAPE 8 -
+21:09:11.448 | ECHEC     | B1_profond     | verdict de l etape
+21:09:11.450 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+21:09:12.737 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+21:09:12.739 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+21:09:12.740 | SORTIE    | C_emplacements | GitHub : commit b40129ac du 2026-10-18T18:34:00Z (HAOS MANUEL-backup: 2026-10-18 20:34:00 CEST (HA 2026.10.1))
+21:09:12.741 | SORTIE    | C_emplacements | ANOMALIES : x 1
+21:09:12.743 | SORTIE    | C_emplacements | RESULTAT : 98 fichiers suivis - ABSENT 1 - SYNC 97 - presents ailleurs qu en local 0
+21:09:12.744 | INFO      | C_emplacements | rapport ecrit 15722 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+21:09:12.753 | OK        | C_emplacements | verdict de l etape
+21:09:12.754 | OK        | SYNTHESE       | A_arbres
+21:09:12.755 | ECHEC     | SYNTHESE       | B1_profond
+21:09:12.757 | OK        | SYNTHESE       | C_emplacements
+21:09:12.758 | INFO      | LANCEUR        | FIN DU LANCEUR - code 1
+21:09:19.512 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+21:09:19.515 | INFO      | LANCEUR        | H: accessible : True
+21:09:19.516 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+21:09:21.207 | INFO      | A_arbres       | FIN code de retour 0 en 1.7 s, 3 lignes de sortie
+21:09:21.209 | SORTIE    | A_arbres       | RESULTAT : 474 chemins ; SYNC 467 ; a traiter 7 ; ecarts attendus 0 ; erreurs du script 0
+21:09:21.210 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+21:09:21.211 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+21:09:21.213 | INFO      | A_arbres       | rapport ecrit 4411 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+21:09:21.220 | INFO      | A_arbres       | rapport ecrit 121812 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+21:09:21.222 | OK        | A_arbres       | verdict de l etape
+21:09:21.223 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+21:09:21.984 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 23 lignes de sortie
+21:09:21.986 | SORTIE    | B1_profond     | 
+21:09:21.991 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+21:09:21.992 | SORTIE    | B1_profond     | 
+21:09:21.993 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+21:09:21.994 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt 3D39A610
+21:09:21.996 | INFO      | B1_profond     | rapport ecrit 16750 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+21:09:21.997 | OK        | B1_profond     | verdict de l etape
+21:09:21.999 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+21:09:23.264 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+21:09:23.266 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+21:09:23.267 | SORTIE    | C_emplacements | GitHub : commit b40129ac du 2026-10-18T18:34:00Z (HAOS MANUEL-backup: 2026-10-18 20:34:00 CEST (HA 2026.10.1))
+21:09:23.268 | SORTIE    | C_emplacements | ANOMALIES : x 1
+21:09:23.270 | SORTIE    | C_emplacements | RESULTAT : 98 fichiers suivis - ABSENT 1 - SYNC 97 - presents ailleurs qu en local 0
+21:09:23.271 | INFO      | C_emplacements | rapport ecrit 15722 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+21:09:23.278 | OK        | C_emplacements | verdict de l etape
+21:09:23.279 | OK        | SYNTHESE       | A_arbres
+21:09:23.281 | OK        | SYNTHESE       | B1_profond
+21:09:23.282 | OK        | SYNTHESE       | C_emplacements
+21:09:23.283 | INFO      | LANCEUR        | FIN DU LANCEUR - code 0
+21:15:36.825 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+21:15:36.828 | INFO      | LANCEUR        | H: accessible : True
+21:15:36.829 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+21:15:41.311 | INFO      | A_arbres       | FIN code de retour 0 en 4.5 s, 3 lignes de sortie
+21:15:41.312 | SORTIE    | A_arbres       | RESULTAT : 474 chemins ; SYNC 469 ; a traiter 5 ; ecarts attendus 0 ; erreurs du script 0
+21:15:41.313 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+21:15:41.315 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+21:15:41.316 | INFO      | A_arbres       | rapport ecrit 4175 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+21:15:41.323 | INFO      | A_arbres       | rapport ecrit 121134 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+21:15:41.325 | OK        | A_arbres       | verdict de l etape
+21:15:41.326 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+21:15:42.090 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 24 lignes de sortie
+21:15:42.091 | SORTIE    | B1_profond     | 
+21:15:42.092 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+21:15:42.094 | SORTIE    | B1_profond     | 
+21:15:42.095 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+21:15:42.096 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt B34AB5BB
+21:15:42.097 | INFO      | B1_profond     | rapport ecrit 16805 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+21:15:42.099 | OK        | B1_profond     | verdict de l etape
+21:15:42.100 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+21:15:43.420 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+21:15:43.421 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+21:15:43.423 | SORTIE    | C_emplacements | GitHub : commit 0658846e du 2026-10-18T19:10:00Z (HAOS auto-backup: 2026-10-18 21:10:00 CEST (HA 2026.10.1))
+21:15:43.424 | SORTIE    | C_emplacements | ANOMALIES : x 1
+21:15:43.425 | SORTIE    | C_emplacements | RESULTAT : 98 fichiers suivis - ABSENT 1 - SYNC 97 - presents ailleurs qu en local 0
+21:15:43.426 | INFO      | C_emplacements | rapport ecrit 15720 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+21:15:43.434 | OK        | C_emplacements | verdict de l etape
+21:15:43.435 | OK        | SYNTHESE       | A_arbres
+21:15:43.436 | OK        | SYNTHESE       | B1_profond
+21:15:43.437 | OK        | SYNTHESE       | C_emplacements
+21:15:43.439 | INFO      | LANCEUR        | FIN DU LANCEUR - code 0
+21:25:41.067 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+21:25:41.070 | INFO      | LANCEUR        | H: accessible : True
+21:25:41.071 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+21:25:45.125 | INFO      | A_arbres       | FIN code de retour 0 en 4.1 s, 3 lignes de sortie
+21:25:45.126 | SORTIE    | A_arbres       | RESULTAT : 474 chemins ; SYNC 473 ; a traiter 1 ; ecarts attendus 0 ; erreurs du script 0
+21:25:45.127 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+21:25:45.129 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+21:25:45.130 | INFO      | A_arbres       | rapport ecrit 3384 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+21:25:45.137 | INFO      | A_arbres       | rapport ecrit 119707 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+21:25:45.138 | OK        | A_arbres       | verdict de l etape
+21:25:45.139 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+21:25:45.907 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 24 lignes de sortie
+21:25:45.908 | SORTIE    | B1_profond     | 
+21:25:45.909 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+21:25:45.911 | SORTIE    | B1_profond     | 
+21:25:45.912 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+21:25:45.913 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt 691C96CC
+21:25:45.915 | INFO      | B1_profond     | rapport ecrit 16805 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+21:25:45.916 | OK        | B1_profond     | verdict de l etape
+21:25:45.917 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+21:25:47.189 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+21:25:47.190 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+21:25:47.192 | SORTIE    | C_emplacements | GitHub : commit ee1eda47 du 2026-10-18T19:25:11Z (HAOS MANUEL-backup: 2026-10-18 21:25:11 CEST (HA 2026.10.1))
+21:25:47.193 | SORTIE    | C_emplacements | ANOMALIES : x 1
+21:25:47.194 | SORTIE    | C_emplacements | RESULTAT : 98 fichiers suivis - ABSENT 1 - SYNC 97 - presents ailleurs qu en local 0
+21:25:47.195 | INFO      | C_emplacements | rapport ecrit 15722 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+21:25:47.202 | OK        | C_emplacements | verdict de l etape
+21:25:47.204 | OK        | SYNTHESE       | A_arbres
+21:25:47.205 | OK        | SYNTHESE       | B1_profond
+21:25:47.206 | OK        | SYNTHESE       | C_emplacements
+21:25:47.207 | INFO      | LANCEUR        | FIN DU LANCEUR - code 0
+21:28:41.001 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+21:28:41.004 | INFO      | LANCEUR        | H: accessible : True
+21:28:41.006 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+21:28:45.061 | INFO      | A_arbres       | FIN code de retour 0 en 4.1 s, 3 lignes de sortie
+21:28:45.063 | SORTIE    | A_arbres       | RESULTAT : 474 chemins ; SYNC 473 ; a traiter 1 ; ecarts attendus 0 ; erreurs du script 0
+21:28:45.064 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+21:28:45.065 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+21:28:45.067 | INFO      | A_arbres       | rapport ecrit 3384 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+21:28:45.074 | INFO      | A_arbres       | rapport ecrit 119707 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+21:28:45.075 | OK        | A_arbres       | verdict de l etape
+21:28:45.076 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+21:28:45.844 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 24 lignes de sortie
+21:28:45.846 | SORTIE    | B1_profond     | 
+21:28:45.847 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+21:28:45.849 | SORTIE    | B1_profond     | 
+21:28:45.850 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+21:28:45.851 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt 625AB6C0
+21:28:45.853 | INFO      | B1_profond     | rapport ecrit 16805 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+21:28:45.854 | OK        | B1_profond     | verdict de l etape
+21:28:45.855 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+21:28:47.131 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+21:28:47.132 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+21:28:47.134 | SORTIE    | C_emplacements | GitHub : commit ee1eda47 du 2026-10-18T19:25:11Z (HAOS MANUEL-backup: 2026-10-18 21:25:11 CEST (HA 2026.10.1))
+21:28:47.135 | SORTIE    | C_emplacements | ANOMALIES : aucune
+21:28:47.140 | SORTIE    | C_emplacements | RESULTAT : 97 fichiers suivis - SYNC 97 - presents ailleurs qu en local 0
+21:28:47.141 | INFO      | C_emplacements | rapport ecrit 15551 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+21:28:47.148 | OK        | C_emplacements | verdict de l etape
+21:28:47.149 | OK        | SYNTHESE       | A_arbres
+21:28:47.150 | OK        | SYNTHESE       | B1_profond
+21:28:47.152 | OK        | SYNTHESE       | C_emplacements
+21:28:47.153 | INFO      | LANCEUR        | FIN DU LANCEUR - code 0
+21:28:55.057 | NOTE      | B2_categories_ha | 21:29 categories HA relues : 15 automations, 0 scripts, identiques au releve de 14:54 (rapport du jour non reecrit)
+21:29:08.214 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+21:29:08.217 | INFO      | LANCEUR        | H: accessible : True
+21:29:08.218 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+21:29:11.792 | INFO      | A_arbres       | FIN code de retour 0 en 3.6 s, 3 lignes de sortie
+21:29:11.794 | SORTIE    | A_arbres       | RESULTAT : 474 chemins ; SYNC 473 ; a traiter 1 ; ecarts attendus 0 ; erreurs du script 0
+21:29:11.795 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+21:29:11.796 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+21:29:11.798 | INFO      | A_arbres       | rapport ecrit 3384 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+21:29:11.805 | INFO      | A_arbres       | rapport ecrit 119707 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+21:29:11.806 | OK        | A_arbres       | verdict de l etape
+21:29:11.807 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+21:29:12.570 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 24 lignes de sortie
+21:29:12.571 | SORTIE    | B1_profond     | 
+21:29:12.573 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+21:29:12.574 | SORTIE    | B1_profond     | 
+21:29:12.575 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+21:29:12.576 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt 47208B62
+21:29:12.578 | INFO      | B1_profond     | rapport ecrit 16805 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+21:29:12.579 | OK        | B1_profond     | verdict de l etape
+21:29:12.580 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+21:29:13.890 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+21:29:13.891 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+21:29:13.892 | SORTIE    | C_emplacements | GitHub : commit ee1eda47 du 2026-10-18T19:25:11Z (HAOS MANUEL-backup: 2026-10-18 21:25:11 CEST (HA 2026.10.1))
+21:29:13.894 | SORTIE    | C_emplacements | ANOMALIES : aucune
+21:29:13.895 | SORTIE    | C_emplacements | RESULTAT : 97 fichiers suivis - SYNC 97 - presents ailleurs qu en local 0
+21:29:13.896 | INFO      | C_emplacements | rapport ecrit 15551 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+21:29:13.903 | OK        | C_emplacements | verdict de l etape
+21:29:13.905 | OK        | SYNTHESE       | A_arbres
+21:29:13.906 | OK        | SYNTHESE       | B1_profond
+21:29:13.907 | OK        | SYNTHESE       | C_emplacements
+21:29:13.909 | INFO      | LANCEUR        | FIN DU LANCEUR - code 0
+21:29:13.993 | NOTE      | B2_categories_ha | categories HA inchangees depuis 21:29 (15 automations, 0 scripts)
+22:08:26.218 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+22:08:26.221 | INFO      | LANCEUR        | H: accessible : True
+22:08:26.222 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+22:08:30.433 | INFO      | A_arbres       | FIN code de retour 0 en 4.2 s, 3 lignes de sortie
+22:08:30.434 | SORTIE    | A_arbres       | RESULTAT : 478 chemins ; SYNC 468 ; a traiter 10 ; ecarts attendus 0 ; erreurs du script 0
+22:08:30.435 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+22:08:30.437 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+22:08:30.438 | INFO      | A_arbres       | rapport ecrit 4949 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+22:08:30.445 | INFO      | A_arbres       | rapport ecrit 123749 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+22:08:30.447 | OK        | A_arbres       | verdict de l etape
+22:08:30.448 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+22:08:31.227 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 24 lignes de sortie
+22:08:31.228 | SORTIE    | B1_profond     | 
+22:08:31.231 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+22:08:31.233 | SORTIE    | B1_profond     | 
+22:08:31.235 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+22:08:31.237 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt A5CC5AA4
+22:08:31.239 | INFO      | B1_profond     | rapport ecrit 16805 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+22:08:31.241 | OK        | B1_profond     | verdict de l etape
+22:08:31.243 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+22:08:32.560 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+22:08:32.561 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+22:08:32.563 | SORTIE    | C_emplacements | GitHub : commit ee1eda47 du 2026-10-18T19:25:11Z (HAOS MANUEL-backup: 2026-10-18 21:25:11 CEST (HA 2026.10.1))
+22:08:32.564 | SORTIE    | C_emplacements | ANOMALIES : x 1
+22:08:32.565 | SORTIE    | C_emplacements | RESULTAT : 97 fichiers suivis - GITHUB 1 - SYNC 96 - presents ailleurs qu en local 0
+22:08:32.566 | INFO      | C_emplacements | rapport ecrit 15559 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+22:08:32.574 | OK        | C_emplacements | verdict de l etape
+22:08:32.575 | OK        | SYNTHESE       | A_arbres
+22:08:32.576 | OK        | SYNTHESE       | B1_profond
+22:08:32.578 | OK        | SYNTHESE       | C_emplacements
+22:08:32.579 | INFO      | LANCEUR        | FIN DU LANCEUR - code 0
+22:11:03.680 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+22:11:03.683 | INFO      | LANCEUR        | H: accessible : True
+22:11:03.684 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+22:11:07.696 | INFO      | A_arbres       | FIN code de retour 0 en 4.0 s, 3 lignes de sortie
+22:11:07.697 | SORTIE    | A_arbres       | RESULTAT : 478 chemins ; SYNC 477 ; a traiter 1 ; ecarts attendus 0 ; erreurs du script 0
+22:11:07.699 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+22:11:07.700 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+22:11:07.701 | INFO      | A_arbres       | rapport ecrit 3384 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+22:11:07.709 | INFO      | A_arbres       | rapport ecrit 120607 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+22:11:07.710 | OK        | A_arbres       | verdict de l etape
+22:11:07.711 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+22:11:08.476 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 24 lignes de sortie
+22:11:08.478 | SORTIE    | B1_profond     | 
+22:11:08.479 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+22:11:08.480 | SORTIE    | B1_profond     | 
+22:11:08.481 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+22:11:08.483 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt 7554E84A
+22:11:08.484 | INFO      | B1_profond     | rapport ecrit 16805 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+22:11:08.485 | OK        | B1_profond     | verdict de l etape
+22:11:08.487 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+22:11:09.769 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+22:11:09.771 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+22:11:09.772 | SORTIE    | C_emplacements | GitHub : commit 33e085df du 2026-10-18T20:09:56Z (HAOS MANUEL-backup: 2026-10-18 22:09:56 CEST (HA 2026.10.1))
+22:11:09.773 | SORTIE    | C_emplacements | ANOMALIES : aucune
+22:11:09.775 | SORTIE    | C_emplacements | RESULTAT : 97 fichiers suivis - SYNC 97 - presents ailleurs qu en local 0
+22:11:09.776 | INFO      | C_emplacements | rapport ecrit 15551 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+22:11:09.783 | OK        | C_emplacements | verdict de l etape
+22:11:09.784 | OK        | SYNTHESE       | A_arbres
+22:11:09.785 | OK        | SYNTHESE       | B1_profond
+22:11:09.787 | OK        | SYNTHESE       | C_emplacements
+22:11:09.788 | INFO      | LANCEUR        | FIN DU LANCEUR - code 0
+22:12:06.320 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\04_journal_trigul\trigul_journal_2026-10-18.log
+22:12:06.323 | INFO      | LANCEUR        | H: accessible : True
+22:12:06.324 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+22:12:10.367 | INFO      | A_arbres       | FIN code de retour 0 en 4.0 s, 3 lignes de sortie
+22:12:10.369 | SORTIE    | A_arbres       | RESULTAT : 478 chemins ; SYNC 476 ; a traiter 2 ; ecarts attendus 0 ; erreurs du script 0
+22:12:10.370 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+22:12:10.371 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+22:12:10.373 | INFO      | A_arbres       | rapport ecrit 3635 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.txt
+22:12:10.379 | INFO      | A_arbres       | rapport ecrit 121033 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\00_Verif_Final_trigul_arbres\trigul_arbres_2026-10-18.html
+22:12:10.380 | OK        | A_arbres       | verdict de l etape
+22:12:10.382 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+22:12:11.152 | INFO      | B1_profond     | FIN code de retour 0 en 0.8 s, 24 lignes de sortie
+22:12:11.153 | SORTIE    | B1_profond     | 
+22:12:11.155 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+22:12:11.156 | SORTIE    | B1_profond     | 
+22:12:11.157 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+22:12:11.158 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt CFA9A975
+22:12:11.160 | INFO      | B1_profond     | rapport ecrit 16805 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\01_trigul_profond\trigul_profond_2026-10-18.txt
+22:12:11.161 | OK        | B1_profond     | verdict de l etape
+22:12:11.162 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_Docs_scripts\Docs_scripts_sh\Verif_emplacements\Verif_emplacements.py
+22:12:12.478 | INFO      | C_emplacements | FIN code de retour 0 en 1.3 s, 4 lignes de sortie
+22:12:12.480 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+22:12:12.481 | SORTIE    | C_emplacements | GitHub : commit 33e085df du 2026-10-18T20:09:56Z (HAOS MANUEL-backup: 2026-10-18 22:09:56 CEST (HA 2026.10.1))
+22:12:12.482 | SORTIE    | C_emplacements | ANOMALIES : aucune
+22:12:12.484 | SORTIE    | C_emplacements | RESULTAT : 97 fichiers suivis - SYNC 97 - presents ailleurs qu en local 0
+22:12:12.485 | INFO      | C_emplacements | rapport ecrit 15551 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\MD5\03_verif_emplacements\verif_emplacements_2026-10-18.txt
+22:12:12.493 | OK        | C_emplacements | verdict de l etape
+22:12:12.494 | OK        | SYNTHESE       | A_arbres
+22:12:12.495 | OK        | SYNTHESE       | B1_profond
+22:12:12.497 | OK        | SYNTHESE       | C_emplacements
+22:12:12.498 | INFO      | LANCEUR        | FIN DU LANCEUR - code 0
+22:12:19.096 | NOTE      | B2_categories_ha | 15 categories d automations, 0 pour les scripts, identiques au releve de 14h54 (rapport categories_ha_2026-10-18.txt inchange)

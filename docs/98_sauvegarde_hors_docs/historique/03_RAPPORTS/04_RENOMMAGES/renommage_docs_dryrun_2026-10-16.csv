@@ -1,0 +1,1230 @@
+kind;parent_rel;old;new;etat;flags
+D;.;00_IA;00_Ia;case-only;SIGLE
+D;.;01_docs_config_system;01_Docs_config_system;case-only;
+D;.;02_docs_dashboard;02_Docs_dashboard;case-only;
+D;.;03_docs_automations;03_Docs_automations;case-only;
+D;.;04_docs_scripts;04_Docs_scripts;case-only;
+D;.;05_docs_MD_system;05_Docs_md_system;case-only;SIGLE
+D;.;05_docs_skills;05_Docs_skills;case-only;
+D;.;06_docs_technique;06_Docs_technique;case-only;
+D;00_IA;IA_CONTEXT_BASE;Ia_context_base;case-only;SIGLE
+D;00_IA;sous_context_ia;Sous_context_ia;case-only;
+B;00_IA;GLOBAL_INDEX_IA.bak_2026_10_13.md;Global_index_ia.bak_2026_10_13.md;case-only;SIGLE
+B;00_IA;GLOBAL_INDEX_IA.bak_2026_10_14.md;Global_index_ia.bak_2026_10_14.md;case-only;SIGLE
+B;00_IA;GLOBAL_INDEX_IA.bak_2026_10_15_22h08m37s.md;Global_index_ia.bak_2026_10_15_22h08m37s.md;case-only;SIGLE
+F;00_IA;GLOBAL_INDEX_IA.md;Global_index_ia.md;case-only;SIGLE
+B;00_IA\IA_CONTEXT_BASE;IA_CONTEXT_BASE.bak_2026_10_10.md;Ia_context_base.bak_2026_10_10.md;case-only;SIGLE
+B;00_IA\IA_CONTEXT_BASE;IA_CONTEXT_BASE.bak_2026_10_11.md;Ia_context_base.bak_2026_10_11.md;case-only;SIGLE
+B;00_IA\IA_CONTEXT_BASE;IA_CONTEXT_BASE.bak_2026_10_13.md;Ia_context_base.bak_2026_10_13.md;case-only;SIGLE
+F;00_IA\IA_CONTEXT_BASE;IA_CONTEXT_BASE.md;Ia_context_base.md;case-only;SIGLE
+D;00_IA\sous_context_ia;IA_ARBO_DETAIL;Ia_arbo_detail;case-only;SIGLE
+D;00_IA\sous_context_ia;IA_AUDIT_ENERGETIQUE_ET_THERMIQUE;Ia_audit_energetique_et_thermique;case-only;SIGLE
+D;00_IA\sous_context_ia;IA_AUTOMATIONS_NOTIFS;Ia_automations_notifs;case-only;SIGLE
+D;00_IA\sous_context_ia;IA_CMD_TERMINAL_HA;Ia_cmd_terminal_ha;case-only;SIGLE
+D;00_IA\sous_context_ia;IA_INDEX_AUTOMATIONS;Ia_index_automations;case-only;SIGLE
+D;00_IA\sous_context_ia;IA_INDEX_NAVIGATION;Ia_index_navigation;case-only;SIGLE
+D;00_IA\sous_context_ia;IA_INTEGRATIONS_CARTES;Ia_integrations_cartes;case-only;SIGLE
+D;00_IA\sous_context_ia;IA_P4_PRESENCE;Ia_p4_presence;case-only;SIGLE
+D;00_IA\sous_context_ia;IA_SKILLS_INVENTAIRE;Ia_skills_inventaire;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_ARBO_DETAIL;IA_ARBO_DETAIL.bak_2026_10_12.md;Ia_arbo_detail.bak_2026_10_12.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_ARBO_DETAIL;IA_ARBO_DETAIL.bak_2026_10_13.md;Ia_arbo_detail.bak_2026_10_13.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_ARBO_DETAIL;IA_ARBO_DETAIL.bak_2026_10_14.md;Ia_arbo_detail.bak_2026_10_14.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_ARBO_DETAIL;IA_ARBO_DETAIL.bak_2026_10_15_22h14m23s.md;Ia_arbo_detail.bak_2026_10_15_22h14m23s.md;case-only;SIGLE
+F;00_IA\sous_context_ia\IA_ARBO_DETAIL;IA_ARBO_DETAIL.md;Ia_arbo_detail.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_AUDIT_ENERGETIQUE_ET_THERMIQUE;IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.bak_2026_09_29.md;Ia_audit_energetique_et_thermique.bak_2026_09_29.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_AUDIT_ENERGETIQUE_ET_THERMIQUE;IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.bak_2026_10_11.md;Ia_audit_energetique_et_thermique.bak_2026_10_11.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_AUDIT_ENERGETIQUE_ET_THERMIQUE;IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.bak_2026_10_13.md;Ia_audit_energetique_et_thermique.bak_2026_10_13.md;case-only;SIGLE
+F;00_IA\sous_context_ia\IA_AUDIT_ENERGETIQUE_ET_THERMIQUE;IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md;Ia_audit_energetique_et_thermique.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_AUTOMATIONS_NOTIFS;IA_AUTOMATIONS_NOTIFS.bak_2026_10_11.md;Ia_automations_notifs.bak_2026_10_11.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_AUTOMATIONS_NOTIFS;IA_AUTOMATIONS_NOTIFS.bak_2026_10_13.md;Ia_automations_notifs.bak_2026_10_13.md;case-only;SIGLE
+F;00_IA\sous_context_ia\IA_AUTOMATIONS_NOTIFS;IA_AUTOMATIONS_NOTIFS.md;Ia_automations_notifs.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_CMD_TERMINAL_HA;IA_CMD_TERMINAL_HA.bak_2026_10_13.md;Ia_cmd_terminal_ha.bak_2026_10_13.md;case-only;SIGLE
+F;00_IA\sous_context_ia\IA_CMD_TERMINAL_HA;IA_CMD_TERMINAL_HA.md;Ia_cmd_terminal_ha.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_INDEX_AUTOMATIONS;IA_INDEX_AUTOMATIONS.bak_2026_10_08.md;Ia_index_automations.bak_2026_10_08.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_INDEX_AUTOMATIONS;IA_INDEX_AUTOMATIONS.bak_2026_10_13.md;Ia_index_automations.bak_2026_10_13.md;case-only;SIGLE
+F;00_IA\sous_context_ia\IA_INDEX_AUTOMATIONS;IA_INDEX_AUTOMATIONS.md;Ia_index_automations.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_INDEX_NAVIGATION;IA_INDEX_NAVIGATION.bak_2026_09_29.md;Ia_index_navigation.bak_2026_09_29.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_INDEX_NAVIGATION;IA_INDEX_NAVIGATION.bak_2026_10_13.md;Ia_index_navigation.bak_2026_10_13.md;case-only;SIGLE
+F;00_IA\sous_context_ia\IA_INDEX_NAVIGATION;IA_INDEX_NAVIGATION.md;Ia_index_navigation.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_INTEGRATIONS_CARTES;IA_INTEGRATIONS_CARTES.bak_2026_09_20.md;Ia_integrations_cartes.bak_2026_09_20.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_INTEGRATIONS_CARTES;IA_INTEGRATIONS_CARTES.bak_2026_10_13.md;Ia_integrations_cartes.bak_2026_10_13.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_INTEGRATIONS_CARTES;IA_INTEGRATIONS_CARTES.bak_2026_10_16_18h13m47s.md;Ia_integrations_cartes.bak_2026_10_16_18h13m47s.md;case-only;SIGLE
+F;00_IA\sous_context_ia\IA_INTEGRATIONS_CARTES;IA_INTEGRATIONS_CARTES.md;Ia_integrations_cartes.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_P4_PRESENCE;IA_P4_PRESENCE.bak_2026_10_13.md;Ia_p4_presence.bak_2026_10_13.md;case-only;SIGLE
+F;00_IA\sous_context_ia\IA_P4_PRESENCE;IA_P4_PRESENCE.md;Ia_p4_presence.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_SKILLS_INVENTAIRE;IA_SKILLS_INVENTAIRE.bak_2026_10_11.md;Ia_skills_inventaire.bak_2026_10_11.md;case-only;SIGLE
+B;00_IA\sous_context_ia\IA_SKILLS_INVENTAIRE;IA_SKILLS_INVENTAIRE.bak_2026_10_13.md;Ia_skills_inventaire.bak_2026_10_13.md;case-only;SIGLE
+F;00_IA\sous_context_ia\IA_SKILLS_INVENTAIRE;IA_SKILLS_INVENTAIRE.md;Ia_skills_inventaire.md;case-only;SIGLE
+D;01_docs_config_system;config_system_MD;Config_system_md;case-only;SIGLE
+D;01_docs_config_system;config_system_YAML;Config_system_yaml;case-only;SIGLE
+B;01_docs_config_system\config_system_MD;configuration.bak_2026_09_11.md;Configuration.bak_2026_09_11.md;case-only;
+F;01_docs_config_system\config_system_MD;configuration.md;Configuration.md;case-only;
+D;01_docs_config_system\config_system_YAML;blueprints;Blueprints;case-only;
+D;01_docs_config_system\config_system_YAML;command_line;Command_line;case-only;
+D;01_docs_config_system\config_system_YAML;groups;Groups;case-only;
+D;01_docs_config_system\config_system_YAML;input_booleans;Input_booleans;case-only;
+D;01_docs_config_system\config_system_YAML;input_number;Input_number;case-only;
+D;01_docs_config_system\config_system_YAML;notifs;Notifs;case-only;
+D;01_docs_config_system\config_system_YAML;sensors;Sensors;case-only;
+D;01_docs_config_system\config_system_YAML;shell_command;Shell_command;case-only;
+D;01_docs_config_system\config_system_YAML;templates;Templates;case-only;
+D;01_docs_config_system\config_system_YAML;themes;Themes;case-only;
+D;01_docs_config_system\config_system_YAML;timers;Timers;case-only;
+D;01_docs_config_system\config_system_YAML;utility_meter;Utility_meter;case-only;
+B;01_docs_config_system\config_system_YAML;configuration.bak_2026_09_11.yaml;Configuration.bak_2026_09_11.yaml;case-only;
+B;01_docs_config_system\config_system_YAML;configuration.bak_2026_10_07.yaml;Configuration.bak_2026_10_07.yaml;case-only;
+F;01_docs_config_system\config_system_YAML;configuration.yaml;Configuration.yaml;case-only;
+F;01_docs_config_system\config_system_YAML;input_button.yaml;Input_button.yaml;case-only;
+F;01_docs_config_system\config_system_YAML;input_datetime.yaml;Input_datetime.yaml;case-only;
+F;01_docs_config_system\config_system_YAML;input_select.yaml;Input_select.yaml;case-only;
+D;01_docs_config_system\config_system_YAML\blueprints;template;Template;case-only;
+D;01_docs_config_system\config_system_YAML\blueprints\template;homeassistant;Homeassistant;case-only;
+F;01_docs_config_system\config_system_YAML\blueprints\template\homeassistant;inverted_binary_sensor.yaml;Inverted_binary_sensor.yaml;case-only;
+D;01_docs_config_system\config_system_YAML\command_line;audit;Audit;case-only;
+D;01_docs_config_system\config_system_YAML\command_line;energie;Energie;case-only;
+D;01_docs_config_system\config_system_YAML\command_line;github_maintenance;Github_maintenance;case-only;
+D;01_docs_config_system\config_system_YAML\command_line;ip_externe;Ip_externe;case-only;
+D;01_docs_config_system\config_system_YAML\command_line;meteo;Meteo;case-only;
+F;01_docs_config_system\config_system_YAML\command_line\audit;audit_md5_md_yaml.yaml;Audit_md5_md_yaml.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\command_line\audit;audit_md5_yaml.yaml;Audit_md5_yaml.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\command_line\energie;histo_energie.yaml;Histo_energie.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\command_line\github_maintenance;github_maintenance.yaml;Github_maintenance.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\command_line\ip_externe;ip_externe.yaml;Ip_externe.yaml;case-only;
+B;01_docs_config_system\config_system_YAML\command_line\meteo;carte_meteo_france.bak_2026_10_01.yaml;Carte_meteo_france.bak_2026_10_01.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\command_line\meteo;carte_meteo_france.yaml;Carte_meteo_france.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\groups;GRP_01_batteries_hue.yaml;Grp_01_batteries_hue.yaml;case-only;SIGLE
+B;01_docs_config_system\config_system_YAML\groups;GRP_02_batteries_ikea.bak_2026_09_28.yaml;Grp_02_batteries_ikea.bak_2026_09_28.yaml;case-only;SIGLE
+F;01_docs_config_system\config_system_YAML\groups;GRP_02_batteries_ikea.yaml;Grp_02_batteries_ikea.yaml;case-only;SIGLE
+F;01_docs_config_system\config_system_YAML\groups;GRP_03_batteries_sonoff.yaml;Grp_03_batteries_sonoff.yaml;case-only;SIGLE
+F;01_docs_config_system\config_system_YAML\input_booleans\P1;P1_ACS_IB_01_arret_clim_securises.yaml;P1_Acs_ib_01_arret_clim_securises.yaml;case-only;SIGLE
+B;01_docs_config_system\config_system_YAML\input_booleans\P1;P1_BV_IB_inter_soufflant_sdb.bak_2026_09_28.yaml;P1_Bv_ib_inter_soufflant_sdb.bak_2026_09_28.yaml;case-only;SIGLE|FAMILLE_TYPE
+B;01_docs_config_system\config_system_YAML\input_booleans\P1;P1_BV_IB_inter_soufflant_sdb.bak_2026_09_29.yaml;P1_Bv_ib_inter_soufflant_sdb.bak_2026_09_29.yaml;case-only;SIGLE|FAMILLE_TYPE
+B;01_docs_config_system\config_system_YAML\input_booleans\P1;P1_BV_IB_inter_soufflant_sdb.bak_2026_10_07.yaml;P1_Bv_ib_inter_soufflant_sdb.bak_2026_10_07.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\input_booleans\P1;P1_BV_IB_inter_soufflant_sdb.yaml;P1_Bv_ib_inter_soufflant_sdb.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\input_booleans\P4;P4_presence_wifi.yaml;P4_Presence_wifi.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\input_number;input_number.yaml;Input_number.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\notifs;diag_conso_elec.txt;Diag_conso_elec.txt;case-only;
+F;01_docs_config_system\config_system_YAML\notifs;ecart_liky_vs_nodon.txt;Ecart_liky_vs_nodon.txt;case-only;
+D;01_docs_config_system\config_system_YAML\sensors;P1_clim_chauffage;P1_Clim_chauffage;case-only;
+D;01_docs_config_system\config_system_YAML\sensors;meteo;Meteo;case-only;
+F;01_docs_config_system\config_system_YAML\sensors\Air_quality;A_01_AIR_QUALITY.yaml;A_01_air_quality.yaml;case-only;SIGLE
+F;01_docs_config_system\config_system_YAML\sensors\P0_Energie_total_min_maxi_diag\P0_Genelec_appart_mini_maxi;P0_MINI_MAXI_AVG_Genelec_appart.yaml;P0_Mini_maxi_avg_genelec_appart.yaml;case-only;SIGLE|FAMILLE_TYPE
+D;01_docs_config_system\config_system_YAML\sensors\P1_clim_chauffage;P1_DUT;P1_Dut;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\sensors\P1_clim_chauffage\P1_DUT;P1_DUT_clim_chauffage.yaml;P1_Dut_clim_chauffage.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\shell_command\Ghithub;backup_github.yaml;Backup_github.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\shell_command\P0;P0_correct_linky.yaml;P0_Correct_linky.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\shell_command\P4;P4_log_eric_zone.yaml;P4_Log_eric_zone.yaml;case-only;
+D;01_docs_config_system\config_system_YAML\templates;Inter_BP_Virtuel;Inter_bp_virtuel;case-only;SIGLE
+D;01_docs_config_system\config_system_YAML\templates;P1_clim_chauffage;P1_Clim_chauffage;case-only;
+D;01_docs_config_system\config_system_YAML\templates;P2_prise;P2_Prise;case-only;
+D;01_docs_config_system\config_system_YAML\templates;P3_eclairage;P3_Eclairage;case-only;
+D;01_docs_config_system\config_system_YAML\templates;P4_groupe_presence;P4_Groupe_presence;case-only;
+D;01_docs_config_system\config_system_YAML\templates;meteo;Meteo;case-only;
+D;01_docs_config_system\config_system_YAML\templates;utilitaires;Utilitaires;case-only;
+F;01_docs_config_system\config_system_YAML\templates\Air_quality;A_01_AIR_QUALITY.yaml;A_01_air_quality.yaml;case-only;SIGLE
+B;01_docs_config_system\config_system_YAML\templates\Inter_BP_Virtuel\P1;P1_BV_IB_SW_inter_souflant_sdb.bak_2026_10_07.yaml;P1_Bv_ib_sw_inter_souflant_sdb.bak_2026_10_07.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\Inter_BP_Virtuel\P1;P1_BV_IB_SW_inter_souflant_sdb.yaml;P1_Bv_ib_sw_inter_souflant_sdb.yaml;case-only;SIGLE|FAMILLE_TYPE
+D;01_docs_config_system\config_system_YAML\templates\meteo;M_03_Meteo_orage_eclaires;M_03_meteo_orage_eclaires;case-only;
+D;01_docs_config_system\config_system_YAML\templates\P0_Energie_total_diag;P0_total_pour_les_7_postes;P0_Total_pour_les_7_postes;case-only;
+F;01_docs_config_system\config_system_YAML\templates\P0_Energie_total_diag\P0_Diag;P0_diag_conso_hebdomadaire_en_cours.yaml;P0_Diag_conso_hebdomadaire_en_cours.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\templates\P0_Energie_total_diag\P0_Diag;P0_diag_conso_jour_en_cours.yaml;P0_Diag_conso_jour_en_cours.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\templates\P0_Energie_total_diag\P0_Diag;P0_diag_conso_mois_en_cours.yaml;P0_Diag_conso_mois_en_cours.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\templates\P0_Energie_total_diag\P0_Genelec_appart;P0_01_genelec_appart_AMHQ_cost.yaml;P0_01_Genelec_appart_amhq_cost.yaml;case-only;SIGLE
+F;01_docs_config_system\config_system_YAML\templates\P0_Energie_total_diag\P0_Genelec_appart;P0_02_ratio_hp_hc.yaml;P0_02_Ratio_hp_hc.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\templates\P0_Energie_total_diag\P0_Genelec_appart;P0_03_AVG_genelec_appart.yaml;P0_03_Avg_genelec_appart.yaml;case-only;SIGLE
+F;01_docs_config_system\config_system_YAML\templates\P0_Energie_total_diag\P0_Linky;P0_MyElectricalData.yaml;P0_Myelectricaldata.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\templates\P0_Energie_total_diag\P0_total_pour_les_7_postes;P0_total_pour_les_7_postes.yaml;P0_Total_pour_les_7_postes.yaml;case-only;
+D;01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage;P1_01_MASTER;P1_01_Master;case-only;SIGLE
+D;01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage;P1_AVG;P1_Avg;case-only;SIGLE|FAMILLE_TYPE
+D;01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage;P1_DUT_TOTAL;P1_Dut_total;case-only;SIGLE|FAMILLE_TYPE
+D;01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage;P1_TOTAL;P1_Total;case-only;SIGLE|FAMILLE_TYPE
+D;01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage;P1_ui_dashboard;P1_Ui_dashboard;case-only;FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage\P1_01_MASTER;P1_01_clim_logique_system_autom.yaml;P1_01_Clim_logique_system_autom.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage\P1_01_MASTER;P1_02_automation_message_clim_7h30_21h.yaml;P1_02_Automation_message_clim_7h30_21h.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage\P1_01_MASTER;P1_03_automation_message_clim_21h_7h30.yaml;P1_03_Automation_message_clim_21h_7h30.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage\P1_AVG;P1_AVG_AMHQ_TOTAL.yaml;P1_Avg_amhq_total.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage\P1_AVG;P1_AVG_AMHQ_UNITE.yaml;P1_Avg_amhq_unite.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage\P1_DUT_TOTAL;P1_DUT_TOTAL_SDB.yaml;P1_Dut_total_sdb.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage\P1_TOTAL;P1_TOTAL_AMHQ.yaml;P1_Total_amhq.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage\P1_ui_dashboard;P1_ui_dashboard.yaml;P1_Ui_dashboard.yaml;case-only;FAMILLE_TYPE
+B;01_docs_config_system\config_system_YAML\templates\P1_clim_chauffage\P1_ui_dashboard;P1_ui_dashboard.yaml.bak_2026_10_14;P1_Ui_dashboard.yaml.bak_2026_10_14;case-only;
+D;01_docs_config_system\config_system_YAML\templates\P2_prise;P2_AVG;P2_Avg;case-only;SIGLE|FAMILLE_TYPE
+D;01_docs_config_system\config_system_YAML\templates\P2_prise;P2_congelateur;P2_Congelateur;case-only;
+D;01_docs_config_system\config_system_YAML\templates\P2_prise;P2_eCO_prises;P2_Eco_prises;case-only;SIGLE
+F;01_docs_config_system\config_system_YAML\templates\P2_prise\P2_AVG;P2_AVG_AMHQ_mini_pc.yaml;P2_Avg_amhq_mini_pc.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P2_prise\P2_AVG;P2_AVG_AMHQ_prises.yaml;P2_Avg_amhq_prises.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P2_prise\P2_AVG;P2_AVG_AMHQ_veilles.yaml;P2_Avg_amhq_veilles.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P2_prise\P2_congelateur;P2_congelateur_compresseur_actif.yaml;P2_Congelateur_compresseur_actif.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\templates\P2_prise\P2_eCO_prises;P2_eco_prises_config.yaml;P2_Eco_prises_config.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\templates\P2_prise\P2_I_all_standby_power;P2_current_all_standby.yaml;P2_Current_all_standby.yaml;case-only;
+D;01_docs_config_system\config_system_YAML\templates\P3_eclairage;P3_AVG;P3_Avg;case-only;SIGLE|FAMILLE_TYPE
+D;01_docs_config_system\config_system_YAML\templates\P3_eclairage;P3_ENERGIE_TPL;P3_Energie_tpl;case-only;SIGLE
+D;01_docs_config_system\config_system_YAML\templates\P3_eclairage;P3_POWER_TPL;P3_Power_tpl;case-only;SIGLE|FAMILLE_TYPE
+D;01_docs_config_system\config_system_YAML\templates\P3_eclairage;P3_ui_dashboard;P3_Ui_dashboard;case-only;FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P3_eclairage\P3_AVG;P3_AVG_AMHQ_1_UNITE.yaml;P3_Avg_amhq_1_unite.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P3_eclairage\P3_AVG;P3_AVG_AMHQ_2_ZONE.yaml;P3_Avg_amhq_2_zone.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P3_eclairage\P3_AVG;P3_AVG_AMHQ_3_TOTAL.yaml;P3_Avg_amhq_3_total.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P3_eclairage\P3_ENERGIE_TPL;P3_TPL_AMHQ_1_UNITE.yaml;P3_Tpl_amhq_1_unite.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P3_eclairage\P3_ENERGIE_TPL;P3_TPL_AMHQ_2_ZONE.yaml;P3_Tpl_amhq_2_zone.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P3_eclairage\P3_ENERGIE_TPL;P3_TPL_AMHQ_3_TOTAL.yaml;P3_Tpl_amhq_3_total.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P3_eclairage\P3_POWER_TPL;P3_POWER_3_TOTAL_ZONE.yaml;P3_Power_3_total_zone.yaml;case-only;SIGLE|FAMILLE_TYPE
+F;01_docs_config_system\config_system_YAML\templates\P3_eclairage\P3_ui_dashboard;P3_etats_status.yaml;P3_Etats_status.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\templates\P4_groupe_presence;P4_groupe_presence.yaml;P4_Groupe_presence.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\templates\P4_groupe_presence;P4_wifi_detection.yaml;P4_Wifi_detection.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\templates\Stores;S_01_STORES.yaml;S_01_stores.yaml;case-only;SIGLE
+F;01_docs_config_system\config_system_YAML\templates\utilitaires;jour_nuit.yaml;Jour_nuit.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\templates\utilitaires;nb_fenetre_ouvert_ferme_autom.yaml;Nb_fenetre_ouvert_ferme_autom.yaml;case-only;
+D;01_docs_config_system\config_system_YAML\themes;Frosted Glass;Frosted glass;case-only;
+D;01_docs_config_system\config_system_YAML\themes;ios-dark-mode;Ios-dark-mode;case-only;PONCTUATION
+D;01_docs_config_system\config_system_YAML\themes;visionos;Visionos;case-only;
+F;01_docs_config_system\config_system_YAML\themes\Frosted Glass;Frosted Glass Dark Lite.yaml;Frosted glass dark lite.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\themes\Frosted Glass;Frosted Glass Dark.yaml;Frosted glass dark.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\themes\Frosted Glass;Frosted Glass Light Lite.yaml;Frosted glass light lite.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\themes\Frosted Glass;Frosted Glass Light.yaml;Frosted glass light.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\themes\Frosted Glass;Frosted Glass Lite.yaml;Frosted glass lite.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\themes\Frosted Glass;Frosted Glass.yaml;Frosted glass.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\themes\ios-dark-mode;ios-dark-mode.yaml;Ios-dark-mode.yaml;case-only;PONCTUATION
+F;01_docs_config_system\config_system_YAML\themes\visionos;Liquid Glass Tinted.yaml;Liquid glass tinted.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\themes\visionos;Liquid Glass.yaml;Liquid glass.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\themes\visionos;visionos.yaml;Visionos.yaml;case-only;
+D;01_docs_config_system\config_system_YAML\timers;P1_timers;P1_Timers;case-only;
+B;01_docs_config_system\config_system_YAML\timers\P1_timers;P1_timer_10mn_seche_serviettes_sdb.bak_2026_10_11.yaml;P1_Timer_10mn_seche_serviettes_sdb.bak_2026_10_11.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\timers\P1_timers;P1_timer_10mn_seche_serviettes_sdb.yaml;P1_Timer_10mn_seche_serviettes_sdb.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\timers\P1_timers;P1_timer_10mn_soufflant_sdb.yaml;P1_Timer_10mn_soufflant_sdb.yaml;case-only;
+B;01_docs_config_system\config_system_YAML\timers\P1_timers;P1_timer_2h_seche_serviettes_sdb.bak_2026_10_11.yaml;P1_Timer_2h_seche_serviettes_sdb.bak_2026_10_11.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\timers\P1_timers;P1_timer_2h_seche_serviettes_sdb.yaml;P1_Timer_2h_seche_serviettes_sdb.yaml;case-only;
+F;01_docs_config_system\config_system_YAML\timers\P1_timers;P1_timer_60mn_soufflant_sdb.yaml;P1_Timer_60mn_soufflant_sdb.yaml;case-only;
+D;01_docs_config_system\config_system_YAML\utility_meter;P1_clim_chauffage;P1_Clim_chauffage;case-only;
+D;01_docs_config_system\config_system_YAML\utility_meter;P2_prise;P2_Prise;case-only;
+D;01_docs_config_system\config_system_YAML\utility_meter;P3_eclairage;P3_Eclairage;case-only;
+D;01_docs_config_system\config_system_YAML\utility_meter;meteo;Meteo;case-only;
+F;01_docs_config_system\config_system_YAML\utility_meter\meteo;M_03_meteo_UM_blitzortung.yaml;M_03_meteo_um_blitzortung.yaml;case-only;SIGLE
+F;01_docs_config_system\config_system_YAML\utility_meter\P0_Energie_total\Genelec_appart;P0_UM_AMHQ.yaml;P0_UM_AMHQ.yaml;exempt;P_UM_AMHQ
+F;01_docs_config_system\config_system_YAML\utility_meter\P0_Energie_total\Genelec_appart;P0_UM_AMHQ_HPHC.yaml;P0_UM_AMHQ_HPHC.yaml;exempt;P_UM_AMHQ
+F;01_docs_config_system\config_system_YAML\utility_meter\P1_clim_chauffage;P1_UM_AMHQ.yaml;P1_UM_AMHQ.yaml;exempt;P_UM_AMHQ
+F;01_docs_config_system\config_system_YAML\utility_meter\P2_prise;P2_UM_AMHQ_mini_pc.yaml;P2_UM_AMHQ_mini_pc.yaml;exempt;P_UM_AMHQ
+F;01_docs_config_system\config_system_YAML\utility_meter\P2_prise;P2_UM_AMHQ_prises.yaml;P2_UM_AMHQ_prises.yaml;exempt;P_UM_AMHQ
+F;01_docs_config_system\config_system_YAML\utility_meter\P2_prise;P2_UM_AMHQ_veilles.yaml;P2_UM_AMHQ_veilles.yaml;exempt;P_UM_AMHQ
+F;01_docs_config_system\config_system_YAML\utility_meter\P3_eclairage;P3_UM_AMHQ_1_UNITE.yaml;P3_UM_AMHQ_1_UNITE.yaml;exempt;P_UM_AMHQ
+D;02_docs_dashboard;dashboard_docs_MD;Dashboard_docs_md;case-only;SIGLE
+D;02_docs_dashboard;dashboard_docs_YAML;Dashboard_docs_yaml;case-only;SIGLE
+B;02_docs_dashboard;GLOBAL_INDEX_VIGNETTES_PAGES.bak_2026_10_15_21h13m45s.md;Global_index_vignettes_pages.bak_2026_10_15_21h13m45s.md;case-only;SIGLE
+F;02_docs_dashboard;GLOBAL_INDEX_VIGNETTES_PAGES.md;Global_index_vignettes_pages.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD;L0C0_PAGE_Home;L0c0_page_home;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L1C1_METEO;L1c1_meteo;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L1C2_TEMPERATURES;L1c2_temperatures;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L1C3_CLIM;L1c3_clim;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L2C1_ENERGIE;L2c1_energie;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L2C2_ENERGIE_CLIM;L2c2_energie_clim;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L2C3_ENERGIE_ECLAIRAGE;L2c3_energie_eclairage;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L3C1_ECLAIRAGE;L3c1_eclairage;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L3C2_PRISES;L3c2_prises;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L3C3_STORES;L3c3_stores;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L4C1_MINI_PC;L4c1_mini_pc;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L4C2_PROXMOX;L4c2_proxmox;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L4C3_MAJ_HA;L4c3_maj_ha;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L5C1_PILES_BATTERIES;L5c1_piles_batteries;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L5C2_BATTERIES_PORTABLES;L5c2_batteries_portables;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L5C3_MARIADB;L5c3_mariadb;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L6C1_AIR_QUALITE;L6c1_air_qualite;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L6C2_POLLUTION_POLLEN;L6c2_pollution_pollen;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD;L6C3_VIGIEAU;L6c3_vigieau;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home;02_page;02_Page;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home;03_Carte Météo;03_Carte météo;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home;04_Studio Code Server;04_Studio code server;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home;05_Impacte de Foudre;05_Impacte de foudre;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home;06_Lave Linge;06_Lave linge;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home;07_Lave Vaisselle;07_Lave vaisselle;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home;10_Carte Meteoalarm;10_Carte meteoalarm;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home;11_Carte Présence;11_Carte présence;case-only;
+B;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\02_page;PAGE_HOME.bak_2026_09_24.md;Page_home.bak_2026_09_24.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\02_page;PAGE_HOME.bak_2026_10_10.md;Page_home.bak_2026_10_10.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\02_page;PAGE_HOME.bak_2026_10_11.md;Page_home.bak_2026_10_11.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\02_page;PAGE_HOME.bak_2026_10_15_21h12m29s.md;Page_home.bak_2026_10_15_21h12m29s.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\02_page;PAGE_HOME.md;Page_home.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\03_Carte Météo;www_meteocons;Www_meteocons;case-only;
+F;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\03_Carte Météo;Carte Météo Vence.md;Carte météo vence.md;case-only;
+F;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\03_Carte Météo;METEOCSS_CARD_MODIF.md;Meteocss_card_modif.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;METEOCONS_INSTALL.md;Meteocons_install.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\04_Studio Code Server;CARD_VSCODE_HOME.bak_2026_10_11.md;Card_vscode_home.bak_2026_10_11.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\04_Studio Code Server;CARD_VSCODE_HOME.md;Card_vscode_home.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\05_Impacte de Foudre;CARD_FOUDRE_HOME.bak_2026_10_11.md;Card_foudre_home.bak_2026_10_11.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\05_Impacte de Foudre;CARD_FOUDRE_HOME.md;Card_foudre_home.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\06_Lave Linge;CARD_LAVE_LINGE_HOME.bak_2026_10_11.md;Card_lave_linge_home.bak_2026_10_11.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\06_Lave Linge;CARD_LAVE_LINGE_HOME.md;Card_lave_linge_home.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\07_Lave Vaisselle;CARD_LAVE_VAISSELLE_HOME.bak_2026_10_11.md;Card_lave_vaisselle_home.bak_2026_10_11.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\07_Lave Vaisselle;CARD_LAVE_VAISSELLE_HOME.md;Card_lave_vaisselle_home.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\08_Congélateur;CARD_CONGELATEUR_HOME.bak_2026_10_11.md;Card_congelateur_home.bak_2026_10_11.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\08_Congélateur;CARD_CONGELATEUR_HOME.md;Card_congelateur_home.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\09_Détecteur de fuite;CARD_DETECTEUR_FUITE_HOME.bak_2026_10_11.md;Card_detecteur_fuite_home.bak_2026_10_11.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\09_Détecteur de fuite;CARD_DETECTEUR_FUITE_HOME.md;Card_detecteur_fuite_home.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\10_Carte Meteoalarm;CARD_METEOALARM_HOME.md;Card_meteoalarm_home.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\11_Carte Présence;CARD_PRESENCE_HOME.bak_2026_10_11.md;Card_presence_home.bak_2026_10_11.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\11_Carte Présence;CARD_PRESENCE_HOME.bak_2026_10_15_21h12m29s.md;Card_presence_home.bak_2026_10_15_21h12m29s.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L0C0_PAGE_Home\11_Carte Présence;CARD_PRESENCE_HOME.md;Card_presence_home.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L1C1_METEO;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L1C1_METEO;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_MD\L1C1_METEO;TUTO_IMAGES_ALERTES_METEO_FRANCE.md;Tuto_images_alertes_meteo_france.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L1C1_METEO\01_vignette;L1C1_VIGNETTE_METEO.md;L1c1_vignette_meteo.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L1C1_METEO\02_page;PAGE_METEO.md;Page_meteo.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L1C2_TEMPERATURES;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L1C2_TEMPERATURES;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_MD\L1C2_TEMPERATURES\01_vignette;L1C2_VIGNETTE_TEMPERATURES.md;L1c2_vignette_temperatures.md;case-only;SIGLE|ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_MD\L1C2_TEMPERATURES\02_page;PAGE_TEMPERATURES.bak_2026_09_20.md;Page_temperatures.bak_2026_09_20.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L1C2_TEMPERATURES\02_page;PAGE_TEMPERATURES.bak_2026_09_24.md;Page_temperatures.bak_2026_09_24.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L1C2_TEMPERATURES\02_page;PAGE_TEMPERATURES.bak_2026_10_11.md;Page_temperatures.bak_2026_10_11.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L1C2_TEMPERATURES\02_page;PAGE_TEMPERATURES.md;Page_temperatures.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L1C3_CLIM;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L1C3_CLIM;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_MD\L1C3_CLIM\01_vignette;L1C3_VIGNETTE_CLIM.md;L1c3_vignette_clim.md;case-only;SIGLE|ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_MD\L1C3_CLIM\02_page;PAGE_CLIM.bak_2026_09_29.md;Page_clim.bak_2026_09_29.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L1C3_CLIM\02_page;PAGE_CLIM.bak_2026_10_11.md;Page_clim.bak_2026_10_11.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L1C3_CLIM\02_page;PAGE_CLIM.md;Page_clim.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE;02_page_temps_reel;02_Page_temps_reel;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE;03_page_principale;03_Page_principale;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE;04_page_mensuel;04_Page_mensuel;case-only;
+B;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE;COULEURS_PRISES_PAR_PIECE.bak_2026_09_20.md;Couleurs_prises_par_piece.bak_2026_09_20.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE;COULEURS_PRISES_PAR_PIECE.md;Couleurs_prises_par_piece.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE\01_vignette;L2C1_VIGNETTE_ENERGIE.bak_2026_09_20.md;L2c1_vignette_energie.bak_2026_09_20.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE\01_vignette;L2C1_VIGNETTE_ENERGIE.md;L2c1_vignette_energie.md;case-only;SIGLE|ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE\02_page_temps_reel;PAGE_ENERGIE_TEMPS_REEL.bak_2026_09_20.md;Page_energie_temps_reel.bak_2026_09_20.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE\02_page_temps_reel;PAGE_ENERGIE_TEMPS_REEL.bak_2026_10_15_21h38m34s.md;Page_energie_temps_reel.bak_2026_10_15_21h38m34s.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE\02_page_temps_reel;PAGE_ENERGIE_TEMPS_REEL.md;Page_energie_temps_reel.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE\03_page_principale;PAGE_ENERGIE.bak_2026_09_20.md;Page_energie.bak_2026_09_20.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE\03_page_principale;PAGE_ENERGIE.md;Page_energie.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE\04_page_mensuel;PAGE_ENERGIE_MENSUEL.bak_2026_09_20.md;Page_energie_mensuel.bak_2026_09_20.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L2C1_ENERGIE\04_page_mensuel;PAGE_ENERGIE_MENSUEL.md;Page_energie_mensuel.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L2C2_ENERGIE_CLIM;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L2C2_ENERGIE_CLIM;02_page;02_Page;case-only;
+B;02_docs_dashboard\dashboard_docs_MD\L2C2_ENERGIE_CLIM\01_vignette;L2C2_VIGNETTE_ENERGIE_CLIM.bak_2026_09_20.md;L2c2_vignette_energie_clim.bak_2026_09_20.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L2C2_ENERGIE_CLIM\01_vignette;L2C2_VIGNETTE_ENERGIE_CLIM.md;L2c2_vignette_energie_clim.md;case-only;SIGLE|ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_MD\L2C2_ENERGIE_CLIM\02_page;PAGE_ENERGIE_CLIM.bak_2026_09_20.md;Page_energie_clim.bak_2026_09_20.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L2C2_ENERGIE_CLIM\02_page;PAGE_ENERGIE_CLIM.bak_2026_10_11.md;Page_energie_clim.bak_2026_10_11.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L2C2_ENERGIE_CLIM\02_page;PAGE_ENERGIE_CLIM.md;Page_energie_clim.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L2C3_ENERGIE_ECLAIRAGE;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L2C3_ENERGIE_ECLAIRAGE;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_MD\L2C3_ENERGIE_ECLAIRAGE;COULEURS_ECLAIRAGE_PAR_PIECE.md;Couleurs_eclairage_par_piece.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L2C3_ENERGIE_ECLAIRAGE\01_vignette;L2C3_VIGNETTE_ECLAIRAGE.md;L2c3_vignette_eclairage.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L2C3_ENERGIE_ECLAIRAGE\02_page;PAGE_ENERGIE_ECLAIRAGE.md;Page_energie_eclairage.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L3C1_ECLAIRAGE;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L3C1_ECLAIRAGE;02_page_gauche;02_Page_gauche;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L3C1_ECLAIRAGE;03_page_droite;03_Page_droite;case-only;
+B;02_docs_dashboard\dashboard_docs_MD\L3C1_ECLAIRAGE\01_vignette;L3C1_VIGNETTE_ECLAIRAGE.bak_2026_10_11.md;L3c1_vignette_eclairage.bak_2026_10_11.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L3C1_ECLAIRAGE\01_vignette;L3C1_VIGNETTE_ECLAIRAGE.md;L3c1_vignette_eclairage.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L3C1_ECLAIRAGE\02_page_gauche;PAGE_ECLAIRAGE_GAUCHE.md;Page_eclairage_gauche.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L3C1_ECLAIRAGE\03_page_droite;PAGE_ECLAIRAGE_DROITE.bak_2026_10_15_21h12m29s.md;Page_eclairage_droite.bak_2026_10_15_21h12m29s.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L3C1_ECLAIRAGE\03_page_droite;PAGE_ECLAIRAGE_DROITE.md;Page_eclairage_droite.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L3C2_PRISES;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L3C2_PRISES;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_MD\L3C2_PRISES\01_vignette;L3C2_VIGNETTE_PRISES.md;L3c2_vignette_prises.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L3C2_PRISES\02_page;PAGE_PRISES.md;Page_prises.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L3C3_STORES;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L3C3_STORES;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_MD\L3C3_STORES\01_vignette;L3C3_VIGNETTE_STORES.md;L3c3_vignette_stores.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L3C3_STORES\02_page;PAGE_STORES.md;Page_stores.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L4C1_MINI_PC;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L4C1_MINI_PC;02_page_mini_pc;02_Page_mini_pc;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L4C1_MINI_PC;03_page_raspi;03_Page_raspi;case-only;
+B;02_docs_dashboard\dashboard_docs_MD\L4C1_MINI_PC\01_vignette;L4C1_VIGNETTE_MINI_PC.bak_2026_10_10.md;L4c1_vignette_mini_pc.bak_2026_10_10.md;case-only;SIGLE|ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_MD\L4C1_MINI_PC\01_vignette;L4C1_VIGNETTE_MINI_PC.bak_2026_10_11.md;L4c1_vignette_mini_pc.bak_2026_10_11.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L4C1_MINI_PC\01_vignette;L4C1_VIGNETTE_MINI_PC.md;L4c1_vignette_mini_pc.md;case-only;SIGLE|ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_MD\L4C1_MINI_PC\02_page_mini_pc;PAGE_MINI_PC.bak_2026_10_10.md;Page_mini_pc.bak_2026_10_10.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L4C1_MINI_PC\02_page_mini_pc;PAGE_MINI_PC.bak_2026_10_11.md;Page_mini_pc.bak_2026_10_11.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L4C1_MINI_PC\02_page_mini_pc;PAGE_MINI_PC.md;Page_mini_pc.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L4C1_MINI_PC\03_page_raspi;PAGE_RASPI.bak_2026_10_10.md;Page_raspi.bak_2026_10_10.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L4C1_MINI_PC\03_page_raspi;PAGE_RASPI.md;Page_raspi.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L4C2_PROXMOX;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L4C2_PROXMOX;02_page;02_Page;case-only;
+B;02_docs_dashboard\dashboard_docs_MD\L4C2_PROXMOX\01_vignette;L4C2_VIGNETTE_PROXMOX.bak_2026_10_10.md;L4c2_vignette_proxmox.bak_2026_10_10.md;case-only;SIGLE|ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_MD\L4C2_PROXMOX\01_vignette;L4C2_VIGNETTE_PROXMOX.bak_2026_10_11.md;L4c2_vignette_proxmox.bak_2026_10_11.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L4C2_PROXMOX\01_vignette;L4C2_VIGNETTE_PROXMOX.md;L4c2_vignette_proxmox.md;case-only;SIGLE|ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_MD\L4C2_PROXMOX\02_page;PAGE_PROXMOX.bak_2026_10_10.md;Page_proxmox.bak_2026_10_10.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L4C2_PROXMOX\02_page;PAGE_PROXMOX.bak_2026_10_11.md;Page_proxmox.bak_2026_10_11.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L4C2_PROXMOX\02_page;PAGE_PROXMOX.md;Page_proxmox.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L4C3_MAJ_HA;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L4C3_MAJ_HA;02_page_gauche;02_Page_gauche;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L4C3_MAJ_HA;03_page_droite;03_Page_droite;case-only;
+B;02_docs_dashboard\dashboard_docs_MD\L4C3_MAJ_HA\01_vignette;L4C3_VIGNETTE_MAJ.bak_2026_10_11.md;L4c3_vignette_maj.bak_2026_10_11.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L4C3_MAJ_HA\01_vignette;L4C3_VIGNETTE_MAJ.md;L4c3_vignette_maj.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L4C3_MAJ_HA\02_page_gauche;PAGE_MAJ_GAUCHE.md;Page_maj_gauche.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L4C3_MAJ_HA\03_page_droite;PAGE_MAJ_DROITE.md;Page_maj_droite.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L5C1_PILES_BATTERIES;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L5C1_PILES_BATTERIES;02_page;02_Page;case-only;
+B;02_docs_dashboard\dashboard_docs_MD\L5C1_PILES_BATTERIES\01_vignette;L5C1_VIGNETTE_BATTERIES.bak_2026_09_24.md;L5c1_vignette_batteries.bak_2026_09_24.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L5C1_PILES_BATTERIES\01_vignette;L5C1_VIGNETTE_BATTERIES.md;L5c1_vignette_batteries.md;case-only;SIGLE|ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_MD\L5C1_PILES_BATTERIES\02_page;PAGE_BATTERIES.bak_2026_09_24.md;Page_batteries.bak_2026_09_24.md;case-only;SIGLE
+B;02_docs_dashboard\dashboard_docs_MD\L5C1_PILES_BATTERIES\02_page;PAGE_BATTERIES.bak_2026_10_14.md;Page_batteries.bak_2026_10_14.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L5C1_PILES_BATTERIES\02_page;PAGE_BATTERIES.md;Page_batteries.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L5C2_BATTERIES_PORTABLES;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L5C2_BATTERIES_PORTABLES;02_page_gauche;02_Page_gauche;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L5C2_BATTERIES_PORTABLES;03_page_droite;03_Page_droite;case-only;
+B;02_docs_dashboard\dashboard_docs_MD\L5C2_BATTERIES_PORTABLES\01_vignette;L5C2_VIGNETTE_BATTERIES_PORTABLES.bak_2026_10_11.md;L5c2_vignette_batteries_portables.bak_2026_10_11.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L5C2_BATTERIES_PORTABLES\01_vignette;L5C2_VIGNETTE_BATTERIES_PORTABLES.md;L5c2_vignette_batteries_portables.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L5C2_BATTERIES_PORTABLES\02_page_gauche;PAGE_BATTERIES_PORTABLES_GAUCHE.md;Page_batteries_portables_gauche.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L5C2_BATTERIES_PORTABLES\03_page_droite;PAGE_BATTERIES_PORTABLES_DROITE.md;Page_batteries_portables_droite.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L5C3_MARIADB;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L5C3_MARIADB;02_page_principale;02_Page_principale;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L5C3_MARIADB;03_page_reserve;03_Page_reserve;case-only;
+F;02_docs_dashboard\dashboard_docs_MD\L5C3_MARIADB\01_vignette;L5C3_VIGNETTE_MARIADB.md;L5c3_vignette_mariadb.md;case-only;SIGLE|ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_MD\L5C3_MARIADB\02_page_principale;PAGE_SYSTEME.bak_2026_10_11.md;Page_systeme.bak_2026_10_11.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L5C3_MARIADB\02_page_principale;PAGE_SYSTEME.md;Page_systeme.md;case-only;SIGLE
+F;02_docs_dashboard\dashboard_docs_MD\L5C3_MARIADB\03_page_reserve;PAGE_L5C3_SYSTEME_RESERVE.md;Page_l5c3_systeme_reserve.md;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_MD\L6C1_AIR_QUALITE;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L6C1_AIR_QUALITE;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_MD\L6C1_AIR_QUALITE\01_vignette;L6C1_VIGNETTE_AIR_QUALITE.md;L6c1_vignette_air_qualite.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L6C1_AIR_QUALITE\02_page;PAGE_AIR_QUALITE.md;Page_air_qualite.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L6C2_POLLUTION_POLLEN;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L6C2_POLLUTION_POLLEN;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_MD\L6C2_POLLUTION_POLLEN\01_vignette;L6C2_VIGNETTE_POLLUTION_POLLEN.md;L6c2_vignette_pollution_pollen.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L6C2_POLLUTION_POLLEN\02_page;PAGE_POLLUTION_POLLEN.md;Page_pollution_pollen.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_MD\L6C3_VIGIEAU;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_MD\L6C3_VIGIEAU;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_MD\L6C3_VIGIEAU\01_vignette;L6C3_VIGNETTE_VIGIEAU.md;L6c3_vignette_vigieau.md;case-only;SIGLE|ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_MD\L6C3_VIGIEAU\02_page;PAGE_VIGIEAU.md;Page_vigieau.md;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_YAML;L0C0_PAGE_Home;L0c0_page_home;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L1C1_01_Meteo;L1c1_01_meteo;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L1C2_02_Temperatures;L1c2_02_temperatures;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L1C3_03_Commandes_Clim;L1c3_03_commandes_clim;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L2C1_04_Energie_Generale;L2c1_04_energie_generale;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L2C2_05_Energie_Clim;L2c2_05_energie_clim;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L2C3_06_Energie_Eclairage;L2c3_06_energie_eclairage;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L3C1_07_Commandes_Eclairage;L3c1_07_commandes_eclairage;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L3C2_08_Commandes_Prises;L3c2_08_commandes_prises;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L3C3_09_Stores_Fenetres;L3c3_09_stores_fenetres;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L4C1_10_Mini_PC;L4c1_10_mini_pc;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L4C2_11_Proxmox;L4c2_11_proxmox;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L4C3_12_MAJ_HA;L4c3_12_maj_ha;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L5C1_13_Batteries_Piles;L5c1_13_batteries_piles;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L5C2_14_Batteries_Portables;L5c2_14_batteries_portables;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L5C3_15_MariaDB;L5c3_15_mariadb;case-only;SIGLE|ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L6C1_16_Air_Qualite;L6c1_16_air_qualite;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L6C2_17_Pollution_Pollen;L6c2_17_pollution_pollen;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;L6C3_18_VigiEau;L6c3_18_vigieau;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML;PAGE_RASPI;Page_raspi;case-only;SIGLE
+D;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home;02_page;02_Page;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home;03_Carte Météo;03_Carte météo;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home;04_Studio Code Server;04_Studio code server;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home;05_Impacte de Foudre;05_Impacte de foudre;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home;06_Lave Linge;06_Lave linge;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home;07_Lave Vaisselle;07_Lave vaisselle;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home;10_Carte Meteoalarm;10_Carte meteoalarm;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home;11_Carte Présence;11_Carte présence;case-only;
+B;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\02_page;Page_Home.bak_2026_10_11.yaml;Page_home.bak_2026_10_11.yaml;case-only;
+B;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\02_page;Page_Home.bak_2026_10_15_21h12m29s.yaml;Page_home.bak_2026_10_15_21h12m29s.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\02_page;Page_Home.yaml;Page_home.yaml;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo;www_meteocons;Www_meteocons;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo;card_meteocss_home.yaml;Card_meteocss_home.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo;meteocss-card.js;Meteocss-card.js;case-only;PONCTUATION
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;clear-night.svg;Clear-night.svg;case-only;PONCTUATION
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;cloudy.svg;Cloudy.svg;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;exceptional.svg;Exceptional.svg;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;fog.svg;Fog.svg;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;hail.svg;Hail.svg;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;lightning-rainy.svg;Lightning-rainy.svg;case-only;PONCTUATION
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;lightning.svg;Lightning.svg;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;partlycloudy-night.svg;Partlycloudy-night.svg;case-only;PONCTUATION
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;partlycloudy.svg;Partlycloudy.svg;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;pouring.svg;Pouring.svg;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;rainy.svg;Rainy.svg;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;snowy-rainy.svg;Snowy-rainy.svg;case-only;PONCTUATION
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;snowy.svg;Snowy.svg;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;sunny.svg;Sunny.svg;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;windy-variant.svg;Windy-variant.svg;case-only;PONCTUATION
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\03_Carte Météo\www_meteocons;windy.svg;Windy.svg;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\04_Studio Code Server;card_vscode_home.yaml;Card_vscode_home.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\05_Impacte de Foudre;card_foudre_home.yaml;Card_foudre_home.yaml;case-only;
+B;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\06_Lave Linge;card_lave_linge_home.bak_2026_06_13.yaml;Card_lave_linge_home.bak_2026_06_13.yaml;case-only;
+B;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\06_Lave Linge;card_lave_linge_home.bak_2026_09_19.yaml;Card_lave_linge_home.bak_2026_09_19.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\06_Lave Linge;card_lave_linge_home.yaml;Card_lave_linge_home.yaml;case-only;
+B;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\07_Lave Vaisselle;card_lave_vaisselle_home.bak_2026_06_13.yaml;Card_lave_vaisselle_home.bak_2026_06_13.yaml;case-only;
+B;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\07_Lave Vaisselle;card_lave_vaisselle_home.bak_2026_09_19.yaml;Card_lave_vaisselle_home.bak_2026_09_19.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\07_Lave Vaisselle;card_lave_vaisselle_home.yaml;Card_lave_vaisselle_home.yaml;case-only;
+B;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\08_Congélateur;card_congelateur_home.bak_2026_09_20.yaml;Card_congelateur_home.bak_2026_09_20.yaml;case-only;
+B;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\08_Congélateur;card_congelateur_home.bak_2026_09_24.yaml;Card_congelateur_home.bak_2026_09_24.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\08_Congélateur;card_congelateur_home.yaml;Card_congelateur_home.yaml;case-only;
+B;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\08_Congélateur;card_congelateur_home_2026-09-20.bak_2026_09_20.yaml;Card_congelateur_home_2026-09-20.bak_2026_09_20.yaml;case-only;PONCTUATION
+B;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\09_Détecteur de fuite;card_detecteur_fuite_home.bak_2026_10_11.yaml;Card_detecteur_fuite_home.bak_2026_10_11.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\09_Détecteur de fuite;card_detecteur_fuite_home.yaml;Card_detecteur_fuite_home.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\10_Carte Meteoalarm;card_meteoalarm_home.yaml;Card_meteoalarm_home.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L0C0_PAGE_Home\11_Carte Présence;card_presence_home.yaml;Card_presence_home.yaml;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L1C1_01_Meteo;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L1C1_01_Meteo;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L1C1_01_Meteo;card_duree_du_jour.yaml;Card_duree_du_jour.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L1C1_01_Meteo\01_vignette;vignette_L1C1_meteo.yaml;Vignette_l1c1_meteo.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L1C1_01_Meteo\02_page;page_L1C1_meteo.bak_2026_05_23.yaml;Page_l1c1_meteo.bak_2026_05_23.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L1C1_01_Meteo\02_page;page_L1C1_meteo.bak_2026_06_13.yaml;Page_l1c1_meteo.bak_2026_06_13.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L1C1_01_Meteo\02_page;page_L1C1_meteo.yaml;Page_l1c1_meteo.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L1C2_02_Temperatures;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L1C2_02_Temperatures;02_page;02_Page;case-only;
+B;02_docs_dashboard\dashboard_docs_YAML\L1C2_02_Temperatures\01_vignette;vignette_L1C2_temperatures.bak_2026_05_12.yaml;Vignette_l1c2_temperatures.bak_2026_05_12.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L1C2_02_Temperatures\01_vignette;vignette_L1C2_temperatures.yaml;Vignette_l1c2_temperatures.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L1C2_02_Temperatures\02_page;page_L1C2_temperatures.bak_2026_07_14.yaml;Page_l1c2_temperatures.bak_2026_07_14.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L1C2_02_Temperatures\02_page;page_L1C2_temperatures.bak_2026_09_02.yaml;Page_l1c2_temperatures.bak_2026_09_02.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L1C2_02_Temperatures\02_page;page_L1C2_temperatures.bak_2026_09_20.yaml;Page_l1c2_temperatures.bak_2026_09_20.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L1C2_02_Temperatures\02_page;page_L1C2_temperatures.yaml;Page_l1c2_temperatures.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim;card_calcule_temp_cible.yaml;Card_calcule_temp_cible.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim;card_prog_clim_bureau.yaml;Card_prog_clim_bureau.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim;card_prog_clim_chambre.yaml;Card_prog_clim_chambre.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim;card_prog_clim_salon.yaml;Card_prog_clim_salon.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim;card_prog_radiateur_cuisine.yaml;Card_prog_radiateur_cuisine.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim;card_prog_soufflant_sdb.yaml;Card_prog_soufflant_sdb.yaml;case-only;
+B;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim\01_vignette;vignette_L1C3_clim.bak_2026_05_13.yaml;Vignette_l1c3_clim.bak_2026_05_13.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim\01_vignette;vignette_L1C3_clim.bak_2026_07_08.yaml;Vignette_l1c3_clim.bak_2026_07_08.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim\01_vignette;vignette_L1C3_clim.yaml;Vignette_l1c3_clim.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim\02_page;page_L1C3_clim.bak_2026_05_22.yaml;Page_l1c3_clim.bak_2026_05_22.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim\02_page;page_L1C3_clim.bak_2026_07_08.yaml;Page_l1c3_clim.bak_2026_07_08.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim\02_page;page_L1C3_clim.yaml;Page_l1c3_clim.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L1C3_03_Commandes_Clim\02_page;page_L1C3_clim.yaml.bak_2026_10_14;Page_l1c3_clim.yaml.bak_2026_10_14;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L2C1_04_Energie_Generale;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L2C1_04_Energie_Generale;02_page_temps_reel;02_Page_temps_reel;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L2C1_04_Energie_Generale;03_page_principale;03_Page_principale;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L2C1_04_Energie_Generale;04_page_mensuel;04_Page_mensuel;case-only;
+B;02_docs_dashboard\dashboard_docs_YAML\L2C1_04_Energie_Generale\01_vignette;vignette_L2C1_energie.bak_2026_05_12.yaml;Vignette_l2c1_energie.bak_2026_05_12.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L2C1_04_Energie_Generale\01_vignette;vignette_L2C1_energie.yaml;Vignette_l2c1_energie.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L2C1_04_Energie_Generale\02_page_temps_reel;page_L2C1_energie_temps_reel.bak_2026_05_12.yaml;Page_l2c1_energie_temps_reel.bak_2026_05_12.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L2C1_04_Energie_Generale\02_page_temps_reel;page_L2C1_energie_temps_reel.bak_2026_10_15_21h38m34s.yaml;Page_l2c1_energie_temps_reel.bak_2026_10_15_21h38m34s.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L2C1_04_Energie_Generale\02_page_temps_reel;page_L2C1_energie_temps_reel.yaml;Page_l2c1_energie_temps_reel.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L2C1_04_Energie_Generale\03_page_principale;page_L2C1_energie_principale.bak_2026_05_12.yaml;Page_l2c1_energie_principale.bak_2026_05_12.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L2C1_04_Energie_Generale\03_page_principale;page_L2C1_energie_principale.bak_2026_06_18.yaml;Page_l2c1_energie_principale.bak_2026_06_18.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L2C1_04_Energie_Generale\03_page_principale;page_L2C1_energie_principale.yaml;Page_l2c1_energie_principale.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L2C1_04_Energie_Generale\04_page_mensuel;page_L2C1_energie_mensuel.bak_2026_05_12.yaml;Page_l2c1_energie_mensuel.bak_2026_05_12.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L2C1_04_Energie_Generale\04_page_mensuel;page_L2C1_energie_mensuel.yaml;Page_l2c1_energie_mensuel.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L2C2_05_Energie_Clim;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L2C2_05_Energie_Clim;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L2C2_05_Energie_Clim\01_vignette;vignette_L2C2_energie_clim.yaml;Vignette_l2c2_energie_clim.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L2C2_05_Energie_Clim\02_page;page_L2C2_energie_clim.bak_2026_05_22.yaml;Page_l2c2_energie_clim.bak_2026_05_22.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L2C2_05_Energie_Clim\02_page;page_L2C2_energie_clim.bak_2026_06_18.yaml;Page_l2c2_energie_clim.bak_2026_06_18.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L2C2_05_Energie_Clim\02_page;page_L2C2_energie_clim.bak_2026_07_14.yaml;Page_l2c2_energie_clim.bak_2026_07_14.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L2C2_05_Energie_Clim\02_page;page_L2C2_energie_clim.yaml;Page_l2c2_energie_clim.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L2C3_06_Energie_Eclairage;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L2C3_06_Energie_Eclairage;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L2C3_06_Energie_Eclairage\01_vignette;vignette_L2C3_energie_eclairage.yaml;Vignette_l2c3_energie_eclairage.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L2C3_06_Energie_Eclairage\02_page;page_L2C3_energie_eclairage.yaml;Page_l2c3_energie_eclairage.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L3C1_07_Commandes_Eclairage;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L3C1_07_Commandes_Eclairage;02_page_gauche;02_Page_gauche;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L3C1_07_Commandes_Eclairage;03_page_droite;03_Page_droite;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L3C1_07_Commandes_Eclairage\01_vignette;vignette_L3C1_eclairage.yaml;Vignette_l3c1_eclairage.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L3C1_07_Commandes_Eclairage\02_page_gauche;page_L3C1_eclairage_gauche.yaml;Page_l3c1_eclairage_gauche.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L3C1_07_Commandes_Eclairage\03_page_droite;page_L3C1_eclairage_droite.bak_2026_05_13.yaml;Page_l3c1_eclairage_droite.bak_2026_05_13.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L3C1_07_Commandes_Eclairage\03_page_droite;page_L3C1_eclairage_droite.yaml;Page_l3c1_eclairage_droite.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L3C2_08_Commandes_Prises;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L3C2_08_Commandes_Prises;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L3C2_08_Commandes_Prises\01_vignette;vignette_L3C2_prises.yaml;Vignette_l3c2_prises.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L3C2_08_Commandes_Prises\02_page;page_L3C2_prises.yaml;Page_l3c2_prises.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L3C3_09_Stores_Fenetres;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L3C3_09_Stores_Fenetres;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L3C3_09_Stores_Fenetres\01_vignette;vignette_L3C3_stores.yaml;Vignette_l3c3_stores.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L3C3_09_Stores_Fenetres\02_page;page_L3C3_stores.bak_2026_05_14.yaml;Page_l3c3_stores.bak_2026_05_14.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L3C3_09_Stores_Fenetres\02_page;page_L3C3_stores.yaml;Page_l3c3_stores.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L4C1_10_Mini_PC;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L4C1_10_Mini_PC;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L4C1_10_Mini_PC;card_popup_memory.yaml;Card_popup_memory.yaml;case-only;
+B;02_docs_dashboard\dashboard_docs_YAML\L4C1_10_Mini_PC\01_vignette;vignette_L4C1_mini_pc.bak_2026_06_04.yaml;Vignette_l4c1_mini_pc.bak_2026_06_04.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L4C1_10_Mini_PC\01_vignette;vignette_L4C1_mini_pc.bak_2026_06_09.yaml;Vignette_l4c1_mini_pc.bak_2026_06_09.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L4C1_10_Mini_PC\01_vignette;vignette_L4C1_mini_pc.yaml;Vignette_l4c1_mini_pc.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L4C1_10_Mini_PC\02_page;page_L4C1_mini_pc.bak_2026_06_09.yaml;Page_l4c1_mini_pc.bak_2026_06_09.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L4C1_10_Mini_PC\02_page;page_L4C1_mini_pc.bak_2026_06_10.yaml;Page_l4c1_mini_pc.bak_2026_06_10.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L4C1_10_Mini_PC\02_page;page_L4C1_mini_pc.bak_2026_06_18.yaml;Page_l4c1_mini_pc.bak_2026_06_18.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L4C1_10_Mini_PC\02_page;page_L4C1_mini_pc.yaml;Page_l4c1_mini_pc.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L4C2_11_Proxmox;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L4C2_11_Proxmox;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L4C2_11_Proxmox;card_services_ha_z2m_mariadb.yaml;Card_services_ha_z2m_mariadb.yaml;case-only;
+B;02_docs_dashboard\dashboard_docs_YAML\L4C2_11_Proxmox\01_vignette;vignette_L4C2_proxmox.bak_2026_05_19.yaml;Vignette_l4c2_proxmox.bak_2026_05_19.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L4C2_11_Proxmox\01_vignette;vignette_L4C2_proxmox.bak_2026_06_09.yaml;Vignette_l4c2_proxmox.bak_2026_06_09.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L4C2_11_Proxmox\01_vignette;vignette_L4C2_proxmox.bak_2026_06_18.yaml;Vignette_l4c2_proxmox.bak_2026_06_18.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L4C2_11_Proxmox\01_vignette;vignette_L4C2_proxmox.yaml;Vignette_l4c2_proxmox.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L4C2_11_Proxmox\02_page;page_L4C2_proxmox.bak_2026_06_18.yaml;Page_l4c2_proxmox.bak_2026_06_18.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L4C2_11_Proxmox\02_page;page_L4C2_proxmox.bak_2026_08_08.yaml;Page_l4c2_proxmox.bak_2026_08_08.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L4C2_11_Proxmox\02_page;page_L4C2_proxmox.bak_2026_10_09.yaml;Page_l4c2_proxmox.bak_2026_10_09.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L4C2_11_Proxmox\02_page;page_L4C2_proxmox.yaml;Page_l4c2_proxmox.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L4C3_12_MAJ_HA;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L4C3_12_MAJ_HA;02_page_gauche;02_Page_gauche;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L4C3_12_MAJ_HA;03_page_droite;03_Page_droite;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L4C3_12_MAJ_HA\01_vignette;vignette_L4C3_maj_ha.yaml;Vignette_l4c3_maj_ha.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L4C3_12_MAJ_HA\02_page_gauche;page_L4C3_maj_ha_gauche.bak_2026_10_11.yaml;Page_l4c3_maj_ha_gauche.bak_2026_10_11.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L4C3_12_MAJ_HA\02_page_gauche;page_L4C3_maj_ha_gauche.yaml;Page_l4c3_maj_ha_gauche.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L4C3_12_MAJ_HA\03_page_droite;page_L4C3_maj_ha_droite.bak_2026_10_11.yaml;Page_l4c3_maj_ha_droite.bak_2026_10_11.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L4C3_12_MAJ_HA\03_page_droite;page_L4C3_maj_ha_droite.yaml;Page_l4c3_maj_ha_droite.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L5C1_13_Batteries_Piles;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L5C1_13_Batteries_Piles;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L5C1_13_Batteries_Piles\01_vignette;vignette_L5C1_batteries_piles.yaml;Vignette_l5c1_batteries_piles.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L5C1_13_Batteries_Piles\02_page;page_L5C1_batteries_piles.bak_2026_05_14.yaml;Page_l5c1_batteries_piles.bak_2026_05_14.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L5C1_13_Batteries_Piles\02_page;page_L5C1_batteries_piles.yaml;Page_l5c1_batteries_piles.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L5C2_14_Batteries_Portables;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L5C2_14_Batteries_Portables;02_page_gauche;02_Page_gauche;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L5C2_14_Batteries_Portables;03_page_droite;03_Page_droite;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L5C2_14_Batteries_Portables\01_vignette;vignette_L5C2_batteries_portables.yaml;Vignette_l5c2_batteries_portables.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L5C2_14_Batteries_Portables\02_page_gauche;page_L5C2_batteries_portables_gauche.yaml;Page_l5c2_batteries_portables_gauche.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L5C2_14_Batteries_Portables\03_page_droite;page_L5C2_batteries_portables_droite.yaml;Page_l5c2_batteries_portables_droite.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L5C3_15_MariaDB;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L5C3_15_MariaDB;02_page_mariadb;02_Page_mariadb;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L5C3_15_MariaDB;03_page_systeme_reserve;03_Page_systeme_reserve;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L5C3_15_MariaDB;card_audit_buttons.yaml;Card_audit_buttons.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L5C3_15_MariaDB;card_audit_journal.yaml;Card_audit_journal.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L5C3_15_MariaDB;card_audit_md5.yaml;Card_audit_md5.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L5C3_15_MariaDB;card_audit_recap.yaml;Card_audit_recap.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L5C3_15_MariaDB;card_mariadb.yaml;Card_mariadb.yaml;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L5C3_15_MariaDB\01_vignette;vignette_L5C3_mariadb.yaml;Vignette_l5c3_mariadb.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L5C3_15_MariaDB\02_page_mariadb;page_L5C3_mariadb.bak_2026_06_15.yaml;Page_l5c3_mariadb.bak_2026_06_15.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L5C3_15_MariaDB\02_page_mariadb;page_L5C3_mariadb.bak_2026_08_08.yaml;Page_l5c3_mariadb.bak_2026_08_08.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L5C3_15_MariaDB\02_page_mariadb;page_L5C3_mariadb.yaml;Page_l5c3_mariadb.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L5C3_15_MariaDB\03_page_systeme_reserve;page_L5C3_systeme_reserve.yaml;Page_l5c3_systeme_reserve.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L5C3_15_MariaDB\Script sh;audit_md5.sh;Audit_md5.sh;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L6C1_16_Air_Qualite;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L6C1_16_Air_Qualite;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L6C1_16_Air_Qualite\01_vignette;vignette_L6C1_air_qualite.yaml;Vignette_l6c1_air_qualite.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L6C1_16_Air_Qualite\02_page;page_L6C1_air_qualite.bak_2026_05_14.yaml;Page_l6c1_air_qualite.bak_2026_05_14.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L6C1_16_Air_Qualite\02_page;page_L6C1_air_qualite.yaml;Page_l6c1_air_qualite.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L6C2_17_Pollution_Pollen;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L6C2_17_Pollution_Pollen;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L6C2_17_Pollution_Pollen\01_vignette;vignette_L6C2_pollution_pollen.yaml;Vignette_l6c2_pollution_pollen.yaml;case-only;ID_VIGNETTE
+B;02_docs_dashboard\dashboard_docs_YAML\L6C2_17_Pollution_Pollen\02_page;page_L6C2_pollution_pollen.bak_2026_05_14.yaml;Page_l6c2_pollution_pollen.bak_2026_05_14.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L6C2_17_Pollution_Pollen\02_page;page_L6C2_pollution_pollen.yaml;Page_l6c2_pollution_pollen.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\L6C3_18_VigiEau;01_vignette;01_Vignette;case-only;
+D;02_docs_dashboard\dashboard_docs_YAML\L6C3_18_VigiEau;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\L6C3_18_VigiEau\01_vignette;vignette_L6C3_vigieau.yaml;Vignette_l6c3_vigieau.yaml;case-only;ID_VIGNETTE
+F;02_docs_dashboard\dashboard_docs_YAML\L6C3_18_VigiEau\02_page;page_L6C3_vigieau.yaml;Page_l6c3_vigieau.yaml;case-only;ID_VIGNETTE
+D;02_docs_dashboard\dashboard_docs_YAML\PAGE_RASPI;02_page;02_Page;case-only;
+F;02_docs_dashboard\dashboard_docs_YAML\PAGE_RASPI\02_page;page_raspi.yaml;Page_raspi.yaml;case-only;
+D;03_docs_automations;docs_automations_MD;Docs_automations_md;case-only;SIGLE
+D;03_docs_automations;docs_automations_YAML;Docs_automations_yaml;case-only;SIGLE
+B;03_docs_automations;GLOBAL_INDEX_AUTOMATIONS.bak_2026_10_13.md;Global_index_automations.bak_2026_10_13.md;case-only;SIGLE
+F;03_docs_automations;GLOBAL_INDEX_AUTOMATIONS.md;Global_index_automations.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD;AUTOMATIONS.YALM ORIGINAL;Automations.yalm original;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD;Backup HA - GitHub;Backup ha - github;case-only;SIGLE|PONCTUATION
+D;03_docs_automations\docs_automations_MD;Bouton Virtuel;Bouton virtuel;case-only;
+D;03_docs_automations\docs_automations_MD;Contrôle Entity z2m;Contrôle entity z2m;case-only;
+D;03_docs_automations\docs_automations_MD;Gestion des Stores;Gestion des stores;case-only;
+D;03_docs_automations\docs_automations_MD;MariaDB & VSCode Optimisation;Mariadb & vscode optimisation;case-only;SIGLE|PONCTUATION
+D;03_docs_automations\docs_automations_MD;P0_ENRIGE;P0_Enrige;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD;P1_01_CLIM_CHAUFFAGE;P1_01_Clim_chauffage;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD;P1_03_Chauffage Salle de Bain;P1_03_Chauffage salle de bain;case-only;
+D;03_docs_automations\docs_automations_MD;P2_Alarme_Congélateur;P2_Alarme_congélateur;case-only;
+D;03_docs_automations\docs_automations_MD;P2_PRISES;P2_Prises;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD;P2_éCO. Prises;P2_Éco. prises;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD;RASPI;Raspi;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD;Tarif HC-HP;Tarif hc-hp;case-only;SIGLE|PONCTUATION
+D;03_docs_automations\docs_automations_MD;Watchdog Piles (HUE-IKEA-SONOFF);Watchdog piles (hue-ikea-sonoff);case-only;SIGLE|PONCTUATION
+D;03_docs_automations\docs_automations_MD;_SANS_CATEGORIE;_Sans_categorie;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\AUTOMATIONS.YALM ORIGINAL;AUTOMATIONS.bak_2026_10_06.md;Automations.bak_2026_10_06.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\AUTOMATIONS.YALM ORIGINAL;AUTOMATIONS.bak_2026_10_07.md;Automations.bak_2026_10_07.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\AUTOMATIONS.YALM ORIGINAL;AUTOMATIONS.bak_2026_10_11.md;Automations.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\AUTOMATIONS.YALM ORIGINAL;AUTOMATIONS.md;Automations.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Backup HA - GitHub;GIT_ALERTE_KO;Git_alerte_ko;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Backup HA - GitHub;GIT_AU_DEMARRAGE;Git_au_demarrage;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Backup HA - GitHub;GIT_DAILY;Git_daily;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Backup HA - GitHub;GIT_HOURLY;Git_hourly;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Backup HA - GitHub;GIT_PUSH_MANUEL;Git_push_manuel;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Backup HA - GitHub;GIT_PUSH_WEEKLY_MANUEL;Git_push_weekly_manuel;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Backup HA - GitHub;GIT_WEEKLY;Git_weekly;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Backup HA - GitHub\GIT_ALERTE_KO;GIT_ALERTE_KO.bak_2026_10_11.md;Git_alerte_ko.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Backup HA - GitHub\GIT_ALERTE_KO;GIT_ALERTE_KO.md;Git_alerte_ko.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Backup HA - GitHub\GIT_AU_DEMARRAGE;GIT_AU_DEMARRAGE.bak_2026_10_11.md;Git_au_demarrage.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Backup HA - GitHub\GIT_AU_DEMARRAGE;GIT_AU_DEMARRAGE.md;Git_au_demarrage.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Backup HA - GitHub\GIT_DAILY;GIT_DAILY.md;Git_daily.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Backup HA - GitHub\GIT_HOURLY;GIT_HOURLY.bak_2026_10_11.md;Git_hourly.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Backup HA - GitHub\GIT_HOURLY;GIT_HOURLY.md;Git_hourly.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Backup HA - GitHub\GIT_PUSH_MANUEL;GIT_PUSH_MANUEL.md;Git_push_manuel.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Backup HA - GitHub\GIT_PUSH_WEEKLY_MANUEL;GIT_PUSH_WEEKLY_MANUEL.md;Git_push_weekly_manuel.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Backup HA - GitHub\GIT_WEEKLY;GIT_WEEKLY.bak_2026_10_11.md;Git_weekly.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Backup HA - GitHub\GIT_WEEKLY;GIT_WEEKLY.md;Git_weekly.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Bouton Virtuel;BOUTON_INTER_IKEA_4;Bouton_inter_ikea_4;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Bouton Virtuel;BOUTON_INTER_SOMRIG;Bouton_inter_somrig;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Bouton Virtuel\BOUTON_INTER_IKEA_4;BOUTON_INTER_IKEA_4.bak_2026_10_11.md;Bouton_inter_ikea_4.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Bouton Virtuel\BOUTON_INTER_IKEA_4;BOUTON_INTER_IKEA_4.md;Bouton_inter_ikea_4.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Bouton Virtuel\BOUTON_INTER_SOMRIG;BOUTON_INTER_SOMRIG.bak_2026_10_11.md;Bouton_inter_somrig.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Bouton Virtuel\BOUTON_INTER_SOMRIG;BOUTON_INTER_SOMRIG.md;Bouton_inter_somrig.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Contrôle Entity z2m;Z2M_LAST_SEEN;Z2m_last_seen;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Contrôle Entity z2m\Z2M_LAST_SEEN;Z2M_LAST_SEEN.bak_2026_10_11.md;Z2m_last_seen.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Contrôle Entity z2m\Z2M_LAST_SEEN;Z2M_LAST_SEEN.md;Z2m_last_seen.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Gestion des Stores;GESTION_STORE_BUREAU;Gestion_store_bureau;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Gestion des Stores;GESTION_STORE_SALON;Gestion_store_salon;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Gestion des Stores\GESTION_STORE_BUREAU;GESTION_STORE_BUREAU.bak_2026_10_11.md;Gestion_store_bureau.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Gestion des Stores\GESTION_STORE_BUREAU;GESTION_STORE_BUREAU.md;Gestion_store_bureau.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Gestion des Stores\GESTION_STORE_SALON;GESTION_STORE_SALON.bak_2026_10_11.md;Gestion_store_salon.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Gestion des Stores\GESTION_STORE_SALON;GESTION_STORE_SALON.md;Gestion_store_salon.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\MariaDB & VSCode Optimisation;DB_PURGE_MARIADB;Db_purge_mariadb;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\MariaDB & VSCode Optimisation;ECONOMIE_ENERGIE_VSCODE;Economie_energie_vscode;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\MariaDB & VSCode Optimisation\DB_PURGE_MARIADB;DB_PURGE_MARIADB.bak_2026_10_11.md;Db_purge_mariadb.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\MariaDB & VSCode Optimisation\DB_PURGE_MARIADB;DB_PURGE_MARIADB.md;Db_purge_mariadb.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\MariaDB & VSCode Optimisation\ECONOMIE_ENERGIE_VSCODE;ECONOMIE_ENERGIE_VSCODE.bak_2026_10_11.md;Economie_energie_vscode.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\MariaDB & VSCode Optimisation\ECONOMIE_ENERGIE_VSCODE;ECONOMIE_ENERGIE_VSCODE.md;Economie_energie_vscode.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Météo;ALERTE_METEO_CARTES;Alerte_meteo_cartes;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Météo;MAJ_TEMPS_FOUDRE;Maj_temps_foudre;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Météo;NOTIF_FOUDRE;Notif_foudre;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Météo;UPDATE_PREV_HUMIDITY;Update_prev_humidity;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Météo;UPDATE_PREV_TEMPERATURE;Update_prev_temperature;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Météo\ALERTE_METEO_CARTES;ALERTE_METEO_CARTES.bak_2026_10_11.md;Alerte_meteo_cartes.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Météo\ALERTE_METEO_CARTES;ALERTE_METEO_CARTES.md;Alerte_meteo_cartes.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Météo\MAJ_TEMPS_FOUDRE;MAJ_TEMPS_FOUDRE.bak_2026_10_11.md;Maj_temps_foudre.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Météo\MAJ_TEMPS_FOUDRE;MAJ_TEMPS_FOUDRE.md;Maj_temps_foudre.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Météo\NOTIF_FOUDRE;NOTIF_FOUDRE.bak_2026_10_11.md;Notif_foudre.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Météo\NOTIF_FOUDRE;NOTIF_FOUDRE.md;Notif_foudre.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Météo\UPDATE_PREV_HUMIDITY;UPDATE_PREV_HUMIDITY.bak_2026_10_11.md;Update_prev_humidity.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Météo\UPDATE_PREV_HUMIDITY;UPDATE_PREV_HUMIDITY.md;Update_prev_humidity.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Météo\UPDATE_PREV_TEMPERATURE;UPDATE_PREV_TEMPERATURE.bak_2026_10_11.md;Update_prev_temperature.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Météo\UPDATE_PREV_TEMPERATURE;UPDATE_PREV_TEMPERATURE.md;Update_prev_temperature.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P0_ENRIGE;DIAG_ENREGISTREMENT_JOURNALIER;Diag_enregistrement_journalier;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P0_ENRIGE;HISTO_LINKY_QUOTIDIEN;Histo_linky_quotidien;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P0_ENRIGE;HISTO_NODON_QUOTIDIEN;Histo_nodon_quotidien;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P0_ENRIGE;LOG_ECART_LINKY_NODON;Log_ecart_linky_nodon;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P0_ENRIGE;RATTRAPAGE_LINKY_ECART;Rattrapage_linky_ecart;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P0_ENRIGE;RATTRAPAGE_LINKY_J2;Rattrapage_linky_j2;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P0_ENRIGE\DIAG_ENREGISTREMENT_JOURNALIER;DIAG_ENREGISTREMENT_JOURNALIER.bak_2026_10_11.md;Diag_enregistrement_journalier.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P0_ENRIGE\DIAG_ENREGISTREMENT_JOURNALIER;DIAG_ENREGISTREMENT_JOURNALIER.md;Diag_enregistrement_journalier.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P0_ENRIGE\HISTO_LINKY_QUOTIDIEN;HISTO_LINKY_QUOTIDIEN.md;Histo_linky_quotidien.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P0_ENRIGE\HISTO_NODON_QUOTIDIEN;HISTO_NODON_QUOTIDIEN.md;Histo_nodon_quotidien.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P0_ENRIGE\LOG_ECART_LINKY_NODON;LOG_ECART_LINKY_NODON.md;Log_ecart_linky_nodon.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P0_ENRIGE\RATTRAPAGE_LINKY_ECART;RATTRAPAGE_LINKY_ECART.md;Rattrapage_linky_ecart.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P0_ENRIGE\RATTRAPAGE_LINKY_J2;RATTRAPAGE_LINKY_J2.md;Rattrapage_linky_j2.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE;A0_CLIM_JOUR;A0_clim_jour;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE;B0_CLIM_NUIT;B0_clim_nuit;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE;C_NOTIF_TEMP_JOUR;C_notif_temp_jour;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE;D_NOTIF_TEMP_NUIT;D_notif_temp_nuit;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE;E_NOTIF_FERMETURE_FENETRES;E_notif_fermeture_fenetres;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE;F_ARRET_CLIM_NOTIF;F_arret_clim_notif;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE;G_NOTIF_MODE_CHANGEMENT;G_notif_mode_changement;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE;H_DEBUG_FORCE_MODE;H_debug_force_mode;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE;I_SYNCHRO_NOTIF_PRISE_COUPEE;I_synchro_notif_prise_coupee;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE;J_DEBUG_NOTIF_MESSAGE_CLIM;J_debug_notif_message_clim;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\A0_CLIM_JOUR;A0_CLIM_JOUR.bak_2026_09_20.md;A0_clim_jour.bak_2026_09_20.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\A0_CLIM_JOUR;A0_CLIM_JOUR.bak_2026_10_11.md;A0_clim_jour.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\A0_CLIM_JOUR;A0_CLIM_JOUR.md;A0_clim_jour.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\B0_CLIM_NUIT;B0_CLIM_NUIT.bak_2026_09_20.md;B0_clim_nuit.bak_2026_09_20.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\B0_CLIM_NUIT;B0_CLIM_NUIT.bak_2026_10_11.md;B0_clim_nuit.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\B0_CLIM_NUIT;B0_CLIM_NUIT.md;B0_clim_nuit.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\C_NOTIF_TEMP_JOUR;C_NOTIF_TEMP_JOUR.bak_2026_10_11.md;C_notif_temp_jour.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\C_NOTIF_TEMP_JOUR;C_NOTIF_TEMP_JOUR.md;C_notif_temp_jour.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\D_NOTIF_TEMP_NUIT;D_NOTIF_TEMP_NUIT.bak_2026_10_11.md;D_notif_temp_nuit.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\D_NOTIF_TEMP_NUIT;D_NOTIF_TEMP_NUIT.md;D_notif_temp_nuit.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\E_NOTIF_FERMETURE_FENETRES;E_NOTIF_FERMETURE_FENETRES.bak_2026_10_11.md;E_notif_fermeture_fenetres.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\E_NOTIF_FERMETURE_FENETRES;E_NOTIF_FERMETURE_FENETRES.md;E_notif_fermeture_fenetres.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\F_ARRET_CLIM_NOTIF;F_ARRET_CLIM_NOTIF.bak_2026_10_11.md;F_arret_clim_notif.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\F_ARRET_CLIM_NOTIF;F_ARRET_CLIM_NOTIF.md;F_arret_clim_notif.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\G_NOTIF_MODE_CHANGEMENT;G_NOTIF_MODE_CHANGEMENT.bak_2026_10_11.md;G_notif_mode_changement.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\G_NOTIF_MODE_CHANGEMENT;G_NOTIF_MODE_CHANGEMENT.md;G_notif_mode_changement.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\H_DEBUG_FORCE_MODE;H_DEBUG_FORCE_MODE.bak_2026_10_11.md;H_debug_force_mode.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\H_DEBUG_FORCE_MODE;H_DEBUG_FORCE_MODE.md;H_debug_force_mode.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\I_SYNCHRO_NOTIF_PRISE_COUPEE;I_SYNCHRO_NOTIF_PRISE_COUPEE.bak_2026_10_11.md;I_synchro_notif_prise_coupee.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\I_SYNCHRO_NOTIF_PRISE_COUPEE;I_SYNCHRO_NOTIF_PRISE_COUPEE.md;I_synchro_notif_prise_coupee.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\J_DEBUG_NOTIF_MESSAGE_CLIM;J_DEBUG_NOTIF_MESSAGE_CLIM.bak_2026_10_11.md;J_debug_notif_message_clim.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_01_CLIM_CHAUFFAGE\J_DEBUG_NOTIF_MESSAGE_CLIM;J_DEBUG_NOTIF_MESSAGE_CLIM.md;J_debug_notif_message_clim.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_02_Cuisine;A_CHAUFFAGE_CUISINE;A_chauffage_cuisine;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_02_Cuisine;B_CHAUFFAGE_CUISINE_VACANCES;B_chauffage_cuisine_vacances;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_02_Cuisine;FICHE_OP_RELAIS_CUISINE_MAJ_SHELLY;Fiche_op_relais_cuisine_maj_shelly;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_02_Cuisine\A_CHAUFFAGE_CUISINE;A_CHAUFFAGE_CUISINE.bak_2026_10_11.md;A_chauffage_cuisine.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_02_Cuisine\A_CHAUFFAGE_CUISINE;A_CHAUFFAGE_CUISINE.md;A_chauffage_cuisine.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_02_Cuisine\B_CHAUFFAGE_CUISINE_VACANCES;B_CHAUFFAGE_CUISINE_VACANCES.bak_2026_10_10.md;B_chauffage_cuisine_vacances.bak_2026_10_10.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_02_Cuisine\B_CHAUFFAGE_CUISINE_VACANCES;B_CHAUFFAGE_CUISINE_VACANCES.bak_2026_10_11.md;B_chauffage_cuisine_vacances.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_02_Cuisine\B_CHAUFFAGE_CUISINE_VACANCES;B_CHAUFFAGE_CUISINE_VACANCES.md;B_chauffage_cuisine_vacances.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_02_Cuisine\FICHE_OP_RELAIS_CUISINE_MAJ_SHELLY;FICHE_OP_RELAIS_CUISINE_MAJ_SHELLY.bak_2026_10_11.md;Fiche_op_relais_cuisine_maj_shelly.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_02_Cuisine\FICHE_OP_RELAIS_CUISINE_MAJ_SHELLY;FICHE_OP_RELAIS_CUISINE_MAJ_SHELLY.md;Fiche_op_relais_cuisine_maj_shelly.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain;A_SOUFFLANT_SDB_BOUTON_RODRET;A_soufflant_sdb_bouton_rodret;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain;B_SOUFFLANT_SDB_ROUTAGE;B_soufflant_sdb_routage;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain;C_WATCHDOG_SOUFFLANT_SDB;C_watchdog_soufflant_sdb;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain;D_SDB_SOUFFLANT_DECOMPTE_60MIN;D_sdb_soufflant_decompte_60min;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain;E_SDB_SOUFFLANT_RATTRAPAGE_DEMARRAGE_HA;E_sdb_soufflant_rattrapage_demarrage_ha;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain;F_MINUTERIE_SECHE_SERVIETTES;F_minuterie_seche_serviettes;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain;G_SDB_SECHE_SERVIETTES_DECOMPTE_2H;G_sdb_seche_serviettes_decompte_2h;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain;H_SDB_SECHE_SERVIETTES_RATTRAPAGE_DEMARRAGE_HA;H_sdb_seche_serviettes_rattrapage_demarrage_ha;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain;RODRET_SOUFFLANT_SDB;Rodret_soufflant_sdb;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain;SDB_SOUFFLANT_SPECIFICATION_2026;Sdb_soufflant_specification_2026;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain;TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES;Timers_sdb_soufflant_et_seche_serviettes;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain;Z_SOUFFLANT_SDB_GESTION_INTELLIGENTE;Z_soufflant_sdb_gestion_intelligente;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain;Z_SOUFFLANT_SDB_old_2024-2025;Z_soufflant_sdb_old_2024-2025;case-only;SIGLE|PONCTUATION
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\A_SOUFFLANT_SDB_BOUTON_RODRET;A_SOUFFLANT_SDB_BOUTON_RODRET.bak_2026_10_11.md;A_soufflant_sdb_bouton_rodret.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\A_SOUFFLANT_SDB_BOUTON_RODRET;A_SOUFFLANT_SDB_BOUTON_RODRET.md;A_soufflant_sdb_bouton_rodret.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\B_SOUFFLANT_SDB_ROUTAGE;B_SOUFFLANT_SDB_ROUTAGE.bak_2026_10_11.md;B_soufflant_sdb_routage.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\B_SOUFFLANT_SDB_ROUTAGE;B_SOUFFLANT_SDB_ROUTAGE.md;B_soufflant_sdb_routage.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\C_WATCHDOG_SOUFFLANT_SDB;C_WATCHDOG_SOUFFLANT_SDB.bak_2026_09_29.md;C_watchdog_soufflant_sdb.bak_2026_09_29.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\C_WATCHDOG_SOUFFLANT_SDB;C_WATCHDOG_SOUFFLANT_SDB.bak_2026_10_07.md;C_watchdog_soufflant_sdb.bak_2026_10_07.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\C_WATCHDOG_SOUFFLANT_SDB;C_WATCHDOG_SOUFFLANT_SDB.bak_2026_10_11.md;C_watchdog_soufflant_sdb.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\C_WATCHDOG_SOUFFLANT_SDB;C_WATCHDOG_SOUFFLANT_SDB.md;C_watchdog_soufflant_sdb.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\D_SDB_SOUFFLANT_DECOMPTE_60MIN;D_SDB_SOUFFLANT_DECOMPTE_60MIN.bak_2026_10_11.md;D_sdb_soufflant_decompte_60min.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\D_SDB_SOUFFLANT_DECOMPTE_60MIN;D_SDB_SOUFFLANT_DECOMPTE_60MIN.md;D_sdb_soufflant_decompte_60min.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\E_SDB_SOUFFLANT_RATTRAPAGE_DEMARRAGE_HA;E_SDB_SOUFFLANT_RATTRAPAGE_DEMARRAGE_HA.bak_2026_10_11.md;E_sdb_soufflant_rattrapage_demarrage_ha.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\E_SDB_SOUFFLANT_RATTRAPAGE_DEMARRAGE_HA;E_SDB_SOUFFLANT_RATTRAPAGE_DEMARRAGE_HA.md;E_sdb_soufflant_rattrapage_demarrage_ha.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\F_MINUTERIE_SECHE_SERVIETTES;F_MINUTERIE_SECHE_SERVIETTES.bak_2026_10_07.md;F_minuterie_seche_serviettes.bak_2026_10_07.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\F_MINUTERIE_SECHE_SERVIETTES;F_MINUTERIE_SECHE_SERVIETTES.bak_2026_10_11.md;F_minuterie_seche_serviettes.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\F_MINUTERIE_SECHE_SERVIETTES;F_MINUTERIE_SECHE_SERVIETTES.md;F_minuterie_seche_serviettes.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\G_SDB_SECHE_SERVIETTES_DECOMPTE_2H;G_SDB_SECHE_SERVIETTES_DECOMPTE_2H.bak_2026_10_11.md;G_sdb_seche_serviettes_decompte_2h.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\G_SDB_SECHE_SERVIETTES_DECOMPTE_2H;G_SDB_SECHE_SERVIETTES_DECOMPTE_2H.md;G_sdb_seche_serviettes_decompte_2h.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\H_SDB_SECHE_SERVIETTES_RATTRAPAGE_DEMARRAGE_HA;H_SDB_SECHE_SERVIETTES_RATTRAPAGE_DEMARRAGE_HA.bak_2026_10_11.md;H_sdb_seche_serviettes_rattrapage_demarrage_ha.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\H_SDB_SECHE_SERVIETTES_RATTRAPAGE_DEMARRAGE_HA;H_SDB_SECHE_SERVIETTES_RATTRAPAGE_DEMARRAGE_HA.md;H_sdb_seche_serviettes_rattrapage_demarrage_ha.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\RODRET_SOUFFLANT_SDB;RODRET_SOUFFLANT_SDB.bak_2026_08_08.md;Rodret_soufflant_sdb.bak_2026_08_08.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\SDB_SOUFFLANT_SPECIFICATION_2026;SDB_SOUFFLANT_SPECIFICATION_2026.bak_2026_09_29.md;Sdb_soufflant_specification_2026.bak_2026_09_29.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\SDB_SOUFFLANT_SPECIFICATION_2026;SDB_SOUFFLANT_SPECIFICATION_2026.bak_2026_10_07.md;Sdb_soufflant_specification_2026.bak_2026_10_07.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\SDB_SOUFFLANT_SPECIFICATION_2026;SDB_SOUFFLANT_SPECIFICATION_2026.bak_2026_10_11.md;Sdb_soufflant_specification_2026.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\SDB_SOUFFLANT_SPECIFICATION_2026;SDB_SOUFFLANT_SPECIFICATION_2026.md;Sdb_soufflant_specification_2026.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES;TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.bak_2026_10_11.md;Timers_sdb_soufflant_et_seche_serviettes.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES;TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md;Timers_sdb_soufflant_et_seche_serviettes.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\Z_SOUFFLANT_SDB_GESTION_INTELLIGENTE;Z_SOUFFLANT_SDB_GESTION_INTELLIGENTE.bak_2026_10_11.md;Z_soufflant_sdb_gestion_intelligente.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\Z_SOUFFLANT_SDB_GESTION_INTELLIGENTE;Z_SOUFFLANT_SDB_GESTION_INTELLIGENTE.md;Z_soufflant_sdb_gestion_intelligente.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P1_03_Chauffage Salle de Bain\Z_SOUFFLANT_SDB_old_2024-2025;Z_SOUFFLANT_SDB_old_2024-2025.bak_2026_08_08.md;Z_soufflant_sdb_old_2024-2025.bak_2026_08_08.md;case-only;SIGLE|PONCTUATION
+D;03_docs_automations\docs_automations_MD\P2_Alarme_Congélateur;CONGELATEUR_ALARME_CAPTEUR;Congelateur_alarme_capteur;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P2_Alarme_Congélateur;CONGELATEUR_ALARME_PANNE;Congelateur_alarme_panne;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P2_Alarme_Congélateur;CONGELATEUR_ALARME_PORTE;Congelateur_alarme_porte;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P2_Alarme_Congélateur\CONGELATEUR_ALARME_CAPTEUR;CONGELATEUR_ALARME_CAPTEUR.bak_2026_10_11.md;Congelateur_alarme_capteur.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P2_Alarme_Congélateur\CONGELATEUR_ALARME_CAPTEUR;CONGELATEUR_ALARME_CAPTEUR.md;Congelateur_alarme_capteur.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P2_Alarme_Congélateur\CONGELATEUR_ALARME_PANNE;CONGELATEUR_ALARME_PANNE.bak_2026_10_11.md;Congelateur_alarme_panne.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P2_Alarme_Congélateur\CONGELATEUR_ALARME_PANNE;CONGELATEUR_ALARME_PANNE.md;Congelateur_alarme_panne.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P2_Alarme_Congélateur\CONGELATEUR_ALARME_PORTE;CONGELATEUR_ALARME_PORTE.bak_2026_10_11.md;Congelateur_alarme_porte.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P2_Alarme_Congélateur\CONGELATEUR_ALARME_PORTE;CONGELATEUR_ALARME_PORTE.md;Congelateur_alarme_porte.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P2_éCO. Prises;ECO_PRISES_DYNAMIQUE;Eco_prises_dynamique;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P2_éCO. Prises;GESTION_PC_BUREAU;Gestion_pc_bureau;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P2_éCO. Prises;GESTION_TV_CHAMBRE;Gestion_tv_chambre;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P2_éCO. Prises\ECO_PRISES_DYNAMIQUE;ECO_PRISES_DYNAMIQUE.bak_2026_09_23.md;Eco_prises_dynamique.bak_2026_09_23.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P2_éCO. Prises\ECO_PRISES_DYNAMIQUE;ECO_PRISES_DYNAMIQUE.bak_2026_10_11.md;Eco_prises_dynamique.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P2_éCO. Prises\ECO_PRISES_DYNAMIQUE;ECO_PRISES_DYNAMIQUE.md;Eco_prises_dynamique.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P2_éCO. Prises\GESTION_PC_BUREAU;GESTION_PC_BUREAU.bak_2026_09_23.md;Gestion_pc_bureau.bak_2026_09_23.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P2_éCO. Prises\GESTION_PC_BUREAU;GESTION_PC_BUREAU.bak_2026_10_11.md;Gestion_pc_bureau.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P2_éCO. Prises\GESTION_PC_BUREAU;GESTION_PC_BUREAU.md;Gestion_pc_bureau.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P2_éCO. Prises\GESTION_TV_CHAMBRE;GESTION_TV_CHAMBRE.bak_2026_09_23.md;Gestion_tv_chambre.bak_2026_09_23.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P2_éCO. Prises\GESTION_TV_CHAMBRE;GESTION_TV_CHAMBRE.bak_2026_10_11.md;Gestion_tv_chambre.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P2_éCO. Prises\GESTION_TV_CHAMBRE;GESTION_TV_CHAMBRE.md;Gestion_tv_chambre.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P3_Eclairage;ALLUMAGE_LUMIERE_ENTREE;Allumage_lumiere_entree;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P3_Eclairage;BUREAU_ACTIVATION_ECRAN_SYNCHRO;Bureau_activation_ecran_synchro;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P3_Eclairage;BUREAU_FORCER_PLAY_ON;Bureau_forcer_play_on;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P3_Eclairage;BUREAU_RODRET_TOGGLE_BLANCHES;Bureau_rodret_toggle_blanches;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P3_Eclairage;BUREAU_WATCHDOG_SYNCHRO_LAMPES;Bureau_watchdog_synchro_lampes;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\P3_Eclairage;SDB_SYNC_MIROIR_LAMPE_ET_RELAIS_SDB;Sdb_sync_miroir_lampe_et_relais_sdb;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P3_Eclairage\ALLUMAGE_LUMIERE_ENTREE;ALLUMAGE_LUMIERE_ENTREE.bak_2026_10_11.md;Allumage_lumiere_entree.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P3_Eclairage\ALLUMAGE_LUMIERE_ENTREE;ALLUMAGE_LUMIERE_ENTREE.md;Allumage_lumiere_entree.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P3_Eclairage\BUREAU_ACTIVATION_ECRAN_SYNCHRO;BUREAU_ACTIVATION_ECRAN_SYNCHRO.bak_2026_10_11.md;Bureau_activation_ecran_synchro.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P3_Eclairage\BUREAU_ACTIVATION_ECRAN_SYNCHRO;BUREAU_ACTIVATION_ECRAN_SYNCHRO.md;Bureau_activation_ecran_synchro.md;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\P3_Eclairage\BUREAU_FORCER_PLAY_ON;BUREAU_FORCER_PLAY_ON.bak_2026_10_11.md;Bureau_forcer_play_on.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P3_Eclairage\BUREAU_FORCER_PLAY_ON;BUREAU_FORCER_PLAY_ON.md;Bureau_forcer_play_on.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P3_Eclairage\BUREAU_RODRET_TOGGLE_BLANCHES;BUREAU_RODRET_TOGGLE_BLANCHES.md;Bureau_rodret_toggle_blanches.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P3_Eclairage\BUREAU_WATCHDOG_SYNCHRO_LAMPES;BUREAU_WATCHDOG_SYNCHRO_LAMPES.md;Bureau_watchdog_synchro_lampes.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\P3_Eclairage\SDB_SYNC_MIROIR_LAMPE_ET_RELAIS_SDB;SDB_SYNC_MIROIR_LAMPE_ET_RELAIS_SDB.md;Sdb_sync_miroir_lampe_et_relais_sdb.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\RASPI;RPi4_FAN_PWM;Rpi4_fan_pwm;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\RASPI\RPi4_FAN_PWM;RPi4_FAN_PWM.bak_2026_10_11.md;Rpi4_fan_pwm.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\RASPI\RPi4_FAN_PWM;RPi4_FAN_PWM.md;Rpi4_fan_pwm.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Tarif HC-HP;BASCULEMENT_TARIF_HPHC;Basculement_tarif_hphc;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Tarif HC-HP\BASCULEMENT_TARIF_HPHC;BASCULEMENT_TARIF_HPHC.md;Basculement_tarif_hphc.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\Watchdog Piles (HUE-IKEA-SONOFF);WATCHDOG_PILES;Watchdog_piles;case-only;SIGLE
+B;03_docs_automations\docs_automations_MD\Watchdog Piles (HUE-IKEA-SONOFF)\WATCHDOG_PILES;WATCHDOG_PILES.bak_2026_10_11.md;Watchdog_piles.bak_2026_10_11.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\Watchdog Piles (HUE-IKEA-SONOFF)\WATCHDOG_PILES;WATCHDOG_PILES.md;Watchdog_piles.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\_SANS_CATEGORIE;P4_LOG_ZONES_ERIC;P4_Log_zones_eric;case-only;SIGLE
+D;03_docs_automations\docs_automations_MD\_SANS_CATEGORIE;VEILLE_GITHUB_RELEASES;Veille_github_releases;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\_SANS_CATEGORIE\P4_LOG_ZONES_ERIC;P4_LOG_ZONES_ERIC.md;P4_Log_zones_eric.md;case-only;SIGLE
+F;03_docs_automations\docs_automations_MD\_SANS_CATEGORIE\VEILLE_GITHUB_RELEASES;VEILLE_GITHUB_RELEASES.md;Veille_github_releases.md;case-only;SIGLE
+D;03_docs_automations\docs_automations_YAML;AUTOMATIONS.YALM ORIGINAL;Automations.yalm original;case-only;SIGLE
+D;03_docs_automations\docs_automations_YAML;Backup HA - GitHub;Backup ha - github;case-only;SIGLE|PONCTUATION
+D;03_docs_automations\docs_automations_YAML;Bouton Virtuel;Bouton virtuel;case-only;
+D;03_docs_automations\docs_automations_YAML;Contrôle Entity z2m;Contrôle entity z2m;case-only;
+D;03_docs_automations\docs_automations_YAML;Gestion des Stores;Gestion des stores;case-only;
+D;03_docs_automations\docs_automations_YAML;MariaDB & VSCode Optimisation;Mariadb & vscode optimisation;case-only;SIGLE|PONCTUATION
+D;03_docs_automations\docs_automations_YAML;P0_ENRIGE;P0_Enrige;case-only;SIGLE
+D;03_docs_automations\docs_automations_YAML;P1_01_CLIM_CHAUFFAGE;P1_01_Clim_chauffage;case-only;SIGLE
+D;03_docs_automations\docs_automations_YAML;P1_03_Chauffage Salle de Bain;P1_03_Chauffage salle de bain;case-only;
+D;03_docs_automations\docs_automations_YAML;P2_Alarme_Congélateur;P2_Alarme_congélateur;case-only;
+D;03_docs_automations\docs_automations_YAML;P2_éCO. Prises;P2_Éco. prises;case-only;SIGLE
+D;03_docs_automations\docs_automations_YAML;RASPI;Raspi;case-only;SIGLE
+D;03_docs_automations\docs_automations_YAML;Tarif HC-HP;Tarif hc-hp;case-only;SIGLE|PONCTUATION
+D;03_docs_automations\docs_automations_YAML;Watchdog Piles (HUE-IKEA-SONOFF);Watchdog piles (hue-ikea-sonoff);case-only;SIGLE|PONCTUATION
+D;03_docs_automations\docs_automations_YAML;_SANS_CATEGORIE;_Sans_categorie;case-only;SIGLE
+B;03_docs_automations\docs_automations_YAML\AUTOMATIONS.YALM ORIGINAL;automations.bak_2026_10_11.yaml;Automations.bak_2026_10_11.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\AUTOMATIONS.YALM ORIGINAL;automations.bak_2026_10_12.yaml;Automations.bak_2026_10_12.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\AUTOMATIONS.YALM ORIGINAL;automations.bak_2026_10_13.yaml;Automations.bak_2026_10_13.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\AUTOMATIONS.YALM ORIGINAL;automations.bak_2026_10_16_18h32m39s.yaml;Automations.bak_2026_10_16_18h32m39s.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\AUTOMATIONS.YALM ORIGINAL;automations.yaml;Automations.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\Backup HA - GitHub;00_backup_alerte_si_ko_15_min;00_Backup_alerte_si_ko_15_min;case-only;
+D;03_docs_automations\docs_automations_YAML\Backup HA - GitHub;01_backup_git_hourly_h_10;01_Backup_git_hourly_h_10;case-only;
+D;03_docs_automations\docs_automations_YAML\Backup HA - GitHub;02_backup_git_daily_03_00;02_Backup_git_daily_03_00;case-only;
+D;03_docs_automations\docs_automations_YAML\Backup HA - GitHub;03_backup_git_weekly_dim_01_30;03_Backup_git_weekly_dim_01_30;case-only;
+D;03_docs_automations\docs_automations_YAML\Backup HA - GitHub;04_backup_git_push_manuel;04_Backup_git_push_manuel;case-only;
+D;03_docs_automations\docs_automations_YAML\Backup HA - GitHub;05_backup_git_push_weekly_manuel;05_Backup_git_push_weekly_manuel;case-only;
+D;03_docs_automations\docs_automations_YAML\Backup HA - GitHub;git_push_au_demarrage_ha;Git_push_au_demarrage_ha;case-only;
+B;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\00_backup_alerte_si_ko_15_min;00_backup_alerte_si_ko_15_min.bak_2026_04_05.yaml;00_Backup_alerte_si_ko_15_min.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\00_backup_alerte_si_ko_15_min;00_backup_alerte_si_ko_15_min.yaml;00_Backup_alerte_si_ko_15_min.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\01_backup_git_hourly_h_10;01_backup_git_hourly_h_10.bak_2026_04_05.yaml;01_Backup_git_hourly_h_10.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\01_backup_git_hourly_h_10;01_backup_git_hourly_h_10.yaml;01_Backup_git_hourly_h_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\02_backup_git_daily_03_00;02_backup_git_daily_03_00.yaml;02_Backup_git_daily_03_00.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\03_backup_git_weekly_dim_01_30;03_backup_git_weekly_dim_01_30.bak_2026_04_05.yaml;03_Backup_git_weekly_dim_01_30.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\03_backup_git_weekly_dim_01_30;03_backup_git_weekly_dim_01_30.yaml;03_Backup_git_weekly_dim_01_30.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\04_backup_git_push_manuel;04_backup_git_push_manuel.bak_2026_05_31.yaml;04_Backup_git_push_manuel.bak_2026_05_31.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\04_backup_git_push_manuel;04_backup_git_push_manuel.bak_2026_09_10.yaml;04_Backup_git_push_manuel.bak_2026_09_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\04_backup_git_push_manuel;04_backup_git_push_manuel.yaml;04_Backup_git_push_manuel.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\05_backup_git_push_weekly_manuel;05_backup_git_push_weekly_manuel.bak_2026_05_31.yaml;05_Backup_git_push_weekly_manuel.bak_2026_05_31.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\05_backup_git_push_weekly_manuel;05_backup_git_push_weekly_manuel.bak_2026_09_10.yaml;05_Backup_git_push_weekly_manuel.bak_2026_09_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\05_backup_git_push_weekly_manuel;05_backup_git_push_weekly_manuel.yaml;05_Backup_git_push_weekly_manuel.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\git_push_au_demarrage_ha;git_push_au_demarrage_ha.bak_2026_04_05.yaml;Git_push_au_demarrage_ha.bak_2026_04_05.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\git_push_au_demarrage_ha;git_push_au_demarrage_ha.bak_2026_06_02.yaml;Git_push_au_demarrage_ha.bak_2026_06_02.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\git_push_au_demarrage_ha;git_push_au_demarrage_ha.bak_2026_09_10.yaml;Git_push_au_demarrage_ha.bak_2026_09_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Backup HA - GitHub\git_push_au_demarrage_ha;git_push_au_demarrage_ha.yaml;Git_push_au_demarrage_ha.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\Bouton Virtuel;p3_salon_bouton_ikea_inter_salon;P3_Salon_bouton_ikea_inter_salon;case-only;
+D;03_docs_automations\docs_automations_YAML\Bouton Virtuel;p3_salon_bouton_ikea_somrig;P3_Salon_bouton_ikea_somrig;case-only;
+B;03_docs_automations\docs_automations_YAML\Bouton Virtuel\p3_salon_bouton_ikea_inter_salon;p3_salon_bouton_ikea_inter_salon.bak_2026_04_05.yaml;P3_Salon_bouton_ikea_inter_salon.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Bouton Virtuel\p3_salon_bouton_ikea_inter_salon;p3_salon_bouton_ikea_inter_salon.yaml;P3_Salon_bouton_ikea_inter_salon.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Bouton Virtuel\p3_salon_bouton_ikea_somrig;p3_salon_bouton_ikea_somrig.yaml;P3_Salon_bouton_ikea_somrig.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\Contrôle Entity z2m;z2m_last_seen;Z2m_last_seen;case-only;
+B;03_docs_automations\docs_automations_YAML\Contrôle Entity z2m\z2m_last_seen;z2m_last_seen.bak_2026_04_05.yaml;Z2m_last_seen.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Contrôle Entity z2m\z2m_last_seen;z2m_last_seen.yaml;Z2m_last_seen.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\Gestion des Stores;gestion_optimisee_du_store_bureau;Gestion_optimisee_du_store_bureau;case-only;
+D;03_docs_automations\docs_automations_YAML\Gestion des Stores;gestion_simple_du_store_salon_matin_soir;Gestion_simple_du_store_salon_matin_soir;case-only;
+B;03_docs_automations\docs_automations_YAML\Gestion des Stores\gestion_optimisee_du_store_bureau;gestion_optimisee_du_store_bureau.bak_2026_04_05.yaml;Gestion_optimisee_du_store_bureau.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Gestion des Stores\gestion_optimisee_du_store_bureau;gestion_optimisee_du_store_bureau.yaml;Gestion_optimisee_du_store_bureau.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Gestion des Stores\gestion_simple_du_store_salon_matin_soir;gestion_simple_du_store_salon_matin_soir.yaml;Gestion_simple_du_store_salon_matin_soir.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\MariaDB & VSCode Optimisation;db_purge_mariadb_repack;Db_purge_mariadb_repack;case-only;
+D;03_docs_automations\docs_automations_YAML\MariaDB & VSCode Optimisation;systeme_economie_energie_vs_code;Systeme_economie_energie_vs_code;case-only;
+B;03_docs_automations\docs_automations_YAML\MariaDB & VSCode Optimisation\db_purge_mariadb_repack;db_purge_mariadb_repack.bak_2026_04_05.yaml;Db_purge_mariadb_repack.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\MariaDB & VSCode Optimisation\db_purge_mariadb_repack;db_purge_mariadb_repack.yaml;Db_purge_mariadb_repack.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\MariaDB & VSCode Optimisation\systeme_economie_energie_vs_code;systeme_economie_energie_vs_code.bak_2026_04_05.yaml;Systeme_economie_energie_vs_code.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\MariaDB & VSCode Optimisation\systeme_economie_energie_vs_code;systeme_economie_energie_vs_code.yaml;Systeme_economie_energie_vs_code.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\Météo;alerte_meteo_france_actualisation_des_cartes;Alerte_meteo_france_actualisation_des_cartes;case-only;
+D;03_docs_automations\docs_automations_YAML\Météo;mettre_a_jour_le_temps_du_dernier_impact_de_foudre;Mettre_a_jour_le_temps_du_dernier_impact_de_foudre;case-only;
+D;03_docs_automations\docs_automations_YAML\Météo;notification_de_la_foudre;Notification_de_la_foudre;case-only;
+D;03_docs_automations\docs_automations_YAML\Météo;update_previous_humidity;Update_previous_humidity;case-only;
+D;03_docs_automations\docs_automations_YAML\Météo;update_previous_temperature;Update_previous_temperature;case-only;
+B;03_docs_automations\docs_automations_YAML\Météo\alerte_meteo_france_actualisation_des_cartes;alerte_meteo_france_actualisation_des_cartes.bak_2026_04_05.yaml;Alerte_meteo_france_actualisation_des_cartes.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Météo\alerte_meteo_france_actualisation_des_cartes;alerte_meteo_france_actualisation_des_cartes.yaml;Alerte_meteo_france_actualisation_des_cartes.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Météo\mettre_a_jour_le_temps_du_dernier_impact_de_foudre;mettre_a_jour_le_temps_du_dernier_impact_de_foudre.bak_2026_04_05.yaml;Mettre_a_jour_le_temps_du_dernier_impact_de_foudre.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Météo\mettre_a_jour_le_temps_du_dernier_impact_de_foudre;mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml;Mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Météo\notification_de_la_foudre;notification_de_la_foudre.bak_2026_04_05.yaml;Notification_de_la_foudre.bak_2026_04_05.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Météo\notification_de_la_foudre;notification_de_la_foudre.bak_2026_05_31.yaml;Notification_de_la_foudre.bak_2026_05_31.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Météo\notification_de_la_foudre;notification_de_la_foudre.bak_2026_09_10.yaml;Notification_de_la_foudre.bak_2026_09_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Météo\notification_de_la_foudre;notification_de_la_foudre.yaml;Notification_de_la_foudre.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Météo\update_previous_humidity;update_previous_humidity.bak_2026_04_05.yaml;Update_previous_humidity.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Météo\update_previous_humidity;update_previous_humidity.yaml;Update_previous_humidity.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\Météo\update_previous_temperature;update_previous_temperature.bak_2026_04_05.yaml;Update_previous_temperature.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Météo\update_previous_temperature;update_previous_temperature.yaml;Update_previous_temperature.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\P0_ENRIGE;diag_enregistrement_journalier;Diag_enregistrement_journalier;case-only;
+D;03_docs_automations\docs_automations_YAML\P0_ENRIGE;histo_linky_quotidien;Histo_linky_quotidien;case-only;
+D;03_docs_automations\docs_automations_YAML\P0_ENRIGE;histo_nodon_quotidien;Histo_nodon_quotidien;case-only;
+D;03_docs_automations\docs_automations_YAML\P0_ENRIGE;log_ecart_linky_vs_nodon;Log_ecart_linky_vs_nodon;case-only;
+D;03_docs_automations\docs_automations_YAML\P0_ENRIGE;rattrapage_linky_ecart;Rattrapage_linky_ecart;case-only;
+D;03_docs_automations\docs_automations_YAML\P0_ENRIGE;rattrapage_linky_j2_ecart;Rattrapage_linky_j2_ecart;case-only;
+B;03_docs_automations\docs_automations_YAML\P0_ENRIGE\diag_enregistrement_journalier;diag_enregistrement_journalier.bak_2026_05_01.yaml;Diag_enregistrement_journalier.bak_2026_05_01.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P0_ENRIGE\diag_enregistrement_journalier;diag_enregistrement_journalier.yaml;Diag_enregistrement_journalier.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P0_ENRIGE\histo_linky_quotidien;histo_linky_quotidien.bak_2026_09_01.yaml;Histo_linky_quotidien.bak_2026_09_01.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P0_ENRIGE\histo_linky_quotidien;histo_linky_quotidien.bak_2026_09_10.yaml;Histo_linky_quotidien.bak_2026_09_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P0_ENRIGE\histo_linky_quotidien;histo_linky_quotidien.yaml;Histo_linky_quotidien.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P0_ENRIGE\histo_nodon_quotidien;histo_nodon_quotidien.bak_2026_09_01.yaml;Histo_nodon_quotidien.bak_2026_09_01.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P0_ENRIGE\histo_nodon_quotidien;histo_nodon_quotidien.bak_2026_09_10.yaml;Histo_nodon_quotidien.bak_2026_09_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P0_ENRIGE\histo_nodon_quotidien;histo_nodon_quotidien.yaml;Histo_nodon_quotidien.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P0_ENRIGE\log_ecart_linky_vs_nodon;log_ecart_linky_vs_nodon.bak_2026_05_31.yaml;Log_ecart_linky_vs_nodon.bak_2026_05_31.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P0_ENRIGE\log_ecart_linky_vs_nodon;log_ecart_linky_vs_nodon.bak_2026_09_10.yaml;Log_ecart_linky_vs_nodon.bak_2026_09_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P0_ENRIGE\log_ecart_linky_vs_nodon;log_ecart_linky_vs_nodon.yaml;Log_ecart_linky_vs_nodon.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P0_ENRIGE\rattrapage_linky_ecart;rattrapage_linky_ecart.bak_2026_09_03.yaml;Rattrapage_linky_ecart.bak_2026_09_03.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P0_ENRIGE\rattrapage_linky_ecart;rattrapage_linky_ecart.bak_2026_09_10.yaml;Rattrapage_linky_ecart.bak_2026_09_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P0_ENRIGE\rattrapage_linky_ecart;rattrapage_linky_ecart.yaml;Rattrapage_linky_ecart.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P0_ENRIGE\rattrapage_linky_j2_ecart;rattrapage_linky_j2_ecart.bak_2026_09_10.yaml;Rattrapage_linky_j2_ecart.bak_2026_09_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P0_ENRIGE\rattrapage_linky_j2_ecart;rattrapage_linky_j2_ecart.yaml;Rattrapage_linky_j2_ecart.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE;a_0_2026_01_11_automatisation_clim_jour_07h30_21h00;A_0_2026_01_11_automatisation_clim_jour_07h30_21h00;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE;b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30;B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE;c_notification_temperature_up_ou_down_7h30_21h00;C_notification_temperature_up_ou_down_7h30_21h00;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE;d_notification_temperature_up_ou_down_21h00_7h30;D_notification_temperature_up_ou_down_21h00_7h30;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE;e_clim_notification_de_fermeture_des_fenetres;E_clim_notification_de_fermeture_des_fenetres;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE;f_clim_automatisation_arret_clim_notification;F_clim_automatisation_arret_clim_notification;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE;g_clim_notification_de_changement_de_mode_ete_fan_hiver;G_clim_notification_de_changement_de_mode_ete_fan_hiver;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE;h_clim_debug_force_mode_correct_securite;H_clim_debug_force_mode_correct_securite;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE;i_synchro_notif_clim_si_prise_coupee;I_synchro_notif_clim_si_prise_coupee;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE;j_debug_notifier_les_changements_de_message_clim_mobile;J_debug_notifier_les_changements_de_message_clim_mobile;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\a_0_2026_01_11_automatisation_clim_jour_07h30_21h00;a_0_2026_01_11_automatisation_clim_jour_07h30_21h00.bak_2026_04_26.yaml;A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.bak_2026_04_26.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\a_0_2026_01_11_automatisation_clim_jour_07h30_21h00;a_0_2026_01_11_automatisation_clim_jour_07h30_21h00.bak_2026_09_20.yaml;A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.bak_2026_09_20.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\a_0_2026_01_11_automatisation_clim_jour_07h30_21h00;a_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml;A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30;b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.bak_2026_04_26.yaml;B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.bak_2026_04_26.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30;b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.bak_2026_09_20.yaml;B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.bak_2026_09_20.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30;b_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml;B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\c_notification_temperature_up_ou_down_7h30_21h00;c_notification_temperature_up_ou_down_7h30_21h00.bak_2026_04_05.yaml;C_notification_temperature_up_ou_down_7h30_21h00.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\c_notification_temperature_up_ou_down_7h30_21h00;c_notification_temperature_up_ou_down_7h30_21h00.yaml;C_notification_temperature_up_ou_down_7h30_21h00.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\d_notification_temperature_up_ou_down_21h00_7h30;d_notification_temperature_up_ou_down_21h00_7h30.bak_2026_04_05.yaml;D_notification_temperature_up_ou_down_21h00_7h30.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\d_notification_temperature_up_ou_down_21h00_7h30;d_notification_temperature_up_ou_down_21h00_7h30.yaml;D_notification_temperature_up_ou_down_21h00_7h30.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\e_clim_notification_de_fermeture_des_fenetres;e_clim_notification_de_fermeture_des_fenetres.bak_2026_04_05.yaml;E_clim_notification_de_fermeture_des_fenetres.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\e_clim_notification_de_fermeture_des_fenetres;e_clim_notification_de_fermeture_des_fenetres.yaml;E_clim_notification_de_fermeture_des_fenetres.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\f_clim_automatisation_arret_clim_notification;f_clim_automatisation_arret_clim_notification.bak_2026_04_05.yaml;F_clim_automatisation_arret_clim_notification.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\f_clim_automatisation_arret_clim_notification;f_clim_automatisation_arret_clim_notification.yaml;F_clim_automatisation_arret_clim_notification.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\g_clim_notification_de_changement_de_mode_ete_fan_hiver;g_clim_notification_de_changement_de_mode_ete_fan_hiver.bak_2026_04_05.yaml;G_clim_notification_de_changement_de_mode_ete_fan_hiver.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\g_clim_notification_de_changement_de_mode_ete_fan_hiver;g_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml;G_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\h_clim_debug_force_mode_correct_securite;h_clim_debug_force_mode_correct_securite.bak_2026_04_05.yaml;H_clim_debug_force_mode_correct_securite.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\h_clim_debug_force_mode_correct_securite;h_clim_debug_force_mode_correct_securite.yaml;H_clim_debug_force_mode_correct_securite.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\i_synchro_notif_clim_si_prise_coupee;i_synchro_notif_clim_si_prise_coupee.bak_2026_04_05.yaml;I_synchro_notif_clim_si_prise_coupee.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\i_synchro_notif_clim_si_prise_coupee;i_synchro_notif_clim_si_prise_coupee.yaml;I_synchro_notif_clim_si_prise_coupee.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\j_debug_notifier_les_changements_de_message_clim_mobile;j_debug_notifier_les_changements_de_message_clim_mobile.bak_2026_04_05.yaml;J_debug_notifier_les_changements_de_message_clim_mobile.bak_2026_04_05.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\j_debug_notifier_les_changements_de_message_clim_mobile;j_debug_notifier_les_changements_de_message_clim_mobile.bak_2026_06_02.yaml;J_debug_notifier_les_changements_de_message_clim_mobile.bak_2026_06_02.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\j_debug_notifier_les_changements_de_message_clim_mobile;j_debug_notifier_les_changements_de_message_clim_mobile.bak_2026_09_10.yaml;J_debug_notifier_les_changements_de_message_clim_mobile.bak_2026_09_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_01_CLIM_CHAUFFAGE\j_debug_notifier_les_changements_de_message_clim_mobile;j_debug_notifier_les_changements_de_message_clim_mobile.yaml;J_debug_notifier_les_changements_de_message_clim_mobile.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_02_Cuisine;a_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9;A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_02_Cuisine;b_chauffage_cuisine_vacances;B_chauffage_cuisine_vacances;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_02_Cuisine\a_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9;a_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.bak_2026_04_05.yaml;A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_02_Cuisine\a_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9;a_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.yaml;A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_02_Cuisine\b_chauffage_cuisine_vacances;b_chauffage_cuisine_vacances.bak_2026_04_05.yaml;B_chauffage_cuisine_vacances.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_02_Cuisine\b_chauffage_cuisine_vacances;b_chauffage_cuisine_vacances.yaml;B_chauffage_cuisine_vacances.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain;a_soufflant_sdb_bouton_rodret;A_soufflant_sdb_bouton_rodret;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain;b_soufflant_sdb_routage;B_soufflant_sdb_routage;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain;c_salle_de_bain_watchdog_securite_soufflant;C_salle_de_bain_watchdog_securite_soufflant;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain;d_sdb_soufflant_decompte_60min_timer;D_sdb_soufflant_decompte_60min_timer;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain;e_sdb_soufflant_rattrapage_demarrage_ha_timer;E_sdb_soufflant_rattrapage_demarrage_ha_timer;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain;f_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h;F_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain;g_sdb_seche_serviettes_decompte_2h_timer;G_sdb_seche_serviettes_decompte_2h_timer;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain;h_sdb_seche_serviettes_rattrapage_demarrage_ha_timer;H_sdb_seche_serviettes_rattrapage_demarrage_ha_timer;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain;rodret_soufflant_sdb;Rodret_soufflant_sdb;case-only;
+D;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain;z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant;Z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\a_soufflant_sdb_bouton_rodret;a_soufflant_sdb_bouton_rodret.bak_2026_10_10.yaml;A_soufflant_sdb_bouton_rodret.bak_2026_10_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\a_soufflant_sdb_bouton_rodret;a_soufflant_sdb_bouton_rodret.yaml;A_soufflant_sdb_bouton_rodret.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\b_soufflant_sdb_routage;b_soufflant_sdb_routage.bak_2026_10_07.yaml;B_soufflant_sdb_routage.bak_2026_10_07.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\b_soufflant_sdb_routage;b_soufflant_sdb_routage.bak_2026_10_10.yaml;B_soufflant_sdb_routage.bak_2026_10_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\b_soufflant_sdb_routage;b_soufflant_sdb_routage.yaml;B_soufflant_sdb_routage.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\c_salle_de_bain_watchdog_securite_soufflant;c_salle_de_bain_watchdog_securite_soufflant.bak_2026_10_07.yaml;C_salle_de_bain_watchdog_securite_soufflant.bak_2026_10_07.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\c_salle_de_bain_watchdog_securite_soufflant;c_salle_de_bain_watchdog_securite_soufflant.bak_2026_10_10.yaml;C_salle_de_bain_watchdog_securite_soufflant.bak_2026_10_10.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\c_salle_de_bain_watchdog_securite_soufflant;c_salle_de_bain_watchdog_securite_soufflant.bak_2026_10_11.yaml;C_salle_de_bain_watchdog_securite_soufflant.bak_2026_10_11.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\c_salle_de_bain_watchdog_securite_soufflant;c_salle_de_bain_watchdog_securite_soufflant.yaml;C_salle_de_bain_watchdog_securite_soufflant.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\d_sdb_soufflant_decompte_60min_timer;d_sdb_soufflant_decompte_60min_timer.bak_2026_10_11.yaml;D_sdb_soufflant_decompte_60min_timer.bak_2026_10_11.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\d_sdb_soufflant_decompte_60min_timer;d_sdb_soufflant_decompte_60min_timer.yaml;D_sdb_soufflant_decompte_60min_timer.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\e_sdb_soufflant_rattrapage_demarrage_ha_timer;e_sdb_soufflant_rattrapage_demarrage_ha_timer.bak_2026_10_11.yaml;E_sdb_soufflant_rattrapage_demarrage_ha_timer.bak_2026_10_11.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\e_sdb_soufflant_rattrapage_demarrage_ha_timer;e_sdb_soufflant_rattrapage_demarrage_ha_timer.yaml;E_sdb_soufflant_rattrapage_demarrage_ha_timer.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\f_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h;f_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.bak_2026_10_07.yaml;F_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.bak_2026_10_07.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\f_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h;f_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.bak_2026_10_11.yaml;F_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.bak_2026_10_11.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\f_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h;f_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.yaml;F_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\g_sdb_seche_serviettes_decompte_2h_timer;g_sdb_seche_serviettes_decompte_2h_timer.bak_2026_10_11.yaml;G_sdb_seche_serviettes_decompte_2h_timer.bak_2026_10_11.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\g_sdb_seche_serviettes_decompte_2h_timer;g_sdb_seche_serviettes_decompte_2h_timer.yaml;G_sdb_seche_serviettes_decompte_2h_timer.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\h_sdb_seche_serviettes_rattrapage_demarrage_ha_timer;h_sdb_seche_serviettes_rattrapage_demarrage_ha_timer.bak_2026_10_11.yaml;H_sdb_seche_serviettes_rattrapage_demarrage_ha_timer.bak_2026_10_11.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\h_sdb_seche_serviettes_rattrapage_demarrage_ha_timer;h_sdb_seche_serviettes_rattrapage_demarrage_ha_timer.yaml;H_sdb_seche_serviettes_rattrapage_demarrage_ha_timer.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\rodret_soufflant_sdb;rodret_soufflant_sdb.bak_2026_04_05.yaml;Rodret_soufflant_sdb.bak_2026_04_05.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant;z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant.bak_2026_10_10.yaml;Z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant.bak_2026_10_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P1_03_Chauffage Salle de Bain\z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant;z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant.yaml;Z_2026_02_01_salle_de_bain_gestion_intelligente_soufflant.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\P2_Alarme_Congélateur;congelateur_alarme_capteur;Congelateur_alarme_capteur;case-only;
+D;03_docs_automations\docs_automations_YAML\P2_Alarme_Congélateur;congelateur_alarme_panne;Congelateur_alarme_panne;case-only;
+D;03_docs_automations\docs_automations_YAML\P2_Alarme_Congélateur;congelateur_alarme_porte;Congelateur_alarme_porte;case-only;
+B;03_docs_automations\docs_automations_YAML\P2_Alarme_Congélateur\congelateur_alarme_capteur;congelateur_alarme_capteur.bak_2026_09_01.yaml;Congelateur_alarme_capteur.bak_2026_09_01.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P2_Alarme_Congélateur\congelateur_alarme_capteur;congelateur_alarme_capteur.yaml;Congelateur_alarme_capteur.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P2_Alarme_Congélateur\congelateur_alarme_panne;congelateur_alarme_panne.bak_2026_09_01.yaml;Congelateur_alarme_panne.bak_2026_09_01.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P2_Alarme_Congélateur\congelateur_alarme_panne;congelateur_alarme_panne.yaml;Congelateur_alarme_panne.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P2_Alarme_Congélateur\congelateur_alarme_porte;congelateur_alarme_porte.bak_2026_09_01.yaml;Congelateur_alarme_porte.bak_2026_09_01.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P2_Alarme_Congélateur\congelateur_alarme_porte;congelateur_alarme_porte.yaml;Congelateur_alarme_porte.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\P2_éCO. Prises;eco_prises_dynamique_by_presence_groupe;Eco_prises_dynamique_by_presence_groupe;case-only;
+D;03_docs_automations\docs_automations_YAML\P2_éCO. Prises;gestion_pc_bureau_scene_de_fin_notif;Gestion_pc_bureau_scene_de_fin_notif;case-only;
+D;03_docs_automations\docs_automations_YAML\P2_éCO. Prises;gestion_tv_chambre_scene_de_fin_notif;Gestion_tv_chambre_scene_de_fin_notif;case-only;
+B;03_docs_automations\docs_automations_YAML\P2_éCO. Prises\eco_prises_dynamique_by_presence_groupe;eco_prises_dynamique_by_presence_groupe.bak_2026_07_15.yaml;Eco_prises_dynamique_by_presence_groupe.bak_2026_07_15.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P2_éCO. Prises\eco_prises_dynamique_by_presence_groupe;eco_prises_dynamique_by_presence_groupe.bak_2026_09_10.yaml;Eco_prises_dynamique_by_presence_groupe.bak_2026_09_10.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P2_éCO. Prises\eco_prises_dynamique_by_presence_groupe;eco_prises_dynamique_by_presence_groupe.bak_2026_09_23.yaml;Eco_prises_dynamique_by_presence_groupe.bak_2026_09_23.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P2_éCO. Prises\eco_prises_dynamique_by_presence_groupe;eco_prises_dynamique_by_presence_groupe.yaml;Eco_prises_dynamique_by_presence_groupe.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P2_éCO. Prises\gestion_pc_bureau_scene_de_fin_notif;gestion_pc_bureau_scene_de_fin_notif.bak_2026_05_31.yaml;Gestion_pc_bureau_scene_de_fin_notif.bak_2026_05_31.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P2_éCO. Prises\gestion_pc_bureau_scene_de_fin_notif;gestion_pc_bureau_scene_de_fin_notif.bak_2026_09_10.yaml;Gestion_pc_bureau_scene_de_fin_notif.bak_2026_09_10.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P2_éCO. Prises\gestion_pc_bureau_scene_de_fin_notif;gestion_pc_bureau_scene_de_fin_notif.bak_2026_09_23.yaml;Gestion_pc_bureau_scene_de_fin_notif.bak_2026_09_23.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P2_éCO. Prises\gestion_pc_bureau_scene_de_fin_notif;gestion_pc_bureau_scene_de_fin_notif.yaml;Gestion_pc_bureau_scene_de_fin_notif.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P2_éCO. Prises\gestion_tv_chambre_scene_de_fin_notif;gestion_tv_chambre_scene_de_fin_notif.bak_2026_06_01.yaml;Gestion_tv_chambre_scene_de_fin_notif.bak_2026_06_01.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P2_éCO. Prises\gestion_tv_chambre_scene_de_fin_notif;gestion_tv_chambre_scene_de_fin_notif.bak_2026_09_10.yaml;Gestion_tv_chambre_scene_de_fin_notif.bak_2026_09_10.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P2_éCO. Prises\gestion_tv_chambre_scene_de_fin_notif;gestion_tv_chambre_scene_de_fin_notif.bak_2026_09_23.yaml;Gestion_tv_chambre_scene_de_fin_notif.bak_2026_09_23.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P2_éCO. Prises\gestion_tv_chambre_scene_de_fin_notif;gestion_tv_chambre_scene_de_fin_notif.yaml;Gestion_tv_chambre_scene_de_fin_notif.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\P3_Eclairage;p3_bureau_activation_ecran_synchro;P3_Bureau_activation_ecran_synchro;case-only;
+D;03_docs_automations\docs_automations_YAML\P3_Eclairage;p3_bureau_bouton_rodret_toggle_blanches;P3_Bureau_bouton_rodret_toggle_blanches;case-only;
+D;03_docs_automations\docs_automations_YAML\P3_Eclairage;p3_bureau_forcer_play_on_si_pc_tourne;P3_Bureau_forcer_play_on_si_pc_tourne;case-only;
+D;03_docs_automations\docs_automations_YAML\P3_Eclairage;p3_bureau_watchdog_synchronisation_lampes_blanches;P3_Bureau_watchdog_synchronisation_lampes_blanches;case-only;
+D;03_docs_automations\docs_automations_YAML\P3_Eclairage;p3_entree_allumage_lumiere;P3_Entree_allumage_lumiere;case-only;
+D;03_docs_automations\docs_automations_YAML\P3_Eclairage;p3_sdb_sync_miroir_lampe_et_relais_sdb;P3_Sdb_sync_miroir_lampe_et_relais_sdb;case-only;
+B;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_bureau_activation_ecran_synchro;p3_bureau_activation_ecran_synchro.bak_2026_05_30.yaml;P3_Bureau_activation_ecran_synchro.bak_2026_05_30.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_bureau_activation_ecran_synchro;p3_bureau_activation_ecran_synchro.bak_2026_10_11.yaml;P3_Bureau_activation_ecran_synchro.bak_2026_10_11.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_bureau_activation_ecran_synchro;p3_bureau_activation_ecran_synchro.yaml;P3_Bureau_activation_ecran_synchro.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_bureau_bouton_rodret_toggle_blanches;p3_bureau_bouton_rodret_toggle_blanches.bak_2026_05_23.yaml;P3_Bureau_bouton_rodret_toggle_blanches.bak_2026_05_23.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_bureau_bouton_rodret_toggle_blanches;p3_bureau_bouton_rodret_toggle_blanches.yaml;P3_Bureau_bouton_rodret_toggle_blanches.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_bureau_forcer_play_on_si_pc_tourne;p3_bureau_forcer_play_on_si_pc_tourne.bak_2026_05_30.yaml;P3_Bureau_forcer_play_on_si_pc_tourne.bak_2026_05_30.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_bureau_forcer_play_on_si_pc_tourne;p3_bureau_forcer_play_on_si_pc_tourne.bak_2026_10_10.yaml;P3_Bureau_forcer_play_on_si_pc_tourne.bak_2026_10_10.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_bureau_forcer_play_on_si_pc_tourne;p3_bureau_forcer_play_on_si_pc_tourne.bak_2026_10_11.yaml;P3_Bureau_forcer_play_on_si_pc_tourne.bak_2026_10_11.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_bureau_forcer_play_on_si_pc_tourne;p3_bureau_forcer_play_on_si_pc_tourne.yaml;P3_Bureau_forcer_play_on_si_pc_tourne.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_bureau_watchdog_synchronisation_lampes_blanches;p3_bureau_watchdog_synchronisation_lampes_blanches.bak_2026_05_30.yaml;P3_Bureau_watchdog_synchronisation_lampes_blanches.bak_2026_05_30.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_bureau_watchdog_synchronisation_lampes_blanches;p3_bureau_watchdog_synchronisation_lampes_blanches.yaml;P3_Bureau_watchdog_synchronisation_lampes_blanches.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_entree_allumage_lumiere;p3_entree_allumage_lumiere.yaml;P3_Entree_allumage_lumiere.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_sdb_sync_miroir_lampe_et_relais_sdb;p3_sdb_sync_miroir_lampe_et_relais_sdb.bak_2026_05_31.yaml;P3_Sdb_sync_miroir_lampe_et_relais_sdb.bak_2026_05_31.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_sdb_sync_miroir_lampe_et_relais_sdb;p3_sdb_sync_miroir_lampe_et_relais_sdb.bak_2026_09_10.yaml;P3_Sdb_sync_miroir_lampe_et_relais_sdb.bak_2026_09_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\P3_Eclairage\p3_sdb_sync_miroir_lampe_et_relais_sdb;p3_sdb_sync_miroir_lampe_et_relais_sdb.yaml;P3_Sdb_sync_miroir_lampe_et_relais_sdb.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\Tarif HC-HP;auto_energie_basculement_tarif_hc_hp_genelec_appart;Auto_energie_basculement_tarif_hc_hp_genelec_appart;case-only;
+B;03_docs_automations\docs_automations_YAML\Tarif HC-HP\auto_energie_basculement_tarif_hc_hp_genelec_appart;auto_energie_basculement_tarif_hc_hp_genelec_appart.bak_2026_04_15.yaml;Auto_energie_basculement_tarif_hc_hp_genelec_appart.bak_2026_04_15.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Tarif HC-HP\auto_energie_basculement_tarif_hc_hp_genelec_appart;auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml;Auto_energie_basculement_tarif_hc_hp_genelec_appart.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\Watchdog Piles (HUE-IKEA-SONOFF);systeme_watchdog_piles_hue_ikea_sonoff;Systeme_watchdog_piles_hue_ikea_sonoff;case-only;
+B;03_docs_automations\docs_automations_YAML\Watchdog Piles (HUE-IKEA-SONOFF)\systeme_watchdog_piles_hue_ikea_sonoff;systeme_watchdog_piles_hue_ikea_sonoff.bak_2026_04_05.yaml;Systeme_watchdog_piles_hue_ikea_sonoff.bak_2026_04_05.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\Watchdog Piles (HUE-IKEA-SONOFF)\systeme_watchdog_piles_hue_ikea_sonoff;systeme_watchdog_piles_hue_ikea_sonoff.yaml;Systeme_watchdog_piles_hue_ikea_sonoff.yaml;case-only;
+D;03_docs_automations\docs_automations_YAML\_SANS_CATEGORIE;P4_log_zones_eric;P4_Log_zones_eric;case-only;
+D;03_docs_automations\docs_automations_YAML\_SANS_CATEGORIE;veille_github_nouvelle_release_detectee;Veille_github_nouvelle_release_detectee;case-only;
+B;03_docs_automations\docs_automations_YAML\_SANS_CATEGORIE\P4_log_zones_eric;P4_log_zones_eric.bak_2026_06_22.yaml;P4_Log_zones_eric.bak_2026_06_22.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\_SANS_CATEGORIE\P4_log_zones_eric;P4_log_zones_eric.bak_2026_09_10.yaml;P4_Log_zones_eric.bak_2026_09_10.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\_SANS_CATEGORIE\P4_log_zones_eric;P4_log_zones_eric.yaml;P4_Log_zones_eric.yaml;case-only;
+B;03_docs_automations\docs_automations_YAML\_SANS_CATEGORIE\veille_github_nouvelle_release_detectee;veille_github_nouvelle_release_detectee.bak_2026_04_19.yaml;Veille_github_nouvelle_release_detectee.bak_2026_04_19.yaml;case-only;
+F;03_docs_automations\docs_automations_YAML\_SANS_CATEGORIE\veille_github_nouvelle_release_detectee;veille_github_nouvelle_release_detectee.yaml;Veille_github_nouvelle_release_detectee.yaml;case-only;
+D;04_docs_scripts;DOCS_SCRIPT_ORIGINAL;Docs_script_original;case-only;SIGLE
+D;04_docs_scripts;docs_scripts_SH;Docs_scripts_sh;case-only;SIGLE
+D;04_docs_scripts;docs_scripts_SH_MD;Docs_scripts_sh_md;case-only;SIGLE
+D;04_docs_scripts;docs_scripts_YAML;Docs_scripts_yaml;case-only;SIGLE
+D;04_docs_scripts;docs_scripts_YAML_MD;Docs_scripts_yaml_md;case-only;SIGLE
+B;04_docs_scripts;GLOBAL_INDEX_SCRIPTS_SH.bak_2026_10_13.md;Global_index_scripts_sh.bak_2026_10_13.md;case-only;SIGLE
+B;04_docs_scripts;GLOBAL_INDEX_SCRIPTS_SH.bak_2026_10_14.md;Global_index_scripts_sh.bak_2026_10_14.md;case-only;SIGLE
+F;04_docs_scripts;GLOBAL_INDEX_SCRIPTS_SH.md;Global_index_scripts_sh.md;case-only;SIGLE
+F;04_docs_scripts;GLOBAL_INDEX_SCRIPTS_YAML.md;Global_index_scripts_yaml.md;case-only;SIGLE
+D;04_docs_scripts\docs_scripts_SH;MP_01_monitor_temp.sh - save pour RASPI;Mp_01_monitor_temp.sh - save pour raspi;case-only;SIGLE|PONCTUATION
+D;04_docs_scripts\docs_scripts_SH;audit_md5;Audit_md5;case-only;
+D;04_docs_scripts\docs_scripts_SH;audit_md5_md_yaml;Audit_md5_md_yaml;case-only;
+D;04_docs_scripts\docs_scripts_SH;audit_md5_yaml;Audit_md5_yaml;case-only;
+D;04_docs_scripts\docs_scripts_SH;check_global_index;Check_global_index;case-only;
+D;04_docs_scripts\docs_scripts_SH;check_sous_context_ia;Check_sous_context_ia;case-only;
+D;04_docs_scripts\docs_scripts_SH;gen_global_index_automations;Gen_global_index_automations;case-only;
+D;04_docs_scripts\docs_scripts_SH;gen_global_index_ia;Gen_global_index_ia;case-only;
+D;04_docs_scripts\docs_scripts_SH;gen_global_index_scripts;Gen_global_index_scripts;case-only;
+D;04_docs_scripts\docs_scripts_SH;gen_global_index_vignettes_pages;Gen_global_index_vignettes_pages;case-only;
+D;04_docs_scripts\docs_scripts_SH;ha_git_backup;Ha_git_backup;case-only;
+D;04_docs_scripts\docs_scripts_SH;hermes_audit_md5_docs;Hermes_audit_md5_docs;case-only;
+D;04_docs_scripts\docs_scripts_SH;hermes_audit_md5_trigul_3md;Hermes_audit_md5_trigul_3md;case-only;
+D;04_docs_scripts\docs_scripts_SH;mf_vigilance_images;Mf_vigilance_images;case-only;
+F;04_docs_scripts\docs_scripts_SH\audit_md5;audit_md5.sh;Audit_md5.sh;case-only;
+B;04_docs_scripts\docs_scripts_SH\audit_md5_md_yaml;audit_md5_md_yaml.bak_2026_10_11.sh;Audit_md5_md_yaml.bak_2026_10_11.sh;case-only;
+B;04_docs_scripts\docs_scripts_SH\audit_md5_md_yaml;audit_md5_md_yaml.bak_2026_10_13.sh;Audit_md5_md_yaml.bak_2026_10_13.sh;case-only;
+F;04_docs_scripts\docs_scripts_SH\audit_md5_md_yaml;audit_md5_md_yaml.sh;Audit_md5_md_yaml.sh;case-only;
+F;04_docs_scripts\docs_scripts_SH\audit_md5_yaml;audit_md5_yaml.sh;Audit_md5_yaml.sh;case-only;
+F;04_docs_scripts\docs_scripts_SH\check_global_index;check_global_index.py;Check_global_index.py;case-only;
+B;04_docs_scripts\docs_scripts_SH\check_global_index;check_global_index.py.bak_2026_10_14;Check_global_index.py.bak_2026_10_14;case-only;
+D;04_docs_scripts\docs_scripts_SH\check_sous_context_ia;__pycache__;__Pycache__;case-only;
+B;04_docs_scripts\docs_scripts_SH\check_sous_context_ia;check_sous_context_ia.bak_2026_10_13.py;Check_sous_context_ia.bak_2026_10_13.py;case-only;
+F;04_docs_scripts\docs_scripts_SH\check_sous_context_ia;check_sous_context_ia.py;Check_sous_context_ia.py;case-only;
+F;04_docs_scripts\docs_scripts_SH\check_sous_context_ia\__pycache__;check_sous_context_ia.cpython-314.pyc;Check_sous_context_ia.cpython-314.pyc;case-only;PONCTUATION
+F;04_docs_scripts\docs_scripts_SH\gen_global_index_automations;gen_global_index_automations.py;Gen_global_index_automations.py;case-only;
+F;04_docs_scripts\docs_scripts_SH\gen_global_index_ia;gen_global_index_ia.py;Gen_global_index_ia.py;case-only;
+F;04_docs_scripts\docs_scripts_SH\gen_global_index_scripts;gen_global_index_scripts.py;Gen_global_index_scripts.py;case-only;
+F;04_docs_scripts\docs_scripts_SH\gen_global_index_vignettes_pages;gen_global_index_vignettes_pages.py;Gen_global_index_vignettes_pages.py;case-only;
+B;04_docs_scripts\docs_scripts_SH\ha_git_backup;ha_git_backup.bak_2026_10_11.sh;Ha_git_backup.bak_2026_10_11.sh;case-only;
+F;04_docs_scripts\docs_scripts_SH\ha_git_backup;ha_git_backup.sh;Ha_git_backup.sh;case-only;
+B;04_docs_scripts\docs_scripts_SH\hermes_audit_md5_docs;hermes_audit_md5_docs.bak_2026_10_11.sh;Hermes_audit_md5_docs.bak_2026_10_11.sh;case-only;
+B;04_docs_scripts\docs_scripts_SH\hermes_audit_md5_docs;hermes_audit_md5_docs.bak_2026_10_13.sh;Hermes_audit_md5_docs.bak_2026_10_13.sh;case-only;
+F;04_docs_scripts\docs_scripts_SH\hermes_audit_md5_docs;hermes_audit_md5_docs.sh;Hermes_audit_md5_docs.sh;case-only;
+B;04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md;hermes_audit_md5_trigul_3md.bak_2026_10_11.sh;Hermes_audit_md5_trigul_3md.bak_2026_10_11.sh;case-only;
+B;04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md;hermes_audit_md5_trigul_3md.bak_2026_10_13.sh;Hermes_audit_md5_trigul_3md.bak_2026_10_13.sh;case-only;
+F;04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md;hermes_audit_md5_trigul_3md.sh;Hermes_audit_md5_trigul_3md.sh;case-only;
+B;04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md;hermes_audit_md5_trigul_unitaire.bak_2026_10_11.py;Hermes_audit_md5_trigul_unitaire.bak_2026_10_11.py;case-only;
+F;04_docs_scripts\docs_scripts_SH\hermes_audit_md5_trigul_3md;hermes_audit_md5_trigul_unitaire.py;Hermes_audit_md5_trigul_unitaire.py;case-only;
+F;04_docs_scripts\docs_scripts_SH\mf_vigilance_images;mf_vigilance_images.sh;Mf_vigilance_images.sh;case-only;
+F;04_docs_scripts\docs_scripts_SH\MP_01_monitor_temp.sh - save pour RASPI;#MP_01_monitor_temp.sh.#;#Mp_01_monitor_temp.sh.#;case-only;SIGLE
+D;04_docs_scripts\docs_scripts_SH_MD;AUDIT_MD5;Audit_md5;case-only;SIGLE
+D;04_docs_scripts\docs_scripts_SH_MD;AUDIT_MD5_DOCS;Audit_md5_docs;case-only;SIGLE
+D;04_docs_scripts\docs_scripts_SH_MD;HA_GIT_BACKUP;Ha_git_backup;case-only;SIGLE
+F;04_docs_scripts\docs_scripts_SH_MD\AUDIT_MD5;AUDIT_MD5.md;Audit_md5.md;case-only;SIGLE
+B;04_docs_scripts\docs_scripts_SH_MD\AUDIT_MD5_DOCS;AUDIT_MD5_DOCS.bak_2026_10_13.md;Audit_md5_docs.bak_2026_10_13.md;case-only;SIGLE
+F;04_docs_scripts\docs_scripts_SH_MD\AUDIT_MD5_DOCS;AUDIT_MD5_DOCS.md;Audit_md5_docs.md;case-only;SIGLE
+F;04_docs_scripts\docs_scripts_SH_MD\HA_GIT_BACKUP;HA_GIT_BACKUP.md;Ha_git_backup.md;case-only;SIGLE
+D;04_docs_scripts\docs_scripts_YAML;Soufflant SDB;Soufflant sdb;case-only;SIGLE
+D;04_docs_scripts\docs_scripts_YAML;audit_md5;Audit_md5;case-only;
+D;04_docs_scripts\docs_scripts_YAML;audit_md5_md_yaml;Audit_md5_md_yaml;case-only;
+D;04_docs_scripts\docs_scripts_YAML;check_yaml_forme;Check_yaml_forme;case-only;
+D;04_docs_scripts\docs_scripts_YAML;correct_linky;Correct_linky;case-only;
+F;04_docs_scripts\docs_scripts_YAML\audit_md5;audit_md5.yaml;Audit_md5.yaml;case-only;
+F;04_docs_scripts\docs_scripts_YAML\audit_md5_md_yaml;audit_md5_md_yaml.yaml;Audit_md5_md_yaml.yaml;case-only;
+F;04_docs_scripts\docs_scripts_YAML\check_yaml_forme;check_yaml_forme.py;Check_yaml_forme.py;case-only;
+D;04_docs_scripts\docs_scripts_YAML\Climatisation;j_1_1_salon_clim_on_off_intelligent;J_1_1_salon_clim_on_off_intelligent;case-only;
+D;04_docs_scripts\docs_scripts_YAML\Climatisation;j_1_2_bureau_clim_on_off_intelligent;J_1_2_bureau_clim_on_off_intelligent;case-only;
+D;04_docs_scripts\docs_scripts_YAML\Climatisation;j_1_3_chambre_clim_on_off_intelligent;J_1_3_chambre_clim_on_off_intelligent;case-only;
+D;04_docs_scripts\docs_scripts_YAML\Climatisation;j_2_0_secu_arret_clim_protege;J_2_0_secu_arret_clim_protege;case-only;
+D;04_docs_scripts\docs_scripts_YAML\Climatisation;p1_master_gestion_clim;P1_Master_gestion_clim;case-only;
+F;04_docs_scripts\docs_scripts_YAML\Climatisation\j_1_1_salon_clim_on_off_intelligent;j_1_1_salon_clim_on_off_intelligent.yaml;J_1_1_salon_clim_on_off_intelligent.yaml;case-only;
+F;04_docs_scripts\docs_scripts_YAML\Climatisation\j_1_2_bureau_clim_on_off_intelligent;j_1_2_bureau_clim_on_off_intelligent.yaml;J_1_2_bureau_clim_on_off_intelligent.yaml;case-only;
+F;04_docs_scripts\docs_scripts_YAML\Climatisation\j_1_3_chambre_clim_on_off_intelligent;j_1_3_chambre_clim_on_off_intelligent.yaml;J_1_3_chambre_clim_on_off_intelligent.yaml;case-only;
+F;04_docs_scripts\docs_scripts_YAML\Climatisation\j_2_0_secu_arret_clim_protege;j_2_0_secu_arret_clim_protege.yaml;J_2_0_secu_arret_clim_protege.yaml;case-only;
+B;04_docs_scripts\docs_scripts_YAML\Climatisation\p1_master_gestion_clim;p1_master_gestion_clim.bak_2026_09_06.yaml;P1_Master_gestion_clim.bak_2026_09_06.yaml;case-only;
+B;04_docs_scripts\docs_scripts_YAML\Climatisation\p1_master_gestion_clim;p1_master_gestion_clim.bak_2026_09_09.yaml;P1_Master_gestion_clim.bak_2026_09_09.yaml;case-only;
+F;04_docs_scripts\docs_scripts_YAML\Climatisation\p1_master_gestion_clim;p1_master_gestion_clim.yaml;P1_Master_gestion_clim.yaml;case-only;
+F;04_docs_scripts\docs_scripts_YAML\correct_linky;correct_linky.py;Correct_linky.py;case-only;
+D;04_docs_scripts\docs_scripts_YAML\Soufflant SDB;sdb_soufflant_arreter;Sdb_soufflant_arreter;case-only;
+D;04_docs_scripts\docs_scripts_YAML\Soufflant SDB;sdb_soufflant_demarrer;Sdb_soufflant_demarrer;case-only;
+B;04_docs_scripts\docs_scripts_YAML\Soufflant SDB\sdb_soufflant_arreter;sdb_soufflant_arreter.bak_2026_09_28.yaml;Sdb_soufflant_arreter.bak_2026_09_28.yaml;case-only;
+B;04_docs_scripts\docs_scripts_YAML\Soufflant SDB\sdb_soufflant_arreter;sdb_soufflant_arreter.bak_2026_09_29.yaml;Sdb_soufflant_arreter.bak_2026_09_29.yaml;case-only;
+F;04_docs_scripts\docs_scripts_YAML\Soufflant SDB\sdb_soufflant_arreter;sdb_soufflant_arreter.yaml;Sdb_soufflant_arreter.yaml;case-only;
+B;04_docs_scripts\docs_scripts_YAML\Soufflant SDB\sdb_soufflant_demarrer;sdb_soufflant_demarrer.bak_2026_09_28.yaml;Sdb_soufflant_demarrer.bak_2026_09_28.yaml;case-only;
+B;04_docs_scripts\docs_scripts_YAML\Soufflant SDB\sdb_soufflant_demarrer;sdb_soufflant_demarrer.bak_2026_09_29.yaml;Sdb_soufflant_demarrer.bak_2026_09_29.yaml;case-only;
+B;04_docs_scripts\docs_scripts_YAML\Soufflant SDB\sdb_soufflant_demarrer;sdb_soufflant_demarrer.bak_2026_10_07.yaml;Sdb_soufflant_demarrer.bak_2026_10_07.yaml;case-only;
+F;04_docs_scripts\docs_scripts_YAML\Soufflant SDB\sdb_soufflant_demarrer;sdb_soufflant_demarrer.yaml;Sdb_soufflant_demarrer.yaml;case-only;
+D;04_docs_scripts\docs_scripts_YAML_MD;P1_MASTER_GESTION_CLIM;P1_Master_gestion_clim;case-only;SIGLE
+D;04_docs_scripts\docs_scripts_YAML_MD;SCRIPTS_CLIM_ON_OFF;Scripts_clim_on_off;case-only;SIGLE
+D;04_docs_scripts\docs_scripts_YAML_MD;SCRIPT_J2_0_SECU_ARRET_CLIM;Script_j2_0_secu_arret_clim;case-only;SIGLE
+B;04_docs_scripts\docs_scripts_YAML_MD\P1_MASTER_GESTION_CLIM;P1_MASTER_GESTION_CLIM.bak_2026_10_11.md;P1_Master_gestion_clim.bak_2026_10_11.md;case-only;SIGLE
+F;04_docs_scripts\docs_scripts_YAML_MD\P1_MASTER_GESTION_CLIM;P1_MASTER_GESTION_CLIM.md;P1_Master_gestion_clim.md;case-only;SIGLE
+F;04_docs_scripts\docs_scripts_YAML_MD\SCRIPTS_CLIM_ON_OFF;SCRIPTS_CLIM_ON_OFF.md;Scripts_clim_on_off.md;case-only;SIGLE
+F;04_docs_scripts\docs_scripts_YAML_MD\SCRIPT_J2_0_SECU_ARRET_CLIM;SCRIPT_J2_0_SECU_ARRET_CLIM.md;Script_j2_0_secu_arret_clim.md;case-only;SIGLE
+B;04_docs_scripts\DOCS_SCRIPT_ORIGINAL;scripts.bak_2026_10_11.yaml;Scripts.bak_2026_10_11.yaml;case-only;
+B;04_docs_scripts\DOCS_SCRIPT_ORIGINAL;scripts.bak_2026_10_12.yaml;Scripts.bak_2026_10_12.yaml;case-only;
+B;04_docs_scripts\DOCS_SCRIPT_ORIGINAL;scripts.bak_2026_10_13.yaml;Scripts.bak_2026_10_13.yaml;case-only;
+B;04_docs_scripts\DOCS_SCRIPT_ORIGINAL;scripts.bak_2026_10_16_18h32m39s.yaml;Scripts.bak_2026_10_16_18h32m39s.yaml;case-only;
+D;05_docs_MD_system;CONFIG_ROOT;Config_root;case-only;SIGLE
+D;05_docs_MD_system;DEPENDANCES_GLOBALES;Dependances_globales;case-only;SIGLE
+D;05_docs_MD_system;DEPENDANCES_GLOBALES_HERMES;Dependances_globales_hermes;case-only;SIGLE
+D;05_docs_MD_system;ENTITES_GLOBAL_INDEX;Entites_global_index;case-only;SIGLE
+D;05_docs_MD_system;GLOBAL_INDEX_REPO;Global_index_repo;case-only;SIGLE
+D;05_docs_MD_system;matrisse_template_doc;Matrisse_template_doc;case-only;
+B;05_docs_MD_system\CONFIG_ROOT;CONFIG_ROOT.bak_2026_09_11.md;Config_root.bak_2026_09_11.md;case-only;SIGLE
+F;05_docs_MD_system\CONFIG_ROOT;CONFIG_ROOT.md;Config_root.md;case-only;SIGLE
+B;05_docs_MD_system\DEPENDANCES_GLOBALES;DEPENDANCES_GLOBALES.bak_2026_10_12.md;Dependances_globales.bak_2026_10_12.md;case-only;SIGLE
+B;05_docs_MD_system\DEPENDANCES_GLOBALES;DEPENDANCES_GLOBALES.bak_2026_10_13.md;Dependances_globales.bak_2026_10_13.md;case-only;SIGLE
+B;05_docs_MD_system\DEPENDANCES_GLOBALES;DEPENDANCES_GLOBALES.bak_2026_10_14.md;Dependances_globales.bak_2026_10_14.md;case-only;SIGLE
+B;05_docs_MD_system\DEPENDANCES_GLOBALES;DEPENDANCES_GLOBALES.bak_2026_10_15_22h08m29s.md;Dependances_globales.bak_2026_10_15_22h08m29s.md;case-only;SIGLE
+B;05_docs_MD_system\DEPENDANCES_GLOBALES;DEPENDANCES_GLOBALES.bak_2026_10_16_18h09m54s.md;Dependances_globales.bak_2026_10_16_18h09m54s.md;case-only;SIGLE
+B;05_docs_MD_system\DEPENDANCES_GLOBALES;DEPENDANCES_GLOBALES.bak_2026_10_16_18h13m47s.md;Dependances_globales.bak_2026_10_16_18h13m47s.md;case-only;SIGLE
+F;05_docs_MD_system\DEPENDANCES_GLOBALES;DEPENDANCES_GLOBALES.md;Dependances_globales.md;case-only;SIGLE
+B;05_docs_MD_system\DEPENDANCES_GLOBALES;DEPENDANCES_GLOBALES.md.bak_2026_10_10.md;Dependances_globales.md.bak_2026_10_10.md;case-only;SIGLE
+F;05_docs_MD_system\DEPENDANCES_GLOBALES;DEPENDANCES_GLOBALES_archive_2026-09-28.md;Dependances_globales_archive_2026-09-28.md;case-only;SIGLE|PONCTUATION
+F;05_docs_MD_system\DEPENDANCES_GLOBALES;DEPENDANCES_GLOBALES_archive_2026-10-07_18h13.md;Dependances_globales_archive_2026-10-07_18h13.md;case-only;SIGLE|PONCTUATION
+F;05_docs_MD_system\DEPENDANCES_GLOBALES;DEPENDANCES_GLOBALES_archive_2026-10-07_19h20.md;Dependances_globales_archive_2026-10-07_19h20.md;case-only;SIGLE|PONCTUATION
+B;05_docs_MD_system\DEPENDANCES_GLOBALES_HERMES;DEPENDANCES_GLOBALES_HERMES_V1.bak_2026_09_29.md;Dependances_globales_hermes_v1.bak_2026_09_29.md;case-only;SIGLE
+B;05_docs_MD_system\DEPENDANCES_GLOBALES_HERMES;DEPENDANCES_GLOBALES_HERMES_V1.bak_2026_10_11.md;Dependances_globales_hermes_v1.bak_2026_10_11.md;case-only;SIGLE
+B;05_docs_MD_system\DEPENDANCES_GLOBALES_HERMES;DEPENDANCES_GLOBALES_HERMES_V1.bak_2026_10_13.md;Dependances_globales_hermes_v1.bak_2026_10_13.md;case-only;SIGLE
+F;05_docs_MD_system\DEPENDANCES_GLOBALES_HERMES;DEPENDANCES_GLOBALES_HERMES_V1.md;Dependances_globales_hermes_v1.md;case-only;SIGLE
+B;05_docs_MD_system\ENTITES_GLOBAL_INDEX;ENTITES_GLOBAL_INDEX.bak_2026_09_20.md;Entites_global_index.bak_2026_09_20.md;case-only;SIGLE
+B;05_docs_MD_system\ENTITES_GLOBAL_INDEX;ENTITES_GLOBAL_INDEX.bak_2026_09_24.md;Entites_global_index.bak_2026_09_24.md;case-only;SIGLE
+B;05_docs_MD_system\ENTITES_GLOBAL_INDEX;ENTITES_GLOBAL_INDEX.bak_2026_09_29.md;Entites_global_index.bak_2026_09_29.md;case-only;SIGLE
+F;05_docs_MD_system\ENTITES_GLOBAL_INDEX;ENTITES_GLOBAL_INDEX.md;Entites_global_index.md;case-only;SIGLE
+B;05_docs_MD_system\GLOBAL_INDEX_REPO;GLOBAL_INDEX_REPO.bak_2026_10_12.md;Global_index_repo.bak_2026_10_12.md;case-only;SIGLE
+B;05_docs_MD_system\GLOBAL_INDEX_REPO;GLOBAL_INDEX_REPO.bak_2026_10_13.md;Global_index_repo.bak_2026_10_13.md;case-only;SIGLE
+B;05_docs_MD_system\GLOBAL_INDEX_REPO;GLOBAL_INDEX_REPO.bak_2026_10_14.md;Global_index_repo.bak_2026_10_14.md;case-only;SIGLE
+B;05_docs_MD_system\GLOBAL_INDEX_REPO;GLOBAL_INDEX_REPO.bak_2026_10_15_22h08m29s.md;Global_index_repo.bak_2026_10_15_22h08m29s.md;case-only;SIGLE
+B;05_docs_MD_system\GLOBAL_INDEX_REPO;GLOBAL_INDEX_REPO.bak_2026_10_16_18h09m54s.md;Global_index_repo.bak_2026_10_16_18h09m54s.md;case-only;SIGLE
+F;05_docs_MD_system\GLOBAL_INDEX_REPO;GLOBAL_INDEX_REPO.md;Global_index_repo.md;case-only;SIGLE
+F;05_docs_MD_system\matrisse_template_doc;_TEMPLATE_DOC.md;_Template_doc.md;case-only;SIGLE
+D;05_docs_skills;skill_fix-file;Skill_fix-file;case-only;PONCTUATION
+D;05_docs_skills;skill_ha-new-yaml;Skill_ha-new-yaml;case-only;PONCTUATION
+D;05_docs_skills;skill_ha-push-docs;Skill_ha-push-docs;case-only;PONCTUATION
+D;05_docs_skills;skill_ha-push-md;Skill_ha-push-md;case-only;PONCTUATION
+D;05_docs_skills;skill_ha-push-yaml;Skill_ha-push-yaml;case-only;PONCTUATION
+D;05_docs_skills;skill_ha-resync-docs;Skill_ha-resync-docs;case-only;PONCTUATION
+D;05_docs_skills;skill_ha-resync-tree;Skill_ha-resync-tree;case-only;PONCTUATION
+D;05_docs_skills;skill_ha-status;Skill_ha-status;case-only;PONCTUATION
+D;05_docs_skills;skill_ha-trigul;Skill_ha-trigul;case-only;PONCTUATION
+D;05_docs_skills;skill_histo;Skill_histo;case-only;
+D;05_docs_skills;skill_histo-final;Skill_histo-final;case-only;PONCTUATION
+D;05_docs_skills;skill_journal-modifs;Skill_journal-modifs;case-only;PONCTUATION
+D;05_docs_skills;skill_sync-index;Skill_sync-index;case-only;PONCTUATION
+D;05_docs_skills;skill_update-arbo;Skill_update-arbo;case-only;PONCTUATION
+F;05_docs_skills\skill_fix-file;fix-file.md;Fix-file.md;case-only;PONCTUATION
+F;05_docs_skills\skill_ha-new-yaml;ha-new-yaml.md;Ha-new-yaml.md;case-only;PONCTUATION
+B;05_docs_skills\skill_ha-push-docs;ha-push-docs.bak_2026_10_11.md;Ha-push-docs.bak_2026_10_11.md;case-only;PONCTUATION
+B;05_docs_skills\skill_ha-push-docs;ha-push-docs.bak_2026_10_13.md;Ha-push-docs.bak_2026_10_13.md;case-only;PONCTUATION
+F;05_docs_skills\skill_ha-push-docs;ha-push-docs.md;Ha-push-docs.md;case-only;PONCTUATION
+B;05_docs_skills\skill_ha-push-docs;ha-push-docs.md.bak_2026_10_13;Ha-push-docs.md.bak_2026_10_13;case-only;PONCTUATION
+B;05_docs_skills\skill_ha-push-md;ha-push-md.bak_2026_10_13.md;Ha-push-md.bak_2026_10_13.md;case-only;PONCTUATION
+F;05_docs_skills\skill_ha-push-md;ha-push-md.md;Ha-push-md.md;case-only;PONCTUATION
+B;05_docs_skills\skill_ha-push-yaml;ha-push-yaml.bak_2026_10_13.md;Ha-push-yaml.bak_2026_10_13.md;case-only;PONCTUATION
+F;05_docs_skills\skill_ha-push-yaml;ha-push-yaml.md;Ha-push-yaml.md;case-only;PONCTUATION
+F;05_docs_skills\skill_ha-resync-docs;ha-resync-docs.md;Ha-resync-docs.md;case-only;PONCTUATION
+F;05_docs_skills\skill_ha-resync-tree;ha-resync-tree.md;Ha-resync-tree.md;case-only;PONCTUATION
+F;05_docs_skills\skill_ha-status;ha-status.md;Ha-status.md;case-only;PONCTUATION
+B;05_docs_skills\skill_ha-trigul;ha-trigul.bak_2026_10_11.md;Ha-trigul.bak_2026_10_11.md;case-only;PONCTUATION
+B;05_docs_skills\skill_ha-trigul;ha-trigul.bak_2026_10_13.md;Ha-trigul.bak_2026_10_13.md;case-only;PONCTUATION
+F;05_docs_skills\skill_ha-trigul;ha-trigul.md;Ha-trigul.md;case-only;PONCTUATION
+B;05_docs_skills\skill_histo;histo.bak_2026_10_11.md;Histo.bak_2026_10_11.md;case-only;
+B;05_docs_skills\skill_histo;histo.bak_2026_10_13.md;Histo.bak_2026_10_13.md;case-only;
+B;05_docs_skills\skill_histo;histo.bak_2026_10_14.md;Histo.bak_2026_10_14.md;case-only;
+B;05_docs_skills\skill_histo;histo.bak_2026_10_15_19h28m01s.md;Histo.bak_2026_10_15_19h28m01s.md;case-only;
+B;05_docs_skills\skill_histo;histo.bak_2026_10_15_19h35m58s.md;Histo.bak_2026_10_15_19h35m58s.md;case-only;
+B;05_docs_skills\skill_histo;histo.bak_2026_10_15_20h08m42s.md;Histo.bak_2026_10_15_20h08m42s.md;case-only;
+B;05_docs_skills\skill_histo;histo.bak_2026_10_15_20h12m22s.md;Histo.bak_2026_10_15_20h12m22s.md;case-only;
+F;05_docs_skills\skill_histo;histo.md;Histo.md;case-only;
+B;05_docs_skills\skill_histo;histo.md.bak_2026_10_13;Histo.md.bak_2026_10_13;case-only;
+B;05_docs_skills\skill_histo-final;histo-final.bak_2026_10_11.md;Histo-final.bak_2026_10_11.md;case-only;PONCTUATION
+B;05_docs_skills\skill_histo-final;histo-final.bak_2026_10_14.md;Histo-final.bak_2026_10_14.md;case-only;PONCTUATION
+B;05_docs_skills\skill_histo-final;histo-final.bak_2026_10_15_20h08m53s.md;Histo-final.bak_2026_10_15_20h08m53s.md;case-only;PONCTUATION
+F;05_docs_skills\skill_histo-final;histo-final.md;Histo-final.md;case-only;PONCTUATION
+F;05_docs_skills\skill_journal-modifs;journal-modifs.md;Journal-modifs.md;case-only;PONCTUATION
+B;05_docs_skills\skill_sync-index;sync-index.bak_2026_10_13.md;Sync-index.bak_2026_10_13.md;case-only;PONCTUATION
+F;05_docs_skills\skill_sync-index;sync-index.md;Sync-index.md;case-only;PONCTUATION
+B;05_docs_skills\skill_update-arbo;update-arbo.bak_2026_10_13.md;Update-arbo.bak_2026_10_13.md;case-only;PONCTUATION
+F;05_docs_skills\skill_update-arbo;update-arbo.md;Update-arbo.md;case-only;PONCTUATION
+D;06_docs_technique;01_pont_hue_hacking;01_Pont_hue_hacking;case-only;
+F;06_docs_technique\01_pont_hue_hacking;01_pont_hue_hacking.md;01_Pont_hue_hacking.md;case-only;
+B;06_docs_technique\01_pont_hue_hacking;01_pont_hue_hacking.md.bak_2026_10_11_17h50m00s.md;01_Pont_hue_hacking.md.bak_2026_10_11_17h50m00s.md;case-only;

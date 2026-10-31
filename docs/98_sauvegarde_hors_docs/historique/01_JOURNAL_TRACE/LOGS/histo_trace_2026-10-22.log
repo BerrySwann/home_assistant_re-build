@@ -1,0 +1,25 @@
+21:45:28.716 | SEQ_DEBUT  | SEQUENCE           | histo
+21:45:48.642 | DEBUT      | journal            | 
+21:45:48.745 | FIN        | journal            | OK histo_2026-10-22_s1.md
+21:46:16.592 | DEBUT      | fusionne           | 
+21:46:16.918 | FIN        | fusionne           | OK JOURNAL_FUSIONNE_2026-07-15_2026-10-22.md
+21:46:24.123 | DEBUT      | sync_index         | 
+21:46:38.501 | FIN        | sync_index         | OK index IA regenere, autres inchanges, GIR identique
+21:46:38.604 | DEBUT      | obsidian           | 
+21:46:38.949 | FIN        | obsidian           | OK
+21:46:43.038 | DEBUT      | pages_html         | 
+21:47:02.452 | FIN        | pages_html         | OK 2 pages creees, 2 originaux a la corbeille
+21:47:28.852 | DEBUT      | menage             | 
+21:47:58.325 | FIN        | menage             | OK 12 renommes, 29 corbeille, 0 echec, 1 douteux signale
+21:47:58.422 | DEBUT      | export_5B          | 
+21:48:10.080 | FIN        | export_5B          | OK Dashboard deja a jour (2026_10_16 en local et prod)
+21:48:22.800 | DEBUT      | tree               | 
+21:49:27.436 | FIN        | tree               | OK IA_ARBO_DETAIL a jour, local=prod
+21:49:34.182 | DEBUT      | controles_6B       | 
+21:49:35.115 | FIN        | controles_6B       | OK
+21:49:35.214 | DEBUT      | controles_6C       | 
+21:49:35.852 | FIN        | controles_6C       | OK
+21:49:35.946 | DEBUT      | controles_6D       | 
+21:49:39.845 | FIN        | controles_6D       | OK
+21:49:45.180 | NOTE       | controles_6C       | ATTENTION prod differente : GLOBAL_INDEX_SCRIPTS_SH, GLOBAL_INDEX_IA (pas de push auto)
+21:49:45.384 | SEQ_FIN    | SEQUENCE           | fin de sequence

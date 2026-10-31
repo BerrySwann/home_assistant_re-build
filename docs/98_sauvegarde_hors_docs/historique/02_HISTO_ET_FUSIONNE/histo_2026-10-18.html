@@ -1,0 +1,152 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-18</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-18</h1><p class="mut">3 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a><a href="#s2">Session S2</a><a href="#s3">Session S3</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-18_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-18</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 11 h (07h36 -&gt; 18h45, journal des modifs)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>docs/04_Docs_scripts/Docs_scripts_sh/Hermes_audit_md5_trigul_3md/hermes_audit_trigul_arbres.py</code> - superposition des 3 arbres (local, prod, GitHub), remplace le trigul .md en bash, rapports dans <code>historique/MD5/00_Verif_Final_trigul_arbres/</code> (.txt et .html) <strong>[v]</strong></li>
+<li>🟢 <code>historique/MD5/</code> - sous-dossiers <code>00_Verif_Final_trigul_arbres</code>, <code>01_trigul_profond</code>, <code>02_categories_ha</code>, <code>03_verif_emplacements</code> ; premier menage .bak du dossier (plan puis go d'Eric) <strong>[v]</strong></li>
+<li>🟢 <code>H:\.gitignore</code> - <code>!docs/<strong>/*.svg</code> (icones meteo de docs suivies par GitHub) </strong>[v]**</li>
+<li>🟢 <code>H:\docs</code> - anciens noms supprimes (copies dans <code>TEMPO</code>), <code>_old_avant_staging</code> vide en prod et local a la corbeille, 25 fichiers recuperes de la prod, 18 pousses <strong>[v]</strong></li>
+<li>🟢 <code>docs/03_Docs_automations/Docs_automations_yaml/P1_SDB/</code> - 6 YAML obsoletes supprimes (local et prod) ; <code>Automations.yalm original/Automations.yaml</code> mis a jour et pousse <strong>[v]</strong></li>
+<li>🟢 <code>H:\sensors</code>, <code>H:\templates</code>, <code>H:\command_line</code>, <code>H:\utility_meter</code>, <code>H:\shell_command</code>, <code>H:\timers</code> - renommages a la convention (<code>Ghithub</code> -&gt; <code>GitHub</code>, timers en sous-dossiers) ; sauvegarde HA <code>Avant_deplacements_config_2026_10_18_16h</code> avant <strong>[v]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/config_system_SH_PY_YAML/</code> - local = prod <code>/config</code> (plus de 90 fichiers) ; prod plus jamais en avance sur le local <strong>[v]</strong></li>
+<li>🟢 <code>.scripts/01_scripts.sh/audit_md5_yaml.sh</code> - couvre <code>timers</code> et <code>scripts/*.sh</code>, BOM retires ; pousse sur <code>H:\.scripts\</code> <strong>[v]</strong></li>
+<li>🟢 <code>docs/01_docs_config_system/config_system_MD/</code> - fiches <code>.scripts</code> (Audit_md5_yaml, Audit_md5_md_yaml, Check_yaml_forme, Correct_linky, Ha_git_backup), <code>Mf_vigilance_images.md</code>, sous-dossiers <code>GLOBAL_INDEX_REPO</code>, <code>README</code>, <code>configuration</code>, <code>sql</code> (reorganises par Eric) <strong>[v]</strong></li>
+<li>🟢 <code>config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md</code> - 315 liens resynchronises a la casse exacte, pousse miroir + racine <code>H:\GLOBAL_INDEX_REPO.md</code> <strong>[v]</strong></li>
+<li>🟢 <code>config_system_MD/README/README.md</code> - original du README ; copies <code>Github/README.md</code> et <code>H:\README.md</code> <strong>[v]</strong></li>
+<li>🟢 <code>docs/05_docs_MD_system/DEPENDANCES_GLOBALES/DEPENDANCES_GLOBALES.md</code> - 160 chemins corriges, pousse <strong>[v]</strong></li>
+<li>🟢 <code>docs/05_docs_MD_system/ENTITES_GLOBAL_INDEX/ENTITES_GLOBAL_INDEX.md</code> - 531 chemins corriges, 0 entite absente, pousse <strong>[v]</strong></li>
+<li>🟢 <code>docs/00_IA/SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md</code> - tree local / prod / GitHub, pousse <strong>[v]</strong></li>
+<li>🟢 <code>docs/00_IA/SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md</code> - nouvelle carte des 5 emplacements (local, prod racine, prod miroir, GitHub racine, GitHub docs/) <strong>[v]</strong></li>
+<li>🟢 <code>docs/04_Docs_scripts/Docs_scripts_sh/Verif_emplacements/Verif_emplacements.py</code> - nouveau controle en lecture seule des 5 emplacements <strong>[v]</strong></li>
+<li>🟢 References aux anciens chemins mises a jour (CLAUDE.md, IA_CONTEXT_BASE, IA_INDEX_*, fiches, scripts de controle, <code>GLOBAL_INDEX_IA.md</code> regenere) <strong>[v]</strong></li>
+<li>🟢 12 skills (ha-push-yaml, ha-push-docs, histo, histo-final, ha-trigul, sync-index, update-arbo, ha-new-yaml, fix-file, ha-update-check-cli, ha-resync-docs, ha-resync-tree) - copies dans <code>docs/05_Docs_skills</code> et <code>.claude/skills</code> (script lance en admin par Eric, 12/12) <strong>[v]</strong></li>
+<li>🟢 <code>H:\docs\...\Dashboard_COMPLET</code> - 23 anciens exports supprimes en prod (copies dans <code>TEMPO\Dashboard_prod_supprimes_2026-10-18\</code>), reste <code>Dashboard_2026_10_16.yaml</code> <strong>[v]</strong></li>
+<li>🟢 <code>H:\custom_components\atmofrance\__init__.py</code> (v2.1.5) - patch pollen absent -&gt; capteurs a 0 au lieu de bloquer l'integration (issue sebcaps/atmofrance #67) ; originaux dans <code>TEMPO\atmofrance_v2.1.5_original_2026-10-18\</code> <strong>[v]</strong></li>
+<li>🟢 Redemarrage complet HA a 18h15 : rien de casse, Atmo France charge (38 capteurs), entites indisponibles de 223 a 165 (surtout des <code>unknown</code> normaux) <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 <code>H:\.scripts\check_yaml_forme.py</code> - prod differente du local, push sur GO d'Eric <strong>[a deployer]</strong></li>
+<li>🟠 Suppression definitive en prod de <code>H:\docs\01_docs_config_system\config_system_YAML\</code> (102 fichiers), <code>H:\docs\05_docs_MD_system\GLOBAL_INDEX_REPO\</code>, anciens <code>configuration.md</code> et <code>sql.md</code> a plat du miroir - sur GO d'Eric <strong>[draft]</strong></li>
+<li>🟠 <code>GLOBAL_INDEX_REPO.md</code> et <code>README.md</code> aux nouveaux chemins - GitHub en attente du backup HA <strong>[a deployer]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 Chaine PowerShell entre guillemets doubles avec accents graves -&gt; ligne d'historique de fiche corrompue -&gt; reecrite en guillemets simples <strong>[resolu]</strong></li>
+<li>🔴 Script de remplacement sorti en code 1 (description trop longue, mauvaise ligne trouvee) -&gt; Patch() avec chaines exactes et colonnes realignees <strong>[resolu]</strong></li>
+<li>🔴 <code>device_commit_files</code> refuse (dossier non connecte) -&gt; acces au dossier ReBuild demande et accorde <strong>[resolu]</strong></li>
+<li>🔴 Ecriture dans <code>.claude</code> refusee par les outils distants -&gt; script lance par Eric en admin avec <code>-ExecutionPolicy Bypass</code> <strong>[resolu]</strong></li>
+<li>🔴 Atmo France en <code>setup_retry</code> (pollen absent de l'API) -&gt; patch local du composant <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.md)</h4>
+<ul>
+<li>📌 <code>DEPENDANCES_GLOBALES.md</code> : 5 chemins complets sans fichier et environ 62 chemins courts (liste dans <code>TEMPO\resync_index_dependances_2026-10-18.txt</code>)</li>
+<li>📌 <code>GLOBAL_INDEX_REPO.md</code> : 3 entites citees absentes (<code>fan.rpi_cooling_fan</code>, <code>sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power</code>, <code>sensor.system_monitor_temperature_du_processeur</code>)</li>
+<li>📌 Fichier verrou <code>H:\.scripts\#MP_01_monitor_temp.sh.#</code></li>
+<li>📌 <code>Github\README.md</code> (et ses baks) et <code>docs\05_docs_MD_system\Config_root</code> : doublons a garder ou non</li>
+<li>📌 Copies de skills poussees sur <code>H:\docs\05_Docs_skills</code> : a garder ou retirer (regle du 2026-10-11)</li>
+<li>📌 Patch atmofrance ecrase par toute mise a jour HACS : suivre l'issue #67</li>
+<li>📌 Optionnel : ancien device MQTT du pont Zigbee2MQTT (4 entites <code>zigbee2mqtt_bridge_*</code> indisponibles)</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Lancer le backup HA (GitHub) pour que les fichiers "en attente du backup" passent SYNC, puis decider des GO en attente (check_yaml_forme.py, suppressions prod).</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-10-18_s2.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-18</strong> (Session <strong>S2</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : N/A (soiree, apres le journal S1 de 18h44)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>docs/04_Docs_scripts/Docs_scripts_sh/Verif_emplacements/Verif_emplacements.py</code> - section 3 ECARTS ATTENDUS (verrous d'editeur <code>#...#</code> en prod seule), pousse en prod <strong>[v]</strong></li>
+<li>🟢 <code>docs/04_docs_scripts/docs_scripts_SH/hermes_audit_md5_trigul_3md/hermes_audit_trigul_arbres.py</code> - verrous <code>#...#</code> en prod seule = ecart attendu, pousse <strong>[v]</strong></li>
+<li>🟢 <code>.../hermes_audit_md5_trigul_unitaire.py</code> - etape profonde en 8 etapes numerotees, MD5 different = ATTENTION mais analyse continue, pousse <strong>[v]</strong></li>
+<li>🟢 <code>.../trigul_run.py</code> - marqueurs B1 corriges (<code>ETAPES : 1 -</code>, <code>AUTOMATIONS :</code>, <code>SCRIPTS :</code>), pousse <strong>[v]</strong></li>
+<li>🟢 <code>docs/05_Docs_skills/Skill_ha-trigul/Ha-trigul.md</code> = <code>.claude/skills/ha-trigul/SKILL.md</code> = compte (F27D258B), pousse en prod <strong>[v]</strong></li>
+<li>🟢 4 fiches trigul creees en local (arbres, md5_trigul_unitaire, Trigul_run, Verif_emplacements) dans <code>docs/04_Docs_scripts/Docs_scripts_sh_md/</code> - NON poussees <strong>[a deployer]</strong></li>
+<li>🟢 R54 (superposition tree local/prod), R55 et R61 fermes dans <code>TODO/TODO.md</code> (non pousse) <strong>[v]</strong></li>
+<li>🟢 Menage R61 : 3 fichiers IA_CONTEXT_BASE en corbeille, CLAUDE option A, rapport <code>historique/menage_R61_CLAUDE_2026-10-18.txt</code> <strong>[v]</strong></li>
+<li>🟢 <code>.pyc</code> mis a la corbeille (R57 reporte)</li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 R63 : reste 5 scripts SH sans fiche (Check_GLOBAL_INDEX, Check_sous_context_ia, Gen_GLOBAL_INDEX_automations/ia/scripts/vignettes_pages, Mf_vigilance_images), 4 scripts YAML, 7 automations, dossier Page_RASPI <strong>[EN COURS]</strong></li>
+<li>🟠 R57 : <code>configuration.yaml</code> reapparait en prod, cause inconnue, recherche cote HA reportee <strong>[EN COURS]</strong></li>
+<li>🟠 Fiches trigul a pousser en prod : en attente de l'ordre d'Eric <strong>[a deployer]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 <code>trigul_run.py</code> : marqueur 'ETAPE 8 -' absent du rapport -&gt; ECHEC B1 a 21:09, marqueurs remplaces <strong>[resolu]</strong> (l'ECHEC reste dans le journal du jour)</li>
+<li>🔴 <code>hermes_audit_md5_trigul_unitaire.py</code> : ancre de patch erronee (4 backslashes) -&gt; patch reecrit <strong>[resolu]</strong></li>
+<li>🔴 Test du chemin MD5 different : rapport du jour ecrase -&gt; relance du lanceur normal <strong>[resolu]</strong></li>
+<li>🔴 Skill ha-trigul : espace en trop dans la version du compte -&gt; docs et <code>.claude</code> alignes sur le compte <strong>[resolu]</strong></li>
+<li>🔴 Journal des modifs : ligne LOT de 21:35 terminee par un <code>\n</code> litteral (erreur de formatage, contenu intact) <strong>[signale]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.md)</h4>
+<ul>
+<li>📌 A mettre a jour : verrous dans R64, skill dans R70, etapes du profond, regle "prod jamais en avance sur le local"</li>
+<li>📌 22 points ouverts avant cette mise a jour (R54 ferme depuis)</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Verifier les index regeneres par ce /histo (les 4 scripts du trigul ne doivent plus etre sans fiche apres push des fiches), puis poursuivre R63</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+<section id="s3"><h2>Session S3</h2><p class="src">Source : histo_2026-10-18_s3.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-10-18</strong> (Session <strong>S3</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 21h51 a 22h58 (apres le journal S2)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>TODO/TODO.md</code> - R71 a R78 ajoutes, puis scinde en A FAIRE / A TRIER / FAIT, ligne Dates sur chaque point, puis eclate en un point par ligne (Rxx.n, 163 points, texte d'origine en PARTIE 4, cloture 22h42 : A FAIRE 107, A TRIER 80, FAIT 90) <strong>[v]</strong></li>
+<li>🟢 <code>TODO/TODO.html</code> - vue du TODO (compteurs, ouverts et fermes par jour, solde, seuil de gel), instantane de 22h42 <strong>[v]</strong></li>
+<li>🟢 <code>Claude md SAVE/CLAUDE.md</code> et ses 3 copies (<code>IA_CONTEXT_BASE</code> local, prod <code>H:\docs\00_IA</code>, <code>D:\docs\00_IA</code>) - regle TODO (Rxx.n, dates, cloture, gel), MD5 cf29d407 <strong>[v]</strong></li>
+<li>🟢 <code>docs/04_docs_scripts/docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py</code> - ignore les .pyc et les verrous #...# <strong>[v]</strong> (pousse en prod)</li>
+<li>🟢 4 fiches du trigul (<code>Hermes_audit_trigul_arbres</code>, <code>Hermes_audit_md5_trigul_unitaire</code>, <code>Trigul_run</code>, <code>Verif_emplacements</code>) - poussees en prod, sur GitHub au backup de 22h09 <strong>[v]</strong></li>
+<li>🟢 <code>IA_P4_PRESENCE</code> re-fige au <strong>2026-10-18</strong> (constante FIGES de <code>check_sous_context_ia.py</code>) <strong>[v]</strong> (local seulement)</li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 <code>check_sous_context_ia.py</code> modifie en local, non pousse en prod - <strong>[a deployer]</strong> (sur ordre d'Eric, R72.1)</li>
+<li>🟠 Entrees du TODO sans numero (38) non eclatees en points - <strong>[EN COURS]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 <code>GLOBAL_INDEX_SCRIPTS_SH</code> : .pyc et verrous #...# comptes comme scripts sans fiche (13) -&gt; generateur corrige, 7 restants <strong>[resolu]</strong></li>
+<li>🔴 Balayage de <code>H:</code> : le dossier cache <code>.scripts</code> n'etait pas lu -&gt; relu avec l'option des fichiers caches <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.md)</h4>
+<ul>
+<li>📌 R78.1 : les 2 .py de <code>docs_scripts_YAML</code> sont <code>Check_yaml_forme.py</code> et <code>Correct_linky.py</code> ; chacun existe en 4 copies (docs local, docs prod, <code>.scripts</code> local, <code>.scripts</code> prod)</li>
+<li>📌 <code>check_yaml_forme.py</code> : version de <code>.scripts</code> (3990 o, E0D5B842) differente de celle rangee dans docs_scripts_YAML (3347 o, F1AB38C1) ; <code>correct_linky.py</code> identique partout (A32D90F9)</li>
+<li>📌 Seuil de gel propose : 50 points ouverts ou 3 clotures de suite avec solde positif (non confirme par Eric)</li>
+<li>📌 Le MD5 du TODO avant l'eclatement (1c5b5d0d) n'etait pas celui de ma derniere ecriture : modifie par autre que moi entre-temps, cause inconnue</li>
+<li>📌 Eric a demande les faits en haut et les ouverts en bas ; ordre actuel conserve (ouverts en haut), en attente de son avis</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>🔵 Demain, avec Eric : decider du rangement de <code>check_yaml_forme.py</code> et <code>correct_linky.py</code> (R78.1), valider les seuils de gel, puis eclater les 38 entrees sans numero du TODO</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

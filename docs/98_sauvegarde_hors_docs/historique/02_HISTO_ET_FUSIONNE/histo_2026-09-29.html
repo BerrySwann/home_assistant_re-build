@@ -1,0 +1,103 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-09-29</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-09-29</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-09-29_s1.txt</p>
+<h3>JOURNAL HA REBUILD - 2026-09-29</h3>
+<pre>
+SESSION : soiree, continuation directe de la session ouverte le 27/09
+CONTEXTE : menage documentaire ReBuild (workflow, doublons, chemins morts, index) +
+           boutons virtuels du salon + vestiges d'entites
+</pre>
+<h4>ETAPES VALIDEES</h4>
+<pre>[1] Workflow disparu : les 2 fichiers WORKFLOW_REBUILD.md supprimes (local + prod), dossier
+    workflow/ retire, renvois nettoyes dans INDEX_GLOBAL.md et README.md -&gt; push cd78fe9a
+[2] 2 morceaux utiles sauves avant suppression : l'historique des sessions 1 a 20
+    (historique/ARCHIVE_SESSIONS_HA_2026-03-15_2026-05-14.md) et le script de controle de
+    forme YAML (check_yaml_forme.py, repointer sur un dossier en argument, pose en prod, en
+    local/scripts et dans docs/04 ; teste sur H:/sensors : 5 vraies anomalies trouvees)
+[3] TriguL lance : 145 md, 143 sync, 2 ecarts. Les 2 ecarts = le renommage soufflant jamais
+    replique (DEPENDANCES_GLOBALES_HERMES_V1.md et PAGE_BATTERIES.md) -&gt; corriges, pousses
+    (8ce2a71b), trigul de nouveau vert
+[4] Vestige inter_radiateur_salle_de_bain supprime : input_boolean orphelin, aucun
+    consommateur, le fichier B1_01_inter_sdb.yaml n'a jamais existe en prod. L'entite repond
+    404, inter_soufflant et son verrou sont intacts -&gt; push 7078e7ea
+[5] Boutons virtuels du salon : audit complet. Les 2 BP (rodret, somrig) n'ont aucun
+    consommateur. Les 2 automatisations du salon (INTER SALON 4 et SOMRIG) sont vivantes et
+    verifiees cote Z2M (topics exacts, base zigbee2mqtt2, service actif) : elles pilotent
+    light.salon directement, sans passer par les BP.
+[6] Dossier P3 supprime (par Berry) : les 2 input_booleans avec ; les 2 switchs fantomes
+    purges du registre HA par l'API websocket (ils survivaient en "restaure, indisponible").
+    Les 4 entites repondent 404, le soufflant de la SdB est intact -&gt; push a3edf590
+[7] Doc nettoyee : PAGE_CLIM.md (4 renvois vers l'ancien nom BI_02), le YAML input_boolean de
+    la SdB (2 renvois), DEPENDANCES_GLOBALES_HERMES_V1.md (5 lignes d'entites mortes)
+[8] TREE refait : IA_ARBO_DETAIL.md reecrit sur comptage reel (local 515 fichiers docs dont
+    50 sauvegardes, prod 474, GitHub 643 fichiers et 177 dossiers) + les purges du jour notees
+[9] Chemins morts des dependances : 385 occurrences du prefixe
+    01_docs_config_system/config_system_YAML corrigees (fichier principal, CLAUDE.md,
+    IA_CONTEXT_BASE.md, IA_INDEX_NAVIGATION, fiche energie, fichiers .claude). Les archives
+    (journal fusionne, 2 sauvegardes de contexte) touchees par erreur ont ete restaurees :
+    on ne reecrit pas l'histoire.
+[10] ENTITES_INDEX.md : 282 -&gt; 273 entrees (2 renommages verifies en base, 9 blocs d'entites
+    disparues retires, en-tete date)
+[11] Verifications finales : trigul 145 fichiers, 145 sync, 0 ecart, 0 absent. Le "1 DIFF"
+    observe juste apres un push etait le cache CDN de raw.githubusercontent, confirme par
+    l'API contents (taille et blob sha a jour)
+[12] Generateur hermes_gen_dependances.py diagnostique : il plantait faute de PyYAML
+    (installe depuis), sa sortie part dans %LOCALAPPDATA%\Temp, sa source
+    config_system_YAML a ete videe le soir meme, le fichier d'annotations
+    annotations_v1.json a disparu. Il tourne a nouveau, mais le document publie contient des
+    corrections manuelles qu'il ne sait pas reproduire.
+[13] Mesure du fichier de dependances : 5734 lignes, 1015 entites citees dont 964 encore
+    vivantes en base, 51 a reprendre, 38 des 39 fichiers sources presents en prod
+</pre>
+<h4>EN COURS</h4>
+<pre>- Nettoyage des 51 entites citees dans les dependances (dont 3 faux positifs du comptage)
+  et du nom mal orthographie command_line/audit/audit_md5_md.yaml
+- Sort du generateur a trancher : reparer (source prod, sortie dans docs/) ou archiver
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>- Generateur qui plante -&gt; ModuleNotFoundError: No module named 'yaml' -&gt; pip install pyyaml
+- "1 DIFF" au trigul apres un push -&gt; cache CDN raw (~5 min) -&gt; verification par l'API contents
+- Script de correction de chemins qui a deborde sur le journal fusionne et 2 sauvegardes de
+  contexte -&gt; restaurees depuis leurs .bak
+- Entites du salon qui survivaient au rechargement -&gt; elles etaient "restored" dans le
+  registre -&gt; purge par websocket (ids de message croissants, sinon erreur id_reuse)
+</pre>
+<h4>FICHIERS MODIFIES</h4>
+<pre>docs/00_IA/sous_context_ia/IA_ARBO_DETAIL.md
+  -&gt; reecrit : releves du 29/09 (local, prod, GitHub), purges du jour, incoherences connues
+docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES_HERMES_V1.md
+  -&gt; 385 chemins morts corriges, 5 lignes d'entites disparues retirees
+docs/02_docs_dashboard/dashboard_docs_MD/L1C3_CLIM/PAGE_CLIM.md
+  -&gt; 4 renvois vers BI_02_switch_inter_sdb.yaml remplaces par le vrai chemin
+docs/05_docs_MD_system/ENTITES_INDEX.md
+  -&gt; 2 renommages, 9 blocs morts retires, en-tete date
+docs/00_IA/IA_CONTEXT_BASE.md et CLAUDE.md (3 copies alignees, empreinte identique)
+  -&gt; chemins morts corriges
+input_booleans/P1/P1_BV_IB_inter_soufflant_sdb.yaml (prod)
+  -&gt; vestige inter_radiateur retire, 2 renvois corriges
+input_booleans/P3/ et templates/Inter_BP_Virtuel/P3/ (prod)
+  -&gt; supprimes : boutons virtuels du salon sans consommateur
+TODO.txt
+  -&gt; SDB-2 coche (decision du vestige tranchee)
+historique/ARCHIVE_SESSIONS_HA_2026-03-15_2026-05-14.md
+  -&gt; cree : sessions 1 a 20, sauvees du workflow supprime
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>1. Nettoyer les 51 entites citees dans les dependances et corriger le nom de fichier
+   command_line/audit/audit_md5_md.yaml (audit_md5_md_yaml.yaml)
+2. Trancher le sort du generateur hermes_gen_dependances.py : reparer (source prod, sortie
+   dans docs/) ou archiver puisque le document vit tres bien sans lui
+(optionnel ensuite : les 3 copies de contexte, l'export du dashboard du 24/09,
+MOC_DEPENDANCES / MOC_DASHBOARD / RAPPORT_TRI_ENTITES du 20/09, les 26 entites mortes
+d'INDEX_GLOBAL, les 4 sous-contextes F-5, le residu #MP_01_monitor_temp.sh.#)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

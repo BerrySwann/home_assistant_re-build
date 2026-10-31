@@ -1,0 +1,43 @@
+08:10:03.314 | SEQ_DEBUT  | SEQUENCE           | histo-final
+08:10:03.372 | NOTE       | tokens             | debut : compteur de tokens non visible dans la session (inconnu)
+08:10:22.070 | DEBUT      | automation_off     | coupure de automation.bureau_forcer_play_on_si_pc_tourne
+22:16:41.612 | SEQ_DEBUT  | SEQUENCE           | histo-final
+22:16:41.670 | NOTE       | tokens             | debut : 14968546 restants
+22:16:41.728 | DEBUT      | automation_off     | 
+22:16:49.547 | FIN        | automation_off     | OK automation.nouvelle_automatisation off
+22:16:49.605 | DEBUT      | journal            | 
+22:17:20.831 | FIN        | journal            | OK histo_2026-10-29_s1.md
+22:17:20.890 | DEBUT      | sync_index         | 
+22:17:50.216 | FIN        | sync_index         | OK index regeneres inchanges, REPO a jour
+22:17:50.272 | DEBUT      | fusionne           | 
+22:18:35.515 | FIN        | fusionne           | OK JOURNAL_FUSIONNE_2026-07-15_2026-10-29.md 4321 lignes, session 10-29 S1
+22:18:35.575 | DEBUT      | obsidian           | 
+22:18:41.799 | FIN        | obsidian           | OK 2 fichiers copies, MD5 identiques
+22:18:41.858 | DEBUT      | pages_html         | 
+22:18:51.619 | FIN        | pages_html         | OK pages creees, 2 originaux a la corbeille
+22:18:51.677 | DEBUT      | menage             | 
+22:24:21.501 | FIN        | menage             | OK 14 renommes, 56 corbeille, 2 fusions, 0 erreur, 5 signales
+22:24:21.559 | DEBUT      | export_5B          | 
+22:24:24.784 | FIN        | export_5B          | OK Dashboard deja a jour (DE2E1F06 racine, local, prod)
+22:24:24.844 | DEBUT      | tree               | 
+22:26:01.201 | FIN        | tree               | OK IA_ARBO_DETAIL a jour, local = prod
+22:26:01.259 | DEBUT      | controles_6B       | 
+22:26:07.545 | FIN        | controles_6B       | ATTENTION ecarts=6 casses=1 (connus: IA_ARBO_DETAIL chemin mort, 62 vs 63 automations, noms bak hors format)
+22:26:07.603 | DEBUT      | controles_6C       | 
+22:26:07.996 | FIN        | controles_6C       | OK voir sortie
+22:26:08.054 | DEBUT      | controles_6D       | 
+22:26:10.304 | FIN        | controles_6D       | OK 98 suivis, 96 SYNC, 2 prod differente connus
+22:26:10.362 | DEBUT      | controles_6E       | 
+22:26:10.510 | FIN        | controles_6E       | OK voir sortie
+22:26:16.390 | DEBUT      | controles_6F       | 
+22:26:33.827 | FIN        | controles_6F       | OK sources sans fiche 0 ; badges : 20 fiches corrigees, a_corriger=157 a_decider=112
+22:27:00.452 | NOTE       | tokens             | fin : inconnu (le compteur est repasse a 15000000 apres la reconnexion du PC, releve de fin non comparable au debut 14968546)
+22:27:27.591 | DEBUT      | notification       | 
+22:27:35.864 | FIN        | notification       | OK notify.mobile_app_eric envoyee 22:27:40
+22:27:45.958 | DEBUT      | lumieres           | 
+22:28:58.288 | FIN        | lumieres           | OK Hue Sync coupe (API pont), 3 Hue Play off confirme
+22:28:58.347 | DEBUT      | automation_on      | 
+22:29:08.436 | FIN        | automation_on      | OK automation.nouvelle_automatisation relue on
+22:29:08.528 | DEBUT      | arret_pc           | 
+22:29:08.584 | FIN        | arret_pc           | OK arret programme
+22:29:08.642 | SEQ_FIN    | SEQUENCE           | fin de sequence

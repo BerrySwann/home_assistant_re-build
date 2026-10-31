@@ -1,0 +1,80 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-07</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-07</h1><p class="mut">2 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a><a href="#s2">Session S2</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-07_s1.txt</p>
+<h3>JOURNAL HA REBUILD - 2026-10-07 (SESSION S1)</h3>
+<pre>
+SESSION : environ 6 h (matin/soir, reprise apres compaction a 20h28)
+BRANCHE ACTIVE : docs/
+</pre>
+<h4>FICHIERS VALIDES</h4>
+<pre>scripts.yaml (live) sdb_soufflant_demarrer - garde de saison (pas de demarrage si sensor.mode_ete_hiver = cool) + verrou 30 s [OK]
+docs/04_docs_scripts/docs_scripts_YAML/sdb_soufflant_demarrer.yaml - export aligne, MD5 identique H:\docs [OK]
+docs/01_docs_config_system/config_system_YAML/input_booleans/P1/P1_BV_IB_inter_soufflant_sdb.yaml - voyant_thermostat_soufflant_salle_de_bain, verrou renomme 30 s [OK]
+docs/01_docs_config_system/config_system_YAML/templates/Inter_BP_Virtuel/P1/P1_BV_IB_SW_inter_souflant_sdb.yaml - switch.voyant_thermostat_soufflant_salle_de_bain (miroir realigne sur la prod) [OK]
+climate.soufflant_salle_de_bain (helper UI generic_thermostat) - heater = switch voyant neutre, plus de coupure par le thermostat [OK]
+automation D (watchdog) - derive +0.4, cloturee, verification en TODO [OK]
+docs/01_docs_config_system/config_system_YAML/configuration.yaml - ajout timer: !include_dir_merge_named timers/ (miroir local = prod) [OK]
+docs/01_docs_config_system/config_system_YAML/timers/P1_timers/ - 4 helpers : P1_timer_60mn_soufflant_sdb, P1_timer_10mn_soufflant_sdb, P1_timer_2h_seche_serviettes_sdb, P1_timer_10mn_seche_serviettes_sdb [OK, charges apres redemarrage 21h30 / timer.reload]
+automations live creees : E (decompte 60 min soufflant), F (rattrapage demarrage HA soufflant), H (decompte 2 h seche-serviettes), I (rattrapage demarrage HA seche-serviettes) [actives, NON TESTEES]
+automation G = ancienne E (minuterie seche-serviettes 2 h), renommee par Eric ; reste active en doublon avec H
+docs/03_docs_automations : 4 exports e_/f_/h_/i_ (P1_sdb), export G realigne, fiche TIMERS_SDB_SOUFFLANT_ET_SECHE_SERVIETTES.md, E_MINUTERIE_SECHE_SERVIETTES.md, SDB_SOUFFLANT_SPECIFICATION_2026.md (8.4, 8.7), AUTOMATIONS.md (G 2 h, #53 a #56), D_WATCHDOG - pousses vers H:\docs, MD5 identiques [OK]
+docs/02_docs_dashboard/dashboard_docs_MD/DEPENDANCES_GLOBALES.md - en-tetes 19h20 et 22h, pousse [OK]
+Github/INDEX_GLOBAL.md - en-tete nuit, bloc timers, entrees E/F/H/I, G renomme (local seulement, pas de circuit de push)
+TODO.txt - SDB-INTER-SANS-EFFET clos, SDB-60MIN-FRAGILE (mis en place), SDB-ROUTAGE-REDEMARRAGE (info), SECHE-SERV-TIMER (local seulement)
+Tableur verification_docs_config_soufflant_sdb_2026-10-07.xlsx (local vs prod) envoye a Eric
+</pre>
+<h4>EN COURS</h4>
+<pre>Timers E/F/H/I : a tester (soufflant : timer 60 mn actif a l'allumage, puis redemarrage HA soufflant en marche ; meme controle H/I)
+Automation G : a desactiver apres test de H (pas avant)
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>ha_config_set_script : BestPracticeKey manquante -&gt; cle lue dans le guide (change toutes les heures)
+generic_thermostat : heater refuse input_boolean -&gt; switch template neutre cree
+Rechargement des templates 19h02 : a relance le script d'arret, prise deja coupee, sans effet
+configuration.yaml : cle timers: (avec s) et dossier timers/ absent -&gt; corrige en timer:, fichiers crees avant tout redemarrage
+Script PowerShell trop long (WinError 206) -&gt; decoupe en etapes
+Boucle de renommage des fichiers timers (P1_timer_ / P1_timers_) -&gt; miroir local realigne sur la prod
+</pre>
+<h4>TACHES BACKLOG (TODO.txt)</h4>
+<pre>Ouverts : SDB-60MIN-FRAGILE (a tester), SDB-TEMP-COUPURE, SDB-WATCHDOG-VERIF, SDB-ROUTAGE-REDEMARRAGE (info), SECHE-SERV-TIMER, CHAUFFAGE-AUDIT (reformulation), 3 entites SDB 404 dans INDEX_GLOBAL, items cuisine
+Fermes aujourd'hui : SDB-THERMOSTAT, SDB-WATCHDOG, SDB-INTER-SANS-EFFET
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Tester E/F (soufflant) et H/I (seche-serviettes) en conditions reelles, puis desactiver G. Decider du risque de l'automation B (from: off) seulement si un bug apparait au redemarrage.
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-10-07_s2.txt</p>
+<h3>JOURNAL HA REBUILD - 2026-10-07 (SESSION S2)</h3>
+<pre>
+SESSION : N/A (23h13)
+BRANCHE ACTIVE : docs/
+
+SESSION VIDE - aucune modification depuis le journal s1 (22h01)
+</pre>
+<h4>FICHIERS VALIDES</h4>
+<pre>(aucun nouveau; voir histo_2026-10-07_s1.txt)
+</pre>
+<h4>EN COURS</h4>
+<pre>Timers soufflant SDB (E, F) et seche-serviettes (H, I) : en place, NON testes (last_triggered null)
+Automation G (Timer Absolu 2h) : toujours active en doublon de H
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>(aucune)
+</pre>
+<h4>TACHES BACKLOG (TODO.txt)</h4>
+<pre>SDB-60MIN-FRAGILE (a tester), SECHE-SERV-TIMER (desactiver G apres test de H), SDB-ROUTAGE-REDEMARRAGE (info, from: off sur B a decider), SDB-TEMP-COUPURE, SDB-WATCHDOG-VERIF, CHAUFFAGE-AUDIT
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Tester E/F : allumer le soufflant, verifier timer.soufflant_sdb_60mn actif, eteindre -&gt; idle; puis redemarrer HA soufflant en marche. Meme test pour H/I, puis desactiver G.
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

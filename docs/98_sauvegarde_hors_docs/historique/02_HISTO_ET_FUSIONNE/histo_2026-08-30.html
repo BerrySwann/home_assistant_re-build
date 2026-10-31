@@ -1,0 +1,48 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-08-30</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-08-30</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-08-30_s1.txt</p>
+<h3>JOURNAL HA REBUILD — 2026-08-30 (SESSION S1)</h3>
+<pre>
+SESSION : ~1h — Proxmox infrastructure / stockage critique
+BRANCHE ACTIVE : Infra_Proxmox/
+</pre>
+<h4>FICHIERS VALIDÉS</h4>
+<pre>Infra_Proxmox/proxmox_infra.md — stockage, jobs backup, historique interventions [✓]
+</pre>
+<h4>EN COURS</h4>
+<pre>(aucun — session terminée proprement)
+</pre>
+<h4>ERREURS RÉSOLUES</h4>
+<pre>local storage 0 GB libre (94.1%) :
+  - Cause : snapshots LVM orphelins (snap VM 100/201/202 depuis mai-aout) + 5 backups VM 100 x 11 GB
+  - Fix 1 : suppression snapshots LVM depuis UI Proxmox -&gt; local-lvm data pool 23.69% -&gt; 15.56%
+  - Fix 2 : suppression manuelle 2 anciens backups VM 100 (26/08 + 27/08) -&gt; 11 GB liberes
+  - Fix 3 : reduction keep-last VM 100 : 5 -&gt; 3 (via sed /etc/pve/jobs.cfg)
+  - Resultat : local 94.1% -&gt; 59.1% (33 GB libres)
+
+API Proxmox keep-last update 400 :
+  - Cause : parametre "keep-last" refuse par l'API REST (non present dans le schema PVE 7)
+  - Fix : modification directe via sed dans /etc/pve/jobs.cfg (prune-backups keep-last=5 -&gt; 3)
+</pre>
+<h4>TACHES BACKLOG (TODO.txt)</h4>
+<pre>(non consulte en session — session focalisee infra Proxmox)
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Verifier ce soir (apres 02:00) que le backup VM 100 s'est execute correctement avec keep-last=3.
+Surveiller que local reste sous 70% apres rotation.
+Taches HA en attente (depuis sessions precedentes) :
+  - DASH-COMPLET : refaire Dashboard_COMPLET depuis HA (L4C1 + L5C3 mis a jour)
+  - L5C2-FANTOMES : decider sensor ne2213 battery_health + battery_temperature
+  - BV-PUSH : pousser 6 fichiers BV renommes vers prod H:\
+  - P1-CUISINE-B : deployer automation via UI HA
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

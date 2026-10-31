@@ -1,0 +1,113 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-01</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-01</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-01_s1.txt</p>
+<h3>JOURNAL JEMAYA - ETUDE DE LA MAISON ET CAPTURE TEMPS REEL - 2026-10-01</h3>
+<pre>
+SESSION : soiree du 01/10 (continuation de la session Jemaya du 30/09)
+CONTEXTE : projet Jemaya. Berry veut que Jemaya etudie comment VIT la maison avant
+           d'executer la moindre commande, puis construise des arborescences
+           (qui fait quoi, ou, comment) et une sentinelle de consommation.
+</pre>
+<h4>ETAPES VALIDEEES</h4>
+<pre>[1] Corrections de mes propres affirmations fausses, faites et signalees dans la
+    meme soiree : les entites camera.mf_alerte_today / _tomorrow EXISTENT (config
+    entry local_file creee dans l'interface), verifie par md5 identique entre
+    /api/camera_proxy et le fichier sur disque ; le fichier
+    H:/command_line/meteo/carte_meteo_france.yaml et la reference du skill ont ete
+    corriges dans la foulee ✓
+[2] Jugement de "doublon" retire sur docs/05_projet/dependances.md : les deux
+    fichiers ont des contenus differents (l'un est le registre par groupes
+    oblig_/Secur_/Confo_ avec table de correspondance, l'autre la fiche projet avec
+    structure, dashboards, HACS installe et modules en attente) - deux objets, deux
+    dossiers ✓
+[3] Etude "comment vit HA" livree : Documents/Jemaya/etude_ha_2026-10-01/
+    2134 entites, 7666 evenements sur 24 h, lecture seule. Rythme horaire mesure
+    (creux 9h-11h, pic 7h, coeur 19h-21h, 173 a 214 evts/h la nuit), familles de
+    consommation, indisponibles classes, 7 piles faibles ✓
+[4] Arborescences par domaine livrees : ARBORESCENCES.md, 7 domaines, 58
+    automatisations et 9 scripts deplieses (QUAND / SI / FAIT / SUR) ✓
+[5] Cascades reelles capturees dans le journal (cascades.json) et chaine "Eric
+    rentre" identifiee : declencheur RESEAU (sensor.eric_network_type /
+    sensor.mamour_network_type, wifi &lt;-&gt; cellular) -&gt; automatisation clim jour ou
+    nuit -&gt; script P1 MASTER (8 etapes) -&gt; 3 climatiseurs + notifications ✓
+[6] Cause du bavardage du capteur sensor.eco_prises_spy_pc_tv trouvee dans son
+    propre code (template) : il affiche une duree en minutes calculee avec now(),
+    donc il est recalcule chaque minute par construction. Decompte : 1808
+    evenements = puissance du PC qui fluctue, 575 = compteur de veille qui avance,
+    meme la nuit quand tout est coupe ✓
+[7] Arborescence de consommation livree sur 7 jours : ARBORESCENCE_CONSO.md,
+    14 prises mesurees, profils horaires, creneaux a nommer, vue jour par jour.
+    Chiffres cles : 420 W de moyenne, 3680 kWh/an, 711 EUR/an ; la nuit (23h-6h)
+    coute 168 EUR/an a elle seule ✓
+[8] Ecouteur temps reel ecrit : jemaya_ecouteur.py. Abonnement au bus d'evenements
+    de HA par websocket, filtre anti-bruit, detection de cascades avec les delais
+    reels, echantillonnage des mesures, alerte Telegram hors 7h30-21h ✓
+[9] Ecouteur DEPLOYE ET LANCE sur .135 (PID 45590, connecte au bus), avec
+    garde-fou : relance toutes les 5 min si mort, et au demarrage de la machine ✓
+[10] Tout le travail depose chez .135 : ~/jemaya/ (docs, scripts adaptes et testes
+     chez lui, donnees, rapports) + CONSIGNE.md + 2 messages dans sa boite, qu'il
+     releve toutes les 10 minutes ✓
+</pre>
+<h4>EN COURS</h4>
+<pre>- .135 doit produire demain matin : rapport de la nuit (23h-7h), liste courte des
+  creneaux de consommation a faire nommer par Berry, et liste propre des prises
+  aveugles. NON VERIFIE : je ne peux pas garantir le travail d'un autre agent.
+- Les creneaux attendent les etiquettes de Berry (fichier conso_a_nommer.json) :
+  c'est lui qui sait ce qui tourne, aucun modele ne peut le deviner.
+- 9 prises ne remontent aucune puissance : lave-linge, lave-vaisselle, four et
+  micro-ondes, airfryer, seche-serviette, soufflant salle de bain, radiateur
+  cuisine, TV salon, horloge, plus une clim. Principal frein de tout le projet.
+- Ecouteur lance a 23h24, pas encore observe apres plusieurs heures de marche.
+- 4 automatisations actives mais muettes a instruire : sauvegarde horaire (rien
+  depuis le 26/09), veille GitHub (19/04), notification de foudre (18/09 alors que
+  son capteur a parle 1442 fois), watchdog radiateur salle de bain (JAMAIS).
+- Questions du jumeau en attente de decision de Berry : quelle DEEPSEEK_API_KEY est
+  la vivante (deux en circulation), et veut-il recuperer chez lui les jetons GitHub
+  / HA / OpenRouter / Proxmox.
+</pre>
+<h4>ERREURS RESOLUES</h4>
+<pre>- Mon lecteur YAML ignorait la syntaxe moderne de HA (trigger: et action: au lieu
+  de platform: et service:) -&gt; les arbres perdaient les liens, corrige.
+- API history appelee avec des timestamps non encodes (le + de +00:00 passait pour
+  un espace) -&gt; donnees tronquees a 2 jours au lieu de 7, profils faux -&gt;
+  urllib.parse.quote sur les dates, collecte refaite completement.
+- Detection de cascade : chaque nouvel evenement fermait la cascade en cours -&gt;
+  cascades vides. Corrige : une cascade ouverte absorbe tout ce qui suit.
+- Filtre de l'ecouteur trop strict (capteurs nommes en francais type _puissance,
+  qualite d'air) -&gt; motifs ajoutes.
+</pre>
+<h4>FICHIERS MODIFIES</h4>
+<pre>Documents/Jemaya/etude_ha_2026-10-01/  (nouveau dossier, source de verite locale)
+  -&gt; ETUDE_VIE_HA.md, base_jemaya.json, ARBORESCENCES.md, graphe.json,
+     cascades.json, ARBORESCENCE_CONSO.md, conso_profils.json,
+     conso_a_nommer.json, donnees/ (states, logbook 24h, synthese)
+D:/hermes/scripts/jemaya_ecouteur.py
+  -&gt; nouveau : ecouteur temps reel du bus d'evenements HA, lecture seule
+H:/command_line/meteo/carte_meteo_france.yaml
+  -&gt; en-tete et annotations corriges (les cameras existent, elles ne sont pas
+     desactivees) ; chaine de dependances mise a jour
+skills/smart-home/home-assistant-config/references/capteurs-command-line-et-vigilance-meteo.md
+  -&gt; section ajoutee : ou ces cartes sont reellement affichees, et le piege de
+     recherche par nom de fichier au lieu de l'id d'entite
+.135 : ~/jemaya/ (docs, scripts, donnees, rapports, CONSIGNE.md)
+  -&gt; depot complet + consigne de travail
+.135 : crontab
+  -&gt; @reboot + toutes les 5 min : /home/berry/jemaya/lance_ecouteur.sh
+</pre>
+<h4>PROCHAINE ACTION</h4>
+<pre>Demain matin : lire le rapport depose par .135 dans ~/jemaya/rapports/, puis
+nommer les creneaux de consommation avec Berry pour que la sentinelle ait son
+referentiel. Ensuite seulement, brancher la detection d'anomalie.
+(alternative si le jumeau n'a rien produit : relancer l'ecouteur et faire le
+ rapport de nuit directement depuis .110)
+</pre>
+<h3>FIN JOURNAL</h3>
+</section>
+</body></html>

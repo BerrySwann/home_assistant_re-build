@@ -20,8 +20,9 @@ ROOT = r"C:\Users\Berry Swann\Documents\ReBuild\docs"
 ORDRE = ["Statut", "MaJ", "HA", "IA_Partner", "Source", "Modifs", "Expert", "Type"]
 STATUTS = {"Actif", "En cours", "A terminer", "VERROUILLE", "bak", "bak_h", "bak_d", "Trash", "Archive", "Original"}  # bak_h/bak_d ajoutes le 2026-10-31 13h30 (idee d Eric) ; bak/Trash/Archive ajoutes le 2026-10-30 (ordre d'Eric)
 TYPES = {"Vignette", "Page", "Carte", "Page droite", "Page gauche", "Dashboard Doc", "Vignette Doc", "Page Doc", "Config Racine", "Index_Pages", "Scripts", "Script", "Script_Executant", "System", "Dashboard", "Automation", "README", "TUTO", "Hacking", "Inconnu", "IA_System", "Skill"}  # System/Dashboard/Automation ajoutes le 2026-10-30 (ordre d Eric)
-SKIP = re.compile(r"(^|[\\/])(05_docs_skills_PURE|__pycache__)([\\/]|$)", re.I)  # PURE = skills en anglais, exemptes ; 05_docs_skills_MD = fiches FR, badgees (Eric 2026-10-31)
-COUL_TYPE = {"Skill": "ffeb3b", "System": "ffeb3b", "IA_System": "ffeb3b"}  # couleur par valeur du Type, defaut ff9800 (Skill, System et IA_System jaunes, ordre d Eric le 2026-10-31 17h08)
+SKIP = re.compile(r"(^|[\\/])(05_docs_skills_PURE|98_sauvegarde_hors_docs|__pycache__)([\\/]|$)", re.I)  # PURE = skills en anglais, exemptes ; 05_docs_skills_MD = fiches FR, badgees (Eric 2026-10-31)
+COUL_TYPE = {"Skill": "ffeb3b", "System": "ffeb3b", "IA_System": "ffeb3b", "README": "ffeb3b", "TUTO": "ffeb3b", "Index_Pages": "ffeb3b", "Hacking": "f44336"}
+COUL_TYPE.update({v: "4fc3f7" for v in ['Automation', 'Script', 'Scripts', 'Script_Executant', 'Dashboard', 'Dashboard Doc', 'Vignette', 'Vignette Doc', 'Page', 'Page gauche', 'Page droite', 'Page Doc', 'Carte', 'Config Racine']})  # bleu clair (plus clair que le bleu HA 03a9f4), ordre d Eric le 2026-10-31 17h18  # couleur par valeur du Type, defaut ff9800 (Skill, System et IA_System jaunes, ordre d Eric le 2026-10-31 17h08)
 COUL_STATUT = {"Actif": "0f9d58", "bak": "ff9800", "bak_h": "ff9800", "bak_d": "ff9800", "Trash": "f44336", "Archive": "9e9e9e", "Original": "ffeb3b"}  # couleur par valeur (ordre d'Eric le 2026-10-31)
 BADGE = re.compile(r"\[!\[[^\]]*\]\(https://img\.shields\.io/badge/([^)\s]+)\)\]\([^)]*\)")
 FIX = "--fix" in sys.argv
