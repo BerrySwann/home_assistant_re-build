@@ -1,5 +1,18 @@
 # MOC_DASHBOARD.md - 1 YAML = 1 fiche .md (dashboard)
 
+<div align="center">
+
+[![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
+[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
+[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
+[![Type](https://img.shields.io/badge/Type-Dashboard-ff9800?style=flat-square)](.)
+
+</div>
+
 Genere le 2026-10-28 19:07. Genere par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_dashboard/gen_moc_dashboard.py. Ne pas modifier a la main : le script ecrase les modifications.
 
 Regle d'Eric (2026-10-28) : chaque YAML de docs/02_docs_dashboard (hors Dashboard_COMPLET) a sa fiche .md. Le rapprochement se fait par le nom du fichier, sinon par une fiche de la meme cellule qui cite le fichier YAML, sinon par un rattachement manuel (table FORCE du script). Sous la ligne de chaque page ou vignette figurent toutes les cartes (autres YAML) de la meme cellule avec leur fiche (Page.md). Sont ignores : sauvegardes .bak, dossiers XX_, Dashboard_COMPLET, *_ORIGINAL, *_archive*, et les fichiers qui ne sont pas des YAML (.js, .svg, .sh). Les liens sont relatifs a ce fichier.

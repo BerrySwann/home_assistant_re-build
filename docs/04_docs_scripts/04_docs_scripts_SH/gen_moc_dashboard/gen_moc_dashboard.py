@@ -54,6 +54,26 @@ def slot_of(rel):
             return "p"
     return "o"
 
+def avec_badges(texte, path):
+    """Banniere des 8 badges via Check_badges_fiches.reconstruire (regle unique, ordre d'Eric le 2026-10-31 : badges partout sauf .bak). 00_IA et 05_docs_skills restent exemptes."""
+    sys.path.insert(0, r"C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Check_badges_fiches")
+    import Check_badges_fiches as cb
+    rel = os.path.relpath(path, r"C:\Users\Berry Swann\Documents\ReBuild\docs")
+    if cb.SKIP.search(rel):
+        return texte
+    ha = cb.ha_version()
+    if not ha:
+        print("ATTENTION : H:\\.HA_VERSION illisible, badge HA absent pour " + rel)
+    nt = cb.reconstruire(texte, {}, cb.ORDRE, rel, ha)
+    if nt is None:
+        print("ATTENTION : badges non ajoutes pour " + rel)
+        return texte
+    return nt
+
+
+def sans_maj(s):
+    return re.sub(r"M.J-\d{4}--\d{2}--\d{2}", "MaJ-X", s)
+
 def main():
     dry = "--dry" in sys.argv
     ys = walk(YD, {".yaml", ".yml"})
@@ -183,6 +203,7 @@ def main():
     text = "\n".join(L)
     stamp_line = lambda t: "\n".join(l for l in t.split("\n") if not l.startswith("GENEREDATE") and not l.startswith("Genere le "))
     final = text.replace("GENEREDATE", "Genere le " + now + ".")
+    final = avec_badges(final, OUT)
     print("yaml=%d avec_fiche=%d sans_fiche=%d fiches_sans_yaml=%d" % (len(rows), n_ok, n_ko, len(orphan)))
     for r in rows:
         if not r["md"]:
@@ -192,8 +213,8 @@ def main():
         return
     old = open(OUT, encoding="utf-8", newline="").read() if os.path.exists(OUT) else None
     if old is not None:
-        a = "\n".join(l for l in old.split("\n") if not l.startswith("Genere le "))
-        b = "\n".join(l for l in final.split("\n") if not l.startswith("Genere le "))
+        a = sans_maj("\n".join(l for l in old.split("\n") if not l.startswith("Genere le ")))
+        b = sans_maj("\n".join(l for l in final.split("\n") if not l.startswith("Genere le ")))
         if a == b:
             print("MOC identique : rien d'ecrit")
             return

@@ -1,4 +1,16 @@
 # 🛠️ COMMANDES TERMINAL HA - RÉFÉRENCE
+<div align="center">
+
+[![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
+[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
+[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)
+
+</div>
+
 *Dernière mise à jour : 2026-10-13 (vérifié contre `.scripts`, `shell_command`, `scripts.yaml`, `automations.yaml` et `.logs` prod du jour ; refonte d'origine du 2026-07-18)*
 
 > ⚠️ Chemin réel : `/homeassistant/` (= `/config/`, symlink - les scripts internes utilisent `/config/`, `find` doit cibler `/homeassistant/`)

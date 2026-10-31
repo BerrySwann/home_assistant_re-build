@@ -1,6 +1,19 @@
 # GLOBAL_INDEX_SCRIPTS_SH.md - index des scripts shell et python
 
-Fichier GENERE le 2026-10-29 20:09 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+<div align="center">
+
+[![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
+[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
+[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
+[![Type](https://img.shields.io/badge/Type-Scripts-ff9800?style=flat-square)](.)
+
+</div>
+
+Fichier GENERE le 2026-10-31 11:52 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 ## Difference entre l'index SH et l'index YAML
 
@@ -27,7 +40,7 @@ Fichier GENERE le 2026-10-29 20:09 par docs/04_docs_scripts/04_docs_scripts_SH/g
 | [Check_GLOBAL_INDEX.py](04_docs_scripts_SH/Check_GLOBAL_INDEX/Check_GLOBAL_INDEX.py) | python | absent de H:\.scripts | - | - | - | [Check_GLOBAL_INDEX.md](04_docs_scripts_SH_MD/Check_GLOBAL_INDEX/Check_GLOBAL_INDEX.md) | Check_GLOBAL_INDEX |
 | [Check_XX_presents.py](04_docs_scripts_SH/Check_XX_presents/Check_XX_presents.py) | python | absent de H:\.scripts | - | - | ha-push-docs, ha-push-md, ha-push-yaml | [Check_XX_presents.md](04_docs_scripts_SH_MD/Check_XX_presents/Check_XX_presents.md) | Check_XX_presents |
 | [XX_manifest.json](04_docs_scripts_SH/Check_XX_presents/XX_manifest.json) | autre | absent de H:\.scripts | - | - | ha-push-docs, ha-push-md, ha-push-yaml | [Check_XX_presents.md](04_docs_scripts_SH_MD/Check_XX_presents/Check_XX_presents.md) | Check_XX_presents |
-| [Check_badges_fiches.py](04_docs_scripts_SH/Check_badges_fiches/Check_badges_fiches.py) | python | absent de H:\.scripts | - | - | - | [Check_badges_fiches.md](04_docs_scripts_SH_MD/Check_badges_fiches/Check_badges_fiches.md) | Check_badges_fiches |
+| [Check_badges_fiches.py](04_docs_scripts_SH/Check_badges_fiches/Check_badges_fiches.py) | python | absent de H:\.scripts | - | - | histo | [Check_badges_fiches.md](04_docs_scripts_SH_MD/Check_badges_fiches/Check_badges_fiches.md) | Check_badges_fiches |
 | [Check_sous_context_ia.py](04_docs_scripts_SH/Check_sous_context_ia/Check_sous_context_ia.py) | python | absent de H:\.scripts | - | - | - | [Check_sous_context_ia.md](04_docs_scripts_SH_MD/Check_sous_context_ia/Check_sous_context_ia.md) | Check_sous_context_ia |
 | [Gen_GLOBAL_INDEX_automations.py](04_docs_scripts_SH/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.py) | python | absent de H:\.scripts | - | - | - | [Gen_GLOBAL_INDEX_automations.md](04_docs_scripts_SH_MD/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.md) | Gen_GLOBAL_INDEX_automations |
 | [Gen_GLOBAL_INDEX_ia.py](04_docs_scripts_SH/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.py) | python | absent de H:\.scripts | - | - | histo | [Gen_GLOBAL_INDEX_ia.md](04_docs_scripts_SH_MD/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.md) | Gen_GLOBAL_INDEX_ia |
@@ -43,7 +56,7 @@ Fichier GENERE le 2026-10-29 20:09 par docs/04_docs_scripts/04_docs_scripts_SH/g
 | [Verif_emplacements.py](04_docs_scripts_SH/Verif_emplacements/Verif_emplacements.py) | python | absent de H:\.scripts | - | - | fix-file, ha-new-yaml, ha-push-docs, ha-push-yaml, ha-resync-tree, ha-trigul, ha-update-check-cli, ha-verif-headers, histo, histo-final, sync-index, update-arbo | [Verif_emplacements.md](04_docs_scripts_SH_MD/Verif_emplacements/Verif_emplacements.md) | Verif_emplacements |
 | [Verif_headers_yaml.py](04_docs_scripts_SH/Verif_headers_yaml/Verif_headers_yaml.py) | python | absent de H:\.scripts | - | - | ha-verif-headers | [Verif_headers_yaml.md](04_docs_scripts_SH_MD/Verif_headers_yaml/Verif_headers_yaml.md) | Verif_headers_yaml |
 | [Verif_integrations_file.py](04_docs_scripts_SH/Verif_integrations_file/Verif_integrations_file.py) | python | absent de H:\.scripts | - | - | histo | [Verif_integrations_file.md](04_docs_scripts_SH_MD/Verif_integrations_file/Verif_integrations_file.md) | Verif_integrations_file |
-| [gen_moc_dashboard.py](04_docs_scripts_SH/gen_moc_dashboard/gen_moc_dashboard.py) | python | absent de H:\.scripts | - | - | - | [gen_moc_dashboard.md](04_docs_scripts_SH_MD/gen_moc_dashboard/gen_moc_dashboard.md) | gen_moc_dashboard |
-| [gen_moc_docs.py](04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py) | python | absent de H:\.scripts | - | - | - | [gen_moc_docs.md](04_docs_scripts_SH_MD/gen_moc_docs/gen_moc_docs.md) | gen_moc_docs |
+| [gen_moc_dashboard.py](04_docs_scripts_SH/gen_moc_dashboard/gen_moc_dashboard.py) | python | absent de H:\.scripts | - | - | histo | [gen_moc_dashboard.md](04_docs_scripts_SH_MD/gen_moc_dashboard/gen_moc_dashboard.md) | gen_moc_dashboard |
+| [gen_moc_docs.py](04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py) | python | absent de H:\.scripts | - | - | histo | [gen_moc_docs.md](04_docs_scripts_SH_MD/gen_moc_docs/gen_moc_docs.md) | gen_moc_docs |
 | [histo_html.py](04_docs_scripts_SH/histo_html/histo_html.py) | python | absent de H:\.scripts | - | - | histo, histo-final | [histo_html.md](04_docs_scripts_SH_MD/histo_html/histo_html.md) | histo_html |
 | [histo_trace.py](04_docs_scripts_SH/histo_trace/histo_trace.py) | python | absent de H:\.scripts | - | - | histo, histo-final | [histo_trace.md](04_docs_scripts_SH_MD/histo_trace/histo_trace.md) | histo_trace |

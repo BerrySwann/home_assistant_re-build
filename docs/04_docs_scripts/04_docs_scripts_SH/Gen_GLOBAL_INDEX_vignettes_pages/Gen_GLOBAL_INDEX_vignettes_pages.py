@@ -69,6 +69,26 @@ def title_of(g):
     return g["dirs"].get("md") or g["dirs"].get("yaml") or ""
 
 
+def avec_badges(texte, path):
+    """Banniere des 8 badges via Check_badges_fiches.reconstruire (regle unique, ordre d'Eric le 2026-10-31 : badges partout sauf .bak). 00_IA et 05_docs_skills restent exemptes."""
+    sys.path.insert(0, r"C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Check_badges_fiches")
+    import Check_badges_fiches as cb
+    rel = os.path.relpath(path, r"C:\Users\Berry Swann\Documents\ReBuild\docs")
+    if cb.SKIP.search(rel):
+        return texte
+    ha = cb.ha_version()
+    if not ha:
+        print("ATTENTION : H:\\.HA_VERSION illisible, badge HA absent pour " + rel)
+    nt = cb.reconstruire(texte, {}, cb.ORDRE, rel, ha)
+    if nt is None:
+        print("ATTENTION : badges non ajoutes pour " + rel)
+        return texte
+    return nt
+
+
+def sans_maj(s):
+    return re.sub(r"M.J-\d{4}--\d{2}--\d{2}", "MaJ-X", s)
+
 def main():
     for p in (MDIR, YDIR):
         if not os.path.isdir(p):
@@ -141,10 +161,11 @@ def main():
     if DRY:
         print("--dry : rien ecrit")
         return
+    content = avec_badges(content, OUT)  # apres le controle des liens
     old = read(OUT) if os.path.exists(OUT) else None
 
     def norm(s):
-        return re.sub(r"Fichier GENERE le \S+ \S+", "Fichier GENERE le X", s.replace("\r\n", "\n"))
+        return sans_maj(re.sub(r"Fichier GENERE le \S+ \S+", "Fichier GENERE le X", s.replace("\r\n", "\n")))
 
     if old is not None and norm(old) == norm(content):
         print("inchange : fichier deja a jour")

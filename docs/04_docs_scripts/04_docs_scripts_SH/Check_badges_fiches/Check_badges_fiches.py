@@ -7,10 +7,10 @@ Avec --fix : cree les badges manquants (jamais de modification d'un badge exista
   Modifs = Autorisees, Expert = HAOS_Proxmox, Type par dossier (01 System, 02 Dashboard, 03 Automation, 04 Scripts). Type ailleurs : jamais devine,
   listes comme A DECIDER.
 Options : --fix ; --limite N (corrige au plus N fiches) ; --chemin SOUS_DOSSIER (restreint a un sous-dossier de docs).
-Exemptes : .bak, MOC_*, GLOBAL_INDEX_*, docs/00_IA, copies de skills (docs/05_docs_skills).
+Exemptes : copies de skills (docs/05_docs_skills). MOC_* et GLOBAL_INDEX_* ne sont plus exemptes (ordre d Eric le 2026-10-31 : badges partout sauf .bak).
 XX_*, *_ORIGINAL et *_archive* ne sont plus exemptes (ordre d'Eric le 2026-10-31).
-Couleur du Statut selon la valeur : Actif vert 0f9d58, bak orange ff9800, Trash rouge f44336, Archive et Original gris 9e9e9e. Une couleur qui ne correspond pas a la valeur est signalee (StatutCouleur), jamais corrigee.
-Statut automatique : XX_ et archive = Archive, *_ORIGINAL = Actif (vert en prod, ordre d'Eric le 2026-10-31).
+Couleur du Statut selon la valeur : Actif vert 0f9d58, bak orange ff9800, Trash rouge f44336, Archive gris 9e9e9e, Original jaune ffeb3b. Une couleur qui ne correspond pas a la valeur est signalee (StatutCouleur), jamais corrigee.
+Statut automatique : XX_ et archive = Archive, *_ORIGINAL = Original (jaune ffeb3b, ordre d'Eric le 2026-10-31).
 Derniere ligne : controle badges: fiches=N conformes=N a_corriger=N a_decider=N corrigees=N
 """
 import os, re, sys, shutil, datetime
@@ -20,10 +20,11 @@ ROOT = r"C:\Users\Berry Swann\Documents\ReBuild\docs"
 ORDRE = ["Statut", "MaJ", "HA", "IA_Partner", "Source", "Modifs", "Expert", "Type"]
 STATUTS = {"Actif", "En cours", "A terminer", "VERROUILLE", "bak", "Trash", "Archive", "Original"}  # bak/Trash/Archive ajoutes le 2026-10-30 (ordre d'Eric)
 TYPES = {"Vignette", "Page", "Carte", "Page droite", "Page gauche", "Dashboard Doc", "Vignette Doc", "Page Doc", "Config Racine", "Index_Pages", "Scripts", "Script", "Script_Executant", "System", "Dashboard", "Automation", "README", "TUTO", "Hacking"}  # System/Dashboard/Automation ajoutes le 2026-10-30 (ordre d Eric)
-SKIP = re.compile(r"(^|[\\/])(00_IA|05_docs_skills|__pycache__)([\\/]|$)", re.I)
-COUL_STATUT = {"Actif": "0f9d58", "bak": "ff9800", "Trash": "f44336", "Archive": "9e9e9e", "Original": "9e9e9e"}  # couleur par valeur (ordre d'Eric le 2026-10-31)
+SKIP = re.compile(r"(^|[\\/])(05_docs_skills|__pycache__)([\\/]|$)", re.I)
+COUL_STATUT = {"Actif": "0f9d58", "bak": "ff9800", "Trash": "f44336", "Archive": "9e9e9e", "Original": "ffeb3b"}  # couleur par valeur (ordre d'Eric le 2026-10-31)
 BADGE = re.compile(r"\[!\[[^\]]*\]\(https://img\.shields\.io/badge/([^)\s]+)\)\]\([^)]*\)")
 FIX = "--fix" in sys.argv
+OVR = {}  # valeurs imposees par le mode --bak
 
 def arg(nom, defaut=None):
     if nom in sys.argv:
@@ -50,7 +51,7 @@ def fiches():
         base = os.path.join(ROOT, sous)
     for dp, dn, fn in os.walk(base):
         for f in sorted(fn):
-            if not f.lower().endswith(".md") or ".bak" in f or f.startswith(("MOC_", "GLOBAL_INDEX_")):
+            if not f.lower().endswith(".md") or ".bak" in f:
                 continue
             p = os.path.join(dp, f)
             if SKIP.search(os.path.relpath(p, ROOT)):
@@ -76,6 +77,8 @@ def ligne_badge(k, v, ha):
     return m % (nom, "%s-%s-%s" % (nom if k == "MaJ" else k, v.replace("-", "--"), coul[k]), "")
 
 def auto(k, chemin, ha):
+    if k in OVR:
+        return OVR[k]
     if k == "HA":
         return ha
     if k == "MaJ":
@@ -93,12 +96,12 @@ def auto(k, chemin, ha):
         if low.startswith("xx_") or "\\xx_" in low:
             return "Archive"  # dossiers XX_ (ordre d'Eric le 2026-10-30)
         if "_original" in low or "yaml_original" in low:
-            return "Actif"  # *_ORIGINAL : Actif vert en prod (ordre d'Eric le 2026-10-31, remplace Original)
+            return "Original"  # *_ORIGINAL : Original jaune (ordre d'Eric le 2026-10-31, annule le passage en Actif vert du meme jour)
         if "archive" in low:
             return "Archive"  # sauf Modifs=INTERDITES (cas particulier)
         return "Actif"  # defaut decide par Eric le 2026-10-30
     if k == "Type":  # Type par categorie de dossier (ordre d Eric le 2026-10-30)
-        for dossier, t in (("01_docs_config_system", "System"), ("02_docs_dashboard", "Dashboard"), ("03_docs_automations", "Automation"), ("04_docs_scripts", "Scripts")):
+        for dossier, t in (("01_docs_config_system", "System"), ("02_docs_dashboard", "Dashboard"), ("03_docs_automations", "Automation"), ("04_docs_scripts", "Scripts"), ("XX_docs_MD_system", "System")):
             if chemin.replace("/", "\\").startswith(dossier + "\\"):
                 return t
     return None
@@ -160,6 +163,8 @@ def reconstruire(texte, tr, manquants, chemin, ha):
     return eol.join(lignes[:pos] + banniere + lignes[pos:])
 
 def main():
+    if "--bak" in sys.argv:
+        return main_bak()
     ha = ha_version()
     lim = int(arg("--limite", "100000"))
     n = ok = corr = dec = faits = 0
@@ -180,7 +185,7 @@ def main():
         indecis = [k for k in manq if auto(k, rel, ha) is None]
         if indecis: dec += 1
         print("%s | manque=%s | hors_liste=%s | gabarit=%s | a_decider=%s" % (rel, ",".join(manq) or "-", ",".join(pb) or "-", "oui" if gab else "non", ",".join(indecis) or "-"))
-        if FIX and manq and faits < lim:
+        if FIX and manq and not gab and faits < lim:  # gabarit jamais reecrit
             if "HA" in manq and not ha:
                 print("   FIX ignore : H:\\.HA_VERSION illisible"); continue
             nt = reconstruire(texte, tr, manq, rel, ha)
@@ -195,5 +200,60 @@ def main():
     print("controle badges: fiches=%d conformes=%d a_corriger=%d a_decider=%d corrigees=%d" % (n, ok, corr, dec, faits))
     return 0 if corr == 0 else 1
 
+def date_bak(nom):
+    m = re.search(r"\.bak_(\d{4})_(\d{2})_(\d{2})", nom)
+    return "%s-%s-%s" % m.groups() if m else None
+
+def classer_bak():
+    """Statut voulu par .bak (ordre d'Eric le 2026-10-31) : date >= 2026-10-30 -> bak ; plus ancien et destine a la corbeille par le menage (hors 3 derniers jours passes, un seul fichier par jour passe) -> Trash ; plus ancien conserve -> aucun badge."""
+    auj = datetime.date.today().strftime("%Y-%m-%d")
+    groupes = {}
+    for dp, dn, fn in os.walk(ROOT):
+        if SKIP.search(os.path.relpath(dp, ROOT) + os.sep):
+            continue
+        for f in fn:
+            if f.lower().endswith(".md") and ".bak_" in f and date_bak(f):
+                groupes.setdefault((dp, f.split(".bak_")[0]), []).append(f)
+    res = {}
+    for (dp, stem), fs in groupes.items():
+        par_jour = {}
+        for f in fs:
+            par_jour.setdefault(date_bak(f), []).append(f)
+        gardes = set(par_jour.get(auj, []))
+        for j in sorted([j for j in par_jour if j != auj], reverse=True)[:3]:
+            gardes.add(sorted(par_jour[j])[-1])
+        for f in fs:
+            d = date_bak(f)
+            v = "bak" if d >= "2026-10-30" else (None if f in gardes else "Trash")
+            res[os.path.join(dp, f)] = (v, d)
+    return res
+
+def main_bak():
+    ha = ha_version()
+    lim = int(arg("--limite", "100000"))
+    nb = faits = ignores = 0
+    for p, (v, d) in sorted(classer_bak().items()):
+        if v is None:
+            continue
+        rel = os.path.relpath(p, ROOT)
+        texte = open(p, encoding="utf-8", newline="").read()
+        tr, bloc = analyser(texte)
+        cur = tr["Statut"][1] if "Statut" in tr else None
+        manq = [k for k in ORDRE if k not in tr]
+        if cur == v and not manq:
+            continue
+        nb += 1
+        if not FIX or faits >= lim:
+            continue
+        OVR.clear(); OVR["Statut"] = v; OVR["MaJ"] = d
+        mq = manq + ([] if "Statut" in manq else ["Statut"])
+        nt = reconstruire(texte, tr, mq, rel, ha)
+        if nt is None:
+            ignores += 1; print("A REVOIR A LA MAIN : " + rel); continue
+        with open(p, "w", encoding="utf-8", newline="") as f:
+            f.write(nt)
+        faits += 1
+    print("controle badges .bak: a_corriger=%d corriges=%d a_revoir=%d" % (nb, faits, ignores))
+    return 0 if nb == 0 else 1
 if __name__ == "__main__":
     sys.exit(main())

@@ -127,7 +127,8 @@ def orphan_lines(base, orphans, taken):
     return L
 
 def write(path, text, dry):
-    stamp = lambda t: "\n".join(l for l in t.split("\n") if not l.startswith("Genere le "))
+    text = avec_badges(text, path)
+    stamp = lambda t: sans_maj("\n".join(l for l in t.split("\n") if not l.startswith("Genere le ")))
     old = open(path, encoding="utf-8").read().replace("\r\n", "\n") if os.path.exists(path) else None
     if old is not None and stamp(old) == stamp(text):
         print("inchange : " + path)
@@ -334,6 +335,26 @@ def moc_skills(dry):
     L.append("")
     write(os.path.join(root, "MOC_SKILLS.md"), "\n".join(L), dry)
     print("05 : skills=%d projet=%d sans_copie=%d dossiers_vides=%d" % (len(rows), len(proj), len(manque), len(vides)))
+
+def avec_badges(texte, path):
+    """Banniere des 8 badges via Check_badges_fiches.reconstruire (regle unique, ordre d'Eric le 2026-10-31 : badges partout sauf .bak). 00_IA et 05_docs_skills restent exemptes."""
+    sys.path.insert(0, r"C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Check_badges_fiches")
+    import Check_badges_fiches as cb
+    rel = os.path.relpath(path, r"C:\Users\Berry Swann\Documents\ReBuild\docs")
+    if cb.SKIP.search(rel):
+        return texte
+    ha = cb.ha_version()
+    if not ha:
+        print("ATTENTION : H:\\.HA_VERSION illisible, badge HA absent pour " + rel)
+    nt = cb.reconstruire(texte, {}, cb.ORDRE, rel, ha)
+    if nt is None:
+        print("ATTENTION : badges non ajoutes pour " + rel)
+        return texte
+    return nt
+
+
+def sans_maj(s):
+    return re.sub(r"M.J-\d{4}--\d{2}--\d{2}", "MaJ-X", s)
 
 def main():
     dry = "--dry" in sys.argv

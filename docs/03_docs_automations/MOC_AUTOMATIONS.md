@@ -1,5 +1,18 @@
 # MOC_AUTOMATIONS.md - 1 YAML = 1 fiche .md (automations)
 
+<div align="center">
+
+[![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
+[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
+[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
+[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
+[![Type](https://img.shields.io/badge/Type-Automation-ff9800?style=flat-square)](.)
+
+</div>
+
 Genere le 2026-10-28 20:03 par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py (MOC_AUTOMATIONS). Ne pas modifier a la main : le script ecrase les modifications.
 
 Regle d'Eric (2026-10-28) : chaque YAML de docs/03_docs_automations a sa fiche .md. Le rapprochement se fait par le nom du fichier, sinon par une fiche qui cite le nom du YAML. Une fiche proche par le nom mais non rattachee est seulement proposee comme candidate (a valider par Eric, jamais comptee OK). Sont ignores : .bak, XX_*, *_ORIGINAL, *_archive*. Voir aussi GLOBAL_INDEX_AUTOMATIONS.md (lien avec les automations de la prod). Les liens sont relatifs a ce fichier.

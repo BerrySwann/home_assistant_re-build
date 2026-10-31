@@ -271,12 +271,33 @@ def casses_de(txt):
     return n, cas
 
 
+def avec_badges(texte, path):
+    """Banniere des 8 badges via Check_badges_fiches.reconstruire (regle unique, ordre d'Eric le 2026-10-31 : badges partout sauf .bak anciens)."""
+    sys.path.insert(0, r"C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Check_badges_fiches")
+    import Check_badges_fiches as cb
+    rel = os.path.relpath(path, r"C:\Users\Berry Swann\Documents\ReBuild\docs")
+    if cb.SKIP.search(rel):
+        return texte
+    ha = cb.ha_version()
+    if not ha:
+        print("ATTENTION : H:\\.HA_VERSION illisible, badge HA absent pour " + rel)
+    nt = cb.reconstruire(texte, {}, cb.ORDRE, rel, ha)
+    if nt is None:
+        print("ATTENTION : badges non ajoutes pour " + rel)
+        return texte
+    return nt
+
+
+def sans_maj(s):
+    return re.sub(r"M.J-\d{4}--\d{2}--\d{2}", "MaJ-X", s)
+
 def main():
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
     txt, manques = build(now)
     liens, cas = casses_de(txt)
+    txt = avec_badges(txt, OUT)  # apres le controle des liens
     ancien = read(OUT) if os.path.exists(OUT) else None
-    change = ancien is None or RX_GEN.sub("", ancien) != RX_GEN.sub("", txt)
+    change = ancien is None or sans_maj(RX_GEN.sub("", ancien)) != sans_maj(RX_GEN.sub("", txt))
     if DRY:
         print("[DRY] ecriture %s" % ("necessaire" if change else "inutile (contenu identique)"))
     elif change:
