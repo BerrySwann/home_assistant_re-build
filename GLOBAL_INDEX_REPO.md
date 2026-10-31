@@ -16,6 +16,7 @@
 *Index unique de navigation - YAML, docs, entités, scripts*
 *Dernière mise à jour : 2026-10-29 (22h) - lien de la fiche Audit_md5_yaml.md remis sur son dossier (01_scripts.sh_md/Audit_md5_yaml/) après le rangement des fiches de .scripts un dossier par fichier ; aucun fichier ajouté ni supprimé*
 *Dernière mise à jour : 2026-10-31 (18h44) - entrées ajoutées : Push_5C.py et Sync_98_sauvegarde.py (scripts python, recompté : 16)*
+*Dernière mise à jour : 2026-10-31 (23h, /histo-final) - entrées ajoutées : Check_prod_fonctionnelle.py (script python, compteur de l'en-tête non recompté) et Audit_md5_docs_local.sh (ancien Audit_md5_md_yaml, renommé) ; fiche de Mf_vigilance_images.sh liée*
 
 *Dernière mise à jour : 2026-10-25 (21h21) - entrée ajoutée : Check_XX_presents.py (scripts python, recompté : 14) ; contrôle de présence des dossiers XX_ avant chaque push*
 *Dernière mise à jour : 2026-10-25 20h28 - sous-dossiers de 00_ à 04_ numérotés et suffixes MD, SH, YAML en majuscules (02_dashboard_docs_MD, 03_docs_automations_YAML, 04_docs_scripts_SH, 00_IA_SOUS_CONTEXT_IA, 01_config_system_MD...) : tous les liens corrigés, 832 liens, 0 cassé*
@@ -4190,7 +4191,7 @@ Script source : <a href="docs/04_docs_scripts/04_docs_scripts_SH/Audit_md5_yaml/
 <summary><code>mf_vigilance_images.sh</code> &nbsp;|&nbsp; Cartes de vigilance Météo-France J0/J1 (ajouté le 2026-10-12, activité non vérifiée)</summary>
 <blockquote>
 Script source : <a href="docs/04_docs_scripts/04_docs_scripts_SH/Mf_vigilance_images/Mf_vigilance_images.sh">mf_vigilance_images.sh</a> (copie de <code>/homeassistant/scripts/</code>)<br>
-Pas de doc associée.
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_SH_MD/Mf_vigilance_images/Mf_vigilance_images.md">Doc</a>
 </blockquote>
 </details>
 
@@ -4309,6 +4310,23 @@ Plan en lecture seule ou exécution ; ne pousse jamais XX_, 99_ (sauf ENTITES_GL
 ⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_SH/Sync_98_sauvegarde/Sync_98_sauvegarde.py">Script source</a><br>
 Rend ces dossiers (hors docs) poussables en prod puis sur GitHub par le 5C (décidé par Eric le 2026-10-31). Exclut les .bak sauf ceux d'Infra_Proxmox ; masque identifiants, mots de passe, clé réseau Zigbee et jetons ghp_.<br>
 📄 <a href="docs/04_docs_scripts/04_docs_scripts_SH_MD/Sync_98_sauvegarde/Sync_98_sauvegarde.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><code>Check_prod_fonctionnelle.py</code> &nbsp;|&nbsp; Contrôle en lecture seule des fichiers qui font tourner la prod (98 fichiers, 4 colonnes P R L M), étape D du trigul</summary>
+<blockquote>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_SH/Check_prod_fonctionnelle/Check_prod_fonctionnelle.py">Script source</a><br>
+Palier 1 (98 fichiers de config, automations et scripts unité par unité), palier 2 (notifs .txt et Dashboard), images en prod ; ne modifie rien (décidé par Eric le 2026-10-31).<br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_SH_MD/Check_prod_fonctionnelle/Check_prod_fonctionnelle.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><code>Audit_md5_docs_local.sh</code> &nbsp;|&nbsp; Audit MD5 des docs en local (ancien nom Audit_md5_md_yaml, renommé le 2026-10-31)</summary>
+<blockquote>
+⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_SH/Audit_md5_docs_local/Audit_md5_docs_local.sh">Script source</a><br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_SH_MD/Audit_md5_docs_local/Audit_md5_docs_local.md">Doc</a>
 </blockquote>
 </details>
 
