@@ -7,7 +7,10 @@ Avec --fix : cree les badges manquants (jamais de modification d'un badge exista
   Modifs = Autorisees, Expert = HAOS_Proxmox, Type par dossier (01 System, 02 Dashboard, 03 Automation, 04 Scripts). Type ailleurs : jamais devine,
   listes comme A DECIDER.
 Options : --fix ; --limite N (corrige au plus N fiches) ; --chemin SOUS_DOSSIER (restreint a un sous-dossier de docs).
-Exemptes : .bak, XX_*, *_ORIGINAL, *_archive*, MOC_*, GLOBAL_INDEX_*, docs/00_IA, copies de skills (docs/05_docs_skills).
+Exemptes : .bak, MOC_*, GLOBAL_INDEX_*, docs/00_IA, copies de skills (docs/05_docs_skills).
+XX_*, *_ORIGINAL et *_archive* ne sont plus exemptes (ordre d'Eric le 2026-10-31).
+Couleur du Statut selon la valeur : Actif vert 0f9d58, bak orange ff9800, Trash rouge f44336, Archive et Original gris 9e9e9e. Une couleur qui ne correspond pas a la valeur est signalee (StatutCouleur), jamais corrigee.
+Statut automatique : XX_ et archive = Archive, *_ORIGINAL = Actif (vert en prod, ordre d'Eric le 2026-10-31).
 Derniere ligne : controle badges: fiches=N conformes=N a_corriger=N a_decider=N corrigees=N
 """
 import os, re, sys, shutil, datetime
@@ -17,7 +20,8 @@ ROOT = r"C:\Users\Berry Swann\Documents\ReBuild\docs"
 ORDRE = ["Statut", "MaJ", "HA", "IA_Partner", "Source", "Modifs", "Expert", "Type"]
 STATUTS = {"Actif", "En cours", "A terminer", "VERROUILLE", "bak", "Trash", "Archive", "Original"}  # bak/Trash/Archive ajoutes le 2026-10-30 (ordre d'Eric)
 TYPES = {"Vignette", "Page", "Carte", "Page droite", "Page gauche", "Dashboard Doc", "Vignette Doc", "Page Doc", "Config Racine", "Index_Pages", "Scripts", "Script", "Script_Executant", "System", "Dashboard", "Automation", "README", "TUTO", "Hacking"}  # System/Dashboard/Automation ajoutes le 2026-10-30 (ordre d Eric)
-SKIP = re.compile(r"(^|[\\/])(XX_[^\\/]*|[^\\/]*_ORIGINAL|[^\\/]*_archive[^\\/]*|00_IA|05_docs_skills|__pycache__)([\\/]|$)", re.I)
+SKIP = re.compile(r"(^|[\\/])(00_IA|05_docs_skills|__pycache__)([\\/]|$)", re.I)
+COUL_STATUT = {"Actif": "0f9d58", "bak": "ff9800", "Trash": "f44336", "Archive": "9e9e9e", "Original": "9e9e9e"}  # couleur par valeur (ordre d'Eric le 2026-10-31)
 BADGE = re.compile(r"\[!\[[^\]]*\]\(https://img\.shields\.io/badge/([^)\s]+)\)\]\([^)]*\)")
 FIX = "--fix" in sys.argv
 
@@ -65,7 +69,7 @@ def ligne_badge(k, v, ha):
         return m % ("HA", "HA-%s-03a9f4" % v, "&logo=home-assistant&logoColor=white")
     if k == "IA_Partner":
         return "[![IA Partner](https://img.shields.io/badge/IA_Partner-%s-blueviolet?style=flat-square)](.)" % v
-    coul = {"Statut": "0f9d58", "MaJ": "44739e", "Source": "2196f3", "Modifs": "0f9d58", "Type": "ff9800"}
+    coul = {"Statut": COUL_STATUT.get(v, "0f9d58"), "MaJ": "44739e", "Source": "2196f3", "Modifs": "0f9d58", "Type": "ff9800"}
     if k == "Expert":
         return "[![Expert](https://img.shields.io/badge/Expert-%s-success?style=flat-square)](.)" % v
     nom = {"MaJ": "M\u00e0J"}.get(k, k)
@@ -86,8 +90,10 @@ def auto(k, chemin, ha):
         return "HAOS_Proxmox"
     if k == "Statut":
         low = chemin.lower()
+        if low.startswith("xx_") or "\\xx_" in low:
+            return "Archive"  # dossiers XX_ (ordre d'Eric le 2026-10-30)
         if "_original" in low or "yaml_original" in low:
-            return "Original"  # fichier original (ordre d'Eric 2026-10-30)
+            return "Actif"  # *_ORIGINAL : Actif vert en prod (ordre d'Eric le 2026-10-31, remplace Original)
         if "archive" in low:
             return "Archive"  # sauf Modifs=INTERDITES (cas particulier)
         return "Actif"  # defaut decide par Eric le 2026-10-30
@@ -108,6 +114,10 @@ def analyser(texte):
 def valeurs_hors_liste(tr):
     pb = []
     if "Statut" in tr and tr["Statut"][1] not in STATUTS: pb.append("Statut=%s" % tr["Statut"][1])
+    if "Statut" in tr:
+        mc = re.search(r"badge/Statut-.*-([0-9a-fA-F]{6})\?", tr["Statut"][0])
+        att = COUL_STATUT.get(tr["Statut"][1])
+        if mc and att and mc.group(1).lower() != att: pb.append("StatutCouleur=%s(attendu %s)" % (mc.group(1), att))
     if "Type" in tr and tr["Type"][1] not in TYPES: pb.append("Type=%s" % tr["Type"][1])
     if "Modifs" in tr and tr["Modifs"][1] not in ("Autorisees", "INTERDITES"): pb.append("Modifs=%s" % tr["Modifs"][1])
     if "HA" in tr and not re.match(r"^\d{4}\.\d+(\.\d+)?$", tr["HA"][1]): pb.append("HA=%s" % tr["HA"][1])
