@@ -1,13 +1,13 @@
 ---
 name: "ha-push-docs"
-description: "Skill HA ReBuild - synchronise les fichiers de documentation locaux (*.md + *.yaml dashboard) vers la prod H:\\Docs (Samba HA). Declencher sur : \"pousse les docs en prod\", \"sync docs\", \"met a jour H:\\Docs\", \"nettoie les anciens yaml Dashboard\", \"vire les vieux yaml\"."
+description: "Skill HA ReBuild - synchronise les fichiers de documentation locaux (*.md + *.yaml dashboard) vers la prod H:\\docs (Samba HA). Declencher sur : \"pousse les docs en prod\", \"sync docs\", \"met a jour H:\\docs\", \"nettoie les anciens yaml Dashboard\", \"vire les vieux yaml\"."
 ---
 
-# HA Push Docs - Local -> H:\Docs (*.md + *.yaml dashboard)
+# HA Push Docs - Local -> H:\docs (*.md + *.yaml dashboard)
 
 > Fichiers presents a plusieurs emplacements (config, GLOBAL_INDEX_REPO, README) : voir `docs\00_IA\00_IA_SOUS_CONTEXT_IA\IA_CARTE_EMPLACEMENTS\IA_CARTE_EMPLACEMENTS.md` (5 emplacements : local, prod racine, prod miroir docs, GitHub racine, GitHub docs/) et le controle en lecture seule `docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py` (decide par Eric le 2026-10-18).
 
-Synchronise la documentation locale vers `H:\Docs\` : fichiers `*.md` ET `*.yaml` dashboard.
+Synchronise la documentation locale vers `H:\docs\` : fichiers `*.md` ET `*.yaml` dashboard.
 Pousse uniquement les fichiers dont le MD5 differe de la prod.
 
 > Pour les *.md seuls -> /ha_push_md. Pour les yaml config HA -> /ha_push_yaml.
@@ -18,11 +18,13 @@ Pousse uniquement les fichiers dont le MD5 differe de la prod.
 
 | Source locale | Destination prod | Type |
 |:---|:---|:---|
-| `docs\02_docs_dashboard\02_dashboard_docs_MD\` | `H:\Docs\` | *.md |
-| `docs\03_docs_automations\03_docs_automations_MD\` | `H:\Docs\` | *.md |
-| `docs\04_docs_scripts\04_docs_scripts_YAML_MD\` | `H:\Docs\` | *.md |
-| `docs\04_docs_scripts\04_docs_scripts_SH_MD\` | `H:\Docs\` | *.md |
-| `docs\02_docs_dashboard\02_dashboard_docs_YAML\` | `H:\Docs\Dashboard\` | *.yaml dashboard |
+| `docs\02_docs_dashboard\02_dashboard_docs_MD\` | `H:\docs\02_docs_dashboard\02_dashboard_docs_MD\` | *.md |
+| `docs\03_docs_automations\03_docs_automations_MD\` | `H:\docs\03_docs_automations\03_docs_automations_MD\` | *.md |
+| `docs\04_docs_scripts\04_docs_scripts_YAML_MD\` | `H:\docs\04_docs_scripts\04_docs_scripts_YAML_MD\` | *.md |
+| `docs\04_docs_scripts\04_docs_scripts_SH_MD\` | `H:\docs\04_docs_scripts\04_docs_scripts_SH_MD\` | *.md |
+| `docs\02_docs_dashboard\02_dashboard_docs_YAML\` | `H:\docs\02_docs_dashboard\02_dashboard_docs_YAML\` | *.yaml dashboard |
+
+> La prod reproduit l'arborescence de `docs` : chemin prod = `H:\docs\` + chemin relatif a `docs\` (verifie le 2026-10-31 : aucun fichier a plat dans `H:\docs`, pas de dossier `H:\docs\Dashboard`).
 
 > Utiliser `mcp__Windows-MCP__PowerShell` pour H:\ (Samba). secrets.yaml interdit absolu.
 
@@ -47,7 +49,7 @@ $localMd5 = @{}
   $srcRoot = $_
   if (Test-Path $srcRoot) {
     Get-ChildItem $srcRoot -Recurse -Filter "*.md" | ForEach-Object {
-      $rel = "md|" + $_.FullName.Replace($srcRoot + "\", "")
+      $rel = "md|" + $_.FullName.Replace("$base\docs\", "")
       $localMd5[$rel] = @{ Path=$_.FullName; Hash=(Get-FileHash $_.FullName -Algorithm MD5).Hash }
     }
   }
@@ -61,22 +63,22 @@ Get-ChildItem $yamlSrc -Directory | Where-Object { $_.Name -ne 'Dashboard_COMPLE
     Group-Object { $_.Name -replace '_\d{4}[-_]\d{2}[-_]\d{2}\.yaml$', '' } |
     ForEach-Object {
       $latest = $_.Group | Sort-Object Name | Select-Object -Last 1
-      $rel = "yaml|$subDir\$($latest.Name)"
+      $rel = "yaml|" + $latest.FullName.Replace("$base\docs\", "")
       $localMd5[$rel] = @{ Path=$latest.FullName; Hash=(Get-FileHash $latest.FullName -Algorithm MD5).Hash }
     }
 }
 Write-Host "Local : $($localMd5.Count) fichiers indexes"
 ```
 
-### 2 - MD5 prod (H:\Docs)
+### 2 - MD5 prod (H:\docs)
 ```powershell
 $prodMd5 = @{}
-Get-ChildItem "H:\Docs" -Recurse -Filter "*.md" | ForEach-Object {
-  $rel = "md|" + $_.FullName.Replace("H:\Docs\", "")
+Get-ChildItem "H:\docs" -Recurse -Filter "*.md" | ForEach-Object {
+  $rel = "md|" + $_.FullName.Replace("H:\docs\", "")
   $prodMd5[$rel] = (Get-FileHash $_.FullName -Algorithm MD5).Hash
 }
-Get-ChildItem "H:\Docs\Dashboard" -Recurse -Filter "*.yaml" -ErrorAction SilentlyContinue | ForEach-Object {
-  $rel = "yaml|" + $_.FullName.Replace("H:\Docs\Dashboard\", "")
+Get-ChildItem "H:\docs\02_docs_dashboard\02_dashboard_docs_YAML" -Recurse -Filter "*.yaml" -ErrorAction SilentlyContinue | ForEach-Object {
+  $rel = "yaml|" + $_.FullName.Replace("H:\docs\", "")
   $prodMd5[$rel] = (Get-FileHash $_.FullName -Algorithm MD5).Hash
 }
 Write-Host "Prod  : $($prodMd5.Count) fichiers indexes"
@@ -112,13 +114,8 @@ Pour chaque `*.yaml` dashboard present dans `$toPush` (vignette, page, carte) : 
 ### 4 - Push uniquement les fichiers differents
 ```powershell
 $toPush | ForEach-Object {
-  if ($_.Key.StartsWith("md|")) {
-    $rel  = $_.Key.Replace("md|", "")
-    $dest = "H:\Docs\$rel"
-  } else {
-    $rel  = $_.Key.Replace("yaml|", "")
-    $dest = "H:\Docs\Dashboard\$rel"
-  }
+  $rel  = $_.Key.Substring($_.Key.IndexOf("|") + 1)
+  $dest = "H:\docs\$rel"
   $destDir = Split-Path $dest
   New-Item -ItemType Directory -Path $destDir -Force | Out-Null
   Copy-Item $_.Path $dest -Force
@@ -127,11 +124,11 @@ $toPush | ForEach-Object {
 ```
 
 ### 5 - Nettoyage doublons Dashboard (si demande) - JAMAIS dans Dashboard_COMPLET (regle 9)
-Supprimer les anciennes versions de yaml dashboard en prod. **Dry-run + confirmation obligatoire avant suppression.** Attention : la suppression se fait sur H:\Docs, il n'y a pas de corbeille sur H:, donc jamais de suppression directe : chaque fichier a supprimer est d'abord copie dans `TEMPO\<operation>_AAAA-MM-JJ\` (meme arborescence), MD5 de la copie verifie, puis supprime sur H: ; rapport dans le journal des modifs (regle TEMPO de CLAUDE.md du 2026-10-18). Les sauvegardes locales ne sont pas concernees (voir regle 7 ci-dessous).
+Supprimer les anciennes versions de yaml dashboard en prod. **Dry-run + confirmation obligatoire avant suppression.** Attention : la suppression se fait sur H:\docs, il n'y a pas de corbeille sur H:, donc jamais de suppression directe : chaque fichier a supprimer est d'abord copie dans `TEMPO\<operation>_AAAA-MM-JJ\` (meme arborescence), MD5 de la copie verifie, puis supprime sur H: ; rapport dans le journal des modifs (regle TEMPO de CLAUDE.md du 2026-10-18). Les sauvegardes locales ne sont pas concernees (voir regle 7 ci-dessous).
 
 ```powershell
 # DRY-RUN
-Get-ChildItem "H:\Docs\Dashboard" -Recurse -Filter "*.yaml" |
+Get-ChildItem "H:\docs\02_docs_dashboard\02_dashboard_docs_YAML" -Recurse -Filter "*.yaml" |
   Where-Object { $_.FullName -notmatch '\\Dashboard_COMPLET\\' } |
   Group-Object { $_.DirectoryName + "\" + ($_.Name -replace '_\d{4}[-_]\d{2}[-_]\d{2}\.yaml$', '') } |
   Where-Object { $_.Count -gt 1 } |
@@ -144,8 +141,7 @@ Get-ChildItem "H:\Docs\Dashboard" -Recurse -Filter "*.yaml" |
 ### 6 - Verification MD5 finale sur les fichiers pousses
 ```powershell
 $toPush | ForEach-Object {
-  $dest = if ($_.Key.StartsWith("md|")) { "H:\Docs\" + $_.Key.Replace("md|","") }
-          else { "H:\Docs\Dashboard\" + $_.Key.Replace("yaml|","") }
+  $dest = "H:\docs\" + $_.Key.Substring($_.Key.IndexOf("|") + 1)
   $h1 = (Get-FileHash $_.Path -Algorithm MD5).Hash
   $h2 = (Get-FileHash $dest -Algorithm MD5).Hash
   if ($h1 -eq $h2) { Write-Host "OK   $($_.Key)" } else { Write-Host "DIFF $($_.Key)" }
@@ -161,7 +157,7 @@ Un seul fichier source, DEUX destinations en prod :
 | `docs\01_docs_config_system\01_config_system_MD\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md` | `H:\docs\01_docs_config_system\01_config_system_MD\GLOBAL_INDEX_REPO\GLOBAL_INDEX_REPO.md` | `H:\GLOBAL_INDEX_REPO.md` |
 | `docs\01_docs_config_system\01_config_system_MD\README\README.md` | `H:\docs\01_docs_config_system\01_config_system_MD\README\README.md` | `H:\README.md` |
 
-- Les destinations sont calculees a la main : ces fichiers ne sont PAS dans les 5 sources du tableau du haut (qui ecrivent dans H:\Docs\ a plat), ne pas les melanger au calcul de ces sources.
+- Les destinations sont calculees a la main : ces fichiers ne sont PAS dans les 5 sources du tableau du haut (dont le calcul est decrit plus haut), ne pas les melanger au calcul de ces sources.
 - MD5 de la source comparee a CHAQUE destination separement. Pousser seulement celles qui different. Afficher les deux lignes dans le diff (NOUVEAU / DIFF / identique).
 - Verification MD5 finale sur les deux destinations (source = destination 1 = destination 2).
 - Les sauvegardes `GLOBAL_INDEX_REPO.bak_...` et `README.bak_...` restent locales (regle 8).
@@ -176,7 +172,7 @@ Un seul fichier source, DEUX destinations en prod :
 3. **secrets.yaml -> interdit absolu.**
 4. **Local = verite absolue** : en cas de conflit, le local l'emporte.
 5. **Dry-run obligatoire** avant toute suppression de doublons Dashboard.
-6. **DEPENDANCES_GLOBALES_CLAUDE_memoire.md** : LOCAL SEUL (dossier XX_docs_MD_system, decide par Eric le 2026-10-25 21:25). Jamais pousse en prod ; s'il apparait dans un diff, l'ignorer et le signaler.
+6. **DEPENDANCES_GLOBALES_CLAUDE_memoire.md** (`docs\00_IA\00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire\`) : depuis le 2026-10-30 il part en prod avec le push general de /histo (etape 5C, tout `docs` hors `XX_` et `.bak`), ce qui remplace la decision du 2026-10-25 qui le gardait en local seul. Il n'est pas dans les 5 sources de ce skill : mettre sa date et ses lignes a jour en local, /histo le pousse.
 7. **Jamais de sauvegarde creee sur H: ni sur D:** (regle du 2026-10-08). Avant de modifier un fichier de documentation, on le modifie en LOCAL apres en avoir fait une copie a cote de lui, `fichier.ext.bak_AAAA_MM_JJ_HHhMMmSSs` (10 max le jour meme, 3 `.bak_AAAA_MM_JJ` max pour les jours precedents, menage fait par /histo, suppressions vers la corbeille Windows). Voir CLAUDE.md, section REGLE DE SAUVEGARDE.
 8. **Les sauvegardes locales ne sont jamais poussees** : les fichiers `*.bak_...` ne sont pas pris par les filtres `*.md` / `*.yaml`. Si un fichier `.md` au nom date (`_AAAA-MM-JJ_HHhmm.md` ou `_AAAA-MM-JJ.md`) ou un dossier `_ARCHIVE` apparait dans le diff, c'est une sauvegarde ou une archive locale : ne pas le pousser et le signaler.
 9. **Dashboard_COMPLET : ne jamais y toucher** (decide par Eric le 2026-10-11). Ce dossier contient les mises a jour au fil de l'eau du dashboard complet, il ne se vide jamais. Ce skill l'exclut du calcul MD5/push (etape 1) et du nettoyage de doublons (etape 5) : aucune copie, aucune suppression, aucun renommage, en local comme en prod. Meme si la demande dit "vire les vieux yaml" ou "nettoie les anciens yaml Dashboard", ce dossier est ignore et signale. Le seul circuit qui s'en occupe est l'etape 5B de /histo.

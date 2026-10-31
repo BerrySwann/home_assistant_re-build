@@ -24,18 +24,15 @@ documentation de dependances pour maintenir la coherence du projet.
 
 | Type valide | Fichier index a mettre a jour |
 |:---|:---|
-| Config YAML | `docs/00_IA/` |
+| Config YAML | `docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md` |
 | Automation | `docs/03_docs_automations/03_docs_automations_MD/{nom_automation}.md` + index automations si existant |
 | Script | `docs/04_docs_scripts/04_docs_scripts_YAML_MD/{nom_script}.md` |
 | Tout type impactant une vignette | `DEPENDANCES_GLOBALES_CLAUDE_memoire.md` |
 
 **Chemins Windows :**
-- `C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\`
+- `C:\Users\Berry Swann\Documents\ReBuild\docs\00_IA\00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire\DEPENDANCES_GLOBALES_CLAUDE_memoire.md`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\03_docs_automations\03_docs_automations_MD\`
 - `C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_YAML_MD\`
-
-**Chemin bash sandbox :** `/sessions/bold-determined-wright/mnt/Documents--ReBuild/docs/`
-> Note : le prefixe de session bash peut changer. Verifier avec `ls /sessions/` si besoin.
 
 ## Protocole d'execution
 
