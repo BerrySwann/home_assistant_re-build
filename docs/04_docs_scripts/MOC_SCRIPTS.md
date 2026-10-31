@@ -104,7 +104,7 @@ Outils de controle, pour Eric, Claude et Hermes. Certains sont lances depuis un 
 <tbody>
 <tr><td>Audit_md5</td><td><a href="04_docs_scripts_SH/Audit_md5/Audit_md5.sh">Audit_md5.sh</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Audit_md5/Audit_md5.md">fiche</a></td><td>oui (P4_log_eric_zone.yaml)</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
-<tr><td>Audit_md5_md_yaml</td><td><a href="04_docs_scripts_SH/Audit_md5_md_yaml/Audit_md5_md_yaml.sh">Audit_md5_md_yaml.sh</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Audit_md5_md_yaml/Audit_md5_md_yaml.md">fiche</a></td><td>oui (GitHub_backup_GitHub.yaml)</td></tr>
+<tr><td>Audit_md5_docs_local</td><td><a href="04_docs_scripts_SH/Audit_md5_docs_local/Audit_md5_docs_local.sh">Audit_md5_docs_local.sh</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Audit_md5_docs_local/Audit_md5_docs_local.md">fiche</a></td><td>oui (GitHub_backup_GitHub.yaml)</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Audit_md5_yaml</td><td><a href="04_docs_scripts_SH/Audit_md5_yaml/Audit_md5_yaml.sh">Audit_md5_yaml.sh</a></td><td>Fiche OK <a href="../01_docs_config_system/01_config_system_MD/.scripts/01_scripts.sh_md/Audit_md5_yaml/Audit_md5_yaml.md">fiche</a> (rattachement manuel)</td><td>oui (GitHub_backup_GitHub.yaml)</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>

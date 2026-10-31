@@ -4,13 +4,18 @@
 2. Extrait les liens et chemins cites par les fichiers d'index et teste leur existence,
    en deux passes (un nom de fichier cite sans son dossier n'est pas un lien mort).
 
+Depuis 2026-10-31 (c20261031-10 point 5, GO d'Eric) :
+  * une phrase qui dit qu'un fichier n'existe plus n'est pas un lien mort : le lien
+    tombe dans un compteur a part "ignores (historique)" ;
+  * TEMPO n'est jamais une cible : exclu de la carte des noms et jamais resolu.
+
 Usage : python audit_carte_docs.py
 Regler LOCAL / PROD / ZONES / INDEX avant de lancer. Ne modifie AUCUN fichier.
 
 Pieges Python sur Windows (vecus, coutent une iteration chacun) :
   * os.path.join("C:", "Users", ...) rend "C:Users\\..." SANS separateur : os.walk ne trouve
     rien, sans lever d'erreur, et le projet parait vide. Ecrire "C:/Users/..." ou "C:" + os.sep.
-  * r"H:\\" est une SyntaxError : une chaine brute ne peut pas finir par un antislash.
+  * r"H:\\\\" est une SyntaxError : une chaine brute ne peut pas finir par un antislash.
 """
 
 import hashlib
@@ -48,7 +53,14 @@ MOTIFS = [
                r"(?:md|yaml|yml|sh|py|txt|json|html|png|csv))`"),
 ]
 
-EXCLUS = (".git", "node_modules", "__pycache__")
+# Un lien cite dans une phrase qui dit qu'il n'existe plus n'est pas un lien mort.
+HISTO = re.compile(r"(n'y a plus|n y a plus|plus de fichier|supprim|retir|fusionn"
+                   r"|remplac|obsolet|abandonn|devenu|vestige|historique)", re.I)
+
+# TEMPO est un dossier temporaire : jamais une cible valide.
+TEMPO = re.compile(r"(^|[\\/])TEMPO([\\/]|$)", re.I)
+
+EXCLUS = (".git", "node_modules", "__pycache__", "TEMPO")
 
 
 def compte(racine):
@@ -65,7 +77,9 @@ def compte(racine):
 
 
 def carte_noms():
-    """nom de fichier -> emplacements, pour la 2e passe de resolution des liens."""
+    """nom de fichier -> emplacements, pour la 2e passe de resolution des liens.
+    TEMPO est exclu : un fichier qui n'y vit que temporairement ne doit jamais
+    servir a declarer un lien "a reecrire"."""
     noms = {}
     for base in (LOCAL, PROD):
         for racine, dossiers, fichiers in os.walk(base):
@@ -109,13 +123,28 @@ for rel in INDEX:
         autre = hashlib.md5(open(pp, "rb").read()).hexdigest()[:8]
         etat = "miroir local/prod identique" if autre == empreinte else f"ECART avec prod ({autre})"
     texte = open(p, encoding="utf-8", errors="replace").read()
-    liens = set()
-    for motif in MOTIFS:
-        liens.update(motif.findall(texte))
+    lignes_txt = texte.splitlines()
 
-    morts, faux = [], []
-    for lien in sorted(liens):
+    liens, vus = [], set()
+    for motif in MOTIFS:
+        for m in motif.finditer(texte):
+            lien = m.group(1)
+            if lien in vus:
+                continue
+            vus.add(lien)
+            liens.append((lien, m.start()))
+
+    morts, faux, histo, tempo = [], [], [], []
+    for lien, pos in sorted(liens):
         if lien.startswith(("http://", "https://", "mailto:", "#")):
+            continue
+        if TEMPO.search(lien.replace("/", "\\")):
+            tempo.append(lien)
+            continue
+        i = texte.count("\n", 0, pos)
+        contexte = lignes_txt[i] if i < len(lignes_txt) else ""
+        if HISTO.search(contexte):
+            histo.append(lien)
             continue
         if existe(lien):
             continue
@@ -128,9 +157,14 @@ for rel in INDEX:
             morts.append(lien)
 
     print(f"### {rel}   ({empreinte}{', ' + etat if etat else ''})")
-    print(f"    {len(liens)} references   {len(morts)} DISPARUS   {len(faux)} cites sans leur dossier")
+    print(f"    {len(vus)} references   {len(morts)} DISPARUS   {len(histo)} ignores (historique)"
+          f"   {len(tempo)} TEMPO   {len(faux)} cites sans leur dossier")
     for lien in morts[:12]:
         print(f"       disparu : {lien}")
+    for lien in histo[:12]:
+        print(f"       ignore, la phrase dit qu'il n'existe plus : {lien}")
+    for lien in tempo[:12]:
+        print(f"       TEMPO, jamais une cible : {lien}")
     for lien, ou in faux[:6]:
         print(f"       a reecrire : {lien}  ->  {ou[0]}")
     print()

@@ -31,6 +31,21 @@ RACINE_MD = {MD + '/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md': 'GLOBAL_INDEX_REPO.
 PROD_SEULE_DOSSIERS = {'notifs', 'themes', 'blueprints'}
 EXCLUS_NOMS = {'secrets.yaml', 'scenes.yaml', 'ip_bans.yaml'}
 SOUS_DOSSIERS_SCRIPTS = ('01_scripts.sh', '02_scripts.py')
+# automations.yaml et scripts.yaml (ajoutes le 2026-10-31, demande d'Eric : fichiers vitaux de la prod). Pas de copie entiere
+# en local ni de miroir docs : L = copie du jour dans le dossier ORIGINAL (faite par le trigul profond, qui compare ensuite
+# unite par unite) ; PM et GD ne sont pas attendus.
+ORIGINAUX = {'automations.yaml': (os.path.join('docs', '03_docs_automations', '03_docs_automations_YAML', 'AUTOMATIONS_YAML_ORIGINAL'), 'automations'),
+             'scripts.yaml': (os.path.join('docs', '04_docs_scripts', '04_docs_script_ORIGINAL'), 'scripts')}
+
+
+def copie_du_jour(nom, now):
+    d, base = ORIGINAUX[nom]
+    d = os.path.join(REBUILD, d)
+    if not os.path.isdir(d):
+        return None
+    pre = '%s.bak_%s_' % (base, now.strftime('%Y_%m_%d'))
+    c = sorted(x for x in os.listdir(d) if x.startswith(pre) and x.endswith('.yaml'))
+    return os.path.join(d, c[-1]) if c else None
 
 
 def ignore(name):
@@ -144,6 +159,8 @@ def main():
         items.append((rel, CFG + '/' + rel, r, CFG + '/' + rel, r, CFG + '/' + rel))
     for lrel, r in RACINE_MD.items():
         items.append((lrel, lrel, r, lrel, r, lrel))
+    for nom in ORIGINAUX:
+        items.append((nom, '@ORIGINAL:' + nom, nom, None, nom, None))
 
     lignes, comptes = [], {}
     suivis_racine, suivis_miroir = set(), set()
@@ -151,22 +168,23 @@ def main():
         suivis_racine.add(pr)
         suivis_miroir.add(pm)
         v = {}
-        p = exact(REBUILD, l)
+        p = copie_du_jour(l[len('@ORIGINAL:'):], now) if l.startswith('@ORIGINAL:') else exact(REBUILD, l)
         v['L'] = blob_file(p) if p else None
         p = exact(PROD, pr)
         v['PR'] = blob_file(p) if p else None
-        p = exact(PROD, pm)
+        p = exact(PROD, pm) if pm else None
         v['PM'] = blob_file(p) if p else None
         if gh is None:
             v['GR'] = v['GD'] = '?'
         else:
             v['GR'] = gh.get(gr)
-            v['GD'] = gh.get(gd)
-        manque = [k for k in ('L', 'PR', 'PM', 'GR', 'GD') if v[k] is None]
+            v['GD'] = gh.get(gd) if gd else None
+        attendus_col = [k for k in ('L', 'PR', 'PM', 'GR', 'GD') if not (k == 'PM' and pm is None) and not (k == 'GD' and gd is None)]
+        manque = [k for k in attendus_col if v[k] is None]
         loc = v['L']
         prod_diff = [k for k in ('PR', 'PM') if v[k] is not None and v[k] != loc]
         gh_diff = [k for k in ('GR', 'GD') if v[k] not in (None, '?') and v[k] != loc]
-        if manque and set(manque) <= {'GR', 'GD'} and not prod_diff and v['PR'] == loc and v['PM'] == loc:
+        if manque and set(manque) <= {'GR', 'GD'} and not prod_diff and v['PR'] == loc and (pm is None or v['PM'] == loc):
             verdict = 'GITHUB EN ATTENTE DU BACKUP absent ' + '+'.join(manque)
             if gh_diff:
                 verdict += ' / different ' + '+'.join(gh_diff)

@@ -1,0 +1,38 @@
+23:04:16.884 | SEQ_DEBUT  | SEQUENCE           | histo-final
+23:04:16.943 | NOTE       | tokens             | debut : inconnu (compteur non visible)
+23:04:17.001 | NOTE       | menage             | definitif : oui
+23:04:17.061 | DEBUT      | automation_off     | 
+23:04:20.389 | FIN        | automation_off     | OK etat off confirme
+23:04:27.001 | DEBUT      | journal            | 
+23:04:48.460 | FIN        | journal            | OK histo_2026-10-31_s1.md
+23:04:48.517 | DEBUT      | sync_index         | 
+23:07:16.695 | FIN        | sync_index         | OK GLOBAL_INDEX_REPO maj et pousse miroir+racine MD5 identiques
+23:07:21.601 | DEBUT      | fusionne           | 
+23:07:54.063 | FIN        | fusionne           | OK JOURNAL_FUSIONNE_2026-07-15_2026-10-31.md cree
+23:07:54.120 | DEBUT      | obsidian           | 
+23:07:58.709 | FIN        | obsidian           | OK 2 fichiers copies MD5 identiques
+23:07:58.766 | DEBUT      | pages_html         | 
+23:08:06.967 | FIN        | pages_html         | OK 2 lignes, rapport pages_html_2026-10-31.txt
+23:08:12.588 | DEBUT      | menage             | 
+23:10:21.433 | FIN        | menage             | OK definitif : 427 renommes, 642 corbeille, plan relance = 0
+23:10:27.734 | DEBUT      | export_5B          | 
+23:10:56.184 | FIN        | export_5B          | OK un seul export en prod : Dashboard_2026_10_26.yaml
+23:10:56.242 | DEBUT      | push_docs          | 
+23:12:06.445 | FIN        | push_docs          | OK 31 pousses + 1 index, MD5 identiques, 2 orphelins prod gardes
+23:12:06.500 | DEBUT      | tree               | 
+23:13:29.387 | FIN        | tree               | OK IA_ARBO_DETAIL maj et pousse MD5 identique (971 prod, GitHub a8f7aaf5)
+23:13:29.448 | DEBUT      | controles_6B       | 
+23:13:30.051 | FIN        | controles_6B       | OK voir rapport
+23:13:30.110 | DEBUT      | controles_6C       | 
+23:13:30.473 | FIN        | controles_6C       | OK voir rapport
+23:13:37.086 | NOTE       | controles_6C       | ATTENTION : 1 ecart entites (voir rapport check_global_index)
+23:13:37.152 | NOTE       | controles_6B       | ATTENTION : 1 ecart (IA_P4_PRESENCE fige 2026-10-18 modifie le 2026-10-31 ; entites input_*.yaml absentes du registre)
+23:13:37.216 | DEBUT      | controles_6D       | 
+23:13:39.553 | FIN        | controles_6D       | OK voir rapport
+23:13:39.610 | DEBUT      | controles_6E       | 
+23:13:39.762 | FIN        | controles_6E       | OK voir rapport
+23:14:22.295 | DEBUT      | controles_6F       | 
+23:14:29.206 | FIN        | controles_6F       | ATTENTION 244 fiches, 243 conformes ; 1 a corriger (PAGE_MAJ.md archive, Type hors liste) ; 1 fiche sans source (SH)
+23:14:29.263 | DEBUT      | controles_6G       | 
+23:14:38.000 | FIN        | controles_6G       | OK ecarts=0 apres relance Gen_GLOBAL_INDEX_ia
+23:14:38.061 | DEBUT      | push_docs          | rattrapage

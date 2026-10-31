@@ -54,6 +54,11 @@ STEPS = [
          script=os.path.join(SH3, 'Verif_emplacements', 'Verif_emplacements.py'),
          reports=[os.path.join(MD5, '03_VERIF_EMPLACEMENTS', 'verif_emplacements_%s.txt' % TODAY)],
          must=['ANOMALIES', 'RESULTAT'], mustnot=[], needs_h=True, warn_out=['injoignable']),
+    # D : fichiers qui font tourner la prod (ajoute le 2026-10-31, demande d Eric) ; APRES B1 : il lit les copies ORIGINAL du jour et le rapport profond
+    dict(name='D_prod_fonctionnelle',
+         script=os.path.join(SH, 'Check_prod_fonctionnelle', 'Check_prod_fonctionnelle.py'),
+         reports=[os.path.join(MD5, '06_PROD_FONCTIONNELLE', 'prod_fonctionnelle_%s.txt' % TODAY)],
+         must=['RESULTAT :', 'PALIER 1'], mustnot=[], needs_h=True, warn_out=['ECART', 'non verifie']),
 ]
 
 

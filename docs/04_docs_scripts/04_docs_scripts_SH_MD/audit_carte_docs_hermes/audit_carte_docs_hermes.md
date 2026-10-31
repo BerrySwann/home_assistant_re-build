@@ -39,9 +39,9 @@ Deux blocs, dans cet ordre.
 
 **2. INDEX : miroir local / prod puis liens** : pour chaque fichier d'`INDEX`, une ligne `### <chemin relatif>` suivie de l'empreinte md5 sur 8 caracteres et, si la copie prod existe, de `miroir local/prod identique` ou `ECART avec prod (<md5 prod>)`. Un index absent en local donne `### <chemin> : ABSENT en local` et est saute. Pour un index range sous `Github/`, la copie prod est cherchee sans ce prefixe.
 
-Puis, par index : `N references   N DISPARUS   N cites sans leur dossier`, avec au plus 12 lignes `disparu : <lien>` et 6 lignes `a reecrire : <lien>  ->  <emplacement>` (2 emplacements max par nom, prefixes `PROD:` cote prod). Les compteurs affiches restent complets meme quand les listes sont tronquees.
+Puis, par index : `N references   N DISPARUS   N ignores (historique)   N TEMPO   N cites sans leur dossier`, avec au plus 12 lignes `disparu : <lien>`, `ignore, la phrase dit qu'il n'existe plus : <lien>`, `TEMPO, jamais une cible : <lien>`, et 6 lignes `a reecrire : <lien>  ->  <emplacement>` (2 emplacements max par nom, prefixes `PROD:` cote prod). Les compteurs affiches restent complets meme quand les listes sont tronquees.
 
-Liens ignores : `http://`, `https://`, `mailto:`, `#`. Un lien est teste en local puis en prod, apres retrait d'un `/` initial, normalisation des `\` et retrait du prefixe `homeassistant/`.
+Liens ignores : `http://`, `https://`, `mailto:`, `#`. Depuis le 2026-10-31 (c20261031-10 point 5, GO d'Eric) : un lien dont la ligne citee contient une phrase disant qu'il n'existe plus (`n'y a plus`, `plus de fichier`, `supprim`, `retir`, `fusionn`, `remplac`, `obsolet`, `abandonn`, `devenu`, `vestige`, `historique`) n'est JAMAIS compte comme DISPARU, il tombe dans `ignores (historique)` ; et `TEMPO` est exclu de la carte des noms et de toute resolution, un lien qui y pointe est classe `TEMPO, jamais une cible`. Un lien est teste en local puis en prod, apres retrait d'un `/` initial, normalisation des `\` et retrait du prefixe `homeassistant/`.
 
 Codes de retour :
 - 0 : le script est alle au bout. Un lien disparu ou un ecart md5 n'y change rien : l'alerte est dans le texte, pas dans le code.
