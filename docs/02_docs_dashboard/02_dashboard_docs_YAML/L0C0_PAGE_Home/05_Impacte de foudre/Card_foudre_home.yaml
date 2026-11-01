@@ -6,7 +6,7 @@
 # Entités :
 #   sensor.maison_lightning_counter        — compteur + condition de visibilité
 #   sensor.maison_lightning_distance       — distance dernier impact (km)
-#   sensor.maison_lightning_localisation   — géocodage ville (attr.features[0].properties.geocoding.city)
+#   sensor.blitzortung_lightning_localisation   — géocodage ville (attr.features[0].properties.geocoding.city)
 #   sensor.maison_lightning_azimuth        — azimut degrés (si pas de ville)
 #   sensor.dernier_impact_temps_reel       — temps écoulé depuis dernier impact
 
@@ -18,7 +18,7 @@ triggers_update:
 name: |
   [[[
     const distRaw = states['sensor.maison_lightning_distance'] ? parseFloat(states['sensor.maison_lightning_distance'].state) : 0;
-    const localisation = states['sensor.maison_lightning_localisation'];
+    const localisation = states['sensor.blitzortung_lightning_localisation'];
     const azimuth = states['sensor.maison_lightning_azimuth'] ? parseFloat(states['sensor.maison_lightning_azimuth'].state) : null;
     const impactCount = parseInt(entity.state) || 0;
     const timePhrase = states['sensor.dernier_impact_temps_reel'] ? states['sensor.dernier_impact_temps_reel'].state : '';

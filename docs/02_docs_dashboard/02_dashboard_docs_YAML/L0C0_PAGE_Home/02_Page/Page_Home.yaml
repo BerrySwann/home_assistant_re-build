@@ -235,7 +235,7 @@ cards:
     name: |
       [[[
         const distRaw = states['sensor.maison_lightning_distance'] ? parseFloat(states['sensor.maison_lightning_distance'].state) : 0;
-        const localisation = states['sensor.maison_lightning_localisation'];
+        const localisation = states['sensor.blitzortung_lightning_localisation'];
         const azimuth = states['sensor.maison_lightning_azimuth'] ? parseFloat(states['sensor.maison_lightning_azimuth'].state) : null;
         const impactCount = parseInt(entity.state) || 0;
         const timePhrase = states['sensor.timer_foudre'] ? states['sensor.timer_foudre'].state : '';

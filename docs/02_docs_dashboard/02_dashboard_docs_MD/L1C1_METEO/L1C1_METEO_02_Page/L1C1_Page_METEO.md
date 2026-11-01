@@ -176,7 +176,7 @@ Cette page regroupe toutes les informations météorologiques pour Vence (06140)
       color: green
   tap_action:
     action: navigate
-    navigation_path: /dashboard-tablette/home
+    navigation_path: /dashboard-tablette/0
   layout_options:
     grid_columns: full
     grid_rows: 1
@@ -569,7 +569,7 @@ Courbe de pluie cumulée sur 24h (mise à jour toutes les minutes).
 | `sensor.maison_lightning_distance` [HACS Blitzortung - UI] | Blitzortung | Distance dernier impact (km) |
 | `sensor.maison_lightning_azimuth` [HACS Blitzortung - UI] | Blitzortung | Direction dernier impact (°) |
 | `sensor.dernier_impact_temps_reel` [templates/meteo/M_03] | Template | "Il y a XX minutes" |
-| `sensor.maison_lightning_localisation` [sensors/meteo/M_03_...blitzortung.yaml] | REST API | Ville/lieu proche |
+| `sensor.blitzortung_lightning_localisation` [sensors/meteo/M_03_...blitzortung.yaml] | REST API | Ville/lieu proche |
 | `sensor.eclair_horaire` [utility_meter/meteo/M_03] | Utility meter | Compteur heure |
 | `sensor.eclair_quotidien` [utility_meter/meteo/M_03] | Utility meter | Compteur jour |
 | `sensor.eclair_hebdomadaire` [utility_meter/meteo/M_03] | Utility meter | Compteur semaine |
@@ -583,7 +583,7 @@ Courbe de pluie cumulée sur 24h (mise à jour toutes les minutes).
 
 ```javascript
 const distRaw = parseFloat(states['sensor.maison_lightning_distance'].state);
-const localisation = states['sensor.maison_lightning_localisation'];
+const localisation = states['sensor.blitzortung_lightning_localisation'];
 const azimuth = parseFloat(states['sensor.maison_lightning_azimuth'].state);
 const impactCount = parseInt(entity.state) || 0;
 const timePhrase = states['sensor.dernier_impact_temps_reel'].state;
@@ -934,7 +934,7 @@ Graphique annuel affiché sous la Glance Cycles, intégré directement dans le p
 
 | Entité | unique_id | Type | MAJ |
 |--------|-----------|------|-----|
-| `sensor.maison_lightning_localisation` [sensors/meteo/M_03_...blitzortung.yaml] | `blitzortung_lightning_localisation` | REST API | toutes les 3600s |
+| `sensor.blitzortung_lightning_localisation` [sensors/meteo/M_03_...blitzortung.yaml] | `blitzortung_lightning_localisation` | REST API | toutes les 3600s |
 
 > **Source des données brutes Blitzortung** (`sensor.maison_lightning_counter` [HACS Blitzortung - UI], `sensor.maison_lightning_distance` [HACS Blitzortung - UI], `sensor.maison_lightning_azimuth` [HACS Blitzortung - UI]) → créées automatiquement par l'**intégration HACS Blitzortung** (UI).
 

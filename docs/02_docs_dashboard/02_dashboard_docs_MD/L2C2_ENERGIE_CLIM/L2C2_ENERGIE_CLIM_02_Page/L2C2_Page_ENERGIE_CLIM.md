@@ -154,12 +154,12 @@ badges:
       navigation_path: "#tendances"
 tap_action:
   action: navigate
-  navigation_path: /dashboard-tablette/home   # ← retour Home
+  navigation_path: /dashboard-tablette/0   # ← retour Home
 ```
 
 Le badge `sensor.temperature_delta_affichage` (Δ T° intérieur/extérieur) ouvre la pop-up `#tendances` au clic.
 
-> ⚠️ **Constaté le 2026-09-20, CORRIGÉ le 2026-11-01** : le `tap_action` de l'en-tête pointe vers `/dashboard-tablette/home` - cette vue n'existe pas (la vue Home n'a pas de `path`) ; le retour Home ne peut pas aboutir en l'état (à corriger - GO attendu).
+> ⚠️ **Constaté le 2026-09-20, CORRIGÉ le 2026-11-01** : le `tap_action` de l'en-tête pointe vers `/dashboard-tablette/0` - cette vue n'existe pas (la vue Home n'a pas de `path`) ; le retour Home ne peut pas aboutir en l'état (à corriger - GO attendu).
 
 ---
 

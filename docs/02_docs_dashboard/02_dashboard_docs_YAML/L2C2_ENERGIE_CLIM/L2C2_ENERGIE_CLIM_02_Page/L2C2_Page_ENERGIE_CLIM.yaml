@@ -18,7 +18,7 @@ cards:
       navigation_path: '#tendances'
   tap_action:
     action: navigate
-    navigation_path: /dashboard-tablette/home
+    navigation_path: /dashboard-tablette/0
   layout_options:
     grid_columns: full
     grid_rows: 1

@@ -12,7 +12,7 @@ cards:
         color: green
     tap_action:
       action: navigate
-      navigation_path: /dashboard-tablette/home
+      navigation_path: /dashboard-tablette/0
     layout_options:
       grid_columns: full
       grid_rows: 1
@@ -565,7 +565,7 @@ cards:
         name: |
           [[[
             const distRaw = states['sensor.maison_lightning_distance'] ? parseFloat(states['sensor.maison_lightning_distance'].state) : 0;
-            const localisation = states['sensor.maison_lightning_localisation'];
+            const localisation = states['sensor.blitzortung_lightning_localisation'];
             const azimuth = states['sensor.maison_lightning_azimuth'] ? parseFloat(states['sensor.maison_lightning_azimuth'].state) : null;
             const impactCount = parseInt(entity.state) || 0;
             const timePhrase = states['sensor.timer_foudre'] ? states['sensor.timer_foudre'].state : '';
@@ -1218,7 +1218,7 @@ cards:
           show_states: true
           colorize_states: true
         yaxis:
-          - id: Eclaires
+          - id: Eclair
             min: 0
             max: auto
             opposite: true
@@ -1235,7 +1235,7 @@ cards:
             extremas: true
         series:
           - entity: sensor.eclair_quotidien
-            yaxis_id: Eclaires
+            yaxis_id: Eclair
             name: Nb éclairs ce jour
             color: gainsboro
             type: column
@@ -1277,7 +1277,7 @@ cards:
           show_states: true
           colorize_states: true
         yaxis:
-          - id: Eclaires
+          - id: Eclair
             min: 0
             max: auto
             opposite: true
@@ -1294,7 +1294,7 @@ cards:
             extremas: true
         series:
           - entity: sensor.eclair_mensuel
-            yaxis_id: Eclaires
+            yaxis_id: Eclair
             name: Nb éclairs ce mois
             color: gainsboro
             type: column

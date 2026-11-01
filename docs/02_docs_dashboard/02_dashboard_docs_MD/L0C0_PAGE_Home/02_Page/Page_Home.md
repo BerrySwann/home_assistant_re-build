@@ -201,7 +201,7 @@ Tap → `/meteo/#foudre`
 |--------|------|
 | `sensor.maison_lightning_counter` | Compteur impacts (condition + affichage) |
 | `sensor.maison_lightning_distance` | Distance dernier impact (km) |
-| `sensor.maison_lightning_localisation` | Géocodage ville (attr.features[0].properties.geocoding.city) |
+| `sensor.blitzortung_lightning_localisation` | Géocodage ville (attr.features[0].properties.geocoding.city) |
 | `sensor.maison_lightning_azimuth` | Direction (azimut degrés - fallback si pas de ville) |
 
 ---

@@ -56,7 +56,7 @@ Carte HACS utilisée : `custom:button-card`.
 |:---------|:-----|
 | `sensor.maison_lightning_counter` | Compteur d'impacts + condition de visibilité (> 1) |
 | `sensor.maison_lightning_distance` | Distance du dernier impact (km) : couleurs et animation |
-| `sensor.maison_lightning_localisation` | Géocodage : ville (`features[0].properties.geocoding.city`) |
+| `sensor.blitzortung_lightning_localisation` | Géocodage : ville (`features[0].properties.geocoding.city`) |
 | `sensor.maison_lightning_azimuth` | Azimut en degrés (utilisé si pas de ville) |
 | `sensor.dernier_impact_temps_reel` | Temps écoulé depuis le dernier impact |
 
