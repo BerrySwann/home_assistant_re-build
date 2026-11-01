@@ -25,6 +25,7 @@ P_SC = r"H:\.scripts"
 P_SHC = r"H:\shell_command"
 P_ENT = r"H:\.storage\core.entity_registry"
 OUT_SH = os.path.join(DOCS, "GLOBAL_INDEX_SCRIPTS_SH.md")
+OUT_PY = os.path.join(DOCS, "GLOBAL_INDEX_SCRIPTS_PY.md")
 OUT_YA = os.path.join(DOCS, "GLOBAL_INDEX_SCRIPTS_YAML.md")
 DRY = "--dry" in sys.argv
 
@@ -87,12 +88,12 @@ def find_fiche(mdroot, name, key=""):
 
 
 EXPL = [
-    "## Difference entre l'index SH et l'index YAML",
+    "## Difference entre les index SH, PY et YAML",
     "",
-    "- Scripts SH (index GLOBAL_INDEX_SCRIPTS_SH.md, dossier 04_docs_scripts_SH) : programmes bash ou python, executes par un interpreteur sur une machine, pas par Home Assistant lui-meme. En prod ils sont dans /config/.scripts (H:\\.scripts) et HA les lance par une commande shell_command (dossier H:\\shell_command). Les scripts de controle et de generation (hermes_*, gen_*) tournent sur le PC d'Eric, sans passer par HA. Un script SH se modifie et se pousse comme un fichier.",
+    "- Scripts SH et PY (index GLOBAL_INDEX_SCRIPTS_SH.md pour les .sh bash, GLOBAL_INDEX_SCRIPTS_PY.md pour les .py python, dossier 04_docs_scripts_SH) : programmes executes par un interpreteur sur une machine, pas par Home Assistant lui-meme. En prod ils sont dans /config/.scripts (H:\\.scripts) et HA les lance par une commande shell_command (dossier H:\\shell_command). Les scripts de controle et de generation (hermes_*, gen_*) tournent sur le PC d'Eric, sans passer par HA. Un script SH se modifie et se pousse comme un fichier.",
     "- Scripts YAML (index GLOBAL_INDEX_SCRIPTS_YAML.md, dossier 04_docs_scripts_YAML) : scripts Home Assistant definis dans H:\\scripts.yaml, qui existent comme entites script.xxx. Ce sont des suites d'actions HA, appelables par un bouton du dashboard, une automatisation ou un autre script. Un script YAML peut declencher un script SH par une action shell_command.xxx.",
     "- Chaine type : bouton du dashboard -> script YAML (scripts.yaml) -> commande shell_command (H:\\shell_command) -> script SH (/config/.scripts).",
-    "- Verification par /histo : les deux index sont regeneres par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py a chaque /histo. La section Controle liste les ecarts et /histo doit verifier que la ligne liens=N casses=M donne casses=0. Ne pas modifier ces fichiers a la main.",
+    "- Verification par /histo : les trois index sont regeneres par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py a chaque /histo. La section Controle liste les ecarts et /histo doit verifier que la ligne liens=N casses=M donne casses=0. Ne pas modifier ces fichiers a la main.",
     "",
 ]
 
@@ -157,8 +158,37 @@ def write_out(path, content, label):
     print("%s : ecrit" % label)
 
 
-def build_sh(now, scripts, autos, cmds):
+AUDIT = re.compile(r"^(audit|check|verif|hermes_audit|trigul_run)", re.I)
+_PROD = {}
+
+
+def prod_usage(name):
+    """Nom du fichier cherche dans les YAML de la prod (H:), lecture seule. Meme regle que gen_moc_docs.py."""
+    base = "H:" + chr(92)
+    if not os.path.isdir(base):
+        return "H: inaccessible"
+    if not _PROD:
+        files = [os.path.join(base, n) for n in ("shell_command.yaml", "scripts.yaml", "automations.yaml", "configuration.yaml")]
+        for d in ("shell_command", "shell_commands", "scripts", "timers"):
+            dd = os.path.join(base, d)
+            if os.path.isdir(dd):
+                for dp, dn, fn in os.walk(dd):
+                    files += [os.path.join(dp, f) for f in fn if f.lower().endswith((".yaml", ".yml"))]
+        for f in files:
+            try:
+                _PROD[f] = open(f, encoding="utf-8", errors="replace").read().lower()
+            except OSError:
+                pass
+    hits = sorted(set(os.path.basename(f) for f, t in _PROD.items() if name.lower() in t))
+    return ("oui (" + ", ".join(hits) + ")") if hits else "non trouve dans les YAML de la prod"
+
+
+def build_sh(now, scripts, autos, cmds, mode=".sh"):
+    NOM = {".sh": "SH", ".py": "PY"}[mode]
+    LANG = {".sh": "shell (bash)", ".py": "python"}[mode]
+    ignores = []
     rows, sans_fiche, prod_diff, prod_abs = [], [], [], []
+    items = []  # (nom, extension, ligne de tableau) pour le classement par section
     skill_txt = {}
     if os.path.isdir(SKILLS):
         for s in os.listdir(SKILLS):
@@ -174,6 +204,10 @@ def build_sh(now, scripts, autos, cmds):
             if name.lower().endswith(".pyc") or (len(name) > 2 and name.startswith("#") and name.endswith("#")):
                 continue  # bytecode et verrous d editeur : pas des scripts (decide par Eric le 2026-10-18)
             ext = os.path.splitext(name)[1].lower()
+            if ext != mode:
+                if ext not in (".sh", ".py"):
+                    ignores.append(name)  # ni shell ni python : pas un script (ex. XX_manifest.json)
+                continue
             typ = {".sh": "bash", ".py": "python"}.get(ext, "autre")
             pp = os.path.join(P_SC, name)
             if os.path.exists(pp):
@@ -182,7 +216,7 @@ def build_sh(now, scripts, autos, cmds):
                 st = "absent de H:\\.scripts"
             if st == "DIFFERENT":
                 prod_diff.append(name)
-            keys = [k for k, (c, fn) in cmds.items() if re.search(r"(?<![A-Za-z0-9_])%s(?![A-Za-z0-9_])" % re.escape(name), c)]
+            keys = [k for k, (c, fn) in cmds.items() if re.search(r"(?<![A-Za-z0-9_])%s(?![A-Za-z0-9_])" % re.escape(name), c, re.I)]  # insensible a la casse (corrige le 2026-11-01 : la prod ecrit audit_md5_yaml.sh en minuscules)
             users = []
             for k in keys:
                 for sk, sv in scripts.items():
@@ -195,28 +229,53 @@ def build_sh(now, scripts, autos, cmds):
             fi = find_fiche(SHMD, name, folder)
             if not fi:
                 sans_fiche.append(name)
-            rows.append("| %s | %s | %s | %s | %s | %s | %s | %s |" % (
+            rowtxt = ("| %s | %s | %s | %s | %s | %s | %s | %s |" % (
                 link(name, p), typ, st,
                 esc(", ".join("shell_command." + k for k in keys) or "-"),
                 esc(", ".join(users) or "-"), esc(", ".join(sk) or "-"),
                 link(os.path.basename(fi), fi) if fi else "aucune", esc(folder)))
-    L = header("GLOBAL_INDEX_SCRIPTS_SH.md - index des scripts shell et python", now, None)
+            rows.append(rowtxt)
+            items.append((name, ext, rowtxt))
+    L = header("GLOBAL_INDEX_SCRIPTS_%s.md - index des scripts %s" % (NOM, LANG), now, None)
     L += ["## Controle", "",
-          "- Scripts SH indexes : %d" % len(rows),
+          "- Scripts %s indexes : %d" % (NOM, len(rows)),
           "- Scripts sans fiche dans 04_docs_scripts_SH_MD : %d%s" % (len(sans_fiche), (" (" + ", ".join(sans_fiche) + ")") if sans_fiche else ""),
           "- Scripts presents dans H:\\.scripts avec un contenu different du local : %d%s" % (len(prod_diff), (" (" + ", ".join(prod_diff) + ")") if prod_diff else ""),
-          "- Les scripts 'absent de H:\\.scripts' tournent sur le PC ou ne sont pas deployes : a lire avec la colonne Skill.", "",
-          "## Scripts SH", "",
-          "| Script | Type | Copie dans H:\\.scripts | Lance par (shell_command) | Appele par (HA) | Skill (PC) | Fiche | Dossier |",
+          "- Les scripts 'absent de H:\\.scripts' tournent sur le PC ou ne sont pas deployes : a lire avec la colonne Skill.",
+          "- Fichiers du dossier 04_docs_scripts_SH ni shell ni python, hors index : %s" % (", ".join(sorted(set(ignores))) or "aucun"),
+          "- Autre type de script : voir GLOBAL_INDEX_SCRIPTS_%s.md (dossier 04_docs_scripts_SH, classement identique)." % ("PY" if mode == ".sh" else "SH"), "",
+          ]
+    TH = ["| Script | Type | Copie dans H:\\.scripts | Lance par (shell_command) | Appele par (HA) | Skill (PC) | Fiche | Dossier |",
           "|:-------|:-----|:-----------------------|:--------------------------|:----------------|:-----------|:------|:--------|"]
-    L += rows
-    L.append("")
-    print("SH : scripts=%d sans_fiche=%d prod_different=%d" % (len(rows), len(sans_fiche), len(prod_diff)))
+    # meme classement que MOC_SCRIPTS.md (decide par Eric le 2026-11-01) : ce qui tourne dans HA en haut, puis ce qui n'y tourne pas, par IA et par type
+    aud = lambda it: bool(AUDIT.match(it[0])) or it[1] not in (".sh", ".py") or (it[1] == ".py" and prod_usage(it[0]).startswith("non trouve"))
+    is_h = lambda it: "hermes" in it[0].lower()
+    EXTS = [mode]
+    srt = lambda lst: sorted(lst, key=lambda it: it[0].lower())
+    ha = [it for it in items if not aud(it)]
+    nha = [it for it in items if aud(it)]
+    L += ["## SCRIPTS HOME ASSISTANT, ILS TOURNENT DANS HOME ASSISTANT", ""]
+    if not ha:
+        L += ["- aucun script de ce type ne tourne dans Home Assistant", ""]
+    for ext in EXTS:
+        sub = srt([it for it in ha if it[1] == ext])
+        if sub:
+            L += ["#### " + ext, ""] + TH + [it[2] for it in sub] + [""]
+    L += ["## SCRIPTS HOME ASSISTANT, ILS NE TOURNENT PAS DANS HOME ASSISTANT (audit, verification, generation, historique et sauvegarde : la maison fonctionnerait sans eux)", ""]
+    for who, flt in (("SCRIPTS DE L'IA CLAUDE", lambda it: not is_h(it)), ("SCRIPTS DE L'IA HERMES", is_h)):
+        L += ["### " + who, ""]
+        for ext in EXTS:
+            sub = srt([it for it in nha if flt(it) and it[1] == ext])
+            if sub:
+                L += ["#### " + ext, ""] + TH + [it[2] for it in sub] + [""]
+        L += ["---", ""]
+    print("%s : scripts=%d sans_fiche=%d prod_different=%d" % (NOM, len(rows), len(sans_fiche), len(prod_diff)))
     return "\n".join(L)
 
 
 def build_yaml(now, scripts, autos, cmds, reg):
     rows, sans_yaml, diff, sans_fiche = [], [], [], []
+    yitems = []  # (cle, ligne de tableau)
     local = {}
     for p in files_of(YA):
         if p.endswith(".yaml"):
@@ -244,11 +303,13 @@ def build_yaml(now, scripts, autos, cmds, reg):
         fi = find_fiche(YAMD, os.path.basename(lp) if lp else key + ".yaml", key)
         if not fi:
             sans_fiche.append(key)
-        rows.append("| %s | %s | %s | %s | %s | %s | %s | %s |" % (
+        rowtxt = ("| %s | %s | %s | %s | %s | %s | %s | %s |" % (
             esc(key), esc(v.get("alias", "")), "`%s`" % reg[key] if key in reg else "inconnu",
             esc(v.get("mode", "")), link(os.path.basename(lp), lp) if lp else "aucun", st,
             esc(", ".join(called) or "-") + (" -> " + ", ".join(shl) if shl else ""),
             link(os.path.basename(fi), fi) if fi else "aucune"))
+        rows.append(rowtxt)
+        yitems.append((key, rowtxt))
     only_local = sorted(k for k in local if k not in scripts)
     pys = [p for p in files_of(YA) if p.endswith(".py")]
     L = header("GLOBAL_INDEX_SCRIPTS_YAML.md - index des scripts Home Assistant", now, None)
@@ -259,16 +320,39 @@ def build_yaml(now, scripts, autos, cmds, reg):
           "- Scripts sans fiche dans 04_docs_scripts_YAML_MD : %d%s" % (len(sans_fiche), (" (" + ", ".join(sans_fiche) + ")") if sans_fiche else ""),
           "- YAML locaux absents de scripts.yaml : %d%s" % (len(only_local), (" (" + ", ".join(only_local) + ")") if only_local else ""),
           "- Fichiers .py rangés dans 04_docs_scripts_YAML (ce sont des scripts de type SH) : %d" % len(pys), "",
-          "## Scripts YAML", "",
-          "| Cle | Alias | Entite HA | Mode | YAML local | Local = prod | Appelle (shell_command -> script SH) | Fiche |",
+          ]
+    TH = ["| Cle | Alias | Entite HA | Mode | YAML local | Local = prod | Appelle (shell_command -> script SH) | Fiche |",
           "|:----|:------|:----------|:-----|:-----------|:-------------|:-------------------------------------|:------|"]
-    L += rows
-    L += ["", "## Fichiers .py rangés dans 04_docs_scripts_YAML", "",
-          "Ces fichiers sont des scripts python lances par shell_command : ils releveraient plutot de l'index SH. Ils sont listes ici parce qu'ils sont rangés dans ce dossier.", ""]
-    for p in pys:
-        pp = os.path.join(P_SC, os.path.basename(p))
-        st = ("identique" if md5(pp) == md5(p) else "DIFFERENT") if os.path.exists(pp) else "absent de H:\\.scripts"
-        L.append("- %s : copie dans H:\\.scripts : %s" % (link(os.path.basename(p), p), st))
+    # meme classement que MOC_SCRIPTS.md et les index SH / PY (decide par Eric le 2026-11-01)
+    is_h = lambda t: "hermes" in t.lower()
+    srt = lambda lst: sorted(lst, key=lambda x: x[0].lower())
+    py_ha = [p for p in pys if not prod_usage(os.path.basename(p)).startswith("non trouve")]
+    py_nha = [p for p in pys if p not in py_ha]
+
+    def py_lines(lst):
+        out = []
+        for p in sorted(lst, key=lambda x: os.path.basename(x).lower()):
+            pp = os.path.join(P_SC, os.path.basename(p))
+            st = ("identique" if md5(pp) == md5(p) else "DIFFERENT") if os.path.exists(pp) else "absent de H:\\.scripts"
+            out.append("- %s : copie dans H:\\.scripts : %s" % (link(os.path.basename(p), p), st))
+        return out
+
+    L += ["## SCRIPTS HOME ASSISTANT, ILS TOURNENT DANS HOME ASSISTANT", "",
+          "#### .yaml (definis dans H:\\scripts.yaml)", ""] + TH + [r for k, r in srt(yitems)] + [""]
+    if py_ha:
+        L += ["#### .py rangés dans 04_docs_scripts_YAML (scripts python lances par shell_command, ils relevent aussi de l'index PY)", ""] + py_lines(py_ha) + [""]
+    L += ["## SCRIPTS HOME ASSISTANT, ILS NE TOURNENT PAS DANS HOME ASSISTANT (YAML locaux absents de scripts.yaml, python non appele par la prod)", ""]
+    for who, flt in (("SCRIPTS DE L'IA CLAUDE", lambda t: not is_h(t)), ("SCRIPTS DE L'IA HERMES", is_h)):
+        L += ["### " + who, ""]
+        loc = [k for k in only_local if flt(k)]
+        pyl = [p for p in py_nha if flt(os.path.basename(p))]
+        if loc:
+            L += ["#### .yaml", ""] + ["- %s" % link(os.path.basename(local[k]), local[k]) for k in sorted(loc)] + [""]
+        if pyl:
+            L += ["#### .py", ""] + py_lines(pyl) + [""]
+        if not loc and not pyl:
+            L += ["- aucun", ""]
+        L += ["---", ""]
     L.append("")
     print("YAML : scripts=%d sans_yaml=%d different=%d sans_fiche=%d yaml_hors_scripts=%d py_dans_yaml=%d" % (
         len(scripts), len(sans_yaml), len(diff), len(sans_fiche), len(only_local), len(pys)))
@@ -302,7 +386,8 @@ def main():
             sys.exit(2)
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
     scripts, autos, cmds, reg = load_prod()
-    write_out(OUT_SH, build_sh(now, scripts, autos, cmds), "GLOBAL_INDEX_SCRIPTS_SH")
+    write_out(OUT_SH, build_sh(now, scripts, autos, cmds, ".sh"), "GLOBAL_INDEX_SCRIPTS_SH")
+    write_out(OUT_PY, build_sh(now, scripts, autos, cmds, ".py"), "GLOBAL_INDEX_SCRIPTS_PY")
     write_out(OUT_YA, build_yaml(now, scripts, autos, cmds, reg), "GLOBAL_INDEX_SCRIPTS_YAML")
 
 

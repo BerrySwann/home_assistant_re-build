@@ -1,7 +1,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifié](https://img.shields.io/badge/MàJ-2026--04--19-44739e?style=flat-square)](.)&nbsp;
+[![Modifié](https://img.shields.io/badge/MàJ-2026--11--01-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.3-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -14,6 +14,7 @@
 | Champ | Valeur |
 |:------|:-------|
 | 📁 **Fichier prod** | `scripts.yaml` (géré via UI HA) |
+| 📄 **Source** | `docs/04_docs_scripts/04_docs_scripts_YAML/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.yaml` |
 | 🔗 **Appelé depuis** | `script.j_1_1/j_1_2/j_1_3_*` (sur OFF uniquement) |
 | ✏️ **Prompt** | Eric · BerrySwann |
 | 🤖 **Créateur** | Claude · Anthropic |

@@ -113,6 +113,8 @@ def profond_info(rel):
     cp = None
     if os.path.isdir(d):
         c = sorted(x for x in os.listdir(d) if x.startswith(base + ".bak_" + today + "_") and x.endswith(".yaml"))
+        if not c:  # apres le menage definitif : copie renommee en base.bak_AAAA_MM_JJ.yaml (nom date, sans heure)
+            c = [x for x in os.listdir(d) if x == base + ".bak_" + today + ".yaml"]
         if c:
             cp = d + "\\" + c[-1]
     rep = "?"

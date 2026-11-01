@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--01-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -14,7 +14,8 @@
 </div>
 
 > **Script HA :** `script.p1_master_gestion_clim`
-> **Fichier source :** `docs/04_docs_scripts/04_docs_scripts_YAML/p1_master_gestion_clim/p1_master_gestion_clim_2026-09-09.yaml` (versions antérieures : `_2026-09-06.yaml`)
+> **Fichier source :** `docs/04_docs_scripts/04_docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml`
+> **Ancien chemin cité par cette fiche :** `docs/04_docs_scripts/04_docs_scripts_YAML/p1_master_gestion_clim/p1_master_gestion_clim_2026-09-09.yaml` (versions antérieures : `_2026-09-06.yaml`)
 > **Mode :** `queued` - max: 10
 > **Appelé par :** Automation A0 (JOUR) + Automation B0 (NUIT)
 > **Créé par :** Refactoring LLM local - 2026-06

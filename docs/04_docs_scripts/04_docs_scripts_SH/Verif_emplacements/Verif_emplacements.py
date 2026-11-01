@@ -45,6 +45,8 @@ def copie_du_jour(nom, now):
         return None
     pre = '%s.bak_%s_' % (base, now.strftime('%Y_%m_%d'))
     c = sorted(x for x in os.listdir(d) if x.startswith(pre) and x.endswith('.yaml'))
+    if not c:  # apres le menage definitif : copie renommee en base.bak_AAAA_MM_JJ.yaml (nom date, sans heure)
+        c = [x for x in os.listdir(d) if x == '%s.bak_%s.yaml' % (base, now.strftime('%Y_%m_%d'))]
     return os.path.join(d, c[-1]) if c else None
 
 

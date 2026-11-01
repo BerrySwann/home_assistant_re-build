@@ -13,6 +13,9 @@
 
 </div>
 
+> **Doublon (decide par Eric le 2026-11-01) :** fiches qui decrivent le meme audit MD5 : `04_docs_scripts_SH_MD/Audit_md5/Audit_md5.md` (audit_md5.sh), `04_docs_scripts_YAML_MD/Audit_md5/Audit_md5.md` (script Home Assistant), `01_docs_config_system/01_config_system_MD/.scripts/01_scripts.sh_md/Audit_md5_yaml/Audit_md5_yaml.md` (fiche historique du meme script) et `04_docs_scripts_SH_MD/Audit_md5_yaml/Audit_md5_yaml.md` (cette fiche, une par script).
+> Toute modification se fait dans toutes les fiches listees.
+
 > **Script :** `audit_md5_yaml.sh` (bash)
 > **Emplacement prod :** `/config/.scripts/audit_md5_yaml.sh`
 > **Emplacement local :** `docs/01_docs_config_system/01_config_system_SH_PY_YAML/`.scripts/01_scripts.sh/audit_md5_yaml_sh/audit_md5_yaml.sh` (copie identique dans `docs/04_docs_scripts/04_docs_scripts_SH/Audit_md5_yaml/Audit_md5_yaml.sh`)

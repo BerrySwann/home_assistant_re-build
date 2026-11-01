@@ -94,7 +94,7 @@ rule (section 4 STRUCTURE NON CONFORME of its report).
 
 The `XX_` folders exist only locally and must never be lost. Before the first computation of this skill, AND a second time right after the push (before/after check), run:
 `python -I -X utf8 "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Check_XX_presents\Check_XX_presents.py"`
-It also refuses any XX_ folder present in prod (ALERTE). It compares the XX_ folders and their files with the manifest `XX_manifest.json` (same folder). `RESULTAT : OK` = continue. An ALERTE (missing folder or file) = push NOTHING, warn Eric, restore from `TEMPO\XX_sauvegarde_2026-10-25` only on his order. XX_ folders are never pushed to prod. The manifest is updated (`--maj`) only on Eric's order.
+It also refuses any XX_ folder present in prod (ALERTE). It compares the XX_ folders and their files with the manifest `XX_manifest.json` (in `docs\04_docs_scripts\04_docs_scripts_JSON\Check_XX_presents\`). `RESULTAT : OK` = continue. An ALERTE (missing folder or file) = push NOTHING, warn Eric, restore from `TEMPO\XX_sauvegarde_2026-10-25` only on his order. XX_ folders are never pushed to prod. The manifest is updated (`--maj`) only on Eric's order.
 
 ### 0 - BEFORE ANY MODIFICATION OF AN EXISTING FILE: local backup
 

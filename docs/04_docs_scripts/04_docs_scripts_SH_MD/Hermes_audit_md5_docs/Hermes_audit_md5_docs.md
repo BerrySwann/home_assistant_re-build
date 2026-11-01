@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--01-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,8 +13,8 @@
 
 </div>
 
-> **Script shell :** `audit_md5_docs.sh`
-> **Emplacement local :** `docs/04_docs_scripts/scripts/audit_md5_docs.sh`
+> **Script shell :** `Hermes_audit_md5_docs.sh` (cette fiche citait auparavant `audit_md5_docs.sh`)
+> **Emplacement local :** `docs/04_docs_scripts/04_docs_scripts_SH/Hermes_audit_md5_docs/Hermes_audit_md5_docs.sh`
 > **Exécuté depuis :** Git Bash Windows (local ReBuild - pas sur HA)
 > **Auteur :** HERMES
 > **Dernière modif :** 2026-08-07

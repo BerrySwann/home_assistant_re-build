@@ -10,10 +10,9 @@ D = r"C:\Users\Berry Swann\Documents\ReBuild\docs"
 SKIP = re.compile(r"(^|[\\/])(XX_[^\\/]*|99_docs_MD_system|98_sauvegarde_hors_docs|[^\\/]*_ORIGINAL|[^\\/]*_archive[^\\/]*|__pycache__)([\\/]|$)", re.I)
 FORCE = {}  # nom de fichier source en minuscules -> chemin complet de la fiche (rattachements valides par Eric)
 _CLIM = r"C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_YAML_MD\Climatisation\Scripts_clim_on_off\Scripts_clim_on_off.md"
-for _n in ("j_1_1_salon_clim_on_off_intelligent.yaml", "j_1_2_bureau_clim_on_off_intelligent.yaml", "j_1_3_chambre_clim_on_off_intelligent.yaml"):
-    FORCE[_n] = _CLIM  # 1 fiche pour les 3 routeurs clim (rattachement manuel, ordre d'Eric 2026-10-28)
+# FORCE des 3 routeurs clim J_1_x retire le 2026-11-01 : une fiche par script existe maintenant (rattachement par le nom), la fiche commune Scripts_clim_on_off reste en doublon
 _CFG = r"C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\01_config_system_MD"
-FORCE["audit_md5_yaml.sh"] = _CFG + r"\.scripts\01_scripts.sh_md\Audit_md5_yaml\Audit_md5_yaml.md"  # copie identique a la prod, fiche existante (ordre d'Eric 2026-10-28, a valider)
+# FORCE de audit_md5_yaml.sh retire le 2026-11-01 : fiche 04_docs_scripts_SH_MD/Audit_md5_yaml creee (la fiche de 01_scripts.sh_md reste en doublon)
 FORCE["correct_linky.py"] = _CFG + r"\.scripts\02_scripts.py_md\Correct_linky\Correct_linky.md"  # idem
 # FORCE de mf_vigilance_images.sh retire le 2026-11-01 : la fiche existe maintenant dans 04_docs_scripts_SH_MD (Mf_vigilance_images), rattachement par le nom
 
@@ -259,21 +258,25 @@ def moc_scripts(dry):
         fam.append((title, len(rows), ok, ko, cand, len(orph), orph, taken))
         allrows += rows
     ext = lambda r: os.path.splitext(r["sf"])[1].lower()
-    aud = lambda r: bool(AUDIT.match(os.path.basename(r["sf"])))
+    # hors Home Assistant : nom d'audit/verification, OU script python que les YAML de la prod n'appellent pas (generateurs, outils d'historique, push, outils Hermes) ; regle d'Eric 2026-11-01
+    aud = lambda r: bool(AUDIT.match(os.path.basename(r["sf"]))) or (os.path.splitext(r["sf"])[1].lower() == ".py" and prod_usage(os.path.basename(r["sf"])).startswith("non trouve"))
     sh = [r for r in allrows if ext(r) == ".sh" and not aud(r)]
     py = [r for r in allrows if ext(r) == ".py" and not aud(r)]
     yml = [r for r in allrows if ext(r) in (".yaml", ".yml")]
     a_sh = [r for r in allrows if ext(r) == ".sh" and aud(r)]
     a_py = [r for r in allrows if ext(r) == ".py" and aud(r)]
     key = lambda rs: sorted(rs, key=lambda r: os.path.basename(r["sf"]).lower())
-    L += ["## Controle", ""]
+    L += ["## SCRIPTS HOME ASSISTANT, ILS TOURNENT DANS HOME ASSISTANT", "", "### .sh", ""] + src_table_x(root, key(sh)) + ["", "---", "", "### .py", ""] + src_table_x(root, key(py)) + ["", "---", "", "### .yaml (scripts Home Assistant, ils tournent dans Home Assistant)", ""] + src_table_x(root, key(yml)) + [""]
+    is_h = lambda r: "hermes" in os.path.basename(r["sf"]).lower()  # auteur : Hermes si le nom du fichier contient hermes, sinon Claude (regle d'Eric 2026-11-01)
+    L += ["## SCRIPTS HOME ASSISTANT, ILS NE TOURNENT PAS DANS HOME ASSISTANT (audit, verification, generation, historique et sauvegarde : la maison fonctionnerait sans eux)", "", "Outils de controle, pour Eric, Claude et Hermes. Certains sont lances depuis un bouton ou une automation de Home Assistant (voir la colonne Appele par Home Assistant), mais ils ne servent qu'a controler, generer ou sauvegarder : la maison fonctionnerait sans eux. Un script python que les YAML de la prod n'appellent pas est range ici. Classement par auteur : un script dont le nom contient hermes est a Hermes, les autres sont a Claude.", ""]
+    for who, flt in (("SCRIPTS DE L'IA CLAUDE", lambda r: not is_h(r)), ("SCRIPTS DE L'IA HERMES", is_h)):
+        L += ["### " + who, "", "#### .sh", ""] + src_table_x(root, key([r for r in a_sh if flt(r)])) + ["", "#### .py", ""] + src_table_x(root, key([r for r in a_py if flt(r)])) + ["", "---", ""]
+    L += ["## Controle des fiches", ""]
     for t, n, ok, ko, cand, no, o, tk in fam:
         L.append("- %s : %d sources, %d avec fiche, %d sans fiche (dont %d avec candidate a valider), %d fiches sans source" % (t, n, ok, ko, cand, no))
     L += ["- Repartition : %d scripts bash, %d scripts python, %d scripts YAML Home Assistant, %d verification ou audit en bash, %d verification ou audit en python" % (len(sh), len(py), len(yml), len(a_sh), len(a_py)), ""]
     hd = [r for r in allrows if not r["md"] and not r["cand"] and header_sections(r["sf"]) >= 3]
     L += ["- Sans fiche .md mais documentes dans leur en-tete (3 sections ou plus) : %d (%s)" % (len(hd), ", ".join(os.path.basename(r["sf"]) for r in hd)), ""]
-    L += ["## Home Assistant", "", "### .sh", ""] + src_table_x(root, key(sh)) + ["", "---", "", "### .py", ""] + src_table_x(root, key(py)) + ["", "---", "", "### .yaml (scripts Home Assistant, ils tournent dans Home Assistant)", ""] + src_table_x(root, key(yml)) + [""]
-    L += ["## Audit interne (ils ne font pas tourner Home Assistant)", "", "Outils de controle, pour Eric, Claude et Hermes. Certains sont lances depuis un bouton ou une automation de Home Assistant (voir la colonne Appele par Home Assistant), mais ils ne servent qu'a controler : la maison fonctionnerait sans eux.", "", "### .sh", ""] + src_table_x(root, key(a_sh)) + ["", "---", "", "### .py", ""] + src_table_x(root, key(a_py)) + [""]
     for t, n, ok, ko, cand, no, o, tk in fam:
         L += ["## Fiches sans source correspondante (" + t + ")", ""] + orphan_lines(root, o, tk) + [""]
     write(os.path.join(root, "MOC_SCRIPTS.md"), "\n".join(L), dry)

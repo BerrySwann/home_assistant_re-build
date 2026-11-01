@@ -16,6 +16,8 @@
 *Index unique de navigation - YAML, docs, entités, scripts*
 *Dernière mise à jour : 2026-10-29 (22h) - lien de la fiche Audit_md5_yaml.md remis sur son dossier (01_scripts.sh_md/Audit_md5_yaml/) après le rangement des fiches de .scripts un dossier par fichier ; aucun fichier ajouté ni supprimé*
 *Dernière mise à jour : 2026-10-31 (18h44) - entrées ajoutées : Push_5C.py et Sync_98_sauvegarde.py (scripts python, recompté : 16)*
+*Dernière mise à jour : 2026-11-01 (matin) - index des scripts séparés par type : GLOBAL_INDEX_SCRIPTS_SH.md (.sh) et GLOBAL_INDEX_SCRIPTS_PY.md (.py, nouveau), classés comme MOC_SCRIPTS (ce qui tourne dans Home Assistant, puis ce qui n'y tourne pas, par IA Claude et Hermes) ; ancienne fiche Mf_vigilance_images.md de 01_config_system_MD/scripts retirée ; dossiers Audit_md5_md_yaml retirés de la prod. Compteur de l'en-tête non recompté.*
+
 *Dernière mise à jour : 2026-10-31 (23h, /histo-final) - entrées ajoutées : Check_prod_fonctionnelle.py (script python, compteur de l'en-tête non recompté) et Audit_md5_docs_local.sh (ancien Audit_md5_md_yaml, renommé) ; fiche de Mf_vigilance_images.sh liée*
 
 *Dernière mise à jour : 2026-10-25 (21h21) - entrée ajoutée : Check_XX_presents.py (scripts python, recompté : 14) ; contrôle de présence des dossiers XX_ avant chaque push*
@@ -4233,10 +4235,10 @@ Pas de doc associée.
 </details>
 
 <details>
-<summary><code>gen_global_index_scripts.py</code> &nbsp;|&nbsp; Génère GLOBAL_INDEX_SCRIPTS_SH.md et GLOBAL_INDEX_SCRIPTS_YAML.md</summary>
+<summary><code>gen_global_index_scripts.py</code> &nbsp;|&nbsp; Génère GLOBAL_INDEX_SCRIPTS_SH.md, GLOBAL_INDEX_SCRIPTS_PY.md et GLOBAL_INDEX_SCRIPTS_YAML.md</summary>
 <blockquote>
 ⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_SH/Gen_GLOBAL_INDEX_scripts/Gen_GLOBAL_INDEX_scripts.py">Script source</a><br>
-Sorties : <a href="docs/04_docs_scripts/GLOBAL_INDEX_SCRIPTS_SH.md">GLOBAL_INDEX_SCRIPTS_SH.md</a> · <a href="docs/04_docs_scripts/GLOBAL_INDEX_SCRIPTS_YAML.md">GLOBAL_INDEX_SCRIPTS_YAML.md</a> (régénérés à chaque /histo)<br>
+Sorties : <a href="docs/04_docs_scripts/GLOBAL_INDEX_SCRIPTS_SH.md">GLOBAL_INDEX_SCRIPTS_SH.md</a> · <a href="docs/04_docs_scripts/GLOBAL_INDEX_SCRIPTS_PY.md">GLOBAL_INDEX_SCRIPTS_PY.md</a> · <a href="docs/04_docs_scripts/GLOBAL_INDEX_SCRIPTS_YAML.md">GLOBAL_INDEX_SCRIPTS_YAML.md</a> (régénérés à chaque /histo)<br>
 Pas de doc associée.
 </blockquote>
 </details>
@@ -4290,7 +4292,7 @@ Lancé par /histo (6E, point 10) ; ne corrige rien. Fiche de référence : <a hr
 <summary><code>Check_XX_presents.py</code> &nbsp;|&nbsp; Contrôle en lecture seule de la présence des dossiers XX_ (local seul) contre un manifeste</summary>
 <blockquote>
 ⚙️ <a href="docs/04_docs_scripts/04_docs_scripts_SH/Check_XX_presents/Check_XX_presents.py">Script source</a><br>
-Lancé avant chaque push par ha-push-docs, ha-push-md et ha-push-yaml (décidé par Eric le 2026-10-25) ; alerte si un dossier ou un fichier XX_ manque. Manifeste : <a href="docs/04_docs_scripts/04_docs_scripts_SH/Check_XX_presents/XX_manifest.json">XX_manifest.json</a><br>
+Lancé avant chaque push par ha-push-docs, ha-push-md et ha-push-yaml (décidé par Eric le 2026-10-25) ; alerte si un dossier ou un fichier XX_ manque. Manifeste : <a href="docs/04_docs_scripts/04_docs_scripts_JSON/Check_XX_presents/XX_manifest.json">XX_manifest.json</a><br>
 📄 <a href="docs/04_docs_scripts/04_docs_scripts_SH_MD/Check_XX_presents/Check_XX_presents.md">Doc</a>
 </blockquote>
 </details>

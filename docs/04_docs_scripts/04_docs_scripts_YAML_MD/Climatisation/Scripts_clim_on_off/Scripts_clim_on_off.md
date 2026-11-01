@@ -11,6 +11,9 @@
 
 </div>
 
+> **Doublon (decide par Eric le 2026-11-01) :** fiches qui decrivent les routeurs clim : `04_docs_scripts_YAML_MD/Climatisation/Scripts_clim_on_off/Scripts_clim_on_off.md` (les trois ensemble), et une fiche par script : J_1_1 (salon), J_1_2 (bureau), J_1_3 (chambre).
+> Toute modification se fait dans toutes les fiches listees.
+
 | Champ | Valeur |
 |:------|:-------|
 | 📁 **Fichier prod** | `scripts.yaml` (géré via UI HA) |

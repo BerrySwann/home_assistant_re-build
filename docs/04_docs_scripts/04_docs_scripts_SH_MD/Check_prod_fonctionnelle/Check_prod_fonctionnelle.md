@@ -46,3 +46,7 @@ Lecture seule. Code de retour 0 palier 1 conforme, 1 ecart au palier 1, 2 H: inj
 ## Origine de cette fiche
 
 Creee le 2026-10-31 par Claude (ordre d'Eric 22:26).
+
+## Mise a jour 2026-11-01
+
+La copie ORIGINAL du jour de automations.yaml et scripts.yaml est aussi reconnue sous son nom date (base.bak_AAAA_MM_JJ.yaml), nom pris par le menage definitif de /histo-final ; la copie horodatee reste prioritaire si elle existe.

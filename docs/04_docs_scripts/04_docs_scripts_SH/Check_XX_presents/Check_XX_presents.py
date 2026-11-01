@@ -20,8 +20,7 @@ import os, sys, json
 BASE = os.path.join("C:" + chr(92), "Users", "Berry Swann", "Documents", "ReBuild")
 DOCS = os.path.join(BASE, "docs")
 PROD = "H:" + chr(92) + "docs"
-MANIFEST = os.path.join(DOCS, "04_docs_scripts", "04_docs_scripts_SH", "Check_XX_presents",
-                        "XX_manifest.json")
+MANIFEST = os.path.join(DOCS, "04_docs_scripts", "04_docs_scripts_JSON", "Check_XX_presents", "XX_manifest.json")  # deplace le 2026-11-01 (ordre d'Eric) : un fichier .json va dans 04_docs_scripts_JSON
 SKIP = {"TEMPO", "__pycache__"}
 PREF = ("XX_", "99_docs_MD_system")
 PROD_AUTORISE = {"99_docs_MD_system/ENTITES_GLOBAL_INDEX/ENTITES_GLOBAL_INDEX.md"}  # seul fichier de 99_ autorise en prod (Eric, 2026-10-31 17h33)  # 99_ ajoute le 2026-10-31 (ordre d Eric) : local seul, comme XX_

@@ -98,7 +98,7 @@ AUTRES = [
  ("GLOBAL_INDEX_REPO.md", "../01_docs_config_system/01_config_system_MD/GLOBAL_INDEX_REPO/GLOBAL_INDEX_REPO.md", "Index du depot GitHub, liens depuis la racine du depot. Tenu a la main par /histo (sync_index) ; a pousser aux 2 endroits de la prod (racine et miroir docs).", "check_global_index.py"),
  ("GLOBAL_INDEX_AUTOMATIONS.md", "../03_docs_automations/GLOBAL_INDEX_AUTOMATIONS.md", "Genere par gen_global_index_automations.py.", "etape 8 de /histo + check_global_index.py"),
  ("GLOBAL_INDEX_VIGNETTES_PAGES.md", "../02_docs_dashboard/GLOBAL_INDEX_VIGNETTES_PAGES.md", "Genere par gen_global_index_vignettes_pages.py.", "etape 9 de /histo + check_global_index.py"),
- ("GLOBAL_INDEX_SCRIPTS_SH.md", "../04_docs_scripts/GLOBAL_INDEX_SCRIPTS_SH.md", "Genere par gen_global_index_scripts.py (scripts bash et python).", "etape 10 de /histo + check_global_index.py"),
+ ("GLOBAL_INDEX_SCRIPTS_SH.md", "../04_docs_scripts/GLOBAL_INDEX_SCRIPTS_SH.md", "Genere par gen_global_index_scripts.py (scripts shell .sh).", "etape 10 de /histo + check_global_index.py"),
  ("GLOBAL_INDEX_SCRIPTS_YAML.md", "../04_docs_scripts/GLOBAL_INDEX_SCRIPTS_YAML.md", "Genere par gen_global_index_scripts.py (scripts Home Assistant).", "etape 10 de /histo + check_global_index.py"),
  ("ENTITES_GLOBAL_INDEX.md", "../99_docs_MD_system/ENTITES_GLOBAL_INDEX/ENTITES_GLOBAL_INDEX.md", "Index des entites, sans generateur : tenu a la main.", "check_global_index.py"),
  ("IA_GLOBAL_INDEX_memoire.md", "00_IA_GLOBAL_INDEX_memoire/IA_GLOBAL_INDEX_memoire.md", "Ce fichier, genere par gen_global_index_ia.py.", "etape 11 de /histo + check_global_index.py"),

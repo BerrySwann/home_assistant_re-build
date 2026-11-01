@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--01-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 </div>
 
-Genere le 2026-10-31 15:52 par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py (MOC_SKILLS). Ne pas modifier a la main : le script ecrase les modifications.
+Genere le 2026-11-01 09:07 par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py (MOC_SKILLS). Ne pas modifier a la main : le script ecrase les modifications.
 
 Regle d'Eric (2026-10-28) : la liste des skills avec leur explication (champ description du SKILL.md, repris de la copie en docs/05_docs_skills). Une copie par skill : dossier `skill_NOM/NOM.md` (anglais, dans 05_docs_skills_PURE) et fiche francaise dans 05_docs_skills_MD. Les liens sont relatifs a ce fichier.
 
@@ -30,9 +30,9 @@ Regle d'Eric (2026-10-28) : la liste des skills avec leur explication (champ des
 |:------|:------|:------|:------------|:---------------|
 | fix-file | [fix_file.md](05_docs_skills_PURE/skill_fix_file/fix_file.md) | [fix_file.md](05_docs_skills_MD/skill_fix_file/fix_file.md) | Tu colles une erreur Home Assistant (log, trace, message de l'interface) ou un bloc YAML qui plante. Le ski... | 2026-10-31 |
 | ha-new-yaml | [ha_new_yaml.md](05_docs_skills_PURE/skill_ha_new_yaml/ha_new_yaml.md) | [ha_new_yaml.md](05_docs_skills_MD/skill_ha_new_yaml/ha_new_yaml.md) | Le skill cree un fichier YAML vide mais entierement conforme aux conventions du projet : boites ASCII, 5 he... | 2026-10-31 |
-| ha-push-docs | [ha_push_docs.md](05_docs_skills_PURE/skill_ha_push_docs/ha_push_docs.md) | [ha_push_docs.md](05_docs_skills_MD/skill_ha_push_docs/ha_push_docs.md) | Le skill synchronise la documentation locale (`*.md` et `*.yaml` de dashboard) vers `H:\docs`, en ne poussa... | 2026-10-31 |
-| ha-push-md | [ha_push_md.md](05_docs_skills_PURE/skill_ha_push_md/ha_push_md.md) | [ha_push_md.md](05_docs_skills_MD/skill_ha_push_md/ha_push_md.md) | Version restreinte de `ha-push-docs` : elle ne pousse que les fichiers `*.md` de documentation (dashboard,... | 2026-10-31 |
-| ha-push-yaml | [ha_push_yaml.md](05_docs_skills_PURE/skill_ha_push_yaml/ha_push_yaml.md) | [ha_push_yaml.md](05_docs_skills_MD/skill_ha_push_yaml/ha_push_yaml.md) | Operation critique : le skill pousse des YAML de `01_config_system_SH_PY_YAML` vers la prod, aux deux empla... | 2026-10-31 |
+| ha-push-docs | [ha_push_docs.md](05_docs_skills_PURE/skill_ha_push_docs/ha_push_docs.md) | [ha_push_docs.md](05_docs_skills_MD/skill_ha_push_docs/ha_push_docs.md) | Le skill synchronise la documentation locale (`*.md` et `*.yaml` de dashboard) vers `H:\docs`, en ne poussa... | 2026-11-01 |
+| ha-push-md | [ha_push_md.md](05_docs_skills_PURE/skill_ha_push_md/ha_push_md.md) | [ha_push_md.md](05_docs_skills_MD/skill_ha_push_md/ha_push_md.md) | Version restreinte de `ha-push-docs` : elle ne pousse que les fichiers `*.md` de documentation (dashboard,... | 2026-11-01 |
+| ha-push-yaml | [ha_push_yaml.md](05_docs_skills_PURE/skill_ha_push_yaml/ha_push_yaml.md) | [ha_push_yaml.md](05_docs_skills_MD/skill_ha_push_yaml/ha_push_yaml.md) | Operation critique : le skill pousse des YAML de `01_config_system_SH_PY_YAML` vers la prod, aux deux empla... | 2026-11-01 |
 | ha-resync-tree | [ha_resync_tree.md](05_docs_skills_PURE/skill_ha_resync_tree/ha_resync_tree.md) | [ha_resync_tree.md](05_docs_skills_MD/skill_ha_resync_tree/ha_resync_tree.md) | Ancien "resync GitHub vers local", retire le 2026-10-18 parce que le local fait foi. Le skill ne fait plus... | 2026-10-31 |
 | ha-status | [ha_status.md](05_docs_skills_PURE/skill_ha_status/ha_status.md) | [ha_status.md](05_docs_skills_MD/skill_ha_status/ha_status.md) | Resume ultra-compact de l'etat du projet : ce qui est fait, ce qui est en cours, ce qui suit, plus les bloc... | 2026-10-31 |
 | ha-trigul | [ha_trigul.md](05_docs_skills_PURE/skill_ha_trigul/ha_trigul.md) | [ha_trigul.md](05_docs_skills_MD/skill_ha_trigul/ha_trigul.md) | Trois controles enchaines, en lecture seule, qui comparent la documentation entre le local (ReBuild, qui fa... | 2026-10-31 |

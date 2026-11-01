@@ -2213,6 +2213,8 @@ La colonne de droite donne la règle appliquée à l'entrée, ou l'écart avec l
 │ │   │                                                                                       │                                                                                             │
 │ │   ├── GLOBAL_INDEX_SCRIPTS_SH.md                                                          │ intact : GLOBAL_INDEX                                                                       │
 │ │   │                                                                                       │                                                                                             │
+│ │   ├── GLOBAL_INDEX_SCRIPTS_PY.md                                                          │ intact : GLOBAL_INDEX                                                                       │
+│ │   │                                                                                       │                                                                                             │
 │ │   └── GLOBAL_INDEX_SCRIPTS_YAML.md                                                        │ intact : GLOBAL_INDEX                                                                       │
 │ │                                                                                           │                                                                                             │
 │ ├── 99_docs_MD_system/                                                                      │ intact : 99_docs_MD_system                                                                  │

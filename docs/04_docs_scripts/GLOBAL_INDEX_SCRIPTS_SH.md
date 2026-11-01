@@ -1,9 +1,9 @@
-# GLOBAL_INDEX_SCRIPTS_SH.md - index des scripts shell et python
+# GLOBAL_INDEX_SCRIPTS_SH.md - index des scripts shell (bash)
 
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--01-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,61 +13,54 @@
 
 </div>
 
-Fichier GENERE le 2026-10-31 22:33 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-11-01 09:07 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
-## Difference entre l'index SH et l'index YAML
+## Difference entre les index SH, PY et YAML
 
-- Scripts SH (index GLOBAL_INDEX_SCRIPTS_SH.md, dossier 04_docs_scripts_SH) : programmes bash ou python, executes par un interpreteur sur une machine, pas par Home Assistant lui-meme. En prod ils sont dans /config/.scripts (H:\.scripts) et HA les lance par une commande shell_command (dossier H:\shell_command). Les scripts de controle et de generation (hermes_*, gen_*) tournent sur le PC d'Eric, sans passer par HA. Un script SH se modifie et se pousse comme un fichier.
+- Scripts SH et PY (index GLOBAL_INDEX_SCRIPTS_SH.md pour les .sh bash, GLOBAL_INDEX_SCRIPTS_PY.md pour les .py python, dossier 04_docs_scripts_SH) : programmes executes par un interpreteur sur une machine, pas par Home Assistant lui-meme. En prod ils sont dans /config/.scripts (H:\.scripts) et HA les lance par une commande shell_command (dossier H:\shell_command). Les scripts de controle et de generation (hermes_*, gen_*) tournent sur le PC d'Eric, sans passer par HA. Un script SH se modifie et se pousse comme un fichier.
 - Scripts YAML (index GLOBAL_INDEX_SCRIPTS_YAML.md, dossier 04_docs_scripts_YAML) : scripts Home Assistant definis dans H:\scripts.yaml, qui existent comme entites script.xxx. Ce sont des suites d'actions HA, appelables par un bouton du dashboard, une automatisation ou un autre script. Un script YAML peut declencher un script SH par une action shell_command.xxx.
 - Chaine type : bouton du dashboard -> script YAML (scripts.yaml) -> commande shell_command (H:\shell_command) -> script SH (/config/.scripts).
-- Verification par /histo : les deux index sont regeneres par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py a chaque /histo. La section Controle liste les ecarts et /histo doit verifier que la ligne liens=N casses=M donne casses=0. Ne pas modifier ces fichiers a la main.
+- Verification par /histo : les trois index sont regeneres par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py a chaque /histo. La section Controle liste les ecarts et /histo doit verifier que la ligne liens=N casses=M donne casses=0. Ne pas modifier ces fichiers a la main.
 
 ## Controle
 
-- Scripts SH indexes : 38
+- Scripts SH indexes : 7
 - Scripts sans fiche dans 04_docs_scripts_SH_MD : 0
 - Scripts presents dans H:\.scripts avec un contenu different du local : 0
 - Les scripts 'absent de H:\.scripts' tournent sur le PC ou ne sont pas deployes : a lire avec la colonne Skill.
+- Fichiers du dossier 04_docs_scripts_SH ni shell ni python, hors index : aucun
+- Autre type de script : voir GLOBAL_INDEX_SCRIPTS_PY.md (dossier 04_docs_scripts_SH, classement identique).
 
-## Scripts SH
+## SCRIPTS HOME ASSISTANT, ILS TOURNENT DANS HOME ASSISTANT
+
+#### .sh
+
+| Script | Type | Copie dans H:\.scripts | Lance par (shell_command) | Appele par (HA) | Skill (PC) | Fiche | Dossier |
+|:-------|:-----|:-----------------------|:--------------------------|:----------------|:-----------|:------|:--------|
+| [Ha_git_backup.sh](04_docs_scripts_SH/Ha_git_backup/Ha_git_backup.sh) | bash | identique | shell_command.git_backup_push, shell_command.git_backup_push_manual, shell_command.git_backup_push_weekly | automation [01-Backup] Git hourly H+10, automation [02-Backup] Git daily (03:00), automation [06-Backup] Git au démarrage HA, automation [04-Backup] Git push manuel, automation [03-Backup] Git weekly (dim 01:30), automation [05-Backup] Git push weekly manuel | ha-trigul | [Ha_git_backup.md](04_docs_scripts_SH_MD/Ha_git_backup/Ha_git_backup.md) | Ha_git_backup |
+| [Mf_vigilance_images.sh](04_docs_scripts_SH/Mf_vigilance_images/Mf_vigilance_images.sh) | bash | absent de H:\.scripts | - | - | - | [Mf_vigilance_images.md](04_docs_scripts_SH_MD/Mf_vigilance_images/Mf_vigilance_images.md) | Mf_vigilance_images |
+
+## SCRIPTS HOME ASSISTANT, ILS NE TOURNENT PAS DANS HOME ASSISTANT (audit, verification, generation, historique et sauvegarde : la maison fonctionnerait sans eux)
+
+### SCRIPTS DE L'IA CLAUDE
+
+#### .sh
 
 | Script | Type | Copie dans H:\.scripts | Lance par (shell_command) | Appele par (HA) | Skill (PC) | Fiche | Dossier |
 |:-------|:-----|:-----------------------|:--------------------------|:----------------|:-----------|:------|:--------|
 | [Audit_md5.sh](04_docs_scripts_SH/Audit_md5/Audit_md5.sh) | bash | absent de H:\.scripts | - | - | - | [Audit_md5.md](04_docs_scripts_SH_MD/Audit_md5/Audit_md5.md) | Audit_md5 |
 | [Audit_md5_docs_local.sh](04_docs_scripts_SH/Audit_md5_docs_local/Audit_md5_docs_local.sh) | bash | absent de H:\.scripts | - | - | - | [Audit_md5_docs_local.md](04_docs_scripts_SH_MD/Audit_md5_docs_local/Audit_md5_docs_local.md) | Audit_md5_docs_local |
-| [Audit_md5_yaml.sh](04_docs_scripts_SH/Audit_md5_yaml/Audit_md5_yaml.sh) | bash | identique | - | - | - | [Audit_md5.md](04_docs_scripts_SH_MD/Audit_md5/Audit_md5.md) | Audit_md5_yaml |
-| [Check_DEPENDANCES.py](04_docs_scripts_SH/Check_DEPENDANCES/Check_DEPENDANCES.py) | python | absent de H:\.scripts | - | - | histo-final | [Check_DEPENDANCES.md](04_docs_scripts_SH_MD/Check_DEPENDANCES/Check_DEPENDANCES.md) | Check_DEPENDANCES |
-| [Check_GLOBAL_INDEX.py](04_docs_scripts_SH/Check_GLOBAL_INDEX/Check_GLOBAL_INDEX.py) | python | absent de H:\.scripts | - | - | - | [Check_GLOBAL_INDEX.md](04_docs_scripts_SH_MD/Check_GLOBAL_INDEX/Check_GLOBAL_INDEX.md) | Check_GLOBAL_INDEX |
-| [Check_XX_presents.py](04_docs_scripts_SH/Check_XX_presents/Check_XX_presents.py) | python | absent de H:\.scripts | - | - | ha-push-docs, ha-push-md, ha-push-yaml | [Check_XX_presents.md](04_docs_scripts_SH_MD/Check_XX_presents/Check_XX_presents.md) | Check_XX_presents |
-| [XX_manifest.json](04_docs_scripts_SH/Check_XX_presents/XX_manifest.json) | autre | absent de H:\.scripts | - | - | ha-push-docs, ha-push-md, ha-push-yaml | [Check_XX_presents.md](04_docs_scripts_SH_MD/Check_XX_presents/Check_XX_presents.md) | Check_XX_presents |
-| [Check_badges_fiches.py](04_docs_scripts_SH/Check_badges_fiches/Check_badges_fiches.py) | python | absent de H:\.scripts | - | - | - | [Check_badges_fiches.md](04_docs_scripts_SH_MD/Check_badges_fiches/Check_badges_fiches.md) | Check_badges_fiches |
-| [Check_prod_fonctionnelle.py](04_docs_scripts_SH/Check_prod_fonctionnelle/Check_prod_fonctionnelle.py) | python | absent de H:\.scripts | - | - | - | [Check_prod_fonctionnelle.md](04_docs_scripts_SH_MD/Check_prod_fonctionnelle/Check_prod_fonctionnelle.md) | Check_prod_fonctionnelle |
-| [Check_sous_context_ia.py](04_docs_scripts_SH/Check_sous_context_ia/Check_sous_context_ia.py) | python | absent de H:\.scripts | - | - | - | [Check_sous_context_ia.md](04_docs_scripts_SH_MD/Check_sous_context_ia/Check_sous_context_ia.md) | Check_sous_context_ia |
-| [Gen_GLOBAL_INDEX_automations.py](04_docs_scripts_SH/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.py) | python | absent de H:\.scripts | - | - | - | [Gen_GLOBAL_INDEX_automations.md](04_docs_scripts_SH_MD/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.md) | Gen_GLOBAL_INDEX_automations |
-| [Gen_GLOBAL_INDEX_ia.py](04_docs_scripts_SH/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.py) | python | absent de H:\.scripts | - | - | - | [Gen_GLOBAL_INDEX_ia.md](04_docs_scripts_SH_MD/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.md) | Gen_GLOBAL_INDEX_ia |
-| [Gen_GLOBAL_INDEX_scripts.py](04_docs_scripts_SH/Gen_GLOBAL_INDEX_scripts/Gen_GLOBAL_INDEX_scripts.py) | python | absent de H:\.scripts | - | - | - | [Gen_GLOBAL_INDEX_scripts.md](04_docs_scripts_SH_MD/Gen_GLOBAL_INDEX_scripts/Gen_GLOBAL_INDEX_scripts.md) | Gen_GLOBAL_INDEX_scripts |
-| [Gen_GLOBAL_INDEX_vignettes_pages.py](04_docs_scripts_SH/Gen_GLOBAL_INDEX_vignettes_pages/Gen_GLOBAL_INDEX_vignettes_pages.py) | python | absent de H:\.scripts | - | - | - | [Gen_GLOBAL_INDEX_vignettes_pages.md](04_docs_scripts_SH_MD/Gen_GLOBAL_INDEX_vignettes_pages/Gen_GLOBAL_INDEX_vignettes_pages.md) | Gen_GLOBAL_INDEX_vignettes_pages |
-| [Ha_git_backup.sh](04_docs_scripts_SH/Ha_git_backup/Ha_git_backup.sh) | bash | identique | - | - | ha-trigul | [Ha_git_backup.md](04_docs_scripts_SH_MD/Ha_git_backup/Ha_git_backup.md) | Ha_git_backup |
+| [Audit_md5_yaml.sh](04_docs_scripts_SH/Audit_md5_yaml/Audit_md5_yaml.sh) | bash | identique | shell_command.audit_md5 | script audit_md5 | - | [Audit_md5_yaml.md](04_docs_scripts_SH_MD/Audit_md5_yaml/Audit_md5_yaml.md) | Audit_md5_yaml |
+
+---
+
+### SCRIPTS DE L'IA HERMES
+
+#### .sh
+
+| Script | Type | Copie dans H:\.scripts | Lance par (shell_command) | Appele par (HA) | Skill (PC) | Fiche | Dossier |
+|:-------|:-----|:-----------------------|:--------------------------|:----------------|:-----------|:------|:--------|
 | [Hermes_audit_md5_docs.sh](04_docs_scripts_SH/Hermes_audit_md5_docs/Hermes_audit_md5_docs.sh) | bash | absent de H:\.scripts | - | - | - | [Hermes_audit_md5_docs.md](04_docs_scripts_SH_MD/Hermes_audit_md5_docs/Hermes_audit_md5_docs.md) | Hermes_audit_md5_docs |
 | [Hermes_audit_md5_trigul_3md.sh](04_docs_scripts_SH/Hermes_audit_md5_trigul_3md/Hermes_audit_md5_trigul_3md.sh) | bash | absent de H:\.scripts | - | - | - | [Hermes_audit_md5_trigul_3md.md](04_docs_scripts_SH_MD/Hermes_audit_md5_trigul_3md/Hermes_audit_md5_trigul_3md.md) | Hermes_audit_md5_trigul_3md |
-| [Hermes_audit_md5_trigul_unitaire.py](04_docs_scripts_SH/Hermes_audit_md5_trigul_3md/Hermes_audit_md5_trigul_unitaire.py) | python | absent de H:\.scripts | - | - | - | [Hermes_audit_md5_trigul_unitaire.md](04_docs_scripts_SH_MD/Hermes_audit_md5_trigul_unitaire/Hermes_audit_md5_trigul_unitaire.md) | Hermes_audit_md5_trigul_3md |
-| [hermes_audit_trigul_arbres.py](04_docs_scripts_SH/Hermes_audit_md5_trigul_3md/hermes_audit_trigul_arbres.py) | python | absent de H:\.scripts | - | - | ha-trigul | [Hermes_audit_trigul_arbres.md](04_docs_scripts_SH_MD/Hermes_audit_trigul_arbres/Hermes_audit_trigul_arbres.md) | Hermes_audit_md5_trigul_3md |
-| [trigul_run.py](04_docs_scripts_SH/Hermes_audit_md5_trigul_3md/trigul_run.py) | python | absent de H:\.scripts | - | - | ha-trigul | [Trigul_run.md](04_docs_scripts_SH_MD/Trigul_run/Trigul_run.md) | Hermes_audit_md5_trigul_3md |
-| [Mf_vigilance_images.sh](04_docs_scripts_SH/Mf_vigilance_images/Mf_vigilance_images.sh) | bash | absent de H:\.scripts | - | - | - | [Mf_vigilance_images.md](04_docs_scripts_SH_MD/Mf_vigilance_images/Mf_vigilance_images.md) | Mf_vigilance_images |
-| [Push_5C.py](04_docs_scripts_SH/Push_5C/Push_5C.py) | python | absent de H:\.scripts | - | - | - | [Push_5C.md](04_docs_scripts_SH_MD/Push_5C/Push_5C.md) | Push_5C |
-| [Sync_98_sauvegarde.py](04_docs_scripts_SH/Sync_98_sauvegarde/Sync_98_sauvegarde.py) | python | absent de H:\.scripts | - | - | - | [Sync_98_sauvegarde.md](04_docs_scripts_SH_MD/Sync_98_sauvegarde/Sync_98_sauvegarde.md) | Sync_98_sauvegarde |
-| [Verif_emplacements.py](04_docs_scripts_SH/Verif_emplacements/Verif_emplacements.py) | python | absent de H:\.scripts | - | - | fix-file, ha-new-yaml, ha-push-docs, ha-push-yaml, ha-resync-tree, ha-trigul, ha-update-check-cli, ha-verif-headers, histo, histo-final, sync-index, update-arbo | [Verif_emplacements.md](04_docs_scripts_SH_MD/Verif_emplacements/Verif_emplacements.md) | Verif_emplacements |
-| [Verif_headers_yaml.py](04_docs_scripts_SH/Verif_headers_yaml/Verif_headers_yaml.py) | python | absent de H:\.scripts | - | - | ha-verif-headers | [Verif_headers_yaml.md](04_docs_scripts_SH_MD/Verif_headers_yaml/Verif_headers_yaml.md) | Verif_headers_yaml |
-| [Verif_integrations_file.py](04_docs_scripts_SH/Verif_integrations_file/Verif_integrations_file.py) | python | absent de H:\.scripts | - | - | - | [Verif_integrations_file.md](04_docs_scripts_SH_MD/Verif_integrations_file/Verif_integrations_file.md) | Verif_integrations_file |
-| [audit_carte_docs_hermes.py](04_docs_scripts_SH/audit_carte_docs_hermes/audit_carte_docs_hermes.py) | python | absent de H:\.scripts | - | - | - | [audit_carte_docs_hermes.md](04_docs_scripts_SH_MD/audit_carte_docs_hermes/audit_carte_docs_hermes.md) | audit_carte_docs_hermes |
-| [audit_huissier_hermes.py](04_docs_scripts_SH/audit_huissier_hermes/audit_huissier_hermes.py) | python | absent de H:\.scripts | - | - | - | [audit_huissier_hermes.md](04_docs_scripts_SH_MD/audit_huissier_hermes/audit_huissier_hermes.md) | audit_huissier_hermes |
-| [boite_claude_watch_hermes.py](04_docs_scripts_SH/boite_claude_watch_hermes/boite_claude_watch_hermes.py) | python | absent de H:\.scripts | - | - | - | [boite_claude_watch_hermes.md](04_docs_scripts_SH_MD/boite_claude_watch_hermes/boite_claude_watch_hermes.md) | boite_claude_watch_hermes |
-| [check_xx_repertoires_hermes.py](04_docs_scripts_SH/check_xx_repertoires_hermes/check_xx_repertoires_hermes.py) | python | absent de H:\.scripts | - | - | - | [check_xx_repertoires_hermes.md](04_docs_scripts_SH_MD/check_xx_repertoires_hermes/check_xx_repertoires_hermes.md) | check_xx_repertoires_hermes |
-| [edition_tracee_hermes.py](04_docs_scripts_SH/edition_tracee_hermes/edition_tracee_hermes.py) | python | absent de H:\.scripts | - | - | - | [edition_tracee_hermes.md](04_docs_scripts_SH_MD/edition_tracee_hermes/edition_tracee_hermes.md) | edition_tracee_hermes |
-| [gen_moc_dashboard.py](04_docs_scripts_SH/gen_moc_dashboard/gen_moc_dashboard.py) | python | absent de H:\.scripts | - | - | - | [gen_moc_dashboard.md](04_docs_scripts_SH_MD/gen_moc_dashboard/gen_moc_dashboard.md) | gen_moc_dashboard |
-| [gen_moc_docs.py](04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py) | python | absent de H:\.scripts | - | - | - | [gen_moc_docs.md](04_docs_scripts_SH_MD/gen_moc_docs/gen_moc_docs.md) | gen_moc_docs |
-| [hermes_gen_dependances.py](04_docs_scripts_SH/hermes_gen_dependances/hermes_gen_dependances.py) | python | absent de H:\.scripts | - | - | - | [hermes_gen_dependances.md](04_docs_scripts_SH_MD/hermes_gen_dependances/hermes_gen_dependances.md) | hermes_gen_dependances |
-| [histo_html.py](04_docs_scripts_SH/histo_html/histo_html.py) | python | absent de H:\.scripts | - | - | histo, histo-final | [histo_html.md](04_docs_scripts_SH_MD/histo_html/histo_html.md) | histo_html |
-| [histo_trace.py](04_docs_scripts_SH/histo_trace/histo_trace.py) | python | absent de H:\.scripts | - | - | histo, histo-final | [histo_trace.md](04_docs_scripts_SH_MD/histo_trace/histo_trace.md) | histo_trace |
-| [renomme_chemins_trace_hermes.py](04_docs_scripts_SH/renomme_chemins_trace_hermes/renomme_chemins_trace_hermes.py) | python | absent de H:\.scripts | - | - | - | [renomme_chemins_trace_hermes.md](04_docs_scripts_SH_MD/renomme_chemins_trace_hermes/renomme_chemins_trace_hermes.md) | renomme_chemins_trace_hermes |
-| [verif_ecriture_hermes.py](04_docs_scripts_SH/verif_ecriture_hermes/verif_ecriture_hermes.py) | python | absent de H:\.scripts | - | - | - | [verif_ecriture_hermes.md](04_docs_scripts_SH_MD/verif_ecriture_hermes/verif_ecriture_hermes.md) | verif_ecriture_hermes |
+
+---

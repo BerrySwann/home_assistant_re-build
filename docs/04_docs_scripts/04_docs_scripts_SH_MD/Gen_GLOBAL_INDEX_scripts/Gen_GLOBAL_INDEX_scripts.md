@@ -1,4 +1,4 @@
-# Gen_GLOBAL_INDEX_scripts.py - genere GLOBAL_INDEX_SCRIPTS_SH.md et GLOBAL_INDEX_SCRIPTS_YAML.md
+# Gen_GLOBAL_INDEX_scripts.py - genere GLOBAL_INDEX_SCRIPTS_SH.md, GLOBAL_INDEX_SCRIPTS_PY.md et GLOBAL_INDEX_SCRIPTS_YAML.md
 
 <div align="center">
 
@@ -18,11 +18,11 @@
 | Source | `docs/04_docs_scripts/04_docs_scripts_SH/Gen_GLOBAL_INDEX_scripts/Gen_GLOBAL_INDEX_scripts.py` |
 | Langage | Python 3 (module `yaml` requis) |
 | Lance par | /histo (etape 2, point 10) ou a la main. Ne fait pas tourner Home Assistant |
-| Ecrit | `GLOBAL_INDEX_SCRIPTS_SH.md` et `GLOBAL_INDEX_SCRIPTS_YAML.md`, a la racine de `docs/04_docs_scripts` |
+| Ecrit | `GLOBAL_INDEX_SCRIPTS_SH.md` (.sh), `GLOBAL_INDEX_SCRIPTS_PY.md` (.py) et `GLOBAL_INDEX_SCRIPTS_YAML.md`, a la racine de `docs/04_docs_scripts` |
 
 ## Role
 
-Index des scripts SH (programmes bash et python) et des scripts YAML (scripts Home Assistant). Sources : l'arbre local `04_docs_scripts_SH`, `04_docs_scripts_YAML` et leurs dossiers `_MD`, plus la prod en lecture seule : `H:\scripts.yaml`, `H:\automations.yaml`, `H:\shell_command`, `H:\.scripts` et le registre Home Assistant (entity_registry).
+Un index par type : scripts SH (bash), scripts PY (python) et scripts YAML (scripts Home Assistant). Sources : l'arbre local `04_docs_scripts_SH`, `04_docs_scripts_YAML` et leurs dossiers `_MD`, plus la prod en lecture seule : `H:\scripts.yaml`, `H:\automations.yaml`, `H:\shell_command`, `H:\.scripts` et le registre Home Assistant (entity_registry).
 
 ## Utilisation
 
@@ -30,13 +30,13 @@ Index des scripts SH (programmes bash et python) et des scripts YAML (scripts Ho
 $env:PYTHONIOENCODING='utf-8'; python -I Gen_GLOBAL_INDEX_scripts.py [--dry]
 ```
 
-- Sortie console : une ligne `<index> : liens=N casses=M` puis `<index> : ecrit` pour chacun des deux fichiers. `casses` doit valoir 0.
+- Sortie console : une ligne `<index> : liens=N casses=M` puis `<index> : ecrit` pour chacun des trois fichiers. `casses` doit valoir 0.
 - Copie `.bak_AAAA_MM_JJ_HHhMMmSSs.md` avant ecrasement si le contenu change.
 - Le script ne pousse rien en prod. Un script de `H:\.scripts` ne se pousse jamais sans ordre d'Eric.
 
 ## A savoir
 
-- Ne jamais modifier les deux index a la main.
+- Ne jamais modifier les trois index a la main. Les index SH et PY sont classes comme `MOC_SCRIPTS.md` (decide par Eric le 2026-11-01) : en haut ce qui tourne dans Home Assistant, puis ce qui n'y tourne pas, par IA (Claude, Hermes) et par type.
 - Il ne remplace pas `MOC_SCRIPTS.md` : celui-ci est genere par `gen_moc_docs.py` (regle 1 source = 1 fiche).
 
 ## Origine de cette fiche

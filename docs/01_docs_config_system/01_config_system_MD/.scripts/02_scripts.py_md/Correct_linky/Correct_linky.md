@@ -15,7 +15,7 @@
 
 > **Script :** `correct_linky.py` (Python 3)
 > **Emplacement prod :** `/config/.scripts/correct_linky.py`
-> **Emplacement local :** `docs/01_docs_config_system/01_config_system_SH_PY_YAML/.scripts/02_scripts.py/correct_linky.py` (copie identique dans `docs/04_docs_scripts/04_docs_scripts_YAML/Correct_linky/Correct_linky.py`)
+> **Emplacement local :** `docs/01_docs_config_system/01_config_system_SH_PY_YAML/.scripts/02_scripts.py/correct_linky.py` (la copie en double du dossier `04_docs_scripts_YAML` a ete retiree le 2026-11-01)
 > **Empreinte relevée le 2026-10-18 :** MD5 `a32d90f9`, 4911 octets, copies identiques à la prod
 > **Appelé par :** `shell_command.correct_linky_log` (fichier `shell_command/P0/P0_correct_linky.yaml`), lui-même appelé par l'automation de rattrapage Linky de `automations.yaml` (action `shell_command.correct_linky_log`, vers la ligne 2468)
 > **Dernière modification :** 2026-08-30 (date du fichier)
