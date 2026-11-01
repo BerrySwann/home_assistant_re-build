@@ -2,7 +2,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifie](https://img.shields.io/badge/MàJ-2026--10--29-44739e?style=flat-square)](.)&nbsp;
+[![Modifie](https://img.shields.io/badge/MàJ-2026--11--01-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -12,6 +12,7 @@
 
 </div>
 
+*Derniere mise a jour : 2026-11-01 14h25 (repointage de la prise de la salle de bain : sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power, entite supprimee de HA, remplacee par sensor.prise_seche_serviette_salle_de_bain_nous_power dans L2C2_Page_ENERGIE_CLIM.yaml et sa fiche ; dashboard vivant repointe par l API lovelace/config/save ; demande d Eric)*
 *Derniere mise a jour : 2026-10-29 22h10 (R125.1 a R125.3 : fiches de .scripts rangees un dossier par fichier, commentaires obsoletes des audits corriges, fiche Audit_md5_yaml corrigee)*
 *Derniere mise a jour : 2026-10-29 21h32 (regle de structure scripts et command_line : local range par dossier, HA toujours a plat, avertissement gyrophare, cascades bouton -> script -> fonction des audits MD5 et de la sauvegarde GitHub ; chemin du capteur audit_md5_journal corrige ; demande d'Eric)*
 *Derniere mise a jour : 2026-10-29 20h10 (11 automations ajoutees, section store salon reecrite, cascades P0 Linky/Nodon documentees, vignettes alarmes congelateur ; controle Check_DEPENDANCES.py cree et branche dans /histo ; aucune vignette modifiee)*
@@ -39,7 +40,7 @@
 *Dernière mise à jour : 2026-10-25 (sync_index apres renommages : dossiers `docs` minuscule, noms sans espace ni tiret, page réserve L5C3 sortie de docs ; aucune entité ni vignette modifiée)*
 *Dernière mise à jour : 2026-09-24 S1 (sync_index : HOME PAGE + L1C2 + L5C1 + GRP_03 - carte Congélateur : contact porte en visibilité (bloc or : tongel > -15°C OU porte ouverte, seuil -15 retenu par Eric), seuils 26/48/235, label "Porte fermée / Porte Ouverte" ; carte appliance Congélateur ajoutée en fin de page L1C2 (42 cartes) ; batterie porte_congel intégrée (L5C1 + groupe) ; GRP_03 : 13 membres (resync prod->local) ; exports 24/09 : card_congelateur_home, page_L1C2_temperatures, page_L5C1_batteries_piles, Dashboard_2026_09_24 (39 135 lignes) ; vignette L5C1 inchangée.)*
 *Dernière mise à jour : 2026-09-20 S6 (automations clim P1 : `max_exceeded: silent` ajouté à (A-0) JOUR + (B-0) NUIT ; exports YAML des 2 automations mis à jour côté docs/ ; add-on Cloudflared HA = vestige arrêté)*
-*Dernière mise à jour : 2026-09-20 S5 (sync_index : L2C2 Énergie Clim - PAGE_ENERGIE_CLIM.md mise à jour (cartes clim button-card, entités UT `_um`, sources helpers generic_thermostat, P1_AVG_AMHQ_TOTAL), section ENTITES_INDEX L2C2 complétée (+55 entrées), export page_L2C2_energie_clim_2026-09-20.yaml ajouté côté C:. Constats : retour Home vers une vue `/home` inexistante ; 2 références introuvables (`sensor.ete_hiver`, `sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power`) - notés dans la doc page.)*
+*Dernière mise à jour : 2026-09-20 S5 (sync_index : L2C2 Énergie Clim - PAGE_ENERGIE_CLIM.md mise à jour (cartes clim button-card, entités UT `_um`, sources helpers generic_thermostat, P1_AVG_AMHQ_TOTAL), section ENTITES_INDEX L2C2 complétée (+55 entrées), export page_L2C2_energie_clim_2026-09-20.yaml ajouté côté C:. Constats : retour Home vers une vue `/home` inexistante ; 2 références introuvables (`sensor.ete_hiver`, `sensor.prise_seche_serviette_salle_de_bain_nous_power`) - notés dans la doc page.)*
 *Dernière mise à jour : 2026-09-20 S4 (sync_index : HOME PAGE - carte Congélateur : coquille `ssensor.prise_congelateur_cuisine_nous_power` corrigée en live (champ entity) ; seuil de visibilité `-15` → `-14 °C` ; export card_congelateur_home_2026-09-20.yaml rafraîchi (C: + /mnt/save) ; PAGE_HOME.md mis à jour.)*
 *Dernière mise à jour : 2026-09-20 S3 (sync_index : L1C2 Page Températures - refonte des 5 contrôles clim en custom:button-card, retrait du reliquat bubble "Radiateur de la Cuisine" (page : 41 cartes), bloc CONGÉLATEUR ajouté à PAGE_TEMPERATURES.md, export page_L1C2_temperatures_2026-09-20.yaml rafraîchi. Constat : 3 correctifs du 14/03 absents du YAML actuel (yaxis TH chambre, }}°C + label série dans #hcourbe) - notés dans la doc page.)*
 *Dernière mise à jour : 2026-09-20 S2 (sync_index : HOME PAGE - carte Congélateur ajoutée (custom:button-card "appliance" : prise NOUS + sonde Tongel, visible si tongel_temperature > -15°C). Arbre [7] + entités + PAGE_HOME.md (sections renumérotées 8/9) + ENTITES_INDEX.md + export carte. Aucune autre vignette touchée.)*
@@ -792,7 +793,7 @@ MATÉRIEL (NOUS SP via Z2M)
 | `sensor.ete_hiver` | TPL | ⚠️ introuvable en live *(2026-09-20)* - l'entité réelle est `sensor.mode_ete_hiver_etat` (`P1_UI_DASHBOARD.yaml`) |
 | `climate.*` (×5) | NAT | SmartIR / helpers generic_thermostat |
 
-> ⚠️ **Constaté le 2026-09-20** : 2 références introuvables dans la page - `sensor.ete_hiver` (icônes saison des chips DUT, jamais « Été ») et `sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power` (onglet instantané sèche-serviette). À repointers (GO attendu).
+> ⚠️ **Constaté le 2026-09-20, corrigé le 2026-11-01** : 2 références étaient introuvables dans la page - `sensor.ete_hiver` (icônes saison des chips DUT, jamais « Été ») et `sensor.prise_seche_serviette_salle_de_bain_nous_power` (onglet instantané sèche-serviette). À repointers (GO attendu).
 
 ### Streamline templates (page)
 
@@ -973,7 +974,7 @@ MATÉRIEL (Hue Bridge / Sonoff)
 | `light.hue_color_candle_chambre_eric` | NAT | Hue Bridge |
 | `light.lit` | NAT | Hue Bridge | Groupe tête de lit - cible du tap_action toggle (fix B4) |
 | `switch.prise_tete_de_lit_chambre` | NAT | Intégration native |
-| `input_select.saison` | NAT | `input_select.yaml` (helper manuel Été/Hiver, ajouté 2026-07-19). Plus aucun usage depuis 2026-10-24 : son seul lecteur, le bloc `icon:` du sensor `lumiere_appartement_etat` dans `P3_etats_status.yaml`, a été supprimé sur ordre d'Eric (code conservé tel quel dans les annotations en bas de ce fichier). Supprimé du template : `{% set s = is_state('input_select.saison', 'Hiver') %}` ; icônes `mdi:home-floor-g` / `mdi:home-check` (si allumé, Hiver / Été) et `mdi:home-outline` / `mdi:home-variant-outline` (si éteint, Hiver / Été). Helper SUPPRIMÉ de HA et d'input_select.yaml le 2026-10-24 sur ordre d'Eric (jamais modifié en 60 jours, toujours Été) ; définition conservée en annotations en bas de input_select.yaml. |
+| `input_select.saison` | NAT | **SUPPRIME le 2026-10-24 21h30 sur ordre d Eric** (helper jamais modifie en 60 jours) : definition commentee dans `input_select.yaml`, l entite n existe plus dans HA. Il avait ete cree le 2026-07-19 (helper manuel Ete/Hiver) et n avait plus aucun usage depuis la suppression du bloc `icon:` du sensor `lumiere_appartement_etat` dans `P3_etats_status.yaml`. |
 
 ### Entités disponibles (etats_status) non encore intégrées
 

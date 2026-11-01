@@ -159,7 +159,7 @@ tap_action:
 
 Le badge `sensor.temperature_delta_affichage` (Δ T° intérieur/extérieur) ouvre la pop-up `#tendances` au clic.
 
-> ⚠️ **Constaté le 2026-09-20** : le `tap_action` de l'en-tête pointe vers `/dashboard-tablette/home` - cette vue n'existe pas (la vue Home n'a pas de `path`) ; le retour Home ne peut pas aboutir en l'état (à corriger - GO attendu).
+> ⚠️ **Constaté le 2026-09-20, CORRIGÉ le 2026-11-01** : le `tap_action` de l'en-tête pointe vers `/dashboard-tablette/home` - cette vue n'existe pas (la vue Home n'a pas de `path`) ; le retour Home ne peut pas aboutir en l'état (à corriger - GO attendu).
 
 ---
 
@@ -201,7 +201,7 @@ Salon: {% set t = states(entity) | float(0) %}
 
 Icône/couleur conditionnelle sur `sensor.ete_hiver` : Été = `#03a9f4`, Hiver = `#ff9800`.
 
-> ⚠️ **Constaté le 2026-09-20** : `sensor.ete_hiver` est introuvable en live (l'entité réelle est `sensor.mode_ete_hiver_etat`, template `P1_UI_DASHBOARD.yaml`) - les icônes saison des chips ne basculent donc jamais ; à repointers (GO attendu).
+> ⚠️ **Constaté le 2026-09-20, CORRIGÉ le 2026-11-01** : `sensor.ete_hiver` est introuvable en live (l'entité réelle est `sensor.mode_ete_hiver_etat`, template `P1_UI_DASHBOARD.yaml`) - les icônes saison des chips ne basculent donc jamais ; à repointers (GO attendu).
 
 > Note : La SdB n'a **pas** de chip DUT dédié ici (le DUT SdB est visible dans la section dédiée).
 
@@ -432,9 +432,9 @@ Les 2 séries `in_chart: false` servent uniquement à afficher leur valeur dans 
 - Ampère : `sensor.prise_seche_serviette_salle_de_bain_nous_current`
 
 **Tabbed-card** :
-- `INSTANTANÉ` → energy=`sensor.prise_seche_serviette_salle_de_bain_nous_power` (rgb(218,112,214)), avg=`sensor.seche_serviette_sdb_avg_watts_quotidien`, kwh=`sensor.seche_serviette_sdb_quotidien_um`, power_entity=`sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power` (rgb(255,215,0) - IKEA Inspelning)
+- `INSTANTANÉ` → energy=`sensor.prise_seche_serviette_salle_de_bain_nous_power` (rgb(218,112,214)), avg=`sensor.seche_serviette_sdb_avg_watts_quotidien`, kwh=`sensor.seche_serviette_sdb_quotidien_um`, power_entity=`sensor.prise_seche_serviette_salle_de_bain_nous_power` (rgb(255,215,0) - IKEA Inspelning)
 
-> ⚠️ **Constaté le 2026-09-20** : `sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power` est introuvable en live (probablement renommée) - la courbe IKEA de cet onglet ne s'affiche pas ; à repointers (GO attendu).
+> ⚠️ **Constaté le 2026-09-20, CORRIGÉ le 2026-11-01** : `sensor.prise_seche_serviette_salle_de_bain_nous_power` est introuvable en live (probablement renommée) - la courbe IKEA de cet onglet ne s'affiche pas ; à repointers (GO attendu).
 - `MENSUEL` → energy=`sensor.prise_seche_serviette_salle_de_bain_nous_energy` (rgb(218,112,214)), avg_monthly=`sensor.seche_serviette_sdb_avg_watts_mensuel`
 - `PERF / DUT` → `sensor.dut_sdb_total` (rgb(218,112,214)), annotation "Pic de conso"
 
@@ -583,7 +583,7 @@ Affiche le calcul du delta entre T° intérieure moyenne et T° extérieure, ave
 | `sensor.prise_seche_serviette_salle_de_bain_nous_voltage` | Sèche-Serv SdB (V) |
 | `sensor.prise_seche_serviette_salle_de_bain_nous_current` | Sèche-Serv SdB (A) |
 | `sensor.prise_seche_serviette_salle_de_bain_nous_energy` | Sèche-Serv SdB (kWh natif) |
-| `sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power` | IKEA Inspelning SdB (W) |
+| `sensor.prise_seche_serviette_salle_de_bain_nous_power` | IKEA Inspelning SdB (W) |
 | `sensor.clim_chambre_nous_power` | Clim Chambre |
 | `sensor.clim_chambre_nous_voltage` | Clim Chambre (V) |
 | `sensor.clim_chambre_nous_current` | Clim Chambre (A) |

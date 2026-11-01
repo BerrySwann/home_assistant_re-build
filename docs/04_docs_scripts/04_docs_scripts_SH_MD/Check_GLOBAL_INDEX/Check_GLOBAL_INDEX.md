@@ -32,6 +32,7 @@ $env:PYTHONIOENCODING='utf-8'; python -I Check_GLOBAL_INDEX.py
 
 - Sortie : une ligne par index (`<nom>: liens=N casses=M prod=...`), puis la derniere ligne `controle global_index: index=N liens=N casses=N ecarts=N`.
 - Si `H:` est inaccessible, le script le dit et ne controle ni la prod ni les entites.
+- Entites : le scan ignore les sections d archive de l index (aujourd hui `## 06 - SAUVEGARDE RASPI (archive, hors HA actuel)`), decision d'Eric du 2026-11-01 : les entites du Raspberry Pi4 archive (`fan.rpi_cooling_fan`, `sensor.system_monitor_temperature_du_processeur`) ne sont plus signalees. Tout ce qui est hors de ces sections reste controle, notamment la prise du seche-serviette de la salle de bain (R102.8). Les liens casses ne sont pas concernes par cette exclusion.
 
 ## Origine de cette fiche
 

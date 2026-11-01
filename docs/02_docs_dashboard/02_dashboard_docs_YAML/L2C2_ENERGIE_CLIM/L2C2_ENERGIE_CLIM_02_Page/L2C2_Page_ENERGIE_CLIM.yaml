@@ -2364,7 +2364,7 @@ cards:
         current_color: rgb(255, 41, 41)
         avg_daily_entity: sensor.seche_serviette_sdb_avg_watts_quotidien
         conso_daily_kwh_entity: sensor.seche_serviette_sdb_quotidien_um
-        power_entity: sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power
+        power_entity: sensor.prise_seche_serviette_salle_de_bain_nous_power
         power_color: rgb(255, 215, 0)
         span_offset: +15m
         group_duration: 1m
@@ -2821,3 +2821,6 @@ cards:
   cards:
   - type: custom:streamline-card
     template: calcule_temp_cible
+
+# annotations_log:
+# - [2026-11-01] Onglet INSTANTANE de la carte Conso. Temps Reel Seche-Serv. Salle de Bain : power_entity repointee de sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power (entite supprimee de HA avec la prise IKEA INSPELNING) vers sensor.prise_seche_serviette_salle_de_bain_nous_power, meme schema que la carte Soufflant SdB (energy_entity et power_entity sur la prise NOUS). Demande d'Eric du 2026-11-01 ; trace au journal MODIFS hermes.

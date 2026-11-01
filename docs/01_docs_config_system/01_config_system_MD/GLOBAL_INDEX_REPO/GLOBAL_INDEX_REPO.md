@@ -1576,7 +1576,7 @@ déplacées vers natives.
 <li><code>sensor.clim_salon_nous_energy</code></li>
 <li><code>sensor.clim_salon_nous_power</code></li>
 <li><code>sensor.clim_salon_nous_voltage</code></li>
-<li><code>sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power</code></li>
+<li><code>sensor.prise_seche_serviette_salle_de_bain_nous_power</code></li>
 <li><code>sensor.prise_seche_serviette_salle_de_bain_nous_current</code></li>
 <li><code>sensor.prise_seche_serviette_salle_de_bain_nous_energy</code></li>
 <li><code>sensor.prise_seche_serviette_salle_de_bain_nous_power</code></li>
@@ -2396,7 +2396,7 @@ cpu_package) n'existent dans aucun fichier <code>01_config_system_SH_PY_YAML/</c
 <details>
 <summary>📎 Fichiers complémentaires</summary>
 <blockquote>
-📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L4C1_MINI_PC/XX_L4C1_MINI_PC_03_Page_RASPI/L4C1_Page_MINI_PC_RASPI.md">Page RPi (transitoire)</a><br>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L4C1_MINI_PC/XX_L4C1_MINI_PC_03_Page_RASPI%20(a%20ne%20pas%20jeter)/L4C1_Page_MINI_PC_RASPI.md">Page RPi (transitoire)</a><br>
 </blockquote>
 </details>
 
@@ -4624,8 +4624,8 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 <summary>✅ <b>Raspberry CPU Fan PWM 6 States</b></summary>
 <blockquote>
 <i>Règle la vitesse du ventilateur du Raspberry en fonction de la température</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_YAML/XX_RASPI/A_RASPI_fan_pwm_6_states_MD/A_RASPI_fan_pwm_6_states.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/XX_RASPI/A_RASPI_fan_pwm_6_states_YAML/A_RASPI_fan_pwm_6_states.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/XX_A_RASPI_fan_pwm_6_states%20(a%20ne%20pas%20jeter)/A_RASPI_fan_pwm_6_states.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/XX_A_RASPI_fan_pwm_6_states%20(a%20ne%20pas%20jeter)/A_RASPI_fan_pwm_6_states.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · 📊`numeric_state`<br>
 <br><details>
 <summary>🔌 Entités (2)</summary>
