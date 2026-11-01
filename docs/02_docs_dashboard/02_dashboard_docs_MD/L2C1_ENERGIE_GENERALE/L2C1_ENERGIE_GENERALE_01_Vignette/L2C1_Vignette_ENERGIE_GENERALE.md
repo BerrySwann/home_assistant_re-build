@@ -299,7 +299,7 @@ La carte se met à jour sur changement de l'une des 6 entités ci-dessus (event-
 | `sensor.genelec_appart_quotidien_um` | Utility Meter (utility_meter/) | ✅ Requis - source des stats mini/maxi |
 | `P0_MINI_MAXI_AVG_Genelec_appart.yaml` | platform: statistics | ✅ Requis - fournit mini/maxi kWh |
 | `01_genelec_appart_AMHQ_cost.yaml` | Template coûts | ✅ Requis - fournit `cout_total/hp/hc_quotidien` |
-| Automation basculement HP/HC | `automations_corrige/energie/basculement_tarif_hphc.yaml` | ✅ Requis - split HP/HC correct |
+| Automation basculement HP/HC | `H:\automations.yaml` (automation `AUTO. ENERGIE. Basculement Tarif HC/HP - Genelec Appart`, id 1775997999740) | ✅ Requis - split HP/HC correct |
 
 ---
 

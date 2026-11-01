@@ -639,7 +639,7 @@ Donut : `group_by: func: diff, duration: 24h`.
 | `sensor.genelec_appart_hphc_annuel_um_hp` | yearly | HP | idem |
 | `sensor.genelec_appart_hphc_annuel_um_hc` | yearly | HC | idem |
 
-> Basculement HP ↔ HC piloté par : `automations_corrige/energie/basculement_tarif_hphc.yaml`
+> Basculement HP ↔ HC piloté par : `H:\automations.yaml` (automation `AUTO. ENERGIE. Basculement Tarif HC/HP - Genelec Appart`, id 1775997999740)
 
 ---
 

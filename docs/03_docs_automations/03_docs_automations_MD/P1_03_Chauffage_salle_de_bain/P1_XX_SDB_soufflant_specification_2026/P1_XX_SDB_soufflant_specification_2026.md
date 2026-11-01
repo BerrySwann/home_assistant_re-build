@@ -110,7 +110,7 @@ Déploiement : ajout dans `automations.yaml`, `scripts.yaml` et le fichier d'int
 virtuels, puis rechargement des trois domaines. Aucun redémarrage de Home Assistant.
 
 Exports : `03_docs_automations_YAML/P1_03_Chauffage_Salle_de_Bain/b_soufflant_sdb_routage/b_soufflant_sdb_routage.yaml` et
-`a_soufflant_sdb_bouton_rodret.yaml`, `04_docs_scripts_YAML/sdb_soufflant_demarrer/sdb_soufflant_demarrer.yaml` et
+`A_soufflant_SDB_bouton_rodret.yaml`, `04_docs_scripts_YAML/sdb_soufflant_demarrer/sdb_soufflant_demarrer.yaml` et
 `sdb_soufflant_arreter.yaml`.
 
 Le piège de nommage reste en place : l'automation dont l'identifiant parle de soufflant salle

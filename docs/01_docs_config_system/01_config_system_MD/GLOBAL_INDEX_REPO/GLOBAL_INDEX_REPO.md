@@ -2224,10 +2224,10 @@ la valeur brute est native. Tout déplacé vers natives.
 
 <blockquote>
 ⚠️ <b>Corrigé le 2026-07-19</b> : <code>sensor.proxmox_cpu_package</code> n'existe dans
-aucun fichier <code>01_config_system_SH_PY_YAML/</code> (vérifié) - publié par le script externe
-<code>MP_01_monitor_temp.sh</code> tournant sur le <b>Raspberry Pi</b> (confirmé par Eric
-2026-07-19 : "ça remonte la T° du CPU et d'autres choses"), remonté dans HA
-via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
+aucun fichier <code>01_config_system_SH_PY_YAML/</code> (vérifié) - publié par une source externe via MQTT Discovery (<code>unique_id proxmox_temp_cpu_package</code>, aucun appareil
+rattaché - publiée par un script tournant sur le mini-PC, confirmé par Eric 2026-07-19 : "ça remonte la T° du CPU et
+d'autres choses"). L'archive <code>#MPC_01_monitor_temp.sh.#</code> conservée pour le Raspberry Pi 4 4 Go ne contient
+PAS la partie publication (c'est un afficheur terminal) : publieur exact non identifié au 2026-11-01. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 </blockquote>
 
 </blockquote>
@@ -2301,7 +2301,7 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 <details>
 <summary>💬 Pop-up <code>#temp</code> - 1 entité(s)</summary>
 <blockquote><ul>
-<li><code>sensor.proxmox_cpu_package</code> - <i>Natif HA (MQTT Discovery - MP_01_monitor_temp.sh)</i></li>
+<li><code>sensor.proxmox_cpu_package</code> - <i>MQTT Discovery externe (unique_id proxmox_temp_cpu_package) - pas l'archive MPC_01, qui ne publie rien</i></li>
 </ul></blockquote>
 </details>
 
@@ -2382,9 +2382,8 @@ via MQTT Discovery. Reclassé natif plutôt que "fichier réorganisé" (ambigu).
 
 <blockquote>
 ⚠️ <b>Corrigé le 2026-07-19</b> : les 6 <code>sensor.proxmox_*</code> (carte_mere, core_0-3,
-cpu_package) n'existent dans aucun fichier <code>01_config_system_SH_PY_YAML/</code> - publiés par
-<code>MP_01_monitor_temp.sh</code> tournant sur le <b>Raspberry Pi</b> (confirmé par Eric
-2026-07-19) via MQTT Discovery. Reclassés natifs.
+cpu_package) n'existent dans aucun fichier <code>01_config_system_SH_PY_YAML/</code> - publiés par une source externe via MQTT Discovery (<code>unique_id proxmox_temp_cpu_package</code> ; confirmé par Eric
+2026-07-19 qu'ils remontent bien). L'archive <code>#MPC_01_monitor_temp.sh.#</code> ne publie rien. Reclassés natifs.
 </blockquote>
 
 </blockquote>
@@ -2396,7 +2395,7 @@ cpu_package) n'existent dans aucun fichier <code>01_config_system_SH_PY_YAML/</c
 <details>
 <summary>📎 Fichiers complémentaires</summary>
 <blockquote>
-📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L4C1_MINI_PC/XX_L4C1_MINI_PC_03_Page_RASPI%20(a%20ne%20pas%20jeter)/L4C1_Page_MINI_PC_RASPI.md">Page RPi (transitoire)</a><br>
+📄 <a href="docs/02_docs_dashboard/02_dashboard_docs_MD/L4C1_MINI_PC/XX_L4C1_MINI_PC_03_Page_RASPI%20(a%20ne%20pas%20jeter)/L4C1_Page_MINI_PC_RASPI.md">Page RPi4 4 Go (archive volontaire, ne pas jeter)</a><br>
 </blockquote>
 </details>
 
@@ -4197,17 +4196,6 @@ Script source : <a href="docs/04_docs_scripts/04_docs_scripts_SH/Mf_vigilance_im
 </blockquote>
 </details>
 
-<details>
-<summary><code>#MP_01_monitor_temp.sh.#</code> &nbsp;|&nbsp; Actif - Raspberry Pi</summary>
-<blockquote>
-Script de monitoring température (Raspberry Pi) - publie <code>sensor.proxmox_cpu_package</code>,
-<code>_carte_mere</code>, <code>_core_0-3</code> (utilisés en L4C1/L4C2) via MQTT Discovery.<br>
-Pas de doc associée.<br><br>
-✅ <b>Confirmé par Eric (2026-07-19)</b> : "ça remonte la T° du CPU et d'autres choses" -
-device et fonction confirmés (Raspberry Pi, cf. TODO.md U-2). Corrige l'ancienne mention
-"désactivé/archivé" de cette entrée, qui contredisait TODO.md ("actif - NE PAS TOUCHER").
-</blockquote>
-</details>
 
 </blockquote>
 </details>
@@ -4643,3 +4631,19 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 
 <!-- annotations_log:
 [2026-10-24] R83 / L5C1 : entity_id Hue d'entree renommes entee -> entree (Hue Smart button Entree 1 et 2), apres renommage dans HA, accord d'Eric 15:42 -->
+
+<details>
+<summary><code>#MPC_01_monitor_temp.sh.#</code> &nbsp;|&nbsp; Archive volontaire - Raspberry Pi 4 4 Go</summary>
+<blockquote>
+Script d'affichage terminal (boucle <code>while true</code> lisant <code>/sys/class/thermal</code>), conserve pour remettre
+un <b>Raspberry Pi 4 4 Go</b> en service. <b>Ne pas jeter, ne pas modifier.</b><br>
+Il <b>ne publie rien en MQTT</b> : aucune ligne mqtt, curl ou discovery dedans. Les capteurs
+<code>sensor.proxmox_cpu_package</code>, <code>_carte_mere</code>, <code>_core_0-3</code> utilises par L4C1 sont vivants mais
+publies par une autre source (MQTT Discovery externe, <code>unique_id proxmox_temp_cpu_package</code>, aucun appareil rattache) -
+publieur non identifie au 2026-11-01.<br>
+Aucune entite du Raspberry (<code>fan.rpi_cooling_fan</code>, <code>binary_sensor.rpi_power_status</code>, reseau <code>end0</code>)
+n'existe plus dans HA : le ventilateur GPIO est desactive dans <code>configuration.yaml</code> (bloc commente, pin 14).<br>
+📄 <a href="docs/04_docs_scripts/04_docs_scripts_SH_MD/XX_MPC_01_monitor_temp_sh_RASPI%20(a%20ne%20pas%20jeter)/MPC_01_monitor_temp.md">Fiche</a><br>
+<i>[2026-11-01] Entree renommee MP_01 -> MPC_01 et deplacee de la section 04 vers 06 : la fiche etait deja classee RASPI, sauvegarde pour le Raspberry Pi 4 4 Go.</i>
+</blockquote>
+</details>

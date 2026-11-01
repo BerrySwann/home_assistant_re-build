@@ -24,7 +24,7 @@ Source : arbre local docs/02_docs_dashboard (02_dashboard_docs_MD et 02_dashboar
 - Vignettes sans YAML vignette : 0
 - Vignettes sans fiche page : 0
 - Vignettes sans YAML page : 0
-- Dossiers presents seulement cote MD : 1 (XX_RASPI)
+- Dossiers presents seulement cote MD : 0 (XX_RASPI a disparu le 2026-11-01 : les deux archives Pi4 existent, cote MD et cote YAML)
 - Dossiers presents seulement cote YAML : 0
 - Vignettes dont le code n'apparait pas dans DEPENDANCES_GLOBALES_CLAUDE_memoire.md : 0
 
@@ -51,4 +51,4 @@ Source : arbre local docs/02_docs_dashboard (02_dashboard_docs_MD et 02_dashboar
 | L6C1 | 🫧 L6C1 - VIGNETTE QUALITÉ DE L'AIR | [L6C1_Vignette_AIR_QUALITE.md](02_dashboard_docs_MD/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_01_Vignette/L6C1_Vignette_AIR_QUALITE.md) | [L6C1_Vignette_AIR_QUALITE.yaml](02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_01_Vignette/L6C1_Vignette_AIR_QUALITE.yaml) | [L6C1_Page_AIR_QUALITE.md](02_dashboard_docs_MD/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_02_Page/L6C1_Page_AIR_QUALITE.md) | [L6C1_Page_AIR_QUALITE.yaml](02_dashboard_docs_YAML/L6C1_AIR_QUALITE/L6C1_AIR_QUALITE_02_Page/L6C1_Page_AIR_QUALITE.yaml) | - | oui |
 | L6C2 | 🌿 L6C2 - Vignette Pollulèn © | [L6C2_Vignette_POLLUTION_POLLEN.md](02_dashboard_docs_MD/L6C2_POLLUTION_POLLEN/L6C2_POLLUTION_POLLEN_01_Vignette/L6C2_Vignette_POLLUTION_POLLEN.md) | [L6C2_Vignette_POLLUTION_POLLEN.yaml](02_dashboard_docs_YAML/L6C2_POLLUTION_POLLEN/L6C2_POLLUTION_POLLEN_01_Vignette/L6C2_Vignette_POLLUTION_POLLEN.yaml) | [L6C2_Page_POLLUTION_POLLEN.md](02_dashboard_docs_MD/L6C2_POLLUTION_POLLEN/L6C2_POLLUTION_POLLEN_02_Page/L6C2_Page_POLLUTION_POLLEN.md) | [L6C2_Page_POLLUTION_POLLEN.yaml](02_dashboard_docs_YAML/L6C2_POLLUTION_POLLEN/L6C2_POLLUTION_POLLEN_02_Page/L6C2_Page_POLLUTION_POLLEN.yaml) | - | oui |
 | L6C3 | 💧 L6C3 - Vignette Vigieau (Vigilance Eau) | [L6C3_Vignette_VIGIEAU.md](02_dashboard_docs_MD/L6C3_VIGIEAU/L6C3_VIGIEAU_01_Vignette/L6C3_Vignette_VIGIEAU.md) | [L6C3_Vignette_VIGIEAU.yaml](02_dashboard_docs_YAML/L6C3_VIGIEAU/L6C3_VIGIEAU_01_Vignette/L6C3_Vignette_VIGIEAU.yaml) | [L6C3_Page_VIGIEAU.md](02_dashboard_docs_MD/L6C3_VIGIEAU/L6C3_VIGIEAU_02_Page/L6C3_Page_VIGIEAU.md) | [L6C3_Page_VIGIEAU.yaml](02_dashboard_docs_YAML/L6C3_VIGIEAU/L6C3_VIGIEAU_02_Page/L6C3_Page_VIGIEAU.yaml) | [vigieau_guard_invalid_data.patch](02_dashboard_docs_YAML/L6C3_VIGIEAU/XX_L6C3_VIGIEAU_03_Correctif_upstream/vigieau_guard_invalid_data.patch) | oui |
-| XX_RASPI | XX_RASPI | - | - | - | - | [L4C1_Page_MINI_PC_RASPI.md](02_dashboard_docs_MD/XX_RASPI/L4C1_MINI_PC_02_RASPI%20%28a%20ne%20pas%20jeter%29/L4C1_Page_MINI_PC_RASPI.md) | non |
+| XX_RASPI | XX_RASPI (archive volontaire, Pi4 4 Go - ne pas jeter) | - | - | - | - | [L4C1_Page_MINI_PC_RASPI.md](02_dashboard_docs_MD/L4C1_MINI_PC/XX_L4C1_MINI_PC_03_Page_RASPI%20%28a%20ne%20pas%20jeter%29/L4C1_Page_MINI_PC_RASPI.md) | non |

@@ -114,6 +114,21 @@ def etat_prod(local, prods, h_ok):
     return ("OK" if not ko else "; ".join(etats)), ko
 
 
+RX_SECTION_ARCHIVE = re.compile(r"^##\s+.*06\s*-\s*SAUVEGARDE RASPI", re.I)
+
+def sans_sections_archive(t):
+    """Retire les sections d archive de l index (aujourd hui "06 - SAUVEGARDE RASPI")
+    du texte analyse pour les ENTITES. Decision d Eric du 2026-11-01 : les entites du
+    Raspberry Pi4 archive ne sont plus signalees ; tout ce qui est hors de ces sections
+    reste controle, en particulier la prise inspelning (autre section)."""
+    out, saute = [], False
+    for ligne in t.split("\n"):
+        if ligne.startswith("## "):
+            saute = bool(RX_SECTION_ARCHIVE.match(ligne))
+        if not saute:
+            out.append(ligne)
+    return "\n".join(out)
+
 def main():
     h_ok = os.path.isdir(PH) and os.path.exists(r"H:\.storage")
     ent = (entites_prod() | groupes_yaml() | ENTITES_SYSTEME | ENTITES_NOTES | TYPES_NON_ENTITES) if h_ok else set()
@@ -141,7 +156,7 @@ def main():
                 ecarts.append("balises")
         absentes = []
         if veut_ent and ent:
-            vus = {m.group(0) for m in RX_ENT.finditer(t)}
+            vus = {m.group(0) for m in RX_ENT.finditer(sans_sections_archive(t))}
             absentes = sorted(e for e in vus if e not in ent and not e.endswith("_") and "xxx" not in e)
             if absentes:
                 ecarts.append("entites")

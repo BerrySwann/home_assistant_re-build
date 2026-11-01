@@ -13,7 +13,7 @@
 
 </div>
 
-> **Fichier :** `docs/03_docs_automations/03_docs_automations_YAML/P1_03_Chauffage_Salle_de_Bain/a_soufflant_sdb_bouton_rodret/a_soufflant_sdb_bouton_rodret.yaml`
+> **Fichier :** `docs/03_docs_automations/03_docs_automations_YAML/P1_03_Chauffage_Salle_de_Bain/a_soufflant_sdb_bouton_rodret/A_soufflant_SDB_bouton_rodret.yaml`
 > **ID HA :** `1790623332290`
 > **Mode HA :** `single`
 > **MàJ :** 2026-10-10 (fiche écrite à partir du YAML, identique à H:\automations.yaml)
