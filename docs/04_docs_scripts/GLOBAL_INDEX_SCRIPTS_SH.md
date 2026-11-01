@@ -13,7 +13,7 @@
 
 </div>
 
-Fichier GENERE le 2026-11-01 12:46 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-11-01 22:34 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 ## Difference entre les index SH, PY et YAML
 
@@ -24,7 +24,7 @@ Fichier GENERE le 2026-11-01 12:46 par docs/04_docs_scripts/04_docs_scripts_SH/g
 
 ## Controle
 
-- Scripts SH indexes : 7
+- Scripts SH indexes : 8
 - Scripts sans fiche dans 04_docs_scripts_SH_MD : 0
 - Scripts presents dans H:\.scripts avec un contenu different du local : 0
 - Les scripts 'absent de H:\.scripts' tournent sur le PC ou ne sont pas deployes : a lire avec la colonne Skill.
@@ -39,6 +39,7 @@ Fichier GENERE le 2026-11-01 12:46 par docs/04_docs_scripts/04_docs_scripts_SH/g
 |:-------|:-----|:-----------------------|:--------------------------|:----------------|:-----------|:------|:--------|
 | [Ha_git_backup.sh](04_docs_scripts_SH/Ha_git_backup/Ha_git_backup.sh) | bash | identique | shell_command.git_backup_push, shell_command.git_backup_push_manual, shell_command.git_backup_push_weekly | automation [01-Backup] Git hourly H+10, automation [02-Backup] Git daily (03:00), automation [06-Backup] Git au démarrage HA, automation [04-Backup] Git push manuel, automation [03-Backup] Git weekly (dim 01:30), automation [05-Backup] Git push weekly manuel | ha-trigul | [Ha_git_backup.md](04_docs_scripts_SH_MD/Ha_git_backup/Ha_git_backup.md) | Ha_git_backup |
 | [Mf_vigilance_images.sh](04_docs_scripts_SH/Mf_vigilance_images/Mf_vigilance_images.sh) | bash | absent de H:\.scripts | - | - | - | [Mf_vigilance_images.md](04_docs_scripts_SH_MD/Mf_vigilance_images/Mf_vigilance_images.md) | Mf_vigilance_images |
+| [MPC_01_monitor_temp.sh](04_docs_scripts_SH/XX_MPC_01_monitor_temp_sh_RASPI%20%28a%20ne%20pas%20jeter%29/MPC_01_monitor_temp.sh) | bash | absent de H:\.scripts | - | - | - | [MPC_01_monitor_temp.md](04_docs_scripts_SH_MD/XX_MPC_01_monitor_temp_sh_RASPI%20%28a%20ne%20pas%20jeter%29/MPC_01_monitor_temp.md) | XX_MPC_01_monitor_temp_sh_RASPI (a ne pas jeter) |
 
 ## SCRIPTS HOME ASSISTANT, ILS NE TOURNENT PAS DANS HOME ASSISTANT (audit, verification, generation, historique et sauvegarde : la maison fonctionnerait sans eux)
 

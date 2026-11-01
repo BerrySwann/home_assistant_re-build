@@ -69,7 +69,7 @@ docs/03_docs_automations/
 | Tarif HC/HP | 1 |
 | Watchdog Piles (HUE/IKEA/SONOFF) | 1 |
 
-> Source : sections du `GLOBAL_INDEX_AUTOMATIONS.md` genere le 2026-10-28 (somme = 63). Hors prod : 4 YAML locaux (dont RASPI : ventilateur Raspberry Pi 4, sans id), liste dans la section "Hors prod ou sans id" de l'index.
+> Source : sections du `GLOBAL_INDEX_AUTOMATIONS.md` genere le 2026-10-28 (somme = 63). Hors prod : 4 YAML locaux (dont RASPI : ventilateur Raspberry Pi 4, sans id - archive volontaire, ne pas supprimer), liste dans la section "Hors prod ou sans id" de l'index.
 
 ---
 

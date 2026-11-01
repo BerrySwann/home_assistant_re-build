@@ -12,7 +12,7 @@
 
 </div>
 
-*Derniere mise a jour : 2026-11-01 14h25 (repointage de la prise de la salle de bain : sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power, entite supprimee de HA, remplacee par sensor.prise_seche_serviette_salle_de_bain_nous_power dans L2C2_Page_ENERGIE_CLIM.yaml et sa fiche ; dashboard vivant repointe par l API lovelace/config/save ; demande d Eric)*
+*Derniere mise a jour : 2026-11-01 22h16 (controle qualite du 2026-11-01 : tableau des fichiers L0C0_PAGE_Home corrige - carte 05_Impacte de foudre ajoutee, doublon 08_Congelateur supprime ; la carte 11_Carte presence y etait deja. Les 8 YAML modifies dans la soiree (Page_Home, Card_foudre_home, L1C1/L2C2/L2C3/L6C2/L6C3 pages, L4C1 RASPI) ont ete repointes sur /dashboard-tablette/0 ou sur la bonne entite foudre.)*
 *Derniere mise a jour : 2026-10-29 22h10 (R125.1 a R125.3 : fiches de .scripts rangees un dossier par fichier, commentaires obsoletes des audits corriges, fiche Audit_md5_yaml corrigee)*
 *Derniere mise a jour : 2026-10-29 21h32 (regle de structure scripts et command_line : local range par dossier, HA toujours a plat, avertissement gyrophare, cascades bouton -> script -> fonction des audits MD5 et de la sauvegarde GitHub ; chemin du capteur audit_md5_journal corrige ; demande d'Eric)*
 *Derniere mise a jour : 2026-10-29 20h10 (11 automations ajoutees, section store salon reecrite, cascades P0 Linky/Nodon documentees, vignettes alarmes congelateur ; controle Check_DEPENDANCES.py cree et branche dans /histo ; aucune vignette modifiee)*
@@ -239,9 +239,9 @@ HOME PAGE (type: grid)
 | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L0C0_PAGE_Home/02_Page/Page_Home.yaml` | ✅ page complète |
 | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L0C0_PAGE_Home/03_Carte météo/Card_meteocss_home.yaml` | ✅ picture-elements 7 layers |
 | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L0C0_PAGE_Home/04_Studio code server/Card_vscode_home.yaml` | ✅ VS Code conditional |
+| `docs/02_docs_dashboard/02_dashboard_docs_YAML/L0C0_PAGE_Home/05_Impacte de foudre/Card_foudre_home.yaml` | ✅ Carte foudre (impact, distance, localisation) |
 | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L0C0_PAGE_Home/06_Lave linge/Card_lave_linge_home.yaml` | ✅ Lave-linge mushroom card_mod refonte animee (remplace 2026-09-19) |
 | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L0C0_PAGE_Home/07_Lave vaisselle/Card_lave_vaisselle_home.yaml` | ✅ Lave-vaisselle mushroom card_mod refonte animee (remplace 2026-09-19) |
-| `docs/02_docs_dashboard/02_dashboard_docs_YAML/L0C0_PAGE_Home/08_Congélateur/Card_congelateur_home.yaml` | ✅ Congelateur button-card refonte complete snow/drip/door (remplace 2026-09-24) |
 | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L0C0_PAGE_Home/08_Congélateur/Card_congelateur_home.yaml` | ✅ Congelateur button-card refonte complete snow/drip/door (remplace 2026-09-24) |
 | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L0C0_PAGE_Home/11_Carte présence/Card_presence_home.yaml` | ✅ Présence (separator + Eric + Mamour) |
 | `docs/02_docs_dashboard/02_dashboard_docs_YAML/L0C0_PAGE_Home/09_Détecteur de fuite/Card_detecteur_fuite_home.yaml` | ✅ Détecteur fuite mushroom |

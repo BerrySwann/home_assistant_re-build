@@ -13,7 +13,7 @@
 
 </div>
 
-Fichier GENERE le 2026-11-01 12:46 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-11-01 22:26 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et categorie), YAML locaux 03_docs_automations_YAML (id local et commentaires), fiches 03_docs_automations_MD. Les liens sont relatifs a ce fichier.
 
@@ -187,10 +187,12 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 ## Hors prod ou sans id (YAML locaux uniquement) (4)
 
 Ces YAML ne correspondent a aucune entree de H:\automations.yaml (id absent ou inconnu de la prod). Exemple : l'automatisation du ventilateur du Raspberry Pi 4, dont le YAML local n'a pas d'id.
+Attention : parmi eux, les YAML dont le dossier est suffixe (a ne pas jeter) sont des ARCHIVES VOLONTAIRES (exemple : le Raspberry Pi 4 Go, hors tension). On ne les supprime pas, on ne les nettoie pas : regle "Archives volontaires" de IA_CONTEXT_BASE.md.
+
 
 | N | Alias | id prod | id local (ReBuild) | Entity HA | Documentation (md) | YAML source | Commentaire |
 |:--|:------|:--------|:-------------------|:----------|:-------------------|:------------|:------------|
 | 1 | P3_BUREAU - Forcer Play ON si PC tourne | hors automations.yaml de la prod | 1775331547996 | - | [Bureau_espace_de_loisirs_actif.md](03_docs_automations_MD/P3_Eclairage/Bureau_espace_de_loisirs_actif/Bureau_espace_de_loisirs_actif.md) | [P3_Bureau_forcer_play_on_si_pc_tourne.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_forcer_play_on_si_pc_tourne/P3_Bureau_forcer_play_on_si_pc_tourne.yaml) |  |
-| 2 | Raspberry CPU Fan PWM 6 States | hors automations.yaml de la prod | aucun | - | [A_RASPI_fan_pwm_6_states.md](03_docs_automations_MD/XX_A_RASPI_fan_pwm_6_states%20%28a%20ne%20pas%20jeter%29/A_RASPI_fan_pwm_6_states.md) | [A_RASPI_fan_pwm_6_states.yaml](03_docs_automations_YAML/XX_A_RASPI_fan_pwm_6_states%20%28a%20ne%20pas%20jeter%29/A_RASPI_fan_pwm_6_states.yaml) |  |
+| 2 | Raspberry CPU Fan PWM 6 States | hors automations.yaml de la prod (archive volontaire, ne pas jeter) | aucun | - | [A_RASPI_fan_pwm_6_states.md](03_docs_automations_MD/XX_A_RASPI_fan_pwm_6_states%20%28a%20ne%20pas%20jeter%29/A_RASPI_fan_pwm_6_states.md) | [A_RASPI_fan_pwm_6_states.yaml](03_docs_automations_YAML/XX_A_RASPI_fan_pwm_6_states%20%28a%20ne%20pas%20jeter%29/A_RASPI_fan_pwm_6_states.yaml) |  |
 | 3 | SDB - SOUFFLANT - BOUTON IKEA RODRET (MQTT vers interrupteur) | hors automations.yaml de la prod | aucun | - | [i_soufflant_SDB_bouton_rodret.md](03_docs_automations_MD/P1_SDB/i_soufflant_SDB_bouton_rodret.md) | [i_soufflant_SDB_bouton_rodret.yaml](03_docs_automations_YAML/P1_SDB/i_soufflant_SDB_bouton_rodret.yaml) | Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant. ; Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - BOUTON IKEA RODRET) |
 | 4 | SDB - SOUFFLANT - ROUTAGE (interrupteur vers sequences) | hors automations.yaml de la prod | aucun | - | [h_soufflant_SDB_routage.md](03_docs_automations_MD/P1_SDB/h_soufflant_SDB_routage.md) | [h_soufflant_SDB_routage.yaml](03_docs_automations_YAML/P1_SDB/h_soufflant_SDB_routage.yaml) | Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant. ; Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - ROUTAGE) |

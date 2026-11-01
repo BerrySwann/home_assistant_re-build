@@ -13,8 +13,8 @@
 
 </div>
 
-> Fichier GENERE le 2026-11-01 14:33 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
-> 14 fichiers de contenu, 74 sauvegardes (.bak), 0 sans description.
+> Fichier GENERE le 2026-11-01 22:27 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
+> 14 fichiers de contenu, 82 sauvegardes (.bak), 0 sans description.
 
 > 🚨🚨🚨 **GYROPHARE ROUGE - DANS HOME ASSISTANT TOUT EST A PLAT** 🚨🚨🚨
 >
@@ -30,7 +30,7 @@ Liste de tous les fichiers de docs/00_IA (le dossier des directives pour les IA)
 
 | Fichier | Qui s'en sert | Son but | Quand le lire | Cite dans CLAUDE.md | Prod |
 |---|---|---|---|---|---|
-| [IA_CONTEXT_BASE.md](../00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md) | Claude (c'est son CLAUDE.md local), Hermes et toute IA du projet ; Eric pour relire les regles. Tenu identique en 3 emplacements (voir son en-tete) | Directives IA completes : regles de codage YAML, nomenclature, hierarchie visuelle, arborescences, protocoles, regle de sauvegarde. Meme contenu que le CLAUDE.md local. | Quand une IA doit travailler dans le projet : c'est le contexte de base, les sous-contextes ci-dessous le completent. | oui | OK (MD5 identique) |
+| [IA_CONTEXT_BASE.md](../00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md) | Claude (c'est son CLAUDE.md local), Hermes et toute IA du projet ; Eric pour relire les regles. Tenu identique en 3 emplacements (voir son en-tete) | Directives IA completes : regles de codage YAML, nomenclature, hierarchie visuelle, arborescences, protocoles, regle de sauvegarde. Meme contenu que le CLAUDE.md local. | Quand une IA doit travailler dans le projet : c'est le contexte de base, les sous-contextes ci-dessous le completent. | oui | DIFFERENT de la prod |
 
 ## Sous-contextes (00_IA_SOUS_CONTEXT_IA)
 
@@ -44,7 +44,7 @@ Un dossier par fichier. Chargés a la demande : Claude ne les lit que si la tach
 | [IA_BADGES_FICHES.md](../00_IA_SOUS_CONTEXT_IA/IA_BADGES_FICHES/IA_BADGES_FICHES.md) | Claude, pour creer ou corriger la banniere de badges d une fiche | Inventaire des badges des fiches .md : valeurs et couleurs de chaque badge, et les cas deja rencontres. | Creer une fiche .md, choisir ou corriger un badge, modifier Check_badges_fiches. | oui | OK (MD5 identique) |
 | [IA_CARTE_EMPLACEMENTS.md](../00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/IA_CARTE_EMPLACEMENTS.md) | Claude et les skills qui copient ou comparent des fichiers (histo, ha-push-yaml, ha-push-docs, ha-trigul...) | Carte unique des fichiers presents a plusieurs emplacements (local, prod racine, prod miroir docs, GitHub racine et docs/) et regles de correspondance ; script de controle Verif_emplacements.py. | Avant un push de config, de GLOBAL_INDEX_REPO ou de README, ou un controle local / prod / GitHub. | non | OK (MD5 identique) |
 | [IA_CMD_TERMINAL_HA.md](../00_IA_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA/IA_CMD_TERMINAL_HA.md) | Claude et Eric, pour les commandes a lancer sur HA | Commandes terminal HA : commande tree prod, audits MD5, sauvegarde git vers GitHub, logs, chemins /homeassistant/. | Lancer un audit ou un backup, lire un log, retrouver un chemin /homeassistant/. | oui | OK (MD5 identique) |
-| [IA_INDEX_AUTOMATIONS.md](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/IA_INDEX_AUTOMATIONS.md) | Claude, pour tenir l'index des automations | Comment les automations sont indexees (index genere et resume de GLOBAL_INDEX_REPO), arborescence locale, comptage par categorie, procedure de mise a jour. | Ajout, suppression ou renommage d'une automation, regeneration de l'index. | oui | OK (MD5 identique) |
+| [IA_INDEX_AUTOMATIONS.md](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/IA_INDEX_AUTOMATIONS.md) | Claude, pour tenir l'index des automations | Comment les automations sont indexees (index genere et resume de GLOBAL_INDEX_REPO), arborescence locale, comptage par categorie, procedure de mise a jour. | Ajout, suppression ou renommage d'une automation, regeneration de l'index. | oui | DIFFERENT de la prod |
 | [IA_INDEX_NAVIGATION.md](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/IA_INDEX_NAVIGATION.md) | Claude, pour tenir l'index du dashboard | Comment la navigation du dashboard est indexee (index genere et section 02 de GLOBAL_INDEX_REPO), arborescence, chemins GitHub, limites connues. | Ajout d'une vignette ou d'une page, mapping des entites vers leurs fichiers sources. | oui | OK (MD5 identique) |
 | [IA_INTEGRATIONS_CARTES.md](../00_IA_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md) | Claude, pour valider un YAML de dashboard | Referentiel des integrations HA (HACS, core, add-ons), des cartes du dashboard et de la palette de couleurs. | YAML dashboard a valider, type custom:* inconnu, integration manquante, nouvelle carte a ajouter. | oui | OK (MD5 identique) |
 | [IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md](../00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md) | Claude et Hermes (qui s'aligne dessus) pour nommer les dossiers et fichiers de docs ; Eric pour valider les regles | Regles de nommage des repertoires et des fichiers du dossier docs (poles, abreviations, accents, niveaux, releve des ecarts a renommer). Copie du maitre historique/IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md ; statut brouillon a valider par Eric. | Avant de creer, renommer ou deplacer un fichier ou un dossier de docs ; pour savoir quels noms sont encore en ecart. | oui | OK (MD5 identique) |
@@ -55,7 +55,7 @@ Un dossier par fichier. Chargés a la demande : Claude ne les lit que si la tach
 
 | Fichier | Qui s'en sert | Son but | Quand le lire | Cite dans CLAUDE.md | Prod |
 |---|---|---|---|---|---|
-| [DEPENDANCES_GLOBALES_CLAUDE_memoire.md](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md) | Claude (il la tient a jour via /sync_index et /histo) ; Hermes a sa propre version dans docs/99_docs_MD_system/DEPENDANCES_GLOBALES_HERMES | Chaine de dependances du dashboard : matrice des 18 vignettes, entites, fichiers et automations par domaine, scripts, fichiers config racine. Citee par IA_CONTEXT_BASE, IA_ARBO_DETAIL, IA_INDEX_NAVIGATION et IA_NOM_DES_REPERTOIRES_ET_FICHIERS. | Apres validation d un YAML, d une automation ou d une vignette ; pour savoir quelles entites et quels fichiers dependent d une vignette. | oui | DIFFERENT de la prod |
+| [DEPENDANCES_GLOBALES_CLAUDE_memoire.md](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md) | Claude (il la tient a jour via /sync_index et /histo) ; Hermes a sa propre version dans docs/99_docs_MD_system/DEPENDANCES_GLOBALES_HERMES | Chaine de dependances du dashboard : matrice des 18 vignettes, entites, fichiers et automations par domaine, scripts, fichiers config racine. Citee par IA_CONTEXT_BASE, IA_ARBO_DETAIL, IA_INDEX_NAVIGATION et IA_NOM_DES_REPERTOIRES_ET_FICHIERS. | Apres validation d un YAML, d une automation ou d une vignette ; pour savoir quelles entites et quels fichiers dependent d une vignette. | oui | OK (MD5 identique) |
 
 ## Sauvegardes (.bak)
 
@@ -63,16 +63,16 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 
 | Dossier | Nombre de sauvegardes |
 |---|---|
-| [00_IA_CONTEXT_BASE](../00_IA_CONTEXT_BASE/) | 11 |
-| [00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/) | 10 |
-| [00_IA_GLOBAL_INDEX_memoire](./) | 17 |
+| [00_IA_CONTEXT_BASE](../00_IA_CONTEXT_BASE/) | 12 |
+| [00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/) | 12 |
+| [00_IA_GLOBAL_INDEX_memoire](./) | 21 |
 | [00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 4 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE](../00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS](../00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_BADGES_FICHES](../00_IA_SOUS_CONTEXT_IA/IA_BADGES_FICHES/) | 2 |
 | [00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS](../00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA](../00_IA_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA/) | 3 |
-| [00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/) | 3 |
+| [00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/) | 4 |
 | [00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES](../00_IA_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS](../00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/) | 4 |

@@ -4602,7 +4602,7 @@ Pas de doc associée. Aucune automation de la prod ne l'appelle (vérifié le 20
 
 ## 🍓 06 - SAUVEGARDE RASPI (archive, hors HA actuel)
 
-*Restes de l'ancien Raspberry Pi4, conservés pour mémoire. Les entités citées ici (fan.rpi_cooling_fan, sensor.system_monitor_temperature_du_processeur) n'existent plus dans HA.*
+*Archive du Raspberry Pi 4 4 Go, conservé et non jeté. Les entités citées ici (fan.rpi_cooling_fan, sensor.system_monitor_temperature_du_processeur) ne figurent pas dans HA tant que le Pi est hors tension ; elles réapparaissent dès qu'on le rallume, avec son System Monitor et son ventilateur GPIO. Ne pas jeter, ne pas modifier : cette section documente ce que le Pi publie quand il tourne.*
 
 <details>
 <summary><b>🍓 Raspberry Pi4 (archivé)</b> &nbsp;|&nbsp; 1 automation(s) &nbsp;|&nbsp; <i>Gestion ventilateur CPU - archivé depuis migration NUC</i></summary>
@@ -4642,7 +4642,7 @@ Il <b>ne publie rien en MQTT</b> : aucune ligne mqtt, curl ou discovery dedans. 
 publies par une autre source (MQTT Discovery externe, <code>unique_id proxmox_temp_cpu_package</code>, aucun appareil rattache) -
 publieur non identifie au 2026-11-01.<br>
 Aucune entite du Raspberry (<code>fan.rpi_cooling_fan</code>, <code>binary_sensor.rpi_power_status</code>, reseau <code>end0</code>)
-n'existe plus dans HA : le ventilateur GPIO est desactive dans <code>configuration.yaml</code> (bloc commente, pin 14).<br>
+n'est presente dans HA aujourd'hui : le Pi 4 4 Go est hors tension et le bloc GPIO du ventilateur (pin 14) est commente dans <code>configuration.yaml</code>. Ce n'est pas une entite fantome ni une entite morte : le Pi est conserve, et l'automation comme le script d'archive permettent de tout retablir. Ne pas jeter, ne pas supprimer, ne pas nettoyer.<br>
 📄 <a href="docs/04_docs_scripts/04_docs_scripts_SH_MD/XX_MPC_01_monitor_temp_sh_RASPI%20(a%20ne%20pas%20jeter)/MPC_01_monitor_temp.md">Fiche</a><br>
 <i>[2026-11-01] Entree renommee MP_01 -> MPC_01 et deplacee de la section 04 vers 06 : la fiche etait deja classee RASPI, sauvegarde pour le Raspberry Pi 4 4 Go.</i>
 </blockquote>

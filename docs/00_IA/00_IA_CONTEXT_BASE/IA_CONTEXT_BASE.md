@@ -597,6 +597,13 @@ Aucun `input_boolean`, `input_number` ou `input_select` pour la logique métier.
   En local : aucun menage, aucune suppression, aucun `.bak`, aucun renommage. Ne jamais proposer de le purger ni de le consolider.
   (Cote prod, la regle de `/histo` etape 5B reste inchangee : un seul export, le plus recent.)
 
+## ARCHIVES VOLONTAIRES `(a ne pas jeter)` (decidee par Eric le 2026-10-31, ecrite le 2026-11-01 apres une erreur d'Hermes)
+
+- Un dossier dont le nom se termine par `(a ne pas jeter)` est une ARCHIVE VOLONTAIRE. On ne le supprime pas, on ne le renomme pas, on ne le deplace pas, on ne propose pas de le purger ni de le consolider. Le suffixe fait foi, meme si le contenu parait inutile ou casse.
+- Ces archives documentent du materiel qu'Eric possede encore mais qui est hors tension. Exemple vivant : le Raspberry Pi 4 4 Go (`XX_A_RASPI_fan_pwm_6_states (a ne pas jeter)`, `XX_MINI_PC_02_YAML_RASPI (a ne pas jeter)`, `XX_MPC_01_monitor_temp_sh_RASPI (a ne pas jeter)`). Ses entites (`fan.rpi_cooling_fan`, `sensor.system_monitor_temperature_du_processeur`) ne sont pas dans HA tant que le Pi est eteint, et reviennent des qu'on le rallume.
+- INTERDIT d'ecrire, dans une fiche, un index ou un rapport, qu'une entite citee par une archive 'n'existe plus' ou qu'elle est 'morte'. Absence dans HA ne signifie pas suppression : la formulation correcte est 'absente tant que le materiel est hors tension'. Avant de conclure a une disparition, lire le nom du dossier qui contient la fiche.
+- Un controle qui signale comme manquante une entite citee par une archive est un FAUX POSITIF : c'est le controle qu'on corrige, jamais l'archive ni sa fiche.
+
 ## BADGES DES FICHES .md - REGLE UNIQUE (decidee par Eric le 2026-10-28, completee les 2026-10-30 et 2026-10-31)
 
 - Chaque fiche .md de `docs/` commence par une banniere de 8 badges shields.io, dans cet ordre : Statut, MàJ, HA, IA Partner, Source, Modifs, Expert, Type. Forme d'un badge : `[![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;`, le tout dans un `<div align="center">`. Modele : `docs/02_docs_dashboard/02_dashboard_docs_MD/L0C0_PAGE_Home/02_Page/Page_Home.md`. Inventaire des badges existants : `docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_BADGES_FICHES/IA_BADGES_FICHES.md` (deplace dans l IA sous contexte par Eric le 2026-10-31, part en prod avec le 5C).
