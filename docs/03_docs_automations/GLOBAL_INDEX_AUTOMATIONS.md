@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--01-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 </div>
 
-Fichier GENERE le 2026-10-28 19:54 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-11-01 12:46 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et categorie), YAML locaux 03_docs_automations_YAML (id local et commentaires), fiches 03_docs_automations_MD. Les liens sont relatifs a ce fichier.
 
@@ -21,7 +21,7 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 
 - Automatisations en prod (automations.yaml) : 63
 - YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS_YAML_ORIGINAL) : 68
-- Fiches .md retenues : 70 dont 58 rattachees a un YAML
+- Fiches .md retenues : 71 dont 59 rattachees a un YAML
 - Automatisations de la prod sans YAML local : 0
 - Automatisations de la prod sans fiche rattachee : 6 ([00-Backup] Alerte si KO 15 min ; (A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00) ; Mettre à jour le temps du dernier impact de foudre ; (C) Notification température Up ou Down de (7h30 -> 21h00) ; (D) Notification température Up ou Down de (21h00 -> 7h30) ; C - SALLE DE BAIN : WATCHDOG SÉCURITÉ SOUFFLANT)
 - Automatisations sans entity_id dans le registre HA : 0
@@ -191,6 +191,6 @@ Ces YAML ne correspondent a aucune entree de H:\automations.yaml (id absent ou i
 | N | Alias | id prod | id local (ReBuild) | Entity HA | Documentation (md) | YAML source | Commentaire |
 |:--|:------|:--------|:-------------------|:----------|:-------------------|:------------|:------------|
 | 1 | P3_BUREAU - Forcer Play ON si PC tourne | hors automations.yaml de la prod | 1775331547996 | - | [Bureau_espace_de_loisirs_actif.md](03_docs_automations_MD/P3_Eclairage/Bureau_espace_de_loisirs_actif/Bureau_espace_de_loisirs_actif.md) | [P3_Bureau_forcer_play_on_si_pc_tourne.yaml](03_docs_automations_YAML/P3_Eclairage/P3_Bureau_forcer_play_on_si_pc_tourne/P3_Bureau_forcer_play_on_si_pc_tourne.yaml) |  |
-| 2 | Raspberry CPU Fan PWM 6 States | hors automations.yaml de la prod | aucun | - | aucune | [A_RASPI_fan_pwm_6_states.yaml](03_docs_automations_YAML/XX_RASPI/A_RASPI_fan_pwm_6_states_YAML/A_RASPI_fan_pwm_6_states.yaml) |  |
+| 2 | Raspberry CPU Fan PWM 6 States | hors automations.yaml de la prod | aucun | - | [A_RASPI_fan_pwm_6_states.md](03_docs_automations_MD/XX_A_RASPI_fan_pwm_6_states%20%28a%20ne%20pas%20jeter%29/A_RASPI_fan_pwm_6_states.md) | [A_RASPI_fan_pwm_6_states.yaml](03_docs_automations_YAML/XX_A_RASPI_fan_pwm_6_states%20%28a%20ne%20pas%20jeter%29/A_RASPI_fan_pwm_6_states.yaml) |  |
 | 3 | SDB - SOUFFLANT - BOUTON IKEA RODRET (MQTT vers interrupteur) | hors automations.yaml de la prod | aucun | - | [i_soufflant_SDB_bouton_rodret.md](03_docs_automations_MD/P1_SDB/i_soufflant_SDB_bouton_rodret.md) | [i_soufflant_SDB_bouton_rodret.yaml](03_docs_automations_YAML/P1_SDB/i_soufflant_SDB_bouton_rodret.yaml) | Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant. ; Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - BOUTON IKEA RODRET) |
 | 4 | SDB - SOUFFLANT - ROUTAGE (interrupteur vers sequences) | hors automations.yaml de la prod | aucun | - | [h_soufflant_SDB_routage.md](03_docs_automations_MD/P1_SDB/h_soufflant_SDB_routage.md) | [h_soufflant_SDB_routage.yaml](03_docs_automations_YAML/P1_SDB/h_soufflant_SDB_routage.yaml) | Deploye en prod le 2026-09-28, recharge sans redemarrage de Home Assistant. ; Identifiant d'automation : voir automations.yaml (alias SDB - SOUFFLANT - ROUTAGE) |

@@ -13,8 +13,8 @@
 
 </div>
 
-> Fichier GENERE le 2026-11-01 09:07 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
-> 14 fichiers de contenu, 52 sauvegardes (.bak), 0 sans description.
+> Fichier GENERE le 2026-11-01 12:46 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
+> 14 fichiers de contenu, 59 sauvegardes (.bak), 0 sans description.
 
 > 🚨🚨🚨 **GYROPHARE ROUGE - DANS HOME ASSISTANT TOUT EST A PLAT** 🚨🚨🚨
 >
@@ -30,7 +30,7 @@ Liste de tous les fichiers de docs/00_IA (le dossier des directives pour les IA)
 
 | Fichier | Qui s'en sert | Son but | Quand le lire | Cite dans CLAUDE.md | Prod |
 |---|---|---|---|---|---|
-| [IA_CONTEXT_BASE.md](../00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md) | Claude (c'est son CLAUDE.md local), Hermes et toute IA du projet ; Eric pour relire les regles. Tenu identique en 3 emplacements (voir son en-tete) | Directives IA completes : regles de codage YAML, nomenclature, hierarchie visuelle, arborescences, protocoles, regle de sauvegarde. Meme contenu que le CLAUDE.md local. | Quand une IA doit travailler dans le projet : c'est le contexte de base, les sous-contextes ci-dessous le completent. | oui | DIFFERENT de la prod |
+| [IA_CONTEXT_BASE.md](../00_IA_CONTEXT_BASE/IA_CONTEXT_BASE.md) | Claude (c'est son CLAUDE.md local), Hermes et toute IA du projet ; Eric pour relire les regles. Tenu identique en 3 emplacements (voir son en-tete) | Directives IA completes : regles de codage YAML, nomenclature, hierarchie visuelle, arborescences, protocoles, regle de sauvegarde. Meme contenu que le CLAUDE.md local. | Quand une IA doit travailler dans le projet : c'est le contexte de base, les sous-contextes ci-dessous le completent. | oui | OK (MD5 identique) |
 
 ## Sous-contextes (00_IA_SOUS_CONTEXT_IA)
 
@@ -63,9 +63,9 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 
 | Dossier | Nombre de sauvegardes |
 |---|---|
-| [00_IA_CONTEXT_BASE](../00_IA_CONTEXT_BASE/) | 4 |
+| [00_IA_CONTEXT_BASE](../00_IA_CONTEXT_BASE/) | 10 |
 | [00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/) | 3 |
-| [00_IA_GLOBAL_INDEX_memoire](./) | 9 |
+| [00_IA_GLOBAL_INDEX_memoire](./) | 10 |
 | [00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 4 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE](../00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS](../00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/) | 3 |
