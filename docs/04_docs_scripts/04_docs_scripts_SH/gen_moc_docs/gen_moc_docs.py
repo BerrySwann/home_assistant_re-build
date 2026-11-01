@@ -15,7 +15,7 @@ for _n in ("j_1_1_salon_clim_on_off_intelligent.yaml", "j_1_2_bureau_clim_on_off
 _CFG = r"C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\01_config_system_MD"
 FORCE["audit_md5_yaml.sh"] = _CFG + r"\.scripts\01_scripts.sh_md\Audit_md5_yaml\Audit_md5_yaml.md"  # copie identique a la prod, fiche existante (ordre d'Eric 2026-10-28, a valider)
 FORCE["correct_linky.py"] = _CFG + r"\.scripts\02_scripts.py_md\Correct_linky\Correct_linky.md"  # idem
-FORCE["mf_vigilance_images.sh"] = _CFG + r"\scripts\Mf_vigilance_images.md"  # idem
+# FORCE de mf_vigilance_images.sh retire le 2026-11-01 : la fiche existe maintenant dans 04_docs_scripts_SH_MD (Mf_vigilance_images), rattachement par le nom
 
 def norm(s):
     return re.sub(r"[^a-z0-9]", "", s.lower())

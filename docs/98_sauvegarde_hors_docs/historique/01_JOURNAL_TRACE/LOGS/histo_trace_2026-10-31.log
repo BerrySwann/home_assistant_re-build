@@ -36,3 +36,12 @@
 23:14:29.263 | DEBUT      | controles_6G       | 
 23:14:38.000 | FIN        | controles_6G       | OK ecarts=0 apres relance Gen_GLOBAL_INDEX_ia
 23:14:38.061 | DEBUT      | push_docs          | rattrapage
+23:15:00.417 | FIN        | push_docs          | OK rattrapage : 1 fichier, MD5 identique
+23:15:24.451 | NOTE       | tokens             | fin : inconnu (compteur non visible)
+23:15:39.190 | DEBUT      | notification       | 
+23:15:55.059 | FIN        | notification       | OK notification envoyee 23:20
+23:15:55.115 | DEBUT      | lumieres           | 
+23:16:09.848 | FIN        | lumieres           | OK Hue Sync coupe, 3 Play off, automation remise on
+23:16:09.934 | DEBUT      | arret_pc           | 
+23:16:09.991 | FIN        | arret_pc           | OK shutdown /s /t 300 lance
+23:16:10.048 | SEQ_FIN    | SEQUENCE           | fin de sequence

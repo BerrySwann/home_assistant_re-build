@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--01-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,15 +13,15 @@
 
 </div>
 
-Genere le 2026-10-29 22:05 par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py (MOC_SCRIPTS). Ne pas modifier a la main : le script ecrase les modifications.
+Genere le 2026-11-01 08:09 par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py (MOC_SCRIPTS). Ne pas modifier a la main : le script ecrase les modifications.
 
 Regle d'Eric (2026-10-28) : chaque script de docs/04_docs_scripts a sa fiche .md. Rapprochement par le nom du fichier, sinon par une fiche qui cite le nom du fichier ; fiche proche mais non rattachee = candidate (a valider, jamais comptee OK). Classement (Eric, 2026-10-28) : deux groupes. Home Assistant : les .sh, puis les .py, puis les scripts YAML (les scripts de Home Assistant). Audit interne : les .sh, puis les .py ; ces scripts ne font pas tourner Home Assistant. Un script est range en verification ou audit quand son nom commence par Audit, Check, Verif, Hermes_audit ou trigul_run. La colonne Appele par Home Assistant dit si le nom du fichier apparait dans les YAML de la prod (H:), lecture seule. Voir GLOBAL_INDEX_SCRIPTS_SH.md et GLOBAL_INDEX_SCRIPTS_YAML.md. Les liens sont relatifs a ce fichier.
 
 ## Controle
 
-- Scripts SH (bash et python) : 26 sources, 26 avec fiche, 0 sans fiche (dont 0 avec candidate a valider), 0 fiches sans source
+- Scripts SH (bash et python) : 37 sources, 37 avec fiche, 0 sans fiche (dont 0 avec candidate a valider), 0 fiches sans source
 - Scripts YAML (Home Assistant) : 11 sources, 11 avec fiche, 0 sans fiche (dont 0 avec candidate a valider), 0 fiches sans source
-- Repartition : 2 scripts bash, 9 scripts python, 9 scripts YAML Home Assistant, 5 verification ou audit en bash, 12 verification ou audit en python
+- Repartition : 2 scripts bash, 15 scripts python, 9 scripts YAML Home Assistant, 5 verification ou audit en bash, 17 verification ou audit en python
 
 - Sans fiche .md mais documentes dans leur en-tete (3 sections ou plus) : 0 ()
 
@@ -35,7 +35,7 @@ Regle d'Eric (2026-10-28) : chaque script de docs/04_docs_scripts a sa fiche .md
 <tbody>
 <tr><td>Ha_git_backup</td><td><a href="04_docs_scripts_SH/Ha_git_backup/Ha_git_backup.sh">Ha_git_backup.sh</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Ha_git_backup/Ha_git_backup.md">fiche</a></td><td>oui (GitHub_backup_GitHub.yaml)</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
-<tr><td>Mf_vigilance_images</td><td><a href="04_docs_scripts_SH/Mf_vigilance_images/Mf_vigilance_images.sh">Mf_vigilance_images.sh</a></td><td>Fiche OK <a href="../01_docs_config_system/01_config_system_MD/scripts/Mf_vigilance_images.md">fiche</a> (rattachement manuel)</td><td>non trouve dans les YAML de la prod</td></tr>
+<tr><td>Mf_vigilance_images</td><td><a href="04_docs_scripts_SH/Mf_vigilance_images/Mf_vigilance_images.sh">Mf_vigilance_images.sh</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Mf_vigilance_images/Mf_vigilance_images.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 </tbody></table>
 
 ---
@@ -46,7 +46,11 @@ Regle d'Eric (2026-10-28) : chaque script de docs/04_docs_scripts a sa fiche .md
 <colgroup><col width="18%"><col width="26%"><col width="24%"><col width="32%"></colgroup>
 <thead><tr><th>Dossier</th><th>Source</th><th>Fiche</th><th>Appele par Home Assistant</th></tr></thead>
 <tbody>
+<tr><td>boite_claude_watch_hermes</td><td><a href="04_docs_scripts_SH/boite_claude_watch_hermes/boite_claude_watch_hermes.py">boite_claude_watch_hermes.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/boite_claude_watch_hermes/boite_claude_watch_hermes.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
+<tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Correct_linky</td><td><a href="04_docs_scripts_YAML/Correct_linky/Correct_linky.py">Correct_linky.py</a></td><td>Fiche OK <a href="../01_docs_config_system/01_config_system_MD/.scripts/02_scripts.py_md/Correct_linky/Correct_linky.md">fiche</a> (rattachement manuel)</td><td>oui (P0_correct_linky.yaml, automations.yaml)</td></tr>
+<tr><td colspan="4">&nbsp;</td></tr>
+<tr><td>edition_tracee_hermes</td><td><a href="04_docs_scripts_SH/edition_tracee_hermes/edition_tracee_hermes.py">edition_tracee_hermes.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/edition_tracee_hermes/edition_tracee_hermes.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Gen_GLOBAL_INDEX_automations</td><td><a href="04_docs_scripts_SH/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.py">Gen_GLOBAL_INDEX_automations.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
@@ -60,9 +64,17 @@ Regle d'Eric (2026-10-28) : chaque script de docs/04_docs_scripts a sa fiche .md
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>gen_moc_docs</td><td><a href="04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py">gen_moc_docs.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/gen_moc_docs/gen_moc_docs.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
+<tr><td>hermes_gen_dependances</td><td><a href="04_docs_scripts_SH/hermes_gen_dependances/hermes_gen_dependances.py">hermes_gen_dependances.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/hermes_gen_dependances/hermes_gen_dependances.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
+<tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>histo_html</td><td><a href="04_docs_scripts_SH/histo_html/histo_html.py">histo_html.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/histo_html/histo_html.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>histo_trace</td><td><a href="04_docs_scripts_SH/histo_trace/histo_trace.py">histo_trace.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/histo_trace/histo_trace.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
+<tr><td colspan="4">&nbsp;</td></tr>
+<tr><td>Push_5C</td><td><a href="04_docs_scripts_SH/Push_5C/Push_5C.py">Push_5C.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Push_5C/Push_5C.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
+<tr><td colspan="4">&nbsp;</td></tr>
+<tr><td>renomme_chemins_trace_hermes</td><td><a href="04_docs_scripts_SH/renomme_chemins_trace_hermes/renomme_chemins_trace_hermes.py">renomme_chemins_trace_hermes.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/renomme_chemins_trace_hermes/renomme_chemins_trace_hermes.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
+<tr><td colspan="4">&nbsp;</td></tr>
+<tr><td>Sync_98_sauvegarde</td><td><a href="04_docs_scripts_SH/Sync_98_sauvegarde/Sync_98_sauvegarde.py">Sync_98_sauvegarde.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Sync_98_sauvegarde/Sync_98_sauvegarde.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 </tbody></table>
 
 ---
@@ -104,7 +116,7 @@ Outils de controle, pour Eric, Claude et Hermes. Certains sont lances depuis un 
 <tbody>
 <tr><td>Audit_md5</td><td><a href="04_docs_scripts_SH/Audit_md5/Audit_md5.sh">Audit_md5.sh</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Audit_md5/Audit_md5.md">fiche</a></td><td>oui (P4_log_eric_zone.yaml)</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
-<tr><td>Audit_md5_docs_local</td><td><a href="04_docs_scripts_SH/Audit_md5_docs_local/Audit_md5_docs_local.sh">Audit_md5_docs_local.sh</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Audit_md5_docs_local/Audit_md5_docs_local.md">fiche</a></td><td>oui (GitHub_backup_GitHub.yaml)</td></tr>
+<tr><td>Audit_md5_docs_local</td><td><a href="04_docs_scripts_SH/Audit_md5_docs_local/Audit_md5_docs_local.sh">Audit_md5_docs_local.sh</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Audit_md5_docs_local/Audit_md5_docs_local.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Audit_md5_yaml</td><td><a href="04_docs_scripts_SH/Audit_md5_yaml/Audit_md5_yaml.sh">Audit_md5_yaml.sh</a></td><td>Fiche OK <a href="../01_docs_config_system/01_config_system_MD/.scripts/01_scripts.sh_md/Audit_md5_yaml/Audit_md5_yaml.md">fiche</a> (rattachement manuel)</td><td>oui (GitHub_backup_GitHub.yaml)</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
@@ -121,21 +133,31 @@ Outils de controle, pour Eric, Claude et Hermes. Certains sont lances depuis un 
 <colgroup><col width="18%"><col width="26%"><col width="24%"><col width="32%"></colgroup>
 <thead><tr><th>Dossier</th><th>Source</th><th>Fiche</th><th>Appele par Home Assistant</th></tr></thead>
 <tbody>
+<tr><td>audit_carte_docs_hermes</td><td><a href="04_docs_scripts_SH/audit_carte_docs_hermes/audit_carte_docs_hermes.py">audit_carte_docs_hermes.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/audit_carte_docs_hermes/audit_carte_docs_hermes.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
+<tr><td colspan="4">&nbsp;</td></tr>
+<tr><td>audit_huissier_hermes</td><td><a href="04_docs_scripts_SH/audit_huissier_hermes/audit_huissier_hermes.py">audit_huissier_hermes.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/audit_huissier_hermes/audit_huissier_hermes.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
+<tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Check_badges_fiches</td><td><a href="04_docs_scripts_SH/Check_badges_fiches/Check_badges_fiches.py">Check_badges_fiches.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Check_badges_fiches/Check_badges_fiches.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Check_DEPENDANCES</td><td><a href="04_docs_scripts_SH/Check_DEPENDANCES/Check_DEPENDANCES.py">Check_DEPENDANCES.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Check_DEPENDANCES/Check_DEPENDANCES.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Check_GLOBAL_INDEX</td><td><a href="04_docs_scripts_SH/Check_GLOBAL_INDEX/Check_GLOBAL_INDEX.py">Check_GLOBAL_INDEX.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Check_GLOBAL_INDEX/Check_GLOBAL_INDEX.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
+<tr><td>Check_prod_fonctionnelle</td><td><a href="04_docs_scripts_SH/Check_prod_fonctionnelle/Check_prod_fonctionnelle.py">Check_prod_fonctionnelle.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Check_prod_fonctionnelle/Check_prod_fonctionnelle.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
+<tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Check_sous_context_ia</td><td><a href="04_docs_scripts_SH/Check_sous_context_ia/Check_sous_context_ia.py">Check_sous_context_ia.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Check_sous_context_ia/Check_sous_context_ia.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Check_XX_presents</td><td><a href="04_docs_scripts_SH/Check_XX_presents/Check_XX_presents.py">Check_XX_presents.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Check_XX_presents/Check_XX_presents.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
+<tr><td colspan="4">&nbsp;</td></tr>
+<tr><td>check_xx_repertoires_hermes</td><td><a href="04_docs_scripts_SH/check_xx_repertoires_hermes/check_xx_repertoires_hermes.py">check_xx_repertoires_hermes.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/check_xx_repertoires_hermes/check_xx_repertoires_hermes.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Check_yaml_forme</td><td><a href="04_docs_scripts_YAML/Check_yaml_forme/Check_yaml_forme.py">Check_yaml_forme.py</a></td><td>Fiche OK <a href="04_docs_scripts_YAML_MD/Check_yaml_forme/Check_yaml_forme.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Hermes_audit_md5_trigul_3md</td><td><a href="04_docs_scripts_SH/Hermes_audit_md5_trigul_3md/Hermes_audit_md5_trigul_unitaire.py">Hermes_audit_md5_trigul_unitaire.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Hermes_audit_md5_trigul_unitaire/Hermes_audit_md5_trigul_unitaire.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td></td><td><a href="04_docs_scripts_SH/Hermes_audit_md5_trigul_3md/hermes_audit_trigul_arbres.py">hermes_audit_trigul_arbres.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Hermes_audit_trigul_arbres/Hermes_audit_trigul_arbres.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td></td><td><a href="04_docs_scripts_SH/Hermes_audit_md5_trigul_3md/trigul_run.py">trigul_run.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Trigul_run/Trigul_run.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
+<tr><td colspan="4">&nbsp;</td></tr>
+<tr><td>verif_ecriture_hermes</td><td><a href="04_docs_scripts_SH/verif_ecriture_hermes/verif_ecriture_hermes.py">verif_ecriture_hermes.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/verif_ecriture_hermes/verif_ecriture_hermes.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Verif_emplacements</td><td><a href="04_docs_scripts_SH/Verif_emplacements/Verif_emplacements.py">Verif_emplacements.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Verif_emplacements/Verif_emplacements.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>

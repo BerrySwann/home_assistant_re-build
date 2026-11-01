@@ -1,0 +1,3 @@
+2026-11-01 07:59:00 | claude | MODIF | docs\02_docs_dashboard\XX_archive_fiches_2026-10-28\L4C3_MAJ_HA\PAGE_MAJ.md | badge Type 'Page Detaillee' -> 'Dashboard' (4fc3f7), une seule ligne, .bak a cote ; ordre d'Eric 07:58
+2026-11-01 08:10:00 | claude | MODIF | docs\04_docs_scripts\04_docs_scripts_SH\gen_moc_docs\gen_moc_docs.py | ligne FORCE de mf_vigilance_images.sh retiree (fiche creee dans 04_docs_scripts_SH_MD) ; .bak a cote ; fiches_sans_source 1 -> 0 ; ordre d'Eric 08:08
+2026-11-01 08:10:30 | claude | MODIF | docs\04_docs_scripts\MOC_SCRIPTS.md | regenere par gen_moc_docs.py (.bak a cote)
