@@ -1,9 +1,6 @@
 ---
-name: ha-push-md
-description: >
-  HA ReBuild skill - pushes only the local documentation *.md files to H:\Docs (HA Samba share).
-  Trigger on: "pousse les md en prod", "sync les docs markdown", "met a jour les docs texte",
-  "push les md vers H:", "les md sont a jour en prod ?". Strict scope: *.md only.
+name: "ha-push-md"
+description: "HA ReBuild skill - pushes only the local documentation *.md files to H:\\Docs (HA Samba share). Trigger on: \"pousse les md en prod\", \"sync les docs markdown\", \"met a jour les docs texte\", \"push les md vers H:\", \"les md sont a jour en prod ?\". Strict scope: *.md only."
 ---
 
 # HA Push MD - Local *.md -> H:\Docs
@@ -31,7 +28,7 @@ Pushes only the documentation `*.md` files to the Samba share `H:\Docs\`.
 
 The `XX_` folders exist only locally and must never be lost. Before the first computation of this skill, AND a second time right after the push (before/after check), run:
 `python -I -X utf8 "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Check_XX_presents\Check_XX_presents.py"`
-It also refuses any XX_ folder present in prod (ALERTE). It compares the XX_ folders and their files with the manifest `XX_manifest.json` (in `docs\04_docs_scripts\04_docs_scripts_JSON\Check_XX_presents\`). `RESULTAT : OK` = continue. An ALERTE (missing folder or file) = push NOTHING, warn Eric, restore from `TEMPO\XX_sauvegarde_2026-10-25` only on his order. XX_ folders are never pushed to prod. The manifest is updated (`--maj`) only on Eric's order.
+It also refuses any XX_ folder present in prod (ALERTE). It compares the XX_ folders and their files with the manifest `XX_manifest.json` (in `docs\04_docs_scripts\04_docs_scripts_JSON\Check_XX_presents\`, moved there on 2026-11-01 by Eric's order; it must stay there). `RESULTAT : OK` = continue. An ALERTE (missing folder or file) = push NOTHING, warn Eric, restore from `TEMPO\XX_sauvegarde_2026-10-25` only on his order. XX_ folders are never pushed to prod. The manifest is updated (`--maj`) only on Eric's order.
 
 ### 1 - Local MD5 of all *.md
 ```powershell
@@ -107,7 +104,7 @@ $toPush | ForEach-Object {
 3. ***.yaml -> never in this workflow.**
 4. **secrets.yaml -> strictly forbidden.**
 5. **Local = absolute truth**: in case of conflict, local wins.
-6. **DEPENDANCES_GLOBALES_CLAUDE_memoire.md** (in `docs\00_IA\00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire\` since 2026-10-29): not one of this skill's sources. Since 2026-10-30 it goes to prod with the general push of /histo (step 5C, all of `docs` except `XX_` and `.bak`), no longer "local only" (that was the 2026-10-25 rule, replaced). If it shows up in a diff here, ignore it and report it.
+6. **DEPENDANCES_GLOBALES_CLAUDE_memoire.md** (in `docs\00_IA\00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire\` since 2026-10-29): not one of this skill's sources. Since 2026-10-30 it goes to prod with the general push of /histo (step 5C: all of `docs` except `XX_` folders, `99_docs_MD_system` (except `ENTITES_GLOBAL_INDEX.md`) and `.bak`; `98_sauvegarde_hors_docs` is included), no longer "local only" (that was the 2026-10-25 rule, replaced). If it shows up in a diff here, ignore it and report it.
 7. **CLAUDE.md rule of 2026-10-13**: a push updates the `.md` of the pushed file. Here the pushed files ARE `.md` files: check they were updated locally before the push (this is the job of `ha-push-yaml` and `ha-push-docs` upstream). Never modify a `.md` directly on H:\ : local first, with a backup.
 
 ## Maintenance note

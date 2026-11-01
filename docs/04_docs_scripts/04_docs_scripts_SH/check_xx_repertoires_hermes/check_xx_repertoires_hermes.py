@@ -25,6 +25,7 @@ ATTENDUS = [
     (os.path.join("03_docs_automations", "03_docs_automations_YAML", "XX_RASPI"), 2),
     (os.path.join("04_docs_scripts", "04_docs_scripts_SH",
                   "XX_MP_01_monitor_temp_sh_save_pour_RASPI"), 1),
+    (os.path.join("02_docs_dashboard", "XX_archive_fiches_2026-10-28"), 3),
     (os.path.join("04_docs_scripts", "04_docs_scripts_SH",
                   "XX_MPC_01_monitor_temp_sh_save_pour_RASPI"), 1),
 ]

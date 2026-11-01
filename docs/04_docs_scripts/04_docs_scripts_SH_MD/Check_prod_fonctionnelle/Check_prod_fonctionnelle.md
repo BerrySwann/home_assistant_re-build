@@ -17,7 +17,7 @@
 |:------|:-------|
 | Source | `docs/04_docs_scripts/04_docs_scripts_SH/Check_prod_fonctionnelle/Check_prod_fonctionnelle.py` |
 | Langage | Python 3 |
-| Lance par | etape D de `trigul_run.py` (apres le trigul profond) et /histo etape 6 point 13 |
+| Lance par | etape D de `trigul_run.py` (apres le trigul profond) et /histo etape 6 point 14 |
 | Ecrit | uniquement son rapport dans `historique/03_RAPPORTS/06_MD5/06_PROD_FONCTIONNELLE/` |
 
 ## Role
@@ -50,3 +50,5 @@ Creee le 2026-10-31 par Claude (ordre d'Eric 22:26).
 ## Mise a jour 2026-11-01
 
 La copie ORIGINAL du jour de automations.yaml et scripts.yaml est aussi reconnue sous son nom date (base.bak_AAAA_MM_JJ.yaml), nom pris par le menage definitif de /histo-final ; la copie horodatee reste prioritaire si elle existe.
+<!-- annotations_log: -->
+<!-- [2026-11-01] /histo etape 6 point 14 (et non 13) : le point 13 est le rattrapage du push -->

@@ -46,7 +46,9 @@ Le skill synchronise la documentation locale (`*.md` et `*.yaml` de dashboard) v
 - 2026-10-13 : cas des deux destinations pour `GLOBAL_INDEX_REPO` et `README`.
 - 2026-10-18 : controle apres push par `Verif_emplacements.py`.
 - 2026-10-30 : `/histo` pousse aussi tout `docs` en prod (etape 5C) ; ce skill reste l'outil manuel.
+- 2026-11-01 : le manifeste XX_manifest.json du controle des dossiers XX_ est dans docs/04_docs_scripts/04_docs_scripts_JSON/Check_XX_presents/ (il doit y rester). Skill du compte aligne (MD5 eab1529d).
 
 ## Quand modifier cette fiche
 
 Chaque fois que la copie du skill change dans `05_docs_skills_PURE`, relire cette fiche et la mettre a jour si une etape, une regle ou une decision a change.
+<!-- [2026-11-01] Fiche alignee sur le skill enregistre du compte (second lot) -->

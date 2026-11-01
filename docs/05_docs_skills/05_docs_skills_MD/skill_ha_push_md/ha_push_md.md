@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifie](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![Modifie](https://img.shields.io/badge/MàJ-2026--11--01-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -40,6 +40,7 @@ Version restreinte de `ha-push-docs` : elle ne pousse que les fichiers `*.md` de
 ## Decisions datees
 
 - 2026-10-25 : controle des dossiers `XX_` obligatoire.
+- 2026-11-01 : le manifeste `XX_manifest.json` est dans `docs/04_docs_scripts/04_docs_scripts_JSON/Check_XX_presents/` (il doit y rester).
 
 ## Points a verifier avec Eric
 
@@ -49,3 +50,5 @@ Version restreinte de `ha-push-docs` : elle ne pousse que les fichiers `*.md` de
 ## Quand modifier cette fiche
 
 Chaque fois que la copie du skill change dans `05_docs_skills_PURE`, relire cette fiche et la mettre a jour si une etape, une regle ou une decision a change.
+<!-- annotations_log: -->
+<!-- [2026-11-01] Fiche alignee sur le skill enregistre : nouveau chemin du manifeste XX -->

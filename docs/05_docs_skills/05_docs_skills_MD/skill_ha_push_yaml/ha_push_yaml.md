@@ -48,7 +48,9 @@ Operation critique : le skill pousse des YAML de `01_config_system_SH_PY_YAML` v
 - 2026-10-18 : deux destinations en prod (racine et miroir).
 - 2026-10-25 : controle des dossiers `XX_`.
 - 2026-10-29 : regle d'aplatissement, ordre d'Eric.
+- 2026-11-01 : le manifeste XX_manifest.json du controle des dossiers XX_ est dans docs/04_docs_scripts/04_docs_scripts_JSON/Check_XX_presents/ (il doit y rester). Skill du compte aligne (MD5 031a6b18).
 
 ## Quand modifier cette fiche
 
 Chaque fois que la copie du skill change dans `05_docs_skills_PURE`, relire cette fiche et la mettre a jour si une etape, une regle ou une decision a change.
+<!-- [2026-11-01] Fiche alignee sur le skill enregistre du compte (second lot) -->

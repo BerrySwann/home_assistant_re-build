@@ -1,6 +1,6 @@
 ---
-name: journal-modifs
-description: HA ReBuild skill - logs as you go every file modification (creation, modification, rename, deletion, push) in a per-author journal readable by Claude and Hermes. Apply after every write and read at the start of a session.
+name: "journal-modifs"
+description: "HA ReBuild skill - logs every file modification in a per-author journal readable by Claude and Hermes. Apply after every write and read at the start of a session."
 ---
 
 # Skill: journal-modifs
@@ -16,7 +16,7 @@ Avoid modifications without a trace or an author (observed on 2026-10-10: CLAUDE
 - No copy to H: since 2026-10-22 (Eric's decision: a single local source). The old prod folder `H:\docs\modifs\` is no longer updated.
 - `<auteur>`: `claude` or `hermes` (lowercase). Another agent takes its own name.
 - Each agent writes ONLY in its own file, never in the other one's (avoids simultaneous writes).
-- Hermes writes its own file in the same local folder (to confirm with Eric: before 2026-10-22 it wrote to `H:\docs\modifs\`).
+- Hermes writes its own file in the same local folder (confirmed 2026-11-01: `MODIFS_2026-11-01_hermes.md` is there); before 2026-10-22 it wrote to `H:\docs\modifs\`.
 - These files are not backups: no .bak, outside the scope of the /histo cleanup.
 
 ## When to log
@@ -41,7 +41,16 @@ One line per file, appended at the end of the file (never rewrite the file). The
 - Backup made before modification: quote its name in the reason (`bak : nom`)
 - Reason: a few words, no secret (never a password, token or file content)
 - No line break inside a line. Plain ASCII preferred.
+- One line PER WRITE, never one line for several writes: a file written twice gets two lines, each with its own .bak and its own before/after MD5.
 - First line of a new file: `# MODIFS AAAA-MM-JJ - <auteur>`
+
+## Third trace: annotations_log (Eric's rule of 2026-10-24, carried by CLAUDE.md)
+
+A modification is traced in THREE places, not two. Besides the `.bak` and the journal line, the modified file itself receives a dated line `# [AAAA-MM-JJ] description` under a `# annotations_log:` block at the bottom of the file, with the comment marker of its type (`#` for YAML, sh, py; `<!-- -->` for md and html), with a direct reference by matrix ID (L1C1, P2...) when one applies.
+
+Exceptions: formats without comments (JSON), `.bak` files, the MODIFS journals and the exchange files (already logs). If the rule gets stuck on a given file, Eric rectifies it by adding the exception in CLAUDE.md.
+
+A file modified with its `.bak` and its journal line but without the annotation line is traced in the journal and out of rule.
 
 ## Bulk operations
 

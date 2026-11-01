@@ -52,7 +52,9 @@ Fin de journee : le skill lance tout `/histo`, verifie que tout est ecrit et pou
 - 2026-10-31 : question "Histo final definitif ?" au debut ; menage des `.bak` de `docs` seulement sur Oui.
 - 2026-10-31 : chemin corrige dans le skill : `historique/03_RAPPORTS/06_MD5/` (ancien `historique/MD5/`).
 - 2026-10-31 : le skill est traduit en anglais et range dans `05_docs_skills_PURE` ; cette fiche est son explication en francais.
+- 2026-10-31 : regle Prod fonctionnelle (point 14 de l'etape 6 de histo, trace controles_6H) : un ecart au palier 1 bloque le push 5C et l'extinction, a dire en tete du rapport. Skill du compte aligne le 2026-11-01 (MD5 a064c0da).
 
 ## Quand modifier cette fiche
 
 Chaque fois que `histo_final.md` change dans `05_docs_skills_PURE/skill_histo_final/`, relire cette fiche et la mettre a jour si une etape, une regle ou une decision a change. Le skill installe dans `.claude/skills/histo-final/` doit rester identique a la copie `histo_final.md`.
+<!-- [2026-11-01] Fiche alignee sur le skill enregistre du compte (second lot) -->

@@ -20,7 +20,7 @@ Verifie que chaque dossier attendu de `ReBuild\docs` existe encore, qu'il n'a pa
 
 ## Emplacement
 - Script dans le depot : `docs\04_docs_scripts\04_docs_scripts_SH\check_xx_repertoires_hermes\check_xx_repertoires_hermes.py`
-- Original vivant : `D:\hermes\scripts\check_xx_repertoires.py` (identique a la copie du depot, 3217 octets, verification par `diff` le 2026-10-31)
+- Original vivant : `D:\hermes\scripts\check_xx_repertoires.py` (identique a la copie du depot : 3293 octets, md5 `7a1c19e3` des deux cotes, verifie le 2026-11-01 apres l'ajout du 8e dossier)
 - Racine controlee (codee en dur) : `C:\Users\Berry Swann\Documents\ReBuild\docs`
 - Racine prod surveillee (codee en dur) : `H:\docs`
 
@@ -32,6 +32,7 @@ Dossiers attendus, avec leur minimum de fichiers hors `.bak` :
 | `02_docs_dashboard\02_dashboard_docs_MD\L4C1_MINI_PC\XX_L4C1_MINI_PC_03_Page_RASPI` | 1 |
 | `02_docs_dashboard\02_dashboard_docs_YAML\L6C3_VIGIEAU\XX_L6C3_VIGIEAU_03_Correctif_upstream` | 1 |
 | `02_docs_dashboard\02_dashboard_docs_YAML\XX_RASPI` | 2 |
+| `02_docs_dashboard\XX_archive_fiches_2026-10-28` | 3 |
 | `03_docs_automations\03_docs_automations_YAML\XX_RASPI` | 2 |
 | `04_docs_scripts\04_docs_scripts_SH\XX_MP_01_monitor_temp_sh_save_pour_RASPI` | 1 |
 | `04_docs_scripts\04_docs_scripts_SH\XX_MPC_01_monitor_temp_sh_save_pour_RASPI` | 1 |

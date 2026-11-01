@@ -60,7 +60,9 @@ Ce skill fait le point sur une session de travail et remet tout en ordre : il ec
 - 2026-10-31 : badges partout (8 badges sur tous les `.md` de `docs`, `.bak` compris) ; menage des `.bak` seulement a l'histo definitif ; Statuts `bak_h`, `bak_d`, `Trash`.
 - 2026-10-31 : le skill est traduit en anglais et range dans `05_docs_skills_PURE` ; cette fiche est son explication en francais.
 - 2026-10-31 : un `.bak_AAAA_MM_JJ` garde la date du jour de sa derniere modification, pas celle du menage (precision d Eric, ecrite dans `histo_ref_menage`).
+- 2026-10-31 : l'etape 6 compte 14 points ; le point 14 (PROD FONCTIONNELLE, trace controles_6H, script Check_prod_fonctionnelle.py) controle les 98 fichiers vitaux de la prod (palier 1) et bloque le push 5C et l'extinction en cas d'ecart. Le point 13 reste le rattrapage du push. Skill du compte aligne le 2026-11-01 (MD5 c3237de2).
 
 ## Quand modifier cette fiche
 
 Chaque fois que `histo.md` ou un de ses 3 fichiers de reference change dans `05_docs_skills_PURE/skill_histo/`, relire cette fiche et la mettre a jour si une etape, une regle ou une decision a change. Le skill installe dans `.claude/skills/histo/` doit rester identique a la copie `histo.md`.
+<!-- [2026-11-01] Fiche alignee sur le skill enregistre du compte (second lot) -->

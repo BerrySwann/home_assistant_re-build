@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifie](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![Modifie](https://img.shields.io/badge/MàJ-2026--11--01-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -31,6 +31,7 @@ Chaque agent (Claude, Hermes) note une ligne par fichier modifie, au moment de l
 2. Format : `date heure | auteur | ACTION | chemin | avant=MD5 apres=MD5 | raison`.
 3. Au-dela de 10 fichiers dans une meme operation : une seule ligne LOT avec le chemin d'un rapport detaille.
 4. Debut de session : lire les journaux du jour et de la veille, chercher les modifications non journalisees et les presenter avant de commencer.
+5. Troisieme trace : en plus du .bak et de la ligne du journal, le fichier modifie recoit une ligne datee `# [AAAA-MM-JJ] description` sous un bloc `# annotations_log:` (`<!-- -->` pour md et html). Exceptions : JSON, .bak, journaux MODIFS, fichiers d'echanges.
 
 ## Regles cles
 
@@ -44,12 +45,15 @@ Chaque agent (Claude, Hermes) note une ligne par fichier modifie, au moment de l
 - 2026-10-10 : creation, apres des fichiers modifies sans trace.
 - 2026-10-21 : dossier deplace dans `historique\03_RAPPORTS\01_MODIFS_IA\`.
 - 2026-10-22 : plus de copie sur `H:` pour les journaux de Claude (decision d'Eric, une seule source locale).
+- 2026-10-24 : regle annotations_log (troisieme trace), portee par CLAUDE.md ; ajoutee au skill le 2026-11-01.
 
 ## Points a verifier avec Eric
 
 - Corrige le 2026-10-31 dans la copie anglaise : plus de copie du journal vers `H:`, lecture et ecriture en local (decision du 2026-10-22).
-- Reste a confirmer avec toi : le dossier ou Hermes ecrit son propre journal (avant le 2026-10-22 il ecrivait dans `H:\docs\modifs\`).
+- Confirme le 2026-11-01 : Hermes ecrit son journal dans le meme dossier local (`MODIFS_2026-11-01_hermes.md` y est).
 
 ## Quand modifier cette fiche
 
 Chaque fois que la copie du skill change dans `05_docs_skills_PURE`, relire cette fiche et la mettre a jour si une etape, une regle ou une decision a change.
+<!-- annotations_log: -->
+<!-- [2026-11-01] Fiche alignee sur le skill enregistre : troisieme trace annotations_log, emplacement du journal d'Hermes confirme -->
