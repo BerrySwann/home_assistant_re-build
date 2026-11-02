@@ -12,7 +12,7 @@
 
 </div>
 
-*Derniere mise a jour : 2026-11-01 22h16 (controle qualite du 2026-11-01 : tableau des fichiers L0C0_PAGE_Home corrige - carte 05_Impacte de foudre ajoutee, doublon 08_Congelateur supprime ; la carte 11_Carte presence y etait deja. Les 8 YAML modifies dans la soiree (Page_Home, Card_foudre_home, L1C1/L2C2/L2C3/L6C2/L6C3 pages, L4C1 RASPI) ont ete repointes sur /dashboard-tablette/0 ou sur la bonne entite foudre.)*
+*Derniere mise a jour : 2026-11-02 21h09 (controle qualite du 2026-11-01 : tableau des fichiers L0C0_PAGE_Home corrige - carte 05_Impacte de foudre ajoutee, doublon 08_Congelateur supprime ; la carte 11_Carte presence y etait deja. Les 8 YAML modifies dans la soiree (Page_Home, Card_foudre_home, L1C1/L2C2/L2C3/L6C2/L6C3 pages, L4C1 RASPI) ont ete repointes sur /dashboard-tablette/0 ou sur la bonne entite foudre.)*
 *Derniere mise a jour : 2026-10-29 22h10 (R125.1 a R125.3 : fiches de .scripts rangees un dossier par fichier, commentaires obsoletes des audits corriges, fiche Audit_md5_yaml corrigee)*
 *Derniere mise a jour : 2026-10-29 21h32 (regle de structure scripts et command_line : local range par dossier, HA toujours a plat, avertissement gyrophare, cascades bouton -> script -> fonction des audits MD5 et de la sauvegarde GitHub ; chemin du capteur audit_md5_journal corrige ; demande d'Eric)*
 *Derniere mise a jour : 2026-10-29 20h10 (11 automations ajoutees, section store salon reecrite, cascades P0 Linky/Nodon documentees, vignettes alarmes congelateur ; controle Check_DEPENDANCES.py cree et branche dans /histo ; aucune vignette modifiee)*
