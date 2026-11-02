@@ -6,7 +6,7 @@
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
-[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
+[![Modifs](https://img.shields.io/badge/Modifs-Gelé-f44336?style=flat-square)](.)&nbsp;
 [![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
 [![Type](https://img.shields.io/badge/Type-IA_System-ffeb3b?style=flat-square)](.)
 
@@ -40,16 +40,16 @@ Format : `[X: statut_X/statut_Y]` où statut = `WIFI` | `CELL` | `WIFI_!?`
 | Valeur affichée | Situation |
 |:----------------|:----------|
 | `[2] en [WIFI]` | Les deux sur le réseau domestique |
-| `[2] en [CELL]` | Les deux en cellulaire |
-| `[2] en [WIFI_!?]` | Les deux en WiFi, mais sur un autre réseau |
+| `[2] en [CELL]` | Les deux en cellulaire - Aucun sur le domestique |
+| `[2] en [WIFI_!?]` | Les deux en WiFi, mais sur un autre réseau - Aucun sur le domestique |
 | `[Mamour: WIFI/CELL]` | Mamour présente (domestique), Eric en cellulaire |
 | `[Mamour: WIFI/WIFI_!?]` | Mamour présente (domestique), Eric sur autre WiFi |
+| `[Mamour: WIFI_!? / CELL]` | Mamour=autre WiFi, Eric=CELL - Aucun sur le domestique |
+| `[Mamour: CELL / WIFI_!?]` | Mamour=CELL, Eric=autre WiFi - Aucun sur le domestique |
 | `[Eric: WIFI/CELL]` | Eric présent (domestique), Mamour en cellulaire |
 | `[Eric: WIFI/WIFI_!?]` | Eric présent (domestique), Mamour sur autre WiFi |
-| `[CELL / WIFI_!?]` | Aucun sur le domestique - Mamour=CELL, Eric=autre WiFi |
-| `[WIFI_!? / CELL]` | Aucun sur le domestique - Mamour=autre WiFi, Eric=CELL |
-
-> **Ordre d'affichage :** `[Eric: e_stat/m_stat]` → Eric en premier, Mamour en second.
+| `[Eric: WIFI_!? / CELL]` | Eric=autre WiFi, Mamour=CELL - Aucun sur le domestique |
+| `[Eric: CELL / WIFI_!?]` | Eric=CELL, Mamour=autre WiFi - Aucun sur le domestique |
 
 ---
 

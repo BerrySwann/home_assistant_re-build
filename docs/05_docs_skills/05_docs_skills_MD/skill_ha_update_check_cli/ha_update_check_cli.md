@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifie](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![Modifie](https://img.shields.io/badge/MàJ-2026--11--01-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -29,7 +29,7 @@ Analyse les mises a jour HA en attente quand les outils MCP ne sont pas disponib
 
 1. Versions : core installee lue dans `H:\.HA_VERSION`, core disponible par l'API GitHub, cartes et integrations HACS demandees a Eric.
 2. Lire les notes de version de toutes les versions sautees (breaking changes, options renommees, suppressions).
-3. Croiser par grep avec la config locale et la prod ; ce qui n'est pas verifie reste "non verifie".
+3. Croiser avec la config locale et la prod : grep -rIn, puis, si le serveur MCP HA repond, les dashboards VIVANTS par `ha_config_get_dashboard` (`url_path` + `entity_id="sensor.xxx"` ou `query="custom:<nom>"` ; le parametre `mode` n'existe pas, verifie le 2026-11-01). Ce qui n'est pas verifie reste "non verifie".
 4. Pieges ReBuild a verifier systematiquement (token API 403, `parseFloat`, cartes custom, `mqtt.publish`...).
 5. Verdict par mise a jour : INSTALLER ou BLOQUER, puis le rapport court.
 
@@ -42,6 +42,7 @@ Analyse les mises a jour HA en attente quand les outils MCP ne sont pas disponib
 ## Decisions datees
 
 - 2026-10-13 : liste des pieges ReBuild donnee par Eric.
+- 2026-11-01 : l'etape 3 s'appuie aussi sur les dashboards vivants (storage) via `ha_config_get_dashboard`, parametres `url_path`, `entity_id`, `query` ; `mode` n'existe pas.
 
 ## Points a verifier avec Eric
 

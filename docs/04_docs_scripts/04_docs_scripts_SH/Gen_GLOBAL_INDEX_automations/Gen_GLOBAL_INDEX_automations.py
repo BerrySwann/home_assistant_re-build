@@ -289,14 +289,17 @@ def main():
     L.append("## Hors prod ou sans id (YAML locaux uniquement) (%d)" % len(hors))
     L.append("")
     L.append("Ces YAML ne correspondent a aucune entree de H:\\automations.yaml (id absent ou inconnu de la prod). Exemple : l'automatisation du ventilateur du Raspberry Pi 4, dont le YAML local n'a pas d'id.")
+    L.append("Attention : parmi eux, les YAML dont le dossier est suffixe (a ne pas jeter) sont des ARCHIVES VOLONTAIRES (exemple : le Raspberry Pi 4 Go, hors tension). On ne les supprime pas, on ne les nettoie pas : regle \"Archives volontaires\" de IA_CONTEXT_BASE.md.")
+    L.append("")
     L.append("")
     L.append(HEAD)
     L.append(SEP)
     for i, l in enumerate(sorted(hors, key=lambda x: x["alias"].lower()), 1):
         fi = hors_fiche.get(l["rel"])
         fl = link(os.path.basename(fi["rel"]), fi["rel"]) if fi else "aucune"
-        L.append("| %d | %s | hors automations.yaml de la prod | %s | - | %s | %s | %s |" % (
-            i, esc(l["alias"]), l["id"] or "aucun", fl, link(os.path.basename(l["rel"]), l["rel"]), esc(l["comment"])))
+        _arch = " (archive volontaire, ne pas jeter)" if "a ne pas jeter" in l["rel"] else ""
+        L.append("| %d | %s | hors automations.yaml de la prod%s | %s | - | %s | %s | %s |" % (
+            i, esc(l["alias"]), _arch, l["id"] or "aucun", fl, link(os.path.basename(l["rel"]), l["rel"]), esc(l["comment"])))
     L.append("")
 
     content = "\n".join(L)

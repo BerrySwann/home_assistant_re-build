@@ -124,7 +124,7 @@ def valeurs_hors_liste(tr):
         att = COUL_STATUT.get(tr["Statut"][1])
         if mc and att and mc.group(1).lower() != att: pb.append("StatutCouleur=%s(attendu %s)" % (mc.group(1), att))
     if "Type" in tr and tr["Type"][1] not in TYPES: pb.append("Type=%s" % tr["Type"][1])
-    if "Modifs" in tr and tr["Modifs"][1] not in ("Autorisees", "INTERDITES"): pb.append("Modifs=%s" % tr["Modifs"][1])
+    if "Modifs" in tr and tr["Modifs"][1] not in ("Autorisees", "INTERDITES", "Gelé", "Gele"): pb.append("Modifs=%s" % tr["Modifs"][1])
     if "HA" in tr and not re.match(r"^\d{4}\.\d+(\.\d+)?$", tr["HA"][1]): pb.append("HA=%s" % tr["HA"][1])
     if "MaJ" in tr and not re.match(r"^\d{4}--\d{2}--\d{2}$", tr["MaJ"][1].replace("-", "--") if "--" not in tr["MaJ"][1] else tr["MaJ"][1]): pb.append("MaJ=%s" % tr["MaJ"][1])
     return pb

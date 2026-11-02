@@ -114,16 +114,13 @@
           {%- set m_here = (m_net == 'wifi' and m_ssid in target_ssids) -%}
           {%- set e_here = (e_net == 'wifi' and e_ssid in target_ssids) -%}
 
-          {%- if m_here and e_here -%}
-            {# Cas où les deux sont là mais statuts différents #}
-            [Tous les 2: {{ m_stat }}/{{ e_stat }}]
-          {%- elif m_here -%}
+          {%- if m_here -%}
             [Mamour: {{ m_stat }}/{{ e_stat }}]
           {%- elif e_here -%}
             [Eric: {{ e_stat }}/{{ m_stat }}]
           {%- else -%}
-            {# Fallback : aucun n'est sur le WiFi cible #}
-            [{{ m_stat }} / {{ e_stat }}]
+            {# Fallback : aucun n'est sur le WiFi cible, le nom est celui de Mamour (m_stat en premier) #}
+            [Mamour: {{ m_stat }} / {{ e_stat }}]
           {%- endif -%}
         {%- endif -%}
 

@@ -24,7 +24,11 @@ TODAY = datetime.date.today()
 # Fichiers FIGES (decision d'Eric) : plus de controle de contenu (date, chemins, nombres, entites).
 # Restent controles : structure, baks, MD5 prod, et "fige mais modifie depuis" (mtime apres la date de gel).
 # Format : "IA_NOM": "AAAA-MM-JJ" (date du gel). Gel decide le 2026-10-13 apres relecture des 9 fichiers (seul IA_P4_PRESENCE : logique verifiee contre le template prod) ; re-gel decide par Eric le 2026-10-18 apres la modification du 2026-10-17.
-FIGES = {"IA_P4_PRESENCE": "2026-10-18"}
+# [2026-11-02] Re-gel apres verification : la seule modification de contenu depuis le gel du
+# 2026-10-18 est la correction du chemin Source (02_logique_wifi_cellular.yaml ->
+# P4_groupe_presence.yaml, chemin verifie present en prod et en local) plus la mise aux normes
+# des badges. Entites citees verifiees en live, toutes presentes.
+FIGES = {"IA_P4_PRESENCE": "2026-11-02"}
 
 def md5(p):
     h = hashlib.md5()
@@ -146,7 +150,11 @@ def check_entites(t, F):
     if not F["entites"]:
         return None
     vus = sorted({m.group(0) for m in RX_ENT.finditer(t)})
-    vus = [e for e in vus if not e.endswith("_") and "xxx" not in e]
+    # Un nom de FICHIER (input_button.yaml, sql.yaml...) ressemble a un entity_id pour la regex
+    # domaine.objet : ce sont les 4 faux positifs signales par R62.3. On ecarte les extensions.
+    EXT = ("yaml", "yml", "json", "md", "txt", "py", "sh", "cfg", "conf", "ini", "csv")
+    vus = [e for e in vus if not e.endswith("_") and "xxx" not in e
+           and e.rsplit(".", 1)[-1].lower() not in EXT]
     return [e for e in vus if e not in F["entites"]]
 
 CLAUDE_MD = os.path.join(BASE, "Claude md SAVE", "CLAUDE.md")

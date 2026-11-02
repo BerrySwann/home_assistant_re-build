@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--01-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--02-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,14 +13,14 @@
 
 </div>
 
-Fichier GENERE le 2026-11-01 22:26 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-11-02 21:09 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et categorie), YAML locaux 03_docs_automations_YAML (id local et commentaires), fiches 03_docs_automations_MD. Les liens sont relatifs a ce fichier.
 
 ## Controle
 
 - Automatisations en prod (automations.yaml) : 63
-- YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS_YAML_ORIGINAL) : 68
+- YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS_YAML_ORIGINAL) : 67
 - Fiches .md retenues : 71 dont 59 rattachees a un YAML
 - Automatisations de la prod sans YAML local : 0
 - Automatisations de la prod sans fiche rattachee : 6 ([00-Backup] Alerte si KO 15 min ; (A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00) ; Mettre à jour le temps du dernier impact de foudre ; (C) Notification température Up ou Down de (7h30 -> 21h00) ; (D) Notification température Up ou Down de (21h00 -> 7h30) ; C - SALLE DE BAIN : WATCHDOG SÉCURITÉ SOUFFLANT)
@@ -28,9 +28,9 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 - YAML locaux absents de la prod ou sans id : 4 (voir section Hors prod)
 - Erreurs de lecture YAML : 0
 - Fiches non rattachees a un YAML (fiches d'operation, specifications, etc.) : 12
+  - [03_docs_automations_MD/Automations_yaml_original/Automations.md](03_docs_automations_MD/Automations_yaml_original/Automations.md)
   - [03_docs_automations_MD/Backup_ha_GitHub/Git_alerte_ko/Git_alerte_ko.md](03_docs_automations_MD/Backup_ha_GitHub/Git_alerte_ko/Git_alerte_ko.md)
   - [03_docs_automations_MD/Gestion_des_stores/Gestion_store_bureau/Gestion_store_bureau.md](03_docs_automations_MD/Gestion_des_stores/Gestion_store_bureau/Gestion_store_bureau.md)
-  - [03_docs_automations_MD/Meteo/Alerte_meteo_cartes/Alerte_meteo_cartes.md](03_docs_automations_MD/Meteo/Alerte_meteo_cartes/Alerte_meteo_cartes.md)
   - [03_docs_automations_MD/Meteo/Maj_temps_foudre/Maj_temps_foudre.md](03_docs_automations_MD/Meteo/Maj_temps_foudre/Maj_temps_foudre.md)
   - [03_docs_automations_MD/P1_01_Clim_chauffage/A0_clim_jour/A0_clim_jour.md](03_docs_automations_MD/P1_01_Clim_chauffage/A0_clim_jour/A0_clim_jour.md)
   - [03_docs_automations_MD/P1_01_Clim_chauffage/C_notif_temp_jour/C_notif_temp_jour.md](03_docs_automations_MD/P1_01_Clim_chauffage/C_notif_temp_jour/C_notif_temp_jour.md)
@@ -91,7 +91,7 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 
 | N | Alias | id prod | id local (ReBuild) | Entity HA | Documentation (md) | YAML source | Commentaire |
 |:--|:------|:--------|:-------------------|:----------|:-------------------|:------------|:------------|
-| 17 | Alerte Météo France actualisation des "CARTES" | 1771872569647 | 1771872569647 | `automation.alerte_meteo_france_actualisation_des_cartes` | [Automations.md](03_docs_automations_MD/Automations_yaml_original/Automations.md) | [Automations.yaml](03_docs_automations_YAML/Automations_yaml_original/Automations.yaml) |  |
+| 17 | Alerte Météo France actualisation des "CARTES" | 1771872569647 | 1771872569647 | `automation.alerte_meteo_france_actualisation_des_cartes` | [Alerte_meteo_cartes.md](03_docs_automations_MD/Meteo/Alerte_meteo_cartes/Alerte_meteo_cartes.md) | [Alerte_meteo_france_actualisation_des_cartes.yaml](03_docs_automations_YAML/Meteo/Alerte_meteo_france_actualisation_des_cartes/Alerte_meteo_france_actualisation_des_cartes.yaml) |  |
 | 18 | Mettre à jour le temps du dernier impact de foudre | 1775243312985 | 1775243312985 | `automation.mettre_a_jour_le_temps_du_dernier_impact_de_foudre` | aucune | [Mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml](03_docs_automations_YAML/Meteo/Mettre_a_jour_le_temps_du_dernier_impact_de_foudre/Mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml) |  |
 | 19 | Notification de la foudre | 1775243260631 | 1775243260631 | `automation.notification_de_la_foudre` | [Notif_foudre.md](03_docs_automations_MD/Meteo/Notif_foudre/Notif_foudre.md) | [Notification_de_la_foudre.yaml](03_docs_automations_YAML/Meteo/Notification_de_la_foudre/Notification_de_la_foudre.yaml) |  |
 | 20 | Update previous humidity | 1775243176772 | 1775243176772 | `automation.update_previous_humidity` | [Update_prev_humidity.md](03_docs_automations_MD/Meteo/Update_prev_humidity/Update_prev_humidity.md) | [Update_previous_humidity.yaml](03_docs_automations_YAML/Meteo/Update_previous_humidity/Update_previous_humidity.yaml) |  |

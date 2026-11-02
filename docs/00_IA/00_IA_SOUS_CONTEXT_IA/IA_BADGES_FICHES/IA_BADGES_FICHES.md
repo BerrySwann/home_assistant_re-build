@@ -414,11 +414,17 @@ Rendu : [![Source](https://img.shields.io/badge/Source-HACF-2196f3?style=flat-sq
 Fiches (1) :
 - 02_docs_dashboard/02_dashboard_docs_MD/L1C1_METEO/TUTO_L1C1_images_alertes_meteo_france.md
 
-## Modifs (1 badges)
+## Modifs (2 badges)
 
 ### INTERDITES : 1
 
 Rendu : [![Modifs](https://img.shields.io/badge/Modifs-INTERDITES-f44336?style=flat-square)](.)
+
+### Gelé : 1
+
+Une fiche gelee voit ses modifications interdites jusqu a deliberation : le badge passe en rouge.
+
+Rendu : [![Modifs](https://img.shields.io/badge/Modifs-Gelé-f44336?style=flat-square)](.)
 
 Fiches (1) :
 - 02_docs_dashboard/02_dashboard_docs_MD/L4C3_MAJ_HA/L4C3_MAJ_HA_01_Vignette/L4C3_Vignette_MAJ_HA.md

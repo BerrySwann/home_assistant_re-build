@@ -43,7 +43,20 @@ Scope (read-only):
 - Local: C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\01_config_system_SH_PY_YAML\ and docs\03_docs_automations\03_docs_automations_YAML\
 - Prod: H:\ (config YAML; themes/, blueprints/ and notifs/ exist only in prod)
 
-For each option, entity, service or card (custom:xxx) quoted by the notes: grep -rIn on the scope, note file and line. Zero result = "non utilise (verifie dans <scope>)". Dashboards stored outside YAML and nested content are not covered by this grep: say so.
+For each option, entity, service or card (custom:xxx) quoted by the notes, two checks in this order:
+
+1. grep -rIn on the scope (local then prod), note file and line. Zero result = "non utilise (verifie dans <scope>)".
+2. if the HA MCP server answers, query the LIVE dashboards (storage, not YAML) with `ha_config_get_dashboard`:
+   - `url_path="dashboard-tablette"` to target the dashboard, `list_only=true` to list them;
+   - `entity_id="sensor.xxx"` for an entity quoted by the notes (`*` works as a wildcard);
+   - `query="custom:<name>"` for a card type.
+   The tool has NO `mode` parameter: checked on 2026-11-01, the call returns `VALIDATION_FAILED - \`mode\`: unknown parameter`.
+   Real parameters: `url_path`, `list_only`, `force_reload`, `entity_id`, `card_type`, `heading`, `include_config`,
+   `include_screenshot`, `view_path`, `query`, `describe`.
+   The response returns `matches` with `view_index`, `section_index`, `card_index`, `jq_path` and `python_path`:
+   quote the exact path of the impacted card instead of "a dashboard is concerned".
+
+Limits to state: storage only; nested content (picture-elements) and card_mod are not covered.
 
 ## Step 4 - ReBuild traps to check systematically
 
