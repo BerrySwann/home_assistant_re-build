@@ -199,7 +199,11 @@ def main():
             sl = gsha(lp) if lp else "-"
             sm = gsha(mp) if mp else "-"
         vals = [sp, sr, sl, sm]
-        comp = [v for v in vals if v not in ("?", "n/a") and not re.match(r"^\d+/\d+$|^pas de copie", v)]
+        # GitHub (sr) ne fait PAS partie du verdict : il est alimente par le backup HA, jamais par nous.
+        # Un retard GitHub juste apres un push est normal (jusqu a H+10) ; le compter comme un ecart bloquait
+        # l extinction apres chaque push d un fichier vital. Il reste affiche dans le tableau et en NOTE.
+        # (Eric, 2026-11-03 : un garde-fou ne doit pas bloquer une situation qu on ne peut pas corriger.)
+        comp = [v for v in (sp, sl, sm) if v not in ("?", "n/a") and not re.match(r"^\d+/\d+$|^pas de copie", v)]
         flag = []
         if "-" in comp:
             flag.append("manquant")

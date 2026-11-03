@@ -13,8 +13,8 @@
 
 </div>
 
-> Fichier GENERE le 2026-11-03 07:25 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
-> 14 fichiers de contenu, 47 sauvegardes (.bak), 0 sans description.
+> Fichier GENERE le 2026-11-03 18:37 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
+> 14 fichiers de contenu, 54 sauvegardes (.bak), 0 sans description.
 
 > 🚨🚨🚨 **GYROPHARE ROUGE - DANS HOME ASSISTANT TOUT EST A PLAT** 🚨🚨🚨
 >
@@ -55,7 +55,7 @@ Un dossier par fichier. Chargés a la demande : Claude ne les lit que si la tach
 
 | Fichier | Qui s'en sert | Son but | Quand le lire | Cite dans CLAUDE.md | Prod |
 |---|---|---|---|---|---|
-| [DEPENDANCES_GLOBALES_CLAUDE_memoire.md](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md) | Claude (il la tient a jour via /sync_index et /histo) ; Hermes a sa propre version dans docs/99_docs_MD_system/DEPENDANCES_GLOBALES_HERMES | Chaine de dependances du dashboard : matrice des 18 vignettes, entites, fichiers et automations par domaine, scripts, fichiers config racine. Citee par IA_CONTEXT_BASE, IA_ARBO_DETAIL, IA_INDEX_NAVIGATION et IA_NOM_DES_REPERTOIRES_ET_FICHIERS. | Apres validation d un YAML, d une automation ou d une vignette ; pour savoir quelles entites et quels fichiers dependent d une vignette. | oui | OK (MD5 identique) |
+| [DEPENDANCES_GLOBALES_CLAUDE_memoire.md](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md) | Claude (il la tient a jour via /sync_index et /histo) ; Hermes a sa propre version dans docs/99_docs_MD_system/DEPENDANCES_GLOBALES_HERMES | Chaine de dependances du dashboard : matrice des 18 vignettes, entites, fichiers et automations par domaine, scripts, fichiers config racine. Citee par IA_CONTEXT_BASE, IA_ARBO_DETAIL, IA_INDEX_NAVIGATION et IA_NOM_DES_REPERTOIRES_ET_FICHIERS. | Apres validation d un YAML, d une automation ou d une vignette ; pour savoir quelles entites et quels fichiers dependent d une vignette. | oui | DIFFERENT de la prod |
 
 ## Sauvegardes (.bak)
 
@@ -64,8 +64,8 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 | Dossier | Nombre de sauvegardes |
 |---|---|
 | [00_IA_CONTEXT_BASE](../00_IA_CONTEXT_BASE/) | 3 |
-| [00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/) | 3 |
-| [00_IA_GLOBAL_INDEX_memoire](./) | 4 |
+| [00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/) | 4 |
+| [00_IA_GLOBAL_INDEX_memoire](./) | 5 |
 | [00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 4 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE](../00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS](../00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/) | 3 |
@@ -76,7 +76,7 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 | [00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES](../00_IA_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS](../00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/) | 3 |
-| [00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE](../00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE/) | 3 |
+| [00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE](../00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE/) | 8 |
 | [00_IA_SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE](../00_IA_SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE/) | 3 |
 
 ## Les autres index globaux du projet
@@ -93,3 +93,59 @@ Tous sont verifies par /histo (liens casses, existence, prod).
 | [ENTITES_GLOBAL_INDEX.md](../../99_docs_MD_system/ENTITES_GLOBAL_INDEX/ENTITES_GLOBAL_INDEX.md) | Index des entites, sans generateur : tenu a la main. | check_global_index.py |
 | [IA_GLOBAL_INDEX_memoire.md](IA_GLOBAL_INDEX_memoire.md) | Ce fichier, genere par gen_global_index_ia.py. | etape 11 de /histo + check_global_index.py |
 
+<!-- RECAP-ENTITES:DEBUT -->
+
+## Recapitulatif des entites citees par cet index
+
+Total : **685 entites**. Origine de chacune : type, puis le nom de l integration telle qu elle apparait dans Appareils et services.
+
+| origine | nombre | explication |
+|:---|---:|:---|
+| CREE template | 249 | creee par un YAML du depot, dossier `template`, sans aucune integration dans Appareils et services |
+| NAT mqtt | 128 | chaine a trois maillons, verifiee le 2026-11-03 : Zigbee2MQTT (conteneur 200, Proxmox 10.32.154.244) publie vers le broker `core-mosquitto` (add-on Mosquitto, port 1883), que consomme l integration `mqtt` d Appareils et services. Si un des trois manque, les entites tombent |
+| CREE utility_meter | 76 | creee par un YAML du depot, dossier `utility_meter`, sans aucune integration dans Appareils et services |
+| NAT mobile_app | 49 | integration `mobile_app` du coeur de Home Assistant, installee et visible dans Appareils et services |
+| NAT hue | 35 | integration `hue` du coeur de Home Assistant, installee et visible dans Appareils et services |
+| HACS atmofrance | 19 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services sous le nom `Atmo France - Vence` |
+| HACS powercalc | 19 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services en 38 entrees (premiere : `Hue ambiance lamp salon 1`) |
+| NAT systemmonitor | 11 | integration `systemmonitor` du coeur de Home Assistant, installee et visible dans Appareils et services |
+| HACS scheduler | 9 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services sous le nom `Scheduler` |
+| CREE statistics | 8 | creee par un YAML du depot, dossier `statistics`, sans aucune integration dans Appareils et services |
+| CREE input_booleans | 7 | creee par un YAML du depot, dossier `input_booleans`, sans aucune integration dans Appareils et services |
+| HACS meross_lan | 6 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services en 2 entrees (premiere : `Store SALON`) |
+| CREE command_line | 5 | creee par un YAML du depot, dossier `command_line`, sans aucune integration dans Appareils et services |
+| NAT hassio | 5 | integration `hassio` du coeur de Home Assistant, installee et visible dans Appareils et services |
+| CREE history_stats | 4 | creee par un YAML du depot, dossier `history_stats`, sans aucune integration dans Appareils et services |
+| CREE timers | 4 | creee par un YAML du depot, dossier `timers`, sans aucune integration dans Appareils et services |
+| NAT broadlink | 4 | integration `broadlink` du coeur de Home Assistant, installee et visible dans Appareils et services |
+| NAT meteo_france | 4 | integration `meteo_france` du coeur de Home Assistant, installee et visible dans Appareils et services |
+| NAT proxmoxve | 4 | integration `proxmoxve` du coeur de Home Assistant, installee et visible dans Appareils et services |
+| CREE groups | 3 | creee par un YAML du depot, dossier `groups`, sans aucune integration dans Appareils et services |
+| CREE smartir | 3 | creee par un YAML du depot, dossier `smartir`, sans aucune integration dans Appareils et services |
+| HACS blitzortung | 3 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services sous le nom `Maison` |
+| NAT template | 3 | integration `template` du coeur de Home Assistant, installee et visible dans Appareils et services |
+| RASPI-PI4-4GO | 3 | entites du Raspberry Pi 4 4 Go : elles existent, le materiel est hors tension (pour Raspberry Pi4 4Go) |
+| CREE input_button | 2 | creee par un YAML du depot, dossier `input_button`, sans aucune integration dans Appareils et services |
+| CREE input_number | 2 | creee par un YAML du depot, dossier `input_number`, sans aucune integration dans Appareils et services |
+| CREE person | 2 | creee par un YAML du depot, dossier `person`, sans aucune integration dans Appareils et services |
+| CREE script | 2 | creee par un YAML du depot, dossier `script`, sans aucune integration dans Appareils et services |
+| HACS vigieau | 2 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services sous le nom `Vigieau AEP` |
+| NAT generic_thermostat | 2 | integration `generic_thermostat` du coeur de Home Assistant, installee et visible dans Appareils et services |
+| ARTEFACT-TEMPLATE | 1 | mot-cle de template, pas une entite |
+| CREE automation | 1 | creee par un YAML du depot, dossier `automation`, sans aucune integration dans Appareils et services |
+| CREE input_datetime | 1 | creee par un YAML du depot, dossier `input_datetime`, sans aucune integration dans Appareils et services |
+| CREE input_select | 1 | creee par un YAML du depot, dossier `input_select`, sans aucune integration dans Appareils et services |
+| CREE powercalc | 1 | creee par un YAML du depot, dossier `powercalc`, sans aucune integration dans Appareils et services |
+| CREE rest | 1 | creee par un YAML du depot, dossier `rest`, sans aucune integration dans Appareils et services |
+| CREE sql | 1 | creee par un YAML du depot, dossier `sql`, sans aucune integration dans Appareils et services |
+| HACS hacs | 1 | installee via HACS (qui va etre renomme marketplace) ; son entree dans Appareils et services n a pas de nom affiche |
+| NAT cpuspeed | 1 | integration `cpuspeed` du coeur de Home Assistant, installee et visible dans Appareils et services |
+| NAT moon | 1 | integration `moon` du coeur de Home Assistant, installee et visible dans Appareils et services |
+| NAT season | 1 | integration `season` du coeur de Home Assistant, installee et visible dans Appareils et services |
+| NAT-SANS-REGISTRE | 1 | fournie par Home Assistant sans entree au registre (zone.home) |
+
+> **Chaine la plus fragile** : les `NAT mqtt` ne dependent pas que de Home Assistant. Mesure du 2026-11-03 : l integration `mqtt` pointe le broker add-on `core-mosquitto` (1883), et les mesures viennent de Zigbee2MQTT, conteneur 200 sur 10.32.154.244. Conteneur arrete, broker en vrac ou integration retiree : les entites tombent, sans que rien ne le signale dans l interface. A la meme date, 114 des 128 entites citees avaient remonte dans les 2 heures.
+
+*Bloc ecrit par `recap_index.py`, encadre par deux marqueurs : il est remplace a chaque passage, jamais edite a la main. Classification : NAT <integration> si l entree de registre a un config entry ; NAT <integration> pour le coeur de Home Assistant, HACS <integration> pour ce qui vient de HACS ou d un depot (dossier custom_components) ; CREE <famille> sinon, famille = dossier du YAML qui declare l objet ; RASPI-PI4-4GO pour les trois entites du Pi 4 4 Go (materiel hors tension, entites existantes) ; SUPPRIMEE pour les noms remplaces ; ARTEFACT-TEMPLATE pour les mots-cles qui ne sont pas des entites.*
+
+<!-- RECAP-ENTITES:FIN -->

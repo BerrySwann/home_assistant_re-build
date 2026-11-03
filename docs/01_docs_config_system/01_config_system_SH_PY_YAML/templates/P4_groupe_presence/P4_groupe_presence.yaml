@@ -119,7 +119,9 @@
           {%- elif e_here -%}
             [Eric: {{ e_stat }}/{{ m_stat }}]
           {%- else -%}
-            {# Fallback : aucun n'est sur le WiFi cible, le nom est celui de Mamour (m_stat en premier) #}
+            {# Fallback : PERSONNE n'est a la maison. Le nom affiche est celui de la personne
+               presente quand il y en a une (m_here / e_here) ; sinon PAR DEFAUT c'est Mamour,
+               avec m_stat en premier (regle dite par Eric le 2026-11-03). #}
             [Mamour: {{ m_stat }} / {{ e_stat }}]
           {%- endif -%}
         {%- endif -%}
@@ -128,3 +130,6 @@
 # - [2026-10-20] [L39-41, L70-72] Titres secondaires (boites carrees) indentes de 4 espaces (col 0 -> 4), contenu inchange.
 # - [2026-10-20] [L39-41, L70-72] Titres secondaires numerotes (1. et 2.), largeur de boite elargie de 3 car., haut/titre/bas alignes.
 # - [2026-10-20] [L43-44, L74-75] Commentaire et slug tertiaire alignes sur le bloc d'entite (4 espaces).
+# - [2026-11-02] [L109-125] Bloc AFFICHAGE FINAL : branche inatteignable [Tous les 2] retiree (m_stat == e_stat la rendait impossible), fallback prefixe Mamour ([{{ m_stat }} / {{ e_stat }}] -> [Mamour: {{ m_stat }} / {{ e_stat }}]). Le prefixe par un nom suppose que la personne est sur le reseau domestique.
+# - [2026-11-03] [L121-124] Fallback AFFICHAGE FINAL : le prefixe Mamour ajoute le 2026-11-02 est retire. Le nom ne s affiche que si la personne est sur le reseau domestique (m_here / e_here) ; quand personne n est a la maison, l affichage reste [{{ m_stat }} / {{ e_stat }}] sans nom (regle dite par Eric).
+# - [2026-11-03] [L121-125] Fallback AFFICHAGE FINAL, regle definitive dite par Eric : le nom affiche est celui de la personne a la maison ; quand personne n est a la maison le prefixe par defaut est Mamour, avec m_stat en premier.

@@ -28,7 +28,7 @@ TODAY = datetime.date.today()
 # 2026-10-18 est la correction du chemin Source (02_logique_wifi_cellular.yaml ->
 # P4_groupe_presence.yaml, chemin verifie present en prod et en local) plus la mise aux normes
 # des badges. Entites citees verifiees en live, toutes presentes.
-FIGES = {"IA_P4_PRESENCE": "2026-11-02"}
+FIGES = {"IA_P4_PRESENCE": "2026-11-03"}
 
 def md5(p):
     h = hashlib.md5()
