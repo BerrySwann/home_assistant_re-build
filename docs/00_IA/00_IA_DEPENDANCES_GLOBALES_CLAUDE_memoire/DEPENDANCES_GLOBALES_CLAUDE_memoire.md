@@ -614,8 +614,8 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 
 | Entité | Correction |
 |:-------|:-----------|
-| `sensor.temperature_corrige_mamour` | Été : `min(T°ext - 1, 27)` dynamique |
-| `sensor.temperature_corrige_eric` | Été : `min(T°ext + 1, 28)` dynamique |
+| `sensor.temperature_corrige_salon` | Été : `min(T°ext - 1, 27)` dynamique |
+| `sensor.temperature_corrige_bureau` | Été : `min(T°ext + 1, 28)` dynamique |
 | `sensor.temperature_corrige_chambre` | Été : `min(T°ext + 1, 28)` - hiver : fallback `float(18)` à corriger |
 | `sensor.temperature_eco_hiver_corrige` | Source corrigée : lit `temperature_eco_hiver` (était `temperature_eco_ete`) |
 | `sensor.temperature_confort_jour` | À corriger : ajouter `cool` mode → retourner `base` (26°C) |
@@ -635,7 +635,7 @@ MATÉRIEL (NOUS SP via Z2M + SmartIR + Meross)
 | `sensor.temperature_confort_nuit` | 07-20 : palier dynamique selon `sensor.alerte_canicule` (M_01_meteo_alertes_card) : Vert/indispo=29, Jaune=30, Orange=30, Rouge=31 - T°ext ≤ palier → 26°C, au-delà → 27°C - nouvelle dépendance M_01 → P1_01_MASTER → L1C3 | ✅ |
 | `sensor.message_clim_personnalise_7h30_21h00` (P1_02) | 07-20 : 8 branches réalignées sur t_*_target du script p1_master_gestion_clim - g1 cool → [ECO COOL] eco_ete_corrige ; g2/g3/g4 cool → corrige_m/e/c ; g2 heat Bureau → eco ; g3 heat Salon → conf_e. Sources : + `temperature_eco_ete_corrige`, - `temperature_cible` / `temperature_confort_jour` | ✅ |
 | `sensor.message_clim_personnalise_21h00_7h30` (P1_03) | 07-20 : g1 cool → [ECO COOL] eco_ete_corrige (était [COOL] cible). Sources : + `temperature_eco_ete_corrige`, - `temperature_cible` | ✅ |
-| `sensor.temperature_corrige_eric` / `_chambre` (P1_01) | 07-20 (16h07, modif Eric en prod hors session) : plafond été relevé 27→28°C. Réintégré en local + boîtes ASCII 07.BUREAU/09.CHAMBRE/MOTEURS restaurées 37 car. | ✅ |
+| `sensor.temperature_corrige_bureau` / `_chambre` (P1_01) | 07-20 (16h07, modif Eric en prod hors session) : plafond été relevé 27→28°C. Réintégré en local + boîtes ASCII 07.BUREAU/09.CHAMBRE/MOTEURS restaurées 37 car. | ✅ |
 | `sensor.message_clim_personnalise_7h30_21h00` (P1_02) | 07-20 (16h, correction Eric en prod) : fix Ctrl+H ayant cassé entity_id/variables Jinja + `s_off/b_off/c_off` simplifiés en constantes. Local resynchronisé sur prod + fix commentaire ligne 17 | ✅ |
 | `sensor.message_clim_personnalise_21h00_7h30` (P1_03) | 07-20 : préfixe "Mode: " + deux-points pièces (Salon:/Bureau:/Chambre:) aligné sur P1_02 | ✅ |
 
@@ -4050,7 +4050,7 @@ Sequence en 6 étapes :
 |:--|:--|
 | Appelé par | Automation P1-A (CLIM JOUR) + Automation P1-B (CLIM NUIT) |
 | Paramètres | `periode` (jour/nuit, obligatoire), `trigger_id`, `trigger_entity_id` |
-| Capteurs lus | `sensor.mode_ete_hiver`, `sensor.groupe`, `sensor.temperature_cible`, `sensor.temperature_confort_nuit`, `sensor.temperature_corrige_mamour/_eric/_chambre`, `sensor.temperature_eco_hiver_corrige`, `sensor.temperature_eco_ete_corrige`, `sensor.presence`, `sensor.nombre_de_fenetres_ouvertes` |
+| Capteurs lus | `sensor.mode_ete_hiver`, `sensor.groupe`, `sensor.temperature_cible`, `sensor.temperature_confort_nuit`, `sensor.temperature_corrige_salon/_eric/_chambre`, `sensor.temperature_eco_hiver_corrige`, `sensor.temperature_eco_ete_corrige`, `sensor.presence`, `sensor.nombre_de_fenetres_ouvertes` |
 | Fenêtres | `binary_sensor.contact_fenetre_salon/cuisine/bureau/chambre_sonoff_contact` (4) |
 | Prises clim | `switch.clim_salon/bureau/chambre_nous` |
 | Flags sécurité | `input_boolean.clim_salon/bureau/chambre_arret_securise_en_cours` |
@@ -4064,7 +4064,7 @@ automation P1-A (CLIM JOUR) --+
 automation P1-B (CLIM NUIT) --+--> script.p1_master_gestion_clim [periode, trigger_id, trigger_entity_id]
   --> sensor.mode_ete_hiver + sensor.groupe
   --> sensor.temperature_cible (JOUR) / sensor.temperature_confort_nuit (NUIT)
-  --> sensor.temperature_corrige_mamour / _eric / _chambre
+  --> sensor.temperature_corrige_salon / _eric / _chambre
   --> binary_sensor.contact_fenetre_* (4 pieces)
     [fenetre ouverte] --> climate.set_hvac_mode OFF (3 clims) + notify ALERTE FENETRE
                          stop : arrêt immédiat

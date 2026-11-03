@@ -258,8 +258,8 @@ p1_master_gestion_clim:
             in ['unknown', 'unavailable'] and\n  states('sensor.groupe') not in ['unknown',
             'unavailable'] and\n  states('sensor.temperature_eco_hiver_corrige') not
             in ['unknown', 'unavailable', '0'] and\n  states('sensor.temperature_eco_ete_corrige')
-            not in ['unknown', 'unavailable', '0'] and\n  states('sensor.temperature_corrige_mamour')
-            not in ['unknown', 'unavailable', '0'] and\n  states('sensor.temperature_corrige_eric')
+            not in ['unknown', 'unavailable', '0'] and\n  states('sensor.temperature_corrige_salon')
+            not in ['unknown', 'unavailable', '0'] and\n  states('sensor.temperature_corrige_bureau')
             not in ['unknown', 'unavailable', '0'] and\n  states('sensor.temperature_corrige_chambre')
             not in ['unknown', 'unavailable', '0']\n%} {% if periode == 'jour' %}\n
             \ {{ base_ok and\n     states('sensor.temperature_cible') not in ['unknown',
@@ -284,8 +284,8 @@ p1_master_gestion_clim:
         == ''true'' %} true {% else %}false{% endif %}'
       groupe_ok: '{{ ''true'' if states(''sensor.groupe'') not in [''unknown'', ''unavailable'']
         else ''false'' }}'
-      temps_normales_ok: "{% set base =\n  states('sensor.temperature_corrige_mamour')
-        not in ['unknown', 'unavailable', '0'] and\n  states('sensor.temperature_corrige_eric')
+      temps_normales_ok: "{% set base =\n  states('sensor.temperature_corrige_salon')
+        not in ['unknown', 'unavailable', '0'] and\n  states('sensor.temperature_corrige_bureau')
         not in ['unknown', 'unavailable', '0'] and\n  states('sensor.temperature_corrige_chambre')
         not in ['unknown', 'unavailable', '0']\n%} {% if periode == 'jour' %} {{ 'true'
         if (base and states('sensor.temperature_cible') not in ['unknown', 'unavailable',
@@ -297,10 +297,10 @@ p1_master_gestion_clim:
         in [''unknown'', ''unavailable'', ''0''] %}{% set ns.hs = ns.hs + [''eco_hiver_corrige'']
         %}{% endif %} {% if states(''sensor.temperature_eco_ete_corrige'') in [''unknown'',
         ''unavailable'', ''0''] %}{% set ns.hs = ns.hs + [''eco_ete_corrige''] %}{%
-        endif %} {% if states(''sensor.temperature_corrige_mamour'') in [''unknown'',
-        ''unavailable'', ''0''] %}{% set ns.hs = ns.hs + [''corrige_mamour''] %}{%
-        endif %} {% if states(''sensor.temperature_corrige_eric'') in [''unknown'',
-        ''unavailable'', ''0''] %}{% set ns.hs = ns.hs + [''corrige_eric''] %}{% endif
+        endif %} {% if states(''sensor.temperature_corrige_salon'') in [''unknown'',
+        ''unavailable'', ''0''] %}{% set ns.hs = ns.hs + [''corrige_salon''] %}{%
+        endif %} {% if states(''sensor.temperature_corrige_bureau'') in [''unknown'',
+        ''unavailable'', ''0''] %}{% set ns.hs = ns.hs + [''corrige_bureau''] %}{% endif
         %} {% if states(''sensor.temperature_corrige_chambre'') in [''unknown'', ''unavailable'',
         ''0''] %}{% set ns.hs = ns.hs + [''corrige_chambre''] %}{% endif %} {% if
         periode == ''jour'' and states(''sensor.temperature_cible'') in [''unknown'',
@@ -370,9 +370,9 @@ p1_master_gestion_clim:
         | float) }}'
       temp_nuit: '{{ states(''sensor.temperature_confort_nuit'') | float(states(''sensor.consigne_de_base'')
         | float) }}'
-      temp_conf_m: '{{ states(''sensor.temperature_corrige_mamour'') | float(states(''sensor.temperature_cible'')
+      temp_conf_m: '{{ states(''sensor.temperature_corrige_salon'') | float(states(''sensor.temperature_cible'')
         | float) }}'
-      temp_conf_e: '{{ states(''sensor.temperature_corrige_eric'') | float(states(''sensor.temperature_cible'')
+      temp_conf_e: '{{ states(''sensor.temperature_corrige_bureau'') | float(states(''sensor.temperature_cible'')
         | float) }}'
       temp_conf_c: '{{ states(''sensor.temperature_corrige_chambre'') | float(states(''sensor.temperature_cible'')
         | float) }}'

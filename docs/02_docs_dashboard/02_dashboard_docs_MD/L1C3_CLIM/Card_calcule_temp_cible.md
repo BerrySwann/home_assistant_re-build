@@ -47,8 +47,8 @@
 - `sensor.temperature_confort_jour`
 - `sensor.temperature_confort_nuit`
 - `sensor.temperature_corrige_chambre`
-- `sensor.temperature_corrige_eric`
-- `sensor.temperature_corrige_mamour`
+- `sensor.temperature_corrige_bureau`
+- `sensor.temperature_corrige_salon`
 - `sensor.temperature_delta_affichage`
 - `sensor.temperature_differentielle`
 - `sensor.temperature_eco_ete`

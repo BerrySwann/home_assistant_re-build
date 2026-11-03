@@ -52,7 +52,7 @@ Page de supervision matérielle du Mini-PC Intel NUC (hôte Proxmox). Affiche ph
 │  vertical-stack                         │
 │  ├── Photo NUC (/local/images/mini pc.png)
 │  ├── IP Int. / Ext. (mushroom × 3)    │
-│  ├── Uptime (mushroom × 2)            │ ⚠️ BUG (voir ci-dessous)
+│  ├── Uptime (mushroom × 2)            │ ✅ corrige le 2026-11-03
 │  ├── CPU % + CPU Temp (bar-card × 2) │
 │  ├── RAM % + Used MB + Free MB (bar×3)│
 │  ├── Disk PVE GiB (bar-card)         │
@@ -79,18 +79,30 @@ Page de supervision matérielle du Mini-PC Intel NUC (hôte Proxmox). Affiche ph
 
 ---
 
-## ✅ UPTIME - TEMPLATE CONFORME
+## ✅ UPTIME - TEMPLATE CORRIGE LE 2026-11-03
 
-L'ancien bug (valeurs traitées comme des secondes) est corrigé : le template utilise bien les **heures flottantes** renvoyées par `sensor.pve_uptime`.
+`sensor.pve_uptime` ne renvoie **pas** un nombre d'heures : il renvoie un **horodatage**, par exemple
+`2026-10-31T17:32:04+00:00` (l'entite porte `device_class: uptime`).
+
+L'ancien template faisait `| float(0)` sur cette chaine. La conversion echoue, `float` rend 0, donc la carte
+affichait `00h 00m` en permanence - et a l'ecran les deux zeros colles donnaient le fameux `00000`.
+La note precedente de cette fiche, qui declarait ce template "conforme" en croyant a des heures flottantes,
+etait fausse.
+
+Le template actuel calcule la duree depuis la date de demarrage :
 
 ```yaml
-{% set uptime = states('sensor.pve_uptime') | float(0) %}
-{% set jours = (uptime / 24) | int(0) %}
-{% set heures = (uptime % 24) | int(0) %}
-{% set minutes = ((uptime % 1) * 60) | int(0) %}
+{% set s = states('sensor.pve_uptime') %}
+{% set d = (now().timestamp() - as_timestamp(s)) | int(0) %}
+{% set jours = (d // 86400) | int(0) %}
+{% set heures = ((d % 86400) // 3600) | int(0) %}
+{% set minutes = ((d % 3600) // 60) | int(0) %}
 ```
 
-> Vérifié dans l'export `page_L4C1_mini_pc_2026-08-02.yaml` (ligne 130) : conforme. L'ancienne note "BUG CONNU" n'a plus lieu d'être.
+> Rendu verifie par l'API `/api/template` le 2026-11-03 : ancien template `00h 00m`, nouveau `3d 01h 00m`
+> (l'hote a demarre le 2026-10-31 a 17h32). Le dashboard live et le YAML des docs portent le meme template.
+> Si le capteur passe a `unknown` ou `unavailable`, la carte affiche "heure de demarrage inconnue"
+> au lieu d'un zero trompeur.
 
 ---
 
@@ -106,7 +118,7 @@ L'ancien bug (valeurs traitées comme des secondes) est corrigé : le template u
 ### Uptime
 | Entité | Source | Note |
 |--------|--------|------|
-| `sensor.pve_uptime` | Intégration `proxmox_ve` | Heures flottantes - template conforme (`float`, `/24`) |
+| `sensor.pve_uptime` | Intégration `proxmoxve` | Horodatage (`device_class: uptime`) - la duree se calcule par `as_timestamp`, pas par `float` |
 
 ### CPU
 | Entité | Source | Seuils bar-card |

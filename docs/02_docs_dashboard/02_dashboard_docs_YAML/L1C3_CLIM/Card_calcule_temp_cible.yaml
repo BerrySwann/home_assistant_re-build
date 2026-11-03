@@ -20,8 +20,8 @@ calcule_temp_cible:
             {% set temp_cible = states('sensor.temperature_cible') | int(0) %}
             {% set temp_confort = states('sensor.temperature_confort_jour') | int(0) %}
             {% set temp_confort_n = states('sensor.temperature_confort_nuit') | int(0) %}
-            {% set tcm = states('sensor.temperature_corrige_mamour') | float(0) %}
-            {% set tce = states('sensor.temperature_corrige_eric') | float(0) %}
+            {% set tcm = states('sensor.temperature_corrige_salon') | float(0) %}
+            {% set tce = states('sensor.temperature_corrige_bureau') | float(0) %}
             {% set tcc = states('sensor.temperature_corrige_chambre') | float(0) %}
             **Température Extérieure: {{ temp_ext | round(2) }}°C**
 
@@ -113,11 +113,11 @@ calcule_temp_cible:
             content: >
               **{{ states('sensor.presence') }} (7h30 ⟷ 21h)** {% if
               is_state('sensor.mode_ete_hiver', 'heat') %}
-                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_mamour') | int(0) }}°C (Heat){% endif %}
+                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_salon') | int(0) }}°C (Heat){% endif %}
                 - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_eco_hiver_corrige') | int(0) }}°C (éCO Heat){% endif %}
                 - Climatiseur Chambre : {% if is_state('switch.clim_chambre_nous', 'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_chambre') | int(0) }}°C (Heat){% endif %}
               {% elif is_state('sensor.mode_ete_hiver', 'cool') %}
-                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_mamour') | int(0) }}°C (Cool){% endif %}
+                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_salon') | int(0) }}°C (Cool){% endif %}
                 - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_eco_ete_corrige') | int(0) }}°C (éCO Cool){% endif %}
                 - Climatiseur Chambre : {% if is_state('switch.clim_chambre_nous', 'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_chambre') | int(0) }}°C (Cool){% endif %}
               {% else %}
@@ -139,12 +139,12 @@ calcule_temp_cible:
             content: >
               **{{ states('sensor.presence') }} (7h30 ⟷ 21h)** {% if
               is_state('sensor.mode_ete_hiver', 'heat') %}
-                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_eric') | int(0) }}°C (Heat){% endif %}
-                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_eric') | int(0) }}°C (Heat){% endif %}
+                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_bureau') | int(0) }}°C (Heat){% endif %}
+                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_bureau') | int(0) }}°C (Heat){% endif %}
                 - Climatiseur Chambre : {% if is_state('switch.clim_chambre_nous', 'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_chambre') | int(0) }}°C (Heat){% endif %}
               {% elif is_state('sensor.mode_ete_hiver', 'cool') %}
-                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_eric') | int(0) }}°C (Cool){% endif %}
-                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_eric') | int(0) }}°C (Cool){% endif %}
+                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_bureau') | int(0) }}°C (Cool){% endif %}
+                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_bureau') | int(0) }}°C (Cool){% endif %}
                 - Climatiseur Chambre : {% if is_state('switch.clim_chambre_nous', 'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_chambre') | int(0) }}°C (Cool){% endif %}
               {% else %}
                 - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.mode_ete_hiver') }}{% endif %}
@@ -165,12 +165,12 @@ calcule_temp_cible:
             content: |
               **{{ states('sensor.presence') }} (7h30 ⟷ 21h)**
               {% if is_state('sensor.mode_ete_hiver', 'heat') %}
-                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_mamour') | int(0) }}°C (Heat){% endif %}
-                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_eric') | int(0) }}°C (Heat){% endif %}
+                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_salon') | int(0) }}°C (Heat){% endif %}
+                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_bureau') | int(0) }}°C (Heat){% endif %}
                 - Climatiseur Chambre : {% if is_state('switch.clim_chambre_nous', 'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_chambre') | int(0) }}°C (Heat){% endif %}
               {% elif is_state('sensor.mode_ete_hiver', 'cool') %}
-                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_mamour') | int(0) }}°C (Cool){% endif %}
-                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_eric') | int(0) }}°C (Cool){% endif %}
+                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_salon') | int(0) }}°C (Cool){% endif %}
+                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_bureau') | int(0) }}°C (Cool){% endif %}
                 - Climatiseur Chambre : {% if is_state('switch.clim_chambre_nous', 'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_chambre') | int(0) }}°C (Cool){% endif %}
               {% else %}
                 - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.mode_ete_hiver') }}{% endif %}
@@ -236,13 +236,13 @@ calcule_temp_cible:
 #   / corrige_*_hivers → corrige_* (sans suffixe)
 # - G1 cool : temperature_cible → temperature_eco_ete_corrige (JOUR + NUIT)
 # - G2 bureau : temperature_cible → ECO (hiver_corrige / ete_corrige selon mode)
-# - G2 salon : temperature_confort_jour → temperature_corrige_mamour
+# - G2 salon : temperature_confort_jour → temperature_corrige_salon
 # - G2 chambre : temperature_cible → temperature_corrige_chambre
-# - G3 salon : temperature_cible → temperature_corrige_eric (heat + cool)
-# - G3 bureau : temperature_confort_jour → temperature_corrige_eric
+# - G3 salon : temperature_cible → temperature_corrige_bureau (heat + cool)
+# - G3 bureau : temperature_confort_jour → temperature_corrige_bureau
 # - G3 chambre : temperature_cible → temperature_corrige_chambre
-# - G4 salon : temperature_confort_jour → temperature_corrige_mamour
-# - G4 bureau : temperature_confort_jour → temperature_corrige_eric
+# - G4 salon : temperature_confort_jour → temperature_corrige_salon
+# - G4 bureau : temperature_confort_jour → temperature_corrige_bureau
 # - G4 chambre : temperature_cible → temperature_corrige_chambre
 # - NUIT G≠1 cool salon/bureau : temperature_cible → temperature_confort_nuit
 # - Résumé base éCO : conditionnel mode cool → temperature_eco_ete / heat → temperature_eco_hiver

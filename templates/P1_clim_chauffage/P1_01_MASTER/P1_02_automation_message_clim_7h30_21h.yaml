@@ -13,7 +13,7 @@
 # - sensor.groupe → groupe_1 / groupe_2 / groupe_3 / groupe_4
 # - sensor.presence → texte de présence affiché en en-tête du message
 # - sensor.mode_ete_hiver → heat / cool / fan_only
-# - sensor.temperature_corrige_mamour / sensor.temperature_corrige_eric
+# - sensor.temperature_corrige_salon / sensor.temperature_corrige_bureau
 # - sensor.temperature_corrige_chambre
 # - sensor.temperature_eco_hiver_corrige / sensor.temperature_eco_ete_corrige
 # - switch.clim_*_nous → vérifie alimentation de chaque unité
@@ -58,8 +58,8 @@
         {%- else %}
           {%- set tendance     = states('sensor.th_balcon_nord_temperature_trend') %}
           {%- set temp_ext     = states('sensor.th_balcon_nord_temperature') | float(0) %}
-          {%- set temp_conf_m  = states('sensor.temperature_corrige_mamour') | float(20) %}
-          {%- set temp_conf_e  = states('sensor.temperature_corrige_eric') | float(18) %}
+          {%- set temp_conf_s  = states('sensor.temperature_corrige_salon') | float(20) %}
+          {%- set temp_conf_b  = states('sensor.temperature_corrige_bureau') | float(18) %}
           {%- set temp_conf_c  = states('sensor.temperature_corrige_chambre') | float(18) %}
           {%- set temp_eco     = states('sensor.temperature_eco_hiver_corrige') | float(17) %}
           {%- set temp_eco_ete = states('sensor.temperature_eco_ete_corrige') | float(28) %}
@@ -75,10 +75,10 @@
           {%- set s_eco    = "Mode: [OFF]" if not prise_salon   else temp_eco     ~ "°" %}
           {%- set s_eco_e  = "Mode: [OFF]" if not prise_salon   else temp_eco_ete ~ "°" %}
           {%- set s_conf_m = "Mode: [OFF]" if not prise_salon   else temp_conf_m  ~ "°" %}
-          {%- set s_conf_e = "Mode: [OFF]" if not prise_salon   else temp_conf_e  ~ "°" %}
+          {%- set s_conf_e = "Mode: [OFF]" if not prise_salon   else temp_conf_b  ~ "°" %}
           {%- set b_eco    = "Mode: [OFF]" if not prise_bureau  else temp_eco     ~ "°" %}
           {%- set b_eco_e  = "Mode: [OFF]" if not prise_bureau  else temp_eco_ete ~ "°" %}
-          {%- set b_conf_e = "Mode: [OFF]" if not prise_bureau  else temp_conf_e  ~ "°" %}
+          {%- set b_conf_e = "Mode: [OFF]" if not prise_bureau  else temp_conf_b  ~ "°" %}
           {%- set c_eco    = "Mode: [OFF]" if not prise_chambre else temp_eco     ~ "°" %}
           {%- set c_eco_e  = "Mode: [OFF]" if not prise_chambre else temp_eco_ete ~ "°" %}
           {%- set c_conf_c = "Mode: [OFF]" if not prise_chambre else temp_conf_c  ~ "°" %}

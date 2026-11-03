@@ -455,7 +455,7 @@ Nuit (21h-7h30) + groupe_2/3/4 → confort_nuit (heat + cool, toutes pièces)
 > Ces entités proviennent de `P1_MASTER_CLIM_TEMPLATES` :
 > `sensor.groupe`, `sensor.mode_ete_hiver`,
 > `sensor.temperature_eco_hiver_corrige`, `sensor.temperature_eco_ete_corrige`,
-> `sensor.temperature_corrige_mamour`, `sensor.temperature_corrige_eric`,
+> `sensor.temperature_corrige_salon`, `sensor.temperature_corrige_bureau`,
 > `sensor.temperature_corrige_chambre`, `sensor.temperature_confort_nuit`.
 
 > ⚠️ **Correction 2026-06-21** : entités obsolètes corrigées (`temperature_confort_jour_jour` → `temperature_confort_jour`, `corrige_*_hivers` → `corrige_*`). Logique cool G1 : `temperature_cible` → `temperature_eco_ete_corrige`. Corrections par pièce selon groupe ajoutées (corrige_mamour/eric/chambre).

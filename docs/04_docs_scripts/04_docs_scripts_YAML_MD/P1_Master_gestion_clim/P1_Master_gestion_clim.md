@@ -49,7 +49,7 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 - Si `trigger_id == 'ha_restart'` → attente 1 minute
 
 ### 3. Boucle attente capteurs (max 10 × 30s)
-- Vérifie 9 capteurs : `mode_ete_hiver`, `groupe`, `temperature_eco_hiver_corrige`, `temperature_eco_ete_corrige`, `temperature_corrige_mamour`, `temperature_corrige_eric`, `temperature_corrige_chambre` + selon `periode` : `temperature_cible` (JOUR) ou `temperature_confort_nuit` (NUIT)
+- Vérifie 9 capteurs : `mode_ete_hiver`, `groupe`, `temperature_eco_hiver_corrige`, `temperature_eco_ete_corrige`, `temperature_corrige_salon`, `temperature_corrige_bureau`, `temperature_corrige_chambre` + selon `periode` : `temperature_cible` (JOUR) ou `temperature_confort_nuit` (NUIT)
 - Aucune notif pendant la boucle (fini le spam par essai)
 - Au 10e cycle, **diagnostic 3 sorties** :
   - **SORTIE 1 - OFF sécurité** : `mode_ete_hiver` HS, OU éco de saison HS alors qu'on en a besoin (groupe_1, groupe HS, ou une température normale HS) → off des 3 clims + message « Arrêt sécurité capteur HS »
@@ -66,8 +66,8 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 | `temp_eco_ec` | `sensor.temperature_eco_ete_corrige` |
 | `temp_cible` | `sensor.temperature_cible` |
 | `temp_nuit` | `sensor.temperature_confort_nuit` |
-| `temp_conf_m` | `sensor.temperature_corrige_mamour` |
-| `temp_conf_e` | `sensor.temperature_corrige_eric` |
+| `temp_conf_m` | `sensor.temperature_corrige_salon` |
+| `temp_conf_e` | `sensor.temperature_corrige_bureau` |
 | `temp_conf_c` | `sensor.temperature_corrige_chambre` |
 
 ### 5. Calcul cibles par pièce
@@ -128,8 +128,8 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 | `sensor.temperature_cible` | T° cible jour |
 | `sensor.temperature_confort_nuit` | T° cible nuit |
 | `sensor.consigne_de_base` | Fallback général |
-| `sensor.temperature_corrige_mamour` | T° confort Mamour |
-| `sensor.temperature_corrige_eric` | T° confort Eric |
+| `sensor.temperature_corrige_salon` | T° confort Mamour |
+| `sensor.temperature_corrige_bureau` | T° confort Eric |
 | `sensor.temperature_corrige_chambre` | T° confort chambre |
 | `sensor.presence` | Texte présence (notif) |
 | `sensor.nombre_de_fenetres_ouvertes` | Compteur fenêtres |

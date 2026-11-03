@@ -27,7 +27,7 @@
 # |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
 # | [calculé] (constantes fixes) | valeurs codées en dur                              | temperature_eco_hiver / _eco_ete / seuil_non_chauffage / seuil_non_clim / delta_1 / _2 / _3 / _5 / _7 | consommées par toutes les lignes suivantes |
 # | Sonde SONOFF Balcon Nord | sensor.th_balcon_nord_temperature                  | mode_ete_hiver / consigne_de_base / temperature_differentielle | L1C3 Commandes Clim |
-# | [calculé] (interne, chaîné) | sensor.consigne_de_base / temperature_confort_jour / delta_1 / _2 | temperature_corrige_mamour / _eric / _chambre       | L1C3 Commandes Clim                |
+# | [calculé] (interne, chaîné) | sensor.consigne_de_base / temperature_confort_jour / delta_1 / _2 | temperature_corrige_salon / _eric / _chambre       | L1C3 Commandes Clim                |
 # | Sonde SONOFF Balcon Nord + [calculé] | sensor.th_balcon_nord_temperature + consigne_de_base / delta_1 / _2 / _5 / _7 | temperature_cible / temperature_confort_jour / temperature_confort_nuit / temperature_eco_hiver_corrige / temperature_eco_ete_corrige | L1C3 Commandes Clim |
 # | Sondes SONOFF intérieures (6 pièces) | sensor.th_salon / _cellier / _cuisine / _bureau / _salle_de_bain / _chambre_temperature | temperature_moyenne_interieure                      | L1C2 Températures                  |
 # | [calculé]      | sensor.temperature_moyenne_interieure + th_balcon_nord_temperature / temperature_confort_jour | temperature_delta_value / _affichage / delta_ademe_recommande | L1C2 Températures                  |
@@ -160,9 +160,9 @@
 # ┌─────────────────────────────────┐
 # │ 04. SALON                       │
 # └─────────────────────────────────┘
-# --- temperature_corrige_mamour ---
-    - name: "Temperature Corrigé Mamour"
-      unique_id: temperature_corrige_mamour
+# --- temperature_corrige_salon ---
+    - name: "Temperature Corrigé Salon"
+      unique_id: temperature_corrige_salon
       unit_of_measurement: "°C"
       device_class: temperature
       state: >
@@ -171,16 +171,16 @@
           {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {{ [temp_ext - delta_1, 26] | min | int }}
         {% else %}
-          {% set temp_conf_m = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ (temp_conf_m + delta_1) | round(1) }}
+          {% set temp_conf_s = states('sensor.temperature_confort_jour') | float(0) %}
+          {{ (temp_conf_s + delta_1) | round(1) }}
         {% endif %}
 
 # ┌─────────────────────────────────┐
 # │ 07. BUREAU                      │
 # └─────────────────────────────────┘
-# --- temperature_corrige_eric ---
-    - name: "Temperature Corrigé Eric"
-      unique_id: temperature_corrige_eric
+# --- temperature_corrige_bureau ---
+    - name: "Temperature Corrigé Bureau"
+      unique_id: temperature_corrige_bureau
       unit_of_measurement: "°C"
       device_class: temperature
       state: >
@@ -190,8 +190,8 @@
           {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {{ [temp_ext + delta_1, 27] | min | int }}
         {% else %}
-          {% set temp_conf_e = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ (temp_conf_e - delta_2) | round(1) }}
+          {% set temp_conf_b = states('sensor.temperature_confort_jour') | float(0) %}
+          {{ (temp_conf_b - delta_2) | round(1) }}
         {% endif %}
 
 # ┌─────────────────────────────────┐
@@ -223,9 +223,11 @@
         {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
         {% set base = states('sensor.consigne_de_base') | float(0) %}
         {% set d1 = states('sensor.delta_1') | float(1) %}
+        {% set d2 = states('sensor.delta_2') | float(1) %}
         {% set d5 = states('sensor.delta_5') | float(5) %}
         {% set d7 = states('sensor.delta_7') | float(7) %}
-        {% if temp_ext < 12 %} {{ (base + d1) | int }}
+        {% if temp_ext < 8 %} {{ (base + d2) | int }}
+        {% elif temp_ext < 12 %} {{ (base + d1) | int }}
         {% elif temp_ext > 32 %} {{ (temp_ext - d5) | int }}
         {% else %} {{ base | int }}
         {% endif %}
