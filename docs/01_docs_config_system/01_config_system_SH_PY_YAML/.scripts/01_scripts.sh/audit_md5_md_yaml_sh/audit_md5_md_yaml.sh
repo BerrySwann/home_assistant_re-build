@@ -3,7 +3,7 @@
 # │ AUDIT MD5 DOCS — 3 PASSES : TREE → MD5 PROD → MD5 GITHUB → RAPPORT     │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 # Compare TOUS les fichiers docs/ (.md + .yaml + .sh) entre la prod HA (/config/docs/) et GitHub
-# Statuts : ✅ SYNC · ❌ DIFF · ⚠️ ABSENT GITHUB
+# Statuts : ✅ SYNC · ❌ DIFF · ⚠️ PUSH MANQUANT
 # Log : /config/.logs/md5_audit_md_yaml_YYYY-MM-DD.txt
 
 set -euo pipefail
@@ -74,7 +74,7 @@ while IFS='|' read -r rel prod_md5; do
 
     if [[ "$HTTP_CODE" != "200" ]]; then
         github_md5=""
-        statut="⚠️  ABSENT GITHUB"
+        statut="⚠️  PUSH MANQUANT"
         ABSENT=$((ABSENT+1))
     else
         github_md5=$(md5sum "$TMP_GH" | cut -d' ' -f1)
@@ -100,7 +100,7 @@ done < "$TMP_PROD"
 {
 echo ""
 printf '%.0s─' {1..137}; echo ""
-echo "RÉSULTAT : $TOTAL fichiers ($TOTAL_MD .md · $TOTAL_YAML .yaml · $TOTAL_SH .sh) — ✅ $OK SYNC · ❌ $DIFF_COUNT DIFF · ⚠️ $ABSENT ABSENT GITHUB"
+echo "RÉSULTAT : $TOTAL fichiers ($TOTAL_MD .md · $TOTAL_YAML .yaml · $TOTAL_SH .sh) — ✅ $OK SYNC · ❌ $DIFF_COUNT DIFF · ⚠️ $ABSENT PUSH MANQUANT"
 printf '%.0s─' {1..137}; echo ""
 } >> "$LOG"
 
@@ -108,12 +108,12 @@ rm -f "$TMP_TREE" "$TMP_PROD" "$TMP_GH"
 
 cp "$LOG" /config/.logs/md5_audit_md_yaml_latest.txt 2>/dev/null || true
 
-echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 docs terminé : $TOTAL fichiers ($TOTAL_MD .md · $TOTAL_YAML .yaml · $TOTAL_SH .sh) · $OK SYNC · $DIFF_COUNT DIFF · $ABSENT ABSENT GITHUB → $LOG"
+echo "$(date '+%Y-%m-%d %H:%M:%S %Z') ✅ Audit MD5 docs terminé : $TOTAL fichiers ($TOTAL_MD .md · $TOTAL_YAML .yaml · $TOTAL_SH .sh) · $OK SYNC · $DIFF_COUNT DIFF · $ABSENT PUSH MANQUANT → $LOG"
 
 # annotations_log:
 # [2026-08-08] Création — miroir de audit_md5.sh pour les fichiers .md de /config/docs/
 # [2026-08-08] FIX : réécriture LF pur (fichier initial écrit en CRLF via Windows → bash error \r)
 # [2026-08-09] Extension périmètre : tout docs/ sans exclusion (.md + .yaml + .sh)
 # [2026-10-10] Colonnes du tableau : PROD | GITHUB | STATUT | FICHIER (fichier en dernier, statuts alignes). Lignes RESULTAT et Audit MD5 docs termine inchangees.
-# [2026-10-18] Exclusion du dossier modifs/ (journaux des agents, ecrits en prod avant le backup GitHub, ABSENT GITHUB sans interet). Demande d Eric.
+# [2026-10-18] Exclusion du dossier modifs/ (journaux des agents, ecrits en prod avant le backup GitHub, PUSH MANQUANT sans interet). Demande d Eric.
 # [2026-10-29] Suppression de la copie du rapport dans /config/www/logs (inutile, www est servi sans connexion). Demande d Eric.
