@@ -301,7 +301,7 @@ ha-card {
   windspeed_bar_full: true
 
   wind_direction_entity:
-    entity: sensor.vence_wind_bearing
+    entity: sensor.direction_vent_vence_deg
     use_statistics: false
     direction_compensation: 0
 
@@ -327,14 +327,14 @@ ha-card {
     top_left:
       label: Vitesse du Vent
       unit: " km/h"
-      entity: sensor.vitesse_du_vent_vence
+      entity: sensor.vitesse_vent_vence_kmh
     top_right:
       label: Direction du Vent
-      entity: sensor.vence_wind_direction_label
+      entity: sensor.direction_vent_vence_label
     bottom_left:
       label: Boussole
       unit: °
-      entity: sensor.vence_wind_bearing
+      entity: sensor.direction_vent_vence_deg
     bottom_right:
       label: Vitesse de la rafale actuelle
       unit: " km/h"
@@ -363,9 +363,9 @@ Rose des vents complète affichant :
 - Sélecteur de période : 1 jour / 7 jours / 15 jours / 30 jours
 
 ### Entités
-- `sensor.vence_wind_bearing` [templates/meteo/M_02] (Template sensor - voir `M_02_meteo_vent_vence_card.yaml`)
-- `sensor.vence_wind_direction_label` [templates/meteo/M_02] (Template sensor - Nord/Sud/Est/Ouest)
-- `sensor.vitesse_du_vent_vence` [templates/meteo/M_02] (Template sensor)
+- `sensor.direction_vent_vence_deg` [templates/meteo/M_02] (Template sensor - voir `M_02_meteo_vent_vence_card.yaml`)
+- `sensor.direction_vent_vence_label` [templates/meteo/M_02] (Template sensor - Nord/Sud/Est/Ouest)
+- `sensor.vitesse_vent_vence_kmh` [templates/meteo/M_02] (Template sensor)
 - `sensor.vence_wind_gust` [Météo France - UI] (Météo France)
 - `weather.vence` [Météo France - UI] (attribute: wind_speed)
 
@@ -568,16 +568,16 @@ Courbe de pluie cumulée sur 24h (mise à jour toutes les minutes).
 | `sensor.maison_lightning_counter` [HACS Blitzortung - UI] | Blitzortung | Compteur d'impacts |
 | `sensor.maison_lightning_distance` [HACS Blitzortung - UI] | Blitzortung | Distance dernier impact (km) |
 | `sensor.maison_lightning_azimuth` [HACS Blitzortung - UI] | Blitzortung | Direction dernier impact (°) |
-| `sensor.dernier_impact_temps_reel` [templates/meteo/M_03] | Template | "Il y a XX minutes" |
+| `sensor.dernier_impact_foudre` [templates/meteo/M_03] | Template | "Il y a XX minutes" |
 | `sensor.blitzortung_lightning_localisation` [sensors/meteo/M_03_...blitzortung.yaml] | REST API | Ville/lieu proche |
 | `sensor.eclair_horaire` [utility_meter/meteo/M_03] | Utility meter | Compteur heure |
 | `sensor.eclair_quotidien` [utility_meter/meteo/M_03] | Utility meter | Compteur jour |
 | `sensor.eclair_hebdomadaire` [utility_meter/meteo/M_03] | Utility meter | Compteur semaine |
 | `sensor.eclair_mensuel` [utility_meter/meteo/M_03] | Utility meter | Compteur mois |
 | `sensor.eclair_annuel` [utility_meter/meteo/M_03] | Utility meter | Compteur année |
-| `sensor.lightning_bearing` [templates/meteo/M_03] | Template | Bearing pour windrose |
-| `sensor.lightning_distance_km` [templates/meteo/M_03] | Template | Distance pour windrose |
-| `sensor.lightning_direction_label` [templates/meteo/M_03] | Template | "Nord", "Sud-Est"... |
+| `sensor.direction_foudre_deg` [templates/meteo/M_03] | Template | Bearing pour windrose |
+| `sensor.distance_foudre_km` [templates/meteo/M_03] | Template | Distance pour windrose |
+| `sensor.direction_foudre_label` [templates/meteo/M_03] | Template | "Nord", "Sud-Est"... |
 
 ### Button-card dernier impact (logique JS)
 
@@ -586,7 +586,7 @@ const distRaw = parseFloat(states['sensor.maison_lightning_distance'].state);
 const localisation = states['sensor.blitzortung_lightning_localisation'];
 const azimuth = parseFloat(states['sensor.maison_lightning_azimuth'].state);
 const impactCount = parseInt(entity.state) || 0;
-const timePhrase = states['sensor.dernier_impact_temps_reel'].state;
+const timePhrase = states['sensor.dernier_impact_foudre'].state;
 
 let message = '';
 
@@ -965,9 +965,9 @@ Graphique annuel affiché sous la Glance Cycles, intégré directement dans le p
 
 | Entité | unique_id | Unité | Rôle |
 |--------|-----------|-------|------|
-| `sensor.vence_wind_bearing` [templates/meteo/M_02] | `vence_wind_bearing` | `°` | Angle du vent (0-360°) |
-| `sensor.vence_wind_direction_label` [templates/meteo/M_02] | `vence_wind_direction_label` | - | Direction cardinale (Nord, Sud-Est…) |
-| `sensor.vitesse_du_vent_vence` [templates/meteo/M_02] | `vence_wind_speed_kmh` | `km/h` | Vitesse convertie depuis `weather.vence` [Météo France - UI] |
+| `sensor.direction_vent_vence_deg` [templates/meteo/M_02] | `vence_wind_bearing` | `°` | Angle du vent (0-360°) |
+| `sensor.direction_vent_vence_label` [templates/meteo/M_02] | `vence_wind_direction_label` | - | Direction cardinale (Nord, Sud-Est…) |
+| `sensor.vitesse_vent_vence_kmh` [templates/meteo/M_02] | `vence_wind_speed_kmh` | `km/h` | Vitesse convertie depuis `weather.vence` [Météo France - UI] |
 
 ---
 
@@ -976,11 +976,11 @@ Graphique annuel affiché sous la Glance Cycles, intégré directement dans le p
 
 | Entité | unique_id | Rôle |
 |--------|-----------|------|
-| `sensor.lightning_direction_label` [templates/meteo/M_03] | `lightning_direction_label` | Direction cardinale de l'éclair (Nord, Nord-Est…) |
-| `sensor.lightning_distance_km` [templates/meteo/M_03] | `lightning_distance_km` | Distance en km (pour windrose) |
-| `sensor.lightning_bearing` [templates/meteo/M_03] | `lightning_bearing` | Azimut de l'éclair en ° (pour windrose) |
-| `sensor.temps_depuis_dernier_impact` [templates/meteo/M_03] | `temps_depuis_le_dernier_impact_de_foudre` | Temps écoulé format h/m/s |
-| `sensor.dernier_impact_temps_reel` [templates/meteo/M_03] | `dernier_impact_temps_reel` | Texte "il y a X minutes/heures/jours" |
+| `sensor.direction_foudre_label` [templates/meteo/M_03] | `direction_foudre_label` | Direction cardinale de l'éclair (Nord, Nord-Est…) |
+| `sensor.distance_foudre_km` [templates/meteo/M_03] | `distance_foudre_km` | Distance en km (pour windrose) |
+| `sensor.direction_foudre_deg` [templates/meteo/M_03] | `direction_foudre_deg` | Azimut de l'éclair en ° (pour windrose) |
+| `sensor.timer_foudre` [templates/meteo/M_03] | `timer_foudre` | Temps écoulé format h/m/s |
+| `sensor.dernier_impact_foudre` [templates/meteo/M_03] | `dernier_impact_foudre` | Texte "il y a X minutes/heures/jours" |
 
 ---
 
@@ -1093,7 +1093,7 @@ duree = 2 × acos(cos_h) × (180/π) / 15   [en heures]
 ### La windrose-card ne s'affiche pas
 1. Vérifier l'installation : HACS > Frontend > `windrose-card`
 2. Vider le cache navigateur (`Ctrl+Shift+R`)
-3. Vérifier que l'entité `sensor.vence_wind_bearing` [templates/meteo/M_02] existe
+3. Vérifier que l'entité `sensor.direction_vent_vence_deg` [templates/meteo/M_02] existe
 
 ### Le baromètre affiche "N/A"
 1. Vérifier l'état de `sensor.vence_pressure` [Météo France - UI] dans Outils de développement > États
