@@ -127,13 +127,7 @@ cards:
                       }
               - type: custom:mushroom-template-card
                 primary: >-
-                  {% set uptime = states('sensor.pve_uptime') | float(0) %} {%
-                  set jours = (uptime / 24) | int(0) %} {% set heures = (uptime
-                  % 24) | int(0) %} {% set minutes = ((uptime % 1) * 60) |
-                  int(0) %} {%- if jours > 0 -%} {{ jours }}d {{
-                  "%02d"|format(heures) }}h {{ "%02d"|format(minutes) }}m {%-
-                  else -%} {{ "%02d"|format(heures) }}h {{
-                  "%02d"|format(minutes) }}m {%- endif -%}
+                  {% set s = states('sensor.pve_uptime') %}{% if s in ['unknown','unavailable','none',''] %}heure de demarrage inconnue{% else %}{% set d = (now().timestamp() - as_timestamp(s)) | int(0) %}{% set jours = (d // 86400) | int(0) %}{% set heures = ((d % 86400) // 3600) | int(0) %}{% set minutes = ((d % 3600) // 60) | int(0) %}{{ jours }}d {{ "%02d"|format(heures) }}h {{ "%02d"|format(minutes) }}m{% endif %}
                 secondary: ""
                 icon: mdi:clock-start
                 icon_color: white
