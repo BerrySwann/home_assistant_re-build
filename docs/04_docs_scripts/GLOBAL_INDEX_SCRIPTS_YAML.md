@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--01-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--03-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 </div>
 
-Fichier GENERE le 2026-11-01 08:52 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-11-03 21:05 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 ## Difference entre les index SH, PY et YAML
 
@@ -26,7 +26,7 @@ Fichier GENERE le 2026-11-01 08:52 par docs/04_docs_scripts/04_docs_scripts_SH/g
 
 - Scripts dans H:\scripts.yaml (prod) : 9
 - Scripts de la prod sans YAML local : 0
-- Scripts dont le contenu local differe de la prod : 0
+- Scripts dont le contenu local differe de la prod : 1 (p1_master_gestion_clim)
 - Scripts sans fiche dans 04_docs_scripts_YAML_MD : 0
 - YAML locaux absents de scripts.yaml : 0
 - Fichiers .py rangés dans 04_docs_scripts_YAML (ce sont des scripts de type SH) : 0
@@ -43,7 +43,7 @@ Fichier GENERE le 2026-11-01 08:52 par docs/04_docs_scripts/04_docs_scripts_SH/g
 | j_1_2_bureau_clim_on_off_intelligent | J 1-2 BUREAU - CLIM ON/OFF INTELLIGENT | `script.j_1_2_bureau_clim_on_off_intelligent` | single | [J_1_2_bureau_clim_on_off_intelligent.yaml](04_docs_scripts_YAML/Climatisation/J_1_2_bureau_clim_on_off_intelligent/J_1_2_bureau_clim_on_off_intelligent.yaml) | identique | - | [J_1_2_bureau_clim_on_off_intelligent.md](04_docs_scripts_YAML_MD/Climatisation/J_1_2_bureau_clim_on_off_intelligent/J_1_2_bureau_clim_on_off_intelligent.md) |
 | j_1_3_chambre_clim_on_off_intelligent | J 1-3 CHAMBRE - CLIM ON/OFF INTELLIGENT | `script.j_1_3_chambre_clim_on_off_intelligent` | single | [J_1_3_chambre_clim_on_off_intelligent.yaml](04_docs_scripts_YAML/Climatisation/J_1_3_chambre_clim_on_off_intelligent/J_1_3_chambre_clim_on_off_intelligent.yaml) | identique | - | [J_1_3_chambre_clim_on_off_intelligent.md](04_docs_scripts_YAML_MD/Climatisation/J_1_3_chambre_clim_on_off_intelligent/J_1_3_chambre_clim_on_off_intelligent.md) |
 | j_2_0_secu_arret_clim_protege | J 2-0 SECU - ARRÊT CLIM PROTÉGÉ | `script.j_2_0_secu_arret_clim_protege` | parallel | [J_2_0_secu_arret_clim_protege.yaml](04_docs_scripts_YAML/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.yaml) | identique | - | [J_2_0_secu_arret_clim_protege.md](04_docs_scripts_YAML_MD/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.md) |
-| p1_master_gestion_clim | P1 - MASTER : Gestion centralisée climatisation | `script.p1_master_gestion_clim` | queued | [P1_Master_gestion_clim.yaml](04_docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml) | identique | - | [P1_Master_gestion_clim.md](04_docs_scripts_YAML_MD/P1_Master_gestion_clim/P1_Master_gestion_clim.md) |
+| p1_master_gestion_clim | P1 - MASTER : Gestion centralisée climatisation | `script.p1_master_gestion_clim` | queued | [P1_Master_gestion_clim.yaml](04_docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml) | DIFFERENT | - | [P1_Master_gestion_clim.md](04_docs_scripts_YAML_MD/P1_Master_gestion_clim/P1_Master_gestion_clim.md) |
 | sdb_soufflant_arreter | SDB - Soufflant : ARRET (resistances, ventilateur 1 min 30, prise) | `script.sdb_soufflant_arreter` | single | [SDB_soufflant_arreter.yaml](04_docs_scripts_YAML/Soufflant_SDB/SDB_soufflant_arreter/SDB_soufflant_arreter.yaml) | identique | - | [SDB_soufflant_arreter.md](04_docs_scripts_YAML_MD/Soufflant_SDB/SDB_soufflant_arreter/SDB_soufflant_arreter.md) |
 | sdb_soufflant_demarrer | SDB - Soufflant : DEMARRAGE (2000 W, verrou 30 s) | `script.sdb_soufflant_demarrer` | single | [SDB_soufflant_demarrer.yaml](04_docs_scripts_YAML/Soufflant_SDB/SDB_soufflant_demarrer/SDB_soufflant_demarrer.yaml) | identique | - | [SDB_soufflant_demarrer.md](04_docs_scripts_YAML_MD/Soufflant_SDB/SDB_soufflant_demarrer/SDB_soufflant_demarrer.md) |
 
