@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--01-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--04-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 </div>
 
-Genere le 2026-11-01 08:53 par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py (MOC_SCRIPTS). Ne pas modifier a la main : le script ecrase les modifications.
+Genere le 2026-11-04 20:01 par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py (MOC_SCRIPTS). Ne pas modifier a la main : le script ecrase les modifications.
 
 Regle d'Eric (2026-10-28) : chaque script de docs/04_docs_scripts a sa fiche .md. Rapprochement par le nom du fichier, sinon par une fiche qui cite le nom du fichier ; fiche proche mais non rattachee = candidate (a valider, jamais comptee OK). Classement (Eric, 2026-10-28) : deux groupes. Home Assistant : les .sh, puis les .py, puis les scripts YAML (les scripts de Home Assistant). Audit interne : les .sh, puis les .py ; ces scripts ne font pas tourner Home Assistant. Un script est range en verification ou audit quand son nom commence par Audit, Check, Verif, Hermes_audit ou trigul_run. La colonne Appele par Home Assistant dit si le nom du fichier apparait dans les YAML de la prod (H:), lecture seule. Voir GLOBAL_INDEX_SCRIPTS_SH.md et GLOBAL_INDEX_SCRIPTS_YAML.md. Les liens sont relatifs a ce fichier.
 
@@ -104,6 +104,8 @@ Outils de controle, pour Eric, Claude et Hermes. Certains sont lances depuis un 
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Check_XX_presents</td><td><a href="04_docs_scripts_SH/Check_XX_presents/Check_XX_presents.py">Check_XX_presents.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Check_XX_presents/Check_XX_presents.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
+<tr><td>Copie_reference</td><td><a href="04_docs_scripts_SH/Copie_reference/Copie_reference.py">Copie_reference.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Copie_reference/Copie_reference.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
+<tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Gen_GLOBAL_INDEX_automations</td><td><a href="04_docs_scripts_SH/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.py">Gen_GLOBAL_INDEX_automations.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Gen_GLOBAL_INDEX_automations/Gen_GLOBAL_INDEX_automations.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Gen_GLOBAL_INDEX_ia</td><td><a href="04_docs_scripts_SH/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.py">Gen_GLOBAL_INDEX_ia.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Gen_GLOBAL_INDEX_ia/Gen_GLOBAL_INDEX_ia.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
@@ -123,6 +125,8 @@ Outils de controle, pour Eric, Claude et Hermes. Certains sont lances depuis un 
 <tr><td>histo_trace</td><td><a href="04_docs_scripts_SH/histo_trace/histo_trace.py">histo_trace.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/histo_trace/histo_trace.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Push_5C</td><td><a href="04_docs_scripts_SH/Push_5C/Push_5C.py">Push_5C.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Push_5C/Push_5C.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
+<tr><td colspan="4">&nbsp;</td></tr>
+<tr><td>Recap_index</td><td><a href="04_docs_scripts_SH/Recap_index/Recap_index.py">Recap_index.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Recap_index/Recap_index.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
 <tr><td>Sync_98_sauvegarde</td><td><a href="04_docs_scripts_SH/Sync_98_sauvegarde/Sync_98_sauvegarde.py">Sync_98_sauvegarde.py</a></td><td>Fiche OK <a href="04_docs_scripts_SH_MD/Sync_98_sauvegarde/Sync_98_sauvegarde.md">fiche</a></td><td>non trouve dans les YAML de la prod</td></tr>
 <tr><td colspan="4">&nbsp;</td></tr>
@@ -178,9 +182,9 @@ Outils de controle, pour Eric, Claude et Hermes. Certains sont lances depuis un 
 
 ## Controle des fiches
 
-- Scripts SH (bash et python) : 37 sources, 37 avec fiche, 0 sans fiche (dont 0 avec candidate a valider), 0 fiches sans source
+- Scripts SH (bash et python) : 39 sources, 39 avec fiche, 0 sans fiche (dont 0 avec candidate a valider), 0 fiches sans source
 - Scripts YAML (Home Assistant) : 9 sources, 9 avec fiche, 0 sans fiche (dont 0 avec candidate a valider), 1 fiches sans source
-- Repartition : 2 scripts bash, 0 scripts python, 9 scripts YAML Home Assistant, 5 verification ou audit en bash, 30 verification ou audit en python
+- Repartition : 2 scripts bash, 0 scripts python, 9 scripts YAML Home Assistant, 5 verification ou audit en bash, 32 verification ou audit en python
 
 - Sans fiche .md mais documentes dans leur en-tete (3 sections ou plus) : 0 ()
 

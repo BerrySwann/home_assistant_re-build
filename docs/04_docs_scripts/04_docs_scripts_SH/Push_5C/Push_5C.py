@@ -4,10 +4,13 @@
 # [2026-11-04] regle des garde-fous d Eric (2026-11-03) : avant chaque ecrasement, l ancienne prod est copiee dans
 #   TEMPO\push_5C_L_vers_P_<horodatage>\ (MD5 verifie contre la prod) ; une PROD INCONNUE est poussee quand meme
 #   (avertissement, plus un refus) ; un fichier SEUL EN PROD n arrete plus le push : il est signale, jamais supprime
-#   sans ordre d Eric. Pas de purge de TEMPO (vidage par Eric seul).
+#   sans ordre d Eric.
+# [2026-11-04] purge validee par Eric (19h57, alignement sur Hermes) : en mode exec, les dossiers
+#   TEMPO\push_5C_L_vers_P_* de plus de 7 jours (date lue dans le nom) partent a la corbeille Windows, jamais supprimes.
 import os, hashlib, glob, re, sys, shutil, datetime
 L=r"C:\Users\Berry Swann\Documents\ReBuild\docs"; P=r"H:\docs"
-T=r"C:\Users\Berry Swann\Documents\ReBuild\TEMPO\push_5C_L_vers_P_"+datetime.datetime.now().strftime("%Y-%m-%d_%Hh%Mm%Ss")
+TEMPO=r"C:\Users\Berry Swann\Documents\ReBuild\TEMPO"; PFX="push_5C_L_vers_P_"; JOURS_PURGE=7
+T=os.path.join(TEMPO,PFX+datetime.datetime.now().strftime("%Y-%m-%d_%Hh%Mm%Ss"))
 MODE=sys.argv[1] if len(sys.argv)>1 else "plan"
 def skip(rel):
     parts=rel.split("\\")
@@ -59,6 +62,16 @@ print("-- NOUVEAU (dossiers):")
 g={}
 for r in new: k="\\".join(r.split("\\")[:2]); g[k]=g.get(k,0)+1
 [print("  %4d %s"%(v,k)) for k,v in sorted(g.items())]
+def a_purger():
+    lim=datetime.date.today()-datetime.timedelta(days=JOURS_PURGE); out=[]
+    for n in sorted(os.listdir(TEMPO)) if os.path.isdir(TEMPO) else []:
+        if not n.startswith(PFX) or not os.path.isdir(os.path.join(TEMPO,n)): continue
+        try: d=datetime.datetime.strptime(n[len(PFX):len(PFX)+10],"%Y-%m-%d").date()
+        except ValueError: continue
+        if d<lim: out.append(n)
+    return out
+vieux=a_purger()
+print("-- TEMPO copies de securite de plus de %d jours (corbeille Windows en mode exec): %d"%(JOURS_PURGE,len(vieux))); [print("  ",n) for n in vieux]
 if MODE!="exec": sys.exit(0)
 # 1) copie de securite de l ancienne prod (DIFF connus et inconnus), MD5 verifie contre la prod d origine
 sauve=[];ko_copie=[]
@@ -77,4 +90,13 @@ print("pousses:",n,"MD5 differents apres push:",len(bad)); [print("  KO",r) for 
 print("PROD INCONNUE poussee (avertissement, ancienne prod dans TEMPO):",len([r for r in inconnu if r in sauve])); [print("  ",r) for r in inconnu if r in sauve]
 print("non pousses (copie de securite non conforme):",len(ko_copie)); [print("  KO_COPIE",r) for r in ko_copie]
 print("SEUL_EN_PROD non supprimes (a decider avec Eric):",len(only))
+# 3) purge des copies de securite de plus de 7 jours : corbeille Windows, jamais de suppression definitive
+import subprocess as _sp
+purge_ok=0; purge_ko=[]
+for n in vieux:
+    cible=os.path.join(TEMPO,n)
+    r=_sp.run(["powershell","-NoProfile","-Command","Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteDirectory($args[0],'OnlyErrorDialogs','SendToRecycleBin')",cible],capture_output=True,text=True)
+    if r.returncode==0 and not os.path.exists(cible): purge_ok+=1
+    else: purge_ko.append(n)
+print("purge TEMPO (corbeille Windows):",purge_ok,"| echecs:",len(purge_ko)); [print("  KO_PURGE",n) for n in purge_ko]
 sys.exit(1 if (bad or ko_copie) else 0)

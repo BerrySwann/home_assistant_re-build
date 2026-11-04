@@ -62,7 +62,10 @@ Ce skill fait le point sur une session de travail et remet tout en ordre : il ec
 - 2026-10-31 : un `.bak_AAAA_MM_JJ` garde la date du jour de sa derniere modification, pas celle du menage (precision d Eric, ecrite dans `histo_ref_menage`).
 - 2026-10-31 : l'etape 6 compte 14 points ; le point 14 (PROD FONCTIONNELLE, trace controles_6H, script Check_prod_fonctionnelle.py) controle les 98 fichiers vitaux de la prod (palier 1) et bloque le push 5C et l'extinction en cas d'ecart. Le point 13 reste le rattrapage du push. Skill du compte aligne le 2026-11-01 (MD5 c3237de2).
 
+- **2026-11-04** : alignement sur le skill histo d'Hermes, sur ordre d'Eric. Regles reprises : palier 1 de la prod fonctionnelle qui bloque seulement l'extinction et plus le push 5C (2026-11-03), colonne GitHub notee mais non jugee, prod differente du local diagnostiquee avant reparation, point 15 (regle 6 : reparer les ecarts nouveaux de la session, 2026-11-01), menage sans plafond de volume (2026-11-01), regle des garde-fous et copies de reference avant le push (2026-11-02 et 03), recapitulatif des entites apres les generateurs (2026-11-03), purge apres 7 jours des copies de securite du push dans TEMPO (validee par Eric le 2026-11-04). Nouveaux scripts : `Recap_index.py` et `Copie_reference.py` ; `Push_5C.py` adapte.
+
 ## Quand modifier cette fiche
 
 Chaque fois que `histo.md` ou un de ses 3 fichiers de reference change dans `05_docs_skills_PURE/skill_histo/`, relire cette fiche et la mettre a jour si une etape, une regle ou une decision a change. Le skill installe dans `.claude/skills/histo/` doit rester identique a la copie `histo.md`.
 <!-- [2026-11-01] Fiche alignee sur le skill enregistre du compte (second lot) -->
+<!-- annotations_log: [2026-11-04] alignement des skills histo sur Hermes, ordre d'Eric -->

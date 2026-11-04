@@ -54,7 +54,10 @@ Fin de journee : le skill lance tout `/histo`, verifie que tout est ecrit et pou
 - 2026-10-31 : le skill est traduit en anglais et range dans `05_docs_skills_PURE` ; cette fiche est son explication en francais.
 - 2026-10-31 : regle Prod fonctionnelle (point 14 de l'etape 6 de histo, trace controles_6H) : un ecart au palier 1 bloque le push 5C et l'extinction, a dire en tete du rapport. Skill du compte aligne le 2026-11-01 (MD5 a064c0da).
 
+- **2026-11-04** : alignement sur Hermes, sur ordre d'Eric : un ecart au palier 1 de la prod fonctionnelle bloque seulement l'extinction, plus le push 5C (regle d'Eric du 2026-11-03) ; une `PROD INCONNUE` est poussee avec un avertissement, l'ancienne prod etant copiee dans TEMPO ; plus de plafond de volume au menage. L'arret du PC reste le `shutdown` lance par Claude (choix d'Eric du 2026-11-04 : Hermes passe par un fichier de demande parce que son moteur lui interdit `shutdown`).
+
 ## Quand modifier cette fiche
 
 Chaque fois que `histo_final.md` change dans `05_docs_skills_PURE/skill_histo_final/`, relire cette fiche et la mettre a jour si une etape, une regle ou une decision a change. Le skill installe dans `.claude/skills/histo-final/` doit rester identique a la copie `histo_final.md`.
 <!-- [2026-11-01] Fiche alignee sur le skill enregistre du compte (second lot) -->
+<!-- annotations_log: [2026-11-04] alignement des skills histo sur Hermes, ordre d'Eric -->

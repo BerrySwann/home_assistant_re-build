@@ -23,7 +23,7 @@ Avoid modifications without a trace or an author (observed on 2026-10-10: CLAUDE
 
 After every SUCCESSFUL write in the project scope: creation, modification, rename, move, deletion (recycle bin), copy to H: or D:, push.
 
-Scope: ReBuild (docs, scripts, historique, Github, TODO, MOC, Claude md SAVE, .claude), H: (docs, .scripts, config YAML), copies D:\Cerveau-Obsidian and D:\hermes.
+Scope: ReBuild (docs, scripts, historique, Github, TODO, MOC, Claude md SAVE, .claude), H: (docs, .scripts, config YAML), copies D:\Cerveau-Obsidian, and the Hermes profile `C:\Users\Berry Swann\AppData\Local\hermes` (moved back from D:\hermes on 2026-11-01; `D:\hermes` no longer exists).
 
 Do not log: reads, temporary files in %TEMP%, the journal itself.
 
@@ -82,6 +82,8 @@ File format: CRLF, UTF-8 without BOM. No copy to H: (decision of 2026-10-22).
 ## End of session and /histo
 
 The two authors' journals of the day are the source of step 1 of /histo: each file quoted in the logbook must find its line. A gap is reported in the logbook ("modifications non journalisees : ...").
+
+End-of-session rule (Eric, 2026-11-01): a session that modified project files ends by PROPOSING /histo (Eric stays) or /histo-final (he leaves, or the PC must go off). One proposal, made at the END of the work, never during a running /histo, and never run without his answer.
 
 ## Limits (know them)
 

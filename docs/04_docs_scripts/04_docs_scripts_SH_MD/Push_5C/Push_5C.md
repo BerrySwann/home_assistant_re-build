@@ -33,7 +33,7 @@ Regle des garde-fous d'Eric du 2026-11-03 : un garde-fou protege une donnee, il 
 - Avant chaque ecrasement, l'ancienne version de prod est copiee dans `TEMPO\push_5C_L_vers_P_<AAAA-MM-JJ_HHhMMmSSs>\` (meme chemin relatif), MD5 verifie contre la prod d'origine. Copie non conforme : le fichier n'est PAS ecrase et il est signale.
 - Prod differente qui ne correspond a aucun `.bak` local connu (prod modifiee hors circuit) : PROD INCONNUE, poussee quand meme avec un avertissement (avant le 2026-11-04 : non poussee). La copie TEMPO garde l'ancienne prod.
 - Fichiers seuls en prod (SEUL_EN_PROD) : signales, jamais supprimes sans ordre d'Eric, et ils n'arretent plus le push (avant le 2026-11-04 : arret du mode `exec`, code 3).
-- Pas de purge automatique de TEMPO : son vidage est decide par Eric seul.
+- Purge (validee par Eric le 2026-11-04 a 19h57, alignement sur Hermes) : en mode `exec`, les dossiers `TEMPO\push_5C_L_vers_P_*` de plus de 7 jours (date lue dans le nom) partent a la corbeille Windows, jamais supprimes definitivement. Le mode `plan` les liste. Le reste de TEMPO reste vide par Eric seul.
 - Code de retour 1 si un MD5 differe apres push ou si une copie de securite n'est pas conforme.
 
 ## Copie 98 automatique
@@ -47,3 +47,4 @@ L'etape 5C du skill `histo` (decide par Eric le 2026-10-30).
 - 2026-10-31 : rangé dans le projet. Differences avec la version temporaire : date du dossier TEMPO automatique, liste des suppressions attendues remplacee par un arret si SEUL_EN_PROD non vide.
 
 <!-- annotations_log: [2026-11-04] garde-fous alignes sur la regle d'Eric du 2026-11-03 (script et fiche) -->
+<!-- annotations_log: [2026-11-04] purge TEMPO push_5C de plus de 7 jours vers la corbeille, validee par Eric -->

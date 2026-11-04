@@ -52,8 +52,11 @@ Chaque agent (Claude, Hermes) note une ligne par fichier modifie, au moment de l
 - Corrige le 2026-10-31 dans la copie anglaise : plus de copie du journal vers `H:`, lecture et ecriture en local (decision du 2026-10-22).
 - Confirme le 2026-11-01 : Hermes ecrit son journal dans le meme dossier local (`MODIFS_2026-11-01_hermes.md` y est).
 
+- **2026-11-04** : regle de fin de session ajoutee (Eric, 2026-11-01) : une session qui a modifie des fichiers se termine en PROPOSANT /histo ou /histo-final, a la fin du travail, jamais pendant un histo. Perimetre : le profil d'Hermes est maintenant `C:\Users\Berry Swann\AppData\Local\hermes` (`D:\hermes` n'existe plus depuis le 2026-11-01).
+
 ## Quand modifier cette fiche
 
 Chaque fois que la copie du skill change dans `05_docs_skills_PURE`, relire cette fiche et la mettre a jour si une etape, une regle ou une decision a change.
 <!-- annotations_log: -->
 <!-- [2026-11-01] Fiche alignee sur le skill enregistre : troisieme trace annotations_log, emplacement du journal d'Hermes confirme -->
+<!-- annotations_log: [2026-11-04] alignement des skills histo sur Hermes, ordre d'Eric -->
