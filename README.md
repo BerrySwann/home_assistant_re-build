@@ -92,7 +92,7 @@ Developpee en collaboration avec **Claude (Anthropic)** pour garantir :
 | `atmo_france` | Atmo France | Qualite air exterieur (IQA) |
 | `vigieau` | VigiEau | Restrictions d'eau en vigueur (L6C3) |
 | `soleil` | Soleil (Sun2) | Lever/coucher + azimut/elevation solaire precis |
-| `tarifs_edf` | Tarifs EDF | Index HP/HC, couts Tempo/Base (P0) |
+| `tarifelecinfo` | TarifElecInfo | Tarifs HP/HC du contrat, prochain changement et jours restants (P0). Remplace `tarif_edf`, retiree le 2026-11-04 avec son dossier custom_components. Les tarifs Tempo viennent de MyElectricalData (MQTT, `sensor.edf_tempo_price_*`), pas de cette integration |
 
 ### Officielles HA Core
 

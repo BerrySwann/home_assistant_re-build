@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--04-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -27,7 +27,7 @@ Formats de ligne :
 - `JJ/MM | Total: X.X kWh | HP: X.X | HC: X.X | Cout: X.XX`
 - total à 0 : `JJ/MM | Total: 0.0 kWh | HP: 0.0 | HC: 0.0 | Cout: 0.0 (MANQUANT)`
 
-Le coût = HP x `sensor.tarif_heures_pleines_ttc` + HC x `sensor.tarif_heures_creuses_ttc` (tarifs EDF HPHC 6kVA TTC lus en direct, rien en dur).
+Le coût = HP x `sensor.tarifelecinfo_tarif_heures_pleines` + HC x `sensor.tarifelecinfo_tarif_heures_creuses` (tarifs EDF HPHC 6kVA TTC lus en direct, rien en dur).
 
 ## Déclencheurs
 
@@ -38,7 +38,7 @@ Le coût = HP x `sensor.tarif_heures_pleines_ttc` + HC x `sensor.tarif_heures_cr
 - `sensor.genelec_appart_quotidien_um` (attr `last_period`) : total
 - `sensor.genelec_appart_hphc_quotidien_um_hp` (attr `last_period`) : HP
 - `sensor.genelec_appart_hphc_quotidien_um_hc` (attr `last_period`) : HC
-- `sensor.tarif_heures_pleines_ttc`, `sensor.tarif_heures_creuses_ttc` : tarifs
+- `sensor.tarifelecinfo_tarif_heures_pleines`, `sensor.tarifelecinfo_tarif_heures_creuses` : tarifs
 - `notify.send_message` -> `notify.nodon_complet_histo` -> `/config/notifs/nodon_complet_histo.txt`
 
 ## Fichier source
@@ -58,3 +58,34 @@ Intégration File créée dans l'UI HA : Paramètres > Appareils > Ajouter inté
 
 ---
 *Doc créée le 2026-10-23*
+
+---
+
+## Changement d'integration : tarif_edf -> TarifElecInfo (2026-11-04)
+
+**Pourquoi.** L'integration `tarif_edf` venait d'un depot HACS supprime (404 sur GitHub, plus aucune
+mise a jour possible), reinstallee a la main en 2.0.1. L'integration personnelle `tarifelecinfo`,
+installee le 2026-11-01, la remplace : memes prix, plus le prochain changement de tarif et le nombre
+de jours restants, et elle est publiable au lieu de dependre d'un depot mort.
+
+**Correspondance des capteurs**, valeurs relevees cote a cote avant la bascule :
+
+| Avant (`tarif_edf`) | Apres (`tarifelecinfo`) |
+|:---|:---|
+| `sensor.tarif_heures_pleines_ttc` | `sensor.tarifelecinfo_tarif_heures_pleines` |
+| `sensor.tarif_heures_creuses_ttc` | `sensor.tarifelecinfo_tarif_heures_creuses` |
+| `sensor.puissance_souscrite_hphc_6kva` | `sensor.tarifelecinfo_puissance_souscrite` |
+
+**Ce qui a change dans ce fichier** : toutes les references a ces trois capteurs ont ete remplacees.
+La formule, les periodes et les arrondis ne changent pas : seul le nom de la source bouge.
+
+**Preuve que la bascule est neutre** : le calcul de cout rejoue par l'API `/api/template` rend le
+MEME resultat avec les anciens capteurs et avec les nouveaux. Aucun prix n'est ecrit en dur ici : les
+montants se lisent sur les capteurs, qui changent au 1er fevrier et au 1er aout. Les douze capteurs de cout P0
+(quotidien, hebdomadaire, mensuel, annuel, en HP et en HC) sont restes vivants apres la migration.
+
+**Ce qui a ete retire le 2026-11-04** : l'entree de configuration `tarif_edf` et le dossier
+`H:/custom_components/tarif_edf`. Les trois anciens capteurs ont disparu des etats.
+
+**Ce qui n'est PAS touche** : les capteurs TEMPO (`sensor.rte_tempo_today`,
+`sensor.edf_tempo_days_blue`) sont en `platform: mqtt`, ils n'ont jamais dependu de `tarif_edf`.

@@ -2,7 +2,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--04-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -32,7 +32,7 @@
 | `blitzortung` | Blitzortung | Détection foudre temps réel |
 | `atmofrance` | Atmo France | Qualité air extérieur (IQA) |
 | `vigieau` | VigiEau | Restrictions d'eau en vigueur (L6C3) |
-| `tarif_edf` | Tarifs EDF | Index HP/HC, couts Tempo/Base (P0) |
+| `tarifelecinfo` | TarifElecInfo | Prix du contrat HP/HC, abonnement, prochain changement et jours restants, deux alertes avant echeance (P0). Integration personnelle, remplace `tarif_edf` retiree le 2026-11-04 |
 | `hacs` | HACS | Gestionnaire de composants et de cartes personnalisés (v2.0.5) |
 | `ha_mcp_tools` | HA-MCP Custom Component | Outils MCP côté HA : serveur + outils fichiers/YAML (2 entrées, v2.2.1) |
 | `ha_washdata` | WashData | Suivi des cycles Lave-Linge et Lave-Vaisselle (2 entrées, v0.5.8) |

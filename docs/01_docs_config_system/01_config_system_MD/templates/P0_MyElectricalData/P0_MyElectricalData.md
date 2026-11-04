@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--28-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--04-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -16,9 +16,9 @@
 > **Fichier :** `P0_MyElectricalData.yaml`
 > **Emplacement prod :** `/config/templates/P0_energie_total_diag/P0_Linky/P0_MyElectricalData.yaml` (et miroir `/config/docs/01_docs_config_system/01_config_system_SH_PY_YAML/...`)
 > **Emplacement local :** `docs/01_docs_config_system/01_config_system_SH_PY_YAML/templates/P0_energie_total_diag/P0_Linky/P0_MyElectricalData.yaml`
-> **Empreinte relevée le 2026-10-23 :** MD5 `60ce6de6`, 96575 octets, copie locale identique à la prod après le push du 2026-10-23
+> **Empreinte relevée le 2026-11-04 :** MD5 `df450d1a`, 98662 octets, copie locale identique à la prod
 > **Inclus par :** `configuration.yaml` (`template: !include_dir_merge_list templates/`)
-> **Dernière modification :** 2026-10-23 (repli Nodon J1 à J7 + coût de J0 aux tarifs HPHC)
+> **Dernière modification :** 2026-11-04 (changement d'intégration de tarifs : `tarif_edf` -> `tarifelecinfo`)
 
 ---
 
@@ -26,7 +26,7 @@
 
 Huit capteurs template `linky_jour_0` à `linky_jour_7` : consommation journalière sur 8 jours, avec les attributs `jour`, `hp`, `hc`, `total`, `cout`. Ils alimentent le tableau de l'onglet hebdomadaire de L2C1 (Énergie Générale).
 
-- **J0 (Aujourd'hui)** : `sensor.genelec_appart_quotidien_um` (total) et `sensor.genelec_appart_hphc_quotidien_um_hp` / `_hc` (split). Coût = HP x `sensor.tarif_heures_pleines_ttc` + HC x `sensor.tarif_heures_creuses_ttc` (tarifs EDF HPHC 6kVA TTC lus en direct, plus de prix en dur).
+- **J0 (Aujourd'hui)** : `sensor.genelec_appart_quotidien_um` (total) et `sensor.genelec_appart_hphc_quotidien_um_hp` / `_hc` (split). Coût = HP x `sensor.tarifelecinfo_tarif_heures_pleines` + HC x `sensor.tarifelecinfo_tarif_heures_creuses` (tarifs EDF HPHC 6kVA TTC lus en direct, plus de prix en dur).
 - **J1 à J7** : attributs `day_N_HP`, `day_N_HC`, `dailyweek`, `dailyweek_cost` de `sensor.linky_25481620821301_consumption` (MyElectricalData / Enedis).
 
 ## Repli sur Nodon quand le Linky vaut 0 (depuis le 2026-10-23)
@@ -57,3 +57,34 @@ Les automations Linky A (id `1788118118362`), C (id `1788118327851`) et D (id `1
 - La valeur Nodon peut s'écarter du Linky (exemple relevé le 2026-10-23 : 20/10, Linky 5.7 kWh contre Nodon 3.8 kWh). Une valeur à `*` est une estimation.
 - Les noms de jour viennent de `dailyweek` (index 0 pour J1 ... index 6 pour J7). Les corrections forcées des index de J6 et J7 sont conservées dans le fichier.
 - Aval : vignette L2C1 04 Énergie Générale (tableau J0 à J7).
+
+---
+
+## Changement d'integration : tarif_edf -> TarifElecInfo (2026-11-04)
+
+**Pourquoi.** L'integration `tarif_edf` venait d'un depot HACS supprime (404 sur GitHub, plus aucune
+mise a jour possible), reinstallee a la main en 2.0.1. L'integration personnelle `tarifelecinfo`,
+installee le 2026-11-01, la remplace : memes prix, plus le prochain changement de tarif et le nombre
+de jours restants, et elle est publiable au lieu de dependre d'un depot mort.
+
+**Correspondance des capteurs**, valeurs relevees cote a cote avant la bascule :
+
+| Avant (`tarif_edf`) | Apres (`tarifelecinfo`) |
+|:---|:---|
+| `sensor.tarif_heures_pleines_ttc` | `sensor.tarifelecinfo_tarif_heures_pleines` |
+| `sensor.tarif_heures_creuses_ttc` | `sensor.tarifelecinfo_tarif_heures_creuses` |
+| `sensor.puissance_souscrite_hphc_6kva` | `sensor.tarifelecinfo_puissance_souscrite` |
+
+**Ce qui a change dans ce fichier** : toutes les references a ces trois capteurs ont ete remplacees.
+La formule, les periodes et les arrondis ne changent pas : seul le nom de la source bouge.
+
+**Preuve que la bascule est neutre** : le calcul de cout rejoue par l'API `/api/template` rend le
+MEME resultat avec les anciens capteurs et avec les nouveaux. Aucun prix n'est ecrit en dur ici : les
+montants se lisent sur les capteurs, qui changent au 1er fevrier et au 1er aout. Les douze capteurs de cout P0
+(quotidien, hebdomadaire, mensuel, annuel, en HP et en HC) sont restes vivants apres la migration.
+
+**Ce qui a ete retire le 2026-11-04** : l'entree de configuration `tarif_edf` et le dossier
+`H:/custom_components/tarif_edf`. Les trois anciens capteurs ont disparu des etats.
+
+**Ce qui n'est PAS touche** : les capteurs TEMPO (`sensor.rte_tempo_today`,
+`sensor.edf_tempo_days_blue`) sont en `platform: mqtt`, ils n'ont jamais dependu de `tarif_edf`.

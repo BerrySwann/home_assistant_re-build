@@ -2,6 +2,18 @@
 # │ PÔLE 0. TEMPLATES : LINKY — DONNÉES J0 À J7 (MYELECTRICALDATA)           │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
+# [2026-11-04] CHANGEMENT D'INTEGRATION : tarif_edf -> TarifElecInfo.
+# L'integration tarif_edf venait d'un depot HACS supprime (404), sans mise a jour possible.
+# Les trois capteurs ont ete remplaces par ceux de l'integration personnelle tarifelecinfo,
+# a valeurs identiques, verifie avant bascule : le calcul de cout rend le meme resultat avec les deux jeux.
+# Aucun prix n'est ecrit en dur ici : les montants se lisent sur les capteurs, ils changent au 1er fevrier et au 1er aout.
+#   sensor.tarif_heures_pleines_ttc        -> sensor.tarifelecinfo_tarif_heures_pleines
+#   sensor.tarif_heures_creuses_ttc        -> sensor.tarifelecinfo_tarif_heures_creuses
+#   sensor.puissance_souscrite_hphc_6kva   -> sensor.tarifelecinfo_puissance_souscrite
+# La formule, les periodes et les arrondis ne changent pas. L'integration tarif_edf a ete retiree
+# le meme jour (entree de configuration et dossier custom_components supprimes).
+# Les capteurs TEMPO ne sont pas concernes : ils sont en platform mqtt.
+#
 # ## 📝 DESCRIPTION :
 # Huit capteurs templates fournissant les données de consommation journalière
 # Linky sur une fenêtre glissante de 8 jours (J0 à J7). J0 = aujourd'hui
@@ -54,8 +66,8 @@
         cout: >-
           {% set hp = states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) %}
           {% set hc = states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) %}
-          {% set hp_trf = states('sensor.tarif_heures_pleines_ttc') | float(0) %}
-          {% set hc_trf = states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+          {% set hp_trf = states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) %}
+          {% set hc_trf = states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
           {{ ((hp * hp_trf) + (hc * hc_trf)) | round(2) }}                           {# "[modif 2026-10-23] : HP x tarif_heures_pleines_ttc + HC x tarif_heures_creuses_ttc (EDF HPHC 6kVA TTC, lus en direct)" #}
 
     # ┌───────────────────────────────────┐
@@ -83,7 +95,7 @@
             {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
             {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
             {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-            {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
           {% else %}
             {% for i in range(7) %}
               {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -117,7 +129,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -160,7 +172,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -190,7 +202,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -220,7 +232,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -250,7 +262,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -290,7 +302,7 @@
             {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
             {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
             {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-            {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
           {% else %}
             {% for i in range(7) %}
               {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -324,7 +336,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -367,7 +379,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -397,7 +409,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -427,7 +439,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -457,7 +469,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -497,7 +509,7 @@
             {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
             {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
             {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-            {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
           {% else %}
             {% for i in range(7) %}
               {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -531,7 +543,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -574,7 +586,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -604,7 +616,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -634,7 +646,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -664,7 +676,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -704,7 +716,7 @@
             {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
             {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
             {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-            {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
           {% else %}
             {% for i in range(7) %}
               {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -738,7 +750,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -781,7 +793,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -811,7 +823,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -841,7 +853,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -871,7 +883,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -911,7 +923,7 @@
             {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
             {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
             {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-            {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
           {% else %}
             {% for i in range(7) %}
               {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -945,7 +957,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -988,7 +1000,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1018,7 +1030,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1048,7 +1060,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1078,7 +1090,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1118,7 +1130,7 @@
             {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
             {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
             {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-            {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
           {% else %}
             {% for i in range(7) %}
               {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1153,7 +1165,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1196,7 +1208,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1226,7 +1238,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1256,7 +1268,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1286,7 +1298,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1326,7 +1338,7 @@
             {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
             {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
             {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-            {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+            {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
           {% else %}
             {% for i in range(7) %}
               {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1361,7 +1373,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1404,7 +1416,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1434,7 +1446,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1464,7 +1476,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1494,7 +1506,7 @@
               {% set ns.t = state_attr('sensor.genelec_appart_quotidien_um', 'last_period') | float(0) %}
               {% set ns.hp = state_attr('sensor.genelec_appart_hphc_quotidien_um_hp', 'last_period') | float(0) %}
               {% set ns.hc = state_attr('sensor.genelec_appart_hphc_quotidien_um_hc', 'last_period') | float(0) %}
-              {% set ns.c = ns.hp * states('sensor.tarif_heures_pleines_ttc') | float(0) + ns.hc * states('sensor.tarif_heures_creuses_ttc') | float(0) %}
+              {% set ns.c = ns.hp * states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0) + ns.hc * states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0) %}
             {% else %}
               {% for i in range(7) %}
                 {% if state_attr('sensor.histo_energie_nodon', 'j' ~ i ~ '_date') == key %}
@@ -1521,3 +1533,5 @@
 # - [L43]  modif : cout J0 → UM quotidien × tarif HP (approché, surestimé ~10-15%)
 # - [J1-J7] inchangés (source MEData / Linky — HP/HC toujours disponibles via Enedis)
 # - [2026-10-23] modif : J1-J7 repli Nodon si Linky = 0, * sur le jour ; J0 cout via sensor.tarif_heures_pleines_ttc / creuses_ttc
+# - [2026-11-04] Integration : tarif_edf RETIREE, remplacee par TarifElecInfo. Les capteurs tarif_heures_*_ttc
+#   sont devenus sensor.tarifelecinfo_tarif_heures_pleines / _creuses, a valeur identique (meme resultat verifie).

@@ -12,6 +12,7 @@
 
 </div>
 
+*Derniere mise a jour : 2026-11-04 20h50 (changement d integration : tarif_edf remplacee par TarifElecInfo. Les trois capteurs tarif_heures_pleines_ttc, tarif_heures_creuses_ttc et puissance_souscrite_hphc_6kva sont devenus tarifelecinfo_tarif_heures_pleines, _creuses et _puissance_souscrite, a valeurs identiques (verifie avant bascule), 141 references en local et 127 en prod. L integration tarif_edf est retiree : entree de configuration supprimee et dossier custom_components supprime. Les capteurs TEMPO sont en platform mqtt et ne sont pas concernes)*
 *Derniere mise a jour : 2026-11-03 21h05 (renommage demande par Eric : sensor.temperature_corrige_mamour devient temperature_corrige_salon et sensor.temperature_corrige_eric devient temperature_corrige_bureau ; les fiches de la clim, du dashboard et cette matrice suivent le nouveau nom. Verification faite au passage : le plafond d ete du capteur est 26 pour le salon, et non 27 comme l ecrivait cette matrice avant correction)*
 *Derniere mise a jour : 2026-11-03 18h37 (controle qualite du 2026-11-01 : tableau des fichiers L0C0_PAGE_Home corrige - carte 05_Impacte de foudre ajoutee, doublon 08_Congelateur supprime ; la carte 11_Carte presence y etait deja. Les 8 YAML modifies dans la soiree (Page_Home, Card_foudre_home, L1C1/L2C2/L2C3/L6C2/L6C3 pages, L4C1 RASPI) ont ete repointes sur /dashboard-tablette/0 ou sur la bonne entite foudre.)*
 *Derniere mise a jour : 2026-10-29 22h10 (R125.1 a R125.3 : fiches de .scripts rangees un dossier par fichier, commentaires obsoletes des audits corriges, fiche Audit_md5_yaml corrigee)*
@@ -3738,7 +3739,7 @@ B - [P0] Histo Nodon quotidien -> nodon_histo.txt (colonne Nodon de la carte ; a
 | | Détail |
 |:--|:--|
 | Trigger | 23:59:10 |
-| Entités lues | `sensor.genelec_appart_quotidien_um` (Total), `sensor.genelec_appart_hphc_quotidien_um_hp`, `sensor.genelec_appart_hphc_quotidien_um_hc` (attribut last_period), `sensor.tarif_heures_pleines_ttc`, `sensor.tarif_heures_creuses_ttc` |
+| Entités lues | `sensor.genelec_appart_quotidien_um` (Total), `sensor.genelec_appart_hphc_quotidien_um_hp`, `sensor.genelec_appart_hphc_quotidien_um_hc` (attribut last_period), `sensor.tarifelecinfo_tarif_heures_pleines`, `sensor.tarifelecinfo_tarif_heures_creuses` |
 | Action | `notify.send_message` vers `notify.nodon_complet_histo` (intégration File -> `/config/notifs/nodon_complet_histo.txt`) |
 
 #### C - Chaîne de dépendances

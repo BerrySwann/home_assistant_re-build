@@ -30,7 +30,7 @@ Format d'une ligne du fichier : `22/10 | Total: 5.0 kWh | HP: 3.7 | HC: 1.3 | Co
 
 ## Automation rattachée
 
-- **E - [P0] Histo Nodon complet quotidien** (id `1792780906393`, 23:59:10) écrit le fichier via `notify.nodon_complet_histo` (intégration File, chemin `/config/notifs/nodon_complet_histo.txt`, horodatage désactivé). Elle y consigne chaque nuit le total, le HP, le HC et le coût de la veille (coût aux tarifs `sensor.tarif_heures_pleines_ttc` / `sensor.tarif_heures_creuses_ttc`).
+- **E - [P0] Histo Nodon complet quotidien** (id `1792780906393`, 23:59:10) écrit le fichier via `notify.nodon_complet_histo` (intégration File, chemin `/config/notifs/nodon_complet_histo.txt`, horodatage désactivé). Elle y consigne chaque nuit le total, le HP, le HC et le coût de la veille (coût aux tarifs `sensor.tarifelecinfo_tarif_heures_pleines` / `sensor.tarifelecinfo_tarif_heures_creuses`).
 
 ## Utilisé par
 
@@ -42,3 +42,34 @@ Format d'une ligne du fichier : `22/10 | Total: 5.0 kWh | HP: 3.7 | HC: 1.3 | Co
 - `scan_interval` 900 : une ligne écrite à 23:59:10 est visible dans le capteur au plus tard 15 minutes plus tard. Mise à jour immédiate possible avec `homeassistant.update_entity`.
 - Aucun guillemet double dans le script Python : la commande est encadrée par des guillemets doubles dans le YAML.
 - Prérequis côté HA : l'intégration File `nodon_complet_histo` (créée dans l'UI), sinon l'automation E ne peut pas écrire.
+
+---
+
+## Changement d'integration : tarif_edf -> TarifElecInfo (2026-11-04)
+
+**Pourquoi.** L'integration `tarif_edf` venait d'un depot HACS supprime (404 sur GitHub, plus aucune
+mise a jour possible), reinstallee a la main en 2.0.1. L'integration personnelle `tarifelecinfo`,
+installee le 2026-11-01, la remplace : memes prix, plus le prochain changement de tarif et le nombre
+de jours restants, et elle est publiable au lieu de dependre d'un depot mort.
+
+**Correspondance des capteurs**, valeurs relevees cote a cote avant la bascule :
+
+| Avant (`tarif_edf`) | Apres (`tarifelecinfo`) |
+|:---|:---|
+| `sensor.tarif_heures_pleines_ttc` | `sensor.tarifelecinfo_tarif_heures_pleines` |
+| `sensor.tarif_heures_creuses_ttc` | `sensor.tarifelecinfo_tarif_heures_creuses` |
+| `sensor.puissance_souscrite_hphc_6kva` | `sensor.tarifelecinfo_puissance_souscrite` |
+
+**Ce qui a change dans ce fichier** : toutes les references a ces trois capteurs ont ete remplacees.
+La formule, les periodes et les arrondis ne changent pas : seul le nom de la source bouge.
+
+**Preuve que la bascule est neutre** : le calcul de cout rejoue par l'API `/api/template` rend le
+MEME resultat avec les anciens capteurs et avec les nouveaux. Aucun prix n'est ecrit en dur ici : les
+montants se lisent sur les capteurs, qui changent au 1er fevrier et au 1er aout. Les douze capteurs de cout P0
+(quotidien, hebdomadaire, mensuel, annuel, en HP et en HC) sont restes vivants apres la migration.
+
+**Ce qui a ete retire le 2026-11-04** : l'entree de configuration `tarif_edf` et le dossier
+`H:/custom_components/tarif_edf`. Les trois anciens capteurs ont disparu des etats.
+
+**Ce qui n'est PAS touche** : les capteurs TEMPO (`sensor.rte_tempo_today`,
+`sensor.edf_tempo_days_blue`) sont en `platform: mqtt`, ils n'ont jamais dependu de `tarif_edf`.

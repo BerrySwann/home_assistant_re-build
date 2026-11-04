@@ -2,19 +2,31 @@
 # │ PÔLE 0. TEMPLATE : ÉNERGIE APPART — CALCUL COÛTS HP/HC + TOTAL (AMHQ)    │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
+# [2026-11-04] CHANGEMENT D'INTEGRATION : tarif_edf -> TarifElecInfo.
+# L'integration tarif_edf venait d'un depot HACS supprime (404), sans mise a jour possible.
+# Les trois capteurs ont ete remplaces par ceux de l'integration personnelle tarifelecinfo,
+# a valeurs identiques, verifie avant bascule : le calcul de cout rend le meme resultat avec les deux jeux.
+# Aucun prix n'est ecrit en dur ici : les montants se lisent sur les capteurs, ils changent au 1er fevrier et au 1er aout.
+#   sensor.tarif_heures_pleines_ttc        -> sensor.tarifelecinfo_tarif_heures_pleines
+#   sensor.tarif_heures_creuses_ttc        -> sensor.tarifelecinfo_tarif_heures_creuses
+#   sensor.puissance_souscrite_hphc_6kva   -> sensor.tarifelecinfo_puissance_souscrite
+# La formule, les periodes et les arrondis ne changent pas. L'integration tarif_edf a ete retiree
+# le meme jour (entree de configuration et dossier custom_components supprimes).
+# Les capteurs TEMPO ne sont pas concernes : ils sont en platform mqtt.
+#
 # ## 📝 DESCRIPTION :
 # Sensors template calculant les coûts HP, HC et Total en euros de la
 # consommation de l'appartement sur 4 périodes (Quotidien, Hebdo, Mensuel,
 # Annuel). Split HP/HC géré nativement via utility_meter tariffs.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Formule HP   : sensor.genelec_appart_hphc_[periode]_um_hp × sensor.edf_tempo_price_blue_hp
-# - Formule HC   : sensor.genelec_appart_hphc_[periode]_um_hc × sensor.edf_tempo_price_blue_hc
+# - Formule HP   : sensor.genelec_appart_hphc_[periode]_um_hp × sensor.tarifelecinfo_tarif_heures_pleines
+# - Formule HC   : sensor.genelec_appart_hphc_[periode]_um_hc × sensor.tarifelecinfo_tarif_heures_creuses
 # - Formule TOTAL: cout_hp + cout_hc
 # - Sources UM   : utility_meter/P0_Energie_total/Genelec_appart/03_UM_genelec_appart_HPHC_AMHQ.yaml
 # - Tarifs EDF HPHC 6kVA :
-#     HP : sensor.tarif_heures_pleines_ttc  (0.2065 €/kWh — 2026)
-#     HC : sensor.tarif_heures_creuses_ttc  (0.1578 €/kWh — 2026)
+#     HP : sensor.tarifelecinfo_tarif_heures_pleines  (0.2065 €/kWh — 2026)
+#     HC : sensor.tarifelecinfo_tarif_heures_creuses  (0.1578 €/kWh — 2026)
 # - Basculement HP ↔ HC : automation energie/basculement_tarif_hphc.yaml
 #
 #
@@ -48,11 +60,11 @@
       state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) %}
-        {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
+        {% set tarif = states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0.2065) %}
         {{ (kwh * tarif) | round(3) }}
       availability: >
         {{ states('sensor.genelec_appart_hphc_quotidien_um_hp') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_pleines_ttc') not in ['unavailable','unknown','none'] }}
+          and states('sensor.tarifelecinfo_tarif_heures_pleines') not in ['unavailable','unknown','none'] }}
 
     # --- genelec_appart_cout_hc_quotidien ---
     - name: "Genelec Appart Coût HC Quotidien"
@@ -62,11 +74,11 @@
       state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) %}
-        {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
+        {% set tarif = states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0.1578) %}
         {{ (kwh * tarif) | round(3) }}
       availability: >
         {{ states('sensor.genelec_appart_hphc_quotidien_um_hc') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_creuses_ttc') not in ['unavailable','unknown','none'] }}
+          and states('sensor.tarifelecinfo_tarif_heures_creuses') not in ['unavailable','unknown','none'] }}
 
     # --- genelec_appart_cout_total_quotidien ---
     - name: "Genelec Appart Coût Total Quotidien"
@@ -77,14 +89,14 @@
       state: >
         {% set hp_kwh  = states('sensor.genelec_appart_hphc_quotidien_um_hp') | float(0) %}
         {% set hc_kwh  = states('sensor.genelec_appart_hphc_quotidien_um_hc') | float(0) %}
-        {% set hp_trf  = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
-        {% set hc_trf  = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
+        {% set hp_trf  = states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0.2065) %}
+        {% set hc_trf  = states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0.1578) %}
         {{ ((hp_kwh * hp_trf) + (hc_kwh * hc_trf)) | round(2) }}
       availability: >
         {{ states('sensor.genelec_appart_hphc_quotidien_um_hp') not in ['unavailable','unknown','none']
           and states('sensor.genelec_appart_hphc_quotidien_um_hc') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_pleines_ttc') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_creuses_ttc') not in ['unavailable','unknown','none'] }}
+          and states('sensor.tarifelecinfo_tarif_heures_pleines') not in ['unavailable','unknown','none']
+          and states('sensor.tarifelecinfo_tarif_heures_creuses') not in ['unavailable','unknown','none'] }}
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ 2. HEBDOMADAIRE (H)                                                      │
@@ -98,11 +110,11 @@
       state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_hebdomadaire_um_hp') | float(0) %}
-        {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
+        {% set tarif = states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0.2065) %}
         {{ (kwh * tarif) | round(3) }}
       availability: >
         {{ states('sensor.genelec_appart_hphc_hebdomadaire_um_hp') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_pleines_ttc') not in ['unavailable','unknown','none'] }}
+          and states('sensor.tarifelecinfo_tarif_heures_pleines') not in ['unavailable','unknown','none'] }}
 
     # --- genelec_appart_cout_hc_hebdomadaire ---
     - name: "Genelec Appart Coût HC Hebdomadaire"
@@ -112,11 +124,11 @@
       state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_hebdomadaire_um_hc') | float(0) %}
-        {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
+        {% set tarif = states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0.1578) %}
         {{ (kwh * tarif) | round(3) }}
       availability: >
         {{ states('sensor.genelec_appart_hphc_hebdomadaire_um_hc') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_creuses_ttc') not in ['unavailable','unknown','none'] }}
+          and states('sensor.tarifelecinfo_tarif_heures_creuses') not in ['unavailable','unknown','none'] }}
 
     # --- genelec_appart_cout_total_hebdomadaire ---
     - name: "Genelec Appart Coût Total Hebdomadaire"
@@ -127,14 +139,14 @@
       state: >
         {% set hp_kwh  = states('sensor.genelec_appart_hphc_hebdomadaire_um_hp') | float(0) %}
         {% set hc_kwh  = states('sensor.genelec_appart_hphc_hebdomadaire_um_hc') | float(0) %}
-        {% set hp_trf  = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
-        {% set hc_trf  = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
+        {% set hp_trf  = states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0.2065) %}
+        {% set hc_trf  = states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0.1578) %}
         {{ ((hp_kwh * hp_trf) + (hc_kwh * hc_trf)) | round(2) }}
       availability: >
         {{ states('sensor.genelec_appart_hphc_hebdomadaire_um_hp') not in ['unavailable','unknown','none']
           and states('sensor.genelec_appart_hphc_hebdomadaire_um_hc') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_pleines_ttc') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_creuses_ttc') not in ['unavailable','unknown','none'] }}
+          and states('sensor.tarifelecinfo_tarif_heures_pleines') not in ['unavailable','unknown','none']
+          and states('sensor.tarifelecinfo_tarif_heures_creuses') not in ['unavailable','unknown','none'] }}
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ 3. MENSUEL (M)                                                           │
@@ -148,11 +160,11 @@
       state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_mensuel_um_hp') | float(0) %}
-        {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
+        {% set tarif = states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0.2065) %}
         {{ (kwh * tarif) | round(3) }}
       availability: >
         {{ states('sensor.genelec_appart_hphc_mensuel_um_hp') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_pleines_ttc') not in ['unavailable','unknown','none'] }}
+          and states('sensor.tarifelecinfo_tarif_heures_pleines') not in ['unavailable','unknown','none'] }}
 
     # --- genelec_appart_cout_hc_mensuel ---
     - name: "Genelec Appart Coût HC Mensuel"
@@ -162,11 +174,11 @@
       state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_mensuel_um_hc') | float(0) %}
-        {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
+        {% set tarif = states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0.1578) %}
         {{ (kwh * tarif) | round(3) }}
       availability: >
         {{ states('sensor.genelec_appart_hphc_mensuel_um_hc') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_creuses_ttc') not in ['unavailable','unknown','none'] }}
+          and states('sensor.tarifelecinfo_tarif_heures_creuses') not in ['unavailable','unknown','none'] }}
 
     # --- genelec_appart_cout_total_mensuel ---
     - name: "Genelec Appart Coût Total Mensuel"
@@ -177,14 +189,14 @@
       state: >
         {% set hp_kwh  = states('sensor.genelec_appart_hphc_mensuel_um_hp') | float(0) %}
         {% set hc_kwh  = states('sensor.genelec_appart_hphc_mensuel_um_hc') | float(0) %}
-        {% set hp_trf  = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
-        {% set hc_trf  = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
+        {% set hp_trf  = states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0.2065) %}
+        {% set hc_trf  = states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0.1578) %}
         {{ ((hp_kwh * hp_trf) + (hc_kwh * hc_trf)) | round(2) }}
       availability: >
         {{ states('sensor.genelec_appart_hphc_mensuel_um_hp') not in ['unavailable','unknown','none']
           and states('sensor.genelec_appart_hphc_mensuel_um_hc') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_pleines_ttc') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_creuses_ttc') not in ['unavailable','unknown','none'] }}
+          and states('sensor.tarifelecinfo_tarif_heures_pleines') not in ['unavailable','unknown','none']
+          and states('sensor.tarifelecinfo_tarif_heures_creuses') not in ['unavailable','unknown','none'] }}
 
 # ╭──────────────────────────────────────────────────────────────────────────╮
 # │ 4. ANNUEL (A)                                                            │
@@ -198,11 +210,11 @@
       state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_annuel_um_hp') | float(0) %}
-        {% set tarif = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
+        {% set tarif = states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0.2065) %}
         {{ (kwh * tarif) | round(3) }}
       availability: >
         {{ states('sensor.genelec_appart_hphc_annuel_um_hp') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_pleines_ttc') not in ['unavailable','unknown','none'] }}
+          and states('sensor.tarifelecinfo_tarif_heures_pleines') not in ['unavailable','unknown','none'] }}
 
     # --- genelec_appart_cout_hc_annuel ---
     - name: "Genelec Appart Coût HC Annuel"
@@ -212,11 +224,11 @@
       state_class: total              # "[modif] total_increasing → total (device_class: monetary)"
       state: >
         {% set kwh   = states('sensor.genelec_appart_hphc_annuel_um_hc') | float(0) %}
-        {% set tarif = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
+        {% set tarif = states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0.1578) %}
         {{ (kwh * tarif) | round(3) }}
       availability: >
         {{ states('sensor.genelec_appart_hphc_annuel_um_hc') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_creuses_ttc') not in ['unavailable','unknown','none'] }}
+          and states('sensor.tarifelecinfo_tarif_heures_creuses') not in ['unavailable','unknown','none'] }}
 
     # --- genelec_appart_cout_total_annuel ---
     - name: "Genelec Appart Coût Total Annuel"
@@ -227,14 +239,14 @@
       state: >
         {% set hp_kwh  = states('sensor.genelec_appart_hphc_annuel_um_hp') | float(0) %}
         {% set hc_kwh  = states('sensor.genelec_appart_hphc_annuel_um_hc') | float(0) %}
-        {% set hp_trf  = states('sensor.tarif_heures_pleines_ttc') | float(0.2065) %}
-        {% set hc_trf  = states('sensor.tarif_heures_creuses_ttc') | float(0.1578) %}
+        {% set hp_trf  = states('sensor.tarifelecinfo_tarif_heures_pleines') | float(0.2065) %}
+        {% set hc_trf  = states('sensor.tarifelecinfo_tarif_heures_creuses') | float(0.1578) %}
         {{ ((hp_kwh * hp_trf) + (hc_kwh * hc_trf)) | round(2) }}
       availability: >
         {{ states('sensor.genelec_appart_hphc_annuel_um_hp') not in ['unavailable','unknown','none']
           and states('sensor.genelec_appart_hphc_annuel_um_hc') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_pleines_ttc') not in ['unavailable','unknown','none']
-          and states('sensor.tarif_heures_creuses_ttc') not in ['unavailable','unknown','none'] }}
+          and states('sensor.tarifelecinfo_tarif_heures_pleines') not in ['unavailable','unknown','none']
+          and states('sensor.tarifelecinfo_tarif_heures_creuses') not in ['unavailable','unknown','none'] }}
 
 # annotations_log:
 # - [REFONTE] Remplacement du calcul approximatif (× tarif HP unique) par split HP/HC réel
@@ -243,4 +255,8 @@
 # - [MODIF 2026-04-26] Tarif : sensor.edf_tempo_price_blue_hp/_hc (unknown) →
 #   sensor.tarif_heures_pleines_ttc / sensor.tarif_heures_creuses_ttc (intégration tarifs_edf HPHC 6kVA)
 # - [TARIFS 2026] HP = 0.2065 €/kWh / HC = 0.1578 €/kWh (EDF HPHC 6kVA TTC)
+# - [MODIF 2026-11-04] Integration : tarif_edf RETIREE du parc, remplacee par TarifElecInfo.
+#   Les capteurs deviennent sensor.tarifelecinfo_tarif_heures_pleines / sensor.tarifelecinfo_tarif_heures_creuses,
+#   a valeur identique : le calcul rend le meme resultat avec les deux jeux,
+#   verifie avant la bascule. L'entree de configuration et le dossier custom_components ont ete supprimes.
 # - [PRECISION] round(3) pour HP/HC individuels, round(2) pour total

@@ -1,8 +1,15 @@
+# [2026-11-04] CHANGEMENT D'INTEGRATION : tarif_edf -> TarifElecInfo.
+# Le cout calcule a 23h59m10s lit desormais sensor.tarifelecinfo_tarif_heures_pleines et
+# sensor.tarifelecinfo_tarif_heures_creuses, a la place de sensor.tarif_heures_pleines_ttc et
+# sensor.tarif_heures_creuses_ttc (integration tarif_edf, retiree le meme jour).
+# Valeur identique, verifiee avant bascule : le calcul rend le meme resultat avec les deux jeux.
+# Aucun prix n'est ecrit en dur : il se lit sur les capteurs, qui changent au 1er fevrier et au 1er aout.
+# Cette copie locale porte le commentaire ; Home Assistant reecrit automations.yaml, il n'y survivrait pas.
 id: '1792780906393'
 alias: E - [P0] Histo Nodon complet quotidien (Total HP HC Cout)
 description: 'A 23h59m10s, logue la conso Nodon complete de la veille (last_period
   du compteur UM quotidien : Total, HP, HC) et le cout (tarifs EDF HPHC 6kVA TTC
-  lus en direct sur sensor.tarif_heures_pleines_ttc et sensor.tarif_heures_creuses_ttc)
+  lus en direct sur sensor.tarifelecinfo_tarif_heures_pleines et sensor.tarifelecinfo_tarif_heures_creuses)
   dans nodon_complet_histo.txt. Sert de source de remplacement des 0 Linky dans
   le tableau hebdomadaire L2C1 (templates linky_jour_1 a 7). Si le total vaut 0
   : ecrit "(MANQUANT)". Prerequis : integration File "nodon_complet_histo" (notify.nodon_complet_histo)
@@ -24,8 +31,8 @@ actions:
     total: '{{ state_attr(''sensor.genelec_appart_quotidien_um'', ''last_period'')
       | float(0) | round(1) }}'
 - variables:
-    cout: '{{ ((hp | float(0) * states(''sensor.tarif_heures_pleines_ttc'') | float(0))
-      + (hc | float(0) * states(''sensor.tarif_heures_creuses_ttc'') | float(0)))
+    cout: '{{ ((hp | float(0) * states(''sensor.tarifelecinfo_tarif_heures_pleines'') | float(0))
+      + (hc | float(0) * states(''sensor.tarifelecinfo_tarif_heures_creuses'') | float(0)))
       | round(2) }}'
 - else:
   - action: notify.send_message

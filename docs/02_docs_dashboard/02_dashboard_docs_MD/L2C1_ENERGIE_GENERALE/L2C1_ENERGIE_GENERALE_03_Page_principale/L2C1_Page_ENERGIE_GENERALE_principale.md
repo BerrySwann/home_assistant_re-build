@@ -67,7 +67,8 @@ Cette page regroupe toutes les informations de consommation électrique du logem
 - ✅ **Riemann tampon** - `sensor.genelec_appart_totale_kwh` (source des UM)
 - ✅ **UM Genelec Appart** - `sensor.genelec_appart_*_um` et `sensor.genelec_appart_hphc_*_um_hp/hc`
 - ✅ **MyElectricalData / Linky** (`linky_card`) - `sensor.linky_*`
-- ✅ **tarif_edf** (custom component) - `sensor.edf_tempo_price_blue_hp` / `sensor.edf_tempo_price_blue_hc`
+- ✅ **MyElectricalData (tarifs Tempo)** - `sensor.edf_tempo_price_blue_hp` / `sensor.edf_tempo_price_blue_hc`, remontes en MQTT (unique_id `myelectricaldata_tempo_price_blue_*`). Ce ne sont PAS des capteurs de l integration de tarifs.
+- ✅ **TarifElecInfo** (integration personnelle, `custom_components/tarifelecinfo`) - `sensor.tarifelecinfo_tarif_heures_pleines` / `sensor.tarifelecinfo_tarif_heures_creuses` : prix du contrat HP/HC. Remplace `tarif_edf`, retiree le 2026-11-04.
 - ✅ Sensors Genelec Appart mini/maxi - `sensor.genelec_appart_conso_mini_24h` / `sensor.genelec_appart_conso_maxi_24h` (via `P0_MINI_MAXI_AVG_Genelec_appart.yaml`)
 
 ### Cartes HACS utilisées
@@ -660,7 +661,11 @@ Donut : `group_by: func: diff, duration: 24h`.
 | `sensor.genelec_appart_cout_hc_annuel` | Annuel | idem |
 | `sensor.genelec_appart_cout_total_annuel` | Annuel | idem |
 
-> Tarifs EDF Tempo Bleu : HP = `sensor.edf_tempo_price_blue_hp` (0.1494 €/kWh) · HC = `sensor.edf_tempo_price_blue_hc` (0.1232 €/kWh)
+> **Tarifs Tempo Bleu** (MyElectricalData) : HP = `sensor.edf_tempo_price_blue_hp` · HC = `sensor.edf_tempo_price_blue_hc`.
+>
+> **Tarifs du contrat HP/HC** (TarifElecInfo) : HP = `sensor.tarifelecinfo_tarif_heures_pleines` · HC = `sensor.tarifelecinfo_tarif_heures_creuses`. Ces deux capteurs remplacent ceux de `tarif_edf`, integration retiree le 2026-11-04.
+>
+> Aucun prix n'est ecrit en dur dans cette fiche : les montants se lisent sur les capteurs, ils changent au 1er fevrier et au 1er aout.
 
 ---
 
