@@ -37,6 +37,7 @@ Les skills `ha-push-docs`, `ha-push-md` et `ha-push-yaml` (étape "Avant tout pu
 
 - Outil unique : decouverte recursive des dossiers XX_ (un XX_ imbrique dans un autre compte separement), manifeste fichier par fichier, .bak exclus, INFO sur un nouveau XX_ ou un nouveau fichier.
 - Ajoute par Hermes : alerte si un dossier XX_ existe en prod (H:\docs), controle a lancer AVANT et APRES chaque push, option --quiet (une ligne), option --json.
-- Codes de retour : 0 = OK, 1 = ALERTE (ne rien pousser, prevenir Eric), 2 = manifeste absent.
-- Manifeste XX_manifest.json (dossier JSON, voir ci-dessus) : propriete de Claude ; --maj uniquement sur ordre d Eric.
+- Codes de retour : 0 = OK, 1 = ALERTE (ne rien pousser, prevenir Eric). Le code 2 (manifeste absent) n'existe plus depuis le 2026-11-04 : le controle prend alors le disque comme reference, affiche un INFO et poursuit.
+- Manifeste XX_manifest.json (dossier JSON, voir ci-dessus) : cree par Claude, lu en comparaison quand il est present. Son absence n'arrete plus le controle. --maj uniquement sur ordre d Eric.
+- [2026-11-04] Dependance a Claude retiree (demande d Eric) : le script ne s'arrete plus sur un manifeste absent, parce qu'un fichier qui appartient a l'autre agent ne doit pas pouvoir bloquer un controle du projet.
 - Copie maitre : ce dossier. Les skills de Claude et de Hermes appellent ce chemin.

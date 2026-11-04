@@ -21,12 +21,13 @@ Liste de référence des dossiers `XX_*` de `docs` et des fichiers qu'ils contie
 
 - Fichier source : `docs\04_docs_scripts\04_docs_scripts_JSON\Check_XX_presents\XX_manifest.json`
 - Déplacé le 2026-11-01 (ordre d'Eric) depuis `04_docs_scripts_SH\Check_XX_presents\`. Il reste dans ce dossier JSON : ne pas le déplacer, le renommer ni le régénérer.
-- Contenu au 2026-11-01 : 8 dossiers XX_, 13 fichiers.
+- Contenu au 2026-11-01 : 13 fichiers repartis sur 10 dossiers (le chiffre de 8 dossiers etait faux, recompte le 2026-11-04).
+- Ecart connu au 2026-11-04 : 1 fichier present sur disque et absent du manifeste, `04_docs_scripts_SH/XX_MPC_01_monitor_temp_sh_RASPI (a ne pas jeter)/MPC_01_monitor_temp.sh`. Le controle le signale en INFO, il ne bloque pas.
 - Nom conservé `XX_manifest.json` : ce n'est pas un dossier XX_, il part en prod avec `docs` (étape 5C).
 
 ## Propriétaire et règles
 
-- Propriété de Claude. Hermes ne le modifie pas.
+- Manifeste cree par Claude. Depuis le 2026-11-04, le controle `Check_XX_presents.py` **ne depend plus de sa presence** : s'il manque, la reference est prise sur le disque et le controle qui compte (aucun `XX_` en prod) continue. Le manifeste sert desormais de comparaison, pas de condition.
 - Mise à jour (`--maj` de `Check_XX_presents.py`) uniquement sur ordre d'Eric.
 - Utilisé par : [Check_XX_presents.py](../../04_docs_scripts_SH/Check_XX_presents/Check_XX_presents.py) (constante `MANIFEST`), fiche : [Check_XX_presents.md](../../04_docs_scripts_SH_MD/Check_XX_presents/Check_XX_presents.md).
 

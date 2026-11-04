@@ -12,6 +12,7 @@
 
 </div>
 
+*Derniere mise a jour : 2026-11-04 21h50 (session du soir : tarif_edf retiree du parc et remplacee par Tarifelecinfo, 141 references locales et 127 en prod migrees, fiche de l integration creee, referentiel des integrations corrige ; six fiches d automations creees pour vider la famille R63 ; deux scripts de controle decouples du manifeste et du fichier de regles de Claude. Aucun prix en dur dans la documentation.)*
 *Derniere mise a jour : 2026-11-04 20h50 (changement d integration : tarif_edf remplacee par TarifElecInfo. Les trois capteurs tarif_heures_pleines_ttc, tarif_heures_creuses_ttc et puissance_souscrite_hphc_6kva sont devenus tarifelecinfo_tarif_heures_pleines, _creuses et _puissance_souscrite, a valeurs identiques (verifie avant bascule), 141 references en local et 127 en prod. L integration tarif_edf est retiree : entree de configuration supprimee et dossier custom_components supprime. Les capteurs TEMPO sont en platform mqtt et ne sont pas concernes)*
 *Derniere mise a jour : 2026-11-03 21h05 (renommage demande par Eric : sensor.temperature_corrige_mamour devient temperature_corrige_salon et sensor.temperature_corrige_eric devient temperature_corrige_bureau ; les fiches de la clim, du dashboard et cette matrice suivent le nouveau nom. Verification faite au passage : le plafond d ete du capteur est 26 pour le salon, et non 27 comme l ecrivait cette matrice avant correction)*
 *Derniere mise a jour : 2026-11-03 18h37 (controle qualite du 2026-11-01 : tableau des fichiers L0C0_PAGE_Home corrige - carte 05_Impacte de foudre ajoutee, doublon 08_Congelateur supprime ; la carte 11_Carte presence y etait deja. Les 8 YAML modifies dans la soiree (Page_Home, Card_foudre_home, L1C1/L2C2/L2C3/L6C2/L6C3 pages, L4C1 RASPI) ont ete repointes sur /dashboard-tablette/0 ou sur la bonne entite foudre.)*
@@ -124,7 +125,7 @@ HOME PAGE (type: grid)
   │     ├─→ sensor.moon_api (attr: moon_parallactic_angle)  (NAT - intégration Moon)
   │     ├─→ sensor.vence_original_condition  (NAT - command_line/meteo/carte_meteo_france.yaml)
   │     ├─→ sensor.th_balcon_nord_temperature  (NAT - SONOFF via Z2M)
-  │     └─→ sensor.alerte_meteo  (TPL - templates/meteo/M_01_meteo_alertes_card.yaml)
+  │     └─→ sensor.alerte_meteo  (TPL - templates/Meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml)
   ├─→ [2] meteofrance-weather-card  (toujours visible)
   │     └─→ weather.vence + sensor.vence_* (NAT - Météo France)
   ├─→ [3] conditional - VS Code Server  (visible si CPU > 1%)
@@ -134,7 +135,7 @@ HOME PAGE (type: grid)
   │     ├─→ sensor.maison_lightning_distance  (NAT - Blitzortung natif)
   │     ├─→ sensor.blitzortung_lightning_localisation  (SEN - M_meteo_sensors_blitzortung.yaml, REST Nominatim)
   │     ├─→ sensor.maison_lightning_azimuth  (NAT - Blitzortung natif)
-  │     └─→ sensor.timer_foudre  (TPL - M_03_Meteo_orage_eclaires/M_03_meteo_timer_foudre_card.yaml, seul vrai TPL de ce bloc ; lit input_datetime.dernier_eclair depuis le 2026-10-14, avant : entite inexistante)
+  │     └─→ sensor.timer_foudre  (TPL - M_03_meteo_orage_eclaires/M_03_meteo_timer_foudre_card.yaml, seul vrai TPL de ce bloc ; lit input_datetime.dernier_eclair depuis le 2026-10-14, avant : entite inexistante)
   ├─→ [5] mushroom - Lave-Linge (WashData)  (visible si power > 2W)
   │     ├─→ sensor.lave_linge_etat  (NAT - WashData, HACS)
   │     ├─→ sensor.lave_linge_temps_restant  (NAT - WashData, HACS)
@@ -155,7 +156,7 @@ HOME PAGE (type: grid)
   ├─→ [9] meteoalarm-card - Alertes de vigilance Météo-France  (masquee si aucune alerte)
   │     └─→ sensor.06_weather_alert  (NAT - Météo France, integration meteofrance ; aussi dans le pop-up #alert de L1C1)
   ├─→ [10] bubble-card separator + 2× button - Présence
-  │     ├─→ sensor.etat_wifi_maison  (TPL - P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml)
+  │     ├─→ sensor.etat_wifi_maison  (TPL - P4_groupe_presence/P4_wifi_detection.yaml)
   │     ├─→ device_tracker.poco  (NAT - Mobile App Eric)
   │     ├─→ person.eric  (NAT - HA Personnes)
   │     ├─→ device_tracker.mamour  (NAT - Mobile App Mamour)
@@ -177,7 +178,7 @@ HOME PAGE (type: grid)
 | `sensor.moon_api` (attr: `moon_parallactic_angle`) - introuvable en live 2026-10-29 | NAT | Intégration Moon (HACS) | [1] |
 | `sensor.vence_original_condition` | NAT | `command_line/Meteo/carte_meteo_france.yaml` | [1] |
 | `sensor.th_balcon_nord_temperature` | NAT | SONOFF via Z2M | [1] |
-| `sensor.alerte_meteo` | TPL | `templates/meteo/M_01_meteo_alertes_card.yaml` | [1] |
+| `sensor.alerte_meteo` | TPL | `templates/Meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml` | [1] |
 | `weather.vence` | NAT | Météo France | [2] |
 | `sensor.vence_rain_chance` / `vence_uv` / `vence_cloud_cover` | NAT | Météo France | [2] |
 | `sensor.vence_freeze_chance` / `vence_snow_chance` / `vence_next_rain` | NAT | Météo France | [2] |
@@ -202,7 +203,7 @@ HOME PAGE (type: grid)
 | `sensor.tongel_temperature` | NAT | SONOFF Tongel via Z2M | [7] |
 | `binary_sensor.porte_congel_contact` | NAT | porte Congél. via Z2M | [7] |
 | `binary_sensor.detecteur_de_fuite_ikea_water_leak` | NAT | IKEA Vallhorn via Z2M | [8] |
-| `sensor.etat_wifi_maison` | TPL | `templates/P4_groupe_presence/01_phones_wifi_cellular_card_autom.yaml` | [10] |
+| `sensor.etat_wifi_maison` | TPL | `templates/P4_groupe_presence/P4_wifi_detection.yaml` | [10] |
 | `device_tracker.poco` | NAT | Mobile App (Companion) - Eric | [10] |
 | `person.eric` | NAT | HA Personnes | [10] |
 | `device_tracker.mamour` | NAT | Mobile App (Companion) - Mamour | [10] |
@@ -284,7 +285,7 @@ MATÉRIEL / INTÉGRATION
   │     └─→ sensor.maison_lightning_azimuth / _distance / _counter  (NAT)
   │           └─→ UM: M_03_meteo_UM_blitzortung.yaml  (eclair_annuel/mensuel/hebdomadaire/quotidien/horaire)
   │           └─→ SEN: M_meteo_sensors_blitzortung.yaml  (blitzortung_lightning_localisation - API Nominatim)
-  │           └─→ TPL: M_03_Meteo_orage_eclaires/*.yaml  (direction_foudre_label / distance_foudre_km / direction_foudre_deg / timer_foudre / dernier_impact_foudre)
+  │           └─→ TPL: M_03_meteo_orage_eclaires/*.yaml  (direction_foudre_label / distance_foudre_km / direction_foudre_deg / timer_foudre / dernier_impact_foudre)
   ├─→ Météo France (alertes)
   │     └─→ sensor.06_weather_alert  (NAT)
   │           └─→ TPL: M_01_meteo_alertes_card.yaml  (10 sensors : alerte_vent_violent, _inondation, _orages,
@@ -312,10 +313,10 @@ MATÉRIEL / INTÉGRATION
 | `sensor.maison_lightning_azimuth` / `_distance` / `_counter` | NAT | Intégration Blitzortung (MQTT native) |
 | `sensor.eclair_quotidien` / `_hebdomadaire` / `_mensuel` / `_annuel` / `_horaire` | UM | `utility_meter/Meteo/M_03_meteo_UM_blitzortung.yaml` |
 | `sensor.blitzortung_lightning_localisation` | SEN (REST) | `sensors/Meteo/M_meteo_sensors_blitzortung.yaml` |
-| `sensor.alerte_vent_violent` / `_inondation` / `_orages` / `_pluie_inondation` / `_neige_verglas` / `_grand_froid` / `_canicule` / `_avalanches` / `_vagues_submersion` / `alerte_meteo` | TPL | `templates/meteo/M_01_meteo_alertes_card.yaml` |
-| `sensor.direction_vent_vence_label` / `direction_vent_vence_deg` / `vitesse_vent_vence_kmh` | TPL | `templates/meteo/M_02_meteo_vent/*.yaml` |
-| `sensor.direction_foudre_label` / `distance_foudre_km` / `direction_foudre_deg` / `dernier_impact_foudre` / `timer_foudre` | TPL | `templates/meteo/M_03_Meteo_orage_eclaires/*.yaml` |
-| `sensor.duree_du_jour` / `tendance_duree_jour` / `variation_quotidienne` | TPL | `templates/meteo/M_05_meteo_cycle_solaire/*.yaml` (calcul astronomique zone.home, PAS sun.sun) |
+| `sensor.alerte_vent_violent` / `_inondation` / `_orages` / `_pluie_inondation` / `_neige_verglas` / `_grand_froid` / `_canicule` / `_avalanches` / `_vagues_submersion` / `alerte_meteo` | TPL | `templates/Meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml` |
+| `sensor.direction_vent_vence_label` / `direction_vent_vence_deg` / `vitesse_vent_vence_kmh` | TPL | `templates/Meteo/M_02_meteo_vent/*.yaml` |
+| `sensor.direction_foudre_label` / `distance_foudre_km` / `direction_foudre_deg` / `dernier_impact_foudre` / `timer_foudre` | TPL | `templates/Meteo/M_03_meteo_orage_eclaires/*.yaml` |
+| `sensor.duree_du_jour` / `tendance_duree_jour` / `variation_quotidienne` | TPL | `templates/Meteo/M_05_meteo_cycle_solaire/*.yaml` (calcul astronomique zone.home, PAS sun.sun) |
 
 ### Entités ApexCharts (data_generator JS - durée du jour)
 
@@ -337,7 +338,7 @@ MATÉRIEL / INTÉGRATION
 | `command_line/Meteo/carte_meteo_france.yaml` | ✅ |
 | `utility_meter/Meteo/M_03_meteo_UM_blitzortung.yaml` | ✅ |
 | `sensors/Meteo/M_meteo_sensors_blitzortung.yaml` | ✅ *(ajouté 2026-07-19 - manquait)* |
-| `templates/meteo/M_01_meteo_alertes_card.yaml` | ✅ |
+| `templates/Meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml` | ✅ |
 | `templates/Meteo/M_02_meteo_vent/M_02_meteo_direction_vent_vence_deg_card.yaml` | ✅ |
 | `templates/Meteo/M_02_meteo_vent/M_02_meteo_direction_vent_vence_label_card.yaml` | ✅ |
 | `templates/Meteo/M_02_meteo_vent/M_02_meteo_vitesse_vent_vence_kmh_card.yaml` | ✅ |
@@ -350,7 +351,7 @@ MATÉRIEL / INTÉGRATION
 | `templates/Meteo/M_05_meteo_cycle_solaire/M_05_meteo_tendance_duree_jour_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
 | `templates/Meteo/M_05_meteo_cycle_solaire/M_05_meteo_variation_quotidienne_card.yaml` | ✅ *(refactorisé 2026-10-04)* |
 
-> `templates/meteo/M_04_tendances_th_ext_card.yaml` retiré de cette liste le 2026-07-19 -
+> `templates/Meteo/M_04_tendances_th_ext_card.yaml` retiré de cette liste le 2026-07-19 -
 > son entête déclare lui-même `AVAL : L1C2 Températures`, pas L1C1. Voir section L1C2.
 
 ---
@@ -419,7 +420,7 @@ MATÉRIEL (SONOFF TH via Z2M)
 > corps, AVAL déclaré L1C3/L2C2, pas L1C2). Vrai fichier source : `P1_01_clim_logique_system_autom.yaml`
 > (son AVAL déclare lui-même "L1C2 Températures" pour ces 4 sensors). Les entrées fictives
 > `sensor.th_*_temperature_trend` / `_humidity_trend` (génériques, toutes pièces) ont été
-> retirées - seule la sonde balcon nord a un calcul de tendance réel (`M_04_tendances_th_ext_card.yaml`,
+> retirées - seule la sonde balcon nord a un calcul de tendance réel (`M_04_meteo_tendances/M_04_tendances_th_ext_temperature_card.yaml`,
 > absent de cette section jusqu'ici - ajouté). `sensor.*_power_status` / `clim_*_etat` retirés
 > d'ici - ce sont des entités Clim ON/OFF, déjà documentées dans la section L1C3 ci-dessous,
 > pas des données de température.

@@ -90,9 +90,13 @@ def main():
         return 0
 
     if not os.path.exists(MANIFEST):
-        print("ALERTE : manifeste absent (%s) - ne pas pousser ; --maj sur ordre d'Eric" % MANIFEST)
-        return 2
-    ref = json.load(open(MANIFEST, encoding="utf-8"))
+        # Le manifeste appartenait a Claude. S'il disparait, le controle ne s'arrete plus :
+        # il prend le disque comme reference et continue, parce que le controle qui compte
+        # (aucun XX_ en prod) ne depend pas de cette liste.
+        print("INFO : manifeste absent (%s) - reference prise sur le disque, controle poursuivi" % MANIFEST)
+        ref = now
+    else:
+        ref = json.load(open(MANIFEST, encoding="utf-8"))
 
     alertes, infos = [], []
     for d, fichiers in sorted(ref.items()):
