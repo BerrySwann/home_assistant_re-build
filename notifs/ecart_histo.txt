@@ -63,3 +63,4 @@
 31/10 | Linky: 7.99 kWh | Nodon: 7.9 kWh | Ecart: 0.09 (1.1%)
 01/11 | Linky: 10.76 kWh | Nodon: 10.6 kWh | Ecart: 0.16 (1.5%)
 02/11 | Linky: 9.2 kWh | Nodon: 9.1 kWh | Ecart: 0.1 (1.1%)
+03/11 | Linky: 8.35 kWh | Nodon: 8.3 kWh | Ecart: 0.05 (0.6%)
