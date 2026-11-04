@@ -26,7 +26,7 @@ Hermes lit les regles et les modifications de Claude, les assimile et se comport
 ## Les etapes
 
 1. Hermes annonce "ALIGNEMENT en lecture seule".
-2. Il lit, dans l'ordre : CLAUDE.md, IA_CONTEXT_BASE.md (deux fichiers distincts), l'index IA et les sous-contextes, les journaux MODIFS et les messages de Claude dans `D:\Discussion_Claude_Hermes`, les skills de Claude (copies PURE, fiches, MOC_SKILLS).
+2. Il lit, dans l'ordre : CLAUDE.md, IA_CONTEXT_BASE.md (deux fichiers distincts), l'index IA et les sous-contextes, les journaux MODIFS et les messages de Claude dans `C:\Users\Berry Swann\AppData\Local\hermes\Discussion_Claude_Hermes`, les skills de Claude (copies PURE, fiches, MOC_SKILLS).
 3. Il retient les regles avec leurs exceptions (XX_, 99_, 98_, TEMPO et Groupe_A/B/C, manifeste, .bak, 8 badges, index par type).
 4. Il rend un rapport court : sources lues, regles retenues, ecarts constates, sans rien corriger.
 
@@ -44,7 +44,7 @@ Hermes lit les regles et les modifications de Claude, les assimile et se comport
 
 ## Points a verifier avec Eric
 
-- Hermes a sa propre version du skill dans `D:\hermes\skills`, que le curateur de skills d'Hermes peut modifier sans nous ; elle n'est pas forcement identique a celle-ci.
+- Hermes a sa propre version du skill dans `C:\Users\Berry Swann\AppData\Local\hermes\skills\autonomous-ai-agents\hermes-aligne`, que le curateur de skills d'Hermes peut modifier sans nous ; elle n'est pas forcement identique a celle-ci.
 
 ## Quand modifier cette fiche
 
@@ -52,3 +52,4 @@ Chaque fois que la copie du skill change dans `05_docs_skills_PURE`, relire cett
 
 <!-- annotations_log: -->
 <!-- [2026-11-01] Fiche creee : le skill n'en avait pas -->
+<!-- annotations_log: [2026-11-04] chemins D: alignes sur AppData\Local\hermes -->

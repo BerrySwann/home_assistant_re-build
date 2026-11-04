@@ -28,7 +28,7 @@ Les skills propres a Hermes sont regroupees par sujet : les skills d'un meme the
 
 ## 1. Skills communes Claude = Hermes (14)
 
-| # | Skill | Claude (`.claude/skills/`) | Hermes (`D:/hermes/skills/`) |
+| # | Skill | Claude (`.claude/skills/`) | Hermes (`C:/Users/Berry Swann/AppData/Local/hermes/skills/`, D:/hermes jusqu au 2026-11-01) |
 |---:|---|---|---|
 | 1 | `fix-file` | `.claude/skills/fix-file/SKILL.md` | `smart-home/fix-file/SKILL.md` |
 | 2 | `ha-new-yaml` | `.claude/skills/ha-new-yaml/SKILL.md` | `smart-home/ha-new-yaml/SKILL.md` |
@@ -333,3 +333,4 @@ Les skills propres a Hermes sont regroupees par sujet : les skills d'un meme the
 | Gaming & divers | 5 |
 | **Total actives** | **185** |
 | Archivees (`.archive`) | 46 |
+<!-- annotations_log: [2026-11-04] colonne Hermes repointee sur AppData\Local\hermes\skills -->

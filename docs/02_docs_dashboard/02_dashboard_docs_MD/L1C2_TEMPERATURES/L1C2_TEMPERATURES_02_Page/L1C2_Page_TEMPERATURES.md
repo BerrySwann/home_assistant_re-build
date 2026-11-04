@@ -455,7 +455,7 @@ Nuit (21h-7h30) + groupe_2/3/4 → confort_nuit (heat + cool, toutes pièces)
 > Ces entités proviennent de `P1_MASTER_CLIM_TEMPLATES` :
 > `sensor.groupe`, `sensor.mode_ete_hiver`,
 > `sensor.temperature_eco_hiver_corrige`, `sensor.temperature_eco_ete_corrige`,
-> `sensor.temperature_corrige_salon`, `sensor.temperature_corrige_bureau`,
+> `sensor.temperature_corrige_salon`, `sensor.temperature_corrige_eric`,
 > `sensor.temperature_corrige_chambre`, `sensor.temperature_confort_nuit`.
 
 > ⚠️ **Correction 2026-06-21** : entités obsolètes corrigées (`temperature_confort_jour_jour` → `temperature_confort_jour`, `corrige_*_hivers` → `corrige_*`). Logique cool G1 : `temperature_cible` → `temperature_eco_ete_corrige`. Corrections par pièce selon groupe ajoutées (corrige_mamour/eric/chambre).
@@ -675,3 +675,18 @@ Vérifier que les entités Pôle 1 sont chargées (`templates/P1_clim_chauffage/
 <!-- obsidian-wikilinks -->
 ---
 *Liens : [[DEPENDANCES_GLOBALES]]  [[L1C2_Vignette_TEMPERATURES]]*
+
+---
+
+## Modifications du 2026-11-03
+
+Deux capteurs affiches par cette page ont ete renommes pour sortir les prenoms de l'installation :
+
+| Avant | Apres | Valeur au 2026-11-03 |
+|:---|:---|:---|
+| `sensor.temperature_corrige_mamour` | `sensor.temperature_corrige_salon` | 20,0 C (confort 19 + delta_1) |
+| `sensor.temperature_corrige_eric` | `sensor.temperature_corrige_bureau` | 17,0 C (confort 19 - delta_2) |
+
+Le renommage a ete fait cote Home Assistant, pas seulement dans les cartes : les deux entites ont ete supprimees
+puis recreees sous leur nouveau nom, donc l'historique de ces courbes repart de la date du changement. Les anciennes
+valeurs restent en base sous les anciens noms et ne s'affichent plus.

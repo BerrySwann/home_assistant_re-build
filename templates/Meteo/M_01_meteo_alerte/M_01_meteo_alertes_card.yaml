@@ -13,7 +13,16 @@
 # - Source unique : sensor.06_weather_alert (intégration Météo France)
 #   → attributs par type d'alerte (Vent violent, Inondation, etc.)
 # - Attribut absent (Canicule l'hiver ; Grand-froid et Avalanches l'été) :
-#   state_attr() renvoie None → le capteur retourne 'Vert' (pas d'erreur).
+#   state_attr() renvoie None → le capteur retourne 'H. saison', PAS 'Vert'.
+#   [2026-11-04] Correction : les deux cas etaient confondus. Le capteur
+#   annoncait 'pas de risque' alors que Meteo-France ne publie rien pour ce
+#   type d'alerte hors saison. Le repli 'Vert' ne sert plus qu'aux valeurs
+#   inattendues. La carte traite 'H. saison' comme Vert pour la couleur :
+#   c'est le TEXTE qui distingue une absence d'information d'une absence de
+#   risque, la couleur ne le peut pas.
+#   Mesure du 2026-11-04 : huit attributs publies, 'Canicule' absent.
+#   Les etiquettes de sante du script de clim ('corrige_salon',
+#   'corrige_bureau') suivent la meme logique de renommage que les capteurs.
 # - Le repli sur binary_sensor.meteoalarm (intégration MeteoAlarm, jamais
 #   installée) a été supprimé le 2026-10-15 (alertes Spook entité inconnue).
 #

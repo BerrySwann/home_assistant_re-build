@@ -695,6 +695,81 @@ Gradient de couleurs (7 paliers) : `Green → Gold → Orange → Dark Orange �
 - `Jaune` → Soyez attentifs
 - `Orange` → Soyez très vigilants
 - `Rouge` → Vigilance absolue
+- `H. saison` → Météo-France ne publie pas ce type d'alerte en ce moment (voir ci-dessous)
+
+### Valeur `H. saison` - l'attribut n'existe pas
+
+**Le problème.** `sensor.06_weather_alert` ne porte pas les neuf types d'alerte en permanence : Météo-France
+en inhibe une partie selon la saison. Mesure du **2026-11-04 à 20h05**, en hiver : huit attributs présents
+(`Avalanches`, `Grand-froid`, `Inondation`, `Neige-verglas`, `Orages`, `Pluie-inondation`,
+`Vagues-submersion`, `Vent violent`) et **`Canicule` absent**. En été, c'est l'inverse : `Canicule` apparaît et
+`Avalanches` et `Grand-froid` disparaissent.
+
+**Pourquoi c'était faux avant.** Les neuf capteurs d'alerte appliquaient ce repli :
+
+```jinja
+{% set wa = state_attr('sensor.06_weather_alert', 'Canicule') %}
+{% if wa is not none and wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %} {{ wa }}
+{% else %} Vert {% endif %}
+```
+
+Deux situations très différentes tombaient dans la même branche : l'attribut vaut `Vert` (pas d'alerte) et
+l'attribut n'existe pas (aucune information publiée). Le capteur annonçait donc « pas de risque de canicule »
+en plein hiver, et aurait annoncé « pas de risque d'avalanche » en août. Spook signalait cette référence
+d'attribut absente, à juste titre, sans pouvoir dire que la cause était saisonnière.
+
+**Le template retenu**, identique sur les neuf capteurs, dans
+`docs/01_docs_config_system/01_config_system_SH_PY_YAML/templates/Meteo/M_01_meteo_alerte/M_01_meteo_alertes_card.yaml` :
+
+```jinja
+{% set wa = state_attr('sensor.06_weather_alert', '<Type>') %}
+{% if wa is none %}
+  H. saison
+{% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+  {{ wa }}
+{% else %}
+  Vert
+{% endif %}
+```
+
+Trois branches distinctes : attribut absent → `H. saison` ; attribut valide → sa couleur ; valeur inattendue →
+repli `Vert` par sécurité. Résultat au 2026-11-04 : `sensor.alerte_canicule` vaut `H. saison`, les huit autres
+gardent leur valeur réelle (`Vert`, ou `Jaune` pour Pluie-inondation).
+
+**Le libellé, et pourquoi il est abrégé.** La première version affichait `Hors saison`. Dans la pastille, le
+texte est tronqué par la largeur de la carte : `Hors sais...`. Le libellé retenu est donc **`H. saison`**, qui
+tient sur une ligne. Décision d'Eric du 2026-11-04.
+
+**Affichage dans les pastilles.** Les dix cartes d'alerte n'affichaient que l'icône, sa couleur et le nom du
+phénomène : le champ `primary` était vide, donc la valeur n'était visible nulle part. Elle l'est maintenant :
+
+```yaml
+- type: custom:mushroom-template-card
+  primary: "{{ states(entity) }}"     # la valeur, au-dessus du libellé
+  secondary: Canicule                 # le nom du phenomene
+  icon: "{{ state_attr(entity, 'icon') }}"
+  icon_color: |-
+    {% if states(entity) in ['Vert', 'H. saison'] %}
+     green
+    {% elif states(entity) == 'Jaune' %}
+     yellow
+    ...
+```
+
+`H. saison` est traité comme `Vert` dans la couleur : la pastille reste verte, la couleur ne distingue pas une
+absence d'information d'une absence de risque, c'est le texte qui le fait.
+
+**Ce qui ne marche pas, et pourquoi.** Une tentative de mise à la même taille de police que le libellé a été
+faite en `card_mod`, puis retirée. Le CSS était inopérant : cette version de Mushroom délègue le texte à
+`ha-tile-info`, le composant natif de Home Assistant, qui possède son propre shadow DOM. Un `card_mod` posé sur
+la carte ne peut pas atteindre l'intérieur de ce composant, quel que soit le `!important`. Pour maîtriser
+réellement cette taille, il faudrait réécrire les dix pastilles en `custom:button-card`.
+
+**Format du fichier YAML de cette page.** Le YAML local `L1C1_Page_METEO.yaml` a été **réexporté depuis la
+production le 2026-11-04** (demande d'Eric) : il était encore en ancien format `type: grid`, alors que le
+dashboard live est en `type: sections` depuis la migration de Home Assistant. Les 25 autres pages sont encore
+dans l'ancien format et devront être réexportées de la même façon. L'aller-retour YAML a été vérifié : le
+fichier relu redonne exactement la configuration servie par la production.
 
 ### Meteoalarm Card
 

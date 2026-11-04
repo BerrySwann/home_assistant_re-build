@@ -349,6 +349,13 @@
 # - [Fix]     temperature_eco_hiver_corrige : fallback float(17) + suppression palier <10.
 # - [Fix]     temperature_moyenne_interieure : reject('==', 0) pour exclure sondes offline.
 # - [Fix]     delta_ademe_recommande : source temperature_confort_JOUR (était temperature_confort).
+# - [Rename] 2026-11-03 temperature_corrige_mamour -> temperature_corrige_salon et
+#             temperature_corrige_eric -> temperature_corrige_bureau (nom + unique_id + variable
+#             interne). Les calculs ne changent pas : salon = confort + d1, bureau = confort - d2.
+# - [Fix]    2026-11-04 hs_list du script : les deux etiquettes 'corrige_mamour' et 'corrige_eric'
+#             n'avaient pas suivi le renommage en prod ; seules les copies locales divergeaient.
+# - [Note]   temperature_corrige_chambre reste la seule des trois a recopier consigne_de_base
+#             au lieu de passer par temperature_confort_jour : comportement assume, pas un oubli.
 # - [Tune]    2026-07-19 temperature_confort_nuit : palier été +d2 relevé de >29 à >30 (confort nuit).
 # - [Feat]    2026-07-20 temperature_confort_nuit : palier été dynamique selon vigilance canicule
 #             (Vert/indispo=29, Jaune=30, Orange=30, Rouge=31) — source sensor.alerte_canicule (M_01).

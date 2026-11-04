@@ -11,7 +11,17 @@
 # │             - éco saison HS + besoin éco => OFF + message                  │
 # │             - groupe HS ou temp normale HS => dégradé éco de saison        │
 # │             - sinon => mode normal                                         │
-# ╰──────────────────────────────────────────────────────────────────────────╯
+# ╰───────────────────────────────────
+#
+# [2026-11-03 / 2026-11-04] Renommage des cibles de confort : temperature_corrige_mamour est
+# devenue temperature_corrige_salon, temperature_corrige_eric est devenue temperature_corrige_bureau.
+# Les QUATRE references d'entites ont ete corrigees le 03. Les DEUX ETIQUETTES de hs_list
+# ('corrige_mamour' -> 'corrige_salon', 'corrige_eric' -> 'corrige_bureau') ne l'ont ete que le 04 :
+# c'est l'ecart que Gen_GLOBAL_INDEX_scripts signalait par different=1, revenu a 0 depuis.
+# Ces etiquettes nomment les capteurs muets dans le rapport de sante ; elles sont ecrites en dur et
+# ne suivent pas automatiquement un renommage d'entite.
+# A SAVOIR : Home Assistant reecrit scripts.yaml a chaque enregistrement depuis l'interface, donc
+# ces commentaires n'y survivraient pas. Cette copie locale est la reference documentaire.───────────────────────────────────────╯
 p1_master_gestion_clim:
   alias: "P1 - MASTER : Gestion centralisée climatisation"
   description: "Pilotage des 3 clims jour/nuit selon le paramètre periode. Appelé par P1_A_01 et P1_B_01."
@@ -127,8 +137,8 @@ p1_master_gestion_clim:
           {% if groupe_ok == 'false' %}{% set ns.hs = ns.hs + ['groupe'] %}{% endif %}
           {% if states('sensor.temperature_eco_hiver_corrige') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['eco_hiver_corrige'] %}{% endif %}
           {% if states('sensor.temperature_eco_ete_corrige') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['eco_ete_corrige'] %}{% endif %}
-          {% if states('sensor.temperature_corrige_salon') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['corrige_mamour'] %}{% endif %}
-          {% if states('sensor.temperature_corrige_bureau') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['corrige_eric'] %}{% endif %}
+          {% if states('sensor.temperature_corrige_salon') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['corrige_salon'] %}{% endif %}
+          {% if states('sensor.temperature_corrige_bureau') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['corrige_bureau'] %}{% endif %}
           {% if states('sensor.temperature_corrige_chambre') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['corrige_chambre'] %}{% endif %}
           {% if periode == 'jour' and states('sensor.temperature_cible') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['temperature_cible'] %}{% endif %}
           {% if periode == 'nuit' and states('sensor.temperature_confort_nuit') in ['unknown', 'unavailable', '0'] %}{% set ns.hs = ns.hs + ['temperature_confort_nuit'] %}{% endif %}

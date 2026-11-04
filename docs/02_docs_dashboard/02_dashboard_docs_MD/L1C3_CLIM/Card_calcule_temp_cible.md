@@ -47,7 +47,7 @@
 - `sensor.temperature_confort_jour`
 - `sensor.temperature_confort_nuit`
 - `sensor.temperature_corrige_chambre`
-- `sensor.temperature_corrige_bureau`
+- `sensor.temperature_corrige_eric`
 - `sensor.temperature_corrige_salon`
 - `sensor.temperature_delta_affichage`
 - `sensor.temperature_differentielle`
@@ -69,3 +69,21 @@
 
 ---
 *Doc créée le 2026-10-28*
+
+---
+
+## Modifications du 2026-11-03
+
+Les deux cibles de confort ont ete renommees, pour sortir les prenoms de l'installation :
+
+| Avant | Apres |
+|:---|:---|
+| `sensor.temperature_corrige_mamour` | `sensor.temperature_corrige_salon` |
+| `sensor.temperature_corrige_eric` | `sensor.temperature_corrige_bureau` |
+
+Sept references de cette carte ont suivi le renommage. La valeur affichee ne change pas : le salon vaut toujours
+`temperature_confort_jour + delta_1` et le bureau `temperature_confort_jour - delta_2`. Ce sont les noms qui ont
+bouge, pas les calculs.
+
+La chambre n'est pas concernee : `sensor.temperature_corrige_chambre` garde son nom et son comportement, mais elle
+reste la seule des trois a recopier `consigne_de_base` au lieu de passer par `temperature_confort_jour`.

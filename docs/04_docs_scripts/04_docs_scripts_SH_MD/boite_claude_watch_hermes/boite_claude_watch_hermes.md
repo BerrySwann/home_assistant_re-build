@@ -16,7 +16,7 @@
 *Cree le 2026-10-31 : copie maitre du script Hermes rangee dans le depot (ordre d'Eric)*
 
 ## Role
-Surveille la boite aux lettres Claude (`D:\Discussion_Claude_Hermes`) et ne sort un message que si un fichier `*_claude.md` change ou apparait. Le message dit QUEL fichier a change, COMBIEN de lignes sont nouvelles et QUELS identifiants de messages sont concernes, avec un apercu. Sortie vide = rien a signaler.
+Surveille la boite aux lettres Claude (`C:\Users\Berry Swann\AppData\Local\hermes\Discussion_Claude_Hermes`) et ne sort un message que si un fichier `*_claude.md` change ou apparait. Le message dit QUEL fichier a change, COMBIEN de lignes sont nouvelles et QUELS identifiants de messages sont concernes, avec un apercu. Sortie vide = rien a signaler.
 
 Mecanique, telle qu'ecrite dans le script (quatre fonctions, aucune dependance hors bibliotheque standard) :
 
@@ -29,12 +29,12 @@ Mecanique, telle qu'ecrite dans le script (quatre fonctions, aucune dependance h
 
 ## Emplacement
 - Copie maitre (ce depot) : `docs\04_docs_scripts\04_docs_scripts_SH\boite_claude_watch_hermes\boite_claude_watch_hermes.py`
-- Original vivant : `D:\hermes\scripts\boite_claude_watch.py` (3319 octets, md5 `e5c51f080d96304ab3cd1c669e039052`, identique a la copie ci-dessus)
-- Boite surveillee : `D:\Discussion_Claude_Hermes`, surchargeable par la variable d'environnement `BOITE_CLAUDE_DIR`
-- Fichier d'etat : `D:\hermes\scripts\.boite_claude_state`, surchargeable par la variable d'environnement `BOITE_CLAUDE_STATE`
+- Original vivant (releve du 2026-11-04) : `C:\Users\Berry Swann\AppData\Local\hermes\skills\autonomous-ai-agents\echange-claude\scripts\boite_claude_watch.py` (3436 octets, md5 `9f720997`), repointe par Hermes le 2026-11-01 sur la nouvelle boite. Il est DIFFERENT de la copie du depot ci-dessus (3319 octets, md5 `e5c51f08`), qui est l ancienne version, identique a `C:\Users\Berry Swann\AppData\Local\hermes\scripts\boite_claude_watch.py` et encore reglee sur D:.
+- Boite surveillee : `C:\Users\Berry Swann\AppData\Local\hermes\Discussion_Claude_Hermes` (dans l original vivant), surchargeable par la variable d'environnement `BOITE_CLAUDE_DIR`
+- Fichier d'etat : l original vivant pointe encore `D:\hermes\scripts\.boite_claude_state`, dossier qui n existe plus depuis le 2026-11-01 (suivi au TODO en R130.15, a corriger par Hermes) ; surchargeable par la variable d'environnement `BOITE_CLAUDE_STATE`
 
 ## Lancement
-`python -I -X utf8 "D:\hermes\scripts\boite_claude_watch.py"`
+`python -I -X utf8 "C:\Users\Berry Swann\AppData\Local\hermes\skills\autonomous-ai-agents\echange-claude\scripts\boite_claude_watch.py"`
 
 - Aucun argument n'est lu : tout se regle par `BOITE_CLAUDE_DIR` et `BOITE_CLAUDE_STATE`.
 - Test hors boite reelle : forcer ces deux variables vers un dossier et un fichier d'etat jetables.
@@ -60,3 +60,4 @@ Les quatre sorties explicites du script sont des `SystemExit(0)` : cette veille 
 - Identifiants et apercu sont des extraits : 4 identifiants au maximum, 260 caracteres d'apercu, et `clean()` supprime tout caractere hors ASCII imprimable (accents compris) — l'apercu n'est pas le texte d'origine.
 - Aucun verrou sur le fichier d'etat : deux instances simultanees peuvent s'ecraser mutuellement l'etat.
 - Le message ne porte ni horodatage ni heure de modification ; il ne dit pas quand le changement a eu lieu.
+<!-- annotations_log: [2026-11-04] chemins alignes sur la migration d Hermes vers AppData ; copie du depot ancienne, fichier d etat sur D: (R130.15) -->

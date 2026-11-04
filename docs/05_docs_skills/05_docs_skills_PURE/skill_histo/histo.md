@@ -11,22 +11,23 @@ description: "Skill HA ReBuild - genere un journal de bord ultra-compact et le s
 
 Six actions, plus les etapes 5B et 5C, enchainees sans interruption :
 1. Generer et sauvegarder le journal de bord de session
-2. Executer le sync_index (DEPENDANCES_GLOBALES_CLAUDE_memoire.md, docs impactees, GLOBAL_INDEX_REPO.md, GLOBAL_INDEX_AUTOMATIONS.md, GLOBAL_INDEX_VIGNETTES_PAGES.md, GLOBAL_INDEX_SCRIPTS_SH.md, GLOBAL_INDEX_SCRIPTS_PY.md, GLOBAL_INDEX_SCRIPTS_YAML.md, IA_GLOBAL_INDEX_memoire.md)
+2. Executer le sync_index (DEPENDANCES_GLOBALES_CLAUDE_memoire.md, docs impactees, GLOBAL_INDEX_REPO.md, GLOBAL_INDEX_AUTOMATIONS.md, GLOBAL_INDEX_VIGNETTES_PAGES.md, GLOBAL_INDEX_SCRIPTS_SH.md, GLOBAL_INDEX_SCRIPTS_PY.md, GLOBAL_INDEX_SCRIPTS_YAML.md, IA_GLOBAL_INDEX_memoire.md), puis le recapitulatif des entites en fin des index globaux, APRES les generateurs (`Recap_index.py`, regle d'Eric du 2026-11-03)
 
 3. Mettre a jour le JOURNAL FUSIONNE (historique\02_HISTO_ET_FUSIONNE\FUSIONNE\) avec la session qui vient d'etre ecrite
 4. Copier le journal de session et le journal fusionne dans le coffre Obsidian
 4B. Generer les pages HTML sombres du journal du jour et du fusionne (histo_html.py), puis mettre a la corbeille Windows les originaux .md/.txt convertis (etape 4B)
 5. Faire le menage des sauvegardes (.bak) : `docs` et `Claude md SAVE` seulement quand l'histo est definitif (question Oui/Non posee par /histo-final), puis `historique\03_RAPPORTS\06_MD5\`, les pages HTML de `historique\01_JOURNAL_TRACE\` et `historique\02_HISTO_ET_FUSIONNE\`, `TODO\`, le reste de `historique\`, et la purge de la corbeille Windows (elements de plus de 3 mois). Details : `histo_ref_menage.md`
 5B. Verifier l'export Dashboard depose a la racine de la prod et ne garder qu'un export en prod (etape 5B)
-5C. Pousser en prod tout `docs` hors `XX_` et hors `.bak`, avec MD5 avant et apres (etape 5C, decide par Eric le 2026-10-30)
+5C. Faire les copies de reference de `automations.yaml`, `scripts.yaml` et `configuration.yaml` (`Copie_reference.py`, regle d'Eric du 2026-11-02), puis pousser en prod tout `docs` hors `XX_` et hors `.bak`, avec MD5 avant et apres et copie TEMPO de l'ancienne prod avant chaque ecrasement (etape 5C, decide par Eric le 2026-10-30, garde-fous du 2026-11-03)
 6. Mettre a jour les tree : IA_ARBO_DETAIL.md (comptages local, prod, GitHub), avec le skill update-arbo (etape 6)
-6B. Controler les 9 fichiers de 00_IA_SOUS_CONTEXT_IA (lecture seule, rapport d'ecarts, etape 6 point 7)
+6B. Controler les fichiers de 00_IA_SOUS_CONTEXT_IA (12 au 2026-11-04) (lecture seule, rapport d'ecarts, etape 6 point 7)
 6C. Controler tous les index globaux (lecture seule, rapport d'ecarts, etape 6 point 8)
 6D. Controler les fichiers a plusieurs emplacements (lecture seule, rapport d'ecarts, etape 6 point 9)
 6E. Controler les integrations File (notify) de HA contre leur fiche (lecture seule, rapport d'ecarts, etape 6 point 10)
 6F. Verifier les fiches .md (une fiche par source) et la presence des 8 badges, creer les badges manquants dans la foulee (etape 6 point 11, ajoute par Eric le 2026-10-28)
 6G. Controler la fraicheur de DEPENDANCES_GLOBALES_CLAUDE_memoire.md et IA_GLOBAL_INDEX_memoire.md (lecture seule, corrections par Claude, etape 6 point 12)
-6H. Controler la prod fonctionnelle : les fichiers vitaux de la prod (palier 1, 98 fichiers) doivent etre verts partout (lecture seule, etape 6 point 14, ajoute par Eric le 2026-10-31)
+6H. Controler la prod fonctionnelle : les fichiers vitaux de la prod (palier 1, 98 fichiers) doivent etre verts en prod racine, local et miroir docs ; la colonne GitHub est seulement notee (lecture seule, etape 6 point 14, ajoute par Eric le 2026-10-31, precise le 2026-11-03)
+6I. Reparer les ecarts NOUVEAUX apparus pendant la session, puis relancer le controle jusqu'a 0 ; les ecarts anterieurs vont dans le rapport (etape 6 point 15, regle 6 d'Eric du 2026-11-01)
 
 Ne jamais demander confirmation entre les etapes. Les faire dans la foulee. Seule exception : le DRY-RUN du menage (etape 5) a la premiere execution sur un dossier, qui s'arrete pour presenter la liste et attendre le go de l'utilisateur (voir les garde-fous de l'etape 5).
 
@@ -39,10 +40,10 @@ Le menage des `.bak` de `docs` et `Claude md SAVE` n'a lieu que si l'histo est d
 
 ## FICHIERS DE REFERENCE (a lire seulement quand l'etape correspondante est executee)
 
-Dossier : `C:\Users\Berry Swann\Documents\ReBuild\docs\05_docs_skills\skill_histo\`
-- `histo_ref_sync_index.md` : etapes 2 (sync_index, index generes, GLOBAL_INDEX_REPO) et 3 (journal fusionne).
-- `histo_ref_menage.md` : etape 5 (menage des `.bak`, chapitres historique, TODO, MD5), 5B (export Dashboard) et 5C (push en prod de `docs`).
-- `histo_ref_controles.md` : etape 6 (tree, controles, badges, rattrapage du push, prod fonctionnelle) et format du rapport final.
+Dossier : `C:\Users\Berry Swann\Documents\ReBuild\docs\05_docs_skills\05_docs_skills_PURE\skill_histo\`
+- `histo_ref_sync_index.md` : etapes 2 (sync_index, index generes, recapitulatif des entites, GLOBAL_INDEX_REPO) et 3 (journal fusionne).
+- `histo_ref_menage.md` : etape 5 (menage des `.bak`, chapitres historique, TODO, MD5), 5B (export Dashboard) et 5C (copies de reference, regle des garde-fous, push en prod de `docs`).
+- `histo_ref_controles.md` : etape 6 (tree, controles, badges, rattrapage du push, prod fonctionnelle, reparation des ecarts nouveaux) et format du rapport final.
 Si un fichier de reference est introuvable : le dire en tete du rapport et arreter l'etape concernee, ne pas la refaire de memoire.
 
 ## ETAPE 2 - SYNC_INDEX et ETAPE 3 - JOURNAL FUSIONNE
@@ -175,11 +176,14 @@ Les journaux de session et les journaux fusionnes sont lisibles en HTML sombre (
 Enchainees sans demander, apres l'etape 4B. Lire `histo_ref_menage.md`. Trace : `menage`, `export_5B`, `push_docs`. Regles cles :
 - Menage des `.bak` de `docs` et `Claude md SAVE` seulement si l'histo est definitif. Horodates du jour : 10 au plus, Statut `bak_h`. Au menage definitif : le plus recent devient `.bak_AAAA_MM_JJ` (Statut `bak_d`), les autres horodates partent a la corbeille apres le Statut `Trash` ; 3 `.bak_AAAA_MM_JJ` au plus par fichier.
 - Corbeille Windows : jamais videe par le menage, sauf les elements de plus de 3 mois (au menage definitif).
-- Push en prod (5C) : tout `docs` hors `XX_` et hors `.bak`, MD5 avant et apres, jamais de sauvegarde sur H: ni sur D:.
+- Pas de plafond de volume (Eric, 2026-11-01 : "open bar, no limit") : le menage passe en une fois quel que soit le nombre de fichiers. Plus de lot de 19 ou 20, plus de dry-run declenche par un volume. Seul reste le dry-run de la premiere execution sur un dossier.
+- Copies de reference (5C, Eric 2026-11-02) AVANT le push : `Copie_reference.py`. Son MD5 est une barriere : en cas d'echec il s'arrete et ecrit `ALERTE A ENVOYER PAR CLAUDE` ; Claude envoie alors lui-meme `notify.mobile_app_eric` et `persistent_notification.create`, et arrete l'etape 5C.
+- Push en prod (5C) : `Push_5C.py`, tout `docs` hors `XX_` et hors `.bak`, MD5 avant et apres, jamais de sauvegarde sur H: ni sur D:. Avant chaque ecrasement, l'ancienne prod est copiee dans `TEMPO\push_5C_L_vers_P_<horodatage>\`. Une prod inconnue (modifiee hors circuit) est poussee quand meme et signalee `PROD INCONNUE` ; un fichier seul en prod est signale, jamais supprime sans ordre d'Eric, et n'arrete plus le push. Purge (validee par Eric le 2026-11-04, alignement sur Hermes) : a chaque `exec`, les dossiers `TEMPO\push_5C_L_vers_P_*` de plus de 7 jours partent a la corbeille Windows, jamais de suppression definitive ; le reste de TEMPO est vide par Eric seul.
+- Regle des garde-fous (Eric, 2026-11-03) : un garde-fou protege une donnee, il ne doit jamais empecher sa propre reparation. Dans l'ordre : signaler, bloquer une action ciblee (ce fichier, pas la session), bloquer une action non recuperable (extinction, suppression, ecrasement sans copie). Une alerte de `Check_XX_presents.py` bloque le fichier en cause, pas toute la sequence.
 
 ## ETAPE 6 - TREE ET CONTROLES
 
-Apres le menage. Lire `histo_ref_controles.md` (tree, controles 6B a 6H, badges, rattrapage du push, prod fonctionnelle, format du rapport final). Trace : `tree`, `controles_6B` a `controles_6H`. Un ecart au palier 1 de la prod fonctionnelle (point 14, `controles_6H`) bloque le push 5C et l'extinction de /histo-final et est dit en tete du rapport.
+Apres le menage. Lire `histo_ref_controles.md` (tree, controles 6B a 6H, badges, rattrapage du push, prod fonctionnelle, reparation des ecarts nouveaux, format du rapport final). Trace : `tree`, `controles_6B` a `controles_6H`. Un ecart au palier 1 de la prod fonctionnelle (point 14, `controles_6H`) bloque SEULEMENT l'extinction de /histo-final et est dit en tete du rapport ; il ne bloque pas le push 5C, qui est en general la reparation (Eric, 2026-11-03). Une prod differente du local se diagnostique avant d'etre reparee : si la prod contient plus que le local, c'est le local qui se realigne sur la prod. Point 15 (regle 6, Eric 2026-11-01) : un ecart NOUVEAU apparu pendant la session est repare tout de suite puis le controle est relance jusqu'a 0 ; un ecart deja present avant la session va dans le rapport ("soucis a traiter").
 
 ## ORDRE D'EXECUTION STRICT
 
@@ -191,6 +195,6 @@ Apres le menage. Lire `histo_ref_controles.md` (tree, controles 6B a 6H, badges,
 4. Copie Obsidian (etape 4).
 4B. Pages HTML sombres (etape 4B), originaux convertis a la corbeille.
 5. Menage (etape 5), puis export Dashboard (5B), puis push en prod (5C).
-6. Tree et controles (etape 6, points 1 a 14).
+6. Tree et controles (etape 6, points 1 a 15).
 7. Releve des tokens de fin, `histo_trace.py verifier`, puis (sauf si appele par /histo-final) `seq-fin`, `recap`, `html`.
 8. Rapport final au format de `histo_ref_controles.md`.

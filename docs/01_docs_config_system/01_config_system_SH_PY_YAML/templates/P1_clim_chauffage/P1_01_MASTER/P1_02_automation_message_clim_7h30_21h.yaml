@@ -2,6 +2,9 @@
 # │ TEMPLATES : SÉRIE 03_07. CLIM — MESSAGE PERSONNALISÉ (7h30 <-> 21h00)    │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
+# [2026-11-03] Les deux cibles de confort ont ete renommees : temperature_corrige_mamour devient
+#              temperature_corrige_salon et temperature_corrige_eric devient temperature_corrige_bureau.
+#              Les deux references de ce message ont suivi, le texte envoye est inchange.
 # ## 📝 DESCRIPTION :
 # Template sensor générant le message texte envoyé via notification mobile lors des
 # changements d'état de la clim en plage jour (7h30 → 21h00). Le message intègre
