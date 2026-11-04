@@ -44,7 +44,7 @@
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Vent violent') %}
         {% if wa is none %}
-          Hors saison
+          H. saison
         {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
           {{ wa }}
         {% else %}
@@ -58,7 +58,7 @@
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Inondation') %}
         {% if wa is none %}
-          Hors saison
+          H. saison
         {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
           {{ wa }}
         {% else %}
@@ -72,7 +72,7 @@
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Orages') %}
         {% if wa is none %}
-          Hors saison
+          H. saison
         {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
           {{ wa }}
         {% else %}
@@ -86,7 +86,7 @@
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Pluie-inondation') %}
         {% if wa is none %}
-          Hors saison
+          H. saison
         {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
           {{ wa }}
         {% else %}
@@ -100,7 +100,7 @@
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Neige-verglas') %}
         {% if wa is none %}
-          Hors saison
+          H. saison
         {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
           {{ wa }}
         {% else %}
@@ -114,7 +114,7 @@
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Grand-froid') %}
         {% if wa is none %}
-          Hors saison
+          H. saison
         {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
           {{ wa }}
         {% else %}
@@ -128,7 +128,7 @@
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Canicule') %}
         {% if wa is none %}
-          Hors saison
+          H. saison
         {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
           {{ wa }}
         {% else %}
@@ -142,7 +142,7 @@
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Avalanches') %}
         {% if wa is none %}
-          Hors saison
+          H. saison
         {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
           {{ wa }}
         {% else %}
@@ -156,7 +156,7 @@
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Vagues-submersion') %}
         {% if wa is none %}
-          Hors saison
+          H. saison
         {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
           {{ wa }}
         {% else %}

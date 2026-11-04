@@ -1523,7 +1523,7 @@ cards:
             primary: "{{ states(entity) }}"
             icon: "{{ state_attr(entity, 'icon') }}"
             icon_color: |-
-              {% if states(entity) in ['Vert', 'Hors saison'] %}
+              {% if states(entity) in ['Vert', 'H. saison'] %}
                green
               {% elif states(entity) == 'Jaune' %}
                yellow
@@ -1548,18 +1548,11 @@ cards:
                   box-shadow: none !important;
                   background: none !important;
                 }
-                ha-card .primary, ha-card .secondary {
-                  font-size: 1em !important;
-                  font-weight: 700 !important;
-                }
-                ha-card .primary {
-                  white-space: normal !important;
-                }
           - type: custom:mushroom-template-card
             primary: "{{ states(entity) }}"
             icon: "{{ state_attr(entity, 'icon') }}"
             icon_color: |-
-              {% if states(entity) in ['Vert', 'Hors saison'] %}
+              {% if states(entity) in ['Vert', 'H. saison'] %}
                green
               {% elif states(entity) == 'Jaune' %}
                yellow
@@ -1584,18 +1577,11 @@ cards:
                   box-shadow: none !important;
                   background: none !important;
                 }
-                ha-card .primary, ha-card .secondary {
-                  font-size: 1em !important;
-                  font-weight: 700 !important;
-                }
-                ha-card .primary {
-                  white-space: normal !important;
-                }
           - type: custom:mushroom-template-card
             primary: "{{ states(entity) }}"
             icon: "{{ state_attr(entity, 'icon') }}"
             icon_color: |-
-              {% if states(entity) in ['Vert', 'Hors saison'] %}
+              {% if states(entity) in ['Vert', 'H. saison'] %}
                green
               {% elif states(entity) == 'Jaune' %}
                yellow
@@ -1620,18 +1606,11 @@ cards:
                   box-shadow: none !important;
                   background: none !important;
                 }
-                ha-card .primary, ha-card .secondary {
-                  font-size: 1em !important;
-                  font-weight: 700 !important;
-                }
-                ha-card .primary {
-                  white-space: normal !important;
-                }
           - type: custom:mushroom-template-card
             primary: "{{ states(entity) }}"
             icon: "{{ state_attr(entity, 'icon') }}"
             icon_color: |-
-              {% if states(entity) in ['Vert', 'Hors saison'] %}
+              {% if states(entity) in ['Vert', 'H. saison'] %}
                green
               {% elif states(entity) == 'Jaune' %}
                yellow
@@ -1656,18 +1635,11 @@ cards:
                   box-shadow: none !important;
                   background: none !important;
                 }
-                ha-card .primary, ha-card .secondary {
-                  font-size: 1em !important;
-                  font-weight: 700 !important;
-                }
-                ha-card .primary {
-                  white-space: normal !important;
-                }
           - type: custom:mushroom-template-card
             primary: "{{ states(entity) }}"
             icon: "{{ state_attr(entity, 'icon') }}"
             icon_color: |-
-              {% if states(entity) in ['Vert', 'Hors saison'] %}
+              {% if states(entity) in ['Vert', 'H. saison'] %}
                green
               {% elif states(entity) == 'Jaune' %}
                yellow
@@ -1692,20 +1664,13 @@ cards:
                   box-shadow: none !important;
                   background: none !important;
                 }
-                ha-card .primary, ha-card .secondary {
-                  font-size: 1em !important;
-                  font-weight: 700 !important;
-                }
-                ha-card .primary {
-                  white-space: normal !important;
-                }
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-template-card
             primary: "{{ states(entity) }}"
             icon: "{{ state_attr(entity, 'icon') }}"
             icon_color: |-
-              {% if states(entity) in ['Vert', 'Hors saison'] %}
+              {% if states(entity) in ['Vert', 'H. saison'] %}
                green
               {% elif states(entity) == 'Jaune' %}
                yellow
@@ -1730,18 +1695,11 @@ cards:
                   box-shadow: none !important;
                   background: none !important;
                 }
-                ha-card .primary, ha-card .secondary {
-                  font-size: 1em !important;
-                  font-weight: 700 !important;
-                }
-                ha-card .primary {
-                  white-space: normal !important;
-                }
           - type: custom:mushroom-template-card
             primary: "{{ states(entity) }}"
             icon: "{{ state_attr(entity, 'icon') }}"
             icon_color: |-
-              {% if states(entity) in ['Vert', 'Hors saison'] %}
+              {% if states(entity) in ['Vert', 'H. saison'] %}
                green
               {% elif states(entity) == 'Jaune' %}
                yellow
@@ -1766,18 +1724,11 @@ cards:
                   box-shadow: none !important;
                   background: none !important;
                 }
-                ha-card .primary, ha-card .secondary {
-                  font-size: 1em !important;
-                  font-weight: 700 !important;
-                }
-                ha-card .primary {
-                  white-space: normal !important;
-                }
           - type: custom:mushroom-template-card
             primary: "{{ states(entity) }}"
             icon: "{{ state_attr(entity, 'icon') }}"
             icon_color: |-
-              {% if states(entity) in ['Vert', 'Hors saison'] %}
+              {% if states(entity) in ['Vert', 'H. saison'] %}
                green
               {% elif states(entity) == 'Jaune' %}
                yellow
@@ -1802,18 +1753,11 @@ cards:
                   box-shadow: none !important;
                   background: none !important;
                 }
-                ha-card .primary, ha-card .secondary {
-                  font-size: 1em !important;
-                  font-weight: 700 !important;
-                }
-                ha-card .primary {
-                  white-space: normal !important;
-                }
           - type: custom:mushroom-template-card
             primary: "{{ states(entity) }}"
             icon: "{{ state_attr(entity, 'icon') }}"
             icon_color: |-
-              {% if states(entity) in ['Vert', 'Hors saison'] %}
+              {% if states(entity) in ['Vert', 'H. saison'] %}
                green
               {% elif states(entity) == 'Jaune' %}
                yellow
@@ -1838,18 +1782,11 @@ cards:
                   box-shadow: none !important;
                   background: none !important;
                 }
-                ha-card .primary, ha-card .secondary {
-                  font-size: 1em !important;
-                  font-weight: 700 !important;
-                }
-                ha-card .primary {
-                  white-space: normal !important;
-                }
           - type: custom:mushroom-template-card
             primary: "{{ states(entity) }}"
             icon: "{{ state_attr(entity, 'icon') }}"
             icon_color: |-
-              {% if states(entity) in ['Vert', 'Hors saison'] %}
+              {% if states(entity) in ['Vert', 'H. saison'] %}
                green
               {% elif states(entity) == 'Jaune' %}
                yellow
@@ -1873,13 +1810,6 @@ cards:
                   border: none !important;
                   box-shadow: none !important;
                   background: none !important;
-                }
-                ha-card .primary, ha-card .secondary {
-                  font-size: 1em !important;
-                  font-weight: 700 !important;
-                }
-                ha-card .primary {
-                  white-space: normal !important;
                 }
       - type: custom:meteoalarm-card
         entities:
