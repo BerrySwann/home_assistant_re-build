@@ -1,9 +1,13 @@
 # Push_5C.py - push general de l etape 5C de /histo (docs vers H:\docs). Modes : plan (lecture seule, defaut) | exec.
 # Fiche : docs\04_docs_scripts\04_docs_scripts_SH_MD\Push_5C\Push_5C.md . Interpreteur : python -I -X utf8
-import os, hashlib, glob, re, sys, shutil
+# annotations_log:
+# [2026-11-04] regle des garde-fous d Eric (2026-11-03) : avant chaque ecrasement, l ancienne prod est copiee dans
+#   TEMPO\push_5C_L_vers_P_<horodatage>\ (MD5 verifie contre la prod) ; une PROD INCONNUE est poussee quand meme
+#   (avertissement, plus un refus) ; un fichier SEUL EN PROD n arrete plus le push : il est signale, jamais supprime
+#   sans ordre d Eric. Pas de purge de TEMPO (vidage par Eric seul).
+import os, hashlib, glob, re, sys, shutil, datetime
 L=r"C:\Users\Berry Swann\Documents\ReBuild\docs"; P=r"H:\docs"
-import datetime
-T=r"C:\Users\Berry Swann\Documents\ReBuild\TEMPO\miroir_5C_"+datetime.date.today().isoformat()
+T=r"C:\Users\Berry Swann\Documents\ReBuild\TEMPO\push_5C_L_vers_P_"+datetime.datetime.now().strftime("%Y-%m-%d_%Hh%Mm%Ss")
 MODE=sys.argv[1] if len(sys.argv)>1 else "plan"
 def skip(rel):
     parts=rel.split("\\")
@@ -49,31 +53,28 @@ for r in diff:
     cands=glob.glob(os.path.join(d,stem+".bak*"))+glob.glob(os.path.join(d,n+".bak*"))
     (connu if any(strip(b)==h for b in cands) else inconnu).append(r)
 print("local=%d prod=%d identiques=%d NOUVEAU=%d DIFF=%d (connus %d, INCONNUS %d) SEUL_EN_PROD=%d"%(len(loc),len(prod),same,len(new),len(diff),len(connu),len(inconnu),len(only)))
-print("-- SEUL_EN_PROD:"); [print("  ",r) for r in sorted(only)]
-print("-- DIFF INCONNUS:"); [print("  ",r) for r in inconnu]
+print("-- SEUL_EN_PROD (jamais supprime sans ordre d Eric, ne bloque pas le push):"); [print("  ",r) for r in sorted(only)]
+print("-- DIFF INCONNUS (prod modifiee hors circuit : poussee quand meme, ancienne prod copiee dans TEMPO):"); [print("  ",r) for r in inconnu]
 print("-- NOUVEAU (dossiers):")
 g={}
 for r in new: k="\\".join(r.split("\\")[:2]); g[k]=g.get(k,0)+1
 [print("  %4d %s"%(v,k)) for k,v in sorted(g.items())]
 if MODE!="exec": sys.exit(0)
-# garde-fou : aucune suppression en prod sans ordre d Eric
-if only: print("ABANDON : SEUL_EN_PROD non vide, a decider avec Eric (copie TEMPO + suppression a faire a part)"); sys.exit(3)
-# 1) copie TEMPO + MD5 puis suppression
-ok=0
-for r in only:
+# 1) copie de securite de l ancienne prod (DIFF connus et inconnus), MD5 verifie contre la prod d origine
+sauve=[];ko_copie=[]
+for r in connu+inconnu:
     dst=os.path.join(T,r); os.makedirs(os.path.dirname(dst),exist_ok=True); shutil.copy2(prod[r],dst)
-    assert md5(dst)==md5(prod[r]),r
-for r in only:
-    os.remove(prod[r]); ok+=1
-for r in sorted({os.path.dirname(r) for r in only},key=len,reverse=True):
-    d=os.path.join(P,r)
-    while d!=P and os.path.isdir(d) and not os.listdir(d): os.rmdir(d); d=os.path.dirname(d)
-print("supprimes en prod (copie TEMPO + MD5 OK):",ok)
-# 2) push NOUVEAU + DIFF connus
+    if md5(dst)==md5(prod[r]): sauve.append(r)
+    else: ko_copie.append(r)
+# 2) push NOUVEAU + DIFF dont la copie de securite est conforme
 n=0;bad=[]
-for r in new+connu:
+for r in new+sauve:
     src=loc[r]; dst=os.path.join(P,r); os.makedirs(os.path.dirname(dst),exist_ok=True); shutil.copyfile(src,dst)
     if md5(src)!=md5(dst): bad.append(r)
     n+=1
+print("copie de securite TEMPO :",(T if sauve else "aucune"),"| fichiers copies :",len(sauve))
 print("pousses:",n,"MD5 differents apres push:",len(bad)); [print("  KO",r) for r in bad]
-print("non pousses (PROD DIFFERENTE INCONNUE):",len(inconnu))
+print("PROD INCONNUE poussee (avertissement, ancienne prod dans TEMPO):",len([r for r in inconnu if r in sauve])); [print("  ",r) for r in inconnu if r in sauve]
+print("non pousses (copie de securite non conforme):",len(ko_copie)); [print("  KO_COPIE",r) for r in ko_copie]
+print("SEUL_EN_PROD non supprimes (a decider avec Eric):",len(only))
+sys.exit(1 if (bad or ko_copie) else 0)

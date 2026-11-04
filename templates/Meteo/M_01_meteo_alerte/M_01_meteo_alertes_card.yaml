@@ -43,12 +43,13 @@
       unique_id: alerte_vent_violent                   # "[L39] modif"
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Vent violent') %}
-        {% if wa is not none and wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
-          {% set al = wa %}
+        {% if wa is none %}
+          Hors saison
+        {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {{ wa }}
         {% else %}
-          {% set al = 'Vert' %}
+          Vert
         {% endif %}
-        {{ al }}
       icon: mdi:weather-windy
 
 # --- alerte_inondation ---
@@ -56,12 +57,13 @@
       unique_id: alerte_inondation                     # "[L60] modif"
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Inondation') %}
-        {% if wa is not none and wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
-          {% set al = wa %}
+        {% if wa is none %}
+          Hors saison
+        {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {{ wa }}
         {% else %}
-          {% set al = 'Vert' %}
+          Vert
         {% endif %}
-        {{ al }}
       icon: mdi:home-flood
 
 # --- alerte_orages ---
@@ -69,12 +71,13 @@
       unique_id: alerte_orages                         # "[L81] modif"
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Orages') %}
-        {% if wa is not none and wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
-          {% set al = wa %}
+        {% if wa is none %}
+          Hors saison
+        {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {{ wa }}
         {% else %}
-          {% set al = 'Vert' %}
+          Vert
         {% endif %}
-        {{ al }}
       icon: mdi:weather-lightning
 
 # --- alerte_pluie_inondation ---
@@ -82,12 +85,13 @@
       unique_id: alerte_pluie_inondation               # "[L102] modif"
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Pluie-inondation') %}
-        {% if wa is not none and wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
-          {% set al = wa %}
+        {% if wa is none %}
+          Hors saison
+        {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {{ wa }}
         {% else %}
-          {% set al = 'Vert' %}
+          Vert
         {% endif %}
-        {{ al }}
       icon: mdi:weather-pouring
 
 # --- alerte_neige_verglas ---
@@ -95,12 +99,13 @@
       unique_id: alerte_neige_verglas                  # "[L123] modif"
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Neige-verglas') %}
-        {% if wa is not none and wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
-          {% set al = wa %}
+        {% if wa is none %}
+          Hors saison
+        {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {{ wa }}
         {% else %}
-          {% set al = 'Vert' %}
+          Vert
         {% endif %}
-        {{ al }}
       icon: mdi:weather-snowy-heavy
 
 # --- alerte_grand_froid ---
@@ -108,7 +113,9 @@
       unique_id: alerte_grand_froid
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Grand-froid') %}
-        {% if wa is not none and wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+        {% if wa is none %}
+          Hors saison
+        {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
           {{ wa }}
         {% else %}
           Vert
@@ -120,7 +127,9 @@
       unique_id: alerte_canicule
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Canicule') %}
-        {% if wa is not none and wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+        {% if wa is none %}
+          Hors saison
+        {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
           {{ wa }}
         {% else %}
           Vert
@@ -132,12 +141,13 @@
       unique_id: alerte_avalanches                     # "[L174] modif"
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Avalanches') %}
-        {% if wa is not none and wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
-          {% set al = wa %}
+        {% if wa is none %}
+          Hors saison
+        {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {{ wa }}
         {% else %}
-          {% set al = 'Vert' %}
+          Vert
         {% endif %}
-        {{ al }}
       icon: mdi:terrain
 
 # --- alerte_vagues_submersion ---
@@ -145,12 +155,13 @@
       unique_id: alerte_vagues_submersion              # "[L195] modif"
       state: >-
         {% set wa = state_attr('sensor.06_weather_alert', 'Vagues-submersion') %}
-        {% if wa is not none and wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
-          {% set al = wa %}
+        {% if wa is none %}
+          Hors saison
+        {% elif wa in ['Vert', 'Jaune', 'Orange', 'Rouge'] %}
+          {{ wa }}
         {% else %}
-          {% set al = 'Vert' %}
+          Vert
         {% endif %}
-        {{ al }}
       icon: mdi:waves
 
 # --- alerte_meteo ---

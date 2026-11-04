@@ -105,6 +105,16 @@ Scope: all directories and sub-directories of `C:\Users\Berry Swann\Documents\Re
 - `Dashboard_COMPLET` exports -> never processed.
 - Recycle bin error (locked file, access denied) -> do not retry by another method, report.
 - Before running the step for the first time on a folder: first produce the list (DRY-RUN: planned renamings and recycle bin sends) and present it, changing nothing, then wait for the user's go (the only stop allowed in /histo). In all other cases, whatever the number of files (Eric's decision of 2026-10-15): no go to wait for; write the list in historique\03_RAPPORTS\02_MENAGE_BAK\menage_dry_run_AAAA-MM-JJ.txt, cite it in the final report, then execute. Re-read the plan before presenting or executing it: no target must be truncated, no Dashboard export or real file must appear in it, and the cap of 3 (folders outside docs) must be computed after the renamings of family D. Then execute without asking again; the tree (step 6) is done after the cleanup is executed, or the report states that its counts are from before the cleanup.
+- NO VOLUME CAP (Eric, 2026-11-01: "open bar, no limit"): the cleanup runs in one go whatever the number of files. No batch of 19 or 20, no dry-run triggered by a volume, no go to wait for because of a count. The only dry-run left is the very first run on a folder (bullet above), and it is about discovering the folder, not about its volume. History: the limit was 20, then 30, then dropped by Eric; neither value is valid today.
+
+### Step 5C - reference copies, then push (Eric, 2026-11-02 and 2026-11-03)
+
+Rule of the safeguards (Eric, 2026-11-03): a safeguard protects a piece of DATA; it must never prevent its own repair. Acceptable forms, in this order: report (the work goes on), block a targeted action (this file, not the session), block a non-recoverable action (shutdown, deletion, overwrite without copy). Before adding a safeguard, write in one sentence what it protects and how it is lifted.
+
+1. Reference copies (Eric, 2026-11-02), BEFORE the push so that they leave with it: `$env:PYTHONIOENCODING='utf-8'; python -I -X utf8 "C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Copie_reference\Copie_reference.py"`. `H:\automations.yaml` and `H:\scripts.yaml` get a dated copy (`<base>.bak_<now>.yaml`) in `Automations_yaml_original\` and `04_docs_script_ORIGINAL\`; `H:\configuration.yaml` refreshes the stable working file `01_config_system_SH_PY_YAML\configuration.yaml` (old one saved with its real date). An undated yaml of those folders is renamed with its REAL modification date, never today's date. The MD5 is a GATE: on a mismatch the copy is removed, the script stops (exit 1) and prints `ALERTE A ENVOYER PAR CLAUDE` ; Claude then sends `notify.mobile_app_eric` and `persistent_notification.create` himself and stops step 5C. No write on H:. Report the line printed per file (`renomme` / `copie` / `copie deja a jour`).
+2. Push: `Push_5C.py plan`, then `Push_5C.py exec`. Before each overwrite the OLD prod version is copied into `TEMPO\push_5C_L_vers_P_<AAAA-MM-JJ_HHhMMmSSs>\<same relative path>`, MD5 checked against the original prod; a non-conforming copy means the file is NOT overwritten and is reported. A prod that matches no known local `.bak` (modified outside the circuit) is listed `PROD INCONNUE` and pushed anyway: a WARNING, not a refusal (Eric, 2026-11-03), the TEMPO copy keeps the old prod. A file present only in prod is reported, never deleted without Eric's order, and no longer stops the push. No automatic purge of TEMPO: its emptying is decided by Eric alone.
+3. Exclusions applied by the script itself: `XX_` folders, `99_docs_MD_system` (except `ENTITES_GLOBAL_INDEX\ENTITES_GLOBAL_INDEX.md`, Eric 2026-10-31), `.bak`, `Dashboard_COMPLET`, archives, `secrets.yaml`, `#...#`, `.pyc`.
+4. After the push: `Check_XX_presents.py` (must say nothing in prod). An `ALERTE` blocks the offending file, not the whole session (Eric, 2026-11-03): name it to Eric, fix it (removing a stray `XX_` in prod needs his order), then resume.
 
 ### Report (to put in the final report)
 
@@ -117,3 +127,5 @@ Scope: all directories and sub-directories of `C:\Users\Berry Swann\Documents\Re
 - for `TODO\`: backups renamed, sent to the recycle bin, reported, with the path of the cleanup plan
 
 ---
+
+<!-- [2026-11-04] No volume cap (Eric 2026-11-01) and step 5C section (reference copies, safeguards rule, PROD INCONNUE pushed with warning, Eric 2026-11-02 and 2026-11-03), aligned on Hermes's histo skill -->
