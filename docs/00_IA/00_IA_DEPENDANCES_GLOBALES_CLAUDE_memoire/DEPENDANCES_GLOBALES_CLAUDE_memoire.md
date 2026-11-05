@@ -12,6 +12,7 @@
 
 </div>
 
+*Derniere mise a jour : 2026-11-05 07h42 (automation du store salon refaite sur le modele du store bureau et appliquee dans HA : presence sensor.groupe, seuils 12 et 32, lever/coucher du soleil ; section GESTION SIMPLE DU STORE SALON reecrite ; aucune vignette modifiee)*
 *Derniere mise a jour : 2026-11-04 21h50 (session du soir : tarif_edf retiree du parc et remplacee par Tarifelecinfo, 141 references locales et 127 en prod migrees, fiche de l integration creee, referentiel des integrations corrige ; six fiches d automations creees pour vider la famille R63 ; deux scripts de controle decouples du manifeste et du fichier de regles de Claude. Aucun prix en dur dans la documentation.)*
 *Derniere mise a jour : 2026-11-04 20h50 (changement d integration : tarif_edf remplacee par TarifElecInfo. Les trois capteurs tarif_heures_pleines_ttc, tarif_heures_creuses_ttc et puissance_souscrite_hphc_6kva sont devenus tarifelecinfo_tarif_heures_pleines, _creuses et _puissance_souscrite, a valeurs identiques (verifie avant bascule), 141 references en local et 127 en prod. L integration tarif_edf est retiree : entree de configuration supprimee et dossier custom_components supprime. Les capteurs TEMPO sont en platform mqtt et ne sont pas concernes)*
 *Derniere mise a jour : 2026-11-03 21h05 (renommage demande par Eric : sensor.temperature_corrige_mamour devient temperature_corrige_salon et sensor.temperature_corrige_eric devient temperature_corrige_bureau ; les fiches de la clim, du dashboard et cette matrice suivent le nouveau nom. Verification faite au passage : le plafond d ete du capteur est 26 pour le salon, et non 27 comme l ecrivait cette matrice avant correction)*
@@ -2000,7 +2001,7 @@ VigiEau (intégration HACS) - Section SÉCHERESSE
 | METEO | UPDATE PREVIOUS HUMIDITY | L1C2 | ✅ enrichi 2026-08-08 |
 | METEO | UPDATE PREVIOUS TEMPERATURE | L1C2 | ✅ enrichi 2026-08-08 |
 | STORES | GESTION OPTIMISÉE DU STORE BUREAU | L3C3 | ✅ enrichi 2026-08-08 |
-| STORES | GESTION SIMPLE DU STORE SALON (MATIN/SOIR) | L3C3 | ✅ refonte 2026-10-29 |
+| STORES | GESTION SIMPLE DU STORE SALON (MATIN/SOIR) | L3C3 | ✅ refonte 2026-11-05 |
 | SYSTEME | DB PURGE MARIADB + REPACK | L5C3 | ✅ enrichi 2026-08-08 |
 | SYSTEME | DIAG ENREGISTREMENT JOURNALIER (7 POSTES + DUT) | - log | ✅ enrichi 2026-08-08 |
 | SYSTEME | ÉCONOMIE ÉNERGIE VS CODE | HOME PAGE | ✅ enrichi 2026-08-08 |
@@ -3466,26 +3467,28 @@ sensor.th_balcon_nord_temperature (NAT) / sun.sun (NAT)
 
 #### A - Rôle
 
-Pilotage simple du store salon : ouvre à partir de 06:30 (avant le coucher du soleil) si le store est fermé, ferme au coucher du soleil. Sécurité : aucun mouvement si la fenêtre salon est ouverte. Refonte du 2026-10-29 sur le modèle du store bureau, sans les températures ; un lancement manuel évalue les mêmes conditions (plus de condition trigger id).
+Pilotage du store salon (alias HA "Gestion Optimisée du Store Salon", refonte du 2026-11-05 sur le modèle du store bureau, seuils 12 et 32) : groupe 1 (personne) ferme après 5 min sans autre condition ; groupe 2 ou 4 ouvre sans délai si soleil levé, température entre 12 et 32, fenêtre fermée, après 07:00 et store fermé ; fermeture chaleur et nuit. Appliqué dans HA le 2026-11-05 (point de retour : Automations_yaml_original/automations.bak_2026_11_05_07h30m30.yaml).
 
 #### B - Triggers / Entités
 
 | | Détail |
 |:--|:--|
-| Triggers | 06:30 (id: reveil) / `sun` sunset / `binary_sensor.contact_fenetre_salon_sonoff_contact` passe à off (id: fenetre) |
-| Condition globale | `binary_sensor.contact_fenetre_salon_sonoff_contact` = off (sécurité) |
-| Matin : Ouverture | après 06:30, avant sunset, `cover.store_salon` attribut `current_position` < 1 |
-| Soir : Fermeture | après sunset |
-| Entités lues | `binary_sensor.contact_fenetre_salon_sonoff_contact`, `cover.store_salon` (current_position) ; `sun.sun` n'est plus lue |
+| Triggers | 07:00 (id: reveil) / `sun` sunrise (id: lever) / `sun` sunset / `sensor.th_balcon_nord_temperature` change / `binary_sensor.contact_fenetre_salon_sonoff_contact` passe à off (id: fenetre) / `sensor.groupe` passe à groupe_1 pendant 5 min (id: groupe_1) / `sensor.groupe` passe à groupe_2 ou groupe_4 sans délai (id: groupe_2_4) |
+| Condition globale | aucune ; la sécurité fenêtre fermée est portée par les scénarios A, B et C (le groupe 1 la contourne) |
+| Groupe 1 : Fermeture | `sensor.groupe` = groupe_1, aucune autre condition |
+| Scénario A : Ouverture | groupe_2 ou groupe_4, fenêtre fermée, après 07:00, soleil levé et avant sunset, température balcon nord entre 12 et 32, `cover.store_salon` attribut `current_position` < 1 |
+| Scénario B : Fermeture chaleur | fenêtre fermée, température > 32, avant sunset |
+| Scénario C : Fermeture nuit | fenêtre fermée, après sunset |
+| Entités lues | `binary_sensor.contact_fenetre_salon_sonoff_contact`, `cover.store_salon` (current_position), `sensor.groupe`, `sensor.th_balcon_nord_temperature` ; `sun.sun` n'est pas lue (conditions `sun`) |
 | Actions | `cover.open_cover` / `cover.close_cover` sur `cover.store_salon` |
 
 #### C - Chaîne de dépendances
 
 ```
-Horloge 06:30 / sun sunset / fenêtre salon -> off (NAT)
-  [condition : fenêtre salon fermée]
-  ├─→ [après 06:30, avant sunset, store à 0 %] cover.store_salon → open
-  └─→ [après sunset] cover.store_salon → close
+Horloge 07:00 / sun sunrise / sun sunset / température balcon nord / fenêtre salon -> off / sensor.groupe (TPL P4_groupe_presence)
+  [groupe_1 : fermeture sans condition ; scénarios A, B, C : fenêtre salon fermée]
+  ├─→ [groupe_2/4, soleil levé, 12 < T < 32, après 07:00, store à 0 %] cover.store_salon → open
+  └─→ [groupe_1, T > 32 avant sunset, ou après sunset] cover.store_salon → close
         └─→ L3C3
 ```
 

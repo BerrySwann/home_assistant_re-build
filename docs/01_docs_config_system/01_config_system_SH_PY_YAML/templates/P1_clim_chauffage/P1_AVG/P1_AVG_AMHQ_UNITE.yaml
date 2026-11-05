@@ -43,7 +43,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.clim_salon_quotidien_um') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.clim_salon_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- clim_salon_avg_watts_mensuel ---
@@ -53,7 +55,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.clim_salon_mensuel_um') | float(0) %}
-        {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.clim_salon_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- clim_salon_avg_watts_hebdomadaire ---
@@ -63,7 +67,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.clim_salon_hebdomadaire_um') | float(0) %}
-        {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.clim_salon_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- clim_salon_avg_watts_annuel ---
@@ -74,7 +80,9 @@
       state: >
         {% set conso = states('sensor.clim_salon_annuel_um') | float(0) %}
         {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
-        {% set h = (now() - debut).total_seconds() / 3600 %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.clim_salon_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # ┌───────────────────────────────────┐
@@ -88,7 +96,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.radiateur_elec_cuisine_quotidien_um') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.radiateur_elec_cuisine_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- radiateur_elec_cuisine_avg_watts_mensuel ---
@@ -98,7 +108,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.radiateur_elec_cuisine_mensuel_um') | float(0) %}
-        {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.radiateur_elec_cuisine_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- radiateur_elec_cuisine_avg_watts_hebdomadaire ---
@@ -108,7 +120,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.radiateur_elec_cuisine_hebdomadaire_um') | float(0) %}
-        {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.radiateur_elec_cuisine_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- radiateur_elec_cuisine_avg_watts_annuel ---
@@ -119,7 +133,9 @@
       state: >
         {% set conso = states('sensor.radiateur_elec_cuisine_annuel_um') | float(0) %}
         {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
-        {% set h = (now() - debut).total_seconds() / 3600 %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.radiateur_elec_cuisine_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # ┌───────────────────────────────────┐
@@ -133,7 +149,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.clim_bureau_quotidien_um') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.clim_bureau_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- clim_bureau_avg_watts_mensuel ---
@@ -143,7 +161,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.clim_bureau_mensuel_um') | float(0) %}
-        {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.clim_bureau_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- clim_bureau_avg_watts_hebdomadaire ---
@@ -153,7 +173,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.clim_bureau_hebdomadaire_um') | float(0) %}
-        {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.clim_bureau_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- clim_bureau_avg_watts_annuel ---
@@ -164,7 +186,9 @@
       state: >
         {% set conso = states('sensor.clim_bureau_annuel_um') | float(0) %}
         {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
-        {% set h = (now() - debut).total_seconds() / 3600 %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.clim_bureau_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # ┌───────────────────────────────────┐
@@ -178,7 +202,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.soufflant_sdb_quotidien_um') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.soufflant_sdb_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- soufflant_sdb_avg_watts_mensuel ---
@@ -188,7 +214,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.soufflant_sdb_mensuel_um') | float(0) %}
-        {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.soufflant_sdb_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- soufflant_sdb_avg_watts_hebdomadaire ---
@@ -198,7 +226,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.soufflant_sdb_hebdomadaire_um') | float(0) %}
-        {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.soufflant_sdb_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- soufflant_sdb_avg_watts_annuel ---
@@ -209,7 +239,9 @@
       state: >
         {% set conso = states('sensor.soufflant_sdb_annuel_um') | float(0) %}
         {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
-        {% set h = (now() - debut).total_seconds() / 3600 %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.soufflant_sdb_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- seche_serviette_sdb_avg_watts_quotidien ---
@@ -219,7 +251,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.seche_serviette_sdb_quotidien_um') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.seche_serviette_sdb_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- seche_serviette_sdb_avg_watts_mensuel ---
@@ -229,7 +263,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.seche_serviette_sdb_mensuel_um') | float(0) %}
-        {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.seche_serviette_sdb_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- seche_serviette_sdb_avg_watts_hebdomadaire ---
@@ -239,7 +275,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.seche_serviette_sdb_hebdomadaire_um') | float(0) %}
-        {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.seche_serviette_sdb_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- seche_serviette_sdb_avg_watts_annuel ---
@@ -250,7 +288,9 @@
       state: >
         {% set conso = states('sensor.seche_serviette_sdb_annuel_um') | float(0) %}
         {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
-        {% set h = (now() - debut).total_seconds() / 3600 %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.seche_serviette_sdb_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # ┌───────────────────────────────────┐
@@ -264,7 +304,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.clim_chambre_quotidien_um') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.clim_chambre_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- clim_chambre_avg_watts_mensuel ---
@@ -274,7 +316,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.clim_chambre_mensuel_um') | float(0) %}
-        {% set h = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.clim_chambre_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- clim_chambre_avg_watts_hebdomadaire ---
@@ -284,7 +328,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.clim_chambre_hebdomadaire_um') | float(0) %}
-        {% set h = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.clim_chambre_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- clim_chambre_avg_watts_annuel ---
@@ -295,5 +341,7 @@
       state: >
         {% set conso = states('sensor.clim_chambre_annuel_um') | float(0) %}
         {% set debut = now().replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0) %}
-        {% set h = (now() - debut).total_seconds() / 3600 %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.clim_chambre_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}

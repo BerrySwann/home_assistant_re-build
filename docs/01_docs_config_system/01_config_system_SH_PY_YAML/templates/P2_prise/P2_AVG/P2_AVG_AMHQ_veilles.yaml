@@ -39,7 +39,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.all_standby_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.all_standby_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- all_standby_avg_watts_hebdomadaire ---
@@ -49,7 +51,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.all_standby_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.all_standby_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- all_standby_avg_watts_mensuel ---
@@ -59,7 +63,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.all_standby_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.all_standby_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- all_standby_avg_watts_annuel ---
@@ -69,7 +75,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.all_standby_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.all_standby_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
 # annotations_log:

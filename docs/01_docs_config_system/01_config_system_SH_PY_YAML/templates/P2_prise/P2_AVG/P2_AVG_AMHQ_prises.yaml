@@ -36,7 +36,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_box_internet_ikea_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_box_internet_ikea_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- box_internet_avg_watts_hebdomadaire ---
@@ -46,7 +48,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_box_internet_ikea_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_box_internet_ikea_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- box_internet_avg_watts_mensuel ---
@@ -56,7 +60,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_box_internet_ikea_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_box_internet_ikea_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- box_internet_avg_watts_annuel ---
@@ -66,7 +72,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_box_internet_ikea_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_box_internet_ikea_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # --- horloge_avg_watts_quotidien ---
@@ -76,7 +84,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_horloge_ikea_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_horloge_ikea_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- horloge_avg_watts_hebdomadaire ---
@@ -86,7 +96,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_horloge_ikea_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_horloge_ikea_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- horloge_avg_watts_mensuel ---
@@ -96,7 +108,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_horloge_ikea_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_horloge_ikea_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- horloge_avg_watts_annuel ---
@@ -106,7 +120,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_horloge_ikea_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_horloge_ikea_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # ┌───────────────────────────────────┐
@@ -119,7 +135,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_pc_s_gege_ikea_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_pc_s_gege_ikea_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- pc_gege_avg_watts_hebdomadaire ---
@@ -129,7 +147,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_pc_s_gege_ikea_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_pc_s_gege_ikea_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- pc_gege_avg_watts_mensuel ---
@@ -139,7 +159,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_pc_s_gege_ikea_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_pc_s_gege_ikea_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- pc_gege_avg_watts_annuel ---
@@ -149,7 +171,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_pc_s_gege_ikea_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_pc_s_gege_ikea_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # --- chargeurs_salon_avg_watts_quotidien ---
@@ -159,7 +183,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_salon_chargeur_nous_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_salon_chargeur_nous_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- chargeurs_salon_avg_watts_hebdomadaire ---
@@ -169,7 +195,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_salon_chargeur_nous_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_salon_chargeur_nous_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- chargeurs_salon_avg_watts_mensuel ---
@@ -179,7 +207,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_salon_chargeur_nous_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_salon_chargeur_nous_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- chargeurs_salon_avg_watts_annuel ---
@@ -189,7 +219,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_salon_chargeur_nous_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_salon_chargeur_nous_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # --- tv_salon_avg_watts_quotidien ---
@@ -199,7 +231,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_tv_salon_ikea_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_tv_salon_ikea_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- tv_salon_avg_watts_hebdomadaire ---
@@ -209,7 +243,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_tv_salon_ikea_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_tv_salon_ikea_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- tv_salon_avg_watts_mensuel ---
@@ -219,7 +255,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_tv_salon_ikea_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_tv_salon_ikea_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- tv_salon_avg_watts_annuel ---
@@ -229,7 +267,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_tv_salon_ikea_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_tv_salon_ikea_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # ┌───────────────────────────────────┐
@@ -242,7 +282,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_four_micro_ondes_nous_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_four_micro_ondes_nous_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- four_mo_avg_watts_hebdomadaire ---
@@ -252,7 +294,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_four_micro_ondes_nous_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_four_micro_ondes_nous_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- four_mo_avg_watts_mensuel ---
@@ -262,7 +306,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_four_micro_ondes_nous_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_four_micro_ondes_nous_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- four_mo_avg_watts_annuel ---
@@ -272,7 +318,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_four_micro_ondes_nous_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_four_micro_ondes_nous_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # --- petit_dej_avg_watts_quotidien ---
@@ -282,7 +330,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_petit_dejeune_nous_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_petit_dejeune_nous_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- petit_dej_avg_watts_hebdomadaire ---
@@ -292,7 +342,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_petit_dejeune_nous_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_petit_dejeune_nous_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- petit_dej_avg_watts_mensuel ---
@@ -302,7 +354,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_petit_dejeune_nous_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_petit_dejeune_nous_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- petit_dej_avg_watts_annuel ---
@@ -312,7 +366,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_petit_dejeune_nous_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_petit_dejeune_nous_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # --- lave_linge_avg_watts_quotidien ---
@@ -322,7 +378,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_lave_linge_nous_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_lave_linge_nous_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- lave_linge_avg_watts_hebdomadaire ---
@@ -332,7 +390,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_lave_linge_nous_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_lave_linge_nous_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- lave_linge_avg_watts_mensuel ---
@@ -342,7 +402,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_lave_linge_nous_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_lave_linge_nous_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- lave_linge_avg_watts_annuel ---
@@ -352,7 +414,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_lave_linge_nous_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_lave_linge_nous_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # --- lave_vaisselle_avg_watts_quotidien ---
@@ -362,7 +426,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_lave_vaisselle_nous_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_lave_vaisselle_nous_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- lave_vaisselle_avg_watts_hebdomadaire ---
@@ -372,7 +438,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_lave_vaisselle_nous_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_lave_vaisselle_nous_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- lave_vaisselle_avg_watts_mensuel ---
@@ -382,7 +450,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_lave_vaisselle_nous_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_lave_vaisselle_nous_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- lave_vaisselle_avg_watts_annuel ---
@@ -392,7 +462,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_lave_vaisselle_nous_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_lave_vaisselle_nous_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # --- airfryer_avg_watts_quotidien ---
@@ -402,7 +474,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_airfryer_ninja_nous_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_airfryer_ninja_nous_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- airfryer_avg_watts_hebdomadaire ---
@@ -412,7 +486,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_airfryer_ninja_nous_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_airfryer_ninja_nous_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- airfryer_avg_watts_mensuel ---
@@ -422,7 +498,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_airfryer_ninja_nous_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_airfryer_ninja_nous_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- airfryer_avg_watts_annuel ---
@@ -432,7 +510,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_airfryer_ninja_nous_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_airfryer_ninja_nous_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # --- plaques_cuisson_avg_watts_quotidien ---
@@ -442,7 +522,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.four_et_plaque_de_cuisson_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.four_et_plaque_de_cuisson_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- plaques_cuisson_avg_watts_hebdomadaire ---
@@ -452,7 +534,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.four_et_plaque_de_cuisson_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.four_et_plaque_de_cuisson_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- plaques_cuisson_avg_watts_mensuel ---
@@ -462,7 +546,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.four_et_plaque_de_cuisson_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.four_et_plaque_de_cuisson_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- plaques_cuisson_avg_watts_annuel ---
@@ -472,7 +558,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.four_et_plaque_de_cuisson_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.four_et_plaque_de_cuisson_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # --- frigo_avg_watts_quotidien ---
@@ -482,7 +570,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_frigo_cuisine_nous_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_frigo_cuisine_nous_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- frigo_avg_watts_hebdomadaire ---
@@ -492,7 +582,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_frigo_cuisine_nous_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_frigo_cuisine_nous_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- frigo_avg_watts_mensuel ---
@@ -502,7 +594,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_frigo_cuisine_nous_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_frigo_cuisine_nous_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- frigo_avg_watts_annuel ---
@@ -512,7 +606,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_frigo_cuisine_nous_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_frigo_cuisine_nous_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # --- congelateur_avg_watts_quotidien ---
@@ -522,7 +618,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_congelateur_cuisine_nous_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_congelateur_cuisine_nous_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- congelateur_avg_watts_hebdomadaire ---
@@ -532,7 +630,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_congelateur_cuisine_nous_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_congelateur_cuisine_nous_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- congelateur_avg_watts_mensuel ---
@@ -542,7 +642,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_congelateur_cuisine_nous_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_congelateur_cuisine_nous_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- congelateur_avg_watts_annuel ---
@@ -552,7 +654,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_congelateur_cuisine_nous_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_congelateur_cuisine_nous_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # ┌───────────────────────────────────┐
@@ -565,7 +669,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_bureau_pc_ikea_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_bureau_pc_ikea_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- pc_bureau_avg_watts_hebdomadaire ---
@@ -575,7 +681,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_bureau_pc_ikea_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_bureau_pc_ikea_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- pc_bureau_avg_watts_mensuel ---
@@ -585,7 +693,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_bureau_pc_ikea_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_bureau_pc_ikea_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- pc_bureau_avg_watts_annuel ---
@@ -595,7 +705,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_bureau_pc_ikea_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_bureau_pc_ikea_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # --- fer_repasser_avg_watts_quotidien ---
@@ -605,7 +717,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_bureau_fer_a_repasser_nous_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_bureau_fer_a_repasser_nous_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- fer_repasser_avg_watts_hebdomadaire ---
@@ -615,7 +729,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_bureau_fer_a_repasser_nous_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_bureau_fer_a_repasser_nous_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- fer_repasser_avg_watts_mensuel ---
@@ -625,7 +741,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_bureau_fer_a_repasser_nous_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_bureau_fer_a_repasser_nous_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- fer_repasser_avg_watts_annuel ---
@@ -635,7 +753,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_bureau_fer_a_repasser_nous_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_bureau_fer_a_repasser_nous_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # ┌───────────────────────────────────┐
@@ -648,7 +768,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_tete_de_lit_chambre_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_tete_de_lit_chambre_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- tetes_lit_avg_watts_hebdomadaire ---
@@ -658,7 +780,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_tete_de_lit_chambre_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_tete_de_lit_chambre_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- tetes_lit_avg_watts_mensuel ---
@@ -668,7 +792,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_tete_de_lit_chambre_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_tete_de_lit_chambre_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- tetes_lit_avg_watts_annuel ---
@@ -678,7 +804,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_tete_de_lit_chambre_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_tete_de_lit_chambre_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
   # --- tv_chambre_avg_watts_quotidien ---
@@ -688,7 +816,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_tv_chambre_nous_quotidien_um') | float(0) %}
-      {% set h = now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_tv_chambre_nous_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
   # --- tv_chambre_avg_watts_hebdomadaire ---
@@ -698,7 +828,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_tv_chambre_nous_hebdomadaire_um') | float(0) %}
-      {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+      {% set lr = [state_attr('sensor.prise_tv_chambre_nous_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
   # --- tv_chambre_avg_watts_mensuel ---
@@ -708,7 +840,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_tv_chambre_nous_mensuel_um') | float(0) %}
-      {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_tv_chambre_nous_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
   # --- tv_chambre_avg_watts_annuel ---
@@ -718,7 +852,9 @@
     device_class: power
     state: >
       {% set conso = states('sensor.prise_tv_chambre_nous_annuel_um') | float(0) %}
-      {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+      {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+      {% set lr = [state_attr('sensor.prise_tv_chambre_nous_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+      {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
       {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
 # annotations_log:

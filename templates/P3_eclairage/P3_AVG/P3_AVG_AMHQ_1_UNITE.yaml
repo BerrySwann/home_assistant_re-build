@@ -44,7 +44,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_entree_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_entree_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_entree_avg_watts_hebdomadaire ---
@@ -54,7 +56,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_entree_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_entree_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_entree_avg_watts_mensuel ---
@@ -64,7 +68,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_entree_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_entree_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_entree_avg_watts_annuel ---
@@ -74,7 +80,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_entree_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_entree_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # ┌───────────────────────────────────┐
@@ -87,7 +95,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_table_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_table_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_table_avg_watts_hebdomadaire ---
@@ -97,7 +107,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_table_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_table_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_table_avg_watts_mensuel ---
@@ -107,7 +119,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_table_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_table_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_table_avg_watts_annuel ---
@@ -117,7 +131,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_table_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_table_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # --- hue_ambiance_lamp_salon_1_avg_watts_quotidien ---
@@ -127,7 +143,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_ambiance_lamp_salon_1_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_ambiance_lamp_salon_1_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_ambiance_lamp_salon_1_avg_watts_hebdomadaire ---
@@ -137,7 +155,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_ambiance_lamp_salon_1_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_ambiance_lamp_salon_1_avg_watts_mensuel ---
@@ -147,7 +167,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_ambiance_lamp_salon_1_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_ambiance_lamp_salon_1_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_ambiance_lamp_salon_1_avg_watts_annuel ---
@@ -157,7 +179,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_ambiance_lamp_salon_1_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_ambiance_lamp_salon_1_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # --- hue_ambiance_lamp_salon_2_avg_watts_quotidien ---
@@ -167,7 +191,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_ambiance_lamp_salon_2_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_ambiance_lamp_salon_2_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_ambiance_lamp_salon_2_avg_watts_hebdomadaire ---
@@ -177,7 +203,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_ambiance_lamp_salon_2_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_ambiance_lamp_salon_2_avg_watts_mensuel ---
@@ -187,7 +215,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_ambiance_lamp_salon_2_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_ambiance_lamp_salon_2_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_ambiance_lamp_salon_2_avg_watts_annuel ---
@@ -197,7 +227,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_ambiance_lamp_salon_2_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_ambiance_lamp_salon_2_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # --- hue_ambiance_lamp_salon_3_avg_watts_quotidien ---
@@ -207,7 +239,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_ambiance_lamp_salon_3_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_ambiance_lamp_salon_3_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_ambiance_lamp_salon_3_avg_watts_hebdomadaire ---
@@ -217,7 +251,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_ambiance_lamp_salon_3_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_ambiance_lamp_salon_3_avg_watts_mensuel ---
@@ -227,7 +263,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_ambiance_lamp_salon_3_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_ambiance_lamp_salon_3_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_ambiance_lamp_salon_3_avg_watts_annuel ---
@@ -237,7 +275,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_ambiance_lamp_salon_3_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_ambiance_lamp_salon_3_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # --- hue_color_candle_salon_1_avg_watts_quotidien ---
@@ -247,7 +287,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_color_candle_salon_1_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_color_candle_salon_1_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_color_candle_salon_1_avg_watts_hebdomadaire ---
@@ -257,7 +299,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_color_candle_salon_1_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_color_candle_salon_1_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_color_candle_salon_1_avg_watts_mensuel ---
@@ -267,7 +311,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_color_candle_salon_1_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_color_candle_salon_1_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_color_candle_salon_1_avg_watts_annuel ---
@@ -277,7 +323,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_color_candle_salon_1_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_color_candle_salon_1_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # ┌───────────────────────────────────┐
@@ -290,7 +338,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_cuisine_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_cuisine_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_cuisine_avg_watts_hebdomadaire ---
@@ -300,7 +350,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_cuisine_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_cuisine_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_cuisine_avg_watts_mensuel ---
@@ -310,7 +362,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_cuisine_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_cuisine_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_cuisine_avg_watts_annuel ---
@@ -320,7 +374,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_cuisine_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_cuisine_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # ┌───────────────────────────────────┐
@@ -333,7 +389,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_couloir_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_couloir_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_couloir_avg_watts_hebdomadaire ---
@@ -343,7 +401,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_couloir_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_couloir_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_couloir_avg_watts_mensuel ---
@@ -353,7 +413,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_couloir_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_couloir_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_couloir_avg_watts_annuel ---
@@ -363,7 +425,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_couloir_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_couloir_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # ┌───────────────────────────────────┐
@@ -376,7 +440,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_play_1_pc_bureau_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_play_1_pc_bureau_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_play_1_pc_bureau_avg_watts_hebdomadaire ---
@@ -386,7 +452,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_play_1_pc_bureau_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_play_1_pc_bureau_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_play_1_pc_bureau_avg_watts_mensuel ---
@@ -396,7 +464,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_play_1_pc_bureau_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_play_1_pc_bureau_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_play_1_pc_bureau_avg_watts_annuel ---
@@ -406,7 +476,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_play_1_pc_bureau_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_play_1_pc_bureau_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # --- hue_play_2_pc_bureau_avg_watts_quotidien ---
@@ -416,7 +488,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_play_2_pc_bureau_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_play_2_pc_bureau_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_play_2_pc_bureau_avg_watts_hebdomadaire ---
@@ -426,7 +500,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_play_2_pc_bureau_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_play_2_pc_bureau_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_play_2_pc_bureau_avg_watts_mensuel ---
@@ -436,7 +512,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_play_2_pc_bureau_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_play_2_pc_bureau_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_play_2_pc_bureau_avg_watts_annuel ---
@@ -446,7 +524,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_play_2_pc_bureau_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_play_2_pc_bureau_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # --- hue_play_3_pc_bureau_avg_watts_quotidien ---
@@ -456,7 +536,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_play_3_pc_bureau_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_play_3_pc_bureau_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_play_3_pc_bureau_avg_watts_hebdomadaire ---
@@ -466,7 +548,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_play_3_pc_bureau_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_play_3_pc_bureau_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_play_3_pc_bureau_avg_watts_mensuel ---
@@ -476,7 +560,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_play_3_pc_bureau_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_play_3_pc_bureau_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_play_3_pc_bureau_avg_watts_annuel ---
@@ -486,7 +572,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_play_3_pc_bureau_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_play_3_pc_bureau_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_bureau_1_avg_watts_quotidien ---
@@ -496,7 +584,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_bureau_1_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_bureau_1_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_bureau_1_avg_watts_hebdomadaire ---
@@ -506,7 +596,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_bureau_1_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_bureau_1_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_bureau_1_avg_watts_mensuel ---
@@ -516,7 +608,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_bureau_1_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_bureau_1_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_bureau_1_avg_watts_annuel ---
@@ -526,7 +620,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_bureau_1_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_bureau_1_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_bureau_2_avg_watts_quotidien ---
@@ -536,7 +632,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_bureau_2_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_bureau_2_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_bureau_2_avg_watts_hebdomadaire ---
@@ -546,7 +644,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_bureau_2_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_bureau_2_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_bureau_2_avg_watts_mensuel ---
@@ -556,7 +656,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_bureau_2_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_bureau_2_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_bureau_2_avg_watts_annuel ---
@@ -566,7 +668,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_bureau_2_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_bureau_2_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # ┌───────────────────────────────────┐
@@ -579,7 +683,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.relais_lumiere_sdb_sonoff_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.relais_lumiere_sdb_sonoff_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- relais_lumiere_sdb_sonoff_avg_watts_hebdomadaire ---
@@ -589,7 +695,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.relais_lumiere_sdb_sonoff_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- relais_lumiere_sdb_sonoff_avg_watts_mensuel ---
@@ -599,7 +707,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.relais_lumiere_sdb_sonoff_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.relais_lumiere_sdb_sonoff_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- relais_lumiere_sdb_sonoff_avg_watts_annuel ---
@@ -609,7 +719,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.relais_lumiere_sdb_sonoff_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.relais_lumiere_sdb_sonoff_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_salle_de_bain_avg_watts_quotidien ---
@@ -619,7 +731,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_salle_de_bain_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_salle_de_bain_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_salle_de_bain_avg_watts_hebdomadaire ---
@@ -629,7 +743,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_salle_de_bain_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_salle_de_bain_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_salle_de_bain_avg_watts_mensuel ---
@@ -639,7 +755,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_salle_de_bain_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_salle_de_bain_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_salle_de_bain_avg_watts_annuel ---
@@ -649,7 +767,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_salle_de_bain_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_salle_de_bain_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # ┌───────────────────────────────────┐
@@ -662,7 +782,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_chambre_1_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_chambre_1_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_chambre_1_avg_watts_hebdomadaire ---
@@ -672,7 +794,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_chambre_1_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_chambre_1_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_chambre_1_avg_watts_mensuel ---
@@ -682,7 +806,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_chambre_1_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_chambre_1_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_chambre_1_avg_watts_annuel ---
@@ -692,7 +818,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_chambre_1_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_chambre_1_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_chambre_2_avg_watts_quotidien ---
@@ -702,7 +830,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_chambre_2_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_chambre_2_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_chambre_2_avg_watts_hebdomadaire ---
@@ -712,7 +842,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_chambre_2_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_chambre_2_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_chambre_2_avg_watts_mensuel ---
@@ -722,7 +854,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_chambre_2_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_chambre_2_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_white_lamp_chambre_2_avg_watts_annuel ---
@@ -732,7 +866,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_white_lamp_chambre_2_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_white_lamp_chambre_2_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # --- hue_color_candle_chambre_gege_avg_watts_quotidien ---
@@ -742,7 +878,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_color_candle_chambre_gege_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_color_candle_chambre_gege_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_color_candle_chambre_gege_avg_watts_hebdomadaire ---
@@ -752,7 +890,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_color_candle_chambre_gege_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_color_candle_chambre_gege_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_color_candle_chambre_gege_avg_watts_mensuel ---
@@ -762,7 +902,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_color_candle_chambre_gege_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_color_candle_chambre_gege_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_color_candle_chambre_gege_avg_watts_annuel ---
@@ -772,7 +914,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_color_candle_chambre_gege_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_color_candle_chambre_gege_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
     # --- hue_color_candle_chambre_eric_avg_watts_quotidien ---
@@ -782,7 +926,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_color_candle_chambre_eric_quotidien_um_kwh_tpl') | float(0) %}
-        {% set h = now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_color_candle_chambre_eric_quotidien_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set h = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / h if h > 0.1 else 0) | round(1) }}
 
     # --- hue_color_candle_chambre_eric_avg_watts_hebdomadaire ---
@@ -792,7 +938,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_color_candle_chambre_eric_hebdomadaire_um_kwh_tpl') | float(0) %}
-        {% set hh = (now().weekday() * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = (now().replace(hour=0,minute=0,second=0,microsecond=0) - timedelta(days=now().weekday())) %}
+        {% set lr = [state_attr('sensor.hue_color_candle_chambre_eric_hebdomadaire_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hh = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hh if hh > 0.1 else 0) | round(1) }}
 
     # --- hue_color_candle_chambre_eric_avg_watts_mensuel ---
@@ -802,7 +950,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_color_candle_chambre_eric_mensuel_um_kwh_tpl') | float(0) %}
-        {% set hm = ((now().day - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_color_candle_chambre_eric_mensuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set hm = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / hm if hm > 0.1 else 0) | round(1) }}
 
     # --- hue_color_candle_chambre_eric_avg_watts_annuel ---
@@ -812,7 +962,9 @@
       device_class: power
       state: >
         {% set conso = states('sensor.hue_color_candle_chambre_eric_annuel_um_kwh_tpl') | float(0) %}
-        {% set ha = ((now().timetuple().tm_yday - 1) * 24) + now().hour + (now().minute / 60) %}
+        {% set cs = now().replace(month=1,day=1,hour=0,minute=0,second=0,microsecond=0) %}
+        {% set lr = [state_attr('sensor.hue_color_candle_chambre_eric_annuel_um', 'last_reset')] | select('ne', none) | map('as_datetime') | select('gt', cs) | list %}
+        {% set ha = (now() - (([cs] + lr) | max)).total_seconds() / 3600 %}
         {{ ((conso * 1000) / ha if ha > 0.1 else 0) | round(1) }}
 
 # annotations_log:

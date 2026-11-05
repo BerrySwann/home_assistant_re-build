@@ -1,0 +1,67 @@
+id: '1775244989013'
+alias: Gestion Optimisée du Store Salon
+description: 'Priorité Sommeil et Anti-Reflet. Sécurité : Bloque tout mouvement
+  si la fenêtre est ouverte.'
+triggers:
+- id: reveil
+  trigger: time
+  at: '07:00:00'
+- trigger: state
+  entity_id: sensor.th_balcon_nord_temperature
+- trigger: sun
+  event: sunset
+- id: fenetre
+  trigger: state
+  entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+  to: 'off'
+conditions:
+- alias: 'SÉCURITÉ : La fenêtre doit être FERMÉE pour bouger le store'
+  condition: state
+  entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+  state: 'off'
+actions:
+- choose:
+  - alias: 'SCÉNARIO A : Ouverture Travail (Printemps/Automne)'
+    conditions:
+    - condition: time
+      after: '07:00:00'
+    - condition: sun
+      before: sunset
+    - condition: numeric_state
+      entity_id: sensor.th_balcon_nord_temperature
+      above: 12
+      below: 32
+    - condition: numeric_state
+      entity_id: cover.store_salon
+      attribute: current_position
+      below: 1
+    sequence:
+    - action: cover.open_cover
+      target:
+        entity_id: cover.store_salon
+  - alias: 'SCÉNARIO B : Fermeture Chaleur (Été)'
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.th_balcon_nord_temperature
+      above: 32
+    - condition: sun
+      before: sunset
+    sequence:
+    - action: cover.close_cover
+      target:
+        entity_id: cover.store_salon
+  - alias: 'SCÉNARIO C : Fermeture Nuit'
+    conditions:
+    - condition: sun
+      after: sunset
+    sequence:
+    - action: cover.close_cover
+      target:
+        entity_id: cover.store_salon
+mode: single
+# annotations_log:
+# [2026-10-29] L3C3 - at: et after: entre guillemets (HA lisait 06:29:00 en base 60, erreur 23340) ; condition sun.sun du matin remplacee par un template (declencheur sun OU sun.sun above_horizon) ; bak : Gestion_simple_du_store_salon_matin_soir.bak_2026_10_29_07h28m54s.yaml
+# [2026-10-29] L3C3 - refonte sur le modele du store bureau sans temperatures, 06:30 au lieu de 07:00 : plus de condition trigger id (un lancement manuel evalue les memes conditions), declencheur fenetre ajoute ; bak : Gestion_simple_du_store_salon_matin_soir.bak_2026_10_29_07h32m27s.yaml
+# [2026-11-05] L3C3 - corps remplace par la copie de Gestion_optimisee_du_store_bureau (ordre d Eric 07:05, premier temps, local seulement, NON poussee en prod) ; entites du salon gardees : cover.store_salon et binary_sensor.contact_fenetre_salon_sonoff_contact ; sensor.th_balcon_nord_temperature repris tel quel du bureau ; heures 07:00:00 du bureau (le salon etait a 06:30:00) mises entre guillemets ; id du salon conserve ; bak : Gestion_simple_du_store_salon_matin_soir.bak_2026_11_05_07h06m31s.yaml
+# [2026-11-05] L3C3 - seuils de temperature (ordre d Eric 07:10) : scenario A (Printemps/Automne) above 18 -> 12 et below 25 -> 32 ; scenario B (Ete) above 25 -> 32 ; local seulement, NON poussee en prod ; bak : Gestion_simple_du_store_salon_matin_soir.bak_2026_11_05_07h10m35s.yaml
+# [2026-11-05] L3C3 - decision d Eric 07:14 : EXCEPTIONNELLEMENT deux automations gardees. Ce fichier = version DEFINITIVE (copie du bureau, seuils 12 et 32). A CONSERVER hors menage : Gestion_simple_du_store_salon_matin_soir.bak_2026_11_05_07h06m31s.yaml (ancienne automation simple matin/soir 06:30, md5 8176562F) ; bak : Gestion_simple_du_store_salon_matin_soir.bak_2026_11_05_07h15m12s.yaml

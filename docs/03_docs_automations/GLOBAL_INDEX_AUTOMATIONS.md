@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--04-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--05-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,14 +13,14 @@
 
 </div>
 
-Fichier GENERE le 2026-11-04 21:44 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-11-05 07:41 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et categorie), YAML locaux 03_docs_automations_YAML (id local et commentaires), fiches 03_docs_automations_MD. Les liens sont relatifs a ce fichier.
 
 ## Controle
 
 - Automatisations en prod (automations.yaml) : 63
-- YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS_YAML_ORIGINAL) : 67
+- YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS_YAML_ORIGINAL) : 68
 - Fiches .md retenues : 77 dont 65 rattachees a un YAML
 - Automatisations de la prod sans YAML local : 0
 - Automatisations de la prod sans fiche rattachee : 0
@@ -78,7 +78,7 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 | N | Alias | id prod | id local (ReBuild) | Entity HA | Documentation (md) | YAML source | Commentaire |
 |:--|:------|:--------|:-------------------|:----------|:-------------------|:------------|:------------|
 | 13 | Gestion Optimisée du Store Bureau | 1775244953345 | 1775244953345 | `automation.gestion_optimisee_du_store_bureau` | [Gestion_store_salon.md](03_docs_automations_MD/Gestion_des_stores/Gestion_store_salon/Gestion_store_salon.md) | [Gestion_optimisee_du_store_bureau.yaml](03_docs_automations_YAML/Gestion_des_stores/Gestion_optimisee_du_store_bureau/Gestion_optimisee_du_store_bureau.yaml) |  |
-| 14 | Gestion Simple du Store Salon (Matin/Soir) | 1775244989013 | 1775244989013 | `automation.gestion_optimisee_du_store_salon_avec_mode_anti_reflet_pc` | [Gestion_store_salon.md](03_docs_automations_MD/Gestion_des_stores/Gestion_store_salon/Gestion_store_salon.md) | [Gestion_simple_du_store_salon_matin_soir.yaml](03_docs_automations_YAML/Gestion_des_stores/Gestion_simple_du_store_salon_matin_soir/Gestion_simple_du_store_salon_matin_soir.yaml) |  |
+| 14 | Gestion Optimisée du Store Salon | 1775244989013 | 1775244989013 | `automation.gestion_optimisee_du_store_salon_avec_mode_anti_reflet_pc` | [Gestion_store_salon.md](03_docs_automations_MD/Gestion_des_stores/Gestion_store_salon/Gestion_store_salon.md) | [Gestion_simple_du_store_salon_matin_soir.yaml](03_docs_automations_YAML/Gestion_des_stores/Gestion_simple_du_store_salon_matin_soir/Gestion_simple_du_store_salon_matin_soir.yaml) |  |
 
 ## MariaDB & VSCode Optimisation (2)
 
