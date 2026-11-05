@@ -1,0 +1,52 @@
+# ha_mcp_backup
+schema_version: 1
+domain: automation
+entity_id: '1775244989013'
+captured: '2026-11-05T06:31:09.331704+00:00'
+tool: ha_config_set_automation
+config:
+  id: '1775244989013'
+  alias: Gestion Simple du Store Salon (Matin/Soir)
+  description: "Ouvre le store \xE0 partir de 6h30 et le ferme au coucher du soleil.\
+    \ S\xE9curit\xE9 : bloque tout mouvement si la fen\xEAtre est ouverte."
+  triggers:
+  - id: reveil
+    trigger: time
+    at: 06:30:00
+  - trigger: sun
+    event: sunset
+  - id: fenetre
+    trigger: state
+    entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+    to: 'off'
+  conditions:
+  - alias: "S\xC9CURIT\xC9 : La fen\xEAtre doit \xEAtre FERM\xC9E pour bouger le store"
+    condition: state
+    entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+    state: 'off'
+  actions:
+  - choose:
+    - alias: 'MATIN : Ouverture'
+      conditions:
+      - condition: time
+        after: 06:30:00
+      - condition: sun
+        after: sunset
+      - condition: numeric_state
+        entity_id: cover.store_salon
+        attribute: current_position
+        below: 1
+      sequence:
+      - action: cover.open_cover
+        target:
+          entity_id: cover.store_salon
+        data: {}
+    - alias: 'SOIR : Fermeture'
+      conditions:
+      - condition: sun
+        after: sunset
+      sequence:
+      - action: cover.close_cover
+        target:
+          entity_id: cover.store_salon
+  mode: single

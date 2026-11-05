@@ -1449,45 +1449,101 @@
           entity_id: cover.store_bureau
   mode: single
 - id: '1775244989013'
-  alias: Gestion Simple du Store Salon (Matin/Soir)
-  description: 'Ouvre le store à partir de 6h30 et le ferme au coucher du soleil.
-    Sécurité : bloque tout mouvement si la fenêtre est ouverte.'
+  alias: Gestion Optimisée du Store Salon
+  description: 'Priorité Sommeil et Anti-Reflet. Groupe 1 (personne) : fermeture immédiate,
+    sans aucune autre condition. Groupe 2 ou 4 : ouverture selon lever/coucher du
+    soleil et températures. Sécurité : fenêtre ouverte = aucun mouvement (sauf groupe
+    1).'
   triggers:
-  - id: reveil
+  - at: 07:00:00
+    id: reveil
     trigger: time
-    at: 06:30:00
-  - trigger: sun
-    event: sunset
-  - id: fenetre
+  - event: sunrise
+    id: lever
+    trigger: sun
+  - entity_id: sensor.th_balcon_nord_temperature
     trigger: state
-    entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+  - event: sunset
+    trigger: sun
+  - entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+    id: fenetre
     to: 'off'
-  conditions:
-  - alias: 'SÉCURITÉ : La fenêtre doit être FERMÉE pour bouger le store'
-    condition: state
-    entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
-    state: 'off'
+    trigger: state
+  - entity_id: sensor.groupe
+    for: 00:05:00
+    id: groupe_1
+    to: groupe_1
+    trigger: state
+  - entity_id: sensor.groupe
+    id: groupe_2_4
+    to:
+    - groupe_2
+    - groupe_4
+    trigger: state
+  conditions: []
   actions:
   - choose:
-    - alias: 'MATIN : Ouverture'
+    - alias: 'GROUPE 1 : Personne, fermeture (priorité absolue, aucune autre condition)'
       conditions:
-      - condition: time
-        after: 06:30:00
-      - condition: sun
-        after: sunset
-      - condition: numeric_state
-        entity_id: cover.store_salon
-        attribute: current_position
+      - condition: state
+        entity_id: sensor.groupe
+        state: groupe_1
+      sequence:
+      - action: cover.close_cover
+        target:
+          entity_id: cover.store_salon
+    - alias: 'SCÉNARIO A : Ouverture Travail (Groupe 2 ou 4, Printemps/Automne)'
+      conditions:
+      - alias: 'SÉCURITÉ : La fenêtre doit être FERMÉE pour bouger le store'
+        condition: state
+        entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+        state: 'off'
+      - condition: state
+        entity_id: sensor.groupe
+        state:
+        - groupe_2
+        - groupe_4
+      - after: 07:00:00
+        condition: time
+      - after: sunrise
+        condition: sun
+      - before: sunset
+        condition: sun
+      - above: 12
+        below: 32
+        condition: numeric_state
+        entity_id: sensor.th_balcon_nord_temperature
+      - attribute: current_position
         below: 1
+        condition: numeric_state
+        entity_id: cover.store_salon
       sequence:
       - action: cover.open_cover
         target:
           entity_id: cover.store_salon
-        data: {}
-    - alias: 'SOIR : Fermeture'
+    - alias: 'SCÉNARIO B : Fermeture Chaleur (Été)'
       conditions:
-      - condition: sun
-        after: sunset
+      - alias: 'SÉCURITÉ : La fenêtre doit être FERMÉE pour bouger le store'
+        condition: state
+        entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+        state: 'off'
+      - above: 32
+        condition: numeric_state
+        entity_id: sensor.th_balcon_nord_temperature
+      - before: sunset
+        condition: sun
+      sequence:
+      - action: cover.close_cover
+        target:
+          entity_id: cover.store_salon
+    - alias: 'SCÉNARIO C : Fermeture Nuit'
+      conditions:
+      - alias: 'SÉCURITÉ : La fenêtre doit être FERMÉE pour bouger le store'
+        condition: state
+        entity_id: binary_sensor.contact_fenetre_salon_sonoff_contact
+        state: 'off'
+      - after: sunset
+        condition: sun
       sequence:
       - action: cover.close_cover
         target:
