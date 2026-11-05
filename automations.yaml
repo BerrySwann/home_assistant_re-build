@@ -1474,7 +1474,7 @@
       - condition: time
         after: 06:30:00
       - condition: sun
-        before: sunset
+        after: sunset
       - condition: numeric_state
         entity_id: cover.store_salon
         attribute: current_position
@@ -1483,6 +1483,7 @@
       - action: cover.open_cover
         target:
           entity_id: cover.store_salon
+        data: {}
     - alias: 'SOIR : Fermeture'
       conditions:
       - condition: sun
@@ -2877,9 +2878,9 @@
       total: '{{ state_attr(''sensor.genelec_appart_quotidien_um'', ''last_period'')
         | float(0) | round(1) }}'
   - variables:
-      cout: '{{ ((hp | float(0) * states(''sensor.tarifelecinfo_tarif_heures_pleines'') | float(0))
-        + (hc | float(0) * states(''sensor.tarifelecinfo_tarif_heures_creuses'') | float(0)))
-        | round(2) }}'
+      cout: '{{ ((hp | float(0) * states(''sensor.tarifelecinfo_tarif_heures_pleines'')
+        | float(0)) + (hc | float(0) * states(''sensor.tarifelecinfo_tarif_heures_creuses'')
+        | float(0))) | round(2) }}'
   - else:
     - action: notify.send_message
       data:
