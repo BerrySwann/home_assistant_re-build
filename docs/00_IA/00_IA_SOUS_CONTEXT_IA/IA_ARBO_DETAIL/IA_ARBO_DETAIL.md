@@ -12,6 +12,7 @@
 
 </div>
 
+*Derniere mise a jour : 2026-11-06 (soir, /histo-final S1 : session application GEMAYA EDL, aucun YAML HA touche ; docs 2067 dont 1030 sauvegardes, historique 561 dont 104 sauvegardes, 01_docs_config_system 222, 02_docs_dashboard 482, 03_docs_automations 459, 04_docs_scripts 291, 99_docs_MD_system 11 ; PROD H:/docs 996 ; GitHub commit 2ffdb743, 2255 objets dont 1443 dans docs/ ; menage .bak : 19 renommes, 32 a la corbeille Windows ; sous-comptages de la grille laisses au releve du 2026-10-31 ; push prod non fait, la prod est tenue par Claude)*
 *Derniere mise a jour : 2026-11-05 (soir, /histo-final S1 : docs 2089, historique 15 fichiers a la racine, 01_docs_config_system 222, 02_docs_dashboard 484, 03_docs_automations 472, 04_docs_scripts 295, 99_docs_MD_system 11 ; PROD H:/docs 996 ; GitHub commit 79bf6666 ; menage .bak : 50 renommes, 69 a la corbeille Win)*
 *Derniere mise a jour : 2026-11-04 (soir, /histo-final S1 : docs 2114, historique 13 fichiers a la racine, 01_docs_config_system 226, 02_docs_dashboard 494, 03_docs_automations 462, 04_docs_scripts 304, 99_docs_MD_system 11 ; PROD H:/docs 995 ; GitHub commit c638a4f2 ; menage .bak : 17 renommes, 19 a la corbeille Win)*
 *Derniere mise a jour : 2026-11-03 (soir, /histo-final S2 : docs 2048, historique 11 fichiers a la racine, 01_docs_config_system 206, 02_docs_dashboard 490, 03_docs_automations 449, 04_docs_scripts 285, 99_docs_MD_system 13 ; PROD H:/docs 984 ; GitHub commit dfac388a ; menage .bak : 0 renomme, 0 a la corbeille)*
@@ -33,7 +34,7 @@
 
 ---
 
-## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-10-31)
+## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-11-06)
 
 ```text
 ┌───────────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────────────────────┐
@@ -108,7 +109,7 @@
 │ │   │                                         │                                                                                      │
 │ │   └── MOC_PRESENCE/                         │ (son .md et ses sauvegardes)                                                         │
 │ │                                             │                                                                                      │
-│ ├── historique/                               │ (485 dont 80 sauvegardes)                                                            │
+│ ├── historique/                               │ (561 dont 104 sauvegardes)                                                            │
 │ │   │                                         │                                                                                      │
 │ │   ├── JOURNAL_COMPLET/JOURNAL_FUSIONNE_*.md │ (journaux)                                                                           │
 │ │   │                                         │                                                                                      │
@@ -120,7 +121,7 @@
 │ │   │                                         │                                                                                      │
 │ │   └── histo.md                              │ (= copie du skill + ses sauvegardes)                                                 │
 │ │                                             │                                                                                      │
-│ └── docs/                                     │ (1966 fichiers dont 963 sauvegardes)                                                │
+│ └── docs/                                     │ (2067 fichiers dont 1030 sauvegardes)                                                │
 │     │                                         │                                                                                      │
 │     ├── 00_IA/                                │ (12 dont 9 sauvegardes hors 00_IA_SOUS_CONTEXT_IA/ ; les fichiers html, rapports d'audit,    │
 │     │   │                                     │ grille tarifaire et png cites avant ne sont plus ici)                                │
@@ -203,7 +204,7 @@
 
 ---
 
-## 🌳 ARBORESCENCE - PROD /homeassistant/ (= H:\ - relevé 2026-10-31)
+## 🌳 ARBORESCENCE - PROD /homeassistant/ (= H:\ - relevé 2026-11-06)
 
 ```text
 ┌─────────────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────────┐
@@ -488,7 +489,7 @@
 │ │                                               │                                                                                    │
 │ ├── deps/                                       │ (divers, hors périmètre docs HA)                                                   │
 │ │                                               │                                                                                    │
-│ └── docs/                                       │ (971 - miroir pushé depuis local docs/ ; modifs/ supprimé de la prod)              │
+│ └── docs/                                       │ (996 - miroir pushé depuis local docs/ ; modifs/ supprimé de la prod)              │
 │     │                                           │                                                                                    │
 │     ├── 00_IA/                                  │ (14 fichiers - aucune sauvegarde .bak sur H:)                                      │
 │     │   │                                       │                                                                                    │
@@ -555,7 +556,7 @@
 - **Repo actif unique** : `BerrySwann/home_assistant_re-build` (ancien `home-assistant-config` supprimé le 2026-04-27)
 - **Contenu** : reflet exact de `/homeassistant/` - pushé par `.scripts/ha_git_backup.sh` (boutons page Système L5C3)
 - **Point d'entrée navigation** : [GLOBAL_INDEX_REPO.md](https://github.com/BerrySwann/home_assistant_re-build/blob/main/GLOBAL_INDEX_REPO.md) (copie de navigation a la racine, nom change le 2026-10-13 ; visible sur GitHub apres le prochain backup HA)
-- **Dernier relevé arbre (API git trees)** : 2026-11-03 - **2227 objets** au relevé precedent ; dernier commit `15f4c715` (2026-11-03 07:10 CET)
+- **Dernier relevé arbre (API git trees)** : 2026-11-06 - **2255 objets** dont 1443 dans docs/ ; dernier commit `2ffdb743` (2026-11-06 20:10 CET)
 - Répartition : `docs/` 1394 · `templates/` 85 · `utility_meter/` 14 · `input_booleans/` 5 · `sensors/` 10
 
 **Patterns URLs :**

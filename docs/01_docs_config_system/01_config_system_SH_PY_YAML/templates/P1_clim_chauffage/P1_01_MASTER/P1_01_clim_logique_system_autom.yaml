@@ -70,13 +70,13 @@
     - name: "Seuil non chauffage"
       unique_id: seuil_non_chauffage
       unit_of_measurement: "°C"
-      state: "18"
+      state: "19"
 
 # --- seuil_non_clim ---
     - name: "Seuil non clim"
       unique_id: seuil_non_clim
       unit_of_measurement: "°C"
-      state: "26"
+      state: "25"
 
 # --- delta_1 ---
     - name: "Delta_1"

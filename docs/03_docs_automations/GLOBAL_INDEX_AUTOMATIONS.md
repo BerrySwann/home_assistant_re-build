@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--05-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--06-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 </div>
 
-Fichier GENERE le 2026-11-05 21:31 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-11-06 20:48 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et categorie), YAML locaux 03_docs_automations_YAML (id local et commentaires), fiches 03_docs_automations_MD. Les liens sont relatifs a ce fichier.
 

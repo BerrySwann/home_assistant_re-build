@@ -22431,3 +22431,4 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [2] en [WIFI] | 06/11 20:30 | Hyg:0.95 | Cuis:0.35 | Froid:0.71 | Chauff:5.96 | Avg 4:290.9 | Multi:3.04 | Lum:0.51 | Autres:0.29 | Ti:21.1°C | Ext:11.2°C | DUT S/R/B/C:6.4/0.0/4.5/7.6
 [2] en [WIFI] | 06/11 20:45 | Hyg:0.95 | Cuis:0.35 | Froid:0.71 | Chauff:6.07 | Avg 4:292.8 | Multi:3.14 | Lum:0.53 | Autres:0.29 | Ti:21.1°C | Ext:11.2°C | DUT S/R/B/C:6.6/0.0/4.5/7.6
 [2] en [WIFI] | 06/11 21:00 | Hyg:0.95 | Cuis:0.35 | Froid:0.72 | Chauff:6.26 | Avg 4:298.3 | Multi:3.14 | Lum:0.55 | Autres:0.29 | Ti:21.4°C | Ext:11.2°C | DUT S/R/B/C:6.7/0.0/4.6/7.7
+[2] en [WIFI] | 06/11 21:15 | Hyg:0.95 | Cuis:0.35 | Froid:0.73 | Chauff:6.33 | Avg 4:298.1 | Multi:3.34 | Lum:0.56 | Autres:0.29 | Ti:21.3°C | Ext:11.0°C | DUT S/R/B/C:6.8/0.0/4.7/7.8
