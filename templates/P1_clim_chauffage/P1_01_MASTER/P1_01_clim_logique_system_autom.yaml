@@ -134,7 +134,7 @@
 # └───────────────────────────────────────────────────┘
 
 # --- consigne ---
-    - name: "Consigne de consigne"
+    - name: "Consigne"
       unique_id: consigne
       unit_of_measurement: "°C"
       state: >
