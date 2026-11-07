@@ -200,76 +200,178 @@ streamline_templates:
       cards:
         - type: markdown
           content: >
-            **<<< CALCUL DE LA TEMPERATURE CIBLE >>>**   {% set temp_ext =
-            states('sensor.th_balcon_nord_temperature') | float(-999) %}  {% set
-            consigne_de_base = states('sensor.consigne_de_base') | int(0) %} {%
-            set mode = states('sensor.mode_ete_hiver') %} {% set temp_eco =
-            states('sensor.temperature_eco_hiver') | int(0) %} {% set temp_eco_c
-            = states('sensor.temperature_eco_hiver_corrige') | int(0) %} {% set
-            temp_eco_ec = states('sensor.temperature_eco_ete_corrige') | int(0)
-            %} {% set temp_hg =states('sensor.temperature_hors_gel_hiver') |
-            int(0) %} {% set temp_diff =
-            states('sensor.temperature_differentielle') | int(0) %} {% set
-            delta_1 = states('sensor.delta_1') | int(0) %} {% set delta_2 =
-            states('sensor.delta_2') | int(0) %} {% set delta_5 =
-            states('sensor.delta_5') | int(0) %} {% set delta_7 =
-            states('sensor.delta_7') | int(0) %} {% set temp_cible =
-            states('sensor.temperature_cible') | int(0) %} {% set temp_confort =
-            states('sensor.temperature_confort_jour') | int(0) %} {% set
-            temp_confort_n = states('sensor.temperature_confort_nuit') | int(0)
-            %} {% set tcm = states('sensor.temperature_corrige_mamour') |
-            float(0) %} {% set tce = states('sensor.temperature_corrige_eric') |
-            float(0) %} {% set tcc =
-            states('sensor.temperature_corrige_chambre') | float(0) %}
+            **<<< CALCUL DES CONSIGNES CLIM >>>**
 
+            {% set temp_ext = states('sensor.th_balcon_nord_temperature') |
+            float(-999) %}
 
-            **Température Extérieure: {{ temp_ext | round(2) }}°C**
-             
-              **Résumé des valeurs actuel :**
-            {% if temp_ext < 10 %}         
-                - Calcul T°cible si T°Ext. ≤ 10°C [ {{ consigne_de_base }} + {{ delta_2 }} = {{ (consigne_de_base + delta_2) | round(0) }}°C ]
-                - Température cible [ {{ temp_cible | round(0) }}°C ]
-                - Calcul T°Diff. si T°Ext. ≤ 10°C [ {{ temp_diff }} + {{ delta_2 }} = {{ (temp_diff + delta_2) | round(0) }}°C ]
-                - Température confort [ {{ temp_confort | round(0) }}°C ]
-                - Température confort de nuit [ {{ temp_confort_n | round(0) }}°C ] (21h <-> 7h30)
-                - Calcul T°éCO si T°Ext. ≤ 10°C [ {{ temp_eco }} + {{ delta_1 }} = {{ (temp_eco + delta_1) | round(0) }}°C ]
-                - Température éCO corrigé: {{ temp_eco_c }}°C (éCO. si absents)
-            {% elif temp_ext < 12 %}        
-                - Calcul T°cible si T°Ext. ≤ 12°C [ {{ consigne_de_base }} + {{ delta_1 }} = {{ (consigne_de_base + delta_1) | round(0) }}°C ]
-                - Température cible [ {{ temp_cible | round(0) }}°C ]
-                - Calcul T°Diff. si T°Ext. ≤ 12°C [ {{ temp_diff }} + {{ delta_1 }} = {{ (temp_diff + delta_1) | round(0) }}°C ]
-                - Température confort [ {{ temp_confort | round(0) }}°C ]
-                - Température confort de nuit [ {{ temp_confort_n | round(0) }}°C ] (21h <-> 7h30)
-                - Température éCO. : {{ temp_eco_c | round(0) }}°C -> (éCO. si absents)
-            {% elif temp_ext > 40 %}
-                - Calcul T°cible si T°Ext. ≥ 40°C [ {{ temp_ext | round(0) }} - {{ delta_7 }} = {{ (temp_ext - delta_7) | round(0) }}°C ]
-                - Température cible [ {{ temp_cible | round(0) }}°C ]
-                - Température confort [ {{ temp_confort | round(0) }}°C ]
-            {% elif temp_ext > 32 %}
-                - Calcul T°cible si T°Ext. ≥ 32°C [ {{ temp_ext | round(0) }} - {{ delta_5 }} = {{ (temp_ext - delta_5) | round(0) }}°C ]
-                - Température cible [ {{ temp_cible | round(0) }}°C ]
-                - Température confort [ {{ temp_confort | round(0) }}°C ]
+            {% set mode = states('sensor.mode_ete_hiver') %}
+
+            {% set consigne = states('sensor.consigne') | float(19) %}
+
+            {% set d1 = states('sensor.delta_1') | float(1) %}
+
+            {% set d2 = states('sensor.delta_2') | float(2) %}
+
+            {% set d5 = states('sensor.delta_5') | float(5) %}
+
+            {% set d7 = states('sensor.delta_7') | float(7) %}
+
+            {% set conf = states('sensor.temperature_confort') | float(0) %}
+
+            {% set conf_j = states('sensor.temperature_confort_jour') | float(0)
+            %}
+
+            {% set conf_n = states('sensor.temperature_confort_nuit') | float(0)
+            %}
+
+            {% set eco_h = states('sensor.temperature_eco_hiver_corrige') |
+            float(0) %}
+
+            {% set eco_e = states('sensor.temperature_eco_ete_corrige') |
+            float(0) %}
+
+            {% set tcs = states('sensor.temperature_corrige_salon') | float(0)
+            %}
+
+            {% set tcb = states('sensor.temperature_corrige_bureau') | float(0)
+            %}
+
+            {% set tcc = states('sensor.temperature_corrige_chambre') | float(0)
+            %}
+
+            {% if temp_ext == -999 %}
+
+            **Température extérieure : sonde indisponible - mode : {{ mode |
+            upper }}**
+
             {% else %}
-                - Température cible [ {{ temp_cible | round(0) }}°C ]
-                - Température confort [ {{ temp_confort | round(0) }}°C ]
-            {% if mode == "heat" %} 
-                - Température confort de nuit [ {{ temp_confort_n | round(0) }}°C ] (21h <-> 7h30)  {% endif %}
-            {% if temp_ext < 17 %} 
-                - Température éCO. : {{ temp_eco_c | round(0) }}°C -> (éCO. si absents) {% endif %} {% endif %} 
-              
-              **Résumé des valeurs de base :**
-              
-                - Consigne de Base : {{consigne_de_base }}°C 
-                - Température Cible : {{ temp_cible | round(0) }}°C 
-                - Température différentielle : {{ temp_diff | round(0) }}°C -> (Confort) 
-                {% if mode == 'cool' %}- Température éCO. été : {{ states('sensor.temperature_eco_ete') | int(0) }}°C -> (éCO. si absents){% else %}- Température éCO. hiver : {{ temp_eco | round(0) }}°C -> (éCO. si absents){% endif %}
 
-            **DELTA: {{ states('sensor.temperature_delta_affichage') |
-            default('N/A') }}**
-              
-              **MODE: {{ states('sensor.mode_ete_hiver') | upper | default('N/A') }}** 
+            **Température extérieure : {{ temp_ext | round(1) }} °C - mode : {{
+            mode | upper }}**
 
-              **Groupe = {{ states('sensor.groupe') | default('N/A') }} - Presence = {{ states('sensor.presence')  | default('N/A') }}**
+            {% endif %}
+
+            {% if temp_ext == -999 %}
+
+            - **Sonde extérieure indisponible**, aucun palier ne peut être
+            calculé.
+
+            {% elif mode == 'cool' %}
+
+            {% if temp_ext >= 34 %}
+
+            - **Palier été fort** : {{ temp_ext | round(0) }} - {{ d7 }} = **{{
+            (temp_ext - d7) | round(0) }} °C**
+
+            {% elif temp_ext > 32 %}
+
+            - **Palier été chaud** : {{ temp_ext | round(0) }} - {{ d5 }} = **{{
+            (temp_ext - d5) | round(0) }} °C**
+
+            {% else %}
+
+            - **Palier été** : consigne maintenue à **{{ consigne | round(0) }}
+            °C**
+
+            {% endif %}
+
+            {% else %}
+
+            {% if temp_ext < 8 %}
+
+            - **Palier hiver froid** (< 8 °C) : {{ consigne | round(0) }} + {{
+            d2 }} = **{{ (consigne + d2) | round(0) }} °C**
+
+            {% elif temp_ext < 12 %}
+
+            - **Palier hiver frais** (< 12 °C) : {{ consigne | round(0) }} + {{
+            d1 }} = **{{ (consigne + d1) | round(0) }} °C**
+
+            {% else %}
+
+            - **Palier hiver doux** (>= 12 °C) : consigne maintenue à **{{
+            consigne | round(0) }} °C**
+
+            {% endif %}
+
+            {% endif %}
+
+
+            **Consignes fixes par défaut selon la saison**
+
+
+            - Mode été/hiver, capteur de saison : **{{ mode | upper }}**
+
+            {% if mode == 'cool' %} - Consigne active (Été) : **{{ consigne |
+            round(0) }} °C**
+
+            - Confort par défaut (Été) : **{{ conf | round(1) }} °C**
+
+            - Éco été : **{{ states('sensor.temperature_eco_ete') | float(0) |
+            round(0) }} °C**
+
+            {% elif mode == 'heat' %} - Consigne active (Hiver) : **{{ consigne
+            | round(0) }} °C**
+
+            - Confort par défaut (Hiver) : **{{ conf | round(1) }} °C**
+
+            - Éco hiver : **{{ states('sensor.temperature_eco_hiver') | float(0)
+            | round(0) }} °C**
+
+            {% else %} - Consigne active (hors saison) : **{{ consigne |
+            round(0) }} °C**
+
+            {% endif %}
+
+
+            **Consignes calculées**
+
+
+            - Confort de jour, compensé, 7h30 -> 21h00 : **{{ conf_j | round(1)
+            }} °C**
+
+            - Confort de nuit, consigne régulée, 21h00 -> 7h30 : **{{ conf_n |
+            round(1) }} °C**
+
+
+            **Pièces, plafonds appliqués**
+
+            - Salon : **{{ tcs | round(1) }} °C** ({{ "%+.1f" | format(tcs -
+            conf_j) }} par rapport au confort jour)
+
+            - Bureau : **{{ tcb | round(1) }} °C** ({{ "%+.1f" | format(tcb -
+            conf_j) }} par rapport au confort jour)
+
+            - Chambre : **{{ tcc | round(0) }} °C** ({{ "%+.1f" | format(tcc -
+            conf_j) }} par rapport au confort jour)
+
+
+            **Mode éco, si absents**
+
+            {% if mode == 'cool' %}
+
+            - Éco été corrigé, compensé : **{{ eco_e | round(0) }} °C**
+
+            {% else %}
+
+            - Éco hiver corrigé, compensé : **{{ eco_h | round(0) }} °C**
+
+            {% endif %}
+
+            {% if mode == 'heat' and temp_ext != -999 and temp_ext < 12 %}
+
+            - L'éco s'applique, l'extérieur est sous 12 °C.
+
+            {% endif %}
+
+
+            **Delta : {{ states('sensor.temperature_delta_affichage') |
+            default('N/A', true) }}**
+
+
+            **Groupe : {{ states('sensor.groupe') | default('N/A', true) }} -
+            Présence : {{ states('sensor.presence') | default('N/A', true) }}**
           card_mod:
             style: |
               ha-card {
@@ -316,11 +418,11 @@ streamline_templates:
             content: >
               **{{ states('sensor.presence') }} (7h30 ⟷ 21h)** {% if
               is_state('sensor.mode_ete_hiver', 'heat') %}
-                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_mamour') | int(0) }}°C (Heat){% endif %}
+                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_salon') | int(0) }}°C (Heat){% endif %}
                 - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_eco_hiver_corrige') | int(0) }}°C (éCO Heat){% endif %}
                 - Climatiseur Chambre : {% if is_state('switch.clim_chambre_nous', 'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_chambre') | int(0) }}°C (Heat){% endif %}
               {% elif is_state('sensor.mode_ete_hiver', 'cool') %}
-                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_mamour') | int(0) }}°C (Cool){% endif %}
+                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_salon') | int(0) }}°C (Cool){% endif %}
                 - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_eco_ete_corrige') | int(0) }}°C (éCO Cool){% endif %}
                 - Climatiseur Chambre : {% if is_state('switch.clim_chambre_nous', 'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_chambre') | int(0) }}°C (Cool){% endif %}
               {% else %}
@@ -342,12 +444,12 @@ streamline_templates:
             content: >
               **{{ states('sensor.presence') }} (7h30 ⟷ 21h)** {% if
               is_state('sensor.mode_ete_hiver', 'heat') %}
-                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_eric') | int(0) }}°C (Heat){% endif %}
-                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_eric') | int(0) }}°C (Heat){% endif %}
+                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_bureau') | int(0) }}°C (Heat){% endif %}
+                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_bureau') | int(0) }}°C (Heat){% endif %}
                 - Climatiseur Chambre : {% if is_state('switch.clim_chambre_nous', 'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_chambre') | int(0) }}°C (Heat){% endif %}
               {% elif is_state('sensor.mode_ete_hiver', 'cool') %}
-                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_eric') | int(0) }}°C (Cool){% endif %}
-                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_eric') | int(0) }}°C (Cool){% endif %}
+                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_bureau') | int(0) }}°C (Cool){% endif %}
+                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_bureau') | int(0) }}°C (Cool){% endif %}
                 - Climatiseur Chambre : {% if is_state('switch.clim_chambre_nous', 'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_chambre') | int(0) }}°C (Cool){% endif %}
               {% else %}
                 - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.mode_ete_hiver') }}{% endif %}
@@ -368,12 +470,12 @@ streamline_templates:
             content: |
               **{{ states('sensor.presence') }} (7h30 ⟷ 21h)**
               {% if is_state('sensor.mode_ete_hiver', 'heat') %}
-                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_mamour') | int(0) }}°C (Heat){% endif %}
-                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_eric') | int(0) }}°C (Heat){% endif %}
+                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_salon') | int(0) }}°C (Heat){% endif %}
+                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_bureau') | int(0) }}°C (Heat){% endif %}
                 - Climatiseur Chambre : {% if is_state('switch.clim_chambre_nous', 'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_chambre') | int(0) }}°C (Heat){% endif %}
               {% elif is_state('sensor.mode_ete_hiver', 'cool') %}
-                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_mamour') | int(0) }}°C (Cool){% endif %}
-                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_eric') | int(0) }}°C (Cool){% endif %}
+                - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_salon') | int(0) }}°C (Cool){% endif %}
+                - Climatiseur Bureau  : {% if is_state('switch.clim_bureau_nous',  'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_bureau') | int(0) }}°C (Cool){% endif %}
                 - Climatiseur Chambre : {% if is_state('switch.clim_chambre_nous', 'off') %}[OFF]{% else %}{{ states('sensor.temperature_corrige_chambre') | int(0) }}°C (Cool){% endif %}
               {% else %}
                 - Climatiseur Salon   : {% if is_state('switch.clim_salon_nous',   'off') %}[OFF]{% else %}{{ states('sensor.mode_ete_hiver') }}{% endif %}
@@ -1595,7 +1697,7 @@ views:
             name: |
               [[[
                 const distRaw = states['sensor.maison_lightning_distance'] ? parseFloat(states['sensor.maison_lightning_distance'].state) : 0;
-                const localisation = states['sensor.maison_lightning_localisation'];
+                const localisation = states['sensor.blitzortung_lightning_localisation'];
                 const azimuth = states['sensor.maison_lightning_azimuth'] ? parseFloat(states['sensor.maison_lightning_azimuth'].state) : null;
                 const impactCount = parseInt(entity.state) || 0;
                 const timePhrase = states['sensor.timer_foudre'] ? states['sensor.timer_foudre'].state : '';
@@ -3608,6 +3710,7 @@ views:
                   - sensor.lumiere_salon_etat
                   - sensor.lumiere_cuisine_etat
                   - sensor.lumiere_bureau_etat
+                  - sensor.lumiere_ecran_etat
                   - sensor.lumiere_salle_de_bain_etat
                   - sensor.lumiere_chambre_etat
                   - sensor.eclairage_appart_2_quotidien_um_kwh_tpl
@@ -3629,6 +3732,7 @@ views:
                   - sensor.lumiere_salon_etat
                   - sensor.lumiere_cuisine_etat
                   - sensor.lumiere_bureau_etat
+                  - sensor.lumiere_ecran_etat
                   - sensor.lumiere_salle_de_bain_etat
                   - sensor.lumiere_chambre_etat
                   - sensor.eclairage_appart_2_quotidien_um_kwh_tpl
@@ -3696,7 +3800,7 @@ views:
                         { name: 'Appart.', color: getCol('sensor.lumiere_appartement_etat') },
                         { name: 'Salon',   color: getCol('sensor.lumiere_salon_etat') },
                         { name: 'Cuisine', color: getCol('sensor.lumiere_cuisine_etat') },
-                        { name: 'Bureau',  color: getCol('sensor.lumiere_bureau_etat', true) },
+                        { name: 'Bureau',  color: getCol('sensor.lumiere_ecran_etat', true) },
                         { name: 'SdB',     color: getCol('sensor.lumiere_salle_de_bain_etat') },
                         { name: 'Chambre', color: getCol('sensor.lumiere_chambre_etat', true) },
                         { name: 'TOTAL',   color: 'lightgreen', bold: true }
@@ -6055,7 +6159,7 @@ views:
                 name: |
                   [[[
                     const distRaw = states['sensor.maison_lightning_distance'] ? parseFloat(states['sensor.maison_lightning_distance'].state) : 0;
-                    const localisation = states['sensor.maison_lightning_localisation'];
+                    const localisation = states['sensor.blitzortung_lightning_localisation'];
                     const azimuth = states['sensor.maison_lightning_azimuth'] ? parseFloat(states['sensor.maison_lightning_azimuth'].state) : null;
                     const impactCount = parseInt(entity.state) || 0;
                     const timePhrase = states['sensor.timer_foudre'] ? states['sensor.timer_foudre'].state : '';
@@ -6717,7 +6821,7 @@ views:
                   show_states: true
                   colorize_states: true
                 yaxis:
-                  - id: Eclaires
+                  - id: Eclair
                     min: 0
                     max: auto
                     opposite: true
@@ -6734,7 +6838,7 @@ views:
                     extremas: true
                 series:
                   - entity: sensor.eclair_quotidien
-                    yaxis_id: Eclaires
+                    yaxis_id: Eclair
                     name: Nb éclairs ce jour
                     color: gainsboro
                     type: column
@@ -6776,7 +6880,7 @@ views:
                   show_states: true
                   colorize_states: true
                 yaxis:
-                  - id: Eclaires
+                  - id: Eclair
                     min: 0
                     max: auto
                     opposite: true
@@ -6793,7 +6897,7 @@ views:
                     extremas: true
                 series:
                   - entity: sensor.eclair_mensuel
-                    yaxis_id: Eclaires
+                    yaxis_id: Eclair
                     name: Nb éclairs ce mois
                     color: gainsboro
                     type: column
@@ -7011,10 +7115,10 @@ views:
               - type: horizontal-stack
                 cards:
                   - type: custom:mushroom-template-card
-                    primary: ''
+                    primary: '{{ states(entity) }}'
                     icon: '{{ state_attr(entity, ''icon'') }}'
                     icon_color: |-
-                      {% if states(entity) == 'Vert' %}
+                      {% if states(entity) in ['Vert', 'H. saison'] %}
                        green
                       {% elif states(entity) == 'Jaune' %}
                        yellow
@@ -7033,17 +7137,17 @@ views:
                     tap_action:
                       action: more-info
                     card_mod:
-                      style: |
+                      style: |-
                         ha-card {
                           border: none !important;
                           box-shadow: none !important;
                           background: none !important;
                         }
                   - type: custom:mushroom-template-card
-                    primary: ''
+                    primary: '{{ states(entity) }}'
                     icon: '{{ state_attr(entity, ''icon'') }}'
                     icon_color: |-
-                      {% if states(entity) == 'Vert' %}
+                      {% if states(entity) in ['Vert', 'H. saison'] %}
                        green
                       {% elif states(entity) == 'Jaune' %}
                        yellow
@@ -7062,17 +7166,17 @@ views:
                     tap_action:
                       action: more-info
                     card_mod:
-                      style: |
+                      style: |-
                         ha-card {
                           border: none !important;
                           box-shadow: none !important;
                           background: none !important;
                         }
                   - type: custom:mushroom-template-card
-                    primary: ''
+                    primary: '{{ states(entity) }}'
                     icon: '{{ state_attr(entity, ''icon'') }}'
                     icon_color: |-
-                      {% if states(entity) == 'Vert' %}
+                      {% if states(entity) in ['Vert', 'H. saison'] %}
                        green
                       {% elif states(entity) == 'Jaune' %}
                        yellow
@@ -7091,17 +7195,17 @@ views:
                     tap_action:
                       action: more-info
                     card_mod:
-                      style: |
+                      style: |-
                         ha-card {
                           border: none !important;
                           box-shadow: none !important;
                           background: none !important;
                         }
                   - type: custom:mushroom-template-card
-                    primary: ''
+                    primary: '{{ states(entity) }}'
                     icon: '{{ state_attr(entity, ''icon'') }}'
                     icon_color: |-
-                      {% if states(entity) == 'Vert' %}
+                      {% if states(entity) in ['Vert', 'H. saison'] %}
                        green
                       {% elif states(entity) == 'Jaune' %}
                        yellow
@@ -7120,17 +7224,17 @@ views:
                     tap_action:
                       action: more-info
                     card_mod:
-                      style: |
+                      style: |-
                         ha-card {
                           border: none !important;
                           box-shadow: none !important;
                           background: none !important;
                         }
                   - type: custom:mushroom-template-card
-                    primary: ''
+                    primary: '{{ states(entity) }}'
                     icon: '{{ state_attr(entity, ''icon'') }}'
                     icon_color: |-
-                      {% if states(entity) == 'Vert' %}
+                      {% if states(entity) in ['Vert', 'H. saison'] %}
                        green
                       {% elif states(entity) == 'Jaune' %}
                        yellow
@@ -7149,7 +7253,7 @@ views:
                     tap_action:
                       action: more-info
                     card_mod:
-                      style: |
+                      style: |-
                         ha-card {
                           border: none !important;
                           box-shadow: none !important;
@@ -7158,10 +7262,10 @@ views:
               - type: horizontal-stack
                 cards:
                   - type: custom:mushroom-template-card
-                    primary: ''
+                    primary: '{{ states(entity) }}'
                     icon: '{{ state_attr(entity, ''icon'') }}'
                     icon_color: |-
-                      {% if states(entity) == 'Vert' %}
+                      {% if states(entity) in ['Vert', 'H. saison'] %}
                        green
                       {% elif states(entity) == 'Jaune' %}
                        yellow
@@ -7180,17 +7284,17 @@ views:
                     tap_action:
                       action: more-info
                     card_mod:
-                      style: |
+                      style: |-
                         ha-card {
                           border: none !important;
                           box-shadow: none !important;
                           background: none !important;
                         }
                   - type: custom:mushroom-template-card
-                    primary: ''
+                    primary: '{{ states(entity) }}'
                     icon: '{{ state_attr(entity, ''icon'') }}'
                     icon_color: |-
-                      {% if states(entity) == 'Vert' %}
+                      {% if states(entity) in ['Vert', 'H. saison'] %}
                        green
                       {% elif states(entity) == 'Jaune' %}
                        yellow
@@ -7209,17 +7313,17 @@ views:
                     tap_action:
                       action: more-info
                     card_mod:
-                      style: |
+                      style: |-
                         ha-card {
                           border: none !important;
                           box-shadow: none !important;
                           background: none !important;
                         }
                   - type: custom:mushroom-template-card
-                    primary: ''
+                    primary: '{{ states(entity) }}'
                     icon: '{{ state_attr(entity, ''icon'') }}'
                     icon_color: |-
-                      {% if states(entity) == 'Vert' %}
+                      {% if states(entity) in ['Vert', 'H. saison'] %}
                        green
                       {% elif states(entity) == 'Jaune' %}
                        yellow
@@ -7238,17 +7342,17 @@ views:
                     tap_action:
                       action: more-info
                     card_mod:
-                      style: |
+                      style: |-
                         ha-card {
                           border: none !important;
                           box-shadow: none !important;
                           background: none !important;
                         }
                   - type: custom:mushroom-template-card
-                    primary: ''
+                    primary: '{{ states(entity) }}'
                     icon: '{{ state_attr(entity, ''icon'') }}'
                     icon_color: |-
-                      {% if states(entity) == 'Vert' %}
+                      {% if states(entity) in ['Vert', 'H. saison'] %}
                        green
                       {% elif states(entity) == 'Jaune' %}
                        yellow
@@ -7267,17 +7371,17 @@ views:
                     tap_action:
                       action: more-info
                     card_mod:
-                      style: |
+                      style: |-
                         ha-card {
                           border: none !important;
                           box-shadow: none !important;
                           background: none !important;
                         }
                   - type: custom:mushroom-template-card
-                    primary: ''
+                    primary: '{{ states(entity) }}'
                     icon: '{{ state_attr(entity, ''icon'') }}'
                     icon_color: |-
-                      {% if states(entity) == 'Vert' %}
+                      {% if states(entity) in ['Vert', 'H. saison'] %}
                        green
                       {% elif states(entity) == 'Jaune' %}
                        yellow
@@ -7296,7 +7400,7 @@ views:
                     tap_action:
                       action: more-info
                     card_mod:
-                      style: |
+                      style: |-
                         ha-card {
                           border: none !important;
                           box-shadow: none !important;
@@ -21720,6 +21824,20 @@ views:
                   box-shadow: none !important;
                   background: transparent;
                 }
+          - title: Facture
+            contract: hchp
+            cycle_start: 10-01
+            energy_hc_jour: sensor.genelec_appart_hphc_quotidien_um_hc
+            energy_hp_jour: sensor.genelec_appart_hphc_quotidien_um_hp
+            energy_hc_mois: sensor.genelec_appart_hphc_mensuel_um_hc
+            energy_hp_mois: sensor.genelec_appart_hphc_mensuel_um_hp
+            energy_hc_annee: sensor.genelec_appart_hphc_annuel_um_hc
+            energy_hp_annee: sensor.genelec_appart_hphc_annuel_um_hp
+            price_hc: sensor.tarifelecinfo_tarif_heures_creuses
+            price_hp: sensor.tarifelecinfo_tarif_heures_pleines
+            subscription_month: sensor.tarifelecinfo_abonnement_mensuel
+            theme: ha
+            type: custom:linky-facture-card
         column_span: 1
     title: Energie HOME
     cards: []
@@ -27423,7 +27541,7 @@ views:
                     current_color: rgb(255, 41, 41)
                     avg_daily_entity: sensor.seche_serviette_sdb_avg_watts_quotidien
                     conso_daily_kwh_entity: sensor.seche_serviette_sdb_quotidien_um
-                    power_entity: sensor.prise_radiateur_salle_de_bain_inspelning_ikea_power
+                    power_entity: sensor.prise_seche_serviette_salle_de_bain_nous_power
                     power_color: rgb(255, 215, 0)
                     span_offset: +15m
                     group_duration: 1m
@@ -28905,7 +29023,7 @@ views:
               - type: entity
                 show_state: true
                 show_icon: true
-                entity: light.bureau
+                entity: binary_sensor.moniteur_pc
                 color: state
                 state_content: name
                 icon: mdi:desktop-tower-monitor
@@ -33785,14 +33903,15 @@ views:
                               }
                       - type: custom:mushroom-template-card
                         primary: >-
-                          {% set uptime = states('sensor.pve_uptime') | float(0)
-                          %} {% set jours = (uptime / 24) | int(0) %} {% set
-                          heures = (uptime % 24) | int(0) %} {% set minutes =
-                          ((uptime % 1) * 60) | int(0) %} {%- if jours > 0 -%}
-                          {{ jours }}d {{ "%02d"|format(heures) }}h {{
-                          "%02d"|format(minutes) }}m {%- else -%} {{
+                          {% set s = states('sensor.pve_uptime') %}{% if s in
+                          ['unknown','unavailable','none',''] %}heure de
+                          demarrage inconnue{% else %}{% set d =
+                          (now().timestamp() - as_timestamp(s)) | int(0) %}{%
+                          set jours = (d // 86400) | int(0) %}{% set heures =
+                          ((d % 86400) // 3600) | int(0) %}{% set minutes = ((d
+                          % 3600) // 60) | int(0) %}{{ jours }}d {{
                           "%02d"|format(heures) }}h {{ "%02d"|format(minutes)
-                          }}m {%- endif -%}
+                          }}m{% endif %}
                         secondary: ''
                         icon: mdi:clock-start
                         icon_color: white
