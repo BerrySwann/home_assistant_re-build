@@ -180,8 +180,8 @@
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {{ [t_ext - d1, 26] | min | int }}
         {% else %}
-          {% set tccj_s = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccj_s + d2, 21] | min | round(1) }}
+          {% set tccsj_s = states('sensor.temperature_confort_jour') | float(0) %}
+          {{ [tccsj_s + d2, 21] | min | round(1) }}
         {% endif %}
 
 # ┌─────────────────────────────────┐
@@ -199,8 +199,8 @@
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {{ [t_ext + d1, 27] | min | int }}
         {% else %}
-          {% set tccj_b = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccj_b - d2, 21] | min | round(1) }}
+          {% set tccsj_b = states('sensor.temperature_confort_jour') | float(0) %}
+          {{ [tccsj_b - d2, 21] | min | round(1) }}
         {% endif %}
 
 # ┌─────────────────────────────────┐
@@ -218,8 +218,8 @@
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {{ [t_ext + d1, 27] | min | int }}
         {% else %}
-          {% set tccj_c = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccj_c - d2, 19] | min | int }}
+          {% set tccsj_c = states('sensor.temperature_confort_jour') | float(0) %}
+          {{ [tccsj_c - d2, 19] | min | int }}
         {% endif %}
 
 # ┌──────────────────────────────────────────────────┐
@@ -231,7 +231,7 @@
       unique_id: temperature_confort_jour
       unit_of_measurement: "°C"
       state: >
-        {% set base = states('sensor.consigne') | float(19) %}
+        {% set conf = states('sensor.temperature_confort') | float(20) %}
         {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
         {% set d1 = states('sensor.delta_1') | float(1) %}
         {% set d2 = states('sensor.delta_2') | float(2) %}
@@ -240,11 +240,11 @@
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% if t_ext >= 34 %}{{ ((t_ext - d7) - d1) | round(1) }}
           {% elif t_ext > 32 %}{{ ((t_ext - d5) - d1) | round(1) }}
-          {% else %}{{ (base - d1) | round(1) }}{% endif %}
+          {% else %}{{ conf | round(1) }}{% endif %}
         {% else %}
-          {% if t_ext < 8 %}{{ (base + d2 + d1) | round(1) }}
-          {% elif t_ext < 12 %}{{ (base + d1 + d1) | round(1) }}
-          {% else %}{{ (base + d1) | round(1) }}{% endif %}
+          {% if t_ext < 8 %}{{ (conf + d2) | round(1) }}
+          {% elif t_ext < 12 %}{{ (conf + d1) | round(1) }}
+          {% else %}{{ conf | round(1) }}{% endif %}
         {% endif %}
     - name: "Temperature confort nuit"
       unique_id: temperature_confort_nuit

@@ -370,11 +370,11 @@ p1_master_gestion_clim:
         | float) }}'
       temp_nuit: '{{ states(''sensor.temperature_confort_nuit'') | float(states(''sensor.consigne'')
         | float) }}'
-      temp_conf_m: '{{ states(''sensor.temperature_corrige_salon'') | float(states(''sensor.temperature_confort_jour'')
+      tccsj_s: '{{ states(''sensor.temperature_corrige_salon'') | float(states(''sensor.temperature_confort_jour'')
         | float) }}'
-      temp_conf_e: '{{ states(''sensor.temperature_corrige_bureau'') | float(states(''sensor.temperature_confort_jour'')
+      tccsj_b: '{{ states(''sensor.temperature_corrige_bureau'') | float(states(''sensor.temperature_confort_jour'')
         | float) }}'
-      temp_conf_c: '{{ states(''sensor.temperature_corrige_chambre'') | float(states(''sensor.temperature_confort_jour'')
+      tccsj_c: '{{ states(''sensor.temperature_corrige_chambre'') | float(states(''sensor.temperature_confort_jour'')
         | float) }}'
   - alias: 'INIT : CIBLES DE TEMPÉRATURE PAR PIÈCE'
     variables:
@@ -386,21 +386,21 @@ p1_master_gestion_clim:
       t_salon_target: '{% if mode_degrade_eco == ''true'' %} {{ eco_saison_val }}
         {% elif ''groupe_1'' in groupe_presence %} {{ temp_eco_hc if mode_saison ==
         ''heat'' else temp_eco_ec }} {% elif periode == ''jour'' and ''groupe_3''
-        in groupe_presence %} {{ temp_conf_e }} {% elif periode == ''jour'' and (''groupe_2''
-        in groupe_presence or ''groupe_4'' in groupe_presence) %} {{ temp_conf_m }}
+        in groupe_presence %} {{ tccsj_b }} {% elif periode == ''jour'' and (''groupe_2''
+        in groupe_presence or ''groupe_4'' in groupe_presence) %} {{ tccsj_s }}
         {% elif periode == ''jour'' %} {{ temp_eco_hc if mode_saison == ''heat'' else
         temp_eco_ec }} {% else %} {{ temp_nuit }} {% endif %}'
       t_bureau_target: '{% if mode_degrade_eco == ''true'' %} {{ eco_saison_val }}
         {% elif ''groupe_1'' in groupe_presence %} {{ temp_eco_hc if mode_saison ==
         ''heat'' else temp_eco_ec }} {% elif periode == ''jour'' and (''groupe_3''
-        in groupe_presence or ''groupe_4'' in groupe_presence) %} {{ temp_conf_e }}
+        in groupe_presence or ''groupe_4'' in groupe_presence) %} {{ tccsj_b }}
         {% elif periode == ''jour'' and ''groupe_2'' in groupe_presence %} {{ temp_eco_hc
-        if mode_saison == ''heat'' else temp_conf_e }} {% elif periode == ''jour''
+        if mode_saison == ''heat'' else tccsj_b }} {% elif periode == ''jour''
         %} {{ temp_eco_hc if mode_saison == ''heat'' else temp_eco_ec }} {% else %}
         {{ temp_nuit }} {% endif %}'
       t_chambre_target: '{% if mode_degrade_eco == ''true'' %} {{ eco_saison_val }}
         {% elif ''groupe_1'' in groupe_presence %} {{ temp_eco_hc if mode_saison ==
-        ''heat'' else temp_eco_ec }} {% elif periode == ''jour'' %} {{ temp_conf_c
+        ''heat'' else temp_eco_ec }} {% elif periode == ''jour'' %} {{ tccsj_c
         }} {% else %} {{ temp_nuit }} {% endif %}'
   - alias: 'LOGIQUE : SÉCURITÉ FENÊTRES VS GESTION STANDARD'
     choose:
