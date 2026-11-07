@@ -15,3 +15,4 @@ Home Assistant notifications (Log started: 2026-10-23T21:59:10.211560+00:00)
 03/11 | Total: 8.3 kWh | HP: 5.9 | HC: 2.4 | Cout: 1.65
 04/11 | Total: 11.3 kWh | HP: 7.7 | HC: 3.6 | Cout: 2.22
 05/11 | Total: 11.5 kWh | HP: 7.8 | HC: 3.7 | Cout: 2.26
+06/11 | Total: 14.3 kWh | HP: 10.5 | HC: 3.8 | Cout: 2.85
