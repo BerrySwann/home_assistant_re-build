@@ -1,0 +1,90 @@
+type: vertical-stack
+cards:
+  - type: markdown
+    content: |
+      **<<< CALCUL DES CONSIGNES CLIM >>>**
+
+      {% set temp_ext = states('sensor.th_balcon_nord_temperature') | float(-999) -%}
+      {% set mode = states('sensor.mode_ete_hiver') -%}
+      {% set consigne = states('sensor.consigne') | float(19) -%}
+      {% set d1 = states('sensor.delta_1') | float(1) -%}
+      {% set d2 = states('sensor.delta_2') | float(2) -%}
+      {% set d5 = states('sensor.delta_5') | float(5) -%}
+      {% set d7 = states('sensor.delta_7') | float(7) -%}
+      {% set conf = states('sensor.temperature_confort') | float(0) -%}
+      {% set conf_j = states('sensor.temperature_confort_jour') | float(0) -%}
+      {% set conf_n = states('sensor.temperature_confort_nuit') | float(0) -%}
+      {% set eco_h = states('sensor.temperature_eco_hiver_corrige') | float(0) -%}
+      {% set eco_e = states('sensor.temperature_eco_ete_corrige') | float(0) -%}
+      {% set tcs = states('sensor.temperature_corrige_salon') | float(0) -%}
+      {% set tcb = states('sensor.temperature_corrige_bureau') | float(0) -%}
+      {% set tcc = states('sensor.temperature_corrige_chambre') | float(0) -%}
+      {% if temp_ext == -999 -%}
+      **Température extérieure : sonde indisponible - mode : {{ mode | upper }}**
+      {% else -%}
+      **Température extérieure : {{ temp_ext | round(1) }} °C - mode : {{ mode | upper }}**
+      {% endif -%}
+      {% if temp_ext == -999 -%}
+      - **Sonde extérieure indisponible**, aucun palier ne peut être calculé.
+      {% elif mode == 'cool' -%}
+      {% if temp_ext >= 34 -%}
+      - **Palier été fort** : {{ temp_ext | round(0) }} - {{ d7 }} = **{{ (temp_ext - d7) | round(0) }} °C**
+      {% elif temp_ext > 32 -%}
+      - **Palier été chaud** : {{ temp_ext | round(0) }} - {{ d5 }} = **{{ (temp_ext - d5) | round(0) }} °C**
+      {% else -%}
+      - **Palier été** : consigne maintenue à **{{ consigne | round(0) }} °C**
+      {% endif -%}
+      {% else -%}
+      {% if temp_ext < 8 -%}
+      - **Palier hiver froid** (< 8 °C) : {{ consigne | round(0) }} + {{ d2 }} = **{{ (consigne + d2) | round(0) }} °C**
+      {% elif temp_ext < 12 -%}
+      - **Palier hiver frais** (< 12 °C) : {{ consigne | round(0) }} + {{ d1 }} = **{{ (consigne + d1) | round(0) }} °C**
+      {% else -%}
+      - **Palier hiver doux** (>= 12 °C) : consigne maintenue à **{{ consigne | round(0) }} °C**
+      {% endif -%}
+      {% endif %}
+      **Consignes par défaut**
+
+      - Mode été/hiver, capteur de saison : **{{ mode | upper }}**
+      {% if mode == 'cool' -%}
+      - Consigne active (Été) : **{{ consigne | round(0) }} °C**
+      - Confort par défaut (Été) : **{{ conf | round(1) }} °C**
+      - Éco été : **{{ states('sensor.temperature_eco_ete') | float(0) | round(0) }} °C**
+      {% elif mode == 'heat' -%}
+      - Consigne active (Hiver) : **{{ consigne | round(0) }} °C**
+      - Confort par défaut (Hiver) : **{{ conf | round(1) }} °C**
+      - Éco hiver : **{{ states('sensor.temperature_eco_hiver') | float(0) | round(0) }} °C**
+      {% else -%}
+      - Consigne active (hors saison) : **{{ consigne | round(0) }} °C**
+      {% endif %}
+      **Consignes calculées**
+
+      - Confort de jour, compensé, 7h30 -> 21h00 : **{{ conf_j | round(1) }} °C**
+      - Confort de nuit, consigne régulée, 21h00 -> 7h30 : **{{ conf_n | round(1) }} °C**
+
+      **Pièces, plafonds appliqués**
+
+      - Salon, confort jour + {{ d2 }}, plafond 22 : **{{ tcs | round(1) }} °C**
+      - Bureau, confort jour - {{ d2 }}, plafond 21 : **{{ tcb | round(1) }} °C**
+      - Chambre, confort jour - {{ d2 }}, plafond 19 : **{{ tcc | round(0) }} °C**
+
+      **Mode éco, si absents**
+
+      {% if mode == 'cool' -%}
+      - Éco été corrigé : **{{ eco_e | round(0) }} °C**
+      {% else -%}
+      - Éco hiver corrigé : **{{ eco_h | round(0) }} °C**
+      {% endif -%}
+      {% if mode == 'heat' and temp_ext != -999 and temp_ext < 12 -%}
+      - L'éco s'applique, l'extérieur est sous 12 °C.
+      {% endif %}
+      **Delta : {{ states('sensor.temperature_delta_affichage') | default('N/A', true) }}**
+
+      **Groupe : {{ states('sensor.groupe') | default('N/A', true) }} - Présence : {{ states('sensor.presence') | default('N/A', true) }}**
+    card_mod:
+      style: |
+        ha-card {
+          border: none !important;
+          box-shadow: none !important;
+          background: transparent;
+        }

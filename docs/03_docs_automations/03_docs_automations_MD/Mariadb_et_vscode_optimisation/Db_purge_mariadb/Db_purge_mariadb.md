@@ -35,7 +35,7 @@ et repack la base pour libérer l'espace disque.
 
 ## ⚙️ Actions
 
-- `recorder.purge` : `keep_days: 7`, `repack: true`
+- `recorder.purge` : `keep_days: 14`, `repack: true`
 
 ---
 

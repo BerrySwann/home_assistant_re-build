@@ -1,75 +1,50 @@
 # GLOBAL_INDEX_SCRIPTS_YAML.md - index des scripts Home Assistant
 
-<div align="center">
+Fichier GENERE le 2026-11-07 17:14 par docs/04_docs_scripts/04_docs_scripts_sh/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
-[![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--06-44739e?style=flat-square)](.)&nbsp;
-[![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
-[![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
-[![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
-[![Modifs](https://img.shields.io/badge/Modifs-Autorisees-0f9d58?style=flat-square)](.)&nbsp;
-[![Expert](https://img.shields.io/badge/Expert-HAOS_Proxmox-success?style=flat-square)](.)&nbsp;
-[![Type](https://img.shields.io/badge/Type-Scripts-4fc3f7?style=flat-square)](.)
+## Difference entre l'index SH et l'index YAML
 
-</div>
-
-Fichier GENERE le 2026-11-06 20:48 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
-
-## Difference entre les index SH, PY et YAML
-
-- Scripts SH et PY (index GLOBAL_INDEX_SCRIPTS_SH.md pour les .sh bash, GLOBAL_INDEX_SCRIPTS_PY.md pour les .py python, dossier 04_docs_scripts_SH) : programmes executes par un interpreteur sur une machine, pas par Home Assistant lui-meme. En prod ils sont dans /config/.scripts (H:\.scripts) et HA les lance par une commande shell_command (dossier H:\shell_command). Les scripts de controle et de generation (hermes_*, gen_*) tournent sur le PC d'Eric, sans passer par HA. Un script SH se modifie et se pousse comme un fichier.
-- Scripts YAML (index GLOBAL_INDEX_SCRIPTS_YAML.md, dossier 04_docs_scripts_YAML) : scripts Home Assistant definis dans H:\scripts.yaml, qui existent comme entites script.xxx. Ce sont des suites d'actions HA, appelables par un bouton du dashboard, une automatisation ou un autre script. Un script YAML peut declencher un script SH par une action shell_command.xxx.
+- Scripts SH (index GLOBAL_INDEX_SCRIPTS_SH.md, dossier 04_docs_scripts_sh) : programmes bash ou python, executes par un interpreteur sur une machine, pas par Home Assistant lui-meme. En prod ils sont dans /config/.scripts (H:\.scripts) et HA les lance par une commande shell_command (dossier H:\shell_command). Les scripts de controle et de generation (hermes_*, gen_*) tournent sur le PC d'Eric, sans passer par HA. Un script SH se modifie et se pousse comme un fichier.
+- Scripts YAML (index GLOBAL_INDEX_SCRIPTS_YAML.md, dossier 04_docs_scripts_yaml) : scripts Home Assistant definis dans H:\scripts.yaml, qui existent comme entites script.xxx. Ce sont des suites d'actions HA, appelables par un bouton du dashboard, une automatisation ou un autre script. Un script YAML peut declencher un script SH par une action shell_command.xxx.
 - Chaine type : bouton du dashboard -> script YAML (scripts.yaml) -> commande shell_command (H:\shell_command) -> script SH (/config/.scripts).
-- Verification par /histo : les trois index sont regeneres par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py a chaque /histo. La section Controle liste les ecarts et /histo doit verifier que la ligne liens=N casses=M donne casses=0. Ne pas modifier ces fichiers a la main.
+- Verification par /histo : les deux index sont regeneres par docs/04_docs_scripts/04_docs_scripts_sh/gen_global_index_scripts/gen_global_index_scripts.py a chaque /histo. La section Controle liste les ecarts et /histo doit verifier que la ligne liens=N casses=M donne casses=0. Ne pas modifier ces fichiers a la main.
 
 ## Controle
 
 - Scripts dans H:\scripts.yaml (prod) : 9
 - Scripts de la prod sans YAML local : 0
 - Scripts dont le contenu local differe de la prod : 0
-- Scripts sans fiche dans 04_docs_scripts_YAML_MD : 0
+- Scripts sans fiche dans 04_docs_scripts_yaml_md : 0
 - YAML locaux absents de scripts.yaml : 0
-- Fichiers .py rangés dans 04_docs_scripts_YAML (ce sont des scripts de type SH) : 0
+- Fichiers .py rangés dans 04_docs_scripts_yaml (ce sont des scripts de type SH) : 0
 
-## SCRIPTS HOME ASSISTANT, ILS TOURNENT DANS HOME ASSISTANT
-
-#### .yaml (definis dans H:\scripts.yaml)
+## Scripts YAML
 
 | Cle | Alias | Entite HA | Mode | YAML local | Local = prod | Appelle (shell_command -> script SH) | Fiche |
 |:----|:------|:----------|:-----|:-----------|:-------------|:-------------------------------------|:------|
-| audit_md5 | Audit MD5 GitHub | `script.audit_md5` | single | [Audit_md5.yaml](04_docs_scripts_YAML/Audit_md5/Audit_md5.yaml) | identique | shell_command.audit_md5 -> audit_md5_yaml.sh | [Audit_md5.md](04_docs_scripts_YAML_MD/Audit_md5/Audit_md5.md) |
-| audit_md5_md_yaml | Audit MD5 MD YAML | `script.audit_md5_md_yaml` | single | [Audit_md5_md_yaml.yaml](04_docs_scripts_YAML/Audit_md5_md_yaml/Audit_md5_md_yaml.yaml) | identique | shell_command.audit_md5_md_yaml -> audit_md5_md_yaml.sh | [Audit_md5_md_yaml.md](04_docs_scripts_YAML_MD/Audit_md5_md_yaml/Audit_md5_md_yaml.md) |
-| j_1_1_salon_clim_on_off_intelligent | J 1-1 SALON - CLIM ON/OFF INTELLIGENT | `script.j_1_1_salon_clim_on_off_intelligent` | single | [J_1_1_salon_clim_on_off_intelligent.yaml](04_docs_scripts_YAML/Climatisation/J_1_1_salon_clim_on_off_intelligent/J_1_1_salon_clim_on_off_intelligent.yaml) | identique | - | [J_1_1_salon_clim_on_off_intelligent.md](04_docs_scripts_YAML_MD/Climatisation/J_1_1_salon_clim_on_off_intelligent/J_1_1_salon_clim_on_off_intelligent.md) |
-| j_1_2_bureau_clim_on_off_intelligent | J 1-2 BUREAU - CLIM ON/OFF INTELLIGENT | `script.j_1_2_bureau_clim_on_off_intelligent` | single | [J_1_2_bureau_clim_on_off_intelligent.yaml](04_docs_scripts_YAML/Climatisation/J_1_2_bureau_clim_on_off_intelligent/J_1_2_bureau_clim_on_off_intelligent.yaml) | identique | - | [J_1_2_bureau_clim_on_off_intelligent.md](04_docs_scripts_YAML_MD/Climatisation/J_1_2_bureau_clim_on_off_intelligent/J_1_2_bureau_clim_on_off_intelligent.md) |
-| j_1_3_chambre_clim_on_off_intelligent | J 1-3 CHAMBRE - CLIM ON/OFF INTELLIGENT | `script.j_1_3_chambre_clim_on_off_intelligent` | single | [J_1_3_chambre_clim_on_off_intelligent.yaml](04_docs_scripts_YAML/Climatisation/J_1_3_chambre_clim_on_off_intelligent/J_1_3_chambre_clim_on_off_intelligent.yaml) | identique | - | [J_1_3_chambre_clim_on_off_intelligent.md](04_docs_scripts_YAML_MD/Climatisation/J_1_3_chambre_clim_on_off_intelligent/J_1_3_chambre_clim_on_off_intelligent.md) |
-| j_2_0_secu_arret_clim_protege | J 2-0 SECU - ARRÊT CLIM PROTÉGÉ | `script.j_2_0_secu_arret_clim_protege` | parallel | [J_2_0_secu_arret_clim_protege.yaml](04_docs_scripts_YAML/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.yaml) | identique | - | [J_2_0_secu_arret_clim_protege.md](04_docs_scripts_YAML_MD/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.md) |
-| p1_master_gestion_clim | P1 - MASTER : Gestion centralisée climatisation | `script.p1_master_gestion_clim` | queued | [P1_Master_gestion_clim.yaml](04_docs_scripts_YAML/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml) | identique | - | [P1_Master_gestion_clim.md](04_docs_scripts_YAML_MD/P1_Master_gestion_clim/P1_Master_gestion_clim.md) |
-| sdb_soufflant_arreter | SDB - Soufflant : ARRET (resistances, ventilateur 1 min 30, prise) | `script.sdb_soufflant_arreter` | single | [SDB_soufflant_arreter.yaml](04_docs_scripts_YAML/Soufflant_SDB/SDB_soufflant_arreter/SDB_soufflant_arreter.yaml) | identique | - | [SDB_soufflant_arreter.md](04_docs_scripts_YAML_MD/Soufflant_SDB/SDB_soufflant_arreter/SDB_soufflant_arreter.md) |
-| sdb_soufflant_demarrer | SDB - Soufflant : DEMARRAGE (2000 W, verrou 30 s) | `script.sdb_soufflant_demarrer` | single | [SDB_soufflant_demarrer.yaml](04_docs_scripts_YAML/Soufflant_SDB/SDB_soufflant_demarrer/SDB_soufflant_demarrer.yaml) | identique | - | [SDB_soufflant_demarrer.md](04_docs_scripts_YAML_MD/Soufflant_SDB/SDB_soufflant_demarrer/SDB_soufflant_demarrer.md) |
+| j_2_0_secu_arret_clim_protege | J 2-0 SECU - ARRÊT CLIM PROTÉGÉ | `script.j_2_0_secu_arret_clim_protege` | parallel | [J_2_0_secu_arret_clim_protege.yaml](04_docs_scripts_yaml/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.yaml) | identique | - | [J_2_0_secu_arret_clim_protege.md](04_docs_scripts_yaml_md/Climatisation/J_2_0_secu_arret_clim_protege/J_2_0_secu_arret_clim_protege.md) |
+| j_1_1_salon_clim_on_off_intelligent | J 1-1 SALON - CLIM ON/OFF INTELLIGENT | `script.j_1_1_salon_clim_on_off_intelligent` | single | [J_1_1_salon_clim_on_off_intelligent.yaml](04_docs_scripts_yaml/Climatisation/J_1_1_salon_clim_on_off_intelligent/J_1_1_salon_clim_on_off_intelligent.yaml) | identique | - | [J_1_1_salon_clim_on_off_intelligent.md](04_docs_scripts_yaml_md/Climatisation/J_1_1_salon_clim_on_off_intelligent/J_1_1_salon_clim_on_off_intelligent.md) |
+| j_1_2_bureau_clim_on_off_intelligent | J 1-2 BUREAU - CLIM ON/OFF INTELLIGENT | `script.j_1_2_bureau_clim_on_off_intelligent` | single | [J_1_2_bureau_clim_on_off_intelligent.yaml](04_docs_scripts_yaml/Climatisation/J_1_2_bureau_clim_on_off_intelligent/J_1_2_bureau_clim_on_off_intelligent.yaml) | identique | - | [J_1_2_bureau_clim_on_off_intelligent.md](04_docs_scripts_yaml_md/Climatisation/J_1_2_bureau_clim_on_off_intelligent/J_1_2_bureau_clim_on_off_intelligent.md) |
+| j_1_3_chambre_clim_on_off_intelligent | J 1-3 CHAMBRE - CLIM ON/OFF INTELLIGENT | `script.j_1_3_chambre_clim_on_off_intelligent` | single | [J_1_3_chambre_clim_on_off_intelligent.yaml](04_docs_scripts_yaml/Climatisation/J_1_3_chambre_clim_on_off_intelligent/J_1_3_chambre_clim_on_off_intelligent.yaml) | identique | - | [J_1_3_chambre_clim_on_off_intelligent.md](04_docs_scripts_yaml_md/Climatisation/J_1_3_chambre_clim_on_off_intelligent/J_1_3_chambre_clim_on_off_intelligent.md) |
+| audit_md5 | Audit MD5 GitHub | `script.audit_md5` | single | [Audit_md5.yaml](04_docs_scripts_yaml/Audit_md5/Audit_md5.yaml) | identique | shell_command.audit_md5 -> audit_md5_yaml.sh | [Audit_md5.md](04_docs_scripts_yaml_md/Audit_md5/Audit_md5.md) |
+| audit_md5_md_yaml | Audit MD5 MD YAML | `script.audit_md5_md_yaml` | single | [Audit_md5_md_yaml.yaml](04_docs_scripts_yaml/Audit_md5_md_yaml/Audit_md5_md_yaml.yaml) | identique | shell_command.audit_md5_md_yaml -> audit_md5_md_yaml.sh | [Audit_md5_md_yaml.md](04_docs_scripts_yaml_md/Audit_md5_md_yaml/Audit_md5_md_yaml.md) |
+| p1_master_gestion_clim | P1 - MASTER : Gestion centralisée climatisation | `script.p1_master_gestion_clim` | queued | [P1_Master_gestion_clim.yaml](04_docs_scripts_yaml/Climatisation/P1_Master_gestion_clim/P1_Master_gestion_clim.yaml) | identique | - | [P1_Master_gestion_clim.md](04_docs_scripts_yaml_md/P1_Master_gestion_clim/P1_Master_gestion_clim.md) |
+| sdb_soufflant_demarrer | SDB - Soufflant : DEMARRAGE (2000 W, verrou 30 s) | `script.sdb_soufflant_demarrer` | single | [SDB_soufflant_demarrer.yaml](04_docs_scripts_yaml/Soufflant_SDB/SDB_soufflant_demarrer/SDB_soufflant_demarrer.yaml) | identique | - | [SDB_soufflant_demarrer.md](04_docs_scripts_yaml_md/Soufflant_SDB/SDB_soufflant_demarrer/SDB_soufflant_demarrer.md) |
+| sdb_soufflant_arreter | SDB - Soufflant : ARRET (resistances, ventilateur 1 min 30, prise) | `script.sdb_soufflant_arreter` | single | [SDB_soufflant_arreter.yaml](04_docs_scripts_yaml/Soufflant_SDB/SDB_soufflant_arreter/SDB_soufflant_arreter.yaml) | identique | - | [SDB_soufflant_arreter.md](04_docs_scripts_yaml_md/Soufflant_SDB/SDB_soufflant_arreter/SDB_soufflant_arreter.md) |
 
-## SCRIPTS HOME ASSISTANT, ILS NE TOURNENT PAS DANS HOME ASSISTANT (YAML locaux absents de scripts.yaml, python non appele par la prod)
+## Fichiers .py rangés dans 04_docs_scripts_yaml
 
-### SCRIPTS DE L'IA CLAUDE
-
-- aucun
-
----
-
-### SCRIPTS DE L'IA HERMES
-
-- aucun
-
----
+Ces fichiers sont des scripts python lances par shell_command : ils releveraient plutot de l'index SH. Ils sont listes ici parce qu'ils sont rangés dans ce dossier.
 
 <!-- RECAP-ENTITES:DEBUT -->
 
 ## Recapitulatif des entites citees par cet index
 
-Total : **685 entites**. Origine de chacune : type, puis le nom de l integration telle qu elle apparait dans Appareils et services.
+Total : **684 entites**. Origine de chacune : type, puis le nom de l integration telle qu elle apparait dans Appareils et services.
 
 | origine | nombre | explication |
 |:---|---:|:---|
-| CREE template | 249 | creee par un YAML du depot, dossier `template`, sans aucune integration dans Appareils et services |
+| CREE template | 248 | creee par un YAML du depot, dossier `template`, sans aucune integration dans Appareils et services |
 | NAT mqtt | 128 | chaine a trois maillons, verifiee le 2026-11-03 : Zigbee2MQTT (conteneur 200, Proxmox 10.32.154.244) publie vers le broker `core-mosquitto` (add-on Mosquitto, port 1883), que consomme l integration `mqtt` d Appareils et services. Si un des trois manque, les entites tombent |
 | CREE utility_meter | 76 | creee par un YAML du depot, dossier `utility_meter`, sans aucune integration dans Appareils et services |
 | NAT mobile_app | 49 | integration `mobile_app` du coeur de Home Assistant, installee et visible dans Appareils et services |

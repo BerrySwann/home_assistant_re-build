@@ -37,7 +37,7 @@ et délègue **intégralement** la logique à `script.p1_master_gestion_clim` av
 | `force_run` | `state` | `switch.clim_salon_nous`, `switch.clim_bureau_nous`, `switch.clim_chambre_nous` |
 | `window_open` | `state` | 4 capteurs fenêtres → `off` → `on` |
 | `window_close` | `state` | 4 capteurs fenêtres → `on` → `off` |
-| `sensor_update` | `state` | `sensor.groupe` *(ajouté)*, `sensor.th_balcon_nord_temperature`, `sensor.temperature_cible`, `sensor.mode_ete_hiver`, `sensor.temperature_confort_jour` |
+| `sensor_update` | `state` | `sensor.groupe` *(ajouté)*, `sensor.th_balcon_nord_temperature`, `sensor.mode_ete_hiver`, `sensor.temperature_confort_jour` |
 
 > ⚠️ `sensor.groupe` a été **ajouté** au trigger `sensor_update` lors du refactoring (2026-06).
 > L'ancienne version ne déclenchait pas sur un changement de présence direct.
@@ -76,7 +76,6 @@ Une seule action :
 | `sensor.eric_network_type` | Présence réseau Eric |
 | `sensor.groupe` | Groupe de présence (trigger sensor_update) |
 | `sensor.th_balcon_nord_temperature` | T° extérieure |
-| `sensor.temperature_cible` | T° cible calculée |
 | `sensor.mode_ete_hiver` | Mode saison |
 | `sensor.temperature_confort_jour` | T° confort jour |
 | 4× `binary_sensor.contact_fenetre_*` | Capteurs fenêtres |
@@ -93,7 +92,7 @@ Une seule action :
 ## ⚠️ Points d'attention
 
 - **Refactoring 2026-06** : logique inline (~250 lignes) déplacée dans le script master. L'automation est maintenant un simple wrapper de 30 lignes.
-- **SALON groupe_3 JOUR** : Eric seul → `temp_conf_e` (comportement identique à l'ancienne version inline).
+- **SALON groupe_3 JOUR** : Eric seul → `tccsj_b` (comportement identique à l'ancienne version inline).
 - `trigger_id` et `trigger_entity_id` sont passés au script pour que la notification fenêtre reste ciblée.
 - Le `sensor_update` ne redémarre **pas** une clim déjà en `off` (protection maintenue dans le script).
 - **2026-09-20** : ajout de `max_exceeded: silent` (mode `queued`/max 5 conservés). Au démarrage de HA, les déclencheurs d'état se déclenchent en rafale et saturent la file ; l'avertissement « Maximum number of runs exceeded » est désormais silencieux, les runs en trop restent ignorés (sans conséquence : recalcul idempotent via le script master).

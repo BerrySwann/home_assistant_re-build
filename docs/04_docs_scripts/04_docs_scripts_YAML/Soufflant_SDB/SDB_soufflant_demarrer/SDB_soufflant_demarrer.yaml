@@ -4,7 +4,7 @@
 #
 # ## DESCRIPTION :
 # Prise ON, mise en route IR, deux impulsions 1000 W pour atteindre 2000 W,
-# puis verrou de trente secondes qui bloque la marche comme l'arret.
+# oscillation du volet (IR swing), puis verrou de trente secondes qui bloque la marche comme l'arret.
 # Affichage du climate en heat, et arret force apres une heure de marche.
 #
 # ## CHAINE DE DEPENDANCES :
@@ -29,6 +29,9 @@
 # - Complete le 2026-09-29 : garde 25 degres, climate heat, arret 60 min, recharge OK.
 # - Modifie le 2026-10-07 : garde 25 degres remplacee par la garde de saison (mode cool).
 # - Modifie le 2026-10-07 : verrou ramene de 2 minutes a 30 secondes (decision Eric : eviter un off premature).
+# - Modifie le 2026-11-07 : remise de la commande IR swing (oscillation du volet), perdue lors de la
+#   reecriture du script ; elle etait envoyee par l'ancienne automation Z ligne 487. Prod modifiee,
+#   scripts recharges sans redemarrage, MD5 d18d9592 -> 8235fd00.
 #
 # --- version finale 2026/2027 du soufflant salle de bain ---
 
@@ -73,6 +76,13 @@ sdb_soufflant_demarrer:
         device: radiateur_sdb
         num_repeats: 2
         delay_secs: 0.8
+    - alias: "Oscillation du volet"
+      action: remote.send_command
+      target:
+        entity_id: remote.soufflant_sdb
+      data:
+        command: swing
+        device: radiateur_sdb
     - alias: "Compteur d'etat logiciel"
       action: input_select.select_option
       target:

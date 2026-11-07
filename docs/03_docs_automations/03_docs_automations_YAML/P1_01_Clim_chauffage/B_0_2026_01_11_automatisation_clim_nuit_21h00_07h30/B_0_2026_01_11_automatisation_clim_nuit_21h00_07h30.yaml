@@ -48,7 +48,6 @@ triggers:
   entity_id:
   - sensor.groupe
   - sensor.th_balcon_nord_temperature
-  - sensor.temperature_cible
   - sensor.mode_ete_hiver
   - sensor.temperature_confort_nuit
   id: sensor_update

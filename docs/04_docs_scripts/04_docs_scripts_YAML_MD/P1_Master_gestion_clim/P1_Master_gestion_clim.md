@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--04-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--07-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -49,7 +49,7 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 - Si `trigger_id == 'ha_restart'` → attente 1 minute
 
 ### 3. Boucle attente capteurs (max 10 × 30s)
-- Vérifie 9 capteurs : `mode_ete_hiver`, `groupe`, `temperature_eco_hiver_corrige`, `temperature_eco_ete_corrige`, `temperature_corrige_salon`, `temperature_corrige_bureau`, `temperature_corrige_chambre` + selon `periode` : `temperature_cible` (JOUR) ou `temperature_confort_nuit` (NUIT)
+- Vérifie 9 capteurs : `mode_ete_hiver`, `groupe`, `temperature_eco_hiver_corrige`, `temperature_eco_ete_corrige`, `temperature_corrige_salon`, `temperature_corrige_bureau`, `temperature_corrige_chambre` + selon `periode` : `temperature_confort_jour` (JOUR) ou `temperature_confort_nuit` (NUIT)
 - Aucune notif pendant la boucle (fini le spam par essai)
 - Au 10e cycle, **diagnostic 3 sorties** :
   - **SORTIE 1 - OFF sécurité** : `mode_ete_hiver` HS, OU éco de saison HS alors qu'on en a besoin (groupe_1, groupe HS, ou une température normale HS) → off des 3 clims + message « Arrêt sécurité capteur HS »
@@ -64,11 +64,11 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 | `fenetres_ouvertes` | expand 4× `binary_sensor.contact_fenetre_*` |
 | `temp_eco_hc` | `sensor.temperature_eco_hiver_corrige` |
 | `temp_eco_ec` | `sensor.temperature_eco_ete_corrige` |
-| `temp_cible` | `sensor.temperature_cible` |
+| `temp_cible` | `sensor.temperature_confort_jour` |
 | `temp_nuit` | `sensor.temperature_confort_nuit` |
-| `temp_conf_m` | `sensor.temperature_corrige_salon` |
-| `temp_conf_e` | `sensor.temperature_corrige_bureau` |
-| `temp_conf_c` | `sensor.temperature_corrige_chambre` |
+| `tccsj_s` | `sensor.temperature_corrige_salon` |
+| `tccsj_b` | `sensor.temperature_corrige_bureau` |
+| `tccsj_c` | `sensor.temperature_corrige_chambre` |
 
 ### 5. Calcul cibles par pièce
 
@@ -76,9 +76,9 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 | Groupe | Période | Cible |
 |:---|:---|:---|
 | `groupe_1` (absent) | - | eco (hc ou ec selon saison) |
-| `groupe_2` (Mamour) | JOUR | `temp_conf_m` |
-| `groupe_3` (Eric) | JOUR | `temp_conf_e` |
-| `groupe_4` (Tous) | JOUR | `temp_conf_m` |
+| `groupe_2` (Mamour) | JOUR | `tccsj_s` |
+| `groupe_3` (Eric) | JOUR | `tccsj_b` |
+| `groupe_4` (Tous) | JOUR | `tccsj_s` |
 | tout | NUIT | `temp_nuit` |
 
 #### BUREAU
@@ -86,15 +86,15 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 |:---|:---|:---|
 | `groupe_1` (absent) | - | eco |
 | `groupe_2` (Mamour) | JOUR | eco |
-| `groupe_3` (Eric) | JOUR | `temp_conf_e` |
-| `groupe_4` (Tous) | JOUR | `temp_conf_e` |
+| `groupe_3` (Eric) | JOUR | `tccsj_b` |
+| `groupe_4` (Tous) | JOUR | `tccsj_b` |
 | tout | NUIT | `temp_nuit` |
 
 #### CHAMBRE
 | Groupe | Période | Cible |
 |:---|:---|:---|
 | `groupe_1` (absent) | - | eco |
-| tout autre | JOUR | `temp_conf_c` |
+| tout autre | JOUR | `tccsj_c` |
 | tout | NUIT | `temp_nuit` |
 
 ### 6. Exécution
@@ -125,9 +125,9 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 | `sensor.temperature_eco_ete_corrige` | T° éco été |
 | `sensor.temperature_eco_hiver` | Fallback éco hiver |
 | `sensor.temperature_eco_ete` | Fallback éco été |
-| `sensor.temperature_cible` | T° cible jour |
+| `sensor.temperature_confort_jour` | T° cible jour |
 | `sensor.temperature_confort_nuit` | T° cible nuit |
-| `sensor.consigne_de_base` | Fallback général |
+| `sensor.consigne` | Fallback général |
 | `sensor.temperature_corrige_salon` | T° confort Salon |
 | `sensor.temperature_corrige_bureau` | T° confort Bureau |
 | `sensor.temperature_corrige_chambre` | T° confort chambre |
@@ -158,7 +158,7 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 
 - **Libelles de `hs_list`** : le rapport de sante nomme les capteurs muets sous forme courte (`corrige_salon`, `corrige_bureau`, `corrige_chambre`, `eco_hiver_corrige`, `eco_ete_corrige`, `groupe`). Ces etiquettes sont ecrites en dur dans le script et ne suivent PAS automatiquement le renommage des entites : apres chaque renommage de capteur il faut les corriger separement, dans la copie locale ET dans la prod. Un oubli ne casse rien a l'execution, il fait seulement diverger les deux copies en silence.
 - **HA reecrit `scripts.yaml`** : apres chaque enregistrement depuis l'interface, Home Assistant reformate le fichier (guillemets, passages a la ligne, echappements). Un diff brut montre alors des dizaines de lignes differentes qui ne sont que de la mise en forme : la comparaison doit se faire sur le YAML relu, jamais sur le texte.
-- **SALON groupe_3 JOUR** : Eric seul -> `temp_conf_e` (meme comportement que l'ancienne version inline).
+- **SALON groupe_3 JOUR** : Eric seul -> `tccsj_b`, la consigne du bureau, pas celle du salon. Ecart de 3 C par rapport aux groupes 2 et 4. Comportement historique conserve apres essai de l'autre option le 2026-11-07 : Eric a prefere l'ancien.
 - `sensor_update` ne redémarre pas une clim déjà en `off` (protection intentionnelle via `trigger_id`).
 - Script `mode: queued, max: 10` - les déclenchements simultanés sont mis en file.
 - **Logique 3 sorties (09-09)** : si un capteur reste HS après les 10 essais, le script ne calcule plus avec des valeurs au hasard : OFF (critique), mode dégradé éco de saison (groupe ou temp normale HS), ou normal. Le message part une seule fois, au 10e cycle.
@@ -169,7 +169,8 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 
 | Date | Session | Modification | config_hash |
 |:---|:---|:---|:---|
+| 2026-11-07 | Hermes | **References aux entites supprimees** : 11 references remplacees apres la suppression de `sensor.consigne_de_base` et `sensor.temperature_cible` le meme jour. `consigne_de_base` devient `sensor.consigne` (renommage pur, meme valeur). `temperature_cible` devient `sensor.temperature_confort_jour`, qui porte desormais la cible du jour dans le template P1_01. **Pourquoi c'etait urgent** : `float()` sur une entite inconnue rend 0, donc `temp_cible` valait 0.0 et le repli `eco_saison_val` tombait aussi a 0.0, ce qui aurait envoye une consigne de 0 C aux trois clims des qu'une branche degradee s'activait. Apres correction : 20.0 et 20.0. Signale par Spook. | - |
 | 2026-11-04 | S2 | **Libelles `hs_list` alignes sur la prod** : `corrige_mamour` devient `corrige_salon` et `corrige_eric` devient `corrige_bureau` dans la copie locale. Les noms d'entites avaient ete renommes le 2026-11-03, mais pas ces deux etiquettes du rapport de sante : la copie locale divergeait de la prod d'exactement deux libelles, ce que `Gen_GLOBAL_INDEX_scripts.py` signalait par `different=1`, desormais `0`. | - |
-| 2026-11-03 | S2 | **Renommage des cibles de confort** : `sensor.temperature_corrige_mamour` devient `sensor.temperature_corrige_salon`, `sensor.temperature_corrige_eric` devient `sensor.temperature_corrige_bureau`. Quatre references d'entites et deux libelles de `hs_list` dans `scripts.yaml`, corriges en prod puis dans les copies. Les noms des VARIABLES internes (`temp_conf_m`, `temp_conf_e`) sont conserves : ils n'apparaissent nulle part a l'ecran, et les renommer aurait touche la logique de repartition par piece sans aucun gain lisible. | - |
+| 2026-11-03 | S2 | **Renommage des cibles de confort** : `sensor.temperature_corrige_mamour` devient `sensor.temperature_corrige_salon`, `sensor.temperature_corrige_eric` devient `sensor.temperature_corrige_bureau`. Quatre references d'entites et deux libelles de `hs_list` dans `scripts.yaml`, corriges en prod puis dans les copies. Les noms des VARIABLES internes (`tccsj_s`, `tccsj_b`) sont conserves : ils n'apparaissent nulle part a l'ecran, et les renommer aurait touche la logique de repartition par piece sans aucun gain lisible. | - |
 | 2026-09-09 | Hermes | **Logique 3 sorties** après les 10 essais capteurs (version `_2026-09-09.yaml`) : sortie 1 OFF si `mode_ete_hiver` HS ou éco de saison HS + besoin éco ; sortie 2 mode dégradé éco de saison si groupe HS ou température normale HS ; sortie 3 normal. Clamp du 06-09 retiré (rollback 09-08). Chambre pilotée en `temperature` simple (SmartIR Daikin, plus de NodOn). Notif unique au 10e cycle (plus de notif par essai). | |
 | 2026-09-06 | S1 | **Fix `temp_out_of_range`** : bloc `INIT : CIBLES DE TEMPÉRATURE PAR PIÈCE` reécrit avec clamp Jinja2 `[[_v, min_temp]|max, max_temp]|min` sur `state_attr` live pour `t_salon_target`, `t_bureau_target`, `t_chambre_target`. Empêche tout appel `climate.set_temperature` hors plage physique AC (Salon 16-32°C, Bureau/Chambre 18-32°C). 279→291 lignes. | `83cd286eafa2f8df` |

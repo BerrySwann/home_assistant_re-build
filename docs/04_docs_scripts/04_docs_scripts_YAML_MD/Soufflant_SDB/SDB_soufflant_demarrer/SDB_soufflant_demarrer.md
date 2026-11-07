@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![Modifie](https://img.shields.io/badge/MàJ-2026--10--28-44739e?style=flat-square)](.)&nbsp;
+[![Modifie](https://img.shields.io/badge/MàJ-2026--11--07-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -26,7 +26,7 @@
 2. Attente de la fin d'une sequence d'arret en cours (`script.sdb_soufflant_arreter` a `off`, 2 minutes au plus).
 3. Pose du verrou `input_boolean.verrou_soufflant_salle_de_bain` (30 secondes).
 4. Prise `switch.prise_soufflant_salle_de_bain_nous` sur `on`, puis 1 s.
-5. Mise en route IR : `remote.send_command` sur `remote.soufflant_sdb` (`on_off`, appareil `radiateur_sdb`), puis deux impulsions `1000w` (soit 2000 W).
+5. Mise en route IR : `remote.send_command` sur `remote.soufflant_sdb` (`on_off`, appareil `radiateur_sdb`), puis deux impulsions `1000w` (soit 2000 W), puis `swing` pour l'oscillation du volet.
 6. Compteur d'etat logiciel : `input_select.etat_resistance_soufflant_sdb` sur `2000W`.
 7. Affichage : `climate.soufflant_salle_de_bain` sur `heat`.
 8. Verrou de 30 secondes, puis levee du verrou ; si `input_boolean.inter_soufflant_salle_de_bain` est `off`, lancement de `script.sdb_soufflant_arreter`.
@@ -35,6 +35,7 @@
 ## Etat (journal du fichier)
 
 - Deploye en prod le 2026-09-28. Complete le 2026-09-29. Modifie le 2026-10-07 : garde 25 degres remplacee par la garde de saison (mode `cool`) ; verrou ramene de 2 minutes a 30 secondes (decision d'Eric : eviter un `off` premature).
+- Modifie le 2026-11-07 : remise de la commande IR `swing` (oscillation du volet) apres les deux impulsions. L'ancienne automation `Z - ... GESTION INTELLIGENTE SOUFFLANT` l'envoyait ligne 487 ; la reecriture en script l'avait perdue. Prod modifiee (MD5 d18d9592 -> 8235fd00), `script.reload` sans redemarrage.
 
 ## Voir aussi
 

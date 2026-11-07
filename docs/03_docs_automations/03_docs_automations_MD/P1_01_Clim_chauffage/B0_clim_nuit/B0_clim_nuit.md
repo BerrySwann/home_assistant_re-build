@@ -38,7 +38,7 @@ La nuit, les 3 pièces utilisent une cible uniforme `temp_nuit` (sauf groupe_1 �
 | `force_run` | `state` | 3 prises clim NOUS |
 | `window_open` | `state` | 4 capteurs fenêtres → `off` → `on` |
 | `window_close` | `state` | 4 capteurs fenêtres → `on` → `off` |
-| `sensor_update` | `state` | `sensor.groupe` *(ajouté)*, `sensor.th_balcon_nord_temperature`, `sensor.temperature_cible`, `sensor.mode_ete_hiver`, `sensor.temperature_confort_nuit` |
+| `sensor_update` | `state` | `sensor.groupe` *(ajouté)*, `sensor.th_balcon_nord_temperature`, `sensor.mode_ete_hiver`, `sensor.temperature_confort_nuit` |
 
 ---
 
@@ -74,7 +74,6 @@ Une seule action :
 | `sensor.eric_network_type` | Présence réseau Eric |
 | `sensor.groupe` | Groupe de présence (trigger sensor_update) |
 | `sensor.th_balcon_nord_temperature` | T° extérieure |
-| `sensor.temperature_cible` | T° cible (utilisée comme fallback dans le script) |
 | `sensor.mode_ete_hiver` | Mode saison |
 | `sensor.temperature_confort_nuit` | T° confort nuit |
 | 4× `binary_sensor.contact_fenetre_*` | Capteurs fenêtres |

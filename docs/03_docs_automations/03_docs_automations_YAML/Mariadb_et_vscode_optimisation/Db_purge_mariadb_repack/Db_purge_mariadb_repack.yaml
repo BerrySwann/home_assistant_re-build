@@ -9,6 +9,6 @@ conditions: []
 actions:
 - action: recorder.purge
   data:
-    keep_days: 7
+    keep_days: 14
     repack: true
 mode: single

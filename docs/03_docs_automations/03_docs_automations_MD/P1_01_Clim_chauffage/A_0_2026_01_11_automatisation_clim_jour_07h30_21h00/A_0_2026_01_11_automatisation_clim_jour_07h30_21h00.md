@@ -33,7 +33,7 @@ Pilotage clims jour - délègue au script P1_MASTER_gestion_clim
 - `state` entity_id=switch.clim_salon_nous, switch.clim_bureau_nous, switch.clim_chambre_nous
 - `state` entity_id=binary_sensor.contact_fenetre_salon_sonoff_contact, binary_sensor.contact_fenetre_cuisine_sonoff_contact, binary_sensor.contact_fenetre_bureau_sonoff_contact, binary_sensor.contact_fenetre_chambre_sonoff_contact · to=on · from=off
 - `state` entity_id=binary_sensor.contact_fenetre_salon_sonoff_contact, binary_sensor.contact_fenetre_cuisine_sonoff_contact, binary_sensor.contact_fenetre_bureau_sonoff_contact, binary_sensor.contact_fenetre_chambre_sonoff_contact · to=off · from=on
-- `state` entity_id=sensor.groupe, sensor.th_balcon_nord_temperature, sensor.temperature_cible, sensor.mode_ete_hiver, sensor.temperature_confort_jour
+- `state` entity_id=sensor.groupe, sensor.th_balcon_nord_temperature, sensor.mode_ete_hiver, sensor.temperature_confort_jour
 
 ## Actions
 
@@ -50,7 +50,6 @@ Pilotage clims jour - délègue au script P1_MASTER_gestion_clim
 - `sensor.groupe`
 - `sensor.mamour_network_type`
 - `sensor.mode_ete_hiver`
-- `sensor.temperature_cible`
 - `sensor.temperature_confort_jour`
 - `sensor.th_balcon_nord_temperature`
 - `switch.clim_bureau_nous`

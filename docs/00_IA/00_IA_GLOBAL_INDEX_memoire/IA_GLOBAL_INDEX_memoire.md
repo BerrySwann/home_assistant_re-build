@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--06-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--07-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,8 +13,8 @@
 
 </div>
 
-> Fichier GENERE le 2026-11-06 20:50 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
-> 14 fichiers de contenu, 50 sauvegardes (.bak), 0 sans description.
+> Fichier GENERE le 2026-11-07 17:16 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
+> 14 fichiers de contenu, 52 sauvegardes (.bak), 0 sans description.
 
 > 🚨🚨🚨 **GYROPHARE ROUGE - DANS HOME ASSISTANT TOUT EST A PLAT** 🚨🚨🚨
 >
@@ -38,7 +38,7 @@ Un dossier par fichier. Chargés a la demande : Claude ne les lit que si la tach
 
 | Fichier | Qui s'en sert | Son but | Quand le lire | Cite dans CLAUDE.md | Prod |
 |---|---|---|---|---|---|
-| [IA_ARBO_DETAIL.md](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md) | Claude, via /update-arbo et /histo (etape 6) | Arborescences completes local, prod et GitHub avec les comptages de fichiers, URLs raw GitHub. | Audit de fichiers, synchro GitHub, recherche d'un fichier en prod, verification de l'arborescence locale. | oui | DIFFERENT de la prod |
+| [IA_ARBO_DETAIL.md](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md) | Claude, via /update-arbo et /histo (etape 6) | Arborescences completes local, prod et GitHub avec les comptages de fichiers, URLs raw GitHub. | Audit de fichiers, synchro GitHub, recherche d'un fichier en prod, verification de l'arborescence locale. | oui | OK (MD5 identique) |
 | [IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md](../00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md) | Claude, en mode expert audit energetique | Prompt expert : caracteristiques du logement, equipements, methodes d'analyse, missions et format du rapport d'audit conso et thermique. | Audit de consommation, analyse DUT par piece, efficacite isolation/volets/rideaux, ecart entre la theorie des YAML et les logs reels. | oui | OK (MD5 identique) |
 | [IA_AUTOMATIONS_NOTIFS.md](../00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/IA_AUTOMATIONS_NOTIFS.md) | Claude, pour ecrire ou modifier des automations et des notifications | Regles de codage des automations et referentiel des notifications de la prod (canaux, titres, messages, fichiers log). | Creation ou modification d'une automation, ecriture d'un message notify, script HA. | oui | OK (MD5 identique) |
 | [IA_BADGES_FICHES.md](../00_IA_SOUS_CONTEXT_IA/IA_BADGES_FICHES/IA_BADGES_FICHES.md) | Claude, pour creer ou corriger la banniere de badges d une fiche | Inventaire des badges des fiches .md : valeurs et couleurs de chaque badge, et les cas deja rencontres. | Creer une fiche .md, choisir ou corriger un badge, modifier Check_badges_fiches. | oui | OK (MD5 identique) |
@@ -65,7 +65,7 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 |---|---|
 | [00_IA_CONTEXT_BASE](../00_IA_CONTEXT_BASE/) | 3 |
 | [00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/) | 6 |
-| [00_IA_GLOBAL_INDEX_memoire](./) | 4 |
+| [00_IA_GLOBAL_INDEX_memoire](./) | 6 |
 | [00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 4 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE](../00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS](../00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/) | 3 |
@@ -97,11 +97,11 @@ Tous sont verifies par /histo (liens casses, existence, prod).
 
 ## Recapitulatif des entites citees par cet index
 
-Total : **685 entites**. Origine de chacune : type, puis le nom de l integration telle qu elle apparait dans Appareils et services.
+Total : **684 entites**. Origine de chacune : type, puis le nom de l integration telle qu elle apparait dans Appareils et services.
 
 | origine | nombre | explication |
 |:---|---:|:---|
-| CREE template | 249 | creee par un YAML du depot, dossier `template`, sans aucune integration dans Appareils et services |
+| CREE template | 248 | creee par un YAML du depot, dossier `template`, sans aucune integration dans Appareils et services |
 | NAT mqtt | 128 | chaine a trois maillons, verifiee le 2026-11-03 : Zigbee2MQTT (conteneur 200, Proxmox 10.32.154.244) publie vers le broker `core-mosquitto` (add-on Mosquitto, port 1883), que consomme l integration `mqtt` d Appareils et services. Si un des trois manque, les entites tombent |
 | CREE utility_meter | 76 | creee par un YAML du depot, dossier `utility_meter`, sans aucune integration dans Appareils et services |
 | NAT mobile_app | 49 | integration `mobile_app` du coeur de Home Assistant, installee et visible dans Appareils et services |
