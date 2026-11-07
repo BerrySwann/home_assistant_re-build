@@ -130,7 +130,7 @@
         {% endif %}
 
 # ┌───────────────────────────────────────────────────┐
-# │ CONSIGNES DE consigne DYNAMIQUES                      │
+# │ CONSIGNES DE CONSIGNE                             │
 # └───────────────────────────────────────────────────┘
 
 # --- consigne ---
@@ -175,12 +175,13 @@
       device_class: temperature
       state: >
         {% set d1 = states('sensor.delta_1') | float(1) %}
+        {% set d2 = states('sensor.delta_2') | float(2) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {{ [t_ext - d1, 26] | min | int }}
         {% else %}
           {% set tcj_s = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tcj_s + d1, 21] | min | round(1) }}
+          {{ [tcj_s + d2, 22] | min | round(1) }}
         {% endif %}
 
 # ┌─────────────────────────────────┐
@@ -212,36 +213,16 @@
       device_class: temperature
       state: >
         {% set d1 = states('sensor.delta_1') | float(1) %}
+        {% set d2 = states('sensor.delta_2') | float(2) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {{ [t_ext + d1, 27] | min | int }}
         {% else %}
-          {{ [states('sensor.temperature_cible') | float(0), 19] | min | int }}
-        {% endif %}
-
-# ┌────────────────────────────────────────────────┐
-# │ MOTEURS DE CALCUL DYNAMIQUES (CIBLE / CONFORT) │
-# └────────────────────────────────────────────────┘
-
-# --- temperature_cible ---
-    - name: "Temperature Cible"
-      unique_id: temperature_cible
-      unit_of_measurement: "°C"
-      state: >
-        {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
-        {% set consigne = states('sensor.consigne') | float(0) %}
-        {% set d1 = states('sensor.delta_1') | float(1) %}
-        {% set d2 = states('sensor.delta_2') | float(1) %}
-        {% set d5 = states('sensor.delta_5') | float(5) %}
-        {% set d7 = states('sensor.delta_7') | float(7) %}
-        {% if t_ext < 8 %} {{ (consigne + d2) | int }}
-        {% elif t_ext < 12 %} {{ (consigne + d1) | int }}
-        {% elif t_ext > 32 %} {{ (t_ext - d5) | int }}
-        {% else %} {{ consigne | int }}
+          {{ [states('sensor.temperature_confort_jour') | float(0) - d2, 19] | min | int }}
         {% endif %}
 
 # ┌──────────────────────────────────────────────────┐
-# │ MOTEURS DE CALCUL DYNAMIQUES (Confort jour/nuiy) │
+# │ MOTEURS DE CALCUL DYNAMIQUES (Confort jour/nuit) │
 # └──────────────────────────────────────────────────┘
 
 # --- temperature_confort_jour ---
@@ -249,12 +230,19 @@
       unique_id: temperature_confort_jour
       unit_of_measurement: "°C"
       state: >
-        {% set t_conf = states('sensor.temperature_confort') | float(0) %}
-        {% set consigne = states('sensor.consigne') | float(0) %}
-        {% set cible = states('sensor.temperature_cible') | float(0) %}
-        {{ (t_conf + (cible - consigne)) | round(1) }}
-
-# --- temperature_confort_nuit ---
+        {% set base = states('sensor.consigne') | float(19) %}
+        {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+        {% set d1 = states('sensor.delta_1') | float(1) %}
+        {% set d2 = states('sensor.delta_2') | float(2) %}
+        {% set d5 = states('sensor.delta_5') | float(5) %}
+        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
+          {% if t_ext > 32 %}{{ ((t_ext - d5) - d1) | round(1) }}
+          {% else %}{{ (base - d1) | round(1) }}{% endif %}
+        {% else %}
+          {% if t_ext < 8 %}{{ (base + d2 + d1) | round(1) }}
+          {% elif t_ext < 12 %}{{ (base + d1 + d1) | round(1) }}
+          {% else %}{{ (base + d1) | round(1) }}{% endif %}
+        {% endif %}
     - name: "Temperature confort nuit"
       unique_id: temperature_confort_nuit
       unit_of_measurement: "°C"
@@ -264,7 +252,7 @@
         {% set d1 = states('sensor.delta_1') | float(1) %}
         {% set d2 = states('sensor.delta_2') | float(2) %}
         {% if t_ext < 8 %} {{ (t_conf - d1) | round(1) }}
-        {% elif t_ext < 12 %} {{ (t_conf - d2) | round(1) }}
+        {% elif t_ext < 12 %} {{ (t_conf - d1) | round(1) }}
         {% elif t_ext < 19 %} {{ (t_conf - d1) | round(1) }}
         {% elif is_state('sensor.mode_ete_hiver', 'cool') %} 26
         {% else %} {{ t_conf + d1 }}
