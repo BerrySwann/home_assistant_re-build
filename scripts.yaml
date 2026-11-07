@@ -566,6 +566,13 @@ sdb_soufflant_demarrer:
       num_repeats: 2
     target:
       entity_id: remote.soufflant_sdb
+  - action: remote.send_command
+    alias: Oscillation du volet
+    data:
+      command: swing
+      device: radiateur_sdb
+    target:
+      entity_id: remote.soufflant_sdb
   - action: input_select.select_option
     alias: Compteur d'etat logiciel
     data:
