@@ -3348,7 +3348,6 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <li><code>binary_sensor.contact_fenetre_chambre_sonoff_contact</code></li>
 <li><code>sensor.groupe</code></li>
 <li><code>sensor.th_balcon_nord_temperature</code></li>
-<li><code>sensor.temperature_cible</code></li>
 <li><code>sensor.mode_ete_hiver</code></li>
 <li><code>sensor.temperature_confort_jour</code></li>
 </ul></blockquote>
@@ -3383,7 +3382,6 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <li><code>binary_sensor.contact_fenetre_chambre_sonoff_contact</code></li>
 <li><code>sensor.groupe</code></li>
 <li><code>sensor.th_balcon_nord_temperature</code></li>
-<li><code>sensor.temperature_cible</code></li>
 <li><code>sensor.mode_ete_hiver</code></li>
 <li><code>sensor.temperature_confort_nuit</code></li>
 </ul></blockquote>
@@ -4652,11 +4650,11 @@ n'est presente dans HA aujourd'hui : le Pi 4 4 Go est hors tension et le bloc GP
 
 ## Recapitulatif des entites citees par cet index
 
-Total : **685 entites**. Origine de chacune : type, puis le nom de l integration telle qu elle apparait dans Appareils et services.
+Total : **684 entites**. Origine de chacune : type, puis le nom de l integration telle qu elle apparait dans Appareils et services.
 
 | origine | nombre | explication |
 |:---|---:|:---|
-| CREE template | 249 | creee par un YAML du depot, dossier `template`, sans aucune integration dans Appareils et services |
+| CREE template | 248 | creee par un YAML du depot, dossier `template`, sans aucune integration dans Appareils et services |
 | NAT mqtt | 128 | chaine a trois maillons, verifiee le 2026-11-03 : Zigbee2MQTT (conteneur 200, Proxmox 10.32.154.244) publie vers le broker `core-mosquitto` (add-on Mosquitto, port 1883), que consomme l integration `mqtt` d Appareils et services. Si un des trois manque, les entites tombent |
 | CREE utility_meter | 76 | creee par un YAML du depot, dossier `utility_meter`, sans aucune integration dans Appareils et services |
 | NAT mobile_app | 49 | integration `mobile_app` du coeur de Home Assistant, installee et visible dans Appareils et services |
