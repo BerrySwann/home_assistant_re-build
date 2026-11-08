@@ -77,7 +77,7 @@
           {#- Pré-calcul labels par prise — Mode: [OFF] si prise coupée -#}
           {%- set s_eco    = "Mode: [OFF]" if not prise_salon   else temp_eco     ~ "°" %}
           {%- set s_eco_e  = "Mode: [OFF]" if not prise_salon   else temp_eco_ete ~ "°" %}
-          {%- set s_conf_m = "Mode: [OFF]" if not prise_salon   else temp_conf_m  ~ "°" %}
+          {%- set s_conf_m = "Mode: [OFF]" if not prise_salon   else temp_conf_s  ~ "°" %}
           {%- set s_conf_e = "Mode: [OFF]" if not prise_salon   else temp_conf_b  ~ "°" %}
           {%- set b_eco    = "Mode: [OFF]" if not prise_bureau  else temp_eco     ~ "°" %}
           {%- set b_eco_e  = "Mode: [OFF]" if not prise_bureau  else temp_eco_ete ~ "°" %}

@@ -20,7 +20,7 @@
 
 ## 📝 Description
 
-Ménage nocturne automatique de MariaDB à 00:30. Conserve 7 jours d'historique
+Ménage nocturne automatique de MariaDB à 00:30. Conserve 14 jours d'historique
 et repack la base pour libérer l'espace disque.
 
 ---

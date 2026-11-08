@@ -1,0 +1,54 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-11-05</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-11-05</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-05_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-11-05</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 07h00 - 07h40 (matin) ; la veille au soir, verifications TarifElecInfo et fiches</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>docs/03_docs_automations/03_docs_automations_YAML/Gestion_des_stores/Gestion_simple_du_store_salon_matin_soir/Gestion_simple_du_store_salon_matin_soir.yaml</code> - automation <code>1775244989013</code> "Gestion Optimisee du Store Salon" : copie du modele du store bureau, seuils 12 et 32, presence (groupe_1 ferme apres 5 min sans autre condition, groupe_2/4 ouvre immediatement sous conditions soleil/temperature/fenetre), applique dans HA a 07h32 puis retrait du delai 5 min sur groupe_2_4 a 07h35 <strong>[v]</strong></li>
+<li>🟢 <code>docs/03_docs_automations/03_docs_automations_MD/Gestion_des_stores/Gestion_store_salon/Gestion_store_salon.md</code> - fiche refaite, alignee sur HA, poussee dans <code>H:\docs</code> <strong>[v]</strong></li>
+<li>🟢 HA prod : automation <code>1775244989013</code> mise a jour (hash <code>c9b6b46a</code>), entite <code>on</code>, relue identique au YAML local <strong>[v]</strong></li>
+<li>🔵 <code>docs/03_docs_automations/03_docs_automations_YAML/Automations_yaml_original/automations.bak_2026_11_05_07h30m30.yaml</code> - point de retour de <code>H:\automations.yaml</code> avant application (MD5 A68B4D3E)</li>
+</ul>
+<h4>🔵 Constats</h4>
+<ul>
+<li>🔵 Integration TarifElecInfo (Hermes) remplace tarif_edf : plus aucune trace de tarif_edf, fiche TarifElecInfo et ligne IA_INTEGRATIONS_CARTES faites par Hermes</li>
+<li>🔵 Timer a 0 dans les cartes L0C0 lave-linge et lave-vaisselle : washdata ne reconnait aucun programme, donc <code>temps_restant</code> inconnu, la carte affiche 0 ; aucune modification</li>
+<li>🔵 Verification yaml/md des automations : ecarts d'appariement a decider par Eric (regle fiches du dossier 01, regeneration de <code>MOC_AUTOMATIONS.md</code>)</li>
+<li>🔵 Ancienne branche MATIN du store salon en HA avait <code>sun after sunset</code> (bug, bloquait l'ouverture le jour) : remplacee</li>
+<li>🔵 Exception decidee par Eric : deux automations gardees pour le salon ; la sauvegarde <code>...bak_2026_11_05_07h06m31s.yaml</code> (ancienne automation simple) est a conserver hors menage</li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 Verification du bon fonctionnement du store salon dans quelques jours (traces HA et historique de <code>cover.store_salon</code>) <strong>[a tester]</strong></li>
+<li>🟠 Conditions du scenario A (07:00, fenetre fermee, store fermé) a confirmer par Eric <strong>[EN COURS]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 Fiche salon annoncait HA aligne a tort (test trop large) -&gt; verifie dans <code>automations.yaml</code>, ligne MaJ corrigee <strong>[resolu]</strong></li>
+<li>🔴 <code>ha_config_set_automation</code> refuse (cle best practices manquante) -&gt; guide lu, cle fournie <strong>[resolu]</strong></li>
+<li>🔴 Ligne du journal des modifs du 11-04 recopiee comme en-tete par erreur -&gt; supprimee, ligne CORRECTION ajoutee <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.html)</h4>
+<ul>
+<li>📌 Decider la regle d'appariement des fiches du dossier 01 ; regenerer <code>MOC_AUTOMATIONS.md</code></li>
+<li>📌 Profils washdata ou affichage du temps ecoule dans les cartes L0C0</li>
+<li>📌 Proteger durablement <code>...bak_2026_11_05_07h06m31s.yaml</code> du menage des <code>.bak</code></li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Controle dans quelques jours du cahier des charges du store salon (groupes 1, 2/4, 3, scenarios B et C)</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

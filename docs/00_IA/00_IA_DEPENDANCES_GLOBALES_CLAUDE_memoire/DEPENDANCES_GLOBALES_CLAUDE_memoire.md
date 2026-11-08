@@ -3764,7 +3764,7 @@ B - [P0] Histo Nodon quotidien -> nodon_histo.txt (colonne Nodon de la carte ; a
 
 #### A - Rôle
 
-Ménage nocturne : purge la base MariaDB à 7 jours de rétention puis Repack pour libérer l'espace disque. Se déclenche chaque nuit à 00:30.
+Ménage nocturne : purge la base MariaDB à 14 jours de rétention puis Repack pour libérer l'espace disque. Se déclenche chaque nuit à 00:30.
 
 #### B - Triggers / Entités
 

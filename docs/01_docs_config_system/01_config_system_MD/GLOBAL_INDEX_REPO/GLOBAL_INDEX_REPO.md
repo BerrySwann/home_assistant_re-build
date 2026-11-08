@@ -3331,7 +3331,7 @@ pop-up COV des autres pièces en ont 3 (native + TPL + SEN) - complété par coh
 <summary>✅ <b>(A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00)</b></summary>
 <blockquote>
 <i>Pilotage clims jour avec boucle de relance et notification ciblée fenêtres</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/A0_clim_jour/A0_clim_jour.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · ⏰`time` · 🔄`state`<br>
 <br><details>
@@ -3365,7 +3365,7 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(B - 0) 2026-01-11 AUTOMATISATION CLIM NUIT (21H00 <-> 07H30)</b></summary>
 <blockquote>
 <i>Pilotage clims nuit avec boucle de relance et notification ciblée fenêtres</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/B0_clim_nuit/B0_clim_nuit.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🏠`homeassistant` · ⏰`time` · 🔄`state`<br>
 <br><details>
@@ -3399,7 +3399,7 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(D) Notification température Up ou Down de (7h30 -> 21h00)</b></summary>
 <blockquote>
 <i>Envoie le message personnalisé de clim si le texte change, OU au réveil</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/C_notif_temp_jour/C_notif_temp_jour.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/C_notification_temperature_up_ou_down_7h30_21h00/C_notification_temperature_up_ou_down_7h30_21h00.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/C_notification_temperature_up_ou_down_7h30_21h00/C_notification_temperature_up_ou_down_7h30_21h00.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · ⏰`time`<br>
 <br><details>
@@ -3416,7 +3416,7 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(E) Notification température Up ou Down de (21h00 -> 7h30)</b></summary>
 <blockquote>
 <i>Envoie le message personnalisé de clim si le texte change, OU au début</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/D_notif_temp_nuit/D_notif_temp_nuit.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/D_notification_temperature_up_ou_down_21h00_7h30/D_notification_temperature_up_ou_down_21h00_7h30.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/D_notification_temperature_up_ou_down_21h00_7h30/D_notification_temperature_up_ou_down_21h00_7h30.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · ⏰`time`<br>
 <br><details>
@@ -3433,7 +3433,7 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(F) (CLIM) Notification de fermeture des fenêtres</b></summary>
 <blockquote>
 <i>Envoie une notification lorsqu'une fenêtre est fermée.</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/E_notif_fermeture_fenetres/E_notif_fermeture_fenetres.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/E_clim_notification_de_fermeture_des_fenetres/E_clim_notification_de_fermeture_des_fenetres.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/E_clim_notification_de_fermeture_des_fenetres/E_clim_notification_de_fermeture_des_fenetres.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 
@@ -3444,7 +3444,7 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(G) (CLIM) Automatisation Arrêt Clim Notification</b></summary>
 <blockquote>
 <i>Notification quand une clim est coupée manuellement, seulement si</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/F_arret_clim_notif/F_arret_clim_notif.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/F_clim_automatisation_arret_clim_notification/F_clim_automatisation_arret_clim_notification.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/F_clim_automatisation_arret_clim_notification/F_clim_automatisation_arret_clim_notification.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
@@ -3467,7 +3467,7 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(H) (CLIM) Notification de changement de mode Été/Fan/Hiver</b></summary>
 <blockquote>
 <i>Notification lorsque le mode change entre Été, Ventilateur ou Hiver</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/G_notif_mode_changement/G_notif_mode_changement.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/G_clim_notification_de_changement_de_mode_ete_fan_hiver/G_clim_notification_de_changement_de_mode_ete_fan_hiver.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/G_clim_notification_de_changement_de_mode_ete_fan_hiver/G_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
@@ -3484,7 +3484,7 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(I) (CLIM DEBUG) Force Mode Correct & Sécurité</b></summary>
 <blockquote>
 <i>WATCHDOG :   1. FORCE OFF si tentative d''allumage alors que Prise</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/H_debug_force_mode/H_debug_force_mode.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/H_clim_debug_force_mode_correct_securite/H_clim_debug_force_mode_correct_securite.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/H_clim_debug_force_mode_correct_securite/H_clim_debug_force_mode_correct_securite.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
@@ -3501,7 +3501,7 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(J) Synchro & Notif Clim si Prise Coupée</b></summary>
 <blockquote>
 <i>Met à jour l''état du thermostat et notifie proprement si la prise</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/I_synchro_notif_prise_coupee/I_synchro_notif_prise_coupee.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/I_synchro_notif_clim_si_prise_coupee/I_synchro_notif_clim_si_prise_coupee.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/I_synchro_notif_clim_si_prise_coupee/I_synchro_notif_clim_si_prise_coupee.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 
@@ -3512,7 +3512,7 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(K) (DEBUG) Notifier les changements de message clim (Mobile)</b></summary>
 <blockquote>
 <i>Surveille et notifie les changements d'état du message personnalisé.</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/J_debug_notif_message_clim/J_debug_notif_message_clim.md">Documentation</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>

@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--08-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,14 +13,14 @@
 
 </div>
 
-Genere le 2026-10-28 19:07. Genere par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_dashboard/gen_moc_dashboard.py. Ne pas modifier a la main : le script ecrase les modifications.
+Genere le 2026-11-08 13:43. Genere par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_dashboard/gen_moc_dashboard.py. Ne pas modifier a la main : le script ecrase les modifications.
 
 Regle d'Eric (2026-10-28) : chaque YAML de docs/02_docs_dashboard (hors Dashboard_COMPLET) a sa fiche .md. Le rapprochement se fait par le nom du fichier, sinon par une fiche de la meme cellule qui cite le fichier YAML, sinon par un rattachement manuel (table FORCE du script). Sous la ligne de chaque page ou vignette figurent toutes les cartes (autres YAML) de la meme cellule avec leur fiche (Page.md). Sont ignores : sauvegardes .bak, dossiers XX_, Dashboard_COMPLET, *_ORIGINAL, *_archive*, et les fichiers qui ne sont pas des YAML (.js, .svg, .sh). Les liens sont relatifs a ce fichier.
 
 ## Controle
 
-- YAML suivis : 66
-- YAML avec fiche : 66
+- YAML suivis : 67
+- YAML avec fiche : 67
 - YAML sans fiche (MANQUANT) : 0
 - Fiches .md sans YAML correspondant (tutos, fiches renommees, etc.) : 0
 
@@ -40,6 +40,7 @@ Regle d'Eric (2026-10-28) : chaque YAML de docs/02_docs_dashboard (hors Dashboar
 |  |  | - | - | [Card_detecteur_fuite_home.yaml](02_dashboard_docs_YAML/L0C0_PAGE_Home/09_D%C3%A9tecteur%20de%20fuite/Card_detecteur_fuite_home.yaml) | Page.md OK [fiche](02_dashboard_docs_MD/L0C0_PAGE_Home/09_D%C3%A9tecteur%20de%20fuite/Card_detecteur_fuite_home.md) |
 |  |  | - | - | [Card_meteoalarm_home.yaml](02_dashboard_docs_YAML/L0C0_PAGE_Home/10_Carte%20meteoalarm/Card_meteoalarm_home.yaml) | Page.md OK [fiche](02_dashboard_docs_MD/L0C0_PAGE_Home/10_Carte%20meteoalarm/Card_meteoalarm_home.md) |
 |  |  | - | - | [Card_presence_home.yaml](02_dashboard_docs_YAML/L0C0_PAGE_Home/11_Carte%20pr%C3%A9sence/Card_presence_home.yaml) | Page.md OK [fiche](02_dashboard_docs_MD/L0C0_PAGE_Home/11_Carte%20pr%C3%A9sence/Card_presence_home.md) |
+|  |  | - | - | [Card_calcul_consignes_clim.yaml](02_dashboard_docs_YAML/L0C0_PAGE_Home/Card_calcul_consignes_clim.yaml) | Page.md OK [fiche](02_dashboard_docs_MD/L0C0_PAGE_Home/Card_calcul_consignes_clim.md) |
 | <br> |  |  |  |  |  |
 | L1C1 | L1C1_METEO | [L1C1_Vignette_METEO.yaml](02_dashboard_docs_YAML/L1C1_METEO/L1C1_METEO_01_Vignette/L1C1_Vignette_METEO.yaml) | Vignette.md OK [fiche](02_dashboard_docs_MD/L1C1_METEO/L1C1_METEO_01_Vignette/L1C1_Vignette_METEO.md) | [L1C1_Page_METEO.yaml](02_dashboard_docs_YAML/L1C1_METEO/L1C1_METEO_02_Page/L1C1_Page_METEO.yaml) | Page.md OK [fiche](02_dashboard_docs_MD/L1C1_METEO/L1C1_METEO_02_Page/L1C1_Page_METEO.md) |
 |  |  | - | - | [Card_duree_du_jour.yaml](02_dashboard_docs_YAML/L1C1_METEO/Card_duree_du_jour.yaml) | Page.md OK [fiche](02_dashboard_docs_MD/L1C1_METEO/Card_duree_du_jour.md) |

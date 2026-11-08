@@ -1,0 +1,16 @@
+07:41:08.371 | SEQ_DEBUT  | SEQUENCE           | histo-final
+07:41:08.431 | NOTE       | tokens             | debut : inconnu (compteur non visible)
+07:41:08.489 | NOTE       | menage             | definitif : oui
+07:41:08.546 | DEBUT      | automation_off     | 
+07:41:17.172 | FIN        | automation_off     | OK off confirme
+07:41:17.231 | DEBUT      | journal            | 
+07:41:42.390 | FIN        | journal            | OK histo_2026-11-05_s1.md
+07:41:47.142 | DEBUT      | sync_index         | 
+07:42:36.259 | FIN        | sync_index         | OK index regeneres, casses=0, DEPENDANCES store salon mise a jour
+07:42:36.316 | DEBUT      | fusionne           | 
+07:43:08.324 | FIN        | fusionne           | OK JOURNAL_FUSIONNE_2026-07-15_2026-11-05.md
+07:43:17.947 | DEBUT      | obsidian           | 
+07:43:19.215 | FIN        | obsidian           | OK
+07:43:19.271 | DEBUT      | pages_html         | 
+07:43:56.708 | FIN        | pages_html         | OK 1 originaux a la corbeille
+07:44:12.781 | DEBUT      | menage             | definitif oui

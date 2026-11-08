@@ -132,8 +132,10 @@ Page de supervision de l'infrastructure Proxmox VE. 6 sections indépendantes : 
 | `sensor.homeassistant_statut` | Badge statut | running/stopped |
 | `sensor.homeassistant_utilisation_du_processeur` | CPU % | - |
 | `sensor.homeassistant_max_cpu` | Nb vCPU | - |
-| `sensor.homeassistant_utilisation_de_la_memoire` | RAM utilisée GiB | - |
-| `sensor.homeassistant_utilisation_maximale_de_la_memoire` | RAM max GiB | - |
+| `sensor.homeassistant_utilisation_de_la_memoire` | RAM utilisée GiB | ⚠️ NON UTILISE pour le calcul depuis le 2026-11-08, voir ci-dessous |
+| `sensor.homeassistant_utilisation_maximale_de_la_memoire` | RAM max GiB | ⚠️ NON UTILISE pour le calcul depuis le 2026-11-08 |
+| `sensor.system_monitor_utilisation_de_la_memoire` | RAM % réel | Source du pourcentage depuis le 2026-11-08 |
+| `sensor.system_monitor_memoire_utilisee` / `_libre` | RAM utilisée et libre MiB | Calcul du texte `x / y GiB` |
 | `sensor.system_monitor_utilisation_du_disque` | Disque utilisé GiB | ⚠️ Utilise system_monitor (homeassistant_* renvoie 0.0) |
 | `sensor.homeassistant_utilisation_maximale_du_disque` | Disque max GiB | - |
 | `sensor.homeassistant_uptime` | Uptime (heures) | - |
@@ -195,8 +197,9 @@ Page de supervision de l'infrastructure Proxmox VE. 6 sections indépendantes : 
 
 | Sujet | Détail |
 |-------|--------|
+| **RAM HA** | `sensor.homeassistant_utilisation_de_la_memoire` vient de l integration proxmoxve : il lit la memoire de la VM cote hyperviseur, **cache inclus**, d ou un pourcentage faux. Mesure du 2026-11-08 : carte a 95.4 % alors que `free -m` dans HAOS donnait 1.7 Go utilises sur 7.9, soit 21.6 %. Le noyau avait 5.2 Go disponibles. Remplace par `sensor.system_monitor_utilisation_de_la_memoire`, qui vient de l interieur et compte `MemAvailable`. Meme probleme pour `sensor.pve_memory_usage_percentage` sur le noeud. |
 | Disque HA | `sensor.homeassistant_utilisation_du_disque` retourne 0.0 GiB → remplacé par `sensor.system_monitor_utilisation_du_disque` |
-| Uptime | Les sensors PVE retournent des **heures flottantes** (pas des secondes). Formule : `parseFloat / 24` pour jours |
+| **Uptime** | Depuis le 2026-11-08 l integration proxmoxve renvoie une **date ISO de demarrage** (`2026-11-07T16:04:55+00:00`), plus un nombre d heures. `parseFloat` donnait donc **2026**, et les cinq cartes affichaient toutes 84j10h. Corrigees : `Date.parse(entity.state)` puis `(Date.now() - t) / 3600000`. La carte SearXNG avait deja le bon calcul et a servi de modele. Les six uptime sont a 20h, ce qui est normal : tout a demarre le 07/11 a 16h04. |
 | stack-in-card fond | Nécessite `card_mod: style: ha-card { background: none !important }` sinon fond gris |
 | MyElectricalData badge | Couleur statut = vert `rgb(15,157,88)` universel - PAS le cyan `#00bcd4` de la section |
 | SearXNG RAM | Passe par `sensor.searxng_pourcentage_d_utilisation_de_la_memoire` (déjà en %), pas par la paire utilisé/max des autres sections ; seuils plus hauts (60/80) |

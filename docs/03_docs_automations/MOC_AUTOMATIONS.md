@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--08-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 </div>
 
-Genere le 2026-10-28 20:03 par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py (MOC_AUTOMATIONS). Ne pas modifier a la main : le script ecrase les modifications.
+Genere le 2026-11-08 13:43 par docs/04_docs_scripts/04_docs_scripts_SH/gen_moc_docs/gen_moc_docs.py (MOC_AUTOMATIONS). Ne pas modifier a la main : le script ecrase les modifications.
 
 Regle d'Eric (2026-10-28) : chaque YAML de docs/03_docs_automations a sa fiche .md. Le rapprochement se fait par le nom du fichier, sinon par une fiche qui cite le nom du YAML. Une fiche proche par le nom mais non rattachee est seulement proposee comme candidate (a valider par Eric, jamais comptee OK). Sont ignores : .bak, XX_*, *_ORIGINAL, *_archive*. Voir aussi GLOBAL_INDEX_AUTOMATIONS.md (lien avec les automations de la prod). Les liens sont relatifs a ce fichier.
 
@@ -22,7 +22,7 @@ Regle d'Eric (2026-10-28) : chaque YAML de docs/03_docs_automations a sa fiche .
 - YAML suivis : 66
 - YAML avec fiche : 66
 - YAML sans fiche (MANQUANT) : 0 dont 0 avec une fiche candidate a valider
-- Fiches .md sans YAML correspondant : 0
+- Fiches .md sans YAML correspondant : 4
 - Documents annexes (prefixe P1_XX_, fiche sans YAML voulue) : 3
 
 ## Automations par categorie
@@ -32,7 +32,7 @@ Regle d'Eric (2026-10-28) : chaque YAML de docs/03_docs_automations a sa fiche .
 | _Sans_categorie | [P4_Log_zones_eric.yaml](03_docs_automations_YAML/_Sans_categorie/P4_Log_zones_eric/P4_Log_zones_eric.yaml) | Fiche OK [fiche](03_docs_automations_MD/_Sans_categorie/P4_Log_zones_eric/P4_Log_zones_eric.md) |
 |  | [Veille_GitHub_nouvelle_release_detectee.yaml](03_docs_automations_YAML/_Sans_categorie/Veille_GitHub_nouvelle_release_detectee/Veille_GitHub_nouvelle_release_detectee.yaml) | Fiche OK [fiche](03_docs_automations_MD/_Sans_categorie/Veille_GitHub_nouvelle_release_detectee/Veille_GitHub_nouvelle_release_detectee.md) |
 | <br> |  |  |
-| Backup_ha_GitHub | [00_Backup_alerte_si_ko_15_min.yaml](03_docs_automations_YAML/Backup_ha_GitHub/00_Backup_alerte_si_ko_15_min/00_Backup_alerte_si_ko_15_min.yaml) | Fiche OK [fiche](03_docs_automations_MD/Backup_ha_GitHub/Git_alerte_ko/Git_alerte_ko.md) (par chemin cite) |
+| Backup_ha_GitHub | [00_Backup_alerte_si_ko_15_min.yaml](03_docs_automations_YAML/Backup_ha_GitHub/00_Backup_alerte_si_ko_15_min/00_Backup_alerte_si_ko_15_min.yaml) | Fiche OK [fiche](03_docs_automations_MD/Backup_ha_GitHub/00_Backup_alerte_si_ko_15_min/00_Backup_alerte_si_ko_15_min.md) |
 |  | [01_Backup_git_hourly_h_10.yaml](03_docs_automations_YAML/Backup_ha_GitHub/01_Backup_git_hourly_h_10/01_Backup_git_hourly_h_10.yaml) | Fiche OK [fiche](03_docs_automations_MD/Backup_ha_GitHub/Git_hourly/Git_hourly.md) (par chemin cite) |
 |  | [02_Backup_git_daily_03_00.yaml](03_docs_automations_YAML/Backup_ha_GitHub/02_Backup_git_daily_03_00/02_Backup_git_daily_03_00.yaml) | Fiche OK [fiche](03_docs_automations_MD/Backup_ha_GitHub/02_Backup_git_daily_03_00/02_Backup_git_daily_03_00.md) |
 |  | [03_Backup_git_weekly_dim_01_30.yaml](03_docs_automations_YAML/Backup_ha_GitHub/03_Backup_git_weekly_dim_01_30/03_Backup_git_weekly_dim_01_30.yaml) | Fiche OK [fiche](03_docs_automations_MD/Backup_ha_GitHub/Git_weekly/Git_weekly.md) (par chemin cite) |
@@ -52,7 +52,7 @@ Regle d'Eric (2026-10-28) : chaque YAML de docs/03_docs_automations a sa fiche .
 |  | [Systeme_economie_energie_vs_code.yaml](03_docs_automations_YAML/Mariadb_et_vscode_optimisation/Systeme_economie_energie_vs_code/Systeme_economie_energie_vs_code.yaml) | Fiche OK [fiche](03_docs_automations_MD/Mariadb_et_vscode_optimisation/Economie_energie_vscode/Economie_energie_vscode.md) (par chemin cite) |
 | <br> |  |  |
 | Meteo | [Alerte_meteo_france_actualisation_des_cartes.yaml](03_docs_automations_YAML/Meteo/Alerte_meteo_france_actualisation_des_cartes/Alerte_meteo_france_actualisation_des_cartes.yaml) | Fiche OK [fiche](03_docs_automations_MD/Meteo/Alerte_meteo_cartes/Alerte_meteo_cartes.md) (par chemin cite) |
-|  | [Mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml](03_docs_automations_YAML/Meteo/Mettre_a_jour_le_temps_du_dernier_impact_de_foudre/Mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml) | Fiche OK [fiche](03_docs_automations_MD/Meteo/Maj_temps_foudre/Maj_temps_foudre.md) (par chemin cite) |
+|  | [Mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml](03_docs_automations_YAML/Meteo/Mettre_a_jour_le_temps_du_dernier_impact_de_foudre/Mettre_a_jour_le_temps_du_dernier_impact_de_foudre.yaml) | Fiche OK [fiche](03_docs_automations_MD/Meteo/Mettre_a_jour_le_temps_du_dernier_impact_de_foudre/Mettre_a_jour_le_temps_du_dernier_impact_de_foudre.md) |
 |  | [Notification_de_la_foudre.yaml](03_docs_automations_YAML/Meteo/Notification_de_la_foudre/Notification_de_la_foudre.yaml) | Fiche OK [fiche](03_docs_automations_MD/Meteo/Notif_foudre/Notif_foudre.md) (par chemin cite) |
 |  | [Update_previous_humidity.yaml](03_docs_automations_YAML/Meteo/Update_previous_humidity/Update_previous_humidity.yaml) | Fiche OK [fiche](03_docs_automations_MD/Meteo/Update_prev_humidity/Update_prev_humidity.md) (par chemin cite) |
 |  | [Update_previous_temperature.yaml](03_docs_automations_YAML/Meteo/Update_previous_temperature/Update_previous_temperature.yaml) | Fiche OK [fiche](03_docs_automations_MD/Meteo/Update_prev_temperature/Update_prev_temperature.md) (par chemin cite) |
@@ -65,23 +65,23 @@ Regle d'Eric (2026-10-28) : chaque YAML de docs/03_docs_automations a sa fiche .
 |  | [Rattrapage_linky_ecart.yaml](03_docs_automations_YAML/P0_Energie/Rattrapage_linky_ecart/Rattrapage_linky_ecart.yaml) | Fiche OK [fiche](03_docs_automations_MD/P0_Energie/Rattrapage_linky_ecart/Rattrapage_linky_ecart.md) |
 |  | [Rattrapage_linky_j2_ecart.yaml](03_docs_automations_YAML/P0_Energie/Rattrapage_linky_j2_ecart/Rattrapage_linky_j2_ecart.yaml) | Fiche OK [fiche](03_docs_automations_MD/P0_Energie/Rattrapage_linky_j2/Rattrapage_linky_j2.md) (par chemin cite) |
 | <br> |  |  |
-| P1_01_Clim_chauffage | [A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/A0_clim_jour/A0_clim_jour.md) (par chemin cite) |
-|  | [B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/B0_clim_nuit/B0_clim_nuit.md) (par chemin cite) |
-|  | [C_notification_temperature_up_ou_down_7h30_21h00.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/C_notification_temperature_up_ou_down_7h30_21h00/C_notification_temperature_up_ou_down_7h30_21h00.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/C_notif_temp_jour/C_notif_temp_jour.md) (par chemin cite) |
-|  | [D_notification_temperature_up_ou_down_21h00_7h30.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/D_notification_temperature_up_ou_down_21h00_7h30/D_notification_temperature_up_ou_down_21h00_7h30.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/D_notif_temp_nuit/D_notif_temp_nuit.md) (par chemin cite) |
-|  | [E_clim_notification_de_fermeture_des_fenetres.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/E_clim_notification_de_fermeture_des_fenetres/E_clim_notification_de_fermeture_des_fenetres.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/E_notif_fermeture_fenetres/E_notif_fermeture_fenetres.md) (par chemin cite) |
-|  | [F_clim_automatisation_arret_clim_notification.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/F_clim_automatisation_arret_clim_notification/F_clim_automatisation_arret_clim_notification.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/F_arret_clim_notif/F_arret_clim_notif.md) (par chemin cite) |
-|  | [G_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/G_clim_notification_de_changement_de_mode_ete_fan_hiver/G_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/G_notif_mode_changement/G_notif_mode_changement.md) (par chemin cite) |
-|  | [H_clim_debug_force_mode_correct_securite.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/H_clim_debug_force_mode_correct_securite/H_clim_debug_force_mode_correct_securite.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/H_debug_force_mode/H_debug_force_mode.md) (par chemin cite) |
-|  | [I_synchro_notif_clim_si_prise_coupee.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/I_synchro_notif_clim_si_prise_coupee/I_synchro_notif_clim_si_prise_coupee.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/I_synchro_notif_prise_coupee/I_synchro_notif_prise_coupee.md) (par chemin cite) |
-|  | [J_debug_notifier_les_changements_de_message_clim_mobile.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/J_debug_notif_message_clim/J_debug_notif_message_clim.md) (par chemin cite) |
+| P1_01_Clim_chauffage | [A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.md) |
+|  | [B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30/B_0_2026_01_11_automatisation_clim_nuit_21h00_07h30.md) |
+|  | [C_notification_temperature_up_ou_down_7h30_21h00.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/C_notification_temperature_up_ou_down_7h30_21h00/C_notification_temperature_up_ou_down_7h30_21h00.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/C_notification_temperature_up_ou_down_7h30_21h00/C_notification_temperature_up_ou_down_7h30_21h00.md) |
+|  | [D_notification_temperature_up_ou_down_21h00_7h30.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/D_notification_temperature_up_ou_down_21h00_7h30/D_notification_temperature_up_ou_down_21h00_7h30.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/D_notification_temperature_up_ou_down_21h00_7h30/D_notification_temperature_up_ou_down_21h00_7h30.md) |
+|  | [E_clim_notification_de_fermeture_des_fenetres.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/E_clim_notification_de_fermeture_des_fenetres/E_clim_notification_de_fermeture_des_fenetres.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/E_clim_notification_de_fermeture_des_fenetres/E_clim_notification_de_fermeture_des_fenetres.md) |
+|  | [F_clim_automatisation_arret_clim_notification.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/F_clim_automatisation_arret_clim_notification/F_clim_automatisation_arret_clim_notification.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/F_clim_automatisation_arret_clim_notification/F_clim_automatisation_arret_clim_notification.md) |
+|  | [G_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/G_clim_notification_de_changement_de_mode_ete_fan_hiver/G_clim_notification_de_changement_de_mode_ete_fan_hiver.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/G_clim_notification_de_changement_de_mode_ete_fan_hiver/G_clim_notification_de_changement_de_mode_ete_fan_hiver.md) |
+|  | [H_clim_debug_force_mode_correct_securite.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/H_clim_debug_force_mode_correct_securite/H_clim_debug_force_mode_correct_securite.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/H_clim_debug_force_mode_correct_securite/H_clim_debug_force_mode_correct_securite.md) |
+|  | [I_synchro_notif_clim_si_prise_coupee.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/I_synchro_notif_clim_si_prise_coupee/I_synchro_notif_clim_si_prise_coupee.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/I_synchro_notif_clim_si_prise_coupee/I_synchro_notif_clim_si_prise_coupee.md) |
+|  | [J_debug_notifier_les_changements_de_message_clim_mobile.yaml](03_docs_automations_YAML/P1_01_Clim_chauffage/J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_01_Clim_chauffage/J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.md) |
 | <br> |  |  |
 | P1_02_Cuisine | [A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.yaml](03_docs_automations_YAML/P1_02_Cuisine/A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9/A_chauffage_cuisine_entre_4h45_7h_lmmj_ou_5_45h_8h_vsd_avec_t_19_9.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_02_Cuisine/A_chauffage_cuisine/A_chauffage_cuisine.md) (par chemin cite) |
 |  | [B_chauffage_cuisine_vacances.yaml](03_docs_automations_YAML/P1_02_Cuisine/B_chauffage_cuisine_vacances/B_chauffage_cuisine_vacances.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_02_Cuisine/B_chauffage_cuisine_vacances/B_chauffage_cuisine_vacances.md) |
 | <br> |  |  |
 | P1_03_Chauffage_salle_de_bain | [A_soufflant_SDB_bouton_rodret.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/A_soufflant_SDB_bouton_rodret/A_soufflant_SDB_bouton_rodret.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/A_soufflant_SDB_bouton_rodret/A_soufflant_SDB_bouton_rodret.md) |
 |  | [B_soufflant_SDB_routage.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/B_soufflant_SDB_routage/B_soufflant_SDB_routage.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/B_soufflant_SDB_routage/B_soufflant_SDB_routage.md) |
-|  | [C_salle_de_bain_watchdog_securite_soufflant.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/C_salle_de_bain_watchdog_securite_soufflant/C_salle_de_bain_watchdog_securite_soufflant.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/C_watchdog_soufflant_SDB/C_watchdog_soufflant_SDB.md) (par chemin cite) |
+|  | [C_salle_de_bain_watchdog_securite_soufflant.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/C_salle_de_bain_watchdog_securite_soufflant/C_salle_de_bain_watchdog_securite_soufflant.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/C_salle_de_bain_watchdog_securite_soufflant/C_salle_de_bain_watchdog_securite_soufflant.md) |
 |  | [D_SDB_soufflant_decompte_60min_timer.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/D_SDB_soufflant_decompte_60min_timer/D_SDB_soufflant_decompte_60min_timer.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/D_SDB_soufflant_decompte_60min/D_SDB_soufflant_decompte_60min.md) (par chemin cite) |
 |  | [E_SDB_soufflant_rattrapage_demarrage_ha_timer.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/E_SDB_soufflant_rattrapage_demarrage_ha_timer/E_SDB_soufflant_rattrapage_demarrage_ha_timer.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/E_SDB_soufflant_rattrapage_demarrage_ha/E_SDB_soufflant_rattrapage_demarrage_ha.md) (par chemin cite) |
 |  | [F_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.yaml](03_docs_automations_YAML/P1_03_Chauffage_salle_de_bain/F_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h/F_minuterie_seche_serviettes_salle_de_bain_timer_absolu_2h.yaml) | Fiche OK [fiche](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/F_minuterie_seche_serviettes/F_minuterie_seche_serviettes.md) (par chemin cite) |
@@ -122,4 +122,7 @@ Fiches de reference rangees avec leur famille d'automations mais qui ne decriven
 
 ## Fiches sans YAML correspondant
 
-- aucune
+- [Backup_ha_GitHub/Git_alerte_ko/Git_alerte_ko.md](03_docs_automations_MD/Backup_ha_GitHub/Git_alerte_ko/Git_alerte_ko.md)
+- [Meteo/Maj_temps_foudre/Maj_temps_foudre.md](03_docs_automations_MD/Meteo/Maj_temps_foudre/Maj_temps_foudre.md)
+- [P1_01_Clim_chauffage/REGULATION_CLIM_CHAUFFAGE.md](03_docs_automations_MD/P1_01_Clim_chauffage/REGULATION_CLIM_CHAUFFAGE.md)
+- [P1_03_Chauffage_salle_de_bain/C_watchdog_soufflant_SDB/C_watchdog_soufflant_SDB.md](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/C_watchdog_soufflant_SDB/C_watchdog_soufflant_SDB.md)

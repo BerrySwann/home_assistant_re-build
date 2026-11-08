@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--07-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--08-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 </div>
 
-Fichier GENERE le 2026-11-07 15:34 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_vignettes_pages/gen_global_index_vignettes_pages.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-11-08 13:46 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_vignettes_pages/gen_global_index_vignettes_pages.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 Source : arbre local docs/02_docs_dashboard (02_dashboard_docs_MD et 02_dashboard_docs_YAML), sauvegardes .bak_ exclues, Dashboard_COMPLET non detaille. Les liens sont relatifs a ce fichier. La colonne Dependances indique si le code de la vignette est cite dans DEPENDANCES_GLOBALES_CLAUDE_memoire.md.
 

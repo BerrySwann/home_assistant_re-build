@@ -429,20 +429,21 @@ cards:
         show_label: true
         label: |
           [[[
-            var used = states['sensor.homeassistant_utilisation_de_la_memoire'];
-            var max = states['sensor.homeassistant_utilisation_maximale_de_la_memoire'];
-            if (!used || used.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">RAM: N/A</div>';
-            var usedV = parseFloat(used.state);
-            var maxV = parseFloat(max.state);
-            var pct = maxV > 0 ? (usedV / maxV * 100) : 0;
-            var color = pct < 60 ? '#6ea8d7' : pct < 80 ? '#ff9800' : '#f44336';
+            var pct = states['sensor.system_monitor_utilisation_de_la_memoire'];
+            var used = states['sensor.system_monitor_memoire_utilisee'];
+            var libre = states['sensor.system_monitor_memoire_libre'];
+            if (!pct || pct.state === 'unavailable') return '<div style="color:#9e9e9e;font-size:12px;padding:3px 0">RAM: N/A</div>';
+            var pctV = parseFloat(pct.state);
+            var usedV = used ? parseFloat(used.state) / 1024 : 0;
+            var libreV = libre ? parseFloat(libre.state) / 1024 : 0;
+            var color = pctV < 60 ? '#6ea8d7' : pctV < 80 ? '#ff9800' : '#f44336';
             return '<div style="display:flex;flex-direction:column;gap:2px;width:100%;padding:3px 0">' +
               '<div style="display:flex;justify-content:space-between;align-items:center">' +
                 '<span style="color:#9e9e9e;font-size:12px">RAM</span>' +
-                '<span style="color:white;font-weight:bold;font-size:12px">' + pct.toFixed(1) + '%  (' + usedV.toFixed(2) + ' / ' + maxV.toFixed(1) + ' GiB)</span>' +
+                '<span style="color:white;font-weight:bold;font-size:12px">' + pctV.toFixed(1) + '%  (' + usedV.toFixed(2) + ' / ' + (usedV+libreV).toFixed(1) + ' GiB)</span>' +
               '</div>' +
               '<div style="background:rgba(255,255,255,0.1);height:3px;border-radius:2px">' +
-                '<div style="background:' + color + ';width:' + Math.min(pct,100) + '%;height:3px;border-radius:2px"></div>' +
+                '<div style="background:' + color + ';width:' + Math.min(pctV,100) + '%;height:3px;border-radius:2px"></div>' +
               '</div></div>';
           ]]]
         styles:
@@ -501,10 +502,18 @@ cards:
         label: |
           [[[
             if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 12px"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
-            var h_total = parseFloat(entity.state);
+            var s = String(entity.state);
+            var h_total;
+            if (/^[0-9]+([.,][0-9]+)?$/.test(s)) {
+              h_total = parseFloat(s.replace(',', '.'));
+            } else {
+              var t = Date.parse(s);
+              h_total = isNaN(t) ? 0 : (Date.now() - t) / 3600000;
+            }
             var j = Math.floor(h_total / 24);
             var h = Math.floor(h_total % 24);
-            var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+            var mn = Math.floor((h_total * 60) % 60);
+            var txt = (j > 0 ? j + 'j ' : '') + h + 'h' + (mn < 10 ? '0' : '') + mn + 'm';
             return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
               '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
               '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
@@ -750,10 +759,18 @@ cards:
         label: |
           [[[
             if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
-            var h_total = parseFloat(entity.state);
+            var s = String(entity.state);
+            var h_total;
+            if (/^[0-9]+([.,][0-9]+)?$/.test(s)) {
+              h_total = parseFloat(s.replace(',', '.'));
+            } else {
+              var t = Date.parse(s);
+              h_total = isNaN(t) ? 0 : (Date.now() - t) / 3600000;
+            }
             var j = Math.floor(h_total / 24);
             var h = Math.floor(h_total % 24);
-            var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+            var mn = Math.floor((h_total * 60) % 60);
+            var txt = (j > 0 ? j + 'j ' : '') + h + 'h' + (mn < 10 ? '0' : '') + mn + 'm';
             return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
               '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
               '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
@@ -999,10 +1016,18 @@ cards:
         label: |
           [[[
             if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
-            var h_total = parseFloat(entity.state);
+            var s = String(entity.state);
+            var h_total;
+            if (/^[0-9]+([.,][0-9]+)?$/.test(s)) {
+              h_total = parseFloat(s.replace(',', '.'));
+            } else {
+              var t = Date.parse(s);
+              h_total = isNaN(t) ? 0 : (Date.now() - t) / 3600000;
+            }
             var j = Math.floor(h_total / 24);
             var h = Math.floor(h_total % 24);
-            var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+            var mn = Math.floor((h_total * 60) % 60);
+            var txt = (j > 0 ? j + 'j ' : '') + h + 'h' + (mn < 10 ? '0' : '') + mn + 'm';
             return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
               '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
               '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
@@ -1248,10 +1273,18 @@ cards:
         label: |
           [[[
             if (!entity || entity.state === 'unavailable') return '<div style="display:flex;justify-content:space-between;padding:3px 0"><span style="color:#9e9e9e;font-size:12px">Uptime</span><span style="color:white;font-size:12px">N/A</span></div>';
-            var h_total = parseFloat(entity.state);
+            var s = String(entity.state);
+            var h_total;
+            if (/^[0-9]+([.,][0-9]+)?$/.test(s)) {
+              h_total = parseFloat(s.replace(',', '.'));
+            } else {
+              var t = Date.parse(s);
+              h_total = isNaN(t) ? 0 : (Date.now() - t) / 3600000;
+            }
             var j = Math.floor(h_total / 24);
             var h = Math.floor(h_total % 24);
-            var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+            var mn = Math.floor((h_total * 60) % 60);
+            var txt = (j > 0 ? j + 'j ' : '') + h + 'h' + (mn < 10 ? '0' : '') + mn + 'm';
             return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
               '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
               '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
@@ -1467,7 +1500,8 @@ cards:
             var h_total = diffMs / (1000 * 3600);
             var j = Math.floor(h_total / 24);
             var h = Math.floor(h_total % 24);
-            var txt = (j > 0 ? j + 'j ' : '') + h + 'h';
+            var mn = Math.floor((h_total * 60) % 60);
+            var txt = (j > 0 ? j + 'j ' : '') + h + 'h' + (mn < 10 ? '0' : '') + mn + 'm';
             return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0">' +
               '<span style="color:#9e9e9e;font-size:12px">Uptime</span>' +
               '<span style="color:white;font-weight:bold;font-size:12px">' + txt + '</span>' +
