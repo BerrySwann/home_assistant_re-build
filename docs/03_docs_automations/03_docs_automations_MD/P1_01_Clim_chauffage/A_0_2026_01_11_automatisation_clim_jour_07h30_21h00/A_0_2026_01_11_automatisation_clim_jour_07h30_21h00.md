@@ -1,9 +1,9 @@
-# (A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00)
+# (A-0) AUTOMATISATION CLIM JOUR (07H30 ↔ 21H00)
 
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MaJ](https://img.shields.io/badge/MaJ-2026--11--04-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,49 +13,86 @@
 
 </div>
 
-> **Catégorie :** P1_01_Clim_chauffage
-> **Alias HA :** `(A - 0) 2026-01-11 AUTOMATISATION CLIM JOUR (07H30 <-> 21H00)`
-> **ID HA :** `1767373340706`
-> **Fichier :** `P1_01_Clim_chauffage/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00/A_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml`
-> **Empreinte relevée le 2026-11-04 :** MD5 `e0f6b40e`, 2021 octets
+> **Fichier :** `docs/03_docs_automations/03_docs_automations_YAML/P1_01_CLIM_CHAUFFAGE/a_0_2026_01_11_automatisation_clim_jour_07h30_21h00/a_0_2026_01_11_automatisation_clim_jour_07h30_21h00.yaml`
+> **Mode HA :** `queued` - max: 5 - `max_exceeded: silent`
+> **Dernière mise à jour :** 2026-09-20 (ajout `max_exceeded: silent` - fin des messages « Maximum number of runs exceeded » au démarrage)
 
 ---
 
-## Description
+## 📝 Description
 
-Pilotage clims jour - délègue au script P1_MASTER_gestion_clim
+Automation wrapper diurne (07h30–21h00). Surveille tous les événements pertinents
+et délègue **intégralement** la logique à `script.p1_master_gestion_clim` avec
+`periode: "jour"`. Plus de logique inline - tout est centralisé dans le script.
 
-## Déclencheurs
+---
 
-- `homeassistant` event=start
-- `time` at=07:30:00
-- `state` entity_id=sensor.mamour_network_type, sensor.eric_network_type
-- `state` entity_id=switch.clim_salon_nous, switch.clim_bureau_nous, switch.clim_chambre_nous
-- `state` entity_id=binary_sensor.contact_fenetre_salon_sonoff_contact, binary_sensor.contact_fenetre_cuisine_sonoff_contact, binary_sensor.contact_fenetre_bureau_sonoff_contact, binary_sensor.contact_fenetre_chambre_sonoff_contact · to=on · from=off
-- `state` entity_id=binary_sensor.contact_fenetre_salon_sonoff_contact, binary_sensor.contact_fenetre_cuisine_sonoff_contact, binary_sensor.contact_fenetre_bureau_sonoff_contact, binary_sensor.contact_fenetre_chambre_sonoff_contact · to=off · from=on
-- `state` entity_id=sensor.groupe, sensor.th_balcon_nord_temperature, sensor.mode_ete_hiver, sensor.temperature_confort_jour
+## ⚡ Déclencheurs
 
-## Actions
+| ID trigger | Type | Entité / Horaire |
+|:---|:---|:---|
+| `ha_restart` | `homeassistant` | Démarrage HA |
+| `force_run` | `time` | 07:30:00 |
+| `force_run` | `state` | `sensor.mamour_network_type`, `sensor.eric_network_type` |
+| `force_run` | `state` | `switch.clim_salon_nous`, `switch.clim_bureau_nous`, `switch.clim_chambre_nous` |
+| `window_open` | `state` | 4 capteurs fenêtres → `off` → `on` |
+| `window_close` | `state` | 4 capteurs fenêtres → `on` → `off` |
+| `sensor_update` | `state` | `sensor.groupe` *(ajouté)*, `sensor.th_balcon_nord_temperature`, `sensor.mode_ete_hiver`, `sensor.temperature_confort_jour` |
 
-- `action`
+> ⚠️ `sensor.groupe` a été **ajouté** au trigger `sensor_update` lors du refactoring (2026-06).
+> L'ancienne version ne déclenchait pas sur un changement de présence direct.
 
-## Entités citées
+---
 
-- `binary_sensor.contact_fenetre_bureau_sonoff_contact`
-- `binary_sensor.contact_fenetre_chambre_sonoff_contact`
-- `binary_sensor.contact_fenetre_cuisine_sonoff_contact`
-- `binary_sensor.contact_fenetre_salon_sonoff_contact`
-- `script.p1_master_gestion_clim`
-- `sensor.eric_network_type`
-- `sensor.groupe`
-- `sensor.mamour_network_type`
-- `sensor.mode_ete_hiver`
-- `sensor.temperature_confort_jour`
-- `sensor.th_balcon_nord_temperature`
-- `switch.clim_bureau_nous`
-- `switch.clim_chambre_nous`
-- `switch.clim_salon_nous`
+## 🔒 Conditions globales
 
-## Points d'attention
+- Plage horaire : `after 07:30 before 21:00`
 
-Fiche produite le 2026-11-04 à partir du YAML local, pour combler l absence de fiche signalée par R63.4. Les sections Déclencheurs, Actions et Entités sont extraites du fichier, pas rédigées : à enrichir à la main si le comportement mérite une explication.
+---
+
+## ⚙️ Actions
+
+Une seule action :
+
+```yaml
+- action: script.p1_master_gestion_clim
+  data:
+    periode: "jour"
+    trigger_id: "{{ trigger.id if trigger is defined else '' }}"
+    trigger_entity_id: "{{ trigger.entity_id if trigger is defined ... else '' }}"
+```
+
+→ Toute la logique est dans `script.p1_master_gestion_clim` - voir `docs_scripts/docs/P1_MASTER_GESTION_CLIM.md`
+
+---
+
+## 🔌 DÉPENDANCES
+
+### Entités lues (triggers / conditions)
+
+| Entité | Rôle |
+|:---|:---|
+| `sensor.mamour_network_type` | Présence réseau Mamour |
+| `sensor.eric_network_type` | Présence réseau Eric |
+| `sensor.groupe` | Groupe de présence (trigger sensor_update) |
+| `sensor.th_balcon_nord_temperature` | T° extérieure |
+| `sensor.mode_ete_hiver` | Mode saison |
+| `sensor.temperature_confort_jour` | T° confort jour |
+| 4× `binary_sensor.contact_fenetre_*` | Capteurs fenêtres |
+| 3× `switch.clim_*_nous` | Prises clim (sécurité) |
+
+### Script appelé
+
+| Script | Paramètres | Doc |
+|:---|:---|:---|
+| `script.p1_master_gestion_clim` | `periode:"jour"`, `trigger_id`, `trigger_entity_id` | `docs_scripts/docs/P1_MASTER_GESTION_CLIM.md` |
+
+---
+
+## ⚠️ Points d'attention
+
+- **Refactoring 2026-06** : logique inline (~250 lignes) déplacée dans le script master. L'automation est maintenant un simple wrapper de 30 lignes.
+- **SALON groupe_3 JOUR** : Eric seul → `tccsj_b` (comportement identique à l'ancienne version inline).
+- `trigger_id` et `trigger_entity_id` sont passés au script pour que la notification fenêtre reste ciblée.
+- Le `sensor_update` ne redémarre **pas** une clim déjà en `off` (protection maintenue dans le script).
+- **2026-09-20** : ajout de `max_exceeded: silent` (mode `queued`/max 5 conservés). Au démarrage de HA, les déclencheurs d'état se déclenchent en rafale et saturent la file ; l'avertissement « Maximum number of runs exceeded » est désormais silencieux, les runs en trop restent ignorés (sans conséquence : recalcul idempotent via le script master).

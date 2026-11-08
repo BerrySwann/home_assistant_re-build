@@ -1,9 +1,9 @@
-# (C) Notification température Up ou Down de (7h30 -> 21h00)
+# (C) NOTIFICATION TEMPÉRATURE - JOUR (07H30 → 21H00)
 
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MaJ](https://img.shields.io/badge/MaJ-2026--11--04-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,37 +13,56 @@
 
 </div>
 
-> **Catégorie :** P1_01_Clim_chauffage
-> **Alias HA :** `(C) Notification température Up ou Down de (7h30 -> 21h00)`
-> **ID HA :** `1775243646439`
-> **Fichier :** `P1_01_Clim_chauffage/C_notification_temperature_up_ou_down_7h30_21h00/C_notification_temperature_up_ou_down_7h30_21h00.yaml`
-> **Empreinte relevée le 2026-11-04 :** MD5 `8e0b2172`, 1624 octets
+> **Fichier :** `docs/03_docs_automations/03_docs_automations_YAML/P1_01_CLIM_CHAUFFAGE/c_notification_temperature_up_ou_down_7h30_21h00/c_notification_temperature_up_ou_down_7h30_21h00.yaml`
+> **Mode HA :** `queued`
 
 ---
 
-## Description
+## 📝 Description
 
-Envoie le message personnalisé de clim si le texte change, OU au réveil à 07h30.
+Envoie le message personnalisé de clim (tendance T°, mode, présence) à chaque
+changement de température extérieure, en période diurne. Inclut une vérification
+de disponibilité des capteurs avant envoi.
 
-## Déclencheurs
+---
 
-- `state` entity_id=sensor.th_balcon_nord_temperature
-- `time` at=07:30:00
+## ⚡ Déclencheurs
 
-## Actions
+| Type | Entité |
+|:---|:---|
+| `state` | `sensor.th_balcon_nord_temperature` |
+| `time` | 07:30:00 (envoi forcé au réveil) |
 
-- CONDITION : PÉRIODE DIURNE · `?`
-- ACTION : PAUSE 2 SECONDES · `delay`
-- LOGIQUE : VÉRIFICATION CAPTEURS · `if`
+---
 
-## Entités citées
+## 🔒 Conditions
 
-- `notify.mobile_app_eric`
-- `sensor.eric_wi_fi_connection`
-- `sensor.mamour_wi_fi_connection`
-- `sensor.message_clim_personnalise_7h30_21h00`
-- `sensor.th_balcon_nord_temperature`
+- Plage horaire inline : `after 07:30 before 21:00`
 
-## Points d'attention
+---
 
-Fiche produite le 2026-11-04 à partir du YAML local, pour combler l absence de fiche signalée par R63.4. Les sections Déclencheurs, Actions et Entités sont extraites du fichier, pas rédigées : à enrichir à la main si le comportement mérite une explication.
+## ⚙️ Actions
+
+1. Pause 2s (stabilisation)
+2. **Si** capteurs KO → notification d'erreur `[ANJ] Erreur Capteurs`
+3. **Sinon** → notification `[Automa. Notif. Jrs]` avec `sensor.message_clim_personnalise_7h30_21h00`
+
+---
+
+## 🔌 DÉPENDANCES
+
+### Entités lues
+
+| Entité | Rôle |
+|:---|:---|
+| `sensor.th_balcon_nord_temperature` | Déclencheur + vérification dispo |
+| `sensor.message_clim_personnalise_7h30_21h00` | Contenu du message à envoyer |
+| `sensor.mamour_wi_fi_connection` | Vérification dispo |
+| `sensor.eric_wi_fi_connection` | Vérification dispo |
+
+### Notifications
+
+| Titre | Condition |
+|:---|:---|
+| `[ANJ] Erreur Capteurs` | Capteur indisponible |
+| `[Automa. Notif. Jrs]` | Normal - contenu du sensor message |

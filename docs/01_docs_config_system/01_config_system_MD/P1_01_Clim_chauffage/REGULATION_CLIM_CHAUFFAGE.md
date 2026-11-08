@@ -25,6 +25,11 @@ Le template ne pilote rien. Il produit des nombres. C est le script qui agit.
 | `delta_5` | 5 | palier de chaleur |
 | `delta_7` | 7 | palier de forte chaleur |
 
+`seuil_non_chauffage` est a 19, mais il peut descendre a 18 pour des raisons d economie d energie.
+Comme il sert a la fois de consigne d hiver et de plafond pour la nuit, ce seul chiffre deplace toute la
+partie hivernale : la consigne, le confort, les trois pieces, la nuit, et la borne basse de la zone off.
+La section 9 bis donne les deux jeux de valeurs cote a cote.
+
 ## 2. Le mode, calcule par `mode_ete_hiver`
 
 Le capteur compare la sonde du balcon aux deux seuils :
@@ -100,10 +105,38 @@ bouge encore, entre 21 sous 8 C et 19 au-dessus de 12.
 
 ## 7. L eco de saison
 
-`temperature_eco_hiver_corrige` et `temperature_eco_ete_corrige` suivent les memes paliers que le confort,
-appliques a la valeur eco : plus delta_2 sous 8 C dehors, plus delta_1 sous 12, valeur brute au-dessus.
+L eco a une valeur brute, 17 en hiver et 28 en ete, et une valeur corrigee par la temperature exterieure.
 
-Le script s en sert quand personne n est la, ou quand un capteur manque.
+`temperature_eco_hiver_corrige` suit les paliers du confort : plus delta_2 sous 8 C dehors,
+plus delta_1 sous 12, valeur brute au-dessus.
+
+| Saison | Exterieur | Eco brut | Eco corrige |
+|:--|:--|--:|--:|
+| hiver | sous 8 | 17 | **19** |
+| hiver | de 8 a 12 | 17 | **18** |
+| hiver | au-dessus de 12 | 17 | **17** |
+| ete | sous 28 | 28 | **27** |
+| ete | a partir de 28 | 28 | **28** |
+
+L eco d ete suit une autre regle : il retire delta_1 tant qu il ne fait pas 28 C dehors, et rend la valeur
+brute a partir de 28. C est l inverse de l hiver, ou l eco monte quand il fait froid.
+
+## 7 bis. Eco en jour et en nuit
+
+L eco de saison s applique de la meme facon en journee et la nuit. Ce n est pas la periode qui le declenche,
+c est l absence : le script prend l eco des que le groupe de presence vaut `groupe_1`, quel que soit le
+moment, et aussi quand un capteur manque et qu il bascule en mode degrade.
+
+| Saison | Exterieur | Salon | Bureau | Chambre |
+|:--|:--|--:|--:|--:|
+| hiver | sous 8 | 19 | 19 | 19 |
+| hiver | de 8 a 12 | 18 | 18 | 18 |
+| hiver | au-dessus de 12 | 17 | 17 | 17 |
+| ete | sous 28 | 27 | 27 | 27 |
+| ete | a partir de 28 | 28 | 28 | 28 |
+
+Et quand une fenetre est ouverte, le script ne calcule pas d eco du tout : il coupe les trois unites.
+
 
 ## 8. Le script `p1_master_gestion_clim`
 
@@ -161,6 +194,27 @@ Valeurs que la chaine complete produit, script compris, avec la consigne a 19 en
 | 36 a 40 | cool | 28 a 32 | 28 a 32 | 26 | 26 | 27 | 27 |
 
 Degres Celsius.
+
+## 9 bis. Variante seuil_non_chauffage a 18
+
+Le seuil de chauffage vaut 19 en service. Si l on passe a 18 pour economiser, tout l hiver se decale d un degre.
+Le plafond de la nuit suit, puisqu il lit ce meme seuil.
+
+| Exterieur | Mode | Conf 19 | Nuit 19 | Salon 19 | Bureau 19 | Chambre 19 | Conf 18 | Nuit 18 | Salon 18 | Bureau 18 | Chambre 18 |
+|:--|:--|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| sous 8 | heat | 21 | 19 | 21 | 19 | 19 | **20** | **18** | 20 | 19 | 19 |
+| 8 a 12 | heat | 20 | 19 | 20 | 19 | 19 | **19** | **18** | 19 | 19 | 19 |
+| 12 a 18 | heat | 19 | 19 | 19 | 19 | 19 | **18** | **18** | 18 | 18 | 18 |
+| 18 a 19 | heat | 19 | 19 | 19 | 19 | 19 | rien | rien | rien | rien | rien |
+| 19 a 26 | off | 19 | 19 | rien | rien | rien | rien | rien | rien | rien | rien |
+| 26 et au-dela | cool | 26 | 26 | 25 a 26 | 26 a 27 | 26 a 27 | identique | identique | identique | identique | identique |
+
+Avec la consigne a 18, la nuit tombe a 18 au lieu de 19, et le confort perd un degre sur chaque palier.
+Le bureau et la chambre ne bougent pas sous 8 C ni entre 8 et 12, leurs plafonds a 19 les retenant deja.
+
+La zone off commence un degre plus bas : 18 au lieu de 19. Entre 18 et 19 C dehors, la variante 19 chauffe encore sur sa consigne alors que la variante 18 est deja a l arret. C est la seule plage ou les deux jeux divergent sur le mode et pas seulement sur la valeur.
+
+L ete n est pas touche, `seuil_non_clim` reste a 26.
 
 ## 10. Les pieges
 
