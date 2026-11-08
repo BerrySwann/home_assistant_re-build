@@ -169,16 +169,20 @@
 │     │   │                                     │                                                                                      │
 │     │   └── 03_docs_automations_YAML             │                                                                                      │
 │     │                                         │                                                                                      │
-│     ├── 04_docs_scripts/                      │ (252 dont 149 sauvegardes)                                                           │
-│     │   │                                     │                                                                                      │
-│     │   ├── SH                                │                                                                                      │
-│     │   │                                     │                                                                                      │
-│     │   ├── SH_MD                             │                                                                                      │
-│     │   │                                     │                                                                                      │
-│     │   ├── YAML                              │                                                                                      │
-│     │   │                                     │                                                                                      │
-│     │   └── YAML_MD                           │                                                                                      │
-│     │                                         │                                                                                      │
+│     ├── 04_docs_scripts/                      │ (344 dont 149 sauvegardes)                                                           │
+│     │   ├── 04_docs_script_ORIGINAL/         │ (15)                                                                                 │
+│     │   │                                    │                                                                                      │
+│     │   ├── 04_docs_scripts_JSON/            │ (1)                                                                                  │
+│     │   │                                    │                                                                                      │
+│     │   ├── 04_docs_scripts_JSON_MD/         │ (2)                                                                                  │
+│     │   │                                    │                                                                                      │
+│     │   ├── 04_docs_scripts_SH/              │ (138)                                                                                │
+│     │   │                                    │                                                                                      │
+│     │   ├── 04_docs_scripts_SH_MD/           │ (107)                                                                                │
+│     │   │                                    │                                                                                      │
+│     │   ├── 04_docs_scripts_YAML/            │ (21)                                                                                 │
+│     │   │                                    │                                                                                      │
+│     │   └── 04_docs_scripts_YAML_MD/         │ (27)                                                                                 │
 │     ├── 99_docs_MD_system/                    │ (23 dont 21 sauvegardes)                                                             │
 │     │                                         │                                                                                      │
 │     ├── 05_docs_skills/                       │ (90 - 56 sauvegardes ; releve 2026-10-31)                                            │
@@ -201,6 +205,8 @@
 > ⛔ `TREE_CORRIGE/`, `TREE_ORIGINE/`, `Dashboard/`, `docs_dashboard/`, `docs_automations/`, `docs_scripts/`, `IA/` racine : **supprimés le 2026-07-14** - toute référence à ces chemins est morte.
 
 > 🗑️ **Purge du 2026-09-29** : config_system_YAML vidé de 104 YAML (risque de divergence). Le dossier P3 boutons salon supprimé + 4 entités purgées HA. Les 2 WORKFLOW_REBUILD.md supprimés. **RATTRAPÉ 2026-10-04** : ha-resync-docs GitHub->local, 85 fichiers resynchronisés (SYNC=80 DIFF=0) - copie locale de nouveau conforme à la prod.
+
+> **Suppression du 2026-10-24** (ordre d'Eric) : le dossier `config_system_YAML/` de `01_docs_config_system` a ete retire, en local et en prod. Il ne figure donc plus dans les grilles ci-dessous, qui decrivent le disque et non l'historique. Restent `01_config_system_MD/` et `01_config_system_SH_PY_YAML/`. Cette suppression est differente de la purge du 2026-09-29 ci-dessus, qui avait vide le dossier sans le retirer.
 
 ---
 
@@ -503,9 +509,7 @@
 │     │   │                                       │                                                                                    │
 │     │   ├── 01_config_system_MD/                   │ (13)                                                                               │
 │     │   │                                       │                                                                                    │
-│     │   ├── 01_config_system_SH_PY_YAML/           │ (96 - copie de /config, poussee le 2026-10-18)                                     │
-│     │   │                                       │                                                                                    │
-│     │   └── config_system_YAML/                 │ (supprime le 2026-10-24 sur ordre d'Eric)                                          │
+│     │   └── 01_config_system_SH_PY_YAML/           │ (96 - copie de /config, poussee le 2026-10-18)                                     │
 │     │                                           │                                                                                    │
 │     ├── 02_docs_dashboard/                      │ (157)                                                                              │
 │     │   │                                       │                                                                                    │
@@ -521,16 +525,21 @@
 │     │   │                                       │                                                                                    │
 │     │ (66)                                         │                                                                                    │
 │     │                                           │                                                                                    │
-│     ├── 04_docs_scripts/                        │ (74)                                                                               │
-│     │   │                                       │                                                                                    │
-│     │   ├── 04_docs_scripts_SH/                    │ (27)                                                                               │
-│     │   │                                       │                                                                                    │
-│     │   ├── 04_docs_scripts_SH_MD/                 │ (23)                                                                               │
-│     │   │                                       │                                                                                    │
-│     │   ├── 04_docs_scripts_YAML/                  │ (11)                                                                               │
-│     │   │                                       │                                                                                    │
-│     │   └── 04_docs_scripts_YAML_MD/               │ (8)                                                                                │
-│     │                                           │                                                                                    │
+│     ├── 04_docs_scripts/                        │ (103)                                                                              │
+│     │   ├── 04_docs_script_ORIGINAL/           │ (0)                                                                                │
+│     │   │                                      │                                                                                    │
+│     │   ├── 04_docs_scripts_JSON/              │ (1)                                                                                │
+│     │   │                                      │                                                                                    │
+│     │   ├── 04_docs_scripts_JSON_MD/           │ (1)                                                                                │
+│     │   │                                      │                                                                                    │
+│     │   ├── 04_docs_scripts_SH/                │ (39)                                                                               │
+│     │   │                                      │                                                                                    │
+│     │   ├── 04_docs_scripts_SH_MD/             │ (39)                                                                               │
+│     │   │                                      │                                                                                    │
+│     │   ├── 04_docs_scripts_YAML/              │ (9)                                                                                │
+│     │   │                                      │                                                                                    │
+│     │   └── 04_docs_scripts_YAML_MD/           │ (10)                                                                               │
+│     │                                                 │                                                                                    │
 │     ├── 99_docs_MD_system/                      │ (0 - absent de la prod, local seul depuis le 2026-10-25 ; liste = ancien releve)   │
 │     │   │                                       │                                                                                    │
 │     │   ├── DEPENDANCES_GLOBALES_HERMES/        │                                                                                    │

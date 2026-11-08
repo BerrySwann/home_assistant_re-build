@@ -38,7 +38,7 @@ $env:PYTHONIOENCODING='utf-8'; python -I Gen_GLOBAL_INDEX_ia.py [--dry]
 ## A savoir
 
 - Ne jamais modifier IA_GLOBAL_INDEX_memoire.md a la main.
-- Depuis le 2026-10-29, le script ecrit sous les lignes de comptage de l'en-tete un bandeau GYROPHARE ROUGE (dans Home Assistant tout est a plat) avec un lien vers la section SCRIPTS ET COMMAND_LINE de DEPENDANCES_GLOBALES_CLAUDE_memoire.md (demande d'Eric). Le texte est dans la fonction uild du script.
+- Depuis le 2026-10-29, le script ecrit sous les lignes de comptage de l'en-tete un bandeau GYROPHARE ROUGE (dans Home Assistant tout est a plat) avec un lien vers la section SCRIPTS ET COMMAND_LINE de DEPENDANCES_GLOBALES_CLAUDE_memoire.md (demande d'Eric). Le texte est dans la fonction build du script.
 - Le skill /histo cite encore l'ancien chemin en minuscules (`gen_global_index_ia/gen_global_index_ia.py`).
 
 ## Origine de cette fiche

@@ -838,4 +838,3 @@ PC ON → écran ON / PC OFF depuis 2 min → écran OFF.
 
 *Généré depuis : `https://raw.githubusercontent.com/BerrySwann/home_assistant_re-build/main/automations.yaml`*
 *Mis à jour : 2026-04-05*
-   
