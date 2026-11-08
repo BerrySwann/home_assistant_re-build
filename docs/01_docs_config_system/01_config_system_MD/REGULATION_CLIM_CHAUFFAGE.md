@@ -93,15 +93,21 @@ Elles s appliquent sur le confort jour, avec un plafond different par piece et p
 
 | Piece | Hiver | Ete |
 |:--|:--|:--|
-| Salon | confort jour, plafond 21 | 25 jusqu a 27 C dehors, 26 au-dela |
-| Bureau | confort jour, plafond 19 | 26 jusqu a 27 C dehors, 27 au-dela |
-| Chambre | confort jour, plafond 19 | 26 jusqu a 27 C dehors, 27 au-dela |
+| Salon | 22 sous 8, 21 de 8 a 12, 20 au-dela | 25 jusqu a 27 C dehors, 26 au-dela |
+| Bureau | 20 sous 8, 19 de 8 a 12, 18 au-dela | 26 jusqu a 27 C dehors, 27 au-dela |
+| Chambre | 19 sous 12, 18 au-dela | 26 jusqu a 27 C dehors, 27 au-dela |
+
+Depuis le 2026-11-08, les trois pieces ne dependent PLUS du confort jour en hiver : chacune a ses propres
+paliers, fixes, lus directement sur la sonde exterieure. Le salon monte de 1 C par rapport a l ancienne
+formule, le bureau baisse de 1, la chambre perd son palier intermediaire.
 
 En ete ces trois capteurs n utilisent plus le confort du tout : ils lisent directement la sonde exterieure.
 Une seule marche, entre 27 et 28 C dehors.
 
-En hiver, le plafond de 19 pour le bureau et la chambre les bloque quel que soit l exterieur. Seul le salon
-bouge encore, entre 21 sous 8 C et 19 au-dessus de 12.
+En hiver, chaque piece bouge maintenant : le salon de 22 a 20, le bureau de 20 a 18, la chambre de 19 a 18.
+Aucune ne recopie plus le confort jour, et le groupe de presence ne change plus la source : depuis le
+2026-11-08, `groupe_2`, `groupe_3` et `groupe_4` recoivent tous `tccsj_s`, `tccsj_b` et `tccsj_c`.
+La seule exception reste `groupe_1`, qui envoie l eco aux trois.
 
 ## 7. L eco de saison
 
@@ -180,41 +186,79 @@ le script ne la rallume pas.
 
 Valeurs que la chaine complete produit, script compris, avec la consigne a 19 en hiver et 26 en ete.
 
-| Exterieur | Mode | Confort | Jour | Nuit | Salon | Bureau | Chambre |
-|:--|:--|--:|--:|--:|--:|--:|--:|
-| 0 a 7 | heat | 21 | 21 | 19 | 21 | 19 | 19 |
-| 8 a 11 | heat | 20 | 20 | 19 | 21 | 19 | 19 |
-| 12 a 18 | heat | 19 | 19 | 19 | 19 | 19 | 19 |
-| 19 a 25 | off | 19 | 19 | 19 | rien | rien | rien |
-| 26 a 27 | cool | 26 | 26 | 26 | 25 | 26 | 26 |
-| 28 a 32 | cool | 26 | 26 | 26 | 26 | 27 | 27 |
-| 33 | cool | 27 | 27 | 26 | 26 | 27 | 27 |
-| 34 | cool | 26 | 26 | 26 | 26 | 27 | 27 |
-| 35 | cool | 27 | 27 | 26 | 26 | 27 | 27 |
-| 36 a 40 | cool | 28 a 32 | 28 a 32 | 26 | 26 | 27 | 27 |
+D abord ce que la chaine CALCULE, avant que le script ne choisisse :
 
-Degres Celsius.
+| Exterieur | Mode | Confort | Jour | Nuit | Salon tccsj_s | Bureau tccsj_b | Chambre tccsj_c | Eco |
+|:--|:--|--:|--:|--:|--:|--:|--:|--:|
+| 0 a 7 | heat | 21 | 21 | 19 | 21 | 19 | 19 | 19 |
+| 8 a 11 | heat | 20 | 20 | 19 | 20 | 19 | 19 | 18 |
+| 12 a 18 | heat | 19 | 19 | 19 | 19 | 19 | 19 | 17 |
+| 19 a 25 | off | 19 | 19 | 19 | 19 | 19 | 19 | 17 |
+| 26 a 27 | cool | 26 | 26 | 26 | 25 | 26 | 26 | 27 |
+| 28 a 32 | cool | 26 | 26 | 26 | 26 | 27 | 27 | 28 |
+| 33 | cool | 27 | 27 | 26 | 26 | 27 | 27 | 28 |
+| 34 | cool | 26 | 26 | 26 | 26 | 27 | 27 | 28 |
+| 35 | cool | 27 | 27 | 26 | 26 | 27 | 27 | 28 |
+| 36 a 40 | cool | 28 a 32 | 28 a 32 | 26 | 26 | 27 | 27 | 28 |
 
-## 9 bis. Variante seuil_non_chauffage a 18
+Puis ce que le script ENVOIE, qui n est pas la meme chose, parce qu il choisit la source selon le groupe :
 
-Le seuil de chauffage vaut 19 en service. Si l on passe a 18 pour economiser, tout l hiver se decale d un degre.
-Le plafond de la nuit suit, puisqu il lit ce meme seuil.
+| Groupe | Periode | Salon recoit | Bureau recoit | Chambre recoit |
+|:--|:--|:--|:--|:--|
+| groupe_1 | jour et nuit | eco | eco | eco |
+| groupe_2 | jour heat | tccsj_s | **eco** | tccsj_c |
+| groupe_2 | jour cool | tccsj_s | **tccsj_b** | tccsj_c |
+| groupe_3 | jour | **tccsj_b** | tccsj_b | tccsj_c |
+| groupe_4 | jour | tccsj_s | tccsj_b | tccsj_c |
+| tous sauf 1 | nuit | temp_nuit | temp_nuit | temp_nuit |
 
-| Exterieur | Mode | Conf 19 | Nuit 19 | Salon 19 | Bureau 19 | Chambre 19 | Conf 18 | Nuit 18 | Salon 18 | Bureau 18 | Chambre 18 |
-|:--|:--|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| sous 8 | heat | 21 | 19 | 21 | 19 | 19 | **20** | **18** | 20 | 19 | 19 |
-| 8 a 12 | heat | 20 | 19 | 20 | 19 | 19 | **19** | **18** | 19 | 19 | 19 |
-| 12 a 18 | heat | 19 | 19 | 19 | 19 | 19 | **18** | **18** | 18 | 18 | 18 |
-| 18 a 19 | heat | 19 | 19 | 19 | 19 | 19 | rien | rien | rien | rien | rien |
-| 19 a 26 | off | 19 | 19 | rien | rien | rien | rien | rien | rien | rien | rien |
-| 26 et au-dela | cool | 26 | 26 | 25 a 26 | 26 a 27 | 26 a 27 | identique | identique | identique | identique | identique |
+## 9 ter. Ce que recoit chaque piece, groupe par groupe
 
-Avec la consigne a 18, la nuit tombe a 18 au lieu de 19, et le confort perd un degre sur chaque palier.
-Le bureau et la chambre ne bougent pas sous 8 C ni entre 8 et 12, leurs plafonds a 19 les retenant deja.
+Valeurs produites par le script lui-meme, ses trois templates rendus avec les vrais capteurs, consigne a 19
+en hiver. Depuis le 2026-11-08 les trois pieces ne dependent plus du groupe : seules la periode et la
+temperature exterieure changent la valeur.
 
-La zone off commence un degre plus bas : 18 au lieu de 19. Entre 18 et 19 C dehors, la variante 19 chauffe encore sur sa consigne alors que la variante 18 est deja a l arret. C est la seule plage ou les deux jeux divergent sur le mode et pas seulement sur la valeur.
+### SALON
+| Groupe | Periode | sous 8 | 8 a 12 | au-dela de 12 |
+|:--|:--|--:|--:|--:|
+| groupe_1 | jour | 19.0 | 18.0 | 17.0 |
+| groupe_1 | nuit | 19.0 | 18.0 | 17.0 |
+| groupe_2 | jour | 22.0 | 21.0 | 20.0 |
+| groupe_2 | nuit | 19.0 | 19.0 | 19.0 |
+| groupe_3 | jour | 22.0 | 21.0 | 20.0 |
+| groupe_3 | nuit | 19.0 | 19.0 | 19.0 |
+| groupe_4 | jour | 22.0 | 21.0 | 20.0 |
+| groupe_4 | nuit | 19.0 | 19.0 | 19.0 |
 
-L ete n est pas touche, `seuil_non_clim` reste a 26.
+### BUREAU
+| Groupe | Periode | sous 8 | 8 a 12 | au-dela de 12 |
+|:--|:--|--:|--:|--:|
+| groupe_1 | jour | 19.0 | 18.0 | 17.0 |
+| groupe_1 | nuit | 19.0 | 18.0 | 17.0 |
+| groupe_2 | jour | 20.0 | 19.0 | 18.0 |
+| groupe_2 | nuit | 19.0 | 19.0 | 19.0 |
+| groupe_3 | jour | 20.0 | 19.0 | 18.0 |
+| groupe_3 | nuit | 19.0 | 19.0 | 19.0 |
+| groupe_4 | jour | 20.0 | 19.0 | 18.0 |
+| groupe_4 | nuit | 19.0 | 19.0 | 19.0 |
+
+### CHAMBRE
+| Groupe | Periode | sous 8 | 8 a 12 | au-dela de 12 |
+|:--|:--|--:|--:|--:|
+| groupe_1 | jour | 19.0 | 18.0 | 17.0 |
+| groupe_1 | nuit | 19.0 | 18.0 | 17.0 |
+| groupe_2 | jour | 19.0 | 19.0 | 18.0 |
+| groupe_2 | nuit | 19.0 | 19.0 | 19.0 |
+| groupe_3 | jour | 19.0 | 19.0 | 18.0 |
+| groupe_3 | nuit | 19.0 | 19.0 | 19.0 |
+| groupe_4 | jour | 19.0 | 19.0 | 18.0 |
+| groupe_4 | nuit | 19.0 | 19.0 | 19.0 |
+
+Le salon est la seule piece qui monte : 22 sous 8 C, contre 19 avant. Le bureau descend d un degre.
+La chambre perd son palier a 19 pour 8-12, elle passe directement de 19 a 18 a 12 C dehors.
+
+La nuit ecrase tout : les trois pieces recoivent `temp_nuit`, 19 en chauffage, sauf en `groupe_1` ou
+l eco de saison s applique avant la periode.
 
 ## 10. Les pieges
 
