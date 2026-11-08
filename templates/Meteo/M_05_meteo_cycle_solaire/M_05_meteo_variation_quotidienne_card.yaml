@@ -3,22 +3,27 @@
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Variation progressive de la durée du jour en min/jour selon la saison.
+# Variation de la durée du jour, en minutes par jour, calculée comme l'écart
+# réel entre la durée du jour de demain et celle d'aujourd'hui.
 #
 # ## 🧮 CALCUL & SOURCES :
-# - Printemps (j80->172) : 0->+3 progressif | Été (j172->264) : 0->-3 progressif
-# - Automne (j264->355) : stable -3 | Hiver (j355->80) : stable +2.
-# - Dates clés : Équinoxe printemps j80 | Solstice été j172 | Équinoxe automne j264
-#                Solstice hiver j355.
+# - Reprend la formule NOAA de M_05_meteo_duree_du_jour_card.yaml (même
+#   déclinaison, même zénith 90,833°) et la rejoue pour j et j+1.
+# - variation = (durée(j+1) - durée(j)) * 60, arrondie à 1 décimale.
+# - Ordre de grandeur réel : +/- 3 min/jour aux équinoxes, ~0 aux solstices.
+#   À la latitude de Vence le 2026-11-08 : -2,5 min.
 #
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
 #
 # | MATÉRIEL                                | CAPTEUR BRUT (source)                           | CE FICHIER (unique_id) | AVAL                           |
 # |:------------------------------------------|:---------------------------------------------------|:--------------------------|:---------------------------------|
-# | [calculé] (horloge système)             | now() - formule progressive par saison            | variation_quotidienne     | L1C1 Météo (données solaires) |
+# | [calculé] (zone.home + horloge système) | formule NOAA rejouée à j et j+1                 | variation_quotidienne     | L1C1 Météo (données solaires) |
 #
 # ## ⚠️ IMPORTANT (PIÈGES) :
+# - NE PAS revenir à la rampe linéaire par saison (0->+3 au printemps, -3 fixe
+#   de j264 à j355, +2 en hiver) : elle ignorait la latitude et donnait -3,0 min
+#   le 2026-11-08 pour -2,5 réels. Correction du 2026-11-08 (R134.1).
 # - La variation est arrondie à 1 décimale (round(1)).
 # - L'attribut variation_type relit son propre état (sensor.variation_quotidienne)
 #   pour en déduire Rallongement/Raccourcissement/Stable - comportement voulu,
@@ -37,20 +42,23 @@
       unit_of_measurement: "min"
       icon: mdi:clock-fast
       state: >
-        {% set day_of_year = now().timetuple().tm_yday %}
-        {% if day_of_year >= 80 and day_of_year <= 172 %}
-          {# Printemps : variation progressive 0 -> +3 min/jour #}
-          {{ (3 * ((day_of_year - 80) / 92)) | round(1) }}
-        {% elif day_of_year >= 172 and day_of_year <= 264 %}
-          {# Été : variation progressive 0 -> -3 min/jour #}
-          {{ (-3 * ((day_of_year - 172) / 92)) | round(1) }}
-        {% elif day_of_year >= 264 and day_of_year <= 355 %}
-          {# Automne : stable à -3 min/jour #}
-          {{ -3 | round(1) }}
-        {% else %}
-          {# Hiver : stable à +2 min/jour #}
-          {{ 2 | round(1) }}
-        {% endif %}
+        {% set lat_rad = (state_attr('zone.home', 'latitude') | float(default=43.72)) * pi / 180 %}
+        {# Durée du jour au jour j, formule NOAA (zénith 90,833°) #}
+        {% macro duree(j) -%}
+          {%- set g = 2 * pi * (j - 1) / 365 -%}
+          {%- set decl = 0.006918 - 0.399912 * cos(g) + 0.070257 * sin(g)
+                          - 0.006758 * cos(2 * g) + 0.000907 * sin(2 * g)
+                          - 0.002697 * cos(3 * g) + 0.001480 * sin(3 * g) -%}
+          {%- set cos_h = cos(90.833 * pi / 180) / (cos(lat_rad) * cos(decl))
+                          - tan(lat_rad) * tan(decl) -%}
+          {%- set cos_h = [[-1, cos_h] | max, 1] | min -%}
+          {{- (2 * acos(cos_h) * 180 / pi / 15) -}}
+        {%- endmacro %}
+        {% set j0 = now().timetuple().tm_yday %}
+        {% set j1 = (now() + timedelta(days=1)).timetuple().tm_yday %}
+        {% set h0 = duree(j0) | float %}
+        {% set h1 = duree(j1) | float %}
+        {{ ((h1 - h0) * 60) | round(1) }}
       attributes:
         jour_annee: "{{ now().timetuple().tm_yday }}"
         periode: >

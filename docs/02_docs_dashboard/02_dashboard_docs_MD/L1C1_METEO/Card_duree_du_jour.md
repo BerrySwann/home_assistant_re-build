@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--29-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--08-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -33,13 +33,36 @@
 - Durée du jour
 - Gain/Perte
 
-## Entités citées (5)
+## Entités citées (4)
 
 - `sensor.duree_du_jour`
-- `sensor.duree_du_jour_brut`
 - `sensor.variation_quotidienne`
 - `sun.sun`
 - `zone.home`
+
+## Calcul de la durée du jour (corrigé le 2026-11-08)
+
+La courbe et les deux capteurs utilisent une **formule NOAA** : déclinaison solaire
+en série de Fourier, et angle horaire calculé avec un zénith de **90,833°**
+(réfraction atmosphérique 34' + demi-diamètre solaire 16').
+
+| Élément | Avant | Après |
+|:--|:--|:--|
+| Déclinaison le 2026-11-08 | -17,65° | -16,36° |
+| Durée affichée | 9,64 h (9h38) | 9,99 h (9h59) |
+| Variation quotidienne | -3,0 min (rampe fixe) | -2,5 min (écart réel) |
+
+L'ancienne formule `23.45 * sin(2π(j-80)/365)` ignorait la réfraction et donnait
+**21 minutes d'erreur** sur la durée du jour. `sensor.duree_du_jour_brut` n'existe
+plus : la série du graphique porte sur `sensor.duree_du_jour`.
+
+**Piège du header** : la série « Gain/Perte » est en `in_header: true`, et
+apexcharts affiche alors la **dernière valeur** de la courbe générée. Le `break`
+qui arrête la génération à la date du jour est donc indispensable : sans lui le
+header affichait **+0,80 min** (la valeur du 31 décembre) au lieu de la variation
+du jour. Ne pas le retirer.
+
+---
 
 ## À compléter
 

@@ -3,13 +3,19 @@
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
 # ## 📝 DESCRIPTION :
-# Durée du jour calculée astronomiquement (latitude/déclinaison/angle horaire).
+# Durée du jour lever -> coucher, calculée par la formule NOAA (déclinaison en
+# série de Fourier + réfraction atmosphérique et demi-diamètre solaire).
 #
 # ## 🧮 CALCUL & SOURCES :
-# - lat = zone.home.latitude -> déclinaison = 23.45 * sin(2π(j-80)/365)
-#   -> cos_h = -(tan(lat_rad) * tan(decl_rad)) -> acos(cos_h) -> heures.
-# - Dates clés : Équinoxe printemps j80 | Solstice été j172 | Équinoxe automne j264
-#                Solstice hiver j355.
+# - lat = zone.home.latitude.
+# - Déclinaison (NOAA, précision ~0,01°) :
+#     gamma = 2 * pi * (j - 1) / 365
+#     decl  = 0.006918 - 0.399912 cos(g) + 0.070257 sin(g)
+#             - 0.006758 cos(2g) + 0.000907 sin(2g)
+#             - 0.002697 cos(3g) + 0.001480 sin(3g)
+# - Angle horaire avec zénith 90,833° (réfraction 34' + demi-diamètre 16') :
+#     cos(ha) = cos(90.833°) / (cos(lat) cos(decl)) - tan(lat) tan(decl)
+# - Durée = 2 * ha / 15 en heures.
 #
 #
 # ## 🔗 CHAÎNE DE DÉPENDANCES :
@@ -37,19 +43,22 @@
       unit_of_measurement: "h"
       icon: mdi:weather-sunny
       state: >
-        {# Récupération sécurisée de la latitude #}
-        {% set lat = state_attr('zone.home', 'latitude') | float(default=43.72) %}
+        {% set lat = state_attr('zone.home', 'latitude') | float(default=43.72) | float %}
         {% set lat_rad = lat * pi / 180 %}
 
         {# Jour de l'année (1-365) #}
         {% set day = now().timetuple().tm_yday %}
 
-        {# Calcul de la déclinaison #}
-        {% set decl = 23.45 * sin((2 * pi * (day - 80)) / 365) %}
-        {% set decl_rad = decl * pi / 180 %}
+        {# Déclinaison solaire - série de Fourier NOAA #}
+        {% set g = 2 * pi * (day - 1) / 365 %}
+        {% set decl = 0.006918
+                      - 0.399912 * cos(g) + 0.070257 * sin(g)
+                      - 0.006758 * cos(2 * g) + 0.000907 * sin(2 * g)
+                      - 0.002697 * cos(3 * g) + 0.001480 * sin(3 * g) %}
 
-        {# Calcul de l'angle horaire #}
-        {% set cos_h = -(tan(lat_rad) * tan(decl_rad)) %}
+        {# Angle horaire pour un lever/coucher apparent (zénith 90,833°) #}
+        {% set cos_h = cos(90.833 * pi / 180) / (cos(lat_rad) * cos(decl))
+                       - tan(lat_rad) * tan(decl) %}
 
         {# Sécurité pour les limites polaires #}
         {% set cos_h = [ [-1, cos_h] | max, 1 ] | min %}

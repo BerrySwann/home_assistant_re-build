@@ -1536,10 +1536,7 @@ sections:
         opacity: 0.2
         extend_to: now
         fill_raw: last
-        data_generator: "const data = [];\nconst lat = 43.72;\nconst latRad = lat * Math.PI / 180;\nconst now = new Date();\nconst year = 2026;\nfor (let i = 0; i <= 365; i++) {\n  const date = new Date(year,\
-          \ 0, i + 1);\n  if (date > now) break;\n  const dayOfYear = i + 1;\n  const declRad = 23.45 * Math.sin((2 * Math.PI * (dayOfYear - 80)) / 365) * Math.PI / 180;\n  const cosH = -(Math.tan(latRad)\
-          \ * Math.tan(declRad));\n  const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));\n  const dayLength = Math.round((2 * hourAngle * 180 / Math.PI / 15) * 100) / 100;\n  data.push([date.getTime(),\
-          \ dayLength]);\n}\nreturn data;\n"
+        data_generator: "const data = [];\nconst lat = hass.states['zone.home']?.attributes?.latitude ?? hass.config.latitude ?? 43.72;\nconst latRad = lat * Math.PI / 180;\nconst now = new Date();\nconst year = now.getFullYear();\nfunction dayLength(dayOfYear) {\n  const g = 2 * Math.PI * (dayOfYear - 1) / 365;\n  const declRad = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.001480 * Math.sin(3 * g);\n  const cosH = Math.cos(90.833 * Math.PI / 180) / (Math.cos(latRad) * Math.cos(declRad)) - Math.tan(latRad) * Math.tan(declRad);\n  const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));\n  return (2 * hourAngle * 180 / Math.PI / 15);\n}\nfor (let i = 1; i <= 365; i++) {\n  const date = new Date(year, 0, i);\n  if (date > now) break;\n  data.push([date.getTime(), Math.round(dayLength(i) * 100) / 100]);\n}\nreturn data;\n"
         color_threshold:
         - value: 9
           color: '#3B82F6'
@@ -1567,10 +1564,7 @@ sections:
           in_chart: true
           extremas: false
           legend_value: false
-        data_generator: "const data = [];\nconst lat = hass.states['zone.home']?.attributes?.latitude\n            ?? hass.config.latitude\n            ?? 43.72;\nconst latRad = lat * Math.PI / 180;\nconst\
-          \ year = new Date().getFullYear();\nfor (let i = 0; i <= 365; i += 4) {\n  const date = new Date(year, 0, i + 1);\n  const dayOfYear = i + 1;\n  const declRad = 23.45 * Math.sin((2 * Math.PI *\
-          \ (dayOfYear - 80)) / 365) * Math.PI / 180;\n  const cosH = -(Math.tan(latRad) * Math.tan(declRad));\n  const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));\n  const dayLength = Math.round((2\
-          \ * hourAngle * 180 / Math.PI / 15) * 100) / 100;\n  data.push([date.getTime(), dayLength]);\n}\nreturn data;\n"
+        data_generator: "const data = [];\nconst lat = hass.states['zone.home']?.attributes?.latitude ?? hass.config.latitude ?? 43.72;\nconst latRad = lat * Math.PI / 180;\nconst now = new Date();\nconst year = now.getFullYear();\nfunction dayLength(dayOfYear) {\n  const g = 2 * Math.PI * (dayOfYear - 1) / 365;\n  const declRad = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.001480 * Math.sin(3 * g);\n  const cosH = Math.cos(90.833 * Math.PI / 180) / (Math.cos(latRad) * Math.cos(declRad)) - Math.tan(latRad) * Math.tan(declRad);\n  const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));\n  return (2 * hourAngle * 180 / Math.PI / 15);\n}\nfor (let i = 1; i <= 365; i += 4) {\n  const date = new Date(year, 0, i);\n  data.push([date.getTime(), Math.round(dayLength(i) * 100) / 100]);\n}\nreturn data;\n"
       - entity: sensor.variation_quotidienne
         name: Gain/Perte
         yaxis_id: variation
@@ -1579,10 +1573,7 @@ sections:
         color: '#8B5CF6'
         stroke_width: 1
         opacity: 0.1
-        data_generator: "const data = [];\nconst lat = 43.72;\nconst latRad = lat * Math.PI / 180;\nconst year = 2026;\nfunction getDayLength(dayOfYear) {\n  const declRad = 23.45 * Math.sin((2 * Math.PI\
-          \ * (dayOfYear - 80)) / 365) * Math.PI / 180;\n  const cosH = -(Math.tan(latRad) * Math.tan(declRad));\n  const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));\n  return (2 * hourAngle\
-          \ * 180 / Math.PI / 15);\n}\nfor (let i = 1; i <= 365; i++) {\n  const date = new Date(year, 0, i + 1);\n  // [modif] Pas de break → courbe complète jusqu'au 31/12\n  const diffMinutes = (getDayLength(i\
-          \ + 1) - getDayLength(i)) * 60;\n  data.push([date.getTime(), diffMinutes]);\n}\nreturn data;\n"
+        data_generator: "const data = [];\nconst lat = hass.states['zone.home']?.attributes?.latitude ?? hass.config.latitude ?? 43.72;\nconst latRad = lat * Math.PI / 180;\nconst now = new Date();\nconst year = now.getFullYear();\nfunction dayLength(dayOfYear) {\n  const g = 2 * Math.PI * (dayOfYear - 1) / 365;\n  const declRad = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.001480 * Math.sin(3 * g);\n  const cosH = Math.cos(90.833 * Math.PI / 180) / (Math.cos(latRad) * Math.cos(declRad)) - Math.tan(latRad) * Math.tan(declRad);\n  const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));\n  return (2 * hourAngle * 180 / Math.PI / 15);\n}\nfor (let i = 1; i <= 365; i++) {\n  const date = new Date(year, 0, i);\n  // Le break est INDISPENSABLE : in_header affiche la derniere valeur de la serie.\n  // Sans lui, le header montrait +0,80 min (le 31/12) au lieu de la variation du jour.\n  if (date > now) break;\n  data.push([date.getTime(), (dayLength(i + 1) - dayLength(i)) * 60]);\n}\nreturn data;\n"
         show:
           in_header: true
           in_brush: false

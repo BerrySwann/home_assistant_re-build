@@ -29,7 +29,7 @@ apex_config:
     position: top
   annotations:
     xaxis:
-      - x: EVAL:new Date('2026-03-20').getTime()
+      - x: EVAL:new Date(new Date().getFullYear(), 2, 20).getTime()
         borderColor: "#10B981"
         label:
           text: 🌱 Printemps
@@ -39,7 +39,7 @@ apex_config:
           style:
             background: "#10B981"
             color: "#fff"
-      - x: EVAL:new Date('2026-06-21').getTime()
+      - x: EVAL:new Date(new Date().getFullYear(), 5, 21).getTime()
         borderColor: "#F59E0B"
         label:
           text: ☀️ Été
@@ -49,7 +49,7 @@ apex_config:
           style:
             background: "#F59E0B"
             color: "#fff"
-      - x: EVAL:new Date('2026-09-22').getTime()
+      - x: EVAL:new Date(new Date().getFullYear(), 8, 22).getTime()
         borderColor: "#EF4444"
         label:
           text: 🍂 Automne
@@ -59,7 +59,7 @@ apex_config:
           style:
             background: "#EF4444"
             color: "#fff"
-      - x: EVAL:new Date('2026-12-21').getTime()
+      - x: EVAL:new Date(new Date().getFullYear(), 11, 21).getTime()
         borderColor: "#3B82F6"
         label:
           text: ❄️ Hiver
@@ -69,21 +69,21 @@ apex_config:
             background: "#3B82F6"
             color: "#fff"
     yaxis:
-      - "y": 8.9
+      - "y": 8.92
         borderColor: "#3B82F6"
         strokeDashArray: 3
         label:
-          text: Min 8h54
+          text: Min 8h55
           offsetY: 20
           position: right
           style:
             color: "#fff"
             background: "#3B82F6"
-      - "y": 15.47
+      - "y": 15.45
         borderColor: "#EF4444"
         strokeDashArray: 3
         label:
-          text: Max 15h28
+          text: Max 15h27
           offsetY: 20
           position: right
           style:
@@ -114,8 +114,9 @@ series:
       in_chart: false
       extremas: false
       legend_value: false
-  # Série chart : utilise sensor.duree_du_jour_brut (décimal pur) pour le tracé + extremas
-  - entity: sensor.duree_du_jour_brut
+  # Série chart : courbe annuelle recalculée en JS avec la formule NOAA
+  # (même calcul que le template duree_du_jour, cf. R134.1 du 2026-11-08)
+  - entity: sensor.duree_du_jour
     name: Durée du jour
     yaxis_id: hours
     type: area
@@ -126,19 +127,27 @@ series:
     fill_raw: last
     data_generator: |
       const data = [];
-      const lat = 43.72;
+      const lat = hass.states['zone.home']?.attributes?.latitude
+                  ?? hass.config.latitude
+                  ?? 43.72;
       const latRad = lat * Math.PI / 180;
       const now = new Date();
-      const year = 2026;
-      for (let i = 0; i <= 365; i++) {
-        const date = new Date(year, 0, i + 1);
-        if (date > now) break;
-        const dayOfYear = i + 1;
-        const declRad = 23.45 * Math.sin((2 * Math.PI * (dayOfYear - 80)) / 365) * Math.PI / 180;
-        const cosH = -(Math.tan(latRad) * Math.tan(declRad));
+      const year = now.getFullYear();
+      function dayLength(dayOfYear) {
+        const g = 2 * Math.PI * (dayOfYear - 1) / 365;
+        const declRad = 0.006918
+          - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g)
+          - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g)
+          - 0.002697 * Math.cos(3 * g) + 0.001480 * Math.sin(3 * g);
+        const cosH = Math.cos(90.833 * Math.PI / 180) / (Math.cos(latRad) * Math.cos(declRad))
+                     - Math.tan(latRad) * Math.tan(declRad);
         const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));
-        const dayLength = Math.round((2 * hourAngle * 180 / Math.PI / 15) * 100) / 100;
-        data.push([date.getTime(), dayLength]);
+        return Math.round((2 * hourAngle * 180 / Math.PI / 15) * 100) / 100;
+      }
+      for (let i = 1; i <= 365; i++) {
+        const date = new Date(year, 0, i);
+        if (date > now) break;
+        data.push([date.getTime(), dayLength(i)]);
       }
       return data;
     color_threshold:
@@ -175,14 +184,20 @@ series:
                   ?? 43.72;
       const latRad = lat * Math.PI / 180;
       const year = new Date().getFullYear();
-      for (let i = 0; i <= 365; i += 4) {
-        const date = new Date(year, 0, i + 1);
-        const dayOfYear = i + 1;
-        const declRad = 23.45 * Math.sin((2 * Math.PI * (dayOfYear - 80)) / 365) * Math.PI / 180;
-        const cosH = -(Math.tan(latRad) * Math.tan(declRad));
+      function dayLength(dayOfYear) {
+        const g = 2 * Math.PI * (dayOfYear - 1) / 365;
+        const declRad = 0.006918
+          - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g)
+          - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g)
+          - 0.002697 * Math.cos(3 * g) + 0.001480 * Math.sin(3 * g);
+        const cosH = Math.cos(90.833 * Math.PI / 180) / (Math.cos(latRad) * Math.cos(declRad))
+                     - Math.tan(latRad) * Math.tan(declRad);
         const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));
-        const dayLength = Math.round((2 * hourAngle * 180 / Math.PI / 15) * 100) / 100;
-        data.push([date.getTime(), dayLength]);
+        return Math.round((2 * hourAngle * 180 / Math.PI / 15) * 100) / 100;
+      }
+      for (let i = 1; i <= 365; i += 4) {
+        const date = new Date(year, 0, i);
+        data.push([date.getTime(), dayLength(i)]);
       }
       return data;
   - entity: sensor.variation_quotidienne
@@ -195,20 +210,30 @@ series:
     opacity: 0.1
     data_generator: |
       const data = [];
-      const lat = 43.72;
+      const lat = hass.states['zone.home']?.attributes?.latitude
+                  ?? hass.config.latitude
+                  ?? 43.72;
       const latRad = lat * Math.PI / 180;
-      const year = 2026;
-      function getDayLength(dayOfYear) {
-        const declRad = 23.45 * Math.sin((2 * Math.PI * (dayOfYear - 80)) / 365) * Math.PI / 180;
-        const cosH = -(Math.tan(latRad) * Math.tan(declRad));
+      const now = new Date();
+      const year = now.getFullYear();
+      function dayLength(dayOfYear) {
+        const g = 2 * Math.PI * (dayOfYear - 1) / 365;
+        const declRad = 0.006918
+          - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g)
+          - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g)
+          - 0.002697 * Math.cos(3 * g) + 0.001480 * Math.sin(3 * g);
+        const cosH = Math.cos(90.833 * Math.PI / 180) / (Math.cos(latRad) * Math.cos(declRad))
+                     - Math.tan(latRad) * Math.tan(declRad);
         const hourAngle = Math.acos(Math.max(-1, Math.min(1, cosH)));
         return (2 * hourAngle * 180 / Math.PI / 15);
       }
       for (let i = 1; i <= 365; i++) {
-        const date = new Date(year, 0, i + 1);
-        // [modif] Pas de break → courbe complète jusqu'au 31/12
-        const diffMinutes = (getDayLength(i + 1) - getDayLength(i)) * 60;
-        data.push([date.getTime(), diffMinutes]);
+        const date = new Date(year, 0, i);
+        // Le break est INDISPENSABLE : in_header affiche la derniere valeur de la
+        // serie. Sans lui, le header montrait +0,80 min (le 31/12) au lieu de la
+        // variation du jour. Ne pas le retirer (correction du 2026-11-08, R134.1).
+        if (date > now) break;
+        data.push([date.getTime(), (dayLength(i + 1) - dayLength(i)) * 60]);
       }
       return data;
     show:
