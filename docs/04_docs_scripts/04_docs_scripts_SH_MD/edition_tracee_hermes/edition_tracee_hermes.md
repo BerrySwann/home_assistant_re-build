@@ -30,7 +30,7 @@ Le docstring explique pourquoi le fichier existe : construit dans un heredoc bas
 
 ## Emplacement
 - Script (copie maitre) : `docs\04_docs_scripts\04_docs_scripts_SH\edition_tracee_hermes\edition_tracee_hermes.py`
-- Original vivant : `D:\hermes\skills\journal-modifs\templates\edition_tracee.py` (contenu identique, 3383 octets)
+- Original vivant : `C:\Users\Berry Swann\AppData\Local\hermes\skills\journal-modifs\templates\edition_tracee.py` (contenu identique, 3383 octets)
 - Journal vise par defaut (constante `J`, a adapter) : `C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\01_MODIFS_IA\MODIFS_2026-10-24_hermes.md`
 
 ## Lancement

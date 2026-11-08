@@ -20,7 +20,7 @@ Verifie, pour chaque entree du manifeste `XX_manifest.json`, que le dossier de `
 
 ## Emplacement
 - Script dans le depot : `docs\04_docs_scripts\04_docs_scripts_SH\check_xx_repertoires_hermes\check_xx_repertoires_hermes.py`
-- Original vivant : `D:\hermes\scripts\check_xx_repertoires.py` (identique a la copie du depot : 4593 octets, md5 `c67a0c21` des deux cotes, verifie le 2026-11-01 apres le passage a la lecture du manifeste)
+- Original vivant : `C:\Users\Berry Swann\AppData\Local\hermes\scripts\check_xx_repertoires.py` (identique a la copie du depot : 4593 octets, md5 `c67a0c21` des deux cotes, verifie le 2026-11-01 apres le passage a la lecture du manifeste)
 - Racine controlee (codee en dur) : `C:\Users\Berry Swann\Documents\ReBuild\docs`
 - Racine prod surveillee (codee en dur) : `H:\docs`
 

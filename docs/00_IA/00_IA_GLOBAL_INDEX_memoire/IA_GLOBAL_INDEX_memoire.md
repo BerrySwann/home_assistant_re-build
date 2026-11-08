@@ -13,8 +13,8 @@
 
 </div>
 
-> Fichier GENERE le 2026-11-08 13:46 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
-> 14 fichiers de contenu, 57 sauvegardes (.bak), 0 sans description.
+> Fichier GENERE le 2026-11-08 21:40 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
+> 14 fichiers de contenu, 61 sauvegardes (.bak), 0 sans description.
 
 > 🚨🚨🚨 **GYROPHARE ROUGE - DANS HOME ASSISTANT TOUT EST A PLAT** 🚨🚨🚨
 >
@@ -38,7 +38,7 @@ Un dossier par fichier. Chargés a la demande : Claude ne les lit que si la tach
 
 | Fichier | Qui s'en sert | Son but | Quand le lire | Cite dans CLAUDE.md | Prod |
 |---|---|---|---|---|---|
-| [IA_ARBO_DETAIL.md](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md) | Claude, via /update-arbo et /histo (etape 6) | Arborescences completes local, prod et GitHub avec les comptages de fichiers, URLs raw GitHub. | Audit de fichiers, synchro GitHub, recherche d'un fichier en prod, verification de l'arborescence locale. | oui | OK (MD5 identique) |
+| [IA_ARBO_DETAIL.md](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md) | Claude, via /update-arbo et /histo (etape 6) | Arborescences completes local, prod et GitHub avec les comptages de fichiers, URLs raw GitHub. | Audit de fichiers, synchro GitHub, recherche d'un fichier en prod, verification de l'arborescence locale. | oui | DIFFERENT de la prod |
 | [IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md](../00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE.md) | Claude, en mode expert audit energetique | Prompt expert : caracteristiques du logement, equipements, methodes d'analyse, missions et format du rapport d'audit conso et thermique. | Audit de consommation, analyse DUT par piece, efficacite isolation/volets/rideaux, ecart entre la theorie des YAML et les logs reels. | oui | OK (MD5 identique) |
 | [IA_AUTOMATIONS_NOTIFS.md](../00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/IA_AUTOMATIONS_NOTIFS.md) | Claude, pour ecrire ou modifier des automations et des notifications | Regles de codage des automations et referentiel des notifications de la prod (canaux, titres, messages, fichiers log). | Creation ou modification d'une automation, ecriture d'un message notify, script HA. | oui | OK (MD5 identique) |
 | [IA_BADGES_FICHES.md](../00_IA_SOUS_CONTEXT_IA/IA_BADGES_FICHES/IA_BADGES_FICHES.md) | Claude, pour creer ou corriger la banniere de badges d une fiche | Inventaire des badges des fiches .md : valeurs et couleurs de chaque badge, et les cas deja rencontres. | Creer une fiche .md, choisir ou corriger un badge, modifier Check_badges_fiches. | oui | OK (MD5 identique) |
@@ -55,7 +55,7 @@ Un dossier par fichier. Chargés a la demande : Claude ne les lit que si la tach
 
 | Fichier | Qui s'en sert | Son but | Quand le lire | Cite dans CLAUDE.md | Prod |
 |---|---|---|---|---|---|
-| [DEPENDANCES_GLOBALES_CLAUDE_memoire.md](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md) | Claude (il la tient a jour via /sync_index et /histo) ; Hermes a sa propre version dans docs/99_docs_MD_system/DEPENDANCES_GLOBALES_HERMES | Chaine de dependances du dashboard : matrice des 18 vignettes, entites, fichiers et automations par domaine, scripts, fichiers config racine. Citee par IA_CONTEXT_BASE, IA_ARBO_DETAIL, IA_INDEX_NAVIGATION et IA_NOM_DES_REPERTOIRES_ET_FICHIERS. | Apres validation d un YAML, d une automation ou d une vignette ; pour savoir quelles entites et quels fichiers dependent d une vignette. | oui | DIFFERENT de la prod |
+| [DEPENDANCES_GLOBALES_CLAUDE_memoire.md](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md) | Claude (il la tient a jour via /sync_index et /histo) ; Hermes a sa propre version dans docs/99_docs_MD_system/DEPENDANCES_GLOBALES_HERMES | Chaine de dependances du dashboard : matrice des 18 vignettes, entites, fichiers et automations par domaine, scripts, fichiers config racine. Citee par IA_CONTEXT_BASE, IA_ARBO_DETAIL, IA_INDEX_NAVIGATION et IA_NOM_DES_REPERTOIRES_ET_FICHIERS. | Apres validation d un YAML, d une automation ou d une vignette ; pour savoir quelles entites et quels fichiers dependent d une vignette. | oui | OK (MD5 identique) |
 
 ## Sauvegardes (.bak)
 
@@ -63,10 +63,10 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 
 | Dossier | Nombre de sauvegardes |
 |---|---|
-| [00_IA_CONTEXT_BASE](../00_IA_CONTEXT_BASE/) | 3 |
+| [00_IA_CONTEXT_BASE](../00_IA_CONTEXT_BASE/) | 4 |
 | [00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/) | 7 |
-| [00_IA_GLOBAL_INDEX_memoire](./) | 10 |
-| [00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 4 |
+| [00_IA_GLOBAL_INDEX_memoire](./) | 11 |
+| [00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 5 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE](../00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS](../00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_BADGES_FICHES](../00_IA_SOUS_CONTEXT_IA/IA_BADGES_FICHES/) | 3 |
@@ -75,7 +75,7 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 | [00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES](../00_IA_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/) | 3 |
-| [00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS](../00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/) | 3 |
+| [00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS](../00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/) | 4 |
 | [00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE](../00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE](../00_IA_SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE/) | 3 |
 

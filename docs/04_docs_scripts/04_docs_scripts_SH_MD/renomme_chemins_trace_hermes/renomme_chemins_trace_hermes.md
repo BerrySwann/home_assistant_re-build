@@ -20,15 +20,15 @@ Remplace des chaines (ancien -> nouveau) dans les fichiers texte d'un arbre, en 
 
 ## Emplacement
 - Script : `docs\04_docs_scripts\04_docs_scripts_SH\renomme_chemins_trace_hermes\renomme_chemins_trace_hermes.py`
-- Original vivant : `D:\hermes\skills\journal-modifs\scripts\renomme_chemins_trace.py`
+- Original vivant : `C:\Users\Berry Swann\AppData\Local\hermes\skills\journal-modifs\scripts\renomme_chemins_trace.py`
 - Paires : fichier JSON fourni par l'appelant, au format `[["ancien", "nouveau"], ...]` (chemin libre, passe en premier argument)
 - Rapport : `~/rapport_renommage_<AAAA_MM_JJ_HHhMMmSS>.txt` (soit `C:\Users\Berry Swann\rapport_renommage_....txt` ici, chemin non parametrable)
 - Sauvegardes : a cote de chaque fichier modifie, suffixe `.bak_<AAAA_MM_JJ_HHhMMmSS>` (meme horodatage pour toute la passe)
 
 ## Lancement
 ```
-python renomme_chemins_trace_hermes.py paires.json --root D:\hermes --dry
-python renomme_chemins_trace_hermes.py paires.json --root D:\hermes
+python renomme_chemins_trace_hermes.py paires.json --root C:\Users\Berry Swann\AppData\Local\hermes --dry
+python renomme_chemins_trace_hermes.py paires.json --root C:\Users\Berry Swann\AppData\Local\hermes
 ```
 - `--dry` : simulation, aucune ecriture et aucun `.bak` ; la colonne `apres=` vaut `-`.
 - Sans `--root` : la racine est le dossier courant (`os.getcwd()`).

@@ -90,9 +90,25 @@ def snapshot(src, dst_dir, base):
 
 
 def local_files(root, skip_dirs):
+    """Fichiers YAML locaux, hors dossiers d exclusion.
+
+    Deux exclusions de plus que la liste litterale (Eric, 2026-11-08) :
+    les dossiers prefixes XX_, et tout dossier dont le nom contient '_archive'.
+    La regle etait ecrite dans le skill (« les archives doivent porter le
+    prefixe XX_ pour sortir du perimetre du trigul ») mais le code ne
+    l appliquait pas : une archive vivante portait le meme id et le meme alias
+    que l automation prod, se faisait apparier a sa place, et produisait un
+    ecart de palier 1 sur automations.yaml qui bloquait l extinction alors que
+    le fichier vivant portait exactement l empreinte de la prod. Vecu le
+    2026-11-08, dossier COPIE_avant_presence_2026_11_05_archive.
+    """
     out = []
     for r, ds, fs in os.walk(root):
-        ds[:] = [d for d in ds if d not in skip_dirs]
+        ds[:] = [d for d in ds
+                 if d not in skip_dirs
+                 and not d.startswith("XX_")
+                 and "_archive" not in d.lower()
+                 and "archive" not in d.lower()]
         for f in fs:
             if f.lower().endswith(('.yaml', '.yml')) and not is_save(f):
                 out.append(os.path.join(r, f))

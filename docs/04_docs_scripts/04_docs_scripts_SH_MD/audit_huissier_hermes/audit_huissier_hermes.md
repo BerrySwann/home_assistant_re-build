@@ -27,7 +27,7 @@ Execute les 7 passes d'audit d'un bloc et produit un proces-verbal horodate. Con
 - Passe 7 SCRIPTS : `scripts.yaml` PROD contre les `04_docs_scripts_YAML` locaux, et scripts `.sh` de `04_docs_scripts_SH` LOCAL contre PROD (md5 + diff).
 
 ## Emplacement
-- Script : `docs\04_docs_scripts\04_docs_scripts_SH\audit_huissier_hermes\audit_huissier_hermes.py` (md5 `7aaae06dc6c82a26fff54647676d7a0a`, identique a l'original vivant `D:\hermes\skills\smart-home\ha-audit-huissier\scripts\audit_huissier.py`).
+- Script : `docs\04_docs_scripts\04_docs_scripts_SH\audit_huissier_hermes\audit_huissier_hermes.py` (md5 `7aaae06dc6c82a26fff54647676d7a0a`, identique a l'original vivant `C:\Users\Berry Swann\AppData\Local\hermes\skills\smart-home\ha-audit-huissier\scripts\audit_huissier.py`).
 - Perimetre lu : LOCAL `C:/Users/Berry Swann/Documents/ReBuild`, PROD `H:/`, GITHUB = depot git sur `H:/` (`git ls-files`, `git HEAD` / `origin/main`).
 - Matrice : `docs\00_IA\00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire\DEPENDANCES_GLOBALES_CLAUDE_memoire.md` ; YAML de config : `docs\01_docs_config_system\01_config_system_SH_PY_YAML` ; dashboard (vignettes) : `docs\02_docs_dashboard\02_dashboard_docs_YAML`.
 - Sorties : `%LOCALAPPDATA%\Temp\audit_huissier\` (hors projet).

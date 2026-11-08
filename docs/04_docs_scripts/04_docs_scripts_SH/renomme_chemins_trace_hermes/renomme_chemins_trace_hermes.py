@@ -2,8 +2,8 @@
 """Renommage trace de chemins/noms dans un arbre, avec lookbehind et rapport.
 
 Usage :
-    python renomme_chemins_trace.py paires.json --root D:\\hermes --dry
-    python renomme_chemins_trace.py paires.json --root D:\\hermes
+    python renomme_chemins_trace.py paires.json --root C:\\Users\\Berry Swann\\AppData\\Local\\hermes --dry
+    python renomme_chemins_trace.py paires.json --root C:\\Users\\Berry Swann\\AppData\\Local\\hermes
 
 paires.json : [["ancien", "nouveau"], ...] . Les paires sont triees par longueur
 DE SCROISSANTE de l'ancien (variantes longues d'abord). Si le nouveau nom

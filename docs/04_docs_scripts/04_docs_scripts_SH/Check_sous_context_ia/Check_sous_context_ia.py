@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
-r"""check_sous_context_ia.py - controle LECTURE SEULE des 9 fichiers IA_* de docs\00_IA\00_IA_SOUS_CONTEXT_IA.
+r"""check_sous_context_ia.py - controle LECTURE SEULE des fichiers IA_* de docs\00_IA\00_IA_SOUS_CONTEXT_IA.
 Lance par /histo (etape 2, point 11). N'ecrit rien, ne corrige rien : rapporte les ecarts.
+
+Le NOMBRE de dossiers n'est PAS ecrit en dur : il est lu a chaque execution (os.listdir).
+Au 2026-11-08 il y en a 12. Ne jamais remettre un chiffre fixe ici : c'etait le defaut
+d'origine de R76.1, ou le fichier annoncait 8 dossiers alors qu'il y en avait 11.
 Usage : $env:PYTHONIOENCODING='utf-8'; python -I check_sous_context_ia.py
 Controles par fichier :
   1 structure : dossier = nom du fichier, fichier present, baks bien nommes, plafonds (10 le jour meme, 3 par jour passe)

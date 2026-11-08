@@ -31,7 +31,7 @@ Mecanique, telle qu'ecrite dans le script (quatre fonctions, aucune dependance h
 - Copie maitre (ce depot) : `docs\04_docs_scripts\04_docs_scripts_SH\boite_claude_watch_hermes\boite_claude_watch_hermes.py`
 - Original vivant (releve du 2026-11-04) : `C:\Users\Berry Swann\AppData\Local\hermes\skills\autonomous-ai-agents\echange-claude\scripts\boite_claude_watch.py` (3436 octets, md5 `9f720997`), repointe par Hermes le 2026-11-01 sur la nouvelle boite. Il est DIFFERENT de la copie du depot ci-dessus (3319 octets, md5 `e5c51f08`), qui est l ancienne version, identique a `C:\Users\Berry Swann\AppData\Local\hermes\scripts\boite_claude_watch.py` et encore reglee sur D:.
 - Boite surveillee : `C:\Users\Berry Swann\AppData\Local\hermes\Discussion_Claude_Hermes` (dans l original vivant), surchargeable par la variable d'environnement `BOITE_CLAUDE_DIR`
-- Fichier d'etat : l original vivant pointe encore `D:\hermes\scripts\.boite_claude_state`, dossier qui n existe plus depuis le 2026-11-01 (suivi au TODO en R130.15, a corriger par Hermes) ; surchargeable par la variable d'environnement `BOITE_CLAUDE_STATE`
+- Fichier d'etat : l original vivant pointe desormais `C:\Users\Berry Swann\AppData\Local\hermes\scripts\.boite_claude_state` (corrige le 2026-11-08, R130.15 : le dossier `D:\hermes` n existe plus depuis le 2026-11-01, ce qui rendait le watchdog muet, sortant `ok` a chaque tick parce qu il ne trouvait rien a lire) ; surchargeable par la variable d'environnement `BOITE_CLAUDE_STATE`
 
 ## Lancement
 `python -I -X utf8 "C:\Users\Berry Swann\AppData\Local\hermes\skills\autonomous-ai-agents\echange-claude\scripts\boite_claude_watch.py"`

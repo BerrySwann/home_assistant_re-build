@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Check_XX_presents.py - controle des dossiers XX_ de ReBuild/docs. OUTIL UNIQUE (copie maitre dans ReBuild depuis le 2026-10-25 ; ancienne copie D:\hermes\scripts\check_xx.py a ne plus utiliser).
+# Check_XX_presents.py - controle des dossiers XX_ de ReBuild/docs. OUTIL UNIQUE (copie maitre dans ReBuild depuis le 2026-10-25 ; ancienne copie C:\Users\Berry Swann\AppData\Local\hermes\scripts\check_xx.py a ne plus utiliser).
 # Fusion de deux versions ecrites le 2026-10-25 :
 #   - decouverte recursive des dossiers XX_ et manifeste fichier par fichier : idee de Claude
 #     (docs/04_docs_scripts/04_docs_scripts_SH/Check_XX_presents/Check_XX_presents.py) ;

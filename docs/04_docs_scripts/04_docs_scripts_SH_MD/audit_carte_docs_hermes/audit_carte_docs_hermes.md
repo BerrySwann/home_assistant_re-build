@@ -20,7 +20,7 @@ Recompte l'arborescence documentaire en local et en prod, sauvegardes `.bak` com
 
 ## Emplacement
 - Script : `docs\04_docs_scripts\04_docs_scripts_SH\audit_carte_docs_hermes\audit_carte_docs_hermes.py`
-- Original vivant : `D:\hermes\skills\smart-home\ha-projet-documentation\scripts\audit_carte_docs.py`
+- Original vivant : `C:\Users\Berry Swann\AppData\Local\hermes\skills\smart-home\ha-projet-documentation\scripts\audit_carte_docs.py`
 - Fiche : `docs\04_docs_scripts\04_docs_scripts_SH_MD\audit_carte_docs_hermes\audit_carte_docs_hermes.md`
 - Constantes a regler avant lancement, en tete du script : `LOCAL` (`C:/Users/Berry Swann/Documents/ReBuild`), `PROD` (`H:` + separateur), `ZONES` (10 zones), `INDEX` (4 fichiers d'index)
 - Sous-dossiers ignores partout : `.git`, `node_modules`, `__pycache__`

@@ -45,7 +45,8 @@ def read(p):
 
 
 def md5(p):
-    return hashlib.md5(open(p, "rb").read()).hexdigest()
+    with open(p, "rb") as f:
+        return hashlib.md5(f.read()).hexdigest()
 
 
 def files_of(root):
@@ -176,7 +177,8 @@ def prod_usage(name):
                     files += [os.path.join(dp, f) for f in fn if f.lower().endswith((".yaml", ".yml"))]
         for f in files:
             try:
-                _PROD[f] = open(f, encoding="utf-8", errors="replace").read().lower()
+                with open(f, encoding="utf-8", errors="replace") as fh:
+                    _PROD[f] = fh.read().lower()
             except OSError:
                 pass
     hits = sorted(set(os.path.basename(f) for f, t in _PROD.items() if name.lower() in t))

@@ -17,7 +17,7 @@ Pour s'aligner, Hermes a fait `rm -rf` de `docs\00_IA\sous_context_ia` et de `do
 
 ## Regle absolue : ZERO ecriture pendant un alignement
 
-Interdit, sans exception, quel que soit le lieu (ReBuild local, H:, D:, GitHub, `D:\hermes\skills`, le dossier de travail d'Hermes) :
+Interdit, sans exception, quel que soit le lieu (ReBuild local, H:, D:, GitHub, `C:\Users\Berry Swann\AppData\Local\hermes\skills`, le dossier de travail d'Hermes) :
 - creer, modifier, ecraser, renommer, deplacer, copier-sur, supprimer un fichier ou un dossier (`rm`, `rm -rf`, `rmdir`, `del`, `Remove-Item`, `mv`, `Move-Item`, `cp`, `Copy-Item`, `>`, `>>`, `tee`, `sed -i`, `Set-Content`, `Out-File`) ;
 - git (add, commit, push, checkout, reset, clean) ;
 - lancer un script qui ecrit (trigul, menage, generateurs d'index, backup) ;
@@ -40,7 +40,7 @@ Si un chemin est inaccessible, le dire a Eric et continuer avec le reste. Ne pas
 
 1. Les regles de Claude : `C:\Users\Berry Swann\Documents\ReBuild\Claude md SAVE\CLAUDE.md`. `IA_CONTEXT_BASE.md` (`docs\00_IA\00_IA_CONTEXT_BASE\`, copies `D:\docs\00_IA\IA_CONTEXT_BASE.md` et `H:\docs\00_IA\00_IA_CONTEXT_BASE\`) n'est PAS une copie MD5 identique de `CLAUDE.md` : les deux fichiers sont lus separement, et seules les trois copies d'`IA_CONTEXT_BASE.md` se comparent entre elles. Noter le MD5 (8 caracteres) de chacun.
 2. L'index IA : `docs\00_IA\00_IA_GLOBAL_INDEX_memoire\IA_GLOBAL_INDEX_memoire.md`, puis les fichiers de `docs\00_IA\00_IA_SOUS_CONTEXT_IA\` dont l'index dit qu'ils servent a la tache d'Eric. Matrice commune des dependances (elle part en prod au push 5C) : `docs\00_IA\00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire\DEPENDANCES_GLOBALES_CLAUDE_memoire.md`.
-3. Ce que Claude a fait et dit : `historique\03_RAPPORTS\01_MODIFS_IA\MODIFS_AAAA-MM-JJ_claude.md` (aujourd'hui et la veille ; pas de copie sur H: depuis le 2026-10-22), les messages de Claude `D:\Discussion_Claude_Hermes\echanges_AAAA-MM-JJ_claude.md` (aujourd'hui et la veille : c'est la que Claude passe les decisions d'Eric), puis les pages `histo_AAAA-MM-JJ.html` de `historique\02_HISTO_ET_FUSIONNE\` et le `JOURNAL_FUSIONNE_*` le plus recent de `historique\02_HISTO_ET_FUSIONNE\FUSIONNE\`.
+3. Ce que Claude a fait et dit : `historique\03_RAPPORTS\01_MODIFS_IA\MODIFS_AAAA-MM-JJ_claude.md` (aujourd'hui et la veille ; pas de copie sur H: depuis le 2026-10-22), les messages de Claude `C:\Users\Berry Swann\AppData\Local\hermes\Discussion_Claude_Hermes\echanges_AAAA-MM-JJ_claude.md` (aujourd'hui et la veille : c'est la que Claude passe les decisions d'Eric), puis les pages `histo_AAAA-MM-JJ.html` de `historique\02_HISTO_ET_FUSIONNE\` et le `JOURNAL_FUSIONNE_*` le plus recent de `historique\02_HISTO_ET_FUSIONNE\FUSIONNE\`.
 4. Les skills de Claude : `docs\05_docs_skills\05_docs_skills_PURE\skill_<nom>\<nom>.md` (copies utilisables, en anglais), leurs fiches francaises dans `docs\05_docs_skills\05_docs_skills_MD\`, et la liste dans `docs\05_docs_skills\MOC_SKILLS.md`. Lire ceux qui concernent la demande d'Eric ; si Eric n'en designe aucun, lister les noms et lui demander lesquels.
 5. Les memoires et preferences qu'Eric designe (par exemple ses regles de verification, de format, de langue).
 
@@ -61,14 +61,14 @@ Un fichier de sauvegarde (`.bak_...`) n'est jamais une source : seul le fichier 
 - `98_sauvegarde_hors_docs` : copie de `Infra_Proxmox`, `TODO` et `historique` faite par `Sync_98_sauvegarde.py` (avant chaque 5C), secrets caviardes ; elle VA EN PROD avec le 5C (Eric, 2026-10-31).
 - Push general 5C : tout `docs` hors dossiers `XX_`, hors `.bak`, hors `99_docs_MD_system` sauf `ENTITES_GLOBAL_INDEX.md` ; `98_sauvegarde_hors_docs` INCLUS ; MD5 avant et apres ; jamais sans ordre d'Eric.
 - TEMPO (`ReBuild\TEMPO`) : par defaut, copie dans `TEMPO\<operation>_AAAA-MM-JJ\`, MD5 de chaque fichier, copies a la corbeille Windows, puis suppression sur H: ; les copies ne restent dans TEMPO qu'apres un gros changement ou pour un fichier dit critique ; ces dossiers sont vides par ERIC SEUL. Tri en `Groupe_A`, `Groupe_B`, `Groupe_C` fait par Claude, A et B a la corbeille seulement apres le go d'Eric (2026-11-01). Hermes ne range ni ne supprime rien dans TEMPO ; `XX_sauvegarde_2026-10-25` reste a la racine.
-- Sauvegarde `.bak` : a cote du fichier modifie, jamais sur H: ni dans `D:\docs` et les autres copies de ReBuild ; les fichiers d'Hermes de `D:\hermes` gardent leur `.bak` a cote d'eux, sur D: (Eric, 2026-11-01 09h25).
+- Sauvegarde `.bak` : a cote du fichier modifie, jamais sur H: ni dans `D:\docs` et les autres copies de ReBuild ; les fichiers d'Hermes de `C:\Users\Berry Swann\AppData\Local\hermes` gardent leur `.bak` a cote d'eux, sur D: (Eric, 2026-11-01 09h25).
 - Chaque fiche `.md` porte 8 badges ; une fiche par script (sh, py, yaml) meme en doublon, le doublon est note dans toutes les fiches du meme contenu, et chaque fiche cite le nom exact de son fichier source.
 - Index par type de script : `docs\04_docs_scripts\GLOBAL_INDEX_SCRIPTS_SH.md`, `_PY.md`, `_YAML.md`, tries comme `MOC_SCRIPTS.md` (scripts qui tournent dans HA / qui ne tournent pas, IA Claude / IA Hermes, par type).
 - Trace en trois endroits pour toute modification : `.bak`, ligne du journal MODIFS, et ligne `annotations_log` dans le fichier (skill journal-modifs).
 
 ## Proposer une amelioration pendant un alignement (decision d'Eric, 2026-11-01 09h32)
 
-Pendant ou a la fin d'un alignement, si une amelioration te vient (une regle, un skill, un script, une fiche, un index, un chemin, ton propre fonctionnement ou celui de Claude), tu la donnes a Claude. Forme : un message `PROPOSITION` dans `D:\Discussion_Claude_Hermes\echanges_AAAA-MM-JJ_hermes.md`, une idee par message, avec le fichier concerne, le constat prouve (chemin, ligne, MD5 si utile), la modification proposee et le gain attendu. C'est la SEULE ecriture permise pendant un alignement. Tu ne fais JAMAIS la modification toi-meme : Claude la traite avec Eric, qui donne le go fichier par fichier. Aucune idee : tu n'ecris rien et tu ne le dis pas.
+Pendant ou a la fin d'un alignement, si une amelioration te vient (une regle, un skill, un script, une fiche, un index, un chemin, ton propre fonctionnement ou celui de Claude), tu la donnes a Claude. Forme : un message `PROPOSITION` dans `C:\Users\Berry Swann\AppData\Local\hermes\Discussion_Claude_Hermes\echanges_AAAA-MM-JJ_hermes.md`, une idee par message, avec le fichier concerne, le constat prouve (chemin, ligne, MD5 si utile), la modification proposee et le gain attendu. C'est la SEULE ecriture permise pendant un alignement. Tu ne fais JAMAIS la modification toi-meme : Claude la traite avec Eric, qui donne le go fichier par fichier. Aucune idee : tu n'ecris rien et tu ne le dis pas.
 
 ## Rapport de fin d'alignement (dans la conversation uniquement)
 
@@ -84,7 +84,7 @@ Court, en prose ou liste simple, sans tableau :
 
 Un alignement ne se transforme jamais tout seul en modification. Pour changer un fichier, Eric doit le demander en nommant le fichier. Alors, et seulement alors :
 1. montrer d'abord ce qui va changer (ancien contenu, nouveau contenu, MD5 avant) et attendre son "go" pour ce fichier ;
-2. faire la sauvegarde `nom.bak_AAAA_MM_JJ_HHhMMmSSs.ext` a cote du fichier (jamais sur H:, ni dans les copies de ReBuild sur D: ; pour un fichier d'Hermes sur D:\hermes, a cote de lui), 10 au plus le jour meme, 3 `.bak_AAAA_MM_JJ` pour les jours passes (dans `historique\` : une seule `.bak_AAAA_MM_JJ` par fichier et par jour, gardee indefiniment, sans plafond de jours, decision d'Eric le 2026-10-21) ;
+2. faire la sauvegarde `nom.bak_AAAA_MM_JJ_HHhMMmSSs.ext` a cote du fichier (jamais sur H:, ni dans les copies de ReBuild sur D: ; pour un fichier d'Hermes sur C:\Users\Berry Swann\AppData\Local\hermes, a cote de lui), 10 au plus le jour meme, 3 `.bak_AAAA_MM_JJ` pour les jours passes (dans `historique\` : une seule `.bak_AAAA_MM_JJ` par fichier et par jour, gardee indefiniment, sans plafond de jours, decision d'Eric le 2026-10-21) ;
 3. une suppression n'est jamais faite sans que Eric ait nomme le fichier ou dossier ; elle passe par la corbeille Windows ; sur H: (pas de corbeille) : copie dans `ReBuild\TEMPO\<operation>_AAAA-MM-JJ\`, MD5 de chaque copie, puis seulement si tous les MD5 correspondent, copies a la corbeille Windows et suppression sur H: (les copies ne restent dans TEMPO que dans les deux cas de la regle TEMPO ci-dessus) ;
 4. noter une ligne dans `historique\03_RAPPORTS\01_MODIFS_IA\MODIFS_AAAA-MM-JJ_hermes.md` (jamais sur `H:\docs\modifs\` : plus d'ecriture ni de copie sur H: depuis le 2026-10-22, decision d'Eric), et la ligne `annotations_log` dans le fichier ;
 5. verifier le MD5 apres l'ecriture et le dire.

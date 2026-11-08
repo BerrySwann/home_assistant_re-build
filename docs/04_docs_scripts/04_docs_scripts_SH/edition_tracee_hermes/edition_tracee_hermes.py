@@ -79,7 +79,7 @@ def corbeille(path, dossier=False):
 if __name__ == "__main__":
     # --- adapter : un appel par fichier
     EDITS = [
-        # (r"D:\hermes\skills\<categorie>\<skill>\SKILL.md", [("ancien texte", "nouveau texte")], "raison courte"),
+        # (r"C:\Users\Berry Swann\AppData\Local\hermes\skills\<categorie>\<skill>\SKILL.md", [("ancien texte", "nouveau texte")], "raison courte"),
     ]
     for path, pairs, raison in EDITS:
         edit(path, pairs, raison)

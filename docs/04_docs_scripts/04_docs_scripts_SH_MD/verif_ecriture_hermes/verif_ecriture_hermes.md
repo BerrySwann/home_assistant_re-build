@@ -22,7 +22,7 @@ Le script porte son propre mode d'emploi : un fichier de journal ou de message d
 
 ## Emplacement
 - Script : `docs\04_docs_scripts\04_docs_scripts_SH\verif_ecriture_hermes\verif_ecriture_hermes.py` (51 lignes)
-- Original vivant : `D:\hermes\skills\autonomous-ai-agents\hermes-aligne\scripts\verif_ecriture.py` (identique a la copie, md5 `9ae4b73589adddf8b528038e64263268`)
+- Original vivant : `C:\Users\Berry Swann\AppData\Local\hermes\skills\autonomous-ai-agents\hermes-aligne\scripts\verif_ecriture.py` (identique a la copie, md5 `9ae4b73589adddf8b528038e64263268`)
 - Aucun fichier annexe : ni manifeste, ni configuration, ni dependance externe (seulement `hashlib`, `io`, `sys`).
 
 ## Lancement

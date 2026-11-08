@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Surveille la boite aux lettres Claude (D:\Discussion_Claude_Hermes).
+# Surveille la boite aux lettres Claude (C:\Users\Berry Swann\AppData\Local\hermes\Discussion_Claude_Hermes).
 # Sort un message seulement quand un fichier *_claude.md change ou apparait.
 # Le message dit QUEL fichier a change, COMBIEN de lignes sont nouvelles et QUELS
 # identifiants de messages sont concernes, avec un apercu. Sortie vide = rien a signaler.
@@ -9,8 +9,8 @@ import re
 import json
 import hashlib
 
-DIR = os.environ.get("BOITE_CLAUDE_DIR", r"D:\Discussion_Claude_Hermes")
-STATE = os.environ.get("BOITE_CLAUDE_STATE", r"D:\hermes\scripts\.boite_claude_state")
+DIR = os.environ.get("BOITE_CLAUDE_DIR", r"C:\Users\Berry Swann\AppData\Local\hermes\Discussion_Claude_Hermes")
+STATE = os.environ.get("BOITE_CLAUDE_STATE", r"C:\Users\Berry Swann\AppData\Local\hermes\scripts\.boite_claude_state")
 MAX_FILES = 4
 PREVIEW = 260
 

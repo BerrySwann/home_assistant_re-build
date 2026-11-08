@@ -148,6 +148,95 @@ def walk_dir(rel_dir):
     return out
 
 
+def qualite_prod():
+    """VALIDITE du contenu de la prod, en lecture seule (Eric, 2026-11-08).
+
+    MD5 compare deux ETATS, il ne dit rien de leur QUALITE : une corruption
+    identique en local, en prod et sur GitHub donne trois empreintes
+    concordantes. Ce test regarde le CONTENU de la prod pour voir ce qui est
+    DEJA casse la-bas, ce que la synchronisation ne peut pas montrer.
+
+    Deux tests, dans cet ordre : octets de controle (tout octet < 0x20 sauf TAB,
+    CR, LF), puis parse YAML reel avec un loader qui accepte les tags HA.
+
+    Ne corrige rien, ne bloque rien. Rend (ok, lignes).
+    """
+    try:
+        import yaml
+    except ImportError:
+        return False, ["qualite : PyYAML absent, test impossible"]
+
+    class HALoader(yaml.SafeLoader):
+        pass
+
+    def _tag(loader, suffix, node):
+        if isinstance(node, yaml.ScalarNode):
+            return loader.construct_scalar(node)
+        if isinstance(node, yaml.SequenceNode):
+            return loader.construct_sequence(node, deep=True)
+        return loader.construct_mapping(node, deep=True)
+
+    HALoader.add_multi_constructor("!", _tag)
+
+    EXT = (".md", ".yaml", ".yml", ".py", ".sh", ".txt", ".json", ".js", ".svg")
+    cibles = []
+    for f in P1_FILES:
+        p = os.path.join(H, f)
+        if os.path.exists(p):
+            cibles.append(p)
+    for d in P1_DIRS:
+        p = os.path.join(H, d)
+        if os.path.isdir(p):
+            for root, dirs, files in os.walk(p):
+                for fn in files:
+                    cibles.append(os.path.join(root, fn))
+    docd = os.path.join(H, "docs")
+    if os.path.isdir(docd):
+        for root, dirs, files in os.walk(docd):
+            dirs[:] = [x for x in dirs if x not in ("__pycache__", "Dashboard_COMPLET")]
+            for fn in files:
+                cibles.append(os.path.join(root, fn))
+
+    octets, yaml_ko, bom_info, n = [], [], [], 0
+    for p in cibles:
+        if not p.lower().endswith(EXT) or ".bak" in p:
+            continue
+        try:
+            b = open(p, "rb").read()
+        except OSError:
+            continue
+        n += 1
+        mauvais = [(i, x) for i, x in enumerate(b) if x < 0x20 and x not in (9, 10, 13)]
+        if mauvais:
+            fin = len(b) - len(b.rstrip(b"\x00"))
+            note = " (dont %d NUL en fin, piste BOM)" % fin if fin else ""
+            octets.append((p.replace(H, ""), len(mauvais),
+                           ", ".join("%s@%d" % (hex(x), i) for i, x in mauvais[:4]) + note))
+            continue
+        # BOM UTF-8 en tete : toleree par PyYAML et Python 3, donc information
+        # seulement. Elle casserait un JSON ou un shell.
+        if b.startswith(b"\xef\xbb\xbf"):
+            bom_info.append(p.replace(H, ""))
+        if p.lower().endswith((".yaml", ".yml")):
+            try:
+                with open(p, encoding="utf-8") as fh:
+                    for _ in yaml.load_all(fh, Loader=HALoader):
+                        pass
+            except Exception as e:
+                yaml_ko.append((p.replace(H, ""), "%s: %s" % (type(e).__name__,
+                                                             str(e).splitlines()[0][:70])))
+
+    lignes = []
+    ok = not octets and not yaml_ko
+    lignes.append("qualite prod : %d fichier(s) texte, octets de controle=%d, YAML invalide=%d, BOM=%d -> %s"
+                  % (n, len(octets), len(yaml_ko), len(bom_info), "OK" if ok else "ECART"))
+    for rel, k, pos in octets:
+        lignes.append("   OCTETS %s | %d | %s" % (rel, k, pos))
+    for rel, err in yaml_ko:
+        lignes.append("   YAML   %s | %s" % (rel, err))
+    return ok, lignes
+
+
 def main():
     if not os.path.isdir(H):
         print("H: injoignable - palier 1 non verifie")
@@ -340,6 +429,12 @@ def main():
         "OK" if p1_ok else "ECART", "OK" if not p2_problems else "ECART",
         "OK" if not miss_assets else "ECART", len(new_items)))
 
+    try:
+        q_ok, q_lignes = qualite_prod()
+    except Exception as e:
+        q_ok, q_lignes = False, ["qualite prod : erreur %s" % e]
+    lines.extend(q_lignes)
+
     head = "CONTROLE PROD FONCTIONNELLE - %s (lecture seule)" % datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     out = [head] + lines
     print("\n".join(out))
@@ -356,7 +451,7 @@ def main():
         print("rapport : " + f)
     except Exception as e:
         print("rapport non ecrit : %s" % e)
-    return 0 if p1_ok else 1
+    return 0 if (p1_ok and q_ok) else 1
 
 
 if __name__ == "__main__":

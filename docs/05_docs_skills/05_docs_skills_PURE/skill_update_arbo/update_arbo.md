@@ -144,6 +144,7 @@ Fichier LOCAL = PROD : OK
 5. **secrets.yaml -> strictly forbidden**.
 6. **Do not modify the narrative sections** (REGLES DE CASSE, AUDIT, GITHUB URL patterns) unless explicitly asked.
 7. **"resync tree" said by Eric = update of IA_ARBO_DETAIL.md by this skill** (observed on 2026-10-18), not a GitHub -> local copy.
+8. **Count WITHOUT hidden files, and say so** (Eric, 2026-11-08). Counts use `Get-ChildItem -Recurse -File`, which skips hidden files and folders by default: NEVER add `-Force`. History of the trap: on 2026-10-18 the prod tree returned 482 files without hidden ones and 492 with, ten files starting with a dot; two reports made with different methods were no longer comparable. On 2026-11-08 `H:/docs` holds no hidden file at all, both methods agree, but the rule stands: a report made WITH hidden files must say so.
 
 ## Maintenance note
 
