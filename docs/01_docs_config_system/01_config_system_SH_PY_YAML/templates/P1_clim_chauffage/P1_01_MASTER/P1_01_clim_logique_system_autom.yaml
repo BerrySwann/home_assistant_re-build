@@ -2,52 +2,65 @@
 # │ PÔLE 1. TEMPLATE MASTER : LOGIQUE SYSTÈME CLIMATISATION COMPLÈTE         │
 # ╰──────────────────────────────────────────────────────────────────────────╯
 #
-# ## 📝 DESCRIPTION :
-# Fichier master centralisant toute la logique de calcul thermique :
-# détection du mode Été/Hiver, consignes de consigne, températures cibles,
-# confort jour/nuit, corrections par pièce et deltas ADEME. C'est le
-# cerveau du système thermique — toutes les automations clim en dépendent.
+# ## DESCRIPTION
+# Fichier master centralisant le calcul thermique : détection du mode été/hiver,
+# consigne, confort de base, confort jour et nuit, corrections par pièce, éco de
+# saison, moyennes et delta ADEME. Toutes les automations clim en dépendent.
 #
-# ## 🧮 CALCUL & SOURCES :
-# - sensor.th_balcon_nord_temperature : T° extérieure (sonde SONOFF balcon)
-# - sensor.seuil_non_chauffage : 18°C — seuil bascule heat/fan_only
-# - sensor.seuil_non_clim    : 26°C — seuil bascule off/cool
-# - sensor.consigne : lit seuil_non_chauffage (18°C) ou seuil_non_clim (26°C)
-# - sensor.temperature_t_conferentielle : consigne ± delta_1 (19°C hiver / 25°C été)
-# - Deltas fixes : delta_1=1, delta_2=2, delta_3=3, delta_5=5, delta_7=7 (°C)
-# - T° confort = t_conférentielle + (T°cible - consigne)
-# - T°cible modulée par T°ext (paliers < 12°C, > 32°C, > 40°C)
-# - Confort nuit été (mode cool) : FIXE à 26°C quoi qu'il arrive — priorité sommeil
-#   sur la conso (décision 2026-07-20, remplace l'ancien palier dynamique canicule).
+# ## CONSTANTES
+# - seuil_non_chauffage = 19 °C : seuil de bascule heat / off, et consigne d hiver
+# - seuil_non_clim      = 26 °C : seuil de bascule off / cool, et consigne d été
+# - temperature_eco_hiver = 17 °C, temperature_eco_ete = 28 °C
+# - delta_1 = 1, delta_2 = 2, delta_3 = 3, delta_5 = 5, delta_7 = 7
 #
+# ## MODE
+# mode_ete_hiver compare la sonde balcon aux deux seuils :
+#   sous 19 -> heat, de 19 a 26 -> off, a partir de 26 -> cool
+# La plage off, 19 a 26, est morte : les clims sont arrêtées, aucune consigne n est envoyée.
 #
-# ## 🔗 CHAÎNE DE DÉPENDANCES :
+# ## CHAINE DE CALCUL
+# consigne  = seuil_non_chauffage en heat, seuil_non_clim en cool
+# temperature_confort, le moteur :
+#   en heat : consigne + delta_2 sous 8 °C dehors, consigne + delta_1 sous 12, consigne au-dessus
+#   en cool : exterieur moins delta_7 moins delta_1 au-dessus de 34,
+#             exterieur moins delta_5 moins delta_1 au-dessus de 32, consigne en dessous
+# temperature_confort_jour = copie du confort
+# temperature_confort_nuit = 26 fixe en cool ; en heat, confort + delta_1 plafonne a seuil_non_chauffage
 #
-# | MATÉRIEL       | CAPTEUR BRUT (source)                              | CE FICHIER (unique_id)                             | AVAL                               |
-# |:---------------|:---------------------------------------------------|:---------------------------------------------------|:-----------------------------------|
-# | [calculé] (constantes fixes) | valeurs codées en dur                              | temperature_eco_hiver / _eco_ete / seuil_non_chauffage / seuil_non_clim / delta_1 / _2 / _3 / _5 / _7 | consommées par toutes les lignes suivantes |
-# | Sonde SONOFF Balcon Nord | sensor.th_balcon_nord_temperature                  | mode_ete_hiver / consigne / temperature_t_conferentielle | L1C3 Commandes Clim |
-# | [calculé] (interne, chaîné) | sensor.consigne / temperature_confort_jour / delta_1 / _2 | temperature_corrige_salon / _eric / _chambre       | L1C3 Commandes Clim                |
-# | Sonde SONOFF Balcon Nord + [calculé] | sensor.th_balcon_nord_temperature + consigne / delta_1 / _2 / _5 / _7 | temperature_cible / temperature_confort_jour / temperature_confort_nuit / temperature_eco_hiver_corrige / temperature_eco_ete_corrige | L1C3 Commandes Clim |
-# | Sondes SONOFF intérieures (6 pièces) | sensor.th_salon / _cellier / _cuisine / _bureau / _salle_de_bain / _chambre_temperature | temperature_moyenne_interieure                      | L1C2 Températures                  |
-# | [calculé]      | sensor.temperature_moyenne_interieure + th_balcon_nord_temperature / temperature_confort_jour | temperature_delta_value / _affichage / delta_ademe_recommande | L1C2 Températures                  |
+# ## CORRECTIONS PAR PIECE
+# Salon    : hiver, confort jour plafonne a 21 ; ete, 25 jusqu a 27 °C dehors, 26 au-dela
+# Bureau   : hiver, confort jour plafonne a 19 ; ete, 26 jusqu a 27 °C dehors, 27 au-dela
+# Chambre  : hiver, confort jour plafonne a 19 ; ete, 26 jusqu a 27 °C dehors, 27 au-dela
 #
-# ## ⚠️ IMPORTANT (PIÈGES) :
-# - Fichier CRITIQUE : toute modification impacte TOUTES les automations clim.
-# - seuil_non_clim remplace l'ancien seuil_non_chauffage_bas (même valeur 28°C).
-# - La logique absence (17°C eco, 18°C/19°C selon T°ext) est ici — ne pas
-#   dupliquer dans les automations.
-# - Les sensors Deltas (delta_1..7) sont des constantes déclarées ici pour
-#   éviter les valeurs codées en dur dans 10+ endroits t_conférents.
-# - temperature_moyenne_interieure exclut les sondes à 0 (reject '==0')
-#   pour éviter de baisser la moyenne sur une sonde hors ligne.
-# - delta_ademe_recommande utilise temperature_confort_JOUR (et non temperature_confort).
-# - temperature_confort_nuit en cool = 26°C FIXE, ignore désormais t_ext au-delà de 19°C
-#   et sensor.alerte_canicule (plus consommé ici) — choix délibéré confort sommeil > conso.
+# ## ECO DE SAISON
+# temperature_eco_hiver_corrige et _ete_corrige suivent les mêmes paliers que le confort :
+# plus delta_2 sous 8 °C dehors, plus delta_1 sous 12, valeur brute au-dessus.
 #
-# ## 🖥️ TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
-# - L1C3 Commandes Clim (toutes les consignes, états modes, T°cibles)
-# - L1C2 Températures (T° moyenne intérieure, delta intérieur/extérieur)
+# ## CHAINE DE DEPENDANCES
+#
+# | SOURCE | CAPTEUR | CE FICHIER | AVAL |
+# |:---|:---|:---|:---|
+# | constantes | valeurs en dur | eco_hiver, eco_ete, seuil_non_chauffage, seuil_non_clim, delta_1 a _7 | toutes les lignes suivantes |
+# | sonde balcon | sensor.th_balcon_nord_temperature | mode_ete_hiver, consigne, temperature_confort | L1C3 Commandes Clim |
+# | calculé | consigne, deltas, sonde balcon | temperature_confort_jour, temperature_confort_nuit | automations A0 et B0 |
+# | calculé | temperature_confort_jour | temperature_corrige_salon, _bureau, _chambre | L1C3 Commandes Clim |
+# | sondes intérieures 6 pièces | th_salon, th_cellier, th_cuisine, th_bureau, th_salle_de_bain, th_chambre | temperature_moyenne_interieure | L1C2 Températures |
+# | calculé | temperature_moyenne_interieure, sonde balcon, temperature_confort_jour | temperature_delta_value, _affichage, delta_ademe_recommande | L1C2 Températures |
+#
+# ## PIEGES
+# - Fichier CRITIQUE : toute modification impacte toutes les automations clim.
+# - temperature_cible et temperature_t_conferentielle ont ete supprimees. Ne pas les reintroduire
+#   sans recabler le calcul, l ancienne formule confort + (cible - consigne) n existe plus.
+# - temperature_corrige_eric est devenue temperature_corrige_bureau au renommage du 2026-11-03.
+# - temperature_confort_nuit en heat est plafonnee a seuil_non_chauffage, donc elle vaut 19 en pratique.
+#   Ses paliers de confort ne la traversent pas.
+# - temperature_moyenne_interieure exclut les sondes a 0, pour ne pas baisser la moyenne
+#   quand une sonde est hors ligne.
+# - delta_ademe_recommande utilise temperature_confort_jour, pas temperature_confort.
+#
+# ## TABLEAU DE BORD
+# - L1C3 Commandes Clim : consignes, modes, températures cibles
+# - L1C2 Températures : moyenne intérieure, delta intérieur/extérieur
 
 - sensor:
 # ┌──────────────────────────────────────┐
@@ -130,7 +143,7 @@
         {% endif %}
 
 # ┌───────────────────────────────────────────────────┐
-# │ CONSIGNES DE CONSIGNE                             │
+# │ CONSIGNES                                         │
 # └───────────────────────────────────────────────────┘
 
 # --- consigne ---
@@ -153,21 +166,8 @@
       unique_id: temperature_confort
       unit_of_measurement: "°C"
       state: >
-        {% set consigne = states('sensor.consigne') | float(19) %}
-        {% set d1 = states('sensor.delta_1') | float(1) %}
-        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
-          {{ (consigne - d1) | round(1) }}
-        {% else %}
-          {{ (consigne + d1) | round(1) }}
-        {% endif %}
-
-# --- temperature_confort_jour ---
-    - name: "Temperature confort Jour"
-      unique_id: temperature_confort_jour
-      unit_of_measurement: "°C"
-      state: >
-        {% set conf = states('sensor.temperature_confort') | float(20) %}
         {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+        {% set consigne = states('sensor.consigne') | float(19) %}
         {% set d1 = states('sensor.delta_1') | float(1) %}
         {% set d2 = states('sensor.delta_2') | float(2) %}
         {% set d5 = states('sensor.delta_5') | float(5) %}
@@ -175,24 +175,34 @@
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% if t_ext >= 34 %}{{ ((t_ext - d7) - d1) | round(1) }}
           {% elif t_ext > 32 %}{{ ((t_ext - d5) - d1) | round(1) }}
-          {% else %}{{ conf | round(1) }}{% endif %}
+          {% else %}{{ consigne | round(1) }}{% endif %}
         {% else %}
-          {% if t_ext < 8 %}{{ (conf - d1) | round(1) }}
-          {% elif t_ext < 12 %}{{ (conf - d1) | round(1) }}
-          {% else %}{{ conf | round(1) }}{% endif %}
+          {% if t_ext < 8 %}{{ (consigne + d2) | round(1) }}
+          {% elif t_ext < 12 %}{{ (consigne + d1) | round(1) }}
+          {% else %}{{ consigne | round(1) }}{% endif %}
         {% endif %}
+
+# --- temperature_confort_jour ---
+    - name: "Temperature confort Jour"
+      unique_id: temperature_confort_jour
+      unit_of_measurement: "°C"
+      state: >
+        {% set t_conf = states('sensor.temperature_confort') | float(0) %}
+        {{ t_conf | round(1) }}
 
 # --- temperature_confort_nuit ---
     - name: "Temperature confort nuit"
       unique_id: temperature_confort_nuit
       unit_of_measurement: "°C"
       state: >
-        {% set conf = states('sensor.temperature_confort') | float(20) %}
-        {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+        {% set seuil_chauff = states('sensor.seuil_non_chauffage') | float(18) %}
+        {% set t_conf = states('sensor.temperature_confort') | float(0) %}
         {% set d1 = states('sensor.delta_1') | float(1) %}
-        {% if is_state('sensor.mode_ete_hiver', 'cool') %}26
-        {% elif t_ext < 19 %}{{ [conf - d1, 19] | min | round(1) }}
-        {% else %}{{ [conf + d1, 19] | min | round(1) }}
+        {% set d2 = states('sensor.delta_2') | float(2) %}
+        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
+          {{ 26 }} {# nuit d ete bloquee a 26 #}
+        {% else %}
+          {{ [t_conf + d1, seuil_chauff] | min | round(1) }} {# stabilise la nuit l'hiver a 18 ou 19 #}
         {% endif %}
 
 # ┌─────────────────────────────────┐
@@ -209,13 +219,13 @@
       device_class: temperature
       state: >
         {% set d1 = states('sensor.delta_1') | float(1) %}
-        {% set d2 = states('sensor.delta_2') | float(2) %}
+        {% set d3 = states('sensor.delta_3') | float(2) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
-          {{ [t_ext - d1, 26] | min | int }}
+          {% if t_ext <= 27 %}{{ 25 }}{% else %}{{ 26 }}{% endif %}
         {% else %}
           {% set tccsj_s = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccsj_s + d2, 21] | min | round(1) }}
+          {{ [tccsj_s, 21] | min | round(1) }}
         {% endif %}
 
 # ┌─────────────────────────────────┐
@@ -231,10 +241,10 @@
         {% set d2 = states('sensor.delta_2') | float(2) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
-          {{ [t_ext + d1, 27] | min | int }}
+          {% if t_ext <= 27 %}{{ 26 }}{% else %}{{ 27 }}{% endif %}
         {% else %}
           {% set tccsj_b = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccsj_b - d2, 21] | min | round(1) }}
+          {{ [tccsj_b, 19] | min | round(1) }}
         {% endif %}
 
 # ┌─────────────────────────────────┐
@@ -250,10 +260,10 @@
         {% set d2 = states('sensor.delta_2') | float(2) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
-          {{ [t_ext + d1, 27] | min | int }}
+          {% if t_ext <= 27 %}{{ 26 }}{% else %}{{ 27 }}{% endif %}
         {% else %}
           {% set tccsj_c = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccsj_c - d2, 19] | min | int }}
+          {{ [tccsj_c, 19] | min | int }}
         {% endif %}
 
 # ┌────────────────────────────────────────────────┐

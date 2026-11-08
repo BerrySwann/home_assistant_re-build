@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--07-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--08-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 </div>
 
-Fichier GENERE le 2026-11-07 16:32 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-11-08 08:09 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_automations/gen_global_index_automations.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et categorie), YAML locaux 03_docs_automations_YAML (id local et commentaires), fiches 03_docs_automations_MD. Les liens sont relatifs a ce fichier.
 
@@ -21,13 +21,13 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
 
 - Automatisations en prod (automations.yaml) : 63
 - YAML locaux unitaires retenus (hors sauvegardes et AUTOMATIONS_YAML_ORIGINAL) : 68
-- Fiches .md retenues : 77 dont 65 rattachees a un YAML
+- Fiches .md retenues : 78 dont 65 rattachees a un YAML
 - Automatisations de la prod sans YAML local : 0
 - Automatisations de la prod sans fiche rattachee : 0
 - Automatisations sans entity_id dans le registre HA : 0
 - YAML locaux absents de la prod ou sans id : 4 (voir section Hors prod)
 - Erreurs de lecture YAML : 0
-- Fiches non rattachees a un YAML (fiches d'operation, specifications, etc.) : 12
+- Fiches non rattachees a un YAML (fiches d'operation, specifications, etc.) : 13
   - [03_docs_automations_MD/Automations_yaml_original/Automations.md](03_docs_automations_MD/Automations_yaml_original/Automations.md)
   - [03_docs_automations_MD/Backup_ha_GitHub/Git_alerte_ko/Git_alerte_ko.md](03_docs_automations_MD/Backup_ha_GitHub/Git_alerte_ko/Git_alerte_ko.md)
   - [03_docs_automations_MD/Gestion_des_stores/Gestion_store_bureau/Gestion_store_bureau.md](03_docs_automations_MD/Gestion_des_stores/Gestion_store_bureau/Gestion_store_bureau.md)
@@ -35,6 +35,7 @@ Sources : H:\automations.yaml (liste et id prod), registre HA (entity_id et cate
   - [03_docs_automations_MD/P1_01_Clim_chauffage/A0_clim_jour/A0_clim_jour.md](03_docs_automations_MD/P1_01_Clim_chauffage/A0_clim_jour/A0_clim_jour.md)
   - [03_docs_automations_MD/P1_01_Clim_chauffage/C_notif_temp_jour/C_notif_temp_jour.md](03_docs_automations_MD/P1_01_Clim_chauffage/C_notif_temp_jour/C_notif_temp_jour.md)
   - [03_docs_automations_MD/P1_01_Clim_chauffage/D_notif_temp_nuit/D_notif_temp_nuit.md](03_docs_automations_MD/P1_01_Clim_chauffage/D_notif_temp_nuit/D_notif_temp_nuit.md)
+  - [03_docs_automations_MD/P1_01_Clim_chauffage/REGULATION_CLIM_CHAUFFAGE.md](03_docs_automations_MD/P1_01_Clim_chauffage/REGULATION_CLIM_CHAUFFAGE.md)
   - [03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/C_watchdog_soufflant_SDB/C_watchdog_soufflant_SDB.md](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/C_watchdog_soufflant_SDB/C_watchdog_soufflant_SDB.md)
   - [03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_D_WATCHDOG_RADIATEUR_SDB/P1_XX_D_WATCHDOG_RADIATEUR_SDB.md](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_D_WATCHDOG_RADIATEUR_SDB/P1_XX_D_WATCHDOG_RADIATEUR_SDB.md)
   - [03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_SDB_soufflant_specification_2026/P1_XX_SDB_soufflant_specification_2026.md](03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_SDB_soufflant_specification_2026/P1_XX_SDB_soufflant_specification_2026.md)
