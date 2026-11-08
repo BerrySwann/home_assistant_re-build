@@ -92,7 +92,7 @@ Une seule action :
 ## ⚠️ Points d'attention
 
 - **Refactoring 2026-06** : logique inline (~250 lignes) déplacée dans le script master. L'automation est maintenant un simple wrapper de 30 lignes.
-- **SALON groupe_3 JOUR** : Eric seul → `tccsj_b` (comportement identique à l'ancienne version inline).
+- **SALON groupe_3 JOUR** : Eric seul → `tccsj_s`, comme les autres groupes depuis le 2026-11-08. Avant, ce cas recevait `tccsj_b`, la consigne du bureau, soit 3 °C de moins.
 - `trigger_id` et `trigger_entity_id` sont passés au script pour que la notification fenêtre reste ciblée.
 - Le `sensor_update` ne redémarre **pas** une clim déjà en `off` (protection maintenue dans le script).
 - **2026-09-20** : ajout de `max_exceeded: silent` (mode `queued`/max 5 conservés). Au démarrage de HA, les déclencheurs d'état se déclenchent en rafale et saturent la file ; l'avertissement « Maximum number of runs exceeded » est désormais silencieux, les runs en trop restent ignorés (sans conséquence : recalcul idempotent via le script master).

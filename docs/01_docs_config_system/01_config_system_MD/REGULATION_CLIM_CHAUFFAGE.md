@@ -89,7 +89,7 @@ il ecrase les 21 et 20 du confort. Les paliers de jour ne traversent pas la nuit
 
 ## 6. Les corrections par piece
 
-Elles s appliquent sur le confort jour, avec un plafond different par piece et par saison.
+Chaque piece a ses propres regles, differentes en hiver et en ete. En hiver ce sont des paliers fixes lus sur la sonde exterieure ; en ete, une seule marche entre 27 et 28 C dehors, sur leurs plafonds respectifs.
 
 | Piece | Hiver | Ete |
 |:--|:--|:--|
@@ -169,14 +169,19 @@ Le choix des cibles, avec les noms de groupe :
 
 | Groupe | Periode | Salon | Bureau | Chambre |
 |:--|:--|:--|:--|:--|
-| groupe_1, absent | jour | eco de saison | eco de saison | eco de saison |
-| groupe_2 | jour | valeur du salon | eco de saison | valeur chambre |
-| groupe_3 | jour | valeur du bureau | valeur du bureau | valeur chambre |
-| groupe_4 | jour | valeur du salon | valeur du bureau | valeur chambre |
+| groupe_1, absent | jour et nuit | eco de saison | eco de saison | eco de saison |
+| groupe_2 | jour | tccsj_s | tccsj_b | tccsj_c |
+| groupe_3 | jour | tccsj_s | tccsj_b | tccsj_c |
+| groupe_4 | jour | tccsj_s | tccsj_b | tccsj_c |
 | tout groupe sauf 1 | nuit | valeur nuit | valeur nuit | valeur nuit |
 
-Le point a retenir : quand Eric est seul, le salon prend la consigne du **bureau**, pas la sienne. C est un
-comportement historique, conserve apres essai le 2026-11-07.
+Les trois groupes de jour sont interchangeables depuis le 2026-11-08. Le script ne choisit plus la source
+selon qui est present, il envoie a chaque piece celle qu elle calcule.
+
+Deux comportements historiques ont ete supprimes ce jour-la. En `groupe_3`, le salon recevait `tccsj_b`, la
+consigne du bureau, donc 3 C de moins que la sienne : c etait un reste de l epoque ou Mamour et Eric avaient
+chacun leur piece, conserve apres l essai du 2026-11-07. Et en `groupe_2`, le bureau basculait en eco en
+chauffage tout en gardant `tccsj_b` en clim.
 
 Chaque commande est conditionnee a deux verifications : la prise de la clim doit etre alimentee, et le flag
 d arret securise doit etre a off. Si la clim est deja eteinte et que le declencheur est `sensor_update`,
@@ -184,33 +189,52 @@ le script ne la rallume pas.
 
 ## 9. Recapitulatif par plage
 
-Valeurs que la chaine complete produit, script compris, avec la consigne a 19 en hiver et 26 en ete.
-
 D abord ce que la chaine CALCULE, avant que le script ne choisisse :
 
 | Exterieur | Mode | Confort | Jour | Nuit | Salon tccsj_s | Bureau tccsj_b | Chambre tccsj_c | Eco |
 |:--|:--|--:|--:|--:|--:|--:|--:|--:|
-| 0 a 7 | heat | 21 | 21 | 19 | 21 | 19 | 19 | 19 |
-| 8 a 11 | heat | 20 | 20 | 19 | 20 | 19 | 19 | 18 |
-| 12 a 18 | heat | 19 | 19 | 19 | 19 | 19 | 19 | 17 |
-| 19 a 25 | off | 19 | 19 | 19 | 19 | 19 | 19 | 17 |
-| 26 a 27 | cool | 26 | 26 | 26 | 25 | 26 | 26 | 27 |
-| 28 a 32 | cool | 26 | 26 | 26 | 26 | 27 | 27 | 28 |
-| 33 | cool | 27 | 27 | 26 | 26 | 27 | 27 | 28 |
-| 34 | cool | 26 | 26 | 26 | 26 | 27 | 27 | 28 |
-| 35 | cool | 27 | 27 | 26 | 26 | 27 | 27 | 28 |
-| 36 a 40 | cool | 28 a 32 | 28 a 32 | 26 | 26 | 27 | 27 | 28 |
+| 0 a 7 | heat | 21.0 | 21.0 | 19.0 | 22 | 20 | 19 | 19.0 |
+| 8 a 11 | heat | 20.0 | 20.0 | 19.0 | 21 | 19 | 19 | 18.0 |
+| 12 a 18 | heat | 19.0 | 19.0 | 19.0 | 20 | 18 | 18 | 17.0 |
+| 19 a 25 | off | 19.0 | 19.0 | 19.0 | 20 | 18 | 18 | 17.0 |
+| 26 a 27 | cool | 26.0 | 26.0 | 26 | 25 | 26 | 26 | 27.0 |
+| 28 a 32 | cool | 26.0 | 26.0 | 26 | 26 | 27 | 27 | 28.0 |
+| 33 | cool | 27.0 | 27.0 | 26 | 26 | 27 | 27 | 28.0 |
+| 34 | cool | 26.0 | 26.0 | 26 | 26 | 27 | 27 | 28.0 |
+| 35 | cool | 27.0 | 27.0 | 26 | 26 | 27 | 27 | 28.0 |
+| 36 a 40 | cool | 30.0 | 30.0 | 26 | 26 | 27 | 27 | 28.0 |
 
-Puis ce que le script ENVOIE, qui n est pas la meme chose, parce qu il choisit la source selon le groupe :
+Puis ce que le script ENVOIE. Depuis le 2026-11-08 les trois cibles sont symetriques :
 
 | Groupe | Periode | Salon recoit | Bureau recoit | Chambre recoit |
 |:--|:--|:--|:--|:--|
 | groupe_1 | jour et nuit | eco | eco | eco |
-| groupe_2 | jour heat | tccsj_s | **eco** | tccsj_c |
-| groupe_2 | jour cool | tccsj_s | **tccsj_b** | tccsj_c |
-| groupe_3 | jour | **tccsj_b** | tccsj_b | tccsj_c |
+| groupe_2 | jour | tccsj_s | tccsj_b | tccsj_c |
+| groupe_3 | jour | tccsj_s | tccsj_b | tccsj_c |
 | groupe_4 | jour | tccsj_s | tccsj_b | tccsj_c |
 | tous sauf 1 | nuit | temp_nuit | temp_nuit | temp_nuit |
+
+Les groupes 2, 3 et 4 sont interchangeables. Avant le 2026-11-08, le groupe_3 envoyait au salon
+`tccsj_b` et le groupe_2 basculait le bureau en eco : ces deux exceptions ont ete supprimees.
+
+## 9 bis. Variante seuil_non_chauffage a 18
+
+Le seuil de chauffage vaut 19 en service. S il passe a 18, la consigne et la nuit tombent d un degre,
+mais les trois PIECES ne bougent plus : depuis le 2026-11-08 elles ont des paliers fixes, lus sur la
+sonde exterieure, et ne dependent plus de la consigne.
+
+| Exterieur | Mode 19 | Conf 19 | Nuit 19 | Mode 18 | Conf 18 | Nuit 18 | Pieces (identiques) |
+|:--|:--|--:|--:|:--|--:|--:|:--|
+| sous 8 | heat | 21.0 | 19.0 | heat | 20.0 | 18.0 | salon 22, bureau 20, chambre 19 |
+| 8 a 12 | heat | 20.0 | 19.0 | heat | 19.0 | 18.0 | salon 21, bureau 19, chambre 19 |
+| 12 a 17 | heat | 19.0 | 19.0 | heat | 18.0 | 18.0 | salon 20, bureau 18, chambre 18 |
+| 17 a 18 | heat | 19.0 | 19.0 | heat | 18.0 | 18.0 | salon 20, bureau 18, chambre 18 |
+| 18 a 19 | heat | 19.0 | 19.0 | off | 18.0 | 18.0 | salon 20, bureau 18, chambre 18 |
+| 19 a 26 | off | 19.0 | 19.0 | off | 18.0 | 18.0 | salon 20, bureau 18, chambre 18 |
+
+Seuls le mode, le confort, la nuit et l eco suivent le seuil. Les pieces, elles, sont desormais
+insensibles a cette valeur : c est la consequence directe de la refonte du 2026-11-08.
+La zone off gagne un degre en bas : elle commence a 18 au lieu de 19.
 
 ## 9 ter. Ce que recoit chaque piece, groupe par groupe
 

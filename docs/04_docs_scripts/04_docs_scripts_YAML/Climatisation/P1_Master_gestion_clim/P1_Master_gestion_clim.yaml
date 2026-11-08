@@ -213,29 +213,23 @@ p1_master_gestion_clim:
           {{ eco_saison_val }}
           {% elif 'groupe_1' in groupe_presence %}
           {{ temp_eco_hc if mode_saison == 'heat' else temp_eco_ec }}
-          {% elif periode == 'jour' and 'groupe_3' in groupe_presence %}
-          {{ tccsj_b }}
-          {% elif periode == 'jour' and ('groupe_2' in groupe_presence or 'groupe_4' in groupe_presence) %}
-          {{ tccsj_s }}
           {% elif periode == 'jour' %}
-          {{ temp_eco_hc if mode_saison == 'heat' else temp_eco_ec }}
+          {{ tccsj_s }}
           {% else %}
           {{ temp_nuit }}
           {% endif %}
+          
         t_bureau_target: >-
           {% if mode_degrade_eco == 'true' %}
           {{ eco_saison_val }}
           {% elif 'groupe_1' in groupe_presence %}
           {{ temp_eco_hc if mode_saison == 'heat' else temp_eco_ec }}
-          {% elif periode == 'jour' and ('groupe_3' in groupe_presence or 'groupe_4' in groupe_presence) %}
-          {{ tccsj_b }}
-          {% elif periode == 'jour' and 'groupe_2' in groupe_presence %}
-          {{ temp_eco_hc if mode_saison == 'heat' else tccsj_b }}
           {% elif periode == 'jour' %}
-          {{ temp_eco_hc if mode_saison == 'heat' else temp_eco_ec }}
+          {{ tccsj_b }}
           {% else %}
           {{ temp_nuit }}
           {% endif %}
+          
         t_chambre_target: >-
           {% if mode_degrade_eco == 'true' %}
           {{ eco_saison_val }}

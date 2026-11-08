@@ -224,8 +224,10 @@
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {% if t_ext <= 27 %}{{ 25 }}{% else %}{{ 26 }}{% endif %}
         {% else %}
-          {% set tccsj_s = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccsj_s, 21] | min | round(1) }}
+          {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+          {% if t_ext < 8 %}{{ 22 }}
+          {% elif t_ext < 12 %}{{ 21 }}
+          {% else %}{{ 20 }}{% endif %}
         {% endif %}
 
 # ┌─────────────────────────────────┐
@@ -243,8 +245,10 @@
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {% if t_ext <= 27 %}{{ 26 }}{% else %}{{ 27 }}{% endif %}
         {% else %}
-          {% set tccsj_b = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccsj_b, 19] | min | round(1) }}
+          {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+          {% if t_ext < 8 %}{{ 20 }}
+          {% elif t_ext < 12 %}{{ 19 }}
+          {% else %}{{ 18 }}{% endif %}
         {% endif %}
 
 # ┌─────────────────────────────────┐
@@ -262,8 +266,9 @@
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {% if t_ext <= 27 %}{{ 26 }}{% else %}{{ 27 }}{% endif %}
         {% else %}
-          {% set tccsj_c = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccsj_c, 19] | min | int }}
+          {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+          {% if t_ext < 12 %}{{ 19 }}
+          {% else %}{{ 18 }}{% endif %}
         {% endif %}
 
 # ┌────────────────────────────────────────────────┐

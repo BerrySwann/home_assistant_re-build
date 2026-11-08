@@ -77,18 +77,23 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 |:---|:---|:---|
 | `groupe_1` (absent) | - | eco (hc ou ec selon saison) |
 | `groupe_2` (Mamour) | JOUR | `tccsj_s` |
-| `groupe_3` (Eric) | JOUR | `tccsj_b` |
+| `groupe_3` (Eric) | JOUR | `tccsj_s` |
 | `groupe_4` (Tous) | JOUR | `tccsj_s` |
 | tout | NUIT | `temp_nuit` |
+
+Les trois groupes de jour recoivent la MEME source depuis le 2026-11-08. Avant, `groupe_3` recevait `tccsj_b`. 
 
 #### BUREAU
 | Groupe | Période | Cible |
 |:---|:---|:---|
 | `groupe_1` (absent) | - | eco |
-| `groupe_2` (Mamour) | JOUR | eco |
+| `groupe_2` (Mamour) | JOUR | `tccsj_b` |
 | `groupe_3` (Eric) | JOUR | `tccsj_b` |
 | `groupe_4` (Tous) | JOUR | `tccsj_b` |
 | tout | NUIT | `temp_nuit` |
+
+Les trois groupes de jour recoivent la MEME source depuis le 2026-11-08. Avant, `groupe_2` recevait l eco en
+chauffage et `tccsj_b` en clim.
 
 #### CHAMBRE
 | Groupe | Période | Cible |
@@ -158,7 +163,9 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 
 - **Libelles de `hs_list`** : le rapport de sante nomme les capteurs muets sous forme courte (`corrige_salon`, `corrige_bureau`, `corrige_chambre`, `eco_hiver_corrige`, `eco_ete_corrige`, `groupe`). Ces etiquettes sont ecrites en dur dans le script et ne suivent PAS automatiquement le renommage des entites : apres chaque renommage de capteur il faut les corriger separement, dans la copie locale ET dans la prod. Un oubli ne casse rien a l'execution, il fait seulement diverger les deux copies en silence.
 - **HA reecrit `scripts.yaml`** : apres chaque enregistrement depuis l'interface, Home Assistant reformate le fichier (guillemets, passages a la ligne, echappements). Un diff brut montre alors des dizaines de lignes differentes qui ne sont que de la mise en forme : la comparaison doit se faire sur le YAML relu, jamais sur le texte.
-- **SALON groupe_3 JOUR** : Eric seul -> `tccsj_b`, la consigne du bureau, pas celle du salon. Ecart de 3 C par rapport aux groupes 2 et 4. Comportement historique conserve apres essai de l'autre option le 2026-11-07 : Eric a prefere l'ancien.
+- **SALON groupe_3 JOUR** : comportement historique supprime le 2026-11-08. Eric seul recoit desormais
+  `tccsj_s` comme les autres groupes. L ancien comportement (`tccsj_b`, la consigne du bureau, soit 3 C de moins)
+  avait ete conserve apres l essai du 2026-11-07, il a ete retire depuis.
 - `sensor_update` ne redémarre pas une clim déjà en `off` (protection intentionnelle via `trigger_id`).
 - Script `mode: queued, max: 10` - les déclenchements simultanés sont mis en file.
 - **Logique 3 sorties (09-09)** : si un capteur reste HS après les 10 essais, le script ne calcule plus avec des valeurs au hasard : OFF (critique), mode dégradé éco de saison (groupe ou temp normale HS), ou normal. Le message part une seule fois, au 10e cycle.
