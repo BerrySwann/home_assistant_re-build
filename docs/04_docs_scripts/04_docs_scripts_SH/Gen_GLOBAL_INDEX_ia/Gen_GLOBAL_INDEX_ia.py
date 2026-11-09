@@ -67,6 +67,10 @@ DESC = {
   "Claude, pour les automations et messages qui dependent de la presence",
   "Referentiel de la presence : logique de sensor.groupe (automatisation, reseau cible) et de sensor.presence (format dans les notifications).",
   "Automation clim, message notify avec presence, logique groupe WiFi."),
+  "00_IA_SOUS_CONTEXT_IA/IA_PRISE_eCO/IA_PRISE_eCO.md": (
+   "Claude, pour tout diagnostic d entites indisponibles ou de prises eCO",
+   "Fiche des prises coupees volontairement et des prises du systeme eCO : cascade avec la prise de comptage, groupes de presence, ce que chaque prise coupe, entites indisponibles normales (dit par Eric le 2026-11-09).",
+   "Rapport d entites indisponibles, diagnostic d un appareil qui ne repond pas, modification de sensor.eco_prises_config ou de l automation eCO."),
   "00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.bak_2026_09_28.md": (
    "Personne en usage courant ; Eric pour retrouver un ancien etat",
    "Archive de la chaine de dependances au 2026-09-28, date de fin de la tenue manuelle annoncee dans son en-tete (la carte vivante etait alors DEPENDANCES_GLOBALES_HERMES_V1.md). Conservee pour son journal et ses constats.",

@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--08-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--09-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,7 +13,7 @@
 
 </div>
 
-Fichier GENERE le 2026-11-08 21:28 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
+Fichier GENERE le 2026-11-09 20:43 par docs/04_docs_scripts/04_docs_scripts_SH/gen_global_index_scripts/gen_global_index_scripts.py. Ne pas modifier a la main : /histo le regenere et ecrase les modifications.
 
 ## Difference entre les index SH, PY et YAML
 
@@ -81,7 +81,7 @@ Fichier GENERE le 2026-11-08 21:28 par docs/04_docs_scripts/04_docs_scripts_SH/g
 | [boite_claude_watch_hermes.py](04_docs_scripts_SH/boite_claude_watch_hermes/boite_claude_watch_hermes.py) | python | absent de H:\.scripts | - | - | - | [boite_claude_watch_hermes.md](04_docs_scripts_SH_MD/boite_claude_watch_hermes/boite_claude_watch_hermes.md) | boite_claude_watch_hermes |
 | [check_xx_repertoires_hermes.py](04_docs_scripts_SH/check_xx_repertoires_hermes/check_xx_repertoires_hermes.py) | python | absent de H:\.scripts | - | - | - | [check_xx_repertoires_hermes.md](04_docs_scripts_SH_MD/check_xx_repertoires_hermes/check_xx_repertoires_hermes.md) | check_xx_repertoires_hermes |
 | [edition_tracee_hermes.py](04_docs_scripts_SH/edition_tracee_hermes/edition_tracee_hermes.py) | python | absent de H:\.scripts | - | - | - | [edition_tracee_hermes.md](04_docs_scripts_SH_MD/edition_tracee_hermes/edition_tracee_hermes.md) | edition_tracee_hermes |
-| [Hermes_audit_md5_trigul_unitaire.py](04_docs_scripts_SH/Hermes_audit_md5_trigul_3md/Hermes_audit_md5_trigul_unitaire.py) | python | absent de H:\.scripts | - | - | - | [Hermes_audit_md5_trigul_unitaire.md](04_docs_scripts_SH_MD/Hermes_audit_md5_trigul_unitaire/Hermes_audit_md5_trigul_unitaire.md) | Hermes_audit_md5_trigul_3md |
+| [hermes_audit_md5_trigul_unitaire.py](04_docs_scripts_SH/Hermes_audit_md5_trigul_3md/hermes_audit_md5_trigul_unitaire.py) | python | absent de H:\.scripts | - | - | ha-trigul | [Hermes_audit_md5_trigul_unitaire.md](04_docs_scripts_SH_MD/Hermes_audit_md5_trigul_unitaire/Hermes_audit_md5_trigul_unitaire.md) | Hermes_audit_md5_trigul_3md |
 | [hermes_audit_trigul_arbres.py](04_docs_scripts_SH/Hermes_audit_md5_trigul_3md/hermes_audit_trigul_arbres.py) | python | absent de H:\.scripts | - | - | ha-trigul | [Hermes_audit_trigul_arbres.md](04_docs_scripts_SH_MD/Hermes_audit_trigul_arbres/Hermes_audit_trigul_arbres.md) | Hermes_audit_md5_trigul_3md |
 | [hermes_gen_dependances.py](04_docs_scripts_SH/hermes_gen_dependances/hermes_gen_dependances.py) | python | absent de H:\.scripts | - | - | - | [hermes_gen_dependances.md](04_docs_scripts_SH_MD/hermes_gen_dependances/hermes_gen_dependances.md) | hermes_gen_dependances |
 | [renomme_chemins_trace_hermes.py](04_docs_scripts_SH/renomme_chemins_trace_hermes/renomme_chemins_trace_hermes.py) | python | absent de H:\.scripts | - | - | - | [renomme_chemins_trace_hermes.md](04_docs_scripts_SH_MD/renomme_chemins_trace_hermes/renomme_chemins_trace_hermes.md) | renomme_chemins_trace_hermes |

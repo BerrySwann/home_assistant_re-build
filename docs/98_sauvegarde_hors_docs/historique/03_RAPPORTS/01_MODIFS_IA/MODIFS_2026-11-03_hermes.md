@@ -67,3 +67,4 @@ NOTE : la session du 2026-11-02 s'est poursuivie apres l'extinction du PC et a r
 2026-11-03 21:09:52 | hermes | MODIFIE | C:\Users\Berry Swann\Documents\ReBuild\docs\01_docs_config_system\01_config_system_SH_PY_YAML\templates\P1_clim_chauffage\P1_01_MASTER\P1_01_clim_logique_system_autom.yaml | avant=218b179d apres=6813fabc | la PROD avait ete modifiee directement apres mon passage : branche ajoutee 'temp_ext < 8 -> base + delta_2' (variable d2) et seuil du 12 remplace par un elif. Le controle de prod fonctionnelle a leve l ecart. Le local est realigne sur la prod, qui fait foi pour le comportement ; bak : P1_01_clim_logique_system_autom.bak_2026_11_03_21h09m52s.yaml
 2026-11-03 21:10:32 | hermes | ACTION | PC | arret programme (histo-final)
 2026-11-04 21:53:50 | hermes | ACTION | PC | arret programme (histo-final)
+2026-11-08 21:41:43 | hermes | ACTION | PC | arret programme (histo-final)

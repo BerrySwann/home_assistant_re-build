@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--09-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -14,6 +14,7 @@
 </div>
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-11-09 (20h45, /histo-final) - entrée ajoutée : IA_PRISE_eCO.md (fiche des prises eCO, docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_PRISE_eCO/)*
 *Dernière mise à jour : 2026-10-29 (22h) - lien de la fiche Audit_md5_yaml.md remis sur son dossier (01_scripts.sh_md/Audit_md5_yaml/) après le rangement des fiches de .scripts un dossier par fichier ; aucun fichier ajouté ni supprimé*
 *Dernière mise à jour : 2026-10-31 (18h44) - entrées ajoutées : Push_5C.py et Sync_98_sauvegarde.py (scripts python, recompté : 16)*
 *Dernière mise à jour : 2026-11-01 (matin) - index des scripts séparés par type : GLOBAL_INDEX_SCRIPTS_SH.md (.sh) et GLOBAL_INDEX_SCRIPTS_PY.md (.py, nouveau), classés comme MOC_SCRIPTS (ce qui tourne dans Home Assistant, puis ce qui n'y tourne pas, par IA Claude et Hermes) ; ancienne fiche Mf_vigilance_images.md de 01_config_system_MD/scripts retirée ; dossiers Audit_md5_md_yaml retirés de la prod. Compteur de l'en-tête non recompté.*
@@ -124,6 +125,13 @@
 <summary><b>IA_P4_PRESENCE.md</b> &nbsp;|&nbsp; sensor.presence, format notif avec présence, logique groupe Wi-Fi</summary>
 <blockquote>
 📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md">Doc</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>IA_PRISE_eCO.md</b> &nbsp;|&nbsp; Prises coupées volontairement et prises eCO : cascade avec la prise de comptage, groupes de présence, ce que chacune coupe, entités indisponibles normales</summary>
+<blockquote>
+📄 <a href="docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_PRISE_eCO/IA_PRISE_eCO.md">Doc</a>
 </blockquote>
 </details>
 

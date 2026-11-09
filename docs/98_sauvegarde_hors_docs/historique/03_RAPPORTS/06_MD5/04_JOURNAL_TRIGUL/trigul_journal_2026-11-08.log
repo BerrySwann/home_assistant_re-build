@@ -129,3 +129,46 @@
 11:37:53.668 | ATTENTION | SYNTHESE       | C_emplacements
 11:37:53.669 | ECHEC     | SYNTHESE       | D_prod_fonctionnelle
 11:37:53.670 | INFO      | LANCEUR        | FIN DU LANCEUR - code 1
+19:04:22.315 | INFO      | LANCEUR        | DEBUT du trigul, python 3.14.7, journal C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\04_JOURNAL_TRIGUL\trigul_journal_2026-11-08.log
+19:04:22.319 | INFO      | LANCEUR        | H: accessible : True
+19:04:22.320 | INFO      | A_arbres       | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_trigul_arbres.py
+19:04:31.727 | INFO      | A_arbres       | FIN code de retour 0 en 9.4 s, 3 lignes de sortie
+19:04:31.729 | SORTIE    | A_arbres       | RESULTAT : 1072 chemins ; SYNC 812 ; a traiter 38 ; ecarts attendus 222 ; erreurs du script 0
+19:04:31.730 | SORTIE    | A_arbres       | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\00_VERIF_FINAL_TRIGUL_ARBRES\trigul_arbres_2026-11-08.txt
+19:04:31.732 | SORTIE    | A_arbres       | rapport html : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\00_VERIF_FINAL_TRIGUL_ARBRES\trigul_arbres_2026-11-08.html
+19:04:31.733 | INFO      | A_arbres       | rapport ecrit 45077 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\00_VERIF_FINAL_TRIGUL_ARBRES\trigul_arbres_2026-11-08.txt
+19:04:31.740 | INFO      | A_arbres       | rapport ecrit 292534 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\00_VERIF_FINAL_TRIGUL_ARBRES\trigul_arbres_2026-11-08.html
+19:04:31.742 | OK        | A_arbres       | verdict de l etape
+19:04:31.743 | INFO      | B1_profond     | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\hermes_audit_md5_trigul_3md\hermes_audit_md5_trigul_unitaire.py
+19:04:32.423 | INFO      | B1_profond     | FIN code de retour 0 en 0.7 s, 25 lignes de sortie
+19:04:32.424 | SORTIE    | B1_profond     | [AUTOMATIONS] statut | id | prod | local | fichier local | alias
+19:04:32.425 | SORTIE    | B1_profond     | DIFFERENT                | 1775244989013  | prod=EE03AF1C local=F941FD40 | Gestion_des_stores\Gestion_simple_du_store_salon_matin_soir\COPIE_avant_presence_2026_11_05_archive\Gestion_optimisee_du_stor
+19:04:32.427 | SORTIE    | B1_profond     | 
+19:04:32.428 | SORTIE    | B1_profond     | [SCRIPTS] statut | nom | prod | local | fichier local
+19:04:32.429 | SORTIE    | B1_profond     | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\01_TRIGUL_PROFOND\trigul_profond_2026-11-08.txt EA3D4377
+19:04:32.431 | INFO      | B1_profond     | rapport ecrit 17339 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\01_TRIGUL_PROFOND\trigul_profond_2026-11-08.txt
+19:04:32.432 | OK        | B1_profond     | verdict de l etape
+19:04:32.434 | INFO      | C_emplacements | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Verif_emplacements\Verif_emplacements.py
+19:04:34.333 | INFO      | C_emplacements | FIN code de retour 0 en 1.9 s, 4 lignes de sortie
+19:04:34.335 | SORTIE    | C_emplacements | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\03_VERIF_EMPLACEMENTS\verif_emplacements_2026-11-08.txt
+19:04:34.336 | SORTIE    | C_emplacements | GitHub : commit 2274fbf1 du 2026-11-08T17:10:00Z (HAOS auto-backup: 2026-11-08 18:10:00 CET (HA 2026.10.4))
+19:04:34.338 | SORTIE    | C_emplacements | ANOMALIES : x 1
+19:04:34.339 | SORTIE    | C_emplacements | RESULTAT : 100 fichiers suivis - PROD 1 - SYNC 99 - presents ailleurs qu en local 0 - structure non conforme 0
+19:04:34.341 | INFO      | C_emplacements | rapport ecrit 16216 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\03_VERIF_EMPLACEMENTS\verif_emplacements_2026-11-08.txt
+19:04:34.350 | OK        | C_emplacements | verdict de l etape
+19:04:34.352 | INFO      | D_prod_fonctionnelle | DEBUT C:\Users\Berry Swann\Documents\ReBuild\docs\04_docs_scripts\04_docs_scripts_SH\Check_prod_fonctionnelle\Check_prod_fonctionnelle.py
+19:04:35.381 | INFO      | D_prod_fonctionnelle | FIN code de retour 1 en 1.0 s, 163 lignes de sortie
+19:04:35.382 | SORTIE    | D_prod_fonctionnelle | PALIER 2 (donnees) : OK - notifs/*.txt : 6 fichiers, 6 sur GitHub ; export dashboard : Dashboard_2026_11_07.yaml (age 1 jour(s))
+19:04:35.384 | SORTIE    | D_prod_fonctionnelle | IMAGES du dashboard : OK - 18 attendues, 18 presentes
+19:04:35.385 | SORTIE    | D_prod_fonctionnelle | DERIVE : aucun element inconnu a la racine de H:
+19:04:35.387 | SORTIE    | D_prod_fonctionnelle | RESULTAT : palier1=ECART palier2=OK images=OK derive=0
+19:04:35.388 | SORTIE    | D_prod_fonctionnelle | rapport : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\06_PROD_FONCTIONNELLE\prod_fonctionnelle_2026-11-08.txt
+19:04:35.389 | ECHEC     | D_prod_fonctionnelle | code de retour 1 (0 attendu)
+19:04:35.391 | INFO      | D_prod_fonctionnelle | rapport ecrit 14268 octets : C:\Users\Berry Swann\Documents\ReBuild\historique\03_RAPPORTS\06_MD5\06_PROD_FONCTIONNELLE\prod_fonctionnelle_2026-11-08.txt
+19:04:35.397 | ATTENTION | D_prod_fonctionnelle | la sortie contient "ECART" : resultat partiel
+19:04:35.399 | ECHEC     | D_prod_fonctionnelle | verdict de l etape
+19:04:35.400 | OK        | SYNTHESE       | A_arbres
+19:04:35.402 | OK        | SYNTHESE       | B1_profond
+19:04:35.403 | OK        | SYNTHESE       | C_emplacements
+19:04:35.404 | ECHEC     | SYNTHESE       | D_prod_fonctionnelle
+19:04:35.406 | INFO      | LANCEUR        | FIN DU LANCEUR - code 1

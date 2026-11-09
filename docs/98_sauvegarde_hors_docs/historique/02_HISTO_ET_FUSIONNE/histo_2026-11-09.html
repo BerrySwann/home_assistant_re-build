@@ -1,0 +1,54 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-11-09</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-11-09</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-09_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-11-09</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : N/A (check profond a 18:02, fiche IA_PRISE_eCO de 18:12 a 19:23, regle YAML a 20:03)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_PRISE_eCO/IA_PRISE_eCO.md</code> - cree : prises coupees volontairement et les 7 prises du systeme eCO (cascade, groupes, ce que chacune coupe) <strong>[v]</strong></li>
+<li>🟢 <code>Claude md SAVE/CLAUDE.md</code> - regle "PAS DE VALEUR EN DUR DANS UN YAML" (lignes 578 a 583, apres Zero Helper UI) <strong>[v]</strong></li>
+<li>🟢 <code>historique/03_RAPPORTS/01_MODIFS_IA/MODIFS_2026-11-09_claude.md</code> - journal des modifs du jour <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 <code>IA_PRISE_eCO.md</code> - points a confirmer par Eric : message de 18:37 (tv_chambre ou pc_bureau), references batteries 27100 et 16100, sens de "connecte avec" le Roborock, prise de comptage du bureau PC, graphie "sheinerser", nom des boules Alexa <strong>[a confirmer]</strong></li>
+<li>🟠 Regle "pas de valeur en dur" contre Zero Helper UI : Eric a repondu "hormis les helpers ca va de soi", lecture A (helpers autorises) ou B (helpers interdits) non tranchee <strong>[EN COURS]</strong></li>
+<li>🟠 <code>automation.automation_eco_prises</code> - erreur from_json None (4 fois, derniere 2026-11-09 06:22, deduit : course au demarrage de HA car <code>sensor.eco_prises_config</code> change d'etat a 06:22:49) ; correctif <code>from_json(default=[])</code> non applique, ordre d'Eric requis <strong>[a deployer]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 <code>IA_PRISE_eCO.md</code> : prise tete de lit prise pour <code>prise_reserve_nous_a1z</code> -&gt; corrigee en <code>switch.prise_tete_de_lit_chambre</code> (a1z est une prise retiree par Eric) <strong>[resolu]</strong></li>
+<li>🔴 <code>IA_PRISE_eCO.md</code> : sens des groupes note "inconnu" alors que CLAUDE.md (l.786 a 793) le donne -&gt; fiche corrigee <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Constats du check profond 2026-11-09 18:03 (etabli)</h4>
+<ul>
+<li>Trigul arbres : 1074 chemins, 841 SYNC, 10 a traiter, 223 ecarts attendus, 0 erreur du script ; GitHub commit 95d18931 (backup HA 17:10)</li>
+<li>Emplacements : 100 suivis, 99 SYNC, 1 anomalie (detail non relu)</li>
+<li>Prod fonctionnelle : palier 1 OK, palier 2 OK, images OK, derive 0 ; qualite prod 999 fichiers, 0 octet de controle, 0 YAML invalide, 14 BOM inoffensifs</li>
+<li>Integrations File : 0 anomalie ; config HA valide, 0 repair, Spook 0 ghost</li>
+<li>2163 entites dont 53 indisponibles : normales (prises coupees) pour les bougies Hue et la TV 70pus7855_12 ; Studio Code Server arrete par l'automation d'economie ; a1z orpheline ; bridge zigbee2mqtt a traiter</li>
+<li>Mises a jour en attente : core 2026.11.0, vigieau 0.13.1, blitzortung v1.8.0, ha-mcp 9.1.2</li>
+</ul>
+<h4>📋 Taches backlog (TODO.html)</h4>
+<ul>
+<li>📌 Nabu Casa expire le 2026-11-11 (renouvellement a verifier)</li>
+<li>📌 MAJ HA core 2026.11.0 : sauvegarde complete verifiee avant, compter les sauvegardes manuelles (3 au dernier releve)</li>
+<li>📌 Referencer <code>IA_PRISE_eCO</code> dans les index (IA_GLOBAL_INDEX_memoire, IA_INDEX_NAVIGATION)</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Reponses d'Eric aux points a confirmer de la fiche IA_PRISE_eCO et lecture A ou B pour les helpers ; ordre d'Eric pour le correctif eco_prises et pour la MAJ du core</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

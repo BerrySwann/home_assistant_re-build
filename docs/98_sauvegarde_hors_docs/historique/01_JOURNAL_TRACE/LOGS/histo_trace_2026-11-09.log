@@ -1,0 +1,39 @@
+20:42:23.998 | SEQ_DEBUT  | SEQUENCE           | histo-final
+20:42:24.069 | NOTE       | tokens             | debut : inconnu (compteur non visible)
+20:42:24.139 | NOTE       | menage             | definitif : oui
+20:42:24.203 | DEBUT      | automation_off     | 
+20:42:35.179 | FIN        | automation_off     | OK automation.nouvelle_automatisation off confirme (resultat ha_call_service)
+20:42:35.240 | DEBUT      | journal            | 
+20:43:17.504 | FIN        | journal            | OK histo_2026-11-09_s1.md ecrit
+20:43:42.284 | DEBUT      | sync_index         | 
+20:45:22.235 | FIN        | sync_index         | OK journal GLOBAL_INDEX_REPO pousse (miroir+racine), 5 generateurs casses=0, sans_description corrige, recap_index, 2 fiches IA
+20:46:13.673 | DEBUT      | fusionne           | 
+20:46:26.546 | FIN        | fusionne           | OK JOURNAL_FUSIONNE_2026-07-15_2026-11-09.md cree, fences 688 pairs, banniere 1, CRLF, sans BOM
+20:46:26.606 | DEBUT      | obsidian           | 
+20:46:35.244 | FIN        | obsidian           | OK fusionne et histo S1 copies, MD5 identiques
+20:46:35.305 | DEBUT      | pages_html         | 
+20:48:15.255 | FIN        | pages_html         | OK pages jour et fusionne creees, 2 originaux .md en corbeille, 6 anciens fusionnes .md sans page gardes
+20:48:15.318 | NOTE       | menage             | definitif : oui
+20:48:24.860 | NOTE       | pages_html         | correctif: histo_2026-11-09_s1.md envoye a la corbeille apres coup (page du jour verifiee), 2 originaux .md en corbeille au total
+20:48:49.240 | DEBUT      | menage             | definitif oui, menage docs+Claude md SAVE puis historique
+20:51:56.761 | FIN        | menage             | OK docs+SAVE: 81 renommes, 153 corbeille, 9 collisions; historique+TODO: 31 renommes, 179 corbeille; corbeille Windows: 0 element > 3 mois; 3 fiches .bak a revoir a la main
+20:52:14.525 | DEBUT      | export_5B          | 
+20:52:14.676 | FIN        | export_5B          | OK un seul export en prod racine: Dashboard_2026_11_07.yaml; dernier export local: Dashboard_2026_11_07.yaml
+20:52:14.739 | DEBUT      | push_docs          | 
+20:53:20.636 | FIN        | push_docs          | OK push 5C: 47 fichiers pousses, 0 MD5 different, 6 PROD INCONNUE poussees (ancienne prod dans TEMPO push_5C_L_vers_P_2026-11-09_20h52m59s), 2 seuls en prod non supprimes, Check_XX_presents OK
+20:53:33.261 | DEBUT      | tree               | 
+20:54:24.925 | NOTE       | tree               | IA_ARBO_DETAIL: totaux local, prod et GitHub rafraichis (commit f0c12ecc), sous-comptages laisses
+20:54:40.050 | FIN        | tree               | OK IA_ARBO_DETAIL totaux rafraichis, push avec le rattrapage
+20:54:50.394 | DEBUT      | controles_6B       | 
+20:55:10.898 | FIN        | controles_6B       | OK ecarts=0 apres correction de la fiche IA_PRISE_eCO (light.turn_off lu comme entite); dossiers=13 (attendu, IA_CARTE_EMPLACEMENTS et autres)
+20:55:11.471 | DEBUT      | controles_6C       | 
+20:55:11.891 | DEBUT      | controles_6D       | 
+20:55:14.362 | DEBUT      | controles_6E       | 
+20:55:24.108 | FIN        | controles_6C       | OK global_index: index=8 liens=989 casses=0 ecarts=0
+20:55:24.167 | FIN        | controles_6E       | OK integrations File: ANOMALIES 0, RESULTAT OK
+20:55:35.592 | FIN        | controles_6D       | ATTENTION ANOMALIES x4: 3 GitHub en attente du backup HA, 1 README racine prod differente du local (connu, push en attente d ordre d Eric)
+20:55:35.652 | DEBUT      | controles_6F       | 
+20:55:43.612 | FIN        | controles_6F       | ATTENTION sources sans fiche: 0 (SH 41/41, YAML 9/9, dashboard 67/67); badges fiches=264 a_corriger=5 corrigees=5 a_decider=0; .bak: 3 a revoir a la main (IA_ARBO_DETAIL.bak_2026_11_08, Check_prod_fonctionnelle.bak_2026_11_01, hermes_aligne.bak_2026_11_04)
+20:55:43.674 | DEBUT      | controles_6G       | 
+20:56:12.325 | FIN        | controles_6G       | ATTENTION Check_DEPENDANCES ecarts=15 : 14 YAML docs modifies depuis l'entete 2026-11-05 21:30 (sessions du 06 au 08, preexistant, non repare) ; IA_GLOBAL_INDEX regenere, 0 ecart
+20:56:12.384 | DEBUT      | push_docs          | rattrapage
