@@ -83,7 +83,7 @@
     - name: "Seuil non chauffage"
       unique_id: seuil_non_chauffage
       unit_of_measurement: "°C"
-      state: "18"
+      state: "19"
 
 # --- seuil_non_clim ---
     - name: "Seuil non clim"
