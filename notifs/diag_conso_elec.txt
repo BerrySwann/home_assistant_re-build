@@ -22804,3 +22804,4 @@ Home Assistant notifications (Log started: 2025-12-20T19:43:03.751958+00:00)
 [Eric: WIFI/CELL] | 10/11 18:15 | Hyg:0.03 | Cuis:0.18 | Froid:0.62 | Chauff:3.5 | Avg 4:191.9 | Multi:1.09 | Lum:0.22 | Autres:0.27 | Ti:21.1°C | Ext:14.2°C | DUT S/R/B/C:1.8/0.0/4.9/6.2
 [Eric: WIFI/CELL] | 10/11 18:30 | Hyg:0.03 | Cuis:0.18 | Froid:0.63 | Chauff:3.61 | Avg 4:195.2 | Multi:1.19 | Lum:0.23 | Autres:0.27 | Ti:21.3°C | Ext:14.2°C | DUT S/R/B/C:2.0/0.0/5.1/6.4
 [Eric: WIFI/CELL] | 10/11 18:45 | Hyg:0.03 | Cuis:0.18 | Froid:0.63 | Chauff:3.67 | Avg 4:195.9 | Multi:1.29 | Lum:0.24 | Autres:0.3 | Ti:21.2°C | Ext:14.2°C | DUT S/R/B/C:2.0/0.0/5.2/6.5
+[Eric: WIFI/CELL] | 10/11 19:00 | Hyg:0.03 | Cuis:0.18 | Froid:0.64 | Chauff:3.74 | Avg 4:196.9 | Multi:1.29 | Lum:0.25 | Autres:0.3 | Ti:21.3°C | Ext:14.2°C | DUT S/R/B/C:2.0/0.0/5.3/6.6

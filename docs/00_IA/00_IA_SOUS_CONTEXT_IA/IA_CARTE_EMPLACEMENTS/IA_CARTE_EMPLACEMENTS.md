@@ -64,6 +64,8 @@ Trois emplacements seulement : L, PM, GD. Controles par `/ha-trigul` (superposit
 ## 4. Cas traites ailleurs
 
 - `automations.yaml` et `scripts.yaml` : une fiche YAML par unite en local, comparaison unite par unite par l'etape profonde de `/ha-trigul`.
+- La procedure, pour ces deux fichiers (Eric, 2026-11-10) : **on prend de la prod, on la met dans le dossier ORIGINAL, on ouvre le YAML, on compare**. Concretement : `H:\automations.yaml` est copie dans `03_docs_automations\03_docs_automations_YAML\AUTOMATIONS_YAML_ORIGINAL\`, `H:\scripts.yaml` est copie dans `04_docs_scripts\04_docs_scripts_SH\04_docs_script_ORIGINAL\`, puis chacun est compare aux fichiers YAML locaux. Ces deux dossiers ORIGINAL ne sont pas un rangement : c'est la copie de reference sur laquelle la comparaison se fait.
+- On ne compare JAMAIS les deux gros fichiers entre eux : ils n'ont pas le meme format. HA reecrit `automations.yaml` en liste avec deux espaces d'indentation de plus, d'ou 63/63 en logique contre 3/63 en octets.
 - `Dashboard_*.yaml` a la racine de la prod : etape 5B de `/histo` (tous les exports gardes en local, un seul en prod dans `Dashboard_COMPLET`).
 - Fichiers `.bak` : uniquement en local, jamais sur H: ni D:.
 
