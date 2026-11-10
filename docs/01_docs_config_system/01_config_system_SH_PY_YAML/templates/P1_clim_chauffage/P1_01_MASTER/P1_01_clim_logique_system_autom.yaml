@@ -108,6 +108,35 @@
       state: "7"
       unit_of_measurement: "°C"
 
+# ┌───────────────────────────────────────────────────────────┐
+# │ OFFSETS DE CAPTEUR PAR PIECE                              │
+# └───────────────────────────────────────────────────────────┘
+# Les clims mesurent la temperature sur leur retour d air, qui
+# lit sous l ambiance reelle. Mesure du 2026-11-10, en regime
+# stable : bureau et chambre rendent +3,0 au-dessus de la
+# consigne, le salon +1,5. Ces offsets ne sont pas appliques
+# ici : ils le sont par le script au moment de l envoi, pour
+# que temperature_corrige_* garde le sens "temperature visee".
+# Le salon demarre a 1,0 sur demande d Eric, pour tester a 21.
+
+# --- offset_salon ---
+    - name: "Offset Salon"
+      unique_id: offset_salon
+      unit_of_measurement: "°C"
+      state: "1"
+
+# --- offset_bureau ---
+    - name: "Offset Bureau"
+      unique_id: offset_bureau
+      unit_of_measurement: "°C"
+      state: "3"
+
+# --- offset_chambre ---
+    - name: "Offset Chambre"
+      unique_id: offset_chambre
+      unit_of_measurement: "°C"
+      state: "3"
+
 # ┌───────────────────────────────────────────────────┐
 # │ DÉTECTION DU MODE GÉNÉRAL MODE ETE/HIVER          │
 # └───────────────────────────────────────────────────┘
@@ -194,6 +223,26 @@
           {{ [t_conf - d2, 26] | min | round(1) }} {# stabilise la nuit l'ete entre 25 et 27 #}
         {% else %}
           {{ [t_conf + d1, seuil_chauff] | min | round(1) }} {# stabilise la nuit l'hiver a 18 ou 19 #}
+        {% endif %}
+
+# --- temperature_confort_nuit_pieces ---
+    - name: "Temperature confort nuit pieces"
+      unique_id: temperature_confort_nuit_pieces
+      unit_of_measurement: "°C"
+      state: >
+        {#- 2026-11-10 (Eric) : le salon reste a 19 la nuit, bureau et chambre
+            descendent a 18. En hiver cette nuit vaut seuil_non_chauffage - delta_1,
+            soit 18 avec les constantes actuelles. En ete elle reprend la nuit commune. -#}
+        {% set seuil_chauff = states('sensor.seuil_non_chauffage') | float(18) %}
+        {% set t_conf = states('sensor.temperature_confort') | float(0) %}
+        {% set d1 = states('sensor.delta_1') | float(1) %}
+        {% set d2 = states('sensor.delta_2') | float(2) %}
+        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
+          {{ [t_conf - d2, 26] | min | round(1) }}
+        {% else %}
+          {#- En hiver cette nuit vaut le plafond, point. Le t_conf + d1 de la nuit commune
+              ne servirait a rien ici : il vaut 21 ou 22, toujours au-dessus du plafond. -#}
+          {{ (seuil_chauff - d1) | round(1) }}
         {% endif %}
 
 # ┌─────────────────────────────────┐

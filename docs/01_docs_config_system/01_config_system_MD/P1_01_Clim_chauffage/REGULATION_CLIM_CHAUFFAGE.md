@@ -136,6 +136,48 @@ Aucune ne recopie plus le confort jour, et le groupe de presence ne change plus 
 2026-11-08, `groupe_2`, `groupe_3` et `groupe_4` recoivent tous `tccsj_s`, `tccsj_b` et `tccsj_c`.
 La seule exception reste `groupe_1`, qui envoie l eco aux trois.
 
+## 6 bis. Les offsets de capteur
+
+Les clims mesurent sur leur retour d air, pas au milieu de la piece, et cette mesure lit sous l ambiance
+reelle. Mesure du 2026-11-10 sur la nuit, en regime stable : consigne 19 au bureau sortait 22,0, consigne 19
+a la chambre sortait 21,8 a 22,0, consigne 20 au salon sortait 21,5. Les deux premieres derivent de 3 C, le
+salon de 1,5 C.
+
+Trois capteurs constants portent ces offsets, declares avec les parametres fixes du master : `offset_salon`
+a 1, `offset_bureau` a 3, `offset_chambre` a 3. Le salon demarre a 1 et non 1,5 sur decision d Eric du
+2026-11-10 : il veut tester la consommation avec une piece a 21 C avant de descendre a 2.
+
+L offset n est PAS applique dans le master. `temperature_corrige_*` garde son sens de temperature visee,
+celle que le tableau de bord affiche. C est le script qui soustrait, au dernier moment, sur la valeur
+envoyee a la clim. Pour viser 18 au bureau, la clim recoit 15.
+
+Le sens est le meme en hiver et en ete : le capteur sous-estime, donc en chaud la piece depasse la cible et
+en froid elle passerait dessous. C est toujours une soustraction.
+
+Les planchers passent : salon 19 au pire cas pour un minimum accepte de 16, bureau et chambre 15 pour un
+minimum de 10.
+
+Ce reglage reste a confirmer. Il vient d une seule nuit et d une clim en phase de chauffe ; si le biais
+differe a l arret, l offset ne sera juste qu en chauffage actif.
+
+### La nuit, deux cibles et non une
+
+Jusqu au 2026-11-10 le capteur `temperature_confort_nuit` servait les trois pieces et valait 19. Sur demande
+d Eric, le bureau et la chambre descendent a 18 la nuit alors que le salon reste a 19. Un second capteur a
+donc ete cree : `temperature_confort_nuit_pieces`, meme formule que la nuit commune mais bridee un delta_1
+plus bas en hiver, soit `seuil_non_chauffage - delta_1` = 18. En ete il rend la meme chose que la nuit
+commune.
+
+Le script envoie `temp_nuit` au salon, qui vaut 19, et `temp_nuit_p` au bureau et a la chambre, qui vaut 18.
+Les offsets s appliquent ensuite comme partout.
+
+| periode | salon | bureau | chambre |
+|:--|:--|:--|:--|
+| jour vise | 20 | 18 | 18 |
+| jour envoye | 19 | 15 | 15 |
+| nuit vise | 19 | 18 | 18 |
+| nuit envoye | 18 | 15 | 15 |
+
 ## 7. L eco de saison
 
 L eco a une valeur brute, 17 en hiver et 28 en ete, et une valeur corrigee par la temperature exterieure.
