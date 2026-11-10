@@ -31,6 +31,8 @@ Six actions, plus les etapes 5B et 5C, enchainees sans interruption :
 
 Ne jamais demander confirmation entre les etapes. Les faire dans la foulee. Seule exception : le DRY-RUN du menage (etape 5) a la premiere execution sur un dossier, qui s'arrete pour presenter la liste et attendre le go de l'utilisateur (voir les garde-fous de l'etape 5).
 
+**JAMAIS DE BLOCAGE : ON SAUTE ET ON REMONTE (Eric, 2026-11-10).** /histo et /histo-final sont lances quand Eric n'est PAS devant le PC. Aucune etape ne doit rester en attente d'une reponse humaine, aucune erreur ne doit arreter la sequence. Quand quelque chose coince : sauter le fichier problematique et continuer, ou sauter l'etape et passer a la suivante. Dans les deux cas REMONTER l'information : une ligne par element saute dans le rapport final, avec le fichier ou l'etape, la raison, et ce qui n'a donc pas ete fait. Un rapport qui dit 'tout est OK' alors que des etapes ont ete sautees est un mensonge ; dire 'trois etapes sautees, voici lesquelles' est un bon rapport. Seule chose qu'on ne saute jamais : une action IRREVERSIBLE non verifiee (suppression sans copie MD5 controlee), la on s'abstient et on le remonte comme un saut.
+
 ## HISTO DEFINITIF OU NON (decide par Eric le 2026-10-31)
 
 Le menage des `.bak` de `docs` et `Claude md SAVE` n'a lieu que si l'histo est definitif.
