@@ -160,23 +160,19 @@ minimum de 10.
 Ce reglage reste a confirmer. Il vient d une seule nuit et d une clim en phase de chauffe ; si le biais
 differe a l arret, l offset ne sera juste qu en chauffage actif.
 
-### La nuit, deux cibles et non une
+### La nuit, une seule cible
 
-Jusqu au 2026-11-10 le capteur `temperature_confort_nuit` servait les trois pieces et valait 19. Sur demande
-d Eric, le bureau et la chambre descendent a 18 la nuit alors que le salon reste a 19. Un second capteur a
-donc ete cree : `temperature_confort_nuit_pieces`, meme formule que la nuit commune mais bridee un delta_1
-plus bas en hiver, soit `seuil_non_chauffage - delta_1` = 18. En ete il rend la meme chose que la nuit
-commune.
-
-Le script envoie `temp_nuit` au salon, qui vaut 19, et `temp_nuit_p` au bureau et a la chambre, qui vaut 18.
-Les offsets s appliquent ensuite comme partout.
+Le 2026-11-10 un second capteur de nuit avait ete cree pour faire descendre le bureau et la chambre a 18
+alors que le salon restait a 19. Il a ete retire le meme soir sur decision d Eric, qui veut y revenir plus
+tard. La nuit repasse donc par le seul `temperature_confort_nuit`, plafonne a `seuil_non_chauffage` : 19
+pour les trois pieces. Les offsets s appliquent ensuite.
 
 | periode | salon | bureau | chambre |
 |:--|:--|:--|:--|
 | jour vise | 20 | 18 | 18 |
 | jour envoye | 19 | 15 | 15 |
-| nuit vise | 19 | 18 | 18 |
-| nuit envoye | 18 | 15 | 15 |
+| nuit vise | 19 | 19 | 19 |
+| nuit envoye | 18 | 16 | 16 |
 
 ## 7. L eco de saison
 

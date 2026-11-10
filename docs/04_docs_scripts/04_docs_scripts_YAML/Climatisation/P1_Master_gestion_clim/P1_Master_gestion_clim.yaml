@@ -196,6 +196,9 @@ p1_master_gestion_clim:
         tccsj_s: "{{ states('sensor.temperature_corrige_salon') | float(states('sensor.temperature_confort_jour') | float) }}"
         tccsj_b: "{{ states('sensor.temperature_corrige_bureau') | float(states('sensor.temperature_confort_jour') | float) }}"
         tccsj_c: "{{ states('sensor.temperature_corrige_chambre') | float(states('sensor.temperature_confort_jour') | float) }}"
+        off_s: "{{ states('sensor.offset_salon') | float(0) }}"
+        off_b: "{{ states('sensor.offset_bureau') | float(0) }}"
+        off_c: "{{ states('sensor.offset_chambre') | float(0) }}"
 
     # ──────────────────────────────────────────────
     # 5. CALCUL DES CIBLES PAR PIÈCE (SELON PÉRIODE)
@@ -301,7 +304,7 @@ p1_master_gestion_clim:
                 entity_id: climate.clim_salon_rm4_mini
               data:
                 hvac_mode: "{% if trigger_id == 'sensor_update' and is_state('climate.clim_salon_rm4_mini', 'off') %}\n  off\n{% else %}\n  {{ mode_saison }}\n{% endif %}"
-                temperature: '{{ t_salon_target }}'
+                temperature: '{{ (t_salon_target | float) - (off_s | float) }}'
         - alias: LOGIQUE BUREAU
           choose:
           - alias: 'VÉRIFICATION : SÉCURITÉ BUREAU (PRISE + ARRET)'
@@ -319,7 +322,7 @@ p1_master_gestion_clim:
                 entity_id: climate.clim_bureau_rm4_mini
               data:
                 hvac_mode: "{% if trigger_id == 'sensor_update' and is_state('climate.clim_bureau_rm4_mini', 'off') %}\n  off\n{% else %}\n  {{ mode_saison }}\n{% endif %}"
-                temperature: '{{ t_bureau_target }}'
+                temperature: '{{ (t_bureau_target | float) - (off_b | float) }}'
         - alias: LOGIQUE CHAMBRE
           choose:
           - alias: 'VÉRIFICATION : SÉCURITÉ CHAMBRE (PRISE + ARRET)'
@@ -342,7 +345,7 @@ p1_master_gestion_clim:
               target:
                 entity_id: climate.clim_chambre_rm4_mini
               data:
-                temperature: '{{ t_chambre_target }}'
+                temperature: '{{ (t_chambre_target | float) - (off_c | float) }}'
       - alias: 'PAUSE : SÉCURITÉ RÉCEPTION'
         delay: 00:00:02
       - alias: 'NOTIF : RÉSUMÉ DE L''ÉTAT DES CLIMATISATIONS'

@@ -12,6 +12,7 @@
 
 </div>
 
+*Derniere mise a jour : 2026-11-10 (soir, /histo-final S1 : docs 2173 dont 1058 sauvegardes, historique 605 dont 104 sauvegardes et 0 fichier a la racine, 00_IA 77, 01_docs_config_system 244, 02_docs_dashboard 480, 03_docs_automations 436, 04_docs_scripts 307, 05_docs_skills 108, 98_sauvegarde_hors_docs 508, 99_docs_MD_system 10)*
 *Derniere mise a jour : 2026-11-06 (soir, /histo-final S1 : session application GEMAYA EDL, aucun YAML HA touche ; docs 2067 dont 1030 sauvegardes, historique 561 dont 104 sauvegardes, 01_docs_config_system 222, 02_docs_dashboard 482, 03_docs_automations 459, 04_docs_scripts 291, 99_docs_MD_system 11 ; PROD H:/docs 996 ; GitHub commit 2ffdb743, 2255 objets dont 1443 dans docs/ ; menage .bak : 19 renommes, 32 a la corbeille Windows ; sous-comptages de la grille laisses au releve du 2026-10-31 ; push prod non fait, la prod est tenue par Claude)*
 *Derniere mise a jour : 2026-11-05 (soir, /histo-final S1 : docs 2089, historique 15 fichiers a la racine, 01_docs_config_system 222, 02_docs_dashboard 484, 03_docs_automations 472, 04_docs_scripts 295, 99_docs_MD_system 11 ; PROD H:/docs 996 ; GitHub commit 79bf6666 ; menage .bak : 50 renommes, 69 a la corbeille Win)*
 *Derniere mise a jour : 2026-11-04 (soir, /histo-final S1 : docs 2114, historique 13 fichiers a la racine, 01_docs_config_system 226, 02_docs_dashboard 494, 03_docs_automations 462, 04_docs_scripts 304, 99_docs_MD_system 11 ; PROD H:/docs 995 ; GitHub commit c638a4f2 ; menage .bak : 17 renommes, 19 a la corbeille Win)*
@@ -121,7 +122,7 @@
 │ │   │                                         │                                                                                      │
 │ │   └── histo.md                              │ (= copie du skill + ses sauvegardes)                                                 │
 │ │                                             │                                                                                      │
-│ └── docs/                                     │ (2150 fichiers dont 1019 sauvegardes)                                                │
+│ └── docs/                                     │ (2173 fichiers dont 1058 sauvegardes)                                                │
 │     │                                         │                                                                                      │
 │     ├── 00_IA/                                │ (12 dont 9 sauvegardes hors 00_IA_SOUS_CONTEXT_IA/ ; les fichiers html, rapports d'audit,    │
 │     │   │                                     │ grille tarifaire et png cites avant ne sont plus ici)                                │

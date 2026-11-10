@@ -225,26 +225,6 @@
           {{ [t_conf + d1, seuil_chauff] | min | round(1) }} {# stabilise la nuit l'hiver a 18 ou 19 #}
         {% endif %}
 
-# --- temperature_confort_nuit_pieces ---
-    - name: "Temperature confort nuit pieces"
-      unique_id: temperature_confort_nuit_pieces
-      unit_of_measurement: "°C"
-      state: >
-        {#- 2026-11-10 (Eric) : le salon reste a 19 la nuit, bureau et chambre
-            descendent a 18. En hiver cette nuit vaut seuil_non_chauffage - delta_1,
-            soit 18 avec les constantes actuelles. En ete elle reprend la nuit commune. -#}
-        {% set seuil_chauff = states('sensor.seuil_non_chauffage') | float(18) %}
-        {% set t_conf = states('sensor.temperature_confort') | float(0) %}
-        {% set d1 = states('sensor.delta_1') | float(1) %}
-        {% set d2 = states('sensor.delta_2') | float(2) %}
-        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
-          {{ [t_conf - d2, 26] | min | round(1) }}
-        {% else %}
-          {#- En hiver cette nuit vaut le plafond, point. Le t_conf + d1 de la nuit commune
-              ne servirait a rien ici : il vaut 21 ou 22, toujours au-dessus du plafond. -#}
-          {{ (seuil_chauff - d1) | round(1) }}
-        {% endif %}
-
 # ┌─────────────────────────────────┐
 # │ CORRECTIONS SPÉCIFIQUES         │
 # └─────────────────────────────────┘
