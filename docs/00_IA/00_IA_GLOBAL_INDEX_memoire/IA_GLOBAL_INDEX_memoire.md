@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--09-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--10-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,8 +13,8 @@
 
 </div>
 
-> Fichier GENERE le 2026-11-09 20:56 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
-> 15 fichiers de contenu, 51 sauvegardes (.bak), 0 sans description.
+> Fichier GENERE le 2026-11-10 19:19 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
+> 15 fichiers de contenu, 58 sauvegardes (.bak), 0 sans description.
 
 > 🚨🚨🚨 **GYROPHARE ROUGE - DANS HOME ASSISTANT TOUT EST A PLAT** 🚨🚨🚨
 >
@@ -49,14 +49,14 @@ Un dossier par fichier. Chargés a la demande : Claude ne les lit que si la tach
 | [IA_INTEGRATIONS_CARTES.md](../00_IA_SOUS_CONTEXT_IA/IA_INTEGRATIONS_CARTES/IA_INTEGRATIONS_CARTES.md) | Claude, pour valider un YAML de dashboard | Referentiel des integrations HA (HACS, core, add-ons), des cartes du dashboard et de la palette de couleurs. | YAML dashboard a valider, type custom:* inconnu, integration manquante, nouvelle carte a ajouter. | oui | OK (MD5 identique) |
 | [IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md](../00_IA_SOUS_CONTEXT_IA/IA_NOM_DES_REPERTOIRES_ET_FICHIERS/IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md) | Claude et Hermes (qui s'aligne dessus) pour nommer les dossiers et fichiers de docs ; Eric pour valider les regles | Regles de nommage des repertoires et des fichiers du dossier docs (poles, abreviations, accents, niveaux, releve des ecarts a renommer). Copie du maitre historique/IA_NOM_DES_REPERTOIRES_ET_FICHIERS.md ; statut brouillon a valider par Eric. | Avant de creer, renommer ou deplacer un fichier ou un dossier de docs ; pour savoir quels noms sont encore en ecart. | oui | OK (MD5 identique) |
 | [IA_P4_PRESENCE.md](../00_IA_SOUS_CONTEXT_IA/IA_P4_PRESENCE/IA_P4_PRESENCE.md) | Claude, pour les automations et messages qui dependent de la presence | Referentiel de la presence : logique de sensor.groupe (automatisation, reseau cible) et de sensor.presence (format dans les notifications). | Automation clim, message notify avec presence, logique groupe WiFi. | oui | OK (MD5 identique) |
-| [IA_PRISE_eCO.md](../00_IA_SOUS_CONTEXT_IA/IA_PRISE_eCO/IA_PRISE_eCO.md) | Claude, pour tout diagnostic d entites indisponibles ou de prises eCO | Fiche des prises coupees volontairement et des prises du systeme eCO : cascade avec la prise de comptage, groupes de presence, ce que chaque prise coupe, entites indisponibles normales (dit par Eric le 2026-11-09). | Rapport d entites indisponibles, diagnostic d un appareil qui ne repond pas, modification de sensor.eco_prises_config ou de l automation eCO. | non | DIFFERENT de la prod |
+| [IA_PRISE_eCO.md](../00_IA_SOUS_CONTEXT_IA/IA_PRISE_eCO/IA_PRISE_eCO.md) | Claude, pour tout diagnostic d entites indisponibles ou de prises eCO | Fiche des prises coupees volontairement et des prises du systeme eCO : cascade avec la prise de comptage, groupes de presence, ce que chaque prise coupe, entites indisponibles normales (dit par Eric le 2026-11-09). | Rapport d entites indisponibles, diagnostic d un appareil qui ne repond pas, modification de sensor.eco_prises_config ou de l automation eCO. | non | OK (MD5 identique) |
 | [IA_SKILLS_INVENTAIRE.md](../00_IA_SOUS_CONTEXT_IA/IA_SKILLS_INVENTAIRE/IA_SKILLS_INVENTAIRE.md) | Eric, et Claude ou Hermes pour aligner les skills | Inventaire des skills Hermes regroupees par sujet, avec les skills communes a Claude en face a face. | Savoir quelle skill existe, aligner les skills de Claude et d'Hermes. Pas dans la table de lecture de CLAUDE.md, pas pousse en prod. | non | OK (MD5 identique) |
 
 ## Memoires de Claude (00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire)
 
 | Fichier | Qui s'en sert | Son but | Quand le lire | Cite dans CLAUDE.md | Prod |
 |---|---|---|---|---|---|
-| [DEPENDANCES_GLOBALES_CLAUDE_memoire.md](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md) | Claude (il la tient a jour via /sync_index et /histo) ; Hermes a sa propre version dans docs/99_docs_MD_system/DEPENDANCES_GLOBALES_HERMES | Chaine de dependances du dashboard : matrice des 18 vignettes, entites, fichiers et automations par domaine, scripts, fichiers config racine. Citee par IA_CONTEXT_BASE, IA_ARBO_DETAIL, IA_INDEX_NAVIGATION et IA_NOM_DES_REPERTOIRES_ET_FICHIERS. | Apres validation d un YAML, d une automation ou d une vignette ; pour savoir quelles entites et quels fichiers dependent d une vignette. | oui | OK (MD5 identique) |
+| [DEPENDANCES_GLOBALES_CLAUDE_memoire.md](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md) | Claude (il la tient a jour via /sync_index et /histo) ; Hermes a sa propre version dans docs/99_docs_MD_system/DEPENDANCES_GLOBALES_HERMES | Chaine de dependances du dashboard : matrice des 18 vignettes, entites, fichiers et automations par domaine, scripts, fichiers config racine. Citee par IA_CONTEXT_BASE, IA_ARBO_DETAIL, IA_INDEX_NAVIGATION et IA_NOM_DES_REPERTOIRES_ET_FICHIERS. | Apres validation d un YAML, d une automation ou d une vignette ; pour savoir quelles entites et quels fichiers dependent d une vignette. | oui | DIFFERENT de la prod |
 
 ## Sauvegardes (.bak)
 
@@ -65,13 +65,13 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 | Dossier | Nombre de sauvegardes |
 |---|---|
 | [00_IA_CONTEXT_BASE](../00_IA_CONTEXT_BASE/) | 3 |
-| [00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/) | 6 |
-| [00_IA_GLOBAL_INDEX_memoire](./) | 3 |
+| [00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/) | 9 |
+| [00_IA_GLOBAL_INDEX_memoire](./) | 6 |
 | [00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 4 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE](../00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS](../00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_BADGES_FICHES](../00_IA_SOUS_CONTEXT_IA/IA_BADGES_FICHES/) | 3 |
-| [00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS](../00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/) | 3 |
+| [00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS](../00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/) | 4 |
 | [00_IA_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA](../00_IA_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/) | 3 |
@@ -95,59 +95,3 @@ Tous sont verifies par /histo (liens casses, existence, prod).
 | [ENTITES_GLOBAL_INDEX.md](../../99_docs_MD_system/ENTITES_GLOBAL_INDEX/ENTITES_GLOBAL_INDEX.md) | Index des entites, sans generateur : tenu a la main. | check_global_index.py |
 | [IA_GLOBAL_INDEX_memoire.md](IA_GLOBAL_INDEX_memoire.md) | Ce fichier, genere par gen_global_index_ia.py. | etape 11 de /histo + check_global_index.py |
 
-<!-- RECAP-ENTITES:DEBUT -->
-
-## Recapitulatif des entites citees par cet index
-
-Total : **684 entites**. Origine de chacune : type, puis le nom de l integration telle qu elle apparait dans Appareils et services.
-
-| origine | nombre | explication |
-|:---|---:|:---|
-| CREE template | 248 | creee par un YAML du depot, dossier `template`, sans aucune integration dans Appareils et services |
-| NAT mqtt | 128 | chaine a trois maillons, verifiee le 2026-11-03 : Zigbee2MQTT (conteneur 200, Proxmox 10.32.154.244) publie vers le broker `core-mosquitto` (add-on Mosquitto, port 1883), que consomme l integration `mqtt` d Appareils et services. Si un des trois manque, les entites tombent |
-| CREE utility_meter | 76 | creee par un YAML du depot, dossier `utility_meter`, sans aucune integration dans Appareils et services |
-| NAT mobile_app | 49 | integration `mobile_app` du coeur de Home Assistant, installee et visible dans Appareils et services |
-| NAT hue | 35 | integration `hue` du coeur de Home Assistant, installee et visible dans Appareils et services |
-| HACS atmofrance | 19 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services sous le nom `Atmo France - Vence` |
-| HACS powercalc | 19 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services en 38 entrees (premiere : `Hue ambiance lamp salon 1`) |
-| NAT systemmonitor | 11 | integration `systemmonitor` du coeur de Home Assistant, installee et visible dans Appareils et services |
-| HACS scheduler | 9 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services sous le nom `Scheduler` |
-| CREE statistics | 8 | creee par un YAML du depot, dossier `statistics`, sans aucune integration dans Appareils et services |
-| CREE input_booleans | 7 | creee par un YAML du depot, dossier `input_booleans`, sans aucune integration dans Appareils et services |
-| HACS meross_lan | 6 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services en 2 entrees (premiere : `Store SALON`) |
-| CREE command_line | 5 | creee par un YAML du depot, dossier `command_line`, sans aucune integration dans Appareils et services |
-| NAT hassio | 5 | integration `hassio` du coeur de Home Assistant, installee et visible dans Appareils et services |
-| CREE history_stats | 4 | creee par un YAML du depot, dossier `history_stats`, sans aucune integration dans Appareils et services |
-| CREE timers | 4 | creee par un YAML du depot, dossier `timers`, sans aucune integration dans Appareils et services |
-| NAT broadlink | 4 | integration `broadlink` du coeur de Home Assistant, installee et visible dans Appareils et services |
-| NAT meteo_france | 4 | integration `meteo_france` du coeur de Home Assistant, installee et visible dans Appareils et services |
-| NAT proxmoxve | 4 | integration `proxmoxve` du coeur de Home Assistant, installee et visible dans Appareils et services |
-| CREE groups | 3 | creee par un YAML du depot, dossier `groups`, sans aucune integration dans Appareils et services |
-| CREE smartir | 3 | creee par un YAML du depot, dossier `smartir`, sans aucune integration dans Appareils et services |
-| HACS blitzortung | 3 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services sous le nom `Maison` |
-| NAT template | 3 | integration `template` du coeur de Home Assistant, installee et visible dans Appareils et services |
-| RASPI-PI4-4GO | 3 | entites du Raspberry Pi 4 4 Go : elles existent, le materiel est hors tension (pour Raspberry Pi4 4Go) |
-| CREE input_button | 2 | creee par un YAML du depot, dossier `input_button`, sans aucune integration dans Appareils et services |
-| CREE input_number | 2 | creee par un YAML du depot, dossier `input_number`, sans aucune integration dans Appareils et services |
-| CREE person | 2 | creee par un YAML du depot, dossier `person`, sans aucune integration dans Appareils et services |
-| CREE script | 2 | creee par un YAML du depot, dossier `script`, sans aucune integration dans Appareils et services |
-| HACS vigieau | 2 | deux temps : installee via HACS (qui va etre renomme marketplace), puis ajoutee dans Appareils et services sous le nom `Vigieau AEP` |
-| NAT generic_thermostat | 2 | integration `generic_thermostat` du coeur de Home Assistant, installee et visible dans Appareils et services |
-| ARTEFACT-TEMPLATE | 1 | mot-cle de template, pas une entite |
-| CREE automation | 1 | creee par un YAML du depot, dossier `automation`, sans aucune integration dans Appareils et services |
-| CREE input_datetime | 1 | creee par un YAML du depot, dossier `input_datetime`, sans aucune integration dans Appareils et services |
-| CREE input_select | 1 | creee par un YAML du depot, dossier `input_select`, sans aucune integration dans Appareils et services |
-| CREE powercalc | 1 | creee par un YAML du depot, dossier `powercalc`, sans aucune integration dans Appareils et services |
-| CREE rest | 1 | creee par un YAML du depot, dossier `rest`, sans aucune integration dans Appareils et services |
-| CREE sql | 1 | creee par un YAML du depot, dossier `sql`, sans aucune integration dans Appareils et services |
-| HACS hacs | 1 | installee via HACS (qui va etre renomme marketplace) ; son entree dans Appareils et services n a pas de nom affiche |
-| NAT cpuspeed | 1 | integration `cpuspeed` du coeur de Home Assistant, installee et visible dans Appareils et services |
-| NAT moon | 1 | integration `moon` du coeur de Home Assistant, installee et visible dans Appareils et services |
-| NAT season | 1 | integration `season` du coeur de Home Assistant, installee et visible dans Appareils et services |
-| NAT-SANS-REGISTRE | 1 | fournie par Home Assistant sans entree au registre (zone.home) |
-
-> **Chaine la plus fragile** : les `NAT mqtt` ne dependent pas que de Home Assistant. Mesure du 2026-11-03 : l integration `mqtt` pointe le broker add-on `core-mosquitto` (1883), et les mesures viennent de Zigbee2MQTT, conteneur 200 sur 10.32.154.244. Conteneur arrete, broker en vrac ou integration retiree : les entites tombent, sans que rien ne le signale dans l interface. A la meme date, 114 des 128 entites citees avaient remonte dans les 2 heures.
-
-*Bloc ecrit par `recap_index.py`, encadre par deux marqueurs : il est remplace a chaque passage, jamais edite a la main. Classification : NAT <integration> si l entree de registre a un config entry ; NAT <integration> pour le coeur de Home Assistant, HACS <integration> pour ce qui vient de HACS ou d un depot (dossier custom_components) ; CREE <famille> sinon, famille = dossier du YAML qui declare l objet ; RASPI-PI4-4GO pour les trois entites du Pi 4 4 Go (materiel hors tension, entites existantes) ; SUPPRIMEE pour les noms remplaces ; ARTEFACT-TEMPLATE pour les mots-cles qui ne sont pas des entites.*
-
-<!-- RECAP-ENTITES:FIN -->

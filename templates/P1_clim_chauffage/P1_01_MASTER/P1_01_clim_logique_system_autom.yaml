@@ -157,6 +157,7 @@
         {% set consigne = states('sensor.consigne') | float(19) %}
         {% set d1 = states('sensor.delta_1') | float(1) %}
         {% set d2 = states('sensor.delta_2') | float(2) %}
+        {% set d3 = states('sensor.delta_3') | float(3) %}
         {% set d5 = states('sensor.delta_5') | float(5) %}
         {% set d7 = states('sensor.delta_7') | float(7) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
@@ -164,9 +165,12 @@
           {% elif t_ext > 32 %}{{ (t_ext - d5) | round(1) }}
           {% else %}{{ consigne | round(1) }}{% endif %}
         {% else %}
-          {% if t_ext < 8 %}{{ (consigne + d2) | round(1) }}
-          {% elif t_ext < 12 %}{{ (consigne + d1) | round(1) }}
-          {% else %}{{ consigne + d1| round(1) }}{% endif %}
+          {#- 2026-11-10 (Eric) : un delta de plus par palier. La branche 8-12 reprenait d1
+              et rendait la meme valeur que la branche du dessus, et delta_3 n etait lu nulle part.
+              sous 8 -> consigne + d3 (22), 8 a 12 -> consigne + d2 (21), au-dela -> consigne + d1 (20). -#}
+          {% if t_ext < 8 %}{{ (consigne + d3) | round(1) }}
+          {% elif t_ext < 12 %}{{ (consigne + d2) | round(1) }}
+          {% else %}{{ (consigne + d1) | round(1) }}{% endif %}
         {% endif %}
 
 # --- temperature_confort_jour ---
@@ -230,8 +234,16 @@
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {{ [t_ext , 27] | min | int }}
         {% else %}
-          {% set tccsj_b = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccsj_b, 19] | min | round(1) }}
+          {#- 2026-11-10 (Eric) : paliers sur le balcon, derives de la consigne et de delta_1,
+              plus de plafond fixe. sous 8 -> consigne + d1 (20), 8 a 12 -> consigne (19),
+              12 et plus -> consigne - d1 (18). -#}
+          {% set consigne = states('sensor.consigne') | float(19) %}
+          {% set d1 = states('sensor.delta_1') | float(1) %}
+          {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+          {% if t_ext < 8 %}{{ (consigne + d1) | round(1) }}
+          {% elif t_ext < 12 %}{{ consigne | round(1) }}
+          {% else %}{{ (consigne - d1) | round(1) }}
+          {% endif %}
         {% endif %}
 
 # ┌─────────────────────────────────┐
@@ -249,8 +261,14 @@
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {{ [t_ext + d1, 27] | min | int }}
         {% else %}
-          {% set tccsj_c = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccsj_c, 19] | min | int }}
+          {#- 2026-11-10 (Eric) : memes paliers que le bureau, derives de la consigne et de delta_1. -#}
+          {% set consigne = states('sensor.consigne') | float(19) %}
+          {% set d1 = states('sensor.delta_1') | float(1) %}
+          {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
+          {% if t_ext < 8 %}{{ (consigne + d1) | int }}
+          {% elif t_ext < 12 %}{{ consigne | int }}
+          {% else %}{{ (consigne - d1) | int }}
+          {% endif %}
         {% endif %}
 
 # ┌────────────────────────────────────────────────┐

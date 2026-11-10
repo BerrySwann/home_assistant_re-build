@@ -106,13 +106,27 @@ Chaque piece a ses propres regles, differentes en hiver et en ete. En hiver ce s
 
 | Piece | Hiver | Ete |
 |:--|:--|:--|
-| Salon | 22 sous 8, 21 de 8 a 12, 20 au-dela | 25 jusqu a 27 C dehors, 26 au-dela |
+| Salon | 22 sous 8, 21 de 8 a 12, 20 au-dela | 26 jusqu a 27 C dehors, 27 au-dela |
 | Bureau | 20 sous 8, 19 de 8 a 12, 18 au-dela | 26 jusqu a 27 C dehors, 27 au-dela |
-| Chambre | 19 sous 12, 18 au-dela | 26 jusqu a 27 C dehors, 27 au-dela |
+| Chambre | 20 sous 8, 19 de 8 a 12, 18 au-dela | 26 jusqu a 27 C dehors, 27 au-dela |
 
-Depuis le 2026-11-08, les trois pieces ne dependent PLUS du confort jour en hiver : chacune a ses propres
-paliers, fixes, lus directement sur la sonde exterieure. Le salon monte de 1 C par rapport a l ancienne
-formule, le bureau baisse de 1, la chambre perd son palier intermediaire.
+Etat reel du code au 2026-11-10, verifie en service : le salon reste sur la formule par plafond,
+`min(confort jour, 22)`, mais le confort jour monte desormais a 22 sous 8 C, donc le plafond mord pile au
+bon endroit. Le salon sort 22 sous 8 C, 21 de 8 a 12, 20 au-dessus.
+
+Le confort jour lui-meme a ete corrige le 2026-11-10 : la branche de 8 a 12 C reprenait delta_1 et
+rendait exactement la meme valeur que la branche du dessus, et delta_3 n etait lu par personne. Chaque palier
+prend maintenant un delta de plus : `consigne + delta_3` sous 8 (22), `consigne + delta_2` de 8 a 12 (21),
+`consigne + delta_1` au-dela (20).
+
+Le bureau et la chambre ont ete passes en paliers le 2026-11-10 sur demande d Eric, trois paliers derives
+de la consigne et de delta_1 : `consigne + delta_1` sous 8 C (soit 20), `consigne` de 8 a 12 (19), et
+`consigne - delta_1` au-dela de 12 (18). Aucune valeur n est ecrite en dur : si la consigne passe de 19 a 18,
+les trois paliers deviennent 19, 18 et 17 tout seuls.
+
+Cette section decrivait auparavant une version a paliers fixes ecrits en dur, posee le 2026-11-08 a 11h04
+puis retiree le 2026-11-09 a 19h56 sur ordre d Eric. La fiche etait restee sur cette version disparue et ne
+correspondait plus au code depuis cette date.
 
 En ete ces trois capteurs n utilisent plus le confort du tout : ils lisent directement la sonde exterieure.
 Une seule marche, entre 27 et 28 C dehors.
