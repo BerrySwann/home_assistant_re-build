@@ -142,6 +142,23 @@
 # │ DÉTECTION DU MODE GÉNÉRAL MODE ETE/HIVER          │
 # └───────────────────────────────────────────────────┘
 
+# ┌───────────────────────────────────────────────────────────┐
+# │ TEMPERATURE EXTERIEURE ARRONDIE A L UNITE                 │
+# └───────────────────────────────────────────────────────────┘
+# Copie de th_balcon_nord_temperature arrondie a l entier.
+# Elle ne change donc d etat qu au passage d une unite a l autre
+# (12,4 -> 12,6 donne 12 -> 13, mais 12,1 -> 12,4 ne change rien),
+# et non a chaque dixieme comme la sonde brute.
+# Sert a stabiliser tout calcul qui compare l exterieur a un seuil :
+# une cible qui depend de ce capteur ne bouge qu aux unites.
+
+# --- th_balcon_nord_t_unite ---
+    - name: "TH Balcon Nord T unite"
+      unique_id: th_balcon_nord_t_unite
+      unit_of_measurement: "°C"
+      device_class: temperature
+      state: "{{ states('sensor.th_balcon_nord_temperature') | float(0) | round(0) }}"
+
 # --- mode_ete_hiver ---
     - name: "Mode Été/Hiver"
       unique_id: mode_ete_hiver
