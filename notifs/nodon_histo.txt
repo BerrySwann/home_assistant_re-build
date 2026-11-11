@@ -72,3 +72,4 @@ Home Assistant notifications (Log started: 2026-08-31T18:02:51.906374+00:00)
 07/11 | Nodon : 15.4 kWh
 08/11 | Nodon : 15.4 kWh
 09/11 | Nodon : 12.2 kWh
+10/11 | Nodon : 9.4 kWh
