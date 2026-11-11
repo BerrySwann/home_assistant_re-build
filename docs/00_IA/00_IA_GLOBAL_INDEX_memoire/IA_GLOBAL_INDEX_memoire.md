@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--10-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--11-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -13,8 +13,8 @@
 
 </div>
 
-> Fichier GENERE le 2026-11-10 21:27 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
-> 15 fichiers de contenu, 62 sauvegardes (.bak), 0 sans description.
+> Fichier GENERE le 2026-11-11 21:00 par gen_global_index_ia.py - ne pas editer a la main (relancer le script ou /histo).
+> 15 fichiers de contenu, 63 sauvegardes (.bak), 0 sans description.
 
 > 🚨🚨🚨 **GYROPHARE ROUGE - DANS HOME ASSISTANT TOUT EST A PLAT** 🚨🚨🚨
 >
@@ -66,12 +66,12 @@ Copies datees a cote de chaque fichier (regle de sauvegarde de CLAUDE.md : 10 ma
 |---|---|
 | [00_IA_CONTEXT_BASE](../00_IA_CONTEXT_BASE/) | 3 |
 | [00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire](../00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/) | 10 |
-| [00_IA_GLOBAL_INDEX_memoire](./) | 9 |
+| [00_IA_GLOBAL_INDEX_memoire](./) | 11 |
 | [00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL](../00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/) | 4 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE](../00_IA_SOUS_CONTEXT_IA/IA_AUDIT_ENERGETIQUE_ET_THERMIQUE/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS](../00_IA_SOUS_CONTEXT_IA/IA_AUTOMATIONS_NOTIFS/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_BADGES_FICHES](../00_IA_SOUS_CONTEXT_IA/IA_BADGES_FICHES/) | 3 |
-| [00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS](../00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/) | 4 |
+| [00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS](../00_IA_SOUS_CONTEXT_IA/IA_CARTE_EMPLACEMENTS/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA](../00_IA_SOUS_CONTEXT_IA/IA_CMD_TERMINAL_HA/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_AUTOMATIONS/) | 3 |
 | [00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION](../00_IA_SOUS_CONTEXT_IA/IA_INDEX_NAVIGATION/) | 3 |

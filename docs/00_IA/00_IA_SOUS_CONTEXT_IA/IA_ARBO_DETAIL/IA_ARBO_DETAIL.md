@@ -2,7 +2,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--31-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--11-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -12,6 +12,7 @@
 
 </div>
 
+*Derniere mise a jour : 2026-11-11 (soir, /histo-final S1 : docs 2234 dont 1090 sauvegardes, contre 2173 et 1058 la veille, +61 fichiers ; prod H:/docs 1093 fichiers dont 7 sauvegardes ; actualise apres le menage des .bak et le push du jour)
 *Derniere mise a jour : 2026-11-10 (soir, /histo-final S1 : docs 2173 dont 1058 sauvegardes, historique 605 dont 104 sauvegardes et 0 fichier a la racine, 00_IA 77, 01_docs_config_system 244, 02_docs_dashboard 480, 03_docs_automations 436, 04_docs_scripts 307, 05_docs_skills 108, 98_sauvegarde_hors_docs 508, 99_docs_MD_system 10)*
 *Derniere mise a jour : 2026-11-06 (soir, /histo-final S1 : session application GEMAYA EDL, aucun YAML HA touche ; docs 2067 dont 1030 sauvegardes, historique 561 dont 104 sauvegardes, 01_docs_config_system 222, 02_docs_dashboard 482, 03_docs_automations 459, 04_docs_scripts 291, 99_docs_MD_system 11 ; PROD H:/docs 996 ; GitHub commit 2ffdb743, 2255 objets dont 1443 dans docs/ ; menage .bak : 19 renommes, 32 a la corbeille Windows ; sous-comptages de la grille laisses au releve du 2026-10-31 ; push prod non fait, la prod est tenue par Claude)*
 *Derniere mise a jour : 2026-11-05 (soir, /histo-final S1 : docs 2089, historique 15 fichiers a la racine, 01_docs_config_system 222, 02_docs_dashboard 484, 03_docs_automations 472, 04_docs_scripts 295, 99_docs_MD_system 11 ; PROD H:/docs 996 ; GitHub commit 79bf6666 ; menage .bak : 50 renommes, 69 a la corbeille Win)*

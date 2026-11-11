@@ -192,13 +192,12 @@ p1_master_gestion_clim:
         temp_eco_hc: "{{ states('sensor.temperature_eco_hiver_corrige') | float(states('sensor.temperature_eco_hiver') | float) }}"
         temp_eco_ec: "{{ states('sensor.temperature_eco_ete_corrige') | float(states('sensor.temperature_eco_ete') | float) }}"
         temp_cible: "{{ states('sensor.temperature_confort_jour') | float(states('sensor.consigne') | float) }}"
-        temp_nuit: "{{ states('sensor.temperature_confort_nuit') | float(states('sensor.consigne') | float) }}"
-        tccsj_s: "{{ states('sensor.temperature_corrige_salon') | float(states('sensor.temperature_confort_jour') | float) }}"
-        tccsj_b: "{{ states('sensor.temperature_corrige_bureau') | float(states('sensor.temperature_confort_jour') | float) }}"
-        tccsj_c: "{{ states('sensor.temperature_corrige_chambre') | float(states('sensor.temperature_confort_jour') | float) }}"
-        off_s: "{{ states('sensor.offset_salon') | float(0) }}"
-        off_b: "{{ states('sensor.offset_bureau') | float(0) }}"
-        off_c: "{{ states('sensor.offset_chambre') | float(0) }}"
+        tccj_s: "{{ states('sensor.temperature_corrige_salon') | float(states('sensor.temperature_confort_jour') | float) }}"
+        tccj_b: "{{ states('sensor.temperature_corrige_bureau') | float(states('sensor.temperature_confort_jour') | float) }}"
+        tccj_c: "{{ states('sensor.temperature_corrige_chambre') | float(states('sensor.temperature_confort_jour') | float) }}"
+        tccn_s: "{{ states('sensor.temperature_consigne_nuit_salon') | float(states('sensor.seuil_non_chauffage') | float) }}"
+        tccn_b: "{{ states('sensor.temperature_consigne_nuit_bureau') | float(states('sensor.seuil_non_chauffage') | float) }}"
+        tccn_c: "{{ states('sensor.temperature_consigne_nuit_chambre') | float(states('sensor.seuil_non_chauffage') | float) }}"
 
     # ──────────────────────────────────────────────
     # 5. CALCUL DES CIBLES PAR PIÈCE (SELON PÉRIODE)
@@ -217,9 +216,9 @@ p1_master_gestion_clim:
           {% elif 'groupe_1' in groupe_presence %}
           {{ temp_eco_hc if mode_saison == 'heat' else temp_eco_ec }}
           {% elif periode == 'jour' %}
-          {{ tccsj_s }}
+          {{ tccj_s }}
           {% else %}
-          {{ temp_nuit }}
+          {{ tccn_s }}
           {% endif %}
           
         t_bureau_target: >-
@@ -228,9 +227,9 @@ p1_master_gestion_clim:
           {% elif 'groupe_1' in groupe_presence %}
           {{ temp_eco_hc if mode_saison == 'heat' else temp_eco_ec }}
           {% elif periode == 'jour' %}
-          {{ tccsj_b }}
+          {{ tccj_b }}
           {% else %}
-          {{ temp_nuit }}
+          {{ tccn_b }}
           {% endif %}
           
         t_chambre_target: >-
@@ -239,9 +238,9 @@ p1_master_gestion_clim:
           {% elif 'groupe_1' in groupe_presence %}
           {{ temp_eco_hc if mode_saison == 'heat' else temp_eco_ec }}
           {% elif periode == 'jour' %}
-          {{ tccsj_c }}
+          {{ tccj_c }}
           {% else %}
-          {{ temp_nuit }}
+          {{ tccn_c }}
           {% endif %}
     - alias: 'LOGIQUE : SÉCURITÉ FENÊTRES VS GESTION STANDARD'
       choose:
@@ -304,7 +303,7 @@ p1_master_gestion_clim:
                 entity_id: climate.clim_salon_rm4_mini
               data:
                 hvac_mode: "{% if trigger_id == 'sensor_update' and is_state('climate.clim_salon_rm4_mini', 'off') %}\n  off\n{% else %}\n  {{ mode_saison }}\n{% endif %}"
-                temperature: '{{ (t_salon_target | float) - (off_s | float) }}'
+                temperature: '{{ t_salon_target }}'
         - alias: LOGIQUE BUREAU
           choose:
           - alias: 'VÉRIFICATION : SÉCURITÉ BUREAU (PRISE + ARRET)'
@@ -322,7 +321,7 @@ p1_master_gestion_clim:
                 entity_id: climate.clim_bureau_rm4_mini
               data:
                 hvac_mode: "{% if trigger_id == 'sensor_update' and is_state('climate.clim_bureau_rm4_mini', 'off') %}\n  off\n{% else %}\n  {{ mode_saison }}\n{% endif %}"
-                temperature: '{{ (t_bureau_target | float) - (off_b | float) }}'
+                temperature: '{{ t_bureau_target }}'
         - alias: LOGIQUE CHAMBRE
           choose:
           - alias: 'VÉRIFICATION : SÉCURITÉ CHAMBRE (PRISE + ARRET)'
@@ -345,7 +344,7 @@ p1_master_gestion_clim:
               target:
                 entity_id: climate.clim_chambre_rm4_mini
               data:
-                temperature: '{{ (t_chambre_target | float) - (off_c | float) }}'
+                temperature: '{{ t_chambre_target }}'
       - alias: 'PAUSE : SÉCURITÉ RÉCEPTION'
         delay: 00:00:02
       - alias: 'NOTIF : RÉSUMÉ DE L''ÉTAT DES CLIMATISATIONS'

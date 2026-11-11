@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--09-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--11-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -14,6 +14,7 @@
 </div>
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-11-11 (21h, /histo-final) - entrées ajoutées : les 3 timers de consigne de nuit (timers/P1_Consigne_nuit_21h_7h30/) et les 3 input_number de consigne de nuit (input_number/P1_Consigne_nuit_anti_derive/) ; dossier input_number/Meteo/ corrigé (previous.temperature_et_humidit -> previous.temperature_et_humidity) ; bloc timers SDB remis sur les dossiers réels P1_Soufflant_SDB et P1_timers_seche_serviette_SDB (l'ancien chemin P1_timers/ n'existe plus)
 *Dernière mise à jour : 2026-11-09 (20h45, /histo-final) - entrée ajoutée : IA_PRISE_eCO.md (fiche des prises eCO, docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_PRISE_eCO/)*
 *Dernière mise à jour : 2026-10-29 (22h) - lien de la fiche Audit_md5_yaml.md remis sur son dossier (01_scripts.sh_md/Audit_md5_yaml/) après le rangement des fiches de .scripts un dossier par fichier ; aucun fichier ajouté ni supprimé*
 *Dernière mise à jour : 2026-10-31 (18h44) - entrées ajoutées : Push_5C.py et Sync_98_sauvegarde.py (scripts python, recompté : 16)*
@@ -151,13 +152,45 @@
 </details>
 
 <details>
-<summary><b>timers/P1_timers/</b> &nbsp;|&nbsp; Helpers timer SDB (soufflant 60 mn / 10 mn, sèche-serviettes 2 h / 10 mn)</summary>
+<details>
+<summary><b>timers/P1_Consigne_nuit_21h_7h30/</b> &nbsp;|&nbsp; Helpers timer de la consigne de nuit (10 mn par pièce, anti-dérive)</summary>
 <blockquote>
-⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_timers/P1_Timer_60mn/P1_timer_60mn_soufflant_SDB.yaml">P1_timer_60mn_soufflant_SDB.yaml</a><br>
-⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_timers/P1_Timer_10mn/P1_timer_10mn_soufflant_SDB.yaml">P1_timer_10mn_soufflant_SDB.yaml</a><br>
-⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_timers/P1_Timer_2h/P1_timer_2h_seche_serviettes_SDB.yaml">P1_timer_2h_seche_serviettes_SDB.yaml</a><br>
-⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_timers/P1_Timer_10mn/P1_timer_10mn_seche_serviettes_SDB.yaml">P1_timer_10mn_seche_serviettes_SDB.yaml</a><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_Timers_SDB_soufflant_et_seche_serviettes/P1_XX_Timers_SDB_soufflant_et_seche_serviettes.md">Documentation timers SDB</a>
+⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_Consigne_nuit_21h_7h30/P1_timer_10mn_consigne_nuit_salon.yaml">P1_timer_10mn_consigne_nuit_salon.yaml</a><br>
+⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_Consigne_nuit_21h_7h30/P1_timer_10mn_consigne_nuit_bureau.yaml">P1_timer_10mn_consigne_nuit_bureau.yaml</a><br>
+⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_Consigne_nuit_21h_7h30/P1_timer_10mn_consigne_nuit_chambre.yaml">P1_timer_10mn_consigne_nuit_chambre.yaml</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>timers/P1_Soufflant_SDB/</b> &nbsp;|&nbsp; Helpers timer du soufflant SDB (60 mn / 10 mn)</summary>
+<blockquote>
+⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_Soufflant_SDB/P1_timer_60mn_soufflant_SDB.yaml">P1_timer_60mn_soufflant_SDB.yaml</a><br>
+⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_Soufflant_SDB/P1_timer_10mn_soufflant_SDB.yaml">P1_timer_10mn_soufflant_SDB.yaml</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>timers/P1_timers_seche_serviette_SDB/</b> &nbsp;|&nbsp; Helpers timer du sèche-serviettes SDB (2 h / 10 mn)</summary>
+<blockquote>
+⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_timers_seche_serviette_SDB/P1_timer_2h_seche_serviettes_SDB.yaml">P1_timer_2h_seche_serviettes_SDB.yaml</a><br>
+⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/timers/P1_timers_seche_serviette_SDB/P1_timer_10mn_seche_serviettes_SDB.yaml">P1_timer_10mn_seche_serviettes_SDB.yaml</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_03_Chauffage_salle_de_bain/P1_XX_Timers_SDB_soufflant_et_seche_serviettes/P1_XX_Timers_SDB_soufflant_et_seche_serviettes.md">Fiche commune timers SDB</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>input_number/P1_Consigne_nuit_anti_derive/</b> &nbsp;|&nbsp; Consignes de nuit réglables par pièce (-3 à +3, pas 0,5)</summary>
+<blockquote>
+⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/input_number/P1_Consigne_nuit_anti_derive/P1_input_number_consigne_nuit_salon.yaml">P1_input_number_consigne_nuit_salon.yaml</a><br>
+⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/input_number/P1_Consigne_nuit_anti_derive/P1_input_number_consigne_nuit_bureau.yaml">P1_input_number_consigne_nuit_bureau.yaml</a><br>
+⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/input_number/P1_Consigne_nuit_anti_derive/P1_input_number_consigne_nuit_chambre.yaml">P1_input_number_consigne_nuit_chambre.yaml</a>
+</blockquote>
+</details>
+
+<details>
+<summary><b>input_number/Meteo/</b> &nbsp;|&nbsp; Mémorisation température et humidité du balcon (previous)</summary>
+<blockquote>
+⚙️ <a href="docs/01_docs_config_system/01_config_system_SH_PY_YAML/input_number/Meteo/previous.temperature_et_humidity.yaml">previous.temperature_et_humidity.yaml</a>
 </blockquote>
 </details>
 
