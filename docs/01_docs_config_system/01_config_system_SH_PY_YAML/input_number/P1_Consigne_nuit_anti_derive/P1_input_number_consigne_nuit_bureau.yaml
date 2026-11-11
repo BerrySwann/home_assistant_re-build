@@ -1,9 +1,9 @@
 # ╭──────────────────────────────────────────────────────────────────────────┐
-# │ INPUT_NUMBER : CONSIGNE DE NUIT CHAMBRE, ANTI-DERIVE DE LA CLIM        │
+# │ INPUT_NUMBER : CONSIGNE DE NUIT BUREAU, ANTI-DERIVE DE LA CLIM        │
 # ╰──────────────────────────────────────────────────────────────────────────┘
 #
 # ## DESCRIPTION :
-# Consigne de nuit reellement envoyee a la clim de la piece chambre. Elle vaut 19
+# Decalage applique a la consigne de nuit de la piece bureau. Elle vaut 0
 # par defaut. L automatisation de descente la passe a 18 quand la temperature reelle
 # de la piece depasse cette consigne plus son offset, et le timer de 10 minutes la
 # ramene a 19 a son terme.
@@ -22,26 +22,26 @@
 #
 # | MATERIEL     | CAPTEUR BRUT (source)          | CE FICHIER (unique_id)       | AVAL                                    |
 # |:-------------|:-------------------------------|:-----------------------------|:----------------------------------------|
-# | clim chambre | sensor.th_chambre_temperature | clim_consigne_nuit_chambre | script p1_master_gestion_clim, periode nuit |
+# | clim bureau | sensor.th_bureau_temperature | clim_consigne_nuit_bureau | script p1_master_gestion_clim, periode nuit |
 #
 # ## IMPORTANT (PIEGES) :
 # - input_number: !include_dir_merge_named input_number/ : un fichier par famille,
 #   les cles sont fusionnees par nom. Un nouveau fichier demande input_number.reload.
 # - Ne pas confondre avec l offset de nuit, qui est un capteur constant du master
-#   (offset_nuit_chambre) : la consigne est ce qu on vise, l offset est la marge de
+#   (offset_nuit_bureau) : la consigne est ce qu on vise, l offset est la marge de
 #   declenchement qui evite une oscillation autour du seuil.
 # - Le script ne lit cet input QUE pendant la periode nuit (21h a 7h30). En jour il
-#   continue d utiliser temperature_corrige_chambre.
+#   continue d utiliser temperature_corrige_bureau.
 #
 # ## TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
 # - L1C3 Commandes Clim, a prevoir pour afficher la consigne de nuit courante.
 #
-# --- clim_consigne_nuit_chambre ---
-clim_consigne_nuit_chambre:
-  name: "Clim chambre consigne nuit"
-  initial: 19
-  min: 10
-  max: 30
+# --- clim_consigne_nuit_bureau ---
+clim_consigne_nuit_bureau:
+  name: "Clim bureau decalage nuit"
+  initial: 0
+  min: -3
+  max: 3
   step: 0.5
   unit_of_measurement: "°C"
   icon: mdi:thermometer-chevron-down

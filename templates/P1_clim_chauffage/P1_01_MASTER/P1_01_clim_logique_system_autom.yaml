@@ -108,6 +108,36 @@
       state: "7"
       unit_of_measurement: "°C"
 
+# ┌───────────────────────────────────────────────────────────┐
+# │ OFFSETS DE NUIT : MARGE DE DECLENCHEMENT ANTI-DERIVE      │
+# └───────────────────────────────────────────────────────────┘
+# La consigne de nuit de chaque piece est un input_number qui vaut
+# 19. Quand la temperature reelle depasse cette consigne PLUS cet
+# offset, l automatisation de la piece passe la consigne a 18 et
+# lance un timer de 10 minutes, qui la ramene a 19.
+# Sans cette marge, une piece a 19,05 declencherait, puis 19,0
+# ferait remonter, puis 19,05 redéclencherait : oscillation sans fin.
+# Ces offsets ne sont pas des temperatures visees, ce sont des
+# largeurs de bande morte.
+
+# --- offset_nuit_salon ---
+    - name: "Offset nuit Salon"
+      unique_id: offset_nuit_salon
+      unit_of_measurement: "°C"
+      state: "0.3"
+
+# --- offset_nuit_bureau ---
+    - name: "Offset nuit Bureau"
+      unique_id: offset_nuit_bureau
+      unit_of_measurement: "°C"
+      state: "0.3"
+
+# --- offset_nuit_chambre ---
+    - name: "Offset nuit Chambre"
+      unique_id: offset_nuit_chambre
+      unit_of_measurement: "°C"
+      state: "0.3"
+
 # ┌───────────────────────────────────────────────────┐
 # │ DÉTECTION DU MODE GÉNÉRAL MODE ETE/HIVER          │
 # └───────────────────────────────────────────────────┘
@@ -182,16 +212,141 @@
       unique_id: temperature_confort_nuit
       unit_of_measurement: "°C"
       state: >
+        {#- Seuils lus dans les capteurs, plus de 26 en dur (Eric, 2026-11-11).
+            Les replis restent 18 et 26 et JAMAIS 0 : si le seuil devient
+            indisponible, un repli a 0 ferait tomber min() a 0 C et enverrait
+            la consigne de nuit a zero sur les trois clims. -#}
         {% set seuil_chauff = states('sensor.seuil_non_chauffage') | float(18) %}
+        {% set seuil_clim = states('sensor.seuil_non_clim') | float(26) %}
         {% set t_conf = states('sensor.temperature_confort') | float(0) %}
         {% set d1 = states('sensor.delta_1') | float(1) %}
         {% set d2 = states('sensor.delta_2') | float(2) %}
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
-          {{ [t_conf - d2, 26] | min | round(1) }} {# stabilise la nuit l'ete entre 25 et 27 #}
+          {{ [t_conf, seuil_clim] | min | round(1) }} {# nuit d ete : 26 max, pas de -d2 qui donnait 24 #}
         {% else %}
           {{ [t_conf + d1, seuil_chauff] | min | round(1) }} {# stabilise la nuit l'hiver a 18 ou 19 #}
         {% endif %}
 
+# ┌───────────────────────────────────────────────────────────┐
+# │ CONSIGNE DE NUIT PAR PIECE, LUE DANS L INPUT_NUMBER       │
+# └───────────────────────────────────────────────────────────┘
+# La base vient du seuil de la saison : seuil_non_chauffage (19) en hiver,
+# seuil_non_clim (26) en ete. Plus de dependance a temperature_confort_nuit.
+# L input_number n est PAS une consigne mais un DECALAGE, a 0 par
+# defaut, que les automatisations J, K et L font passer a -1 pendant
+# 10 minutes quand la piece depasse, puis remettent a 0.
+# Ainsi la consigne suit la saison sans reference figee : 19 - 1 = 18
+# en hiver, 26 - 1 = 25 en ete.
+
+# --- temperature_consigne_nuit_salon ---
+    - name: "Temperature consigne nuit Salon"
+      unique_id: temperature_consigne_nuit_salon
+      unit_of_measurement: "°C"
+      state: >-
+        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
+          {{ ((states('sensor.seuil_non_clim') | float(26)) +
+          (states('input_number.clim_consigne_nuit_salon') | float(0))) | round(1) }}
+        {% else %}
+          {{ ((states('sensor.seuil_non_chauffage') | float(19)) +
+          (states('input_number.clim_consigne_nuit_salon') | float(0))) | round(1) }}
+        {% endif %}
+
+# --- temperature_consigne_nuit_bureau ---
+    - name: "Temperature consigne nuit Bureau"
+      unique_id: temperature_consigne_nuit_bureau
+      unit_of_measurement: "°C"
+      state: >-
+        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
+          {{ ((states('sensor.seuil_non_clim') | float(26)) +
+          (states('input_number.clim_consigne_nuit_bureau') | float(0))) | round(1) }}
+        {% else %}
+          {{ ((states('sensor.seuil_non_chauffage') | float(19)) +
+          (states('input_number.clim_consigne_nuit_bureau') | float(0))) | round(1) }}
+        {% endif %}
+
+# --- temperature_consigne_nuit_chambre ---
+    - name: "Temperature consigne nuit Chambre"
+      unique_id: temperature_consigne_nuit_chambre
+      unit_of_measurement: "°C"
+      state: >-
+        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
+          {{ ((states('sensor.seuil_non_clim') | float(26)) +
+          (states('input_number.clim_consigne_nuit_chambre') | float(0))) | round(1) }}
+        {% else %}
+          {{ ((states('sensor.seuil_non_chauffage') | float(19)) +
+          (states('input_number.clim_consigne_nuit_chambre') | float(0))) | round(1) }}
+        {% endif %}
+
+
+# ┌───────────────────────────────────────────────────────────┐
+# │ ECART NUIT SIGNE ET DERIVE, VALABLES DANS LES DEUX SENS    │
+# └───────────────────────────────────────────────────────────┘
+# ecart = temperature reelle de la piece moins la consigne de nuit.
+# Positif quand la piece est trop chaude, negatif quand elle est trop froide.
+#
+# La DERIVE depend de la saison, et c est tout l interet :
+#   en heat, la clim chauffe et depasse          -> derive si ecart > +offset
+#   en cool, la clim refroidit et passe dessous  -> derive si ecart < -offset
+# Un seul capteur booleen par piece evite d ecrire la branche de saison
+# dans chaque automatisation.
+
+# --- ecart_nuit_salon ---
+    - name: "Ecart nuit Salon"
+      unique_id: ecart_nuit_salon
+      unit_of_measurement: "°C"
+      state: >-
+        {{ ((states('sensor.th_salon_temperature') | float(0)) -
+        (states('sensor.temperature_consigne_nuit_salon') | float(19))) | round(1) }}
+
+# --- derive_nuit_salon ---
+    - name: "Derive nuit Salon"
+      unique_id: derive_nuit_salon
+      state: >-
+        {% set x = states('sensor.ecart_nuit_salon') | float(0) %}
+        {% set o = states('sensor.offset_nuit_salon') | float(0.3) %}
+        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
+          {{ 'on' if x < (0 - o) else 'off' }}
+        {% elif is_state('sensor.mode_ete_hiver', 'heat') %}
+          {{ 'on' if x > o else 'off' }}
+        {% else %}off{% endif %}
+# --- ecart_nuit_bureau ---
+    - name: "Ecart nuit Bureau"
+      unique_id: ecart_nuit_bureau
+      unit_of_measurement: "°C"
+      state: >-
+        {{ ((states('sensor.th_bureau_temperature') | float(0)) -
+        (states('sensor.temperature_consigne_nuit_bureau') | float(19))) | round(1) }}
+
+# --- derive_nuit_bureau ---
+    - name: "Derive nuit Bureau"
+      unique_id: derive_nuit_bureau
+      state: >-
+        {% set x = states('sensor.ecart_nuit_bureau') | float(0) %}
+        {% set o = states('sensor.offset_nuit_bureau') | float(0.3) %}
+        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
+          {{ 'on' if x < (0 - o) else 'off' }}
+        {% elif is_state('sensor.mode_ete_hiver', 'heat') %}
+          {{ 'on' if x > o else 'off' }}
+        {% else %}off{% endif %}
+# --- ecart_nuit_chambre ---
+    - name: "Ecart nuit Chambre"
+      unique_id: ecart_nuit_chambre
+      unit_of_measurement: "°C"
+      state: >-
+        {{ ((states('sensor.th_chambre_temperature') | float(0)) -
+        (states('sensor.temperature_consigne_nuit_chambre') | float(19))) | round(1) }}
+
+# --- derive_nuit_chambre ---
+    - name: "Derive nuit Chambre"
+      unique_id: derive_nuit_chambre
+      state: >-
+        {% set x = states('sensor.ecart_nuit_chambre') | float(0) %}
+        {% set o = states('sensor.offset_nuit_chambre') | float(0.3) %}
+        {% if is_state('sensor.mode_ete_hiver', 'cool') %}
+          {{ 'on' if x < (0 - o) else 'off' }}
+        {% elif is_state('sensor.mode_ete_hiver', 'heat') %}
+          {{ 'on' if x > o else 'off' }}
+        {% else %}off{% endif %}
 # ┌─────────────────────────────────┐
 # │ CORRECTIONS SPÉCIFIQUES         │
 # └─────────────────────────────────┘

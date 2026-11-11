@@ -1,0 +1,45 @@
+id: '1794417184983'
+alias: (K) (CLIM) Consigne nuit anti-derive Bureau
+description: "Passe la consigne de nuit de bureau a 18 pendant 10 minutes quand la temperature depasse la consigne plus son offset, puis la ramene a 19."
+triggers:
+- trigger: state
+  entity_id: sensor.th_bureau_temperature
+  id: mesure
+- trigger: event
+  event_type: timer.finished
+  event_data:
+    entity_id: timer.clim_consigne_nuit_bureau_10mn
+  id: fin_timer
+conditions: []
+actions:
+- choose:
+  - conditions:
+    - condition: trigger
+      id: mesure
+    - condition: time
+      after: '21:00:00'
+      before: '07:30:00'
+    - condition: template
+      value_template: >-
+        {{ states('sensor.th_bureau_temperature') | float(0) >
+        (states('input_number.clim_consigne_nuit_bureau') | float(19)) +
+        (states('sensor.offset_nuit_bureau') | float(0.3)) }}
+    sequence:
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.clim_consigne_nuit_bureau
+      data:
+        value: -1
+    - action: timer.start
+      target:
+        entity_id: timer.clim_consigne_nuit_bureau_10mn
+  - conditions:
+    - condition: trigger
+      id: fin_timer
+    sequence:
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.clim_consigne_nuit_bureau
+      data:
+        value: 0
+mode: single

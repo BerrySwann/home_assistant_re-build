@@ -3,7 +3,7 @@
 # ╰──────────────────────────────────────────────────────────────────────────┘
 #
 # ## DESCRIPTION :
-# Consigne de nuit reellement envoyee a la clim de la piece salon. Elle vaut 19
+# Decalage applique a la consigne de nuit de la piece salon. Elle vaut 0
 # par defaut. L automatisation de descente la passe a 18 quand la temperature reelle
 # de la piece depasse cette consigne plus son offset, et le timer de 10 minutes la
 # ramene a 19 a son terme.
@@ -38,10 +38,10 @@
 #
 # --- clim_consigne_nuit_salon ---
 clim_consigne_nuit_salon:
-  name: "Clim salon consigne nuit"
-  initial: 19
-  min: 10
-  max: 30
+  name: "Clim salon decalage nuit"
+  initial: 0
+  min: -3
+  max: 3
   step: 0.5
   unit_of_measurement: "°C"
   icon: mdi:thermometer-chevron-down

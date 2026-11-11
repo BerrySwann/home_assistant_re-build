@@ -119,7 +119,7 @@ Une seule marche, entre 27 et 28 C dehors.
 
 En hiver, chaque piece bouge maintenant : le salon de 22 a 20, le bureau de 20 a 18, la chambre de 19 a 18.
 Aucune ne recopie plus le confort jour, et le groupe de presence ne change plus la source : depuis le
-2026-11-08, `groupe_2`, `groupe_3` et `groupe_4` recoivent tous `tccsj_s`, `tccsj_b` et `tccsj_c`.
+2026-11-08, `groupe_2`, `groupe_3` et `groupe_4` recoivent tous `tccj_s`, `tccj_b` et `tccj_c`.
 La seule exception reste `groupe_1`, qui envoie l eco aux trois.
 
 ## 7. L eco de saison
@@ -183,18 +183,18 @@ Le choix des cibles, avec les noms de groupe :
 | Groupe | Periode | Salon | Bureau | Chambre |
 |:--|:--|:--|:--|:--|
 | groupe_1, absent | jour et nuit | eco de saison | eco de saison | eco de saison |
-| groupe_2 | jour | tccsj_s | tccsj_b | tccsj_c |
-| groupe_3 | jour | tccsj_s | tccsj_b | tccsj_c |
-| groupe_4 | jour | tccsj_s | tccsj_b | tccsj_c |
+| groupe_2 | jour | tccj_s | tccj_b | tccj_c |
+| groupe_3 | jour | tccj_s | tccj_b | tccj_c |
+| groupe_4 | jour | tccj_s | tccj_b | tccj_c |
 | tout groupe sauf 1 | nuit | valeur nuit | valeur nuit | valeur nuit |
 
 Les trois groupes de jour sont interchangeables depuis le 2026-11-08. Le script ne choisit plus la source
 selon qui est present, il envoie a chaque piece celle qu elle calcule.
 
-Deux comportements historiques ont ete supprimes ce jour-la. En `groupe_3`, le salon recevait `tccsj_b`, la
+Deux comportements historiques ont ete supprimes ce jour-la. En `groupe_3`, le salon recevait `tccj_b`, la
 consigne du bureau, donc 3 C de moins que la sienne : c etait un reste de l epoque ou Mamour et Eric avaient
 chacun leur piece, conserve apres l essai du 2026-11-07. Et en `groupe_2`, le bureau basculait en eco en
-chauffage tout en gardant `tccsj_b` en clim.
+chauffage tout en gardant `tccj_b` en clim.
 
 Chaque commande est conditionnee a deux verifications : la prise de la clim doit etre alimentee, et le flag
 d arret securise doit etre a off. Si la clim est deja eteinte et que le declencheur est `sensor_update`,
@@ -204,7 +204,7 @@ le script ne la rallume pas.
 
 D abord ce que la chaine CALCULE, avant que le script ne choisisse :
 
-| Exterieur | Mode | Confort | Jour | Nuit | Salon tccsj_s | Bureau tccsj_b | Chambre tccsj_c | Eco |
+| Exterieur | Mode | Confort | Jour | Nuit | Salon tccj_s | Bureau tccj_b | Chambre tccj_c | Eco |
 |:--|:--|--:|--:|--:|--:|--:|--:|--:|
 | 0 a 7 | heat | 21.0 | 21.0 | 19.0 | 22 | 20 | 19 | 19.0 |
 | 8 a 11 | heat | 20.0 | 20.0 | 19.0 | 21 | 19 | 19 | 18.0 |
@@ -222,13 +222,13 @@ Puis ce que le script ENVOIE. Depuis le 2026-11-08 les trois cibles sont symetri
 | Groupe | Periode | Salon recoit | Bureau recoit | Chambre recoit |
 |:--|:--|:--|:--|:--|
 | groupe_1 | jour et nuit | eco | eco | eco |
-| groupe_2 | jour | tccsj_s | tccsj_b | tccsj_c |
-| groupe_3 | jour | tccsj_s | tccsj_b | tccsj_c |
-| groupe_4 | jour | tccsj_s | tccsj_b | tccsj_c |
+| groupe_2 | jour | tccj_s | tccj_b | tccj_c |
+| groupe_3 | jour | tccj_s | tccj_b | tccj_c |
+| groupe_4 | jour | tccj_s | tccj_b | tccj_c |
 | tous sauf 1 | nuit | temp_nuit | temp_nuit | temp_nuit |
 
 Les groupes 2, 3 et 4 sont interchangeables. Avant le 2026-11-08, le groupe_3 envoyait au salon
-`tccsj_b` et le groupe_2 basculait le bureau en eco : ces deux exceptions ont ete supprimees.
+`tccj_b` et le groupe_2 basculait le bureau en eco : ces deux exceptions ont ete supprimees.
 
 ## 9 bis. Variante seuil_non_chauffage a 18
 
