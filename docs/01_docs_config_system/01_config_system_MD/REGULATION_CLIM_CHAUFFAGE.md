@@ -106,27 +106,13 @@ Chaque piece a ses propres regles, differentes en hiver et en ete. En hiver ce s
 
 | Piece | Hiver | Ete |
 |:--|:--|:--|
-| Salon | 22 sous 8, 21 de 8 a 12, 20 au-dela | 26 jusqu a 27 C dehors, 27 au-dela |
+| Salon | 22 sous 8, 21 de 8 a 12, 20 au-dela | 25 jusqu a 27 C dehors, 26 au-dela |
 | Bureau | 20 sous 8, 19 de 8 a 12, 18 au-dela | 26 jusqu a 27 C dehors, 27 au-dela |
-| Chambre | 20 sous 8, 19 de 8 a 12, 18 au-dela | 26 jusqu a 27 C dehors, 27 au-dela |
+| Chambre | 19 sous 12, 18 au-dela | 26 jusqu a 27 C dehors, 27 au-dela |
 
-Etat reel du code au 2026-11-10, verifie en service : le salon reste sur la formule par plafond,
-`min(confort jour, 22)`, mais le confort jour monte desormais a 22 sous 8 C, donc le plafond mord pile au
-bon endroit. Le salon sort 22 sous 8 C, 21 de 8 a 12, 20 au-dessus.
-
-Le confort jour lui-meme a ete corrige le 2026-11-10 : la branche de 8 a 12 C reprenait delta_1 et
-rendait exactement la meme valeur que la branche du dessus, et delta_3 n etait lu par personne. Chaque palier
-prend maintenant un delta de plus : `consigne + delta_3` sous 8 (22), `consigne + delta_2` de 8 a 12 (21),
-`consigne + delta_1` au-dela (20).
-
-Le bureau et la chambre ont ete passes en paliers le 2026-11-10 sur demande d Eric, trois paliers derives
-de la consigne et de delta_1 : `consigne + delta_1` sous 8 C (soit 20), `consigne` de 8 a 12 (19), et
-`consigne - delta_1` au-dela de 12 (18). Aucune valeur n est ecrite en dur : si la consigne passe de 19 a 18,
-les trois paliers deviennent 19, 18 et 17 tout seuls.
-
-Cette section decrivait auparavant une version a paliers fixes ecrits en dur, posee le 2026-11-08 a 11h04
-puis retiree le 2026-11-09 a 19h56 sur ordre d Eric. La fiche etait restee sur cette version disparue et ne
-correspondait plus au code depuis cette date.
+Depuis le 2026-11-08, les trois pieces ne dependent PLUS du confort jour en hiver : chacune a ses propres
+paliers, fixes, lus directement sur la sonde exterieure. Le salon monte de 1 C par rapport a l ancienne
+formule, le bureau baisse de 1, la chambre perd son palier intermediaire.
 
 En ete ces trois capteurs n utilisent plus le confort du tout : ils lisent directement la sonde exterieure.
 Une seule marche, entre 27 et 28 C dehors.
@@ -135,44 +121,6 @@ En hiver, chaque piece bouge maintenant : le salon de 22 a 20, le bureau de 20 a
 Aucune ne recopie plus le confort jour, et le groupe de presence ne change plus la source : depuis le
 2026-11-08, `groupe_2`, `groupe_3` et `groupe_4` recoivent tous `tccsj_s`, `tccsj_b` et `tccsj_c`.
 La seule exception reste `groupe_1`, qui envoie l eco aux trois.
-
-## 6 bis. Les offsets de capteur
-
-Les clims mesurent sur leur retour d air, pas au milieu de la piece, et cette mesure lit sous l ambiance
-reelle. Mesure du 2026-11-10 sur la nuit, en regime stable : consigne 19 au bureau sortait 22,0, consigne 19
-a la chambre sortait 21,8 a 22,0, consigne 20 au salon sortait 21,5. Les deux premieres derivent de 3 C, le
-salon de 1,5 C.
-
-Trois capteurs constants portent ces offsets, declares avec les parametres fixes du master : `offset_salon`
-a 1, `offset_bureau` a 3, `offset_chambre` a 3. Le salon demarre a 1 et non 1,5 sur decision d Eric du
-2026-11-10 : il veut tester la consommation avec une piece a 21 C avant de descendre a 2.
-
-L offset n est PAS applique dans le master. `temperature_corrige_*` garde son sens de temperature visee,
-celle que le tableau de bord affiche. C est le script qui soustrait, au dernier moment, sur la valeur
-envoyee a la clim. Pour viser 18 au bureau, la clim recoit 15.
-
-Le sens est le meme en hiver et en ete : le capteur sous-estime, donc en chaud la piece depasse la cible et
-en froid elle passerait dessous. C est toujours une soustraction.
-
-Les planchers passent : salon 19 au pire cas pour un minimum accepte de 16, bureau et chambre 15 pour un
-minimum de 10.
-
-Ce reglage reste a confirmer. Il vient d une seule nuit et d une clim en phase de chauffe ; si le biais
-differe a l arret, l offset ne sera juste qu en chauffage actif.
-
-### La nuit, une seule cible
-
-Le 2026-11-10 un second capteur de nuit avait ete cree pour faire descendre le bureau et la chambre a 18
-alors que le salon restait a 19. Il a ete retire le meme soir sur decision d Eric, qui veut y revenir plus
-tard. La nuit repasse donc par le seul `temperature_confort_nuit`, plafonne a `seuil_non_chauffage` : 19
-pour les trois pieces. Les offsets s appliquent ensuite.
-
-| periode | salon | bureau | chambre |
-|:--|:--|:--|:--|
-| jour vise | 20 | 18 | 18 |
-| jour envoye | 19 | 15 | 15 |
-| nuit vise | 19 | 19 | 19 |
-| nuit envoye | 18 | 16 | 16 |
 
 ## 7. L eco de saison
 

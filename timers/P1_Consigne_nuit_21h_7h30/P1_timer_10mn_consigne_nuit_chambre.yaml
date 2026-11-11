@@ -1,0 +1,45 @@
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ POLE 1. TIMER : CONSIGNE NUIT CHAMBRE (10 MIN), PALIER 18 -> 19        │
+# ╰──────────────────────────────────────────────────────────────────────────╯
+#
+# ## DESCRIPTION :
+# Compte a rebours de 10 minutes qui ramene la consigne de nuit de la piece
+# chambre de 18 a 19. Il est demarre par l automation de descente quand la
+# temperature reelle depasse la consigne de nuit plus son offset, et il remet
+# la consigne a 19 a son terme (evenement timer.finished).
+#
+# ## POURQUOI UN TIMER ET PAS UN DELAY :
+# Un delay suspend toute l execution de l automation : trois pieces ne peuvent
+# pas avoir chacune leur propre decompte dans une seule execution. Un timer est
+# independant par piece, visible dans l interface, et restaure apres un
+# redemarrage de HA grace a restore: true. Sans restore, une coupure pendant les
+# dix minutes laisserait la consigne bloquee a 18 jusqu au lendemain.
+#
+# ## CALCUL & SOURCES :
+# Duree : 00:10:00, valeur de depart a ajuster apres quelques jours d analyse
+# des puissances (sensor.clim_chambre_nous_power) et des temperatures.
+#
+# ## CHAINE DE DEPENDANCES :
+#
+# | MATERIEL        | CAPTEUR BRUT (source)                          | CE FICHIER (unique_id)              | AVAL                                |
+# |:----------------|:-----------------------------------------------|:------------------------------------|:------------------------------------|
+# | clim chambre | sensor.th_chambre_temperature | clim_consigne_nuit_chambre_10mn | automation de descente et de remontee |
+#
+# ## IMPORTANT (PIEGES) :
+# - Domaine timer charge par configuration.yaml : timer: !include_dir_merge_named timers/.
+#   Un nouveau fichier demande le service timer.reload, pas un redemarrage complet.
+# - Si la fin du timer tombe pendant l arret de HA, timer.finished n est PAS emis au
+#   demarrage (doc officielle). L automatisation de remontee doit donc aussi controler
+#   au demarrage de HA les timers inactifs dont la consigne est restee a 18.
+# - Ce fichier ne contient que le helper : sans les automatisations de descente et de
+#   remontee, il ne fait rien.
+#
+# ## TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - Aucune vignette : helper technique.
+
+# --- clim_consigne_nuit_chambre_10mn ---
+clim_consigne_nuit_chambre_10mn:
+  name: "Clim chambre consigne nuit 10 mn"
+  duration: "00:10:00"
+  restore: true
+  icon: mdi:timer-sand

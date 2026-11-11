@@ -1,0 +1,47 @@
+# ╭──────────────────────────────────────────────────────────────────────────┐
+# │ INPUT_NUMBER : CONSIGNE DE NUIT SALON, ANTI-DERIVE DE LA CLIM        │
+# ╰──────────────────────────────────────────────────────────────────────────┘
+#
+# ## DESCRIPTION :
+# Consigne de nuit reellement envoyee a la clim de la piece salon. Elle vaut 19
+# par defaut. L automatisation de descente la passe a 18 quand la temperature reelle
+# de la piece depasse cette consigne plus son offset, et le timer de 10 minutes la
+# ramene a 19 a son terme.
+#
+# ## POURQUOI UN INPUT_NUMBER ET PAS UN CAPTEUR TEMPLATE :
+# Un capteur template est recalcule a chaque changement de ses sources : il oublierait
+# le 18 des qu un autre capteur bouge (th_balcon_nord par exemple) et renverrait 19
+# aussitot. Un input_number est un etat persistant, insensible aux recalculs, visible
+# dans l interface et modifiable a la main pour un test.
+#
+# ## CALCUL & SOURCES :
+# Valeur de depart 19, la meme que temperature_confort_nuit en hiver. Min 10 et max 30,
+# les planchers des clims. Pas de 0,5 pour permettre un reglage fin du seuil.
+#
+# ## CHAINE DE DEPENDANCES :
+#
+# | MATERIEL     | CAPTEUR BRUT (source)          | CE FICHIER (unique_id)       | AVAL                                    |
+# |:-------------|:-------------------------------|:-----------------------------|:----------------------------------------|
+# | clim salon | sensor.th_salon_temperature | clim_consigne_nuit_salon | script p1_master_gestion_clim, periode nuit |
+#
+# ## IMPORTANT (PIEGES) :
+# - input_number: !include_dir_merge_named input_number/ : un fichier par famille,
+#   les cles sont fusionnees par nom. Un nouveau fichier demande input_number.reload.
+# - Ne pas confondre avec l offset de nuit, qui est un capteur constant du master
+#   (offset_nuit_salon) : la consigne est ce qu on vise, l offset est la marge de
+#   declenchement qui evite une oscillation autour du seuil.
+# - Le script ne lit cet input QUE pendant la periode nuit (21h a 7h30). En jour il
+#   continue d utiliser temperature_corrige_salon.
+#
+# ## TABLEAU DE BORD (VIGNETTES PRINCIPALES) :
+# - L1C3 Commandes Clim, a prevoir pour afficher la consigne de nuit courante.
+#
+# --- clim_consigne_nuit_salon ---
+clim_consigne_nuit_salon:
+  name: "Clim salon consigne nuit"
+  initial: 19
+  min: 10
+  max: 30
+  step: 0.5
+  unit_of_measurement: "°C"
+  icon: mdi:thermometer-chevron-down
