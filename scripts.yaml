@@ -276,6 +276,30 @@ audit_md5_md_yaml:
 # ne suivent pas automatiquement un renommage d'entite.
 # A SAVOIR : Home Assistant reecrit scripts.yaml a chaque enregistrement depuis l'interface, donc
 # ces commentaires n'y survivraient pas. Cette copie locale est la reference documentaire.───────────────────────────────────────╯
+# ╭──────────────────────────────────────────────────────────────────────────╮
+# │ SCRIPT : p1_master_gestion_clim                                            │
+# │ P1 - MASTER : Gestion centralisée climatisation                            │
+# │ Version du 2026-09-09 - logique 3 sorties (OFF / dégradé éco / normal)     │
+# ├──────────────────────────────────────────────────────────────────────────┤
+# │ HISTORIQUE DES VERSIONS                                                   │
+# │ 2026-06-27 : création (refactoring des automations A0/B0)                  │
+# │ 2026-09-06 : ajout clamp min/max (fix temp_out_of_range) - RETIRÉ le 09-09│
+# │ 2026-09-09 : rollback clamp + logique 3 sorties après les 10 essais        │
+# │             - mode_ete_hiver HS => OFF + message                           │
+# │             - éco saison HS + besoin éco => OFF + message                  │
+# │             - groupe HS ou temp normale HS => dégradé éco de saison        │
+# │             - sinon => mode normal                                         │
+# ╰───────────────────────────────────
+#
+# [2026-11-03 / 2026-11-04] Renommage des cibles de confort : temperature_corrige_mamour est
+# devenue temperature_corrige_salon, temperature_corrige_eric est devenue temperature_corrige_bureau.
+# Les QUATRE references d'entites ont ete corrigees le 03. Les DEUX ETIQUETTES de hs_list
+# ('corrige_mamour' -> 'corrige_salon', 'corrige_eric' -> 'corrige_bureau') ne l'ont ete que le 04 :
+# c'est l'ecart que Gen_GLOBAL_INDEX_scripts signalait par different=1, revenu a 0 depuis.
+# Ces etiquettes nomment les capteurs muets dans le rapport de sante ; elles sont ecrites en dur et
+# ne suivent pas automatiquement un renommage d'entite.
+# A SAVOIR : Home Assistant reecrit scripts.yaml a chaque enregistrement depuis l'interface, donc
+# ces commentaires n'y survivraient pas. Cette copie locale est la reference documentaire.───────────────────────────────────────╯
 p1_master_gestion_clim:
   alias: "P1 - MASTER : Gestion centralisée climatisation"
   description: "Pilotage des 3 clims jour/nuit selon le paramètre periode. Appelé par P1_A_01 et P1_B_01."
@@ -450,9 +474,6 @@ p1_master_gestion_clim:
         tccsj_s: "{{ states('sensor.temperature_corrige_salon') | float(states('sensor.temperature_confort_jour') | float) }}"
         tccsj_b: "{{ states('sensor.temperature_corrige_bureau') | float(states('sensor.temperature_confort_jour') | float) }}"
         tccsj_c: "{{ states('sensor.temperature_corrige_chambre') | float(states('sensor.temperature_confort_jour') | float) }}"
-        off_s: "{{ states('sensor.offset_salon') | float(0) }}"
-        off_b: "{{ states('sensor.offset_bureau') | float(0) }}"
-        off_c: "{{ states('sensor.offset_chambre') | float(0) }}"
 
     # ──────────────────────────────────────────────
     # 5. CALCUL DES CIBLES PAR PIÈCE (SELON PÉRIODE)
@@ -558,7 +579,7 @@ p1_master_gestion_clim:
                 entity_id: climate.clim_salon_rm4_mini
               data:
                 hvac_mode: "{% if trigger_id == 'sensor_update' and is_state('climate.clim_salon_rm4_mini', 'off') %}\n  off\n{% else %}\n  {{ mode_saison }}\n{% endif %}"
-                temperature: '{{ (t_salon_target | float) - (off_s | float) }}'
+                temperature: '{{ t_salon_target }}'
         - alias: LOGIQUE BUREAU
           choose:
           - alias: 'VÉRIFICATION : SÉCURITÉ BUREAU (PRISE + ARRET)'
@@ -576,7 +597,7 @@ p1_master_gestion_clim:
                 entity_id: climate.clim_bureau_rm4_mini
               data:
                 hvac_mode: "{% if trigger_id == 'sensor_update' and is_state('climate.clim_bureau_rm4_mini', 'off') %}\n  off\n{% else %}\n  {{ mode_saison }}\n{% endif %}"
-                temperature: '{{ (t_bureau_target | float) - (off_b | float) }}'
+                temperature: '{{ t_bureau_target }}'
         - alias: LOGIQUE CHAMBRE
           choose:
           - alias: 'VÉRIFICATION : SÉCURITÉ CHAMBRE (PRISE + ARRET)'
@@ -599,7 +620,7 @@ p1_master_gestion_clim:
               target:
                 entity_id: climate.clim_chambre_rm4_mini
               data:
-                temperature: '{{ (t_chambre_target | float) - (off_c | float) }}'
+                temperature: '{{ t_chambre_target }}'
       - alias: 'PAUSE : SÉCURITÉ RÉCEPTION'
         delay: 00:00:02
       - alias: 'NOTIF : RÉSUMÉ DE L''ÉTAT DES CLIMATISATIONS'
