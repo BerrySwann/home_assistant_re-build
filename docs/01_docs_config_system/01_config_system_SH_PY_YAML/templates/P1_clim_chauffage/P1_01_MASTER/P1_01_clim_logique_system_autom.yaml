@@ -81,7 +81,7 @@
     - name: "Temperature éCO. Hiver"
       unique_id: temperature_eco_hiver
       unit_of_measurement: "°C"
-      state: "17"
+      state: "19"
 
 # --- temperature_eco_ete ---
     - name: "Temperature éCO. Eté"
