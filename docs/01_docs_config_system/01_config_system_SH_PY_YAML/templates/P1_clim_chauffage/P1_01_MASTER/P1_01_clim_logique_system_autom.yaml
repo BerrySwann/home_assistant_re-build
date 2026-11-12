@@ -168,56 +168,61 @@
       state: "0.3"
 
 # ┌───────────────────────────────────────────────────────────┐
-# │ CORRECTION DE TEMPERATURE DE NUIT, PAR PIECE              │
+# │ CORRECTION DE TEMPERATURE, PAR PIECE                      │
+# │ VALABLE DE JOUR COMME DE NUIT                             │
 # └───────────────────────────────────────────────────────────┘
-# Decalage retire de la consigne de nuit avant de l envoyer a
-# la climatisation, pour compenser SON capteur de reprise d air,
-# qui lit sous l ambiance reelle.
+# Decalage retire de la cible avant de l envoyer a la
+# climatisation, pour compenser SON capteur de reprise d air
+# qui lit sous l ambiance reelle. Le principe ne depend pas de
+# la cible : que la clim vise 19 la nuit, 20 le jour ou 17 en
+# eco, elle lit toujours environ autant sous l ambiance.
 #
 # Mesure du 2026-11-10 en service, consigne affichee contre
-# temperature de la piece :
+# temperature reelle de la piece :
 #   salon   consigne 20 -> 21,5   ecart +1,5
 #   bureau  consigne 18 -> 22,0   ecart +4,0
 #   chambre consigne 18 -> 21,6   ecart +3,6
 #
-# CES CAPTEURS NE SONT PLUS SOUSTRAITS ICI (2026-11-12 19h15).
-# temperature_consigne_nuit_* doit rester la CIBLE de la nuit, c est
-# elle que lisent les automatisations J K L, ecart_nuit_* et
-# derive_nuit_*. La soustraction se fait dans le script, sur ses
-# variables tccn_*, au moment de l envoi. Separer la cible de l ordre
-# donne a la machine : soustraire ici faisait passer la cible de 19 a
-# 18 et 16, J K L declenchaient en permanence et le -1 restait colle.
+# Valeurs retenues par Eric : 1 au salon, 3 au bureau et a la
+# chambre, soit l ecart arrondi vers le bas. Consequence de cet
+# arrondi : la piece se stabilise AU-DESSUS de la cible. Viser
+# 19 pile demanderait 1,5 / 4,0 / 3,6.
 #
-# Valeurs retenues par Eric : 1 au salon, 3 au bureau et a la chambre.
-# Planchers : salon 16, bureau et chambre 10.
+# OU LA SOUSTRACTION SE FAIT :
+# - la nuit, dans le script, sur ses variables tccn_* ;
+# - le jour, dans le script aussi, quand la branche jour sera
+#   cablee. La cible temperature_corrige_* reste la CIBLE,
+#   elle ne doit jamais porter la correction.
 #
-# Ce n est PAS un seuil de declenchement. Ne pas confondre avec
-# offset_nuit_* (0,3), qui sert de zone morte aux automatisations
-# J K L pour decider QUAND agir. Ici on decide de QUELLE valeur
-# on envoie.
+# Ne pas confondre avec offset_nuit_* (0,3), qui est une zone
+# morte de DECLENCHEMENT pour J K L et les automatisations de
+# jour. Ici on decide de QUELLE VALEUR on envoie.
 #
-# Planchers respectes : salon 16 (17,5 vise), bureau et chambre
-# 10 (15,0 et 15,4 vises).
+# Planchers des clims : salon 16, bureau et chambre 10. A cible
+# 19 la correction donne 18 / 16 / 16, il reste de la marge. En
+# eco a 17 elle donne 16 / 14 / 14, le salon est pile sur son
+# plancher : c est la limite basse a ne pas franchir.
 #
-# LIMITE CONNUE : l ecart a ete mesure UNE fois, sur une nuit, a
-# une seule temperature exterieure. S il derive avec la saison ou
-# avec la charge, ces valeurs seront fausses. A remesurer.
+# LIMITE CONNUE : l ecart a ete mesure UNE fois, sur une seule
+# nuit, a une seule temperature exterieure, et sans correction
+# active. A remesurer sur plusieurs nuits, et a reverifier en
+# journee ou la charge varie beaucoup plus.
 
-# --- correction_temperature_nuit_salon ---
-    - name: "Correction temperature nuit Salon"
-      unique_id: correction_temperature_nuit_salon
+# --- correction_temperature_salon ---
+    - name: "Correction temperature Salon"
+      unique_id: correction_temperature_salon
       unit_of_measurement: "°C"
       state: "1"
 
-# --- correction_temperature_nuit_bureau ---
-    - name: "Correction temperature nuit Bureau"
-      unique_id: correction_temperature_nuit_bureau
+# --- correction_temperature_bureau ---
+    - name: "Correction temperature Bureau"
+      unique_id: correction_temperature_bureau
       unit_of_measurement: "°C"
       state: "3"
 
-# --- correction_temperature_nuit_chambre ---
-    - name: "Correction temperature nuit Chambre"
-      unique_id: correction_temperature_nuit_chambre
+# --- correction_temperature_chambre ---
+    - name: "Correction temperature Chambre"
+      unique_id: correction_temperature_chambre
       unit_of_measurement: "°C"
       state: "3"
 
@@ -478,7 +483,8 @@
           {{ [t_ext - d1, 26] | min | int }}
         {% else %}
           {% set tccsj_s = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccsj_s, 22] | min | round(1) }}
+          {#- cible de jour + decalage ecrit par l automatisation de jour -#}
+          {{ ([tccsj_s, 22] | min) + (states('input_number.clim_consigne_jour_salon') | float(0)) | round(1) }}
         {% endif %}
 
 # ┌─────────────────────────────────┐
@@ -497,7 +503,8 @@
           {{ [t_ext , 27] | min | int }}
         {% else %}
           {% set tccsj_b = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccsj_b, 19] | min | round(1) }}
+          {#- cible de jour + decalage ecrit par l automatisation de jour -#}
+          {{ ([tccsj_b, 19] | min) + (states('input_number.clim_consigne_jour_bureau') | float(0)) | round(1) }}
         {% endif %}
 
 # ┌─────────────────────────────────┐
@@ -516,7 +523,8 @@
           {{ [t_ext + d1, 27] | min | int }}
         {% else %}
           {% set tccsj_c = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccsj_c, 19] | min | int }}
+          {#- cible de jour + decalage ecrit par l automatisation de jour -#}
+          {{ ([tccsj_c, 19] | min) + (states('input_number.clim_consigne_jour_chambre') | float(0)) | round(1) }}
         {% endif %}
 
 # ┌────────────────────────────────────────────────┐

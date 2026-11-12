@@ -1,0 +1,22 @@
+# ┌───────────────────────────────────────────────────────────┐
+# │ CONSIGNE DE JOUR, ANTI-DERIVE, Salon
+# └───────────────────────────────────────────────────────────┘
+# Pendant du capteur de nuit. Les automatisations de jour y
+# ecrivent -1 pendant 10 minutes quand la piece depasse sa
+# cible plus l offset, puis le remettent a 0.
+#
+# Il S AJOUTE a la cible dans temperature_corrige_salon, qui
+# vaut min(confort jour, plafond) + cet input. A 0, rien ne
+# change par rapport a avant.
+#
+# Include en merge_named : la cle est l identifiant, la valeur
+# le bloc de configuration. Une liste ici ne serait pas montee.
+
+clim_consigne_jour_salon:
+  name: "Clim salon decalage jour"
+  initial: 0
+  min: -5
+  max: 5
+  step: 0.5
+  unit_of_measurement: "°C"
+  icon: mdi:thermometer-chevron-down

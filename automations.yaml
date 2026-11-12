@@ -3033,3 +3033,165 @@
         data:
           value: 0
   mode: single
+
+- id: '1794417183991'
+  alias: (M) (CLIM) Consigne jour anti-derive Salon
+  description: >-
+    Corrige la derive de la clim de salon en journee. Quand la piece depasse sa cible de
+    jour plus l offset, ecrit -1 dans clim_consigne_jour_salon et lance le timer de
+    10 minutes, qui la ramene a 0. La cible vient de temperature_corrige_salon, qui porte
+    deja les paliers et le groupe ; la correction de derive du capteur de la clim est
+    soustraite plus loin, dans le script, comme la nuit.
+  triggers:
+  - trigger: state
+    entity_id: sensor.th_salon_temperature
+    id: mesure
+  - trigger: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.clim_consigne_jour_salon_10mn
+    id: fin_timer
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: mesure
+      - condition: time
+        after: '07:30:00'
+        before: '21:00:00'
+      - condition: template
+        value_template: >-
+          {{ states('sensor.th_salon_temperature') | float(0) | round(1, 'floor') >
+          (states('sensor.temperature_corrige_salon') | float(0)) +
+          (states('sensor.offset_nuit_salon') | float(0.3)) }}
+      - condition: template
+        value_template: >-
+          {{ not is_state('sensor.groupe', 'groupe_1') }}
+      sequence:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.clim_consigne_jour_salon
+        data:
+          value: -1
+      - action: timer.start
+        target:
+          entity_id: timer.clim_consigne_jour_salon_10mn
+  - conditions:
+    - condition: trigger
+      id: fin_timer
+    sequence:
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.clim_consigne_jour_salon
+      data:
+        value: 0
+  mode: single
+
+- id: '1794417183992'
+  alias: (N) (CLIM) Consigne jour anti-derive Bureau
+  description: >-
+    Corrige la derive de la clim de bureau en journee. Quand la piece depasse sa cible de
+    jour plus l offset, ecrit -1 dans clim_consigne_jour_bureau et lance le timer de
+    10 minutes, qui la ramene a 0. La cible vient de temperature_corrige_bureau, qui porte
+    deja les paliers et le groupe ; la correction de derive du capteur de la clim est
+    soustraite plus loin, dans le script, comme la nuit.
+  triggers:
+  - trigger: state
+    entity_id: sensor.th_bureau_temperature
+    id: mesure
+  - trigger: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.clim_consigne_jour_bureau_10mn
+    id: fin_timer
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: mesure
+      - condition: time
+        after: '07:30:00'
+        before: '21:00:00'
+      - condition: template
+        value_template: >-
+          {{ states('sensor.th_bureau_temperature') | float(0) | round(1, 'floor') >
+          (states('sensor.temperature_corrige_bureau') | float(0)) +
+          (states('sensor.offset_nuit_bureau') | float(0.3)) }}
+      - condition: template
+        value_template: >-
+          {{ not is_state('sensor.groupe', 'groupe_1') }}
+      sequence:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.clim_consigne_jour_bureau
+        data:
+          value: -1
+      - action: timer.start
+        target:
+          entity_id: timer.clim_consigne_jour_bureau_10mn
+  - conditions:
+    - condition: trigger
+      id: fin_timer
+    sequence:
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.clim_consigne_jour_bureau
+      data:
+        value: 0
+  mode: single
+
+- id: '1794417183993'
+  alias: (O) (CLIM) Consigne jour anti-derive Chambre
+  description: >-
+    Corrige la derive de la clim de chambre en journee. Quand la piece depasse sa cible de
+    jour plus l offset, ecrit -1 dans clim_consigne_jour_chambre et lance le timer de
+    10 minutes, qui la ramene a 0. La cible vient de temperature_corrige_chambre, qui porte
+    deja les paliers et le groupe ; la correction de derive du capteur de la clim est
+    soustraite plus loin, dans le script, comme la nuit.
+  triggers:
+  - trigger: state
+    entity_id: sensor.th_chambre_temperature
+    id: mesure
+  - trigger: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.clim_consigne_jour_chambre_10mn
+    id: fin_timer
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: mesure
+      - condition: time
+        after: '07:30:00'
+        before: '21:00:00'
+      - condition: template
+        value_template: >-
+          {{ states('sensor.th_chambre_temperature') | float(0) | round(1, 'floor') >
+          (states('sensor.temperature_corrige_chambre') | float(0)) +
+          (states('sensor.offset_nuit_chambre') | float(0.3)) }}
+      - condition: template
+        value_template: >-
+          {{ not is_state('sensor.groupe', 'groupe_1') }}
+      sequence:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.clim_consigne_jour_chambre
+        data:
+          value: -1
+      - action: timer.start
+        target:
+          entity_id: timer.clim_consigne_jour_chambre_10mn
+  - conditions:
+    - condition: trigger
+      id: fin_timer
+    sequence:
+    - action: input_number.set_value
+      target:
+        entity_id: input_number.clim_consigne_jour_chambre
+      data:
+        value: 0
+  mode: single

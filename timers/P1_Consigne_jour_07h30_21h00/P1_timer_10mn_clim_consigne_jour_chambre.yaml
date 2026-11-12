@@ -1,0 +1,18 @@
+# ┌───────────────────────────────────────────────────────────┐
+# │ TIMER : CONSIGNE JOUR ANTI-DERIVE, Chambre
+# └───────────────────────────────────────────────────────────┘
+# Duree du retour en arriere : l automatisation de jour ecrit
+# -1 dans clim_consigne_jour_chambre, puis demarre ce timer.
+# A l expiration, la consigne repasse a 0.
+#
+# 10 minutes, meme valeur que la nuit, validee par une mesure
+# sur la nuit du 11 au 12 : ecarts constates entre deux
+# declenchements de 11 a 157 minutes, aucun emballement.
+#
+# restore: true pour que le decompte survive a un rechargement.
+
+clim_consigne_jour_chambre_10mn:
+  name: "Clim chambre consigne jour 10 mn"
+  duration: "00:10:00"
+  restore: true
+  icon: mdi:timer-sand
