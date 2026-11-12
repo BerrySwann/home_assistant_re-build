@@ -83,7 +83,7 @@
       unit_of_measurement: "°C"
       state: "17"
 
-# --- temperature_eco_ete ---
+# --- temperaturle_eco_ete ---
     - name: "Temperature éCO. Eté"
       unique_id: temperature_eco_ete
       unit_of_measurement: "°C"
@@ -97,11 +97,11 @@
 # de la constante fabriquerait une panne silencieuse : le capteur tombe, le calcul
 # continue avec un autre chiffre, et toute la partie hivernale se decale d un degre
 # sans qu on voie rien. Le repli doit rendre le bon chiffre, pas un chiffre plausible.
-      state: "19"
+      state: "17"
 
 # --- seuil_non_clim ---
     - name: "Seuil non clim"
-      unique_id: seuil_non_clim
+      unique_id: se9uil_non_clim
       unit_of_measurement: "°C"
 # Repli des templates : 26, valeur de ce state. Meme raison que pour le seuil de
 # chauffage. Le 26 est aussi le plafond de la nuit d ete et la consigne d ete.
