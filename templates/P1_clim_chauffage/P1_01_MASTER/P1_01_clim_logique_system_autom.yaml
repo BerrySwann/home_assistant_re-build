@@ -336,7 +336,7 @@
 
 
 # ┌───────────────────────────────────────────────────────────┐
-# │ ECART NUIT SIGNE ET DERIVE, VALABLES DANS LES DEUX SENS    │
+# │ ECART NUIT SIGNE ET DERIVE, VALABLES DANS LES DEUX SENS   │
 # └───────────────────────────────────────────────────────────┘
 # ecart = temperature reelle de la piece moins la consigne de nuit.
 # Positif quand la piece est trop chaude, negatif quand elle est trop froide.
@@ -347,6 +347,9 @@
 # Un seul capteur booleen par piece evite d ecrire la branche de saison
 # dans chaque automatisation.
 
+# ┌───────────────────────────────────────────────────────────┐
+# │ CONSIGNES DE NUIT ET ANTI-DERIVE SALON (2026-11-12)       │
+# └───────────────────────────────────────────────────────────┘
 # --- ecart_nuit_salon ---
     - name: "Ecart nuit Salon"
       unique_id: ecart_nuit_salon
@@ -366,6 +369,9 @@
           {{ 'on' if x > o else 'off' }}
         {% else %}off{% endif %}
 
+# ┌───────────────────────────────────────────────────────────┐
+# │ CONSIGNES DE NUIT ET ANTI-DERIVE BUREAU (2026-11-12)      │
+# └───────────────────────────────────────────────────────────┘
 # --- ecart_nuit_bureau ---
     - name: "Ecart nuit Bureau"
       unique_id: ecart_nuit_bureau
@@ -385,6 +391,9 @@
           {{ 'on' if x > o else 'off' }}
         {% else %}off{% endif %}
 
+# ┌───────────────────────────────────────────────────────────┐
+# │ CONSIGNES DE NUIT ET ANTI-DERIVE CHAMBRE (2026-11-12)     │
+# └───────────────────────────────────────────────────────────┘
 # --- ecart_nuit_chambre ---
     - name: "Ecart nuit Chambre"
       unique_id: ecart_nuit_chambre
