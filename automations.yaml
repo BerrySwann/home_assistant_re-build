@@ -2915,8 +2915,11 @@
         after: '21:00:00'
         before: 07:30:00
       - condition: template
-        value_template: '{{ states(''sensor.th_salon_temperature'') | float(0) > (states(''input_number.clim_consigne_nuit_salon'')
-          | float(0)) + (states(''sensor.offset_nuit_salon'') | float(0)) }}'
+        value_template: "{% set thst = states('sensor.th_salon_temperature') | float(none)
+          %} {% set tcns = states('sensor.temperature_consigne_nuit_salon') | float(none)
+          %} {% set ons = states('sensor.offset_nuit_salon') | float(none) %} {{ thst
+          is not none and tcns is not none and ons is not none\n   and (thst | round(1,
+          'floor')) > (tcns + ons) }}"
       sequence:
       - action: input_number.set_value
         target:
@@ -2959,9 +2962,11 @@
         after: '21:00:00'
         before: 07:30:00
       - condition: template
-        value_template: '{{ states(''sensor.th_bureau_temperature'') | float(0) >
-          (states(''input_number.clim_consigne_nuit_bureau'') | float(0)) + (states(''sensor.offset_nuit_bureau'')
-          | float(0)) }}'
+        value_template: "{% set thbt = states('sensor.th_bureau_temperature') | float(none)
+          %} {% set tcnb = states('sensor.temperature_consigne_nuit_bureau') | float(none)
+          %} {% set onb = states('sensor.offset_nuit_bureau') | float(none) %} {{
+          thbt is not none and tcnb is not none and onb is not none\n   and (thbt
+          | round(1, 'floor')) > (tcnb + onb) }}"
       sequence:
       - action: input_number.set_value
         target:
@@ -3004,9 +3009,11 @@
         after: '21:00:00'
         before: 07:30:00
       - condition: template
-        value_template: '{{ states(''sensor.th_chambre_temperature'') | float(0) >
-          (states(''input_number.clim_consigne_nuit_chambre'') | float(0)) + (states(''sensor.offset_nuit_chambre'')
-          | float(0)) }}'
+        value_template: "{% set thct = states('sensor.th_chambre_temperature') | float(none)
+          %} {% set tcnc = states('sensor.temperature_consigne_nuit_chambre') | float(none)
+          %} {% set onc = states('sensor.offset_nuit_chambre') | float(none) %} {{
+          thct is not none and tcnc is not none and onc is not none\n   and (thct
+          | round(1, 'floor')) > (tcnc + onc) }}"
       sequence:
       - action: input_number.set_value
         target:

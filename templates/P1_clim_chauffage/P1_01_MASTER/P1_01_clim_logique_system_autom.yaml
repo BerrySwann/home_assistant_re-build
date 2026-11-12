@@ -83,7 +83,7 @@
       unit_of_measurement: "°C"
       state: "17"
 
-# --- temperaturle_eco_ete ---
+# --- temperature_eco_ete ---
     - name: "Temperature éCO. Eté"
       unique_id: temperature_eco_ete
       unit_of_measurement: "°C"
@@ -166,6 +166,60 @@
       unique_id: offset_nuit_chambre
       unit_of_measurement: "°C"
       state: "0.3"
+
+# ┌───────────────────────────────────────────────────────────┐
+# │ CORRECTION DE TEMPERATURE DE NUIT, PAR PIECE              │
+# └───────────────────────────────────────────────────────────┘
+# Decalage retire de la consigne de nuit avant de l envoyer a
+# la climatisation, pour compenser SON capteur de reprise d air,
+# qui lit sous l ambiance reelle.
+#
+# Mesure du 2026-11-10 en service, consigne affichee contre
+# temperature de la piece :
+#   salon   consigne 20 -> 21,5   ecart +1,5
+#   bureau  consigne 18 -> 22,0   ecart +4,0
+#   chambre consigne 18 -> 21,6   ecart +3,6
+#
+# CES CAPTEURS NE SONT PLUS SOUSTRAITS ICI (2026-11-12 19h15).
+# temperature_consigne_nuit_* doit rester la CIBLE de la nuit, c est
+# elle que lisent les automatisations J K L, ecart_nuit_* et
+# derive_nuit_*. La soustraction se fait dans le script, sur ses
+# variables tccn_*, au moment de l envoi. Separer la cible de l ordre
+# donne a la machine : soustraire ici faisait passer la cible de 19 a
+# 18 et 16, J K L declenchaient en permanence et le -1 restait colle.
+#
+# Valeurs retenues par Eric : 1 au salon, 3 au bureau et a la chambre.
+# Planchers : salon 16, bureau et chambre 10.
+#
+# Ce n est PAS un seuil de declenchement. Ne pas confondre avec
+# offset_nuit_* (0,3), qui sert de zone morte aux automatisations
+# J K L pour decider QUAND agir. Ici on decide de QUELLE valeur
+# on envoie.
+#
+# Planchers respectes : salon 16 (17,5 vise), bureau et chambre
+# 10 (15,0 et 15,4 vises).
+#
+# LIMITE CONNUE : l ecart a ete mesure UNE fois, sur une nuit, a
+# une seule temperature exterieure. S il derive avec la saison ou
+# avec la charge, ces valeurs seront fausses. A remesurer.
+
+# --- correction_temperature_nuit_salon ---
+    - name: "Correction temperature nuit Salon"
+      unique_id: correction_temperature_nuit_salon
+      unit_of_measurement: "°C"
+      state: "1"
+
+# --- correction_temperature_nuit_bureau ---
+    - name: "Correction temperature nuit Bureau"
+      unique_id: correction_temperature_nuit_bureau
+      unit_of_measurement: "°C"
+      state: "3"
+
+# --- correction_temperature_nuit_chambre ---
+    - name: "Correction temperature nuit Chambre"
+      unique_id: correction_temperature_nuit_chambre
+      unit_of_measurement: "°C"
+      state: "3"
 
 # ┌───────────────────────────────────────────────────┐
 # │ DÉTECTION DU MODE GÉNÉRAL MODE ETE/HIVER          │
@@ -336,7 +390,7 @@
 
 
 # ┌───────────────────────────────────────────────────────────┐
-# │ ECART NUIT SIGNE ET DERIVE, VALABLES DANS LES DEUX SENS   │
+# │ ECART NUIT SIGNE ET DERIVE, VALABLES DANS LES DEUX SENS    │
 # └───────────────────────────────────────────────────────────┘
 # ecart = temperature reelle de la piece moins la consigne de nuit.
 # Positif quand la piece est trop chaude, negatif quand elle est trop froide.
@@ -347,9 +401,6 @@
 # Un seul capteur booleen par piece evite d ecrire la branche de saison
 # dans chaque automatisation.
 
-# ┌───────────────────────────────────────────────────────────┐
-# │ CONSIGNES DE NUIT ET ANTI-DERIVE SALON (2026-11-12)       │
-# └───────────────────────────────────────────────────────────┘
 # --- ecart_nuit_salon ---
     - name: "Ecart nuit Salon"
       unique_id: ecart_nuit_salon
@@ -357,6 +408,7 @@
       state: >-
         {{ ((states('sensor.th_salon_temperature') | float(0)) -
         (states('sensor.temperature_consigne_nuit_salon') | float(19))) | round(1) }}
+
 # --- derive_nuit_salon ---
     - name: "Derive nuit Salon"
       unique_id: derive_nuit_salon
@@ -368,10 +420,6 @@
         {% elif is_state('sensor.mode_ete_hiver', 'heat') %}
           {{ 'on' if x > o else 'off' }}
         {% else %}off{% endif %}
-
-# ┌───────────────────────────────────────────────────────────┐
-# │ CONSIGNES DE NUIT ET ANTI-DERIVE BUREAU (2026-11-12)      │
-# └───────────────────────────────────────────────────────────┘
 # --- ecart_nuit_bureau ---
     - name: "Ecart nuit Bureau"
       unique_id: ecart_nuit_bureau
@@ -379,6 +427,7 @@
       state: >-
         {{ ((states('sensor.th_bureau_temperature') | float(0)) -
         (states('sensor.temperature_consigne_nuit_bureau') | float(19))) | round(1) }}
+
 # --- derive_nuit_bureau ---
     - name: "Derive nuit Bureau"
       unique_id: derive_nuit_bureau
@@ -390,10 +439,6 @@
         {% elif is_state('sensor.mode_ete_hiver', 'heat') %}
           {{ 'on' if x > o else 'off' }}
         {% else %}off{% endif %}
-
-# ┌───────────────────────────────────────────────────────────┐
-# │ CONSIGNES DE NUIT ET ANTI-DERIVE CHAMBRE (2026-11-12)     │
-# └───────────────────────────────────────────────────────────┘
 # --- ecart_nuit_chambre ---
     - name: "Ecart nuit Chambre"
       unique_id: ecart_nuit_chambre
@@ -401,6 +446,7 @@
       state: >-
         {{ ((states('sensor.th_chambre_temperature') | float(0)) -
         (states('sensor.temperature_consigne_nuit_chambre') | float(19))) | round(1) }}
+
 # --- derive_nuit_chambre ---
     - name: "Derive nuit Chambre"
       unique_id: derive_nuit_chambre
