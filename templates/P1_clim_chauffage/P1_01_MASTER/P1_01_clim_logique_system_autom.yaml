@@ -97,7 +97,7 @@
 # de la constante fabriquerait une panne silencieuse : le capteur tombe, le calcul
 # continue avec un autre chiffre, et toute la partie hivernale se decale d un degre
 # sans qu on voie rien. Le repli doit rendre le bon chiffre, pas un chiffre plausible.
-      state: "17"
+      state: "19"
 
 # --- seuil_non_clim ---
     - name: "Seuil non clim"
@@ -354,7 +354,6 @@
       state: >-
         {{ ((states('sensor.th_salon_temperature') | float(0)) -
         (states('sensor.temperature_consigne_nuit_salon') | float(19))) | round(1) }}
-
 # --- derive_nuit_salon ---
     - name: "Derive nuit Salon"
       unique_id: derive_nuit_salon
@@ -366,6 +365,7 @@
         {% elif is_state('sensor.mode_ete_hiver', 'heat') %}
           {{ 'on' if x > o else 'off' }}
         {% else %}off{% endif %}
+
 # --- ecart_nuit_bureau ---
     - name: "Ecart nuit Bureau"
       unique_id: ecart_nuit_bureau
@@ -373,7 +373,6 @@
       state: >-
         {{ ((states('sensor.th_bureau_temperature') | float(0)) -
         (states('sensor.temperature_consigne_nuit_bureau') | float(19))) | round(1) }}
-
 # --- derive_nuit_bureau ---
     - name: "Derive nuit Bureau"
       unique_id: derive_nuit_bureau
@@ -385,6 +384,7 @@
         {% elif is_state('sensor.mode_ete_hiver', 'heat') %}
           {{ 'on' if x > o else 'off' }}
         {% else %}off{% endif %}
+
 # --- ecart_nuit_chambre ---
     - name: "Ecart nuit Chambre"
       unique_id: ecart_nuit_chambre
@@ -392,7 +392,6 @@
       state: >-
         {{ ((states('sensor.th_chambre_temperature') | float(0)) -
         (states('sensor.temperature_consigne_nuit_chambre') | float(19))) | round(1) }}
-
 # --- derive_nuit_chambre ---
     - name: "Derive nuit Chambre"
       unique_id: derive_nuit_chambre
