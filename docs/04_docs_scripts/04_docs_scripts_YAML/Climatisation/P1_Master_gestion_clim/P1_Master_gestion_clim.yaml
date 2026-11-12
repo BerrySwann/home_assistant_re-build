@@ -1,27 +1,3 @@
-# ╭──────────────────────────────────────────────────────────────────────────╮
-# │ SCRIPT : p1_master_gestion_clim                                            │
-# │ P1 - MASTER : Gestion centralisée climatisation                            │
-# │ Version du 2026-09-09 - logique 3 sorties (OFF / dégradé éco / normal)     │
-# ├──────────────────────────────────────────────────────────────────────────┤
-# │ HISTORIQUE DES VERSIONS                                                   │
-# │ 2026-06-27 : création (refactoring des automations A0/B0)                  │
-# │ 2026-09-06 : ajout clamp min/max (fix temp_out_of_range) - RETIRÉ le 09-09│
-# │ 2026-09-09 : rollback clamp + logique 3 sorties après les 10 essais        │
-# │             - mode_ete_hiver HS => OFF + message                           │
-# │             - éco saison HS + besoin éco => OFF + message                  │
-# │             - groupe HS ou temp normale HS => dégradé éco de saison        │
-# │             - sinon => mode normal                                         │
-# ╰───────────────────────────────────
-#
-# [2026-11-03 / 2026-11-04] Renommage des cibles de confort : temperature_corrige_mamour est
-# devenue temperature_corrige_salon, temperature_corrige_eric est devenue temperature_corrige_bureau.
-# Les QUATRE references d'entites ont ete corrigees le 03. Les DEUX ETIQUETTES de hs_list
-# ('corrige_mamour' -> 'corrige_salon', 'corrige_eric' -> 'corrige_bureau') ne l'ont ete que le 04 :
-# c'est l'ecart que Gen_GLOBAL_INDEX_scripts signalait par different=1, revenu a 0 depuis.
-# Ces etiquettes nomment les capteurs muets dans le rapport de sante ; elles sont ecrites en dur et
-# ne suivent pas automatiquement un renommage d'entite.
-# A SAVOIR : Home Assistant reecrit scripts.yaml a chaque enregistrement depuis l'interface, donc
-# ces commentaires n'y survivraient pas. Cette copie locale est la reference documentaire.───────────────────────────────────────╯
 p1_master_gestion_clim:
   alias: "P1 - MASTER : Gestion centralisée climatisation"
   description: "Pilotage des 3 clims jour/nuit selon le paramètre periode. Appelé par P1_A_01 et P1_B_01."
@@ -195,12 +171,9 @@ p1_master_gestion_clim:
         tccj_s: "{{ states('sensor.temperature_corrige_salon') | float(states('sensor.temperature_confort_jour') | float) }}"
         tccj_b: "{{ states('sensor.temperature_corrige_bureau') | float(states('sensor.temperature_confort_jour') | float) }}"
         tccj_c: "{{ states('sensor.temperature_corrige_chambre') | float(states('sensor.temperature_confort_jour') | float) }}"
-        tccn_s: "{{ (states('sensor.temperature_consigne_nuit_salon') | float(states('sensor.seuil_non_chauffage') | float))
-      - (states('sensor.correction_temperature_salon') | float(0)) }}"
-        tccn_b: "{{ (states('sensor.temperature_consigne_nuit_bureau') | float(states('sensor.seuil_non_chauffage') | float))
-      - (states('sensor.correction_temperature_bureau') | float(0)) }}"
-        tccn_c: "{{ (states('sensor.temperature_consigne_nuit_chambre') | float(states('sensor.seuil_non_chauffage') | float))
-      - (states('sensor.correction_temperature_chambre') | float(0)) }}"
+        tccn_s: "{{ states('sensor.temperature_consigne_nuit_salon') | float(states('sensor.seuil_non_chauffage') | float) }}"
+        tccn_b: "{{ states('sensor.temperature_consigne_nuit_bureau') | float(states('sensor.seuil_non_chauffage') | float) }}"
+        tccn_c: "{{ states('sensor.temperature_consigne_nuit_chambre') | float(states('sensor.seuil_non_chauffage') | float) }}"
 
     # ──────────────────────────────────────────────
     # 5. CALCUL DES CIBLES PAR PIÈCE (SELON PÉRIODE)

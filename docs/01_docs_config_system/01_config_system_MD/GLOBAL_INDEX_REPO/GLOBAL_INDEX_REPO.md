@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--11-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--12-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -14,6 +14,7 @@
 </div>
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-11-12 (21h, /histo-final) - entrées ajoutées : les 3 automatisations de jour (M, N, O) Consigne jour anti-derive Salon / Bureau / Chambre, les 3 input_number clim_consigne_jour_* et les 3 timers clim_consigne_jour_*_10mn ; budget MAJ : core 2026.11.1 et SmartIR ecartes, wind rose, custom brand et samba installes
 *Dernière mise à jour : 2026-11-11 (21h, /histo-final) - entrées ajoutées : les 3 timers de consigne de nuit (timers/P1_Consigne_nuit_21h_7h30/) et les 3 input_number de consigne de nuit (input_number/P1_Consigne_nuit_anti_derive/) ; dossier input_number/Meteo/ corrigé (previous.temperature_et_humidit -> previous.temperature_et_humidity) ; bloc timers SDB remis sur les dossiers réels P1_Soufflant_SDB et P1_timers_seche_serviette_SDB (l'ancien chemin P1_timers/ n'existe plus)
 *Dernière mise à jour : 2026-11-09 (20h45, /histo-final) - entrée ajoutée : IA_PRISE_eCO.md (fiche des prises eCO, docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_PRISE_eCO/)*
 *Dernière mise à jour : 2026-10-29 (22h) - lien de la fiche Audit_md5_yaml.md remis sur son dossier (01_scripts.sh_md/Audit_md5_yaml/) après le rangement des fiches de .scripts un dossier par fichier ; aucun fichier ajouté ni supprimé*
