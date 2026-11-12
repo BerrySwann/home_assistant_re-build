@@ -1,45 +1,47 @@
-id: '1794417185983'
-alias: (L) (CLIM) Consigne nuit anti-derive Chambre
-description: "Passe la consigne de nuit de chambre a 18 pendant 10 minutes quand la temperature depasse la consigne plus son offset, puis la ramene a 19."
-triggers:
-- trigger: state
-  entity_id: sensor.th_chambre_temperature
-  id: mesure
-- trigger: event
-  event_type: timer.finished
-  event_data:
-    entity_id: timer.clim_consigne_nuit_chambre_10mn
-  id: fin_timer
-conditions: []
-actions:
-- choose:
-  - conditions:
-    - condition: trigger
-      id: mesure
-    - condition: time
-      after: '21:00:00'
-      before: '07:30:00'
-    - condition: template
-      value_template: >-
-        {{ states('sensor.th_chambre_temperature') | float(0) >
-        (states('input_number.clim_consigne_nuit_chambre') | float(19)) +
-        (states('sensor.offset_nuit_chambre') | float(0.3)) }}
-    sequence:
-    - action: input_number.set_value
-      target:
-        entity_id: input_number.clim_consigne_nuit_chambre
-      data:
-        value: -1
-    - action: timer.start
-      target:
-        entity_id: timer.clim_consigne_nuit_chambre_10mn
-  - conditions:
-    - condition: trigger
-      id: fin_timer
-    sequence:
-    - action: input_number.set_value
-      target:
-        entity_id: input_number.clim_consigne_nuit_chambre
-      data:
-        value: 0
-mode: single
+- id: '1794417185983'
+  alias: (L) (CLIM) Consigne nuit anti-derive Chambre
+  description: Passe la consigne de nuit de chambre a 18 pendant 10 minutes quand
+    la temperature depasse la consigne plus son offset, puis la ramene a 19.
+  triggers:
+  - trigger: state
+    entity_id: sensor.th_chambre_temperature
+    id: mesure
+  - trigger: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.clim_consigne_nuit_chambre_10mn
+    id: fin_timer
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: mesure
+      - condition: time
+        after: '21:00:00'
+        before: 07:30:00
+      - condition: template
+        value_template: "{% set thct = states('sensor.th_chambre_temperature') | float(none)
+          %} {% set tcnc = states('sensor.temperature_consigne_nuit_chambre') | float(none)
+          %} {% set onc = states('sensor.offset_nuit_chambre') | float(none) %} {{
+          thct is not none and tcnc is not none and onc is not none\n   and (thct
+          | round(1, 'floor')) > (tcnc + onc) }}"
+      sequence:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.clim_consigne_nuit_chambre
+        data:
+          value: -1
+      - action: timer.start
+        target:
+          entity_id: timer.clim_consigne_nuit_chambre_10mn
+    - conditions:
+      - condition: trigger
+        id: fin_timer
+      sequence:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.clim_consigne_nuit_chambre
+        data:
+          value: 0
+  mode: single

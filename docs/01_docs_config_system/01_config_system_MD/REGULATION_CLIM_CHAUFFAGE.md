@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--11-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--12-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -149,6 +149,26 @@ Trois capteurs d ecart, un par piece, qui prennent la temperature reelle moins l
 
     ecart_nuit_salon = sensor.th_salon_temperature - temperature_consigne_nuit_salon
 
+Trois capteurs de correction, un par piece, qui portent le decalage a retirer de la consigne AVANT
+de l envoyer a la clim, pour compenser son capteur de reprise d air qui lit sous l ambiance reelle :
+
+| Capteur | Valeur | Justification |
+|:--|--:|:--|
+| `correction_temperature_nuit_salon` | 1 | consigne 20 tenait 21,5, ecart 1,5 arrondi |
+| `correction_temperature_nuit_bureau` | 3 | consigne 18 tenait 22,0, ecart 4,0 arrondi |
+| `correction_temperature_nuit_chambre` | 3 | consigne 18 tenait 21,6, ecart 3,6 arrondi |
+
+Ces ecarts ont ete mesures une seule nuit, le 2026-11-10. Ils sont donc fragiles, et arrondis vers
+le bas. Un arrondi vers le bas laisse la piece au-dessus de 19 : c est un choix assume, a reverifier
+sur plusieurs nuits.
+
+**Cible et consigne envoyee sont deux choses distinctes, et c est le point a ne pas casser.**
+`temperature_consigne_nuit_*` est la CIBLE, celle que lisent J K L, `ecart_nuit_*` et `derive_nuit_*`.
+La soustraction se fait dans le script, sur ses variables `tccn_*`, au moment de l envoi. Le
+2026-11-12 a la mi-journee, la soustraction avait ete posee dans le capteur de consigne : la cible
+est tombee de 19 a 18 et 16, J K L declenchaient en permanence puisque leur seuil etait devenu
+18,3 et 16,3, et le -1 restait colle toute la nuit. Corrige le meme jour a 19h15.
+
 Trois capteurs de derive, un par piece, qui appliquent la bonne regle selon la saison :
 
 | Saison | Derive active si | Sens |
@@ -210,6 +230,15 @@ Le choix des cibles :
 | groupe_1, absent | jour et nuit | eco de saison | eco de saison | eco de saison |
 | groupe_2, 3 ou 4 | jour | tccj_s | tccj_b | tccj_c |
 | tout groupe sauf 1 | nuit | tccn_s | tccn_b | tccn_c |
+
+Et ces `tccn_*` ne valent pas la cible : le script soustrait la correction au moment de l envoi.
+
+    tccn_s = temperature_consigne_nuit_salon  - correction_temperature_nuit_salon   -> 19 - 1 = 18
+    tccn_b = temperature_consigne_nuit_bureau - correction_temperature_nuit_bureau  -> 19 - 3 = 16
+    tccn_c = temperature_consigne_nuit_chambre- correction_temperature_nuit_chambre -> 19 - 3 = 16
+
+Donc la clim vise 18 et 16 alors que la cible interne reste 19. Pendant une derive, J K L
+ajoutent le -1 et la clim vise 17 et 15 pendant dix minutes.
 
 Les variables du script se lisent ainsi : `tcc` pour temperature de consigne de confort, puis `j` ou `n`
 pour la periode, jour ou nuit, puis `s`, `b` ou `c` pour la piece. Donc `tccj_s` est la consigne de confort

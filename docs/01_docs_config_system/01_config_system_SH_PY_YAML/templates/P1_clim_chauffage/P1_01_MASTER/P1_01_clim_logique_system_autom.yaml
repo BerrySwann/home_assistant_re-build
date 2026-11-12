@@ -180,10 +180,16 @@
 #   bureau  consigne 18 -> 22,0   ecart +4,0
 #   chambre consigne 18 -> 21,6   ecart +3,6
 #
-# Valeurs retenues par Eric : 1 au salon, 3 au bureau et a la chambre,
-# c est-a-dire l ecart mesure arrondi vers le bas. La clim vise donc
-# 18 / 16 / 16, ce qui devrait donner environ 19,5 / 20 / 19,6 en piece
-# si l ecart reste celui du 2026-11-10. Mesurer demain pour ajuster.
+# CES CAPTEURS NE SONT PLUS SOUSTRAITS ICI (2026-11-12 19h15).
+# temperature_consigne_nuit_* doit rester la CIBLE de la nuit, c est
+# elle que lisent les automatisations J K L, ecart_nuit_* et
+# derive_nuit_*. La soustraction se fait dans le script, sur ses
+# variables tccn_*, au moment de l envoi. Separer la cible de l ordre
+# donne a la machine : soustraire ici faisait passer la cible de 19 a
+# 18 et 16, J K L declenchaient en permanence et le -1 restait colle.
+#
+# Valeurs retenues par Eric : 1 au salon, 3 au bureau et a la chambre.
+# Planchers : salon 16, bureau et chambre 10.
 #
 # Ce n est PAS un seuil de declenchement. Ne pas confondre avec
 # offset_nuit_* (0,3), qui sert de zone morte aux automatisations
@@ -353,8 +359,7 @@
           (states('input_number.clim_consigne_nuit_salon') | float(0))) | round(1) }}
         {% else %}
           {{ ((states('sensor.seuil_non_chauffage') | float(19)) +
-          (states('input_number.clim_consigne_nuit_salon') | float(0)) -
-          (states('sensor.correction_temperature_nuit_salon') | float(0))) | round(1) }}
+          (states('input_number.clim_consigne_nuit_salon') | float(0))) | round(1) }}
         {% endif %}
 
 # --- temperature_consigne_nuit_bureau ---
@@ -367,8 +372,7 @@
           (states('input_number.clim_consigne_nuit_bureau') | float(0))) | round(1) }}
         {% else %}
           {{ ((states('sensor.seuil_non_chauffage') | float(19)) +
-          (states('input_number.clim_consigne_nuit_bureau') | float(0)) -
-          (states('sensor.correction_temperature_nuit_bureau') | float(0))) | round(1) }}
+          (states('input_number.clim_consigne_nuit_bureau') | float(0))) | round(1) }}
         {% endif %}
 
 # --- temperature_consigne_nuit_chambre ---
@@ -381,8 +385,7 @@
           (states('input_number.clim_consigne_nuit_chambre') | float(0))) | round(1) }}
         {% else %}
           {{ ((states('sensor.seuil_non_chauffage') | float(19)) +
-          (states('input_number.clim_consigne_nuit_chambre') | float(0)) -
-          (states('sensor.correction_temperature_nuit_chambre') | float(0))) | round(1) }}
+          (states('input_number.clim_consigne_nuit_chambre') | float(0))) | round(1) }}
         {% endif %}
 
 

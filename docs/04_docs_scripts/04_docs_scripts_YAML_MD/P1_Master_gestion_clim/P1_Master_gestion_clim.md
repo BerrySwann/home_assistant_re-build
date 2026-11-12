@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--07-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--12-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -65,7 +65,9 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 | `temp_eco_hc` | `sensor.temperature_eco_hiver_corrige` |
 | `temp_eco_ec` | `sensor.temperature_eco_ete_corrige` |
 | `temp_cible` | `sensor.temperature_confort_jour` |
-| `temp_nuit` | `sensor.temperature_confort_nuit` |
+| `tccn_s` | `sensor.temperature_consigne_nuit_salon` moins `sensor.correction_temperature_nuit_salon` |
+| `tccn_b` | `sensor.temperature_consigne_nuit_bureau` moins `sensor.correction_temperature_nuit_bureau` |
+| `tccn_c` | `sensor.temperature_consigne_nuit_chambre` moins `sensor.correction_temperature_nuit_chambre` |
 | `tccsj_s` | `sensor.temperature_corrige_salon` |
 | `tccsj_b` | `sensor.temperature_corrige_bureau` |
 | `tccsj_c` | `sensor.temperature_corrige_chambre` |
@@ -79,7 +81,7 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 | `groupe_2` (Mamour) | JOUR | `tccsj_s` |
 | `groupe_3` (Eric) | JOUR | `tccsj_s` |
 | `groupe_4` (Tous) | JOUR | `tccsj_s` |
-| tout | NUIT | `temp_nuit` |
+| tout | NUIT | `tccn_s` |
 
 Les trois groupes de jour recoivent la MEME source depuis le 2026-11-08. Avant, `groupe_3` recevait `tccsj_b`. 
 
@@ -90,7 +92,7 @@ Les trois groupes de jour recoivent la MEME source depuis le 2026-11-08. Avant, 
 | `groupe_2` (Mamour) | JOUR | `tccsj_b` |
 | `groupe_3` (Eric) | JOUR | `tccsj_b` |
 | `groupe_4` (Tous) | JOUR | `tccsj_b` |
-| tout | NUIT | `temp_nuit` |
+| tout | NUIT | `tccn_b` |
 
 Les trois groupes de jour recoivent la MEME source depuis le 2026-11-08. Avant, `groupe_2` recevait l eco en
 chauffage et `tccsj_b` en clim.
@@ -100,7 +102,7 @@ chauffage et `tccsj_b` en clim.
 |:---|:---|:---|
 | `groupe_1` (absent) | - | eco |
 | tout autre | JOUR | `tccsj_c` |
-| tout | NUIT | `temp_nuit` |
+| tout | NUIT | `tccn_c` |
 
 ### 6. Exécution
 
@@ -131,7 +133,12 @@ chauffage et `tccsj_b` en clim.
 | `sensor.temperature_eco_hiver` | Fallback éco hiver |
 | `sensor.temperature_eco_ete` | Fallback éco été |
 | `sensor.temperature_confort_jour` | T° cible jour |
-| `sensor.temperature_confort_nuit` | T° cible nuit |
+| `sensor.temperature_consigne_nuit_salon` | Cible de nuit salon, seuil + décalage |
+| `sensor.temperature_consigne_nuit_bureau` | Cible de nuit bureau |
+| `sensor.temperature_consigne_nuit_chambre` | Cible de nuit chambre |
+| `sensor.correction_temperature_nuit_salon` | Correction d'envoi salon (1) |
+| `sensor.correction_temperature_nuit_bureau` | Correction d'envoi bureau (3) |
+| `sensor.correction_temperature_nuit_chambre` | Correction d'envoi chambre (3) |
 | `sensor.consigne` | Fallback général |
 | `sensor.temperature_corrige_salon` | T° confort Salon |
 | `sensor.temperature_corrige_bureau` | T° confort Bureau |
@@ -166,6 +173,15 @@ chauffage et `tccsj_b` en clim.
 - **SALON groupe_3 JOUR** : comportement historique supprime le 2026-11-08. Eric seul recoit desormais
   `tccsj_s` comme les autres groupes. L ancien comportement (`tccsj_b`, la consigne du bureau, soit 3 C de moins)
   avait ete conserve apres l essai du 2026-11-07, il a ete retire depuis.
+- **CIBLE ET CONSIGNE ENVOYEE SONT DEUX CHOSES (2026-11-12).** `temperature_consigne_nuit_*` est la CIBLE,
+  celle que lisent les automatisations J K L, `ecart_nuit_*` et `derive_nuit_*`. La correction de dérive du
+  capteur de reprise d'air se soustrait ICI, dans `tccn_*`, au moment de l'envoi. L'avoir mise dans le capteur
+  de consigne faisait passer la cible de 19 à 18 et 16, donc J K L déclenchaient en permanence et le -1 restait
+  collé. Ne jamais remettre la soustraction dans le template.
+- **Repli de la correction à 0** : si un `correction_temperature_nuit_*` devient `unavailable`, le script
+  envoie la consigne brute sans correction et SANS ALERTE. La clim vise alors 19 au lieu de 18 ou 16.
+- **Les valeurs de correction sont en dur dans le template** (`state: "1"`, `"3"`, `"3"`), ce qui va
+  contre la règle sans hard code. À arbitrer : constantes assumées ou `input_number`.
 - `sensor_update` ne redémarre pas une clim déjà en `off` (protection intentionnelle via `trigger_id`).
 - Script `mode: queued, max: 10` - les déclenchements simultanés sont mis en file.
 - **Logique 3 sorties (09-09)** : si un capteur reste HS après les 10 essais, le script ne calcule plus avec des valeurs au hasard : OFF (critique), mode dégradé éco de saison (groupe ou temp normale HS), ou normal. Le message part une seule fois, au 10e cycle.
@@ -176,6 +192,7 @@ chauffage et `tccsj_b` en clim.
 
 | Date | Session | Modification | config_hash |
 |:---|:---|:---|:---|
+| 2026-11-12 | Hermes | **Cible et consigne envoyee separees.** `tccn_s/b/c` ne valent plus `temperature_confort_nuit` mais `temperature_consigne_nuit_*` moins `correction_temperature_nuit_*`. Trois capteurs de correction crees dans le template : 1 au salon, 3 au bureau et a la chambre, mesures du 2026-11-10 (ecarts 1,5 / 4,0 / 3,6 du capteur de reprise d'air). Le script envoie donc 18 / 16 / 16 alors que la cible reste 19. La soustraction avait d'abord ete posee dans le template, ce qui cassait J K L : la cible tombait a 18 et 16, les automatisations declenchaient en permanence et le -1 restait colle. | - |
 | 2026-11-07 | Hermes | **References aux entites supprimees** : 11 references remplacees apres la suppression de `sensor.consigne_de_base` et `sensor.temperature_cible` le meme jour. `consigne_de_base` devient `sensor.consigne` (renommage pur, meme valeur). `temperature_cible` devient `sensor.temperature_confort_jour`, qui porte desormais la cible du jour dans le template P1_01. **Pourquoi c'etait urgent** : `float()` sur une entite inconnue rend 0, donc `temp_cible` valait 0.0 et le repli `eco_saison_val` tombait aussi a 0.0, ce qui aurait envoye une consigne de 0 C aux trois clims des qu'une branche degradee s'activait. Apres correction : 20.0 et 20.0. Signale par Spook. | - |
 | 2026-11-04 | S2 | **Libelles `hs_list` alignes sur la prod** : `corrige_mamour` devient `corrige_salon` et `corrige_eric` devient `corrige_bureau` dans la copie locale. Les noms d'entites avaient ete renommes le 2026-11-03, mais pas ces deux etiquettes du rapport de sante : la copie locale divergeait de la prod d'exactement deux libelles, ce que `Gen_GLOBAL_INDEX_scripts.py` signalait par `different=1`, desormais `0`. | - |
 | 2026-11-03 | S2 | **Renommage des cibles de confort** : `sensor.temperature_corrige_mamour` devient `sensor.temperature_corrige_salon`, `sensor.temperature_corrige_eric` devient `sensor.temperature_corrige_bureau`. Quatre references d'entites et deux libelles de `hs_list` dans `scripts.yaml`, corriges en prod puis dans les copies. Les noms des VARIABLES internes (`tccsj_s`, `tccsj_b`) sont conserves : ils n'apparaissent nulle part a l'ecran, et les renommer aurait touche la logique de repartition par piece sans aucun gain lisible. | - |

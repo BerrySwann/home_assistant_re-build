@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--11-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--12-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -21,10 +21,10 @@
 ## 📝 Description
 
 Corrige la derive de la clim de salon la nuit. La clim mesure sur son retour d air et
-chauffe au-dela de la consigne demandee. Plutt que d envoyer une consigne fausse en permanence,
+chauffe au-dela de la consigne demandee. Plutot que d envoyer une consigne fausse en permanence,
 cette automation fait taire la clim pendant 10 minutes quand la piece depasse vraiment la cible.
 
-Quand `sensor.th_salon_temperature` depasse `input_number.clim_consigne_nuit_salon` plus
+Quand `sensor.th_salon_temperature` arrondi au plancher depasse `sensor.temperature_consigne_nuit_salon` plus
 `sensor.offset_nuit_salon` pendant la plage 21h a 7h30, elle met la consigne a 18 et
 demarre `timer.clim_consigne_nuit_salon_10mn`. A la fin du timer, elle remet 19.
 
@@ -42,9 +42,9 @@ demarre `timer.clim_consigne_nuit_salon_10mn`. A la fin du timer, elle remet 19.
 ## ⚙️ Actions
 
 Si le déclencheur est `mesure` et qu'on est entre 21h et 7h30 et que la pièce dépasse la consigne
-plus l'offset : consigne à 18, puis démarrage du timer de 10 minutes.
+plus l'offset : elle écrit `-1` dans l'`input_number`, ce qui fait passer la cible de 19 à 18, puis démarre le timer de 10 minutes.
 
-Si le déclencheur est `fin_timer` : consigne remise à 19.
+Si le déclencheur est `fin_timer` : elle remet `0` dans l'`input_number`, la cible repasse à 19.
 
 ---
 
@@ -53,9 +53,9 @@ Si le déclencheur est `fin_timer` : consigne remise à 19.
 | Sens | Objet |
 |:---|:---|
 | Lit | `sensor.th_salon_temperature` |
-| Lit | `input_number.clim_consigne_nuit_salon` |
+| Lit | `sensor.temperature_consigne_nuit_salon` |
+| Écrit | `input_number.clim_consigne_nuit_salon` (-1 puis 0) |
 | Lit | `sensor.offset_nuit_salon` |
-| Écrit | `input_number.clim_consigne_nuit_salon` |
 | Écrit | `timer.clim_consigne_nuit_salon_10mn` |
 | Aval | script `p1_master_gestion_clim`, qui envoie cette consigne à `climate.clim_salon_rm4_mini` |
 
@@ -69,5 +69,5 @@ Si le déclencheur est `fin_timer` : consigne remise à 19.
   consigne à 18 ne redéclenche pas, ce qui est voulu : le timer fait le retour.
 - Si la fin du timer tombe pendant un arrêt de HA, `timer.finished` n'est pas émis au redémarrage.
   La consigne resterait à 18 jusqu'au prochain changement de température.
-- Cette automation ne fonctionne que si le script lit les `input_number` en période nuit. Tant qu'il
-  envoie `temperature_confort_nuit`, elle tourne à vide.
+- **La cible et la consigne envoyée sont deux choses (2026-11-12).** Cette automation lit `sensor.temperature_consigne_nuit_salon`, la CIBLE, et non ce que la clim reçoit. Le script soustrait ensuite `sensor.correction_temperature_nuit_salon au moment de l'envoi. Mettre la correction dans le capteur de consigne ferait tomber la cible de 19 à 18, la condition serait vraie en permanence et le -1 resterait collé toute la nuit.
+- Un `-1` ajouté à une correction de 3 fait viser 15 à la clim pendant dix minutes, donc une pièce qui descend vers 18 au lieu de 19. C'est voulu, mais il faut le savoir avant de juger le résultat du matin.
