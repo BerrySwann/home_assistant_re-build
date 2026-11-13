@@ -173,7 +173,7 @@
     - name: "Min froid"
       unique_id: min_froid
       unit_of_measurement: "°C"
-      state: "19"
+      state: "22"
       device_class: temperature
       icon: "mdi:arrow-collapse-down"
 
@@ -357,7 +357,7 @@
           {{ [t_ext - 1, (states('sensor.seuil_non_clim') | float(26))] | min | int }}
         {% else %}
           {% set tccsj_s = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccsj_s, (states('sensor.seuil_non_chauffage') | float(22))] | min | round(1) }}
+          {{ ([tccsj_s, (states('sensor.minimum_froid') | float(22))] | min) + (states('input_number.clim_consigne_jour_salon') | float(0)) | round(1) }}
         {% endif %}
       device_class: temperature
       icon: "mdi:sofa"
@@ -377,7 +377,7 @@
           {{ [t_ext, (states('sensor.maximum_chaud') | float(27))] | min | int }}
         {% else %}
           {% set tccsj_b = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccsj_b, (states('sensor.minimum_froid') | float(19))] | min | round(1) }}
+          {{ ([tccsj_b, ((states('sensor.minimum_froid') | float(22)) - 1)] | min) + (states('input_number.clim_consigne_jour_bureau') | float(0)) | round(1) }}
         {% endif %}
       device_class: temperature
       icon: "mdi:desk"
@@ -397,7 +397,7 @@
           {{ [t_ext + 1, (states('sensor.maximum_chaud') | float(27))] | min | int }}
         {% else %}
           {% set tccsj_c = states('sensor.temperature_confort_jour') | float(0) %}
-          {{ [tccsj_c, (states('sensor.minimum_froid') | float(19))] | min | int }}
+          {{ ([tccsj_c, ((states('sensor.minimum_froid') | float(22)) - 1)] | min) + (states('input_number.clim_consigne_jour_chambre') | float(0)) | round(1) }}
         {% endif %}
       device_class: temperature
       icon: "mdi:bed"

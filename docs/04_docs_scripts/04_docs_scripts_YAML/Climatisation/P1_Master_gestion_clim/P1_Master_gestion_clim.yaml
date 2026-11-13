@@ -168,15 +168,18 @@ p1_master_gestion_clim:
         temp_eco_hc: "{{ states('sensor.temperature_eco_hiver_corrige') | float(states('sensor.temperature_eco_hiver') | float) }}"
         temp_eco_ec: "{{ states('sensor.temperature_eco_ete_corrige') | float(states('sensor.temperature_eco_ete') | float) }}"
         temp_cible: "{{ states('sensor.temperature_confort_jour') | float(states('sensor.consigne') | float) }}"
-        tccj_s: "{{ states('sensor.temperature_corrige_salon') | float(states('sensor.temperature_confort_jour') | float) }}"
-        tccj_b: "{{ states('sensor.temperature_corrige_bureau') | float(states('sensor.temperature_confort_jour') | float) }}"
-        tccj_c: "{{ states('sensor.temperature_corrige_chambre') | float(states('sensor.temperature_confort_jour') | float) }}"
+        tccj_s: "{{ (states('sensor.temperature_corrige_salon') | float(states('sensor.temperature_confort_jour') | float))
+        - (states('sensor.correction_temperature_salon') | float(0)) }}"
+        tccj_b: "{{ (states('sensor.temperature_corrige_bureau') | float(states('sensor.temperature_confort_jour') | float))
+        - (states('sensor.correction_temperature_bureau') | float(0)) }}"
+        tccj_c: "{{ (states('sensor.temperature_corrige_chambre') | float(states('sensor.temperature_confort_jour') | float))
+        - (states('sensor.correction_temperature_chambre') | float(0)) }}"
         tccn_s: "{{ (states('sensor.temperature_consigne_nuit_salon') | float(states('sensor.seuil_non_chauffage') | float))
-      - (states('sensor.correction_temperature_salon') | float(0)) }}"
+        - (states('sensor.correction_temperature_salon') | float(0)) }}"
         tccn_b: "{{ (states('sensor.temperature_consigne_nuit_bureau') | float(states('sensor.seuil_non_chauffage') | float))
-      - (states('sensor.correction_temperature_bureau') | float(0)) }}"
+        - (states('sensor.correction_temperature_bureau') | float(0)) }}"
         tccn_c: "{{ (states('sensor.temperature_consigne_nuit_chambre') | float(states('sensor.seuil_non_chauffage') | float))
-      - (states('sensor.correction_temperature_chambre') | float(0)) }}"
+        - (states('sensor.correction_temperature_chambre') | float(0)) }}"
 
     # ──────────────────────────────────────────────
     # 5. CALCUL DES CIBLES PAR PIÈCE (SELON PÉRIODE)
