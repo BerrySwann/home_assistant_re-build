@@ -82,11 +82,19 @@
       unique_id: temperature_eco_hiver
       unit_of_measurement: "°C"
       state: "17"
+      device_class: temperature
+      icon: "mdi:leaf"
+
+
 # --- temperature_eco_ete ---
     - name: "Temperature éCO. Eté"
       unique_id: temperature_eco_ete
       unit_of_measurement: "°C"
       state: "28"
+      device_class: temperature
+      icon: "mdi:leaf"
+
+
 # --- seuil_non_chauffage ---
     - name: "Seuil non chauffage"
       unique_id: seuil_non_chauffage
@@ -96,6 +104,10 @@
 # continue avec un autre chiffre, et toute la partie hivernale se decale d un degre
 # sans qu on voie rien. Le repli doit rendre le bon chiffre, pas un chiffre plausible.
       state: "19"
+      device_class: temperature
+      icon: "mdi:radiator"
+
+
 # --- seuil_non_clim ---
     - name: "Seuil non clim"
       unique_id: seuil_non_clim
@@ -103,9 +115,8 @@
 # Repli des templates : 26, valeur de ce state. Meme raison que pour le seuil de
 # chauffage. Le 26 est aussi le plafond de la nuit d ete et la consigne d ete.
       state: "26"
-
-
-
+      device_class: temperature
+      icon: "mdi:snowflake"
 
 
 # ┌───────────────────────────────────────────────────────────┐
@@ -127,67 +138,108 @@
       unique_id: point_tres_froid
       unit_of_measurement: "°C"
       state: "8"
+      device_class: temperature
+      icon: "mdi:snowflake-thermometer"
+
 
 # --- point_froid ---
     - name: "Point froid"
       unique_id: point_froid
       unit_of_measurement: "°C"
       state: "12"
+      device_class: temperature
+      icon: "mdi:thermometer-low"
+
 
 # --- point_chaud ---
     - name: "Point chaud"
       unique_id: point_chaud
       unit_of_measurement: "°C"
       state: "32"
+      device_class: temperature
+      icon: "mdi:thermometer-high"
+
 
 # --- point_tres_chaud ---
     - name: "Point tres chaud"
       unique_id: point_tres_chaud
       unit_of_measurement: "°C"
       state: "34"
+      device_class: temperature
+      icon: "mdi:thermometer-alert"
+
 
 # --- min_froid ---
     - name: "Min froid"
       unique_id: min_froid
       unit_of_measurement: "°C"
       state: "19"
+      device_class: temperature
+      icon: "mdi:arrow-collapse-down"
+
 
 # --- max_chaud ---
     - name: "Max chaud"
       unique_id: max_chaud
       unit_of_measurement: "°C"
       state: "27"
+      device_class: temperature
+      icon: "mdi:arrow-collapse-up"
+
 
 # --- offset_nuit_salon ---
     - name: "Offset nuit Salon"
       unique_id: offset_nuit_salon
       unit_of_measurement: "°C"
       state: "0.3"
+      device_class: temperature
+      icon: "mdi:tune-vertical"
+
+
 # --- offset_nuit_bureau ---
     - name: "Offset nuit Bureau"
       unique_id: offset_nuit_bureau
       unit_of_measurement: "°C"
       state: "0.3"
+      device_class: temperature
+      icon: "mdi:tune-vertical"
+
+
 # --- offset_nuit_chambre ---
     - name: "Offset nuit Chambre"
       unique_id: offset_nuit_chambre
       unit_of_measurement: "°C"
       state: "0.3"
+      device_class: temperature
+      icon: "mdi:tune-vertical"
+
+
 # --- correction_temperature_salon ---
     - name: "Correction temperature Salon"
       unique_id: correction_temperature_salon
       unit_of_measurement: "°C"
       state: "1"
+      device_class: temperature
+      icon: "mdi:swap-vertical"
+
+
 # --- correction_temperature_bureau ---
     - name: "Correction temperature Bureau"
       unique_id: correction_temperature_bureau
       unit_of_measurement: "°C"
       state: "3"
+      device_class: temperature
+      icon: "mdi:swap-vertical"
+
+
 # --- correction_temperature_chambre ---
     - name: "Correction temperature Chambre"
       unique_id: correction_temperature_chambre
       unit_of_measurement: "°C"
       state: "3"
+      device_class: temperature
+      icon: "mdi:swap-vertical"
+
 
 # ┌───────────────────────────────────────────────────────────┐
 # │ 2 - DETECTION DU MODE ETE / HIVER                         │
@@ -208,6 +260,8 @@
         {% else %}
           cool
         {% endif %}
+      icon: "mdi:swap-horizontal"
+
 
 # ┌───────────────────────────────────────────────────────────┐
 # │ 3 - LES CONSIGNES                                         │
@@ -222,6 +276,9 @@
         {% else %}
           {{ states('sensor.seuil_non_chauffage') | float(19) }}
         {% endif %}
+      device_class: temperature
+      icon: "mdi:thermostat"
+
 
 # ┌───────────────────────────────────────────────────────────┐
 # │ 4 - LES CONSIGNES CONFORT                                 │
@@ -247,6 +304,10 @@
           {% elif t_ext < (states('sensor.point_froid') | float(12)) %}{{ (consigne + 1) | round(1) }}
           {% else %}{{ consigne + 1| round(1) }}{% endif %}
         {% endif %}
+      device_class: temperature
+      icon: "mdi:home-thermometer"
+
+
 # --- temperature_confort_jour ---
     - name: "Temperature confort Jour"
       unique_id: temperature_confort_jour
@@ -254,6 +315,10 @@
       state: >
         {% set t_conf = states('sensor.temperature_confort') | float(0) %}
         {{ t_conf | round(1) }}
+      device_class: temperature
+      icon: "mdi:white-balance-sunny"
+
+
 # --- temperature_confort_nuit ---
     - name: "Temperature confort nuit"
       unique_id: temperature_confort_nuit
@@ -271,6 +336,9 @@
         {% else %}
           {{ [t_conf + 1, seuil_chauff] | min | round(1) }} {# stabilise la nuit l'hiver a 18 ou 19 #}
         {% endif %}
+      device_class: temperature
+      icon: "mdi:weather-night"
+
 
 # ┌───────────────────────────────────────────────────────────┐
 # │ 5 - CORRECTIONS SPECIFIQUES JOUR                          │
@@ -283,7 +351,6 @@
     - name: "Temperature Corrigé Salon"
       unique_id: temperature_corrige_salon
       unit_of_measurement: "°C"
-      device_class: temperature
       state: >
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
@@ -292,15 +359,18 @@
           {% set tccsj_s = states('sensor.temperature_confort_jour') | float(0) %}
           {{ [tccsj_s, (states('sensor.seuil_non_chauffage') | float(22))] | min | round(1) }}
         {% endif %}
+      device_class: temperature
+      icon: "mdi:sofa"
 
 # ─────────────────────────────────────────────────────────────────────
 # 07. BUREAU JOUR temperature_corrige_bureau
 # ─────────────────────────────────────────────────────────────────────
+
+
 # --- temperature_corrige_bureau ---
     - name: "Temperature Corrigé Bureau"
       unique_id: temperature_corrige_bureau
       unit_of_measurement: "°C"
-      device_class: temperature
       state: >
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
@@ -309,15 +379,18 @@
           {% set tccsj_b = states('sensor.temperature_confort_jour') | float(0) %}
           {{ [tccsj_b, (states('sensor.minimum_froid') | float(19))] | min | round(1) }}
         {% endif %}
+      device_class: temperature
+      icon: "mdi:desk"
 
 # ─────────────────────────────────────────────────────────────────────
 # 09. CHAMBRE JOUR temperature_corrige_chambre
 # ─────────────────────────────────────────────────────────────────────
+
+
 # --- temperature_corrige_chambre ---
     - name: "Temperature Corrigé Chambre"
       unique_id: temperature_corrige_chambre
       unit_of_measurement: "°C"
-      device_class: temperature
       state: >
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
@@ -326,6 +399,9 @@
           {% set tccsj_c = states('sensor.temperature_confort_jour') | float(0) %}
           {{ [tccsj_c, (states('sensor.minimum_froid') | float(19))] | min | int }}
         {% endif %}
+      device_class: temperature
+      icon: "mdi:bed"
+
 
 # ┌───────────────────────────────────────────────────────────┐
 # │ 6 - CORRECTIONS SPECIFIQUES NUIT                          │
@@ -346,6 +422,10 @@
           {{ ((states('sensor.seuil_non_chauffage') | float(19)) +
           (states('input_number.clim_consigne_nuit_salon') | float(0))) | round(1) }}
         {% endif %}
+      device_class: temperature
+      icon: "mdi:sofa"
+
+
 # --- ecart_nuit_salon ---
     - name: "Ecart nuit Salon"
       unique_id: ecart_nuit_salon
@@ -353,6 +433,10 @@
       state: >-
         {{ ((states('sensor.th_salon_temperature') | float(0)) -
         (states('sensor.temperature_consigne_nuit_salon') | float(19))) | round(1) }}
+      device_class: temperature
+      icon: "mdi:delta"
+
+
 # --- derive_nuit_salon ---
     - name: "Derive nuit Salon"
       unique_id: derive_nuit_salon
@@ -364,10 +448,13 @@
         {% elif is_state('sensor.mode_ete_hiver', 'heat') %}
           {{ 'on' if x > o else 'off' }}
         {% else %}off{% endif %}
+      icon: "mdi:alert-circle-outline"
 
 # ─────────────────────────────────────────────────────────────────────
 # 07. BUREAU NUIT temperature_consigne_nuit & ecart_nuit & derive_nuit
 # ─────────────────────────────────────────────────────────────────────
+
+
 # --- temperature_consigne_nuit_bureau ---
     - name: "Temperature consigne nuit Bureau"
       unique_id: temperature_consigne_nuit_bureau
@@ -380,6 +467,10 @@
           {{ ((states('sensor.seuil_non_chauffage') | float(19)) +
           (states('input_number.clim_consigne_nuit_bureau') | float(0))) | round(1) }}
         {% endif %}
+      device_class: temperature
+      icon: "mdi:desk"
+
+
 # --- ecart_nuit_bureau ---
     - name: "Ecart nuit Bureau"
       unique_id: ecart_nuit_bureau
@@ -387,6 +478,10 @@
       state: >-
         {{ ((states('sensor.th_bureau_temperature') | float(0)) -
         (states('sensor.temperature_consigne_nuit_bureau') | float(19))) | round(1) }}
+      device_class: temperature
+      icon: "mdi:delta"
+
+
 # --- derive_nuit_bureau ---
     - name: "Derive nuit Bureau"
       unique_id: derive_nuit_bureau
@@ -398,10 +493,13 @@
         {% elif is_state('sensor.mode_ete_hiver', 'heat') %}
           {{ 'on' if x > o else 'off' }}
         {% else %}off{% endif %}
+      icon: "mdi:alert-circle-outline"
 
 # ─────────────────────────────────────────────────────────────────────
 # 09. CHAMBRE NUIT temperature_consigne_nuit & ecart_nuit & derive_nuit
 # ─────────────────────────────────────────────────────────────────────
+
+
 # --- temperature_consigne_nuit_chambre ---
     - name: "Temperature consigne nuit Chambre"
       unique_id: temperature_consigne_nuit_chambre
@@ -414,6 +512,10 @@
           {{ ((states('sensor.seuil_non_chauffage') | float(19)) +
           (states('input_number.clim_consigne_nuit_chambre') | float(0))) | round(1) }}
         {% endif %}
+      device_class: temperature
+      icon: "mdi:bed"
+
+
 # --- ecart_nuit_chambre ---
     - name: "Ecart nuit Chambre"
       unique_id: ecart_nuit_chambre
@@ -421,6 +523,10 @@
       state: >-
         {{ ((states('sensor.th_chambre_temperature') | float(0)) -
         (states('sensor.temperature_consigne_nuit_chambre') | float(19))) | round(1) }}
+      device_class: temperature
+      icon: "mdi:delta"
+
+
 # --- derive_nuit_chambre ---
     - name: "Derive nuit Chambre"
       unique_id: derive_nuit_chambre
@@ -432,6 +538,8 @@
         {% elif is_state('sensor.mode_ete_hiver', 'heat') %}
           {{ 'on' if x > o else 'off' }}
         {% else %}off{% endif %}
+      icon: "mdi:alert-circle-outline"
+
 
 # ┌───────────────────────────────────────────────────────────┐
 # │ 7 - MOYENNES, ECO CORRIGE ET ADEME (inchange)             │
@@ -447,6 +555,10 @@
         {% elif t_ext < (states('sensor.point_froid') | float(12)) %} {{ temp_eco + 1 }}
         {% else %} {{ temp_eco }}
         {% endif %}
+      device_class: temperature
+      icon: "mdi:leaf"
+
+
 # --- temperature_eco_ete_corrige ---
     - name: "Temperature éCO. Ete Corrigé"
       unique_id: temperature_eco_ete_corrige
@@ -459,11 +571,14 @@
         {% else %}
           {{ temp_eco - 1 }}
         {% endif %}
+      device_class: temperature
+      icon: "mdi:leaf"
+
+
 # --- temperature_moyenne_interieure ---
     - name: "Température moyenne intérieure"
       unique_id: temperature_moyenne_interieure
       unit_of_measurement: "°C"
-      icon: "mdi:home-thermometer"
       state: >
         {% set sensors = [
           states('sensor.th_salon_temperature'),
@@ -475,6 +590,10 @@
         ] %}
         {% set values = sensors | map('float', 0) | reject('==', 0) | list %}
         {{ (values | sum / values | count) | round(1) if values | count > 0 else 0 }}
+      device_class: temperature
+      icon: "mdi:home-thermometer"
+
+
 # --- temperature_delta_value ---
     - name: "Temperature Delta (valeur)"
       unique_id: temperature_delta_value
@@ -483,6 +602,10 @@
         {% set t_int = states('sensor.temperature_moyenne_interieure') | float(0) %}
         {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
         {{ (t_int - t_ext) | round(1) }}
+      device_class: temperature
+      icon: "mdi:delta"
+
+
 # --- temperature_delta_affichage ---
     - name: "Température Delta (Affichage)"
       unique_id: temperature_delta_affichage
@@ -490,14 +613,19 @@
         T̄i {{ states('sensor.temperature_moyenne_interieure') | float(0) | round(1) }}°C
         Te {{ states('sensor.th_balcon_nord_temperature') | float(0) | round(1) }}°C
         ΔT = {{ (states('sensor.temperature_moyenne_interieure') | float(0) - states('sensor.th_balcon_nord_temperature') | float(0)) | round(1) }}°C
+      icon: "mdi:delta"
+
+
 # --- delta_ademe_recommande ---
     - name: "Delta ADEME Recommandé"
       unique_id: delta_ademe_recommande
       unit_of_measurement: "°C"
-      icon: "mdi:delta"
       state: >
         {{ (states('sensor.temperature_confort_jour') | float(0) -
             states('sensor.th_balcon_nord_temperature') | float(0)) | round(1) }}
+      device_class: temperature
+      icon: "mdi:delta"
+
 
 # - [Tune]    2026-11-11 : temperature_confort lit th_balcon_nord_temperature avec un plancher
 #             (round(0, 'floor')) et non un arrondi : l arrondi deplace les bornes d un demi-degre
