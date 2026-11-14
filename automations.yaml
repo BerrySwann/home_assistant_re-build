@@ -3077,15 +3077,15 @@
       - action: timer.start
         target:
           entity_id: timer.clim_consigne_jour_salon_10mn
-  - conditions:
-    - condition: trigger
-      id: fin_timer
-    sequence:
-    - action: input_number.set_value
-      target:
-        entity_id: input_number.clim_consigne_jour_salon
-      data:
-        value: 0
+    - conditions:
+      - condition: trigger
+        id: fin_timer
+      sequence:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.clim_consigne_jour_salon
+        data:
+          value: 0
   mode: single
 
 - id: '1794417183992'
@@ -3131,15 +3131,15 @@
       - action: timer.start
         target:
           entity_id: timer.clim_consigne_jour_bureau_10mn
-  - conditions:
-    - condition: trigger
-      id: fin_timer
-    sequence:
-    - action: input_number.set_value
-      target:
-        entity_id: input_number.clim_consigne_jour_bureau
-      data:
-        value: 0
+    - conditions:
+      - condition: trigger
+        id: fin_timer
+      sequence:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.clim_consigne_jour_bureau
+        data:
+          value: 0
   mode: single
 
 - id: '1794417183993'
@@ -3185,13 +3185,13 @@
       - action: timer.start
         target:
           entity_id: timer.clim_consigne_jour_chambre_10mn
-  - conditions:
-    - condition: trigger
-      id: fin_timer
-    sequence:
-    - action: input_number.set_value
-      target:
-        entity_id: input_number.clim_consigne_jour_chambre
-      data:
-        value: 0
+    - conditions:
+      - condition: trigger
+        id: fin_timer
+      sequence:
+      - action: input_number.set_value
+        target:
+          entity_id: input_number.clim_consigne_jour_chambre
+        data:
+          value: 0
   mode: single
