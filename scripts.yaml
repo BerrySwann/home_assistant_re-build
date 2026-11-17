@@ -524,11 +524,11 @@ p1_master_gestion_clim:
         - (states('sensor.correction_temperature_bureau') | float(0)) }}"
         tccj_c: "{{ (states('sensor.temperature_corrige_chambre') | float(states('sensor.temperature_confort_jour') | float))
         - (states('sensor.correction_temperature_chambre') | float(0)) }}"
-        tccn_s: "{{ (states('sensor.temperature_consigne_nuit_salon') | float(states('sensor.seuil_non_chauffage') | float))
+        tccn_s: "{{ (states('sensor.temperature_consigne_nuit_salon') | float(states('sensor.seuil_chauffage') | float(19)))
         - (states('sensor.correction_temperature_salon') | float(0)) }}"
-        tccn_b: "{{ (states('sensor.temperature_consigne_nuit_bureau') | float(states('sensor.seuil_non_chauffage') | float))
+        tccn_b: "{{ (states('sensor.temperature_consigne_nuit_bureau') | float(states('sensor.seuil_chauffage') | float(19)))
         - (states('sensor.correction_temperature_bureau') | float(0)) }}"
-        tccn_c: "{{ (states('sensor.temperature_consigne_nuit_chambre') | float(states('sensor.seuil_non_chauffage') | float))
+        tccn_c: "{{ (states('sensor.temperature_consigne_nuit_chambre') | float(states('sensor.seuil_chauffage') | float(19)))
         - (states('sensor.correction_temperature_chambre') | float(0)) }}"
 
     # ──────────────────────────────────────────────
