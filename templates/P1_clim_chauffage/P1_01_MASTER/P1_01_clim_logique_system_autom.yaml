@@ -217,7 +217,7 @@
     - name: "Correction temperature Bureau"
       unique_id: correction_temperature_bureau
       unit_of_measurement: "°C"
-      state: "3"
+      state: "2"
       device_class: temperature
       icon: "mdi:swap-vertical"
 
@@ -225,7 +225,7 @@
     - name: "Correction temperature Chambre"
       unique_id: correction_temperature_chambre
       unit_of_measurement: "°C"
-      state: "3"
+      state: "2"
       device_class: temperature
       icon: "mdi:swap-vertical"
 
