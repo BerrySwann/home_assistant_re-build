@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--17-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -64,7 +64,7 @@ extinction sur veille CONFIRMÉE (puissance < 40W pendant 12 min via
 | `binary_sensor.veille_tv_chambre` | Veille confirmée (template : puissance < 40W) |
 | `light.hue_smart_eco_tv_chambre` | Éclairage ambiance TV chambre (prise éco) |
 | `switch.prise_tv_chambre_nous` | Prise de mesure (ON à l'allumage, laissée allumée) |
-| `sensor.eco_prises_spy_pc_tv` | Spy de contrôle PC+TV (veille, coupures ratées) |
+| `sensor.eco_prises_spy_pc_tv` | Spy de contrôle PC+TV (veille, coupures ratées) ; tolere une entite absente ; duree de veille = la plus courte de la veille et de la prise (2026-11-17) |
 
 ### Notifications
 
@@ -86,3 +86,6 @@ extinction sur veille CONFIRMÉE (puissance < 40W pendant 12 min via
   (ou le seuil déjà franchi), plus rien ne déclenchait. Remplacé par : binaire dédié < 40W
   (au-dessus de la veille ~20W, sous l'actif ~70W+), confirmation 12 min sur durée RÉELLE,
   filet de rattrapage 15 min, garde anti-fantôme (n'agit que si la prise est allumée).
+
+<!-- annotations_log:
+[2026-11-17] sensor.eco_prises_spy_pc_tv durci (entite absente tolere, duree = min(veille, prise)). -->

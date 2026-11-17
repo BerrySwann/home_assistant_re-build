@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--12-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--17-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -26,7 +26,7 @@ la consigne demandee. Plutot que de lui envoyer une consigne fausse en permanenc
 fait taire pendant 10 minutes quand la piece depasse vraiment sa cible de jour.
 
 Quand `sensor.th_salon_temperature` arrondi au plancher depasse `sensor.temperature_corrige_salon` plus
-`sensor.offset_nuit_salon`, entre 7h30 et 21h et hors `groupe_1`, elle ecrit `-1` dans
+`sensor.offset_salon`, entre 7h30 et 21h et hors `groupe_1`, elle ecrit `-1` dans
 `input_number.clim_consigne_jour_salon` et demarre `timer.clim_consigne_jour_salon_10mn`. A la fin du
 timer, elle remet `0`.
 
@@ -57,7 +57,7 @@ Si le déclencheur est `fin_timer` : elle remet `0`, la cible repasse à sa vale
 |:---|:---|
 | Lit | `sensor.th_salon_temperature` |
 | Lit | `sensor.temperature_corrige_salon` |
-| Lit | `sensor.offset_nuit_salon` |
+| Lit | `sensor.offset_salon` |
 | Lit | `sensor.groupe` |
 | Écrit | `input_number.clim_consigne_jour_salon` (-1 puis 0) |
 | Écrit | `timer.clim_consigne_jour_salon_10mn` |
@@ -77,6 +77,7 @@ Si le déclencheur est `fin_timer` : elle remet `0`, la cible repasse à sa vale
   c est voulu : le timer fait le retour.
 - Si la fin du timer tombe pendant un arrêt de HA, `timer.finished` n est pas émis au redémarrage. La
   consigne resterait à `-1` jusqu au prochain changement de température.
-- **Etat au 2026-11-12 : `unavailable`.** L automation est ecrite, `config_check` l accepte et l API la
-  connait, mais elle ne se charge pas. Deux rechargements sans effet, piste du redemarrage complet non
-  testee.
+- **Etat au 2026-11-17 : `on`** (releve dans HA). L etat `unavailable` du 2026-11-12 est resolu ; la cause et la date de resolution ne sont pas documentees.
+
+<!-- annotations_log:
+[2026-11-17] offset_nuit_salon remplace par offset_salon (rename du 06h30) ; etat de l automation passe de unavailable a on (releve HA). -->

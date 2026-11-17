@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--13-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--17-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -14,6 +14,7 @@
 </div>
 
 *Index unique de navigation - YAML, docs, entités, scripts*
+*Dernière mise à jour : 2026-11-17 (07h25) - fiches realignees sur la prod : automatisations J a O (offset_* a la place de offset_nuit_*), eco_prises (filtre unavailable + garde du spy sensor.eco_prises_spy), spy PC/TV durci, master clim (correction 1/2/2). Aucune entree ajoutee ni retiree.*
 *Dernière mise à jour : 2026-11-12 (21h, /histo-final) - entrées ajoutées : les 3 automatisations de jour (M, N, O) Consigne jour anti-derive Salon / Bureau / Chambre, les 3 input_number clim_consigne_jour_* et les 3 timers clim_consigne_jour_*_10mn ; budget MAJ : core 2026.11.1 et SmartIR ecartes, wind rose, custom brand et samba installes
 *Dernière mise à jour : 2026-11-11 (21h, /histo-final) - entrées ajoutées : les 3 timers de consigne de nuit (timers/P1_Consigne_nuit_21h_7h30/) et les 3 input_number de consigne de nuit (input_number/P1_Consigne_nuit_anti_derive/) ; dossier input_number/Meteo/ corrigé (previous.temperature_et_humidit -> previous.temperature_et_humidity) ; bloc timers SDB remis sur les dossiers réels P1_Soufflant_SDB et P1_timers_seche_serviette_SDB (l'ancien chemin P1_timers/ n'existe plus)
 *Dernière mise à jour : 2026-11-09 (20h45, /histo-final) - entrée ajoutée : IA_PRISE_eCO.md (fiche des prises eCO, docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_PRISE_eCO/)*
@@ -3813,7 +3814,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>Eco. PRISES DINAMIQUE -> By-Présence/Groupe</b></summary>
 <blockquote>
 <i>Pilotage des 7 prises en fonction du groupe de présence (G1 à G4).</i><br>
-<i>Correctif + spy 2026-09-23 : liste lue via | from_json ; sensor.eco_prises_spy (groupe + états + écarts).</i><br><br>
+<i>Correctif + spy 2026-09-23 : liste lue via | from_json ; sensor.eco_prises_spy (groupe + états + écarts).</i><br>
+<i>Correctif 2026-11-17 : filtre contre les transitions vers unavailable (rechargement des templates), garde de disponibilite sur sensor.eco_prises_spy.</i><br><br>
 📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P2_eCO_prises/eCO_prises_dynamique/eCO_prises_dynamique.md">Documentation</a><br>
 ⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P2_eCO_prises/eCO_prises_dynamique_by_presence_groupe/eCO_prises_dynamique_by_presence_groupe.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state` · 📊`numeric_state`<br>

@@ -1,0 +1,49 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-27</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-27</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-27_s1.md</p>
+<h3>Journal HA ReBuild - 2026-10-27 (Session S1)</h3>
+<ul>
+<li>Session : environ 4 h, de 18h00 a 22h00</li>
+<li>Branche active : docs/</li>
+</ul>
+<h4>Fichiers valides</h4>
+<ul>
+<li><code>H:/automations.yaml</code> - une seule automation pour les 3 Hue Play du bureau, id <code>1793131130516</code>, 4 declencheurs et une condition de streaming <strong>[v]</strong> (64 -&gt; 63 blocs, md5 5cd4b470 -&gt; 07f997f4)</li>
+<li><code>H:/.scripts/ha_git_backup.sh</code> - filtre de commit elargi aux <code>.txt</code>, nombre de fichiers en tete des lignes de journal et de statut <strong>[v]</strong> (md5 57ae9a6e -&gt; 60c77049)</li>
+<li><code>docs/04_docs_scripts/04_docs_scripts_SH/hermes_audit_md5_trigul_3md/hermes_audit_md5_trigul_3md.sh</code> - exclusion des dossiers <code>XX_</code> du perimetre <strong>[v]</strong> (md5 f9dcb537 -&gt; 45eb88dd)</li>
+<li><code>docs/00_IA/GLOBAL_INDEX_IA.md</code> - regenere puis pousse en prod <strong>[v]</strong> (prod c9f123f4 -&gt; 1573028a)</li>
+<li><code>Github/README.md</code> - aligne sur la prod, qui portait les nouveaux noms de dossiers <strong>[v]</strong> (48de0fae -&gt; dea9dcea)</li>
+<li><code>H:/docs/modifs/</code> - 22 anciennes copies du journal supprimees, apres copie verifiee et corbeille Windows <strong>[v]</strong></li>
+</ul>
+<h4>En cours</h4>
+<ul>
+<li>Mise a jour HACS installee le 26 : <code>multiple-entity-row</code> v4.13.1 et <code>VigiEau</code> 0.13.0 <strong>[v]</strong></li>
+<li>Reste en attente cote HA : <code>bureau_pve_software</code> et la carte MeteoFrance v2.0.2, mises de cote <strong>[draft]</strong></li>
+</ul>
+<h4>Erreurs resolues</h4>
+<ul>
+<li><code>hermes_audit_md5_trigul_3md.sh</code> comptait 12 fichiers <code>XX_</code> en ABSENT alors qu'ils sont local seul -&gt; exclusion <code>-not -ipath "<em>/XX_</em>"</code>, 193 fichiers et 0 ABSENT <strong>[resolu]</strong></li>
+<li><code>ha_git_backup.sh</code> ne commitait jamais un <code>.txt</code> modifie seul (filtre limite a yaml/md/sh) -&gt; <code>txt</code> ajoute au filtre <strong>[resolu]</strong></li>
+<li>Automation des Play : <code>light.toggle</code> sur tout changement de <code>moniteur_pc</code>, en conflit avec le garde-fou existant -&gt; remplacee par un declencheur sur l'attribut <code>mode</code> passant a streaming <strong>[resolu]</strong></li>
+<li>L'etat restait <code>off</code> alors que Hue Sync tournait : aucune transition vers off, donc le garde-fou ne pouvait pas se declencher -&gt; traite par le declencheur d'attribut, prouve en direct a 21h33 <strong>[resolu]</strong></li>
+<li>Entite fantome <code>automation.bureau_forcer_play_on_si_pc_tourne</code> restee <code>unavailable</code> apres retrait du YAML, resistante a un redemarrage complet -&gt; retiree du registre par Eric, verifie ensuite : absente de l'API <strong>[resolu]</strong></li>
+<li>J'avais annonce une derive d'horloge de HA : c'etait une erreur de ma part, l'API renvoie l'UTC et nous sommes en CET depuis le 25/10 <strong>[resolu]</strong></li>
+</ul>
+<h4>Taches backlog (TODO.html)</h4>
+<ul>
+<li>Mise a jour du journal fusionne du 26 et du 27, menage <code>.bak</code> (656 fichiers de jours passes), tree <code>IA_ARBO_DETAIL</code>, <code>GLOBAL_INDEX_REPO</code> <strong>[a faire]</strong></li>
+</ul>
+<h4>Prochaine action</h4>
+<ul>
+<li>Relancer le menage des <code>.bak</code> avec un plan relu avant execution, puis reprendre le tree et le fusionne.</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

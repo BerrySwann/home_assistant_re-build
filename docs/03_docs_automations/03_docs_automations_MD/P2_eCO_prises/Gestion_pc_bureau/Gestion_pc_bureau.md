@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--17-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -62,7 +62,7 @@ extinction sur veille CONFIRMÉE (puissance < 70W pendant 12 min via
 | `sensor.prise_bureau_pc_ikea_power` | Puissance PC (IKEA) - source du binaire |
 | `binary_sensor.veille_pc_bureau` | Veille confirmée (template : puissance < 70W) |
 | `light.hue_smart_eco_pc_bureau` | Éclairage bureau PC |
-| `sensor.eco_prises_spy_pc_tv` | Spy de contrôle PC+TV (veille, coupures ratées) |
+| `sensor.eco_prises_spy_pc_tv` | Spy de contrôle PC+TV (veille, coupures ratées) ; tolere une entite absente ; duree de veille = la plus courte de la veille et de la prise (2026-11-17) |
 
 ### Notifications
 
@@ -84,3 +84,6 @@ extinction sur veille CONFIRMÉE (puissance < 70W pendant 12 min via
   de 10 min était réinitialisée par chaque micro-pic. Remplacé par : binaire dédié < 70W
   (au-dessus des pics ~45W, sous l'actif ~100W+), confirmation 12 min sur durée RÉELLE,
   filet de rattrapage 15 min, garde anti-fantôme (n'agit que si la prise est allumée).
+
+<!-- annotations_log:
+[2026-11-17] sensor.eco_prises_spy_pc_tv durci (entite absente tolere, duree = min(veille, prise)). -->

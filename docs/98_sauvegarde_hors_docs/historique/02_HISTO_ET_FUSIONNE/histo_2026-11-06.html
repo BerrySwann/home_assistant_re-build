@@ -1,0 +1,50 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-11-06</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-11-06</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-06_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-11-06</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 2 h (18 h 30 - 20 h 50)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+<li>🎯 <strong>Sujet réel</strong> : application Android GEMAYA EDL, pas la configuration HA. Aucun YAML HA touché.</li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>Downloads/EDL-GEMAYA-0.49-test.apk</code> - APK 0.49 compilé et signé, versionCode 49, 2,5 Mo, sha256 <code>d9338031...58943</code> <strong>[v]</strong></li>
+<li>🟢 <code>GEMAYA_Inventaire/inventaire/INVENTAIRE_PALAIS_NIKA_A_2026_10_30_FINAL.xlsx</code> - 140 790 o, sha <code>267d535</code>, commit <code>cc9ea70</code>, MD5 relu identique au local <strong>[v]</strong></li>
+<li>🟢 <code>apk/outils/inventaire_vers_csv.py</code> - constantes de colonnes recalées (clone de travail uniquement, non poussé) <strong>[a deployer]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 APK 0.49 - installable mais non publié : aucune release, <code>update.json</code> toujours en 0.48 <strong>[a tester]</strong></li>
+<li>🟠 Inventaire embarqué - l'asset de l'APK 0.49 contient 282 lignes, la conversion recalée en produit 572 <strong>[a deployer]</strong></li>
+<li>🟠 Keystore de test - <code>apk/keystore/gemaya-test.jks</code> (CN=GEMAYA Test), nouvelle signature, ne remplace pas la 0.48 sans désinstallation <strong>[EN COURS]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 <code>gemaya-maj</code> passé en privé par erreur -&gt; 404 sur l'API, sur <code>raw</code>, sur les releases et sur l'asset de la 0.48, donc plus aucune mise à jour ni réinstallation possible <strong>[resolu en diagnostic, pas en action]</strong></li>
+<li>🔴 <code>inventaire_vers_csv.py</code> lisait la famille en colonne 6 et l'équipement en 8, alors que les colonnes +1 et +2 ont décalé le fichier client (famille en 8, équipement en 10) -&gt; 573 lignes sorties avec « Bloc sanitaire », « Couloir », « Sanitaires » comme familles <strong>[resolu]</strong></li>
+<li>🔴 <code>git apply --check</code> avec chemin <code>/c/...</code> -&gt; « can't open patch », <code>git</code> est natif Windows et veut <code>C:/...</code> <strong>[resolu]</strong></li>
+<li>🔴 <code>cmd //c</code> en bash MSYS découpe les arguments sur les espaces du chemin -&gt; contourné en appelant sdkmanager par la classe Java directe <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.html)</h4>
+<ul>
+<li>📌 Remettre <code>BerrySwann/gemaya-maj</code> en public (règle absolue du skill <code>gemaya-edl-app</code>)</li>
+<li>📌 Passer <code>BerrySwann/GEMAYA_Inventaire</code> en privé (données client actuellement publiques)</li>
+<li>📌 Régénérer l'asset CSV avec les 572 lignes, recompiler l'APK</li>
+<li>📌 Pousser <code>inventaire_vers_csv.py</code> corrigé, sinon la prochaine conversion repart de travers</li>
+<li>📌 Publier la release <code>v0.49</code> et éditer <code>update.json</code>, après essai sur le téléphone</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Remettre <code>gemaya-maj</code> en public en premier : sans ça aucune mise à jour n'est servie, et tout le reste du chantier reste invisible pour le téléphone.</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

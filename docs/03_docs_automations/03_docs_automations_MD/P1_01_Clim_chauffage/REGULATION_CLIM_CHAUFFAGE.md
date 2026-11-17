@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--14-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--17-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -325,6 +325,7 @@ recabler le calcul.
 Les capteurs `delta_1` a `delta_7` ont ete supprimes le 2026-11-13, et les `offset_nuit_*` renommes en
 `offset_*` le 2026-11-14. Leurs entites sont restees au registre en `unavailable` : c est du menage a faire
 dans Parametres, pas un capteur vivant.
+Les automatisations J a O lisaient encore `offset_nuit_*` : depuis le 2026-11-17 06h30 elles lisent `offset_salon`, `offset_bureau` et `offset_chambre` (0,3).
 
 La zone off de 19 a 26 degres est morte. Toute la mecanique de paliers n a d effet que sous 8 degres et
 au-dela de 32, parce que la plage intermediaire n est jamais appliquee.
@@ -348,3 +349,6 @@ restait fige sur une ancienne valeur alors que la formule rendait la bonne.
 Le fichier est critique : toute modification impacte toutes les automations clim. Et HA reecrit
 `scripts.yaml` a chaque enregistrement depuis l interface, donc une comparaison de texte brut entre deux
 copies ne veut rien dire, il faut comparer le YAML relu.
+
+<!-- annotations_log:
+[2026-11-17] automatisations J a O realignees sur offset_* (ancien nom offset_nuit_*). -->

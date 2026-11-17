@@ -1,0 +1,79 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-11-08</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-11-08</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-08_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-11-08</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : longue (apres-midi et soiree, environ 7 h continues)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<h5>Meteo - duree du jour (R134.1)</h5>
+<ul>
+<li>🟢 <code>docs/01_docs_config_system/01_config_system_SH_PY_YAML/templates/Meteo/M_05_meteo_cycle_solaire/M_05_meteo_duree_du_jour_card.yaml</code> - <code>sensor.duree_du_jour</code> <strong>[v]</strong></li>
+<li>🟢 <code>.../M_05_meteo_tendance_duree_jour_card.yaml</code> - <code>sensor.tendance_duree_jour</code> <strong>[v]</strong></li>
+<li>🟢 <code>.../M_05_meteo_variation_quotidienne_card.yaml</code> - <code>sensor.variation_quotidienne</code> <strong>[v]</strong></li>
+<li>🟢 <code>docs/02_docs_dashboard/02_dashboard_docs_YAML/L1C1_METEO/Card_duree_du_jour.yaml</code> <strong>[v]</strong></li>
+<li>🟢 <code>docs/02_docs_dashboard/02_dashboard_docs_YAML/L1C1_METEO/L1C1_METEO_02_Page/L1C1_Page_METEO.yaml</code> - entite morte <code>duree_du_jour_brut</code> retiree <strong>[v]</strong></li>
+</ul>
+<p>Formule NOAA remplacee : declinaison <code>23.45*sin(2*pi*(j-80)/365)</code> corrigee, zenith geometrique 90 remplace par <strong>90.833</strong>. Capteur 9.64 h -&gt; <strong>9.99 h</strong>, variation -3.0 -&gt; <strong>-2.5 min</strong>. Bug de decalage d un jour corrige (<code>new Date(year, 0, i + 1)</code> lisait <code>dayLength(i)</code>), 3 blocs, 0 occurrence restante.</p>
+<h5>Arborescence et documentation</h5>
+<ul>
+<li>🟢 <code>docs/00_IA/00_IA_SOUS_CONTEXT_IA/IA_ARBO_DETAIL/IA_ARBO_DETAIL.md</code> - <code>config_system_YAML</code> retire de la grille PROD, 7 sous-dossiers de <code>04_docs_scripts</code> documentes <strong>[v]</strong></li>
+<li>🟢 <code>docs/04_docs_scripts/04_docs_scripts_SH/Check_sous_context_ia/Check_sous_context_ia.py</code> - en-tete sans chiffre fige <strong>[v]</strong></li>
+</ul>
+<h5>Controle de qualite des docs (nouveau)</h5>
+<ul>
+<li>🟢 <code>docs/04_docs_scripts/04_docs_scripts_SH/Check_qualite_docs/Check_qualite_docs.py</code> - trois tests, lecture seule <strong>[v]</strong></li>
+<li>🟢 <code>docs/04_docs_scripts/04_docs_scripts_SH_MD/Check_qualite_docs/Check_qualite_docs.md</code> - fiche <strong>[v]</strong></li>
+<li>🟢 <code>docs/04_docs_scripts/04_docs_scripts_SH/Check_prod_fonctionnelle/Check_prod_fonctionnelle.py</code> - fonction <code>qualite_prod()</code> en lecture seule <strong>[v]</strong></li>
+</ul>
+<h5>Menage des .bak (nouveau)</h5>
+<ul>
+<li>🟢 <code>docs/04_docs_scripts/04_docs_scripts_SH/Menage_bak/Menage_bak.py</code> - dry-run par defaut, <code>--go</code> pour la corbeille <strong>[v]</strong></li>
+<li>🟢 <code>docs/04_docs_scripts/04_docs_scripts_SH_MD/Menage_bak/Menage_bak.md</code> - fiche <strong>[v]</strong></li>
+</ul>
+<h5>Skills alignes</h5>
+<ul>
+<li>🟢 <code>note-taking/histo/SKILL.md</code> et <code>histo-final/SKILL.md</code> - controle de qualite en tete du 5C <strong>[v]</strong></li>
+<li>🟢 <code>.claude/skills/histo/SKILL.md</code> + copie PURE, <code>.claude/skills/histo-final/SKILL.md</code> + copie PURE - identiques deux a deux <strong>[v]</strong></li>
+<li>🟢 <code>smart-home/ha-trigul/SKILL.md</code> - regle de reparation en trois etapes <strong>[v]</strong></li>
+<li>🟢 <code>smart-home/update-arbo/SKILL.md</code> et copie PURE - regle de comptage sans fichiers caches <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 20 <code>.bak</code> au-dela des plafonds, plan produits par <code>Menage_bak.py</code>, <strong>pas encore envoyes a la corbeille</strong> (<code>--go</code> non lance) <strong>[a executer]</strong></li>
+<li>🟠 Ecart de prod sur <code>IA_NOM_DES_REPERTOIRES_ET_FICHIERS</code>, modifie a 17h30 lors du rapatriement, <strong>pas encore pousse</strong> <strong>[a pousser]</strong></li>
+<li>🟠 Fiches MD des skills <code>histo</code> et <code>histo-final</code> non mises a jour (elles decrivent encore le 5C sans le controle) <strong>[a completer]</strong></li>
+<li>🟠 15 <code>.bak</code> mal nommes anterieurs a aujourd'hui, non renommes (pas de moi, decision d'Eric requise) <strong>[en attente]</strong></li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 <code>Card_prog_clim_chambre.yaml</code>, <code>Automations.md</code>, <code>Gen_GLOBAL_INDEX_ia.md</code>, <code>Verif_emplacements.md</code>, <code>MODIFS_2026-11-01_hermes.md</code> et sa copie : <strong>octets de controle</strong> issus de sequences d echappement interpretees. Le YAML L1C3 etait REELLEMENT CASSE, <code>yaml.safe_load</code> le refusait <strong>[resolu]</strong></li>
+<li>🔴 Deux <code>.bak</code> dans <code>H:\templates</code> charges par <code>include_dir_merge_list</code>, 318 warnings <code>temp_conf_m</code> sur 20 h <strong>[resolu]</strong></li>
+<li>🔴 Mon propre <code>data_generator</code> de duree du jour, decale d un jour <strong>[resolu]</strong></li>
+<li>🔴 21 <code>.bak</code> crees par moi sous la forme <code>X.md.bak_DATE</code> au lieu de <code>X.bak_DATE.md</code> <strong>[resolu]</strong></li>
+<li>🔴 14 <code>.bak</code> mal nommes renommes, un CR parasite introduit dans des fichiers LF, corrige <strong>[resolu]</strong></li>
+<li>🔴 Double <code>C:\\Users</code> dans le remplacement de chemins lors du rapatriement, 35 fichiers restaures <strong>[resolu]</strong></li>
+<li>🔴 <code>corrige_rebuild.py</code> ecrivait sans dry-run, un controle a re-corrige <code>journal_modifs.md</code> <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.html)</h4>
+<ul>
+<li>📌 <strong>13 points fermes</strong> : R134.1, R64.3, R66.1, R66.2, R66.3, R73.1, R73.2, R75.1, R75.2, R76.1, R76.2, R76.3, R77.1</li>
+<li>📌 Etat final : total <strong>496</strong>, FAIT <strong>279</strong>, A VERIFIER 56, A FAIRE <strong>89</strong>, A PLUS TARD 4, A TRIER 68</li>
+<li>📌 Solde du jour : <strong>+23</strong></li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Lancer <code>Menage_bak.py --go</code> pour solder les 20 <code>.bak</code> au-dela des plafonds, puis pousser l ecart de prod de <code>IA_NOM_DES_REPERTOIRES_ET_FICHIERS</code></li>
+<li>Completer les fiches MD de <code>histo</code> et <code>histo-final</code> avec le controle de qualite</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

@@ -1,0 +1,90 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-11-03</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-11-03</h1><p class="mut">2 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a><a href="#s2">Session S2</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-03_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-11-03</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : matin (reprise après extinction, PC rallumé vers 06h15)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>H:\.scripts\audit_md5_md_yaml.sh</code> + miroir <code>docs/01_docs_config_system/.../audit_md5_md_yaml_sh/</code> - « ABSENT GITHUB » remplacé par « PUSH MANQUANT », 5 occurrences, prod modifiée d'abord puis local aligné <strong>[v]</strong></li>
+<li>🟢 <code>AppData/Local/hermes/scripts/histo/push_docs.py</code> - <strong>nouveau</strong> : push avec copie de sécurité TEMPO, MD5 double, purge 7 jours, options <code>--dry</code> et <code>--self-test</code> <strong>[v]</strong></li>
+<li>🟢 <code>AppData/Local/hermes/scripts/histo/copie_reference.py</code> - trois <code>strftime</code> corrigés (format <code>.bak</code> en <code>HHhMMmSSs</code>) <strong>[v]</strong></li>
+<li>🟢 <code>docs/02_docs_dashboard/02_dashboard_docs_MD/L1C1_METEO/L1C1_METEO_02_Page/L1C1_Page_METEO.md</code> - 13 remplacements, 8 entités mortes remplacées par les capteurs réels, poussée en prod <strong>[v]</strong></li>
+<li>🟢 skills <code>histo</code>, <code>ha-push-docs</code>, <code>ha-push-md</code>, <code>ha-push-yaml</code> - garde-fous débloqués là où ils créaient un blocage circulaire <strong>[v]</strong></li>
+<li>🟢 <code>TODO/TODO.html</code> - <code>R134.1</code> (carte Durée du jour fausse) et <code>R135.1</code> (récap dans tous les index), placés en tête avec les points du soir <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>(aucun)</li>
+</ul>
+<h4>🔴 Erreurs résolues</h4>
+<ul>
+<li>🔴 <strong>Blocage circulaire n°1</strong> : le palier 1 de <code>Check_prod_fonctionnelle</code> interdisait le push 5C, alors que le push est souvent la réparation. Il bloque désormais seulement l'extinction <strong>[resolu]</strong></li>
+<li>🔴 <strong>Blocage circulaire n°2</strong> : le garde-fou « la prod doit correspondre à un <code>.bak</code> » refusait le push après une modification directe en prod sur ordre d'Eric. Il signale au lieu de bloquer, la copie TEMPO protégeant autant <strong>[resolu]</strong></li>
+<li>🔴 Les alertes <code>XX_</code> disaient « STOP, rien n'est poussé » dans quatre skills : un fichier égaré bloquait toute la séance. Elles bloquent maintenant le fichier fautif <strong>[resolu]</strong></li>
+<li>🔴 Classification des entités : <code>sensor.eclair_*</code> et les <code>group.*_devices</code> étaient dits « sans registre » alors qu'ils sont créés en YAML. Le classement croise désormais registre + déclaration YAML locale <strong>[resolu]</strong></li>
+<li>🔴 Mon extraction comptait comme vivantes des entités citées dans une note « obsolète/retiré » de l'index : <code>sensor.vitesse_du_vent_vence</code> et sa bande <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Tâches backlog (TODO.html)</h4>
+<ul>
+<li>📌 <code>R133.1</code> P4 présence (11 situations), <code>R134.1</code> carte Durée du jour fausse, <code>R135.1</code> récap dans tous les index - les trois en tête pour ce soir</li>
+<li>📌 Audit des 695 entités de <code>GLOBAL_INDEX_REPO</code> : NAT 310, CREE 375, NAT-SANS-REGISTRE 2, RASPI-PI4-4GO 3, SUPPRIMEE 3, ARTEFACT-TEMPLATE 2, HISTORIQUE 0</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li><code>R133.1</code>, puis <code>R134.1</code>, puis <code>R135.1</code>, puis <code>R62.4</code></li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+<section id="s2"><h2>Session S2</h2><p class="src">Source : histo_2026-11-03_s2.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-11-03</strong> (Session <strong>S2</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 2 h (18h50 -&gt; 21h05)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 <code>templates/P1_clim_chauffage/P1_01_MASTER/P1_01_clim_logique_system_autom.yaml</code> - <code>temperature_corrige_mamour</code> -&gt; <code>_salon</code>, puis <code>temperature_corrige_eric</code> -&gt; <code>_bureau</code> (<code>e5bb0396</code> -&gt; <code>218b179d</code>) <strong>[v]</strong></li>
+<li>🟢 <code>templates/P1_clim_chauffage/P1_01_MASTER/P1_02_automation_message_clim_7h30_21h.yaml</code> - 2 references vers le capteur salon puis 2 vers bureau (<code>c850044b</code> -&gt; <code>8bb61d99</code>) <strong>[v]</strong></li>
+<li>🟢 <code>H:\scripts.yaml</code> - script <code>p1_master_gestion_clim</code> : 4 references <code>temp_conf_m</code> puis 4 <code>temp_conf_e</code> retargetees, plus les libelles du rapport de sante <code>corrige_salon</code> et <code>corrige_bureau</code> (<code>8ba8c525</code> -&gt; <code>d18d9592</code>) <strong>[v]</strong></li>
+<li>🟢 <code>docs/02_docs_dashboard/02_dashboard_docs_YAML/L1C3_CLIM/Card_calcule_temp_cible.yaml</code> - 7 puis 10 references (<code>3277ed7d</code> -&gt; <code>af51947c</code>) et sa fiche <code>.md</code> <strong>[v]</strong></li>
+<li>🟢 <code>docs/02_docs_dashboard/.../L4C1_MINI_PC/L4C1_Page_MINI_PC.yaml</code> - template uptime refait sur <code>as_timestamp</code> (<code>328ee8d6</code> -&gt; <code>2484cfe5</code>), fiche <code>.md</code> reecrite (<code>ea98b841</code> -&gt; <code>6cefcc49</code>) <strong>[v]</strong></li>
+<li>🟢 Dashboard live <code>dashboard-tablette</code> - template uptime remplace (1 occurrence) puis 5 occurrences salon et 7 bureau, sauvegarde et relecture verifiees par l API websocket <strong>[v]</strong></li>
+<li>🟢 7 index globaux - explication de la chaine MQTT corrigee (broker <code>core-mosquitto</code>) et lignes HACS en deux temps avec le nom reel dans Appareils et services (<code>Atmo France - Vence</code>, <code>Scheduler</code>, <code>Maison</code>, 38 entrees pour powercalc) <strong>[v]</strong></li>
+<li>🟢 <code>docs/00_IA/00_IA_DEPENDANCES_GLOBALES_CLAUDE_memoire/DEPENDANCES_GLOBALES_CLAUDE_memoire.md</code>, <code>L1C2_Page_TEMPERATURES.md</code>, <code>P1_Master_gestion_clim.yaml</code> et <code>.md</code>, <code>DEPENDANCES_GLOBALES_HERMES_V1.md</code> - references d entites alignees sur les nouveaux noms <strong>[v]</strong></li>
+<li>🟢 <code>TODO/TODO.html</code> - 485 -&gt; 488 points, points <code>R136.1</code>, <code>R137.1</code>, <code>R138.1</code> crees <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 Renommage global Eric -&gt; Bureau et Mamour -&gt; Salon (<code>R136.1</code>) : seuls les deux capteurs de clim sont faits. Le reste du perimetre est mesure et inscrit dans le point : 554 <code>entity_id</code>, 408 noms, 4 appareils, 25 517 occurrences dans 727 fichiers. <strong>Decision d Eric attendue sur <code>person.eric</code> / <code>person.mamour</code> (comptes) et <code>notify.eric</code> / <code>notify.mamour</code> (services de notification).</strong></li>
+<li>🟠 Consigne de la chambre : elle recopie <code>consigne_de_base</code> (seuil de non-chauffage, 18 C) au lieu de passer par <code>temperature_confort_jour</code> comme le salon et le bureau. Aucune modification faite, le choix du delta n est pas tranche.</li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 <code>sensor.pve_uptime</code> affiche <code>00000</code> sur la page du mini-PC : la carte faisait <code>float(0)</code> sur un <strong>horodatage</strong> (<code>2026-10-31T17:32:04+00:00</code>), donc toujours <code>00h 00m</code>. Remplace par un calcul sur <code>as_timestamp</code>, rendu verifie par l API <code>/api/template</code> : <code>00h 00m</code> avant, <code>3d 01h 00m</code> apres. <strong>Corrige aux trois endroits</strong> : dashboard live, YAML des docs, fiche <code>.md</code> qui declarait faussement ce template « conforme » <strong>[resolu]</strong></li>
+<li>🔴 <code>sensor.tarifelecinfo_*</code> : six entites creees avant l activation de <code>has_entity_name</code>, donc figees avec le prefixe en double (<code>tarifelecinfo_tarifelecinfo_</code>). Renommees une par une dans le registre par l API websocket, <code>unique_id</code> intacts, valeurs conservees, aucune reference existante <strong>[resolu]</strong></li>
+<li>🔴 <code>recap_index.py</code> decrivait la chaine MQTT comme « conteneur 200 (Zigbee2MQTT + broker MQTT) ». Mesure : l integration <code>mqtt</code> pointe <code>core-mosquitto</code> (add-on, port 1883) ; Zigbee2MQTT du conteneur 200 publie dessus. 114 des 128 entites citees avaient remonte dans les 2 heures. Texte du generateur corrige, pas l index <strong>[resolu]</strong></li>
+<li>🔴 Ligne de documentation fausse : <code>DEPENDANCES_GLOBALES_CLAUDE_memoire.md</code> annonce <code>min(T°ext - 1, 27)</code> pour le capteur salon ; le code dit <strong>26</strong>. Signale a Eric, non corrige (hors du perimetre de la session) <strong>[a traiter]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.html)</h4>
+<ul>
+<li>📌 <code>R136.1</code> REMPLACEMENT-NOMS-ERIC-MAMOUR-VERS-BUREAU-SALON - perimetre mesure, ordre de traitement inscrit, deux familles a trancher</li>
+<li>📌 <code>R137.1</code> COURBES-CHAMBRE-VS-BUREAU-ECART-DE-TEMPERATURE - premiere mesure sur 7 jours : chambre 20,9 C de moyenne, bureau 21,4 C, ecart -0,5 C, <strong>mais seule la chambre chauffait</strong> ; a refaire apres une journee avec les trois unites en marche</li>
+<li>📌 <code>R138.1</code> BUREAU-LE-PC-COMPENSE-T-IL-LE-DEGRE-DE-MOINS - entites a croiser et deux sources de donnees identifiees, dont le log 15 min <code>H:/notifs/diag_conso_elec.txt</code></li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Refaire la mesure chambre contre bureau avec les trois clims en marche, croiser la puissance de la prise du PC bureau avec la temperature de la piece, et trancher la consigne de la chambre.</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

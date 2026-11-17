@@ -1,0 +1,18 @@
+07:18:36.988 | SEQ_DEBUT  | SEQUENCE           | histo
+07:18:37.047 | NOTE       | tokens             | debut : inconnu (compteur non visible)
+07:18:37.103 | NOTE       | menage             | definitif : non (histo courant)
+07:19:06.258 | DEBUT      | journal            | 
+07:19:06.378 | FIN        | journal            | OK histo_2026-11-17_s1.md
+07:19:18.198 | DEBUT      | sync_index         | 
+07:19:46.786 | FIN        | sync_index         | OK index regeneres 0 casses ; Recap_index ecrit ; IA_AUTOMATIONS_NOTIFS et IA_INDEX_AUTOMATIONS deja a jour (68 automations) ; DEPENDANCES et GLOBAL_INDEX_REPO faits en amont
+07:19:46.842 | DEBUT      | fusionne           | 
+07:20:31.285 | FIN        | fusionne           | OK JOURNAL_FUSIONNE_2026-07-15_2026-11-17.md 5326 lignes, fences paires, 0 LF isole
+07:20:31.343 | DEBUT      | obsidian           | 
+07:20:37.712 | FIN        | obsidian           | OK 2 fichiers copies, MD5 identiques
+07:20:37.768 | DEBUT      | pages_html         | 
+07:20:57.404 | FIN        | pages_html         | OK 2 pages creees, 2 originaux a la corbeille
+07:21:06.526 | DEBUT      | menage             | non definitif : historique, TODO, 06_MD5, 01_JOURNAL_TRACE, 02_HISTO_ET_FUSIONNE
+07:21:50.310 | FIN        | menage             | OK historique+TODO : ok=26 echec=0 ; docs et Claude md SAVE non touches (histo non definitif)
+07:22:00.682 | DEBUT      | export_5B          | 
+07:22:09.165 | FIN        | export_5B          | OK un seul export en prod (Dashboard_2026_11_07.yaml), = dernier local
+07:22:09.222 | DEBUT      | push_docs          | 

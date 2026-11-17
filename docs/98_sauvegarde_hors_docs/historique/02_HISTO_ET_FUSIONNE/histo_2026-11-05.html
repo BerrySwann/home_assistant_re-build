@@ -10,44 +10,36 @@ table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2
 <section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-05_s1.md</p>
 <h3>📓 Journal HA ReBuild - <strong>2026-11-05</strong> (Session <strong>S1</strong>)</h3>
 <ul>
-<li>⏱️ <strong>Session</strong> : environ 07h00 - 07h40 (matin) ; la veille au soir, verifications TarifElecInfo et fiches</li>
+<li>⏱️ <strong>Session</strong> : environ 3 h 30 (18h00 -&gt; 21h30)</li>
 <li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
 </ul>
 <h4>✅ Fichiers valides</h4>
 <ul>
-<li>🟢 <code>docs/03_docs_automations/03_docs_automations_YAML/Gestion_des_stores/Gestion_simple_du_store_salon_matin_soir/Gestion_simple_du_store_salon_matin_soir.yaml</code> - automation <code>1775244989013</code> "Gestion Optimisee du Store Salon" : copie du modele du store bureau, seuils 12 et 32, presence (groupe_1 ferme apres 5 min sans autre condition, groupe_2/4 ouvre immediatement sous conditions soleil/temperature/fenetre), applique dans HA a 07h32 puis retrait du delai 5 min sur groupe_2_4 a 07h35 <strong>[v]</strong></li>
-<li>🟢 <code>docs/03_docs_automations/03_docs_automations_MD/Gestion_des_stores/Gestion_store_salon/Gestion_store_salon.md</code> - fiche refaite, alignee sur HA, poussee dans <code>H:\docs</code> <strong>[v]</strong></li>
-<li>🟢 HA prod : automation <code>1775244989013</code> mise a jour (hash <code>c9b6b46a</code>), entite <code>on</code>, relue identique au YAML local <strong>[v]</strong></li>
-<li>🔵 <code>docs/03_docs_automations/03_docs_automations_YAML/Automations_yaml_original/automations.bak_2026_11_05_07h30m30.yaml</code> - point de retour de <code>H:\automations.yaml</code> avant application (MD5 A68B4D3E)</li>
-</ul>
-<h4>🔵 Constats</h4>
-<ul>
-<li>🔵 Integration TarifElecInfo (Hermes) remplace tarif_edf : plus aucune trace de tarif_edf, fiche TarifElecInfo et ligne IA_INTEGRATIONS_CARTES faites par Hermes</li>
-<li>🔵 Timer a 0 dans les cartes L0C0 lave-linge et lave-vaisselle : washdata ne reconnait aucun programme, donc <code>temps_restant</code> inconnu, la carte affiche 0 ; aucune modification</li>
-<li>🔵 Verification yaml/md des automations : ecarts d'appariement a decider par Eric (regle fiches du dossier 01, regeneration de <code>MOC_AUTOMATIONS.md</code>)</li>
-<li>🔵 Ancienne branche MATIN du store salon en HA avait <code>sun after sunset</code> (bug, bloquait l'ouverture le jour) : remplacee</li>
-<li>🔵 Exception decidee par Eric : deux automations gardees pour le salon ; la sauvegarde <code>...bak_2026_11_05_07h06m31s.yaml</code> (ancienne automation simple) est a conserver hors menage</li>
+<li>🟢 8 fichiers AVG corrigés (220 diviseurs) : <code>P0_03_AVG_genelec_appart</code>, <code>P1_AVG_AMHQ_UNITE</code>, <code>P2_AVG_AMHQ_MINI_PC</code>, <code>P2_AVG_AMHQ_prises</code>, <code>P2_AVG_AMHQ_veilles</code>, <code>P3_AVG_AMHQ_1_UNITE</code>, <code>P3_AVG_AMHQ_2_ZONE</code>, <code>P3_AVG_AMHQ_3_TOTAL</code> <strong>[v]</strong></li>
+<li>🟢 Le diviseur des watts moyens ne part plus du calendrier mais du <code>last_reset</code> du compteur source, avec repli sur le calcul d'origine quand le capteur n'en expose pas <strong>[v]</strong></li>
+<li>🟢 <code>Github/README.md</code> et miroir <code>H:/docs</code> réalignés, config vivante <code>H:/templates</code> poussée, les trois en SYNC, copies de sécurité dans <code>TEMPO\prod_avant_push_2026-11-05_20h37m13s</code> <strong>[v]</strong></li>
+<li>🟢 Redémarrage complet de HA après la correction : 2163 entités, retour en 13 s, 224 capteurs <code>_avg_watts_</code> chargés, 0 en erreur <strong>[v]</strong></li>
+<li>🟢 Automation <code>A - Chauffage Cuisine</code> rallumée sur ordre d'Eric, <code>B - Chauffage Cuisine Vacances</code> laissée éteinte <strong>[v]</strong></li>
 </ul>
 <h4>🟠 En cours</h4>
 <ul>
-<li>🟠 Verification du bon fonctionnement du store salon dans quelques jours (traces HA et historique de <code>cover.store_salon</code>) <strong>[a tester]</strong></li>
-<li>🟠 Conditions du scenario A (07:00, fenetre fermee, store fermé) a confirmer par Eric <strong>[EN COURS]</strong></li>
+<li>🟠 Seuil de veille du PC à passer de 1-70 W à 25-70 W : le résidu du bureau (mini PC 13 W + switch 7 W) tombe dans la bande actuelle, donc la veille ne retombe jamais et le compteur des 12 minutes ne repart pas. Mode de modification du helper à trancher.</li>
 </ul>
 <h4>🔴 Erreurs resolues</h4>
 <ul>
-<li>🔴 Fiche salon annoncait HA aligne a tort (test trop large) -&gt; verifie dans <code>automations.yaml</code>, ligne MaJ corrigee <strong>[resolu]</strong></li>
-<li>🔴 <code>ha_config_set_automation</code> refuse (cle best practices manquante) -&gt; guide lu, cle fournie <strong>[resolu]</strong></li>
-<li>🔴 Ligne du journal des modifs du 11-04 recopiee comme en-tete par erreur -&gt; supprimee, ligne CORRECTION ajoutee <strong>[resolu]</strong></li>
+<li>🔴 J'ai lu les statistiques dans <code>H:/home-assistant_v2.db</code>, qui est le fichier du Raspberry Pi figé au 2026-02-28 18:48. HA écrit dans MariaDB sur le LXC 201. Toute une analyse en a été faussée et a dû être reprise par l'API <strong>[resolu]</strong></li>
+<li>🔴 L'API REST de l'historique tronque les résultats : 3 états renvoyés pour 7 jours là où le websocket en donne 42. Une conclusion fausse en a découlé (« plus aucune coupure depuis le 30 octobre ») <strong>[resolu]</strong></li>
+<li>🔴 Deux de mes scripts ont affirmé des choses fausses faute de valider leur propre sortie : la regex des <code>{% set %}</code> ne matchait rien (accolade finale oubliée) et mon appariement kWh/W ratait 6 prises à cause de slugs différents <strong>[resolu]</strong></li>
+<li>🔴 <code>sys.argv</code> et le découpage en fenêtres du premier script de correction attrapaient des lignes de blocs voisins : 63 diviseurs annoncés pour 36 capteurs. Réécrit bloc par bloc, 220 sur 220 <strong>[resolu]</strong></li>
 </ul>
 <h4>📋 Taches backlog (TODO.html)</h4>
 <ul>
-<li>📌 Decider la regle d'appariement des fiches du dossier 01 ; regenerer <code>MOC_AUTOMATIONS.md</code></li>
-<li>📌 Profils washdata ou affichage du temps ecoule dans les cartes L0C0</li>
-<li>📌 Proteger durablement <code>...bak_2026_11_05_07h06m31s.yaml</code> du menage des <code>.bak</code></li>
+<li>📌 Fermé : R141.1 (diviseur des AVG en watts), créé et clos dans la même séance avec sa preuve</li>
+<li>📌 Restent ouverts : R136.1 (renommage global), R137.1 (courbes chambre/bureau), R138.1 (PC du bureau), R140.1 à R140.3 (outils de superposition introuvables)</li>
 </ul>
 <h4>🎯 Prochaine action</h4>
 <ul>
-<li>Controle dans quelques jours du cahier des charges du store salon (groupes 1, 2/4, 3, scenarios B et C)</li>
+<li>Trancher le seuil de veille du PC, puis reprendre les courbes chambre contre bureau.</li>
 </ul>
 <p><em>Fin du journal</em></p>
 </section>

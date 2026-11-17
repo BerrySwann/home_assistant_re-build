@@ -1,0 +1,52 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-10-26</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-10-26</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-10-26_s1.md</p>
+<h3>Journal HA ReBuild - 2026-10-26 (Session S1)</h3>
+<ul>
+<li>Session : environ 2 h, de 18h00 a 20h05</li>
+<li>Branche active : docs/</li>
+</ul>
+<h4>Fichiers valides</h4>
+<ul>
+<li><code>docs/02_docs_dashboard/02_dashboard_docs_YAML/L1C1_METEO/L1C1_METEO_02_Page/L1C1_Page_METEO.yaml</code> - carte foudre : 8 fois <code>sensor.eclairs_*</code> remplace par <code>sensor.eclair_*</code> [v] (avant 4241182d, apres 67188c3e)</li>
+<li><code>docs/02_docs_dashboard/02_dashboard_docs_YAML/L3C1_ECLAIRAGE/L3C1_ECLAIRAGE_03_Page_droite/L3C1_Page_ECLAIRAGE_droite.yaml</code> - pop-up Tetes de Lit : carte Eric et ses 4 boutons remis dans un vertical-stack comme ceux de Gege [v] (avant 01aa35d3, apres adfef089)</li>
+<li><code>docs/XX_docs_MD_system/DEPENDANCES_GLOBALES_HERMES/DEPENDANCES_GLOBALES_HERMES_V1.md</code> - regenere deux fois ; plus aucune entite <code>eclairs_</code> fantome [v] (final c9e30cff)</li>
+<li><code>ReBuild/scripts/hermes_gen_dependances.py</code> - generateur reconstruit (l'ancien n'existait plus) [v]</li>
+<li><code>ReBuild/scripts/annotations_v1.json</code> - annotations Claude extraites puis reinjectees, 18 vignettes [v]</li>
+<li><code>D:/hermes/scripts/check_xx.py</code> - outil unique de controle des dossiers XX_ [v]</li>
+<li><code>D:/hermes/scripts/ha_updates_etat.py</code>, <code>ha_maj_exec.py</code>, <code>ha_backup_mcp.py</code>, <code>ha_backups_liste.py</code> - chaine mise a jour HA par REST et par canal MCP [v]</li>
+<li><code>D:/hermes/skills/smart-home/ha-maj/SKILL.md</code> - reecrit sur le modele ha-update-check, avec sauvegarde obligatoire, installation, regle des 5 sauvegardes [v]</li>
+<li>7 skills (ha-push-docs, ha-push-md, ha-push-yaml, sync-index, ha-trigul, ha-resync-tree, histo) - bloc de controle des dossiers XX_ ajoute puis repointe vers la copie maitre [v]</li>
+</ul>
+<h4>En cours</h4>
+<ul>
+<li>Dashboard vivant : correctif du pop-up applique par l'API dashboard sur <code>.storage/lovelace.dashboard_tablette</code> [valide par Eric a l'ecran]</li>
+<li>Edition du dashboard : les corrections locales doivent servir a l'export neuf qu'Eric veut creer</li>
+</ul>
+<h4>Erreurs resolues</h4>
+<ul>
+<li><code>printf</code> a mange un antislash dans une ligne de journal, octet 0x1B ecrit -&gt; ligne retiree, corrigee, note ajoutee [resolu]</li>
+<li>Deux <code>write_file</code> refuses sur <code>check_xx_repertoires.py</code> -&gt; fichier laisse intact, outil unique ecrit sous un autre nom [resolu]</li>
+<li>Correction appliquee a <code>H:/Dashboard_2026_10_16.yaml</code> sans effet a l'ecran : les dashboards sont en mode storage, ce YAML est un export [resolu, cause identifiee]</li>
+<li>Premier essai de correction du pop-up en prod rejete par la validation YAML, prod restauree automatiquement depuis la copie [resolu]</li>
+<li><code>update.install</code> en HTTP 500 « Backup is not supported » : le champ <code>backup</code> ne s'envoie pas pour une carte ni une integration [resolu]</li>
+<li><code>backup.create_automatic</code> ne cree pas immediatement : enregistre 2 minutes plus tard, ma conclusion « aucune sauvegarde » etait prematuree [resolu]</li>
+</ul>
+<h4>Taches backlog (TODO.html)</h4>
+<ul>
+<li>Points laisses par Claude : liens XX_RASPI dans GLOBAL_INDEX_REPO, tri des sigles, page reservee L5C3, verrous #MP_01 et #MPC_01</li>
+</ul>
+<h4>Prochaine action</h4>
+<ul>
+<li>Export d'un nouveau dashboard date, cote Eric, a partir des YAML locaux corriges ; puis suppression de la sauvegarde Avant_renommage_docs_2026_10_17 depuis l'UI HA pour revenir a 5 sauvegardes completes.</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

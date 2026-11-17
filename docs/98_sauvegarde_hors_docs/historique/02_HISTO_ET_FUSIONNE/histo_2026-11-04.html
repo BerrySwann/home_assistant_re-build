@@ -1,0 +1,52 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="generator" content="histo_html.py"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Journal de bord 2026-11-04</title><style>body{font-family:system-ui,Arial,sans-serif;margin:0 auto;padding:20px 16px;max-width:1000px;background:#12181b;color:#e4eaed;font-size:15px;line-height:1.55}
+h1{margin:0 0 4px}h2{margin:34px 0 6px;border-bottom:1px solid #2c383d;padding-bottom:4px}h3{margin:18px 0 4px}h4{margin:16px 0 4px;color:#4fb8c9}
+p{margin:6px 0}.mut,.src{color:#93a3ab;font-size:.85rem}a{color:#4fb8c9}hr{border:0;border-top:1px solid #2c383d;margin:14px 0}
+pre{background:#1a2226;border:1px solid #2c383d;border-radius:4px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;font:13px/1.5 ui-monospace,Consolas,monospace;margin:6px 0}
+code{background:#1a2226;border:1px solid #2c383d;border-radius:3px;padding:0 4px;font:13px ui-monospace,Consolas,monospace}
+ul{margin:4px 0 4px 20px;padding:0}li{margin:2px 0}nav{margin:10px 0}nav a{margin-right:12px}
+table{border-collapse:collapse;width:100%;background:#1a2226;border:1px solid #2c383d}th,td{padding:6px 8px;border-bottom:1px solid #2c383d;text-align:left}th{color:#93a3ab;font-weight:500;font-size:.8rem}</style></head><body>
+<h1>Journal de bord du 2026-11-04</h1><p class="mut">1 session(s)</p>
+<nav><a href="index.html">Liste des jours</a> <a href="#s1">Session S1</a></nav>
+<section id="s1"><h2>Session S1</h2><p class="src">Source : histo_2026-11-04_s1.md</p>
+<h3>📓 Journal HA ReBuild - <strong>2026-11-04</strong> (Session <strong>S1</strong>)</h3>
+<ul>
+<li>⏱️ <strong>Session</strong> : environ 3 h (19h00 -&gt; 21h50)</li>
+<li>🌿 <strong>Branche active</strong> : <code>docs/</code></li>
+</ul>
+<h4>✅ Fichiers valides</h4>
+<ul>
+<li>🟢 Mises à jour HA installées : <code>bubble_card</code> v3.4.3, <code>custom_brand_icons</code> 2026.11.1, <code>scheduler_card</code> v4.0.20, <code>meross_lan</code> v6.0.0, <code>scheduler_component</code> v3.3.9, <code>tailscale</code> 0.30.6. Sauvegarde <code>9de7a5ee</code> (base incluse) avant, <code>check_config</code> accepté, redémarrage effectué <strong>[v]</strong></li>
+<li>🟢 <code>templates/P0_energie_total_diag/...</code> : <code>P0_01_genelec_appart_AMHQ_cost.yaml</code> et <code>P0_MyElectricalData.yaml</code>, 141 références locales / 127 en prod migrées de <code>tarif_edf</code> vers <code>tarifelecinfo</code> <strong>[v]</strong></li>
+<li>🟢 <code>H:/automations.yaml</code> : calcul de coût de l'automation Histo Nodon, 4 références migrées <strong>[v]</strong></li>
+<li>🟢 <code>01_config_system_MD/integrations/TarifElecInfo/TarifElecInfo.md</code> : fiche dédiée créée (8 badges, 8 capteurs, 3 sources de prix, options, 2 alertes) <strong>[v]</strong></li>
+<li>🟢 <code>IA_INTEGRATIONS_CARTES.md</code> ligne 35 : <code>tarif_edf</code> remplacée par <code>tarifelecinfo</code> <strong>[v]</strong></li>
+<li>🟢 6 fiches d'automations créées dans <code>03_docs_automations_MD</code> (Backup alerte KO, CLIM JOUR, impact foudre, notification C et D, WATCHDOG SDB) <strong>[v]</strong></li>
+<li>🟢 <code>Github/README.md</code> aligné sur la prod puis corrigé, <code>H:/README.md</code> corrigé aussi <strong>[v]</strong></li>
+<li>🟢 <code>L2C1_Page_ENERGIE_GENERALE_principale.md</code> : sources réelles rétablies (MyElectricalData pour Tempo, TarifElecInfo pour le contrat), <strong>aucun prix en dur</strong> <strong>[v]</strong></li>
+</ul>
+<h4>🟠 En cours</h4>
+<ul>
+<li>🟠 R140.1 et R140.2 (scripts de superposition introuvables) : à localiser, rien de recréé</li>
+<li>🟠 R140.3 : rangement de la fiche du trigul unitaire, à trancher</li>
+</ul>
+<h4>🔴 Erreurs resolues</h4>
+<ul>
+<li>🔴 <code>sensor.tarif_heures_*_ttc</code> que j'avais déclarés morts le matin : ils étaient <strong>vivants</strong>, mis à jour à 19h41. J'ai conclu sur un instant où l'intégration n'avait pas rechargé - correction écrite à Eric <strong>[resolu]</strong></li>
+<li>🔴 <code>clore_point.py</code> cassait la ligne TODO en deux (<code>"m":"m":</code>), deux fois de suite. Cause : position du champ <code>m</code> calculée avant les remplacements de statut et de date. Réécrit en <code>json.loads</code>/<code>json.dumps</code>, testé sur copie jetable <strong>[resolu]</strong></li>
+<li>🔴 Un <code>.bak</code> déposé à la racine de <code>H:</code> par mon script de correction du README : copie MD5 dans TEMPO puis suppression <strong>[resolu]</strong></li>
+<li>🔴 45 <code>.bak</code> hors format (<code>HHh_MMm_SSs</code>) créés par mes scripts : tous renommés, contrôle repassé de 3 écarts à 0 <strong>[resolu]</strong></li>
+<li>🔴 <code>Check_XX_presents.py</code> s'arrêtait si le manifeste de Claude manquait : il prend désormais le disque comme référence <strong>[resolu]</strong></li>
+</ul>
+<h4>📋 Taches backlog (TODO.html)</h4>
+<ul>
+<li>📌 Fermés ce jour : R139.1 (tarif_edf), R62.4 (chemins morts de la matrice), R63.2, R63.3, R63.4, R63.5 (docs sans fiche)</li>
+<li>📌 Créés : R140.1, R140.2 (scripts de superposition introuvables), R140.3 (rangement d'une fiche)</li>
+<li>📌 Restent ouverts de la veille : R136.1 (renommage global), R137.1 (courbes chambre/bureau), R138.1 (PC du bureau)</li>
+</ul>
+<h4>🎯 Prochaine action</h4>
+<ul>
+<li>Localiser <code>hermes_audit_trigul_arbres.py</code> et <code>Trigul_run.py</code>, et trancher la consigne de la chambre.</li>
+</ul>
+<p><em>Fin du journal</em></p>
+</section>
+</body></html>

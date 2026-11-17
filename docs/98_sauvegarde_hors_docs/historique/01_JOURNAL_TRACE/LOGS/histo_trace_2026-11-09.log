@@ -37,3 +37,16 @@
 20:55:43.674 | DEBUT      | controles_6G       | 
 20:56:12.325 | FIN        | controles_6G       | ATTENTION Check_DEPENDANCES ecarts=15 : 14 YAML docs modifies depuis l'entete 2026-11-05 21:30 (sessions du 06 au 08, preexistant, non repare) ; IA_GLOBAL_INDEX regenere, 0 ecart
 20:56:12.384 | DEBUT      | push_docs          | rattrapage
+20:56:23.207 | FIN        | push_docs          | OK rattrapage: fiches badgees, IA_PRISE_eCO, indexes regeneres, ARBO poussees; voir sortie Push_5C
+20:56:23.689 | DEBUT      | controles_6H       | 
+20:56:41.962 | FIN        | controles_6H       | OK palier1=OK palier2=OK images=OK derive=0, qualite prod OK, ne bloque pas l'extinction
+20:56:55.194 | NOTE       | tokens             | fin : inconnu (compteur non visible)
+20:57:08.939 | DEBUT      | rapport            | 
+20:57:24.001 | FIN        | rapport            | OK rapport final envoye
+20:57:24.060 | DEBUT      | notification       | 
+20:57:31.900 | FIN        | notification       | OK notify.mobile_app_eric envoyee, arret annonce 21:02
+20:57:41.987 | DEBUT      | lumieres           | 
+20:58:06.740 | FIN        | lumieres           | OK Hue Sync coupe (stream.active=false), 3 Play en mode normal puis off, automation.nouvelle_automatisation remise on, switch.ecran_p_c_3_play_hue reste on
+20:58:06.800 | DEBUT      | arret_pc           | shutdown /s /t 300 annonce 21:02
+20:58:06.897 | FIN        | arret_pc           | OK commande d'arret lancee a la suite (dernier appel)
+20:58:06.955 | SEQ_FIN    | SEQUENCE           | fin de sequence

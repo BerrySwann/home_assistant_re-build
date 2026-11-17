@@ -12,6 +12,7 @@
 
 </div>
 
+*Derniere mise a jour : 2026-11-17 07h13 (journee de correctifs eco_prises et clim, fiches realignees. Automatisations J a O : sensor.offset_nuit_* remplace par sensor.offset_* (06h30). Automation eco_prises : seconde condition qui ignore les transitions vers unavailable pendant un rechargement des templates (06h36). sensor.eco_prises_spy : garde de disponibilite (06h41). sensor.eco_prises_spy_pc_tv : entite absente toleree, duree = min(veille, prise) (06h52). Fiche master clim : capteurs correction_temperature_salon/bureau/chambre aux valeurs 1 / 2 / 2 relevees dans HA. 40 fichiers .bak retires de H:/docs, copies en local.)*
 *Derniere mise a jour : 2026-11-17 06h30 (clim : restauration du calcul de la consigne de nuit. Le script lisait sensor.seuil_non_chauffage, renomme en seuil_chauffage le 13/11, avec un float sans repli : les trois consignes de nuit echouaient et le salon chauffait a 20 au lieu de 18. Presence : la condition exigeait network_type == wifi, un telephone sur VPN etait vu absent alors que son SSID est celui de la maison ; le groupe tombait en groupe_1. 68 automations en prod, 68 identiques en logique apres realignement de quatre fiches locales.)*
 *Derniere mise a jour : 2026-11-13 21h00 (anti-derive de jour aligne sur la nuit, plafonds de jour repares. Master clim P1_01_clim_logique_system_autom.yaml : temperature_corrige_* recoit l'input de jour, min_froid porte a 22, salon [tccsj_s, min_froid] et bureau/chambre [tccsj_X, min_froid - 1]. Script P1_Master_gestion_clim.yaml : tccj_s/b/c soustraient correction_temperature_* comme tccn_* le faisait en nuit. device_class et icones poses sur les 39 capteurs du master. Deux .bak retires de H:/templates, ils y etaient charges comme des templates et bloquaient les capteurs sur une ancienne valeur.)
 *Derniere mise a jour : 2026-11-12 21h10 (mises a jour HA puis chauffage de jour. Cote HA, core 2026.11.1 et SmartIR 1.18.2 ecartes : le premier parce que c est la plus grosse release jamais publiee et que HACS y devient le Marketplace, avec 900 entites sur 3225 qui changent de nom affiche ; le second parce que son manifest exige homeassistant 2026.11.0 et qu il refuserait de se charger sur un core 2026.10.4, ce qui ferait tomber les trois clims SmartIR. Installes : wind rose v2.8.0, custom brand 2026.11.2, samba 12.11.0, sauvegarde de57b416 faite avant. Cote chauffage, trois capteurs correction_temperature_salon/bureau/chambre crees dans le master aux valeurs 1 / 3 / 3, mesures du 2026-11-10 (ecarts 1,5 / 4,0 / 3,6 du capteur de reprise d air) ; le script soustrait cette correction a l envoi, la cible temperature_consigne_nuit_* reste a 19. Appareil de jour prepare : trois input_number clim_consigne_jour_*, trois timers de 10 mn, trois automatisations M N O, et temperature_corrige_* integre desormais l input de jour. Les trois automatisations restent unavailable malgre une config valide. Master range en 7 parties dans l ordre officiel des pieces.
@@ -2579,6 +2580,8 @@ sensor.groupe (TPL - P4)
 
 *Correctif 2026-09-23 : liste `prises` convertie `| from_json` (erreur for_each - 5 exécutions aborted) ; spy `sensor.eco_prises_spy`.*
 
+*Correctif 2026-11-17 : seconde condition de l automation (transitions vers unavailable ignorees pendant un rechargement des templates) ; `sensor.eco_prises_spy` renvoie `indisponible (rechargement)` au lieu de lever une erreur from_json.*
+
 ---
 
 ### ✅ GESTION PC BUREAU : SCENE DE FIN + NOTIF
@@ -2607,7 +2610,7 @@ sensor.prise_bureau_pc_ikea_power (NAT - IKEA)
         [on 12 min] → light.hue_smart_eco_pc_bureau → turn_off
                     → notify.mobile_app_eric (Veille détectée / PC Bureau [OFF])
         [rattrapage /15] → même coupure si veille >= 12 min (durée réelle) + garde anti-fantôme
-              → Spy : sensor.eco_prises_spy_pc_tv
+              → Spy : sensor.eco_prises_spy_pc_tv (entite absente toleree, duree min(veille, prise), 2026-11-17)
         → Aucune vignette dashboard (notification pure)
 ```
 
@@ -2641,7 +2644,7 @@ sensor.prise_tv_chambre_nous_power (NAT - NOUS)
         [on 12 min] → light.hue_smart_eco_tv_chambre → turn_off
                     → notify.mobile_app_eric (Veille détectée / Prise TV [OFF])
         [rattrapage /15] → même coupure si veille >= 12 min (durée réelle) + garde anti-fantôme
-              → Spy : sensor.eco_prises_spy_pc_tv
+              → Spy : sensor.eco_prises_spy_pc_tv (entite absente toleree, duree min(veille, prise), 2026-11-17)
         → Aucune vignette dashboard (notification pure)
 ```
 
@@ -4164,4 +4167,5 @@ automation P1-B (CLIM NUIT) --+--> script.p1_master_gestion_clim [periode, trigg
 
 
 <!-- annotations_log:
-[2026-10-24] Section L5C1 mise à jour d'après HA et le yaml prod synchronisé : page = 4 cartes (section Contacts IKEA retirée), IKEA 9 entités dont sensor.inter_reserve_ikea_rodret_battery (absente de group.ikea_devices, 8), thermostats SONOFF 9, group.sonoff_devices 13 (comptage corrigé), ligne yaml dupliquée supprimée, Hue entrée renommés entree (R83) ; demande d'Eric 15:42 -->
+[2026-10-24] Section L5C1 mise à jour d'après HA et le yaml prod synchronisé : page = 4 cartes (section Contacts IKEA retirée), IKEA 9 entités dont sensor.inter_reserve_ikea_rodret_battery (absente de group.ikea_devices, 8), thermostats SONOFF 9, group.sonoff_devices 13 (comptage corrigé), ligne yaml dupliquée supprimée, Hue entrée renommés entree (R83) ; demande d'Eric 15:42
+[2026-11-17] fiches clim J a O, REGULATION x3, master clim, eco_prises, spy pc_tv realignees sur la prod ; offset_* ; correction 1/2/2 ; garde spy. -->

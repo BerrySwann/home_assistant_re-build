@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--30-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--17-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -35,6 +35,7 @@ templates. L'automation ne change jamais.
 
 - Filtre anti-démarrage : ignore les transitions depuis `unavailable`, `unknown` ou vide.
   Évite de purger les prises quand HA redémarre et que `sensor.groupe` se réinitialise.
+- Filtre rechargement des templates (2026-11-17) : ignore aussi les transitions vers `unavailable`, `unknown` ou vide. Un rechargement des templates rend `sensor.groupe` indisponible environ 0,4 s : le declencheur partait et `from_json` lisait une valeur vide.
 
 ## Logique (pour chaque prise de la config)
 
@@ -75,7 +76,7 @@ effectivement allumées).
 | `sensor.groupe` | Groupe de présence courant |
 | `sensor.eco_prises_config` | Attribut `prises` (liste JSON) — cf. `templates/P2_prise/P2_eCO_prises/P2_eCO_prises_config.yaml` |
 | `notify.mobile_app_eric` | Notification de résumé |
-| `sensor.eco_prises_spy` | Spy de contrôle : groupe + état des 7 prises + écarts |
+| `sensor.eco_prises_spy` | Spy de contrôle : groupe + état des 7 prises + écarts ; renvoie `indisponible (rechargement)` pendant un rechargement des templates |
 
 ## Fichier source
 
@@ -92,6 +93,10 @@ effectivement allumées).
   `repeat.for_each` (il exige une liste native ; l'ancien texte JSON provoquait
   "Repeat 'for_each' must be a list of items" - 5 exécutions aborted en ~1,5 ms,
   tête de lit jamais coupée en absence). Spy de contrôle : `sensor.eco_prises_spy`.
+- **Correctif 2026-11-17** : seconde condition `FILTRE` (voir Condition) contre les transitions vers `unavailable` pendant un rechargement des templates ; `sensor.eco_prises_spy` renvoie `indisponible (rechargement)` quand la config ou le groupe est indisponible, au lieu de lever une erreur `from_json` (54 occurrences depuis le 2026-11-12).
 
 ---
 *Relue le 2026-10-11 contre le YAML et contre la config externe : contenu conforme, seuls la catégorie et le chemin source ont été corrigés. Doc unique du 2026-09-10 — fusion de ECO_PRISES.md et ECO_PRISES_DYNAMIQUE.md. L'ancienne fiche décrivait un montage disparu (5 prises en dur + créneaux HC + fenêtre de présence) ; le live a été refactorisé en liste externalisée déclenchée par le seul changement de groupe.*
+
+<!-- annotations_log:
+[2026-11-17] filtre unavailable ajoute a l automation (06h36) ; garde de disponibilite sur sensor.eco_prises_spy (06h41). -->
