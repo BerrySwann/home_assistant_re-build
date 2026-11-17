@@ -1,6 +1,6 @@
 id: '1767373801871'
 alias: (B - 0) 2026-01-11 AUTOMATISATION CLIM NUIT (21H00 <-> 07H30)
-description: "Pilotage clims nuit - délègue au script P1_MASTER_gestion_clim"
+description: Pilotage clims nuit - délègue au script P1_MASTER_gestion_clim
 triggers:
 - alias: 'SYSTEM : REDÉMARRAGE HOME ASSISTANT'
   trigger: homeassistant
@@ -51,6 +51,13 @@ triggers:
   - sensor.mode_ete_hiver
   - sensor.temperature_confort_nuit
   id: sensor_update
+- alias: 'CONSIGNE NUIT : CHANGEMENT PAR PIÈCE (CORRECTION ANTI-DÉRIVE)'
+  trigger: state
+  entity_id:
+  - sensor.temperature_consigne_nuit_salon
+  - sensor.temperature_consigne_nuit_bureau
+  - sensor.temperature_consigne_nuit_chambre
+  id: sensor_update
 conditions:
 - condition: time
   after: '21:00:00'
@@ -58,9 +65,9 @@ conditions:
 actions:
 - action: script.p1_master_gestion_clim
   data:
-    periode: "nuit"
-    trigger_id: "{{ trigger.id if trigger is defined else '' }}"
-    trigger_entity_id: "{{ trigger.entity_id if trigger is defined and trigger.entity_id is defined else '' }}"
+    periode: nuit
+    trigger_id: '{{ trigger.id if trigger is defined else '''' }}'
+    trigger_entity_id: '{{ trigger.entity_id if trigger is defined and trigger.entity_id is defined else '''' }}'
 mode: queued
 max: 5
 max_exceeded: silent

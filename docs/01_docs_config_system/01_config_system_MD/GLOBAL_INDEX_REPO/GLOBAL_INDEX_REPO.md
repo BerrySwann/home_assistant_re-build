@@ -3554,8 +3554,8 @@ ces entités ne sont pas dans l'automation elle-même, retirées de la liste ci-
 <summary>✅ <b>(K) (DEBUG) Notifier les changements de message clim (Mobile)</b></summary>
 <blockquote>
 <i>Surveille et notifie les changements d'état du message personnalisé.</i><br><br>
-📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.md">Documentation</a><br>
-⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.yaml">YAML source</a><br>
+📄 <a href="docs/03_docs_automations/03_docs_automations_MD/P1_01_Clim_chauffage/XX_J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.md">Documentation</a><br>
+⚙️ <a href="docs/03_docs_automations/03_docs_automations_YAML/P1_01_Clim_chauffage/XX_J_debug_notifier_les_changements_de_message_clim_mobile/J_debug_notifier_les_changements_de_message_clim_mobile.yaml">YAML source</a><br>
 <br><b>Déclencheurs :</b> 🔄`state`<br>
 <br><details>
 <summary>🔌 Entités (1)</summary>

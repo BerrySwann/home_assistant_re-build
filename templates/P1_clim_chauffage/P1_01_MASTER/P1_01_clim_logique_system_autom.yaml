@@ -39,7 +39,7 @@
 #
 # | MATERIEL       | CAPTEUR BRUT (source)                            | CE FICHIER (unique_id)                                                                    | AVAL                        |
 # |:---------------|:-------------------------------------------------|:------------------------------------------------------------------------------------------|:----------------------------|
-# | [calcule]      | valeurs codees en dur                            | temperature_eco_hiver/_ete, seuil_non_chauffage/_clim, delta_1/_2/_3/_5/_7, offset_nuit_* | tout le reste               |
+# | [calcule]      | valeurs codees en dur                            | temperature_eco_hiver/_ete, seuil_non_chauffage/_clim, delta_1/_2/_3/_5/_7, offset_* | tout le reste               |
 # | Sonde balcon   | sensor.th_balcon_nord_temperature                | mode_ete_hiver, consigne, temperature_confort                                             | L1C3, script 5C             |
 # | Sonde balcon   | + constantes                                     | temperature_confort_jour/_nuit, temperature_eco_*_corrige                                 | script 5C                   |
 # | input_number   | input_number.clim_consigne_nuit_*                | temperature_consigne_nuit_salon/_bureau/_chambre                                          | script 5C en periode nuit   |

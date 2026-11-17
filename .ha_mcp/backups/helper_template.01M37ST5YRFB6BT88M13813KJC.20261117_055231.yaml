@@ -1,0 +1,31 @@
+# ha_mcp_backup
+schema_version: 1
+domain: helper_template
+entity_id: 01M37ST5YRFB6BT88M13813KJC
+captured: '2026-11-17T05:52:31.115128+00:00'
+tool: ha_config_set_helper
+config:
+  entry_id: 01M37ST5YRFB6BT88M13813KJC
+  options:
+    name: Eco Prises Spy PC TV
+    state: "{% set ns = namespace(parts=[], ko=[]) %}{% set corners = [ {'n':'PC','p':'light.hue_smart_eco_pc_bureau','v':'binary_sensor.veille_pc_bureau','w':'sensor.prise_bureau_pc_ikea_power'},\
+      \ {'n':'TV','p':'light.hue_smart_eco_tv_chambre','v':'binary_sensor.veille_tv_chambre','w':'sensor.prise_tv_chambre_nous_power'}\
+      \ ] %}{% for c in corners %}{% set plug = states(c.p) %}{% set veil = states(c.v)\
+      \ %}{% set w = states(c.w) | float(0) | round(0) | int %}{% set dm = ((now()\
+      \ - states[c.v].last_changed).total_seconds() // 60) | int %}{% set duree =\
+      \ ('%dh%02d' | format(dm // 60, dm % 60)) if dm >= 120 else (dm ~ ' min') %}{%\
+      \ if plug == 'off' %}{% set stat = 'prise coup\xE9e' ~ (' (veille ' ~ duree\
+      \ ~ ')' if veil == 'on' else '') %}{% elif plug == 'on' and veil == 'on' %}{%\
+      \ set stat = 'allum\xE9e \xB7 veille ' ~ duree ~ ' \xB7 ' ~ w ~ ' W' %}{% if\
+      \ dm >= 13 %}{% set ns.ko = ns.ko + [c.n ~ ': en veille ' ~ duree ~ ', pas coup\xE9\
+      e'] %}{% endif %}{% elif plug == 'on' and veil == 'off' %}{% set stat = 'allum\xE9\
+      e \xB7 actif ' ~ w ~ ' W' %}{% else %}{% set stat = 'allum\xE9e \xB7 veille\
+      \ ?' %}{% endif %}{% set ns.parts = ns.parts + [c.n ~ ': ' ~ stat] %}{% endfor\
+      \ %}{{ ns.parts | join(' | ') }}{% if ns.ko %} | KO: {{ ns.ko | join(' ; ')\
+      \ }}{% endif %}"
+    template_type: sensor
+  entities:
+  - entity_id: sensor.eco_prises_spy_pc_tv
+    unique_id: 01M37ST5YRFB6BT88M13813KJC
+    name: null
+    original_name: Eco Prises Spy PC TV

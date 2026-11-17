@@ -28,7 +28,7 @@
 # - input_number: !include_dir_merge_named input_number/ : un fichier par famille,
 #   les cles sont fusionnees par nom. Un nouveau fichier demande input_number.reload.
 # - Ne pas confondre avec l offset de nuit, qui est un capteur constant du master
-#   (offset_nuit_salon) : la consigne est ce qu on vise, l offset est la marge de
+#   (offset_salon) : la consigne est ce qu on vise, l offset est la marge de
 #   declenchement qui evite une oscillation autour du seuil.
 # - Le script ne lit cet input QUE pendant la periode nuit (21h a 7h30). En jour il
 #   continue d utiliser temperature_corrige_salon.

@@ -41,7 +41,7 @@
     - name: "Condition Mamour Wifi"
       unique_id: condition_mamour_wifi
       state: >-
-        {% if is_state('sensor.mamour_network_type', 'wifi') %}
+        {% if is_state('sensor.mamour_network_type', ['wifi', 'vpn']) %}
           {% if states('sensor.mamour_wi_fi_connection') in ['Module B.E.R.Y.L. [GG-5.0]', 'Module B.E.R.Y.L. [GG-2.4]'] %}
             true
           {% else %}
@@ -55,7 +55,7 @@
     - name: "Condition Eric Wifi"
       unique_id: condition_eric_wifi
       state: >-
-        {% if is_state('sensor.eric_network_type', 'wifi') %}
+        {% if is_state('sensor.eric_network_type', ['wifi', 'vpn']) %}
           {% if states('sensor.eric_wi_fi_connection') in ['Module B.E.R.Y.L. [GG-5.0]', 'Module B.E.R.Y.L. [GG-2.4]'] %}
             true
           {% else %}

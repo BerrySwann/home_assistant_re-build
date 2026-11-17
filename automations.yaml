@@ -1464,6 +1464,10 @@
     condition: template
     value_template: '{{ trigger.from_state is not none and trigger.from_state.state
       not in [''unavailable'', ''unknown'', ''''] }}'
+  - alias: FILTRE — Ignorer transitions vers unavailable (rechargement des templates)
+    condition: template
+    value_template: '{{ trigger.to_state is not none and trigger.to_state.state
+      not in [''unavailable'', ''unknown'', ''''] }}'
   actions:
   - alias: VARIABLES — Groupe actif + liste des prises (source externe)
     variables:
@@ -2917,7 +2921,7 @@
       - condition: template
         value_template: "{% set thst = states('sensor.th_salon_temperature') | float(none)
           %} {% set tcns = states('sensor.temperature_consigne_nuit_salon') | float(none)
-          %} {% set ons = states('sensor.offset_nuit_salon') | float(none) %} {{ thst
+          %} {% set ons = states('sensor.offset_salon') | float(none) %} {{ thst
           is not none and tcns is not none and ons is not none\n   and (thst | round(1,
           'floor')) > (tcns + ons) }}"
       sequence:
@@ -2964,7 +2968,7 @@
       - condition: template
         value_template: "{% set thbt = states('sensor.th_bureau_temperature') | float(none)
           %} {% set tcnb = states('sensor.temperature_consigne_nuit_bureau') | float(none)
-          %} {% set onb = states('sensor.offset_nuit_bureau') | float(none) %} {{
+          %} {% set onb = states('sensor.offset_bureau') | float(none) %} {{
           thbt is not none and tcnb is not none and onb is not none\n   and (thbt
           | round(1, 'floor')) > (tcnb + onb) }}"
       sequence:
@@ -3011,7 +3015,7 @@
       - condition: template
         value_template: "{% set thct = states('sensor.th_chambre_temperature') | float(none)
           %} {% set tcnc = states('sensor.temperature_consigne_nuit_chambre') | float(none)
-          %} {% set onc = states('sensor.offset_nuit_chambre') | float(none) %} {{
+          %} {% set onc = states('sensor.offset_chambre') | float(none) %} {{
           thct is not none and tcnc is not none and onc is not none\n   and (thct
           | round(1, 'floor')) > (tcnc + onc) }}"
       sequence:
@@ -3064,7 +3068,7 @@
         value_template: >-
           {{ states('sensor.th_salon_temperature') | float(0) | round(1, 'floor') >
           (states('sensor.temperature_corrige_salon') | float(0)) +
-          (states('sensor.offset_nuit_salon') | float(0.3)) }}
+          (states('sensor.offset_salon') | float(0.3)) }}
       - condition: template
         value_template: >-
           {{ not is_state('sensor.groupe', 'groupe_1') }}
@@ -3118,7 +3122,7 @@
         value_template: >-
           {{ states('sensor.th_bureau_temperature') | float(0) | round(1, 'floor') >
           (states('sensor.temperature_corrige_bureau') | float(0)) +
-          (states('sensor.offset_nuit_bureau') | float(0.3)) }}
+          (states('sensor.offset_bureau') | float(0.3)) }}
       - condition: template
         value_template: >-
           {{ not is_state('sensor.groupe', 'groupe_1') }}
@@ -3172,7 +3176,7 @@
         value_template: >-
           {{ states('sensor.th_chambre_temperature') | float(0) | round(1, 'floor') >
           (states('sensor.temperature_corrige_chambre') | float(0)) +
-          (states('sensor.offset_nuit_chambre') | float(0.3)) }}
+          (states('sensor.offset_chambre') | float(0.3)) }}
       - condition: template
         value_template: >-
           {{ not is_state('sensor.groupe', 'groupe_1') }}

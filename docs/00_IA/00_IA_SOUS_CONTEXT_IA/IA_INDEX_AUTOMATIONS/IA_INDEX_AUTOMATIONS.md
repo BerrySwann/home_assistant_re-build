@@ -13,7 +13,7 @@
 
 </div>
 
-*Mis a jour le : 2026-11-09 (comptage 63 automations et categories remis a jour ; version precedente du 2026-10-13)*
+*Mis a jour le : 2026-11-17 (comptage 68 automations ; version precedente du 2026-11-09 qui annoncait 63)*
 
 ---
 
@@ -48,7 +48,7 @@ docs/03_docs_automations/
 
 ## Comptage (verifie 2026-10-30)
 
-**63 automations** dans `automations.yaml` prod (controle du script : 63 en prod, 68 YAML locaux retenus, 75 fiches dont 65 rattachees).
+**68 automations** dans `automations.yaml` prod (controle du script au 2026-11-17 : 68 en prod, 74 YAML locaux retenus, 81 fiches dont 71 rattachees, 5 hors prod).
 
 | Categories HA | Nb reel |
 |:--------------|:--------|

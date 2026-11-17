@@ -23,7 +23,7 @@
       - condition: template
         value_template: "{% set thst = states('sensor.th_salon_temperature') | float(none)
           %} {% set tcns = states('sensor.temperature_consigne_nuit_salon') | float(none)
-          %} {% set ons = states('sensor.offset_nuit_salon') | float(none) %} {{ thst
+          %} {% set ons = states('sensor.offset_salon') | float(none) %} {{ thst
           is not none and tcns is not none and ons is not none\n   and (thst | round(1,
           'floor')) > (tcns + ons) }}"
       sequence:

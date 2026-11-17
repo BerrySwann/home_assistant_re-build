@@ -15,6 +15,10 @@ conditions:
   condition: template
   value_template: '{{ trigger.from_state is not none and trigger.from_state.state
     not in [''unavailable'', ''unknown'', ''''] }}'
+- alias: FILTRE — Ignorer transitions vers unavailable (rechargement des templates)
+  condition: template
+  value_template: '{{ trigger.to_state is not none and trigger.to_state.state
+    not in [''unavailable'', ''unknown'', ''''] }}'
 actions:
 - alias: VARIABLES — Groupe actif + liste des prises (source externe)
   variables:

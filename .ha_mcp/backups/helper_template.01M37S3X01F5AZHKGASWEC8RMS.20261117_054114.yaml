@@ -1,0 +1,28 @@
+# ha_mcp_backup
+schema_version: 1
+domain: helper_template
+entity_id: 01M37S3X01F5AZHKGASWEC8RMS
+captured: '2026-11-17T05:41:14.270216+00:00'
+tool: ha_config_set_helper
+config:
+  entry_id: 01M37S3X01F5AZHKGASWEC8RMS
+  options:
+    name: Eco Prises Spy
+    state: '{% set g = states(''sensor.groupe'') %}{% set prises = state_attr(''sensor.eco_prises_config'',''prises'')
+      | from_json %}{% set noms = {''switch.prise_horloge_ikea'':''horloge'',''light.hue_smart_eco_salon'':''salon'',''light.hue_smart_eco_tv_salon'':''tv-salon'',''light.hue_smart_eco_pc_bureau'':''pc-bureau'',''switch.ecran_p_c_3_play_hue'':''ecran'',''light.hue_smart_eco_tv_chambre'':''tv-chambre'',''switch.prise_tete_de_lit_chambre'':''tete-lit''}
+      %}{% set home = {''groupe_1'':''absent'',''groupe_2'':''Mamour seule'',''groupe_3'':''Eric
+      seul'',''groupe_4'':''les deux''} %}{% set ns = namespace(on=0, t=[], ko=[])
+      %}{% for p in prises %}{% set s = states(p.entity) %}{% if s == ''on'' %}{%
+      set ns.on = ns.on + 1 %}{% endif %}{% set att = ''on'' if g in p.groupes else
+      ''off'' %}{% if not (p.get(''absent_only'', false) and g != ''groupe_1'') %}{%
+      if s != att %}{% set ns.ko = ns.ko + [noms[p.entity] + ''='' + s + '' (attendu
+      '' + att + '')''] %}{% endif %}{% endif %}{% set ns.t = ns.t + [noms[p.entity]
+      + '':'' + s] %}{% endfor %}{{ g }} [{{ home.get(g,''?'') }}] | {{ ns.t | join(''
+      '') }} | {{ ns.on }}/{{ prises | count }} ON{% if ns.ko %} | KO: {{ ns.ko |
+      join(''; '') }}{% endif %}'
+    template_type: sensor
+  entities:
+  - entity_id: sensor.eco_prises_spy
+    unique_id: 01M37S3X01F5AZHKGASWEC8RMS
+    name: null
+    original_name: Eco Prises Spy
