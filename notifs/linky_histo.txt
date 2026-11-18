@@ -78,4 +78,5 @@ Home Assistant notifications (Log started: 2026-08-31T18:24:31.482888+00:00)
 13/11 | Linky : 11.91 kWh (RATTRAPÉ)
 14/11 | Linky : 10.62 kWh
 15/11 | Linky : 11.48 kWh (RATTRAPÉ)
-16/11 | Linky : 0.00 kWh (MANQUANT)
+16/11 | Linky : 14.58 kWh (RATTRAPÉ)
+17/11 | Linky : 11.22 kWh

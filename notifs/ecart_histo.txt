@@ -76,3 +76,5 @@
 14/11 | Linky: 10.62 kWh | Nodon: 10.6 kWh | Ecart: 0.02 (0.2%)
 13/11 | Linky: 11.91 kWh | Nodon: 11.80 kWh | Ecart: 0.11 (0.9%) (RATTRAPÉ)
 15/11 | Linky: 11.48 kWh | Nodon: 11.40 kWh | Ecart: 0.08 (0.7%) (RATTRAPÉ)
+17/11 | Linky: 11.22 kWh | Nodon: 11.2 kWh | Ecart: 0.02 (0.2%)
+16/11 | Linky: 14.58 kWh | Nodon: 14.50 kWh | Ecart: 0.08 (0.5%) (RATTRAPÉ)
