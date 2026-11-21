@@ -1,0 +1,82 @@
+# ha_mcp_backup
+schema_version: 1
+domain: automation
+entity_id: automation.m_clim_track_clim_journal_des_consignes
+captured: '2026-11-21T15:15:17.844071+00:00'
+tool: ha_config_set_automation
+config:
+  id: '1795272726443'
+  alias: (M) (CLIM) Track_Clim journal des consignes
+  description: 'Ecrit dans notifs/Track_Clim.txt, par piece : T reel, groupe, CNC
+    (consigne non corrigee, sans anti-derive), CT (correction), CAD (consigne anti-derive,
+    input_number jour ou nuit), CRE (consigne reelle envoyee a la clim). Toutes les
+    15 minutes et a chaque changement de groupe.'
+  triggers:
+  - id: quinze_minutes
+    minutes: /15
+    trigger: time_pattern
+  - entity_id: sensor.groupe
+    id: changement_groupe
+    trigger: state
+  conditions:
+  - condition: template
+    value_template: '{{ states(''sensor.groupe'') not in [''unknown'', ''unavailable'']
+      }}'
+  actions:
+  - choose:
+    - alias: 'NUIT : CNC = consigne nuit'
+      conditions:
+      - after: '21:00:00'
+        before: 07:30:00
+        condition: time
+      sequence:
+      - action: notify.send_message
+        data:
+          message: "{% set nuit = true %}{% set h = now().strftime('%Y_%m_%d %H:%M:%S')\
+            \ %}{% set g = states('sensor.groupe') %}{% set ns = namespace(l=[]) %}{%\
+            \ for p in ['salon','bureau','chambre'] %}{% set P = p | capitalize %}{%\
+            \ set ct = states('sensor.correction_temperature_' ~ p) | float(0) %}{%\
+            \ set cnc = states('sensor.temperature_eco_hiver_corrige') | float(0)\
+            \ if g == 'groupe_1' else (states('sensor.temperature_consigne_nuit_'\
+            \ ~ p) | float(0) if nuit else states('sensor.temperature_corrige_' ~\
+            \ p) | float(0)) %}{% set inp = states('input_number.clim_consigne_' ~\
+            \ ('nuit' if nuit else 'jour') ~ '_' ~ p) | float(0) %}{% set cad = 0\
+            \ if (g == 'groupe_1' or inp == 0) else -inp %}{% set cnc = cnc + cad\
+            \ %}{% set th = states('sensor.th_' ~ p ~ '_temperature') | float(0) %}{%\
+            \ set cre = state_attr('climate.clim_' ~ p ~ '_rm4_mini', 'temperature')\
+            \ | float(0) %}{% set ns.l = ns.l + ['| ' ~ h ~ ' | T\xB0 ' ~ ('%-7s'\
+            \ | format(P)) ~ ' R\xE9el = ' ~ ('%5.1f' | format(th)) ~ '\xB0 | ' ~\
+            \ ('%-8s' | format(g | capitalize)) ~ ' | CNC_' ~ ('%-7s' | format(P))\
+            \ ~ ' = ' ~ ('%5.1f' | format(cnc)) ~ '\xB0 - CT_' ~ ('%-7s' | format(P))\
+            \ ~ ' ' ~ ('%4.1f' | format(ct)) ~ '\xB0 - CAD ' ~ ('%4.1f' | format(cad))\
+            \ ~ '\xB0 = CRE_' ~ ('%-7s' | format(P)) ~ ' = ' ~ ('%5.1f' | format(cre))\
+            \ ~ '\xB0 |'] %}{% endfor %}{{ '\u2500' * (ns.l[0] | length) + 1 }}\n\
+            {{ ns.l | join('\\n') }}"
+        target:
+          entity_id: notify.track_clim
+    default:
+    - action: notify.send_message
+      data:
+        message: "{% set nuit = false %}{% set h = now().strftime('%Y_%m_%d %H:%M:%S')\
+          \ %}{% set g = states('sensor.groupe') %}{% set ns = namespace(l=[]) %}{%\
+          \ for p in ['salon','bureau','chambre'] %}{% set P = p | capitalize %}{%\
+          \ set ct = states('sensor.correction_temperature_' ~ p) | float(0) %}{%\
+          \ set cnc = states('sensor.temperature_eco_hiver_corrige') | float(0) if\
+          \ g == 'groupe_1' else (states('sensor.temperature_consigne_nuit_' ~ p)\
+          \ | float(0) if nuit else states('sensor.temperature_corrige_' ~ p) | float(0))\
+          \ %}{% set inp = states('input_number.clim_consigne_' ~ ('nuit' if nuit\
+          \ else 'jour') ~ '_' ~ p) | float(0) %}{% set cad = 0 if (g == 'groupe_1'\
+          \ or inp == 0) else -inp %}{% set cnc = cnc + cad %}{% set th = states('sensor.th_'\
+          \ ~ p ~ '_temperature') | float(0) %}{% set cre = state_attr('climate.clim_'\
+          \ ~ p ~ '_rm4_mini', 'temperature') | float(0) %}{% set ns.l = ns.l + ['|\
+          \ ' ~ h ~ ' | T\xB0 ' ~ ('%-7s' | format(P)) ~ ' R\xE9el = ' ~ ('%5.1f'\
+          \ | format(th)) ~ '\xB0 | ' ~ ('%-8s' | format(g | capitalize)) ~ ' | CNC_'\
+          \ ~ ('%-7s' | format(P)) ~ ' = ' ~ ('%5.1f' | format(cnc)) ~ '\xB0 - CT_'\
+          \ ~ ('%-7s' | format(P)) ~ ' ' ~ ('%4.1f' | format(ct)) ~ '\xB0 - CAD '\
+          \ ~ ('%4.1f' | format(cad)) ~ '\xB0 = CRE_' ~ ('%-7s' | format(P)) ~ ' =\
+          \ ' ~ ('%5.1f' | format(cre)) ~ '\xB0 |'] %}{% endfor %}{{ '\u2500' * (ns.l[0]\
+          \ | length) + 1 }}\n{{ ns.l | join('\\n') }}"
+      target:
+        entity_id: notify.track_clim
+  max: 5
+  mode: queued

@@ -666,9 +666,19 @@
     entity_id:
     - sensor.groupe
     - sensor.th_balcon_nord_temperature
-    - sensor.mode_ete_hiver
     - sensor.temperature_confort_jour
     id: sensor_update
+  - alias: 'CONSIGNE JOUR : CHANGEMENT PAR PIÈCE (CORRECTION ANTI-DÉRIVE)'
+    trigger: state
+    entity_id:
+    - sensor.temperature_corrige_salon
+    - sensor.temperature_corrige_bureau
+    - sensor.temperature_corrige_chambre
+    id: sensor_update
+  - alias: 'SAISON : CHANGEMENT MODE ÉTÉ/HIVER (REDÉMARRAGE FORCÉ)'
+    trigger: state
+    entity_id: sensor.mode_ete_hiver
+    id: force_run
   conditions:
   - condition: time
     after: 07:30:00
@@ -733,7 +743,6 @@
     entity_id:
     - sensor.groupe
     - sensor.th_balcon_nord_temperature
-    - sensor.mode_ete_hiver
     - sensor.temperature_confort_nuit
     id: sensor_update
   - alias: 'CONSIGNE NUIT : CHANGEMENT PAR PIÈCE (CORRECTION ANTI-DÉRIVE)'
@@ -743,6 +752,10 @@
     - sensor.temperature_consigne_nuit_bureau
     - sensor.temperature_consigne_nuit_chambre
     id: sensor_update
+  - alias: 'SAISON : CHANGEMENT MODE ÉTÉ/HIVER (REDÉMARRAGE FORCÉ)'
+    trigger: state
+    entity_id: sensor.mode_ete_hiver
+    id: force_run
   conditions:
   - condition: time
     after: '21:00:00'
@@ -3215,46 +3228,52 @@
       - action: notify.send_message
         data:
           message: '{% set nuit = true %}{% set h = now().strftime(''%Y_%m_%d %H:%M:%S'')
-            %}{% set g = states(''sensor.groupe'') %}{% for p in [''salon'',''bureau'',''chambre'']
-            %}{% set P = p | capitalize %}{% set ct = states(''sensor.correction_temperature_''
-            ~ p) | float(0) %}{% set cnc = states(''sensor.temperature_eco_hiver_corrige'')
-            | float(0) if g == ''groupe_1'' else (states(''sensor.temperature_consigne_nuit_''
+            %}{% set g = states(''sensor.groupe'') %}{% set ns = namespace(l=[]) %}{%
+            for p in [''salon'',''bureau'',''chambre''] %}{% set P = p | capitalize
+            %}{% set ct = states(''sensor.correction_temperature_'' ~ p) | float(0)
+            %}{% set cnc = states(''sensor.temperature_eco_hiver_corrige'') | float(0)
+            if g == ''groupe_1'' else (states(''sensor.temperature_consigne_nuit_''
             ~ p) | float(0) if nuit else states(''sensor.temperature_corrige_'' ~
             p) | float(0)) %}{% set inp = states(''input_number.clim_consigne_'' ~
             (''nuit'' if nuit else ''jour'') ~ ''_'' ~ p) | float(0) %}{% set cad
             = 0 if (g == ''groupe_1'' or inp == 0) else -inp %}{% set cnc = cnc +
             cad %}{% set th = states(''sensor.th_'' ~ p ~ ''_temperature'') | float(0)
             %}{% set cre = state_attr(''climate.clim_'' ~ p ~ ''_rm4_mini'', ''temperature'')
-            | float(0) %}{{ h }} | T° {{ ''%-7s'' | format(P) }} Réel = {{ ''%5.1f''
-            | format(th) }}° | {{ ''%-8s'' | format(g | capitalize) }} | CNC_{{ ''%-7s''
-            | format(P) }} = {{ ''%5.1f'' | format(cnc) }}° - CT_{{ ''%-7s'' | format(P)
-            }} {{ ''%4.1f'' | format(ct) }}° - CAD {{ ''%4.1f'' | format(cad) }}°
-            = CRE_{{ ''%-7s'' | format(P) }} = {{ ''%5.1f'' | format(cre) }}° |
+            | float(0) %}{% set ns.l = ns.l + [''| '' ~ h ~ '' | T° '' ~ (''%-7s''
+            | format(P)) ~ '' Réel = '' ~ (''%5.1f'' | format(th)) ~ ''° | '' ~ (''%-8s''
+            | format(g | capitalize)) ~ '' | CNC_'' ~ (''%-7s'' | format(P)) ~ ''
+            = '' ~ (''%5.1f'' | format(cnc)) ~ ''° - CT_'' ~ (''%-7s'' | format(P))
+            ~ '' '' ~ (''%4.1f'' | format(ct)) ~ ''° - CAD '' ~ (''%4.1f'' | format(cad))
+            ~ ''° = CRE_'' ~ (''%-7s'' | format(P)) ~ '' = '' ~ (''%5.1f'' | format(cre))
+            ~ ''° |''] %}{% endfor %}{{ ''─'' * (ns.l | map(''length'') | max) }}
 
-            {% endfor %}'
+            {{ ns.l | join(''\n'') }}'
         target:
           entity_id: notify.track_clim
     default:
     - action: notify.send_message
       data:
         message: '{% set nuit = false %}{% set h = now().strftime(''%Y_%m_%d %H:%M:%S'')
-          %}{% set g = states(''sensor.groupe'') %}{% for p in [''salon'',''bureau'',''chambre'']
-          %}{% set P = p | capitalize %}{% set ct = states(''sensor.correction_temperature_''
-          ~ p) | float(0) %}{% set cnc = states(''sensor.temperature_eco_hiver_corrige'')
-          | float(0) if g == ''groupe_1'' else (states(''sensor.temperature_consigne_nuit_''
+          %}{% set g = states(''sensor.groupe'') %}{% set ns = namespace(l=[]) %}{%
+          for p in [''salon'',''bureau'',''chambre''] %}{% set P = p | capitalize
+          %}{% set ct = states(''sensor.correction_temperature_'' ~ p) | float(0)
+          %}{% set cnc = states(''sensor.temperature_eco_hiver_corrige'') | float(0)
+          if g == ''groupe_1'' else (states(''sensor.temperature_consigne_nuit_''
           ~ p) | float(0) if nuit else states(''sensor.temperature_corrige_'' ~ p)
           | float(0)) %}{% set inp = states(''input_number.clim_consigne_'' ~ (''nuit''
           if nuit else ''jour'') ~ ''_'' ~ p) | float(0) %}{% set cad = 0 if (g ==
           ''groupe_1'' or inp == 0) else -inp %}{% set cnc = cnc + cad %}{% set th
           = states(''sensor.th_'' ~ p ~ ''_temperature'') | float(0) %}{% set cre
           = state_attr(''climate.clim_'' ~ p ~ ''_rm4_mini'', ''temperature'') | float(0)
-          %}{{ h }} | T° {{ ''%-7s'' | format(P) }} Réel = {{ ''%5.1f'' | format(th)
-          }}° | {{ ''%-8s'' | format(g | capitalize) }} | CNC_{{ ''%-7s'' | format(P)
-          }} = {{ ''%5.1f'' | format(cnc) }}° - CT_{{ ''%-7s'' | format(P) }} {{ ''%4.1f''
-          | format(ct) }}° - CAD {{ ''%4.1f'' | format(cad) }}° = CRE_{{ ''%-7s''
-          | format(P) }} = {{ ''%5.1f'' | format(cre) }}° |
+          %}{% set ns.l = ns.l + [''| '' ~ h ~ '' | T° '' ~ (''%-7s'' | format(P))
+          ~ '' Réel = '' ~ (''%5.1f'' | format(th)) ~ ''° | '' ~ (''%-8s'' | format(g
+          | capitalize)) ~ '' | CNC_'' ~ (''%-7s'' | format(P)) ~ '' = '' ~ (''%5.1f''
+          | format(cnc)) ~ ''° - CT_'' ~ (''%-7s'' | format(P)) ~ '' '' ~ (''%4.1f''
+          | format(ct)) ~ ''° - CAD '' ~ (''%4.1f'' | format(cad)) ~ ''° = CRE_''
+          ~ (''%-7s'' | format(P)) ~ '' = '' ~ (''%5.1f'' | format(cre)) ~ ''° |'']
+          %}{% endfor %}{{ ''─'' * (ns.l | map(''length'') | max) }}
 
-          {% endfor %}'
+          {{ ns.l | join(''\n'') }}'
       target:
         entity_id: notify.track_clim
   max: 5
