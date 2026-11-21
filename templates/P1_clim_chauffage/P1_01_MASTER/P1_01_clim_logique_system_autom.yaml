@@ -292,11 +292,11 @@
         {% if is_state('sensor.mode_ete_hiver', 'cool') %}
           {% if t_ext >= (states('sensor.point_tres_chaud') | float(34)) %}{{ (t_ext - 7) | round(1) }}
           {% elif t_ext > (states('sensor.point_chaud') | float(32)) %}{{ (t_ext - 5) | round(1) }}
-          {% else %}{{ consigne | round(1) }}{% endif %}
+          {% else %}{{ consigne -1 | round(1) }}{% endif %}
         {% else %}
-          {% if t_ext < (states('sensor.point_tres_froid') | float(8)) %}{{ (consigne + 2) | round(1) }}
-          {% elif t_ext < (states('sensor.point_froid') | float(12)) %}{{ (consigne + 1) | round(1) }}
-          {% else %}{{ consigne | round(1) }}{% endif %}
+          {% if t_ext < (states('sensor.point_tres_froid') | float(8)) %}{{ (consigne + 3) | round(1) }}
+          {% elif t_ext < (states('sensor.point_froid') | float(12)) %}{{ (consigne + 2) | round(1) }}
+          {% else %}{{ consigne + 1 | round(1) }}{% endif %}
         {% endif %}
       device_class: temperature
       icon: "mdi:home-thermometer"
