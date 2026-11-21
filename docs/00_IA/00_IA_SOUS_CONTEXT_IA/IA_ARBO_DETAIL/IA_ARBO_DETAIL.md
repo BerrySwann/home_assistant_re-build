@@ -2,7 +2,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--12-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--21-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -12,6 +12,7 @@
 
 </div>
 
+*Derniere mise a jour : 2026-11-21 (soir, /histo-final S1 : docs 2313 dont 1101 sauvegardes ; prod H:/docs 1158 fichiers dont 0 sauvegarde ; historique 649 dont 99 sauvegardes ; 00_IA 71, 01_docs_config_system 265, 02_docs_dashboard 480, 03_docs_automations 478, 04_docs_scripts 325, 05_docs_skills 108, 06_docs_technique 3, 98_sauvegarde_hors_docs 575, 99_docs_MD_system 8 ; GitHub commit 6a5b863c : 2409 objets dont 1560 dans docs/). Session : point TODO R144.1 clim verifier temperatures ; logique par groupe du script clim reconstituee mais non appliquee.*
 *Derniere mise a jour : 2026-11-17 (matin, /histo S1 : docs 2367 dont 1145 sauvegardes ; prod H:/docs 1168 fichiers dont 0 sauvegarde ; historique 639 dont 98 sauvegardes ; 00_IA 81, 01_docs_config_system 295, 02_docs_dashboard 481, 03_docs_automations 487, 04_docs_scripts 329, 05_docs_skills 108, 06_docs_technique 3, 98_sauvegarde_hors_docs 575, 99_docs_MD_system 8 ; GitHub commit d8f60df1 : 2356 objets dont 1525 dans docs/). Session clim : fiches .md alignees sur HA (offset_*, corrections 1/2/2, filtre eco_prises). Sous-comptages des branches 00_IA, 04_docs_scripts (prod) et 98 non releves cette fois.*
 *Derniere mise a jour : 2026-11-13 (soir, /histo-final S1 : docs 2237 dont 1082 sauvegardes, contre 2266 et 1110 la veille ; prod H:/docs 1138 fichiers dont 40 sauvegardes ; historique 622 dont 106 sauvegardes (1 fichier a la racine, le plan de menage du jour) ; 00_IA 71, 01_docs_config_system 282, 02_docs_dashboard 480, 03_docs_automations 455, 04_docs_scripts 322, 05_docs_skills 108, 06_docs_technique 3, 98_sauvegarde_hors_docs 508, 99_docs_MD_system 8). Session clim : anti-derive de jour alignee sur la nuit, plafonds de jour repares, 39 capteurs du master uniformises.*
 *Derniere mise a jour : 2026-11-10 (soir, /histo-final S1 : docs 2173 dont 1058 sauvegardes, historique 605 dont 104 sauvegardes et 0 fichier a la racine, 00_IA 77, 01_docs_config_system 244, 02_docs_dashboard 480, 03_docs_automations 436, 04_docs_scripts 307, 05_docs_skills 108, 98_sauvegarde_hors_docs 508, 99_docs_MD_system 10)*
@@ -37,7 +38,7 @@
 
 ---
 
-## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-11-17)
+## 🌳 ARBORESCENCE - LOCAL ReBuild/ (relevé 2026-11-21)
 
 ```text
 ┌───────────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────────────────────┐
@@ -112,7 +113,7 @@
 │ │   │                                         │                                                                                      │
 │ │   └── MOC_PRESENCE/                         │ (son .md et ses sauvegardes)                                                         │
 │ │                                             │                                                                                      │
-│ ├── historique/                               │ (639 dont 98 sauvegardes)                                                            │
+│ ├── historique/                               │ (649 dont 99 sauvegardes)                                                            │
 │ │   │                                         │                                                                                      │
 │ │   ├── JOURNAL_COMPLET/JOURNAL_FUSIONNE_*.md │ (journaux)                                                                           │
 │ │   │                                         │                                                                                      │
@@ -124,7 +125,7 @@
 │ │   │                                         │                                                                                      │
 │ │   └── histo.md                              │ (= copie du skill + ses sauvegardes)                                                 │
 │ │                                             │                                                                                      │
-│ └── docs/                                     │ (2367 fichiers dont 1145 sauvegardes)                                                │
+│ └── docs/                                     │ (2313 fichiers dont 1101 sauvegardes)                                                │
 │     │                                         │                                                                                      │
 │     ├── 00_IA/                                │ (12 dont 9 sauvegardes hors 00_IA_SOUS_CONTEXT_IA/ ; les fichiers html, rapports d'audit,    │
 │     │   │                                     │ grille tarifaire et png cites avant ne sont plus ici)                                │
@@ -213,7 +214,7 @@
 
 ---
 
-## 🌳 ARBORESCENCE - PROD /homeassistant/ (= H:\ - relevé 2026-11-17)
+## 🌳 ARBORESCENCE - PROD /homeassistant/ (= H:\ - relevé 2026-11-21)
 
 ```text
 ┌─────────────────────────────────────────────────┬────────────────────────────────────────────────────────────────────────────────────┐
@@ -498,7 +499,7 @@
 │ │                                               │                                                                                    │
 │ ├── deps/                                       │ (divers, hors périmètre docs HA)                                                   │
 │ │                                               │                                                                                    │
-│ └── docs/                                       │ (1168 - miroir pushé depuis local docs/ ; modifs/ supprimé de la prod)             │
+│ └── docs/                                       │ (1158 - miroir pushé depuis local docs/ ; modifs/ supprimé de la prod)             │
 │     │                                           │                                                                                    │
 │     ├── 00_IA/                                  │ (16 fichiers - aucune sauvegarde .bak sur H:)                                      │
 │     │   │                                       │                                                                                    │
@@ -568,7 +569,7 @@
 - **Repo actif unique** : `BerrySwann/home_assistant_re-build` (ancien `home-assistant-config` supprimé le 2026-04-27)
 - **Contenu** : reflet exact de `/homeassistant/` - pushé par `.scripts/ha_git_backup.sh` (boutons page Système L5C3)
 - **Point d'entrée navigation** : [GLOBAL_INDEX_REPO.md](https://github.com/BerrySwann/home_assistant_re-build/blob/main/GLOBAL_INDEX_REPO.md) (copie de navigation a la racine, nom change le 2026-10-13 ; visible sur GitHub apres le prochain backup HA)
-- **Dernier relevé arbre (API git trees)** : 2026-11-17 - **2356 objets** dont 1525 dans docs/ ; dernier commit `d8f60df1` (2026-11-17 07:10 CET)
+- **Dernier relevé arbre (API git trees)** : 2026-11-21 - **2409 objets** dont 1560 dans docs/ ; dernier commit `6a5b863c` (2026-11-21 21:10 CET)
 - Répartition : `docs/` 1525 · `templates/` 85 · `utility_meter/` 14 · `input_booleans/` 5 · `sensors/` 10
 
 **Patterns URLs :**
@@ -601,4 +602,5 @@ Exemples :
 - `INDEX_GLOBAL.md` : 26 entités citées n'existent plus en base (relevé 2026-09-29), à retirer ou à requalifier.
 - `hermes_gen_dependances.py` : écrit dans `%LOCALAPPDATA%\Temp` et lit `docs/01_docs_config_system/01_config_system_SH_PY_YAML` (script repointe le 2026-10-25, ligne 18 du script).
 
-<!-- annotations_log: [2026-11-17] /histo : comptages local, prod et GitHub mis a jour (update-arbo) -->
+<!-- annotations_log: [2026-11-17] /histo : comptages local, prod et GitHub mis a jour (update-arbo)
+[2026-11-21] /histo-final : comptages local, prod et GitHub mis a jour (update-arbo) -->

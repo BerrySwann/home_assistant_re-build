@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--10--28-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--21-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -15,7 +15,7 @@
 
 > **Fichier :** aucun. Ces intégrations n'existent pas en YAML : la plateforme `notify.file` est interdite en YAML depuis 2026. Elles sont créées dans l'UI de HA et stockées dans la config interne (`/config/.storage/core.config_entries`, domaine `file`).
 > **Où les voir :** Paramètres > Appareils et services > File
-> **Relevé du 2026-10-23 :** 7 entrées, toutes chargées, lues dans HA (API) et dans `core.config_entries` (lecture seule, domaine `file` uniquement)
+> **Relevé du 2026-10-23 :** 7 entrées (+ Track_Clim ajoutée le 2026-11-21), toutes chargées, lues dans HA (API) et dans `core.config_entries` (lecture seule, domaine `file` uniquement)
 > **Utilisées par :** les automations qui appellent `notify.send_message` avec une entité `notify.*` de cette liste
 
 ---
@@ -24,7 +24,7 @@
 
 Chaque entrée File écrit les messages qu'elle reçoit à la suite d'un fichier texte dans `/config/notifs/` (ou `/config/.logs/`). Une automation envoie la ligne avec `notify.send_message` sur l'entité de l'entrée. Les fichiers `/config/notifs/` sont vivants (lus par des capteurs `command_line`) : ils ne sont ni copiés, ni sauvegardés, ni poussés.
 
-## Les 7 intégrations (relevé 2026-10-23)
+## Les 8 intégrations (7 relevées le 2026-10-23, Track_Clim ajoutée le 2026-11-21)
 
 | Fichier écrit | Entité notify | Écrit par (automation) | Horodatage |
 |:--|:--|:--|:--|
@@ -35,6 +35,7 @@ Chaque entrée File écrit les messages qu'elle reçoit à la suite d'un fichier
 | `/config/notifs/ecart_histo.txt` | `notify.log_ecart_histo` | A - [P0] Histo Linky quotidien + Ecart J-1 (corrigé par C et D via script) | non |
 | `/config/notifs/nodon_histo.txt` | `notify.log_nodon_histo` | B - [P0] Histo Nodon quotidien | non |
 | `/config/notifs/nodon_complet_histo.txt` | `notify.nodon_complet_histo` | E - [P0] Histo Nodon complet quotidien (Total HP HC Cout) | non |
+| `/config/notifs/Track_Clim.txt` | `notify.track_clim` | (M) (CLIM) Track_Clim journal des consignes | non (la date et l'heure sont écrites dans le message) |
 
 Identifiants des entrées (`entry_id`) : `01KP8X8BBAGWX8ZP1S7Z9M5MGG` (diag_conso_elec), `01KPXW28JQBWE7KSS84ZHF2NGB` (ecart_liky_vs_nodon), `01KVGEBAK9411S889HDG49QK1T` (zone_eric), `01M1A41V4S9QDRBM7ARJ4HJP3H` (linky_histo), `01M1CG4WC7JZWBATG1NGKHZBCG` (ecart_histo), `01M1A3W9N3DZNQ54S31QG48KDF` (nodon_histo), `01M5N0WW6XZPAMBB3RXSYDGBD0` (nodon_complet_histo).
 
