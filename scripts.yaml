@@ -394,17 +394,17 @@ p1_master_gestion_clim:
         | float }} {% else %}{{ states(''sensor.temperature_confort_jour'') | float
         }}{% endif %}'
       t_salon_target: '{% if mode_degrade_eco == ''true'' %} {{ eco_saison_val }}
-        {% elif ''groupe_1'' in groupe_presence %} {{ (temp_eco_hc - (states(''sensor.correction_temperature_salon'')
-        | float(0))) if mode_saison == ''heat'' else temp_eco_ec }} {% elif periode
-        == ''jour'' %} {{ tccj_s }} {% else %} {{ tccn_s }} {% endif %}'
+        {% elif ''groupe_1'' in groupe_presence %} {{ temp_eco_hc if mode_saison ==
+        ''heat'' else temp_eco_ec }} {% elif periode == ''jour'' %} {{ tccj_s }} {%
+        else %} {{ tccn_s }} {% endif %}'
       t_bureau_target: '{% if mode_degrade_eco == ''true'' %} {{ eco_saison_val }}
-        {% elif ''groupe_1'' in groupe_presence %} {{ (temp_eco_hc - (states(''sensor.correction_temperature_bureau'')
-        | float(0))) if mode_saison == ''heat'' else temp_eco_ec }} {% elif periode
-        == ''jour'' %} {{ tccj_b }} {% else %} {{ tccn_b }} {% endif %}'
+        {% elif ''groupe_1'' in groupe_presence %} {{ temp_eco_hc if mode_saison ==
+        ''heat'' else temp_eco_ec }} {% elif periode == ''jour'' %} {{ tccj_b }} {%
+        else %} {{ tccn_b }} {% endif %}'
       t_chambre_target: '{% if mode_degrade_eco == ''true'' %} {{ eco_saison_val }}
-        {% elif ''groupe_1'' in groupe_presence %} {{ (temp_eco_hc - (states(''sensor.correction_temperature_chambre'')
-        | float(0))) if mode_saison == ''heat'' else temp_eco_ec }} {% elif periode
-        == ''jour'' %} {{ tccj_c }} {% else %} {{ tccn_c }} {% endif %}'
+        {% elif ''groupe_1'' in groupe_presence %} {{ temp_eco_hc if mode_saison ==
+        ''heat'' else temp_eco_ec }} {% elif periode == ''jour'' %} {{ tccj_c }} {%
+        else %} {{ tccn_c }} {% endif %}'
   - alias: 'LOGIQUE : SÉCURITÉ FENÊTRES VS GESTION STANDARD'
     choose:
     - alias: 'CAS URGENCE : FENÊTRE OUVERTE DÉTECTÉE'

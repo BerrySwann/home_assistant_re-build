@@ -181,78 +181,6 @@
       device_class: temperature
       icon: "mdi:arrow-collapse-up"
 
-# --- cible_jour_salon_groupe_2 ---
-    - name: "Cible jour salon groupe 2"
-      unique_id: cible_jour_salon_groupe_2
-      unit_of_measurement: "°C"
-      state: "21"
-      device_class: temperature
-      icon: "mdi:sofa"
-
-# --- cible_jour_salon_groupe_3 ---
-    - name: "Cible jour salon groupe 3"
-      unique_id: cible_jour_salon_groupe_3
-      unit_of_measurement: "°C"
-      state: "18"
-      device_class: temperature
-      icon: "mdi:sofa"
-
-# --- cible_jour_salon_groupe_4 ---
-    - name: "Cible jour salon groupe 4"
-      unique_id: cible_jour_salon_groupe_4
-      unit_of_measurement: "°C"
-      state: "21"
-      device_class: temperature
-      icon: "mdi:sofa"
-
-# --- cible_jour_bureau_groupe_2 ---
-    - name: "Cible jour bureau groupe 2"
-      unique_id: cible_jour_bureau_groupe_2
-      unit_of_measurement: "°C"
-      state: "19"
-      device_class: temperature
-      icon: "mdi:sofa"
-
-# --- cible_jour_bureau_groupe_3 ---
-    - name: "Cible jour bureau groupe 3"
-      unique_id: cible_jour_bureau_groupe_3
-      unit_of_measurement: "°C"
-      state: "18"
-      device_class: temperature
-      icon: "mdi:sofa"
-
-# --- cible_jour_bureau_groupe_4 ---
-    - name: "Cible jour bureau groupe 4"
-      unique_id: cible_jour_bureau_groupe_4
-      unit_of_measurement: "°C"
-      state: "18"
-      device_class: temperature
-      icon: "mdi:sofa"
-
-# --- cible_jour_chambre_groupe_2 ---
-    - name: "Cible jour chambre groupe 2"
-      unique_id: cible_jour_chambre_groupe_2
-      unit_of_measurement: "°C"
-      state: "19"
-      device_class: temperature
-      icon: "mdi:sofa"
-
-# --- cible_jour_chambre_groupe_3 ---
-    - name: "Cible jour chambre groupe 3"
-      unique_id: cible_jour_chambre_groupe_3
-      unit_of_measurement: "°C"
-      state: "18"
-      device_class: temperature
-      icon: "mdi:sofa"
-
-# --- cible_jour_chambre_groupe_4 ---
-    - name: "Cible jour chambre groupe 4"
-      unique_id: cible_jour_chambre_groupe_4
-      unit_of_measurement: "°C"
-      state: "19"
-      device_class: temperature
-      icon: "mdi:sofa"
-
 # --- offset_salon ---
     - name: "Offset Salon"
       unique_id: offset_salon
@@ -426,9 +354,8 @@
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {{ [t_ext - 1, (states('sensor.seuil_clim') | float(26))] | min | int }}
         {% else %}
-          {% set palier = (states('sensor.temperature_confort_jour') | float(0)) - (states('sensor.consigne') | float(19)) %}
-          {% set base = states('sensor.cible_jour_salon_' ~ states('sensor.groupe')) | float((states('sensor.consigne') | float(19)) + 1) %}
-          {{ ([base + palier, (states('sensor.max_chaud_hiver') | float(22))] | min) + (states('input_number.clim_consigne_jour_salon') | float(0)) | round(1) }}
+          {% set tccsj_s = states('sensor.temperature_confort_jour') | float(0) %}
+          {{ (([tccsj_s, (states('sensor.max_chaud_hiver') | float(22))] | min) + 1) + (states('input_number.clim_consigne_jour_salon') | float(0)) | round(1) }}
         {% endif %}
       device_class: temperature
       icon: "mdi:sofa"
@@ -448,9 +375,8 @@
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {{ [t_ext, (states('sensor.max_chaud_ete') | float(27))] | min | int }}
         {% else %}
-          {% set palier = (states('sensor.temperature_confort_jour') | float(0)) - (states('sensor.consigne') | float(19)) %}
-          {% set base = states('sensor.cible_jour_bureau_' ~ states('sensor.groupe')) | float((states('sensor.consigne') | float(19)) - 1) %}
-          {{ ([base + palier, (states('sensor.max_chaud_hiver') | float(22))] | min) + (states('input_number.clim_consigne_jour_bureau') | float(0)) | round(1) }}
+          {% set tccsj_b = states('sensor.temperature_confort_jour') | float(0) %}
+          {{ (([tccsj_b, (states('sensor.max_chaud_hiver') | float(22))] | min) - 1) + (states('input_number.clim_consigne_jour_bureau') | float(0)) | round(1) }}
         {% endif %}
       device_class: temperature
       icon: "mdi:desk"
@@ -467,9 +393,8 @@
           {% set t_ext = states('sensor.th_balcon_nord_temperature') | float(0) %}
           {{ [t_ext + 1, (states('sensor.max_chaud_ete') | float(27))] | min | int }}
         {% else %}
-          {% set palier = (states('sensor.temperature_confort_jour') | float(0)) - (states('sensor.consigne') | float(19)) %}
-          {% set base = states('sensor.cible_jour_chambre_' ~ states('sensor.groupe')) | float((states('sensor.consigne') | float(19)) - 1) %}
-          {{ ([base + palier, (states('sensor.max_chaud_hiver') | float(22))] | min) + (states('input_number.clim_consigne_jour_chambre') | float(0)) | round(1) }}
+          {% set tccsj_c = states('sensor.temperature_confort_jour') | float(0) %}
+          {{ (([tccsj_c, (states('sensor.max_chaud_hiver') | float(22))] | min) - 1) + (states('input_number.clim_consigne_jour_chambre') | float(0)) | round(1) }}
         {% endif %}
       device_class: temperature
       icon: "mdi:bed"
@@ -697,12 +622,6 @@
       icon: "mdi:delta"
 
 
-# - [Tune]    2026-11-21 : temperature_corrige_salon/_bureau/_chambre, hiver : la cible de base vient
-#             du capteur cible_jour_<piece>_groupe_<n> (groupes 2, 3, 4 ; valeurs = temperatures reelles
-#             voulues par Eric). Le palier de froid reste celui de temperature_confort_jour moins consigne
-#             (0, 1 ou 2). Total plafonne par max_chaud_hiver, puis decalage anti-derive. Groupe_1 et
-#             groupe inconnu : repli sur consigne +1 (salon) ou -1 (bureau, chambre), comme avant.
-#             Remplace cible_salon_groupes_2_4, cree le meme jour et jamais pousse.
 # - [Tune]    2026-11-11 : temperature_confort lit th_balcon_nord_temperature avec un plancher
 #             (round(0, 'floor')) et non un arrondi : l arrondi deplace les bornes d un demi-degre
 #             (a 7,9 il rend 8, donc 8 < 8 devient faux). Mesure sur 20 releves de nuit : 18

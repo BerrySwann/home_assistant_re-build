@@ -668,13 +668,6 @@
     - sensor.th_balcon_nord_temperature
     - sensor.temperature_confort_jour
     id: sensor_update
-  - alias: 'CONSIGNE JOUR : CHANGEMENT PAR PIÈCE (CORRECTION ANTI-DÉRIVE)'
-    trigger: state
-    entity_id:
-    - sensor.temperature_corrige_salon
-    - sensor.temperature_corrige_bureau
-    - sensor.temperature_corrige_chambre
-    id: sensor_update
   - alias: 'SAISON : CHANGEMENT MODE ÉTÉ/HIVER (REDÉMARRAGE FORCÉ)'
     trigger: state
     entity_id: sensor.mode_ete_hiver
@@ -3201,7 +3194,7 @@
           value: 0
   mode: single
 - id: '1795272726443'
-  alias: (M) (CLIM) Track_Clim journal des consignes
+  alias: (P) (CLIM) Track_Clim journal des consignes
   description: 'Ecrit dans notifs/Track_Clim.txt, par piece : T reel, groupe, CNC
     (consigne non corrigee, sans anti-derive), CT (correction), CAD (consigne anti-derive,
     input_number jour ou nuit), CRE (consigne reelle envoyee a la clim). Toutes les
