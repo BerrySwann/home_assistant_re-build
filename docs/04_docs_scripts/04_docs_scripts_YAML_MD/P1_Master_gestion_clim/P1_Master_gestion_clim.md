@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Statut](https://img.shields.io/badge/Statut-Actif-0f9d58?style=flat-square)](.)&nbsp;
-[![MàJ](https://img.shields.io/badge/MàJ-2026--11--17-44739e?style=flat-square)](.)&nbsp;
+[![MàJ](https://img.shields.io/badge/MàJ-2026--11--22-44739e?style=flat-square)](.)&nbsp;
 [![HA](https://img.shields.io/badge/HA-2026.10.4-03a9f4?style=flat-square&logo=home-assistant&logoColor=white)](.)&nbsp;
 [![IA Partner](https://img.shields.io/badge/IA_Partner-Claude_Sonnet_5.5-blueviolet?style=flat-square)](.)&nbsp;
 [![Source](https://img.shields.io/badge/Source-Interne-2196f3?style=flat-square)](.)&nbsp;
@@ -79,28 +79,28 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 |:---|:---|:---|
 | `groupe_1` (absent) | - | chauffage : `eco_hc_salon` (eco moins la correction du salon, plancher `min_temp` de la clim) ; clim : eco ete |
 | `groupe_2` (Mamour) | JOUR | `tccj_s` |
-| `groupe_3` (Eric) | JOUR | `tccj_b` + (correction bureau - correction salon) |
+| `groupe_3` (Eric) | JOUR | `tccj_s` - `sensor.correction_script_salon` |
 | `groupe_4` (Tous) | JOUR | `tccj_s` |
 | tout | NUIT | `tccn_s` |
 
-Le groupe_3 recoit la cible du bureau ramenee au salon : `tccj_b` + (correction du bureau - correction du salon), c est a dire `temperature_corrige_bureau` moins la correction du salon. Les groupes 2 et 4 recoivent `tccj_s`.
+Le groupe_3 recoit `tccj_s` moins `sensor.correction_script_salon` (3). Les groupes 2 et 4 recoivent `tccj_s` sans correction.
 
 #### BUREAU
 | Groupe | Période | Cible |
 |:---|:---|:---|
 | `groupe_1` (absent) | - | chauffage : `eco_hc_bureau` (eco moins la correction du bureau, plancher `min_temp`) ; clim : eco ete |
-| `groupe_2` (Mamour) | JOUR | chauffage : `temp_eco_hc` (eco sans correction) ; clim : `tccj_b` |
-| `groupe_3` (Eric) | JOUR | `tccj_b` |
-| `groupe_4` (Tous) | JOUR | `tccj_b` |
+| `groupe_2` (Mamour) | JOUR | `tccj_b` - `sensor.correction_script_bureau` |
+| `groupe_3` (Eric) | JOUR | `tccj_b` - `sensor.correction_script_bureau` |
+| `groupe_4` (Tous) | JOUR | `tccj_b` - `sensor.correction_script_bureau` |
 | tout | NUIT | `tccn_b` |
 
-En groupe_2, le jour, le bureau recoit l eco (`temp_eco_hc`, sans correction) en chauffage et `tccj_b` en clim ; confirme voulu par Eric le 2026-11-22. Les groupes 3 et 4 recoivent `tccj_b`.
+En jour, les groupes 2, 3 et 4 recoivent `tccj_b` moins `sensor.correction_script_bureau` (1). Le chauffage eco du bureau en groupe_2 a ete retire le 2026-11-22 au soir.
 
 #### CHAMBRE
 | Groupe | Période | Cible |
 |:---|:---|:---|
 | `groupe_1` (absent) | - | chauffage : `eco_hc_chambre` (eco moins la correction de la chambre, plancher `min_temp`) ; clim : eco ete |
-| `groupe_2`, `groupe_3`, `groupe_4` | JOUR | `tccj_c` |
+| `groupe_2`, `groupe_3`, `groupe_4` | JOUR | `tccj_c` - `sensor.correction_script_chambre` |
 | tout | NUIT | `tccn_c` |
 
 Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco de saison (`temp_eco_hc` ou `temp_eco_ec`).
@@ -142,6 +142,9 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 | `sensor.correction_temperature_salon` | Correction d'envoi salon (1) |
 | `sensor.correction_temperature_bureau` | Correction d'envoi bureau (2) |
 | `sensor.correction_temperature_chambre` | Correction d'envoi chambre (2) |
+| `sensor.correction_script_salon` | Correction cible jour salon (3) |
+| `sensor.correction_script_bureau` | Correction cible jour bureau (1) |
+| `sensor.correction_script_chambre` | Correction cible jour chambre (1) |
 | `sensor.consigne` | Fallback général |
 | `sensor.temperature_corrige_salon` | T° confort Salon |
 | `sensor.temperature_corrige_bureau` | T° confort Bureau |
@@ -193,6 +196,7 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 
 | Date | Session | Modification | config_hash |
 |:---|:---|:---|:---|
+| 2026-11-22 | Hermes | **Cibles de jour pilotees par capteurs.** Remplacement des offsets fixes (-3/-1) par `sensor.correction_script_salon` (3), `_bureau` (1), `_chambre` (1), crees dans P1_01_clim_logique_system_autom.yaml. Salon groupe_3 = `tccj_s` - 3 ; bureau g2/g3/g4 = `tccj_b` - 1 ; chambre g2/g3/g4 = `tccj_c` - 1. Salon g2/g4 reste `tccj_s` sans offset. Version lisible |- poussee en prod. | - |
 | 2026-11-22 | Claude | **Fiche corrigee, script inchange.** Cibles de jour des groupes 2, 3 et 4 alignees sur le code : salon en groupe_3 = cible du bureau ramenee au salon (`tccj_b` + correction bureau - correction salon), bureau en groupe_2 = eco en chauffage et `tccj_b` en clim. Variables `tccsj_*` renommees `tccj_*` (corrige moins correction), comme dans le script. | `ee25a74797646c88` |
 | 2026-11-22 | Claude | **Notification resume : cibles reelles.** Le resume affiche valeur envoyee + correction de la piece (`t_s`, `t_b`, `t_c`) au lieu de la valeur envoyee, arrondie a 1 decimale. Les consignes envoyees aux clims ne changent pas. | `feb1f6683d7f047c` |
 | 2026-11-22 | Claude | **Eco corrige en groupe_1 (chauffage).** Trois variables `eco_hc_salon`, `eco_hc_bureau`, `eco_hc_chambre` : eco moins la correction de la piece (1 / 2 / 2), plancher `min_temp` de la clim lu sur l entite climate (16 salon, 10 bureau et chambre). Envoye 16 / 15 / 15 au lieu de 17, reel 17 partout au lieu de 18 / 19 / 19. Notification : vrais sauts de ligne, valeurs `t_salon_target`, `t_bureau_target`, `t_chambre_target` (valeur reellement envoyee). YAML local reconstruit depuis la prod (il datait du 2026-11-17). | `ee25a74797646c88` |
@@ -209,4 +213,5 @@ Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco 
 [2026-11-22] eco groupe_1 chauffage : correction soustraite, plancher min_temp (eco_hc_salon, eco_hc_bureau, eco_hc_chambre) ; notification = valeur envoyee ; YAML local realigne sur la prod (ee25a74797646c88).
 [2026-11-22] cibles de jour des groupes 2/3/4 alignees sur le code prod (salon g3 = cible bureau ramenee au salon, bureau g2 = eco en chauffage) ; tccsj_* renomme tccj_*.
 [2026-11-22] note SALON groupe_3 JOUR corrigee (la fiche annoncait tccsj_s pour tous les groupes).
-[2026-11-22] notification resume : affiche la cible reelle (valeur envoyee + correction de la piece) au lieu de la valeur envoyee ; config_hash feb1f6683d7f047c. -->
+[2026-11-22] notification resume : affiche la cible reelle (valeur envoyee + correction de la piece) au lieu de la valeur envoyee ; config_hash feb1f6683d7f047c.
+[2026-11-22] cibles de jour : offsets fixes remplaces par sensor.correction_script_salon (3), _bureau (1), _chambre (1) ; salon g2/g4 sans offset ; version lisible |- poussee en prod. -->
