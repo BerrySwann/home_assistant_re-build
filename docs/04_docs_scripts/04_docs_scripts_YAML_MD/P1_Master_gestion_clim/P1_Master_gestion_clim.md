@@ -79,28 +79,28 @@ Prend un paramètre `periode` (`"jour"` ou `"nuit"`) et adapte les cibles en con
 |:---|:---|:---|
 | `groupe_1` (absent) | - | chauffage : `eco_hc_salon` (eco moins la correction du salon, plancher `min_temp` de la clim) ; clim : eco ete |
 | `groupe_2` (Mamour) | JOUR | `tccj_s` |
-| `groupe_3` (Eric) | JOUR | `tccj_s` - `sensor.correction_script_salon` |
+| `groupe_3` (Eric) | JOUR | `tccj_s` - `sensor.correction_script_salon` (heat) / `tccj_s` (cool) |
 | `groupe_4` (Tous) | JOUR | `tccj_s` |
 | tout | NUIT | `tccn_s` |
 
-Le groupe_3 recoit `tccj_s` moins `sensor.correction_script_salon` (3). Les groupes 2 et 4 recoivent `tccj_s` sans correction.
+Le groupe_3 recoit `tccj_s` moins `sensor.correction_script_salon` en chauffage ; en clim, `tccj_s` seul. Les groupes 2 et 4 recoivent `tccj_s` sans correction.
 
 #### BUREAU
 | Groupe | Période | Cible |
 |:---|:---|:---|
 | `groupe_1` (absent) | - | chauffage : `eco_hc_bureau` (eco moins la correction du bureau, plancher `min_temp`) ; clim : eco ete |
-| `groupe_2` (Mamour) | JOUR | `tccj_b` - `sensor.correction_script_bureau` |
-| `groupe_3` (Eric) | JOUR | `tccj_b` - `sensor.correction_script_bureau` |
-| `groupe_4` (Tous) | JOUR | `tccj_b` - `sensor.correction_script_bureau` |
+| `groupe_2` (Mamour) | JOUR | `tccj_b` - `sensor.correction_script_bureau` (heat) / `tccj_b` (cool) |
+| `groupe_3` (Eric) | JOUR | `tccj_b` - `sensor.correction_script_bureau` (heat) / `tccj_b` (cool) |
+| `groupe_4` (Tous) | JOUR | `tccj_b` - `sensor.correction_script_bureau` (heat) / `tccj_b` (cool) |
 | tout | NUIT | `tccn_b` |
 
-En jour, les groupes 2, 3 et 4 recoivent `tccj_b` moins `sensor.correction_script_bureau` (1). Le chauffage eco du bureau en groupe_2 a ete retire le 2026-11-22 au soir.
+En jour, les groupes 2, 3 et 4 recoivent `tccj_b` moins `sensor.correction_script_bureau` en chauffage ; en clim, `tccj_b` seul. Le chauffage eco du bureau en groupe_2 a ete retire le 2026-11-22 au soir.
 
 #### CHAMBRE
 | Groupe | Période | Cible |
 |:---|:---|:---|
 | `groupe_1` (absent) | - | chauffage : `eco_hc_chambre` (eco moins la correction de la chambre, plancher `min_temp`) ; clim : eco ete |
-| `groupe_2`, `groupe_3`, `groupe_4` | JOUR | `tccj_c` - `sensor.correction_script_chambre` |
+| `groupe_2`, `groupe_3`, `groupe_4` | JOUR | `tccj_c` - `sensor.correction_script_chambre` (heat) / `tccj_c` (cool) |
 | tout | NUIT | `tccn_c` |
 
 Hors des quatre groupes (valeur inattendue), la cible de jour retombe sur l eco de saison (`temp_eco_hc` ou `temp_eco_ec`).

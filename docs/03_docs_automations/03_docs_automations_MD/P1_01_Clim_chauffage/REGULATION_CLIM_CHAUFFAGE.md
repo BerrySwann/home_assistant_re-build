@@ -145,7 +145,7 @@ En ete les pieces ne suivent plus le confort du tout : elles lisent directement 
 **sans plancher** puisque le plancher ne s applique qu a l interieur de `temperature_confort`. Une seule
 marche, entre 26 et 28 degres dehors.
 
-Le jour, les groupes 2, 3 et 4 recoivent `tccj_s`, `tccj_b` et `tccj_c`, avec deux ecarts voulus par Eric : en `groupe_3` le salon recoit la cible du bureau ramenee au salon (`tccj_b` + correction du bureau - correction du salon), et en `groupe_2` le bureau recoit l eco en chauffage (`tccj_b` en clim).
+Le jour, les groupes 2, 3 et 4 recoivent `tccj_s`, `tccj_b` et `tccj_c`. En chauffage (heat), chaque piece soustrait son capteur `correction_script_*` ; en clim (cool), la correction n est pas appliquee. En `groupe_3` le salon est la seule piece a recevoir cette correction ; les groupes 2 et 4 restent a `tccj_s`.
 `groupe_1` envoie l eco aux trois (en chauffage, l eco moins la correction de la piece, voir section 9).
 
 ## 6. Confort jour, confort nuit, et consigne de nuit
@@ -263,9 +263,9 @@ Le choix des cibles :
 | Groupe | Periode | Salon | Bureau | Chambre |
 |:--|:--|:--|:--|:--|
 | groupe_1, absent | jour et nuit | eco de saison (chauffage : moins la correction) | idem | idem |
-| groupe_2 | jour | tccj_s | eco en chauffage (tccj_b en clim) | tccj_c |
-| groupe_3 | jour | tccj_b + (correction bureau - correction salon) | tccj_b | tccj_c |
-| groupe_4 | jour | tccj_s | tccj_b | tccj_c |
+| groupe_2 | jour | tccj_s | tccj_b - correction_script_bureau (heat) / tccj_b (cool) | tccj_c - correction_script_chambre (heat) / tccj_c (cool) |
+| groupe_3 | jour | tccj_s - correction_script_salon (heat) / tccj_s (cool) | tccj_b - correction_script_bureau (heat) / tccj_b (cool) | tccj_c - correction_script_chambre (heat) / tccj_c (cool) |
+| groupe_4 | jour | tccj_s | tccj_b - correction_script_bureau (heat) / tccj_b (cool) | tccj_c - correction_script_chambre (heat) / tccj_c (cool) |
 | tout groupe sauf 1 | nuit | tccn_s | tccn_b | tccn_c |
 
 Et ces variables ne valent pas la cible : le script soustrait la correction au moment de l envoi, au jour

@@ -229,6 +229,30 @@
       device_class: temperature
       icon: "mdi:swap-vertical"
 
+# --- correction_script_salon ---
+    - name: "Correction script Salon"
+      unique_id: correction_script_salon
+      unit_of_measurement: "°C"
+      state: "3"
+      device_class: temperature
+      icon: "mdi:swap-vertical"
+
+# --- correction_script_bureau ---
+    - name: "Correction script Bureau"
+      unique_id: correction_script_bureau
+      unit_of_measurement: "°C"
+      state: "1"
+      device_class: temperature
+      icon: "mdi:swap-vertical"
+
+# --- correction_script_chambre ---
+    - name: "Correction script Chambre"
+      unique_id: correction_script_chambre
+      unit_of_measurement: "°C"
+      state: "1"
+      device_class: temperature
+      icon: "mdi:swap-vertical"
+
 # ┌───────────────────────────────────────────────────────────┐
 # │                                                           │
 # │ 2 - DETECTION DU MODE ETE / HIVER                         │

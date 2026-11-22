@@ -93,11 +93,11 @@ Une seule action :
 ## ⚠️ Points d'attention
 
 - **Refactoring 2026-06** : logique inline (~250 lignes) déplacée dans le script master. L'automation est maintenant un simple wrapper de 30 lignes.
-- **SALON groupe_3 JOUR** : Eric seul, le salon recoit la cible du bureau ramenee au salon (`tccj_b` + correction bureau - correction salon), comme le code du script en prod (relu le 2026-11-22). La fiche annoncait a tort `tccsj_s` pour tous les groupes depuis le 2026-11-08.
+- **SALON groupe_3 JOUR** : Eric seul, le salon recoit `tccj_s` moins `sensor.correction_script_salon` en chauffage ; en clim, `tccj_s` seul. Les groupes 2 et 4 restent a `tccj_s`. Mis a jour le 2026-11-22 (fin de soiree).
 - `trigger_id` et `trigger_entity_id` sont passés au script pour que la notification fenêtre reste ciblée.
 - Le `sensor_update` ne redémarre **pas** une clim déjà en `off` (protection maintenue dans le script).
 - **2026-09-20** : ajout de `max_exceeded: silent` (mode `queued`/max 5 conservés). Au démarrage de HA, les déclencheurs d'état se déclenchent en rafale et saturent la file ; l'avertissement « Maximum number of runs exceeded » est désormais silencieux, les runs en trop restent ignorés (sans conséquence : recalcul idempotent via le script master).
 
 <!-- annotations_log:
-[2026-11-22] note SALON groupe_3 JOUR corrigee : salon g3 = cible du bureau ramenee au salon (code prod relu le 2026-11-22).
+[2026-11-22] note SALON groupe_3 JOUR : salon g3 = tccj_s - correction_script_salon (heat) / tccj_s (cool).
 [2026-11-22] declencheurs realignes sur la prod : ajout du declencheur SAISON (sensor.mode_ete_hiver, id force_run) ; sensor.mode_ete_hiver retire du declencheur ENVIRONNEMENT. -->
